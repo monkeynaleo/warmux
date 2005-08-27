@@ -1,0 +1,57 @@
+Wormux 0.5
+Compilation/Installation sous Linux
+-----------------------------------
+
+* ClanLib
+----------
+
+Wormux utilise actuellement(13/11/2004) la librairie ClanLIB version subversion, car la dernière
+version stable n'est pas dans un état suffisament avancé pour lancer Wormux.
+Pour l'installer, suivez les instructions sur leur site web.
+
+Site Internet : http://www.clanlib.org/
+
+
+* libxml++
+----------
+
+Wormux utilise la librairie libxml++ version 1.0, vous devrez donc l'installer.
+Sous Debian, utilisez la commande :
+  apt-get install libxml++1.0-dev
+
+Site Internet : http://libxmlplusplus.sourceforge.net/
+
+
+* Compilation / Installation
+----------------------------
+
+Sous Linux, il suffit de taper :
+
+$ ./configure
+$ make
+$ su -c "make install"
+
+Par défaut, le jeu est installé dans /usr/local. Mais vous pouvez spécifier un autre
+répertoire (pratique si on n'a pas accès au compte administrateur) en changeant la
+commande configure initiale:
+
+$ ./configure --prefix=/home/utilisateur/jeux
+
+
+* Désinstallation
+-----------------
+
+Dans le répertoire des sources, faites tout simplement:
+$ su -c "make uninstall"
+
+
+* Autres options
+----------------
+
+Beaucoup d'options peuvent être utilisées avec la commande configure.
+La plus pratique étant:
+$ ./configure --enable-debug
+Permettant d'obtenir toutes les informations de débuggage nécecssaires.
+
+Pour connaitre toutes les autres options du configure, faite:
+$ ./configure --help

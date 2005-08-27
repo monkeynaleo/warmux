@@ -1,0 +1,117 @@
+Authors of Wormux :
+===================
+
+o Lawrence AZZOUG <lawrenceazzoug AT wanadoo.fr> from France
+  Initial programmer of Wormux, graphist, coder
+o Laurent DEFERT SIMONNEAU <lodesi2 AT yahoo.fr> from France
+  Coder
+o Matthieu FERTRE <matthieu.fertre AT free.fr> from France
+  Coder
+o Renaud LOTTIAUX <renaud.lottiaux AT free.fr> from France
+  Coder
+o Victor STINNER <victor.stinner AT haypocalc.com> from France
+  Coder, english translator
+
+Translation :
+=============
+
+o Nicolas LETAVENIER <nicolas.letavenier@utbm.fr>
+  Help for English translation of the site
+o Eduard BERMEJO <templer AT iespana.es>
+  Add spain AND catalan translation in Wormux !
+o Marc Lanctot <marc.lanctot AT mail.mcgill.ca> from Canada
+  First english version of INSTALL.fr.txt
+o Packo ASSAMITA <packo_assamita AT supercable.es>
+  Translate the whole website in spanish !
+o Bartosz Fenski aka fEnIo <fenio AT o2.pl> from Poland
+  First polish version of Wormux :-)
+o Frank van der Loo <frank_l AT linuxmail.org> from the Netherlands
+  First dutch version of Wormux.
+o Török Gábor aka Gabó <gabo AT linuxportal.hu> from Hungary
+  First hungarian version of Wormux.
+o Paolo Nicorelli aka Willy <p.nicorelli AT fastwebnet.it> from Italy
+  First italien version of Wormux.
+o Victor STINNER <victor.stinner AT haypocalc.com> from France
+  Very-First esperanto version of Wormux.
+o Bruno PIRES <bruno.pires AT utbm.fr> from France
+  First portuguese version of Wormux.
+o Danny Allen <dannya40uk AT yahoo.co.uk> from England
+  English translation of Wormux.
+o Michael Prager <X_X_L AT gmx.net> from Germany
+  Maintener of Wormux german translatation.
+o Pohodin Alexander <admin AT tuxgames.ru> from Russia
+  Translate website in russian.
+o Martin Vojcík <stryco AT centrum.sk>
+  Translate game and INSTALL in slovak.
+
+Contributors :
+==============
+
+o Dino Ghilardi <dinoghi AT tin.it> from Italy
+  Beautiful skin called "ball".
+o Thomas Guittonneau (yz) <yz AT yznah.net> from France
+  Skin called "Wougzy".
+o Larry COW <larry AT doubidou.net>
+  Patch for Linux.
+o Gottfried Hofmann <toddd AT mypse.goracer.de> from Germany
+  Sounds
+o "Koumis Production" <info AT koumis.com>, http://koumis.com/soundfx.htm
+  Sounds
+o Lionel ALLORGE <lallorge AT april.org>, http://www.lunerouge.com/ from France
+  Sounds
+o Denis DEVEDJIAN <ddevedjian AT tema.rms.fr> from France
+  CSS stylesheet for the website.
+o Husson Pierre-Hugues <phh AT sidenux.ath.cx>
+  Gave us the trick to prepare a static binary and prepared 0.4 binary.
+o Alexandre Norman <norman AT freesurf.fr> from France
+  Send us two maps (arbre and prehistorik)
+o Michael Prager <X_X_L AT gmx.net> from Germany
+  Great map "pirates".
+o Isaac Clerencia <isaac@sindominio.net>
+  Add autotools (autogen.sh, ./configure, ...) in Wormux !
+o Adriana Chirita aka "Adi" <adriana.chirita AT utbm.fr>
+  Draw Japon map
+o Olivier SERRES <olivier.serres AT utbm.fr>
+  Wrote CPU limiter with Eric HOFFMANN
+o Eric HOFFMANN <eric.hoffmann AT utbm.fr>
+  Wrote CPU limiter with Olivier SERRES
+o Yann BARB <yann.barb AT utbm.fr>
+  Wrote SuperTux weapon with Colin DIDIER
+o Colin DIDIER <colin.didier AT utbm.fr>
+  Wrote SuperTux weapon with Yann BARB
+o Pascal Giard <evilynux AT gmail.com>
+  Wrote a patch to stop configure if clanlib and/or libxml++ is missing
+o Sami Pietila <sampie AT ariana-dsl.utu.fi>
+  Nice water effect using two sinus
+o Jerome Glatigny <jerome.glatigny AT utbm.fr>
+  Write first network patch with François Bleibel
+o François Bleibel <francois.bleibel AT utbm.fr>
+  Write first network patch with Jerome Glatigny
+o Piotr Pokojowczyk <rashid AT vp.pl> from Poland
+  Draw map Dinos and skin Dude
+
+Package mainteners :
+====================
+
+o Michael Prager <X_X_L AT gmx.net> from Germany
+  Geetoo distribution.
+o Bartosz Fenski aka fEnIo <fenio AT o2.pl> from Poland
+  Debian GNU/Linux distribution.
+o Julien Catalano <julien.catalano AT free.fr> from France
+  Mandrake distribution.
+o Rudolf Kastl aka che <che666 AT uni.de>
+  Fedora Core 3 packager.
+
+Thanks to :
+===========
+
+o Brian Wellington <bwelling AT xbill.org> and Matias Duarte
+  Authors of funny xbill game.
+o Xavier Vello
+  Tester of Linux version
+o All authors of Clanlib
+  Thanks for this nice library ;-)
+o Harry Storbacka and Kenneth Gangstoe
+  Thanks to share the code of your game Mastzi
+o The Battle for Wesnoth (a turn-based strategy game with a fantasy theme)
+  We used their autotools script, see http://www.wesnoth.org/.

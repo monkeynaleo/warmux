@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<profile>
+  <sound action="fire" filename="fire_01.ogg" />  
+  <sound action="fire" filename="fire_02.ogg" /> 
+
+  <sound action="friendly_fire" filename="crazy.ogg" />
+</profile>

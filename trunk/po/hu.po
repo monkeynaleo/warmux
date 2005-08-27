@@ -1,0 +1,496 @@
+# Hungarian translation of the Wormux POT.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the Wormux package.
+# Török Gábor, <slink@lxp.hu>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: wormux 0.5.0\n"
+"Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"PO-Revision-Date: 2004-12-19 12:00+0100\n"
+"Last-Translator: Török Gábor <slink@lxp.hu>\n"
+"Language-Team: hu <gabo@lxp.hu>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/map/maps_list.cpp:267
+#, c-format
+msgid "! Map %s not found :-("
+msgstr "Nem található %s térkép :-("
+
+#: src/game/game.cpp:288
+#, c-format
+msgid "%s (%s team) has died."
+msgstr "%s (%s csapat) meghalt."
+
+#: src/map/maps_list.cpp:122
+#, c-format
+msgid "%s <%s> aka %s from %s"
+msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
+
+#: src/map/maps_list.cpp:129
+#, c-format
+msgid "%s <%s> from %s"
+msgstr "%s <%s> %s csapatától"
+
+#: src/game/game.cpp:259
+#, c-format
+msgid "%s commits suicide !"
+msgstr "%s öngyilkos lett!"
+
+#: src/game/game.cpp:250
+#, fuzzy, c-format
+msgid "%s has fallen in water."
+msgstr "%s kiesett a pályáról!"
+
+#: src/game/game.cpp:265
+#, c-format
+msgid "%s has fallen off the map!"
+msgstr "%s kiesett a pályáról!"
+
+#: src/object/bonus_box.cpp:239
+#, c-format
+msgid "%s has lost %u points of energy."
+msgstr "%s energiaszintje %u egységgel csökkent."
+
+#: src/object/bonus_box.cpp:233
+#, c-format
+msgid "%s has won %u points of energy!"
+msgstr "%s energiaszintje %u egységgel nõtt!"
+
+#: src/game/game.cpp:277
+#, c-format
+msgid "%s is a psychopath, he has killed a member of %s team!"
+msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
+
+#: src/game/game.cpp:271
+#, c-format
+msgid "%s is dead because he is clumsy!"
+msgstr "%s kicsit ügyefogyott volt, így hát távozott az élõ sorából!"
+
+#: src/weapon/mine.cpp:226
+#, c-format
+msgid "%s is next to a mine!"
+msgstr "%s egy taposó akna mellett ténfereg!"
+
+#: src/object/bonus_box.cpp:251
+#, c-format
+msgid "%s team has won %u automatic bazookas!"
+msgstr "%s csapata %u automatikus tûzelésû rakétevetõt kapott!"
+
+#: src/object/bonus_box.cpp:258
+#, c-format
+msgid "%s team has won %u sticks of dynamite!"
+msgstr "%s csapata %u dinamitot nyert!"
+
+#: src/object/bonus_box.cpp:227
+#, c-format
+msgid "%s team has won %u teleportations."
+msgstr "%s csapata plusz %u teleportot kapott!"
+
+#: src/game/game.cpp:105
+#, c-format
+msgid "%s team has won."
+msgstr "%s csapata nyert."
+
+#: src/object/bonus_box.cpp:245
+#, c-format
+msgid "'%s has won %u air attack(s)"
+msgstr "%s %u ráadás légitámadás nyert!"
+
+#: src/interface/interface.cpp:144
+msgid "(dead)"
+msgstr "(kipurcant)"
+
+#: src/interface/interface.cpp:199
+msgid "(unlimited)"
+msgstr "(korlátlan)"
+
+#: src/object/bonus_box.cpp:247 src/weapon/air_attack.cpp:184
+msgid "Air attack"
+msgstr "Légitámadás"
+
+#: src/main.cpp:68 src/menu/infos_menu.cpp:37
+msgid "Authors:"
+msgstr "Szerzõk:"
+
+#: src/object/bonus_box.cpp:253 src/weapon/auto_bazooka.cpp:164
+msgid "Automatic bazooka"
+msgstr "Automatikus tûzelésû rakétavetõ"
+
+#: src/weapon/baseball.cpp:36
+msgid "Baseball"
+msgstr "Baseball"
+
+#: src/weapon/bazooka.cpp:114
+msgid "Bazooka"
+msgstr "Rakétavetõ"
+
+#: src/main.cpp:241
+msgid "C++ exception caught:"
+msgstr "Elfogtam egy C++ kivételt:"
+
+#: src/team/teams_list.cpp:420
+#, c-format
+msgid "Can't find team %s !"
+msgstr ""
+
+#: src/team/teams_list.cpp:395
+#, c-format
+msgid "Can't find team %s :-("
+msgstr ""
+
+#: src/team/teams_list.cpp:115
+#, c-format
+msgid "Cannot open teams directory (%s)!"
+msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
+
+#: src/main.cpp:234
+msgid "ClanLib error :"
+msgstr "ClanLib hiba:"
+
+#: src/map/maps_list.cpp:79
+#, c-format
+msgid "ClanLib error during loading map '%s' :"
+msgstr "ClanLib hiba lépett fel a pálya (%s) betöltése közben:"
+
+#: src/weapon/cluster_bomb.cpp:266
+msgid "ClusterBomb"
+msgstr "Szõnyegbomba"
+
+#: src/weapon/suicide.cpp:40
+msgid "Commit suicide"
+msgstr "Öngyilkosság elkövetése"
+
+#: src/menu/options_menu.cpp:181
+msgid "Display player energy?"
+msgstr "A játékos energiájának megjelenítése"
+
+#: src/menu/options_menu.cpp:182
+msgid "Display player's name?"
+msgstr "A játékos nevének megjelenítése"
+
+#: src/game/game.cpp:190
+msgid "Do you really want to quit? (Y/N)"
+msgstr "Biztos, hogy ki szeretnél lépni? (Y/N) ?"
+
+#: src/menu/options_menu.cpp:189
+msgid "Duration of a turn:"
+msgstr "Egy forduló ideje:"
+
+#: src/menu/options_menu.cpp:191
+msgid "Duration of the end of a turn:"
+msgstr "Egy forduló ideje:"
+
+#: src/object/bonus_box.cpp:260 src/weapon/dynamite.cpp:140
+msgid "Dynamite"
+msgstr "Dinamit"
+
+#: src/main.cpp:174
+msgid "End of game"
+msgstr "Vége!"
+
+#: src/game/game.cpp:97
+msgid "End of the game!\n"
+msgstr "Vége a játéknak!\n"
+
+#: src/interface/interface.cpp:139
+msgid "Energy"
+msgstr ""
+
+#: src/team/skin.cpp:124
+#, c-format
+msgid "Error during skin loading (%s) :"
+msgstr "Hiba lépett fel a smink (%s) betöltése közben:"
+
+#: src/tool/error.cpp:79
+#, c-format
+msgid "Error in %s:%lu"
+msgstr "Hiba lépett fel (%s): %lu"
+
+#: src/team/team.cpp:71
+#, c-format
+msgid "Error loading %s team :"
+msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
+
+#: src/game/game_mode.cpp:143
+#, c-format
+msgid "Error while loading game mode %s (file %s) :"
+msgstr ""
+
+#: src/game/game.cpp:233
+#, c-format
+msgid ""
+"Error:\n"
+"%s"
+msgstr ""
+"Hiba:\n"
+"%s"
+
+#: src/team/team.cpp:150
+#, c-format
+msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
+msgstr "Hiba: nem található %s csapatának %s sminkje."
+
+#: src/sound/jukebox.cpp:269
+#, c-format
+msgid "File \"%s\" does not exist !"
+msgstr "%s fájl nem létezik!"
+
+#: src/game/game_loop.cpp:186
+msgid "Find a random position for worms"
+msgstr "A kukacok véletlenszerû elhelyezése"
+
+#: src/menu/options_menu.cpp:183
+msgid "Fullscreen?"
+msgstr "Teljesképernyõs üzemmód"
+
+#: src/weapon/grenade.cpp:175
+msgid "Grenade"
+msgstr "Gránát"
+
+#: src/weapon/gun.cpp:100
+msgid "Gun"
+msgstr "Pisztoly"
+
+#: src/tool/file_tools.cpp:58
+msgid "HOME directory (environment variable $HOME) could not be found !"
+msgstr "Nem található a felhasználó könyvtára!"
+
+#: src/menu/main_menu.cpp:87
+msgid "Info"
+msgstr "Információ"
+
+#: src/menu/options_menu.cpp:195
+msgid "Initial energy:"
+msgstr "Induló energiaszint:"
+
+#: src/game/game_loop.cpp:220
+msgid "Initialisation"
+msgstr "Felkészülés"
+
+#: src/game/game_loop.cpp:137 src/game/game_loop.cpp:191
+msgid "Initialise data"
+msgstr "Felkészülés"
+
+#: src/game/game_loop.cpp:92
+#, fuzzy
+msgid "Initialise teams"
+msgstr "Felkészülés"
+
+#: src/game/game.cpp:87
+msgid "Load game data..."
+msgstr "Adatok betöltése..."
+
+#: src/game/game_loop.cpp:88
+#, fuzzy
+msgid "Load map"
+msgstr "%s térkép betöltése"
+
+#: src/map/maps_list.cpp:214
+#, fuzzy
+msgid "Load maps:"
+msgstr "%s térkép betöltése"
+
+#: src/team/skin.cpp:241
+#, fuzzy
+msgid "Load skins:"
+msgstr "%s smink betöltése"
+
+#: src/team/teams_list.cpp:106
+#, fuzzy
+msgid "Load teams:"
+msgstr "%s csapat betöltése."
+
+#: src/map/map.cpp:220
+#, c-format
+msgid "Map %s, a creation of :"
+msgstr "%s térkép szerzõje:"
+
+#: src/weapon/mine.cpp:301
+msgid "Mine"
+msgstr "Taposó akna"
+
+#: src/menu/options_menu.cpp:198
+msgid "Music?"
+msgstr "Zene"
+
+#: src/interface/interface.cpp:133
+msgid "Name"
+msgstr "Név"
+
+#: src/menu/main_menu.cpp:75
+msgid "Network Game"
+msgstr ""
+
+#: src/weapon/weapon.cpp:464
+#, c-format
+msgid "No element <%s> found in the xml config file !"
+msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
+
+#: src/menu/options_menu.cpp:193
+msgid "Number of players per team:"
+msgstr "Játékosok száma csapatonként:"
+
+#: src/menu/main_menu.cpp:81
+msgid "Options"
+msgstr "Beállítások"
+
+#: src/game/game.cpp:304
+msgid "Pause"
+msgstr "Szünet"
+
+#: src/menu/main_menu.cpp:69
+msgid "Play"
+msgstr "Irány a játék!"
+
+#: src/main.cpp:188
+msgid "Please tell us your opinion of Wormux via email:"
+msgstr "Kérjük, mondd el a véleményed a Wormuxról: "
+
+#: src/menu/main_menu.cpp:93
+msgid "Quit"
+msgstr "Kilépés"
+
+#: src/main.cpp:99
+msgid "Run game"
+msgstr "Játék futtatása"
+
+#: src/menu/options_menu.cpp:450
+msgid ""
+"SDL option changed:\n"
+"You have to restart Wormux to apply the new settings."
+msgstr ""
+"Megváltoztak az SDL beállítások:\n"
+"Újra kell indítanod a Wormuxot a beállítások érvényesítéséhez!"
+
+#: src/menu/options_menu.cpp:199
+msgid "Sound effects?"
+msgstr "Hanghatások"
+
+#: src/sound/jukebox.cpp:151 src/sound/jukebox.cpp:268
+#: src/sound/jukebox.cpp:290
+msgid "Sound error :"
+msgstr "Hanghiba:"
+
+#: src/game/game_loop.cpp:215
+msgid "Starting a new game"
+msgstr "Új játék kezdése"
+
+#: src/interface/interface.cpp:197
+msgid "Stock"
+msgstr "Raktár"
+
+#: src/object/bonus_box.cpp:229 src/weapon/teleportation.cpp:45
+msgid "Teleportation"
+msgstr "Teleport"
+
+#: src/weapon/auto_bazooka.cpp:139
+msgid "The automatic rocket has left the battlefield..."
+msgstr ""
+
+#: src/game/game.cpp:112
+msgid "The game has ended as a draw."
+msgstr ""
+
+#: src/weapon/bazooka.cpp:102 src/weapon/cluster_bomb.cpp:107
+msgid "The rocket left the battlefield..."
+msgstr ""
+
+#: src/map/maps_list.cpp:224
+#, fuzzy, c-format
+msgid "Unable to open maps directory (%s) !"
+msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
+
+#: src/team/skin.cpp:250
+#, fuzzy, c-format
+msgid "Unable to open skins directory (%s) !"
+msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
+
+#: src/main.cpp:248
+msgid "Unexcepted exception caught..."
+msgstr "Elkaptam egy váratlanul fellépett kivételt..."
+
+#: src/game/game_loop.cpp:165
+msgid "Unknow action"
+msgstr ""
+
+#: src/menu/options_menu.cpp:185
+msgid "Use SDL?"
+msgstr ""
+
+#: src/menu/options_menu.cpp:197
+msgid "Use sound?"
+msgstr "Hang bekapcsolása"
+
+#: src/main.cpp:156
+msgid "Version"
+msgstr "Verzió"
+
+#: src/game/game_loop.cpp:76
+msgid "Wait for clients"
+msgstr ""
+
+#: src/game/game_loop.cpp:159
+msgid "Wait for map"
+msgstr ""
+
+#: src/game/game_loop.cpp:156
+msgid "Wait for server"
+msgstr ""
+
+#: src/game/game_loop.cpp:152
+msgid "Wait for server informations"
+msgstr ""
+
+#: src/game/game_loop.cpp:162
+msgid "Wait teams"
+msgstr ""
+
+#: src/interface/interface.cpp:188
+msgid "Weapon"
+msgstr "Fegyver"
+
+#: src/main.cpp:78
+msgid "Website: "
+msgstr "Honlap: "
+
+#: src/game/game.cpp:282
+#, c-format
+msgid "What a shame for %s - he was killed by a simple gun!"
+msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"
+
+#: src/main.cpp:155
+msgid "Wormux launching..."
+msgstr "Töltõdik a Wormux..."
+
+#: src/main.cpp:67
+msgid "Wormux version "
+msgstr "Wormux verzió "
+
+#: src/map/maps_list.cpp:87
+#, c-format
+msgid "XML error during loading map '%s' :"
+msgstr "XML hiba a térkép (%s) betöltése közben:"
+
+#: src/map/maps_list.cpp:240
+msgid "You need at least one valid map !"
+msgstr "Legalább egy térképpel rendelkezned kell!"
+
+#: src/game/game_loop.cpp:232
+msgid "You need at least two teams to play: change this in 'Options menu' !"
+msgstr ""
+"Legalalább két csapatot kell verbuválnod a játékhoz! Ezt a Beállítások "
+"menüpont alatt teheted meg!"
+
+#: src/team/teams_list.cpp:130
+msgid "You need at least two valid teams !"
+msgstr "Legalább két csapatot kell verbuválnod!"
+
+#: src/weapon/gun.cpp:89
+msgid "Your shot has missed!"
+msgstr "Ezt elnézted!"
+
+#~ msgid "Load weapon %s"
+#~ msgstr "%s fegyver betöltése"

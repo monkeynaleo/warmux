@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<profile>
+  <sound action="step" filename="step_01.ogg" />
+  <sound action="step" filename="step_02.ogg" />
+  <sound action="jump" filename="hop_01.ogg" />
+  <sound action="superjump" filename="superjump_01.ogg" />
+
+  <sound action="death" filename="death_01.ogg" />
+  <sound action="death" filename="death_02.ogg" />
+  <sound action="suicide" filename="suicide_01.ogg" />
+
+  <sound action="injured_light" filename="uuh_01.ogg" />
+  <sound action="injured_light" filename="uuh_02.ogg" />
+  <sound action="injured_light" filename="uuh_03.ogg" />
+  <sound action="injured_light" filename="uuh_04.ogg" />
+  <sound action="injured_medium" filename="uuh_05.ogg" />
+  <sound action="injured_medium" filename="uuh_06.ogg" />
+  <sound action="injured_high" filename="uuh_07.ogg" />
+  <sound action="injured_high" filename="uuh_08.ogg" />
+
+  <sound action="sink" filename="sink.ogg" />
+  <sound action="out" filename="out_01.ogg" />
+
+  <sound action="fire" filename="fire_01.ogg" />
+  <sound action="fire" filename="fire_02.ogg" />
+
+  <sound action="friendly_fire" filename="crazy_01.ogg" />
+  <sound action="friendly_fire" filename="crazy_02.ogg" />
+  <sound action="friendly_fire" filename="crazy_03.ogg" />
+  <sound action="friendly_fire" filename="crazy_04.ogg" />
+  <sound action="friendly_fire" filename="crazy_05.ogg" />
+
+  <sound action="cuss" filename="cuss_01.ogg" />
+  <sound action="cuss" filename="cuss_02.ogg" />
+  <sound action="cuss" filename="cuss_03.ogg" />  
+  <sound action="cuss" filename="cuss_04.ogg" />
+
+  <sound action="laugh" filename="hehe.ogg" />
+  <sound action="skip_turn" filename="skip_turn.ogg" />
+</profile>

@@ -1,0 +1,68 @@
+Wormux 0.5
+FAQ (Français)
+-------------------
+Vous trouverez peut-être dans ce document la réponse à un problème rencontré
+avec Wormux.
+
+
+* J'ai 2 images par secondes, alors que j'ai un P4 1.2GHz ?!?
+-------------------------------------------------------------
+
+Wormux utilise des fonctions OpenGL de gestion de textures pour afficher des
+images à l'écran. Donc sur les ordinateurs ne possédant pas d'accélération
+graphique les calcules sont gérés par le driver vidéo et c'est trop lourd pour
+le processeur.
+La solution au problème est d'utiliser les fontions SDL au lieu d'OpenGL, mais
+tous n'est pas encore implémenté dans ClanLib, donc toute contribution est la
+bienvenue!
+
+* J'ai le message "Floating point exception", dès que je lance Wormux
+---------------------------------------------------------------------
+
+Ce problème a été rencontré la plupart du temps sur des odinateurs portables
+possédant une carte graphique Intel i8xx, la solution est de modifier votre
+fichier /etc/X11/xorg.conf ou /etc/X11/XF86Config.conf et de rajouter (ou
+modifier) la ligne:
+
+Section "ServerFlags"
+[...]
+Option "DisableVidModeExtension" "yes"
+
+* Erreur "connection refused by server" (Linux)
+---------------------------------------
+
+Si vous avez un message du genre :
+
+<< Xlib: connection to ":0.0" refused by server
+   Xlib: No protocol specified
+
+   UNE EXCEPTION EST INTERVENUE (pas de bol) :
+   Failed to open display. No XWindow display available. >>
+
+C'est sûrement que vous lancez Wormux avec un autre utilisateur que celui
+avec lequel vous avez lancé l'environnement graphique (typiquement : mélange
+entre le compte utilisateur normal et root). Soit vous repassez sous le bon
+utilisateur, soit vous autorisez root à ouvrir des applications graphiques
+en tapant "xhost -" (c'est pas très sécurisé tout ça ...).
+
+* Erreur "resource (...) not found"
+-----------------------------------
+
+Si vous avez un message du genre :
+<< UNE EXCEPTION EST INTERVENUE (pas de bol) :
+   Resource ico_arme/suicide not found. >>
+
+C'est que Wormux n'est pas exécuté dans le bon répertoire. Si vous travaillez
+avec le code source, allez dans le répertoire racine et tapez ./wormux.
+Sinon, vous pouvez spécifier dans le fichier ~/.wormux/config.xml où sont situées
+les données utilisées par Wormux.
+
+Le mieux reste d'installer Wormux en tapant "make install" en tant 
+qu'utilisateur root dans le sous-répertoire src. Supprimez ensuite le
+répertoire du code source (à moins que vous comptiez désintaller le jeu plus
+tard).
+
+* Une autre erreur ?
+--------------------
+
+Voyez le fichier BUGS.txt qui explique comment rapporter une erreur.
