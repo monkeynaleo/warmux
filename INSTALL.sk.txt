@@ -1,0 +1,73 @@
+Wormux 0.5
+Kompilácia/Inštalácia pod Linuxom
+-----------------------------------
+
+==========
+* Závislosti
+==========
+
+Ak nasledujúci software nie je v tvojom systéme, budeš si ho musie stiahnu
+pred pokusom o inštaláciu Wormuxu 0.5 na tvoj poèítaè...
+
+* ClanLib
+----------
+
+Wormux (z 13/11/2004) potrebuje ClanLib kninicu - ("0.7 subversion" verzie)
+
+Túto verziu môeš stiahnu z webstránky: http://www.clanlib.org/
+
+
+* libxml++
+----------
+
+Wormux pouíva libxml++ kninicu (verzie 1.0).
+
+Dostaneš ju tu: http://libxmlplusplus.sourceforge.net/
+
+Pod Debianom, poui príkaz:
+	apt-get install libxml++1.0-dev
+
+
+===============
+* Kompilácia / Inštalácia
+===============
+
+Pod Linuxom, zadaj Wormux adresár, jednoducho zadaj:
+
+	./configure
+	make
+	
+potom, ako root, zadaj:
+	
+	make install
+
+Štandardne, sa hra naištaluje do /usr/local. Ale ty si môeš vybra
+adresár (uiteèné ak nemáš prístup ku kontu roota) modifikovaním
+poèiatoèného konfiguraèného príkazu:
+
+	./configure --prefix=/OTHER/DIRECTORY/HERE
+
+
+=========
+* Uninstalling
+=========
+
+Pre odinštalovanie Wormuxu, choï do zdrojového adresára, potom (ako root )zadaj:
+
+	make uninstall
+
+
+==========
+* Ïalšie nastavenie
+==========
+
+Ve¾a nastavení moe by pouitıch s konfiguraènım príkazom.
+najuitoènejšie (pre vıvojárov, najmenej) bıva:
+
+	./configure --enable-debug
+
+Toto ti dovolí skompilova Wormuxa s debug nastavením, povolí ti vysliedi chyby/dalšie problémy.
+
+Pre zoznam všetkıch ïalších konfiguraènıch nastavení, zadaj:
+
+	./configure --help

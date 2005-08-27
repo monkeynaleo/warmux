@@ -1,0 +1,82 @@
+=======================
+Compilacion en Linux
+=======================
+
+ ClanLib
+ -------
+
+Wormux usa la libreria ClanLib en su version 0.6, asi que tendras que 
+instalarla. Los usuarios de Debien podran hacerlo facilmente:
+	apt-get install libclanlib-dev
+
+Pagina web: http://www.clanlib.org/
+
+ libxml++
+ --------
+
+Wormux usa tambien la libreria libxml++ en su version 1.0, así que tambien
+tendras que instalartela. Los usuarios de Debian podran hacerlo facilemente:
+	apt-get install libxml++1.0-dev
+
+Pagina web : http://libxmlplusplus.sourceforge.net/
+
+ Compilacion
+ -----------
+
+En GNU/Linux es suficiente ejecutar:
+
+$ cd src
+$ make release
+
+Para ejecutar el juego, vuelve al direcotorio raiz de Wormux y ejecuta:
+"./wormux"
+
+
+ Instalacion / Desinstalacion
+ -----------------------------
+
+En GNU/Linux para instalar Wormux ejecuta:
+
+$ make cleanall && make release && su -c "make install"
+
+Y para desinstalarlo:
+
+$ su -c "make uninstall"
+
+Por defecto, el juego es instalado en "/usr". Tambien puedes instalarlo
+en otro directorio (sobretodo si no tienes permiso en "/usr").
+
+$ make install DIR=~/games/
+
+
+===========================
+Informacion del Makefile
+===========================
+
+Opciones :
+---------	
+
+- DIR       : Especifica el directorio donde Wormux sera (des)instalado. 
+
+
+Reglas :
+--------
+
+- make all       : Compila
+- make exec      : Compila y ejecuta 
+- make release   : Compila en modo "release" ( sin informacion ni
+		   codigo de depuracion)
+- make qexec     : Ejecuta sin recompilar
+- make tgz-bin   : Compila y crea el archivo que contendra el programa
+		   en binario y la documentacion)
+- make tgz-src   : Creacion de un archivo que contiene el codigo fuente
+- make info      : Muestra una pantalla de ayuda sobre el entorno y las 
+		   opciones de compilacion
+- make install   : Compila e instala el Wormux
+- make uninstall : Desinstalacion
+- make clean     : Limpieza de archivos objeto
+- make cleanall  : Limpieza de todo rastro binario
+- make i18n_pot  : Generate new .pot file (used for translation)
+- make i18n_mo   : Generate new .mo file (used for translation)
+
+Hay otras reglas pero solo son utilizadas de manera interna.

@@ -1,0 +1,23 @@
+                    CREATION D'UN NOUVEAU TERRAIN
+                    =============================
+
+
+
+  Cette documentation a été écrite pour Wormux version 0.3.1. Dans cette
+version, les terrains de Wormux sont de simples images au format PNG 
+32 bits/pixel (avec couche alpha). 
+
+  Pour ajouter votre terrain, il faut :
+
+(1) Créer un sous-répertoire portant le nom de votre terrain dans 
+    donnee/terrain/ --> donnee/terrain/exemple/
+
+(2) Copier votre terrain -> donnee/terrain/exemple/terrain.png
+
+(3) Créer un fichier ressource ClanLib où sont donnés les noms de fichier du
+    ciel et du terrain -> donnee/terrain/exemple/images.scr. Exemple :
+
+--- images.scr ---
+ciel = ../../ciel/bleu.png (type=surface);
+terrain = exemple.png (type=surface); 
+------------------
