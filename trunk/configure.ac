@@ -146,7 +146,8 @@ fi
 
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-1.0 --libs`
 LIBXMLPP_LIBS="$LIBXMLPP_LIBS"
-SDL_LIBS=`$SDL_CONFIG --libs -lSDL_mixer -lSDL_image`
+SDL_LIBS=`$SDL_CONFIG --libs`
+SDL_LIBS="$SDL_LIBS -lSDL_mixer -lSDL_image"
 
 
 AC_SUBST([SDL_LIBS])
