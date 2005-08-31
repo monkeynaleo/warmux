@@ -96,6 +96,6 @@ wormux_SOURCES = \
 	include/action_handler.cpp include/action_handler.h \
 	include/constant.cpp include/constant.h
 
-AM_CXXFLAGS = @CLANLIB_CFLAGS@ @LIBXMLPP_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\" -I../intl -I$(top_srcdir)/intl
+AM_CXXFLAGS = @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
 
-LIBS = $(CLANLIB_LIBS) $(LIBXMLPP_LIBS)
+LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS)

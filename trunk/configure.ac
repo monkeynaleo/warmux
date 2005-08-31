@@ -29,11 +29,6 @@ AC_ARG_ENABLE([debug],
                    CXXFLAGS="$CXXFLAGS -DDEBUG -ggdb3"
 	       fi])
 
-use_sdl='no'
-AC_ARG_ENABLE([sdl],
-	      [  --enable-sdl        Enable SDL option for ClanLib],
-	      use_sdl='yes')
-
 AC_ARG_ENABLE([static],
               [  --enable-static       Enable static building of wormux],
 	      [static=$enableval],
@@ -92,12 +87,21 @@ fi
 
 AM_CONDITIONAL([X11], [test "$have_libx11" = 'yes'])
 
+###### Check for pkg-config  ########
 AC_PATH_PROGS([PACKAGE_CONFIG], [pkg-config], [none])
-
 if test "x$PACKAGE_CONFIG" = "xnone"; then
 	
 	AC_MSG_ERROR([*** pkg-config, needed to check for libxml++ existence
 has not been found.])
+
+fi
+
+
+###### Check for sdl-config  ########
+AC_PATH_PROGS([SDL_CONFIG], [sdl-config], [none])
+if test "x$SDL_CONFIG" = "xnone"; then
+	
+	AC_MSG_ERROR([*** sdl-config has not been found.])
 
 fi
 
@@ -110,88 +114,14 @@ else
 	AC_MSG_ERROR([*** libxml++ version 1.0 not found!])
 fi
 
-AC_MSG_CHECKING(for clanGL-0.7)
 
-if $PACKAGE_CONFIG clanGL-0.7 --libs > /dev/null 2>&1; then
+AC_MSG_CHECKING(for SDL)
+
+if $SDL_CONFIG --libs > /dev/null 2>&1; then
 	AC_MSG_RESULT(yes)
 else
 	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** ClanLib GL module version 0.7 not found!])
-fi
-
-AC_MSG_CHECKING(for clanSound-0.7)
-
-if $PACKAGE_CONFIG clanSound-0.7 --libs > /dev/null 2>&1; then
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** ClanLib Sound module version 0.7 not found!])
-fi
-
-AC_MSG_CHECKING(for clanVorbis-0.7)
-
-if $PACKAGE_CONFIG clanVorbis-0.7 --libs > /dev/null 2>&1; then
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** ClanLib Vorbis module version 0.7 not found!])
-fi
-
-
-#if test "$use_sdl" == 'yes'; then
-# AC_MSG_CHECKING(for clanSDL-0.7)
-
-#  if $PACKAGE_CONFIG clanSDL-0.7 --libs > /dev/null 2>&1; then
-#    AC_MSG_RESULT(yes)
-#  else
-#    AC_MSG_RESULT(no)
-#    AC_MSG_ERROR([*** ClanLib SDL module version 0.7 not found!])
-#  fi
-#fi
-
-AC_MSG_CHECKING(for clanDisplay-0.7)
-
-if $PACKAGE_CONFIG clanDisplay-0.7 --libs > /dev/null 2>&1; then
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** ClanLib Display module version 0.7 not found!])
-fi
-
-AC_MSG_CHECKING(for clanCore-0.7)
-
-if $PACKAGE_CONFIG clanCore-0.7 --libs > /dev/null 2>&1; then
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** ClanLib Core module version 0.7 not found!])
-fi
-
-AC_MSG_CHECKING(for clanApp-0.7)
-
-if $PACKAGE_CONFIG clanApp-0.7 --libs > /dev/null 2>&1; then
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** ClanLib App module version 0.7 not found!])
-fi
-
-AC_MSG_CHECKING(for clanSignals-0.7)
-
-if $PACKAGE_CONFIG clanSignals-0.7 --libs > /dev/null 2>&1; then
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** ClanLib Signals module version 0.7 not found!])
-fi
-
-AC_MSG_CHECKING(for clanNetwork-0.7)
-
-if $PACKAGE_CONFIG clanNetwork-0.7 --libs > /dev/null 2>&1; then
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** ClanLib Network module version 0.7 not found!])
+	AC_MSG_ERROR([*** SDL not found!])
 fi
 
 #######################################################################
@@ -214,25 +144,12 @@ fi
 # Checks for libraries.                                               #
 #######################################################################
 
-CLANLIB_MODULES="clanGL-0.7 clanSound-0.7 clanVorbis-0.7\
-              clanDisplay-0.7 clanCore-0.7 clanApp-0.7 clanSignals-0.7\
-			  clanNetwork-0.7"
-
-#if test "$use_sdl" == 'yes'; then
-#  CLANLIB_MODULES="$CLANLIB_MODULES clanSDL-0.7"
-#fi
-
-CLANLIB_CFLAGS=`$PACKAGE_CONFIG $CLANLIB_MODULES --cflags`
-CLANLIB_LIBS=`$PACKAGE_CONFIG $CLANLIB_MODULES --libs`
-
-#if test "$use_sdl" == 'yes'; then
-#  CLANLIB_CFLAGS="$CLANLIB_CFLAGS -DUSE_SDL"
-#fi
-
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-1.0 --libs`
 LIBXMLPP_LIBS="$LIBXMLPP_LIBS"
+SDL_LIBS=`$SDL_CONFIG --libs -lSDL_mixer -lSDL_image`
 
-AC_SUBST([CLANLIB_LIBS])
+
+AC_SUBST([SDL_LIBS])
 AC_SUBST([LIBXMLPP_LIBS])
 
 #######################################################################
@@ -247,10 +164,11 @@ OLD_CXXFLAGS=$CXXFLAGS
 
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-1.0 --cflags`
 LIBXMLPP_CFLAGS="$LIBXMLPP_CFLAGS"
+SDL_CFLAGS=`$SDL_CONFIG --cflags`
 CPPFLAGS="$CPPFLAGS $LIBXMLPP_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS"
 
-AC_SUBST(CLANLIB_CFLAGS)
+AC_SUBST(SDL_CFLAGS)
 AC_SUBST(LIBXMLPP_CFLAGS)
 
 #AC_CHECK_HEADER([ClanLib/core.h],
@@ -288,17 +206,7 @@ CXXFLAGS=$OLD_CXXFLAGS
 DATA_FILES=`cd data ; find . -name CVS -prune -o -name ".cvs*" -o -name "Makefile*" -o -name ".#*" -o -type d -o -print`
 DATA_FILES=`echo $DATA_FILES`
 
-#if test "$static" = yes; then
-#   CLANLIB_DIR=`$PACKAGE_CONFIG $CLANLIB_MODULES --variable=libdir` ;
-
-#   DATA_FILES="$DATA_FILES $CLANLIB_DIR/libclanSDL.a $CLANLIB_DIR/libclanNetwork.a \
-#			   $CLANLIB_DIR/libclanVorbis.a $CLANLIB_DIR/libclanSound.a libclanGL.a \
-#			   $CLANLIB_DIR/libclanSignals.a $CLANLIB_DIR/libclanDisplay.a \
-#			   $CLANLIB_DIR/libclanCore.a $CLANLIB_DIR/libclanApp.a";
-   
-#fi
-
-
+AM_PATH_PARAGUI()
 
 AC_SUBST([DATA_FILES])
 
