@@ -22,76 +22,75 @@
 #ifndef JUKEBOX_H
 #define JUKEBOX_H
 //-----------------------------------------------------------------------------
-#include <ClanLib/vorbis.h>
-#include <ClanLib/sound.h>
-#include <ClanLib/core.h>
+#include <SDL.h>
+#include <SDL_mixer.h>
+
 #include <map>
+#include <set>
+#include <utility>
+
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
 class JukeBox 
 {
 private:
-  // Define types
-  typedef struct s_error_displayed{
-    CL_SoundBuffer* buffer;
-    CL_SoundBuffer_Session* session;
-    bool error_displayed;
-  } sound_item_t;
-  typedef std::multimap<std::string, sound_item_t>::value_type 
-    paire_soundbuffer;
-  typedef std::multimap<std::string, sound_item_t>::iterator 
-    iterator;
 
-  std::multimap<std::string, sound_item_t> m_soundbuffers;
+  typedef std::multimap<std::string, std::string>::value_type 
+    sound_sample;
+  typedef std::multimap<std::string, std::string>::iterator 
+    sample_iterator;
+
+  std::multimap<std::string, std::string> m_soundsamples;
+
   struct s_m_config{
-    bool use;
     bool music;
     bool effects;
-    uint frequency;
+    int frequency;
+    int channels; // (1 channel = mono, 2 = stereo, etc)
   } m_config;
+
   bool m_init;
-  bool m_init_res;
-  CL_ResourceManager * res; 
-  
-  CL_SoundOutput * soundoutput;
-  CL_SetupCore * coreinit;
-  CL_SetupSound * soundinit;
-  CL_SetupVorbis * vorbisinit;
 
   std::set<std::string> m_profiles_loaded;
 
 public:
   JukeBox();
-
-  void ActiveSound (bool on);
-  void ActiveMusic (bool on);
-  void ActiveEffects (bool on);
-  void SetFrequency (uint frequency);
-  bool UseSound() const;
-  bool UseMusic() const;
-  bool UseEffects() const;
-  bool GetMusicConfig() const;
-  bool GetEffectsConfig() const;
-  uint GetFrequency() const;
-
   void Init();
   void End(); 
-  void StopAll();
-  void Play(const std::string& soundfile, 
-	    const bool loop = false,
-	    CL_SoundBuffer_Session **session = NULL);
-  void Stop(const std::string& soundfile);
-
-  void Load(const std::string& profile);
-  void PlayProfile(const std::string& profile, 
-	    const std::string& action, 
-	    const bool loop = false,
-	    CL_SoundBuffer_Session **session = NULL);
   
+  bool UseMusic() const {return m_config.music;};
+  bool UseEffects() const {return m_config.effects;};
+  int GetFrequency() const {return m_config.frequency;};
+  int HowManyChannels() const {return m_config.channels;};
+  
+  void ActiveMusic (bool on) {m_config.music = on ;};
+  void ActiveEffects (bool on) {m_config.effects = on;};
+  void SetFrequency (int frequency);
+  void SetNumbersOfChannel(int channels);
+
+  void LoadXML(const std::string& profile);
+
+  /** 
+   * Playing a sound effect
+   * @return the channel used to play the sample
+   * <i>loop</i>: -1 for loop forever, else number of times to play
+   */
+  int Play(const std::string& category, 
+	   const std::string& sample, 
+	   const int loop);
+  
+  int Stop(int channel);
+
+  int StopAll();
+
 private:
-  void PlayItem (sound_item_t &item, const bool loop, 
-		 CL_SoundBuffer_Session **session);
+  /** 
+   * Playing a sound effect
+   * @return the channel used to play the sample
+   * <i>loop</i>: -1 for loop forever, else number of times -1 to play
+   */
+  int PlaySample (Mix_Chunk * sample, int loop=0); 
 };
 
 extern JukeBox jukebox;
