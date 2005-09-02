@@ -129,6 +129,7 @@ double BorneDouble (const double &valeur, const double &min, const double &max)
 // - M=(-10,10) -> 3*PI/4 (2.35)
 // - M=(10,-10) -> -PI/4 (-0.78)
 // - M=O -> 0
+#ifdef CL
 double CalculeAngle (const CL_Point &O, const CL_Point &M)
 {
   int x = M.x - O.x;
@@ -164,7 +165,7 @@ double CalculeAngle (const CL_Point &O, const CL_Point &M)
   }
   return angle;
 }
-
+#endif
 double CalculeAnglef (DoubleVector V)
 {
   double angle;

@@ -16,8 +16,11 @@ wormux_SOURCES = \
 	tool/i18n.cpp tool/i18n.h \
 	tool/error.cpp tool/error.h \
 	tool/file_tools.cpp tool/file_tools.h \
+	tool/math_tools.cpp tool/math_tools.h \
+	tool/random.cpp tool/random.h \
 	include/constant.cpp include/constant.h \
-	game/game_mode.cpp game/game_mode.h 
+	game/game_mode.cpp game/game_mode.h \
+	sound/jukebox.cpp sound/jukebox.h 
 #\
 #	game/game.cpp game/game.h \
 #	game/game_loop.cpp gamse/game_loop.h \
@@ -56,7 +59,6 @@ wormux_SOURCES = \
 #	object/particle.cpp object/particle.h \
 #	object/physical_obj.cpp object/physical_obj.h \
 #	object/physics.cpp object/physics.h \
-#	sound/jukebox.cpp sound/jukebox.h \
 #	team/macro.h \
 #	team/character.cpp team/character.h \
 #	team/move.cpp team/move.h \
@@ -65,8 +67,6 @@ wormux_SOURCES = \
 #	team/team_energy.cpp team/team_energy.h \
 #	team/teams_list.cpp team/teams_list.h \
 #	tool/geometry_tools.cpp tool/geometry_tools.h \
-#	tool/math_tools.cpp tool/math_tools.h \
-#	tool/random.cpp tool/random.h \
 #	weapon/all.h \
 #	weapon/airhammer.cpp weapon/airhammer.h \
 #	weapon/air_attack.cpp weapon/air_attack.h \
