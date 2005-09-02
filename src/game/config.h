@@ -62,9 +62,6 @@ public:
     std::list<std::string> teams;
     std::string map_name;
   } tmp;
-#ifdef USE_SDL
-  bool use_sdl;
-#endif
   std::string data_dir, locale_dir, personal_dir;
 
 public:
