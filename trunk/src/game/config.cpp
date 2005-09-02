@@ -23,24 +23,27 @@
 
 #include "config.h"
 //-----------------------------------------------------------------------------
-#include "../include/constant.h"
+#ifdef CL
 #include "../team/teams_list.h"
 #include "../graphic/video.h"
 #include "../sound/jukebox.h"
 #include "../team/skin.h"
-#include "../tool/file_tools.h"
-#include "../tool/string_tools.h"
-#include "game_mode.h"
 #include "../graphic/graphism.h"
 #include "../map/maps_list.h"
-#include "../tool/i18n.h"
 #include "../weapon/weapons_list.h"
 #include "../interface/keyboard.h"
 #include "../include/action.h"
+#include <ClanLib/display.h>
+#else
 #include <sstream>
 #include <iostream>
 #include <sys/stat.h>
-#include <ClanLib/display.h>
+#include "../include/constant.h"
+#include "game_mode.h"
+#include "../tool/file_tools.h"
+#include "../tool/string_tools.h"
+#include "../tool/i18n.h"
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux 
 {
@@ -171,7 +174,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   //=== Mode de jeu ===
   LitDocXml::LitString (xml, "game_mode", m_game_mode);
 
- 
+#ifdef CL
 	clavier.SetKeyAction(CL_KEY_LEFT,		ACTION_MOVE_LEFT);		
 	clavier.SetKeyAction(CL_KEY_RIGHT,	ACTION_MOVE_RIGHT);
 	clavier.SetKeyAction(CL_KEY_UP,			ACTION_UP);
@@ -193,7 +196,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 	clavier.SetKeyAction(CL_KEY_F7, ACTION_WEAPONS7);
 	clavier.SetKeyAction(CL_KEY_F8, ACTION_WEAPONS8);
 	clavier.SetKeyAction(CL_KEY_C, ACTION_CENTER);
-	
+#endif
  	return true;
 }
 
@@ -204,9 +207,12 @@ void Config::Applique()
   I18N_SetDir (locale_dir);
 
   // Charge le mode jeu
+#ifdef CL
   weapons_list.Init();
+#endif
   game_mode.Load(m_game_mode);
 
+#ifdef CL
   // Son
   jukebox.ActiveSound (tmp.sound.active);
   jukebox.ActiveMusic (tmp.sound.music);
@@ -224,6 +230,7 @@ void Config::Applique()
     lst_terrain.ChangeTerrainNom (tmp.map_name);
   else
     lst_terrain.ChangeTerrain (0);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -265,6 +272,7 @@ bool Config::SauveXml()
   doc.EcritBalise (racine, "data_dir", data_dir);
   doc.EcritBalise (racine, "locale_dir", locale_dir);
 
+#ifdef CL
   //=== Terrain ===
   doc.EcritBalise (racine, "map", lst_terrain.TerrainActif().name);
 
@@ -277,16 +285,12 @@ bool Config::SauveXml()
   {
     doc.EcritBalise (balise_equipes, "team", (**it).GetId());
   }
-
-  //=== Vidéo ===
-  xmlpp::Element *noeud_video = racine -> add_child("video");
-#ifdef USE_SDL
-  doc.EcritBalise (noeud_video, "use_sdl", 
-		   ulong2str(static_cast<uint>(config.use_sdl)) );
 #endif
+
 #ifdef BUGGY_CODE
   doc.EcritBalise (noeud_video, "max_fps", ulong2str(video.GetMaxFps()));
 #endif
+#ifdef CL
   doc.EcritBalise (noeud_video, "width", ulong2str(video.GetWidth()));
   doc.EcritBalise (noeud_video, "height", ulong2str(video.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 
@@ -299,7 +303,7 @@ bool Config::SauveXml()
 		   ulong2str(jukebox.GetEffectsConfig()));
   doc.EcritBalise (noeud_son, "frequency",
 		   ulong2str(jukebox.GetFrequency()));
-
+#endif
   //=== Mode de jeu ===
   doc.EcritBalise (racine, "game_mode", m_game_mode);
   return doc.Sauve();

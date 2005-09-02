@@ -204,7 +204,7 @@ CXXFLAGS=$OLD_CXXFLAGS
 # Data file substitution.                                             #
 #######################################################################
 
-DATA_FILES=`cd data ; find . -name CVS -prune -o -name ".cvs*" -o -name "Makefile*" -o -name ".#*" -o -type d -o -print`
+DATA_FILES=`cd data ; find . -name CVS -prune -o -name ".svn*" -o -name "Makefile*" -o -name ".#*" -o -type d -o -print`
 DATA_FILES=`echo $DATA_FILES`
 
 AM_PATH_PARAGUI()

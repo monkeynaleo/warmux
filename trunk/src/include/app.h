@@ -22,40 +22,29 @@
 #ifndef APP_WORMUX_H
 #define APP_WORMUX_H
 //-----------------------------------------------------------------------------
-#include "base.h"
-#include <ClanLib/core.h>
-#include <ClanLib/application.h>
-#include <ClanLib/display.h>
-#include <ClanLib/gl.h>
+#include <SDL/SDL.h>
 #include <string>
-
-#ifdef USE_SDL
-#  include <ClanLib/sdl.h>
-#endif
+#include "base.h"
 
 //-----------------------------------------------------------------------------
 
-class AppWormux : public CL_ClanApplication
+class AppWormux
 {
 public:
-  CL_DisplayWindow *clwindow;
+  SDL_Surface *sdlwindow;
 
 private:
   int x, y;
   std::string titre_fenetre;
-#ifdef USE_SDL
-  CL_SetupSDL *setup_sdl;
-#endif
 
 private:
   void Prepare();
   void WelcomeMessage();
-  void Init(int, char**);
+  bool Init(int, char**);
   void Fin();
 
 public:
-	CL_SetupGL *setup_gl;
-	AppWormux();
+  AppWormux();
   int main( int argc, char ** argv );
 };
 

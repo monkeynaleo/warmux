@@ -23,29 +23,35 @@
 //-----------------------------------------------------------------------------
 #define EMAIL "wormux-dev@gna.org"
 //-----------------------------------------------------------------------------
+#ifdef CL
 #include <ClanLib/core.h>
 #include <ClanLib/display.h>
-#include <algorithm>
-#include <exception>
 #include "menu/main_menu.h"
 #include "menu/options_menu.h"
-#include "tool/i18n.h"
 #include "menu/infos_menu.h"
 #include "game/game.h"
 #include "graphic/graphism.h"
-#include "include/constant.h"
 #include "include/action_handler.h"
-#include "tool/random.h"
-#include "game/config.h"
 #include "network/network.h"
 #include "graphic/video.h"
 #include "sound/jukebox.h"
+
+#include "map/wind.h"
+#endif
+
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <algorithm>
+#include <exception>
 #include <sstream>
 #include <vector>
 #include <string>
 #include <iostream>
+#include "include/constant.h"
+#include "tool/i18n.h"
+#include "tool/random.h"
+#include "game/config.h"
 
-#include "map/wind.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -57,7 +63,7 @@ AppWormux app;
 
 AppWormux::AppWormux()
 {
-  clwindow = NULL;
+  sdlwindow = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -105,17 +111,20 @@ void AppWormux::Prepare()
 {
   InitCst();
   InitI18N();
+#ifdef CL
   InitRandom();
   WelcomeMessage();
   action_handler.Init();
+#endif
   config.Charge();
 }
 
 //-----------------------------------------------------------------------------
 
-void AppWormux::Init(int argc, char **argv)
+bool AppWormux::Init(int argc, char **argv)
 {
   // Network
+#ifdef CL
   if ((argc == 3) && (strcmp(argv[1],"server")==0)) {
 	// wormux server <port>
 	network.server_start (argv[2]);
@@ -123,37 +132,51 @@ void AppWormux::Init(int argc, char **argv)
 	// wormux <server_ip> <server_port>
 	network.client_connect(argv[1], argv[2]);
   }
-
-#ifdef USE_SDL
-  if (config.use_sdl) {
-    setup_gl = NULL;
-    setup_sdl = new CL_SetupSDL();
-  } else {
-    setup_gl = new CL_SetupGL();
-    setup_sdl = NULL;
-  }
-#else
-  setup_gl = new CL_SetupGL();
 #endif
 
+  if ( SDL_Init(SDL_INIT_TIMER|
+       SDL_INIT_AUDIO|
+       SDL_INIT_VIDEO) < 0 )
+  {
+    fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
+    return false;
+  }
+
   // Open a new window
-  clwindow = new CL_DisplayWindow(std::string("Wormux ")+VERSION,
+  sdlwindow = SDL_SetVideoMode(config.tmp.video.width,
+                                   config.tmp.video.height,
+                                   16, //resolution in bpp
+                                   SDL_HWSURFACE);  //see http://www.libsdl.org/cgi/docwiki.cgi/SDL_5fSetVideoMode
+  //TODO->set the name of the window
+
+#ifdef CL
+      CL_DisplayWindow(std::string("Wormux ")+VERSION,
 				config.tmp.video.width,
 				config.tmp.video.height,
 				config.tmp.video.fullscreen);
-  CL_Display::clear (CL_Color::black);
+#endif
 
   // Load graphics resources XML file
+#ifdef CL
   graphisme.Init();
+#endif
 
   // Display a loading picture
+#ifdef CL
   CL_Surface loading_image = CL_Surface("intro/loading", graphisme.LitRes());
-  loading_image.draw (CL_Rect(0, 0, video.GetWidth(), video.GetHeight()));
+#else
+  //TODO->use ressource handler
+  SDL_Surface* loading_image=IMG_Load("../data/menu/img/loading.png");
+#endif
+
+  SDL_BlitSurface(loading_image,NULL,sdlwindow,NULL);
+  SDL_Flip(sdlwindow);
 
   // Message in window
   std::ostringstream ss;
   ss << _("Wormux launching...") << std::endl;
   ss << _("Version") << " " << VERSION;
+#ifdef CL
   police_grand.WriteCenter (video.GetWidth()/2, 200*video.GetHeight()/loading_image.get_height(), ss.str());
   CL_Display::flip();
 
@@ -161,6 +184,8 @@ void AppWormux::Init(int argc, char **argv)
   jukebox.Init();
 
   config.Applique();
+#endif
+  SDL_FreeSurface(loading_image);
 }
 
 //-----------------------------------------------------------------------------
@@ -170,17 +195,13 @@ void AppWormux::Fin()
   // Message de fin
   std::cout << std::endl
 	    << "[ " << _("End of game") << " ]" << std::endl;
+  
+#ifdef CL
   config.Sauve();
-
   jukebox.End();
-  delete clwindow;
-  CL_SetupDisplay::deinit();
-  CL_SetupCore::deinit();
-
-  delete setup_gl;
-#ifdef USE_SDL
-  delete setup_sdl;
 #endif
+
+  SDL_Quit();
 
   std::cout << "o "
 	    << _("Please tell us your opinion of Wormux via email:")
@@ -192,22 +213,26 @@ void AppWormux::Fin()
 
 int AppWormux::main (int argc, char **argv)
 {
-#ifdef WIN32
-  // Create a console window for text-output if not available
-  CL_ConsoleWindow console("Console",80,1000);
-  console.redirect_stdio();
-#endif
+#ifdef CL
   menu_item choix;
+#endif
   bool quitter = false;
   try
   {
     Prepare();
+#ifdef CL
     CL_SetupCore setupCore;
     CL_SetupDisplay setupDisplay;
     CL_SetupNetwork setupNetwork;
-    Init(argc, argv);
+#endif
+    if (!Init(argc, argv))
+    {
+      std::cout << std::endl << "Error during initialisation...";
+      return 0;
+    }
     do
     {
+#ifdef CL
       Menu *menu = new Menu;
       menu->ChargeImage();
       choix = menu->Lance();
@@ -228,18 +253,12 @@ int AppWormux::main (int argc, char **argv)
 	                  break;
         default:          ;
       }
-      
+#endif
     } while (!quitter);
 
     Fin();
   }
-  catch (const CL_Error &err)
-  {
-    std::cerr << std::endl
-	      << _("ClanLib error :") << std::endl
-	      << err.message << std::endl
-	      << std::endl;
-  }
+  
   catch (const std::exception &e)
   {
     std::cerr << std::endl
@@ -256,4 +275,9 @@ int AppWormux::main (int argc, char **argv)
   return 0;
 }
 
+int main (int argc, char **argv)
+{
+  AppWormux wormux;
+  wormux.main(argc,argv);
+}
 //-----------------------------------------------------------------------------
