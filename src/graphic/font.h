@@ -15,35 +15,35 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Police de caractère.
- *****************************************************************************/
-
-#ifndef POLICE_H
-#define POLICE_H
+ ******************************************************************************/
+ 
+#ifndef FONT_H
+#define FONT_H
 //-----------------------------------------------------------------------------
+#include <SDL>
+#include <SDL_ttf>
+
 #include "../include/base.h"
-#include <ClanLib/display.h>
 //-----------------------------------------------------------------------------
 
-class Police
+class Font
 {
 public:
-  CL_Font *m_police;
+  TTF_Font *m_font;
 
 public:
-  Police();
-  void Load (const std::string& resource_id, CL_ResourceManager* manager);
-  void WriteLeft (int x, int y, const std::string &txt);
-  void WriteLeftBottom (int x, int y, const std::string &txt);
-  void WriteRight (int x, int y, const std::string &txt);
-  void WriteCenterTop (int x, int y, const std::string &txt);
-  void WriteCenter (int x, int y, const std::string &txt);
+  Font();
+  ~Font();
+  void Load (const std::string& resource_id);
+  void WriteLeft (int x, int y, const std::string &txt, SDL_Color color);
+  void WriteLeftBottom (int x, int y, const std::string &txt, SDL_Color color);
+  void WriteRight (int x, int y, const std::string &txt, SDL_Color color);
+  void WriteCenterTop (int x, int y, const std::string &txt, SDL_Color color);
+  void WriteCenter (int x, int y, const std::string &txt, SDL_Color color);
   uint GetWidth (const std::string &txt);
   uint GetHeight (const std::string &txt);
-  CL_Font &Acces();
-  const CL_Font &Read() const;
-};
+  SDL_Surface * Font::Render(const std::string &txt, SDL_Color color);
+ };
 
 //-----------------------------------------------------------------------------
 #endif
