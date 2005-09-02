@@ -15,89 +15,124 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Police de caractère.
- *****************************************************************************/
+ ******************************************************************************/
 
 #include "font.h"
 //-----------------------------------------------------------------------------
-#include "../tool/string_tools.h"
+
+Font::Font()
+{ 
+  m_font = NULL; 
+}
+
 //-----------------------------------------------------------------------------
 
-Police::Police()
-{ m_police = NULL; }
-
-//-----------------------------------------------------------------------------
-
-void Police::Load (const std::string& resource_id, 
-		     CL_ResourceManager* manager)
+Font::~Font()
 {
-  assert (m_police == NULL);
-  m_police = new CL_Font(resource_id, manager);
-}
-//-----------------------------------------------------------------------------
-
-void Police::WriteLeft (int x, int y, const std::string &txt)
-{ 
-  Acces().set_alignment (origin_top_left);
-  Acces().draw(x,y,txt); 
+  if (m_font != NULL) {
+    TTF_CloseFont(m_font);
+    m_font = NULL;
+  }
 }
 
 //-----------------------------------------------------------------------------
 
-void Police::WriteLeftBottom (int x, int y, const std::string &txt)
+void Font::Load (const std::string& font_name, int size) 
+{
+  assert (m_font == NULL);
+  m_font = TTF_OpenFont(font_name, size);
+}
+//-----------------------------------------------------------------------------
+
+void Font::WriteLeft (int x, int y, const std::string &txt, 
+		      SDL_Color color)
 { 
-  Acces().set_alignment (origin_bottom_left);
-  Acces().draw(x,y,txt); 
+  SDL_surface text_surface = Render(txt, color);
+  SDL_rect dst_rect;
+  dst_rect.x = x;
+  dst_rect.y = y;
+  dst_rect.h = dst_rect.w = 0;
+
+  SDL_BlitSurface(text_surface,NULL,screen, dst_rect);
+}
+
+// //-----------------------------------------------------------------------------
+
+void Font::WriteLeftBottom (int x, int y, const std::string &txt,
+			    SDL_Color color)
+{ 
+  SDL_surface text_surface = Render(txt, color);
+  SDL_rect dst_rect;
+  dst_rect.x = x;
+  dst_rect.y = y - GetHeight();
+  dst_rect.h = dst_rect.w = 0;
+
+  SDL_BlitSurface(text_surface,NULL,screen, dst_rect);
+}
+
+// //-----------------------------------------------------------------------------
+
+void Font::WriteRight (int x, int y, const std::string &txt,
+		       SDL_Color color)
+{ 
+  SDL_surface text_surface = Render(txt, color);
+  SDL_rect dst_rect;
+  dst_rect.x = x - GetWidth(txt);
+  dst_rect.y = y;
+  dst_rect.h = dst_rect.w = 0;
+
+  SDL_BlitSurface(text_surface, NULL, screen, dst_rect);
+}
+
+// //-----------------------------------------------------------------------------
+
+void Font::WriteCenter (int txt_x, int txt_y, const std::string &txt,
+			SDL_Color color)
+{ 
+  SDL_surface text_surface = Render(txt, color);
+  SDL_rect dst_rect;
+  dst_rect.x = x - GetWidth(txt)/2;
+  dst_rect.y = y - GetHeight()/2;
+  dst_rect.h = dst_rect.w = 0;
+
+  SDL_BlitSurface(text_surface, NULL, screen, dst_rect);
+}
+
+// //-----------------------------------------------------------------------------
+
+void Font::WriteCenterTop (int txt_x, int txt_y, const std::string &txt,
+			   SDL_Color color)
+{ 
+  SDL_surface text_surface = Render(txt, color);
+  SDL_rect dst_rect;
+  dst_rect.x = x - GetWidth(txt)/2;
+  dst_rect.y = y;
+  dst_rect.h = dst_rect.w = 0;
+
+  SDL_BlitSurface(text_surface, NULL, screen, dst_rect);
 }
 
 //-----------------------------------------------------------------------------
 
-void Police::WriteRight (int x, int y, const std::string &txt)
-{ 
-  Acces().set_alignment (origin_top_right);
-  Acces().draw(x,y,txt); 
+SDL_Surface * Font::Render(const std::string &txt, SDL_Color color)
+{
+  return TTF_RenderUTF8_Blended(m_font, txt, color);
 }
 
 //-----------------------------------------------------------------------------
 
-void Police::WriteCenter (int txt_x, int txt_y, const std::string &txt)
+int Font::GetWidth (const std::string &txt)
 { 
-  Acces().set_alignment (origin_center);
-  Acces().draw(txt_x,txt_y,txt); 
+  int width=-1;
+  TTF_SizeUTF8(m_font, txt, &width, NULL);
+  return width;
 }
 
 //-----------------------------------------------------------------------------
 
-void Police::WriteCenterTop (int txt_x, int txt_y, const std::string &txt)
+uint Font::GetHeight ()
 { 
-  Acces().set_alignment (origin_top_center);
-  Acces().draw(txt_x,txt_y,txt); 
-}
-
-//-----------------------------------------------------------------------------
-
-CL_Font &Police::Acces() 
-{ assert (m_police != NULL); return *m_police; }
-
-//-----------------------------------------------------------------------------
-
-const CL_Font &Police::Read() const 
-{ assert (m_police != NULL); return *m_police; }
-
-//-----------------------------------------------------------------------------
-
-
-uint Police::GetWidth (const std::string &txt)
-{ 
-  return Acces().get_width(txt);
-}
-
-//-----------------------------------------------------------------------------
-
-uint Police::GetHeight (const std::string &txt)
-{ 
-  return Acces().get_height(txt);
+  return TTF_FontHeight(m_font);
 }
 
 //-----------------------------------------------------------------------------
