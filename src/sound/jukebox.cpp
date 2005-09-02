@@ -145,9 +145,8 @@ void JukeBox::LoadXML(const std::string& profile)
   } 
   LitDocXml doc;
 
-  std::string test = "/home/matt/projets/wormux/wormux/data/";
   // Load the XML
-  std::string folder = test+/*config.data_dir*/ + "sound/"+ profile + '/';
+  std::string folder = config.data_dir + "sound/"+ profile + '/';
   std::string xml_filename = folder + "profile.xml";
   if (!FichierExiste(xml_filename)) return;
   if (!doc.Charge (xml_filename)) return;
