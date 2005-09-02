@@ -34,7 +34,6 @@
 #include "include/action_handler.h"
 #include "network/network.h"
 #include "graphic/video.h"
-#include "sound/jukebox.h"
 
 #include "map/wind.h"
 #endif
@@ -51,6 +50,7 @@
 #include "tool/i18n.h"
 #include "tool/random.h"
 #include "game/config.h"
+#include "sound/jukebox.h"
 
 
 using namespace Wormux;
@@ -181,10 +181,10 @@ bool AppWormux::Init(int argc, char **argv)
   CL_Display::flip();
 
   // Charge le son
-  jukebox.Init();
 
   config.Applique();
 #endif
+  jukebox.Init();
   SDL_FreeSurface(loading_image);
 }
 
@@ -198,9 +198,9 @@ void AppWormux::Fin()
   
 #ifdef CL
   config.Sauve();
-  jukebox.End();
 #endif
 
+  jukebox.End();
   SDL_Quit();
 
   std::cout << "o "
