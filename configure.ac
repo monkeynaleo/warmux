@@ -106,6 +106,15 @@ if test "x$SDL_CONFIG" = "xnone"; then
 
 fi
 
+###### Check for paragui-config  ########
+AC_PATH_PROGS([PGUI_CONFIG], [paragui-config], [none])
+
+if test "x$PGUI_CONFIG" = "xnone"; then	
+
+	AC_MSG_ERROR([*** paragui-config has not been found.])
+
+fi
+
 AC_MSG_CHECKING(for libxml++)
 
 if $PACKAGE_CONFIG libxml++-1.0 --libs > /dev/null 2>&1; then
@@ -123,6 +132,15 @@ if $SDL_CONFIG --libs > /dev/null 2>&1; then
 else
 	AC_MSG_RESULT(no)
 	AC_MSG_ERROR([*** SDL not found!])
+fi
+
+AC_MSG_CHECKING(for Paragui)
+
+if $PGUI_CONFIG --libs > /dev/null 2>&1; then
+	AC_MSG_RESULT(yes)
+else
+	AC_MSG_RESULT(no)
+	AC_MSG_ERROR([*** Paragui not found!])
 fi
 
 #######################################################################
@@ -149,12 +167,11 @@ LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-1.0 --libs`
 LIBXMLPP_LIBS="$LIBXMLPP_LIBS"
 SDL_LIBS=`$SDL_CONFIG --libs`
 SDL_LIBS="$SDL_LIBS -lSDL_mixer -lSDL_image"
+PARAGUI_LIBS=`$PGUI_CONFIG --libs`
 
-
-AC_SUBST([SDL_LIBS])
 AC_SUBST([LIBXMLPP_LIBS])
-
-AM_PATH_PARAGUI()
+AC_SUBST([PARAGUI_LIBS])
+AC_SUBST([SDL_LIBS])
 
 #######################################################################
 # Checks for header files.                                            #
@@ -169,11 +186,13 @@ OLD_CXXFLAGS=$CXXFLAGS
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-1.0 --cflags`
 LIBXMLPP_CFLAGS="$LIBXMLPP_CFLAGS"
 SDL_CFLAGS=`$SDL_CONFIG --cflags`
+PARAGUI_CFLAGS=`$PGUI_CONFIG --cflags`
 CPPFLAGS="$CPPFLAGS $LIBXMLPP_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS"
 
 AC_SUBST(SDL_CFLAGS)
 AC_SUBST(LIBXMLPP_CFLAGS)
+AC_SUBST(PARAGUI_CFLAGS)
 
 #AC_CHECK_HEADER([ClanLib/core.h],
 #		[],

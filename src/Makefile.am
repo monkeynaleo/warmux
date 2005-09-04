@@ -11,6 +11,7 @@ wormux_SOURCES = \
 	main.cpp \
 	game/config.cpp game/config.h \
 	game/debug.cpp game/debug.h \
+	game/game_mode.cpp game/game_mode.h \
 	tool/string_tools.cpp tool/string_tools.h \
 	tool/xml_document.cpp tool/xml_document.h \
 	tool/i18n.cpp tool/i18n.h \
@@ -19,7 +20,6 @@ wormux_SOURCES = \
 	tool/math_tools.cpp tool/math_tools.h \
 	tool/random.cpp tool/random.h \
 	include/constant.cpp include/constant.h \
-	game/game_mode.cpp game/game_mode.h \
 	sound/jukebox.cpp sound/jukebox.h 
 #\
 #	game/game.cpp game/game.h \
@@ -51,8 +51,8 @@ wormux_SOURCES = \
 #	map/water.cpp map/water.h \
 #	map/wind.cpp map/wind.h \
 #	menu/infos_menu.cpp menu/infos_menu.h \
-#	menu/main_menu.cpp menu/main_menu.h \
 #	menu/options_menu.cpp menu/options_menu.h \
+#	menu/main_menu.cpp menu/main_menu.h \
 #	network/network.cpp network/network.h \
 #	object/bonus_box.cpp object/bonus_box.h \
 #	object/objects_list.cpp object/objects_list.h \
@@ -97,6 +97,6 @@ wormux_SOURCES = \
 #	include/action.cpp include/action.h \
 #	include/action_handler.cpp include/action_handler.h 
 
-AM_CXXFLAGS = @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
+AM_CXXFLAGS = @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ @PARAGUI_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
 
-LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS)
+LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS) $(PARAGUI_LIBS)
