@@ -99,8 +99,9 @@ fi
 
 ###### Check for sdl-config  ########
 AC_PATH_PROGS([SDL_CONFIG], [sdl-config], [none])
-if test "x$SDL_CONFIG" = "xnone"; then
-	
+
+if test "x$SDL_CONFIG" = "xnone"; then	
+
 	AC_MSG_ERROR([*** sdl-config has not been found.])
 
 fi
@@ -152,6 +153,8 @@ SDL_LIBS="$SDL_LIBS -lSDL_mixer -lSDL_image"
 
 AC_SUBST([SDL_LIBS])
 AC_SUBST([LIBXMLPP_LIBS])
+
+AM_PATH_PARAGUI()
 
 #######################################################################
 # Checks for header files.                                            #
@@ -206,8 +209,6 @@ CXXFLAGS=$OLD_CXXFLAGS
 
 DATA_FILES=`cd data ; find . -name CVS -prune -o -name ".svn*" -o -name "Makefile*" -o -name ".#*" -o -type d -o -print`
 DATA_FILES=`echo $DATA_FILES`
-
-AM_PATH_PARAGUI()
 
 AC_SUBST([DATA_FILES])
 
