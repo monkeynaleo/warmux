@@ -20,7 +20,8 @@ wormux_SOURCES = \
 	tool/math_tools.cpp tool/math_tools.h \
 	tool/random.cpp tool/random.h \
 	include/constant.cpp include/constant.h \
-	sound/jukebox.cpp sound/jukebox.h 
+	sound/jukebox.cpp sound/jukebox.h \
+	graphic/font.cpp graphic/font.h
 #\
 #	game/game.cpp game/game.h \
 #	game/game_loop.cpp gamse/game_loop.h \
