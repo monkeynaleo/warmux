@@ -207,6 +207,8 @@ bool AppWormux::Init(int argc, char **argv)
 #endif
 
   jukebox.Init();
+  jukebox.LoadXML("share");
+  jukebox.Play("share", "menu/ok");
   SDL_FreeSurface(loading_image);
 }
 
