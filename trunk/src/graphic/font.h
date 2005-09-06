@@ -20,8 +20,8 @@
 #ifndef FONT_H
 #define FONT_H
 //-----------------------------------------------------------------------------
-#include <SDL>
-#include <SDL_ttf>
+#include <SDL.h>
+#include <SDL_ttf.h>
 
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
@@ -34,16 +34,18 @@ public:
 public:
   Font();
   ~Font();
-  void Load (const std::string& resource_id);
+  void Load (const std::string& resource_id, int size);
   void WriteLeft (int x, int y, const std::string &txt, SDL_Color color);
   void WriteLeftBottom (int x, int y, const std::string &txt, SDL_Color color);
   void WriteRight (int x, int y, const std::string &txt, SDL_Color color);
   void WriteCenterTop (int x, int y, const std::string &txt, SDL_Color color);
   void WriteCenter (int x, int y, const std::string &txt, SDL_Color color);
-  uint GetWidth (const std::string &txt);
-  uint GetHeight (const std::string &txt);
+  int GetWidth (const std::string &txt);
+  int GetHeight ();
   SDL_Surface * Font::Render(const std::string &txt, SDL_Color color);
  };
 
+extern SDL_Color white_color;
+extern SDL_Color black_color;
 //-----------------------------------------------------------------------------
 #endif
