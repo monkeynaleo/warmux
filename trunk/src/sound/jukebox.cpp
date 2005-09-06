@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Moteur de son
+ * Sound engine
  *****************************************************************************/
 
 #include "jukebox.h"
@@ -32,9 +32,9 @@
 #ifdef DEBUG
 
 // Débogue le jukebox ?
-//#define DBG_SON
+#define DBG_SON
 
-#define COUT_DBG cout << "[Son] "
+#define COUT_DBG std::cout << "[Sound] "
 
 #endif
 
@@ -141,7 +141,7 @@ void JukeBox::LoadXML(const std::string& profile)
   std::set<std::string>::iterator it_profile = m_profiles_loaded.find(profile) ;
   if (it_profile !=  m_profiles_loaded.end()) {
 #ifdef DBG_SON
-    COUT_DBG << "Profile " << profile << "is already loaded !" << endl ;
+    COUT_DBG << "Profile " << profile << "is already loaded !" << std::endl ;
     return ;
 #endif
   } 
@@ -150,7 +150,10 @@ void JukeBox::LoadXML(const std::string& profile)
   // Load the XML
   std::string folder = config.data_dir + "sound/"+ profile + '/';
   std::string xml_filename = folder + "profile.xml";
-  if (!FichierExiste(xml_filename)) return;
+  if (!FichierExiste(xml_filename)) {
+    std::cerr << "[Sound] Error : file " << xml_filename << " not found" << std::endl;
+    return;
+  }
   if (!doc.Charge (xml_filename)) return;
 
   xmlpp::Node::NodeList nodes = doc.racine() -> get_children("sound");
@@ -168,17 +171,15 @@ void JukeBox::LoadXML(const std::string& profile)
       LitDocXml::LitAttrString(elem, "file", file);
 
 #ifdef DBG_SON
-      COUT_DBG << "Charge le son " << profile << "/" << sample << " : " << file << endl;
+      COUT_DBG << "Load sound sample " << profile << "/" << sample << " : " << file << std::endl;
 #endif
 
       // Charge le son
       std::string sample_filename = folder + file;
       if ( !FichierExiste(sample_filename) ) {
-	std::cerr << std::endl
-		  << "Sound error: File "
-		  << sample_filename.c_str() << " does not exist !"
-		  << std::endl; 
-	  continue;
+	std::cerr << "Sound error: File " << sample_filename.c_str() 
+		  << " does not exist !" << std::endl; 
+	continue;
       }
 	
       // Inserting sound sample in list
@@ -224,9 +225,8 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
     return Play("default", sample, loop) ; // try with default profile
   } 
 
-#ifdef DBG_SON
-  COUT_DBG << "Aucun son pour l'action " << action << endl ;
-#endif
+  std::cerr << "[Sound] Error : No sound found for sample " << sample << std::endl;
+
   return -1;
 }
 
@@ -253,10 +253,12 @@ int JukeBox::StopAll()
 
 int JukeBox::PlaySample (Mix_Chunk * sample, int loop)
 {
+  if (loop != -1) loop--;
+
   int channel = Mix_PlayChannel(-1, sample, loop);
 
   if (channel == -1) {
-    std::cerr << "JukeBox::PlaySample: " << Mix_GetError() << std::endl;
+    std::cerr << "[Sound] Error : Jukebox::PlaySample: " << Mix_GetError() << std::endl;
   }
   return channel;
 }
