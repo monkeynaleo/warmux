@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <ressources>
 
-  <sound sample="menu/ok" file="../../menu/sound/ok.ogg" />
-  <sound sample="menu/cancel" file="../../menu/sound/cancel.ogg" />
+  <sound sample="menu/ok" file="menu/ok.ogg" />
+  <sound sample="menu/cancel" file="menu/cancel.ogg" />
 
   <sound sample="weapon/dynamite_exp"    file="../../weapon/sound/dynamite_exp.ogg" />
   <sound sample="weapon/dynamite_fuze"   file="../../weapon/sound/dynamite_fuze.ogg" />
