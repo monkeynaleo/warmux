@@ -16,10 +16,16 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
-
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_video.h>
+#include <iostream>
+#include "../include/app.h"
 #include "font.h"
 //-----------------------------------------------------------------------------
+SDL_Color white_color = { 0xFF, 0xFF, 0xFF, 0 };
+SDL_Color black_color = { 0x00, 0x00, 0x00, 0 };
 
+//-----------------------------------------------------------------------------
 Font::Font()
 { 
   m_font = NULL; 
@@ -39,21 +45,26 @@ Font::~Font()
 
 void Font::Load (const std::string& font_name, int size) 
 {
-  assert (m_font == NULL);
-  m_font = TTF_OpenFont(font_name, size);
+  //assert (m_font == NULL);
+  m_font = TTF_OpenFont(font_name.c_str(), size);
+  //assert (m_font != NULL);	
+  TTF_SetFontStyle(m_font,TTF_STYLE_NORMAL);
 }
 //-----------------------------------------------------------------------------
 
 void Font::WriteLeft (int x, int y, const std::string &txt, 
 		      SDL_Color color)
 { 
-  SDL_surface text_surface = Render(txt, color);
-  SDL_rect dst_rect;
+  //assert (m_font != NULL);
+  SDL_Surface * text_surface = Render(txt.c_str(), color);
+  SDL_Rect dst_rect;
   dst_rect.x = x;
   dst_rect.y = y;
-  dst_rect.h = dst_rect.w = 0;
+  dst_rect.h = text_surface->h;
+  dst_rect.w = text_surface->w;
 
-  SDL_BlitSurface(text_surface,NULL,screen, dst_rect);
+  SDL_BlitSurface(text_surface,NULL,app.sdlwindow, &dst_rect);
+  SDL_FreeSurface(text_surface);
 }
 
 // //-----------------------------------------------------------------------------
@@ -61,13 +72,16 @@ void Font::WriteLeft (int x, int y, const std::string &txt,
 void Font::WriteLeftBottom (int x, int y, const std::string &txt,
 			    SDL_Color color)
 { 
-  SDL_surface text_surface = Render(txt, color);
-  SDL_rect dst_rect;
+  //assert (m_font != NULL);
+  SDL_Surface * text_surface = Render(txt.c_str(), color);
+  SDL_Rect dst_rect;
   dst_rect.x = x;
   dst_rect.y = y - GetHeight();
-  dst_rect.h = dst_rect.w = 0;
+  dst_rect.h = text_surface->h;
+  dst_rect.w = text_surface->w;
 
-  SDL_BlitSurface(text_surface,NULL,screen, dst_rect);
+  SDL_BlitSurface(text_surface,NULL,app.sdlwindow, &dst_rect);
+  SDL_FreeSurface(text_surface);
 }
 
 // //-----------------------------------------------------------------------------
@@ -75,63 +89,78 @@ void Font::WriteLeftBottom (int x, int y, const std::string &txt,
 void Font::WriteRight (int x, int y, const std::string &txt,
 		       SDL_Color color)
 { 
-  SDL_surface text_surface = Render(txt, color);
-  SDL_rect dst_rect;
+  //assert (m_font != NULL);
+  SDL_Surface * text_surface = Render(txt.c_str(), color);
+  SDL_Rect dst_rect;
   dst_rect.x = x - GetWidth(txt);
   dst_rect.y = y;
-  dst_rect.h = dst_rect.w = 0;
+  dst_rect.h = text_surface->h;
+  dst_rect.w = text_surface->w;
 
-  SDL_BlitSurface(text_surface, NULL, screen, dst_rect);
+  SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
+  SDL_FreeSurface(text_surface);
 }
 
 // //-----------------------------------------------------------------------------
 
-void Font::WriteCenter (int txt_x, int txt_y, const std::string &txt,
+void Font::WriteCenter (int x, int y, const std::string &txt,
 			SDL_Color color)
 { 
-  SDL_surface text_surface = Render(txt, color);
-  SDL_rect dst_rect;
+  //assert (m_font != NULL);
+  SDL_Surface * text_surface = Render(txt.c_str(), color);
+  SDL_Rect dst_rect;
   dst_rect.x = x - GetWidth(txt)/2;
   dst_rect.y = y - GetHeight()/2;
-  dst_rect.h = dst_rect.w = 0;
+  dst_rect.h = text_surface->h;
+  dst_rect.w = text_surface->w;
 
-  SDL_BlitSurface(text_surface, NULL, screen, dst_rect);
+  SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
+  SDL_FreeSurface(text_surface);
 }
 
 // //-----------------------------------------------------------------------------
 
-void Font::WriteCenterTop (int txt_x, int txt_y, const std::string &txt,
+void Font::WriteCenterTop (int x, int y, const std::string &txt,
 			   SDL_Color color)
 { 
-  SDL_surface text_surface = Render(txt, color);
-  SDL_rect dst_rect;
+  //assert (m_font != NULL);
+  SDL_Surface * text_surface = Render(txt.c_str(), color);
+  SDL_Rect dst_rect;
   dst_rect.x = x - GetWidth(txt)/2;
   dst_rect.y = y;
-  dst_rect.h = dst_rect.w = 0;
+  dst_rect.h = text_surface->h;
+  dst_rect.w = text_surface->w;
 
-  SDL_BlitSurface(text_surface, NULL, screen, dst_rect);
+  SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
+  SDL_FreeSurface(text_surface);
 }
 
 //-----------------------------------------------------------------------------
 
 SDL_Surface * Font::Render(const std::string &txt, SDL_Color color)
 {
-  return TTF_RenderUTF8_Blended(m_font, txt, color);
+  //assert (m_font != NULL);
+  SDL_Surface * surface = TTF_RenderUTF8_Blended(m_font, txt.c_str(), 
+						 color); //, black_color);
+  //assert (surface != NULL);
+  return surface;
 }
 
 //-----------------------------------------------------------------------------
 
 int Font::GetWidth (const std::string &txt)
 { 
+  //assert (m_font != NULL);
   int width=-1;
-  TTF_SizeUTF8(m_font, txt, &width, NULL);
+  TTF_SizeUTF8(m_font, txt.c_str(), &width, NULL);
   return width;
 }
 
 //-----------------------------------------------------------------------------
 
-uint Font::GetHeight ()
+int Font::GetHeight ()
 { 
+  //assert (m_font != NULL);
   return TTF_FontHeight(m_font);
 }
 

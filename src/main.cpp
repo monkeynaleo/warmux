@@ -46,11 +46,12 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "game/config.h"
+#include "graphic/font.h"
 #include "include/constant.h"
+#include "sound/jukebox.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
-#include "game/config.h"
-#include "sound/jukebox.h"
 
 
 using namespace Wormux;
@@ -111,9 +112,9 @@ void AppWormux::Prepare()
 {
   InitCst();
   InitI18N();
+  WelcomeMessage();
 #ifdef CL
   InitRandom();
-  WelcomeMessage();
   action_handler.Init();
 #endif
   config.Charge();
@@ -138,23 +139,28 @@ bool AppWormux::Init(int argc, char **argv)
        SDL_INIT_AUDIO|
        SDL_INIT_VIDEO) < 0 )
   {
-    fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
+    std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
+    return false;
+  }
+
+  if (TTF_Init()==-1) {
+    std::cerr << "TTF_Init: "<< TTF_GetError() << std::endl;
     return false;
   }
 
   // Open a new window
-  sdlwindow = SDL_SetVideoMode(config.tmp.video.width,
+  app.sdlwindow = SDL_SetVideoMode(config.tmp.video.width,
                                    config.tmp.video.height,
                                    16, //resolution in bpp
                                    SDL_HWSURFACE);  //see http://www.libsdl.org/cgi/docwiki.cgi/SDL_5fSetVideoMode
-  //TODO->set the name of the window
 
-#ifdef CL
-      CL_DisplayWindow(std::string("Wormux ")+VERSION,
-				config.tmp.video.width,
-				config.tmp.video.height,
-				config.tmp.video.fullscreen);
-#endif
+  std::ostringstream title;
+  title << "Wormux " << VERSION;
+  SDL_WM_SetCaption(title.str().c_str(), NULL);
+  
+  if (config.tmp.video.fullscreen) {
+    SDL_WM_ToggleFullScreen(app.sdlwindow);
+  }
 
   // Load graphics resources XML file
 #ifdef CL
@@ -169,14 +175,29 @@ bool AppWormux::Init(int argc, char **argv)
   SDL_Surface* loading_image=IMG_Load("../data/menu/img/loading.png");
 #endif
 
-  SDL_BlitSurface(loading_image,NULL,sdlwindow,NULL);
-  SDL_Flip(sdlwindow);
+  SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
 
-  // Message in window
-  std::ostringstream ss;
-  ss << _("Wormux launching...") << std::endl;
-  ss << _("Version") << " " << VERSION;
+  std::ostringstream version_ss;
+  version_ss << _("Version") << " " << VERSION;
+
+  Font big_font;
+  big_font.Load("../data/font/Vera.ttf", 32);
+
+  big_font.WriteCenter( config.tmp.video.width/2, 
+			config.tmp.video.height/2 - 200, 
+			_("Wormux launching..."), //"Chargement",
+  			white_color);
+
+  big_font.WriteCenter( config.tmp.video.width/2, 
+			config.tmp.video.height/2 - 180 + big_font.GetHeight(), 
+			version_ss.str(), //"Chargement",
+  			white_color);
+  
+  SDL_UpdateRect(app.sdlwindow, 0, 0, 0, 0);
+  SDL_Flip(app.sdlwindow);
+
 #ifdef CL
+
   police_grand.WriteCenter (video.GetWidth()/2, 200*video.GetHeight()/loading_image.get_height(), ss.str());
   CL_Display::flip();
 
@@ -184,6 +205,7 @@ bool AppWormux::Init(int argc, char **argv)
 
   config.Applique();
 #endif
+
   jukebox.Init();
   SDL_FreeSurface(loading_image);
 }
@@ -230,32 +252,33 @@ int AppWormux::main (int argc, char **argv)
       std::cout << std::endl << "Error during initialisation...";
       return 0;
     }
-    do
-    {
-#ifdef CL
-      Menu *menu = new Menu;
-      menu->ChargeImage();
-      choix = menu->Lance();
+//     do
+//     {
+// #ifdef CL
+//       Menu *menu = new Menu;
+//       menu->ChargeImage();
+//       choix = menu->Lance();
 
-      switch (choix)
-      {
-        case menuJOUER:   delete menu;
-		          jeu.LanceJeu();
-	                  break;
-        case menuOPTIONS: delete menu;
-			  menu_option.Lance();
-	                  break;
-        case menuINFOS:   delete menu;
-			  menu_infos.Lance();
-	                  break;
-        case menuQUITTER: delete menu;
-		          quitter = true;
-	                  break;
-        default:          ;
-      }
-#endif
-    } while (!quitter);
-
+//       switch (choix)
+//       {
+//         case menuJOUER:   delete menu;
+// 		          jeu.LanceJeu();
+// 	                  break;
+//         case menuOPTIONS: delete menu;
+// 			  menu_option.Lance();
+// 	                  break;
+//         case menuINFOS:   delete menu;
+// 			  menu_infos.Lance();
+// 	                  break;
+//         case menuQUITTER: delete menu;
+// 		          quitter = true;
+// 	                  break;
+//         default:          ;
+//       }
+// #endif
+//     } while (!quitter);
+    sleep(300);
+    
     Fin();
   }
   

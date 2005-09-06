@@ -78,7 +78,7 @@ public:
    */
   int Play(const std::string& category, 
 	   const std::string& sample, 
-	   const int loop);
+	   const int loop = 1);
   
   int Stop(int channel);
 
