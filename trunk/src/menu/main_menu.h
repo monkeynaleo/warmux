@@ -23,20 +23,25 @@
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../gui/button_text.h"
+#include <SDL/SDL.h>
+#include <pgbutton.h>
 #include <vector>
-#include <ClanLib/core.h>
-#include <ClanLib/display.h>
+#include "../include/base.h"
+
+
+#ifdef CL
+#include "../gui/button_text.h"
+#endif
 //-----------------------------------------------------------------------------
 
 typedef enum
 {
   menuNULL=0,
-  menuJOUER,
+  menuPLAY,
+  menuNETWORK,
   menuOPTIONS,
   menuINFOS,
-  menuQUITTER
+  menuQUIT
 } menu_item;
 
 //-----------------------------------------------------------------------------
@@ -44,31 +49,17 @@ typedef enum
 class Menu
 {
 private:
-  CL_ResourceManager *pictures;
-  CL_Surface background;
-
-  ButtonText jouer, network, options, infos, quitter;
-  typedef struct touche_menu
-  {
-    int touche;
-    menu_item item;
-    touche_menu(int t, menu_item i) { touche = t; item = i; }
-  } touche_menu;
-  std::vector<touche_menu> touches;
-  CL_Slot keyboard_slot, mouse_slot, slot_quit;
-  menu_item choix;
-  volatile bool fin_boucle;
+  
+  SDL_Surface *background;
+  PG_Button *play, *network, *options, *infos, *quit;
 
 public:
-  Menu();
-  void ChargeImage();
-  menu_item Lance ();
+  menu_item choice;
 
-private:
-  void TraiteTouche (const CL_InputEvent &event);
-  void TraiteClic (const CL_InputEvent &event);
-  menu_item Boucle ();
-  void SignalWM_QUIT ();
+  Menu();
+  ~Menu();
+  void Init();
+  menu_item Run ();
 };
 
 extern Menu menu;

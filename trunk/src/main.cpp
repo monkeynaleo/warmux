@@ -26,7 +26,6 @@
 #ifdef CL
 #include <ClanLib/core.h>
 #include <ClanLib/display.h>
-#include "menu/main_menu.h"
 #include "menu/options_menu.h"
 #include "menu/infos_menu.h"
 #include "game/game.h"
@@ -52,6 +51,9 @@
 #include "sound/jukebox.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
+#include "game/config.h"
+#include "menu/main_menu.h"
+#include "sound/jukebox.h"
 
 
 using namespace Wormux;
@@ -64,7 +66,6 @@ AppWormux app;
 
 AppWormux::AppWormux()
 {
-  sdlwindow = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -113,8 +114,8 @@ void AppWormux::Prepare()
   InitCst();
   InitI18N();
   WelcomeMessage();
-#ifdef CL
   InitRandom();
+#ifdef CL
   action_handler.Init();
 #endif
   config.Charge();
@@ -135,21 +136,24 @@ bool AppWormux::Init(int argc, char **argv)
   }
 #endif
 
-  if ( SDL_Init(SDL_INIT_TIMER|
-       SDL_INIT_AUDIO|
-       SDL_INIT_VIDEO) < 0 )
+  if(!InitScreen(config.tmp.video.width,
+                 config.tmp.video.height,
+                 16, //resolution in bpp
+                 SDL_HWSURFACE))
   {
-    std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
+    std::cerr << "Unable to initialize SDL/ParaGUI: %s\n" << SDL_GetError() << std::endl;
     return false;
   }
-
+  LoadTheme("default");
+  sdlwindow=GetScreen();
+//  pgui_window.SetTitle("Wormux ")+VERSION);
   if (TTF_Init()==-1) {
     std::cerr << "TTF_Init: "<< TTF_GetError() << std::endl;
     return false;
   }
 
   // Open a new window
-  app.sdlwindow = SDL_SetVideoMode(config.tmp.video.width,
+  sdlwindow = SDL_SetVideoMode(config.tmp.video.width,
                                    config.tmp.video.height,
                                    16, //resolution in bpp
                                    SDL_HWSURFACE);  //see http://www.libsdl.org/cgi/docwiki.cgi/SDL_5fSetVideoMode
@@ -159,7 +163,7 @@ bool AppWormux::Init(int argc, char **argv)
   SDL_WM_SetCaption(title.str().c_str(), NULL);
   
   if (config.tmp.video.fullscreen) {
-    SDL_WM_ToggleFullScreen(app.sdlwindow);
+    SDL_WM_ToggleFullScreen(sdlwindow);
   }
 
   // Load graphics resources XML file
@@ -175,7 +179,7 @@ bool AppWormux::Init(int argc, char **argv)
   SDL_Surface* loading_image=IMG_Load("../data/menu/img/loading.png");
 #endif
 
-  SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
+  SDL_BlitSurface(loading_image,NULL,sdlwindow,NULL);
 
   std::ostringstream version_ss;
   version_ss << _("Version") << " " << VERSION;
@@ -193,8 +197,8 @@ bool AppWormux::Init(int argc, char **argv)
 			version_ss.str(), //"Chargement",
   			white_color);
   
-  SDL_UpdateRect(app.sdlwindow, 0, 0, 0, 0);
-  SDL_Flip(app.sdlwindow);
+  SDL_UpdateRect(sdlwindow, 0, 0, 0, 0);
+  SDL_Flip(sdlwindow);
 
 #ifdef CL
 
@@ -203,13 +207,14 @@ bool AppWormux::Init(int argc, char **argv)
 
   // Charge le son
 
-  config.Applique();
 #endif
-
+  config.Applique();
+  
   jukebox.Init();
   jukebox.LoadXML("share");
   jukebox.Play("share", "menu/ok");
   SDL_FreeSurface(loading_image);
+  return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -237,36 +242,28 @@ void AppWormux::Fin()
 
 int AppWormux::main (int argc, char **argv)
 {
-#ifdef CL
   menu_item choix;
-#endif
   bool quitter = false;
   try
   {
     Prepare();
-#ifdef CL
-    CL_SetupCore setupCore;
-    CL_SetupDisplay setupDisplay;
-    CL_SetupNetwork setupNetwork;
-#endif
     if (!Init(argc, argv))
     {
       std::cout << std::endl << "Error during initialisation...";
       return 0;
     }
-//     do
-//     {
-// #ifdef CL
-//       Menu *menu = new Menu;
-//       menu->ChargeImage();
-//       choix = menu->Lance();
+//    do
+  //  {
+      Menu *menu = new Menu;
+      menu->Init();
+      choix = menu->Run();
 
-//       switch (choix)
-//       {
-//         case menuJOUER:   delete menu;
+       switch (choix)
+       {
+//         case menuPLAY:   //delete menu;
 // 		          jeu.LanceJeu();
 // 	                  break;
-//         case menuOPTIONS: delete menu;
+//                case menuOPTIONS: delete menu;
 // 			  menu_option.Lance();
 // 	                  break;
 //         case menuINFOS:   delete menu;
@@ -275,9 +272,9 @@ int AppWormux::main (int argc, char **argv)
 //         case menuQUITTER: delete menu;
 // 		          quitter = true;
 // 	                  break;
-//         default:          ;
-//       }
-// #endif
+         default:
+           printf("sortie dumenu->choix %i",choix);
+       }
 //     } while (!quitter);
     sleep(300);
     
@@ -302,7 +299,6 @@ int AppWormux::main (int argc, char **argv)
 
 int main (int argc, char **argv)
 {
-  AppWormux wormux;
-  wormux.main(argc,argv);
+  app.main(argc,argv);
 }
 //-----------------------------------------------------------------------------

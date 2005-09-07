@@ -10,7 +10,6 @@ wormux_SOURCES = \
 	include/app.h \
 	main.cpp \
 	game/config.cpp game/config.h \
-	game/debug.cpp game/debug.h \
 	game/game_mode.cpp game/game_mode.h \
 	tool/string_tools.cpp tool/string_tools.h \
 	tool/xml_document.cpp tool/xml_document.h \
@@ -21,8 +20,10 @@ wormux_SOURCES = \
 	tool/random.cpp tool/random.h \
 	include/constant.cpp include/constant.h \
 	sound/jukebox.cpp sound/jukebox.h \
-	graphic/font.cpp graphic/font.h
+	graphic/font.cpp graphic/font.h \
+	menu/main_menu.cpp menu/main_menu.h 
 #\
+#	game/debug.cpp game/debug.h \
 #	game/game.cpp game/game.h \
 #	game/game_loop.cpp gamse/game_loop.h \
 #	game/time.cpp game/time.h \
@@ -53,7 +54,6 @@ wormux_SOURCES = \
 #	map/wind.cpp map/wind.h \
 #	menu/infos_menu.cpp menu/infos_menu.h \
 #	menu/options_menu.cpp menu/options_menu.h \
-#	menu/main_menu.cpp menu/main_menu.h \
 #	network/network.cpp network/network.h \
 #	object/bonus_box.cpp object/bonus_box.h \
 #	object/objects_list.cpp object/objects_list.h \
