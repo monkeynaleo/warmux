@@ -23,15 +23,16 @@
 #define APP_WORMUX_H
 //-----------------------------------------------------------------------------
 #include <SDL/SDL.h>
+#include <pgapplication.h>
 #include <string>
 #include "base.h"
 
 //-----------------------------------------------------------------------------
 
-class AppWormux
+class AppWormux : public PG_Application
 {
 public:
-  SDL_Surface *sdlwindow;
+  SDL_Surface* sdlwindow;
 
 private:
   int x, y;
