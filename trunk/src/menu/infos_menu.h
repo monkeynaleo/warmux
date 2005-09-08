@@ -28,7 +28,7 @@
 class MenuInfos
 {
 public:
-  void Lance();
+  void Run();
 };
 
 extern MenuInfos menu_infos;

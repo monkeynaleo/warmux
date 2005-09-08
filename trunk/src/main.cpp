@@ -27,7 +27,6 @@
 #include <ClanLib/core.h>
 #include <ClanLib/display.h>
 #include "menu/options_menu.h"
-#include "menu/infos_menu.h"
 #include "game/game.h"
 #include "graphic/graphism.h"
 #include "include/action_handler.h"
@@ -53,6 +52,7 @@
 #include "tool/random.h"
 #include "game/config.h"
 #include "menu/main_menu.h"
+#include "menu/infos_menu.h"
 #include "sound/jukebox.h"
 
 
@@ -212,7 +212,6 @@ bool AppWormux::Init(int argc, char **argv)
   
   jukebox.Init();
   jukebox.LoadXML("share");
-  jukebox.Play("share", "menu/ok");
   SDL_FreeSurface(loading_image);
   return true;
 }
@@ -252,32 +251,30 @@ int AppWormux::main (int argc, char **argv)
       std::cout << std::endl << "Error during initialisation...";
       return 0;
     }
-//    do
-  //  {
-      Menu *menu = new Menu;
-      menu->Init();
-      choix = menu->Run();
+    do
+    {
+      main_menu.Init();
+      choix = main_menu.Run();
+      main_menu.FreeMem();
 
-       switch (choix)
-       {
-//         case menuPLAY:   //delete menu;
+      switch (choix)
+      {
+//         case menuPLAY:
+//                        main_menu.FreeMem();
 // 		          jeu.LanceJeu();
 // 	                  break;
-//                case menuOPTIONS: delete menu;
+//                case menuOPTIONS:
+//                        main_menu.FreeMem();
 // 			  menu_option.Lance();
 // 	                  break;
-//         case menuINFOS:   delete menu;
-// 			  menu_infos.Lance();
-// 	                  break;
-//         case menuQUITTER: delete menu;
-// 		          quitter = true;
-// 	                  break;
-         default:
-           printf("sortie dumenu->choix %i",choix);
+        case menuQUIT:
+                         quitter = true;
+                         break;
+        default:
+                         break;
        }
-//     } while (!quitter);
-    sleep(300);
-    
+     } while (!quitter);
+
     Fin();
   }
   

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Menu du jeu permettant de lancer une partie, modifier les options, d'obtenir
+ * Main_Menu du jeu permettant de lancer une partie, modifier les options, d'obtenir
  * des informations, ou encore quitter le jeu.
  *****************************************************************************/
 
@@ -31,6 +31,7 @@
 #include "../tool/file_tools.h"
 #include "../sound/jukebox.h"
 #include "../graphic/font.h"
+#include "infos_menu.h"
 
 #ifdef CL
 #include "../graphic/graphism.h"
@@ -43,6 +44,8 @@
 using namespace Wormux;
 using namespace std;
 //-----------------------------------------------------------------------------
+Main_Menu main_menu;
+//-----------------------------------------------------------------------------
 
 // Position du texte de la version
 const int VERSION_DY = -40;
@@ -53,34 +56,40 @@ const int BUTTON_WIDTH = 282 ;  // Button width at default screen resolution
 const int BUTTON_HEIGHT = 57 ;  // Button height at default screen resolution
 
 //-----------------------------------------------------------------------------
-Menu menu;
-//-----------------------------------------------------------------------------
 
-Menu::Menu()
+Main_Menu::Main_Menu()
 {
-  background=NULL;
 }
 
 //-----------------------------------------------------------------------------
-Menu::~Menu()
+void Main_Menu::FreeMem()
 {
+  app.DeleteBackground();
   SDL_FreeSurface(background);
+  delete play;
+  delete network;
+  delete options;
+  delete infos;
+  delete quit;
 }
 
 //-----------------------------------------------------------------------------
+void button_click()
+{ jukebox.Play("share", "menu/ok"); }
+
 bool sig_play()
-{ menu.choice=menuPLAY;printf("\nsig %i",menu.choice);return true; }
+{ button_click(); main_menu.choice=menuPLAY;return true; }
 bool sig_network()
-{ menu.choice=menuNETWORK;printf("\nsig %i",menu.choice);return true; }
+{ button_click(); main_menu.choice=menuNETWORK;return true; }
 bool sig_options()
-{ menu.choice=menuOPTIONS;printf("\nsig %i",menu.choice);return true; }
+{ button_click(); main_menu.choice=menuOPTIONS;return true; }
 bool sig_infos()
-{ menu.choice=menuINFOS;printf("\nsig %i",menu.choice);return true; }
+{ button_click(); menu_infos.Run();return true; }
 bool sig_quit()
-{ menu.choice=menuQUIT;printf("\nsig %i",menu.choice);return true; }
+{ /*button_click()*/; main_menu.choice=menuQUIT;return true; }
 //-----------------------------------------------------------------------------
 
-void Menu::Init()
+void Main_Menu::Init()
 {
   int x_button, button_width, button_height ;
   double y_scale ;
@@ -88,8 +97,11 @@ void Menu::Init()
 #ifdef CL
   background = CL_Surface("intro/fond", graphisme.LitRes());
 #else
-  background = IMG_Load("../data/menu/img/background.png");
+//  app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
+ background=IMG_Load("../data/menu/img/background.png");
 #endif
+  app.SetBackground(background,BKMODE_STRETCH);
+  app.EnableBackground(true);
 
 #ifdef CL
   x_button = (int)((double)474 / DEFAULT_SCREEN_WIDTH * video.GetWidth()) ;
@@ -134,8 +146,9 @@ void Menu::Init()
 
 //-----------------------------------------------------------------------------
 
-menu_item Menu::Run ()
+menu_item Main_Menu::Run ()
 {
+  
   string txt_version;
   int x,y;
   txt_version = string("Version ") + string(VERSION);
@@ -150,8 +163,6 @@ menu_item Menu::Run ()
   choice = menuNULL;
   while (choice == menuNULL)
   {
-    SDL_BlitSurface(background,NULL,app.sdlwindow,NULL);
-
 #ifdef CL
     big_font.WriteCenter (video.GetWidth()/2,
                            video.GetHeight()+VERSION_DY,
@@ -161,14 +172,12 @@ menu_item Menu::Run ()
     while ( SDL_PollEvent(&event) ) {
       app.PumpIntoEventQueue(&event);
     }
-    printf("\n%i",choice);
+    //TODO:Use videomode
+    app.RedrawBackground(PG_Rect(0,0,640,480));
     PG_Widget::BulkBlit();
     SDL_Flip(app.sdlwindow);
   }
-#ifdef CL
-  if (choice != menuQUIT) jukebox.Play("menu/ok");
-#endif
-printf("\nsortie....");fflush(stdout);
+  
   return choice;
 }
 
