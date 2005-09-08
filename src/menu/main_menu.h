@@ -27,11 +27,6 @@
 #include <pgbutton.h>
 #include <vector>
 #include "../include/base.h"
-
-
-#ifdef CL
-#include "../gui/button_text.h"
-#endif
 //-----------------------------------------------------------------------------
 
 typedef enum
@@ -40,29 +35,27 @@ typedef enum
   menuPLAY,
   menuNETWORK,
   menuOPTIONS,
-  menuINFOS,
   menuQUIT
 } menu_item;
 
 //-----------------------------------------------------------------------------
 
-class Menu
+class Main_Menu
 {
 private:
-  
-  SDL_Surface *background;
+  SDL_Surface* background;
   PG_Button *play, *network, *options, *infos, *quit;
 
 public:
   menu_item choice;
 
-  Menu();
-  ~Menu();
+  Main_Menu();
   void Init();
+  void FreeMem();
   menu_item Run ();
 };
 
-extern Menu menu;
-
+//-----------------------------------------------------------------------------
+extern Main_Menu main_menu;
 //-----------------------------------------------------------------------------
 #endif

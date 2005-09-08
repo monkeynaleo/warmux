@@ -21,28 +21,49 @@
 
 #include "infos_menu.h"
 //-----------------------------------------------------------------------------
-#include "../gui/question.h"
+#include <pgmessagebox.h>
+#include <stdio.h>
 #include "../include/constant.h"
 #include "../tool/i18n.h"
-#include <sstream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 MenuInfos menu_infos;
 //-----------------------------------------------------------------------------
 
-void MenuInfos::Lance()
+void MenuInfos::Run()
 {
-  Question q;
-  std::ostringstream ss;
-  ss << _("Authors:") << std::endl;
-
-  for (std::vector<std::string>::iterator it=AUTHORS.begin(),
-	 fin=AUTHORS.end(); it != fin; ++it)
+#ifndef CL
+  //TODO:open the authors file from /usr/include according to the configure
+  //TODO:Move the window depending on the screen resolution(?)
+  FILE* authors=fopen("../AUTHORS","r");
+#endif
+  char* txt;
+  if(authors!=NULL)
   {
-    ss << *it << std::endl;
+    fseek(authors,0,SEEK_END);
+    long size=ftell(authors);
+    txt=new char[size+1];
+    rewind(authors);
+    fread(txt,1,size,authors);
+    txt[size]='\0';
+    fclose(authors);
   }
-  q.Init (ss.str(), true, 0);
-  q.PoseQuestion ();
+  else
+  {
+    txt=new char[strlen("Wormux team!")+1];
+    strcpy(txt,"Wormux team!");
+  }
+  PG_MessageBox* msgbox=new PG_MessageBox(NULL,
+                                          PG_Rect(40,50,560,390),
+                                          _("Authors"),txt,
+                                          PG_Rect(530, 0,30, 30),
+                                          _("Ok"),
+                                          PG_Label::CENTER);
+
+  msgbox->Show();
+  msgbox->WaitForClick();
+  delete msgbox;
+  delete []txt;
 }
 
 //-----------------------------------------------------------------------------

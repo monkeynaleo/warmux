@@ -21,6 +21,7 @@ wormux_SOURCES = \
 	include/constant.cpp include/constant.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	graphic/font.cpp graphic/font.h \
+	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/main_menu.cpp menu/main_menu.h 
 #\
 #	game/debug.cpp game/debug.h \
@@ -52,7 +53,6 @@ wormux_SOURCES = \
 #	map/tile.cpp map/tile.h \
 #	map/water.cpp map/water.h \
 #	map/wind.cpp map/wind.h \
-#	menu/infos_menu.cpp menu/infos_menu.h \
 #	menu/options_menu.cpp menu/options_menu.h \
 #	network/network.cpp network/network.h \
 #	object/bonus_box.cpp object/bonus_box.h \
