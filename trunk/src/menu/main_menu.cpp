@@ -33,10 +33,6 @@
 #include "../graphic/font.h"
 #include "infos_menu.h"
 
-#ifdef CL
-#include "../graphic/graphism.h"
-#endif
-
 #ifndef WIN32
 #include <dirent.h>
 #endif
@@ -75,7 +71,7 @@ void Main_Menu::FreeMem()
 
 //-----------------------------------------------------------------------------
 void button_click()
-{ jukebox.Play("share", "menu/ok"); }
+{ jukebox.Play("share", "menu/clic"); }
 
 bool sig_play()
 { button_click(); main_menu.choice=menuPLAY;return true; }
@@ -103,19 +99,11 @@ void Main_Menu::Init()
   app.SetBackground(background,BKMODE_STRETCH);
   app.EnableBackground(true);
 
-#ifdef CL
-  x_button = (int)((double)474 / DEFAULT_SCREEN_WIDTH * video.GetWidth()) ;
-  y_scale = (double)1 / DEFAULT_SCREEN_HEIGHT * video.GetHeight() ;
+  x_button = (int)((double)474 / DEFAULT_SCREEN_WIDTH * app.sdlwindow->w) ;
+  y_scale = (double)1 / DEFAULT_SCREEN_HEIGHT * app.sdlwindow->h ;
 
-  button_width = (int)((double)BUTTON_WIDTH / DEFAULT_SCREEN_WIDTH * video.GetWidth()) ;
-  button_height = (int)((double)BUTTON_HEIGHT / DEFAULT_SCREEN_HEIGHT * video.GetHeight()) ;
-#else
-  x_button = (int)((double)474 / DEFAULT_SCREEN_WIDTH * 640) ;
-  y_scale = (double)1 / DEFAULT_SCREEN_HEIGHT * 480 ;
-
-  button_width = (int)((double)BUTTON_WIDTH / DEFAULT_SCREEN_WIDTH * 640) ;
-  button_height = (int)((double)BUTTON_HEIGHT / DEFAULT_SCREEN_HEIGHT * 480) ;
-#endif
+  button_width = (int)((double)BUTTON_WIDTH / DEFAULT_SCREEN_WIDTH * app.sdlwindow->w) ;
+  button_height = (int)((double)BUTTON_HEIGHT / DEFAULT_SCREEN_HEIGHT * app.sdlwindow->h) ;
 
   play = new PG_Button(NULL,
                         PG_Rect(x_button,(int)(192 * y_scale), //Position
