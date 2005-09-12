@@ -24,7 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include <string.h>
+#include <string>
 #include "../include/app.h"
 #include "../include/constant.h" // VERSION
 #include "../tool/i18n.h"
@@ -136,34 +136,35 @@ void Main_Menu::Init()
 
 menu_item Main_Menu::Run ()
 {
-  
   string txt_version;
-  int x,y;
   txt_version = string("Version ") + string(VERSION);
   SDL_Event event;
-  
+
+  app.FlipPage();
+
   play->Show();
   network->Show();
   options->Show();
   infos->Show();
   quit->Show();
-  
+ 
   choice = menuNULL;
   while (choice == menuNULL)
   {
-#ifdef CL
-    big_font.WriteCenter (video.GetWidth()/2,
-                           video.GetHeight()+VERSION_DY,
-                           txt_version);
-#endif
-
     while ( SDL_PollEvent(&event) ) {
       app.PumpIntoEventQueue(&event);
     }
+
     //TODO:Use videomode
-    app.RedrawBackground(PG_Rect(0,0,640,480));
+    app.RedrawBackground(PG_Rect(0,0,app.sdlwindow->w,app.sdlwindow->h));
+    
+    big_font.WriteCenter( app.sdlwindow->w/2,
+ 			  app.sdlwindow->h+VERSION_DY,
+ 			  txt_version, white_color);
+    
     PG_Widget::BulkBlit();
-    SDL_Flip(app.sdlwindow);
+
+    app.FlipPage();
   }
   
   return choice;

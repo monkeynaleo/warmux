@@ -43,9 +43,19 @@ public:
   int GetWidth (const std::string &txt);
   int GetHeight ();
   SDL_Surface * Font::Render(const std::string &txt, SDL_Color color);
+
+  static void InitAllFonts();
  };
 
 extern SDL_Color white_color;
 extern SDL_Color black_color;
+
+extern Font huge_font;
+extern Font large_font;
+extern Font big_font;
+extern Font normal_font;
+extern Font small_font;
+extern Font tiny_font;
+
 //-----------------------------------------------------------------------------
 #endif
