@@ -24,7 +24,27 @@
 //-----------------------------------------------------------------------------
 SDL_Color white_color = { 0xFF, 0xFF, 0xFF, 0 };
 SDL_Color black_color = { 0x00, 0x00, 0x00, 0 };
+//-----------------------------------------------------------------------------
 
+Font huge_font;
+Font large_font;
+Font big_font;
+Font normal_font;
+Font small_font;
+Font tiny_font;
+
+void Font::InitAllFonts()
+{
+  huge_font.Load("../data/font/Vera.ttf", 40);
+  large_font.Load("../data/font/Vera.ttf", 32);
+  big_font.Load("../data/font/Vera.ttf", 24);
+  normal_font.Load("../data/font/Vera.ttf", 16);
+  small_font.Load("../data/font/Vera.ttf", 12);
+  tiny_font.Load("../data/font/Vera.ttf", 8);
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 Font::Font()
 { 
@@ -165,3 +185,4 @@ int Font::GetHeight ()
 }
 
 //-----------------------------------------------------------------------------
+

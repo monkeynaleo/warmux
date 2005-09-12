@@ -136,6 +136,7 @@ bool AppWormux::Init(int argc, char **argv)
   }
 #endif
 
+  // Screen initialisation
   if(!InitScreen(config.tmp.video.width,
                  config.tmp.video.height,
                  16, //resolution in bpp
@@ -145,23 +146,23 @@ bool AppWormux::Init(int argc, char **argv)
     return false;
   }
   LoadTheme("default");
-  sdlwindow=GetScreen();
-//  pgui_window.SetTitle("Wormux ")+VERSION);
+
+  // Set window caption
+  std::string txt_version;
+  txt_version = std::string("Wormux ") + std::string(VERSION);
+  SetCaption(txt_version.c_str(), NULL);
+
+  
+  // Fonts initialisation
   if (TTF_Init()==-1) {
     std::cerr << "TTF_Init: "<< TTF_GetError() << std::endl;
     return false;
   }
+  Font::InitAllFonts();
 
-  // Open a new window
-  sdlwindow = SDL_SetVideoMode(config.tmp.video.width,
-                                   config.tmp.video.height,
-                                   16, //resolution in bpp
-                                   SDL_HWSURFACE);  //see http://www.libsdl.org/cgi/docwiki.cgi/SDL_5fSetVideoMode
+   // Full screen ?
+  sdlwindow=GetScreen();
 
-  std::ostringstream title;
-  title << "Wormux " << VERSION;
-  SDL_WM_SetCaption(title.str().c_str(), NULL);
-  
   if (config.tmp.video.fullscreen) {
     SDL_WM_ToggleFullScreen(sdlwindow);
   }
@@ -181,38 +182,28 @@ bool AppWormux::Init(int argc, char **argv)
 
   SDL_BlitSurface(loading_image,NULL,sdlwindow,NULL);
 
-  std::ostringstream version_ss;
-  version_ss << _("Version") << " " << VERSION;
+  txt_version = _("Version") + std::string(VERSION);
 
-  Font big_font;
-  big_font.Load("../data/font/Vera.ttf", 32);
-
-  big_font.WriteCenter( config.tmp.video.width/2, 
+  huge_font.WriteCenter( config.tmp.video.width/2, 
 			config.tmp.video.height/2 - 200, 
 			_("Wormux launching..."), //"Chargement",
   			white_color);
 
-  big_font.WriteCenter( config.tmp.video.width/2, 
-			config.tmp.video.height/2 - 180 + big_font.GetHeight(), 
-			version_ss.str(), //"Chargement",
-  			white_color);
+  huge_font.WriteCenter( config.tmp.video.width/2, 
+			 config.tmp.video.height/2 - 180 + huge_font.GetHeight(), 
+			 txt_version,
+			 white_color);
   
   SDL_UpdateRect(sdlwindow, 0, 0, 0, 0);
   SDL_Flip(sdlwindow);
+  SDL_FreeSurface(loading_image);
 
-#ifdef CL
-
-  police_grand.WriteCenter (video.GetWidth()/2, 200*video.GetHeight()/loading_image.get_height(), ss.str());
-  CL_Display::flip();
-
-  // Charge le son
-
-#endif
   config.Applique();
-  
+
+  // Sound initialisation
   jukebox.Init();
   jukebox.LoadXML("share");
-  SDL_FreeSurface(loading_image);
+
   return true;
 }
 
@@ -260,11 +251,9 @@ int AppWormux::main (int argc, char **argv)
       switch (choix)
       {
 //         case menuPLAY:
-//                        main_menu.FreeMem();
 // 		          jeu.LanceJeu();
 // 	                  break;
 //                case menuOPTIONS:
-//                        main_menu.FreeMem();
 // 			  menu_option.Lance();
 // 	                  break;
         case menuQUIT:
