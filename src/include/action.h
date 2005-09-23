@@ -25,8 +25,16 @@
 #include "base.h"
 #include "enum.h"
 #include <string>
-#include <ClanLib/core.h>
+#include <iostream>
+#ifdef CL
+# include <ClanLib/core.h>
+#endif
 //-----------------------------------------------------------------------------
+
+#ifndef CL
+typedef std::ostream CL_OutputSource;
+typedef std::istream CL_InputSource;
+#endif
 
 class Action
 {
@@ -36,8 +44,12 @@ public:
 	Action (Action_t type);
 	virtual ~Action();
 	virtual Action_t GetType() const;
-	virtual void Write(CL_OutputSource &os) const;
-	virtual Action* clone() const;
+//#ifdef CL
+        virtual void Write(CL_OutputSource &os) const;
+//#else
+//        virtual void Write( std::string str) const;
+//#endif
+        virtual Action* clone() const;
 	virtual std::ostream& out(std::ostream&os) const;
 };
 
@@ -49,10 +61,16 @@ private:
 	int m_value;
 public:
 	ActionInt (Action_t type, int value);
-	ActionInt (Action_t type, CL_InputSource &is);
-	int GetValue() const;
-	void Write(CL_OutputSource &os) const;
-	Action* clone() const;
+//#ifdef CL
+        ActionInt (Action_t type, CL_InputSource &is);
+//#else
+//#endif
+        int GetValue() const;
+//#ifdef CL
+        void Write(CL_OutputSource &os) const;
+//#else
+//#endif
+        Action* clone() const;
 	std::ostream& out(std::ostream&os) const;
 };
 
@@ -65,11 +83,17 @@ private:
 	int m_value2;
 public:
 	ActionInt2 (Action_t type, int val1, int val2);
-	ActionInt2 (Action_t type, CL_InputSource &is);
-	int GetValue1() const;
+//#ifdef CL
+        ActionInt2 (Action_t type, CL_InputSource &is);
+//#else
+//#endif
+        int GetValue1() const;
 	int GetValue2() const;
-	void Write(CL_OutputSource &os) const;
-	Action* clone() const;
+//#ifdef CL
+        void Write(CL_OutputSource &os) const;
+//#else
+//#endif
+        Action* clone() const;
 	std::ostream& out(std::ostream&os) const;
 };
 
@@ -82,11 +106,17 @@ private:
 	int m_value2;
 public:
 	ActionDoubleInt (Action_t type, double val1, int val2);
+//#ifdef CL
 	ActionDoubleInt (Action_t type, CL_InputSource &is);
-	double GetValue1() const;
+//#else
+//#endif
+        double GetValue1() const;
 	int GetValue2() const;
-	void Write(CL_OutputSource &os) const;
-	Action* clone() const;
+//#ifdef CL
+        void Write(CL_OutputSource &os) const;
+//#else
+//#endif   
+        Action* clone() const;
 	std::ostream& out(std::ostream&os) const;
 };
 
@@ -98,10 +128,16 @@ private:
 	std::string m_value;
 public:
 	ActionString (Action_t type, const std::string& value);
-	ActionString (Action_t type, CL_InputSource &is);
-	std::string GetValue() const;
+//#ifdef CL
+        ActionString (Action_t type, CL_InputSource &is);
+//#else
+//#endif
+        std::string GetValue() const;
+//#ifdef CL
 	void Write(CL_OutputSource &os) const;
-	Action* clone() const;
+//#else
+//#endif
+        Action* clone() const;
 	std::ostream& out(std::ostream&os) const;
 };
 

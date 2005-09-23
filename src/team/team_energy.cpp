@@ -67,9 +67,15 @@ void TeamEnergy :: Init ()
   valeur_max = 0;
   status = EnergieStatusOK;
   barre_energie.InitPos (0,0, BARRE_LARG, BARRE_HAUT);
+#ifdef CL
   barre_energie.value_color = CL_Color (R_INIT, V_INIT, B_INIT, ALPHA);
   barre_energie.border_color = CL_Color(255, 255, 255, ALPHA);
   barre_energie.background_color = CL_Color(255*6/10, 255*6/10, 255*6/10, ALPHA_FOND);
+#else
+  barre_energie.SetValueColor(R_INIT, V_INIT, B_INIT, ALPHA);
+  barre_energie.SetBorderColor(255, 255, 255, ALPHA);
+  barre_energie.SetBackgroundColor(255*6/10, 255*6/10, 255*6/10, ALPHA_FOND);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -135,20 +141,35 @@ void TeamEnergy :: Draw ()
     v = ( 2.0 * ((V_INIT * (valeur - (valeur_max / 2))) + (V_INTER * (valeur_max - valeur)))) / valeur_max;
     b = ( 2.0 * ((B_INIT * (valeur - (valeur_max / 2))) + (B_INTER * (valeur_max - valeur)))) / valeur_max;
   }
-
+   
+#ifdef CL
+   
   barre_energie.value_color = CL_Color((uchar)r, (uchar)v, 
 				       (uchar)b, ALPHA);
+#else
+//    barre_energie.value_color = CL_Color((uchar)r, (uchar)v,  (uchar)b, ALPHA);
+#endif
+   
   int x,y;
+#ifdef CL
   x = camera.GetX() + camera.GetWidth() - (BARRE_LARG + 10) + dx;
   y = camera.GetY() + BARRE_HAUT +(classement * (BARRE_HAUT + ESPACEMENT)) +dy;
-  barre_energie.DrawXY(x,y);
+#else
+  x = camera.GetWidth() - (BARRE_LARG + 10) + dx;
+  y = BARRE_HAUT +(classement * (BARRE_HAUT + ESPACEMENT)) +dy;
+#endif
+   barre_energie.DrawXY(x,y);
   
   ostringstream ss;
   ss << nom << "/" << valeur;
   x = camera.GetX() + camera.GetWidth() - ((BARRE_LARG/2) + 10) + dx;
   y = camera.GetY();
   y += BARRE_HAUT + (classement * (BARRE_HAUT + ESPACEMENT)) + dy;
-  police_mix.WriteCenterTop (x, y, ss.str());
+#ifdef CL
+   police_mix.WriteCenterTop (x, y, ss.str());
+#else
+   // TODO
+#endif
 }
 
 //-----------------------------------------------------------------------------

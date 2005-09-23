@@ -23,16 +23,23 @@
 #define EQUIPE_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#include "../tool/xml_document.h"
+//#include "../tool/xml_document.h"
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon.h"
 #include "character.h"
 #include "team_energy.h"
+#ifdef CL
 #include <ClanLib/display.h>
+#else
+#include "../tool/Point.h"
+#include "../tool/resource_manager.h"
+#endif
 #include <string>
 #include <list>
 #include <map>
 //-----------------------------------------------------------------------------
+
+struct SDL_Surface;
 
 class Team
 {
@@ -45,8 +52,13 @@ public:
 
   // Autres
   CrossHair crosshair;
+#ifdef CL
   CL_Surface ecusson;
   CL_Point sauve_camera;
+#else
+  SDL_Surface *ecusson;
+  Point2i sauve_camera;
+#endif
   bool camera_est_sauve;
   TeamEnergy energie;
  
@@ -58,8 +70,11 @@ private:
   uint ver_actif, vers_fin;
   iterator vers_fin_it;
   Weapon *active_weapon;
+#ifdef CL
   bool ChargeDonnee (xmlpp::Element *xml, CL_ResourceManager *res);
-
+#else
+   bool ChargeDonnee( xmlpp::Element *xml, Profile *res_profile);
+#endif
 public:
   // Initialization
   Team ();

@@ -25,7 +25,9 @@
 #include "../include/base.h"
 #include <vector>
 #include <string>
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
 
 class Video
 {

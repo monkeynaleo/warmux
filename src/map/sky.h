@@ -24,11 +24,17 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "tile.h"
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
+
+struct SDL_Surface;
+
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
 
+   
 class Ciel : public Tile
 {  
 public:
@@ -37,6 +43,11 @@ public:
   void Reset();
   void Draw();
   void Free() { FreeMem(); } 
+
+ private:
+#ifndef CL
+   SDL_Surface *image;
+#endif
 };
 
 }

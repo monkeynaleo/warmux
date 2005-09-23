@@ -23,25 +23,39 @@
 #define KEYBOARD_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#include <ClanLib/display.h>  // Pour CL_Slot
-#include <map>
+#ifdef CL
+# include <ClanLib/display.h>  // Pour CL_Slot
+#else
+#include <SDL.h>
+#endif
+# include <map>
 #include "../include/action.h"
 //-----------------------------------------------------------------------------
 
 class Clavier
 {
 private:
+#ifdef CL
   CL_Slot slot_up, slot_down;
   bool pilote_installe;
+#endif
   std::map<int, Action_t> layout;
   bool PressedKeys[ACTION_MAX];
 
 private:
   // Traite une touche relachée
+#ifdef CL
   void HandleKeyPressed (const CL_InputEvent &event);
   void HandleKeyReleased (const CL_InputEvent &event);
   void HandleKeyEvent(int key, int event_type) ;
-
+#else
+  void HandleKeyPressed (const SDL_keysym *key);
+  void HandleKeyReleased (const SDL_keysym *key);
+ public:
+   void HandleKeyEvent( const SDL_Event *event) ;
+ private:
+#endif
+   
 public:
   Clavier();
 
@@ -54,9 +68,11 @@ public:
   // Associe une touche à une action.
   void SetKeyAction(int key, Action_t at);
 
+#ifdef CL
   // Installe/désinstalle le pilote
   void DesinstallePilote();
   void InstallePilote();
+#endif
 };
 
 extern Clavier clavier;

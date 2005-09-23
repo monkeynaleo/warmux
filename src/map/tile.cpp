@@ -24,9 +24,19 @@
 #include "tile.h"
 //-----------------------------------------------------------------------------
 #include "../graphic/graphism.h"
-#include <ClanLib/core.h>
+#ifdef CL
+# include <ClanLib/core.h>
+#else
+#include <SDL.h>
+#include "../tool/Point.h"
+#include "../include/app.h"
+#include "../map/camera.h"
+#include "../include/constant.h"
+#endif
+#include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
+
 
 // Calcule l'offset a l'interieur d'un canvas
 #define OPP 4 // octets/pixel, on travaille en 32 bits/pixels
@@ -47,6 +57,7 @@ using namespace Wormux;
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 TileItem::TileItem (uint width, uint height, CL_PixelFormat format)
  : m_locked(false), m_changed(false), m_width(width), m_height(height)
 {
@@ -58,9 +69,27 @@ TileItem::TileItem (uint width, uint height, CL_PixelFormat format)
   m_surface = CL_Surface(m_buffer, 0);
   //#endif
 }
+#else
+TileItem::TileItem (uint width, uint height)
+{
+   m_locked = false;
+   m_changed = false;
+   m_width = width;
+   m_height = height;
 
+   m_surface = SDL_CreateRGBSurface( /*SDL_SWSURFACE|*/SDL_SRCALPHA, width, height, 
+				     32, //sdlscreen->format->BitsPerPixel,
+				     0x000000ff, //sdlscreen->format->Rmask,
+				     0x0000ff00,
+				     0x00ff0000,
+				     0xff000000);
+
+   m_buffer = new unsigned char[m_height*m_width];
+}
+#endif
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 TileItem::TileItem (const TileItem &copy)
  : m_width(copy.m_width), m_height(copy.m_height)
 {
@@ -71,16 +100,43 @@ TileItem::TileItem (const TileItem &copy)
   //#endif
 
   m_buffer = m_surface.get_pixeldata();
+   
   m_changed = false;
   m_locked = false;
 }
+#else
+TileItem::TileItem (const TileItem &copy)
+{
+   m_width = copy.m_width;
+   m_height = copy.m_height;
+
+   m_surface = SDL_CreateRGBSurface( /*SDL_SWSURFACE|*/SDL_SRCALPHA, m_width, m_height, 
+				     32,
+				     0x000000ff,
+				     0x0000ff00,
+				     0x00ff0000,
+				     0xff000000);
+
+   SDL_Rect dest_rect = {0,0, copy.m_surface->w, copy.m_surface->h};
+   SDL_BlitSurface( copy.m_surface, NULL, m_surface, &dest_rect);
+
+   m_buffer = new unsigned char[m_height*m_width];
+   memcpy( copy.m_buffer, m_buffer, m_height*m_width*sizeof( unsigned char));
+   
+   m_changed = false;
+   m_locked = false;
+}
+
+#endif
 
 //-----------------------------------------------------------------------------
 
 void TileItem::Lock() 
 {
   if (m_locked) return;
+#ifdef CL
   m_buffer.lock(); 
+#endif
   m_locked = true;
 }
 
@@ -93,19 +149,40 @@ TileItem::~TileItem()
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 CL_PixelBuffer& TileItem::get_pixelbuffer() 
 {
   Lock();
   return m_buffer;
 }
- 
+#else
+unsigned char * TileItem::get_pixelbuffer() 
+{
+  return m_buffer;
+}
+#endif
+
 //-----------------------------------------------------------------------------
 
 uchar* TileItem::get_data() 
 {
   Lock();
+#ifdef CL
   return (uchar*)m_buffer.get_data();
+#else
+  return (unsigned char *) m_buffer; 
+#endif
 }
+
+
+#ifndef CL
+
+unsigned char TileItem::GetAlpha( int x, int y)
+{
+   return *(((unsigned char *)m_surface->pixels) + y*m_surface->pitch + x * 4 + 3);
+}
+
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -120,6 +197,7 @@ void TileItem::Unlock(bool force)
 {
   if (!m_changed && !force) return;
   if (!m_locked) return;
+#ifdef CL
   m_buffer.unlock(); 
   m_locked = false;
   if (m_changed) 
@@ -127,23 +205,52 @@ void TileItem::Unlock(bool force)
     m_surface.set_pixeldata(m_buffer); 
     m_buffer = CL_PixelBuffer(m_surface.get_pixeldata()); // is it needed ???
     m_changed = false;
-  }  
+  }
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 CL_Surface& TileItem::get_surface()
 {
   Unlock();
   return m_surface;
 }
-
+#else
+SDL_Surface *TileItem::get_surface()
+{
+   Unlock();
+   return m_surface;
+}
+#endif
 //-----------------------------------------------------------------------------
 
 void TileItem::Sync()
 {
   Unlock();
 }
+
+void TileItem::Dig( int ox, int oy, SDL_Surface *dig)
+{
+   int starting_x = ox >= 0 ? ox : 0;   
+   int starting_y = oy >= 0 ? oy : 0; 
+   int ending_x = ox+dig->w <= m_surface->w ? ox+dig->w : m_surface->w;
+   int ending_y = oy+dig->h <= m_surface->h ? oy+dig->h : m_surface->h;
+   
+   for( int py = starting_y ; py < ending_y ; py++) 
+     for( int px = starting_x ; px < ending_x ; px++)
+       {
+	  
+	  if ( *(((unsigned char *)dig->pixels) + (py-oy)*dig->pitch + (px-ox) * 4 + 3) != 0)
+	    
+	    *(((unsigned char *)m_surface->pixels) + py*m_surface->pitch + px * 4 + 3) = 0;
+
+
+       }
+}
+
+
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -203,6 +310,7 @@ void Tile::InitTile (uint plarg_cell, uint phaut_cell,
 // Le cell sera creusé dans la pièce 'cell'
 // Les coordonnées dans ce trou sont x,y, et la taille est larg x haut
 // !!! Ne vérifie ou ne corrige aucune valeur, c'est à vous de le faire !!!
+#ifdef CL
 void CreuseCellule (CL_PixelBuffer &creuse, 
 		    CL_Point pos_creuse,
 		    uint larg, uint haut,
@@ -272,10 +380,15 @@ void CreuseCellule (CL_PixelBuffer &creuse,
   creuse.unlock();
 }
 
+#else // CL is undefinded
+
+#endif // CL not defined
+
 //-----------------------------------------------------------------------------
 
 // Prépare une surface pour la copie
 // Renvoie false si il n'y a rien à copier
+#ifdef CL
 bool PrepareSurfaceCopie (CL_PixelBuffer &source,
 			  CL_Point &pos, CL_Point &pos2,
 			  uint &larg, uint &haut)
@@ -333,11 +446,14 @@ bool PrepareSurfaceCopie (CL_PixelBuffer &source,
   }
   return true;
 }
-
+#else
+//TODO
+#endif
 //-----------------------------------------------------------------------------
 
 // Copie source dans destination
 // (larg x haut) donne les dimensions de la zone copiée depuis source
+#ifdef CL
 void CopieCell (CL_PixelBuffer source,
 		CL_Point pos_src,
 		uint larg, uint haut,
@@ -387,7 +503,59 @@ void CopieCell (CL_PixelBuffer source,
   dest.unlock();
   source.unlock();
 }
+#else
+void CopieCell (SDL_Surface *source,
+		Point2i pos_src,
+		uint larg, uint haut,
+		TileItem& item_dest,
+		Point2i pos_dst)
+{
+/*  SDL_Surface *dest = item_dest.get_pixelbuffer();
+  item_dest.Touch();
+	
+  if (!PrepareSurfaceCopie (source,pos_src, pos_dst, larg, haut)) return;
+  if (!PrepareSurfaceCopie (dest,pos_dst, pos_src, larg, haut)) return;
 
+  // Lock datas
+//  source.lock();
+//  dest.lock();
+  
+  // Lecture des données source
+  const uint source_pitch = source.get_pitch();
+  uchar *source_data = (uchar *)source.get_data();
+  source_data += pos_src.x*OPP;
+  source_data += pos_src.y*source_pitch;
+
+  // Lecture des données destination
+  const uint dest_pitch = dest.get_pitch();
+  uchar *dest_data = (uchar *)dest.get_data();
+  dest_data += pos_dst.x*OPP;
+  dest_data += pos_dst.y*source_pitch;
+
+  // Sauve les données
+  uchar *sauve_source_data = source_data;
+  uchar *sauve_dest_data = dest_data;
+
+  for (uint dy=0; dy < haut; ++dy)
+  {
+    memcpy (dest_data, source_data, larg*OPP);
+
+    // Passe à la ligne suivante dans source
+    sauve_source_data += source_pitch;
+    source_data = sauve_source_data;
+
+    // Passe à la ligne suivante dans dest
+    sauve_dest_data += dest_pitch;
+    dest_data = sauve_dest_data;
+  }
+
+  // Unlock datas
+  dest.unlock();
+  source.unlock();
+*/
+}
+
+#endif
 //-----------------------------------------------------------------------------
 
 long Offset(long x, long larg)
@@ -410,6 +578,7 @@ ulong ArronditDefaut (long x, ulong larg)
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Tile::Dig (int x, int y, uint width, uint height, CL_PixelBuffer dig)
 {
   int x_max_cell = x+width;
@@ -562,9 +731,38 @@ void Tile::Dig (int x, int y, uint width, uint height, CL_PixelBuffer dig)
   COUT_DBG << "--- Fin creuse ---" << std::endl;
 #endif
 }
+#else // CL is not defined /////////////////////////////////////////////////
+
+int clamp (const int val, const int min, const int max)
+{   
+   return ( val > max ) ? max : ( val < min ) ? min : val ;
+}
+
+void Tile::Dig (int ox, int oy, SDL_Surface *dig)
+{  
+   Rectanglei rect = Rectanglei( ox, oy, dig->w, dig->h); 
+
+   int first_cell_x = clamp( ox/larg_cell,          0, nbr_cell_larg);
+   int first_cell_y = clamp( oy/haut_cell,          0, nbr_cell_haut);
+   int last_cell_x  = clamp( (ox+dig->w)/larg_cell, 0, nbr_cell_larg);
+   int last_cell_y  = clamp( (oy+dig->h)/haut_cell, 0, nbr_cell_haut);
+   
+   for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
+     for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++)
+       {
+	  // compute offset
+	  
+	  int offset_x = ox - cx * larg_cell;
+	  int offset_y = oy - cy * haut_cell;
+	  
+	  item[cy*nbr_cell_larg+cx].Dig( offset_x, offset_y, dig);
+       }
+}
+#endif
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Tile::LoadImage (CL_Surface &terrain)
 {
   FreeMem();
@@ -598,9 +796,44 @@ void Tile::LoadImage (CL_Surface &terrain)
   }
   data.unlock();
 }
+#else
+void Tile::LoadImage (SDL_Surface *terrain)
+{
+  FreeMem();
 
+  InitTile (256, 256, terrain->w, terrain->h);
+  assert (nbr_cell != 0);
+
+  // Crée les canvas et les 'canvas_modifie'
+  //item.clear(); // on a deja fait un FreeMem() non ?!?
+  for (uint i=0; i<nbr_cell; ++i)
+  {
+    TileItem tmp_item(larg_cell, haut_cell);
+    item.push_back(tmp_item);
+  }
+   
+   // Copie les données de la carte dans les 'canvas'
+   for ( unsigned int iy = 0 ; iy < nbr_cell_haut ; iy++ )
+     {
+	for ( unsigned int ix = 0 ; ix < nbr_cell_larg ; ix++)
+	  {
+	     unsigned int piece = iy * nbr_cell_larg + ix;
+
+	     SDL_Rect sr = {ix*larg_cell,iy*haut_cell,larg_cell,haut_cell};
+	     SDL_Rect dr = {0,0,larg_cell,haut_cell};
+	     
+	     SDL_SetAlpha( terrain, 0, 0);
+	     SDL_BlitSurface( terrain, &sr, item[piece].get_surface(), &dr);
+	     
+	     // TODO  CopieCell(terrain, pos_src, larg_cell, haut_cell, item[piece], pos_dst);	     
+	  }	
+     }
+}
+
+#endif
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 // Lit la valeur alpha du pixel (x,y)
 uchar Tile::GetAlpha (int x, int y)
 {
@@ -623,9 +856,22 @@ uchar Tile::GetAlpha (int x, int y)
 
   return *data;
 }
+#else
+uchar Tile::GetAlpha (int x, int y)
+{
+   if ( x < 0 || x >= larg || y < 0 || y >= haut )
+     return 0;
+   
+   unsigned int piece_x = x / larg_cell;
+   unsigned int piece_y = y / haut_cell;
+   
+   return item[piece_y*nbr_cell_larg+piece_x].GetAlpha( x%larg_cell, y%haut_cell);
+}
 
+// TODO
+#endif
 //-----------------------------------------------------------------------------
-
+#ifdef CL
 void Tile::DrawTile()
 {
   uint index = 0;
@@ -661,5 +907,32 @@ void Tile::DrawTile()
   }
 #endif
 }
+#else
+void Tile::DrawTile()
+{
+   uint index = 0;
+   uint x = 0;
+   uint y = 0;
 
+   int ox = (int)FOND_X-camera.GetX(); 
+   int oy = (int)FOND_Y-camera.GetY(); // needed for differential scrolling
+
+   
+   
+   for (uint iy=0; iy<nbr_cell_haut; iy++)
+     {
+	x = 0;
+	for (uint ix=0; ix<nbr_cell_larg; ix++)
+	  {
+	     SDL_Surface *s = item[index].get_surface();
+	     SDL_Rect dr = {x+ox,y+oy,s->w,s->h};
+	     SDL_BlitSurface( s, NULL, app.sdlwindow, &dr);
+
+	     index++;
+	     x += larg_cell;	  
+	  }
+	y += haut_cell;
+     }   
+}
+#endif
 //-----------------------------------------------------------------------------

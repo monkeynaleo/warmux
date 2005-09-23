@@ -26,30 +26,51 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include <vector>
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
 //-----------------------------------------------------------------------------
+
+struct SDL_Surface;
 
 class TileItem 
 {
 public:
-  TileItem (uint width, uint height, 
-            CL_PixelFormat format=CL_PixelFormat::rgba8888);
+#ifdef CL
+  TileItem (uint width, uint height, CL_PixelFormat format=CL_PixelFormat::rgba8888);
+#else
+  TileItem (uint width, uint height);
+#endif   
   TileItem (const TileItem &copy);
   ~TileItem();
+  
   void Lock();
   void Unlock(bool force=false);  
   void Sync(); // Save last changes (if needed)
   void Touch(); // Touch it -> mark it as changed
+  
   uchar* get_data();
+#ifdef CL
   CL_Surface& get_surface();
   CL_PixelBuffer& get_pixelbuffer();
-  
+#else
+  unsigned char GetAlpha( int x, int y); 
+  SDL_Surface *get_surface();
+  unsigned char *get_pixelbuffer();
+  void Dig( int ox, int oy, SDL_Surface *dig);
+#endif
+   
 private:
   bool m_locked;
   bool m_changed;
   uint m_width, m_height;
+#ifdef CL
   CL_Surface m_surface;
   CL_PixelBuffer m_buffer; // if not NULL, contains update canvas
+#else
+  SDL_Surface *m_surface;
+  unsigned char *m_buffer;
+#endif
 };  
 
 //-----------------------------------------------------------------------------
@@ -72,11 +93,18 @@ public:
   ~Tile();
 
   // Dig a hole
-  void Dig (int x, int y, uint width, uint height, CL_PixelBuffer provider);
-
+#ifdef CL
+   void Dig (int x, int y, uint width, uint height, CL_PixelBuffer provider);
+#else
+   void Dig (int ox, int oy, SDL_Surface *provider);
+#endif
+   
   // Load an image
+#ifdef CL
   void LoadImage (CL_Surface &terrain);
-
+#else
+  void LoadImage (SDL_Surface *terrain);
+#endif
   // Get size
   uint GetWidth() const { return larg; }
   uint GetHeight() const { return haut; }

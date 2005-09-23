@@ -22,8 +22,11 @@
 #include "../object/objects_list.h"
 //-----------------------------------------------------------------------------
 #include "../map/maps_list.h"
-#include "../weapon/mine.h"
+#ifdef CL
+# include "../weapon/mine.h"
+#endif
 #include "bonus_box.h"
+#include <vector>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 ListeObjets lst_objets;
@@ -80,8 +83,10 @@ void ListeObjets::Reset()
 
   for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
   {
+#ifdef CL
     ObjMine *obj = new ObjMine();
     AjouteObjet (obj, true);
+#endif
   }
 
   POUR_CHAQUE_OBJET(objet) (*objet).ptr -> Reset();

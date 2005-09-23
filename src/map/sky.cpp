@@ -25,6 +25,10 @@
 #include "map.h"
 #include "../graphic/graphism.h"
 #include "maps_list.h"
+#ifndef CL
+#include <SDL.h>
+#include "../include/app.h"
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux
 {
@@ -35,15 +39,28 @@ const double VITESSE_CIEL_Y = -1;
 
 //-----------------------------------------------------------------------------
 
-Ciel::Ciel() { }
+Ciel::Ciel()
+{
+#ifdef CL
+  image = NULL;
+#endif
+}
 
 //-----------------------------------------------------------------------------
 
 void Ciel::Init()
 {
+#ifdef CL
   CL_Surface *m_image = new CL_Surface(lst_terrain.TerrainActif().LitImgCiel());
   LoadImage (*m_image);
   delete m_image;
+#else
+   // That is temporary -> image will be loaded directly without alpha chanel
+   SDL_Surface *tmp_image = lst_terrain.TerrainActif().LitImgCiel();
+   SDL_SetAlpha( tmp_image, 0, 0);
+   image = SDL_DisplayFormat( tmp_image);
+   SDL_FreeSurface( tmp_image);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -55,6 +72,7 @@ void Ciel::Reset()
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Ciel::Draw()
 {
   int x=camera.GetX();
@@ -75,6 +93,17 @@ void Ciel::Draw()
     x += GetWidth();
   } while (x <= (int)monde.GetWidth());
 }
-
+#else
+void Ciel::Draw()
+{   	
+   SDL_Rect ds = {-camera.GetX()*VITESSE_CIEL_X, -camera.GetY()*VITESSE_CIEL_Y,app.sdlwindow->w,app.sdlwindow->h};
+   SDL_Rect dr = {0,0,app.sdlwindow->w,app.sdlwindow->h};
+   
+   SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
+}
+   
+#endif
+   
+   
 //-----------------------------------------------------------------------------
 } // namespace Wormux

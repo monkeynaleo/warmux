@@ -31,6 +31,12 @@
 #include "../weapon/weapon_tools.h"
 #include "../object/objects_list.h"
 #include "../weapon/weapons_list.h"
+#ifdef CL
+#else
+#include "../tool/resource_manager.h"
+#include "../include/app.h"
+#include "../map/camera.h"
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
 
@@ -51,6 +57,7 @@ void BatonDynamite::Init()
 {
   SetMass (dynamite.cfg().mass);
 
+#ifdef CL
   image = CL_Sprite("dynamite_anim", &graphisme.weapons);
 
   double delay = dynamite.cfg().duree/image.get_frame_count()/1000.0 ;
@@ -60,14 +67,45 @@ void BatonDynamite::Init()
   image.set_play_loop(false);
 
   SetSize (image.get_width(), image.get_height());
-  SetTestRect (0, 0, 2, 3);
 
+  SetTestRect (0, 0, 2, 3);
+   
   explosion = CL_Sprite("explosion", &graphisme.weapons);
   delay = 60/explosion.get_frame_count()/1000.0 ;
   for (int i=0 ; i < explosion.get_frame_count(); i++)
     explosion.set_frame_delay(i, delay) ;
 
   explosion.set_play_loop(false);
+
+#else
+
+   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");  
+   image = resource_manager.LoadSprite(res,"dynamite_anim");
+
+   double delay = dynamite.cfg().duree/image->GetFrameCount()/1000.0 ;
+   for (int i=0 ; i < image->GetFrameCount(); i++)
+     ; // TODO // image.set_frame_delay(i, delay) ;
+
+   image->Start();
+
+   SetSize (image->GetWidth(), image->GetHeight());
+
+   SetTestRect (0, 0, 2, 3);
+
+   explosion = resource_manager.LoadSprite(res, "explosion");
+   delay = 60/explosion->GetFrameCount()/1000.0 ;
+   for (int i=0 ; i < explosion->GetFrameCount(); i++)
+    ; // TODO explosion.set_frame_delay(i, delay) ;
+
+  explosion->Start();
+   
+   delete res;
+   
+#endif
+
+  
+
+
 }
 
 //-----------------------------------------------------------------------------
@@ -78,17 +116,24 @@ void BatonDynamite::Reset()
   is_active = false;
   explosion_active = false;
 
+#ifdef CL
   image.restart();
   image.set_frame (0);
 
   explosion.restart();
   explosion.set_frame(0);
+#else
+  image->SetCurrentFrame(0);
+
+  explosion->SetCurrentFrame(0);
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void BatonDynamite::Refresh()
 {
+#ifdef CL
   if (!is_active) return;
   bool fin;
   assert (!IsGhost());
@@ -101,10 +146,25 @@ void BatonDynamite::Refresh()
     fin = explosion.is_finished();
     if (fin) is_active = false;
   }
+#else
+  if (!is_active) return;
+  bool fin;
+  assert (!IsGhost());
+  if (!explosion_active) {
+    image->Update(); 
+    fin = image->GetCurrentFrame() == image->GetFrameCount()-1;
+    if (fin) explosion_active = true;
+  } else {
+    explosion->Update();
+    fin = explosion->GetCurrentFrame() == explosion->GetFrameCount()-1;
+    if (fin) is_active = false;
+  }
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void BatonDynamite::Draw()
 {
   if (!is_active) return;
@@ -124,7 +184,24 @@ void BatonDynamite::Draw()
   CL_Display::draw_rect (LitRectTest(), CL_Color::red);
 #endif
 }
+#else
+void BatonDynamite::Draw()
+{
+  if (!is_active) return;
+  assert (!IsGhost());
 
+  int x = GetX();
+  int y = GetY();
+  if (!explosion_active)
+    image->Blit( app.sdlwindow,x-camera.GetX(),y-camera.GetY()); 
+  else {
+    x -= explosion->GetWidth()/2;
+    y -= explosion->GetHeight()/2;
+    explosion->Blit(app.sdlwindow,x-camera.GetX(),y-camera.GetY());
+  }
+}
+   
+#endif
 //-----------------------------------------------------------------------------
 
 void BatonDynamite::SignalCollision() {}
@@ -148,7 +225,13 @@ Dynamite::Dynamite() : Weapon(WEAPON_DYNAMITE, "dynamite")
 void Dynamite::p_Init()
 {
   baton.Init();
-  impact = CL_Surface("dynamite_impact", &graphisme.weapons);
+#ifdef CL
+   impact = CL_Surface("dynamite_impact", &graphisme.weapons);
+#else
+   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");  
+   impact = resource_manager.LoadImage(res,"dynamite_impact");
+   delete res;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -178,8 +261,12 @@ bool Dynamite::p_Shoot ()
   baton.SetSpeedXY (speed_vector);
 
   // Active l'animation
-  jukebox.Play("weapon/dynamite_fuze");
-  return true;
+#ifdef CL
+   jukebox.Play("weapon/dynamite_fuze");
+#else
+   // TODO
+#endif
+   return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -191,7 +278,12 @@ void Dynamite::Refresh()
     if (!baton.is_active) FinExplosion ();
   } else {
     // Change le sens de l'image si nécessaire
-    m_image.set_scale(ActiveCharacter().GetDirection(), 1);
+#ifdef CL
+     m_image.set_scale(ActiveCharacter().GetDirection(), 1);
+#else
+     //TODO
+     //m_image->Scale(ActiveCharacter().GetDirection(), 1);
+#endif
   }
 }
 
@@ -203,15 +295,23 @@ void Dynamite::FinExplosion ()
 
   lst_objets.RetireObjet (&baton);
 
-  jukebox.Stop("weapon/dynamite_fuze");
-  
+#ifdef CL
+   jukebox.Stop("weapon/dynamite_fuze");
+#endif
+   
   // Si la dynamite est sortie de l'écran, on ne fait rien
   if (baton.IsGhost()) return;
 
   // Applique les degats aux vers
+#ifdef CL
   CL_Point centre = baton.GetCenter();
   centre.y = baton.GetY()+baton.GetHeight();
   AppliqueExplosion (centre, centre, impact, cfg(), NULL, "weapon/dynamite_exp");
+#else
+  Point2i centre = baton.GetCenter();
+  centre.y = baton.GetY()+baton.GetHeight();
+  AppliqueExplosion (centre, centre, impact, cfg(), NULL, "weapon/dynamite_exp");
+#endif
 }
 
 //-----------------------------------------------------------------------------

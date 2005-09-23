@@ -16,49 +16,50 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Suicide.
+ * Rectangle.h: Standard C++ Rectangle template
+ ******************************************************************************
+ * 2005/09/21:  Jean-Christophe Duberga (jcduberga@gmx.de) 
+ *              Initial version
  *****************************************************************************/
 
-#ifndef SUICIDE_H
-#define SUICIDE_H
-//-----------------------------------------------------------------------------
-#include "weapon.h"
-#ifdef CL
-# include <ClanLib/sound.h>
-#endif
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
+#ifndef _RECTANGLE_H
+#define _RECTANGLE_H
 
-   struct SDL_Surface;
-     
-class Suicide : public Weapon
+#include <cmath>
+
+template<class T> class Rectangle
 {
-private:
-#ifdef CL
-   CL_SoundBuffer_Session *son;
-#else
-   // TODO
-#endif
-   bool is_dying;
-
-  void p_Init();
-  bool p_Shoot();
-
-public:
-#ifdef CL
-  CL_Surface hole_image;
-#else
-  SDL_Surface *hole_image;
-#endif
    
-  Suicide();
-  void p_Select();
-  void Refresh();
-  ExplosiveWeaponConfig &cfg();
+ public:
+   inline Rectangle(){}
+   inline Rectangle(T ox, T oy, T width, T height)
+     {
+	this->x = ox;
+	this->y = oy;
+	this->w = width;
+	this->h = height;
+     }
+   
+   inline void Clip( const Rectangle &cr)
+     {
+	T left    = ( x < cr.x ) ? cr.x : ( x > cr.x+cr.w ) ? cr.x+cr.w : x; 
+	T right   = ( x+w < cr.x ) ? cr.x : ( x+w > cr.x+cr.w ) ? cr.x+cr.w : x+w;
+	T top     = ( y < cr.y ) ? cr.y : ( y > cr.y+cr.h ) ? cr.y+cr.h : y;
+	T bottom  = ( y+h < cr.y ) ? cr.y : ( y+h > cr.y+cr.h ) ? cr.y+cr.h : y+h;
+	
+	x = left;
+	w = right-left;
+	y = top;
+	h = bottom-top;
+     }
+   
+   T x, y, w, h;
 };
 
-extern Suicide suicide;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
-#endif
+   
+typedef Rectangle<int>    Rectanglei;   
+typedef Rectangle<float>  Rectanglef;   
+typedef Rectangle<double> Rectangled;   
+
+
+#endif // _RECTANGLE_H

@@ -31,10 +31,26 @@
 #include "../graphic/graphism.h"
 #include "../tool/i18n.h"
 #include "../graphic/video.h"
+#ifndef CL
+#include <SDL.h>
+#include "../tool/resource_manager.h"
+#include "../include/app.h"
+#endif
+#include <iostream>
 
 //-----------------------------------------------------------------------------
 WeaponStrengthBar weapon_strength_bar;
 //-----------------------------------------------------------------------------
+
+SDL_Color c_white  = { 0xFF, 0xFF, 0xFF, 0xFF };
+SDL_Color c_black  = { 0x00, 0x00, 0x00, 0xFF };
+SDL_Color c_gray   = { 0xF0, 0xF0, 0xF0, 0xFF };
+SDL_Color c_darkgray = { 0x50, 0x50, 0x50, 0xFF };
+SDL_Color c_dimgray  = { 0xF0, 0xF0, 0xF0, 0xFF };
+
+SDL_Color c_w1 = { 0xFF, 0xFF, 0xFF, 0xF0};
+SDL_Color c_w2 = { 0x00, 0x00, 0x00, 0xF0};
+SDL_Color c_w3 = { 255*6/10, 255*6/10, 255*6/10, 96};
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -96,25 +112,45 @@ void Interface::Init()
 {
   affiche = true;
 
+#ifdef CL
   CL_ResourceManager* res=graphisme.LitRes();
   game_menu = CL_Surface("interface/menu_jeu", res);
   bg_time = CL_Surface("interface/fond_compteur", res);
   weapons_menu.Init();
   weapon_box_button = CL_Surface("interface/weapon_box_button", res);
-
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  game_menu = resource_manager.LoadImage( res, "interface/menu_jeu");
+  bg_time = resource_manager.LoadImage( res, "interface/fond_compteur");
+  weapons_menu.Init();
+  weapon_box_button = resource_manager.LoadImage( res, "interface/weapon_box_button");
+#endif
+   
   barre_energie.InitVal (0, 0, game_mode.character.init_energy);
   barre_energie.InitPos (BARENERGIE_X, BARENERGIE_Y, 
 			 BARENERGIE_LARG, BARENERGIE_HAUT);
+#ifdef CL
   barre_energie.border_color = CL_Color::white;
   barre_energie.value_color = CL_Color::darkgray;
   barre_energie.background_color = CL_Color::dimgray;  
-
+#else
+  barre_energie.border_color = c_white;
+  barre_energie.value_color = c_darkgray;
+  barre_energie.background_color = c_dimgray;  
+#endif
+   
   // strength bar initialisation  
   weapon_strength_bar.InitPos (0, 0, 400, 10);
   weapon_strength_bar.InitVal (0, 0, 100);
+#ifdef CL
   weapon_strength_bar.value_color = CL_Color (255, 255, 255, 127);
   weapon_strength_bar.border_color = CL_Color(0, 0, 0, 127);
   weapon_strength_bar.background_color = CL_Color(255*6/10, 255*6/10, 255*6/10, 96);
+#else
+  weapon_strength_bar.value_color = c_w1;
+  weapon_strength_bar.border_color = c_w2;
+  weapon_strength_bar.background_color = c_w3; 
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -137,17 +173,25 @@ void Interface::AfficheInfoVer (Character &ver)
 
   std::ostringstream txt;
 
+#ifdef CL
   CL_Display::push_cliprect(CL_Rect(x+INFO_VER_X1, 
-					 y+INFO_VER_Y1,
-					 x+INFO_VER_X2, 
-					 y+INFO_VER_Y2));
-
+				    y+INFO_VER_Y1,
+				    x+INFO_VER_X2, 
+				    y+INFO_VER_Y2));
+#else
+// TODO
+#endif
+   
   // Affiche le nom du ver
   txt.str ("");
   txt << _("Name") << " : " 
       << ver.m_name << " (" << ver.GetTeam().GetName() << ')';
-  police_grand.WriteLeft (NOM_VER_X, NOM_VER_Y, txt.str());
-
+#ifdef CL
+   police_grand.WriteLeft (NOM_VER_X, NOM_VER_Y, txt.str());
+#else
+   // TODO
+#endif
+   
   // Affiche l'énergie du ver
   txt.str ("");
   txt << _("Energy") << " : ";
@@ -158,15 +202,28 @@ void Interface::AfficheInfoVer (Character &ver)
     txt << _("(dead)");
     barre_energie.Actu (0);
   }
+#ifdef CL
   police_grand.WriteLeft (ENERGIE_VER_X, ENERGIE_VER_Y, txt.str());
-
+#else
+// TODO 
+#endif
+   
   // Barre d'énergie
-  barre_energie.Draw ();
-  
-  CL_Display::pop_cliprect();
+  barre_energie.DrawXY (x+INFO_VER_X1, y+INFO_VER_Y1);
 
+#ifdef CL
+  CL_Display::pop_cliprect();
+#else
+// TODO ?   
+#endif
+   
   // Affiche l'écusson de l'équipe
-  ver.TeamAccess().ecusson.draw (ECUSSON_EQUIPE_X, ECUSSON_EQUIPE_Y);
+#ifdef CL
+   ver.TeamAccess().ecusson.draw (ECUSSON_EQUIPE_X, oy+ECUSSON_EQUIPE_Y);
+#else
+   SDL_Rect dest = { x+ECUSSON_EQUIPE_X, y+ECUSSON_EQUIPE_Y, ver.TeamAccess().ecusson->w, ver.TeamAccess().ecusson->h};	
+   SDL_BlitSurface( ver.TeamAccess().ecusson, NULL, app.sdlwindow, &dest);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -192,20 +249,41 @@ void Interface::AfficheInfoArme ()
 
   std::ostringstream txt;
 
-  CL_Display::push_cliprect(CL_Rect(x+CLIP_ARME_X1, 
+#ifdef CL
+   CL_Display::push_cliprect(CL_Rect(x+CLIP_ARME_X1, 
 					 y+CLIP_ARME_Y1,
 					 x+CLIP_ARME_X2, 
 					 y+CLIP_ARME_Y2));
-
+#else
+// TODO ?
+#endif
+   
   // Nom de l'arme
   txt.str("");
   txt << _("Weapon") << " : ";
   txt << arme_affiche->GetName();
+#ifdef CL
   police_grand.WriteLeft (NOM_ARME_X, NOM_ARME_Y, txt.str());
+#else
+// TODO
+#endif
 
   // Icône de l'arme
+#ifdef CL
   arme_affiche->icone.draw (ICONE_ARME_X, ICONE_ARME_Y);
-
+#else
+   if( arme_affiche->icone )
+     {
+	SDL_Rect dest = { x+CLIP_ARME_X1+ICONE_ARME_X, y+CLIP_ARME_Y1+ICONE_ARME_Y, arme_affiche->icone->w, arme_affiche->icone->h};	
+	SDL_BlitSurface( arme_affiche->icone, NULL, app.sdlwindow, &dest);   
+     }
+   else
+     {
+	std::cout << "Can't blit weapon->icone => NULL " << std::endl;
+     }
+   
+#endif
+ 
   // Munitions
   txt.str ("");
   txt << _("Stock") << " : ";
@@ -213,27 +291,39 @@ void Interface::AfficheInfoArme ()
     txt << _("(unlimited)");
   else
     txt << nbr_munition;
+#ifdef CL
   police_grand.WriteLeft (MUNITION_X, MUNITION_Y, txt.str());
 
   CL_Display::pop_cliprect();
-
+#else
+  //TODO
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void Interface::Draw ()
 {  
-  bg_time.draw((video.GetWidth()/2)-40, 0, NULL);
-
+#ifdef CL
+  bg_time.draw(( NULL);
+#else
+  SDL_Rect dest = { (video.GetWidth()/2)-40, 0, bg_time->w, bg_time->h};	
+  SDL_BlitSurface( bg_time, NULL, app.sdlwindow, &dest);   
+#endif
+   
   if ( game_loop.ReadState() == gamePLAYING && 
        weapon_strength_bar.visible) {
     // Position on the screen 
     uint barre_x = (video.GetWidth()-weapon_strength_bar.GetWidth())/2;
     uint barre_y = video.GetHeight()-weapon_strength_bar.GetHeight() 
       - interface.GetHeight()-10;
-    
+
     // Drawing on the screen
-    weapon_strength_bar.DrawXY (barre_x, barre_y);
+#ifdef CL
+     weapon_strength_bar.Draw ();
+#else
+     weapon_strength_bar.DrawXY (BARENERGIE_X+barre_x, BARENERGIE_X+barre_y);
+#endif
   }
        
   weapons_menu.Draw();
@@ -246,15 +336,26 @@ void Interface::Draw ()
   // On a bien un ver et/ou une équipe pointée par la souris
   if (ver_pointe_souris == NULL) ver_pointe_souris = &ActiveCharacter();
 
-  CL_Display::push_translate(x, y);
-  
+#ifdef CL
+ CL_Display::push_translate(x, y);
+#endif
+	       
   // Redessine intégralement le fond ?
-  game_menu.draw (0, 0, NULL);
-
+#ifdef CL
+      game_menu.draw (0, 0, NULL);
+#else
+  SDL_Rect dr = { x, y, game_menu->w, game_menu->h};	
+  SDL_BlitSurface( game_menu, NULL, app.sdlwindow, &dr);   	       
+#endif
+	       
   // Affiche le temps restant du tour ?
   if (0 <= chrono)
   {
-    police_grand.WriteCenter (GetWidth()/2, GetHeight()/2, ulong2str(chrono));
+#ifdef CL
+     police_grand.WriteCenter (GetWidth()/2, GetHeight()/2, ulong2str(chrono));
+#else
+     // TODO
+#endif
   }
 
   // Affiche le nom du ver
@@ -263,7 +364,11 @@ void Interface::Draw ()
   // Affiche les informations sur l'arme
   AfficheInfoArme ();
 
+	       
+#ifdef CL
   CL_Display::pop_modelview ();  
+#else
+#endif
 }
 
 //-----------------------------------------------------------------------------

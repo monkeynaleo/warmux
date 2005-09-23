@@ -21,8 +21,9 @@
 
 #include "map.h"
 //-----------------------------------------------------------------------------
+#include <iostream>
 #include "../graphic/graphism.h"
-#include "../weapon/air_attack.h"
+//#include "../weapon/air_attack.h"
 #include "../game/config.h"
 #include "../include/constant.h"
 #include "../object/bonus_box.h"
@@ -44,7 +45,7 @@ Monde monde;
 //-----------------------------------------------------------------------------
 
 //NOT USED ANYMORE
-void Monde::Init()
+/*void Monde::Init()
 {
 
   ciel.Init();
@@ -55,7 +56,7 @@ void Monde::Init()
 
   // Distance minimale entre les vers
   dst_min_entre_vers = DST_MIN_ENTRE_VERS;
-}
+}*/
 
 //-----------------------------------------------------------------------------
 
@@ -91,12 +92,19 @@ void Monde::FreeMem()
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Monde::Creuse (uint x, uint y, CL_Surface &surface)
 {
   terrain.Dig (x, y, 
 	       surface.get_width(), surface.get_height(),
                surface.get_pixeldata());
 }
+#else
+void Monde::Creuse (uint x, uint y, SDL_Surface *surface)
+{
+   terrain.Dig (x, y, surface);
+}
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -133,9 +141,13 @@ bool Monde::EstHorsMondeYhaut(int y, uint haut) const
 bool Monde::EstHorsMondeXY(int x, int y) const
 { return EstHorsMondeX(x) || EstHorsMondeY(y); }
 
+#ifdef CL
 bool Monde::EstHorsMonde (const CL_Point &pos) const
 { return EstHorsMondeXY (pos.x, pos.y); }
-
+#else
+bool Monde::EstHorsMonde (const Point2i &pos) const
+{ return EstHorsMondeXY (pos.x, pos.y); }
+#endif
 //-----------------------------------------------------------------------------
 
 bool Monde::EstDansVide(int x, int y)
@@ -143,6 +155,7 @@ bool Monde::EstDansVide(int x, int y)
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 bool Monde::LigneH_EstDansVide (int left, int y, int right)
 { 
   assert (left <= right);
@@ -160,6 +173,21 @@ bool Monde::LigneH_EstDansVide (int left, int y, int right)
   }
   return true;
 }
+#else
+bool Monde::LigneH_EstDansVide (int ox, int y, int width)
+{ 
+  // Traite une ligne
+  for (unsigned int i=0; i<width; i++) 
+     {
+	if (!EstDansVide(ox+i, (uint)y)) 
+	  {
+	     return false;
+	  }
+     }
+   
+   return true;
+}
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -183,6 +211,7 @@ bool Monde::LigneV_EstDansVide (int x, int top, int bottom)
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 bool Monde::RectEstDansVide (const CL_Rect &prect)
 {
   CL_Rect rect(prect);
@@ -200,25 +229,61 @@ bool Monde::RectEstDansVide (const CL_Rect &prect)
   }
   return true;
 }
+#else
+bool Monde::RectEstDansVide (const Rectanglei &prect)
+{
+   Rectanglei rect(prect);
+
+   // Clip rectangle in the the world area
+   rect.Clip( Rectanglei(0,0,GetWidth(),GetHeight())); 
+   
+   // Check line by line
+   for (int i=rect.y; i < rect.y+rect.h; i++)
+     {
+	if (!LigneH_EstDansVide (rect.x, i, rect.w))
+	  {
+	     return false;
+	  }
+     }
+   
+   return true;
+}
+#endif
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 bool Monde::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
 {
   return LigneH_EstDansVide (obj.GetTestRect().left+dx,
 			     obj.GetTestRect().top+dy,
 			     obj.GetTestRect().right+dx);
 }
-
+#else
+bool Monde::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
+{
+  return LigneH_EstDansVide (obj.GetTestRect().x+dx,
+			     obj.GetTestRect().y+obj.GetTestRect().h+dy,
+			     obj.GetTestRect().w);
+}
+#endif
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 bool Monde::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
 {
   return LigneH_EstDansVide (obj.GetTestRect().left+dx,
 			     obj.GetTestRect().bottom+dy,
 			     obj.GetTestRect().right+dx);
 }
-
+#else
+bool Monde::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
+{
+  return LigneH_EstDansVide (obj.GetTestRect().x+dx,
+			     obj.GetTestRect().y+dy,
+			     obj.GetTestRect().w);
+}
+#endif
 //-----------------------------------------------------------------------------
 
 void Monde::DrawAuthorName()
@@ -233,7 +298,11 @@ void Monde::DrawAuthorName()
   txt += '\n';
   txt += lst_terrain.TerrainActif().author_info;
 
-  police_mix.WriteLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y, txt);
+#ifdef CL
+   police_mix.WriteLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y, txt);
+#else
+//TODO
+#endif
 }
 
 //-----------------------------------------------------------------------------

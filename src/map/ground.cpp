@@ -21,11 +21,17 @@
 
 #include "ground.h"
 //-----------------------------------------------------------------------------
+#include <iostream>
+#include "map.h"
+#include "maps_list.h"
+
 #include "../include/constant.h"
 #include "../graphic/graphism.h"
-#include "map.h"
+#ifdef CL
 #include "../weapon/mine.h"
-#include "maps_list.h"
+#else
+#include "../tool/resource_manager.h"
+#endif
 
 #ifdef DEBUG
 //#  define DESSINE_BORDURE_CANVAS
@@ -44,11 +50,19 @@ Terrain::Terrain()
 
 void Terrain::Init()
 {
-  std::cout << "init terrain." << std::endl;
+  std::cout << "Ground initialization...";
+  std::cout.flush();
+  
   // Charge les données du terrain
+#ifdef CL
   CL_Surface *m_image = new CL_Surface(lst_terrain.TerrainActif().LitImgTerrain());
   LoadImage (*m_image);
   delete m_image;
+#else
+  SDL_Surface *m_image = lst_terrain.TerrainActif().LitImgTerrain();
+  LoadImage ( m_image);
+//delete m_image;
+#endif
 
   // Vérifie la taille du terrain
   assert (LARG_MIN_TERRAIN <= GetWidth());
@@ -57,6 +71,8 @@ void Terrain::Init()
   
   // Vérifie si c'est un terrain ouvert ou fermé
   ouvert = lst_terrain.TerrainActif().is_opened;
+
+  std::cout << "done" << std::endl;
 }
 
 //-----------------------------------------------------------------------------
@@ -76,7 +92,11 @@ bool Terrain::EstDansVide (int x, int y)
   assert (!monde.EstHorsMondeXY(x,y));
 
   // Lit le monde
-  return EstTransparent( GetAlpha(x,y) );
+#ifdef CL
+   return EstTransparent( GetAlpha(x,y) );
+#else
+   return ( GetAlpha(x,y) != 255);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -95,7 +115,11 @@ double Terrain::Tangeante(int x,int y)
   // p2 = 1er point à droite
   // p3 = 2em point à gauche
   // p4 = 2em point à droite)
+#ifdef CL
   CL_Point p1,p2,p3,p4;
+#else
+  Point2i p1,p2,p3,p4;
+#endif
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
     return -1.0;
   
@@ -140,12 +164,20 @@ bool Terrain::PointContigu(int x,int y,  int & p_x,int & p_y,
   //Cherche un pixel autour du pixel(x,y) qui est à la limite entre
   //le terrin et le vide.
   //renvoie true (+ p_x et p_y) si on a trouvé qqch, sinon false
+#ifdef CL
   if(monde.EstHorsMonde(CL_Point(x-1,y))
   || monde.EstHorsMonde(CL_Point(x+1,y))
   || monde.EstHorsMonde(CL_Point(x,y-1))
   || monde.EstHorsMonde(CL_Point(x,y+1)) )
     return false;
-
+#else
+  if(monde.EstHorsMonde(Point2i(x-1,y))
+  || monde.EstHorsMonde(Point2i(x+1,y))
+  || monde.EstHorsMonde(Point2i(x,y-1))
+  || monde.EstHorsMonde(Point2i(x,y+1)) )
+    return false;
+#endif
+   
   //regarde en haut à gauche
   if(x-1 != pas_bon_x
   || y-1 != pas_bon_y)

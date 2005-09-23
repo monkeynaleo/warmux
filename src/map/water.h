@@ -22,9 +22,14 @@
 #ifndef EAU_H
 #define EAU_H
 //-----------------------------------------------------------------------------
+#include <vector>
 #include "../include/base.h"
+#ifdef CL
 #include <ClanLib/display.h>
+#endif
 //-----------------------------------------------------------------------------
+
+struct SDL_Surface;
 
 const uint WATER_INITIAL_HEIGHT = 100;
 
@@ -38,8 +43,11 @@ private:
   uint hauteur_eau;
   uint temps_montee;
   std::vector<int> height;
+#ifdef CL
   CL_Surface *surface;
-  
+#else
+  SDL_Surface *surface;
+#endif
 public:
   void Init();
   void Reset();

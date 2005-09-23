@@ -24,6 +24,7 @@
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../graphic/graphism.h"
+#include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 GameMessages game_messages;
@@ -60,8 +61,12 @@ void GameMessages::Draw()
   uint msgy = 50;
   for (iterator i=liste.begin(); i != liste.end(); ++i)
   {
+#ifdef CL
     police_petit.WriteCenterTop (video.GetWidth()/2, msgy, i -> text);
-    msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
+#else
+     // TODO
+#endif
+     msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
   }
 }
 

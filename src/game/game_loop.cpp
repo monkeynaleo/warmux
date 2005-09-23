@@ -27,10 +27,9 @@
 #include "../include/constant.h"
 #include "../include/action_handler.h"
 #include "../interface/game_msg.h"
-#include "../interface/mouse.h"
-#include "../interface/keyboard.h"
 #include "../interface/cursor.h"
 #include "../interface/interface.h"
+#include "../interface/mouse.h"
 #include "../object/bonus_box.h"
 #include "../object/objects_list.h"
 #include "../object/particle.h"
@@ -38,7 +37,6 @@
 #include "../map/wind.h"
 #include "../map/map.h"
 #include "../map/maps_list.h"
-#include "../network/network.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
 #include "../tool/i18n.h"
@@ -48,7 +46,18 @@
 #include "debug.h"
 #include "game_mode.h"
 #include "config.h"
+#include "../interface/keyboard.h"
+
+#ifdef CL
+#include "../network/network.h"
+#else
+#include <SDL.h>
+#include "../include/app.h"
+#include "../tool/Distance.h"
+#endif
+
 #include <sstream>
+#include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -75,6 +84,7 @@ GameLoop game_loop;
 //               FUNCTIONS USED TO INITIALIZE NETWORK GAME
 // ***************************************************************************
 // ***************************************************************************
+#ifdef CL
 void InitGameData_NetServer()
 {
   //	action_handler.NewAction(Action(ACTION_ASK_TEAM));
@@ -196,6 +206,8 @@ void InitGameData_NetClient()
   ActiveTeam().is_local = false;
 }
 
+#endif // CL defined
+
 //-----------------------------------------------------------------------------
 
 void InitGameData_Local()
@@ -216,15 +228,18 @@ void InitGameData()
 {
   temps.Reset();
   
+#ifdef CL
   if (network.is_server())
     InitGameData_NetServer();
   else if (network.is_client())
     InitGameData_NetClient();
   else	
+#endif
     InitGameData_Local();
 
   curseur_ver.Reset();
   mouse.Reset();
+   
   image_par_seconde.Reset();
   interface.Reset();
   game_messages.Reset();
@@ -261,6 +276,7 @@ void InitGame ()
   // =============================================
 
   // Teams' creation
+   std::cout << "team nb = " << teams_list.list.size() << std::endl;
   if (teams_list.list.size() < 2)
     Erreur(_("You need at least two teams to play: "
 	     "change this in 'Options menu' !"));
@@ -270,22 +286,27 @@ void InitGame ()
   teams_list.InitEnergy();
 
   // Load teams' sound profiles
+#ifdef CL
   jukebox.Load("default");
   POUR_CHAQUE_EQUIPE(equipe) 
     if ( (**equipe).GetSoundProfile() != "default" )
       jukebox.Load((**equipe).GetSoundProfile()) ;  
-
+#else
+// TODO
+#endif
+   
   // =============================================
   // Begin to play !!
   // =============================================
   // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
-  if (jukebox.UseMusic()) jukebox.Play ("ambiance/grenouilles", true);
-
+#ifdef CL
+   if (jukebox.UseMusic()) jukebox.Play ("ambiance/grenouilles", true);
+#else
+// TODO
+#endif
   jeu.fin_partie = false;
   game_loop.SetState (gamePLAYING, true);
 }
-
-
 
 // ***************************************************************************
 // ***************************************************************************
@@ -301,6 +322,9 @@ GameLoop::GameLoop()
   interaction_enabled = true;
 }
 
+
+
+
 //-----------------------------------------------------------------------------
 
 void GameLoop::Refresh()
@@ -315,12 +339,54 @@ void GameLoop::Refresh()
   camera.Refresh();
 
   // Mise à jeu des entrées (clavier / mouse)
+#ifdef CL
 #if CL_CURRENT_VERSION <= 0x0708
   CL_System::keep_alive(sleep_fps);
 #else
   CL_System::keep_alive();
 #endif
+#endif
+   
+#ifndef CL //////////////////// TREAT EVENTS in the SDL fashion /////////////////////
+ 
+   // Poll and treat events
+	
+   SDL_Event event;
+   
+   while( SDL_PollEvent( &event) ) 
+     {      
+	if ( event.type == SDL_QUIT) 
+	  {  
+	     std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
+	     SDL_Quit();
+	     exit(0);
+	  }
+	if ( event.type == SDL_MOUSEBUTTONDOWN )
+	  {
+	     mouse.TraiteClic( &event);
+	  }
+	if ( event.type == SDL_KEYDOWN )
+	  {	       
+	     switch ( event.key.keysym.sym)
+	       { 
+		case SDLK_ESCAPE:SDL_Quit();exit(0);break;
+		case SDLK_F1: break;
+		case SDLK_p: break;
+		case SDLK_UP: break;
+		case SDLK_DOWN: break;
+		case SDLK_LEFT: break;
+		case SDLK_RIGHT: break;
+		case SDLK_SPACE: break;
+		default:break;
+	       }
+	     
+	     clavier.HandleKeyEvent( &event);
+	  }
+     }
+   
 
+#endif ////////////////////////////////////////
+   
   // How many frame by seconds ?
   image_par_seconde.Refresh();
 
@@ -328,6 +394,7 @@ void GameLoop::Refresh()
 
   if (!temps.EstPause())
   {
+     
     // Keyboard and mouse refresh
     if ( 
 	(interaction_enabled && state != gameEND_TURN)
@@ -337,10 +404,10 @@ void GameLoop::Refresh()
       mouse.Refresh();
       clavier.Refresh();
     }
-
+   
     // Execute actions
     action_handler.ExecActions();
-
+ 
     // Refresh des vers
     POUR_TOUS_VERS(equipe,ver) ver -> Refresh();
 
@@ -379,16 +446,20 @@ void GameLoop::Draw ()
 {
   std::ostringstream txt;
 
+#ifdef CL
   CL_Display::push_cliprect( CL_Rect(FOND_X, FOND_Y, 
   					  FOND_X+camera.GetWidth(), 
 					  FOND_Y+camera.GetHeight()));
-
+#endif
+   
   // Draw the sky 
   monde.DrawSky();
 
+#ifdef CL
   CL_Display::push_translate((int)FOND_X-camera.GetX(), 
 			     (int)FOND_Y-camera.GetY()); // needed for differential scrolling
-
+#endif
+   
   // Draw the map
   monde.Draw();
 
@@ -414,9 +485,11 @@ void GameLoop::Draw ()
   // Draw teams' information
   POUR_CHAQUE_EQUIPE(team) (**team).Draw();
 
+#ifdef CL
   // Supprime le decalage
   CL_Display::pop_modelview();
-
+#endif
+   
   // Display game messages
   game_messages.Draw();
 
@@ -425,10 +498,12 @@ void GameLoop::Draw ()
 
   // Display number of frames by second
   image_par_seconde.Draw();
-  
+
+#ifdef CL
   // Remove clipping
   CL_Display::pop_cliprect();
-
+#endif
+   
 #ifdef DEBUG
   // Draw les messages de debug
   debug.Draw();
@@ -452,7 +527,11 @@ void GameLoop::Draw ()
 void GameLoop::CallDraw()
 {
   Draw();
-  CL_Display::flip (false);
+#ifdef CL
+   CL_Display::flip (false);
+#else
+   SDL_Flip( app.sdlwindow);
+#endif
 }
 
 
@@ -465,8 +544,12 @@ void GameLoop::Run()
   // boucle until game is finished
   do
   {
+#ifdef CL
     unsigned int start = CL_System::get_time();
-	  
+#else
+    unsigned int start = SDL_GetTicks();
+#endif
+     
     jeu.fin_partie = false;
 
     // the REAL loop
@@ -474,8 +557,13 @@ void GameLoop::Run()
     CallDraw ();
 
     // try to adjust to max Frame by seconds
+#ifdef CL
     unsigned int delay = CL_System::get_time()-start;
-#ifdef BUGGY_CODE
+#else
+    unsigned int delay = SDL_GetTicks()-start;
+#endif
+     
+# ifdef BUGGY_CODE
     if (delay < video.GetSleepMaxFps())
       sleep_fps = video.GetSleepMaxFps() - delay;
     else
@@ -502,8 +590,10 @@ void GameLoop::RefreshClock()
 
       case gamePLAYING:
 	if (duration == 0) {
+#ifdef CL
 	  jukebox.Play("end_turn");
-	  SetState (gameEND_TURN);
+#endif
+	   SetState (gameEND_TURN);
 	} else {
 	  duration--;
 	  interface.chrono = duration;
@@ -562,8 +652,12 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     interface.chrono = duration;
     pause_seconde = temps.Lit();
 
-    if (network.is_server() || network.is_local()) wind.ChooseRandomVal();
-    character_already_chosen = false;
+#ifdef CL
+    if (network.is_server() || network.is_local())
+#endif
+     wind.ChooseRandomVal();
+    
+     character_already_chosen = false;
 
     // Prépare un tour pour un ver
     POUR_TOUS_VERS_VIVANTS(equipe,ver) ver -> PrepareTour();
@@ -689,8 +783,12 @@ void GameLoop::SignalCharacterDeath (Character *character)
     } else if (state == gamePLAYING) {
       txt = Format(_("%s has fallen off the map!"),
 		   character -> m_name.c_str());
-      jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "out");
-      
+#ifdef CL
+       jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "out");
+#else
+       ;
+#endif
+       
       // Mort en se faisant toucher par son arme / la mort d'un ennemi ?
     } else {
       txt = Format(_("%s is dead because he is clumsy!"), 

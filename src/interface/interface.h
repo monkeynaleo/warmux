@@ -34,6 +34,8 @@
 #undef interface
 #endif
 
+struct SDL_Surface;
+
 class Interface
 {
 public:
@@ -41,16 +43,23 @@ public:
   Weapon* arme_pointe_souris;
   int chrono; // affiché uniquement si sa valeur est positive
   WeaponsMenu weapons_menu;
-  CL_Surface weapon_box_button ;
-
+#ifdef CL
+   CL_Surface weapon_box_button ;
+#else
+   SDL_Surface *weapon_box_button;
+#endif
 private:
   bool affiche;
   void AfficheInfoVer (Character &ver);
   void AfficheInfoArme ();
   BarreProg barre_energie;
+#ifdef CL
   CL_Surface game_menu;
   CL_Surface bg_time;
-  
+#else
+  SDL_Surface *game_menu;
+  SDL_Surface *bg_time;
+#endif
 public:
   Interface();
   void Init();

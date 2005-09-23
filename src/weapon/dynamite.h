@@ -26,8 +26,13 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../team/character.h"
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
 #include "weapon.h"
+
+struct Sprite;
+
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -36,7 +41,11 @@ namespace Wormux {
 class BatonDynamite : public WeaponProjectile
 {
 private:
+#ifdef CL
   CL_Sprite explosion;
+#else
+  Sprite *explosion;
+#endif 
   bool explosion_active;
 
 public:
@@ -70,8 +79,12 @@ class Dynamite : public Weapon
 {
 private:
   // Image du trou de l'explosion
+#ifdef CL
   CL_Surface impact;
-
+#else
+  SDL_Surface *impact;
+#endif
+   
   // Objet réprésentant la dynamite (= l'objet qui tombe et explose)
   BatonDynamite baton;
 

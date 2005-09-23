@@ -20,6 +20,9 @@
  *****************************************************************************/
 
 #include "../tool/math_tools.h"
+#ifndef CL
+#include "../tool/Point.h"
+#endif
 //-----------------------------------------------------------------------------
 #include <math.h>
 //-----------------------------------------------------------------------------
@@ -131,6 +134,9 @@ double BorneDouble (const double &valeur, const double &min, const double &max)
 // - M=O -> 0
 #ifdef CL
 double CalculeAngle (const CL_Point &O, const CL_Point &M)
+#else
+double CalculeAngle (const Point2i &O, const Point2i &M)  
+#endif
 {
   int x = M.x - O.x;
   int y = M.y - O.y;
@@ -165,7 +171,7 @@ double CalculeAngle (const CL_Point &O, const CL_Point &M)
   }
   return angle;
 }
-#endif
+
 double CalculeAnglef (DoubleVector V)
 {
   double angle;

@@ -21,10 +21,20 @@
 
 #include "cursor.h"
 //-----------------------------------------------------------------------------
-#include "../graphic/graphism.h"
+#ifndef CL
+#include <SDL.h>
+#include "../tool/resource_manager.h"
+#endif
+//#include "../graphic/graphism.h"
 #include "../team/teams_list.h" // ActiveCharacter()
 #include "../game/time.h"
 #include "../game/game_loop.h"
+#include "../object/physical_obj.h"
+#include "../include/app.h"
+#include "../tool/Point.h"
+#ifndef CL
+#include "../map/camera.h"
+#endif
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -63,10 +73,18 @@ void CurseurVer::Draw()
   if (obj_designe -> IsGhost()) return;
 
   // Dessine le curseur autour du ver
+#ifdef CL
   CL_Point centre = obj_designe -> GetCenter();
-  uint x = centre.x - image.get_width()/2;
-  uint y = centre.y - (image.get_height()/2 + y_mouvement);
-  image.draw (x, y);
+#else
+  Point2i centre = obj_designe->GetCenter();
+#endif
+  uint x = centre.x - image->GetWidth()/2;
+  uint y = centre.y - image->GetHeight()/2 + y_mouvement;
+#ifdef CL
+   image.draw (x, y);
+#else
+   image->Blit( app.sdlwindow, x-camera.GetX(), y-camera.GetY()); 
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -144,8 +162,13 @@ void CurseurVer::Cache()
 
 void CurseurVer::Init()
 {
+#ifdef CL
   CL_ResourceManager *res=graphisme.LitRes();
   image = CL_Sprite("gfx/curseur", res);
+#else
+   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+   image = resource_manager.LoadSprite( res, "gfx/curseur");
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -173,7 +196,11 @@ void CurseurVer::SuitVerActif()
   temps = Wormux::temps.Lit();
   clignote = true;
   nbr_boucle = NBR_BOUCLE_FLECHE;
+#ifdef CL
   image.set_frame (1);
+#else
+   image->SetCurrentFrame(1);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -201,11 +228,20 @@ void CurseurVer::PointeObj (PhysicalObj *obj)
   nbr_boucle = NBR_BOUCLE_FLECHE;
 
   const Character* character = dynamic_cast<const Character*> (obj_designe);
-  if (game_loop.character_already_chosen
+
+#ifdef CL
+   if (game_loop.character_already_chosen
       || ((character != NULL) && (&character -> GetTeam() != &ActiveTeam())))
     image.set_frame (2);
   else
     image.set_frame (0);
+#else
+   if (game_loop.character_already_chosen
+      || ((character != NULL) && (&character -> GetTeam() != &ActiveTeam())))
+    image->SetCurrentFrame (2);
+  else
+    image->SetCurrentFrame (0);
+#endif
 }
 
 //-----------------------------------------------------------------------------

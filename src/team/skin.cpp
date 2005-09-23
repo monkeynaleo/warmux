@@ -33,7 +33,11 @@
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include "../tool/string_tools.h"
-
+#ifndef CL
+#include "../tool/sprite.h"
+#include "../tool/resource_manager.h"
+#endif
+#include <iostream>
 #ifndef WIN32
 #include <dirent.h>
 #include <sys/stat.h>
@@ -51,13 +55,21 @@ CfgSkin::CfgSkin() { Reset(); }
 CfgSkin::~CfgSkin() { Reset(); }
 void CfgSkin::Reset()
 {
+#ifdef CL
   image = CL_Sprite(); // NULL sprite
+#else
+  image = new Sprite();
+#endif 
   test_bottom = 0;
   test_top = 0;
   test_dx = 0;
 }
 //-----------------------------------------------------------------------------
-CfgSkin_Walking::CfgSkin_Walking() { Reset(); }
+CfgSkin_Walking::CfgSkin_Walking() 
+{ 
+   Reset(); 
+}
+
 void CfgSkin_Walking::Reset()
 {
   CfgSkin::Reset();
@@ -100,17 +112,31 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
 
     // Load XML file
     nomfich = repertoire+"config.xml";
-    CL_ResourceManager res(nomfich, false);
-    if (!doc.Charge (nomfich)) return false;
 
+#ifdef CL
+     CL_ResourceManager res(nomfich, false);
+#else
+     Profile *res = resource_manager.LoadXMLProfile( nomfich);
+#endif
+    
+     if (!doc.Charge (nomfich)) {
+       return false;
+    }
+    
     LoadManySkins(doc.racine(),res);
 
     // <animation>
     anim.utilise = 
       (LitDocXml::Access (doc.racine(), "sprite", "animation") != NULL);
     if (anim.utilise) {
+#ifdef CL
       anim.image = CL_Sprite("animation", &res);
       anim.image.set_play_loop (false);
+#else
+      anim.image = resource_manager.LoadSprite( res, "animation");
+      anim.image->Start();
+       
+#endif
     }
   }
   catch (const xmlpp::exception &e)
@@ -125,7 +151,11 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Skin::LoadManySkins(xmlpp::Element *root, CL_ResourceManager &res) {
+#else
+void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {   
+#endif
   many_skins.clear();
 
   xmlpp::Node::NodeList nodes = root -> get_children("sprite");
@@ -138,16 +168,23 @@ void Skin::LoadManySkins(xmlpp::Element *root, CL_ResourceManager &res) {
     assert (elem != NULL);
 
     std::string skin_name;
-    if (!LitDocXml::LitAttrString(elem, "name", skin_name)) continue;
-    if (skin_name=="animation") continue;
-
+    if (!LitDocXml::LitAttrString(elem, "name", skin_name)) {
+       continue;
+    }
+    if (skin_name=="animation") {
+       continue;
+    }
     xmlpp::Node::NodeList nodes = elem -> get_children("hand");
     if(nodes.end()==nodes.begin())
     {
       CfgSkin config;
       xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
       Xml_LitRectTest(xml_config,config);
+#ifdef CL
       config.image = CL_Sprite(skin_name, &res);
+#else
+      config.image = resource_manager.LoadSprite( res, skin_name); 
+#endif
       many_skins.insert(paire_skin(skin_name,config));
     }
     else
@@ -155,8 +192,13 @@ void Skin::LoadManySkins(xmlpp::Element *root, CL_ResourceManager &res) {
       CfgSkin_Walking config;
       xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
       Xml_LitRectTest(xml_config,config);
+#ifdef CL
       config.image = CL_Sprite(skin_name, &res);
+#else
+      config.image = resource_manager.LoadSprite( res, skin_name);
+#endif       
       GetXmlConfig(xml_config,config);
+
       many_walking_skins.insert(paire_walking_skin(skin_name,config));
     }
   }
@@ -178,7 +220,11 @@ void Skin::Xml_LitRectTest (xmlpp::Element *elem, CfgSkin &img)
 //-----------------------------------------------------------------------------
 
 void Skin::Xml_ReadHandPosition(xmlpp::Element *root, CfgSkin_Walking &config) {
+#ifdef CL
   int n = config.image.get_frame_count();
+#else
+  int n = config.image->GetFrameCount();
+#endif 
   skin_translate_t pos = {0,0};
   config.hand_position.clear();
   config.hand_position.assign (n, pos);
@@ -265,11 +311,16 @@ void LoadOneSkin (const std::string &dir, const std::string &file)
 void InitSkins()
 {  
   std::cout << "o " << _("Load skins:");
-
+  std::cout.flush();
+   
 #ifndef WIN32
   struct dirent *file;
 
   std::string dirname = config.data_dir+"skin/";
+   
+  std::cout << "looking in the directory : " << dirname << std::endl;
+  std::cout.flush();
+  
   DIR *dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL)
@@ -298,7 +349,7 @@ void InitSkins()
   }
   FindClose(file_search);
 #endif
-
+   
 #ifndef WIN32
   dirname = config.GetWormuxPersonalDir()+"skin/";
   dir = opendir(dirname.c_str());
@@ -308,7 +359,7 @@ void InitSkins()
     closedir (dir);
   }
 #endif
-  std::cout << std::endl << std::endl;
+  std::cout << "done!" << std::endl;
 }
 
 //-----------------------------------------------------------------------------

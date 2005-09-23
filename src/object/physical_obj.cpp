@@ -31,13 +31,20 @@
 #include "../map/map.h"
 #include "../game/config.h"
 #include "../tool/math_tools.h"
-#include "../tool/geometry_tools.h"
-#include "../game/game_mode.h"
+#ifdef CL
+# include "../tool/geometry_tools.h"
+#else
+#include "../tool/Point.h"
+#include "../tool/Rectangle.h"
+#include "../tool/Distance.h"
+#endif
+//# include "../game/game_mode.h"
 #include "../game/time.h"
-#include "../map/water.h"
-#include "../sound/jukebox.h"
-#include "../weapon/ninja_rope.h"
-#include "../map/wind.h"
+//#include "../map/water.h"
+#include "../sound/jukebox.h" //TODO remove this
+//#include "../weapon/ninja_rope.h"
+//#include "../map/wind.h"
+#include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -58,11 +65,17 @@ const int WATER_RESIST_FACTOR = 6 ;
 
 const double PIXEL_PER_METER = 40 ;
 
+#ifdef CL
 double MeterDistance (const CL_Point &p1, const CL_Point &p2)
 {
   return Distance(p1, p2) / PIXEL_PER_METER ;
 }
-
+#else
+double MeterDistance (const Point2i &p1, const Point2i &p2)
+{
+  return Distance(p1, p2) / PIXEL_PER_METER ;
+}
+#endif
 //-----------------------------------------------------------------------------
 
 PhysicalObj::PhysicalObj (const std::string &name, double mass)
@@ -126,10 +139,17 @@ void PhysicalObj::SetXY (int x, int y)
     }
 }
 
+#ifdef CL
 const CL_Point PhysicalObj::GetPos() const 
 { 
   return CL_Point(GetX(), GetY()); 
 }
+#else
+const Point2i PhysicalObj::GetPos() const 
+{ 
+  return Point2i(GetX(), GetY()); 
+}
+#endif
 
 int PhysicalObj::GetX() const
 {
@@ -153,11 +173,17 @@ int PhysicalObj::GetCenterY() const
   return GetY() +m_test_top +GetTestHeight()/2;
 }
 
+#ifdef CL
 const CL_Point PhysicalObj::GetCenter() const 
 {
   return CL_Point(GetCenterX(), GetCenterY());
 }
-
+#else
+const Point2i PhysicalObj::GetCenter() const 
+{
+  return Point2i(GetCenterX(), GetCenterY());
+}
+#endif
 //-----------------------------------------------------------------------------
 
 void PhysicalObj::SetSize (uint width, uint height) 
@@ -206,15 +232,22 @@ int PhysicalObj::GetTestHeight() const
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 const CL_Rect PhysicalObj::GetRect() const 
 { 
   const int x = GetX();
   const int y = GetY();
   return CL_Rect(x, y, x+m_width, y+m_height);
 }
-
+#else
+const Rectanglei PhysicalObj::GetRect() const 
+{ 
+  return Rectanglei( GetX(), GetX(), m_width, m_height);
+}
+#endif
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 const CL_Rect PhysicalObj::GetTestRect() const 
 { 
   const int x = GetX();
@@ -225,8 +258,18 @@ const CL_Rect PhysicalObj::GetTestRect() const
     x +m_width  -m_test_right, 
     y +m_height -m_test_bottom);  
 }
+#else
+const Rectanglei PhysicalObj::GetTestRect() const 
+{ 
+  return Rectanglei( GetX()+m_test_left,       
+		     GetY()+m_test_top, 
+		     m_width-m_test_right-m_test_left, 
+		     m_height-m_test_bottom-m_test_top);  
+}
+#endif
 
 //-----------------------------------------------------------------------------
+
 
 // Move to a point with collision test
 // Return true if collision occured
@@ -251,7 +294,8 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
   new_y *= PIXEL_PER_METER ;
 
   // Compute distance between old and new position.
-  double lg = Distance (old_x, old_y, new_x, new_y);
+
+  double lg = Distance ( Point2d(old_x, old_y), Point2d(new_x, new_y));
 
   if (lg == 0)
     return false ;
@@ -333,12 +377,22 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
     lg -= 1.0 ;    
   } while (0 < lg);
 
-  if (ninjarope.IsActive())
+#ifdef CL
+   if (ninjarope.IsActive())
     ninjarope.NotifyMove(collision) ;
-
+#endif
+   
   return collision;
 }
-
+/*#else
+bool PhysicalObj::NotifyMove(double old_x, double old_y,
+			     double new_x, double new_y,
+			     double &contact_x, double &contact_y,
+			     double &contact_angle)
+{
+    return false;
+}
+#endif // TODO*/
 //-----------------------------------------------------------------------------
 
 void PhysicalObj::UpdatePosition ()
@@ -451,8 +505,12 @@ bool PhysicalObj::IsDrowned() const
 
 void PhysicalObj::SignalRebound()
 {
-  if (!m_rebound_sound.empty())
-    jukebox.Play(m_rebound_sound) ;
+#ifdef CL
+   if (!m_rebound_sound.empty())
+   jukebox.Play(m_rebound_sound) ;
+#else
+  // TODO   
+#endif
 }
 
 
@@ -505,6 +563,7 @@ bool PhysicalObj::IsInVacuumXY (int x, int y) const
   
   if (FootsOnFloor(y-1)) return false;
 
+#ifdef CL
   CL_Rect rect(
     x +m_test_left,       
 	y +m_test_top, 
@@ -515,6 +574,14 @@ bool PhysicalObj::IsInVacuumXY (int x, int y) const
     if ((0<=rect.bottom) && (rect.top<0)) rect.top = 0;
   }
   return monde.RectEstDansVide (rect);
+#else
+  Rectanglei rect( x+m_test_left,y+m_test_top, m_width-m_test_right-m_test_left, m_height-m_test_bottom-m_test_top/*-1*/);
+//  if (m_allow_negative_y)
+//   {
+//    if ((0<=rect.bottom) && (rect.top<0)) rect.top = 0;
+//  }
+  return monde.RectEstDansVide (rect);
+#endif   
 }
 
 //-----------------------------------------------------------------------------
@@ -528,12 +595,20 @@ bool PhysicalObj::FootsInVacuum() const
 
 bool PhysicalObj::FootsInVacuumXY(int x, int y) const
 {
-  if (IsOutsideWorldXY(x,y)) return config.exterieur_monde_vide;
+  if (IsOutsideWorldXY(x,y)) 
+     {
+	std::cout << "physicalobk.cpp:597: physobj is outside the world" << std::endl;
+	return config.exterieur_monde_vide;
+     }
+   
+  if (FootsOnFloor(y)) {
+     std::cout << "physobj is on floor" << std::endl; 
+     return false;
+  }
+   
+  int y_test = y + m_height - m_test_bottom/*-1*/;
 
-  if (FootsOnFloor(y)) return false;
- 
-  int y_test = y +m_height -m_test_bottom/*-1*/;
-
+#ifdef CL
   CL_Rect rect(
     x +m_test_left,       
     y_test,
@@ -545,6 +620,30 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
   }
 
   return monde.RectEstDansVide (rect);
+#else
+  Rectanglei rect( x+m_test_left, y_test, m_width-m_test_right-m_test_left, 1);
+  if (m_allow_negative_y)
+  {
+    if ( rect.y < 0 ) 
+       {
+	  int b = rect.y + rect.h;
+	  rect.y = 0;
+	  rect.h = ( b > 0 ) ? b - rect.y : 0;
+       }
+  }
+   
+/*  if ( monde.RectEstDansVide (Rectanglei(rect)))
+     {
+	std::cout << "physicalobk.cpp:629: physobj " << rect.x << " " << rect.y <<" (" << rect.w << "," << rect.h <<") dans le vide" << std::endl;
+     }
+   else
+     {
+	std::cout << "physicalobk.cpp:629: physobj " << rect.x << " " << rect.y <<" EST POSE" << std::endl;	
+     }*/
+   
+  return monde.RectEstDansVide (rect);
+   
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -569,7 +668,10 @@ bool PhysicalObj::CollisionTest (int x, int y)
 void PhysicalObj::DirectFall()
 {
   while (!IsGhost() && !IsInWater() && FootsInVacuum())
-    SetY(GetY()+1);
+   {
+//      std::cout << "DirectFall " << GetX() << " " << GetY() << std::endl;
+      SetY(GetY()+1);
+   }
 }
 
 //-----------------------------------------------------------------------------
@@ -579,7 +681,11 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact en bas de l'objet:
   for (uint x=GetX()+ m_test_left; x<=(GetX()+m_width)-m_test_right; x++)
   {
+#ifdef CL
     if(!monde.EstHorsMonde(CL_Point(x,(GetY()+m_height-m_test_bottom))))
+#else
+    if(!monde.EstHorsMonde(Point2i(x,(GetY()+m_height-m_test_bottom))))       
+#endif
     if(!monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)+1)
     &&( monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom))
     ||  monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)+2)))
@@ -592,7 +698,11 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact à gauche de l'objet:
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
+#ifdef CL
     if(!monde.EstHorsMonde(CL_Point(GetX()+m_test_left-1,y)))
+#else
+    if(!monde.EstHorsMonde(Point2i(GetX()+m_test_left-1,y)))
+#endif
     if(!monde.terrain.EstDansVide(GetX()+m_test_left-1,y)
     &&( monde.terrain.EstDansVide(GetX()+m_test_left,y)
     ||  monde.terrain.EstDansVide(GetX()+m_test_left-2,y)))
@@ -605,7 +715,11 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact à droite de l'objet:
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
+#ifdef CL
     if(!monde.EstHorsMonde(CL_Point((GetX()+m_width-m_test_right)+1,y)))
+#else
+    if(!monde.EstHorsMonde(Point2i((GetX()+m_width-m_test_right)+1,y)))
+#endif
     if(!monde.terrain.EstDansVide((GetX()+m_width-m_test_right)+1,y)
     &&( monde.terrain.EstDansVide((GetX()+m_width-m_test_right)+2,y)
     ||  monde.terrain.EstDansVide((GetX()+m_width-m_test_right),y)))
@@ -618,7 +732,11 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact en haut de l'objet:
   for(uint x=GetX()+m_test_left;x<=GetX()+m_width-m_test_right;x++)
   {
+#ifdef CL
     if(!monde.EstHorsMonde(CL_Point(x,GetY()+m_test_top-1)))
+#else
+     if(!monde.EstHorsMonde(Point2i(x,GetY()+m_test_top-1)))
+#endif
     if(!monde.terrain.EstDansVide(x,GetY()+m_test_top-1)
     &&( monde.terrain.EstDansVide(x,GetY()+m_test_top-2)
     ||  monde.terrain.EstDansVide(x,GetY()+m_test_top)))
@@ -633,3 +751,23 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
 
 //-----------------------------------------------------------------------------
 
+#ifndef CL // from tool/geomtry_tool.cpp
+
+// Est-ce que deux objets se touchent ? (utilise les rectangles de test)
+bool ObjTouche (const PhysicalObj &a, const PhysicalObj &b)
+{
+  return Intersect (a.GetTestRect(), b.GetTestRect());
+}
+
+//-----------------------------------------------------------------------------
+
+// Est-ce que le point p touche l'objet a ?
+bool ObjTouche (const PhysicalObj &a, const Point2i &p)
+{
+   Rectanglei _r = a.GetTestRect();
+   Point2i _p = p;
+   
+   return IsInside ( _r, _p);
+}
+
+#endif // CL not defined

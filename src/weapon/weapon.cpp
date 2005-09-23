@@ -28,7 +28,6 @@
 #include "../team/macro.h"
 #include "../team/team.h"
 #include "../tool/i18n.h"
-#include "../tool/geometry_tools.h"
 #include "../tool/math_tools.h"
 #include "../tool/xml_document.h"
 #include "../map/camera.h"
@@ -41,7 +40,15 @@
 #include "../game/game_loop.h"
 #include "weapon_tools.h"
 #include "../graphic/video.h"
-
+#ifdef CL
+#include "../tool/geometry_tools.h"
+#else
+#include "../tool/Point.h"
+#include "../tool/Distance.h"
+#include "../include/app.h"
+#include "../tool/resource_manager.h"
+#include "../map/camera.h"
+#endif
 #include <iostream>
 #include <sstream>
 
@@ -82,7 +89,11 @@ WeaponProjectile::WeaponProjectile (const std::string &name)
 
 void WeaponProjectile::PrepareTir()
 {
+#ifdef CL
   SetSize (image.get_width(), image.get_height());
+#else
+  SetSize (image->GetWidth(), image->GetHeight());
+#endif
   Ready();
   camera.ChangeObjSuivi (this, true, false);
   is_active = true;
@@ -113,14 +124,24 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
 
   if (!touche_ver_objet) return false;
 
+#ifdef CL
   CL_Rect test = GetTestRect();
   MoveRect (test, dx, dy);
-
+#else
+   Rectanglei test = GetTestRect();
+   test.x += dx;
+   test.y += dy;
+#endif
+   
   POUR_TOUS_VERS_VIVANTS(equipe,ver)
   if (&(*ver) != &ActiveCharacter())
   {
+#ifdef CL
     if (RectTouche(ver -> GetTestRect(), test)) 
-    {
+#else
+    if (Intersect(ver -> GetTestRect(), test))
+#endif
+       {
       dernier_ver_touche = &(*ver);
 #ifdef DEBUG_MSG_COLLISION
       COUT_DBG << "On a touché le ver : " << ver -> m_name << std::endl;
@@ -132,8 +153,12 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
   POUR_CHAQUE_OBJET(objet)
   if (objet -> ptr != this)
   {
+#ifdef CL
     if (RectTouche(objet -> ptr -> GetTestRect(), test)) 
-    {
+#else
+    if (Intersect(objet -> ptr -> GetTestRect(), test))
+#endif
+      {
       dernier_obj_touche = objet -> ptr;
 #ifdef DEBUG_MSG_COLLISION
       COUT_DBG << "On a touché un objet : " 
@@ -160,9 +185,14 @@ void WeaponProjectile::Refresh()
 void WeaponProjectile::Draw()
 {
   if (!is_active) return;
+
+#ifdef CL
   image.draw (GetX(), GetY());
 #if defined(DEBUG_CADRE_TEST)
   CL_Display::draw_rect (GetTestRect(), CL_Color::red);
+#endif
+#else
+  image->Blit( app.sdlwindow, GetX()-camera.GetX(), GetY()-camera.GetY());   
 #endif
 }
 
@@ -209,17 +239,35 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
   m_visibility = ALWAYS_VISIBLE;
   m_unit_visibility = ALWAYS_VISIBLE;
   extra_params = NULL;
+   
+#ifndef CL
+   m_image = NULL;
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void Weapon::Init ()
 {
+#ifdef CL
   if (m_visibility != NEVER_VISIBLE)
     m_image = CL_Surface(m_id, &graphisme.weapons);
+  
+   icone = CL_Surface(m_id+"_ico", &graphisme.weapons);
+#else
+   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+ 
+   if (m_visibility != NEVER_VISIBLE)
+   m_image = resource_manager.LoadImage(res, m_id);
+   else
+     std::cout << "WEAPON NEVER VISIBLE" << std::endl;
+     
+   icone = resource_manager.LoadImage(res,m_id+"_ico");
+   
+ //  delete res;
 
-  icone = CL_Surface(m_id+"_ico", &graphisme.weapons);
-
+#endif
+   
   p_Init();
 }
 
@@ -252,7 +300,11 @@ void Weapon::Select()
   double val = ActiveCharacter().previous_strength;
   weapon_strength_bar.Reset_Marqueur();
   if (0 < val && val < max_strength)
-    weapon_strength_bar.AjouteMarqueur (uint(val*100), CL_Color::red);
+#ifdef CL
+     weapon_strength_bar.AjouteMarqueur (uint(val*100), CL_Color::red);
+#else
+   ; // TODO
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -350,7 +402,11 @@ void Weapon::PosXY (int &x, int &y) const
   }
 
   if(min_angle!=max_angle && ActiveCharacter().GetDirection()==-1)
+#ifdef CL
     x -= m_image.get_width();
+#else
+    x -= m_image->w;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -359,8 +415,13 @@ void Weapon::PosXY (int &x, int &y) const
 void Weapon::RotationPointXY (int &x, int &y) const
 {
   PosXY(x,y);
+#ifdef CL
   x += m_image.get_width()/2;
   y += m_image.get_height()/2;
+#else
+  x += m_image->w/2;
+  y += m_image->h/2;
+#endif
 }
 
 
@@ -456,7 +517,12 @@ void Weapon::InitLoading()
   // no loading for weapon with max_strength = 0
   if (max_strength == 0) return ;
 
+#ifdef CL
   jukebox.Play("weapon/load");
+#else
+  // TODO
+#endif
+   
   curseur_ver.Cache();
 
   m_first_time_loading = Wormux::temps.Lit();
@@ -471,7 +537,11 @@ void Weapon::InitLoading()
 void Weapon::StopLoading()
 {
   m_first_time_loading = 0 ;
-  jukebox.Stop("weapon/load");
+#ifdef CL
+   jukebox.Stop("weapon/load");
+#else
+   // TODO
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -480,6 +550,8 @@ void Weapon::DrawWeaponBox()
 {
   int c_x;
   int c_y;
+
+#ifdef CL
 
   c_x = camera.GetX() + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
   c_y = camera.GetY() + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
@@ -493,6 +565,18 @@ void Weapon::DrawWeaponBox()
 
   icon.draw((int)(c_x - 0.5 * WEAPON_ICO_WIDTH),
 	    (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT));
+#else
+
+  c_x =  + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
+  c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
+
+  SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH),(int)(c_y - 0.5 * BUTTON_ICO_HEIGHT), interface.weapon_box_button->w, interface.weapon_box_button->h};	
+  SDL_BlitSurface( interface.weapon_box_button, NULL, app.sdlwindow, &dest);
+
+  SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT),icone->w,icone->h};	   
+  SDL_BlitSurface( icone, NULL, app.sdlwindow, &dr2);
+   
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -512,7 +596,7 @@ void Weapon::Draw()
 	  DrawUnit(ActiveTeam().ReadNbUnits());
     }
 
-  //  DrawWeaponBox();
+  DrawWeaponBox();
 
   // show strength_bar if necessay
   if (max_strength != 0 && IsReady() && !m_is_active)
@@ -549,11 +633,23 @@ void Weapon::Draw()
 
   // rotate weapon if necessary
   if (min_angle != max_angle) {
+#ifdef CL
     m_image.set_rotation_hotspot (origin_center);
     m_image.set_angle (ActiveTeam().crosshair.GetAngle());
     m_image.set_scale(1, ActiveCharacter().GetDirection());
+#else
+    // TODO
+    //m_image.set_rotation_hotspot (origin_center);
+    //m_image.set_angle (ActiveTeam().crosshair.GetAngle());
+    //m_image->Scale(1, ActiveCharacter().GetDirection());
+#endif
   } else {
+#ifdef CL
     m_image.set_scale(ActiveCharacter().GetDirection(), 1);
+#else
+    //TODO
+    //m_image->Scale(ActiveCharacter().GetDirection(), 1);
+#endif
   }
 
   // Calculate position of the image
@@ -561,19 +657,45 @@ void Weapon::Draw()
   switch (position.origin) 
   {
   case weapon_origin_OVER:
+#ifdef CL
     x = ActiveCharacter().GetCenterX()-m_image.get_width()/2+position.dx;
     y = ActiveCharacter().GetY()-m_image.get_height()+position.dy;
+#else
+    x = ActiveCharacter().GetCenterX()-m_image->w/2+position.dx;
+    y = ActiveCharacter().GetY()-m_image->h+position.dy;
+#endif
     if(ActiveCharacter().GetDirection() == -1)
+#ifdef CL
       x += m_image.get_width();
-    break;
+#else
+      x += m_image->w;
+#endif
+     break;
   case weapon_origin_HAND:
     PosXY (x, y);
     if(min_angle!=max_angle && ActiveCharacter().GetDirection()==-1)
+#ifdef CL
       y += m_image.get_height();
-    break;
+#else
+      y += m_image->h;
+#endif
+     break;
   }
+#ifdef CL
   m_image.draw (x,y);
-
+#else
+  if ( m_image )
+     {
+	SDL_Rect dest = { x-camera.GetX(), y-camera.GetY(), m_image->w, m_image->h};
+	SDL_BlitSurface( m_image, NULL, app.sdlwindow, &dest);
+     }
+   else
+     {
+	std::cout << "Ne peut clitter weapon -> NULL" << std::endl;
+     }
+   
+#endif
+   
 #if defined(DEBUG_CADRE_TEST)
   CL_Display::draw_rect (CL_Rect(x,y,
 				 x+m_image.get_width(), 
@@ -586,20 +708,28 @@ void Weapon::Draw()
 
 void Weapon::DrawUnit(int unit)
 {
+#ifdef CL
   CL_Color color;
-  CL_Rect rect ;
+  CL_Rect rect;
+#else
+  SDL_Color color;
+  Rectanglei rect;
+#endif
+
   std::ostringstream ss;
 
   ss << unit;
+
+#ifdef CL
 
   rect.left   = ActiveCharacter().GetCenterX() - UNIT_BOX_WIDTH/2 ;
   rect.right  = ActiveCharacter().GetCenterX() + UNIT_BOX_WIDTH/2 ;
   rect.top    = ActiveCharacter().GetY() - UNIT_BOX_HEIGHT - UNIT_BOX_GAP;
   rect.bottom = ActiveCharacter().GetY() - UNIT_BOX_GAP;
-
+   
   color.set_color(80, 80, 159, 206);
   CL_Display::fill_rect(rect, color);
-
+  
   color.set_color(49, 32, 122, 255);
   CL_Display::draw_rect(rect, color);
   rect.left++;
@@ -612,6 +742,31 @@ void Weapon::DrawUnit(int unit)
 	      ActiveCharacter().GetCenterX(),
 	      ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP,
 	      ss.str());
+#else
+
+  rect.x = ActiveCharacter().GetCenterX() - UNIT_BOX_WIDTH/2 ;
+  rect.w = UNIT_BOX_WIDTH ;
+  rect.y = ActiveCharacter().GetY() - UNIT_BOX_HEIGHT - UNIT_BOX_GAP;
+  rect.h = UNIT_BOX_HEIGHT;
+   
+/*
+  color.set_color(80, 80, 159, 206);
+  CL_Display::fill_rect(rect, color);
+  
+  color.set_color(49, 32, 122, 255);
+  CL_Display::draw_rect(rect, color);
+  rect.left++;
+  rect.right--;
+  rect.top++;
+  rect.bottom--;
+  CL_Display::draw_rect(rect, color);
+
+  police_mix.WriteCenter (
+	      ActiveCharacter().GetCenterX(),
+	      ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP,
+	      ss.str());
+*/
+#endif
 }
 
 //-----------------------------------------------------------------------------

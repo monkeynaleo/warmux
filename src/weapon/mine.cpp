@@ -28,12 +28,19 @@
 #include "../team/macro.h"
 #include "../game/time.h"
 #include "../interface/game_msg.h"
-#include "../tool/geometry_tools.h"
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"
 #include "../game/game_loop.h"
 #include "../tool/random.h"
 #include "../weapon/weapon_tools.h"
+#ifdef CL
+#include "../tool/geometry_tools.h"
+#else
+#include "../tool/sprite.h"
+#include "../tool/resource_manager.h"
+#include "../include/app.h"
+#endif
+
 #include <sstream>
 //-----------------------------------------------------------------------------
 namespace Wormux {
@@ -70,7 +77,10 @@ ObjMine::ObjMine() : PhysicalObj("mine", 0.0)
 
 void ObjMine::Init()
 {
-  detection = CL_Sprite("mine_anim", &graphisme.weapons);
+
+#ifdef CL
+
+   detection = CL_Sprite("mine_anim", &graphisme.weapons);
 
   SetSize (detection.get_width(), detection.get_height());
 
@@ -79,6 +89,20 @@ void ObjMine::Init()
   
   explosion = CL_Sprite("explosion", &graphisme.weapons);
 
+#else
+
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+ 
+  detection = resource_manager.LoadSprite(res,"mine_anim");
+  SetSize (detection->GetWidth(), detection->GetHeight());
+
+  impact = resource_manager.LoadImage(res,"mine_impact");
+  SetMass (mine.cfg().mass);
+  
+  explosion = resource_manager.LoadSprite(res,"explosion");
+   
+#endif
+   
   armer = temps.Lit() + mine.cfg().temps_fuite;
   depart = uint(temps.Lit() + DEPART_FONCTIONNEMENT * 1000);
 }
@@ -91,8 +115,12 @@ void ObjMine::Reset()
   animation = false;
   ver_declancheur = NULL;
 
+#ifdef CL
   detection.set_frame(0);
-
+#else
+  detection->SetCurrentFrame(0);
+#endif
+   
   uint bcl=0;
   uint x = RandomLong(0, monde.GetWidth() - GetWidth()), y;
   bool ok;
@@ -140,8 +168,12 @@ void ObjMine::Draw()
 { 
   if (!affiche) return;
 
-  detection.draw (GetX(), GetY());
-    
+#ifdef CL
+   detection.draw (GetX(), GetY());
+#else
+   detection->Blit( app.sdlwindow, GetX(), GetY());
+#endif
+   
 #if defined(DEBUG_CADRE_TEST)
   CL_Display::draw_rect (LitRectTest(), CL_Color::red);
 #endif  
@@ -166,7 +198,11 @@ void ObjMine::Explosion ()
   COUT_DBG << "Explosion()" << std::endl;
 #endif
   affiche = false;
+#ifdef CL
   CL_Point centre = GetCenter();	
+#else
+   Point2i centre = GetCenter();
+#endif
   AppliqueExplosion (centre, centre, impact, mine.cfg(), NULL);
   if (ver_declancheur == &ActiveCharacter()) game_loop.interaction_enabled = false;
   DesactiveDetection();
@@ -190,7 +226,11 @@ void ObjMine::ActiveDetection()
 #ifdef DBG_DETECTION
     COUT_DBG << "IsReady() : " << IsReady() << std::endl;
 #endif
-    jukebox.Play("weapon/mine_beep", true);    
+#ifdef CL
+     jukebox.Play("weapon/mine_beep", true);    
+#else
+//TODO
+#endif
   }
 }
 
@@ -206,7 +246,11 @@ void ObjMine::DesactiveDetection()
     animation = false;
     m_ready = true;
 
-    detection.set_frame(0);
+#ifdef CL
+     detection.set_frame(0);
+#else
+     detection->SetCurrentFrame(0);
+#endif
   }
 }
 
@@ -237,19 +281,31 @@ void ObjMine::Refresh()
 
   if (!affiche)
   {
+#ifdef CL
     jukebox.Stop("weapon/mine_beep");
-    Ghost ();
+#else
+     // TODO
+#endif
+     Ghost ();
     return;
   }
 
   if (!animation) Detection();
 
   if (animation) {
-    detection.update();
-    if (attente < temps.Lit())
+#ifdef CL
+     detection.update();
+#else
+     detection->Update();
+#endif
+     if (attente < temps.Lit())
     {
+#ifdef CL
       jukebox.Stop("weapon/mine_beep");
-      if (non_defectueuse)
+#else
+       // TODO
+#endif
+       if (non_defectueuse)
       {
         Explosion ();
       }

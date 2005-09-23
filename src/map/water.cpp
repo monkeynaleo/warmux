@@ -23,8 +23,14 @@
 //-----------------------------------------------------------------------------
 #include "../game/time.h"
 #include "map.h"
-#include "../graphic/graphism.h"
 #include "maps_list.h"
+#ifdef CL
+#include "../graphic/graphism.h"
+#else
+#include <SDL.h>
+#include "../tool/resource_manager.h"
+#include "../include/app.h"
+#endif
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -46,7 +52,11 @@ const float b = 1.0;
 
 void Water::Init()
 { 
-  surface = new CL_Surface("gfx/water", graphisme.LitRes());
+#ifdef CL
+   surface = new CL_Surface("gfx/water", graphisme.LitRes());
+#else
+   surface = resource_manager.LoadImage("water.png");
+#endif
   shift1 = 0;
 }
 
@@ -105,13 +115,13 @@ void Water::Refresh()
   {
     temps_eau = Wormux::temps.Lit();
     vague += WAVE_STEP;
-    if (surface->get_width() <= vague) vague=0;
+    if (surface->w <= vague) vague=0;
   }
 
-  int x = -surface->get_width()+vague;
+  int x = -surface->w+vague;
   int y = monde.GetHeight()-(hauteur_eau + height_mvt);
 
-  double decree = (double) 2*PI/360;
+  double decree = (double) 2*M_PI/360;
 
   double angle1 = 0;
   double angle2 = shift1;
@@ -140,9 +150,14 @@ void Water::Draw()
 {
   if (!actif) return;
   for(uint x=0; x<monde.GetWidth(); x++)
-  for(uint y=height.at(x); y<monde.GetHeight(); y+=surface->get_height())
+  for(uint y=height.at(x); y<monde.GetHeight(); y+=surface->h)
   {
-    surface->draw (x, y);
+#ifdef CL     
+     surface->draw (x, y);
+#else
+     SDL_Rect dest_rect = {x,y,surface->w,surface->h};
+     SDL_BlitSurface( surface, NULL, app.sdlwindow, &dest_rect);
+#endif
   }
 }
 

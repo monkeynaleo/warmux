@@ -57,6 +57,7 @@ void WeaponsList::InitAndAddToList(Weapon* arme, uint num_sort)
 
 void WeaponsList::Init()
 {
+/*
   InitAndAddToList(&bazooka, 1);
   InitAndAddToList(&auto_bazooka, 1);
   InitAndAddToList(&lance_grenade, 1);
@@ -65,9 +66,9 @@ void WeaponsList::Init()
   InitAndAddToList(&gun, 2);
   InitAndAddToList(&uzi, 2);
   InitAndAddToList(&baseball, 2);  
-  InitAndAddToList(&dynamite,3);
-  InitAndAddToList(&mine,3);
-  InitAndAddToList(&air_attack,4);
+*/  InitAndAddToList(&dynamite,3);
+    InitAndAddToList(&mine,3);
+/*  InitAndAddToList(&air_attack,4);
   InitAndAddToList(&tux,4);  
   InitAndAddToList(&gnu_launcher,4);  
   InitAndAddToList(&teleportation,5);
@@ -78,6 +79,7 @@ void WeaponsList::Init()
   InitAndAddToList(&airhammer,5);
   InitAndAddToList(&lowgrav,5);
   InitAndAddToList(&ninjarope,5);
+*/
 }
 
 //-----------------------------------------------------------------------------

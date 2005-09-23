@@ -23,9 +23,14 @@
 #define CURSOR_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#include "../object/physical_obj.h"
+#ifdef CL
 #include <ClanLib/display.h>
+#else
+#endif
 //-----------------------------------------------------------------------------
+
+class PhysicalObj;
+struct Sprite;
 
 class CurseurVer
 {
@@ -43,9 +48,13 @@ private:
   bool monter;
 
 public:
-  CL_Sprite image;
+#ifdef CL
+   CL_Sprite image;
+#else
+   Sprite *image;
+#endif
 
-public:
+ public:
   CurseurVer();
 
   void Init();

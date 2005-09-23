@@ -25,6 +25,8 @@
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
+struct Font;
+
 namespace Wormux
 {
 
@@ -35,7 +37,8 @@ private:
   uint dt_pause;    // Décalage entre get_time() et LitTemps()
   bool mode_pause;  // Le jeu est en pause ?
   double vitesse;   // Vitesse où s'écoule le temps
-
+  Font *big_font;
+   
 public:
   Temps();
   void Reset();

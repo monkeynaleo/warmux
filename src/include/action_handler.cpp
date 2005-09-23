@@ -21,7 +21,9 @@
 
 #include "action_handler.h"
 //-----------------------------------------------------------------------------
-#include "../network/network.h"
+#ifdef CL
+# include "../network/network.h"
+#endif
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
 
@@ -34,7 +36,10 @@
 #endif
 
 //-----------------------------------------------------------------------------
-#include "../network/network.h"
+#ifdef CL
+# include "../network/network.h"
+#endif
+
 #include "../include/constant.h"
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
@@ -138,7 +143,8 @@ void Action_Wind (const Action *a)
 void Action_MoveCharacter (const Action *a)
 {
 	const ActionInt2& ap = dynamic_cast<const ActionInt2&> (*a);
-	if (network.is_server())
+#ifdef CL
+        if (network.is_server())
 	{
 #ifdef DBG_ACT
 	COUT_DBG << ActiveCharacter().m_name << " is " << ActiveCharacter().GetX() << ", " << ActiveCharacter().GetY() << std::endl;
@@ -150,6 +156,7 @@ void Action_MoveCharacter (const Action *a)
 	COUT_DBG << ActiveCharacter().m_name << " move to " << ap.GetValue1() << ", " << ap.GetValue2() << std::endl;
 #endif
 	ActiveCharacter().SetXY (ap.GetValue1(), ap.GetValue2());
+#endif // CL defined
 }
 //-----------------------------------------------------------------------------
 
@@ -167,10 +174,13 @@ void Action_SetMap (const Action *a)
 #ifdef DBG_ACT
 	COUT_DBG << "SetMap : " << action.GetValue() << std::endl;
 #endif
-	if (!network.is_client()) return;
-	lst_terrain.ChangeTerrainNom (action.GetValue());
+   
+#ifdef CL
+        if (!network.is_client()) return;
+        lst_terrain.ChangeTerrainNom (action.GetValue());
 	network.state = Network::NETWORK_WAIT_TEAMS;
 	monde.Reset();
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -180,8 +190,10 @@ void Action_ClearTeams (const Action *a)
 #ifdef DBG_ACT
 	COUT_DBG << "ClearTeams" << std::endl;
 #endif
-	if (!network.is_client()) return;
+#ifdef CL
+        if (!network.is_client()) return;
 	teams_list.Clear();
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -191,8 +203,10 @@ void Action_StartGame (const Action *a)
 #ifdef DBG_ACT
 	COUT_DBG << "StartGame" << std::endl;
 #endif
-	if (!network.is_client()) return;
+#ifdef CL
+        if (!network.is_client()) return;
 	network.state = Network::NETWORK_PLAYING;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -215,10 +229,13 @@ void Action_NewTeam (const Action *a)
 #ifdef DBG_ACT
 	COUT_DBG << "NewTeam : " << action.GetValue() << std::endl;
 #endif
-	if (!network.is_client()) return;
+   
+#ifdef CL
+        if (!network.is_client()) return;
 	teams_list.AddTeam (action.GetValue());
 	teams_list.SetActive (action.GetValue());
 	ActiveTeam().Reset();
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -239,17 +256,20 @@ void Action_ChangeTeam (const Action *a)
 
 void Action_AskVersion (const Action *a)
 {
-	if (!network.is_client()) return;
+#ifdef CL
+        if (!network.is_client()) return;
 	if (network.state != Network::NETWORK_WAIT_SERVER) return;
 	action_handler.NewAction(ActionString(ACTION_SEND_VERSION, VERSION));
 	network.state = Network::NETWORK_WAIT_MAP;
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void Action_SendVersion (const Action *a)
 {
-	if (!network.is_server()) return;
+#ifdef CL
+        if (!network.is_server()) return;
 	const ActionString& action = dynamic_cast<const ActionString&> (*a);
 	if (action.GetValue() != VERSION)
 	{
@@ -257,6 +277,7 @@ void Action_SendVersion (const Action *a)
 			action.GetValue().c_str(), VERSION));
 	}
 	network.state = Network::NETWORK_SERVER_INIT_GAME;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -270,8 +291,10 @@ void Action_SendTeam (const Action *a)
 
 void Action_AskTeam (const Action *a)
 {
-	if (!network.is_client()) return;
+#ifdef CL
+        if (!network.is_client()) return;
 //	action_handler.NewAction(ActionString(ACTION_SEND_TEAM, ???));
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -297,7 +320,9 @@ void ActionHandler::NewAction(const Action &a, bool repeat_to_network)
 #endif
 	Action *clone = a.clone();
 	queue.push_back(clone);
-	if (repeat_to_network) network.send_action(a);
+#ifdef CL
+        if (repeat_to_network) network.send_action(a);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -316,7 +341,8 @@ void ActionHandler::Exec(const Action *a)
 #ifdef DBG_ACT
 	COUT_DBG << "Exec action " << *a << std::endl;
 #endif
-	handler_it it=handler.find(a->GetType());
+
+        handler_it it=handler.find(a->GetType());
 	assert(it != handler.end());
 	(*it->second) (a);
 }

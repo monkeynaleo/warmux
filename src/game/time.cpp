@@ -28,7 +28,11 @@
 #include "../graphic/graphism.h"
 #include "../graphic/font.h"
 
-#include <ClanLib/core.h>
+#ifdef CL
+# include <ClanLib/core.h>
+#else
+#include <SDL.h>
+#endif
 #include <sstream>
 #include <iomanip>
 //-----------------------------------------------------------------------------
@@ -45,14 +49,19 @@ Temps temps;
 
 Temps::Temps()
 {
-  Reset();
+   big_font = NULL;
+   Reset();
 }
 
 //-----------------------------------------------------------------------------
 
 void Temps::Reset()
 {
+#ifdef CL
   dt_pause = CL_System::get_time(); //Needed to have time set to 0, on a reset
+#else
+  dt_pause = SDL_GetTicks();
+#endif
   mode_pause = false;
   ChangeVitesse (1.0, false);
 }
@@ -74,7 +83,11 @@ void Temps::ChangeVitesse (double pvitesse, bool message=false)
 
 uint Temps::Lit() const
 { 
+#ifdef CL
   double t = CL_System::get_time() - dt_pause;
+#else
+  double t = SDL_GetTicks() - dt_pause;
+#endif
   t *= vitesse;
   FORCE_ASSERT (t < UINT_MAX);
   return (uint)t;
@@ -86,8 +99,12 @@ void Temps::Pause()
 {
   if (mode_pause) return;
   //assert (!mode_pause);
+#ifdef CL
   debut_pause = CL_System::get_time();
-  mode_pause = true;
+#else
+  debut_pause = SDL_GetTicks();
+#endif
+   mode_pause = true;
 }
 
 //-----------------------------------------------------------------------------
@@ -95,8 +112,12 @@ void Temps::Pause()
 void Temps::Reprend()
 {
   assert (mode_pause);
+#ifdef CL
   dt_pause += CL_System::get_time() - debut_pause;
-  mode_pause = false;
+#else
+   dt_pause += SDL_GetTicks() - debut_pause;
+#endif
+   mode_pause = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -127,7 +148,17 @@ void Temps::Draw()
   //if (!affiche) return;
   std::ostringstream ss;
   ss << Horloge_Min() << ":" << std::setfill('0') << std::setw(2) << Horloge_Sec();
-  police_grand.WriteCenterTop (video.GetWidth()/2, 10, ss.str());
+#ifdef CL
+   police_grand.WriteCenterTop (video.GetWidth()/2, 10, ss.str());
+#else
+   if ( big_font == NULL )
+     {
+	big_font = new Font();
+	big_font->Load("../data/font/Vera.ttf", 32);
+     }
+   
+   big_font->WriteCenter( video.GetWidth()/2, 10, ss.str(), white_color); 
+#endif
 }
 
 //-----------------------------------------------------------------------------

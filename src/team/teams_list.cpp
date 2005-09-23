@@ -22,12 +22,15 @@
 #include "teams_list.h"
 //-----------------------------------------------------------------------------
 #include "../include/action_handler.h"
+#ifdef CL
 #include "../network/network.h"
+#endif
 #include "../game/config.h"
 #include "../tool/file_tools.h"
 #include "../tool/i18n.h"
 #include "team_energy.h"
 #include <algorithm>
+#include <iostream>
 
 #ifndef WIN32
 #include <dirent.h>
@@ -46,9 +49,11 @@ void TeamsList::NextTeam (bool debut_jeu)
 {
   // Fin du tour pour l'équipe active
   if (debut_jeu) return;
+#ifdef CL
   if (network.is_client()) return;
   ActiveTeam().FinTour();
-  
+#endif
+   
   // Passe à l'équipe suivante
   std::vector<Team*>::iterator it=m_equipe_active;
   do

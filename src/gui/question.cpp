@@ -22,13 +22,16 @@
 
 #include "question.h"
 //-----------------------------------------------------------------------------
+#ifdef CL
 #include <ClanLib/core.h>
 #include <ClanLib/display.h>
+#include <ClanLib/Core/System/error.h>
+#else
+#include <SDL.h>
+#endif
 #include "../graphic/graphism.h"
 #include "../graphic/video.h"
 using namespace Wormux;
-
-#include <ClanLib/Core/System/error.h>
 
 //-----------------------------------------------------------------------------
 
@@ -37,6 +40,7 @@ Question::Question()
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Question::TraiteClic (const CL_InputEvent &event)
 {
   // Sinon, on utilise le choix par défaut ?
@@ -47,10 +51,13 @@ void Question::TraiteClic (const CL_InputEvent &event)
     return;
   }
 }
-
+#else
+// TODO oder paragui ?
+#endif
 //-----------------------------------------------------------------------------
 
 // Traite une touche du clavier
+#ifdef CL
 void Question::TraiteTouche (const CL_InputEvent &event)
 {
   // Teste les différents choix
@@ -73,9 +80,11 @@ void Question::TraiteTouche (const CL_InputEvent &event)
     return;
   }
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Question::Draw()
 {
   TexteEncadre (police_grand, 
@@ -83,9 +92,23 @@ void Question::Draw()
 		message);
   CL_Display::update(CL_Rect(0,0,CL_Display::get_width(), CL_Display::get_height()));
 }
+#else
+void Question::Draw()
+{
+ /* TexteEncadre (police_grand, 
+		video.GetWidth()/2, video.GetHeight()/2,
+		message);
+  CL_Display::update(CL_Rect(0,0,CL_Display::get_width(), CL_Display::get_height()));*/
+   
+   //TODO
+}
+
+#endif
 
 //-----------------------------------------------------------------------------
 
+
+#ifdef CL
 int Question::PoseQuestion ()
 {
   m_keyboard_slot = CL_Keyboard::sig_key_up().
@@ -107,6 +130,19 @@ int Question::PoseQuestion ()
   CL_Keyboard::sig_key_up().disconnect(m_mouse_slot);
   return reponse;
 }
+
+#else
+
+int Question::PoseQuestion ()
+{
+
+  Draw();
+
+   return reponse;
+}
+
+
+#endif
 
 //-----------------------------------------------------------------------------
 

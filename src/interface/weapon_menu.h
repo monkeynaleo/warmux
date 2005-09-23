@@ -27,8 +27,12 @@
 #include "../team/team.h"
 #include "../weapon/weapon.h"
 #include <vector>
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
 //-----------------------------------------------------------------------------
+
+struct SDL_Surface;
 
 class WeaponMenuItem
 {
@@ -58,12 +62,19 @@ private:
 class WeaponsMenu
 {
 public:
+#ifdef CL
   CL_Surface my_button1 ;
   CL_Surface my_button2 ;
   CL_Surface my_button3 ;
   CL_Surface my_button4 ;
   CL_Surface my_button5 ;
-
+#else
+  SDL_Surface *my_button1;
+  SDL_Surface *my_button2;
+  SDL_Surface *my_button3;
+  SDL_Surface *my_button4;
+  SDL_Surface *my_button5;
+#endif
 private:
   std::vector<WeaponMenuItem> boutons;
   typedef std::vector<WeaponMenuItem>::iterator iterator;
