@@ -26,11 +26,15 @@
 #include "../interface/cursor.h"
 #include "../team/macro.h"
 #include "../graphic/video.h"
+#include "../interface/keyboard.h"
+
+#ifdef CL
 #include "../interface/mouse.h"
+#endif
+
 #include "../graphic/fps.h"
 #include "../map/camera.h"
 #include "../map/map.h"
-#include "../interface/keyboard.h"
 #include "time.h"
 #include "../weapon/weapons_list.h"
 #include "../sound/jukebox.h"
@@ -39,6 +43,8 @@
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include <sstream>
+#include <iostream>
+
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -86,10 +92,16 @@ void Jeu::MsgChargement()
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
 
+#ifdef CL
   CL_Display::clear (CL_Color::black);
   police_grand.WriteCenterTop (video.GetWidth()/2, video.GetHeight()/2, 
 			    _("Load game data..."));
   CL_Display::flip();
+#else
+   
+   std::cout << "Loading game... => Splashscreen is TODO" << std::endl;
+
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -111,8 +123,12 @@ void Jeu::MsgFinPartie()
     }
   }
   if (gagnant_trouve) 
-    jukebox.Play("victory");
-  else
+#ifdef CL
+     jukebox.Play("victory");
+#else
+     jukebox.Play("share","victory");
+#endif
+   else
     txt += _("The game has ended as a draw.");
   std::cout << txt << std::endl;
 
@@ -122,6 +138,7 @@ void Jeu::MsgFinPartie()
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Jeu::SignalWM_QUIT () 
 { 
 #ifdef DEBUG_VERBOSE
@@ -129,24 +146,29 @@ void Jeu::SignalWM_QUIT ()
 #endif
   fin_partie = true; 
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Jeu::SignalPAINT (const CL_Rect &rect) 
 { 
 #ifdef DEBUG_VERBOSE
   COUT_DEBUG << "Signal 'PAINT' intercepté." << endl;
 #endif
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Jeu::SignalRESIZE (int larg, int haut)
 { 
 #ifdef DEBUG_VERBOSE
   COUT_DEBUG << "Signal 'WM_RESIZE' intercepté." << endl;
 #endif
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -168,6 +190,7 @@ void Jeu::LanceJeu()
   bool err=true;
   std::string err_msg;
 
+#ifdef CL
   clavier.InstallePilote();
   mouse.InstallePilote();
 #ifdef PORT_CL07
@@ -175,11 +198,14 @@ void Jeu::LanceJeu()
   slot_paint = CL_DisplayWindow::sig_paint().connect(this, &Jeu::SignalPAINT);
   slot_resize = CL_DisplayWindow::sig_resize().connect(this, &Jeu::SignalRESIZE);
 #endif
-
+#endif
+   
   try
   {
     InitGame ();
 
+    std::cout << "JCTMP Game successfully initialized ! " << std::endl;
+     
     bool fin;
     do
     {
@@ -204,8 +230,12 @@ void Jeu::LanceJeu()
             abort();
           if (!isalpha(key_x)) /* sanity check */
             abort();
-          question.choix.push_back ( Question::choix_t(CL_KEY_A + (int)key_x - 'a', 1) );
-        }
+#ifdef CL
+	   question.choix.push_back ( Question::choix_t(CL_KEY_A + (int)key_x - 'a', 1) );
+#else
+	   //TODO
+#endif
+	}
 	
         fin = (PoseQuestion() == 1);
       } else {
@@ -226,6 +256,7 @@ void Jeu::LanceJeu()
 
   monde.FreeMem();
   jukebox.StopAll();
+#ifdef CL
   clavier.DesinstallePilote();
   mouse.DesinstallePilote();
 #ifdef PORT_CL07
@@ -233,7 +264,8 @@ void Jeu::LanceJeu()
   CL_DisplayWindow::sig_resize().disconnect(slot_resize);
   CL_DisplayWindow::sig_paint().disconnect(slot_paint);
 #endif
-
+#endif
+   
   if (err)
   {
     std::string txt = Format(_("Error:\n%s"), err_msg.c_str());

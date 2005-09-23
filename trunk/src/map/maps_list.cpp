@@ -25,6 +25,7 @@
 #include "map.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
+#include <iostream>
 #ifndef WIN32
 #include <dirent.h>
 #include <sys/stat.h>
@@ -41,7 +42,9 @@ ListeTerrain lst_terrain;
 
 InfoTerrain::InfoTerrain ()
 { 
+#ifdef CL
   res = NULL; 
+#endif
   m_donnees_chargees = false;
   nb_mine = 0;
   wind.nbr_sprite = 0;
@@ -57,7 +60,11 @@ bool InfoTerrain::Init (const std::string &map_name,
 
   m_directory = directory;
 
+#ifdef CL
   res = NULL;
+#else
+  res_profile = NULL;
+#endif
   m_donnees_chargees = false;
 
   try
@@ -66,16 +73,23 @@ bool InfoTerrain::Init (const std::string &map_name,
 
     // Load resources
     if (!FichierExiste(nomfich)) return false;
+#ifdef CL
     res = new CL_ResourceManager(nomfich, false);
-
+#else
+    res_profile = resource_manager.LoadXMLProfile( nomfich), 
+#endif
     // Load preview
+#ifdef CL
     preview = CL_Surface("preview", res);
-
+#else
+    preview = resource_manager.LoadImage( res_profile, "preview");
+#endif
     // Load other informations
     LitDocXml doc;
     if (!doc.Charge (nomfich)) return false;
     if (!TraiteXml (doc.racine())) return false;
   }
+#ifdef CL
   catch (const CL_Error &err)
   {
     std::cout << std::endl
@@ -84,6 +98,9 @@ bool InfoTerrain::Init (const std::string &map_name,
 	      << err.message << std::endl;
     return false;
    }
+#else
+   // TODO
+#endif
   catch (const xmlpp::exception &e)
   {
     std::cout << std::endl
@@ -92,7 +109,7 @@ bool InfoTerrain::Init (const std::string &map_name,
               << e.what() << std::endl;
     return false;
   }
-
+ 
 #ifdef VERBOSE_MAP_LOADING
   DBG_COUT << "Map loaded." << std::endl;
 #endif
@@ -172,15 +189,48 @@ void InfoTerrain::ChargeDonnees()
   DBG_COUT << "Map data loaded." << std::endl;
 #endif
 
+#ifdef CL
   img_terrain = CL_Surface("map", res);
   img_ciel = CL_Surface("sky", res);
+#else
+  img_terrain = resource_manager.LoadImage(res_profile, "map");
+  img_ciel = resource_manager.LoadImage(res_profile,"sky");   
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
-CL_Surface &InfoTerrain::LitImgTerrain() { ChargeDonnees(); return img_terrain; }
-CL_Surface &InfoTerrain::LitImgCiel() { ChargeDonnees(); return img_ciel; }
-bool InfoTerrain::DonneesChargees() const { return m_donnees_chargees; }
+#ifdef CL
+CL_Surface &InfoTerrain::LitImgTerrain() 
+{ 
+  ChargeDonnees(); 
+  return img_terrain;
+}
+
+CL_Surface &InfoTerrain::LitImgCiel() 
+{ 
+  ChargeDonnees(); 
+  return img_ciel;
+}
+
+#else
+SDL_Surface *InfoTerrain::LitImgTerrain() 
+{ 
+  ChargeDonnees(); 
+  return img_terrain;
+}
+
+SDL_Surface *InfoTerrain::LitImgCiel() 
+{ 
+  ChargeDonnees(); 
+  return img_ciel;
+}
+#endif
+
+bool InfoTerrain::DonneesChargees() const 
+{ 
+   return m_donnees_chargees; 
+}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

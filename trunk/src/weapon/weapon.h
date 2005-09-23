@@ -37,6 +37,9 @@
 #include <string>
 //-----------------------------------------------------------------------------
 
+struct SDL_Surface;
+struct Sprite;
+
 // Constante munitions illimitées
 extern const int INFINITE_AMMO;
 
@@ -68,8 +71,11 @@ class WeaponProjectile : public PhysicalObj
 {
 public:
   bool is_active;
+#ifdef CL
   CL_Sprite image;
-
+#else
+  Sprite *image;
+#endif
 protected:
   Character* dernier_ver_touche;
   PhysicalObj* dernier_obj_touche;
@@ -110,8 +116,12 @@ protected:
   std::string m_id;
   std::string m_name;
   bool m_is_active;
+#ifdef CL
   CL_Surface m_image;
-  struct s_position{
+#else
+  SDL_Surface *m_image; 
+#endif
+   struct s_position{
     int dx, dy;
     weapon_origin_t origin;
   } position;
@@ -138,8 +148,11 @@ protected:
 
 public:
   // Icone de l'arme dans l'interface
+#ifdef CL
   CL_Surface icone;
-
+#else
+  SDL_Surface *icone;
+#endif
   // if max_strength != 0, display the strength bar
   double max_strength;
 

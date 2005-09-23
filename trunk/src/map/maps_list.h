@@ -25,9 +25,15 @@
 #include "../include/base.h"
 #include <string>
 #include <map>
-#include <ClanLib/display.h>
-#include "../tool/xml_document.h"
+#ifdef CL
+# include <ClanLib/display.h>
+#else
+#include "../tool/resource_manager.h"
+#endif
+# include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
+
+struct SDL_Surface;
 
 class InfoTerrain
 {
@@ -36,11 +42,17 @@ public:
   uint nb_mine;
   bool use_water;
   bool is_opened;
+#ifdef CL
   CL_Surface preview;
   CL_Surface img_terrain, img_ciel;
+  CL_ResourceManager *res;
+#else
+  SDL_Surface *preview;
+  SDL_Surface *img_terrain, *img_ciel;   
+  Profile *res_profile;
+#endif
   std::string author_info;
   std::string m_directory;
-  CL_ResourceManager *res;
   struct s_wind
   {
     uint nbr_sprite;
@@ -56,8 +68,13 @@ private:
 
 public:
   InfoTerrain ();
+#ifdef CL
   CL_Surface &InfoTerrain::LitImgTerrain();
   CL_Surface &InfoTerrain::LitImgCiel();
+#else
+   SDL_Surface *LitImgTerrain();
+   SDL_Surface *LitImgCiel();
+#endif
   bool Init(const std::string &nom, const std::string &repertoire);
   bool DonneesChargees() const;
 };

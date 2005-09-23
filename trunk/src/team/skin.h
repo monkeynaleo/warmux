@@ -31,18 +31,29 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../tool/xml_document.h"
-#include <ClanLib/display.h>
-#include <ClanLib/core.h>
+#ifdef CL
+# include <ClanLib/display.h>
+# include <ClanLib/core.h>
+#else
+#include "../tool/resource_manager.h"
+#endif
 #include <map>
 #include <string>
 //-----------------------------------------------------------------------------
+
+struct SDL_Surface;
+struct Sprite;
 
 typedef struct s_skin_translate_t{ int dx,dy; } skin_translate_t;
 
 class CfgSkin
 {
 public:
+#ifdef CL
   CL_Sprite image;
+#else
+  Sprite *image;
+#endif
   uint test_dx, test_top, test_bottom;
 public:
   CfgSkin();
@@ -57,7 +68,11 @@ typedef std::map<std::string,CfgSkin>::value_type paire_skin;
 class CfgSkin_Walking : public CfgSkin
 {
 public:
-//  CL_Sprite image_helmet;
+#ifdef CL
+  CL_Sprite image_helmet;
+#else
+   Sprite *image_helmet;
+#endif
   uint repetition_frame;
   std::vector<skin_translate_t> hand_position;
 public:
@@ -73,7 +88,11 @@ class CfgSkin_Anim
 {
 public:
   bool utilise;
+#ifdef CL
   CL_Sprite image;
+#else
+  Sprite *image;
+#endif
   skin_translate_t pos;
   uint vitesse;
 
@@ -107,7 +126,11 @@ protected:
   bool GetXmlConfig (xmlpp::Element *xml, CfgSkin_Walking &config);
   void Xml_LitRectTest (xmlpp::Element *elem, CfgSkin &config);
   void Xml_ReadHandPosition(xmlpp::Element *elem, CfgSkin_Walking &config);
+#ifdef CL
   void LoadManySkins(xmlpp::Element *elem, CL_ResourceManager &res);
+#else
+  void LoadManySkins(xmlpp::Element *elem, Profile *res);   
+#endif
 };
 
 //-----------------------------------------------------------------------------

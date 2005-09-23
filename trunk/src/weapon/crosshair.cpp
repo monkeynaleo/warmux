@@ -24,6 +24,12 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../weapon/weapon.h"
+#ifdef CL
+#else
+#include <SDL.h>
+#include "../include/app.h"
+#endif
+
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -80,10 +86,18 @@ void CrossHair::Draw()
   ActiveCharacter().GetHandPosition(x,y);
   x += calcul_dx*ActiveCharacter().GetDirection();
   y += calcul_dy;
+#ifdef CL
   x -= image.get_width()/2;
   y -= image.get_height()/2;
 
   image.draw(x, y);
+#else
+ 
+  x -= image->w/2;
+  y -= image->h/2;
+  SDL_Rect dest = { x,y,image->w,image->h};
+  SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -115,8 +129,14 @@ double CrossHair::GetAngleRad() const
 
 void CrossHair::Init()
 {
+#ifdef CL
   CL_ResourceManager *res=graphisme.LitRes();
   image = CL_Surface("gfx/pointeur1", res);
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  image = resource_manager.LoadImage(res, "gfx/pointeur1");
+  delete res;
+#endif
 }
 
 //-----------------------------------------------------------------------------

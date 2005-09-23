@@ -21,7 +21,9 @@
 
 #include "video.h"
 //-----------------------------------------------------------------------------
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
 #include <iostream>
 #include <algorithm>
 #include <sstream>
@@ -135,15 +137,27 @@ uint Video::GetSleepMaxFps()
 #endif //BUGGY_CODE
 int Video::GetWidth(void) const
 {
+#ifdef CL
   return app.clwindow->get_width();
+#else
+  return app.sdlwindow->w;
+#endif
 }
 
 int Video::GetHeight(void) const
 {
+#ifdef CL
   return app.clwindow->get_height();
+#else
+  return app.sdlwindow->h;
+#endif
 }
 
 bool Video::IsFullScreen(void) const
 {
+#ifdef CL
   return app.clwindow->is_fullscreen();
+#else
+  return false;
+#endif
 }

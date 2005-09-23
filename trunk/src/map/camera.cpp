@@ -24,14 +24,21 @@
 #include "camera.h"
 //-----------------------------------------------------------------------------
 #include "map.h"
-#include "../interface/keyboard.h"
 #include "../graphic/video.h"
-#include "../interface/interface.h"
 #include "../interface/mouse.h"
+
+# ifdef CL
+#include "../interface/keyboard.h"
+#include "../interface/interface.h"
 #include "../tool/math_tools.h"
 #include "../tool/geometry_tools.h"
 #include "../team/team.h"
 #include "../graphic/graphism.h"
+#else
+#include "../tool/Rectangle.h"
+#include "../tool/Distance.h"
+#endif
+
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -61,7 +68,11 @@ Camera::Camera()
   pos.x=0;
   pos.y=0;
   selec_rectangle=false;
+#ifdef CL
   pause = CL_System::get_time();
+#else
+  pause = SDL_GetTicks();
+#endif
   lance = false;
   autorecadre = true;
   obj_suivi = NULL;
@@ -211,10 +222,12 @@ void Camera::Refresh()
   mouse.TestCamera();
   if (lance) return;
 
+#ifdef CL
   // Camera au clavier
   clavier.TestCamera();
   if (lance) return;
-
+#endif
+   
   if (autorecadre) AutoRecadre();
 }
 
@@ -252,12 +265,21 @@ uint Camera::GetHeight() const { return video.GetHeight(); }
 
 bool Camera::EstVisible (const PhysicalObj &obj)
 {
+#ifdef CL
   CL_Rect rect;
   rect.left = GetX();
   rect.top = GetY();
   rect.right = rect.left + GetWidth();
   rect.bottom = rect.top + GetHeight();
   return RectTouche (rect, obj.GetRect());
+#else
+   Rectanglei rect;
+   rect.x = GetX();
+   rect.y = GetY();
+   rect.w = GetWidth();
+   rect.h = GetHeight();
+   return Intersect (rect, obj.GetRect());
+#endif
 }
 
 //-----------------------------------------------------------------------------

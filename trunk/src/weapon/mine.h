@@ -26,12 +26,19 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../team/character.h"
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
 #include "weapon.h"
+
+struct Sprite;
+struct SDL_Surface; 
+
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
 
+     
 class ObjMine : public PhysicalObj
 {
 private:
@@ -40,8 +47,13 @@ private:
 
   // Activation des mines ?
   bool animation;//,repos;
+#ifdef CL
   CL_Surface impact;
   CL_Sprite detection, explosion;
+#else
+  SDL_Surface *impact;
+  Sprite *detection, *explosion;
+#endif
   uint attente;
   uint armer;
   uint depart;

@@ -16,49 +16,30 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Suicide.
+ * Distance.h: Comppute distances between different geometrics things
+ ******************************************************************************
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
+ *             Initial version
  *****************************************************************************/
 
-#ifndef SUICIDE_H
-#define SUICIDE_H
-//-----------------------------------------------------------------------------
-#include "weapon.h"
-#ifdef CL
-# include <ClanLib/sound.h>
-#endif
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
+#ifndef _DISTANCE_H
+#define _DISTANCE_H
 
-   struct SDL_Surface;
-     
-class Suicide : public Weapon
-{
-private:
-#ifdef CL
-   CL_SoundBuffer_Session *son;
-#else
-   // TODO
-#endif
-   bool is_dying;
+#include "Point.h"
+#include "Rectangle.h"
 
-  void p_Init();
-  bool p_Shoot();
+extern int Distance( const Point2i &p1, const Point2i &p2);
 
-public:
-#ifdef CL
-  CL_Surface hole_image;
-#else
-  SDL_Surface *hole_image;
-#endif
-   
-  Suicide();
-  void p_Select();
-  void Refresh();
-  ExplosiveWeaponConfig &cfg();
-};
+extern float Distance( const Point2f &p1, const Point2f &p2);
 
-extern Suicide suicide;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
-#endif
+extern float Distance( const Point2d &p1, const Point2d &p2);
+
+extern bool IsInside( const Rectanglei &r, const Point2i &p);
+
+extern bool IsInside( const Rectanglef &r, const Point2f &p);
+
+extern bool IsInside( const Rectangled &r, const Point2d &p);
+
+extern bool Intersect( const Rectanglei &r1, const Rectanglei &r2);
+
+#endif // _DISTANCE_H

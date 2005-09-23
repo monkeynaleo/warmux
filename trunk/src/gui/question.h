@@ -25,7 +25,11 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include <string>
-#include <ClanLib/display.h>
+#include <list>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
+
 //-----------------------------------------------------------------------------
 
 class Question
@@ -58,16 +62,22 @@ public:
   int reponse;
 
 private:
+#ifdef CL
   CL_Slot m_keyboard_slot;
   CL_Slot m_mouse_slot;
+#else
+#endif
   bool m_fin_boucle;
 
 private:
+#ifdef CL
   void TraiteClic (const CL_InputEvent &event);
   void TraiteTouche (const CL_InputEvent &event);
+#else
   void Draw();
+#endif
 
-public:
+ public:
   Question();
   void Init (const std::string &message, bool choix_defaut, int valeur);
   int PoseQuestion ();

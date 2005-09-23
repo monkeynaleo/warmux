@@ -26,12 +26,18 @@
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../map/camera.h"
-#include "../tool/geometry_tools.h"
-#include "../graphic/video.h"
+# include "../graphic/video.h"
 #include "../include/constant.h" // FOND_X, FOND_Y
 #include "interface.h"
 #include "cursor.h"
 #include "../weapon/weapon.h"
+#ifdef CL
+# include "../tool/geometry_tools.h"
+#else
+#include "../tool/Point.h"
+#include "../tool/Distance.h"
+#endif
+
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 Mouse mouse;
@@ -63,6 +69,8 @@ void Mouse::Reset()
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
+
 #ifdef PORT_CL07
 
 bool Mouse::ClicG() const { return CL_Mouse::left_pressed(); }
@@ -76,6 +84,8 @@ bool Mouse::ClicD() const { return false; }
 bool Mouse::ClicM() const { return false; }
 
 #endif
+
+#endif // CL defined
 
 //-----------------------------------------------------------------------------
 
@@ -92,8 +102,12 @@ bool Mouse::ActionClicD()
 
 bool Mouse::ActionClicG()
 {
-  const CL_Point pos_monde = GetPosMonde();
-
+#ifdef CL
+   const CL_Point pos_monde = GetPosMonde();
+#else
+   const Point2i pos_monde = GetPosMonde();   
+#endif
+   
 #ifdef MODE_TRICHEUR
   // Control gauche + clic gauche = téléportation !
   if (CL_Keyboard::get_keycode(CL_KEY_CONTROL) && ActiveCharacter().IsReady())
@@ -124,8 +138,13 @@ bool Mouse::ActionClicG()
     {
       if (&(*it) != &ActiveCharacter()
 	  && !it -> IsDead() 
-	  && DansRect (it -> GetRect(), pos_monde))
-      {
+	  && 
+#ifdef CL	  
+	  DansRect (it -> GetRect(), pos_monde))
+#else
+	  IsInside (it -> GetRect(), pos_monde))
+#endif
+	 {
 	ver_choisi = true;
 	break;
       }
@@ -136,8 +155,12 @@ bool Mouse::ActionClicG()
       return true;
     }
 
-    if (DansRect (ActiveCharacter().GetRect(), pos_monde))
-    {
+#ifdef CL
+   if (DansRect (ActiveCharacter().GetRect(), pos_monde))
+#else
+     if (IsInside (ActiveCharacter().GetRect(), pos_monde))
+#endif
+     {
       curseur_ver.SuitVerActif();
       return true;
     }
@@ -167,14 +190,22 @@ void Mouse::ChoixVerPointe()
 {
   if (game_loop.ReadState() != gamePLAYING) return;
 
+#ifdef CL
   const CL_Point pos_monde = GetPosMonde();
-
+#else
+  const Point2i pos_monde = GetPosMonde();;
+#endif
+   
   // Quel ver est pointé par la souris ? (en dehors du ver actif)
   interface.ver_pointe_souris = NULL;
   POUR_TOUS_VERS_VIVANTS(equipe,ver)
   {
     if ((&(*ver) != &ActiveCharacter())
+#ifdef CL
 	&& DansRect (ver -> GetRect(), pos_monde))
+#else
+    	&& IsInside (ver -> GetRect(), pos_monde))   
+#endif
     {
       interface.ver_pointe_souris = &(*ver);
     }
@@ -182,8 +213,13 @@ void Mouse::ChoixVerPointe()
 
   // Aucun ver n'est pointé ... et le ver actif alors ?
   if ((interface.ver_pointe_souris == NULL)
-      && DansRect (ActiveCharacter().GetRect(), pos_monde))
-  {
+      && 
+#ifdef CL
+      DansRect (ActiveCharacter().GetRect(), pos_monde))
+#else
+      IsInside (ActiveCharacter().GetRect(), pos_monde))  
+#endif
+{
     interface.ver_pointe_souris = &ActiveCharacter();
   }
 
@@ -199,21 +235,41 @@ void Mouse::ChoixVerPointe()
  
 void Mouse::TestCamera()
 {
-  //Move camera with mouse holding Ctrl key down
-  const bool demande_scroll = CL_Keyboard::get_keycode(CL_KEY_CONTROL);
-  if (demande_scroll)
+#ifndef CL
+   int _x, _y;       
+   SDL_GetMouseState( &_x, &_y);
+#endif
+   
+   //Move camera with mouse holding Ctrl key down
+#ifdef CL
+   const bool demande_scroll = CL_Keyboard::get_keycode(CL_KEY_CONTROL);
+#else
+   const bool demande_scroll = SDL_GetModState() & KMOD_CTRL;
+#endif
+   
+   if (demande_scroll)
   {
     if (scroll_actif) {
+#ifdef CL
       int dx = sauve_x - CL_Mouse::get_x();
       int dy = sauve_y - CL_Mouse::get_y();
+#else
+       int dx = sauve_x - _x;
+       int dy = sauve_y - _y;
+#endif 
       camera.SetXY (dx, dy);
       camera.autorecadre = false;
     } else {
       scroll_actif = true;
     }
+#ifdef CL
     sauve_x = CL_Mouse::get_x();
     sauve_y = CL_Mouse::get_y();
-    return;
+#else
+    sauve_x = _x;
+    sauve_y = _y;
+#endif
+     return;
   } else {
     scroll_actif = false;
   }
@@ -261,34 +317,80 @@ void Mouse::Refresh()
 
 //-----------------------------------------------------------------------------
 
-int Mouse::GetX() const { return CL_Mouse::get_x(); }
-int Mouse::GetY() const { return CL_Mouse::get_y(); }
-int Mouse::GetXmonde() const { return GetX() -FOND_X +camera.GetX(); }
-int Mouse::GetYmonde() const { return GetY() -FOND_Y +camera.GetY(); }
+int Mouse::GetX() const 
+{
+#ifdef CL
+   return CL_Mouse::get_x(); 
+#else
+   int x;
+   
+   SDL_GetMouseState( &x, NULL);
+   return x; 
+#endif
+}
+
+int Mouse::GetY() const 
+{ 
+#ifdef CL
+   return CL_Mouse::get_y(); 
+#else
+   int y;
+   
+   SDL_GetMouseState( NULL, &y);
+   return y; 
+#endif
+
+}
+
+int Mouse::GetXmonde() const 
+{ 
+   return GetX() -FOND_X +camera.GetX(); 
+}
+
+int Mouse::GetYmonde() const 
+{ 
+   return GetY() -FOND_Y +camera.GetY(); 
+}
+
+#ifdef CL
 CL_Point Mouse::GetPosMonde() const
-{ return CL_Point (GetXmonde(), GetYmonde()); }
+{ 
+   return CL_Point (GetXmonde(), GetYmonde()); 
+}
+#else
+Point2i Mouse::GetPosMonde() const
+{ 
+   return Point2i (GetXmonde(), GetYmonde());
+}
+#endif
+
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Mouse::DesinstallePilote()
 {
   assert (pilote_installe);
   CL_Mouse::sig_key_up().disconnect(slot);
   pilote_installe = false;
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Mouse::InstallePilote()
 {
   assert (!pilote_installe);
   slot = CL_Mouse::sig_key_up().connect(this, &Mouse::TraiteClic);
   pilote_installe = true;
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
 // Traite une touche relachée
+#ifdef CL
 void Mouse::TraiteClic (const CL_InputEvent &event)
 {
   // Clic gauche de la mouse ?
@@ -305,5 +407,26 @@ void Mouse::TraiteClic (const CL_InputEvent &event)
     return;
   }
 }
+#else
+void Mouse::TraiteClic (const SDL_Event *event)
+{
+   if ( event->type == SDL_MOUSEBUTTONDOWN )
+     {
+	
+	if ( event->button.button == SDL_BUTTON_RIGHT)
+	  {
+	     ActionClicD();
+	     return;
+	  }
+	
+	// Clic gauche de la souris ?
+	if ( event->button.button == SDL_BUTTON_LEFT)
+	  {
+	     ActionClicG();
+	     return;
+	  }
+     }
+}
+#endif
 
 //-----------------------------------------------------------------------------

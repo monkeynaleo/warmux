@@ -19,9 +19,10 @@
  * Refresh d'un ver de terre.
  *****************************************************************************/
 
+#include <SDL.h>
+
 #include "character.h"
 //-----------------------------------------------------------------------------
-#include <ClanLib/core.h>
 #include <sstream>
 #include <iostream>
 #include "../game/game.h"
@@ -37,13 +38,24 @@
 #include "../sound/jukebox.h"
 #include "../tool/random.h"
 #include "../tool/math_tools.h"
-#include "../tool/geometry_tools.h"
 #include "../weapon/suicide.h"
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon_tools.h"
 #include "../include/action_handler.h"
 #include "move.h"
 #include "macro.h"
+
+#ifdef CL
+#include <ClanLib/core.h>
+#include "../tool/geometry_tools.h"
+#else
+#include <SDL.h>
+#include "../tool/Distance.h"
+#include "../include/app.h"
+#include "../map/camera.h"
+#endif
+#include <iostream>
+
 using namespace std;
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -108,6 +120,7 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
 // Signale la mort d'un ver
 void Character::SignalDeath()
 {
+/*
 #ifdef DEBUG_CHG_ETAT
   COUT_DBG << "Meurt." << endl;
 #endif
@@ -115,19 +128,35 @@ void Character::SignalDeath()
   // No more energy ...
   energy = 0;
 
+#ifdef CL
   jukebox.PlayProfile(GetTeam().GetSoundProfile(),"death");
-
+#else
+   // TODO
+#endif
+   
   SetSkin("dead");
 
   //--- Do the skin explosion :-) ---
+#ifdef CL
   CL_Surface img_trou = suicide.hole_image;
-
+#else
+  SDL_Surface *img_trou = suicide.hole_image;
+#endif
+   
   // The hole is at the center
+#ifdef CL
   CL_Point trou(GetCenter());
-
+#else
+  Point2i trou(GetCenter());
+#endif
+   
   // But the explosion is on the foots :)
+#ifdef CL
   CL_Point explosion(GetCenterX(), GetY()+ GetHeight());
-
+#else
+   Point2i explosion(GetCenterX(), GetY()+ GetHeight());
+#endif
+   
   AppliqueExplosion (explosion, trou, img_trou, suicide.cfg(), NULL);
 
   // Change test rectangle
@@ -140,7 +169,7 @@ void Character::SignalDeath()
   
   // Signal the death
   game_loop.SignalCharacterDeath (this);
-  
+*/  
 }
 
 //-----------------------------------------------------------------------------
@@ -151,8 +180,10 @@ void Character::SignalDrowning()
   //Desactive();
   //m_type = objINSENSIBLE;
   SetSkin("drowned");
+#ifdef CL
   jukebox.PlayProfile(GetTeam().GetSoundProfile(),"sink");
   game_loop.SignalCharacterDeath (this);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -175,17 +206,26 @@ void Character::SignalGhostState (bool was_dead)
 
 void Character::SetDirection (int nv_direction)
 { 
-  image.set_scale (nv_direction, 1); 
-  if (GetSkin().anim.utilise) anim.image.set_scale (nv_direction, 1);
+#ifdef CL
+   image.set_scale (nv_direction, 1); 
+#else
+   image->Scale (nv_direction, 1);
+#endif
+   
+   if (GetSkin().anim.utilise) 
+#ifdef CL
+     anim.image.set_scale (nv_direction, 1);
+#else
+     anim.image->Scale (nv_direction, 1);
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void Character::DrawEnergyBar(int dy) const
 {
-  energy_bar.DrawXY (
-    GetCenterX()-energy_bar.GetWidth()/2, 
-	GetY()+dy);
+  energy_bar.DrawXY ( GetCenterX()-energy_bar.GetWidth()/2-camera.GetX(), 
+		      GetY()+dy-camera.GetY());
 }
 
 //-----------------------------------------------------------------------------
@@ -194,7 +234,9 @@ void Character::DrawName (int dy) const
 {
   const int x =  GetCenterX();
   const int y = GetY()+dy;
-  police_mix.WriteCenterTop (x,y,m_name);
+#ifdef CL
+   police_mix.WriteCenterTop (x,y,m_name);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -227,27 +269,37 @@ void Character::SetEnergyDelta (int delta)
   }
   B = 0;
 
+#ifdef CL
   energy_bar.value_color = CL_Color(R,V,B);
-
+#else
+  energy_bar.SetValueColor( R,V,B);
+#endif
+   
   // Compute energy lost
   if (delta < 0)
   {
 
     losted_energy += (int)energy - (int)sauve_energie;
+#ifdef CL
     if ( losted_energy < 33 )
       jukebox.PlayProfile(GetTeam().GetSoundProfile(), "injured_light");
     else if ( losted_energy < 66 )
       jukebox.PlayProfile(GetTeam().GetSoundProfile(), "injured_medium");
     else 
       jukebox.PlayProfile(GetTeam().GetSoundProfile(), "injured_high");
+#endif
   }
   else 
     losted_energy = 0;
 
   // "Friendly fire !!"
   if ( (&ActiveCharacter() != this) && (&ActiveTeam() == m_team) )
+#ifdef CL
     jukebox.PlayProfile(GetTeam().GetSoundProfile(), "friendly_fire");
-
+#else
+   ;
+#endif
+   
   // Dead character ?
   if (energy == 0) Die();
 }
@@ -268,13 +320,21 @@ void Character::Draw()
 
   // Draw skin
   if(!is_walking) //walking skins image update only when a keyboard key is pressed
+#ifdef CL
     image.update();
-
+#else
+   image->Update();
+#endif
+   
   int x = GetX();
   int y = GetY();
+#ifdef CL
   if (GetDirection()<0) x += GetWidth();
   image.draw (x,y);
-
+#else
+  image->Blit(app.sdlwindow,x-camera.GetX(),y-camera.GetY());
+#endif
+   
 #ifdef DRAW_HAND_POSITION
   int a,b,c=3;
   GetHandPosition (a,b);
@@ -284,10 +344,14 @@ void Character::Draw()
 
   // Draw animation
   if (anim.draw && current_skin=="walking")
-    anim.image.draw (x,y);
+#ifdef CL
+   anim.image.draw (x,y);
+#else
+   anim.image->Blit(app.sdlwindow,x-camera.GetX(),y-camera.GetY());
+#endif
 
-  // Draw energy bar
-  int dy=-ESPACE;
+   // Draw energy bar
+  int dy = -ESPACE;
   bool est_ver_actif = (this == &ActiveCharacter());
   bool affiche_energie = config.affiche_energie_ver;
   affiche_energie &= !est_ver_actif || (game_loop.ReadState() != gamePLAYING);
@@ -313,7 +377,11 @@ void Character::Draw()
     ostringstream ss;
     ss << losted_energy;
     dy -= HAUT_FONT_MIX;
+#ifdef CL
     police_mix.WriteCenterTop (GetX() +GetWidth()/2, GetY()+dy, ss.str());    
+#else
+//TODO
+#endif
   }
 
 #if defined(DEBUG_CADRE_AUTOUR_VER)
@@ -334,12 +402,16 @@ void Character::Saute ()
 #endif
   if (!CanJump()) return;
 
+#ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "jump");
-
+#else
+//TODO
+#endif
+   
   m_rebounding = false;
 
-  if(current_skin=="walking")
-    SetSkin("jump");
+//  if(current_skin=="walking")
+//    SetSkin("jump");
 
   // Initialise la force
   double angle = Deg2Rad(game_mode.character.jump_angle);
@@ -358,8 +430,12 @@ void Character::SuperSaut ()
 
   m_rebounding = false;
 
+#ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "superjump");
-
+#else
+// TODO
+#endif
+   
   // Initialise la force
   double angle = Deg2Rad(game_mode.character.super_jump_angle);
   if (GetDirection() == -1) angle = InverseAngle(angle);
@@ -427,7 +503,8 @@ void Character::HandleKeyEvent(int action, int event_type)
   if (action == ACTION_SHOOT)
     {
       HandleShoot(event_type);
-      return;
+       std::cout << "SHOOT" << std::endl;
+       return;
     }
 
   if (!ActiveCharacter().IsReady())
@@ -484,15 +561,29 @@ void Character::Refresh()
     // C'est le début d'une animation ?
     if (!anim.draw && (anim.time < temps.Lit())) 
     {
+#ifdef CL
       anim.image.restart();
       anim.draw = true;
+#else
+      anim.image->SetCurrentFrame(0);
+      anim.draw = true;
+#endif
     }
 
     // Animation active
     if (anim.draw)
     {
+#ifdef CL
       anim.image.update();
+#else
+      anim.image->Update();
+#endif
+       
+#ifdef CL
       if (anim.image.is_finished())
+#else
+      if ( anim.image->GetCurrentFrame() == anim.image->GetFrameCount()-1 )
+#endif
       {
         anim.draw = false;
         anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
@@ -580,8 +671,12 @@ void Character::SignalFallEnding()
 int Character::GetDirection() const 
 { 
   float x,y;
+#ifdef CL
   image.get_scale(x,y);
-  return (x<0)?-1:1;
+#else
+   image->GetScaleFactors(x,y);
+#endif
+   return (x<0)?-1:1;
 }
 
 //-----------------------------------------------------------------------------
@@ -635,19 +730,30 @@ void Character::SetSkin(std::string skin_name)
   {
     float sc_x,sc_y;
     if(current_skin!="")
-      image.get_scale(sc_x,sc_y);
-
+#ifdef CL
+       image.get_scale(sc_x,sc_y);
+#else
+       image->GetScaleFactors(sc_x,sc_y);
+#endif
+     
     image = AccessSkin().many_skins[skin_name].image;
     SetTestRect (AccessSkin().many_skins[skin_name].test_dx, 
                  AccessSkin().many_skins[skin_name].test_dx, 
                  AccessSkin().many_skins[skin_name].test_top, 
                  AccessSkin().many_skins[skin_name].test_bottom);
+#ifdef CL
     SetSize (image.get_width(), image.get_height());
-
+#else
+    SetSize (image->GetWidth(), image->GetHeight());
+#endif
+     
     //Restore skins direction
     if(current_skin!="" && sc_x<0)
-      image.set_scale(-1,1);
-
+#ifdef CL
+       image.set_scale(-1,1);
+#else
+       image->Scale(-1,1);
+#endif
     current_skin = skin_name;
     is_walking = false;
     return;
@@ -658,7 +764,11 @@ void Character::SetSkin(std::string skin_name)
   {
     float sc_x,sc_y;
     if(current_skin!="")
-      image.get_scale(sc_x,sc_y);
+#ifdef CL
+       image.get_scale(sc_x,sc_y);
+#else
+       image->GetScaleFactors(sc_x,sc_y);
+#endif
 
     walk_skin = &AccessSkin().many_walking_skins[skin_name];
     image = walk_skin->image;
@@ -667,12 +777,19 @@ void Character::SetSkin(std::string skin_name)
                  walk_skin->test_top,
                  walk_skin->test_bottom);
     m_frame_repetition = walk_skin->repetition_frame;
-    SetSize (image.get_width(), image.get_height());
-
+#ifdef CL
+     SetSize (image.get_width(), image.get_height());
+#else
+     SetSize (image->GetWidth(), image->GetHeight());
+#endif
     //Restore skins direction
     if(current_skin!="" && sc_x<0.0)
+#ifdef CL
       image.set_scale(-1.0,1.0);
-
+#else
+     image->Scale( -1.0,1.0);
+#endif
+     
     if(skin_name=="walking")
     {
         anim.draw = false;
@@ -697,16 +814,24 @@ void Character::SetSkin(std::string skin_name)
 void Character::FrameImageSuivante()
 {
   m_image_frame++;
+#ifdef CL
   if (image.get_frame_count()-1 < (int)(m_image_frame/m_frame_repetition)) 
     m_image_frame = 0;
   image.set_frame (m_image_frame/m_frame_repetition);
-
+#else
+  if (image->GetFrameCount()-1 < (int)(m_image_frame/m_frame_repetition)) 
+    m_image_frame = 0;
+  image->SetCurrentFrame (m_image_frame/m_frame_repetition); 
+#endif
+   
+#ifdef CL
   static CL_SoundBuffer_Session *step_session = NULL;
-
+   
   bool play = (step_session == NULL) || (!step_session -> is_playing());
 
   if (play)
     jukebox.PlayProfile(m_team->GetSoundProfile(), "step", false, &step_session);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -735,8 +860,13 @@ void Character::InitTeam (Team *ptr_equipe, const string &name,
   // Energie
   energy_bar.InitVal (energy, 0, game_mode.character.max_energy);
   energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
+#ifdef CL
   energy_bar.border_color = CL_Color::black;
   energy_bar.background_color = CL_Color::dimgray;
+#else
+  energy_bar.SetBorderColor(0,0,0);
+  energy_bar.SetBackgroundColor(100,100,100);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -753,22 +883,33 @@ void Character::Reset()
   // Animation ?
   if (anim.draw)
   { 
+#ifdef CL
     anim.image.finish();
+#else
+    anim.image->Finish();
+#endif 
     anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
     anim.time += temps.Lit();    
   }
 
   // Initialise l'image
   SetDirection( RandomBool()?1:-1 );
+#ifdef CL
   image.set_frame ( RandomLong(0, image.get_frame_count()-1) );
   m_image_frame = image.get_current_frame();
-
+#else
+  image->SetCurrentFrame ( RandomLong(0, image->GetFrameCount()-1) );
+  m_image_frame = image->GetCurrentFrame();   
+#endif
+   
   // Energie
   energy = game_mode.character.init_energy-1;
   energy_bar.InitVal (energy, 0, game_mode.character.init_energy);
   SetEnergyDelta (1);
   losted_energy = 0;
 
+  std::cout << "Reset character..." << std::endl;
+   
   // Initialise la position
   uint bcl=0;
   bool pos_ok;
@@ -785,16 +926,12 @@ void Character::Reset()
     // Prend des coordonnées au hasard
     uint x = RandomLong(0, monde.GetWidth() -GetWidth());
     uint y = RandomLong(0, monde.GetHeight() -GetHeight());
-#ifdef DEBUG_PLACEMENT
-    COUT_PLACEMENT << "x0="<<x<<", y="<<y<< endl;
-#endif
+
+    std::cout << "character initial pos x=" << x << " y=" << y << " => falling!" << std::endl; 
     SetXY (x, y);
 
 #ifndef NO_POSITION_CHECK
     pos_ok &= !IsGhost() && IsInVacuum(0,0) && (GetY() < monde.GetHeight() - (WATER_INITIAL_HEIGHT + 30));
-#ifdef DEBUG_PLACEMENT
-    if (!pos_ok) COUT_PLACEMENT << "Placement XY manqué." << endl;
-#endif
     if (!pos_ok) continue;
 
     // Chute directe pour le sol
@@ -808,8 +945,18 @@ void Character::Reset()
     // Vérifie que le ver ne fois pas trop près de ses voisins
     POUR_TOUS_VERS_VIVANTS(it_equipe,ver) if (&(*ver) != this)
     {
-      double dst = Distance(ver -> GetCenter(), GetCenter());
-      if (dst < monde.dst_min_entre_vers) pos_ok = false;
+#ifdef CL
+      double dst = Distance( ver->GetCenter(), GetCenter());
+#else
+       Point2i p1 = ver->GetCenter();
+       Point2i p2 = GetCenter();
+       double dst = Distance ( p1, p2);
+#endif
+      if (dst < monde.dst_min_entre_vers) {
+	std::cout << "JCTMP vorm is too near from another one" << endl;
+	pos_ok = false;
+      }
+       
     }
 
     // La position est bonne ?
@@ -836,7 +983,12 @@ uint Character::GetEnergy() const
 
 // Hand position
 void Character::GetHandPosition (int &x, int &y) {
-  int frame = image.get_current_frame();
+#ifdef CL
+   int frame = image.get_current_frame();
+#else
+   int frame = image->GetCurrentFrame();
+#endif
+   
   assert(walk_skin!=NULL);
   skin_translate_t hand = walk_skin->hand_position.at(frame);
   y = GetY() +hand.dy;
@@ -850,8 +1002,11 @@ void Character::GetHandPosition (int &x, int &y) {
 
 // Hand position
 void Character::GetHandPositionf (double &x, double &y) {
-  int frame = image.get_current_frame();
-
+#ifdef CL
+   int frame = image.get_current_frame();
+#else
+   int frame = image->GetCurrentFrame();
+#endif
   assert(walk_skin!=NULL);
   skin_translate_t hand = walk_skin->hand_position.at(frame);
 

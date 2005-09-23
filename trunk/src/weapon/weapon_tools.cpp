@@ -29,9 +29,15 @@
 #include "../object/particle.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
-#include "../tool/geometry_tools.h"
 #include "../tool/math_tools.h"
 #include "../weapon/weapons_list.h"
+
+#ifdef CL
+#include "../tool/geometry_tools.h"
+
+#else
+
+#endif
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG
@@ -42,6 +48,7 @@
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void AppliqueExplosion (const CL_Point &explosion, 
 			const CL_Point &trou, 
 			CL_Surface &impact,
@@ -50,14 +57,29 @@ void AppliqueExplosion (const CL_Point &explosion,
 			const std::string& son,
 			bool fire_particle
 			)
+#else
+void AppliqueExplosion (const Point2i &explosion, 
+			const Point2i &trou, 
+			SDL_Surface *impact,
+			const ExplosiveWeaponConfig &config,
+			PhysicalObj *obj_exclu,
+			const std::string& son,
+			bool fire_particle
+			)
+#endif
 {
   // Make a hole in the ground
-  monde.Creuse (trou.x - impact.get_width()/2, trou.y-impact.get_height()/2,
-		impact);
-
+#ifdef CL
+  monde.Creuse (trou.x - impact.get_width()/2, trou.y-impact.get_height()/2,impact);
+#else
+  monde.Creuse (trou.x-impact->w/2, trou.y-impact->h/2,impact);   
+#endif
+   
   // Play a sound
+#ifdef CL
   jukebox.Play (son);
-
+#endif
+   
   // Apply damage on the worms.
   // Do not care about the death of the active worm.
   POUR_TOUS_VERS(equipe,ver)
@@ -142,9 +164,16 @@ void AppliqueExplosion (const CL_Point &explosion,
 
   // Do we need to generate some fire particles ?
   if (fire_particle) {
-    global_particle_engine.AddNow ( trou.x - impact.get_width()/2, trou.y-impact.get_height()/2,
-				    5, particle_FIRE );
+#ifdef CL
+     global_particle_engine.AddNow ( trou.x - impact.get_width()/2, trou.y-impact.get_height()/2,
+				     5, particle_FIRE );
+#else
+     global_particle_engine.AddNow ( trou.x - impact->w/2, trou.y-impact->h/2,
+				     5, particle_FIRE );
+#endif
+  
   }
+
 }
 
 //-----------------------------------------------------------------------------

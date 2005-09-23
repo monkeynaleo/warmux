@@ -22,9 +22,18 @@
 #include "particle.h"
 #include "../object/objects_list.h"
 #include "../game/time.h"
-#include "../graphic/graphism.h"
 #include "../tool/random.h"
 #include "../weapon/weapon_tools.h"
+#ifdef CL
+#include "../graphic/graphism.h"
+#else
+#include <SDL.h>
+#include "../include/app.h"
+#include "../tool/resource_manager.h"
+#include "../tool/Point.h"
+#endif
+#include <map>
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -49,7 +58,15 @@ Particle::Particle() : PhysicalObj("Particle", 0.0)
 
 void Particle::Draw()
 {
-  if (m_left_time_to_live > 0) image.draw(GetX(), GetY());
+  if (m_left_time_to_live > 0) 
+#ifdef CL
+    image.draw(GetX(), GetY());
+#else
+     {
+	SDL_Rect dest = { GetX(), GetY(), image->w, image->h};	
+	SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
+     }
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -74,14 +91,22 @@ void Particle::Refresh()
     if((float)lived_time<m_initial_time_to_live/2.0)
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
+#ifdef CL
       image.set_scale(coeff, coeff);
       image.set_alpha(1.0);
+#else
+       // TODO
+#endif
     }
     else
     {
       float alpha = 1.0 - sin((M_PI/2.0)*((float)lived_time-((float)m_initial_time_to_live/2.0))/((float)m_initial_time_to_live/2.0));
+#ifdef CL
       image.set_alpha(alpha);
       image.set_scale(1.0,1.0);
+#else
+       // TODO
+#endif
     }
     m_last_refresh = Wormux::temps.Lit() ;
   }
@@ -112,9 +137,16 @@ Smoke::Smoke() : Particle()
 
 void Smoke::Init()
 {
-  image = CL_Surface("smoke", &Wormux::graphisme.weapons); 
-  SetSize(image.get_width(),image.get_height());
-
+#ifdef CL
+   image = CL_Surface("smoke", &Wormux::graphisme.weapons); 
+   SetSize(image.get_width(),image.get_height());
+#else
+   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+   image = resource_manager.LoadImage(res,"smoke"); 
+   delete res;
+   SetSize(image->w,image->h);
+#endif
+   
   m_initial_time_to_live = 10;
   m_left_time_to_live = m_initial_time_to_live; 
 }
@@ -137,8 +169,15 @@ StarParticle::StarParticle() : Particle()
 
 void StarParticle::Init()
 {
+#ifdef CL
   image = CL_Surface("star_particle", &Wormux::graphisme.weapons); 
   SetSize(image.get_width(),image.get_height());
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+   image = resource_manager.LoadImage(res,"star_particle"); 
+  delete res;
+  SetSize(image->w,image->h);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -165,17 +204,29 @@ FireParticle::FireParticle() : Particle()
 
 void FireParticle::Init()
 {
+#ifdef CL
   image = CL_Surface("fire_particle", &Wormux::graphisme.weapons); 
   impact = CL_Surface("fire_impact", &Wormux::graphisme.weapons); 
   SetSize(image.get_width(),image.get_height());
+#else
+   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+   image = resource_manager.LoadImage(res,"fire_particle"); 
+   impact = resource_manager.LoadImage(res,"fire_impact");   
+   delete res;
+   SetSize(image->w,image->h);
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void FireParticle::SignalFallEnding()
 {
-  CL_Point pos = GetCenter();
-  AppliqueExplosion (pos, pos, impact, fire_cfg, NULL, 
+#ifdef CL
+   CL_Point pos = GetCenter();
+#else
+   Point2i pos = GetCenter();
+#endif
+   AppliqueExplosion (pos, pos, impact, fire_cfg, NULL, 
   		     "", false);
 
   m_left_time_to_live = 0;

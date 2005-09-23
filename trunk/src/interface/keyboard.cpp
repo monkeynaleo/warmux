@@ -43,6 +43,7 @@
 #include "../graphic/video.h"
 #include "cursor.h"
 #include "../include/constant.h"
+#include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -61,11 +62,14 @@ Clavier clavier;
 
 Clavier::Clavier()
 {
-  pilote_installe = false;
+#ifdef CL
+   pilote_installe = false;
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Clavier::DesinstallePilote()
 {
   assert (pilote_installe);
@@ -88,6 +92,7 @@ void Clavier::InstallePilote()
   for (i = 0; i < ACTION_MAX; i++)
     PressedKeys[i] = false ;
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
@@ -98,6 +103,7 @@ void Clavier::SetKeyAction(int key, Action_t at)
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Clavier::HandleKeyEvent(int key, int event_type)
 {
   std::map<int, Action_t>::iterator it = layout.find(key);
@@ -137,10 +143,59 @@ void Clavier::HandleKeyEvent(int key, int event_type)
 
   ActiveCharacter().HandleKeyEvent((int)action, event_type);
 }
+#else // CL is defined
+void Clavier::HandleKeyEvent( const SDL_Event *event)
+{
+  std::map<int, Action_t>::iterator it = layout.find(event->key.keysym.sym);
 
+  if ( it == layout.end() )
+    return;
+
+  Action_t action = it->second;
+
+  //We can perform the next actions, only if the player is played localy:
+  //if(!ActiveTeam().is_local)
+  //  return;
+
+/*  if (ActiveTeam().GetWeapon().override_keys &&
+      ActiveTeam().GetWeapon().IsActive())
+    {
+      ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
+      return ;
+    }*/
+   
+  if(action <= ACTION_CHANGE_CHARACTER)
+    {
+      switch (action) {
+//         case ACTION_ADD:
+// 	  if (lance_grenade.time < 15)
+// 	    lance_grenade.time ++;
+// 	  break ;
+	  
+//         case ACTION_SUBSTRACT:
+// 	  if (lance_grenade.time > 1)
+// 	    lance_grenade.time --;
+// 	  break ;
+        default:
+	  break ;
+      }
+    }
+
+   int event_type=0;
+   switch( event->type)
+     {
+      case SDL_KEYDOWN: event_type = KEY_PRESSED;break;
+      case SDL_KEYUP: event_type = KEY_RELEASED;break;
+     }
+   
+  ActiveCharacter().HandleKeyEvent( action, event_type);
+}
+
+#endif // CL not defined
 //-----------------------------------------------------------------------------
 
 // Handle a pressed key
+#ifdef CL
 void Clavier::HandleKeyPressed (const CL_InputEvent &key)
 {
   std::map<int, Action_t>::iterator it = layout.find(key.id);
@@ -226,10 +281,12 @@ void Clavier::HandleKeyPressed (const CL_InputEvent &key)
 
   HandleKeyEvent (key.id, KEY_PRESSED);
 }
-
+#else
+#endif
 //-----------------------------------------------------------------------------
 
 // Handle a released key
+#ifdef CL
 void Clavier::HandleKeyReleased (const CL_InputEvent &key)
 {
   // Work-around for a bug from lower layers... Perhaps ClanLib.
@@ -300,12 +357,16 @@ void Clavier::HandleKeyReleased (const CL_InputEvent &key)
     }
 #endif
 }
+#else
+
+#endif
 
 //-----------------------------------------------------------------------------
 
 // Refresh keys which are still pressed.
 void Clavier::Refresh()
 {
+#ifdef CL
   if(!ActiveTeam().is_local)
     return;
 
@@ -330,12 +391,14 @@ void Clavier::Refresh()
 	|| CL_Keyboard::get_keycode(CL_KEY_RSHIFT);
       if (meta) return;
 #endif
+#endif
 }
 
 //-----------------------------------------------------------------------------
                                                                                     
 void Clavier::TestCamera()
 {
+#ifdef CL
   if (CL_Keyboard::get_keycode(CL_KEY_NUMPAD4)) {
     camera.SetXY (-SCROLL_CLAVIER, 0);
     camera.autorecadre = false;
@@ -359,4 +422,7 @@ void Clavier::TestCamera()
     camera.autorecadre = false;
     return;
   }
+#else
+
+#endif
 }

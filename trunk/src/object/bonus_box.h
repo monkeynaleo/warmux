@@ -29,6 +29,8 @@
 #include "../team/team.h"
 //-----------------------------------------------------------------------------
 
+struct SDL_Surface;
+
 class Caisse : public PhysicalObj
 {
 private:
@@ -37,7 +39,11 @@ private:
   bool desactive;
   bool pos_valide;
 
+#ifdef CL
   CL_Sprite anim;
+#else
+  Sprite *anim;
+#endif
   uint temps_caisse;
   int bonus;
 

@@ -27,12 +27,9 @@
 #include <ClanLib/core.h>
 #include <ClanLib/display.h>
 #include "menu/options_menu.h"
-#include "game/game.h"
 #include "graphic/graphism.h"
-#include "include/action_handler.h"
 #include "network/network.h"
 #include "graphic/video.h"
-
 #include "map/wind.h"
 #endif
 
@@ -44,6 +41,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include "include/action_handler.h"
+#include "game/game.h"
 #include "game/config.h"
 #include "graphic/font.h"
 #include "include/constant.h"
@@ -115,9 +114,7 @@ void AppWormux::Prepare()
   InitI18N();
   WelcomeMessage();
   InitRandom();
-#ifdef CL
   action_handler.Init();
-#endif
   config.Charge();
 }
 
@@ -139,7 +136,7 @@ bool AppWormux::Init(int argc, char **argv)
   // Screen initialisation
   if(!InitScreen(config.tmp.video.width,
                  config.tmp.video.height,
-                 16, //resolution in bpp
+                 32, //resolution in bpp
                  SDL_HWSURFACE))
   {
     std::cerr << "Unable to initialize SDL/ParaGUI: %s\n" << SDL_GetError() << std::endl;
@@ -250,9 +247,9 @@ int AppWormux::main (int argc, char **argv)
 
       switch (choix)
       {
-//         case menuPLAY:
-// 		          jeu.LanceJeu();
-// 	                  break;
+        case menuPLAY:
+	 jeu.LanceJeu();
+	 break;
 //                case menuOPTIONS:
 // 			  menu_option.Lance();
 // 	                  break;
@@ -274,6 +271,10 @@ int AppWormux::main (int argc, char **argv)
 	      << e.what() << std::endl
 	      << std::endl;
   }
+  catch (std::string &e)
+  {
+     std::cerr << e << std::endl;
+  } 
   catch (...)
   {
     std::cerr << std::endl

@@ -29,7 +29,7 @@
 class EmptyWeaponConfig
 {
 public:
-  virtual void LoadXml(xmlpp::Element *elem) = 0;
+   virtual void LoadXml(xmlpp::Element *elem) = 0;
 };
 
 //-----------------------------------------------------------------------------
@@ -40,6 +40,7 @@ public:
   uint damage;
 public:
   WeaponConfig();
+  virtual ~WeaponConfig() {};
   virtual void LoadXml(xmlpp::Element *elem);
 };
 
@@ -55,7 +56,8 @@ public:
   double blast_force ;
 public:
   ExplosiveWeaponConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
+  virtual ~ExplosiveWeaponConfig() {};
+   virtual void LoadXml(xmlpp::Element *elem);
 };
 
 //-----------------------------------------------------------------------------

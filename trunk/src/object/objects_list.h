@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../object/physical_obj.h"
+#include <vector>
 //-----------------------------------------------------------------------------
 
 // Boucle pour chaque objet de la liste des objets (non fantome)

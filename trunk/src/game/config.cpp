@@ -23,16 +23,16 @@
 
 #include "config.h"
 //-----------------------------------------------------------------------------
-#ifdef CL
 #include "../team/teams_list.h"
 #include "../graphic/video.h"
 #include "../sound/jukebox.h"
 #include "../team/skin.h"
-#include "../graphic/graphism.h"
 #include "../map/maps_list.h"
 #include "../weapon/weapons_list.h"
-#include "../interface/keyboard.h"
 #include "../include/action.h"
+#include "../interface/keyboard.h"
+#ifdef CL
+#include "../graphic/graphism.h"
 #include <ClanLib/display.h>
 #else
 #include <sstream>
@@ -129,6 +129,9 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   //=== Directories ===
   if (LitDocXml::LitString  (xml, "data_dir", data_dir)) {
     data_dir = TraduitRepertoire(data_dir);
+#ifndef CL
+    resource_manager.AddDataPath( std::string("../data/"));
+#endif
   }
   if (LitDocXml::LitString  (xml, "locale_dir", locale_dir)) {
     locale_dir = TraduitRepertoire(locale_dir);
@@ -196,6 +199,29 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 	clavier.SetKeyAction(CL_KEY_F7, ACTION_WEAPONS7);
 	clavier.SetKeyAction(CL_KEY_F8, ACTION_WEAPONS8);
 	clavier.SetKeyAction(CL_KEY_C, ACTION_CENTER);
+#else
+	clavier.SetKeyAction(SDLK_LEFT,		ACTION_MOVE_LEFT);		
+	clavier.SetKeyAction(SDLK_RIGHT,	ACTION_MOVE_RIGHT);
+	clavier.SetKeyAction(SDLK_UP,			ACTION_UP);
+	clavier.SetKeyAction(SDLK_DOWN,	ACTION_DOWN);
+	clavier.SetKeyAction(SDLK_RETURN,	ACTION_JUMP);
+	clavier.SetKeyAction(SDLK_BACKSPACE, ACTION_SUPER_JUMP);
+	clavier.SetKeyAction(SDLK_SPACE, ACTION_SHOOT);
+	clavier.SetKeyAction(SDLK_TAB, ACTION_CHANGE_CHARACTER);
+	clavier.SetKeyAction(SDLK_ESCAPE, ACTION_QUIT);
+	clavier.SetKeyAction(SDLK_p, ACTION_PAUSE);
+	clavier.SetKeyAction(SDLK_F10, ACTION_FULLSCREEN);
+	clavier.SetKeyAction(SDLK_F9, ACTION_TOGGLE_INTERFACE);
+	clavier.SetKeyAction(SDLK_F1, ACTION_WEAPONS1);
+	clavier.SetKeyAction(SDLK_F2, ACTION_WEAPONS2);
+	clavier.SetKeyAction(SDLK_F3, ACTION_WEAPONS3);
+	clavier.SetKeyAction(SDLK_F4, ACTION_WEAPONS4);
+	clavier.SetKeyAction(SDLK_F5, ACTION_WEAPONS5);
+	clavier.SetKeyAction(SDLK_F6, ACTION_WEAPONS6);
+	clavier.SetKeyAction(SDLK_F7, ACTION_WEAPONS7);
+	clavier.SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
+	clavier.SetKeyAction(SDLK_c, ACTION_CENTER);
+
 #endif
  	return true;
 }
@@ -207,9 +233,8 @@ void Config::Applique()
   I18N_SetDir (locale_dir);
 
   // Charge le mode jeu
-#ifdef CL
   weapons_list.Init();
-#endif
+  
   game_mode.Load(m_game_mode);
 
 #ifdef CL
@@ -218,19 +243,22 @@ void Config::Applique()
   jukebox.ActiveMusic (tmp.sound.music);
   jukebox.ActiveMusic (tmp.sound.effects);
   jukebox.SetFrequency (tmp.sound.frequency);
-
+#else
+//TODO
+#endif
+   
   // Charge les équipes 
   InitSkins();
   teams_list.LoadList();
   if (m_xml_charge) teams_list.InitList (tmp.teams);
-  
+
+   
   // Charge les terrains
   lst_terrain.Init();
   if (m_xml_charge && !tmp.map_name.empty()) 
     lst_terrain.ChangeTerrainNom (tmp.map_name);
   else
     lst_terrain.ChangeTerrain (0);
-#endif
 }
 
 //-----------------------------------------------------------------------------

@@ -31,7 +31,12 @@
 #include "../weapon/dynamite.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
+#ifndef CL
+#include "../tool/resource_manager.h"
+#include "../tool/sprite.h"
+#endif
 #include <sstream>
+#include <iostream>
 using namespace Wormux;
 using namespace std;
 //-----------------------------------------------------------------------------
@@ -62,10 +67,18 @@ bool Team::Init (const std::string &teams_dir, const std::string &id)
     if (!FichierExiste(nomfich)) return false;
     if (!doc.Charge (nomfich)) return false;
 
+#ifdef CL
     CL_ResourceManager res(nomfich, false);
-
+#else
+    Profile *res = resource_manager.LoadXMLProfile( nomfich);
+#endif
+     
     // Charge les données
+#ifdef CL
     if (!ChargeDonnee (doc.racine(), &res)) return false;
+#else
+    if (!ChargeDonnee (doc.racine(), res)) return false;
+#endif
   }
   catch (const xmlpp::exception &e)
   {
@@ -106,7 +119,7 @@ void Team::ActualiseBarreEnergie ()
 }
 
 //-----------------------------------------------------------------------------
-
+#ifdef CL
 bool Team::ChargeDonnee (xmlpp::Element *xml, 
 			   CL_ResourceManager *res)
 {
@@ -171,6 +184,75 @@ bool Team::ChargeDonnee (xmlpp::Element *xml,
   vers_fin_it = vers.end();
   return (1 <= vers.size());
 }
+
+#else // CL defined
+
+bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
+{
+  xml = LitDocXml::AccesBalise (xml, "equipe");
+  // Valeurs par défaut
+  camera_est_sauve = false;
+  active_weapon = &dynamite;
+
+  m_name = "Team unamed";
+  m_sound_profile="default";
+  crosshair.Init();
+
+  // Lit le nom
+  if (!LitDocXml::LitString(xml, "nom", m_name)) return false;
+
+  // Ecusson
+  ecusson = resource_manager.LoadImage( res_profile, "flag");
+   
+  // Recupère le nom du profile sonore
+  LitDocXml::LitString(xml, "sound_profile", m_sound_profile);
+
+  // Créer les vers
+  xmlpp::Node::NodeList nodes = xml -> get_children("ver");
+  xmlpp::Node::NodeList::iterator 
+    it=nodes.begin(),
+    fin=nodes.end();
+
+  vers.clear();
+  bool fin_bcl;
+  do
+  {
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
+    Skin *skin;
+    std::string character_name="Soldat Inconnu";
+    std::string skin_name="ver_jaune";
+    LitDocXml::LitAttrString(elem, "nom", character_name);
+    LitDocXml::LitAttrString(elem, "avatar", skin_name);
+
+    if (skins_list.find(skin_name) != skins_list.end()) {
+      skin = &skins_list[skin_name];
+    } else {
+      cout << Format(_("Error: can't find the skin \"%s\" for the team \"%s\"."),
+		     skin_name.c_str(),
+		     m_name.c_str()) << endl;
+      return false;
+    }
+
+    // Initialise les variables du ver, puis l'ajoute à la liste
+    Character new_character;
+    vers.push_back(new_character);
+    vers.back().InitTeam (this, character_name, skin);
+
+    // C'est la fin ?
+    ++it;
+    fin_bcl = (it == fin);
+    fin_bcl |= (game_mode.max_characters <= vers.size());
+  } while (!fin_bcl);
+
+  ver_actif = 0;
+  vers_fin = vers.size();
+  vers_fin_it = vers.end();
+  return (1 <= vers.size());
+}
+
+
+#endif // CL not defined
+
 
 //-----------------------------------------------------------------------------
 
@@ -266,7 +348,11 @@ void Team::FinTour()
   ActiveCharacter().EndTurn();
   AccessWeapon().Deselect();
   camera_est_sauve = true;
+#ifdef CL
   sauve_camera = CL_Point(camera.GetX(), camera.GetY());
+#else
+  sauve_camera = Point2i(camera.GetX(), camera.GetY());
+#endif
 }
 
 //-----------------------------------------------------------------------------

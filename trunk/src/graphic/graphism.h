@@ -24,8 +24,13 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "font.h"
-#include <ClanLib/display.h>
-#include <ClanLib/core.h>
+#ifdef CL
+# include <ClanLib/display.h>
+# include <ClanLib/core.h>
+#endif
+
+struct SDL_Surface;
+
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -35,6 +40,7 @@ bool EstTransparent(uchar alpha);
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 // Polices de caractère
 extern Police police_grand;
 extern Police police_petit;
@@ -46,13 +52,16 @@ void TexteEncadre (Police &police,
 		   int x, int y, 
 		   const std::string &txt,
 		   uint espace=10);
-
+#endif
+   
 //-----------------------------------------------------------------------------
 
 class Graphisme
 {
 private:
   // Refreshnaire des ressources
+
+#ifdef CL
   CL_ResourceManager res;
 
 public:
@@ -62,6 +71,8 @@ public:
   // Accès aux ressources
   CL_ResourceManager *LitRes();
 
+#endif
+   
   // Initialise le ressource manager
   void Init();
 };

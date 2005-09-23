@@ -23,6 +23,9 @@
 #define MATH_TOOLS_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#ifndef CL
+#include "../tool/Point.h"
+#endif
 #include <string>
 //-----------------------------------------------------------------------------
 
@@ -67,6 +70,8 @@ double BorneDouble (const double &valeur, const double &min,
 // - M=O -> 0
 #ifdef CL
 double CalculeAngle (const CL_Point &O, const CL_Point &M);
+#else
+double CalculeAngle (const Point2i &O, const Point2i &M);
 #endif
 double CalculeAnglef (DoubleVector V) ;
 

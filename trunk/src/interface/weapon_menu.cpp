@@ -29,12 +29,20 @@
 #include "../tool/string_tools.h"
 #include "../weapon/weapons_list.h"
 #include "../weapon/weapon.h"
-#include "../graphic/graphism.h"
 #include "../graphic/video.h"
 #include "../game/time.h"
 #include "../team/team.h"
-#include "../interface/mouse.h"
 #include "../include/action_handler.h"
+#include "../interface/mouse.h"
+#ifdef CL
+#include "../graphic/graphism.h"
+#else
+# include "../tool/Point.h"
+#include "../tool/Rectangle.h"
+#include "../tool/Distance.h"
+#include "../include/app.h"
+#include "../tool/resource_manager.h"
+#endif
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -130,18 +138,35 @@ bool WeaponMenuItem::MouseOn(int s_x, int s_y)
   int scaled_width = (int)(BUTTON_ICO_WIDTH * scale) ;
   int scaled_height = (int)(BUTTON_ICO_HEIGHT * scale) ;
 
+#ifdef CL
   CL_Rect rect;
   rect.left = interface.weapons_menu.GetX() + x - (int)(0.5 * scaled_width) ;
   rect.top = interface.weapons_menu.GetY() + y - (int)(0.5 * scaled_height) ;
   rect.right = rect.left + scaled_width ;
   rect.bottom = rect.top + scaled_height ;
-
+#else
+  Rectanglei rect;
+  rect.x = interface.weapons_menu.GetX() + x - (int)(0.5 * scaled_width);
+  rect.w = scaled_width;
+  rect.y = interface.weapons_menu.GetY() + y - (int)(0.5 * scaled_height) ;
+  rect.h = scaled_height;;
+#endif
+   
+#ifdef CL
   CL_Point point;
+#else
+  Point2i point;
+#endif
+   
   point.x = s_x;
   point.y = s_y;
 
-  if (rect.is_inside(point))
-    return true;
+#ifdef CL
+   if (rect.is_inside(point))
+#else
+   if ( IsInside( rect, point))  
+#endif
+     return true;
   else
     {
       if(scale > DEFAULT_ICON_SCALE && !dezoom)
@@ -160,8 +185,12 @@ void WeaponMenuItem::Draw()
   std::ostringstream txt;
   int nb_bullets ;
 
+#ifdef CL
   CL_Surface button ;
-
+#else
+  SDL_Surface *button;
+#endif
+   
   switch (weapon_type) {
     case 1:
       button = interface.weapons_menu.my_button1 ;
@@ -190,20 +219,33 @@ void WeaponMenuItem::Draw()
 
   // Button display
 
-  button.set_scale(scale, scale);
-  
-  button.draw((int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale),
+#ifdef CL
+   button.set_scale(scale, scale);
+   button.draw((int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale),
 	      (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale));
 
+#else
+   // TODO : scale
+   SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale), (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale), button->w, button->h};	
+   SDL_BlitSurface( button, NULL, app.sdlwindow, &dest);
+
+#endif
+   
   // Weapon display
 
+#ifdef CL
   CL_Surface icon = weapon->icone;
 
   icon.set_scale(scale, scale);
 
   icon.draw((int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
 	    (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale));
-
+#else
+   // TODO : scale
+   SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale),weapon->icone->w,weapon->icone->h};
+   SDL_BlitSurface( weapon->icone, NULL, app.sdlwindow, &dr2);    
+#endif
+   
   // Amunitions display
   nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetName());
   txt.str ("");
@@ -211,10 +253,14 @@ void WeaponMenuItem::Draw()
     txt << ("§");
   else
     txt << nb_bullets;
+#ifdef CL
   police_weapon.Acces().set_scale(0.4+scale,0.4+scale);
   police_weapon.WriteLeftBottom ((int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
 				(int)(c_y + 0.5 * WEAPON_ICO_HEIGHT * scale),
-				txt.str());
+				 txt.str());
+#else
+// TODO
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -340,6 +386,7 @@ bool WeaponsMenu::IsDisplayed() const
 //-----------------------------------------------------------------------------
 void WeaponsMenu::Init()
 {
+#ifdef CL
   CL_ResourceManager* res=graphisme.LitRes();
 
   my_button1 = CL_Surface("interface/button1_icon", res);
@@ -347,6 +394,14 @@ void WeaponsMenu::Init()
   my_button3 = CL_Surface("interface/button3_icon", res);
   my_button4 = CL_Surface("interface/button4_icon", res);
   my_button5 = CL_Surface("interface/button5_icon", res);
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  my_button1 = resource_manager.LoadImage(res, "interface/button1_icon");
+  my_button2 = resource_manager.LoadImage(res,"interface/button2_icon");
+  my_button3 = resource_manager.LoadImage(res,"interface/button3_icon");
+  my_button4 = resource_manager.LoadImage(res,"interface/button4_icon");
+  my_button5 = resource_manager.LoadImage(res,"interface/button5_icon");
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -424,7 +479,7 @@ void WeaponsMenu::Draw()
 
   ReactionSouris(mouse_x,mouse_y);
   ComputeSize();
-
+   
   uint nr_buttons = max_weapon * nbr_weapon_type;
   uint button_no = 0;
   uint current_type = 0;
@@ -468,6 +523,8 @@ void WeaponsMenu::Draw()
 void WeaponsMenu::ReactionSouris (int x, int y)
 {
   static int bouton_sous_souris = -1; //bouton survolé par la souris
+ 
+#ifdef CL
   CL_Rect rect;
 
   rect.left = GetX();
@@ -478,8 +535,24 @@ void WeaponsMenu::ReactionSouris (int x, int y)
   CL_Point point;
   point.x = x;
   point.y = y;
+#else
+  Rectanglei rect;
 
+  rect.x = GetX();
+  rect.y = GetY() + GetHeight() - (int)(0.5 * BUTTON_ICO_HEIGHT);
+  rect.w = GetWidth();
+  rect.h = GetHeight() - (int)(0.5 * BUTTON_ICO_HEIGHT);
+
+  Point2i point;
+  point.x = x;
+  point.y = y;
+#endif
+   
+#ifdef CL
   if (rect.is_inside(point))
+#else
+  if ( IsInside( rect, point))
+#endif  
   {
     //Bouton en cour d'analyse:
     int button_no=0;
@@ -522,7 +595,9 @@ void WeaponsMenu::ReactionSouris (int x, int y)
 
 bool WeaponsMenu::ActionClic (int x, int y)
 {
+#ifdef CL
   CL_Rect rect;
+#endif
   if (!display) return false;
 
   iterator it=boutons.begin(), fin=boutons.end();

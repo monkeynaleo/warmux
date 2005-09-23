@@ -27,11 +27,14 @@
 #include "../gui/progress_bar.h"
 #include "skin.h"
 #include <string>
+#ifndef CL
+#include <SDL.h>
+#include "../tool/sprite.h"
+#endif
 //-----------------------------------------------------------------------------
 
 // Prédéfinition de la classe équipe
 class Team;
-
 //-----------------------------------------------------------------------------
 
 // Un ver de terre :-)
@@ -56,7 +59,11 @@ private:
 
   // Animation
   struct s_anim{
+#ifdef CL
     CL_Sprite image;
+#else
+    Sprite *image;
+#endif
     bool draw;
     uint time; // Time for next animation
   } anim;
@@ -65,8 +72,11 @@ private:
   uint m_frame_repetition; // Number of frame repetition (used for walking)
 
 public:
+#ifdef CL
   CL_Sprite image;
-  
+#else
+  Sprite *image;
+#endif
   // Previous strength 
   double previous_strength;
 

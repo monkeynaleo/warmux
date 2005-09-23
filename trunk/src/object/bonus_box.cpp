@@ -30,9 +30,16 @@
 #include "../game/time.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
-#include "../tool/geometry_tools.h"
 #include "../tool/random.h"
+#ifdef CL
+#include "../tool/geometry_tools.h"
+#else
+#include "../tool/resource_manager.h"
+#include "../tool/sprite.h"
+#include "../include/app.h"
+#endif
 #include <sstream>
+#include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -90,9 +97,15 @@ Caisse::Caisse()
 
 void Caisse::Init()
 {
+#ifdef CL
   CL_ResourceManager *res = graphisme.LitRes();
   anim = CL_Sprite( "objet/caisse", res);
   SetSize (anim.get_width(), anim.get_height());
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  anim = resource_manager.LoadSprite( res, "objet/caisse");
+  SetSize (anim->GetWidth(), anim->GetHeight());
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -169,9 +182,13 @@ void Caisse::Reset()
   affiche = false;
   Ready();
   parachute = true;
+#ifdef CL
   anim.set_play_loop(false);
   anim.set_frame(0);
-  
+#else
+   anim->SetCurrentFrame(0);
+   anim->Start();
+#endif
 
   temps_caisse = RandomLong(TEMPS_MIN_CREATION, 
 			    TEMPS_MAX_CREATION-TEMPS_MIN_CREATION);
@@ -188,10 +205,14 @@ void Caisse::Reset()
 void Caisse::Draw()
 { 
   if (!affiche) return;
+#ifdef CL
   anim.draw (GetX(), GetY());
 #if defined(DEBUG_CADRE_TEST)
   CL_Rect rect=LitRectTest();
   CL_Display::draw_rect (rect, CL_Color::red);
+#endif
+#else
+  anim->Blit( app.sdlwindow, GetX(), GetY());
 #endif
 }
 
@@ -209,8 +230,12 @@ void Caisse::SignalFallEnding()
   COUT_DBG << "Début de l'animation 'repli du parachute'." << std::endl;
 #endif
   parachute = false;
+#ifdef CL
   anim.restart();
-
+#else
+  anim->SetCurrentFrame(0);
+  anim->Start();
+#endif
   SetMass (MASSE_CAISSE);
   UpdatePosition();
 }
@@ -301,9 +326,17 @@ void Caisse::Refresh()
   }
 
   // Refresh de l'animation
-  if (!parachute) anim.update();
-
-  m_ready = anim.is_finished();
+#ifdef CL
+   if (!parachute) anim.update();
+#else
+   if (!parachute) anim->Update();
+#endif
+   
+#ifdef CL
+   m_ready = anim.is_finished();
+#else
+   m_ready = anim->GetCurrentFrame() == anim->GetFrameCount()-1;
+#endif
 }
 
 //-----------------------------------------------------------------------------

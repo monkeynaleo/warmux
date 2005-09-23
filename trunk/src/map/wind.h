@@ -29,6 +29,9 @@
 #include "../gui/progress_bar.h"
 #include <vector>
 
+struct SDL_Surface;
+struct Sprite;
+
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -36,8 +39,12 @@ namespace Wormux {
 class WindParticle : public PhysicalObj
 {
 public:
+#ifdef CL
   CL_Sprite sprite;
-
+#else
+  Sprite *sprite;
+#endif
+     
 public:
   WindParticle();
   void Reset();
@@ -73,7 +80,11 @@ public:
   void Draw();
   void DrawParticles();
   void LoadXML(xmlpp::Element *xml);
+#ifdef CL
   void LoadXML_Sprite(CL_ResourceManager* res);
+#else
+   // TODO
+#endif
 };
 
 
