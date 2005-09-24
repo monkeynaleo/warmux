@@ -107,7 +107,8 @@ bool Mouse::ActionClicG()
 #else
    const Point2i pos_monde = GetPosMonde();   
 #endif
-   
+
+#ifdef CL   
 #ifdef MODE_TRICHEUR
   // Control gauche + clic gauche = téléportation !
   if (CL_Keyboard::get_keycode(CL_KEY_CONTROL) && ActiveCharacter().IsReady())
@@ -116,6 +117,7 @@ bool Mouse::ActionClicG()
     ActiveCharacter().UpdatePosition();
     return true;
   }
+#endif
 #endif
 	
   // Action dans le menu des armes ?
