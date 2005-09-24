@@ -28,13 +28,13 @@ wormux_SOURCES = \
 	include/constant.cpp include/constant.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	graphic/font.cpp graphic/font.h \
-	interface/interface.cpp interface/interface.h \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
 	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/main_menu.cpp menu/main_menu.h \
 	game/time.cpp game/time.h \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/question.cpp gui/question.h \
+	interface/interface.cpp interface/interface.h \
         interface/cursor.cpp \
 	interface/game_msg.cpp interface/game_msg.h \
 	interface/mouse.cpp interface/mouse.h \
@@ -110,6 +110,6 @@ wormux_SOURCES = \
 
 
 
-AM_CXXFLAGS = @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ @PARAGUI_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
+AM_CXXFLAGS = -pg @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ @PARAGUI_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
 
 LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS) $(PARAGUI_LIBS)

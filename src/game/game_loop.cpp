@@ -433,9 +433,11 @@ void GameLoop::Refresh()
   // Refresh the map
   monde.Refresh();
 
+#ifdef CL
 #ifdef DEBUG
   // Draw les messages de debug
   debug.Refresh();
+#endif
 #endif
 
 }
@@ -504,9 +506,11 @@ void GameLoop::Draw ()
   CL_Display::pop_cliprect();
 #endif
    
+#ifdef CL
 #ifdef DEBUG
   // Draw les messages de debug
   debug.Draw();
+#endif
 #endif
 
   // Draw the interface (current team's information, weapon's ammo)

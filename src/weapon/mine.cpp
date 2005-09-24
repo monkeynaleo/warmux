@@ -49,7 +49,7 @@ namespace Wormux {
 #ifdef DEBUG
 
   //#define DBG_PLACEMENT
-#define DBG_DETECTION
+//#define DBG_DETECTION
 
 #define COUT_DBG0 std::cout << "[" << m_name << "]"
 #define COUT_DBG COUT_DBG0 " "
