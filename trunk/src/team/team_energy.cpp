@@ -26,7 +26,9 @@
 #include "../graphic/graphism.h"
 #include "../map/camera.h"
 #include "../game/time.h"
-
+#ifndef CL
+#include "../graphic/font.h"
+#endif
 using namespace std;
 using namespace Wormux;
 
@@ -147,7 +149,7 @@ void TeamEnergy :: Draw ()
   barre_energie.value_color = CL_Color((uchar)r, (uchar)v, 
 				       (uchar)b, ALPHA);
 #else
-//    barre_energie.value_color = CL_Color((uchar)r, (uchar)v,  (uchar)b, ALPHA);
+  barre_energie.SetValueColor( (unsigned char)r, (unsigned char)v, (unsigned char)b, ALPHA);
 #endif
    
   int x,y;
@@ -158,17 +160,19 @@ void TeamEnergy :: Draw ()
   x = camera.GetWidth() - (BARRE_LARG + 10) + dx;
   y = BARRE_HAUT +(classement * (BARRE_HAUT + ESPACEMENT)) +dy;
 #endif
-   barre_energie.DrawXY(x,y);
+  barre_energie.DrawXY(x,y);
   
   ostringstream ss;
   ss << nom << "/" << valeur;
+#ifdef CL
   x = camera.GetX() + camera.GetWidth() - ((BARRE_LARG/2) + 10) + dx;
   y = camera.GetY();
   y += BARRE_HAUT + (classement * (BARRE_HAUT + ESPACEMENT)) + dy;
-#ifdef CL
-   police_mix.WriteCenterTop (x, y, ss.str());
+  police_mix.WriteCenterTop (x, y, ss.str());
 #else
-   // TODO
+  x = camera.GetWidth() - ((BARRE_LARG/2) + 10) + dx;
+  y = BARRE_HAUT + (classement * (BARRE_HAUT + ESPACEMENT)) + dy;
+  small_font.WriteCenterTop (x, y, ss.str(), white_color); 
 #endif
 }
 

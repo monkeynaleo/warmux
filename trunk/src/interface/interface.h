@@ -59,6 +59,8 @@ private:
 #else
   SDL_Surface *game_menu;
   SDL_Surface *bg_time;
+  int bottom_bar_ox;
+  int bottom_bar_oy;
 #endif
 public:
   Interface();

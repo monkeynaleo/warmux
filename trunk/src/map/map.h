@@ -34,6 +34,8 @@ extern const uint MAX_WIND_OBJECTS;
 class Monde
 {
 public:
+  Monde();
+   
   Wormux::Terrain terrain;
   Wormux::Ciel ciel;
   double dst_min_entre_vers;

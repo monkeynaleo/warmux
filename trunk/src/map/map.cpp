@@ -44,8 +44,13 @@ const uint AUTHOR_INFO_Y = 50;
 Monde monde;
 //-----------------------------------------------------------------------------
 
+Monde::Monde()
+{
+  dst_min_entre_vers = DST_MIN_ENTRE_VERS;
+}
+
 //NOT USED ANYMORE
-/*void Monde::Init()
+void Monde::Init()
 {
 
   ciel.Init();
@@ -56,7 +61,7 @@ Monde monde;
 
   // Distance minimale entre les vers
   dst_min_entre_vers = DST_MIN_ENTRE_VERS;
-}*/
+}
 
 //-----------------------------------------------------------------------------
 
@@ -301,7 +306,7 @@ void Monde::DrawAuthorName()
 #ifdef CL
    police_mix.WriteLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y, txt);
 #else
-//TODO
+   small_font.WriteLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y, txt, white_color);
 #endif
 }
 

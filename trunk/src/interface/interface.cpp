@@ -48,10 +48,6 @@ SDL_Color c_gray   = { 0xF0, 0xF0, 0xF0, 0xFF };
 SDL_Color c_darkgray = { 0x50, 0x50, 0x50, 0xFF };
 SDL_Color c_dimgray  = { 0xF0, 0xF0, 0xF0, 0xFF };
 
-SDL_Color c_w1 = { 0xFF, 0xFF, 0xFF, 0xF0};
-SDL_Color c_w2 = { 0x00, 0x00, 0x00, 0xF0};
-SDL_Color c_w3 = { 255*6/10, 255*6/10, 255*6/10, 96};
-
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -147,9 +143,9 @@ void Interface::Init()
   weapon_strength_bar.border_color = CL_Color(0, 0, 0, 127);
   weapon_strength_bar.background_color = CL_Color(255*6/10, 255*6/10, 255*6/10, 96);
 #else
-  weapon_strength_bar.value_color = c_w1;
-  weapon_strength_bar.border_color = c_w2;
-  weapon_strength_bar.background_color = c_w3; 
+  weapon_strength_bar.SetValueColor (255, 255, 255, 127);
+  weapon_strength_bar.SetBorderColor (0, 0, 0, 127);
+  weapon_strength_bar.SetBackgroundColor (255*6/10, 255*6/10, 255*6/10, 96); 
 #endif
 }
 
@@ -189,7 +185,7 @@ void Interface::AfficheInfoVer (Character &ver)
 #ifdef CL
    police_grand.WriteLeft (NOM_VER_X, NOM_VER_Y, txt.str());
 #else
-   // TODO
+   normal_font.WriteLeft( bottom_bar_ox+NOM_VER_X, bottom_bar_oy+NOM_VER_Y, txt.str(), c_white);
 #endif
    
   // Affiche l'énergie du ver
@@ -205,16 +201,18 @@ void Interface::AfficheInfoVer (Character &ver)
 #ifdef CL
   police_grand.WriteLeft (ENERGIE_VER_X, ENERGIE_VER_Y, txt.str());
 #else
-// TODO 
+  normal_font.WriteLeft (bottom_bar_ox+ENERGIE_VER_X, bottom_bar_oy+ENERGIE_VER_Y, txt.str(), white_color);
 #endif
    
   // Barre d'énergie
-  barre_energie.DrawXY (x+INFO_VER_X1, y+INFO_VER_Y1);
-
+#ifdef CL
+   barre_energie.DrawXY (x+INFO_VER_X1, y+INFO_VER_Y1);
+#else
+   barre_energie.DrawXY (bottom_bar_ox+BARENERGIE_X,bottom_bar_oy+BARENERGIE_Y);
+#endif
+   
 #ifdef CL
   CL_Display::pop_cliprect();
-#else
-// TODO ?   
 #endif
    
   // Affiche l'écusson de l'équipe
@@ -254,8 +252,6 @@ void Interface::AfficheInfoArme ()
 					 y+CLIP_ARME_Y1,
 					 x+CLIP_ARME_X2, 
 					 y+CLIP_ARME_Y2));
-#else
-// TODO ?
 #endif
    
   // Nom de l'arme
@@ -265,7 +261,7 @@ void Interface::AfficheInfoArme ()
 #ifdef CL
   police_grand.WriteLeft (NOM_ARME_X, NOM_ARME_Y, txt.str());
 #else
-// TODO
+  normal_font.WriteLeft (bottom_bar_ox+NOM_ARME_X, bottom_bar_oy+NOM_ARME_Y, txt.str(), white_color);
 #endif
 
   // Icône de l'arme
@@ -274,8 +270,8 @@ void Interface::AfficheInfoArme ()
 #else
    if( arme_affiche->icone )
      {
-	SDL_Rect dest = { x+CLIP_ARME_X1+ICONE_ARME_X, y+CLIP_ARME_Y1+ICONE_ARME_Y, arme_affiche->icone->w, arme_affiche->icone->h};	
-	SDL_BlitSurface( arme_affiche->icone, NULL, app.sdlwindow, &dest);   
+	SDL_Rect dest_rect = { bottom_bar_ox+ICONE_ARME_X, bottom_bar_oy+ICONE_ARME_Y, arme_affiche->icone->w, arme_affiche->icone->h};	
+	SDL_BlitSurface( arme_affiche->icone, NULL, app.sdlwindow, &dest_rect);   
      }
    else
      {
@@ -296,7 +292,7 @@ void Interface::AfficheInfoArme ()
 
   CL_Display::pop_cliprect();
 #else
-  //TODO
+  normal_font.WriteLeft (bottom_bar_ox+MUNITION_X, bottom_bar_oy+MUNITION_Y, txt.str(), white_color);
 #endif
 }
 
@@ -305,25 +301,26 @@ void Interface::AfficheInfoArme ()
 void Interface::Draw ()
 {  
 #ifdef CL
-  bg_time.draw(( NULL);
+  bg_time.draw( NULL);
 #else
   SDL_Rect dest = { (video.GetWidth()/2)-40, 0, bg_time->w, bg_time->h};	
   SDL_BlitSurface( bg_time, NULL, app.sdlwindow, &dest);   
 #endif
-   
-  if ( game_loop.ReadState() == gamePLAYING && 
-       weapon_strength_bar.visible) {
+	       
+  if ( game_loop.ReadState() == gamePLAYING && weapon_strength_bar.visible)
+  {
     // Position on the screen 
     uint barre_x = (video.GetWidth()-weapon_strength_bar.GetWidth())/2;
     uint barre_y = video.GetHeight()-weapon_strength_bar.GetHeight() 
-      - interface.GetHeight()-10;
+                   - interface.GetHeight()-10;
 
     // Drawing on the screen
 #ifdef CL
      weapon_strength_bar.Draw ();
 #else
-     weapon_strength_bar.DrawXY (BARENERGIE_X+barre_x, BARENERGIE_X+barre_y);
+     weapon_strength_bar.DrawXY (BARENERGIE_X+barre_x, BARENERGIE_Y+barre_y);
 #endif
+
   }
        
   weapons_menu.Draw();
@@ -333,6 +330,11 @@ void Interface::Draw ()
   int x = (video.GetWidth() - GetWidth())/2;
   int y = video.GetHeight() - GetHeight();
 
+#ifndef CL
+   bottom_bar_ox = x;
+   bottom_bar_oy = y;
+#endif
+   
   // On a bien un ver et/ou une équipe pointée par la souris
   if (ver_pointe_souris == NULL) ver_pointe_souris = &ActiveCharacter();
 
@@ -342,7 +344,7 @@ void Interface::Draw ()
 	       
   // Redessine intégralement le fond ?
 #ifdef CL
-      game_menu.draw (0, 0, NULL);
+  game_menu.draw (0, 0, NULL);
 #else
   SDL_Rect dr = { x, y, game_menu->w, game_menu->h};	
   SDL_BlitSurface( game_menu, NULL, app.sdlwindow, &dr);   	       
@@ -354,7 +356,7 @@ void Interface::Draw ()
 #ifdef CL
      police_grand.WriteCenter (GetWidth()/2, GetHeight()/2, ulong2str(chrono));
 #else
-     // TODO
+     big_font.WriteCenter (x+GetWidth()/2, y+GetHeight()/2, ulong2str(chrono), c_white);
 #endif
   }
 
@@ -363,11 +365,9 @@ void Interface::Draw ()
 
   // Affiche les informations sur l'arme
   AfficheInfoArme ();
-
 	       
 #ifdef CL
   CL_Display::pop_modelview ();  
-#else
 #endif
 }
 
