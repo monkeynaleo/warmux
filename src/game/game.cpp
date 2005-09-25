@@ -204,8 +204,6 @@ void Jeu::LanceJeu()
   {
     InitGame ();
 
-    std::cout << "JCTMP Game successfully initialized ! " << std::endl;
-     
     bool fin;
     do
     {

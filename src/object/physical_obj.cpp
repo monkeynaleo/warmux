@@ -242,7 +242,7 @@ const CL_Rect PhysicalObj::GetRect() const
 #else
 const Rectanglei PhysicalObj::GetRect() const 
 { 
-  return Rectanglei( GetX(), GetX(), m_width, m_height);
+  return Rectanglei( GetX(), GetY(), m_width, m_height);
 }
 #endif
 //-----------------------------------------------------------------------------

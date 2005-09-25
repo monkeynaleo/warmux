@@ -236,6 +236,8 @@ void Character::DrawName (int dy) const
   const int y = GetY()+dy;
 #ifdef CL
    police_mix.WriteCenterTop (x,y,m_name);
+#else
+   small_font.WriteCenterTop (x-camera.GetX(),y-camera.GetY(),m_name,white_color);
 #endif
 }
 
@@ -380,7 +382,7 @@ void Character::Draw()
 #ifdef CL
     police_mix.WriteCenterTop (GetX() +GetWidth()/2, GetY()+dy, ss.str());    
 #else
-//TODO
+    small_font.WriteCenterTop (GetX() +GetWidth()/2-camera.GetX(), GetY()+dy-camera.GetY(), ss.str(), white_color);    
 #endif
   }
 
@@ -410,8 +412,8 @@ void Character::Saute ()
    
   m_rebounding = false;
 
-//  if(current_skin=="walking")
-//    SetSkin("jump");
+  if(current_skin=="walking")
+    SetSkin("jump");
 
   // Initialise la force
   double angle = Deg2Rad(game_mode.character.jump_angle);
@@ -662,8 +664,8 @@ void Character::SignalFallEnding()
 
     game_loop.SignalCharacterDamageFalling(this);
   }
-  if(current_skin=="jump")
-    SetSkin("walking");
+//  if(current_skin=="jump")
+//    SetSkin("walking");
 }
 
 //-----------------------------------------------------------------------------
@@ -927,7 +929,6 @@ void Character::Reset()
     uint x = RandomLong(0, monde.GetWidth() -GetWidth());
     uint y = RandomLong(0, monde.GetHeight() -GetHeight());
 
-    std::cout << "character initial pos x=" << x << " y=" << y << " => falling!" << std::endl; 
     SetXY (x, y);
 
 #ifndef NO_POSITION_CHECK
@@ -953,7 +954,6 @@ void Character::Reset()
        double dst = Distance ( p1, p2);
 #endif
       if (dst < monde.dst_min_entre_vers) {
-	std::cout << "JCTMP vorm is too near from another one" << endl;
 	pos_ok = false;
       }
        
