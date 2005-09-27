@@ -385,3 +385,50 @@ void Interface::ChangeAffiche (bool nv_affiche)
 }
 
 //-----------------------------------------------------------------------------
+
+void AbsoluteDraw(SDL_Surface* s, int x, int y)
+{
+  assert(s!=NULL);
+  if(x + s->w < 0 || y + s->h < 0)
+  {
+    std::cout << "WARNING: Trying to display a SDL_Surface out of the screen!" << std::endl;
+    return;
+  }
+  
+  if(x + s->w < camera.GetX() || x > camera.GetX()+camera.GetWidth()
+  || y + s->h < camera.GetY() || y > camera.GetY()+camera.GetHeight())
+  {
+    //Drawing out of camera area
+    return;
+  }
+
+  SDL_Rect src={0,0,s->w,s->h};
+  SDL_Rect dst={x - camera.GetX(), y - camera.GetY(), s->w , s->h};
+
+  if(dst.x<0)
+  {
+    src.w+=src.x;
+    src.x=0;
+  }
+
+  if(dst.x+src.w>camera.GetX())
+  {
+    src.w=camera.GetWidth()-src.x;
+  }
+
+  if(dst.y<0)
+  {
+    src.h+=src.y;
+    src.y=0;
+  }
+
+  if(dst.y+src.h>camera.GetY())
+  {
+    src.h=camera.GetHeight()-src.y;
+  }
+
+  
+
+  //TODO:blit only the displayed part of the SDL_Surface
+  SDL_BlitSurface(s,&src,app.sdlwindow,&dst);
+}
