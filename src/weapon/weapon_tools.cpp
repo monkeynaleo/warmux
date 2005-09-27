@@ -78,6 +78,8 @@ void AppliqueExplosion (const Point2i &explosion,
   // Play a sound
 #ifdef CL
   jukebox.Play (son);
+#else
+  jukebox.Play ("share", son);
 #endif
    
   // Apply damage on the worms.
