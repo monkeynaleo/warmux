@@ -185,7 +185,7 @@ void WindParticle::Draw()
 #ifdef CL
    sprite.draw(GetX(),GetY());
 #else
-   sprite->Blit( app.sdlwindow, GetX()-camera.GetX(), GetY()-camera.GetY());
+   sprite->Draw(GetX(), GetY());
 #endif
 }
 

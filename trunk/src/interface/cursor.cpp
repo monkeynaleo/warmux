@@ -32,9 +32,7 @@
 #include "../object/physical_obj.h"
 #include "../include/app.h"
 #include "../tool/Point.h"
-#ifndef CL
-#include "../map/camera.h"
-#endif
+
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -83,7 +81,7 @@ void CurseurVer::Draw()
 #ifdef CL
    image.draw (x, y);
 #else
-   image->Blit( app.sdlwindow, x-camera.GetX(), y-camera.GetY()); 
+   image->Draw(x,y); 
 #endif
 }
 

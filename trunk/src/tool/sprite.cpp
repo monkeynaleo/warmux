@@ -24,6 +24,8 @@
  *****************************************************************************/
 
 #include "sprite.h"
+#include "../map/camera.h"
+#include "../include/app.h"
 #include <SDL.h>
 
 Sprite::Sprite()
@@ -118,4 +120,8 @@ void Sprite::Update()
    current_frame = ( current_frame + 1 ) % nb_frames;
 }
 
+void Sprite::Draw(int pos_x, int pos_y)
+{
+  Blit(app.sdlwindow,pos_x - camera.GetX(),pos_y - camera.GetY());
+}
 

@@ -172,7 +172,7 @@ void ObjMine::Draw()
 #ifdef CL
    detection.draw (GetX(), GetY());
 #else
-   detection->Blit( app.sdlwindow, GetX(), GetY());
+   detection->Draw(GetX(), GetY());
 #endif
    
 #if defined(DEBUG_CADRE_TEST)

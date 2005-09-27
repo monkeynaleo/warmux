@@ -52,7 +52,6 @@
 #include <SDL.h>
 #include "../tool/Distance.h"
 #include "../include/app.h"
-#include "../map/camera.h"
 #endif
 #include <iostream>
 
@@ -348,7 +347,7 @@ void Character::Draw()
   if (GetDirection()<0) x += GetWidth();
   image.draw (x,y);
 #else
-  image->Blit(app.sdlwindow,x-camera.GetX(),y-camera.GetY());
+  image->Draw(x,y);
 #endif
    
 #ifdef DRAW_HAND_POSITION
@@ -363,7 +362,7 @@ void Character::Draw()
 #ifdef CL
    anim.image.draw (x,y);
 #else
-   anim.image->Blit(app.sdlwindow,x-camera.GetX(),y-camera.GetY());
+   anim.image->Draw(x,y);
 #endif
 
    // Draw energy bar
@@ -426,8 +425,8 @@ void Character::Saute ()
    
   m_rebounding = false;
 
-  if(current_skin=="walking")
-    SetSkin("jump");
+//  if(current_skin=="walking")
+//    SetSkin("jump");
 
   // Initialise la force
   double angle = Deg2Rad(game_mode.character.jump_angle);

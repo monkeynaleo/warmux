@@ -35,7 +35,6 @@
 #else
 #include "../tool/resource_manager.h"
 #include "../include/app.h"
-#include "../map/camera.h"
 #endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
@@ -79,7 +78,7 @@ void BatonDynamite::Init()
 
 #else
 
-   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");  
+   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
    image = resource_manager.LoadSprite(res,"dynamite_anim");
 
    double delay = dynamite.cfg().duree/image->GetFrameCount()/1000.0 ;
@@ -193,11 +192,11 @@ void BatonDynamite::Draw()
   int x = GetX();
   int y = GetY();
   if (!explosion_active)
-    image->Blit( app.sdlwindow,x-camera.GetX(),y-camera.GetY()); 
+    image->Draw(x,y);
   else {
     x -= explosion->GetWidth()/2;
     y -= explosion->GetHeight()/2;
-    explosion->Blit(app.sdlwindow,x-camera.GetX(),y-camera.GetY());
+    explosion->Draw(x,y);
   }
 }
    
