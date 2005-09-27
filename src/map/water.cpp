@@ -24,6 +24,7 @@
 #include "../game/time.h"
 #include "map.h"
 #include "maps_list.h"
+#include "../interface/interface.h"
 
 #ifdef CL
 #include "../graphic/graphism.h"
@@ -58,6 +59,7 @@ void Water::Init()
 #else
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
    surface = resource_manager.LoadImage(res, "gfx/water");
+
 #endif
   shift1 = 0;
 }
@@ -157,8 +159,7 @@ void Water::Draw()
 #ifdef CL     
      surface->draw (x, y);
 #else
-     SDL_Rect dest_rect = {x,y,surface->w,surface->h};
-     SDL_BlitSurface( surface, NULL, app.sdlwindow, &dest_rect);
+     AbsoluteDraw( surface, x,y);
 #endif
   }
 }

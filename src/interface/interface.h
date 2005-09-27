@@ -78,5 +78,7 @@ public:
 
 extern Interface interface;
 
+void AbsoluteDraw(SDL_Surface* s, int x, int y);
+
 //-----------------------------------------------------------------------------
 #endif
