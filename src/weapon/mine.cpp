@@ -70,6 +70,7 @@ ObjMine::ObjMine() : PhysicalObj("mine", 0.0)
   m_rebounding = true;
   affiche = true;
   non_defectueuse = RandomLong(0, 9);
+  channel = -1;
   Init();
 }
 
@@ -229,7 +230,7 @@ void ObjMine::ActiveDetection()
 #ifdef CL
      jukebox.Play("weapon/mine_beep", true);    
 #else
-//TODO
+     channel = jukebox.Play("share", "weapon/mine_beep", -1);
 #endif
   }
 }
@@ -284,7 +285,8 @@ void ObjMine::Refresh()
 #ifdef CL
     jukebox.Stop("weapon/mine_beep");
 #else
-     // TODO
+    jukebox.Stop(channel);
+    channel = -1;
 #endif
      Ghost ();
     return;
@@ -303,7 +305,7 @@ void ObjMine::Refresh()
 #ifdef CL
       jukebox.Stop("weapon/mine_beep");
 #else
-       // TODO
+      jukebox.Stop(channel);
 #endif
        if (non_defectueuse)
       {

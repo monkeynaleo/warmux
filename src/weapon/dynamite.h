@@ -78,6 +78,9 @@ public:
 class Dynamite : public Weapon
 {
 private:
+  // channel used for sound
+  int channel;
+
   // Image du trou de l'explosion
 #ifdef CL
   CL_Surface impact;
