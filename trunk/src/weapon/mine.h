@@ -42,6 +42,9 @@ namespace Wormux {
 class ObjMine : public PhysicalObj
 {
 private:
+  // channel used for sound
+  int channel;
+
   // La mine est affichée ?
   bool affiche;
 

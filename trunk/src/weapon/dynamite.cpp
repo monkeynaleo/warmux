@@ -216,6 +216,7 @@ Dynamite::Dynamite() : Weapon(WEAPON_DYNAMITE, "dynamite")
 {
   m_name = _("Dynamite");
   extra_params = new DynamiteConfig();
+  channel = -1;
 
    m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
 }
@@ -264,6 +265,7 @@ bool Dynamite::p_Shoot ()
 #ifdef CL
    jukebox.Play("weapon/dynamite_fuze");
 #else
+   jukebox.Play("share","weapon/dynamite_fuze");
    // TODO
 #endif
    return true;
@@ -297,6 +299,9 @@ void Dynamite::FinExplosion ()
 
 #ifdef CL
    jukebox.Stop("weapon/dynamite_fuze");
+#else
+   jukebox.Stop(channel);
+   channel = -1;
 #endif
    
   // Si la dynamite est sortie de l'écran, on ne fait rien
