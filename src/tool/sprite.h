@@ -52,6 +52,7 @@ class Sprite
    void Finish();
      
    void Blit( SDL_Surface *dest, unsigned int pox_x, unsigned int pos_y);
+   void Draw(int pos_x, int pos_y);
    void Update();
    
  private:

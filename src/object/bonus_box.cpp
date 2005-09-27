@@ -212,7 +212,7 @@ void Caisse::Draw()
   CL_Display::draw_rect (rect, CL_Color::red);
 #endif
 #else
-  anim->Blit( app.sdlwindow, GetX(), GetY());
+  anim->Draw(GetX(), GetY());
 #endif
 }
 

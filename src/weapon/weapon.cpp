@@ -30,7 +30,6 @@
 #include "../tool/i18n.h"
 #include "../tool/math_tools.h"
 #include "../tool/xml_document.h"
-#include "../map/camera.h"
 #include "../object/objects_list.h"
 #include "../include/action_handler.h"
 #include "../interface/cursor.h"
@@ -192,7 +191,7 @@ void WeaponProjectile::Draw()
   CL_Display::draw_rect (GetTestRect(), CL_Color::red);
 #endif
 #else
-  image->Blit( app.sdlwindow, GetX()-camera.GetX(), GetY()-camera.GetY());   
+  image->Draw(GetX(), GetY());   
 #endif
 }
 
