@@ -292,7 +292,11 @@ void InitGame ()
     if ( (**equipe).GetSoundProfile() != "default" )
       jukebox.Load((**equipe).GetSoundProfile()) ;  
 #else
-// TODO
+// TODO  
+  jukebox.LoadXML("default");
+  POUR_CHAQUE_EQUIPE(equipe) 
+    if ( (**equipe).GetSoundProfile() != "default" )
+      jukebox.LoadXML((**equipe).GetSoundProfile()) ; 
 #endif
    
   // =============================================
@@ -302,7 +306,7 @@ void InitGame ()
 #ifdef CL
    if (jukebox.UseMusic()) jukebox.Play ("ambiance/grenouilles", true);
 #else
-// TODO
+   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
 #endif
   jeu.fin_partie = false;
   game_loop.SetState (gamePLAYING, true);
@@ -596,6 +600,8 @@ void GameLoop::RefreshClock()
 	if (duration == 0) {
 #ifdef CL
 	  jukebox.Play("end_turn");
+#else
+	  jukebox.Play("share", "end_turn");
 #endif
 	   SetState (gameEND_TURN);
 	} else {
@@ -790,7 +796,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
 #ifdef CL
        jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "out");
 #else
-       ;
+       jukebox.Play(ActiveTeam().GetSoundProfile(), "out");
 #endif
        
       // Mort en se faisant toucher par son arme / la mort d'un ennemi ?
