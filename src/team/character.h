@@ -71,6 +71,9 @@ private:
   uint m_image_frame; // Current image frame
   uint m_frame_repetition; // Number of frame repetition (used for walking)
 
+  // Channel used for sound
+  int channel_step;
+
 public:
 #ifdef CL
   CL_Sprite image;

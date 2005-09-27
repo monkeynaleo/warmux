@@ -113,6 +113,7 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   m_rebounding = true;
   is_walking = true;
   current_skin = "";
+  channel_step = -1;
 }
 
 //-----------------------------------------------------------------------------
@@ -131,7 +132,7 @@ void Character::SignalDeath()
 #ifdef CL
   jukebox.PlayProfile(GetTeam().GetSoundProfile(),"death");
 #else
-   // TODO
+  jukebox.Play(GetTeam().GetSoundProfile(),"death");
 #endif
    
   SetSkin("dead");
@@ -183,7 +184,11 @@ void Character::SignalDrowning()
 #ifdef CL
   jukebox.PlayProfile(GetTeam().GetSoundProfile(),"sink");
   game_loop.SignalCharacterDeath (this);
+#else
+  jukebox.Play (GetTeam().GetSoundProfile(),"sink");
+  game_loop.SignalCharacterDeath (this);
 #endif
+  
 }
 
 //-----------------------------------------------------------------------------
@@ -289,7 +294,16 @@ void Character::SetEnergyDelta (int delta)
       jukebox.PlayProfile(GetTeam().GetSoundProfile(), "injured_medium");
     else 
       jukebox.PlayProfile(GetTeam().GetSoundProfile(), "injured_high");
+#else
+    if ( losted_energy < 33 )
+      jukebox.Play (GetTeam().GetSoundProfile(), "injured_light");
+    else if ( losted_energy < 66 )
+      jukebox.Play (GetTeam().GetSoundProfile(), "injured_medium");
+    else 
+      jukebox.Play (GetTeam().GetSoundProfile(), "injured_high");
+#
 #endif
+
   }
   else 
     losted_energy = 0;
@@ -299,7 +313,7 @@ void Character::SetEnergyDelta (int delta)
 #ifdef CL
     jukebox.PlayProfile(GetTeam().GetSoundProfile(), "friendly_fire");
 #else
-   ;
+  jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
 #endif
    
   // Dead character ?
@@ -407,7 +421,7 @@ void Character::Saute ()
 #ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "jump");
 #else
-//TODO
+  jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
 #endif
    
   m_rebounding = false;
@@ -435,7 +449,7 @@ void Character::SuperSaut ()
 #ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "superjump");
 #else
-// TODO
+  jukebox.Play (ActiveTeam().GetSoundProfile(), "superjump");
 #endif
    
   // Initialise la force
@@ -833,6 +847,10 @@ void Character::FrameImageSuivante()
 
   if (play)
     jukebox.PlayProfile(m_team->GetSoundProfile(), "step", false, &step_session);
+#else
+  if ( channel_step == -1 || !Mix_Playing(channel_step) ) {
+    channel_step = jukebox.Play (m_team->GetSoundProfile(), "step");
+  }
 #endif
 }
 
