@@ -24,6 +24,7 @@
 #include "../game/time.h"
 #include "map.h"
 #include "maps_list.h"
+
 #ifdef CL
 #include "../graphic/graphism.h"
 #else
@@ -55,7 +56,8 @@ void Water::Init()
 #ifdef CL
    surface = new CL_Surface("gfx/water", graphisme.LitRes());
 #else
-   surface = resource_manager.LoadImage("water.png");
+   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+   surface = resource_manager.LoadImage(res, "gfx/water");
 #endif
   shift1 = 0;
 }
