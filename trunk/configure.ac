@@ -169,6 +169,10 @@ SDL_LIBS=`$SDL_CONFIG --libs`
 SDL_LIBS="$SDL_LIBS -lSDL_mixer -lSDL_image -lSDL_ttf -lSDL_gfx"
 PARAGUI_LIBS=`$PGUI_CONFIG --libs`
 
+#### Paragui 1.0 ####
+#g++ library flags:
+#PARAGUI_LIBS="-L/usr/lib/ -lparagui-1.0"
+
 AC_SUBST([LIBXMLPP_LIBS])
 AC_SUBST([PARAGUI_LIBS])
 AC_SUBST([SDL_LIBS])
@@ -189,6 +193,11 @@ SDL_CFLAGS=`$SDL_CONFIG --cflags`
 PARAGUI_CFLAGS=`$PGUI_CONFIG --cflags`
 CPPFLAGS="$CPPFLAGS $LIBXMLPP_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS"
+
+#### Paragui 1.0 ####
+#g++ incldue flags
+#PARAGUI_CFLAGS="-I/usr/include/paragui-1.0"
+
 
 AC_SUBST(SDL_CFLAGS)
 AC_SUBST(LIBXMLPP_CFLAGS)
