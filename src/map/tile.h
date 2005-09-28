@@ -54,7 +54,7 @@ public:
   CL_Surface& get_surface();
   CL_PixelBuffer& get_pixelbuffer();
 #else
-  unsigned char GetAlpha( int x, int y); 
+  unsigned char GetAlpha(const int x,const int y) const;
   SDL_Surface *get_surface();
   unsigned char *get_pixelbuffer();
   void Dig( int ox, int oy, SDL_Surface *dig);
@@ -110,7 +110,7 @@ public:
   uint GetHeight() const { return haut; }
 
   // Get alpha value of a pixel
-  uchar GetAlpha (int x, int y);
+  uchar GetAlpha (const int x, const int y) const;
 
   // Draw it
   void DrawTile();

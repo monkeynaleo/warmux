@@ -69,6 +69,17 @@ Clavier::Clavier()
 
 //-----------------------------------------------------------------------------
 
+
+void Clavier::Reset()
+{
+  //Disable repeated events when a key is kept down
+  SDL_EnableKeyRepeat(0,0);
+  for (uint i = 0; i < ACTION_MAX; i++)
+    PressedKeys[i] = false ;
+}
+
+//-----------------------------------------------------------------------------
+
 #ifdef CL
 void Clavier::DesinstallePilote()
 {
@@ -157,13 +168,6 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
   //if(!ActiveTeam().is_local)
   //  return;
 
-/*  if (ActiveTeam().GetWeapon().override_keys &&
-      ActiveTeam().GetWeapon().IsActive())
-    {
-      ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
-      return ;
-    }*/
-   
   if(action <= ACTION_CHANGE_CHARACTER)
     {
       switch (action) {
@@ -187,6 +191,17 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
       case SDL_KEYDOWN: event_type = KEY_PRESSED;break;
       case SDL_KEYUP: event_type = KEY_RELEASED;break;
      }
+  if(event_type==KEY_PRESSED)
+    HandleKeyPressed(action);
+  if(event_type==KEY_RELEASED)
+    HandleKeyReleased(action);
+
+/*  if (ActiveTeam().GetWeapon().override_keys &&
+      ActiveTeam().GetWeapon().IsActive())
+    {
+      ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
+      return ;
+    }*/
    
   ActiveCharacter().HandleKeyEvent( action, event_type);
 }
@@ -197,14 +212,20 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
 // Handle a pressed key
 #ifdef CL
 void Clavier::HandleKeyPressed (const CL_InputEvent &key)
+#else
+void Clavier::HandleKeyPressed (const Action_t &action)
+#endif
 {
+#ifdef CL
   std::map<int, Action_t>::iterator it = layout.find(key.id);
   
   if ( it == layout.end() )
     return;
   
   Action_t action = it->second;
+#endif
 
+#ifdef CL
   if (PressedKeys[action])
     {
       // The key is already pressed... It's a refresh.
@@ -213,6 +234,8 @@ void Clavier::HandleKeyPressed (const CL_InputEvent &key)
     }
   else
     PressedKeys[action] = true ;
+#endif
+  PressedKeys[action] = true ;
 
   //We can perform the next actions, only if the player is played localy:
   if(!ActiveTeam().is_local)
@@ -276,19 +299,23 @@ void Clavier::HandleKeyPressed (const CL_InputEvent &key)
         }
     }
 
+#ifdef CL
   // The key pressed was not in the previously managed key...
   // Try to manage it in the KeyEvent handler.
 
   HandleKeyEvent (key.id, KEY_PRESSED);
-}
-#else
 #endif
+}
 //-----------------------------------------------------------------------------
 
 // Handle a released key
 #ifdef CL
 void Clavier::HandleKeyReleased (const CL_InputEvent &key)
+#else
+void Clavier::HandleKeyReleased (const Action_t &action)
+#endif
 {
+#ifdef CL
   // Work-around for a bug from lower layers... Perhaps ClanLib.
   // Sometime, a key_release event is sent since the key is still pressed...
   if (CL_Keyboard::get_keycode(key.id))
@@ -300,6 +327,7 @@ void Clavier::HandleKeyReleased (const CL_InputEvent &key)
     return;
 
   Action_t action = it->second;
+#endif
 
   PressedKeys[action] = false ;
 
@@ -337,8 +365,11 @@ void Clavier::HandleKeyReleased (const CL_InputEvent &key)
       break ;
   }
 
+#ifdef CL
   HandleKeyEvent (key.id, KEY_RELEASED);
+#endif
 
+#ifdef CL
 #ifdef USE_HAND_POSITION_MODIFIER
   bool meta = 
     CL_Keyboard::get_keycode(CL_KEY_LSHIFT)
@@ -356,10 +387,8 @@ void Clavier::HandleKeyReleased (const CL_InputEvent &key)
       if (key.id == CL_KEY_DOWN) { tr.dy++; return; }
     }
 #endif
-}
-#else
-
 #endif
+}
 
 //-----------------------------------------------------------------------------
 
@@ -392,6 +421,20 @@ void Clavier::Refresh()
       if (meta) return;
 #endif
 #endif
+
+  //Treat KEY_REFRESH events:
+  for (uint i = 0; i < ACTION_MAX; i++)
+  if(PressedKeys[i])
+  {
+/*  if (ActiveTeam().GetWeapon().override_keys &&
+      ActiveTeam().GetWeapon().IsActive())
+    {
+      ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
+      return ;
+    }*/
+
+    ActiveCharacter().HandleKeyEvent(i,KEY_REFRESH);
+  }
 }
 
 //-----------------------------------------------------------------------------

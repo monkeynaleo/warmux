@@ -33,6 +33,7 @@
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 const uint NBR_VAL = 4; // nombre de valeurs utilisées pour calculer la moyenne
+const SDL_Color c_white  = { 0xFF, 0xFF, 0xFF, 0xFF };
 //-----------------------------------------------------------------------------
 ImageParSeconde image_par_seconde;
 //-----------------------------------------------------------------------------
@@ -111,7 +112,7 @@ void ImageParSeconde::Draw()
 #ifdef CL
   police_mix.WriteRight (video.GetWidth(), 0, ss.str());
 #else
-//TODO
+   small_font.WriteRight(video.GetWidth(), 0, ss.str(), c_white);
 #endif
 }
 

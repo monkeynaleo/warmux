@@ -177,7 +177,7 @@ uchar* TileItem::get_data()
 
 #ifndef CL
 
-unsigned char TileItem::GetAlpha( int x, int y)
+unsigned char TileItem::GetAlpha(const int x,const int y) const
 {
    return *(((unsigned char *)m_surface->pixels) + y*m_surface->pitch + x * 4 + 3);
 }
@@ -857,7 +857,7 @@ uchar Tile::GetAlpha (int x, int y)
   return *data;
 }
 #else
-uchar Tile::GetAlpha (int x, int y)
+uchar Tile::GetAlpha (const int x, const int y) const
 {
    if ( x < 0 || x >= larg || y < 0 || y >= haut )
      return 0;

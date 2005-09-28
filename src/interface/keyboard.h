@@ -49,8 +49,8 @@ private:
   void HandleKeyReleased (const CL_InputEvent &event);
   void HandleKeyEvent(int key, int event_type) ;
 #else
-  void HandleKeyPressed (const SDL_keysym *key);
-  void HandleKeyReleased (const SDL_keysym *key);
+  void HandleKeyPressed (const Action_t &action);
+  void HandleKeyReleased (const Action_t &action);
  public:
    void HandleKeyEvent( const SDL_Event *event) ;
  private:
@@ -58,6 +58,7 @@ private:
    
 public:
   Clavier();
+  void Reset();
 
   // On veut bouger la caméra au clavier ?
   void TestCamera();
