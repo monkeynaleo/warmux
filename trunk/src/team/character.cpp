@@ -527,37 +527,54 @@ void Character::HandleKeyEvent(int action, int event_type)
 
   if(action <= ACTION_CHANGE_CHARACTER)
     {
-      switch (action) {
-        case ACTION_MOVE_LEFT:
-	  MoveCharacterLeft(ActiveCharacter());
-	  //        action_handler.NewAction (Action(ACTION_MOVE_LEFT));
-	  break ;
+      switch (event_type)
+      {
+        case KEY_PRESSED:
+          switch (action)
+          {
+            case ACTION_JUMP:
+	      action_handler.NewAction (Action(ACTION_JUMP));
+	      return ;
 
-        case ACTION_MOVE_RIGHT:
-	  MoveCharacterRight(ActiveCharacter());
-	  //        action_handler.NewAction (Action(ACTION_MOVE_RIGHT));
-	  break ;
+            case ACTION_SUPER_JUMP:
+	      action_handler.NewAction (Action(ACTION_SUPER_JUMP));
+	      return ;
+            default:
+	      break ;
+          }
+          //no break!! -> it's normal
 
-        case ACTION_UP:
-	  if (ActiveTeam().crosshair.enable)
-	    action_handler.NewAction (Action(ACTION_UP));
-	  break ;
+        case KEY_REFRESH:
+          switch (action) {
+            case ACTION_MOVE_LEFT:
+              if(event_type==KEY_PRESSED)
+                InitMouvementDG(PAUSE_BOUGE);
+              MoveCharacterLeft(ActiveCharacter());
+                //        action_handler.NewAction (Action(ACTION_MOVE_LEFT));
+              break ;
 
-        case ACTION_DOWN:
-	  if (ActiveTeam().crosshair.enable)
-	    action_handler.NewAction (Action(ACTION_DOWN));
-	  break ;
+            case ACTION_MOVE_RIGHT:
+              if(event_type==KEY_PRESSED)
+                InitMouvementDG(PAUSE_BOUGE);
+    	      MoveCharacterRight(ActiveCharacter());
+    	      //        action_handler.NewAction (Action(ACTION_MOVE_RIGHT));
+  	      break ;
 
-        case ACTION_JUMP:
-	  action_handler.NewAction (Action(ACTION_JUMP));
-	  return ;
+            case ACTION_UP:
+    	      if (ActiveTeam().crosshair.enable)
+	        action_handler.NewAction (Action(ACTION_UP));
+	      break ;
 
-        case ACTION_SUPER_JUMP:
-	  action_handler.NewAction (Action(ACTION_SUPER_JUMP));
-	  return ;
-
-        default:
-	  break ;
+            case ACTION_DOWN:
+	      if (ActiveTeam().crosshair.enable)
+	        action_handler.NewAction (Action(ACTION_DOWN));
+	      break ;
+            default:
+	      break ;
+          }
+          break;
+        case KEY_RELEASED: break;
+        default: break;
       }
     }
 }
@@ -658,11 +675,25 @@ void Character::InitMouvementDG(uint pause)
 
 //-----------------------------------------------------------------------------
 
+bool Character::CanStillMoveDG(uint pause)
+{
+  if(pause_bouge_dg+pause<temps.Lit())
+  {
+    pause_bouge_dg += pause;
+    return true;
+  }
+  return false;
+}
+
+//-----------------------------------------------------------------------------
+
 // Signal the end of a fall
 void Character::SignalFallEnding()
 {
   // Do not manage dead worms.
   if (IsDead()) return;
+
+  pause_bouge_dg = temps.Lit();
 
   double norme, degat;
   DoubleVector speed_vector ;
