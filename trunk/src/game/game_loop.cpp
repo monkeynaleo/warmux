@@ -239,6 +239,7 @@ void InitGameData()
 
   curseur_ver.Reset();
   mouse.Reset();
+  clavier.Reset();
    
   image_par_seconde.Reset();
   interface.Reset();
@@ -369,7 +370,8 @@ void GameLoop::Refresh()
 	  {
 	     mouse.TraiteClic( &event);
 	  }
-	if ( event.type == SDL_KEYDOWN )
+	if ( event.type == SDL_KEYDOWN 
+	||   event.type == SDL_KEYUP)
 	  {	       
 	     switch ( event.key.keysym.sym)
 	       { 
