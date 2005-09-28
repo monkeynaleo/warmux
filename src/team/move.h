@@ -26,6 +26,9 @@
 #include "character.h"
 //-----------------------------------------------------------------------------
 
+// Pause entre deux deplacement
+#define PAUSE_BOUGE 30 // ms
+
 // Calcule la hauteur a chuter ou grimper lors d'un déplacement horizontal
 // Renvoie si le mouvement est possible
 bool CalculeHauteurBouge (Character &character, int &hauteur);

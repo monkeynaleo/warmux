@@ -111,6 +111,7 @@ public:
 
   // Initialise un mouvement à droite ou à gauche
   void InitMouvementDG (uint pause);
+  bool CanStillMoveDG (uint pause);
 
   // Changement d'etat
   void SuperSaut ();

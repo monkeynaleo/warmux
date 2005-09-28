@@ -45,9 +45,6 @@ using namespace Wormux;
 #define HAUTEUR_CHUTE_MAX 20
 
 // Pause entre deux deplacement
-#define PAUSE_BOUGE 10 // ms
-
-// Pause entre deux deplacement
 #define PAUSE_CHG_SENS 80 // ms
 
 //-----------------------------------------------------------------------------
@@ -124,21 +121,27 @@ void MoveCharacter (Character &character)
   // Calcule la hauteur a descendre
   if (!CalculeHauteurBouge (character, hauteur)) return;
 
-  // Bouge !
-  game_loop.character_already_chosen = true;
-  character.InitMouvementDG (PAUSE_BOUGE);
+  do
+  {
+    // Bouge !
+    game_loop.character_already_chosen = true;
+    // Deplace enfin le character
 
-  // Deplace enfin le character
-  character.SetXY (character.GetX() +character.GetDirection(),
+    character.SetXY (character.GetX() +character.GetDirection(),
 		character.GetY() +hauteur);
 
-  // Passe a l'image suivante
-  character.FrameImageSuivante();
+    // Gravite (s'il n'y a pas eu de collision
+    character.UpdatePosition();
 
-  // Gravite (s'il n'y a pas eu de collision
-  character.UpdatePosition();
+    // Passe a l'image suivante
+    character.FrameImageSuivante();
+
+  }
+  while(character.CanStillMoveDG(PAUSE_BOUGE) && CalculeHauteurBouge (character, hauteur));
+
+//    character.UpdatePosition();
+
 }
-
 //-----------------------------------------------------------------------------
 
 // Move a character to the left
