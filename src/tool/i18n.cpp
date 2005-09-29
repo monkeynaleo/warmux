@@ -26,6 +26,7 @@
 #include <sstream>
 #include <stdarg.h>
 #include "../game/config.h"
+#include "../config.h"
 //-----------------------------------------------------------------------------
 
 // Package is defined by autotools
