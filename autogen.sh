@@ -35,7 +35,7 @@ AUTOCONF=autoconf
 echo "Run aclocal"
 $ACLOCAL -I m4
 
-#autoheader
+autoheader
 
 echo "Run automake"
 $AUTOMAKE --add-missing --copy
