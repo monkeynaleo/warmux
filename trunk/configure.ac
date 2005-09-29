@@ -19,7 +19,7 @@ dnl Detect the canonical host and target build environment
 AC_CANONICAL_HOST
 AC_CANONICAL_TARGET
 
-AC_CONFIG_AUX_DIR([config])
+#AC_CONFIG_AUX_DIR([config])
 AM_INIT_AUTOMAKE([foreign 1.5])
 
 AM_MAINTAINER_MODE
