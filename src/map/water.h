@@ -43,11 +43,7 @@ private:
   uint hauteur_eau;
   uint temps_montee;
   std::vector<int> height;
-#ifdef CL
-  CL_Surface *surface;
-#else
   SDL_Surface *surface;
-#endif
 public:
   void Init();
   void Reset();

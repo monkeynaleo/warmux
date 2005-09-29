@@ -192,7 +192,11 @@ bool TuxLauncher::p_Shoot()
   supertux.Tire ();
   lst_objets.AjouteObjet (&supertux, true);
 
+#ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
+#else
+  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
+#endif
 
   return true;
 }

@@ -132,7 +132,11 @@ bool Bazooka::p_Shoot ()
   roquette.Tire (m_strength);
   lst_objets.AjouteObjet (&roquette, true);
 
+#ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
+#else
+  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
+#endif
 
   return true;
 }

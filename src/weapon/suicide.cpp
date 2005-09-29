@@ -59,6 +59,7 @@ void Suicide::p_Init()
 bool Suicide::p_Shoot()
 { 
   jukebox.Play ("weapon/suicide", false, &son);
+
   game_loop.interaction_enabled=false;
   is_dying = true;
 

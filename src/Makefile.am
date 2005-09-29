@@ -41,7 +41,7 @@ wormux_SOURCES = \
 	interface/keyboard.cpp interface/keyboard.h \
 	object/physical_obj.cpp object/physical_obj.h \
 	object/physics.cpp object/physics.h \
-       	object/bonus_box.cpp object/bonus_box.h \
+	object/bonus_box.cpp object/bonus_box.h \
 	object/objects_list.cpp object/objects_list.h \
 	object/particle.cpp object/particle.h \
 	map/map.cpp map/map.h \
@@ -66,7 +66,8 @@ wormux_SOURCES = \
 	weapon/weapon_tools.cpp weapon/weapon_tools.h \
 	weapon/crosshair.cpp weapon/crosshair.h \
 	weapon/mine.cpp weapon/mine.h \
-	weapon/dynamite.cpp weapon/dynamite.h
+	weapon/dynamite.cpp weapon/dynamite.h\
+	weapon/skip_turn.cpp weapon/skip_turn.h
 
 #	
 #	game/debug.cpp game/debug.h \

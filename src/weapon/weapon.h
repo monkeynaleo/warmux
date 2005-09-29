@@ -146,6 +146,9 @@ protected:
   int m_initial_nb_unit_per_ammo;
   bool use_unit_on_first_shoot;
 
+  // For sound
+  int channel_load;
+
 public:
   // Icone de l'arme dans l'interface
 #ifdef CL
