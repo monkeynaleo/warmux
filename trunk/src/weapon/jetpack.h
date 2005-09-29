@@ -34,6 +34,8 @@ private:
   double m_x_force;
   double m_y_force;
 
+  int channel;
+
   // Jetpack fuel.
   uint m_last_fuel_down;
 

@@ -242,6 +242,8 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
 #ifndef CL
    m_image = NULL;
 #endif
+
+   channel_load = -1;
 }
 
 //-----------------------------------------------------------------------------
@@ -519,6 +521,7 @@ void Weapon::InitLoading()
 #ifdef CL
   jukebox.Play("weapon/load");
 #else
+  channel_load = jukebox.Play("share","weapon/load");
   // TODO
 #endif
    
@@ -538,8 +541,9 @@ void Weapon::StopLoading()
   m_first_time_loading = 0 ;
 #ifdef CL
    jukebox.Stop("weapon/load");
+   channel_load = -1;
 #else
-   // TODO
+   jukebox.Stop(channel_load);
 #endif
 }
 

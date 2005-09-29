@@ -24,61 +24,64 @@
 #define OPTIONS_MENU_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#include "../gui/button.h"
-#include "../gui/list_box.h"
-#include "../gui/check_box.h"
-#include "../gui/spin_button.h"
 #include <string>
-#include <ClanLib/core.h>
-#include <ClanLib/display.h>
 //-----------------------------------------------------------------------------
 
-class MenuOption
+class OptionMenu
 {
-private:
-  volatile bool fin_boucle;
-  Button valider, enregistrer, annuler;
-#ifdef BUGGY_CODE
-  ListBox lboxVideoMode;
-#endif
-  ListBox lboxMaps, lboxTeams,  lboxSoundFreq;
 
-  CheckBox option_affichage_energie, option_affichage_nom;
-#ifdef BUGGY_CODE
-  CheckBox full_screen
-#endif
-#ifdef USE_SDL
-  CheckBox use_sdl;
-  bool old_use_sdl;
-#endif
-  CheckBox opt_sound, opt_music, opt_sound_effects;
+ public:
+  Run();
+  FreeMem();
+}
 
-  SpinButton option_temps_tour, option_temps_fin_tour, option_nb_ver, option_energie_ini;
-  bool m_init;
-  CL_Surface map_preview;
-  CL_Surface fond_option, fond_maps, fond_box, fond_box2;
-  uint carte_x, carte_y, carte_larg, carte_haut;
-  uint maps_x, maps_y;
-  uint teams_x, teams_y;
-  uint espace;
 
-  CL_Slot keyboard_slot, mouse_slot, slot_quit;
+/* class OptionMenu */
+/* { */
+/* private: */
+/*   volatile bool fin_boucle; */
+/*   Button valider, enregistrer, annuler; */
+/* #ifdef BUGGY_CODE */
+/*   ListBox lboxVideoMode; */
+/* #endif */
+/*   ListBox lboxMaps, lboxTeams,  lboxSoundFreq; */
 
-public:
-  MenuOption() ;
-  void Lance ();
-  void Init (); 
-  void Reset (); 
+/*   CheckBox option_affichage_energie, option_affichage_nom; */
+/* #ifdef BUGGY_CODE */
+/*   CheckBox full_screen */
+/* #endif */
+/* #ifdef USE_SDL */
+/*   CheckBox use_sdl; */
+/*   bool old_use_sdl; */
+/* #endif */
+/*   CheckBox opt_sound, opt_music, opt_sound_effects; */
 
- private:
-  void ChangeTerrain();
-  void TraiteTouche (const CL_InputEvent &event);
-  void TraiteClic (const CL_InputEvent &event);
-  void SignalWM_QUIT ();
-  void RetourMenuPrincipal ();
-  void EnregistreOptions();
-};
+/*   SpinButton option_temps_tour, option_temps_fin_tour, option_nb_ver, option_energie_ini; */
+/*   bool m_init; */
+/*   CL_Surface map_preview; */
+/*   CL_Surface fond_option, fond_maps, fond_box, fond_box2; */
+/*   uint carte_x, carte_y, carte_larg, carte_haut; */
+/*   uint maps_x, maps_y; */
+/*   uint teams_x, teams_y; */
+/*   uint espace; */
 
-extern MenuOption menu_option;
+/*   CL_Slot keyboard_slot, mouse_slot, slot_quit; */
+
+/* public: */
+/*   OptionMenu() ; */
+/*   void Lance (); */
+/*   void Init ();  */
+/*   void Reset ();  */
+
+/*  private: */
+/*   void ChangeTerrain(); */
+/*   void TraiteTouche (const CL_InputEvent &event); */
+/*   void TraiteClic (const CL_InputEvent &event); */
+/*   void SignalWM_QUIT (); */
+/*   void RetourMenuPrincipal (); */
+/*   void EnregistreOptions(); */
+/* }; */
+
+extern OptionMenu options_menu;
 //-----------------------------------------------------------------------------
 #endif

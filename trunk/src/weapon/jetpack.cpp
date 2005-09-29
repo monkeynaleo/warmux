@@ -129,7 +129,11 @@ void JetPack::StartUse()
   if ( (m_x_force == 0) && (m_y_force == 0))
     {
       m_last_fuel_down = temps.Lit();
+#ifdef CL
       jukebox.Play("weapon/jetpack", true);
+#else
+      channel = jukebox.Play("share","weapon/jetpack", -1);
+#endif
     }
 }
 
@@ -139,7 +143,12 @@ void JetPack::StopUse()
 {
   if (m_x_force == 0.0 && m_y_force == 0.0)
   {
-    jukebox.Stop("weapon/jetpack");
+#ifdef CL
+    jukebox.Stop("share","weapon/jetpack");
+#else
+    jukebox.Stop(channel);
+    channel = -1;
+#endif
     ActiveCharacter().SetSkin("jetpack");
   }
 }

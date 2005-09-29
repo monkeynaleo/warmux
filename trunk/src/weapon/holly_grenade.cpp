@@ -136,7 +136,11 @@ void HollyGrenade::Refresh()
 
   // Sing Alleluia ;-)
   if (tmp > (1000 * holly_grenade_launcher.cfg().timeout - 2000) && !sing_alleluia) {
+#ifdef CL
     jukebox.Play("weapon/alleluia") ;
+#else
+    jukebox.Play("share","weapon/alleluia") ;
+#endif
     sing_alleluia = true;
   }
   
@@ -206,7 +210,11 @@ bool HollyGrenadeLauncher::p_Shoot ()
   camera.ChangeObjSuivi (&grenade, true, false);
   lst_objets.AjouteObjet (&grenade, true);
 
+#ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
+#else
+  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
+#endif
 
   return true;
 }

@@ -39,23 +39,7 @@ namespace Wormux {
 bool EstTransparent(uchar alpha);
 
 //-----------------------------------------------------------------------------
-
-#ifdef CL
-// Polices de caractère
-extern Police police_grand;
-extern Police police_petit;
-extern Police police_mix;
-extern Police police_weapon;
-
-// Ecrit un texte et l'encadre
-void TexteEncadre (Police &police, 
-		   int x, int y, 
-		   const std::string &txt,
-		   uint espace=10);
-#endif
    
-//-----------------------------------------------------------------------------
-
 class Graphisme
 {
 private:

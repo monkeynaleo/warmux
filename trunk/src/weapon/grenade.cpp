@@ -190,7 +190,11 @@ bool GrenadeLauncher::p_Shoot ()
   camera.ChangeObjSuivi (&grenade, true, false);
   lst_objets.AjouteObjet (&grenade, true);
 
+#ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
+#else
+  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
+#endif
 
 #ifdef MSG_DBG
   COUT_DBG << "GrenadeLauncher::Tire()" << std::endl;

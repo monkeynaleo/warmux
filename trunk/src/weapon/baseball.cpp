@@ -49,7 +49,11 @@ bool Baseball::p_Shoot ()
   bool fin = false;
 
   RotationPointXY (ver_x, ver_y);
+#ifdef CL
   jukebox.Play ("weapon/baseball");
+#else
+  jukebox.Play ("share","weapon/baseball");
+#endif
 
   do
   {

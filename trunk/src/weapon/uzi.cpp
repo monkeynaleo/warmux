@@ -119,7 +119,11 @@ void Uzi::RepeatShoot()
 
 bool Uzi::p_Shoot()
 {
+#ifdef CL
   jukebox.Play("weapon/uzi");
+#else
+  jukebox.Play("share", "weapon/uzi");
+#endif
 
   // Calculate movement of the bullet
   

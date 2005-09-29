@@ -59,7 +59,12 @@ bool Teleportation::p_Shoot ()
   if (!ActiveCharacter().IsInVacuumXY (dst.x, dst.y)) return false; 
 
   game_loop.interaction_enabled = false;
+
+#ifdef CL
   jukebox.Play("weapon/teleport_start");
+#else 
+  jukebox.Play("share", "weapon/teleport_start");
+#endif
   
   // Initialise les variables
   temps = Wormux::temps.Lit();
@@ -88,7 +93,11 @@ void Teleportation::Refresh()
       ActiveCharacter().SetSpeed(0.0,0.0);
       ActiveCharacter().Reactive();
       
+#ifdef CL
       jukebox.Play("weapon/teleport_end");
+#else
+      jukebox.Play("share","weapon/teleport_end");
+#endif
       game_loop.interaction_enabled = true;
       return;
 

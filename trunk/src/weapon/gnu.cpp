@@ -215,7 +215,11 @@ bool GnuLauncher::p_Shoot ()
   camera.ChangeObjSuivi (&gnu,true,true,true);
   m_strength = 0;
 
+#ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
+#else
+  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
+#endif
 
   return true;
 }

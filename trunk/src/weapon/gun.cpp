@@ -152,7 +152,11 @@ bool Gun::p_Shoot()
   lst_objets.AjouteObjet (&balle, true);
 
   // Cache le curseur
+#ifdef CL
   jukebox.Play("weapon/gun");
+#else
+  jukebox.Play("share","weapon/gun");
+#endif
 
   return true;
 }
