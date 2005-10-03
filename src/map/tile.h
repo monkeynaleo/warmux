@@ -21,106 +21,118 @@
  * des trous dans cette image (en touchant à la couche alpha).
  *****************************************************************************/
 
-#ifndef CLIPPING_H
-#define CLIPPING_H
-//-----------------------------------------------------------------------------
+#ifndef _TILE_H
+#define _TILE_H
+
 #include "../include/base.h"
 #include <vector>
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
-//-----------------------------------------------------------------------------
 
 struct SDL_Surface;
 
-class TileItem 
+class TileItem
 {
 public:
-#ifdef CL
-  TileItem (uint width, uint height, CL_PixelFormat format=CL_PixelFormat::rgba8888);
-#else
-  TileItem (uint width, uint height);
-#endif   
-  TileItem (const TileItem &copy);
-  ~TileItem();
-  
-  void Lock();
-  void Unlock(bool force=false);  
-  void Sync(); // Save last changes (if needed)
-  void Touch(); // Touch it -> mark it as changed
-  
-  uchar* get_data();
-#ifdef CL
-  CL_Surface& get_surface();
-  CL_PixelBuffer& get_pixelbuffer();
-#else
-  unsigned char GetAlpha(const int x,const int y) const;
-  SDL_Surface *get_surface();
-  unsigned char *get_pixelbuffer();
-  void Dig( int ox, int oy, SDL_Surface *dig);
-#endif
+  TileItem () {};
+  virtual ~TileItem () {};
+   
+  virtual unsigned char GetAlpha(const int x,const int y) const = 0;
+  virtual void Dig( int ox, int oy, SDL_Surface *dig) = 0;
+  virtual SDL_Surface *GetSurface() = 0;
+  virtual void SyncBuffer() = 0; // (if needed)
+};
+
+class TileItem_AlphaSoftware : public TileItem
+{
+public:
+  TileItem_AlphaSoftware (unsigned int width, unsigned int height);
+  TileItem_AlphaSoftware (const TileItem_AlphaSoftware &copy);
+  ~TileItem_AlphaSoftware ();
+    
+  unsigned char GetAlpha (const int x, const int y) const;
+  SDL_Surface *GetSurface ();
+  void Dig (int ox, int oy, SDL_Surface *dig);
+  void SyncBuffer ();
+ 
+private:
+  unsigned int m_width, m_height;
+  SDL_Surface *m_surface;
+};  
+
+class TileItem_AlphaHardware : public TileItem
+{
+public:
+  TileItem_AlphaHardware (unsigned int width, unsigned int height);
+  TileItem_AlphaHardware (const TileItem_AlphaHardware &copy);
+  ~TileItem_AlphaHardware ();
+    
+  unsigned char GetAlpha (const int x, const int y) const;
+  SDL_Surface *GetSurface ();
+  void Dig (int ox, int oy, SDL_Surface *dig);
+  void SyncBuffer ();
    
 private:
-  bool m_locked;
-  bool m_changed;
-  uint m_width, m_height;
-#ifdef CL
-  CL_Surface m_surface;
-  CL_PixelBuffer m_buffer; // if not NULL, contains update canvas
-#else
+  unsigned int m_width, m_height;
   SDL_Surface *m_surface;
   unsigned char *m_buffer;
-#endif
+};  
+
+class TileItem_ColorkeySoftware : public TileItem
+{
+public:
+  TileItem_ColorkeySoftware (unsigned int width, unsigned int height);
+  TileItem_ColorkeySoftware (const TileItem_ColorkeySoftware &copy);
+  ~TileItem_ColorkeySoftware ();
+    
+  unsigned char GetAlpha (const int x, const int y) const;
+  SDL_Surface *GetSurface ();
+  void Dig (int ox, int oy, SDL_Surface *dig);
+  void SyncBuffer ();
+ 
+private:
+  unsigned int m_width, m_height;
+  SDL_Surface *m_surface;
+  unsigned char *m_buffer;
 };  
 
 //-----------------------------------------------------------------------------
  
 class Tile
 {
-protected:
-  // Dimension du terrain
-  uint larg, haut;
-
-  uint larg_cell, haut_cell;
-  uint nbr_cell_larg, nbr_cell_haut;
-  uint nbr_cell;
-
-  // Canvas donnant accès aux cellules
-  std::vector<TileItem> item;
-
 public:
-  Tile();
-  ~Tile();
+  Tile ();
+  ~Tile ();
 
   // Dig a hole
-#ifdef CL
-   void Dig (int x, int y, uint width, uint height, CL_PixelBuffer provider);
-#else
-   void Dig (int ox, int oy, SDL_Surface *provider);
-#endif
+  void Dig (int ox, int oy, SDL_Surface *provider);
    
   // Load an image
-#ifdef CL
-  void LoadImage (CL_Surface &terrain);
-#else
   void LoadImage (SDL_Surface *terrain);
-#endif
+
   // Get size
-  uint GetWidth() const { return larg; }
-  uint GetHeight() const { return haut; }
+  unsigned int GetWidth () const { return larg; }
+  unsigned int GetHeight () const { return haut; }
 
   // Get alpha value of a pixel
-  uchar GetAlpha (const int x, const int y) const;
+  unsigned char GetAlpha (const int x, const int y) const;
 
   // Draw it
   void DrawTile();
 
 protected:
   // Initialise la position, la taille des cellules, et la taille du terrain
-  void InitTile (uint larg_cell, uint haut_cell, uint larg, uint haut);
+  void InitTile (unsigned int larg_cell, unsigned int haut_cell, unsigned int larg, unsigned int haut);
 
   void FreeMem();
+
+  // Dimension du terrain
+  unsigned int larg, haut;
+
+  unsigned int larg_cell, haut_cell;
+  unsigned int nbr_cell_larg, nbr_cell_haut;
+  unsigned int nbr_cell;
+
+  // Canvas donnant accès aux cellules
+  std::vector<TileItem *> item;
 };
 
-//-----------------------------------------------------------------------------
-#endif
+#endif // _TILE_H

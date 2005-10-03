@@ -62,6 +62,13 @@ public:
     std::list<std::string> teams;
     std::string map_name;
   } tmp;
+   enum Transparency 
+     {
+	ALPHA,
+	COLORKEY,
+     };
+   Transparency transparency;
+  
   std::string data_dir, locale_dir, personal_dir;
 
 public:

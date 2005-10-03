@@ -48,6 +48,12 @@ AC_ARG_ENABLE([debug],
                    CXXFLAGS="$CXXFLAGS -DDEBUG -ggdb3"
 	       fi])
 
+AC_ARG_ENABLE([profile],
+	      [  --enable-profile        Enable profiling],
+	      [if test "x${enableval}" = "xyes" ; then
+                   CXXFLAGS="$CXXFLAGS -pg"
+	       fi])
+
 AC_ARG_ENABLE([static],
               [  --enable-static         Enable static building of wormux],
 	      [static=$enableval],
@@ -124,8 +130,8 @@ LIBS="$LIBS -lSDL_ttf"
 
 dnl === Check for SDL_gfx ==================================================
 
-#AC_CHECK_LIB(SDL_gfx, zoomSurface,,
-#	AC_MSG_ERROR([SDL_gfx library required]))
+AC_CHECK_LIB(SDL_gfx, zoomSurface,,
+	AC_MSG_ERROR([SDL_gfx library required]))
 LIBS="$LIBS -lSDL_gfx"
 
 
