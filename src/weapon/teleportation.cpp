@@ -89,7 +89,11 @@ void Teleportation::Refresh()
     if (retour) {
       // Oui, c'est la fin de la téléportation
       m_is_active = false;
+#ifdef CL
       ActiveCharacter().image.set_scale (m_direction, 1);
+#else
+      ActiveCharacter().image->Scale (m_direction, 1);
+#endif
       ActiveCharacter().SetSpeed(0.0,0.0);
       ActiveCharacter().Reactive();
       
@@ -143,8 +147,13 @@ void Teleportation::Refresh()
 void Teleportation::Draw()
 {
   if (m_is_active) {
+#ifdef CL
     ActiveCharacter().image.set_scale (m_zoom*m_direction, m_zoom);
     ActiveCharacter().image.draw (m_x, m_y);
+#else
+    ActiveCharacter().image->Scale (m_zoom*m_direction, m_zoom);
+    ActiveCharacter().image->Draw (m_x, m_y);
+#endif
   } else {
     Weapon::Draw();
   }

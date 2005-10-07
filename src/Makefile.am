@@ -67,8 +67,9 @@ wormux_SOURCES = \
 	weapon/crosshair.cpp weapon/crosshair.h \
 	weapon/mine.cpp weapon/mine.h \
 	weapon/dynamite.cpp weapon/dynamite.h\
-	weapon/skip_turn.cpp weapon/skip_turn.h
-
+	weapon/skip_turn.cpp weapon/skip_turn.h\
+	weapon/teleportation.cpp weapon/teleportation.h\
+	weapon/baseball.cpp weapon/baseball.h
 #	
 #	game/debug.cpp game/debug.h \
 ####	graphic/graphism.cpp graphic/graphism.h \
@@ -103,7 +104,6 @@ wormux_SOURCES = \
 #	weapon/lowgrav.cpp weapon/lowgrav.h \
 #	weapon/ninja_rope.cpp weapon/ninja_rope.h \
 #	weapon/parachute.cpp weapon/parachute.h\
-#	weapon/skip_turn.cpp weapon/skip_turn.h \
 #	weapon/suicide.cpp weapon/suicide.h \
 #	weapon/supertux.cpp weapon/supertux.h \
 #	weapon/teleportation.cpp weapon/teleportation.h \

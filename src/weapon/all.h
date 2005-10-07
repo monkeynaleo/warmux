@@ -27,7 +27,9 @@
 #include "airhammer.h"
 #include "air_attack.h"
 #include "auto_bazooka.h"
+*/
 #include "baseball.h"
+/*
 #include "bazooka.h"
 #include "cluster_bomb.h"
 */
@@ -46,7 +48,9 @@
 #include "ninja_rope.h"
 #include "supertux.h"
 #include "parachute.h"
+*/
 #include "teleportation.h"
+/*
 #include "uzi.h"
 */
 //-----------------------------------------------------------------------------
