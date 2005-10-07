@@ -21,9 +21,13 @@
 
 #include "baseball.h"
 //-----------------------------------------------------------------------------
+#ifdef CL
 #include <ClanLib/core.h>
-#include "../team/macro.h"
 #include "../tool/geometry_tools.h"
+#else
+#include "../tool/Point.h"
+#endif
+#include "../team/macro.h"
 #include "../game/game_loop.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
@@ -76,7 +80,11 @@ bool Baseball::p_Shoot ()
     if (&(*ver) != &ActiveCharacter())
     {
       // On a touché un ver ?
+#ifdef CL
       if (ObjTouche(*ver, CL_Point(x, y)))
+#else
+      if (ObjTouche(*ver, Point2<int>(x, y)))
+#endif
       {
 	// Inflige les dégats au ver touché
 	(*ver).SetEnergyDelta (-cfg().damage);

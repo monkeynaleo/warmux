@@ -47,6 +47,8 @@
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../map/camera.h"
+#include <SDL.h>
+#include <SDL_rotozoom.h>
 #endif
 #include <iostream>
 #include <sstream>

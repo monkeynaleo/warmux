@@ -65,14 +65,15 @@ void WeaponsList::Init()
   InitAndAddToList(&lance_cluster, 1);
   InitAndAddToList(&gun, 2);
   InitAndAddToList(&uzi, 2);
+*/
   InitAndAddToList(&baseball, 2);  
-*/  InitAndAddToList(&dynamite,3);
+  InitAndAddToList(&dynamite,3);
     InitAndAddToList(&mine,3);
 /*  InitAndAddToList(&air_attack,4);
   InitAndAddToList(&tux,4);  
-  InitAndAddToList(&gnu_launcher,4);  
+  InitAndAddToList(&gnu_launcher,4);  */
   InitAndAddToList(&teleportation,5);
-  InitAndAddToList(&parachute,5);
+  /*  InitAndAddToList(&parachute,5);
   InitAndAddToList(&suicide,5);*/
   InitAndAddToList(&skipturn,5);
   /*  InitAndAddToList(&jetpack,5);
