@@ -27,6 +27,35 @@
 #include "../map/camera.h"
 #include "../include/app.h"
 #include <SDL.h>
+#include <SDL_rotozoom.h>
+#include <iostream>
+
+// *****************************************************************************/
+
+SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv)
+{
+	int		x, y;
+	unsigned int	*srcbuff, *dstbuff; /* assuming unsigned int is 32bit */
+	SDL_Surface	*flipped = SDL_CreateRGBSurface(SDL_SWSURFACE, src->w,
+		src->h, 32, src->format->Rmask, src->format->Gmask,
+		src->format->Bmask, src->format->Amask);
+
+	SDL_LockSurface(src);
+	SDL_LockSurface(flipped);
+	srcbuff = (unsigned int*)src->pixels;
+	dstbuff = (unsigned int*)flipped->pixels;
+	for (y=0;y<src->h;y++)
+		for (x=0;x<src->w;x++)
+			dstbuff[y*src->w + x] =
+				srcbuff[(flipv?(src->h-y-1):y)*src->w +
+				(fliph?(src->w-x-1):x)];
+	SDL_UnlockSurface(flipped);
+	SDL_UnlockSurface(src);
+	
+	return flipped;
+}
+// *****************************************************************************/
+
 
 Sprite::Sprite()
 {
@@ -74,6 +103,8 @@ void Sprite::Scale( float scale_x, float scale_y)
 {
    this->scale_x = scale_x;
    this->scale_y = scale_y;
+
+
 }
 
 void Sprite::GetScaleFactors( float &scale_x, float &scale_y)
@@ -101,18 +132,47 @@ void Sprite::StartLoop()
 {
    current_frame = 0;
 }
-
 void Sprite::Finish()
 {
    current_frame = nb_frames-1;
 }
 
-void Sprite::Blit( SDL_Surface *dest, unsigned int pox_x, unsigned int pos_y)
+void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 {
-   //current_frame;
-   SDL_Rect sr = { current_frame*frame_width_pix, 0, frame_width_pix, frame_height_pix};
-   SDL_Rect dr = { pox_x, pos_y, frame_width_pix, frame_height_pix};
-   SDL_BlitSurface( surface, &sr, dest, &dr);
+ SDL_Rect dr = { pos_x, pos_y, frame_width_pix, frame_height_pix};
+
+ SDL_Surface *current;
+ 
+ // do we need to scale ?
+ bool scale = false;
+ if ( fabs(scale_x)!=1 || fabs(scale_y)!=1 ) {
+   scale = true;
+   current = zoomSurface (surface, fabs(scale_x), fabs(scale_y), 1);
+ } else {
+   current = surface; 
+ }
+
+ // do we need to mirror ?
+ int flip_h=0, flip_v=0;
+ if (scale_x < 0) flip_h = 1;
+ if (scale_y < 0) flip_v = 1;
+
+ if (flip_h || flip_v) {
+   SDL_Surface *tmp = newFlippedSurface(current,flip_h,flip_v);
+
+   SDL_Rect sr = { (nb_frames-current_frame-1)*frame_width_pix*fabs(scale_x), 0, 
+		   frame_width_pix, frame_height_pix}; // this is buggy, do not work in case of flip_v
+   
+   SDL_BlitSurface (tmp, &sr, dest, &dr);
+   SDL_FreeSurface(tmp);
+
+ } else {
+   SDL_Rect sr = { current_frame*frame_width_pix*fabs(scale_x), 0, frame_width_pix, frame_height_pix};
+   SDL_BlitSurface (current, &sr, dest, &dr);
+ }
+
+ if (scale)
+   SDL_FreeSurface(current);
 }
 
 void Sprite::Update()
@@ -124,4 +184,7 @@ void Sprite::Draw(int pos_x, int pos_y)
 {
   Blit(app.sdlwindow,pos_x - camera.GetX(),pos_y - camera.GetY());
 }
+
+
+//-----------------------------------------------------------------------------
 

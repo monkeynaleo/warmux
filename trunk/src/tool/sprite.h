@@ -29,6 +29,8 @@
 struct SDL_Surface;
 class ResourceManager;
 
+SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
+
 class Sprite
 {
  public:
