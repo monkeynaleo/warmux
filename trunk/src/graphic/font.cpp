@@ -19,6 +19,8 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_video.h>
 #include <iostream>
+#include <string>
+#include "../game/config.h"
 #include "../include/app.h"
 #include "font.h"
 //-----------------------------------------------------------------------------
@@ -34,13 +36,13 @@ Font small_font;
 Font tiny_font;
 
 void Font::InitAllFonts()
-{
-  huge_font.Load("../data/font/Vera.ttf", 40);
-  large_font.Load("../data/font/Vera.ttf", 32);
-  big_font.Load("../data/font/Vera.ttf", 24);
-  normal_font.Load("../data/font/Vera.ttf", 16);
-  small_font.Load("../data/font/Vera.ttf", 12);
-  tiny_font.Load("../data/font/Vera.ttf", 8);
+{   
+  huge_font.Load(Wormux::config.data_dir+"/font/Vera.ttf", 40);
+  large_font.Load(Wormux::config.data_dir+"/font/Vera.ttf", 32);
+  big_font.Load(Wormux::config.data_dir+"/font/Vera.ttf", 24);
+  normal_font.Load(Wormux::config.data_dir+"/font/Vera.ttf", 16);
+  small_font.Load(Wormux::config.data_dir+"/font/Vera.ttf", 12);
+  tiny_font.Load(Wormux::config.data_dir+"/font/Vera.ttf", 8);
 }
 
 //-----------------------------------------------------------------------------

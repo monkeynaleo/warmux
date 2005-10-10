@@ -215,19 +215,22 @@ Sprite *ResourceManager::LoadSprite( Profile *profile, std::string resource_name
    //      By now force alpha and no colorkey
    
    bool alpha = true;
-
-   Sprite *sprite = new Sprite();
-   sprite->surface = LoadImage( profile->relative_path+image_filename, alpha);
-      
+ 
+   Sprite *sprite = NULL;
+   
    xmlpp::Element *elem_grid = profile->doc->AccesBalise ( elem_image, "grid");
 
    if ( elem_grid == NULL )
      {
 	// No grid element, Load the Sprite like a normal image
-	
-	sprite->nb_frames = 1;
-	sprite->frame_width_pix = sprite->surface->w;
-	sprite->frame_height_pix = sprite->surface->h;
+
+	SDL_Surface *surface = LoadImage( profile->relative_path+image_filename, alpha);
+
+	sprite = new Sprite();
+     
+	sprite->Init( surface, surface->w, surface->h, 1, 1);
+
+	SDL_FreeSurface( surface);
 	
 #ifdef DEBUG
 	std::cout << "ResourceManager: sprite resource \"" << resource_name << "\" has no grid element" << std::endl;  
@@ -235,6 +238,11 @@ Sprite *ResourceManager::LoadSprite( Profile *profile, std::string resource_name
      }
    else
      {	
+	int frame_width = 0;
+	int frame_height = 0;
+	int nb_frames_x = 0;
+	int nb_frames_y = 0;
+	
 	std::string size;
 	if ( ! profile->doc->LitAttrString( elem_grid, "size", size) )
 	  {
@@ -245,8 +253,8 @@ Sprite *ResourceManager::LoadSprite( Profile *profile, std::string resource_name
 	
 	if ( size.find(",") != size.npos)
 	  {
-	     sprite->frame_width_pix = atoi( (size.substr(0,size.find(","))).c_str());
-	     sprite->frame_height_pix = atoi( (size.substr(size.find(",")+1,size.length())).c_str());
+	     frame_width = atoi( (size.substr(0,size.find(","))).c_str());
+	     frame_height = atoi( (size.substr(size.find(",")+1,size.length())).c_str());
 	  }
 	else
 	  {
@@ -264,9 +272,11 @@ Sprite *ResourceManager::LoadSprite( Profile *profile, std::string resource_name
 	
 	if ( array.find(",") != array.npos)
 	  {
-	     sprite->nb_frames = atoi( (array.substr(0,array.find(","))).c_str());
-	     if ( sprite->nb_frames <= 0 )
-	       sprite->nb_frames = 1;
+	     nb_frames_x = atoi( (array.substr(0,array.find(","))).c_str());
+	     if ( nb_frames_x <= 0 )
+	       nb_frames_x = 1;
+	  
+	     nb_frames_y = 1;
 	  }
 	else
 	  {
@@ -274,16 +284,16 @@ Sprite *ResourceManager::LoadSprite( Profile *profile, std::string resource_name
 	     return NULL;
 	  }
    
-/* en exemple....
-<sprite name="walking">
-  <image file="poulpe-anim.png">
-    <grid pos="0,0" size="42,42" array="10,1" />
-  </image>
-  <collision_rect dx="10" top="0" bottom="8" />
-  <wormux repetition="2" />
-*/ 
+	
+	SDL_Surface *surface = LoadImage( profile->relative_path+image_filename, alpha);
+	
+	sprite = new Sprite();
+     
+	sprite->Init( surface, frame_width, frame_height, nb_frames_x, nb_frames_y);
+	
+	SDL_FreeSurface( surface);
      }
-   
+
    return sprite;
 }
 
