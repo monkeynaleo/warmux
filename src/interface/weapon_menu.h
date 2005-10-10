@@ -32,7 +32,7 @@
 #endif
 //-----------------------------------------------------------------------------
 
-struct SDL_Surface;
+struct Sprite;
 
 class WeaponMenuItem
 {
@@ -40,6 +40,9 @@ public:
   int x, y;
   double scale;
   Weapon* weapon;
+#ifndef CL
+  Sprite *weapon_icon;
+#endif
   uint zoom_start_time;
   uint weapon_type;
 
@@ -69,11 +72,11 @@ public:
   CL_Surface my_button4 ;
   CL_Surface my_button5 ;
 #else
-  SDL_Surface *my_button1;
-  SDL_Surface *my_button2;
-  SDL_Surface *my_button3;
-  SDL_Surface *my_button4;
-  SDL_Surface *my_button5;
+  Sprite *my_button1;
+  Sprite *my_button2;
+  Sprite *my_button3;
+  Sprite *my_button4;
+  Sprite *my_button5;
 #endif
 private:
   std::vector<WeaponMenuItem> boutons;

@@ -54,6 +54,7 @@ SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv)
 	
 	return flipped;
 }
+
 // *****************************************************************************/
 
 
@@ -64,6 +65,7 @@ Sprite::Sprite()
    scale_x = 1.0f;
    scale_y = 1.0f;
    rotation_deg = 0.0f;
+   current_frame = 0;
 }
 
 Sprite::Sprite( const Sprite& other)
@@ -73,6 +75,7 @@ Sprite::Sprite( const Sprite& other)
    scale_x = other.scale_x;
    scale_y = other.scale_y;
    rotation_deg = other.rotation_deg;
+   current_frame = other.current_frame;
    
    for ( unsigned int f = 0 ; f < other.surfaces.size() ; f++)
      {
@@ -86,6 +89,18 @@ Sprite::Sprite( const Sprite& other)
 	  SDL_BlitSurface( other.surfaces[f], NULL, new_surf, NULL);
 	  surfaces.push_back( new_surf);
      }
+}
+
+Sprite::Sprite( SDL_Surface *surface)
+{   
+   frame_width_pix = surface->w;
+   frame_height_pix = surface->h;
+   surfaces.push_back( surface);
+   
+   scale_x = 1.0f;
+   scale_y = 1.0f;
+   rotation_deg = 0.0f;   
+   current_frame = 0;
 }
 
 Sprite::~Sprite()
