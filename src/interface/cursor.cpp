@@ -77,7 +77,7 @@ void CurseurVer::Draw()
   Point2i centre = obj_designe->GetCenter();
 #endif
   uint x = centre.x - image->GetWidth()/2;
-  uint y = centre.y - image->GetHeight()/2 + y_mouvement;
+  uint y = centre.y - image->GetHeight()/2 - y_mouvement;
 #ifdef CL
    image.draw (x, y);
 #else

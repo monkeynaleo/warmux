@@ -203,7 +203,7 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (unsigned int width, unsign
 				     0xff000000); // alpha mask
 
    SDL_SetAlpha (m_surface,0,0);
-   SDL_SetColorKey (m_surface, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGBA (m_surface->format,0,0,0,0));
+   SDL_SetColorKey (m_surface, SDL_SRCCOLORKEY/*|SDL_RLEACCEL*/, SDL_MapRGBA (m_surface->format,0,0,0,0));
    m_buffer = new unsigned char[m_height*m_width];
 }
 
@@ -222,7 +222,7 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (const TileItem_ColorkeySof
    SDL_Rect dest_rect = {0,0, copy.m_surface->w, copy.m_surface->h};
    SDL_BlitSurface( copy.m_surface, NULL, m_surface, &dest_rect);
    SDL_SetAlpha (m_surface,0,0);
-   SDL_SetColorKey (m_surface, SDL_SRCCOLORKEY|SDL_RLEACCEL, SDL_MapRGBA (m_surface->format,0,0,0,0));
+   SDL_SetColorKey (m_surface, SDL_SRCCOLORKEY/*|SDL_RLEACCEL*/, SDL_MapRGBA (m_surface->format,0,0,0,0));
 
    m_buffer = new unsigned char[m_height*m_width];
    memcpy( copy.m_buffer, m_buffer, m_height*m_width*sizeof( unsigned char));

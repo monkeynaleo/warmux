@@ -26,17 +26,21 @@
 #ifndef _SPRITE_H
 #define _SPRITE_H
 
+#include <vector>
+
 struct SDL_Surface;
 class ResourceManager;
 
-SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
+extern SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
 
 class Sprite
 {
  public:
    Sprite();
+   Sprite( const Sprite &other);
    ~Sprite();
-
+   void Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
+   
    // Get physical characterisics
    unsigned int GetWidth();
    unsigned int GetHeight();
@@ -58,18 +62,14 @@ class Sprite
    void Update();
    
  private:
-   SDL_Surface *surface;
    int frame_width_pix;
    int frame_height_pix;
-   int nb_frames;
    float scale_x;
    float scale_y;
    float rotation_deg;
    float alpha;
-   int current_frame;
-   
-friend class ResourceManager;
-   
+   unsigned int current_frame;
+   std::vector< SDL_Surface *> surfaces;   
 };
 
 #endif /* _SPRITE_H */

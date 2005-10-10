@@ -130,8 +130,8 @@ LIBS="$LIBS -lSDL_ttf"
 
 dnl === Check for SDL_gfx ==================================================
 
-AC_CHECK_LIB(SDL_gfx, zoomSurface,,
-	AC_MSG_ERROR([SDL_gfx library required]))
+AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,
+	AC_MSG_ERROR([SDL_gfx library >= 2.0.13 required]))
 LIBS="$LIBS -lSDL_gfx"
 
 
