@@ -42,6 +42,7 @@
 #include "../tool/Distance.h"
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
+#include "../tool/sprite.h"
 #endif
 
 using namespace Wormux;
@@ -188,7 +189,7 @@ void WeaponMenuItem::Draw()
 #ifdef CL
   CL_Surface button ;
 #else
-  SDL_Surface *button;
+  Sprite *button;
 #endif
    
   switch (weapon_type) {
@@ -223,12 +224,13 @@ void WeaponMenuItem::Draw()
    button.set_scale(scale, scale);
    button.draw((int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale),
 	      (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale));
-
+   
 #else
-   // TODO : scale
-   SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale), (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale), button->w, button->h};	
-   SDL_BlitSurface( button, NULL, app.sdlwindow, &dest);
-
+  
+   button->Scale( scale, scale);
+   button->Blit( app.sdlwindow, 
+		 (int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale), 
+		 (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale));	
 #endif
    
   // Weapon display
@@ -241,9 +243,10 @@ void WeaponMenuItem::Draw()
   icon.draw((int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
 	    (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale));
 #else
-   // TODO : scale
-   SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale),weapon->icone->w,weapon->icone->h};
-   SDL_BlitSurface( weapon->icone, NULL, app.sdlwindow, &dr2);    
+  weapon_icon->Scale( scale, scale);
+  weapon_icon->Blit( app.sdlwindow,
+		     (int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
+		     (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale));
 #endif
    
   // Amunitions display
@@ -282,6 +285,9 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
   item.x = 0;
   item.y = 0;
   item.weapon = new_item;
+#ifndef CL
+  item.weapon_icon = new Sprite( new_item->icone);
+#endif
   boutons.push_back (item);
 
   if(num_sort>nbr_weapon_type)
@@ -396,11 +402,11 @@ void WeaponsMenu::Init()
   my_button5 = CL_Surface("interface/button5_icon", res);
 #else
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
-  my_button1 = resource_manager.LoadImage(res, "interface/button1_icon");
-  my_button2 = resource_manager.LoadImage(res,"interface/button2_icon");
-  my_button3 = resource_manager.LoadImage(res,"interface/button3_icon");
-  my_button4 = resource_manager.LoadImage(res,"interface/button4_icon");
-  my_button5 = resource_manager.LoadImage(res,"interface/button5_icon");
+  my_button1 = new Sprite( resource_manager.LoadImage(res,"interface/button1_icon"));
+  my_button2 = new Sprite( resource_manager.LoadImage(res,"interface/button2_icon"));
+  my_button3 = new Sprite( resource_manager.LoadImage(res,"interface/button3_icon"));
+  my_button4 = new Sprite( resource_manager.LoadImage(res,"interface/button4_icon"));
+  my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));
 #endif
 }
 

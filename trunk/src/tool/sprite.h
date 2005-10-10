@@ -38,6 +38,7 @@ class Sprite
  public:
    Sprite();
    Sprite( const Sprite &other);
+   Sprite( SDL_Surface *surface);
    ~Sprite();
    void Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
    
