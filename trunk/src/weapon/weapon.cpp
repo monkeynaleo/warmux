@@ -47,6 +47,7 @@
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../map/camera.h"
+#include "../tool/sprite.h"
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #endif
@@ -258,16 +259,11 @@ void Weapon::Init ()
   
    icone = CL_Surface(m_id+"_ico", &graphisme.weapons);
 #else
-   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
  
-   if (m_visibility != NEVER_VISIBLE)
-   m_image = resource_manager.LoadImage(res, m_id);
-   else
-     std::cout << "WEAPON NEVER VISIBLE" << std::endl;
+  if (m_visibility != NEVER_VISIBLE)
+    m_image = new Sprite( resource_manager.LoadImage(weapons_res_profile, m_id));
      
-   icone = resource_manager.LoadImage(res,m_id+"_ico");
-   
- //  delete res;
+  icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
 
 #endif
    
@@ -291,7 +287,12 @@ void Weapon::Select()
   if (min_angle != max_angle) {
     ActiveTeam().crosshair.enable = true; 
   }
-
+   else
+     {
+	std::cout << "MIN/MAX ANGLES " << min_angle << " " << max_angle << std::endl;
+     }
+   
+     
   p_Select();
 
   if (max_strength == 0) return ;
@@ -304,9 +305,9 @@ void Weapon::Select()
   weapon_strength_bar.Reset_Marqueur();
   if (0 < val && val < max_strength)
 #ifdef CL
-     weapon_strength_bar.AjouteMarqueur (uint(val*100), CL_Color::red);
+  weapon_strength_bar.AjouteMarqueur (uint(val*100), CL_Color::red);
 #else
-   ; // TODO
+  weapon_strength_bar.AjouteMarqueur (uint(val*100), 255,0,0);
 #endif
 }
 
@@ -408,7 +409,7 @@ void Weapon::PosXY (int &x, int &y) const
 #ifdef CL
     x -= m_image.get_width();
 #else
-    x -= m_image->w;
+    x -= m_image->GetWidth();
 #endif
 }
 
@@ -422,8 +423,8 @@ void Weapon::RotationPointXY (int &x, int &y) const
   x += m_image.get_width()/2;
   y += m_image.get_height()/2;
 #else
-  x += m_image->w/2;
-  y += m_image->h/2;
+  x += m_image->GetWidth()/2;
+  y += m_image->GetHeight()/2;
 #endif
 }
 
@@ -524,7 +525,6 @@ void Weapon::InitLoading()
   jukebox.Play("weapon/load");
 #else
   channel_load = jukebox.Play("share","weapon/load");
-  // TODO
 #endif
    
   curseur_ver.Cache();
@@ -644,16 +644,15 @@ void Weapon::Draw()
     m_image.set_scale(1, ActiveCharacter().GetDirection());
 #else
     // TODO
-    //m_image.set_rotation_hotspot (origin_center);
-    //m_image.set_angle (ActiveTeam().crosshair.GetAngle());
-    //m_image->Scale(1, ActiveCharacter().GetDirection());
+    //m_image->et_rotation_hotspot (origin_center);
+    m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
+    m_image->Scale(1, ActiveCharacter().GetDirection());
 #endif
   } else {
 #ifdef CL
     m_image.set_scale(ActiveCharacter().GetDirection(), 1);
 #else
-    //TODO
-    //m_image->Scale(ActiveCharacter().GetDirection(), 1);
+    m_image->Scale(ActiveCharacter().GetDirection(), 1);
 #endif
   }
 
@@ -666,14 +665,14 @@ void Weapon::Draw()
     x = ActiveCharacter().GetCenterX()-m_image.get_width()/2+position.dx;
     y = ActiveCharacter().GetY()-m_image.get_height()+position.dy;
 #else
-    x = ActiveCharacter().GetCenterX()-m_image->w/2+position.dx;
-    y = ActiveCharacter().GetY()-m_image->h+position.dy;
+    x = ActiveCharacter().GetCenterX()-m_image->GetWidth()/2+position.dx;
+    y = ActiveCharacter().GetY()-m_image->GetHeight()+position.dy;
 #endif
     if(ActiveCharacter().GetDirection() == -1)
 #ifdef CL
       x += m_image.get_width();
 #else
-      x += m_image->w;
+      x += m_image->GetWidth();
 #endif
      break;
   case weapon_origin_HAND:
@@ -682,7 +681,7 @@ void Weapon::Draw()
 #ifdef CL
       y += m_image.get_height();
 #else
-      y += m_image->h;
+      y += m_image->GetHeight();
 #endif
      break;
   }
@@ -690,15 +689,9 @@ void Weapon::Draw()
   m_image.draw (x,y);
 #else
   if ( m_image )
-     {
-	SDL_Rect dest = { x-camera.GetX(), y-camera.GetY(), m_image->w, m_image->h};
-	SDL_BlitSurface( m_image, NULL, app.sdlwindow, &dest);
-     }
-   else
-     {
-	std::cout << "Ne peut clitter weapon -> NULL" << std::endl;
-     }
-   
+    {
+       m_image->Blit( app.sdlwindow, x-camera.GetX(), y-camera.GetY());
+    }
 #endif
    
 #if defined(DEBUG_CADRE_TEST)

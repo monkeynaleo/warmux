@@ -34,8 +34,8 @@
 #include "cluster_bomb.h"
 */
 #include "dynamite.h"
+#include "grenade.h"
 /*
- #include "grenade.h"
 #include "gun.h"
 #include "gnu.h"
 #include "holly_grenade.h"

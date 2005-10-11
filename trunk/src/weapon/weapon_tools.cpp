@@ -45,6 +45,9 @@
 #  define COUT_DBG cout << "[Explosion] "
 #endif
 
+#ifndef CL
+Profile *weapons_res_profile = NULL;
+#endif
 
 //-----------------------------------------------------------------------------
 

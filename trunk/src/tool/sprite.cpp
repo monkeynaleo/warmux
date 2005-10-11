@@ -181,6 +181,11 @@ float Sprite::GetAlpha()
    return alpha;
 }
 
+void Sprite::SetRotation_deg( float angle_deg)
+{
+   rotation_deg = angle_deg;
+}
+
 void Sprite::Start()
 {
    current_frame = 0;

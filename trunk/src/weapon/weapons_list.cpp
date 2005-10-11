@@ -26,6 +26,7 @@
 #include "../object/objects_list.h"
 #include "../map/camera.h"
 #include "../interface/interface.h"
+#include "../weapon/weapon_tools.h"
 #include "all.h"
 #include <algorithm>
 using namespace Wormux;
@@ -57,10 +58,15 @@ void WeaponsList::InitAndAddToList(Weapon* arme, uint num_sort)
 
 void WeaponsList::Init()
 {
+#ifndef CL
+  weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml");
+#endif
 /*
   InitAndAddToList(&bazooka, 1);
   InitAndAddToList(&auto_bazooka, 1);
+*/
   InitAndAddToList(&lance_grenade, 1);
+/*
   InitAndAddToList(&holly_grenade_launcher, 1);
   InitAndAddToList(&lance_cluster, 1);
   InitAndAddToList(&gun, 2);
@@ -68,7 +74,7 @@ void WeaponsList::Init()
 */
   InitAndAddToList(&baseball, 2);  
   InitAndAddToList(&dynamite,3);
-    InitAndAddToList(&mine,3);
+  InitAndAddToList(&mine,3);
 /*  InitAndAddToList(&air_attack,4);
   InitAndAddToList(&tux,4);  
   InitAndAddToList(&gnu_launcher,4);  */

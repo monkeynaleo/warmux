@@ -33,6 +33,7 @@
 //-----------------------------------------------------------------------------
 
 struct SDL_Surface;
+struct Profile;
 
 // Applique au explosion au point centre
 // Lance ExceptionMortVer() si le ver actif meurt
@@ -58,5 +59,10 @@ void AppliqueExplosion (const Point2i &explosion,
 
 void UpdateStrengthBar(double strength);
 
+#ifndef CL
+
+extern Profile *weapons_res_profile; 
+
+#endif
 //-----------------------------------------------------------------------------
 #endif

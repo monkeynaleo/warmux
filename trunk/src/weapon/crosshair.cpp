@@ -28,6 +28,8 @@
 #else
 #include <SDL.h>
 #include "../include/app.h"
+#include "../map/camera.h"
+#include <iostream>
 #endif
 
 using namespace Wormux;
@@ -95,7 +97,7 @@ void CrossHair::Draw()
  
   x -= image->w/2;
   y -= image->h/2;
-  SDL_Rect dest = { x,y,image->w,image->h};
+  SDL_Rect dest = { x-camera.GetX(),y-camera.GetY(),image->w,image->h};
   SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
 #endif
 }

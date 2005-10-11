@@ -541,23 +541,10 @@ void WeaponsMenu::ReactionSouris (int x, int y)
   CL_Point point;
   point.x = x;
   point.y = y;
-#else
-  Rectanglei rect;
 
-  rect.x = GetX();
-  rect.y = GetY() + GetHeight() - (int)(0.5 * BUTTON_ICO_HEIGHT);
-  rect.w = GetWidth();
-  rect.h = GetHeight() - (int)(0.5 * BUTTON_ICO_HEIGHT);
-
-  Point2i point;
-  point.x = x;
-  point.y = y;
-#endif
-   
-#ifdef CL
   if (rect.is_inside(point))
 #else
-  if ( IsInside( rect, point))
+  // Nothing to do
 #endif  
   {
     //Bouton en cour d'analyse:
@@ -585,6 +572,7 @@ void WeaponsMenu::ReactionSouris (int x, int y)
     }
     bouton_sous_souris = nv_bouton_sous_souris;
   }
+#ifdef CL
   else
   {
     iterator it=boutons.begin();
@@ -595,6 +583,9 @@ void WeaponsMenu::ReactionSouris (int x, int y)
     bouton_sous_souris = -1;
     interface.arme_pointe_souris = NULL;
   }
+#else
+  // Nothing to do
+#endif
 }
 
 //-----------------------------------------------------------------------------
