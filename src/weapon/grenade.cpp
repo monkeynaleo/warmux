@@ -88,18 +88,29 @@ void Grenade::Tire (double force)
 
 void Grenade::Init()
 {
+#ifdef CL
   image = CL_Sprite("grenade_sprite", &graphisme.weapons);
   SetSize (image.get_width(), image.get_height());
+#else
+  image = resource_manager.LoadSprite( weapons_res_profile, "grenade_sprite");
+  SetSize (image->GetWidth(), image->GetHeight());
+#endif 
 
   SetMass (lance_grenade.cfg().mass);
   SetAirResistFactor(lance_grenade.cfg().air_resist_factor);
   m_rebound_factor = double(lance_grenade.cfg().rebound_factor);
 
   // Fixe le rectangle de test
+#ifdef CL
   int dx = image.get_width()/2-1;
   int dy = image.get_height()/2-1;
   SetTestRect (dx, dx, dy, dy);
-
+#else
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);   
+#endif
+   
 #ifdef MSG_DBG
   COUT_DBG << "Grenade::Init()" << std::endl;
 #endif
@@ -133,7 +144,11 @@ void Grenade::Refresh()
 
   // rotation de l'image de la grenade...
   double angle = GetSpeedAngle() * 180/M_PI ;
-  image.set_angle(angle);
+#ifdef CL
+   image.set_angle(angle);
+#else
+  image->SetRotation_deg( angle);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -148,14 +163,22 @@ void Grenade::Draw()
     return;
   }
 
+#ifdef CL
   image.draw(GetX(),GetY());
+#else
+  image->Draw(GetX(),GetY());
+#endif 
   int tmp = lance_grenade.cfg().timeout;
   tmp -= (int)((Wormux::temps.Lit() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
+#ifdef CL
   police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
+#else
+  // TODO police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -221,7 +244,11 @@ void GrenadeLauncher::Explosion()
   if (grenade.IsGhost()) return;
 
   // Applique les degats et le souffle aux vers
+#ifdef CL
   CL_Point pos = grenade.GetCenter();
+#else
+  Point2i pos = grenade.GetCenter();
+#endif 
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -240,7 +267,11 @@ void GrenadeLauncher::Refresh()
 void GrenadeLauncher::p_Init()
 {
   grenade.Init();
+#ifdef CL
   impact = CL_Surface("grenade_impact", &graphisme.weapons);
+#else
+  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
+#endif
 }
 
 //-----------------------------------------------------------------------------

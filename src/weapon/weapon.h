@@ -119,7 +119,8 @@ protected:
 #ifdef CL
   CL_Surface m_image;
 #else
-  SDL_Surface *m_image; 
+//  SDL_Surface *m_image; 
+  Sprite *m_image;
 #endif
    struct s_position{
     int dx, dy;
