@@ -26,11 +26,9 @@
 #include "../tool/i18n.h"
 #include "config.h"
 #include "../tool/file_tools.h"
-#ifdef CL
 #include "game_loop.h"
 #include "../weapon/all.h"
 #include "../weapon/weapons_list.h"
-#endif
 #include <iostream>
 //-----------------------------------------------------------------------------
 namespace Wormux {
@@ -112,7 +110,7 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
       LitDocXml::LitAttrInt  (item, "angle", character.super_jump_angle);
 	}
   }
-#ifdef CL
+
   //=== Weapons ===
   xmlpp::Element *armes = LitDocXml::AccesBalise (xml, "weapons");
   if (armes != NULL)
@@ -124,7 +122,7 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
 
     for (; itw != end ; ++itw) (*itw)->LoadXml(armes);
   }
-#endif
+
   return true;
 }
 
