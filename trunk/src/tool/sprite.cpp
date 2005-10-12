@@ -86,7 +86,13 @@ Sprite::Sprite( const Sprite& other)
 							0x0000ff00,  // green mask
 							0x00ff0000,  // blue mask
 							0xff000000); // alpha mask
+	  // Disable per pixel alpha on the source surface
+          // in order to properly copy the alpha chanel to the destination suface
+	  // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
+	  SDL_SetAlpha( other.surfaces[f], 0, 0); 
 	  SDL_BlitSurface( other.surfaces[f], NULL, new_surf, NULL);
+	  // re-enable the per pixel alpha in the 
+	  SDL_SetAlpha( other.surfaces[f], SDL_SRCALPHA, 0); 
 	  surfaces.push_back( new_surf);
      }
 }
