@@ -425,8 +425,8 @@ void Character::Saute ()
    
   m_rebounding = false;
 
-//  if(current_skin=="walking")
-//    SetSkin("jump");
+  if(current_skin=="walking")
+    SetSkin("jump");
 
   // Initialise la force
   double angle = Deg2Rad(game_mode.character.jump_angle);
@@ -708,8 +708,8 @@ void Character::SignalFallEnding()
 
     game_loop.SignalCharacterDamageFalling(this);
   }
-//  if(current_skin=="jump")
-//    SetSkin("walking");
+  if(current_skin=="jump")
+    SetSkin("walking");
 }
 
 //-----------------------------------------------------------------------------
@@ -781,8 +781,12 @@ void Character::SetSkin(std::string skin_name)
 #else
        image->GetScaleFactors(sc_x,sc_y);
 #endif
-     
+    
+#ifdef CL
     image = AccessSkin().many_skins[skin_name].image;
+#else
+    image = new Sprite( *(AccessSkin().many_skins[skin_name].image));
+#endif
     SetTestRect (AccessSkin().many_skins[skin_name].test_dx, 
                  AccessSkin().many_skins[skin_name].test_dx, 
                  AccessSkin().many_skins[skin_name].test_top, 
@@ -817,23 +821,27 @@ void Character::SetSkin(std::string skin_name)
 #endif
 
     walk_skin = &AccessSkin().many_walking_skins[skin_name];
+#ifdef CL
     image = walk_skin->image;
+#else
+    image = new Sprite(*(walk_skin->image));
+#endif
     SetTestRect (walk_skin->test_dx, 
                  walk_skin->test_dx,
                  walk_skin->test_top,
                  walk_skin->test_bottom);
     m_frame_repetition = walk_skin->repetition_frame;
 #ifdef CL
-     SetSize (image.get_width(), image.get_height());
+    SetSize (image.get_width(), image.get_height());
 #else
-     SetSize (image->GetWidth(), image->GetHeight());
+    SetSize (image->GetWidth(), image->GetHeight());
 #endif
     //Restore skins direction
     if(current_skin!="" && sc_x<0.0)
 #ifdef CL
       image.set_scale(-1.0,1.0);
 #else
-     image->Scale( -1.0,1.0);
+      image->Scale( -1.0,1.0);
 #endif
      
     if(skin_name=="walking")
@@ -904,7 +912,11 @@ void Character::InitTeam (Team *ptr_equipe, const string &name,
   if (GetSkin().anim.utilise)
   { 
     anim.draw = true;
+#ifdef CL
     anim.image = GetSkin().anim.image;
+#else
+    anim.image = new Sprite(*GetSkin().anim.image);
+#endif
   }
 
   // Energie
