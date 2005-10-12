@@ -645,7 +645,7 @@ void Weapon::Draw()
 #else
     // TODO
     //m_image->et_rotation_hotspot (origin_center);
-    m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
+    m_image->SetRotation_deg (-ActiveTeam().crosshair.GetAngle());
     m_image->Scale(1, ActiveCharacter().GetDirection());
 #endif
   } else {
