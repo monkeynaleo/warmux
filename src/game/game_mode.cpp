@@ -159,7 +159,6 @@ bool GameMode::Load(const std::string &mode)
 
 bool GameMode::AllowCharacterSelection() const
 {
-#ifdef CL
   switch (allow_character_selection)
   {
   case GameMode::ALWAYS: break;
@@ -172,7 +171,7 @@ bool GameMode::AllowCharacterSelection() const
   case GameMode::NEVER:
 	  return false;
   }
-#endif
+
   return true;
 }
 
