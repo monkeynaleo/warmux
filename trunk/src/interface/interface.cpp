@@ -313,12 +313,12 @@ void Interface::Draw ()
     uint barre_x = (video.GetWidth()-weapon_strength_bar.GetWidth())/2;
     uint barre_y = video.GetHeight()-weapon_strength_bar.GetHeight() 
                    - interface.GetHeight()-10;
-
+     
     // Drawing on the screen
 #ifdef CL
      weapon_strength_bar.Draw ();
 #else
-     weapon_strength_bar.DrawXY (BARENERGIE_X+barre_x, BARENERGIE_Y+barre_y);
+     weapon_strength_bar.DrawXY (barre_x, barre_y);
 #endif
 
   }

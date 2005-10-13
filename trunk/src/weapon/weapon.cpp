@@ -287,11 +287,6 @@ void Weapon::Select()
   if (min_angle != max_angle) {
     ActiveTeam().crosshair.enable = true; 
   }
-   else
-     {
-	std::cout << "MIN/MAX ANGLES " << min_angle << " " << max_angle << std::endl;
-     }
-   
      
   p_Select();
 
