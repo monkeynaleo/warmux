@@ -26,7 +26,9 @@
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
 #include "weapon.h"
+#ifdef CL
 #include <ClanLib/display.h>
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -52,7 +54,11 @@ class Bazooka : public Weapon
   bool p_Shoot();
 
  public:
+#ifdef CL
   CL_Surface impact;    // Image (alpha) de l'impact
+#else
+  SDL_Surface *impact;
+#endif
   RoquetteBazooka roquette;
 
   Bazooka();

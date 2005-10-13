@@ -26,7 +26,9 @@
 #include "../weapon/weapon.h"
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
+#ifdef CL
 #include <ClanLib/display.h>
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -37,7 +39,11 @@ class RoquetteTeteCherche : public WeaponProjectile
 protected:
   double angle_local;
   double temps_debut_tir;
+#ifdef CL
   CL_Point m_cible;
+#else
+  Point2i m_cible;
+#endif
   bool m_attire;
 public:
   RoquetteTeteCherche();
@@ -59,16 +65,28 @@ private:
 
   struct s_cible
   {
+#ifdef CL
     CL_Point pos;
+#else
+    Point2i pos;
+#endif
     bool choisie;
+#ifdef CL
     CL_Surface image;
+#else
+    SDL_Surface *image;
+#endif
   } cible;
   
   void p_Init();
   bool p_Shoot();
 
 public:
+#ifdef CL
   CL_Surface impact;    // Image (alpha) de l'impact
+#else
+  SDL_Surface *impact;
+#endif
   RoquetteTeteCherche roquette;
 
   AutomaticBazooka();

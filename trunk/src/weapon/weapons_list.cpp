@@ -61,10 +61,9 @@ void WeaponsList::Init()
 #ifndef CL
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml");
 #endif
-/*
+
   InitAndAddToList(&bazooka, 1);
   InitAndAddToList(&auto_bazooka, 1);
-*/
   InitAndAddToList(&lance_grenade, 1);
 /*
   InitAndAddToList(&holly_grenade_launcher, 1);
