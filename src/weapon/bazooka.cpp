@@ -70,17 +70,29 @@ void RoquetteBazooka::Tire (double force)
 
 void RoquetteBazooka::Init()
 {
+#ifdef CL
   image = CL_Sprite("roquette", &graphisme.weapons);
   SetSize (image.get_width(), image.get_height());
+#else
+  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
+  SetSize (image->GetWidth(), image->GetHeight());
+#endif
 
   SetMass (bazooka.cfg().mass);
   SetWindFactor(5.0);
   SetAirResistFactor(bazooka.cfg().air_resist_factor);
 
+
   // Fixe le rectangle de test
+#ifdef CL
   int dx = image.get_width()/2-1;
   int dy = image.get_height()/2-1;
   SetTestRect (dx, dx, dy, dy);
+#else
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy); 
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -92,7 +104,11 @@ void RoquetteBazooka::Refresh()
   if (TestImpact()) { SignalCollision(); return; }
 
   double angle = GetSpeedAngle() *180/M_PI;
+#ifdef CL
   image.set_angle(angle);
+#else
+  image->SetRotation_deg( angle);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -146,7 +162,11 @@ bool Bazooka::p_Shoot ()
 // Le bazooka explose car il a été poussé à bout !
 void Bazooka::ExplosionDirecte()
 {
+#ifdef CL
   CL_Point pos = ActiveCharacter().GetCenter();
+#else
+  Point2i pos = ActiveCharacter().GetCenter();
+#endif
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -162,7 +182,11 @@ void Bazooka::Explosion()
   if (roquette.IsGhost()) return;
 
   // Applique les degats et le souffle aux vers
+#ifdef CL
   CL_Point pos = roquette.GetCenter();
+#else
+  Point2i pos = ActiveCharacter().GetCenter();
+#endif
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -180,7 +204,11 @@ void Bazooka::p_Init()
 {
 
   roquette.Init();
+#ifdef CL
   impact = CL_Surface("bazooka_impact", &graphisme.weapons);
+#else
+  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
+#endif
 }
 
 //-----------------------------------------------------------------------------

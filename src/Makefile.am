@@ -65,13 +65,14 @@ wormux_SOURCES = \
 	weapon/weapons_list.cpp weapon/weapons_list.h \
 	weapon/weapon_tools.cpp weapon/weapon_tools.h \
 	weapon/crosshair.cpp weapon/crosshair.h \
+	weapon/auto_bazooka.cpp weapon/auto_bazooka.h \
 	weapon/baseball.cpp weapon/baseball.h \
+	weapon/bazooka.cpp weapon/bazooka.h \
 	weapon/dynamite.cpp weapon/dynamite.h \
 	weapon/grenade.cpp weapon/grenade.h \
 	weapon/mine.cpp weapon/mine.h \
         weapon/skip_turn.cpp weapon/skip_turn.h \
 	weapon/teleportation.cpp weapon/teleportation.h
-	
 #	
 #	game/debug.cpp game/debug.h \
 ####	graphic/graphism.cpp graphic/graphism.h \
@@ -96,7 +97,6 @@ wormux_SOURCES = \
 #	weapon/air_attack.cpp weapon/air_attack.h \
 #	weapon/auto_bazooka.cpp weapon/auto_bazooka.h \
 #	weapon/baseball.cpp weapon/baseball.h \
-#	weapon/bazooka.cpp weapon/bazooka.h \
 #	weapon/cluster_bomb.cpp weapon/cluster_bomb.h \
 #	weapon/holly_grenade.cpp weapon/holly_grenade.h \
 #	weapon/gnu.cpp weapon/gnu.h \
@@ -107,7 +107,6 @@ wormux_SOURCES = \
 #	weapon/parachute.cpp weapon/parachute.h\
 #	weapon/suicide.cpp weapon/suicide.h \
 #	weapon/supertux.cpp weapon/supertux.h \
-#	weapon/teleportation.cpp weapon/teleportation.h \
 #	weapon/uzi.cpp weapon/uzi.h
 
 
