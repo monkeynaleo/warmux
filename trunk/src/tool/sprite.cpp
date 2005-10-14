@@ -245,7 +245,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    SDL_FreeSurface(current);
 
 */   
-   SDL_Surface *tmp_surface = rotozoomSurfaceXY (surfaces[current_frame], rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+   SDL_Surface *tmp_surface = rotozoomSurfaceXY (surfaces[current_frame], -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
 
    SDL_Rect dr = {pos_x, pos_y, frame_width_pix, frame_height_pix};
 

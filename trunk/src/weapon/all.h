@@ -25,8 +25,8 @@
 #include "mine.h"
 /*
 #include "airhammer.h"
-#include "air_attack.h"
 */
+#include "air_attack.h"
 #include "auto_bazooka.h"
 #include "baseball.h"
 #include "bazooka.h"
@@ -35,9 +35,9 @@
 */
 #include "dynamite.h"
 #include "grenade.h"
-/*
 #include "gun.h"
 #include "gnu.h"
+/*
 #include "holly_grenade.h"
 #include "jetpack.h"
 #include "lowgrav.h"

@@ -24,7 +24,13 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "weapon.h"
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#endif
+
+struct SDL_Surface;
+class Sprite;
+
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -44,8 +50,11 @@ public:
 class Obus : public WeaponProjectile
 {
 private:
+#ifdef CL
   CL_Surface impact;
-
+#else
+  SDL_Surface *impact; 
+#endif
 public:
   Obus();
   void Draw();
@@ -63,8 +72,11 @@ class Avion : public PhysicalObj
 {
 public:
   int obus_dx, obus_dy;
+#ifdef CL
   CL_Surface image;
-
+#else
+  Sprite *image;
+#endif
 private:
   int cible_x;
   int vitesse;

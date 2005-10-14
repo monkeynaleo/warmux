@@ -569,10 +569,10 @@ void Weapon::DrawWeaponBox()
 
   c_x =  + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
   c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
-
+   
   SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH),(int)(c_y - 0.5 * BUTTON_ICO_HEIGHT), interface.weapon_box_button->w, interface.weapon_box_button->h};	
   SDL_BlitSurface( interface.weapon_box_button, NULL, app.sdlwindow, &dest);
-
+   
   SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT),icone->w,icone->h};	   
   SDL_BlitSurface( icone, NULL, app.sdlwindow, &dr2);
    
@@ -640,7 +640,7 @@ void Weapon::Draw()
 #else
     // TODO
     //m_image->et_rotation_hotspot (origin_center);
-    m_image->SetRotation_deg (-ActiveTeam().crosshair.GetAngle());
+    m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
     m_image->Scale(1, ActiveCharacter().GetDirection());
 #endif
   } else {
@@ -676,7 +676,7 @@ void Weapon::Draw()
 #ifdef CL
       y += m_image.get_height();
 #else
-      y += m_image->GetHeight();
+      // (JC) WHY ? y += m_image->GetHeight();
 #endif
      break;
   }

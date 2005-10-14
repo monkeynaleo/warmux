@@ -26,8 +26,15 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "weapon.h"
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#else
+#include "../tool/Point.h"
+#endif
 #include <vector>
+
+struct SDL_Surface;
+
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -48,9 +55,13 @@ class Gun : public Weapon
 {
 private:
   uint temps_capture;
+#ifdef CL
   std::vector<CL_Point> lst_points;
   CL_Surface impact;    // Image (alpha) de l'impact
-
+#else
+  std::vector<Point2i> lst_points;
+  SDL_Surface *impact;
+#endif
   void p_Init();
   bool p_Shoot();
 

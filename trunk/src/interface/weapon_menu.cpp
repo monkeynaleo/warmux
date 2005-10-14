@@ -364,11 +364,15 @@ int WeaponsMenu::GetX() const
 //-----------------------------------------------------------------------------
 int WeaponsMenu::GetY() const 
 {
+#ifdef CL
   int y = video.GetHeight();
 
   if (interface.EstAffiche())
     y -= interface.GetHeight();
   return y;
+#else
+   return video.GetHeight() - GetHeight() - ( interface.EstAffiche() ? interface.GetHeight() : 0 );
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -380,7 +384,11 @@ int WeaponsMenu::GetWidth() const
 //-----------------------------------------------------------------------------
 int WeaponsMenu::GetHeight() const
 {
-  return -((BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon));
+#ifdef CL
+   return -((BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon));
+#else
+   return BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -507,8 +515,12 @@ void WeaponsMenu::Draw()
     int row = button_no;
 
     it->x = GetWidth() - (int)(BUTTON_WIDTH * (column+0.5));
+#ifdef CL
     it->y = GetHeight() + BUTTON_ICO_GAP + (row * BUTTON_HEIGHT);
-
+#else
+    it->y = BUTTON_ICO_GAP + (row * BUTTON_HEIGHT);     
+#endif
+     
     if(show)
     {
       ShowMotion(nr_buttons,(column * max_weapon) + row,it,column);
