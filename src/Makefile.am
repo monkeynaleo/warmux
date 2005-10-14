@@ -60,16 +60,19 @@ wormux_SOURCES = \
 	team/team.cpp team/team.h \
 	team/team_energy.cpp team/team_energy.h \
 	team/teams_list.cpp team/teams_list.h \
+	weapon/crosshair.cpp weapon/crosshair.h \
 	weapon/weapon.cpp weapon/weapon.h \
 	weapon/weapon_cfg.cpp weapon/weapon_cfg.h \
-	weapon/weapons_list.cpp weapon/weapons_list.h \
 	weapon/weapon_tools.cpp weapon/weapon_tools.h \
-	weapon/crosshair.cpp weapon/crosshair.h \
+	weapon/weapons_list.cpp weapon/weapons_list.h \
+	weapon/air_attack.cpp weapon/air_attack.h \
 	weapon/auto_bazooka.cpp weapon/auto_bazooka.h \
 	weapon/baseball.cpp weapon/baseball.h \
 	weapon/bazooka.cpp weapon/bazooka.h \
 	weapon/dynamite.cpp weapon/dynamite.h \
+	weapon/gnu.cpp weapon/gnu.h \
 	weapon/grenade.cpp weapon/grenade.h \
+	weapon/gun.cpp weapon/gun.h \
 	weapon/mine.cpp weapon/mine.h \
         weapon/skip_turn.cpp weapon/skip_turn.h \
 	weapon/teleportation.cpp weapon/teleportation.h
@@ -94,13 +97,10 @@ wormux_SOURCES = \
 #
 #	weapon/all.h \
 #	weapon/airhammer.cpp weapon/airhammer.h \
-#	weapon/air_attack.cpp weapon/air_attack.h \
 #	weapon/auto_bazooka.cpp weapon/auto_bazooka.h \
 #	weapon/baseball.cpp weapon/baseball.h \
 #	weapon/cluster_bomb.cpp weapon/cluster_bomb.h \
 #	weapon/holly_grenade.cpp weapon/holly_grenade.h \
-#	weapon/gnu.cpp weapon/gnu.h \
-#	weapon/gun.cpp weapon/gun.h \
 #	weapon/jetpack.cpp weapon/jetpack.h\
 #	weapon/lowgrav.cpp weapon/lowgrav.h \
 #	weapon/ninja_rope.cpp weapon/ninja_rope.h \

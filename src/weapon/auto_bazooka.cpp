@@ -313,7 +313,7 @@ void AutomaticBazooka::DrawTarget()
   cible.image.draw (cible.pos.x - (cible.image.get_width() / 2),
   			cible.pos.y - (cible.image.get_height() / 2));
 #else
-  // TODO
+// TODO  cible.image->BlitSurface(
 #endif
 }
 

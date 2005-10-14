@@ -87,8 +87,13 @@ void Gnu::Tire (double force)
 
 void Gnu::Init()
 {
-  image = CL_Sprite("gnu", &graphisme.weapons);
+#ifdef CL
+  image = CL_Sprite("gnu", &graphisme.weapons); 
   SetSize (image.get_width(), image.get_height());
+#else
+  image = resource_manager.LoadSprite( weapons_res_profile, "gnu"); 
+  SetSize (image->GetWidth(), image->GetHeight());
+#endif
   SetMass (gnu_launcher.cfg().mass);
 }
 
@@ -130,11 +135,20 @@ void Gnu::Refresh()
 //  if(angle<-45 && angle>-135)
 //    angle=0;
 
+#ifdef CL
   image.set_angle(angle);
   image.update();
   // Fixe le rectangle de test
   int dx = image.get_width()/2-1;
   int dy = image.get_height()/2-1;
+#else
+  image->SetRotation_deg(angle);
+  image->Update();
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+#endif
+   
   SetTestRect (dx, dx, dy, dy);
 
   if(IsGhost())
@@ -169,12 +183,19 @@ void Gnu::Draw()
 {
   if (!is_active) return;
 
+#ifdef CL
   image.set_scale(m_sens,1.0);
   if(m_sens==1)
     image.draw(GetX(),GetY());
   else
     image.draw(GetX()+image.get_width(),GetY());
-
+#else
+  image->Scale(m_sens,1.0);
+  if(m_sens==1)
+    image->Draw(GetX(),GetY());
+  else
+    image->Draw(GetX()+image->GetWidth(),GetY());   
+#endif
 
   int tmp=gnu_launcher.cfg().timeout;
   tmp -= (int) ((temps.Lit() - launched_time) / 1000);
@@ -182,7 +203,11 @@ void Gnu::Draw()
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
+#ifdef CL
   police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
+#else
+   // TODO
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -236,7 +261,11 @@ void GnuLauncher::Explosion()
   if (gnu.IsGhost()||!gnu.is_active) return;
 
   // Applique les degats et le souffle aux vers
+#ifdef CL
   CL_Point pos = gnu.GetCenter();
+#else
+  Point2i pos = gnu.GetCenter();
+#endif 
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -251,7 +280,11 @@ void GnuLauncher::Refresh()
 
 void GnuLauncher::p_Init()
 {
+#ifdef CL
   impact = CL_Surface("gnulauncher_impact", &graphisme.weapons);
+#else
+  impact = resource_manager.LoadImage( weapons_res_profile, "gnulauncher_impact");
+#endif
   gnu.Init();
 }
 
