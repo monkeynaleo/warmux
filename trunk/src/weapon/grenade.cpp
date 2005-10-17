@@ -177,7 +177,7 @@ void Grenade::Draw()
 #ifdef CL
   police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
 #else
-  // TODO police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
+  small_font.WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
 #endif
 }
 
