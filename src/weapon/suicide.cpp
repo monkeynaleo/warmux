@@ -24,6 +24,8 @@
 #include "../tool/i18n.h"
 #include "../team/teams_list.h"
 #include "../game/game_loop.h"
+#include "weapon_tools.h"
+#include <iostream>
 //-----------------------------------------------------------------------------
 namespace Wormux 
 {
@@ -38,6 +40,7 @@ Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide")
 {  
   m_name = _("Commit suicide");
   extra_params = new ExplosiveWeaponConfig();
+  sound_channel = -1;
 }
 
 //-----------------------------------------------------------------------------
@@ -51,14 +54,22 @@ void Suicide::p_Select()
 
 void Suicide::p_Init()
 {
+#ifdef CL
   hole_image = CL_Surface("suicide_hole", &graphisme.weapons);
+#else
+  hole_image = resource_manager.LoadImage( weapons_res_profile, "suicide_hole"); 
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 bool Suicide::p_Shoot()
 { 
+#ifdef CL
   jukebox.Play ("weapon/suicide", false, &son);
+#else
+  sound_channel = jukebox.Play ("share", "weapon/suicide");
+#endif
 
   game_loop.interaction_enabled=false;
   is_dying = true;
@@ -72,7 +83,15 @@ void Suicide::Refresh()
 {
   if (!is_dying) return;
 
+#ifdef CL
   m_is_active = son -> is_playing();
+#else
+  if ( sound_channel != -1 && Mix_Playing(sound_channel) ) {
+    m_is_active = true;
+  } else {
+    m_is_active = false;
+  }
+#endif
 
   if (!m_is_active) {
     if ( !ActiveCharacter().IsDead() ) ActiveCharacter().Die();

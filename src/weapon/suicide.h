@@ -30,15 +30,13 @@
 namespace Wormux {
 //-----------------------------------------------------------------------------
 
-   struct SDL_Surface;
-     
 class Suicide : public Weapon
 {
 private:
 #ifdef CL
    CL_SoundBuffer_Session *son;
 #else
-   // TODO
+   int sound_channel;
 #endif
    bool is_dying;
 
