@@ -191,10 +191,10 @@ void Gnu::Draw()
     image.draw(GetX()+image.get_width(),GetY());
 #else
   image->Scale(m_sens,1.0);
-  if(m_sens==1)
+//  if(m_sens==1)
     image->Draw(GetX(),GetY());
-  else
-    image->Draw(GetX()+image->GetWidth(),GetY());   
+//  else
+//    image->Draw(GetX()+image->GetWidth(),GetY());   
 #endif
 
   int tmp=gnu_launcher.cfg().timeout;

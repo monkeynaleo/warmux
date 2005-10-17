@@ -37,6 +37,10 @@
 #include "../object/objects_list.h"
 #include "../game/game_mode.h"
 #include "../map/wind.h"
+#ifndef CL
+#include "../include/app.h"
+#include "../map/camera.h"
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
 
@@ -264,7 +268,8 @@ void AutomaticBazooka::Refresh()
 #ifdef CL
     cible.image.draw (cible.pos.x,cible.pos.y);
 #else
-    // TODO  SDL_BlitSurface(cible.image, cible.pos.x,cible.pos.y);
+    SDL_Rect dr = { cible.pos.x-cible.image->w/2-camera.GetX(),cible.pos.y-cible.image->h/2-camera.GetY(),cible.image->w,cible.image->h};
+    SDL_BlitSurface(cible.image, NULL, app.sdlwindow, &dr);
 #endif
   }
 
@@ -313,7 +318,8 @@ void AutomaticBazooka::DrawTarget()
   cible.image.draw (cible.pos.x - (cible.image.get_width() / 2),
   			cible.pos.y - (cible.image.get_height() / 2));
 #else
-// TODO  cible.image->BlitSurface(
+  SDL_Rect dr = { cible.pos.x-cible.image->w/2-camera.GetX(),cible.pos.y-cible.image->h/2-camera.GetY(),cible.image->w,cible.image->h};
+  SDL_BlitSurface(cible.image, NULL, app.sdlwindow, &dr);
 #endif
 }
 
