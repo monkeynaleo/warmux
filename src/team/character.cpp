@@ -120,7 +120,6 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
 // Signale la mort d'un ver
 void Character::SignalDeath()
 {
-/*
 #ifdef DEBUG_CHG_ETAT
   COUT_DBG << "Meurt." << endl;
 #endif
@@ -161,15 +160,19 @@ void Character::SignalDeath()
 
   // Change test rectangle
   int x = GetCenterX(), y=GetCenterY();
+#ifdef CL
   SetSize (image.get_width(), image.get_height());
   SetXY (x - GetWidth()/2, y - GetHeight()/2);
-  
+#else
+  SetSize (image->GetWidth(), image->GetHeight());
+  SetXY (x - GetWidth()/2, y - GetHeight()/2);
+#endif
+
   assert (m_alive == DEAD);
   assert (IsDead());
   
   // Signal the death
   game_loop.SignalCharacterDeath (this);
-*/  
 }
 
 //-----------------------------------------------------------------------------
