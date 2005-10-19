@@ -23,35 +23,25 @@
 #define ALL_WEAPONS_H
 //-----------------------------------------------------------------------------
 #include "mine.h"
-/*
-#include "airhammer.h"
-*/
+//#include "airhammer.h"
 #include "air_attack.h"
 #include "auto_bazooka.h"
 #include "baseball.h"
 #include "bazooka.h"
-/*
 #include "cluster_bomb.h"
-*/
 #include "dynamite.h"
 #include "grenade.h"
 #include "gun.h"
 #include "gnu.h"
-/*
-#include "holly_grenade.h"
-#include "jetpack.h"
-#include "lowgrav.h"
-*/
+//#include "holly_grenade.h"
+//#include "jetpack.h"
+//#include "lowgrav.h"
 #include "skip_turn.h"
-/*
 #include "suicide.h"
-#include "ninja_rope.h"
-#include "supertux.h"
-#include "parachute.h"
-*/
+//#include "ninja_rope.h"
+//#include "supertux.h"
+//#include "parachute.h"
 #include "teleportation.h"
-/*
-#include "uzi.h"
-*/
+//#include "uzi.h"
 //-----------------------------------------------------------------------------
 #endif
