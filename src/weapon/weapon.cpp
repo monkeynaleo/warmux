@@ -569,10 +569,10 @@ void Weapon::DrawWeaponBox()
 
   c_x =  + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
   c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
-   
+
   SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH),(int)(c_y - 0.5 * BUTTON_ICO_HEIGHT), interface.weapon_box_button->w, interface.weapon_box_button->h};	
   SDL_BlitSurface( interface.weapon_box_button, NULL, app.sdlwindow, &dest);
-   
+
   SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT),icone->w,icone->h};	   
   SDL_BlitSurface( icone, NULL, app.sdlwindow, &dr2);
    
@@ -676,7 +676,7 @@ void Weapon::Draw()
 #ifdef CL
       y += m_image.get_height();
 #else
-      // (JC) WHY ? y += m_image->GetHeight();
+    // (JC) WHY ? y += m_image->GetHeight();
 #endif
      break;
   }
@@ -705,7 +705,6 @@ void Weapon::DrawUnit(int unit)
   CL_Color color;
   CL_Rect rect;
 #else
-  SDL_Color color;
   Rectanglei rect;
 #endif
 
@@ -759,6 +758,11 @@ void Weapon::DrawUnit(int unit)
 	      ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP,
 	      ss.str());
 */
+  small_font.WriteCenter (
+			  ActiveCharacter().GetCenterX(),
+			  ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP,
+			  ss.str(),
+			  white_color);
 #endif
 }
 
