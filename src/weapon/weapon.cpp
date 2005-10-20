@@ -50,6 +50,7 @@
 #include "../tool/sprite.h"
 #include <SDL.h>
 #include <SDL_rotozoom.h>
+#include <SDL_gfxPrimitives.h>
 #endif
 #include <iostream>
 #include <sstream>
@@ -736,31 +737,20 @@ void Weapon::DrawUnit(int unit)
 	      ss.str());
 #else
 
-  rect.x = ActiveCharacter().GetCenterX() - UNIT_BOX_WIDTH/2 ;
+  rect.x = ActiveCharacter().GetCenterX() - UNIT_BOX_WIDTH/2-camera.GetX() ;
   rect.w = UNIT_BOX_WIDTH ;
-  rect.y = ActiveCharacter().GetY() - UNIT_BOX_HEIGHT - UNIT_BOX_GAP;
+  rect.y = ActiveCharacter().GetY() - UNIT_BOX_HEIGHT - UNIT_BOX_GAP-camera.GetY();
   rect.h = UNIT_BOX_HEIGHT;
    
-/*
-  color.set_color(80, 80, 159, 206);
-  CL_Display::fill_rect(rect, color);
-  
-  color.set_color(49, 32, 122, 255);
-  CL_Display::draw_rect(rect, color);
-  rect.left++;
-  rect.right--;
-  rect.top++;
-  rect.bottom--;
-  CL_Display::draw_rect(rect, color);
+  boxRGBA(app.sdlwindow, rect.x+1, rect.y+1, rect.x+rect.w-1, rect.y+rect.h-1,
+	   80,80,159,206);
 
-  police_mix.WriteCenter (
-	      ActiveCharacter().GetCenterX(),
-	      ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP,
-	      ss.str());
-*/
+  rectangleRGBA(app.sdlwindow, rect.x, rect.y, rect.x+rect.w, rect.y+rect.h,
+		49, 32, 122, 255);  
+	   
   small_font.WriteCenter (
-			  ActiveCharacter().GetCenterX(),
-			  ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP,
+			  ActiveCharacter().GetCenterX()-camera.GetX(),
+			  ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP-camera.GetY(),
 			  ss.str(),
 			  white_color);
 #endif
