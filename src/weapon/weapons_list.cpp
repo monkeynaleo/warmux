@@ -68,7 +68,7 @@ void WeaponsList::Init()
 //   InitAndAddToList(&holly_grenade_launcher, 1);
   InitAndAddToList(&lance_cluster, 1);
   InitAndAddToList(&gun, 2);
-//   InitAndAddToList(&uzi, 2);
+  InitAndAddToList(&uzi, 2);
   InitAndAddToList(&baseball, 2);  
   InitAndAddToList(&dynamite,3);
   InitAndAddToList(&mine,3);

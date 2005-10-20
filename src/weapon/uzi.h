@@ -24,7 +24,9 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "weapon.h"
+#ifdef CL
 #include <ClanLib/display.h>
+#endif
 #include <vector>
 //-----------------------------------------------------------------------------
 namespace Wormux {
@@ -52,7 +54,11 @@ class Uzi : public Weapon
   void RepeatShoot(); 
 
 protected:
+#ifdef CL
   CL_Surface impact;    // Image (alpha) de l'impact
+#else 
+  SDL_Surface *impact;
+#endif
   BalleUzi balle;
   uint m_first_shoot;
 

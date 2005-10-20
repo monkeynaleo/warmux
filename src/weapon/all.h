@@ -42,6 +42,6 @@
 //#include "supertux.h"
 //#include "parachute.h"
 #include "teleportation.h"
-//#include "uzi.h"
+#include "uzi.h"
 //-----------------------------------------------------------------------------
 #endif

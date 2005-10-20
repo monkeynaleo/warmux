@@ -30,6 +30,7 @@
 #include "../tool/i18n.h"
 #include "../interface/game_msg.h"
 #include "../interface/game_msg.h"
+#include "../weapon/weapon_tools.h"
 using namespace std;
 //-----------------------------------------------------------------------------
 namespace Wormux {
@@ -51,8 +52,13 @@ BalleUzi::BalleUzi() : WeaponProjectile("balle_uzi")
 //-----------------------------------------------------------------------------
 void BalleUzi::Init()
 {
+#ifdef CL
   image = CL_Sprite("gun_bullet", &graphisme.weapons);
   SetSize (image.get_width(), image.get_height());
+#else
+  image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
+  SetSize (image->GetWidth(), image->GetHeight());
+#endif
   SetSize (2,2);
   SetMass (0.02);
   SetWindFactor(0.05);
@@ -90,7 +96,11 @@ Uzi::Uzi() : Weapon(WEAPON_UZI,"uzi")
 void Uzi::p_Init()
 {
   balle.Init();
+#ifdef CL
   impact = CL_Surface("uzi_impact", &graphisme.weapons);  
+#else
+  impact = resource_manager.LoadImage( weapons_res_profile, "uzi_impact");  
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -170,9 +180,15 @@ bool Uzi::p_Shoot()
       // Creuse le monde
       if (!obj)
       {
+#ifdef CL
 	monde.Creuse (balle.GetX() - impact.get_width()/2,
 		      balle.GetY() - impact.get_height()/2,
 		      impact);
+#else
+	monde.Creuse (balle.GetX() - impact->w/2,
+		      balle.GetY() - impact->h/2,
+		      impact);
+#endif
       }
       return true;
     }
@@ -186,7 +202,11 @@ bool Uzi::p_Shoot()
 
 void Uzi::Refresh()
 {
+#ifdef CL
   m_image.set_scale(ActiveCharacter().GetDirection(), 1);
+#else
+  m_image->Scale(ActiveCharacter().GetDirection(), 1);
+#endif
 }
 //-----------------------------------------------------------------------------
 
