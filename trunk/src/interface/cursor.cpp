@@ -66,7 +66,6 @@ CurseurVer::CurseurVer()
 void CurseurVer::Draw()
 {
   if (!actif) return;
-  if (!affiche) return;
   if (obj_designe == NULL) return;
   if (obj_designe -> IsGhost()) return;
 
@@ -93,7 +92,6 @@ void CurseurVer::Refresh()
 
     // Dessine une fleche au dessus du ver
   if (nbr_boucle > 0) {
-    affiche = true;
     if (y_mouvement > HAUTEUR_FLECHE+30)
     {
       monter = false;
@@ -116,13 +114,7 @@ void CurseurVer::Refresh()
 	y_mouvement--;
       }
     }
-  } else {
-    affiche = false;
-  }
-
-  if (affiche) 
-  {
-  }
+  } 
 
 #if 0
   // Dessine le curseur autour du ver
@@ -153,7 +145,7 @@ void CurseurVer::Cache()
   //monter = false;
   nbr_boucle = 0;
   nbr_clignot = NBR_CLIGNOTEMENT_CURSEUR;
-  affiche = false;
+  actif = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -174,7 +166,6 @@ void CurseurVer::Init()
 void CurseurVer::Reset()
 {
   actif = false;
-  affiche = false;
   obj_designe = NULL;
   designe_ver_actif = false;
 
@@ -189,7 +180,6 @@ void CurseurVer::SuitVerActif()
   obj_designe = &ActiveCharacter();
   designe_ver_actif = true;
   nbr_clignot = 0;
-  affiche = true;
   actif = true;
   temps = Wormux::temps.Lit();
   clignote = true;
@@ -220,7 +210,6 @@ void CurseurVer::PointeObj (PhysicalObj *obj)
   }
   designe_ver_actif = false;
   obj_designe = obj;
-  affiche = true;  
   actif = true;
   clignote = false;
   nbr_boucle = NBR_BOUCLE_FLECHE;
@@ -228,17 +217,23 @@ void CurseurVer::PointeObj (PhysicalObj *obj)
   const Character* character = dynamic_cast<const Character*> (obj_designe);
 
 #ifdef CL
-   if (game_loop.character_already_chosen
-      || ((character != NULL) && (&character -> GetTeam() != &ActiveTeam())))
-    image.set_frame (2);
-  else
+  if (game_loop.character_already_chosen || &character->GetTeam()!=&ActiveTeam() ) {
+    actif = false;
+    //image.set_frame (2);
+  }
+  else {
+    actif = true;
     image.set_frame (0);
+  }
 #else
-   if (game_loop.character_already_chosen
-      || ((character != NULL) && (&character -> GetTeam() != &ActiveTeam())))
-    image->SetCurrentFrame (2);
-  else
-    image->SetCurrentFrame (0);
+   if (game_loop.character_already_chosen || &character->GetTeam()!=&ActiveTeam() ) {
+     actif = false;
+     //image->SetCurrentFrame (2);
+   }
+   else {
+     actif = true;
+     image->SetCurrentFrame (0);
+   }
 #endif
 }
 

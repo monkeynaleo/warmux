@@ -37,7 +37,6 @@ class CurseurVer
 private:
   uint nbr_clignot;
   uint temps;
-  bool affiche;
   PhysicalObj *obj_designe;
   bool clignote;
   bool actif;
