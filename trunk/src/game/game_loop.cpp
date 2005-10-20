@@ -476,7 +476,7 @@ void GameLoop::Draw ()
     ver -> Draw();
 
     if (&(*ver) == &ActiveCharacter() && !ActiveCharacter().IsDead()) {
-      if (state != gameEND_TURN) {
+      if (state == gamePLAYING) {
 	ActiveTeam().crosshair.Draw();
 	ActiveTeam().AccessWeapon().Draw();
       }
