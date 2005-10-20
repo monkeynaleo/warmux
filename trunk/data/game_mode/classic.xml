@@ -146,7 +146,7 @@
       <min_angle>-40</min_angle>
       <max_angle>90</max_angle>
       <nb_ammo>-1</nb_ammo>
-      <unit_per_ammo>6</unit_per_ammo>
+      <unit_per_ammo>2</unit_per_ammo>
       <damage>25</damage>
       <air_resist_factor>0.0</air_resist_factor>
       <blast_range>1</blast_range>

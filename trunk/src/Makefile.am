@@ -77,7 +77,8 @@ wormux_SOURCES = \
 	weapon/mine.cpp weapon/mine.h \
         weapon/skip_turn.cpp weapon/skip_turn.h \
 	weapon/suicide.cpp weapon/suicide.h \
-	weapon/teleportation.cpp weapon/teleportation.h
+	weapon/teleportation.cpp weapon/teleportation.h \
+	weapon/uzi.cpp weapon/uzi.h
 #	
 #	game/debug.cpp game/debug.h \
 ####	graphic/graphism.cpp graphic/graphism.h \
@@ -104,9 +105,7 @@ wormux_SOURCES = \
 #	weapon/lowgrav.cpp weapon/lowgrav.h \
 #	weapon/ninja_rope.cpp weapon/ninja_rope.h \
 #	weapon/parachute.cpp weapon/parachute.h\
-#	weapon/supertux.cpp weapon/supertux.h \
-#	weapon/uzi.cpp weapon/uzi.h
-
+#	weapon/supertux.cpp weapon/supertux.h
 
 
 #AM_CXXFLAGS = -pg @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ @PARAGUI_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
