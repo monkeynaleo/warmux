@@ -33,6 +33,8 @@ class ResourceManager;
 
 extern SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
 
+enum Rotation_HotSpot {top_left, top_center, top_right, left_center, center, right_center, bottom_left, bottom_center, bottom_right};
+
 class Sprite
 {
  public:
@@ -53,6 +55,7 @@ class Sprite
    void Scale( float scale_x, float scale_y);
    void GetScaleFactors( float &scale_x, float &scale_y);
    void SetRotation_deg( float angle_deg);
+   void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
    void SetAlpha( float alpha); // Can't be combined with per pixel alpha
    float GetAlpha();
    void Start();
@@ -71,7 +74,9 @@ class Sprite
    float rotation_deg;
    float alpha;
    unsigned int current_frame;
-   std::vector< SDL_Surface *> surfaces;   
+   std::vector< SDL_Surface *> surfaces;
+   Rotation_HotSpot rot_hotspot;
+   void Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface);
 };
 
 #endif /* _SPRITE_H */

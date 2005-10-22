@@ -66,6 +66,7 @@ Sprite::Sprite()
    scale_y = 1.0f;
    rotation_deg = 0.0f;
    current_frame = 0;
+   rot_hotspot = center;
 }
 
 Sprite::Sprite( const Sprite& other)
@@ -76,6 +77,7 @@ Sprite::Sprite( const Sprite& other)
    scale_y = other.scale_y;
    rotation_deg = other.rotation_deg;
    current_frame = other.current_frame;
+   rot_hotspot = center;
    
    for ( unsigned int f = 0 ; f < other.surfaces.size() ; f++)
      {
@@ -107,6 +109,7 @@ Sprite::Sprite( SDL_Surface *surface)
    scale_y = 1.0f;
    rotation_deg = 0.0f;   
    current_frame = 0;
+   rot_hotspot = center;
 }
 
 Sprite::~Sprite()
@@ -192,6 +195,133 @@ void Sprite::SetRotation_deg( float angle_deg)
    rotation_deg = angle_deg;
 }
 
+void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface)
+{
+   // Calculate offset of the depending on hotspot rotation position :
+
+   //Do as if hotspot is center of picture:
+   rot_x = (surfaces[current_frame]->w/2)-(tmp_surface->w/2);
+   rot_y = (surfaces[current_frame]->h/2)-(tmp_surface->h/2);
+
+   if(rot_hotspot == center)
+      return;
+
+   //TODO:Rewrite this function... It's quite dirty, i know :p
+   //Distance between center of picture and hotspot:
+   // Works with scale == 1 or -1
+
+   float d = 0.0 ;
+   //Angle between center of picture and hotspot:
+   float d_angle = 0.0;
+
+   //Rotoation angle in radians:
+   float angle = rotation_deg * M_PI / 180.0;
+
+   switch(rot_hotspot)
+   {
+   case top_left:
+   case top_right:
+   case bottom_left:
+   case bottom_right:
+      d = sqrt(surfaces[current_frame]->w * surfaces[current_frame]->w +
+               surfaces[current_frame]->h * surfaces[current_frame]->h) / 2;
+      break;
+   case top_center:
+   case bottom_center:
+      d = surfaces[current_frame]->h / 2;
+      break;
+   case left_center:
+   case right_center:
+      d = surfaces[current_frame]->w / 2;
+      break;
+   default: break;
+   }
+
+   switch(rot_hotspot)
+   {
+   case top_center:
+      d_angle = 0.0;
+      break;
+   case top_left:
+      if(surfaces[current_frame]->w<surfaces[current_frame]->h)
+        d_angle = atan(surfaces[current_frame]->w / surfaces[current_frame]->h);
+      else
+        d_angle = atan(surfaces[current_frame]->h / surfaces[current_frame]->w);
+      break;
+   case left_center:
+      d_angle = M_PI_2;
+      break;
+   case bottom_left:
+      if(surfaces[current_frame]->w<surfaces[current_frame]->h)
+        d_angle = M_PI - atan(surfaces[current_frame]->w / surfaces[current_frame]->h);
+      else
+        d_angle = M_PI - atan(surfaces[current_frame]->h / surfaces[current_frame]->w);
+      break;
+   case bottom_center:
+      d_angle = M_PI;
+      break;
+   case bottom_right:
+      if(surfaces[current_frame]->w<surfaces[current_frame]->h)
+        d_angle = M_PI + atan(surfaces[current_frame]->w / surfaces[current_frame]->h);
+      else
+        d_angle = M_PI + atan(surfaces[current_frame]->h / surfaces[current_frame]->w);
+      break;
+   case right_center:
+      d_angle =  - M_PI_2;
+      break;
+   case top_right:
+      if(surfaces[current_frame]->w<surfaces[current_frame]->h)
+        d_angle = - atan(surfaces[current_frame]->w / surfaces[current_frame]->h);
+      else
+        d_angle = - atan(surfaces[current_frame]->h / surfaces[current_frame]->w);
+      break;
+   default: break;
+   }
+
+   if(this->scale_y > 0.0)
+   {
+      d_angle += M_PI_2;
+   }
+   else
+   {
+      d_angle = - d_angle - M_PI_2;
+   }
+
+   rot_x -= cos(angle - d_angle) * d;
+   rot_y -= sin(angle - d_angle) * d;
+
+   switch(rot_hotspot)
+   {
+   case top_left:
+   case left_center:
+   case bottom_left:
+      rot_x -= scale_y * surfaces[current_frame]->w / 2;
+      break;
+   case top_right:
+   case right_center:
+   case bottom_right:
+      rot_x += scale_y * surfaces[current_frame]->w / 2;
+      break;
+   default: break;
+   }
+
+   switch(rot_hotspot)
+   {
+   case top_left:
+   case top_center:
+   case top_right:
+      rot_y -= surfaces[current_frame]->h / 2;
+      break;
+   case bottom_left:
+   case bottom_center:
+   case bottom_right:
+      rot_y += surfaces[current_frame]->h / 2;
+      break;
+   default: break;
+   }
+}
+
+
 void Sprite::Start()
 {
    current_frame = 0;
@@ -247,7 +377,13 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 */   
    SDL_Surface *tmp_surface = rotozoomSurfaceXY (surfaces[current_frame], -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
 
-   SDL_Rect dr = {pos_x, pos_y, frame_width_pix, frame_height_pix};
+   // Calculate offset of the depending on hotspot rotation position :
+   int rot_x=0;
+   int rot_y=0;
+   if(rotation_deg!=0.0)
+     Calculate_Rotation_Offset(rot_x, rot_y, tmp_surface);
+
+   SDL_Rect dr = {pos_x + rot_x, pos_y + rot_y, frame_width_pix, frame_height_pix};
 
    SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
 
