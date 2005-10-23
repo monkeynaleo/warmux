@@ -76,13 +76,13 @@ void WeaponsList::Init()
   InitAndAddToList(&tux,4);  
   InitAndAddToList(&gnu_launcher,4); 
   InitAndAddToList(&teleportation,5);
-//   InitAndAddToList(&parachute,5);
+  InitAndAddToList(&parachute,5);
   InitAndAddToList(&suicide,5);
   InitAndAddToList(&skipturn,5);
-   InitAndAddToList(&jetpack,5);
-   InitAndAddToList(&airhammer,5);
-//   InitAndAddToList(&lowgrav,5);
-//   InitAndAddToList(&ninjarope,5);
+  InitAndAddToList(&jetpack,5);
+  InitAndAddToList(&airhammer,5);
+  InitAndAddToList(&lowgrav,5);
+  InitAndAddToList(&ninjarope,5);
 }
 
 //-----------------------------------------------------------------------------

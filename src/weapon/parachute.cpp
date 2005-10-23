@@ -31,7 +31,9 @@
 #include "../interface/game_msg.h"
 #include "../object/physical_obj.h"
 
+#ifdef CL
 CL_Sprite image ;
+#endif
 
 //-----------------------------------------------------------------------------
 namespace Wormux 
@@ -58,9 +60,13 @@ void Parachute::p_Select()
   m_is_active = true ;
   open = false ;
   closing = false ;
+#ifdef CL
   image.set_play_backward(false);
   image.set_show_on_finish(CL_Sprite::show_last_frame);
   image.restart();
+#else
+  //TODO
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -77,9 +83,17 @@ void Parachute::p_Deselect()
 void Parachute::p_Init()
 {
   m_name = _("parachute");
+#ifdef CL
   m_image = CL_Surface("mine", &graphisme.weapons);
   image = CL_Sprite("parachute_sprite", &graphisme.weapons);
   image.set_play_loop(false);
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+//  m_image = resource_manager.LoadSprite(res,"mine");
+  image = resource_manager.LoadSprite(res,"parachute_sprite");
+  //TODO : image.set_play_loop(false);
+  delete res;
+#endif
 }
 
 
@@ -94,9 +108,15 @@ void Parachute::Draw()
 {
   if (open)
     {
+#ifdef CL
       image.update();
       image.draw(ActiveCharacter().GetX() - ActiveCharacter().GetWidth()/2,
 		 ActiveCharacter().GetY() - image.get_height());
+#else
+      image->Update();
+      image->Draw(ActiveCharacter().GetX() - ActiveCharacter().GetWidth()/2,
+		 ActiveCharacter().GetY() - image->GetHeight());
+#endif
     }
 }
 
@@ -129,14 +149,19 @@ void Parachute::Refresh()
 	  if (!closing)
 	    {
 	      /* We have just hit the ground. Start closing animation */
+#ifdef CL
 	      image.set_play_backward(true);
 	      image.set_show_on_finish(CL_Sprite::show_blank);
 	      image.restart();
+#else
+  //TODO
+#endif
 	      closing = true ;
 	    }
 	  else
 	    {
 	      /* The parachute is closing */
+#ifdef CL
 	      if (image.is_finished())
 		{
 		  /* The animation is finished...
@@ -146,6 +171,9 @@ void Parachute::Refresh()
 		  m_image = CL_Surface("mine", &graphisme.weapons);
 		  UseAmmoUnit();
 		}
+#else
+  //TODO
+#endif
 	    }
 	}
     }

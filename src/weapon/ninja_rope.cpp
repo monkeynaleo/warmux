@@ -34,7 +34,7 @@
 #include "../game/time.h"
 #include "../sound/jukebox.h"
 #include "../tool/math_tools.h"
-#include "../tool/geometry_tools.h"
+#include "../tool/Distance.h"
 
 #ifdef WIN32
 int roundl(double nbr)
@@ -429,6 +429,9 @@ void NinjaRope::Draw()
 {
   int i, x, y;
   double angle, prev_angle ;
+#ifndef CL
+  struct CL_Quad {int x1,x2,x3,x4,y1,y2,y3,y4;};
+#endif
   CL_Quad quad ;
 
   if (!m_is_active)
@@ -462,13 +465,15 @@ void NinjaRope::Draw()
       quad.y3 = (int)roundl((double)rope_node[i].y - 2 * sin(angle)) ;
       quad.x4 = (int)roundl((double)rope_node[i].x - 2 * cos(angle)) ;
       quad.y4 = (int)roundl((double)rope_node[i].y + 2 * sin(angle)) ;
-
+#ifdef CL
       CL_Display::fill_quad(quad,
 			    CL_Color::white);
 
       CL_Display::draw_line(quad.x1, quad.y1, quad.x4, quad.y4,CL_Color::grey);
       CL_Display::draw_line(quad.x2, quad.y2, quad.x3, quad.y3,CL_Color::grey);
-
+#else
+    //TODO ! 
+#endif
       quad.x1 = quad.x4 ;
       quad.y1 = quad.y4 ;
       quad.x2 = quad.x3 ;
@@ -477,9 +482,15 @@ void NinjaRope::Draw()
       angle = rope_node[i].angle ;
     }
 
+#ifdef CL
   m_hook_sprite.set_angle(-prev_angle * 180.0 / M_PI);
   m_hook_sprite.draw(rope_node[0].x - m_hook_sprite.get_width()/2,
 		     rope_node[0].y - m_hook_sprite.get_height()/2);
+#else
+  m_hook_sprite->SetRotation_deg(-prev_angle * 180.0 / M_PI);
+  m_hook_sprite->Draw(rope_node[0].x - m_hook_sprite->GetWidth()/2,
+		     rope_node[0].y - m_hook_sprite->GetHeight()/2);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -487,9 +498,17 @@ void NinjaRope::Draw()
 void NinjaRope::p_Init()
 {
   m_name="ninjarope";
+#ifdef CL
   icone = CL_Surface("ninjarope_ico", &graphisme.weapons);
   m_image = CL_Surface("ninjarope", &graphisme.weapons);
   m_hook_sprite = CL_Surface("ninjahook", &graphisme.weapons);
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+  icone = resource_manager.LoadImage(res,"ninjarope_ico");
+  m_image = resource_manager.LoadSprite(res,"ninjarope");
+  m_hook_sprite = resource_manager.LoadSprite(res,"ninjahook");
+  delete res;
+#endif
 
   m_is_active = false;
   m_attaching = false;
