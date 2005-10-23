@@ -53,7 +53,13 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer")
 
 void Airhammer::p_Init()
 {
-  impact = CL_Surface("airhammer_impact", &graphisme.weapons);  
+#ifdef CL
+  impact = CL_Surface("airhammer_impact", &graphisme.weapons);
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+  impact = resource_manager.LoadImage( res, "airhammer_impact");
+#endif
+
   m_last_jolt = 0;
 }
 
@@ -70,10 +76,17 @@ bool Airhammer::p_Shoot()
 
   // initiate movement ;-)
   ActiveCharacter().SetXY(ActiveCharacter().GetX(),ActiveCharacter().GetY());
+#ifdef CL
   monde.Creuse (ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 
 		- impact.get_width()/2,
 		ActiveCharacter().GetY() + ActiveCharacter().GetHeight() -15,
 		impact);
+#else
+  monde.Creuse (ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 
+		- impact->w/2,
+		ActiveCharacter().GetY() + ActiveCharacter().GetHeight() -15,
+		impact);
+#endif
 
   return true;
 }

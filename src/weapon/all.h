@@ -23,7 +23,7 @@
 #define ALL_WEAPONS_H
 //-----------------------------------------------------------------------------
 #include "mine.h"
-//#include "airhammer.h"
+#include "airhammer.h"
 #include "air_attack.h"
 #include "auto_bazooka.h"
 #include "baseball.h"

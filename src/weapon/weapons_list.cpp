@@ -80,7 +80,7 @@ void WeaponsList::Init()
   InitAndAddToList(&suicide,5);
   InitAndAddToList(&skipturn,5);
 //   InitAndAddToList(&jetpack,5);
-//   InitAndAddToList(&airhammer,5);
+   InitAndAddToList(&airhammer,5);
 //   InitAndAddToList(&lowgrav,5);
 //   InitAndAddToList(&ninjarope,5);
 }

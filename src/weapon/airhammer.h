@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "weapon.h"
+struct SDL_Surface;
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -32,7 +33,7 @@ class Airhammer : public Weapon
 {
  private:
   uint m_last_jolt;
-  CL_Surface impact;
+  SDL_Surface* impact;
 
   void p_Init();
   void p_Deselect();
