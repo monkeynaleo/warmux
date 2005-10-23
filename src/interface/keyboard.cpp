@@ -196,12 +196,12 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
   if(event_type==KEY_RELEASED)
     HandleKeyReleased(action);
 
-/*  if (ActiveTeam().GetWeapon().override_keys &&
+  if (ActiveTeam().GetWeapon().override_keys &&
       ActiveTeam().GetWeapon().IsActive())
     {
       ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
       return ;
-    }*/
+    }
    
   ActiveCharacter().HandleKeyEvent( action, event_type);
 }
@@ -426,12 +426,12 @@ void Clavier::Refresh()
   for (uint i = 0; i < ACTION_MAX; i++)
   if(PressedKeys[i])
   {
-/*  if (ActiveTeam().GetWeapon().override_keys &&
-      ActiveTeam().GetWeapon().IsActive())
+    if (ActiveTeam().GetWeapon().override_keys &&
+        ActiveTeam().GetWeapon().IsActive())
     {
-      ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
+      ActiveTeam().AccessWeapon().HandleKeyEvent(i, KEY_REFRESH);
       return ;
-    }*/
+    }
 
     ActiveCharacter().HandleKeyEvent(i,KEY_REFRESH);
   }

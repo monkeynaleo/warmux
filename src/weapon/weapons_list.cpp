@@ -73,7 +73,7 @@ void WeaponsList::Init()
   InitAndAddToList(&dynamite,3);
   InitAndAddToList(&mine,3);
   InitAndAddToList(&air_attack,4);
-//   InitAndAddToList(&tux,4);  
+  InitAndAddToList(&tux,4);  
   InitAndAddToList(&gnu_launcher,4); 
   InitAndAddToList(&teleportation,5);
 //   InitAndAddToList(&parachute,5);

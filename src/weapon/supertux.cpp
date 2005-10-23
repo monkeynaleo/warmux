@@ -76,15 +76,27 @@ void SuperTux::Tire()
 
 void SuperTux::Init()
 {
+#ifdef CL
   image = CL_Sprite("supertux", &graphisme.weapons);
   SetSize (image.get_width(), image.get_height());
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+  image = resource_manager.LoadSprite(res,"supertux");
+  SetSize(image->GetWidth(), image->GetHeight());
+#endif
 
   SetMass (tux.cfg().mass);
   m_gravity_factor = 0.0;
 
   // Fixe le rectangle de test
+#ifdef CL
   int dx = image.get_width()/2-1;
   int dy = image.get_height()/2-1;
+#else
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+#endif
+
   SetTestRect (dx, dx, dy, dy);
 }
 
@@ -96,17 +108,19 @@ void SuperTux::Refresh()
 
   if (TestImpact()) { SignalCollision(); return; }
 
-  image.set_angle(angle*180/M_PI);
+  image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
   if ((last_move+animation_deltat)<Wormux::temps.Lit())
     {
       SetExternForce(tux.cfg().speed, angle);
-
+#ifdef CL
       image.update();
+#else
+      image->Update();
+#endif
       last_move = Wormux::temps.Lit();
   }
 
   particle_engine.AddPeriodic(GetX(),GetY(),angle, 0);
-  
 }
 
 
@@ -213,7 +227,12 @@ void TuxLauncher::Explosion()
   if (supertux.IsGhost()) return;
 
   // Applique les degats et le souffle aux vers
+#ifdef CL
   CL_Point pos = supertux.GetCenter();
+#else
+  Point2i pos = supertux.GetCenter();
+#endif
+
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 
 
@@ -232,7 +251,12 @@ void TuxLauncher::Refresh()
 void TuxLauncher::p_Init()
 {
   supertux.Init();
+#ifdef CL
   impact = CL_Surface("tux_impact", &graphisme.weapons);
+#else
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+  impact = resource_manager.LoadImage(res,"tux_impact");
+#endif
 }
 
 
