@@ -39,7 +39,7 @@
 #include "skip_turn.h"
 #include "suicide.h"
 //#include "ninja_rope.h"
-//#include "supertux.h"
+#include "supertux.h"
 //#include "parachute.h"
 #include "teleportation.h"
 #include "uzi.h"
