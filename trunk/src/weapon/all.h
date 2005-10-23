@@ -33,7 +33,7 @@
 #include "grenade.h"
 #include "gun.h"
 #include "gnu.h"
-//#include "holly_grenade.h"
+#include "holly_grenade.h"
 //#include "jetpack.h"
 //#include "lowgrav.h"
 #include "skip_turn.h"

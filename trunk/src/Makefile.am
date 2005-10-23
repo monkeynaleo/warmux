@@ -78,6 +78,7 @@ wormux_SOURCES = \
         weapon/skip_turn.cpp weapon/skip_turn.h \
 	weapon/suicide.cpp weapon/suicide.h \
 	weapon/teleportation.cpp weapon/teleportation.h \
+	weapon/holly_grenade.cpp weapon/holly_grenade.h \
 	weapon/uzi.cpp weapon/uzi.h
 #	
 #	game/debug.cpp game/debug.h \
@@ -100,7 +101,6 @@ wormux_SOURCES = \
 #
 #	weapon/all.h \
 #	weapon/airhammer.cpp weapon/airhammer.h \
-#	weapon/holly_grenade.cpp weapon/holly_grenade.h \
 #	weapon/jetpack.cpp weapon/jetpack.h\
 #	weapon/lowgrav.cpp weapon/lowgrav.h \
 #	weapon/ninja_rope.cpp weapon/ninja_rope.h \

@@ -89,16 +89,27 @@ void HollyGrenade::Tire (double force)
 
 void HollyGrenade::Init()
 {
+#ifdef CL
   image = CL_Sprite("holly_grenade_sprite", &graphisme.weapons);
   SetSize (image.get_width(), image.get_height());
+#else
+  image = resource_manager.LoadSprite( weapons_res_profile, "holly_grenade_sprite");
+  SetSize (image->GetWidth(), image->GetHeight());
+#endif
 
   SetMass (holly_grenade_launcher.cfg().mass);
   SetAirResistFactor(holly_grenade_launcher.cfg().air_resist_factor);
   m_rebound_factor = double(holly_grenade_launcher.cfg().rebound_factor);
 
   // Fixe le rectangle de test
+#ifdef CL
   int dx = image.get_width()/2-1;
   int dy = image.get_height()/2-1;
+#else
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+#endif
+
   SetTestRect (dx, dx, dy, dy);
 
 #ifdef MSG_DBG
@@ -148,8 +159,8 @@ void HollyGrenade::Refresh()
   if (TestImpact()) { SignalCollision(); return; }
 
   // rotation de l'image de la grenade...
-  double angle = GetSpeedAngle() * 180/M_PI ;
-  image.set_angle(angle);
+  double angle = GetSpeedAngle() * 180.0/M_PI ;
+  image->SetRotation_deg(angle);
 }
 
 //-----------------------------------------------------------------------------
@@ -167,14 +178,18 @@ void HollyGrenade::Draw()
   // draw smoke particles below the grenade
   smoke_engine.Draw();
 
-  image.draw(GetX(),GetY());
+  image->Draw(GetX(),GetY());
   int tmp = holly_grenade_launcher.cfg().timeout;
   tmp -= (int)((Wormux::temps.Lit() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
+#ifdef CL
   police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
+#else
+  normal_font.WriteCenterTop (txt_x, txt_y, ss.str(),white_color);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -235,7 +250,11 @@ void HollyGrenadeLauncher::Explosion()
   if (grenade.IsGhost()) return;
 
   // Applique les degats et le souffle aux vers
+#ifdef CL
   CL_Point pos = grenade.GetCenter();
+#else
+  Point2i pos = grenade.GetCenter();
+#endif 
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -254,7 +273,11 @@ void HollyGrenadeLauncher::Refresh()
 void HollyGrenadeLauncher::p_Init()
 {
   grenade.Init();
+#ifdef CL
   impact = CL_Surface("holly_grenade_impact", &graphisme.weapons);
+#else
+  impact = resource_manager.LoadImage( weapons_res_profile, "holly_grenade_impact");
+#endif
 }
 
 //-----------------------------------------------------------------------------
