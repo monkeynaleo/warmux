@@ -10,9 +10,18 @@
     </image>
   </sprite>
 
-  <surface name="smoke" file="object/smoke2.png" />
-  <surface name="fire_particle" file="object/fire.png" />
-  <surface name="star_particle" file="object/star.png" />
+  <sprite name="smoke">
+    <image file="object/smoke2.png" />
+  </sprite>
+  
+  <sprite name="fire_particle">
+    <image file="object/fire.png" />
+  </sprite>
+  
+  <sprite name="star_particle">
+    <image file="object/star.png" />
+  </sprite>
+
   <surface name="fire_impact" file="weapon/uzi_impact.png" />
 
 <!-- Air attack ressources -->

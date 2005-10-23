@@ -185,7 +185,7 @@ void Bazooka::Explosion()
 #ifdef CL
   CL_Point pos = roquette.GetCenter();
 #else
-  Point2i pos = ActiveCharacter().GetCenter();
+  Point2i pos = roquette.GetCenter();
 #endif
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }

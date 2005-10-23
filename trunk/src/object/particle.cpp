@@ -1,3 +1,4 @@
+
 /******************************************************************************
  *  Wormux, a free clone of the game Worms from Team17.
  *  Copyright (C) 2001-2004 Lawrence Azzoug.
@@ -31,6 +32,7 @@
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../tool/Point.h"
+#include "../tool/sprite.h"
 #endif
 #include <map>
 
@@ -62,10 +64,12 @@ void Particle::Draw()
 #ifdef CL
     image.draw(GetX(), GetY());
 #else
-     {
+/*     {
 	SDL_Rect dest = { GetX(), GetY(), image->w, image->h};	
 	SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
      }
+*/
+	image->Draw(GetX(),GetY());
 #endif
 }
 
@@ -76,6 +80,9 @@ void Particle::Refresh()
   uint time = Wormux::temps.Lit() - m_last_refresh; 
 
   UpdatePosition ();
+#ifndef CL
+  image->Update();
+#endif
 
   if (time >= m_time_between_scale) {  
 
@@ -95,7 +102,8 @@ void Particle::Refresh()
       image.set_scale(coeff, coeff);
       image.set_alpha(1.0);
 #else
-       // TODO
+      image->Scale(coeff,coeff);
+      image->SetAlpha(1.0);
 #endif
     }
     else
@@ -105,7 +113,8 @@ void Particle::Refresh()
       image.set_alpha(alpha);
       image.set_scale(1.0,1.0);
 #else
-       // TODO
+      image->Scale(1.0,1.0);
+      image->SetAlpha(alpha);
 #endif
     }
     m_last_refresh = Wormux::temps.Lit() ;
@@ -142,9 +151,9 @@ void Smoke::Init()
    SetSize(image.get_width(),image.get_height());
 #else
    Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   image = resource_manager.LoadImage(res,"smoke"); 
+   image = resource_manager.LoadSprite(res,"smoke"); 
    delete res;
-   SetSize(image->w,image->h);
+   SetSize(image->GetWidth(),image->GetHeight());
 #endif
    
   m_initial_time_to_live = 10;
@@ -174,9 +183,9 @@ void StarParticle::Init()
   SetSize(image.get_width(),image.get_height());
 #else
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   image = resource_manager.LoadImage(res,"star_particle"); 
+   image = resource_manager.LoadSprite(res,"star_particle"); 
   delete res;
-  SetSize(image->w,image->h);
+  SetSize(image->GetWidth(),image->GetHeight());
 #endif
 }
 
@@ -210,10 +219,10 @@ void FireParticle::Init()
   SetSize(image.get_width(),image.get_height());
 #else
    Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   image = resource_manager.LoadImage(res,"fire_particle"); 
-   impact = resource_manager.LoadImage(res,"fire_impact");   
+   image = resource_manager.LoadSprite(res,"fire_particle");
+   impact = resource_manager.LoadImage(res,"fire_impact");
    delete res;
-   SetSize(image->w,image->h);
+   SetSize(image->GetWidth(),image->GetHeight());
 #endif
 }
 
