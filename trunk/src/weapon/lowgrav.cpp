@@ -57,7 +57,13 @@ LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav")
 void LowGrav::p_Init()
 {
   m_name = _("lowgrav");
+#ifdef CL
   icone = CL_Surface("lowgrav_ico", &graphisme.weapons);
+#else
+   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+   icone = resource_manager.LoadImage(res,"lowgrav_ico");
+   delete res;
+#endif
 }
 
 //-----------------------------------------------------------------------------

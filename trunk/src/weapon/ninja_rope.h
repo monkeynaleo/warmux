@@ -49,7 +49,11 @@ private:
   bool m_rope_attached;
   double m_initial_angle;
   uint m_launch_time;
+#ifdef CL
   CL_Surface m_hook_sprite ;
+#else
+  Sprite* m_hook_sprite;
+#endif
 
 public:
   s_rope_node rope_node[node_max];

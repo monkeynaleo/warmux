@@ -23,7 +23,9 @@
 #define PARACHUTE_H
 //-----------------------------------------------------------------------------
 #include "weapon.h"
+#ifdef CL
 #include <ClanLib/sound.h>
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -35,6 +37,7 @@ private:
   bool closing ;
   double air_resist_factor ;
   double open_speed_limit ;
+  Sprite* image;
 
 public:
   Parachute();

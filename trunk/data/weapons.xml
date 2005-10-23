@@ -163,7 +163,12 @@
 
   <surface name="ninjarope_ico" file="weapon/ninjarope_ico.png" />
   <surface name="ninjarope" file="weapon/bazooka.png" />
-  <surface name="ninjahook" file="weapon/ninjahook.png" />
+  <sprite name="ninjarope">
+    <image file="weapon/bazooka.png" />
+  </sprite>
+  <sprite name="ninjahook">
+    <image file="weapon/ninjahook.png" />
+  </sprite>
 
 <!-- Parachute ressources -->
   
