@@ -29,6 +29,7 @@
 #include "../include/base.h"
 #include "../team/character.h"
 #include "../weapon/weapon_cfg.h"
+#include "../tool/sprite.h"
 #include "physical_obj.h"
 //-----------------------------------------------------------------------------
 
@@ -55,7 +56,7 @@ class Particle : public PhysicalObj
 #ifdef CL
   CL_Surface image;
 #else
-  SDL_Surface *image;
+  Sprite *image;
 #endif
    
  public:
