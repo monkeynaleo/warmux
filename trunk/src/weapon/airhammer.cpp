@@ -58,6 +58,7 @@ void Airhammer::p_Init()
 #else
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
   impact = resource_manager.LoadImage( res, "airhammer_impact");
+  delete res;
 #endif
 
   m_last_jolt = 0;

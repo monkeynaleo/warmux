@@ -34,7 +34,7 @@
 #include "gun.h"
 #include "gnu.h"
 #include "holly_grenade.h"
-//#include "jetpack.h"
+#include "jetpack.h"
 //#include "lowgrav.h"
 #include "skip_turn.h"
 #include "suicide.h"
