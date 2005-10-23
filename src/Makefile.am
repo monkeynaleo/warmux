@@ -81,6 +81,7 @@ wormux_SOURCES = \
 	weapon/holly_grenade.cpp weapon/holly_grenade.h \
 	weapon/airhammer.cpp weapon/airhammer.h \
 	weapon/uzi.cpp weapon/uzi.h \
+	weapon/jetpack.cpp weapon/jetpack.h\
 	weapon/supertux.cpp weapon/supertux.h
 	
 #	game/debug.cpp game/debug.h \
@@ -102,7 +103,6 @@ wormux_SOURCES = \
 ####	tool/geometry_tools.cpp tool/geometry_tools.h \
 #
 #	weapon/all.h \
-#	weapon/jetpack.cpp weapon/jetpack.h\
 #	weapon/lowgrav.cpp weapon/lowgrav.h \
 #	weapon/ninja_rope.cpp weapon/ninja_rope.h \
 #	weapon/parachute.cpp weapon/parachute.h

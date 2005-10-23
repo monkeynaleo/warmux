@@ -83,6 +83,7 @@ void SuperTux::Init()
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
   image = resource_manager.LoadSprite(res,"supertux");
   SetSize(image->GetWidth(), image->GetHeight());
+  delete res;
 #endif
 
   SetMass (tux.cfg().mass);
@@ -256,6 +257,7 @@ void TuxLauncher::p_Init()
 #else
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
   impact = resource_manager.LoadImage(res,"tux_impact");
+  delete res;
 #endif
 }
 

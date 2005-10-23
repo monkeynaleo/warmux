@@ -61,7 +61,13 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack")
 void JetPack::p_Init()
 {
   m_name = _("jetpack");
+#ifdef CL
   icone = CL_Surface("jetpack_ico", &graphisme.weapons);
+#else
+   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+   icone = resource_manager.LoadImage(res,"jetpack_ico");
+   delete res;
+#endif
   m_x_force = 0.0;
   m_y_force = 0.0;
 }
@@ -168,7 +174,12 @@ void JetPack::GoLeft()
 {
   StartUse();
   ActiveCharacter().SetSkin("jetpack-left-right");
+#ifdef CL
   ActiveCharacter().image.set_scale (-1, 1);
+#else
+  ActiveCharacter().image->Scale (-1, 1);
+#endif
+
   m_x_force = - JETPACK_FORCE ;
 }
 
@@ -178,7 +189,12 @@ void JetPack::GoRight()
 {
   StartUse();
   ActiveCharacter().SetSkin("jetpack-left-right");
+#ifdef CL
   ActiveCharacter().image.set_scale (1, 1);
+#else
+  ActiveCharacter().image->Scale (1, 1);
+#endif
+
   m_x_force = JETPACK_FORCE ;
 }
 
