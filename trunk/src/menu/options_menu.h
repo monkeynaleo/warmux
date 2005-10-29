@@ -27,61 +27,78 @@
 #include <string>
 //-----------------------------------------------------------------------------
 
+
+// TODO: remove gui items from here as they are only nedded in .cpp file
+//       and not needed in the .h interface file of the menu
+class Button;
+class ListBox;
+class CheckBox;
+class SpinButton;
+class SDL_Surface;
+class Sprite;
+
 class OptionMenu
 {
-
  public:
-  Run();
-  FreeMem();
-}
+   OptionMenu(); 
+   void Lance ();
+   void Init ();
+   void Reset ();
 
+ private:
+   bool fin_boucle;
+   
+   Button *valider; 
+   Button *enregistrer;
+   Button *annuler;
 
-/* class OptionMenu */
-/* { */
-/* private: */
-/*   volatile bool fin_boucle; */
-/*   Button valider, enregistrer, annuler; */
-/* #ifdef BUGGY_CODE */
-/*   ListBox lboxVideoMode; */
-/* #endif */
-/*   ListBox lboxMaps, lboxTeams,  lboxSoundFreq; */
+   ListBox *lboxVideoMode;
+   ListBox *lboxMaps;
+   ListBox *lboxTeams;
+   ListBox *lboxSoundFreq;
 
-/*   CheckBox option_affichage_energie, option_affichage_nom; */
-/* #ifdef BUGGY_CODE */
-/*   CheckBox full_screen */
-/* #endif */
-/* #ifdef USE_SDL */
-/*   CheckBox use_sdl; */
-/*   bool old_use_sdl; */
-/* #endif */
-/*   CheckBox opt_sound, opt_music, opt_sound_effects; */
+   CheckBox *option_affichage_energie;
+   CheckBox *option_affichage_nom;
+   CheckBox *full_screen;
+   CheckBox *opt_sound;
+   CheckBox *opt_music;
+   CheckBox *opt_sound_effects;
 
-/*   SpinButton option_temps_tour, option_temps_fin_tour, option_nb_ver, option_energie_ini; */
-/*   bool m_init; */
-/*   CL_Surface map_preview; */
-/*   CL_Surface fond_option, fond_maps, fond_box, fond_box2; */
-/*   uint carte_x, carte_y, carte_larg, carte_haut; */
-/*   uint maps_x, maps_y; */
-/*   uint teams_x, teams_y; */
-/*   uint espace; */
+   SpinButton *option_temps_tour;
+   SpinButton *option_temps_fin_tour;
+   SpinButton *option_nb_ver;
+   SpinButton *option_energie_ini;
 
-/*   CL_Slot keyboard_slot, mouse_slot, slot_quit; */
+   bool m_init;
+#ifdef CL
+   CL_Surface map_preview;
+   CL_Surface fond_option, fond_maps, fond_box, fond_box2;
+#else
+   Sprite *map_preview;
+   Sprite *fond_option; 
+   SDL_Surface *fond_maps;
+   SDL_Surface *fond_box;
+   SDL_Surface *fond_box2;
+#endif
+   uint carte_x, carte_y, carte_larg, carte_haut;
+   uint maps_x, maps_y;
+   uint teams_x, teams_y;
+   uint espace;
 
-/* public: */
-/*   OptionMenu() ; */
-/*   void Lance (); */
-/*   void Init ();  */
-/*   void Reset ();  */
+/* CL_Slot keyboard_slot, mouse_slot, slot_quit; */
 
-/*  private: */
-/*   void ChangeTerrain(); */
+   void ChangeTerrain();
+   void EnregistreOptions();
+#ifdef CL
+   void TraiteClic (const CL_InputEvent &event);
+#else
+   void onClic ( int mouse_x, int mouse_y);
+#endif
 /*   void TraiteTouche (const CL_InputEvent &event); */
-/*   void TraiteClic (const CL_InputEvent &event); */
 /*   void SignalWM_QUIT (); */
 /*   void RetourMenuPrincipal (); */
-/*   void EnregistreOptions(); */
-/* }; */
+};
 
 extern OptionMenu options_menu;
-//-----------------------------------------------------------------------------
+
 #endif

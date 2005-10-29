@@ -24,21 +24,35 @@
 #define GUI_BUTTON_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#ifdef CL
 #include <ClanLib/display.h>
+#else
+#endif
 //-----------------------------------------------------------------------------
+
+class Sprite;
+struct Profile;
 
 class Button
 {
 protected:
   uint m_x, m_width, m_y, m_height;
+#ifdef CL
   CL_Sprite image;
-
+#else
+  Sprite *image;
+#endif
+   
 public:
   Button();
   virtual ~Button();
   void SetPos(uint x, uint y);
   void SetSize (uint larg, uint haut);
+#ifdef CL
   void SetImage (const std::string& resource_id, CL_ResourceManager* manager);
+#else
+  void SetImage (const Profile *res_profile, const std::string& resource_id);
+#endif 
   bool Test (uint souris_x, uint souris_y);
   virtual void Draw (uint souris_x, uint souris_y);
   uint GetX() const;

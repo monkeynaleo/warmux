@@ -30,13 +30,21 @@ class ButtonText : public Button
 {
 private:
   std::string m_text;
+#ifdef CL
   Police *m_police;
-
+#else
+  Font *font;
+#endif
+   
 public:
   ButtonText();
   virtual void Draw (uint souris_x, uint souris_y);
   void SetText (const std::string &text);
+#ifdef CL
   void SetFont (Police *police);
+#else
+  void SetFont (Font *font);
+#endif 
   std::string GetText() const;
 };
 

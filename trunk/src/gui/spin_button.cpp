@@ -23,7 +23,10 @@
 //-----------------------------------------------------------------------------
 #include "../graphic/graphism.h"
 #include "../tool/math_tools.h"
-#include <sstream>
+#ifndef CL
+#include "../tool/resource_manager.h"
+#endif
+# include <sstream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -36,9 +39,16 @@ void SpinButton::Init (const std::string &label, uint x, uint y,
 		       int value, int step, int min_value, int max_value)
 {
   // Load images
+#ifdef CL
   m_plus.SetImage ("menu/plus",graphisme.LitRes());
   m_minus.SetImage ("menu/minus", graphisme.LitRes());
-
+#else
+  // UGLY -> TODO find a place to store the graphism.xml (in app ?) profile 
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml"); 
+  m_plus.SetImage (res, "menu/plus");
+  m_minus.SetImage (res, "menu/minus");   
+#endif
+   
   // Copy arguments
   m_label = label;
   m_x = x;
@@ -59,12 +69,21 @@ void SpinButton::Init (const std::string &label, uint x, uint y,
   max_value_s << max_value ;
 
   // Calculate coordonnates
+#ifdef CL
   /*uint*/ label_width = police_mix.GetWidth(m_label);
   /*uint*/ label_height = police_mix.GetHeight(m_label);
 
   // for having margins
   /*uint */value_width = police_mix.GetHeight( max_value_s.str() ) * 2 ;
+#else
+  /*uint*/ label_width = small_font.GetWidth(m_label);
+  /*uint*/ label_height = small_font.GetHeight();
 
+  // for having margins
+  /*uint */value_width = small_font.GetHeight() * 2 ;
+   
+#endif
+   
   m_width  = label_width + m_minus.GetWidth();
   m_width += value_width + m_plus.GetWidth();
 #ifndef WIN32
@@ -116,13 +135,21 @@ void SpinButton::SetXY (uint x, uint y)
 
 void SpinButton::Display (uint mouse_x, uint mouse_y)
 {
+#ifdef CL
   police_mix.WriteLeft(m_label_x, m_label_y, m_label);
-
+#else
+  small_font.WriteLeft(m_label_x, m_label_y, m_label, white_color); 
+#endif
+   
   // Display text
   std::ostringstream value_s;
   value_s << m_value ;
+#ifdef CL
   police_mix.WriteCenterTop(m_value_x, m_value_y, value_s.str());
-
+#else
+  small_font.WriteCenter(m_value_x, m_value_y, value_s.str(), white_color);
+#endif
+   
   // Display minus image
   m_minus.Draw (mouse_x, mouse_y);
   m_plus.Draw (mouse_x, mouse_y);
