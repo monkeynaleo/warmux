@@ -24,8 +24,13 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include <string>
-#include <ClanLib/display.h>
+#ifdef CL
+# include <ClanLib/display.h>
+#else
+#endif
 //-----------------------------------------------------------------------------
+
+class Sprite;
 
 class CheckBox
 {
@@ -36,8 +41,12 @@ class CheckBox
   uint m_img_x, m_img_y;
   uint m_label_x, m_label_y;
   bool m_value;
+#ifdef CL
   CL_Sprite m_image;
-  
+#else
+  Sprite *m_image;
+#endif
+   
  public:
   CheckBox();
   void Init (const std::string &label, uint x, uint y, bool value=true) ;  

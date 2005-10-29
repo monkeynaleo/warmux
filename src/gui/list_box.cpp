@@ -23,6 +23,9 @@
 //-----------------------------------------------------------------------------
 #include "../graphic/graphism.h"
 #include "../tool/math_tools.h"
+#ifndef CL
+# include "../tool/resource_manager.h"
+#endif
 #include <algorithm>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -43,8 +46,15 @@ ListBox::ListBox (uint _x, uint _y, uint _width, uint _height)
 void ListBox::Init()
 {
   // Load images
+#ifdef CL
   m_up.SetImage ("menu/up",graphisme.LitRes());
   m_down.SetImage ("menu/down", graphisme.LitRes());
+#else
+  // UGLY -> TODO find a place to store the graphism.xml (in app ?) profile 
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml"); 
+  m_up.SetImage ( res, "menu/up");
+  m_down.SetImage ( res, "menu/down");   
+#endif   
 }
 
 
@@ -101,10 +111,15 @@ void ListBox::Display (uint mouse_x, uint mouse_y)
 {
   int item = MouseIsOnWitchItem(mouse_x, mouse_y);
 
+#ifdef CL
   CL_Display::fill_rect(CL_Rect(x,y, x+width, y+height), CL_Color(255, 255, 255, 255*3/10));
-  
+#else
+   // TODO blit a surface as SDL_FillRect don't alpha blit a rectangle
+#endif
+   
   for (uint i=0; i < nb_visible_items; i++) 
   {
+#ifdef CL
     if ( i+first_visible_item == uint(item) ) {
       CL_Display::fill_rect(CL_Rect(x+1, y+i*height_item+1, x+width-1, y+(i+1)*height_item-1), 
 			    CL_Color(0,0,255*6/10,255*4/10));
@@ -112,10 +127,21 @@ void ListBox::Display (uint mouse_x, uint mouse_y)
       CL_Display::fill_rect (CL_Rect(x+1, y+i*height_item+1, x+width-1, y+(i+1)*height_item-1), 
 			     CL_Color(0,0,255*6/10,255*8/10));
     }
-      
+#else
+     // TODO blit surfaces as SDL_FillRect don't alpha blit a rectangle
+#endif
+     
+#ifdef CL
     police_mix.WriteLeft(x+5,
-			   y+i*height_item,
-			   m_items[i+first_visible_item].label) ;
+			 y+i*height_item,
+			 m_items[i+first_visible_item].label) ;
+#else
+    small_font.WriteLeft(x+5,
+			 y+i*height_item,
+			 m_items[i+first_visible_item].label,
+			 i+first_visible_item == uint(item) ? black_color : white_color) ;
+    
+#endif
   }  
 
 

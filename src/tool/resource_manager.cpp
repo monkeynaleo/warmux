@@ -54,7 +54,7 @@ void ResourceManager::AddDataPath( std::string base_path)
    this->base_path = base_path;
 }
 
-SDL_Surface * ResourceManager::LoadImage( std::string resource_str, bool alpha, bool set_colorkey, Uint32 colorkey)
+SDL_Surface * ResourceManager::LoadImage( const std::string resource_str, bool alpha, bool set_colorkey, Uint32 colorkey)
 {
    SDL_Surface *pre_surface = NULL;
    SDL_Surface *end_surface = NULL;
@@ -102,7 +102,7 @@ SDL_Surface * ResourceManager::LoadImage( std::string resource_str, bool alpha, 
    return end_surface;
 }
 
-Profile *ResourceManager::LoadXMLProfile( std::string xml_filename)
+Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename)
 {
    LitDocXml *doc = new LitDocXml;
    
@@ -131,7 +131,7 @@ Profile *ResourceManager::LoadXMLProfile( std::string xml_filename)
    return profile;
 }
 
-xmlpp::Element * ResourceManager::GetElement( Profile *profile, std::string resource_type, std::string resource_name)
+xmlpp::Element * ResourceManager::GetElement( const Profile *profile, const std::string resource_type, const std::string resource_name)
 {
    xmlpp::Element *elem = profile->doc->Access ( profile->doc->racine(),
 						 resource_type,
@@ -158,7 +158,7 @@ xmlpp::Element * ResourceManager::GetElement( Profile *profile, std::string reso
    return elem;   
 }
 
-SDL_Surface *ResourceManager::LoadImage( Profile *profile, std::string resource_name)
+SDL_Surface *ResourceManager::LoadImage( const Profile *profile, const std::string resource_name)
 {     
    xmlpp::Element *elem = GetElement ( profile, "surface", resource_name);
    if ( elem == NULL)
@@ -184,7 +184,7 @@ SDL_Surface *ResourceManager::LoadImage( Profile *profile, std::string resource_
    return LoadImage( profile->relative_path+filename, alpha);
 }
 
-Sprite *ResourceManager::LoadSprite( Profile *profile, std::string resource_name)
+Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string resource_name)
 {
    xmlpp::Element *elem_sprite = GetElement( profile, "sprite", resource_name);
    if ( elem_sprite == NULL)

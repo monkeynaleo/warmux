@@ -26,7 +26,6 @@
 #ifdef CL
 #include <ClanLib/core.h>
 #include <ClanLib/display.h>
-#include "menu/options_menu.h"
 #include "graphic/graphism.h"
 #include "network/network.h"
 #include "graphic/video.h"
@@ -44,6 +43,7 @@
 #include "include/action_handler.h"
 #include "game/game.h"
 #include "game/config.h"
+#include "menu/options_menu.h"
 #include "graphic/font.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
@@ -250,9 +250,9 @@ int AppWormux::main (int argc, char **argv)
         case menuPLAY:
 	 jeu.LanceJeu();
 	 break;
-//                case menuOPTIONS:
-// 			  menu_option.Lance();
-// 	                  break;
+       case menuOPTIONS:
+	 options_menu.Lance();
+	 break;
         case menuQUIT:
                          quitter = true;
                          break;

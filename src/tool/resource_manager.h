@@ -45,13 +45,13 @@ class ResourceManager
    ~ResourceManager();
   
    void AddDataPath( std::string base_path);
-   SDL_Surface *LoadImage( std::string ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0);
+   SDL_Surface *LoadImage( const std::string ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0);
   
-   Profile *LoadXMLProfile( std::string xml_filename);
+   Profile *LoadXMLProfile( const std::string xml_filename);
    Profile *UnLoadXMLProfile( Profile *profile);
    
-   SDL_Surface *LoadImage( Profile *profile, std::string resource_name); 
-   Sprite *LoadSprite( Profile *profile, std::string resource_name); 
+   SDL_Surface *LoadImage( const Profile *profile, const std::string resource_name); 
+   Sprite *LoadSprite( const Profile *profile, const std::string resource_name); 
    
  private:
    
@@ -59,7 +59,7 @@ class ResourceManager
 // std::vector< std::string> data_pathes;
 // map < std::string, Resource *> resources;
 
-   xmlpp::Element * GetElement( Profile *profile, std::string ressource_type, std::string ressource_name);
+   xmlpp::Element * GetElement( const Profile *profile, const std::string ressource_type, const std::string ressource_name);
 
 };
 

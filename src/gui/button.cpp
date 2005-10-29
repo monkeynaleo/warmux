@@ -21,14 +21,22 @@
  *****************************************************************************/
 
 #include "button.h"
+#include "../tool/resource_manager.h"
+#include "../tool/sprite.h"
+
 //-----------------------------------------------------------------------------
 
 Button::Button ()
-{ SetPos(0,0); SetSize(0,0); }
+{ 
+   SetPos(0,0); 
+   SetSize(0,0);
+}
 
 //-----------------------------------------------------------------------------
 
-Button::~Button() {} 
+Button::~Button() 
+{
+} 
 
 //-----------------------------------------------------------------------------
 
@@ -57,24 +65,39 @@ bool Button::Test (uint souris_x, uint souris_y)
 //-----------------------------------------------------------------------------
 
 void Button::Draw (uint souris_x, uint souris_y)
-{ DrawImage (souris_x, souris_y); }
+{ 
+   DrawImage (souris_x, souris_y);
+}
 
 //-----------------------------------------------------------------------------
 
 void Button::DrawImage (uint souris_x, uint souris_y)
 {
   uint frame = Test(souris_x,souris_y)?1:0;
+#ifdef CL
   image.set_frame (frame);
   image.draw(CL_Rect(m_x, m_y, m_x+m_width, m_y+m_height)); 
+#else
+  image->SetCurrentFrame (frame);
+  image->Draw(m_x, m_y);
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Button::SetImage (const std::string& resource_id, CL_ResourceManager* manager)
 { 
   image = CL_Sprite(resource_id, manager);
   SetSize (image.get_width(), image.get_height());
 }
+#else
+void Button::SetImage (const Profile *res_profile, const std::string& resource_id)
+{
+  image = resource_manager.LoadSprite(res_profile,resource_id);
+  SetSize (image->GetWidth(), image->GetHeight());   
+}
+#endif
 
 //-----------------------------------------------------------------------------
 

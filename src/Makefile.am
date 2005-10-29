@@ -16,6 +16,11 @@ wormux_SOURCES = \
 	game/game_loop.cpp gamse/game_loop.h \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/video.cpp graphic/video.h \
+	gui/button.cpp gui/button.h \
+	gui/button_text.cpp gui/button_text.h \
+	gui/check_box.cpp gui/check_box.h \
+	gui/list_box.cpp gui/list_box.h \
+	gui/spin_button.cpp gui/spin_button.h \
 	tool/string_tools.cpp tool/string_tools.h \
 	tool/xml_document.cpp tool/xml_document.h \
 	tool/i18n.cpp tool/i18n.h \
@@ -31,6 +36,7 @@ wormux_SOURCES = \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
 	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/main_menu.cpp menu/main_menu.h \
+	menu/options_menu.cpp menu/options_menu.h \
 	game/time.cpp game/time.h \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/question.cpp gui/question.h \
@@ -89,15 +95,9 @@ wormux_SOURCES = \
 	
 #	game/debug.cpp game/debug.h \
 ####	graphic/graphism.cpp graphic/graphism.h \
-####	gui/button.cpp gui/button.h \
-####	gui/button_text.cpp gui/button_text.h \
-####	gui/check_box.cpp gui/check_box.h \
-####	gui/list_box.cpp gui/list_box.h \
-####	gui/spin_button.cpp gui/spin_button.h \
 #
 #
 #
-#	menu/options_menu.cpp menu/options_menu.h \
 #
 ####	network/network.cpp network/network.h \
 ##

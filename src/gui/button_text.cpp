@@ -24,16 +24,33 @@
 
 ButtonText::ButtonText() : Button() 
 {
+#ifdef CL
   m_police = NULL;
+#else
+  font = NULL;
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
-void ButtonText::SetFont (Police *police) { m_police = police; }
+#ifdef CL
+void ButtonText::SetFont (Police *police)
+{ 
+  m_police = police;
+}
+#else
+void ButtonText::SetFont (Font *font)
+{ 
+  this->font = font;
+}
+#endif
 
 //-----------------------------------------------------------------------------
 
-void ButtonText::SetText(const std::string &text) { m_text = text; }
+void ButtonText::SetText(const std::string &text) 
+{ 
+  m_text = text; 
+}
 
 //-----------------------------------------------------------------------------
 
@@ -43,11 +60,18 @@ void ButtonText::Draw (uint souris_x, uint souris_y)
   assert (m_police != NULL);
   const int x = GetX()+GetWidth()/2;
   const int y = GetY()+GetHeight()/2;
+#ifdef CL
   m_police -> WriteCenter (x, y, m_text);
+#else
+  font->WriteCenter (x, y, m_text, white_color);
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
-std::string ButtonText::GetText() const { return m_text; }
+std::string ButtonText::GetText() const 
+{ 
+  return m_text;
+}
 
 //-----------------------------------------------------------------------------
