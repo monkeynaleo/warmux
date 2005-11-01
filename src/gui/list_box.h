@@ -29,6 +29,8 @@
 #include <list>
 //-----------------------------------------------------------------------------
 
+struct SDL_Surface;
+
 typedef struct s_list_box_item_t{
     std::string label;
     std::string value;
@@ -58,9 +60,14 @@ private:
 
   // Buttons
   Button m_up, m_down;
-
+#ifndef CL
+  SDL_Surface *cursorover_box;
+  SDL_Surface *selected_box;
+  SDL_Surface *background;
+#endif 
 public:
   ListBox (uint _x, uint _y, uint _width, uint _height);
+  ~ListBox();
   void Init ();
   void Display (uint mouse_x, uint mouse_y);
   bool Clic (uint mouse_x, uint mouse_y);

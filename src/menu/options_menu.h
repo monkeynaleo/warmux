@@ -92,7 +92,7 @@ class OptionMenu
 #ifdef CL
    void TraiteClic (const CL_InputEvent &event);
 #else
-   void onClic ( int mouse_x, int mouse_y);
+   void onClick ( int mouse_x, int mouse_y);
 #endif
 /*   void TraiteTouche (const CL_InputEvent &event); */
 /*   void SignalWM_QUIT (); */

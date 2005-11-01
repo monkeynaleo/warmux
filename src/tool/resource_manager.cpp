@@ -276,7 +276,9 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	     if ( nb_frames_x <= 0 )
 	       nb_frames_x = 1;
 	  
-	     nb_frames_y = 1;
+	     nb_frames_y = atoi( (array.substr(array.find(",")+1,array.length()-array.find(",")-1)).c_str());;
+	     if ( nb_frames_y <= 0 )
+	       nb_frames_y = 1;
 	  }
 	else
 	  {

@@ -119,7 +119,8 @@ void CheckBox::Display (uint mouse_x, uint mouse_y)
 #else
 void CheckBox::Display (uint mouse_x, uint mouse_y)
 {
-// TODO  police_mix.WriteLeft(m_label_x, m_label_y, m_label);
+  small_font.WriteLeft(m_label_x, m_label_y, m_label, white_color);
+  
   if (m_value)
     m_image->SetCurrentFrame(0);
   else 

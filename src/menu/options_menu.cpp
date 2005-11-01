@@ -149,48 +149,46 @@ void OptionMenu::TraiteTouche (const CL_InputEvent &touche)
 
 //-----------------------------------------------------------------------------
 
-/*
+#ifdef CL
 void OptionMenu::TraiteClic (const CL_InputEvent &event)
 {
   if (event.id == CL_MOUSE_LEFT)
   {
     int x = CL_Mouse::get_x();
     int y = CL_Mouse::get_y();
-    
-    if (valider.Test (x, y)) {
-      jukebox.Play("menu/ok");
-      EnregistreOptions();
-      RetourMenuPrincipal();
-    } else if (annuler.Test (x, y)) {
-      jukebox.Play("menu/cancel");
-      RetourMenuPrincipal();
-    } else if (enregistrer.Test (x, y)) {
-      EnregistreOptions();
-    } else if (lboxMaps.Clic(x, y)) {
-      ChangeTerrain();
-#ifdef BUGGY_CODE
-    } else if (lboxVideoMode.Clic(x, y)) {
-    } else if (full_screen.Clic(x, y)) {
+#else
+void OptionMenu::onClick ( int x, int y)
+{     
 #endif
-    } else if (lboxTeams.Clic(x, y)) {
-    } else if (lboxSoundFreq.Clic(x,y)) {
-    } else if (option_affichage_energie.Clic(x, y)) {
-    } else if (option_affichage_nom.Clic(x, y)) {
-#ifdef USE_SDL
-    } else if (use_sdl.Clic(x, y)) {
-#endif
-    } else if (option_temps_tour.Clic(x, y)) {
-    } else if (option_temps_fin_tour.Clic(x, y)) {
-    } else if (option_nb_ver.Clic(x, y)) {
-    } else if (option_energie_ini.Clic(x, y)) {
-    } else if (opt_sound.Clic (x,y)) {
-    } else if (opt_music.Clic (x,y)) {
-    } else if (opt_sound_effects.Clic (x,y)) {
+     
+    if (valider->Test (x, y)) {
+      //jukebox.Play("menu/ok");
+      EnregistreOptions();
+      fin_boucle = true;
+    } else if (annuler->Test (x, y)) {
+      //jukebox.Play("menu/cancel");
+      fin_boucle = true;
+    } else if (enregistrer->Test (x, y)) {
+      EnregistreOptions();
+    } else if (lboxMaps->Clic(x, y)) {
+       ChangeTerrain();
+    } else if (lboxVideoMode->Clic(x, y)) {
+    } else if (full_screen->Clic(x, y)) {
+    } else if (lboxTeams->Clic(x, y)) {
+    } else if (lboxSoundFreq->Clic(x,y)) {
+    } else if (option_affichage_energie->Clic(x, y)) {
+    } else if (option_affichage_nom->Clic(x, y)) {
+    } else if (option_temps_tour->Clic(x, y)) {
+    } else if (option_temps_fin_tour->Clic(x, y)) {
+    } else if (option_nb_ver->Clic(x, y)) {
+    } else if (option_energie_ini->Clic(x, y)) {
+    } else if (opt_sound->Clic (x,y)) {
+    } else if (opt_music->Clic (x,y)) {
+    } else if (opt_sound_effects->Clic (x,y)) {
     }
     return;
-  }
 }
-*/
+
 //-----------------------------------------------------------------------------
 
 #ifdef CL
@@ -452,13 +450,7 @@ void OptionMenu::Lance ()
 
   x = centre_x-50;
   y = FULL_SCREEN_Y;
-#ifdef USE_SDL
-  use_sdl.SetXY (x, y);
-  y += 20; 
-#endif
-#ifdef BUGGY_CODE
-  full_screen.SetXY (x, y);
-#endif
+  full_screen->SetXY (x, y);
   y += 20; opt_sound->SetXY (x, y);
   y += 20; opt_music->SetXY (x, y);
   y += 20; opt_sound_effects->SetXY (x, y);
@@ -478,7 +470,7 @@ void OptionMenu::Lance ()
    // Poll and treat events
 	
    SDL_Event event;
-   
+     
    while( SDL_PollEvent( &event) ) 
      {      
 	if ( event.type == SDL_QUIT) 
@@ -504,10 +496,12 @@ void OptionMenu::Lance ()
 	  }
 	else if ( event.type == SDL_MOUSEBUTTONDOWN )
 	  {
-	     //TraiteClic( &event);
+	     onClick( event.button.x, event.button.y);
 	  }
      }
-   
+
+     SDL_GetMouseState( &x, &y);
+     
 #endif
      
     int nv_equipe = lboxTeams->MouseIsOnWitchItem (x,y);
@@ -558,7 +552,12 @@ void OptionMenu::Lance ()
 				     (TEAMS_LARG/2)-ECUSSON_LARG/2 ,
 				     ECUSSON_Y);
 #else
-    // TODO
+   SDL_Rect team_icon_rect = { (espace*3)+CARTE_LARG+MAPS_LARG+(TEAMS_LARG/2)-ECUSSON_LARG/2,
+	                       ECUSSON_Y,
+                               ECUSSON_LARG,
+                               ECUSSON_HAUT};
+   SDL_BlitSurface (derniere_equipe->ecusson, NULL, app.sdlwindow, &team_icon_rect); 
+     
 #endif
      
     if (!terrain_init)
@@ -574,6 +573,8 @@ void OptionMenu::Lance ()
 
     CL_System::keep_alive (PAUSE) ;
 #else
+    map_preview->Blit ( app.sdlwindow, carte_x, carte_y);     
+     
     SDL_Flip( app.sdlwindow);
 #endif
      
