@@ -317,7 +317,6 @@ bool Config::SauveXml()
   doc.EcritBalise (racine, "data_dir", data_dir);
   doc.EcritBalise (racine, "locale_dir", locale_dir);
 
-#ifdef CL
   //=== Terrain ===
   doc.EcritBalise (racine, "map", lst_terrain.TerrainActif().name);
 
@@ -330,25 +329,26 @@ bool Config::SauveXml()
   {
     doc.EcritBalise (balise_equipes, "team", (**it).GetId());
   }
-#endif
 
-#ifdef BUGGY_CODE
-  doc.EcritBalise (noeud_video, "max_fps", ulong2str(video.GetMaxFps()));
-#endif
-#ifdef CL
+  //=== Video ===
+  xmlpp::Element *noeud_video = racine -> add_child("video");
   doc.EcritBalise (noeud_video, "width", ulong2str(video.GetWidth()));
   doc.EcritBalise (noeud_video, "height", ulong2str(video.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 
 		   ulong2str(static_cast<uint>(video.IsFullScreen())) );
   //=== Son ===
   xmlpp::Element *noeud_son = racine -> add_child("sound");
+#ifdef CL
   doc.EcritBalise (noeud_son, "active", ulong2str(jukebox.UseSound()));
   doc.EcritBalise (noeud_son, "music", ulong2str(jukebox.GetMusicConfig()));
   doc.EcritBalise (noeud_son, "effects", 
 		   ulong2str(jukebox.GetEffectsConfig()));
   doc.EcritBalise (noeud_son, "frequency",
 		   ulong2str(jukebox.GetFrequency()));
+#else
+   // TODO
 #endif
+   
   //=== Mode de jeu ===
   doc.EcritBalise (racine, "game_mode", m_game_mode);
   return doc.Sauve();
