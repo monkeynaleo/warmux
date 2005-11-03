@@ -59,7 +59,8 @@ SDL_Surface * ResourceManager::LoadImage( const std::string resource_str, bool a
    SDL_Surface *pre_surface = NULL;
    SDL_Surface *end_surface = NULL;
    
-   if ( ( pre_surface = IMG_Load( (base_path+resource_str).c_str())) == NULL )
+   if (( ( pre_surface = IMG_Load((base_path+resource_str).c_str()) ) == NULL ) &&
+       ( ( pre_surface = IMG_Load((resource_str).c_str()) ) == NULL ))
      {
 	// TODO raise an "can't load file" exception
 	throw std::string("ResourceManager: can't load image ")+resource_str;
@@ -108,7 +109,7 @@ Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename)
    
    // Load the XML
       
-   if ( !  doc->Charge ( base_path + xml_filename ) ) 
+   if ( !doc->Charge(base_path + xml_filename) && !doc->Charge(xml_filename)) 
      {
 	// TODO raise an "can't load file" exception
 	throw std::string("ResourceManager: can't load profile ")+xml_filename;

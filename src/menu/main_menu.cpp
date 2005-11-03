@@ -27,6 +27,7 @@
 #include <string>
 #include "../include/app.h"
 #include "../include/constant.h" // VERSION
+#include "../game/config.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include "../sound/jukebox.h"
@@ -94,7 +95,7 @@ void Main_Menu::Init()
   background = CL_Surface("intro/fond", graphisme.LitRes());
 #else
 //  app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
- background=IMG_Load("../data/menu/img/background.png");
+ background=IMG_Load( (config.data_dir+"menu/img/background.png").c_str() );
 #endif
   app.SetBackground(background,BKMODE_STRETCH);
   app.EnableBackground(true);
