@@ -131,7 +131,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   if (LitDocXml::LitString  (xml, "data_dir", data_dir)) {
     data_dir = TraduitRepertoire(data_dir);
 #ifndef CL
-    resource_manager.AddDataPath( std::string("../data/"));
+    resource_manager.AddDataPath(data_dir);
 #endif
   }
   if (LitDocXml::LitString  (xml, "locale_dir", locale_dir)) {
