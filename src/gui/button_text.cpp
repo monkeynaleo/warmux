@@ -57,7 +57,11 @@ void ButtonText::SetText(const std::string &text)
 void ButtonText::Draw (uint souris_x, uint souris_y)
 {
   DrawImage (souris_x, souris_y);
+#ifdef CL
   assert (m_police != NULL);
+#else
+  assert (font != NULL);
+#endif
   const int x = GetX()+GetWidth()/2;
   const int y = GetY()+GetHeight()/2;
 #ifdef CL
