@@ -85,7 +85,6 @@ Config::Config()
   tmp.video.height = 600;
   tmp.video.fullscreen = false;
 
-  tmp.sound.active = true;
   tmp.sound.music = true;
   tmp.sound.effects = true;
   tmp.sound.frequency = 22050;
@@ -185,7 +184,6 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   elem = LitDocXml::AccesBalise (xml, "sound");
   if (elem != NULL)
   {
-    LitDocXml::LitBool (elem, "active", tmp.sound.active);
     LitDocXml::LitBool (elem, "music", tmp.sound.music);
     LitDocXml::LitBool (elem, "effects", tmp.sound.effects);
     LitDocXml::LitUint (elem, "frequency", tmp.sound.frequency);
@@ -254,15 +252,10 @@ void Config::Applique()
   
   game_mode.Load(m_game_mode);
 
-#ifdef CL
   // Son
-  jukebox.ActiveSound (tmp.sound.active);
   jukebox.ActiveMusic (tmp.sound.music);
   jukebox.ActiveMusic (tmp.sound.effects);
   jukebox.SetFrequency (tmp.sound.frequency);
-#else
-//TODO
-#endif
    
   // Charge les équipes 
   InitSkins();
@@ -339,14 +332,17 @@ bool Config::SauveXml()
   //=== Son ===
   xmlpp::Element *noeud_son = racine -> add_child("sound");
 #ifdef CL
-  doc.EcritBalise (noeud_son, "active", ulong2str(jukebox.UseSound()));
   doc.EcritBalise (noeud_son, "music", ulong2str(jukebox.GetMusicConfig()));
   doc.EcritBalise (noeud_son, "effects", 
 		   ulong2str(jukebox.GetEffectsConfig()));
   doc.EcritBalise (noeud_son, "frequency",
 		   ulong2str(jukebox.GetFrequency()));
 #else
-   // TODO
+  doc.EcritBalise (noeud_son, "music", ulong2str(jukebox.UseMusic()));
+  doc.EcritBalise (noeud_son, "effects", 
+		   ulong2str(jukebox.UseEffects()));
+  doc.EcritBalise (noeud_son, "frequency",
+		   ulong2str(jukebox.GetFrequency()));
 #endif
    
   //=== Mode de jeu ===

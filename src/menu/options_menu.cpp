@@ -103,7 +103,6 @@ OptionMenu::OptionMenu()
   option_affichage_energie = new CheckBox();
   option_affichage_nom = new CheckBox();
   full_screen = new CheckBox();
-  opt_sound = new CheckBox();
   opt_music = new CheckBox();
   opt_sound_effects = new CheckBox();
 
@@ -182,7 +181,6 @@ void OptionMenu::onClick ( int x, int y)
     } else if (option_temps_fin_tour->Clic(x, y)) {
     } else if (option_nb_ver->Clic(x, y)) {
     } else if (option_energie_ini->Clic(x, y)) {
-    } else if (opt_sound->Clic (x,y)) {
     } else if (opt_music->Clic (x,y)) {
     } else if (opt_sound_effects->Clic (x,y)) {
     }
@@ -255,7 +253,6 @@ void OptionMenu::Init ()
 		     4, 1, NBR_VER_MIN, NBR_VER_MAX);
   option_energie_ini->Init(_("Initial energy:"), espace, 0, 100, 5, 50, 200);
 
-  opt_sound->Init (_("Use sound?"), video.GetWidth()/2, 0);
   opt_music->Init (_("Music?"), video.GetWidth()/2, 0);
   opt_sound_effects->Init (_("Sound effects?"), video.GetWidth()/2, 0);
 
@@ -325,11 +322,11 @@ void OptionMenu::Reset()
   option_energie_ini->SetValue(game_mode.character.init_energy);
 
 #ifdef CL
-  opt_sound->SetValue( jukebox.UseSound() );
   opt_music->SetValue( jukebox.GetMusicConfig() );
   opt_sound_effects->SetValue( jukebox.GetEffectsConfig() );
 #else
-   // TODO
+  opt_music->SetValue( jukebox.UseMusic() );
+  opt_music->SetValue( jukebox.UseEffects() );
 #endif
 }
 
@@ -364,7 +361,11 @@ void OptionMenu::EnregistreOptions()
   long freq;
   if (str2long(sfreq,freq)) jukebox.SetFrequency (freq);
 #else
-   // TODO
+  jukebox.ActiveMusic( opt_music->GetValue() );
+  jukebox.ActiveEffects( opt_sound_effects->GetValue() );
+  std::string sfreq = lboxSoundFreq->ReadValue(lboxSoundFreq->GetSelectedItem());
+  long freq;
+  if (str2long(sfreq,freq)) jukebox.SetFrequency (freq);
 #endif
    
   //Enregistre le tout dans le XML
@@ -451,7 +452,6 @@ void OptionMenu::Lance ()
   x = centre_x-50;
   y = FULL_SCREEN_Y;
   full_screen->SetXY (x, y);
-  y += 20; opt_sound->SetXY (x, y);
   y += 20; opt_music->SetXY (x, y);
   y += 20; opt_sound_effects->SetXY (x, y);
 
@@ -543,7 +543,6 @@ void OptionMenu::Lance ()
     option_temps_fin_tour->Display(x,y);
     option_nb_ver->Display(x,y);
     option_energie_ini->Display(x,y);
-    opt_sound->Display(x,y);
     opt_music->Display(x,y);
     opt_sound_effects->Display(x,y);
 

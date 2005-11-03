@@ -60,7 +60,6 @@ class OptionMenu
    CheckBox *option_affichage_energie;
    CheckBox *option_affichage_nom;
    CheckBox *full_screen;
-   CheckBox *opt_sound;
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
 
