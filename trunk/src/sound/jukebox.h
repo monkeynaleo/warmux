@@ -28,7 +28,6 @@
 #include <map>
 #include <set>
 #include <utility>
-
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
@@ -66,6 +65,7 @@ public:
   
   void ActiveMusic (bool on) {m_config.music = on ;};
   void ActiveEffects (bool on) {m_config.effects = on;};
+
   void SetFrequency (int frequency);
   void SetNumbersOfChannel(int channels);
 

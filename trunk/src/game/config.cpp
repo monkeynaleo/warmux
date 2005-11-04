@@ -87,7 +87,7 @@ Config::Config()
 
   tmp.sound.music = true;
   tmp.sound.effects = true;
-  tmp.sound.frequency = 22050;
+  tmp.sound.frequency = 44100;
 
 #ifndef WIN32
   personal_dir = RepertoireHome()+"/.wormux/";
@@ -115,7 +115,8 @@ bool Config::Charge()
     std::cout << "o Erreur lors du chargement :" << std::endl
 	      << e.what() << std::endl;
     return false;
-  }
+  } 
+
   return true;
 }
 
@@ -254,9 +255,9 @@ void Config::Applique()
 
   // Son
   jukebox.ActiveMusic (tmp.sound.music);
-  jukebox.ActiveMusic (tmp.sound.effects);
+  jukebox.ActiveEffects (tmp.sound.effects);
   jukebox.SetFrequency (tmp.sound.frequency);
-   
+
   // Charge les équipes 
   InitSkins();
   teams_list.LoadList();

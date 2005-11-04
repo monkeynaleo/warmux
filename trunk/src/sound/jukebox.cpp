@@ -58,7 +58,11 @@ JukeBox::JukeBox()
 
 void JukeBox::Init() 
 {
-  if (!m_config.music && !m_config.effects) return;
+  if (!m_config.music && !m_config.effects) {
+    End();
+    return;
+  }
+
   if (m_init) return;
 
   Uint16 audio_format = MIX_DEFAULT_FORMAT;
@@ -78,7 +82,9 @@ void JukeBox::Init()
     std::cout << "Opened audio at " << m_config.frequency <<" Hz "<< (audio_format&0xFF) 
 	      <<" bit " << std::endl;
   }
-  m_init = true;
+  m_init = true;  
+  
+  LoadXML("share");
 }
 
 //-----------------------------------------------------------------------------
