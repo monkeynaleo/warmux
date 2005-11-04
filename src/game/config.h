@@ -54,7 +54,6 @@ public:
       bool fullscreen;
     } video;
     struct tmp_xml_sound{
-      bool active;
       bool music;
       bool effects;
       uint frequency;

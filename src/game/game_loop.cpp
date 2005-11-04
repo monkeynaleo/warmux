@@ -293,7 +293,6 @@ void InitGame ()
     if ( (**equipe).GetSoundProfile() != "default" )
       jukebox.Load((**equipe).GetSoundProfile()) ;  
 #else
-// TODO  
   jukebox.LoadXML("default");
   POUR_CHAQUE_EQUIPE(equipe) 
     if ( (**equipe).GetSoundProfile() != "default" )

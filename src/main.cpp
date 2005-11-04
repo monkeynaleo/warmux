@@ -198,9 +198,8 @@ bool AppWormux::Init(int argc, char **argv)
   config.Applique();
 
   // Sound initialisation
-  jukebox.Init();
-  jukebox.LoadXML("share");
-
+  jukebox.Init();  
+  
   return true;
 }
 

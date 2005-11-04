@@ -161,11 +161,11 @@ void OptionMenu::onClick ( int x, int y)
 #endif
      
     if (valider->Test (x, y)) {
-      //jukebox.Play("menu/ok");
+      jukebox.Play("share", "menu/ok");
       EnregistreOptions();
       fin_boucle = true;
     } else if (annuler->Test (x, y)) {
-      //jukebox.Play("menu/cancel");
+      jukebox.Play("share", "menu/cancel");
       fin_boucle = true;
     } else if (enregistrer->Test (x, y)) {
       EnregistreOptions();
@@ -202,8 +202,6 @@ void OptionMenu::Init ()
 { 
   if (m_init) return;
   m_init = true;
-
-  app.LoadLayout("pokus.xml");
 
 #ifdef CL
   //Enter main loop 
@@ -326,7 +324,7 @@ void OptionMenu::Reset()
   opt_sound_effects->SetValue( jukebox.GetEffectsConfig() );
 #else
   opt_music->SetValue( jukebox.UseMusic() );
-  opt_music->SetValue( jukebox.UseEffects() );
+  opt_sound_effects->SetValue( jukebox.UseEffects() );
 #endif
 }
 
@@ -366,6 +364,8 @@ void OptionMenu::EnregistreOptions()
   std::string sfreq = lboxSoundFreq->ReadValue(lboxSoundFreq->GetSelectedItem());
   long freq;
   if (str2long(sfreq,freq)) jukebox.SetFrequency (freq);
+  
+  jukebox.Init(); // commit modification on sound options
 #endif
    
   //Enregistre le tout dans le XML
