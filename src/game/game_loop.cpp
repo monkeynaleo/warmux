@@ -308,6 +308,9 @@ void InitGame ()
 #else
    if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
 #endif
+   
+   if (!config.display_wind_particles) TerrainActif().wind.nbr_sprite = 0;
+
   jeu.fin_partie = false;
   game_loop.SetState (gamePLAYING, true);
 }

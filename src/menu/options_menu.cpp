@@ -100,6 +100,7 @@ OptionMenu::OptionMenu()
   lboxVideoMode = new ListBox(0, 0, VIDEO_MODE_LARG, VIDEO_MODE_HAUT);
   lboxSoundFreq = new ListBox(0, 0, SOUND_FREQ_WIDTH, SOUND_FREQ_HEIGHT);
 
+  option_display_wind_particles = new CheckBox();
   option_affichage_energie = new CheckBox();
   option_affichage_nom = new CheckBox();
   full_screen = new CheckBox();
@@ -175,6 +176,7 @@ void OptionMenu::onClick ( int x, int y)
     } else if (full_screen->Clic(x, y)) {
     } else if (lboxTeams->Clic(x, y)) {
     } else if (lboxSoundFreq->Clic(x,y)) {
+    } else if (option_display_wind_particles->Clic(x, y)) {
     } else if (option_affichage_energie->Clic(x, y)) {
     } else if (option_affichage_nom->Clic(x, y)) {
     } else if (option_temps_tour->Clic(x, y)) {
@@ -238,6 +240,7 @@ void OptionMenu::Init ()
 #endif
    
   // CheckBox
+  option_display_wind_particles->Init (_("Display wind particles?"), espace, 0);
   option_affichage_energie->Init (_("Display player energy?"), espace, 0);
   option_affichage_nom->Init (_("Display player's name?"), espace, 0);
   full_screen->Init (_("Fullscreen?"), 0, 0);
@@ -311,6 +314,7 @@ void OptionMenu::Init ()
 
 void OptionMenu::Reset()
 {
+  option_display_wind_particles->SetValue (config.display_wind_particles);
   option_affichage_energie->SetValue (config.affiche_energie_ver);
   option_affichage_nom->SetValue (config.affiche_nom_ver);
   full_screen->SetValue (video.IsFullScreen());
@@ -336,6 +340,7 @@ void OptionMenu::EnregistreOptions()
   std::string map_id = lboxMaps->ReadLabel(lboxMaps->GetSelectedItem());
   lst_terrain.ChangeTerrainNom (map_id);
   teams_list.ChangeSelection (lboxTeams->GetSelection());
+  config.display_wind_particles = option_display_wind_particles->GetValue();
   config.affiche_energie_ver = option_affichage_energie->GetValue();
   config.affiche_nom_ver = option_affichage_nom->GetValue();
 
@@ -444,10 +449,11 @@ void OptionMenu::Lance ()
   x = espace;
   option_affichage_energie->SetXY (x, CBOX_ENERGIE_Y);
   option_affichage_nom->SetXY (x, CBOX_ENERGIE_Y+20);
-  option_temps_tour->SetXY (x, CBOX_ENERGIE_Y+(2*20));
-  option_temps_fin_tour->SetXY (x, CBOX_ENERGIE_Y+(3*20));
-  option_nb_ver->SetXY (x, CBOX_ENERGIE_Y+(4*20));
-  option_energie_ini->SetXY (x, CBOX_ENERGIE_Y+(5*20));
+  option_display_wind_particles->SetXY (x, CBOX_ENERGIE_Y+(2*20));
+  option_temps_tour->SetXY (x, CBOX_ENERGIE_Y+(3*20));
+  option_temps_fin_tour->SetXY (x, CBOX_ENERGIE_Y+(4*20));
+  option_nb_ver->SetXY (x, CBOX_ENERGIE_Y+(5*20));
+  option_energie_ini->SetXY (x, CBOX_ENERGIE_Y+(6*20));
 
   x = centre_x-50;
   y = FULL_SCREEN_Y;
@@ -539,6 +545,7 @@ void OptionMenu::Lance ()
     lboxSoundFreq->Display(x,y);
     option_affichage_energie->Display(x,y);
     option_affichage_nom->Display(x,y);
+    option_display_wind_particles->Display(x,y);
     option_temps_tour->Display(x,y);
     option_temps_fin_tour->Display(x,y);
     option_nb_ver->Display(x,y);

@@ -65,6 +65,7 @@ Config::Config()
   m_game_mode = "classic";
   affiche_energie_ver = true;
   affiche_nom_ver = true;
+  display_wind_particles = true;
   transparency = ALPHA;
    
   // directories
