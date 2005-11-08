@@ -57,6 +57,7 @@ class OptionMenu
    ListBox *lboxTeams;
    ListBox *lboxSoundFreq;
 
+   CheckBox *option_display_wind_particles;
    CheckBox *option_affichage_energie;
    CheckBox *option_affichage_nom;
    CheckBox *full_screen;
