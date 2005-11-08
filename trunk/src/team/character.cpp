@@ -113,6 +113,10 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   is_walking = true;
   current_skin = "";
   channel_step = -1;
+
+#ifndef CL
+  name_surface = NULL;
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -244,7 +248,14 @@ void Character::DrawName (int dy) const
 #ifdef CL
    police_mix.WriteCenterTop (x,y,m_name);
 #else
-   small_font.WriteCenterTop (x-camera.GetX(),y-camera.GetY(),m_name,white_color);
+   //small_font.WriteCenterTop (x-camera.GetX(),y-camera.GetY(),m_name,white_color);
+   SDL_Rect dst_rect;
+   dst_rect.x = x-camera.GetX() - small_font.GetWidth(m_name)/2; 
+   dst_rect.y = y-camera.GetY();
+   dst_rect.h = name_surface->h;
+   dst_rect.w = name_surface->w;
+
+   SDL_BlitSurface(name_surface, NULL, app.sdlwindow, &dst_rect);
 #endif
 }
 
@@ -966,7 +977,13 @@ void Character::Reset()
   image->SetCurrentFrame ( RandomLong(0, image->GetFrameCount()-1) );
   m_image_frame = image->GetCurrentFrame();   
 #endif
-   
+
+#ifndef CL
+  // Prépare l'image du nom
+  if (config.affiche_nom_ver)
+    name_surface = small_font.Render(m_name, white_color);
+#endif
+
   // Energie
   energy = game_mode.character.init_energy-1;
   energy_bar.InitVal (energy, 0, game_mode.character.init_energy);
