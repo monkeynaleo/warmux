@@ -22,6 +22,8 @@
 #include "ninja_rope.h"
 //-----------------------------------------------------------------------------
 #include <math.h>
+#include <SDL_gfxPrimitives.h>
+#include "../include/app.h"
 #include "../interface/mouse.h"
 #include "../graphic/graphism.h"
 #include "../team/teams_list.h"
@@ -44,6 +46,7 @@ int roundl(double nbr)
   return (int)nbr;
 }
 #endif
+
 //-----------------------------------------------------------------------------
 
 namespace Wormux {
@@ -430,7 +433,7 @@ void NinjaRope::Draw()
   int i, x, y;
   double angle, prev_angle ;
 #ifndef CL
-  struct CL_Quad {int x1,x2,x3,x4,y1,y2,y3,y4;};
+  struct CL_Quad {Sint16 x1,x2,x3,x4,y1,y2,y3,y4;};
 #endif
   CL_Quad quad ;
 
@@ -454,25 +457,48 @@ void NinjaRope::Draw()
 
   ActiveCharacter().GetHandPosition(x, y);
 
+#ifdef CL
   quad.x1 = (int)roundl( (double)x - 2 * cos(angle));
   quad.y1 = (int)roundl((double)y + 2 * sin(angle));
   quad.x2 = (int)roundl((double)x + 2 * cos(angle));
   quad.y2 = (int)roundl((double)y - 2 * sin(angle));
+#else
+  quad.x1 = (int)roundl( (double)x - 2 * cos(angle)) - camera.GetX();
+  quad.y1 = (int)roundl((double)y + 2 * sin(angle)) - camera.GetY();
+  quad.x2 = (int)roundl((double)x + 2 * cos(angle)) - camera.GetX();
+  quad.y2 = (int)roundl((double)y - 2 * sin(angle)) - camera.GetY();
+#endif
 
   for (i = last_node ; i >= 0; i--)
     {
+#ifdef CL
       quad.x3 = (int)roundl((double)rope_node[i].x + 2 * cos(angle)) ;
       quad.y3 = (int)roundl((double)rope_node[i].y - 2 * sin(angle)) ;
       quad.x4 = (int)roundl((double)rope_node[i].x - 2 * cos(angle)) ;
       quad.y4 = (int)roundl((double)rope_node[i].y + 2 * sin(angle)) ;
-#ifdef CL
+
       CL_Display::fill_quad(quad,
 			    CL_Color::white);
 
       CL_Display::draw_line(quad.x1, quad.y1, quad.x4, quad.y4,CL_Color::grey);
       CL_Display::draw_line(quad.x2, quad.y2, quad.x3, quad.y3,CL_Color::grey);
 #else
-    //TODO ! 
+      quad.x3 = (int)roundl((double)rope_node[i].x + 2 * cos(angle))  - camera.GetX();
+      quad.y3 = (int)roundl((double)rope_node[i].y - 2 * sin(angle))  - camera.GetY();
+      quad.x4 = (int)roundl((double)rope_node[i].x - 2 * cos(angle))  - camera.GetX();
+      quad.y4 = (int)roundl((double)rope_node[i].y + 2 * sin(angle))  - camera.GetY();
+      
+
+      filledPolygonRGBA (app.sdlwindow, 
+			 &quad.x1,
+			 &quad.y1,
+			 4, 
+			 213,198,181,255);
+
+      lineRGBA(app.sdlwindow, quad.x1, quad.y1, quad.x4, quad.y4, 
+	       95,95,95,255);
+      lineRGBA(app.sdlwindow, quad.x2, quad.y2, quad.x3, quad.y3, 
+	       95,95,95,255);
 #endif
       quad.x1 = quad.x4 ;
       quad.y1 = quad.y4 ;
