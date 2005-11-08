@@ -42,7 +42,7 @@ public:
   void WriteCenter (int x, int y, const std::string &txt, SDL_Color color);
   int GetWidth (const std::string &txt);
   int GetHeight ();
-  SDL_Surface * Font::Render(const std::string &txt, SDL_Color color);
+  SDL_Surface * Render(const std::string &txt, SDL_Color color);
 
   static void InitAllFonts();
  };
