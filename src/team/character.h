@@ -49,6 +49,11 @@ private:
   uint energy;
   BarreProg energy_bar;
 
+#ifndef CL
+  // name
+  SDL_Surface* name_surface;
+#endif
+
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
   int losted_energy;
