@@ -30,6 +30,7 @@
 #include "../game/config.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
+#include "../tool/resource_manager.h"
 #include "../sound/jukebox.h"
 #include "../graphic/font.h"
 #include "infos_menu.h"
@@ -42,6 +43,8 @@ using namespace Wormux;
 using namespace std;
 //-----------------------------------------------------------------------------
 Main_Menu main_menu;
+
+const std::string VERSION("0.7beta");
 //-----------------------------------------------------------------------------
 
 // Position du texte de la version
@@ -61,14 +64,15 @@ Main_Menu::Main_Menu()
 //-----------------------------------------------------------------------------
 void Main_Menu::FreeMem()
 {
-  app.DeleteBackground();
-  SDL_FreeSurface(background);
+  delete background;
   delete play;
   delete network;
   delete options;
   delete infos;
   delete quit;
 }
+
+//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 void button_click()
@@ -95,10 +99,9 @@ void Main_Menu::Init()
   background = CL_Surface("intro/fond", graphisme.LitRes());
 #else
 //  app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
- background=IMG_Load( (config.data_dir+"menu/img/background.png").c_str() );
+ background=new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
+ background->Blit( app.sdlwindow, 0, 0);
 #endif
-  app.SetBackground(background,BKMODE_STRETCH);
-  app.EnableBackground(true);
 
   x_button = (int)((double)474 / DEFAULT_SCREEN_WIDTH * app.sdlwindow->w) ;
   y_scale = (double)1 / DEFAULT_SCREEN_HEIGHT * app.sdlwindow->h ;
@@ -106,66 +109,91 @@ void Main_Menu::Init()
   button_width = (int)((double)BUTTON_WIDTH / DEFAULT_SCREEN_WIDTH * app.sdlwindow->w) ;
   button_height = (int)((double)BUTTON_HEIGHT / DEFAULT_SCREEN_HEIGHT * app.sdlwindow->h) ;
 
-  play = new PG_Button(NULL,
-                        PG_Rect(x_button,(int)(192 * y_scale), //Position
-                                button_width,button_height), //Size
-                        _("Play"));
-  network = new PG_Button(NULL,
-                        PG_Rect(x_button,(int)(261 * y_scale), //Position
-                                button_width,button_height), //Size
-                        _("Network Game"));
-  options = new PG_Button(NULL,
-                        PG_Rect(x_button,(int)(329 * y_scale), //Position
-                                button_width,button_height), //Size
-                        _("Options"));
-  infos =  new PG_Button(NULL,
-                        PG_Rect(x_button,(int)(397 * y_scale), //Position
-                                button_width,button_height), //Size
-                        _("Info"));
-  quit =  new PG_Button(NULL,
-                        PG_Rect(x_button,(int)(465 * y_scale), //Position
-                                button_width,button_height), //Size
-                        _("Quit"));
-  play->sigClick.connect(slot(sig_play));
-  network->sigClick.connect(slot(sig_network));
-  options->sigClick.connect(slot(sig_options));
-  infos->sigClick.connect(slot(sig_infos));
-  quit->sigClick.connect(slot(sig_quit));
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+
+  play = new ButtonText(x_button,(uint)(192 * y_scale),//Position
+		    button_width,button_height, //Size
+		    _("Play"));
+  play->SetFont(&large_font);
+  play->SetImage (res, "intro/jouer");//->SetImage (res, "intro/play");
+
+  network = new ButtonText(x_button,(int)(261 * y_scale), //Position
+		       button_width,button_height, //Size
+		       _("Network Game"));
+  network->SetFont(&large_font);
+  network->SetImage (res,"intro/jouer");
+
+  options = new ButtonText(x_button,(int)(329 * y_scale), //Position
+		       button_width,button_height, //Size
+		       _("Options"));
+  options->SetFont(&large_font);
+  options->SetImage (res,"intro/options");
+
+  infos =  new ButtonText(x_button,(int)(397 * y_scale), //Position
+		      button_width,button_height, //Size
+		      _("Info"));
+  infos->SetFont(&large_font);
+  infos->SetImage (res,"intro/infos");
+
+  quit =  new ButtonText(x_button,(int)(465 * y_scale), //Position
+		     button_width,button_height, //Size
+		     _("Quit"));
+  quit->SetFont(&large_font);
+  quit->SetImage (res,"intro/quitter");
+
+  delete res;
 }
 
 //-----------------------------------------------------------------------------
+void Main_Menu::onClick ( int x, int y)
+{     
+  if (play->Test (x, y)) sig_play();
+  else if (network->Test (x, y)) sig_network();
+  else if (options->Test (x, y)) sig_options();
+  //else if (infos->Test (x, y)) sig_infos();
+  else if (quit->Test (x, y)) sig_quit();
+}
 
+//-----------------------------------------------------------------------------
 menu_item Main_Menu::Run ()
 {
   string txt_version;
   txt_version = string("Version ") + string(VERSION);
   SDL_Event event;
+  int x=0, y=0;
 
-  app.FlipPage();
-
-  play->Show();
-  network->Show();
-  options->Show();
-  infos->Show();
-  quit->Show();
+  SDL_Flip( app.sdlwindow);
  
   choice = menuNULL;
   while (choice == menuNULL)
   {
-    while ( SDL_PollEvent(&event) ) {
-      app.PumpIntoEventQueue(&event);
-    }
-
-    //TODO:Use videomode
-    app.RedrawBackground(PG_Rect(0,0,app.sdlwindow->w,app.sdlwindow->h));
     
-    big_font.WriteCenter( app.sdlwindow->w/2,
- 			  app.sdlwindow->h+VERSION_DY,
- 			  txt_version, white_color);
-    
-    PG_Widget::BulkBlit();
+    // Poll and treat events
+   SDL_Event event;
+     
+   while( SDL_PollEvent( &event) ) {      
+     if ( event.type == SDL_MOUSEBUTTONDOWN )
+       {
+	 onClick( event.button.x, event.button.y);
+       }
+   }
 
-    app.FlipPage();
+   SDL_GetMouseState( &x, &y);
+
+   background->Blit( app.sdlwindow, 0, 0);
+
+   play->Draw(x,y);
+   network->Draw(x,y);
+   options->Draw(x,y);
+   infos->Draw(x,y);
+   quit->Draw(x,y);
+
+   
+   big_font.WriteCenter( app.sdlwindow->w/2,
+			 app.sdlwindow->h+VERSION_DY,
+			 txt_version, white_color);
+   
+   SDL_Flip(app.sdlwindow);
   }
   
   return choice;

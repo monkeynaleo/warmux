@@ -45,6 +45,7 @@ protected:
    
 public:
   Button();
+  Button (uint x, uint y, uint w, uint h);
   virtual ~Button();
   void SetPos(uint x, uint y);
   void SetSize (uint larg, uint haut);

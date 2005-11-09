@@ -33,6 +33,15 @@ ButtonText::ButtonText() : Button()
 
 //-----------------------------------------------------------------------------
 
+ButtonText::ButtonText (uint x, uint y, uint w, uint h, const std::string &text)
+  : Button(x, y, w, h)
+{ 
+  m_text = text;
+}
+
+
+//-----------------------------------------------------------------------------
+
 #ifdef CL
 void ButtonText::SetFont (Police *police)
 { 
