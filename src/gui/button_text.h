@@ -38,6 +38,8 @@ private:
    
 public:
   ButtonText();
+  ButtonText (uint x, uint y, uint w, uint h, const std::string &text);
+
   virtual void Draw (uint souris_x, uint souris_y);
   void SetText (const std::string &text);
 #ifdef CL

@@ -24,9 +24,11 @@
 #define MAIN_MENU_H
 //-----------------------------------------------------------------------------
 #include <SDL/SDL.h>
-#include <pgbutton.h>
 #include <vector>
+#include "../gui/button_text.h"
 #include "../include/base.h"
+#include "../tool/sprite.h"
+
 //-----------------------------------------------------------------------------
 
 typedef enum
@@ -43,9 +45,9 @@ typedef enum
 class Main_Menu
 {
 private:
-  SDL_Surface* background;
-  PG_Button *play, *network, *options, *infos, *quit;
-
+  Sprite* background;
+  ButtonText *play, *network, *options, *infos, *quit;
+  void onClick ( int x, int y);
 public:
   menu_item choice;
 

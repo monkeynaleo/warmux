@@ -61,6 +61,8 @@ using namespace Wormux;
 #define MSG_CHARGEMENT_Y (config.ecran.haut/2)
 //-----------------------------------------------------------------------------
 AppWormux app;
+
+const std::string VERSION("0.7");
 //-----------------------------------------------------------------------------
 
 AppWormux::AppWormux()
@@ -133,22 +135,34 @@ bool AppWormux::Init(int argc, char **argv)
   }
 #endif
 
-  // Screen initialisation
-  if(!InitScreen(config.tmp.video.width,
-                 config.tmp.video.height,
-                 32, //resolution in bpp
-                 SDL_HWSURFACE))
-  {
-    std::cerr << "Unable to initialize SDL/ParaGUI: %s\n" << SDL_GetError() << std::endl;
-    return false;
-  }
-  LoadTheme("default");
+//   // Screen initialisation
+//   if(!InitScreen(config.tmp.video.width,
+//                  config.tmp.video.height,
+//                  32, //resolution in bpp
+//                  SDL_HWSURFACE))
+//   {
+//     std::cerr << "Unable to initialize SDL/ParaGUI: %s\n" << SDL_GetError() << std::endl;
+//     return false;
+//   }
+//   LoadTheme("default");
+
+  if ( SDL_Init(SDL_INIT_TIMER|
+		SDL_INIT_VIDEO) < 0 )
+    {
+      std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
+      return false;
+    }
+  
+  // Open a new window
+  app.sdlwindow = SDL_SetVideoMode(config.tmp.video.width,
+                                   config.tmp.video.height,
+                                   16, //resolution in bpp
+                                   SDL_HWSURFACE);  //see http://www.libsdl.org/cgi/docwiki.cgi/SDL_5fSetVideoMode
 
   // Set window caption
   std::string txt_version;
   txt_version = std::string("Wormux ") + std::string(VERSION);
-  SetCaption(txt_version.c_str(), NULL);
-
+  SDL_WM_SetCaption(txt_version.c_str(), NULL);
   
   // Fonts initialisation
   if (TTF_Init()==-1) {
@@ -157,11 +171,9 @@ bool AppWormux::Init(int argc, char **argv)
   }
   Font::InitAllFonts();
 
-   // Full screen ?
-  sdlwindow=GetScreen();
-
+  // Full screen ?
   if (config.tmp.video.fullscreen) {
-    SDL_WM_ToggleFullScreen(sdlwindow);
+    SDL_WM_ToggleFullScreen(app.sdlwindow);
   }
 
   // Load graphics resources XML file
@@ -177,7 +189,7 @@ bool AppWormux::Init(int argc, char **argv)
   SDL_Surface* loading_image=IMG_Load( (config.data_dir+"/menu/img/loading.png").c_str());
 #endif
 
-  SDL_BlitSurface(loading_image,NULL,sdlwindow,NULL);
+  SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
 
   txt_version = _("Version") + std::string(VERSION);
 
@@ -191,8 +203,8 @@ bool AppWormux::Init(int argc, char **argv)
 			 txt_version,
 			 white_color);
   
-  SDL_UpdateRect(sdlwindow, 0, 0, 0, 0);
-  SDL_Flip(sdlwindow);
+  SDL_UpdateRect(app.sdlwindow, 0, 0, 0, 0);
+  SDL_Flip(app.sdlwindow);
   SDL_FreeSurface(loading_image);
 
   config.Applique();
