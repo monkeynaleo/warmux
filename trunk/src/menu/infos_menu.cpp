@@ -21,7 +21,6 @@
 
 #include "infos_menu.h"
 //-----------------------------------------------------------------------------
-#include <pgmessagebox.h>
 #include <stdio.h>
 #include "../include/constant.h"
 #include "../tool/i18n.h"
@@ -32,11 +31,10 @@ MenuInfos menu_infos;
 
 void MenuInfos::Run()
 {
-#ifndef CL
+#ifdef CL
   //TODO:open the authors file from /usr/include according to the configure
   //TODO:Move the window depending on the screen resolution(?)
   FILE* authors=fopen("../AUTHORS","r");
-#endif
   char* txt;
   if(authors!=NULL)
   {
@@ -64,6 +62,7 @@ void MenuInfos::Run()
   msgbox->WaitForClick();
   delete msgbox;
   delete []txt;
+#endif
 }
 
 //-----------------------------------------------------------------------------
