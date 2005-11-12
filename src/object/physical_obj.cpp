@@ -42,7 +42,7 @@
 #include "../game/time.h"
 //#include "../map/water.h"
 #include "../sound/jukebox.h" //TODO remove this
-//#include "../weapon/ninja_rope.h"
+#include "../weapon/ninja_rope.h"
 //#include "../map/wind.h"
 #include <iostream>
 using namespace Wormux;
@@ -377,10 +377,8 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
     lg -= 1.0 ;    
   } while (0 < lg);
 
-#ifdef CL
    if (ninjarope.IsActive())
     ninjarope.NotifyMove(collision) ;
-#endif
    
   return collision;
 }
