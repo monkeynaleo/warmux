@@ -160,7 +160,7 @@ unsigned int Sprite::GetFrameCount()
 
 void Sprite::SetCurrentFrame( unsigned int frame_no)
 {
-   current_frame = ( frame_no < surfaces.size() ) ? frame_no : surfaces.size()-1;
+  current_frame = ( frame_no < surfaces.size() ) ? frame_no : surfaces.size()-1;
 }
 
 unsigned int Sprite::GetCurrentFrame()
@@ -178,6 +178,12 @@ void Sprite::GetScaleFactors( float &scale_x, float &scale_y)
 {
    scale_x = this->scale_x;
    scale_y = this->scale_y;
+}
+
+void Sprite::ScaleSize(int width, int height)
+{
+  scale_x = float(width)/float(frame_width_pix);
+  scale_y = float(height)/float(frame_height_pix);
 }
 
 void Sprite::SetAlpha( float alpha)

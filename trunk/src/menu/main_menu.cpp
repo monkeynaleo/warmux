@@ -179,7 +179,8 @@ menu_item Main_Menu::Run ()
    }
 
    SDL_GetMouseState( &x, &y);
-
+   
+   background->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
    background->Blit( app.sdlwindow, 0, 0);
 
    play->Draw(x,y);

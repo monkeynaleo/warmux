@@ -205,6 +205,8 @@ private:
   bool CollisionTest (int x, int y);
 
   void SignalRebound() ;
+
+
 };
 
 #ifndef CL // from tool/geomtry_tool.h

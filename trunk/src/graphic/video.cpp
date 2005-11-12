@@ -59,7 +59,10 @@ Video::Video()
     }
 }
 #else
-Video::Video() {}
+Video::Video() 
+{
+  fullscreen = false;
+}
 #endif
 
 #ifdef BUGGY_CODE
@@ -135,6 +138,10 @@ uint Video::GetSleepMaxFps()
 { return m_sleep_max_fps; }
 
 #endif //BUGGY_CODE
+
+//-----------------------------------------------------------------------------
+
+
 int Video::GetWidth(void) const
 {
 #ifdef CL
@@ -143,6 +150,7 @@ int Video::GetWidth(void) const
   return app.sdlwindow->w;
 #endif
 }
+//-----------------------------------------------------------------------------
 
 int Video::GetHeight(void) const
 {
@@ -152,12 +160,44 @@ int Video::GetHeight(void) const
   return app.sdlwindow->h;
 #endif
 }
+//-----------------------------------------------------------------------------
 
 bool Video::IsFullScreen(void) const
 {
 #ifdef CL
   return app.clwindow->is_fullscreen();
 #else
-  return false;
+  return fullscreen;
 #endif
 }
+
+//-----------------------------------------------------------------------------
+
+bool Video::SetConfig(int width, int height, bool _fullscreen)
+{
+  // initialize the main window
+  if ((app.sdlwindow == NULL) || 
+      (width != app.sdlwindow->w || height != app.sdlwindow->h)) {
+    app.sdlwindow = SDL_SetVideoMode(width,
+				     height,
+				     16, //resolution in bpp
+				     SDL_HWSURFACE|SDL_DOUBLEBUF);
+    if (app.sdlwindow == NULL) 
+      app.sdlwindow = SDL_SetVideoMode(width,
+				       height,
+				       16, //resolution in bpp
+				       SDL_SWSURFACE);
+
+    if (app.sdlwindow == NULL) return false;
+  }
+
+  // fullscreen ?
+  if (fullscreen != _fullscreen) {
+    SDL_WM_ToggleFullScreen(app.sdlwindow);
+    fullscreen = _fullscreen;
+  }
+
+  return true;
+}
+
+//-----------------------------------------------------------------------------

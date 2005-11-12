@@ -330,7 +330,13 @@ bool Config::SauveXml()
   doc.EcritBalise (noeud_video, "width", ulong2str(video.GetWidth()));
   doc.EcritBalise (noeud_video, "height", ulong2str(video.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 
-		   ulong2str(static_cast<uint>(video.IsFullScreen())) );
+		   ulong2str(static_cast<uint>(video.IsFullScreen())) );	  
+
+  if ( transparency == ALPHA )
+    doc.EcritBalise (noeud_video, "transparency", "alpha");
+  else if ( transparency == COLORKEY )
+    doc.EcritBalise (noeud_video, "transparency", "colorkey");
+ 
   //=== Son ===
   xmlpp::Element *noeud_son = racine -> add_child("sound");
 #ifdef CL

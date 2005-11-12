@@ -54,6 +54,7 @@ class Sprite
    unsigned int GetCurrentFrame();
    void Scale( float scale_x, float scale_y);
    void GetScaleFactors( float &scale_x, float &scale_y);
+   void ScaleSize(int width, int height);
    void SetRotation_deg( float angle_deg);
    void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
    void SetAlpha( float alpha); // Can't be combined with per pixel alpha

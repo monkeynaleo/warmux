@@ -22,6 +22,9 @@
 #include "constant.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
+
+  //const std::string VERSION("0.7beta");
+
 //-----------------------------------------------------------------------------
 
 #ifndef INSTALL_DATADIR
@@ -76,6 +79,7 @@ void InitCst()
 {
   AUTHORS.push_back ("Lawrence AZZOUG");
   AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
+  AUTHORS.push_back ("Jean-Christophe DUBERGA");
   AUTHORS.push_back ("Matthieu FERTRE");
   AUTHORS.push_back ("Renaud LOTTIAUX");
   AUTHORS.push_back ("Victor STINNER");
