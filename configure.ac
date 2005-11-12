@@ -135,24 +135,24 @@ AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,
 LIBS="$LIBS -lSDL_gfx"
 
 
-dnl === Check for paragui-config  ==========================================
+#dnl === Check for paragui-config  ==========================================
 
-AC_PATH_PROGS([PGUI_CONFIG], [paragui-config], [none])
-if test "x$PGUI_CONFIG" = "xnone"; then	
-	AC_MSG_ERROR([*** paragui-config has not been found.])
-fi
-AC_MSG_CHECKING(for Paragui)
-if $PGUI_CONFIG --libs > /dev/null 2>&1; then
-	AC_MSG_RESULT(yes)
-else
-	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** Paragui not found!])
-fi
-PARAGUI_CFLAGS=`$PGUI_CONFIG --cflags`
-PARAGUI_LIBS=`$PGUI_CONFIG --libs`
-CFLAGS="$CFLAGS $PARAGUI_CFLAGS"
-CXXFLAGS="$CXXFLAGS $PARAGUI_CFLAGS"
-LIBS="$LIBS $PARAGUI_LIBS"
+#AC_PATH_PROGS([PGUI_CONFIG], [paragui-config], [none])
+#if test "x$PGUI_CONFIG" = "xnone"; then	
+#	AC_MSG_ERROR([*** paragui-config has not been found.])
+#fi
+#AC_MSG_CHECKING(for Paragui)
+#if $PGUI_CONFIG --libs > /dev/null 2>&1; then
+#	AC_MSG_RESULT(yes)
+#else
+#	AC_MSG_RESULT(no)
+#	AC_MSG_ERROR([*** Paragui not found!])
+#fi
+#PARAGUI_CFLAGS=`$PGUI_CONFIG --cflags`
+#PARAGUI_LIBS=`$PGUI_CONFIG --libs`
+#CFLAGS="$CFLAGS $PARAGUI_CFLAGS"
+#CXXFLAGS="$CXXFLAGS $PARAGUI_CFLAGS"
+#LIBS="$LIBS $PARAGUI_LIBS"
 
 
 dnl === Check for libxml++ 1.x =============================================
