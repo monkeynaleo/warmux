@@ -33,6 +33,30 @@
 
 using namespace Wormux;
 
+const int larg_cell = 128;
+const int haut_cell = 128;
+
+// === Common to all TileItem_* except TileItem_Emtpy ==============================
+
+void TileItem::Draw(const int x,const int y)
+{
+  SDL_Surface *i_surface = GetSurface();
+  SDL_Rect dr = {x*larg_cell-camera.GetX(),y*haut_cell-camera.GetY(),i_surface->w,i_surface->h};
+  SDL_BlitSurface (i_surface, NULL, app.sdlwindow, &dr); 	     
+}
+
+bool TileItem::IsEmpty()
+{
+  for(int x = 0;x < larg_cell;x++)
+  for(int y = 0;y < haut_cell;y++)
+  {
+    if(GetAlpha(x,y) == 255)
+      return false;
+  }
+  return true;
+}
+
+
 // === Implemenation of TileItem_Software_ALpha ==============================
 
 TileItem_AlphaSoftware::TileItem_AlphaSoftware (unsigned int width, unsigned int height)
@@ -99,7 +123,6 @@ void TileItem_AlphaSoftware::SyncBuffer()
 {
    // nothing to do
 }
-
 
 // === Implemenation of TileItem_ALphaHardware ============================
 
@@ -286,8 +309,6 @@ void TileItem_ColorkeySoftware::SyncBuffer()
 
 Tile::Tile()
 {
-  larg_cell = 128;
-  haut_cell = 128;
 }
 
 //-----------------------------------------------------------------------------
@@ -306,16 +327,12 @@ Tile::~Tile()
 
 //-----------------------------------------------------------------------------
 
-void Tile::InitTile (unsigned int plarg_cell, unsigned int phaut_cell, 
-		     unsigned int plarg, unsigned int phaut)
+void Tile::InitTile (unsigned int plarg, unsigned int phaut)
 {
-  larg_cell = plarg_cell;
-  haut_cell = phaut_cell;
-
-  nbr_cell_larg = plarg / plarg_cell;
-  if ((plarg % plarg_cell) != 0) nbr_cell_larg++;
-  nbr_cell_haut = phaut / phaut_cell;
-  if ((phaut % phaut_cell) != 0) nbr_cell_haut++;
+  nbr_cell_larg = plarg / larg_cell;
+  if ((plarg % larg_cell) != 0) nbr_cell_larg++;
+  nbr_cell_haut = phaut / haut_cell;
+  if ((phaut % haut_cell) != 0) nbr_cell_haut++;
 
   larg = plarg;
   haut = phaut;
@@ -362,7 +379,7 @@ void Tile::LoadImage (SDL_Surface *terrain)
 {
   FreeMem();
 
-  InitTile (256, 256, terrain->w, terrain->h);
+  InitTile (terrain->w, terrain->h);
   assert (nbr_cell != 0);
 
   // Create the TileItem objects
@@ -392,6 +409,22 @@ void Tile::LoadImage (SDL_Surface *terrain)
 	     item[piece]->SyncBuffer();
 	  }	
      }
+
+   // Replace transparent tiles by TileItem_Empty tiles
+
+  std::cout << "Checking empty tiles of map" << std::endl;
+  uint freed = 0;
+
+  for (uint i=0; i<nbr_cell; ++i)
+  {
+    if(item[i]->IsEmpty())
+    {
+      freed++;
+      delete item[i];
+      item[i] = (TileItem*)new TileItem_Empty;
+    }
+  }
+  std::cout << freed << "tiles deleted!" << std::endl;
 }
 
 uchar Tile::GetAlpha (const int x, const int y) const
@@ -415,11 +448,6 @@ void Tile::DrawTile()
    for ( int iy = first_cell_y ; iy <= last_cell_y ; iy++ )
      for ( int ix = first_cell_x ; ix <= last_cell_x ; ix++)
        {
-	  SDL_Surface *i_surface = item[iy*nbr_cell_larg+ix]->GetSurface();
-	  
-	  SDL_Rect dr = {ix*larg_cell-camera.GetX(),iy*haut_cell-camera.GetY(),i_surface->w,i_surface->h};
-	  SDL_BlitSurface (i_surface, NULL, app.sdlwindow, &dr); 	     
+	  item[iy*nbr_cell_larg+ix]->Draw(ix,iy);
        }
 }   
-
-
