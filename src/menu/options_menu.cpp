@@ -303,6 +303,30 @@ void OptionMenu::Init ()
 			   mode->get_string());
   }
 #endif
+#ifndef CL
+  SDL_Rect **modes;
+
+  /* Get available fullscreen/hardware modes */
+  modes=SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
+
+  /* Check is there are any modes available */
+  if(modes == (SDL_Rect **)0){
+    std::ostringstream ss;
+    ss << app.sdlwindow->w << "x" << app.sdlwindow->h ;
+    lboxVideoMode->AddItem(false,"No modes available!", ss.str());
+  } else {
+    for(i=0;modes[i];++i) {
+      if (modes[i]->w < 800 || modes[i]->h < 600) break; 
+      std::ostringstream ss;
+      ss << modes[i]->w << "x" << modes[i]->h ;
+      if (modes[i]->w == app.sdlwindow->w && modes[i]->h == app.sdlwindow->h)
+	lboxVideoMode->AddItem(true, ss.str(), ss.str());
+      else
+	lboxVideoMode->AddItem(false, ss.str(), ss.str());
+    }
+  }
+#endif
+
   // Generate sound mode list
   uint current_freq = jukebox.GetFrequency();
   lboxSoundFreq->AddItem (current_freq == 11025, "11 kHz", "11025");
@@ -354,6 +378,11 @@ void OptionMenu::EnregistreOptions()
 #ifdef CL
   video.ChangeMode(lboxVideoMode->GetSelectedItem(),full_screen->GetValue());
 #else
+  uint mode = lboxVideoMode->GetSelectedItem();
+  std::string s_mode = lboxVideoMode->ReadValue(mode);
+  int w, h;
+  sscanf(s_mode.c_str(),"%dx%d", &w, &h);
+  video.SetConfig(w, h, full_screen->GetValue());
    // TODO
 #endif
    
@@ -526,6 +555,7 @@ void OptionMenu::Lance ()
     fond_box->draw(espace-30, CBOX_ENERGIE_Y-20);
     fond_box2->draw((espace*3)+CARTE_LARG+MAPS_LARG-100, VIDEO_MODE_Y-25);
 #else
+    fond_option->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
     fond_option->Blit( app.sdlwindow, 0, 0);
     SDL_Rect r1 = {espace-30,5,fond_maps->w,fond_maps->h};	  
     SDL_BlitSurface( fond_maps, NULL, app.sdlwindow, &r1);

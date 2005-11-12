@@ -44,14 +44,14 @@
 #include "game/game.h"
 #include "game/config.h"
 #include "menu/options_menu.h"
+#include "menu/main_menu.h"
+#include "menu/infos_menu.h"
 #include "graphic/font.h"
+#include "graphic/video.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
-#include "game/config.h"
-#include "menu/main_menu.h"
-#include "menu/infos_menu.h"
 #include "sound/jukebox.h"
 
 
@@ -135,17 +135,7 @@ bool AppWormux::Init(int argc, char **argv)
   }
 #endif
 
-//   // Screen initialisation
-//   if(!InitScreen(config.tmp.video.width,
-//                  config.tmp.video.height,
-//                  32, //resolution in bpp
-//                  SDL_HWSURFACE))
-//   {
-//     std::cerr << "Unable to initialize SDL/ParaGUI: %s\n" << SDL_GetError() << std::endl;
-//     return false;
-//   }
-//   LoadTheme("default");
-
+  // Screen initialisation
   if ( SDL_Init(SDL_INIT_TIMER|
 		SDL_INIT_VIDEO) < 0 )
     {
@@ -154,10 +144,10 @@ bool AppWormux::Init(int argc, char **argv)
     }
   
   // Open a new window
-  app.sdlwindow = SDL_SetVideoMode(config.tmp.video.width,
-                                   config.tmp.video.height,
-                                   16, //resolution in bpp
-                                   SDL_HWSURFACE);  //see http://www.libsdl.org/cgi/docwiki.cgi/SDL_5fSetVideoMode
+  app.sdlwindow = NULL;
+  video.SetConfig(config.tmp.video.width,
+		  config.tmp.video.height,
+		  config.tmp.video.fullscreen);
 
   // Set window caption
   std::string txt_version;
@@ -170,11 +160,6 @@ bool AppWormux::Init(int argc, char **argv)
     return false;
   }
   Font::InitAllFonts();
-
-  // Full screen ?
-  if (config.tmp.video.fullscreen) {
-    SDL_WM_ToggleFullScreen(app.sdlwindow);
-  }
 
   // Load graphics resources XML file
 #ifdef CL
@@ -242,35 +227,32 @@ int AppWormux::main (int argc, char **argv)
 {
   menu_item choix;
   bool quitter = false;
-  try
-  {
+  try {
     Prepare();
-    if (!Init(argc, argv))
-    {
+    if (!Init(argc, argv)) {
       std::cout << std::endl << "Error during initialisation...";
       return 0;
     }
-    do
-    {
+    do {
       main_menu.Init();
       choix = main_menu.Run();
       main_menu.FreeMem();
-
+      
       switch (choix)
-      {
-        case menuPLAY:
-	 jeu.LanceJeu();
-	 break;
-       case menuOPTIONS:
-	 options_menu.Lance();
-	 break;
-        case menuQUIT:
-                         quitter = true;
-                         break;
-        default:
-                         break;
-       }
-     } while (!quitter);
+	{
+	case menuPLAY:
+	  jeu.LanceJeu();
+	  break;
+	case menuOPTIONS:
+	  options_menu.Lance();
+	  break;
+	case menuQUIT:
+	  quitter = true;
+	  break;
+	default:
+	  break;
+	}
+    } while (!quitter);
 
     Fin();
   }

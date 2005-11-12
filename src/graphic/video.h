@@ -58,11 +58,15 @@ public:
   uint GetSleepMaxFps();  
 
 #endif //BUGGY_CODE
+ private:
+  bool fullscreen;
+
 public:
   Video();
   int GetWidth(void) const;
   int GetHeight(void) const;
   bool IsFullScreen(void) const;
+  bool SetConfig(int width, int height, bool fullscreen);
 };
 
 extern Video video;
