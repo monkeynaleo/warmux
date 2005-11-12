@@ -35,10 +35,25 @@ public:
   TileItem () {};
   virtual ~TileItem () {};
    
+  bool IsEmpty();
   virtual unsigned char GetAlpha(const int x,const int y) const = 0;
   virtual void Dig( int ox, int oy, SDL_Surface *dig) = 0;
   virtual SDL_Surface *GetSurface() = 0;
   virtual void SyncBuffer() = 0; // (if needed)
+  virtual void Draw(const int x,const int y);
+};
+
+class TileItem_Empty : public TileItem
+{
+public:
+  TileItem_Empty () {};
+  ~TileItem_Empty () {};
+   
+  unsigned char GetAlpha(const int x,const int y) const {return 0;};
+  void Dig( int ox, int oy, SDL_Surface *dig) {};
+  SDL_Surface *GetSurface() {return NULL;};
+  void SyncBuffer() {}; // (if needed)
+  void Draw(const int x,const int y) {};
 };
 
 class TileItem_AlphaSoftware : public TileItem
@@ -120,14 +135,13 @@ public:
 
 protected:
   // Initialise la position, la taille des cellules, et la taille du terrain
-  void InitTile (unsigned int larg_cell, unsigned int haut_cell, unsigned int larg, unsigned int haut);
+  void InitTile (unsigned int larg, unsigned int haut);
 
   void FreeMem();
 
   // Dimension du terrain
   unsigned int larg, haut;
 
-  unsigned int larg_cell, haut_cell;
   unsigned int nbr_cell_larg, nbr_cell_haut;
   unsigned int nbr_cell;
 
