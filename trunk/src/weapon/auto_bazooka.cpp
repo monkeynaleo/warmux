@@ -22,7 +22,6 @@
 #include "../weapon/auto_bazooka.h"
 //-----------------------------------------------------------------------------
 #include "../game/time.h"
-#include "../game/config.h"
 #include "../interface/mouse.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
@@ -40,6 +39,10 @@
 #ifndef CL
 #include "../include/app.h"
 #include "../map/camera.h"
+#endif
+
+#ifdef __MINGW32__
+#undef LoadImage
 #endif
 //-----------------------------------------------------------------------------
 namespace Wormux {

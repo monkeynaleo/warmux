@@ -38,7 +38,7 @@
 #include "../tool/resource_manager.h"
 #endif
 #include <iostream>
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
 #include <dirent.h>
 #include <sys/stat.h>
 #endif
@@ -285,7 +285,7 @@ void LoadOneSkin (const std::string &dir, const std::string &file)
 
   std::string fullname = dir+file;
 
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   // Only try directories
   struct stat stat_file;
   if (stat(fullname.c_str(), &stat_file) != 0) return;
@@ -313,7 +313,7 @@ void InitSkins()
   std::cout << "o " << _("Load skins:");
   std::cout.flush();
    
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   struct dirent *file;
 
   std::string dirname = config.data_dir+"skin/";
@@ -350,7 +350,7 @@ void InitSkins()
   FindClose(file_search);
 #endif
    
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   dirname = config.GetWormuxPersonalDir()+"skin/";
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
