@@ -42,6 +42,7 @@ public:
   uint nb_mine;
   bool use_water;
   bool is_opened;
+  bool infinite_bg;
 #ifdef CL
   CL_Surface preview;
   CL_Surface img_terrain, img_ciel;

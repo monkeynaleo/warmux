@@ -389,21 +389,21 @@ void Interface::ChangeAffiche (bool nv_affiche)
 void AbsoluteDraw(SDL_Surface* s, int x, int y)
 {
   assert(s!=NULL);
-  if(x + s->w < 0 || y + s->h < 0)
+/*  if(x + s->w < 0 || y + s->h < 0)
   {
     std::cout << "WARNING: Trying to display a SDL_Surface out of the screen!" << std::endl;
     return;
   }
-  
-  if(x + s->w < camera.GetX() || x > camera.GetX()+camera.GetWidth()
-  || y + s->h < camera.GetY() || y > camera.GetY()+camera.GetHeight())
+*/  
+  if(x + s->w < (int)camera.GetX() || x > (int)camera.GetX()+(int)camera.GetWidth()
+  || y + s->h < (int)camera.GetY() || y > (int)camera.GetY()+(int)camera.GetHeight())
   {
     //Drawing out of camera area
     return;
   }
 
   SDL_Rect src={0,0,s->w,s->h};
-  SDL_Rect dst={x - camera.GetX(), y - camera.GetY(), s->w , s->h};
+  SDL_Rect dst={x - (int)camera.GetX(), y - (int)camera.GetY(), s->w , s->h};
 
   if(dst.x<0)
   {

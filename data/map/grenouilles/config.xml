@@ -15,12 +15,14 @@
   <water>1</water>
   <nb_mine>3</nb_mine>
   <is_open>1</is_open>
+  <infinite_background>1</infinite_background>
 
   <sprite name="wind_particle">
     <image file="nuage.png">
       <grid pos="0,0" size="96,66" array="1,1"/>
     </image>
   </sprite>
+
   <wind>
     <nbr_sprite>10</nbr_sprite>
     <mass>0.1</mass>

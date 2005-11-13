@@ -42,6 +42,7 @@
 #include "../graphic/graphism.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
+#include "../object/bonus_box.h"
 #include <sstream>
 #include <iostream>
 
@@ -253,6 +254,7 @@ void Jeu::LanceJeu()
   }
 
   monde.FreeMem();
+  caisse.FreeMem();
   jukebox.StopAll();
 #ifdef CL
   clavier.DesinstallePilote();

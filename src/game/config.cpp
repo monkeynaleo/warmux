@@ -107,6 +107,9 @@ bool Config::Charge()
     // Charge la configuration XML
     LitDocXml doc;
     m_nomfich = personal_dir+NOMFICH;
+#ifdef __MINGW32__
+printf("charge %s",m_nomfich.c_str());
+#endif
     if (!doc.Charge (m_nomfich)) return false;
     if (!ChargeXml (doc.racine())) return false;
     m_xml_charge = true;

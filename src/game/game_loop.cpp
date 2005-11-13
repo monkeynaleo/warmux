@@ -244,6 +244,7 @@ void InitGameData()
   image_par_seconde.Reset();
   interface.Reset();
   game_messages.Reset();
+  caisse.Init();
 }
 
 //-----------------------------------------------------------------------------
@@ -266,7 +267,7 @@ void InitGame ()
     std::cout << "o " << _("Initialisation") << std::endl;
     interface.Init();
     curseur_ver.Init();
-    lst_objets.Init();	
+    lst_objets.Init();
     jeu.initialise = true;
   }
 

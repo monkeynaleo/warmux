@@ -31,6 +31,7 @@
 #include "../weapon/mine.h"
 #else
 #include "../tool/resource_manager.h"
+#include <SDL/SDL_video.h>
 #endif
 
 #ifdef DEBUG
@@ -90,12 +91,18 @@ bool Terrain::EstDansVide (int x, int y)
   // En dehors du monde : c'est vide :-p
   //  if (monde.EstHorsMondeXY(x,y)) return config.exterieur_monde_vide;
   assert (!monde.EstHorsMondeXY(x,y));
+  if(TerrainActif().infinite_bg)
+  {
+    if(x < 0 || y<0 || x>GetWidth() || y>GetHeight())
+      return true;
+  }
 
   // Lit le monde
 #ifdef CL
    return EstTransparent( GetAlpha(x,y) );
 #else
    return ( GetAlpha(x,y) != 255);
+//   return ( GetAlpha(x,y) == SDL_ALPHA_TRANSPARENT);
 #endif
 }
 

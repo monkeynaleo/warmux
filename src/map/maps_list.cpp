@@ -26,7 +26,7 @@
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include <iostream>
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
 #include <dirent.h>
 #include <sys/stat.h>
 #endif
@@ -49,6 +49,7 @@ InfoTerrain::InfoTerrain ()
   nb_mine = 0;
   wind.nbr_sprite = 0;
   wind.need_flip = false;
+  infinite_bg = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -156,6 +157,13 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
   LitDocXml::LitBool (xml, "water", use_water);
   LitDocXml::LitUint (xml, "nb_mine", nb_mine);
   LitDocXml::LitBool (xml, "is_open", is_opened);
+  LitDocXml::LitBool (xml, "infinite_background", infinite_bg);
+
+  if(!is_opened && infinite_bg)
+  {
+    std::cout << _("<infinite_background> needs <is_open> to be set to work correctly!!") << std::endl;
+    infinite_bg = false;
+  }
 
   xmlpp::Element *xmlwind = LitDocXml::AccesBalise (xml, "wind");
   if (xmlwind != NULL)
@@ -248,7 +256,7 @@ void ListeTerrain::LoadOneMap (const std::string &dir, const std::string &file)
 {
   std::string fullname = dir+file;
 
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   struct stat stat_file;
   if (file[0] == '.') return;
   if (stat(fullname.c_str(), &stat_file) != 0) return;
@@ -275,7 +283,7 @@ void ListeTerrain::Init()
 
   std::cout << "o " << _("Load maps:");
 
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   std::string dirname = Wormux::config.data_dir+"map/";
   DIR *dir = opendir(dirname.c_str());
   struct dirent *file;
@@ -308,7 +316,7 @@ void ListeTerrain::Init()
 #endif
 
   
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   // Load personal maps
   dirname = Wormux::config.GetWormuxPersonalDir()+"map/";
   dir = opendir(dirname.c_str());
