@@ -86,7 +86,7 @@ void SpinButton::Init (const std::string &label, uint x, uint y,
    
   m_width  = label_width + m_minus.GetWidth();
   m_width += value_width + m_plus.GetWidth();
-#ifndef WIN32
+#if !defined WIN32 || defined __MINGW32__
   m_height = std::max(label_height, m_plus.GetHeight());
 #else
   m_height = _cpp_max(label_height, m_plus.GetHeight());

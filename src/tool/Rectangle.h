@@ -27,12 +27,12 @@
 
 #include <cmath>
 
-template<class T> class Rectangle
+template<class T> class Wormux_Rectangle
 {
    
  public:
-   inline Rectangle(){}
-   inline Rectangle(T ox, T oy, T width, T height)
+   inline Wormux_Rectangle(){}
+   inline Wormux_Rectangle(T ox, T oy, T width, T height)
      {
 	this->x = ox;
 	this->y = oy;
@@ -40,7 +40,7 @@ template<class T> class Rectangle
 	this->h = height;
      }
    
-   inline void Clip( const Rectangle &cr)
+   inline void Clip( const Wormux_Rectangle &cr)
      {
 	T left    = ( x < cr.x ) ? cr.x : ( x > cr.x+cr.w ) ? cr.x+cr.w : x; 
 	T right   = ( x+w < cr.x ) ? cr.x : ( x+w > cr.x+cr.w ) ? cr.x+cr.w : x+w;
@@ -57,9 +57,9 @@ template<class T> class Rectangle
 };
 
    
-typedef Rectangle<int>    Rectanglei;   
-typedef Rectangle<float>  Rectanglef;   
-typedef Rectangle<double> Rectangled;   
+typedef Wormux_Rectangle<int>    Rectanglei;   
+typedef Wormux_Rectangle<float>  Rectanglef;   
+typedef Wormux_Rectangle<double> Rectangled;   
 
 
 #endif // _RECTANGLE_H
