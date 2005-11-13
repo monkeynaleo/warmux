@@ -41,6 +41,7 @@
 #include <sstream>
 #include <iostream>
 using namespace Wormux;
+using namespace std;
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG
@@ -106,6 +107,13 @@ void Caisse::Init()
   anim = resource_manager.LoadSprite( res, "objet/caisse");
   SetSize (anim->GetWidth(), anim->GetHeight());
 #endif
+}
+
+//-----------------------------------------------------------------------------
+
+void Caisse::FreeMem()
+{
+  delete anim;
 }
 
 //-----------------------------------------------------------------------------
@@ -301,7 +309,7 @@ bool Caisse::FaitApparaitre()
   affiche = true;
   m_ready = false;
   Ready();
-  SetSpeed (VITESSE_CAISSE, M_PI/2);
+  SetSpeed (VITESSE_CAISSE, M_PI_2);
   return true;
 }
 

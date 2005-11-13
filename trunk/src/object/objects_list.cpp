@@ -44,7 +44,6 @@ ListeObjets lst_objets;
 void ListeObjets::CreeListe()
 {
   liste.clear();
-  AjouteObjet (&caisse, false);
 }
 
 //-----------------------------------------------------------------------------

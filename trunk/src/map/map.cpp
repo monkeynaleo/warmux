@@ -132,19 +132,19 @@ void Monde::Draw()
 //-----------------------------------------------------------------------------
 
 bool Monde::EstHorsMondeX(int x) const
-{ return ((x < 0) || ((int)GetWidth() <= x)); }
+{ return ((x < 0) || ((int)GetWidth() <= x)) && !TerrainActif().infinite_bg; }
 
 bool Monde::EstHorsMondeY(int y) const
-{ return ((y < 0) || ((int)GetHeight() <= y)); }
+{ return (((y < 0) && !TerrainActif().infinite_bg) || ((int)GetHeight() <= y)); }
 
 bool Monde::EstHorsMondeXlarg(int x, uint larg) const
-{ return ((x+(int)larg-1 < 0) || ((int)GetWidth() <= x)); }
+{ return ((x+(int)larg-1 < 0) || ((int)GetWidth() <= x)) && !TerrainActif().infinite_bg; }
 
 bool Monde::EstHorsMondeYhaut(int y, uint haut) const
-{ return ((y+(int)haut-1 < 0) || ((int)GetHeight() <= y)); }
+{ return ((y+(int)haut-1 < 0  && !TerrainActif().infinite_bg) || ((int)GetHeight() <= y)); }
 
 bool Monde::EstHorsMondeXY(int x, int y) const
-{ return EstHorsMondeX(x) || EstHorsMondeY(y); }
+{ return EstHorsMondeX(x) || EstHorsMondeY(y) && !TerrainActif().infinite_bg; }
 
 #ifdef CL
 bool Monde::EstHorsMonde (const CL_Point &pos) const

@@ -148,6 +148,7 @@ void Avion::Tire()
   DoubleVector speed_vector ;
   int dir = ActiveCharacter().GetDirection();
   cible_x = mouse.GetXmonde();
+  SetY (0);
 
 #ifdef CL
   image.set_scale(dir, 1);
@@ -195,7 +196,6 @@ void Avion::Init()
   SetSize (image.get_width(), image.get_height());
 #else
   image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
-  SetY (0);
   SetSize (image->GetWidth(), image->GetHeight());   
 #endif 
   SetMass (3000);

@@ -24,6 +24,7 @@
 #include "camera.h"
 //-----------------------------------------------------------------------------
 #include "map.h"
+#include "maps_list.h"
 #include "../graphic/video.h"
 #include "../interface/mouse.h"
 
@@ -37,6 +38,7 @@
 #else
 #include "../tool/Rectangle.h"
 #include "../tool/Distance.h"
+#include <iostream>
 #endif
 
 using namespace Wormux;
@@ -47,7 +49,7 @@ const int MARGE = 200;
 
 #if 0
 // Pause entre deux scroll
-const uint PAUSE_SCROLLING = 1; // ms
+const int PAUSE_SCROLLING = 1; // ms
 #endif
 
 #ifdef DEBUG
@@ -56,7 +58,7 @@ const uint PAUSE_SCROLLING = 1; // ms
 //#define DEBUG_OBJ_SUIVI
 
 #endif
-#define COUT_DBG cout << "[Camera] "
+#define COUT_DBG std::cout << "[Camera] "
 
 const double VITESSE_CAMERA = 20;
 //-----------------------------------------------------------------------------
@@ -96,27 +98,42 @@ void Camera::SetXYabs (int x, int y)
 #ifdef DEBUG_MSG_SCROLL
   int sauve_fond_x = pos.x, sauve_fond_y = pos.y;
 #endif
-
-  if (!HasFixedX()) {
-    pos.x = BorneLong(x, 0, monde.GetWidth()-GetWidth());
-  } else {
-    //pos.x = BorneLong(x, 0, GetWidth()-monde.GetWidth());
-      pos.x = BorneLong(x, monde.GetWidth()-GetWidth(), 0);
+  if(!TerrainActif().infinite_bg)
+  {
+    if (!HasFixedX()) {
+      pos.x = BorneLong(x, 0, monde.GetWidth()-GetWidth());
+    } else {
+      //pos.x = BorneLong(x, 0, GetWidth()-monde.GetWidth());
+        pos.x = BorneLong(x, monde.GetWidth()-GetWidth(), 0);
+    }
+  }
+  else
+  {
+    pos.x = x;
   }
 
-  if (!HasFixedY()) {
-    pos.y = BorneLong(y, 0, monde.GetHeight()-GetHeight());
-  } else {
-    //pos.y = BorneLong(y, 0, GetHeight()-monde.GetHeight());
-        pos.y = BorneLong(y, monde.GetHeight()-GetHeight(), 0);
+  if(!TerrainActif().infinite_bg)
+  {
+    if (!HasFixedY()) {
+      pos.y = BorneLong(y, 0, monde.GetHeight()-GetHeight());
+    } else {
+      //pos.y = BorneLong(y, 0, GetHeight()-monde.GetHeight());
+          pos.y = BorneLong(y, monde.GetHeight()-GetHeight(), 0);
+    }
   }
-
+  else
+  {
+    if( y > (int)monde.GetHeight()-(int)GetHeight() )
+      pos.y = (int)monde.GetHeight()-(int)GetHeight();
+    else
+      pos.y = y;
+  }    
   lance = true;
 #ifdef DEBUG_MSG_SCROLL
   if ((pos.x != sauve_fond_x) && (pos.y != sauve_fond_y )) 
   {
     COUT_DBG << "SetXY : " << x << "," << y 
-	     << ", fond:" << pos.x << "," << pos.y << endl;
+	     << ", fond:" << pos.x << "," << pos.y << std::endl;
 
   }
 #endif
@@ -145,20 +162,20 @@ void Camera::Centre (const PhysicalObj &obj)
   if (obj.IsGhost()) return;
 
 #ifdef DEBUG_MSG_SCROLL
-  COUT_DBG << "Se centre sur " << obj.nom << endl;
+  COUT_DBG << "Se centre sur " << obj.m_name << std::endl;
 #endif
 
   int x,y;
 
   if (!HasFixedX()) {
-    x  = obj.GetX();
-    x -= (GetWidth() - obj.GetWidth())/2;
+    x  = (int)obj.GetX();
+    x -= ((int)GetWidth() - (int)obj.GetWidth())/(int)2;
   } else {
     x = ((int)monde.GetWidth() - (int)GetWidth()) / 2;
   }
   if (!HasFixedY()) {
-    y  = obj.GetY();
-    y -= (GetHeight() - obj.GetHeight())/2;
+    y  = (int)obj.GetY();
+    y -= ((int)GetHeight() - (int)obj.GetHeight())/(int)2;
   } else {
     y = ((int)monde.GetHeight() - (int)GetHeight()) / 2;
   }
@@ -175,16 +192,16 @@ void Camera::AutoRecadre ()
 
   if (!obj_suivi || obj_suivi -> IsGhost()) return;
 
-  x = obj_suivi -> GetX();
-  y = obj_suivi -> GetY(); 
-  if (y < 0) y = 0;
+  x = (int)obj_suivi -> GetX();
+  y = (int)obj_suivi -> GetY(); 
+  if (y < 0 && !TerrainActif().infinite_bg) y = 0;
   larg = obj_suivi -> GetWidth();
   haut = obj_suivi -> GetHeight();
 
   if (!EstVisible(*obj_suivi)) 
   {
 #ifdef DEBUG_MSG_SCROLL
-    COUT_DBG << "L'objet n'est pas visible." << endl;
+    COUT_DBG << "L'objet n'est pas visible." << std::endl;
 #endif
     Centre (*obj_suivi);
     return;
@@ -193,14 +210,14 @@ void Camera::AutoRecadre ()
   double dst_max = (GetWidth() - 2*MARGE)/2;
   double dst;
   if ((int)GetWidth() + pos.x < x+larg+MARGE)
-    dst = x+larg+MARGE - (GetWidth() + pos.x);  // positif
+    dst = x+larg+MARGE - ((int)GetWidth() + pos.x);  // positif
   else if (x-MARGE < pos.x)
     dst = (int)(x-MARGE) - pos.x; // négatif
   else
     dst = 0;
   dx = (int)(dst*VITESSE_CAMERA / dst_max);
 
-  dst_max = (GetHeight() - 2*MARGE)/2;
+  dst_max = ((int)GetHeight() - 2*MARGE)/2;
   if ((int)GetHeight() + pos.y < y+haut+MARGE)
     dst = y+haut+MARGE - (GetHeight() + pos.y);
   else if (y-MARGE < pos.y)
@@ -237,9 +254,9 @@ void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
 			     bool force_recentrage)
 {
 #ifdef DEBUG_OBJ_SUIVI
-  COUT_DBG << "Suit l'objet " << obj -> nom
+  COUT_DBG << "Suit l'objet " << obj -> m_name
 	   << ", recentre=" << recentre
-	   << ", suit=" << suit << endl;
+	   << ", suit=" << suit << std::endl;
 #endif
   if (recentre) 
   {
@@ -249,7 +266,7 @@ void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
       autorecadre = suit;
 #ifdef DEBUG_OBJ_SUIVI
     } else {
-      COUT_DBG << "Finalement ne le suit pas ..." << endl;
+      COUT_DBG << "Finalement ne le suit pas ..." << std::endl;
 #endif
     }
   }

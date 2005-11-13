@@ -24,6 +24,7 @@
 #include "../game/time.h"
 #include "map.h"
 #include "maps_list.h"
+#include "camera.h"
 #include "../interface/interface.h"
 
 #ifdef CL
@@ -59,7 +60,12 @@ void Water::Init()
 #else
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
    surface = resource_manager.LoadImage(res, "gfx/water");
-
+   pattern = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, 180, surface->h + 40,
+                                     32, // force to 32 bits per pixel
+                                     0x000000ff,  // red mask
+                                     0x0000ff00,  // green mask
+                                     0x00ff0000,  // blue mask
+                                     0xff000000); // alpha mask
 #endif
   shift1 = 0;
 }
@@ -76,7 +82,7 @@ void Water::Reset()
   temps_eau = 0;
   temps_montee = GO_UP_TIME * 60 * 1000;
   height.clear();
-  height.assign(monde.GetWidth(), 0);
+  height.assign(180, 0);
   Refresh(); // Calculate first height position
 }
 
@@ -85,7 +91,8 @@ void Water::Reset()
 void Water::Free()
 {
   if(!actif) return;
-  delete surface;
+  SDL_FreeSurface(surface);
+  SDL_FreeSurface(pattern);
   height.clear();
 }
 
@@ -95,7 +102,7 @@ void Water::Refresh()
 {
   if (!actif) return;
 
-  int height_mvt = 0;
+  height_mvt = 0;
 
   ////////  Height Calculation:
   if (temps_montee < Wormux::temps.Lit())
@@ -129,16 +136,15 @@ void Water::Refresh()
 
   double angle1 = 0;
   double angle2 = shift1;
-
   do 
   {
     int offset=0;
     double y_pos = y + sin(angle1)*10 + sin(angle2)*10;
-    do 
-    {
+//    do 
+//    {
       if (0<=x+offset) height.at(x+offset) = (int)y_pos;
-      offset += 180;
-    } while ((uint)offset+x < monde.GetWidth());
+//      offset += 180;
+//    } while ((uint)offset+x < monde.GetWidth());
 
     angle1 += 2*decree;
     angle2 += 4*decree;
@@ -153,14 +159,38 @@ void Water::Refresh()
 void Water::Draw()
 {
   if (!actif) return;
-  for(uint x=0; x<monde.GetWidth(); x++)
+
+/*  for(uint x=0; x<monde.GetWidth(); x++)
   for(uint y=height.at(x); y<monde.GetHeight(); y+=surface->h)
   {
 #ifdef CL     
-     surface->draw (x, y);
+     surface->draw (camera.GetX()+x-x0, y);
 #else
-     AbsoluteDraw( surface, x,y);
+     AbsoluteDraw( surface, x, y);
 #endif
+  }
+*/
+  // Compute 1 pattern:
+  SDL_FillRect(pattern, NULL, 0xFFFFFF00);
+
+  int y0 = monde.GetHeight()-(hauteur_eau + height_mvt)-20;
+
+  for(uint x=0; x<180; x++)
+  {
+    SDL_Rect dst = {x, height.at(x) - y0, surface->w, surface->h};
+    SDL_BlitSurface(surface,NULL, pattern,&dst);
+  }
+
+  int x0 = (int)camera.GetX();
+  while(x0<0)
+    x0+=180;
+  while(x0>180)
+    x0-=180;
+
+  for(int x=(int)camera.GetX()-x0;x<(int)camera.GetX()+(int)camera.GetWidth();x+=180)
+  for(int y=y0;y<(int)camera.GetY()+(int)camera.GetHeight();y+=surface->h)
+  {
+    AbsoluteDraw(pattern, x, y);
   }
 }
 
@@ -168,10 +198,16 @@ void Water::Draw()
 
 int Water::GetHeight(int x)
 {
-	if (IsActive())
-		return height.at(x);
-	else
-		return monde.GetHeight();
+  if (IsActive())
+  {
+    while(x<0)
+      x += 180;
+    while(x>=180)
+      x -= 180;
+    return height.at(x);
+  }
+  else
+    return monde.GetHeight();
 }
 
 //-----------------------------------------------------------------------------

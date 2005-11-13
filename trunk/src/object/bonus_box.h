@@ -63,6 +63,7 @@ public:
   // Initialise les données
   Caisse();
   void Init();
+  void FreeMem();
   void Reset();
 
   // Active les caisses ?

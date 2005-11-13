@@ -37,6 +37,7 @@ class Water
 {
 private:
   uint temps_eau;
+  int height_mvt;
   int vague;
   bool actif;
   double shift1;
@@ -44,6 +45,7 @@ private:
   uint temps_montee;
   std::vector<int> height;
   SDL_Surface *surface;
+  SDL_Surface *pattern;
 public:
   void Init();
   void Reset();

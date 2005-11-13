@@ -71,7 +71,7 @@ void WindParticle::Init()
   sprite->SetCurrentFrame ( RandomLong(0, sprite->GetFrameCount()-1));
 #endif
    
-  SetXY(RandomLong(0, monde.GetWidth()), RandomLong(0, monde.GetHeight()));
+  SetXY(RandomLong(0, monde.GetWidth()-1), RandomLong(0, monde.GetHeight()-1));
 
   //Mass = mass_mean + or - 25%
   mass = TerrainActif().wind.particle_mass;
@@ -111,50 +111,47 @@ void WindParticle::Refresh()
    sprite->Update();
 #endif   
   UpdatePosition();
-  if (m_alive == GHOST)
+  int x = GetX();
+  int y = GetY();
+
+  if(x > camera.GetX()+(int)camera.GetWidth())
+  {
+#ifdef CL
+    x = 1 - sprite.get_width() ;
+#else
+    x = camera.GetX() - sprite->GetWidth();
+#endif
+    y = RandomLong(camera.GetY(), camera.GetY() + camera.GetHeight()-1) ;
+  }
+  else
+  {
+    if(x + GetWidth() < camera.GetX())
     {
-      int x = GetX();
-      int y = GetY();
-
-      if(x >= (int)monde.GetWidth())
-	{
-#ifdef CL
-	   x = 1 - sprite.get_width() ;
-#else
-	   x = 1 - sprite->GetWidth();
-#endif
-	  y = RandomLong(0, monde.GetHeight()) ;
-	}
-      else
-	{
-	  if(x <= 0)
-	    {
-	      x = monde.GetWidth() - 1 ;
-	      y = RandomLong(0, monde.GetHeight()) ;
-	    }
-	}
-
-      if(y >= (int)monde.GetHeight())
-	{
-#ifdef CL
-	   y = 1 - sprite.get_height() ;
-#else
-	   y = 1 - sprite->GetHeight() ;
-#endif
-	   x = RandomLong(0, monde.GetWidth()) ;
-	}
-      else
-	{
-	  if(y <= 0)
-	    {
-	      y = monde.GetHeight() - 1 ;
-	      x = RandomLong(0, monde.GetWidth()) ;
-	    }
-	}
-
-      m_alive = ALIVE;
-      SetXY(x,y);
+      x = camera.GetX() + camera.GetWidth() - 1 ;
+      y = RandomLong(camera.GetY(), camera.GetY() + camera.GetHeight()-1) ;
     }
+  }
+
+  if(y > camera.GetY()+(int)camera.GetHeight())
+  {
+#ifdef CL
+    y = 1 - sprite.get_height() ;
+#else
+    y = camera.GetY() - sprite->GetHeight() ;
+#endif
+    x = RandomLong(camera.GetX(), camera.GetX()+camera.GetWidth()-1) ;
+  }
+  else
+  {
+    if(y + GetHeight()< camera.GetY())
+    {
+      y = camera.GetY() + camera.GetHeight() - 1 ;
+      x = RandomLong(camera.GetX(), camera.GetX()+camera.GetWidth()-1) ;
+    }
+  }
+
+  m_alive = ALIVE;
+  SetXY(x,y);
 }
 
 //-----------------------------------------------------------------------------
