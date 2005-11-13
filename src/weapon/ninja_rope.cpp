@@ -37,6 +37,7 @@
 #include "../sound/jukebox.h"
 #include "../tool/math_tools.h"
 #include "../tool/Distance.h"
+#include "../weapon/weapon_tools.h"
 
 #ifdef WIN32
 int roundl(double nbr)
@@ -529,11 +530,9 @@ void NinjaRope::p_Init()
   m_image = CL_Surface("ninjarope", &graphisme.weapons);
   m_hook_sprite = CL_Surface("ninjahook", &graphisme.weapons);
 #else
-  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-  icone = resource_manager.LoadImage(res,"ninjarope_ico");
-  m_image = resource_manager.LoadSprite(res,"ninjarope");
-  m_hook_sprite = resource_manager.LoadSprite(res,"ninjahook");
-  delete res;
+  icone = resource_manager.LoadImage(weapons_res_profile,"ninjarope_ico");
+  m_image = resource_manager.LoadSprite(weapons_res_profile,"ninjarope");
+  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
 #endif
 
   m_is_active = false;

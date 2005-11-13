@@ -132,6 +132,11 @@ Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename)
    return profile;
 }
 
+void ResourceManager::UnLoadXMLProfile( Profile *profile)
+{
+   delete profile;
+}
+
 xmlpp::Element * ResourceManager::GetElement( const Profile *profile, const std::string resource_type, const std::string resource_name)
 {
    xmlpp::Element *elem = profile->doc->Access ( profile->doc->racine(),

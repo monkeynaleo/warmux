@@ -333,7 +333,7 @@ void OptionMenu::Init ()
   lboxSoundFreq->AddItem (current_freq == 22050, "22 kHz", "22050");
   lboxSoundFreq->AddItem (current_freq == 44100, "44 kHz", "44100");
 
-  delete res;
+  resource_manager.UnLoadXMLProfile( res);
 }
 
 //-----------------------------------------------------------------------------

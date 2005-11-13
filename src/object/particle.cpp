@@ -152,7 +152,7 @@ void Smoke::Init()
 #else
    Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
    image = resource_manager.LoadSprite(res,"smoke"); 
-   delete res;
+   resource_manager.UnLoadXMLProfile( res);
    SetSize(image->GetWidth(),image->GetHeight());
 #endif
    
@@ -184,7 +184,7 @@ void StarParticle::Init()
 #else
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
    image = resource_manager.LoadSprite(res,"star_particle"); 
-  delete res;
+  resource_manager.UnLoadXMLProfile( res);
   SetSize(image->GetWidth(),image->GetHeight());
 #endif
 }
@@ -221,7 +221,7 @@ void FireParticle::Init()
    Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
    image = resource_manager.LoadSprite(res,"fire_particle");
    impact = resource_manager.LoadImage(res,"fire_impact");
-   delete res;
+   resource_manager.UnLoadXMLProfile( res);
    SetSize(image->GetWidth(),image->GetHeight());
 #endif
 }
