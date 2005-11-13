@@ -30,6 +30,7 @@
 #include "../game/game_mode.h"
 #include "../interface/game_msg.h"
 #include "../object/physical_obj.h"
+#include "../weapon/weapon_tools.h"
 
 #ifdef CL
 CL_Sprite image ;
@@ -88,11 +89,9 @@ void Parachute::p_Init()
   image = CL_Sprite("parachute_sprite", &graphisme.weapons);
   image.set_play_loop(false);
 #else
-  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
 //  m_image = resource_manager.LoadSprite(res,"mine");
-  image = resource_manager.LoadSprite(res,"parachute_sprite");
+  image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
   //TODO : image.set_play_loop(false);
-  delete res;
 #endif
 }
 

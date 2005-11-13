@@ -141,7 +141,7 @@ void Main_Menu::Init()
   quit->SetFont(&large_font);
   quit->SetImage (res,"intro/quitter");
 
-  delete res;
+  resource_manager.UnLoadXMLProfile( res);
 }
 
 //-----------------------------------------------------------------------------

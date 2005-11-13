@@ -31,6 +31,7 @@
 #include "../interface/game_msg.h"
 #include "../object/physical_obj.h"
 #include "../game/game_mode.h"
+#include "../weapon/weapon_tools.h"
 
 //-----------------------------------------------------------------------------
 namespace Wormux 
@@ -64,9 +65,7 @@ void JetPack::p_Init()
 #ifdef CL
   icone = CL_Surface("jetpack_ico", &graphisme.weapons);
 #else
-   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   icone = resource_manager.LoadImage(res,"jetpack_ico");
-   delete res;
+   icone = resource_manager.LoadImage(weapons_res_profile,"jetpack_ico");
 #endif
   m_x_force = 0.0;
   m_y_force = 0.0;

@@ -29,6 +29,7 @@
 class EmptyWeaponConfig
 {
 public:
+   virtual ~EmptyWeaponConfig() {};
    virtual void LoadXml(xmlpp::Element *elem) = 0;
 };
 

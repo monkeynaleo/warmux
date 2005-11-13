@@ -29,6 +29,7 @@
 #include "../game/game_loop.h"
 #include "../interface/game_msg.h"
 #include "../object/physical_obj.h"
+#include "../weapon/weapon_tools.h"
 
 //-----------------------------------------------------------------------------
 namespace Wormux 
@@ -60,9 +61,7 @@ void LowGrav::p_Init()
 #ifdef CL
   icone = CL_Surface("lowgrav_ico", &graphisme.weapons);
 #else
-   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   icone = resource_manager.LoadImage(res,"lowgrav_ico");
-   delete res;
+   icone = resource_manager.LoadImage(weapons_res_profile,"lowgrav_ico");
 #endif
 }
 

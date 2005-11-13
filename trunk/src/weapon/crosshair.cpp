@@ -137,7 +137,7 @@ void CrossHair::Init()
 #else
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
   image = resource_manager.LoadImage(res, "gfx/pointeur1");
-  delete res;
+  resource_manager.UnLoadXMLProfile( res); 
 #endif
 }
 

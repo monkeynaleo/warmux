@@ -80,10 +80,8 @@ void SuperTux::Init()
   image = CL_Sprite("supertux", &graphisme.weapons);
   SetSize (image.get_width(), image.get_height());
 #else
-  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-  image = resource_manager.LoadSprite(res,"supertux");
+  image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
   SetSize(image->GetWidth(), image->GetHeight());
-  delete res;
 #endif
 
   SetMass (tux.cfg().mass);
@@ -255,9 +253,7 @@ void TuxLauncher::p_Init()
 #ifdef CL
   impact = CL_Surface("tux_impact", &graphisme.weapons);
 #else
-  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-  impact = resource_manager.LoadImage(res,"tux_impact");
-  delete res;
+  impact = resource_manager.LoadImage(weapons_res_profile,"tux_impact");
 #endif
 }
 

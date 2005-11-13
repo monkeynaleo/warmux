@@ -30,6 +30,8 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../interface/game_msg.h"
+#include "../weapon/weapon_tools.h"
+
 using namespace std;
 //-----------------------------------------------------------------------------
 namespace Wormux {
@@ -56,9 +58,7 @@ void Airhammer::p_Init()
 #ifdef CL
   impact = CL_Surface("airhammer_impact", &graphisme.weapons);
 #else
-  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-  impact = resource_manager.LoadImage( res, "airhammer_impact");
-  delete res;
+  impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
 #endif
 
   m_last_jolt = 0;

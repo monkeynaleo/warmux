@@ -78,8 +78,7 @@ void BatonDynamite::Init()
 
 #else
 
-   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   image = resource_manager.LoadSprite(res,"dynamite_anim");
+   image = resource_manager.LoadSprite(weapons_res_profile,"dynamite_anim");
 
    double delay = dynamite.cfg().duree/image->GetFrameCount()/1000.0 ;
    for (int i=0 ; i < image->GetFrameCount(); i++)
@@ -91,19 +90,15 @@ void BatonDynamite::Init()
 
    SetTestRect (0, 0, 2, 3);
 
-   explosion = resource_manager.LoadSprite(res, "explosion");
+   explosion = resource_manager.LoadSprite(weapons_res_profile, "explosion");
    delay = 60/explosion->GetFrameCount()/1000.0 ;
    for (int i=0 ; i < explosion->GetFrameCount(); i++)
     ; // TODO explosion.set_frame_delay(i, delay) ;
 
   explosion->Start();
    
-   delete res;
    
 #endif
-
-  
-
 
 }
 
@@ -228,9 +223,7 @@ void Dynamite::p_Init()
 #ifdef CL
    impact = CL_Surface("dynamite_impact", &graphisme.weapons);
 #else
-   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");  
-   impact = resource_manager.LoadImage(res,"dynamite_impact");
-   delete res;
+   impact = resource_manager.LoadImage(weapons_res_profile,"dynamite_impact");
 #endif
 }
 
