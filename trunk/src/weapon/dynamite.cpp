@@ -36,6 +36,10 @@
 #include "../tool/resource_manager.h"
 #include "../include/app.h"
 #endif
+
+#ifdef __MINGW32__
+#undef LoadImage
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
 

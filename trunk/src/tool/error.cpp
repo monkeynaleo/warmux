@@ -25,7 +25,7 @@
 #include <signal.h>
 #include "../tool/i18n.h"
 
-#ifndef WIN32
+#if !defined WIN32 || defined __MINGW32__
 #include <sys/types.h>
 #include <unistd.h>
 #endif
@@ -38,7 +38,7 @@ void AssertionManquee (const char *nomfich, unsigned long ligne,
   std::cerr << nomfich << ':' << ligne 
 	    << ": Assertion manquée \"" << message << "\"."
 	    << std::endl;
-#ifdef DEBUG
+#if defined DEBUG && !defined WIN32
   kill (getpid(), SIGABRT);
 #endif
   abort();

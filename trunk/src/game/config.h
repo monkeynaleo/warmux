@@ -29,12 +29,15 @@
 #include <list>
 #include <string>
 //-----------------------------------------------------------------------------
-#ifndef WIN32
-#define PATH_SEPARATOR "/"
+#if defined(WIN32) || defined(__MINGW32__)
+#define PATH_SEPARATOR "\\"
 #else
-#define PATH_SEPARATOR '\\'
+#define PATH_SEPARATOR "/"
 #endif
 
+#ifdef __MINGW32__
+#undef LoadImage
+#endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------

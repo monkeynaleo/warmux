@@ -380,7 +380,8 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
  if (scale)
    SDL_FreeSurface(current);
 
-*/   
+*/
+#ifndef __MINGW32__
    SDL_Surface *tmp_surface = rotozoomSurfaceXY (surfaces[current_frame], -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
 
    // Calculate offset of the depending on hotspot rotation position :
@@ -394,6 +395,12 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
 
    SDL_FreeSurface (tmp_surface);
+#else
+   SDL_Rect dr = {pos_x , pos_y , frame_width_pix, frame_height_pix};
+   SDL_BlitSurface (surfaces[current_frame], NULL, dest, &dr);
+#endif
+
+
 }
 
 void Sprite::Update()

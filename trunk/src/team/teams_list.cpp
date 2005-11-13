@@ -32,7 +32,7 @@
 #include <algorithm>
 #include <iostream>
 
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
 #include <dirent.h>
 #include <sys/stat.h>
 #endif
@@ -79,7 +79,7 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
   // Skip '.', '..' and hidden files
   if (team[0] == '.') return;
   
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   // Is it a directory ?
   struct stat stat_file;
   std::string filename = dir+team;
@@ -113,7 +113,7 @@ void TeamsList::LoadList()
   std::cout << "o " << _("Load teams:");
   
   // Load Wormux teams
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   struct dirent *file;
 
   std::string dirname = Wormux::config.data_dir+"team/";
@@ -144,7 +144,7 @@ void TeamsList::LoadList()
 #endif
 
   // Load personal teams
-#ifndef WIN32
+#if !defined(WIN32) || defined(__MINGW32__)
   dirname = Wormux::config.GetWormuxPersonalDir()+"team/";
   dir = opendir(dirname.c_str());
   if (dir != NULL) {

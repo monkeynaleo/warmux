@@ -25,6 +25,7 @@
 #include <SDL/SDL.h>
 #include <string>
 #include "base.h"
+#include "../game/config.h"
 
 //-----------------------------------------------------------------------------
 
