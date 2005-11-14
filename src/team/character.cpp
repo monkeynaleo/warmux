@@ -1012,12 +1012,12 @@ void Character::Reset()
     SetXY (x, y);
 
 #ifndef NO_POSITION_CHECK
-    pos_ok &= !IsGhost() && IsInVacuum(0,0) && (GetY() < monde.GetHeight() - (WATER_INITIAL_HEIGHT + 30));
+    pos_ok &= !IsGhost() && IsInVacuum(0,0) && (GetY() < static_cast<int>(monde.GetHeight()) - (WATER_INITIAL_HEIGHT + 30));
     if (!pos_ok) continue;
 
     // Chute directe pour le sol
     DirectFall ();
-    pos_ok &= !IsGhost() && (GetY() < monde.GetHeight() - (WATER_INITIAL_HEIGHT + 30));
+    pos_ok &= !IsGhost() && (GetY() < static_cast<int>(monde.GetHeight()) - (WATER_INITIAL_HEIGHT + 30));
 #ifdef DEBUG_PLACEMENT
     if (!pos_ok) COUT_PLACEMENT << "Fantome en tombant." << endl;
 #endif

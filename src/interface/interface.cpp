@@ -228,9 +228,6 @@ void Interface::AfficheInfoVer (Character &ver)
 
 void Interface::AfficheInfoArme ()
 {
-  int x = (video.GetWidth() - GetWidth())/2;
-  int y = video.GetHeight() - GetHeight();
-
   Weapon* arme_affiche;
   int nbr_munition;
 
@@ -248,6 +245,8 @@ void Interface::AfficheInfoArme ()
   std::ostringstream txt;
 
 #ifdef CL
+  int x = (video.GetWidth() - GetWidth())/2;
+  int y = video.GetHeight() - GetHeight();
    CL_Display::push_cliprect(CL_Rect(x+CLIP_ARME_X1, 
 					 y+CLIP_ARME_Y1,
 					 x+CLIP_ARME_X2, 

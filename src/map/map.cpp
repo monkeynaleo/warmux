@@ -182,7 +182,7 @@ bool Monde::LigneH_EstDansVide (int left, int y, int right)
 bool Monde::LigneH_EstDansVide (int ox, int y, int width)
 { 
   // Traite une ligne
-  for (unsigned int i=0; i<width; i++) 
+  for (int i=0; i<width; i++) 
      {
 	if (!EstDansVide(ox+i, (uint)y)) 
 	  {

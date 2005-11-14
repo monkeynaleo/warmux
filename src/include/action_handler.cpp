@@ -142,8 +142,8 @@ void Action_Wind (const Action *a)
 
 void Action_MoveCharacter (const Action *a)
 {
-	const ActionInt2& ap = dynamic_cast<const ActionInt2&> (*a);
 #ifdef CL
+	const ActionInt2& ap = dynamic_cast<const ActionInt2&> (*a);
         if (network.is_server())
 	{
 #ifdef DBG_ACT
@@ -170,12 +170,11 @@ void Action_SetCharacterDirection (const Action *a)
 
 void Action_SetMap (const Action *a)
 {
+#ifdef CL
 	const ActionString& action = dynamic_cast<const ActionString&> (*a);
 #ifdef DBG_ACT
 	COUT_DBG << "SetMap : " << action.GetValue() << std::endl;
 #endif
-   
-#ifdef CL
         if (!network.is_client()) return;
         lst_terrain.ChangeTerrainNom (action.GetValue());
 	network.state = Network::NETWORK_WAIT_TEAMS;
@@ -225,12 +224,12 @@ void Action_SetGameMode (const Action *a)
 
 void Action_NewTeam (const Action *a)
 {
+#ifdef CL
 	const ActionString& action = dynamic_cast<const ActionString&> (*a);
 #ifdef DBG_ACT
 	COUT_DBG << "NewTeam : " << action.GetValue() << std::endl;
 #endif
    
-#ifdef CL
         if (!network.is_client()) return;
 	teams_list.AddTeam (action.GetValue());
 	teams_list.SetActive (action.GetValue());

@@ -159,7 +159,6 @@ menu_item Main_Menu::Run ()
 {
   string txt_version;
   txt_version = string("Version ") + string(VERSION);
-  SDL_Event event;
   int x=0, y=0;
 
   SDL_Flip( app.sdlwindow);
