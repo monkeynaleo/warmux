@@ -85,7 +85,7 @@ void BatonDynamite::Init()
    image = resource_manager.LoadSprite(weapons_res_profile,"dynamite_anim");
 
    double delay = dynamite.cfg().duree/image->GetFrameCount()/1000.0 ;
-   for (int i=0 ; i < image->GetFrameCount(); i++)
+   for (uint i=0 ; i < image->GetFrameCount(); i++)
      ; // TODO // image.set_frame_delay(i, delay) ;
 
    image->Start();
@@ -96,7 +96,7 @@ void BatonDynamite::Init()
 
    explosion = resource_manager.LoadSprite(weapons_res_profile, "explosion");
    delay = 60/explosion->GetFrameCount()/1000.0 ;
-   for (int i=0 ; i < explosion->GetFrameCount(); i++)
+   for (uint i=0 ; i < explosion->GetFrameCount(); i++)
     ; // TODO explosion.set_frame_delay(i, delay) ;
 
   explosion->Start();

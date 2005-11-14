@@ -134,8 +134,8 @@ void Gun::Draw ()
   // Dessine le tracé de la trajectoire
   if (m_is_active)
   {
-    bool noir=true;
 #ifdef CL
+    bool noir=true;
     for (std::vector<CL_Point>::const_iterator it=lst_points.begin();
 	 it != lst_points.end();
 	 ++it)
