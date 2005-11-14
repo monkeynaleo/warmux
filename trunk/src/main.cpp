@@ -208,9 +208,7 @@ void AppWormux::Fin()
   std::cout << std::endl
 	    << "[ " << _("End of game") << " ]" << std::endl;
   
-#ifdef CL
   config.Sauve();
-#endif
 
   jukebox.End();
   SDL_Quit();

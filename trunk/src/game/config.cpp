@@ -134,10 +134,10 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   //=== Directories ===
   if (LitDocXml::LitString  (xml, "data_dir", data_dir)) {
     data_dir = TraduitRepertoire(data_dir);
-#ifndef CL
-    resource_manager.AddDataPath(data_dir);
-#endif
   }
+#ifndef CL
+  resource_manager.AddDataPath(data_dir);
+#endif
   if (LitDocXml::LitString  (xml, "locale_dir", locale_dir)) {
     locale_dir = TraduitRepertoire(locale_dir);
   }
