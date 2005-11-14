@@ -343,7 +343,7 @@ void Caisse::Refresh()
 #ifdef CL
    m_ready = anim.is_finished();
 #else
-   m_ready = anim->GetCurrentFrame() == anim->GetFrameCount()-1;
+   m_ready = anim->IsFinished();
 #endif
 }
 

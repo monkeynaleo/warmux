@@ -64,7 +64,7 @@ void GameMessages::Draw()
 #ifdef CL
     police_petit.WriteCenterTop (video.GetWidth()/2, msgy, i -> text);
 #else
-     // TODO
+    small_font.WriteCenterTop (video.GetWidth()/2, msgy, i -> text, white_color);
 #endif
      msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
   }

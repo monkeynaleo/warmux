@@ -81,6 +81,7 @@ Sprite::Sprite()
    last_update = Wormux::temps.Lit();
    show_on_finish = show_last_frame;
    loop = false;
+   finished = false;
 }
 
 Sprite::Sprite( const Sprite& other)
@@ -98,6 +99,7 @@ Sprite::Sprite( const Sprite& other)
    last_update = other.last_update;
    show_on_finish = other.show_on_finish;
    loop = other.loop;
+   finished = other.finished;
    
    for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
      {
@@ -136,6 +138,7 @@ Sprite::Sprite( SDL_Surface *surface)
    last_update = Wormux::temps.Lit();
    show_on_finish = show_last_frame;
    loop = false;
+   finished = false;
 }
 
 Sprite::~Sprite()
@@ -373,6 +376,7 @@ void Sprite::Start()
    }
    show = true;
    loop = false;
+   finished = false;
 }
 
 void Sprite::StartLoop()
@@ -453,6 +457,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 
 void Sprite::Finish()
 {
+  finished = true;
   loop = false;
   switch(show_on_finish)
   {
@@ -491,6 +496,7 @@ void Sprite::Draw(int pos_x, int pos_y)
 void Sprite::Show() { show = true; }
 void Sprite::Hide() { show = false; }
 void Sprite::SetShowOnFinish(SpriteShowOnFinish show) { show_on_finish = show; }
+bool Sprite::IsFinished() const { return finished; }
 
 //-----------------------------------------------------------------------------
 
