@@ -36,13 +36,14 @@
 //-----------------------------------------------------------------------------
 namespace Wormux {
 
- Bazooka bazooka;
+// Bazooka bazooka;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-RoquetteBazooka::RoquetteBazooka() : WeaponProjectile ("roquette_bazooka")
+RoquetteBazooka::RoquetteBazooka(Bazooka &p_bazooka) 
+  : WeaponProjectile ("roquette_bazooka"), bazooka(p_bazooka)
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
@@ -127,7 +128,8 @@ void RoquetteBazooka::SignalCollision()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Bazooka::Bazooka() : Weapon(WEAPON_BAZOOKA, "bazooka")
+Bazooka::Bazooka() 
+  : Weapon(WEAPON_BAZOOKA, "bazooka"), roquette(*this)
 {  
   m_name = _("Bazooka");
   extra_params = new ExplosiveWeaponConfig();

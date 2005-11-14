@@ -55,12 +55,7 @@ const int BUTTON_HEIGHT = 57 ;  // Button height at default screen resolution
 
 //-----------------------------------------------------------------------------
 
-Main_Menu::Main_Menu()
-{
-}
-
-//-----------------------------------------------------------------------------
-void Main_Menu::FreeMem()
+Main_Menu::~Main_Menu()
 {
   delete background;
   delete play;
@@ -86,7 +81,7 @@ bool Main_Menu::sig_quit()
 { choice=menuQUIT;return true; }
 //-----------------------------------------------------------------------------
 
-void Main_Menu::Init()
+Main_Menu::Main_Menu()
 {
   int x_button, button_width, button_height ;
   double y_scale ;

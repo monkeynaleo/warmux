@@ -33,15 +33,18 @@
 namespace Wormux {
 //-----------------------------------------------------------------------------
 
+class Bazooka;
+
 // Roquette du bazooka
 class RoquetteBazooka : public WeaponProjectile
 {
 public:
-  RoquetteBazooka();
+  RoquetteBazooka(Bazooka& bazooka);
   void Tire (double force);
   void Init();
   void Refresh();
 protected:
+  Bazooka &bazooka;
   void SignalCollision();
 };
 
@@ -70,7 +73,7 @@ protected:
   void Explosion();
 };
 
-extern Bazooka bazooka;
+//extern Bazooka bazooka;
 //-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

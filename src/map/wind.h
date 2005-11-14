@@ -79,12 +79,6 @@ public:
   void Reset();
   void Draw();
   void DrawParticles();
-  void LoadXML(xmlpp::Element *xml);
-#ifdef CL
-  void LoadXML_Sprite(CL_ResourceManager* res);
-#else
-   // TODO
-#endif
 };
 
 

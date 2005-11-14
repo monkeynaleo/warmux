@@ -532,7 +532,6 @@ void Character::HandleKeyEvent(int action, int event_type)
   if (action == ACTION_SHOOT)
     {
       HandleShoot(event_type);
-       std::cout << "SHOOT" << std::endl;
        return;
     }
 

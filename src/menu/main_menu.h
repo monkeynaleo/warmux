@@ -50,8 +50,7 @@ public:
   menu_item choice;
 
   Main_Menu();
-  void Init();
-  void FreeMem();
+  ~Main_Menu();
   menu_item Run ();
 private:  
   void onClick ( int x, int y);

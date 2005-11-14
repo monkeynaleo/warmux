@@ -28,7 +28,6 @@
 #include "../game/config.h"
 #include "../map/camera.h"
 #include "../weapon/weapons_list.h"
-#include "../weapon/dynamite.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #ifndef CL
@@ -126,7 +125,7 @@ bool Team::ChargeDonnee (xmlpp::Element *xml,
   xml = LitDocXml::AccesBalise (xml, "equipe");
   // Valeurs par défaut
   camera_est_sauve = false;
-  active_weapon = &dynamite;
+  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
 
   m_name = "Team unamed";
   m_sound_profile="default";
@@ -192,7 +191,7 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
   xml = LitDocXml::AccesBalise (xml, "equipe");
   // Valeurs par défaut
   camera_est_sauve = false;
-  active_weapon = &dynamite;
+  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
 
   m_name = "Team unamed";
   m_sound_profile="default";
@@ -474,7 +473,7 @@ void Team::Reset()
     m_nb_units[ (*itw)->GetName() ] = (*itw)->ReadInitialNbUnit();
   }
   
-  active_weapon = &dynamite;
+  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
   camera_est_sauve = false;
 
   // Reset des vers

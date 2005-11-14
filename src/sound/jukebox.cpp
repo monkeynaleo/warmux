@@ -32,7 +32,7 @@
 #ifdef DEBUG
 
 // Débogue le jukebox ?
-#define DBG_SON
+//#define DBG_SON
 
 #define COUT_DBG std::cout << "[Sound] "
 

@@ -32,6 +32,7 @@
 #include "map/wind.h"
 #endif
 
+#include "game/time.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <algorithm>
@@ -174,6 +175,9 @@ bool AppWormux::Init(int argc, char **argv)
   SDL_Surface* loading_image=IMG_Load( (config.data_dir+"/menu/img/loading.png").c_str());
 #endif
 
+  // Reset timer
+  Wormux::temps.Reset();
+
   SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
 
   txt_version = _("Version") + std::string(VERSION);
@@ -221,28 +225,10 @@ void AppWormux::Fin()
 
 //-----------------------------------------------------------------------------
 
-bool AppWormux::Menu()
+menu_item ShowMainMenu()
 {
-  menu_item choix;
   Main_Menu main_menu;
-  main_menu.Init();
-  choix = main_menu.Run();
-  main_menu.FreeMem();
-  
-  switch (choix)
-    {
-    case menuPLAY:
-      jeu.LanceJeu();
-      break;
-    case menuOPTIONS:
-      options_menu.Lance();
-      break;
-    case menuQUIT:
-      return true;
-    default:
-      break;
-    }
-  return false;
+  return main_menu.Run();
 }
 
 //-----------------------------------------------------------------------------
@@ -257,7 +243,21 @@ int AppWormux::main (int argc, char **argv)
       return 0;
     }
     do {
-      quitter = Menu();
+      menu_item choix = ShowMainMenu();
+      
+      switch (choix)
+        {
+        case menuPLAY:
+          jeu.LanceJeu(); 
+          break;
+        case menuOPTIONS:
+          options_menu.Lance();
+          break;
+        case menuQUIT:
+          quitter = true; 
+        default:
+          break;
+        }
     } while (!quitter);
 
     Fin();

@@ -38,6 +38,9 @@ public:
   
 private:
   weapons_list_type m_weapons_list;
+  // **EVIL HACK**
+  weapons_list_type todelete;
+  // **EVIL HACK**
 
   // The int is used to classify weapon by sort
   std::multimap<uint, Weapon*> m_weapons_map;
@@ -46,7 +49,7 @@ private:
 
 public:
   WeaponsList();
-
+  ~WeaponsList();
   void Init();
 
   // Refresh des armes
