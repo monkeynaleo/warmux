@@ -293,20 +293,20 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
       d_angle = - d_angle - M_PI_2;
    }
 
-   rot_x -= cos(angle - d_angle) * d;
-   rot_y -= sin(angle - d_angle) * d;
+   rot_x -= static_cast<int>(cos(angle - d_angle) * d);
+   rot_y -= static_cast<int>(sin(angle - d_angle) * d);
 
    switch(rot_hotspot)
    {
    case top_left:
    case left_center:
    case bottom_left:
-      rot_x -= scale_y * surfaces[current_frame]->w / 2;
+      rot_x -= static_cast<int>(scale_y * surfaces[current_frame]->w / 2);
       break;
    case top_right:
    case right_center:
    case bottom_right:
-      rot_x += scale_y * surfaces[current_frame]->w / 2;
+      rot_x += static_cast<int>(scale_y * surfaces[current_frame]->w / 2);
       break;
    default: break;
    }

@@ -98,8 +98,8 @@ void Ciel::Draw()
 #else
 void Ciel::Draw()
 {
-   int x = camera.GetX() * VITESSE_CIEL_X;
-   int y = camera.GetY() * VITESSE_CIEL_Y;
+   int x = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
+   int y = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
 
    if(!TerrainActif().infinite_bg)
    {
@@ -121,30 +121,30 @@ void Ciel::Draw()
        y -= image->h;
 
      w = image->w - x;
-     if(w >= camera.GetWidth())
+     if(w >= static_cast<int>(camera.GetWidth()))
        w = camera.GetWidth();
 
      h = image->h - y;
-     if(h >= camera.GetHeight())
+     if(h >= static_cast<int>(camera.GetHeight()))
        h = camera.GetHeight();
 
      SDL_Rect ds = {x, y, w, h};
      SDL_Rect dr = {0,0, w, h};
      SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
 
-     if(w < camera.GetWidth())
+     if(w < static_cast<int>(camera.GetWidth()))
      {
        SDL_Rect ds = {x+w-image->w, y, (int)camera.GetWidth()-w, h};
        SDL_Rect dr = {w,0, (int)camera.GetWidth()-w, h};
        SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
      }
-     if(h < camera.GetHeight())
+     if(h < static_cast<int>(camera.GetHeight()))
      {
        SDL_Rect ds = {x, y+h-image->h, w, (int)camera.GetHeight()-h};
        SDL_Rect dr = {0,h, w, (int)camera.GetHeight()-h};
        SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
      }
-     if(w < camera.GetWidth() && h < camera.GetHeight())
+     if(w < static_cast<int>(camera.GetWidth()) && h < static_cast<int>(camera.GetHeight()))
      {
        SDL_Rect ds = {x+w-image->w, y+h-image->h, camera.GetWidth()-w, camera.GetHeight()-h};
        SDL_Rect dr = {w,h, camera.GetWidth()-w, camera.GetHeight()-h};

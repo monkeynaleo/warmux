@@ -218,8 +218,8 @@ void BarreProg::DrawXY (uint px, uint py) const
   marqueur_it_const it=marqueur.begin(), fin=marqueur.end();
   for (; it != fin; ++it)
   {
-    int x = px+1+it -> val;
 #ifdef CL
+    int x = px+1+it -> val;
      CL_Display::draw_line (x, py+1, x, py+haut-2,
 			    it -> color);
 #else

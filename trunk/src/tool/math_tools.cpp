@@ -175,19 +175,17 @@ double CalculeAngle (const Point2i &O, const Point2i &M)
 double CalculeAnglef (DoubleVector V)
 {
   double angle;
-  double x = V.x ;
-  double y = V.y ;
 
   if (V.x != 0)
     {
-      if (y != 0)
+      if (V.y != 0)
 	{
-	  angle = atan((double)y/V.x);
+	  angle = atan((double)V.y/V.x);
 	  if (0 < V.x)
 	    angle = angle;
 	  else
 	    {
-	      if (0 < y)
+	      if (0 < V.y)
 		angle += M_PI;
 	      else
 		angle -= M_PI;
@@ -203,12 +201,12 @@ double CalculeAnglef (DoubleVector V)
     }
   else
     {
-      if (0 < y)
+      if (0 < V.y)
 	{
 	  angle = M_PI/2;
 	} 
       else
-	if (y < 0)
+	if (V.y < 0)
 	  angle = -M_PI/2;
 	else
 	  angle = 0.0;      

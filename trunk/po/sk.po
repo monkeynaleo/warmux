@@ -17,220 +17,229 @@ msgstr ""
 "X-Poedit-Country: SLOVAKIA\n"
 "X-Poedit-SourceCharset: iso-8859-2\n"
 
-#: src/map/maps_list.cpp:267
+#: src/map/maps_list.cpp:360
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebola nájdená :-("
 
-#: src/game/game.cpp:288
+#: src/game/game_loop.cpp:825
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
 
-#: src/map/maps_list.cpp:122
+#: src/map/maps_list.cpp:143
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:129
+#: src/map/maps_list.cpp:150
 #, c-format
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game.cpp:259
+#: src/game/game_loop.cpp:795
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s spáchal samovraždu !"
 
-#: src/game/game.cpp:250
+#: src/game/game_loop.cpp:788
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game.cpp:265
+#: src/game/game_loop.cpp:799
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:239
+#: src/object/bonus_box.cpp:272
 #, fuzzy, c-format
 msgid "%s has lost %u points of energy."
 msgstr "Hráč '%s' stratil %u bodov energie :-("
 
-#: src/object/bonus_box.cpp:233
+#: src/object/bonus_box.cpp:266
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "Hráč '%s' zvíťazil %u bodov energie !"
 
-#: src/game/game.cpp:277
+#: src/game/game_loop.cpp:816
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s je psychopat, zabil člena svojho týmu : %s !"
 
-#: src/game/game.cpp:271
+#: src/game/game_loop.cpp:809
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mŕtvy, pretože bol nemotorný."
 
-#: src/weapon/mine.cpp:226
+#: src/weapon/mine.cpp:271
 #, fuzzy, c-format
 msgid "%s is next to a mine!"
 msgstr "%s je veľmi blízko míny ..."
 
-#: src/object/bonus_box.cpp:251
+#: src/object/bonus_box.cpp:284
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazookas!"
 msgstr "Tým '%s' vyhral %u automatickými bazukami !"
 
-#: src/object/bonus_box.cpp:258
+#: src/object/bonus_box.cpp:291
 #, fuzzy, c-format
 msgid "%s team has won %u sticks of dynamite!"
 msgstr "Tým '%s' vyhral %u dynamitmi !"
 
-#: src/object/bonus_box.cpp:227
+#: src/object/bonus_box.cpp:260
 #, fuzzy, c-format
 msgid "%s team has won %u teleportations."
 msgstr "Tým '%s' vyhral %u teleportáciami !"
 
-#: src/game/game.cpp:105
+#: src/game/game.cpp:122
 #, c-format
 msgid "%s team has won."
 msgstr ""
 
-#: src/object/bonus_box.cpp:245
+#: src/object/bonus_box.cpp:278
 #, fuzzy, c-format
 msgid "'%s has won %u air attack(s)"
 msgstr "Hráč '%s' zvíťazil %u leteckých útokov !"
 
-#: src/interface/interface.cpp:144
+#: src/interface/interface.cpp:198
 msgid "(dead)"
 msgstr "(mŕtvy)"
 
-#: src/interface/interface.cpp:199
+#: src/interface/interface.cpp:287
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
-#: src/object/bonus_box.cpp:247 src/weapon/air_attack.cpp:184
+#: src/map/maps_list.cpp:164
+msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
+msgstr ""
+
+#: src/object/bonus_box.cpp:280 src/weapon/air_attack.cpp:223
 msgid "Air attack"
 msgstr "Letecký útok"
 
-#: src/main.cpp:68 src/menu/infos_menu.cpp:37
+#: src/menu/infos_menu.cpp:56
+#, fuzzy
+msgid "Authors"
+msgstr "Autory :"
+
+#: src/main.cpp:77
 #, fuzzy
 msgid "Authors:"
 msgstr "Autory :"
 
-#: src/object/bonus_box.cpp:253 src/weapon/auto_bazooka.cpp:164
+#: src/object/bonus_box.cpp:286 src/weapon/auto_bazooka.cpp:192
 msgid "Automatic bazooka"
 msgstr "Automatická bazuka"
 
-#: src/weapon/baseball.cpp:36
+#: src/weapon/baseball.cpp:40
 msgid "Baseball"
 msgstr "Basebal"
 
-#: src/weapon/bazooka.cpp:114
+#: src/weapon/bazooka.cpp:132
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/main.cpp:241
+#: src/main.cpp:263
 #, fuzzy
 msgid "C++ exception caught:"
 msgstr "Zachytená výnimka C++ :"
 
-#: src/team/teams_list.cpp:420
+#: src/team/teams_list.cpp:450
 #, c-format
 msgid "Can't find team %s !"
 msgstr ""
 
-#: src/team/teams_list.cpp:395
+#: src/team/teams_list.cpp:425
 #, c-format
 msgid "Can't find team %s :-("
 msgstr ""
 
-#: src/team/teams_list.cpp:115
+#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:141
 #, fuzzy, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár týmov (%s) !"
 
-#: src/main.cpp:234
-msgid "ClanLib error :"
-msgstr "Chyba ClanLib :"
-
-#: src/map/maps_list.cpp:79
+#: src/map/maps_list.cpp:97
 #, fuzzy, c-format
 msgid "ClanLib error during loading map '%s' :"
 msgstr "Chyba počas načítavania mapy  '%s' :"
 
-#: src/weapon/cluster_bomb.cpp:266
+#: src/weapon/cluster_bomb.cpp:311
 msgid "ClusterBomb"
 msgstr "KlusterBomba"
 
-#: src/weapon/suicide.cpp:40
+#: src/weapon/suicide.cpp:41
 msgid "Commit suicide"
 msgstr "Samovražda"
 
-#: src/menu/options_menu.cpp:181
+#: src/menu/options_menu.cpp:244
 #, fuzzy
 msgid "Display player energy?"
 msgstr "Zobraz hráčovu energiu"
 
-#: src/menu/options_menu.cpp:182
+#: src/menu/options_menu.cpp:245
 #, fuzzy
 msgid "Display player's name?"
 msgstr "Zobraz hráčovo meno"
 
-#: src/game/game.cpp:190
+#: src/menu/options_menu.cpp:243
+msgid "Display wind particles?"
+msgstr ""
+
+#: src/game/game.cpp:218
 #, fuzzy
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Skutočne chceš skončiť (A/N) ?"
 
-#: src/menu/options_menu.cpp:189
+#: src/menu/options_menu.cpp:249
 #, fuzzy
 msgid "Duration of a turn:"
 msgstr "Dľžka trvania ťahu"
 
-#: src/menu/options_menu.cpp:191
+#: src/menu/options_menu.cpp:251
 #, fuzzy
 msgid "Duration of the end of a turn:"
 msgstr "Trvanie konca ťahu"
 
-#: src/object/bonus_box.cpp:260 src/weapon/dynamite.cpp:140
+#: src/object/bonus_box.cpp:293 src/weapon/dynamite.cpp:215
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/main.cpp:174
+#: src/main.cpp:209
 msgid "End of game"
 msgstr "Koniec hry !"
 
-#: src/game/game.cpp:97
+#: src/game/game.cpp:114
 #, fuzzy
 msgid "End of the game!\n"
 msgstr "Koniec hry  !\n"
 
-#: src/interface/interface.cpp:139
+#: src/interface/interface.cpp:193
 msgid "Energy"
 msgstr "Energia"
 
-#: src/team/skin.cpp:124
+#: src/team/skin.cpp:145
 #, c-format
 msgid "Error during skin loading (%s) :"
 msgstr "Chyba počas načítavania skinu %s :"
 
-#: src/tool/error.cpp:79
+#: src/tool/error.cpp:82
 #, c-format
 msgid "Error in %s:%lu"
 msgstr "Chyba v %s:%lu"
 
-#: src/team/team.cpp:71
+#: src/team/team.cpp:86
 #, fuzzy, c-format
 msgid "Error loading %s team :"
 msgstr "Chyba počas načítavania týmu %s :"
 
-#: src/game/game_mode.cpp:143
+#: src/game/game_mode.cpp:150
 #, c-format
 msgid "Error while loading game mode %s (file %s) :"
 msgstr ""
 
-#: src/game/game.cpp:233
+#: src/game/game.cpp:271
 #, fuzzy, c-format
 msgid ""
 "Error:\n"
@@ -239,282 +248,278 @@ msgstr ""
 "Chyba :\n"
 "%s"
 
-#: src/team/team.cpp:150
+#: src/team/team.cpp:165 src/team/team.cpp:230
 #, fuzzy, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť skin \"%s\" pre tým \"%s\"."
 
-#: src/sound/jukebox.cpp:269
-#, c-format
-msgid "File \"%s\" does not exist !"
-msgstr "Súbor \"%s\" neexistuje !"
-
-#: src/game/game_loop.cpp:186
+#: src/game/game_loop.cpp:216
 msgid "Find a random position for worms"
 msgstr "Náhodná poloha pre červa"
 
-#: src/menu/options_menu.cpp:183
+#: src/menu/options_menu.cpp:246
 #, fuzzy
 msgid "Fullscreen?"
 msgstr "Celá obrazovka"
 
-#: src/weapon/grenade.cpp:175
+#: src/weapon/grenade.cpp:201
 msgid "Grenade"
 msgstr "Granát"
 
-#: src/weapon/gun.cpp:100
+#: src/weapon/gun.cpp:112
 msgid "Gun"
 msgstr "Pištoľ"
 
-#: src/tool/file_tools.cpp:58
+#: src/tool/file_tools.cpp:59
 msgid "HOME directory (environment variable $HOME) could not be found !"
 msgstr "Domovský priečinok (Prostredie premennej $HOME) sa nenašiel !"
 
-#: src/menu/main_menu.cpp:87
+#: src/menu/main_menu.cpp:134
 #, fuzzy
 msgid "Info"
 msgstr "Info"
 
-#: src/menu/options_menu.cpp:195
+#: src/menu/options_menu.cpp:255
 #, fuzzy
 msgid "Initial energy:"
 msgstr "Počiatočná energia"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:267
 msgid "Initialisation"
 msgstr "Inicializácia"
 
-#: src/game/game_loop.cpp:137 src/game/game_loop.cpp:191
+#: src/game/game_loop.cpp:158 src/game/game_loop.cpp:221
 #, fuzzy
 msgid "Initialise data"
 msgstr "Inicializácia"
 
-#: src/game/game_loop.cpp:92
+#: src/game/game_loop.cpp:110
 #, fuzzy
 msgid "Initialise teams"
 msgstr "Inicializácia"
 
-#: src/game/game.cpp:87
+#: src/game/game.cpp:99
 #, fuzzy
 msgid "Load game data..."
 msgstr "Načítavam údaje hry ..."
 
-#: src/game/game_loop.cpp:88
+#: src/game/game_loop.cpp:106
 #, fuzzy
 msgid "Load map"
 msgstr "Načítavam mapu %s"
 
-#: src/map/maps_list.cpp:214
+#: src/map/maps_list.cpp:284
 #, fuzzy
 msgid "Load maps:"
 msgstr "Načítavam mapu %s"
 
-#: src/team/skin.cpp:241
+#: src/team/skin.cpp:313
 #, fuzzy
 msgid "Load skins:"
 msgstr "Načítavam skin %s"
 
-#: src/team/teams_list.cpp:106
+#: src/team/teams_list.cpp:113
 #, fuzzy
 msgid "Load teams:"
 msgstr "Načítavam tým %s"
 
-#: src/map/map.cpp:220
+#: src/map/map.cpp:301
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr ""
 
-#: src/weapon/mine.cpp:301
+#: src/weapon/mine.cpp:347
 msgid "Mine"
 msgstr "Mína"
 
-#: src/menu/options_menu.cpp:198
+#: src/menu/options_menu.cpp:257
 #, fuzzy
 msgid "Music?"
 msgstr "Hudba"
 
-#: src/interface/interface.cpp:133
+#: src/interface/interface.cpp:183
 msgid "Name"
 msgstr "Meno"
 
-#: src/menu/main_menu.cpp:75
+#: src/menu/main_menu.cpp:122
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:464
+#: src/weapon/weapon.cpp:766
 #, c-format
 msgid "No element <%s> found in the xml config file !"
 msgstr ""
 
-#: src/menu/options_menu.cpp:193
+#: src/menu/options_menu.cpp:253
 #, fuzzy
 msgid "Number of players per team:"
 msgstr "Počet hráčov týmu"
 
-#: src/menu/main_menu.cpp:81
+#: src/menu/infos_menu.cpp:58
+msgid "Ok"
+msgstr ""
+
+#: src/menu/main_menu.cpp:128
 msgid "Options"
 msgstr "Nastavenie"
 
-#: src/game/game.cpp:304
+#: src/game/game.cpp:282
 msgid "Pause"
 msgstr ""
 
-#: src/menu/main_menu.cpp:69
+#: src/menu/main_menu.cpp:116
 msgid "Play"
 msgstr "Hraj"
 
-#: src/main.cpp:188
+#: src/main.cpp:219
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr ""
 
-#: src/menu/main_menu.cpp:93
+#: src/menu/main_menu.cpp:140
 msgid "Quit"
 msgstr "Koniec"
 
-#: src/main.cpp:99
+#: src/main.cpp:108
 msgid "Run game"
 msgstr "Spusti hru"
 
-#: src/menu/options_menu.cpp:450
-msgid ""
-"SDL option changed:\n"
-"You have to restart Wormux to apply the new settings."
-msgstr ""
-
-#: src/menu/options_menu.cpp:199
+#: src/menu/options_menu.cpp:258
 #, fuzzy
 msgid "Sound effects?"
 msgstr "Zvukové efekty"
 
-#: src/sound/jukebox.cpp:151 src/sound/jukebox.cpp:268
-#: src/sound/jukebox.cpp:290
-msgid "Sound error :"
-msgstr "Chyba zvuku :"
-
-#: src/game/game_loop.cpp:215
+#: src/game/game.cpp:94
 #, fuzzy
 msgid "Starting a new game"
 msgstr "Beh novej hry"
 
-#: src/interface/interface.cpp:197
+#: src/interface/interface.cpp:285
 msgid "Stock"
 msgstr "Munícia"
 
-#: src/object/bonus_box.cpp:229 src/weapon/teleportation.cpp:45
+#: src/object/bonus_box.cpp:262 src/weapon/teleportation.cpp:44
 msgid "Teleportation"
 msgstr "Teleport"
 
-#: src/weapon/auto_bazooka.cpp:139
+#: src/weapon/auto_bazooka.cpp:167
 #, fuzzy
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automatická raketa zanechala v inom svete ..."
 
-#: src/game/game.cpp:112
+#: src/game/game.cpp:133
 msgid "The game has ended as a draw."
 msgstr ""
 
-#: src/weapon/bazooka.cpp:102 src/weapon/cluster_bomb.cpp:107
+#: src/weapon/bazooka.cpp:120 src/weapon/cluster_bomb.cpp:126
 #, fuzzy
 msgid "The rocket left the battlefield..."
 msgstr " Raketa zanechala v inom svete ..."
 
-#: src/map/maps_list.cpp:224
+#: src/map/maps_list.cpp:295 src/map/maps_list.cpp:312
 #, fuzzy, c-format
 msgid "Unable to open maps directory (%s) !"
 msgstr "Nedá sa otvoriť adresár máp (%s) !"
 
-#: src/team/skin.cpp:250
+#: src/team/skin.cpp:330 src/team/skin.cpp:347
 #, fuzzy, c-format
 msgid "Unable to open skins directory (%s) !"
 msgstr "Nedá sa otvoriť adresár skinov  (%s) !"
 
-#: src/main.cpp:248
+#: src/main.cpp:274
 #, fuzzy
 msgid "Unexcepted exception caught..."
 msgstr "Neočakávaná výnimka zachytená ..."
 
-#: src/game/game_loop.cpp:165
+#: src/game/game_loop.cpp:188
 msgid "Unknow action"
 msgstr ""
 
-#: src/menu/options_menu.cpp:185
-msgid "Use SDL?"
-msgstr ""
-
-#: src/menu/options_menu.cpp:197
-#, fuzzy
-msgid "Use sound?"
-msgstr "Použi zvuk"
-
-#: src/main.cpp:156
+#: src/main.cpp:179
 msgid "Version"
 msgstr "Verzia"
 
-#: src/game/game_loop.cpp:76
+#: src/game/game_loop.cpp:94
 msgid "Wait for clients"
 msgstr ""
 
-#: src/game/game_loop.cpp:159
+#: src/game/game_loop.cpp:182
 msgid "Wait for map"
 msgstr ""
 
-#: src/game/game_loop.cpp:156
+#: src/game/game_loop.cpp:179
 msgid "Wait for server"
 msgstr ""
 
-#: src/game/game_loop.cpp:152
+#: src/game/game_loop.cpp:175
 msgid "Wait for server informations"
 msgstr ""
 
-#: src/game/game_loop.cpp:162
+#: src/game/game_loop.cpp:185
 #, fuzzy
 msgid "Wait teams"
 msgstr "Načítavam tým %s"
 
-#: src/interface/interface.cpp:188
+#: src/map/maps_list.cpp:175
+msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
+msgstr ""
+
+#: src/interface/interface.cpp:259
 msgid "Weapon"
 msgstr "Zbraň"
 
-#: src/main.cpp:78
+#: src/main.cpp:87
 #, fuzzy
 msgid "Website: "
 msgstr "Web stránka : "
 
-#: src/game/game.cpp:282
+#: src/game/game_loop.cpp:820
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba ti %s : Zabitý obyčajnou píštoľou !"
 
-#: src/main.cpp:155
+#: src/main.cpp:183
 #, fuzzy
 msgid "Wormux launching..."
 msgstr "Wormux sa spúšťa."
 
-#: src/main.cpp:67
+#: src/main.cpp:76
 msgid "Wormux version "
 msgstr "Wormux verzia"
 
-#: src/map/maps_list.cpp:87
+#: src/map/maps_list.cpp:108
 #, fuzzy, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "Chyba počas načítavania mapy  '%s' :"
 
-#: src/map/maps_list.cpp:240
+#: src/map/maps_list.cpp:333
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
-#: src/game/game_loop.cpp:232
+#: src/game/game_loop.cpp:283
 #, fuzzy
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Potrebuješ najmenej  dva tými na hru, zmeň si to v menu Nastavenie !"
 
-#: src/team/teams_list.cpp:130
+#: src/team/teams_list.cpp:160
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tými !"
 
-#: src/weapon/gun.cpp:89
+#: src/weapon/gun.cpp:101
 msgid "Your shot has missed!"
 msgstr ""
+
+#~ msgid "ClanLib error :"
+#~ msgstr "Chyba ClanLib :"
+
+#~ msgid "File \"%s\" does not exist !"
+#~ msgstr "Súbor \"%s\" neexistuje !"
+
+#~ msgid "Sound error :"
+#~ msgstr "Chyba zvuku :"
+
+#, fuzzy
+#~ msgid "Use sound?"
+#~ msgstr "Použi zvuk"
 
 #~ msgid "%s is stupidly dead because he gone out of the map ..."
 #~ msgstr "%s je hlúpo mŕtvy, lebo sa dostal mimo mapy ..."

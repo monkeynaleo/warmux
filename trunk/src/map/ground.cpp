@@ -93,7 +93,7 @@ bool Terrain::EstDansVide (int x, int y)
   assert (!monde.EstHorsMondeXY(x,y));
   if(TerrainActif().infinite_bg)
   {
-    if(x < 0 || y<0 || x>GetWidth() || y>GetHeight())
+    if(x < 0 || y<0 || x>static_cast<int>(GetWidth()) || y>static_cast<int>(GetHeight()))
       return true;
   }
 
