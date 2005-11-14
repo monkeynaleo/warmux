@@ -155,7 +155,7 @@ LIBS="$LIBS -lSDL_gfx"
 #LIBS="$LIBS $PARAGUI_LIBS"
 
 
-dnl === Check for libxml++ 1.x =============================================
+dnl === Check for libxml++ 2.6 =============================================
 
 dnl Check first for pkg-config  
 
@@ -168,14 +168,14 @@ fi
 
 AC_MSG_CHECKING(for libxml++)
 
-if $PACKAGE_CONFIG libxml++-1.0 --libs > /dev/null 2>&1; then
+if $PACKAGE_CONFIG libxml++-2.6 --libs > /dev/null 2>&1; then
 	AC_MSG_RESULT(yes)
 else
 	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** libxml++ version 1.0 not found!])
+	AC_MSG_ERROR([*** libxml++ version 2.6 not found!])
 fi
-LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-1.0 --cflags`
-LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-1.0 --libs`
+LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
+LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
 CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS"
 LIBS="$LIBS $LIBXMLPP_LIBS"
