@@ -221,9 +221,34 @@ void AppWormux::Fin()
 
 //-----------------------------------------------------------------------------
 
-int AppWormux::main (int argc, char **argv)
+bool AppWormux::Menu()
 {
   menu_item choix;
+  Main_Menu main_menu;
+  main_menu.Init();
+  choix = main_menu.Run();
+  main_menu.FreeMem();
+  
+  switch (choix)
+    {
+    case menuPLAY:
+      jeu.LanceJeu();
+      break;
+    case menuOPTIONS:
+      options_menu.Lance();
+      break;
+    case menuQUIT:
+      return true;
+    default:
+      break;
+    }
+  return false;
+}
+
+//-----------------------------------------------------------------------------
+
+int AppWormux::main (int argc, char **argv)
+{
   bool quitter = false;
   try {
     Prepare();
@@ -232,24 +257,7 @@ int AppWormux::main (int argc, char **argv)
       return 0;
     }
     do {
-      main_menu.Init();
-      choix = main_menu.Run();
-      main_menu.FreeMem();
-      
-      switch (choix)
-	{
-	case menuPLAY:
-	  jeu.LanceJeu();
-	  break;
-	case menuOPTIONS:
-	  options_menu.Lance();
-	  break;
-	case menuQUIT:
-	  quitter = true;
-	  break;
-	default:
-	  break;
-	}
+      quitter = Menu();
     } while (!quitter);
 
     Fin();
