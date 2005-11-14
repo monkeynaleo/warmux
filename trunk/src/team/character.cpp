@@ -628,7 +628,7 @@ void Character::Refresh()
 #ifdef CL
       if (anim.image.is_finished())
 #else
-      if ( anim.image->GetCurrentFrame() == anim.image->GetFrameCount()-1 )
+      if ( anim.image->IsFinished() )
 #endif
       {
         anim.draw = false;
@@ -1072,7 +1072,7 @@ void Character::GetHandPosition (int &x, int &y) {
   assert(walk_skin!=NULL);
   skin_translate_t hand = walk_skin->hand_position.at(frame);
   y = GetY() +hand.dy;
-  if (GetDirection() == 1) 
+  if (GetDirection() == 1)
     x = GetX() +hand.dx;
   else
     x = GetX() +GetWidth() -hand.dx;

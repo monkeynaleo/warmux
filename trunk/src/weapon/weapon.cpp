@@ -664,20 +664,16 @@ void Weapon::Draw()
     x = ActiveCharacter().GetCenterX()-m_image->GetWidth()/2+position.dx;
     y = ActiveCharacter().GetY()-m_image->GetHeight()+position.dy;
 #endif
-    if(ActiveCharacter().GetDirection() == -1)
 #ifdef CL
+    if(ActiveCharacter().GetDirection() == -1)
       x += m_image.get_width();
-#else
-      x += m_image->GetWidth();
 #endif
      break;
   case weapon_origin_HAND:
     PosXY (x, y);
-    if(min_angle!=max_angle && ActiveCharacter().GetDirection()==-1)
 #ifdef CL
+    if(min_angle!=max_angle && ActiveCharacter().GetDirection()==-1)
       y += m_image.get_height();
-#else
-    // (JC) WHY ? y += m_image->GetHeight();
 #endif
      break;
   }
