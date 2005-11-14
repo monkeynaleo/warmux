@@ -42,8 +42,6 @@
 using namespace Wormux;
 using namespace std;
 //-----------------------------------------------------------------------------
-Main_Menu main_menu;
-
 const std::string VERSION("0.7beta");
 //-----------------------------------------------------------------------------
 
@@ -73,21 +71,19 @@ void Main_Menu::FreeMem()
 }
 
 //-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-void button_click()
+void Main_Menu::button_click()
 { jukebox.Play("share", "menu/clic"); }
 
-bool sig_play()
-{ button_click(); main_menu.choice=menuPLAY;return true; }
-bool sig_network()
-{ button_click(); main_menu.choice=menuNETWORK;return true; }
-bool sig_options()
-{ button_click(); main_menu.choice=menuOPTIONS;return true; }
-bool sig_infos()
+bool Main_Menu::sig_play()
+{ button_click(); choice=menuPLAY;return true; }
+bool Main_Menu::sig_network()
+{ button_click(); choice=menuNETWORK;return true; }
+bool Main_Menu::sig_options()
+{ button_click(); choice=menuOPTIONS;return true; }
+bool Main_Menu::sig_infos()
 { button_click(); menu_infos.Run();return true; }
-bool sig_quit()
-{ /*button_click()*/; main_menu.choice=menuQUIT;return true; }
+bool Main_Menu::sig_quit()
+{ choice=menuQUIT;return true; }
 //-----------------------------------------------------------------------------
 
 void Main_Menu::Init()
@@ -146,7 +142,7 @@ void Main_Menu::Init()
 
 //-----------------------------------------------------------------------------
 void Main_Menu::onClick ( int x, int y)
-{     
+{       
   if (play->Test (x, y)) sig_play();
   else if (network->Test (x, y)) sig_network();
   else if (options->Test (x, y)) sig_options();

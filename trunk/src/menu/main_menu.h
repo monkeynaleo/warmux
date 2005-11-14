@@ -23,12 +23,11 @@
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
 //-----------------------------------------------------------------------------
+#include "../include/base.h"
+#include "../gui/button_text.h"
+#include "../tool/sprite.h"
 #include <SDL/SDL.h>
 #include <vector>
-#include "../gui/button_text.h"
-#include "../include/base.h"
-#include "../tool/sprite.h"
-
 //-----------------------------------------------------------------------------
 
 typedef enum
@@ -47,7 +46,6 @@ class Main_Menu
 private:
   Sprite* background;
   ButtonText *play, *network, *options, *infos, *quit;
-  void onClick ( int x, int y);
 public:
   menu_item choice;
 
@@ -55,9 +53,15 @@ public:
   void Init();
   void FreeMem();
   menu_item Run ();
+private:  
+  void onClick ( int x, int y);
+  void button_click();
+  bool sig_play();
+  bool sig_network();
+  bool sig_options();
+  bool sig_infos();
+  bool sig_quit();
 };
 
-//-----------------------------------------------------------------------------
-extern Main_Menu main_menu;
 //-----------------------------------------------------------------------------
 #endif
