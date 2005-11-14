@@ -30,7 +30,6 @@
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
 #include "../tool/math_tools.h"
-#include "../weapon/weapons_list.h"
 
 #ifdef CL
 #include "../tool/geometry_tools.h"

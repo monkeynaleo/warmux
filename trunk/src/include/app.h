@@ -26,7 +26,6 @@
 #include <string>
 #include "base.h"
 #include "../game/config.h"
-
 //-----------------------------------------------------------------------------
 
 class AppWormux
@@ -42,7 +41,6 @@ private:
   void Prepare();
   void WelcomeMessage();
   bool Init(int, char**);
-  bool Menu();
   void Fin();
 
 public:

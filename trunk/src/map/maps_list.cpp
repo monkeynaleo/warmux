@@ -99,8 +99,6 @@ bool InfoTerrain::Init (const std::string &map_name,
 	      << err.message << std::endl;
     return false;
    }
-#else
-   // TODO
 #endif
   catch (const xmlpp::exception &e)
   {

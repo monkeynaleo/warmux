@@ -36,6 +36,7 @@ struct Sprite;
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
+class Dynamite;
 
 // La représentation d'une dynamite
 class BatonDynamite : public WeaponProjectile
@@ -49,7 +50,7 @@ private:
   bool explosion_active;
 
 public:
-  BatonDynamite();
+  BatonDynamite(Dynamite &dynamite);
 
   void Init();
   void Reset();
@@ -59,6 +60,7 @@ public:
 protected:
   void SignalCollision();
   void SignalGhostState (bool was_dead);
+  Dynamite &dynamite;
 };
 
 //-----------------------------------------------------------------------------
@@ -102,7 +104,6 @@ public:
   DynamiteConfig &cfg();
 };
 
-extern Dynamite dynamite;
 //-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

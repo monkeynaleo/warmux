@@ -30,7 +30,6 @@
 #include "../game/game_loop.h"
 #include "../weapon/weapon_tools.h"
 #include "../object/objects_list.h"
-#include "../weapon/weapons_list.h"
 #ifdef CL
 #else
 #include "../tool/resource_manager.h"
@@ -43,15 +42,14 @@
 //-----------------------------------------------------------------------------
 namespace Wormux {
 
-Dynamite dynamite;
-
 #ifdef DEBUG
   //  #define DEBUG_CADRE_TEST
 #endif
 
 //-----------------------------------------------------------------------------
 
-BatonDynamite::BatonDynamite() : WeaponProjectile("baton de dynamite")
+BatonDynamite::BatonDynamite(Dynamite &p_dynamite) 
+  : WeaponProjectile("baton de dynamite"), dynamite(p_dynamite)
 {}
 
 //-----------------------------------------------------------------------------
@@ -121,8 +119,9 @@ void BatonDynamite::Reset()
   explosion.restart();
   explosion.set_frame(0);
 #else
+  image->Start();
   image->SetCurrentFrame(0);
-
+  explosion->Start();
   explosion->SetCurrentFrame(0);
 #endif
 }
@@ -210,7 +209,8 @@ void BatonDynamite::SignalGhostState (bool) { is_active = false; }
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Dynamite::Dynamite() : Weapon(WEAPON_DYNAMITE, "dynamite")
+Dynamite::Dynamite() 
+  : Weapon(WEAPON_DYNAMITE, "dynamite"), baton(*this)
 {
   m_name = _("Dynamite");
   extra_params = new DynamiteConfig();

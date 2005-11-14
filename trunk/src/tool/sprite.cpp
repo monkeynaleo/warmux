@@ -35,7 +35,7 @@
 SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed)
 {
   this->surface = p_surface;
-  this->speed = p_speed;
+  this->delay = p_speed;
 }
 
 // *****************************************************************************/
@@ -197,6 +197,12 @@ unsigned int Sprite::GetCurrentFrame() const
 {
    return current_frame;
 }
+
+SpriteFrame& Sprite::operator[] (unsigned int index)
+{ return frames.at(index); }
+
+const SpriteFrame& Sprite::operator[] (unsigned int index) const
+{ return frames.at(index); }
 
 const SpriteFrame& Sprite::GetCurrentFrameObject() const
 {
@@ -377,6 +383,7 @@ void Sprite::Start()
    show = true;
    loop = false;
    finished = false;
+   last_update = Wormux::temps.Lit();
 }
 
 void Sprite::StartLoop()
@@ -475,6 +482,9 @@ void Sprite::Finish()
 
 void Sprite::Update()
 {
+  if (finished) return;
+  if (Wormux::temps.Lit() < (last_update + GetCurrentFrameObject().delay))
+     return;
    last_update = Wormux::temps.Lit();
    bool finish;
    if (frame_delta < 0)

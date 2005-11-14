@@ -35,6 +35,7 @@
 #endif
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 //-----------------------------------------------------------------------------
 
 const double VITESSE_MIN = 0.01;
@@ -48,9 +49,9 @@ Temps temps;
 //-----------------------------------------------------------------------------
 
 Temps::Temps()
+  : dt_pause(0), mode_pause(false), vitesse(1.0), big_font(NULL)
 {
-   big_font = NULL;
-   Reset();
+//   Reset();
 }
 
 //-----------------------------------------------------------------------------

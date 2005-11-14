@@ -22,6 +22,7 @@
 #include "../weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 #include "../team/macro.h"
+#include "../game/time.h"
 #include "../game/game_loop.h"
 #include "../object/objects_list.h"
 #include "../map/camera.h"
@@ -38,6 +39,17 @@ WeaponsList weapons_list;
 
 WeaponsList::WeaponsList()
 {
+}
+
+//-----------------------------------------------------------------------------
+
+WeaponsList::~WeaponsList()
+{
+  weapons_list_it it=todelete.begin(), end=todelete.end();
+  for (; it != end; ++it)
+  {
+    delete *it;
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -61,8 +73,10 @@ void WeaponsList::Init()
 #ifndef CL
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml");
 #endif
-
-  InitAndAddToList(&bazooka, 1);
+  Bazooka* bazooka = new Bazooka;
+  todelete.push_back(bazooka);
+  InitAndAddToList(bazooka, 1);
+  
   InitAndAddToList(&auto_bazooka, 1);
   InitAndAddToList(&lance_grenade, 1);
   InitAndAddToList(&holly_grenade_launcher, 1);
@@ -70,7 +84,12 @@ void WeaponsList::Init()
   InitAndAddToList(&gun, 2);
   InitAndAddToList(&uzi, 2);
   InitAndAddToList(&baseball, 2);  
-  InitAndAddToList(&dynamite,3);
+
+
+  Dynamite* dynamite = new Dynamite;
+  todelete.push_back(dynamite);
+  InitAndAddToList(dynamite,3);
+  
   InitAndAddToList(&mine,3);
   InitAndAddToList(&air_attack,4);
   InitAndAddToList(&tux,4);  

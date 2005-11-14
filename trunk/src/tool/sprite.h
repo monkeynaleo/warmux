@@ -39,9 +39,9 @@ enum Rotation_HotSpot {top_left, top_center, top_right, left_center, center, rig
 class SpriteFrame
 {
 public:
-  SpriteFrame(SDL_Surface *surface, unsigned int speed=100);
+  SpriteFrame(SDL_Surface *surface, unsigned int delay=100);
   SDL_Surface *surface;
-  unsigned int speed; // in millisecond
+  unsigned int delay; // in millisecond
 };
 
 class Sprite
@@ -67,6 +67,8 @@ typedef enum {
    // Get/Set sprite parameters
    void SetCurrentFrame( unsigned int frame_no);    
    unsigned int GetCurrentFrame() const;
+   SpriteFrame& operator[] (unsigned int frame_no);
+   const SpriteFrame& operator[] (unsigned int frame_no) const;
    const SpriteFrame& GetCurrentFrameObject() const;
    void Scale( float scale_x, float scale_y);
    void GetScaleFactors( float &scale_x, float &scale_y);
