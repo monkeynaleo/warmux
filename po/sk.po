@@ -106,7 +106,7 @@ msgstr "Hráč '%s' zvíťazil %u leteckých útokov !"
 msgid "(dead)"
 msgstr "(mŕtvy)"
 
-#: src/interface/interface.cpp:287
+#: src/interface/interface.cpp:286
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
@@ -140,7 +140,7 @@ msgstr "Basebal"
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/main.cpp:263
+#: src/main.cpp:261
 #, fuzzy
 msgid "C++ exception caught:"
 msgstr "Zachytená výnimka C++ :"
@@ -371,7 +371,7 @@ msgstr ""
 msgid "Play"
 msgstr "Hraj"
 
-#: src/main.cpp:219
+#: src/main.cpp:217
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr ""
 
@@ -393,7 +393,7 @@ msgstr "Zvukové efekty"
 msgid "Starting a new game"
 msgstr "Beh novej hry"
 
-#: src/interface/interface.cpp:285
+#: src/interface/interface.cpp:284
 msgid "Stock"
 msgstr "Munícia"
 
@@ -425,7 +425,7 @@ msgstr "Nedá sa otvoriť adresár máp (%s) !"
 msgid "Unable to open skins directory (%s) !"
 msgstr "Nedá sa otvoriť adresár skinov  (%s) !"
 
-#: src/main.cpp:274
+#: src/main.cpp:272
 #, fuzzy
 msgid "Unexcepted exception caught..."
 msgstr "Neočakávaná výnimka zachytená ..."
@@ -463,7 +463,7 @@ msgstr "Načítavam tým %s"
 msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 msgstr ""
 
-#: src/interface/interface.cpp:259
+#: src/interface/interface.cpp:258
 msgid "Weapon"
 msgstr "Zbraň"
 

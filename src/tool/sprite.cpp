@@ -29,6 +29,14 @@
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <iostream>
+#include "../game/time.h"
+// *****************************************************************************/
+
+SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed)
+{
+  this->surface = p_surface;
+  this->speed = p_speed;
+}
 
 // *****************************************************************************/
 
@@ -66,7 +74,13 @@ Sprite::Sprite()
    scale_y = 1.0f;
    rotation_deg = 0.0f;
    current_frame = 0;
+   frame_delta = 1;
    rot_hotspot = center;
+   show = true;
+   backward = false; 
+   last_update = Wormux::temps.Lit();
+   show_on_finish = show_last_frame;
+   loop = false;
 }
 
 Sprite::Sprite( const Sprite& other)
@@ -78,8 +92,14 @@ Sprite::Sprite( const Sprite& other)
    rotation_deg = other.rotation_deg;
    current_frame = other.current_frame;
    rot_hotspot = center;
+   frame_delta = other.frame_delta;
+   show = other.show;
+   backward = other.backward;
+   last_update = other.last_update;
+   show_on_finish = other.show_on_finish;
+   loop = other.loop;
    
-   for ( unsigned int f = 0 ; f < other.surfaces.size() ; f++)
+   for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
      {
 	  SDL_Surface *new_surf = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, 
 							frame_width_pix, frame_height_pix, 
@@ -91,11 +111,11 @@ Sprite::Sprite( const Sprite& other)
 	  // Disable per pixel alpha on the source surface
           // in order to properly copy the alpha chanel to the destination suface
 	  // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-	  SDL_SetAlpha( other.surfaces[f], 0, 0); 
-	  SDL_BlitSurface( other.surfaces[f], NULL, new_surf, NULL);
+	  SDL_SetAlpha( other.frames[f].surface, 0, 0); 
+	  SDL_BlitSurface( other.frames[f].surface, NULL, new_surf, NULL);
 	  // re-enable the per pixel alpha in the 
-	  SDL_SetAlpha( other.surfaces[f], SDL_SRCALPHA, 0); 
-	  surfaces.push_back( new_surf);
+	  SDL_SetAlpha( other.frames[f].surface, SDL_SRCALPHA, 0); 
+	  frames.push_back( SpriteFrame(new_surf));
      }
 }
 
@@ -103,19 +123,25 @@ Sprite::Sprite( SDL_Surface *surface)
 {   
    frame_width_pix = surface->w;
    frame_height_pix = surface->h;
-   surfaces.push_back( surface);
+   frames.push_back( SpriteFrame(surface));
    
    scale_x = 1.0f;
    scale_y = 1.0f;
    rotation_deg = 0.0f;   
    current_frame = 0;
    rot_hotspot = center;
+   frame_delta = 1;
+   show = true;
+   backward = false; 
+   last_update = Wormux::temps.Lit();
+   show_on_finish = show_last_frame;
+   loop = false;
 }
 
 Sprite::~Sprite()
 {
-   for ( unsigned int f = 0 ; f < surfaces.size() ; f++)
-     SDL_FreeSurface( surfaces[f]);
+   for ( unsigned int f = 0 ; f < frames.size() ; f++)
+     SDL_FreeSurface( frames[f].surface);
 }
 
 void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y)
@@ -139,7 +165,7 @@ void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int 
 	  SDL_Rect dr = {0,0,frame_width,frame_height};
 	  
 	  SDL_BlitSurface( surface, &sr, new_surf, &dr);
-	  surfaces.push_back( new_surf);
+	  frames.push_back( SpriteFrame(new_surf));
        }
 }
 
@@ -155,17 +181,23 @@ unsigned int Sprite::GetHeight()
 
 unsigned int Sprite::GetFrameCount()
 {
-   return surfaces.size();
+   return frames.size();
 }
 
 void Sprite::SetCurrentFrame( unsigned int frame_no)
 {
-  current_frame = ( frame_no < surfaces.size() ) ? frame_no : surfaces.size()-1;
+  assert (frame_no < frames.size());
+  current_frame = frame_no;
 }
 
-unsigned int Sprite::GetCurrentFrame()
+unsigned int Sprite::GetCurrentFrame() const
 {
    return current_frame;
+}
+
+const SpriteFrame& Sprite::GetCurrentFrameObject() const
+{
+   return frames[current_frame];
 }
 
 void Sprite::Scale( float scale_x, float scale_y)
@@ -203,11 +235,13 @@ void Sprite::SetRotation_deg( float angle_deg)
 
 void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface)
 {
+  const SpriteFrame& frame = GetCurrentFrameObject();
+  const SDL_Surface& surface = *frame.surface;
    // Calculate offset of the depending on hotspot rotation position :
 
    //Do as if hotspot is center of picture:
-   rot_x = (surfaces[current_frame]->w/2)-(tmp_surface->w/2);
-   rot_y = (surfaces[current_frame]->h/2)-(tmp_surface->h/2);
+   rot_x = (surface.w/2)-(tmp_surface->w/2);
+   rot_y = (surface.h/2)-(tmp_surface->h/2);
 
    if(rot_hotspot == center)
       return;
@@ -229,16 +263,16 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    case top_right:
    case bottom_left:
    case bottom_right:
-      d = sqrt(surfaces[current_frame]->w * surfaces[current_frame]->w +
-               surfaces[current_frame]->h * surfaces[current_frame]->h) / 2;
+      d = sqrt(surface.w * surface.w +
+               surface.h * surface.h) / 2;
       break;
    case top_center:
    case bottom_center:
-      d = surfaces[current_frame]->h / 2;
+      d = surface.h / 2;
       break;
    case left_center:
    case right_center:
-      d = surfaces[current_frame]->w / 2;
+      d = surface.w / 2;
       break;
    default: break;
    }
@@ -249,37 +283,37 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
       d_angle = 0.0;
       break;
    case top_left:
-      if(surfaces[current_frame]->w<surfaces[current_frame]->h)
-        d_angle = atan(surfaces[current_frame]->w / surfaces[current_frame]->h);
+      if(surface.w<surface.h)
+        d_angle = atan(surface.w / surface.h);
       else
-        d_angle = atan(surfaces[current_frame]->h / surfaces[current_frame]->w);
+        d_angle = atan(surface.h / surface.w);
       break;
    case left_center:
       d_angle = M_PI_2;
       break;
    case bottom_left:
-      if(surfaces[current_frame]->w<surfaces[current_frame]->h)
-        d_angle = M_PI - atan(surfaces[current_frame]->w / surfaces[current_frame]->h);
+      if(surface.w<surface.h)
+        d_angle = M_PI - atan(surface.w / surface.h);
       else
-        d_angle = M_PI - atan(surfaces[current_frame]->h / surfaces[current_frame]->w);
+        d_angle = M_PI - atan(surface.h / surface.w);
       break;
    case bottom_center:
       d_angle = M_PI;
       break;
    case bottom_right:
-      if(surfaces[current_frame]->w<surfaces[current_frame]->h)
-        d_angle = M_PI + atan(surfaces[current_frame]->w / surfaces[current_frame]->h);
+      if(surface.w<surface.h)
+        d_angle = M_PI + atan(surface.w / surface.h);
       else
-        d_angle = M_PI + atan(surfaces[current_frame]->h / surfaces[current_frame]->w);
+        d_angle = M_PI + atan(surface.h / surface.w);
       break;
    case right_center:
       d_angle =  - M_PI_2;
       break;
    case top_right:
-      if(surfaces[current_frame]->w<surfaces[current_frame]->h)
-        d_angle = - atan(surfaces[current_frame]->w / surfaces[current_frame]->h);
+      if(surface.w<surface.h)
+        d_angle = - atan(surface.w / surface.h);
       else
-        d_angle = - atan(surfaces[current_frame]->h / surfaces[current_frame]->w);
+        d_angle = - atan(surface.h / surface.w);
       break;
    default: break;
    }
@@ -301,12 +335,12 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    case top_left:
    case left_center:
    case bottom_left:
-      rot_x -= static_cast<int>(scale_y * surfaces[current_frame]->w / 2);
+      rot_x -= static_cast<int>(scale_y * surface.w / 2);
       break;
    case top_right:
    case right_center:
    case bottom_right:
-      rot_x += static_cast<int>(scale_y * surfaces[current_frame]->w / 2);
+      rot_x += static_cast<int>(scale_y * surface.w / 2);
       break;
    default: break;
    }
@@ -316,12 +350,12 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    case top_left:
    case top_center:
    case top_right:
-      rot_y -= surfaces[current_frame]->h / 2;
+      rot_y -= surface.h / 2;
       break;
    case bottom_left:
    case bottom_center:
    case bottom_right:
-      rot_y += surfaces[current_frame]->h / 2;
+      rot_y += surface.h / 2;
       break;
    default: break;
    }
@@ -330,20 +364,34 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
 
 void Sprite::Start()
 {
-   current_frame = 0;
+   if (backward) {
+     current_frame = frames.size()-1;
+     frame_delta = -1;
+   } else {
+     current_frame = 0;
+     frame_delta = 1;
+   }
+   show = true;
+   loop = false;
 }
 
 void Sprite::StartLoop()
 {
-   current_frame = 0;
+  Start();
+  loop = true;
 }
-void Sprite::Finish()
+void Sprite::SetPlayBackward(bool enable)
 {
-   current_frame = surfaces.size()-1;
+  backward = enable;
+  if (backward)
+    frame_delta = -1;
+  else
+    frame_delta = 1;
 }
 
 void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 {
+  if (!show) return;
 /*
  SDL_Rect dr = { pos_x, pos_y, frame_width_pix, frame_height_pix};
 
@@ -353,9 +401,9 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
  bool scale = false;
  if ( fabs(scale_x)!=1 || fabs(scale_y)!=1 ) {
    scale = true;
-   current = zoomSurface (surfaces[current_frame], fabs(scale_x), fabs(scale_y), 1);
+   current = zoomSurface (frames[current_frame].surface, fabs(scale_x), fabs(scale_y), 1);
  } else {
-   current = surfaces[current_frame]; 
+   current = frames[current_frame].surface; 
  }
 
  // do we need to mirror ?
@@ -382,7 +430,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 
 */
 #ifndef __MINGW32__
-   SDL_Surface *tmp_surface = rotozoomSurfaceXY (surfaces[current_frame], -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+   SDL_Surface *tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
 
    // Calculate offset of the depending on hotspot rotation position :
    int rot_x=0;
@@ -397,22 +445,52 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    SDL_FreeSurface (tmp_surface);
 #else
    SDL_Rect dr = {pos_x , pos_y , frame_width_pix, frame_height_pix};
-   SDL_BlitSurface (surfaces[current_frame], NULL, dest, &dr);
+   SDL_BlitSurface (frames[current_frame].surface, NULL, dest, &dr);
 #endif
 
 
 }
 
+void Sprite::Finish()
+{
+  loop = false;
+  switch(show_on_finish)
+  {
+  case show_blank:
+    current_frame = 0;
+    show = false;
+    break;      
+  default:
+  case show_last_frame:
+    current_frame = frames.size()-1;
+    break;      
+  }
+  frame_delta = 0;
+}
+
 void Sprite::Update()
 {
-   current_frame = ( current_frame + 1 ) % surfaces.size();
+   last_update = Wormux::temps.Lit();
+   bool finish;
+   if (frame_delta < 0)
+     finish = (current_frame + frame_delta) <= 0;
+   else
+     finish = (frames.size()-1) <= (current_frame + frame_delta);
+   if (finish && !loop)
+      Finish();
+   else
+     current_frame = ( current_frame + frame_delta ) % frames.size();
 }
 
 void Sprite::Draw(int pos_x, int pos_y)
 {
+  if (!show) return;
   Blit(app.sdlwindow,pos_x - camera.GetX(),pos_y - camera.GetY());
 }
 
+void Sprite::Show() { show = true; }
+void Sprite::Hide() { show = false; }
+void Sprite::SetShowOnFinish(SpriteShowOnFinish show) { show_on_finish = show; }
 
 //-----------------------------------------------------------------------------
 

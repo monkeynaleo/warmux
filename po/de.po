@@ -103,7 +103,7 @@ msgstr "Spieler '%s' hat %u Luftangriff(e) gewonnen!"
 msgid "(dead)"
 msgstr "(tot)"
 
-#: src/interface/interface.cpp:287
+#: src/interface/interface.cpp:286
 msgid "(unlimited)"
 msgstr "(unbegrenzt)"
 
@@ -136,7 +136,7 @@ msgstr "Baseball"
 msgid "Bazooka"
 msgstr "Panzerfaust"
 
-#: src/main.cpp:263
+#: src/main.cpp:261
 #, fuzzy
 msgid "C++ exception caught:"
 msgstr "C++ Ausnahmefehler abgefangen:"
@@ -366,7 +366,7 @@ msgstr ""
 msgid "Play"
 msgstr "Spielen"
 
-#: src/main.cpp:219
+#: src/main.cpp:217
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr "Sound Effekte"
 msgid "Starting a new game"
 msgstr "Neues Spiel wird gestartet"
 
-#: src/interface/interface.cpp:285
+#: src/interface/interface.cpp:284
 msgid "Stock"
 msgstr "Vorrat"
 
@@ -420,7 +420,7 @@ msgstr "Kann das Map Verzeichnis (%s) nicht öffnen!"
 msgid "Unable to open skins directory (%s) !"
 msgstr "Kann das Skins Verzeichnis (%s) nicht öffnen!"
 
-#: src/main.cpp:274
+#: src/main.cpp:272
 #, fuzzy
 msgid "Unexcepted exception caught..."
 msgstr "Unerwarteter Ausnahmefehler abgefangen ..."
@@ -457,7 +457,7 @@ msgstr ""
 msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 msgstr ""
 
-#: src/interface/interface.cpp:259
+#: src/interface/interface.cpp:258
 msgid "Weapon"
 msgstr "Waffe"
 
