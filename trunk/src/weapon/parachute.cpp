@@ -66,6 +66,8 @@ void Parachute::p_Select()
   image.set_show_on_finish(CL_Sprite::show_last_frame);
   image.restart();
 #else
+  image->Start();
+  image->SetShowOnFinish(Sprite::show_last_frame);
   //TODO
 #endif
 }
@@ -153,7 +155,9 @@ void Parachute::Refresh()
 	      image.set_show_on_finish(CL_Sprite::show_blank);
 	      image.restart();
 #else
-  //TODO
+	      image->SetPlayBackward(true);
+        image->SetShowOnFinish(Sprite::show_blank);
+        image->Start();
 #endif
 	      closing = true ;
 	    }

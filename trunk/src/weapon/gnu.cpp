@@ -201,9 +201,9 @@ void Gnu::Draw()
   tmp -= (int) ((temps.Lit() - launched_time) / 1000);
   std::ostringstream ss;
   ss << tmp;
+#ifdef CL
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
-#ifdef CL
   police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
 #else
    // TODO

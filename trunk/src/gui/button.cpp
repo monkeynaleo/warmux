@@ -34,10 +34,10 @@ Button::Button ()
 
 //-----------------------------------------------------------------------------
 
-Button::Button (uint x, uint y, uint w, uint h): m_x(x), m_y(y), 
-						 m_width(w), m_height(h)
-{ 
-}
+Button::Button (uint x, uint y, uint w, uint h)
+  : m_x(x), m_width(w), m_y(y), m_height(h)
+{}
+
 //-----------------------------------------------------------------------------
 
 Button::~Button() 

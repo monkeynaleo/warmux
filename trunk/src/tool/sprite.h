@@ -35,8 +35,23 @@ extern SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
 
 enum Rotation_HotSpot {top_left, top_center, top_right, left_center, center, right_center, bottom_left, bottom_center, bottom_right};
 
+ 
+class SpriteFrame
+{
+public:
+  SpriteFrame(SDL_Surface *surface, unsigned int speed=100);
+  SDL_Surface *surface;
+  unsigned int speed; // in millisecond
+};
+
 class Sprite
 {
+  public:
+typedef enum {
+  show_last_frame,
+  show_blank
+} SpriteShowOnFinish;
+	
  public:
    Sprite();
    Sprite( const Sprite &other);
@@ -51,7 +66,8 @@ class Sprite
    
    // Get/Set sprite parameters
    void SetCurrentFrame( unsigned int frame_no);    
-   unsigned int GetCurrentFrame();
+   unsigned int GetCurrentFrame() const;
+   const SpriteFrame& GetCurrentFrameObject() const;
    void Scale( float scale_x, float scale_y);
    void GetScaleFactors( float &scale_x, float &scale_y);
    void ScaleSize(int width, int height);
@@ -62,12 +78,20 @@ class Sprite
    void Start();
    void StartLoop();
    void Finish();
+	 void SetPlayBackward(bool enable);
+   void Show();
+   void Hide();
+   void SetShowOnFinish(SpriteShowOnFinish show);
      
    void Blit( SDL_Surface *dest, unsigned int pox_x, unsigned int pos_y);
    void Draw(int pos_x, int pos_y);
    void Update();
-   
+
  private:
+   uint last_update;
+   bool show;
+   bool loop;
+   SpriteShowOnFinish show_on_finish;
    int frame_width_pix;
    int frame_height_pix;
    float scale_x;
@@ -75,7 +99,9 @@ class Sprite
    float rotation_deg;
    float alpha;
    unsigned int current_frame;
-   std::vector< SDL_Surface *> surfaces;
+   int frame_delta; // Used in Update() to get next frame
+   bool backward;
+   std::vector<SpriteFrame> frames;
    Rotation_HotSpot rot_hotspot;
    void Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface);
 };
