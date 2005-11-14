@@ -235,6 +235,30 @@ void Mouse::ChoixVerPointe()
 
 //-----------------------------------------------------------------------------
  
+void Mouse::ScrollCamera() const
+{
+  //Move camera with mouse when cursor is on border of the screen
+  if (uint(GetX()) < SENSIT_SCROLL_MOUSE) {
+    camera.SetXY (-SCROLL_MOUSE, 0);
+    camera.autorecadre = false;
+  }
+
+  if (uint(GetX()) > video.GetWidth() - SENSIT_SCROLL_MOUSE) {
+    camera.SetXY (SCROLL_MOUSE, 0);
+    camera.autorecadre = false;
+  }
+
+  if (uint(GetY()) < SENSIT_SCROLL_MOUSE) {
+    camera.SetXY (0, -SCROLL_MOUSE);
+    camera.autorecadre = false;
+  }
+
+  if (uint(GetY()) > video.GetHeight() - SENSIT_SCROLL_MOUSE) {
+    camera.SetXY (0,SCROLL_MOUSE);
+    camera.autorecadre = false;
+  }
+}
+
 void Mouse::TestCamera()
 {
 #ifndef CL
@@ -276,38 +300,7 @@ void Mouse::TestCamera()
     scroll_actif = false;
   }
 
-  //Move camera with mouse when cursor is on border of the screen
-  if (uint(GetX()) < SENSIT_SCROLL_MOUSE) {
-    camera.SetXY (-SCROLL_MOUSE, 0);
-    camera.autorecadre = false;
-  }
-
-  if(!interface.weapons_menu.IsDisplayed())
-  {
-    if (uint(GetX()) > video.GetWidth() - SENSIT_SCROLL_MOUSE) {
-      camera.SetXY (SCROLL_MOUSE, 0);
-      camera.autorecadre = false;
-    }
-  }
-  else
-  { //Don't move camera, if the cursor is on the weapon menu
-    if (uint(GetX()) > video.GetWidth() - SENSIT_SCROLL_MOUSE
-    &&  GetY() < interface.weapons_menu.GetY()+interface.weapons_menu.GetHeight()) {
-      camera.SetXY (SCROLL_MOUSE, 0);
-      camera.autorecadre = false;
-    }
-  }
-
-  if (uint(GetY()) < SENSIT_SCROLL_MOUSE) {
-    camera.SetXY (0, -SCROLL_MOUSE);
-    camera.autorecadre = false;
-  }
-
-  if (uint(GetY()) > video.GetHeight() - SENSIT_SCROLL_MOUSE) {
-    camera.SetXY (0,SCROLL_MOUSE);
-    camera.autorecadre = false;
-  }
-
+  if(!interface.weapons_menu.IsDisplayed()) ScrollCamera();
 }
 
 //-----------------------------------------------------------------------------

@@ -75,6 +75,7 @@ public:
   bool ClicG() const;
   bool ClicD() const;
   bool ClicM() const;
+  void ScrollCamera() const;
 #ifdef CL
   CL_Point GetPosMonde () const;
 #else
