@@ -229,7 +229,7 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
   m_strength = 0;
   m_first_time_loading = 0;
 
-  min_angle = max_angle = 0;
+  max_strength = min_angle = max_angle = 0;
 
   override_keys = false ;
 
