@@ -557,30 +557,36 @@ void GameLoop::Run()
   // boucle until game is finished
   do
   {
+#define ENABLE_LIMIT_FPS    
+#ifdef ENABLE_LIMIT_FPS    
 #ifdef CL
     unsigned int start = CL_System::get_time();
 #else
     unsigned int start = SDL_GetTicks();
 #endif
+#endif    
      
     jeu.fin_partie = false;
 
-    // the REAL loop
+    // one loop
     Refresh();
     CallDraw ();
 
     // try to adjust to max Frame by seconds
+#ifdef ENABLE_LIMIT_FPS    
 #ifdef CL
     unsigned int delay = CL_System::get_time()-start;
 #else
     unsigned int delay = SDL_GetTicks()-start;
 #endif
      
-# ifdef BUGGY_CODE
     if (delay < video.GetSleepMaxFps())
       sleep_fps = video.GetSleepMaxFps() - delay;
     else
       sleep_fps = 0;
+#ifndef CL
+  SDL_Delay(sleep_fps);
+#endif
 #endif
 
   } while (!jeu.fin_partie); 

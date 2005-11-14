@@ -42,6 +42,7 @@ private:
   void Prepare();
   void WelcomeMessage();
   bool Init(int, char**);
+  bool Menu();
   void Fin();
 
 public:
