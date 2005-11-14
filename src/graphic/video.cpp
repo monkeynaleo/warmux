@@ -61,6 +61,7 @@ Video::Video()
 #else
 Video::Video() 
 {
+  SetMaxFps (50);
   fullscreen = false;
 }
 #endif
@@ -120,6 +121,7 @@ int Video::GetCurrentMode(void)
 
   return m_mode;
 }
+#endif
 
 void Video::SetMaxFps(uint max_fps)
 {
@@ -136,8 +138,6 @@ uint Video::GetMaxFps()
 
 uint Video::GetSleepMaxFps()
 { return m_sleep_max_fps; }
-
-#endif //BUGGY_CODE
 
 //-----------------------------------------------------------------------------
 

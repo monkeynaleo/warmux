@@ -31,6 +31,10 @@
 
 class Video
 {
+private:
+  uint m_max_fps;     // If equals to zero, it means no limit
+  uint m_sleep_max_fps;
+
 #ifdef BUGGY_CODE
 public:
   typedef std::vector<CL_DisplayMode>::const_iterator ConstIteratorMode;
@@ -42,7 +46,6 @@ private:
   int m_mode;
   
 public:
-  Video();
 
   // Change the mode
   void ChangeMode(int mode, bool fullScreen);
@@ -52,12 +55,13 @@ public:
   const std::vector<CL_DisplayMode>& GetModes() const;
 
   int GetCurrentMode(void);
+#endif //BUGGY_CODE
 
+public:
   void SetMaxFps (uint max_fps);
   uint GetMaxFps();
   uint GetSleepMaxFps();  
 
-#endif //BUGGY_CODE
  private:
   bool fullscreen;
 

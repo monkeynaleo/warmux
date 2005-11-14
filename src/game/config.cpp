@@ -156,11 +156,9 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   elem = LitDocXml::AccesBalise (xml, "video");
   if (elem != NULL)
   {
-#ifdef BUGGY_CODE
     uint max_fps;
     if (LitDocXml::LitUint (elem, "max_fps", max_fps)) 
       video.SetMaxFps(max_fps);
-#endif
 #ifdef USE_SDL
     LitDocXml::LitBool (elem, "use_sdl", use_sdl);
 #endif
@@ -334,6 +332,8 @@ bool Config::SauveXml()
   doc.EcritBalise (noeud_video, "height", ulong2str(video.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 
 		   ulong2str(static_cast<uint>(video.IsFullScreen())) );	  
+  doc.EcritBalise (noeud_video, "max_fps", 
+		   ulong2str(static_cast<uint>(video.GetMaxFps())) );	  
 
   if ( transparency == ALPHA )
     doc.EcritBalise (noeud_video, "transparency", "alpha");
