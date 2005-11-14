@@ -188,3 +188,12 @@ int Font::GetHeight ()
 
 //-----------------------------------------------------------------------------
 
+int Font::GetHeight (const std::string &str)
+{ 
+  int height=-1;
+  TTF_SizeUTF8(m_font, str.c_str(), NULL, &height);
+  return height;
+}
+
+//-----------------------------------------------------------------------------
+

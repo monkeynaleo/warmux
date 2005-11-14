@@ -294,20 +294,25 @@ bool Monde::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
 void Monde::DrawAuthorName()
 {
   uint time = temps.Lit();
+  int y = AUTHOR_INFO_Y;
 
   if (AUTHOR_INFO_TIME < time) return;
 
   std::string txt;
   txt  = Format(_("Map %s, a creation of :"),
 		lst_terrain.TerrainActif().name.c_str());
-  txt += '\n';
-  txt += lst_terrain.TerrainActif().author_info;
 
 #ifdef CL
-   police_mix.WriteLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y, txt);
+  txt += '\n';
+  txt += lst_terrain.TerrainActif().author_info;
+  police_mix.WriteLeft(AUTHOR_INFO_X,y, txt);
 #else
-   small_font.WriteLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y, txt, white_color);
+  small_font.WriteLeft(AUTHOR_INFO_X,y, txt, white_color);
+  y += small_font.GetHeight(txt);
+  txt = lst_terrain.TerrainActif().author_info;
+  small_font.WriteLeft(AUTHOR_INFO_X,y, txt, white_color);
 #endif
+   
 }
 
 //-----------------------------------------------------------------------------
