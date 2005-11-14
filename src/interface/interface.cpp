@@ -242,7 +242,7 @@ void Interface::AfficheInfoArme ()
     nbr_munition = ActiveTeam().ReadNbAmmos(arme_pointe_souris->GetName());
   }
 
-  std::ostringstream txt;
+  std::string txt,txt2;
 
 #ifdef CL
   int x = (video.GetWidth() - GetWidth())/2;
@@ -254,13 +254,11 @@ void Interface::AfficheInfoArme ()
 #endif
    
   // Nom de l'arme
-  txt.str("");
-  txt << _("Weapon") << " : ";
-  txt << arme_affiche->GetName();
+  txt = Format(_("Weapon: %s"), arme_affiche->GetName().c_str());
 #ifdef CL
-  police_grand.WriteLeft (NOM_ARME_X, NOM_ARME_Y, txt.str());
+  police_grand.WriteLeft (NOM_ARME_X, NOM_ARME_Y, txt);
 #else
-  normal_font.WriteLeft (bottom_bar_ox+NOM_ARME_X, bottom_bar_oy+NOM_ARME_Y, txt.str(), white_color);
+  normal_font.WriteLeft (bottom_bar_ox+NOM_ARME_X, bottom_bar_oy+NOM_ARME_Y, txt, white_color);
 #endif
 
   // Icône de l'arme
@@ -280,18 +278,17 @@ void Interface::AfficheInfoArme ()
 #endif
  
   // Munitions
-  txt.str ("");
-  txt << _("Stock") << " : ";
   if (nbr_munition ==  INFINITE_AMMO)
-    txt << _("(unlimited)");
+    txt2 = _("(unlimited)");
   else
-    txt << nbr_munition;
+    txt2 = Format("%i", nbr_munition);
+  txt = Format(_("Stock: %s"), txt2.c_str());
 #ifdef CL
-  police_grand.WriteLeft (MUNITION_X, MUNITION_Y, txt.str());
+  police_grand.WriteLeft (MUNITION_X, MUNITION_Y, txt);
 
   CL_Display::pop_cliprect();
 #else
-  normal_font.WriteLeft (bottom_bar_ox+MUNITION_X, bottom_bar_oy+MUNITION_Y, txt.str(), white_color);
+  normal_font.WriteLeft (bottom_bar_ox+MUNITION_X, bottom_bar_oy+MUNITION_Y, txt, white_color);
 #endif
 }
 

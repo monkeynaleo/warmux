@@ -432,7 +432,7 @@ void NinjaRope::StopLeft()
 void NinjaRope::Draw()
 {
   int i, x, y;
-  double angle, prev_angle ;
+  double angle, prev_angle;
 #ifndef CL
   struct CL_Quad {Sint16 x1,x2,x3,x4,y1,y2,y3,y4;};
 #endif
@@ -453,6 +453,7 @@ void NinjaRope::Draw()
     }
   else
     angle = ActiveCharacter().GetRopeAngle();
+  prev_angle = angle;
 
   // Draw the rope.
 
