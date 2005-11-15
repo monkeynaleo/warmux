@@ -538,7 +538,7 @@ void GameLoop::Run()
   // boucle until game is finished
   do
   {
-    StatStart("GameLoop:<loop>");
+    StatStart("GameLoop:loop");
 #define ENABLE_LIMIT_FPS    
 #ifdef ENABLE_LIMIT_FPS    
 #ifdef CL
@@ -575,7 +575,7 @@ void GameLoop::Run()
 #endif
 #endif
 
-    StatStop("GameLoop:<loop>");
+    StatStop("GameLoop:loop");
   } while (!jeu.fin_partie); 
 
   global_particle_engine.Stop();
