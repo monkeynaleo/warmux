@@ -218,7 +218,6 @@ void AppWormux::Fin()
   jukebox.End();
   SDL_Quit();
 
-//  StatOutput();
   SaveStatToXML("stats.xml");
   std::cout << "o "
             << _("Please tell us your opinion of Wormux via email:")

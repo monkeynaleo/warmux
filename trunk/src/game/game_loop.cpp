@@ -452,17 +452,17 @@ void GameLoop::Refresh()
 void GameLoop::Draw ()
 {
   // Draw the sky 
-  StatStart("GameLoop:Draw:sky");
+  StatStart("GameDraw:sky");
   monde.DrawSky();
-  StatStop("GameLoop:Draw:sky");
+  StatStop("GameDraw:sky");
 
   // Draw the map
-  StatStart("GameLoop:Draw:world");
+  StatStart("GameDraw:world");
   monde.Draw();
-  StatStop("GameLoop:Draw:world");
+  StatStop("GameDraw:world");
 
   // Draw the characters 
-  StatStart("GameLoop:Draw:characters");
+  StatStart("GameDraw:characters");
   POUR_TOUS_VERS(equipe,ver) {
     ver -> Draw();
 
@@ -473,9 +473,9 @@ void GameLoop::Draw ()
       }
     }
   }
-  StatStop("GameLoop:Draw:characters");
+  StatStop("GameDraw:characters");
 
-  StatStart("GameLoop:Draw:other");
+  StatStart("GameDraw:other");
   lst_objets.Draw();
   global_particle_engine.Draw();
   curseur_ver.Draw();
@@ -499,20 +499,20 @@ void GameLoop::Draw ()
   // Draw les messages de debug
   debug.Draw();
 #endif
-  StatStop("GameLoop:Draw:other");
+  StatStop("GameDraw:other");
 
   // Draw the interface (current team's information, weapon's ammo)
-  StatStart("GameLoop:Draw:interface");
+  StatStart("GameDraw:interface");
   interface.Draw ();
-  StatStop("GameLoop:Draw:interface");
+  StatStop("GameDraw:interface");
 
-  StatStart("GameLoop:Draw:end");
+  StatStart("GameDraw:end");
   // Display game clock
   temps.Draw();
 
   // Display wind bar
   wind.Draw();
-  StatStop("GameLoop:Draw:end");
+  StatStop("GameDraw:end");
 
   // Add one frame to the fps counter ;-)
   image_par_seconde.AjouteUneImage();
@@ -523,9 +523,9 @@ void GameLoop::Draw ()
 void GameLoop::CallDraw()
 {
   Draw();
-  StatStart("GameLoop:Draw:flip()");
+  StatStart("GameDraw:flip()");
   SDL_Flip( app.sdlwindow);
-  StatStop("GameLoop:Draw:flip()");
+  StatStop("GameDraw:flip()");
 }
 
 
@@ -538,7 +538,6 @@ void GameLoop::Run()
   // boucle until game is finished
   do
   {
-    StatStart("GameLoop:loop");
 #define ENABLE_LIMIT_FPS    
 #ifdef ENABLE_LIMIT_FPS    
 #ifdef CL
@@ -574,8 +573,6 @@ void GameLoop::Run()
   SDL_Delay(sleep_fps);
 #endif
 #endif
-
-    StatStop("GameLoop:loop");
   } while (!jeu.fin_partie); 
 
   global_particle_engine.Stop();

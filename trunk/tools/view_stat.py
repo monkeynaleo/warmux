@@ -1,12 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-import sys
-import types
+import sys, os, types
 import pygtk
 pygtk.require ('2.0')
-import gtk
-import gtk.glade
+import gtk, gtk.glade
 from xml.dom.minidom import parse
 
 class GUI:
@@ -151,9 +149,16 @@ def main():
     if len(sys.argv) < 2:
         usage()
     filename = sys.argv[1]
-    gui = GUI("view_stat.glade")
+
+    # Load GUI
+    xml= os.path.join(os.path.dirname(__file__), "view_stat.glade")
+    gui = GUI(xml)
+
+    # Load stats
     stats = Stats(filename)
     stats.updateGUI(gui)
+
+    # Run GUI
     gui.run()
 
 if __name__=="__main__":

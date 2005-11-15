@@ -87,51 +87,6 @@ void StatStop(const std::string &function)
   it->second.time.push_back(StatGetTimer() - it->second.last_time);
 }
 
-void DoStatOutput(const std::list<StatOutputItem> &table, StatTime_t total_time)
-{
-  const uint func_width = 30;
-  std::list<StatOutputItem>::const_iterator it=table.begin(), end=table.end();
-  std::cout << "[Stats]" << std::endl;
-  std::cout
-    << std::setw(func_width) << "Function" << " | "
-    << std::setw(5) << "" << "%"
-    << std::setw(8) << "Call"
-    << std::setw(8) << "Total"
-    << std::setw(8) << "Average"
-    << std::setw(8) << "Min"
-    << std::setw(8) << "Max"
-    << std::endl;
-
-  std::cout.setf(std::ios_base::fixed);
-  std::cout.precision(2);
-  for (; it != end; ++it)
-  {
-    std::cout
-      << std::setw(func_width) << std::setiosflags(std::ios::left) 
-      << it->function 
-      << std::setiosflags(std::ios::right) << " | "
-
-      << std::setw(5) << ((double)it->total*100/total_time) << "%"
-      << std::setw(8) << it->count
-      << std::setw(8) << it->total
-      << std::setw(8) << (it->count!=0?it->total/it->count:0)
-      << std::setw(8) << it->min
-      << std::setw(8) << it->max
-      << std::endl;
-  }
-    std::cout
-      << std::setw(func_width) << "(total)" << " | "
-      << std::setw(5) << 100 << "%"
-      << std::setw(8) << ""
-      << std::setw(8) << total_time
-      << std::setw(8) << ""
-      << std::setw(8) << ""
-      << std::setw(8) << ""
-      << std::endl;
-
-  std::cout << std::endl;
-}
-
 StatTime_t ComputeStat(std::list<StatOutputItem> &table)
 {
   std::list<StatOutputItem>::iterator table_it;
@@ -204,16 +159,7 @@ void SaveStatToXML(const std::string &filename)
   std::list<StatOutputItem> table;
   StatTime_t total_time = ComputeStat(table);
   table.sort();
-  DoStatOutput(table, total_time);
   DoSaveStatToXML(filename, table, total_time);
-}
-
-void StatOutput()
-{
-  std::list<StatOutputItem> table;
-  StatTime_t total_time = ComputeStat(table);
-  table.sort();
-  DoStatOutput(table, total_time);
 }
 
 //-----------------------------------------------------------------------------
