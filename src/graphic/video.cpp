@@ -180,12 +180,12 @@ bool Video::SetConfig(int width, int height, bool _fullscreen)
       (width != app.sdlwindow->w || height != app.sdlwindow->h)) {
     app.sdlwindow = SDL_SetVideoMode(width,
 				     height,
-				     16, //resolution in bpp
+				     32, //resolution in bpp
 				     SDL_HWSURFACE| SDL_HWACCEL |SDL_DOUBLEBUF);
     if (app.sdlwindow == NULL) 
       app.sdlwindow = SDL_SetVideoMode(width,
 				       height,
-				       16, //resolution in bpp
+				       32, //resolution in bpp
 				       SDL_SWSURFACE);
 
     if (app.sdlwindow == NULL) return false;

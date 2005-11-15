@@ -32,12 +32,10 @@
 void StatStart(const std::string &function);
 void StatStop(const std::string &function);
 void SaveStatToXML(const std::string &filename);
-void StatOutput();
 #else
 #define StatStart(A)
 #define StatStop(A)
 #define SaveStatToXML()
-#define StatOutput()
 #endif
 
 //-----------------------------------------------------------------------------
