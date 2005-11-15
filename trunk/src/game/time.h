@@ -25,8 +25,6 @@
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
-struct Font;
-
 namespace Wormux
 {
 
@@ -36,8 +34,6 @@ private:
   uint debut_pause; // Début de la pause
   uint dt_pause;    // Décalage entre get_time() et LitTemps()
   bool mode_pause;  // Le jeu est en pause ?
-  double vitesse;   // Vitesse où s'écoule le temps
-  Font *big_font;
    
 public:
   Temps();
@@ -45,10 +41,6 @@ public:
 
   // On est en pause ?
   bool EstPause() const { return mode_pause; }
-
-  // Change la vitesse
-  double LitVitesse() const { return vitesse; }
-  void ChangeVitesse (double vitesse, bool message);
 
   // Lit le temps, horloge du jeu
   // Elle diffère légèrement de CL_System::get_time() car le jeu

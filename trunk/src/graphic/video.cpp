@@ -181,7 +181,7 @@ bool Video::SetConfig(int width, int height, bool _fullscreen)
     app.sdlwindow = SDL_SetVideoMode(width,
 				     height,
 				     16, //resolution in bpp
-				     SDL_HWSURFACE|SDL_DOUBLEBUF);
+				     SDL_HWSURFACE| SDL_HWACCEL |SDL_DOUBLEBUF);
     if (app.sdlwindow == NULL) 
       app.sdlwindow = SDL_SetVideoMode(width,
 				       height,
@@ -196,7 +196,6 @@ bool Video::SetConfig(int width, int height, bool _fullscreen)
     SDL_WM_ToggleFullScreen(app.sdlwindow);
     fullscreen = _fullscreen;
   }
-
   return true;
 }
 

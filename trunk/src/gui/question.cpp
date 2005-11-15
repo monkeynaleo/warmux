@@ -29,8 +29,9 @@
 #else
 #include <SDL.h>
 #endif
-#include "../graphic/graphism.h"
+#include "../graphic/font.h"
 #include "../graphic/video.h"
+#include "../include/app.h" // SDL_Flip
 using namespace Wormux;
 
 //-----------------------------------------------------------------------------
@@ -80,6 +81,29 @@ void Question::TraiteTouche (const CL_InputEvent &event)
     return;
   }
 }
+#else
+void Question::TraiteTouche (SDL_Event &event)
+{
+  // Teste les différents choix
+  choix_iterator it=choix.begin(), fin=choix.end();
+  for (; it != fin; ++it)
+  {
+    if (event.key.keysym.sym == it -> m_touche)
+    {
+      reponse = it -> m_val;
+      m_fin_boucle = true;
+      return;
+    }
+  }
+
+  // Sinon, on utilise le choix par défaut ?
+  if (choix_defaut.actif) 
+  {
+    reponse = choix_defaut.valeur;
+    m_fin_boucle = true;
+    return;
+  }
+}
 #endif
 
 //-----------------------------------------------------------------------------
@@ -93,14 +117,32 @@ void Question::Draw()
   CL_Display::update(CL_Rect(0,0,CL_Display::get_width(), CL_Display::get_height()));
 }
 #else
+
+// Ecrit un texte et l'encadre
+void TexteEncadre (Font &police, int txt_x, int txt_y, 
+		   const std::string &txt, uint espace=10)
+{
+  int x,y,larg,haut;
+  larg = police.GetWidth(txt)+espace*2;
+  x = txt_x - larg / 2;
+  haut = police.GetHeight(txt)+espace*2;
+  y = txt_y - haut / 2;
+  txt_y -= police.GetHeight(txt)/2;
+// TODO  
+//  CL_Display::fill_rect (CL_Rect(x, y, x+larg, y+haut), CL_Color(0, 0, 0, 255*7/10));
+//  CL_Display::draw_rect (CL_Rect(x, y, x+larg, y+haut), CL_Color::red);
+
+  police.WriteCenterTop (txt_x, txt_y, txt, white_color);
+}
+
+
+
 void Question::Draw()
 {
- /* TexteEncadre (police_grand, 
+  TexteEncadre (big_font, 
 		video.GetWidth()/2, video.GetHeight()/2,
 		message);
-  CL_Display::update(CL_Rect(0,0,CL_Display::get_width(), CL_Display::get_height()));*/
-   
-   //TODO
+  SDL_Flip( app.sdlwindow);
 }
 
 #endif
@@ -135,10 +177,28 @@ int Question::PoseQuestion ()
 
 int Question::PoseQuestion ()
 {
+  SDL_Event event;
+  
+  m_fin_boucle = false;
+  do
+  {
+    Draw();
 
-  Draw();
-
-   return reponse;
+    while( SDL_PollEvent( &event) ) 
+    {      
+      if ( event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN )
+      {  
+        reponse = choix_defaut.valeur;
+        m_fin_boucle = true;
+      }
+      if (event.type == SDL_KEYUP)
+      {
+        TraiteTouche(event); 
+      }
+    }
+  } while (!m_fin_boucle);
+  
+  return reponse;
 }
 
 

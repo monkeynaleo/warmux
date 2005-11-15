@@ -42,6 +42,7 @@
 #include <string>
 #include <iostream>
 #include "include/action_handler.h"
+#include "tool/stats.h"
 #include "game/game.h"
 #include "game/config.h"
 #include "menu/options_menu.h"
@@ -217,10 +218,11 @@ void AppWormux::Fin()
   jukebox.End();
   SDL_Quit();
 
+  StatOutput();
   std::cout << "o "
-	    << _("Please tell us your opinion of Wormux via email:")
-	    << std::endl
-	    << "  " << EMAIL << std::endl;
+            << _("Please tell us your opinion of Wormux via email:")
+            << std::endl
+            << "  " << EMAIL << std::endl;
 }
 
 //-----------------------------------------------------------------------------

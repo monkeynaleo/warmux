@@ -57,7 +57,7 @@ CL_ResourceManager *Graphisme::LitRes()
 //-----------------------------------------------------------------------------
 
 // Ecrit un texte et l'encadre
-void TexteEncadre (Police &police, int txt_x, int txt_y, 
+void TexteEncadre (Font &police, int txt_x, int txt_y, 
 		   const std::string &txt, uint espace)
 {
   int x,y,larg,haut;

@@ -47,6 +47,7 @@
 #include "game_mode.h"
 #include "config.h"
 #include "../interface/keyboard.h"
+#include "../tool/stats.h"
 
 #ifdef CL
 #include "../network/network.h"
@@ -366,8 +367,9 @@ void GameLoop::Refresh()
 	if ( event.type == SDL_QUIT) 
 	  {  
 	     std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
-	     SDL_Quit();
-	     exit(0);
+             jeu.fin_partie = true;
+                  std::cout << "FIN PARTIE" << std::endl;
+             return;
 	  }
 	if ( event.type == SDL_MOUSEBUTTONDOWN )
 	  {
@@ -376,18 +378,12 @@ void GameLoop::Refresh()
 	if ( event.type == SDL_KEYDOWN 
 	||   event.type == SDL_KEYUP)
 	  {	       
-	     switch ( event.key.keysym.sym)
-	       { 
-		case SDLK_ESCAPE:SDL_Quit();exit(0);break;
-		case SDLK_F1: break;
-		case SDLK_p: break;
-		case SDLK_UP: break;
-		case SDLK_DOWN: break;
-		case SDLK_LEFT: break;
-		case SDLK_RIGHT: break;
-		case SDLK_SPACE: break;
-		default:break;
-	       }
+             if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
+             {
+                  jeu.fin_partie = true;
+                  std::cout << "FIN PARTIE" << std::endl;
+                  return;
+             }
 	     
 	     clavier.HandleKeyEvent( &event);
 	  }
@@ -455,26 +451,18 @@ void GameLoop::Refresh()
 
 void GameLoop::Draw ()
 {
-  std::ostringstream txt;
-
-#ifdef CL
-  CL_Display::push_cliprect( CL_Rect(FOND_X, FOND_Y, 
-  					  FOND_X+camera.GetWidth(), 
-					  FOND_Y+camera.GetHeight()));
-#endif
-   
   // Draw the sky 
+  StatStart("GameLoop:Draw:sky");
   monde.DrawSky();
+  StatStop("GameLoop:Draw:sky");
 
-#ifdef CL
-  CL_Display::push_translate((int)FOND_X-camera.GetX(), 
-			     (int)FOND_Y-camera.GetY()); // needed for differential scrolling
-#endif
-   
   // Draw the map
+  StatStart("GameLoop:Draw:world");
   monde.Draw();
+  StatStop("GameLoop:Draw:world");
 
   // Draw the characters 
+  StatStart("GameLoop:Draw:characters");
   POUR_TOUS_VERS(equipe,ver) {
     ver -> Draw();
 
@@ -485,7 +473,9 @@ void GameLoop::Draw ()
       }
     }
   }
+  StatStop("GameLoop:Draw:characters");
 
+  StatStart("GameLoop:Draw:other");
   lst_objets.Draw();
   global_particle_engine.Draw();
   curseur_ver.Draw();
@@ -496,11 +486,6 @@ void GameLoop::Draw ()
   // Draw teams' information
   POUR_CHAQUE_EQUIPE(team) (**team).Draw();
 
-#ifdef CL
-  // Supprime le decalage
-  CL_Display::pop_modelview();
-#endif
-   
   // Display game messages
   game_messages.Draw();
 
@@ -510,26 +495,24 @@ void GameLoop::Draw ()
   // Display number of frames by second
   image_par_seconde.Draw();
 
-#ifdef CL
-  // Remove clipping
-  CL_Display::pop_cliprect();
-#endif
-   
-#ifdef CL
 #ifdef DEBUG
   // Draw les messages de debug
   debug.Draw();
 #endif
-#endif
+  StatStop("GameLoop:Draw:other");
 
   // Draw the interface (current team's information, weapon's ammo)
+  StatStart("GameLoop:Draw:interface");
   interface.Draw ();
+  StatStop("GameLoop:Draw:interface");
 
+  StatStart("GameLoop:Draw:end");
   // Display game clock
   temps.Draw();
 
   // Display wind bar
   wind.Draw();
+  StatStop("GameLoop:Draw:end");
 
   // Add one frame to the fps counter ;-)
   image_par_seconde.AjouteUneImage();
@@ -540,11 +523,9 @@ void GameLoop::Draw ()
 void GameLoop::CallDraw()
 {
   Draw();
-#ifdef CL
-   CL_Display::flip (false);
-#else
-   SDL_Flip( app.sdlwindow);
-#endif
+  StatStart("GameLoop:Draw:flip()");
+  SDL_Flip( app.sdlwindow);
+  StatStop("GameLoop:Draw:flip()");
 }
 
 
@@ -557,6 +538,7 @@ void GameLoop::Run()
   // boucle until game is finished
   do
   {
+    StatStart("GameLoop:<loop>");
 #define ENABLE_LIMIT_FPS    
 #ifdef ENABLE_LIMIT_FPS    
 #ifdef CL
@@ -569,8 +551,12 @@ void GameLoop::Run()
     jeu.fin_partie = false;
 
     // one loop
+    StatStart("GameLoop:Refresh()");
     Refresh();
+    StatStop("GameLoop:Refresh()");
+    StatStart("GameLoop:Draw()");
     CallDraw ();
+    StatStop("GameLoop:Draw()");
 
     // try to adjust to max Frame by seconds
 #ifdef ENABLE_LIMIT_FPS    
@@ -589,6 +575,7 @@ void GameLoop::Run()
 #endif
 #endif
 
+    StatStop("GameLoop:<loop>");
   } while (!jeu.fin_partie); 
 
   global_particle_engine.Stop();

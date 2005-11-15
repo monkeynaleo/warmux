@@ -61,6 +61,9 @@ public:
   void Init();
 };
 
+void TexteEncadre (Font &police, int txt_x, int txt_y, 
+		   const std::string &txt, uint espace=10);
+
 extern Graphisme graphisme;
 //-----------------------------------------------------------------------------
 }

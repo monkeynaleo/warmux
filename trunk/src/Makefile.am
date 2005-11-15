@@ -27,6 +27,7 @@ wormux_SOURCES = \
 	tool/error.cpp tool/error.h \
 	tool/file_tools.cpp tool/file_tools.h \
 	tool/math_tools.cpp tool/math_tools.h \
+	tool/stats.cpp tool/stats.h \
 	tool/random.cpp tool/random.h \
 	tool/sprite.cpp tool/sprite.h \
 	tool/Distance.cpp tool/Distance.h \
