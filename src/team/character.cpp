@@ -349,20 +349,11 @@ void Character::Draw()
 
   // Draw skin
   if(!is_walking) //walking skins image update only when a keyboard key is pressed
-#ifdef CL
-    image.update();
-#else
    image->Update();
-#endif
    
   int x = GetX();
   int y = GetY();
-#ifdef CL
-  if (GetDirection()<0) x += GetWidth();
-  image.draw (x,y);
-#else
   image->Draw(x,y);
-#endif
    
 #ifdef DRAW_HAND_POSITION
   int a,b,c=3;
@@ -373,11 +364,7 @@ void Character::Draw()
 
   // Draw animation
   if (anim.draw && current_skin=="walking")
-#ifdef CL
-   anim.image.draw (x,y);
-#else
    anim.image->Draw(x,y);
-#endif
 
    // Draw energy bar
   int dy = -ESPACE;
@@ -886,7 +873,7 @@ void Character::FrameImageSuivante()
     m_image_frame = 0;
   image.set_frame (m_image_frame/m_frame_repetition);
 #else
-  if (image->GetFrameCount()-1 < (int)(m_image_frame/m_frame_repetition)) 
+  if (image->GetFrameCount()-1 < (m_image_frame/m_frame_repetition)) 
     m_image_frame = 0;
   image->SetCurrentFrame (m_image_frame/m_frame_repetition); 
 #endif
@@ -1011,12 +998,12 @@ void Character::Reset()
     SetXY (x, y);
 
 #ifndef NO_POSITION_CHECK
-    pos_ok &= !IsGhost() && IsInVacuum(0,0) && (GetY() < static_cast<int>(monde.GetHeight()) - (WATER_INITIAL_HEIGHT + 30));
+    pos_ok &= !IsGhost() && IsInVacuum(0,0) && (GetY() < static_cast<int>(monde.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
     if (!pos_ok) continue;
 
     // Chute directe pour le sol
     DirectFall ();
-    pos_ok &= !IsGhost() && (GetY() < static_cast<int>(monde.GetHeight()) - (WATER_INITIAL_HEIGHT + 30));
+    pos_ok &= !IsGhost() && (GetY() < static_cast<int>(monde.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
 #ifdef DEBUG_PLACEMENT
     if (!pos_ok) COUT_PLACEMENT << "Fantome en tombant." << endl;
 #endif

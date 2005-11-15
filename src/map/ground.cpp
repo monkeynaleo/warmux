@@ -24,6 +24,7 @@
 #include <iostream>
 #include "map.h"
 #include "maps_list.h"
+#include "../map/camera.h"
 
 #include "../include/constant.h"
 #include "../graphic/graphism.h"
@@ -280,6 +281,15 @@ bool Terrain::PointContigu(int x,int y,  int & p_x,int & p_y,
 
 void Terrain::Draw()
 {
+#if 0
+  int cx = camera.GetX();
+  int cy = camera.GetY();
+  static int lastx = camera.GetX()-1;
+  static int lasty = camera.GetY()-1;  
+  if (lastx == cx && lasty == cy) return;
+  lastx = cx;
+  lasty = cy;
+#endif  
   DrawTile();
 }
 

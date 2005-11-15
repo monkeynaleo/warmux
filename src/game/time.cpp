@@ -49,7 +49,7 @@ Temps temps;
 //-----------------------------------------------------------------------------
 
 Temps::Temps()
-  : dt_pause(0), mode_pause(false), vitesse(1.0), big_font(NULL)
+  : dt_pause(0), mode_pause(false)
 {
 //   Reset();
 }
@@ -64,34 +64,13 @@ void Temps::Reset()
   dt_pause = SDL_GetTicks();
 #endif
   mode_pause = false;
-  ChangeVitesse (1.0, false);
-}
-
-//-----------------------------------------------------------------------------
-
-void Temps::ChangeVitesse (double pvitesse, bool message=false)
-{ 
-  vitesse = BorneDouble (pvitesse, VITESSE_MIN, VITESSE_MAX); 
-  if (message)
-  {
-    std::ostringstream ss;
-    ss << "Vitesse du temps : " << std::setprecision(3) << vitesse*100 << " %";
-    game_messages.Add (ss.str());
-  }
 }
 
 //-----------------------------------------------------------------------------
 
 uint Temps::Lit() const
-{ 
-#ifdef CL
-  double t = CL_System::get_time() - dt_pause;
-#else
-  double t = SDL_GetTicks() - dt_pause;
-#endif
-  t *= vitesse;
-  FORCE_ASSERT (t < UINT_MAX);
-  return (uint)t;
+{   
+  return SDL_GetTicks() - dt_pause;
 }
 
 //-----------------------------------------------------------------------------
@@ -149,11 +128,7 @@ void Temps::Draw()
   //if (!affiche) return;
   std::ostringstream ss;
   ss << Horloge_Min() << ":" << std::setfill('0') << std::setw(2) << Horloge_Sec();
-#ifdef CL
-   police_grand.WriteCenterTop (video.GetWidth()/2, 10, ss.str());
-#else   
-   normal_font.WriteCenterTop( video.GetWidth()/2, 10, ss.str(), white_color); 
-#endif
+  normal_font.WriteCenterTop( video.GetWidth()/2, 10, ss.str(), white_color); 
 }
 
 //-----------------------------------------------------------------------------

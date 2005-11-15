@@ -28,6 +28,8 @@
 #include <list>
 #ifdef CL
 # include <ClanLib/display.h>
+#else
+# include <SDL_events.h>
 #endif
 
 //-----------------------------------------------------------------------------
@@ -62,20 +64,11 @@ public:
   int reponse;
 
 private:
-#ifdef CL
-  CL_Slot m_keyboard_slot;
-  CL_Slot m_mouse_slot;
-#else
-#endif
+  void TraiteTouche (SDL_Event &event);
   bool m_fin_boucle;
 
 private:
-#ifdef CL
-  void TraiteClic (const CL_InputEvent &event);
-  void TraiteTouche (const CL_InputEvent &event);
-#else
   void Draw();
-#endif
 
  public:
   Question();

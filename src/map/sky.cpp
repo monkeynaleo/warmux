@@ -72,34 +72,17 @@ void Ciel::Reset()
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-void Ciel::Draw()
-{
-  int x=camera.GetX();
-
-  if (0 <= x)
-    x = (int)(x*-VITESSE_CIEL_X);
-  else
-    x = 0;
-  int y=camera.GetY();
-  if (0 <= y)
-    y = (int)(y*-VITESSE_CIEL_Y);
-  else
-    y = 0;
-
-  do
-  {
-    CL_Display::push_translate(x, y);
-    DrawTile();
-    CL_Display::pop_modelview();
-    x += GetWidth();
-  } while (x <= (int)monde.GetWidth());
-}
-#else
 void Ciel::Draw()
 {
    int x = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
    int y = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
+#if 0
+  static int lastx = 0;
+  static int lasty = 0;
+  if (lastx == x && lasty == y) return;
+  lastx = x;
+  lasty = y;
+#endif
 
    if(!TerrainActif().infinite_bg)
    {
@@ -153,9 +136,6 @@ void Ciel::Draw()
 
    }
 }
-   
-#endif
-   
-   
+
 //-----------------------------------------------------------------------------
 } // namespace Wormux

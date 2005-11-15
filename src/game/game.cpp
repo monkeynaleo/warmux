@@ -27,6 +27,7 @@
 #include "../team/macro.h"
 #include "../graphic/video.h"
 #include "../interface/keyboard.h"
+#include <SDL.h>
 
 #ifdef CL
 #include "../interface/mouse.h"
@@ -211,6 +212,7 @@ void Jeu::LanceJeu()
       jeu_lance = true;
       image_par_seconde.Reset();
       game_loop.Run();
+      std::cout << "Quitte run" << std::endl;
       jeu_lance = false;
       
       if (!EstFinPartie()) 
@@ -232,7 +234,7 @@ void Jeu::LanceJeu()
 #ifdef CL
 	   question.choix.push_back ( Question::choix_t(CL_KEY_A + (int)key_x - 'a', 1) );
 #else
-	   //TODO
+	   question.choix.push_back ( Question::choix_t(SDLK_a + (int)key_x - 'a', 1) );
 #endif
 	}
 	
