@@ -218,7 +218,8 @@ void AppWormux::Fin()
   jukebox.End();
   SDL_Quit();
 
-  StatOutput();
+//  StatOutput();
+  SaveStatToXML("stats.xml");
   std::cout << "o "
             << _("Please tell us your opinion of Wormux via email:")
             << std::endl
@@ -245,7 +246,9 @@ int AppWormux::main (int argc, char **argv)
       return 0;
     }
     do {
+    StatStart("Main:Menu");
       menu_item choix = ShowMainMenu();
+    StatStop("Main:Menu");
       
       switch (choix)
         {

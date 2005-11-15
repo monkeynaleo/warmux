@@ -29,6 +29,7 @@
 #include <algorithm>
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 //-----------------------------------------------------------------------------
 
 typedef uint StatTime_t;
@@ -86,7 +87,7 @@ void StatStop(const std::string &function)
   it->second.time.push_back(StatGetTimer() - it->second.last_time);
 }
 
-void StatOutput(const std::list<StatOutputItem> &table, StatTime_t total_time)
+void DoStatOutput(const std::list<StatOutputItem> &table, StatTime_t total_time)
 {
   const uint func_width = 30;
   std::list<StatOutputItem>::const_iterator it=table.begin(), end=table.end();
@@ -113,7 +114,7 @@ void StatOutput(const std::list<StatOutputItem> &table, StatTime_t total_time)
       << std::setw(5) << ((double)it->total*100/total_time) << "%"
       << std::setw(8) << it->count
       << std::setw(8) << it->total
-      << std::setw(8) << it->total/it->count
+      << std::setw(8) << (it->count!=0?it->total/it->count:0)
       << std::setw(8) << it->min
       << std::setw(8) << it->max
       << std::endl;
@@ -131,12 +132,12 @@ void StatOutput(const std::list<StatOutputItem> &table, StatTime_t total_time)
   std::cout << std::endl;
 }
 
-void StatOutput()
+StatTime_t ComputeStat(std::list<StatOutputItem> &table)
 {
-  std::list<StatOutputItem> table;
   std::list<StatOutputItem>::iterator table_it;
   stats_it it = stats.begin(), end=stats.end();
   StatTime_t total_time = 0;
+  table.clear();
   for (; it != end; ++it)
   {
     StatOutputItem item(it->first);
@@ -156,8 +157,63 @@ void StatOutput()
     table.push_back(item);
     total_time += item.total;
   }
+  if (total_time == 0) total_time = 1;
+  return total_time;
+}
+
+std::string str2xml(const std::string &str)
+{
+// TODO
+//    str.replace("&", "&amp;");
+//    str.replace("<", "&lt;");
+//    str.replace(">", "&gt;");
+    return str;
+}
+
+void DoSaveStatToXML(const std::string &filename,
+    std::list<StatOutputItem> &table,
+    StatTime_t total_time)
+{
+  std::basic_ofstream<char> file(filename.c_str(), std::ios_base::out);
+  if (!file)
+  {
+    std::cerr << "Can not create/open file \"" << filename << "\" to store statistics." << std::endl;
+  }
+
+  std::list<StatOutputItem>::const_iterator it=table.begin(), end=table.end();
+  file << "<?xml version=\"1.0\" encoding=\"iso-8859-1\" ?>\n";
+  file << "<stats total_time=\"" << total_time << "\">\n";
+  file.setf(std::ios_base::fixed);
+  file.precision(2);
+  for (; it != end; ++it)
+  {
+    file 
+      << "  <item function=\"" << it->function
+      << "\" count=\"" << it->count
+      << "\" total=\"" << it->total
+      << "\" min=\"" << it->min
+      << "\" max=\"" << it->max
+      << "\" />\n";
+  }
+  file << "</stats>\n";
+  file.close();
+}
+
+void SaveStatToXML(const std::string &filename)
+{
+  std::list<StatOutputItem> table;
+  StatTime_t total_time = ComputeStat(table);
   table.sort();
-  StatOutput(table, total_time);
+  DoStatOutput(table, total_time);
+  DoSaveStatToXML(filename, table, total_time);
+}
+
+void StatOutput()
+{
+  std::list<StatOutputItem> table;
+  StatTime_t total_time = ComputeStat(table);
+  table.sort();
+  DoStatOutput(table, total_time);
 }
 
 //-----------------------------------------------------------------------------
