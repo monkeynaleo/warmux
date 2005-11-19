@@ -82,6 +82,8 @@ Sprite::Sprite()
    show_on_finish = show_last_frame;
    loop = false;
    finished = false;
+   translation_x = 0;
+   translation_y = 0;
 }
 
 Sprite::Sprite( const Sprite& other)
@@ -100,6 +102,9 @@ Sprite::Sprite( const Sprite& other)
    show_on_finish = other.show_on_finish;
    loop = other.loop;
    finished = other.finished;
+   translation_x = other.translation_x;
+   translation_y = other.translation_y;
+
    
    for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
      {
@@ -139,6 +144,8 @@ Sprite::Sprite( SDL_Surface *surface)
    show_on_finish = show_last_frame;
    loop = false;
    finished = false;
+   translation_x = 0;
+   translation_y = 0;
 }
 
 Sprite::~Sprite()
@@ -191,6 +198,9 @@ void Sprite::SetCurrentFrame( unsigned int frame_no)
 {
   assert (frame_no < frames.size());
   current_frame = frame_no;
+  finished = false;
+  show = true;
+  last_update = Wormux::temps.Lit();
 }
 
 unsigned int Sprite::GetCurrentFrame() const
@@ -396,50 +406,14 @@ void Sprite::SetPlayBackward(bool enable)
   backward = enable;
   if (backward)
     frame_delta = -1;
-  else
+  else 
     frame_delta = 1;
 }
 
 void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 {
   if (!show) return;
-/*
- SDL_Rect dr = { pos_x, pos_y, frame_width_pix, frame_height_pix};
 
- SDL_Surface *current;
- 
- // do we need to scale ?
- bool scale = false;
- if ( fabs(scale_x)!=1 || fabs(scale_y)!=1 ) {
-   scale = true;
-   current = zoomSurface (frames[current_frame].surface, fabs(scale_x), fabs(scale_y), 1);
- } else {
-   current = frames[current_frame].surface; 
- }
-
- // do we need to mirror ?
- int flip_h=0, flip_v=0;
- if (scale_x < 0) flip_h = 1;
- if (scale_y < 0) flip_v = 1;
-
- if (flip_h || flip_v) {
-   SDL_Surface *tmp = newFlippedSurface(current,flip_h,flip_v);
-
-//   SDL_Rect sr = { (nb_frames-current_frame-1)*frame_width_pix*fabs(scale_x), 0, 
-//		   frame_width_pix, frame_height_pix}; // this is buggy, do not work in case of flip_v
-   
-   SDL_BlitSurface (tmp, NULL, dest, &dr);
-   SDL_FreeSurface(tmp);
-
- } else {
-//   SDL_Rect sr = { current_frame*frame_width_pix*fabs(scale_x), 0, frame_width_pix, frame_height_pix};
-   SDL_BlitSurface (current, NULL, dest, &dr);
- }
-
- if (scale)
-   SDL_FreeSurface(current);
-
-*/
 #ifndef __MINGW32__
    SDL_Surface *tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
 
@@ -449,17 +423,25 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    if(rotation_deg!=0.0)
      Calculate_Rotation_Offset(rot_x, rot_y, tmp_surface);
 
-   SDL_Rect dr = {pos_x + rot_x, pos_y + rot_y, frame_width_pix, frame_height_pix};
+   int x = pos_x + rot_x + int((float)translation_x * scale_x);
+   int y = pos_y + rot_y + int((float)translation_y * -scale_y);
+
+//   if(scale_x < 0) //Clanlib backward compatibility: do as if hotspot 
+//is set to top_left
+//     x -= scale_x * GetWidth();
+//   if(scale_y < 0) //Clanlib backward compatibility: do as if hotspot is set to top_left
+//     y -= scale_y * GetHeight();
+
+   SDL_Rect dr = {x, y, frame_width_pix, frame_height_pix};
 
    SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
 
    SDL_FreeSurface (tmp_surface);
 #else
+   //SDL_gfx not working...
    SDL_Rect dr = {pos_x , pos_y , frame_width_pix, frame_height_pix};
    SDL_BlitSurface (frames[current_frame].surface, NULL, dest, &dr);
 #endif
-
-
 }
 
 void Sprite::Finish()
@@ -477,7 +459,7 @@ void Sprite::Finish()
     current_frame = frames.size()-1;
     break;      
   }
-  frame_delta = 0;
+//  frame_delta = 0;
 }
 
 void Sprite::Update()

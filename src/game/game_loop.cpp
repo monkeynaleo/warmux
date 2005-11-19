@@ -497,7 +497,7 @@ void GameLoop::Draw ()
 
 #ifdef DEBUG
   // Draw les messages de debug
-  debug.Draw();
+//  debug.Draw();
 #endif
   StatStop("GameDraw:other");
 

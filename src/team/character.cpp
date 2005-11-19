@@ -85,8 +85,8 @@ const uint ESPACE = 3; // pixels
 
 // Pause for the animation
 #ifdef ANIME_VITE
-  const uint ANIM_PAUSE_MIN = 0*1000;
-  const uint ANIM_PAUSE_MAX = 3*1000;
+  const uint ANIM_PAUSE_MIN = 100;
+  const uint ANIM_PAUSE_MAX = 150;
 #else
   const uint ANIM_PAUSE_MIN = 5*1000;
   const uint ANIM_PAUSE_MAX = 60*1000;
@@ -452,6 +452,9 @@ void Character::SuperSaut ()
   jukebox.Play (ActiveTeam().GetSoundProfile(), "superjump");
 #endif
    
+  if(current_skin=="walking")
+    SetSkin("jump");
+
   // Initialise la force
   double angle = Deg2Rad(game_mode.character.super_jump_angle);
   if (GetDirection() == -1) angle = InverseAngle(angle);
