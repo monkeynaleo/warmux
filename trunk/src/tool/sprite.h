@@ -89,13 +89,15 @@ typedef enum {
    void Draw(int pos_x, int pos_y);
    void Update();
    bool IsFinished() const;
+   void SetTranslation(int x, int y) {translation_x = x; translation_y = y;};
 
  private:
-   uint last_update;
+   unsigned int last_update;
    bool finished;
    bool show;
    bool loop;
    SpriteShowOnFinish show_on_finish;
+   int translation_x,translation_y;
    int frame_width_pix;
    int frame_height_pix;
    float scale_x;

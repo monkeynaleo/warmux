@@ -302,6 +302,25 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	SDL_FreeSurface( surface);
      }
 
+   xmlpp::Element *translate = profile->doc->AccesBalise ( elem_sprite, "translation");
+
+   if ( translate != NULL )
+   {
+	std::string x,y;
+        int tx=0,ty=0;
+
+	if ( profile->doc->LitAttrString( translate, "x", x) )
+	     tx = atoi( x.c_str());
+
+	if ( profile->doc->LitAttrString( translate, "y", y) )
+	     ty = atoi( y.c_str());
+
+        assert(sprite!=NULL);
+        sprite->SetTranslation(tx ,ty);
+   }
+   else
+        sprite->SetTranslation(0,0);
+
    return sprite;
 }
 
