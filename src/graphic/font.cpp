@@ -61,6 +61,15 @@ Font::~Font()
     TTF_CloseFont(m_font);
     m_font = NULL;
   }
+
+  
+  txt_iterator it;
+  for (it = surface_text_table.begin(); 
+       it != surface_text_table.end(); 
+       ++it){
+    SDL_FreeSurface(it->second);
+    surface_text_table.erase(it->first);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -86,7 +95,7 @@ void Font::WriteLeft (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface,NULL,app.sdlwindow, &dst_rect);
-  SDL_FreeSurface(text_surface);
+  //SDL_FreeSurface(text_surface);
 }
 
 // //-----------------------------------------------------------------------------
@@ -103,7 +112,7 @@ void Font::WriteLeftBottom (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface,NULL,app.sdlwindow, &dst_rect);
-  SDL_FreeSurface(text_surface);
+  //SDL_FreeSurface(text_surface);
 }
 
 // //-----------------------------------------------------------------------------
@@ -120,7 +129,7 @@ void Font::WriteRight (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
-  SDL_FreeSurface(text_surface);
+  //SDL_FreeSurface(text_surface);
 }
 
 // //-----------------------------------------------------------------------------
@@ -137,7 +146,7 @@ void Font::WriteCenter (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
-  SDL_FreeSurface(text_surface);
+  //SDL_FreeSurface(text_surface);
 }
 
 // //-----------------------------------------------------------------------------
@@ -154,17 +163,33 @@ void Font::WriteCenterTop (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
-  SDL_FreeSurface(text_surface);
+  //SDL_FreeSurface(text_surface);
 }
 
 //-----------------------------------------------------------------------------
 
 SDL_Surface * Font::Render(const std::string &txt, SDL_Color color)
 {
-  //assert (m_font != NULL);
-  SDL_Surface * surface = TTF_RenderUTF8_Blended(m_font, txt.c_str(), 
-						 color); //, black_color);
-  //assert (surface != NULL);
+  SDL_Surface * surface = NULL;
+  
+  txt_iterator p = surface_text_table.find(txt);
+  if (p == surface_text_table.end() ) {
+
+    if (surface_size > 5) {
+      SDL_FreeSurface(surface_text_table.begin()->second);
+      surface_text_table.erase(surface_text_table.begin());
+      surface_size--;
+    }
+    surface = TTF_RenderUTF8_Blended(m_font, txt.c_str(), 
+				     color); //, black_color);
+
+    surface_text_table.insert(txt_sample(txt, surface));
+    surface_size++;
+  } else {
+    txt_iterator p = surface_text_table.find(txt);
+    surface = p->second;
+  }
+  assert (surface != NULL);
   return surface;
 }
 

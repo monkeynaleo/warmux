@@ -22,12 +22,22 @@
 //-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <SDL_ttf.h>
+#include <map>
 
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
 class Font
 {
+ private:
+  typedef std::map<std::string, SDL_Surface *>::value_type 
+    txt_sample;
+  typedef std::map<std::string, SDL_Surface *>::iterator 
+    txt_iterator;
+
+  std::map<std::string, SDL_Surface *> surface_text_table;
+  int surface_size;
+
 public:
   TTF_Font *m_font;
 
