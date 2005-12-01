@@ -86,13 +86,9 @@ Main_Menu::Main_Menu()
   int x_button, button_width, button_height ;
   double y_scale ;
 
-#ifdef CL
-  background = CL_Surface("intro/fond", graphisme.LitRes());
-#else
 //  app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
  background=new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
  background->Blit( app.sdlwindow, 0, 0);
-#endif
 
   x_button = (int)((double)474 / DEFAULT_SCREEN_WIDTH * app.sdlwindow->w) ;
   y_scale = (double)1 / DEFAULT_SCREEN_HEIGHT * app.sdlwindow->h ;
@@ -103,33 +99,33 @@ Main_Menu::Main_Menu()
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
 
   play = new ButtonText(x_button,(uint)(192 * y_scale),//Position
-		    button_width,button_height, //Size
-		    _("Play"));
-  play->SetFont(&large_font);
+			button_width,button_height, //Size
+			_("Play"),
+			&large_font);
   play->SetImage (res, "intro/jouer");//->SetImage (res, "intro/play");
 
   network = new ButtonText(x_button,(int)(261 * y_scale), //Position
-		       button_width,button_height, //Size
-		       _("Network Game"));
-  network->SetFont(&large_font);
+			   button_width,button_height, //Size
+			   _("Network Game"),
+			   &large_font );
   network->SetImage (res,"intro/jouer");
 
   options = new ButtonText(x_button,(int)(329 * y_scale), //Position
-		       button_width,button_height, //Size
-		       _("Options"));
-  options->SetFont(&large_font);
+			   button_width,button_height, //Size
+			   _("Options"),
+			   &large_font);
   options->SetImage (res,"intro/options");
 
   infos =  new ButtonText(x_button,(int)(397 * y_scale), //Position
-		      button_width,button_height, //Size
-		      _("Info"));
-  infos->SetFont(&large_font);
+			  button_width,button_height, //Size
+			  _("Info"),
+			  &large_font);
   infos->SetImage (res,"intro/infos");
 
   quit =  new ButtonText(x_button,(int)(465 * y_scale), //Position
-		     button_width,button_height, //Size
-		     _("Quit"));
-  quit->SetFont(&large_font);
+			 button_width,button_height, //Size
+			 _("Quit"),
+			 &large_font);
   quit->SetImage (res,"intro/quitter");
 
   resource_manager.UnLoadXMLProfile( res);
