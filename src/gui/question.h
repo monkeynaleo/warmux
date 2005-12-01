@@ -26,11 +26,8 @@
 #include "../include/base.h"
 #include <string>
 #include <list>
-#ifdef CL
-# include <ClanLib/display.h>
-#else
-# include <SDL_events.h>
-#endif
+#include <SDL_events.h>
+
 
 //-----------------------------------------------------------------------------
 
