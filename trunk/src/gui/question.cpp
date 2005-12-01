@@ -22,13 +22,8 @@
 
 #include "question.h"
 //-----------------------------------------------------------------------------
-#ifdef CL
-#include <ClanLib/core.h>
-#include <ClanLib/display.h>
-#include <ClanLib/Core/System/error.h>
-#else
 #include <SDL.h>
-#endif
+#include <SDL_gfxPrimitives.h>
 #include "../graphic/font.h"
 #include "../graphic/video.h"
 #include "../include/app.h" // SDL_Flip
@@ -41,47 +36,6 @@ Question::Question()
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-void Question::TraiteClic (const CL_InputEvent &event)
-{
-  // Sinon, on utilise le choix par défaut ?
-  if (choix_defaut.actif) 
-  {
-    reponse = choix_defaut.valeur;
-    m_fin_boucle = true;
-    return;
-  }
-}
-#else
-// TODO oder paragui ?
-#endif
-//-----------------------------------------------------------------------------
-
-// Traite une touche du clavier
-#ifdef CL
-void Question::TraiteTouche (const CL_InputEvent &event)
-{
-  // Teste les différents choix
-  choix_iterator it=choix.begin(), fin=choix.end();
-  for (; it != fin; ++it)
-  {
-    if (event.id == it -> m_touche)
-    {
-      reponse = it -> m_val;
-      m_fin_boucle = true;
-      return;
-    }
-  }
-
-  // Sinon, on utilise le choix par défaut ?
-  if (choix_defaut.actif) 
-  {
-    reponse = choix_defaut.valeur;
-    m_fin_boucle = true;
-    return;
-  }
-}
-#else
 void Question::TraiteTouche (SDL_Event &event)
 {
   // Teste les différents choix
@@ -104,19 +58,9 @@ void Question::TraiteTouche (SDL_Event &event)
     return;
   }
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-void Question::Draw()
-{
-  TexteEncadre (police_grand, 
-		video.GetWidth()/2, video.GetHeight()/2,
-		message);
-  CL_Display::update(CL_Rect(0,0,CL_Display::get_width(), CL_Display::get_height()));
-}
-#else
 
 // Ecrit un texte et l'encadre
 void TexteEncadre (Font &police, int txt_x, int txt_y, 
@@ -128,6 +72,13 @@ void TexteEncadre (Font &police, int txt_x, int txt_y,
   haut = police.GetHeight(txt)+espace*2;
   y = txt_y - haut / 2;
   txt_y -= police.GetHeight(txt)/2;
+
+  boxRGBA(app.sdlwindow, x, y, x+larg, y+haut,
+	  80,80,159,206);
+
+  rectangleRGBA(app.sdlwindow, x, y, x+larg, y+haut,
+		49, 32, 122, 255);  
+  
 // TODO  
 //  CL_Display::fill_rect (CL_Rect(x, y, x+larg, y+haut), CL_Color(0, 0, 0, 255*7/10));
 //  CL_Display::draw_rect (CL_Rect(x, y, x+larg, y+haut), CL_Color::red);
@@ -145,35 +96,7 @@ void Question::Draw()
   SDL_Flip( app.sdlwindow);
 }
 
-#endif
-
 //-----------------------------------------------------------------------------
-
-
-#ifdef CL
-int Question::PoseQuestion ()
-{
-  m_keyboard_slot = CL_Keyboard::sig_key_up().
-    connect(this, &Question::TraiteTouche);
-  m_mouse_slot = CL_Mouse::sig_key_up().
-    connect(this, &Question::TraiteClic);
-
-  Draw();
-
-  // Boucle en attendant qu'un choix soit fait
-  m_fin_boucle = false;
-  do
-  {
-    CL_System::keep_alive (10);
-    CL_Display::flip();
-  } while (!m_fin_boucle);
-
-  CL_Keyboard::sig_key_up().disconnect(m_keyboard_slot);
-  CL_Keyboard::sig_key_up().disconnect(m_mouse_slot);
-  return reponse;
-}
-
-#else
 
 int Question::PoseQuestion ()
 {
@@ -200,9 +123,6 @@ int Question::PoseQuestion ()
   
   return reponse;
 }
-
-
-#endif
 
 //-----------------------------------------------------------------------------
 
