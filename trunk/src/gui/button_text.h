@@ -29,25 +29,15 @@
 class ButtonText : public Button
 {
 private:
-  std::string m_text;
-#ifdef CL
-  Police *m_police;
-#else
-  Font *font;
-#endif
+  SDL_Surface * text_surface;
    
 public:
-  ButtonText();
-  ButtonText (uint x, uint y, uint w, uint h, const std::string &text);
+  ButtonText (uint x, uint y, uint w, uint h, 
+	      const std::string &text,
+	      Font * font);
+  ~ButtonText();
 
   virtual void Draw (uint souris_x, uint souris_y);
-  void SetText (const std::string &text);
-#ifdef CL
-  void SetFont (Police *police);
-#else
-  void SetFont (Font *font);
-#endif 
-  std::string GetText() const;
 };
 
 //-----------------------------------------------------------------------------
