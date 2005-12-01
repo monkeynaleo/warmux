@@ -20,71 +20,41 @@
  *****************************************************************************/
 
 #include "button_text.h"
+#include "include/app.h"
 //-----------------------------------------------------------------------------
 
-ButtonText::ButtonText() : Button() 
+//-----------------------------------------------------------------------------
+
+ButtonText::~ButtonText()
 {
-#ifdef CL
-  m_police = NULL;
-#else
-  font = NULL;
-#endif
+  SDL_FreeSurface(text_surface);
 }
 
+
 //-----------------------------------------------------------------------------
 
-ButtonText::ButtonText (uint x, uint y, uint w, uint h, const std::string &text)
+ButtonText::ButtonText (uint x, uint y, uint w, uint h, 
+			const std::string &text,
+			Font *font)
   : Button(x, y, w, h)
 { 
-  m_text = text;
+  text_surface = font->Render(text,white_color);
 }
 
-
-//-----------------------------------------------------------------------------
-
-#ifdef CL
-void ButtonText::SetFont (Police *police)
-{ 
-  m_police = police;
-}
-#else
-void ButtonText::SetFont (Font *font)
-{ 
-  this->font = font;
-}
-#endif
-
-//-----------------------------------------------------------------------------
-
-void ButtonText::SetText(const std::string &text) 
-{ 
-  m_text = text; 
-}
 
 //-----------------------------------------------------------------------------
 
 void ButtonText::Draw (uint souris_x, uint souris_y)
 {
   DrawImage (souris_x, souris_y);
-#ifdef CL
-  assert (m_police != NULL);
-#else
-  assert (font != NULL);
-#endif
-  const int x = GetX()+GetWidth()/2;
-  const int y = GetY()+GetHeight()/2;
-#ifdef CL
-  m_police -> WriteCenter (x, y, m_text);
-#else
-  font->WriteCenter (x, y, m_text, white_color);
-#endif
-}
 
-//-----------------------------------------------------------------------------
+  SDL_Rect dst_rect;
+  dst_rect.x = GetX()+GetWidth()/2-text_surface->w/2;
+  dst_rect.y = GetY()+GetHeight()/2-text_surface->h/2;
+  dst_rect.h = text_surface->h;
+  dst_rect.w = text_surface->w;
 
-std::string ButtonText::GetText() const 
-{ 
-  return m_text;
+  SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
 }
 
 //-----------------------------------------------------------------------------
