@@ -36,7 +36,7 @@
 #ifdef CL
 #include "../tool/geometry_tools.h"
 #else
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 #include "../include/app.h"
 #endif

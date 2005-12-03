@@ -24,7 +24,7 @@
 #include <algorithm>
 #include "../graphic/graphism.h"
 #ifndef CL
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 #endif
 

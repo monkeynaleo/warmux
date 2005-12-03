@@ -32,7 +32,7 @@
 #include "../tool/file_tools.h"
 #ifndef CL
 #include "../tool/resource_manager.h"
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #endif
 #include <sstream>
 #include <iostream>

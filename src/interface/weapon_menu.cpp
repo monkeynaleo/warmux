@@ -42,7 +42,7 @@
 #include "../tool/Distance.h"
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #endif
 
 using namespace Wormux;

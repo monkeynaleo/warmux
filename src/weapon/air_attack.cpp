@@ -33,7 +33,7 @@
 #include <sstream>
 #include "../tool/i18n.h"
 #ifndef CL
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #include "../map/camera.h"
 #endif
 //----------------------------------------------------------------------------

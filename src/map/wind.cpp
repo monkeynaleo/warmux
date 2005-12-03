@@ -32,7 +32,7 @@
 #ifndef CL
 #include <SDL.h>
 #include "../tool/resource_manager.h"
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #include "../include/app.h"
 #include "camera.h"
 #endif

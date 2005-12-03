@@ -29,11 +29,11 @@ wormux_SOURCES = \
 	tool/math_tools.cpp tool/math_tools.h \
 	tool/stats.cpp tool/stats.h \
 	tool/random.cpp tool/random.h \
-	tool/sprite.cpp tool/sprite.h \
 	tool/Distance.cpp tool/Distance.h \
 	include/constant.cpp include/constant.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	graphic/font.cpp graphic/font.h \
+	graphic/sprite.cpp graphic/sprite.h \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
 	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/main_menu.cpp menu/main_menu.h \

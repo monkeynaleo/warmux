@@ -29,7 +29,7 @@
 #include "../include/base.h"
 #include "../team/character.h"
 #include "../weapon/weapon_cfg.h"
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #include "physical_obj.h"
 //-----------------------------------------------------------------------------
 

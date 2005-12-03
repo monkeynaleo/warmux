@@ -47,7 +47,7 @@
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../map/camera.h"
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <SDL_gfxPrimitives.h>
