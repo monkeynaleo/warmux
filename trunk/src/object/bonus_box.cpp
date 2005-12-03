@@ -35,7 +35,7 @@
 #include "../tool/geometry_tools.h"
 #else
 #include "../tool/resource_manager.h"
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #include "../include/app.h"
 #endif
 #include <sstream>

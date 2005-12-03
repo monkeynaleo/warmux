@@ -34,7 +34,7 @@
 #include "../tool/file_tools.h"
 #include "../tool/string_tools.h"
 #ifndef CL
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 #endif
 #include <iostream>

@@ -29,7 +29,7 @@
 #include <string>
 #ifndef CL
 #include <SDL.h>
-#include "../tool/sprite.h"
+#include "../graphic/sprite.h"
 #endif
 //-----------------------------------------------------------------------------
 

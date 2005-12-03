@@ -30,7 +30,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
-#include "sprite.h"
+#include "../graphic/sprite.h"
 #include "xml_document.h"
 
 struct Profile
