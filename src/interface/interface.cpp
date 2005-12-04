@@ -29,6 +29,7 @@
 #include "../tool/string_tools.h"
 #include "../weapon/weapons_list.h"
 #include "../graphic/graphism.h"
+#include "../graphic/colors.h"
 #include "../tool/i18n.h"
 #include "../graphic/video.h"
 #ifndef CL
@@ -41,12 +42,6 @@
 //-----------------------------------------------------------------------------
 WeaponStrengthBar weapon_strength_bar;
 //-----------------------------------------------------------------------------
-
-SDL_Color c_white  = { 0xFF, 0xFF, 0xFF, 0xFF };
-SDL_Color c_black  = { 0x00, 0x00, 0x00, 0xFF };
-SDL_Color c_gray   = { 0xF0, 0xF0, 0xF0, 0xFF };
-SDL_Color c_darkgray = { 0x50, 0x50, 0x50, 0xFF };
-SDL_Color c_dimgray  = { 0xF0, 0xF0, 0xF0, 0xFF };
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -130,9 +125,9 @@ void Interface::Init()
   barre_energie.value_color = CL_Color::darkgray;
   barre_energie.background_color = CL_Color::dimgray;  
 #else
-  barre_energie.border_color = c_white;
-  barre_energie.value_color = c_darkgray;
-  barre_energie.background_color = c_dimgray;  
+  barre_energie.border_color = white_color;
+  barre_energie.value_color = darkgray_color;
+  barre_energie.background_color = gray_color;  
 #endif
    
   // strength bar initialisation  
@@ -185,7 +180,7 @@ void Interface::AfficheInfoVer (Character &ver)
 #ifdef CL
    police_grand.WriteLeft (NOM_VER_X, NOM_VER_Y, txt.str());
 #else
-   normal_font.WriteLeft( bottom_bar_ox+NOM_VER_X, bottom_bar_oy+NOM_VER_Y, txt.str(), c_white);
+   normal_font.WriteLeft( bottom_bar_ox+NOM_VER_X, bottom_bar_oy+NOM_VER_Y, txt.str(), white_color);
 #endif
    
   // Affiche l'énergie du ver
@@ -352,7 +347,7 @@ void Interface::Draw ()
 #ifdef CL
      police_grand.WriteCenter (GetWidth()/2, GetHeight()/2, ulong2str(chrono));
 #else
-     big_font.WriteCenter (x+GetWidth()/2, y+GetHeight()/2, ulong2str(chrono), c_white);
+     big_font.WriteCenter (x+GetWidth()/2, y+GetHeight()/2, ulong2str(chrono), white_color);
 #endif
   }
 

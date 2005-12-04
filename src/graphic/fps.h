@@ -22,7 +22,7 @@
 #ifndef FPS_H
 #define FPS_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
+#include "text.h"
 #include <list>
 //-----------------------------------------------------------------------------
 
@@ -33,6 +33,7 @@ private:
   double moyenne;
   std::list<uint> nbr_img;
   uint temps_seconde;
+  Text* fps_txt;
 
 public:
   bool affiche;
