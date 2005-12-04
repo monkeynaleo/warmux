@@ -22,6 +22,7 @@
 #ifndef ENERGIE_EQUIPE_H
 #define ENERGIE_EQUIPE_H
  
+#include "../graphic/text.h"
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
 
@@ -42,6 +43,7 @@ class TeamEnergy
 {
   private :
     BarreProg barre_energie;
+    Text* bar_text;
     uint valeur; //Valeur affichée
     uint nv_valeur; //Vrai valeur
     uint valeur_max; //Valeur initiale (en début de partie)

@@ -23,9 +23,7 @@
 #include "../game/config.h"
 #include "../include/app.h"
 #include "font.h"
-//-----------------------------------------------------------------------------
-SDL_Color white_color = { 0xFF, 0xFF, 0xFF, 0 };
-SDL_Color black_color = { 0x00, 0x00, 0x00, 0 };
+#include "colors.h"
 //-----------------------------------------------------------------------------
 
 Font huge_font;

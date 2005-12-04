@@ -23,17 +23,17 @@
 #define BUTTON_TEXT_H
 //-----------------------------------------------------------------------------
 #include "button.h"
-#include "../graphic/font.h"
+#include "../graphic/text.h"
 //-----------------------------------------------------------------------------
 
 class ButtonText : public Button
 {
 private:
-  SDL_Surface * text_surface;
+  Text* text;
    
 public:
   ButtonText (uint x, uint y, uint w, uint h, 
-	      const std::string &text,
+	      const std::string &new_text,
 	      Font * font);
   ~ButtonText();
 

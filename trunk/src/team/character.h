@@ -30,6 +30,7 @@
 #ifndef CL
 #include <SDL.h>
 #include "../graphic/sprite.h"
+#include "../graphic/text.h"
 #endif
 //-----------------------------------------------------------------------------
 
@@ -51,7 +52,7 @@ private:
 
 #ifndef CL
   // name
-  SDL_Surface* name_surface;
+  Text* name_text;
 #endif
 
   // chrono
