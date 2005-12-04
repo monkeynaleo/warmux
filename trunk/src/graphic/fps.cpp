@@ -23,23 +23,20 @@
 //-----------------------------------------------------------------------------
 #include "video.h"
 #include "graphism.h"
-#ifdef CL
-# include <ClanLib/core.h>
-#else
+#include "text.h"
 #include <SDL.h>
-#endif
 #include <sstream>
 #include <iomanip>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 const uint NBR_VAL = 4; // nombre de valeurs utilisées pour calculer la moyenne
-const SDL_Color c_white  = { 0xFF, 0xFF, 0xFF, 0xFF };
 //-----------------------------------------------------------------------------
 ImageParSeconde image_par_seconde;
 //-----------------------------------------------------------------------------
   
 ImageParSeconde::ImageParSeconde()
 {
+  fps_txt = NULL;
   affiche = true;
   Reset();
 }
@@ -56,7 +53,9 @@ void ImageParSeconde::Reset()
 #else
   temps_seconde = SDL_GetTicks()+1000;
 #endif
-   nbr_val_valides = -1;
+  nbr_val_valides = -1;
+  if(fps_txt == NULL)
+    fps_txt = new Text("");
 }
 
 //-----------------------------------------------------------------------------
@@ -107,13 +106,10 @@ void ImageParSeconde::Draw()
   if (moyenne < 0) return;
 
   std::ostringstream ss;
-
   ss << std::setprecision(3) << moyenne << " i/s";
-#ifdef CL
-  police_mix.WriteRight (video.GetWidth(), 0, ss.str());
-#else
-   small_font.WriteRight(video.GetWidth(), 0, ss.str(), c_white);
-#endif
+  std::string txt = ss.str();
+  fps_txt->Set(txt);
+  fps_txt->DrawTopRight(video.GetWidth(),0);
 }
 
 //-----------------------------------------------------------------------------

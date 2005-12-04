@@ -93,6 +93,18 @@ void Text::DrawTopLeft (int x, int y)
 }
 
 //-----------------------------------------------------------------------------
+void Text::DrawTopRight (int x, int y)
+{ 
+  SDL_Rect dst_rect;
+  dst_rect.x = x - surf->w;
+  dst_rect.y = y;
+  dst_rect.w = surf->w;
+  dst_rect.h = surf->h;
+
+  SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+}
+
+//-----------------------------------------------------------------------------
 void Text::DrawCenterTop (int x, int y)
 { 
   SDL_Rect dst_rect;
