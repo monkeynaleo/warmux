@@ -31,6 +31,7 @@
 #include "../game/time.h"
 #include "../game/config.h"
 #include "../graphic/graphism.h"
+#include "../graphic/text.h"
 #include "../include/constant.h"
 #include "../map/camera.h"
 #include "../map/map.h"
@@ -115,7 +116,7 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   channel_step = -1;
 
 #ifndef CL
-  name_surface = NULL;
+  name_text = NULL;
 #endif
 }
 
@@ -248,14 +249,8 @@ void Character::DrawName (int dy) const
 #ifdef CL
    police_mix.WriteCenterTop (x,y,m_name);
 #else
-   //small_font.WriteCenterTop (x-camera.GetX(),y-camera.GetY(),m_name,white_color);
-   SDL_Rect dst_rect;
-   dst_rect.x = x-camera.GetX() - small_font.GetWidth(m_name)/2; 
-   dst_rect.y = y-camera.GetY();
-   dst_rect.h = name_surface->h;
-   dst_rect.w = name_surface->w;
-
-   SDL_BlitSurface(name_surface, NULL, app.sdlwindow, &dst_rect);
+  if (config.affiche_nom_ver)
+   name_text->DrawCenterTopOnMap(x,y);
 #endif
 }
 
@@ -969,8 +964,8 @@ void Character::Reset()
 
 #ifndef CL
   // Prépare l'image du nom
-  if (config.affiche_nom_ver)
-    name_surface = small_font.Render(m_name, white_color);
+  if (config.affiche_nom_ver && name_text == NULL)
+    name_text = new Text(m_name);
 #endif
 
   // Energie

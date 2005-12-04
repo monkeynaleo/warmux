@@ -27,18 +27,18 @@
 
 ButtonText::~ButtonText()
 {
-  SDL_FreeSurface(text_surface);
+  delete text;
 }
 
 
 //-----------------------------------------------------------------------------
 
 ButtonText::ButtonText (uint x, uint y, uint w, uint h, 
-			const std::string &text,
+			const std::string &new_text,
 			Font *font)
   : Button(x, y, w, h)
 { 
-  text_surface = font->Render(text,white_color);
+  text = new Text(new_text, white_color, font);
 }
 
 
@@ -47,14 +47,7 @@ ButtonText::ButtonText (uint x, uint y, uint w, uint h,
 void ButtonText::Draw (uint souris_x, uint souris_y)
 {
   DrawImage (souris_x, souris_y);
-
-  SDL_Rect dst_rect;
-  dst_rect.x = GetX()+GetWidth()/2-text_surface->w/2;
-  dst_rect.y = GetY()+GetHeight()/2-text_surface->h/2;
-  dst_rect.h = text_surface->h;
-  dst_rect.w = text_surface->w;
-
-  SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
+  text->DrawCenter(GetX()+GetWidth()/2,GetY()+GetHeight()/2);
 }
 
 //-----------------------------------------------------------------------------
