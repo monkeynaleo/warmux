@@ -22,6 +22,7 @@ wormux_SOURCES = \
 	gui/check_box.cpp gui/check_box.h \
 	gui/list_box.cpp gui/list_box.h \
 	gui/spin_button.cpp gui/spin_button.h \
+	gui/widget.cpp gui/widget.h \
 	tool/string_tools.cpp tool/string_tools.h \
 	tool/xml_document.cpp tool/xml_document.h \
 	tool/i18n.cpp tool/i18n.h \
