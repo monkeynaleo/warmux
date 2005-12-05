@@ -36,10 +36,11 @@ SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed)
 {
   this->surface = p_surface;
   this->delay = p_speed;
+  rotated_surface = NULL;
 }
 
 // *****************************************************************************/
-
+#ifdef UNUSED_CODE
 SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv)
 {
 	int		x, y;
@@ -62,7 +63,7 @@ SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv)
 	
 	return flipped;
 }
-
+#endif
 // *****************************************************************************/
 
 
@@ -84,6 +85,8 @@ Sprite::Sprite()
    finished = false;
    translation_x = 0;
    translation_y = 0;
+   have_rotation_cache = false;
+   have_flipping_cache = false;
 }
 
 Sprite::Sprite( const Sprite& other)
@@ -104,7 +107,8 @@ Sprite::Sprite( const Sprite& other)
    finished = other.finished;
    translation_x = other.translation_x;
    translation_y = other.translation_y;
-
+   have_rotation_cache = false;
+   have_flipping_cache = false;
    
    for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
      {
@@ -124,6 +128,10 @@ Sprite::Sprite( const Sprite& other)
 	  SDL_SetAlpha( other.frames[f].surface, SDL_SRCALPHA, 0); 
 	  frames.push_back( SpriteFrame(new_surf));
      }
+     if(other.have_rotation_cache)
+       EnableRotationCache(other.rotation_cache_size);
+     if(other.have_flipping_cache)
+       EnableFlippingCache();
 }
 
 Sprite::Sprite( SDL_Surface *surface)
@@ -146,12 +154,34 @@ Sprite::Sprite( SDL_Surface *surface)
    finished = false;
    translation_x = 0;
    translation_y = 0;
+   have_rotation_cache = false;
+   have_flipping_cache = false;
 }
 
 Sprite::~Sprite()
 {
-   for ( unsigned int f = 0 ; f < frames.size() ; f++)
-     SDL_FreeSurface( frames[f].surface);
+  for ( unsigned int f = 0 ; f < frames.size() ; f++)
+  {
+    SDL_FreeSurface( frames[f].surface);
+    if(have_flipping_cache)
+      SDL_FreeSurface( frames[f].flipped_surface);
+  }
+
+  if(have_rotation_cache)
+  {
+    for ( unsigned int f = 0 ; f < frames.size() ; f++)
+    {
+      for(unsigned int i = 1;i < rotation_cache_size;i++)
+      {
+        SDL_FreeSurface( frames[f].rotated_surface[i]);
+        if(have_flipping_cache)
+          SDL_FreeSurface( frames[f].rotated_flipped_surface[i]);
+      }
+      delete []frames[f].rotated_surface;
+      if(have_flipping_cache)
+        delete []frames[f].rotated_surface;
+    }
+  }
 }
 
 void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y)
@@ -177,6 +207,48 @@ void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int 
 	  SDL_BlitSurface( surface, &sr, new_surf, &dr);
 	  frames.push_back( SpriteFrame(new_surf));
        }
+}
+
+void Sprite::EnableRotationCache(unsigned int cache_size)
+{
+  assert(!have_rotation_cache);
+  assert(!have_flipping_cache); //Always compute rotation cache before flipping cache!
+  assert(cache_size > 1);
+  assert(cache_size <= 360);
+
+  rotation_cache_size = cache_size;
+  have_rotation_cache = true;
+
+  for ( unsigned int f = 0 ; f < frames.size() ; f++)
+  {
+    frames[f].rotated_surface=new SDL_Surface*[cache_size];
+    frames[f].rotated_surface[0]=frames[f].surface;
+    for(unsigned int i=1 ; i< cache_size ; i++)
+    {
+      frames[f].rotated_surface[i] = rotozoomSurfaceXY(frames[f].surface, - 360.0 * (float) i / (float) cache_size, 1.0, 1.0, SMOOTHING_ON);
+    }
+  }
+}
+
+void Sprite::EnableFlippingCache()
+{
+  assert(!have_flipping_cache);
+
+  have_flipping_cache = true;
+
+  for ( unsigned int f = 0 ; f < frames.size() ; f++)
+  {
+    frames[f].flipped_surface = rotozoomSurfaceXY(frames[f].surface, 0.0, -1.0, 1.0, SMOOTHING_OFF); //Smoothing == off to keep the exact flipped image
+    if(have_rotation_cache)
+    {
+      frames[f].rotated_flipped_surface=new SDL_Surface*[rotation_cache_size];
+      frames[f].rotated_flipped_surface[0]=frames[f].flipped_surface;
+      for(unsigned int i=1 ; i< rotation_cache_size ; i++)
+      {
+        frames[f].rotated_flipped_surface[i] = rotozoomSurfaceXY(frames[f].surface, - 360.0 * (float) i / (float) rotation_cache_size, -1.0, 1.0, SMOOTHING_ON);
+      }
+    }
+  }
 }
 
 unsigned int Sprite::GetWidth()
@@ -249,6 +321,11 @@ float Sprite::GetAlpha()
 
 void Sprite::SetRotation_deg( float angle_deg)
 {
+   while(angle_deg < 0.0)
+     angle_deg += 360.0;
+   while(angle_deg >= 360.0)
+     angle_deg -= 360.0;
+
    rotation_deg = angle_deg;
 }
 
@@ -410,13 +487,71 @@ void Sprite::SetPlayBackward(bool enable)
     frame_delta = 1;
 }
 
+#ifdef DEBUG
+#define CACHE_WARNING std::cout << "Warning : Sprite uses SDL_gfx while flipping or rotation cache is enabled!" << std::endl;
+#else
+#define CACHE_WARNING
+#endif
+
 void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 {
   if (!show) return;
 
 #ifndef __MINGW32__
-   SDL_Surface *tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+   SDL_Surface *tmp_surface = NULL;
+   bool need_free_surface = false;
 
+   if(!have_rotation_cache && !have_flipping_cache)
+   {
+     tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+     need_free_surface = true;
+   }
+   else
+   {
+     if(have_flipping_cache && !have_rotation_cache)
+     {
+       if(rotation_deg != 0.0 || scale_y != 1.0 || (scale_x != 1.0 && scale_x != -1.0))
+       {
+         CACHE_WARNING;
+         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+         need_free_surface = true;
+       }
+       else
+       if(scale_x == 1.0)
+         tmp_surface = frames[current_frame].surface;
+       else
+         tmp_surface = frames[current_frame].flipped_surface;
+     }
+     else
+     if(!have_flipping_cache && have_rotation_cache)
+     {
+       if(scale_x != 1.0 || scale_y != 1.0)
+       {
+         CACHE_WARNING;
+         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+         need_free_surface = true;
+       }
+       else
+         tmp_surface = frames[current_frame].rotated_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
+     }
+     else
+     {
+       if((scale_x != 1.0 && scale_x != -1.0)  || scale_y != 1.0)
+       {
+         CACHE_WARNING;
+         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+         need_free_surface = true;
+       }
+       else
+       {
+         if(scale_x == 1.0)
+           tmp_surface = frames[current_frame].rotated_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
+         else
+           tmp_surface = frames[current_frame].rotated_flipped_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
+       }
+     }
+   }
+   assert(tmp_surface != NULL);
    // Calculate offset of the depending on hotspot rotation position :
    int rot_x=0;
    int rot_y=0;
@@ -436,7 +571,8 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 
    SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
 
-   SDL_FreeSurface (tmp_surface);
+   if(need_free_surface)
+     SDL_FreeSurface (tmp_surface);
 #else
    //SDL_gfx not working...
    SDL_Rect dr = {pos_x , pos_y , frame_width_pix, frame_height_pix};

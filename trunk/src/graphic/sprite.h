@@ -41,6 +41,9 @@ class SpriteFrame
 public:
   SpriteFrame(SDL_Surface *surface, unsigned int delay=100);
   SDL_Surface *surface;
+  SDL_Surface *flipped_surface;
+  SDL_Surface** rotated_surface;
+  SDL_Surface** rotated_flipped_surface;
   unsigned int delay; // in millisecond
 };
 
@@ -58,7 +61,9 @@ typedef enum {
    Sprite( SDL_Surface *surface);
    ~Sprite();
    void Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
-   
+   void EnableRotationCache(unsigned int cache_size);
+   void EnableFlippingCache();
+
    // Get physical characterisics
    unsigned int GetWidth();
    unsigned int GetHeight();
@@ -80,7 +85,7 @@ typedef enum {
    void Start();
    void StartLoop();
    void Finish();
-	 void SetPlayBackward(bool enable);
+   void SetPlayBackward(bool enable);
    void Show();
    void Hide();
    void SetShowOnFinish(SpriteShowOnFinish show);
@@ -108,8 +113,13 @@ typedef enum {
    int frame_delta; // Used in Update() to get next frame
    bool backward;
    std::vector<SpriteFrame> frames;
+
    Rotation_HotSpot rot_hotspot;
    void Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface);
+
+   bool have_rotation_cache;
+   bool have_flipping_cache;
+   unsigned int rotation_cache_size;
 };
 
 #endif /* _SPRITE_H */

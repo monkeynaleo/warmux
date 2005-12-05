@@ -76,6 +76,7 @@ void RoquetteBazooka::Init()
   SetSize (image.get_width(), image.get_height());
 #else
   image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
+  image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight());
 #endif
 
