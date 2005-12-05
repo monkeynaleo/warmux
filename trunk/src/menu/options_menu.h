@@ -16,15 +16,13 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Menu du jeu permettant de lancer une partie, modifier les options, d'obtenir
- * des informations, ou encore quitter le jeu.
+ * Options menu
  *****************************************************************************/
 
 #ifndef OPTIONS_MENU_H
 #define OPTIONS_MENU_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#include <string>
 //-----------------------------------------------------------------------------
 
 
@@ -41,6 +39,8 @@ class OptionMenu
 {
  public:
    OptionMenu(); 
+   ~OptionMenu();
+
    void Lance ();
    void Init ();
    void Reset ();
@@ -70,35 +70,21 @@ class OptionMenu
    SpinButton *option_energie_ini;
 
    bool m_init;
-#ifdef CL
-   CL_Surface map_preview;
-   CL_Surface fond_option, fond_maps, fond_box, fond_box2;
-#else
+
    Sprite *map_preview;
    Sprite *fond_option; 
    SDL_Surface *fond_maps;
    SDL_Surface *fond_box;
    SDL_Surface *fond_box2;
-#endif
+
    uint carte_x, carte_y, carte_larg, carte_haut;
    uint maps_x, maps_y;
    uint teams_x, teams_y;
    uint espace;
 
-/* CL_Slot keyboard_slot, mouse_slot, slot_quit; */
-
    void ChangeTerrain();
    void EnregistreOptions();
-#ifdef CL
-   void TraiteClic (const CL_InputEvent &event);
-#else
    void onClick ( int mouse_x, int mouse_y);
-#endif
-/*   void TraiteTouche (const CL_InputEvent &event); */
-/*   void SignalWM_QUIT (); */
-/*   void RetourMenuPrincipal (); */
 };
-
-extern OptionMenu options_menu;
 
 #endif
