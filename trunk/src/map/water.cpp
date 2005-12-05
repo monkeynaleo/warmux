@@ -60,6 +60,7 @@ void Water::Init()
 #else
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
    surface = resource_manager.LoadImage(res, "gfx/water");
+   SDL_SetAlpha(surface, 0, 0);
    pattern = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, 180, surface->h + 40,
                                      32, // force to 32 bits per pixel
                                      0x000000ff,  // red mask
@@ -171,7 +172,8 @@ void Water::Draw()
   }
 */
   // Compute 1 pattern:
-  SDL_FillRect(pattern, NULL, 0xFFFFFF00);
+  SDL_SetAlpha(pattern, 0, 0);
+  SDL_FillRect(pattern, NULL, 0x00000000);
 
   int y0 = monde.GetHeight()-(hauteur_eau + height_mvt)-20;
 
@@ -180,6 +182,7 @@ void Water::Draw()
     SDL_Rect dst = {x, height.at(x) - y0, surface->w, surface->h};
     SDL_BlitSurface(surface,NULL, pattern,&dst);
   }
+  SDL_SetAlpha(pattern, SDL_SRCALPHA, 0);
 
   int x0 = (int)camera.GetX();
   while(x0<0)
