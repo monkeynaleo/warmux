@@ -16,8 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Button for graphic interface. It could be in two states : idle or 
- * "mouseover".
+ * Simple button
  *****************************************************************************/
 
 #include "button.h"
@@ -26,90 +25,38 @@
 
 //-----------------------------------------------------------------------------
 
-Button::Button ()
-{ 
-   SetPos(0,0); 
-   SetSize(0,0);
-}
-
-//-----------------------------------------------------------------------------
-
-Button::Button (uint x, uint y, uint w, uint h)
-  : m_x(x), m_width(w), m_y(y), m_height(h)
-{}
-
-//-----------------------------------------------------------------------------
-
-Button::~Button() 
-{
-} 
-
-//-----------------------------------------------------------------------------
-
-void Button::SetPos (uint x, uint y)
-{
-  m_x  = x;
-  m_y  = y;
-}
-
-//-----------------------------------------------------------------------------
-
-void Button::SetSize (uint w, uint h)
-{
-  m_width = w;
-  m_height = h;
-}
-
-//-----------------------------------------------------------------------------
-
-bool Button::Test (uint souris_x, uint souris_y)
-{
-  return ((m_x <= souris_x) && (souris_x <= m_x+m_width)
-	  && (m_y <= souris_y) && (souris_y <= m_y+m_height));
-}
-
-//-----------------------------------------------------------------------------
-
-void Button::Draw (uint souris_x, uint souris_y)
-{ 
-   DrawImage (souris_x, souris_y);
-}
-
-//-----------------------------------------------------------------------------
-
-void Button::DrawImage (uint souris_x, uint souris_y)
-{
-  uint frame = Test(souris_x,souris_y)?1:0;
-#ifdef CL
-  image.set_frame (frame);
-  image.draw(CL_Rect(m_x, m_y, m_x+m_width, m_y+m_height)); 
-#else
-  image->SetCurrentFrame (frame);
-  image->Draw(m_x, m_y);
-#endif
-}
-
-//-----------------------------------------------------------------------------
-
-#ifdef CL
-void Button::SetImage (const std::string& resource_id, CL_ResourceManager* manager)
-{ 
-  image = CL_Sprite(resource_id, manager);
-  SetSize (image.get_width(), image.get_height());
-}
-#else
-void Button::SetImage (const Profile *res_profile, const std::string& resource_id)
+Button::Button (uint x, uint y, uint w, uint h,
+		const Profile *res_profile, const std::string& resource_id)
+  : Widget(x, y, w, h)
 {
   image = resource_manager.LoadSprite(res_profile,resource_id);
-  SetSize (image->GetWidth(), image->GetHeight());   
+  image->ScaleSize(w,h);
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
-uint Button::GetX() const { return m_x; }
-uint Button::GetY() const { return m_y; }
-uint Button::GetWidth() const { return m_width; }
-uint Button::GetHeight() const { return m_height; }
+Button::Button (uint x, uint y,
+		const Profile *res_profile, const std::string& resource_id)
+  : Widget(x, y, 1, 1)
+{
+  image = resource_manager.LoadSprite(res_profile,resource_id);
+  w = image->GetWidth();
+  h = image->GetHeight();
+}
+
+//-----------------------------------------------------------------------------
+
+Button::~Button()
+{
+}
+
+//-----------------------------------------------------------------------------
+
+void Button::Draw (uint mouse_x, uint mouse_y)
+{
+  uint frame = MouseIsOver(mouse_x,mouse_y)?1:0;
+  image->SetCurrentFrame (frame);
+  image->Draw(x, y);
+}
 
 //-----------------------------------------------------------------------------

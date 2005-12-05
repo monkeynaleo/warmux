@@ -23,121 +23,52 @@
 //-----------------------------------------------------------------------------
 #include <algorithm>
 #include "../graphic/graphism.h"
-#ifndef CL
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
-#endif
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
-CheckBox::CheckBox()
-{
-}
 
-//-----------------------------------------------------------------------------
-
-void CheckBox::Init (const std::string &label, uint x, uint y, bool value) 
+CheckBox::CheckBox (const std::string &label, uint x, uint y, uint w, bool value) :
+  Widget(x, y, w, small_font.GetHeight())
 {
-#ifdef CL
-  m_image = CL_Sprite("menu/check", graphisme.LitRes());
-#else
   // UGLY -> TODO find a place to store the graphism.xml (in app ?) profile 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");   
   m_image = resource_manager.LoadSprite( res, "menu/check");
-#endif
+
   // Copy arguments
-  m_label = label;
-  m_x = x;
-  m_y = y;
   m_value = value;
 
-  // Calculate coordonnates
-#ifdef CL
-  uint label_width = police_mix.GetWidth(m_label);
-  uint label_height = police_mix.GetHeight(m_label);
-
-  m_width = label_width + m_image.get_width();
-  m_height = std::max(label_height, uint(m_image.get_height()));
-
-  m_img_x = m_x + label_width;
-  m_img_y = m_y + (m_height - m_image.get_height())/2;
-  m_label_x = m_x;
-  m_label_y = m_y + (m_height - label_height)/2;
-#else
-  uint label_width = small_font.GetWidth(m_label);
-  uint label_height = small_font.GetHeight();
-
-  m_width = label_width + m_image->GetWidth();
-  m_height = std::max(label_height, uint(m_image->GetHeight()));
-
-  m_img_x = m_x + label_width;
-  m_img_y = m_y + (m_height - m_image->GetHeight())/2;
-  m_label_x = m_x;
-  m_label_y = m_y + (m_height - label_height)/2;
-#endif
+  txt_label = new Text(label, white_color, &small_font);
 }
 
 //-----------------------------------------------------------------------------
 
-void CheckBox::SetXY (uint x, uint y)
+CheckBox::~CheckBox()
 {
-  m_x = x; m_y = y;
-
-#ifdef CL
-  uint label_width = police_mix.GetWidth(m_label);
-  uint label_height = police_mix.GetHeight(m_label);
-
-  m_img_x = m_x + label_width;
-  m_img_y = m_y + (m_height - m_image.get_height())/2;
-  m_label_x = m_x;
-  m_label_y = m_y + (m_height - label_height)/2;
-#else
-  uint label_width = small_font.GetWidth(m_label);
-  uint label_height = small_font.GetHeight();
-
-  m_img_x = m_x + label_width;
-  m_img_y = m_y + (m_height - m_image->GetHeight())/2;
-  m_label_x = m_x;
-  m_label_y = m_y + (m_height - label_height)/2;
-#endif
+  delete txt_label;
 }
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-void CheckBox::Display (uint mouse_x, uint mouse_y)
+void CheckBox::Draw (uint mouse_x, uint mouse_y)
 {
-  police_mix.WriteLeft(m_label_x, m_label_y, m_label);
-  if (m_value)
-    m_image.set_frame(0);
-  else 
-    m_image.set_frame(1);
-
-  m_image.draw(m_img_x, m_img_y);
-}
-#else
-void CheckBox::Display (uint mouse_x, uint mouse_y)
-{
-  small_font.WriteLeft(m_label_x, m_label_y, m_label, white_color);
-  
+  txt_label->DrawTopLeft(x, y);
+ 
   if (m_value)
     m_image->SetCurrentFrame(0);
   else 
     m_image->SetCurrentFrame(1);
 
-  m_image->Draw(m_img_x, m_img_y);
+  m_image->Draw(x+w-16, y);
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
 bool CheckBox::Clic (uint mouse_x, uint mouse_y)
 {
-  if ((mouse_x < m_x)
-      || (m_x+m_width <= mouse_x)
-      || (mouse_y < m_y)
-      || (m_y+m_height <= mouse_y)) return false;
+  if (!MouseIsOver(mouse_x, mouse_y)) return false;
 
   m_value = !m_value ;
   return true ;

@@ -16,39 +16,30 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Button with text.
+ * Widget
  *****************************************************************************/
 
-#include "button_text.h"
-#include "include/app.h"
-//-----------------------------------------------------------------------------
+#include "widget.h"
 
 //-----------------------------------------------------------------------------
 
-ButtonText::~ButtonText()
+Widget::Widget(uint _x, uint _y, uint _w, uint _h) :
+  x(_x), y(_y), w(_w), h(_h)
 {
-  delete text;
 }
-
 
 //-----------------------------------------------------------------------------
 
-ButtonText::ButtonText (uint x, uint y, uint w, uint h, 
-			const Profile *res_profile, const std::string& resource_id,
-			const std::string &new_text,
-			Font *font)
-  : Button(x, y, w, h, res_profile, resource_id)
-{ 
-  text = new Text(new_text, white_color, font);
-}
-
-
-//-----------------------------------------------------------------------------
-
-void ButtonText::Draw (uint souris_x, uint souris_y)
+Widget::~Widget()
 {
-  Button::Draw (souris_x, souris_y);
-  text->DrawCenter(GetX()+w/2,GetY()+h/2);
 }
 
+//-----------------------------------------------------------------------------
+
+bool Widget::MouseIsOver (uint mouse_x, uint mouse_y)
+{
+  return ((x <= mouse_x) && (mouse_x <= x+w)
+	  && (y <= mouse_y) && (mouse_y <= y+h));
+
+}
 //-----------------------------------------------------------------------------

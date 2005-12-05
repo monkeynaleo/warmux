@@ -16,53 +16,32 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Button for graphic interface. It could be in two states : idle or 
- * "mouseover".
+ * Simple button
  *****************************************************************************/
 
 #ifndef GUI_BUTTON_H
 #define GUI_BUTTON_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#ifdef CL
-#include <ClanLib/display.h>
-#else
-#endif
+#include "widget.h"
 //-----------------------------------------------------------------------------
 
 class Sprite;
 struct Profile;
 
-class Button
+class Button : public Widget
 {
 protected:
-  uint m_x, m_width, m_y, m_height;
-#ifdef CL
-  CL_Sprite image;
-#else
   Sprite *image;
-#endif
    
 public:
-  Button();
-  Button (uint x, uint y, uint w, uint h);
+  Button (uint x, uint y, uint w, uint h,
+	  const Profile *res_profile, const std::string& resource_id);
+  Button (uint x, uint y, 
+	  const Profile *res_profile, const std::string& resource_id);
   virtual ~Button();
-  void SetPos(uint x, uint y);
-  void SetSize (uint larg, uint haut);
-#ifdef CL
-  void SetImage (const std::string& resource_id, CL_ResourceManager* manager);
-#else
-  void SetImage (const Profile *res_profile, const std::string& resource_id);
-#endif 
-  bool Test (uint souris_x, uint souris_y);
-  virtual void Draw (uint souris_x, uint souris_y);
-  uint GetX() const;
-  uint GetY() const;
-  uint GetWidth() const;
-  uint GetHeight() const;
 
-protected:
-  void DrawImage (uint souris_x, uint souris_y);
+  virtual void Draw (uint mouse_x, uint mouse_y);
 };
 
 //-----------------------------------------------------------------------------

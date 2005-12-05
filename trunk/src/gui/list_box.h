@@ -23,6 +23,7 @@
 #define LIST_BOX_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#include "widget.h"
 #include "button.h"
 #include <vector>
 #include <string>
@@ -37,7 +38,7 @@ typedef struct s_list_box_item_t{
   } list_box_item_t;
 
 
-class ListBox
+class ListBox : public Widget
 {
 public:
   int selection_min; // Minimal number of selected items
@@ -47,7 +48,7 @@ public:
 private:
   // for the placement
   uint x, y;
-  uint width, height, visible_height; 
+  uint visible_height; 
   uint nb_visible_items, nb_visible_items_max;
   uint height_item;
   
@@ -59,17 +60,15 @@ private:
   std::list<uint> m_selection;
 
   // Buttons
-  Button m_up, m_down;
-#ifndef CL
+  Button *m_up, *m_down;
   SDL_Surface *cursorover_box;
   SDL_Surface *selected_box;
   SDL_Surface *background;
-#endif 
 public:
   ListBox (uint _x, uint _y, uint _width, uint _height);
   ~ListBox();
-  void Init ();
-  void Display (uint mouse_x, uint mouse_y);
+
+  void Draw (uint mouse_x, uint mouse_y);
   bool Clic (uint mouse_x, uint mouse_y);
   void AddItem (bool selected, 
 		const std::string &label,
@@ -82,7 +81,6 @@ public:
   const std::list<uint>& GetSelection() const;
   const std::string& ReadLabel (uint index) const;
   const std::string& ReadValue (uint index) const;
-  void SetXY (uint x, uint y);
 };
 
 //-----------------------------------------------------------------------------
