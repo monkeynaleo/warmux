@@ -7,25 +7,7 @@
 
   <surface name="loading" file="menu/img/loading.png" />
 
-  <sprite name="jouer">
-    <image file="menu/img/button.png">
-      <grid pos="0,0" size="282,57" array="1,2" />
-    </image>
-  </sprite>
-
-  <sprite name="options">
-    <image file="menu/img/button.png">
-      <grid pos="0,0" size="282,57" array="1,2" />
-    </image>
-  </sprite>
-
-  <sprite name="infos">
-    <image file="menu/img/button.png">
-      <grid pos="0,0" size="282,57" array="1,2" />
-    </image>
-  </sprite>
-
-  <sprite name="quitter">
+  <sprite name="txt_button">
     <image file="menu/img/button.png">
       <grid pos="0,0" size="282,57" array="1,2" />
     </image>
