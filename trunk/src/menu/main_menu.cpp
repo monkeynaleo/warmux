@@ -100,33 +100,33 @@ Main_Menu::Main_Menu()
 
   play = new ButtonText(x_button,(uint)(192 * y_scale),//Position
 			button_width,button_height, //Size
+			res, "intro/txt_button",
 			_("Play"),
 			&large_font);
-  play->SetImage (res, "intro/jouer");//->SetImage (res, "intro/play");
 
   network = new ButtonText(x_button,(int)(261 * y_scale), //Position
 			   button_width,button_height, //Size
+			   res, "intro/txt_button",
 			   _("Network Game"),
 			   &large_font );
-  network->SetImage (res,"intro/jouer");
 
   options = new ButtonText(x_button,(int)(329 * y_scale), //Position
 			   button_width,button_height, //Size
+			   res, "intro/txt_button",
 			   _("Options"),
 			   &large_font);
-  options->SetImage (res,"intro/options");
 
   infos =  new ButtonText(x_button,(int)(397 * y_scale), //Position
 			  button_width,button_height, //Size
+			  res, "intro/txt_button",
 			  _("Info"),
 			  &large_font);
-  infos->SetImage (res,"intro/infos");
 
   quit =  new ButtonText(x_button,(int)(465 * y_scale), //Position
 			 button_width,button_height, //Size
+			 res, "intro/txt_button",
 			 _("Quit"),
 			 &large_font);
-  quit->SetImage (res,"intro/quitter");
 
   resource_manager.UnLoadXMLProfile( res);
 }
@@ -134,11 +134,11 @@ Main_Menu::Main_Menu()
 //-----------------------------------------------------------------------------
 void Main_Menu::onClick ( int x, int y)
 {       
-  if (play->Test (x, y)) sig_play();
-  else if (network->Test (x, y)) sig_network();
-  else if (options->Test (x, y)) sig_options();
-  //else if (infos->Test (x, y)) sig_infos();
-  else if (quit->Test (x, y)) sig_quit();
+  if (play->MouseIsOver (x, y)) sig_play();
+  else if (network->MouseIsOver (x, y)) sig_network();
+  else if (options->MouseIsOver (x, y)) sig_options();
+  //else if (infos->MouseIsOver (x, y)) sig_infos();
+  else if (quit->MouseIsOver (x, y)) sig_quit();
 }
 
 //-----------------------------------------------------------------------------
