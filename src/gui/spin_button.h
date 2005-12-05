@@ -23,39 +23,30 @@
 #define SPIN_BUTTON_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#include "../graphic/text.h"
 #include "button.h"
 #include <string>
 #include <sstream>
 //-----------------------------------------------------------------------------
 
-class SpinButton
+class SpinButton : public Widget
 {
  private:
-  std::string m_label;
-  uint m_x, m_y;
-  uint m_height, m_width;
-  uint m_label_x, m_label_y;
-  uint m_value_x, m_value_y;
-
-  uint value_width;
-  uint label_width, label_height;
-  uint m_img_plus_x, m_img_plus_y;
-  uint m_img_minus_x, m_img_minus_y;
-  std::ostringstream max_value_s;
+  Text *txt_label, *txt_value;
 
   int m_value;
   int m_min_value, m_max_value, m_step;
-  Button m_plus, m_minus;
+  Button *m_plus, *m_minus;
   
  public:
-  SpinButton();
-  void Init (const std::string &label, uint x, uint y, int value=0, 
-	     int step=1, int min_value=-1, int max_value=-1) ;  
-  void Display (uint mouse_x, uint mouse_y) ;
+  SpinButton(const std::string &label, uint x, uint y, uint w, uint h,
+	     int value=0, int step=1, int min_value=-1, int max_value=-1);
+  virtual ~SpinButton();
+
+  void Draw (uint mouse_x, uint mouse_y) ;
   bool Clic (uint mouse_x, uint mouse_y) ;
   int GetValue() const;
   void SetValue(int value);
-  void SetXY (uint x, uint y);
 };
 
 //-----------------------------------------------------------------------------

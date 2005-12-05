@@ -23,38 +23,27 @@
 #define CHECK_BOX_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#include "../graphic/text.h"
+#include "../gui/widget.h"
 #include <string>
-#ifdef CL
-# include <ClanLib/display.h>
-#else
-#endif
 //-----------------------------------------------------------------------------
 
 class Sprite;
 
-class CheckBox
+class CheckBox : public Widget
 {
  private:
-  std::string m_label;
-  uint m_x, m_y;
-  uint m_height, m_width;
-  uint m_img_x, m_img_y;
-  uint m_label_x, m_label_y;
+  Text * txt_label;
   bool m_value;
-#ifdef CL
-  CL_Sprite m_image;
-#else
   Sprite *m_image;
-#endif
    
  public:
-  CheckBox();
-  void Init (const std::string &label, uint x, uint y, bool value=true) ;  
-  void Display (uint mouse_x, uint mouse_y) ;
+  CheckBox(const std::string &label, uint x, uint y, uint w, bool value=true) ;  
+  ~CheckBox();
+  void Draw (uint mouse_x, uint mouse_y) ;
   bool Clic (uint mouse_x, uint mouse_y) ;
   bool GetValue() const;
   void SetValue(bool value);
-  void SetXY (uint x, uint y);
 };
 
 //-----------------------------------------------------------------------------
