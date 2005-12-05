@@ -72,7 +72,8 @@ void Cluster::Init()
   image = CL_Sprite("cluster", &graphisme.weapons);
   SetSize (image.get_width(), image.get_height());
 #else
-   image = resource_manager.LoadSprite( weapons_res_profile, "cluster");
+  image = resource_manager.LoadSprite( weapons_res_profile, "cluster");
+  image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight()); 
 #endif
 
@@ -182,6 +183,7 @@ void ClusterBomb::Init()
   SetSize (image.get_width(), image.get_height());
 #else
   image = resource_manager.LoadSprite( weapons_res_profile, "cluster");
+  image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight()); 
 #endif
 

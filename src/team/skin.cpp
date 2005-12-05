@@ -183,7 +183,8 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
 #ifdef CL
       config.image = CL_Sprite(skin_name, &res);
 #else
-      config.image = resource_manager.LoadSprite( res, skin_name); 
+      config.image = resource_manager.LoadSprite( res, skin_name);
+      config.image->EnableFlippingCache();
 #endif
       many_skins.insert(paire_skin(skin_name,config));
     }
@@ -196,6 +197,7 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
       config.image = CL_Sprite(skin_name, &res);
 #else
       config.image = resource_manager.LoadSprite( res, skin_name);
+      config.image->EnableFlippingCache();
 #endif       
       GetXmlConfig(xml_config,config);
 

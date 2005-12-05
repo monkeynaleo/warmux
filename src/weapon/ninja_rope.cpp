@@ -534,6 +534,7 @@ void NinjaRope::p_Init()
   icone = resource_manager.LoadImage(weapons_res_profile,"ninjarope_ico");
   m_image = resource_manager.LoadSprite(weapons_res_profile,"ninjarope");
   m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
+  m_hook_sprite->EnableRotationCache(32);
 #endif
 
   m_is_active = false;
