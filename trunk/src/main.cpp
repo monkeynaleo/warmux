@@ -23,15 +23,6 @@
 //-----------------------------------------------------------------------------
 #define EMAIL "wormux-dev@gna.org"
 //-----------------------------------------------------------------------------
-#ifdef CL
-#include <ClanLib/core.h>
-#include <ClanLib/display.h>
-#include "graphic/graphism.h"
-#include "network/network.h"
-#include "graphic/video.h"
-#include "map/wind.h"
-#endif
-
 #include "game/time.h"
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
@@ -255,7 +246,9 @@ int AppWormux::main (int argc, char **argv)
           jeu.LanceJeu(); 
           break;
         case menuOPTIONS:
-          options_menu.Lance();
+	  OptionMenu * options_menu = new OptionMenu();
+          options_menu->Lance();
+	  delete options_menu;
           break;
         case menuQUIT:
           quitter = true; 
