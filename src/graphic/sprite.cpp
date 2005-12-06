@@ -81,7 +81,8 @@ Sprite::Sprite()
    backward = false; 
    last_update = Wormux::temps.Lit();
    show_on_finish = show_last_frame;
-   loop = false;
+//   loop = false;
+   loop = true;
    finished = false;
    translation_x = 0;
    translation_y = 0;
@@ -150,7 +151,8 @@ Sprite::Sprite( SDL_Surface *surface)
    backward = false; 
    last_update = Wormux::temps.Lit();
    show_on_finish = show_last_frame;
-   loop = false;
+//   loop = false;
+   loop = true;
    finished = false;
    translation_x = 0;
    translation_y = 0;
@@ -468,16 +470,17 @@ void Sprite::Start()
      frame_delta = 1;
    }
    show = true;
-   loop = false;
+//   loop = false;
    finished = false;
    last_update = Wormux::temps.Lit();
 }
-
+/*
 void Sprite::StartLoop()
 {
   Start();
   loop = true;
 }
+*/
 void Sprite::SetPlayBackward(bool enable)
 {
   backward = enable;
@@ -583,7 +586,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 void Sprite::Finish()
 {
   finished = true;
-  loop = false;
+//  loop = false;
   switch(show_on_finish)
   {
   case show_blank:
@@ -623,7 +626,7 @@ void Sprite::Draw(int pos_x, int pos_y)
 
 void Sprite::Show() { show = true; }
 void Sprite::Hide() { show = false; }
-void Sprite::SetShowOnFinish(SpriteShowOnFinish show) { show_on_finish = show; }
+void Sprite::SetShowOnFinish(SpriteShowOnFinish show) { show_on_finish = show; loop = false;}
 bool Sprite::IsFinished() const { return finished; }
 
 //-----------------------------------------------------------------------------
