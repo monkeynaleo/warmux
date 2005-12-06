@@ -34,6 +34,7 @@ class CheckBox;
 class SpinButton;
 class SDL_Surface;
 class Sprite;
+class Vbox;
 
 class OptionMenu
 {
@@ -61,13 +62,18 @@ class OptionMenu
    CheckBox *option_affichage_energie;
    CheckBox *option_affichage_nom;
    CheckBox *full_screen;
+   Vbox *graphic_options;
+
+
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
+   Vbox *sound_options;
 
    SpinButton *option_temps_tour;
    SpinButton *option_temps_fin_tour;
    SpinButton *option_nb_ver;
    SpinButton *option_energie_ini;
+   Vbox *game_options;
 
    bool m_init;
 

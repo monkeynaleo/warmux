@@ -29,8 +29,8 @@
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
-ListBox::ListBox (uint x, uint y, uint w, uint h)
-  : Widget(x,y,w,h) 
+ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
+  : Widget(_x,_y,_w,_h) 
 {  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml"); 
   m_up = new Button(x+w-10, y, 10, 5, res, "menu/up");
@@ -130,8 +130,8 @@ void ListBox::Draw (uint mouse_x, uint mouse_y)
   CL_Display::fill_rect(CL_Rect(, CL_Color(255, 255, 255, 255*3/10));
 #else
   // blit a surface as SDL_FillRect don't alpha blit a rectangle
-  SDL_Rect r_back = {x,y,w,h};
-  SDL_BlitSurface( background, NULL, app.sdlwindow, &r_back);			
+   SDL_Rect r_back = {x,y,w,h};
+   SDL_BlitSurface( background, NULL, app.sdlwindow, &r_back);			
 #endif
    
   for (uint i=0; i < nb_visible_items; i++) 

@@ -47,7 +47,6 @@ public:
 
 private:
   // for the placement
-  uint x, y;
   uint visible_height; 
   uint nb_visible_items, nb_visible_items_max;
   uint height_item;
@@ -65,7 +64,7 @@ private:
   SDL_Surface *selected_box;
   SDL_Surface *background;
 public:
-  ListBox (uint _x, uint _y, uint _width, uint _height);
+  ListBox (uint _x, uint _y, uint _w, uint _h);
   ~ListBox();
 
   void Draw (uint mouse_x, uint mouse_y);
