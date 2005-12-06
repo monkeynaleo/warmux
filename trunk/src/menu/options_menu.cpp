@@ -25,6 +25,7 @@
 #include "../gui/list_box.h"
 #include "../gui/check_box.h"
 #include "../gui/spin_button.h"
+#include "../gui/vbox.h"
 #include "../gui/question.h"
 
 #include "../tool/resource_manager.h"
@@ -80,6 +81,11 @@ const uint TPS_TOUR_MAX = 120;
 const uint TPS_FIN_TOUR_MIN = 1;
 const uint TPS_FIN_TOUR_MAX = 10;
 
+const uint SOUND_X = 750;
+const uint SOUND_Y = 400;
+const uint SOUND_W = 160;
+const uint SOUND_H = 80;
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
@@ -100,7 +106,7 @@ OptionMenu::OptionMenu()
   lboxMaps = new ListBox(x, MAPS_Y, MAPS_LARG, MAPS_HAUT);
   lboxTeams = new ListBox(500, TEAMS_Y, TEAMS_LARG, TEAMS_HAUT);
   lboxVideoMode = new ListBox(500, VIDEO_MODE_Y, VIDEO_MODE_LARG, VIDEO_MODE_HAUT);
-  lboxSoundFreq = new ListBox(500, SOUND_FREQ_Y, SOUND_FREQ_WIDTH, SOUND_FREQ_HEIGHT);
+  lboxSoundFreq = new ListBox(0, 0, 0, SOUND_FREQ_HEIGHT);
 
 
   x = (video.GetWidth()-CARTE_LARG-MAPS_LARG-TEAMS_LARG)/4;
@@ -110,8 +116,17 @@ OptionMenu::OptionMenu()
   option_affichage_nom = new CheckBox(_("Display player's name?"), x, CBOX_ENERGIE_Y+2*20, MAPS_LARG);
   full_screen = new CheckBox(_("Fullscreen?"), x, CBOX_ENERGIE_Y+7*20, MAPS_LARG);
 
-  opt_music = new CheckBox(_("Music?"), video.GetWidth()/2, 0, MAPS_LARG);
-  opt_sound_effects = new CheckBox(_("Sound effects?"), video.GetWidth()/2, 0, MAPS_LARG);
+  sound_options = new Vbox(SOUND_X, SOUND_Y, SOUND_W, SOUND_H);
+
+  sound_options->AddWidget(lboxSoundFreq);
+
+  opt_music = new CheckBox(_("Music?"), 0, 0, 0);
+  sound_options->AddWidget(opt_music);
+
+  opt_sound_effects = new CheckBox(_("Sound effects?"), 0, 0, 0);
+  sound_options->AddWidget(opt_sound_effects);
+  
+  
 
   option_temps_tour = new SpinButton(_("Duration of a turn:"), x, CBOX_ENERGIE_Y+(3*20),
 				     60, 5, TPS_TOUR_MIN, TPS_TOUR_MAX);
@@ -151,8 +166,10 @@ OptionMenu::~OptionMenu()
   delete option_affichage_energie;
   delete option_affichage_nom;
   delete full_screen;
-  delete opt_music;
-  delete opt_sound_effects;
+
+  delete sound_options;
+//   delete opt_music;
+//   delete opt_sound_effects;
 
   delete option_temps_tour;
   delete option_temps_fin_tour;
@@ -190,6 +207,9 @@ void OptionMenu::onClick ( int x, int y)
   } else if (opt_music->Clic (x,y)) {
   } else if (opt_sound_effects->Clic (x,y)) {
   }
+//   } else if (sound_options->Clic (x,y)) {
+//   }
+
 }
 
 //-----------------------------------------------------------------------------
@@ -429,7 +449,7 @@ void OptionMenu::Lance ()
     lboxTeams->Draw(x,y);
     lboxVideoMode->Draw(x,y);
     full_screen->Draw(x,y);
-    lboxSoundFreq->Draw(x,y);
+    //    lboxSoundFreq->Draw(x,y);
     option_affichage_energie->Draw(x,y);
     option_affichage_nom->Draw(x,y);
     option_display_wind_particles->Draw(x,y);
@@ -437,9 +457,10 @@ void OptionMenu::Lance ()
     option_temps_fin_tour->Draw(x,y);
     option_nb_ver->Draw(x,y);
     option_energie_ini->Draw(x,y);
-    opt_music->Draw(x,y);
-    opt_sound_effects->Draw(x,y);
-
+//     opt_music->Draw(x,y);
+//     opt_sound_effects->Draw(x,y);
+    sound_options->Draw(x,y);
+    
 
    SDL_Rect team_icon_rect = { (espace*3)+CARTE_LARG+MAPS_LARG+(TEAMS_LARG/2)-ECUSSON_LARG/2,
 	                       ECUSSON_Y,

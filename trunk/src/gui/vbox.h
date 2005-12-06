@@ -16,34 +16,30 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Widget
+ * Vertical Box
  *****************************************************************************/
 
-#ifndef GUI_WIDGET_H
-#define GUI_WIDGET_H
+#ifndef GUI_VBOX_H
+#define GUI_VBOX_H
 
-#include "../include/base.h"
+//-----------------------------------------------------------------------------
+#include "widget.h"
+#include <list>
 //-----------------------------------------------------------------------------
 
-class Widget
+class Vbox : public Widget
 {
- protected:
-  uint x, y, w, h;
+ private:
+  std::list<Widget *> widgets;
 
  public:
-  Widget(uint _x, uint _y, uint _w, uint _h);
-  virtual ~Widget();
+  Vbox(uint x, uint y, uint w, uint h);
+  virtual ~Vbox();
 
-  virtual void Draw (uint mouse_x, uint mouse_y) = 0;
-  bool MouseIsOver (uint mouse_x, uint mouse_y) ;
-  //virtual bool Clic (uint mouse_x, uint mouse_y);
+  void Draw (uint mouse_x, uint mouse_y);
+  //bool Clic (uint mouse_x, uint mouse_y);
 
-  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
-
-  uint GetX() const {return x;}
-  uint GetY() const {return y;}
-  uint GetW() const {return w;}
-  uint GetH() const {return h;}
+  void AddWidget(Widget * a_widget);
 };
 
 //-----------------------------------------------------------------------------

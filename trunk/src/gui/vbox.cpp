@@ -16,49 +16,75 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Widget
+ * Vertical Box
  *****************************************************************************/
 
-#include "widget.h"
-
+#include "vbox.h"
+#include <iostream>
 //-----------------------------------------------------------------------------
 
-Widget::Widget(uint _x, uint _y, uint _w, uint _h) :
-  x(_x), y(_y), w(_w), h(_h)
+Vbox::Vbox(uint _x, uint _y, uint _w, uint _h) :
+  Widget(_x,_y,_w,_h)
 {
 }
 
 //-----------------------------------------------------------------------------
 
-Widget::~Widget()
+Vbox::~Vbox()
 {
+  
+  std::list<Widget *>::iterator it;
+  for (it = widgets.begin(); 
+       it != widgets.end(); 
+       ++it){
+    widgets.erase(it);
+  }
 }
 
 //-----------------------------------------------------------------------------
 
-bool Widget::MouseIsOver (uint mouse_x, uint mouse_y)
+void Vbox::Draw (uint mouse_x, uint mouse_y)
 {
-  return ((x <= mouse_x) && (mouse_x <= x+w)
-	  && (y <= mouse_y) && (mouse_y <= y+h));
-
+  std::list<Widget *>::iterator it;
+  for (it = widgets.begin(); 
+       it != widgets.end(); 
+       ++it){
+    (*it)->Draw(mouse_x, mouse_y);
+  }
 }
 
 //-----------------------------------------------------------------------------
 
-// bool Widget::Clic (uint mouse_x, uint mouse_y)
+// bool Vbox::Clic (uint mouse_x, uint mouse_y)
 // {
+//   bool r=false;
+
+//   std::list<Widget *>::iterator it;
+//   for (it = widgets.begin(); 
+//        it != widgets.end(); 
+//        ++it){
+//     std::cout << "Do we crash ?" << std::endl;
+//     r = (*it)->Clic(mouse_x, mouse_y);
+//     std::cout << "No :-)" << std::endl;
+//     if (r) return true;
+//   }
+
 //   return false;
 // }
 
-
 //-----------------------------------------------------------------------------
 
-void Widget::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+void Vbox::AddWidget(Widget * a_widget)
 {
-  x = _x;
-  y = _y;
-  w = _w;
-  h = _h;
+  if (!widgets.empty()) {
+    Widget * prev = (*(--widgets.end()));
+    a_widget->SetSizePosition(x, prev->GetY()+prev->GetH(), w, a_widget->GetH());
+  }
+  else 
+    a_widget->SetSizePosition(x, y, w, a_widget->GetH());
+
+  widgets.push_back(a_widget);
+
 }
 
 //-----------------------------------------------------------------------------
