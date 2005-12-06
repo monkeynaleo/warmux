@@ -83,7 +83,7 @@ typedef enum {
    void SetAlpha( float alpha); // Can't be combined with per pixel alpha
    float GetAlpha();
    void Start();
-   void StartLoop();
+//   void StartLoop();
    void Finish();
    void SetPlayBackward(bool enable);
    void Show();
