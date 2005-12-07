@@ -135,7 +135,7 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
 #else
       anim.image = resource_manager.LoadSprite( res, "animation");
       anim.image->Start();
-       
+      anim.image->SetShowOnFinish(Sprite::show_blank);
 #endif
     }
   }
