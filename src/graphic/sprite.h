@@ -61,10 +61,12 @@ typedef enum {
    Sprite( SDL_Surface *surface);
    ~Sprite();
    void Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
+   void AddFrame(SDL_Surface* surf, unsigned int delay);
    void EnableRotationCache(unsigned int cache_size);
    void EnableFlippingCache();
 
-   // Get physical characterisics
+   // Get/Set physical characterisics
+	void SetSize(unsigned int w, unsigned int h);
    unsigned int GetWidth();
    unsigned int GetHeight();
    unsigned int GetFrameCount();

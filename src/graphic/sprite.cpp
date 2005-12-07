@@ -211,6 +211,11 @@ void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int 
        }
 }
 
+void Sprite::AddFrame(SDL_Surface* surf, unsigned int delay)
+{
+	  frames.push_back(SpriteFrame(surf,delay));
+}
+
 void Sprite::EnableRotationCache(unsigned int cache_size)
 {
   assert(!have_rotation_cache);
@@ -251,6 +256,13 @@ void Sprite::EnableFlippingCache()
       }
     }
   }
+}
+
+void Sprite::SetSize(unsigned int w, unsigned int h)
+{
+   assert(frame_width_pix == 0 && frame_height_pix == 0)
+	frame_width_pix = w;
+	frame_height_pix = 0;
 }
 
 unsigned int Sprite::GetWidth()
@@ -606,16 +618,23 @@ void Sprite::Update()
   if (finished) return;
   if (Wormux::temps.Lit() < (last_update + GetCurrentFrameObject().delay))
      return;
-   last_update = Wormux::temps.Lit();
+
+   //Delta to next frame used to enable frameskip
+   //if delay between 2 frame is < fps
+   int delta_to_next_f = (Wormux::temps.Lit() - last_update) / GetCurrentFrameObject().delay;
+   last_update += delta_to_next_f * GetCurrentFrameObject().delay;
+
+//   last_update = Wormux::temps.Lit();
+
    bool finish;
    if (frame_delta < 0)
-     finish = (current_frame + frame_delta) <= 0;
+     finish = (current_frame + frame_delta * delta_to_next_f) <= 0;
    else
-     finish = (frames.size()-1) <= (current_frame + frame_delta);
+     finish = (frames.size()-1) <= (current_frame + frame_delta * delta_to_next_f);
    if (finish && !loop)
       Finish();
    else
-     current_frame = ( current_frame + frame_delta ) % frames.size();
+     current_frame = ( current_frame + frame_delta * delta_to_next_f) % frames.size();
 }
 
 void Sprite::Draw(int pos_x, int pos_y)
