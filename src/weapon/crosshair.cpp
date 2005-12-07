@@ -24,6 +24,7 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../weapon/weapon.h"
+#include "../game/game_loop.h"
 #ifdef CL
 #else
 #include <SDL.h>
@@ -83,6 +84,7 @@ void CrossHair::Draw()
 {
   if (!enable) return;
   if (ActiveCharacter().IsDead()) return;
+  if (game_loop.ReadState() != gamePLAYING) return;
 
   int x,y;
   ActiveCharacter().GetHandPosition(x,y);

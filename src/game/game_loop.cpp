@@ -465,9 +465,8 @@ void GameLoop::Draw ()
   StatStart("GameDraw:characters");
   POUR_TOUS_VERS(equipe,ver) {
     ver -> Draw();
-
     if (&(*ver) == &ActiveCharacter() && !ActiveCharacter().IsDead()) {
-      if (state == gamePLAYING) {
+    if (state != gameEND_TURN) {
 	ActiveTeam().crosshair.Draw();
 	ActiveTeam().AccessWeapon().Draw();
       }

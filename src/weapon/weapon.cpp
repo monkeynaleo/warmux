@@ -584,6 +584,8 @@ void Weapon::DrawWeaponBox()
 
 void Weapon::Draw()
 {
+  if(game_loop.ReadState() != gamePLAYING) return;
+
   weapon_strength_bar.visible = false;
 
   switch (m_unit_visibility)
