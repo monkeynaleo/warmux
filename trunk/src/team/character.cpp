@@ -114,6 +114,7 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   is_walking = true;
   current_skin = "";
   channel_step = -1;
+  hidden = false;
 
 #ifndef CL
   name_text = NULL;
@@ -332,15 +333,17 @@ void Character::SetEnergyDelta (int delta)
 
 void Character::Draw()
 {
+  if (hidden) return;
+
+  // Gone in another world ?
+  if (!IsActive()) return;
+
   bool dessine_perte = (losted_energy != 0);
   if ((&ActiveCharacter() == this) 
       && (game_loop.ReadState() != gameEND_TURN)
       //&& (game_loop.ReadState() != jeuANIM_FIN_TOUR)
       )
     dessine_perte = false;
-
-  // Gone in another world ?
-  if (!IsActive()) return;
 
   // Draw skin
   if(!is_walking) //walking skins image update only when a keyboard key is pressed
@@ -1087,4 +1090,7 @@ void Character::EndTurn()
   m_rebounding = true;
 }
 
+//-----------------------------------------------------------------------------
+void Character::Hide() { hidden = true; }
+void Character::Show() { hidden = false; }
 //-----------------------------------------------------------------------------

@@ -17,6 +17,7 @@ wormux_SOURCES = \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/video.cpp graphic/video.h \
 	graphic/text.cpp graphic/text.h \
+	graphic/effects.cpp graphic/effects.h \
 	gui/button.cpp gui/button.h \
 	gui/button_text.cpp gui/button_text.h \
 	gui/check_box.cpp gui/check_box.h \

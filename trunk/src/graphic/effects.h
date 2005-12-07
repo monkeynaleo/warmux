@@ -16,46 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Téléportation : déplacement d'un ver n'importe où sur le terrain.
+ *  Graphic effects on sprite / pixel acces to SDL_Surface
  *****************************************************************************/
 
-#ifndef TELEPORTATION_H
-#define TELEPORTATION_H
-//-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../tool/Point.h"
-#include "weapon.h"
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "sprite.h"
 
-class Teleportation : public Weapon
-{
-private:
-  bool retour; // on est dans le retour ?
-  uint temps;
-#ifdef CL
-  CL_Point src,dst;
-#else
-  Point2i src, dst;
-#endif
-  int m_x,m_y;
-  float m_zoom;
-  int m_direction;
-
-	Sprite* skin;
-
-  bool p_Shoot();
-
-public:
-  Teleportation();
-  void Refresh();
-  void Draw();
-  virtual void ChooseTarget();
-  WeaponConfig& cfg();
-};
-
-extern Teleportation teleportation;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
-#endif
+Sprite* WaveSurface(SDL_Surface* a,unsigned int nbr_frames, unsigned int duration, float wave_amp, float wave_per);

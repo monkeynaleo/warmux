@@ -76,6 +76,7 @@ private:
 
   uint m_image_frame; // Current image frame
   uint m_frame_repetition; // Number of frame repetition (used for walking)
+  bool hidden; //The character is hidden (needed by teleportation)
 
   // Channel used for sound
   int channel_step;
@@ -137,6 +138,8 @@ public:
   // Désactive/Réactive le ver
   void Desactive();
   void Reactive();
+  void Hide();
+  void Show();
 
   // Un ver est actif ? (affiché et ses données sont calculées ?)
   bool IsActive() const; 

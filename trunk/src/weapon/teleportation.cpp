@@ -28,12 +28,13 @@
 #include "../game/game_loop.h"
 #include "../map/map.h"
 #include "../game/time.h"
+#include "../graphic/effects.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
 Teleportation teleportation;
 //-----------------------------------------------------------------------------
 
-const uint duree_animation = 1000; // ms
+const uint duree_animation = 3000; // ms
 double ZOOM_MAX = 10; // zoom maximum durant le petit effet graphique
 uint ESPACE = 4;
 
@@ -69,8 +70,17 @@ bool Teleportation::p_Shoot ()
   // Initialise les variables
   temps = Wormux::temps.Lit();
   retour = false;
-  ActiveCharacter().Desactive();
   m_direction = ActiveCharacter().GetDirection();
+
+  // Compute skins animation
+  SDL_Surface* current_skin=NULL;
+  if(m_direction == 1)
+    current_skin = ActiveCharacter().image->GetCurrentFrameObject().surface;
+  else
+    current_skin = ActiveCharacter().image->GetCurrentFrameObject().flipped_surface;
+
+  ActiveCharacter().Hide();
+  skin = WaveSurface(current_skin, 100, duree_animation, 5.0, 1.5);
   return true;
 }
 
@@ -82,64 +92,45 @@ void Teleportation::Refresh()
 
   double dt = Wormux::temps.Lit() - temps;
 
+  // On a fait le chemin retour ?
+  if (retour) {
+    // Oui, c'est la fin de la téléportation
+    m_is_active = false;
+    ActiveCharacter().image->Scale (m_direction, 1);
+    ActiveCharacter().SetSpeed(0.0,0.0);
+    ActiveCharacter().Show();
+    jukebox.Play("share","weapon/teleport_end");
+    game_loop.interaction_enabled = true;
+    delete skin;
+    return;
+  }
+
   // Fin du chronometre ?
   if (duree_animation < dt)
   {
-    // On a fait le chemin retour ?
-    if (retour) {
-      // Oui, c'est la fin de la téléportation
-      m_is_active = false;
-#ifdef CL
-      ActiveCharacter().image.set_scale (m_direction, 1);
-#else
-      ActiveCharacter().image->Scale (m_direction, 1);
-#endif
-      ActiveCharacter().SetSpeed(0.0,0.0);
-      ActiveCharacter().Reactive();
-      
-#ifdef CL
-      jukebox.Play("weapon/teleport_end");
-#else
-      jukebox.Play("share","weapon/teleport_end");
-#endif
-      game_loop.interaction_enabled = true;
-      return;
-
-    } else {
-      // Non, on fait le chemin retour en 
-      // commençant par déplacer le ver
-      retour = true;
-      ActiveCharacter().SetXY (dst.x, dst.y);
-      temps = Wormux::temps.Lit();
-      dt = 0.0;
-    }
+    // Non, on fait le chemin retour en 
+    // commençant par déplacer le ver
+    retour = true;
+    ActiveCharacter().SetXY (dst.x, dst.y);
+    temps = Wormux::temps.Lit();
+    dt = 0.0;
+    return;
   }
 
-  // Calcule le zoom
-  if ((duree_animation/2) <= dt) {
-    // Seconde partie
-    dt = (duree_animation-dt)/duree_animation;
-    if (retour)
-      m_zoom = 1+dt*(ZOOM_MAX-1);
-    else
-      m_zoom = dt*ZOOM_MAX;
-  } else {
-    // Premier partie
-    dt /= duree_animation;
-    if (retour)
-      m_zoom = dt*ZOOM_MAX;
-    else
-      m_zoom = 1+dt*(ZOOM_MAX-1);
+  if (duree_animation / 2 < dt)
+  {
+    m_x = dst.x;
+    m_y = dst.y - skin->GetHeight()/2;
+    return;
   }
 
   uint larg=ActiveCharacter().GetWidth();
-  uint haut=ActiveCharacter().GetHeight();
-  uint nv_larg = (uint)(larg * m_zoom);
-  uint nv_haut = (uint)(haut * m_zoom);
-  m_x = ActiveCharacter().GetX() - (nv_larg-larg)/2;
-  m_y = ActiveCharacter().GetY() - (nv_haut-haut)/2;
-  if(ActiveCharacter().GetDirection() == -1)
-    m_x += nv_larg;
+
+  m_x = ActiveCharacter().GetX() - (skin->GetWidth()-larg)/2;
+  m_y = ActiveCharacter().GetY();
+
+//  if(ActiveCharacter().GetDirection() == -1)
+//    m_x += nv_larg;
 }
 
 //-----------------------------------------------------------------------------
@@ -151,8 +142,10 @@ void Teleportation::Draw()
     ActiveCharacter().image.set_scale (m_zoom*m_direction, m_zoom);
     ActiveCharacter().image.draw (m_x, m_y);
 #else
-    ActiveCharacter().image->Scale (m_zoom*m_direction, m_zoom);
-    ActiveCharacter().image->Draw (m_x, m_y);
+//    ActiveCharacter().image->Scale (m_zoom*m_direction, m_zoom);
+//    ActiveCharacter().image->Draw (m_x, m_y);
+	 skin->Update();
+    skin->Draw(m_x, m_y);
 #endif
   } else {
     Weapon::Draw();
