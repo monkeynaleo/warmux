@@ -16,28 +16,31 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Vertical Box
+ * Vertical or Horizontal Box
  *****************************************************************************/
 
-#ifndef GUI_VBOX_H
-#define GUI_VBOX_H
+#ifndef GUI_BOX_H
+#define GUI_BOX_H
 
 //-----------------------------------------------------------------------------
 #include "widget.h"
 #include <list>
 //-----------------------------------------------------------------------------
 
-class Vbox : public Widget
+class Box : public Widget
 {
  private:
   std::list<Widget *> widgets;
+  Widget * last_widget;
+  bool horizontal;
 
  public:
-  Vbox(uint x, uint y, uint w, uint h);
-  virtual ~Vbox();
+  Box(uint x, uint y, uint w, uint h, bool _horizontal=false);
+  virtual ~Box();
 
   void Draw (uint mouse_x, uint mouse_y);
-  //bool Clic (uint mouse_x, uint mouse_y);
+  bool Clic (uint mouse_x, uint mouse_y);
+  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
 
   void AddWidget(Widget * a_widget);
 };

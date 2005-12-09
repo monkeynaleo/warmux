@@ -35,8 +35,7 @@ Button::Button (uint x, uint y, uint w, uint h,
 
 //-----------------------------------------------------------------------------
 
-Button::Button (uint x, uint y,
-		const Profile *res_profile, const std::string& resource_id)
+Button::Button (uint x, uint y, const Profile *res_profile, const std::string& resource_id)
   : Widget(x, y, 1, 1)
 {
   image = resource_manager.LoadSprite(res_profile,resource_id);
@@ -59,4 +58,11 @@ void Button::Draw (uint mouse_x, uint mouse_y)
   image->Draw(x, y);
 }
 
+//-----------------------------------------------------------------------------
+
+void Button::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+{
+  StdSetSizePosition(_x, _y, _w, _h);
+  image->ScaleSize(w,h);
+}
 //-----------------------------------------------------------------------------

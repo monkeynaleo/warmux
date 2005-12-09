@@ -47,7 +47,6 @@ public:
 
 private:
   // for the placement
-  uint visible_height; 
   uint nb_visible_items, nb_visible_items_max;
   uint height_item;
   
@@ -60,15 +59,15 @@ private:
 
   // Buttons
   Button *m_up, *m_down;
-  SDL_Surface *cursorover_box;
-  SDL_Surface *selected_box;
-  SDL_Surface *background;
+
 public:
   ListBox (uint _x, uint _y, uint _w, uint _h);
   ~ListBox();
 
   void Draw (uint mouse_x, uint mouse_y);
-  bool Clic (uint mouse_x, uint mouse_y);
+  bool Clic (uint mouse_x, uint mouse_y);  
+  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+
   void AddItem (bool selected, 
 		const std::string &label,
 		const std::string &value);

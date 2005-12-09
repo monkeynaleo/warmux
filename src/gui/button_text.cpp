@@ -33,7 +33,8 @@ ButtonText::~ButtonText()
 
 //-----------------------------------------------------------------------------
 
-ButtonText::ButtonText (uint x, uint y, uint w, uint h, 
+ButtonText::ButtonText (uint x, uint y,
+			uint w, uint h, 
 			const Profile *res_profile, const std::string& resource_id,
 			const std::string &new_text,
 			Font *font)
@@ -45,10 +46,11 @@ ButtonText::ButtonText (uint x, uint y, uint w, uint h,
 
 //-----------------------------------------------------------------------------
 
-void ButtonText::Draw (uint souris_x, uint souris_y)
+void ButtonText::Draw (uint mouse_x, uint mouse_y)
 {
-  Button::Draw (souris_x, souris_y);
+  Button::Draw (mouse_x, mouse_y);
   text->DrawCenter(GetX()+w/2,GetY()+h/2);
 }
 
 //-----------------------------------------------------------------------------
+

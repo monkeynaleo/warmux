@@ -75,6 +75,11 @@ bool CheckBox::Clic (uint mouse_x, uint mouse_y)
 }
 
 //-----------------------------------------------------------------------------
+void CheckBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+{
+  StdSetSizePosition(_x, _y, _w, _h);
+}
+//-----------------------------------------------------------------------------
 
 bool CheckBox::GetValue()  const { return m_value; }
 void CheckBox::SetValue(bool value)  { m_value = value; }

@@ -45,15 +45,15 @@ bool Widget::MouseIsOver (uint mouse_x, uint mouse_y)
 
 //-----------------------------------------------------------------------------
 
-// bool Widget::Clic (uint mouse_x, uint mouse_y)
-// {
-//   return false;
-// }
+bool Widget::Clic (uint mouse_x, uint mouse_y)
+{
+  return false;
+}
 
 
 //-----------------------------------------------------------------------------
 
-void Widget::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+void Widget::StdSetSizePosition(uint _x, uint _y, uint _w, uint _h)
 {
   x = _x;
   y = _y;
