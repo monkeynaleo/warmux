@@ -152,7 +152,7 @@ bool AppWormux::Init(int argc, char **argv)
     std::cerr << "TTF_Init: "<< TTF_GetError() << std::endl;
     return false;
   }
-  Font::InitAllFonts();
+  if (!Font::InitAllFonts()) return false;
 
   // Load graphics resources XML file
 #ifdef CL
@@ -232,7 +232,7 @@ int AppWormux::main (int argc, char **argv)
   try {
     Prepare();
     if (!Init(argc, argv)) {
-      std::cout << std::endl << "Error during initialisation...";
+      std::cout << std::endl << "Error during initialisation..." << std::endl;
       return 0;
     }
     do {

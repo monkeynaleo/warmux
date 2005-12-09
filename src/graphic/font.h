@@ -45,7 +45,7 @@ public:
 public:
   Font();
   ~Font();
-  void Load (const std::string& resource_id, int size);
+  bool Load (const std::string& resource_id, int size);
   void WriteLeft (int x, int y, const std::string &txt, SDL_Color color);
   void WriteLeftBottom (int x, int y, const std::string &txt, SDL_Color color);
   void WriteRight (int x, int y, const std::string &txt, SDL_Color color);
@@ -56,7 +56,7 @@ public:
   int GetHeight (const std::string &txt);
   SDL_Surface * Render(const std::string &txt, SDL_Color color, bool cache=false);
 
-  static void InitAllFonts();
+  static bool InitAllFonts();
  };
 
 extern Font huge_font;
