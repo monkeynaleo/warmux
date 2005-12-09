@@ -26,6 +26,7 @@
 #include "../tool/resource_manager.h"
 #include "../include/app.h"
 #include <algorithm>
+#include <SDL_gfxPrimitives.h>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
@@ -36,41 +37,23 @@ ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
   m_up = new Button(x+w-10, y, 10, 5, res, "menu/up");
   m_down = new Button(x+w-10, y+h-5, 10, 5, res, "menu/down");
 
-  height_item = 15;
+  height_item = small_font.GetHeight();
   first_visible_item = 0;
   nb_visible_items_max = h/height_item;
   nb_visible_items = 0;
-  visible_height = 0;
   selection_min = 1;
   selection_max = 1;
-
-  SDL_Rect r_item = {0,0,w,height_item};
-  SDL_Rect r_back = {0,0,w,h};
-
-  cursorover_box = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, w, height_item, 
-					 32, 0x000000ff, 0x0000ff00, 0x00ff0000,0xff000000);
-  SDL_FillRect( cursorover_box, &r_item, SDL_MapRGBA( cursorover_box->format,0,0,255*6/10,255*4/10));
-  			       
-  selected_box = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, w, height_item, 
-					 32, 0x000000ff, 0x0000ff00, 0x00ff0000,0xff000000);
-  SDL_FillRect( selected_box, &r_item, SDL_MapRGBA( selected_box->format,0,0,255*6/10,255*8/10));
-
-  background = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, w, h,
-				     32, 0x000000ff, 0x0000ff00, 0x00ff0000,0xff000000);
-  SDL_FillRect( background, &r_back, SDL_MapRGBA( background->format,255, 255, 255, 255*3/10));
 }
+
+//-----------------------------------------------------------------------------
 
 ListBox::~ListBox()
 {
-   if ( cursorover_box)
-     SDL_FreeSurface( cursorover_box);
-   if ( selected_box)
-     SDL_FreeSurface( selected_box);
-   if ( background)
-     SDL_FreeSurface( background);
-
    delete m_up;
    delete m_down;
+
+   m_selection.clear();
+   m_items.clear();
 }
 
 //-----------------------------------------------------------------------------
@@ -79,7 +62,7 @@ int ListBox::MouseIsOnWitchItem (uint mouse_x, uint mouse_y)
 {
   if ((mouse_x < x+1) 
       || (mouse_y < y+1)
-      || ((y+1 + visible_height) < mouse_y)
+      || ((y+1 + h) < mouse_y)
       || ((x + w) < mouse_x)) 
     return -1;
 
@@ -125,62 +108,52 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y)
 void ListBox::Draw (uint mouse_x, uint mouse_y)
 {
   int item = MouseIsOnWitchItem(mouse_x, mouse_y);
-
-#ifdef CL
-  CL_Display::fill_rect(CL_Rect(, CL_Color(255, 255, 255, 255*3/10));
-#else
-  // blit a surface as SDL_FillRect don't alpha blit a rectangle
-   SDL_Rect r_back = {x,y,w,h};
-   SDL_BlitSurface( background, NULL, app.sdlwindow, &r_back);			
-#endif
-   
+  
+  boxRGBA(app.sdlwindow, x, y, x+w, x+h,
+		255, 255, 255, 255*3/10);
+  
   for (uint i=0; i < nb_visible_items; i++) 
   {
-#ifdef CL
-    if ( i+first_visible_item == uint(item) ) {
-      CL_Display::fill_rect(CL_Rect(x+1, y+i*height_item+1, x+w-1, y+(i+1)*height_item-1), 
-			    CL_Color(0,0,255*6/10,255*4/10));
-    } else if ( IsSelected(i+first_visible_item) ) {
-      CL_Display::fill_rect (CL_Rect(x+1, y+i*height_item+1, x+w-1, y+(i+1)*height_item-1), 
-			     CL_Color(0,0,255*6/10,255*8/10));
-    }
-#else
-     // blit surfaces as SDL_FillRect don't alpha blit a rectangle
      if ( i+first_visible_item == uint(item) ) {
-	SDL_Rect r = {x+1, y+i*height_item+1, w-2, height_item-2};
-	SDL_BlitSurface( cursorover_box, NULL, app.sdlwindow, &r);
-    } else if ( IsSelected(i+first_visible_item) ) {
-	SDL_Rect r = {x+1, y+i*height_item+1, w-2, height_item-2};
-        SDL_BlitSurface( selected_box, NULL, app.sdlwindow, &r);
-    }
-#endif
+       boxRGBA(app.sdlwindow, 
+	       x+1, y+i*height_item+1, 
+	       x+1+w-2, y+i*height_item+1+height_item-2,
+	       0,0,255*6/10,255*4/10);
+       
+     } else if ( IsSelected(i+first_visible_item) ) {
+       boxRGBA(app.sdlwindow, 
+	       x+1, y+i*height_item+1, 
+	       x+1+w-2, y+i*height_item+1+height_item-2,
+	       0,0,255*6/10,255*8/10);
+     }
      
-#ifdef CL
-    police_mix.WriteLeft(x+5,
-			 y+i*height_item,
-			 m_items[i+first_visible_item].label) ;
-#else
-    small_font.WriteLeft(x+5,
-			 y+i*height_item,
-			 m_items[i+first_visible_item].label,
-			 white_color);//IsSelected(i+first_visible_item) ? black_color : white_color) ;
-    
-#endif
+     small_font.WriteLeft(x+5,
+			  y+i*height_item,
+			  m_items[i+first_visible_item].label,
+			  white_color);//IsSelected(i+first_visible_item) ? black_color : white_color) ;
+     
   }  
 
 
   // buttons for listbox with more items than visible
   if (m_items.size() > nb_visible_items_max)
   {
-    //m_up.SetPos(x+w-12, y+2);
-    //m_down.SetPos(x+w-12, y+height-7);
-
     m_up->Draw (mouse_x, mouse_y);
     m_down->Draw (mouse_x, mouse_y);
   }
   
   
 }
+
+//-----------------------------------------------------------------------------
+
+void ListBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+{
+  StdSetSizePosition(_x, _y, _w, _h);
+  m_up->SetSizePosition(x+w-10, y, 10, 5);
+  m_down->SetSizePosition(x+w-10, y+h-5, 10, 5);
+}
+
 //-----------------------------------------------------------------------------
 
 void ListBox::AddItem (bool selected, 
@@ -201,10 +174,6 @@ void ListBox::AddItem (bool selected,
   nb_visible_items = m_items.size();
   if (nb_visible_items_max < nb_visible_items) 
     nb_visible_items = nb_visible_items_max;
-
-  visible_height = nb_visible_items*height_item;
-  if (h < visible_height)  visible_height = h;
-
 }
 
 //-----------------------------------------------------------------------------

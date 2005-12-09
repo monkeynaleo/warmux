@@ -29,16 +29,18 @@ class Widget
 {
  protected:
   uint x, y, w, h;
+  void StdSetSizePosition(uint _x, uint _y, uint _w, uint _h);
 
  public:
   Widget(uint _x, uint _y, uint _w, uint _h);
   virtual ~Widget();
 
   virtual void Draw (uint mouse_x, uint mouse_y) = 0;
-  bool MouseIsOver (uint mouse_x, uint mouse_y) ;
-  //virtual bool Clic (uint mouse_x, uint mouse_y);
 
-  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+  bool MouseIsOver (uint mouse_x, uint mouse_y) ;
+  virtual bool Clic (uint mouse_x, uint mouse_y);
+
+  virtual void SetSizePosition(uint _x, uint _y, uint _w, uint _h) = 0;
 
   uint GetX() const {return x;}
   uint GetY() const {return y;}

@@ -42,6 +42,8 @@ class CheckBox : public Widget
   ~CheckBox();
   void Draw (uint mouse_x, uint mouse_y) ;
   bool Clic (uint mouse_x, uint mouse_y) ;
+  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+
   bool GetValue() const;
   void SetValue(bool value);
 };

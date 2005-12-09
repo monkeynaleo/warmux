@@ -25,12 +25,13 @@
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
 # include <sstream>
+#include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
-SpinButton::SpinButton (const std::string &label, uint x, uint y, uint w, uint h,
+SpinButton::SpinButton (const std::string &label, uint x, uint y, uint w,
 			     int value, int step, int min_value, int max_value) :
-  Widget(x,y,w,h)
+  Widget(x,y,w,small_font.GetHeight())
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml"); 
 
@@ -67,6 +68,21 @@ SpinButton::~SpinButton ()
   delete txt_value;
 }
 
+
+//-----------------------------------------------------------------------------
+void SpinButton::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+{
+  StdSetSizePosition(_x, _y, _w, _h);
+
+  std::ostringstream max_value_s;
+  max_value_s << m_max_value ;
+  uint max_value_w = small_font.GetWidth(max_value_s.str());
+  
+  uint margin = 5;
+  
+  m_plus->SetSizePosition(x+w-5,y,5,10);
+  m_minus->SetSizePosition(x+w-max_value_w-5-2*margin,y,5,10);
+}
 
 //-----------------------------------------------------------------------------
 
