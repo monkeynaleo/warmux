@@ -34,7 +34,7 @@ class CheckBox;
 class SpinButton;
 class SDL_Surface;
 class Sprite;
-class Vbox;
+class Box;
 
 class OptionMenu
 {
@@ -49,35 +49,42 @@ class OptionMenu
  private:
    bool fin_boucle;
    
+   /* Actions buttons  */
    Button *valider; 
    Button *enregistrer;
    Button *annuler;
+   Box *actions_buttons;
 
+   /* Graphic options controllers */   
    ListBox *lboxVideoMode;
-   ListBox *lboxMaps;
-   ListBox *lboxTeams;
-   ListBox *lboxSoundFreq;
-
    CheckBox *option_display_wind_particles;
    CheckBox *option_affichage_energie;
    CheckBox *option_affichage_nom;
-   CheckBox *full_screen;
-   Vbox *graphic_options;
+   CheckBox *full_screen;    
+   Box *graphic_options;
 
-
+   /* Sound options controllers */
+   ListBox *lboxSoundFreq;
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
-   Vbox *sound_options;
+   Box *sound_options;
 
+   /* Game options controllers */
    SpinButton *option_temps_tour;
    SpinButton *option_temps_fin_tour;
    SpinButton *option_nb_ver;
    SpinButton *option_energie_ini;
-   Vbox *game_options;
+   Box *game_options;
+
+   /* Team controllers */
+   ListBox *lboxTeams;   
+
+   /* Map controllers */
+   ListBox *lboxMaps;
+   Sprite *map_preview;  
 
    bool m_init;
 
-   Sprite *map_preview;
    Sprite *fond_option; 
    SDL_Surface *fond_maps;
    SDL_Surface *fond_box;
