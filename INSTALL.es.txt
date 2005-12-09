@@ -1,3 +1,5 @@
+THIS DOCUMENTATION IS OUTDATED
+
 =======================
 Compilacion en Linux
 =======================

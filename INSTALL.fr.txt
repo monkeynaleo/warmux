@@ -1,3 +1,5 @@
+CETTE DOCUMENTATION N'EST PLUS A JOUR
+
 Wormux 0.5
 Compilation/Installation sous Linux
 -----------------------------------
