@@ -2,25 +2,39 @@ Wormux 0.5
 Compilation/Installation under Linux
 -----------------------------------
 
-==========
+==============
 * Dependencies
-==========
+==============
 
 If the following software is not presently on your system, you will need to download them
 before attempting to install Wormux 0.5 on your computer...
 
-* ClanLib
-----------
+* SDL
+-----
 
-Wormux (as of 13/11/2004) needs the ClanLib library - ("0.7 subversion" version)
+Wormux needs the SDL library version 1.2.
 
-This version can be downloaded of their website: http://www.clanlib.org/
+It can be downloaded of their website: http://www.libsdl.org/
 
+* SDL mixer, SDL image, SDL ttf and SDL gfx
+-------------------------------------------
+
+SDL is splitted is small modules. Wormux needs mixer (sound), image (load
+picture file), ttf (draw text) and gfx (graphical things).
+
+You may have trouble to install SDL gfx: Wormux *needs* version 2.0.13 or
+greater. Download it and compile it.
+
+Here are their website:
+ http://www.libsdl.org/projects/SDL_ttf/
+ http://www.libsdl.org/projects/SDL_mixer/
+ http://www.libsdl.org/projects/SDL_image/
+ http://www.ferzkopp.net/Software/SDL_gfx-2.0/
 
 * libxml++
 ----------
 
-Wormux uses the libxml++ library (version 1.0).
+Wormux uses the libxml++ library version 2.6.
 
 Get it here: http://libxmlplusplus.sourceforge.net/
 
@@ -28,9 +42,13 @@ Under Debian, use the command:
 	apt-get install libxml++1.0-dev
 
 
-===============
+============================
 * Compilation / Installation
-===============
+============================
+
+If you're using SubVersion version of Wormux, will have first to type:
+
+    ./autogen.sh
 
 Under Linux, enter the Wormux directory, then simply type:
 
@@ -47,10 +65,9 @@ initial configure command:
 
 	./configure --prefix=/OTHER/DIRECTORY/HERE
 
-
-=========
+==============
 * Uninstalling
-=========
+==============
 
 To uninstall Wormux, go to the source directory, then (as root):
 

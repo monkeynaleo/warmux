@@ -1,3 +1,5 @@
+THIS DOCUMENTATION IS OUTDATED
+
 Wormux 0.5
 Kompilácia/Inštalácia pod Linuxom
 -----------------------------------
