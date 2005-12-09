@@ -24,6 +24,8 @@
 #include "../include/app.h"
 #include "font.h"
 #include "colors.h"
+#include "../tool/file_tools.h"
+#include <exception>
 //-----------------------------------------------------------------------------
 
 Font huge_font;
@@ -32,15 +34,24 @@ Font big_font;
 Font normal_font;
 Font small_font;
 Font tiny_font;
-
-void Font::InitAllFonts()
-{   
-  huge_font.Load(Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+"Vera.ttf", 40);
-  large_font.Load(Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+"Vera.ttf", 32);
-  big_font.Load(Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+"Vera.ttf", 24);
-  normal_font.Load(Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+"Vera.ttf", 16);
-  small_font.Load(Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+"Vera.ttf", 12);
-  tiny_font.Load(Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+"Vera.ttf", 8);
+  
+bool Font::InitAllFonts()
+{ 
+  bool ok=true;
+  std::string vera_ttf = "Vera.ttf";
+  std::string filename  = Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+vera_ttf;
+  if (!FichierExiste(filename))
+  {
+      std::cout << "Error: Font " << vera_ttf << " can't be found (" << filename << ")!" << std::endl;
+      return false;
+  }
+  ok |= huge_font.Load(vera_ttf, 40);
+  ok |= large_font.Load(vera_ttf, 32);
+  ok |= big_font.Load(vera_ttf, 24);
+  ok |= normal_font.Load(vera_ttf, 16);
+  ok |= small_font.Load(vera_ttf, 12);
+  ok |= tiny_font.Load(vera_ttf, 8);
+  return ok;
 }
 
 //-----------------------------------------------------------------------------
@@ -72,13 +83,16 @@ Font::~Font()
 
 //-----------------------------------------------------------------------------
 
-void Font::Load (const std::string& font_name, int size) 
+bool Font::Load (const std::string& font_name, int size) 
 {
-  //assert (m_font == NULL);
-  m_font = TTF_OpenFont(font_name.c_str(), size);
-  //assert (m_font != NULL);	
+  std::string filename  = Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+filename;
+  assert (FichierExiste(filename));
+
+  m_font = TTF_OpenFont(filename.c_str(), size);
   TTF_SetFontStyle(m_font,TTF_STYLE_NORMAL);
+  return true;
 }
+
 //-----------------------------------------------------------------------------
 
 void Font::WriteLeft (int x, int y, const std::string &txt, 
