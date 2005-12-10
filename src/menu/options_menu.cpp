@@ -47,41 +47,38 @@ using namespace std;
 
 const uint PAUSE = 10;
 
+const uint TEAMS_X = 30;
+const uint TEAMS_Y = 30;
+const uint TEAMS_W = 160;
+const uint TEAMS_H = 260;
+const uint TEAM_LOGO_Y = 290;
+const uint TEAM_LOGO_W = 48;
 
-const uint MAPS_X = 30;
-const uint MAPS_Y = 30;
+const uint MAPS_X = TEAMS_X+TEAMS_W+50;
+const uint MAPS_Y = TEAMS_Y;
 const uint MAPS_W = 160;
 const uint MAPS_H = 260;
  
 const uint MAP_PREVIEW_W = 300;
 const uint MAP_PREVIEW_H = 300;
 
-const uint TEAMS_X = 550;
-const uint TEAMS_Y = MAPS_Y;
-const uint TEAMS_W = MAPS_W;
-const uint TEAMS_H = MAPS_H;
-
-const uint TEAM_LOGO_Y = 320;
-const uint TEAM_LOGO_W = 48;
-
-const uint CBOX_ENERGIE_Y = 400;
+//const uint CBOX_ENERGIE_Y = 400;
 const uint FULL_SCREEN_Y = 340;
 
-const uint SOUND_X = 50;
-const uint SOUND_Y = 400;
-const uint SOUND_W = 230;
-const uint SOUND_H = 80;
-
-const uint GRAPHIC_X = 350;
-const uint GRAPHIC_Y = 400;
-const uint GRAPHIC_W = 230;
-const uint GRAPHIC_H = 80;
-
-const uint GAME_X = 650;
-const uint GAME_Y = 400;
+const uint GAME_X = TEAMS_X;
+const uint GAME_Y = TEAMS_Y+TEAMS_H+50;
 const uint GAME_W = 230;
 const uint GAME_H = 80;
 
+const uint SOUND_X = GAME_X+GAME_W+50;
+const uint SOUND_Y = GAME_Y;
+const uint SOUND_W = 180;
+const uint SOUND_H = 80;
+
+const uint GRAPHIC_X = SOUND_X+SOUND_W+50;
+const uint GRAPHIC_Y = GAME_Y;
+const uint GRAPHIC_W = 230;
+const uint GRAPHIC_H = 80;
 
 const uint NBR_VER_MIN = 1;
 const uint NBR_VER_MAX = 10;
@@ -106,14 +103,14 @@ OptionMenu::OptionMenu()
   /* actions buttons */
   actions_buttons = new Box(x, y, 100, 30, true);
 
-  valider = new Button(0, 0, res, "menu/valider"); 
-  actions_buttons->AddWidget(valider);
+  b_ok = new Button(0, 0, res, "menu/valider"); 
+  actions_buttons->AddWidget(b_ok);
 
-  enregistrer = new Button(0, 0, res, "menu/enregistrer");
-  actions_buttons->AddWidget(enregistrer);
+  b_record = new Button(0, 0, res, "menu/enregistrer");
+  actions_buttons->AddWidget(b_record);
 
-  annuler = new Button(0, 0, res, "menu/annuler");
-  actions_buttons->AddWidget(annuler);
+  b_cancel = new Button(0, 0, res, "menu/annuler");
+  actions_buttons->AddWidget(b_cancel);
 
   /* Maps and teams listboxes */
   lboxMaps = new ListBox(MAPS_X, MAPS_Y, MAPS_W, MAPS_H);
@@ -195,14 +192,14 @@ OptionMenu::~OptionMenu()
 
 void OptionMenu::onClick ( int x, int y)
 {     
-  if (valider->MouseIsOver (x, y)) {
+  if (b_ok->MouseIsOver (x, y)) {
     jukebox.Play("share", "menu/ok");
     EnregistreOptions();
     fin_boucle = true;
-  } else if (annuler->MouseIsOver (x, y)) {
+  } else if (b_cancel->MouseIsOver (x, y)) {
     jukebox.Play("share", "menu/cancel");
     fin_boucle = true;
-  } else if (enregistrer->MouseIsOver (x, y)) {
+  } else if (b_record->MouseIsOver (x, y)) {
     EnregistreOptions();
   } else if (lboxMaps->Clic(x, y)) {
     ChangeTerrain();
@@ -232,10 +229,9 @@ void OptionMenu::Init ()
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
 
-  fond_option = new Sprite( resource_manager.LoadImage( res, "menu/fond_option"));
-  fond_maps = resource_manager.LoadImage( res, "menu/fond_maps");
-  fond_box = resource_manager.LoadImage( res, "menu/fond_box");
-  fond_box2 = resource_manager.LoadImage( res, "menu/fond_box2");
+  bg_option = new Sprite( resource_manager.LoadImage( res, "menu/bg_option"));
+  bg_long_box = resource_manager.LoadImage( res, "menu/bg_long_box");
+  bg_small_box = resource_manager.LoadImage( res, "menu/bg_small_box");
 
   // Load Maps' list
   std::sort(lst_terrain.liste.begin(), lst_terrain.liste.end(), compareMaps);
@@ -368,8 +364,8 @@ void OptionMenu::ChangeTerrain()
 
   map_preview->Scale (scale, scale);
   
-  carte_x = (espace*2+MAPS_W)+(MAP_PREVIEW_W-carte_larg)/2;
-  carte_y = MAPS_Y+(MAP_PREVIEW_H-carte_haut)/2;
+  carte_x = MAPS_X+MAPS_W+50;
+  carte_y = MAPS_Y;
 }
 
 //-----------------------------------------------------------------------------
@@ -383,9 +379,6 @@ void OptionMenu::Lance ()
 
   Init();
   Reset();
-
-  espace = (video.GetWidth()-MAP_PREVIEW_W-MAPS_W-TEAMS_W)/4;
-  //espace_h = (video.GetHeight()-CARTE_HAUT-30-100)/4;
 
   fin_boucle = false;
   do
@@ -432,20 +425,25 @@ void OptionMenu::Lance ()
     }
       
     // affichage des boutons et de la carte
-    fond_option->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
-    fond_option->Blit( app.sdlwindow, 0, 0);
-    SDL_Rect r1 = {espace-30,5,fond_maps->w,fond_maps->h};	  
-    SDL_BlitSurface( fond_maps, NULL, app.sdlwindow, &r1);
-    SDL_Rect r2 = {(espace*3)+MAP_PREVIEW_W+MAPS_W-30, 5,fond_maps->w,fond_maps->h};
-    SDL_BlitSurface( fond_maps, NULL, app.sdlwindow, &r2);
-    SDL_Rect r3 = {espace-30, CBOX_ENERGIE_Y-20,fond_box->w,fond_box->h};
-    SDL_BlitSurface( fond_box, NULL, app.sdlwindow, &r3);
-    SDL_Rect r4 = {(espace*3)+MAP_PREVIEW_W+MAPS_W-100, GRAPHIC_Y-25,fond_box->w,fond_box->h};
-    SDL_BlitSurface( fond_box2, NULL, app.sdlwindow, &r4);
+    bg_option->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
+    bg_option->Blit( app.sdlwindow, 0, 0);
+
+    SDL_Rect r1 = {TEAMS_X-30,TEAMS_Y-30,bg_long_box->w,bg_long_box->h};	  
+    SDL_BlitSurface( bg_long_box, NULL, app.sdlwindow, &r1);
+
+    SDL_Rect r2 = {MAPS_X-30, MAPS_Y-30,bg_long_box->w,bg_long_box->h};
+    SDL_BlitSurface( bg_long_box, NULL, app.sdlwindow, &r2);
+
+    SDL_Rect r3 = {GAME_X-30, GAME_Y-30,bg_small_box->w,bg_small_box->h};
+    SDL_BlitSurface( bg_small_box, NULL, app.sdlwindow, &r3);
+
+    SDL_Rect r4 = {SOUND_X-30, SOUND_Y-30,bg_small_box->w,bg_small_box->h};
+    SDL_BlitSurface( bg_small_box, NULL, app.sdlwindow, &r4);
+
+    SDL_Rect r5 = {GRAPHIC_X-30, GRAPHIC_Y-30,bg_small_box->w,bg_small_box->h};
+    SDL_BlitSurface( bg_small_box, NULL, app.sdlwindow, &r5);
      
-    valider->Draw(x,y) ;
-    annuler->Draw(x,y) ;
-    enregistrer->Draw(x,y) ;
+    actions_buttons->Draw(x,y);
     lboxMaps->Draw(x,y);
     lboxTeams->Draw(x,y);
 
@@ -454,11 +452,11 @@ void OptionMenu::Lance ()
     game_options->Draw(x,y);
     
 
-   SDL_Rect team_icon_rect = { (espace*3)+MAP_PREVIEW_W+MAPS_W+(TEAMS_W/2)-TEAM_LOGO_W/2,
-	                       TEAM_LOGO_W,
-                               TEAM_LOGO_W,
-                               TEAM_LOGO_W};
-   SDL_BlitSurface (derniere_equipe->ecusson, NULL, app.sdlwindow, &team_icon_rect); 
+    SDL_Rect team_icon_rect = { TEAMS_X+(TEAMS_W/2)-(TEAM_LOGO_W/2),
+				TEAMS_Y+TEAMS_H,
+				TEAM_LOGO_W,
+				TEAM_LOGO_W};
+    SDL_BlitSurface (derniere_equipe->ecusson, NULL, app.sdlwindow, &team_icon_rect); 
      
     if (!terrain_init)
     {
