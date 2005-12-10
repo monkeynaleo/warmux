@@ -109,8 +109,8 @@ void ListBox::Draw (uint mouse_x, uint mouse_y)
 {
   int item = MouseIsOnWitchItem(mouse_x, mouse_y);
   
-  boxRGBA(app.sdlwindow, x, y, x+w, x+h,
-		255, 255, 255, 255*3/10);
+  boxRGBA(app.sdlwindow, x, y, x+w, y+h,
+	  255, 255, 255, 255*3/10);
   
   for (uint i=0; i < nb_visible_items; i++) 
   {
