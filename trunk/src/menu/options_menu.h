@@ -50,9 +50,9 @@ class OptionMenu
    bool fin_boucle;
    
    /* Actions buttons  */
-   Button *valider; 
-   Button *enregistrer;
-   Button *annuler;
+   Button *b_ok;
+   Button *b_record;
+   Button *b_cancel;
    Box *actions_buttons;
 
    /* Graphic options controllers */   
@@ -85,10 +85,9 @@ class OptionMenu
 
    bool m_init;
 
-   Sprite *fond_option; 
-   SDL_Surface *fond_maps;
-   SDL_Surface *fond_box;
-   SDL_Surface *fond_box2;
+   Sprite *bg_option;
+   SDL_Surface *bg_long_box;
+   SDL_Surface *bg_small_box;
 
    uint carte_x, carte_y, carte_larg, carte_haut;
    uint maps_x, maps_y;
