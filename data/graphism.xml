@@ -16,10 +16,9 @@
 </section>
 
 <section name="menu">
-  <surface name="fond_option" file="menu/img/background_options.png" />
-  <surface name="fond_maps" file="menu/img/background_maps.png" />
-  <surface name="fond_box" file="menu/img/background_box1.png" />
-  <surface name="fond_box2" file="menu/img/background_box2.png" />
+  <surface name="bg_option" file="menu/img/background_options.png" />
+  <surface name="bg_long_box" file="menu/img/background_long_box.png" />
+  <surface name="bg_small_box" file="menu/img/background_small_box.png" />
   
   <sprite name="valider">
     <image file="menu/img/validate.png">
