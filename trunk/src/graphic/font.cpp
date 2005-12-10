@@ -85,7 +85,7 @@ Font::~Font()
 
 bool Font::Load (const std::string& font_name, int size) 
 {
-  std::string filename  = Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+filename;
+  std::string filename  = Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+font_name;
   assert (FichierExiste(filename));
 
   m_font = TTF_OpenFont(filename.c_str(), size);
