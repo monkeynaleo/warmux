@@ -62,11 +62,8 @@ const uint MAPS_H = 260;
 const uint MAP_PREVIEW_W = 300;
 const uint MAP_PREVIEW_H = 300;
 
-//const uint CBOX_ENERGIE_Y = 400;
-const uint FULL_SCREEN_Y = 340;
-
 const uint GAME_X = TEAMS_X;
-const uint GAME_Y = TEAMS_Y+TEAMS_H+50;
+const uint GAME_Y = TEAMS_Y+TEAMS_H+TEAM_LOGO_W+50;
 const uint GAME_W = 230;
 const uint GAME_H = 80;
 
@@ -92,7 +89,7 @@ const uint TPS_FIN_TOUR_MAX = 10;
 
 OptionMenu::OptionMenu()
 {
-  fin_boucle = false ;
+  close_menu = false ;
   m_init = false;
    
   uint x = (video.GetWidth()/2);
@@ -125,14 +122,14 @@ OptionMenu::OptionMenu()
   full_screen = new CheckBox(_("Fullscreen?"), 0, 0, 0); 
   graphic_options->AddWidget(full_screen);
 
-  option_display_wind_particles = new CheckBox(_("Display wind particles?"), 0, 0, 0); 
-  graphic_options->AddWidget(option_display_wind_particles);
+  opt_display_wind_particles = new CheckBox(_("Display wind particles?"), 0, 0, 0); 
+  graphic_options->AddWidget(opt_display_wind_particles);
 
-  option_affichage_energie = new CheckBox(_("Display player energy?"), 0, 0, 0); 
-  graphic_options->AddWidget(option_affichage_energie);
+  opt_display_energy = new CheckBox(_("Display player energy?"), 0, 0, 0); 
+  graphic_options->AddWidget(opt_display_energy);
 
-  option_affichage_nom = new CheckBox(_("Display player's name?"), 0, 0, 0); 
-  graphic_options->AddWidget(option_affichage_nom);
+  opt_display_name = new CheckBox(_("Display player's name?"), 0, 0, 0); 
+  graphic_options->AddWidget(opt_display_name);
 
   /* Sound options */
   sound_options = new Box(SOUND_X, SOUND_Y, SOUND_W, SOUND_H);
@@ -148,26 +145,26 @@ OptionMenu::OptionMenu()
   
   /* Game options */
   game_options = new Box(GAME_X, GAME_Y, GAME_W, GAME_H);
-  option_temps_tour = new SpinButton(_("Duration of a turn:"), 0, 0, 0,
+  opt_duration_turn = new SpinButton(_("Duration of a turn:"), 0, 0, 0,
 				     TPS_TOUR_MIN, 5,
 				     TPS_TOUR_MIN, TPS_TOUR_MAX);
-  game_options->AddWidget(option_temps_tour);
+  game_options->AddWidget(opt_duration_turn);
 
-  option_temps_fin_tour = new SpinButton(_("Duration of the end of a turn:"), 0, 0, 0,
+  opt_duration_end_turn = new SpinButton(_("Duration of the end of a turn:"), 0, 0, 0,
 					 TPS_FIN_TOUR_MIN, 1,
 					 TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
-  game_options->AddWidget(option_temps_fin_tour);
+  game_options->AddWidget(opt_duration_end_turn);
 
-  option_nb_ver = new SpinButton(_("Number of players per team:"), 0, 0, 0,
+  opt_nb_characters = new SpinButton(_("Number of players per team:"), 0, 0, 0,
 				 4, 1,
 				 NBR_VER_MIN, NBR_VER_MAX);
-  game_options->AddWidget(option_nb_ver);
+  game_options->AddWidget(opt_nb_characters);
 
-  option_energie_ini = new SpinButton(_("Initial energy:"), 0,0,0,
+  opt_energy_ini = new SpinButton(_("Initial energy:"), 0,0,0,
 				      100, 5,
 				      50, 200);
   
-  game_options->AddWidget(option_energie_ini);
+  game_options->AddWidget(opt_energy_ini);
 
 }
 
@@ -175,7 +172,7 @@ OptionMenu::OptionMenu()
 
 OptionMenu::~OptionMenu()
 {
-  fin_boucle = false ;
+  close_menu = false ;
   m_init = false;
 
   delete actions_buttons;
@@ -194,15 +191,15 @@ void OptionMenu::onClick ( int x, int y)
 {     
   if (b_ok->MouseIsOver (x, y)) {
     jukebox.Play("share", "menu/ok");
-    EnregistreOptions();
-    fin_boucle = true;
+    SaveOptions();
+    close_menu = true;
   } else if (b_cancel->MouseIsOver (x, y)) {
     jukebox.Play("share", "menu/cancel");
-    fin_boucle = true;
+    close_menu = true;
   } else if (b_record->MouseIsOver (x, y)) {
-    EnregistreOptions();
+    SaveOptions();
   } else if (lboxMaps->Clic(x, y)) {
-    ChangeTerrain();
+    ChangeMap();
   } else if (lboxTeams->Clic(x, y)) {
   } else if (graphic_options->Clic (x,y)) {
   } else if (sound_options->Clic (x,y)) {
@@ -224,8 +221,6 @@ void OptionMenu::Init ()
 #else
    // WHY app.run() ????
 #endif
-
-  espace = 30 ; //(video.GetWidth()-CARTE_LARG-MAPS_LARG-TEAMS_LARG)/4;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
 
@@ -297,14 +292,14 @@ void OptionMenu::Init ()
 
 void OptionMenu::Reset()
 {
-  option_display_wind_particles->SetValue (config.display_wind_particles);
-  option_affichage_energie->SetValue (config.affiche_energie_ver);
-  option_affichage_nom->SetValue (config.affiche_nom_ver);
+  opt_display_wind_particles->SetValue (config.display_wind_particles);
+  opt_display_energy->SetValue (config.affiche_energie_ver);
+  opt_display_name->SetValue (config.affiche_nom_ver);
   full_screen->SetValue (video.IsFullScreen());
-  option_temps_tour->SetValue(game_mode.duration_turn);
-  option_temps_fin_tour->SetValue(game_mode.duration_turn_end);
-  option_nb_ver->SetValue(game_mode.max_characters);
-  option_energie_ini->SetValue(game_mode.character.init_energy);
+  opt_duration_turn->SetValue(game_mode.duration_turn);
+  opt_duration_end_turn->SetValue(game_mode.duration_turn_end);
+  opt_nb_characters->SetValue(game_mode.max_characters);
+  opt_energy_ini->SetValue(game_mode.character.init_energy);
 
 
   opt_music->SetValue( jukebox.UseMusic() );
@@ -313,21 +308,21 @@ void OptionMenu::Reset()
 
 //-----------------------------------------------------------------------------
 
-void OptionMenu::EnregistreOptions()
+void OptionMenu::SaveOptions()
 {
   // Save values
   std::string map_id = lboxMaps->ReadLabel(lboxMaps->GetSelectedItem());
   lst_terrain.ChangeTerrainNom (map_id);
   teams_list.ChangeSelection (lboxTeams->GetSelection());
-  config.display_wind_particles = option_display_wind_particles->GetValue();
-  config.affiche_energie_ver = option_affichage_energie->GetValue();
-  config.affiche_nom_ver = option_affichage_nom->GetValue();
+  config.display_wind_particles = opt_display_wind_particles->GetValue();
+  config.affiche_energie_ver = opt_display_energy->GetValue();
+  config.affiche_nom_ver = opt_display_name->GetValue();
 
-  game_mode.duration_turn = option_temps_tour->GetValue() ;
-  game_mode.duration_turn_end = option_temps_fin_tour->GetValue() ;
-  game_mode.max_characters = option_nb_ver->GetValue() ;
+  game_mode.duration_turn = opt_duration_turn->GetValue() ;
+  game_mode.duration_turn_end = opt_duration_end_turn->GetValue() ;
+  game_mode.max_characters = opt_nb_characters->GetValue() ;
 
-  game_mode.character.init_energy = option_energie_ini->GetValue() ;
+  game_mode.character.init_energy = opt_energy_ini->GetValue() ;
 
   // Video mode
   uint mode = lboxVideoMode->GetSelectedItem();
@@ -346,32 +341,27 @@ void OptionMenu::EnregistreOptions()
   
   jukebox.Init(); // commit modification on sound options
    
-  //Enregistre le tout dans le XML
+  //Save options in XML
   config.Sauve();
 }
 
 //-----------------------------------------------------------------------------
 
-void OptionMenu::ChangeTerrain()
+void OptionMenu::ChangeMap()
 {
   std::string map_id = lboxMaps->ReadLabel(lboxMaps->GetSelectedItem());
   uint map = lst_terrain.FindMapById(map_id);
   map_preview = new Sprite(lst_terrain.liste[map].preview);
   float scale = std::min( float(MAP_PREVIEW_H)/map_preview->GetHeight(), 
                           float(MAP_PREVIEW_W)/map_preview->GetWidth() ) ;
-  carte_haut = (uint)(map_preview->GetHeight() * scale);
-  carte_larg = (uint)(map_preview->GetWidth() * scale);
 
   map_preview->Scale (scale, scale);
-  
-  carte_x = MAPS_X+MAPS_W+50;
-  carte_y = MAPS_Y;
 }
 
 //-----------------------------------------------------------------------------
 
 // Traitement d'une touche clavier relachée
-void OptionMenu::Lance ()
+void OptionMenu::Run ()
 { 
   bool terrain_init = false;
   int x=0, y=0;
@@ -380,7 +370,7 @@ void OptionMenu::Lance ()
   Init();
   Reset();
 
-  fin_boucle = false;
+  close_menu = false;
   do
   {
    // Poll and treat events
@@ -391,19 +381,19 @@ void OptionMenu::Lance ()
      {      
 	if ( event.type == SDL_QUIT) 
 	  {  
-	     fin_boucle = true;
+	     close_menu = true;
 	  }
 	else if ( event.type == SDL_KEYDOWN )
 	  {	       
 	     switch ( event.key.keysym.sym)
 	       { 
 		case SDLK_ESCAPE: 
-		  fin_boucle = true;
+		  close_menu = true;
 		  break;
 		  
 		case SDLK_RETURN: 
-		  EnregistreOptions();
-		  fin_boucle = true;
+		  SaveOptions();
+		  close_menu = true;
 		  break;
 		  
 		default:
@@ -461,14 +451,14 @@ void OptionMenu::Lance ()
     if (!terrain_init)
     {
       terrain_init = true;
-      ChangeTerrain();
+      ChangeMap();
     }
 
-    map_preview->Blit ( app.sdlwindow, carte_x, carte_y);     
+    map_preview->Blit ( app.sdlwindow, MAPS_X+MAPS_W+50, MAPS_Y);
      
     SDL_Flip( app.sdlwindow);
      
-  } while (!fin_boucle);
+  } while (!close_menu);
 
 }
 

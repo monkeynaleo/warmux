@@ -247,7 +247,7 @@ int AppWormux::main (int argc, char **argv)
           break;
         case menuOPTIONS:
 	  OptionMenu * options_menu = new OptionMenu();
-          options_menu->Lance();
+          options_menu->Run();
 	  delete options_menu;
           break;
         case menuQUIT:

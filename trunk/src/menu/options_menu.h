@@ -42,12 +42,12 @@ class OptionMenu
    OptionMenu(); 
    ~OptionMenu();
 
-   void Lance ();
+   void Run ();
    void Init ();
    void Reset ();
 
  private:
-   bool fin_boucle;
+   bool close_menu;
    
    /* Actions buttons  */
    Button *b_ok;
@@ -57,9 +57,9 @@ class OptionMenu
 
    /* Graphic options controllers */   
    ListBox *lboxVideoMode;
-   CheckBox *option_display_wind_particles;
-   CheckBox *option_affichage_energie;
-   CheckBox *option_affichage_nom;
+   CheckBox *opt_display_wind_particles;
+   CheckBox *opt_display_energy;
+   CheckBox *opt_display_name;
    CheckBox *full_screen;    
    Box *graphic_options;
 
@@ -70,10 +70,10 @@ class OptionMenu
    Box *sound_options;
 
    /* Game options controllers */
-   SpinButton *option_temps_tour;
-   SpinButton *option_temps_fin_tour;
-   SpinButton *option_nb_ver;
-   SpinButton *option_energie_ini;
+   SpinButton *opt_duration_turn;
+   SpinButton *opt_duration_end_turn;
+   SpinButton *opt_nb_characters;
+   SpinButton *opt_energy_ini;
    Box *game_options;
 
    /* Team controllers */
@@ -89,13 +89,8 @@ class OptionMenu
    SDL_Surface *bg_long_box;
    SDL_Surface *bg_small_box;
 
-   uint carte_x, carte_y, carte_larg, carte_haut;
-   uint maps_x, maps_y;
-   uint teams_x, teams_y;
-   uint espace;
-
-   void ChangeTerrain();
-   void EnregistreOptions();
+   void ChangeMap();
+   void SaveOptions();
    void onClick ( int mouse_x, int mouse_y);
 };
 
