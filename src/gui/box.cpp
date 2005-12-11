@@ -39,6 +39,7 @@ Box::~Box()
   for (it = widgets.begin(); 
        it != widgets.end(); 
        ++it){
+    assert(it != NULL);
     widgets.erase(it);
   }
 }
@@ -71,6 +72,7 @@ bool Box::Clic (uint mouse_x, uint mouse_y)
   for (it = widgets.begin(); 
        it != widgets.end(); 
        ++it){
+    assert(it != NULL);
     r = (*it)->Clic(mouse_x, mouse_y);
     if (r) return true;
   }
@@ -82,6 +84,7 @@ bool Box::Clic (uint mouse_x, uint mouse_y)
 
 void Box::AddWidget(Widget * a_widget)
 {
+  assert(a_widget != NULL);
   if (last_widget != NULL) {
 
     if (horizontal) {
