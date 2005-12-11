@@ -47,6 +47,7 @@ CheckBox::CheckBox (const std::string &label, uint x, uint y, uint w, bool value
 
 CheckBox::~CheckBox()
 {
+  delete m_image;
   delete txt_label;
 }
 

@@ -33,6 +33,10 @@
 #include "../graphic/sprite.h"
 #include "xml_document.h"
 
+#ifdef DEBUG
+//#define DBG_RS_MANAGER
+#endif
+
 struct Profile
 {
    LitDocXml *doc;
@@ -238,7 +242,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 
 	SDL_FreeSurface( surface);
 	
-#ifdef DEBUG
+#ifdef DBG_RS_MANAGER
 	std::cout << "ResourceManager: sprite resource \"" << resource_name << "\" has no grid element" << std::endl;  
 #endif
      }

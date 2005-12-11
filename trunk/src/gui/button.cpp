@@ -47,6 +47,7 @@ Button::Button (uint x, uint y, const Profile *res_profile, const std::string& r
 
 Button::~Button()
 {
+	delete image;
 }
 
 //-----------------------------------------------------------------------------

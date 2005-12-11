@@ -174,7 +174,7 @@ Sprite::~Sprite()
     for ( unsigned int f = 0 ; f < frames.size() ; f++)
     {
       for(unsigned int i = 1;i < rotation_cache_size;i++)
-      {
+      { //Begins with i=1, because frames[f].rotated_surface[0] == frames[f].surface (which is deleted just before)
         SDL_FreeSurface( frames[f].rotated_surface[i]);
         if(have_flipping_cache)
           SDL_FreeSurface( frames[f].rotated_flipped_surface[i]);

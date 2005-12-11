@@ -24,8 +24,9 @@
   </sprite>
   <wind>
     <nbr_sprite>15</nbr_sprite>
-    <mass>0.1</mass>
+    <mass>0.3</mass>
     <wind_factor>0.5</wind_factor>
     <need_flip>1</need_flip>
   </wind>
+
 </resources>

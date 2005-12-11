@@ -424,7 +424,7 @@ void Tile::LoadImage (SDL_Surface *terrain)
       item[i] = (TileItem*)new TileItem_Empty;
     }
   }
-  std::cout << freed << "tiles deleted!" << std::endl;
+  std::cout << freed << " tiles deleted!" << std::endl;
 }
 
 uchar Tile::GetAlpha (const int x, const int y) const
