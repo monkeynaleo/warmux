@@ -451,3 +451,62 @@ void Tile::DrawTile()
 	  item[iy*nbr_cell_larg+ix]->Draw(ix,iy);
        }
 }   
+
+void Tile::DrawTile_Clipped( Rectanglei clip_r_world)
+{
+   // Select only the items that are under the clip area
+   int first_cell_x = clamp( clip_r_world.x/larg_cell,                  0, nbr_cell_larg-1);
+   int first_cell_y = clamp( clip_r_world.y/haut_cell,                  0, nbr_cell_haut-1);
+   int last_cell_x  = clamp( (clip_r_world.x+clip_r_world.w)/larg_cell, 0, nbr_cell_larg-1);
+   int last_cell_y  = clamp( (clip_r_world.y+clip_r_world.h)/haut_cell, 0, nbr_cell_haut-1);
+
+   // Compute the clipping rectangle in the screen coordinates
+   Rectanglei clip_r_screen;
+   clip_r_screen.x = clip_r_world.x - camera.GetX();
+   clip_r_screen.y = clip_r_world.y - camera.GetY();
+   clip_r_screen.w = clip_r_world.w;
+   clip_r_screen.h = clip_r_world.h;
+   clip_r_screen.Clip( Rectanglei( 0,0, 640, 480)); 
+   
+   for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
+     for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++)
+       {
+	  // For all selected items, clip source and destination
+          // blitting rectangles 
+	  int dest_x = cx * larg_cell;  
+	  int dest_y = cy * haut_cell;
+	  int dest_w = larg_cell;
+	  int dest_h = haut_cell;
+	  int src_x = 0;
+	  int src_y = 0;
+	  
+	  if ( dest_x < clip_r_world.x ) // left clipping
+	    {
+	       src_x  += clip_r_world.x - dest_x;
+	       dest_w -= clip_r_world.x - dest_x;
+	       dest_x  = clip_r_world.x;
+	    }
+	  if ( dest_y < clip_r_world.y ) // top clipping
+	    {
+	       src_y  += clip_r_world.y - dest_y;
+	       dest_h -= clip_r_world.y - dest_y;
+	       dest_y  = clip_r_world.y;
+	    }
+	  if ( dest_x + dest_w > clip_r_world.x + clip_r_world.w ) // right clipping
+	    {
+	       dest_w -= ( dest_x + dest_w ) - ( clip_r_world.x + clip_r_world.w );
+	    }
+	  if ( dest_y + dest_h > clip_r_world.y + clip_r_world.h ) // bottom clipping
+	    {
+	       dest_h -= ( dest_y + dest_h ) - ( clip_r_world.y + clip_r_world.h );
+	    }
+	  
+	  
+	  SDL_Rect sr = { src_x, src_y, dest_w, dest_h};
+	       
+	  // Decall the destination rectangle along the camera offset
+	  SDL_Rect dr = { dest_x-camera.GetX(), dest_y-camera.GetY(), dest_w, dest_h};
+	  
+	  SDL_BlitSurface (item[cy*nbr_cell_larg+cx]->GetSurface(), &sr, app.sdlwindow, &dr);
+       }
+}   
