@@ -29,6 +29,8 @@
 # include <ClanLib/display.h>
 #endif
 
+#define EstTransparent(a)	( (a) != 255 )
+
 class Video
 {
 private:

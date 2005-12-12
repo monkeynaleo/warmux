@@ -308,6 +308,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 
    xmlpp::Element *translate = profile->doc->AccesBalise ( elem_sprite, "translation");
 
+   assert(sprite!=NULL);
    if ( translate != NULL )
    {
 	std::string x,y;
@@ -319,7 +320,6 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	if ( profile->doc->LitAttrString( translate, "y", y) )
 	     ty = atoi( y.c_str());
 
-        assert(sprite!=NULL);
         sprite->SetTranslation(tx ,ty);
    }
    else

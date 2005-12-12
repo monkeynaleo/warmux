@@ -29,7 +29,6 @@
 #include "skin.h"
 //-----------------------------------------------------------------------------
 #include "../game/config.h" // DATADIR
-#include "../graphic/graphism.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include "../tool/string_tools.h"

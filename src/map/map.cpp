@@ -22,8 +22,6 @@
 #include "map.h"
 //-----------------------------------------------------------------------------
 #include <iostream>
-#include "../graphic/graphism.h"
-//#include "../weapon/air_attack.h"
 #include "../game/config.h"
 #include "../include/constant.h"
 #include "../object/bonus_box.h"

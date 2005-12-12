@@ -25,7 +25,6 @@
 #include <SDL_gfxPrimitives.h>
 #include "../include/app.h"
 #include "../interface/mouse.h"
-#include "../graphic/graphism.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../game/game.h"

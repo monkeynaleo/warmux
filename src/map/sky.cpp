@@ -23,7 +23,6 @@
 //-----------------------------------------------------------------------------
 #include "camera.h"
 #include "map.h"
-#include "../graphic/graphism.h"
 #include "maps_list.h"
 #ifndef CL
 #include <SDL.h>

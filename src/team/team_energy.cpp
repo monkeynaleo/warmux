@@ -23,7 +23,6 @@
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include <math.h>
-#include "../graphic/graphism.h"
 #include "../map/camera.h"
 #include "../game/time.h"
 #include "../graphic/text.h"

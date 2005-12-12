@@ -29,7 +29,6 @@
 #include "../gui/question.h"
 
 #include "../tool/resource_manager.h"
-#include "../graphic/graphism.h"
 #include "../team/teams_list.h"
 #include "../game/game_mode.h"
 #include "../graphic/video.h"

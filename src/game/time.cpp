@@ -25,7 +25,6 @@
 #include "../interface/game_msg.h"
 
 #include "../graphic/video.h"
-#include "../graphic/graphism.h"
 #include "../graphic/font.h"
 
 #ifdef CL

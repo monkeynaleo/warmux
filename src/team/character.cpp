@@ -30,7 +30,6 @@
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../game/config.h"
-#include "../graphic/graphism.h"
 #include "../graphic/text.h"
 #include "../include/constant.h"
 #include "../map/camera.h"

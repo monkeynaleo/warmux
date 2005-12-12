@@ -26,7 +26,6 @@
 #include "../include/constant.h" // NBR_BCL_MAX_EST_VIDE
 #include "../map/map.h"
 #include "../team/macro.h"
-#include "../graphic/graphism.h"
 #include "../game/time.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"

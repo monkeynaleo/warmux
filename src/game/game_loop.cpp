@@ -22,7 +22,6 @@
 #include "game_loop.h"
 //-----------------------------------------------------------------------------
 #include "../graphic/fps.h"
-#include "../graphic/graphism.h"
 #include "../graphic/video.h"
 #include "../include/constant.h"
 #include "../include/action_handler.h"

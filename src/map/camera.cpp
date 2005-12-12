@@ -27,19 +27,9 @@
 #include "maps_list.h"
 #include "../graphic/video.h"
 #include "../interface/mouse.h"
-
-# ifdef CL
-#include "../interface/keyboard.h"
-#include "../interface/interface.h"
-#include "../tool/math_tools.h"
-#include "../tool/geometry_tools.h"
-#include "../team/team.h"
-#include "../graphic/graphism.h"
-#else
 #include "../tool/Rectangle.h"
 #include "../tool/Distance.h"
 #include <iostream>
-#endif
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

@@ -25,9 +25,9 @@
 #include "map.h"
 #include "maps_list.h"
 #include "../map/camera.h"
+#include "../graphic/video.h"
 
 #include "../include/constant.h"
-#include "../graphic/graphism.h"
 #ifdef CL
 #include "../weapon/mine.h"
 #else
@@ -99,12 +99,7 @@ bool Terrain::EstDansVide (int x, int y)
   }
 
   // Lit le monde
-#ifdef CL
    return EstTransparent( GetAlpha(x,y) );
-#else
-   return ( GetAlpha(x,y) != 255);
-//   return ( GetAlpha(x,y) == SDL_ALPHA_TRANSPARENT);
-#endif
 }
 
 //-----------------------------------------------------------------------------

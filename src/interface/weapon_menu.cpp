@@ -34,16 +34,12 @@
 #include "../team/team.h"
 #include "../include/action_handler.h"
 #include "../interface/mouse.h"
-#ifdef CL
-#include "../graphic/graphism.h"
-#else
-# include "../tool/Point.h"
+#include "../tool/Point.h"
 #include "../tool/Rectangle.h"
 #include "../tool/Distance.h"
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
-#endif
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

@@ -41,8 +41,6 @@
 
 //-----------------------------------------------------------------------------
 
-#include "../graphic/graphism.h"
-
 namespace Wormux
 {
 Debug debug;

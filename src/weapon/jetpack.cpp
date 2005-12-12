@@ -21,7 +21,6 @@
 
 #include "../weapon/jetpack.h"
 //-----------------------------------------------------------------------------
-#include "../graphic/graphism.h"
 #include "../tool/i18n.h"
 #include "../team/teams_list.h"
 #include "../sound/jukebox.h"

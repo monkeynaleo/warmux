@@ -27,7 +27,6 @@
 #include "../map/maps_list.h"
 #include "../game/time.h"
 #include "../tool/xml_document.h"
-#include "../graphic/graphism.h"
 #include "camera.h"
 #ifndef CL
 #include <SDL.h>
