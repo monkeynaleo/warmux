@@ -30,6 +30,7 @@ Button::Button (uint x, uint y, uint w, uint h,
   : Widget(x, y, w, h)
 {
   image = resource_manager.LoadSprite(res_profile,resource_id);
+  image->EnableLastFrameCache();
   image->ScaleSize(w,h);
 }
 

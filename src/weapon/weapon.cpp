@@ -262,10 +262,12 @@ void Weapon::Init ()
 #else
  
   if (m_visibility != NEVER_VISIBLE)
+  {
     m_image = new Sprite( resource_manager.LoadImage(weapons_res_profile, m_id));
+    m_image->EnableLastFrameCache();
+  }
      
   icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
-
 #endif
    
   p_Init();

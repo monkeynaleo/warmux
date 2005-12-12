@@ -91,6 +91,8 @@ Sprite::Sprite()
    translation_y = 0;
    have_rotation_cache = false;
    have_flipping_cache = false;
+   have_lastframe_cache = false;
+   last_frame = NULL;
 }
 
 Sprite::Sprite( const Sprite& other)
@@ -113,7 +115,9 @@ Sprite::Sprite( const Sprite& other)
    translation_y = other.translation_y;
    have_rotation_cache = false;
    have_flipping_cache = false;
-   
+   have_lastframe_cache = false;
+   last_frame = NULL;
+
    for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
      {
 	  SDL_Surface *new_surf = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, 
@@ -136,6 +140,8 @@ Sprite::Sprite( const Sprite& other)
        EnableRotationCache(other.rotation_cache_size);
      if(other.have_flipping_cache)
        EnableFlippingCache();
+     if(other.have_lastframe_cache)
+       EnableLastFrameCache();
 }
 
 Sprite::Sprite( SDL_Surface *surface)
@@ -161,6 +167,8 @@ Sprite::Sprite( SDL_Surface *surface)
    translation_y = 0;
    have_rotation_cache = false;
    have_flipping_cache = false;
+   have_lastframe_cache = false;
+   last_frame = NULL;
 }
 
 Sprite::~Sprite()
@@ -187,6 +195,9 @@ Sprite::~Sprite()
         delete []frames[f].rotated_surface;
     }
   }
+
+  if(have_lastframe_cache && last_frame!=NULL)
+    SDL_FreeSurface(last_frame);
 }
 
 void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y)
@@ -221,6 +232,9 @@ void Sprite::AddFrame(SDL_Surface* surf, unsigned int delay)
 
 void Sprite::EnableRotationCache(unsigned int cache_size)
 {
+  //For each frame, we pre-render 'cache_size' rotated surface
+  //At runtime the prerender SDL_Surface with the nearest angle to what is asked is displayed
+  assert(!have_lastframe_cache);
   assert(!have_rotation_cache);
   assert(!have_flipping_cache); //Always compute rotation cache before flipping cache!
   assert(cache_size > 1);
@@ -242,7 +256,9 @@ void Sprite::EnableRotationCache(unsigned int cache_size)
 
 void Sprite::EnableFlippingCache()
 {
+  //For each frame, we pre-render the flipped frame
   assert(!have_flipping_cache);
+  assert(!have_lastframe_cache);
 
   have_flipping_cache = true;
 
@@ -259,6 +275,27 @@ void Sprite::EnableFlippingCache()
       }
     }
   }
+}
+
+void Sprite::EnableLastFrameCache()
+{
+  //The result of the last call to SDLgfx is kept in memory
+  //to display it again if rotation / scale / alpha didn't changed
+  assert(!have_rotation_cache);
+  assert(!have_flipping_cache);
+  assert(!have_lastframe_cache);
+  have_lastframe_cache = true;
+}
+
+void Sprite::LastFrameModified()
+{
+   if(!have_lastframe_cache) return;
+
+   if(last_frame!=NULL)
+   {
+     SDL_FreeSurface(last_frame);
+     last_frame = NULL;
+   }
 }
 
 void Sprite::SetSize(unsigned int w, unsigned int h)
@@ -290,6 +327,7 @@ void Sprite::SetCurrentFrame( unsigned int frame_no)
   finished = false;
   show = true;
   last_update = Wormux::temps.Lit();
+  LastFrameModified();
 }
 
 unsigned int Sprite::GetCurrentFrame() const
@@ -310,8 +348,10 @@ const SpriteFrame& Sprite::GetCurrentFrameObject() const
 
 void Sprite::Scale( float scale_x, float scale_y)
 {
+   if(this->scale_x == scale_x && this->scale_y == scale_y) return;
    this->scale_x = scale_x;
    this->scale_y = scale_y;
+   LastFrameModified();
 }
 
 void Sprite::GetScaleFactors( float &scale_x, float &scale_y)
@@ -322,13 +362,15 @@ void Sprite::GetScaleFactors( float &scale_x, float &scale_y)
 
 void Sprite::ScaleSize(int width, int height)
 {
-  scale_x = float(width)/float(frame_width_pix);
-  scale_y = float(height)/float(frame_height_pix);
+  Scale(float(width)/float(frame_width_pix),
+        float(height)/float(frame_height_pix));
 }
 
 void Sprite::SetAlpha( float alpha)
 {
+   if(this->alpha == alpha) return;
    this->alpha = alpha;
+   LastFrameModified();
 }
 
 float Sprite::GetAlpha()
@@ -343,7 +385,10 @@ void Sprite::SetRotation_deg( float angle_deg)
    while(angle_deg >= 360.0)
      angle_deg -= 360.0;
 
+   if(rotation_deg == angle_deg) return;
+
    rotation_deg = angle_deg;
+   LastFrameModified();
 }
 
 void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface)
@@ -488,6 +533,7 @@ void Sprite::Start()
 //   loop = false;
    finished = false;
    last_update = Wormux::temps.Lit();
+   LastFrameModified();
 }
 /*
 void Sprite::StartLoop()
@@ -521,8 +567,23 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 
    if(!have_rotation_cache && !have_flipping_cache)
    {
-     tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-     need_free_surface = true;
+     if(!have_lastframe_cache)
+     {
+       tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+       need_free_surface = true;
+     }
+     else
+     {
+       if(last_frame == NULL)
+       {
+         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_ON);
+         last_frame = tmp_surface;
+       }
+       else
+       {
+         tmp_surface = last_frame;
+       }
+     }
    }
    else
    {
@@ -613,6 +674,7 @@ void Sprite::Finish()
     current_frame = frames.size()-1;
     break;      
   }
+  LastFrameModified();
 //  frame_delta = 0;
 }
 
@@ -627,17 +689,23 @@ void Sprite::Update()
    int delta_to_next_f = (Wormux::temps.Lit() - last_update) / GetCurrentFrameObject().delay;
    last_update += delta_to_next_f * GetCurrentFrameObject().delay;
 
-//   last_update = Wormux::temps.Lit();
-
    bool finish;
    if (frame_delta < 0)
      finish = (current_frame + frame_delta * delta_to_next_f) <= 0;
    else
      finish = (frames.size()-1) <= (current_frame + frame_delta * delta_to_next_f);
+
    if (finish && !loop)
       Finish();
    else
-     current_frame = ( current_frame + frame_delta * delta_to_next_f) % frames.size();
+   {
+     unsigned int next_frame = ( current_frame + frame_delta * delta_to_next_f) % frames.size();
+     if(next_frame != current_frame)
+     {
+       LastFrameModified();
+       current_frame = next_frame;
+     }
+   }
 }
 
 void Sprite::Draw(int pos_x, int pos_y)
