@@ -26,6 +26,7 @@
 
 #include "../include/base.h"
 #include <vector>
+#include "../tool/Rectangle.h"
 
 struct SDL_Surface;
 
@@ -130,9 +131,15 @@ public:
   // Get alpha value of a pixel
   unsigned char GetAlpha (const int x, const int y) const;
 
-  // Draw it
+  // Draw it (on the entire visible part) 
   void DrawTile();
-
+   
+  // Draw a part that is inside the given clipping rectangle
+  // Clipping rectangle is in World corrdinate not screen coordinates
+  // usefull to redraw only a part that is under a sprite that has moved,...
+ 
+  void DrawTile_Clipped( Rectanglei clip_rectangle);
+   
 protected:
   // Initialise la position, la taille des cellules, et la taille du terrain
   void InitTile (unsigned int larg, unsigned int haut);
