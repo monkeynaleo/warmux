@@ -81,6 +81,7 @@ void SuperTux::Init()
   SetSize (image.get_width(), image.get_height());
 #else
   image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
+  image->EnableLastFrameCache();
   SetSize(image->GetWidth(), image->GetHeight());
 #endif
 

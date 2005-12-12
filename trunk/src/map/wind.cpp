@@ -67,6 +67,8 @@ void WindParticle::Init()
   sprite.set_frame ( RandomLong(0, sprite.get_frame_count()-1) );
 #else
   sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
+  if(sprite->GetFrameCount()==1)
+    sprite->EnableLastFrameCache();
   sprite->SetCurrentFrame ( RandomLong(0, sprite->GetFrameCount()-1));
 #endif
    
@@ -167,8 +169,8 @@ void WindParticle::Draw()
 #else
      sprite->GetScaleFactors( scale_x, scale_y);
 #endif
-    if(speed.x<0 && scale_x>0
-    || speed.x>0 && scale_x<0)
+    if((speed.x<0 && scale_x>0)
+    || (speed.x>0 && scale_x<0))
     {
       scale_x=-scale_x;
 #ifdef CL

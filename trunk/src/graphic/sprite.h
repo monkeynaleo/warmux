@@ -64,6 +64,7 @@ typedef enum {
    void AddFrame(SDL_Surface* surf, unsigned int delay);
    void EnableRotationCache(unsigned int cache_size);
    void EnableFlippingCache();
+   void EnableLastFrameCache();
 
    // Get/Set physical characterisics
 	void SetSize(unsigned int w, unsigned int h);
@@ -119,9 +120,15 @@ typedef enum {
    Rotation_HotSpot rot_hotspot;
    void Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface);
 
+   //Cache members / functions
    bool have_rotation_cache;
-   bool have_flipping_cache;
    unsigned int rotation_cache_size;
+
+   bool have_flipping_cache;
+
+   bool have_lastframe_cache;
+   SDL_Surface* last_frame;
+   void LastFrameModified();
 };
 
 #endif /* _SPRITE_H */
