@@ -21,19 +21,15 @@
 
 #include "water.h"
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "../game/time.h"
 #include "map.h"
 #include "maps_list.h"
 #include "camera.h"
 #include "../interface/interface.h"
 
-#ifdef CL
-#include "../graphic/graphism.h"
-#else
-#include <SDL.h>
 #include "../tool/resource_manager.h"
 #include "../include/app.h"
-#endif
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 

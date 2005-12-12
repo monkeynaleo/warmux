@@ -31,10 +31,6 @@
 #include "../weapon/weapons_list.h"
 #include "../include/action.h"
 #include "../interface/keyboard.h"
-#ifdef CL
-#include "../graphic/graphism.h"
-#include <ClanLib/display.h>
-#else
 #include <sstream>
 #include <iostream>
 #include <sys/stat.h>
@@ -43,7 +39,6 @@
 #include "../tool/file_tools.h"
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
-#endif
 //-----------------------------------------------------------------------------
 namespace Wormux 
 {

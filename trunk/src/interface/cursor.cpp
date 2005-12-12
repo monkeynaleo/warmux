@@ -21,11 +21,8 @@
 
 #include "cursor.h"
 //-----------------------------------------------------------------------------
-#ifndef CL
 #include <SDL.h>
 #include "../tool/resource_manager.h"
-#endif
-//#include "../graphic/graphism.h"
 #include "../team/teams_list.h" // ActiveCharacter()
 #include "../game/time.h"
 #include "../game/game_loop.h"

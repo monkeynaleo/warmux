@@ -23,7 +23,7 @@
 //-----------------------------------------------------------------------------
 #include "../game/time.h"
 #include "../graphic/video.h"
-#include "../graphic/graphism.h"
+#include "../graphic/font.h"
 #include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------

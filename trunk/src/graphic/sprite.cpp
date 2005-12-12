@@ -34,9 +34,12 @@
 
 SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed)
 {
+  assert(p_surface != NULL);
   this->surface = p_surface;
   this->delay = p_speed;
   rotated_surface = NULL;
+  flipped_surface = NULL;
+  rotated_flipped_surface = NULL;
 }
 
 // *****************************************************************************/

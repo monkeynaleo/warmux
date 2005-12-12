@@ -28,7 +28,6 @@
 #include "../team/teams_list.h"
 #include "../tool/string_tools.h"
 #include "../weapon/weapons_list.h"
-#include "../graphic/graphism.h"
 #include "../graphic/colors.h"
 #include "../tool/i18n.h"
 #include "../graphic/video.h"

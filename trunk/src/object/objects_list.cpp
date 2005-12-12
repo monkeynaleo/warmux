@@ -21,6 +21,7 @@
 
 #include "../object/objects_list.h"
 //-----------------------------------------------------------------------------
+#include "../include/app.h"
 #include "../map/maps_list.h"
 #ifdef CL
 # include "../weapon/mine.h"

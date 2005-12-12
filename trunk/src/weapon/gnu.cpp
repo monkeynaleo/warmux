@@ -29,7 +29,6 @@
 #include "../graphic/video.h"
 #include "../tool/math_tools.h"
 #include "../game/game_loop.h"
-#include "../graphic/graphism.h"
 #include "../tool/i18n.h"
 #include "../map/camera.h"
 #include "../weapon/weapon_tools.h"

@@ -22,12 +22,11 @@
 #include "fps.h"
 //-----------------------------------------------------------------------------
 #include "video.h"
-#include "graphism.h"
 #include "text.h"
 #include <SDL.h>
 #include <sstream>
 #include <iomanip>
-using namespace Wormux;
+
 //-----------------------------------------------------------------------------
 const uint NBR_VAL = 4; // nombre de valeurs utilisées pour calculer la moyenne
 //-----------------------------------------------------------------------------

@@ -1,4 +1,3 @@
-
 /******************************************************************************
  *  Wormux, a free clone of the game Worms from Team17.
  *  Copyright (C) 2001-2004 Lawrence Azzoug.
@@ -21,20 +20,16 @@
  *****************************************************************************/
 
 #include "particle.h"
+#include <SDL.h>
+#include <map>
 #include "../object/objects_list.h"
 #include "../game/time.h"
 #include "../tool/random.h"
 #include "../weapon/weapon_tools.h"
-#ifdef CL
-#include "../graphic/graphism.h"
-#else
-#include <SDL.h>
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../tool/Point.h"
 #include "../graphic/sprite.h"
-#endif
-#include <map>
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------

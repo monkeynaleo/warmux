@@ -24,7 +24,6 @@
 #include "tile.h"
 #include <iostream>
 #include <SDL.h>
-//#include "../graphic/graphism.h"
 #include "../tool/Point.h"
 #include "../include/app.h"
 #include "../map/camera.h"

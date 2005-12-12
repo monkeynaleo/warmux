@@ -22,7 +22,7 @@
 #include "check_box.h"
 //-----------------------------------------------------------------------------
 #include <algorithm>
-#include "../graphic/graphism.h"
+#include "../include/app.h"
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 

@@ -21,7 +21,7 @@
 
 #include "spin_button.h"
 //-----------------------------------------------------------------------------
-#include "../graphic/graphism.h"
+#include "../include/app.h"
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
 # include <sstream>

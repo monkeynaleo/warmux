@@ -40,7 +40,6 @@
 #include "../weapon/weapons_list.h"
 #include "../sound/jukebox.h"
 #include "game_mode.h"
-#include "../graphic/graphism.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../object/bonus_box.h"

@@ -28,7 +28,6 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../include/enum.h"
-#include "../graphic/graphism.h"
 #include "../object/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"

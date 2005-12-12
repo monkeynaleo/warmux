@@ -99,7 +99,6 @@ wormux_SOURCES = \
 	weapon/supertux.cpp weapon/supertux.h
 	
 #	game/debug.cpp game/debug.h \
-####	graphic/graphism.cpp graphic/graphism.h \
 #
 #
 #

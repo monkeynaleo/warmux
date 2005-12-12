@@ -21,10 +21,10 @@
 
 #include "list_box.h"
 //-----------------------------------------------------------------------------
-#include "../graphic/graphism.h"
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
 #include "../include/app.h"
+#include "../graphic/font.h"
 #include <algorithm>
 #include <SDL_gfxPrimitives.h>
 using namespace Wormux;
