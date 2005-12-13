@@ -86,13 +86,8 @@ void Gnu::Tire (double force)
 
 void Gnu::Init()
 {
-#ifdef CL
-  image = CL_Sprite("gnu", &graphisme.weapons); 
-  SetSize (image.get_width(), image.get_height());
-#else
   image = resource_manager.LoadSprite( weapons_res_profile, "gnu"); 
   SetSize (image->GetWidth(), image->GetHeight());
-#endif
   SetMass (gnu_launcher.cfg().mass);
 }
 
@@ -134,19 +129,11 @@ void Gnu::Refresh()
 //  if(angle<-45 && angle>-135)
 //    angle=0;
 
-#ifdef CL
-  image.set_angle(angle);
-  image.update();
-  // Fixe le rectangle de test
-  int dx = image.get_width()/2-1;
-  int dy = image.get_height()/2-1;
-#else
   image->SetRotation_deg(angle);
   image->Update();
   // Fixe le rectangle de test
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
-#endif
    
   SetTestRect (dx, dx, dy, dy);
 
@@ -200,13 +187,11 @@ void Gnu::Draw()
   tmp -= (int) ((temps.Lit() - launched_time) / 1000);
   std::ostringstream ss;
   ss << tmp;
-#ifdef CL
+
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
-  police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
-#else
-   // TODO
-#endif
+  small_font.WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
+
 }
 
 //-----------------------------------------------------------------------------
@@ -239,11 +224,7 @@ bool GnuLauncher::p_Shoot ()
   camera.ChangeObjSuivi (&gnu,true,true,true);
   m_strength = 0;
 
-#ifdef CL
-  jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
-#else
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-#endif
 
   return true;
 }
@@ -260,11 +241,7 @@ void GnuLauncher::Explosion()
   if (gnu.IsGhost()||!gnu.is_active) return;
 
   // Applique les degats et le souffle aux vers
-#ifdef CL
-  CL_Point pos = gnu.GetCenter();
-#else
   Point2i pos = gnu.GetCenter();
-#endif 
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -279,11 +256,7 @@ void GnuLauncher::Refresh()
 
 void GnuLauncher::p_Init()
 {
-#ifdef CL
-  impact = CL_Surface("gnulauncher_impact", &graphisme.weapons);
-#else
   impact = resource_manager.LoadImage( weapons_res_profile, "gnulauncher_impact");
-#endif
   gnu.Init();
 }
 
