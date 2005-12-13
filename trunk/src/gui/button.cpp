@@ -22,6 +22,7 @@
 #include "button.h"
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
+#include "../include/app.h"
 
 //-----------------------------------------------------------------------------
 
@@ -57,7 +58,7 @@ void Button::Draw (uint mouse_x, uint mouse_y)
 {
   uint frame = MouseIsOver(mouse_x,mouse_y)?1:0;
   image->SetCurrentFrame (frame);
-  image->Draw(x, y);
+  image->Blit(app.sdlwindow, x, y);
 }
 
 //-----------------------------------------------------------------------------
