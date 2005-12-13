@@ -61,12 +61,9 @@ void GameMessages::Draw()
   uint msgy = 50;
   for (iterator i=liste.begin(); i != liste.end(); ++i)
   {
-#ifdef CL
-    police_petit.WriteCenterTop (video.GetWidth()/2, msgy, i -> text);
-#else
-    small_font.WriteCenterTop (video.GetWidth()/2, msgy, i -> text, white_color);
-#endif
-     msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
+    i -> text->DrawCenterTop(video.GetWidth()/2, msgy);
+    
+    msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
   }
 }
 
@@ -84,6 +81,7 @@ void GameMessages::Refresh()
     if (DUREE_VIE_MSG < temps.Lit() - actuel -> time)
     {
       fin = (i == liste.end());
+      delete (actuel->text);
       liste.erase (actuel);
       if (fin) break;
     }
@@ -99,7 +97,9 @@ void GameMessages::Add(const std::string &message)
   std::cout << "o MSG: " << message << std::endl;
 
   // Ajoute le message à la liste (avec son heure d'arrivée)
-  liste.push_back (message_t(message, temps.Lit()));
+  Text * tmp = new Text(message, white_color, &small_font);
+
+  liste.push_back (message_t(tmp, temps.Lit()));
 
   while (NBR_MSG_MAX < liste.size()) liste.pop_front();
 }
