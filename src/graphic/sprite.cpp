@@ -76,6 +76,7 @@ Sprite::Sprite()
    frame_height_pix = 0;
    scale_x = 1.0f;
    scale_y = 1.0f;
+   alpha = 1.0f;
    rotation_deg = 0.0f;
    current_frame = 0;
    frame_delta = 1;
@@ -101,6 +102,7 @@ Sprite::Sprite( const Sprite& other)
    frame_height_pix = other.frame_height_pix;
    scale_x = other.scale_x;
    scale_y = other.scale_y;
+   alpha = other.alpha;
    rotation_deg = other.rotation_deg;
    current_frame = other.current_frame;
    rot_hotspot = center;
@@ -152,6 +154,7 @@ Sprite::Sprite( SDL_Surface *surface)
    
    scale_x = 1.0f;
    scale_y = 1.0f;
+   alpha = 1.0f;
    rotation_deg = 0.0f;   
    current_frame = 0;
    rot_hotspot = center;

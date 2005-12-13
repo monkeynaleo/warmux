@@ -58,7 +58,7 @@ void Ciel::Init()
    SDL_Surface *tmp_image = lst_terrain.TerrainActif().LitImgCiel();
    SDL_SetAlpha( tmp_image, 0, 0);
    image = SDL_DisplayFormat( tmp_image);
-   SDL_FreeSurface( tmp_image);
+//   SDL_FreeSurface( tmp_image);
 #endif
 }
 

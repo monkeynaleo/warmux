@@ -360,15 +360,26 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 	SetXY (Arrondit(x-dx), Arrondit(y-dy));
 
 	// Find the contact point and collision angle.
-	ContactPoint(cx,cy);
-	contact_angle = monde.terrain.Tangeante(cx,cy);
-	contact_x = (double)cx / PIXEL_PER_METER ;
-	contact_y = (double)cy / PIXEL_PER_METER ;
+  // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
+  // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
+  // !!! uninitialised values of cx and cy!!
+	if(ContactPoint(cx,cy))
+  {
+    contact_angle = monde.terrain.Tangeante(cx,cy);
+    contact_x = (double)cx / PIXEL_PER_METER ;
+    contact_y = (double)cy / PIXEL_PER_METER ;
+  }
+  else
+  {
+    contact_angle = - GetSpeedAngle();
+    contact_x = x;
+    contact_y = y;
+  }
 
 	//        printf ("--- Collision !!! - Pos %d,%d\n", tmp_x, tmp_y);
+    collision = true;
+    break ;
 
-	collision = true;
-	break ;
       }
     
     // Next motion step
@@ -679,33 +690,29 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact en bas de l'objet:
   for (uint x=GetX()+ m_test_left; x<=(GetX()+m_width)-m_test_right; x++)
   {
-#ifdef CL
-    if(!monde.EstHorsMonde(CL_Point(x,(GetY()+m_height-m_test_bottom))))
-#else
     if(!monde.EstHorsMonde(Point2i(x,(GetY()+m_height-m_test_bottom))))       
-#endif
-    if(!monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)+1)
-    &&( monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom))
-    ||  monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)+2)))
+//    if(!monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)+1)
+//    &&( monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom))
+//    || monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)+2)))
+    if(monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)-1)
+    && !monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)))
     {
       contact_x = x;
-      contact_y = GetY() +m_height-m_test_bottom +1;
+      contact_y = GetY() +m_height-m_test_bottom;
       return true;
     }
   }
   //On cherche un point de contact à gauche de l'objet:
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-#ifdef CL
-    if(!monde.EstHorsMonde(CL_Point(GetX()+m_test_left-1,y)))
-#else
     if(!monde.EstHorsMonde(Point2i(GetX()+m_test_left-1,y)))
-#endif
-    if(!monde.terrain.EstDansVide(GetX()+m_test_left-1,y)
-    &&( monde.terrain.EstDansVide(GetX()+m_test_left,y)
-    ||  monde.terrain.EstDansVide(GetX()+m_test_left-2,y)))
+//    if(!monde.terrain.EstDansVide(GetX()+m_test_left-1,y)
+//    &&( monde.terrain.EstDansVide(GetX()+m_test_left,y)
+//    ||  monde.terrain.EstDansVide(GetX()+m_test_left-2,y)))
+    if(!monde.terrain.EstDansVide(GetX()+m_test_left,y)
+    &&  monde.terrain.EstDansVide(GetX()+m_test_left+1,y))
     {
-      contact_x = GetX() +m_test_left-1;
+      contact_x = GetX() +m_test_left;
       contact_y = y;
       return true;
     }
@@ -713,16 +720,14 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact à droite de l'objet:
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-#ifdef CL
-    if(!monde.EstHorsMonde(CL_Point((GetX()+m_width-m_test_right)+1,y)))
-#else
     if(!monde.EstHorsMonde(Point2i((GetX()+m_width-m_test_right)+1,y)))
-#endif
-    if(!monde.terrain.EstDansVide((GetX()+m_width-m_test_right)+1,y)
-    &&( monde.terrain.EstDansVide((GetX()+m_width-m_test_right)+2,y)
-    ||  monde.terrain.EstDansVide((GetX()+m_width-m_test_right),y)))
+//    if(!monde.terrain.EstDansVide((GetX()+m_width-m_test_right)+1,y)
+//    &&( monde.terrain.EstDansVide((GetX()+m_width-m_test_right)+2,y)
+//    ||  monde.terrain.EstDansVide((GetX()+m_width-m_test_right),y)))
+    if(!monde.terrain.EstDansVide((GetX()+m_width-m_test_right),y)
+    &&  monde.terrain.EstDansVide((GetX()+m_width-m_test_right)-1,y))
     {
-      contact_x = GetX() + m_width - m_test_right +1;
+      contact_x = GetX() + m_width - m_test_right;
       contact_y = y;
       return true;
     }
@@ -730,14 +735,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact en haut de l'objet:
   for(uint x=GetX()+m_test_left;x<=GetX()+m_width-m_test_right;x++)
   {
-#ifdef CL
-    if(!monde.EstHorsMonde(CL_Point(x,GetY()+m_test_top-1)))
-#else
-     if(!monde.EstHorsMonde(Point2i(x,GetY()+m_test_top-1)))
-#endif
-    if(!monde.terrain.EstDansVide(x,GetY()+m_test_top-1)
-    &&( monde.terrain.EstDansVide(x,GetY()+m_test_top-2)
-    ||  monde.terrain.EstDansVide(x,GetY()+m_test_top)))
+    if(!monde.EstHorsMonde(Point2i(x,GetY()+m_test_top-1)))
+//    if(!monde.terrain.EstDansVide(x,GetY()+m_test_top-1)
+//    &&( monde.terrain.EstDansVide(x,GetY()+m_test_top-2)
+//    ||  monde.terrain.EstDansVide(x,GetY()+m_test_top)))
+    if(!monde.terrain.EstDansVide(x,GetY()+m_test_top)
+    &&  monde.terrain.EstDansVide(x,GetY()+m_test_top-1))
     {
       contact_x =x;
       contact_y = GetY() +m_test_top;

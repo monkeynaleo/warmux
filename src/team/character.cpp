@@ -101,6 +101,7 @@ const uint HAUT_ENERGIE = 6;
 Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
 {
   pause_bouge_dg = 0;
+  previous_strength = 0;
   m_team = NULL;
   energy = 100;
   losted_energy = 0;
