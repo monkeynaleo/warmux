@@ -23,6 +23,7 @@
 #define GAME_MESSAGES_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#include "../graphic/text.h"
 #include <string>
 #include <list>
 //-----------------------------------------------------------------------------
@@ -32,9 +33,9 @@ class GameMessages
 public:
   typedef struct message_t
   {
-    std::string text;
+    Text * text;
     uint time;
-    message_t (const std::string &a, uint b) { text = a; time = b; }
+    message_t (Text * t, uint _time) { text = t; time = _time; }
   } message_t;
   std::list<message_t> liste;
   typedef std::list<message_t>::iterator iterator;
