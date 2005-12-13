@@ -71,6 +71,7 @@ const uint BUTTON_HEIGHT = (int)(BUTTON_ICO_GAP + BUTTON_ICO_HEIGHT  *
 //-----------------------------------------------------------------------------
 WeaponMenuItem::WeaponMenuItem(uint num_sort)
 {
+  zoom_start_time = 0;
   weapon_type = num_sort;
   Reset();
 }

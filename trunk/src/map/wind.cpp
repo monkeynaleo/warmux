@@ -54,6 +54,7 @@ WindParticle::WindParticle() : PhysicalObj("WindParticle", 0.0)
   m_type = objUNBREAKABLE;
   m_wind_factor = 1;
   m_air_resist_factor = 0.2;
+  sprite = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -61,6 +62,9 @@ WindParticle::WindParticle() : PhysicalObj("WindParticle", 0.0)
 void WindParticle::Init()
 {
   double mass, wind_factor ;
+
+  if(sprite != NULL)
+    delete sprite;
 
 #ifdef CL
   sprite = CL_Sprite("wind_particle", TerrainActif().res);

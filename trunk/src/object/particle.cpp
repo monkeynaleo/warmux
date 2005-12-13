@@ -266,8 +266,8 @@ void ParticleEngine::Refresh()
     ++it;
 
     if (! (*current)->StillUseful()) {
-      particles.erase(current);
       delete (*current);
+      particles.erase(current);
       if (it==end) break;
     }   
   }
@@ -352,8 +352,8 @@ void ParticleEngine::Stop()
     current = it;
     ++it;
     
-    particles.erase(current);
     delete (*current);
+    particles.erase(current);
     if (it==end) break;
     
   }
