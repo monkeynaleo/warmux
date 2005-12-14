@@ -87,7 +87,7 @@ void WeaponMenuItem::Reset()
 //-----------------------------------------------------------------------------
 void WeaponMenuItem::ChangeZoom()
 {
-  zoom_start_time = temps.Lit();
+  zoom_start_time = global_time.Read();
 
   if(!zoom && scale < 1)
     {
@@ -106,7 +106,7 @@ void WeaponMenuItem::ComputeScale()
 {
   double scale_range, time_range ;
 
-  time_range = ((double)temps.Lit() - zoom_start_time) / ICON_ZOOM_TIME ;
+  time_range = ((double)global_time.Read() - zoom_start_time) / ICON_ZOOM_TIME ;
   if (time_range > 1)
     time_range = 1 ;
 
@@ -297,9 +297,9 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
 void WeaponsMenu::Show()
 {
   if(hide)
-    motion_start_time = temps.Lit() - (ICONS_DRAW_TIME - (temps.Lit()-motion_start_time));
+    motion_start_time = global_time.Read() - (ICONS_DRAW_TIME - (global_time.Read()-motion_start_time));
   else
-    motion_start_time = temps.Lit();
+    motion_start_time = global_time.Read();
 
   display = true;
   show = true;
@@ -336,9 +336,9 @@ void WeaponsMenu::ComputeSize()
 void WeaponsMenu::Hide()
 {
   if(show)
-    motion_start_time = temps.Lit() - (ICONS_DRAW_TIME - (temps.Lit()-motion_start_time));
+    motion_start_time = global_time.Read() - (ICONS_DRAW_TIME - (global_time.Read()-motion_start_time));
   else
-    motion_start_time = temps.Lit();
+    motion_start_time = global_time.Read();
 
   hide = true;
   show = false;
@@ -365,11 +365,11 @@ int WeaponsMenu::GetY() const
 #ifdef CL
   int y = video.GetHeight();
 
-  if (interface.EstAffiche())
+  if (interface.IsDisplayed())
     y -= interface.GetHeight();
   return y;
 #else
-   return video.GetHeight() - GetHeight() - ( interface.EstAffiche() ? interface.GetHeight() : 0 );
+   return video.GetHeight() - GetHeight() - ( interface.IsDisplayed() ? interface.GetHeight() : 0 );
 #endif
 }
 
@@ -398,15 +398,6 @@ bool WeaponsMenu::IsDisplayed() const
 //-----------------------------------------------------------------------------
 void WeaponsMenu::Init()
 {
-#ifdef CL
-  CL_ResourceManager* res=graphisme.LitRes();
-
-  my_button1 = CL_Surface("interface/button1_icon", res);
-  my_button2 = CL_Surface("interface/button2_icon", res);
-  my_button3 = CL_Surface("interface/button3_icon", res);
-  my_button4 = CL_Surface("interface/button4_icon", res);
-  my_button5 = CL_Surface("interface/button5_icon", res);
-#else
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
   my_button1 = new Sprite( resource_manager.LoadImage(res,"interface/button1_icon"));
   my_button1->EnableLastFrameCache();
@@ -418,7 +409,6 @@ void WeaponsMenu::Init()
   my_button4->EnableLastFrameCache();
   my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));
   my_button5->EnableLastFrameCache();
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -426,12 +416,12 @@ void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column
 {
   int delta_t=ICONS_DRAW_TIME/(2*nr_buttons);
 
-  if((temps.Lit() > motion_start_time + (delta_t*button_no))
-     && (temps.Lit() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(button_no))))
+  if((global_time.Read() > motion_start_time + (delta_t*button_no))
+     && (global_time.Read() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(button_no))))
     {
       double delta_sin = -(asin((column+1.0)/(column+2.0)) - (M_PI/2));
       
-      uint tps = temps.Lit() - (motion_start_time + delta_t*button_no);
+      uint tps = global_time.Read() - (motion_start_time + delta_t*button_no);
       
       double tps_sin = ((double)tps * ((M_PI/2) + delta_sin)/(ICONS_DRAW_TIME/2));
       
@@ -439,12 +429,12 @@ void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column
       it-> x += (BUTTON_WIDTH * (column+1));
     }
   else
-    if(temps.Lit() < motion_start_time + (delta_t*button_no))
+    if(global_time.Read() < motion_start_time + (delta_t*button_no))
       {
 	it-> x += (BUTTON_WIDTH * (column+1));
       }
   
-  if(temps.Lit() > motion_start_time + ICONS_DRAW_TIME)
+  if(global_time.Read() > motion_start_time + ICONS_DRAW_TIME)
     {
       show = false;
     }
@@ -456,12 +446,12 @@ bool WeaponsMenu::HideMotion(int nr_buttons,int button_no,iterator it,int column
 {
   int delta_t=ICONS_DRAW_TIME/(2*nr_buttons);
 
-  if((temps.Lit() > motion_start_time + (delta_t*(nr_buttons-button_no)))
-     && (temps.Lit() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(nr_buttons-button_no))))
+  if((global_time.Read() > motion_start_time + (delta_t*(nr_buttons-button_no)))
+     && (global_time.Read() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(nr_buttons-button_no))))
     {
       double delta_sin = -(asin((column+1.0)/(column+2.0)) - (M_PI/2));
       
-      uint tps = temps.Lit() - (motion_start_time + delta_t*(nr_buttons-button_no));
+      uint tps = global_time.Read() - (motion_start_time + delta_t*(nr_buttons-button_no));
       double tps_sin = ((double)tps * ((M_PI/2) + delta_sin)/(ICONS_DRAW_TIME/2));
       tps_sin = ((M_PI/2) + delta_sin) - tps_sin;
       
@@ -469,13 +459,13 @@ bool WeaponsMenu::HideMotion(int nr_buttons,int button_no,iterator it,int column
       it-> x += BUTTON_WIDTH * (column+1);
     }
   else
-    if(temps.Lit() > motion_start_time + (delta_t*(nr_buttons-button_no)))
+    if(global_time.Read() > motion_start_time + (delta_t*(nr_buttons-button_no)))
       {
 	it-> x += BUTTON_WIDTH * (column+1);
 	it-> Reset();
       }
   
-  if(temps.Lit() > motion_start_time + ICONS_DRAW_TIME)
+  if(global_time.Read() > motion_start_time + ICONS_DRAW_TIME)
     {
       hide = false;
       display = false;
@@ -566,12 +556,12 @@ void WeaponsMenu::ReactionSouris (int x, int y)
     int button_no=0;
     int nv_bouton_sous_souris=-1;
     iterator it=boutons.begin(), fin=boutons.end();
-    interface.arme_pointe_souris = NULL;
+    interface.weapon_under_cursor = NULL;
     for (; it != fin; ++it)
     {
       if(it->MouseOn(x,y))
       {
-          interface.arme_pointe_souris = it->weapon;
+          interface.weapon_under_cursor = it->weapon;
         nv_bouton_sous_souris = button_no;
         if(button_no != bouton_sous_souris)
         {//Le curseur arrive sur un nouveau bouton
@@ -596,7 +586,7 @@ void WeaponsMenu::ReactionSouris (int x, int y)
       (it+bouton_sous_souris)->ChangeZoom();
     }
     bouton_sous_souris = -1;
-    interface.arme_pointe_souris = NULL;
+    interface.weapon_under_cursor = NULL;
   }
 #else
   // Nothing to do

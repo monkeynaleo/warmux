@@ -200,7 +200,7 @@ void Caisse::Reset()
   temps_caisse = RandomLong(TEMPS_MIN_CREATION, 
 			    TEMPS_MAX_CREATION-TEMPS_MIN_CREATION);
   temps_caisse *= 1000;
-  temps_caisse += temps.Lit();
+  temps_caisse += global_time.Read();
   bonus = RandomLong (1, nbr_bonus_diff);
 
   SetMass (0);
@@ -304,7 +304,7 @@ bool Caisse::FaitApparaitre()
 
   if (!pos_valide) Reset();
 
-  if (affiche || (temps.Lit() < temps_caisse)) return false;
+  if (affiche || (global_time.Read() < temps_caisse)) return false;
   affiche = true;
   m_ready = false;
   Ready();

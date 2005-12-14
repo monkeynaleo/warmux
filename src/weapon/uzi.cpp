@@ -114,8 +114,8 @@ void Uzi::p_Deselect()
 
 void Uzi::RepeatShoot()
 {        
-  uint time = Wormux::temps.Lit() - m_first_shoot; 
-  uint tmp = Wormux::temps.Lit();
+  uint time = Wormux::global_time.Read() - m_first_shoot; 
+  uint tmp = Wormux::global_time.Read();
 
   if (time >= MIN_TIME_BETWEEN_SHOOT)
   {

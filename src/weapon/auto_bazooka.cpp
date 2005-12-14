@@ -87,7 +87,7 @@ void RoquetteTeteCherche::Tire (double force,
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (force, angle);
 
-  temps_debut_tir = Wormux::temps.Lit();
+  temps_debut_tir = Wormux::global_time.Read();
   angle_local=angle;
 }
 
@@ -143,7 +143,7 @@ void RoquetteTeteCherche::Refresh()
 #endif
       
       //2 sec après avoir été tirée, la roquette se dirige vers la cible:
-      tmp = Wormux::temps.Lit() - temps_debut_tir;
+      tmp = Wormux::global_time.Read() - temps_debut_tir;
       if(tmp>1000 * TPS_AV_ATTIRANCE)
 	{
 	  m_attire = true;

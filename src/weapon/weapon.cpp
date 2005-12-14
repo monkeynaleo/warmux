@@ -497,7 +497,7 @@ void Weapon::UpdateStrength()
 {
   if (max_strength == 0 || m_first_time_loading == 0) return ;
   
-  uint time = Wormux::temps.Lit() - m_first_time_loading;
+  uint time = Wormux::global_time.Read() - m_first_time_loading;
   double val = (max_strength * time) / MAX_TIME_LOADING;
 
   m_strength = BorneDouble (val, 0.0, max_strength);
@@ -527,7 +527,7 @@ void Weapon::InitLoading()
    
   curseur_ver.Cache();
 
-  m_first_time_loading = Wormux::temps.Lit();
+  m_first_time_loading = Wormux::global_time.Read();
   
   m_strength = 0;
 

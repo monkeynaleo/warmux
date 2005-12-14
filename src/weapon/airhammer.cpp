@@ -96,8 +96,8 @@ bool Airhammer::p_Shoot()
 
 void Airhammer::RepeatShoot()
 {  
-  uint time = Wormux::temps.Lit() - m_last_jolt; 
-  uint tmp = Wormux::temps.Lit();
+  uint time = Wormux::global_time.Read() - m_last_jolt; 
+  uint tmp = Wormux::global_time.Read();
 
   if (time >= MIN_TIME_BETWEEN_JOLT) 
   {

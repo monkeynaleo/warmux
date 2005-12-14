@@ -69,7 +69,7 @@ void Gnu::Tire (double force)
   save_x=(double)x-1.0;
   save_y=(double)y-1.0;
 
-  launched_time=temps.Lit();
+  launched_time=global_time.Read();
 
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();
@@ -97,7 +97,7 @@ void Gnu::Refresh()
 {
   if (!is_active) return;
 
-  uint tmp=temps.Lit();
+  uint tmp=global_time.Read();
   if(tmp > (1000*gnu_launcher.cfg().timeout)+launched_time)
   {
     gnu_launcher.Explosion();
@@ -184,7 +184,7 @@ void Gnu::Draw()
 #endif
 
   int tmp=gnu_launcher.cfg().timeout;
-  tmp -= (int) ((temps.Lit() - launched_time) / 1000);
+  tmp -= (int) ((global_time.Read() - launched_time) / 1000);
   std::ostringstream ss;
   ss << tmp;
 

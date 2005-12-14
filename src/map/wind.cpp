@@ -300,14 +300,14 @@ void Wind::DrawParticles()
 
 void Wind::Refresh()
 {
-  if(m_last_move + barre_speed < temps.Lit())
+  if(m_last_move + barre_speed < global_time.Read())
   {
     if(m_val>m_nv_val)
       --m_val;
     else
     if(m_val<m_nv_val)
       ++m_val;
-    m_last_move = temps.Lit();
+    m_last_move = global_time.Read();
     barre.Actu(m_val); 
   }
 

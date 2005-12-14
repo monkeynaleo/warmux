@@ -349,7 +349,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
 
     case ACTION_TOGGLE_INTERFACE:
-      interface.ChangeAffiche (!interface.EstAffiche());
+      interface.EnableDisplay (!interface.IsDisplayed());
       return;
 
     case ACTION_CENTER:

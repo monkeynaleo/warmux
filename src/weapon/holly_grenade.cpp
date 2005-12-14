@@ -81,7 +81,7 @@ void HollyGrenade::Tire (double force)
 #endif
 
   // Recupere le moment du départ
-  temps_debut_tir = Wormux::temps.Lit();
+  temps_debut_tir = Wormux::global_time.Read();
   sing_alleluia = false;
 }
 
@@ -139,7 +139,7 @@ void HollyGrenade::Refresh()
   }
 
   //5 sec après avoir été tirée, la grenade explose
-  double tmp = Wormux::temps.Lit() - temps_debut_tir;
+  double tmp = Wormux::global_time.Read() - temps_debut_tir;
   if(tmp>1000 * holly_grenade_launcher.cfg().timeout) {
     smoke_engine.Stop();
     is_active = false;
@@ -181,7 +181,7 @@ void HollyGrenade::Draw()
 
   image->Draw(GetX(),GetY());
   int tmp = holly_grenade_launcher.cfg().timeout;
-  tmp -= (int)((Wormux::temps.Lit() - temps_debut_tir) / 1000);
+  tmp -= (int)((Wormux::global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;

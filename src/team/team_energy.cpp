@@ -218,19 +218,19 @@ void TeamEnergy::Mouvement ()
   if( classement != nv_classement )
   {
     if(tps_debut_mvt == 0)
-      tps_debut_mvt = temps.Lit();
+      tps_debut_mvt = global_time.Read();
     
     dy = (int)(( (BARRE_HAUT+ESPACEMENT) * ((float)nv_classement - classement))
-             * ((temps.Lit() - tps_debut_mvt) / DUREE_MVT));
+             * ((global_time.Read() - tps_debut_mvt) / DUREE_MVT));
     
     // Déplacement en arc de cercle seulement quand la jauge descend 
     // dans le classement
     if( nv_classement > classement )
       dx = (int)(( 3.0 * (BARRE_HAUT+ESPACEMENT) * ((float)classement - nv_classement))
-             * sin( M_PI * ((temps.Lit() - tps_debut_mvt) /DUREE_MVT)));
+             * sin( M_PI * ((global_time.Read() - tps_debut_mvt) /DUREE_MVT)));
     
     //Mouvement terminé?
-    if( (temps.Lit() - tps_debut_mvt) > DUREE_MVT )
+    if( (global_time.Read() - tps_debut_mvt) > DUREE_MVT )
     {
       dy = 0;
       dx = 0;
@@ -243,8 +243,8 @@ void TeamEnergy::Mouvement ()
   else
   {//Pendant que la jauge bougeait, elle est revenue
   //à sa place d'origine dans le classement
-    dy = (int)((float)dy - ((temps.Lit() - tps_debut_mvt) /DUREE_MVT) * dy);
-    dx = (int)((float)dx - ((temps.Lit() - tps_debut_mvt) /DUREE_MVT) * dx);
+    dy = (int)((float)dy - ((global_time.Read() - tps_debut_mvt) /DUREE_MVT) * dy);
+    dx = (int)((float)dx - ((global_time.Read() - tps_debut_mvt) /DUREE_MVT) * dx);
   }
 }
 

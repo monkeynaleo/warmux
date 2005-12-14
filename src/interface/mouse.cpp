@@ -69,26 +69,6 @@ void Mouse::Reset()
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-
-#ifdef PORT_CL07
-
-bool Mouse::ClicG() const { return CL_Mouse::left_pressed(); }
-bool Mouse::ClicD() const { return CL_Mouse::right_pressed(); }
-bool Mouse::ClicM() const { return CL_Mouse::middle_pressed(); }
-
-#else
-
-bool Mouse::ClicG() const { return false; }
-bool Mouse::ClicD() const { return false; }
-bool Mouse::ClicM() const { return false; }
-
-#endif
-
-#endif // CL defined
-
-//-----------------------------------------------------------------------------
-
 bool Mouse::ActionClicD()
 { 
   if ( ActiveTeam().GetWeapon().CanChangeWeapon() )
@@ -102,23 +82,7 @@ bool Mouse::ActionClicD()
 
 bool Mouse::ActionClicG()
 {
-#ifdef CL
-   const CL_Point pos_monde = GetPosMonde();
-#else
-   const Point2i pos_monde = GetPosMonde();   
-#endif
-
-#ifdef CL   
-#ifdef MODE_TRICHEUR
-  // Control gauche + clic gauche = téléportation !
-  if (CL_Keyboard::get_keycode(CL_KEY_CONTROL) && ActiveCharacter().IsReady())
-  {
-    ActiveCharacter().SetXY (pos_monde.x, pos_monde.y);
-    ActiveCharacter().UpdatePosition();
-    return true;
-  }
-#endif
-#endif
+  const Point2i pos_monde = GetPosMonde();   
 	
   // Action dans le menu des armes ?
   if (interface.weapons_menu.ActionClic (GetX(),GetY())) 
@@ -126,54 +90,44 @@ bool Mouse::ActionClicG()
     return true;
   } 
 
-
   // On peut changer de ver ?
   if (game_mode.AllowCharacterSelection())
-  {
-    // Sélection d'un ver se son équipe ?
-    bool ver_choisi=false;
-    Team::iterator 
-      it=ActiveTeam().begin(),
-      fin=ActiveTeam().end();
-    uint index=0;
-    for (; it != fin; ++it, ++index)
     {
-      if (&(*it) != &ActiveCharacter()
-	  && !it -> IsDead() 
-	  && 
-#ifdef CL	  
-	  DansRect (it -> GetRect(), pos_monde))
-#else
-	  IsInside (it -> GetRect(), pos_monde))
-#endif
-	 {
-	ver_choisi = true;
-	break;
-      }
-    }
-    if (ver_choisi)
-    {
-      ActiveTeam().SelectCharacterIndex (index);
-      return true;
-    }
+      // Sélection d'un ver se son équipe ?
+      bool ver_choisi=false;
+      Team::iterator 
+	it=ActiveTeam().begin(),
+	fin=ActiveTeam().end();
+      uint index=0;
+      for (; it != fin; ++it, ++index)
+	{
+	  if (&(*it) != &ActiveCharacter()
+	      && !it -> IsDead() 
+	      && IsInside (it -> GetRect(), pos_monde))
+	    {
+	      ver_choisi = true;
+	      break;
+	    }
+	}
+      if (ver_choisi)
+	{
+	  ActiveTeam().SelectCharacterIndex (index);
+	  return true;
+	}
 
-#ifdef CL
-   if (DansRect (ActiveCharacter().GetRect(), pos_monde))
-#else
-     if (IsInside (ActiveCharacter().GetRect(), pos_monde))
-#endif
-     {
-      curseur_ver.SuitVerActif();
-      return true;
+      if (IsInside (ActiveCharacter().GetRect(), pos_monde))
+	{
+	  curseur_ver.SuitVerActif();
+	  return true;
+	}
     }
-  }
-
+  
   // Action dans le menu des armes ?
   if (interface.weapons_menu.ActionClic (GetX(),GetY())) 
-  {
-    return true;
-  }
-
+    {
+      return true;
+    }
+  
   // Choosing target for a weapon, many posibilities :
   // - Do nothing
   // - Choose a target but don't fire
@@ -192,42 +146,29 @@ void Mouse::ChoixVerPointe()
 {
   if (game_loop.ReadState() != gamePLAYING) return;
 
-#ifdef CL
-  const CL_Point pos_monde = GetPosMonde();
-#else
-  const Point2i pos_monde = GetPosMonde();;
-#endif
+  const Point2i pos_monde = GetPosMonde();
    
   // Quel ver est pointé par la souris ? (en dehors du ver actif)
-  interface.ver_pointe_souris = NULL;
+  interface.character_under_cursor = NULL;
   POUR_TOUS_VERS_VIVANTS(equipe,ver)
-  {
-    if ((&(*ver) != &ActiveCharacter())
-#ifdef CL
-	&& DansRect (ver -> GetRect(), pos_monde))
-#else
-    	&& IsInside (ver -> GetRect(), pos_monde))   
-#endif
     {
-      interface.ver_pointe_souris = &(*ver);
+      if ((&(*ver) != &ActiveCharacter())
+	  && IsInside (ver -> GetRect(), pos_monde))   
+	{
+	  interface.character_under_cursor = &(*ver);
+	}
     }
-  }
-
+  
   // Aucun ver n'est pointé ... et le ver actif alors ?
-  if ((interface.ver_pointe_souris == NULL)
-      && 
-#ifdef CL
-      DansRect (ActiveCharacter().GetRect(), pos_monde))
-#else
-      IsInside (ActiveCharacter().GetRect(), pos_monde))  
-#endif
-{
-    interface.ver_pointe_souris = &ActiveCharacter();
-  }
-
+  if ((interface.character_under_cursor == NULL)
+      && IsInside (ActiveCharacter().GetRect(), pos_monde))  
+    {
+      interface.character_under_cursor = &ActiveCharacter();
+    }
+  
   // Dessine le curseur autour du ver pointé s'il y en a un
-  if (interface.ver_pointe_souris != NULL) {
-    curseur_ver.PointeObj (interface.ver_pointe_souris);
+  if (interface.character_under_cursor != NULL) {
+    curseur_ver.PointeObj (interface.character_under_cursor);
   } else {
     curseur_ver.PointeAucunObj();
   }
@@ -261,40 +202,24 @@ void Mouse::ScrollCamera() const
 
 void Mouse::TestCamera()
 {
-#ifndef CL
    int _x, _y;       
    SDL_GetMouseState( &_x, &_y);
-#endif
    
    //Move camera with mouse holding Ctrl key down
-#ifdef CL
-   const bool demande_scroll = CL_Keyboard::get_keycode(CL_KEY_CONTROL);
-#else
    const bool demande_scroll = SDL_GetModState() & KMOD_CTRL;
-#endif
    
    if (demande_scroll)
   {
     if (scroll_actif) {
-#ifdef CL
-      int dx = sauve_x - CL_Mouse::get_x();
-      int dy = sauve_y - CL_Mouse::get_y();
-#else
-       int dx = sauve_x - _x;
-       int dy = sauve_y - _y;
-#endif 
+      int dx = sauve_x - _x;
+      int dy = sauve_y - _y;
       camera.SetXY (dx, dy);
       camera.autorecadre = false;
     } else {
       scroll_actif = true;
     }
-#ifdef CL
-    sauve_x = CL_Mouse::get_x();
-    sauve_y = CL_Mouse::get_y();
-#else
     sauve_x = _x;
     sauve_y = _y;
-#endif
      return;
   } else {
     scroll_actif = false;
@@ -314,27 +239,18 @@ void Mouse::Refresh()
 
 int Mouse::GetX() const 
 {
-#ifdef CL
-   return CL_Mouse::get_x(); 
-#else
    int x;
    
    SDL_GetMouseState( &x, NULL);
    return x; 
-#endif
 }
 
 int Mouse::GetY() const 
 { 
-#ifdef CL
-   return CL_Mouse::get_y(); 
-#else
    int y;
    
    SDL_GetMouseState( NULL, &y);
    return y; 
-#endif
-
 }
 
 int Mouse::GetXmonde() const 
@@ -347,62 +263,16 @@ int Mouse::GetYmonde() const
    return GetY() -FOND_Y +camera.GetY(); 
 }
 
-#ifdef CL
-CL_Point Mouse::GetPosMonde() const
-{ 
-   return CL_Point (GetXmonde(), GetYmonde()); 
-}
-#else
+
 Point2i Mouse::GetPosMonde() const
 { 
    return Point2i (GetXmonde(), GetYmonde());
 }
-#endif
 
 
-//-----------------------------------------------------------------------------
-
-#ifdef CL
-void Mouse::DesinstallePilote()
-{
-  assert (pilote_installe);
-  CL_Mouse::sig_key_up().disconnect(slot);
-  pilote_installe = false;
-}
-#endif
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-void Mouse::InstallePilote()
-{
-  assert (!pilote_installe);
-  slot = CL_Mouse::sig_key_up().connect(this, &Mouse::TraiteClic);
-  pilote_installe = true;
-}
-#endif
-
-//-----------------------------------------------------------------------------
-
-// Traite une touche relachée
-#ifdef CL
-void Mouse::TraiteClic (const CL_InputEvent &event)
-{
-  // Clic gauche de la mouse ?
-  if (event.id == CL_MOUSE_RIGHT)
-  {
-    ActionClicD();
-    return;
-  }
-
-  // Clic gauche de la souris ?
-  if (event.id == CL_MOUSE_LEFT)
-  {
-    ActionClicG();
-    return;
-  }
-}
-#else
 void Mouse::TraiteClic (const SDL_Event *event)
 {
    if ( event->type == SDL_MOUSEBUTTONDOWN )
@@ -422,6 +292,5 @@ void Mouse::TraiteClic (const SDL_Event *event)
 	  }
      }
 }
-#endif
 
 //-----------------------------------------------------------------------------

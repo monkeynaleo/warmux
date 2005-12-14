@@ -53,7 +53,7 @@ CurseurVer curseur_ver;
 
 CurseurVer::CurseurVer()
 {
-  temps = Wormux::temps.Lit();
+  temps = Wormux::global_time.Read();
   Cache();
 }
 
@@ -99,15 +99,15 @@ void CurseurVer::Refresh()
 
     if (monter)
     {
-      if (TEMPS_CURSEUR_FLECHE_M <= Wormux::temps.Lit() - temps)
+      if (TEMPS_CURSEUR_FLECHE_M <= Wormux::global_time.Read() - temps)
       {
-        temps = Wormux::temps.Lit();
+        temps = Wormux::global_time.Read();
         y_mouvement++;
       }
     } else {
-      if (TEMPS_CURSEUR_FLECHE_D <= Wormux::temps.Lit() - temps)
+      if (TEMPS_CURSEUR_FLECHE_D <= Wormux::global_time.Read() - temps)
       {
-        temps = Wormux::temps.Lit();
+        temps = Wormux::global_time.Read();
 	y_mouvement--;
       }
     }
@@ -117,13 +117,13 @@ void CurseurVer::Refresh()
   // Dessine le curseur autour du ver
   if (clignote)
   {
-    if (Wormux::temps.Lit() - temps <= TEMPS_CURSEUR) {
+    if (Wormux::global_time.Read() - temps <= TEMPS_CURSEUR) {
       affiche = true;
     } else {
       affiche = false;
-      if (TEMPS_CURSEUR*2 < Wormux::temps.Lit() - temps) 
+      if (TEMPS_CURSEUR*2 < Wormux::global_time.Read() - temps) 
       {
-	temps = Wormux::temps.Lit();
+	temps = Wormux::global_time.Read();
 	nbr_clignot++;
       }
     }
@@ -178,7 +178,7 @@ void CurseurVer::SuitVerActif()
   designe_ver_actif = true;
   nbr_clignot = 0;
   actif = true;
-  temps = Wormux::temps.Lit();
+  temps = Wormux::global_time.Read();
   clignote = true;
   nbr_boucle = NBR_BOUCLE_FLECHE;
 #ifdef CL
