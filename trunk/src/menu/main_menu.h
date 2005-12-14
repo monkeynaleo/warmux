@@ -46,6 +46,8 @@ class Main_Menu
 private:
   Sprite* background;
   ButtonText *play, *network, *options, *infos, *quit;
+  Text * text;
+
 public:
   menu_item choice;
 
