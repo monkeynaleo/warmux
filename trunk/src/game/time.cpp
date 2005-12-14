@@ -25,13 +25,8 @@
 #include "../interface/game_msg.h"
 
 #include "../graphic/video.h"
-#include "../graphic/font.h"
 
-#ifdef CL
-# include <ClanLib/core.h>
-#else
 #include <SDL.h>
-#endif
 #include <sstream>
 #include <iomanip>
 #include <iostream>
@@ -44,10 +39,10 @@ const double VITESSE_MAX = 50;
 namespace Wormux
 {
 
-Temps temps;
+Time global_time;
 //-----------------------------------------------------------------------------
 
-Temps::Temps()
+Time::Time()
   : dt_pause(0), mode_pause(false)
 {
 //   Reset();
@@ -55,7 +50,7 @@ Temps::Temps()
 
 //-----------------------------------------------------------------------------
 
-void Temps::Reset()
+void Time::Reset()
 {
 #ifdef CL
   dt_pause = CL_System::get_time(); //Needed to have time set to 0, on a reset
@@ -67,14 +62,14 @@ void Temps::Reset()
 
 //-----------------------------------------------------------------------------
 
-uint Temps::Lit() const
+uint Time::Read() const
 {   
   return SDL_GetTicks() - dt_pause;
 }
 
 //-----------------------------------------------------------------------------
 
-void Temps::Pause()
+void Time::Pause()
 {
   if (mode_pause) return;
   //assert (!mode_pause);
@@ -88,7 +83,7 @@ void Temps::Pause()
 
 //-----------------------------------------------------------------------------
 
-void Temps::Reprend()
+void Time::Continue()
 {
   assert (mode_pause);
 #ifdef CL
@@ -101,33 +96,33 @@ void Temps::Reprend()
 
 //-----------------------------------------------------------------------------
 
-uint Temps::Horloge_Sec()
+uint Time::Clock_Sec()
 {
-  uint horloge_sec = Lit()/1000;
-  horloge_sec %= 60;
-  if (horloge_sec == 60)
-    return horloge_sec = 0;
-  return horloge_sec;
+  uint clock_sec = Read()/1000;
+  clock_sec %= 60;
+  if (clock_sec == 60)
+    return clock_sec = 0;
+  return clock_sec;
 }
 
 //-----------------------------------------------------------------------------
 
-uint Temps::Horloge_Min()
+uint Time::Clock_Min()
 {
-  uint horloge_min = Lit()/60000;
-  if (horloge_min > 59)
-    return horloge_min = 0;
-  return horloge_min;
+  uint clock_min = Read()/60000;
+  if (clock_min > 59)
+    return clock_min = 0;
+  return clock_min;
 }
 
 //-----------------------------------------------------------------------------
 
-void Temps::Draw()
+std::string Time::GetString()
 {
   //if (!affiche) return;
   std::ostringstream ss;
-  ss << Horloge_Min() << ":" << std::setfill('0') << std::setw(2) << Horloge_Sec();
-  normal_font.WriteCenterTop( video.GetWidth()/2, 10, ss.str(), white_color); 
+  ss << Clock_Min() << ":" << std::setfill('0') << std::setw(2) << Clock_Sec();
+  return ss.str();
 }
 
 //-----------------------------------------------------------------------------

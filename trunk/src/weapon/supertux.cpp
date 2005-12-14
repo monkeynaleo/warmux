@@ -68,8 +68,8 @@ void SuperTux::Tire()
   // Fixe la force de départ
   angle = ActiveTeam().crosshair.GetAngleRad();
   SetExternForce(tux.cfg().speed, angle);
-  time_next_action = Wormux::temps.Lit();
-  last_move = Wormux::temps.Lit();
+  time_next_action = Wormux::global_time.Read();
+  last_move = Wormux::global_time.Read();
 }
 
 //-----------------------------------------------------------------------------
@@ -109,7 +109,7 @@ void SuperTux::Refresh()
   if (TestImpact()) { SignalCollision(); return; }
 
   image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
-  if ((last_move+animation_deltat)<Wormux::temps.Lit())
+  if ((last_move+animation_deltat)<Wormux::global_time.Read())
     {
       SetExternForce(tux.cfg().speed, angle);
 #ifdef CL
@@ -117,7 +117,7 @@ void SuperTux::Refresh()
 #else
       image->Update();
 #endif
-      last_move = Wormux::temps.Lit();
+      last_move = Wormux::global_time.Read();
   }
 
   particle_engine.AddPeriodic(GetX(),GetY(),angle, 0);
@@ -128,7 +128,7 @@ void SuperTux::Refresh()
 
 void SuperTux::turn_left()
 {  
-  time_now = Wormux::temps.Lit();
+  time_now = Wormux::global_time.Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
@@ -141,7 +141,7 @@ void SuperTux::turn_left()
 
 void SuperTux::turn_right()
 {
-  time_now = Wormux::temps.Lit();
+  time_now = Wormux::global_time.Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;

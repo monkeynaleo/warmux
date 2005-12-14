@@ -68,7 +68,7 @@ bool Teleportation::p_Shoot ()
 #endif
   
   // Initialise les variables
-  temps = Wormux::temps.Lit();
+  temps = Wormux::global_time.Read();
   retour = false;
   m_direction = ActiveCharacter().GetDirection();
 
@@ -90,7 +90,7 @@ void Teleportation::Refresh()
 {
   if (!m_is_active) return;
 
-  double dt = Wormux::temps.Lit() - temps;
+  double dt = Wormux::global_time.Read() - temps;
 
   // On a fait le chemin retour ?
   if (retour) {
@@ -112,7 +112,7 @@ void Teleportation::Refresh()
     // commençant par déplacer le ver
     retour = true;
     ActiveCharacter().SetXY (dst.x, dst.y);
-    temps = Wormux::temps.Lit();
+    temps = Wormux::global_time.Read();
     dt = 0.0;
     return;
   }

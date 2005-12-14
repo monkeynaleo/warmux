@@ -291,7 +291,7 @@ bool Monde::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
 
 void Monde::DrawAuthorName()
 {
-  uint time = temps.Lit();
+  uint time = global_time.Read();
   int y = AUTHOR_INFO_Y;
 
   if (AUTHOR_INFO_TIME < time) return;

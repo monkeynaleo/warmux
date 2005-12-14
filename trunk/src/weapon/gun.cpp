@@ -165,7 +165,7 @@ bool Gun::p_Shoot()
   balle.Tire();
 
   // Temps de capture
-  temps_capture = temps.Lit()+VITESSE_CAPTURE_POS_BALLE;
+  temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
 
   lst_points.clear();
   lst_objets.AjouteObjet (&balle, true);
@@ -193,9 +193,9 @@ void Gun::Refresh()
   if (balle.is_active)
     {
       // Une balle est en l'air : on capture sa position ?
-      if (temps_capture < temps.Lit()) 
+      if (temps_capture < global_time.Read()) 
 	{
-	  temps_capture = temps.Lit()+VITESSE_CAPTURE_POS_BALLE;
+	  temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
 #ifdef CL
 	  CL_Point pos_balle = balle.GetPos();
 #else

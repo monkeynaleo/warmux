@@ -592,7 +592,7 @@ void Character::Refresh()
   if (GetSkin().anim.utilise)
   {
     // C'est le début d'une animation ?
-    if (!anim.draw && (anim.time < temps.Lit())) 
+    if (!anim.draw && (anim.time < global_time.Read())) 
     {
 #ifdef CL
       anim.image.restart();
@@ -620,7 +620,7 @@ void Character::Refresh()
       {
         anim.draw = false;
         anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
-        anim.time += temps.Lit();
+        anim.time += global_time.Read();
       }
     }
   }
@@ -632,7 +632,7 @@ void Character::Refresh()
 void Character::PrepareTour ()
 {
   losted_energy = 0;
-  pause_bouge_dg = temps.Lit();
+  pause_bouge_dg = global_time.Read();
 }
 
 //-----------------------------------------------------------------------------
@@ -656,7 +656,7 @@ Team& Character::TeamAccess()
 bool Character::MouvementDG_Autorise() const
 {
   if (!IsReady() || IsFalling()) return false;
-  return pause_bouge_dg < temps.Lit();
+  return pause_bouge_dg < global_time.Read();
 }
 
 //-----------------------------------------------------------------------------
@@ -671,14 +671,14 @@ bool Character::CanJump() const
 void Character::InitMouvementDG(uint pause)
 {
   m_rebounding = false;
-  pause_bouge_dg = temps.Lit()+pause;
+  pause_bouge_dg = global_time.Read()+pause;
 }
 
 //-----------------------------------------------------------------------------
 
 bool Character::CanStillMoveDG(uint pause)
 {
-  if(pause_bouge_dg+pause<temps.Lit())
+  if(pause_bouge_dg+pause<global_time.Read())
   {
     pause_bouge_dg += pause;
     return true;
@@ -694,7 +694,7 @@ void Character::SignalFallEnding()
   // Do not manage dead worms.
   if (IsDead()) return;
 
-  pause_bouge_dg = temps.Lit();
+  pause_bouge_dg = global_time.Read();
 
   double norme, degat;
   DoubleVector speed_vector ;
@@ -849,7 +849,7 @@ void Character::SetSkin(std::string skin_name)
     {
         anim.draw = false;
         anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
-        anim.time += temps.Lit();
+        anim.time += global_time.Read();
     }
 
     current_skin = skin_name;
@@ -952,7 +952,7 @@ void Character::Reset()
     anim.image->Finish();
 #endif 
     anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
-    anim.time += temps.Lit();    
+    anim.time += global_time.Read();    
   }
 
   // Initialise l'image

@@ -102,11 +102,11 @@ void Water::Refresh()
   height_mvt = 0;
 
   ////////  Height Calculation:
-  if (temps_montee < Wormux::temps.Lit())
+  if (temps_montee < Wormux::global_time.Read())
   {
-    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > Wormux::temps.Lit())
+    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > Wormux::global_time.Read())
     {
-      uint dt=Wormux::temps.Lit()- temps_montee;
+      uint dt=Wormux::global_time.Read()- temps_montee;
       height_mvt = GO_UP_STEP + (uint)(((float)GO_UP_STEP * sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))/GO_UP_OSCILLATION_TIME/1000.0)*2*M_PI))/(a*dt+b));
 ///;
     }
@@ -119,9 +119,9 @@ void Water::Refresh()
 
   ////////  Wave calculation:
   // on rempli le sol avec de l'eau
-  if (WAVE_TIME < (Wormux::temps.Lit() - temps_eau))
+  if (WAVE_TIME < (Wormux::global_time.Read() - temps_eau))
   {
-    temps_eau = Wormux::temps.Lit();
+    temps_eau = Wormux::global_time.Read();
     vague += WAVE_STEP;
     if (surface->w <= vague) vague=0;
   }

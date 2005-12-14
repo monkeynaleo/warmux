@@ -78,7 +78,7 @@ void GameMessages::Refresh()
   {
     actuel = i;
     ++i;
-    if (DUREE_VIE_MSG < temps.Lit() - actuel -> time)
+    if (DUREE_VIE_MSG < global_time.Read() - actuel -> time)
     {
       fin = (i == liste.end());
       delete (actuel->text);
@@ -99,7 +99,7 @@ void GameMessages::Add(const std::string &message)
   // Ajoute le message à la liste (avec son heure d'arrivée)
   Text * tmp = new Text(message, white_color, &small_font);
 
-  liste.push_back (message_t(tmp, temps.Lit()));
+  liste.push_back (message_t(tmp, global_time.Read()));
 
   while (NBR_MSG_MAX < liste.size()) liste.pop_front();
 }

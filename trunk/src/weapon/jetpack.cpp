@@ -88,7 +88,7 @@ void JetPack::Refresh()
 	{
 	  // We are using fuel !!!
 
-	  uint current = temps.Lit() ;
+	  uint current = global_time.Read() ;
 	  double delta = (double)(current - m_last_fuel_down);
 
 	  while (delta >= DELTA_FUEL_DOWN)
@@ -132,7 +132,7 @@ void JetPack::StartUse()
 {
   if ( (m_x_force == 0) && (m_y_force == 0))
     {
-      m_last_fuel_down = temps.Lit();
+      m_last_fuel_down = global_time.Read();
 #ifdef CL
       jukebox.Play("weapon/jetpack", true);
 #else

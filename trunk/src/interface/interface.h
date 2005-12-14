@@ -38,42 +38,57 @@ struct SDL_Surface;
 
 class Interface
 {
+
 public:
-  Character *ver_pointe_souris;
-  Weapon* arme_pointe_souris;
-  int chrono; // affiché uniquement si sa valeur est positive
+  Character *character_under_cursor;
+  Weapon* weapon_under_cursor;
   WeaponsMenu weapons_menu;
-#ifdef CL
-   CL_Surface weapon_box_button ;
-#else
-   SDL_Surface *weapon_box_button;
-#endif
-private:
-  bool affiche;
-  void AfficheInfoVer (Character &ver);
-  void AfficheInfoArme ();
-  BarreProg barre_energie;
-#ifdef CL
-  CL_Surface game_menu;
-  CL_Surface bg_time;
-#else
-  SDL_Surface *game_menu;
-  SDL_Surface *bg_time;
-  int bottom_bar_ox;
-  int bottom_bar_oy;
-#endif
+  SDL_Surface *weapon_box_button;
+
+ private:
+   // Timers
+   Text * global_timer;
+   Text * timer;
+   
+   // Character information
+   Text * t_NAME;
+   Text * t_character_name;
+   
+   Text * t_ENERGY;
+   Text * t_character_energy;
+   
+   // Weapon information
+   Text * t_WEAPON;
+   Text * t_weapon_name;
+   Text * t_STOCK;
+   Text * t_weapon_stock;
+   
+   bool display;
+   bool display_timer;
+   void DisplayCharacterInfo ();
+   void DisplayWeaponInfo ();
+   BarreProg barre_energie;
+
+   SDL_Surface *game_menu;
+   SDL_Surface *bg_time;
+   int bottom_bar_ox;
+   int bottom_bar_oy;
+
 public:
   Interface();
+  ~Interface();
   void Init();
   void Reset();
   void Draw();
 
-  bool EstAffiche () const { return affiche; }
-  void ChangeAffiche (bool affiche);
+  bool IsDisplayed () const { return display; };
+  void EnableDisplay (bool _display);
 
   uint GetWidth() const;
   uint GetHeight() const;
 
+  void UpdateTimer(uint utimer);
+  void EnableDisplayTimer (bool _display) {display_timer = _display;};
 };
 
 extern Interface interface;

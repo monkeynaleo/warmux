@@ -113,10 +113,10 @@ bool NinjaRope::p_Shoot()
 
   last_node = 0 ;
   m_attaching = true;
-  m_launch_time = Wormux::temps.Lit() ;
+  m_launch_time = Wormux::global_time.Read() ;
   m_initial_angle = ActiveTeam().crosshair.GetAngleRad();
 
-  last_mvt=temps.Lit();
+  last_mvt=global_time.Read();
   return true ;
 }
 
@@ -126,7 +126,7 @@ void NinjaRope::TryAttachRope()
 {
   int x, y;
   uint length;
-  uint delta_time = Wormux::temps.Lit() - m_launch_time;
+  uint delta_time = Wormux::global_time.Read() - m_launch_time;
   double angle ;
 
   // The rope is being launching. Increase the rope length and check
@@ -364,9 +364,9 @@ void NinjaRope::Refresh()
 //-----------------------------------------------------------------------------
 void NinjaRope::GoUp()
 {
-  if(temps.Lit()<last_mvt+DT_MVT)
+  if(global_time.Read()<last_mvt+DT_MVT)
     return;
-  last_mvt = temps.Lit();
+  last_mvt = global_time.Read();
 
   delta_len = -0.1 ;
   ActiveCharacter().ChangePhysRopeSize (delta_len);
@@ -377,9 +377,9 @@ void NinjaRope::GoUp()
 //-----------------------------------------------------------------------------
 void NinjaRope::GoDown()
 {
-  if(temps.Lit()<last_mvt+DT_MVT)
+  if(global_time.Read()<last_mvt+DT_MVT)
     return;
-  last_mvt = temps.Lit();
+  last_mvt = global_time.Read();
 
   if (ActiveCharacter().GetRopeLength() >= MAX_ROPE_LEN / PIXEL_PER_METER)
     return;

@@ -83,7 +83,7 @@ Sprite::Sprite()
    rot_hotspot = center;
    show = true;
    backward = false; 
-   last_update = Wormux::temps.Lit();
+   last_update = Wormux::global_time.Read();
    show_on_finish = show_last_frame;
 //   loop = false;
    loop = true;
@@ -161,7 +161,7 @@ Sprite::Sprite( SDL_Surface *surface)
    frame_delta = 1;
    show = true;
    backward = false; 
-   last_update = Wormux::temps.Lit();
+   last_update = Wormux::global_time.Read();
    show_on_finish = show_last_frame;
 //   loop = false;
    loop = true;
@@ -329,7 +329,7 @@ void Sprite::SetCurrentFrame( unsigned int frame_no)
   current_frame = frame_no;
   finished = false;
   show = true;
-  last_update = Wormux::temps.Lit();
+  last_update = Wormux::global_time.Read();
   LastFrameModified();
 }
 
@@ -535,7 +535,7 @@ void Sprite::Start()
    show = true;
 //   loop = false;
    finished = false;
-   last_update = Wormux::temps.Lit();
+   last_update = Wormux::global_time.Read();
    LastFrameModified();
 }
 /*
@@ -684,12 +684,12 @@ void Sprite::Finish()
 void Sprite::Update()
 {
   if (finished) return;
-  if (Wormux::temps.Lit() < (last_update + GetCurrentFrameObject().delay))
+  if (Wormux::global_time.Read() < (last_update + GetCurrentFrameObject().delay))
      return;
 
    //Delta to next frame used to enable frameskip
    //if delay between 2 frame is < fps
-   int delta_to_next_f = (Wormux::temps.Lit() - last_update) / GetCurrentFrameObject().delay;
+   int delta_to_next_f = (Wormux::global_time.Read() - last_update) / GetCurrentFrameObject().delay;
    last_update += delta_to_next_f * GetCurrentFrameObject().delay;
 
    bool finish;

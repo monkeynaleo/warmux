@@ -175,12 +175,12 @@ void Jeu::SignalRESIZE (int larg, int haut)
 
 int Jeu::PoseQuestion (bool dessine)
 {
-  temps.Pause();
+  global_time.Pause();
 
   if (dessine) game_loop.Draw ();
   question.PoseQuestion ();
 
-  temps.Reprend(); 
+  global_time.Continue(); 
   return question.reponse;
 }
 

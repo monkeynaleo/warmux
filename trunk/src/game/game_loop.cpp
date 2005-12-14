@@ -157,7 +157,7 @@ void InitGameData_NetServer()
   // Remise à zéro
   std::cout << "o " << _("Initialise data") << std::endl;
   curseur_ver.Reset();
-  temps.Reset();
+  global_time.Reset();
   mouse.Reset();
   image_par_seconde.Reset();
   interface.Reset();
@@ -226,7 +226,7 @@ void InitGameData_Local()
 
 void InitGameData()
 {
-  temps.Reset();
+  global_time.Reset();
   
 #ifdef CL
   if (network.is_server())
@@ -396,7 +396,7 @@ void GameLoop::Refresh()
 
   //--- D'abord ce qui pourrait modifier les données d'un ver ---
 
-  if (!temps.EstPause())
+  if (!global_time.IsInPause())
   {
      
     // Keyboard and mouse refresh
@@ -505,8 +505,6 @@ void GameLoop::Draw ()
   StatStop("GameDraw:interface");
 
   StatStart("GameDraw:end");
-  // Display game clock
-  temps.Draw();
 
   // Display wind bar
   wind.Draw();
@@ -581,11 +579,11 @@ void GameLoop::Run()
 
 void GameLoop::RefreshClock()
 {
-  if (temps.EstPause()) return;
+  if (global_time.IsInPause()) return;
 
-  if (1000 < temps.Lit() - pause_seconde) 
+  if (1000 < global_time.Read() - pause_seconde) 
     {
-      pause_seconde = temps.Lit();
+      pause_seconde = global_time.Read();
 
       switch (state) {
 
@@ -599,7 +597,7 @@ void GameLoop::RefreshClock()
 	   SetState (gameEND_TURN);
 	} else {
 	  duration--;
-	  interface.chrono = duration;
+	  interface.UpdateTimer(duration);
 	}
 	break;
 
@@ -608,7 +606,7 @@ void GameLoop::RefreshClock()
 	  SetState (gameEND_TURN);
 	} else {
 	  duration--;
-	  interface.chrono = duration;
+	  interface.UpdateTimer(duration);
 	}
 	break;
 
@@ -652,8 +650,8 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
 #endif
     // Init. le compteur
     duration = game_mode.duration_turn;
-    interface.chrono = duration;
-    pause_seconde = temps.Lit();
+    interface.EnableDisplayTimer(true);
+    pause_seconde = global_time.Read();
 
 #ifdef CL
     if (network.is_server() || network.is_local())
@@ -688,8 +686,6 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     COUT_DEBUG << "HAS_PLAYED" << std::endl;
 #endif
     duration = 5;
-    interface.chrono = duration;
-
     break;
 
   // Fin du tour : petite pause
@@ -699,8 +695,8 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
 #endif
     ActiveTeam().AccessWeapon().SignalTurnEnd();
     duration = game_mode.duration_turn_end;
-    interface.chrono = -1 ;
-    pause_seconde = temps.Lit();
+    interface.EnableDisplayTimer(false);
+    pause_seconde = global_time.Read();
 
     interaction_enabled = false; // Be sure that we can NOT play !
 

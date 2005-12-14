@@ -107,8 +107,8 @@ void ObjMine::Init()
    
 #endif
    
-  armer = temps.Lit() + mine.cfg().temps_fuite;
-  depart = uint(temps.Lit() + DEPART_FONCTIONNEMENT * 1000);
+  armer = global_time.Read() + mine.cfg().temps_fuite;
+  depart = uint(global_time.Read() + DEPART_FONCTIONNEMENT * 1000);
 }
 
 //-----------------------------------------------------------------------------
@@ -224,8 +224,8 @@ void ObjMine::ActiveDetection()
 
     animation=true;
     affiche = true;
-    armer = temps.Lit() + mine.cfg().temps_fuite;
-    attente = temps.Lit() + mine.cfg().temps_fuite;
+    armer = global_time.Read() + mine.cfg().temps_fuite;
+    attente = global_time.Read() + mine.cfg().temps_fuite;
     m_ready = false;
 #ifdef DBG_DETECTION
     COUT_DBG << "IsReady() : " << IsReady() << std::endl;
@@ -281,7 +281,7 @@ void ObjMine::Detection()
 
 void ObjMine::Refresh()
 {
-  if (temps.Lit() < depart) return;
+  if (global_time.Read() < depart) return;
 
   if (!affiche)
   {
@@ -303,7 +303,7 @@ void ObjMine::Refresh()
 #else
      detection->Update();
 #endif
-     if (attente < temps.Lit())
+     if (attente < global_time.Read())
     {
 #ifdef CL
       jukebox.Stop("weapon/mine_beep");
@@ -377,7 +377,7 @@ void Mine::Add (int x, int y)
   ActiveCharacter().GetSpeedXY(speed_vector);
   obj -> SetSpeedXY (speed_vector);
   lst_objets.AjouteObjet (obj, true);
-  fuite = temps.Lit()+3000;
+  fuite = global_time.Read()+3000;
 }
 
 //-----------------------------------------------------------------------------
@@ -386,7 +386,7 @@ void Mine::Refresh()
 {
   if (!already_put) return ;
 
-  if (fuite < temps.Lit())
+  if (fuite < global_time.Read())
   {
     already_put = false;
     m_is_active = false;

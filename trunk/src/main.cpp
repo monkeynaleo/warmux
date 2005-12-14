@@ -168,7 +168,7 @@ bool AppWormux::Init(int argc, char **argv)
 #endif
 
   // Reset timer
-  Wormux::temps.Reset();
+  Wormux::global_time.Reset();
 
   SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
 

@@ -23,12 +23,13 @@
 #define TEMPS_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#include <string>
 //-----------------------------------------------------------------------------
 
 namespace Wormux
 {
 
-class Temps
+class Time
 {
 private:
   uint debut_pause; // Début de la pause
@@ -36,28 +37,28 @@ private:
   bool mode_pause;  // Le jeu est en pause ?
    
 public:
-  Temps();
+  Time();
   void Reset();
 
   // On est en pause ?
-  bool EstPause() const { return mode_pause; }
+  bool IsInPause() const { return mode_pause; }
 
   // Lit le temps, horloge du jeu
   // Elle diffère légèrement de CL_System::get_time() car le jeu
   // peut se mettre en pause
-  uint Lit() const;
+  uint Read() const;
 
   // Lit l'horloge du jeu (formatee)
-  uint Horloge_Sec();
-  uint Horloge_Min();
-  void Draw();
+  uint Clock_Sec();
+  uint Clock_Min();
+  std::string GetString();
 
   // Passe/reprend
   void Pause();
-  void Reprend();
+  void Continue();
 };
 
-extern Temps temps;
+ extern Time global_time;
 }
 //-----------------------------------------------------------------------------
 #endif
