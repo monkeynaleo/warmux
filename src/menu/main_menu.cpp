@@ -42,7 +42,7 @@
 using namespace Wormux;
 using namespace std;
 //-----------------------------------------------------------------------------
-const std::string VERSION("0.7beta");
+const std::string VERSION("0.7 beta");
 //-----------------------------------------------------------------------------
 
 // Position du texte de la version
@@ -63,6 +63,8 @@ Main_Menu::~Main_Menu()
   delete options;
   delete infos;
   delete quit;
+
+  delete text;
 }
 
 //-----------------------------------------------------------------------------
@@ -129,6 +131,9 @@ Main_Menu::Main_Menu()
 			 &large_font);
 
   resource_manager.UnLoadXMLProfile( res);
+
+  std::string s("Version "+VERSION);
+  text = new Text(s, white_color, &big_font);
 }
 
 //-----------------------------------------------------------------------------
@@ -144,8 +149,6 @@ void Main_Menu::onClick ( int x, int y)
 //-----------------------------------------------------------------------------
 menu_item Main_Menu::Run ()
 {
-  string txt_version;
-  txt_version = string("Version ") + string(VERSION);
   int x=0, y=0;
 
   SDL_Flip( app.sdlwindow);
@@ -175,10 +178,8 @@ menu_item Main_Menu::Run ()
    infos->Draw(x,y);
    quit->Draw(x,y);
 
-   
-   big_font.WriteCenter( app.sdlwindow->w/2,
-			 app.sdlwindow->h+VERSION_DY,
-			 txt_version, white_color);
+   text->DrawCenter( app.sdlwindow->w/2,
+		     app.sdlwindow->h+VERSION_DY);
    
    SDL_Flip(app.sdlwindow);
   }
