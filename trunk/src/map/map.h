@@ -23,6 +23,7 @@
 #define MONDE_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#include "../graphic/text.h"
 #include "../object/physical_obj.h"
 #include "sky.h"
 #include "water.h"
@@ -33,6 +34,10 @@ extern const uint MAX_WIND_OBJECTS;
 
 class Monde
 {
+ private:
+  Text * author_info1;
+  Text * author_info2;
+
 public:
   Monde();
    
@@ -41,11 +46,8 @@ public:
   double dst_min_entre_vers;
   Water water;
 
-private:
-  bool raz_terrain;
-
 public:
-  void Init();
+  //void Init();
   void Reset();
   void Refresh();
   void FreeMem();
@@ -58,11 +60,8 @@ public:
   bool EstDansVide (int x, int y);
   bool LigneH_EstDansVide (int left, int y,  int right);
   bool LigneV_EstDansVide (int x,  int top, int bottom);
-#ifdef CL
-  bool RectEstDansVide (const CL_Rect &rect);
-#else
   bool RectEstDansVide (const Rectanglei &rect);
-#endif
+
   // La ligne du haut/bas d'un objet physique est dans le vide ?
   // Le test se fait sur le rectangle de test décalé de dx et dy.
   bool EstDansVide_haut (const PhysicalObj &obj, int dx, int dy);
@@ -74,20 +73,13 @@ public:
   bool EstHorsMondeXlarg (int x, uint larg) const;
   bool EstHorsMondeYhaut (int x, uint haut) const;
   bool EstHorsMondeXY (int x, int y) const;
-#ifdef CL
-  bool EstHorsMonde (const CL_Point &pos) const;
-#else
   bool EstHorsMonde (const Point2i &pos) const;
-#endif
+
   // C'est un terrain ouvert ?
   bool EstOuvert() const { return terrain.EstOuvert(); }
 
   // Creuse un pixel
-#ifdef CL
-  void Creuse(uint x, uint y, CL_Surface &alpha_sur);
-#else
   void Creuse(uint x, uint y, SDL_Surface *alpha_sur);
-#endif
    
   // Lit la taille du monde
   uint GetWidth() const { return terrain.GetWidth(); }

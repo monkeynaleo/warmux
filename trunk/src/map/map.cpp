@@ -48,18 +48,18 @@ Monde::Monde()
 }
 
 //NOT USED ANYMORE
-void Monde::Init()
-{
+// void Monde::Init()
+// {
 
-  ciel.Init();
-  water.Init();
+//   ciel.Init();
+//   water.Init();
 
-  cout.flush();
-  terrain.Init();
+//   cout.flush();
+//   terrain.Init();
 
-  // Distance minimale entre les vers
-  dst_min_entre_vers = DST_MIN_ENTRE_VERS;
-}
+//   // Distance minimale entre les vers
+//   dst_min_entre_vers = DST_MIN_ENTRE_VERS;
+// }
 
 //-----------------------------------------------------------------------------
 
@@ -74,6 +74,9 @@ void Monde::Reset()
   bool ouvert = terrain.EstOuvert();
   caisse.Active (ouvert);
   config.exterieur_monde_vide = ouvert;
+
+  delete author_info1; author_info1 = NULL;
+  delete author_info2; author_info2 = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -95,19 +98,11 @@ void Monde::FreeMem()
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-void Monde::Creuse (uint x, uint y, CL_Surface &surface)
-{
-  terrain.Dig (x, y, 
-	       surface.get_width(), surface.get_height(),
-               surface.get_pixeldata());
-}
-#else
+
 void Monde::Creuse (uint x, uint y, SDL_Surface *surface)
 {
    terrain.Dig (x, y, surface);
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
@@ -144,13 +139,9 @@ bool Monde::EstHorsMondeYhaut(int y, uint haut) const
 bool Monde::EstHorsMondeXY(int x, int y) const
 { return EstHorsMondeX(x) || EstHorsMondeY(y) && !TerrainActif().infinite_bg; }
 
-#ifdef CL
-bool Monde::EstHorsMonde (const CL_Point &pos) const
-{ return EstHorsMondeXY (pos.x, pos.y); }
-#else
 bool Monde::EstHorsMonde (const Point2i &pos) const
 { return EstHorsMondeXY (pos.x, pos.y); }
-#endif
+
 //-----------------------------------------------------------------------------
 
 bool Monde::EstDansVide(int x, int y)
@@ -158,25 +149,6 @@ bool Monde::EstDansVide(int x, int y)
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-bool Monde::LigneH_EstDansVide (int left, int y, int right)
-{ 
-  assert (left <= right);
-
-  // Vérifie qu'on reste dans le monde
-  if (EstHorsMondeXlarg(left, right-left+1) || EstHorsMondeY(y)) 
-    return config.exterieur_monde_vide;
-  if (left < 0) left = 0;
-  if ((int)GetWidth() <= right) right = GetWidth()-1;
-
-  // Traite une ligne
-  for (uint i=(uint)left; i<=(uint)right; i++) 
-  {
-    if (!EstDansVide(i, (uint)y)) return false;
-  }
-  return true;
-}
-#else
 bool Monde::LigneH_EstDansVide (int ox, int y, int width)
 { 
   // Traite une ligne
@@ -190,7 +162,6 @@ bool Monde::LigneH_EstDansVide (int ox, int y, int width)
    
    return true;
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
@@ -214,25 +185,6 @@ bool Monde::LigneV_EstDansVide (int x, int top, int bottom)
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-bool Monde::RectEstDansVide (const CL_Rect &prect)
-{
-  CL_Rect rect(prect);
-
-  // Vérifie qu'on reste dans le monde
-  if (EstHorsMondeYhaut(rect.top, rect.bottom-rect.top+1))
-    return config.exterieur_monde_vide;
-  if (rect.top < 0) rect.top = 0;
-  if ((int)GetHeight() <= rect.bottom) rect.bottom = GetHeight()-1;
-
-  // Teste un pixel après l'autre
-  for (int i=rect.top; i <= rect.bottom; ++i)
-  {
-    if (!LigneH_EstDansVide (rect.left, i, rect.right)) return false;
-  }
-  return true;
-}
-#else
 bool Monde::RectEstDansVide (const Rectanglei &prect)
 {
    Rectanglei rect(prect);
@@ -251,66 +203,51 @@ bool Monde::RectEstDansVide (const Rectanglei &prect)
    
    return true;
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-bool Monde::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
-{
-  return LigneH_EstDansVide (obj.GetTestRect().left+dx,
-			     obj.GetTestRect().top+dy,
-			     obj.GetTestRect().right+dx);
-}
-#else
+
 bool Monde::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
 {
   return LigneH_EstDansVide (obj.GetTestRect().x+dx,
 			     obj.GetTestRect().y+obj.GetTestRect().h+dy,
 			     obj.GetTestRect().w);
 }
-#endif
+
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-bool Monde::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
-{
-  return LigneH_EstDansVide (obj.GetTestRect().left+dx,
-			     obj.GetTestRect().bottom+dy,
-			     obj.GetTestRect().right+dx);
-}
-#else
+
 bool Monde::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
 {
   return LigneH_EstDansVide (obj.GetTestRect().x+dx,
 			     obj.GetTestRect().y+dy,
 			     obj.GetTestRect().w);
 }
-#endif
+
 //-----------------------------------------------------------------------------
 
 void Monde::DrawAuthorName()
 {
-  uint time = global_time.Read();
-  int y = AUTHOR_INFO_Y;
+  if (AUTHOR_INFO_TIME < global_time.Read()) {
+    if (author_info1 != NULL) {
+      delete author_info1;
+      delete author_info2;
+      author_info1 = author_info2 = NULL;
+    }
+    return;
+  }
 
-  if (AUTHOR_INFO_TIME < time) return;
-
-  std::string txt;
-  txt  = Format(_("Map %s, a creation of :"),
-		lst_terrain.TerrainActif().name.c_str());
-
-#ifdef CL
-  txt += '\n';
-  txt += lst_terrain.TerrainActif().author_info;
-  police_mix.WriteLeft(AUTHOR_INFO_X,y, txt);
-#else
-  small_font.WriteLeft(AUTHOR_INFO_X,y, txt, white_color);
-  y += small_font.GetHeight(txt);
-  txt = lst_terrain.TerrainActif().author_info;
-  small_font.WriteLeft(AUTHOR_INFO_X,y, txt, white_color);
-#endif
-   
+  if (author_info1 == NULL) {
+    std::string txt;
+    txt  = Format(_("Map %s, a creation of :"),
+		  lst_terrain.TerrainActif().name.c_str());
+    author_info1 = new Text(txt, white_color, &small_font);
+    txt = lst_terrain.TerrainActif().author_info;
+    author_info2 = new Text(txt, white_color, &small_font);
+  }
+  
+  author_info1->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y);
+  author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+small_font.GetHeight());
 }
 
 //-----------------------------------------------------------------------------
