@@ -215,6 +215,7 @@ void InitGameData_Local()
   // Placement des vers
   std::cout << "o " << _("Find a random position for worms") << std::endl;
   monde.Reset();
+  lst_terrain.TerrainActif().FreeData();
   teams_list.Reset();
 
   // Remise à zéro

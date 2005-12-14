@@ -50,6 +50,8 @@ InfoTerrain::InfoTerrain ()
   wind.nbr_sprite = 0;
   wind.need_flip = false;
   infinite_bg = false;
+  img_terrain = NULL;
+  img_ciel = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -186,7 +188,7 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
 
 //-----------------------------------------------------------------------------
 
-void InfoTerrain::ChargeDonnees()
+void InfoTerrain::LoadData()
 {
   if (m_donnees_chargees) return;
   m_donnees_chargees = true;
@@ -195,13 +197,24 @@ void InfoTerrain::ChargeDonnees()
   DBG_COUT << "Map data loaded." << std::endl;
 #endif
 
-#ifdef CL
-  img_terrain = CL_Surface("map", res);
-  img_ciel = CL_Surface("sky", res);
-#else
   img_terrain = resource_manager.LoadImage(res_profile, "map");
   img_ciel = resource_manager.LoadImage(res_profile,"sky");   
+}
+
+void InfoTerrain::FreeData()
+{
+  if (!m_donnees_chargees) return;
+  assert(img_ciel!=NULL && img_terrain!=NULL);
+  m_donnees_chargees = false;
+
+#ifdef VERBOSE_MAP_LOADING
+  DBG_COUT << "Map data deleted." << std::endl;
 #endif
+
+  SDL_FreeSurface(img_terrain);
+  SDL_FreeSurface(img_ciel);
+  img_terrain=NULL;
+  img_ciel=NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -209,26 +222,26 @@ void InfoTerrain::ChargeDonnees()
 #ifdef CL
 CL_Surface &InfoTerrain::LitImgTerrain() 
 { 
-  ChargeDonnees(); 
+  LoadData(); 
   return img_terrain;
 }
 
 CL_Surface &InfoTerrain::LitImgCiel() 
 { 
-  ChargeDonnees(); 
+  LoadData(); 
   return img_ciel;
 }
 
 #else
 SDL_Surface *InfoTerrain::LitImgTerrain() 
 { 
-  ChargeDonnees(); 
+  LoadData(); 
   return img_terrain;
 }
 
 SDL_Surface *InfoTerrain::LitImgCiel() 
 { 
-  ChargeDonnees(); 
+  LoadData(); 
   return img_ciel;
 }
 #endif

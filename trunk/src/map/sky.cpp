@@ -40,26 +40,17 @@ const double VITESSE_CIEL_Y = 1;
 
 Ciel::Ciel()
 {
-#ifdef CL
   image = NULL;
-#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void Ciel::Init()
 {
-#ifdef CL
-  CL_Surface *m_image = new CL_Surface(lst_terrain.TerrainActif().LitImgCiel());
-  LoadImage (*m_image);
-  delete m_image;
-#else
    // That is temporary -> image will be loaded directly without alpha chanel
    SDL_Surface *tmp_image = lst_terrain.TerrainActif().LitImgCiel();
-   SDL_SetAlpha( tmp_image, 0, 0);
-   image = SDL_DisplayFormat( tmp_image);
-//   SDL_FreeSurface( tmp_image);
-#endif
+   SDL_SetAlpha(tmp_image, 0, 0);
+   image = SDL_DisplayFormat(tmp_image);
 }
 
 //-----------------------------------------------------------------------------

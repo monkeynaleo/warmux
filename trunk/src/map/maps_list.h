@@ -64,7 +64,7 @@ public:
 
 private:
   bool m_donnees_chargees;
-  void ChargeDonnees();
+  void LoadData();
   bool TraiteXml (xmlpp::Element *xml);
 
 public:
@@ -78,6 +78,7 @@ public:
 #endif
   bool Init(const std::string &nom, const std::string &repertoire);
   bool DonneesChargees() const;
+  void FreeData();
 };
 
 //-----------------------------------------------------------------------------
