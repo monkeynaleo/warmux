@@ -63,7 +63,7 @@ void Terrain::Init()
 #else
   SDL_Surface *m_image = lst_terrain.TerrainActif().LitImgTerrain();
   LoadImage ( m_image);
-//delete m_image;
+  // delete m_image; -> Done after Terrain initialization
 #endif
 
   // Vérifie la taille du terrain
