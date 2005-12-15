@@ -31,12 +31,8 @@
 #include "interface.h"
 #include "cursor.h"
 #include "../weapon/weapon.h"
-#ifdef CL
-# include "../tool/geometry_tools.h"
-#else
 #include "../tool/Point.h"
 #include "../tool/Distance.h"
-#endif
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

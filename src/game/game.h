@@ -31,9 +31,6 @@
 class Jeu
 {
 private:
-#ifdef CL
-   CL_Slot slot_quit, slot_paint, slot_resize;
-#endif
   bool jeu_lance;
   Question question;
 
@@ -41,14 +38,6 @@ public:
   bool initialise;
   volatile bool fin_partie;
 
-private:
-  // Refresh des signaux
-#ifdef CL
-  void SignalPAINT (const CL_Rect &rect);
-  void SignalWM_QUIT ();
-  void SignalRESIZE (int larg, int haut);
-#endif
-   
 public:
   // Initialisation des données (valeurs par défaut)
   Jeu();

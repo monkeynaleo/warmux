@@ -51,9 +51,6 @@ const float b = 1.0;
 
 void Water::Init()
 { 
-#ifdef CL
-   surface = new CL_Surface("gfx/water", graphisme.LitRes());
-#else
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
    surface = resource_manager.LoadImage(res, "gfx/water");
    SDL_SetAlpha(surface, 0, 0);
@@ -63,7 +60,6 @@ void Water::Init()
                                      0x0000ff00,  // green mask
                                      0x00ff0000,  // blue mask
                                      0xff000000); // alpha mask
-#endif
   shift1 = 0;
 }
 
@@ -160,11 +156,7 @@ void Water::Draw()
 /*  for(uint x=0; x<monde.GetWidth(); x++)
   for(uint y=height.at(x); y<monde.GetHeight(); y+=surface->h)
   {
-#ifdef CL     
-     surface->draw (camera.GetX()+x-x0, y);
-#else
      AbsoluteDraw( surface, x, y);
-#endif
   }
 */
   // Compute 1 pattern:

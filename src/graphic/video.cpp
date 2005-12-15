@@ -21,9 +21,6 @@
 
 #include "video.h"
 //-----------------------------------------------------------------------------
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
 #include <iostream>
 #include <algorithm>
 #include <sstream>
@@ -66,63 +63,6 @@ Video::Video()
 }
 #endif
 
-#ifdef BUGGY_CODE
-
-void Video::SetSize(int width, int height)
-{
-  bool fs=IsFullScreen();
-  delete app.clwindow;
-  CL_SetupDisplay::deinit();
-//  app.setup_gl=new CL_SetupGL();
-  app.clwindow=new CL_DisplayWindow(std::string("Wormux ")+VERSION,
-				width,
-				height,
-				fs);
-  //app.clwindow->set_size(width,height);
-}
-
-void Video::ChangeMode(int mode, bool fullScreen)
-{
-  assert(mode >= 0 && mode < static_cast<int>( m_modes.size() ) );
-
-  CL_Size resolution=m_modes[mode].get_resolution();
-  SetSize(resolution.width,resolution.height);
-
-  m_mode=mode;
-
-  SetFullScreen(fullScreen);
-}
-
-void Video::SetFullScreen(bool fullScreen)
-{
-  if(fullScreen) app.clwindow->set_fullscreen();
-  else app.clwindow->set_windowed();
-}
-
-const std::vector<CL_DisplayMode>& Video::GetModes() const
-{
-  return m_modes;
-}
-
-int Video::GetCurrentMode(void)
-{
-  if(m_mode!=-1) return m_mode;
-
-  m_mode=0; // Default Value
-  for(int mode=0;mode<static_cast<int>(m_modes.size());++mode)
-    {
-      CL_Size resolution=m_modes[mode].get_resolution();
-      if(resolution.width==GetWidth() && resolution.height==GetHeight())
-	{
-	  m_mode=mode;
-	  break;
-	}
-    }
-
-  return m_mode;
-}
-#endif
-
 void Video::SetMaxFps(uint max_fps)
 {
 	m_max_fps = max_fps;
@@ -144,31 +84,19 @@ uint Video::GetSleepMaxFps()
 
 int Video::GetWidth(void) const
 {
-#ifdef CL
-  return app.clwindow->get_width();
-#else
   return app.sdlwindow->w;
-#endif
 }
 //-----------------------------------------------------------------------------
 
 int Video::GetHeight(void) const
 {
-#ifdef CL
-  return app.clwindow->get_height();
-#else
   return app.sdlwindow->h;
-#endif
 }
 //-----------------------------------------------------------------------------
 
 bool Video::IsFullScreen(void) const
 {
-#ifdef CL
-  return app.clwindow->is_fullscreen();
-#else
   return fullscreen;
-#endif
 }
 
 //-----------------------------------------------------------------------------

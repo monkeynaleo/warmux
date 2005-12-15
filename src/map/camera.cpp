@@ -60,11 +60,7 @@ Camera::Camera()
   pos.x=0;
   pos.y=0;
   selec_rectangle=false;
-#ifdef CL
-  pause = CL_System::get_time();
-#else
   pause = SDL_GetTicks();
-#endif
   lance = false;
   autorecadre = true;
   obj_suivi = NULL;
@@ -229,7 +225,7 @@ void Camera::Refresh()
   mouse.TestCamera();
   if (lance) return;
 
-#ifdef CL
+#ifdef TODO_KEYBOARD // ??? 
   // Camera au clavier
   clavier.TestCamera();
   if (lance) return;
@@ -272,7 +268,7 @@ uint Camera::GetHeight() const { return video.GetHeight(); }
 
 bool Camera::EstVisible (const PhysicalObj &obj)
 {
-#ifdef CL
+#ifdef TODO_KEYBOARD // ??? 
   CL_Rect rect;
   rect.left = GetX();
   rect.top = GetY();

@@ -47,19 +47,14 @@
 #include "config.h"
 #include "../interface/keyboard.h"
 #include "../tool/stats.h"
-
-#ifdef CL
-#include "../network/network.h"
-#else
 #include <SDL.h>
 #include "../include/app.h"
 #include "../tool/Distance.h"
-#endif
-
 #include <sstream>
 #include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
+#define ENABLE_LIMIT_FPS    
 
 #ifdef DEBUG
 
@@ -84,7 +79,7 @@ GameLoop game_loop;
 //               FUNCTIONS USED TO INITIALIZE NETWORK GAME
 // ***************************************************************************
 // ***************************************************************************
-#ifdef CL
+#ifdef TODO_NETWORK 
 void InitGameData_NetServer()
 {
   //	action_handler.NewAction(Action(ACTION_ASK_TEAM));
@@ -206,7 +201,7 @@ void InitGameData_NetClient()
   ActiveTeam().is_local = false;
 }
 
-#endif // CL defined
+#endif // TODO_NETWORK
 
 //-----------------------------------------------------------------------------
 
@@ -229,7 +224,7 @@ void InitGameData()
 {
   global_time.Reset();
   
-#ifdef CL
+#ifdef TODO_NETWORK 
   if (network.is_server())
     InitGameData_NetServer();
   else if (network.is_client())
@@ -289,29 +284,18 @@ void InitGame ()
   teams_list.InitEnergy();
 
   // Load teams' sound profiles
-#ifdef CL
-  jukebox.Load("default");
-  POUR_CHAQUE_EQUIPE(equipe) 
-    if ( (**equipe).GetSoundProfile() != "default" )
-      jukebox.Load((**equipe).GetSoundProfile()) ;  
-#else
   jukebox.LoadXML("default");
   POUR_CHAQUE_EQUIPE(equipe) 
     if ( (**equipe).GetSoundProfile() != "default" )
       jukebox.LoadXML((**equipe).GetSoundProfile()) ; 
-#endif
    
   // =============================================
   // Begin to play !!
   // =============================================
   // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
-#ifdef CL
-   if (jukebox.UseMusic()) jukebox.Play ("ambiance/grenouilles", true);
-#else
-   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
-#endif
+  if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
    
-   if (!config.display_wind_particles) TerrainActif().wind.nbr_sprite = 0;
+  if (!config.display_wind_particles) TerrainActif().wind.nbr_sprite = 0;
 
   jeu.fin_partie = false;
   game_loop.SetState (gamePLAYING, true);
@@ -348,16 +332,6 @@ void GameLoop::Refresh()
   camera.Refresh();
 
   // Mise à jeu des entrées (clavier / mouse)
-#ifdef CL
-#if CL_CURRENT_VERSION <= 0x0708
-  CL_System::keep_alive(sleep_fps);
-#else
-  CL_System::keep_alive();
-#endif
-#endif
-   
-#ifndef CL //////////////////// TREAT EVENTS in the SDL fashion /////////////////////
- 
    // Poll and treat events
 	
    SDL_Event event;
@@ -388,9 +362,6 @@ void GameLoop::Refresh()
 	     clavier.HandleKeyEvent( &event);
 	  }
      }
-   
-
-#endif ////////////////////////////////////////
    
   // How many frame by seconds ?
   image_par_seconde.Refresh();
@@ -438,13 +409,10 @@ void GameLoop::Refresh()
   // Refresh the map
   monde.Refresh();
 
-#ifdef CL
-#ifdef DEBUG
+#if 0 // #ifdef DEBUG
   // Draw les messages de debug
   debug.Refresh();
 #endif
-#endif
-
 }
 
 //-----------------------------------------------------------------------------
@@ -537,13 +505,8 @@ void GameLoop::Run()
   // boucle until game is finished
   do
   {
-#define ENABLE_LIMIT_FPS    
 #ifdef ENABLE_LIMIT_FPS    
-#ifdef CL
-    unsigned int start = CL_System::get_time();
-#else
     unsigned int start = SDL_GetTicks();
-#endif
 #endif    
      
     jeu.fin_partie = false;
@@ -558,19 +521,13 @@ void GameLoop::Run()
 
     // try to adjust to max Frame by seconds
 #ifdef ENABLE_LIMIT_FPS    
-#ifdef CL
-    unsigned int delay = CL_System::get_time()-start;
-#else
     unsigned int delay = SDL_GetTicks()-start;
-#endif
      
     if (delay < video.GetSleepMaxFps())
       sleep_fps = video.GetSleepMaxFps() - delay;
     else
       sleep_fps = 0;
-#ifndef CL
-  SDL_Delay(sleep_fps);
-#endif
+    SDL_Delay(sleep_fps);
 #endif
   } while (!jeu.fin_partie); 
 
@@ -592,11 +549,7 @@ void GameLoop::RefreshClock()
 
       case gamePLAYING:
 	if (duration == 0) {
-#ifdef CL
-	  jukebox.Play("end_turn");
-#else
-	  jukebox.Play("share", "end_turn");
-#endif
+	   jukebox.Play("share", "end_turn");
 	   SetState (gameEND_TURN);
 	} else {
 	  duration--;
@@ -656,7 +609,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     interface.EnableDisplayTimer(true);
     pause_seconde = global_time.Read();
 
-#ifdef CL
+#ifdef TODO_NETWORK 
     if (network.is_server() || network.is_local())
 #endif
      wind.ChooseRandomVal();
@@ -785,11 +738,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
     } else if (state == gamePLAYING) {
       txt = Format(_("%s has fallen off the map!"),
 		   character -> m_name.c_str());
-#ifdef CL
-       jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "out");
-#else
        jukebox.Play(ActiveTeam().GetSoundProfile(), "out");
-#endif
        
       // Mort en se faisant toucher par son arme / la mort d'un ennemi ?
     } else {

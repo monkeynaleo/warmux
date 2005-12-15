@@ -25,9 +25,6 @@
 #include "../include/base.h"
 #include <vector>
 #include <string>
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
 
 #define EstTransparent(a)	( (a) != 255 )
 
@@ -36,28 +33,6 @@ class Video
 private:
   uint m_max_fps;     // If equals to zero, it means no limit
   uint m_sleep_max_fps;
-
-#ifdef BUGGY_CODE
-public:
-  typedef std::vector<CL_DisplayMode>::const_iterator ConstIteratorMode;
-
-private:
-  uint m_max_fps;     // If equals to zero, it means no limit
-  uint m_sleep_max_fps;
-  std::vector<CL_DisplayMode> m_modes;
-  int m_mode;
-  
-public:
-
-  // Change the mode
-  void ChangeMode(int mode, bool fullScreen);
-  void SetSize(int width, int height);
-  void SetFullScreen(bool fullScreen);
-
-  const std::vector<CL_DisplayMode>& GetModes() const;
-
-  int GetCurrentMode(void);
-#endif //BUGGY_CODE
 
 public:
   void SetMaxFps (uint max_fps);
