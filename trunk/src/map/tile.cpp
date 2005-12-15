@@ -40,8 +40,9 @@ const int haut_cell = 128;
 void TileItem::Draw(const int x,const int y)
 {
   SDL_Surface *i_surface = GetSurface();
-  SDL_Rect dr = {x*larg_cell-camera.GetX(),y*haut_cell-camera.GetY(),i_surface->w,i_surface->h};
-  SDL_BlitSurface (i_surface, NULL, app.sdlwindow, &dr); 	     
+  SDL_Rect ds = {0,0,larg_cell,haut_cell};
+  SDL_Rect dr = {x*larg_cell-camera.GetX(),y*haut_cell-camera.GetY(),larg_cell,haut_cell};
+  SDL_BlitSurface (i_surface, &ds, app.sdlwindow, &dr); 	     
 }
 
 bool TileItem::IsEmpty()
@@ -453,14 +454,11 @@ void Tile::DrawTile()
 
 void Tile::DrawTile_Clipped( Rectanglei clip_r_world)
 {
-   int ox = camera.GetX();
-   int oy = camera.GetY();
-
    // Select only the items that are under the clip area
-   int first_cell_x = clamp( (ox+clip_r_world.x)/larg_cell,                  0, nbr_cell_larg-1);
-   int first_cell_y = clamp( (oy+clip_r_world.y)/haut_cell,                  0, nbr_cell_haut-1);
-   int last_cell_x  = clamp( (ox+clip_r_world.x+clip_r_world.w)/larg_cell, 0, nbr_cell_larg-1);
-   int last_cell_y  = clamp( (oy+clip_r_world.y+clip_r_world.h)/haut_cell, 0, nbr_cell_haut-1);
+   int first_cell_x = clamp( (clip_r_world.x)/larg_cell,                0, nbr_cell_larg-1);
+   int first_cell_y = clamp( (clip_r_world.y)/haut_cell,                0, nbr_cell_haut-1);
+   int last_cell_x  = clamp( (clip_r_world.x+clip_r_world.w)/larg_cell, 0, nbr_cell_larg-1);
+   int last_cell_y  = clamp( (clip_r_world.y+clip_r_world.h)/haut_cell, 0, nbr_cell_haut-1);
 
    // Compute the clipping rectangle in the screen coordinates
    Rectanglei clip_r_screen;
@@ -474,7 +472,7 @@ void Tile::DrawTile_Clipped( Rectanglei clip_r_world)
      for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++)
        {
 	  // For all selected items, clip source and destination
-          // blitting rectangles 
+      // blitting rectangles 
 	  int dest_x = cx * larg_cell;  
 	  int dest_y = cy * haut_cell;
 	  int dest_w = larg_cell;

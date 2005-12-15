@@ -37,8 +37,8 @@ private:
   bool ouvert;
   bool PointContigu(int x,int y, int & p_x,int & p_y,
                     int pas_bon_x,int pas_bon_y);
-  uint lastx;
-  uint lasty;
+  int lastx;
+  int lasty;
 
 public:
   Terrain();

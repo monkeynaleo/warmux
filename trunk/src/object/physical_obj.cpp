@@ -128,6 +128,12 @@ void PhysicalObj::SetY (int y)
 
 void PhysicalObj::SetXY (int x, int y)
 {
+  if (x != GetX() || y != GetY())
+  {
+    monde.to_redraw.push_back(GetRect());
+    monde.to_redraw.push_back(Rectanglei(x, y, m_width, m_height));
+  }      
+
   if (IsOutsideWorldXY (static_cast<int>(x), static_cast<int>(y)))
     {
       Ghost();
@@ -139,17 +145,10 @@ void PhysicalObj::SetXY (int x, int y)
     }
 }
 
-#ifdef CL
-const CL_Point PhysicalObj::GetPos() const 
-{ 
-  return CL_Point(GetX(), GetY()); 
-}
-#else
 const Point2i PhysicalObj::GetPos() const 
 { 
   return Point2i(GetX(), GetY()); 
 }
-#endif
 
 int PhysicalObj::GetX() const
 {
@@ -173,17 +172,11 @@ int PhysicalObj::GetCenterY() const
   return GetY() +m_test_top +GetTestHeight()/2;
 }
 
-#ifdef CL
-const CL_Point PhysicalObj::GetCenter() const 
-{
-  return CL_Point(GetCenterX(), GetCenterY());
-}
-#else
 const Point2i PhysicalObj::GetCenter() const 
 {
   return Point2i(GetCenterX(), GetCenterY());
 }
-#endif
+
 //-----------------------------------------------------------------------------
 
 void PhysicalObj::SetSize (uint width, uint height) 
@@ -232,33 +225,13 @@ int PhysicalObj::GetTestHeight() const
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-const CL_Rect PhysicalObj::GetRect() const 
-{ 
-  const int x = GetX();
-  const int y = GetY();
-  return CL_Rect(x, y, x+m_width, y+m_height);
-}
-#else
 const Rectanglei PhysicalObj::GetRect() const 
 { 
   return Rectanglei( GetX(), GetY(), m_width, m_height);
 }
-#endif
+
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-const CL_Rect PhysicalObj::GetTestRect() const 
-{ 
-  const int x = GetX();
-  const int y = GetY();
-  return CL_Rect(
-    x +m_test_left,       
-    y +m_test_top, 
-    x +m_width  -m_test_right, 
-    y +m_height -m_test_bottom);  
-}
-#else
 const Rectanglei PhysicalObj::GetTestRect() const 
 { 
   return Rectanglei( GetX()+m_test_left,       
@@ -266,7 +239,6 @@ const Rectanglei PhysicalObj::GetTestRect() const
 		     m_width-m_test_right-m_test_left, 
 		     m_height-m_test_bottom-m_test_top);  
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
@@ -280,8 +252,6 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 {
   if(IsGhost())
     return false;
-
-  monde.to_redraw.push_back(GetRect());
 
   double x,y,dx,dy;
   int tmp_x, tmp_y;
@@ -516,14 +486,9 @@ bool PhysicalObj::IsDrowned() const
 
 void PhysicalObj::SignalRebound()
 {
-#ifdef CL
-   if (!m_rebound_sound.empty())
-   jukebox.Play(m_rebound_sound) ;
-#else
   // TO CLEAN...
    if (!m_rebound_sound.empty())
      jukebox.Play("share", m_rebound_sound) ;
-#endif
 }
 
 
@@ -576,25 +541,12 @@ bool PhysicalObj::IsInVacuumXY (int x, int y) const
   
   if (FootsOnFloor(y-1)) return false;
 
-#ifdef CL
-  CL_Rect rect(
-    x +m_test_left,       
-	y +m_test_top, 
-	x +m_width  -m_test_right, 
-	y +m_height -m_test_bottom/*-1*/);
-  if (m_allow_negative_y)
-  {
-    if ((0<=rect.bottom) && (rect.top<0)) rect.top = 0;
-  }
-  return monde.RectEstDansVide (rect);
-#else
   Rectanglei rect( x+m_test_left,y+m_test_top, m_width-m_test_right-m_test_left, m_height-m_test_bottom-m_test_top/*-1*/);
 //  if (m_allow_negative_y)
 //   {
 //    if ((0<=rect.bottom) && (rect.top<0)) rect.top = 0;
 //  }
   return monde.RectEstDansVide (rect);
-#endif   
 }
 
 //-----------------------------------------------------------------------------
@@ -621,19 +573,6 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
    
   int y_test = y + m_height - m_test_bottom/*-1*/;
 
-#ifdef CL
-  CL_Rect rect(
-    x +m_test_left,       
-    y_test,
-    x +m_width  -m_test_right, 
-    y_test+1);
-  if (m_allow_negative_y)
-  {
-    if ((0<=rect.bottom) && (rect.top<0)) rect.top = 0;
-  }
-
-  return monde.RectEstDansVide (rect);
-#else
   Rectanglei rect( x+m_test_left, y_test, m_width-m_test_right-m_test_left, 1);
   if (m_allow_negative_y)
   {
@@ -655,8 +594,6 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
      }*/
    
   return monde.RectEstDansVide (rect);
-   
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -756,8 +693,6 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
 
 //-----------------------------------------------------------------------------
 
-#ifndef CL // from tool/geomtry_tool.cpp
-
 // Est-ce que deux objets se touchent ? (utilise les rectangles de test)
 bool ObjTouche (const PhysicalObj &a, const PhysicalObj &b)
 {
@@ -775,4 +710,4 @@ bool ObjTouche (const PhysicalObj &a, const Point2i &p)
    return IsInside ( _r, _p);
 }
 
-#endif // CL not defined
+//-----------------------------------------------------------------------------
