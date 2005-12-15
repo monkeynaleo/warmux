@@ -27,11 +27,9 @@
 #include "../gui/progress_bar.h"
 #include "skin.h"
 #include <string>
-#ifndef CL
 #include <SDL.h>
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
-#endif
 //-----------------------------------------------------------------------------
 
 // Prédéfinition de la classe équipe
@@ -50,10 +48,8 @@ private:
   uint energy;
   BarreProg energy_bar;
 
-#ifndef CL
   // name
   Text* name_text;
-#endif
 
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
@@ -65,11 +61,7 @@ private:
 
   // Animation
   struct s_anim{
-#ifdef CL
-    CL_Sprite image;
-#else
     Sprite *image;
-#endif
     bool draw;
     uint time; // Time for next animation
   } anim;
@@ -82,11 +74,9 @@ private:
   int channel_step;
 
 public:
-#ifdef CL
-  CL_Sprite image;
-#else
+
   Sprite *image;
-#endif
+
   // Previous strength 
   double previous_strength;
 
