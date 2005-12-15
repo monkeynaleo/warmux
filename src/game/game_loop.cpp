@@ -597,6 +597,9 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
   state = new_state;
   action_handler.ExecActions();
 
+  //
+  interface.weapons_menu.Hide();
+
   switch (state)
   {
   // Début d'un tour

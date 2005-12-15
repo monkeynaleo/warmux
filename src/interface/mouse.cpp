@@ -69,7 +69,7 @@ bool Mouse::ActionClicD()
 { 
   if ( ActiveTeam().GetWeapon().CanChangeWeapon() )
   {
-    interface.weapons_menu.ChangeAffichage();
+    interface.weapons_menu.SwitchDisplay();
   }
   return true;
 }

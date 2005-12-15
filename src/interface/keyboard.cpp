@@ -238,7 +238,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
 
     case ACTION_TOGGLE_WEAPONS_MENUS:
-      interface.weapons_menu.ChangeAffichage();
+      interface.weapons_menu.SwitchDisplay();
       return;
 
     default:

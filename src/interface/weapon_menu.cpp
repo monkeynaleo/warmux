@@ -136,34 +136,19 @@ bool WeaponMenuItem::MouseOn(int s_x, int s_y)
   int scaled_width = (int)(BUTTON_ICO_WIDTH * scale) ;
   int scaled_height = (int)(BUTTON_ICO_HEIGHT * scale) ;
 
-#ifdef CL
-  CL_Rect rect;
-  rect.left = interface.weapons_menu.GetX() + x - (int)(0.5 * scaled_width) ;
-  rect.top = interface.weapons_menu.GetY() + y - (int)(0.5 * scaled_height) ;
-  rect.right = rect.left + scaled_width ;
-  rect.bottom = rect.top + scaled_height ;
-#else
+
   Rectanglei rect;
   rect.x = interface.weapons_menu.GetX() + x - (int)(0.5 * scaled_width);
   rect.w = scaled_width;
   rect.y = interface.weapons_menu.GetY() + y - (int)(0.5 * scaled_height) ;
   rect.h = scaled_height;;
-#endif
-   
-#ifdef CL
-  CL_Point point;
-#else
+
   Point2i point;
-#endif
-   
   point.x = s_x;
   point.y = s_y;
 
-#ifdef CL
-   if (rect.is_inside(point))
-#else
+
    if ( IsInside( rect, point))  
-#endif
      return true;
   else
     {
@@ -183,11 +168,8 @@ void WeaponMenuItem::Draw()
   std::ostringstream txt;
   int nb_bullets ;
 
-#ifdef CL
-  CL_Surface button ;
-#else
+
   Sprite *button;
-#endif
    
   switch (weapon_type) {
     case 1:
@@ -215,36 +197,18 @@ void WeaponMenuItem::Draw()
       break ;
   }
 
-  // Button display
-
-#ifdef CL
-   button.set_scale(scale, scale);
-   button.draw((int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale),
-	      (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale));
-   
-#else
-  
+  // Button display  
    button->Scale( scale, scale);
    button->Blit( app.sdlwindow, 
 		 (int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale), 
 		 (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale));	
-#endif
    
   // Weapon display
-
-#ifdef CL
-  CL_Surface icon = weapon->icone;
-
-  icon.set_scale(scale, scale);
-
-  icon.draw((int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
-	    (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale));
-#else
   weapon_icon->Scale( scale, scale);
   weapon_icon->Blit( app.sdlwindow,
 		     (int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
 		     (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale));
-#endif
+
    
   // Amunitions display
   nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetName());
@@ -259,7 +223,10 @@ void WeaponMenuItem::Draw()
 				(int)(c_y + 0.5 * WEAPON_ICO_HEIGHT * scale),
 				 txt.str());
 #else
-// TODO
+  tiny_font.WriteLeftBottom((int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
+			    (int)(c_y + 0.5 * WEAPON_ICO_HEIGHT * scale),
+			    txt.str(),
+			    white_color);
 #endif
 }
 
@@ -282,10 +249,10 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
   item.x = 0;
   item.y = 0;
   item.weapon = new_item;
-#ifndef CL
+
   item.weapon_icon = new Sprite( new_item->icone);
   item.weapon_icon->EnableLastFrameCache();
-#endif
+
   boutons.push_back (item);
 
   if(num_sort>nbr_weapon_type)
@@ -345,7 +312,7 @@ void WeaponsMenu::Hide()
 }
 
 //-----------------------------------------------------------------------------
-void WeaponsMenu::ChangeAffichage()
+void WeaponsMenu::SwitchDisplay()
 {
   if(display && !hide)
     Hide();
@@ -362,15 +329,7 @@ int WeaponsMenu::GetX() const
 //-----------------------------------------------------------------------------
 int WeaponsMenu::GetY() const 
 {
-#ifdef CL
-  int y = video.GetHeight();
-
-  if (interface.IsDisplayed())
-    y -= interface.GetHeight();
-  return y;
-#else
    return video.GetHeight() - GetHeight() - ( interface.IsDisplayed() ? interface.GetHeight() : 0 );
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -382,11 +341,7 @@ int WeaponsMenu::GetWidth() const
 //-----------------------------------------------------------------------------
 int WeaponsMenu::GetHeight() const
 {
-#ifdef CL
-   return -((BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon));
-#else
-   return BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon;
-#endif
+  return BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon;
 }
 
 //-----------------------------------------------------------------------------
@@ -484,7 +439,7 @@ void WeaponsMenu::Draw()
   int mouse_x = mouse.GetPosMonde().x - camera.GetX();
   int mouse_y = mouse.GetPosMonde().y - camera.GetY();
 
-  ReactionSouris(mouse_x,mouse_y);
+  MouseOver(mouse_x,mouse_y);
   ComputeSize();
    
   uint nr_buttons = max_weapon * nbr_weapon_type;
@@ -508,11 +463,7 @@ void WeaponsMenu::Draw()
     int row = button_no;
 
     it->x = GetWidth() - (int)(BUTTON_WIDTH * (column+0.5));
-#ifdef CL
-    it->y = GetHeight() + BUTTON_ICO_GAP + (row * BUTTON_HEIGHT);
-#else
     it->y = BUTTON_ICO_GAP + (row * BUTTON_HEIGHT);     
-#endif
      
     if(show)
     {
@@ -531,75 +482,40 @@ void WeaponsMenu::Draw()
 }
 
 //-----------------------------------------------------------------------------
-void WeaponsMenu::ReactionSouris (int x, int y)
+void WeaponsMenu::MouseOver (int x, int y)
 {
   static int bouton_sous_souris = -1; //bouton survolé par la souris
  
-#ifdef CL
-  CL_Rect rect;
-
-  rect.left = GetX();
-  rect.top = GetY() + GetHeight() - (int)(0.5 * BUTTON_ICO_HEIGHT);
-  rect.right = GetX() + GetWidth();
-  rect.bottom = GetY();
-
-  CL_Point point;
-  point.x = x;
-  point.y = y;
-
-  if (rect.is_inside(point))
-#else
-  // Nothing to do
-#endif  
-  {
-    //Bouton en cour d'analyse:
-    int button_no=0;
-    int nv_bouton_sous_souris=-1;
-    iterator it=boutons.begin(), fin=boutons.end();
-    interface.weapon_under_cursor = NULL;
-    for (; it != fin; ++it)
+  //Bouton en cour d'analyse:
+  int button_no=0;
+  int nv_bouton_sous_souris=-1;
+  iterator it=boutons.begin(), fin=boutons.end();
+  interface.weapon_under_cursor = NULL;
+  for (; it != fin; ++it)
     {
       if(it->MouseOn(x,y))
-      {
+	{
           interface.weapon_under_cursor = it->weapon;
-        nv_bouton_sous_souris = button_no;
-        if(button_no != bouton_sous_souris)
-        {//Le curseur arrive sur un nouveau bouton
-          it->ChangeZoom();
-        }
-      }
+	  nv_bouton_sous_souris = button_no;
+	  if(button_no != bouton_sous_souris)
+	    {//Le curseur arrive sur un nouveau bouton
+	      it->ChangeZoom();
+	    }
+	}
       else
-      if(button_no == bouton_sous_souris)
-      {
-        it->ChangeZoom();
-      }
+	if(button_no == bouton_sous_souris)
+	  {
+	    it->ChangeZoom();
+	  }
       button_no++;
     }
-    bouton_sous_souris = nv_bouton_sous_souris;
-  }
-#ifdef CL
-  else
-  {
-    iterator it=boutons.begin();
-    if(bouton_sous_souris != -1)
-    {
-      (it+bouton_sous_souris)->ChangeZoom();
-    }
-    bouton_sous_souris = -1;
-    interface.weapon_under_cursor = NULL;
-  }
-#else
-  // Nothing to do
-#endif
+  bouton_sous_souris = nv_bouton_sous_souris;
 }
 
 //-----------------------------------------------------------------------------
 
 bool WeaponsMenu::ActionClic (int x, int y)
 {
-#ifdef CL
-  CL_Rect rect;
-#endif
   if (!display) return false;
 
   iterator it=boutons.begin(), fin=boutons.end();
@@ -610,7 +526,7 @@ bool WeaponsMenu::ActionClic (int x, int y)
 	  action_handler.NewAction (ActionInt(
 	    ACTION_CHANGE_WEAPON, 
 		it -> weapon -> GetType()));
-      ChangeAffichage();
+      SwitchDisplay();
       return true;
     }
   }
