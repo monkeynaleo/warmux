@@ -30,6 +30,8 @@
 #include "wind.h"
 #include "camera.h"
 #include "maps_list.h"
+#include "../tool/stats.h"
+
 using namespace std;
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -118,8 +120,13 @@ void Monde::DrawWater()
 
 void Monde::Draw()
 { 
+  //StatStart("GameDraw: wind_particles");
   wind.DrawParticles();
+  //StatStop("GameDraw: wind_particles");
+
+  //StatStart("GameDraw: ground");
   terrain.Draw(); 
+  //StatStop("GameDraw: ground");
 }
 
 //-----------------------------------------------------------------------------

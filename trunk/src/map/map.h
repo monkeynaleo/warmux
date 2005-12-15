@@ -45,6 +45,7 @@ public:
   Wormux::Ciel ciel;
   double dst_min_entre_vers;
   Water water;
+  std::list<Rectanglei> to_redraw;
 
 public:
   //void Init();
