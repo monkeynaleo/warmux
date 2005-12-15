@@ -38,7 +38,7 @@ namespace Wormux {
 class Ciel : public Tile
 {  
  private:
-  uint lastx, lasty;
+  int lastx, lasty;
   void CompleteDraw();
 
 public:

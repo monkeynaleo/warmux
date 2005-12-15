@@ -24,10 +24,9 @@
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
-#ifndef CL
+#include <limits.h>
 #include <SDL.h>
 #include "../include/app.h"
-#endif
 //-----------------------------------------------------------------------------
 namespace Wormux
 {
@@ -58,6 +57,7 @@ void Ciel::Init()
 void Ciel::Reset()
 {
   Init();
+  lastx = lasty = INT_MAX;
 }
 
 //-----------------------------------------------------------------------------
@@ -124,13 +124,10 @@ void Ciel::CompleteDraw()
 
 void Ciel::Draw()
 {
-  int x = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
-  int y = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
-
   int cx = camera.GetX();
   int cy = camera.GetY();
 
-  if ((lastx != cx || lasty != cy) || (!TerrainActif().infinite_bg)) {
+  if (lastx != cx || lasty != cy) {
     CompleteDraw();
     lastx = cx;
     lasty = cy;
@@ -139,32 +136,34 @@ void Ciel::Draw()
 
   lastx = cx;
   lasty = cy;
-  
+
+  int sky_cx = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
+  int sky_cy = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
 
   // Redraw the top and the bottom of the screen for the interface
-  Rectanglei top(cx,cy, cx+app.sdlwindow->w, cy+50); 
+  //Rectanglei top(cx,cy, cx+app.sdlwindow->w, cy+50); 
   //monde.to_redraw.push_back(top);
   //DrawTile_Clipped(top);
   
-  Rectanglei bottom(0,0+app.sdlwindow->h-100, 0+app.sdlwindow->w, 0+app.sdlwindow->h); 
+  //Rectanglei bottom(0,0+app.sdlwindow->h-100, 0+app.sdlwindow->w, 0+app.sdlwindow->h); 
   //monde.to_redraw.push_back(bottom);
   //DrawTile_Clipped(bottom);
   
   std::list<Rectanglei>::iterator it;
   for (it = monde.to_redraw.begin(); 
        it != monde.to_redraw.end(); 
-       ++it){
-    SDL_Rect ds = { it->x-camera.GetX(), 
-		    it->y-camera.GetY(), 
+       ++it)
+  {
+    SDL_Rect ds = { sky_cx + it->x - cx, 
+		    sky_cy + it->y - cy, 
 		    it->w, 
 		    it->h};
-    SDL_Rect dr = {it->x-camera.GetX(),
-		   it->y-camera.GetY(), 
+    SDL_Rect dr = {it->x-cx,
+		   it->y-cy, 
 		   it->w, 
 		   it->h};
     SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
   }
-
 }
 
 //-----------------------------------------------------------------------------

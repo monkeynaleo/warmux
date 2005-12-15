@@ -26,14 +26,11 @@
 #include "maps_list.h"
 #include "../map/camera.h"
 #include "../graphic/video.h"
+#include <limits.h>
 
 #include "../include/constant.h"
-#ifdef CL
-#include "../weapon/mine.h"
-#else
 #include "../tool/resource_manager.h"
 #include <SDL/SDL_video.h>
-#endif
 
 #ifdef DEBUG
 //#  define DESSINE_BORDURE_CANVAS
@@ -56,15 +53,9 @@ void Terrain::Init()
   std::cout.flush();
   
   // Charge les données du terrain
-#ifdef CL
-  CL_Surface *m_image = new CL_Surface(lst_terrain.TerrainActif().LitImgTerrain());
-  LoadImage (*m_image);
-  delete m_image;
-#else
   SDL_Surface *m_image = lst_terrain.TerrainActif().LitImgTerrain();
   LoadImage ( m_image);
   // delete m_image; -> Done after Terrain initialization
-#endif
 
   // Vérifie la taille du terrain
   assert (LARG_MIN_TERRAIN <= GetWidth());
@@ -82,6 +73,7 @@ void Terrain::Init()
 void Terrain::Reset()
 {
   Init();
+  lastx = lasty = INT_MAX;
 }
 
 //-----------------------------------------------------------------------------
@@ -118,11 +110,7 @@ double Terrain::Tangeante(int x,int y)
   // p2 = 1er point à droite
   // p3 = 2em point à gauche
   // p4 = 2em point à droite)
-#ifdef CL
-  CL_Point p1,p2,p3,p4;
-#else
   Point2i p1,p2,p3,p4;
-#endif
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
     return -1.0;
   
@@ -167,19 +155,11 @@ bool Terrain::PointContigu(int x,int y,  int & p_x,int & p_y,
   //Cherche un pixel autour du pixel(x,y) qui est à la limite entre
   //le terrin et le vide.
   //renvoie true (+ p_x et p_y) si on a trouvé qqch, sinon false
-#ifdef CL
-  if(monde.EstHorsMonde(CL_Point(x-1,y))
-  || monde.EstHorsMonde(CL_Point(x+1,y))
-  || monde.EstHorsMonde(CL_Point(x,y-1))
-  || monde.EstHorsMonde(CL_Point(x,y+1)) )
-    return false;
-#else
   if(monde.EstHorsMonde(Point2i(x-1,y))
   || monde.EstHorsMonde(Point2i(x+1,y))
   || monde.EstHorsMonde(Point2i(x,y-1))
   || monde.EstHorsMonde(Point2i(x,y+1)) )
     return false;
-#endif
    
   //regarde en haut à gauche
   if(x-1 != pas_bon_x
@@ -279,24 +259,20 @@ void Terrain::Draw()
   int cx = camera.GetX();
   int cy = camera.GetY();  
   
-  if ((lastx != cx || lasty != cy) || (!TerrainActif().infinite_bg)) {
-    DrawTile();
+  if (lastx != cx || lasty != cy)
+  {
     lastx = cx;
     lasty = cy;
+    DrawTile();
     return;
   }
   lastx = cx;
   lasty = cy; 
 
-
-
-  std::list<Rectanglei>::iterator it;
-  for (it = monde.to_redraw.begin(); 
-       it != monde.to_redraw.end(); 
-       ++it){
-    DrawTile_Clipped(*it);
-  }
-  monde.to_redraw.clear();
+  std::list<Rectanglei>::iterator
+    it=monde.to_redraw.begin(),
+    end=monde.to_redraw.end();
+  for (; it != end; ++it) DrawTile_Clipped(*it);
 }
 
 //-----------------------------------------------------------------------------

@@ -514,6 +514,7 @@ void GameLoop::Draw ()
 
   // Add one frame to the fps counter ;-)
   image_par_seconde.AjouteUneImage();
+  monde.to_redraw.clear();
 }
 
 //-----------------------------------------------------------------------------
