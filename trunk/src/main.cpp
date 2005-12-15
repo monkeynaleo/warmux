@@ -118,7 +118,7 @@ void AppWormux::Prepare()
 bool AppWormux::Init(int argc, char **argv)
 {
   // Network
-#ifdef CL
+#ifdef TODO_NETWORK 
   if ((argc == 3) && (strcmp(argv[1],"server")==0)) {
 	// wormux server <port>
 	network.server_start (argv[2]);

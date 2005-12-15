@@ -28,13 +28,11 @@
 #include "../game/time.h"
 #include "../tool/xml_document.h"
 #include "camera.h"
-#ifndef CL
 #include <SDL.h>
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
 #include "../include/app.h"
 #include "camera.h"
-#endif
 //----------------------------------------------------------------------------
 
 const uint MAX_WIND_OBJECTS = 200;
@@ -66,15 +64,10 @@ void WindParticle::Init()
   if(sprite != NULL)
     delete sprite;
 
-#ifdef CL
-  sprite = CL_Sprite("wind_particle", TerrainActif().res);
-  sprite.set_frame ( RandomLong(0, sprite.get_frame_count()-1) );
-#else
   sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
   if(sprite->GetFrameCount()==1)
     sprite->EnableLastFrameCache();
   sprite->SetCurrentFrame ( RandomLong(0, sprite->GetFrameCount()-1));
-#endif
    
   SetXY(RandomLong(0, monde.GetWidth()-1), RandomLong(0, monde.GetHeight()-1));
 
@@ -82,11 +75,7 @@ void WindParticle::Init()
   mass = TerrainActif().wind.particle_mass;
   mass *= (1.0 + RandomLong(-100, 100)/400.0);
   SetMass (mass);
-#ifdef CL
-  SetSize (sprite.get_width(), sprite.get_height());
-#else
-   SetSize( sprite->GetWidth(), sprite->GetHeight());
-#endif
+  SetSize( sprite->GetWidth(), sprite->GetHeight());
   wind_factor = TerrainActif().wind.particle_wind_factor ;
   wind_factor *= (1.0 + RandomLong(-100, 100)/400.0);  
   SetWindFactor(wind_factor);
@@ -110,22 +99,14 @@ void WindParticle::Reset()
 
 void WindParticle::Refresh()
 {
-#ifdef CL
-  sprite.update();
-#else
-   sprite->Update();
-#endif   
+  sprite->Update();
   UpdatePosition();
   int x = GetX();
   int y = GetY();
 
   if(x > camera.GetX()+(int)camera.GetWidth())
   {
-#ifdef CL
-    x = 1 - sprite.get_width() ;
-#else
     x = camera.GetX() - sprite->GetWidth();
-#endif
     y = RandomLong(camera.GetY(), camera.GetY() + camera.GetHeight()-1) ;
   }
   else
@@ -139,11 +120,7 @@ void WindParticle::Refresh()
 
   if(y > camera.GetY()+(int)camera.GetHeight())
   {
-#ifdef CL
-    y = 1 - sprite.get_height() ;
-#else
     y = camera.GetY() - sprite->GetHeight() ;
-#endif
     x = RandomLong(camera.GetX(), camera.GetX()+camera.GetWidth()-1) ;
   }
   else
@@ -168,27 +145,15 @@ void WindParticle::Draw()
     DoubleVector speed;
     GetSpeedXY(speed);
     float scale_x,scale_y;
-#ifdef CL
-     sprite.get_scale(scale_x,scale_y);
-#else
-     sprite->GetScaleFactors( scale_x, scale_y);
-#endif
+    sprite->GetScaleFactors( scale_x, scale_y);
     if((speed.x<0 && scale_x>0)
     || (speed.x>0 && scale_x<0))
     {
       scale_x=-scale_x;
-#ifdef CL
-       sprite.set_scale(scale_x,scale_y);
-#else
-       sprite->Scale( scale_x, scale_y);
-#endif
+      sprite->Scale( scale_x, scale_y);
     }
   }
-#ifdef CL
-   sprite.draw(GetX(),GetY());
-#else
-   sprite->Draw(GetX(), GetY());
-#endif
+  sprite->Draw(GetX(), GetY());
 }
 
 //-----------------------------------------------------------------------------
@@ -196,13 +161,8 @@ void WindParticle::Draw()
 void WindParticle::Resize(double size)
 {
   size=0.5+size/2.0;
-#ifdef CL
-  sprite.set_scale(size,size);
-  sprite.set_alpha(size);
-#else
-   sprite->Scale( size,size);
-   sprite->SetAlpha( size);
-#endif
+  sprite->Scale( size,size);
+  sprite->SetAlpha( size);
 }
 
 //-----------------------------------------------------------------------------
@@ -219,17 +179,10 @@ Wind::Wind()
   m_val = m_nv_val = 0;
   barre.InitPos (10, 10, BARRE_LARG, BARRE_HAUT);
   barre.InitVal (0, -100, 100);
-#ifdef CL
-  barre.border_color = CL_Color::white;
-  barre.background_color = CL_Color(255*6/10,255*6/10,255*6/10);
-  barre.value_color = CL_Color(255*3/10,255*3/10,255);
-  barre.AjouteMarqueur (100, CL_Color::white);
-#else
-   barre.border_color = c_white;
+  barre.border_color = c_white;
   barre.background_color = c_black;
   barre.value_color = c_red;
   barre.AjouteMarqueur (100, c_white);
-#endif
   barre.SetReferenceValue (true, 0);
 
   wind_particle_array = new WindParticle[MAX_WIND_OBJECTS];

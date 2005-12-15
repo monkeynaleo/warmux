@@ -25,11 +25,7 @@
 #include "../include/base.h"
 #include <string>
 #include <map>
-#ifdef CL
-# include <ClanLib/display.h>
-#else
 #include "../tool/resource_manager.h"
-#endif
 # include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
@@ -43,15 +39,9 @@ public:
   bool use_water;
   bool is_opened;
   bool infinite_bg;
-#ifdef CL
-  CL_Surface preview;
-  CL_Surface img_terrain, img_ciel;
-  CL_ResourceManager *res;
-#else
   SDL_Surface *preview;
   SDL_Surface *img_terrain, *img_ciel;   
   Profile *res_profile;
-#endif
   std::string author_info;
   std::string m_directory;
   struct s_wind
@@ -69,13 +59,8 @@ private:
 
 public:
   InfoTerrain ();
-#ifdef CL
-  CL_Surface &InfoTerrain::LitImgTerrain();
-  CL_Surface &InfoTerrain::LitImgCiel();
-#else
-   SDL_Surface *LitImgTerrain();
-   SDL_Surface *LitImgCiel();
-#endif
+  SDL_Surface *LitImgTerrain();
+  SDL_Surface *LitImgCiel();
   bool Init(const std::string &nom, const std::string &repertoire);
   bool DonneesChargees() const;
   void FreeData();

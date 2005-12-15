@@ -23,39 +23,18 @@
 #define MOUSE_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#ifdef CL
-# include <ClanLib/core.h>
-# include <ClanLib/display.h>
-#else
 #include <SDL.h>
 #include "../tool/Point.h"
-#endif
-
-
 //-----------------------------------------------------------------------------
 
 class Mouse
 {
 private:
-#ifdef CL
-  CL_Slot slot;
-  bool pilote_installe;
-#endif
   bool scroll_actif;
   int sauve_x, sauve_y;
 
-private:
-  // Traite une touche relachée
-#ifdef CL
-   void TraiteClic (const CL_InputEvent &event);
-#else
- public:
-  void TraiteClic (const SDL_Event *event); 
- private:
-#endif
-   
-   
 public:
+  void TraiteClic (const SDL_Event *event); 
   Mouse();
 
   void Reset();
@@ -76,16 +55,7 @@ public:
   bool ClicD() const;
   bool ClicM() const;
   void ScrollCamera() const;
-#ifdef CL
-  CL_Point GetPosMonde () const;
-#else
   Point2i GetPosMonde () const;
-#endif
-   
-#ifdef CL
-  void InstallePilote();
-  void DesinstallePilote();
-#endif
 };
 
 extern Mouse mouse;

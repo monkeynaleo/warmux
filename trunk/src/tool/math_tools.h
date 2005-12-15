@@ -23,9 +23,7 @@
 #define MATH_TOOLS_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#ifndef CL
 #include "../tool/Point.h"
-#endif
 #include <string>
 //-----------------------------------------------------------------------------
 
@@ -68,11 +66,7 @@ double BorneDouble (const double &valeur, const double &min,
 // - M=(-10,10) -> 3*PI/4 (2.35)
 // - M=(10,-10) -> -PI/4 (-0.78)
 // - M=O -> 0
-#ifdef CL
-double CalculeAngle (const CL_Point &O, const CL_Point &M);
-#else
 double CalculeAngle (const Point2i &O, const Point2i &M);
-#endif
 double CalculeAnglef (DoubleVector V) ;
 
 // Inverse un angle par rapport à l'axe vertical

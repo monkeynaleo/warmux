@@ -39,11 +39,7 @@ namespace Wormux {
 class WindParticle : public PhysicalObj
 {
 public:
-#ifdef CL
-  CL_Sprite sprite;
-#else
   Sprite *sprite;
-#endif
      
 public:
   WindParticle();

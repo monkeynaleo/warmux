@@ -47,11 +47,7 @@ void ImageParSeconde::Reset()
   moyenne = -1;
   nbr_img.clear();
   for (uint i=0; i<=NBR_VAL; ++i) nbr_img.push_back (0);
-#ifdef CL
-  temps_seconde = CL_System::get_time()+1000;
-#else
   temps_seconde = SDL_GetTicks()+1000;
-#endif
   nbr_val_valides = -1;
   if(fps_txt == NULL)
     fps_txt = new Text("");
@@ -68,11 +64,7 @@ void ImageParSeconde::AjouteUneImage()
 
 void ImageParSeconde::Refresh()
 {
-#ifdef CL
-  uint nv_temps = CL_System::get_time();
-#else
   uint nv_temps = SDL_GetTicks();   
-#endif
    
   // Pas encore l'heure de recalculer : exit !
   if (nv_temps <= temps_seconde) return;
