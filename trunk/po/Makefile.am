@@ -24,7 +24,6 @@ POTFILES = \
 	src/main.cpp \
 	src/graphic/font.cpp \
 	src/graphic/fps.cpp \
-	src/graphic/graphism.cpp \
 	src/graphic/video.cpp \
 	src/include/constant.cpp \
 	src/interface/cursor.cpp \
