@@ -27,9 +27,6 @@
 #include "../team/team.h"
 #include "../weapon/weapon.h"
 #include <vector>
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
 //-----------------------------------------------------------------------------
 
 struct Sprite;
@@ -40,9 +37,7 @@ public:
   int x, y;
   double scale;
   Weapon* weapon;
-#ifndef CL
   Sprite *weapon_icon;
-#endif
   uint zoom_start_time;
   uint weapon_type;
 
@@ -65,19 +60,12 @@ private:
 class WeaponsMenu
 {
 public:
-#ifdef CL
-  CL_Surface my_button1 ;
-  CL_Surface my_button2 ;
-  CL_Surface my_button3 ;
-  CL_Surface my_button4 ;
-  CL_Surface my_button5 ;
-#else
   Sprite *my_button1;
   Sprite *my_button2;
   Sprite *my_button3;
   Sprite *my_button4;
   Sprite *my_button5;
-#endif
+
 private:
   std::vector<WeaponMenuItem> boutons;
   typedef std::vector<WeaponMenuItem>::iterator iterator;
@@ -108,14 +96,14 @@ public:
   bool IsDisplayed() const;
 
   void NewItem(Weapon* new_item, uint num_sort);
-  void ChangeAffichage();
+  void SwitchDisplay();
+  void Hide();
 
-  void ReactionSouris(int x,int y);
+  void MouseOver(int x,int y);
 
 private:
   void ComputeSize();
   void Show();
-  void Hide();
   void DrawBouton(iterator bouton);
   void ShowMotion(int nr_bottons,int button_no,iterator it, int column);
   bool HideMotion(int nr_buttons,int button_no,iterator it,int column);
