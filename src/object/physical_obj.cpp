@@ -518,7 +518,9 @@ void PhysicalObj::SignalRebound()
    if (!m_rebound_sound.empty())
    jukebox.Play(m_rebound_sound) ;
 #else
-  // TODO   
+  // TO CLEAN...
+   if (!m_rebound_sound.empty())
+     jukebox.Play("share", m_rebound_sound) ;
 #endif
 }
 
