@@ -281,6 +281,8 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
   if(IsGhost())
     return false;
 
+  monde.to_redraw.push_back(GetRect());
+
   double x,y,dx,dy;
   int tmp_x, tmp_y;
   int cx, cy;

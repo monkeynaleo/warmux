@@ -23,6 +23,7 @@
 #define TERRAIN_H
 //-----------------------------------------------------------------------------
 #include "tile.h"
+#include <list>
 #ifdef CL
 # include <ClanLib/display.h>
 #endif
@@ -36,6 +37,8 @@ private:
   bool ouvert;
   bool PointContigu(int x,int y, int & p_x,int & p_y,
                     int pas_bon_x,int pas_bon_y);
+  uint lastx;
+  uint lasty;
 
 public:
   Terrain();

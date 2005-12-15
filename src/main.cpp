@@ -154,18 +154,10 @@ bool AppWormux::Init(int argc, char **argv)
   }
   if (!Font::InitAllFonts()) return false;
 
-  // Load graphics resources XML file
-#ifdef CL
-  graphisme.Init();
-#endif
-
   // Display a loading picture
-#ifdef CL
-  CL_Surface loading_image = CL_Surface("intro/loading", graphisme.LitRes());
-#else
+
   //TODO->use ressource handler
   SDL_Surface* loading_image=IMG_Load( (config.data_dir+"/menu/img/loading.png").c_str());
-#endif
 
   // Reset timer
   Wormux::global_time.Reset();
