@@ -80,6 +80,7 @@ CfgSkin_Anim::CfgSkin_Anim() { Reset(); }
 void CfgSkin_Anim::Reset()
 {
   utilise = false;
+  not_while_playing = false;
   pos.dx = 0;
   pos.dy = 0;
 }
@@ -124,19 +125,6 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
     
     LoadManySkins(doc.racine(),res);
 
-    // <animation>
-    anim.utilise = 
-      (LitDocXml::Access (doc.racine(), "sprite", "animation") != NULL);
-    if (anim.utilise) {
-#ifdef CL
-      anim.image = CL_Sprite("animation", &res);
-      anim.image.set_play_loop (false);
-#else
-      anim.image = resource_manager.LoadSprite( res, "animation");
-      anim.image->Start();
-      anim.image->SetShowOnFinish(Sprite::show_blank);
-#endif
-    }
   }
   catch (const xmlpp::exception &e)
   {
@@ -156,6 +144,7 @@ void Skin::LoadManySkins(xmlpp::Element *root, CL_ResourceManager &res) {
 void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {   
 #endif
   many_skins.clear();
+  anim.utilise = false;
 
   xmlpp::Node::NodeList nodes = root -> get_children("sprite");
   xmlpp::Node::NodeList::iterator 
@@ -171,8 +160,16 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
        continue;
     }
     if (skin_name=="animation") {
-       continue;
+    // <animation>
+      xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
+      anim.utilise = true;
+      anim.image = resource_manager.LoadSprite( res, skin_name);
+      anim.image->Start();
+      anim.image->SetShowOnFinish(Sprite::show_blank);
+      LitDocXml::LitBool(xml_config, "not_while_playing", anim.not_while_playing);
+      continue;
     }
+
     xmlpp::Node::NodeList nodes = elem -> get_children("hand");
     if(nodes.end()==nodes.begin())
     {
