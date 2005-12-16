@@ -88,6 +88,7 @@ class CfgSkin_Anim
 {
 public:
   bool utilise;
+  bool not_while_playing;
 #ifdef CL
   CL_Sprite image;
 #else

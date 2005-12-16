@@ -67,6 +67,7 @@
   </image>
   <collision_rect dx="10" top="1" bottom="3" />
   <animation speed="600" />
+  <not_while_playing>1</not_while_playing>
 </sprite>
 
 

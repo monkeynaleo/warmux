@@ -292,7 +292,8 @@ void Character::Draw()
   image->Draw(x,y);
    
   // Draw animation
-  if (anim.draw && current_skin=="walking")
+  if (anim.draw && current_skin=="walking"
+  && (!GetSkin().anim.not_while_playing || &ActiveCharacter()!=this))
    anim.image->Draw(x,y);
 
    // Draw energy bar
@@ -512,7 +513,7 @@ void Character::Refresh()
     }
 
     // Animation active
-    if (anim.draw)
+    if (anim.draw && (!GetSkin().anim.not_while_playing || &ActiveCharacter()!=this))
     {
       anim.image->Update();
 
