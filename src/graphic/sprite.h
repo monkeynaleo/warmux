@@ -28,6 +28,14 @@
 
 #include <vector>
 
+#ifdef DEBUG
+//#define DBG_SPRITE
+
+#ifdef DBG_SPRITE
+#include "text.h"
+#endif
+#endif //DEBUG
+
 struct SDL_Surface;
 class ResourceManager;
 
@@ -51,6 +59,7 @@ class Sprite
 {
   public:
 typedef enum {
+  show_first_frame,
   show_last_frame,
   show_blank
 } SpriteShowOnFinish;
@@ -78,20 +87,30 @@ typedef enum {
    SpriteFrame& operator[] (unsigned int frame_no);
    const SpriteFrame& operator[] (unsigned int frame_no) const;
    const SpriteFrame& GetCurrentFrameObject() const;
-   void Scale( float scale_x, float scale_y);
-   void GetScaleFactors( float &scale_x, float &scale_y);
-   void ScaleSize(int width, int height);
-   void SetRotation_deg( float angle_deg);
-   void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
-   void SetAlpha( float alpha); // Can't be combined with per pixel alpha
-   float GetAlpha();
+
    void Start();
-//   void StartLoop();
    void Finish();
    void SetPlayBackward(bool enable);
+   void SetLoopMode(bool enable=true) { loop = enable; };
+   void SetPingPongMode(bool enable=true) { pingpong = enable; };
+   void SetShowOnFinish(SpriteShowOnFinish show);
+
+   void Scale( float scale_x, float scale_y);
+   void ScaleSize(int width, int height);
+   void GetScaleFactors( float &scale_x, float &scale_y);
+
+   void SetRotation_deg( float angle_deg);
+   void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
+
+   void SetAlpha( float alpha); // Can't be combined with per pixel alpha
+   float GetAlpha();
+
+   void SetFrameSpeed(unsigned int nv_fs);
+   void SetSpeedFactor(float nv_speed);
+
    void Show();
    void Hide();
-   void SetShowOnFinish(SpriteShowOnFinish show);
+
      
    void Blit( SDL_Surface *dest, unsigned int pox_x, unsigned int pos_y);
    void Draw(int pos_x, int pos_y);
@@ -104,14 +123,14 @@ typedef enum {
    bool finished;
    bool show;
    bool loop;
+   bool pingpong;
    SpriteShowOnFinish show_on_finish;
    int translation_x,translation_y;
-   int frame_width_pix;
-   int frame_height_pix;
-   float scale_x;
-   float scale_y;
+   int frame_width_pix,frame_height_pix;
+   float scale_x,scale_y;
    float rotation_deg;
    float alpha;
+   float speed_factor;
    unsigned int current_frame;
    int frame_delta; // Used in Update() to get next frame
    bool backward;
@@ -129,6 +148,10 @@ typedef enum {
    bool have_lastframe_cache;
    SDL_Surface* last_frame;
    void LastFrameModified();
+
+#ifdef DBG_SPRITE
+   Text* info;
+#endif
 };
 
 #endif /* _SPRITE_H */

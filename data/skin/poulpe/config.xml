@@ -11,7 +11,8 @@
     <grid pos="0,0" size="42,42" array="10,1" />
   </image>
   <collision_rect dx="10" top="0" bottom="8" />
-  <wormux repetition="2" />
+  <frame speed="50" />
+  <full_walk>1</full_walk>
 
   <hand frame="1" x="36" y="33" />
   <hand frame="2" x="35" y="31" />
@@ -49,7 +50,15 @@
     <grid pos="0,0" size="42,42" array="20,1" />
   </image>
   <translation origin="top_left" x="0" y="0" />
-  <animation speed="100" />
+</sprite>
+
+<sprite name="breathe">
+  <image file="breathe.png">
+    <grid pos="0,0" size="42,42" array="20,1" />
+  </image>
+  <collision_rect dx="10" top="0" bottom="8" />
+  <frame speed="100" />
+  <animation pingpong="yes"/>
 </sprite>
 
 <sprite name="dead">
@@ -82,7 +91,7 @@
 		<grid size="53,46" array="4,1" />
 	</image>
 	<frame speed="30" />
-	<collision_rect dx="20" top="0" bottom="12" />
+	<collision_rect dx="20" top="0" bottom="17" />
 </sprite>
 
 

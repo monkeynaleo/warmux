@@ -306,26 +306,44 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	SDL_FreeSurface( surface);
      }
 
-   xmlpp::Element *translate = profile->doc->AccesBalise ( elem_sprite, "translation");
+  assert(sprite!=NULL);
 
-   assert(sprite!=NULL);
-   if ( translate != NULL )
-   {
-	std::string x,y;
-        int tx=0,ty=0;
+  xmlpp::Element *elem = profile->doc->AccesBalise ( elem_sprite, "translation");
+  if ( elem != NULL )
+  {
+	  std::string x,y;
+    int tx=0,ty=0;
+    if ( profile->doc->LitAttrString( elem, "x", x) )
+	    tx = atoi( x.c_str());
+    if ( profile->doc->LitAttrString( elem, "y", y) )
+	    ty = atoi( y.c_str());
+    sprite->SetTranslation(tx ,ty);
+  }
+  else
+    sprite->SetTranslation(0,0);
 
-	if ( profile->doc->LitAttrString( translate, "x", x) )
-	     tx = atoi( x.c_str());
+  elem = profile->doc->AccesBalise ( elem_sprite, "frame");
+  if ( elem != NULL )
+  {
+	  std::string fs_str;
+    int fs=0;
+    if ( profile->doc->LitAttrString( elem, "speed", fs_str) )
+	    fs = atoi( fs_str.c_str());
+    sprite->SetFrameSpeed(fs);
+  }
 
-	if ( profile->doc->LitAttrString( translate, "y", y) )
-	     ty = atoi( y.c_str());
+  elem = profile->doc->AccesBalise ( elem_sprite, "animation");
+  if ( elem != NULL )
+  {
+	  std::string pp_str;
+    if ( profile->doc->LitAttrString( elem, "pingpong", pp_str) )
+    if (pp_str == "yes")
+    {
+      sprite->SetPingPongMode();
+    }
+  }
 
-        sprite->SetTranslation(tx ,ty);
-   }
-   else
-        sprite->SetTranslation(0,0);
-
-   return sprite;
+  return sprite;
 }
 
 

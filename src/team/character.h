@@ -43,6 +43,7 @@ private:
   Team *m_team;
   bool desactive;       // Désactive le ver ? (ni affichage, ni gestion)
   bool is_walking;
+  bool full_walk;
 
   // energie
   uint energy;
@@ -83,6 +84,9 @@ public:
 private:
   void DrawEnergyBar (int dy) const;
   void DrawName (int dy) const;
+  void StartBreathing();
+  void StartWalking();
+  void StopWalking();
 
   virtual void SignalDeath();
   virtual void SignalDrowning();
