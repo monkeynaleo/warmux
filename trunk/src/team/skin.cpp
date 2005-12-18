@@ -66,7 +66,7 @@ void CfgSkin::Reset()
 //-----------------------------------------------------------------------------
 CfgSkin_Walking::CfgSkin_Walking() 
 { 
-   Reset(); 
+   Reset();
 }
 
 void CfgSkin_Walking::Reset()
@@ -74,6 +74,7 @@ void CfgSkin_Walking::Reset()
   CfgSkin::Reset();
   repetition_frame = 1;
   hand_position.clear();
+  full_walk = false;
 }
 //-----------------------------------------------------------------------------
 CfgSkin_Anim::CfgSkin_Anim() { Reset(); }
@@ -138,11 +139,7 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-void Skin::LoadManySkins(xmlpp::Element *root, CL_ResourceManager &res) {
-#else
 void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {   
-#endif
   many_skins.clear();
   anim.utilise = false;
 
@@ -176,12 +173,8 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
       CfgSkin config;
       xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
       Xml_LitRectTest(xml_config,config);
-#ifdef CL
-      config.image = CL_Sprite(skin_name, &res);
-#else
       config.image = resource_manager.LoadSprite( res, skin_name);
       config.image->EnableFlippingCache();
-#endif
       many_skins.insert(paire_skin(skin_name,config));
     }
     else
@@ -189,12 +182,16 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
       CfgSkin_Walking config;
       xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
       Xml_LitRectTest(xml_config,config);
-#ifdef CL
-      config.image = CL_Sprite(skin_name, &res);
-#else
       config.image = resource_manager.LoadSprite( res, skin_name);
       config.image->EnableFlippingCache();
-#endif       
+
+      LitDocXml::LitBool(xml_config, "full_walk", config.full_walk);
+      if(config.full_walk)
+      {
+        config.image->SetShowOnFinish(Sprite::show_first_frame);
+        config.image->SetLoopMode();
+        config.image->Finish();
+      }
       GetXmlConfig(xml_config,config);
 
       many_walking_skins.insert(paire_walking_skin(skin_name,config));

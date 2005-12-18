@@ -107,6 +107,7 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   current_skin = "";
   channel_step = -1;
   hidden = false;
+  image = NULL;
 
   name_text = NULL;
 }
@@ -194,6 +195,7 @@ void Character::SetDirection (int nv_direction)
 
 void Character::DrawEnergyBar(int dy) const
 {
+  if(IsDead()) return;
   energy_bar.DrawXY ( GetCenterX()-energy_bar.GetWidth()/2-camera.GetX(), 
 		      GetY()+dy-camera.GetY());
 }
@@ -202,6 +204,8 @@ void Character::DrawEnergyBar(int dy) const
 
 void Character::DrawName (int dy) const
 {
+  if(IsDead()) return;
+
   const int x =  GetCenterX();
   const int y = GetY()+dy;
 
@@ -268,7 +272,41 @@ void Character::SetEnergyDelta (int delta)
 }
 
 //-----------------------------------------------------------------------------
+void Character::StartBreathing()
+{
+  SetSkin("breathe");
+  if(current_skin == "breathe")
+  {
+    image->SetSpeedFactor((float)RandomLong(100,150)/100.0);
+    image->SetLoopMode();
+    image->Start();
+  }
+}
 
+//-----------------------------------------------------------------------------
+void Character::StartWalking()
+{
+  if(full_walk && current_skin=="breathe")
+  {
+    SetSkin("walking");
+    image->Start();
+    image->SetLoopMode();
+    image->SetSpeedFactor(1.0);
+    image->SetCurrentFrame(0);
+  }
+}
+
+//-----------------------------------------------------------------------------
+void Character::StopWalking()
+{
+  if(image!=NULL && current_skin=="walking" && full_walk)
+  {
+    image->Finish();
+    image->SetCurrentFrame(0);
+  }
+}
+
+//-----------------------------------------------------------------------------
 void Character::Draw()
 {
   if (hidden) return;
@@ -277,24 +315,33 @@ void Character::Draw()
   if (!IsActive()) return;
 
   bool dessine_perte = (losted_energy != 0);
-  if ((&ActiveCharacter() == this) 
-      && (game_loop.ReadState() != gameEND_TURN)
+  if ((&ActiveCharacter() == this
+    && game_loop.ReadState() != gameEND_TURN)
       //&& (game_loop.ReadState() != jeuANIM_FIN_TOUR)
-      )
+    || IsDead()
+     )
     dessine_perte = false;
 
   // Draw skin
-  if(!is_walking) //walking skins image update only when a keyboard key is pressed
-   image->Update();
+
+  if(!is_walking || full_walk) //walking skins image update only when a keyboard key is pressed
+  {
+    image->Update();
+    if(current_skin=="walking" && image->IsFinished())
+      StartBreathing();
+  }
    
   int x = GetX();
   int y = GetY();
   image->Draw(x,y);
    
   // Draw animation
-  if (anim.draw && current_skin=="walking"
+  if(anim.draw
+  && (current_skin=="walking" || current_skin=="breathe")
   && (!GetSkin().anim.not_while_playing || &ActiveCharacter()!=this))
-   anim.image->Draw(x,y);
+  {
+    anim.image->Draw(x,y);
+  }
 
    // Draw energy bar
   int dy = -ESPACE;
@@ -302,6 +349,7 @@ void Character::Draw()
   bool affiche_energie = config.affiche_energie_ver;
   affiche_energie &= !est_ver_actif || (game_loop.ReadState() != gamePLAYING);
   affiche_energie |= dessine_perte;
+  affiche_energie &= !IsDead();
   if (affiche_energie)
   { 
     dy -= HAUT_ENERGIE; 
@@ -341,7 +389,7 @@ void Character::Saute ()
    
   m_rebounding = false;
 
-  if(current_skin=="walking")
+  if(current_skin=="walking" || current_skin=="breathe")
     SetSkin("jump");
 
   // Initialise la force
@@ -363,7 +411,7 @@ void Character::SuperSaut ()
 
   jukebox.Play (ActiveTeam().GetSoundProfile(), "superjump");
    
-  if(current_skin=="walking")
+  if(current_skin=="walking" || current_skin=="breathe")
     SetSkin("jump");
 
   // Initialise la force
@@ -463,6 +511,8 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_MOVE_LEFT:
               if(event_type==KEY_PRESSED)
                 InitMouvementDG(PAUSE_BOUGE);
+              else
+                StartWalking();
               MoveCharacterLeft(ActiveCharacter());
                 //        action_handler.NewAction (Action(ACTION_MOVE_LEFT));
               break ;
@@ -470,7 +520,9 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_MOVE_RIGHT:
               if(event_type==KEY_PRESSED)
                 InitMouvementDG(PAUSE_BOUGE);
-    	      MoveCharacterRight(ActiveCharacter());
+              else
+                StartWalking();
+      	      MoveCharacterRight(ActiveCharacter());
     	      //        action_handler.NewAction (Action(ACTION_MOVE_RIGHT));
   	      break ;
 
@@ -487,7 +539,17 @@ void Character::HandleKeyEvent(int action, int event_type)
 	      break ;
           }
           break;
-        case KEY_RELEASED: break;
+        case KEY_RELEASED:
+          switch (action) {
+            case ACTION_MOVE_LEFT:
+            case ACTION_MOVE_RIGHT:
+               if(current_skin=="walking" && full_walk)
+               {
+                 image->SetSpeedFactor(2.0);
+                 image->SetLoopMode(0);
+               }
+               break;
+            }
         default: break;
       }
     }
@@ -507,8 +569,8 @@ void Character::Refresh()
     // C'est le début d'une animation ?
     if (!anim.draw && (anim.time < global_time.Read())) 
     {
-
       anim.image->SetCurrentFrame(0);
+      anim.image->Start();
       anim.draw = true;
     }
 
@@ -573,6 +635,8 @@ void Character::InitMouvementDG(uint pause)
 {
   m_rebounding = false;
   pause_bouge_dg = global_time.Read()+pause;
+
+  StartWalking();
 }
 
 //-----------------------------------------------------------------------------
@@ -669,6 +733,7 @@ void Character::SetSkin(std::string skin_name)
   if(skin_name == current_skin) return;
 
   assert (skin != NULL);
+
   if(AccessSkin().many_skins.find(skin_name) != 
      AccessSkin().many_skins.end())
   {
@@ -702,6 +767,7 @@ void Character::SetSkin(std::string skin_name)
        image->GetScaleFactors(sc_x,sc_y);
 
     walk_skin = &AccessSkin().many_walking_skins[skin_name];
+    full_walk = walk_skin->full_walk;
 
     image = new Sprite(*(walk_skin->image));
 
@@ -712,13 +778,14 @@ void Character::SetSkin(std::string skin_name)
     m_frame_repetition = walk_skin->repetition_frame;
 
     SetSize (image->GetWidth(), image->GetHeight());
+    StopWalking();
 
     //Restore skins direction
     if(current_skin!="" && sc_x<0.0)
       image->Scale( -1.0,1.0);
 
      
-    if(skin_name=="walking")
+    if(skin_name=="walking" || skin_name=="breathe")
     {
         anim.draw = false;
         anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
@@ -741,6 +808,8 @@ void Character::SetSkin(std::string skin_name)
 
 void Character::FrameImageSuivante()
 {
+  if(full_walk) return;
+
   m_image_frame++;
 
   if (image->GetFrameCount()-1 < (m_image_frame/m_frame_repetition)) 
@@ -751,7 +820,6 @@ void Character::FrameImageSuivante()
   if ( channel_step == -1 || !Mix_Playing(channel_step) ) {
     channel_step = jukebox.Play (m_team->GetSoundProfile(), "step");
   }
-
 }
 
 //-----------------------------------------------------------------------------
@@ -807,7 +875,12 @@ void Character::Reset()
 
   // Initialise l'image
   SetDirection( RandomBool()?1:-1 );
-  image->SetCurrentFrame ( RandomLong(0, image->GetFrameCount()-1) );
+
+  if(!full_walk)
+    image->SetCurrentFrame ( RandomLong(0, image->GetFrameCount()-1) );
+  else
+    StartBreathing();
+
   m_image_frame = image->GetCurrentFrame();   
 
 
@@ -895,6 +968,19 @@ void Character::GetHandPosition (int &x, int &y)
    int frame = image->GetCurrentFrame();
    
   assert(walk_skin!=NULL);
+
+  if(current_skin=="breathe")
+  {
+    //Hand position is first frame of the hand position of the walking skin
+    skin_translate_t hand = walk_skin->hand_position.at(0);
+    y = GetY() +hand.dy;
+    if (GetDirection() == 1)
+      x = GetX() +hand.dx;
+    else
+      x = GetX() +GetWidth() -hand.dx;
+    return;
+  }
+
   skin_translate_t hand = walk_skin->hand_position.at(frame);
   y = GetY() +hand.dy;
   if (GetDirection() == 1)

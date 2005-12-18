@@ -24,7 +24,7 @@
 
 <sprite name="helmet">
   <image file="helmet.png">
-    <grid pos="0,0" size="27,44" array="8,1" />
+    <grid pos="0,0" size="28,46" array="8,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="3" />
   <wormux repetition="5" />
@@ -67,7 +67,6 @@
   </image>
   <collision_rect dx="10" top="1" bottom="3" />
   <animation speed="150" />
-  <not_while_playing>1</not_while_playing>
 </sprite>
 
 

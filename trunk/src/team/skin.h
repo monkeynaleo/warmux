@@ -74,6 +74,7 @@ public:
    Sprite *image_helmet;
 #endif
   uint repetition_frame;
+  bool full_walk;
   std::vector<skin_translate_t> hand_position;
 public:
   CfgSkin_Walking();

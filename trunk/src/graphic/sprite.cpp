@@ -30,6 +30,10 @@
 #include <SDL_rotozoom.h>
 #include <iostream>
 #include "../game/time.h"
+
+#ifdef DBG_SPRITE
+#include <sstream>
+#endif
 // *****************************************************************************/
 
 SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed)
@@ -78,15 +82,15 @@ Sprite::Sprite()
    scale_y = 1.0f;
    alpha = 1.0f;
    rotation_deg = 0.0f;
+   speed_factor = 1.0f;
    current_frame = 0;
    frame_delta = 1;
    rot_hotspot = center;
    show = true;
-   backward = false; 
    last_update = Wormux::global_time.Read();
    show_on_finish = show_last_frame;
-//   loop = false;
    loop = true;
+   pingpong = false;
    finished = false;
    translation_x = 0;
    translation_y = 0;
@@ -94,6 +98,9 @@ Sprite::Sprite()
    have_flipping_cache = false;
    have_lastframe_cache = false;
    last_frame = NULL;
+#ifdef DBG_SPRITE
+   info = new Text("");
+#endif
 }
 
 Sprite::Sprite( const Sprite& other)
@@ -104,14 +111,15 @@ Sprite::Sprite( const Sprite& other)
    scale_y = other.scale_y;
    alpha = other.alpha;
    rotation_deg = other.rotation_deg;
+   speed_factor = other.speed_factor;
    current_frame = other.current_frame;
    rot_hotspot = center;
    frame_delta = other.frame_delta;
    show = other.show;
-   backward = other.backward;
    last_update = other.last_update;
    show_on_finish = other.show_on_finish;
    loop = other.loop;
+   pingpong = other.pingpong;
    finished = other.finished;
    translation_x = other.translation_x;
    translation_y = other.translation_y;
@@ -136,7 +144,7 @@ Sprite::Sprite( const Sprite& other)
 	  SDL_BlitSurface( other.frames[f].surface, NULL, new_surf, NULL);
 	  // re-enable the per pixel alpha in the 
 	  SDL_SetAlpha( other.frames[f].surface, SDL_SRCALPHA, 0); 
-	  frames.push_back( SpriteFrame(new_surf));
+	  frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
      }
      if(other.have_rotation_cache)
        EnableRotationCache(other.rotation_cache_size);
@@ -144,6 +152,9 @@ Sprite::Sprite( const Sprite& other)
        EnableFlippingCache();
      if(other.have_lastframe_cache)
        EnableLastFrameCache();
+#ifdef DBG_SPRITE
+   info = new Text("");
+#endif
 }
 
 Sprite::Sprite( SDL_Surface *surface)
@@ -156,15 +167,16 @@ Sprite::Sprite( SDL_Surface *surface)
    scale_y = 1.0f;
    alpha = 1.0f;
    rotation_deg = 0.0f;   
+   speed_factor = 1.0f;
    current_frame = 0;
    rot_hotspot = center;
    frame_delta = 1;
    show = true;
-   backward = false; 
    last_update = Wormux::global_time.Read();
    show_on_finish = show_last_frame;
 //   loop = false;
    loop = true;
+   pingpong = false;
    finished = false;
    translation_x = 0;
    translation_y = 0;
@@ -172,6 +184,9 @@ Sprite::Sprite( SDL_Surface *surface)
    have_flipping_cache = false;
    have_lastframe_cache = false;
    last_frame = NULL;
+#ifdef DBG_SPRITE
+   info = new Text("");
+#endif
 }
 
 Sprite::~Sprite()
@@ -201,6 +216,9 @@ Sprite::~Sprite()
 
   if(have_lastframe_cache && last_frame!=NULL)
     SDL_FreeSurface(last_frame);
+#ifdef DBG_SPRITE
+   delete info;
+#endif
 }
 
 void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y)
@@ -292,6 +310,8 @@ void Sprite::EnableLastFrameCache()
 
 void Sprite::LastFrameModified()
 {
+  //Free lastframe_cache if the next frame to be displayed
+  //is not the same as the last one.
    if(!have_lastframe_cache) return;
 
    if(last_frame!=NULL)
@@ -303,7 +323,7 @@ void Sprite::LastFrameModified()
 
 void Sprite::SetSize(unsigned int w, unsigned int h)
 {
-   assert(frame_width_pix == 0 && frame_height_pix == 0)
+  assert(frame_width_pix == 0 && frame_height_pix == 0)
 	frame_width_pix = w;
 	frame_height_pix = 0;
 }
@@ -327,9 +347,6 @@ void Sprite::SetCurrentFrame( unsigned int frame_no)
 {
   assert (frame_no < frames.size());
   current_frame = frame_no;
-  finished = false;
-  show = true;
-  last_update = Wormux::global_time.Read();
   LastFrameModified();
 }
 
@@ -357,16 +374,27 @@ void Sprite::Scale( float scale_x, float scale_y)
    LastFrameModified();
 }
 
+void Sprite::ScaleSize(int width, int height)
+{
+  Scale(float(width)/float(frame_width_pix),
+        float(height)/float(frame_height_pix));
+}
+
 void Sprite::GetScaleFactors( float &scale_x, float &scale_y)
 {
    scale_x = this->scale_x;
    scale_y = this->scale_y;
 }
 
-void Sprite::ScaleSize(int width, int height)
+void Sprite::SetFrameSpeed(unsigned int nv_fs)
 {
-  Scale(float(width)/float(frame_width_pix),
-        float(height)/float(frame_height_pix));
+   for ( unsigned int f = 0 ; f < frames.size() ; f++)
+     frames[f].delay = nv_fs;
+}
+
+void Sprite::SetSpeedFactor( float nv_speed)
+{
+   speed_factor = nv_speed;
 }
 
 void Sprite::SetAlpha( float alpha)
@@ -383,10 +411,10 @@ float Sprite::GetAlpha()
 
 void Sprite::SetRotation_deg( float angle_deg)
 {
-   while(angle_deg < 0.0)
-     angle_deg += 360.0;
    while(angle_deg >= 360.0)
      angle_deg -= 360.0;
+   while(angle_deg < 0.0)
+     angle_deg += 360.0;
 
    if(rotation_deg == angle_deg) return;
 
@@ -522,33 +550,17 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    }
 }
 
-
 void Sprite::Start()
 {
-   if (backward) {
-     current_frame = frames.size()-1;
-     frame_delta = -1;
-   } else {
-     current_frame = 0;
-     frame_delta = 1;
-   }
    show = true;
-//   loop = false;
    finished = false;
    last_update = Wormux::global_time.Read();
    LastFrameModified();
 }
-/*
-void Sprite::StartLoop()
-{
-  Start();
-  loop = true;
-}
-*/
+
 void Sprite::SetPlayBackward(bool enable)
 {
-  backward = enable;
-  if (backward)
+  if (enable)
     frame_delta = -1;
   else 
     frame_delta = 1;
@@ -659,17 +671,27 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    //SDL_gfx not working...
    SDL_Rect dr = {pos_x , pos_y , frame_width_pix, frame_height_pix};
    SDL_BlitSurface (frames[current_frame].surface, NULL, dest, &dr);
+#endif //__MINGW32__
+
+#ifdef DBG_SPRITE
+   std::ostringstream ss;
+   ss << pos_x << "," << pos_y << " " << current_frame << "/" << frames.size() << " L" << loop << " P" << pingpong;
+   std::string s = ss.str();   
+   info->Set(s);
+   info->DrawTopLeft(pos_x + frame_width_pix, pos_y);
 #endif
+
 }
 
 void Sprite::Finish()
 {
   finished = true;
-//  loop = false;
   switch(show_on_finish)
   {
-  case show_blank:
+  case show_first_frame:
     current_frame = 0;
+    break;      
+  case show_blank:
     show = false;
     break;      
   default:
@@ -678,7 +700,6 @@ void Sprite::Finish()
     break;      
   }
   LastFrameModified();
-//  frame_delta = 0;
 }
 
 void Sprite::Update()
@@ -687,28 +708,49 @@ void Sprite::Update()
   if (Wormux::global_time.Read() < (last_update + GetCurrentFrameObject().delay))
      return;
 
-   //Delta to next frame used to enable frameskip
-   //if delay between 2 frame is < fps
-   int delta_to_next_f = (Wormux::global_time.Read() - last_update) / GetCurrentFrameObject().delay;
-   last_update += delta_to_next_f * GetCurrentFrameObject().delay;
+  //Delta to next frame used to enable frameskip
+  //if delay between 2 frame is < fps
+  int delta_to_next_f = (int)((float)((Wormux::global_time.Read() - last_update) / GetCurrentFrameObject().delay) * speed_factor);
+  last_update += (int)((float)(delta_to_next_f * GetCurrentFrameObject().delay) / speed_factor);
 
-   bool finish;
-   if (frame_delta < 0)
-     finish = (current_frame + frame_delta * delta_to_next_f) <= 0;
-   else
-     finish = (frames.size()-1) <= (current_frame + frame_delta * delta_to_next_f);
+  //Animation is finished, when last frame have been fully played
+  bool finish;
+  if (frame_delta < 0)
+    finish = ((int)current_frame + frame_delta * delta_to_next_f) <= -1;
+  else
+    finish = frames.size() <= (current_frame + frame_delta * delta_to_next_f);
 
-   if (finish && !loop)
-      Finish();
-   else
-   {
-     unsigned int next_frame = ( current_frame + frame_delta * delta_to_next_f) % frames.size();
-     if(next_frame != current_frame)
-     {
-       LastFrameModified();
-       current_frame = next_frame;
-     }
-   }
+  if (finish && !loop && (!pingpong || frame_delta < 0))
+     Finish();
+  else
+  {
+    unsigned int next_frame = ( current_frame + frame_delta * delta_to_next_f ) % frames.size();
+
+    if(pingpong)
+    {
+      if( frame_delta>0 && ( current_frame + frame_delta * delta_to_next_f )>=frames.size())
+      {
+        next_frame = frames.size() - next_frame -2;
+        frame_delta = - frame_delta;
+      }
+      else
+      if( frame_delta<0 && ( (int)current_frame + frame_delta * delta_to_next_f ) <= -1)
+      {
+        next_frame = (-((int)current_frame + frame_delta * delta_to_next_f )) % frames.size();
+        frame_delta = - frame_delta;
+      }
+    }
+
+    if(next_frame != current_frame)
+    {
+      if(!(next_frame >= 0 && next_frame < frames.size()))
+      {
+        next_frame = 0;
+      }
+      LastFrameModified();
+      current_frame = next_frame;
+    }
+  }
 }
 
 void Sprite::Draw(int pos_x, int pos_y)
