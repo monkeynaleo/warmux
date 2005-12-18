@@ -26,6 +26,7 @@
 #include "colors.h"
 #include "../tool/file_tools.h"
 #include <exception>
+#include "../map/map.h"
 //-----------------------------------------------------------------------------
 
 Font huge_font;
@@ -107,6 +108,7 @@ void Font::WriteLeft (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface,NULL,app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x,dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 // //-----------------------------------------------------------------------------
@@ -123,6 +125,7 @@ void Font::WriteLeftBottom (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface,NULL,app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x,dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 // //-----------------------------------------------------------------------------
@@ -139,6 +142,7 @@ void Font::WriteRight (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x,dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 // //-----------------------------------------------------------------------------
@@ -155,6 +159,7 @@ void Font::WriteCenter (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x,dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 // //-----------------------------------------------------------------------------
@@ -171,6 +176,7 @@ void Font::WriteCenterTop (int x, int y, const std::string &txt,
   dst_rect.w = text_surface->w;
 
   SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x,dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 //-----------------------------------------------------------------------------

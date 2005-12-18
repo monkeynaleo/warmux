@@ -74,8 +74,8 @@ int Camera::GetY() const { return pos.y; }
 
 //-----------------------------------------------------------------------------
 
-bool Camera::HasFixedX() const { return (monde.GetWidth() <= GetWidth()); }
-bool Camera::HasFixedY() const { return (monde.GetHeight() <= GetHeight()); }
+bool Camera::HasFixedX() const { return (world.GetWidth() <= GetWidth()); }
+bool Camera::HasFixedY() const { return (world.GetHeight() <= GetHeight()); }
 
 //-----------------------------------------------------------------------------
 
@@ -87,10 +87,10 @@ void Camera::SetXYabs (int x, int y)
   if(!TerrainActif().infinite_bg)
   {
     if (!HasFixedX()) {
-      pos.x = BorneLong(x, 0, monde.GetWidth()-GetWidth());
+      pos.x = BorneLong(x, 0, world.GetWidth()-GetWidth());
     } else {
-      //pos.x = BorneLong(x, 0, GetWidth()-monde.GetWidth());
-        pos.x = BorneLong(x, monde.GetWidth()-GetWidth(), 0);
+      //pos.x = BorneLong(x, 0, GetWidth()-world.GetWidth());
+        pos.x = BorneLong(x, world.GetWidth()-GetWidth(), 0);
     }
   }
   else
@@ -101,16 +101,16 @@ void Camera::SetXYabs (int x, int y)
   if(!TerrainActif().infinite_bg)
   {
     if (!HasFixedY()) {
-      pos.y = BorneLong(y, 0, monde.GetHeight()-GetHeight());
+      pos.y = BorneLong(y, 0, world.GetHeight()-GetHeight());
     } else {
-      //pos.y = BorneLong(y, 0, GetHeight()-monde.GetHeight());
-          pos.y = BorneLong(y, monde.GetHeight()-GetHeight(), 0);
+      //pos.y = BorneLong(y, 0, GetHeight()-world.GetHeight());
+          pos.y = BorneLong(y, world.GetHeight()-GetHeight(), 0);
     }
   }
   else
   {
-    if( y > (int)monde.GetHeight()-(int)GetHeight() )
-      pos.y = (int)monde.GetHeight()-(int)GetHeight();
+    if( y > (int)world.GetHeight()-(int)GetHeight() )
+      pos.y = (int)world.GetHeight()-(int)GetHeight();
     else
       pos.y = y;
   }    
@@ -157,13 +157,13 @@ void Camera::Centre (const PhysicalObj &obj)
     x  = (int)obj.GetX();
     x -= ((int)GetWidth() - (int)obj.GetWidth())/(int)2;
   } else {
-    x = ((int)monde.GetWidth() - (int)GetWidth()) / 2;
+    x = ((int)world.GetWidth() - (int)GetWidth()) / 2;
   }
   if (!HasFixedY()) {
     y  = (int)obj.GetY();
     y -= ((int)GetHeight() - (int)obj.GetHeight())/(int)2;
   } else {
-    y = ((int)monde.GetHeight() - (int)GetHeight()) / 2;
+    y = ((int)world.GetHeight() - (int)GetHeight()) / 2;
   }
   SetXYabs (x,y);
 }

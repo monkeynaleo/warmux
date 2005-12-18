@@ -30,6 +30,8 @@
 #include <SDL_rotozoom.h>
 #include <iostream>
 #include "../game/time.h"
+#include "../tool/Rectangle.h"
+#include "../map/map.h"
 
 #ifdef DBG_SPRITE
 #include <sstream>
@@ -575,6 +577,10 @@ void Sprite::SetPlayBackward(bool enable)
 void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 {
   if (!show) return;
+
+  
+  // For the cache mechanism
+  world.ToRedrawOnScreen(Rectanglei(pos_x, pos_y, frame_width_pix, frame_height_pix));
 
 #ifndef __MINGW32__
    SDL_Surface *tmp_surface = NULL;

@@ -78,8 +78,11 @@ bool CalculeHauteurBouge (Character &character, int &hauteur)
 
   // Calcule la hauteur a grimper
   for (hauteur=-1;
-       !character.IsInVacuum(character.GetDirection(), hauteur)
-/*	 && monde.EstDansVide_haut(character,character.GetDirection(), hauteur-1)*/;
+/*       EstDansVide_haut(character,character.GetDirection(), hauteur)
+	   && !EstDansVide_bas(character,character.GetDirection(), hauteur); */
+       !character.IsInVacuum(character.GetDirection(), hauteur-1)
+	 && world.EstDansVide_haut(character,character.GetDirection(), hauteur-1);
+/*	 && monde.EstDansVide_haut(character,character.GetDirection(), hauteur-1)*/
        --hauteur)
   {
     // C'est trop haut pour grimper :-p

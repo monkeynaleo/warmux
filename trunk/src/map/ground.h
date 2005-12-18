@@ -16,22 +16,20 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Terrain de jeu.
+ * Ground
  *****************************************************************************/
 
-#ifndef TERRAIN_H
-#define TERRAIN_H
+#ifndef GROUND_H
+#define GROUND_H
 //-----------------------------------------------------------------------------
 #include "tile.h"
 #include <list>
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
+
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
 
-class Terrain : public Tile 
+class Ground : public Tile 
 {
 private:
   bool ouvert;
@@ -41,7 +39,7 @@ private:
   int lasty;
 
 public:
-  Terrain();
+  Ground();
   void Init();
   void Draw();
   void Reset();

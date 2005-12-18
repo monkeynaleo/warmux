@@ -80,10 +80,10 @@ bool find_first_contact_point (int x1, int y1, double angle, int length,
   x2 = x1 + (int)(length * cos(angle));
   y2 = y1 + (int)(length * sin(angle));
 
-  while(!monde.EstHorsMondeXY(cx, cy) &&
+  while(!world.EstHorsMondeXY(cx, cy) &&
 	(length > 0))
     {
-      if (!monde.EstDansVide(cx, cy))
+      if (!world.EstDansVide(cx, cy))
 	return true ;
 
       x += x_step ;

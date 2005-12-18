@@ -32,20 +32,23 @@
 
 extern const uint MAX_WIND_OBJECTS;
 
-class Monde
+class Map
 {
  private:
   Text * author_info1;
   Text * author_info2;
 
 public:
-  Monde();
+  Map();
+  ~Map();
    
-  Wormux::Terrain terrain;
-  Wormux::Ciel ciel;
+  Wormux::Ground ground;
+  Wormux::Sky sky;
   double dst_min_entre_vers;
   Water water;
-  std::list<Rectanglei> to_redraw;
+
+  std::list<Rectanglei> *to_redraw;
+  std::list<Rectanglei> *to_redraw_now;
 
 public:
   //void Init();
@@ -56,6 +59,11 @@ public:
   void DrawWater();
   void DrawSky();
   void DrawAuthorName();
+
+  // To manage the cache mechanism
+  void ToRedrawOnMap(Rectanglei r);
+  void ToRedrawOnScreen(Rectanglei r);
+  void SwitchDrawingCache();
 
   // Est-on dans le monde ou dans le vide ?
   bool EstDansVide (int x, int y);
@@ -77,16 +85,16 @@ public:
   bool EstHorsMonde (const Point2i &pos) const;
 
   // C'est un terrain ouvert ?
-  bool EstOuvert() const { return terrain.EstOuvert(); }
+  bool EstOuvert() const { return ground.EstOuvert(); }
 
   // Creuse un pixel
   void Creuse(uint x, uint y, SDL_Surface *alpha_sur);
    
   // Lit la taille du monde
-  uint GetWidth() const { return terrain.GetWidth(); }
-  uint GetHeight() const { return terrain.GetHeight(); }
+  uint GetWidth() const { return ground.GetWidth(); }
+  uint GetHeight() const { return ground.GetHeight(); }
 };
 
-extern Monde monde;
+extern Map world;
 //-----------------------------------------------------------------------------
 #endif

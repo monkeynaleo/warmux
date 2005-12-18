@@ -170,7 +170,7 @@ void Avion::Tire()
   else
     {
       InitVector (speed_vector, -air_attack.cfg().speed, 0) ;
-      SetX (monde.GetWidth()-1);
+      SetX (world.GetWidth()-1);
     }
 
   SetSpeedXY (speed_vector);

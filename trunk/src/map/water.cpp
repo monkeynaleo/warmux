@@ -123,7 +123,7 @@ void Water::Refresh()
   }
 
   int x = -surface->w+vague;
-  int y = monde.GetHeight()-(hauteur_eau + height_mvt);
+  int y = world.GetHeight()-(hauteur_eau + height_mvt);
 
   double decree = (double) 2*M_PI/360;
 
@@ -137,7 +137,7 @@ void Water::Refresh()
 //    {
       if (0<=x+offset) height.at(x+offset) = (int)y_pos;
 //      offset += 180;
-//    } while ((uint)offset+x < monde.GetWidth());
+//    } while ((uint)offset+x < world.GetWidth());
 
     angle1 += 2*decree;
     angle2 += 4*decree;
@@ -153,8 +153,8 @@ void Water::Draw()
 {
   if (!actif) return;
 
-/*  for(uint x=0; x<monde.GetWidth(); x++)
-  for(uint y=height.at(x); y<monde.GetHeight(); y+=surface->h)
+/*  for(uint x=0; x<world.GetWidth(); x++)
+  for(uint y=height.at(x); y<world.GetHeight(); y+=surface->h)
   {
      AbsoluteDraw( surface, x, y);
   }
@@ -163,7 +163,7 @@ void Water::Draw()
   SDL_SetAlpha(pattern, 0, 0);
   SDL_FillRect(pattern, NULL, 0x00000000);
 
-  int y0 = monde.GetHeight()-(hauteur_eau + height_mvt)-20;
+  int y0 = world.GetHeight()-(hauteur_eau + height_mvt)-20;
 
   for(uint x=0; x<180; x++)
   {
@@ -198,7 +198,7 @@ int Water::GetHeight(int x)
     return height.at(x);
   }
   else
-    return monde.GetHeight();
+    return world.GetHeight();
 }
 
 //-----------------------------------------------------------------------------

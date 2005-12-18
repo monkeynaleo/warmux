@@ -41,13 +41,13 @@ namespace Wormux {
 
 //-----------------------------------------------------------------------------
 
-Terrain::Terrain()
+Ground::Ground()
 { //FIXME (a effacer) 
 }
 
 //-----------------------------------------------------------------------------
 
-void Terrain::Init()
+void Ground::Init()
 {
   std::cout << "Ground initialization...";
   std::cout.flush();
@@ -70,7 +70,7 @@ void Terrain::Init()
 
 //-----------------------------------------------------------------------------
 
-void Terrain::Reset()
+void Ground::Reset()
 {
   Init();
   lastx = lasty = INT_MAX;
@@ -79,11 +79,11 @@ void Terrain::Reset()
 //-----------------------------------------------------------------------------
 
 // Lit la valeur alpha du pixel (x,y)
-bool Terrain::EstDansVide (int x, int y)
+bool Ground::EstDansVide (int x, int y)
 { 
   // En dehors du monde : c'est vide :-p
   //  if (monde.EstHorsMondeXY(x,y)) return config.exterieur_monde_vide;
-  assert (!monde.EstHorsMondeXY(x,y));
+  assert (!world.EstHorsMondeXY(x,y));
   if(TerrainActif().infinite_bg)
   {
     if(x < 0 || y<0 || x>static_cast<int>(GetWidth()) || y>static_cast<int>(GetHeight()))
@@ -99,7 +99,7 @@ bool Terrain::EstDansVide (int x, int y)
 //l'angle est toujours > 0.
 //Renvoie -1.0 s'il n'y a pas de tangeante (si le pixel(x,y) ne touche
 //aucun autre morceau de terrain)
-double Terrain::Tangeante(int x,int y)
+double Ground::Tangeante(int x,int y)
 {
   //Approxiamtion:on renvoie la corde de la courbe formée
   //par le terrain...
@@ -149,16 +149,16 @@ double Terrain::Tangeante(int x,int y)
 }
 
 //-----------------------------------------------------------------------------
-bool Terrain::PointContigu(int x,int y,  int & p_x,int & p_y,
+bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
                            int pas_bon_x,int pas_bon_y)
 {
   //Cherche un pixel autour du pixel(x,y) qui est à la limite entre
   //le terrin et le vide.
   //renvoie true (+ p_x et p_y) si on a trouvé qqch, sinon false
-  if(monde.EstHorsMonde(Point2i(x-1,y))
-  || monde.EstHorsMonde(Point2i(x+1,y))
-  || monde.EstHorsMonde(Point2i(x,y-1))
-  || monde.EstHorsMonde(Point2i(x,y+1)) )
+  if(world.EstHorsMonde(Point2i(x-1,y))
+  || world.EstHorsMonde(Point2i(x+1,y))
+  || world.EstHorsMonde(Point2i(x,y-1))
+  || world.EstHorsMonde(Point2i(x,y+1)) )
     return false;
    
   //regarde en haut à gauche
@@ -254,7 +254,7 @@ bool Terrain::PointContigu(int x,int y,  int & p_x,int & p_y,
 
 //-----------------------------------------------------------------------------
 
-void Terrain::Draw()
+void Ground::Draw()
 {
   int cx = camera.GetX();
   int cy = camera.GetY();  
@@ -270,8 +270,8 @@ void Terrain::Draw()
   lasty = cy; 
 
   std::list<Rectanglei>::iterator
-    it=monde.to_redraw.begin(),
-    end=monde.to_redraw.end();
+    it=world.to_redraw_now->begin(),
+    end=world.to_redraw_now->end();
   for (; it != end; ++it) DrawTile_Clipped(*it);
 }
 

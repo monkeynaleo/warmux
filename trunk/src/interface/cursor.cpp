@@ -67,18 +67,11 @@ void CurseurVer::Draw()
   if (obj_designe -> IsGhost()) return;
 
   // Dessine le curseur autour du ver
-#ifdef CL
-  CL_Point centre = obj_designe -> GetCenter();
-#else
   Point2i centre = obj_designe->GetCenter();
-#endif
   uint x = centre.x - image->GetWidth()/2;
   uint y = centre.y - image->GetHeight()/2 - y_mouvement;
-#ifdef CL
-   image.draw (x, y);
-#else
-   image->Draw(x,y); 
-#endif
+  
+  image->Draw(x,y); 
 }
 
 //-----------------------------------------------------------------------------
@@ -149,13 +142,8 @@ void CurseurVer::Cache()
 
 void CurseurVer::Init()
 {
-#ifdef CL
-  CL_ResourceManager *res=graphisme.LitRes();
-  image = CL_Sprite("gfx/curseur", res);
-#else
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
    image = resource_manager.LoadSprite( res, "gfx/curseur");
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -181,11 +169,7 @@ void CurseurVer::SuitVerActif()
   temps = Wormux::global_time.Read();
   clignote = true;
   nbr_boucle = NBR_BOUCLE_FLECHE;
-#ifdef CL
-  image.set_frame (1);
-#else
-   image->SetCurrentFrame(1);
-#endif
+  image->SetCurrentFrame(1);
 }
 
 //-----------------------------------------------------------------------------
@@ -213,25 +197,15 @@ void CurseurVer::PointeObj (PhysicalObj *obj)
 
   const Character* character = dynamic_cast<const Character*> (obj_designe);
 
-#ifdef CL
   if (game_loop.character_already_chosen || &character->GetTeam()!=&ActiveTeam() ) {
     actif = false;
-    //image.set_frame (2);
+    //image->SetCurrentFrame (2);
   }
   else {
     actif = true;
-    image.set_frame (0);
+    image->SetCurrentFrame (0);
   }
-#else
-   if (game_loop.character_already_chosen || &character->GetTeam()!=&ActiveTeam() ) {
-     actif = false;
-     //image->SetCurrentFrame (2);
-   }
-   else {
-     actif = true;
-     image->SetCurrentFrame (0);
-   }
-#endif
+
 }
 
 //-----------------------------------------------------------------------------

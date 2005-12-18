@@ -100,7 +100,7 @@ void InitGameData_NetServer()
 	
   std::cout << "o " << _("Load map") << std::endl;
   action_handler.NewAction (ActionString(ACTION_SET_MAP, TerrainActif().name));
-  monde.Reset();
+  world.Reset();
 
   std::cout << "o " << _("Initialise teams") << std::endl;
   teams_list.Reset();
@@ -209,7 +209,7 @@ void InitGameData_Local()
 {
   // Placement des vers
   std::cout << "o " << _("Find a random position for worms") << std::endl;
-  monde.Reset();
+  world.Reset();
   lst_terrain.TerrainActif().FreeData();
   teams_list.Reset();
 
@@ -407,7 +407,7 @@ void GameLoop::Refresh()
   }
   
   // Refresh the map
-  monde.Refresh();
+  world.Refresh();
 
 #if 0 // #ifdef DEBUG
   // Draw les messages de debug
@@ -421,12 +421,12 @@ void GameLoop::Draw ()
 {
   // Draw the sky 
   StatStart("GameDraw:sky");
-  monde.DrawSky();
+  world.DrawSky();
   StatStop("GameDraw:sky");
 
   // Draw the map
   StatStart("GameDraw:world");
-  monde.Draw();
+  world.Draw();
   StatStop("GameDraw:world");
 
   // Draw the characters 
@@ -449,7 +449,7 @@ void GameLoop::Draw ()
   curseur_ver.Draw();
 
   // Draw water
-  monde.DrawWater();
+  world.DrawWater();
 
   // Draw teams' information
   POUR_CHAQUE_EQUIPE(team) (**team).Draw();
@@ -458,7 +458,7 @@ void GameLoop::Draw ()
   game_messages.Draw();
 
   // Display the name of map's author
-  monde.DrawAuthorName();
+  world.DrawAuthorName();
 
   // Display number of frames by second
   image_par_seconde.Draw();
@@ -472,6 +472,14 @@ void GameLoop::Draw ()
   // Draw the interface (current team's information, weapon's ammo)
   StatStart("GameDraw:interface");
   interface.Draw ();
+
+  // Ask to redraw the top and the bottom of the screen for the interface
+  Rectanglei top(0,0, app.sdlwindow->w, 50); 
+  world.ToRedrawOnScreen(top);
+  
+  Rectanglei bottom(0,app.sdlwindow->h-120, app.sdlwindow->w, 100); 
+  world.ToRedrawOnScreen(bottom);
+
   StatStop("GameDraw:interface");
 
   StatStart("GameDraw:end");
@@ -480,9 +488,11 @@ void GameLoop::Draw ()
   wind.Draw();
   StatStop("GameDraw:end");
 
+  // Clear the cache mechanism
+  world.SwitchDrawingCache();
+
   // Add one frame to the fps counter ;-)
   image_par_seconde.AjouteUneImage();
-  monde.to_redraw.clear();
 }
 
 //-----------------------------------------------------------------------------

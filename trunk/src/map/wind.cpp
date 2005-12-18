@@ -69,7 +69,7 @@ void WindParticle::Init()
     sprite->EnableLastFrameCache();
   sprite->SetCurrentFrame ( RandomLong(0, sprite->GetFrameCount()-1));
    
-  SetXY(RandomLong(0, monde.GetWidth()-1), RandomLong(0, monde.GetHeight()-1));
+  SetXY(RandomLong(0, world.GetWidth()-1), RandomLong(0, world.GetHeight()-1));
 
   //Mass = mass_mean + or - 25%
   mass = TerrainActif().wind.particle_mass;
