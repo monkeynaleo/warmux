@@ -41,23 +41,32 @@ const uint AUTHOR_INFO_TIME = 5000; // ms
 const uint AUTHOR_INFO_X = 30;
 const uint AUTHOR_INFO_Y = 50;
 //-----------------------------------------------------------------------------
-Monde monde;
+Map world;
 //-----------------------------------------------------------------------------
 
-Monde::Monde()
+Map::Map()
 {
   dst_min_entre_vers = DST_MIN_ENTRE_VERS;
+
+  to_redraw_now = new std::list<Rectanglei>;
+  to_redraw = new std::list<Rectanglei>;
+}
+
+Map::~Map()
+{
+ delete to_redraw_now;
+ delete to_redraw;
 }
 
 //NOT USED ANYMORE
-// void Monde::Init()
+// void Map::Init()
 // {
 
-//   ciel.Init();
+//   sky.Init();
 //   water.Init();
 
 //   cout.flush();
-//   terrain.Init();
+//   ground.Init();
 
 //   // Distance minimale entre les vers
 //   dst_min_entre_vers = DST_MIN_ENTRE_VERS;
@@ -65,25 +74,28 @@ Monde::Monde()
 
 //-----------------------------------------------------------------------------
 
-void Monde::Reset()
+void Map::Reset()
 {
-  ciel.Reset();
-  terrain.Reset();
+  sky.Reset();
+  ground.Reset();
   water.Reset();
   wind.Reset();
 
   // Configure le jeu selon que le terrain soit ouvert ou non
-  bool ouvert = terrain.EstOuvert();
+  bool ouvert = ground.EstOuvert();
   caisse.Active (ouvert);
   config.exterieur_monde_vide = ouvert;
 
   delete author_info1; author_info1 = NULL;
   delete author_info2; author_info2 = NULL;
+
+  to_redraw_now->clear();
+  to_redraw->clear();
 }
 
 //-----------------------------------------------------------------------------
 
-void Monde::Refresh()
+void Map::Refresh()
 {
   water.Refresh();
   wind.Refresh();
@@ -91,72 +103,101 @@ void Monde::Refresh()
 
 //-----------------------------------------------------------------------------
 
-void Monde::FreeMem() 
+void Map::FreeMem() 
 { 
-  terrain.Free(); 
-  ciel.Free(); 
+  ground.Free(); 
+  sky.Free(); 
   water.Free();
+
+  to_redraw_now->clear();
+  to_redraw->clear();
 }
 
 //-----------------------------------------------------------------------------
 
-
-void Monde::Creuse (uint x, uint y, SDL_Surface *surface)
+void Map::ToRedrawOnMap(Rectanglei r)
 {
-   terrain.Dig (x, y, surface);
+  to_redraw->push_back(r);
+
 }
 
 //-----------------------------------------------------------------------------
 
-void Monde::DrawSky()
-{ ciel.Draw(); }
+void Map::ToRedrawOnScreen(Rectanglei r)
+{
+  to_redraw->push_back(Rectanglei(r.x+camera.GetX(), 
+				  r.y+camera.GetY(), r.w, r.h));
+}
 
 //-----------------------------------------------------------------------------
 
-void Monde::DrawWater()
+void Map::SwitchDrawingCache()
+{
+  std::list<Rectanglei> *tmp = to_redraw_now;
+  to_redraw_now = to_redraw;
+  to_redraw = tmp;
+  to_redraw->clear();
+}
+
+//-----------------------------------------------------------------------------
+
+void Map::Creuse (uint x, uint y, SDL_Surface *surface)
+{
+   ground.Dig (x, y, surface);
+   to_redraw->push_back(Rectanglei(x, y, surface->w, surface->h));
+}
+
+//-----------------------------------------------------------------------------
+
+void Map::DrawSky()
+{ sky.Draw(); }
+
+//-----------------------------------------------------------------------------
+
+void Map::DrawWater()
 { water.Draw(); }
 
 //-----------------------------------------------------------------------------
 
-void Monde::Draw()
+void Map::Draw()
 { 
   //StatStart("GameDraw: wind_particles");
   wind.DrawParticles();
   //StatStop("GameDraw: wind_particles");
 
   //StatStart("GameDraw: ground");
-  terrain.Draw(); 
+  ground.Draw(); 
   //StatStop("GameDraw: ground");
 }
 
 //-----------------------------------------------------------------------------
 
-bool Monde::EstHorsMondeX(int x) const
+bool Map::EstHorsMondeX(int x) const
 { return ((x < 0) || ((int)GetWidth() <= x)) && !TerrainActif().infinite_bg; }
 
-bool Monde::EstHorsMondeY(int y) const
+bool Map::EstHorsMondeY(int y) const
 { return (((y < 0) && !TerrainActif().infinite_bg) || ((int)GetHeight() <= y)); }
 
-bool Monde::EstHorsMondeXlarg(int x, uint larg) const
+bool Map::EstHorsMondeXlarg(int x, uint larg) const
 { return ((x+(int)larg-1 < 0) || ((int)GetWidth() <= x)) && !TerrainActif().infinite_bg; }
 
-bool Monde::EstHorsMondeYhaut(int y, uint haut) const
+bool Map::EstHorsMondeYhaut(int y, uint haut) const
 { return ((y+(int)haut-1 < 0  && !TerrainActif().infinite_bg) || ((int)GetHeight() <= y)); }
 
-bool Monde::EstHorsMondeXY(int x, int y) const
+bool Map::EstHorsMondeXY(int x, int y) const
 { return EstHorsMondeX(x) || EstHorsMondeY(y) && !TerrainActif().infinite_bg; }
 
-bool Monde::EstHorsMonde (const Point2i &pos) const
+bool Map::EstHorsMonde (const Point2i &pos) const
 { return EstHorsMondeXY (pos.x, pos.y); }
 
 //-----------------------------------------------------------------------------
 
-bool Monde::EstDansVide(int x, int y)
-{ return terrain.EstDansVide (x,y); }
+bool Map::EstDansVide(int x, int y)
+{ return ground.EstDansVide (x,y); }
 
 //-----------------------------------------------------------------------------
 
-bool Monde::LigneH_EstDansVide (int ox, int y, int width)
+bool Map::LigneH_EstDansVide (int ox, int y, int width)
 { 
   // Traite une ligne
   for (int i=0; i<width; i++) 
@@ -172,7 +213,7 @@ bool Monde::LigneH_EstDansVide (int ox, int y, int width)
 
 //-----------------------------------------------------------------------------
 
-bool Monde::LigneV_EstDansVide (int x, int top, int bottom)
+bool Map::LigneV_EstDansVide (int x, int top, int bottom)
 { 
   assert (top <= bottom);
 
@@ -192,7 +233,7 @@ bool Monde::LigneV_EstDansVide (int x, int top, int bottom)
 
 //-----------------------------------------------------------------------------
 
-bool Monde::RectEstDansVide (const Rectanglei &prect)
+bool Map::RectEstDansVide (const Rectanglei &prect)
 {
    Rectanglei rect(prect);
 
@@ -214,7 +255,7 @@ bool Monde::RectEstDansVide (const Rectanglei &prect)
 //-----------------------------------------------------------------------------
 
 
-bool Monde::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
+bool Map::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
 {
   return LigneH_EstDansVide (obj.GetTestRect().x+dx,
 			     obj.GetTestRect().y+obj.GetTestRect().h+dy,
@@ -224,7 +265,7 @@ bool Monde::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
 //-----------------------------------------------------------------------------
 
 
-bool Monde::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
+bool Map::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
 {
   return LigneH_EstDansVide (obj.GetTestRect().x+dx,
 			     obj.GetTestRect().y+dy,
@@ -233,7 +274,7 @@ bool Monde::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
 
 //-----------------------------------------------------------------------------
 
-void Monde::DrawAuthorName()
+void Map::DrawAuthorName()
 {
   if (AUTHOR_INFO_TIME < global_time.Read()) {
     if (author_info1 != NULL) {

@@ -25,11 +25,7 @@
 #include "../include/base.h"
 #include "../weapon/weapon.h"
 #include "../object/physical_obj.h"
-#ifdef CL
-#include <ClanLib/core.h>
-#else
 #include "../tool/Point.h"
-#endif
 //-----------------------------------------------------------------------------
 
 struct SDL_Surface;
@@ -37,16 +33,7 @@ struct Profile;
 
 // Applique au explosion au point centre
 // Lance ExceptionMortVer() si le ver actif meurt
-#ifdef CL
-void AppliqueExplosion (const CL_Point &explosion,
-			const CL_Point &trou,
-			CL_Surface &impact,
-			const ExplosiveWeaponConfig &config,
-			PhysicalObj *obj_exclu, 
-			const std::string& son="weapon/explosion",
-			bool fire_particle = true
-			);
-#else
+
 void AppliqueExplosion (const Point2i &explosion,
 			const Point2i &trou,
 			SDL_Surface *impact,
@@ -55,14 +42,10 @@ void AppliqueExplosion (const Point2i &explosion,
 			const std::string& son="weapon/explosion",
 			bool fire_particle = true
 			);
-#endif
 
 void UpdateStrengthBar(double strength);
 
-#ifndef CL
-
 extern Profile *weapons_res_profile; 
 
-#endif
 //-----------------------------------------------------------------------------
 #endif

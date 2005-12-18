@@ -57,13 +57,8 @@ BalleGun::BalleGun() : WeaponProjectile("balle_gun")
 
 void BalleGun::Init()
 {
-#ifdef CL
-  image = CL_Sprite("gun_bullet", &graphisme.weapons);
-  SetSize (image.get_width(), image.get_height());
-#else
   image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
   SetSize (image->GetWidth(), image->GetHeight());
-#endif 
   SetMass (0.02);
   SetWindFactor(0.05);
   SetAirResistFactor(0);
@@ -79,13 +74,9 @@ void BalleGun::Tire()
   // Set the initial position.
   int x,y;
   ActiveTeam().GetWeapon().RotationPointXY (x, y);
-#ifdef CL
-  x -= image.get_width()/2;
-  y -= image.get_height()/2;
-#else
+
   x -= image->GetWidth()/2;
   y -= image->GetHeight()/2;
-#endif
   SetXY (x,y);
    
   // Set the initial speed.
@@ -118,11 +109,7 @@ Gun::Gun() : Weapon(WEAPON_GUN, "gun")
 void Gun::p_Init()
 {
   balle.Init();
-#ifdef CL
-  impact = CL_Surface("gun_impact", &graphisme.weapons);  
-#else
   impact = resource_manager.LoadImage( weapons_res_profile, "gun_impact");  
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -170,12 +157,7 @@ bool Gun::p_Shoot()
   lst_points.clear();
   lst_objets.AjouteObjet (&balle, true);
 
-  // Cache le curseur
-#ifdef CL
-  jukebox.Play("weapon/gun");
-#else
   jukebox.Play("share","weapon/gun");
-#endif
 
   return true;
 }
@@ -184,11 +166,8 @@ bool Gun::p_Shoot()
 
 void Gun::Refresh()
 {
-#ifdef CL
-  m_image.set_scale(ActiveCharacter().GetDirection(), 1);
-#else
   m_image->Scale(ActiveCharacter().GetDirection(), 1);   
-#endif
+
    
   if (balle.is_active)
     {
@@ -196,11 +175,8 @@ void Gun::Refresh()
       if (temps_capture < global_time.Read()) 
 	{
 	  temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
-#ifdef CL
-	  CL_Point pos_balle = balle.GetPos();
-#else
+
 	  Point2i pos_balle = balle.GetPos();
-#endif	   
 	  pos_balle.x += balle.GetWidth()/2;
 	  pos_balle.y += balle.GetHeight()/2;
 	  lst_points.push_back (pos_balle);
@@ -226,15 +202,9 @@ void Gun::Refresh()
 	  // Creuse le monde
 	  if (!obj)
 	    {
-#ifdef CL
-	       monde.Creuse (balle.GetX() - impact.get_width()/2,
-			    balle.GetY() - impact.get_height()/2,
-			    impact);
-#else
-	       monde.Creuse (balle.GetX() - impact->w/2,
+	       world.Creuse (balle.GetX() - impact->w/2,
 			    balle.GetY() - impact->h/2,
 			    impact);
-#endif
 	    }
 	}
       

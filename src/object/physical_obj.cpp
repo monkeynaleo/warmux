@@ -130,8 +130,8 @@ void PhysicalObj::SetXY (int x, int y)
 {
   if (x != GetX() || y != GetY())
   {
-    monde.to_redraw.push_back(GetRect());
-    monde.to_redraw.push_back(Rectanglei(x, y, m_width, m_height));
+    world.ToRedrawOnMap(GetRect());
+    world.ToRedrawOnMap(Rectanglei(x, y, m_width, m_height));
   }      
 
   if (IsOutsideWorldXY (static_cast<int>(x), static_cast<int>(y)))
@@ -304,8 +304,8 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
       {
 	if (!config.exterieur_monde_vide)
 	  {
-	    tmp_x = BorneLong(tmp_x, 0, monde.GetWidth() -GetWidth() -1);
-	    tmp_y = BorneLong(tmp_y, 0, monde.GetHeight() -GetHeight() -1);
+	    tmp_x = BorneLong(tmp_x, 0, world.GetWidth() -GetWidth() -1);
+	    tmp_y = BorneLong(tmp_y, 0, world.GetHeight() -GetHeight() -1);
 #ifdef DEBUG_CHG_ETAT
 	    COUT_DEBUG << "DeplaceTestCollision touche un bord :" 
 		       << tmp_x << "," << tmp_y
@@ -337,7 +337,7 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
   // !!! uninitialised values of cx and cy!!
 	if(ContactPoint(cx,cy))
   {
-    contact_angle = monde.terrain.Tangeante(cx,cy);
+    contact_angle = world.ground.Tangeante(cx,cy);
     contact_x = (double)cx / PIXEL_PER_METER ;
     contact_y = (double)cy / PIXEL_PER_METER ;
   }
@@ -498,8 +498,8 @@ bool PhysicalObj::IsOutsideWorldXY (int x, int y) const
 {
   x += m_test_left;
   y += m_test_top;
-  if (monde.EstHorsMondeXlarg(x, GetTestWidth())) return true;
-  if (monde.EstHorsMondeYhaut(y, GetTestHeight()))
+  if (world.EstHorsMondeXlarg(x, GetTestWidth())) return true;
+  if (world.EstHorsMondeYhaut(y, GetTestHeight()))
   {
     if (m_allow_negative_y)
     {
@@ -522,7 +522,7 @@ bool PhysicalObj::FootsOnFloor(int y) const
   // If outside is empty, the object can't hit the ground !
   if (config.exterieur_monde_vide) return false;
 
-  const int y_max = monde.GetHeight()-m_height +m_test_bottom;
+  const int y_max = world.GetHeight()-m_height +m_test_bottom;
   return (y_max <= y);
 }
 
@@ -546,7 +546,7 @@ bool PhysicalObj::IsInVacuumXY (int x, int y) const
 //   {
 //    if ((0<=rect.bottom) && (rect.top<0)) rect.top = 0;
 //  }
-  return monde.RectEstDansVide (rect);
+  return world.RectEstDansVide (rect);
 }
 
 //-----------------------------------------------------------------------------
@@ -584,7 +584,7 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
        }
   }
    
-/*  if ( monde.RectEstDansVide (Rectanglei(rect)))
+/*  if ( world.RectEstDansVide (Rectanglei(rect)))
      {
 	std::cout << "physicalobk.cpp:629: physobj " << rect.x << " " << rect.y <<" (" << rect.w << "," << rect.h <<") dans le vide" << std::endl;
      }
@@ -593,7 +593,7 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
 	std::cout << "physicalobk.cpp:629: physobj " << rect.x << " " << rect.y <<" EST POSE" << std::endl;	
      }*/
    
-  return monde.RectEstDansVide (rect);
+  return world.RectEstDansVide (rect);
 }
 
 //-----------------------------------------------------------------------------
@@ -601,9 +601,9 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
 bool PhysicalObj::IsInWater () const
 {
   assert (!IsGhost());
-  if (!monde.water.IsActive()) return false;
-  int x = BorneLong(GetCenterX(), 0, monde.GetWidth()-1);
-  return (int)monde.water.GetHeight(x) < GetCenterY();
+  if (!world.water.IsActive()) return false;
+  int x = BorneLong(GetCenterX(), 0, world.GetWidth()-1);
+  return (int)world.water.GetHeight(x) < GetCenterY();
 }
 
 //-----------------------------------------------------------------------------
@@ -631,12 +631,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact en bas de l'objet:
   for (uint x=GetX()+ m_test_left; x<=(GetX()+m_width)-m_test_right; x++)
   {
-    if(!monde.EstHorsMonde(Point2i(x,(GetY()+m_height-m_test_bottom))))       
+    if(!world.EstHorsMonde(Point2i(x,(GetY()+m_height-m_test_bottom))))       
 //    if(!monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)+1)
 //    &&( monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom))
 //    || monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)+2)))
-    if(monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)-1)
-    && !monde.terrain.EstDansVide(x,(GetY()+m_height-m_test_bottom)))
+    if(world.ground.EstDansVide(x,(GetY()+m_height-m_test_bottom)-1)
+    && !world.ground.EstDansVide(x,(GetY()+m_height-m_test_bottom)))
     {
       contact_x = x;
       contact_y = GetY() +m_height-m_test_bottom;
@@ -646,12 +646,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact à gauche de l'objet:
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-    if(!monde.EstHorsMonde(Point2i(GetX()+m_test_left-1,y)))
-//    if(!monde.terrain.EstDansVide(GetX()+m_test_left-1,y)
-//    &&( monde.terrain.EstDansVide(GetX()+m_test_left,y)
-//    ||  monde.terrain.EstDansVide(GetX()+m_test_left-2,y)))
-    if(!monde.terrain.EstDansVide(GetX()+m_test_left,y)
-    &&  monde.terrain.EstDansVide(GetX()+m_test_left+1,y))
+    if(!world.EstHorsMonde(Point2i(GetX()+m_test_left-1,y)))
+//    if(!world.ground.EstDansVide(GetX()+m_test_left-1,y)
+//    &&( world.ground.EstDansVide(GetX()+m_test_left,y)
+//    ||  world.ground.EstDansVide(GetX()+m_test_left-2,y)))
+    if(!world.ground.EstDansVide(GetX()+m_test_left,y)
+    &&  world.ground.EstDansVide(GetX()+m_test_left+1,y))
     {
       contact_x = GetX() +m_test_left;
       contact_y = y;
@@ -661,12 +661,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact à droite de l'objet:
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-    if(!monde.EstHorsMonde(Point2i((GetX()+m_width-m_test_right)+1,y)))
-//    if(!monde.terrain.EstDansVide((GetX()+m_width-m_test_right)+1,y)
-//    &&( monde.terrain.EstDansVide((GetX()+m_width-m_test_right)+2,y)
-//    ||  monde.terrain.EstDansVide((GetX()+m_width-m_test_right),y)))
-    if(!monde.terrain.EstDansVide((GetX()+m_width-m_test_right),y)
-    &&  monde.terrain.EstDansVide((GetX()+m_width-m_test_right)-1,y))
+    if(!world.EstHorsMonde(Point2i((GetX()+m_width-m_test_right)+1,y)))
+//    if(!world.ground.EstDansVide((GetX()+m_width-m_test_right)+1,y)
+//    &&( world.ground.EstDansVide((GetX()+m_width-m_test_right)+2,y)
+//    ||  world.ground.EstDansVide((GetX()+m_width-m_test_right),y)))
+    if(!world.ground.EstDansVide((GetX()+m_width-m_test_right),y)
+    &&  world.ground.EstDansVide((GetX()+m_width-m_test_right)-1,y))
     {
       contact_x = GetX() + m_width - m_test_right;
       contact_y = y;
@@ -676,12 +676,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   //On cherche un point de contact en haut de l'objet:
   for(uint x=GetX()+m_test_left;x<=GetX()+m_width-m_test_right;x++)
   {
-    if(!monde.EstHorsMonde(Point2i(x,GetY()+m_test_top-1)))
-//    if(!monde.terrain.EstDansVide(x,GetY()+m_test_top-1)
-//    &&( monde.terrain.EstDansVide(x,GetY()+m_test_top-2)
-//    ||  monde.terrain.EstDansVide(x,GetY()+m_test_top)))
-    if(!monde.terrain.EstDansVide(x,GetY()+m_test_top)
-    &&  monde.terrain.EstDansVide(x,GetY()+m_test_top-1))
+    if(!world.EstHorsMonde(Point2i(x,GetY()+m_test_top-1)))
+//    if(!world.ground.EstDansVide(x,GetY()+m_test_top-1)
+//    &&( world.ground.EstDansVide(x,GetY()+m_test_top-2)
+//    ||  world.ground.EstDansVide(x,GetY()+m_test_top)))
+    if(!world.ground.EstDansVide(x,GetY()+m_test_top)
+    &&  world.ground.EstDansVide(x,GetY()+m_test_top-1))
     {
       contact_x =x;
       contact_y = GetY() +m_test_top;

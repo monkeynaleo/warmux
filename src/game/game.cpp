@@ -188,7 +188,7 @@ void Jeu::LanceJeu()
     if (EstFinPartie()) MsgFinPartie();
   }
 
-  monde.FreeMem();
+  world.FreeMem();
   caisse.FreeMem();
   jukebox.StopAll();
    

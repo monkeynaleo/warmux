@@ -25,13 +25,11 @@
 #include "../tool/math_tools.h"
 #include "../weapon/weapon.h"
 #include "../game/game_loop.h"
-#ifdef CL
-#else
 #include <SDL.h>
 #include "../include/app.h"
 #include "../map/camera.h"
+#include "../map/map.h"
 #include <iostream>
-#endif
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -101,6 +99,8 @@ void CrossHair::Draw()
   y -= image->h/2;
   SDL_Rect dest = { x-camera.GetX(),y-camera.GetY(),image->w,image->h};
   SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
+
+  world.ToRedrawOnMap(Rectanglei(x, y, image->w, image->h));
 #endif
 }
 

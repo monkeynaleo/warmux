@@ -16,17 +16,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Ciel : ce qui est affiché en image de fond.
+ * Sky: background of the map
  *****************************************************************************/
 
-#ifndef CIEL_H
-#define CIEL_H
+#ifndef SKY_H
+#define SKY_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "tile.h"
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
 
 struct SDL_Surface;
 
@@ -35,23 +32,21 @@ namespace Wormux {
 //-----------------------------------------------------------------------------
 
    
-class Ciel : public Tile
+class Sky : public Tile
 {  
  private:
   int lastx, lasty;
   void CompleteDraw();
 
 public:
-  Ciel();
+  Sky();
   void Init();
   void Reset();
   void Draw();
   void Free() { FreeMem(); } 
 
  private:
-#ifndef CL
    SDL_Surface *image;
-#endif
 };
 
 }

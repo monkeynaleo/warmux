@@ -52,13 +52,8 @@ BalleUzi::BalleUzi() : WeaponProjectile("balle_uzi")
 //-----------------------------------------------------------------------------
 void BalleUzi::Init()
 {
-#ifdef CL
-  image = CL_Sprite("gun_bullet", &graphisme.weapons);
-  SetSize (image.get_width(), image.get_height());
-#else
   image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
   SetSize (image->GetWidth(), image->GetHeight());
-#endif
   SetSize (2,2);
   SetMass (0.02);
   SetWindFactor(0.05);
@@ -96,11 +91,7 @@ Uzi::Uzi() : Weapon(WEAPON_UZI,"uzi")
 void Uzi::p_Init()
 {
   balle.Init();
-#ifdef CL
-  impact = CL_Surface("uzi_impact", &graphisme.weapons);  
-#else
   impact = resource_manager.LoadImage( weapons_res_profile, "uzi_impact");  
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -129,11 +120,7 @@ void Uzi::RepeatShoot()
 
 bool Uzi::p_Shoot()
 {
-#ifdef CL
-  jukebox.Play("weapon/uzi");
-#else
   jukebox.Play("share", "weapon/uzi");
-#endif
 
   // Calculate movement of the bullet
   
@@ -177,18 +164,12 @@ bool Uzi::p_Shoot()
 	obj -> AddSpeed (SOUFFLE_BALLE, angle);
       }
 
-      // Creuse le monde
+      // Creuse le world
       if (!obj)
       {
-#ifdef CL
-	monde.Creuse (balle.GetX() - impact.get_width()/2,
-		      balle.GetY() - impact.get_height()/2,
-		      impact);
-#else
-	monde.Creuse (balle.GetX() - impact->w/2,
+	world.Creuse (balle.GetX() - impact->w/2,
 		      balle.GetY() - impact->h/2,
 		      impact);
-#endif
       }
       return true;
     }
@@ -202,11 +183,7 @@ bool Uzi::p_Shoot()
 
 void Uzi::Refresh()
 {
-#ifdef CL
-  m_image.set_scale(ActiveCharacter().GetDirection(), 1);
-#else
   m_image->Scale(ActiveCharacter().GetDirection(), 1);
-#endif
 }
 //-----------------------------------------------------------------------------
 

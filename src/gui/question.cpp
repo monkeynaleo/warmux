@@ -27,6 +27,7 @@
 #include "../graphic/font.h"
 #include "../graphic/video.h"
 #include "../include/app.h" // SDL_Flip
+#include "../map/map.h"
 using namespace Wormux;
 
 //-----------------------------------------------------------------------------
@@ -83,6 +84,7 @@ void TexteEncadre (Font &police, int txt_x, int txt_y,
 //  CL_Display::fill_rect (CL_Rect(x, y, x+larg, y+haut), CL_Color(0, 0, 0, 255*7/10));
 //  CL_Display::draw_rect (CL_Rect(x, y, x+larg, y+haut), CL_Color::red);
 
+  world.ToRedrawOnScreen(Rectanglei(x, y, larg, haut));
   police.WriteCenterTop (txt_x, txt_y, txt, white_color);
 }
 

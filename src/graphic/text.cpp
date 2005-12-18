@@ -26,6 +26,7 @@
 #include "../include/app.h"
 #include "../tool/error.h"
 #include "../interface/interface.h"
+#include "../map/map.h"
 //-----------------------------------------------------------------------------
 
 Text::Text(std::string new_txt, SDL_Color new_color, Font* new_font)
@@ -78,6 +79,7 @@ void Text::DrawCenter (int x, int y)
   dst_rect.h = surf->h;
 
   SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 //-----------------------------------------------------------------------------
@@ -90,6 +92,7 @@ void Text::DrawTopLeft (int x, int y)
   dst_rect.h = surf->h;
 
   SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 //-----------------------------------------------------------------------------
@@ -102,6 +105,7 @@ void Text::DrawTopRight (int x, int y)
   dst_rect.h = surf->h;
 
   SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 //-----------------------------------------------------------------------------
@@ -114,6 +118,7 @@ void Text::DrawCenterTop (int x, int y)
   dst_rect.h = surf->h;
 
   SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+  world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
 }
 
 //-----------------------------------------------------------------------------

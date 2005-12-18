@@ -23,6 +23,7 @@
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "../map/camera.h"
+#include "../map/map.h"
 #include "../game/game_loop.h"
 #include "../game/game_mode.h"
 #include "../team/teams_list.h"
@@ -340,6 +341,8 @@ void Interface::UpdateTimer(uint utimer)
 
 void AbsoluteDraw(SDL_Surface* s, int x, int y)
 {
+  world.ToRedrawOnMap(Rectanglei(x, y, s->w, s->h));
+
   assert(s!=NULL);
 /*  if(x + s->w < 0 || y + s->h < 0)
   {

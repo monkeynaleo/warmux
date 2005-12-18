@@ -140,7 +140,7 @@ void Caisse::Reset()
     }
 
     // Placement au hasard en X
-    int x = RandomLong(0, monde.GetWidth() - GetWidth());
+    int x = RandomLong(0, world.GetWidth() - GetWidth());
     int y = -GetHeight()+1;
     SetXY (x, y);
 #ifdef DBG_PLACEMENT

@@ -31,12 +31,6 @@
 #include "../team/macro.h"
 #include "../tool/math_tools.h"
 
-#ifdef CL
-#include "../tool/geometry_tools.h"
-
-#else
-
-#endif
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG
@@ -44,22 +38,11 @@
 #  define COUT_DBG cout << "[Explosion] "
 #endif
 
-#ifndef CL
 Profile *weapons_res_profile = NULL;
-#endif
 
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-void AppliqueExplosion (const CL_Point &explosion, 
-			const CL_Point &trou, 
-			CL_Surface &impact,
-			const ExplosiveWeaponConfig &config,
-			PhysicalObj *obj_exclu,
-			const std::string& son,
-			bool fire_particle
-			)
-#else
+
 void AppliqueExplosion (const Point2i &explosion, 
 			const Point2i &trou, 
 			SDL_Surface *impact,
@@ -68,21 +51,12 @@ void AppliqueExplosion (const Point2i &explosion,
 			const std::string& son,
 			bool fire_particle
 			)
-#endif
 {
   // Make a hole in the ground
-#ifdef CL
-  monde.Creuse (trou.x - impact.get_width()/2, trou.y-impact.get_height()/2,impact);
-#else
-  monde.Creuse (trou.x-impact->w/2, trou.y-impact->h/2,impact);   
-#endif
+  world.Creuse (trou.x-impact->w/2, trou.y-impact->h/2,impact);   
    
   // Play a sound
-#ifdef CL
-  jukebox.Play (son);
-#else
   jukebox.Play ("share", son);
-#endif
    
   // Apply damage on the worms.
   // Do not care about the death of the active worm.
@@ -168,14 +142,8 @@ void AppliqueExplosion (const Point2i &explosion,
 
   // Do we need to generate some fire particles ?
   if (fire_particle) {
-#ifdef CL
-     global_particle_engine.AddNow ( trou.x - impact.get_width()/2, trou.y-impact.get_height()/2,
-				     5, particle_FIRE );
-#else
      global_particle_engine.AddNow ( trou.x - impact->w/2, trou.y-impact->h/2,
 				     5, particle_FIRE );
-#endif
-  
   }
 
 }

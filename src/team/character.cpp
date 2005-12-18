@@ -910,18 +910,18 @@ void Character::Reset()
     Ready();
 
     // Prend des coordonnées au hasard
-    uint x = RandomLong(0, monde.GetWidth() -GetWidth());
-    uint y = RandomLong(0, monde.GetHeight() -GetHeight());
+    uint x = RandomLong(0, world.GetWidth() -GetWidth());
+    uint y = RandomLong(0, world.GetHeight() -GetHeight());
 
     SetXY (x, y);
 
 #ifndef NO_POSITION_CHECK
-    pos_ok &= !IsGhost() && IsInVacuum(0,0) && (GetY() < static_cast<int>(monde.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
+    pos_ok &= !IsGhost() && IsInVacuum(0,0) && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
     if (!pos_ok) continue;
 
     // Chute directe pour le sol
     DirectFall ();
-    pos_ok &= !IsGhost() && (GetY() < static_cast<int>(monde.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
+    pos_ok &= !IsGhost() && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
 #ifdef DEBUG_PLACEMENT
     if (!pos_ok) COUT_PLACEMENT << "Fantome en tombant." << endl;
 #endif
@@ -934,7 +934,7 @@ void Character::Reset()
        Point2i p2 = GetCenter();
        double dst = Distance ( p1, p2);
 
-      if (dst < monde.dst_min_entre_vers) {
+      if (dst < world.dst_min_entre_vers) {
 	pos_ok = false;
       }
        
