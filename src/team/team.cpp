@@ -308,7 +308,11 @@ void Team::SelectCharacterIndex (uint index)
 {
   // Ver mort ?
   assert (index < vers.size());
-  assert (!vers.at(index).IsDead());
+  if (vers.at(index).IsDead()) {
+    int i = (++index)%vers.size();
+    SelectCharacterIndex(i);
+    return;
+  }
 
   // Change de ver
   ver_actif = index;
