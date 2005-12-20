@@ -50,49 +50,51 @@ using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 // Calcule la hauteur a chuter ou grimper lors d'un déplacement horizontal
-// Renvoie si le mouvement est possible
+// Renvoie true si le mouvement est possible
 bool CalculeHauteurBouge (Character &character, int &hauteur)
 {
   int y_floor=character.GetY();
 
-  // On peut descendre ?
-  for (hauteur=0;
-       character.IsInVacuum(character.GetDirection(), hauteur)
-       && !character.FootsOnFloor(y_floor+hauteur);
-       ++hauteur)
+  if( character.IsInVacuum(character.GetDirection(), 0)
+  && !character.IsInVacuum(character.GetDirection(), +1))
   {
-    // C'est trop haut pour grimper :-p
-    if (HAUTEUR_CHUTE_MAX < hauteur) 
+    //Land is flat, we can move!
+    hauteur = 0;
+    return true;
+  }
+
+  //Compute height of the step:
+  if( character.IsInVacuum(character.GetDirection(), 0) )
+  {
+    //Try to go down:
+    for(hauteur = 2; hauteur <= HAUTEUR_CHUTE_MAX ; hauteur++)
     {
-      // Alors le character chute (va dans le vide)
-      character.SetX (character.GetX() +character.GetDirection());
-      character.UpdatePosition();
-      character.SetSkin("fall");
-      return false;
+      if( !character.IsInVacuum(character.GetDirection(), hauteur)
+      ||  character.FootsOnFloor(y_floor+hauteur))
+      {
+        hauteur--;
+        return true;
+      }
+    }
+    //We can go down, but the step is to big -> the character will fall.
+    character.SetX (character.GetX() +character.GetDirection());
+    character.UpdatePosition();
+    character.SetSkin("fall");
+    return false;
+  }
+  else
+  {
+    //Try to go up:
+    for(hauteur = -1; hauteur >= -HAUTEUR_GRIMPE_MAX ; hauteur--)
+    {
+      if( character.IsInVacuum(character.GetDirection(), hauteur) )
+      {
+        return true;
+      }
     }
   }
-  if (hauteur != 0) return true;
-
-  // On est libre : ok, bye !
-//  if (character.IsInVacuum(character.GetDirection(), -1)) return true;
-
-  // Calcule la hauteur a grimper
-  for (hauteur=-1;
-/*       EstDansVide_haut(character,character.GetDirection(), hauteur)
-	   && !EstDansVide_bas(character,character.GetDirection(), hauteur); */
-       !character.IsInVacuum(character.GetDirection(), hauteur-1)
-	 && world.EstDansVide_haut(character,character.GetDirection(), hauteur-1);
-/*	 && monde.EstDansVide_haut(character,character.GetDirection(), hauteur-1)*/
-       --hauteur)
-  {
-    // C'est trop haut pour grimper :-p
-    if (hauteur < -HAUTEUR_GRIMPE_MAX) 
-    {
-      return false;
-    }
-  }
-//  if (!character.IsInVacuum(character.GetDirection(), hauteur-1)) return false;
-  return true;
+  //We can't move!
+  return false;
 }
 
 //-----------------------------------------------------------------------------
