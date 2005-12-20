@@ -48,7 +48,6 @@
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <SDL_gfxPrimitives.h>
-#endif
 #include <iostream>
 #include <sstream>
 
