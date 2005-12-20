@@ -68,26 +68,15 @@ void Cluster::Tire (int x, int y)
 
 void Cluster::Init()
 {
-#ifdef CL
-  image = CL_Sprite("cluster", &graphisme.weapons);
-  SetSize (image.get_width(), image.get_height());
-#else
   image = resource_manager.LoadSprite( weapons_res_profile, "cluster");
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight()); 
-#endif
 
   SetMass (lance_cluster.cfg().mass / (lance_cluster.cfg().nbr_fragments+1));
   SetAirResistFactor(lance_cluster.cfg().air_resist_factor);
 
-  // Fixe le rectangle de test
-#ifdef CL
-  int dx = image.get_width()/2-1;
-  int dy = image.get_height()/2-1;
-#else
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
-#endif
   SetTestRect (dx, dx, dy, dy);
 }
 
@@ -98,22 +87,15 @@ void Cluster::Refresh()
   if (!is_active) return;
 
   double angle = GetSpeedAngle() * 180/M_PI ;
-#ifdef CL
-  image.set_angle (angle);
-#else
+
   image->SetRotation_deg( angle);
-#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void Cluster::Draw()
 {
-#ifdef CL
-  image.draw(GetX(),GetY());
-#else 
   image->Draw(GetX(), GetY());
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -178,26 +160,15 @@ void ClusterBomb::Tire (double force)
 
 void ClusterBomb::Init()
 {
-#ifdef CL
-  image = CL_Sprite("clusterbomb_sprite", &graphisme.weapons);
-  SetSize (image.get_width(), image.get_height());
-#else
-  image = resource_manager.LoadSprite( weapons_res_profile, "cluster");
+  image = resource_manager.LoadSprite( weapons_res_profile, "clusterbomb_sprite");
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight()); 
-#endif
 
   SetMass (lance_cluster.cfg().mass);
   m_rebound_factor = lance_cluster.cfg().rebound_factor;
 
-  // Fixe le rectangle de test
-#ifdef CL
-  int dx = image.get_width()/2-1;
-  int dy = image.get_height()/2-1;
-#else
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
-#endif
   SetTestRect (dx, dx, dy, dy);
 
 #ifdef MSG_DBG
@@ -255,12 +226,7 @@ void ClusterBomb::Refresh()
 
   // rotation de l'image de la grenade...
   double angle = GetSpeedAngle() * 180/M_PI ;
-#ifdef CL
-  image.set_angle (angle);
-#else
   image->SetRotation_deg( angle);
-#endif
-
 }
 
 //-----------------------------------------------------------------------------
@@ -275,22 +241,16 @@ void ClusterBomb::Draw()
     return;
   }
 
-#ifdef CL
-  image.draw(GetX(),GetY());
-#else
   image->Draw(GetX(), GetY());
-#endif
+
   int tmp = lance_cluster.cfg().tps_avt_explosion;
   tmp -= (int)((Wormux::global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
-#ifdef CL
-  police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
-#else
+
   small_font.WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -325,11 +285,7 @@ bool LanceCluster::p_Shoot ()
   camera.ChangeObjSuivi (&cluster_bomb, true, false);
   lst_objets.AjouteObjet (&cluster_bomb, true);
 
-#ifdef CL
-  jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
-#else
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");  
-#endif
 
   return true;
 }
@@ -350,11 +306,7 @@ void LanceCluster::Explosion()
   if (cluster_bomb.IsGhost()) return;
 
   // Applique les degats et le souffle aux vers
-#ifdef CL
-  CL_Point pos = cluster_bomb.GetCenter();
-#else
   Point2i pos = cluster_bomb.GetCenter();
-#endif
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -373,11 +325,7 @@ void LanceCluster::Refresh()
 void LanceCluster::p_Init()
 {
   cluster_bomb.Init();
-#ifdef CL
-  impact = CL_Surface("grenade_impact", &graphisme.weapons);
-#else
   impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
-#endif
 }
 
 //-----------------------------------------------------------------------------
