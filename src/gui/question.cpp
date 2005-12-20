@@ -23,8 +23,7 @@
 #include "question.h"
 //-----------------------------------------------------------------------------
 #include <SDL.h>
-#include <SDL_gfxPrimitives.h>
-#include "../graphic/font.h"
+#include "../graphic/text.h"
 #include "../graphic/video.h"
 #include "../include/app.h" // SDL_Flip
 #include "../map/map.h"
@@ -62,39 +61,12 @@ void Question::TraiteTouche (SDL_Event &event)
 
 //-----------------------------------------------------------------------------
 
-
-// Ecrit un texte et l'encadre
-void TexteEncadre (Font &police, int txt_x, int txt_y, 
-		   const std::string &txt, uint espace=10)
-{
-  int x,y,larg,haut;
-  larg = police.GetWidth(txt)+espace*2;
-  x = txt_x - larg / 2;
-  haut = police.GetHeight(txt)+espace*2;
-  y = txt_y - haut / 2;
-  txt_y -= police.GetHeight(txt)/2;
-
-  boxRGBA(app.sdlwindow, x, y, x+larg, y+haut,
-	  80,80,159,206);
-
-  rectangleRGBA(app.sdlwindow, x, y, x+larg, y+haut,
-		49, 32, 122, 255);  
-  
-// TODO  
-//  CL_Display::fill_rect (CL_Rect(x, y, x+larg, y+haut), CL_Color(0, 0, 0, 255*7/10));
-//  CL_Display::draw_rect (CL_Rect(x, y, x+larg, y+haut), CL_Color::red);
-
-  world.ToRedrawOnScreen(Rectanglei(x, y, larg, haut));
-  police.WriteCenterTop (txt_x, txt_y, txt, white_color);
-}
-
-
-
 void Question::Draw()
 {
-  TexteEncadre (big_font, 
-		video.GetWidth()/2, video.GetHeight()/2,
-		message);
+  DrawTmpBoxText (big_font, 
+		  video.GetWidth()/2, video.GetHeight()/2,
+		  message,
+		  10);
   SDL_Flip( app.sdlwindow);
 }
 

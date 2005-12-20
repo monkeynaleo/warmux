@@ -51,4 +51,9 @@ public:
   int GetHeight() const {return surf->h;}
 };
 
+void DrawTmpBoxText(Font &font, 
+		    int x, int y, 
+		    const std::string &txt, uint space=3);
+
+
 #endif
