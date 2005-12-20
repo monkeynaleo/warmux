@@ -39,9 +39,6 @@
 #include "../game/game_loop.h"
 #include "weapon_tools.h"
 #include "../graphic/video.h"
-#ifdef CL
-#include "../tool/geometry_tools.h"
-#else
 #include "../tool/Point.h"
 #include "../tool/Distance.h"
 #include "../include/app.h"
@@ -92,11 +89,7 @@ WeaponProjectile::WeaponProjectile (const std::string &name)
 
 void WeaponProjectile::PrepareTir()
 {
-#ifdef CL
-  SetSize (image.get_width(), image.get_height());
-#else
   SetSize (image->GetWidth(), image->GetHeight());
-#endif
   Ready();
   camera.ChangeObjSuivi (this, true, false);
   is_active = true;
@@ -127,23 +120,14 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
 
   if (!touche_ver_objet) return false;
 
-#ifdef CL
-  CL_Rect test = GetTestRect();
-  MoveRect (test, dx, dy);
-#else
    Rectanglei test = GetTestRect();
    test.x += dx;
    test.y += dy;
-#endif
    
   POUR_TOUS_VERS_VIVANTS(equipe,ver)
   if (&(*ver) != &ActiveCharacter())
   {
-#ifdef CL
-    if (RectTouche(ver -> GetTestRect(), test)) 
-#else
     if (Intersect(ver -> GetTestRect(), test))
-#endif
        {
       dernier_ver_touche = &(*ver);
 #ifdef DEBUG_MSG_COLLISION
@@ -156,11 +140,7 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
   POUR_CHAQUE_OBJET(objet)
   if (objet -> ptr != this)
   {
-#ifdef CL
-    if (RectTouche(objet -> ptr -> GetTestRect(), test)) 
-#else
     if (Intersect(objet -> ptr -> GetTestRect(), test))
-#endif
       {
       dernier_obj_touche = objet -> ptr;
 #ifdef DEBUG_MSG_COLLISION
@@ -189,14 +169,7 @@ void WeaponProjectile::Draw()
 {
   if (!is_active) return;
 
-#ifdef CL
-  image.draw (GetX(), GetY());
-#if defined(DEBUG_CADRE_TEST)
-  CL_Display::draw_rect (GetTestRect(), CL_Color::red);
-#endif
-#else
   image->Draw(GetX(), GetY());   
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -243,24 +216,15 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
   m_unit_visibility = ALWAYS_VISIBLE;
   extra_params = NULL;
    
-#ifndef CL
-   m_image = NULL;
-#endif
+  m_image = NULL;
 
-   channel_load = -1;
+  channel_load = -1;
 }
 
 //-----------------------------------------------------------------------------
 
 void Weapon::Init ()
 {
-#ifdef CL
-  if (m_visibility != NEVER_VISIBLE)
-    m_image = CL_Surface(m_id, &graphisme.weapons);
-  
-   icone = CL_Surface(m_id+"_ico", &graphisme.weapons);
-#else
- 
   if (m_visibility != NEVER_VISIBLE)
   {
     m_image = new Sprite( resource_manager.LoadImage(weapons_res_profile, m_id));
@@ -268,7 +232,6 @@ void Weapon::Init ()
   }
      
   icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
-#endif
    
   p_Init();
 }
@@ -302,11 +265,7 @@ void Weapon::Select()
   double val = ActiveCharacter().previous_strength;
   weapon_strength_bar.Reset_Marqueur();
   if (0 < val && val < max_strength)
-#ifdef CL
-  weapon_strength_bar.AjouteMarqueur (uint(val*100), CL_Color::red);
-#else
   weapon_strength_bar.AjouteMarqueur (uint(val*100), 255,0,0);
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -404,11 +363,7 @@ void Weapon::PosXY (int &x, int &y) const
   }
 
   if(min_angle!=max_angle && ActiveCharacter().GetDirection()==-1)
-#ifdef CL
-    x -= m_image.get_width();
-#else
     x -= m_image->GetWidth();
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -417,13 +372,9 @@ void Weapon::PosXY (int &x, int &y) const
 void Weapon::RotationPointXY (int &x, int &y) const
 {
   PosXY(x,y);
-#ifdef CL
-  x += m_image.get_width()/2;
-  y += m_image.get_height()/2;
-#else
+
   x += m_image->GetWidth()/2;
   y += m_image->GetHeight()/2;
-#endif
 }
 
 
@@ -519,11 +470,7 @@ void Weapon::InitLoading()
   // no loading for weapon with max_strength = 0
   if (max_strength == 0) return ;
 
-#ifdef CL
-  jukebox.Play("weapon/load");
-#else
   channel_load = jukebox.Play("share","weapon/load");
-#endif
    
   curseur_ver.Cache();
 
@@ -539,12 +486,8 @@ void Weapon::InitLoading()
 void Weapon::StopLoading()
 {
   m_first_time_loading = 0 ;
-#ifdef CL
-   jukebox.Stop("weapon/load");
-   channel_load = -1;
-#else
-   jukebox.Stop(channel_load);
-#endif
+
+  jukebox.Stop(channel_load);
 }
 
 //-----------------------------------------------------------------------------
@@ -554,22 +497,6 @@ void Weapon::DrawWeaponBox()
   int c_x;
   int c_y;
 
-#ifdef CL
-
-  c_x = camera.GetX() + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
-  c_y = camera.GetY() + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
-
-  CL_Surface button = interface.weapon_box_button;
-  
-  button.draw((int)(c_x - 0.5 * BUTTON_ICO_WIDTH),
-	      (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT));
-
-  CL_Surface icon = icone;
-
-  icon.draw((int)(c_x - 0.5 * WEAPON_ICO_WIDTH),
-	    (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT));
-#else
-
   c_x =  + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
   c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
 
@@ -578,8 +505,6 @@ void Weapon::DrawWeaponBox()
 
   SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT),icone->w,icone->h};	   
   SDL_BlitSurface( icone, NULL, app.sdlwindow, &dr2);
-   
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -638,22 +563,12 @@ void Weapon::Draw()
 
   // rotate weapon if necessary
   if (min_angle != max_angle) {
-#ifdef CL
-    m_image.set_rotation_hotspot (origin_center);
-    m_image.set_angle (ActiveTeam().crosshair.GetAngle());
-    m_image.set_scale(1, ActiveCharacter().GetDirection());
-#else
     // TODO
     //m_image->et_rotation_hotspot (origin_center);
     m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
     m_image->Scale(1, ActiveCharacter().GetDirection());
-#endif
   } else {
-#ifdef CL
-    m_image.set_scale(ActiveCharacter().GetDirection(), 1);
-#else
     m_image->Scale(ActiveCharacter().GetDirection(), 1);
-#endif
   }
 
   // Calculate position of the image
@@ -661,13 +576,8 @@ void Weapon::Draw()
   switch (position.origin) 
   {
   case weapon_origin_OVER:
-#ifdef CL
-    x = ActiveCharacter().GetCenterX()-m_image.get_width()/2+position.dx;
-    y = ActiveCharacter().GetY()-m_image.get_height()+position.dy;
-#else
     x = ActiveCharacter().GetCenterX()-m_image->GetWidth()/2+position.dx;
     y = ActiveCharacter().GetY()-m_image->GetHeight()+position.dy;
-#endif
 #ifdef CL
     if(ActiveCharacter().GetDirection() == -1)
       x += m_image.get_width();
@@ -681,67 +591,30 @@ void Weapon::Draw()
 #endif
      break;
   }
-#ifdef CL
-  m_image.draw (x,y);
-#else
   if ( m_image )
     {
-       m_image->Blit( app.sdlwindow, x-camera.GetX(), y-camera.GetY());
+      m_image->Blit( app.sdlwindow, x-camera.GetX(), y-camera.GetY());
     }
-#endif
    
-#if defined(DEBUG_CADRE_TEST)
-  CL_Display::draw_rect (CL_Rect(x,y,
-				 x+m_image.get_width(), 
-				 y+m_image.get_height()),
-			 CL_Color::red);
-#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void Weapon::DrawUnit(int unit)
 {
-#ifdef CL
-  CL_Color color;
-  CL_Rect rect;
-#else
+
   Rectanglei rect;
-#endif
 
   std::ostringstream ss;
 
   ss << unit;
 
-#ifdef CL
-
-  rect.left   = ActiveCharacter().GetCenterX() - UNIT_BOX_WIDTH/2 ;
-  rect.right  = ActiveCharacter().GetCenterX() + UNIT_BOX_WIDTH/2 ;
-  rect.top    = ActiveCharacter().GetY() - UNIT_BOX_HEIGHT - UNIT_BOX_GAP;
-  rect.bottom = ActiveCharacter().GetY() - UNIT_BOX_GAP;
-   
-  color.set_color(80, 80, 159, 206);
-  CL_Display::fill_rect(rect, color);
-  
-  color.set_color(49, 32, 122, 255);
-  CL_Display::draw_rect(rect, color);
-  rect.left++;
-  rect.right--;
-  rect.top++;
-  rect.bottom--;
-  CL_Display::draw_rect(rect, color);
-
-  police_mix.WriteCenter (
-	      ActiveCharacter().GetCenterX(),
-	      ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP,
-	      ss.str());
-#else
  
   DrawTmpBoxText(small_font,
 		 ActiveCharacter().GetCenterX()-camera.GetX(),
 		 ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP-camera.GetY(),
 		 ss.str());
-#endif
+
 }
 
 //-----------------------------------------------------------------------------

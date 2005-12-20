@@ -115,13 +115,9 @@ protected:
   std::string m_id;
   std::string m_name;
   bool m_is_active;
-#ifdef CL
-  CL_Surface m_image;
-#else
-//  SDL_Surface *m_image; 
   Sprite *m_image;
-#endif
-   struct s_position{
+
+  struct s_position{
     int dx, dy;
     weapon_origin_t origin;
   } position;
@@ -151,11 +147,8 @@ protected:
 
 public:
   // Icone de l'arme dans l'interface
-#ifdef CL
-  CL_Surface icone;
-#else
   SDL_Surface *icone;
-#endif
+
   // if max_strength != 0, display the strength bar
   double max_strength;
 
