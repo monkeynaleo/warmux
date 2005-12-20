@@ -18,6 +18,7 @@
  ******************************************************************************/
 
 #include <SDL/SDL_video.h>
+#include <SDL_gfxPrimitives.h>
 #include <string>
 #include "text.h"
 #include "colors.h"
@@ -140,3 +141,29 @@ void Text::DrawCenterTopOnMap (int x, int y)
 }
 
 //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+// 
+void DrawTmpBoxText(Font &font, 
+		    int _x, int _y, 
+		    const std::string &txt, uint space)
+{
+  int x,y,w,h;
+  w = font.GetWidth(txt)+space*2;
+  x = _x - w / 2;
+
+  h = font.GetHeight(txt)+space*2;
+  y = _y - h / 2;
+  _y -= font.GetHeight(txt)/2;
+
+  boxRGBA(app.sdlwindow, x, y, x+w, y+h,
+	  80,80,159,206);
+
+  rectangleRGBA(app.sdlwindow, x, y, x+w, y+h,
+		49, 32, 122, 255);  
+
+  world.ToRedrawOnScreen(Rectanglei(x, y, w, h));
+  font.WriteCenterTop (_x, _y, txt, white_color);
+}
