@@ -597,7 +597,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
      {
        if(last_frame == NULL)
        {
-         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_ON);
+         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
          last_frame = tmp_surface;
        }
        else
@@ -636,6 +636,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
      }
      else
      {
+       //have_flipping_cache==true && have_rotation_cache==true
        if((scale_x != 1.0 && scale_x != -1.0)  || scale_y != 1.0)
        {
          CACHE_WARNING;
@@ -644,6 +645,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
        }
        else
        {
+         //Scale_y == 1.0
          if(scale_x == 1.0)
            tmp_surface = frames[current_frame].rotated_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
          else
@@ -681,7 +683,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 
 #ifdef DBG_SPRITE
    std::ostringstream ss;
-   ss << pos_x << "," << pos_y << " " << current_frame << "/" << frames.size() << " L" << loop << " P" << pingpong;
+   ss << pos_x << "," << pos_y << " " << current_frame << "/" << frames.size() << " L" << loop << " P" << pingpong << " R" << rotation_deg;
    std::string s = ss.str();   
    info->Set(s);
    info->DrawTopLeft(pos_x + frame_width_pix, pos_y);

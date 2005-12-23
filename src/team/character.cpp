@@ -323,6 +323,8 @@ void Character::Draw()
     dessine_perte = false;
 
   // Draw skin
+  if(full_walk && !image->IsFinished() && game_loop.ReadState() == gameEND_TURN)
+    StopWalking();
 
   if(!is_walking || full_walk) //walking skins image update only when a keyboard key is pressed
   {
