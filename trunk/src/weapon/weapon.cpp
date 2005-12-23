@@ -561,14 +561,14 @@ void Weapon::Draw()
     return;
 
   // rotate weapon if necessary
-  if (min_angle != max_angle) {
+  if (min_angle != max_angle)
+  {
     if(ActiveCharacter().GetDirection() == 1)
       m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
     else
-      m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle() - 180);
-    m_image->Scale(1, ActiveCharacter().GetDirection());
-  } else {
-    m_image->Scale(ActiveCharacter().GetDirection(), 1);
+      m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle() - 180.0);
+
+    m_image->Scale(ActiveCharacter().GetDirection(), 1.0);
   }
 
   // Calculate position of the image
