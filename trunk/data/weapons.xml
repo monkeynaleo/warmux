@@ -169,6 +169,9 @@
   <sprite name="ninjahook">
     <image file="weapon/ninjahook.png" />
   </sprite>
+  <sprite name="ninjanode">
+    <image file="weapon/ninjanode.png" />
+  </sprite>
 
 <!-- Parachute ressources -->
   
