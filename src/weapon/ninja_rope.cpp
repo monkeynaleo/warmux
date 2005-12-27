@@ -22,7 +22,6 @@
 #include "ninja_rope.h"
 //-----------------------------------------------------------------------------
 #include <math.h>
-#include <SDL_gfxPrimitives.h>
 #include "../include/app.h"
 #include "../interface/mouse.h"
 #include "../team/teams_list.h"
@@ -53,7 +52,7 @@ namespace Wormux {
 NinjaRope ninjarope;
 
 const int DT_MVT  = 15 ; //delta_t bitween 2 up/down/left/right mvt
-const int DST_MIN = 3 ;  //dst_minimal bitween 2 nodes
+const int DST_MIN = 6 ;  //dst_minimal bitween 2 nodes
 const uint MAX_ROPE_LEN = 700 ; // Max rope length in pixels
 const uint ROPE_DRAW_SPEED = 12 ; // Pixel per 1/100 second.
 const int ROPE_PUSH_FORCE = 4;
@@ -432,23 +431,24 @@ void NinjaRope::Draw()
 {
   int i, x, y;
   double angle, prev_angle;
-#ifndef CL
-  struct CL_Quad {Sint16 x1,x2,x3,x4,y1,y2,y3,y4;};
-#endif
-  CL_Quad quad ;
+
+  struct CL_Quad {Sint16 x1,x2,x3,x4,y1,y2,y3,y4;} quad;
 
   if (!m_is_active)
-    {
-      Weapon::Draw();
-      return ;
-    }
+  {
+    Weapon::Draw();
+    return ;
+  }
 
   if (m_attaching)
     {
       TryAttachRope();
       if (!m_is_active)
-	return ;
-      angle = m_initial_angle + M_PI/2;
+	      return ;
+      if(m_attaching)
+        angle = m_initial_angle + M_PI/2;
+      else
+        angle = ActiveCharacter().GetRopeAngle();
     }
   else
     angle = ActiveCharacter().GetRopeAngle();
@@ -458,66 +458,46 @@ void NinjaRope::Draw()
 
   ActiveCharacter().GetHandPosition(x, y);
 
-#ifdef CL
-  quad.x1 = (int)roundl( (double)x - 2 * cos(angle));
+  quad.x1 = (int)roundl((double)x - 2 * cos(angle));
   quad.y1 = (int)roundl((double)y + 2 * sin(angle));
   quad.x2 = (int)roundl((double)x + 2 * cos(angle));
   quad.y2 = (int)roundl((double)y - 2 * sin(angle));
-#else
-  quad.x1 = (int)roundl( (double)x - 2 * cos(angle)) - camera.GetX();
-  quad.y1 = (int)roundl((double)y + 2 * sin(angle)) - camera.GetY();
-  quad.x2 = (int)roundl((double)x + 2 * cos(angle)) - camera.GetX();
-  quad.y2 = (int)roundl((double)y - 2 * sin(angle)) - camera.GetY();
-#endif
 
   for (i = last_node ; i >= 0; i--)
     {
-#ifdef CL
-      quad.x3 = (int)roundl((double)rope_node[i].x + 2 * cos(angle)) ;
-      quad.y3 = (int)roundl((double)rope_node[i].y - 2 * sin(angle)) ;
-      quad.x4 = (int)roundl((double)rope_node[i].x - 2 * cos(angle)) ;
-      quad.y4 = (int)roundl((double)rope_node[i].y + 2 * sin(angle)) ;
-
-      CL_Display::fill_quad(quad,
-			    CL_Color::white);
-
-      CL_Display::draw_line(quad.x1, quad.y1, quad.x4, quad.y4,CL_Color::grey);
-      CL_Display::draw_line(quad.x2, quad.y2, quad.x3, quad.y3,CL_Color::grey);
-#else
-      quad.x3 = (int)roundl((double)rope_node[i].x + 2 * cos(angle))  - camera.GetX();
-      quad.y3 = (int)roundl((double)rope_node[i].y - 2 * sin(angle))  - camera.GetY();
-      quad.x4 = (int)roundl((double)rope_node[i].x - 2 * cos(angle))  - camera.GetX();
-      quad.y4 = (int)roundl((double)rope_node[i].y + 2 * sin(angle))  - camera.GetY();
+      quad.x3 = (int)roundl((double)rope_node[i].x + 2 * cos(angle));
+      quad.y3 = (int)roundl((double)rope_node[i].y - 2 * sin(angle));
+      quad.x4 = (int)roundl((double)rope_node[i].x - 2 * cos(angle));
+      quad.y4 = (int)roundl((double)rope_node[i].y + 2 * sin(angle));
       
-
-      filledPolygonRGBA (app.sdlwindow, 
-			 &quad.x1,
-			 &quad.y1,
-			 4, 
-			 213,198,181,255);
-
-      lineRGBA(app.sdlwindow, quad.x1, quad.y1, quad.x4, quad.y4, 
-	       95,95,95,255);
-      lineRGBA(app.sdlwindow, quad.x2, quad.y2, quad.x3, quad.y3, 
-	       95,95,95,255);
-#endif
+      float dx = sin(angle) * (float)m_node_sprite->GetHeight();
+      float dy = cos(angle) * (float)m_node_sprite->GetHeight();
+      int step = 0;
+      int size = (quad.x1-quad.x4) * (quad.x1-quad.x4)
+                +(quad.y1-quad.y4) * (quad.y1-quad.y4);
+      size -= m_node_sprite->GetHeight();
+      while( (step*dx*step*dx)+(step*dy*step*dy) < size )
+      {
+        if(m_attaching)
+          m_node_sprite->Draw(quad.x1 + (int)((float) step * dx),
+                              quad.y1 - (int)((float) step * dy));
+        else
+          m_node_sprite->Draw(quad.x4 + (int)((float) step * dx),
+                              quad.y4 + (int)((float) step * dy));
+        step++;
+      }
       quad.x1 = quad.x4 ;
       quad.y1 = quad.y4 ;
       quad.x2 = quad.x3 ;
       quad.y2 = quad.y3 ;
       prev_angle = angle;
       angle = rope_node[i].angle ;
+
     }
 
-#ifdef CL
-  m_hook_sprite.set_angle(-prev_angle * 180.0 / M_PI);
-  m_hook_sprite.draw(rope_node[0].x - m_hook_sprite.get_width()/2,
-		     rope_node[0].y - m_hook_sprite.get_height()/2);
-#else
   m_hook_sprite->SetRotation_deg(-prev_angle * 180.0 / M_PI);
   m_hook_sprite->Draw(rope_node[0].x - m_hook_sprite->GetWidth()/2,
 		     rope_node[0].y - m_hook_sprite->GetHeight()/2);
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -525,16 +505,11 @@ void NinjaRope::Draw()
 void NinjaRope::p_Init()
 {
   m_name="ninjarope";
-#ifdef CL
-  icone = CL_Surface("ninjarope_ico", &graphisme.weapons);
-  m_image = CL_Surface("ninjarope", &graphisme.weapons);
-  m_hook_sprite = CL_Surface("ninjahook", &graphisme.weapons);
-#else
   icone = resource_manager.LoadImage(weapons_res_profile,"ninjarope_ico");
   m_image = resource_manager.LoadSprite(weapons_res_profile,"ninjarope");
   m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
   m_hook_sprite->EnableRotationCache(32);
-#endif
+  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjanode");
 
   m_is_active = false;
   m_attaching = false;
