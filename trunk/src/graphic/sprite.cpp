@@ -578,10 +578,6 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 {
   if (!show) return;
 
-  
-  // For the cache mechanism
-  world.ToRedrawOnScreen(Rectanglei(pos_x, pos_y, frame_width_pix, frame_height_pix));
-
 #ifndef __MINGW32__
    SDL_Surface *tmp_surface = NULL;
    bool need_free_surface = false;
@@ -597,7 +593,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
      {
        if(last_frame == NULL)
        {
-         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_ON);
          last_frame = tmp_surface;
        }
        else
@@ -669,7 +665,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 //   if(scale_y < 0) //Clanlib backward compatibility: do as if hotspot is set to top_left
 //     y -= scale_y * GetHeight();
 
-   SDL_Rect dr = {x, y, frame_width_pix, frame_height_pix};
+   SDL_Rect dr = {x, y, tmp_surface->w, tmp_surface->h};
 
    SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
 
@@ -680,6 +676,10 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    SDL_Rect dr = {pos_x , pos_y , frame_width_pix, frame_height_pix};
    SDL_BlitSurface (frames[current_frame].surface, NULL, dest, &dr);
 #endif //__MINGW32__
+
+  // For the cache mechanism
+  world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface->w, tmp_surface->h));
+
 
 #ifdef DBG_SPRITE
    std::ostringstream ss;
