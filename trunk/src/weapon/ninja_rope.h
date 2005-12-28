@@ -49,8 +49,10 @@ private:
   bool m_rope_attached;
   double m_initial_angle;
   uint m_launch_time;
+  uint m_hooked_time;
   Sprite* m_hook_sprite;
   Sprite* m_node_sprite;
+  Sprite* skin;
 
 public:
   s_rope_node rope_node[node_max];
@@ -83,6 +85,7 @@ protected:
   bool TryAddNode(int CurrentSense) ;
   bool TryBreakNode(int CurrentSense) ;
   void SignalTurnEnd() ;
+  void InitSkinSprite();
 };
 
 extern NinjaRope ninjarope;
