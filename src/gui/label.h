@@ -16,34 +16,28 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Vertical or Horizontal Box
+ * Label in GUI.
  *****************************************************************************/
 
-#ifndef GUI_BOX_H
-#define GUI_BOX_H
-
+#ifndef LABEL_H
+#define LABEL_H
 //-----------------------------------------------------------------------------
-#include "widget.h"
-#include <list>
+#include "../include/base.h"
+#include "../graphic/text.h"
+#include "../gui/widget.h"
+#include <string>
 //-----------------------------------------------------------------------------
 
-class Box : public Widget
+class Label : public Widget
 {
  private:
-  std::list<Widget *> widgets;
-  Widget * last_widget;
-  bool horizontal;
-  bool visible;
-
+  Text * txt_label;
+   
  public:
-  Box(uint x, uint y, uint w, bool _horizontal=false, bool _visible=true);
-  virtual ~Box();
-
-  void Draw (uint mouse_x, uint mouse_y);
-  bool Clic (uint mouse_x, uint mouse_y);
+  Label(const std::string &label, uint x, uint y, uint w, Font& _fonf=small_font);
+  ~Label();
+  void Draw (uint mouse_x, uint mouse_y) ;
   void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
-
-  void AddWidget(Widget * a_widget);
 };
 
 //-----------------------------------------------------------------------------

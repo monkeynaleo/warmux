@@ -35,6 +35,8 @@ class SpinButton;
 class SDL_Surface;
 class Sprite;
 class Box;
+class Label;
+class NullWidget;
 
 class OptionMenu
 {
@@ -56,17 +58,19 @@ class OptionMenu
    Box *actions_buttons;
 
    /* Graphic options controllers */   
-   ListBox *lboxVideoMode;
+   ListBox *lbox_video_mode;
    CheckBox *opt_display_wind_particles;
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
-   CheckBox *full_screen;    
+   CheckBox *full_screen; 
+   Label *label_graphic;
    Box *graphic_options;
 
    /* Sound options controllers */
-   ListBox *lboxSoundFreq;
+   ListBox *lbox_sound_freq;
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
+   Label *label_sound;
    Box *sound_options;
 
    /* Game options controllers */
@@ -74,20 +78,24 @@ class OptionMenu
    SpinButton *opt_duration_end_turn;
    SpinButton *opt_nb_characters;
    SpinButton *opt_energy_ini;
+   Label *label_game;
    Box *game_options;
 
    /* Team controllers */
-   ListBox *lboxTeams;   
+   ListBox *lbox_teams;   
 
    /* Map controllers */
-   ListBox *lboxMaps;
+   ListBox *lbox_maps;
+   NullWidget *blank_space;
    Sprite *map_preview;  
+   Box *map_box;
+
 
    bool m_init;
 
    Sprite *bg_option;
-   SDL_Surface *bg_long_box;
-   SDL_Surface *bg_small_box;
+   //SDL_Surface *bg_long_box;
+   //SDL_Surface *bg_small_box;
 
    void ChangeMap();
    void SaveOptions();
