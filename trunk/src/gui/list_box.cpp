@@ -27,7 +27,6 @@
 #include "../graphic/font.h"
 #include <algorithm>
 #include <SDL_gfxPrimitives.h>
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
@@ -111,7 +110,10 @@ void ListBox::Draw (uint mouse_x, uint mouse_y)
   
   boxRGBA(app.sdlwindow, x, y, x+w, y+h,
 	  255, 255, 255, 255*3/10);
-  
+
+  rectangleRGBA(app.sdlwindow, x, y, x+w, y+h,
+		255, 255, 255, 255);
+
   for (uint i=0; i < nb_visible_items; i++) 
   {
      if ( i+first_visible_item == uint(item) ) {

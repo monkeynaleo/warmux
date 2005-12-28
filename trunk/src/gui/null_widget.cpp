@@ -16,36 +16,32 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Vertical or Horizontal Box
+ * Null widget (blank) in GUI.
  *****************************************************************************/
 
-#ifndef GUI_BOX_H
-#define GUI_BOX_H
-
-//-----------------------------------------------------------------------------
-#include "widget.h"
-#include <list>
+#include "null_widget.h"
 //-----------------------------------------------------------------------------
 
-class Box : public Widget
+NullWidget::NullWidget (uint x, uint y, uint w, uint h):
+  Widget(x, y, w, h)
 {
- private:
-  std::list<Widget *> widgets;
-  Widget * last_widget;
-  bool horizontal;
-  bool visible;
-
- public:
-  Box(uint x, uint y, uint w, bool _horizontal=false, bool _visible=true);
-  virtual ~Box();
-
-  void Draw (uint mouse_x, uint mouse_y);
-  bool Clic (uint mouse_x, uint mouse_y);
-  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
-
-  void AddWidget(Widget * a_widget);
-};
+}
 
 //-----------------------------------------------------------------------------
-#endif
 
+NullWidget::~NullWidget()
+{
+}
+
+//-----------------------------------------------------------------------------
+
+void NullWidget::Draw (uint mouse_x, uint mouse_y)
+{
+}
+
+//-----------------------------------------------------------------------------
+void NullWidget::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+{
+  StdSetSizePosition(_x, _y, _w, _h);
+}
+//-----------------------------------------------------------------------------

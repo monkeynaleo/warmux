@@ -19,15 +19,24 @@
  * Vertical or Horizontal Box
  *****************************************************************************/
 
+#include <SDL_gfxPrimitives.h>
 #include "box.h"
+#include "../include/app.h"
+
 #include <iostream>
+
 //-----------------------------------------------------------------------------
 
-Box::Box(uint _x, uint _y, uint _w, uint _h, bool _horizontal) :
-  Widget(_x,_y,_w,_h)
+Box::Box(uint _x, uint _y, uint _w, 
+	 bool _horizontal, 
+	 bool _visible) :
+  Widget(_x,_y,_w, 1)
 {
   last_widget = NULL;
   horizontal = _horizontal;
+  visible = _visible;
+
+  if (horizontal) h = _w;
 }
 
 //-----------------------------------------------------------------------------
@@ -48,6 +57,14 @@ Box::~Box()
 
 void Box::Draw (uint mouse_x, uint mouse_y)
 {
+  if (visible) {
+    boxRGBA(app.sdlwindow, x, y, x+w, y+h,
+	    80,80,159,206);
+
+    rectangleRGBA(app.sdlwindow, x, y, x+w, y+h,
+		  49, 32, 122, 255);  
+  }
+
   std::list<Widget *>::iterator it;
   for (it = widgets.begin(); 
        it != widgets.end(); 
@@ -90,24 +107,30 @@ void Box::AddWidget(Widget * a_widget)
     if (horizontal) {
       uint _w = a_widget->GetW();
       uint _x = last_widget->GetX()+last_widget->GetW();
-      a_widget->SetSizePosition(_x, y, _w, h);
+      a_widget->SetSizePosition(_x+5, y+5, _w, h-10);
     } else {
       uint _h = a_widget->GetH();
       uint _y = last_widget->GetY()+last_widget->GetH();
-      a_widget->SetSizePosition(x, _y, w, _h);
+      a_widget->SetSizePosition(x+5, _y+5, w-10, _h);
     }
   }
   else {
 
     if (horizontal) {
-      a_widget->SetSizePosition(x, y, a_widget->GetW(), h);
+      a_widget->SetSizePosition(x+5, y+5, a_widget->GetW(), h-10);
     } else {
-      a_widget->SetSizePosition(x, y, w, a_widget->GetH());
+      a_widget->SetSizePosition(x+5, y+5, w-10, a_widget->GetH());
     }
   }
   last_widget = a_widget;
 
   widgets.push_back(a_widget);
+
+  if (horizontal) {
+    w = a_widget->GetX() + a_widget->GetW() - x + 5;
+  } else {
+    h = a_widget->GetY() + a_widget->GetH() - y + 5;
+  }
 
 }
 
