@@ -579,8 +579,8 @@ void Tile::DrawTile_Clipped( Rectanglei clip_r_world) const
    // Select only the items that are under the clip area
    int first_cell_x = clamp( (clip_r_world.x)/cell_width,                0, nbr_cell_width-1);
    int first_cell_y = clamp( (clip_r_world.y)/cell_height,                0, nbr_cell_height-1);
-   int last_cell_x  = clamp( (clip_r_world.x+clip_r_world.w)/cell_width, 0, nbr_cell_width-1);
-   int last_cell_y  = clamp( (clip_r_world.y+clip_r_world.h)/cell_height, 0, nbr_cell_height-1);
+   int last_cell_x  = clamp( (clip_r_world.x+clip_r_world.w +1)/cell_width, 0, nbr_cell_width-1);
+   int last_cell_y  = clamp( (clip_r_world.y+clip_r_world.h +1)/cell_height, 0, nbr_cell_height-1);
 
    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
      for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++)
@@ -606,13 +606,13 @@ void Tile::DrawTile_Clipped( Rectanglei clip_r_world) const
 	       dest_h -= clip_r_world.y - dest_y;
 	       dest_y  = clip_r_world.y;
 	    }
-	  if ( dest_x + dest_w > clip_r_world.x + clip_r_world.w ) // right clipping
+	  if ( dest_x + dest_w > clip_r_world.x + clip_r_world.w +1) // right clipping
 	    {
-	       dest_w -= ( dest_x + dest_w ) - ( clip_r_world.x + clip_r_world.w );
+	       dest_w -= ( dest_x + dest_w ) - ( clip_r_world.x + clip_r_world.w +1);
 	    }
-	  if ( dest_y + dest_h > clip_r_world.y + clip_r_world.h ) // bottom clipping
+	  if ( dest_y + dest_h > clip_r_world.y + clip_r_world.h +1) // bottom clipping
 	    {
-	       dest_h -= ( dest_y + dest_h ) - ( clip_r_world.y + clip_r_world.h );
+	       dest_h -= ( dest_y + dest_h ) - ( clip_r_world.y + clip_r_world.h +1);
 	    }
 	  
 	  

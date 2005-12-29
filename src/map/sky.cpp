@@ -149,12 +149,12 @@ void Sky::Draw()
   {
     SDL_Rect ds = { sky_cx + it->x - cx, 
 		    sky_cy + it->y - cy, 
-		    it->w, 
-		    it->h};
+		    it->w+1, 
+		    it->h+1};
     SDL_Rect dr = {it->x-cx,
 		   it->y-cy, 
-		   it->w, 
-		   it->h};
+		   it->w+1, 
+		   it->h+1};
     SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
     i++;
   }
