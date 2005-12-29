@@ -116,7 +116,6 @@ typedef enum {
    void Draw(int pos_x, int pos_y);
    void Update();
    bool IsFinished() const;
-   void SetTranslation(int x, int y) {translation_x = x; translation_y = y;};
 
  private:
    unsigned int last_update;
@@ -125,7 +124,6 @@ typedef enum {
    bool loop;
    bool pingpong;
    SpriteShowOnFinish show_on_finish;
-   int translation_x,translation_y;
    int frame_width_pix,frame_height_pix;
    float scale_x,scale_y;
    float rotation_deg;

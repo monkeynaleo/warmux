@@ -26,7 +26,7 @@
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../map/camera.h"
-# include "../graphic/video.h"
+#include "../graphic/video.h"
 #include "../include/constant.h" // FOND_X, FOND_Y
 #include "interface.h"
 #include "cursor.h"
@@ -88,34 +88,34 @@ bool Mouse::ActionClicG()
 
   // On peut changer de ver ?
   if (game_mode.AllowCharacterSelection())
+  {
+    // Sélection d'un ver se son équipe ?
+    bool ver_choisi=false;
+    Team::iterator it=ActiveTeam().begin(),
+	                 fin=ActiveTeam().end();
+    uint index=0;
+    for (; it != fin; ++it, ++index)
     {
-      // Sélection d'un ver se son équipe ?
-      bool ver_choisi=false;
-      Team::iterator 
-	it=ActiveTeam().begin(),
-	fin=ActiveTeam().end();
-      uint index=0;
-      for (; it != fin; ++it, ++index)
-	{
-	  if (&(*it) != &ActiveCharacter()
-	      && !it -> IsDead() 
-	      && IsInside (it -> GetRect(), pos_monde))
-	    {
-	      ver_choisi = true;
-	      break;
-	    }
-	}
-      if (ver_choisi)
-	{
-	  ActiveTeam().SelectCharacterIndex (index);
-	  return true;
-	}
+      if (&(*it) != &ActiveCharacter()
+        && !it -> IsDead() 
+        && IsInside (it -> GetRect(), pos_monde))
+      {
+        ver_choisi = true;
+        break;
+      }
+  }
 
-      if (IsInside (ActiveCharacter().GetRect(), pos_monde))
-	{
-	  curseur_ver.SuitVerActif();
-	  return true;
-	}
+  if (ver_choisi)
+  {
+    ActiveTeam().SelectCharacterIndex (index);
+    return true;
+  }
+
+  if (IsInside (ActiveCharacter().GetRect(), pos_monde))
+  {
+    curseur_ver.SuitVerActif();
+    return true;
+  }
     }
   
   // Action dans le menu des armes ?
@@ -163,11 +163,11 @@ void Mouse::ChoixVerPointe()
     }
   
   // Dessine le curseur autour du ver pointé s'il y en a un
-  if (interface.character_under_cursor != NULL) {
-    curseur_ver.PointeObj (interface.character_under_cursor);
-  } else {
-    curseur_ver.PointeAucunObj();
-  }
+//  if (interface.character_under_cursor != NULL) {
+//    curseur_ver.PointeObj (interface.character_under_cursor);
+//  } else {
+//    curseur_ver.PointeAucunObj();
+//  }
 }
 
 //-----------------------------------------------------------------------------

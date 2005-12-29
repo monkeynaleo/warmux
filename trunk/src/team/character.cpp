@@ -42,6 +42,7 @@
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon_tools.h"
 #include "../include/action_handler.h"
+#include "../interface/cursor.h"
 #include "move.h"
 #include "macro.h"
 
@@ -59,6 +60,7 @@ const uint HAUT_FONT_MIX = 13;
 
 // Space between the name, the skin and the energy bar
 const uint ESPACE = 3; // pixels
+const uint do_nothing_timeout = 5000;
 
 #ifdef DEBUG
 
@@ -108,6 +110,7 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   channel_step = -1;
   hidden = false;
   image = NULL;
+  do_nothing_time = 0;
 
   name_text = NULL;
 }
@@ -286,6 +289,8 @@ void Character::StartBreathing()
 //-----------------------------------------------------------------------------
 void Character::StartWalking()
 {
+  do_nothing_time = Wormux::global_time.Read();
+
   if(full_walk && current_skin=="breathe")
   {
     SetSkin("walking");
@@ -385,6 +390,8 @@ void Character::Saute ()
 #ifdef DEBUG_CHG_ETAT
   COUT_DBG << "Saute." << endl;
 #endif
+  do_nothing_time = Wormux::global_time.Read();
+
   if (!CanJump()) return;
 
   jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
@@ -407,6 +414,8 @@ void Character::SuperSaut ()
 #ifdef DEBUG_CHG_ETAT
   COUT_DBG << "SuperSaut." << endl;
 #endif
+  do_nothing_time = Wormux::global_time.Read();
+
   if (!CanJump()) return;
 
   m_rebounding = false;
@@ -483,7 +492,9 @@ void Character::HandleKeyEvent(int action, int event_type)
   if (action == ACTION_SHOOT)
     {
       HandleShoot(event_type);
-       return;
+      do_nothing_time = Wormux::global_time.Read();
+      curseur_ver.Cache();
+      return;
     }
 
   if (!ActiveCharacter().IsReady())
@@ -529,13 +540,21 @@ void Character::HandleKeyEvent(int action, int event_type)
   	      break ;
 
             case ACTION_UP:
-    	      if (ActiveTeam().crosshair.enable)
-	        action_handler.NewAction (Action(ACTION_UP));
+    	        if (ActiveTeam().crosshair.enable)
+              {
+                do_nothing_time = Wormux::global_time.Read();
+                curseur_ver.Cache();
+	              action_handler.NewAction (Action(ACTION_UP));
+              }
 	      break ;
 
             case ACTION_DOWN:
-	      if (ActiveTeam().crosshair.enable)
-	        action_handler.NewAction (Action(ACTION_DOWN));
+	            if (ActiveTeam().crosshair.enable)
+              {
+                do_nothing_time = Wormux::global_time.Read();
+                curseur_ver.Cache();
+     	          action_handler.NewAction (Action(ACTION_DOWN));
+              }
 	      break ;
             default:
 	      break ;
@@ -564,6 +583,12 @@ void Character::Refresh()
   if (desactive) return;
 
   UpdatePosition ();
+
+  if( &ActiveCharacter() == this && game_loop.ReadState() == gamePLAYING)
+  {
+    if(do_nothing_time + do_nothing_timeout < Wormux::global_time.Read())
+      curseur_ver.SuitVerActif();
+  }
 
   // Refresh de l'animation
   if (GetSkin().anim.utilise)
@@ -635,6 +660,8 @@ bool Character::CanJump() const
 
 void Character::InitMouvementDG(uint pause)
 {
+  do_nothing_time = Wormux::global_time.Read();
+  curseur_ver.Cache();
   m_rebounding = false;
   pause_bouge_dg = global_time.Read()+pause;
 

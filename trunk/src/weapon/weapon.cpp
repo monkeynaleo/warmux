@@ -32,7 +32,6 @@
 #include "../tool/xml_document.h"
 #include "../object/objects_list.h"
 #include "../include/action_handler.h"
-#include "../interface/cursor.h"
 #include "../interface/interface.h"
 #include "../gui/progress_bar.h"
 #include "../game/time.h"
@@ -471,8 +470,6 @@ void Weapon::InitLoading()
 
   channel_load = jukebox.Play("share","weapon/load");
    
-  curseur_ver.Cache();
-
   m_first_time_loading = Wormux::global_time.Read();
   
   m_strength = 0;

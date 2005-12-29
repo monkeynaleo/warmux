@@ -54,6 +54,7 @@ private:
 
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
+  uint do_nothing_time;
   int losted_energy;
 
   Skin *skin;
