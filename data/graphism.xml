@@ -88,9 +88,7 @@
   <surface name="pointeur1" file="gfx/pointer.png" />
 
   <sprite name="curseur">
-    <image file="gfx/arrow.png">
-      <grid pos="0,0" size="27,41" array="3,1" />
-    </image>
+    <image file="gfx/arrow.png" />
   </sprite>
 
   <surface name="water" file="gfx/water.png" />

@@ -317,10 +317,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	    tx = atoi( x.c_str());
     if ( profile->doc->LitAttrString( elem, "y", y) )
 	    ty = atoi( y.c_str());
-    sprite->SetTranslation(tx ,ty);
   }
-  else
-    sprite->SetTranslation(0,0);
 
   elem = profile->doc->AccesBalise ( elem_sprite, "frame");
   if ( elem != NULL )

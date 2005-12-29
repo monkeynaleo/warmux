@@ -34,44 +34,37 @@ struct Sprite;
 
 class CurseurVer
 {
-private:
-  uint nbr_clignot;
-  uint temps;
-  PhysicalObj *obj_designe;
-  bool clignote;
-  bool actif;
-  bool designe_ver_actif;
+public:
+   Sprite *image;
 
-  uint nbr_boucle;
-  uint y_mouvement;
-  bool monter;
+private:
+  uint time_begin_anim;
+  uint last_update;
+  PhysicalObj *obj_designe;
+  int dy;
+  bool actif;
+  bool want_hide;
 
 public:
-#ifdef CL
-   CL_Sprite image;
-#else
-   Sprite *image;
-#endif
-
- public:
   CurseurVer();
+  ~CurseurVer();
 
   void Init();
   void Reset();
   void Draw();
   void Refresh();
 
-  // Suit le ver actif
-  void SuitVerActif();
-
   // Pointe un objet
   void PointeObj (PhysicalObj *obj);
 
-  // Ne pointe plus d'objet (à part si le ver actif était suivi)
-  void PointeAucunObj ();
+  // Pointe un objet
+  void SuitVerActif ();
 
   // Cache le curseur
   void Cache();
+
+private:
+  bool IsDisplayed() const;
 };
 
 extern CurseurVer curseur_ver;

@@ -23,7 +23,6 @@
 //-----------------------------------------------------------------------------
 #include <math.h>
 #include "../include/action_handler.h"
-#include "../interface/cursor.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
 #include "../map/map.h"
@@ -104,9 +103,6 @@ void MoveCharacter (Character &character)
 {
   int hauteur;
   bool fantome;
-
-  // Désactive le curseur
-  curseur_ver.Cache();
 
   // On est bien dans le monde ? (sinon, pas besoin de tester !)
   if (character.GetDirection() == -1)

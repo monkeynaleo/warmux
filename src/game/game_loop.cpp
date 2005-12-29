@@ -655,6 +655,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     COUT_DEBUG << "HAS_PLAYED" << std::endl;
 #endif
     duration = 5;
+    curseur_ver.Cache();
     break;
 
   // Fin du tour : petite pause
@@ -663,6 +664,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     COUT_DEBUG << "END_TURN" << std::endl;
 #endif
     ActiveTeam().AccessWeapon().SignalTurnEnd();
+    curseur_ver.Cache();
     duration = game_mode.duration_turn_end;
     interface.EnableDisplayTimer(false);
     pause_seconde = global_time.Read();

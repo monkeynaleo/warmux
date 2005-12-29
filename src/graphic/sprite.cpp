@@ -94,8 +94,6 @@ Sprite::Sprite()
    loop = true;
    pingpong = false;
    finished = false;
-   translation_x = 0;
-   translation_y = 0;
    have_rotation_cache = false;
    have_flipping_cache = false;
    have_lastframe_cache = false;
@@ -123,8 +121,6 @@ Sprite::Sprite( const Sprite& other)
    loop = other.loop;
    pingpong = other.pingpong;
    finished = other.finished;
-   translation_x = other.translation_x;
-   translation_y = other.translation_y;
    have_rotation_cache = false;
    have_flipping_cache = false;
    have_lastframe_cache = false;
@@ -176,12 +172,9 @@ Sprite::Sprite( SDL_Surface *surface)
    show = true;
    last_update = Wormux::global_time.Read();
    show_on_finish = show_last_frame;
-//   loop = false;
    loop = true;
    pingpong = false;
    finished = false;
-   translation_x = 0;
-   translation_y = 0;
    have_rotation_cache = false;
    have_flipping_cache = false;
    have_lastframe_cache = false;
@@ -327,17 +320,17 @@ void Sprite::SetSize(unsigned int w, unsigned int h)
 {
   assert(frame_width_pix == 0 && frame_height_pix == 0)
 	frame_width_pix = w;
-	frame_height_pix = 0;
+	frame_height_pix = h;
 }
 
 unsigned int Sprite::GetWidth()
 {
-   return frame_width_pix;
+   return (uint)((float)frame_width_pix * (scale_x>0?scale_x:-scale_x));
 }
 
 unsigned int Sprite::GetHeight()
 {
-   return frame_height_pix;
+   return (uint)((float)frame_height_pix * (scale_y>0?scale_y:-scale_y));
 }
 
 unsigned int Sprite::GetFrameCount()
@@ -593,7 +586,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
      {
        if(last_frame == NULL)
        {
-         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_ON);
+         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
          last_frame = tmp_surface;
        }
        else
@@ -656,14 +649,8 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    if(rotation_deg!=0.0)
      Calculate_Rotation_Offset(rot_x, rot_y, tmp_surface);
 
-   int x = pos_x + rot_x + int((float)translation_x * scale_x);
-   int y = pos_y + rot_y + int((float)translation_y * -scale_y);
-
-//   if(scale_x < 0) //Clanlib backward compatibility: do as if hotspot 
-//is set to top_left
-//     x -= scale_x * GetWidth();
-//   if(scale_y < 0) //Clanlib backward compatibility: do as if hotspot is set to top_left
-//     y -= scale_y * GetHeight();
+   int x = pos_x + rot_x;
+   int y = pos_y + rot_y;
 
    SDL_Rect dr = {x, y, tmp_surface->w, tmp_surface->h};
 

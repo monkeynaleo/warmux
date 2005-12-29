@@ -24,6 +24,7 @@
 #include <SDL/SDL_image.h>
 #include <math.h>
 #include "sprite.h"
+#include "../game/time.h"
 
 // From SDL's wiki
 Uint32 getpixel(SDL_Surface *surface, int x, int y)
@@ -86,7 +87,10 @@ void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
     }
 }
 
-
+//Make the sdl_surface 'a', do a wave of 'nbr_frames', and last 'duration' milliseconds.
+//wave_amp is the amplitude of the wave on the left and the right side of the sprite
+//wave_per is the number of periode of the wave when it is waved at the maximum
+//used on the skin during teleportation
 Sprite* WaveSurface(SDL_Surface* a,unsigned int nbr_frames, unsigned int duration, float wave_amp, float wave_per)
 {
 	assert(a!=NULL);
@@ -120,4 +124,36 @@ Sprite* WaveSurface(SDL_Surface* a,unsigned int nbr_frames, unsigned int duratio
 		sprite->AddFrame(b, duration / nbr_frames);
 	}
 	return sprite;
+}
+
+//Modify the scale of 'spr' to make it deform as if it was rebounding
+// dy return the offset that should be used to display the sprite at the good position
+// t0 time when we began to rebound
+// per time to do one full rebound
+// dy_max offset max of the rebound ( 0 <= dy <= dy_max )
+void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
+{
+  float scale_x, scale_y;
+  int spr_w, spr_h;
+  uint dt = (Wormux::global_time.Read() - t0) % per;
+
+  spr->Scale(1.0,1.0);
+  spr_w = spr->GetWidth();
+  spr_h = spr->GetHeight();
+  dy = 0;
+
+  //sprite at bottom:
+  if( dt < per / 4 )
+  {
+    float dt2 = ((per / 4) - dt) / ((float)per / 4.0);    
+    scale_y =        2.0*dt2*dt2 - 2.0*dt2 + 1.0;
+    scale_x = 2.0 - (2.0*dt2*dt2 - 2.0*dt2 + 1.0);
+    dy = 0;
+    spr->Scale(scale_x,scale_y);
+    return;
+  }
+
+  dt -= per/4;
+  float dt2 = ((3*per/4)-dt)/(3.0*per/4.0);
+  dy += (-4.0*dt2*dt2 + 4.0*dt2) * dy_max;
 }
