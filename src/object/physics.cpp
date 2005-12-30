@@ -586,7 +586,7 @@ void Physics::RunPhysicalEngine ()
   double old_x,old_y;
   double new_x,new_y;
   double contact_x, contact_y, contact_angle;
-  bool contact;
+  bool contact = false;
 
   step_t = PHYS_DELTA_T;
 

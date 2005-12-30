@@ -32,6 +32,7 @@
 #include "../game/time.h"
 #include "../tool/Rectangle.h"
 #include "../map/map.h"
+#include "../game/game.h"
 
 #ifdef DBG_SPRITE
 #include <sstream>
@@ -656,6 +657,10 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 
    SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
 
+  // For the cache mechanism
+  if(jeu.JeuEstLance())
+    world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface->w, tmp_surface->h));
+
    if(need_free_surface)
      SDL_FreeSurface (tmp_surface);
 #else
@@ -663,10 +668,6 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    SDL_Rect dr = {pos_x , pos_y , frame_width_pix, frame_height_pix};
    SDL_BlitSurface (frames[current_frame].surface, NULL, dest, &dr);
 #endif //__MINGW32__
-
-  // For the cache mechanism
-  world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface->w, tmp_surface->h));
-
 
 #ifdef DBG_SPRITE
    std::ostringstream ss;
