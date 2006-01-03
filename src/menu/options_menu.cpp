@@ -21,24 +21,14 @@
 
 #include "options_menu.h"
 //-----------------------------------------------------------------------------
-#include "../gui/button.h"
-#include "../gui/list_box.h"
-#include "../gui/check_box.h"
-#include "../gui/spin_button.h"
-#include "../gui/box.h"
-#include "../gui/question.h"
-#include "../gui/label.h"
-#include "../gui/null_widget.h"
 
-#include "../tool/resource_manager.h"
+#include "../include/app.h"
+#include "../graphic/video.h"
 #include "../team/teams_list.h"
 #include "../game/game_mode.h"
-#include "../graphic/video.h"
 #include "../map/maps_list.h"
-#include "../include/app.h"
 #include "../game/config.h"
 #include "../tool/i18n.h"
-#include "../sound/jukebox.h"
 #include "../tool/string_tools.h"
 
 using namespace Wormux;
@@ -46,30 +36,13 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-const uint PAUSE = 10;
-
-const uint TEAMS_X = 30;
-const uint TEAMS_Y = 30;
-const uint TEAMS_W = 160;
-const uint TEAMS_H = 260;
-const uint TEAM_LOGO_Y = 290;
-const uint TEAM_LOGO_W = 48;
-
-const uint MAPS_X = TEAMS_X+TEAMS_W+50;
-const uint MAPS_Y = TEAMS_Y;
-const uint MAPS_W = 160;
-const uint MAPS_H = 260;
- 
-const uint MAP_PREVIEW_W = 300;
-const uint MAP_PREVIEW_H = 300;
-
-const uint GAME_X = TEAMS_X;
-const uint GAME_Y = TEAMS_Y+TEAMS_H+TEAM_LOGO_W+50;
+const uint GAME_X = 20;
+const uint GAME_Y = 20;
 const uint GAME_W = 230;
 
 const uint SOUND_X = GAME_X+GAME_W+50;
 const uint SOUND_Y = GAME_Y;
-const uint SOUND_W = 180;
+const uint SOUND_W = 230;
 
 const uint GRAPHIC_X = SOUND_X+SOUND_W+50;
 const uint GRAPHIC_Y = GAME_Y;
@@ -85,43 +58,17 @@ const uint TPS_FIN_TOUR_MAX = 10;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-OptionMenu::OptionMenu()
+OptionMenu::OptionMenu() : Menu("menu/bg_option")
 {
-  close_menu = false ;
-  m_init = false;
-   
-  uint x = (video.GetWidth()/2);
-  uint y = video.GetHeight()-50;
-
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
 
-  /* actions buttons */
-  actions_buttons = new Box(x, y, 40, true, false);
-
-  b_ok = new Button(0, 0, res, "menu/valider"); 
-  actions_buttons->AddWidget(b_ok);
-
-  b_record = new Button(0, 0, res, "menu/enregistrer");
-  actions_buttons->AddWidget(b_record);
-
-  b_cancel = new Button(0, 0, res, "menu/annuler");
-  actions_buttons->AddWidget(b_cancel);
-
-  /* Maps and teams listboxes */
-  lbox_teams = new ListBox(TEAMS_X, TEAMS_Y, TEAMS_W, TEAMS_H);
-
-  map_box = new Box(MAPS_X, MAPS_Y, MAPS_H+10, true);
-  lbox_maps = new ListBox(0, 0, MAPS_W, MAPS_H);
-  map_box->AddWidget(lbox_maps);
-
-  blank_space = new NullWidget(0, 0, MAP_PREVIEW_W, MAP_PREVIEW_H);
-  map_box->AddWidget(blank_space);
+  //-----------------------------------------------------------------------------
+  // Widget creation
+  //-----------------------------------------------------------------------------
 
   /* Grapic options */
-  graphic_options = new Box(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W);
-
-  label_graphic = new Label(_("Graphic options"), 0, 0, 0, normal_font);
-  graphic_options->AddWidget(label_graphic);
+  graphic_options = new VBox(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W);
+  graphic_options->AddWidget(new Label(_("Graphic options"), 0, 0, 0, normal_font));
 
   lbox_video_mode = new ListBox(0, 0, 0, 80);
   graphic_options->AddWidget(lbox_video_mode);
@@ -139,10 +86,8 @@ OptionMenu::OptionMenu()
   graphic_options->AddWidget(opt_display_name);
 
   /* Sound options */
-  sound_options = new Box(SOUND_X, SOUND_Y, SOUND_W);
-  
-  label_sound = new Label(_("Sound options"), 0, 0, 0, normal_font);
-  sound_options->AddWidget(label_sound);
+  sound_options = new VBox(SOUND_X, SOUND_Y, SOUND_W);
+  sound_options->AddWidget(new Label(_("Sound options"), 0, 0, 0, normal_font));
 
   lbox_sound_freq = new ListBox(0, 0, 0, 80);
   sound_options->AddWidget(lbox_sound_freq);
@@ -154,10 +99,8 @@ OptionMenu::OptionMenu()
   sound_options->AddWidget(opt_sound_effects);
   
   /* Game options */
-  game_options = new Box(GAME_X, GAME_Y, GAME_W);
-
-  label_game = new Label(_("Game options"), 0, 0, 0, normal_font);
-  game_options->AddWidget(label_game);
+  game_options = new VBox(GAME_X, GAME_Y, GAME_W);
+  game_options->AddWidget(new Label(_("Game options"), 0, 0, 0, normal_font));
 
   opt_duration_turn = new SpinButton(_("Duration of a turn:"), 0, 0, 0,
 				     TPS_TOUR_MIN, 5,
@@ -180,95 +123,10 @@ OptionMenu::OptionMenu()
   
   game_options->AddWidget(opt_energy_ini);
 
-}
 
-//-----------------------------------------------------------------------------
-
-OptionMenu::~OptionMenu()
-{
-  close_menu = false ;
-  m_init = false;
-
-  delete actions_buttons;
-   
-  delete map_box;
-  delete lbox_teams;
-
-  delete graphic_options;
-  delete sound_options;
-  delete game_options;
-}
-
-//-----------------------------------------------------------------------------
-
-void OptionMenu::onClick ( int x, int y)
-{     
-  if (b_ok->MouseIsOver (x, y)) {
-    jukebox.Play("share", "menu/ok");
-    SaveOptions();
-    close_menu = true;
-  } else if (b_cancel->MouseIsOver (x, y)) {
-    jukebox.Play("share", "menu/cancel");
-    close_menu = true;
-  } else if (b_record->MouseIsOver (x, y)) {
-    SaveOptions();
-  } else if (lbox_maps->Clic(x, y)) {
-    ChangeMap();
-  } else if (lbox_teams->Clic(x, y)) {
-  } else if (graphic_options->Clic (x,y)) {
-  } else if (sound_options->Clic (x,y)) {
-  } else if (game_options->Clic (x,y)) {
-  }
-
-}
-
-//-----------------------------------------------------------------------------
-
-void OptionMenu::Init ()
-{ 
-  if (m_init) return;
-  m_init = true;
-
-#ifdef CL
-  //Enter main loop 
-  app.Run();
-#else
-   // WHY app.run() ????
-#endif
-
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
-
-  bg_option = new Sprite( resource_manager.LoadImage( res, "menu/bg_option"));
-//   bg_long_box = resource_manager.LoadImage( res, "menu/bg_long_box");
-//   bg_small_box = resource_manager.LoadImage( res, "menu/bg_small_box");
-
-  // Load Maps' list
-  std::sort(lst_terrain.liste.begin(), lst_terrain.liste.end(), compareMaps);
-
-  ListeTerrain::iterator
-    terrain=lst_terrain.liste.begin(),
-    fin_terrain=lst_terrain.liste.end();
-  for (; terrain != fin_terrain; ++terrain)
-  {
-    bool choisi = terrain -> name == lst_terrain.TerrainActif().name;
-    lbox_maps->AddItem (choisi, terrain -> name, terrain -> name);
-  }
-
-  // Load Teams' list
-  teams_list.full_list.sort(compareTeams);
-
-  TeamsList::full_iterator
-    it=teams_list.full_list.begin(), 
-    end=teams_list.full_list.end();
-  lbox_teams->selection_max = game_mode.max_teams;
-  lbox_teams->selection_min = 2;
-  uint i=0;
-  for (; it != end; ++it)
-  {
-    bool choix = teams_list.IsSelected (i);
-    lbox_teams->AddItem (choix, (*it).GetName(), (*it).GetName());
-    ++i;
-  }
+  //-----------------------------------------------------------------------------
+  // Values initialization
+  //-----------------------------------------------------------------------------
 
   //Generate video mode list
   SDL_Rect **modes;
@@ -282,7 +140,7 @@ void OptionMenu::Init ()
     ss << app.sdlwindow->w << "x" << app.sdlwindow->h ;
     lbox_video_mode->AddItem(false,"No modes available!", ss.str());
   } else {
-    for(i=0;modes[i];++i) {
+    for(int i=0;modes[i];++i) {
       if (modes[i]->w < 800 || modes[i]->h < 600) break; 
       std::ostringstream ss;
       ss << modes[i]->w << "x" << modes[i]->h ;
@@ -300,12 +158,7 @@ void OptionMenu::Init ()
   lbox_sound_freq->AddItem (current_freq == 44100, "44 kHz", "44100");
 
   resource_manager.UnLoadXMLProfile( res);
-}
 
-//-----------------------------------------------------------------------------
-
-void OptionMenu::Reset()
-{
   opt_display_wind_particles->SetValue (config.display_wind_particles);
   opt_display_energy->SetValue (config.affiche_energie_ver);
   opt_display_name->SetValue (config.affiche_nom_ver);
@@ -315,9 +168,28 @@ void OptionMenu::Reset()
   opt_nb_characters->SetValue(game_mode.max_characters);
   opt_energy_ini->SetValue(game_mode.character.init_energy);
 
-
   opt_music->SetValue( jukebox.UseMusic() );
   opt_sound_effects->SetValue( jukebox.UseEffects() );
+
+}
+
+//-----------------------------------------------------------------------------
+
+OptionMenu::~OptionMenu()
+{
+  delete graphic_options;
+  delete sound_options;
+  delete game_options;
+}
+
+//-----------------------------------------------------------------------------
+
+void OptionMenu::OnClic ( int x, int y)
+{     
+  if (graphic_options->Clic (x,y)) {
+  } else if (sound_options->Clic (x,y)) {
+  } else if (game_options->Clic (x,y)) {
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -325,9 +197,6 @@ void OptionMenu::Reset()
 void OptionMenu::SaveOptions()
 {
   // Save values
-  std::string map_id = lbox_maps->ReadLabel(lbox_maps->GetSelectedItem());
-  lst_terrain.ChangeTerrainNom (map_id);
-  teams_list.ChangeSelection (lbox_teams->GetSelection());
   config.display_wind_particles = opt_display_wind_particles->GetValue();
   config.affiche_energie_ver = opt_display_energy->GetValue();
   config.affiche_nom_ver = opt_display_name->GetValue();
@@ -361,119 +230,32 @@ void OptionMenu::SaveOptions()
 
 //-----------------------------------------------------------------------------
 
-void OptionMenu::ChangeMap()
+void OptionMenu::__sig_ok()
 {
-  std::string map_id = lbox_maps->ReadLabel(lbox_maps->GetSelectedItem());
-  uint map = lst_terrain.FindMapById(map_id);
-  map_preview = new Sprite(lst_terrain.liste[map].preview);
-  float scale = std::min( float(MAP_PREVIEW_H)/map_preview->GetHeight(), 
-                          float(MAP_PREVIEW_W)/map_preview->GetWidth() ) ;
-
-  map_preview->Scale (scale, scale);
+  SaveOptions();
 }
 
 //-----------------------------------------------------------------------------
 
-// Traitement d'une touche clavier relachée
-void OptionMenu::Run ()
-{ 
-  bool terrain_init = false;
-  int x=0, y=0;
-  Team* derniere_equipe = teams_list.FindByIndex(0);;
+void OptionMenu::__sig_cancel()
+{
+  // Nothing to do
+}
 
-  Init();
-  Reset();
+//-----------------------------------------------------------------------------
 
-  close_menu = false;
-  do
-  {
-   // Poll and treat events
-	
-   SDL_Event event;
-     
-   while( SDL_PollEvent( &event) ) 
-     {      
-	if ( event.type == SDL_QUIT) 
-	  {  
-	     close_menu = true;
-	  }
-	else if ( event.type == SDL_KEYDOWN )
-	  {	       
-	     switch ( event.key.keysym.sym)
-	       { 
-		case SDLK_ESCAPE: 
-		  close_menu = true;
-		  break;
-		  
-		case SDLK_RETURN: 
-		  SaveOptions();
-		  close_menu = true;
-		  break;
-		  
-		default:
-		  break;
-	       }  
-	  }
-	else if ( event.type == SDL_MOUSEBUTTONDOWN )
-	  {
-	     onClick( event.button.x, event.button.y);
-	  }
-     }
+void OptionMenu::__sig_record()
+{
+  SaveOptions();
+}
 
-   SDL_GetMouseState( &x, &y);
-     
-    int nv_equipe = lbox_teams->MouseIsOnWitchItem (x,y);
-    if (nv_equipe != -1)
-    {
-      derniere_equipe = teams_list.FindByIndex(nv_equipe);
-    }
-      
-    // affichage des boutons et de la carte
-    bg_option->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
-    bg_option->Blit( app.sdlwindow, 0, 0);
+//-----------------------------------------------------------------------------
 
-//     SDL_Rect r1 = {TEAMS_X-30,TEAMS_Y-30,bg_long_box->w,bg_long_box->h};	  
-//     SDL_BlitSurface( bg_long_box, NULL, app.sdlwindow, &r1);
-
-//     SDL_Rect r2 = {MAPS_X-30, MAPS_Y-30,bg_long_box->w,bg_long_box->h};
-//     SDL_BlitSurface( bg_long_box, NULL, app.sdlwindow, &r2);
-
-//     SDL_Rect r3 = {GAME_X-30, GAME_Y-30,bg_small_box->w,bg_small_box->h};
-//     SDL_BlitSurface( bg_small_box, NULL, app.sdlwindow, &r3);
-
-//     SDL_Rect r4 = {SOUND_X-30, SOUND_Y-30,bg_small_box->w,bg_small_box->h};
-//     SDL_BlitSurface( bg_small_box, NULL, app.sdlwindow, &r4);
-
-//     SDL_Rect r5 = {GRAPHIC_X-30, GRAPHIC_Y-30,bg_small_box->w,bg_small_box->h};
-//     SDL_BlitSurface( bg_small_box, NULL, app.sdlwindow, &r5);
-     
-    actions_buttons->Draw(x,y);
-    map_box->Draw(x,y);
-    lbox_teams->Draw(x,y);
-
-    graphic_options->Draw(x, y);
-    sound_options->Draw(x,y);
-    game_options->Draw(x,y);
-    
-
-    SDL_Rect team_icon_rect = { TEAMS_X+(TEAMS_W/2)-(TEAM_LOGO_W/2),
-				TEAMS_Y+TEAMS_H,
-				TEAM_LOGO_W,
-				TEAM_LOGO_W};
-    SDL_BlitSurface (derniere_equipe->ecusson, NULL, app.sdlwindow, &team_icon_rect); 
-     
-    if (!terrain_init)
-    {
-      terrain_init = true;
-      ChangeMap();
-    }
-
-    map_preview->Blit ( app.sdlwindow, MAPS_X+MAPS_W+10, MAPS_Y+5);
-     
-    SDL_Flip( app.sdlwindow);
-     
-  } while (!close_menu);
-
+void OptionMenu::Draw(int mouse_x, int mouse_y)
+{   
+  graphic_options->Draw(mouse_x, mouse_y);
+  sound_options->Draw(mouse_x,mouse_y);
+  game_options->Draw(mouse_x,mouse_y);
 }
 
 //-----------------------------------------------------------------------------

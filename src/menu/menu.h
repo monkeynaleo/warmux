@@ -16,52 +16,59 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Options menu
+ * Generic menu
  *****************************************************************************/
 
-#ifndef OPTIONS_MENU_H
-#define OPTIONS_MENU_H
+#ifndef MENU_H
+#define MENU_H
+
+#include <iostream>
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "menu.h"
+#include "../gui/button.h"
+#include "../gui/list_box.h"
+#include "../gui/check_box.h"
+#include "../gui/spin_button.h"
+#include "../gui/box.h"
+#include "../gui/question.h"
+#include "../gui/label.h"
+#include "../gui/null_widget.h"
 //-----------------------------------------------------------------------------
 
-class OptionMenu : public Menu
+class Sprite;
+
+class Menu
 {
  public:
-   OptionMenu(); 
-   ~OptionMenu();
+   Menu(char* bg); 
+   virtual ~Menu();
+
+   void Run ();
 
  private:
+   Sprite *background;
+   bool close_menu;
 
-   /* Graphic options controllers */   
-   ListBox *lbox_video_mode;
-   CheckBox *opt_display_wind_particles;
-   CheckBox *opt_display_energy;
-   CheckBox *opt_display_name;
-   CheckBox *full_screen; 
-   VBox *graphic_options;
+   /* Actions buttons  */
+   Button *b_ok;
+   Button *b_record;
+   Button *b_cancel;
+   HBox *actions_buttons;
 
-   /* Sound options controllers */
-   ListBox *lbox_sound_freq;
-   CheckBox *opt_music;
-   CheckBox *opt_sound_effects;
-   VBox *sound_options;
+   void BasicDraw(int mouse_x, int mouse_y);
+   bool BasicOnClic(int mouse_x, int mouse_y);
 
-   /* Game options controllers */
-   SpinButton *opt_duration_turn;
-   SpinButton *opt_duration_end_turn;
-   SpinButton *opt_nb_characters;
-   SpinButton *opt_energy_ini;
-   VBox *game_options;
+ protected:
+   void sig_ok();
+   void sig_cancel();
+   void sig_record();
 
-   void SaveOptions();
-   void OnClic ( int mouse_x, int mouse_y);
-   void Draw(int mouse_x, int mouse_y);
+   virtual void __sig_ok() = 0;
+   virtual void __sig_cancel() = 0;
+   virtual void __sig_record() = 0;
 
-   void __sig_ok();
-   void __sig_cancel();
-   void __sig_record();
+   virtual void Draw(int mouse_x, int mouse_y) = 0;   
+   virtual void OnClic ( int mouse_x, int mouse_y) = 0;
+
 };
 
 #endif

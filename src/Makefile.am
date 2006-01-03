@@ -41,9 +41,11 @@ wormux_SOURCES = \
 	graphic/font.cpp graphic/font.h \
 	graphic/sprite.cpp graphic/sprite.h \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
-	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/main_menu.cpp menu/main_menu.h \
+	menu/menu.cpp menu/menu.h \
+	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/options_menu.cpp menu/options_menu.h \
+	menu/game_menu.cpp menu/game_menu.h \
 	game/time.cpp game/time.h \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/question.cpp gui/question.h \

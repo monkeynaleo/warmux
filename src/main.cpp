@@ -34,11 +34,11 @@
 #include <iostream>
 #include "include/action_handler.h"
 #include "tool/stats.h"
-#include "game/game.h"
 #include "game/config.h"
 #include "menu/options_menu.h"
 #include "menu/main_menu.h"
 #include "menu/infos_menu.h"
+#include "menu/game_menu.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
 #include "include/constant.h"
@@ -229,19 +229,21 @@ int AppWormux::main (int argc, char **argv)
     }
     do {
     StatStart("Main:Menu");
-      menu_item choix = ShowMainMenu();
+    menu_item choix = ShowMainMenu();
     StatStop("Main:Menu");
       
       switch (choix)
         {
         case menuPLAY:
-          jeu.LanceJeu(); 
-          break;
+	  {
+	    GameMenu game_menu;
+	    game_menu.Run();
+	    break;
+	  }
         case menuOPTIONS:
           {
-            OptionMenu * options_menu = new OptionMenu();
-            options_menu->Run();
-            delete options_menu;
+            OptionMenu options_menu;
+            options_menu.Run();
             break;
           }
         case menuQUIT:

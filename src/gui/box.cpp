@@ -27,16 +27,13 @@
 
 //-----------------------------------------------------------------------------
 
-Box::Box(uint _x, uint _y, uint _w, 
-	 bool _horizontal, 
+Box::Box(uint x, uint y, uint w, uint h, 
 	 bool _visible) :
-  Widget(_x,_y,_w, 1)
+  Widget(x,y,w,h)
 {
   last_widget = NULL;
-  horizontal = _horizontal;
   visible = _visible;
-
-  if (horizontal) h = _w;
+  margin = 5;
 }
 
 //-----------------------------------------------------------------------------
@@ -74,12 +71,6 @@ void Box::Draw (uint mouse_x, uint mouse_y)
 }
 
 //-----------------------------------------------------------------------------
-void Box::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
-{
-  StdSetSizePosition(_x, _y, _w, _h);
-}
-
-//-----------------------------------------------------------------------------
 
 bool Box::Clic (uint mouse_x, uint mouse_y)
 {
@@ -99,39 +90,122 @@ bool Box::Clic (uint mouse_x, uint mouse_y)
 
 //-----------------------------------------------------------------------------
 
-void Box::AddWidget(Widget * a_widget)
+void Box::SetMargin (uint m)
+{
+  margin = m;
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+VBox::VBox(uint x, uint y, uint w, bool _visible) :
+  Box(x, y, w, 1, _visible)
+{
+}
+
+//-----------------------------------------------------------------------------
+
+void VBox::AddWidget(Widget * a_widget)
 {
   assert(a_widget != NULL);
+
+  uint _y;
+
   if (last_widget != NULL) {
-
-    if (horizontal) {
-      uint _w = a_widget->GetW();
-      uint _x = last_widget->GetX()+last_widget->GetW();
-      a_widget->SetSizePosition(_x+5, y+5, _w, h-10);
-    } else {
-      uint _h = a_widget->GetH();
-      uint _y = last_widget->GetY()+last_widget->GetH();
-      a_widget->SetSizePosition(x+5, _y+5, w-10, _h);
-    }
+    _y = last_widget->GetY()+last_widget->GetH();
+  } else {
+    _y = y;
   }
-  else {
 
-    if (horizontal) {
-      a_widget->SetSizePosition(x+5, y+5, a_widget->GetW(), h-10);
-    } else {
-      a_widget->SetSizePosition(x+5, y+5, w-10, a_widget->GetH());
-    }
-  }
+  a_widget->SetSizePosition(x+margin, 
+			    _y+margin, 
+			    w-2*margin, 
+			    a_widget->GetH());
+
   last_widget = a_widget;
 
   widgets.push_back(a_widget);
 
-  if (horizontal) {
-    w = a_widget->GetX() + a_widget->GetW() - x + 5;
-  } else {
-    h = a_widget->GetY() + a_widget->GetH() - y + 5;
+  h = a_widget->GetY() + a_widget->GetH() - y + margin;
+}
+
+//-----------------------------------------------------------------------------
+
+void VBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+{
+  //StdSetSizePosition(_x, _y, _w, _h);
+
+  x = _x;
+  y = _y;
+
+  std::list<Widget *>::iterator it;
+  for (it = widgets.begin(); 
+       it != widgets.end(); 
+       ++it){
+    assert(it != NULL);
+    (*it)->SetSizePosition(x+margin,
+			_y+margin,
+			(*it)->GetW(),
+			(*it)->GetH());
+    _y = (*it)->GetY() + (*it)->GetH();
+  }
+}
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+HBox::HBox(uint x, uint y, uint h, bool _visible) :
+  Box(x, y, 1, h, _visible)
+{
+}
+
+//-----------------------------------------------------------------------------
+
+void HBox::AddWidget(Widget * a_widget)
+{
+  assert(a_widget != NULL);
+
+  uint _x;
+
+  if (last_widget != NULL) {
+     _x = last_widget->GetX()+last_widget->GetW();
+  }
+  else {
+    _x = x;
   }
 
+  a_widget->SetSizePosition(_x+margin, 
+			    y+margin, 
+			    a_widget->GetW(), 
+			    h-2*margin);
+
+  last_widget = a_widget;
+
+  widgets.push_back(a_widget);
+
+  w = a_widget->GetX() + a_widget->GetW() - x + margin;
+}
+
+//-----------------------------------------------------------------------------
+
+void HBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+{
+  //StdSetSizePosition(_x, _y, _w, _h);
+
+  x = _x;
+  y = _y;
+
+  std::list<Widget *>::iterator it;
+  for (it = widgets.begin(); 
+       it != widgets.end(); 
+       ++it){
+    assert(it != NULL);
+    (*it)->SetSizePosition(_x+margin,
+			y+margin,
+			(*it)->GetW(),
+			(*it)->GetH());
+    _x = (*it)->GetX()+ (*it)->GetW();
+  }
 }
 
 //-----------------------------------------------------------------------------

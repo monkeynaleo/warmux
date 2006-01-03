@@ -29,21 +29,41 @@
 
 class Box : public Widget
 {
- private:
+ protected:
   std::list<Widget *> widgets;
   Widget * last_widget;
-  bool horizontal;
   bool visible;
+  uint margin;
 
  public:
-  Box(uint x, uint y, uint w, bool _horizontal=false, bool _visible=true);
+  Box(uint x, uint y, uint w, uint h, bool _visible=true);
   virtual ~Box();
 
   void Draw (uint mouse_x, uint mouse_y);
   bool Clic (uint mouse_x, uint mouse_y);
-  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+  void SetMargin(uint m);
 
+  virtual void AddWidget(Widget * a_widget) = 0;
+};
+
+//-----------------------------------------------------------------------------
+
+class VBox : public Box
+{
+ public:
+  VBox(uint x, uint y, uint w, bool _visible=true);
   void AddWidget(Widget * a_widget);
+  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+};
+
+//-----------------------------------------------------------------------------
+
+class HBox : public Box
+{
+ public:
+  HBox(uint x, uint y, uint h, bool _visible=true);
+  void AddWidget(Widget * a_widget);  
+  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
 };
 
 //-----------------------------------------------------------------------------
