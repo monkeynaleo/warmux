@@ -16,45 +16,34 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Options menu
+ * Game menu
  *****************************************************************************/
 
-#ifndef OPTIONS_MENU_H
-#define OPTIONS_MENU_H
+#ifndef GAME_MENU_H
+#define GAME_MENU_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "menu.h"
 //-----------------------------------------------------------------------------
 
-class OptionMenu : public Menu
+class GameMenu : public Menu
 {
  public:
-   OptionMenu(); 
-   ~OptionMenu();
+   GameMenu(); 
+   ~GameMenu();
 
  private:
 
-   /* Graphic options controllers */   
-   ListBox *lbox_video_mode;
-   CheckBox *opt_display_wind_particles;
-   CheckBox *opt_display_energy;
-   CheckBox *opt_display_name;
-   CheckBox *full_screen; 
-   VBox *graphic_options;
+   /* Team controllers */
+   ListBox *lbox_teams;   
+   VBox *team_box;
 
-   /* Sound options controllers */
-   ListBox *lbox_sound_freq;
-   CheckBox *opt_music;
-   CheckBox *opt_sound_effects;
-   VBox *sound_options;
+   /* Map controllers */
+   ListBox *lbox_maps;
+   Sprite *map_preview;  
+   VBox *map_box;
 
-   /* Game options controllers */
-   SpinButton *opt_duration_turn;
-   SpinButton *opt_duration_end_turn;
-   SpinButton *opt_nb_characters;
-   SpinButton *opt_energy_ini;
-   VBox *game_options;
-
+   void ChangeMap();
    void SaveOptions();
    void OnClic ( int mouse_x, int mouse_y);
    void Draw(int mouse_x, int mouse_y);

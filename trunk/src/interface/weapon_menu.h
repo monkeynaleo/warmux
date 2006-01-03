@@ -42,7 +42,7 @@ public:
   uint weapon_type;
 
 private:
-  bool zoom,dezoom;
+  bool zoom, dezoom;
 
 public:
   WeaponMenuItem(uint num_sort);
