@@ -33,7 +33,7 @@ class Box : public Widget
   std::list<Widget *> widgets;
   Widget * last_widget;
   bool visible;
-  uint margin;
+  uint w_margin, h_margin;
 
  public:
   Box(uint x, uint y, uint w, uint h, bool _visible=true);
@@ -41,7 +41,7 @@ class Box : public Widget
 
   void Draw (uint mouse_x, uint mouse_y);
   bool Clic (uint mouse_x, uint mouse_y);
-  void SetMargin(uint m);
+  void SetMargin(uint _w_margin, uint _h_margin);
 
   virtual void AddWidget(Widget * a_widget) = 0;
 };

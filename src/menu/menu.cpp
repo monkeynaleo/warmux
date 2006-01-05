@@ -172,3 +172,8 @@ void Menu::Run ()
 }
 
 //-----------------------------------------------------------------------------
+
+void Menu::SetActionButtonsXY(int x, int y)
+{
+  actions_buttons->SetSizePosition(x, y, actions_buttons->GetW(), actions_buttons->GetH());
+}

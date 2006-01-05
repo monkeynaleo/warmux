@@ -40,11 +40,11 @@ const uint GAME_X = 20;
 const uint GAME_Y = 20;
 const uint GAME_W = 230;
 
-const uint SOUND_X = GAME_X+GAME_W+50;
+const uint SOUND_X = GAME_X+GAME_W+30;
 const uint SOUND_Y = GAME_Y;
 const uint SOUND_W = 230;
 
-const uint GRAPHIC_X = SOUND_X+SOUND_W+50;
+const uint GRAPHIC_X = SOUND_X+SOUND_W+30;
 const uint GRAPHIC_Y = GAME_Y;
 const uint GRAPHIC_W = 230;
 
@@ -213,7 +213,11 @@ void OptionMenu::SaveOptions()
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
   video.SetConfig(w, h, full_screen->GetValue());
+  
+  uint x = (video.GetWidth()/2);
+  uint y = video.GetHeight()-50;
 
+  SetActionButtonsXY(x, y);
    
   // Sound
   jukebox.ActiveMusic( opt_music->GetValue() );

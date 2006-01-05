@@ -37,47 +37,68 @@ using namespace std;
 
 //-----------------------------------------------------------------------------
 
-const uint TEAMS_X = 30;
-const uint TEAMS_Y = 30;
+const uint TEAMS_X = 20;
+const uint TEAMS_Y = 20;
 const uint TEAMS_W = 160;
-const uint TEAMS_H = 260;
+const uint TEAMS_H = 160;
 const uint TEAM_LOGO_Y = 290;
 const uint TEAM_LOGO_H = 48;
 
-const uint MAPS_X = TEAMS_X+TEAMS_W+50;
-const uint MAPS_Y = TEAMS_Y;
+const uint MAPS_X = 20;
+const uint MAPS_Y = TEAMS_Y+TEAMS_H+40;
 const uint MAPS_W = 160;
-const uint MAPS_H = 260;
  
 const uint MAP_PREVIEW_W = 300;
-const uint MAP_PREVIEW_H = 300+5;
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 GameMenu::GameMenu() : Menu("menu/bg_option")
-{
+{  
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+
   //-----------------------------------------------------------------------------
   // Widget creation
   //-----------------------------------------------------------------------------
 
   /* Choose the teams !! */
-  team_box = new VBox(TEAMS_X, TEAMS_Y, TEAMS_W+10);
+  team_box = new VBox(TEAMS_X, TEAMS_Y, TEAMS_W*3);
   team_box->AddWidget(new Label(_("Select the teams:"), 0, 0, 0, normal_font));
 
-  lbox_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5);
-  team_box->AddWidget(lbox_teams);
+  Box * tmp_box = new HBox(0,0, TEAMS_H, false);
+  tmp_box->SetMargin(5,0);
 
-  team_box->AddWidget(new NullWidget(0, 0, TEAM_LOGO_H, TEAM_LOGO_H));
+  lbox_all_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5);
+  tmp_box->AddWidget(lbox_all_teams);
+
+  Box * buttons_tmp_box = new VBox(0,0, 68, false);
+  buttons_tmp_box->SetMargin(10, 0);
+
+  bt_add_team = new Button(0,0, 48,48,res,"menu/valider");
+  buttons_tmp_box->AddWidget(bt_add_team);
+  
+  bt_remove_team = new Button(0,0,48,48,res,"menu/valider");
+  buttons_tmp_box->AddWidget(bt_remove_team);
+
+  space_for_logo = new NullWidget(0,0,48,48);
+  buttons_tmp_box->AddWidget(space_for_logo);
+
+  tmp_box->AddWidget(buttons_tmp_box);
+  
+  lbox_selected_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5);
+  tmp_box->AddWidget(lbox_selected_teams);
+
+  team_box->AddWidget(tmp_box);
 
   /* Choose the map !! */
-  Box * tmp_box = new HBox(0, 0, MAPS_H, false);
+  tmp_box = new HBox(0, 0, MAP_PREVIEW_W-25, false);
+  tmp_box->SetMargin(0, 0);
 
-  lbox_maps = new ListBox(0, 0, MAPS_W, MAPS_H);
+  lbox_maps = new ListBox(0, 0, MAPS_W, MAP_PREVIEW_W-25);
   tmp_box->AddWidget(lbox_maps);
-  tmp_box->AddWidget(new NullWidget(0, 0, MAP_PREVIEW_W, MAP_PREVIEW_H));
+  tmp_box->AddWidget(new NullWidget(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
   
-  map_box = new VBox(MAPS_X, MAPS_Y, tmp_box->GetW());
+  map_box = new VBox(MAPS_X, MAPS_Y, tmp_box->GetW()+10);
   map_box->AddWidget(new Label(_("Select the world:"), 0, 0, 0, normal_font));
   map_box->AddWidget(tmp_box);
 
@@ -104,13 +125,13 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
   TeamsList::full_iterator
     it=teams_list.full_list.begin(), 
     end=teams_list.full_list.end();
-  lbox_teams->selection_max = game_mode.max_teams;
-  lbox_teams->selection_min = 2;
+  lbox_all_teams->selection_max = game_mode.max_teams;
+  lbox_all_teams->selection_min = 2;
   uint i=0;
   for (; it != end; ++it)
   {
     bool choix = teams_list.IsSelected (i);
-    lbox_teams->AddItem (choix, (*it).GetName(), (*it).GetName());
+    lbox_all_teams->AddItem (choix, (*it).GetName(), (*it).GetName());
     ++i;
   }
 
@@ -130,7 +151,7 @@ void GameMenu::OnClic ( int x, int y)
 {     
   if (lbox_maps->Clic(x, y)) {
     ChangeMap();
-  } else if (lbox_teams->Clic(x, y)) {
+  } else if (lbox_all_teams->Clic(x, y)) {
   }
 }
 
@@ -141,7 +162,7 @@ void GameMenu::SaveOptions()
   // Save values
   std::string map_id = lbox_maps->ReadLabel(lbox_maps->GetSelectedItem());
   lst_terrain.ChangeTerrainNom (map_id);
-  teams_list.ChangeSelection (lbox_teams->GetSelection());
+  teams_list.ChangeSelection (lbox_all_teams->GetSelection());
    
   //Save options in XML
   config.Sauve();
@@ -176,7 +197,7 @@ void GameMenu::ChangeMap()
   std::string map_id = lbox_maps->ReadLabel(lbox_maps->GetSelectedItem());
   uint map = lst_terrain.FindMapById(map_id);
   map_preview = new Sprite(lst_terrain.liste[map].preview);
-  float scale = std::min( float(MAP_PREVIEW_H)/map_preview->GetHeight(), 
+  float scale = std::min( float(MAP_PREVIEW_W)/map_preview->GetHeight(), 
                           float(MAP_PREVIEW_W)/map_preview->GetWidth() ) ;
 
   map_preview->Scale (scale, scale);
@@ -192,15 +213,16 @@ void GameMenu::Draw(int mouse_x, int mouse_y)
   map_box->Draw(mouse_x,mouse_y);
   team_box->Draw(mouse_x,mouse_y);
      
-  int nv_equipe = lbox_teams->MouseIsOnWitchItem (mouse_x,mouse_y);
+  int nv_equipe = lbox_all_teams->MouseIsOnWitchItem (mouse_x,mouse_y);
   if (nv_equipe != -1) {
     derniere_equipe = teams_list.FindByIndex(nv_equipe);
   }
    
-  SDL_Rect team_icon_rect = { TEAMS_X+(TEAMS_W/2)-(TEAM_LOGO_H/2),
-			      TEAMS_Y + TEAMS_H - TEAM_LOGO_H +5,
+  SDL_Rect team_icon_rect = { space_for_logo->GetX(), 
+			      space_for_logo->GetY(),
 			      TEAM_LOGO_H,
 			      TEAM_LOGO_H};
+
   SDL_BlitSurface (derniere_equipe->ecusson, NULL, app.sdlwindow, &team_icon_rect); 
   
   if (!terrain_init)
