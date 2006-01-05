@@ -137,7 +137,7 @@ Main_Menu::Main_Menu()
 }
 
 //-----------------------------------------------------------------------------
-void Main_Menu::onClick ( int x, int y)
+void Main_Menu::onClick ( int x, int y, int button)
 {       
   if (play->MouseIsOver (x, y)) sig_play();
   else if (network->MouseIsOver (x, y)) sig_network();
@@ -163,7 +163,7 @@ menu_item Main_Menu::Run ()
    while( SDL_PollEvent( &event) ) {      
      if ( event.type == SDL_MOUSEBUTTONDOWN )
        {
-	 onClick( event.button.x, event.button.y);
+	 onClick( event.button.x, event.button.y, event.button.button);
        }
    }
 

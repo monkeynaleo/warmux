@@ -38,7 +38,7 @@ class Widget
   virtual void Draw (uint mouse_x, uint mouse_y) = 0;
 
   bool MouseIsOver (uint mouse_x, uint mouse_y) ;
-  virtual bool Clic (uint mouse_x, uint mouse_y);
+  virtual bool Clic (uint mouse_x, uint mouse_y, uint button);
 
   virtual void SetSizePosition(uint _x, uint _y, uint _w, uint _h) = 0;
 

@@ -68,7 +68,7 @@ void CheckBox::Draw (uint mouse_x, uint mouse_y)
 
 //-----------------------------------------------------------------------------
 
-bool CheckBox::Clic (uint mouse_x, uint mouse_y)
+bool CheckBox::Clic (uint mouse_x, uint mouse_y, uint button)
 {
   if (!MouseIsOver(mouse_x, mouse_y)) return false;
 

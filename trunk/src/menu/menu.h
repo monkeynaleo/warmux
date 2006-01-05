@@ -67,7 +67,7 @@ class Menu
    virtual void __sig_record() = 0;
 
    virtual void Draw(int mouse_x, int mouse_y) = 0;   
-   virtual void OnClic ( int mouse_x, int mouse_y) = 0;
+   virtual void OnClic ( int mouse_x, int mouse_y, int button) = 0;
    void SetActionButtonsXY(int x, int y);
 
 };

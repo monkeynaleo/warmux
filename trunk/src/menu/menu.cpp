@@ -156,7 +156,7 @@ void Menu::Run ()
 	 {
 	   if (! BasicOnClic(event.button.x, event.button.y) )
 	     {
-	       OnClic( event.button.x, event.button.y);
+	       OnClic( event.button.x, event.button.y, event.button.button); //uint8 SDL_BUTTON_LEFT SDL_BUTTON_MIDDLE SDL_BUTTON_RIGHT SDL_BUTTON_WHEELUP SDL_BUTTON_WHEELDOWN
 	     }
 	 }
      }

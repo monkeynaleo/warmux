@@ -45,7 +45,7 @@ bool Widget::MouseIsOver (uint mouse_x, uint mouse_y)
 
 //-----------------------------------------------------------------------------
 
-bool Widget::Clic (uint mouse_x, uint mouse_y)
+bool Widget::Clic (uint mouse_x, uint mouse_y, uint button)
 {
   return false;
 }
