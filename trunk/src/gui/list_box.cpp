@@ -153,7 +153,9 @@ void ListBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
 {
   StdSetSizePosition(_x, _y, _w, _h);
   m_up->SetSizePosition(x+w-10, y, 10, 5);
-  m_down->SetSizePosition(x+w-10, y+h-5, 10, 5);
+  m_down->SetSizePosition(x+w-10, y+h-5, 10, 5);  
+
+  nb_visible_items_max = h/height_item;
 }
 
 //-----------------------------------------------------------------------------
