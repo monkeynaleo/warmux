@@ -49,7 +49,7 @@ class GameMenu : public Menu
 
    void ChangeMap();
    void SaveOptions();
-   void OnClic ( int mouse_x, int mouse_y);
+   void OnClic ( int mouse_x, int mouse_y, int button);
    void Draw(int mouse_x, int mouse_y);
 
    void __sig_ok();

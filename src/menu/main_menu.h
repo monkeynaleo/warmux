@@ -55,7 +55,7 @@ public:
   ~Main_Menu();
   menu_item Run ();
 private:  
-  void onClick ( int x, int y);
+  void onClick ( int x, int y, int button);
   void button_click();
   bool sig_play();
   bool sig_network();

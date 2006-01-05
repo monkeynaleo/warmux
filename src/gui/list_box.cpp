@@ -71,35 +71,44 @@ int ListBox::MouseIsOnWitchItem (uint mouse_x, uint mouse_y)
 
 //-----------------------------------------------------------------------------
 
-bool ListBox::Clic (uint mouse_x, uint mouse_y)
+bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button)
 {
 
   // buttons for listbox with more items than visible
   if (m_items.size() > nb_visible_items_max)
   {
-    if ( m_down->MouseIsOver(mouse_x, mouse_y) )
+    if ( (button == SDL_BUTTON_WHEELDOWN && MouseIsOver(mouse_x, mouse_y)) ||
+          (button == SDL_BUTTON_LEFT && m_down->MouseIsOver(mouse_x, mouse_y)) )
     {
       // bottom button
-      if ( m_items.size()-1 - first_visible_item > nb_visible_items_max ) first_visible_item++ ;
+      if ( m_items.size()-1 - first_visible_item > nb_visible_items_max )
+        first_visible_item++ ;
       return true;
     }
-
-    
-    if ( m_up->MouseIsOver(mouse_x,mouse_y) )
+    else if ( (button == SDL_BUTTON_WHEELUP && MouseIsOver(mouse_x, mouse_y)) || 
+                (button == SDL_BUTTON_LEFT && m_up->MouseIsOver(mouse_x,mouse_y)) )
     {
       // top button
-      if (first_visible_item > 0) first_visible_item-- ;
+      if (first_visible_item > 0)
+        first_visible_item-- ;
       return true;
     }
   }
 
-  int item = MouseIsOnWitchItem(mouse_x,mouse_y);
-  if (item == -1) return false;
-  if (IsSelected(item))
-    Deselect (item);
+  if(button == SDL_BUTTON_LEFT)
+  {
+    int item = MouseIsOnWitchItem(mouse_x,mouse_y);
+    if (item == -1) return false;
+    if (IsSelected(item))
+      Deselect (item);
+    else
+      Select (item);
+    return true;
+  }
   else
-    Select (item);
-  return true;
+  {
+    return false;
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -116,17 +125,17 @@ void ListBox::Draw (uint mouse_x, uint mouse_y)
 
   for (uint i=0; i < nb_visible_items; i++) 
   {
-     if ( i+first_visible_item == uint(item) ) {
+     if ( IsSelected(i+first_visible_item) ) {
+       boxRGBA(app.sdlwindow, 
+	       x+1, y+i*height_item+1, 
+	       x+1+w-2, y+i*height_item+1+height_item-2,
+	       0,0,255*6/10,255*8/10);
+     } else if ( i+first_visible_item == uint(item) ) {
        boxRGBA(app.sdlwindow, 
 	       x+1, y+i*height_item+1, 
 	       x+1+w-2, y+i*height_item+1+height_item-2,
 	       0,0,255*6/10,255*4/10);
        
-     } else if ( IsSelected(i+first_visible_item) ) {
-       boxRGBA(app.sdlwindow, 
-	       x+1, y+i*height_item+1, 
-	       x+1+w-2, y+i*height_item+1+height_item-2,
-	       0,0,255*6/10,255*8/10);
      }
      
      small_font.WriteLeft(x+5,

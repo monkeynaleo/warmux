@@ -40,7 +40,7 @@ class Box : public Widget
   virtual ~Box();
 
   void Draw (uint mouse_x, uint mouse_y);
-  bool Clic (uint mouse_x, uint mouse_y);
+  bool Clic (uint mouse_x, uint mouse_y, uint button);
   void SetMargin(uint _w_margin, uint _h_margin);
 
   virtual void AddWidget(Widget * a_widget) = 0;

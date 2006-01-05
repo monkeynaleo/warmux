@@ -41,13 +41,7 @@ Box::Box(uint x, uint y, uint w, uint h,
 Box::~Box()
 {
   
-  std::list<Widget *>::iterator it;
-  for (it = widgets.begin(); 
-       it != widgets.end(); 
-       ++it){
-    assert(it != NULL);
-    widgets.erase(it);
-  }
+  widgets.clear();
 }
 
 //-----------------------------------------------------------------------------
@@ -72,7 +66,7 @@ void Box::Draw (uint mouse_x, uint mouse_y)
 
 //-----------------------------------------------------------------------------
 
-bool Box::Clic (uint mouse_x, uint mouse_y)
+bool Box::Clic (uint mouse_x, uint mouse_y, uint button)
 {
   bool r=false;
 
@@ -81,7 +75,7 @@ bool Box::Clic (uint mouse_x, uint mouse_y)
        it != widgets.end(); 
        ++it){
     assert(it != NULL);
-    r = (*it)->Clic(mouse_x, mouse_y);
+    r = (*it)->Clic(mouse_x, mouse_y, button);
     if (r) return true;
   }
 

@@ -99,12 +99,14 @@ void SpinButton::Draw (uint mouse_x, uint mouse_y)
 
 //-----------------------------------------------------------------------------
 
-bool SpinButton::Clic (uint mouse_x, uint mouse_y) 
+bool SpinButton::Clic (uint mouse_x, uint mouse_y, uint button) 
 {
-  if (m_minus->MouseIsOver(mouse_x, mouse_y)) {
+  if ((button == SDL_BUTTON_WHEELDOWN && MouseIsOver(mouse_x, mouse_y)) ||
+      (button == SDL_BUTTON_LEFT && m_minus->MouseIsOver(mouse_x, mouse_y))) {
     SetValue(m_value - m_step);
     return true;
-  } else if (m_plus->MouseIsOver(mouse_x, mouse_y)) {
+  } else if ((button == SDL_BUTTON_WHEELUP && MouseIsOver(mouse_x, mouse_y)) ||
+              (button == SDL_BUTTON_RIGHT && m_plus->MouseIsOver(mouse_x, mouse_y))) {
     SetValue(m_value + m_step);
     return true;
   }

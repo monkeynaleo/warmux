@@ -184,11 +184,11 @@ OptionMenu::~OptionMenu()
 
 //-----------------------------------------------------------------------------
 
-void OptionMenu::OnClic ( int x, int y)
+void OptionMenu::OnClic ( int x, int y, int button )
 {     
-  if (graphic_options->Clic (x,y)) {
-  } else if (sound_options->Clic (x,y)) {
-  } else if (game_options->Clic (x,y)) {
+  if (graphic_options->Clic (x,y,button)) {
+  } else if (sound_options->Clic (x,y,button)) {
+  } else if (game_options->Clic (x,y,button)) {
   }
 }
 

@@ -147,11 +147,11 @@ GameMenu::~GameMenu()
 
 //-----------------------------------------------------------------------------
 
-void GameMenu::OnClic ( int x, int y)
+void GameMenu::OnClic ( int x, int y, int button)
 {     
-  if (lbox_maps->Clic(x, y)) {
+  if (lbox_maps->Clic(x, y, button)) {
     ChangeMap();
-  } else if (lbox_all_teams->Clic(x, y)) {
+  } else if (lbox_all_teams->Clic(x, y, button)) {
   }
 }
 
