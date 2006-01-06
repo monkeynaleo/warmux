@@ -60,7 +60,17 @@
     <wormux repetition="5" />
   <hand/>
 </sprite>
-  
+
+<sprite name="jetpack-up">
+  <image file="jetpack-fly.png" />
+    <collision_rect dx="10" top="1" bottom="8" />
+</sprite>
+
+<sprite name="jetpack-left-right">
+  <image file="jetpack-fly.png" />
+  <collision_rect dx="10" top="1" bottom="8" />
+</sprite>
+
 <sprite name="animation">
   <image file="animation.png">
     <grid pos="0,0" size="42,42" array="8,1" />
