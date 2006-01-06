@@ -56,16 +56,7 @@ Particle::Particle() : PhysicalObj("Particle", 0.0)
 void Particle::Draw()
 {
   if (m_left_time_to_live > 0) 
-#ifdef CL
-    image.draw(GetX(), GetY());
-#else
-/*     {
-	SDL_Rect dest = { GetX(), GetY(), image->w, image->h};	
-	SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
-     }
-*/
-	image->Draw(GetX(),GetY());
-#endif
+    image->Draw(GetX(),GetY());
 }
 
 //-----------------------------------------------------------------------------
@@ -75,9 +66,9 @@ void Particle::Refresh()
   uint time = Wormux::global_time.Read() - m_last_refresh; 
 
   UpdatePosition ();
-#ifndef CL
+
   image->Update();
-#endif
+
 
   if (time >= m_time_between_scale) {  
 
@@ -93,24 +84,14 @@ void Particle::Refresh()
     if((float)lived_time<m_initial_time_to_live/2.0)
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
-#ifdef CL
-      image.set_scale(coeff, coeff);
-      image.set_alpha(1.0);
-#else
       image->Scale(coeff,coeff);
       image->SetAlpha(1.0);
-#endif
     }
     else
     {
       float alpha = 1.0 - sin((M_PI/2.0)*((float)lived_time-((float)m_initial_time_to_live/2.0))/((float)m_initial_time_to_live/2.0));
-#ifdef CL
-      image.set_alpha(alpha);
-      image.set_scale(1.0,1.0);
-#else
       image->Scale(1.0,1.0);
       image->SetAlpha(alpha);
-#endif
     }
     m_last_refresh = Wormux::global_time.Read() ;
   }
@@ -141,15 +122,10 @@ Smoke::Smoke() : Particle()
 
 void Smoke::Init()
 {
-#ifdef CL
-   image = CL_Surface("smoke", &Wormux::graphisme.weapons); 
-   SetSize(image.get_width(),image.get_height());
-#else
-   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   image = resource_manager.LoadSprite(res,"smoke"); 
-   resource_manager.UnLoadXMLProfile( res);
-   SetSize(image->GetWidth(),image->GetHeight());
-#endif
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+  image = resource_manager.LoadSprite(res,"smoke"); 
+  resource_manager.UnLoadXMLProfile( res);
+  SetSize(image->GetWidth(),image->GetHeight());
    
   m_initial_time_to_live = 10;
   m_left_time_to_live = m_initial_time_to_live; 
@@ -173,15 +149,10 @@ StarParticle::StarParticle() : Particle()
 
 void StarParticle::Init()
 {
-#ifdef CL
-  image = CL_Surface("star_particle", &Wormux::graphisme.weapons); 
-  SetSize(image.get_width(),image.get_height());
-#else
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   image = resource_manager.LoadSprite(res,"star_particle"); 
+  image = resource_manager.LoadSprite(res,"star_particle"); 
   resource_manager.UnLoadXMLProfile( res);
   SetSize(image->GetWidth(),image->GetHeight());
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -208,31 +179,21 @@ FireParticle::FireParticle() : Particle()
 
 void FireParticle::Init()
 {
-#ifdef CL
-  image = CL_Surface("fire_particle", &Wormux::graphisme.weapons); 
-  impact = CL_Surface("fire_impact", &Wormux::graphisme.weapons); 
-  SetSize(image.get_width(),image.get_height());
-#else
-   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
-   image = resource_manager.LoadSprite(res,"fire_particle");
-   impact = resource_manager.LoadImage(res,"fire_impact");
-   resource_manager.UnLoadXMLProfile( res);
-   SetSize(image->GetWidth(),image->GetHeight());
-#endif
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+  image = resource_manager.LoadSprite(res,"fire_particle");
+  impact = resource_manager.LoadImage(res,"fire_impact");
+  resource_manager.UnLoadXMLProfile( res);
+  SetSize(image->GetWidth(),image->GetHeight());
 }
 
 //-----------------------------------------------------------------------------
 
 void FireParticle::SignalFallEnding()
 {
-#ifdef CL
-   CL_Point pos = GetCenter();
-#else
-   Point2i pos = GetCenter();
-#endif
-   AppliqueExplosion (pos, pos, impact, fire_cfg, NULL, 
+  Point2i pos = GetCenter();
+  AppliqueExplosion (pos, pos, impact, fire_cfg, NULL, 
   		     "", false);
-
+  
   m_left_time_to_live = 0;
 }
 
@@ -303,6 +264,8 @@ void ParticleEngine::AddNow(uint x, uint y,
 			    double angle, double norme)
 {
   Particle * particle = NULL;
+  double tmp_angle;
+  double tmp_norme;
 
   for (uint i=0 ; i < nb_particles ; i++) {
 
@@ -318,13 +281,16 @@ void ParticleEngine::AddNow(uint x, uint y,
     }
   
     if (particle != NULL) {
-      if ( norme == -1 ) norme = double(RandomLong(0,20))/4;
+      
+      if ( norme == -1 ) tmp_norme = double(RandomLong(0, 5000))/1000;
+      else tmp_norme = norme;
 
-      if ( angle == -1 ) angle = - double(RandomLong(0,30))/10; 
-    
+      if ( angle == -1 ) tmp_angle = - double(RandomLong(0, 3000))/1000; 
+      else tmp_angle = angle;
+      
       particle->Init();
       particle->SetXY(x,y);
-      particle->SetSpeed(norme, angle);
+      particle->SetSpeed(tmp_norme, tmp_angle);
       particles.push_back(particle);
     }
   }
