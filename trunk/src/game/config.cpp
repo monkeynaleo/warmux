@@ -127,15 +127,8 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   xmlpp::Element *elem;
 
   //=== Directories ===
-  if (LitDocXml::LitString  (xml, "data_dir", data_dir)) {
-    data_dir = TraduitRepertoire(data_dir);
-  }
-#ifndef CL
-  resource_manager.AddDataPath(data_dir);
-#endif
-  if (LitDocXml::LitString  (xml, "locale_dir", locale_dir)) {
-    locale_dir = TraduitRepertoire(locale_dir);
-  }
+  LitDocXml::LitString  (xml, "data_dir", data_dir);
+  LitDocXml::LitString  (xml, "locale_dir", locale_dir);
  
   //=== Map ===
   LitDocXml::LitString  (xml, "map", tmp.map_name);
@@ -243,7 +236,11 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 
 void Config::Applique()
 {
+  locale_dir = TraduitRepertoire(locale_dir);
   I18N_SetDir (locale_dir);
+
+  data_dir = TraduitRepertoire(data_dir);
+  resource_manager.AddDataPath(data_dir);
 
   // Charge le mode jeu
   weapons_list.Init();
