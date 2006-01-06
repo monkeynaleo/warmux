@@ -37,12 +37,15 @@
 //#define DBG_RS_MANAGER
 #endif
 
-struct Profile
+Profile::Profile()
 {
-   LitDocXml *doc;
-   std::string filename;
-   std::string relative_path;
-};
+   doc = NULL;
+}
+
+Profile::~Profile()
+{
+  if (doc != NULL) delete doc;
+}
 
 
 ResourceManager::ResourceManager()

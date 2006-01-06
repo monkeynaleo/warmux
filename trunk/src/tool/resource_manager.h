@@ -34,9 +34,20 @@
 #include <SDL.h>
 #include "xml_document.h"
 
-struct Profile;
 class Sprite;
 struct Element;
+
+class Profile 
+{ 
+ public:
+  LitDocXml *doc;
+  std::string filename;
+  std::string relative_path;
+
+  Profile::Profile();
+  Profile::~Profile();
+  
+};
 
 class ResourceManager
 {
