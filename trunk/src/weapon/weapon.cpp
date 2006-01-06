@@ -246,6 +246,7 @@ void Weapon::Select()
   m_is_active = false;
   m_strength = 0;
   ActiveTeam().ResetNbUnits();
+  ActiveCharacter().SetSkin(m_id);
 
   // is there a crosshair ?
   if (min_angle != max_angle) {

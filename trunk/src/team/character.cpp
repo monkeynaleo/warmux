@@ -827,7 +827,7 @@ void Character::SetSkin(std::string skin_name)
   }
   else
   {
-    std::cout << "Unable to set skin : " << skin_name << "\n";
+//    std::cout << "Unable to set skin : " << skin_name << "\n";
     assert(skin_name!="walking");
     SetSkin("walking");
     image->Finish();
