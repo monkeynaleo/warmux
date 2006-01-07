@@ -274,7 +274,6 @@ void InitGame ()
   // =============================================
 
   // Teams' creation
-   std::cout << "team nb = " << teams_list.list.size() << std::endl;
   if (teams_list.list.size() < 2)
     Erreur(_("You need at least two teams to play: "
 	     "change this in 'Options menu' !"));

@@ -30,7 +30,7 @@
 #include "../map/map.h"
 //-----------------------------------------------------------------------------
 
-Text::Text(std::string new_txt, SDL_Color new_color, Font* new_font)
+Text::Text(const std::string &new_txt, SDL_Color new_color, Font* new_font)
 {
   assert(new_font!=NULL);
   txt = "";
@@ -48,7 +48,7 @@ Text::~Text()
 }
 
 //-----------------------------------------------------------------------------
-void Text::Set (std::string &new_txt)
+void Text::Set(const std::string &new_txt)
 {
   if(txt == new_txt)
     return;

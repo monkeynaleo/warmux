@@ -534,7 +534,6 @@ void Tile::LoadImage (SDL_Surface *terrain)
 
    // Replace transparent tiles by TileItem_Empty tiles
 
-  std::cout << "Checking empty tiles of map" << std::endl;
   uint freed = 0;
 
   for (uint i=0; i<nbr_cell; ++i)
@@ -546,7 +545,6 @@ void Tile::LoadImage (SDL_Surface *terrain)
       item[i] = (TileItem*)new TileItem_Empty;
     }
   }
-  std::cout << freed << " tiles deleted!" << std::endl;
 }
 
 uchar Tile::GetAlpha (const int x, const int y) const

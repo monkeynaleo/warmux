@@ -34,7 +34,7 @@
 // Débogue le jukebox ?
 //#define DBG_SON
 
-#define COUT_DBG std::cout << "[Sound] "
+#define COUT_DBG std::cerr << "[Sound] "
 
 #endif
 
@@ -231,8 +231,9 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
     return Play("default", sample, loop) ; // try with default profile
   } 
 
-  std::cerr << "[Sound] Error : No sound found for sample " << category << "/" << sample << std::endl;
-
+#ifdef DBG_SON
+    COUT_DBG << "Error : No sound found for sample " << category << "/" << sample << std::endl; 
+#endif    
   return -1;
 }
 
