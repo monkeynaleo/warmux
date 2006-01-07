@@ -233,6 +233,7 @@ WeaponsMenu::WeaponsMenu()
   show = false;
   hide = false;
   nbr_weapon_type = 0;
+  motion_start_time = global_time.Read();
 }
 
 //-----------------------------------------------------------------------------
@@ -257,7 +258,7 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
 // Weapon menu display (init of the animation)
 void WeaponsMenu::Show()
 {
-  if(hide)
+  if(display && hide)
     motion_start_time = global_time.Read() - (ICONS_DRAW_TIME - (global_time.Read()-motion_start_time));
   else
     motion_start_time = global_time.Read();
@@ -296,7 +297,7 @@ void WeaponsMenu::ComputeSize()
 //-----------------------------------------------------------------------------
 void WeaponsMenu::Hide()
 {
-  if(show)
+  if(display && show)
     motion_start_time = global_time.Read() - (ICONS_DRAW_TIME - (global_time.Read()-motion_start_time));
   else
     motion_start_time = global_time.Read();
@@ -345,6 +346,17 @@ bool WeaponsMenu::IsDisplayed() const
 }
 
 //-----------------------------------------------------------------------------
+
+void WeaponsMenu::Reset()
+{    
+  display = false;
+  show = false;
+  hide = false;
+  motion_start_time = global_time.Read();
+}
+
+//-----------------------------------------------------------------------------
+
 void WeaponsMenu::Init()
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");

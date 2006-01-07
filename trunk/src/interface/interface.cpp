@@ -156,6 +156,7 @@ void Interface::Reset()
 {
   character_under_cursor = NULL;
   weapon_under_cursor = NULL;
+  weapons_menu.Reset();
   barre_energie.InitVal (0, 0, game_mode.character.init_energy);
 }
 

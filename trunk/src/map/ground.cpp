@@ -49,7 +49,7 @@ Ground::Ground()
 
 void Ground::Init()
 {
-  std::cout << "Ground initialization...";
+  std::cout << "o Ground initialization...";
   std::cout.flush();
   
   // Charge les données du terrain
