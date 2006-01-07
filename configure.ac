@@ -105,6 +105,7 @@ AM_PATH_SDL($SDL_VERSION,
 	    AC_MSG_ERROR([*** SDL version $SDL_VERSION not found!]))
 CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 CFLAGS="$CFLAGS $SDL_CFLAGS"
+CPPFLAGS="$CPPFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
 
 
@@ -130,8 +131,18 @@ LIBS="$LIBS -lSDL_ttf"
 
 dnl === Check for SDL_gfx ==================================================
 
+AC_ARG_WITH(sdl-gfx-prefix,
+    [  --with-sdl-gfx-prefix=DIR       specify where SDL_gfx library is installed],
+    [SDL_GFX_PREFIX="$withval"])
+AC_SUBST(SDL_GFX_PREFIX)
+if test "x$SDL_GFX_PREFIX" != "x"; then
+  CPPFLAGS="$CPPFLAGS -I$SDL_GFX_PREFIX/include/SDL"
+  CXXFLAGS="$CXXFLAGS -I$SDL_GFX_PREFIX/include/SDL"
+fi  
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,
 	AC_MSG_ERROR([SDL_gfx library >= 2.0.13 required]))
+AC_CHECK_HEADERS(SDL_rotozoom.h,,
+    AC_MSG_ERROR([SDL_gfx library headers are missing]))
 LIBS="$LIBS -lSDL_gfx"
 
 
