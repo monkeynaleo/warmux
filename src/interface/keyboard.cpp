@@ -259,7 +259,6 @@ void Clavier::Refresh()
         ActiveTeam().GetWeapon().IsActive())
     {
       ActiveTeam().AccessWeapon().HandleKeyEvent(i, KEY_REFRESH);
-      return ;
     }
 
     ActiveCharacter().HandleKeyEvent(i,KEY_REFRESH);
