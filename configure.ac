@@ -36,6 +36,11 @@ AC_PROG_CXX
 AC_PROG_CPP
 AC_PROG_INSTALL
 
+AC_CHECK_PROG(cxx_present, $CXX, "yes", "no")
+if test "x$cxx_present" != "xyes"; then
+    AC_MSG_ERROR([*** No C++ compiler can be found!])
+fi
+
 dnl =========================================================================
 dnl === Options for users                                                   =
 dnl =========================================================================
