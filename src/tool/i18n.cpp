@@ -38,8 +38,8 @@
 //-----------------------------------------------------------------------------
 
 void CopyString (std::ostream &os, 
-		 const char *&txt, const char *&sauve_txt, 
-		 ulong &lg)
+                 const char *&txt, const char *&sauve_txt, 
+                 ulong &lg)
 {
   std::string prefix(sauve_txt,0,lg);
   os << prefix;
@@ -70,47 +70,47 @@ std::string Format (const char *txt, ...)
       case 's':
       {
         const char *x = va_arg (ap,const char *);
-	CopyString (ss, txt, sauve_txt, lg);
-	ss << x;
-	break;
+        CopyString (ss, txt, sauve_txt, lg);
+        ss << x;
+        break;
       }
       case 'i':
       {
         int x = va_arg (ap,int);
-	CopyString (ss, txt, sauve_txt, lg);
-	ss << x;
-	break;
+        CopyString (ss, txt, sauve_txt, lg);
+        ss << x;
+        break;
       }
       case 'u':
       {
         uint x = va_arg (ap,int);
-	CopyString (ss, txt, sauve_txt, lg);
-	ss << x;
-	break;
+        CopyString (ss, txt, sauve_txt, lg);
+        ss << x;
+        break;
       }
       case 'l':
-	if (*(txt+1) == 'u') {
-	  ulong x = va_arg(ap,ulong);
-	  ++txt;
-	  CopyString (ss, txt, sauve_txt, lg);
-	  ss << x;
-	} else if (*(txt+1) == 'i') {
-	  long x = va_arg(ap,long);
-	  CopyString (ss, txt, sauve_txt, lg);
-	  ss << x;
-	  ++txt;
-	} else {
-	  error = true;
-	}
-	break;
+        if (*(txt+1) == 'u') {
+          ulong x = va_arg(ap,ulong);
+          ++txt;
+          CopyString (ss, txt, sauve_txt, lg);
+          ss << x;
+        } else if (*(txt+1) == 'i') {
+          long x = va_arg(ap,long);
+          CopyString (ss, txt, sauve_txt, lg);
+          ss << x;
+          ++txt;
+        } else {
+          error = true;
+        }
+        break;
       default:
-	error = true;
+        error = true;
       }
 
       if (error) {
-	ss.str("");
-	ss << "Format error : unknown '%" << *txt << "' !";
-	Erreur(ss.str());
+        ss.str("");
+        ss << "Format error : unknown '%" << *txt << "' !";
+        Erreur(ss.str());
       }
     } else {
       ++lg;

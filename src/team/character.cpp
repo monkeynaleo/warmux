@@ -72,7 +72,7 @@ const uint do_nothing_timeout = 5000;
 
 //#define NO_POSITION_CHECK
 
-#define COUT_DBG0 cout << "[Character " << m_name << "]"
+#define COUT_DBG0 std::cerr << "[Character " << m_name << "]"
 #define COUT_DBG COUT_DBG0 " "
 #define COUT_PLACEMENT COUT_DBG0 "[Init bcl=" << bcl << "] "
 #endif
@@ -924,8 +924,6 @@ void Character::Reset()
   SetEnergyDelta (1);
   losted_energy = 0;
 
-  std::cout << "Reset character..." << std::endl;
-   
   // Initialise la position
   uint bcl=0;
   bool pos_ok;

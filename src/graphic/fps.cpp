@@ -22,6 +22,7 @@
 #include "fps.h"
 //-----------------------------------------------------------------------------
 #include "video.h"
+#include "../tool/i18n.h"
 #include "text.h"
 #include <SDL.h>
 #include <sstream>
@@ -95,11 +96,10 @@ void ImageParSeconde::Draw()
 {
   if (!affiche) return;
   if (moyenne < 0) return;
-
-  std::ostringstream ss;
-  ss << std::setprecision(3) << moyenne << " i/s";
-  std::string txt = ss.str();
-  fps_txt->Set(txt);
+  char buffer[20];
+  snprintf(buffer, sizeof(buffer)-1, "%.1f", moyenne);
+  buffer[sizeof(buffer)-1] = '\0';
+  fps_txt->Set( Format(_("%s fps"),buffer) );
   fps_txt->DrawTopRight(video.GetWidth(),0);
 }
 

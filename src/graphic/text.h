@@ -32,7 +32,7 @@ class Text
   SDL_Color color;
 
 public:
-  Text(std::string new_txt, SDL_Color new_color = white_color, Font* new_font = &small_font);
+  Text(const std::string &new_txt, SDL_Color new_color = white_color, Font* new_font = &small_font);
   ~Text();
 
   //Draw method using windows coordinates
@@ -46,7 +46,7 @@ public:
   void DrawTopLeftOnMap(int x, int y);
   void DrawCenterTopOnMap(int x, int y);
 
-  void Set(std::string &new_txt);
+  void Set(const std::string &new_txt);
   int GetWidth() const {return surf->w;};
   int GetHeight() const {return surf->h;}
 };
