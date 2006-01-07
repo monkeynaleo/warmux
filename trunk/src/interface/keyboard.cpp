@@ -260,8 +260,10 @@ void Clavier::Refresh()
     {
       ActiveTeam().AccessWeapon().HandleKeyEvent(i, KEY_REFRESH);
     }
-
-    ActiveCharacter().HandleKeyEvent(i,KEY_REFRESH);
+    else
+    {
+      ActiveCharacter().HandleKeyEvent(i,KEY_REFRESH);
+    }
   }
 }
 
