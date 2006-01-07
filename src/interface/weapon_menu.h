@@ -88,6 +88,7 @@ public:
 
   void Draw();
   void Init();
+  void Reset();
 
   int GetX() const;
   int GetY() const;
