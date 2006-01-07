@@ -300,14 +300,13 @@ void Action_AskTeam (const Action *a)
 
 void ActionHandler::ExecActions()
 {
-	std::list<Action*>::iterator it=queue.begin(), end=queue.end(); 
-	for (; it != end; ++it)
+    while (queue.size() != 0)
 	{
-		Action *action = *it;
+		Action *action = queue.front();
+        queue.pop_front();
 		Exec (action);
 		delete action;
 	}
-	queue.clear();
 }
 
 //-----------------------------------------------------------------------------

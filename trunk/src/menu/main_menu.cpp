@@ -86,17 +86,18 @@ bool Main_Menu::sig_quit()
 Main_Menu::Main_Menu()
 {
   int x_button, button_width, button_height ;
-  double y_scale ;
+  double x_scale, y_scale ;
 
 //  app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
  background=new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
  background->Blit( app.sdlwindow, 0, 0);
 
-  x_button = (int)((double)474 / DEFAULT_SCREEN_WIDTH * app.sdlwindow->w) ;
-  y_scale = (double)1 / DEFAULT_SCREEN_HEIGHT * app.sdlwindow->h ;
+  x_scale = (double)app.sdlwindow->w / DEFAULT_SCREEN_WIDTH ;
+  y_scale = (double)app.sdlwindow->h / DEFAULT_SCREEN_HEIGHT ;
 
-  button_width = (int)((double)BUTTON_WIDTH / DEFAULT_SCREEN_WIDTH * app.sdlwindow->w) ;
-  button_height = (int)((double)BUTTON_HEIGHT / DEFAULT_SCREEN_HEIGHT * app.sdlwindow->h) ;
+  x_button = (int)(474 * x_scale);
+  button_width = (int)(BUTTON_WIDTH * x_scale); 
+  button_height = (int)(BUTTON_HEIGHT * y_scale);
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
 
