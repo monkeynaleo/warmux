@@ -523,12 +523,9 @@ void Weapon::Draw()
 	  DrawUnit(ActiveTeam().ReadNbUnits());
     }
 
-  DrawWeaponBox();
-
-  // show strength_bar if necessay
+  // Do we need to draw strength_bar ? (real draw is done by class Interface
   if (max_strength != 0 && IsReady() && !m_is_active)
     weapon_strength_bar.visible = true;
-  //      UpdateDrawStrengthBar(m_strength);
 
   switch (m_visibility)
     {
