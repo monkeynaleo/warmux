@@ -260,6 +260,10 @@ void Interface::DisplayWeaponInfo ()
     {
       std::cout << "Can't blit weapon->icone => NULL " << std::endl;
     }
+
+  // Display CURRENT weapon icon on top
+  weapon = &ActiveTeam().AccessWeapon();
+  if (weapon != NULL) weapon->DrawWeaponBox();
 }
 
 //-----------------------------------------------------------------------------
