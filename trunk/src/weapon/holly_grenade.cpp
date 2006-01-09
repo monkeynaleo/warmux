@@ -186,11 +186,7 @@ void HollyGrenade::Draw()
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
-#ifdef CL
-  police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
-#else
-  normal_font.WriteCenterTop (txt_x, txt_y, ss.str(),white_color);
-#endif
+  normal_font.WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(),white_color);
 }
 
 //-----------------------------------------------------------------------------
