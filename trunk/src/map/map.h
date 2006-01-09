@@ -75,6 +75,8 @@ public:
   // Le test se fait sur le rectangle de test décalé de dx et dy.
   bool EstDansVide_haut (const PhysicalObj &obj, int dx, int dy);
   bool EstDansVide_bas (const PhysicalObj &obj, int dx, int dy);
+  bool IsInVacuum_left (const PhysicalObj &obj, int dx, int dy);
+  bool IsInVacuum_right (const PhysicalObj &obj, int dx, int dy);
 
   // Est en dehors du monde ?
   bool EstHorsMondeX (int x) const;

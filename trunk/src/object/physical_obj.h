@@ -151,6 +151,11 @@ public:
   // Update position (and state) with current time
   void UpdatePosition();
 
+  // Move the character until he gets out of the ground
+  void PutOutOfGround();
+  void PutOutOfGround(double direction); //Where direction is the angle of the direction
+                                         // where the object is moved
+
   bool NotifyMove(double old_x, double old_y, double new_x, double new_y,
 		  double &contact_x, double &contact_y, double &contact_angle);
 

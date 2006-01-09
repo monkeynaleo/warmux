@@ -67,6 +67,7 @@ void SuperTux::Tire()
 
   // Fixe la force de départ
   angle = ActiveTeam().crosshair.GetAngleRad();
+  PutOutOfGround(angle);
   SetExternForce(tux.cfg().speed, angle);
   time_next_action = Wormux::global_time.Read();
   last_move = Wormux::global_time.Read();

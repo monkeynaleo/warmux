@@ -326,7 +326,6 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 		   << std::endl;
 #endif
 	// Yes ! There is  a collision.
-
 	// Set the object position to the current position.
 
 	SetXY (Arrondit(x-dx), Arrondit(y-dy));
@@ -407,8 +406,57 @@ void PhysicalObj::UpdatePosition ()
 
 
 //-----------------------------------------------------------------------------
+void PhysicalObj::PutOutOfGround(double direction)
+{
+  const int max_step = 15;
 
+  if(IsInVacuum(0,0))
+    return;
+
+  double dx = cos(direction);
+  double dy = sin(direction);
+
+  int step=1;
+  while(step<max_step && !IsInVacuum((int)(dx * (double)step),(int)(dy * (double)step)))
+    step++;
+
+  if(step<max_step)
+  {
+    SetXY((int)(dx * (double)step)+GetX(),(int)(dy * (double)step)+GetY());
+  }
+  else
+  {
+    //Can't put the object out of the ground
+  }
+}
+
+//-----------------------------------------------------------------------------
+void PhysicalObj::PutOutOfGround()
+{
+  if(IsInVacuum(0,0))
+    return;
+
+  bool left,right,top,bottom;
+  left   = world.IsInVacuum_left(*this,0,0);
+  right  = world.IsInVacuum_right(*this,0,0);
+  top    = world.EstDansVide_haut(*this,0,0);
+  bottom = world.EstDansVide_bas(*this,0,0);
+
+  int dx=(int)GetTestRect().w * (right-left);
+  int dy=(int)GetTestRect().h * (top-bottom);
+
+  if(dx==0 && dy==0) return; //->Don't know in which direction we should go...
+
+  Point2i a(0,0);
+  Point2i b(dx,dy);
+
+  double dir = CalculeAngle(a,b);
+  PutOutOfGround(dir);
+}
+
+//-----------------------------------------------------------------------------
 void PhysicalObj::Ready()
+
 {
 #ifdef DEBUG_CHG_ETAT
   if (m_alive != ALIVE) COUT_DEBUG << "Ready." << std::endl;

@@ -254,7 +254,6 @@ bool Map::RectEstDansVide (const Rectanglei &prect)
 
 //-----------------------------------------------------------------------------
 
-
 bool Map::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
 {
   return LigneH_EstDansVide (obj.GetTestRect().x+dx,
@@ -264,12 +263,29 @@ bool Map::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
 
 //-----------------------------------------------------------------------------
 
-
 bool Map::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
 {
   return LigneH_EstDansVide (obj.GetTestRect().x+dx,
 			     obj.GetTestRect().y+dy,
 			     obj.GetTestRect().w);
+}
+
+//-----------------------------------------------------------------------------
+
+bool Map::IsInVacuum_left (const PhysicalObj &obj, int dx, int dy)
+{
+  return LigneV_EstDansVide (obj.GetTestRect().x+dx,
+			     obj.GetTestRect().y+dy,
+			     obj.GetTestRect().y+obj.GetTestRect().h+dy);
+}
+
+//-----------------------------------------------------------------------------
+
+bool Map::IsInVacuum_right (const PhysicalObj &obj, int dx, int dy)
+{
+  return LigneV_EstDansVide (obj.GetTestRect().x+obj.GetTestRect().w+dx,
+			     obj.GetTestRect().y+dy,
+			     obj.GetTestRect().y+obj.GetTestRect().h+dy);
 }
 
 //-----------------------------------------------------------------------------
