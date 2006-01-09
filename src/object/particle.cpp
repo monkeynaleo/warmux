@@ -84,7 +84,8 @@ void Particle::Refresh()
     if((float)lived_time<m_initial_time_to_live/2.0)
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
-      image->Scale(coeff,coeff);
+      image->Scale(coeff,coeff);  
+      SetSize(image->GetWidth(),image->GetHeight());
       image->SetAlpha(1.0);
     }
     else
@@ -125,10 +126,12 @@ void Smoke::Init()
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
   image = resource_manager.LoadSprite(res,"smoke"); 
   resource_manager.UnLoadXMLProfile( res);
-  SetSize(image->GetWidth(),image->GetHeight());
    
   m_initial_time_to_live = 10;
   m_left_time_to_live = m_initial_time_to_live; 
+
+  image->Scale(0.0,0.0);
+  SetSize(1,1);
 }
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -152,7 +155,9 @@ void StarParticle::Init()
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
   image = resource_manager.LoadSprite(res,"star_particle"); 
   resource_manager.UnLoadXMLProfile( res);
-  SetSize(image->GetWidth(),image->GetHeight());
+
+  image->Scale(0.0,0.0);
+  SetSize(1,1);  
 }
 
 //-----------------------------------------------------------------------------
@@ -183,7 +188,9 @@ void FireParticle::Init()
   image = resource_manager.LoadSprite(res,"fire_particle");
   impact = resource_manager.LoadImage(res,"fire_impact");
   resource_manager.UnLoadXMLProfile( res);
-  SetSize(image->GetWidth(),image->GetHeight());
+
+  image->Scale(0.0,0.0);
+  SetSize(1,1);
 }
 
 //-----------------------------------------------------------------------------
