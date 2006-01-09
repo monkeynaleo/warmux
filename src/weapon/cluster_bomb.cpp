@@ -148,6 +148,7 @@ void ClusterBomb::Tire (double force)
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (force, angle);
 
+  PutOutOfGround(angle);
 #ifdef MSG_DBG
   COUT_DBG << "ClusterBomb::Tire()" << std::endl;
 #endif

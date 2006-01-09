@@ -65,6 +65,7 @@ void RoquetteBazooka::Tire (double force)
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (force, angle);
+  PutOutOfGround(angle);
 }
 
 //-----------------------------------------------------------------------------

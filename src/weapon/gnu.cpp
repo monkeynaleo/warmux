@@ -64,17 +64,19 @@ void Gnu::Tire (double force)
   ActiveTeam().GetWeapon().PosXY (x, y);
   SetXY (x,y);
 
-  //Dummy value, we only need save_x!=x and save_y!=y
-  //To avoid a comparison in Refresh()
-  save_x=(double)x-1.0;
-  save_y=(double)y-1.0;
-
-  launched_time=global_time.Read();
-
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (force, angle);
   is_active=true;
+
+  PutOutOfGround(angle);
+
+  //Dummy value, we only need save_x!=x and save_y!=y
+  //To avoid a comparison in Refresh()
+  save_x=(double)GetX()-1.0;
+  save_y=(double)GetY()-1.0;
+
+  launched_time=global_time.Read();
 
   if(angle<M_PI/2 && angle>-M_PI/2)
     m_sens = 1;
@@ -132,10 +134,7 @@ void Gnu::Refresh()
   image->SetRotation_deg(angle);
   image->Update();
   // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-   
-  SetTestRect (dx, dx, dy, dy);
+  SetTestRect (2, 2, 2, 2);
 
   if(IsGhost())
   {

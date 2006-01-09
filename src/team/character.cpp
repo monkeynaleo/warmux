@@ -782,7 +782,7 @@ void Character::SetSkin(std::string skin_name)
                  AccessSkin().many_skins[skin_name].test_bottom);
 
     SetSize (image->GetWidth(), image->GetHeight());
-     
+    PutOutOfGround();     
     //Restore skins direction
     if(current_skin!="" && sc_x<0)
        image->Scale(-1,1);
@@ -811,6 +811,7 @@ void Character::SetSkin(std::string skin_name)
     m_frame_repetition = walk_skin->repetition_frame;
 
     SetSize (image->GetWidth(), image->GetHeight());
+    PutOutOfGround();     
     StopWalking();
 
     //Restore skins direction

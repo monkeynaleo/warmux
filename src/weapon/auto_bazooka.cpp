@@ -87,6 +87,8 @@ void RoquetteTeteCherche::Tire (double force,
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (force, angle);
 
+  PutOutOfGround(angle);
+
   temps_debut_tir = Wormux::global_time.Read();
   angle_local=angle;
 }

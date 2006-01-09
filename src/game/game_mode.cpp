@@ -96,8 +96,7 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
 	  if (character.max_energy==0) character.max_energy = 1;
 	}
     LitDocXml::LitUint (xmlver, "mass", character.mass);
-    LitDocXml::LitDouble (xmlver, "air_resist_facto", character.air_resist_factor);
-  
+    LitDocXml::LitDouble (xmlver, "air_resist_factor", character.air_resist_factor);
 	item = LitDocXml::AccesBalise (xmlver, "jump");
 	if (item != NULL) {
       LitDocXml::LitAttrUint (item, "strength", character.jump_strength);
