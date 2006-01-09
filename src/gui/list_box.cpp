@@ -27,7 +27,6 @@
 #include "../graphic/font.h"
 #include <algorithm>
 #include <SDL_gfxPrimitives.h>
-#include <iostream>
 //-----------------------------------------------------------------------------
 
 ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
