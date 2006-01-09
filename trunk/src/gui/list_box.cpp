@@ -27,6 +27,7 @@
 #include "../graphic/font.h"
 #include <algorithm>
 #include <SDL_gfxPrimitives.h>
+#include <iostream>
 //-----------------------------------------------------------------------------
 
 ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
@@ -81,16 +82,18 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button)
           (button == SDL_BUTTON_LEFT && m_down->MouseIsOver(mouse_x, mouse_y)) )
     {
       // bottom button
-      if ( m_items.size()-1 - first_visible_item > nb_visible_items_max )
+      if ( m_items.size() - first_visible_item > nb_visible_items_max )
         first_visible_item++ ;
+
       return true;
     }
     else if ( (button == SDL_BUTTON_WHEELUP && MouseIsOver(mouse_x, mouse_y)) || 
                 (button == SDL_BUTTON_LEFT && m_up->MouseIsOver(mouse_x,mouse_y)) )
-    {
+    {     
       // top button
       if (first_visible_item > 0)
         first_visible_item-- ;
+
       return true;
     }
   }
