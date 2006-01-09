@@ -199,6 +199,8 @@ void AppWormux::Fin()
   config.Sauve();
 
   jukebox.End();
+
+  TTF_Quit();
   SDL_Quit();
 
   SaveStatToXML("stats.xml");
