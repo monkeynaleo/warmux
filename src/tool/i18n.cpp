@@ -127,6 +127,7 @@ std::string Format (const char *txt, ...)
 void I18N_SetDir(const std::string &dir)
 {
   bindtextdomain(GETTEXT_DOMAIN, dir.c_str());
+  bind_textdomain_codeset (GETTEXT_DOMAIN, "UTF-8");
 }
 
 //-----------------------------------------------------------------------------
