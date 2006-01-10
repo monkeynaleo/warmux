@@ -55,7 +55,7 @@ using namespace Wormux;
 //-----------------------------------------------------------------------------
 AppWormux app;
 
-const std::string VERSION("0.7 beta");
+const std::string VERSION("0.7beta1");
 //-----------------------------------------------------------------------------
 
 AppWormux::AppWormux()
