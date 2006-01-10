@@ -39,8 +39,8 @@ Font tiny_font;
 bool Font::InitAllFonts()
 { 
   bool ok=true;
-  //std::string vera_ttf = "Vera.ttf";
-  std::string vera_ttf = "DejaVuSans.ttf";
+  std::string vera_ttf = "Vera.ttf";
+  //std::string vera_ttf = "DejaVuSans.ttf";
   std::string filename  = Wormux::config.data_dir+"font"+PATH_SEPARATOR+vera_ttf;
   if (!FichierExiste(filename))
   {
