@@ -146,7 +146,7 @@ bool GameMode::Load(const std::string &mode)
   }
   catch (const xmlpp::exception &e)
   {
-    std::cerr << Format(_("Error while loading game mode %s (file %s) :"), 
+    std::cerr << Format(_("Error while loading game mode %s (file %s):"), 
                         mode.c_str(), fullname.c_str())
 			  << std::endl << e.what() << std::endl;
     return false;

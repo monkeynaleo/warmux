@@ -130,7 +130,7 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
   catch (const xmlpp::exception &e)
   {
     std::cout << std::endl
-		      << Format(_("Error during skin loading (%s) :"),nom.c_str())
+		      << Format(_("Error during loading skin %s:"),nom.c_str())
               << std::endl << e.what() << std::endl;
     return false;
   }
@@ -322,7 +322,7 @@ void InitSkins()
       LoadOneSkin(dirname, file->d_name);
     closedir (dir);
   } else {
-	  Erreur (Format(_("Unable to open skins directory (%s) !"), 
+	  Erreur (Format(_("Unable to open skins directory (%s)!"), 
 				     dirname.c_str()));
   }
 #else
@@ -339,7 +339,7 @@ void InitSkins()
 	    LoadOneSkin(dirname,file.cFileName);
 	}
   } else {
-	  Erreur (Format(_("Unable to open skins directory (%s) !"), 
+	  Erreur (Format(_("Unable to open skins directory (%s)!"), 
 				     dirname.c_str()));
   }
   FindClose(file_search);

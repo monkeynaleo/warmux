@@ -422,7 +422,7 @@ void TeamsList::AddTeam (const std::string &id, bool generate_error)
       selection.push_back (pos);
       list.push_back (equipe);
     } else {
-		std::string msg = Format(_("Can't find team %s :-("), id.c_str());
+		std::string msg = Format(_("Can't find team %s!"), id.c_str());
 		if (generate_error)
 		  Erreur (msg);
 		else
@@ -447,7 +447,7 @@ void TeamsList::SetActive(const std::string &id)
 			return;
 		}
 	}
-	Erreur (Format(_("Can't find team %s !"), id.c_str()));
+	Erreur (Format(_("Can't find team %s!"), id.c_str()));
 }
   
 //-----------------------------------------------------------------------------

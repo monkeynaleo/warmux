@@ -263,7 +263,7 @@ void ListeTerrain::Init()
 	  LoadOneMap (dirname, file->d_name);
     closedir (dir);
   } else {
-    Erreur (Format(_("Unable to open maps directory (%s) !"),
+    Erreur (Format(_("Unable to open maps directory (%s)!"),
 		   dirname.c_str()));
   }
 #else
@@ -280,7 +280,7 @@ void ListeTerrain::Init()
 	    LoadOneMap(dirname,file.cFileName);
 	}
   } else {
-    Erreur (Format(_("Unable to open maps directory (%s) !"),
+    Erreur (Format(_("Unable to open maps directory (%s)!"),
 		   dirname.c_str()));
   }
   FindClose(file_search);

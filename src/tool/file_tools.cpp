@@ -56,8 +56,7 @@ std::string RepertoireHome ()
   char *txt = getenv("HOME");
   if (txt == NULL) 
   {
-    Erreur (_("HOME directory (environment variable $HOME) "
-	      "could not be found !"));
+    Erreur (_("HOME directory (environment variable $HOME) could not be found!"));
   }
   return txt;
 }

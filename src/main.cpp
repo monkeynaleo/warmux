@@ -203,7 +203,9 @@ void AppWormux::Fin()
   TTF_Quit();
   SDL_Quit();
 
+#ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
+#endif  
   std::cout << "o "
             << _("Please tell us your opinion of Wormux via email:")
             << std::endl

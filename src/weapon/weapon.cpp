@@ -619,7 +619,7 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   xmlpp::Element *elem = LitDocXml::AccesBalise (weapon, m_id);
   if (elem == NULL)
   {
-      std::cout << Format(_("No element <%s> found in the xml config file !"),
+      std::cout << Format(_("No element <%s> found in the xml config file!"),
                           m_id.c_str())
                 << std::endl;
     return false;
