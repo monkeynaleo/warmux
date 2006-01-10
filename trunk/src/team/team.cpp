@@ -82,7 +82,7 @@ bool Team::Init (const std::string &teams_dir, const std::string &id)
   catch (const xmlpp::exception &e)
   {
     std::cout << std::endl
-              << Format(_("Error loading %s team :"),	id.c_str())
+              << Format(_("Error loading team %s:"),	id.c_str())
               << std::endl << e.what() << std::endl;
     return false;
   }

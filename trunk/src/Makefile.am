@@ -3,10 +3,10 @@ SUBDIRS = .
 bin_PROGRAMS = wormux
 
 pkgdatadir=$(datadir)/@DATADIR@/
-localedir=$(datadir)/po/
+localedir = $(datadir)/locale
 
 wormux_SOURCES = \
-        tool/resource_manager.cpp \
+	tool/resource_manager.cpp \
 	include/base.h \
 	include/app.h \
 	main.cpp \

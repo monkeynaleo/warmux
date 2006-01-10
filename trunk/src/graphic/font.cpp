@@ -90,6 +90,7 @@ bool Font::Load (const std::string& font_name, int size)
   assert (FichierExiste(filename));
 
   m_font = TTF_OpenFont(filename.c_str(), size);
+
   TTF_SetFontStyle(m_font,TTF_STYLE_NORMAL);
   return true;
 }

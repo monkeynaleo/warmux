@@ -26,7 +26,9 @@
 #include <string>
 //-----------------------------------------------------------------------------
 
-#define ENABLE_STATS
+#ifdef DEBUG
+#  define ENABLE_STATS
+#endif
 
 #ifdef ENABLE_STATS
 void StatStart(const std::string &function);

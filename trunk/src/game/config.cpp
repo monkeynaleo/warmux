@@ -236,11 +236,12 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 
 void Config::Applique()
 {
-  locale_dir = TraduitRepertoire(locale_dir);
-  I18N_SetDir (locale_dir);
+  std::string dir;
+  dir = TraduitRepertoire(locale_dir);
+  I18N_SetDir (dir);
 
-  data_dir = TraduitRepertoire(data_dir);
-  resource_manager.AddDataPath(data_dir);
+  dir = TraduitRepertoire(data_dir);
+  resource_manager.AddDataPath(dir);
 
   // Charge le mode jeu
   weapons_list.Init();
