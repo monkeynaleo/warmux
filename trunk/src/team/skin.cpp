@@ -305,11 +305,6 @@ void InitSkins()
   std::string dirname = config.data_dir + "skin" + PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
   struct dirent *file;
-
-   
-  std::cout << "looking in the directory : " << dirname << std::endl;
-  std::cout.flush();
-  
   DIR *dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL)
