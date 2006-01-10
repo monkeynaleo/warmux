@@ -36,10 +36,9 @@
 
 <sprite name="animation">
   <image file="clope-anim.png">
-    <grid pos="0,0" size="42,42" array="17,1" />
+    <grid pos="0,0" size="73,42" array="17,1" />
   </image>
   <animation speed="150" />
-  <translation origin="top_left" x="31" y="0" />
 </sprite>
 
 <sprite name="jump">

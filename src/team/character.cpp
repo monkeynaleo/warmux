@@ -351,7 +351,10 @@ void Character::Draw()
   && (current_skin=="walking" || current_skin=="breathe")
   && (!GetSkin().anim.not_while_playing || &ActiveCharacter()!=this))
   {
-    anim.image->Draw(x,y);
+    int dx = 0;
+    if(GetDirection()==-1)
+      dx = image->GetWidth() - anim.image->GetWidth();
+    anim.image->Draw(x+dx,y);
   }
 
    // Draw energy bar

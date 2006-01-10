@@ -24,13 +24,15 @@
   <hand frame="*" x="16" y="20" />
 </sprite>
 
+<!--
+****  Incompatible *** :(
 <sprite name="animation">
   <image file="flament-yeux.png">
-    <grid pos="0,0" size="14,24" array="25,1" />
+    <grid pos="0,0" size="42,42" array="25,1" />
   </image>
   <animation loop="no" on_finish="blank" speed="170" />
-  <translation origin="top_left" x="26" y="13" />
 </sprite>
+-->
 
 <sprite name="jump">
 	<image file="flament-jump.png" />
