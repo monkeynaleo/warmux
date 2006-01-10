@@ -70,6 +70,7 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
   tmp_box->SetBorder(0,0);
 
   lbox_all_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5);
+  lbox_all_teams->always_one_selected = false;
   tmp_box->AddWidget(lbox_all_teams);
 
   Box * buttons_tmp_box = new VBox(0,0, 68, false);
@@ -77,7 +78,7 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
   bt_add_team = new Button(0,0, 48,48,res,"menu/valider");
   buttons_tmp_box->AddWidget(bt_add_team);
   
-  bt_remove_team = new Button(0,0,48,48,res,"menu/valider");
+  bt_remove_team = new Button(0,0,48,48,res,"menu/annuler");
   buttons_tmp_box->AddWidget(bt_remove_team);
 
   space_for_logo = new NullWidget(0,0,48,48);
@@ -85,7 +86,8 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
 
   tmp_box->AddWidget(buttons_tmp_box);
   
-  lbox_selected_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5);
+  lbox_selected_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5); 
+  lbox_selected_teams->always_one_selected = false;
   tmp_box->AddWidget(lbox_selected_teams);
 
   team_box->AddWidget(tmp_box);
@@ -126,13 +128,15 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
   TeamsList::full_iterator
     it=teams_list.full_list.begin(), 
     end=teams_list.full_list.end();
-  lbox_all_teams->selection_max = game_mode.max_teams;
-  lbox_all_teams->selection_min = 2;
+
   uint i=0;
   for (; it != end; ++it)
   {
     bool choix = teams_list.IsSelected (i);
-    lbox_all_teams->AddItem (choix, (*it).GetName(), (*it).GetName());
+    if (choix)
+      lbox_selected_teams->AddItem (false, (*it).GetName(), (*it).GetId());
+    else
+      lbox_all_teams->AddItem (false, (*it).GetName(), (*it).GetId());
     ++i;
   }
 
@@ -153,6 +157,14 @@ void GameMenu::OnClic ( int x, int y, int button)
   if (lbox_maps->Clic(x, y, button)) {
     ChangeMap();
   } else if (lbox_all_teams->Clic(x, y, button)) {
+
+  } else if (lbox_selected_teams->Clic(x, y, button)) {
+
+  } else if ( bt_add_team->MouseIsOver(x, y)) {
+    if (lbox_selected_teams->GetItemsList()->size() <= game_mode.max_teams)
+      MoveTeams(lbox_all_teams, lbox_selected_teams, false); 
+  } else if ( bt_remove_team->MouseIsOver(x, y)) {
+    MoveTeams(lbox_selected_teams, lbox_all_teams, true);
   }
 }
 
@@ -161,9 +173,29 @@ void GameMenu::OnClic ( int x, int y, int button)
 void GameMenu::SaveOptions()
 {
   // Save values
-  std::string map_id = lbox_maps->ReadLabel(lbox_maps->GetSelectedItem());
+  std::string map_id = lbox_maps->ReadLabel();
   lst_terrain.ChangeTerrainNom (map_id);
-  teams_list.ChangeSelection (lbox_all_teams->GetSelection());
+
+  // teams
+  std::vector<list_box_item_t> * 
+    selected_teams = lbox_selected_teams->GetItemsList();
+
+  if (selected_teams->size() > 1) {
+    std::list<uint> selection;
+
+    std::vector<list_box_item_t>::iterator 
+      it = selected_teams->begin(), 
+      end = selected_teams->end();
+
+    int index = -1;
+    for (; it != end; ++it) {
+      teams_list.FindById(it->value, index);
+      if (index > -1)
+	selection.push_back(uint(index));
+    }
+    teams_list.ChangeSelection (selection);
+
+  }
    
   //Save options in XML
   config.Sauve();
@@ -195,13 +227,28 @@ void GameMenu::__sig_record()
 
 void GameMenu::ChangeMap()
 {
-  std::string map_id = lbox_maps->ReadLabel(lbox_maps->GetSelectedItem());
+  std::string map_id = lbox_maps->ReadLabel();
   uint map = lst_terrain.FindMapById(map_id);
   map_preview = new Sprite(lst_terrain.liste[map].preview);
   float scale = std::min( float(MAP_PREVIEW_W)/map_preview->GetHeight(), 
                           float(MAP_PREVIEW_W)/map_preview->GetWidth() ) ;
 
   map_preview->Scale (scale, scale);
+}
+
+//-----------------------------------------------------------------------------
+
+void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
+{
+  if (from->GetSelectedItem() != -1) {
+    to->AddItem (false, 
+		 from->ReadLabel(),
+		 from->ReadValue());
+    to->Deselect();
+    if (sort) to->Sort();
+    
+    from->RemoveSelected();
+  }
 }
 
 //-----------------------------------------------------------------------------

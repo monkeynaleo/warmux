@@ -25,9 +25,8 @@
 #include "../include/base.h"
 #include "widget.h"
 #include "button.h"
-#include <vector>
 #include <string>
-#include <list>
+#include <vector>
 //-----------------------------------------------------------------------------
 
 struct SDL_Surface;
@@ -39,12 +38,9 @@ typedef struct s_list_box_item_t{
 
 
 class ListBox : public Widget
-{
-public:
-  int selection_min; // Minimal number of selected items
-  int selection_max; // Maximal number of selected items (-1 means no limit)
-  typedef std::list<uint>::const_iterator selection_iterator;
-
+{ 
+ public:
+  bool always_one_selected;
 private:
   // for the placement
   uint nb_visible_items, nb_visible_items_max;
@@ -52,10 +48,8 @@ private:
   
   // what are the items ?
   uint first_visible_item;
+  int selected_item; 
   std::vector<list_box_item_t> m_items;
-
-  //std::vector<ListBoxItem> m_items;
-  std::list<uint> m_selection;
 
   // Buttons
   Button *m_up, *m_down;
@@ -71,14 +65,18 @@ public:
   void AddItem (bool selected, 
 		const std::string &label,
 		const std::string &value);
+  void Sort();
+
   int MouseIsOnWitchItem (uint mouse_x, uint mouse_y);
+
   void Select (uint index);
-  void Deselect (uint index);
-  bool IsSelected (uint index);
-  uint GetSelectedItem ();
-  const std::list<uint>& GetSelection() const;
-  const std::string& ReadLabel (uint index) const;
-  const std::string& ReadValue (uint index) const;
+  int GetSelectedItem ();
+  void Deselect ();
+  void RemoveSelected();
+  const std::string& ReadLabel () const;
+  const std::string& ReadValue () const;
+
+  std::vector<list_box_item_t> * GetItemsList();
 };
 
 //-----------------------------------------------------------------------------

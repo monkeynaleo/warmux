@@ -59,7 +59,7 @@ void TeamsList::NextTeam (bool debut_jeu)
   do
     {
       ++it;
-      if (it == list.end()) it = list.begin();
+      if (it == playing_list.end()) it = playing_list.begin();
     } while ((**it).NbAliveCharacter() == 0);
   action_handler.NewAction(ActionString(ACTION_CHANGE_TEAM, (**it).GetId()));
 }
@@ -68,7 +68,7 @@ void TeamsList::NextTeam (bool debut_jeu)
 
 Team& TeamsList::ActiveTeam()
 {
-  assert (m_equipe_active != list.end());
+  assert (m_equipe_active != playing_list.end());
   return **m_equipe_active;
 }
 
@@ -108,7 +108,7 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
 
 void TeamsList::LoadList()
 {  
-  list.clear() ;
+  playing_list.clear() ;
    
   std::cout << "o " << _("Load teams:");
   
@@ -170,10 +170,10 @@ void TeamsList::LoadList()
 
 void TeamsList::Reset()
 {
-  m_equipe_active = list.begin();
+  m_equipe_active = playing_list.begin();
 
   // Commence par désactiver tous les vers
-  iterator it=list.begin(), fin=list.end();
+  iterator it=playing_list.begin(), fin=playing_list.end();
   for (; it != fin; ++it) 
   {
 	Team &team = **it;
@@ -182,7 +182,7 @@ void TeamsList::Reset()
   } 
 
   // Reset de toutes les équipes
-  for (it=list.begin(); it != fin; ++it) (**it).Reset();
+  for (it=playing_list.begin(); it != fin; ++it) (**it).Reset();
 }
 
 //-----------------------------------------------------------------------------
@@ -224,7 +224,7 @@ void TeamsList::InitList (const std::list<std::string> &liste_nom)
   Clear();
   std::list<std::string>::const_iterator it=liste_nom.begin(), fin=liste_nom.end();
   for (; it != fin; ++it) AddTeam (*it, false);
-  m_equipe_active = list.begin();
+  m_equipe_active = playing_list.begin();
 }
 
 //-----------------------------------------------------------------------------
@@ -233,7 +233,7 @@ void TeamsList::InitEnergy ()
 {
   //On cherche l'équipe avec le plus d'énergie pour fixer le niveau max
   //(arrive dans le cas d'équipe n'ayant pas le même nombre de vers)
-  iterator it=list.begin(), fin=list.end();
+  iterator it=playing_list.begin(), fin=playing_list.end();
   uint max = 0;
   for (; it != fin; ++it)
   {
@@ -242,7 +242,7 @@ void TeamsList::InitEnergy ()
   }
 
   //Initialisation de la barre d'énergie de chaque équipe
-  it=list.begin();
+  it=playing_list.begin();
   uint i = 0;
   for (; it != fin; ++it)
   {
@@ -251,11 +251,11 @@ void TeamsList::InitEnergy ()
   }
 
   //Calcul du classement initial
-  it=list.begin();
+  it=playing_list.begin();
   for (; it != fin; ++it)
   {
     uint classement = 0;
-    iterator it2=list.begin();
+    iterator it2=playing_list.begin();
     for (; it2 != fin; ++it2)
     {
       if((it != it2)
@@ -264,11 +264,11 @@ void TeamsList::InitEnergy ()
     }
     (**it).energie.classement_tmp = classement;
   }
-  it=list.begin();
+  it=playing_list.begin();
   for (; it != fin; ++it)
   {
     uint classement = (**it).energie.classement_tmp;
-    iterator it2=list.begin();
+    iterator it2=playing_list.begin();
     for (it2 = it; it2 != fin; ++it2)
     {
       if((it != it2)
@@ -289,7 +289,7 @@ void TeamsList::RefreshEnergy ()
   // - On change le classement
   // - On prépare les jauges à l'évenement suivant
   
-  iterator it=list.begin(), fin=list.end();
+  iterator it=playing_list.begin(), fin=playing_list.end();
   uint status;
 
   bool en_attente = true; // Toute les jauges sont en attente
@@ -308,7 +308,7 @@ void TeamsList::RefreshEnergy ()
     status = EnergieStatusOK;
 
     //Une des jauges change de valeur?
-    for (it=list.begin(); it != fin; ++it) {
+    for (it=playing_list.begin(); it != fin; ++it) {
       if( (**it).energie.status == EnergieStatusValeurChange) {
         status = EnergieStatusValeurChange;
         break;
@@ -316,7 +316,7 @@ void TeamsList::RefreshEnergy ()
     }
   
     //Une des jauges change de classement?
-    for (it=list.begin(); it != fin; ++it) {
+    for (it=playing_list.begin(); it != fin; ++it) {
       if( (**it).energie.status == EnergieStatusClassementChange
       && ((**it).energie.EstEnMouvement() || status == EnergieStatusOK)) {
         status = EnergieStatusClassementChange;
@@ -333,14 +333,14 @@ void TeamsList::RefreshEnergy ()
   // On recopie l'ordre a donner aux jauges
   if(status != EnergieStatusOK || en_attente)
   {
-    it=list.begin();
+    it=playing_list.begin();
     for (; it != fin; ++it) {
       (**it).energie.status = status;
     }
   }
 
   // Actualisation des valeurs (pas d'actualisation de l'affichage)
-  for (it=list.begin(); it != fin; ++it)
+  for (it=playing_list.begin(); it != fin; ++it)
   {
     (**it).ActualiseBarreEnergie();
     RefreshSort();
@@ -350,15 +350,15 @@ void TeamsList::RefreshEnergy ()
 
 void TeamsList::RefreshSort ()
 {
-  iterator it=list.begin(), fin=list.end();
+  iterator it=playing_list.begin(), fin=playing_list.end();
   uint classement;
   
   //Cherche le classement sans tenir comte des égalités
-  it=list.begin();
+  it=playing_list.begin();
   for (; it != fin; ++it)
   {
     classement = 0;
-    iterator it2=list.begin();
+    iterator it2=playing_list.begin();
     for (; it2 != fin; ++it2)
     {
       if((it != it2)
@@ -369,11 +369,11 @@ void TeamsList::RefreshSort ()
   }
 
   //Réglage des égalités
-  it=list.begin();
+  it=playing_list.begin();
   for (; it != fin; ++it)
   {
     classement = (**it).energie.classement_tmp;
-    iterator it2=list.begin();
+    iterator it2=playing_list.begin();
     for (it2 = it; it2 != fin; ++it2)
     {
       if((it != it2)
@@ -391,9 +391,9 @@ void TeamsList::ChangeSelection (const std::list<uint>& nv_selection)
   selection = nv_selection;
 
   selection_iterator it=selection.begin(), fin=selection.end();
-  list.clear();
-  for (; it != fin; ++it) list.push_back (FindByIndex(*it));
-  m_equipe_active = list.begin();
+  playing_list.clear();
+  for (; it != fin; ++it) playing_list.push_back (FindByIndex(*it));
+  m_equipe_active = playing_list.begin();
 }
 
 //-----------------------------------------------------------------------------
@@ -407,7 +407,7 @@ bool TeamsList::IsSelected (uint index)
 void TeamsList::Clear()
 {
   selection.clear();
-  list.clear();
+  playing_list.clear();
 }
   
 //-----------------------------------------------------------------------------
@@ -418,7 +418,7 @@ void TeamsList::AddTeam (const std::string &id, bool generate_error)
     Team *equipe = FindById (id, pos);
     if (equipe != NULL) {
       selection.push_back (pos);
-      list.push_back (equipe);
+      playing_list.push_back (equipe);
     } else {
 		std::string msg = Format(_("Can't find team %s!"), id.c_str());
 		if (generate_error)
@@ -426,7 +426,7 @@ void TeamsList::AddTeam (const std::string &id, bool generate_error)
 		else
 		  std::cout << "! " << msg << std::endl;
     }
-	m_equipe_active = list.begin();
+	m_equipe_active = playing_list.begin();
 }
   
 //-----------------------------------------------------------------------------
@@ -434,8 +434,8 @@ void TeamsList::AddTeam (const std::string &id, bool generate_error)
 void TeamsList::SetActive(const std::string &id)
 {
 	iterator
-		it = list.begin(),
-		end = list.end();
+		it = playing_list.begin(),
+		end = playing_list.end();
 	for (; it != end; ++it)
 	{
 		Team &team = **it;

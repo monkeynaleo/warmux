@@ -208,8 +208,7 @@ void OptionMenu::SaveOptions()
   game_mode.character.init_energy = opt_energy_ini->GetValue() ;
 
   // Video mode
-  uint mode = lbox_video_mode->GetSelectedItem();
-  std::string s_mode = lbox_video_mode->ReadValue(mode);
+  std::string s_mode = lbox_video_mode->ReadValue();
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
   video.SetConfig(w, h, full_screen->GetValue());
@@ -222,7 +221,7 @@ void OptionMenu::SaveOptions()
   // Sound
   jukebox.ActiveMusic( opt_music->GetValue() );
   jukebox.ActiveEffects( opt_sound_effects->GetValue() );
-  std::string sfreq = lbox_sound_freq->ReadValue(lbox_sound_freq->GetSelectedItem());
+  std::string sfreq = lbox_sound_freq->ReadValue();
   long freq;
   if (str2long(sfreq,freq)) jukebox.SetFrequency (freq);
   
