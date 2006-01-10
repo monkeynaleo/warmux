@@ -109,8 +109,8 @@ void InitGameData_NetServer()
   action_handler.NewAction (Action(ACTION_CLEAR_TEAMS));
   
   TeamsList::iterator 
-    it=teams_list.list.begin(),
-    end=teams_list.list.end();
+    it=teams_list.playing_list.begin(),
+    end=teams_list.playing_list.end();
 
   for (; it != end; ++it)
     {
@@ -274,10 +274,10 @@ void InitGame ()
   // =============================================
 
   // Teams' creation
-  if (teams_list.list.size() < 2)
+  if (teams_list.playing_list.size() < 2)
     Erreur(_("You need at least two teams to play: "
 	     "change this in 'Options menu' !"));
-  assert (teams_list.list.size() <= game_mode.max_teams);
+  assert (teams_list.playing_list.size() <= game_mode.max_teams);
 
   // Initialization of teams' energy
   teams_list.InitEnergy();

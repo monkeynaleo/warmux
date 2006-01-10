@@ -32,7 +32,7 @@ public:
   typedef std::list<Team>::iterator full_iterator;
   typedef std::vector<Team*>::iterator iterator;
   std::list<Team> full_list;
-  std::vector<Team*> list;
+  std::vector<Team*> playing_list;
 
 private:
   typedef std::list<uint>::iterator selection_iterator;

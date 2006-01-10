@@ -312,8 +312,8 @@ bool Config::SauveXml()
   //=== Equipes ===
   xmlpp::Element *balise_equipes = racine -> add_child("teams");
   TeamsList::iterator
-    it=teams_list.list.begin(),
-    fin=teams_list.list.end();
+    it=teams_list.playing_list.begin(),
+    fin=teams_list.playing_list.end();
   for (; it != fin; ++it)
   {
     doc.EcritBalise (balise_equipes, "team", (**it).GetId());

@@ -27,8 +27,8 @@
 
 // Boucle pour chaque equipe
 #define POUR_CHAQUE_EQUIPE(equipe) \
-  for (TeamsList::iterator equipe=teams_list.list.begin(), \
-       fin_pour_chaque_equipe=teams_list.list.end(); \
+  for (TeamsList::iterator equipe=teams_list.playing_list.begin(), \
+       fin_pour_chaque_equipe=teams_list.playing_list.end(); \
        equipe != fin_pour_chaque_equipe; \
        ++equipe)
 

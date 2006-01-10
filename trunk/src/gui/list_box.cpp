@@ -27,6 +27,19 @@
 #include "../graphic/font.h"
 #include <algorithm>
 #include <SDL_gfxPrimitives.h>
+
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+struct CompareItems
+{
+     bool operator()(const list_box_item_t& a, const list_box_item_t& b)
+     {
+       return a.label < b.label;
+     }
+};
+
+
+//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
@@ -40,8 +53,9 @@ ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
   first_visible_item = 0;
   nb_visible_items_max = h/height_item;
   nb_visible_items = 0;
-  selection_min = 1;
-  selection_max = 1;
+
+  selected_item = -1;  
+  always_one_selected = true;
 }
 
 //-----------------------------------------------------------------------------
@@ -51,7 +65,6 @@ ListBox::~ListBox()
    delete m_up;
    delete m_down;
 
-   m_selection.clear();
    m_items.clear();
 }
 
@@ -101,8 +114,9 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button)
   {
     int item = MouseIsOnWitchItem(mouse_x,mouse_y);
     if (item == -1) return false;
-    if (IsSelected(item))
-      Deselect (item);
+    
+    if (item == selected_item)
+      Deselect ();
     else
       Select (item);
     return true;
@@ -127,7 +141,7 @@ void ListBox::Draw (uint mouse_x, uint mouse_y)
 
   for (uint i=0; i < nb_visible_items; i++) 
   {
-     if ( IsSelected(i+first_visible_item) ) {
+     if ( int(i+first_visible_item) == selected_item ) {
        boxRGBA(app.sdlwindow, 
 	       x+1, y+i*height_item+1, 
 	       x+1+w-2, y+i*height_item+1+height_item-2,
@@ -143,7 +157,7 @@ void ListBox::Draw (uint mouse_x, uint mouse_y)
      small_font.WriteLeft(x+5,
 			  y+i*height_item,
 			  m_items[i+first_visible_item].label,
-			  white_color);//IsSelected(i+first_visible_item) ? black_color : white_color) ;
+			  white_color);
      
   }  
 
@@ -193,56 +207,71 @@ void ListBox::AddItem (bool selected,
 
 //-----------------------------------------------------------------------------
 
+void ListBox::Sort()
+{
+  std::sort(m_items.begin(), m_items.end(), 
+               CompareItems());
+}
+
+//-----------------------------------------------------------------------------
+
+void ListBox::RemoveSelected()
+{
+  assert (always_one_selected == false);
+
+  if (selected_item!=-1) {
+    m_items.erase(m_items.begin()+selected_item);
+    selected_item=-1;
+  }  
+  
+  nb_visible_items = m_items.size();
+  if (nb_visible_items_max < nb_visible_items) 
+    nb_visible_items = nb_visible_items_max;
+}
+
+//-----------------------------------------------------------------------------
+
 void ListBox::Select (uint index)
 {
-  // If they are to much selection, kick the oldest one
-  if (selection_max != -1)
-  {
-    if ((int)m_selection.size() == selection_max) 
-      m_selection.erase(m_selection.begin());
-    assert ((int)m_selection.size() < selection_max);
-  }
+  assert(index < m_items.size());
 
-  // Add new selection
-  m_selection.push_back (index);
+  selected_item = index;
 }
 
 //-----------------------------------------------------------------------------
 
-void ListBox::Deselect (uint index)
+void ListBox::Deselect ()
 {
-  if ((int)m_selection.size()-1 < selection_min) return;
-  m_selection.remove (index);
+  assert (always_one_selected == false);
+  selected_item = -1;
 }
 
 //-----------------------------------------------------------------------------
 
-bool ListBox::IsSelected (uint index)
+int ListBox::GetSelectedItem ()
 {
-  return std::find (m_selection.begin(), m_selection.end(), index) 
-    != m_selection.end();
+  return selected_item;
 }
 
 //-----------------------------------------------------------------------------
 
-uint ListBox::GetSelectedItem ()
+const std::string& ListBox::ReadLabel () const
 {
-  assert (m_selection.size() == 1);
-  return m_selection.front();
+  assert (selected_item != -1);
+  return m_items.at(selected_item).label;
 }
 
 //-----------------------------------------------------------------------------
 
-const std::list<uint>& ListBox::GetSelection() const { return m_selection; }
-const std::string& ListBox::ReadLabel (uint index) const
+const std::string& ListBox::ReadValue () const
 {
-  assert (index < m_items.size());
-  return m_items[index].label;
-}
-const std::string& ListBox::ReadValue (uint index) const
-{
-  assert (index < m_items.size());
-  return m_items[index].value;
+  assert (selected_item != -1);
+  return m_items.at(selected_item).value;
 }
 
 //-----------------------------------------------------------------------------
+  
+std::vector<list_box_item_t> * ListBox::GetItemsList()
+{
+  return &m_items;
+}

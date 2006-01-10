@@ -47,10 +47,13 @@ class GameMenu : public Menu
    Sprite *map_preview;  
    VBox *map_box;
 
-   void ChangeMap();
+   void ChangeMap();   
+   void MoveTeams(ListBox * from, ListBox * to, bool sort);
+
    void SaveOptions();
    void OnClic ( int mouse_x, int mouse_y, int button);
    void Draw(int mouse_x, int mouse_y);
+
 
    void __sig_ok();
    void __sig_cancel();
