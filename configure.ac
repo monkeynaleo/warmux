@@ -73,21 +73,18 @@ AC_ARG_ENABLE([static],
 #       fi
 #fi
 
-DATADIR=$PACKAGE
-AC_ARG_ENABLE([datadir-name],
-	      [  --datadir-name[[=dir]]    Change name of data directory. Default with this option: wormux], 
-	      [case "${enableval}" in
-	       yes)
-			DATADIR="wormux"
-			;;
-		no)
-			;;
-		*)
-			DATADIR="${enableval}"
-			;;
-		esac])
-
+DATADIR="games/wormux"
+AC_ARG_WITH(datadir-name,
+    [  --with-datadir-name=DIR       specify where datas are installed],
+    [DATADIR="$withval"])
 AC_SUBST([DATADIR])
+	
+
+LOCALEDIR="locale"
+AC_ARG_WITH(localedir-name,
+    [  --with-localedir-name=DIR       specify where locales are installed],
+    [LOCALEDIR="$withval"])
+AC_SUBST([LOCALEDIR])
 		
 AM_CONDITIONAL([STATIC], [test x$static = xyes])
 AM_CONDITIONAL([GCC], [test x$GXX = xyes])
@@ -227,3 +224,14 @@ AC_CONFIG_FILES([po/Makefile], [AM_POSTPROCESS_PO_MAKEFILE])
 AM_CONFIG_HEADER(src/config.h)
 
 AC_OUTPUT
+
+AC_MSG_RESULT([
+
+Configuration complete
+
+* Game data will be installed into PREFIX/$DATADIR
+* Game locale will be installed into PREFIX/$LOCALEDIR
+
+Execute make to compile then execute make install to install...
+
+])

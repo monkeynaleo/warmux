@@ -84,7 +84,7 @@ COPYRIGHT_HOLDER = Wormux Development Team
 
 MSGID_BUGS_ADDRESS = wormux-dev@gna.org
 
-localedir = $(datadir)/locale
+localedir=$(datadir)/@LOCALEDIR@
 
 XGETTEXT = xgettext
 MSGMERGE = msgmerge
