@@ -51,7 +51,7 @@ const float b = 1.0;
 
 void Water::Init()
 { 
-   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
    surface = resource_manager.LoadImage(res, "gfx/water");
    SDL_SetAlpha(surface, 0, 0);
    pattern = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, 180, surface->h + 40,

@@ -113,14 +113,8 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
 
     // Load XML file
     nomfich = repertoire+"config.xml";
-
-#ifdef CL
-     CL_ResourceManager res(nomfich, false);
-#else
-     Profile *res = resource_manager.LoadXMLProfile( nomfich);
-#endif
-    
-     if (!doc.Charge (nomfich)) {
+    Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
+    if (!doc.Charge (nomfich)) {
        return false;
     }
     
@@ -308,10 +302,10 @@ void InitSkins()
   std::cout << "o " << _("Load skins:");
   std::cout.flush();
    
+  std::string dirname = config.data_dir + "skin" + PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
   struct dirent *file;
 
-  std::string dirname = config.data_dir+"skin/";
    
   std::cout << "looking in the directory : " << dirname << std::endl;
   std::cout.flush();
@@ -326,7 +320,6 @@ void InitSkins()
 				     dirname.c_str()));
   }
 #else
-  std::string dirname = Wormux::config.data_dir+"skin\\";
   std::string pattern = dirname + "*.*";
   WIN32_FIND_DATA file;
   HANDLE file_search;
@@ -346,7 +339,7 @@ void InitSkins()
 #endif
    
 #if !defined(WIN32) || defined(__MINGW32__)
-  dirname = config.GetWormuxPersonalDir()+"skin/";
+  dirname = config.GetWormuxPersonalDir()+"skin"+PATH_SEPARATOR;
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL)

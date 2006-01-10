@@ -37,7 +37,7 @@ Menu::Menu(char * bg)
   uint x = (video.GetWidth()/2);
   uint y = video.GetHeight()-50;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( resource_manager.LoadImage( res, bg));
 
   //-----------------------------------------------------------------------------

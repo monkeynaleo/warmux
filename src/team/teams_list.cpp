@@ -113,10 +113,9 @@ void TeamsList::LoadList()
   std::cout << "o " << _("Load teams:");
   
   // Load Wormux teams
+  std::string dirname = Wormux::config.data_dir+"team"+PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
   struct dirent *file;
-
-  std::string dirname = Wormux::config.data_dir+"team/";
   DIR *dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL)  LoadOneTeam (dirname, file->d_name);
@@ -125,7 +124,6 @@ void TeamsList::LoadList()
 	Erreur (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
   }
 #else
-  std::string dirname = Wormux::config.data_dir+"team\\";
   std::string pattern = dirname + "*.*";
   WIN32_FIND_DATA file;
   HANDLE file_search;

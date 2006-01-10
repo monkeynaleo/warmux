@@ -26,11 +26,14 @@
  *****************************************************************************/
 
 #include "resource_manager.h"
+#include <iostream>
 #include <string>
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
+#include "../game/config.h"
 #include "../graphic/sprite.h"
+#include "error.h"
 #include "xml_document.h"
 
 #ifdef DEBUG
@@ -61,16 +64,19 @@ void ResourceManager::AddDataPath( std::string base_path)
    this->base_path = base_path;
 }
 
-SDL_Surface * ResourceManager::LoadImage( const std::string resource_str, bool alpha, bool set_colorkey, Uint32 colorkey)
+SDL_Surface * ResourceManager::LoadImage( const std::string resource_str, 
+        bool alpha, bool set_colorkey, Uint32 colorkey)
 {
    SDL_Surface *pre_surface = NULL;
    SDL_Surface *end_surface = NULL;
-   
-   if (( ( pre_surface = IMG_Load((base_path+resource_str).c_str()) ) == NULL ) &&
-       ( ( pre_surface = IMG_Load((resource_str).c_str()) ) == NULL ))
+   //std::string filename = base_path + PATH_SEPARATOR + resource_str;
+   std::string filename = resource_str;
+
+  pre_surface = IMG_Load(filename.c_str());
+   if (pre_surface == NULL)
      {
 	// TODO raise an "can't load file" exception
-	throw std::string("ResourceManager: can't load image ")+resource_str;
+	Erreur("ResourceManager: can't load image "+resource_str);
 	return NULL;
      }
 
@@ -89,7 +95,7 @@ SDL_Surface * ResourceManager::LoadImage( const std::string resource_str, bool a
    if ( end_surface == NULL ) 
      {
 	SDL_FreeSurface( pre_surface);
-	throw std::string( "ResourceManager: error converting image " + resource_str +  std::string(": ") + std::string(SDL_GetError())); 
+	Erreur( "ResourceManager: error converting image " + resource_str +  ": " + SDL_GetError()); 
 	return NULL;
      } 
    
@@ -110,32 +116,31 @@ SDL_Surface * ResourceManager::LoadImage( const std::string resource_str, bool a
    return end_surface;
 }
 
-Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename)
+Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename, bool relative_path)
 {
    LitDocXml *doc = new LitDocXml;
+   std::string filename, path;
+   if (!relative_path) {
+       path = base_path;
+       filename = path + xml_filename;
+   } else {
+       assert ( xml_filename.rfind("/") != xml_filename.npos );
+       path = xml_filename.substr(0, xml_filename.rfind("/")+1);
+       filename = xml_filename;
+   }
    
    // Load the XML
-      
-   if ( !doc->Charge(base_path + xml_filename) && !doc->Charge(xml_filename)) 
+   if ( !doc->Charge(filename) )
      {
 	// TODO raise an "can't load file" exception
-	throw std::string("ResourceManager: can't load profile ")+xml_filename;
+	Erreur("ResourceManager: can't load profile "+filename);
 	return NULL;
      }
   
    Profile *profile = new Profile; 
    profile->doc = doc;
    profile->filename = xml_filename;
-   
-   if ( xml_filename.rfind("/") != xml_filename.npos)
-     {
-	profile->relative_path = xml_filename.substr(0,xml_filename.rfind("/")+1);
-     }
-   else
-     {
-	profile->relative_path = ""; 
-     }
-   
+   profile->relative_path = path;
    return profile;
 }
 
@@ -177,7 +182,7 @@ SDL_Surface *ResourceManager::LoadImage( const Profile *profile, const std::stri
    if ( elem == NULL)
      {
 	// TODO raise an "requested resource is not present in the profile" exception
-	throw std::string("ResourceManager: can't find image resource \"")+resource_name+"\" in profile "+profile->filename;
+	Erreur("ResourceManager: can't find image resource \""+resource_name+"\" in profile "+profile->filename);
 	return NULL;
      }
   
@@ -185,7 +190,7 @@ SDL_Surface *ResourceManager::LoadImage( const Profile *profile, const std::stri
    if ( ! profile->doc->LitAttrString( elem, "file", filename) )
      {
      	// TODO raise an "resource is malformed in the profile" exception
-	throw std::string("ResourceManager: image resource \"")+resource_name+"\" has no file field in profile "+profile->filename;
+	Erreur("ResourceManager: image resource \""+resource_name+"\" has no file field in profile "+profile->filename);
 	return NULL;
      }
    
@@ -203,7 +208,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
    if ( elem_sprite == NULL)
      {
 	// TODO raise an "requested resource is not present in the profile" exception
-	throw std::string("ResourceManager: can't find sprite resource \"")+resource_name+"\" in profile "+profile->filename;;
+	Erreur("ResourceManager: can't find sprite resource \""+resource_name+"\" in profile "+profile->filename);;
 	return NULL;
      }
 
@@ -212,7 +217,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
    if ( elem_image == NULL )
      {
    	// TODO raise an "requested resource is not present in the profile" exception
-	throw std::string("ResourceManager: can't load (sprite) resource ")+resource_name;
+	Erreur("ResourceManager: can't load (sprite) resource "+resource_name);
 	return NULL;
      }
    
@@ -220,7 +225,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
    if ( ! profile->doc->LitAttrString( elem_image, "file", image_filename) )
      {
 	// TODO raise an "resource is malformed in the profile" exception
-	throw std::string("ResourceManager: can't load (sprite) resource ")+resource_name;
+	Erreur("ResourceManager: can't load (sprite) resource "+resource_name);
 	return NULL;
      }
    
@@ -260,7 +265,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	if ( ! profile->doc->LitAttrString( elem_grid, "size", size) )
 	  {
 	     // TODO raise an "resource is malformed in the profile" exception
-	     throw std::string("ResourceManager: can't load sprite resource \"")+resource_name+"\" has no attribute size";
+	     Erreur("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute size");
 	     return NULL;
 	  }
 	
@@ -271,7 +276,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	  }
 	else
 	  {
-	     throw std::string("ResourceManager: can't load sprite resource \"")+resource_name+"\" has malformed size attribute";
+	     Erreur("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed size attribute");
 	     return NULL;
 	  }
 	     	
@@ -279,7 +284,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	if ( ! profile->doc->LitAttrString( elem_grid, "array", array) )
 	  {
 	     // TODO raise an "resource is malformed in the profile" exception
-	     throw std::string("ResourceManager: can't load sprite resource \"")+resource_name+"\" has no attribute array";
+	     Erreur("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute array");
 	     return NULL;
 	  }
 	
@@ -295,7 +300,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	  }
 	else
 	  {
-	     throw std::string("ResourceManager: can't load (sprite) resource ")+resource_name;
+	     Erreur("ResourceManager: can't load (sprite) resource "+resource_name);
 	     return NULL;
 	  }
    

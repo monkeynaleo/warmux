@@ -69,7 +69,7 @@ bool InfoTerrain::Init (const std::string &map_name,
 
     // Load resources
     if (!FichierExiste(nomfich)) return false;
-    res_profile = resource_manager.LoadXMLProfile( nomfich), 
+    res_profile = resource_manager.LoadXMLProfile( nomfich, true), 
     // Load preview
     preview = resource_manager.LoadImage( res_profile, "preview");
     // Load other informations
@@ -254,8 +254,8 @@ void ListeTerrain::Init()
 
   std::cout << "o " << _("Load maps:");
 
+  std::string dirname = Wormux::config.data_dir+"map"+PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
-  std::string dirname = Wormux::config.data_dir+"map/";
   DIR *dir = opendir(dirname.c_str());
   struct dirent *file;
   if (dir != NULL) {
@@ -267,7 +267,6 @@ void ListeTerrain::Init()
 		   dirname.c_str()));
   }
 #else
-  std::string dirname = Wormux::config.data_dir+"map\\";
   std::string pattern = dirname + "*.*";
   WIN32_FIND_DATA file;
   HANDLE file_search;

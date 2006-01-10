@@ -40,7 +40,7 @@ bool Font::InitAllFonts()
 { 
   bool ok=true;
   std::string vera_ttf = "Vera.ttf";
-  std::string filename  = Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+vera_ttf;
+  std::string filename  = Wormux::config.data_dir+"font"+PATH_SEPARATOR+vera_ttf;
   if (!FichierExiste(filename))
   {
       std::cout << "Error: Font " << vera_ttf << " can't be found (" << filename << ")!" << std::endl;
