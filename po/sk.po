@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Country: SLOVAKIA\n"
 "X-Poedit-SourceCharset: iso-8859-2\n"
 
-#: src/map/maps_list.cpp:331
+#: src/map/maps_list.cpp:330
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebola nájdená :-("
@@ -57,12 +57,12 @@ msgstr ""
 msgid "%s has fallen off the map!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:271
+#: src/object/bonus_box.cpp:265
 #, fuzzy, c-format
 msgid "%s has lost %u points of energy."
 msgstr "Hráč '%s' stratil %u bodov energie :-("
 
-#: src/object/bonus_box.cpp:265
+#: src/object/bonus_box.cpp:259
 #, fuzzy, c-format
 msgid "%s has won %u points of energy!"
 msgstr "Hráč '%s' zvíťazil %u bodov energie !"
@@ -82,17 +82,17 @@ msgstr "%s je mŕtvy, pretože bol nemotorný."
 msgid "%s is next to a mine!"
 msgstr "%s je veľmi blízko míny ..."
 
-#: src/object/bonus_box.cpp:283
+#: src/object/bonus_box.cpp:277
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazookas!"
 msgstr "Tým '%s' vyhral %u automatickými bazukami !"
 
-#: src/object/bonus_box.cpp:290
+#: src/object/bonus_box.cpp:284
 #, fuzzy, c-format
 msgid "%s team has won %u sticks of dynamite!"
 msgstr "Tým '%s' vyhral %u dynamitmi !"
 
-#: src/object/bonus_box.cpp:259
+#: src/object/bonus_box.cpp:253
 #, fuzzy, c-format
 msgid "%s team has won %u teleportations."
 msgstr "Tým '%s' vyhral %u teleportáciami !"
@@ -102,7 +102,7 @@ msgstr "Tým '%s' vyhral %u teleportáciami !"
 msgid "%s team has won."
 msgstr ""
 
-#: src/object/bonus_box.cpp:277
+#: src/object/bonus_box.cpp:271
 #, fuzzy, c-format
 msgid "'%s has won %u air attack(s)"
 msgstr "Hráč '%s' zvíťazil %u leteckých útokov !"
@@ -119,7 +119,7 @@ msgstr "(neobmedzene)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:279 src/weapon/air_attack.cpp:223
+#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:223
 msgid "Air attack"
 msgstr "Letecký útok"
 
@@ -133,7 +133,7 @@ msgstr "Autory :"
 msgid "Authors:"
 msgstr "Autory :"
 
-#: src/object/bonus_box.cpp:285 src/weapon/auto_bazooka.cpp:195
+#: src/object/bonus_box.cpp:279 src/weapon/auto_bazooka.cpp:195
 msgid "Automatic bazooka"
 msgstr "Automatická bazuka"
 
@@ -150,12 +150,12 @@ msgstr "Bazuka"
 msgid "C++ exception caught:"
 msgstr "Zachytená výnimka C++ :"
 
-#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:450
+#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:141
+#: src/team/teams_list.cpp:124 src/team/teams_list.cpp:139
 #, fuzzy, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár týmov (%s) !"
@@ -197,7 +197,7 @@ msgstr "Dľžka trvania ťahu"
 msgid "Duration of the end of a turn:"
 msgstr "Trvanie konca ťahu"
 
-#: src/object/bonus_box.cpp:292 src/weapon/dynamite.cpp:215
+#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:215
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -215,7 +215,7 @@ msgstr "Koniec hry  !\n"
 msgid "Energy:"
 msgstr "Energia"
 
-#: src/team/skin.cpp:133
+#: src/team/skin.cpp:127
 #, fuzzy, c-format
 msgid "Error during loading skin %s:"
 msgstr "Chyba počas načítavania skinu %s :"
@@ -225,7 +225,7 @@ msgstr "Chyba počas načítavania skinu %s :"
 msgid "Error in %s:%lu"
 msgstr "Chyba v %s:%lu"
 
-#: src/team/team.cpp:85
+#: src/team/team.cpp:77
 #, fuzzy, c-format
 msgid "Error loading team %s:"
 msgstr "Chyba počas načítavania týmu %s :"
@@ -244,7 +244,7 @@ msgstr ""
 "Chyba :\n"
 "%s"
 
-#: src/team/team.cpp:164 src/team/team.cpp:229
+#: src/team/team.cpp:156 src/team/team.cpp:221
 #, fuzzy, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť skin \"%s\" pre tým \"%s\"."
@@ -314,7 +314,7 @@ msgstr "Načítavam mapu %s"
 msgid "Load maps:"
 msgstr "Načítavam mapu %s"
 
-#: src/team/skin.cpp:308
+#: src/team/skin.cpp:302
 #, fuzzy
 msgid "Load skins:"
 msgstr "Načítavam skin %s"
@@ -389,7 +389,7 @@ msgstr "Spusti hru"
 msgid "Select the teams:"
 msgstr ""
 
-#: src/menu/game_menu.cpp:102
+#: src/menu/game_menu.cpp:104
 msgid "Select the world:"
 msgstr ""
 
@@ -413,7 +413,7 @@ msgstr "Beh novej hry"
 msgid "Stock:"
 msgstr "Munícia"
 
-#: src/object/bonus_box.cpp:261 src/weapon/teleportation.cpp:45
+#: src/object/bonus_box.cpp:255 src/weapon/teleportation.cpp:45
 msgid "Teleportation"
 msgstr "Teleport"
 
@@ -431,12 +431,12 @@ msgstr ""
 msgid "The rocket left the battlefield..."
 msgstr " Raketa zanechala v inom svete ..."
 
-#: src/map/maps_list.cpp:266 src/map/maps_list.cpp:283
+#: src/map/maps_list.cpp:266 src/map/maps_list.cpp:282
 #, fuzzy, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s) !"
 
-#: src/team/skin.cpp:325 src/team/skin.cpp:342
+#: src/team/skin.cpp:314 src/team/skin.cpp:330
 #, fuzzy, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Nedá sa otvoriť adresár skinov  (%s) !"
@@ -508,7 +508,7 @@ msgstr "Wormux verzia"
 msgid "XML error during loading map '%s' :"
 msgstr "Chyba počas načítavania mapy  '%s' :"
 
-#: src/map/maps_list.cpp:304
+#: src/map/maps_list.cpp:303
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
@@ -517,7 +517,7 @@ msgstr "Potrebuješ najmenej jednu platnú mapu !"
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Potrebuješ najmenej  dva tými na hru, zmeň si to v menu Nastavenie !"
 
-#: src/team/teams_list.cpp:160
+#: src/team/teams_list.cpp:158
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tými !"
 

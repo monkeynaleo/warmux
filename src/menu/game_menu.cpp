@@ -62,17 +62,17 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
   //-----------------------------------------------------------------------------
 
   /* Choose the teams !! */
-  team_box = new VBox(TEAMS_X, TEAMS_Y, TEAMS_W*3);
+  team_box = new VBox(TEAMS_X, TEAMS_Y, 475);
   team_box->AddWidget(new Label(_("Select the teams:"), 0, 0, 0, normal_font));
 
   Box * tmp_box = new HBox(0,0, TEAMS_H, false);
-  tmp_box->SetMargin(5,0);
+  tmp_box->SetMargin(10);
+  tmp_box->SetBorder(0,0);
 
   lbox_all_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5);
   tmp_box->AddWidget(lbox_all_teams);
 
   Box * buttons_tmp_box = new VBox(0,0, 68, false);
-  buttons_tmp_box->SetMargin(10, 0);
 
   bt_add_team = new Button(0,0, 48,48,res,"menu/valider");
   buttons_tmp_box->AddWidget(bt_add_team);
@@ -92,13 +92,14 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
 
   /* Choose the map !! */
   tmp_box = new HBox(0, 0, MAP_PREVIEW_W-25, false);
-  tmp_box->SetMargin(0, 0);
+  tmp_box->SetMargin(0);
+  tmp_box->SetBorder(0,0);
 
   lbox_maps = new ListBox(0, 0, MAPS_W, MAP_PREVIEW_W-25);
   tmp_box->AddWidget(lbox_maps);
   tmp_box->AddWidget(new NullWidget(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
   
-  map_box = new VBox(MAPS_X, MAPS_Y, tmp_box->GetW()+10);
+  map_box = new VBox(MAPS_X, MAPS_Y, 475); //tmp_box->GetW()+10);
   map_box->AddWidget(new Label(_("Select the world:"), 0, 0, 0, normal_font));
   map_box->AddWidget(tmp_box);
 
