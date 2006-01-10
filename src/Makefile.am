@@ -6,14 +6,15 @@ pkgdatadir=$(datadir)/@DATADIR@
 localedir=$(datadir)/@LOCALEDIR@
 
 wormux_SOURCES = \
-	tool/resource_manager.cpp \
-	include/base.h \
+	include/base.h include/enum.h \
 	include/app.h \
 	main.cpp \
 	game/config.cpp game/config.h \
+	game/debug.h \
 	game/game_mode.cpp game/game_mode.h \
 	game/game.cpp game/game.h \
-	game/game_loop.cpp gamse/game_loop.h \
+	game/game_loop.cpp game/game_loop.h \
+    graphic/colors.h \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/video.cpp graphic/video.h \
 	graphic/text.cpp graphic/text.h \
@@ -33,6 +34,8 @@ wormux_SOURCES = \
 	tool/error.cpp tool/error.h \
 	tool/file_tools.cpp tool/file_tools.h \
 	tool/math_tools.cpp tool/math_tools.h \
+	tool/Rectangle.h tool/Point.h \
+	tool/resource_manager.cpp tool/resource_manager.h \
 	tool/stats.cpp tool/stats.h \
 	tool/random.cpp tool/random.h \
 	tool/Distance.cpp tool/Distance.h \
@@ -50,7 +53,7 @@ wormux_SOURCES = \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/question.cpp gui/question.h \
 	interface/interface.cpp interface/interface.h \
-        interface/cursor.cpp \
+    interface/cursor.cpp interface/cursor.h \
 	interface/game_msg.cpp interface/game_msg.h \
 	interface/mouse.cpp interface/mouse.h \
 	interface/keyboard.cpp interface/keyboard.h \
@@ -69,12 +72,14 @@ wormux_SOURCES = \
 	map/ground.cpp map/ground.h \
 	include/action.cpp include/action.h \
 	include/action_handler.cpp include/action_handler.h \
-        team/character.cpp team/character.h \
+    team/macro.h \
+    team/character.cpp team/character.h \
 	team/move.cpp team/move.h \
 	team/skin.cpp team/skin.h \
 	team/team.cpp team/team.h \
 	team/team_energy.cpp team/team_energy.h \
 	team/teams_list.cpp team/teams_list.h \
+	weapon/all.h \
 	weapon/weapon.cpp weapon/weapon.h \
 	weapon/weapon_cfg.cpp weapon/weapon_cfg.h \
 	weapon/weapons_list.cpp weapon/weapons_list.h \
