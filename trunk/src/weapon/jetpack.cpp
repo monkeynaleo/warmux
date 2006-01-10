@@ -61,11 +61,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack")
 void JetPack::p_Init()
 {
   m_name = _("jetpack");
-#ifdef CL
-  icone = CL_Surface("jetpack_ico", &graphisme.weapons);
-#else
-   icone = resource_manager.LoadImage(weapons_res_profile,"jetpack_ico");
-#endif
+  icone = resource_manager.LoadImage(weapons_res_profile,"jetpack_ico");
   m_x_force = 0.0;
   m_y_force = 0.0;
 }
@@ -133,11 +129,7 @@ void JetPack::StartUse()
   if ( (m_x_force == 0) && (m_y_force == 0))
     {
       m_last_fuel_down = global_time.Read();
-#ifdef CL
-      jukebox.Play("weapon/jetpack", true);
-#else
-      channel = jukebox.Play("share","weapon/jetpack", -1);
-#endif
+      channel = jukebox.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
     }
 }
 
@@ -147,12 +139,8 @@ void JetPack::StopUse()
 {
   if (m_x_force == 0.0 && m_y_force == 0.0)
   {
-#ifdef CL
-    jukebox.Stop("share","weapon/jetpack");
-#else
     jukebox.Stop(channel);
     channel = -1;
-#endif
     ActiveCharacter().SetSkin("jetpack");
   }
 }
@@ -172,11 +160,7 @@ void JetPack::GoLeft()
 {
   StartUse();
   ActiveCharacter().SetSkin("jetpack-left-right");
-#ifdef CL
-  ActiveCharacter().image.set_scale (-1, 1);
-#else
   ActiveCharacter().image->Scale (-1, 1);
-#endif
 
   m_x_force = - JETPACK_FORCE ;
 }
@@ -187,11 +171,7 @@ void JetPack::GoRight()
 {
   StartUse();
   ActiveCharacter().SetSkin("jetpack-left-right");
-#ifdef CL
-  ActiveCharacter().image.set_scale (1, 1);
-#else
   ActiveCharacter().image->Scale (1, 1);
-#endif
 
   m_x_force = JETPACK_FORCE ;
 }
