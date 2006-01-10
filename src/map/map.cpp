@@ -38,7 +38,7 @@ using namespace Wormux;
 const double DST_MIN_ENTRE_VERS = 50.0;
 
 const uint AUTHOR_INFO_TIME = 5000; // ms
-const uint AUTHOR_INFO_X = 30;
+const uint AUTHOR_INFO_X = 100;
 const uint AUTHOR_INFO_Y = 50;
 //-----------------------------------------------------------------------------
 Map world;
