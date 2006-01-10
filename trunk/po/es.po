@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/map/maps_list.cpp:331
+#: src/map/maps_list.cpp:330
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s no encontrado :-("
@@ -54,12 +54,12 @@ msgstr "%s ha caido del mapa!"
 msgid "%s has fallen off the map!"
 msgstr "%s ha caido del mapa!"
 
-#: src/object/bonus_box.cpp:271
+#: src/object/bonus_box.cpp:265
 #, c-format
 msgid "%s has lost %u points of energy."
 msgstr "El jugador %s ha perdido %u puntos de vida."
 
-#: src/object/bonus_box.cpp:265
+#: src/object/bonus_box.cpp:259
 #, c-format
 msgid "%s has won %u points of energy!"
 msgstr "¡El jugador %s ha ganado %u puntos de vida!"
@@ -79,17 +79,17 @@ msgstr "¡ %s se ha muerto por ser un torpe!"
 msgid "%s is next to a mine!"
 msgstr "¡ %s esta cerca d'una mina!"
 
-#: src/object/bonus_box.cpp:283
+#: src/object/bonus_box.cpp:277
 #, c-format
 msgid "%s team has won %u automatic bazookas!"
 msgstr "¡El equipo %s ha ganado %u bazookas automáticos!"
 
-#: src/object/bonus_box.cpp:290
+#: src/object/bonus_box.cpp:284
 #, c-format
 msgid "%s team has won %u sticks of dynamite!"
 msgstr "¡El equipo %s ha ganado %u dinamita(s)!"
 
-#: src/object/bonus_box.cpp:259
+#: src/object/bonus_box.cpp:253
 #, c-format
 msgid "%s team has won %u teleportations."
 msgstr "El equipo %s ha ganado %u teletransportaciones."
@@ -99,7 +99,7 @@ msgstr "El equipo %s ha ganado %u teletransportaciones."
 msgid "%s team has won."
 msgstr "El equipo %s ha ganado."
 
-#: src/object/bonus_box.cpp:277
+#: src/object/bonus_box.cpp:271
 #, c-format
 msgid "'%s has won %u air attack(s)"
 msgstr "¡El jugador %s ha ganado %u ataque(s) aerio(s)!"
@@ -116,7 +116,7 @@ msgstr "(ilimitado)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:279 src/weapon/air_attack.cpp:223
+#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:223
 msgid "Air attack"
 msgstr "Ataque aerio"
 
@@ -129,7 +129,7 @@ msgstr "Autores:"
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/object/bonus_box.cpp:285 src/weapon/auto_bazooka.cpp:195
+#: src/object/bonus_box.cpp:279 src/weapon/auto_bazooka.cpp:195
 msgid "Automatic bazooka"
 msgstr "Bazooka automatico"
 
@@ -145,12 +145,12 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Excepcion C++ interceptada:"
 
-#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:450
+#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
 
-#: src/team/teams_list.cpp:125 src/team/teams_list.cpp:141
+#: src/team/teams_list.cpp:124 src/team/teams_list.cpp:139
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "¡No se puede abrir el directorio de equipos (%s)!"
@@ -187,7 +187,7 @@ msgstr "Duración del turno:"
 msgid "Duration of the end of a turn:"
 msgstr "Duración del tiempo despues del turno:"
 
-#: src/object/bonus_box.cpp:292 src/weapon/dynamite.cpp:215
+#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:215
 msgid "Dynamite"
 msgstr "Dinamita"
 
@@ -204,7 +204,7 @@ msgstr "¡Final de la partida!\n"
 msgid "Energy:"
 msgstr "Energia"
 
-#: src/team/skin.cpp:133
+#: src/team/skin.cpp:127
 #, fuzzy, c-format
 msgid "Error during loading skin %s:"
 msgstr "Error durante la carga del skin (%s) :"
@@ -214,7 +214,7 @@ msgstr "Error durante la carga del skin (%s) :"
 msgid "Error in %s:%lu"
 msgstr "Error en %s:%lu"
 
-#: src/team/team.cpp:85
+#: src/team/team.cpp:77
 #, fuzzy, c-format
 msgid "Error loading team %s:"
 msgstr "Error cargando el equipo %s :"
@@ -233,7 +233,7 @@ msgstr ""
 "Error:\n"
 "%s"
 
-#: src/team/team.cpp:164 src/team/team.cpp:229
+#: src/team/team.cpp:156 src/team/team.cpp:221
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Error: no se puede encontrar el skin \"%s\" para el equipo \"%s\"."
@@ -300,7 +300,7 @@ msgstr "Carga el mapa %s"
 msgid "Load maps:"
 msgstr "Carga el mapa %s"
 
-#: src/team/skin.cpp:308
+#: src/team/skin.cpp:302
 #, fuzzy
 msgid "Load skins:"
 msgstr "Carga la piel %s"
@@ -373,7 +373,7 @@ msgstr "Empieza el juego"
 msgid "Select the teams:"
 msgstr ""
 
-#: src/menu/game_menu.cpp:102
+#: src/menu/game_menu.cpp:104
 msgid "Select the world:"
 msgstr ""
 
@@ -395,7 +395,7 @@ msgstr "Empezando un nuevo juego"
 msgid "Stock:"
 msgstr "Stock"
 
-#: src/object/bonus_box.cpp:261 src/weapon/teleportation.cpp:45
+#: src/object/bonus_box.cpp:255 src/weapon/teleportation.cpp:45
 msgid "Teleportation"
 msgstr "Teletransportacion"
 
@@ -411,12 +411,12 @@ msgstr "El juego ha terminado en empate."
 msgid "The rocket left the battlefield..."
 msgstr "El cohete ha ido a otro mundo..."
 
-#: src/map/maps_list.cpp:266 src/map/maps_list.cpp:283
+#: src/map/maps_list.cpp:266 src/map/maps_list.cpp:282
 #, fuzzy, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "¡Imposible abrir el directorio de los mapas (%s) !"
 
-#: src/team/skin.cpp:325 src/team/skin.cpp:342
+#: src/team/skin.cpp:314 src/team/skin.cpp:330
 #, fuzzy, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "¡Imposible abrir el directorio de los skins (%s) !"
@@ -484,7 +484,7 @@ msgstr "Versión Wormux"
 msgid "XML error during loading map '%s' :"
 msgstr "Error XML durante la carga del mapa '%s' :"
 
-#: src/map/maps_list.cpp:304
+#: src/map/maps_list.cpp:303
 msgid "You need at least one valid map !"
 msgstr "¡Tu necesitas almenos un mapa válido!"
 
@@ -493,7 +493,7 @@ msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "¡Necesitas almenos dos equipos para jugar, canvia las opciones del menu!"
 
-#: src/team/teams_list.cpp:160
+#: src/team/teams_list.cpp:158
 msgid "You need at least two valid teams !"
 msgstr "¡Tu necesitas almenos dos equipos válidos!"
 
