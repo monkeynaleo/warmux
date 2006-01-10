@@ -242,6 +242,7 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
 int JukeBox::Stop (int channel)
 {
   if(!m_config.music && !m_config.effects) return 0;
+  if (channel == -1) return 0;
   return Mix_HaltChannel(channel);
 }
 

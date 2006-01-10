@@ -26,9 +26,6 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../team/character.h"
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
 #include "weapon.h"
 
 struct Sprite;
@@ -42,11 +39,8 @@ class Dynamite;
 class BatonDynamite : public WeaponProjectile
 {
 private:
-#ifdef CL
-  CL_Sprite explosion;
-#else
+
   Sprite *explosion;
-#endif 
   bool explosion_active;
 
 public:
@@ -84,11 +78,7 @@ private:
   int channel;
 
   // Image du trou de l'explosion
-#ifdef CL
-  CL_Surface impact;
-#else
   SDL_Surface *impact;
-#endif
    
   // Objet réprésentant la dynamite (= l'objet qui tombe et explose)
   BatonDynamite baton;
