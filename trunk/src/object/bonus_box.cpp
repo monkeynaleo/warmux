@@ -97,15 +97,9 @@ Caisse::Caisse()
 
 void Caisse::Init()
 {
-#ifdef CL
-  CL_ResourceManager *res = graphisme.LitRes();
-  anim = CL_Sprite( "objet/caisse", res);
-  SetSize (anim.get_width(), anim.get_height());
-#else
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
   SetSize (anim->GetWidth(), anim->GetHeight());
-#endif
 }
 
 //-----------------------------------------------------------------------------

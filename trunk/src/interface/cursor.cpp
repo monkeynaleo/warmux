@@ -128,7 +128,7 @@ void CurseurVer::Cache()
 //-----------------------------------------------------------------------------
 void CurseurVer::Init()
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   image = resource_manager.LoadSprite( res, "gfx/curseur");
 }
 

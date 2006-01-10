@@ -33,7 +33,7 @@ SpinButton::SpinButton (const std::string &label, uint x, uint y, uint w,
 			     int value, int step, int min_value, int max_value) :
   Widget(x,y,w,small_font.GetHeight())
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml"); 
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
   txt_label = new Text(label, white_color, &small_font);
 

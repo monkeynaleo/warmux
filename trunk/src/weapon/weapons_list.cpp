@@ -70,9 +70,7 @@ void WeaponsList::InitAndAddToList(Weapon* arme, uint num_sort)
 
 void WeaponsList::Init()
 {
-#ifndef CL
-  weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml");
-#endif
+  weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
   Bazooka* bazooka = new Bazooka;
   todelete.push_back(bazooka);
   InitAndAddToList(bazooka, 1);

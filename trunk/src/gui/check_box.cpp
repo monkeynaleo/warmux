@@ -33,8 +33,7 @@ using namespace Wormux;
 CheckBox::CheckBox (const std::string &label, uint x, uint y, uint w, bool value) :
   Widget(x, y, w, small_font.GetHeight())
 {
-  // UGLY -> TODO find a place to store the graphism.xml (in app ?) profile 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");   
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadSprite( res, "menu/check");
   m_image->EnableLastFrameCache();
 

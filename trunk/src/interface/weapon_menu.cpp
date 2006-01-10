@@ -359,7 +359,7 @@ void WeaponsMenu::Reset()
 
 void WeaponsMenu::Init()
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   my_button1 = new Sprite( resource_manager.LoadImage(res,"interface/button1_icon"));
   my_button1->EnableLastFrameCache();
   my_button2 = new Sprite( resource_manager.LoadImage(res,"interface/button2_icon"));

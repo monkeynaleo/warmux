@@ -32,7 +32,7 @@
 ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
   : Widget(_x,_y,_w,_h) 
 {  
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml"); 
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
   m_up = new Button(x+w-10, y, 10, 5, res, "menu/up");
   m_down = new Button(x+w-10, y+h-5, 10, 5, res, "menu/down");
 

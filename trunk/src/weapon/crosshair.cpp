@@ -133,14 +133,9 @@ double CrossHair::GetAngleRad() const
 
 void CrossHair::Init()
 {
-#ifdef CL
-  CL_ResourceManager *res=graphisme.LitRes();
-  image = CL_Surface("gfx/pointeur1", res);
-#else
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   image = resource_manager.LoadImage(res, "gfx/pointeur1");
   resource_manager.UnLoadXMLProfile( res); 
-#endif
 }
 
 //-----------------------------------------------------------------------------

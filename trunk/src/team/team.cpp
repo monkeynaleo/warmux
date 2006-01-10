@@ -66,18 +66,10 @@ bool Team::Init (const std::string &teams_dir, const std::string &id)
     if (!FichierExiste(nomfich)) return false;
     if (!doc.Charge (nomfich)) return false;
 
-#ifdef CL
-    CL_ResourceManager res(nomfich, false);
-#else
-    Profile *res = resource_manager.LoadXMLProfile( nomfich);
-#endif
+    Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
      
     // Charge les données
-#ifdef CL
-    if (!ChargeDonnee (doc.racine(), &res)) return false;
-#else
     if (!ChargeDonnee (doc.racine(), res)) return false;
-#endif
   }
   catch (const xmlpp::exception &e)
   {

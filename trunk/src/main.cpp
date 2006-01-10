@@ -55,7 +55,7 @@ using namespace Wormux;
 //-----------------------------------------------------------------------------
 AppWormux app;
 
-const std::string VERSION("0.7");
+const std::string VERSION("0.7 beta");
 //-----------------------------------------------------------------------------
 
 AppWormux::AppWormux()
@@ -164,7 +164,7 @@ bool AppWormux::Init(int argc, char **argv)
 
   SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
 
-  txt_version = _("Version") + std::string(VERSION);
+  txt_version = _("Version") + std::string(" ") + VERSION;
 
   huge_font.WriteCenter( config.tmp.video.width/2, 
 			config.tmp.video.height/2 - 200, 

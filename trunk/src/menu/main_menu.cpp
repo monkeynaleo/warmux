@@ -99,7 +99,7 @@ Main_Menu::Main_Menu()
   button_width = (int)(BUTTON_WIDTH * x_scale); 
   button_height = (int)(BUTTON_HEIGHT * y_scale);
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
   play = new ButtonText(x_button,(uint)(192 * y_scale),//Position
 			button_width,button_height, //Size

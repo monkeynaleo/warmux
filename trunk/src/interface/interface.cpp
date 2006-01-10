@@ -95,7 +95,7 @@ void Interface::Init()
 {
   display = true;
 
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   game_menu = resource_manager.LoadImage( res, "interface/menu_jeu");
   bg_time = resource_manager.LoadImage( res, "interface/fond_compteur");
   weapons_menu.Init();

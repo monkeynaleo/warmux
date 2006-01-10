@@ -55,7 +55,7 @@ const uint MAP_PREVIEW_W = 300;
 
 GameMenu::GameMenu() : Menu("menu/bg_option")
 {  
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
 
   //-----------------------------------------------------------------------------
   // Widget creation

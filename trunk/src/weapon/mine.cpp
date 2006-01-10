@@ -79,7 +79,7 @@ void ObjMine::Init()
 {
 
 
-  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml");
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
  
   detection = resource_manager.LoadSprite(res,"mine_anim");
   SetSize (detection->GetWidth(), detection->GetHeight());

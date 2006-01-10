@@ -65,8 +65,8 @@ Config::Config()
    
   // directories
 #ifndef WIN32
-  data_dir = DEFAULT_DATADIR;
-  locale_dir = DEFAULT_LOCALEDIR;
+  data_dir = DEFAULT_DATADIR + PATH_SEPARATOR;
+  locale_dir = DEFAULT_LOCALEDIR + PATH_SEPARATOR;
 #else
   data_dir = "data\\";
   locale_dir = "locale\\";
