@@ -18,7 +18,6 @@
   <sound sample="weapon/load" file="../../weapon/sound/load.ogg" />
   <sound sample="weapon/explosion" file="explosion.ogg" />
   <sound sample="weapon/uzi" file="../../weapon/sound/uzi.ogg" />
-  <sound sample="weapon/jetpack" file="../../weapon/sound/jetpack.ogg" />
   <sound sample="weapon/alleluia" file="../../weapon/sound/alleluia.ogg" />
 
 
