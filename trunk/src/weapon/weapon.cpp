@@ -246,7 +246,7 @@ void Weapon::Select()
   m_is_active = false;
   m_strength = 0;
   ActiveTeam().ResetNbUnits();
-  ActiveCharacter().SetSkin(m_id);
+  ActiveCharacter().SetSkin("weapon-" + m_id);
 
   // is there a crosshair ?
   if (min_angle != max_angle) {
@@ -272,7 +272,6 @@ void Weapon::Select()
 void Weapon::Deselect()
 {
   ActiveTeam().crosshair.enable = false;
-
   p_Deselect();
 }
 
@@ -432,6 +431,14 @@ const std::string& Weapon::GetName() const
 { 
   assert (!m_name.empty());
   return m_name;
+}
+
+//-----------------------------------------------------------------------------
+
+const std::string& Weapon::GetID() const 
+{ 
+  assert (!m_name.empty());
+  return m_id;
 }
 
 //-----------------------------------------------------------------------------

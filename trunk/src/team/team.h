@@ -67,7 +67,7 @@ private:
   std::string m_name;
   std::string m_sound_profile;
   std::vector<Character> vers;
-  uint ver_actif, vers_fin;
+  int ver_actif, vers_fin;
   iterator vers_fin_it;
   Weapon *active_weapon;
 #ifdef CL
@@ -82,8 +82,8 @@ public:
   void Reset();
 
   // Switch to next worm.
-  void NextCharacter();
-  uint NextCharacterIndex();
+//  void NextCharacter();
+  int NextCharacterIndex();
 
   // Select an *ALIVE* character
   void SelectCharacterIndex (uint index);
@@ -93,7 +93,7 @@ public:
   void FinTour();
 
   // Access to the worms.
-  uint ActiveCharacterIndex() const;
+  int ActiveCharacterIndex() const;
   Character& ActiveCharacter();
 
   void Draw();
@@ -101,7 +101,7 @@ public:
 
   // Change the weapon.
   void SetWeapon (Weapon_type nv_arme);
-  uint NbAliveCharacter() const;
+  int NbAliveCharacter() const;
 
   // Access to the active weapon.
   Weapon& AccessWeapon() const;

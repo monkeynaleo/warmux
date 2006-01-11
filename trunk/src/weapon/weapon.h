@@ -243,6 +243,7 @@ public:
 
   // Accès aux données
   const std::string& GetName() const;
+  const std::string& GetID() const;
   Weapon_type GetType() const;
 };
 

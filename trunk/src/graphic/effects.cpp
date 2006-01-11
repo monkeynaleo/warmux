@@ -155,5 +155,5 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
 
   dt -= per/4;
   float dt2 = ((3*per/4)-dt)/(3.0*per/4.0);
-  dy += (-4.0*dt2*dt2 + 4.0*dt2) * dy_max;
+  dy += (int)((-4.0*dt2*dt2 + 4.0*dt2) * dy_max);
 }

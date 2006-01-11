@@ -31,8 +31,6 @@
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
 //-----------------------------------------------------------------------------
-
-// Prédéfinition de la classe équipe
 class Team;
 //-----------------------------------------------------------------------------
 
@@ -131,9 +129,9 @@ public:
   // Se prepare a un nouveau tour
   void PrepareTour ();
 
-  // Désactive/Réactive le ver
-  void Desactive();
-  void Reactive();
+  // Show hide the Character
+  void StartPlaying();
+  void StopPlaying();
   void Hide();
   void Show();
 
@@ -158,7 +156,7 @@ public:
   // Accès à l'avatar
   const Skin& GetSkin() const;
   Skin& AccessSkin();
-  void SetSkin(std::string skin_name);
+  bool SetSkin(std::string skin_name);
 
   // Hand position
   void GetHandPosition (int &x, int &y);

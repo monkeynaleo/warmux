@@ -161,7 +161,6 @@ void Character::SignalDeath()
 void Character::SignalDrowning()
 {
   energy = 0;
-  //Desactive();
   //m_type = objINSENSIBLE;
   SetSkin("drowned");
 
@@ -175,7 +174,7 @@ void Character::SignalDrowning()
 void Character::SignalGhostState (bool was_dead)
 {
   // Désactive le ver
-  Desactive();
+  desactive = true;
 
 #ifdef DEBUG_CHG_ETAT
   COUT_DBG << "Fantome." << endl;
@@ -710,8 +709,11 @@ void Character::SignalFallEnding()
 
     game_loop.SignalCharacterDamageFalling(this);
   }
-  if(current_skin=="jump")
-    SetSkin("walking");
+  if((current_skin=="jump" || current_skin=="fall"))
+  {
+    if(!SetSkin(m_team->GetWeapon().GetID()))
+      SetSkin("walking");
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -730,19 +732,20 @@ bool Character::IsActive() const
 
 //-----------------------------------------------------------------------------
 
-// Désactive le ver
-void Character::Desactive()
+// End of turn or change of character
+void Character::StopPlaying()
 {
-  desactive = true;
+  SetSkin("walking");
 }
 
 //-----------------------------------------------------------------------------
 
-// Réactive le ver
-void Character::Reactive()
+// Begining of turn or changed to this character
+void Character::StartPlaying()
 {
   assert (!IsGhost());
   desactive = false;
+  SetSkin("weapon-" + m_team->GetWeapon().GetID());
 }
 
 //-----------------------------------------------------------------------------
@@ -764,9 +767,11 @@ Skin& Character::AccessSkin()
 
 //-----------------------------------------------------------------------------
 // Choose which skin to display (ie. dead skin, swiming skin...)
-void Character::SetSkin(std::string skin_name)
+bool Character::SetSkin(std::string skin_name)
 {
-  if(skin_name == current_skin) return;
+  //Return true if the this character have this skin. (if it's set in the xml file)
+
+  if(skin_name == current_skin) return true;
 
   assert (skin != NULL);
 
@@ -792,7 +797,7 @@ void Character::SetSkin(std::string skin_name)
 
     current_skin = skin_name;
     is_walking = false;
-    return;
+    return true;
   }
   else
   if(AccessSkin().many_walking_skins.find(skin_name) != 
@@ -831,14 +836,15 @@ void Character::SetSkin(std::string skin_name)
 
     current_skin = skin_name;
     is_walking = true;
-    return;
+    return true;
   }
   else
   {
 //    std::cout << "Unable to set skin : " << skin_name << "\n";
     assert(skin_name!="walking");
-    SetSkin("walking");
-    image->Finish();
+//    SetSkin("walking");
+//    image->Finish();
+    return false;
   }
 }
 
@@ -898,6 +904,7 @@ void Character::Reset()
 {
   // Reset de l'état du ver
   desactive = false;
+
   Ready();
 
   //  Reset de l'image et les dimensions
