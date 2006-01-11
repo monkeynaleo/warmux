@@ -1,75 +1,93 @@
-THIS DOCUMENTATION IS OUTDATED
-
-Wormux 0.5
-Kompilácia/Inštalácia pod Linuxom
+ï»¿Wormux 0.5
+KompilÃ¡cia/InÅ¡talÃ¡cia pod Linuxom
 -----------------------------------
 
 ==========
-* Závislosti
+* ZÃ¡vislosti
 ==========
 
-Ak nasledujúci software nie je v tvojom systéme, budeš si ho musie stiahnu
-pred pokusom o inštaláciu Wormuxu 0.5 na tvoj poèítaè...
+Ak nasledujÃºci software nie je v tvojom systÃ©me, budeÅ¡ si ho musieÅ¥ stiahnuÅ¥
+pred pokusom o inÅ¡talÃ¡ciu Wormuxu 0.5 na tvoj poÄÃ­taÄ...
 
-* ClanLib
-----------
+* SDL
+-----
 
-Wormux (z 13/11/2004) potrebuje ClanLib kninicu - ("0.7 subversion" verzie)
+Wormux potrebuje SDL kniÅ¾nicu verzie 1.2.
 
-Túto verziu môeš stiahnu z webstránky: http://www.clanlib.org/
+TÃºto verziu mÃ´Å¾eÅ¡ stiahnuÅ¥ z webstrÃ¡nky: http://www.libsdl.org/
 
+* SDL mixer, SDL image, SDL ttf and SDL gfx
+-------------------------------------------
+
+
+SDL je rozdelenÃ½ do malÃ½ch modulov. Wormux potrebuje mixer (zvuk), image (naÄÃ­tanie
+obrazovÃ©ho sÃºboru), ttf (vykreslenie textu) a gfx (grafickÃ© veci).
+
+MÃ´Å¾eÅ¡ maÅ¥ problÃ©my pri inÅ¡talÃ¡cii SDL gfx: Wormux *potrebuje* verziu 2.0.13 alebo
+vyÅ¡Å¡iu. Stiahni ju a skompiluj.
+
+Tu sÃº ich web strÃ¡nky:
+ http://www.libsdl.org/projects/SDL_ttf/
+ http://www.libsdl.org/projects/SDL_mixer/
+ http://www.libsdl.org/projects/SDL_image/
+ http://www.ferzkopp.net/Software/SDL_gfx-2.0/
 
 * libxml++
 ----------
 
-Wormux pouíva libxml++ kninicu (verzie 1.0).
+Wormux pouÅ¾Ã­va libxml++ kniÅ¾nicu verzie 2.6.
 
-Dostaneš ju tu: http://libxmlplusplus.sourceforge.net/
+DostaneÅ¡ ju tu: http://libxmlplusplus.sourceforge.net/
 
-Pod Debianom, poui príkaz:
-	apt-get install libxml++1.0-dev
+Pod Debianom, pouÅ¾i prÃ­kaz:
+apt-get install libxml++2.6-dev
 
 
 ===============
-* Kompilácia / Inštalácia
+* KompilÃ¡cia / InÅ¡talÃ¡cia
 ===============
 
-Pod Linuxom, zadaj Wormux adresár, jednoducho zadaj:
+Pokial pouÅ¾Ã­vaÅ¡ SubVerziu verzie Wormuxu zadÃ¡Å¡ najprv:
 
-	./configure
-	make
-	
+    ./autogen.sh
+
+Pod Linuxom, zadaj Wormux adresÃ¡r, potom jednoducho zadaj:
+
+./configure
+make
+
 potom, ako root, zadaj:
-	
-	make install
 
-Štandardne, sa hra naištaluje do /usr/local. Ale ty si môeš vybra
-adresár (uiteèné ak nemáš prístup ku kontu roota) modifikovaním
-poèiatoèného konfiguraèného príkazu:
+make install
 
-	./configure --prefix=/OTHER/DIRECTORY/HERE
+Å tandardne, sa hra naiÅ¡taluje do /usr/local. Ale ty si mÃ´Å¾eÅ¡ vybraÅ¥
+adresÃ¡r (uÅ¾itoÄnÃ© ak nemÃ¡Å¡ prÃ­stup ku kontu roota) modifikovanÃ­m
+poÄiatoÄnÃ©ho konfiguraÃ¨nÃ©ho prÃ­kazu:
+
+./configure --prefix=/OTHER/DIRECTORY/HERE
 
 
 =========
 * Uninstalling
 =========
 
-Pre odinštalovanie Wormuxu, choï do zdrojového adresára, potom (ako root )zadaj:
+Pre odinÅ¡talovanie Wormuxu, choÃ¯ do zdrojovÃ©ho adresÃ¡ra, potom (ako root )zadaj:
 
-	make uninstall
+make uninstall
 
 
 ==========
-* Ïalšie nastavenie
+* ÄalÅ¡ie nastavenie
 ==========
 
-Ve¾a nastavení moe by pouitıch s konfiguraènım príkazom.
-najuitoènejšie (pre vıvojárov, najmenej) bıva:
+VeÄ¾a nastavenÃ­ moÅ¾e byÅ¥ pouÅ¾itÃ½ch s konfiguraÄnÃ½m prÃ­kazom.
+najuÅ¾itoÄnejÅ¡ie (pre vÃ½vojÃ¡rov, najmenej) bÃ½va:
 
-	./configure --enable-debug
+./configure --enable-debug
 
-Toto ti dovolí skompilova Wormuxa s debug nastavením, povolí ti vysliedi chyby/dalšie problémy.
+Toto ti dovolÃ­ skompilovaÅ¥ Wormuxa s debug nastavenÃ­m, povolÃ­ ti vysliediÅ¥ chyby/dalÅ¡ie problÃ©my.
 
-Pre zoznam všetkıch ïalších konfiguraènıch nastavení, zadaj:
+Pre zoznam vÅ¡etkÃ½ch Ã¯alÅ¡Ã­ch konfiguraÄnÃ½ch nastavenÃ­, zadaj:
 
-	./configure --help
+./configure --help
+
