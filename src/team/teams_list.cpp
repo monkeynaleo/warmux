@@ -174,13 +174,13 @@ void TeamsList::Reset()
 
   // Commence par désactiver tous les vers
   iterator it=playing_list.begin(), fin=playing_list.end();
-  for (; it != fin; ++it) 
+/*  for (; it != fin; ++it) 
   {
 	Team &team = **it;
     Team::iterator ver=team.begin(), dernier_ver=team.end();
-    for (; ver != dernier_ver; ++ver) (*ver).Desactive();
+    for (; ver != dernier_ver; ++ver) (*ver).StopPlaying();
   } 
-
+*/
   // Reset de toutes les équipes
   for (it=playing_list.begin(); it != fin; ++it) (**it).Reset();
 }

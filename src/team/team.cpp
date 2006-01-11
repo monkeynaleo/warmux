@@ -49,6 +49,7 @@ Team::Team()
   vers_fin = 0;
   vers_fin_it = vers.end();
   is_local = true;
+  ver_actif = -1;
 }
 
 //-----------------------------------------------------------------------------
@@ -56,6 +57,7 @@ Team::Team()
 bool Team::Init (const std::string &teams_dir, const std::string &id)
 {
   std::string nomfich;
+  ver_actif = -1;
   try
   {
     LitDocXml doc;
@@ -96,7 +98,7 @@ void Team::InitEnergy (uint max)
 uint Team::LitEnergie ()
 {
   uint total_energie = 0;
-  for (uint index=0; index < vers_fin; ++index) {
+  for (int index=0; index < vers_fin; ++index) {
     if( !vers[index].IsDead() )
       total_energie += vers[index].GetEnergy();
   }
@@ -247,11 +249,11 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
 
 //-----------------------------------------------------------------------------
 
-uint Team::NextCharacterIndex()
+int Team::NextCharacterIndex()
 {
   // Passe au ver suivant
   assert (0 < NbAliveCharacter());
-  uint copy = ver_actif;
+  int copy = ver_actif;
   do
   { 
     ++copy;
@@ -274,7 +276,7 @@ void Team::internal_NextCharacter()
 }
 
 //-----------------------------------------------------------------------------
-
+/*   not used anymore
 void Team::NextCharacter()
 {
   internal_NextCharacter();
@@ -283,13 +285,13 @@ void Team::NextCharacter()
   camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
   curseur_ver.SuitVerActif();
 }
-
+*/
 //-----------------------------------------------------------------------------
 
-uint Team::NbAliveCharacter() const
+int Team::NbAliveCharacter() const
 {
   uint nbr = 0;
-  for (uint index=0; index < vers_fin; ++index)
+  for (int index=0; index < vers_fin; ++index)
     if (!vers[index].IsDead()) ++nbr;
   return nbr;
 }
@@ -307,7 +309,10 @@ void Team::SelectCharacterIndex (uint index)
   }
 
   // Change de ver
+  if(ver_actif != -1)
+    vers.at(ver_actif).StopPlaying();
   ver_actif = index;
+  vers.at(ver_actif).StartPlaying();
   camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
   curseur_ver.SuitVerActif();
 }
@@ -352,7 +357,7 @@ void Team::FinTour()
 
 //-----------------------------------------------------------------------------
 
-uint Team::ActiveCharacterIndex() const
+int Team::ActiveCharacterIndex() const
 { 
   return ver_actif;
 }
@@ -361,7 +366,7 @@ uint Team::ActiveCharacterIndex() const
 
 Character& Team::ActiveCharacter()
 { 
-  assert (ver_actif < vers.size());
+  assert ((uint)ver_actif < vers.size());
   return vers.at(ver_actif);
 }
 
