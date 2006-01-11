@@ -75,10 +75,10 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
 
   Box * buttons_tmp_box = new VBox(0,0, 68, false);
 
-  bt_add_team = new Button(0,0, 48,48,res,"menu/valider");
+  bt_add_team = new Button(0,0, 48,48,res,"menu/arrow-right");
   buttons_tmp_box->AddWidget(bt_add_team);
   
-  bt_remove_team = new Button(0,0,48,48,res,"menu/annuler");
+  bt_remove_team = new Button(0,0,48,48,res,"menu/arrow-left");
   buttons_tmp_box->AddWidget(bt_remove_team);
 
   space_for_logo = new NullWidget(0,0,48,48);
