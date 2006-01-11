@@ -37,6 +37,8 @@
 #include "../tool/Distance.h"
 #include "../weapon/weapon_tools.h"
 
+/*
+// Is this hack still needed for round()?
 #ifdef WIN32
 int roundl(double nbr)
 {
@@ -45,7 +47,7 @@ int roundl(double nbr)
   return (int)nbr;
 }
 #endif
-
+*/
 //-----------------------------------------------------------------------------
 
 namespace Wormux {
@@ -514,17 +516,17 @@ void NinjaRope::Draw()
 
   ActiveCharacter().GetHandPosition(x, y);
 
-  quad.x1 = (int)roundl((double)x - 2 * cos(angle));
-  quad.y1 = (int)roundl((double)y + 2 * sin(angle));
-  quad.x2 = (int)roundl((double)x + 2 * cos(angle));
-  quad.y2 = (int)roundl((double)y - 2 * sin(angle));
+  quad.x1 = (int)round((double)x - 2 * cos(angle));
+  quad.y1 = (int)round((double)y + 2 * sin(angle));
+  quad.x2 = (int)round((double)x + 2 * cos(angle));
+  quad.y2 = (int)round((double)y - 2 * sin(angle));
 
   for (i = last_node ; i >= 0; i--)
     {
-      quad.x3 = (int)roundl((double)rope_node[i].x + 2 * cos(angle));
-      quad.y3 = (int)roundl((double)rope_node[i].y - 2 * sin(angle));
-      quad.x4 = (int)roundl((double)rope_node[i].x - 2 * cos(angle));
-      quad.y4 = (int)roundl((double)rope_node[i].y + 2 * sin(angle));
+      quad.x3 = (int)round((double)rope_node[i].x + 2 * cos(angle));
+      quad.y3 = (int)round((double)rope_node[i].y - 2 * sin(angle));
+      quad.x4 = (int)round((double)rope_node[i].x - 2 * cos(angle));
+      quad.y4 = (int)round((double)rope_node[i].y + 2 * sin(angle));
       
       float dx = sin(angle) * (float)m_node_sprite->GetHeight();
       float dy = cos(angle) * (float)m_node_sprite->GetHeight();
