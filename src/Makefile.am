@@ -10,7 +10,7 @@ wormux_SOURCES = \
 	include/app.h \
 	main.cpp \
 	game/config.cpp game/config.h \
-	game/debug.h \
+	game/debug.cpp game/debug.h \
 	game/game_mode.cpp game/game_mode.h \
 	game/game.cpp game/game.h \
 	game/game_loop.cpp game/game_loop.h \
@@ -106,20 +106,7 @@ wormux_SOURCES = \
 	weapon/ninja_rope.cpp weapon/ninja_rope.h \
 	weapon/parachute.cpp weapon/parachute.h \
 	weapon/supertux.cpp weapon/supertux.h
-	
-#	game/debug.cpp game/debug.h \
-#
-#
-#
-#
 ####	network/network.cpp network/network.h \
-##
-#	team/macro.h \
-#
-####	tool/geometry_tools.cpp tool/geometry_tools.h \
-#
-#	weapon/all.h 
-
 
 #AM_CXXFLAGS = -pg @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ @PARAGUI_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
 #LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS) $(PARAGUI_LIBS)
