@@ -10,6 +10,7 @@ public class WGame implements Drawable {
 	final static int DOWN = 8;
 	static int screenX, screenY;
 	static int scrollStepWidth, scrollStepHeight;
+	final static String[] skins= {"worm", "hypo"};
 	boolean fullDraw;
 	WGround ground;
 	WTeam[] teams = new WTeam[2];
@@ -25,8 +26,9 @@ public class WGame implements Drawable {
 		scrollStepHeight = Wormux.height / 4;
 		ground = new WGround();
 		for (int i=0; i<teams.length; i++) {
-			teams[i] = new WTeam(i);
+			teams[i] = new WTeam(i, skins[i]);
 		}
+		
 		activeTeam = 0;
 	}
 	
