@@ -39,7 +39,7 @@ Wormux uses the libxml++ library version 2.6.
 Get it here: http://libxmlplusplus.sourceforge.net/
 
 Under Debian, use the command:
-	apt-get install libxml++1.0-dev
+	apt-get install libxml++2.6-dev
 
 
 ============================
@@ -88,3 +88,4 @@ This enables you to compile Wormux with debug options, allowing you to track dow
 To get a list of all the other configuration options, type:
 
 	./configure --help
+
