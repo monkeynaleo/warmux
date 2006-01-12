@@ -124,10 +124,17 @@ void Menu::Run ()
   int x=0, y=0;
 
   close_menu = false;
+
+  // to limit CPU  
+  uint sleep_fps=0;
+  uint delay = 0;
+  
   do
   {
+    // to limit CPU  
+    uint start = SDL_GetTicks();
+
    // Poll and treat events
-	
    SDL_Event event;
      
    while( SDL_PollEvent( &event) ) 
@@ -166,6 +173,14 @@ void Menu::Run ()
    BasicDraw(x, y);
    Draw(x, y);
    SDL_Flip( app.sdlwindow);
+
+   // to limit CPU
+   delay = SDL_GetTicks()-start;   
+   if (delay < 200)
+     sleep_fps = 200 - delay;
+   else
+     sleep_fps = 0;
+   SDL_Delay(sleep_fps);
 
   } while (!close_menu);
 

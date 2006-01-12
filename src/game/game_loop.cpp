@@ -499,7 +499,10 @@ void GameLoop::CallDraw()
 
 void GameLoop::Run()
 {
-  sleep_fps = 0;
+#ifdef ENABLE_LIMIT_FPS   
+  uint sleep_fps=0;
+  uint delay=0;
+#endif 
 
   // boucle until game is finished
   do
@@ -520,7 +523,7 @@ void GameLoop::Run()
 
     // try to adjust to max Frame by seconds
 #ifdef ENABLE_LIMIT_FPS    
-    unsigned int delay = SDL_GetTicks()-start;
+    delay = SDL_GetTicks()-start;
      
     if (delay < video.GetSleepMaxFps())
       sleep_fps = video.GetSleepMaxFps() - delay;
