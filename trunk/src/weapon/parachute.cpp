@@ -31,9 +31,6 @@
 #include "../object/physical_obj.h"
 #include "../weapon/weapon_tools.h"
 
-#ifdef CL
-CL_Sprite image ;
-#endif
 
 //-----------------------------------------------------------------------------
 namespace Wormux 
@@ -60,15 +57,8 @@ void Parachute::p_Select()
   m_is_active = true ;
   open = false ;
   closing = false ;
-#ifdef CL
-  image.set_play_backward(false);
-  image.set_show_on_finish(CL_Sprite::show_last_frame);
-  image.restart();
-#else
   image->Start();
   image->SetShowOnFinish(Sprite::show_last_frame);
-  //TODO
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -85,15 +75,9 @@ void Parachute::p_Deselect()
 void Parachute::p_Init()
 {
   m_name = _("parachute");
-#ifdef CL
-  m_image = CL_Surface("mine", &graphisme.weapons);
-  image = CL_Sprite("parachute_sprite", &graphisme.weapons);
-  image.set_play_loop(false);
-#else
-//  m_image = resource_manager.LoadSprite(res,"mine");
+
   image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
   //TODO : image.set_play_loop(false);
-#endif
 }
 
 
@@ -108,15 +92,9 @@ void Parachute::Draw()
 {
   if (open)
     {
-#ifdef CL
-      image.update();
-      image.draw(ActiveCharacter().GetX() - ActiveCharacter().GetWidth()/2,
-		 ActiveCharacter().GetY() - image.get_height());
-#else
       image->Update();
       image->Draw(ActiveCharacter().GetX() - ActiveCharacter().GetWidth()/2,
 		 ActiveCharacter().GetY() - image->GetHeight());
-#endif
     }
 }
 
@@ -132,8 +110,9 @@ void Parachute::Refresh()
     {
       if (!open && (speed.y > open_speed_limit))
 	{
-	  if (UseAmmo())
+	  if (EnoughAmmo())
 	    {
+	      UseAmmo();
 	      ActiveCharacter().SetAirResistFactor(air_resist_factor);
 	      ActiveCharacter().SetWindFactor(2);
 	      open = true ;
@@ -149,33 +128,21 @@ void Parachute::Refresh()
 	  if (!closing)
 	    {
 	      /* We have just hit the ground. Start closing animation */
-#ifdef CL
-	      image.set_play_backward(true);
-	      image.set_show_on_finish(CL_Sprite::show_blank);
-	      image.restart();
-#else
 	      image->SetPlayBackward(true);
-        image->SetShowOnFinish(Sprite::show_blank);
-        image->Start();
-#endif
+	      image->SetShowOnFinish(Sprite::show_blank);
+	      image->Start();
 	      closing = true ;
 	    }
 	  else
-	    {
-	      /* The parachute is closing */
-#ifdef CL
-	      if (image.is_finished())
+	    {/* The parachute is closing */
+	      if (image->IsFinished())
 		{
 		  /* The animation is finished...
 		     We are done with the parachute */
 		  open = false ;
 		  closing = false ;
-		  m_image = CL_Surface("mine", &graphisme.weapons);
 		  UseAmmoUnit();
 		}
-#else
-  //TODO
-#endif
 	    }
 	}
     }
