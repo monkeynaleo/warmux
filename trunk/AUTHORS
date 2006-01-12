@@ -17,7 +17,9 @@ o Victor STINNER <victor.stinner AT haypocalc.com> from France
 Translation :
 =============
 
-o Nicolas LETAVENIER <nicolas.letavenier@utbm.fr>
+o Alexandre Prokoudine <alexandre.prokoudine AT gmail.com> from Russia
+  Translate Wormux into russian
+o Nicolas LETAVENIER <nicolas.letavenier AT utbm.fr>
   Help for English translation of the site
 o Eduard BERMEJO <templer AT iespana.es>
   Add spain AND catalan translation in Wormux !
@@ -71,7 +73,7 @@ o Alexandre Norman <norman AT freesurf.fr> from France
   Send us two maps (arbre and prehistorik)
 o Michael Prager <X_X_L AT gmx.net> from Germany
   Great map "pirates".
-o Isaac Clerencia <isaac@sindominio.net>
+o Isaac Clerencia <isaac AT sindominio.net>
   Add autotools (autogen.sh, ./configure, ...) in Wormux !
 o Adriana Chirita aka "Adi" <adriana.chirita AT utbm.fr>
   Draw Japon map
@@ -91,7 +93,7 @@ o Jerome Glatigny <jerome.glatigny AT utbm.fr>
   Write first network patch with François Bleibel
 o François Bleibel <francois.bleibel AT utbm.fr>
   Write first network patch with Jerome Glatigny
-o Vegar Storvann aka vegar <v@sunscream.net> from Norway
+o Vegar Storvann aka vegar <v AT sunscream.net> from Norway
   Patch for mousewheel scrolling on the gui.
 o Piotr Pokojowczyk <rashid AT vp.pl> from Poland
   Draw map Dinos and skin Dude
