@@ -25,6 +25,7 @@
 //-----------------------------------------------------------------------------
 #include "map.h"
 #include "maps_list.h"
+#include "../team/teams_list.h"
 #include "../graphic/video.h"
 #include "../interface/mouse.h"
 #include "../tool/Rectangle.h"
@@ -257,6 +258,16 @@ void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
     }
   }
   obj_suivi = obj;
+}
+
+//-----------------------------------------------------------------------------
+
+void Camera::StopFollowingObj (PhysicalObj* obj)
+{
+  if( obj_suivi == obj )
+  {
+    ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(),true,true,true);
+  }
 }
 
 //-----------------------------------------------------------------------------

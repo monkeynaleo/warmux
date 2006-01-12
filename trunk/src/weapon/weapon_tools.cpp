@@ -27,6 +27,7 @@
 #include "../map/map.h"
 #include "../object/objects_list.h"
 #include "../object/particle.h"
+#include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
 #include "../tool/math_tools.h"
@@ -52,6 +53,8 @@ void AppliqueExplosion (const Point2i &explosion,
 			bool fire_particle
 			)
 {
+  bool cam_follow_character = false; //Set to true if an explosion is applied to a character. Then the camera shouldn't be following an object
+
   // Make a hole in the ground
   world.Creuse (trou.x-impact->w/2, trou.y-impact->h/2,impact);   
    
@@ -87,19 +90,21 @@ void AppliqueExplosion (const Point2i &explosion,
     {
       double force = distance;
       if (!EgalZero(distance))
-	{
-	  force *= config.blast_force / config.blast_range;
-	  force  = config.blast_force - force;
-	  angle  = CalculeAngle (explosion, ver -> GetCenter());
-	}
+      {
+        force *= config.blast_force / config.blast_range;
+        force  = config.blast_force - force;
+        angle  = CalculeAngle (explosion, ver -> GetCenter());
+      }
       else
-	{
-	  force = config.blast_force;
-	  angle = -M_PI/2;
-	}
+      {
+        force = config.blast_force;
+        angle = -M_PI/2;
+      }
 #ifdef DEBUG_EXPLOSION
       cout << ", force=" << force << endl;
 #endif
+//      camera.ChangeObjSuivi ((PhysicalObj*)&ver, true, true);
+      cam_follow_character = true;
       ver -> AddSpeed (force, angle);
       ver -> UpdatePosition();
     } else {
@@ -135,6 +140,8 @@ void AppliqueExplosion (const Point2i &explosion,
 	distance = config.blast_force;
 	angle = -M_PI/2;
       }
+      if(!cam_follow_character)
+        camera.ChangeObjSuivi (obj->ptr, true, true);
       obj -> ptr -> AddSpeed (distance, angle);
       obj -> ptr -> UpdatePosition();
     }

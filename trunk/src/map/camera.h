@@ -56,6 +56,7 @@ public:
   void ChangeObjSuivi (PhysicalObj *obj, 
 		       bool suit, bool recentre,
 		       bool force_recentrage=false);
+  void StopFollowingObj (PhysicalObj* obj);
 
   // Est-ce que l'objet obj est visible dans le monde ?
   bool EstVisible (const PhysicalObj &obj);

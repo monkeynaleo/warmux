@@ -71,6 +71,7 @@ void SuperTux::Tire()
   SetExternForce(tux.cfg().speed, angle);
   time_next_action = Wormux::global_time.Read();
   last_move = Wormux::global_time.Read();
+  camera.ChangeObjSuivi((PhysicalObj*)this,true,true);
 }
 
 //-----------------------------------------------------------------------------
