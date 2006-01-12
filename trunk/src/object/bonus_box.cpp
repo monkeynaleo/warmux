@@ -254,38 +254,53 @@ void Caisse::AppliqueBonus (Team &equipe, Character &ver)
                 "%s team has won %u teleportation.", 
                 "%s team has won %u teleportations.", 
                 BONUS_TELEPORTE),
-		  ActiveTeam().GetName().c_str(), BONUS_TELEPORTE);
+            ActiveTeam().GetName().c_str(), BONUS_TELEPORTE);
     equipe.m_nb_ammos[ _("Teleportation") ] += BONUS_TELEPORTE;
     break;
 
   case bonusENERGIE:
-    txt << Format(_("%s has won %u points of energy!"),
-		  ver.m_name.c_str(), BONUS_ENERGIE);
+    txt << Format(ngettext(
+                "%s has won %u point of energy!",
+                "%s has won %u points of energy!",
+                BONUS_ENERGIE),
+            ver.m_name.c_str(), BONUS_ENERGIE);
     ver.SetEnergyDelta (BONUS_ENERGIE);
     break;
 
   case bonusPIEGE:
-    txt << Format(_("%s has lost %u points of energy."),
-		  ver.m_name.c_str(), BONUS_PIEGE);
+    txt << Format(ngettext(
+                "%s has lost %u point of energy.",
+                "%s has lost %u points of energy.",
+                BONUS_PIEGE),
+            ver.m_name.c_str(), BONUS_PIEGE);
     ver.SetEnergyDelta (-BONUS_PIEGE);
     break;
 
   case bonusAERIENNE:
-    txt << Format(_("'%s has won %u air attack(s)"),
-		  ActiveTeam().GetName().c_str(), BONUS_AERIENNE);
+    txt << Format(ngettext(
+                "'%s has won %u air attack(s)",
+                "'%s has won %u air attack(s)",
+                BONUS_AERIENNE),
+            ActiveTeam().GetName().c_str(), BONUS_AERIENNE);
     equipe.m_nb_ammos[ _("Air attack") ] += BONUS_AERIENNE;
     break;
 
   case bonusBAZ_TETE_C:
-    txt << Format(_("%s team has won %u automatic bazookas!"),
+    txt << Format(ngettext(
+                "%s team has won %u automatic bazooka!",
+                "%s team has won %u automatic bazookas!",
+                BONUS_BAZ_TETE_C),
 		  ActiveTeam().GetName().c_str(), BONUS_BAZ_TETE_C);
     equipe.m_nb_ammos[ _("Automatic bazooka") ] += BONUS_BAZ_TETE_C;
     break;
 
   default: std::cout << bonus << std::endl; assert (false);
   case bonusDYNAMITE:  
-    txt << Format(_("%s team has won %u sticks of dynamite!"),
-		  ActiveTeam().GetName().c_str(), BONUS_DYNAMITE);
+    txt << Format(ngettext(
+                "%s team has won %u stick of dynamite!",
+                "%s team has won %u sticks of dynamite!",
+                BONUS_DYNAMITE),
+            ActiveTeam().GetName().c_str(), BONUS_DYNAMITE);
     equipe.m_nb_ammos[ _("Dynamite") ] += BONUS_DYNAMITE; 
     break;
   }
