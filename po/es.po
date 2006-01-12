@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-01-12 04:50+0100\n"
 "PO-Revision-Date: 2005-01-11 15:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
@@ -55,15 +54,19 @@ msgstr "%s ha caido del mapa!"
 msgid "%s has fallen off the map!"
 msgstr "%s ha caido del mapa!"
 
-#: src/object/bonus_box.cpp:265
-#, c-format
-msgid "%s has lost %u points of energy."
-msgstr "El jugador %s ha perdido %u puntos de vida."
+#: src/object/bonus_box.cpp:272
+#, fuzzy, c-format
+msgid "%s has lost %u point of energy."
+msgid_plural "%s has lost %u points of energy."
+msgstr[0] "El jugador %s ha perdido %u puntos de vida."
+msgstr[1] "El jugador %s ha perdido %u puntos de vida."
 
-#: src/object/bonus_box.cpp:259
-#, c-format
-msgid "%s has won %u points of energy!"
-msgstr "¡El jugador %s ha ganado %u puntos de vida!"
+#: src/object/bonus_box.cpp:263
+#, fuzzy, c-format
+msgid "%s has won %u point of energy!"
+msgid_plural "%s has won %u points of energy!"
+msgstr[0] "¡El jugador %s ha ganado %u puntos de vida!"
+msgstr[1] "¡El jugador %s ha ganado %u puntos de vida!"
 
 #: src/game/game_loop.cpp:756
 #, c-format
@@ -80,30 +83,38 @@ msgstr "¡ %s se ha muerto por ser un torpe!"
 msgid "%s is next to a mine!"
 msgstr "¡ %s esta cerca d'una mina!"
 
-#: src/object/bonus_box.cpp:277
-#, c-format
-msgid "%s team has won %u automatic bazookas!"
-msgstr "¡El equipo %s ha ganado %u bazookas automáticos!"
+#: src/object/bonus_box.cpp:290
+#, fuzzy, c-format
+msgid "%s team has won %u automatic bazooka!"
+msgid_plural "%s team has won %u automatic bazookas!"
+msgstr[0] "¡El equipo %s ha ganado %u bazookas automáticos!"
+msgstr[1] "¡El equipo %s ha ganado %u bazookas automáticos!"
 
-#: src/object/bonus_box.cpp:284
-#, c-format
-msgid "%s team has won %u sticks of dynamite!"
-msgstr "¡El equipo %s ha ganado %u dinamita(s)!"
+#: src/object/bonus_box.cpp:300
+#, fuzzy, c-format
+msgid "%s team has won %u stick of dynamite!"
+msgid_plural "%s team has won %u sticks of dynamite!"
+msgstr[0] "¡El equipo %s ha ganado %u dinamita(s)!"
+msgstr[1] "¡El equipo %s ha ganado %u dinamita(s)!"
 
-#: src/object/bonus_box.cpp:253
-#, c-format
-msgid "%s team has won %u teleportations."
-msgstr "El equipo %s ha ganado %u teletransportaciones."
+#: src/object/bonus_box.cpp:254
+#, fuzzy, c-format
+msgid "%s team has won %u teleportation."
+msgid_plural "%s team has won %u teleportations."
+msgstr[0] "El equipo %s ha ganado %u teletransportaciones."
+msgstr[1] "El equipo %s ha ganado %u teletransportaciones."
 
 #: src/game/game.cpp:108
 #, c-format
 msgid "%s team has won."
 msgstr "El equipo %s ha ganado."
 
-#: src/object/bonus_box.cpp:271
-#, c-format
+#: src/object/bonus_box.cpp:281
+#, fuzzy, c-format
 msgid "'%s has won %u air attack(s)"
-msgstr "¡El jugador %s ha ganado %u ataque(s) aerio(s)!"
+msgid_plural "'%s has won %u air attack(s)"
+msgstr[0] "¡El jugador %s ha ganado %u ataque(s) aerio(s)!"
+msgstr[1] "¡El jugador %s ha ganado %u ataque(s) aerio(s)!"
 
 #: src/interface/interface.cpp:194
 msgid "(dead)"
@@ -117,7 +128,7 @@ msgstr "(ilimitado)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:214
+#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:214
 msgid "Air attack"
 msgstr "Ataque aerio"
 
@@ -130,7 +141,7 @@ msgstr "Autores:"
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/object/bonus_box.cpp:279 src/weapon/auto_bazooka.cpp:195
+#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:195
 msgid "Automatic bazooka"
 msgstr "Bazooka automatico"
 
@@ -188,7 +199,7 @@ msgstr "Duración del turno:"
 msgid "Duration of the end of a turn:"
 msgstr "Duración del tiempo despues del turno:"
 
-#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:148
+#: src/object/bonus_box.cpp:304 src/weapon/dynamite.cpp:148
 msgid "Dynamite"
 msgstr "Dinamita"
 
@@ -333,7 +344,7 @@ msgstr "Nombre"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:629
+#: src/weapon/weapon.cpp:631
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "¡Ningun elemento <%s> encontrado en el arxivo de configuración xml!"
@@ -396,7 +407,7 @@ msgstr "Empezando un nuevo juego"
 msgid "Stock:"
 msgstr "Stock"
 
-#: src/object/bonus_box.cpp:255 src/weapon/teleportation.cpp:45
+#: src/object/bonus_box.cpp:258 src/weapon/teleportation.cpp:45
 msgid "Teleportation"
 msgstr "Teletransportacion"
 
