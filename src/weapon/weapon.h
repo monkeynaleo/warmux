@@ -188,8 +188,9 @@ public:
 
   // Manage the numbers of ammunitions
   bool EnoughAmmo() const;
-  bool UseAmmo();
-  bool UseAmmoUnit();
+  void UseAmmo();
+  bool EnoughAmmoUnit() const;
+  void UseAmmoUnit();
   int ReadInitialNbAmmo() const;
   int ReadInitialNbUnit() const;
 

@@ -330,18 +330,20 @@ bool Weapon::Shoot(double strength, int angle)
   ActiveTeam().crosshair.ChangeAngleVal(angle);
   m_strength = strength;
 
-  if (!EnoughAmmo()) return false;
+  if (!EnoughAmmo() 
+      || (use_unit_on_first_shoot && !EnoughAmmoUnit())) 
+    return false;
 
   if (!p_Shoot()) return false;
-
+  
   // Is this the first shoot for this ammo use ?
-  if (ActiveTeam().ReadNbUnits() == m_initial_nb_unit_per_ammo)
-    // Yes, so use one ammo. If no ammo left, return.
-    if (!UseAmmo()) return false;
+  if (ActiveTeam().ReadNbUnits() == m_initial_nb_unit_per_ammo) {
+    UseAmmo();
+  }
 
-  if (use_unit_on_first_shoot)
-    if (!UseAmmoUnit())
-      return false ;
+  if (use_unit_on_first_shoot){
+    UseAmmoUnit();
+  }
 
   m_is_active = true;
 
@@ -392,29 +394,32 @@ bool Weapon::EnoughAmmo() const
 
 //-----------------------------------------------------------------------------
 
-bool Weapon::UseAmmo()
+void Weapon::UseAmmo()
 {
-  // Have we enough ammo ?
-  if (!EnoughAmmo()) return false;
-
   // Use one ammo...
   int *ammo = &ActiveTeam().AccessNbAmmos();
   if (*ammo != INFINITE_AMMO) (*ammo)--;
-  return true;
+
+  assert (*ammo >= 0 || *ammo == INFINITE_AMMO);
 }
 
 //-----------------------------------------------------------------------------
 
-bool Weapon::UseAmmoUnit()
+bool Weapon::EnoughAmmoUnit() const
+{
+  int unit = ActiveTeam().ReadNbUnits();
+  return (unit > 0);
+}
+
+//-----------------------------------------------------------------------------
+
+void Weapon::UseAmmoUnit()
 {
   // Use one ammo unit.
   int *unit = &ActiveTeam().AccessNbUnits();
-  if (*unit == 0)
-    return false;
-
   (*unit)--;
 
-  return true;
+  assert (unit >= 0);
 }
 
 //-----------------------------------------------------------------------------

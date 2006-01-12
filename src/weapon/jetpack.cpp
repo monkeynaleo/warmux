@@ -89,8 +89,9 @@ void JetPack::Refresh()
 
 	  while (delta >= DELTA_FUEL_DOWN)
 	    {
-	      if (UseAmmoUnit())
+	      if (EnoughAmmoUnit())
 		{
+		  UseAmmoUnit();
 		  m_last_fuel_down += DELTA_FUEL_DOWN ;
 		  delta -= DELTA_FUEL_DOWN ;
 		}
