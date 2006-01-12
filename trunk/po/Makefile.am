@@ -55,7 +55,6 @@ POTFILES = \
 	src/team/teams_list.cpp \
 	src/tool/error.cpp \
 	src/tool/file_tools.cpp \
-	src/tool/geometry_tools.cpp \
 	src/tool/i18n.cpp \
 	src/tool/math_tools.cpp \
 	src/tool/random.cpp \
