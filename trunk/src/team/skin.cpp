@@ -32,10 +32,8 @@
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include "../tool/string_tools.h"
-#ifndef CL
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
-#endif
 #include <iostream>
 #if !defined(WIN32) || defined(__MINGW32__)
 #include <dirent.h>
@@ -54,11 +52,7 @@ CfgSkin::CfgSkin() { Reset(); }
 CfgSkin::~CfgSkin() { Reset(); }
 void CfgSkin::Reset()
 {
-#ifdef CL
-  image = CL_Sprite(); // NULL sprite
-#else
   image = new Sprite();
-#endif 
   test_bottom = 0;
   test_top = 0;
   test_dx = 0;
@@ -209,11 +203,8 @@ void Skin::Xml_LitRectTest (xmlpp::Element *elem, CfgSkin &img)
 //-----------------------------------------------------------------------------
 
 void Skin::Xml_ReadHandPosition(xmlpp::Element *root, CfgSkin_Walking &config) {
-#ifdef CL
-  int n = config.image.get_frame_count();
-#else
   int n = config.image->GetFrameCount();
-#endif 
+
   skin_translate_t pos = {0,0};
   config.hand_position.clear();
   config.hand_position.assign (n, pos);
@@ -342,7 +333,7 @@ void InitSkins()
     closedir (dir);
   }
 #endif
-  std::cout << "done!" << std::endl;
+  std::cout << std::endl;
 }
 
 //-----------------------------------------------------------------------------
