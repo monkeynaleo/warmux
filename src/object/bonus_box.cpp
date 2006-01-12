@@ -250,7 +250,10 @@ void Caisse::AppliqueBonus (Team &equipe, Character &ver)
   switch (bonus)
   {
   case bonusTELEPORTE: 
-    txt << Format(_("%s team has won %u teleportations."),
+    txt << Format(ngettext(
+                "%s team has won %u teleportation.", 
+                "%s team has won %u teleportations.", 
+                BONUS_TELEPORTE),
 		  ActiveTeam().GetName().c_str(), BONUS_TELEPORTE);
     equipe.m_nb_ammos[ _("Teleportation") ] += BONUS_TELEPORTE;
     break;

@@ -24,6 +24,8 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
+#include <SDL_endian.h>
+#include "../tool/error.h"
 #include "../tool/i18n.h"
 #include "../include/app.h"
 
@@ -32,6 +34,49 @@
 //#define BUGGY_CODE
 //-----------------------------------------------------------------------------
 Video video;
+//-----------------------------------------------------------------------------
+
+SDL_Surface* CreateRGBSurface (int width, int height, Uint32 flags)
+{
+  SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, 32,
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN          
+          0xff000000,  // red mask
+          0x00ff0000,  // green mask
+          0x0000ff00,  // blue mask
+#else
+          0x000000ff,  // red mask
+          0x0000ff00,  // green mask
+          0x00ff0000,  // blue mask
+#endif  
+          0 // don't use alpha
+   );          
+  if ( surface == NULL )
+      Erreur(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
+  return surface;
+}    
+
+//-----------------------------------------------------------------------------
+
+SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags)
+{
+  SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, 32,
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN          
+          0xff000000,  // red mask
+          0x00ff0000,  // green mask
+          0x0000ff00,  // blue mask
+          0x000000ff // alpha mask
+#else
+          0x000000ff,  // red mask
+          0x0000ff00,  // green mask
+          0x00ff0000,  // blue mask
+          0xff000000 // alpha mask
+#endif  
+   );          
+  if ( surface == NULL )
+      Erreur(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
+  return surface;
+}    
+
 //-----------------------------------------------------------------------------
 
 const int WIDTH_MIN=800;

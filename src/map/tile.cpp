@@ -26,6 +26,7 @@
 #include <SDL.h>
 #include <SDL_endian.h>
 #include "../tool/Point.h"
+#include "../graphic/video.h"
 #include "../include/app.h"
 #include "../map/camera.h"
 #include "../game/config.h"
@@ -79,9 +80,9 @@ public:
      
 private:
   unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const int x, const int y) const;
-  unsigned char GetAlpha_RGBA (const int x, const int y) const;
-  unsigned char GetAlpha_ARGB (const int x, const int y) const;
-  unsigned char GetAlpha_Generic (const int x, const int y) const;
+  unsigned char GetAlpha_Index0 (const int x, const int y) const;
+  inline unsigned char GetAlpha_Index3 (const int x, const int y) const;
+  inline unsigned char GetAlpha_Generic (const int x, const int y) const;
 
   unsigned int m_width, m_height;
   SDL_Surface *m_surface;
@@ -149,45 +150,6 @@ bool TileItem::IsEmpty()
 
 // === Implemenation of TileItem_Software_ALpha ==============================
 
-SDL_Surface* CreateRGBSurface (int width, int height, Uint32 flags=SDL_SWSURFACE|SDL_SRCALPHA)
-{
-  SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, 32,
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN          
-          0xff000000,  // red mask
-          0x00ff0000,  // green mask
-          0x0000ff00,  // blue mask
-#else
-          0x000000ff,  // red mask
-          0x0000ff00,  // green mask
-          0x00ff0000,  // blue mask
-#endif  
-          0 // don't use alpha
-   );          
-  if ( surface == NULL )
-      Erreur(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
-  return surface;
-}    
-
-SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags)
-{
-  SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, 32,
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN          
-          0xff000000,  // red mask
-          0x00ff0000,  // green mask
-          0x0000ff00,  // blue mask
-          0x000000ff // alpha mask
-#else
-          0x000000ff,  // red mask
-          0x0000ff00,  // green mask
-          0x00ff0000,  // blue mask
-          0xff000000 // alpha mask
-#endif  
-   );          
-  if ( surface == NULL )
-      Erreur(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
-  return surface;
-}    
-
 TileItem_AlphaSoftware::TileItem_AlphaSoftware (unsigned int width, unsigned int height)
 {
    m_width = width;
@@ -209,14 +171,14 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware (unsigned int width, unsigned int
    {
        if (m_surface->format->Amask == 0x000000ff) {
            if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_RGBA;
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
            else
-               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_ARGB;
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
        } else if (m_surface->format->Amask == 0xff000000) {
            if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_ARGB;
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
            else
-               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_RGBA;
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
        }
    }
 }
@@ -236,12 +198,12 @@ unsigned char TileItem_AlphaSoftware::GetAlpha(const int x,const int y) const
    return (this->*_GetAlpha)( x, y);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_RGBA (const int x, const int y) const
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const int x, const int y) const
 {
    return *(((unsigned char *)m_surface->pixels) + y*m_surface->pitch + x * 4 + 0);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_ARGB (const int x, const int y) const
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const int x, const int y) const
 {
    return *(((unsigned char *)m_surface->pixels) + y*m_surface->pitch + x * 4 + 3);
 }
