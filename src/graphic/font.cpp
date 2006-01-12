@@ -69,7 +69,7 @@ Font::Font()
 Font::~Font()
 {
   if (m_font != NULL) {
-    TTF_CloseFont(m_font);
+//    TTF_CloseFont(m_font);
     m_font = NULL;
   }
 
