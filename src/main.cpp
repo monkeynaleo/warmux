@@ -143,9 +143,10 @@ bool AppWormux::Init(int argc, char **argv)
 		  config.tmp.video.fullscreen);
 
   // Set window caption
-  std::string txt_version;
-  txt_version = std::string("Wormux ") + std::string(VERSION);
+  std::string txt_version = std::string("Wormux ") + VERSION;
+  std::string icon = config.data_dir + "wormux-32.xpm";
   SDL_WM_SetCaption(txt_version.c_str(), NULL);
+  SDL_WM_SetIcon(IMG_Load(icon.c_str()), NULL);
   
   // Fonts initialisation
   if (TTF_Init()==-1) {

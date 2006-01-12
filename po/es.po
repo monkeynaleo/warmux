@@ -145,7 +145,7 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Excepcion C++ interceptada:"
 
-#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
+#: src/team/teams_list.cpp:430 src/team/teams_list.cpp:455
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
@@ -187,7 +187,7 @@ msgstr "Duración del turno:"
 msgid "Duration of the end of a turn:"
 msgstr "Duración del tiempo despues del turno:"
 
-#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:215
+#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:148
 msgid "Dynamite"
 msgstr "Dinamita"
 
@@ -214,7 +214,7 @@ msgstr "Error durante la carga del skin (%s) :"
 msgid "Error in %s:%lu"
 msgstr "Error en %s:%lu"
 
-#: src/team/team.cpp:77
+#: src/team/team.cpp:79
 #, fuzzy, c-format
 msgid "Error loading team %s:"
 msgstr "Error cargando el equipo %s :"
@@ -233,7 +233,7 @@ msgstr ""
 "Error:\n"
 "%s"
 
-#: src/team/team.cpp:156 src/team/team.cpp:221
+#: src/team/team.cpp:158 src/team/team.cpp:223
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Error: no se puede encontrar el skin \"%s\" para el equipo \"%s\"."
@@ -332,7 +332,7 @@ msgstr "Nombre"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:622
+#: src/weapon/weapon.cpp:629
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "¡Ningun elemento <%s> encontrado en el arxivo de configuración xml!"
@@ -373,7 +373,7 @@ msgstr "Empieza el juego"
 msgid "Select the teams:"
 msgstr ""
 
-#: src/menu/game_menu.cpp:104
+#: src/menu/game_menu.cpp:105
 msgid "Select the world:"
 msgstr ""
 
