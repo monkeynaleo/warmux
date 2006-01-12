@@ -54,7 +54,7 @@ void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitDouble (elem, "air_resist_factor", air_resist_factor);
   LitDocXml::LitDouble (elem, "explosion_range", explosion_range);
   LitDocXml::LitDouble (elem, "blast_range", blast_range);
-  LitDocXml::LitDouble (elem, "blast_range", blast_range);
+  LitDocXml::LitDouble (elem, "blast_force", blast_force);
 }
 
 //-----------------------------------------------------------------------------

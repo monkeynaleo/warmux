@@ -57,6 +57,7 @@ Gnu::Gnu() : PhysicalObj ("Gnu!")
 void Gnu::Tire (double force)
 {
   SetAirResistFactor(gnu_launcher.cfg().air_resist_factor);
+//  PrepareTir();
 
   // Set the initial position.
   int x,y;
@@ -91,6 +92,10 @@ void Gnu::Init()
   image = resource_manager.LoadSprite( weapons_res_profile, "gnu"); 
   SetSize (image->GetWidth(), image->GetHeight());
   SetMass (gnu_launcher.cfg().mass);
+  SetTestRect ( image->GetWidth()/2-1,
+                image->GetWidth()/2-1,
+                image->GetHeight()/2-1,
+                image->GetHeight()/2-1);
 }
 
 //-----------------------------------------------------------------------------
@@ -134,7 +139,10 @@ void Gnu::Refresh()
   image->SetRotation_deg(angle);
   image->Update();
   // Fixe le rectangle de test
-  SetTestRect (2, 2, 2, 2);
+  SetTestRect ( image->GetWidth()/2-1,
+                image->GetWidth()/2-1,
+                image->GetHeight()/2-1,
+                image->GetHeight()/2-1);
 
   if(IsGhost())
   {
