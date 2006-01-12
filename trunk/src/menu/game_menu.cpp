@@ -256,14 +256,23 @@ void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 void GameMenu::Draw(int mouse_x, int mouse_y)
 {   
   bool terrain_init = false;  
-  Team* derniere_equipe = teams_list.FindByIndex(0);
+  Team* last_team = teams_list.FindByIndex(0);
    
   map_box->Draw(mouse_x,mouse_y);
   team_box->Draw(mouse_x,mouse_y);
      
-  int nv_equipe = lbox_all_teams->MouseIsOnWitchItem (mouse_x,mouse_y);
-  if (nv_equipe != -1) {
-    derniere_equipe = teams_list.FindByIndex(nv_equipe);
+  int t = lbox_all_teams->MouseIsOnWhichItem (mouse_x,mouse_y);    
+  if (t != -1) {
+    int index = -1;
+    Team * new_team = teams_list.FindById(lbox_all_teams->ReadValue(t), index);
+    if (new_team!=NULL) last_team = new_team;
+  } else {
+    t = lbox_selected_teams->MouseIsOnWhichItem (mouse_x,mouse_y);  
+    if (t != -1) {
+      int index = -1;
+      Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);
+      if (new_team!=NULL) last_team = new_team;
+    }
   }
    
   SDL_Rect team_icon_rect = { space_for_logo->GetX(), 
@@ -271,7 +280,7 @@ void GameMenu::Draw(int mouse_x, int mouse_y)
 			      TEAM_LOGO_H,
 			      TEAM_LOGO_H};
 
-  SDL_BlitSurface (derniere_equipe->ecusson, NULL, app.sdlwindow, &team_icon_rect); 
+  SDL_BlitSurface (last_team->ecusson, NULL, app.sdlwindow, &team_icon_rect); 
   
   if (!terrain_init)
     {

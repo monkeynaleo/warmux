@@ -70,7 +70,7 @@ ListBox::~ListBox()
 
 //-----------------------------------------------------------------------------
 
-int ListBox::MouseIsOnWitchItem (uint mouse_x, uint mouse_y)
+int ListBox::MouseIsOnWhichItem (uint mouse_x, uint mouse_y)
 {
   if ((mouse_x < x+1) 
       || (mouse_y < y+1)
@@ -112,7 +112,7 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button)
 
   if(button == SDL_BUTTON_LEFT)
   {
-    int item = MouseIsOnWitchItem(mouse_x,mouse_y);
+    int item = MouseIsOnWhichItem(mouse_x,mouse_y);
     if (item == -1) return false;
     
     if (item == selected_item)
@@ -131,7 +131,7 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button)
 
 void ListBox::Draw (uint mouse_x, uint mouse_y)
 {
-  int item = MouseIsOnWitchItem(mouse_x, mouse_y);
+  int item = MouseIsOnWhichItem(mouse_x, mouse_y);
   
   boxRGBA(app.sdlwindow, x, y, x+w, y+h,
 	  255, 255, 255, 255*3/10);
@@ -268,7 +268,13 @@ const std::string& ListBox::ReadValue () const
   assert (selected_item != -1);
   return m_items.at(selected_item).value;
 }
+//-----------------------------------------------------------------------------
 
+const std::string& ListBox::ReadValue (int index) const
+{
+  assert (index != -1 && index < m_items.size());
+  return m_items.at(index).value;
+}
 //-----------------------------------------------------------------------------
   
 std::vector<list_box_item_t> * ListBox::GetItemsList()

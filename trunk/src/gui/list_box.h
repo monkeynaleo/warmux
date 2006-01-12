@@ -67,7 +67,7 @@ public:
 		const std::string &value);
   void Sort();
 
-  int MouseIsOnWitchItem (uint mouse_x, uint mouse_y);
+  int MouseIsOnWhichItem (uint mouse_x, uint mouse_y);
 
   void Select (uint index);
   int GetSelectedItem ();
@@ -75,6 +75,7 @@ public:
   void RemoveSelected();
   const std::string& ReadLabel () const;
   const std::string& ReadValue () const;
+  const std::string& ReadValue (int index) const;
 
   std::vector<list_box_item_t> * GetItemsList();
 };

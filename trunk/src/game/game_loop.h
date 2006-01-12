@@ -46,7 +46,6 @@ private:
   game_state state;
   uint pause_seconde;
   uint duration;
-  uint sleep_fps;
 
 public:
   GameLoop();
