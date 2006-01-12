@@ -24,6 +24,7 @@
 #include <math.h>
 #include "../include/app.h"
 #include "../interface/mouse.h"
+#include "../graphic/video.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../game/game.h"
@@ -128,13 +129,7 @@ bool NinjaRope::p_Shoot()
 void NinjaRope::InitSkinSprite()
 {
   //Copy skins surface
-  SDL_Surface *new_surf = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA,
-              ActiveCharacter().GetWidth(), ActiveCharacter().GetHeight(),
-              32, // force to 32 bits per pixel
-              0x000000ff,  // red mask
-              0x0000ff00,  // green mask
-              0x00ff0000,  // blue mask
-              0xff000000); // alpha mask
+  SDL_Surface *new_surf = CreateRGBASurface(ActiveCharacter().GetWidth(), ActiveCharacter().GetHeight(), SDL_SWSURFACE|SDL_SRCALPHA);
   // Disable per pixel alpha on the source surface
   // in order to properly copy the alpha chanel to the destination suface
   // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)

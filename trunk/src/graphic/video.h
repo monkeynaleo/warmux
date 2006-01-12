@@ -22,11 +22,18 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "../include/base.h"
 #include <vector>
 #include <string>
+//-----------------------------------------------------------------------------
 
 #define EstTransparent(a)	( (a) != 255 )
+
+SDL_Surface* CreateRGBSurface (int width, int height, Uint32 flags);
+SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags);
+
+//-----------------------------------------------------------------------------
 
 class Video
 {

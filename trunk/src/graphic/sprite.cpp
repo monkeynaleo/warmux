@@ -33,6 +33,7 @@
 #include "../tool/Rectangle.h"
 #include "../map/map.h"
 #include "../game/game.h"
+#include "video.h"
 
 #ifdef DBG_SPRITE
 #include <sstream>
@@ -49,31 +50,6 @@ SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed)
   rotated_flipped_surface = NULL;
 }
 
-// *****************************************************************************/
-#ifdef UNUSED_CODE
-SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv)
-{
-	int		x, y;
-	unsigned int	*srcbuff, *dstbuff; /* assuming unsigned int is 32bit */
-	SDL_Surface	*flipped = SDL_CreateRGBSurface(SDL_SWSURFACE, src->w,
-		src->h, 32, src->format->Rmask, src->format->Gmask,
-		src->format->Bmask, src->format->Amask);
-
-	SDL_LockSurface(src);
-	SDL_LockSurface(flipped);
-	srcbuff = (unsigned int*)src->pixels;
-	dstbuff = (unsigned int*)flipped->pixels;
-	for (y=0;y<src->h;y++)
-		for (x=0;x<src->w;x++)
-			dstbuff[y*src->w + x] =
-				srcbuff[(flipv?(src->h-y-1):y)*src->w +
-				(fliph?(src->w-x-1):x)];
-	SDL_UnlockSurface(flipped);
-	SDL_UnlockSurface(src);
-	
-	return flipped;
-}
-#endif
 // *****************************************************************************/
 
 
@@ -129,13 +105,8 @@ Sprite::Sprite( const Sprite& other)
 
    for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
      {
-	  SDL_Surface *new_surf = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, 
-							frame_width_pix, frame_height_pix, 
-							32, // force to 32 bits per pixel
-							0x000000ff,  // red mask
-							0x0000ff00,  // green mask
-							0x00ff0000,  // blue mask
-							0xff000000); // alpha mask
+	  SDL_Surface *new_surf = CreateRGBASurface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA);
+
 	  // Disable per pixel alpha on the source surface
           // in order to properly copy the alpha chanel to the destination suface
 	  // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
@@ -227,13 +198,7 @@ void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int 
    for( unsigned int fy = 0 ; fy < (unsigned int)nb_frames_y ; fy++)
      for( unsigned int fx = 0 ; fx < (unsigned int)nb_frames_x ; fx++)
        {
-	  SDL_Surface *new_surf = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, 
-							frame_width, frame_height, 
-							32, // force to 32 bits per pixel
-							0x000000ff,  // red mask
-							0x0000ff00,  // green mask
-							0x00ff0000,  // blue mask
-							0xff000000); // alpha mask
+	  SDL_Surface *new_surf = CreateRGBASurface(frame_width, frame_height, SDL_SWSURFACE|SDL_SRCALPHA);
 	  SDL_Rect sr = {fx*frame_width, fy*frame_width, frame_width, frame_height};
 	  SDL_Rect dr = {0,0,frame_width,frame_height};
 	  

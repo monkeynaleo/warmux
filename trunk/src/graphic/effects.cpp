@@ -24,6 +24,7 @@
 #include <SDL/SDL_image.h>
 #include <math.h>
 #include "sprite.h"
+#include "video.h"
 #include "../game/time.h"
 
 // From SDL's wiki
@@ -98,9 +99,7 @@ Sprite* WaveSurface(SDL_Surface* a,unsigned int nbr_frames, unsigned int duratio
    sprite->SetSize(a->w + 2 * (unsigned int) wave_amp, a->h);
 	for(unsigned int f=0;f<nbr_frames;f++)
 	{
-		SDL_Surface* b = SDL_CreateRGBSurface(SDL_SWSURFACE|SDL_SRCALPHA,
-															a->w+2*(int)wave_amp,a->h,32,
-															0x000000FF,0x0000FF00,0x00FF0000,0xFF000000);
+		SDL_Surface* b = CreateRGBASurface(a->w+2*(int)wave_amp, a->h, SDL_SWSURFACE|SDL_SRCALPHA);
 		SDL_FillRect(b,NULL,0x00000000);
 		SDL_SetAlpha(b,SDL_SRCALPHA,0);
 		SDL_LockSurface(a);

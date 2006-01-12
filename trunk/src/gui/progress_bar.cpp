@@ -21,14 +21,11 @@
 
 #include "progress_bar.h"
 //-----------------------------------------------------------------------------
-#include "../tool/math_tools.h"
-#ifdef CL
-# include <ClanLib/display.h>
-#else
 #include <SDL.h>
+#include "../tool/math_tools.h"
 #include "../include/app.h"
 #include "../map/map.h"
-#endif
+#include "../graphic/video.h"
 //-----------------------------------------------------------------------------
 
 #ifdef CL
@@ -100,8 +97,7 @@ void BarreProg::InitPos (uint px, uint py, uint plarg, uint phaut)
     SDL_FreeSurface( image);
   }
    
-  image = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, larg, haut, 32,
-				0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+  image = CreateRGBASurface(larg, haut, SDL_SWSURFACE|SDL_SRCALPHA);
 }
 
 //-----------------------------------------------------------------------------

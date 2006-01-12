@@ -22,12 +22,12 @@
 #include "water.h"
 //-----------------------------------------------------------------------------
 #include <SDL.h>
+#include "../graphic/video.h"
 #include "../game/time.h"
 #include "map.h"
 #include "maps_list.h"
 #include "camera.h"
 #include "../interface/interface.h"
-
 #include "../tool/resource_manager.h"
 #include "../include/app.h"
 using namespace Wormux;
@@ -54,13 +54,8 @@ void Water::Init()
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
    surface = resource_manager.LoadImage(res, "gfx/water");
    SDL_SetAlpha(surface, 0, 0);
-   pattern = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, 180, surface->h + 40,
-                                     32, // force to 32 bits per pixel
-                                     0x000000ff,  // red mask
-                                     0x0000ff00,  // green mask
-                                     0x00ff0000,  // blue mask
-                                     0xff000000); // alpha mask
-  shift1 = 0;
+   pattern = CreateRGBASurface(180, surface->h + 40, SDL_SWSURFACE|SDL_SRCALPHA);
+   shift1 = 0;
 }
 
 //-----------------------------------------------------------------------------
