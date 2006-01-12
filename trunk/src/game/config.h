@@ -86,6 +86,7 @@ public:
 protected:
   std::string m_game_mode;
   bool ChargeXml (xmlpp::Element *xml);
+  void SetKeyboardConfig();
   bool SauveXml();
   bool m_xml_charge;
   std::string m_nomfich;
