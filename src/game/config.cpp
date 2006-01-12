@@ -182,30 +182,13 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 
   //=== Mode de jeu ===
   LitDocXml::LitString (xml, "game_mode", m_game_mode);
+  return true;
+}
 
-#ifdef CL
-	clavier.SetKeyAction(CL_KEY_LEFT,		ACTION_MOVE_LEFT);		
-	clavier.SetKeyAction(CL_KEY_RIGHT,	ACTION_MOVE_RIGHT);
-	clavier.SetKeyAction(CL_KEY_UP,			ACTION_UP);
-	clavier.SetKeyAction(CL_KEY_DOWN,	ACTION_DOWN);
-	clavier.SetKeyAction(CL_KEY_ENTER,	ACTION_JUMP);
-	clavier.SetKeyAction(CL_KEY_BACKSPACE, ACTION_SUPER_JUMP);
-	clavier.SetKeyAction(CL_KEY_SPACE, ACTION_SHOOT);
-	clavier.SetKeyAction(CL_KEY_TAB, ACTION_CHANGE_CHARACTER);
-	clavier.SetKeyAction(CL_KEY_ESCAPE, ACTION_QUIT);
-	clavier.SetKeyAction(CL_KEY_P, ACTION_PAUSE);
-	clavier.SetKeyAction(CL_KEY_F10, ACTION_FULLSCREEN);
-	clavier.SetKeyAction(CL_KEY_F9, ACTION_TOGGLE_INTERFACE);
-	clavier.SetKeyAction(CL_KEY_F1, ACTION_WEAPONS1);
-	clavier.SetKeyAction(CL_KEY_F2, ACTION_WEAPONS2);
-	clavier.SetKeyAction(CL_KEY_F3, ACTION_WEAPONS3);
-	clavier.SetKeyAction(CL_KEY_F4, ACTION_WEAPONS4);
-	clavier.SetKeyAction(CL_KEY_F5, ACTION_WEAPONS5);
-	clavier.SetKeyAction(CL_KEY_F6, ACTION_WEAPONS6);
-	clavier.SetKeyAction(CL_KEY_F7, ACTION_WEAPONS7);
-	clavier.SetKeyAction(CL_KEY_F8, ACTION_WEAPONS8);
-	clavier.SetKeyAction(CL_KEY_C, ACTION_CENTER);
-#else
+//-----------------------------------------------------------------------------
+
+void Config::SetKeyboardConfig()
+{
 	clavier.SetKeyAction(SDLK_LEFT,		ACTION_MOVE_LEFT);		
 	clavier.SetKeyAction(SDLK_RIGHT,	ACTION_MOVE_RIGHT);
 	clavier.SetKeyAction(SDLK_UP,			ACTION_UP);
@@ -227,9 +210,6 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 	clavier.SetKeyAction(SDLK_F7, ACTION_WEAPONS7);
 	clavier.SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
 	clavier.SetKeyAction(SDLK_c, ACTION_CENTER);
-
-#endif
- 	return true;
 }
 
 //-----------------------------------------------------------------------------
@@ -242,6 +222,7 @@ void Config::Applique()
 
   dir = TraduitRepertoire(data_dir);
   resource_manager.AddDataPath(dir);
+  SetKeyboardConfig();
 
   // Charge le mode jeu
   weapons_list.Init();
@@ -256,7 +237,8 @@ void Config::Applique()
   // Charge les équipes 
   InitSkins();
   teams_list.LoadList();
-  if (m_xml_charge) teams_list.InitList (tmp.teams);
+  if (m_xml_charge)
+    teams_list.InitList (tmp.teams);
 
    
   // Charge les terrains

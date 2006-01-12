@@ -106,7 +106,6 @@ wormux_SOURCES = \
 	weapon/ninja_rope.cpp weapon/ninja_rope.h \
 	weapon/parachute.cpp weapon/parachute.h \
 	weapon/supertux.cpp weapon/supertux.h
-####	network/network.cpp network/network.h \
 
 #AM_CXXFLAGS = -pg @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ @PARAGUI_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
 #LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS) $(PARAGUI_LIBS)
