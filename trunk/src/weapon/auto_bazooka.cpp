@@ -36,10 +36,9 @@
 #include "../object/objects_list.h"
 #include "../game/game_mode.h"
 #include "../map/wind.h"
-#ifndef CL
 #include "../include/app.h"
 #include "../map/camera.h"
-#endif
+
 
 #ifdef __MINGW32__
 #undef LoadImage
@@ -97,27 +96,17 @@ void RoquetteTeteCherche::Tire (double force,
 
 void RoquetteTeteCherche::Init()
 {
-#ifdef CL
-  image = CL_Sprite("roquette", &graphisme.weapons);
-  SetSize (image.get_width(), image.get_height());
-#else
   image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight());
-#endif
 
   SetMass (auto_bazooka.cfg().mass);
   SetWindFactor(0.1);
   SetAirResistFactor(auto_bazooka.cfg().air_resist_factor);
 
   // Fixe le rectangle de test
-#ifdef CL
-  int dx = image.get_width()/2-1;
-  int dy = image.get_height()/2-1;
-#else
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
-#endif
   SetTestRect (dx, dx, dy, dy);
 }
 
@@ -138,11 +127,7 @@ void RoquetteTeteCherche::Refresh()
       if(angle_local > M_PI) angle_local = - M_PI;
       angle = angle_local;
   
-#ifdef CL    
-      image.set_angle (angle *180/M_PI);
-#else
       image->SetRotation_deg(angle *180/M_PI);
-#endif
       
       //2 sec après avoir été tirée, la roquette se dirige vers la cible:
       tmp = Wormux::global_time.Read() - temps_debut_tir;
@@ -152,11 +137,7 @@ void RoquetteTeteCherche::Refresh()
 
 	  SetSpeed(0,0);
 	  angle = CalculeAngle (GetPos(), m_cible);
-#ifdef CL
-	  image.set_angle (angle *180/M_PI);
-#else
 	  image->SetRotation_deg(angle *180/M_PI);
-#endif
 	  SetExternForce(200, angle);
 	}
     }
@@ -224,11 +205,7 @@ bool AutomaticBazooka::p_Shoot ()
   roquette.Tire (m_strength, x,y, cible.pos.x,cible.pos.y);
   lst_objets.AjouteObjet (&roquette,true);
 
-#ifdef CL
-  jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
-#else
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-#endif
 
   return true;
 }
@@ -238,11 +215,7 @@ bool AutomaticBazooka::p_Shoot ()
 // Le bazooka explose car il a été poussé à bout !
 void AutomaticBazooka::ExplosionDirecte()
 {
-#ifdef CL
-  CL_Point pos = ActiveCharacter().GetCenter();
-#else
   Point2i pos = ActiveCharacter().GetCenter();
-#endif
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -258,11 +231,7 @@ void AutomaticBazooka::Explosion()
   if (roquette.IsGhost()) return;
 
   // Applique les degats et le souffle aux vers
-#ifdef CL
-  CL_Point pos = roquette.GetCenter();
-#else
   Point2i pos = roquette.GetCenter();
-#endif
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -270,14 +239,7 @@ void AutomaticBazooka::Explosion()
 
 void AutomaticBazooka::Refresh()
 {
-  if(cible.choisie) {
-#ifdef CL
-    cible.image.draw (cible.pos.x,cible.pos.y);
-#else
-    SDL_Rect dr = { cible.pos.x-cible.image->w/2-camera.GetX(),cible.pos.y-cible.image->h/2-camera.GetY(),cible.image->w,cible.image->h};
-    SDL_BlitSurface(cible.image, NULL, app.sdlwindow, &dr);
-#endif
-  }
+  DrawTarget();
 
   if (m_is_active)
   {
@@ -290,13 +252,8 @@ void AutomaticBazooka::Refresh()
 void AutomaticBazooka::p_Init()
 {
   roquette.Init();
-#ifdef CL
-  impact = CL_Surface("bazooka_impact", &graphisme.weapons);
-  cible.image = CL_Surface("baz_cible", &graphisme.weapons);
-#else
   impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -310,6 +267,14 @@ void AutomaticBazooka::p_Select()
 
 void AutomaticBazooka::ChooseTarget()
 {
+  if (cible.choisie) {
+    // need to clear the old target
+    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image->w/2,
+				   cible.pos.y-cible.image->h/2,
+				   cible.image->w,
+				   cible.image->h));
+  }
+
   cible.pos = mouse.GetPosMonde();
   DrawTarget();
   cible.choisie = true;
@@ -320,13 +285,9 @@ void AutomaticBazooka::ChooseTarget()
 void AutomaticBazooka::DrawTarget()
 {
   if(!cible.choisie) { return; }
-#ifdef CL
-  cible.image.draw (cible.pos.x - (cible.image.get_width() / 2),
-  			cible.pos.y - (cible.image.get_height() / 2));
-#else
+
   SDL_Rect dr = { cible.pos.x-cible.image->w/2-camera.GetX(),cible.pos.y-cible.image->h/2-camera.GetY(),cible.image->w,cible.image->h};
   SDL_BlitSurface(cible.image, NULL, app.sdlwindow, &dr);
-#endif
 }
 
 //-----------------------------------------------------------------------------
