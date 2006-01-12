@@ -149,20 +149,51 @@ bool TileItem::IsEmpty()
 
 // === Implemenation of TileItem_Software_ALpha ==============================
 
+SDL_Surface* CreateRGBSurface (int width, int height, Uint32 flags=SDL_SWSURFACE|SDL_SRCALPHA)
+{
+  SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, 32,
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN          
+          0xff000000,  // red mask
+          0x00ff0000,  // green mask
+          0x0000ff00,  // blue mask
+#else
+          0x000000ff,  // red mask
+          0x0000ff00,  // green mask
+          0x00ff0000,  // blue mask
+#endif  
+          0 // don't use alpha
+   );          
+  if ( surface == NULL )
+      Erreur(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
+  return surface;
+}    
+
+SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags)
+{
+  SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, 32,
+#if SDL_BYTEORDER == SDL_LIL_ENDIAN          
+          0xff000000,  // red mask
+          0x00ff0000,  // green mask
+          0x0000ff00,  // blue mask
+          0x000000ff // alpha mask
+#else
+          0x000000ff,  // red mask
+          0x0000ff00,  // green mask
+          0x00ff0000,  // blue mask
+          0xff000000 // alpha mask
+#endif  
+   );          
+  if ( surface == NULL )
+      Erreur(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
+  return surface;
+}    
+
 TileItem_AlphaSoftware::TileItem_AlphaSoftware (unsigned int width, unsigned int height)
 {
    m_width = width;
    m_height = height;
 
-   SDL_Surface *_m_surface = SDL_CreateRGBSurface( SDL_SWSURFACE|SDL_SRCALPHA, m_width, m_height, 
-						   32, // force to 32 bits per pixel
-						   0xff000000,  // red mask
-						   0x00ff0000,  // green mask
-						   0x0000ff00,  // blue mask
-						   0x000000ff); // alpha mask
-   
-   if ( _m_surface == NULL )
-	Erreur(std::string("TileItem_AlphaSofware: can't create surface: ") + SDL_GetError());	
+   SDL_Surface *_m_surface = CreateRGBASurface(m_width, m_height, SDL_SWSURFACE|SDL_SRCALPHA);
 	
    m_surface = SDL_DisplayFormatAlpha( _m_surface);
 
@@ -259,12 +290,7 @@ TileItem_AlphaHardware::TileItem_AlphaHardware (unsigned int width, unsigned int
    m_width = width;
    m_height = height;
 
-   m_surface = SDL_CreateRGBSurface( SDL_HWSURFACE|SDL_SRCALPHA, m_width, m_height, 
-				     32, // force to 32 bits per pixel
-				     0x000000ff,  // red mask
-				     0x0000ff00,  // green mask
-				     0x00ff0000,  // blue mask
-				     0xff000000); // alpha mask
+   m_surface = CreateRGBASurface(m_width, m_height, SDL_HWSURFACE|SDL_SRCALPHA);
 
    m_buffer = new unsigned char[m_height*m_width];
 }
@@ -274,13 +300,7 @@ TileItem_AlphaHardware::TileItem_AlphaHardware (const TileItem_AlphaHardware &co
    m_width = copy.m_width;
    m_height = copy.m_height;
 
-   m_surface = SDL_CreateRGBSurface( SDL_HWSURFACE|SDL_SRCALPHA, m_width, m_height, 
-				     32, // force to 32 bits per pixel
-				     0x000000ff,  // red mask
-				     0x0000ff00,  // green mask
-				     0x00ff0000,  // blue mask
-				     0xff000000); // alpha mask
-
+   m_surface = CreateRGBASurface(m_width, m_height, SDL_HWSURFACE|SDL_SRCALPHA);
    SDL_Rect dest_rect = {0,0, copy.m_surface->w, copy.m_surface->h};
    SDL_BlitSurface( copy.m_surface, NULL, m_surface, &dest_rect);
 
@@ -346,13 +366,7 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (unsigned int width, unsign
    m_width = width;
    m_height = height;
 
-   m_surface = SDL_CreateRGBSurface( SDL_SWSURFACE, m_width, m_height, 
-				     32, // force to 32 bits per pixel
-				     0x000000ff,  // red mask
-				     0x0000ff00,  // green mask
-				     0x00ff0000,  // blue mask
-				     0xff000000); // alpha mask
-
+   m_surface = CreateRGBASurface(m_width, m_height, SDL_SWSURFACE);
    SDL_SetAlpha (m_surface,0,0);
    SDL_SetColorKey (m_surface, SDL_SRCCOLORKEY/*|SDL_RLEACCEL*/, SDL_MapRGBA (m_surface->format,0,0,0,0));
    m_buffer = new unsigned char[m_height*m_width];
@@ -363,13 +377,7 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (const TileItem_ColorkeySof
    m_width = copy.m_width;
    m_height = copy.m_height;
 
-   m_surface = SDL_CreateRGBSurface( SDL_SWSURFACE, m_width, m_height, 
-				     32, // force to 32 bits per pixel
-				     0x000000ff,  // red mask
-				     0x0000ff00,  // green mask
-				     0x00ff0000,  // blue mask
-				     0x00000000); // alpha mask
-
+   m_surface = CreateRGBSurface(m_width, m_height, SDL_SWSURFACE);
    SDL_Rect dest_rect = {0,0, copy.m_surface->w, copy.m_surface->h};
    SDL_BlitSurface( copy.m_surface, NULL, m_surface, &dest_rect);
    SDL_SetAlpha (m_surface,0,0);
