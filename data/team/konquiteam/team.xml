@@ -3,7 +3,7 @@
   <equipe>
     <nom>Konqi Team</nom>
     <ver nom="Konqui" avatar="konqiteam" />
-	 <ver nom="Quest" avatar="konqiteam" />
+    <ver nom="Quest" avatar="konqiteam" />
     <ver nom="Sheron" avatar="konqiteam" />
     <ver nom="Double" avatar="konqiteam" />
     <ver nom="32/64" avatar="konqiteam" />
@@ -13,9 +13,10 @@
     <ver nom="HMS" avatar="konqiteam" />
     <ver nom="Timaeus" avatar="konqiteam" />
     <ver nom="Idris" avatar="konqiteam" />
-	 <ver nom="Man" avatar="konqiteam" />
-	 <ver nom="Tales" avatar="konqiteam" />
-	 <ver nom="Swamp" avatar="konqiteam" />    
+    <ver nom="Man" avatar="konqiteam" />
+    <ver nom="Tales" avatar="konqiteam" />
+    <ver nom="Swamp" avatar="konqiteam" />   
+    <sound_profile>flying</sound_profile> 
   </equipe>
   <surface name="flag" file="flag.png" />
 </resources>
