@@ -33,15 +33,15 @@ AUTOCONF=autoconf
 #-----------------------------------------------------------------------------
 
 echo "Run aclocal"
-$ACLOCAL -I m4
+$ACLOCAL -I m4 || exit 1
 
-autoheader
+autoheader || exit 1
 
 echo "Run automake"
-$AUTOMAKE --add-missing --copy
+$AUTOMAKE --add-missing --copy || exit 1
 
 echo "Run autoconf"
-$AUTOCONF
+$AUTOCONF || exit 1
 
 echo
 echo "Now run ./configure"

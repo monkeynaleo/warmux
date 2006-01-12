@@ -146,7 +146,7 @@ msgstr "Panzerfaust"
 msgid "C++ exception caught:"
 msgstr "C++ Ausnahmefehler abgefangen:"
 
-#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
+#: src/team/teams_list.cpp:430 src/team/teams_list.cpp:455
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
@@ -193,7 +193,7 @@ msgstr "Dauer einer Runde"
 msgid "Duration of the end of a turn:"
 msgstr "Dauer des Endes einer Runde"
 
-#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:215
+#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:148
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -221,7 +221,7 @@ msgstr "Fehler beim Laden des Skins (%s):"
 msgid "Error in %s:%lu"
 msgstr "Fehler in %s:%lu"
 
-#: src/team/team.cpp:77
+#: src/team/team.cpp:79
 #, fuzzy, c-format
 msgid "Error loading team %s:"
 msgstr "Fehler beim Laden von Team %s:"
@@ -240,7 +240,7 @@ msgstr ""
 "Fehler :\n"
 "%s"
 
-#: src/team/team.cpp:156 src/team/team.cpp:221
+#: src/team/team.cpp:158 src/team/team.cpp:223
 #, fuzzy, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Fehler: kann das Skin \"%s\" für Team \"%s\" nicht finden."
@@ -342,7 +342,7 @@ msgstr "Name"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:622
+#: src/weapon/weapon.cpp:629
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
@@ -384,7 +384,7 @@ msgstr "Spiel gestartet"
 msgid "Select the teams:"
 msgstr ""
 
-#: src/menu/game_menu.cpp:104
+#: src/menu/game_menu.cpp:105
 msgid "Select the world:"
 msgstr ""
 

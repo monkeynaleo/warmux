@@ -147,7 +147,7 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Excepção C++ interceptada :"
 
-#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
+#: src/team/teams_list.cpp:430 src/team/teams_list.cpp:455
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Equipa %s não encontrada!"
@@ -190,7 +190,7 @@ msgstr "Duração d'uma volta:"
 msgid "Duration of the end of a turn:"
 msgstr "Duração do fim d'uma volta:"
 
-#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:215
+#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:148
 msgid "Dynamite"
 msgstr "Dinamite"
 
@@ -216,7 +216,7 @@ msgstr "Erro no carregamento do skin%s"
 msgid "Error in %s:%lu"
 msgstr "Erro em %s.%lu"
 
-#: src/team/team.cpp:77
+#: src/team/team.cpp:79
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Erro no carregamento da equipa %s"
@@ -235,7 +235,7 @@ msgstr ""
 "Erro:\n"
 "%s"
 
-#: src/team/team.cpp:156 src/team/team.cpp:221
+#: src/team/team.cpp:158 src/team/team.cpp:223
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Erro: não pode incontrar o skin \"%s\" para a equipe \"%s\"."
@@ -326,7 +326,7 @@ msgstr "Nome:"
 msgid "Network Game"
 msgstr "Jogo de rede"
 
-#: src/weapon/weapon.cpp:622
+#: src/weapon/weapon.cpp:629
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenhum elemento <%s> encontrado no ficheiro xml!"
@@ -367,7 +367,7 @@ msgstr "Lançamento do jogo"
 msgid "Select the teams:"
 msgstr "Seleto as equipas:"
 
-#: src/menu/game_menu.cpp:104
+#: src/menu/game_menu.cpp:105
 msgid "Select the world:"
 msgstr "Seleto o mapa:"
 
@@ -449,7 +449,9 @@ msgstr "A espera de equipas"
 
 #: src/map/maps_list.cpp:150
 msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
-msgstr "Aviso! A massa das partículas dos ventos é demasiado baixa!  Ajuste pelo defeito a 0,3"
+msgstr ""
+"Aviso! A massa das partículas dos ventos é demasiado baixa!  Ajuste pelo "
+"defeito a 0,3"
 
 #: src/interface/interface.cpp:122
 msgid "Weapon:"
@@ -483,7 +485,8 @@ msgstr "Você necessita ao menos um mapa válido!"
 
 #: src/game/game_loop.cpp:278
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr "Tem necessidade pelo menos de duas equipas, corrige isto no 'menu Opções' !"
+msgstr ""
+"Tem necessidade pelo menos de duas equipas, corrige isto no 'menu Opções' !"
 
 #: src/team/teams_list.cpp:158
 msgid "You need at least two valid teams !"
@@ -492,4 +495,3 @@ msgstr "Você necessita ao menos de dois equipas válidas!"
 #: src/weapon/gun.cpp:92
 msgid "Your shot has missed!"
 msgstr "Seu tiro faltou!"
-

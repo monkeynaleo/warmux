@@ -145,7 +145,7 @@ msgstr "Rakétavetõ"
 msgid "C++ exception caught:"
 msgstr "Elfogtam egy C++ kivételt:"
 
-#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
+#: src/team/teams_list.cpp:430 src/team/teams_list.cpp:455
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
@@ -187,7 +187,7 @@ msgstr "Egy forduló ideje:"
 msgid "Duration of the end of a turn:"
 msgstr "Egy forduló ideje:"
 
-#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:215
+#: src/object/bonus_box.cpp:286 src/weapon/dynamite.cpp:148
 msgid "Dynamite"
 msgstr "Dinamit"
 
@@ -213,7 +213,7 @@ msgstr "Hiba lépett fel a smink (%s) betöltése közben:"
 msgid "Error in %s:%lu"
 msgstr "Hiba lépett fel (%s): %lu"
 
-#: src/team/team.cpp:77
+#: src/team/team.cpp:79
 #, fuzzy, c-format
 msgid "Error loading team %s:"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
@@ -232,7 +232,7 @@ msgstr ""
 "Hiba:\n"
 "%s"
 
-#: src/team/team.cpp:156 src/team/team.cpp:221
+#: src/team/team.cpp:158 src/team/team.cpp:223
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem található %s csapatának %s sminkje."
@@ -330,7 +330,7 @@ msgstr "Név"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:622
+#: src/weapon/weapon.cpp:629
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
@@ -371,7 +371,7 @@ msgstr "Játék futtatása"
 msgid "Select the teams:"
 msgstr ""
 
-#: src/menu/game_menu.cpp:104
+#: src/menu/game_menu.cpp:105
 msgid "Select the world:"
 msgstr ""
 

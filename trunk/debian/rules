@@ -73,7 +73,7 @@ install-indep:
 
 	# Add here commands to install the indep part of the package into
 	# debian/<package>-data.
-	dh_install -pwormux-data wormux-*.xpm /usr/share/pixmaps
+	dh_install -pwormux-data data/wormux-*.xpm /usr/share/pixmaps
 	dh_install -pwormux-data --exclude=Makefile --exclude=Makefile.am --exclude=Makefile.in data/* /usr/share/games/wormux
 
 	dh_install -i
