@@ -61,11 +61,7 @@ bool Teleportation::p_Shoot ()
 
   game_loop.interaction_enabled = false;
 
-#ifdef CL
-  jukebox.Play("weapon/teleport_start");
-#else 
   jukebox.Play("share", "weapon/teleport_start");
-#endif
   
   // Initialise les variables
   temps = Wormux::global_time.Read();
@@ -138,15 +134,8 @@ void Teleportation::Refresh()
 void Teleportation::Draw()
 {
   if (m_is_active) {
-#ifdef CL
-    ActiveCharacter().image.set_scale (m_zoom*m_direction, m_zoom);
-    ActiveCharacter().image.draw (m_x, m_y);
-#else
-//    ActiveCharacter().image->Scale (m_zoom*m_direction, m_zoom);
-//    ActiveCharacter().image->Draw (m_x, m_y);
-	 skin->Update();
+    skin->Update();
     skin->Draw(m_x, m_y);
-#endif
   } else {
     Weapon::Draw();
   }

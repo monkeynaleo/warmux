@@ -330,6 +330,10 @@ bool Weapon::Shoot(double strength, int angle)
   ActiveTeam().crosshair.ChangeAngleVal(angle);
   m_strength = strength;
 
+  if (!EnoughAmmo()) return false;
+
+  if (!p_Shoot()) return false;
+
   // Is this the first shoot for this ammo use ?
   if (ActiveTeam().ReadNbUnits() == m_initial_nb_unit_per_ammo)
     // Yes, so use one ammo. If no ammo left, return.
@@ -338,8 +342,6 @@ bool Weapon::Shoot(double strength, int angle)
   if (use_unit_on_first_shoot)
     if (!UseAmmoUnit())
       return false ;
-
-  if (!p_Shoot()) return false;
 
   m_is_active = true;
 
