@@ -32,10 +32,8 @@
 #include "../game/game_loop.h"
 #include <sstream>
 #include "../tool/i18n.h"
-#ifndef CL
 #include "../graphic/sprite.h"
 #include "../map/camera.h"
-#endif
 //----------------------------------------------------------------------------
 namespace Wormux 
 {
@@ -61,11 +59,7 @@ Obus::Obus() : WeaponProjectile("Obus")
 void Obus::Draw()
 {
   if (!is_active) return;  
-#ifdef CL
-  image.draw (GetX(), GetY());
-#else
   image->Draw (GetX(), GetY());
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -102,11 +96,8 @@ void Obus::SignalCollision()
 
   if (IsGhost()) return;
 
-#ifdef CL
-  CL_Point pos = GetCenter();
-#else
   Point2i pos = GetCenter();
-#endif 
+
   AppliqueExplosion (pos, pos,
 		     impact,
 		     air_attack.cfg(),
@@ -141,22 +132,14 @@ void Avion::Tire()
   cible_x = mouse.GetXmonde();
   SetY (0);
 
-#ifdef CL
-  image.set_scale(dir, 1);
-#else
   image->Scale(dir, 1);
-#endif
    
   Ready();
 
   if (dir == 1)
     {
       InitVector (speed_vector, air_attack.cfg().speed, 0);
-#ifdef CL
-      SetX (-image.get_width()+1);
-#else
       SetX (-image->GetWidth()+1);
-#endif
     }
   else
     {
@@ -181,27 +164,19 @@ void Avion::Refresh()
 
 void Avion::Init()
 {
-#ifdef CL
-  image = CL_Surface("air_attack_plane", &graphisme.weapons);
-  SetY (0);
-  SetSize (image.get_width(), image.get_height());
-#else
   image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
+  //SetY (0); // use in clanlib code...
   SetSize (image->GetWidth(), image->GetHeight());   
-#endif 
   SetMass (3000);
   obus_dx = 100;
   obus_dy = 50;
 }
 
 int Avion::LitCibleX() const { return cible_x; }
+
 int Avion::GetDirection() const { 
   float x,y;
-#ifdef CL
-  image.get_scale(x,y);
-#else
   image->GetScaleFactors(x,y);
-#endif 
   return (x<0)?-1:1;
 }
 
@@ -249,11 +224,7 @@ bool AirAttack::p_Shoot ()
 void Avion::Draw()
 {
   if (IsGhost()) return;
-#ifdef CL
-  image.draw (GetX(), GetY());
-#else
   image->Draw( GetX()-camera.GetX(), GetY()-camera.GetY());
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -263,11 +234,7 @@ bool Avion::PeutLacherObus() const
   if (GetDirection() == 1) 
     return (cible_x <= GetX()+obus_dx);
   else
-#ifdef CL
-    return (GetX()+(int)image.get_width()-obus_dx <= cible_x);
-#else
     return (GetX()+(int)image->GetWidth()-obus_dx <= cible_x);
-#endif
 }
 
 //-----------------------------------------------------------------------------
