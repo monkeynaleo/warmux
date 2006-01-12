@@ -265,6 +265,20 @@ void AutomaticBazooka::p_Select()
 
 //-----------------------------------------------------------------------------
 
+void AutomaticBazooka::p_Deselect()
+{
+  if (cible.choisie) {
+    // need to clear the old target
+    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image->w/2,
+				   cible.pos.y-cible.image->h/2,
+				   cible.image->w,
+				   cible.image->h));
+  }
+}
+
+
+//-----------------------------------------------------------------------------
+
 void AutomaticBazooka::ChooseTarget()
 {
   if (cible.choisie) {
