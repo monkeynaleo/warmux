@@ -24,10 +24,12 @@
 #include "tile.h"
 #include <iostream>
 #include <SDL.h>
+#include <SDL_endian.h>
 #include "../tool/Point.h"
 #include "../include/app.h"
 #include "../map/camera.h"
 #include "../game/config.h"
+#include "../tool/error.h"
 
 using namespace Wormux;
 
@@ -160,34 +162,37 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware (unsigned int width, unsigned int
 						   0x000000ff); // alpha mask
    
    if ( _m_surface == NULL )
-     {
-	throw std::string("TileItem_AlphaSofware: can't create surface : ") + SDL_GetError();	
-     }
-   else
-     {
+	Erreur(std::string("TileItem_AlphaSofware: can't create surface: ") + SDL_GetError());	
 	
-	m_surface = SDL_DisplayFormatAlpha( _m_surface);
+   m_surface = SDL_DisplayFormatAlpha( _m_surface);
 
-	SDL_FreeSurface( _m_surface);
-	  
-	if ( m_surface == NULL)
-	  {
-	     throw std::string("TileItem_AlphaSofware: can't create surface : ") + SDL_GetError();
-	  }
-	
-	if ( m_surface->format->BytesPerPixel == 4 && m_surface->format->Amask == 0x000000ff)   
-	  _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_RGBA;
-	else if ( m_surface->format->BytesPerPixel == 4 && m_surface->format->Amask == 0xff000000)
-	  _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_ARGB;
-	else
-	  _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
-	
-     }
+   SDL_FreeSurface( _m_surface);
+
+   if ( m_surface == NULL)
+   {
+       Erreur(std::string("TileItem_AlphaSofware: can't create surface: ") + SDL_GetError());
+   }
+
+   _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
+   if ( m_surface->format->BytesPerPixel == 4)
+   {
+       if (m_surface->format->Amask == 0x000000ff) {
+           if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_RGBA;
+           else
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_ARGB;
+       } else if (m_surface->format->Amask == 0xff000000) {
+           if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_ARGB;
+           else
+               _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_RGBA;
+       }
+   }
 }
 
 TileItem_AlphaSoftware::TileItem_AlphaSoftware (const TileItem_AlphaSoftware &copy)
 {
-   throw std::string( "TileItem_Alphasoftware: copy constructor not implemented");
+   Erreur( "TileItem_Alphasoftware: copy constructor not implemented");
 }
 
 TileItem_AlphaSoftware::~TileItem_AlphaSoftware ()
