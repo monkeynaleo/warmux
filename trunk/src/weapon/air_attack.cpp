@@ -72,21 +72,12 @@ void Obus::Draw()
 
 void Obus::Init()
 {
-#ifdef CL
-  impact = CL_Surface("obus_impact", &graphisme.weapons);
-  image = CL_Sprite("obus", &graphisme.weapons);
-  image.set_scale(1,1);
-  SetMass (air_attack.cfg().mass);
-  SetWindFactor (0.1);
-  SetSize (image.get_width(), image.get_height());
-#else
   impact = resource_manager.LoadImage(weapons_res_profile,"obus_impact");
   image = resource_manager.LoadSprite(weapons_res_profile,"obus");
   image->Scale(1,1);
   SetMass (air_attack.cfg().mass);
   SetWindFactor (0.1);
   SetSize (image->GetWidth(), image->GetHeight());
-#endif
 }
 
 //-----------------------------------------------------------------------------

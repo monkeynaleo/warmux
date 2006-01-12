@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-01-12 04:50+0100\n"
 "PO-Revision-Date: 2004-06-25 16:01+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -19,7 +20,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr ""
 
-#: src/game/game_loop.cpp:775
+#: src/game/game_loop.cpp:765
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
@@ -34,7 +35,7 @@ msgstr ""
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:749
+#: src/game/game_loop.cpp:739
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s pleeft zelfmoord !"
@@ -44,12 +45,12 @@ msgstr "%s pleeft zelfmoord !"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:742
+#: src/game/game_loop.cpp:732
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game_loop.cpp:753
+#: src/game/game_loop.cpp:743
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
@@ -64,12 +65,12 @@ msgstr "De speler '%s' verloor %u punten energie :-("
 msgid "%s has won %u points of energy!"
 msgstr "De speler '%s' heeft %u punten energie gekregen !"
 
-#: src/game/game_loop.cpp:766
+#: src/game/game_loop.cpp:756
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van zijn team : %s !"
 
-#: src/game/game_loop.cpp:759
+#: src/game/game_loop.cpp:749
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s is dood door zijn onhandigheid."
@@ -116,7 +117,7 @@ msgstr "(onbegrensd)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:223
+#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:214
 msgid "Air attack"
 msgstr "Luchtaanval"
 
@@ -125,7 +126,7 @@ msgstr "Luchtaanval"
 msgid "Authors"
 msgstr "Auteurs :"
 
-#: src/main.cpp:70
+#: src/main.cpp:69
 #, fuzzy
 msgid "Authors:"
 msgstr "Auteurs :"
@@ -147,7 +148,7 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "C++ uitzondering gevangen :"
 
-#: src/team/teams_list.cpp:430 src/team/teams_list.cpp:455
+#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
@@ -253,7 +254,7 @@ msgstr ""
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr ""
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:210
 msgid "Find a random position for worms"
 msgstr "Zoek een willekeurige positie voor de wormen"
 
@@ -283,7 +284,7 @@ msgstr "Geweer"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 
-#: src/menu/main_menu.cpp:125
+#: src/menu/main_menu.cpp:123
 #, fuzzy
 msgid "Info"
 msgstr "Infos"
@@ -293,21 +294,21 @@ msgstr "Infos"
 msgid "Initial energy:"
 msgstr "Initiele energie"
 
-#: src/game/game_loop.cpp:263
+#: src/game/game_loop.cpp:262
 msgid "Initialisation"
 msgstr "Initialisatie"
 
-#: src/game/game_loop.cpp:153 src/game/game_loop.cpp:217
+#: src/game/game_loop.cpp:152 src/game/game_loop.cpp:216
 #, fuzzy
 msgid "Initialise data"
 msgstr "Initialisatie"
 
-#: src/game/game_loop.cpp:105
+#: src/game/game_loop.cpp:104
 #, fuzzy
 msgid "Initialise teams"
 msgstr "Initialisatie"
 
-#: src/game/game_loop.cpp:101
+#: src/game/game_loop.cpp:100
 msgid "Load map"
 msgstr ""
 
@@ -341,7 +342,7 @@ msgstr "Muziek"
 msgid "Name:"
 msgstr ""
 
-#: src/menu/main_menu.cpp:113
+#: src/menu/main_menu.cpp:111
 msgid "Network Game"
 msgstr ""
 
@@ -359,7 +360,7 @@ msgstr "Aantal spelers per team"
 msgid "Ok"
 msgstr ""
 
-#: src/menu/main_menu.cpp:119
+#: src/menu/main_menu.cpp:117
 msgid "Options"
 msgstr "Opties"
 
@@ -367,7 +368,7 @@ msgstr "Opties"
 msgid "Pause"
 msgstr ""
 
-#: src/menu/main_menu.cpp:107
+#: src/menu/main_menu.cpp:105
 msgid "Play"
 msgstr "Spelen"
 
@@ -375,11 +376,11 @@ msgstr "Spelen"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr ""
 
-#: src/menu/main_menu.cpp:131
+#: src/menu/main_menu.cpp:129
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/main.cpp:101
+#: src/main.cpp:100
 msgid "Run game"
 msgstr "Spel starten"
 
@@ -441,7 +442,7 @@ msgstr ""
 msgid "Unexcepted exception caught..."
 msgstr "Onverwachte uitzondering gevangen ..."
 
-#: src/game/game_loop.cpp:183
+#: src/game/game_loop.cpp:182
 msgid "Unknow action"
 msgstr ""
 
@@ -450,23 +451,23 @@ msgstr ""
 msgid "Version"
 msgstr "Versie "
 
-#: src/game/game_loop.cpp:89
+#: src/game/game_loop.cpp:88
 msgid "Wait for clients"
 msgstr ""
 
-#: src/game/game_loop.cpp:177
+#: src/game/game_loop.cpp:176
 msgid "Wait for map"
 msgstr ""
 
-#: src/game/game_loop.cpp:174
+#: src/game/game_loop.cpp:173
 msgid "Wait for server"
 msgstr ""
 
-#: src/game/game_loop.cpp:170
+#: src/game/game_loop.cpp:169
 msgid "Wait for server informations"
 msgstr ""
 
-#: src/game/game_loop.cpp:180
+#: src/game/game_loop.cpp:179
 #, fuzzy
 msgid "Wait teams"
 msgstr "Winnaar : team %s"
@@ -479,12 +480,12 @@ msgstr ""
 msgid "Weapon:"
 msgstr ""
 
-#: src/main.cpp:80
+#: src/main.cpp:79
 #, fuzzy
 msgid "Website: "
 msgstr "Web site : "
 
-#: src/game/game_loop.cpp:770
+#: src/game/game_loop.cpp:760
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s : hij is gedood door een simpel geweer !"
@@ -494,7 +495,7 @@ msgstr "Wat een schande voor %s : hij is gedood door een simpel geweer !"
 msgid "Wormux launching..."
 msgstr "Starten van wormux."
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 msgid "Wormux version "
 msgstr "Wormux versie "
 
@@ -507,7 +508,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr ""
 
-#: src/game/game_loop.cpp:278
+#: src/game/game_loop.cpp:277
 #, fuzzy
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""

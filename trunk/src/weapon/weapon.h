@@ -157,6 +157,7 @@ public:
 
   // Angle in degrees between -90 to 90
   int min_angle, max_angle;
+  bool use_flipping;
 
 protected:
   virtual void p_Init();

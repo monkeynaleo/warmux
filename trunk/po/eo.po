@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-01-12 04:50+0100\n"
 "PO-Revision-Date: 2004-10-03 13:48+0200\n"
 "Last-Translator: Damien BOUCARD <damien.boucard@tchoy.net>\n"
 "Language-Team: eo <victor.stinner@haypocalc.com>\n"
@@ -19,7 +20,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr ""
 
-#: src/game/game_loop.cpp:775
+#: src/game/game_loop.cpp:765
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
@@ -34,7 +35,7 @@ msgstr ""
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:749
+#: src/game/game_loop.cpp:739
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -44,12 +45,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:742
+#: src/game/game_loop.cpp:732
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game_loop.cpp:753
+#: src/game/game_loop.cpp:743
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
@@ -64,12 +65,12 @@ msgstr "Le ludanto '%s' perdis %u energiajn poentojn :-("
 msgid "%s has won %u points of energy!"
 msgstr "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 
-#: src/game/game_loop.cpp:766
+#: src/game/game_loop.cpp:756
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:759
+#: src/game/game_loop.cpp:749
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -116,7 +117,7 @@ msgstr "(senlimaj)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:223
+#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:214
 msgid "Air attack"
 msgstr "Aeratako"
 
@@ -125,7 +126,7 @@ msgstr "Aeratako"
 msgid "Authors"
 msgstr "Auxtoroj :"
 
-#: src/main.cpp:70
+#: src/main.cpp:69
 #, fuzzy
 msgid "Authors:"
 msgstr "Auxtoroj :"
@@ -147,7 +148,7 @@ msgstr "Bazuko"
 msgid "C++ exception caught:"
 msgstr "Escepto C++ intercaptita :"
 
-#: src/team/teams_list.cpp:430 src/team/teams_list.cpp:455
+#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
@@ -254,7 +255,7 @@ msgstr ""
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr ""
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:210
 msgid "Find a random position for worms"
 msgstr "Metas hazarde la vermojn"
 
@@ -284,7 +285,7 @@ msgstr "Pistolo"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 
-#: src/menu/main_menu.cpp:125
+#: src/menu/main_menu.cpp:123
 #, fuzzy
 msgid "Info"
 msgstr "Informoj"
@@ -294,21 +295,21 @@ msgstr "Informoj"
 msgid "Initial energy:"
 msgstr "Komenca energio"
 
-#: src/game/game_loop.cpp:263
+#: src/game/game_loop.cpp:262
 msgid "Initialisation"
 msgstr "Preparanto"
 
-#: src/game/game_loop.cpp:153 src/game/game_loop.cpp:217
+#: src/game/game_loop.cpp:152 src/game/game_loop.cpp:216
 #, fuzzy
 msgid "Initialise data"
 msgstr "Preparanto"
 
-#: src/game/game_loop.cpp:105
+#: src/game/game_loop.cpp:104
 #, fuzzy
 msgid "Initialise teams"
 msgstr "Preparanto"
 
-#: src/game/game_loop.cpp:101
+#: src/game/game_loop.cpp:100
 #, fuzzy
 msgid "Load map"
 msgstr "Muntas la terenon %s"
@@ -348,7 +349,7 @@ msgstr "Muziko"
 msgid "Name:"
 msgstr "Nomo"
 
-#: src/menu/main_menu.cpp:113
+#: src/menu/main_menu.cpp:111
 msgid "Network Game"
 msgstr ""
 
@@ -366,7 +367,7 @@ msgstr "Nombro da ludantoj per teamo"
 msgid "Ok"
 msgstr ""
 
-#: src/menu/main_menu.cpp:119
+#: src/menu/main_menu.cpp:117
 msgid "Options"
 msgstr "Elektoj"
 
@@ -374,7 +375,7 @@ msgstr "Elektoj"
 msgid "Pause"
 msgstr ""
 
-#: src/menu/main_menu.cpp:107
+#: src/menu/main_menu.cpp:105
 msgid "Play"
 msgstr "Aktori"
 
@@ -382,11 +383,11 @@ msgstr "Aktori"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr ""
 
-#: src/menu/main_menu.cpp:131
+#: src/menu/main_menu.cpp:129
 msgid "Quit"
 msgstr "Forlasi"
 
-#: src/main.cpp:101
+#: src/main.cpp:100
 msgid "Run game"
 msgstr "Komencas partion"
 
@@ -451,7 +452,7 @@ msgstr ""
 msgid "Unexcepted exception caught..."
 msgstr "Escepto nekonata intercaptita ..."
 
-#: src/game/game_loop.cpp:183
+#: src/game/game_loop.cpp:182
 msgid "Unknow action"
 msgstr ""
 
@@ -460,23 +461,23 @@ msgstr ""
 msgid "Version"
 msgstr "Versio "
 
-#: src/game/game_loop.cpp:89
+#: src/game/game_loop.cpp:88
 msgid "Wait for clients"
 msgstr ""
 
-#: src/game/game_loop.cpp:177
+#: src/game/game_loop.cpp:176
 msgid "Wait for map"
 msgstr ""
 
-#: src/game/game_loop.cpp:174
+#: src/game/game_loop.cpp:173
 msgid "Wait for server"
 msgstr ""
 
-#: src/game/game_loop.cpp:170
+#: src/game/game_loop.cpp:169
 msgid "Wait for server informations"
 msgstr ""
 
-#: src/game/game_loop.cpp:180
+#: src/game/game_loop.cpp:179
 #, fuzzy
 msgid "Wait teams"
 msgstr "Venkinto : teamo %s"
@@ -490,12 +491,12 @@ msgstr ""
 msgid "Weapon:"
 msgstr "Armilo"
 
-#: src/main.cpp:80
+#: src/main.cpp:79
 #, fuzzy
 msgid "Website: "
 msgstr "TTT-ejo : "
 
-#: src/game/game_loop.cpp:770
+#: src/game/game_loop.cpp:760
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pistolo !"
@@ -505,7 +506,7 @@ msgstr "Kiel honto por %s : li estis mortigita per simpla pistolo !"
 msgid "Wormux launching..."
 msgstr "Wormux muntas."
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 msgid "Wormux version "
 msgstr "Wormux versio "
 
@@ -518,7 +519,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr ""
 
-#: src/game/game_loop.cpp:278
+#: src/game/game_loop.cpp:277
 #, fuzzy
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Vi necesas almenaux du teamojn, korektu cxi tion en la menuo Elektoj !"

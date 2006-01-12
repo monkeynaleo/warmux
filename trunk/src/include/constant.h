@@ -32,7 +32,7 @@ namespace Wormux {
 void InitCst();
 
 // Numéro de version de Wormux
-//extern const std::string VERSION;
+extern const std::string VERSION;
 
 // Répertoire d'installation (avec slash)
 extern const std::string DEFAULT_DATADIR;
