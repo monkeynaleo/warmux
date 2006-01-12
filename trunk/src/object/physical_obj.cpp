@@ -31,13 +31,9 @@
 #include "../map/map.h"
 #include "../game/config.h"
 #include "../tool/math_tools.h"
-#ifdef CL
-# include "../tool/geometry_tools.h"
-#else
 #include "../tool/Point.h"
 #include "../tool/Rectangle.h"
 #include "../tool/Distance.h"
-#endif
 //# include "../game/game_mode.h"
 #include "../game/time.h"
 //#include "../map/water.h"
@@ -65,17 +61,11 @@ const int WATER_RESIST_FACTOR = 6 ;
 
 const double PIXEL_PER_METER = 40 ;
 
-#ifdef CL
-double MeterDistance (const CL_Point &p1, const CL_Point &p2)
-{
-  return Distance(p1, p2) / PIXEL_PER_METER ;
-}
-#else
 double MeterDistance (const Point2i &p1, const Point2i &p2)
 {
   return Distance(p1, p2) / PIXEL_PER_METER ;
 }
-#endif
+
 //-----------------------------------------------------------------------------
 
 PhysicalObj::PhysicalObj (const std::string &name, double mass)

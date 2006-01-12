@@ -30,12 +30,8 @@
 //#include "../include/base.h"
 //#include "../tool/math_tools.h"
 #include "../object/physics.h"
-#ifdef CL
-#include <ClanLib/core.h>  // For CL_Point and CL_Rect
-#else
 #include "../tool/Point.h"
 #include "../tool/Rectangle.h"
-#endif
 //-----------------------------------------------------------------------------
 
 // Alive state
@@ -61,15 +57,9 @@ typedef enum
 } type_objet_t;
 
 //-----------------------------------------------------------------------------
-
-
 extern const double PIXEL_PER_METER ;
 
-#ifdef CL
-double MeterDistance (const CL_Point &p1, const CL_Point &p2) ;
-#else
 double MeterDistance (const Point2i &p1, const Point2i &p2) ;
-#endif
 //-----------------------------------------------------------------------------
 
 class PhysicalObj : public Physics
@@ -111,11 +101,7 @@ public:
   void SetXY (int x, int y);
   int GetX() const;
   int GetY() const;
-#ifdef CL
-  const CL_Point GetPos() const;
-#else
   const Point2i GetPos() const; 
-#endif
      
   // Set/Get size
   void SetSize (uint width, uint height);
@@ -124,11 +110,7 @@ public:
 
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
-#ifdef CL
-  const CL_Rect GetTestRect() const;
-#else
   const Rectanglei GetTestRect() const;   
-#endif
   int GetTestWidth() const;
   int GetTestHeight() const;
 
@@ -137,13 +119,8 @@ public:
   // Get Center position.
   int GetCenterX() const;
   int GetCenterY() const;
-#ifdef CL
-  const CL_Point GetCenter() const;
-  const CL_Rect GetRect() const;
-#else
   const Point2i GetCenter() const;
   const Rectanglei GetRect() const;
-#endif
   type_objet_t GetObjectType() const { return m_type; }
 
   //----------- Physics related function ----------
@@ -214,15 +191,11 @@ private:
 
 };
 
-#ifndef CL // from tool/geomtry_tool.h
-
 // Est-ce que deux objets se touchent ? (utilise les rectangles de test)
 bool ObjTouche (const PhysicalObj &a, const PhysicalObj &b);
 
 // Est-ce que le point p touche l'objet a ?
 bool ObjTouche (const PhysicalObj &a, const Point2i &p);
-
-#endif
 
 //-----------------------------------------------------------------------------
 #endif
