@@ -9,7 +9,6 @@ MAINTAINERCLEANFILES = Makefile.in
 
 POTFILES = \
 	src/game/config.cpp \
-	src/game/debug.cpp \
 	src/game/game.cpp \
 	src/game/game_loop.cpp \
 	src/game/game_mode.cpp \

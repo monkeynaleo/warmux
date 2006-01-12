@@ -42,7 +42,6 @@
 #include "../weapon/weapons_list.h"
 #include "game.h"
 #include "time.h"
-#include "debug.h"
 #include "game_mode.h"
 #include "config.h"
 #include "../interface/keyboard.h"
@@ -407,11 +406,6 @@ void GameLoop::Refresh()
   
   // Refresh the map
   world.Refresh();
-
-#if 0 // #ifdef DEBUG
-  // Draw les messages de debug
-  debug.Refresh();
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -462,10 +456,6 @@ void GameLoop::Draw ()
   // Display number of frames by second
   image_par_seconde.Draw();
 
-#ifdef DEBUG
-  // Draw les messages de debug
-//  debug.Draw();
-#endif
   StatStop("GameDraw:other");
 
   // Draw the interface (current team's information, weapon's ammo)

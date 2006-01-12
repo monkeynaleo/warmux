@@ -201,6 +201,7 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
   m_first_time_loading = 0;
 
   max_strength = min_angle = max_angle = 0;
+  use_flipping = true;
 
   override_keys = false ;
 
@@ -223,6 +224,9 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
 
 void Weapon::Init ()
 {
+  if (!use_flipping and (min_angle != max_angle))
+    use_flipping = true;
+  
   if (m_visibility != NEVER_VISIBLE)
   {
     m_image = new Sprite( resource_manager.LoadImage(weapons_res_profile, m_id));
@@ -562,14 +566,18 @@ void Weapon::Draw()
   || ActiveCharacter().IsDead())
     return;
 
-  // rotate weapon if necessary
+  // rotate weapon if needed
   if (min_angle != max_angle)
   {
     if(ActiveCharacter().GetDirection() == 1)
       m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
     else
       m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle() - 180.0);
+  }
 
+  // flip image if needed
+  if (use_flipping)
+  {
     m_image->Scale(ActiveCharacter().GetDirection(), 1.0);
   }
 
@@ -580,17 +588,9 @@ void Weapon::Draw()
   case weapon_origin_OVER:
     x = ActiveCharacter().GetCenterX()-m_image->GetWidth()/2+position.dx;
     y = ActiveCharacter().GetY()-m_image->GetHeight()+position.dy;
-#ifdef CL
-    if(ActiveCharacter().GetDirection() == -1)
-      x += m_image.get_width();
-#endif
      break;
   case weapon_origin_HAND:
     PosXY (x, y);
-#ifdef CL
-    if(min_angle!=max_angle && ActiveCharacter().GetDirection()==-1)
-      y += m_image.get_height();
-#endif
      break;
   }
   if ( m_image )

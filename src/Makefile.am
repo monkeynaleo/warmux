@@ -10,7 +10,6 @@ wormux_SOURCES = \
 	include/app.h \
 	main.cpp \
 	game/config.cpp game/config.h \
-	game/debug.cpp game/debug.h \
 	game/game_mode.cpp game/game_mode.h \
 	game/game.cpp game/game.h \
 	game/game_loop.cpp game/game_loop.h \

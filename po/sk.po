@@ -6,6 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-01-12 04:50+0100\n"
 "PO-Revision-Date: 2006-01-12 03:17+0100\n"
 "Last-Translator: Stinner Victor <victor.stinner AT haypocalc.com>\n"
 "Language-Team: sk <stryco@centrum.sk>\n"
@@ -21,7 +22,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebola nájdená :-("
 
-#: src/game/game_loop.cpp:775
+#: src/game/game_loop.cpp:765
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s tým) zomrel."
@@ -36,7 +37,7 @@ msgstr "%s <%s> aka %s od %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> od %s"
 
-#: src/game/game_loop.cpp:749
+#: src/game/game_loop.cpp:739
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s spáchal samovraždu !"
@@ -46,12 +47,12 @@ msgstr "%s spáchal samovraždu !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:742
+#: src/game/game_loop.cpp:732
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s spadol do vody."
 
-#: src/game/game_loop.cpp:753
+#: src/game/game_loop.cpp:743
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s vypadol z mapy!"
@@ -66,12 +67,12 @@ msgstr "%s stratil %u bodov energie."
 msgid "%s has won %u points of energy!"
 msgstr "%s zvíťazil %u bodov energie !"
 
-#: src/game/game_loop.cpp:766
+#: src/game/game_loop.cpp:756
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s je psychopat, zabil člena svojho %s týmu!"
 
-#: src/game/game_loop.cpp:759
+#: src/game/game_loop.cpp:749
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mŕtvy, pretože bol nemotorný!"
@@ -120,7 +121,7 @@ msgstr ""
 "<infinite_background> potrebuje <is_open> byť nastavené aby pracovalo "
 "správne!!"
 
-#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:223
+#: src/object/bonus_box.cpp:273 src/weapon/air_attack.cpp:214
 msgid "Air attack"
 msgstr "Letecký útok"
 
@@ -128,7 +129,7 @@ msgstr "Letecký útok"
 msgid "Authors"
 msgstr "Autory"
 
-#: src/main.cpp:70
+#: src/main.cpp:69
 msgid "Authors:"
 msgstr "Autory:"
 
@@ -148,7 +149,7 @@ msgstr "Bazuka"
 msgid "C++ exception caught:"
 msgstr "Zachytená výnimka C++ :"
 
-#: src/team/teams_list.cpp:430 src/team/teams_list.cpp:455
+#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nemôžem nájsť tým %s!"
@@ -240,7 +241,7 @@ msgstr ""
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť skin \"%s\" pre tým \"%s\"."
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:210
 msgid "Find a random position for worms"
 msgstr "Náhodná poloha pre červa"
 
@@ -268,7 +269,7 @@ msgstr "Pištoľ"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Domovský priečinok (Prostredie premennej $HOME) sa nenašiel!"
 
-#: src/menu/main_menu.cpp:125
+#: src/menu/main_menu.cpp:123
 msgid "Info"
 msgstr "Info"
 
@@ -276,19 +277,19 @@ msgstr "Info"
 msgid "Initial energy:"
 msgstr "Počiatočná energia"
 
-#: src/game/game_loop.cpp:263
+#: src/game/game_loop.cpp:262
 msgid "Initialisation"
 msgstr "Inicializácia"
 
-#: src/game/game_loop.cpp:153 src/game/game_loop.cpp:217
+#: src/game/game_loop.cpp:152 src/game/game_loop.cpp:216
 msgid "Initialise data"
 msgstr "Inicializácia dát"
 
-#: src/game/game_loop.cpp:105
+#: src/game/game_loop.cpp:104
 msgid "Initialise teams"
 msgstr "Inicializácia týmov"
 
-#: src/game/game_loop.cpp:101
+#: src/game/game_loop.cpp:100
 msgid "Load map"
 msgstr "Načítavam mapu"
 
@@ -321,7 +322,7 @@ msgstr "Hudba?"
 msgid "Name:"
 msgstr "Meno:"
 
-#: src/menu/main_menu.cpp:113
+#: src/menu/main_menu.cpp:111
 msgid "Network Game"
 msgstr "Sieťová hra"
 
@@ -338,7 +339,7 @@ msgstr "Počet hráčov v týme:"
 msgid "Ok"
 msgstr "OK"
 
-#: src/menu/main_menu.cpp:119
+#: src/menu/main_menu.cpp:117
 msgid "Options"
 msgstr "Nastavenie"
 
@@ -346,7 +347,7 @@ msgstr "Nastavenie"
 msgid "Pause"
 msgstr "Pauza"
 
-#: src/menu/main_menu.cpp:107
+#: src/menu/main_menu.cpp:105
 msgid "Play"
 msgstr "Hraj"
 
@@ -354,11 +355,11 @@ msgstr "Hraj"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Prosím vyjadri nám svoj názor na Wormux cez email:"
 
-#: src/menu/main_menu.cpp:131
+#: src/menu/main_menu.cpp:129
 msgid "Quit"
 msgstr "Koniec"
 
-#: src/main.cpp:101
+#: src/main.cpp:100
 msgid "Run game"
 msgstr "Spusti hru"
 
@@ -416,7 +417,7 @@ msgstr "Nedá sa otvoriť adresár skinov (%s)!"
 msgid "Unexcepted exception caught..."
 msgstr "Neočakávaná výnimka zachytená..."
 
-#: src/game/game_loop.cpp:183
+#: src/game/game_loop.cpp:182
 msgid "Unknow action"
 msgstr "Neznáma akcia"
 
@@ -424,23 +425,23 @@ msgstr "Neznáma akcia"
 msgid "Version"
 msgstr "Verzia"
 
-#: src/game/game_loop.cpp:89
+#: src/game/game_loop.cpp:88
 msgid "Wait for clients"
 msgstr "Čakám na klientov"
 
-#: src/game/game_loop.cpp:177
+#: src/game/game_loop.cpp:176
 msgid "Wait for map"
 msgstr "Čakám na mapu"
 
-#: src/game/game_loop.cpp:174
+#: src/game/game_loop.cpp:173
 msgid "Wait for server"
 msgstr "Čakám na server"
 
-#: src/game/game_loop.cpp:170
+#: src/game/game_loop.cpp:169
 msgid "Wait for server informations"
 msgstr "Čakám na informácie o serveri"
 
-#: src/game/game_loop.cpp:180
+#: src/game/game_loop.cpp:179
 msgid "Wait teams"
 msgstr "Čakám tými"
 
@@ -453,11 +454,11 @@ msgstr ""
 msgid "Weapon:"
 msgstr "Zbraň:"
 
-#: src/main.cpp:80
+#: src/main.cpp:79
 msgid "Website: "
 msgstr "Web stránka: "
 
-#: src/game/game_loop.cpp:770
+#: src/game/game_loop.cpp:760
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
@@ -466,7 +467,7 @@ msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
 msgid "Wormux launching..."
 msgstr "Wormux sa spúšťa..."
 
-#: src/main.cpp:69
+#: src/main.cpp:68
 msgid "Wormux version "
 msgstr "Wormux verzia"
 
@@ -479,7 +480,7 @@ msgstr "XML chyba počas načítavania mapy '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
-#: src/game/game_loop.cpp:278
+#: src/game/game_loop.cpp:277
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Potrebuješ najmenej dva tými na hru: zmeň si to v menu 'Nastavenie' !"
 

@@ -42,8 +42,6 @@
 using namespace Wormux;
 using namespace std;
 //-----------------------------------------------------------------------------
-const std::string VERSION("0.7 beta");
-//-----------------------------------------------------------------------------
 
 // Position du texte de la version
 const int VERSION_DY = -40;
