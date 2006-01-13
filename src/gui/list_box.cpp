@@ -115,9 +115,9 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button)
     int item = MouseIsOnWhichItem(mouse_x,mouse_y);
     if (item == -1) return false;
     
-    if (item == selected_item)
-      Deselect ();
-    else
+    if (item == selected_item) {
+        //Deselect ();
+    } else
       Select (item);
     return true;
   }
