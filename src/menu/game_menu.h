@@ -33,6 +33,7 @@ class GameMenu : public Menu
    ~GameMenu();
 
  private:
+   bool terrain_init;
 
    /* Team controllers */
    ListBox *lbox_all_teams;   
