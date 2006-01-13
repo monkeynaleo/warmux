@@ -140,6 +140,7 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
     ++i;
   }
 
+  terrain_init = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -255,7 +256,6 @@ void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 
 void GameMenu::Draw(int mouse_x, int mouse_y)
 {   
-  bool terrain_init = false;  
   Team* last_team = teams_list.FindByIndex(0);
    
   map_box->Draw(mouse_x,mouse_y);
