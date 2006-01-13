@@ -72,9 +72,11 @@ void JukeBox::Init()
     std::cerr << "Couldn't initialize SDL: "<< SDL_GetError() << std::endl;
     return;
   } 
+  
+  int audio_buffer = 4096;
 
   /* Open the audio device */
-  if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, 4096) < 0) {
+  if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, audio_buffer) < 0) {
     std::cerr << "Couldn't open audio: " <<  SDL_GetError() << std::endl;
     return;
   } else {
@@ -266,9 +268,11 @@ int JukeBox::PlaySample (Mix_Chunk * sample, int loop)
 
   int channel = Mix_PlayChannel(-1, sample, loop);
 
+#ifdef DBG_SON
   if (channel == -1) {
     std::cerr << "[Sound] Error : Jukebox::PlaySample: " << Mix_GetError() << std::endl;
   }
+#endif
   return channel;
 }
 

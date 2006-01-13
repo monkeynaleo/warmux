@@ -160,9 +160,18 @@ menu_item Main_Menu::Run ()
    SDL_Event event;
      
    while( SDL_PollEvent( &event) ) {      
-     if ( event.type == SDL_MOUSEBUTTONDOWN )
-       {
-	 onClick( event.button.x, event.button.y, event.button.button);
+       if ( event.type == SDL_MOUSEBUTTONDOWN ) {
+           onClick( event.button.x, event.button.y, event.button.button);
+       } else if ( event.type == SDL_KEYDOWN )  {
+	     if ( event.key.keysym.sym == SDLK_ESCAPE)
+         {
+             choice = menuQUIT;
+             break;
+         }
+         
+       } else if ( event.type == SDL_QUIT)  {
+           choice = menuQUIT;
+           break;
        }
    }
 
