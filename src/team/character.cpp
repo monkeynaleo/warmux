@@ -72,6 +72,8 @@ const uint do_nothing_timeout = 5000;
 
 //#define NO_POSITION_CHECK
 
+//#define DEBUG_SKIN
+
 #define COUT_DBG0 std::cerr << "[Character " << m_name << "]"
 #define COUT_DBG COUT_DBG0 " "
 #define COUT_PLACEMENT COUT_DBG0 "[Init bcl=" << bcl << "] "
@@ -340,7 +342,13 @@ void Character::Draw()
     if(current_skin=="walking" && image->IsFinished())
       StartBreathing();
   }
-   
+
+  if(current_skin=="hard_fall_ending") image->Update();
+
+  if(current_skin=="hard_fall_ending" && image->IsFinished())
+  if(!SetSkin("weapon-" + m_team->GetWeapon().GetID()))
+    SetSkin("walking");
+
   int x = GetX();
   int y = GetY();
   image->Draw(x,y);
@@ -699,6 +707,7 @@ void Character::SignalFallEnding()
   double norme, degat;
   DoubleVector speed_vector ;
 
+  StopWalking();
   GetSpeedXY (speed_vector);
   norme = Norm (speed_vector);
   if (norme > game_mode.safe_fall && speed_vector.y>0.0)
@@ -706,12 +715,12 @@ void Character::SignalFallEnding()
     norme -= game_mode.safe_fall;
     degat = norme * game_mode.damage_per_fall_unit;
     SetEnergyDelta (-(int)degat);
-
+    SetSkin("hard_fall_ending");
     game_loop.SignalCharacterDamageFalling(this);
   }
   if((current_skin=="jump" || current_skin=="fall"))
   {
-    if(!SetSkin(m_team->GetWeapon().GetID()))
+    if(!SetSkin("weapon-" + m_team->GetWeapon().GetID()))
       SetSkin("walking");
   }
 }
@@ -775,7 +784,11 @@ bool Character::SetSkin(std::string skin_name)
 
   assert (skin != NULL);
 
-  if(AccessSkin().many_skins.find(skin_name) != 
+#ifdef DEBUG_SKIN
+  std::cout << "Setting skin \"" << skin_name << "\" for " << m_name << std::endl;
+#endif
+
+  if(AccessSkin().many_skins.find(skin_name) !=
      AccessSkin().many_skins.end())
   {
     float sc_x,sc_y;
@@ -790,6 +803,8 @@ bool Character::SetSkin(std::string skin_name)
                  AccessSkin().many_skins[skin_name].test_bottom);
 
     SetSize (image->GetWidth(), image->GetHeight());
+    image->SetCurrentFrame(0);
+    image->Start();
     PutOutOfGround();     
     //Restore skins direction
     if(current_skin!="" && sc_x<0)
@@ -844,6 +859,10 @@ bool Character::SetSkin(std::string skin_name)
     assert(skin_name!="walking");
 //    SetSkin("walking");
 //    image->Finish();
+#ifdef DEBUG_SKIN
+  std::cout << "Skin \"" << skin_name << "\" not found!"<< std::endl;
+#endif
+
     return false;
   }
 }
