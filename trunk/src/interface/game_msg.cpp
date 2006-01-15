@@ -62,7 +62,6 @@ void GameMessages::Draw()
   uint msgy = 50;
   for (iterator i=liste.begin(); i != liste.end(); ++i)
   {
-    i -> text_shadow->DrawCenterTop(video.GetWidth()/2+1, msgy+1);
     i -> text->DrawCenterTop(video.GetWidth()/2, msgy);
     
     msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
@@ -84,7 +83,6 @@ void GameMessages::Refresh()
     {
       fin = (i == liste.end());
       delete (actuel->text);
-      delete (actuel->text_shadow);
       liste.erase (actuel);
       if (fin) break;
     }

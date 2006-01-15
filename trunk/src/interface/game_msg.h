@@ -34,9 +34,8 @@ public:
   typedef struct message_t
   {
     Text * text;
-    Text * text_shadow;
     uint time;
-    message_t (Text * t, Text * t2, uint _time) { text = t; text_shadow = t2; time = _time; }
+    message_t (Text * t, Text * t2, uint _time) { text = t; time = _time; }
   } message_t;
   std::list<message_t> liste;
   typedef std::list<message_t>::iterator iterator;

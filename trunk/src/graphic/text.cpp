@@ -31,15 +31,29 @@
 #include "../include/global.h"
 //-----------------------------------------------------------------------------
 
-Text::Text(const std::string &new_txt, SDL_Color new_color, Font* new_font)
+Text::Text(const std::string &new_txt, SDL_Color new_color,
+           Font* new_font, bool shadowed)
 {
   if (new_font == NULL)
       new_font = &global().small_font();
-  txt = "";
+  txt = new_txt;
   color = new_color;
   font = new_font;
   surf = NULL;
-  Set(new_txt);
+  background = NULL;
+  this->shadowed = shadowed;
+
+  if(shadowed)
+  {
+    int width=-1;
+    TTF_SizeUTF8(font->m_font, "a", &width, NULL);
+    bg_offset = (unsigned int)width/5;
+    assert(bg_offset!=0);
+  }
+  else
+    bg_offset = 0;
+
+  Render();
 }
 
 //-----------------------------------------------------------------------------
@@ -47,6 +61,25 @@ Text::~Text()
 {
   assert(surf!=NULL);
   SDL_FreeSurface(surf);
+  if(shadowed)
+  {
+    assert(background!=NULL);
+    SDL_FreeSurface(background);
+  }
+}
+
+//-----------------------------------------------------------------------------
+void Text::Render()
+{
+  if (surf != NULL)
+  {
+    SDL_FreeSurface(surf);
+    if(shadowed)
+      SDL_FreeSurface(background);
+  }
+  surf = TTF_RenderUTF8_Blended(font->m_font, txt.c_str(),color);
+  if(shadowed)
+    background = TTF_RenderUTF8_Blended(font->m_font, txt.c_str(),black_color);
 }
 
 //-----------------------------------------------------------------------------
@@ -56,13 +89,19 @@ void Text::Set(const std::string &new_txt)
     return;
 
   txt = new_txt;
+  Render();
+}
 
-  if (surf != NULL)
-  {
-    SDL_FreeSurface(surf);
-  }
+//-----------------------------------------------------------------------------
+void Text::SetColor(SDL_Color new_color)
+{
+  if(color.r == new_color.r
+  && color.g == new_color.g
+  && color.b == new_color.b)
+    return;
 
-  surf = TTF_RenderUTF8_Blended(font->m_font, txt.c_str(),color);
+  color = new_color;
+  Render();
 }
 
 //-----------------------------------------------------------------------------
@@ -74,6 +113,19 @@ void Text::DrawCenter (int x, int y)
   dst_rect.w = surf->w;
   dst_rect.h = surf->h;
 
+  if(shadowed)
+  {
+    SDL_Rect shad_rect;
+    shad_rect.x = dst_rect.x + bg_offset;
+    shad_rect.y = dst_rect.y + bg_offset;
+    shad_rect.w = background->w;
+    shad_rect.h = background->h;
+    SDL_BlitSurface(background,NULL,app.sdlwindow, &shad_rect);
+    SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+    world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y,
+                                      shad_rect.w+bg_offset, shad_rect.h+bg_offset));
+    return;
+  }
   SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
   world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
 }
@@ -87,6 +139,19 @@ void Text::DrawTopLeft (int x, int y)
   dst_rect.w = surf->w;
   dst_rect.h = surf->h;
 
+  if(shadowed)
+  {
+    SDL_Rect shad_rect;
+    shad_rect.x = dst_rect.x + bg_offset;
+    shad_rect.y = dst_rect.y + bg_offset;
+    shad_rect.w = background->w;
+    shad_rect.h = background->h;
+    SDL_BlitSurface(background,NULL,app.sdlwindow, &shad_rect);
+    SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+    world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y,
+                                      shad_rect.w+bg_offset, shad_rect.h+bg_offset));
+    return;
+  }
   SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
   world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
 }
@@ -100,6 +165,19 @@ void Text::DrawTopRight (int x, int y)
   dst_rect.w = surf->w;
   dst_rect.h = surf->h;
 
+  if(shadowed)
+  {
+    SDL_Rect shad_rect;
+    shad_rect.x = dst_rect.x + bg_offset;
+    shad_rect.y = dst_rect.y + bg_offset;
+    shad_rect.w = background->w;
+    shad_rect.h = background->h;
+    SDL_BlitSurface(background,NULL,app.sdlwindow, &shad_rect);
+    SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+    world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y,
+                                      shad_rect.w+bg_offset, shad_rect.h+bg_offset));
+    return;
+  }
   SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
   world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
 }
@@ -113,6 +191,19 @@ void Text::DrawCenterTop (int x, int y)
   dst_rect.w = surf->w;
   dst_rect.h = surf->h;
 
+  if(shadowed)
+  {
+    SDL_Rect shad_rect;
+    shad_rect.x = dst_rect.x + bg_offset;
+    shad_rect.y = dst_rect.y + bg_offset;
+    shad_rect.w = background->w;
+    shad_rect.h = background->h;
+    SDL_BlitSurface(background,NULL,app.sdlwindow, &shad_rect);
+    SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
+    world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y,
+                                      shad_rect.w+bg_offset, shad_rect.h+bg_offset));
+    return;
+  }
   SDL_BlitSurface(surf,NULL,app.sdlwindow, &dst_rect);
   world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
 }
@@ -120,18 +211,24 @@ void Text::DrawCenterTop (int x, int y)
 //-----------------------------------------------------------------------------
 void Text::DrawCenterOnMap (int x, int y)
 {
+  if(shadowed)
+    AbsoluteDraw(background, bg_offset + x - surf->w / 2, bg_offset + y - surf->h / 2);
   AbsoluteDraw(surf, x - surf->w / 2, y - surf->h / 2);
 }
 
 //-----------------------------------------------------------------------------
 void Text::DrawTopLeftOnMap (int x, int y)
 {
+  if(shadowed)
+    AbsoluteDraw(background, bg_offset + x, bg_offset + y);
   AbsoluteDraw(surf, x, y);
 }
 
 //-----------------------------------------------------------------------------
 void Text::DrawCenterTopOnMap (int x, int y)
 {
+  if(shadowed)
+    AbsoluteDraw(background, bg_offset + x - surf->w / 2, bg_offset + y);
   AbsoluteDraw(surf, x - surf->w / 2, y);
 }
 

@@ -49,7 +49,6 @@ private:
 
   // name
   Text* name_text;
-  Text* name_text_shadow;
 
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
