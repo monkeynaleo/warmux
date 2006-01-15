@@ -171,7 +171,9 @@ void Jeu::LanceJeu()
 	   question.choix.push_back ( Question::choix_t(SDLK_a + (int)key_x - 'a', 1) );
 	}
 	
+        jukebox.Pause();
         fin = (PoseQuestion() == 1);
+        jukebox.Resume();
       } else {
 	fin = true;
       }
@@ -205,8 +207,10 @@ void Jeu::LanceJeu()
 
 void Jeu::Pause()
 {
+  jukebox.Pause();
   question.Init (_("Pause"), true, 0);
   PoseQuestion();
+  jukebox.Resume();
 }
 
 //-----------------------------------------------------------------------------

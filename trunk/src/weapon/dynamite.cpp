@@ -89,6 +89,7 @@ void BatonDynamite::Reset()
 
   image->Start();
   image->SetCurrentFrame(0);
+  image->Scale(ActiveCharacter().GetDirection(), 1);
   explosion->Start();
   explosion->SetCurrentFrame(0);
 }

@@ -62,6 +62,8 @@ public:
   bool UseEffects() const {return m_config.effects;};
   int GetFrequency() const {return m_config.frequency;};
   int HowManyChannels() const {return m_config.channels;};
+  void Pause();
+  void Resume();
   
   void ActiveMusic (bool on) {m_config.music = on ;};
   void ActiveEffects (bool on) {m_config.effects = on;};
