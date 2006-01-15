@@ -59,6 +59,7 @@ void Gnu::Tire (double force)
 {
   SetAirResistFactor(gnu_launcher.cfg().air_resist_factor);
 //  PrepareTir();
+  m_alive = ALIVE;
 
   // Set the initial position.
   int x,y;
@@ -71,7 +72,12 @@ void Gnu::Tire (double force)
   SetSpeed (force, angle);
   is_active=true;
 
-  PutOutOfGround(angle);
+  if(!PutOutOfGround(angle))
+  {
+    //If the gnu can't be put out of the ground, just explode right now!
+    launched_time = global_time.Read() - (1000*gnu_launcher.cfg().timeout);
+    return;
+  }
 
   //Dummy value, we only need save_x!=x and save_y!=y
   //To avoid a comparison in Refresh()
@@ -124,8 +130,6 @@ void Gnu::Refresh()
 
   angle *= 180.0/M_PI;
 
-//  printf("\n%f",angle);
-
   if(angle<-90 || angle>90)
   {
     m_sens=-1;
@@ -136,6 +140,11 @@ void Gnu::Refresh()
 
 //  if(angle<-45 && angle>-135)
 //    angle=0;
+
+  //Due to a bug in the physic engine
+  //sometimes, angle==infinite (according to gdb)
+  if(angle>720)
+    angle = 0;
 
   image->SetRotation_deg(angle);
   image->Update();
@@ -177,19 +186,11 @@ void Gnu::Draw()
 {
   if (!is_active) return;
 
-#ifdef CL
-  image.set_scale(m_sens,1.0);
-  if(m_sens==1)
-    image.draw(GetX(),GetY());
-  else
-    image.draw(GetX()+image.get_width(),GetY());
-#else
   image->Scale(m_sens,1.0);
 //  if(m_sens==1)
     image->Draw(GetX(),GetY());
 //  else
 //    image->Draw(GetX()+image->GetWidth(),GetY());   
-#endif
 
   int tmp=gnu_launcher.cfg().timeout;
   tmp -= (int) ((global_time.Read() - launched_time) / 1000);
@@ -227,8 +228,8 @@ bool GnuLauncher::p_Shoot ()
     m_strength = 0;
 
   // Initialise le gnu
-  gnu.Tire (m_strength);
   lst_objets.AjouteObjet (&gnu, true);
+  gnu.Tire (m_strength);
   camera.ChangeObjSuivi (&gnu,true,true,true);
   m_strength = 0;
 
