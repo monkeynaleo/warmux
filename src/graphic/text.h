@@ -27,12 +27,16 @@
 class Text
 {
   SDL_Surface* surf;
+  SDL_Surface* background; //shoadow or outline or nothing;
   std::string txt;
   Font* font;
   SDL_Color color;
+  bool shadowed;
+  unsigned int bg_offset;
 
+  void Render();
 public:
-  Text(const std::string &new_txt, SDL_Color new_color = white_color, Font* new_font = NULL);
+  Text(const std::string &new_txt, SDL_Color new_color = white_color, Font* new_font = NULL, bool shadowed = true);
   ~Text();
 
   //Draw method using windows coordinates
@@ -47,6 +51,7 @@ public:
   void DrawCenterTopOnMap(int x, int y);
 
   void Set(const std::string &new_txt);
+  void SetColor(SDL_Color new_color);
   int GetWidth() const {return surf->w;};
   int GetHeight() const {return surf->h;}
 };

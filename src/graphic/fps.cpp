@@ -38,11 +38,10 @@ ImageParSeconde image_par_seconde;
 ImageParSeconde::~ImageParSeconde()
 {
   delete fps_txt;
-  delete fps_txt_shadow;
 }    
 ImageParSeconde::ImageParSeconde()
 {
-  fps_txt = fps_txt_shadow = NULL;
+  fps_txt = NULL;
   affiche = true;
   moyenne = -1;
   for (uint i=0; i<=NBR_VAL; ++i) nbr_img.push_back (0);
@@ -61,8 +60,6 @@ void ImageParSeconde::Reset()
   nbr_val_valides = -1;
   if(fps_txt == NULL)
     fps_txt = new Text("");
-  if(fps_txt_shadow == NULL)
-    fps_txt_shadow = new Text("", black_color);
 }
 
 //-----------------------------------------------------------------------------
@@ -112,8 +109,6 @@ void ImageParSeconde::Draw()
   buffer[sizeof(buffer)-1] = '\0';
   std::string text = Format(_("%s fps"),buffer);
   fps_txt->Set( text );
-  fps_txt_shadow->Set( text );
-  fps_txt_shadow->DrawTopRight(video.GetWidth(),1);
   fps_txt->DrawTopRight(video.GetWidth()-1,0);
 }
 

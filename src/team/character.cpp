@@ -116,7 +116,6 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   do_nothing_time = 0;
 
   name_text = NULL;
-  name_text_shadow = NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -217,7 +216,6 @@ void Character::DrawName (int dy) const
 
   if (config.affiche_nom_ver)
   {
-    name_text_shadow->DrawCenterTopOnMap(x+1,y+1);
     name_text->DrawCenterTopOnMap(x,y);
   }
 }
@@ -953,7 +951,6 @@ void Character::Reset()
   if (config.affiche_nom_ver && name_text == NULL)
   {
     name_text = new Text(m_name);
-    name_text_shadow = new Text(m_name, black_color);
   }
 
   // Energie

@@ -396,12 +396,12 @@ void PhysicalObj::UpdatePosition ()
 
 
 //-----------------------------------------------------------------------------
-void PhysicalObj::PutOutOfGround(double direction)
+bool PhysicalObj::PutOutOfGround(double direction)
 {
   const int max_step = 15;
 
   if(IsInVacuum(0,0))
-    return;
+    return true;
 
   double dx = cos(direction);
   double dy = sin(direction);
@@ -417,14 +417,16 @@ void PhysicalObj::PutOutOfGround(double direction)
   else
   {
     //Can't put the object out of the ground
+    return false;
   }
+  return true;
 }
 
 //-----------------------------------------------------------------------------
-void PhysicalObj::PutOutOfGround()
+bool PhysicalObj::PutOutOfGround()
 {
   if(IsInVacuum(0,0))
-    return;
+    return true;
 
   bool left,right,top,bottom;
   left   = world.IsInVacuum_left(*this,0,0);
@@ -435,13 +437,13 @@ void PhysicalObj::PutOutOfGround()
   int dx=(int)GetTestRect().w * (right-left);
   int dy=(int)GetTestRect().h * (top-bottom);
 
-  if(dx==0 && dy==0) return; //->Don't know in which direction we should go...
+  if(dx==0 && dy==0) return false; //->Don't know in which direction we should go...
 
   Point2i a(0,0);
   Point2i b(dx,dy);
 
   double dir = CalculeAngle(a,b);
-  PutOutOfGround(dir);
+  return PutOutOfGround(dir);
 }
 
 //-----------------------------------------------------------------------------
