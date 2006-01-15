@@ -174,24 +174,28 @@ void Mouse::ChoixVerPointe()
  
 void Mouse::ScrollCamera() const
 {
+  int x = GetX();
+  int y = GetY();
   //Move camera with mouse when cursor is on border of the screen
-  if (uint(GetX()) < SENSIT_SCROLL_MOUSE) {
-    camera.SetXY (-SCROLL_MOUSE, 0);
+  int dx = x-SENSIT_SCROLL_MOUSE;
+  if(dx<0) {
+    camera.SetXY(dx/2,0);
     camera.autorecadre = false;
   }
-
-  if (uint(GetX()) > video.GetWidth() - SENSIT_SCROLL_MOUSE) {
-    camera.SetXY (SCROLL_MOUSE, 0);
+  dx=video.GetWidth()-x-SENSIT_SCROLL_MOUSE;
+  if(dx<0) {
+    camera.SetXY(-dx/2,0);
     camera.autorecadre = false;
   }
-
-  if (uint(GetY()) < SENSIT_SCROLL_MOUSE) {
-    camera.SetXY (0, -SCROLL_MOUSE);
+  
+  int dy = y-SENSIT_SCROLL_MOUSE;
+  if(dy<0) {
+    camera.SetXY(0,dy/2);
     camera.autorecadre = false;
   }
-
-  if (uint(GetY()) > video.GetHeight() - SENSIT_SCROLL_MOUSE) {
-    camera.SetXY (0,SCROLL_MOUSE);
+  dy = video.GetHeight()-y-SENSIT_SCROLL_MOUSE;
+  if(dy<0) {
+    camera.SetXY(0,-dy/2);
     camera.autorecadre = false;
   }
 }

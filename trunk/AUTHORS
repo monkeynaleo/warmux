@@ -97,6 +97,8 @@ o Vegar Storvann aka vegar <v AT sunscream.net> from Norway
   Patch for mousewheel scrolling on the gui.
 o Piotr Pokojowczyk <rashid AT vp.pl> from Poland
   Draw map Dinos and skin Dude
+o R. Vigniel <rvigniel AT free.fr> from France
+  Progressive camera scrolling with mouse patch
 
 Package mainteners :
 ====================
