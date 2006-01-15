@@ -25,13 +25,14 @@
 #include "../include/app.h"
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
+#include "../include/global.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 
 CheckBox::CheckBox (const std::string &label, uint x, uint y, uint w, bool value) :
-  Widget(x, y, w, small_font.GetHeight())
+  Widget(x, y, w, global().small_font().GetHeight())
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadSprite( res, "menu/check");
@@ -40,7 +41,7 @@ CheckBox::CheckBox (const std::string &label, uint x, uint y, uint w, bool value
   // Copy arguments
   m_value = value;
 
-  txt_label = new Text(label, white_color, &small_font);
+  txt_label = new Text(label, white_color, &global().small_font());
 }
 
 //-----------------------------------------------------------------------------

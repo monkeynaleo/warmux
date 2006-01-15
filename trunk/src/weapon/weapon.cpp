@@ -49,7 +49,7 @@
 #include <SDL_gfxPrimitives.h>
 #include <iostream>
 #include <sstream>
-
+#include "../include/global.h"
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG
@@ -619,7 +619,7 @@ void Weapon::DrawUnit(int unit)
   ss << unit;
 
  
-  DrawTmpBoxText(small_font,
+  DrawTmpBoxText(global().small_font(),
 		 ActiveCharacter().GetCenterX()-camera.GetX(),
 		 ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP-camera.GetY(),
 		 ss.str());

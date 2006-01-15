@@ -16,47 +16,57 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Messages s'affichant en haut de l'ecran (et écrit dans la console).
+ * Class with instanciate everything.
  *****************************************************************************/
 
-#ifndef GAME_MESSAGES_H
-#define GAME_MESSAGES_H
+#include "global.h"
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../graphic/text.h"
-#include <string>
-#include <list>
-//-----------------------------------------------------------------------------
+Global *global_ptr = NULL;
 
-class GameMessages
+Global::Global()
 {
-public:
-  typedef struct message_t
-  {
-    Text * text;
-    Text * text_shadow;
-    uint time;
-    message_t (Text * t, Text * t2, uint _time) { text = t; text_shadow = t2; time = _time; }
-  } message_t;
-  std::list<message_t> liste;
-  typedef std::list<message_t>::iterator iterator;
+ 
+  ptr_tiny_font = ptr_small_font = \
+  ptr_normal_font = ptr_big_font = \
+  ptr_large_font = ptr_huge_font = NULL;
+}
 
-public:
-  // Remise a zéro
-  void Reset();
+Global::~Global()
+{
+  delete ptr_large_font;
+  delete ptr_huge_font;
+}
 
-  // Affiche tous les messages
-  void Draw();
+Global& global()
+{
+  assert (global_ptr != NULL);
+  return *global_ptr;
+}
 
-  // Actualisation : Supprime les anciens messages
-  void Refresh();
+Font& Global::huge_font() { return *AccessFont(&ptr_huge_font, 40); }
+Font& Global::large_font() { return *AccessFont(&ptr_large_font, 32); }
+Font& Global::big_font() { return *AccessFont(&ptr_big_font, 24); }
+Font& Global::normal_font() { return *AccessFont(&ptr_normal_font, 16); }
+Font& Global::small_font() { return *AccessFont(&ptr_small_font, 12); }
+Font& Global::tiny_font() { return *AccessFont(&ptr_tiny_font, 8); }
 
-  // Ajoute un message
-  // [titre] message
-  void Add(const std::string &message);
-};
+Font* Global::AccessFont(Font **ptr, int size)
+{
+  if (*ptr == NULL) *ptr = new Font(size);
+  return *ptr;
+}
 
-extern GameMessages game_messages;
+void createGlobal()
+{
+  assert (global_ptr == NULL);
+  global_ptr = new Global();
+}
+
+void destroyGlobal()
+{
+  assert (global_ptr != NULL);
+  delete global_ptr;
+  global_ptr = NULL; 
+}    
 
 //-----------------------------------------------------------------------------
-#endif

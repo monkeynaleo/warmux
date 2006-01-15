@@ -28,11 +28,13 @@
 #include "../tool/error.h"
 #include "../interface/interface.h"
 #include "../map/map.h"
+#include "../include/global.h"
 //-----------------------------------------------------------------------------
 
 Text::Text(const std::string &new_txt, SDL_Color new_color, Font* new_font)
 {
-  assert(new_font!=NULL);
+  if (new_font == NULL)
+      new_font = &global().small_font();
   txt = "";
   color = new_color;
   font = new_font;
