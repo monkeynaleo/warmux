@@ -58,10 +58,10 @@ using namespace Wormux;
 #ifdef DEBUG
 
 // Debogue la fin du tour ?
-#define DBG_FIN_TOUR
+//#define DBG_FIN_TOUR
 
 // Afiche les changements d'état ?
-#define DEBUG_CHG_ETAT
+//#define DEBUG_CHG_ETAT
 
 #endif
 
