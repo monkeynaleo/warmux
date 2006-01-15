@@ -36,6 +36,7 @@
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"
 #include "../tool/random.h"
+#include "../include/global.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
 
@@ -251,7 +252,7 @@ void ClusterBomb::Draw()
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
 
-  small_font.WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
+  global().small_font().WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
 }
 
 //-----------------------------------------------------------------------------

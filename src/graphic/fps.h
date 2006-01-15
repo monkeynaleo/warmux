@@ -34,12 +34,14 @@ private:
   std::list<uint> nbr_img;
   uint temps_seconde;
   Text* fps_txt;
+  Text* fps_txt_shadow;
 
 public:
   bool affiche;
   
 public:
   ImageParSeconde();
+  ~ImageParSeconde();
   void Reset();
   void AjouteUneImage();
   void Refresh();

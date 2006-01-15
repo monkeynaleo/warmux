@@ -37,15 +37,15 @@ class Font
     txt_iterator;
 
   std::map<std::string, SDL_Surface *> surface_text_table;
-  int surface_size;
 
 public:
   TTF_Font *m_font;
 
 public:
   Font();
+  Font(int size);
   ~Font();
-  bool Load (const std::string& resource_id, int size);
+  bool Load (const std::string& filename, int size);
   void WriteLeft (int x, int y, const std::string &txt, SDL_Color color);
   void WriteLeftBottom (int x, int y, const std::string &txt, SDL_Color color);
   void WriteRight (int x, int y, const std::string &txt, SDL_Color color);
@@ -58,13 +58,6 @@ public:
 
   static bool InitAllFonts();
  };
-
-extern Font huge_font;
-extern Font large_font;
-extern Font big_font;
-extern Font normal_font;
-extern Font small_font;
-extern Font tiny_font;
 
 //-----------------------------------------------------------------------------
 #endif

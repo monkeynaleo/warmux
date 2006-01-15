@@ -46,7 +46,7 @@
 #include "tool/i18n.h"
 #include "tool/random.h"
 #include "sound/jukebox.h"
-
+#include "include/global.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -153,11 +153,12 @@ bool AppWormux::Init(int argc, char **argv)
     return false;
   }
   if (!Font::InitAllFonts()) return false;
+  createGlobal();
 
   // Display a loading picture
 
   //TODO->use ressource handler
-  SDL_Surface* loading_image=IMG_Load( (config.data_dir+"/menu/img/loading.png").c_str());
+  SDL_Surface* loading_image=IMG_Load( (config.data_dir+"menu/img/loading.png").c_str());
 
   // Reset timer
   Wormux::global_time.Reset();
@@ -166,13 +167,13 @@ bool AppWormux::Init(int argc, char **argv)
 
   txt_version = _("Version") + std::string(" ") + VERSION;
 
-  huge_font.WriteCenter( config.tmp.video.width/2, 
+  global().huge_font().WriteCenter( config.tmp.video.width/2, 
 			config.tmp.video.height/2 - 200, 
 			_("Wormux launching..."), //"Chargement",
   			white_color);
 
-  huge_font.WriteCenter( config.tmp.video.width/2, 
-			 config.tmp.video.height/2 - 180 + huge_font.GetHeight(), 
+  global().huge_font().WriteCenter( config.tmp.video.width/2, 
+			 config.tmp.video.height/2 - 180 + global().huge_font().GetHeight(), 
 			 txt_version,
 			 white_color);
   
@@ -197,9 +198,8 @@ void AppWormux::Fin()
 	    << "[ " << _("End of game") << " ]" << std::endl;
   
   config.Sauve();
-
+  destroyGlobal();
   jukebox.End();
-
   TTF_Quit();
   SDL_Quit();
 
@@ -267,10 +267,6 @@ int AppWormux::main (int argc, char **argv)
 	      << e.what() << std::endl
 	      << std::endl;
   }
-  catch (std::string &e)
-  {
-     std::cerr << e << std::endl;
-  } 
   catch (...)
   {
     std::cerr << std::endl

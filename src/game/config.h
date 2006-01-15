@@ -50,6 +50,7 @@ public:
   bool affiche_energie_ver;
   bool affiche_nom_ver;
   bool display_wind_particles;
+  std::string ttf_filename;
 
   // Tempory values (loaded from XML, but may change during running)
   struct tmp_xml_config{

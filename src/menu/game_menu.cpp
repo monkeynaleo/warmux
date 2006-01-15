@@ -31,6 +31,7 @@
 #include "../game/config.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
+#include "../include/global.h"
 
 using namespace Wormux;
 using namespace std;
@@ -63,7 +64,7 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
 
   /* Choose the teams !! */
   team_box = new VBox(TEAMS_X, TEAMS_Y, 475);
-  team_box->AddWidget(new Label(_("Select the teams:"), 0, 0, 0, normal_font));
+  team_box->AddWidget(new Label(_("Select the teams:"), 0, 0, 0, global().normal_font()));
 
   Box * tmp_box = new HBox(0,0, TEAMS_H, false);
   tmp_box->SetMargin(10);
@@ -102,7 +103,7 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
   tmp_box->AddWidget(new NullWidget(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
   
   map_box = new VBox(MAPS_X, MAPS_Y, 475); //tmp_box->GetW()+10);
-  map_box->AddWidget(new Label(_("Select the world:"), 0, 0, 0, normal_font));
+  map_box->AddWidget(new Label(_("Select the world:"), 0, 0, 0, global().normal_font()));
   map_box->AddWidget(tmp_box);
 
 

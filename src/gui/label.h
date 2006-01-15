@@ -34,7 +34,7 @@ class Label : public Widget
   Text * txt_label;
    
  public:
-  Label(const std::string &label, uint x, uint y, uint w, Font& _fonf=small_font);
+  Label(const std::string &label, uint x, uint y, uint w, Font& font);
   ~Label();
   void Draw (uint mouse_x, uint mouse_y) ;
   void SetSizePosition(uint _x, uint _y, uint _w, uint _h);

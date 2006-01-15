@@ -45,6 +45,7 @@
 #include "../interface/cursor.h"
 #include "move.h"
 #include "macro.h"
+#include "../include/global.h"
 
 
 #include <SDL.h>
@@ -392,7 +393,7 @@ void Character::Draw()
     ostringstream ss;
     ss << losted_energy;
     dy -= HAUT_FONT_MIX;
-    small_font.WriteCenterTop (GetX() +GetWidth()/2-camera.GetX(), GetY()+dy-camera.GetY(), ss.str(), white_color);    
+    global().small_font().WriteCenterTop (GetX() +GetWidth()/2-camera.GetX(), GetY()+dy-camera.GetY(), ss.str(), white_color);    
   }
 
 }

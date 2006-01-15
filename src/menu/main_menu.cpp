@@ -25,6 +25,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <string>
+#include "../include/global.h"
 #include "../include/app.h"
 #include "../include/constant.h" // VERSION
 #include "../game/config.h"
@@ -34,6 +35,7 @@
 #include "../sound/jukebox.h"
 #include "../graphic/font.h"
 #include "infos_menu.h"
+#include "../include/global.h"
 
 #ifndef WIN32
 #include <dirent.h>
@@ -103,36 +105,36 @@ Main_Menu::Main_Menu()
 			button_width,button_height, //Size
 			res, "intro/txt_button",
 			_("Play"),
-			&large_font);
+			&global().large_font());
 
   network = new ButtonText(x_button,(int)(261 * y_scale), //Position
 			   button_width,button_height, //Size
 			   res, "intro/txt_button",
 			   _("Network Game"),
-			   &large_font );
+			   &global().large_font() );
 
   options = new ButtonText(x_button,(int)(329 * y_scale), //Position
 			   button_width,button_height, //Size
 			   res, "intro/txt_button",
 			   _("Options"),
-			   &large_font);
+			   &global().large_font());
 
   infos =  new ButtonText(x_button,(int)(397 * y_scale), //Position
 			  button_width,button_height, //Size
 			  res, "intro/txt_button",
 			  _("Info"),
-			  &large_font);
+			  &global().large_font());
 
   quit =  new ButtonText(x_button,(int)(465 * y_scale), //Position
 			 button_width,button_height, //Size
 			 res, "intro/txt_button",
 			 _("Quit"),
-			 &large_font);
+			 &global().large_font());
 
   resource_manager.UnLoadXMLProfile( res);
 
   std::string s("Version "+VERSION);
-  text = new Text(s, white_color, &big_font);
+  text = new Text(s, white_color, &global().big_font());
 }
 
 //-----------------------------------------------------------------------------

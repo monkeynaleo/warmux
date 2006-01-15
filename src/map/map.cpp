@@ -31,6 +31,7 @@
 #include "camera.h"
 #include "maps_list.h"
 #include "../tool/stats.h"
+#include "../include/global.h"
 
 using namespace std;
 using namespace Wormux;
@@ -305,13 +306,13 @@ void Map::DrawAuthorName()
     std::string txt;
     txt  = Format(_("Map %s, a creation of :"),
 		  lst_terrain.TerrainActif().name.c_str());
-    author_info1 = new Text(txt, white_color, &small_font);
+    author_info1 = new Text(txt, white_color, &global().small_font());
     txt = lst_terrain.TerrainActif().author_info;
-    author_info2 = new Text(txt, white_color, &small_font);
+    author_info2 = new Text(txt, white_color, &global().small_font());
   }
   
   author_info1->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y);
-  author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+small_font.GetHeight());
+  author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+global().small_font().GetHeight());
 }
 
 //-----------------------------------------------------------------------------

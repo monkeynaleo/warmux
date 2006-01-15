@@ -27,38 +27,18 @@
 #include "../tool/file_tools.h"
 #include <exception>
 #include "../map/map.h"
+#include "../tool/error.h"
 //-----------------------------------------------------------------------------
 
-Font huge_font;
-Font large_font;
-Font big_font;
-Font normal_font;
-Font small_font;
-Font tiny_font;
-  
 bool Font::InitAllFonts()
 { 
-  bool ok=true;
-  std::string vera_ttf = "Vera.ttf";
-  //std::string vera_ttf = "DejaVuSans.ttf";
-  std::string filename  = Wormux::config.data_dir+"font"+PATH_SEPARATOR+vera_ttf;
-  if (!FichierExiste(filename))
-  {
-      std::cout << "Error: Font " << vera_ttf << " can't be found (" << filename << ")!" << std::endl;
-      return false;
-  }
-  ok |= huge_font.Load(vera_ttf, 40);
-  ok |= large_font.Load(vera_ttf, 32);
-  ok |= big_font.Load(vera_ttf, 24);
-  ok |= normal_font.Load(vera_ttf, 16);
-  ok |= small_font.Load(vera_ttf, 12);
-  ok |= tiny_font.Load(vera_ttf, 8);
-  return ok;
+    return true;
 }
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
+
 Font::Font()
 { 
   m_font = NULL; 
@@ -66,10 +46,20 @@ Font::Font()
 
 //-----------------------------------------------------------------------------
 
+Font::Font(int size) 
+{ 
+  m_font = NULL; 
+  bool ok = Load(Wormux::config.ttf_filename, size);
+  if (!ok)
+    Erreur("Error during initialisation of a font!");
+}
+
+//-----------------------------------------------------------------------------
+
 Font::~Font()
 {
   if (m_font != NULL) {
-//    TTF_CloseFont(m_font);
+    TTF_CloseFont(m_font);
     m_font = NULL;
   }
 
@@ -85,13 +75,14 @@ Font::~Font()
 
 //-----------------------------------------------------------------------------
 
-bool Font::Load (const std::string& font_name, int size) 
+bool Font::Load (const std::string& filename, int size) 
 {
-  std::string filename  = Wormux::config.data_dir+PATH_SEPARATOR+"font"+PATH_SEPARATOR+font_name;
-  assert (FichierExiste(filename));
-
+  if (!FichierExiste(filename))
+  {
+      std::cout << "Error: Font " << filename << " can't be found!" << std::endl;
+      return false;
+  }
   m_font = TTF_OpenFont(filename.c_str(), size);
-
   TTF_SetFontStyle(m_font,TTF_STYLE_NORMAL);
   return true;
 }
@@ -192,16 +183,14 @@ SDL_Surface * Font::Render(const std::string &txt, SDL_Color color, bool cache)
     txt_iterator p = surface_text_table.find(txt);
     if (p == surface_text_table.end() ) {
       
-      if (surface_size > 5) {
-	SDL_FreeSurface(surface_text_table.begin()->second);
-	surface_text_table.erase(surface_text_table.begin());
-	surface_size--;
+      if (surface_text_table.size() > 5) {
+        SDL_FreeSurface(surface_text_table.begin()->second);
+        surface_text_table.erase(surface_text_table.begin());
       }
       surface = TTF_RenderUTF8_Blended(m_font, txt.c_str(), 
 				       color); //, black_color);
 
       surface_text_table.insert(txt_sample(txt, surface));
-      surface_size++;
     } else {
       txt_iterator p = surface_text_table.find(txt);
       surface = p->second;

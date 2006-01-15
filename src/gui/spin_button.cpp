@@ -24,18 +24,19 @@
 #include "../include/app.h"
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
-# include <sstream>
+#include <sstream>
 #include <iostream>
+#include "../include/global.h"
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 SpinButton::SpinButton (const std::string &label, uint x, uint y, uint w,
 			     int value, int step, int min_value, int max_value) :
-  Widget(x,y,w,small_font.GetHeight())
+  Widget(x,y,w,global().small_font().GetHeight())
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
-  txt_label = new Text(label, white_color, &small_font);
+  txt_label = new Text(label, white_color, &global().small_font());
 
   if ( min_value != -1 && min_value <= value)
     m_min_value = min_value;
@@ -45,13 +46,13 @@ SpinButton::SpinButton (const std::string &label, uint x, uint y, uint w,
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", white_color, &small_font);
+  txt_value = new Text("", white_color, &global().small_font());
   SetValue(value);
 
 
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
-  uint max_value_w = small_font.GetWidth(max_value_s.str());
+  uint max_value_w = global().small_font().GetWidth(max_value_s.str());
   
   uint margin = 5;
 
@@ -76,7 +77,7 @@ void SpinButton::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
 
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
-  uint max_value_w = small_font.GetWidth(max_value_s.str());
+  uint max_value_w = global().small_font().GetWidth(max_value_s.str());
   
   uint margin = 5;
   

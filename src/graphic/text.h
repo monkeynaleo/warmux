@@ -32,7 +32,7 @@ class Text
   SDL_Color color;
 
 public:
-  Text(const std::string &new_txt, SDL_Color new_color = white_color, Font* new_font = &small_font);
+  Text(const std::string &new_txt, SDL_Color new_color = white_color, Font* new_font = NULL);
   ~Text();
 
   //Draw method using windows coordinates

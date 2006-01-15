@@ -27,6 +27,7 @@
 #include "../graphic/font.h"
 #include <algorithm>
 #include <SDL_gfxPrimitives.h>
+#include "../include/global.h"
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -49,7 +50,7 @@ ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
   m_up = new Button(x+w-10, y, 10, 5, res, "menu/up");
   m_down = new Button(x+w-10, y+h-5, 10, 5, res, "menu/down");
 
-  height_item = small_font.GetHeight();
+  height_item = global().small_font().GetHeight();
   first_visible_item = 0;
   nb_visible_items_max = h/height_item;
   nb_visible_items = 0;
@@ -154,7 +155,7 @@ void ListBox::Draw (uint mouse_x, uint mouse_y)
        
      }
      
-     small_font.WriteLeft(x+5,
+     global().small_font().WriteLeft(x+5,
 			  y+i*height_item,
 			  m_items[i+first_visible_item].label,
 			  white_color);
@@ -272,7 +273,7 @@ const std::string& ListBox::ReadValue () const
 
 const std::string& ListBox::ReadValue (int index) const
 {
-  assert (index != -1 && index < m_items.size());
+  assert (index != -1 && index < (int)m_items.size());
   return m_items.at(index).value;
 }
 //-----------------------------------------------------------------------------

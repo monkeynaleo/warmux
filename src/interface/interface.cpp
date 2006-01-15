@@ -37,6 +37,7 @@
 #include "../include/app.h"
 #include "../game/time.h"
 #include <iostream>
+#include "../include/global.h"
 
 //-----------------------------------------------------------------------------
 WeaponStrengthBar weapon_strength_bar;
@@ -117,18 +118,18 @@ void Interface::Init()
   weapon_strength_bar.SetBackgroundColor (255*6/10, 255*6/10, 255*6/10, 96); 
 
   // constant text initialisation
-  t_NAME = new Text( _("Name:"), white_color, &normal_font);
-  t_ENERGY = new Text( _("Energy:"),white_color, &normal_font);
-  t_WEAPON = new Text( _("Weapon:"), white_color, &normal_font);
-  t_STOCK = new Text( _("Stock:"), white_color, &normal_font);
+  t_NAME = new Text( _("Name:"), white_color, &global().normal_font());
+  t_ENERGY = new Text( _("Energy:"),white_color, &global().normal_font());
+  t_WEAPON = new Text( _("Weapon:"), white_color, &global().normal_font());
+  t_STOCK = new Text( _("Stock:"), white_color, &global().normal_font());
 
-  global_timer = new Text(ulong2str(0), white_color, &normal_font);
+  global_timer = new Text(ulong2str(0), white_color, &global().normal_font());
   timer = NULL;
 
-  t_character_name = new Text("None", white_color, &normal_font);
-  t_character_energy = new Text("Dead", white_color, &normal_font);
-  t_weapon_name = new Text("None", white_color, &normal_font);
-  t_weapon_stock = new Text("0", white_color, &normal_font);;
+  t_character_name = new Text("None", white_color, &global().normal_font());
+  t_character_energy = new Text("Dead", white_color, &global().normal_font());
+  t_weapon_name = new Text("None", white_color, &global().normal_font());
+  t_weapon_stock = new Text("0", white_color, &global().normal_font());;
   
   
 }
@@ -335,7 +336,7 @@ void Interface::UpdateTimer(uint utimer)
       std::string s(ulong2str(utimer));
       timer->Set(s);
     }
-    else timer = new Text(ulong2str(utimer), white_color, &big_font);
+    else timer = new Text(ulong2str(utimer), white_color, &global().big_font());
   } else {
     timer = NULL;
   }

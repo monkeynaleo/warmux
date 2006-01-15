@@ -7,8 +7,11 @@ localedir=$(datadir)/@LOCALEDIR@
 
 wormux_SOURCES = \
 	include/base.h include/enum.h \
-	include/app.h \
-	main.cpp \
+	include/constant.cpp include/constant.h \
+	include/global.cpp include/glboal.h \
+	include/action.cpp include/action.h \
+	include/action_handler.cpp include/action_handler.h \
+	include/app.h main.cpp \
 	game/config.cpp game/config.h \
 	game/game_mode.cpp game/game_mode.h \
 	game/game.cpp game/game.h \
@@ -38,7 +41,6 @@ wormux_SOURCES = \
 	tool/stats.cpp tool/stats.h \
 	tool/random.cpp tool/random.h \
 	tool/Distance.cpp tool/Distance.h \
-	include/constant.cpp include/constant.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	graphic/font.cpp graphic/font.h \
 	graphic/sprite.cpp graphic/sprite.h \
@@ -69,8 +71,6 @@ wormux_SOURCES = \
 	map/wind.cpp map/wind.h \
 	map/camera.cpp map/camera.h \
 	map/ground.cpp map/ground.h \
-	include/action.cpp include/action.h \
-	include/action_handler.cpp include/action_handler.h \
     team/macro.h \
     team/character.cpp team/character.h \
 	team/move.cpp team/move.h \

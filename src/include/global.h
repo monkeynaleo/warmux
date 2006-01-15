@@ -16,47 +16,43 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Messages s'affichant en haut de l'ecran (et écrit dans la console).
+ * Class with instanciate everything.
  *****************************************************************************/
 
-#ifndef GAME_MESSAGES_H
-#define GAME_MESSAGES_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../graphic/text.h"
-#include <string>
-#include <list>
+#include "base.h"
+#include "../graphic/font.h"
 //-----------------------------------------------------------------------------
 
-class GameMessages
+class Global
 {
 public:
-  typedef struct message_t
-  {
-    Text * text;
-    Text * text_shadow;
-    uint time;
-    message_t (Text * t, Text * t2, uint _time) { text = t; text_shadow = t2; time = _time; }
-  } message_t;
-  std::list<message_t> liste;
-  typedef std::list<message_t>::iterator iterator;
+  Global();
+  ~Global();
+  Font& large_font();
+  Font& huge_font();
+  Font& big_font();
+  Font& normal_font();
+  Font& small_font();
+  Font& tiny_font();
 
-public:
-  // Remise a zéro
-  void Reset();
+private:
+  Font* AccessFont (Font **ptr, int size);
 
-  // Affiche tous les messages
-  void Draw();
-
-  // Actualisation : Supprime les anciens messages
-  void Refresh();
-
-  // Ajoute un message
-  // [titre] message
-  void Add(const std::string &message);
+  // Fonts
+  Font *ptr_large_font;
+  Font *ptr_huge_font;
+  Font *ptr_big_font;
+  Font *ptr_normal_font;
+  Font *ptr_small_font;
+  Font *ptr_tiny_font;
 };
 
-extern GameMessages game_messages;
+Global& global();
+void createGlobal();
+void destroyGlobal();
 
 //-----------------------------------------------------------------------------
 #endif

@@ -40,6 +40,7 @@
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
+#include "../include/global.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -218,7 +219,7 @@ void WeaponMenuItem::Draw()
   else
     txt << nb_bullets;
 
-  tiny_font.WriteLeftBottom((int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
+  global().tiny_font().WriteLeftBottom((int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
 			    (int)(c_y + 0.5 * WEAPON_ICO_HEIGHT * scale),
 			    txt.str(),
 			    white_color);

@@ -21,7 +21,6 @@
  * peut être modifiée avec le fichier de configuration.
  *****************************************************************************/
 
-#include "config.h"
 //-----------------------------------------------------------------------------
 #include "../team/teams_list.h"
 #include "../graphic/video.h"
@@ -40,6 +39,7 @@
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
+#include "config.h"
 namespace Wormux 
 {
 Config config;
@@ -65,18 +65,15 @@ Config::Config()
    
   // directories
 #ifndef WIN32
-  data_dir = DEFAULT_DATADIR + PATH_SEPARATOR;
-  locale_dir = DEFAULT_LOCALEDIR + PATH_SEPARATOR;
+  data_dir = INSTALL_DATADIR PATH_SEPARATOR;
+  locale_dir = INSTALL_LOCALEDIR PATH_SEPARATOR;
 #else
   data_dir = "data\\";
   locale_dir = "locale\\";
 #endif
-
+  ttf_filename = data_dir+"font" + PATH_SEPARATOR + "Vera.ttf";
 
   // video
-#ifdef USE_SDL
-  use_sdl = false;
-#endif
   tmp.video.width = 800;
   tmp.video.height = 600;
   tmp.video.fullscreen = false;
@@ -147,9 +144,6 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     uint max_fps;
     if (LitDocXml::LitUint (elem, "max_fps", max_fps)) 
       video.SetMaxFps(max_fps);
-#ifdef USE_SDL
-    LitDocXml::LitBool (elem, "use_sdl", use_sdl);
-#endif
     LitDocXml::LitInt (elem, "width", tmp.video.width);
     LitDocXml::LitInt (elem, "height", tmp.video.height);
     LitDocXml::LitBool (elem, "full_screen", tmp.video.fullscreen);
@@ -221,6 +215,7 @@ void Config::Applique()
   I18N_SetDir (dir);
 
   dir = TraduitRepertoire(data_dir);
+  ttf_filename = dir+"font" + PATH_SEPARATOR + "Vera.ttf";
   resource_manager.AddDataPath(dir);
   SetKeyboardConfig();
 
@@ -308,7 +303,7 @@ bool Config::SauveXml()
   doc.EcritBalise (noeud_video, "full_screen", 
 		   ulong2str(static_cast<uint>(video.IsFullScreen())) );	  
   doc.EcritBalise (noeud_video, "max_fps", 
-		   ulong2str(static_cast<uint>(video.GetMaxFps())) );	  
+          long2str(static_cast<int>(video.GetMaxFps())));
 
   if ( transparency == ALPHA )
     doc.EcritBalise (noeud_video, "transparency", "alpha");

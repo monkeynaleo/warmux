@@ -34,6 +34,7 @@
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"
+#include "../include/global.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
 GrenadeLauncher lance_grenade;
@@ -180,7 +181,7 @@ void Grenade::Draw()
 #ifdef CL
   police_mix.WriteCenterTop (txt_x, txt_y, ss.str());
 #else
-  small_font.WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
+  global().small_font().WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
 #endif
 }
 

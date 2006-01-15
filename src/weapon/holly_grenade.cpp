@@ -33,6 +33,7 @@
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"
+#include "../include/global.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
 
@@ -186,7 +187,7 @@ void HollyGrenade::Draw()
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
   int txt_y = GetY() - GetHeight();
-  normal_font.WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(),white_color);
+  global().normal_font().WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(),white_color);
 }
 
 //-----------------------------------------------------------------------------

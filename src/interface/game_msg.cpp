@@ -24,6 +24,7 @@
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../graphic/font.h"
+#include "../include/global.h"
 #include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -61,6 +62,7 @@ void GameMessages::Draw()
   uint msgy = 50;
   for (iterator i=liste.begin(); i != liste.end(); ++i)
   {
+    i -> text_shadow->DrawCenterTop(video.GetWidth()/2+1, msgy+1);
     i -> text->DrawCenterTop(video.GetWidth()/2, msgy);
     
     msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
@@ -82,6 +84,7 @@ void GameMessages::Refresh()
     {
       fin = (i == liste.end());
       delete (actuel->text);
+      delete (actuel->text_shadow);
       liste.erase (actuel);
       if (fin) break;
     }
@@ -97,9 +100,10 @@ void GameMessages::Add(const std::string &message)
   std::cout << "o MSG: " << message << std::endl;
 
   // Ajoute le message à la liste (avec son heure d'arrivée)
-  Text * tmp = new Text(message, white_color, &small_font);
+  Text * tmp = new Text(message, white_color, &global().small_font());
+  Text * tmp2 = new Text(message, black_color, &global().small_font());
 
-  liste.push_back (message_t(tmp, global_time.Read()));
+  liste.push_back (message_t(tmp, tmp2, global_time.Read()));
 
   while (NBR_MSG_MAX < liste.size()) liste.pop_front();
 }
