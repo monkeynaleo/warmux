@@ -1,4 +1,4 @@
-Wormux 0.5
+Wormux 0.7
 Wormux developers guide (English)
 ---------------------------------
 
@@ -40,13 +40,6 @@ By uncommenting "#define DEBUG_CHG_ETAT", debug messages
 will be written to the console. These are really useful if something
 goes wrong.
 
-* debug.cpp
------------
-
-This file is designed to be an additional tool to help people debug Wormux. In particular, 
-it can enable the display of lots of information that is updated in real-time. Just edit 
-"Debug::Gestion()" to display any data that you require.
-
 * GDB
 -----
 
@@ -70,7 +63,3 @@ way to solve this is to disable signal catching:
 ======
 
 All images must be in the PNG format. Pictures have to be either 24 bits/pixel or 32 bits/pixel.
-
-To see co-ordinates in the game, uncomment
-"#define AFFICHE_COORD_SOURIS" in debug.cpp, then recompile the program.
-The co-ordinates of the cursor will then be displayed on-screen.
