@@ -122,6 +122,15 @@ printf("charge %s",m_nomfich.c_str());
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
   xmlpp::Element *elem;
+  std::string config_version;
+  
+  if (!LitDocXml::LitString  (xml, "version", config_version)
+      || config_version != VERSION)
+  {
+      std::cerr << "! " << _("Warning: Don't load configuration (old version of Wormux).") << std::endl;
+      return false;
+  }
+
 
   //=== Directories ===
   LitDocXml::LitString  (xml, "data_dir", data_dir);
@@ -278,6 +287,7 @@ bool Config::SauveXml()
 
   doc.Cree (m_nomfich, "config", "1.0", "iso-8859-1");
   xmlpp::Element *racine = doc.racine();
+  doc.EcritBalise (racine, "version", VERSION);
 
   //=== Directories ===
   doc.EcritBalise (racine, "data_dir", data_dir);

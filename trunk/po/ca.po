@@ -19,7 +19,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s no trobat :-("
 
-#: src/game/game_loop.cpp:765
+#: src/game/game_loop.cpp:768
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (L'equip %s ) ha mort."
@@ -34,22 +34,22 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:739
+#: src/game/game_loop.cpp:742
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s es suicida!"
 
-#: src/graphic/fps.cpp:102
+#: src/graphic/fps.cpp:113
 #, c-format
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:732
+#: src/game/game_loop.cpp:735
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s ha caigut del mapa!"
 
-#: src/game/game_loop.cpp:743
+#: src/game/game_loop.cpp:746
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ha caigut del mapa!"
@@ -68,12 +68,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "El jugador '%s' ha augmentat %u punts de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game_loop.cpp:756
+#: src/game/game_loop.cpp:759
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip : %s!"
 
-#: src/game/game_loop.cpp:749
+#: src/game/game_loop.cpp:752
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ha mort per ser un maldestre!"
@@ -116,11 +116,11 @@ msgid_plural "'%s has won %u air attack(s)"
 msgstr[0] "El jugador '%s' ha conseguit %u atac(s) aeri(s) !"
 msgstr[1] "El jugador '%s' ha conseguit %u atac(s) aeri(s) !"
 
-#: src/interface/interface.cpp:194
+#: src/interface/interface.cpp:195
 msgid "(dead)"
 msgstr "(mort)"
 
-#: src/interface/interface.cpp:242
+#: src/interface/interface.cpp:243
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
@@ -128,7 +128,7 @@ msgstr "(ilimitat)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:214
+#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:189
 msgid "Air attack"
 msgstr "Atac aeri"
 
@@ -141,7 +141,7 @@ msgstr "Autors:"
 msgid "Authors:"
 msgstr "Autors:"
 
-#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:195
+#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:176
 msgid "Automatic bazooka"
 msgstr "Bazooka automatic"
 
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:274
+#: src/weapon/cluster_bomb.cpp:275
 msgid "ClusterBomb"
 msgstr "ClusterBomb"
 
@@ -175,15 +175,15 @@ msgstr "ClusterBomb"
 msgid "Commit suicide"
 msgstr "Suicidi"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Display player energy?"
 msgstr "Mostra l'energia del jugador?"
 
-#: src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:86
 msgid "Display player's name?"
 msgstr "Mostra el nom del jugador?"
 
-#: src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:80
 msgid "Display wind particles?"
 msgstr ""
 
@@ -191,11 +191,11 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Estar segur que vol sortir? (Y/N)"
 
-#: src/menu/options_menu.cpp:105
+#: src/menu/options_menu.cpp:106
 msgid "Duration of a turn:"
 msgstr "Duració del torn:"
 
-#: src/menu/options_menu.cpp:110
+#: src/menu/options_menu.cpp:111
 msgid "Duration of the end of a turn:"
 msgstr "Duracio del temps despres del torn:"
 
@@ -203,7 +203,7 @@ msgstr "Duracio del temps despres del torn:"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/main.cpp:197
+#: src/main.cpp:198
 msgid "End of game"
 msgstr "Final de la partida"
 
@@ -211,12 +211,12 @@ msgstr "Final de la partida"
 msgid "End of the game!\n"
 msgstr "Final de la partida!\n"
 
-#: src/interface/interface.cpp:121
+#: src/interface/interface.cpp:122
 #, fuzzy
 msgid "Energy:"
 msgstr "Energia"
 
-#: src/team/skin.cpp:127
+#: src/team/skin.cpp:121
 #, fuzzy, c-format
 msgid "Error during loading skin %s:"
 msgstr "Error durant la carrega del skin (%s) :"
@@ -254,20 +254,20 @@ msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 msgid "Find a random position for worms"
 msgstr "Colocacio aleatoria"
 
-#: src/menu/options_menu.cpp:76
+#: src/menu/options_menu.cpp:77
 msgid "Fullscreen?"
 msgstr "Pantalla completa?"
 
-#: src/menu/options_menu.cpp:103
+#: src/menu/options_menu.cpp:104
 #, fuzzy
 msgid "Game options"
 msgstr "Opcions"
 
-#: src/menu/options_menu.cpp:71
+#: src/menu/options_menu.cpp:72
 msgid "Graphic options"
 msgstr ""
 
-#: src/weapon/grenade.cpp:204
+#: src/weapon/grenade.cpp:205
 msgid "Grenade"
 msgstr "Granada"
 
@@ -280,11 +280,11 @@ msgstr "Pistola"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "El directori HOME (la variable de entorn $HOME) no pot ser trobat!"
 
-#: src/menu/main_menu.cpp:123
+#: src/menu/main_menu.cpp:125
 msgid "Info"
 msgstr "Informació"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Initial energy:"
 msgstr "Energia inicial:"
 
@@ -311,7 +311,7 @@ msgstr "Carrega el mapa %s"
 msgid "Load maps:"
 msgstr "Carrega el mapa %s"
 
-#: src/team/skin.cpp:302
+#: src/team/skin.cpp:293
 #, fuzzy
 msgid "Load skins:"
 msgstr "Carrega la pell %s"
@@ -321,7 +321,7 @@ msgstr "Carrega la pell %s"
 msgid "Load teams:"
 msgstr "Carrega l'equip %s."
 
-#: src/map/map.cpp:306
+#: src/map/map.cpp:307
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Mapa %s, fet per :"
@@ -330,25 +330,25 @@ msgstr "Mapa %s, fet per :"
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:96
 msgid "Music?"
 msgstr "Música?"
 
-#: src/interface/interface.cpp:120
+#: src/interface/interface.cpp:121
 #, fuzzy
 msgid "Name:"
 msgstr "Nom"
 
-#: src/menu/main_menu.cpp:111
+#: src/menu/main_menu.cpp:113
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:631
+#: src/weapon/weapon.cpp:636
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Cap element <%s> trobat en el arxiu de configuració xml!"
 
-#: src/menu/options_menu.cpp:115
+#: src/menu/options_menu.cpp:116
 msgid "Number of players per team:"
 msgstr "Nombre de jugadors per equip:"
 
@@ -356,7 +356,7 @@ msgstr "Nombre de jugadors per equip:"
 msgid "Ok"
 msgstr ""
 
-#: src/menu/main_menu.cpp:117
+#: src/menu/main_menu.cpp:119
 msgid "Options"
 msgstr "Opcions"
 
@@ -364,7 +364,7 @@ msgstr "Opcions"
 msgid "Pause"
 msgstr "Pausa"
 
-#: src/menu/main_menu.cpp:105
+#: src/menu/main_menu.cpp:107
 msgid "Play"
 msgstr "Jugar"
 
@@ -372,7 +372,7 @@ msgstr "Jugar"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Siusplau dona'ns la teva opinió de Wormux per correu electrónic:"
 
-#: src/menu/main_menu.cpp:129
+#: src/menu/main_menu.cpp:131
 msgid "Quit"
 msgstr "Sortir"
 
@@ -380,19 +380,19 @@ msgstr "Sortir"
 msgid "Run game"
 msgstr "Arrenca el joc"
 
-#: src/menu/game_menu.cpp:66
+#: src/menu/game_menu.cpp:67
 msgid "Select the teams:"
 msgstr ""
 
-#: src/menu/game_menu.cpp:105
+#: src/menu/game_menu.cpp:106
 msgid "Select the world:"
 msgstr ""
 
-#: src/menu/options_menu.cpp:98
+#: src/menu/options_menu.cpp:99
 msgid "Sound effects?"
 msgstr "Efectes sonors?"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 #, fuzzy
 msgid "Sound options"
 msgstr "Opcions"
@@ -401,7 +401,7 @@ msgstr "Opcions"
 msgid "Starting a new game"
 msgstr "Començant un nou joc"
 
-#: src/interface/interface.cpp:123
+#: src/interface/interface.cpp:124
 #, fuzzy
 msgid "Stock:"
 msgstr "Stock"
@@ -410,7 +410,7 @@ msgstr "Stock"
 msgid "Teleportation"
 msgstr "Teletransportació"
 
-#: src/weapon/auto_bazooka.cpp:170
+#: src/weapon/auto_bazooka.cpp:151
 msgid "The automatic rocket has left the battlefield..."
 msgstr "El cohet automatic ha anat a un altre món..."
 
@@ -418,7 +418,7 @@ msgstr "El cohet automatic ha anat a un altre món..."
 msgid "The game has ended as a draw."
 msgstr "El joc ha acabat en empat."
 
-#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:109
+#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:110
 msgid "The rocket left the battlefield..."
 msgstr "El cohet ha anat a un altre mon..."
 
@@ -427,12 +427,12 @@ msgstr "El cohet ha anat a un altre mon..."
 msgid "Unable to open maps directory (%s)!"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
-#: src/team/skin.cpp:314 src/team/skin.cpp:330
+#: src/team/skin.cpp:305 src/team/skin.cpp:321
 #, fuzzy, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Imposible obrir el directori dels skins (%s) !"
 
-#: src/main.cpp:277
+#: src/main.cpp:273
 msgid "Unexcepted exception caught..."
 msgstr "Excepció interceptada imprevista ..."
 
@@ -440,7 +440,7 @@ msgstr "Excepció interceptada imprevista ..."
 msgid "Unknow action"
 msgstr ""
 
-#: src/main.cpp:167
+#: src/main.cpp:168
 msgid "Version"
 msgstr "Versió"
 
@@ -468,7 +468,11 @@ msgstr ""
 msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 msgstr ""
 
-#: src/interface/interface.cpp:122
+#: src/game/config.cpp:130
+msgid "Warning: Don't load configuration (old version of Wormux)."
+msgstr ""
+
+#: src/interface/interface.cpp:123
 #, fuzzy
 msgid "Weapon:"
 msgstr "Arma"
@@ -477,12 +481,12 @@ msgstr "Arma"
 msgid "Website: "
 msgstr "Lloc web: "
 
-#: src/game/game_loop.cpp:760
+#: src/game/game_loop.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s : ha estat mort per una simple pistola!"
 
-#: src/main.cpp:171
+#: src/main.cpp:172
 msgid "Wormux launching..."
 msgstr "Arrencant Wormux..."
 

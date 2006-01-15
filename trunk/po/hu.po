@@ -19,7 +19,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Nem található %s térkép :-("
 
-#: src/game/game_loop.cpp:765
+#: src/game/game_loop.cpp:768
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -34,22 +34,22 @@ msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> %s csapatától"
 
-#: src/game/game_loop.cpp:739
+#: src/game/game_loop.cpp:742
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
 
-#: src/graphic/fps.cpp:102
+#: src/graphic/fps.cpp:113
 #, c-format
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:732
+#: src/game/game_loop.cpp:735
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:743
+#: src/game/game_loop.cpp:746
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
@@ -68,12 +68,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiaszintje %u egységgel nõtt!"
 msgstr[1] "%s energiaszintje %u egységgel nõtt!"
 
-#: src/game/game_loop.cpp:756
+#: src/game/game_loop.cpp:759
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
 
-#: src/game/game_loop.cpp:749
+#: src/game/game_loop.cpp:752
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kicsit ügyefogyott volt, így hát távozott az élõ sorából!"
@@ -116,11 +116,11 @@ msgid_plural "'%s has won %u air attack(s)"
 msgstr[0] "%s %u ráadás légitámadás nyert!"
 msgstr[1] "%s %u ráadás légitámadás nyert!"
 
-#: src/interface/interface.cpp:194
+#: src/interface/interface.cpp:195
 msgid "(dead)"
 msgstr "(kipurcant)"
 
-#: src/interface/interface.cpp:242
+#: src/interface/interface.cpp:243
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
@@ -128,7 +128,7 @@ msgstr "(korlátlan)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:214
+#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:189
 msgid "Air attack"
 msgstr "Légitámadás"
 
@@ -141,7 +141,7 @@ msgstr "Szerzõk:"
 msgid "Authors:"
 msgstr "Szerzõk:"
 
-#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:195
+#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:176
 msgid "Automatic bazooka"
 msgstr "Automatikus tûzelésû rakétavetõ"
 
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:274
+#: src/weapon/cluster_bomb.cpp:275
 msgid "ClusterBomb"
 msgstr "Szõnyegbomba"
 
@@ -175,15 +175,15 @@ msgstr "Szõnyegbomba"
 msgid "Commit suicide"
 msgstr "Öngyilkosság elkövetése"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:83
 msgid "Display player energy?"
 msgstr "A játékos energiájának megjelenítése"
 
-#: src/menu/options_menu.cpp:85
+#: src/menu/options_menu.cpp:86
 msgid "Display player's name?"
 msgstr "A játékos nevének megjelenítése"
 
-#: src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:80
 msgid "Display wind particles?"
 msgstr ""
 
@@ -191,11 +191,11 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Biztos, hogy ki szeretnél lépni? (Y/N) ?"
 
-#: src/menu/options_menu.cpp:105
+#: src/menu/options_menu.cpp:106
 msgid "Duration of a turn:"
 msgstr "Egy forduló ideje:"
 
-#: src/menu/options_menu.cpp:110
+#: src/menu/options_menu.cpp:111
 msgid "Duration of the end of a turn:"
 msgstr "Egy forduló ideje:"
 
@@ -203,7 +203,7 @@ msgstr "Egy forduló ideje:"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/main.cpp:197
+#: src/main.cpp:198
 msgid "End of game"
 msgstr "Vége!"
 
@@ -211,11 +211,11 @@ msgstr "Vége!"
 msgid "End of the game!\n"
 msgstr "Vége a játéknak!\n"
 
-#: src/interface/interface.cpp:121
+#: src/interface/interface.cpp:122
 msgid "Energy:"
 msgstr ""
 
-#: src/team/skin.cpp:127
+#: src/team/skin.cpp:121
 #, fuzzy, c-format
 msgid "Error during loading skin %s:"
 msgstr "Hiba lépett fel a smink (%s) betöltése közben:"
@@ -253,20 +253,20 @@ msgstr "Hiba: nem található %s csapatának %s sminkje."
 msgid "Find a random position for worms"
 msgstr "A kukacok véletlenszerû elhelyezése"
 
-#: src/menu/options_menu.cpp:76
+#: src/menu/options_menu.cpp:77
 msgid "Fullscreen?"
 msgstr "Teljesképernyõs üzemmód"
 
-#: src/menu/options_menu.cpp:103
+#: src/menu/options_menu.cpp:104
 #, fuzzy
 msgid "Game options"
 msgstr "Beállítások"
 
-#: src/menu/options_menu.cpp:71
+#: src/menu/options_menu.cpp:72
 msgid "Graphic options"
 msgstr ""
 
-#: src/weapon/grenade.cpp:204
+#: src/weapon/grenade.cpp:205
 msgid "Grenade"
 msgstr "Gránát"
 
@@ -279,11 +279,11 @@ msgstr "Pisztoly"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nem található a felhasználó könyvtára!"
 
-#: src/menu/main_menu.cpp:123
+#: src/menu/main_menu.cpp:125
 msgid "Info"
 msgstr "Információ"
 
-#: src/menu/options_menu.cpp:120
+#: src/menu/options_menu.cpp:121
 msgid "Initial energy:"
 msgstr "Induló energiaszint:"
 
@@ -310,7 +310,7 @@ msgstr "%s térkép betöltése"
 msgid "Load maps:"
 msgstr "%s térkép betöltése"
 
-#: src/team/skin.cpp:302
+#: src/team/skin.cpp:293
 #, fuzzy
 msgid "Load skins:"
 msgstr "%s smink betöltése"
@@ -320,7 +320,7 @@ msgstr "%s smink betöltése"
 msgid "Load teams:"
 msgstr "%s csapat betöltése."
 
-#: src/map/map.cpp:306
+#: src/map/map.cpp:307
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "%s térkép szerzõje:"
@@ -329,25 +329,25 @@ msgstr "%s térkép szerzõje:"
 msgid "Mine"
 msgstr "Taposó akna"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:96
 msgid "Music?"
 msgstr "Zene"
 
-#: src/interface/interface.cpp:120
+#: src/interface/interface.cpp:121
 #, fuzzy
 msgid "Name:"
 msgstr "Név"
 
-#: src/menu/main_menu.cpp:111
+#: src/menu/main_menu.cpp:113
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:631
+#: src/weapon/weapon.cpp:636
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
 
-#: src/menu/options_menu.cpp:115
+#: src/menu/options_menu.cpp:116
 msgid "Number of players per team:"
 msgstr "Játékosok száma csapatonként:"
 
@@ -355,7 +355,7 @@ msgstr "Játékosok száma csapatonként:"
 msgid "Ok"
 msgstr ""
 
-#: src/menu/main_menu.cpp:117
+#: src/menu/main_menu.cpp:119
 msgid "Options"
 msgstr "Beállítások"
 
@@ -363,7 +363,7 @@ msgstr "Beállítások"
 msgid "Pause"
 msgstr "Szünet"
 
-#: src/menu/main_menu.cpp:105
+#: src/menu/main_menu.cpp:107
 msgid "Play"
 msgstr "Irány a játék!"
 
@@ -371,7 +371,7 @@ msgstr "Irány a játék!"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Kérjük, mondd el a véleményed a Wormuxról: "
 
-#: src/menu/main_menu.cpp:129
+#: src/menu/main_menu.cpp:131
 msgid "Quit"
 msgstr "Kilépés"
 
@@ -379,19 +379,19 @@ msgstr "Kilépés"
 msgid "Run game"
 msgstr "Játék futtatása"
 
-#: src/menu/game_menu.cpp:66
+#: src/menu/game_menu.cpp:67
 msgid "Select the teams:"
 msgstr ""
 
-#: src/menu/game_menu.cpp:105
+#: src/menu/game_menu.cpp:106
 msgid "Select the world:"
 msgstr ""
 
-#: src/menu/options_menu.cpp:98
+#: src/menu/options_menu.cpp:99
 msgid "Sound effects?"
 msgstr "Hanghatások"
 
-#: src/menu/options_menu.cpp:90
+#: src/menu/options_menu.cpp:91
 #, fuzzy
 msgid "Sound options"
 msgstr "Beállítások"
@@ -400,7 +400,7 @@ msgstr "Beállítások"
 msgid "Starting a new game"
 msgstr "Új játék kezdése"
 
-#: src/interface/interface.cpp:123
+#: src/interface/interface.cpp:124
 #, fuzzy
 msgid "Stock:"
 msgstr "Raktár"
@@ -409,7 +409,7 @@ msgstr "Raktár"
 msgid "Teleportation"
 msgstr "Teleport"
 
-#: src/weapon/auto_bazooka.cpp:170
+#: src/weapon/auto_bazooka.cpp:151
 msgid "The automatic rocket has left the battlefield..."
 msgstr ""
 
@@ -417,7 +417,7 @@ msgstr ""
 msgid "The game has ended as a draw."
 msgstr ""
 
-#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:109
+#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:110
 msgid "The rocket left the battlefield..."
 msgstr ""
 
@@ -426,12 +426,12 @@ msgstr ""
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
 
-#: src/team/skin.cpp:314 src/team/skin.cpp:330
+#: src/team/skin.cpp:305 src/team/skin.cpp:321
 #, fuzzy, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
 
-#: src/main.cpp:277
+#: src/main.cpp:273
 msgid "Unexcepted exception caught..."
 msgstr "Elkaptam egy váratlanul fellépett kivételt..."
 
@@ -439,7 +439,7 @@ msgstr "Elkaptam egy váratlanul fellépett kivételt..."
 msgid "Unknow action"
 msgstr ""
 
-#: src/main.cpp:167
+#: src/main.cpp:168
 msgid "Version"
 msgstr "Verzió"
 
@@ -467,7 +467,11 @@ msgstr ""
 msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 msgstr ""
 
-#: src/interface/interface.cpp:122
+#: src/game/config.cpp:130
+msgid "Warning: Don't load configuration (old version of Wormux)."
+msgstr ""
+
+#: src/interface/interface.cpp:123
 #, fuzzy
 msgid "Weapon:"
 msgstr "Fegyver"
@@ -476,12 +480,12 @@ msgstr "Fegyver"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game_loop.cpp:760
+#: src/game/game_loop.cpp:763
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"
 
-#: src/main.cpp:171
+#: src/main.cpp:172
 msgid "Wormux launching..."
 msgstr "Töltõdik a Wormux..."
 
