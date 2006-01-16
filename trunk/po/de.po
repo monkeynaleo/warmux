@@ -113,8 +113,8 @@ msgstr "Team %s hat gewonnen."
 
 #: src/object/bonus_box.cpp:281
 #, fuzzy, c-format
-msgid "'%s has won %u air attack(s)"
-msgid_plural "'%s has won %u air attack(s)"
+msgid "'%s has won %u air attack"
+msgid_plural "'%s has won %u air attacks"
 msgstr[0] "%s hat %u Luftangriff(e) gewonnen"
 msgstr[1] "%s hat %u Luftangriff(e) gewonnen"
 
@@ -142,7 +142,7 @@ msgstr "Autoren"
 msgid "Authors:"
 msgstr "Autoren:"
 
-#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:176
+#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:177
 msgid "Automatic bazooka"
 msgstr "Lenkrakete"
 
@@ -270,7 +270,7 @@ msgstr "Grafikeinstellungen"
 msgid "Grenade"
 msgstr "Granate"
 
-#: src/weapon/gun.cpp:103
+#: src/weapon/gun.cpp:100
 msgid "Gun"
 msgstr "Pistole"
 
@@ -321,7 +321,7 @@ msgid "Map %s, a creation of :"
 msgstr "Karte %s, eine Kreation von: "
 
 #: src/menu/options_menu.cpp:77
-msgid "Max FPS:"
+msgid "Maximum number of FPS:"
 msgstr ""
 
 #: src/weapon/mine.cpp:298
@@ -405,7 +405,7 @@ msgstr "Vorrat:"
 msgid "Teleportation"
 msgstr "Teleportation"
 
-#: src/weapon/auto_bazooka.cpp:151
+#: src/weapon/auto_bazooka.cpp:152
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
 
@@ -508,7 +508,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Du brauchst mindestens zwei gültige Teams!"
 
-#: src/weapon/gun.cpp:92
+#: src/weapon/gun.cpp:89
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 

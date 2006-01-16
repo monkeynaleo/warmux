@@ -111,8 +111,8 @@ msgstr "L'equip %s ha guanyat."
 
 #: src/object/bonus_box.cpp:281
 #, fuzzy, c-format
-msgid "'%s has won %u air attack(s)"
-msgid_plural "'%s has won %u air attack(s)"
+msgid "'%s has won %u air attack"
+msgid_plural "'%s has won %u air attacks"
 msgstr[0] "El jugador '%s' ha conseguit %u atac(s) aeri(s) !"
 msgstr[1] "El jugador '%s' ha conseguit %u atac(s) aeri(s) !"
 
@@ -141,7 +141,7 @@ msgstr "Autors:"
 msgid "Authors:"
 msgstr "Autors:"
 
-#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:176
+#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:177
 msgid "Automatic bazooka"
 msgstr "Bazooka automatic"
 
@@ -271,7 +271,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "Granada"
 
-#: src/weapon/gun.cpp:103
+#: src/weapon/gun.cpp:100
 msgid "Gun"
 msgstr "Pistola"
 
@@ -327,7 +327,7 @@ msgid "Map %s, a creation of :"
 msgstr "Mapa %s, fet per :"
 
 #: src/menu/options_menu.cpp:77
-msgid "Max FPS:"
+msgid "Maximum number of FPS:"
 msgstr ""
 
 #: src/weapon/mine.cpp:298
@@ -414,7 +414,7 @@ msgstr "Stock"
 msgid "Teleportation"
 msgstr "Teletransportació"
 
-#: src/weapon/auto_bazooka.cpp:151
+#: src/weapon/auto_bazooka.cpp:152
 msgid "The automatic rocket has left the battlefield..."
 msgstr "El cohet automatic ha anat a un altre món..."
 
@@ -516,7 +516,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Tu necesites almenys dos equips vàlids!"
 
-#: src/weapon/gun.cpp:92
+#: src/weapon/gun.cpp:89
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 

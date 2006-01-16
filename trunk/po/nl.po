@@ -111,8 +111,8 @@ msgstr ""
 
 #: src/object/bonus_box.cpp:281
 #, fuzzy, c-format
-msgid "'%s has won %u air attack(s)"
-msgid_plural "'%s has won %u air attack(s)"
+msgid "'%s has won %u air attack"
+msgid_plural "'%s has won %u air attacks"
 msgstr[0] "De speler '%s' heeft %u luchtaanval(len) gewonnen !"
 msgstr[1] "De speler '%s' heeft %u luchtaanval(len) gewonnen !"
 
@@ -142,7 +142,7 @@ msgstr "Auteurs :"
 msgid "Authors:"
 msgstr "Auteurs :"
 
-#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:176
+#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:177
 msgid "Automatic bazooka"
 msgstr "Automatische bazooka"
 
@@ -287,7 +287,7 @@ msgstr ""
 msgid "Grenade"
 msgstr "Granaat"
 
-#: src/weapon/gun.cpp:103
+#: src/weapon/gun.cpp:100
 msgid "Gun"
 msgstr "Geweer"
 
@@ -341,7 +341,7 @@ msgid "Map %s, a creation of :"
 msgstr ""
 
 #: src/menu/options_menu.cpp:77
-msgid "Max FPS:"
+msgid "Maximum number of FPS:"
 msgstr ""
 
 #: src/weapon/mine.cpp:298
@@ -430,7 +430,7 @@ msgstr ""
 msgid "Teleportation"
 msgstr "Teleportatie"
 
-#: src/weapon/auto_bazooka.cpp:151
+#: src/weapon/auto_bazooka.cpp:152
 msgid "The automatic rocket has left the battlefield..."
 msgstr ""
 
@@ -538,7 +538,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr ""
 
-#: src/weapon/gun.cpp:92
+#: src/weapon/gun.cpp:89
 msgid "Your shot has missed!"
 msgstr ""
 
