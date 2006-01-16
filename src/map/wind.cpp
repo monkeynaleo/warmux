@@ -210,10 +210,10 @@ void Wind::Reset()
   m_val = m_nv_val = 0;
   barre.Actu (m_val);
 
-  for(uint i=0;i<TerrainActif().wind.nbr_sprite; i++)
+  for(uint i=0;i<TerrainActif().wind.nb_sprite; i++)
   {
     wind_particle_array[i].Init();
-    wind_particle_array[i].Resize((double)i/(double)TerrainActif().wind.nbr_sprite);
+    wind_particle_array[i].Resize((double)i/(double)TerrainActif().wind.nb_sprite);
   }
 }
 
@@ -245,7 +245,7 @@ void Wind::DrawParticles()
 {
   //  TerrainActif().wind.nbr_sprite = 1 ;
 
-  for(uint i=0;i<TerrainActif().wind.nbr_sprite; i++)
+  for(uint i=0;i<TerrainActif().wind.nb_sprite; i++)
     wind_particle_array[i].Draw();
 }
 
@@ -264,7 +264,7 @@ void Wind::Refresh()
     barre.Actu(m_val); 
   }
 
-  for(uint i=0;i<TerrainActif().wind.nbr_sprite; i++)
+  for(uint i=0;i<TerrainActif().wind.nb_sprite; i++)
     {
       wind_particle_array[i].Refresh();
     }

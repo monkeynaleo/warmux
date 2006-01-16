@@ -59,19 +59,6 @@ Map::~Map()
  delete to_redraw;
 }
 
-//NOT USED ANYMORE
-// void Map::Init()
-// {
-
-//   sky.Init();
-//   water.Init();
-
-//   cout.flush();
-//   ground.Init();
-
-//   // Distance minimale entre les vers
-//   dst_min_entre_vers = DST_MIN_ENTRE_VERS;
-// }
 
 //-----------------------------------------------------------------------------
 
@@ -162,13 +149,8 @@ void Map::DrawWater()
 
 void Map::Draw()
 { 
-  //StatStart("GameDraw: wind_particles");
   wind.DrawParticles();
-  //StatStop("GameDraw: wind_particles");
-
-  //StatStart("GameDraw: ground");
   ground.Draw(); 
-  //StatStop("GameDraw: ground");
 }
 
 //-----------------------------------------------------------------------------

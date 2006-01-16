@@ -44,7 +44,7 @@ InfoTerrain::InfoTerrain ()
 { 
   m_donnees_chargees = false;
   nb_mine = 0;
-  wind.nbr_sprite = 0;
+  wind.nb_sprite = 0;
   wind.need_flip = false;
   infinite_bg = false;
   img_terrain = NULL;
@@ -143,7 +143,7 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
   xmlpp::Element *xmlwind = LitDocXml::AccesBalise (xml, "wind");
   if (xmlwind != NULL)
   {
-    LitDocXml::LitUint (xmlwind, "nbr_sprite", wind.nbr_sprite);
+    LitDocXml::LitUint (xmlwind, "nbr_sprite", wind.nb_sprite);
     LitDocXml::LitDouble (xmlwind, "mass", wind.particle_mass);
     if(wind.particle_mass<0.1)
     {
@@ -153,11 +153,13 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
     LitDocXml::LitDouble (xmlwind, "wind_factor", wind.particle_wind_factor);
     LitDocXml::LitBool (xmlwind, "need_flip", wind.need_flip);
 
-    if (wind.nbr_sprite > MAX_WIND_OBJECTS)
-      wind.nbr_sprite = MAX_WIND_OBJECTS ;
+    if (wind.nb_sprite > MAX_WIND_OBJECTS)
+      wind.nb_sprite = MAX_WIND_OBJECTS ;
   } else {
-	wind.nbr_sprite = 0;
+    wind.nb_sprite = 0;
   }
+  wind.default_nb_sprite = wind.nb_sprite;
+
   return true;
 }
 

@@ -13,12 +13,12 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:332
 #, c-format
 msgid "! Map %s not found :-("
 msgstr ""
 
-#: src/game/game_loop.cpp:768
+#: src/game/game_loop.cpp:764
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
@@ -33,22 +33,22 @@ msgstr ""
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:742
+#: src/game/game_loop.cpp:738
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s pope³ni³ samobójstwo !"
 
-#: src/graphic/fps.cpp:113
+#: src/graphic/fps.cpp:110
 #, c-format
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:735
+#: src/game/game_loop.cpp:731
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game_loop.cpp:746
+#: src/game/game_loop.cpp:742
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
@@ -67,12 +67,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Gracz '%s' zyska³ %u punktów energii !"
 msgstr[1] "Gracz '%s' zyska³ %u punktów energii !"
 
-#: src/game/game_loop.cpp:759
+#: src/game/game_loop.cpp:755
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s jest psychopat±, zabi³ cz³onka swojej dru¿yny : %s !"
 
-#: src/game/game_loop.cpp:752
+#: src/game/game_loop.cpp:748
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s nie¿yje przez swoj± niezdarno¶æ."
@@ -176,17 +176,17 @@ msgstr ""
 msgid "Commit suicide"
 msgstr "Samobójstwo"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:88
 #, fuzzy
 msgid "Display player energy?"
 msgstr "Wy¶wietl energiê graczy"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:91
 #, fuzzy
 msgid "Display player's name?"
 msgstr "Wy¶wietl imiona graczy"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:85
 msgid "Display wind particles?"
 msgstr ""
 
@@ -195,17 +195,17 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Naprawdê chcesz wyj¶æ (T/N) ?"
 
-#: src/menu/options_menu.cpp:106
+#: src/menu/options_menu.cpp:111
 #, fuzzy
 msgid "Duration of a turn:"
 msgstr "Czas na wykonanie ruchu"
 
-#: src/menu/options_menu.cpp:111
+#: src/menu/options_menu.cpp:116
 #, fuzzy
 msgid "Duration of the end of a turn:"
 msgstr "Czas po wykonaniu ruchu do zakoñczenia rundy"
 
-#: src/object/bonus_box.cpp:304 src/weapon/dynamite.cpp:148
+#: src/object/bonus_box.cpp:304 src/weapon/dynamite.cpp:149
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -250,7 +250,7 @@ msgstr ""
 "B³±d :\n"
 "%s"
 
-#: src/game/game.cpp:197
+#: src/game/game.cpp:199
 #, fuzzy, c-format
 msgid ""
 "Error:\n"
@@ -268,12 +268,12 @@ msgstr ""
 msgid "Find a random position for worms"
 msgstr "Losowe umieszczenie robali"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:82
 #, fuzzy
 msgid "Fullscreen?"
 msgstr "Pe³ny ekran"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:109
 #, fuzzy
 msgid "Game options"
 msgstr "Opcje"
@@ -299,7 +299,7 @@ msgstr ""
 msgid "Info"
 msgstr "Informacje"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:126
 #, fuzzy
 msgid "Initial energy:"
 msgstr "Pocz±tkowa ilo¶æ energii"
@@ -322,7 +322,7 @@ msgstr "Inicjalizacja"
 msgid "Load map"
 msgstr ""
 
-#: src/map/maps_list.cpp:255
+#: src/map/maps_list.cpp:257
 msgid "Load maps:"
 msgstr ""
 
@@ -334,16 +334,20 @@ msgstr ""
 msgid "Load teams:"
 msgstr ""
 
-#: src/map/map.cpp:307
+#: src/map/map.cpp:289
 #, c-format
 msgid "Map %s, a creation of :"
+msgstr ""
+
+#: src/menu/options_menu.cpp:77
+msgid "Max FPS:"
 msgstr ""
 
 #: src/weapon/mine.cpp:298
 msgid "Mine"
 msgstr "Mina"
 
-#: src/menu/options_menu.cpp:96
+#: src/menu/options_menu.cpp:101
 #, fuzzy
 msgid "Music?"
 msgstr "Muzyka"
@@ -361,7 +365,7 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr ""
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:121
 #, fuzzy
 msgid "Number of players per team:"
 msgstr "Liczba graczy w dru¿ynie"
@@ -374,7 +378,7 @@ msgstr ""
 msgid "Options"
 msgstr "Opcje"
 
-#: src/game/game.cpp:208
+#: src/game/game.cpp:211
 msgid "Pause"
 msgstr ""
 
@@ -402,12 +406,12 @@ msgstr ""
 msgid "Select the world:"
 msgstr ""
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:104
 #, fuzzy
 msgid "Sound effects?"
 msgstr "Efekty d¼wiêkowe"
 
-#: src/menu/options_menu.cpp:91
+#: src/menu/options_menu.cpp:96
 #, fuzzy
 msgid "Sound options"
 msgstr "Opcje"
@@ -437,7 +441,7 @@ msgstr ""
 msgid "The rocket left the battlefield..."
 msgstr ""
 
-#: src/map/maps_list.cpp:266 src/map/maps_list.cpp:282
+#: src/map/maps_list.cpp:268 src/map/maps_list.cpp:284
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr ""
@@ -499,7 +503,7 @@ msgstr ""
 msgid "Website: "
 msgstr "Strona domowa : "
 
-#: src/game/game_loop.cpp:763
+#: src/game/game_loop.cpp:759
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Co za wstyd... %s zosta³ zabity zwyk³ym pistoletem !"
@@ -518,7 +522,7 @@ msgstr "Wersja Wormux "
 msgid "XML error during loading map '%s' :"
 msgstr ""
 
-#: src/map/maps_list.cpp:303
+#: src/map/maps_list.cpp:305
 msgid "You need at least one valid map !"
 msgstr ""
 
