@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-01-16 17:44+0100\n"
+"PO-Revision-Date: 2006-01-16 18:04+0100\n"
 "Last-Translator: Victor Stinner <victor.stinner@haypocalc.com>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 "X-Poedit-Country: FRANCE\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: KBabel 1.11\n"
+"Plural-Forms:  nplurals=2; plural=(n > 1);\n"
 
 #: src/map/maps_list.cpp:332
 #, c-format
@@ -59,17 +60,17 @@ msgid "%s has fallen off the map!"
 msgstr "%s est sorti du terrain !"
 
 #: src/object/bonus_box.cpp:272
-#, fuzzy, c-format
+#, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
-msgstr[0] "Le joueur %s a perdu %u points d'énergie."
+msgstr[0] "Le joueur %s a perdu %u point d'énergie."
 msgstr[1] "Le joueur %s a perdu %u points d'énergie."
 
 #: src/object/bonus_box.cpp:263
-#, fuzzy, c-format
+#, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
-msgstr[0] "Le joueur %s a gagné %u points de vie !"
+msgstr[0] "Le joueur %s a gagné %u point de vie !"
 msgstr[1] "Le joueur %s a gagné %u points de vie !"
 
 #: src/game/game_loop.cpp:755
@@ -88,24 +89,24 @@ msgid "%s is next to a mine!"
 msgstr "%s est près d'une mine ..."
 
 #: src/object/bonus_box.cpp:290
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
-msgstr[0] "L'équipe %s a gagné %u bazooka(s) automatique(s) !"
-msgstr[1] "L'équipe %s a gagné %u bazooka(s) automatique(s) !"
+msgstr[0] "L'équipe %s a gagné %u bazooka automatique !"
+msgstr[1] "L'équipe %s a gagné %u bazookas automatiques !"
 
 #: src/object/bonus_box.cpp:300
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
-msgstr[0] "L'équipe %s a gagné %u dynamite(s) !"
-msgstr[1] "L'équipe %s a gagné %u dynamite(s) !"
+msgstr[0] "L'équipe %s a gagné %u baton de dynamite !"
+msgstr[1] "L'équipe %s a gagné %u batons de dynamite !"
 
 #: src/object/bonus_box.cpp:254
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
-msgstr[0] "L'équipe '%s' a gagné %u téléportations."
+msgstr[0] "L'équipe '%s' a gagné %u téléportation."
 msgstr[1] "L'équipe '%s' a gagné %u téléportations."
 
 #: src/game/game.cpp:108
@@ -114,11 +115,11 @@ msgid "%s team has won."
 msgstr "L'équipe %s a gagné."
 
 #: src/object/bonus_box.cpp:281
-#, fuzzy, c-format
-msgid "'%s has won %u air attack(s)"
-msgid_plural "'%s has won %u air attack(s)"
-msgstr[0] "Le joueur %s a gagné %u attaque(s) aérienne(s) !"
-msgstr[1] "Le joueur %s a gagné %u attaque(s) aérienne(s) !"
+#, c-format
+msgid "'%s has won %u air attack"
+msgid_plural "'%s has won %u air attacks"
+msgstr[0] "Le joueur %s a gagné %u attaque aérienne !"
+msgstr[1] "Le joueur %s a gagné %u attaques aériennes !"
 
 #: src/interface/interface.cpp:195
 msgid "(dead)"
@@ -146,7 +147,7 @@ msgstr "Auteurs"
 msgid "Authors:"
 msgstr "Auteurs :"
 
-#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:176
+#: src/object/bonus_box.cpp:294 src/weapon/auto_bazooka.cpp:177
 msgid "Automatic bazooka"
 msgstr "Bazooka automatique"
 
@@ -274,7 +275,7 @@ msgstr "Options graphiques"
 msgid "Grenade"
 msgstr "Grenade"
 
-#: src/weapon/gun.cpp:103
+#: src/weapon/gun.cpp:100
 msgid "Gun"
 msgstr "Pistolet"
 
@@ -324,8 +325,8 @@ msgid "Map %s, a creation of :"
 msgstr "Terrain %s, une création de :"
 
 #: src/menu/options_menu.cpp:77
-msgid "Max FPS:"
-msgstr ""
+msgid "Maximum number of FPS:"
+msgstr "Nbr. max. d'images/sec :"
 
 #: src/weapon/mine.cpp:298
 msgid "Mine"
@@ -408,7 +409,7 @@ msgstr "Munitions :"
 msgid "Teleportation"
 msgstr "Téléportation"
 
-#: src/weapon/auto_bazooka.cpp:151
+#: src/weapon/auto_bazooka.cpp:152
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La roquette automatique est partie dans un autre monde ..."
 
@@ -470,7 +471,7 @@ msgstr ""
 
 #: src/game/config.cpp:130
 msgid "Warning: Don't load configuration (old version of Wormux)."
-msgstr ""
+msgstr "Avertissement: Ne charge pas la configuration (ancienne version de Wormux)."
 
 #: src/interface/interface.cpp:123
 msgid "Weapon:"
@@ -512,7 +513,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Il faut au minimum deux équipes valides !"
 
-#: src/weapon/gun.cpp:92
+#: src/weapon/gun.cpp:89
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
 
