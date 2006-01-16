@@ -82,31 +82,11 @@ SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags)
 const int WIDTH_MIN=800;
 const int HEIGHT_MIN=600;
 
-#ifdef BUGGY_CODE
-Video::Video()
-	:  m_mode(-1)
-{
-  SetMaxFps (50);
-  const std::vector<CL_DisplayMode> modes=CL_DisplayMode::get_display_modes();
-  ConstIteratorMode mode=modes.begin();
-  ConstIteratorMode end=modes.end();
-
-  for(;mode!=end;++mode)
-    {
-      CL_Size resolution=mode->get_resolution();
-      if(resolution.width>=WIDTH_MIN && resolution.height>=HEIGHT_MIN)
-	{
-	  m_modes.push_back(*mode);
-	}
-    }
-}
-#else
 Video::Video() 
 {
   SetMaxFps (50);
   fullscreen = false;
 }
-#endif
 
 void Video::SetMaxFps(uint max_fps)
 {
@@ -162,6 +142,7 @@ bool Video::SetConfig(int width, int height, bool _fullscreen)
 				       SDL_SWSURFACE);
 
     if (app.sdlwindow == NULL) return false;
+    fullscreen = false;
   }
 
   // fullscreen ?
