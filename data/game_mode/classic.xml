@@ -49,7 +49,7 @@
     </tux>
 
     <gnulauncher>
-      <position origin="hand" x="-10" y="-6" />
+      <position origin="hand" x="-8" y="-3" />
       <category>4</category>
       <max_strength>20</max_strength>
       <nb_ammo>2</nb_ammo>
@@ -66,7 +66,7 @@
     </gnulauncher>
     
     <bazooka>
-      <position origin="hand" x="-24" y="-23" />
+      <position origin="hand" x="-20" y="-18" />
       <max_strength>20</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
@@ -80,7 +80,7 @@
     </bazooka>
 
     <automatic_bazooka>
-      <position origin="hand" x="-24" y="-23" />
+      <position origin="hand" x="-20" y="-18" />
       <max_strength>20</max_strength>
       <nb_ammo>3</nb_ammo>
       <damage>60</damage>
@@ -94,7 +94,7 @@
     </automatic_bazooka>
 
     <grenade>
-      <position origin="hand" x="-10" y="-6" />
+      <position origin="hand" x="-7" y="-9" />
       <max_strength>20</max_strength>
       <nb_ammo>5</nb_ammo>
       <damage>50</damage>
@@ -142,7 +142,7 @@
     </cluster_bomb>
 
     <gun>
-      <position origin="hand" x="-4" y="-6" />
+      <position origin="hand" x="-8" y="-4" />
       <min_angle>-40</min_angle>
       <max_angle>90</max_angle>
       <nb_ammo>-1</nb_ammo>
@@ -154,7 +154,7 @@
     </gun>
 
      <uzi>
-      <position origin="hand" x="-4" y="-6" />
+      <position origin="hand" x="-7" y="-5" />
       <min_angle>-40</min_angle>
       <max_angle>89</max_angle>
       <nb_ammo>6</nb_ammo>
@@ -200,8 +200,8 @@
     </ninjarope> 
 
     <parachute>
-      <position origin="hand" x="-5" y="-6" />
-      <nb_ammo>2</nb_ammo>     
+      <position origin="hand" x="-5" y="-6" />      
+      <nb_ammo>2</nb_ammo>
       <change_weapon>1</change_weapon>
     </parachute>
 
