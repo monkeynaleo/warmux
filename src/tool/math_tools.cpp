@@ -71,7 +71,7 @@ void InitVector (DoubleVector &vector, double x, double y)
 // Check if a vector is NULL
 bool VectorNull (DoubleVector vector)
 {
-  return (vector.x == 0 && vector.y == 0);
+  return (EgalZero(vector.x) && EgalZero(vector.y));
 }
 
 
@@ -136,8 +136,8 @@ double CalculeAngle (const Point2i &O, const Point2i &M)
   int y = M.y - O.y;
   double angle;
 
-  if (x != 0) {
-    if (y != 0) {
+  if (!EgalZero(x)) {
+    if (!EgalZero(y)) {
       angle = atan((double)y/(double)x);
       if (0 < x) {
 	angle = angle;
@@ -170,9 +170,9 @@ double CalculeAnglef (DoubleVector V)
 {
   double angle;
 
-  if (V.x != 0)
+  if (!EgalZero(V.x))
     {
-      if (V.y != 0)
+      if (!EgalZero(V.y))
 	{
 	  angle = atan((double)V.y/V.x);
 	  if (0 < V.x)
