@@ -73,10 +73,7 @@ void BalleGun::Tire()
 
   // Set the initial position.
   int x,y;
-  ActiveTeam().GetWeapon().RotationPointXY (x, y);
-
-  x -= image->GetWidth()/2;
-  y -= image->GetHeight()/2;
+  ActiveCharacter().GetHandPosition(x, y);
   SetXY (x,y);
    
   // Set the initial speed.

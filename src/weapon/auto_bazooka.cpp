@@ -66,14 +66,15 @@ RoquetteTeteCherche::RoquetteTeteCherche()
 //-----------------------------------------------------------------------------
 
 void RoquetteTeteCherche::Tire (double force, 
-				int x, int y,
 				uint cible_x, uint cible_y)
 {
   SetAirResistFactor(auto_bazooka.cfg().air_resist_factor);
 
   PrepareTir();
-
-  // Fixe la position de départ
+  
+  // Set the initial position.
+  int x,y;
+  ActiveCharacter().GetHandPosition(x, y);
   SetXY (x,y);
 
   //On choisit la cible pour la roquette:
@@ -200,9 +201,7 @@ bool AutomaticBazooka::p_Shoot ()
   }
 
   // Initialise le roquette
-  int x,y;
-  PosXY (x,y);
-  roquette.Tire (m_strength, x,y, cible.pos.x,cible.pos.y);
+  roquette.Tire (m_strength, cible.pos.x,cible.pos.y);
   lst_objets.AjouteObjet (&roquette,true);
 
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");

@@ -60,9 +60,9 @@ void SuperTux::Tire()
 {
   PrepareTir();
 
-  // Fixe la position de départ
+  // Set the initial position.
   int x,y;
-  ActiveTeam().GetWeapon().PosXY (x, y);
+  ActiveCharacter().GetHandPosition(x, y);
   SetXY (x,y);
 
   // Fixe la force de départ

@@ -140,9 +140,9 @@ void ClusterBomb::Tire (double force)
 
   PrepareTir();
 
-  // Set the initial position
+  // Set the initial position.
   int x,y;
-  ActiveTeam().GetWeapon().PosXY (x, y);
+  ActiveCharacter().GetHandPosition(x, y);
   SetXY (x,y);
 
   // Set the initial speed
