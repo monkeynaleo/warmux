@@ -38,11 +38,12 @@ using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG
+#  include <iostream>
 
-#define DEBUG_CHG_ETAT
+//#define DEBUG_CHG_ETAT
 //#define DEBUG_MSG_PHYSIQUE
 
-#define COUT_DEBUG0 std::cout << "[Objet " << m_name << "]"
+#define COUT_DEBUG0 std::cout << "[Objet " << this << "]"
 #define COUT_DEBUG COUT_DEBUG0 " "
 #define COUT_PHYSIC COUT_DEBUG0 << "[Physique] "
 
@@ -176,11 +177,11 @@ void Physics::SetSpeed (double length, double angle)
 
 void Physics::SetSpeedXY (DoubleVector vector)
 {
-  if (!IsMoving() && !VectorNull(vector))
-    StartMoving();
-
   if (EgalZero(vector.x)) vector.x = 0;
   if (EgalZero(vector.y)) vector.y = 0;
+
+  if (!IsMoving() && !VectorNull(vector))
+    StartMoving();
 
   m_pos_x.x1 = vector.x ;
   m_pos_y.x1 = vector.y ;
@@ -201,11 +202,11 @@ void Physics::AddSpeed (double length, double angle)
 
 void Physics::AddSpeedXY (DoubleVector vector)
 {
-  if (!IsMoving() && !VectorNull(vector))
-    StartMoving();
-
   if (EgalZero(vector.x)) vector.x = 0;
   if (EgalZero(vector.y)) vector.y = 0;
+
+  if (!IsMoving() && !VectorNull(vector))
+    StartMoving();
 
   m_pos_x.x1 += vector.x ;
   m_pos_y.x1 += vector.y ;
@@ -614,8 +615,8 @@ void Physics::RunPhysicalEngine ()
 	{
 #ifdef DEBUG_MSG_PHYSIQUE
 	  COUT_PHYSIC << "Collision durant le déplacement "
-		      << '(' << m_pos.x << ',' << m_pos.y 
-		      << " -> " << nv_x << ',' << nv_y << ")." << std::endl;
+		      << '(' << old_x << ',' << old_y 
+		      << " -> " << new_x << ',' << new_y << ")." << std::endl;
 #endif
 	  Rebound(contact_x, contact_y, contact_angle);
 	}
