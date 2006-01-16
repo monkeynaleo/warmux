@@ -153,23 +153,25 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     uint max_fps;
     if (LitDocXml::LitUint (elem, "max_fps", max_fps)) 
       video.SetMaxFps(max_fps);
+
+    LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);
     LitDocXml::LitInt (elem, "width", tmp.video.width);
     LitDocXml::LitInt (elem, "height", tmp.video.height);
     LitDocXml::LitBool (elem, "full_screen", tmp.video.fullscreen);
 
     std::string transparency_str;
     if ( LitDocXml::LitString (elem, "transparency", transparency_str))
-       {
-	  if ( transparency_str == "alpha" )
-	    transparency = ALPHA;
-	  else if ( transparency_str == "colorkey" )
-	    transparency = COLORKEY;
-	  else
-	    {
-	       std::cerr << "o Unknow transparency \"" << transparency_str  
-		 << "\" in config.xml [IGNORED]." << std::endl;
-	    }	  
-       }
+      {
+	if ( transparency_str == "alpha" )
+	  transparency = ALPHA;
+	else if ( transparency_str == "colorkey" )
+	  transparency = COLORKEY;
+	else
+	  {
+	    std::cerr << "o Unknow transparency \"" << transparency_str  
+		      << "\" in config.xml [IGNORED]." << std::endl;
+	  }	  
+      }
      
 	 
   }
@@ -308,6 +310,7 @@ bool Config::SauveXml()
 
   //=== Video ===
   xmlpp::Element *noeud_video = racine -> add_child("video");
+  doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));
   doc.EcritBalise (noeud_video, "width", ulong2str(video.GetWidth()));
   doc.EcritBalise (noeud_video, "height", ulong2str(video.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 
@@ -322,19 +325,11 @@ bool Config::SauveXml()
  
   //=== Son ===
   xmlpp::Element *noeud_son = racine -> add_child("sound");
-#ifdef CL
-  doc.EcritBalise (noeud_son, "music", ulong2str(jukebox.GetMusicConfig()));
-  doc.EcritBalise (noeud_son, "effects", 
-		   ulong2str(jukebox.GetEffectsConfig()));
-  doc.EcritBalise (noeud_son, "frequency",
-		   ulong2str(jukebox.GetFrequency()));
-#else
   doc.EcritBalise (noeud_son, "music", ulong2str(jukebox.UseMusic()));
   doc.EcritBalise (noeud_son, "effects", 
 		   ulong2str(jukebox.UseEffects()));
   doc.EcritBalise (noeud_son, "frequency",
 		   ulong2str(jukebox.GetFrequency()));
-#endif
    
   //=== Mode de jeu ===
   doc.EcritBalise (racine, "game_mode", m_game_mode);

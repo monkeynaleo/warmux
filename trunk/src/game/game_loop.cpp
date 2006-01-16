@@ -293,7 +293,11 @@ void InitGame ()
   // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
    
-  if (!config.display_wind_particles) TerrainActif().wind.nbr_sprite = 0;
+  if (!config.display_wind_particles) {
+    TerrainActif().wind.nb_sprite = 0;
+  } else {
+    TerrainActif().wind.nb_sprite = TerrainActif().wind.default_nb_sprite;
+  }
 
   jeu.fin_partie = false;
   game_loop.SetState (gamePLAYING, true);
@@ -461,14 +465,6 @@ void GameLoop::Draw ()
   // Draw the interface (current team's information, weapon's ammo)
   StatStart("GameDraw:interface");
   interface.Draw ();
-
-  // Ask to redraw the top and the bottom of the screen for the interface
-  Rectanglei top(0,0, app.sdlwindow->w, 50); 
-  world.ToRedrawOnScreen(top);
-  
-  Rectanglei bottom(0,app.sdlwindow->h-120, app.sdlwindow->w, 100); 
-  world.ToRedrawOnScreen(bottom);
-
   StatStop("GameDraw:interface");
 
   StatStart("GameDraw:end");

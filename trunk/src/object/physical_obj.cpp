@@ -120,7 +120,6 @@ void PhysicalObj::SetXY (int x, int y)
 {
   if (x != GetX() || y != GetY())
   {
-    world.ToRedrawOnMap(GetRect());
     world.ToRedrawOnMap(Rectanglei(x, y, m_width, m_height));
   }      
 

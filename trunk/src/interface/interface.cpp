@@ -276,7 +276,10 @@ void Interface::Draw ()
   SDL_BlitSurface( bg_time, NULL, app.sdlwindow, &dest);   
   std::string tmp(global_time.GetString());
   global_timer->Set(tmp);
-  global_timer->DrawCenterTop(video.GetWidth()/2, 10);  
+  global_timer->DrawCenterTop(video.GetWidth()/2, 10); 
+  
+  Rectanglei tmpr(dest.x,dest.y, dest.w, dest.h);
+  world.ToRedrawOnScreen(tmpr);
 
   if ( game_loop.ReadState() == gamePLAYING && weapon_strength_bar.visible)
   {
@@ -299,9 +302,11 @@ void Interface::Draw ()
   bottom_bar_ox = x;
   bottom_bar_oy = y;
    
-  // Redessine intégralement le fond ?
   SDL_Rect dr = { x, y, game_menu->w, game_menu->h};	
-  SDL_BlitSurface( game_menu, NULL, app.sdlwindow, &dr);   	       
+  SDL_BlitSurface( game_menu, NULL, app.sdlwindow, &dr);   
+
+  Rectanglei tmpr2(dr.x,dr.y, dr.w, dr.h);
+  world.ToRedrawOnScreen(tmpr2);
   
   // display time left in a turn ?
   if (timer != NULL && display_timer) timer->DrawCenter(x+GetWidth()/2, 

@@ -74,6 +74,11 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
   lbox_video_mode = new ListBox(0, 0, 0, 80);
   graphic_options->AddWidget(lbox_video_mode);
 
+  opt_max_fps = new SpinButton(_("Maximum number of FPS:"), 0, 0, 0,
+			       50, 5,
+			       20, 120);
+  graphic_options->AddWidget(opt_max_fps);
+
   full_screen = new CheckBox(_("Fullscreen?"), 0, 0, 0); 
   graphic_options->AddWidget(full_screen);
 
@@ -160,6 +165,7 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
 
   resource_manager.UnLoadXMLProfile( res);
 
+  opt_max_fps->SetValue (video.GetMaxFps());
   opt_display_wind_particles->SetValue (config.display_wind_particles);
   opt_display_energy->SetValue (config.affiche_energie_ver);
   opt_display_name->SetValue (config.affiche_nom_ver);
@@ -208,6 +214,7 @@ void OptionMenu::SaveOptions()
 
   game_mode.character.init_energy = opt_energy_ini->GetValue() ;
 
+  video.SetMaxFps(opt_max_fps->GetValue());
   // Video mode
   std::string s_mode = lbox_video_mode->ReadValue();
   int w, h;

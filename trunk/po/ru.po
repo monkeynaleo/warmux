@@ -18,12 +18,12 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: src/map/maps_list.cpp:330
+#: src/map/maps_list.cpp:332
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/game/game_loop.cpp:768
+#: src/game/game_loop.cpp:764
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (команда %s) погибла."
@@ -38,22 +38,22 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:742
+#: src/game/game_loop.cpp:738
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
 
-#: src/graphic/fps.cpp:113
+#: src/graphic/fps.cpp:110
 #, c-format
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:735
+#: src/game/game_loop.cpp:731
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:746
+#: src/game/game_loop.cpp:742
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -74,12 +74,12 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game_loop.cpp:759
+#: src/game/game_loop.cpp:755
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:752
+#: src/game/game_loop.cpp:748
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
@@ -186,15 +186,15 @@ msgstr "Кассетная бомба"
 msgid "Commit suicide"
 msgstr "Покончить жизнь самоубийством"
 
-#: src/menu/options_menu.cpp:83
+#: src/menu/options_menu.cpp:88
 msgid "Display player energy?"
 msgstr "Показать энергию игрока?"
 
-#: src/menu/options_menu.cpp:86
+#: src/menu/options_menu.cpp:91
 msgid "Display player's name?"
 msgstr "Показать имя игрока?"
 
-#: src/menu/options_menu.cpp:80
+#: src/menu/options_menu.cpp:85
 msgid "Display wind particles?"
 msgstr "Показать "
 
@@ -202,15 +202,15 @@ msgstr "Показать "
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
-#: src/menu/options_menu.cpp:106
+#: src/menu/options_menu.cpp:111
 msgid "Duration of a turn:"
 msgstr "Длительность шага:"
 
-#: src/menu/options_menu.cpp:111
+#: src/menu/options_menu.cpp:116
 msgid "Duration of the end of a turn:"
 msgstr "Длительность завершения шага:"
 
-#: src/object/bonus_box.cpp:304 src/weapon/dynamite.cpp:148
+#: src/object/bonus_box.cpp:304 src/weapon/dynamite.cpp:149
 msgid "Dynamite"
 msgstr "Динамит"
 
@@ -246,7 +246,7 @@ msgstr "Ошибка при загрузке команды %s:"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/game.cpp:197
+#: src/game/game.cpp:199
 #, c-format
 msgid ""
 "Error:\n"
@@ -264,11 +264,11 @@ msgstr "Ошибка: не удаётся найти тему \"%s\" для ко
 msgid "Find a random position for worms"
 msgstr "Найти для червяков случайное местоположение"
 
-#: src/menu/options_menu.cpp:77
+#: src/menu/options_menu.cpp:82
 msgid "Fullscreen?"
 msgstr "На весь экран?"
 
-#: src/menu/options_menu.cpp:104
+#: src/menu/options_menu.cpp:109
 msgid "Game options"
 msgstr "Настройки игры"
 
@@ -292,7 +292,7 @@ msgstr "Домашний каталог (переменная окружения
 msgid "Info"
 msgstr "Информация"
 
-#: src/menu/options_menu.cpp:121
+#: src/menu/options_menu.cpp:126
 msgid "Initial energy:"
 msgstr "Энергии в начале:"
 
@@ -312,7 +312,7 @@ msgstr "Инициализация команд"
 msgid "Load map"
 msgstr "Загрузка карты"
 
-#: src/map/maps_list.cpp:255
+#: src/map/maps_list.cpp:257
 msgid "Load maps:"
 msgstr "Загрузка карт:"
 
@@ -324,16 +324,20 @@ msgstr "Загрузка тем:"
 msgid "Load teams:"
 msgstr "Загрузка команд:"
 
-#: src/map/map.cpp:307
+#: src/map/map.cpp:289
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Карту %s создал:"
+
+#: src/menu/options_menu.cpp:77
+msgid "Max FPS:"
+msgstr ""
 
 #: src/weapon/mine.cpp:298
 msgid "Mine"
 msgstr "Мина"
 
-#: src/menu/options_menu.cpp:96
+#: src/menu/options_menu.cpp:101
 msgid "Music?"
 msgstr "Музыка?"
 
@@ -350,7 +354,7 @@ msgstr "Игра по сети"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
 
-#: src/menu/options_menu.cpp:116
+#: src/menu/options_menu.cpp:121
 msgid "Number of players per team:"
 msgstr "Игроков в каждой команде:"
 
@@ -362,7 +366,7 @@ msgstr "ОК"
 msgid "Options"
 msgstr "Настройки"
 
-#: src/game/game.cpp:208
+#: src/game/game.cpp:211
 msgid "Pause"
 msgstr "Пауза"
 
@@ -390,11 +394,11 @@ msgstr "Выберите команды:"
 msgid "Select the world:"
 msgstr "Выберите мир:"
 
-#: src/menu/options_menu.cpp:99
+#: src/menu/options_menu.cpp:104
 msgid "Sound effects?"
 msgstr "Звуковые эффекты?"
 
-#: src/menu/options_menu.cpp:91
+#: src/menu/options_menu.cpp:96
 msgid "Sound options"
 msgstr "Настройки звука"
 
@@ -422,7 +426,7 @@ msgstr "Игра окончилась вничью"
 msgid "The rocket left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
 
-#: src/map/maps_list.cpp:266 src/map/maps_list.cpp:282
+#: src/map/maps_list.cpp:268 src/map/maps_list.cpp:284
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
@@ -481,7 +485,7 @@ msgstr "Оружие:"
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:763
+#: src/game/game_loop.cpp:759
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -499,7 +503,7 @@ msgstr "Wormux версии "
 msgid "XML error during loading map '%s' :"
 msgstr "Ошибка разбора XML при загрузке карты '%s' :"
 
-#: src/map/maps_list.cpp:303
+#: src/map/maps_list.cpp:305
 msgid "You need at least one valid map !"
 msgstr "Вам нужна хотя бы одна карта!"
 

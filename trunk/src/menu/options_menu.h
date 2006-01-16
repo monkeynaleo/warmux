@@ -40,6 +40,7 @@ class OptionMenu : public Menu
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
    CheckBox *full_screen; 
+   SpinButton *opt_max_fps;
    VBox *graphic_options;
 
    /* Sound options controllers */
