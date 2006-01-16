@@ -31,6 +31,28 @@ public class WGround implements Drawable {
 
 	public void keyEvent(int key, boolean isPressed) { ; }
 
+	public int yProjection(int x, int y) {
+		Stair s;
+		for (int i=0; i<stairs.length; i++) {
+			s = stairs[i];
+			if (x >= s.x && x <= s.x + s.width && y <= s.y) {
+				return s.y;
+			}
+		}
+		return -1;
+	}
+
+	public boolean isOn(int x, int y) {
+		Stair s;
+		for (int i=0; i<stairs.length; i++) {
+			s = stairs[i];
+			if (x >= s.x && x <= s.x + s.width && y == s.y) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
 
 class Stair implements Drawable {
@@ -41,8 +63,7 @@ class Stair implements Drawable {
 		x = Wormux.random(WGround.gWidth-10);
 		y = Wormux.random(WGround.gHeight-10)+10;
 		width = Math.min(WGround.gWidth-x, Wormux.random(WGround.gWidth / 4)*2);
-		height = 2;
-		//System.out.println("x="+x+"; y="+y+"; width="+width);
+		height = 5;
 	}
 	
 	public void draw(Graphics g) {
