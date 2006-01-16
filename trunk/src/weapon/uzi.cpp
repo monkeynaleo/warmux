@@ -124,9 +124,9 @@ bool Uzi::p_Shoot()
 
   // Calculate movement of the bullet
   
-  // Departure point
+  // Set the initial position.
   int x,y;
-  ActiveTeam().GetWeapon().RotationPointXY (x, y);
+  ActiveCharacter().GetHandPosition(x, y);
 
   // Equation of movement : y = ax + b
   double angle,a,b ;
@@ -135,9 +135,9 @@ bool Uzi::p_Shoot()
   b= y-(a*x) ;
 
   // Move the bullet !!
-  balle.PrepareTir();
-  balle.SetXY(x,y);
-  
+  balle.PrepareTir();  
+  balle.SetXY (x,y);
+
   while (balle.is_active) {
     y = int(double((a*x) + b)) ;
 

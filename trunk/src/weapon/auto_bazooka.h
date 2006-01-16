@@ -41,7 +41,7 @@ protected:
   bool m_attire;
 public:
   RoquetteTeteCherche();
-  void Tire (double force, int x, int y, uint cible_x,uint cible_y);
+  void Tire (double force, uint cible_x,uint cible_y);
   uint ChoixFrame(double angle);
   void Init();
   void Reset();
