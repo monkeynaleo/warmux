@@ -93,6 +93,19 @@ Config::Config()
 
 bool Config::Charge()
 {
+  bool result = ChargeVraiment();
+  std::string dir;
+  dir = TraduitRepertoire(locale_dir);
+  I18N_SetDir (dir);
+
+  dir = TraduitRepertoire(data_dir);
+  ttf_filename = dir+"font" + PATH_SEPARATOR + "Vera.ttf";
+  resource_manager.AddDataPath(dir);
+  return result;
+}
+
+bool Config::ChargeVraiment()
+{
   m_xml_charge=false;
   try
   {
@@ -223,13 +236,6 @@ void Config::SetKeyboardConfig()
 
 void Config::Applique()
 {
-  std::string dir;
-  dir = TraduitRepertoire(locale_dir);
-  I18N_SetDir (dir);
-
-  dir = TraduitRepertoire(data_dir);
-  ttf_filename = dir+"font" + PATH_SEPARATOR + "Vera.ttf";
-  resource_manager.AddDataPath(dir);
   SetKeyboardConfig();
 
   // Charge le mode jeu
@@ -247,7 +253,6 @@ void Config::Applique()
   teams_list.LoadList();
   if (m_xml_charge)
     teams_list.InitList (tmp.teams);
-
    
   // Charge les terrains
   lst_terrain.Init();
