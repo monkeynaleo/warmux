@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
 <author>
@@ -42,9 +42,9 @@
   <image file="jetpack-walk.png">
     <grid pos="0,0" size="26,44" array="8,1" />
   </image>
+  <hand /> 
   <collision_rect dx="10" top="1" bottom="3" />
-    <wormux repetition="5" />
-  <hand/>
+  <wormux repetition="5" />
 </sprite>
 
 <sprite name="jetpack-up">
@@ -76,6 +76,11 @@
 
 <sprite name="jump">
   <image file="jump.png" />
+  <collision_rect dx="10" top="1" bottom="3" />
+</sprite>
+
+<sprite name="fall">
+  <image file="fall.png" />
   <collision_rect dx="10" top="1" bottom="3" />
 </sprite>
 

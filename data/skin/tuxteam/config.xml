@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
 <author>
@@ -11,15 +11,8 @@
     <grid pos="0,0" size="27,42" array="8,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="3" />
-  <wormux repetition="5" />
-  <hand frame="1" x="23" y="25" />
-  <hand frame="2" x="23" y="25" />
-  <hand frame="3" x="23" y="25" />
-  <hand frame="4" x="23" y="25" />
-  <hand frame="5" x="23" y="25" />
-  <hand frame="6" x="23" y="25" />
-  <hand frame="7" x="23" y="25" />
-  <hand frame="8" x="23" y="25" /> 
+  <wormux repetition="10" />
+  <hand frame="*" x="23" y="25" />
 </sprite>
 
 <sprite name="helmet">
@@ -27,15 +20,8 @@
     <grid pos="0,0" size="27,44" array="8,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="3" />
-  <wormux repetition="5" />
-  <hand frame="1" x="23" y="25" />
-  <hand frame="2" x="23" y="25" />
-  <hand frame="3" x="23" y="25" />
-  <hand frame="4" x="23" y="25" />
-  <hand frame="5" x="23" y="25" />
-  <hand frame="6" x="23" y="25" />
-  <hand frame="7" x="23" y="25" />
-  <hand frame="8" x="23" y="25" /> 
+  <wormux repetition="10" />
+  <hand frame="*" x="23" y="25" /> 
 </sprite>
 
 <sprite name="jetpack-fly-move">
@@ -43,6 +29,38 @@
     <grid size="32,42" array="2,1" />
   </image>
   <frame speed="100" />
+  <animation pingpong="yes"/>
+  <collision_rect dx="10" top="1" bottom="3" />
+</sprite>
+
+<sprite name="jetpack">
+  <image file="jetpack-fly.png" />
+  <collision_rect dx="10" top="1" bottom="8" />
+</sprite>
+
+<sprite name="weapon-jetpack">
+  <image file="jetpack-walk.png">
+    <grid pos="0,0" size="27,42" array="8,1" />
+  </image>
+  <hand /> 
+  <collision_rect dx="10" top="1" bottom="3" />
+  <wormux repetition="10" />
+</sprite>
+
+<sprite name="jetpack-up">
+  <image file="jetpack-fly-move.png">
+    <grid size="32,42" array="2,1" />
+  </image>
+  <frame speed="75" />
+  <animation pingpong="yes"/>
+  <collision_rect dx="10" top="1" bottom="3" />
+</sprite>
+
+<sprite name="jetpack-left-right">
+  <image file="jetpack-fly-move.png">
+    <grid size="32,42" array="2,1" />
+  </image>
+  <frame speed="75" />
   <animation pingpong="yes"/>
   <collision_rect dx="10" top="1" bottom="3" />
 </sprite>
@@ -62,16 +80,21 @@
 </sprite>
   
 <sprite name="animation">
+  <not_while_playing>1</not_while_playing>
   <image file="animation.png">
     <grid pos="0,0" size="27,42" array="8,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="3" />
-  <animation speed="400" />
+  <frame speed="300" />
 </sprite>
-
 
 <sprite name="jump">
   <image file="jump.png" />
+  <collision_rect dx="10" top="1" bottom="3" />
+</sprite>
+
+<sprite name="fall">
+  <image file="fall.png" />
   <collision_rect dx="10" top="1" bottom="3" />
 </sprite>
 
