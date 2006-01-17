@@ -58,8 +58,8 @@ Config::Config()
   // Default values
   exterieur_monde_vide = true;
   m_game_mode = "classic";
-  affiche_energie_ver = true;
-  affiche_nom_ver = true;
+  display_energy_character = true;
+  display_name_character = true;
   display_wind_particles = true;
   transparency = ALPHA;
    
@@ -154,7 +154,9 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     if (LitDocXml::LitUint (elem, "max_fps", max_fps)) 
       video.SetMaxFps(max_fps);
 
-    LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);
+    LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);  
+    LitDocXml::LitBool (elem, "display_energy_character", display_energy_character);
+    LitDocXml::LitBool (elem, "display_name_character", display_name_character);
     LitDocXml::LitInt (elem, "width", tmp.video.width);
     LitDocXml::LitInt (elem, "height", tmp.video.height);
     LitDocXml::LitBool (elem, "full_screen", tmp.video.fullscreen);
@@ -310,7 +312,9 @@ bool Config::SauveXml()
 
   //=== Video ===
   xmlpp::Element *noeud_video = racine -> add_child("video");
-  doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));
+  doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));  
+  doc.EcritBalise (noeud_video, "display_energy_character", ulong2str(display_energy_character));
+  doc.EcritBalise (noeud_video, "display_name_character", ulong2str(display_name_character));
   doc.EcritBalise (noeud_video, "width", ulong2str(video.GetWidth()));
   doc.EcritBalise (noeud_video, "height", ulong2str(video.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 

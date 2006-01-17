@@ -214,7 +214,7 @@ void Character::DrawName (int dy) const
   const int x =  GetCenterX();
   const int y = GetY()+dy;
 
-  if (config.affiche_nom_ver)
+  if (config.display_name_character)
   {
     name_text->DrawCenterTopOnMap(x,y);
   }
@@ -366,11 +366,11 @@ void Character::Draw()
    // Draw energy bar
   int dy = -ESPACE;
   bool est_ver_actif = (this == &ActiveCharacter());
-  bool affiche_energie = config.affiche_energie_ver;
-  affiche_energie &= !est_ver_actif || (game_loop.ReadState() != gamePLAYING);
-  affiche_energie |= dessine_perte;
-  affiche_energie &= !IsDead();
-  if (affiche_energie)
+  bool display_energy = config.display_energy_character;
+  display_energy &= !est_ver_actif || (game_loop.ReadState() != gamePLAYING);
+  display_energy |= dessine_perte;
+  display_energy &= !IsDead();
+  if (display_energy)
   { 
     dy -= HAUT_ENERGIE; 
     DrawEnergyBar (dy); 
@@ -378,7 +378,7 @@ void Character::Draw()
   }
 
   // Draw name
-  if (config.affiche_nom_ver && !est_ver_actif) 
+  if (config.display_name_character && !est_ver_actif) 
   { 
     dy -= HAUT_FONT_MIX;
     DrawName (dy);
@@ -948,7 +948,7 @@ void Character::Reset()
 
 
   // Prépare l'image du nom
-  if (config.affiche_nom_ver && name_text == NULL)
+  if (config.display_name_character && name_text == NULL)
   {
     name_text = new Text(m_name);
   }
