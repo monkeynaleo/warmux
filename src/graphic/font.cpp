@@ -77,12 +77,17 @@ Font::~Font()
 
 bool Font::Load (const std::string& filename, int size) 
 {
-  if (!FichierExiste(filename))
+  bool ok = false;
+  if (FichierExiste(filename))
+  {
+      m_font = TTF_OpenFont(filename.c_str(), size);
+      ok = (m_font != NULL);
+  }
+  if (!ok)
   {
       std::cout << "Error: Font " << filename << " can't be found!" << std::endl;
       return false;
   }
-  m_font = TTF_OpenFont(filename.c_str(), size);
   TTF_SetFontStyle(m_font,TTF_STYLE_NORMAL);
   return true;
 }
