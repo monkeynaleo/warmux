@@ -47,6 +47,7 @@ RoquetteBazooka::RoquetteBazooka(Bazooka &p_bazooka)
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
+  m_wind_factor = 1.0;
 }
 
 //-----------------------------------------------------------------------------
@@ -151,6 +152,7 @@ bool Bazooka::p_Shoot ()
   // Initialise le roquette
   roquette.Tire (m_strength);
   lst_objets.AjouteObjet (&roquette, true);
+  camera.ChangeObjSuivi(&roquette, 1, 1,1);
 
 #ifdef CL
   jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");

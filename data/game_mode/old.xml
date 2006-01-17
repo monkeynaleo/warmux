@@ -7,9 +7,9 @@
 
   <duration_turn>60</duration_turn>
   <duration_turn_end>2</duration_turn_end>
-  <gravity>30</gravity>
-  <safe_fall>15</safe_fall>
-  <damage_per_fall_unit>5</damage_per_fall_unit>
+  <gravity>9.81</gravity>
+  <safe_fall>10</safe_fall>
+  <damage_per_fall_unit>7</damage_per_fall_unit>
 
   <max_teams>4</max_teams>
   <max_characters>6</max_characters>
@@ -30,7 +30,7 @@
       <damage>75</damage>
       <mass>1</mass>
       <explosion_range>3</explosion_range>
-      <blast_force>30</blast_force>
+      <blast_force>9</blast_force>
       <blast_range>4</blast_range>
       <duree>3000</duree>
     </dynamite>
@@ -42,92 +42,92 @@
       <mass>30</mass>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>5</explosion_range>
-      <blast_range>3</blast_range>
-      <blast_force>40</blast_force>
-      <speed>60</speed>
+      <explosion_range>2</explosion_range>
+      <blast_range>2.4</blast_range>
+      <blast_force>6</blast_force>
+      <speed>20</speed>
     </tux>
 
     <gnulauncher>
       <position origin="hand" x="-8" y="-3" />
       <category>4</category>
-      <max_strength>25</max_strength>
+      <max_strength>20</max_strength>
       <nb_ammo>2</nb_ammo>
       <damage>80</damage>
-      <mass>40</mass>
-      <air_resist_factor>0</air_resist_factor>
+      <mass>10</mass>
+      <air_resist_factor>0.5</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>2.5</explosion_range>
       <blast_range>2.5</blast_range>
       <blast_force>6</blast_force>
       <tps_avt_explosion>10</tps_avt_explosion>
-      <rebound_factor>10.0</rebound_factor>
+      <rebound_factor>8.0</rebound_factor>
     </gnulauncher>
     
     <bazooka>
       <position origin="hand" x="-20" y="-18" />
-      <max_strength>60</max_strength>
+      <max_strength>20</max_strength>
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
-      <mass>10.0</mass>
-      <air_resist_factor>0.8</air_resist_factor>
+      <mass>20.0</mass>
+      <air_resist_factor>0.9</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>2</explosion_range>
       <blast_range>2.5</blast_range>
-      <blast_force>10</blast_force>
+      <blast_force>6</blast_force>
     </bazooka>
 
     <automatic_bazooka>
       <position origin="hand" x="-20" y="-18" />
-      <max_strength>60</max_strength>
+      <max_strength>20</max_strength>
       <nb_ammo>3</nb_ammo>
-      <damage>50</damage>
+      <damage>60</damage>
       <mass>20.0</mass>
-      <air_resist_factor>0.8</air_resist_factor>
+      <air_resist_factor>0.9</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>2</explosion_range>
       <blast_range>2.5</blast_range>
-      <blast_force>10</blast_force>
+      <blast_force>6</blast_force>
     </automatic_bazooka>
 
     <grenade>
       <position origin="hand" x="-7" y="-9" />
-      <max_strength>40</max_strength>
+      <max_strength>20</max_strength>
       <nb_ammo>5</nb_ammo>
       <damage>50</damage>
-      <mass>30</mass>
-      <air_resist_factor>0.3</air_resist_factor>
+      <mass>1</mass>
+      <air_resist_factor>0.0</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>2</explosion_range>
       <blast_range>2.5</blast_range>
-      <blast_force>20</blast_force>
+      <blast_force>6</blast_force>
       <tps_avt_explosion>10</tps_avt_explosion>
-      <rebound_factor>1.0</rebound_factor>
+      <rebound_factor>0.75</rebound_factor>
     </grenade>
 
     <holly_grenade>
       <position origin="hand" x="-10" y="-6" />
-      <max_strength>20</max_strength>
+      <max_strength>12</max_strength>
       <nb_ammo>1</nb_ammo>
       <damage>80</damage>
       <mass>2</mass>
       <air_resist_factor>0.0</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>3</explosion_range>
-      <blast_range>3</blast_range>
-      <blast_force>50</blast_force>
+      <explosion_range>2.5</explosion_range>
+      <blast_range>2.5</blast_range>
+      <blast_force>6</blast_force>
       <tps_avt_explosion>10</tps_avt_explosion>
       <rebound_factor>0.05</rebound_factor>
     </holly_grenade>
 
     <cluster_bomb>
       <position origin="hand" x="-6" y="-9" />
-      <max_strength>30</max_strength>
+      <max_strength>20</max_strength>
       <nb_ammo>7</nb_ammo>
       <damage>20</damage>
       <mass>2</mass>
@@ -138,7 +138,7 @@
       <blast_range>2</blast_range>
       <blast_force>2</blast_force>
       <tps_avt_explosion>3</tps_avt_explosion>
-      <rebound_factor>0.3</rebound_factor>
+      <rebound_factor>0.75</rebound_factor>
     </cluster_bomb>
 
     <gun>
@@ -169,7 +169,7 @@
       <max_angle>75</max_angle>
       <nb_ammo>-1</nb_ammo>
       <damage>25</damage>
-      <force>15</force>
+      <force>9</force>
       <longueur>70</longueur>
     </baseball>
 
@@ -228,7 +228,7 @@
       <damage>50</damage>
       <mass>1</mass>
       <explosion_range>2</explosion_range>
-      <blast_range>3</blast_range>
+      <blast_range>2.5</blast_range>
       <blast_force>5</blast_force>
       <detection_range>1</detection_range>
     </mine>
@@ -241,10 +241,10 @@
 
   <character>
     <energy initial="100" maximum="200" />
-    <mass>100</mass>
-    <jump strength="8" angle="-60" />
-    <super_jump strength="15" angle="-80" />
-    <air_resist_factor>0.0</air_resist_factor>
+    <mass>50</mass>
+    <jump strength="5" angle="-60" />
+    <super_jump strength="10" angle="-80" />
+    <air_resist_factor>1.0</air_resist_factor>
   </character>
 
 </game_mode>
