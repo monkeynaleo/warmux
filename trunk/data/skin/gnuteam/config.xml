@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
 <author>
@@ -11,7 +11,7 @@
     <grid pos="0,0" size="27,42" array="8,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="3" />
-  <wormux repetition="5" />
+  <wormux repetition="4" />
   <hand frame="1" x="14" y="30" />
   <hand frame="2" x="15" y="27" />
   <hand frame="3" x="16" y="24" />
@@ -27,7 +27,7 @@
     <grid pos="0,0" size="28,46" array="8,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="3" />
-  <wormux repetition="5" />
+  <wormux repetition="4" />
   <hand frame="1" x="14" y="30" />
   <hand frame="2" x="15" y="27" />
   <hand frame="3" x="16" y="24" />
@@ -39,6 +39,38 @@
 </sprite>
 
 <sprite name="jetpack-fly-move">
+  <image file="jetpack-fly-move.png">
+    <grid size="35,42" array="2,1" />
+  </image>
+  <frame speed="100" />
+  <animation pingpong="yes"/>
+  <collision_rect dx="10" top="1" bottom="3" />
+</sprite>
+
+<sprite name="jetpack">
+  <image file="jetpack-fly.png" />
+  <collision_rect dx="10" top="1" bottom="8" />
+</sprite>
+
+<sprite name="weapon-jetpack">
+  <image file="jetpack-walk.png">
+    <grid pos="0,0" size="27,45" array="8,1" />
+  </image>
+  <collision_rect dx="10" top="1" bottom="3" />
+    <wormux repetition="4" />
+  <hand/>
+</sprite>
+
+<sprite name="jetpack-up">
+  <image file="jetpack-fly-move.png">
+    <grid size="35,42" array="2,1" />
+  </image>
+  <frame speed="100" />
+  <animation pingpong="yes"/>
+  <collision_rect dx="10" top="1" bottom="3" />
+</sprite>
+
+<sprite name="jetpack-left-right">
   <image file="jetpack-fly-move.png">
     <grid size="35,42" array="2,1" />
   </image>
@@ -62,6 +94,7 @@
 </sprite>
   
 <sprite name="animation">
+  <not_while_playing>1</not_while_playing>
   <image file="animation.png">
     <grid pos="0,0" size="32,42" array="36,1" />
   </image>
@@ -72,6 +105,11 @@
 
 <sprite name="jump">
   <image file="jump.png" />
+  <collision_rect dx="10" top="1" bottom="3" />
+</sprite>
+
+<sprite name="fall">
+  <image file="fall.png" />
   <collision_rect dx="10" top="1" bottom="3" />
 </sprite>
 
