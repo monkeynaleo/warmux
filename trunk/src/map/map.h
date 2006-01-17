@@ -49,6 +49,8 @@ public:
 
   std::list<Rectanglei> *to_redraw;
   std::list<Rectanglei> *to_redraw_now;
+  std::list<Rectanglei> *to_redraw_particles;
+  std::list<Rectanglei> *to_redraw_particles_now;
 
 public:
   //void Init();
@@ -63,7 +65,6 @@ public:
   // To manage the cache mechanism
   void ToRedrawOnMap(Rectanglei r);
   void ToRedrawOnScreen(Rectanglei r);
-  void SwitchDrawingCache();
 
   // Est-on dans le monde ou dans le vide ?
   bool EstDansVide (int x, int y);
@@ -95,6 +96,9 @@ public:
   // Lit la taille du monde
   uint GetWidth() const { return ground.GetWidth(); }
   uint GetHeight() const { return ground.GetHeight(); }
+ private:
+  void SwitchDrawingCache();
+  void SwitchDrawingCacheParticles();
 };
 
 extern Map world;

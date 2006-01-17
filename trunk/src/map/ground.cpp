@@ -273,6 +273,16 @@ void Ground::Draw()
     it=world.to_redraw_now->begin(),
     end=world.to_redraw_now->end();
   for (; it != end; ++it) DrawTile_Clipped(*it);
+
+  // Draw on top of sky (redisplayed on top of particles)
+  it=world.to_redraw_particles_now->begin();
+  end=world.to_redraw_particles_now->end();
+  for (; it != end; ++it) DrawTile_Clipped(*it);
+
+  // Draw on top of new position of particles (redisplayed on top of particles)
+  it=world.to_redraw_particles->begin();
+  end=world.to_redraw_particles->end();
+  for (; it != end; ++it) DrawTile_Clipped(*it);
 }
 
 //-----------------------------------------------------------------------------

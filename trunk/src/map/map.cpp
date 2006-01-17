@@ -49,14 +49,18 @@ Map::Map()
 {
   dst_min_entre_vers = DST_MIN_ENTRE_VERS;
 
+  to_redraw = new std::list<Rectanglei>;  
   to_redraw_now = new std::list<Rectanglei>;
-  to_redraw = new std::list<Rectanglei>;
+  to_redraw_particles = new std::list<Rectanglei>;  
+  to_redraw_particles_now = new std::list<Rectanglei>;
 }
 
 Map::~Map()
-{
- delete to_redraw_now;
- delete to_redraw;
+{ 
+  delete to_redraw;
+  delete to_redraw_now;
+  delete to_redraw_particles;
+  delete to_redraw_particles_now;
 }
 
 
@@ -77,8 +81,10 @@ void Map::Reset()
   delete author_info1; author_info1 = NULL;
   delete author_info2; author_info2 = NULL;
 
-  to_redraw_now->clear();
   to_redraw->clear();
+  to_redraw_now->clear();
+  to_redraw_particles->clear();
+  to_redraw_particles_now->clear();
 }
 
 //-----------------------------------------------------------------------------
@@ -97,8 +103,10 @@ void Map::FreeMem()
   sky.Free(); 
   water.Free();
 
-  to_redraw_now->clear();
   to_redraw->clear();
+  to_redraw_now->clear();
+  to_redraw_particles->clear();
+  to_redraw_particles_now->clear();
 }
 
 //-----------------------------------------------------------------------------
@@ -129,6 +137,16 @@ void Map::SwitchDrawingCache()
 
 //-----------------------------------------------------------------------------
 
+void Map::SwitchDrawingCacheParticles()
+{
+  std::list<Rectanglei> *tmp = to_redraw_particles_now;
+  to_redraw_particles_now = to_redraw_particles;
+  to_redraw_particles = tmp;
+  to_redraw_particles->clear();
+}
+
+//-----------------------------------------------------------------------------
+
 void Map::Creuse (uint x, uint y, SDL_Surface *surface)
 {
    ground.Dig (x, y, surface);
@@ -138,7 +156,11 @@ void Map::Creuse (uint x, uint y, SDL_Surface *surface)
 //-----------------------------------------------------------------------------
 
 void Map::DrawSky()
-{ sky.Draw(); }
+{ 
+  SwitchDrawingCache();
+  SwitchDrawingCacheParticles();
+  sky.Draw(); 
+}
 
 //-----------------------------------------------------------------------------
 
@@ -149,7 +171,13 @@ void Map::DrawWater()
 
 void Map::Draw()
 { 
+  std::list<Rectanglei> *tmp = to_redraw;
+  to_redraw_particles->clear();
+  to_redraw = to_redraw_particles;
+  
   wind.DrawParticles();
+  to_redraw = tmp;
+
   ground.Draw(); 
 }
 
