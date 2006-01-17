@@ -141,7 +141,6 @@ void Sky::Draw()
   int sky_cx = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
   int sky_cy = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
 
-  uint i = 0;
   std::list<Rectanglei>::iterator it;
   for (it = world.to_redraw_now->begin(); 
        it != world.to_redraw_now->end(); 
@@ -156,7 +155,21 @@ void Sky::Draw()
 		   it->w+1, 
 		   it->h+1};
     SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
-    i++;
+  }
+
+  for (it = world.to_redraw_particles_now->begin(); 
+       it != world.to_redraw_particles_now->end(); 
+       ++it)
+  {
+    SDL_Rect ds = { sky_cx + it->x - cx, 
+		    sky_cy + it->y - cy, 
+		    it->w+1, 
+		    it->h+1};
+    SDL_Rect dr = {it->x-cx,
+		   it->y-cy, 
+		   it->w+1, 
+		   it->h+1};
+    SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
   }
 }
 

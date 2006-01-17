@@ -473,9 +473,6 @@ void GameLoop::Draw ()
   wind.Draw();
   StatStop("GameDraw:end");
 
-  // Clear the cache mechanism
-  world.SwitchDrawingCache();
-
   // Add one frame to the fps counter ;-)
   image_par_seconde.AjouteUneImage();
 }
