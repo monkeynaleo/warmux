@@ -165,7 +165,6 @@ void Avion::Refresh()
 void Avion::Init()
 {
   image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
-  //SetY (0); // use in clanlib code...
   SetSize (image->GetWidth(), image->GetHeight());   
   SetMass (3000);
   obus_dx = 100;
@@ -178,6 +177,24 @@ int Avion::GetDirection() const {
   float x,y;
   image->GetScaleFactors(x,y);
   return (x<0)?-1:1;
+}
+
+//-----------------------------------------------------------------------------
+
+void Avion::Draw()
+{
+  if (IsGhost()) return;
+  image->Draw( GetX(), GetY());
+}
+
+//-----------------------------------------------------------------------------
+
+bool Avion::PeutLacherObus() const
+{
+  if (GetDirection() == 1) 
+    return (cible_x <= GetX()+obus_dx);
+  else
+    return (GetX()+(int)image->GetWidth()-obus_dx <= cible_x);
 }
 
 //-----------------------------------------------------------------------------
@@ -218,25 +235,6 @@ bool AirAttack::p_Shoot ()
   
   return true;
 }
-
-//-----------------------------------------------------------------------------
-
-void Avion::Draw()
-{
-  if (IsGhost()) return;
-  image->Draw( GetX()-camera.GetX(), GetY()-camera.GetY());
-}
-
-//-----------------------------------------------------------------------------
-
-bool Avion::PeutLacherObus() const
-{
-  if (GetDirection() == 1) 
-    return (cible_x <= GetX()+obus_dx);
-  else
-    return (GetX()+(int)image->GetWidth()-obus_dx <= cible_x);
-}
-
 //-----------------------------------------------------------------------------
 
 void AirAttack::Refresh()
