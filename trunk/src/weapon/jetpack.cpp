@@ -40,7 +40,7 @@ JetPack jetpack;
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
-const double JETPACK_FORCE = 300.0;
+const double JETPACK_FORCE = 5000.0;
 
 const uint DELTA_FUEL_DOWN = 200 ;  // Delta time between 2 fuel unit consumption.
 
