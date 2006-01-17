@@ -167,8 +167,8 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
 
   opt_max_fps->SetValue (video.GetMaxFps());
   opt_display_wind_particles->SetValue (config.display_wind_particles);
-  opt_display_energy->SetValue (config.affiche_energie_ver);
-  opt_display_name->SetValue (config.affiche_nom_ver);
+  opt_display_energy->SetValue (config.display_energy_character);
+  opt_display_name->SetValue (config.display_name_character);
   full_screen->SetValue (video.IsFullScreen());
   opt_duration_turn->SetValue(game_mode.duration_turn);
   opt_duration_end_turn->SetValue(game_mode.duration_turn_end);
@@ -205,8 +205,8 @@ void OptionMenu::SaveOptions()
 {
   // Save values
   config.display_wind_particles = opt_display_wind_particles->GetValue();
-  config.affiche_energie_ver = opt_display_energy->GetValue();
-  config.affiche_nom_ver = opt_display_name->GetValue();
+  config.display_energy_character = opt_display_energy->GetValue();
+  config.display_name_character = opt_display_name->GetValue();
 
   game_mode.duration_turn = opt_duration_turn->GetValue() ;
   game_mode.duration_turn_end = opt_duration_end_turn->GetValue() ;

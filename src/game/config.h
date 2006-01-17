@@ -47,8 +47,8 @@ class Config
 public:
   // Divers
   bool exterieur_monde_vide;
-  bool affiche_energie_ver;
-  bool affiche_nom_ver;
+  bool display_energy_character;
+  bool display_name_character;
   bool display_wind_particles;
   std::string ttf_filename;
 
