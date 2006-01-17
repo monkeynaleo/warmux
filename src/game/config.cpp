@@ -71,7 +71,7 @@ Config::Config()
   data_dir = "data\\";
   locale_dir = "locale\\";
 #endif
-  ttf_filename = data_dir+"font" + PATH_SEPARATOR + "Vera.ttf";
+  ttf_filename = data_dir+"font" + PATH_SEPARATOR + "DejaVuSans.ttf";
 
   // video
   tmp.video.width = 800;
@@ -99,7 +99,6 @@ bool Config::Charge()
   I18N_SetDir (dir);
 
   dir = TraduitRepertoire(data_dir);
-  ttf_filename = dir+"font" + PATH_SEPARATOR + "Vera.ttf";
   resource_manager.AddDataPath(dir);
   return result;
 }
@@ -148,6 +147,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   //=== Directories ===
   LitDocXml::LitString  (xml, "data_dir", data_dir);
   LitDocXml::LitString  (xml, "locale_dir", locale_dir);
+  LitDocXml::LitString  (xml, "ttf_filename", ttf_filename);
  
   //=== Map ===
   LitDocXml::LitString  (xml, "map", tmp.map_name);
@@ -301,6 +301,7 @@ bool Config::SauveXml()
   //=== Directories ===
   doc.EcritBalise (racine, "data_dir", data_dir);
   doc.EcritBalise (racine, "locale_dir", locale_dir);
+  doc.EcritBalise (racine, "ttf_filename", ttf_filename);
 
   //=== Terrain ===
   doc.EcritBalise (racine, "map", lst_terrain.TerrainActif().name);

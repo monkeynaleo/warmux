@@ -128,7 +128,7 @@ msgstr "(onbegrensd)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:189
+#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:206
 msgid "Air attack"
 msgstr "Luchtaanval"
 
@@ -491,7 +491,7 @@ msgstr "Winnaar : team %s"
 msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 msgstr ""
 
-#: src/game/config.cpp:130
+#: src/game/config.cpp:142
 msgid "Warning: Don't load configuration (old version of Wormux)."
 msgstr ""
 
