@@ -163,7 +163,7 @@ void GameMenu::OnClic ( int x, int y, int button)
   } else if (lbox_selected_teams->Clic(x, y, button)) {
 
   } else if ( bt_add_team->MouseIsOver(x, y)) {
-    if (lbox_selected_teams->GetItemsList()->size() <= game_mode.max_teams)
+    if (lbox_selected_teams->GetItemsList()->size() < game_mode.max_teams)
       MoveTeams(lbox_all_teams, lbox_selected_teams, false); 
   } else if ( bt_remove_team->MouseIsOver(x, y)) {
     MoveTeams(lbox_selected_teams, lbox_all_teams, true);
