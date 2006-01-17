@@ -135,7 +135,7 @@ msgstr ""
 "La balise <infinite_background> a besoin de la balise <is_open> pour "
 "fonctionner correctment."
 
-#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:189
+#: src/object/bonus_box.cpp:285 src/weapon/air_attack.cpp:206
 msgid "Air attack"
 msgstr "Attaque aérienne"
 
@@ -347,7 +347,8 @@ msgstr "Jeu en Réseau"
 #: src/weapon/weapon.cpp:636
 #, c-format
 msgid "No element <%s> found in the xml config file!"
-msgstr "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
+msgstr ""
+"Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
 #: src/menu/options_menu.cpp:121
 msgid "Number of players per team:"
@@ -469,9 +470,10 @@ msgstr ""
 "Attention! La masse des particules est trop faible ! Utilise la valeur par "
 "défaut (0.3)."
 
-#: src/game/config.cpp:130
+#: src/game/config.cpp:142
 msgid "Warning: Don't load configuration (old version of Wormux)."
-msgstr "Avertissement: Ne charge pas la configuration (ancienne version de Wormux)."
+msgstr ""
+"Avertissement: Ne charge pas la configuration (ancienne version de Wormux)."
 
 #: src/interface/interface.cpp:123
 msgid "Weapon:"
@@ -516,4 +518,3 @@ msgstr "Il faut au minimum deux équipes valides !"
 #: src/weapon/gun.cpp:89
 msgid "Your shot has missed!"
 msgstr "Tir dans le vide..."
-
