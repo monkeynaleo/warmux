@@ -278,8 +278,8 @@ void Caisse::AppliqueBonus (Team &equipe, Character &ver)
 
   case bonusAERIENNE:
     txt << Format(ngettext(
-                "'%s has won %u air attack(s)",
-                "'%s has won %u air attack(s)",
+                "'%s has won %u air attack",
+                "'%s has won %u air attacks",
                 BONUS_AERIENNE),
             ActiveTeam().GetName().c_str(), BONUS_AERIENNE);
     equipe.m_nb_ammos[ _("Air attack") ] += BONUS_AERIENNE;
