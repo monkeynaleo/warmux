@@ -147,7 +147,8 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   //=== Directories ===
   LitDocXml::LitString  (xml, "data_dir", data_dir);
   LitDocXml::LitString  (xml, "locale_dir", locale_dir);
-  LitDocXml::LitString  (xml, "ttf_filename", ttf_filename);
+  if(!LitDocXml::LitString  (xml, "ttf_filename", ttf_filename))
+    ttf_filename = data_dir+"font" + PATH_SEPARATOR + "DejaVuSans.ttf";
  
   //=== Map ===
   LitDocXml::LitString  (xml, "map", tmp.map_name);
