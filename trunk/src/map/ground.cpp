@@ -30,7 +30,7 @@
 
 #include "../include/constant.h"
 #include "../tool/resource_manager.h"
-#include <SDL/SDL_video.h>
+#include <SDL_video.h>
 
 #ifdef DEBUG
 //#  define DESSINE_BORDURE_CANVAS

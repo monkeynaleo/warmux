@@ -24,8 +24,8 @@
 #define EMAIL "wormux-dev@gna.org"
 //-----------------------------------------------------------------------------
 #include "game/time.h"
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <algorithm>
 #include <exception>
 #include <sstream>

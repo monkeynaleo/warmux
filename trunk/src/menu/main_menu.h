@@ -26,7 +26,7 @@
 #include "../include/base.h"
 #include "../gui/button_text.h"
 #include "../graphic/sprite.h"
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <vector>
 //-----------------------------------------------------------------------------
 

@@ -56,7 +56,7 @@
 #ifndef COLORS_H
 #define COLORS_H
 
-#include <SDL/SDL_video.h>
+#include <SDL_video.h>
 
 const SDL_Color aliceblue_color = { 240, 248, 255, SDL_ALPHA_OPAQUE };
 const SDL_Color antiquewhite_color = { 250, 235, 215, SDL_ALPHA_OPAQUE };
