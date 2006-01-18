@@ -19,9 +19,9 @@
  *  Graphic effects on sprite / pixel acces to SDL_Surface
  *****************************************************************************/
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_video.h>
-#include <SDL/SDL_image.h>
+#include <SDL.h>
+#include <SDL_video.h>
+#include <SDL_image.h>
 #include <math.h>
 #include "sprite.h"
 #include "video.h"

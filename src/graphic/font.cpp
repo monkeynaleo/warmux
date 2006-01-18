@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
-#include <SDL/SDL_image.h>
-#include <SDL/SDL_video.h>
+#include <SDL_image.h>
+#include <SDL_video.h>
 #include <iostream>
 #include <string>
 #include "../game/config.h"

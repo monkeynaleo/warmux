@@ -22,7 +22,7 @@
 #ifndef APP_WORMUX_H
 #define APP_WORMUX_H
 //-----------------------------------------------------------------------------
-#include <SDL/SDL.h>
+#include <SDL.h>
 #include <string>
 #include "base.h"
 #include "../game/config.h"
