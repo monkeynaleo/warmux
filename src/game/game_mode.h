@@ -36,7 +36,8 @@ public:
   uint max_characters;
   uint max_teams;
   uint duration_turn;
-  uint duration_turn_end;
+  uint duration_move_player;
+  uint duration_exchange_player;
   double gravity;
   double safe_fall ;
   double damage_per_fall_unit ;

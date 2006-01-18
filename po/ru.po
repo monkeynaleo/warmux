@@ -160,7 +160,7 @@ msgstr "Автоматическая базука"
 msgid "Baseball"
 msgstr "Бейсбол"
 
-#: src/weapon/bazooka.cpp:136
+#: src/weapon/bazooka.cpp:122
 msgid "Bazooka"
 msgstr "Базука"
 
@@ -241,7 +241,7 @@ msgstr "Ошибка в %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/game/game_mode.cpp:149
+#: src/game/game_mode.cpp:151
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
@@ -324,7 +324,7 @@ msgstr "Загрузка тем:"
 msgid "Load teams:"
 msgstr "Загрузка команд:"
 
-#: src/map/map.cpp:289
+#: src/map/map.cpp:317
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Карту %s создал:"
@@ -422,7 +422,7 @@ msgstr "Автоматическая ракета улетела за преде
 msgid "The game has ended as a draw."
 msgstr "Игра окончилась вничью"
 
-#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:110
+#: src/weapon/bazooka.cpp:109 src/weapon/cluster_bomb.cpp:110
 msgid "The rocket left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
 

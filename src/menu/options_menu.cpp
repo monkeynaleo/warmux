@@ -171,7 +171,7 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
   opt_display_name->SetValue (config.display_name_character);
   full_screen->SetValue (video.IsFullScreen());
   opt_duration_turn->SetValue(game_mode.duration_turn);
-  opt_duration_end_turn->SetValue(game_mode.duration_turn_end);
+  opt_duration_end_turn->SetValue(game_mode.duration_move_player);
   opt_nb_characters->SetValue(game_mode.max_characters);
   opt_energy_ini->SetValue(game_mode.character.init_energy);
 
@@ -209,7 +209,7 @@ void OptionMenu::SaveOptions()
   config.display_name_character = opt_display_name->GetValue();
 
   game_mode.duration_turn = opt_duration_turn->GetValue() ;
-  game_mode.duration_turn_end = opt_duration_end_turn->GetValue() ;
+  game_mode.duration_move_player = opt_duration_end_turn->GetValue() ;
   game_mode.max_characters = opt_nb_characters->GetValue() ;
 
   game_mode.character.init_energy = opt_energy_ini->GetValue() ;

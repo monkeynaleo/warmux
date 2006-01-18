@@ -152,7 +152,7 @@ msgstr "Automatická bazuka"
 msgid "Baseball"
 msgstr "Basebal"
 
-#: src/weapon/bazooka.cpp:136
+#: src/weapon/bazooka.cpp:122
 msgid "Bazooka"
 msgstr "Bazuka"
 
@@ -233,7 +233,7 @@ msgstr "Chyba v %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Chyba počas načítavania týmu %s:"
 
-#: src/game/game_mode.cpp:149
+#: src/game/game_mode.cpp:151
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Chyba počas načítavania herného módu %s (súbor %s):"
@@ -316,7 +316,7 @@ msgstr "Načítavam skiny:"
 msgid "Load teams:"
 msgstr "Načítavam tými"
 
-#: src/map/map.cpp:289
+#: src/map/map.cpp:317
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Mapa %s, výtvor :"
@@ -414,7 +414,7 @@ msgstr "Automatická raketa opustila bojisko ..."
 msgid "The game has ended as a draw."
 msgstr "Hra skončila remízou."
 
-#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:110
+#: src/weapon/bazooka.cpp:109 src/weapon/cluster_bomb.cpp:110
 msgid "The rocket left the battlefield..."
 msgstr "Raketa opustila bojisko..."
 

@@ -155,7 +155,7 @@ msgstr "Automatyczna wyrzutnia rakiet"
 msgid "Baseball"
 msgstr "Pałka"
 
-#: src/weapon/bazooka.cpp:136
+#: src/weapon/bazooka.cpp:122
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -236,7 +236,7 @@ msgstr "Błąd w %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Błąd podczas ładowania drużyny %s:"
 
-#: src/game/game_mode.cpp:149
+#: src/game/game_mode.cpp:151
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Błąd podczas ładowania trybu gry %s (plik %s):"
@@ -320,7 +320,7 @@ msgstr "Ładowanie skórek:"
 msgid "Load teams:"
 msgstr "Ładowanie drużyn:"
 
-#: src/map/map.cpp:289
+#: src/map/map.cpp:317
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Mapa %s, stworzona przez :"
@@ -418,7 +418,7 @@ msgstr "Automatyczna rakieta opuściła pole bitwy..."
 msgid "The game has ended as a draw."
 msgstr "Gra zakończona remisem."
 
-#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:110
+#: src/weapon/bazooka.cpp:109 src/weapon/cluster_bomb.cpp:110
 msgid "The rocket left the battlefield..."
 msgstr "Rakieta opuściła pole bitwy..."
 

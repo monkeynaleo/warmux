@@ -149,7 +149,7 @@ msgstr "Bazooka automatico"
 msgid "Baseball"
 msgstr "Baseball"
 
-#: src/weapon/bazooka.cpp:136
+#: src/weapon/bazooka.cpp:122
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -240,7 +240,7 @@ msgstr ""
 "Errore :\n"
 "%s"
 
-#: src/game/game_mode.cpp:149
+#: src/game/game_mode.cpp:151
 #, fuzzy, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr ""
@@ -332,7 +332,7 @@ msgstr "Caricamento skin %s"
 msgid "Load teams:"
 msgstr "Caricamento squadra %s"
 
-#: src/map/map.cpp:289
+#: src/map/map.cpp:317
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr ""
@@ -438,7 +438,7 @@ msgstr "Il razzo automatico è passato in un altro mondo"
 msgid "The game has ended as a draw."
 msgstr ""
 
-#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:110
+#: src/weapon/bazooka.cpp:109 src/weapon/cluster_bomb.cpp:110
 #, fuzzy
 msgid "The rocket left the battlefield..."
 msgstr "Il razzo è passato in un altro mondo"

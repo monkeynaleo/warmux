@@ -81,7 +81,7 @@ GameLoop game_loop;
 #ifdef TODO_NETWORK 
 void InitGameData_NetServer()
 {
-  //	action_handler.NewAction(Action(ACTION_ASK_TEAM));
+  //        action_handler.NewAction(Action(ACTION_ASK_TEAM));
   do
     {
       action_handler.NewAction(Action(ACTION_ASK_VERSION));
@@ -96,7 +96,7 @@ void InitGameData_NetServer()
   std::cout << "Server init game." << std::endl;
 
 
-	
+        
   std::cout << "o " << _("Load map") << std::endl;
   action_handler.NewAction (ActionString(ACTION_SET_MAP, TerrainActif().name));
   world.Reset();
@@ -114,40 +114,40 @@ void InitGameData_NetServer()
   for (; it != end; ++it)
     {
       Team& team = **it;
-		
+                
       // cliens : Create teams
       action_handler.NewAction (ActionString(ACTION_NEW_TEAM, team.GetId()));
-		
+                
       // cliens : Place characters
       action_handler.NewAction (ActionString(ACTION_CHANGE_TEAM, team.GetId()));
       Team::iterator
-	tit = team.begin(),
-	tend = team.end();
+        tit = team.begin(),
+        tend = team.end();
       int i=0;
       for (; tit != tend; ++tit, ++i)
-	{
-	  Character &character = *tit;
-	  action_handler.NewAction (ActionInt(
-					      ACTION_CHANGE_CHARACTER, i));
-	  action_handler.NewAction (ActionInt2(
-					       ACTION_MOVE_CHARACTER, 
-					       character.GetX(), character.GetY()));
-	  action_handler.NewAction (ActionInt(
-					      ACTION_SET_CHARACTER_DIRECTION, 
-					      character.GetDirection()));
-	}
+        {
+          Character &character = *tit;
+          action_handler.NewAction (ActionInt(
+                                              ACTION_CHANGE_CHARACTER, i));
+          action_handler.NewAction (ActionInt2(
+                                               ACTION_MOVE_CHARACTER, 
+                                               character.GetX(), character.GetY()));
+          action_handler.NewAction (ActionInt(
+                                              ACTION_SET_CHARACTER_DIRECTION, 
+                                              character.GetDirection()));
+        }
 
       // Select first character
       action_handler.NewAction (ActionInt(ACTION_CHANGE_CHARACTER, 0));
     }
-	
+        
   action_handler.NewAction (ActionString(ACTION_CHANGE_TEAM, ActiveTeam().GetId()));
   action_handler.NewAction (ActionInt(ACTION_CHANGE_CHARACTER, ActiveTeam().ActiveCharacterIndex()));
 
   // Create objects
   lst_objets.Reset();
    // @@@ TODO : send objects ... @@@@
-	
+        
   // Remise à zéro
   std::cout << "o " << _("Initialise data") << std::endl;
   curseur_ver.Reset();
@@ -168,21 +168,21 @@ void InitGameData_NetClient()
     {
       std::string msg=_("Wait for server informations");
       switch(network.state)
-	{
-	case Network::NETWORK_WAIT_SERVER:
-	  msg = _("Wait for server");
-	  break;
-	case Network::NETWORK_WAIT_MAP:
-	  msg = _("Wait for map");
-	  break;
-	case Network::NETWORK_WAIT_TEAMS:
-	  msg = _("Wait teams");
-	  break;
-	default:
-	  msg = _("Unknow action");
-	  std::cout << "Unknow action for network in game_loop.cpp" << std::endl;
-	  break;
-	}
+        {
+        case Network::NETWORK_WAIT_SERVER:
+          msg = _("Wait for server");
+          break;
+        case Network::NETWORK_WAIT_MAP:
+          msg = _("Wait for map");
+          break;
+        case Network::NETWORK_WAIT_TEAMS:
+          msg = _("Wait teams");
+          break;
+        default:
+          msg = _("Unknow action");
+          std::cout << "Unknow action for network in game_loop.cpp" << std::endl;
+          break;
+        }
       action_handler.ExecActions();
       std::cout << network.state << std::endl;
       std::cout << msg << std::endl;
@@ -228,7 +228,7 @@ void InitGameData()
     InitGameData_NetServer();
   else if (network.is_client())
     InitGameData_NetClient();
-  else	
+  else        
 #endif
     InitGameData_Local();
 
@@ -275,7 +275,7 @@ void InitGame ()
   // Teams' creation
   if (teams_list.playing_list.size() < 2)
     Erreur(_("You need at least two teams to play: "
-	     "change this in 'Options menu' !"));
+             "change this in 'Options menu' !"));
   assert (teams_list.playing_list.size() <= game_mode.max_teams);
 
   // Initialization of teams' energy
@@ -335,34 +335,34 @@ void GameLoop::Refresh()
 
   // Mise à jeu des entrées (clavier / mouse)
    // Poll and treat events
-	
+        
    SDL_Event event;
    
    while( SDL_PollEvent( &event) ) 
      {      
-	if ( event.type == SDL_QUIT) 
-	  {  
-	     std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
+        if ( event.type == SDL_QUIT) 
+          {  
+             std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
              jeu.fin_partie = true;
                   std::cout << "FIN PARTIE" << std::endl;
              return;
-	  }
-	if ( event.type == SDL_MOUSEBUTTONDOWN )
-	  {
-	     mouse.TraiteClic( &event);
-	  }
-	if ( event.type == SDL_KEYDOWN 
-	||   event.type == SDL_KEYUP)
-	  {	       
+          }
+        if ( event.type == SDL_MOUSEBUTTONDOWN )
+          {
+             mouse.TraiteClic( &event);
+          }
+        if ( event.type == SDL_KEYDOWN 
+        ||   event.type == SDL_KEYUP)
+          {               
              if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
              {
                   jeu.fin_partie = true;
                   std::cout << "FIN PARTIE" << std::endl;
                   return;
              }
-	     
-	     clavier.HandleKeyEvent( &event);
-	  }
+             
+             clavier.HandleKeyEvent( &event);
+          }
      }
    
   // How many frame by seconds ?
@@ -375,9 +375,9 @@ void GameLoop::Refresh()
      
     // Keyboard and mouse refresh
     if ( 
-	(interaction_enabled && state != gameEND_TURN)
-	|| (ActiveTeam().GetWeapon().IsActive() && ActiveTeam().GetWeapon().override_keys) // for driving supertux for example
-	)
+        (interaction_enabled && state != gameEND_TURN)
+        || (ActiveTeam().GetWeapon().IsActive() && ActiveTeam().GetWeapon().override_keys) // for driving supertux for example
+        )
     {
       mouse.Refresh();
       clavier.Refresh();
@@ -435,8 +435,8 @@ void GameLoop::Draw ()
   }
   ActiveCharacter().Draw();
   if (!ActiveCharacter().IsDead() && state != gameEND_TURN) {
-	ActiveTeam().crosshair.Draw();
-	ActiveTeam().AccessWeapon().Draw();
+        ActiveTeam().crosshair.Draw();
+        ActiveTeam().AccessWeapon().Draw();
   }
   StatStop("GameDraw:characters");
 
@@ -543,41 +543,40 @@ void GameLoop::RefreshClock()
       switch (state) {
 
       case gamePLAYING:
-	if (duration == 0) {
-	   jukebox.Play("share", "end_turn");
-	   SetState (gameEND_TURN);
-	} else {
-	  duration--;
-	  interface.UpdateTimer(duration);
-	}
-	break;
+        if (duration <= 1) {
+           jukebox.Play("share", "end_turn");
+           SetState (gameEND_TURN);
+        } else {
+          duration--;
+          interface.UpdateTimer(duration);
+        }
+        break;
 
       case gameHAS_PLAYED:
-	if (duration == 0) {
-	  SetState (gameEND_TURN);
-	} else {
-	  duration--;
-	  interface.UpdateTimer(duration);
-	}
-	break;
+        if (duration <= 1) {
+          SetState (gameEND_TURN);
+        } else {
+          duration--;
+          interface.UpdateTimer(duration);
+        }
+        break;
 
       case gameEND_TURN:
-	if (duration == 0) {
+        if (duration <= 1) {
+          if (IsAnythingMoving()) break;
 
-	  if (IsAnythingMoving()) break;
-
-	  if (jeu.EstFinPartie()) 
-	    jeu.fin_partie = true;
-	  else { 
-	    ActiveTeam().AccessWeapon().Deselect();    
-	    caisse.FaitApparaitre();
-	    SetState (gamePLAYING);
-	    break;
-	  }
-	} else {
-	  duration--;
-	}
-	break;
+          if (jeu.EstFinPartie()) 
+            jeu.fin_partie = true;
+          else { 
+            ActiveTeam().AccessWeapon().Deselect();    
+            caisse.FaitApparaitre();
+            SetState (gamePLAYING);
+            break;
+          }
+        } else {
+          duration--;
+        }
+        break;
       } // switch
     }// if
 }
@@ -604,6 +603,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
 #endif
     // Init. le compteur
     duration = game_mode.duration_turn;
+    interface.UpdateTimer(duration);
     interface.EnableDisplayTimer(true);
     pause_seconde = global_time.Read();
 
@@ -622,8 +622,8 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     if( game_mode.allow_character_selection==GameMode::CHANGE_ON_END_TURN
      || game_mode.allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
     {
-	    action_handler.NewAction(ActionInt(ACTION_CHANGE_CHARACTER,
-				     ActiveTeam().NextCharacterIndex()));
+            action_handler.NewAction(ActionInt(ACTION_CHANGE_CHARACTER,
+                                     ActiveTeam().NextCharacterIndex()));
     }
 
     action_handler.ExecActions();
@@ -639,7 +639,9 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
 #ifdef DEBUG_CHG_ETAT
     COUT_DEBUG << "HAS_PLAYED" << std::endl;
 #endif
-    duration = 5;
+    duration = game_mode.duration_move_player;
+    pause_seconde = global_time.Read();
+    interface.UpdateTimer(duration);
     curseur_ver.Cache();
     break;
 
@@ -650,7 +652,8 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
 #endif
     ActiveTeam().AccessWeapon().SignalTurnEnd();
     curseur_ver.Cache();
-    duration = game_mode.duration_turn_end;
+    duration = game_mode.duration_exchange_player;
+    interface.UpdateTimer(duration);
     interface.EnableDisplayTimer(false);
     pause_seconde = global_time.Read();
 
@@ -737,30 +740,30 @@ void GameLoop::SignalCharacterDeath (Character *character)
       // Dead in moving ?
     } else if (state == gamePLAYING) {
       txt = Format(_("%s has fallen off the map!"),
-		   character -> m_name.c_str());
+                   character -> m_name.c_str());
        jukebox.Play(ActiveTeam().GetSoundProfile(), "out");
        
       // Mort en se faisant toucher par son arme / la mort d'un ennemi ?
     } else {
       txt = Format(_("%s is dead because he is clumsy!"), 
-		   character -> m_name.c_str());
+                   character -> m_name.c_str());
     }
 
 
   } else if ((!ActiveCharacter().IsDead())
-	     && (&character -> GetTeam() == &ActiveTeam())) {
+             && (&character -> GetTeam() == &ActiveTeam())) {
     txt = Format(_("%s is a psychopath, he has killed a member of %s team!"),
-		 ActiveCharacter().m_name.c_str(), character -> m_name.c_str());
+                 ActiveCharacter().m_name.c_str(), character -> m_name.c_str());
     
   } else if (ActiveTeam().GetWeaponType() == WEAPON_GUN) {
     txt = Format(_("What a shame for %s - he was killed by a simple gun!"),
-		 character -> m_name.c_str());
+                 character -> m_name.c_str());
     
   } else {
     // Affiche la mort du ver
     txt = Format(_("%s (%s team) has died."),
-		 character -> m_name.c_str(), 
-		 character -> GetTeam().GetName().c_str());
+                 character -> m_name.c_str(), 
+                 character -> GetTeam().GetName().c_str());
   }
   
   game_messages.Add (txt);
