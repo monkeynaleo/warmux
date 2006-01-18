@@ -179,13 +179,13 @@ void Physics::SetSpeedXY (DoubleVector vector)
 {
   if (EgalZero(vector.x)) vector.x = 0;
   if (EgalZero(vector.y)) vector.y = 0;
-
-  if (!IsMoving() && !VectorNull(vector))
-    StartMoving();
+  bool was_moving = IsMoving();
 
   m_pos_x.x1 = vector.x ;
   m_pos_y.x1 = vector.y ;
   m_motion_type = FreeFall ;
+
+  if (!was_moving && IsMoving()) StartMoving();
 }
 
 //-----------------------------------------------------------------------------
@@ -204,13 +204,13 @@ void Physics::AddSpeedXY (DoubleVector vector)
 {
   if (EgalZero(vector.x)) vector.x = 0;
   if (EgalZero(vector.y)) vector.y = 0;
-
-  if (!IsMoving() && !VectorNull(vector))
-    StartMoving();
+  bool was_moving = IsMoving();
 
   m_pos_x.x1 += vector.x ;
   m_pos_y.x1 += vector.y ;
   m_motion_type = FreeFall ;
+
+  if (!was_moving && IsMoving()) StartMoving();
 }
 
 //-----------------------------------------------------------------------------
@@ -292,10 +292,11 @@ void Physics::SetExternForce (double length, double angle)
 
 void Physics::SetExternForceXY (DoubleVector vector)
 {
-  if (!IsMoving() && !VectorNull(vector))
-    StartMoving();
+  bool was_moving = IsMoving();
 
   InitVector (m_extern_force, vector.x, vector.y);
+
+  if (!was_moving && IsMoving()) StartMoving();
 }
 
 //-----------------------------------------------------------------------------
@@ -334,25 +335,18 @@ void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
       // Compute the initial angle
       V.x = fix_point_x - g_x ;
       V.y = fix_point_y - g_y ;
-      
       m_rope_angle.x0 = M_PI/2 - CalculeAnglef (V) ;
 
       // Convert the linear speed to angular speed.
-      
       m_rope_angle.x1 = (m_pos_x.x1 * cos(m_rope_angle.x0) +
 			 m_pos_y.x1 * sin(m_rope_angle.x0) ) / m_rope_length.x0;
 
       // Reset the angular acceleration.
-
       m_rope_angle.x2 = 0 ;
 
-      //      printf ("Long %f - Angle(%f,%f,%f)\n", m_rope_length.x0, m_rope_angle.x0,
-      //	      m_rope_angle.x1, m_rope_angle.x2);
-      
-      if (!IsMoving())
-	StartMoving();
-      
+      bool was_moving = IsMoving();
       m_motion_type = Pendulum ;
+      if (!was_moving && IsMoving()) StartMoving();
     }
 }
 
@@ -380,13 +374,14 @@ void Physics::ChangePhysRopeSize(double dl)
   if ((dl < 0) && (m_rope_length.x0 < 0.5))
     return ;
 
+  bool was_moving = IsMoving();
+  
   m_rope_length.x0 += dl ;
 
   // Recompute angular speed depending on the new rope length.
   m_rope_angle.x1 = m_rope_angle.x1 * (m_rope_length.x0 - dl) / m_rope_length.x0 ;
- 
-  if (!IsMoving())
-    StartMoving();
+
+  if (!was_moving && IsMoving()) StartMoving();
 }
 
 double Physics::GetRopeAngle()
@@ -444,8 +439,8 @@ void Physics::StopMoving()
 
 bool Physics::IsMoving() const
 {
-  return ( (m_pos_x.x1 != 0) ||
-	   (m_pos_y.x1 != 0) ||
+  return ( (!EgalZero(m_pos_x.x1)) ||
+	   (!EgalZero(m_pos_y.x1)) ||
 	   (! VectorNull (m_extern_force)) ||
 	   (m_motion_type != NoMotion) ) ;
 //	   (m_motion_type == Pendulum) ) ;
