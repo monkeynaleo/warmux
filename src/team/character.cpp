@@ -114,6 +114,7 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   hidden = false;
   image = NULL;
   do_nothing_time = 0;
+  m_allow_negative_y = true;
 
   name_text = NULL;
 }
