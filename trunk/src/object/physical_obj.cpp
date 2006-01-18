@@ -397,7 +397,7 @@ void PhysicalObj::UpdatePosition ()
 //-----------------------------------------------------------------------------
 bool PhysicalObj::PutOutOfGround(double direction)
 {
-  const int max_step = 15;
+  const int max_step = 30;
 
   if(IsInVacuum(0,0))
     return true;

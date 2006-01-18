@@ -40,8 +40,8 @@ namespace Wormux
 //-----------------------------------------------------------------------------
   AirAttack air_attack;
 
-const uint FORCE_X_MIN = 30;
-const uint FORCE_X_MAX = 80;
+const uint FORCE_X_MIN = 10;
+const uint FORCE_X_MAX = 120;
 const uint FORCE_Y_MIN = 1;
 const uint FORCE_Y_MAX = 40;
 

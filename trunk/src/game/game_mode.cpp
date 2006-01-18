@@ -40,10 +40,11 @@ GameMode::GameMode()
   max_characters = 6;
   max_teams = 4;
   duration_turn = 60;
+  duration_exchange_player = 2;
   gravity = 9.81;
   safe_fall = 10;
   damage_per_fall_unit = 7;
-  duration_turn_end = 3;
+  duration_move_player = 3;
   allow_character_selection = BEFORE_FIRST_ACTION_AND_END_TURN;
   character.init_energy = 100;
   character.max_energy = 200;
@@ -77,7 +78,8 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
 
 
   LitDocXml::LitUint (xml, "duration_turn", duration_turn);
-  LitDocXml::LitUint (xml, "duration_turn_end", duration_turn_end);
+  LitDocXml::LitUint (xml, "duration_move_player", duration_move_player);
+  LitDocXml::LitUint (xml, "duration_exchange_player", duration_exchange_player);
   LitDocXml::LitUint (xml, "max_teams", max_teams);
   LitDocXml::LitUint (xml, "max_characters", max_characters);
   LitDocXml::LitDouble (xml, "gravity", gravity);

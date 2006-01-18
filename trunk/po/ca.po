@@ -149,7 +149,7 @@ msgstr "Bazooka automatic"
 msgid "Baseball"
 msgstr "Baseball"
 
-#: src/weapon/bazooka.cpp:136
+#: src/weapon/bazooka.cpp:122
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -231,7 +231,7 @@ msgstr "Error en %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Error carregant l'equip %s :"
 
-#: src/game/game_mode.cpp:149
+#: src/game/game_mode.cpp:151
 #, fuzzy, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Error carregant l'equip %s :"
@@ -321,7 +321,7 @@ msgstr "Carrega la pell %s"
 msgid "Load teams:"
 msgstr "Carrega l'equip %s."
 
-#: src/map/map.cpp:289
+#: src/map/map.cpp:317
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Mapa %s, fet per :"
@@ -422,7 +422,7 @@ msgstr "El cohet automatic ha anat a un altre món..."
 msgid "The game has ended as a draw."
 msgstr "El joc ha acabat en empat."
 
-#: src/weapon/bazooka.cpp:123 src/weapon/cluster_bomb.cpp:110
+#: src/weapon/bazooka.cpp:109 src/weapon/cluster_bomb.cpp:110
 msgid "The rocket left the battlefield..."
 msgstr "El cohet ha anat a un altre mon..."
 
