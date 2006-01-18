@@ -63,7 +63,7 @@
       <explosion_range>2.5</explosion_range>
       <blast_range>2.5</blast_range>
       <blast_force>6</blast_force>
-      <tps_avt_explosion>10</tps_avt_explosion>
+      <tps_avt_explosion>6</tps_avt_explosion>
       <rebound_factor>10.0</rebound_factor>
     </gnulauncher>
     
@@ -107,7 +107,7 @@
       <explosion_range>2</explosion_range>
       <blast_range>2.5</blast_range>
       <blast_force>20</blast_force>
-      <tps_avt_explosion>10</tps_avt_explosion>
+      <tps_avt_explosion>3</tps_avt_explosion>
       <rebound_factor>1.0</rebound_factor>
     </grenade>
 
@@ -123,14 +123,14 @@
       <explosion_range>3</explosion_range>
       <blast_range>3</blast_range>
       <blast_force>50</blast_force>
-      <tps_avt_explosion>10</tps_avt_explosion>
+      <tps_avt_explosion>5</tps_avt_explosion>
       <rebound_factor>0.05</rebound_factor>
     </holly_grenade>
 
     <cluster_bomb>
       <position origin="hand" x="-6" y="-9" />
       <max_strength>30</max_strength>
-      <nb_ammo>7</nb_ammo>
+      <nb_ammo>2</nb_ammo>
       <damage>20</damage>
       <mass>2</mass>
       <air_resist_factor>0.0</air_resist_factor>
@@ -171,7 +171,7 @@
       <max_angle>75</max_angle>
       <nb_ammo>-1</nb_ammo>
       <damage>25</damage>
-      <force>15</force>
+      <force>8</force>
       <longueur>70</longueur>
     </baseball>
 
@@ -218,8 +218,9 @@
 
     <air_attack>
       <position origin="over" x="0" y="-5" />
-      <nb_ammo>10</nb_ammo>
+      <nb_ammo>1</nb_ammo>
       <nbr_obus>3</nbr_obus>
+      <damage>30</damage>
       <mass>3</mass>
       <speed>7</speed>
     </air_attack> 
@@ -233,6 +234,7 @@
       <blast_range>3</blast_range>
       <blast_force>5</blast_force>
       <detection_range>1</detection_range>
+      <temps_fuite>1200</temps_fuite>
     </mine>
 
     <skip_turn>
@@ -245,7 +247,7 @@
     <energy initial="100" maximum="200" />
     <mass>100</mass>
     <jump strength="8" angle="-60" />
-    <super_jump strength="15" angle="-80" />
+    <super_jump strength="11" angle="-80" />
     <air_resist_factor>0.0</air_resist_factor>
   </character>
 
