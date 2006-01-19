@@ -538,12 +538,12 @@ void Tile::DrawTile() const
    int first_cell_x = clamp( ox/cell_width,                      0, nbr_cell_width-1);
    int first_cell_y = clamp( oy/cell_height,                      0, nbr_cell_height-1);
    int last_cell_x  = clamp( (ox+camera.GetWidth())/cell_width,  0, nbr_cell_width-1);
-   int last_cell_y  = clamp( (oy+camera.GetHeight())/cell_height, 0, nbr_cell_height-1);
+   int last_cell_y  = clamp( (oy+camera.GetHeight())/cell_height, 0, nbr_cell_height-1);  
 
    for ( int iy = first_cell_y ; iy <= last_cell_y ; iy++ )
      for ( int ix = first_cell_x ; ix <= last_cell_x ; ix++)
        {
-	  item[iy*nbr_cell_width+ix]->Draw(ix,iy);
+	 item[iy*nbr_cell_width+ix]->Draw(ix,iy);
        }
 }   
 
