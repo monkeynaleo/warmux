@@ -137,14 +137,12 @@ void Camera::InternSetdXY(int dx, int dy)
 void Camera::SetdXY(int dx, int dy)
 {
   user_mvt_to = USER_MOVE_TIMEOUT;
-  COUT_DBG << "User defined delta movement!" << std::endl;
   InternSetdXY(dx,dy);
 }
 
 void Camera::SetXY (int x, int y)
 {
   user_mvt_to = USER_MOVE_TIMEOUT;
-  COUT_DBG << "User defined absolute movement!" << std::endl;
   InternSetXY(x,y);
 }
 //-----------------------------------------------------------------------------
