@@ -87,7 +87,7 @@ void AppWormux::WelcomeMessage()
 	    << "software, and you are welcome to redistribute it under "
 	    << "certain conditions." << std::endl
 	    << std::endl
-	    << "Read COPYING.txt for details." << std::endl
+	    << "Read COPYING file for details." << std::endl
 	    << std::endl;
 
 #ifdef DEBUG
