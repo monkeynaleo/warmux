@@ -255,13 +255,6 @@ void OptionMenu::__sig_cancel()
 
 //-----------------------------------------------------------------------------
 
-void OptionMenu::__sig_record()
-{
-  SaveOptions();
-}
-
-//-----------------------------------------------------------------------------
-
 void OptionMenu::Draw(int mouse_x, int mouse_y)
 {   
   graphic_options->Draw(mouse_x, mouse_y);

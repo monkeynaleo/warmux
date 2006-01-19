@@ -50,9 +50,6 @@ Menu::Menu(char * bg)
   b_ok = new Button(0, 0, res, "menu/valider"); 
   actions_buttons->AddWidget(b_ok);
 
-  b_record = new Button(0, 0, res, "menu/enregistrer");
-  actions_buttons->AddWidget(b_record);
-
   b_cancel = new Button(0, 0, res, "menu/annuler");
   actions_buttons->AddWidget(b_cancel);
 }
@@ -85,22 +82,12 @@ void Menu::sig_cancel()
 
 //-----------------------------------------------------------------------------
 
-void Menu::sig_record()
-{
-  jukebox.Play("share", "menu/ok");
-  __sig_record();
-}
-
-//-----------------------------------------------------------------------------
-
 bool Menu::BasicOnClic(int mouse_x, int mouse_y)
 {
   if (b_ok->MouseIsOver (mouse_x, mouse_y)) {
     sig_ok();
   } else if (b_cancel->MouseIsOver (mouse_x, mouse_y)) {
     sig_cancel();
-  } else if (b_record->MouseIsOver (mouse_x, mouse_y)) {
-    sig_record();
   } else {
     return false;
   }

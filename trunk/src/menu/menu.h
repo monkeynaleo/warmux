@@ -50,7 +50,6 @@ class Menu
 
    /* Actions buttons  */
    Button *b_ok;
-   Button *b_record;
    Button *b_cancel;
    HBox *actions_buttons;
 
@@ -60,11 +59,9 @@ class Menu
  protected:
    void sig_ok();
    void sig_cancel();
-   void sig_record();
 
    virtual void __sig_ok() = 0;
    virtual void __sig_cancel() = 0;
-   virtual void __sig_record() = 0;
 
    virtual void Draw(int mouse_x, int mouse_y) = 0;   
    virtual void OnClic ( int mouse_x, int mouse_y, int button) = 0;

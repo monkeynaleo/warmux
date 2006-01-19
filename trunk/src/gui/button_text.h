@@ -33,7 +33,6 @@ private:
    
 public:
   ButtonText (uint x, uint y,
-	      uint w, uint h, 
 	      const Profile *res_profile, const std::string& resource_id,
 	      const std::string &new_text,
 	      Font * font);

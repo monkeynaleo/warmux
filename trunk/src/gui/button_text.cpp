@@ -34,11 +34,10 @@ ButtonText::~ButtonText()
 //-----------------------------------------------------------------------------
 
 ButtonText::ButtonText (uint x, uint y,
-			uint w, uint h, 
 			const Profile *res_profile, const std::string& resource_id,
 			const std::string &new_text,
 			Font *font)
-  : Button(x, y, w, h, res_profile, resource_id)
+  : Button(x, y, res_profile, resource_id)
 { 
   text = new Text(new_text, white_color, font);
 }
