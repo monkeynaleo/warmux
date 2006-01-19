@@ -44,7 +44,7 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute")
 {
   m_name = _("Parachute");
   m_initial_nb_ammo = 2 ;
-  air_resist_factor = 15.0 ;
+  air_resist_factor = 140.0 ;
   open_speed_limit = 5.0 ;
   extra_params = new WeaponConfig();
   use_unit_on_first_shoot = false;  
@@ -85,7 +85,8 @@ void Parachute::p_Init()
 
 bool Parachute::p_Shoot()
 {
-  return true;
+  game_messages.Add(_("Parachute is activated automatically."));
+  return false;
 }
 
 void Parachute::Draw()
