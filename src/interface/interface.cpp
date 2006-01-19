@@ -309,8 +309,8 @@ void Interface::Draw ()
   world.ToRedrawOnScreen(tmpr2);
   
   // display time left in a turn ?
-  if (timer != NULL && display_timer) timer->DrawCenter(x+GetWidth()/2, 
-							y+GetHeight()/2);
+  if (timer != NULL && display_timer)
+    timer->DrawCenter(x+GetWidth()/2, y+GetHeight()/2+3);
   
   // display character info
   DisplayCharacterInfo();
