@@ -101,39 +101,23 @@ void WindParticle::Refresh()
 {
   sprite->Update();
   UpdatePosition();
-  int x = GetX();
-  int y = GetY();
-
-  if(x > camera.GetX()+(int)camera.GetWidth())
+  if (IsGhost())
   {
-    x = camera.GetX() - sprite->GetWidth();
-    y = RandomLong(camera.GetY(), camera.GetY() + camera.GetHeight()-1) ;
-  }
-  else
-  {
-    if(x + GetWidth() < camera.GetX())
-    {
-      x = camera.GetX() + camera.GetWidth() - 1 ;
-      y = RandomLong(camera.GetY(), camera.GetY() + camera.GetHeight()-1) ;
+    int x, y;
+    if (GetY() < (int)world.GetHeight()) {
+      x = GetX();
+      y = GetY();
+      if (x < 0)
+        x = world.GetWidth()-1;
+      else
+        x = -GetWidth()+1;
+    } else {
+      x = RandomLong(0, world.GetWidth()-1);
+      y = -GetHeight()+1;
     }
+    Ready();
+    SetXY(x, y);
   }
-
-  if(y > camera.GetY()+(int)camera.GetHeight())
-  {
-    y = camera.GetY() - sprite->GetHeight() ;
-    x = RandomLong(camera.GetX(), camera.GetX()+camera.GetWidth()-1) ;
-  }
-  else
-  {
-    if(y + GetHeight()< camera.GetY())
-    {
-      y = camera.GetY() + camera.GetHeight() - 1 ;
-      x = RandomLong(camera.GetX(), camera.GetX()+camera.GetWidth()-1) ;
-    }
-  }
-
-  m_alive = ALIVE;
-  SetXY(x,y);
 }
 
 //-----------------------------------------------------------------------------
