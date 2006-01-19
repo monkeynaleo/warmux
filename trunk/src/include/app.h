@@ -40,10 +40,14 @@ private:
   std::string titre_fenetre;
 
 private:
-  void Prepare();
-  void WelcomeMessage();
-  bool Init(int, char**);
+  void Init(int, char**);
+  void InitNetwork(int argc, char **argv);
+  void InitScreen();
+  void InitWindow();
+  void DisplayLoadingPicture();
+  void InitFonts();
   void End();
+  void DisplayWelcomeMessage();
 
 public:
   AppWormux();

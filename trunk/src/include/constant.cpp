@@ -76,7 +76,7 @@ const double DST_MIN_ENTRE_VERS = 200.0;
 
 //-----------------------------------------------------------------------------
 
-void InitCst()
+void InitConstants()
 {
   AUTHORS.push_back ("Lawrence AZZOUG");
   AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
