@@ -220,7 +220,6 @@ bool HollyGrenadeLauncher::p_Shoot ()
 {
   // Initialise la grenade
   grenade.Tire (m_strength);
-  camera.ChangeObjSuivi (&grenade, true, false);
   lst_objets.AjouteObjet (&grenade, true);
 
 #ifdef CL

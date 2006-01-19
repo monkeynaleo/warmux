@@ -39,7 +39,8 @@ class Character : public PhysicalObj
 {
 private:
   Team *m_team;
-  bool desactive;       // Désactive le ver ? (ni affichage, ni gestion)
+  bool desactive;       // Disable the characte ? (no display, nor handling)
+  bool skin_is_walking; // True if the curent is a walking skin.
   bool is_walking;
   bool full_walk;
 
@@ -112,6 +113,7 @@ public:
   // Initialise un mouvement à droite ou à gauche
   void InitMouvementDG (uint pause);
   bool CanStillMoveDG (uint pause);
+  bool IsWalking () const { return is_walking; };
 
   // Changement d'etat
   void SuperSaut ();

@@ -57,9 +57,7 @@ public:
   CL_Point sauve_camera;
 #else
   SDL_Surface *ecusson;
-  Point2i sauve_camera;
 #endif
-  bool camera_est_sauve;
   TeamEnergy energie;
  
 private:

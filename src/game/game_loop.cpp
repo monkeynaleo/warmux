@@ -49,6 +49,7 @@
 #include <SDL.h>
 #include "../include/app.h"
 #include "../tool/Distance.h"
+#include "../map/camera.h"
 #include <sstream>
 #include <iostream>
 using namespace Wormux;
@@ -240,6 +241,7 @@ void InitGameData()
   interface.Reset();
   game_messages.Reset();
   caisse.Init();
+  camera.Reset();
 }
 
 //-----------------------------------------------------------------------------
@@ -629,7 +631,6 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     action_handler.ExecActions();
 
     assert (!ActiveCharacter().IsDead());
-    camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
 
     interaction_enabled = true; // Be sure that we can play !
     break;
@@ -710,7 +711,6 @@ bool GameLoop::IsAnythingMoving()
     PhysicalObj *obj = GetMovingObject();
     if (obj != NULL)
     {
-      camera.ChangeObjSuivi (obj, true, true);
       object_still_moving = true;
     } 
   }

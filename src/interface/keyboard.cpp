@@ -232,11 +232,6 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       interface.EnableDisplay (!interface.IsDisplayed());
       return;
 
-    case ACTION_CENTER:
-      curseur_ver.SuitVerActif();
-      camera.ChangeObjSuivi (&ActiveCharacter(), true, true, true);
-      return;
-
     case ACTION_TOGGLE_WEAPONS_MENUS:
       interface.weapons_menu.SwitchDisplay();
       return;

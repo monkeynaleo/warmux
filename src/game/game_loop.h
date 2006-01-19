@@ -72,12 +72,12 @@ public:
   // Signal fall of a player
   void SignalCharacterDamageFalling (Character *character);
 
+  bool IsAnythingMoving();
 private:
   void RefreshClock();
   void CallDraw();
 
   PhysicalObj* GetMovingObject();
-  bool IsAnythingMoving();
 };
 
 extern GameLoop game_loop;
