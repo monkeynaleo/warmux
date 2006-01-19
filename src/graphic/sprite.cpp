@@ -552,7 +552,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
      {
        if(last_frame == NULL)
        {
-         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_ON);
          last_frame = tmp_surface;
        }
        else

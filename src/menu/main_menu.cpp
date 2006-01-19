@@ -87,6 +87,7 @@ Main_Menu::Main_Menu()
 
 //  app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
   background=new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
+  background->EnableLastFrameCache();
 
   y_scale = (double)app.sdlwindow->h / DEFAULT_SCREEN_HEIGHT ;
 
