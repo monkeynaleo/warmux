@@ -29,7 +29,7 @@
 namespace Wormux {
 //-----------------------------------------------------------------------------
 
-void InitCst();
+void InitConstants();
 
 // Version number of Wormux
 extern const std::string VERSION;

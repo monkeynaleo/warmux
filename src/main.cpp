@@ -24,12 +24,12 @@
 #include <algorithm>
 #include <exception>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 #include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
-#include "include/action_handler.h"
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/font.h"
@@ -38,6 +38,7 @@
 #include "menu/infos_menu.h"
 #include "menu/main_menu.h"
 #include "menu/options_menu.h"
+#include "include/action_handler.h"
 #include "include/constant.h"
 #include "include/global.h"
 #include "sound/jukebox.h"
@@ -57,7 +58,179 @@ AppWormux::AppWormux()
 
 //-----------------------------------------------------------------------------
 
-void AppWormux::WelcomeMessage()
+int AppWormux::main (int argc, char **argv)
+{
+  bool quit = false;
+
+  try {
+    Init(argc, argv);
+    do {
+      Main_Menu main_menu;
+      menu_item choix;
+
+      StatStart("Main:Menu");
+      choix = main_menu.Run();
+      StatStop("Main:Menu");
+
+      switch (choix)
+        {
+        case menuPLAY:
+	  {
+	    GameMenu game_menu;
+	    game_menu.Run();
+	    break;
+	  }
+        case menuOPTIONS:
+          {
+            OptionMenu options_menu;
+            options_menu.Run();
+            break;
+          }
+        case menuQUIT:
+          quit = true; 
+        default:
+          break;
+        }
+    } while (!quit);
+
+    End();
+  }
+  catch (const std::exception &e)
+  {
+    std::cerr << std::endl
+	      << _("C++ exception caught:") << std::endl
+	      << e.what() << std::endl
+	      << std::endl;
+  }
+  catch (...)
+  {
+    std::cerr << std::endl
+	      << _("Unexcepted exception caught...") << std::endl
+	      << std::endl;
+  }
+
+  return 0;
+}
+
+//-----------------------------------------------------------------------------
+
+void AppWormux::Init(int argc, char **argv)
+{
+  InitConstants();
+  InitI18N();
+  DisplayWelcomeMessage();
+
+  InitRandom();
+  action_handler.Init();
+  config.Charge();
+
+  InitNetwork(argc, argv);
+  InitScreen();
+  InitWindow();
+  InitFonts();
+
+  DisplayLoadingPicture();
+  config.Applique();
+
+  jukebox.Init();
+}
+
+void AppWormux::InitNetwork(int argc, char **argv)
+{
+#ifdef TODO_NETWORK 
+  if ((argc == 3) && (strcmp(argv[1],"server")==0)) {
+	// wormux server <port>
+	network.server_start (argv[2]);
+  } else if (argc == 3) {
+	// wormux <server_ip> <server_port>
+	network.client_connect(argv[1], argv[2]);
+  }
+#endif
+}
+
+void AppWormux::InitScreen()
+{
+  if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
+    throw std::runtime_error( std::string("WORMUX: Unable to initialize SDL") + SDL_GetError() );
+}
+
+void AppWormux::InitWindow()
+{
+  std::string txt_version = std::string("Wormux ") + VERSION;
+  std::string icon = config.data_dir + "wormux-32.xpm";
+
+  // Open a new window
+  app.sdlwindow = NULL;
+  video.SetConfig(config.tmp.video.width,
+		  config.tmp.video.height,
+		  config.tmp.video.fullscreen);
+
+  // Set window caption
+  SDL_WM_SetCaption(txt_version.c_str(), NULL);
+  SDL_WM_SetIcon(IMG_Load(icon.c_str()), NULL);
+}
+
+void AppWormux::DisplayLoadingPicture()
+{
+  std::string txt_version = _("Version") + std::string(" ") + VERSION;
+
+  // TODO->use ressource handler
+  SDL_Surface* loading_image=IMG_Load( (config.data_dir+"menu/img/loading.png").c_str());
+
+  // Reset timer
+  Wormux::global_time.Reset();
+
+  SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
+
+  global().huge_font().WriteCenter( config.tmp.video.width/2, 
+			config.tmp.video.height/2 - 200, 
+			_("Wormux launching..."),
+        		white_color);
+
+  global().huge_font().WriteCenter( config.tmp.video.width/2, 
+			 config.tmp.video.height/2 - 180 + global().huge_font().GetHeight(), 
+			 txt_version,
+			 white_color);
+
+  SDL_UpdateRect(app.sdlwindow, 0, 0, 0, 0);
+  SDL_Flip(app.sdlwindow);
+  SDL_FreeSurface(loading_image);
+}
+
+void AppWormux::InitFonts()
+{
+  if (TTF_Init()==-1)
+    throw std::runtime_error(std::string("WORMUX: TTF_Init: ") + TTF_GetError() );
+  if (!Font::InitAllFonts())
+    throw std::runtime_error("WORMUX: InitAllFonts failed");
+  createGlobal();
+}
+
+//-----------------------------------------------------------------------------
+
+void AppWormux::End()
+{
+  std::cout << std::endl
+	    << "[ " << _("End of game") << " ]" << std::endl;
+
+  config.Sauve();
+  destroyGlobal();
+  jukebox.End();
+  TTF_Quit();
+  SDL_Quit();
+
+#ifdef ENABLE_STATS
+  SaveStatToXML("stats.xml");
+#endif  
+  std::cout << "o "
+            << _("Please tell us your opinion of Wormux via email:")
+            << std::endl
+            << "  " << EMAIL << std::endl;
+}
+
+//-----------------------------------------------------------------------------
+
+void AppWormux::DisplayWelcomeMessage()
 {
   std::cout << "=== " << _("Wormux version ") << VERSION << std::endl;
   std::cout << "=== " << _("Authors:") << ' ';
@@ -95,177 +268,6 @@ void AppWormux::WelcomeMessage()
 }
 
 //-----------------------------------------------------------------------------
-
-void AppWormux::Prepare()
-{
-  InitCst();
-  InitI18N();
-  WelcomeMessage();
-  InitRandom();
-  action_handler.Init();
-  config.Charge();
-}
-
-//-----------------------------------------------------------------------------
-
-bool AppWormux::Init(int argc, char **argv)
-{
-  // Network
-#ifdef TODO_NETWORK 
-  if ((argc == 3) && (strcmp(argv[1],"server")==0)) {
-	// wormux server <port>
-	network.server_start (argv[2]);
-  } else if (argc == 3) {
-	// wormux <server_ip> <server_port>
-	network.client_connect(argv[1], argv[2]);
-  }
-#endif
-
-  // Screen initialisation
-  if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 ){
-      std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
-      return false;
-  }
-  
-  // Open a new window
-  app.sdlwindow = NULL;
-  video.SetConfig(config.tmp.video.width,
-		  config.tmp.video.height,
-		  config.tmp.video.fullscreen);
-
-  // Set window caption
-  std::string txt_version = std::string("Wormux ") + VERSION;
-  std::string icon = config.data_dir + "wormux-32.xpm";
-  SDL_WM_SetCaption(txt_version.c_str(), NULL);
-  SDL_WM_SetIcon(IMG_Load(icon.c_str()), NULL);
-  
-  // Fonts initialisation
-  if (TTF_Init()==-1) {
-    std::cerr << "TTF_Init: "<< TTF_GetError() << std::endl;
-    return false;
-  }
-  if (!Font::InitAllFonts()) return false;
-  createGlobal();
-
-  // Display a loading picture
-
-  // TODO->use ressource handler
-  SDL_Surface* loading_image=IMG_Load( (config.data_dir+"menu/img/loading.png").c_str());
-
-  // Reset timer
-  Wormux::global_time.Reset();
-
-  SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
-
-  txt_version = _("Version") + std::string(" ") + VERSION;
-
-  global().huge_font().WriteCenter( config.tmp.video.width/2, 
-			config.tmp.video.height/2 - 200, 
-			_("Wormux launching..."),
-  			white_color);
-
-  global().huge_font().WriteCenter( config.tmp.video.width/2, 
-			 config.tmp.video.height/2 - 180 + global().huge_font().GetHeight(), 
-			 txt_version,
-			 white_color);
-  
-  SDL_UpdateRect(app.sdlwindow, 0, 0, 0, 0);
-  SDL_Flip(app.sdlwindow);
-  SDL_FreeSurface(loading_image);
-
-  config.Applique();
-
-  // Sound initialisation
-  jukebox.Init();  
-  
-  return true;
-}
-
-//-----------------------------------------------------------------------------
-
-void AppWormux::End()
-{
-  std::cout << std::endl
-	    << "[ " << _("End of game") << " ]" << std::endl;
-  
-  config.Sauve();
-  destroyGlobal();
-  jukebox.End();
-  TTF_Quit();
-  SDL_Quit();
-
-#ifdef ENABLE_STATS
-  SaveStatToXML("stats.xml");
-#endif  
-  std::cout << "o "
-            << _("Please tell us your opinion of Wormux via email:")
-            << std::endl
-            << "  " << EMAIL << std::endl;
-}
-
-//-----------------------------------------------------------------------------
-
-menu_item ShowMainMenu()
-{
-  Main_Menu main_menu;
-  return main_menu.Run();
-}
-
-//-----------------------------------------------------------------------------
-
-int AppWormux::main (int argc, char **argv)
-{
-  bool quit = false;
-  try {
-    Prepare();
-    if (!Init(argc, argv)) {
-      std::cout << std::endl << "Error during initialisation..." << std::endl;
-      return 0;
-    }
-    do {
-      StatStart("Main:Menu");
-      menu_item choix = ShowMainMenu();
-      StatStop("Main:Menu");
-      
-      switch (choix)
-        {
-        case menuPLAY:
-	  {
-	    GameMenu game_menu;
-	    game_menu.Run();
-	    break;
-	  }
-        case menuOPTIONS:
-          {
-            OptionMenu options_menu;
-            options_menu.Run();
-            break;
-          }
-        case menuQUIT:
-          quit = true; 
-        default:
-          break;
-        }
-    } while (!quit);
-
-    End();
-  }
-  
-  catch (const std::exception &e)
-  {
-    std::cerr << std::endl
-	      << _("C++ exception caught:") << std::endl
-	      << e.what() << std::endl
-	      << std::endl;
-  }
-  catch (...)
-  {
-    std::cerr << std::endl
-	      << _("Unexcepted exception caught...") << std::endl
-	      << std::endl;
-  }
-  return 0;
-}
 
 int main (int argc, char **argv)
 {
