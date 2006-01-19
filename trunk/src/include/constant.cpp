@@ -54,7 +54,7 @@ uint FOND_Y = 0;
 
 std::vector<std::string> AUTHORS;
 
-const std::string WEB_SITE("http://www.wormux.org");
+const std::string WEB_SITE("http://www.wormux.org/");
 const std::string EMAIL("wormux-dev@gna.org");
 
 //-----------------------------------------------------------------------------

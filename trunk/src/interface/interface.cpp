@@ -106,7 +106,7 @@ void Interface::Init()
   barre_energie.InitPos (BARENERGIE_X, BARENERGIE_Y, 
 			 BARENERGIE_LARG, BARENERGIE_HAUT);
   barre_energie.border_color = white_color;
-  barre_energie.value_color = darkgray_color;
+  barre_energie.value_color = lightgray_color;
   barre_energie.background_color = gray_color;  
    
   // strength bar initialisation  

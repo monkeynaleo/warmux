@@ -212,9 +212,8 @@ void AppWormux::End()
   SaveStatToXML("stats.xml");
 #endif  
   std::cout << "o "
-            << _("Please tell us your opinion of Wormux via email:")
-            << std::endl
-            << "  " << EMAIL << std::endl;
+            << _("Please tell us your opinion of Wormux via email:") << " " << EMAIL
+            << std::endl;
 }
 
 void AppWormux::DisplayWelcomeMessage()

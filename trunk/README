@@ -217,8 +217,8 @@ Nouvelle équipe
 donnee/equipe/. Chaque sous-répertoire est une équipe. Une équipe a un écusson
 (fichier PNG ecusson.png de taille 48x48). Le nom des personnages et le nom de 
 l'équipe sont définis dans equipes.xml. Le fichier images.scr contient simplement 
-le nom de l'écusson (utilisé par la librairie ClanLib). Chaque personnage peut 
-avoir une apparence différente, c'est l'attribut "avatar".
+le nom de l'écusson. Chaque personnage peut avoir une apparence différente,
+c'est l'attribut "avatar".
 
 Configuration avancée
 ---------------------
