@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "include/app.h"
-//-----------------------------------------------------------------------------
 #include <algorithm>
 #include <exception>
 #include <sstream>
@@ -47,16 +46,11 @@
 #include "tool/stats.h"
 
 using namespace Wormux;
-//-----------------------------------------------------------------------------
 AppWormux app;
-
-//-----------------------------------------------------------------------------
 
 AppWormux::AppWormux()
 {
 }
-
-//-----------------------------------------------------------------------------
 
 int AppWormux::main (int argc, char **argv)
 {
@@ -112,8 +106,6 @@ int AppWormux::main (int argc, char **argv)
   return 0;
 }
 
-//-----------------------------------------------------------------------------
-
 void AppWormux::Init(int argc, char **argv)
 {
   InitConstants();
@@ -151,7 +143,7 @@ void AppWormux::InitNetwork(int argc, char **argv)
 void AppWormux::InitScreen()
 {
   if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
-    throw std::runtime_error( std::string("WORMUX: Unable to initialize SDL") + SDL_GetError() );
+    Error( Format( _("Unable to initialize SDL : %s"), SDL_GetError() ) );
 }
 
 void AppWormux::InitWindow()
@@ -177,7 +169,6 @@ void AppWormux::DisplayLoadingPicture()
   // TODO->use ressource handler
   SDL_Surface* loading_image=IMG_Load( (config.data_dir+"menu/img/loading.png").c_str());
 
-  // Reset timer
   Wormux::global_time.Reset();
 
   SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
@@ -200,13 +191,11 @@ void AppWormux::DisplayLoadingPicture()
 void AppWormux::InitFonts()
 {
   if (TTF_Init()==-1)
-    throw std::runtime_error(std::string("WORMUX: TTF_Init: ") + TTF_GetError() );
+    Error( Format( _("TTF init failed : %s"), TTF_GetError() ) );
   if (!Font::InitAllFonts())
-    throw std::runtime_error("WORMUX: InitAllFonts failed");
+    Error( _("Init all fonts failed") );
   createGlobal();
 }
-
-//-----------------------------------------------------------------------------
 
 void AppWormux::End()
 {
@@ -227,8 +216,6 @@ void AppWormux::End()
             << std::endl
             << "  " << EMAIL << std::endl;
 }
-
-//-----------------------------------------------------------------------------
 
 void AppWormux::DisplayWelcomeMessage()
 {
@@ -259,18 +246,14 @@ void AppWormux::DisplayWelcomeMessage()
 
 #ifdef DEBUG
   std::cout << "!!! This program was compiled in DEBUG mode (development"
-	    << std::endl
-	    << "!!! version)." << std::endl
+	    << " version). !!!" << std::endl
 	    << std::endl;
 #endif
 
   std::cout << "[ " << _("Run game") << " ]" << std::endl;
 }
 
-//-----------------------------------------------------------------------------
-
 int main (int argc, char **argv)
 {
   app.main(argc,argv);
 }
-//-----------------------------------------------------------------------------

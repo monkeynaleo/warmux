@@ -302,7 +302,7 @@ void InitSkins()
       LoadOneSkin(dirname, file->d_name);
     closedir (dir);
   } else {
-	  Erreur (Format(_("Unable to open skins directory (%s)!"), 
+	  Error (Format(_("Unable to open skins directory (%s)!"), 
 				     dirname.c_str()));
   }
 #else
@@ -318,7 +318,7 @@ void InitSkins()
 	    LoadOneSkin(dirname,file.cFileName);
 	}
   } else {
-	  Erreur (Format(_("Unable to open skins directory (%s)!"), 
+	  Error (Format(_("Unable to open skins directory (%s)!"), 
 				     dirname.c_str()));
   }
   FindClose(file_search);
