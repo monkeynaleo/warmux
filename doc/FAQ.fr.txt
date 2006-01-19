@@ -1,4 +1,4 @@
-Wormux 0.5
+Wormux 0.7
 FAQ (Français)
 -------------------
 Vous trouverez peut-être dans ce document la réponse à un problème rencontré

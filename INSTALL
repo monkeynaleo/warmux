@@ -74,9 +74,9 @@ To uninstall Wormux, go to the source directory, then (as root):
 	make uninstall
 
 
-==========
+===============
 * Other options
-==========
+===============
 
 Many options can be used with the configure command.
 The most useful (for developers, at least) being:

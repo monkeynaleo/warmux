@@ -15,9 +15,9 @@ Any contribution is welcome :
 - Bug reports (see BUGS.txt)
 
 
-=========
+=============
 * Development
-=========
+=============
 
 The correction of bugs represents a large part of the development of Wormux.
 Many tools can be used to track down bugs...
@@ -58,8 +58,8 @@ way to solve this is to disable signal catching:
 	"handle SIGTTOU noprint nostop"
 
 
-======
+==========
 * Graphics
-======
+==========
 
 All images must be in the PNG format. Pictures have to be either 24 bits/pixel or 32 bits/pixel.

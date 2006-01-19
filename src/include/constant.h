@@ -16,11 +16,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Diverses constantes.
+ *  Constants...
  *****************************************************************************/
 
-#ifndef CONSTANTE_H
-#define CONSTANTE_H
+#ifndef CONSTANT_H
+#define CONSTANT_H
 //-----------------------------------------------------------------------------
 #include "base.h"
 #include <string>
@@ -31,10 +31,10 @@ namespace Wormux {
 
 void InitCst();
 
-// Numéro de version de Wormux
+// Version number of Wormux
 extern const std::string VERSION;
 
-// Répertoire d'installation (avec slash)
+// Installation directories (with slash)
 extern const std::string DEFAULT_DATADIR;
 extern const std::string DEFAULT_LOCALEDIR;
 
@@ -45,11 +45,12 @@ extern uint FOND_Y;
 // Nombre de boucles maximum pour le test ...
 extern const uint NBR_BCL_MAX_EST_VIDE; // Un objet est dans le vide ?
 
-// Liste des auteurs
+// Authors list
 extern std::vector<std::string> AUTHORS;
 
-// Web site address
+// Web site address and email
 extern const std::string WEB_SITE;
+extern const std::string EMAIL;
 
 //-----------------------------------------------------------------------------
 

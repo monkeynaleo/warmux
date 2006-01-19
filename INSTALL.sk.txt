@@ -1,10 +1,10 @@
-﻿Wormux 0.5
+﻿Wormux 0.7
 Kompilácia/Inštalácia pod Linuxom
 -----------------------------------
 
-==========
+============
 * Závislosti
-==========
+============
 
 Ak nasledujúci software nie je v tvojom systéme, budeš si ho musieť stiahnuť
 pred pokusom o inštaláciu Wormuxu 0.5 na tvoj počítač...
@@ -43,9 +43,9 @@ Pod Debianom, použi príkaz:
 apt-get install libxml++2.6-dev
 
 
-===============
+=========================
 * Kompilácia / Inštalácia
-===============
+=========================
 
 Pokial používaš SubVerziu verzie Wormuxu zadáš najprv:
 
@@ -67,18 +67,18 @@ počiatočného konfiguraèného príkazu:
 ./configure --prefix=/OTHER/DIRECTORY/HERE
 
 
-=========
+==============
 * Uninstalling
-=========
+==============
 
 Pre odinštalovanie Wormuxu, choï do zdrojového adresára, potom (ako root )zadaj:
 
 make uninstall
 
 
-==========
+===================
 * Ďalšie nastavenie
-==========
+===================
 
 Veľa nastavení može byť použitých s konfiguračným príkazom.
 najužitočnejšie (pre vývojárov, najmenej) býva:

@@ -1,45 +1,58 @@
 THIS DOCUMENTATION IS OUTDATED
 
-=======================
+====================
 Compilacion en Linux
-=======================
+====================
 
- ClanLib
- -------
+=============
+* Dependecies
+=============
 
-Wormux usa la libreria ClanLib en su version 0.6, asi que tendras que 
-instalarla. Los usuarios de Debien podran hacerlo facilmente:
-	apt-get install libclanlib-dev
+* SDL
+-----
 
-Pagina web: http://www.clanlib.org/
+Wormux usa la libreria SDL en su version 1.2, asi que tendras que 
+instalarla. 
 
- libxml++
- --------
+Pagina web: http://www.libsdl.org/
 
-Wormux usa tambien la libreria libxml++ en su version 1.0, así que tambien
+* SDL mixer, SDL image, SDL ttf, SDL gfx
+----------------------------------------
+
+ http://www.libsdl.org/projects/SDL_ttf/
+ http://www.libsdl.org/projects/SDL_mixer/
+ http://www.libsdl.org/projects/SDL_image/
+ http://www.ferzkopp.net/Software/SDL_gfx-2.0/
+
+* libxml++
+----------
+
+Wormux usa tambien la libreria libxml++ en su version 2.6, así que tambien
 tendras que instalartela. Los usuarios de Debian podran hacerlo facilemente:
-	apt-get install libxml++1.0-dev
+	apt-get install libxml++2.6-dev
 
 Pagina web : http://libxmlplusplus.sourceforge.net/
 
- Compilacion
- -----------
+=============
+* Compilacion
+=============
 
 En GNU/Linux es suficiente ejecutar:
 
-$ cd src
-$ make release
+$ ./autogen.sh
+$ ./configure
+$ make
 
-Para ejecutar el juego, vuelve al direcotorio raiz de Wormux y ejecuta:
-"./wormux"
-
-
- Instalacion / Desinstalacion
- -----------------------------
+==============================
+* Instalacion / Desinstalacion
+==============================
 
 En GNU/Linux para instalar Wormux ejecuta:
 
-$ make cleanall && make release && su -c "make install"
+$ su -c "make install"
+
+Para ejecutar el juego:
+$ wormux
 
 Y para desinstalarlo:
 
@@ -48,12 +61,12 @@ $ su -c "make uninstall"
 Por defecto, el juego es instalado en "/usr". Tambien puedes instalarlo
 en otro directorio (sobretodo si no tienes permiso en "/usr").
 
-$ make install DIR=~/games/
+$ ./configure --prefix=~/games/
 
 
-===========================
+========================
 Informacion del Makefile
-===========================
+========================
 
 Opciones :
 ---------	
