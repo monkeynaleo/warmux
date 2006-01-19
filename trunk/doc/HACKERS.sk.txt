@@ -1,6 +1,6 @@
-﻿Wormux 0.5
+﻿Wormux 0.7
 Wormux vývojárska príručka (Slovak)
----------------------------------
+-----------------------------------
 
 Ak sa cítiš na to pomôcť nám, prosím pošli nám email na:
 
@@ -15,15 +15,15 @@ Akákoľvek prispenie je vítané :
 - Hlásenie chýb (pozri BUGS.txt)
 
 
-=========
+=======
 * Vývoj
-=========
+=======
 
 Opravy chýb reprezentujú obrovskú časť vývoja Wormuxu.
 Mnoho nástrojov môže byť použitých na vystopovanie chýb...
 
 * Debugging správy
---------------------
+------------------
 
 Na povolenie lepšieho ladenia zdrojového kódu, má veľa zdrojových súborov "ladiace prepínače" ako:
 #define DEBUG_...
@@ -63,9 +63,9 @@ Pokiaľ GDB zmrzne po "SIGTTOU" signáli, je to najčastejšie a najpravdepodobn
 "handle SIGTTOU noprint nostop"
 
 
-======
+=========
 * Grafika
-======
+=========
 
 Všetky obrázky musia byľ v PNG formáte. Obrázky musia byľ najmenej v 24 bitových farbách alebo 32 bitových farbách.
 

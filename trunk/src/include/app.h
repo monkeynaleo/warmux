@@ -43,7 +43,7 @@ private:
   void Prepare();
   void WelcomeMessage();
   bool Init(int, char**);
-  void Fin();
+  void End();
 
 public:
   AppWormux();

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Diverses constantes.
+ *  Constants.
  *****************************************************************************/
 
 #include "constant.h"
@@ -31,7 +31,7 @@ const std::string VERSION("0.7beta3");
 #  define INSTALL_DATADIR "data/"
 #endif
 
-// Répertoire d'installation (avec slash)
+// Installation directory (with slash)
 const std::string DEFAULT_DATADIR(INSTALL_DATADIR);
 
 //-----------------------------------------------------------------------------
@@ -40,7 +40,7 @@ const std::string DEFAULT_DATADIR(INSTALL_DATADIR);
 #  define INSTALL_LOCALEDIR "locale/"
 #endif
 
-// Répertoire d'installation (avec slash)
+// Installation diretory (with slash)
 const std::string DEFAULT_LOCALEDIR(INSTALL_LOCALEDIR);
 
 //-----------------------------------------------------------------------------
@@ -55,6 +55,7 @@ uint FOND_Y = 0;
 std::vector<std::string> AUTHORS;
 
 const std::string WEB_SITE("http://www.wormux.org");
+const std::string EMAIL("wormux-dev@gna.org");
 
 //-----------------------------------------------------------------------------
 

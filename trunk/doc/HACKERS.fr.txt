@@ -1,6 +1,6 @@
-Wormux 0.5
+Wormux 0.7
 Guide développeur de Wormux (Français)
----------------------------------
+--------------------------------------
 
 Si vous vous sentez capable de nous aidez, envoyez-nous s'il vous plais
 un email à l'adresse :
@@ -16,15 +16,15 @@ Toutes les contributions sont les bienvenues :
 - Rapports de bogues (voir BUGS)
 
 
-=========
+===============
 * Développement
-=========
+===============
 
 La correction de bogues représente une large part du développement de Wormux. Un
 certains nombres d'outils peuvent être utilisé pour les trouver...
 
 * Les messages de débuggages
---------------------
+----------------------------
 
 Pour mettre en place un meilleur débuggage du code source, un certain nombre de
 fichiers sources possèdent des "debug switches" (boucle de débuggage) comme :
@@ -70,9 +70,9 @@ signal avec :
 	"handle SIGTTOU noprint nostop"
 
 
-======
+============
 * Graphiques
-======
+============
 
 Toutes les images doivent être au format PNG. Les images doivent être en 24 
 bits/pixel ou en 32 bits/pixel.

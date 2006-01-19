@@ -1,19 +1,8 @@
-Wormux 0.5
+Wormux
 FAQ (English)
 -------------------
 Hopefully, this document provides the answer to any problems you may have encountered in Wormux.
 
-
-* Is there any way to change the resolution ?!?
------------------------------------------------
-
-Well, as ClanLib 0.7 is a little buggy, it doesn't allow to change the resolution
-while the game is running... So the only way to change the resolution is to do it
-manualy in the file ~/.wormux/config.xml . (800x600 as the minimum)
-For the fullscreen option, that's the same problem. BUT! Take care if you set the
-fullscreen mode, be warned that wormux won't restore the previous resolution of your
-screen! (in that case you can try the magic combination 'Ctrl'+'Alt'+'+' (or) '-' to
-change your X resolution, if it's enabled)
 
 * I get 2 frames per second, though I have a P4 1.2GHz ?!?
 --------------------------------------------------------

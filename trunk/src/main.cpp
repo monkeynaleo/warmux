@@ -16,42 +16,36 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Application Wormux lancant le programme (fonction 'main').
+ *  Starting file. (the 'main' function is here.)
  *****************************************************************************/
 
 #include "include/app.h"
 //-----------------------------------------------------------------------------
-#define EMAIL "wormux-dev@gna.org"
-//-----------------------------------------------------------------------------
-#include "game/time.h"
-#include <SDL.h>
-#include <SDL_image.h>
 #include <algorithm>
 #include <exception>
 #include <sstream>
-#include <vector>
 #include <string>
+#include <vector>
 #include <iostream>
+#include <SDL.h>
+#include <SDL_image.h>
 #include "include/action_handler.h"
-#include "tool/stats.h"
 #include "game/config.h"
-#include "menu/options_menu.h"
-#include "menu/main_menu.h"
-#include "menu/infos_menu.h"
-#include "menu/game_menu.h"
+#include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
+#include "menu/game_menu.h"
+#include "menu/infos_menu.h"
+#include "menu/main_menu.h"
+#include "menu/options_menu.h"
 #include "include/constant.h"
+#include "include/global.h"
 #include "sound/jukebox.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
-#include "sound/jukebox.h"
-#include "include/global.h"
+#include "tool/stats.h"
 
 using namespace Wormux;
-//-----------------------------------------------------------------------------
-#define MSG_CHARGEMENT_X (config.ecran.larg/2)
-#define MSG_CHARGEMENT_Y (config.ecran.haut/2)
 //-----------------------------------------------------------------------------
 AppWormux app;
 
@@ -128,12 +122,10 @@ bool AppWormux::Init(int argc, char **argv)
 #endif
 
   // Screen initialisation
-  if ( SDL_Init(SDL_INIT_TIMER|
-		SDL_INIT_VIDEO) < 0 )
-    {
+  if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 ){
       std::cerr << "Unable to initialize SDL: " << SDL_GetError() << std::endl;
       return false;
-    }
+  }
   
   // Open a new window
   app.sdlwindow = NULL;
@@ -157,7 +149,7 @@ bool AppWormux::Init(int argc, char **argv)
 
   // Display a loading picture
 
-  //TODO->use ressource handler
+  // TODO->use ressource handler
   SDL_Surface* loading_image=IMG_Load( (config.data_dir+"menu/img/loading.png").c_str());
 
   // Reset timer
@@ -169,7 +161,7 @@ bool AppWormux::Init(int argc, char **argv)
 
   global().huge_font().WriteCenter( config.tmp.video.width/2, 
 			config.tmp.video.height/2 - 200, 
-			_("Wormux launching..."), //"Chargement",
+			_("Wormux launching..."),
   			white_color);
 
   global().huge_font().WriteCenter( config.tmp.video.width/2, 
@@ -191,9 +183,8 @@ bool AppWormux::Init(int argc, char **argv)
 
 //-----------------------------------------------------------------------------
 
-void AppWormux::Fin()
+void AppWormux::End()
 {
-  // Message de fin
   std::cout << std::endl
 	    << "[ " << _("End of game") << " ]" << std::endl;
   
@@ -224,7 +215,7 @@ menu_item ShowMainMenu()
 
 int AppWormux::main (int argc, char **argv)
 {
-  bool quitter = false;
+  bool quit = false;
   try {
     Prepare();
     if (!Init(argc, argv)) {
@@ -232,9 +223,9 @@ int AppWormux::main (int argc, char **argv)
       return 0;
     }
     do {
-    StatStart("Main:Menu");
-    menu_item choix = ShowMainMenu();
-    StatStop("Main:Menu");
+      StatStart("Main:Menu");
+      menu_item choix = ShowMainMenu();
+      StatStop("Main:Menu");
       
       switch (choix)
         {
@@ -251,13 +242,13 @@ int AppWormux::main (int argc, char **argv)
             break;
           }
         case menuQUIT:
-          quitter = true; 
+          quit = true; 
         default:
           break;
         }
-    } while (!quitter);
+    } while (!quit);
 
-    Fin();
+    End();
   }
   
   catch (const std::exception &e)
