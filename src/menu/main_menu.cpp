@@ -48,10 +48,7 @@ using namespace std;
 // Position du texte de la version
 const int VERSION_DY = -40;
 
-const int DEFAULT_SCREEN_WIDTH = 800 ;
-const int DEFAULT_SCREEN_HEIGHT = 600 ;
-const int BUTTON_WIDTH = 282 ;  // Button width at default screen resolution
-const int BUTTON_HEIGHT = 57 ;  // Button height at default screen resolution
+const int DEFAULT_SCREEN_HEIGHT = 768 ;
 
 //-----------------------------------------------------------------------------
 
@@ -85,49 +82,40 @@ bool Main_Menu::sig_quit()
 
 Main_Menu::Main_Menu()
 {
-  int x_button, button_width, button_height ;
-  double x_scale, y_scale ;
+  int x_button;
+  double y_scale ;
 
 //  app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
- background=new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
- background->Blit( app.sdlwindow, 0, 0);
+  background=new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
 
-  x_scale = (double)app.sdlwindow->w / DEFAULT_SCREEN_WIDTH ;
   y_scale = (double)app.sdlwindow->h / DEFAULT_SCREEN_HEIGHT ;
 
-  x_button = (int)(474 * x_scale);
-  button_width = (int)(BUTTON_WIDTH * x_scale); 
-  button_height = (int)(BUTTON_HEIGHT * y_scale);
+  x_button =  app.sdlwindow->w/2 - 402/2;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
-  play = new ButtonText(x_button,(uint)(192 * y_scale),//Position
-			button_width,button_height, //Size
-			res, "intro/txt_button",
+  play = new ButtonText(x_button,(uint)(320 * y_scale),//Position
+			res, "main_menu/button",
 			_("Play"),
 			&global().large_font());
 
-  network = new ButtonText(x_button,(int)(261 * y_scale), //Position
-			   button_width,button_height, //Size
-			   res, "intro/txt_button",
+  network = new ButtonText(x_button,(int)(395 * y_scale), //Position
+			   res, "main_menu/button",
 			   _("Network Game"),
 			   &global().large_font() );
 
-  options = new ButtonText(x_button,(int)(329 * y_scale), //Position
-			   button_width,button_height, //Size
-			   res, "intro/txt_button",
+  options = new ButtonText(x_button,(int)(470 * y_scale), //Position
+			   res, "main_menu/button",
 			   _("Options"),
 			   &global().large_font());
 
-  infos =  new ButtonText(x_button,(int)(397 * y_scale), //Position
-			  button_width,button_height, //Size
-			  res, "intro/txt_button",
+  infos =  new ButtonText(x_button,(int)(545 * y_scale), //Position
+			  res, "main_menu/button",
 			  _("Info"),
 			  &global().large_font());
 
-  quit =  new ButtonText(x_button,(int)(465 * y_scale), //Position
-			 button_width,button_height, //Size
-			 res, "intro/txt_button",
+  quit =  new ButtonText(x_button,(int)(620 * y_scale), //Position
+			 res, "main_menu/button",
 			 _("Quit"),
 			 &global().large_font());
 

@@ -220,13 +220,6 @@ void GameMenu::__sig_cancel()
 
 //-----------------------------------------------------------------------------
 
-void GameMenu::__sig_record()
-{
-  SaveOptions();
-}
-
-//-----------------------------------------------------------------------------
-
 void GameMenu::ChangeMap()
 {
   std::string map_id = lbox_maps->ReadLabel();
