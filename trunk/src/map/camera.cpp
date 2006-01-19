@@ -117,7 +117,7 @@ void Camera::SetXYabs (int x, int y)
   }    
   lance = true;
 #ifdef DEBUG_MSG_SCROLL
-  if ((pos.x != sauve_fond_x) && (pos.y != sauve_fond_y )) 
+  if ((pos.x != sauve_fond_x) || (pos.y != sauve_fond_y )) 
   {
     COUT_DBG << "SetXY : " << x << "," << y 
 	     << ", fond:" << pos.x << "," << pos.y << std::endl;

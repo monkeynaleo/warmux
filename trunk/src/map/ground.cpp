@@ -22,6 +22,7 @@
 #include "ground.h"
 //-----------------------------------------------------------------------------
 #include <iostream>
+#include <SDL_gfxPrimitives.h>
 #include "map.h"
 #include "maps_list.h"
 #include "../map/camera.h"
@@ -29,6 +30,7 @@
 #include <limits.h>
 
 #include "../include/constant.h"
+#include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include <SDL_video.h>
 
@@ -259,6 +261,22 @@ void Ground::Draw()
   int cx = camera.GetX();
   int cy = camera.GetY();  
   
+  if (camera.HasFixedX()) {// ground is less wide than screen !
+    uint margin = (video.GetWidth()-GetWidth())/2;
+    boxRGBA(app.sdlwindow, 0, 0,margin, video.GetHeight(),
+	    0, 0, 0, 255); 
+    boxRGBA(app.sdlwindow, video.GetWidth()-margin, 0, video.GetWidth(), video.GetHeight(),
+	    0, 0, 0, 255); 
+  }
+
+  if (camera.HasFixedY()) {// ground is less wide than screen !
+    uint margin = (video.GetHeight()-GetHeight())/2;
+    boxRGBA(app.sdlwindow, 0, 0, video.GetWidth(), margin,
+	    0, 0, 0, 255); 
+    boxRGBA(app.sdlwindow, 0, video.GetHeight()-margin, video.GetWidth(), video.GetHeight(),
+	    0, 0, 0, 255); 
+  }
+
   if (lastx != cx || lasty != cy)
   {
     lastx = cx;
