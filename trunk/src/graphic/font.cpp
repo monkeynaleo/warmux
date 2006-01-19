@@ -51,7 +51,7 @@ Font::Font(int size)
   m_font = NULL; 
   bool ok = Load(Wormux::config.ttf_filename, size);
   if (!ok)
-    Erreur("Error during initialisation of a font!");
+    Error("Error during initialisation of a font!");
 }
 
 //-----------------------------------------------------------------------------

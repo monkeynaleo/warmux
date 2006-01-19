@@ -163,7 +163,7 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware (unsigned int width, unsigned int
 
    if ( m_surface == NULL)
    {
-       Erreur(std::string("TileItem_AlphaSofware: can't create surface: ") + SDL_GetError());
+       Error(std::string("TileItem_AlphaSofware: can't create surface: ") + SDL_GetError());
    }
 
    _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
@@ -185,7 +185,7 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware (unsigned int width, unsigned int
 
 TileItem_AlphaSoftware::TileItem_AlphaSoftware (const TileItem_AlphaSoftware &copy)
 {
-   Erreur( "TileItem_Alphasoftware: copy constructor not implemented");
+   Error( "TileItem_Alphasoftware: copy constructor not implemented");
 }
 
 TileItem_AlphaSoftware::~TileItem_AlphaSoftware ()

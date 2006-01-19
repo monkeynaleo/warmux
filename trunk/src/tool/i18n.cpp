@@ -110,7 +110,7 @@ std::string Format (const char *txt, ...)
       if (error) {
         ss.str("");
         ss << "Format error : unknown '%" << *txt << "' !";
-        Erreur(ss.str());
+        Error(ss.str());
       }
     } else {
       ++lg;

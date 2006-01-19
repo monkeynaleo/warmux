@@ -274,7 +274,7 @@ void InitGame ()
 
   // Teams' creation
   if (teams_list.playing_list.size() < 2)
-    Erreur(_("You need at least two teams to play: "
+    Error(_("You need at least two teams to play: "
              "change this in 'Options menu' !"));
   assert (teams_list.playing_list.size() <= game_mode.max_teams);
 

@@ -19,59 +19,59 @@
  * Refresh des erreurs, exceptions, assertions, etc.
  *****************************************************************************/
 
-#ifndef ERREUR_H
-#define ERREUR_H
+#ifndef ERROR_H
+#define ERROR_H
 //-----------------------------------------------------------------------------
 
 #ifndef BASE_H
-#  error "Il faut inclure base.h et non pas ce fichier"
+#  error "You have to include base.h only (not the error.h file)"
 #endif
 
 //-----------------------------------------------------------------------------
 #include <string>
 //-----------------------------------------------------------------------------
 
-void AssertionManquee (const char *nomfich, unsigned long ligne,
+void MissedAssertion (const char *filename, unsigned long line,
 		       const char *message);
 
 //-----------------------------------------------------------------------------
 
-// Assertion (désactivées en mode release)
+// Assertion (disabled in release mode)
 #undef assert
 #ifdef DEBUG
 #  define assert(COND) \
-     if (!(COND)) AssertionManquee (__FILE__, __LINE__, #COND);
+     if (!(COND)) MissedAssertion (__FILE__, __LINE__, #COND);
 #else
 #  define assert(COND)
 #endif
 
 // Force une assertion
 #define FORCE_ASSERT(COND) \
-  if (!(COND)) AssertionManquee (__FILE__, __LINE__, #COND);
+  if (!(COND)) MissedAssertion (__FILE__, __LINE__, #COND);
 
 //-----------------------------------------------------------------------------
 
-class CErreur : public std::exception
+class CError : public std::exception
 {
 protected:
-  std::string m_nomfich, m_txt;
-  unsigned long m_ligne;
+  std::string m_filename, m_txt;
+  unsigned long m_line;
 
 public:
-  CErreur (const char *nomfich, unsigned long ligne, const std::string &txt);
-  ~CErreur() throw();
+  CError (const char *filename, unsigned long line, const std::string &txt);
+  ~CError() throw();
   virtual const char* what() const throw();
   std::ostream& operator<< (std::ostream &os) const;
 };
 
 //-----------------------------------------------------------------------------
 
-void DeclancheErreur (const char *nomfich, unsigned long ligne, 
+void TriggerError (const char *filename, unsigned long line, 
 		      const std::string &txt);
 
 //-----------------------------------------------------------------------------
 
-#define Erreur(txt) DeclancheErreur(__FILE__, __LINE__, txt)
+#define Error(txt) TriggerError(__FILE__, __LINE__, txt)
 
 //-----------------------------------------------------------------------------
 #endif

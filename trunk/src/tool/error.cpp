@@ -31,12 +31,12 @@
 #endif
 //-----------------------------------------------------------------------------
 
-void AssertionManquee (const char *nomfich, unsigned long ligne,
+void MissedAssertion (const char *filename, unsigned long line,
 		       const char *message)
 {
   std::cout << std::endl;
-  std::cerr << nomfich << ':' << ligne 
-	    << ": Assertion manquée \"" << message << "\"."
+  std::cerr << filename << ':' << line 
+	    << ": Missed assertion \"" << message << "\"."
 	    << std::endl;
 #if defined DEBUG && !defined WIN32
   kill (getpid(), SIGABRT);
@@ -46,19 +46,19 @@ void AssertionManquee (const char *nomfich, unsigned long ligne,
 
 //-----------------------------------------------------------------------------
 
-CErreur::CErreur (const char *nomfich, unsigned long ligne, 
+CError::CError (const char *filename, unsigned long line, 
 		const std::string &txt) 
-  : m_nomfich(nomfich), m_txt(txt), m_ligne(ligne)
+  : m_filename(filename), m_txt(txt), m_line(line)
 {}
 
 //-----------------------------------------------------------------------------
 
-CErreur::~CErreur() throw()
+CError::~CError() throw()
 {}
 
 //-----------------------------------------------------------------------------
 
-const char* CErreur::what() const throw()
+const char* CError::what() const throw()
 {
   return m_txt.c_str();
 }
@@ -66,7 +66,7 @@ const char* CErreur::what() const throw()
 
 //-----------------------------------------------------------------------------
 
-std::ostream& CErreur::operator<< (std::ostream &os) const
+std::ostream& CError::operator<< (std::ostream &os) const
 {
   os << m_txt;
   return os;
@@ -74,15 +74,15 @@ std::ostream& CErreur::operator<< (std::ostream &os) const
 
 //-----------------------------------------------------------------------------
 
-void DeclancheErreur (const char *nomfich, 
-		      unsigned long ligne, 
+void TriggerError (const char *filename, 
+		      unsigned long line, 
 		      const std::string &txt)
 {
   std::cout << "! " 
-	    << Format(_("Error in %s:%lu"), nomfich, ligne)
+	    << Format(_("Error in %s:%lu"), filename, line)
 	    << ": " << txt << std::endl;
 
-  throw CErreur (nomfich, ligne, txt);
+  throw CError (filename, line, txt);
 }
 
 //-----------------------------------------------------------------------------

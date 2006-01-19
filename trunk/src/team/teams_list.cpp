@@ -121,7 +121,7 @@ void TeamsList::LoadList()
     while ((file = readdir(dir)) != NULL)  LoadOneTeam (dirname, file->d_name);
     closedir (dir);
   } else {
-	Erreur (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
+	Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
   }
 #else
   std::string pattern = dirname + "*.*";
@@ -136,7 +136,7 @@ void TeamsList::LoadList()
 	    LoadOneTeam(dirname,file.cFileName);
 	}
   } else {
-	Erreur (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
+	Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
   }
   FindClose(file_search);
 #endif
@@ -155,7 +155,7 @@ void TeamsList::LoadList()
 
   // On a au moins deux équipes ?
   if (full_list.size() < 2)
-    Erreur(_("You need at least two valid teams !"));
+    Error(_("You need at least two valid teams !"));
 
   // Sélection bidon
   std::list<uint> nv_selection;
@@ -422,7 +422,7 @@ void TeamsList::AddTeam (const std::string &id, bool generate_error)
     } else {
 		std::string msg = Format(_("Can't find team %s!"), id.c_str());
 		if (generate_error)
-		  Erreur (msg);
+		  Error (msg);
 		else
 		  std::cout << "! " << msg << std::endl;
     }
@@ -445,7 +445,7 @@ void TeamsList::SetActive(const std::string &id)
 			return;
 		}
 	}
-	Erreur (Format(_("Can't find team %s!"), id.c_str()));
+	Error (Format(_("Can't find team %s!"), id.c_str()));
 }
   
 //-----------------------------------------------------------------------------

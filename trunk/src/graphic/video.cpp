@@ -51,7 +51,7 @@ SDL_Surface* CreateRGBSurface (int width, int height, Uint32 flags)
           0 // don't use alpha
    );          
   if ( surface == NULL )
-      Erreur(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
+      Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
   return surface;
 }    
 
@@ -73,7 +73,7 @@ SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags)
 #endif  
    );          
   if ( surface == NULL )
-      Erreur(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
+      Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
   return surface;
 }    
 

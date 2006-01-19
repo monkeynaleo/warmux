@@ -265,7 +265,7 @@ void ListeTerrain::Init()
 	  LoadOneMap (dirname, file->d_name);
     closedir (dir);
   } else {
-    Erreur (Format(_("Unable to open maps directory (%s)!"),
+    Error (Format(_("Unable to open maps directory (%s)!"),
 		   dirname.c_str()));
   }
 #else
@@ -281,7 +281,7 @@ void ListeTerrain::Init()
 	    LoadOneMap(dirname,file.cFileName);
 	}
   } else {
-    Erreur (Format(_("Unable to open maps directory (%s)!"),
+    Error (Format(_("Unable to open maps directory (%s)!"),
 		   dirname.c_str()));
   }
   FindClose(file_search);
@@ -302,7 +302,8 @@ void ListeTerrain::Init()
 
   // On a au moins une carte ?
   if (liste.size() < 1)
-    Erreur(_("You need at least one valid map !"));
+    Error(_("You need at least one valid map !"));
+  
 
   std::sort(lst_terrain.liste.begin(), lst_terrain.liste.end(), compareMaps);
 }
