@@ -179,24 +179,20 @@ void Mouse::ScrollCamera() const
   //Move camera with mouse when cursor is on border of the screen
   int dx = x-SENSIT_SCROLL_MOUSE;
   if(dx<0) {
-    camera.SetXY(dx/2,0);
-    camera.autorecadre = false;
+    camera.SetdXY(dx/2,0);
   }
   dx=video.GetWidth()-x-SENSIT_SCROLL_MOUSE;
   if(dx<0) {
-    camera.SetXY(-dx/2,0);
-    camera.autorecadre = false;
+    camera.SetdXY(-dx/2,0);
   }
   
   int dy = y-SENSIT_SCROLL_MOUSE;
   if(dy<0) {
-    camera.SetXY(0,dy/2);
-    camera.autorecadre = false;
+    camera.SetdXY(0,dy/2);
   }
   dy = video.GetHeight()-y-SENSIT_SCROLL_MOUSE;
   if(dy<0) {
-    camera.SetXY(0,-dy/2);
-    camera.autorecadre = false;
+    camera.SetdXY(0,-dy/2);
   }
 }
 
@@ -213,8 +209,7 @@ void Mouse::TestCamera()
     if (scroll_actif) {
       int dx = sauve_x - _x;
       int dy = sauve_y - _y;
-      camera.SetXY (dx, dy);
-      camera.autorecadre = false;
+      camera.SetdXY (dx, dy);
     } else {
       scroll_actif = true;
     }

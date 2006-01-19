@@ -42,8 +42,8 @@
 #include "../tool/Distance.h"
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
-#include "../map/camera.h"
 #include "../graphic/sprite.h"
+#include "../map/camera.h"
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <SDL_gfxPrimitives.h>
@@ -89,7 +89,6 @@ void WeaponProjectile::PrepareTir()
 {
   SetSize (image->GetWidth(), image->GetHeight());
   Ready();
-  camera.ChangeObjSuivi (this, true, false);
   is_active = true;
 }
 

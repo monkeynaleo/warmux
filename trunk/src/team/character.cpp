@@ -108,7 +108,8 @@ Character::Character () : PhysicalObj("Soldat inconnu", 0.0)
   m_wind_factor = 0.0;
   m_rebound_factor = 0.25;
   m_rebounding = true;
-  is_walking = true;
+  skin_is_walking = true;
+  is_walking = false;
   current_skin = "";
   channel_step = -1;
   hidden = false;
@@ -336,7 +337,7 @@ void Character::Draw()
   if(full_walk && !image->IsFinished() && game_loop.ReadState() == gameEND_TURN)
     StopWalking();
 
-  if(!is_walking || full_walk) //walking skins image update only when a keyboard key is pressed
+  if(!skin_is_walking || full_walk) //walking skins image update only when a keyboard key is pressed
   {
     image->Update();
     if(current_skin=="walking" && image->IsFinished())
@@ -522,14 +523,17 @@ void Character::HandleKeyEvent(int action, int event_type)
           switch (action)
           {
             case ACTION_JUMP:
-	      action_handler.NewAction (Action(ACTION_JUMP));
-	      return ;
-
+              action_handler.NewAction (Action(ACTION_JUMP));
+	            return ;
             case ACTION_SUPER_JUMP:
-	      action_handler.NewAction (Action(ACTION_SUPER_JUMP));
-	      return ;
+              action_handler.NewAction (Action(ACTION_SUPER_JUMP));
+              return ;
+            case ACTION_MOVE_LEFT:
+            case ACTION_MOVE_RIGHT:
+              is_walking = true;
+              break;
             default:
-	      break ;
+      	      break;
           }
           //no break!! -> it's normal
 
@@ -583,6 +587,7 @@ void Character::HandleKeyEvent(int action, int event_type)
                  image->SetSpeedFactor(2.0);
                  image->SetLoopMode(0);
                }
+               is_walking = false;
                break;
             }
         default: break;
@@ -811,7 +816,7 @@ bool Character::SetSkin(std::string skin_name)
        image->Scale(-1,1);
 
     current_skin = skin_name;
-    is_walking = false;
+    skin_is_walking = false;
     return true;
   }
   else
@@ -850,7 +855,7 @@ bool Character::SetSkin(std::string skin_name)
     }
 
     current_skin = skin_name;
-    is_walking = true;
+    skin_is_walking = true;
     return true;
   }
   else
@@ -1075,6 +1080,7 @@ void Character::GetHandPositionf (double &x, double &y)
 void Character::EndTurn()
 {
   m_rebounding = true;
+  is_walking = false;
 }
 
 //-----------------------------------------------------------------------------

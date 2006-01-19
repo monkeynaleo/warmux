@@ -16,67 +16,59 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Caméra : gêre la position à l'intérieur du terrain. On peut "suivre" un
- * objet et se centrer sur un objet. Lors d'un déplacement manuel (au clavier
- * ou à la souris), le mode "suiveur" est désactivé.
+ * Camera : Show where the action takes place (follow moving objects...)
+ *          Follow mouse, when it's on the border of the window
  *****************************************************************************/
 
-#ifndef SCROLLING_H
-#define SCROLLING_H
-//-----------------------------------------------------------------------------
-#include "../include/base.h"
+#ifndef CAMERA_H
+#define CAMERA_H
 #include "../object/physical_obj.h"
-#include "../team/character.h"
-//-----------------------------------------------------------------------------
+#include "../tool/Point.h"
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 class Camera
 {
-public:
-  uint pause;
-  bool autorecadre;
+  Point2i pos;
+  PhysicalObj* followed_obj;
+  unsigned int last_refresh;
+  unsigned int mvt_begin; //Time when the last camera movement began (automatic movement)
+                          //Used when changing followed object
+  int user_mvt_to;//User move timeout = 0 -> move the camera in Refresh()
+                  //                  = USER_MOVE_TO ->the camera just moved with the mouse
 
-private:
-  struct s_pos
-  {
-    int x;
-    int y;
-  } pos;
-  bool selec_rectangle;
-  PhysicalObj* obj_suivi;
-  bool lance;
+  Point2i shake_offset;
+  int shake_offset_max;
+  unsigned int shake_end_time;
+  unsigned int shake_last_time;
 
+  double screen_diagonal_angle;
 public:
   Camera();
-
-  // Scrolle le fond en X ou Y
-  void SetXY (int dx, int dy);
-  void SetXYabs (int x, int y);
-
-  // Recadrage automatique sur l'objet suivi
-  void ChangeObjSuivi (PhysicalObj *obj, 
-		       bool suit, bool recentre,
-		       bool force_recentrage=false);
-  void StopFollowingObj (PhysicalObj* obj);
-
-  // Est-ce que l'objet obj est visible dans le monde ?
-  bool EstVisible (const PhysicalObj &obj);
-
-  // Decalage du fond
-  int GetX() const;
-  int GetY() const;
-  uint GetWidth() const;
-  uint GetHeight() const;
-
+  void Reset();
   void Refresh();
 
+  int GetX() const;
+  int GetY() const;
+  unsigned int GetWidth() const;
+  unsigned int GetHeight() const;
   bool HasFixedX() const;
   bool HasFixedY() const;
+  void SetXY(int x, int y);
+  void SetdXY(int dx, int dy);
 
-  void Centre (const PhysicalObj &obj);
-  void CentreObjSuivi ();
-  void AutoRecadre ();
+  void SignalExplosion(double force);
+  void InitShake(unsigned int duration, int max_offset);
+private:
+  void InternSetXY(int x, int y);
+  void InternSetdXY(int dx, int dy);
+
+  PhysicalObj* GetFastestObj();
+  void ComputeFocus_Object(int & x, int & y);
+  void ComputeFocus_ActiveChar(int & x, int & y);
 };
 
 extern Camera camera;
+
 //-----------------------------------------------------------------------------
-#endif
+#endif //CAMERA_H

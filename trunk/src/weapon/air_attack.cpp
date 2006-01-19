@@ -148,10 +148,7 @@ void Avion::Tire()
     }
 
   SetSpeedXY (speed_vector);
-
-  camera.ChangeObjSuivi (this, true, true);
 }
-
 //-----------------------------------------------------------------------------
 
 void Avion::Refresh()
@@ -270,8 +267,6 @@ void AirAttack::Refresh()
       instance -> SetSpeedXY (speed_vector);
       obus.push_back (instance);
     }
-
-    camera.ChangeObjSuivi (instance, true, true);
   }
 
   // Déplace l'avion
@@ -303,8 +298,6 @@ void AirAttack::Refresh()
 void AirAttack::FinTir()
 {
   m_is_active = false;
-
-  camera.ChangeObjSuivi (NULL, false, false);
 
   iterator it=obus.begin(), fin=obus.end();
   for (; it != fin; ++it)

@@ -23,7 +23,6 @@
 //-----------------------------------------------------------------------------
 #include "../include/app.h"
 #include "../map/maps_list.h"
-#include "../map/camera.h"
 #ifdef CL
 # include "../weapon/mine.h"
 #endif
@@ -109,7 +108,6 @@ void ListeObjets::RetireObjet (PhysicalObj *ptr_obj)
     if (it -> ptr == ptr_obj) 
     {
       liste.erase (it);
-      camera.StopFollowingObj(it->ptr);
       return;
     }
   }
