@@ -4,16 +4,6 @@ FAQ (English)
 Hopefully, this document provides the answer to any problems you may have encountered in Wormux.
 
 
-* I get 2 frames per second, though I have a P4 1.2GHz ?!?
---------------------------------------------------------
-
-Wormux uses OpenGL texture functions to display pictures on the
-screen. So on computers without graphics acceleration, everything is computed
-by the video driver, and processor is overloaded.
-The solution is to use SDL functions instead of the OpenGL ones, but the SDL functions
-are not fully implemented in ClanLib yet, so any contribution is welcome!
-
-
 * I get the message "Floating point exception" as soon as I run Wormux.
 ---------------------------------------------------------------------
 
@@ -25,27 +15,6 @@ the line:
 Section "ServerFlags"
 [...]
 Option "DisableVidModeExtension" "yes"
-
-
-* Error "connection refused by server" (Linux)
--------------------------------------
-
-If you get a message like:
-
-<< Xlib: connection to ":0.0" refused by server
-   Xlib: No protocol specified
-
-   UNE EXCEPTION EST INTERVENUE (pas de bol) :
-   Failed to open display. No XWindow display available. >>
-
-It is almost certainly because you are running Wormux as a different user than the one
-with which you have run the graphical server (typically, you are root instead
-of a regular user). 
-
-You should either switch to the correct user, or authorise root to launch 
-graphical software by typing "xhost -"
-
-(WARNING: this second method is not very secure!)
 
 
 * Error "resource (...) not found"

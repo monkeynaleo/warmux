@@ -207,13 +207,13 @@ void InitGameData_NetClient()
 void InitGameData_Local()
 {
   // Placement des vers
-  std::cout << "o " << _("Find a random position for worms") << std::endl;
+  std::cout << "o " << _("Find a random position for characters") << std::endl;
   world.Reset();
   lst_terrain.TerrainActif().FreeData();
   teams_list.Reset();
 
   // Remise à zéro
-  std::cout << "o " << _("Initialise data") << std::endl;
+  std::cout << "o " << _("Initialise objects") << std::endl;
   lst_objets.Reset();
 }
 

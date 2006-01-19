@@ -4,12 +4,10 @@ CXXFLAGS=""
 
 LIBS=""
 
-CLAN_DIR=~/dev/ClanLib-0.7
-
 # libxml++ 1.0
 #LIBS="$LIBS -lxml++-1.0"
 
-# ClanLib deps
+# Game deps
 LIBS="$LIBS -lxml2 -lpthread -ljpeg -lpng12 -lvorbis -logg"
 
 # X deps
@@ -18,7 +16,8 @@ LIBS="$LIBS -L/usr/X11R6/lib -L/usr/lib -lX11 -lGLU -lXext -lGL -lXi -lXt"
 
 # Wormux objects 
 OBJ="`ls src/*.o`"
-OBJ=" $OBJ $(find $CLAN_DIR -name \*.o|grep libs/) /usr/X11R6/lib/libXxf86vm.a"
+SDL_OBJ=
+OBJ=" $OBJ $SDL_OBJ /usr/X11R6/lib/libXxf86vm.a"
 
 # Output
 echo "LIBS = "
