@@ -46,7 +46,7 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 // Position du texte de la version
-const int VERSION_DY = -40;
+const int VERSION_DY = -15;
 
 const int DEFAULT_SCREEN_HEIGHT = 768 ;
 
@@ -95,12 +95,12 @@ Main_Menu::Main_Menu()
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
-  play = new ButtonText(x_button,(uint)(320 * y_scale),//Position
+  play = new ButtonText(x_button,(uint)(300 * y_scale),//Position
 			res, "main_menu/button",
 			_("Play"),
 			&global().large_font());
 
-  network = new ButtonText(x_button,(int)(395 * y_scale), //Position
+  network = new ButtonText(x_button,(int)(385 * y_scale), //Position
 			   res, "main_menu/button",
 			   _("Network Game"),
 			   &global().large_font() );
@@ -110,12 +110,12 @@ Main_Menu::Main_Menu()
 			   _("Options"),
 			   &global().large_font());
 
-  infos =  new ButtonText(x_button,(int)(545 * y_scale), //Position
+  infos =  new ButtonText(x_button,(int)(555 * y_scale), //Position
 			  res, "main_menu/button",
 			  _("Info"),
 			  &global().large_font());
 
-  quit =  new ButtonText(x_button,(int)(620 * y_scale), //Position
+  quit =  new ButtonText(x_button,(int)(640 * y_scale), //Position
 			 res, "main_menu/button",
 			 _("Quit"),
 			 &global().large_font());
