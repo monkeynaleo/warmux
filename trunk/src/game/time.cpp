@@ -20,98 +20,80 @@
  *****************************************************************************/
 
 #include "time.h"
-//-----------------------------------------------------------------------------
-#include "../tool/math_tools.h"
-#include "../interface/game_msg.h"
-
-#include "../graphic/video.h"
-
 #include <SDL.h>
 #include <sstream>
 #include <iomanip>
 #include <iostream>
-//-----------------------------------------------------------------------------
+#include "../graphic/video.h"
+#include "../interface/game_msg.h"
+#include "../tool/math_tools.h"
 
-const double VITESSE_MIN = 0.01;
-const double VITESSE_MAX = 50;
-
-//-----------------------------------------------------------------------------
 namespace Wormux
 {
 
 Time global_time;
-//-----------------------------------------------------------------------------
 
-Time::Time()
-  : dt_pause(0), mode_pause(false)
-{
-//   Reset();
+bool Time::IsGamePaused() const 
+{ 
+  return is_game_paused;
 }
 
-//-----------------------------------------------------------------------------
+Time::Time()
+{
+  pause_offset = 0;
+  is_game_paused = false;
+}
 
 void Time::Reset()
 {
-  dt_pause = SDL_GetTicks();
-  mode_pause = false;
+  pause_offset = SDL_GetTicks();
+  is_game_paused = false;
 }
-
-//-----------------------------------------------------------------------------
 
 uint Time::Read() const
 {   
-  return SDL_GetTicks() - dt_pause;
+  return SDL_GetTicks() - pause_offset;
 }
 
-//-----------------------------------------------------------------------------
+uint Time::ReadSec() const
+{
+  return Read() / 1000;
+}
 
+uint Time::ReadMin() const
+{
+  return ReadSec() / 60;
+}
 void Time::Pause()
 {
-  if (mode_pause) return;
-  //assert (!mode_pause);
-  debut_pause = SDL_GetTicks();
-  mode_pause = true;
+  if (is_game_paused)
+    return;
+  pause_start = SDL_GetTicks();
+  is_game_paused = true;
 }
-
-//-----------------------------------------------------------------------------
 
 void Time::Continue()
 {
-  assert (mode_pause);
-  dt_pause += SDL_GetTicks() - debut_pause;
-  mode_pause = false;
+  assert (is_game_paused);
+  pause_offset += SDL_GetTicks() - pause_start;
+  is_game_paused = false;
 }
 
-//-----------------------------------------------------------------------------
-
-uint Time::Clock_Sec()
+uint Time::ClockSec()
 {
-  uint clock_sec = Read()/1000;
-  clock_sec %= 60;
-  if (clock_sec == 60)
-    return clock_sec = 0;
-  return clock_sec;
+  return ReadSec() % 60;
 }
 
-//-----------------------------------------------------------------------------
-
-uint Time::Clock_Min()
+uint Time::ClockMin()
 {
-  uint clock_min = Read()/60000;
-  if (clock_min > 59)
-    return clock_min = 0;
-  return clock_min;
+  return ReadMin() % 60;
 }
-
-//-----------------------------------------------------------------------------
 
 std::string Time::GetString()
 {
-  //if (!affiche) return;
   std::ostringstream ss;
-  ss << Clock_Min() << ":" << std::setfill('0') << std::setw(2) << Clock_Sec();
+  
+  ss << ClockMin() << ":" << std::setfill('0') << std::setw(2) << ClockSec();
   return ss.str();
 }
-
-//-----------------------------------------------------------------------------
 }
