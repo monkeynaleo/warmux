@@ -173,15 +173,13 @@ void AppWormux::DisplayLoadingPicture()
 
   SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
 
-  global().huge_font().WriteCenter( config.tmp.video.width/2, 
-			config.tmp.video.height/2 - 200, 
-			_("Wormux launching..."),
-        		white_color);
-
-  global().huge_font().WriteCenter( config.tmp.video.width/2, 
-			 config.tmp.video.height/2 - 180 + global().huge_font().GetHeight(), 
-			 txt_version,
-			 white_color);
+  Text text1(_("Wormux launching..."), white_color, &global().huge_font(), true); 
+  Text text2(txt_version, white_color, &global().huge_font(), true); 
+  int x = video.GetWidth()/2;
+  int y = video.GetHeight()/2 - 200;
+  text1.DrawCenter (x, y);
+  y += global().huge_font().GetHeight() + 20;
+  text2.DrawCenter (x, y);
 
   SDL_UpdateRect(app.sdlwindow, 0, 0, 0, 0);
   SDL_Flip(app.sdlwindow);
