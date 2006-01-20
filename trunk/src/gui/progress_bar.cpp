@@ -28,17 +28,6 @@
 #include "../graphic/video.h"
 //-----------------------------------------------------------------------------
 
-#ifdef CL
-BarreProg::BarreProg()
-  : border_color(CL_Color::black),
-    value_color(CL_Color::white),
-    background_color(CL_Color::darkgray)
-{
-  x = y = larg = haut = 0;
-  val = min = max = 0;
-  m_use_ref_val = false;
-}
-#else
 BarreProg::BarreProg()
 {   
    border_color.r = 0;
@@ -56,6 +45,8 @@ BarreProg::BarreProg()
    image = NULL;
 }
 
+//-----------------------------------------------------------------------------
+
 void BarreProg::SetBorderColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
    border_color.r = r;
@@ -63,6 +54,8 @@ void BarreProg::SetBorderColor( unsigned char r, unsigned char g, unsigned char 
    border_color.b = b;
    border_color.unused = a;   
 }
+
+//-----------------------------------------------------------------------------
 
 void BarreProg::SetBackgroundColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
@@ -72,6 +65,8 @@ void BarreProg::SetBackgroundColor( unsigned char r, unsigned char g, unsigned c
    background_color.unused = a;   
 }
 
+//-----------------------------------------------------------------------------
+
 void BarreProg::SetValueColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
    value_color.r = r;
@@ -79,7 +74,6 @@ void BarreProg::SetValueColor( unsigned char r, unsigned char g, unsigned char b
    value_color.b = b;
    value_color.unused = a;   
 }
-#endif
 
 //-----------------------------------------------------------------------------
 
@@ -150,37 +144,13 @@ void BarreProg::DrawXY (uint px, uint py) const
   int left, right;
    
   // Bordure
-#ifdef CL
-  CL_Display::draw_rect (CL_Rect(px, py, px+larg, py+haut), border_color);
-#else
   SDL_FillRect( image, NULL, SDL_MapRGBA( image->format, border_color.r, border_color.g, border_color.b, border_color.unused));
-#endif
    
   // Fond
-#ifdef CL
-  CL_Display::fill_rect (CL_Rect(px+1, py+1, px+larg-1, py+haut-1), background_color);
-#else
   SDL_Rect r_back = {1, 1, larg-2, haut-2};
   SDL_FillRect( image, &r_back, SDL_MapRGBA( image->format, background_color.r, background_color.g, background_color.b,background_color.unused));   
-#endif
    
   // Valeur
-#ifdef CL
-  if (m_use_ref_val) {
-    int ref = CalculeValBarre (m_ref_val);
-    if (val < m_ref_val) {
-      left = px+1+val_barre;
-      right = px+1+ref;
-    } else {
-      left = px+1+ref;
-      right = px+1+val_barre;
-    }
-  } else {
-    left = px+1;
-    right = px+1+val_barre;
-  }  
-  CL_Display::fill_rect (CL_Rect(left, py+1, right, py+haut-1), value_color);
-#else
   if (m_use_ref_val) {
     int ref = CalculeValBarre (m_ref_val);
     if (val < m_ref_val) {
@@ -197,51 +167,34 @@ void BarreProg::DrawXY (uint px, uint py) const
 
   SDL_Rect r_value = {left, 1, right-left, haut-2};
   SDL_FillRect( image, &r_value, SDL_MapRGBA( image->format, value_color.r, value_color.g, value_color.b, value_color.unused));
-#endif
    
   if (m_use_ref_val) {
     int ref = CalculeValBarre (m_ref_val);
-#ifdef CL
-     CL_Display::draw_line (px+1+ref, py+1, 
-			    px+1+ref, py+haut-1, 
-			    border_color);
-#else
-  SDL_Rect r_ref = {1+ref, 1, 1, haut-2};
-  SDL_FillRect( image, &r_ref, SDL_MapRGBA( image->format, border_color.r, border_color.g, border_color.b, border_color.unused));           
-#endif
+    SDL_Rect r_ref = {1+ref, 1, 1, haut-2};
+    SDL_FillRect( image, &r_ref, 
+      SDL_MapRGBA( image->format, border_color.r, border_color.g, border_color.b, border_color.unused));           
   }
 
   // Marqueurs
   marqueur_it_const it=marqueur.begin(), fin=marqueur.end();
   for (; it != fin; ++it)
   {
-#ifdef CL
-    int x = px+1+it -> val;
-     CL_Display::draw_line (x, py+1, x, py+haut-2,
-			    it -> color);
-#else
-  SDL_Rect r_marq = {1+it->val, 1, 1, haut-2};
-  SDL_FillRect( image, &r_marq, SDL_MapRGBA( image->format, border_color.r, border_color.g, border_color.b, border_color.unused));           
-#endif
+    SDL_Rect r_marq = {1+it->val, 1, 1, haut-2};
+    SDL_FillRect( image, &r_marq,
+      SDL_MapRGBA( image->format, border_color.r, border_color.g, border_color.b, border_color.unused));           
   }
  
-#ifndef CL
   // Blit internal surface to destination
   SDL_Rect d = {px, py, larg, haut};
   SDL_BlitSurface( image, NULL, app.sdlwindow, &d);
 
   world.ToRedrawOnScreen(Rectanglei(d.x, d.y, d.w, d.h));
-#endif
 }
 
 //-----------------------------------------------------------------------------
 
 // Ajoute/supprime un marqueur
-#ifdef CL
-BarreProg::marqueur_it BarreProg::AjouteMarqueur (long val, const CL_Color& color)
-#else
 BarreProg::marqueur_it BarreProg::AjouteMarqueur (long val, const SDL_Color& color)
-#endif
 {
   marqueur_t m;
   m.val = CalculeValBarre (val);

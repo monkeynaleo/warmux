@@ -120,8 +120,9 @@ printf("charge %s",m_nomfich.c_str());
   }
   catch (const xmlpp::exception &e)
   {
-    std::cout << "o Erreur lors du chargement :" << std::endl
-	      << e.what() << std::endl;
+    std::cout << "o "
+        << _("Error while loading configuration file: %s") << std::endl
+        << e.what() << std::endl;
     return false;
   } 
 

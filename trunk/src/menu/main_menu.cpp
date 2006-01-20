@@ -132,7 +132,7 @@ void Main_Menu::onClick ( int x, int y, int button)
   if (play->MouseIsOver (x, y)) sig_play();
   else if (network->MouseIsOver (x, y)) sig_network();
   else if (options->MouseIsOver (x, y)) sig_options();
-  //else if (infos->MouseIsOver (x, y)) sig_infos();
+  else if (infos->MouseIsOver (x, y)) sig_infos();
   else if (quit->MouseIsOver (x, y)) sig_quit();
 }
 
