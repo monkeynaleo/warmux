@@ -37,6 +37,8 @@
 #include "infos_menu.h"
 #include "../include/global.h"
 
+//#define NETWORK_BUTTON 
+
 #ifndef WIN32
 #include <dirent.h>
 #endif
@@ -95,27 +97,43 @@ Main_Menu::Main_Menu()
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
-  play = new ButtonText(x_button,(uint)(300 * y_scale),//Position
+  int y = 300;
+  const int y2 = 580;
+#ifdef NETWORK_BUTTON  
+  int dy = (y2-y)/4;
+#else  
+  int dy = (y2-y)/3;
+#endif  
+
+  play = new ButtonText(x_button,(uint)(y * y_scale),//Position
 			res, "main_menu/button",
 			_("Play"),
 			&global().large_font());
+  y += dy;
 
-  network = new ButtonText(x_button,(int)(385 * y_scale), //Position
+#ifdef NETWORK_BUTTON  
+  network = new ButtonText(x_button,(int)(y * y_scale), //Position
 			   res, "main_menu/button",
 			   _("Network Game"),
 			   &global().large_font() );
-
-  options = new ButtonText(x_button,(int)(470 * y_scale), //Position
+  y += dy;
+#else
+  network = NULL;
+#endif
+  
+  options = new ButtonText(x_button,(int)(y * y_scale), //Position
 			   res, "main_menu/button",
 			   _("Options"),
 			   &global().large_font());
+  y += dy;
 
-  infos =  new ButtonText(x_button,(int)(555 * y_scale), //Position
+  infos =  new ButtonText(x_button,(int)(y * y_scale), //Position
 			  res, "main_menu/button",
-			  _("Info"),
+			  _("Credits"),
 			  &global().large_font());
+  y += dy;
 
-  quit =  new ButtonText(x_button,(int)(640 * y_scale), //Position
+  quit =  new ButtonText(x_button,(int)(y * y_scale), //Position
 			 res, "main_menu/button",
 			 _("Quit"),
 			 &global().large_font());
@@ -130,7 +148,9 @@ Main_Menu::Main_Menu()
 void Main_Menu::onClick ( int x, int y, int button)
 {       
   if (play->MouseIsOver (x, y)) sig_play();
+#ifdef NETWORK_BUTTON  
   else if (network->MouseIsOver (x, y)) sig_network();
+#endif  
   else if (options->MouseIsOver (x, y)) sig_options();
   else if (infos->MouseIsOver (x, y)) sig_infos();
   else if (quit->MouseIsOver (x, y)) sig_quit();
@@ -172,7 +192,9 @@ menu_item Main_Menu::Run ()
    background->Blit( app.sdlwindow, 0, 0);
 
    play->Draw(x,y);
+#ifdef NETWORK_BUTTON  
    network->Draw(x,y);
+#endif   
    options->Draw(x,y);
    infos->Draw(x,y);
    quit->Draw(x,y);
