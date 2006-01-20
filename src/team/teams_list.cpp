@@ -163,7 +163,7 @@ void TeamsList::LoadList()
   nv_selection.push_back (1);
   ChangeSelection (nv_selection);
 
-  std::cout << std::endl << std::endl;
+  std::cout << std::endl;
 }
 
 //-----------------------------------------------------------------------------

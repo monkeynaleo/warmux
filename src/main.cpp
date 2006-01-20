@@ -143,7 +143,7 @@ void AppWormux::InitNetwork(int argc, char **argv)
 void AppWormux::InitScreen()
 {
   if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
-    Error( Format( _("Unable to initialize SDL : %s"), SDL_GetError() ) );
+    Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) );
 }
 
 void AppWormux::InitWindow()
@@ -191,16 +191,16 @@ void AppWormux::DisplayLoadingPicture()
 void AppWormux::InitFonts()
 {
   if (TTF_Init()==-1)
-    Error( Format( _("TTF init failed : %s"), TTF_GetError() ) );
+    Error( Format( _("Initialisation of TTF library failed: %s"), TTF_GetError() ) );
   if (!Font::InitAllFonts())
-    Error( _("Init all fonts failed") );
+    Error( _("Unable to initialise the fonts.") );
   createGlobal();
 }
 
 void AppWormux::End()
 {
   std::cout << std::endl
-	    << "[ " << _("End of game") << " ]" << std::endl;
+	    << "[ " << _("Quit Wormux") << " ]" << std::endl;
 
   config.Sauve();
   destroyGlobal();
@@ -236,16 +236,15 @@ void AppWormux::DisplayWelcomeMessage()
   std::cout << "Wormux version " << VERSION
 	    << ", Copyright (C) 2001-2004 Lawrence Azzoug"
 	    << std::endl
-	    << "Wormux comes with ABSOLUTELY NO WARRANTY. This is free "
-	    << "software, and you are welcome to redistribute it under "
-	    << "certain conditions." << std::endl
+	    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
+        << "This is free software, and you are welcome to redistribute it" << std::endl
+        << "under certain conditions." << std::endl
 	    << std::endl
 	    << "Read COPYING file for details." << std::endl
 	    << std::endl;
 
 #ifdef DEBUG
-  std::cout << "!!! This program was compiled in DEBUG mode (development"
-	    << " version). !!!" << std::endl
+  std::cout << "!!! This program was compiled in DEBUG mode (development version) !!!" << std::endl
 	    << std::endl;
 #endif
 
@@ -255,4 +254,5 @@ void AppWormux::DisplayWelcomeMessage()
 int main (int argc, char **argv)
 {
   app.main(argc,argv);
+  return EXIT_SUCCESS;
 }
