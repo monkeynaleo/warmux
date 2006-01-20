@@ -372,7 +372,7 @@ void GameLoop::Refresh()
 
   //--- D'abord ce qui pourrait modifier les données d'un ver ---
 
-  if (!global_time.IsInPause())
+  if (!global_time.IsGamePaused())
   {
      
     // Keyboard and mouse refresh
@@ -536,7 +536,7 @@ void GameLoop::Run()
 
 void GameLoop::RefreshClock()
 {
-  if (global_time.IsInPause()) return;
+  if (global_time.IsGamePaused()) return;
 
   if (1000 < global_time.Read() - pause_seconde) 
     {

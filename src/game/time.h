@@ -16,15 +16,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh du temps qui passe. Le temps du jeu peut être mise en pause.
+ *  Handle the game time. The game can be paused.
  *****************************************************************************/
 
-#ifndef TEMPS_H
-#define TEMPS_H
-//-----------------------------------------------------------------------------
-#include "../include/base.h"
+#ifndef TIME_H
+#define TIME_H
+
 #include <string>
-//-----------------------------------------------------------------------------
+#include "../include/base.h"
 
 namespace Wormux
 {
@@ -32,33 +31,29 @@ namespace Wormux
 class Time
 {
 private:
-  uint debut_pause; // Début de la pause
-  uint dt_pause;    // Décalage entre get_time() et LitTemps()
-  bool mode_pause;  // Le jeu est en pause ?
+  uint pause_start;
+  uint pause_offset;// Offset between get_time() and LitTemps()
+  bool is_game_paused;
    
 public:
   Time();
   void Reset();
+  bool IsGamePaused() const;
 
-  // On est en pause ?
-  bool IsInPause() const { return mode_pause; }
-
-  // Lit le temps, horloge du jeu
-  // Elle diffère légèrement de CL_System::get_time() car le jeu
-  // peut se mettre en pause
+  // Read the time of the game, excluding paused time
   uint Read() const;
+  uint ReadSec() const;
+  uint ReadMin() const;
 
-  // Lit l'horloge du jeu (formatee)
-  uint Clock_Sec();
-  uint Clock_Min();
+  // Read the clock time
+  uint ClockSec();  // ReadSec() % 60
+  uint ClockMin();  // ReadMin() % 60
   std::string GetString();
 
-  // Passe/reprend
   void Pause();
   void Continue();
 };
 
  extern Time global_time;
 }
-//-----------------------------------------------------------------------------
 #endif
