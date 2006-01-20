@@ -46,9 +46,9 @@ Text::Text(const std::string &new_txt, SDL_Color new_color,
   if(shadowed)
   {
     int width=-1;
-    TTF_SizeUTF8(font->m_font, "a", &width, NULL);
-    bg_offset = (unsigned int)width/5;
-    assert(bg_offset!=0);
+    TTF_SizeUTF8(font->m_font, "x", &width, NULL);
+    bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
+    if (bg_offset < 1) bg_offset = 1;
   }
   else
     bg_offset = 0;
