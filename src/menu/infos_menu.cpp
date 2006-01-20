@@ -21,48 +21,102 @@
 
 #include "infos_menu.h"
 //-----------------------------------------------------------------------------
-#include <stdio.h>
-#include "../include/constant.h"
-#include "../tool/i18n.h"
+#include <sstream>
+#include <iostream>
+#include "../game/config.h"
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 MenuInfos menu_infos;
 //-----------------------------------------------------------------------------
 
+class Author
+{
+public:
+  std::string name;
+  std::string nickname;
+  std::string email;
+  std::string country;
+  std::string description;
+
+  bool Feed (const xmlpp::Node *node);
+  std::string PrettyString(bool with_email);
+};    
+
+//-----------------------------------------------------------------------------
+
+bool Author::Feed (const xmlpp::Node *node)
+{
+   if (!LitDocXml::LitString(node, "name", name)) return false;
+   if (!LitDocXml::LitString(node, "description", description)) return false;
+   return true;
+}
+
+//-----------------------------------------------------------------------------
+
+std::string Author::PrettyString(bool with_email)
+{
+   std::ostringstream ss;
+   ss << name;
+   if (with_email)
+   {
+     ss << " <" << email << ">";
+   }
+   if (!nickname.empty())
+   {
+     ss << " aka " << nickname;
+   }
+   if (!country.empty())
+   {
+     ss << "from " << country;
+   }
+   ss << ": " << description;
+   return ss.str();
+}
+
+//-----------------------------------------------------------------------------
+
 void MenuInfos::Run()
 {
-#ifdef CL
-  //TODO:open the authors file from /usr/include according to the configure
-  //TODO:Move the window depending on the screen resolution(?)
-  FILE* authors=fopen("../AUTHORS","r");
-  char* txt;
-  if(authors!=NULL)
+  std::string filename = config.data_dir+"authors.xml";
+  LitDocXml doc;
+  if (!doc.Charge (filename))
   {
-    fseek(authors,0,SEEK_END);
-    long size=ftell(authors);
-    txt=new char[size+1];
-    rewind(authors);
-    fread(txt,1,size,authors);
-    txt[size]='\0';
-    fclose(authors);
-  }
-  else
-  {
-    txt=new char[strlen("Wormux team!")+1];
-    strcpy(txt,"Wormux team!");
-  }
-  PG_MessageBox* msgbox=new PG_MessageBox(NULL,
-                                          PG_Rect(40,50,560,390),
-                                          _("Authors"),txt,
-                                          PG_Rect(530, 0,30, 30),
-                                          _("Ok"),
-                                          PG_Label::CENTER);
+    // Error: do something ...
+    return;
+  } 
 
-  msgbox->Show();
-  msgbox->WaitForClick();
-  delete msgbox;
-  delete []txt;
-#endif
+  xmlpp::Node::NodeList sections = doc.racine() -> get_children("section");
+  xmlpp::Node::NodeList::iterator
+    section=sections.begin(),
+    end_section=sections.end();
+
+  for (; section != end_section; ++section)
+  {
+    xmlpp::Node::NodeList authors = (**section).get_children("author");
+    xmlpp::Node::NodeList::iterator
+      node=authors.begin(),
+      end=authors.end();
+    std::string title;
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*section);
+    if (!elem)
+    {
+        std::cerr << "cast error" << std::endl;
+        continue;
+    }
+    if (!LitDocXml::LitAttrString(elem, "title", title)) continue;
+    std::cout << "=== " << title << " ===" << std::endl;
+    
+    for (; node != end; ++node)
+    {
+        Author author;
+        if (author.Feed(*node))
+        {
+          std::cout << "* " << author.PrettyString(false) << std::endl;
+        }
+    }
+    std::cout << std::endl;
+  }
+
 }
 
 //-----------------------------------------------------------------------------

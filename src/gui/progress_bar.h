@@ -24,22 +24,14 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include <list>
-#ifdef CL
-#include <ClanLib/display.h>
-#else
 #include <SDL.h>
-#endif
 //-----------------------------------------------------------------------------
 
 class BarreProg
 {
 public:
-#ifdef CL
-  CL_Color border_color, value_color, background_color;
-#else
   SDL_Color border_color, value_color, background_color;
   SDL_Surface *image; // in order to pemit alpha blended progressbar
-#endif
 private:
   uint x, y, larg, haut; // Position
   long val, min, max; // Valeur
@@ -50,16 +42,12 @@ private:
   uint CalculeVal (long val) const;
   uint CalculeValBarre (long val) const;
 
-#ifdef CL
-  typedef struct s_marqueur_t{ CL_Color color; uint val; } marqueur_t;
-#else
   typedef struct s_marqueur_t{ SDL_Color color; uint val; } marqueur_t;
  public:
   void SetBorderColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a=255);
   void SetBackgroundColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a=255);
   void SetValueColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a=255);
  private:
-#endif
   typedef std::list<marqueur_t>::iterator marqueur_it;
   typedef std::list<marqueur_t>::const_iterator marqueur_it_const;
   std::list<marqueur_t> marqueur;
@@ -91,12 +79,8 @@ public:
   uint GetHeight() const { return haut; }
 
   // Ajoute/supprime un marqueur
-#ifdef CL
-  marqueur_it AjouteMarqueur (long val, const CL_Color& coul);
-#else
   marqueur_it AjouteMarqueur (long val, const SDL_Color& coul);
   marqueur_it AjouteMarqueur (long val, unsigned char r, unsigned char g, unsigned char b, unsigned char a=255);
-#endif
   void SupprimeMarqueur (marqueur_it it);
   void Reset_Marqueur();
 };

@@ -52,11 +52,7 @@ Time::Time()
 
 void Time::Reset()
 {
-#ifdef CL
-  dt_pause = CL_System::get_time(); //Needed to have time set to 0, on a reset
-#else
   dt_pause = SDL_GetTicks();
-#endif
   mode_pause = false;
 }
 
@@ -73,12 +69,8 @@ void Time::Pause()
 {
   if (mode_pause) return;
   //assert (!mode_pause);
-#ifdef CL
-  debut_pause = CL_System::get_time();
-#else
   debut_pause = SDL_GetTicks();
-#endif
-   mode_pause = true;
+  mode_pause = true;
 }
 
 //-----------------------------------------------------------------------------
@@ -86,12 +78,8 @@ void Time::Pause()
 void Time::Continue()
 {
   assert (mode_pause);
-#ifdef CL
-  dt_pause += CL_System::get_time() - debut_pause;
-#else
-   dt_pause += SDL_GetTicks() - debut_pause;
-#endif
-   mode_pause = false;
+  dt_pause += SDL_GetTicks() - debut_pause;
+  mode_pause = false;
 }
 
 //-----------------------------------------------------------------------------
