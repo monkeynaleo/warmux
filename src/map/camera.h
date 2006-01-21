@@ -30,6 +30,7 @@
 class Camera
 {
   Point2i pos;
+  Point2i last_char_target;
   PhysicalObj* followed_obj;
   unsigned int last_refresh;
   unsigned int mvt_begin; //Time when the last camera movement began (automatic movement)
@@ -41,8 +42,6 @@ class Camera
   int shake_offset_max;
   unsigned int shake_end_time;
   unsigned int shake_last_time;
-
-  double screen_diagonal_angle;
 public:
   Camera();
   void Reset();
