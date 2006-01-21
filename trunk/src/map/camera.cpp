@@ -243,7 +243,7 @@ PhysicalObj* Camera::GetFastestObj()
 
   //Return the skin with the highst speed:
   POUR_TOUS_VERS(team, character)
-  if(character->IsMoving())
+  if(character->IsMoving() && &(*character) != &ActiveCharacter())
   {
     double speed,angle;
     character->GetSpeed(speed,angle);
@@ -277,23 +277,11 @@ PhysicalObj* Camera::GetFastestObj()
 //-----------------------------------------------------------------------------
 void Camera::ComputeFocus_Object(int & x, int & y)
 {
-//  if(ActiveTeam().GetWeapon().min_angle != ActiveTeam().GetWeapon().max_angle
-//  && !ActiveCharacter.IsWalking())
-//  {
-    //The current weapon uses crosshair
-    uint window_x = GetWidth() /2;  //Final position of the followed,
-    uint window_y = GetHeight()/2; // in the window
-    x = followed_obj->GetX() - (int)window_x;
-    y = followed_obj->GetY() - (int)window_y;
-//  }
-//  else
-//  {
-    //The current weapon  doesn't use crosshair -> center on skin
-//    uint window_x = GetWidth() /2;  //Final position of the followed,
-//    uint window_y = GetHeight()/2; // in the window
-//    x = followed_obj->GetX() - (int)window_x;
-//    y = followed_obj->GetY() - (int)window_y;
-//  }  
+  //Center object in the window
+  uint window_x = GetWidth() /2;  //Final position of the followed,
+  uint window_y = GetHeight()/2; // in the window
+  x = followed_obj->GetX() - (int)window_x;
+  y = followed_obj->GetY() - (int)window_y;
 }
 
 //-----------------------------------------------------------------------------
@@ -313,6 +301,14 @@ void Camera::ComputeFocus_ActiveChar(int & x, int & y)
 
     x = followed_obj->GetX() - (int)window_x;
     y = followed_obj->GetY() - (int)window_y;
+
+    //If the focus point changed too much, begin mvt
+    if(abs(x - last_char_target.x) > (int)DELTA_MVT_MAX
+    || abs(y - last_char_target.y) > (int)DELTA_MVT_MAX)
+      mvt_begin = global_time.Read();
+
+    last_char_target.x = x;
+    last_char_target.y = y;
   }
   else
   {
@@ -322,12 +318,6 @@ void Camera::ComputeFocus_ActiveChar(int & x, int & y)
     x = followed_obj->GetX() - (int)window_x;
     y = followed_obj->GetY() - (int)window_y;
   }  
-  // Begin a movement if the step is to big
-  if(global_time.Read() - mvt_begin > MOVE_TIME)
-  {
-    if(abs(x-(int)GetX()) > (int)DELTA_MVT_MAX) mvt_begin = global_time.Read();
-    if(abs(y-(int)GetY()) > (int)DELTA_MVT_MAX) mvt_begin = global_time.Read();
-  }
 }
 
 //-----------------------------------------------------------------------------
