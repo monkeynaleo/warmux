@@ -26,7 +26,7 @@
 //-----------------------------------------------------------------------------
 
 // Boucle pour chaque equipe
-#define POUR_CHAQUE_EQUIPE(equipe) \
+#define FOR_EACH_TEAM(equipe) \
   for (TeamsList::iterator equipe=teams_list.playing_list.begin(), \
        fin_pour_chaque_equipe=teams_list.playing_list.end(); \
        equipe != fin_pour_chaque_equipe; \
@@ -50,12 +50,12 @@
 
 // Boucle pour tous les vers (or fantomes)
 #define POUR_TOUS_VERS(equipe,ver) \
-  POUR_CHAQUE_EQUIPE(equipe) \
+  FOR_EACH_TEAM(equipe) \
   POUR_CHAQUE_VER(*equipe,ver) 
 
 // Boucle pour tous les vers vivants
 #define POUR_TOUS_VERS_VIVANTS(equipe,ver) \
-  POUR_CHAQUE_EQUIPE(equipe) \
+  FOR_EACH_TEAM(equipe) \
   POUR_CHAQUE_VER_VIVANT(*equipe,ver) 
 
 //-----------------------------------------------------------------------------

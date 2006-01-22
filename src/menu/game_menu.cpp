@@ -208,7 +208,7 @@ void GameMenu::SaveOptions()
 void GameMenu::__sig_ok()
 {
   SaveOptions();
-  jeu.LanceJeu();
+  game.Start();
 }
 
 //-----------------------------------------------------------------------------

@@ -16,7 +16,7 @@ wormux_SOURCES = \
 	game/game_mode.cpp game/game_mode.h \
 	game/game.cpp game/game.h \
 	game/game_loop.cpp game/game_loop.h \
-    graphic/colors.h \
+        graphic/colors.h \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/video.cpp graphic/video.h \
 	graphic/text.cpp graphic/text.h \
@@ -41,6 +41,7 @@ wormux_SOURCES = \
 	tool/stats.cpp tool/stats.h \
 	tool/random.cpp tool/random.h \
 	tool/Distance.cpp tool/Distance.h \
+        tool/debug.cpp tool/debug.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	graphic/font.cpp graphic/font.h \
 	graphic/sprite.cpp graphic/sprite.h \
