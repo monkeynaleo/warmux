@@ -26,40 +26,51 @@
 #define _RECTANGLE_H
 
 #include <cmath>
+#include "Point.h"
 
 template<class T> class Wormux_Rectangle
 {
    
- public:
-   inline Wormux_Rectangle(){}
-   inline Wormux_Rectangle(T ox, T oy, T width, T height)
-     {
-	this->x = ox;
-	this->y = oy;
-	this->w = width;
-	this->h = height;
+  public:
+    T x, y, w, h;
+    inline Wormux_Rectangle(){}
+    inline Wormux_Rectangle(T ox, T oy, T width, T height)
+    {
+      this->x = ox;
+      this->y = oy;
+      this->w = width;
+      this->h = height;
      }
    
-   inline void Clip( const Wormux_Rectangle &cr)
-     {
-	T left    = ( x < cr.x ) ? cr.x : ( x > cr.x+cr.w ) ? cr.x+cr.w : x; 
-	T right   = ( x+w < cr.x ) ? cr.x : ( x+w > cr.x+cr.w ) ? cr.x+cr.w : x+w;
-	T top     = ( y < cr.y ) ? cr.y : ( y > cr.y+cr.h ) ? cr.y+cr.h : y;
-	T bottom  = ( y+h < cr.y ) ? cr.y : ( y+h > cr.y+cr.h ) ? cr.y+cr.h : y+h;
+    inline void Clip( const Wormux_Rectangle &cr)
+    {
+      T left    = ( x < cr.x ) ? cr.x : ( x > cr.x+cr.w ) ? cr.x+cr.w : x; 
+      T right   = ( x+w < cr.x ) ? cr.x : ( x+w > cr.x+cr.w ) ? cr.x+cr.w : x+w;
+      T top     = ( y < cr.y ) ? cr.y : ( y > cr.y+cr.h ) ? cr.y+cr.h : y;
+      T bottom  = ( y+h < cr.y ) ? cr.y : ( y+h > cr.y+cr.h ) ? cr.y+cr.h : y+h;
 	
-	x = left;
-	w = right-left;
-	y = top;
-	h = bottom-top;
-     }
-   
-   T x, y, w, h;
+      x = left;
+      w = right-left;
+      y = top;
+      h = bottom-top;
+    }
+    
+    inline bool Contains( const Point2<T> p ) const{
+      return ( p.x >= x && 
+               p.x <= x+w && 
+               p.y >= y && 
+               p.y <= y+h );
+    }
+
+    inline bool Intersect( const Wormux_Rectangle<T> r2 ) const{
+      return Contains( Point2<T>( r2.x, r2.y))
+	  || Contains( Point2<T>( r2.x, r2.y+r2.h))
+	  || Contains( Point2<T>( r2.x+r2.w, r2.y+r2.h))
+	  || Contains( Point2<T>( r2.x+r2.w, r2.y));
+    }
 };
 
-   
-typedef Wormux_Rectangle<int>    Rectanglei;   
-typedef Wormux_Rectangle<float>  Rectanglef;   
-typedef Wormux_Rectangle<double> Rectangled;   
-
-
+typedef Wormux_Rectangle<int>    Rectanglei;
+typedef Wormux_Rectangle<float>  Rectanglef;
+typedef Wormux_Rectangle<double> Rectangled;
 #endif // _RECTANGLE_H

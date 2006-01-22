@@ -47,8 +47,9 @@ Game game;  // TODO: global variables are bad
 
 Game::Game()
 {
-  initialise = false;
+  //initialise = false;
   isGameLaunched = false;
+  endOfGameStatus = false;
 }
 
 bool Game::IsGameFinished()
@@ -193,4 +194,12 @@ void Game::Pause()
 
 bool Game::IsGameLaunched() const{
   return isGameLaunched;
+}
+
+bool Game::GetEndOfGameStatus(){
+  return endOfGameStatus;
+}
+
+void Game::SetEndOfGameStatus(bool status){
+  endOfGameStatus = status;
 }

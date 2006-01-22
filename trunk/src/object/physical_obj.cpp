@@ -33,7 +33,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/Point.h"
 #include "../tool/Rectangle.h"
-#include "../tool/Distance.h"
 //# include "../game/game_mode.h"
 #include "../game/time.h"
 //#include "../map/water.h"
@@ -63,7 +62,7 @@ const double PIXEL_PER_METER = 40 ;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2)
 {
-  return Distance(p1, p2) / PIXEL_PER_METER ;
+  return p1.Distance(p2) / PIXEL_PER_METER ;
 }
 
 //-----------------------------------------------------------------------------
@@ -256,7 +255,7 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 
   // Compute distance between old and new position.
 
-  double lg = Distance ( Point2d(old_x, old_y), Point2d(new_x, new_y));
+  double lg = Point2d(old_x, old_y).Distance( Point2d(new_x, new_y));
 
   if (lg == 0)
     return false ;
@@ -735,7 +734,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
 // Est-ce que deux objets se touchent ? (utilise les rectangles de test)
 bool ObjTouche (const PhysicalObj &a, const PhysicalObj &b)
 {
-  return Intersect (a.GetTestRect(), b.GetTestRect());
+  return a.GetTestRect().Intersect( b.GetTestRect() );
 }
 
 //-----------------------------------------------------------------------------
@@ -746,7 +745,7 @@ bool ObjTouche (const PhysicalObj &a, const Point2i &p)
    Rectanglei _r = a.GetTestRect();
    Point2i _p = p;
    
-   return IsInside ( _r, _p);
+   return  _r.Contains( _p );
 }
 
 //-----------------------------------------------------------------------------

@@ -23,15 +23,21 @@
 
 #include "character.h"
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include <sstream>
 #include <iostream>
+#include "move.h"
+#include "macro.h"
 #include "../game/game.h"
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../game/config.h"
 #include "../graphic/text.h"
+#include "../include/action_handler.h"
+#include "../include/app.h"
 #include "../include/constant.h"
+#include "../include/global.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../map/water.h"
@@ -41,17 +47,7 @@
 #include "../weapon/suicide.h"
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon_tools.h"
-#include "../include/action_handler.h"
 #include "../interface/cursor.h"
-#include "move.h"
-#include "macro.h"
-#include "../include/global.h"
-
-
-#include <SDL.h>
-#include "../tool/Distance.h"
-#include "../include/app.h"
-#include <iostream>
 
 using namespace std;
 using namespace Wormux;
@@ -1001,7 +997,7 @@ void Character::Reset()
     {
        Point2i p1 = ver->GetCenter();
        Point2i p2 = GetCenter();
-       double dst = Distance ( p1, p2);
+       double dst = p1.Distance( p2 );
 
       if (dst < world.dst_min_entre_vers) {
 	pos_ok = false;

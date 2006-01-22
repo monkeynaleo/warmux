@@ -36,7 +36,6 @@
 #include "../interface/mouse.h"
 #include "../tool/Point.h"
 #include "../tool/Rectangle.h"
-#include "../tool/Distance.h"
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
@@ -149,7 +148,7 @@ bool WeaponMenuItem::MouseOn(int s_x, int s_y)
   point.y = s_y;
 
 
-   if ( IsInside( rect, point))  
+   if( rect.Contains( point ) ) 
      return true;
   else
     {

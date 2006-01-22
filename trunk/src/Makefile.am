@@ -40,7 +40,6 @@ wormux_SOURCES = \
 	tool/resource_manager.cpp tool/resource_manager.h \
 	tool/stats.cpp tool/stats.h \
 	tool/random.cpp tool/random.h \
-	tool/Distance.cpp tool/Distance.h \
         tool/debug.cpp tool/debug.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	graphic/font.cpp graphic/font.h \
@@ -55,7 +54,7 @@ wormux_SOURCES = \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/question.cpp gui/question.h \
 	interface/interface.cpp interface/interface.h \
-    interface/cursor.cpp interface/cursor.h \
+        interface/cursor.cpp interface/cursor.h \
 	interface/game_msg.cpp interface/game_msg.h \
 	interface/mouse.cpp interface/mouse.h \
 	interface/keyboard.cpp interface/keyboard.h \
@@ -72,8 +71,8 @@ wormux_SOURCES = \
 	map/wind.cpp map/wind.h \
 	map/camera.cpp map/camera.h \
 	map/ground.cpp map/ground.h \
-    team/macro.h \
-    team/character.cpp team/character.h \
+        team/macro.h \
+        team/character.cpp team/character.h \
 	team/move.cpp team/move.h \
 	team/skin.cpp team/skin.h \
 	team/team.cpp team/team.h \

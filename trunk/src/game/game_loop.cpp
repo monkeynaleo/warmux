@@ -48,7 +48,6 @@
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
 #include "../tool/debug.h"
-#include "../tool/Distance.h"
 #include "../tool/i18n.h"
 #include "../tool/stats.h"
 #include "../weapon/weapons_list.h"
@@ -58,6 +57,8 @@ using namespace Wormux;
 #define ENABLE_LIMIT_FPS    
 
 GameLoop game_loop;
+bool game_initialise = false;
+bool game_fin_partie;
 
 #ifdef TODO_NETWORK 
 void InitGameData_NetServer()
@@ -221,13 +222,13 @@ void InitGame ()
   game.MessageLoading();
 
   // Init all needed data
-  if (!game.initialise)
+  if (!game_initialise)
   {
     std::cout << "o " << _("Initialisation") << std::endl;
     interface.Init();
     curseur_ver.Init();
     lst_objets.Init();
-    game.initialise = true;
+    game_initialise = true;
   }
 
   InitGameData();
@@ -259,7 +260,7 @@ void InitGame ()
     TerrainActif().wind.nb_sprite = TerrainActif().wind.default_nb_sprite;
   }
 
-  game.fin_partie = false;
+  game.SetEndOfGameStatus( false );
   game_loop.SetState (gamePLAYING, true);
 }
 
@@ -284,8 +285,8 @@ void GameLoop::Refresh()
         if ( event.type == SDL_QUIT) 
           {  
              std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
-             game.fin_partie = true;
-                  std::cout << "FIN PARTIE" << std::endl;
+             game.SetEndOfGameStatus( true );
+             std::cout << "FIN PARTIE" << std::endl;
              return;
           }
         if ( event.type == SDL_MOUSEBUTTONDOWN )
@@ -297,7 +298,7 @@ void GameLoop::Refresh()
           {               
              if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
              {
-                  game.fin_partie = true;
+                  game.SetEndOfGameStatus( true );
                   std::cout << "FIN PARTIE" << std::endl;
                   return;
              }
@@ -425,7 +426,7 @@ void GameLoop::Run()
     unsigned int start = SDL_GetTicks();
 #endif    
      
-    game.fin_partie = false;
+    game.SetEndOfGameStatus( false );
 
     // one loop
     StatStart("GameLoop:Refresh()");
@@ -445,7 +446,7 @@ void GameLoop::Run()
       sleep_fps = 0;
     SDL_Delay(sleep_fps);
 #endif
-  } while (!game.fin_partie); 
+  } while( !game.GetEndOfGameStatus() ); 
 
   global_particle_engine.Stop();
 }
@@ -484,7 +485,7 @@ void GameLoop::RefreshClock()
           if (IsAnythingMoving()) break;
 
           if (game.IsGameFinished()) 
-            game.fin_partie = true;
+            game.SetEndOfGameStatus( true );
           else { 
             ActiveTeam().AccessWeapon().Deselect();    
             caisse.FaitApparaitre();

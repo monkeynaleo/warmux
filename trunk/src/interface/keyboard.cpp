@@ -215,7 +215,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
 
   switch(action) {
     case ACTION_QUIT:
-      game.fin_partie = true;
+      game.SetEndOfGameStatus( true );
       return;
 
     case ACTION_PAUSE:

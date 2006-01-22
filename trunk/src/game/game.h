@@ -30,13 +30,9 @@ class Game
 {
 private:
   bool isGameLaunched;
+  bool endOfGameStatus;
   Question question;
 
-public:
-  bool initialise;
-  volatile bool fin_partie;
-
-private:
   int NbrRemainingTeams();
   
 public:
@@ -54,8 +50,8 @@ public:
   
   void Pause();
 
-  // Change le tour d'un tour (en informe l'interface)
-  void ChangeTpsTour (uint nv_tps_tour);
+  bool GetEndOfGameStatus();
+  void SetEndOfGameStatus(bool status);
 };
 
 extern Game game;
