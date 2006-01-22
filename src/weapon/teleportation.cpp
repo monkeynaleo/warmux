@@ -26,6 +26,7 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../game/game_loop.h"
+#include "../game/game_mode.h"
 #include "../map/map.h"
 #include "../game/time.h"
 #include "../graphic/effects.h"
@@ -34,7 +35,6 @@ namespace Wormux {
 Teleportation teleportation;
 //-----------------------------------------------------------------------------
 
-const uint duree_animation = 3000; // ms
 double ZOOM_MAX = 10; // zoom maximum durant le petit effet graphique
 uint ESPACE = 4;
 
@@ -76,7 +76,7 @@ bool Teleportation::p_Shoot ()
     current_skin = ActiveCharacter().image->GetCurrentFrameObject().flipped_surface;
 
   ActiveCharacter().Hide();
-  skin = WaveSurface(current_skin, 100, duree_animation, 5.0, 1.5);
+  skin = WaveSurface(current_skin, 100, game_mode.duration_move_player * 1000, 5.0, 1.5);
   return true;
 }
 
@@ -102,7 +102,7 @@ void Teleportation::Refresh()
   }
 
   // Fin du chronometre ?
-  if (duree_animation < dt)
+  if (game_mode.duration_move_player * 1000 < dt)
   {
     // Non, on fait le chemin retour en 
     // commençant par déplacer le ver
@@ -113,7 +113,7 @@ void Teleportation::Refresh()
     return;
   }
 
-  if (duree_animation / 2 < dt)
+  if (game_mode.duration_move_player * 1000 / 2 < dt)
   {
     m_x = dst.x;
     m_y = dst.y - skin->GetHeight()/2;
