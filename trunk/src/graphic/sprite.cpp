@@ -612,7 +612,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    // Calculate offset of the depending on hotspot rotation position :
    int rot_x=0;
    int rot_y=0;
-   if(rotation_deg!=0.0)
+   if( rotation_deg!=0.0 )
      Calculate_Rotation_Offset(rot_x, rot_y, tmp_surface);
 
    int x = pos_x + rot_x;
@@ -623,10 +623,10 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
    SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
 
   // For the cache mechanism
-  if(jeu.JeuEstLance())
+  if( game.IsGameLaunched() )
     world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface->w, tmp_surface->h));
 
-   if(need_free_surface)
+  if( need_free_surface )
      SDL_FreeSurface (tmp_surface);
 #else
    //SDL_gfx not working...

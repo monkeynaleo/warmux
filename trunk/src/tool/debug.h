@@ -15,48 +15,24 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Classe principale qui gêre le jeu : initialisation, dessin, gestion
- * des différents composants, et boucle de jeu.
- *****************************************************************************/
+ ******************************************************************************/
 
-#ifndef GAME_H
-#define GAME_H
+#ifndef DEBUG_H
+#define DEBUG_H
 
-#include "../include/base.h"
-#include "../gui/question.h"
+// Usage example : 
+//   MSG_DEBUG( "game.pause", "Salut" )
+//   A debug will be printed only if there is a mode game or game.pause
+#ifdef DEBUG
+#  define MSG_DEBUG(LEVEL, MESSAGE) \
+	PrintDebug( __FILE__, __LINE__, LEVEL, MESSAGE);
+#else
+#  define MSG_DEBUG(LEVEL, MSG)
+#endif
 
-class Game
-{
-private:
-  bool isGameLaunched;
-  Question question;
+void PrintDebug (const char *filename, unsigned long line,
+                 const char *level, std::string message);
+void AddDebugMode( std::string mode );
+void InitDebugModes( int argc, char **argv );
 
-public:
-  bool initialise;
-  volatile bool fin_partie;
-
-private:
-  int NbrRemainingTeams();
-  
-public:
-  Game();
-
-  void Start();
-  
-  bool IsGameFinished();
-  bool IsGameLaunched() const;
-
-  void MessageLoading();
-  void MessageEndOfGame();
-
-  int AskQuestion (bool draw=true);
-  
-  void Pause();
-
-  // Change le tour d'un tour (en informe l'interface)
-  void ChangeTpsTour (uint nv_tps_tour);
-};
-
-extern Game game;
 #endif

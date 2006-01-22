@@ -21,137 +21,119 @@
  *****************************************************************************/
 
 #include "game.h"
-//-----------------------------------------------------------------------------
+#include <iostream>
 #include <SDL.h>
 #include <sstream>
-#include <iostream>
-#include "../interface/cursor.h"
-#include "game_loop.h"
 #include "time.h"
+#include "game_loop.h"
 #include "game_mode.h"
-#include "../team/macro.h"
 #include "../graphic/video.h"
-#include "../interface/keyboard.h"
 #include "../graphic/fps.h"
+#include "../interface/cursor.h"
+#include "../interface/keyboard.h"
+#include "../interface/game_msg.h"
 #include "../map/camera.h"
 #include "../map/map.h"
-#include "../weapon/weapons_list.h"
-#include "../sound/jukebox.h"
-#include "../interface/game_msg.h"
-#include "../tool/i18n.h"
 #include "../object/bonus_box.h"
+#include "../sound/jukebox.h"
+#include "../team/macro.h"
+#include "../tool/debug.h"
+#include "../tool/i18n.h"
+#include "../weapon/weapons_list.h"
 
 using namespace Wormux;
-//-----------------------------------------------------------------------------
 
-#ifdef DEBUG
-  // Mode "bavard gros lourdo" ?
-//# define DEBUG_VERBOSE
-#endif
+Game game;  // TODO: global variables are bad
 
-# define COUT_DEBUG cout << "[Jeu] "
-
-//-----------------------------------------------------------------------------
-
-// Une seconde ...
-const uint UNE_SECONDE = 1000; // ms
-
-//-----------------------------------------------------------------------------
-Jeu jeu;
-//-----------------------------------------------------------------------------
-
-Jeu::Jeu()
+Game::Game()
 {
   initialise = false;
-  jeu_lance = false;
+  isGameLaunched = false;
 }
 
-//-----------------------------------------------------------------------------
-
-// Fin d'une partie = tous les vers d'une equipe sont morts
-bool Jeu::EstFinPartie()
+bool Game::IsGameFinished()
 {
-  uint n=0;
-
-  // Calcule le nombre d'équipe où il reste des vers
-  POUR_CHAQUE_EQUIPE(equipe)
-  {
-    if ((**equipe).NbAliveCharacter() != 0) n++;
-  }
-  return (n <= 1);
+  return (NbrRemainingTeams() <= 1);
 }
 
-//-----------------------------------------------------------------------------
+int Game::NbrRemainingTeams()
+{
+  uint nbr = 0;
+  
+  FOR_EACH_TEAM(team){
+    if( (**team).NbAliveCharacter() > 0 )
+      nbr++;
+  }
+ 
+  return nbr;
+}
 
-void Jeu::MsgChargement()
+void Game::MessageLoading()
 {
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
   std::cout << "Loading game... => Splashscreen is TODO" << std::endl;
 }
 
-//-----------------------------------------------------------------------------
-
-void Jeu::MsgFinPartie()
+void Game::MessageEndOfGame()
 {
-  // Message de fin
-  bool gagnant_trouve;
-  std::string txt(_("End of the game!\n"));
+  bool winner_found = false;
 
-  gagnant_trouve = false;
-  POUR_CHAQUE_EQUIPE(equipe)
+  std::string txt(_("End of the game! - "));
+
+  FOR_EACH_TEAM(equipe)
   {
     if (0 < (**equipe).NbAliveCharacter())
     {
-      gagnant_trouve = true;
+      winner_found = true;
       txt += Format(_("%s team has won."), (**equipe).GetName().c_str());
       break;
     }
   }
-  if (gagnant_trouve) 
+  if (winner_found) 
     jukebox.Play("share","victory");
   else
     txt += _("The game has ended as a draw.");
   std::cout << txt << std::endl;
 
   question.Init (txt, true, 0);
-  PoseQuestion();
+  AskQuestion();
 }
 
-//-----------------------------------------------------------------------------
-
-int Jeu::PoseQuestion (bool dessine)
+int Game::AskQuestion (bool draw)
 {
   global_time.Pause();
 
-  if (dessine) game_loop.Draw ();
+  if (draw) 
+    game_loop.Draw ();
+  
   question.PoseQuestion ();
 
   global_time.Continue(); 
   return question.reponse;
 }
 
-//-----------------------------------------------------------------------------
-
-void Jeu::LanceJeu()
+void Game::Start()
 {
   bool err=true;
+  bool end;
   std::string err_msg;
 
   try
   {
     InitGame ();
 
-    bool fin;
     do
     {
-      jeu_lance = true;
+      isGameLaunched = true;
       image_par_seconde.Reset();
-      game_loop.Run();
-      std::cout << "Quitte run" << std::endl;
-      jeu_lance = false;
       
-      if (!EstFinPartie()) 
+      game_loop.Run();
+     
+      MSG_DEBUG( "game", "End of game_loop.Run()" ); 
+      isGameLaunched = false;
+      
+      if (!IsGameFinished()) 
       {
         const char *msg = _("Do you really want to quit? (Y/N)");
         question.Init (msg, true, 0);
@@ -171,12 +153,12 @@ void Jeu::LanceJeu()
 	}
 	
         jukebox.Pause();
-        fin = (PoseQuestion() == 1);
+        end = (AskQuestion() == 1);
         jukebox.Resume();
       } else {
-	fin = true;
+	end = true;
       }
-    } while (!fin);
+    } while (!end);
     err = false;
   }
   catch (const std::exception &e)
@@ -185,9 +167,8 @@ void Jeu::LanceJeu()
   }
 
   if (!err)
-  {
-    if (EstFinPartie()) MsgFinPartie();
-  }
+    if (IsGameFinished()) 
+      MessageEndOfGame();
 
   world.FreeMem();
   caisse.FreeMem();
@@ -198,18 +179,18 @@ void Jeu::LanceJeu()
     std::string txt = Format(_("Error:\n%s"), err_msg.c_str());
     std::cout << std::endl << txt << std::endl;
     question.Init (txt, true, 0);
-    PoseQuestion (false);
+    AskQuestion (false);
   }
 }
 
-//-----------------------------------------------------------------------------
-
-void Jeu::Pause()
+void Game::Pause()
 {
   jukebox.Pause();
   question.Init (_("Pause"), true, 0);
-  PoseQuestion();
+  AskQuestion();
   jukebox.Resume();
 }
 
-//-----------------------------------------------------------------------------
+bool Game::IsGameLaunched() const{
+  return isGameLaunched;
+}

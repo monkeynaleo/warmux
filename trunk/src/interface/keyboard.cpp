@@ -215,11 +215,11 @@ void Clavier::HandleKeyReleased (const Action_t &action)
 
   switch(action) {
     case ACTION_QUIT:
-      jeu.fin_partie = true;
+      game.fin_partie = true;
       return;
 
     case ACTION_PAUSE:
-      jeu.Pause();
+      game.Pause();
       return;
 
     case ACTION_FULLSCREEN:

@@ -41,6 +41,7 @@
 #include "include/constant.h"
 #include "include/global.h"
 #include "sound/jukebox.h"
+#include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
 #include "tool/stats.h"
@@ -111,6 +112,7 @@ void AppWormux::Init(int argc, char **argv)
   InitConstants();
   InitI18N();
   DisplayWelcomeMessage();
+  InitDebugModes(argc, argv);
 
   InitRandom();
   action_handler.Init();
