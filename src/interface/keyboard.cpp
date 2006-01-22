@@ -24,11 +24,9 @@
 #include <sstream>
 #include "../team/macro.h"
 #include "../game/time.h"
-
 #include "../include/action_handler.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
-
 #include "game_msg.h"
 #include "../map/camera.h"
 #include "interface.h"
@@ -43,6 +41,7 @@
 #include "../graphic/video.h"
 #include "cursor.h"
 #include "../include/constant.h"
+#include "../map/camera.h"
 #include <iostream>
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -230,6 +229,11 @@ void Clavier::HandleKeyReleased (const Action_t &action)
 
     case ACTION_TOGGLE_INTERFACE:
       interface.EnableDisplay (!interface.IsDisplayed());
+      return;
+
+    case ACTION_CENTER:
+      curseur_ver.SuitVerActif();
+      camera.ChangeObjSuivi (&ActiveCharacter(), true, true, true);
       return;
 
     case ACTION_TOGGLE_WEAPONS_MENUS:

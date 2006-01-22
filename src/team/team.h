@@ -50,7 +50,10 @@ public:
   // Autres
   CrossHair crosshair;
   SDL_Surface *ecusson;
+  Point2i sauve_camera;
+  bool camera_est_sauve;
   TeamEnergy energie;
+
  
 private:
   std::string m_id;

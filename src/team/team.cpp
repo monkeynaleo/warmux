@@ -26,6 +26,7 @@
 #include "../interface/cursor.h"
 #include "../include/constant.h"
 #include "../game/config.h"
+#include "../map/camera.h"
 #include "../weapon/weapons_list.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
@@ -117,6 +118,7 @@ bool Team::ChargeDonnee (xmlpp::Element *xml,
 {
   xml = LitDocXml::AccesBalise (xml, "equipe");
   // Valeurs par défaut
+  camera_est_sauve = false;
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
 
   m_name = "Team unamed";
@@ -182,6 +184,7 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
 {
   xml = LitDocXml::AccesBalise (xml, "equipe");
   // Valeurs par défaut
+  camera_est_sauve = false;
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
 
   m_name = "Team unamed";
@@ -310,6 +313,7 @@ void Team::SelectCharacterIndex (uint index)
     vers.at(ver_actif).StopPlaying();
   ver_actif = index;
   vers.at(ver_actif).StartPlaying();
+  camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
   curseur_ver.SuitVerActif();
 }
 
@@ -321,9 +325,14 @@ void Team::PrepareTour()
   // Choisi un ver vivant si possible
   if (ActiveCharacter().IsDead())
   {
+    camera_est_sauve = false;
     internal_NextCharacter();
   }
 
+  if (camera_est_sauve) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
+  camera.ChangeObjSuivi (&ActiveCharacter(), 
+			 !camera_est_sauve, !camera_est_sauve, 
+			 true);
   curseur_ver.SuitVerActif();
 
   // Active notre arme
@@ -338,6 +347,12 @@ void Team::FinTour()
   // Désactive notre arme
   ActiveCharacter().EndTurn();
   AccessWeapon().Deselect();
+  camera_est_sauve = true;
+#ifdef CL
+  sauve_camera = CL_Point(camera.GetX(), camera.GetY());
+#else
+  sauve_camera = Point2i(camera.GetX(), camera.GetY());
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -460,6 +475,7 @@ void Team::Reset()
   }
   
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
+  camera_est_sauve = false;
 
   // Reset des vers
   ver_actif = 0;
