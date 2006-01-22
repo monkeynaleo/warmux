@@ -29,6 +29,7 @@
 #include "../tool/math_tools.h"
 #include "../game/game_loop.h"
 #include "../tool/i18n.h"
+#include "../map/camera.h"
 #include "../weapon/weapon_tools.h"
 #include "../interface/game_msg.h"
 #include "../object/objects_list.h"
@@ -70,6 +71,7 @@ void SuperTux::Tire()
   SetExternForce(tux.cfg().speed, angle);
   time_next_action = Wormux::global_time.Read();
   last_move = Wormux::global_time.Read();
+  camera.ChangeObjSuivi((PhysicalObj*)this,true,true);
 }
 
 //-----------------------------------------------------------------------------

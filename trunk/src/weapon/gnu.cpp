@@ -29,8 +29,8 @@
 #include "../graphic/video.h"
 #include "../tool/math_tools.h"
 #include "../game/game_loop.h"
-#include "../map/camera.h"
 #include "../tool/i18n.h"
+#include "../map/camera.h"
 #include "../weapon/weapon_tools.h"
 #include "../interface/game_msg.h"
 #include "../object/objects_list.h"
@@ -229,6 +229,7 @@ bool GnuLauncher::p_Shoot ()
   // Initialise le gnu
   lst_objets.AjouteObjet (&gnu, true);
   gnu.Tire (m_strength);
+  camera.ChangeObjSuivi (&gnu,true,true,true);
   m_strength = 0;
 
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");

@@ -88,6 +88,7 @@ void WeaponProjectile::PrepareTir()
 {
   SetSize (image->GetWidth(), image->GetHeight());
   Ready();
+  camera.ChangeObjSuivi(this, true, false);
   is_active = true;
 }
 

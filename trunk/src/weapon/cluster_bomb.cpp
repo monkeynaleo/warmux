@@ -28,9 +28,9 @@
 #include "../team/teams_list.h"
 #include "../interface/interface.h"
 #include "../graphic/video.h"
-#include "../map/camera.h"
 #include "../tool/math_tools.h"
 #include "../game/game_loop.h"
+#include "../map/camera.h"
 #include "../weapon/weapon_tools.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
@@ -284,6 +284,7 @@ bool LanceCluster::p_Shoot ()
 {
   // Initialise la grenade
   cluster_bomb.Tire (m_strength);
+  camera.ChangeObjSuivi (&cluster_bomb, true, false);
   lst_objets.AjouteObjet (&cluster_bomb, true);
 
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");  

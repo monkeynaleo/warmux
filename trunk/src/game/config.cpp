@@ -231,6 +231,7 @@ void Config::SetKeyboardConfig()
 	clavier.SetKeyAction(SDLK_F6, ACTION_WEAPONS6);
 	clavier.SetKeyAction(SDLK_F7, ACTION_WEAPONS7);
 	clavier.SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
+	clavier.SetKeyAction(SDLK_c, ACTION_CENTER);
 }
 
 //-----------------------------------------------------------------------------

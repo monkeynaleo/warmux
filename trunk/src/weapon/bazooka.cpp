@@ -137,6 +137,7 @@ bool Bazooka::p_Shoot ()
   // Initialise le roquette
   roquette.Tire (m_strength);
   lst_objets.AjouteObjet (&roquette, true);
+  camera.ChangeObjSuivi(&roquette, 1, 1,1);
 
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
   return true;

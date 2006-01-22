@@ -329,6 +329,7 @@ uint Interface::GetHeight() const { return 70; }
 void Interface::EnableDisplay (bool _display)
 {
   display = _display;
+  camera.CentreObjSuivi ();
 }
 
 //-----------------------------------------------------------------------------

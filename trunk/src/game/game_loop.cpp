@@ -214,7 +214,6 @@ void InitGameData()
   interface.Reset();
   game_messages.Reset();
   caisse.Init();
-  camera.Reset();
 }
 
 void InitGame ()
@@ -545,7 +544,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     action_handler.ExecActions();
 
     assert (!ActiveCharacter().IsDead());
-
+    camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
     interaction_enabled = true; // Be sure that we can play !
     break;
 
@@ -612,6 +611,7 @@ bool GameLoop::IsAnythingMoving()
     PhysicalObj *obj = GetMovingObject();
     if (obj != NULL)
     {
+      camera.ChangeObjSuivi (obj, true, true);
       object_still_moving = true;
     } 
   }
