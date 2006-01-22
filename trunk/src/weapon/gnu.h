@@ -22,17 +22,13 @@
 #ifndef GNU_H
 #define GNU_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
 #include "weapon.h"
 #include "grenade.h"
-#ifdef CL
-#include <ClanLib/display.h>
-#endif
-
-class Sprite;
-struct SDL_Surface;
 
 //-----------------------------------------------------------------------------
 using namespace Wormux;
@@ -40,11 +36,7 @@ using namespace Wormux;
 class Gnu : public PhysicalObj
 {
   uint launched_time;
-#ifdef CL
-  CL_Sprite image;
-#else
   Sprite *image;
-#endif 
   int m_sens;
   double save_x,save_y;
 public:
@@ -66,11 +58,7 @@ public:
 class GnuLauncher : public Weapon
 {
 public:
-#ifdef CL
-  CL_Surface impact;    // Image (alpha) de l'impact
-#else
   SDL_Surface *impact;
-#endif
   Gnu gnu;
 
 public:

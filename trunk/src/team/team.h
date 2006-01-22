@@ -19,27 +19,24 @@
  * A worms team.
  *****************************************************************************/
 
-#ifndef EQUIPE_H
-#define EQUIPE_H
+#ifndef TEAM_H
+#define TEAM_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-//#include "../tool/xml_document.h"
-#include "../weapon/crosshair.h"
-#include "../weapon/weapon.h"
+#include <SDL.h>
 #include "character.h"
 #include "team_energy.h"
-#ifdef CL
-#include <ClanLib/display.h>
-#else
+#include "../include/enum.h"
+#include "../include/base.h"
+#include "../weapon/crosshair.h"
+#include "../weapon/weapon.h"
 #include "../tool/Point.h"
 #include "../tool/resource_manager.h"
-#endif
 #include <string>
 #include <list>
 #include <map>
 //-----------------------------------------------------------------------------
-
-struct SDL_Surface;
+class Character;
+class Weapon;
 
 class Team
 {
@@ -52,12 +49,7 @@ public:
 
   // Autres
   CrossHair crosshair;
-#ifdef CL
-  CL_Surface ecusson;
-  CL_Point sauve_camera;
-#else
   SDL_Surface *ecusson;
-#endif
   TeamEnergy energie;
  
 private:
@@ -68,11 +60,7 @@ private:
   int ver_actif, vers_fin;
   iterator vers_fin_it;
   Weapon *active_weapon;
-#ifdef CL
-  bool ChargeDonnee (xmlpp::Element *xml, CL_ResourceManager *res);
-#else
    bool ChargeDonnee( xmlpp::Element *xml, Profile *res_profile);
-#endif
 public:
   // Initialization
   Team ();
@@ -143,4 +131,4 @@ protected:
 };
 
 //-----------------------------------------------------------------------------
-#endif
+#endif // TEAM_H

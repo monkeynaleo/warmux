@@ -28,8 +28,6 @@
 #include "../game/config.h"
 //-----------------------------------------------------------------------------
 
-namespace Wormux{};
-
 class AppWormux
 {
 public:

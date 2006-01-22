@@ -26,15 +26,10 @@
 #include "enum.h"
 #include <string>
 #include <iostream>
-#ifdef CL
-# include <ClanLib/core.h>
-#endif
 //-----------------------------------------------------------------------------
 
-#ifndef CL
 typedef std::ostream CL_OutputSource;
 typedef std::istream CL_InputSource;
-#endif
 
 class Action
 {

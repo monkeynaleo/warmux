@@ -57,7 +57,7 @@ public:
   SDL_Surface * Render(const std::string &txt, SDL_Color color, bool cache=false);
 
   static bool InitAllFonts();
- };
+};
 
 //-----------------------------------------------------------------------------
 #endif

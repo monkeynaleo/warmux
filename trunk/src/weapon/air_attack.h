@@ -22,11 +22,10 @@
 #ifndef AIR_ATTACK_H
 #define AIR_ATTACK_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "weapon.h"
-
-struct SDL_Surface;
-class Sprite;
 
 //-----------------------------------------------------------------------------
 namespace Wormux {

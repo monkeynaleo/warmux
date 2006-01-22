@@ -23,16 +23,12 @@
 #ifndef MINE_H
 #define MINE_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../team/character.h"
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
 #include "weapon.h"
-
-struct Sprite;
-struct SDL_Surface; 
 
 //-----------------------------------------------------------------------------
 namespace Wormux {
@@ -50,13 +46,8 @@ private:
 
   // Activation des mines ?
   bool animation;//,repos;
-#ifdef CL
-  CL_Surface impact;
-  CL_Sprite detection, explosion;
-#else
   SDL_Surface *impact;
   Sprite *detection, *explosion;
-#endif
   uint attente;
   uint armer;
   uint depart;

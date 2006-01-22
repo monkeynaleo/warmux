@@ -22,14 +22,13 @@
 #ifndef LST_TERRAINS_H
 #define LST_TERRAINS_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "../include/base.h"
 #include <string>
 #include <map>
 #include "../tool/resource_manager.h"
 # include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
-
-struct SDL_Surface;
 
 class InfoTerrain
 {

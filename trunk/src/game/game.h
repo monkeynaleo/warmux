@@ -20,11 +20,10 @@
  * des différents composants, et boucle de jeu.
  *****************************************************************************/
 
-#ifndef JEU_H
-#define JEU_H
+#ifndef GAME_H
+#define GAME_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#include "../team/character.h"
 #include "../gui/question.h"
 //-----------------------------------------------------------------------------
 

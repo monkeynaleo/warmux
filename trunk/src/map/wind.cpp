@@ -51,7 +51,7 @@ WindParticle::WindParticle() : PhysicalObj("WindParticle", 0.0)
 {
   m_type = objUNBREAKABLE;
   m_wind_factor = 1;
-  m_air_resist_factor = 0.2;
+  m_air_resist_factor = 0;
   sprite = NULL;
 }
 

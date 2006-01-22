@@ -22,10 +22,9 @@
 #ifndef SKY_H
 #define SKY_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "../include/base.h"
 #include "tile.h"
-
-struct SDL_Surface;
 
 //-----------------------------------------------------------------------------
 namespace Wormux {

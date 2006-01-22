@@ -22,6 +22,7 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 //-----------------------------------------------------------------------------
+#include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../team/character.h"
 #include "../team/team.h"
@@ -33,8 +34,6 @@
 #ifdef WIN32
 #undef interface
 #endif
-
-struct SDL_Surface;
 
 class Interface
 {

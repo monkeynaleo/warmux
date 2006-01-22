@@ -22,10 +22,8 @@
 #ifndef SUICIDE_H
 #define SUICIDE_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "weapon.h"
-#ifdef CL
-# include <ClanLib/sound.h>
-#endif
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------
@@ -33,22 +31,14 @@ namespace Wormux {
 class Suicide : public Weapon
 {
 private:
-#ifdef CL
-   CL_SoundBuffer_Session *son;
-#else
    int sound_channel;
-#endif
    bool is_dying;
 
   void p_Init();
   bool p_Shoot();
 
 public:
-#ifdef CL
-  CL_Surface hole_image;
-#else
   SDL_Surface *hole_image;
-#endif
    
   Suicide();
   void p_Select();

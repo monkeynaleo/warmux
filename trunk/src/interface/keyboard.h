@@ -52,11 +52,6 @@ public:
   // Associe une touche à une action.
   void SetKeyAction(int key, Action_t at);
 
-#ifdef CL
-  // Installe/désinstalle le pilote
-  void DesinstallePilote();
-  void InstallePilote();
-#endif
 };
 
 extern Clavier clavier;

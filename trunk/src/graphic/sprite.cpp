@@ -23,12 +23,12 @@
  * TODO:       Scale,Rotation...
  *****************************************************************************/
 
-#include "sprite.h"
-#include "../map/camera.h"
-#include "../include/app.h"
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <iostream>
+#include "sprite.h"
+#include "../map/camera.h"
+#include "../include/app.h"
 #include "../game/time.h"
 #include "../tool/Rectangle.h"
 #include "../map/map.h"
