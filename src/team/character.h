@@ -19,20 +19,20 @@
  * Character of a team.
  *****************************************************************************/
 
-#ifndef CHARACTER_H
-#define CHARACTER_H
+#ifndef _CHARACTER_H
+#define _CHARACTER_H
 //-----------------------------------------------------------------------------
+#include <string>
+#include <SDL.h>
+#include "skin.h"
+#include "team.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../gui/progress_bar.h"
-#include "skin.h"
-#include <string>
-#include <SDL.h>
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
 //-----------------------------------------------------------------------------
 class Team;
-//-----------------------------------------------------------------------------
 
 // Un ver de terre :-)
 class Character : public PhysicalObj

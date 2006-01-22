@@ -23,11 +23,10 @@
 #define GUI_BUTTON_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#include "../graphic/sprite.h"
+#include "../tool/resource_manager.h"
 #include "widget.h"
 //-----------------------------------------------------------------------------
-
-class Sprite;
-struct Profile;
 
 class Button : public Widget
 {

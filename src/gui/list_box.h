@@ -22,14 +22,13 @@
 #ifndef LIST_BOX_H
 #define LIST_BOX_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "../include/base.h"
 #include "widget.h"
 #include "button.h"
 #include <string>
 #include <vector>
 //-----------------------------------------------------------------------------
-
-struct SDL_Surface;
 
 typedef struct s_list_box_item_t{
     std::string label;

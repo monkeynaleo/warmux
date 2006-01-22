@@ -22,25 +22,24 @@
 
 #include "game.h"
 //-----------------------------------------------------------------------------
-#include "game_loop.h"
+#include <SDL.h>
+#include <sstream>
+#include <iostream>
 #include "../interface/cursor.h"
+#include "game_loop.h"
+#include "time.h"
+#include "game_mode.h"
 #include "../team/macro.h"
 #include "../graphic/video.h"
 #include "../interface/keyboard.h"
-#include <SDL.h>
-
 #include "../graphic/fps.h"
 #include "../map/camera.h"
 #include "../map/map.h"
-#include "time.h"
 #include "../weapon/weapons_list.h"
 #include "../sound/jukebox.h"
-#include "game_mode.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../object/bonus_box.h"
-#include <sstream>
-#include <iostream>
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

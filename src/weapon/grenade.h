@@ -23,16 +23,11 @@
 #ifndef GRENADE_H
 #define GRENADE_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "../include/base.h"
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
-#ifdef CL
-#include <ClanLib/display.h>
-#else
-#endif
 #include "weapon.h"
-
-struct SDL_Surface;
 
 //-----------------------------------------------------------------------------
 namespace Wormux {
@@ -75,11 +70,7 @@ private:
   bool p_Shoot();
 
 public:
-#ifdef CL
-  CL_Surface impact;
-#else
   SDL_Surface *impact;
-#endif 
   Grenade grenade;
   int time;
 

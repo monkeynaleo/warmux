@@ -22,14 +22,13 @@
 #ifndef WEAPON_MENU_H
 #define WEAPON_MENU_H
 //-----------------------------------------------------------------------------
+#include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../team/character.h"
 #include "../team/team.h"
 #include "../weapon/weapon.h"
 #include <vector>
 //-----------------------------------------------------------------------------
-
-struct Sprite;
 
 class WeaponMenuItem
 {

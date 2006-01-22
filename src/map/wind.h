@@ -22,15 +22,14 @@
 #ifndef WIND_H
 #define WIND_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../tool/xml_document.h"
 #include "../game/config.h"
 #include "../gui/progress_bar.h"
 #include <vector>
-
-struct SDL_Surface;
-struct Sprite;
 
 //-----------------------------------------------------------------------------
 namespace Wormux {

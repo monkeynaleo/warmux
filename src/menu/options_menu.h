@@ -28,11 +28,11 @@
 
 class OptionMenu : public Menu
 {
- public:
+public:
    OptionMenu(); 
    ~OptionMenu();
 
- private:
+private:
 
    /* Graphic options controllers */   
    ListBox *lbox_video_mode;

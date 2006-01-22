@@ -24,11 +24,10 @@
 #ifndef DYNAMITE_H
 #define DYNAMITE_H
 //-----------------------------------------------------------------------------
+#include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../team/character.h"
 #include "weapon.h"
-
-struct Sprite;
 
 //-----------------------------------------------------------------------------
 namespace Wormux {

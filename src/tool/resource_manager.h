@@ -32,10 +32,10 @@
 #include <string>
 #include <map>
 #include <SDL.h>
+#include "../graphic/sprite.h"
 #include "xml_document.h"
 
-class Sprite;
-struct Element;
+//struct Element;
 
 class Profile 
 { 

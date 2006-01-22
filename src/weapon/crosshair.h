@@ -22,13 +22,9 @@
 #ifndef CROSSHAIR_H
 #define CROSSHAIR_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "../include/base.h"
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
 //-----------------------------------------------------------------------------
-
-struct SDL_Surface;
 
 class CrossHair
 {
@@ -37,11 +33,7 @@ public:
   bool enable;
 
 private:
-#ifdef CL
-  CL_Surface image;
-#else
   SDL_Surface *image;
-#endif
   uint calcul_dx, calcul_dy;
 
   int angle;

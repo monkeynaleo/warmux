@@ -24,6 +24,7 @@
 
 #include <iostream>
 //-----------------------------------------------------------------------------
+#include "../graphic/sprite.h"
 #include "../gui/button.h"
 #include "../gui/list_box.h"
 #include "../gui/check_box.h"
@@ -34,17 +35,15 @@
 #include "../gui/null_widget.h"
 //-----------------------------------------------------------------------------
 
-class Sprite;
-
 class Menu
 {
- public:
+public:
    Menu(char* bg); 
    virtual ~Menu();
 
    void Run ();
 
- private:
+private:
    Sprite *background;
    bool close_menu;
 
@@ -56,7 +55,7 @@ class Menu
    void BasicDraw(int mouse_x, int mouse_y);
    bool BasicOnClic(int mouse_x, int mouse_y);
 
- protected:
+protected:
    void sig_ok();
    void sig_cancel();
 

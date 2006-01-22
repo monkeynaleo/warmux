@@ -24,12 +24,11 @@
 #ifndef CAISSES_H
 #define CAISSES_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../team/team.h"
 //-----------------------------------------------------------------------------
-
-struct SDL_Surface;
 
 class Caisse : public PhysicalObj
 {
@@ -39,11 +38,7 @@ private:
   bool desactive;
   bool pos_valide;
 
-#ifdef CL
-  CL_Sprite anim;
-#else
   Sprite *anim;
-#endif
   uint temps_caisse;
   int bonus;
 

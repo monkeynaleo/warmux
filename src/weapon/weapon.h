@@ -26,18 +26,19 @@
 #ifndef WEAPON_H
 #define WEAPON_H
 //-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "../team/character.h"
+#include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../include/enum.h"
 #include "../object/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
-#include "../team/character.h"
+#include "../gui/progress_bar.h"
 #include "weapon_cfg.h"
 #include <string>
 //-----------------------------------------------------------------------------
-
-struct SDL_Surface;
-struct Sprite;
+class Character;
 
 // Constante munitions illimitées
 extern const int INFINITE_AMMO;
@@ -70,11 +71,7 @@ class WeaponProjectile : public PhysicalObj
 {
 public:
   bool is_active;
-#ifdef CL
-  CL_Sprite image;
-#else
   Sprite *image;
-#endif
 protected:
   Character* dernier_ver_touche;
   PhysicalObj* dernier_obj_touche;

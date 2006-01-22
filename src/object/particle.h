@@ -23,17 +23,14 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 //-----------------------------------------------------------------------------
-#ifdef CL
-# include <ClanLib/display.h>
-#endif
+#include <SDL.h>
+#include "physical_obj.h"
+//#include "../team/character.h"
 #include "../include/base.h"
-#include "../team/character.h"
 #include "../weapon/weapon_cfg.h"
 #include "../graphic/sprite.h"
-#include "physical_obj.h"
 //-----------------------------------------------------------------------------
 
-struct SDL_Surface;
 typedef enum { 
   particle_SMOKE,
   particle_FIRE,
@@ -53,11 +50,7 @@ class Particle : public PhysicalObj
   uint m_time_between_scale;
   uint m_last_refresh;
 
-#ifdef CL
-  CL_Surface image;
-#else
   Sprite *image;
-#endif
    
  public:
   Particle();
@@ -90,15 +83,11 @@ class StarParticle : public Particle
 class FireParticle : public Particle
 {
  protected:
-  Character* dernier_ver_touche;
-  PhysicalObj* dernier_obj_touche;
+//  Character* dernier_ver_touche;
+//  PhysicalObj* dernier_obj_touche;
 
  public: 
-#ifdef CL
-  CL_Surface impact;
-#else
   SDL_Surface *impact;
-#endif
   FireParticle();
   void Init();
   void SignalFallEnding();

@@ -34,16 +34,12 @@ class Teleportation : public Weapon
 private:
   bool retour; // on est dans le retour ?
   uint temps;
-#ifdef CL
-  CL_Point src,dst;
-#else
   Point2i src, dst;
-#endif
   int m_x,m_y;
   float m_zoom;
   int m_direction;
 
-	Sprite* skin;
+  Sprite* skin;
 
   bool p_Shoot();
 

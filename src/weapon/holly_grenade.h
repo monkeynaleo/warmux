@@ -24,9 +24,6 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../gui/progress_bar.h"
-#ifdef CL
-#include <ClanLib/display.h>
-#endif
 #include "weapon.h"
 #include "grenade.h"
 //-----------------------------------------------------------------------------
@@ -59,12 +56,8 @@ class HollyGrenadeLauncher : public Weapon
   void p_Init();
   bool p_Shoot();
 
- public:
-#ifdef CL
-  CL_Surface impact;    // Image (alpha) de l'impact
-#else
+public:
   SDL_Surface* impact;    // Image (alpha) de l'impact
-#endif
 
   HollyGrenade grenade;
 

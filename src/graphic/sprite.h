@@ -26,6 +26,7 @@
 #ifndef _SPRITE_H
 #define _SPRITE_H
 
+#include <SDL.h>
 #include <vector>
 
 #ifdef DEBUG
@@ -36,10 +37,8 @@
 #endif
 #endif //DEBUG
 
-struct SDL_Surface;
-class ResourceManager;
-
-extern SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
+// Unused
+//SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
 
 enum Rotation_HotSpot {top_left, top_center, top_right, left_center, center, right_center, bottom_left, bottom_center, bottom_right};
 
