@@ -413,6 +413,9 @@ Tile::Tile()
 
 void Tile::FreeMem()
 {
+  for (uint i=0; i<nbr_cell; ++i)
+    delete item[i];
+  nbr_cell = 0;
   item.clear();
 }
 
