@@ -32,7 +32,6 @@
 #include "cursor.h"
 #include "../weapon/weapon.h"
 #include "../tool/Point.h"
-#include "../tool/Distance.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------
@@ -98,7 +97,7 @@ bool Mouse::ActionClicG()
     {
       if (&(*it) != &ActiveCharacter()
         && !it -> IsDead() 
-        && IsInside (it -> GetRect(), pos_monde))
+        && it->GetRect().Contains( pos_monde ))
       {
         ver_choisi = true;
         break;
@@ -111,7 +110,7 @@ bool Mouse::ActionClicG()
     return true;
   }
 
-  if (IsInside (ActiveCharacter().GetRect(), pos_monde))
+  if (ActiveCharacter().GetRect().Contains( pos_monde ))
   {
     curseur_ver.SuitVerActif();
     return true;
@@ -149,7 +148,7 @@ void Mouse::ChoixVerPointe()
   POUR_TOUS_VERS_VIVANTS(equipe,ver)
     {
       if ((&(*ver) != &ActiveCharacter())
-	  && IsInside (ver -> GetRect(), pos_monde))   
+	  && ver->GetRect().Contains(pos_monde) )
 	{
 	  interface.character_under_cursor = &(*ver);
 	}
@@ -157,7 +156,7 @@ void Mouse::ChoixVerPointe()
   
   // Aucun ver n'est pointé ... et le ver actif alors ?
   if ((interface.character_under_cursor == NULL)
-      && IsInside (ActiveCharacter().GetRect(), pos_monde))  
+      && ActiveCharacter().GetRect().Contains( pos_monde))  
     {
       interface.character_under_cursor = &ActiveCharacter();
     }

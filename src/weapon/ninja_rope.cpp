@@ -22,20 +22,19 @@
 #include "ninja_rope.h"
 //-----------------------------------------------------------------------------
 #include <math.h>
-#include "../include/app.h"
-#include "../interface/mouse.h"
 #include "../graphic/video.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../game/game.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
+#include "../game/time.h"
+#include "../include/app.h"
+#include "../interface/mouse.h"
 #include "../map/map.h"
 #include "../map/camera.h"
-#include "../game/time.h"
 #include "../sound/jukebox.h"
 #include "../tool/math_tools.h"
-#include "../tool/Distance.h"
 #include "../weapon/weapon_tools.h"
 
 /*

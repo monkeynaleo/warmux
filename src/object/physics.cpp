@@ -30,7 +30,6 @@
 #include "../game/config.h"
 #include "../tool/math_tools.h"
 //#include "../tool/geometry_tools.h"
-#include "../tool/Distance.h"
 #include "../game/game_mode.h"
 #include "../game/time.h"
 #include "../map/wind.h"
@@ -321,7 +320,7 @@ void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
   fix_point_y = m_pos_y.x0 + dy ;
 
   old_length = m_rope_length.x0 ;
-  m_rope_length.x0 = Distance( Point2d(fix_point_x,fix_point_y), Point2d(g_x,g_y));    
+  m_rope_length.x0 = Point2d(fix_point_x,fix_point_y).Distance( Point2d(g_x,g_y) );
 
   if (m_motion_type == Pendulum)
     {

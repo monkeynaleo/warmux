@@ -25,31 +25,30 @@
 
 #include "weapon.h"
 //-----------------------------------------------------------------------------
-#include "../team/macro.h"
-#include "../team/team.h"
-#include "../tool/i18n.h"
-#include "../tool/math_tools.h"
-#include "../tool/xml_document.h"
-#include "../object/objects_list.h"
-#include "../include/action_handler.h"
-#include "../interface/interface.h"
-#include "../gui/progress_bar.h"
-#include "../game/time.h"
-#include "../game/game_loop.h"
-#include "weapon_tools.h"
-#include "../graphic/video.h"
-#include "../tool/Point.h"
-#include "../tool/Distance.h"
-#include "../include/app.h"
-#include "../tool/resource_manager.h"
-#include "../graphic/sprite.h"
-#include "../map/camera.h"
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <SDL_gfxPrimitives.h>
 #include <iostream>
 #include <sstream>
+#include "weapon_tools.h"
+#include "../game/time.h"
+#include "../game/game_loop.h"
+#include "../graphic/video.h"
+#include "../graphic/sprite.h"
+#include "../gui/progress_bar.h"
+#include "../map/camera.h"
+#include "../object/objects_list.h"
+#include "../team/macro.h"
+#include "../team/team.h"
+#include "../tool/i18n.h"
+#include "../tool/math_tools.h"
+#include "../tool/Point.h"
+#include "../tool/resource_manager.h"
+#include "../tool/xml_document.h"
+#include "../include/app.h"
+#include "../include/action_handler.h"
 #include "../include/global.h"
+#include "../interface/interface.h"
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG
@@ -124,7 +123,7 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
   POUR_TOUS_VERS_VIVANTS(equipe,ver)
   if (&(*ver) != &ActiveCharacter())
   {
-    if (Intersect(ver -> GetTestRect(), test))
+    if (ver->GetTestRect().Intersect( test ))
        {
       dernier_ver_touche = &(*ver);
 #ifdef DEBUG_MSG_COLLISION
@@ -137,7 +136,7 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
   POUR_CHAQUE_OBJET(objet)
   if (objet -> ptr != this)
   {
-    if (Intersect(objet -> ptr -> GetTestRect(), test))
+    if ( objet->ptr->GetTestRect().Intersect( test ) )
       {
       dernier_obj_touche = objet -> ptr;
 #ifdef DEBUG_MSG_COLLISION

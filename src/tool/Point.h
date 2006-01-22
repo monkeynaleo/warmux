@@ -30,15 +30,20 @@
 template<class T> class Point2
 {
    
- public:
-   inline Point2(){}
-   inline Point2(T x, T y) 
-     { 
-	this->x = x;
-	this->y = y;
-     }	
-    
-   T x, y;
+  public:
+    T x, y;
+   
+    inline Point2(){}
+    inline Point2(T x, T y) 
+    { 
+      this->x = x;
+      this->y = y;
+   }
+
+   inline double Distance(const Point2<T> p2) const{
+     double distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
+     return sqrt( distPow2 );
+   }
 };
    
 typedef Point2<int>    Point2i;   
