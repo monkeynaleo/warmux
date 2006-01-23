@@ -80,7 +80,8 @@ void Game::MessageEndOfGame()
 {
   bool winner_found = false;
 
-  std::string txt(_("End of the game! - "));
+  std::string txt(_("End of the game!"));
+  txt += " - ";
 
   FOR_EACH_TEAM(equipe)
   {

@@ -31,6 +31,7 @@
 
 #include "../include/constant.h"
 #include "../include/app.h"
+#include "../tool/i18n.h"
 #include "../tool/resource_manager.h"
 #include <SDL_video.h>
 
@@ -51,7 +52,7 @@ Ground::Ground()
 
 void Ground::Init()
 {
-  std::cout << "o Ground initialization...";
+  std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
   
   // Charge les données du terrain
@@ -67,7 +68,7 @@ void Ground::Init()
   // Vérifie si c'est un terrain ouvert ou fermé
   ouvert = lst_terrain.TerrainActif().is_opened;
 
-  std::cout << "done" << std::endl;
+  std::cout << _("done") << std::endl;
 }
 
 //-----------------------------------------------------------------------------
