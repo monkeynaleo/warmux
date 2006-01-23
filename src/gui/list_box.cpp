@@ -29,6 +29,7 @@
 #include <SDL_gfxPrimitives.h>
 #include "../include/global.h"
 
+//#define SCROLLBAR
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 struct CompareItems
@@ -168,6 +169,17 @@ void ListBox::Draw (uint mouse_x, uint mouse_y)
   {
     m_up->Draw (mouse_x, mouse_y);
     m_down->Draw (mouse_x, mouse_y);
+#ifdef SCROLLBAR
+    uint tmp_y, tmp_h;
+    tmp_y = y+10+ first_visible_item* (h-20) / m_items.size();
+    tmp_h = nb_visible_items_max * (h-20) / m_items.size();
+    if (tmp_h < 5) tmp_h =5;
+
+    boxRGBA(app.sdlwindow, 
+	    x+w-10, tmp_y,
+	    x+w-1,  tmp_y+tmp_h,
+	    255, 255, 255, 255);
+#endif
   }
   
   
