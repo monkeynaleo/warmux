@@ -69,9 +69,19 @@ void Sky::CompleteDraw()
    int y = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
 
    if(!TerrainActif().infinite_bg)
-   {
-     SDL_Rect ds = {x, y,app.sdlwindow->w,app.sdlwindow->h};
-     SDL_Rect dr = {0,0,app.sdlwindow->w,app.sdlwindow->h};
+   {    
+     uint margin_x = 0, margin_y = 0;
+     
+     if (image->w < int(camera.GetWidth())) {
+       x = 0;
+       margin_x = (camera.GetWidth()-image->w)/2;
+     }
+     if (image->h < int(camera.GetHeight())) {
+       y = 0;
+       margin_y = (camera.GetHeight()-image->h)/2;
+     }
+     SDL_Rect ds = {x, y,camera.GetWidth(),camera.GetHeight()};
+     SDL_Rect dr = {margin_x,margin_y,camera.GetWidth(),camera.GetHeight()};
      SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
    }
    else
@@ -140,18 +150,29 @@ void Sky::Draw()
 
   int sky_cx = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
   int sky_cy = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
+  
+  uint margin_x = 0, margin_y = 0;
+     
+  if (image->w < int(camera.GetWidth())) {
+    sky_cx = 0;
+    margin_x = (camera.GetWidth()-image->w)/2;
+  }
+  if (image->h < int(camera.GetHeight())) {
+    sky_cy = 0;
+    margin_y = (camera.GetHeight()-image->h)/2;
+  }
 
   std::list<Rectanglei>::iterator it;
   for (it = world.to_redraw_now->begin(); 
        it != world.to_redraw_now->end(); 
        ++it)
   {
-    SDL_Rect ds = { sky_cx + it->x - cx, 
-		    sky_cy + it->y - cy, 
+    SDL_Rect ds = { sky_cx + it->x - cx -margin_x, 
+		    sky_cy + it->y - cy -margin_y, 
 		    it->w+1, 
 		    it->h+1};
     SDL_Rect dr = {it->x-cx,
-		   it->y-cy, 
+		   it->y-cy,
 		   it->w+1, 
 		   it->h+1};
     SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
@@ -161,12 +182,12 @@ void Sky::Draw()
        it != world.to_redraw_particles_now->end(); 
        ++it)
   {
-    SDL_Rect ds = { sky_cx + it->x - cx, 
-		    sky_cy + it->y - cy, 
+    SDL_Rect ds = { sky_cx + it->x - cx -margin_x, 
+		    sky_cy + it->y - cy -margin_y, 
 		    it->w+1, 
 		    it->h+1};
     SDL_Rect dr = {it->x-cx,
-		   it->y-cy, 
+		   it->y-cy,
 		   it->w+1, 
 		   it->h+1};
     SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
