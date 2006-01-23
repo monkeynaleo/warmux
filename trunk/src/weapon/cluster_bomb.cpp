@@ -188,7 +188,6 @@ void ClusterBomb::Refresh()
 {
   if (!is_active) return;
 
-
 #ifdef MSG_DBG
   COUT_DBG << "ClusterBomb::Refresh()" << std::endl;
 #endif
@@ -211,7 +210,6 @@ void ClusterBomb::Refresh()
 
     for(uint i=0;i<lance_cluster.cfg().nbr_fragments;i++)
     {
-      printf ("ClusterBomb::Refresh %d\n", i);
       double angle = (double)RandomLong ((long)0.0, (long)(2.0 * M_PI));
       x = GetX()+(int)(cos(angle) * (double)lance_cluster.cfg().blast_range*5);
       y = GetY()+(int)(sin(angle) * (double)lance_cluster.cfg().blast_range*5);
