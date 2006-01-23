@@ -533,7 +533,12 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     POUR_TOUS_VERS_VIVANTS(equipe,ver) ver -> PrepareTour();
 
     // Changement d'équipe
-    teams_list.NextTeam (begin_game);
+    assert (!game.IsGameFinished());    
+    do
+    {
+      teams_list.NextTeam (begin_game);
+      action_handler.ExecActions();
+    } while (ActiveTeam().NbAliveCharacter() == 0);
     if( game_mode.allow_character_selection==GameMode::CHANGE_ON_END_TURN
      || game_mode.allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
     {

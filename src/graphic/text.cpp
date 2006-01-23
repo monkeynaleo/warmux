@@ -59,12 +59,10 @@ Text::Text(const std::string &new_txt, SDL_Color new_color,
 //-----------------------------------------------------------------------------
 Text::~Text()
 {
-  assert(surf!=NULL);
-  SDL_FreeSurface(surf);
+  if (surf!=NULL) SDL_FreeSurface(surf);
   if(shadowed)
   {
-    assert(background!=NULL);
-    SDL_FreeSurface(background);
+    if (background!=NULL) SDL_FreeSurface(background);
   }
 }
 
