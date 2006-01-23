@@ -46,7 +46,6 @@ const uint TEAM_LOGO_Y = 290;
 const uint TEAM_LOGO_H = 48;
 
 const uint MAPS_X = 20;
-const uint MAPS_Y = TEAMS_Y+TEAMS_H+40;
 const uint MAPS_W = 160;
  
 const uint MAP_PREVIEW_W = 300;
@@ -102,10 +101,9 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
   tmp_box->AddWidget(lbox_maps);
   tmp_box->AddWidget(new NullWidget(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
   
-  map_box = new VBox(MAPS_X, MAPS_Y, 475); //tmp_box->GetW()+10);
+  map_box = new VBox(MAPS_X, team_box->GetY()+team_box->GetH()+20, 475);
   map_box->AddWidget(new Label(_("Select the world:"), 0, 0, 0, global().normal_font()));
   map_box->AddWidget(tmp_box);
-
 
   //-----------------------------------------------------------------------------
   // Values initialization
@@ -282,7 +280,7 @@ void GameMenu::Draw(int mouse_x, int mouse_y)
       ChangeMap();
     }
   
-  map_preview->Blit ( app.sdlwindow, MAPS_X+MAPS_W+10, MAPS_Y+5);  
+  map_preview->Blit ( app.sdlwindow, MAPS_X+MAPS_W+10, map_box->GetY()+5  );
 }
 
 //-----------------------------------------------------------------------------
