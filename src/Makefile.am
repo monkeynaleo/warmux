@@ -8,7 +8,7 @@ localedir=$(datadir)/@LOCALEDIR@
 wormux_SOURCES = \
 	include/base.h include/enum.h \
 	include/constant.cpp include/constant.h \
-	include/global.cpp include/glboal.h \
+	include/global.cpp include/global.h \
 	include/action.cpp include/action.h \
 	include/action_handler.cpp include/action_handler.h \
 	include/app.h main.cpp \
@@ -16,7 +16,7 @@ wormux_SOURCES = \
 	game/game_mode.cpp game/game_mode.h \
 	game/game.cpp game/game.h \
 	game/game_loop.cpp game/game_loop.h \
-        graphic/colors.h \
+	graphic/colors.h \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/video.cpp graphic/video.h \
 	graphic/text.cpp graphic/text.h \
@@ -40,7 +40,7 @@ wormux_SOURCES = \
 	tool/resource_manager.cpp tool/resource_manager.h \
 	tool/stats.cpp tool/stats.h \
 	tool/random.cpp tool/random.h \
-        tool/debug.cpp tool/debug.h \
+	tool/debug.cpp tool/debug.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	graphic/font.cpp graphic/font.h \
 	graphic/sprite.cpp graphic/sprite.h \
@@ -54,7 +54,7 @@ wormux_SOURCES = \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/question.cpp gui/question.h \
 	interface/interface.cpp interface/interface.h \
-        interface/cursor.cpp interface/cursor.h \
+	interface/cursor.cpp interface/cursor.h \
 	interface/game_msg.cpp interface/game_msg.h \
 	interface/mouse.cpp interface/mouse.h \
 	interface/keyboard.cpp interface/keyboard.h \
@@ -71,8 +71,8 @@ wormux_SOURCES = \
 	map/wind.cpp map/wind.h \
 	map/camera.cpp map/camera.h \
 	map/ground.cpp map/ground.h \
-        team/macro.h \
-        team/character.cpp team/character.h \
+	team/macro.h \
+	team/character.cpp team/character.h \
 	team/move.cpp team/move.h \
 	team/skin.cpp team/skin.h \
 	team/team.cpp team/team.h \
@@ -94,7 +94,7 @@ wormux_SOURCES = \
 	weapon/grenade.cpp weapon/grenade.h \
 	weapon/gun.cpp weapon/gun.h \
 	weapon/mine.cpp weapon/mine.h \
-        weapon/skip_turn.cpp weapon/skip_turn.h \
+	weapon/skip_turn.cpp weapon/skip_turn.h \
 	weapon/suicide.cpp weapon/suicide.h \
 	weapon/teleportation.cpp weapon/teleportation.h \
 	weapon/holly_grenade.cpp weapon/holly_grenade.h \
