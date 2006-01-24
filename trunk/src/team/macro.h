@@ -33,7 +33,7 @@
        ++equipe)
 
 // Boucle pour chaque ver d'une equipe (sauf les fantomes)
-#define POUR_CHAQUE_VER(equipe,ver) \
+#define FOR_EACH_CHARACTER(equipe,ver) \
   for (Team::iterator ver = (*(equipe)).begin(), \
        fin_pour_chaque_ver = (*(equipe)).end(); \
        ver != fin_pour_chaque_ver; \
@@ -41,7 +41,7 @@
   if (ver -> IsActive())
 
 // Boucle pour chaque ver vivant d'une equipe
-#define POUR_CHAQUE_VER_VIVANT(equipe,ver) \
+#define FOR_EACH_LIVING_CHARACTER(equipe,ver) \
   for (Team::iterator ver = (*(equipe)).begin(), \
        fin_pour_chaque_ver_vivant = (*(equipe)).end(); \
        ver != fin_pour_chaque_ver_vivant; \
@@ -49,14 +49,14 @@
   if (!ver -> IsDead())
 
 // Boucle pour tous les vers (or fantomes)
-#define POUR_TOUS_VERS(equipe,ver) \
+#define FOR_ALL_CHARACTERS(equipe,ver) \
   FOR_EACH_TEAM(equipe) \
-  POUR_CHAQUE_VER(*equipe,ver) 
+  FOR_EACH_CHARACTER(*equipe,ver) 
 
 // Boucle pour tous les vers vivants
-#define POUR_TOUS_VERS_VIVANTS(equipe,ver) \
+#define FOR_ALL_LIVING_CHARACTERS(equipe,ver) \
   FOR_EACH_TEAM(equipe) \
-  POUR_CHAQUE_VER_VIVANT(*equipe,ver) 
+  FOR_EACH_LIVING_CHARACTER(*equipe,ver) 
 
 //-----------------------------------------------------------------------------
 #endif

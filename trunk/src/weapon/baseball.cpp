@@ -67,7 +67,7 @@ bool Baseball::p_Shoot ()
     y = ver_y +(int)dy;
 
     // Teste un ver après l'autre
-    POUR_TOUS_VERS_VIVANTS(equipe,ver)
+    FOR_ALL_LIVING_CHARACTERS(equipe,ver)
     if (&(*ver) != &ActiveCharacter())
     {
       // On a touché un ver ?

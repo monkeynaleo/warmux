@@ -993,7 +993,7 @@ void Character::Reset()
     if (!pos_ok) continue;
 
     // Vérifie que le ver ne fois pas trop près de ses voisins
-    POUR_TOUS_VERS_VIVANTS(it_equipe,ver) if (&(*ver) != this)
+    FOR_ALL_LIVING_CHARACTERS(it_equipe,ver) if (&(*ver) != this)
     {
        Point2i p1 = ver->GetCenter();
        Point2i p2 = GetCenter();

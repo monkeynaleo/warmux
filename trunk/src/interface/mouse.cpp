@@ -145,7 +145,7 @@ void Mouse::ChoixVerPointe()
    
   // Quel ver est pointé par la souris ? (en dehors du ver actif)
   interface.character_under_cursor = NULL;
-  POUR_TOUS_VERS_VIVANTS(equipe,ver)
+  FOR_ALL_LIVING_CHARACTERS(equipe,ver)
     {
       if ((&(*ver) != &ActiveCharacter())
 	  && ver->GetRect().Contains(pos_monde) )

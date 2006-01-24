@@ -63,7 +63,7 @@ void AppliqueExplosion (const Point2i &explosion,
    
   // Apply damage on the worms.
   // Do not care about the death of the active worm.
-  POUR_TOUS_VERS(equipe,ver)
+  FOR_ALL_CHARACTERS(equipe,ver)
   {
     // Is it the object we do not want to manage ?
     if ((obj_exclu != NULL) && (&(*ver) == obj_exclu)) continue;
