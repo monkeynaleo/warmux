@@ -172,7 +172,7 @@
       <nb_ammo>-1</nb_ammo>
       <damage>25</damage>
       <force>8</force>
-      <longueur>70</longueur>
+      <longueur>25</longueur>
     </baseball>
 
     <teleportation>
