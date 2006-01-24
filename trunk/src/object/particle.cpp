@@ -228,7 +228,7 @@ ParticleEngine::ParticleEngine(particle_t type, uint time)
 void ParticleEngine::Refresh()
 {
   // remove old particles 
-  std::list<Particle *>::iterator it=particles.begin(), end=particles.end(), current=NULL;
+  std::list<Particle *>::iterator it=particles.begin(), end=particles.end(), current;
   while (it != end) {
     current = it;
     ++it;
@@ -307,7 +307,7 @@ void ParticleEngine::AddNow(uint x, uint y,
 
 void ParticleEngine::Draw()
 {
-  std::list<Particle *>::iterator it=NULL;
+  std::list<Particle *>::iterator it;
   // draw the particles
   for(it=particles.begin(); it!=particles.end(); ++it) {
     (*it)->Draw();
@@ -320,7 +320,7 @@ void ParticleEngine::Draw()
 void ParticleEngine::Stop()
 {
   // remove all the particles 
-  std::list<Particle *>::iterator it=particles.begin(), end=particles.end(), current=NULL;
+  std::list<Particle *>::iterator it=particles.begin(), end=particles.end(), current;
   while (it != end) {
     current = it;
     ++it;

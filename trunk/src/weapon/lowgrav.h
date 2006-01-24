@@ -38,7 +38,7 @@ public:
   void HandleKeyEvent(int action, int event_type);
   bool p_Shoot();
   void SignalTurnEnd();
-  void LowGrav::Draw();
+  void Draw();
 };
 
 extern LowGrav lowgrav;
