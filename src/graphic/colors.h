@@ -31,5 +31,8 @@ const SDL_Color lightgray_color = { 169, 169, 169, SDL_ALPHA_OPAQUE };
 const SDL_Color gray_color = { 128, 128, 128, SDL_ALPHA_OPAQUE };
 const SDL_Color black_color = {  0, 0, 0, SDL_ALPHA_OPAQUE };
 
+// Green
+const SDL_Color green_color = {  68, 120, 51, SDL_ALPHA_OPAQUE };
+
 //--------------------------------------------------------------------------
 #endif
