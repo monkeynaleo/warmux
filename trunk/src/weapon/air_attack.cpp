@@ -21,19 +21,18 @@
 
 #include "air_attack.h"
 //----------------------------------------------------------------------------
-#include "../map/map.h"
-#include "../map/camera.h"
+#include <sstream>
+#include "../game/game_loop.h"
+#include "../graphic/sprite.h"
 #include "../include/action_handler.h"
 #include "../interface/mouse.h"
+#include "../map/map.h"
+#include "../map/camera.h"
+#include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/random.h"
-#include "../weapon/weapon_tools.h"
-#include "../object/objects_list.h"
-#include "../game/game_loop.h"
-#include <sstream>
 #include "../tool/i18n.h"
-#include "../graphic/sprite.h"
-#include "../map/camera.h"
+#include "../weapon/weapon_tools.h"
 //----------------------------------------------------------------------------
 namespace Wormux 
 {
@@ -138,12 +137,12 @@ void Avion::Tire()
 
   if (dir == 1)
     {
-      InitVector (speed_vector, air_attack.cfg().speed, 0);
+      speed_vector.SetValues( air_attack.cfg().speed, 0);
       SetX (-image->GetWidth()+1);
     }
   else
     {
-      InitVector (speed_vector, -air_attack.cfg().speed, 0) ;
+      speed_vector.SetValues( -air_attack.cfg().speed, 0) ;
       SetX (world.GetWidth()-1);
     }
 
@@ -267,7 +266,7 @@ void AirAttack::Refresh()
       fx *= avion.GetDirection();
       int fy = RandomLong (FORCE_Y_MIN, FORCE_Y_MAX);
 
-      InitVector (speed_vector, fx/30.0, fy/30.0);
+      speed_vector.SetValues( fx/30.0, fy/30.0);
       instance -> SetSpeedXY (speed_vector);
       obus.push_back (instance);
     }

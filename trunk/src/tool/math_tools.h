@@ -21,13 +21,6 @@
 
 #ifndef MATH_TOOLS_H
 #define MATH_TOOLS_H
-//-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../tool/Point.h"
-#include <string>
-//-----------------------------------------------------------------------------
-
-typedef struct { double x,y; } DoubleVector;
 
 typedef struct { double x0,x1,x2; } EulerVector;
 
@@ -40,34 +33,10 @@ void SetEulerVectorZero (EulerVector &vector);
 /* Compute one step to solve a.x'' + b.x' + c.x = d equation using Euler method */
 void ComputeOneEulerStep(EulerVector &V, double a, double b, double c, double d, double dt) ;
 
-// Check if a vector is NULL.
-bool VectorNull (DoubleVector vector) ;
-
-// Set vector x and Y to 0.
-void SetVectorZero (DoubleVector &vector);
-
-// Init a vector.
-void InitVector (DoubleVector &vector, double x, double y) ;
-
-void AddVector (DoubleVector &A, DoubleVector B) ;
-
-// Norm of a vector
-double Norm (DoubleVector vector);
-
 // Borne une valeur dans l'intervale [min;max]
 long BorneLong (const long &valeur, const long &min, const long &max);
 double BorneDouble (const double &valeur, const double &min, 
 		    const double &max);
-
-// Calcule l'angle en radian du point M dans le repère de centre O
-// Pour O=(0,0) :
-// - M=(10,10) -> PI/4 (0.78)
-// - M=(0,10) -> PI/2 (1.57)
-// - M=(-10,10) -> 3*PI/4 (2.35)
-// - M=(10,-10) -> -PI/4 (-0.78)
-// - M=O -> 0
-double CalculeAngle (const Point2i &O, const Point2i &M);
-double CalculeAnglef (DoubleVector V) ;
 
 // Inverse un angle par rapport à l'axe vertical
 double InverseAngle (const double &angle);
@@ -80,7 +49,4 @@ double Deg2Rad (int degre);
 double AbsReel (const double x);
 bool EgalZero (const double x);
 
-// Contertit un double en int en arrondissant à la valeur la plus proche
-int Arrondit(double x);
-//-----------------------------------------------------------------------------
 #endif

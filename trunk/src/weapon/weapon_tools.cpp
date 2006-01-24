@@ -93,7 +93,7 @@ void AppliqueExplosion (const Point2i &explosion,
       {
         force *= config.blast_force / config.blast_range;
         force  = config.blast_force - force;
-        angle  = CalculeAngle (explosion, ver -> GetCenter());
+        angle  = explosion.ComputeAngle(ver -> GetCenter());
       }
       else
       {
@@ -135,10 +135,10 @@ void AppliqueExplosion (const Point2i &explosion,
       if (!EgalZero(distance)) {
 	distance *= config.blast_force / config.blast_range;
 	distance  = config.blast_force - distance;
-	angle  = CalculeAngle (explosion, obj -> ptr -> GetCenter());
+	angle  = explosion.ComputeAngle(obj -> ptr -> GetCenter());
       } else {
 	distance = config.blast_force;
-	angle = -M_PI/2;
+	angle = -M_PI_2;
       }
       if(!cam_follow_character)
         camera.ChangeObjSuivi (obj->ptr, true, true);
