@@ -60,12 +60,12 @@ const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 
 Physics::Physics (double mass)
 {
-  SetVectorZero(m_extern_force);
+  m_extern_force.Clear();
   SetEulerVectorZero(m_pos_x);
   SetEulerVectorZero(m_pos_y);
 
-  SetVectorZero(m_fix_point_gnd);
-  SetVectorZero(m_fix_point_dxy);
+  m_fix_point_gnd.Clear();
+  m_fix_point_dxy.Clear();
   SetEulerVectorZero(m_rope_angle);
   SetEulerVectorZero(m_rope_length);
   
@@ -166,9 +166,7 @@ void Physics::SetGravityFactor (double factor)
 
 void Physics::SetSpeed (double length, double angle)
 {
-  DoubleVector vector ;
-
-  InitVector(vector, length*cos(angle), length*sin(angle)) ;
+  DoubleVector vector( length*cos(angle), length*sin(angle) );
   SetSpeedXY(vector);
 }
 
@@ -191,9 +189,7 @@ void Physics::SetSpeedXY (DoubleVector vector)
 
 void Physics::AddSpeed (double length, double angle)
 {
-  DoubleVector vector ;
-
-  InitVector(vector, length*cos(angle), length*sin(angle)) ;
+  DoubleVector vector( length*cos(angle), length*sin(angle) );
   AddSpeedXY (vector);
 }
 
@@ -221,7 +217,7 @@ void Physics::GetSpeed(double &norm, double &angle)
   switch (m_motion_type) {
     case FreeFall:
       GetSpeedXY(speed);
-      norm = Norm (speed);
+      norm = speed.Norm();
       angle = GetSpeedAngle();
       break ;
 
@@ -250,10 +246,10 @@ void Physics::GetSpeedXY(DoubleVector &vector)
 {
   if(!IsMoving())
     {
-      SetVectorZero(vector);
+      vector.Clear();
       return;
     }
-  InitVector (vector, m_pos_x.x1, m_pos_y.x1);
+  vector.SetValues(m_pos_x.x1, m_pos_y.x1);
 }
 
 //-----------------------------------------------------------------------------
@@ -271,8 +267,7 @@ double Physics::GetSpeedAngle()
   DoubleVector speed ;
 
   GetSpeedXY(speed);
-
-  angle = CalculeAnglef (speed);
+  angle = speed.ComputeAngle();
 
   return angle ;
 }
@@ -281,10 +276,9 @@ double Physics::GetSpeedAngle()
 
 void Physics::SetExternForce (double length, double angle)
 {
-  DoubleVector vector ;
+  DoubleVector vector(length*cos(angle), length*sin(angle));
 
-  InitVector(vector, length*cos(angle), length*sin(angle)) ;
-  SetExternForceXY(vector) ;
+  SetExternForceXY(vector);
 }
 
 //-----------------------------------------------------------------------------
@@ -293,9 +287,10 @@ void Physics::SetExternForceXY (DoubleVector vector)
 {
   bool was_moving = IsMoving();
 
-  InitVector (m_extern_force, vector.x, vector.y);
+  m_extern_force.SetValues(vector);
 
-  if (!was_moving && IsMoving()) StartMoving();
+  if (!was_moving && IsMoving())
+    StartMoving();
 }
 
 //-----------------------------------------------------------------------------
@@ -334,7 +329,7 @@ void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
       // Compute the initial angle
       V.x = fix_point_x - g_x ;
       V.y = fix_point_y - g_y ;
-      m_rope_angle.x0 = M_PI/2 - CalculeAnglef (V) ;
+      m_rope_angle.x0 = M_PI/2 - V.ComputeAngle() ;
 
       // Convert the linear speed to angular speed.
       m_rope_angle.x1 = (m_pos_x.x1 * cos(m_rope_angle.x0) +
@@ -431,7 +426,7 @@ void Physics::StopMoving()
   if (m_motion_type != Pendulum)
     m_motion_type = NoMotion ;
 
-  SetVectorZero(m_extern_force);
+  m_extern_force.Clear();
 }
 
 //-----------------------------------------------------------------------------
@@ -440,7 +435,7 @@ bool Physics::IsMoving() const
 {
   return ( (!EgalZero(m_pos_x.x1)) ||
 	   (!EgalZero(m_pos_y.x1)) ||
-	   (! VectorNull (m_extern_force)) ||
+	   (!m_extern_force.IsNull() ) ||
 	   (m_motion_type != NoMotion) ) ;
 //	   (m_motion_type == Pendulum) ) ;
 }
@@ -628,7 +623,6 @@ void Physics::Rebound(double contact_x, double contact_y, double contact_angle)
   double norme, angle;
 
   // Get norm and angle of the object speed vector.
-  
   GetSpeed(norme, angle);
 
   switch (m_motion_type) {
@@ -636,7 +630,6 @@ void Physics::Rebound(double contact_x, double contact_y, double contact_angle)
       if (m_rebounding)
 	{ 
 	  // Compute rebound angle.
-	  
 	  if(contact_angle == -1.0)
 	    {
 	      angle = angle + M_PI ;
@@ -645,15 +638,12 @@ void Physics::Rebound(double contact_x, double contact_y, double contact_angle)
 	    angle -= 2.0 * (angle - contact_angle);
 
 	  // Apply rebound factor to the object speed.
-	  
 	  norme = norme * m_rebound_factor ;
 	  	  
 	  // Apply the new speed to the object.
-	  
 	  SetSpeed(norme, angle);
 	  
 	  // Check if we should stop rebounding.
-	  
 	  if (norme < STOP_REBOUND_LIMIT)
 	    {
 	      StopMoving();
@@ -671,29 +661,29 @@ void Physics::Rebound(double contact_x, double contact_y, double contact_angle)
       break ;
 
     case Pendulum:
+      {
       DoubleVector V ;
 
       // Recompute new angle.
-      
-      V.x = m_pos_x.x0 + m_fix_point_dxy.x - m_fix_point_gnd.x ;
-      V.y = m_pos_y.x0 + m_fix_point_dxy.y - m_fix_point_gnd.y ;
-      m_rope_angle.x0 = M_PI/2 - CalculeAnglef (V) ;
+      V.x = m_pos_x.x0 + m_fix_point_dxy.x - m_fix_point_gnd.x;
+      V.y = m_pos_y.x0 + m_fix_point_dxy.y - m_fix_point_gnd.y;
+      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle();
       
       // Convert the linear speed of the rebound to angular speed.
-
       V.x = PENDULUM_REBOUND_FACTOR * norme * cos(angle);
       V.y = PENDULUM_REBOUND_FACTOR * norme * sin(angle);
 
-      angle = angle + M_PI ;
+      angle = angle + M_PI;
 
       m_rope_angle.x1 = (norme * cos(angle) * cos(m_rope_angle.x0) +
 			 norme * sin(angle) * sin(m_rope_angle.x0) ) /
 	                 m_rope_length.x0;
 
-      m_rope_angle.x2 = 0 ;
-      SetVectorZero(m_extern_force) ;
+      m_rope_angle.x2 = 0;
+      m_extern_force.Clear();
+      }
       break ;
-
+     
     default:
       break ;
   }

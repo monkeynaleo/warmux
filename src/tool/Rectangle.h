@@ -55,7 +55,7 @@ template<class T> class Wormux_Rectangle
       h = bottom-top;
     }
     
-    inline bool Contains( const Point2<T> p ) const{
+    inline bool Contains( const Vector2<T> p ) const{
       return ( p.x >= x && 
                p.x <= x+w && 
                p.y >= y && 
@@ -63,10 +63,10 @@ template<class T> class Wormux_Rectangle
     }
 
     inline bool Intersect( const Wormux_Rectangle<T> r2 ) const{
-      return Contains( Point2<T>( r2.x, r2.y))
-	  || Contains( Point2<T>( r2.x, r2.y+r2.h))
-	  || Contains( Point2<T>( r2.x+r2.w, r2.y+r2.h))
-	  || Contains( Point2<T>( r2.x+r2.w, r2.y));
+      return Contains( Vector2<T>( r2.x, r2.y))
+	  || Contains( Vector2<T>( r2.x, r2.y+r2.h))
+	  || Contains( Vector2<T>( r2.x+r2.w, r2.y+r2.h))
+	  || Contains( Vector2<T>( r2.x+r2.w, r2.y));
     }
 };
 

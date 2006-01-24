@@ -26,11 +26,9 @@
 
 #ifndef PHYSICS_H
 #define PHYSICS_H
-//-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../tool/math_tools.h"
-
-//-----------------------------------------------------------------------------
+#include "../tool/vector2.h"
 
 typedef enum
 {
@@ -175,5 +173,4 @@ private:
   void Rebound(double contact_x, double contact_y, double contact_angle) ;
 };
 
-//-----------------------------------------------------------------------------
 #endif

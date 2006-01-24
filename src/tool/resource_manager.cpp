@@ -26,7 +26,6 @@
  *****************************************************************************/
 
 #include "resource_manager.h"
-#include <iostream>
 #include <string>
 #include <iostream>
 #include <SDL.h>

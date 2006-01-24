@@ -80,7 +80,7 @@ void JetPack::Refresh()
       ActiveCharacter().SetExternForceXY(F);
       ActiveCharacter().UpdatePosition();
 
-      if (!VectorNull(F))
+      if( !F.IsNull() )
 	{
 	  // We are using fuel !!!
 

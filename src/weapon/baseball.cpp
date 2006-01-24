@@ -83,7 +83,7 @@ bool Baseball::p_Shoot ()
 #ifdef CL
       if (ObjTouche(*ver, CL_Point(x, y)))
 #else
-      if (ObjTouche(*ver, Point2<int>(x, y)))
+      if (ObjTouche(*ver, Point2i(x, y)))
 #endif
       {
 	// Inflige les dégats au ver touché

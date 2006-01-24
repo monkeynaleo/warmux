@@ -91,8 +91,8 @@ bool find_first_contact_point (int x1, int y1, double angle, int length,
 
       x += x_step ;
       y += y_step ;
-      cx = Arrondit(x) ;
-      cy = Arrondit(y) ;
+      cx = (int)round(x) ;
+      cy = (int)round(y) ;
       length-- ;
     }
 
@@ -227,8 +227,8 @@ bool NinjaRope::TryAddNode(int CurrentSense)
 
   V.x = hand_x - m_fixation_x ;
   V.y = hand_y - m_fixation_y ;
-  angle = CalculeAnglef(V);
-  lg = (int)(Norm(V));
+  angle = V.ComputeAngle();
+  lg = (int)V.Norm();
 
   if (lg < DST_MIN)
     return false;

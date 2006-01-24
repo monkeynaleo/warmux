@@ -28,20 +28,15 @@
 #include "../object/physics.h"
 //-----------------------------------------------------------------------------
 #include <stdlib.h>
-#include "../map/map.h"
+#include <iostream>
 #include "../game/config.h"
+#include "../game/time.h"
+#include "../map/map.h"
 #include "../tool/math_tools.h"
 #include "../tool/Point.h"
 #include "../tool/Rectangle.h"
-//# include "../game/game_mode.h"
-#include "../game/time.h"
-//#include "../map/water.h"
-#include "../sound/jukebox.h" //TODO remove this
 #include "../weapon/ninja_rope.h"
-//#include "../map/wind.h"
-#include <iostream>
 using namespace Wormux;
-//-----------------------------------------------------------------------------
 
 #ifdef DEBUG
 
@@ -140,12 +135,12 @@ const Point2i PhysicalObj::GetPos() const
 
 int PhysicalObj::GetX() const
 {
-  return Arrondit(GetPhysX() * PIXEL_PER_METER);
+  return (int)round(GetPhysX() * PIXEL_PER_METER);
 }
 
 int PhysicalObj::GetY() const
 {
-  return Arrondit(GetPhysY() * PIXEL_PER_METER);
+  return (int)round(GetPhysY() * PIXEL_PER_METER);
 }
 
 //-----------------------------------------------------------------------------
@@ -282,8 +277,8 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 
   do
   {
-    tmp_x = Arrondit(x);
-    tmp_y = Arrondit(y);
+    tmp_x = (int)round(x);
+    tmp_y = (int)round(y);
 
     //    printf ("--- PhysicalObj::MoveCollisionTest - Pos %d,%d\n", tmp_x, tmp_y);
     
@@ -316,7 +311,7 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 	// Yes ! There is  a collision.
 	// Set the object position to the current position.
 
-	SetXY (Arrondit(x-dx), Arrondit(y-dy));
+	SetXY ( (int)round(x-dx), (int)round(y-dy));
 
 	// Find the contact point and collision angle.
   // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
@@ -440,7 +435,7 @@ bool PhysicalObj::PutOutOfGround()
   Point2i a(0,0);
   Point2i b(dx,dy);
 
-  double dir = CalculeAngle(a,b);
+  double dir = a.ComputeAngle(b);
   return PutOutOfGround(dir);
 }
 

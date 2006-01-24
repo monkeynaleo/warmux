@@ -710,7 +710,7 @@ void Character::SignalFallEnding()
 
   StopWalking();
   GetSpeedXY (speed_vector);
-  norme = Norm (speed_vector);
+  norme = speed_vector.Norm();
   if (norme > game_mode.safe_fall && speed_vector.y>0.0)
   {
     norme -= game_mode.safe_fall;
