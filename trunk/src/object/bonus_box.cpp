@@ -30,13 +30,9 @@
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../tool/random.h"
-#ifdef CL
-#include "../tool/geometry_tools.h"
-#else
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
 #include "../include/app.h"
-#endif
 #include <sstream>
 #include <iostream>
 using namespace Wormux;
@@ -183,13 +179,8 @@ void Caisse::Reset()
   affiche = false;
   Ready();
   parachute = true;
-#ifdef CL
-  anim.set_play_loop(false);
-  anim.set_frame(0);
-#else
-   anim->SetCurrentFrame(0);
-   anim->Start();
-#endif
+  anim->SetCurrentFrame(0);
+  anim->Start();
 
   temps_caisse = RandomLong(TEMPS_MIN_CREATION, 
 			    TEMPS_MAX_CREATION-TEMPS_MIN_CREATION);
@@ -206,15 +197,8 @@ void Caisse::Reset()
 void Caisse::Draw()
 { 
   if (!affiche) return;
-#ifdef CL
-  anim.draw (GetX(), GetY());
-#if defined(DEBUG_CADRE_TEST)
-  CL_Rect rect=LitRectTest();
-  CL_Display::draw_rect (rect, CL_Color::red);
-#endif
-#else
+
   anim->Draw(GetX(), GetY());
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -231,12 +215,10 @@ void Caisse::SignalFallEnding()
   COUT_DBG << "Début de l'animation 'repli du parachute'." << std::endl;
 #endif
   parachute = false;
-#ifdef CL
-  anim.restart();
-#else
+
   anim->SetCurrentFrame(0);
   anim->Start();
-#endif
+
   SetMass (MASSE_CAISSE);
   UpdatePosition();
 }
@@ -345,17 +327,9 @@ void Caisse::Refresh()
   }
 
   // Refresh de l'animation
-#ifdef CL
-   if (!parachute) anim.update();
-#else
-   if (!parachute) anim->Update();
-#endif
-   
-#ifdef CL
-   m_ready = anim.is_finished();
-#else
-   m_ready = anim->IsFinished();
-#endif
+  if (!parachute) anim->Update();
+  
+  m_ready = anim->IsFinished();
 }
 
 //-----------------------------------------------------------------------------
