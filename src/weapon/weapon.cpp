@@ -134,7 +134,7 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
     }
   }
 
-  POUR_CHAQUE_OBJET(objet)
+  FOR_EACH_OBJECT(objet)
   if (objet -> ptr != this)
   {
     if ( objet->ptr->GetTestRect().Intersect( test ) )

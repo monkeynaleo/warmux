@@ -28,7 +28,7 @@
 //-----------------------------------------------------------------------------
 
 // Boucle pour chaque objet de la liste des objets (non fantome)
-#define POUR_TOUS_OBJETS(objet) \
+#define FOR_ALL_OBJECTS(objet) \
   for (ListeObjets::iterator objet=lst_objets.Debut(), \
        fin_pour_chaque_objet=lst_objets.Fin(); \
        objet != fin_pour_chaque_objet; \
@@ -37,8 +37,8 @@
 //-----------------------------------------------------------------------------
 
 // Boucle pour chaque objet de la liste des objets (non fantome)
-#define POUR_CHAQUE_OBJET(objet) \
-  POUR_TOUS_OBJETS(objet) \
+#define FOR_EACH_OBJECT(objet) \
+  FOR_ALL_OBJECTS(objet) \
   if (!objet -> ptr -> IsGhost())
 
 //-----------------------------------------------------------------------------
