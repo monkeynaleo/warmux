@@ -24,9 +24,7 @@
 #include "../include/app.h"
 #include "../map/maps_list.h"
 #include "../map/camera.h"
-#ifdef CL
-# include "../weapon/mine.h"
-#endif
+#include "../weapon/mine.h"
 #include "bonus_box.h"
 #include <vector>
 using namespace Wormux;
@@ -84,10 +82,8 @@ void ListeObjets::Reset()
 
   for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
   {
-#ifdef CL
     ObjMine *obj = new ObjMine();
     AjouteObjet (obj, true);
-#endif
   }
 
   POUR_CHAQUE_OBJET(objet) (*objet).ptr -> Reset();

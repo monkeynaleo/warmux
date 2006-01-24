@@ -30,10 +30,8 @@
 #include "../weapon/weapons_list.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
-#ifndef CL
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
-#endif
 #include <sstream>
 #include <iostream>
 using namespace Wormux;
