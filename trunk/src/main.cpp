@@ -178,7 +178,7 @@ void AppWormux::DisplayLoadingPicture()
   Text text1(_("Wormux launching..."), white_color, &global().huge_font(), true); 
   Text text2(txt_version, white_color, &global().huge_font(), true); 
   int x = video.GetWidth()/2;
-  int y = video.GetHeight()/2 - 200;
+  int y = video.GetHeight()/2;
   text1.DrawCenter (x, y);
   y += global().huge_font().GetHeight() + 20;
   text2.DrawCenter (x, y);

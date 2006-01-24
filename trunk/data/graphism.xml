@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <resources>
 
-<section name="intro">
-  <surface name="loading" file="menu/img/loading.png" />
-</section>
-
 <section name="main_menu">
   <surface name="bg" file="menu/img/background.png" />
 
