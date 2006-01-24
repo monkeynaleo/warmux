@@ -44,8 +44,8 @@ class Profile
   std::string filename;
   std::string relative_path;
 
-  Profile::Profile();
-  Profile::~Profile();
+  Profile();
+  ~Profile();
   
 };
 
