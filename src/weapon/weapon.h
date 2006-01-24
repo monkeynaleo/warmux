@@ -134,10 +134,12 @@ protected:
   // Visibility
   uint m_visibility;
   uint m_unit_visibility;
+
   // how many times can we use this weapon (since the beginning of the game) ?
   int m_initial_nb_ammo;
   int m_initial_nb_unit_per_ammo;
   bool use_unit_on_first_shoot;
+  bool can_be_used_on_closed_map;
 
   // For sound
   int channel_load;
@@ -190,6 +192,8 @@ public:
   void UseAmmoUnit();
   int ReadInitialNbAmmo() const;
   int ReadInitialNbUnit() const;
+
+  bool CanBeUsedOnClosedMap() const;
 
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;

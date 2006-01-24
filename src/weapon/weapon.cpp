@@ -195,6 +195,7 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
   m_initial_nb_ammo = INFINITE_AMMO;
   m_initial_nb_unit_per_ammo = 1;
   use_unit_on_first_shoot = true;
+  can_be_used_on_closed_map = true;
 
   m_strength = 0;
   m_first_time_loading = 0;
@@ -437,6 +438,13 @@ int Weapon::ReadInitialNbUnit() const
 
 //-----------------------------------------------------------------------------
 
+bool Weapon::CanBeUsedOnClosedMap() const
+{
+  return can_be_used_on_closed_map;
+}
+
+
+//-----------------------------------------------------------------------------
 const std::string& Weapon::GetName() const 
 { 
   assert (!m_name.empty());

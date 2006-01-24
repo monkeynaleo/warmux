@@ -25,6 +25,7 @@
 #include <math.h>
 #include "interface.h"
 #include "../map/camera.h"
+#include "../map/map.h"
 #include "../team/teams_list.h"
 #include "../tool/string_tools.h"
 #include "../weapon/weapons_list.h"
@@ -455,6 +456,10 @@ void WeaponsMenu::Draw()
   iterator it=boutons.begin(), fin=boutons.end();
   for (it=boutons.begin(); it != fin; ++it)
   {
+    if(!it->weapon->CanBeUsedOnClosedMap() 
+       && !world.EstOuvert())
+      continue;
+
     if(ActiveTeam().ReadNbAmmos(it->weapon->GetName())<=0
        && ActiveTeam().ReadNbAmmos(it->weapon->GetName())!=INFINITE_AMMO)
       continue;
