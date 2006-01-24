@@ -78,26 +78,16 @@ void SuperTux::Tire()
 
 void SuperTux::Init()
 {
-#ifdef CL
-  image = CL_Sprite("supertux", &graphisme.weapons);
-  SetSize (image.get_width(), image.get_height());
-#else
   image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
   image->EnableLastFrameCache();
   SetSize(image->GetWidth(), image->GetHeight());
-#endif
 
   SetMass (tux.cfg().mass);
   m_gravity_factor = 0.0;
 
   // Fixe le rectangle de test
-#ifdef CL
-  int dx = image.get_width()/2-1;
-  int dy = image.get_height()/2-1;
-#else
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
-#endif
 
   SetTestRect (dx, dx, dy, dy);
 }
@@ -114,11 +104,7 @@ void SuperTux::Refresh()
   if ((last_move+animation_deltat)<Wormux::global_time.Read())
     {
       SetExternForce(tux.cfg().speed, angle);
-#ifdef CL
-      image.update();
-#else
       image->Update();
-#endif
       last_move = Wormux::global_time.Read();
   }
 
@@ -208,11 +194,7 @@ bool TuxLauncher::p_Shoot()
   supertux.Tire ();
   lst_objets.AjouteObjet (&supertux, true);
 
-#ifdef CL
-  jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
-#else
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-#endif
 
   return true;
 }
@@ -229,11 +211,7 @@ void TuxLauncher::Explosion()
   if (supertux.IsGhost()) return;
 
   // Applique les degats et le souffle aux vers
-#ifdef CL
-  CL_Point pos = supertux.GetCenter();
-#else
   Point2i pos = supertux.GetCenter();
-#endif
 
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 
@@ -253,11 +231,7 @@ void TuxLauncher::Refresh()
 void TuxLauncher::p_Init()
 {
   supertux.Init();
-#ifdef CL
-  impact = CL_Surface("tux_impact", &graphisme.weapons);
-#else
   impact = resource_manager.LoadImage(weapons_res_profile,"tux_impact");
-#endif
 }
 
 

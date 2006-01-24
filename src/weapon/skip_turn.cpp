@@ -50,11 +50,7 @@ bool SkipTurn::p_Shoot()
   game_messages.Add (Format(_("%s team has skipped its turn."), 
 			      ActiveTeam().GetName().c_str()));
 
-#ifdef CL
-  jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "skip_turn");
-#else
   jukebox.Play(ActiveTeam().GetSoundProfile(), "skip_turn");
-#endif
 
   // End turn
   m_is_active = false;
