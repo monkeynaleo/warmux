@@ -204,6 +204,7 @@ bool Avion::PeutLacherObus() const
 AirAttack::AirAttack() : Weapon(WEAPON_AIR_ATTACK, "air_attack")
 {  
   m_name = _("Air attack");
+  can_be_used_on_closed_map = false;
 
   extra_params = new AirAttackConfig();
 }
