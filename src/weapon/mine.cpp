@@ -123,7 +123,7 @@ void ObjMine::Reset()
     ok &= !IsGhost() && IsInVacuum(0,0);
     if (!ok) continue;
 
-    POUR_TOUS_VERS_VIVANTS(equipe, ver)
+    FOR_ALL_LIVING_CHARACTERS(equipe, ver)
     {
       if (MeterDistance (GetCenter(), ver->GetCenter()) 
 	   < mine.cfg().detection_range)
@@ -222,7 +222,7 @@ void ObjMine::DesactiveDetection()
 
 void ObjMine::Detection()
 {
-  POUR_TOUS_VERS_VIVANTS(equipe, ver)
+  FOR_ALL_LIVING_CHARACTERS(equipe, ver)
   { 
     if (MeterDistance (GetCenter(), ver->GetCenter())
 	 < mine.cfg().detection_range && !animation)

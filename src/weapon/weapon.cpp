@@ -121,7 +121,7 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
    test.x += dx;
    test.y += dy;
    
-  POUR_TOUS_VERS_VIVANTS(equipe,ver)
+  FOR_ALL_LIVING_CHARACTERS(equipe,ver)
   if (&(*ver) != &ActiveCharacter())
   {
     if (ver->GetTestRect().Intersect( test ))

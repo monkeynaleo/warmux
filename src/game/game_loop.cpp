@@ -283,8 +283,8 @@ void GameLoop::Refresh()
   camera.Refresh();
 
   // Mise à jeu des entrées (clavier / mouse)
-   // Poll and treat events
-   SDL_Event event;
+  // Poll and treat events
+  SDL_Event event;
    
    while( SDL_PollEvent( &event) ) 
      {      
@@ -332,7 +332,7 @@ void GameLoop::Refresh()
     }
    
     action_handler.ExecActions();
-    POUR_TOUS_VERS(equipe,ver) ver -> Refresh();
+    FOR_ALL_CHARACTERS(equipe,ver) ver -> Refresh();
 
     // Recalcule l'energie des equipes
     FOR_EACH_TEAM(team)
@@ -365,7 +365,7 @@ void GameLoop::Draw ()
 
   // Draw the characters 
   StatStart("GameDraw:characters");
-  POUR_TOUS_VERS(equipe,ver) {
+  FOR_ALL_CHARACTERS(equipe,ver) {
     if (&(*ver) != &ActiveCharacter()) {
       ver -> Draw();
     }
@@ -537,7 +537,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
      character_already_chosen = false;
 
     // Prépare un tour pour un ver
-    POUR_TOUS_VERS_VIVANTS(equipe,ver) ver -> PrepareTour();
+    FOR_ALL_LIVING_CHARACTERS(equipe,ver) ver -> PrepareTour();
 
     // Changement d'équipe
     assert (!game.IsGameFinished());    
@@ -590,7 +590,7 @@ PhysicalObj* GameLoop::GetMovingObject()
 {
   if (!ActiveCharacter().IsReady()) return &ActiveCharacter();
 
-  POUR_TOUS_VERS(equipe,ver)
+  FOR_ALL_CHARACTERS(equipe,ver)
   {
     if (!ver -> IsReady() && !ver -> IsGhost())
     {

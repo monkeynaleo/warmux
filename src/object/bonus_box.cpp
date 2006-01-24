@@ -163,7 +163,7 @@ void Caisse::Reset()
     }
 
     // Vérifie que le caisse ne touche aucun ver au début
-    POUR_TOUS_VERS_VIVANTS(equipe, ver)
+    FOR_ALL_LIVING_CHARACTERS(equipe, ver)
     {
       if (ObjTouche(*this, *ver)) 
       {
@@ -331,7 +331,7 @@ void Caisse::Refresh()
   if (!affiche) return;
 
   // Si un ver touche la caisse, on la réinitialise
-  POUR_TOUS_VERS_VIVANTS(equipe, ver)
+  FOR_ALL_LIVING_CHARACTERS(equipe, ver)
   {
     if (ObjTouche(*this, *ver))
     {
