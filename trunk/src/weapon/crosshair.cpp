@@ -88,12 +88,6 @@ void CrossHair::Draw()
   ActiveCharacter().GetHandPosition(x,y);
   x += calcul_dx*ActiveCharacter().GetDirection();
   y += calcul_dy;
-#ifdef CL
-  x -= image.get_width()/2;
-  y -= image.get_height()/2;
-
-  image.draw(x, y);
-#else
  
   x -= image->w/2;
   y -= image->h/2;
@@ -101,7 +95,6 @@ void CrossHair::Draw()
   SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
 
   world.ToRedrawOnMap(Rectanglei(x, y, image->w, image->h));
-#endif
 }
 
 //-----------------------------------------------------------------------------

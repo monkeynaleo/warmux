@@ -90,28 +90,17 @@ void HollyGrenade::Tire (double force)
 
 void HollyGrenade::Init()
 {
-#ifdef CL
-  image = CL_Sprite("holly_grenade_sprite", &graphisme.weapons);
-  SetSize (image.get_width(), image.get_height());
-#else
   image = resource_manager.LoadSprite( weapons_res_profile, "holly_grenade_sprite");
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight());
-#endif
 
   SetMass (holly_grenade_launcher.cfg().mass);
   SetAirResistFactor(holly_grenade_launcher.cfg().air_resist_factor);
   m_rebound_factor = double(holly_grenade_launcher.cfg().rebound_factor);
 
   // Fixe le rectangle de test
-#ifdef CL
-  int dx = image.get_width()/2-1;
-  int dy = image.get_height()/2-1;
-#else
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
-#endif
-
   SetTestRect (dx, dx, dy, dy);
 
 #ifdef MSG_DBG
@@ -149,11 +138,7 @@ void HollyGrenade::Refresh()
 
   // Sing Alleluia ;-)
   if (tmp > (1000 * holly_grenade_launcher.cfg().timeout - 2000) && !sing_alleluia) {
-#ifdef CL
-    jukebox.Play("weapon/alleluia") ;
-#else
     jukebox.Play("share","weapon/alleluia") ;
-#endif
     sing_alleluia = true;
   }
   
@@ -223,12 +208,7 @@ bool HollyGrenadeLauncher::p_Shoot ()
   camera.ChangeObjSuivi (&grenade, true, false);
   lst_objets.AjouteObjet (&grenade, true);
 
-#ifdef CL
-  jukebox.PlayProfile(ActiveTeam().GetSoundProfile(), "fire");
-#else
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-#endif
-
   return true;
 }
 
@@ -248,11 +228,7 @@ void HollyGrenadeLauncher::Explosion()
   if (grenade.IsGhost()) return;
 
   // Applique les degats et le souffle aux vers
-#ifdef CL
-  CL_Point pos = grenade.GetCenter();
-#else
   Point2i pos = grenade.GetCenter();
-#endif 
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
@@ -271,11 +247,7 @@ void HollyGrenadeLauncher::Refresh()
 void HollyGrenadeLauncher::p_Init()
 {
   grenade.Init();
-#ifdef CL
-  impact = CL_Surface("holly_grenade_impact", &graphisme.weapons);
-#else
   impact = resource_manager.LoadImage( weapons_res_profile, "holly_grenade_impact");
-#endif
 }
 
 //-----------------------------------------------------------------------------

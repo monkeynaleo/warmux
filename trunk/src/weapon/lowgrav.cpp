@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Jet Pack :-)
+ * Low gravity weapon
  *****************************************************************************/
 
 #include "../weapon/lowgrav.h"
@@ -57,11 +57,7 @@ LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav")
 void LowGrav::p_Init()
 {
   m_name = _("lowgrav");
-#ifdef CL
-  icone = CL_Surface("lowgrav_ico", &graphisme.weapons);
-#else
-   icone = resource_manager.LoadImage(weapons_res_profile,"lowgrav_ico");
-#endif
+  icone = resource_manager.LoadImage(weapons_res_profile,"lowgrav_ico");
 }
 
 //-----------------------------------------------------------------------------

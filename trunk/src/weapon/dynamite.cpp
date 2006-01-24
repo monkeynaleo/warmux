@@ -30,11 +30,8 @@
 #include "../game/game_loop.h"
 #include "../weapon/weapon_tools.h"
 #include "../object/objects_list.h"
-#ifdef CL
-#else
 #include "../tool/resource_manager.h"
 #include "../include/app.h"
-#endif
 
 #ifdef __MINGW32__
 #undef LoadImage

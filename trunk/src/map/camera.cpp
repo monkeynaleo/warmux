@@ -278,21 +278,12 @@ uint Camera::GetHeight() const { return video.GetHeight(); }
 
 bool Camera::EstVisible (const PhysicalObj &obj)
 {
-#ifdef TODO_KEYBOARD // ??? 
-  CL_Rect rect;
-  rect.left = GetX();
-  rect.top = GetY();
-  rect.right = rect.left + GetWidth();
-  rect.bottom = rect.top + GetHeight();
-  return RectTouche (rect, obj.GetRect());
-#else
    Rectanglei rect;
    rect.x = GetX();
    rect.y = GetY();
    rect.w = GetWidth();
    rect.h = GetHeight();
    return rect.Intersect (obj.GetRect());
-#endif
 }
 
 //-----------------------------------------------------------------------------
