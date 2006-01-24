@@ -599,7 +599,7 @@ PhysicalObj* GameLoop::GetMovingObject()
     }
   }
 
-  POUR_CHAQUE_OBJET(objet)
+  FOR_EACH_OBJECT(objet)
   {
     if (!objet -> ptr -> IsReady())
     {

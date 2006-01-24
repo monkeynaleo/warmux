@@ -123,7 +123,7 @@ void AppliqueExplosion (const Point2i &explosion,
   }
 
   // Apply the blast on physical objects.
-  POUR_CHAQUE_OBJET(obj) if (obj -> ptr -> GetObjectType() == objCLASSIC)
+  FOR_EACH_OBJECT(obj) if (obj -> ptr -> GetObjectType() == objCLASSIC)
   { 
     // Is this the object we do not want to manage ?
     if ((obj_exclu != NULL) && (obj -> ptr == obj_exclu)) continue;
