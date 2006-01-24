@@ -22,6 +22,7 @@
 #include "game_loop.h"
 //-----------------------------------------------------------------------------
 #include <SDL.h>
+#include <SDL_image.h>
 #include <sstream>
 #include <iostream>
 #include "config.h"
@@ -218,6 +219,12 @@ void InitGameData()
 
 void InitGame ()
 {
+  // Display loading screen
+  SDL_Surface* loading_image=IMG_Load( (config.data_dir+"menu/img/loading.png").c_str());
+  SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
+  SDL_Flip(app.sdlwindow);
+  SDL_FreeSurface(loading_image);
+
   game.MessageLoading();
 
   // Init all needed data
