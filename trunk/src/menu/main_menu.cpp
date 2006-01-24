@@ -48,7 +48,7 @@ using namespace std;
 //-----------------------------------------------------------------------------
 
 // Position du texte de la version
-const int VERSION_DY = -15;
+const int VERSION_DY = -40;
 
 const int DEFAULT_SCREEN_HEIGHT = 768 ;
 
@@ -63,7 +63,8 @@ Main_Menu::~Main_Menu()
   delete infos;
   delete quit;
 
-  delete text;
+  delete version_text;
+  delete website_text;
 }
 
 //-----------------------------------------------------------------------------
@@ -141,7 +142,10 @@ Main_Menu::Main_Menu()
   resource_manager.UnLoadXMLProfile( res);
 
   std::string s("Version "+VERSION);
-  text = new Text(s, white_color, &global().big_font());
+  version_text = new Text(s, green_color, &global().normal_font(), false);
+
+  std::string s2(WEB_SITE);
+  website_text = new Text(s2, green_color, &global().normal_font(), false);
 }
 
 //-----------------------------------------------------------------------------
@@ -199,8 +203,10 @@ menu_item Main_Menu::Run ()
    infos->Draw(x,y);
    quit->Draw(x,y);
 
-   text->DrawCenter( app.sdlwindow->w/2,
-		     app.sdlwindow->h+VERSION_DY);
+   version_text->DrawCenter( app.sdlwindow->w/2,
+			      app.sdlwindow->h+VERSION_DY);
+   website_text->DrawCenter( app.sdlwindow->w/2,
+			     app.sdlwindow->h+VERSION_DY/2);
    
    SDL_Flip(app.sdlwindow);
   }
