@@ -257,7 +257,7 @@ void ListeTerrain::Init()
 
   std::cout << "o " << _("Load maps:");
 
-  std::string dirname = Wormux::config.data_dir+"map"+PATH_SEPARATOR;
+  std::string dirname = Wormux::config.data_dir+ CONCAT("map", "");
 #if !defined(WIN32) || defined(__MINGW32__)
   DIR *dir = opendir(dirname.c_str());
   struct dirent *file;
