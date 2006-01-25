@@ -143,7 +143,7 @@ void TeamsList::LoadList()
 
   // Load personal teams
 #if !defined(WIN32) || defined(__MINGW32__)
-  dirname = Wormux::config.GetWormuxPersonalDir()+"team/";
+  dirname = Wormux::config.GetWormuxPersonalDir()+CONCAT_DIR("team","");
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL) LoadOneTeam (dirname, file->d_name);

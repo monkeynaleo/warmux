@@ -31,9 +31,12 @@
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)
 #define PATH_SEPARATOR "\\"
+#define XXXCONCAT_DIR(a,b) a "\\" b
 #else
 #define PATH_SEPARATOR "/"
+#define XXXCONCAT_DIR(a,b) a "/" b
 #endif
+#define CONCAT_DIR(a,b) XXXCONCAT_DIR(a,b)
 
 #ifdef __MINGW32__
 #undef LoadImage
