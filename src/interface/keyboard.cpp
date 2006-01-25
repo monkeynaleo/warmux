@@ -16,33 +16,34 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Keyboard managment. Use ClanLIB event.
+ * Keyboard managment.
  *****************************************************************************/
 
 #include "keyboard.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
-#include "../team/macro.h"
-#include "../game/time.h"
-#include "../include/action_handler.h"
-#include "../weapon/weapon.h"
-#include "../weapon/weapons_list.h"
+#include <iostream>
+#include "cursor.h"
 #include "game_msg.h"
-#include "../map/camera.h"
 #include "interface.h"
-#include "../team/move.h"
-#include "../tool/i18n.h"
-#include "../tool/math_tools.h"
+#include "../game/config.h"
 #include "../game/game.h"
 #include "../game/game_loop.h"
 #include "../game/game_mode.h"
-#include "../sound/jukebox.h"
-#include "../game/config.h"
+#include "../game/time.h"
 #include "../graphic/video.h"
-#include "cursor.h"
+#include "../include/action_handler.h"
 #include "../include/constant.h"
 #include "../map/camera.h"
-#include <iostream>
+#include "../team/macro.h"
+#include "../team/move.h"
+#include "../tool/i18n.h"
+#include "../tool/math_tools.h"
+#include "../sound/jukebox.h"
+#include "../map/camera.h"
+#include "../weapon/weapon.h"
+#include "../weapon/weapons_list.h"
+
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 

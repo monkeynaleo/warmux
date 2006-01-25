@@ -22,10 +22,10 @@
 #ifndef ACTION_HANDLER_H
 #define ACTION_HANDLER_H
 //-----------------------------------------------------------------------------
-#include "base.h"
-#include "action.h"
 #include <map>
 #include <list>
+#include "action.h"
+#include "base.h"
 //-----------------------------------------------------------------------------
 
 class ActionHandler

@@ -22,18 +22,17 @@
 #include "ground.h"
 //-----------------------------------------------------------------------------
 #include <iostream>
+#include <SDL_video.h>
 #include <SDL_gfxPrimitives.h>
+#include <limits.h>
+#include "camera.h"
 #include "map.h"
 #include "maps_list.h"
-#include "../map/camera.h"
 #include "../graphic/video.h"
-#include <limits.h>
-
-#include "../include/constant.h"
 #include "../include/app.h"
+#include "../include/constant.h"
 #include "../tool/i18n.h"
 #include "../tool/resource_manager.h"
-#include <SDL_video.h>
 
 #ifdef DEBUG
 //#  define DESSINE_BORDURE_CANVAS

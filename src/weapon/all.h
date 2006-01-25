@@ -22,7 +22,6 @@
 #ifndef ALL_WEAPONS_H
 #define ALL_WEAPONS_H
 //-----------------------------------------------------------------------------
-#include "mine.h"
 #include "airhammer.h"
 #include "air_attack.h"
 #include "auto_bazooka.h"
@@ -36,11 +35,12 @@
 #include "holly_grenade.h"
 #include "jetpack.h"
 #include "lowgrav.h"
+#include "mine.h"
+#include "ninja_rope.h"
+#include "parachute.h"
 #include "skip_turn.h"
 #include "suicide.h"
-#include "ninja_rope.h"
 #include "supertux.h"
-#include "parachute.h"
 #include "teleportation.h"
 #include "uzi.h"
 //-----------------------------------------------------------------------------

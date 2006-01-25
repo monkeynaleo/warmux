@@ -19,13 +19,13 @@
  * Suicide.
  *****************************************************************************/
 
-#include "../weapon/suicide.h"
+#include "suicide.h"
 //-----------------------------------------------------------------------------
-#include "../tool/i18n.h"
-#include "../team/teams_list.h"
-#include "../game/game_loop.h"
-#include "weapon_tools.h"
 #include <iostream>
+#include "weapon_tools.h"
+#include "../game/game_loop.h"
+#include "../team/teams_list.h"
+#include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
 namespace Wormux 
 {

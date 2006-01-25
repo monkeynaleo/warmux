@@ -22,16 +22,16 @@
 #include "map.h"
 //-----------------------------------------------------------------------------
 #include <iostream>
-#include "../game/config.h"
-#include "../include/constant.h"
-#include "../object/bonus_box.h"
-#include "../tool/i18n.h"
-#include "../game/time.h"
-#include "wind.h"
 #include "camera.h"
 #include "maps_list.h"
-#include "../tool/stats.h"
+#include "wind.h"
+#include "../game/config.h"
+#include "../game/time.h"
+#include "../include/constant.h"
 #include "../include/global.h"
+#include "../object/bonus_box.h"
+#include "../tool/i18n.h"
+#include "../tool/stats.h"
 
 using namespace std;
 using namespace Wormux;

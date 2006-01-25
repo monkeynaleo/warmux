@@ -23,13 +23,13 @@
 
 #include "game_mode.h"
 //-----------------------------------------------------------------------------
-#include "../tool/i18n.h"
+#include <iostream>
 #include "config.h"
-#include "../tool/file_tools.h"
 #include "game_loop.h"
+#include "../tool/file_tools.h"
+#include "../tool/i18n.h"
 #include "../weapon/all.h"
 #include "../weapon/weapons_list.h"
-#include <iostream>
 //-----------------------------------------------------------------------------
 namespace Wormux {
 GameMode game_mode;

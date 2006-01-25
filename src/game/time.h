@@ -22,8 +22,8 @@
 #ifndef TIME_H
 #define TIME_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
 #include <string>
+#include "../include/base.h"
 
 namespace Wormux
 {

@@ -22,10 +22,10 @@
 #ifndef ACTION_H
 #define ACTION_H
 //-----------------------------------------------------------------------------
+#include <iostream>
+#include <string>
 #include "base.h"
 #include "enum.h"
-#include <string>
-#include <iostream>
 //-----------------------------------------------------------------------------
 
 typedef std::ostream CL_OutputSource;

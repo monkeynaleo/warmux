@@ -36,6 +36,10 @@
 #include "../graphic/video.h"
 #include "../graphic/sprite.h"
 #include "../gui/progress_bar.h"
+#include "../include/app.h"
+#include "../include/action_handler.h"
+#include "../include/global.h"
+#include "../interface/interface.h"
 #include "../map/camera.h"
 #include "../object/objects_list.h"
 #include "../team/macro.h"
@@ -45,10 +49,6 @@
 #include "../tool/Point.h"
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
-#include "../include/app.h"
-#include "../include/action_handler.h"
-#include "../include/global.h"
-#include "../interface/interface.h"
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG

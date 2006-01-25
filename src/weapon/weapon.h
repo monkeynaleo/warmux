@@ -27,16 +27,16 @@
 #define WEAPON_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
-#include "../team/character.h"
+#include <string>
+#include "weapon_cfg.h"
 #include "../graphic/sprite.h"
+#include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../include/enum.h"
 #include "../object/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
-#include "../gui/progress_bar.h"
-#include "weapon_cfg.h"
-#include <string>
+#include "../team/character.h"
 //-----------------------------------------------------------------------------
 class Character;
 

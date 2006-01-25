@@ -23,13 +23,13 @@
 #define WIND_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
+#include <vector>
+#include "../game/config.h"
 #include "../graphic/sprite.h"
+#include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../tool/xml_document.h"
-#include "../game/config.h"
-#include "../gui/progress_bar.h"
-#include <vector>
 
 //-----------------------------------------------------------------------------
 namespace Wormux {

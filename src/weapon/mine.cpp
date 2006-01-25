@@ -20,23 +20,23 @@
  * aleatoire sur le terrain. Au contact d'un ver, ca fait BOOM!!! ;)
  *****************************************************************************/
 
-#include "../weapon/mine.h"
+#include "mine.h"
 //-----------------------------------------------------------------------------
-#include "../game/config.h"
-#include "../include/constant.h"
-#include "../map/map.h"
-#include "../team/macro.h"
-#include "../game/time.h"
-#include "../interface/game_msg.h"
-#include "../tool/i18n.h"
-#include "../object/objects_list.h"
-#include "../game/game_loop.h"
-#include "../tool/random.h"
-#include "../weapon/weapon_tools.h"
-#include "../graphic/sprite.h"
-#include "../tool/resource_manager.h"
-#include "../include/app.h"
 #include <sstream>
+#include "weapon_tools.h"
+#include "../game/config.h"
+#include "../game/game_loop.h"
+#include "../game/time.h"
+#include "../graphic/sprite.h"
+#include "../include/app.h"
+#include "../include/constant.h"
+#include "../interface/game_msg.h"
+#include "../map/map.h"
+#include "../object/objects_list.h"
+#include "../team/macro.h"
+#include "../tool/i18n.h"
+#include "../tool/random.h"
+#include "../tool/resource_manager.h"
 
 #ifdef __MINGW32__
 #undef LoadImage

@@ -21,23 +21,23 @@
 
 #include "interface.h"
 //-----------------------------------------------------------------------------
+#include <iostream>
+#include <SDL.h>
 #include <sstream>
-#include "../map/camera.h"
-#include "../map/map.h"
 #include "../game/game_loop.h"
 #include "../game/game_mode.h"
+#include "../game/time.h"
+#include "../graphic/colors.h"
+#include "../graphic/video.h"
+#include "../include/app.h"
+#include "../include/global.h"
+#include "../map/camera.h"
+#include "../map/map.h"
 #include "../team/teams_list.h"
 #include "../tool/string_tools.h"
-#include "../weapon/weapons_list.h"
-#include "../graphic/colors.h"
 #include "../tool/i18n.h"
-#include "../graphic/video.h"
-#include <SDL.h>
 #include "../tool/resource_manager.h"
-#include "../include/app.h"
-#include "../game/time.h"
-#include <iostream>
-#include "../include/global.h"
+#include "../weapon/weapons_list.h"
 
 //-----------------------------------------------------------------------------
 WeaponStrengthBar weapon_strength_bar;

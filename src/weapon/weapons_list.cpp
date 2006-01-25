@@ -19,17 +19,17 @@
  * Refresh des armes.
  *****************************************************************************/
 
-#include "../weapon/weapons_list.h"
+#include "weapons_list.h"
 //-----------------------------------------------------------------------------
-#include "../team/macro.h"
-#include "../game/time.h"
+#include <algorithm>
+#include "all.h"
+#include "weapon_tools.h"
 #include "../game/game_loop.h"
+#include "../game/time.h"
+#include "../interface/interface.h"
 #include "../object/objects_list.h"
 #include "../map/camera.h"
-#include "../interface/interface.h"
-#include "../weapon/weapon_tools.h"
-#include "all.h"
-#include <algorithm>
+#include "../team/macro.h"
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 WeaponsList weapons_list;

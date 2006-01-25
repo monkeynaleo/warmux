@@ -25,12 +25,12 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_endian.h>
-#include "../tool/Point.h"
+#include "../game/config.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
 #include "../map/camera.h"
-#include "../game/config.h"
 #include "../tool/error.h"
+#include "../tool/Point.h"
 
 using namespace Wormux;
 

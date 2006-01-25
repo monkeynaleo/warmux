@@ -19,16 +19,16 @@
  * Low gravity weapon
  *****************************************************************************/
 
-#include "../weapon/lowgrav.h"
+#include "lowgrav.h"
 //-----------------------------------------------------------------------------
-#include "../tool/i18n.h"
-#include "../team/teams_list.h"
-#include "../sound/jukebox.h"
+#include "weapon_tools.h"
 #include "../game/game.h"
 #include "../game/game_loop.h"
-#include "../interface/game_msg.h"
 #include "../object/physical_obj.h"
-#include "../weapon/weapon_tools.h"
+#include "../sound/jukebox.h"
+#include "../interface/game_msg.h"
+#include "../team/teams_list.h"
+#include "../tool/i18n.h"
 
 //-----------------------------------------------------------------------------
 namespace Wormux 

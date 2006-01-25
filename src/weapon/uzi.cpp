@@ -19,18 +19,17 @@
  * Uzi !
  *****************************************************************************/
 
-#include "../weapon/uzi.h"
+#include "uzi.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
+#include "weapon_tools.h"
 #include "../game/game_loop.h"
-#include "../map/map.h"
 #include "../game/time.h"
+#include "../interface/game_msg.h"
+#include "../map/map.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-#include "../interface/game_msg.h"
-#include "../interface/game_msg.h"
-#include "../weapon/weapon_tools.h"
 using namespace std;
 //-----------------------------------------------------------------------------
 namespace Wormux {

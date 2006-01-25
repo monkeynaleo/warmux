@@ -19,24 +19,24 @@
  * Weapon gnu : a gnu jump in (more or less) random directions and explodes
  *****************************************************************************/
 
-#include "../weapon/gnu.h"
+#include "gnu.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
+#include "weapon_tools.h"
 #include "../game/config.h"
-#include "../game/time.h"
-#include "../team/teams_list.h"
-#include "../interface/interface.h"
-#include "../graphic/video.h"
-#include "../tool/math_tools.h"
 #include "../game/game_loop.h"
-#include "../tool/i18n.h"
-#include "../map/camera.h"
-#include "../weapon/weapon_tools.h"
+#include "../game/time.h"
+#include "../graphic/video.h"
+#include "../include/global.h"
+#include "../interface/interface.h"
 #include "../interface/game_msg.h"
+#include "../map/camera.h"
 #include "../object/objects_list.h"
 #include "../sound/jukebox.h"
+#include "../team/teams_list.h"
+#include "../tool/math_tools.h"
+#include "../tool/i18n.h"
 #include "../tool/random.h"
-#include "../include/global.h"
 //-----------------------------------------------------------------------------
 GnuLauncher gnu_launcher;
 //-----------------------------------------------------------------------------
