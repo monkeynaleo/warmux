@@ -142,9 +142,12 @@ bool GameMode::Load(const std::string &mode)
 			 + mode + std::string(".xml");
     fullname = config.GetWormuxPersonalDir() + filename;
 
-	if (!FichierExiste(fullname)) fullname = config.data_dir+filename;
-    if (!doc.Charge(fullname)) return false;
-    if (!LoadXml (doc.racine())) return false;
+    if( !IsFileExist(fullname) )
+      fullname = config.data_dir+filename;
+    if( !doc.Charge(fullname) )
+      return false;
+    if( !LoadXml (doc.racine()) )
+      return false;
   }
   catch (const xmlpp::exception &e)
   {

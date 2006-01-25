@@ -273,7 +273,7 @@ void LoadOneSkin (const std::string &dir, const std::string &file)
 #endif
 
   // The config file doesn't exist ?
-  if (!FichierExiste(fullname+PATH_SEPARATOR+NOMFICH_CONFIG)) return;
+  if (!IsFileExist(fullname+PATH_SEPARATOR+NOMFICH_CONFIG)) return;
 
   // Try to load the skin
   Skin skin;

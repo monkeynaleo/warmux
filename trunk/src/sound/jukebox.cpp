@@ -174,11 +174,12 @@ void JukeBox::LoadXML(const std::string& profile)
   // Load the XML
   std::string folder = config.data_dir + "sound"+ PATH_SEPARATOR + profile + PATH_SEPARATOR;
   std::string xml_filename = folder + "profile.xml";
-  if (!FichierExiste(xml_filename)) {
+  if( !IsFileExist(xml_filename) ){
     std::cerr << "[Sound] Error : file " << xml_filename << " not found" << std::endl;
     return;
   }
-  if (!doc.Charge (xml_filename)) return;
+  if( !doc.Charge (xml_filename) )
+    return;
 
   xmlpp::Node::NodeList nodes = doc.racine() -> get_children("sound");
   xmlpp::Node::NodeList::iterator 
@@ -200,7 +201,7 @@ void JukeBox::LoadXML(const std::string& profile)
 
       // Charge le son
       std::string sample_filename = folder + file;
-      if ( !FichierExiste(sample_filename) ) {
+      if( !IsFileExist(sample_filename) ){
 	std::cerr << "Sound error: File " << sample_filename.c_str() 
 		  << " does not exist !" << std::endl; 
 	continue;

@@ -20,57 +20,53 @@
  *****************************************************************************/
 
 #include "../tool/file_tools.h"
-//-----------------------------------------------------------------------------
 #include <fstream>
 #include <stdlib.h> // getenv
 #include "i18n.h"
 using namespace std;
-//-----------------------------------------------------------------------------
 
-bool FichierExiste(const std::string &nom)
+// Test if a file exist
+bool IsFileExist(const std::string &name)
 {
-  std::ifstream f(nom.c_str());
-  bool existe = f;
+  std::ifstream f(name.c_str());
+  bool exist = f;
   f.close();
-  return existe;
+  return exist;
 }
 
-//-----------------------------------------------------------------------------
-
-// Extension d'un nom de fichier
-std::string ExtensionFichier (const std::string &nom)
+// Find the extension part of a filename
+std::string FileExtension (const std::string &name)
 {
-  int pos = nom.rfind('.');
+  int pos = name.rfind('.');
   if (pos != -1)
-    return nom.substr(pos+1);
+    return name.substr(pos+1);
   else
     return "";
 }
 
-//-----------------------------------------------------------------------------
-
-// Lit le répertoire $HOME de l'utilisateur
+// Return the path to the home directory of the user
 #ifndef WIN32
-std::string RepertoireHome ()
+std::string GetHome()
 {
   char *txt = getenv("HOME");
+  
   if (txt == NULL) 
-  {
     Error (_("HOME directory (environment variable $HOME) could not be found!"));
-  }
+  
   return txt;
 }
 #else
-std::string RepertoireHome () {return "";}
+std::string GetHome (){
+  return "";
+}
 #endif
-//-----------------------------------------------------------------------------
 
-// Traduit un répertoire en nom de fichier classique
-// Exemple : ~ est remplacé pa $HOME
-std::string TraduitRepertoire (const std::string &repertoire)
+// Replace ~ by its true name
+std::string TranslateDirectory(const std::string &directory)
 {
-  std::string home = RepertoireHome();
-  std::string txt = repertoire;
+  std::string home = GetHome();
+  std::string txt = directory;
+  
   for (int pos = txt.length()-1;
        (pos = txt.rfind ('~', pos)) != -1;
        --pos)
@@ -79,5 +75,3 @@ std::string TraduitRepertoire (const std::string &repertoire)
   }
   return txt;
 }
-
-//-----------------------------------------------------------------------------

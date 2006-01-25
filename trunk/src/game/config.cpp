@@ -21,25 +21,24 @@
  * peut être modifiée avec le fichier de configuration.
  *****************************************************************************/
 
-//-----------------------------------------------------------------------------
-#include "../team/teams_list.h"
-#include "../graphic/video.h"
-#include "../sound/jukebox.h"
-#include "../team/skin.h"
-#include "../map/maps_list.h"
-#include "../weapon/weapons_list.h"
-#include "../include/action.h"
-#include "../interface/keyboard.h"
+#include "config.h"
+
 #include <sstream>
 #include <iostream>
 #include <sys/stat.h>
-#include "../include/constant.h"
 #include "game_mode.h"
+#include "../graphic/video.h"
+#include "../include/action.h"
+#include "../interface/keyboard.h"
+#include "../include/constant.h"
+#include "../map/maps_list.h"
+#include "../sound/jukebox.h"
+#include "../team/teams_list.h"
+#include "../team/skin.h"
 #include "../tool/file_tools.h"
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
-#include "config.h"
+#include "../weapon/weapons_list.h"
 namespace Wormux 
 {
 Config config;
@@ -51,7 +50,6 @@ const std::string REP_CONFIG="";
 #endif
 
 const std::string NOMFICH="config.xml";
-//-----------------------------------------------------------------------------
 
 Config::Config()
 {
@@ -83,22 +81,20 @@ Config::Config()
   tmp.sound.frequency = 44100;
 
 #ifndef WIN32
-  personal_dir = RepertoireHome()+"/.wormux/";
+  personal_dir = GetHome()+"/.wormux/";
 #else
   personal_dir ="";
 #endif
 }
 
-//-----------------------------------------------------------------------------
-
 bool Config::Charge()
 {
   bool result = ChargeVraiment();
   std::string dir;
-  dir = TraduitRepertoire(locale_dir);
+  dir = TranslateDirectory(locale_dir);
   I18N_SetDir (dir);
 
-  dir = TraduitRepertoire(data_dir);
+  dir = TranslateDirectory(data_dir);
   resource_manager.AddDataPath(dir);
   return result;
 }
@@ -129,8 +125,6 @@ printf("charge %s",m_nomfich.c_str());
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 // Lit les données sur une équipe
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
@@ -143,7 +137,6 @@ bool Config::ChargeXml(xmlpp::Element *xml)
       std::cerr << "! " << _("Warning: Don't load configuration (old version of Wormux).") << std::endl;
       return false;
   }
-
 
   //=== Directories ===
   LitDocXml::LitString  (xml, "data_dir", data_dir);
@@ -207,8 +200,6 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void Config::SetKeyboardConfig()
 {
 	clavier.SetKeyAction(SDLK_LEFT,		ACTION_MOVE_LEFT);		
@@ -233,8 +224,6 @@ void Config::SetKeyboardConfig()
 	clavier.SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
 	clavier.SetKeyAction(SDLK_c, ACTION_CENTER);
 }
-
-//-----------------------------------------------------------------------------
 
 void Config::Applique()
 {
@@ -264,14 +253,12 @@ void Config::Applique()
     lst_terrain.ChangeTerrain (0);
 }
 
-//-----------------------------------------------------------------------------
-
 bool Config::Sauve()
 {
   // Le répertoire de config n'existe pas ? le créer
-  std::string rep = TraduitRepertoire(REP_CONFIG);
+  std::string rep = TranslateDirectory(REP_CONFIG);
 #ifndef WIN32
-  if (!FichierExiste (rep))
+  if (!IsFileExist (rep))
   {
     if (mkdir (rep.c_str(), 0750) != 0)
     {
@@ -289,8 +276,6 @@ bool Config::Sauve()
   }
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 bool Config::SauveXml()
 {
@@ -348,9 +333,8 @@ bool Config::SauveXml()
   return doc.Sauve();
 }
 
-//-----------------------------------------------------------------------------
+std::string Config::GetWormuxPersonalDir() const {
+  return personal_dir;
+}
 
-std::string Config::GetWormuxPersonalDir() const { return personal_dir; }
-
-//-----------------------------------------------------------------------------
 }
