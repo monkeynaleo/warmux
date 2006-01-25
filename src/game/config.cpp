@@ -63,13 +63,13 @@ Config::Config()
    
   // directories
 #ifndef WIN32
-  data_dir = INSTALL_DATADIR PATH_SEPARATOR;
-  locale_dir = INSTALL_LOCALEDIR PATH_SEPARATOR;
+  data_dir = CONCAT_DIR(INSTALL_DATADIR,"");
+  locale_dir = CONCAT_DIR(INSTALL_LOCALEDIR,"");
 #else
   data_dir = "data\\";
   locale_dir = "locale\\";
 #endif
-  ttf_filename = data_dir+"font" + PATH_SEPARATOR + "DejaVuSans.ttf";
+  ttf_filename = data_dir + CONCAT_DIR("font", "DejaVuSans.ttf");
 
   // video
   tmp.video.width = 800;
@@ -142,7 +142,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   LitDocXml::LitString  (xml, "data_dir", data_dir);
   LitDocXml::LitString  (xml, "locale_dir", locale_dir);
   if(!LitDocXml::LitString  (xml, "ttf_filename", ttf_filename))
-    ttf_filename = data_dir+"font" + PATH_SEPARATOR + "DejaVuSans.ttf";
+    ttf_filename = data_dir + CONCAT_DIR("font", "DejaVuSans.ttf");
  
   //=== Map ===
   LitDocXml::LitString  (xml, "map", tmp.map_name);

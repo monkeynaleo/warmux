@@ -169,7 +169,8 @@ void AppWormux::DisplayLoadingPicture()
   std::string txt_version = _("Version") + std::string(" ") + VERSION;
 
   // TODO->use ressource handler
-  SDL_Surface* loading_image=IMG_Load( (config.data_dir+"menu/img/loading.png").c_str());
+  std::string filename = config.data_dir + CONCAT_DIR("menu", CONCAT_DIR("img", "loading.png"));
+  SDL_Surface* loading_image=IMG_Load(filename.c_str());
 
   Wormux::global_time.Reset();
 

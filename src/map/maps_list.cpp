@@ -291,7 +291,7 @@ void ListeTerrain::Init()
   
 #if !defined(WIN32) || defined(__MINGW32__)
   // Load personal maps
-  dirname = Wormux::config.GetWormuxPersonalDir()+"map/";
+  dirname = Wormux::config.GetWormuxPersonalDir() + CONCAT_DIR("map","");
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL) 
