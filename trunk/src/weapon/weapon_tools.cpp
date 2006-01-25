@@ -19,7 +19,7 @@
  * Utilitaires pour les armes : applique une explosion en un point.
  *****************************************************************************/
 
-#include "../weapon/weapon_tools.h"
+#include "weapon_tools.h"
 //-----------------------------------------------------------------------------
 #include "../graphic/video.h"
 #include "../interface/interface.h"

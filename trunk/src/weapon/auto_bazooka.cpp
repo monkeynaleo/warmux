@@ -19,26 +19,24 @@
  * Arme bazooka : projette une roquette avec un angle et une force donnée.
  *****************************************************************************/
 
-#include "../weapon/auto_bazooka.h"
+#include "auto_bazooka.h"
 //-----------------------------------------------------------------------------
-#include "../game/time.h"
-#include "../interface/mouse.h"
-#include "../map/map.h"
-#include "../team/teams_list.h"
-#include "../interface/interface.h"
-#include "../graphic/video.h"
-#include "../tool/math_tools.h"
+#include "weapon_tools.h"
 #include "../game/game_loop.h"
-#include "../tool/i18n.h"
-#include "../map/camera.h"
-#include "../weapon/weapon_tools.h"
-#include "../interface/game_msg.h"
-#include "../object/objects_list.h"
 #include "../game/game_mode.h"
-#include "../map/wind.h"
+#include "../game/time.h"
+#include "../graphic/video.h"
 #include "../include/app.h"
+#include "../interface/game_msg.h"
+#include "../interface/mouse.h"
+#include "../interface/interface.h"
 #include "../map/camera.h"
-
+#include "../map/map.h"
+#include "../map/wind.h"
+#include "../team/teams_list.h"
+#include "../tool/math_tools.h"
+#include "../tool/i18n.h"
+#include "../object/objects_list.h"
 
 #ifdef __MINGW32__
 #undef LoadImage

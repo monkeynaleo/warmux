@@ -23,11 +23,11 @@
 #define LST_TERRAINS_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
-#include "../include/base.h"
 #include <string>
 #include <map>
+#include "../include/base.h"
 #include "../tool/resource_manager.h"
-# include "../tool/xml_document.h"
+#include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
 class InfoTerrain

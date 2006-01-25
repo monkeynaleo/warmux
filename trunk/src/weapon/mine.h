@@ -24,11 +24,11 @@
 #define MINE_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
+#include "weapon.h"
 #include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../team/character.h"
-#include "weapon.h"
 
 //-----------------------------------------------------------------------------
 namespace Wormux {

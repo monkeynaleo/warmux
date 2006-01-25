@@ -22,14 +22,15 @@
 #include "water.h"
 //-----------------------------------------------------------------------------
 #include <SDL.h>
-#include "../graphic/video.h"
-#include "../game/time.h"
+#include "camera.h"
 #include "map.h"
 #include "maps_list.h"
-#include "camera.h"
+#include "../game/time.h"
+#include "../graphic/video.h"
+#include "../include/app.h"
 #include "../interface/interface.h"
 #include "../tool/resource_manager.h"
-#include "../include/app.h"
+
 using namespace Wormux;
 //-----------------------------------------------------------------------------
 

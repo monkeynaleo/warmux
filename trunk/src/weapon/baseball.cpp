@@ -21,9 +21,9 @@
 
 #include "baseball.h"
 //-----------------------------------------------------------------------------
-#include "../tool/Point.h"
-#include "../team/macro.h"
 #include "../game/game_loop.h"
+#include "../team/macro.h"
+#include "../tool/Point.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
 namespace Wormux 

@@ -22,15 +22,15 @@
 #include "cursor.h"
 //-----------------------------------------------------------------------------
 #include <SDL.h>
-#include "../tool/resource_manager.h"
-#include "../team/teams_list.h" // ActiveCharacter()
-#include "../game/time.h"
 #include "../game/game_loop.h"
-#include "../object/physical_obj.h"
-#include "../include/app.h"
-#include "../tool/Point.h"
-#include "../map/camera.h"
+#include "../game/time.h"
 #include "../graphic/effects.h"
+#include "../include/app.h"
+#include "../map/camera.h"
+#include "../object/physical_obj.h"
+#include "../team/teams_list.h" // ActiveCharacter()
+#include "../tool/Point.h"
+#include "../tool/resource_manager.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

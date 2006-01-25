@@ -19,12 +19,12 @@
  * Skip his turn
  *****************************************************************************/
 
-#include "../weapon/skip_turn.h"
+#include "skip_turn.h"
 //-----------------------------------------------------------------------------
-#include "../tool/i18n.h"
-#include "../team/teams_list.h"
 #include "../game/game_loop.h"
 #include "../interface/game_msg.h"
+#include "../team/teams_list.h"
+#include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
 namespace Wormux 
 {

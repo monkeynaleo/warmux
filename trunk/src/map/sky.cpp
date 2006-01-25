@@ -21,13 +21,13 @@
 
 #include "sky.h"
 //-----------------------------------------------------------------------------
+#include <iostream>
+#include <limits.h>
+#include <SDL.h>
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
-#include <limits.h>
-#include <SDL.h>
 #include "../include/app.h"
-#include <iostream>
 //-----------------------------------------------------------------------------
 namespace Wormux
 {

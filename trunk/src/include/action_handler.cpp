@@ -20,28 +20,26 @@
  *****************************************************************************/
 
 #include "action_handler.h"
+#include "../game/game_mode.h"
+#include "../game/game_loop.h"
+#include "../include/constant.h"
+#include "../map/map.h"
+#include "../map/maps_list.h"
+#include "../map/wind.h"
+#include "../team/macro.h"
+#include "../team/move.h"
 #include "../tool/i18n.h"
+#include "../weapon/weapon.h"
+#include "../weapon/weapons_list.h"
+#ifdef CL
+# include "../network/network.h"
+#endif
 
 #ifdef DEBUG
 // Love debug message ?
 //#define DBG_ACT
 #define COUT_DBG std::cout << "[Action Handler] "
 #endif
-
-#ifdef CL
-# include "../network/network.h"
-#endif
-
-#include "../include/constant.h"
-#include "../game/game_mode.h"
-#include "../game/game_loop.h"
-#include "../map/map.h"
-#include "../map/wind.h"
-#include "../map/maps_list.h"
-#include "../team/macro.h"
-#include "../team/move.h"
-#include "../weapon/weapon.h"
-#include "../weapon/weapons_list.h"
 
 ActionHandler action_handler;
 

@@ -21,15 +21,15 @@
 
 #include "teleportation.h"
 //-----------------------------------------------------------------------------
-#include "../interface/mouse.h"
-#include "../include/action_handler.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
 #include "../game/game_loop.h"
 #include "../game/game_mode.h"
-#include "../map/map.h"
 #include "../game/time.h"
 #include "../graphic/effects.h"
+#include "../interface/mouse.h"
+#include "../include/action_handler.h"
+#include "../map/map.h"
+#include "../team/teams_list.h"
+#include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
 Teleportation teleportation;

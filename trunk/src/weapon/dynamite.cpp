@@ -23,15 +23,15 @@
 
 #include "dynamite.h"
 //-----------------------------------------------------------------------------
-#include "../game/game_mode.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
+#include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
-#include "../weapon/weapon_tools.h"
-#include "../object/objects_list.h"
-#include "../tool/resource_manager.h"
+#include "../game/game_mode.h"
 #include "../include/app.h"
+#include "../object/objects_list.h"
+#include "../team/teams_list.h"
+#include "../tool/i18n.h"
+#include "../tool/resource_manager.h"
 
 #ifdef __MINGW32__
 #undef LoadImage

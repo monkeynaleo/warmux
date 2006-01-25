@@ -22,9 +22,9 @@
 #ifndef BAZ_TETE_C_H
 #define BAZ_TETE_C_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../weapon/weapon.h"
+#include "weapon.h"
 #include "../gui/progress_bar.h"
+#include "../include/base.h"
 #include "../object/physical_obj.h"
 
 //-----------------------------------------------------------------------------

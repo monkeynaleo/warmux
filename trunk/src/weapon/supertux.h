@@ -22,10 +22,10 @@
 #ifndef SUPERTUX_H
 #define SUPERTUX_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../gui/progress_bar.h"
-#include "../object/physical_obj.h"
 #include "weapon.h"
+#include "../gui/progress_bar.h"
+#include "../include/base.h"
+#include "../object/physical_obj.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------

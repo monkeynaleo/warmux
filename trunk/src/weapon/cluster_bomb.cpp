@@ -24,30 +24,27 @@
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include <math.h>
-#include "../game/time.h"
-#include "../team/teams_list.h"
-#include "../interface/interface.h"
-#include "../graphic/video.h"
-#include "../tool/math_tools.h"
+#include "weapon_tools.h"
 #include "../game/game_loop.h"
-#include "../map/camera.h"
-#include "../weapon/weapon_tools.h"
+#include "../game/time.h"
+#include "../graphic/video.h"
 #include "../interface/game_msg.h"
-#include "../tool/i18n.h"
-#include "../object/objects_list.h"
-#include "../tool/random.h"
+#include "../interface/interface.h"
 #include "../include/global.h"
+#include "../map/camera.h"
+#include "../object/objects_list.h"
+#include "../team/teams_list.h"
+#include "../tool/math_tools.h"
+#include "../tool/i18n.h"
+#include "../tool/random.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
 
 LanceCluster lance_cluster;
 
 #ifdef DEBUG
-
 #define COUT_DBG std::cout << "[ClusterBomb] "
-
 #endif
-
 
 //-----------------------------------------------------------------------------
 

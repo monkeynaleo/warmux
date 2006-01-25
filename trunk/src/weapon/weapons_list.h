@@ -22,10 +22,10 @@
 #ifndef WEAPONS_LIST_H
 #define WEAPONS_LIST_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "weapon.h"
 #include <list>
 #include <map>
+#include "weapon.h"
+#include "../include/base.h"
 //-----------------------------------------------------------------------------
 
 // Classe de gestion des armes

@@ -26,8 +26,8 @@
 #include <SDL.h>
 #include <sstream>
 #include <iostream>
-#include "move.h"
 #include "macro.h"
+#include "move.h"
 #include "../game/game.h"
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
@@ -60,15 +60,10 @@ const uint ESPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
 
 #ifdef DEBUG
-
 //#define ANIME_VITE
-
 //#define DEBUG_CHG_ETAT
-
 //#define DEBUG_PLACEMENT
-
 //#define NO_POSITION_CHECK
-
 //#define DEBUG_SKIN
 
 #define COUT_DBG0 std::cerr << "[Character " << m_name << "]"

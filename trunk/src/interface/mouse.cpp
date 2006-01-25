@@ -21,17 +21,17 @@
 
 #include "mouse.h"
 //-----------------------------------------------------------------------------
-#include "../team/macro.h"
+#include "cursor.h"
+#include "interface.h"
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
-#include "../map/camera.h"
 #include "../graphic/video.h"
 #include "../include/constant.h" // FOND_X, FOND_Y
-#include "interface.h"
-#include "cursor.h"
-#include "../weapon/weapon.h"
+#include "../map/camera.h"
+#include "../team/macro.h"
 #include "../tool/Point.h"
+#include "../weapon/weapon.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

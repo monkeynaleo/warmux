@@ -24,10 +24,10 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../tool/xml_document.h"
 #include <list>
 #include <string>
+#include "../include/base.h"
+#include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)
 #define PATH_SEPARATOR "\\"

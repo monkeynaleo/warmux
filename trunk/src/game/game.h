@@ -23,8 +23,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "../include/base.h"
 #include "../gui/question.h"
+#include "../include/base.h"
 
 class Game
 {

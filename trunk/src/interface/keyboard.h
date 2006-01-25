@@ -22,10 +22,10 @@
 #ifndef KEYBOARD_H
 #define KEYBOARD_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include <SDL.h>
 #include <map>
+#include <SDL.h>
 #include "../include/action.h"
+#include "../include/base.h"
 //-----------------------------------------------------------------------------
 
 class Clavier

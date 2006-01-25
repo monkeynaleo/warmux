@@ -23,11 +23,11 @@
 #define WEAPON_TOOLS_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
-#include "../tool/resource_manager.h"
+#include "weapon.h"
 #include "../include/base.h"
-#include "../weapon/weapon.h"
 #include "../object/physical_obj.h"
 #include "../tool/Point.h"
+#include "../tool/resource_manager.h"
 //-----------------------------------------------------------------------------
 
 // Applique au explosion au point centre

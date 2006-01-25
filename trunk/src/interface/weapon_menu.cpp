@@ -24,23 +24,23 @@
 #include <sstream>
 #include <math.h>
 #include "interface.h"
-#include "../map/camera.h"
-#include "../map/map.h"
-#include "../team/teams_list.h"
-#include "../tool/string_tools.h"
-#include "../weapon/weapons_list.h"
-#include "../weapon/weapon.h"
 #include "../graphic/video.h"
 #include "../game/time.h"
-#include "../team/team.h"
 #include "../include/action_handler.h"
+#include "../include/app.h"
+#include "../include/global.h"
 #include "../interface/mouse.h"
+#include "../map/camera.h"
+#include "../map/map.h"
+#include "../team/team.h"
+#include "../team/teams_list.h"
 #include "../tool/Point.h"
 #include "../tool/Rectangle.h"
-#include "../include/app.h"
+#include "../tool/string_tools.h"
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
-#include "../include/global.h"
+#include "../weapon/weapon.h"
+#include "../weapon/weapons_list.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

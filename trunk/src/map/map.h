@@ -22,12 +22,12 @@
 #ifndef MONDE_H
 #define MONDE_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../graphic/text.h"
-#include "../object/physical_obj.h"
+#include "ground.h"
 #include "sky.h"
 #include "water.h"
-#include "ground.h"
+#include "../graphic/text.h"
+#include "../include/base.h"
+#include "../object/physical_obj.h"
 //-----------------------------------------------------------------------------
 
 extern const uint MAX_WIND_OBJECTS;

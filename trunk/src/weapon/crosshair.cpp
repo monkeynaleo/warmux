@@ -19,17 +19,17 @@
  * Weapon's crosshair
  *****************************************************************************/
 
-#include "../weapon/crosshair.h"
+#include "crosshair.h"
 //-----------------------------------------------------------------------------
-#include "../team/teams_list.h"
-#include "../tool/math_tools.h"
-#include "../weapon/weapon.h"
-#include "../game/game_loop.h"
 #include <SDL.h>
+#include <iostream>
+#include "weapon.h"
+#include "../game/game_loop.h"
 #include "../include/app.h"
 #include "../map/camera.h"
 #include "../map/map.h"
-#include <iostream>
+#include "../team/teams_list.h"
+#include "../tool/math_tools.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

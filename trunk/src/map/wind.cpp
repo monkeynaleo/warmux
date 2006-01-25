@@ -21,18 +21,17 @@
 
 #include "wind.h"
 //----------------------------------------------------------------------------
+#include <SDL.h>
+#include "camera.h"
+#include "../game/time.h"
 #include "../include/action_handler.h"
-#include "../tool/random.h"
+#include "../include/app.h"
 #include "../map/map.h"
 #include "../map/maps_list.h"
-#include "../game/time.h"
-#include "../tool/xml_document.h"
-#include "camera.h"
-#include <SDL.h>
+#include "../tool/random.h"
 #include "../tool/resource_manager.h"
+#include "../tool/xml_document.h"
 #include "../graphic/sprite.h"
-#include "../include/app.h"
-#include "camera.h"
 //----------------------------------------------------------------------------
 
 const uint MAX_WIND_OBJECTS = 200;

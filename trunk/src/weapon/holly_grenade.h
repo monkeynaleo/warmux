@@ -22,10 +22,10 @@
 #ifndef HOLLY_GRENADE_H
 #define HOLLY_GRENADE_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../gui/progress_bar.h"
-#include "weapon.h"
 #include "grenade.h"
+#include "weapon.h"
+#include "../gui/progress_bar.h"
+#include "../include/base.h"
 //-----------------------------------------------------------------------------
 namespace Wormux {
 //-----------------------------------------------------------------------------

@@ -22,13 +22,13 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 //-----------------------------------------------------------------------------
+#include <vector>
+#include "weapon_menu.h"
 #include "../graphic/sprite.h"
+#include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../team/character.h"
 #include "../team/team.h"
-#include "../gui/progress_bar.h"
-#include "weapon_menu.h"
-#include <vector>
 //-----------------------------------------------------------------------------
 
 #ifdef WIN32

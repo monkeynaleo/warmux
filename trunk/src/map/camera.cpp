@@ -27,8 +27,8 @@
 #include "map.h"
 #include "maps_list.h"
 #include "../graphic/video.h"
-#include "../team/teams_list.h"
 #include "../interface/mouse.h"
+#include "../team/teams_list.h"
 #include "../tool/Rectangle.h"
 #include "../tool/math_tools.h"
 
