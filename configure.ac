@@ -50,7 +50,7 @@ AX_CFLAGS_WARN_ALL([CXXFLAGS])
 AC_ARG_ENABLE([debug],
 	      [  --enable-debug          Enable debug in Wormux],
 	      [if test "x${enableval}" = "xyes" ; then
-                   CXXFLAGS="$CXXFLAGS -DDEBUG -ggdb3"
+                   CXXFLAGS="$CXXFLAGS -DDEBUG -ggdb3 -O0"
 	       fi])
 
 AC_ARG_ENABLE([profile],
