@@ -238,7 +238,7 @@ void ListeTerrain::LoadOneMap (const std::string &dir, const std::string &file)
 #endif
 	
   InfoTerrain nv_terrain;  
-  bool ok = nv_terrain.Init (file, fullname+'/');
+  bool ok = nv_terrain.Init (file, fullname + PATH_SEPARATOR);
   if (!ok) return;
 
   std::cout << (liste.empty()?" ":", ") << file;
@@ -257,7 +257,7 @@ void ListeTerrain::Init()
 
   std::cout << "o " << _("Load maps:");
 
-  std::string dirname = Wormux::config.data_dir+ CONCAT("map", "");
+  std::string dirname = Wormux::config.data_dir+ CONCAT_DIR("map", "");
 #if !defined(WIN32) || defined(__MINGW32__)
   DIR *dir = opendir(dirname.c_str());
   struct dirent *file;
