@@ -4,10 +4,11 @@
 
 #include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
-#include "../tool/string_tools.h"
-#include "../tool/file_tools.h"
 #include <libxml++/libxml++.h>
 #include <iostream>
+#include "../tool/string_tools.h"
+#include "../tool/file_tools.h"
+
 using namespace std;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
@@ -16,7 +17,8 @@ using namespace std;
 bool LitDocXml::Charge (const std::string &nomfich)
 {
   // Le fichier existe bien ?
-  if (!FichierExiste(nomfich)) return false;
+  if( !IsFileExist(nomfich) )
+     return false;
 
   // Active la validation DTD du parser
   //  parser.set_validate (true);

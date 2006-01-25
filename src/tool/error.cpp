@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "../include/base.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include <signal.h>
 #include "../tool/i18n.h"
@@ -29,7 +28,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #endif
-//-----------------------------------------------------------------------------
 
 void MissedAssertion (const char *filename, unsigned long line,
 		       const char *message)
@@ -44,27 +42,18 @@ void MissedAssertion (const char *filename, unsigned long line,
   abort();
 }
 
-//-----------------------------------------------------------------------------
-
 CError::CError (const char *filename, unsigned long line, 
 		const std::string &txt) 
   : m_filename(filename), m_txt(txt), m_line(line)
 {}
 
-//-----------------------------------------------------------------------------
-
 CError::~CError() throw()
 {}
-
-//-----------------------------------------------------------------------------
 
 const char* CError::what() const throw()
 {
   return m_txt.c_str();
 }
-
-
-//-----------------------------------------------------------------------------
 
 std::ostream& CError::operator<< (std::ostream &os) const
 {
@@ -72,10 +61,7 @@ std::ostream& CError::operator<< (std::ostream &os) const
   return os;
 }
 
-//-----------------------------------------------------------------------------
-
-void TriggerError (const char *filename, 
-		      unsigned long line, 
+void TriggerError (const char *filename, unsigned long line, 
 		      const std::string &txt)
 {
   std::cout << "! " 
@@ -84,5 +70,3 @@ void TriggerError (const char *filename,
 
   throw CError (filename, line, txt);
 }
-
-//-----------------------------------------------------------------------------

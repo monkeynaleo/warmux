@@ -15,30 +15,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Math tools
  *****************************************************************************/
 
-#ifndef MATH_TOOLS_H
-#define MATH_TOOLS_H
+#include "euler_vector.h"
 
-// Limit under which, real numbers are considered as NULL
-extern const double EPS_ZERO;
+// Set a vector to 0
+void EulerVector::Clear(){
+  x0 = 0.0;
+  x1 = 0.0;
+  x2 = 0.0;
+}
 
-// Borne une valeur dans l'intervale [min;max]
-long BorneLong (const long &valeur, const long &min, const long &max);
-double BorneDouble (const double &valeur, const double &min, 
-		    const double &max);
+/* Solve a.x'' + b.x' + c.x = d equation using Euler method */
+void EulerVector::ComputeOneEulerStep(double a, double b, double c, double d, double dt){
+  x2 = (d - b * x1 - c * x0)/a;
+  x1 = x1 + x2 * dt;
+  x0 = x0 + x1 * dt;
+}
 
-// Inverse un angle par rapport à l'axe vertical
-double InverseAngle (const double &angle);
-double InverseAngleDeg (const double &angle);
-
-// Conversion degré en radian
-double Deg2Rad (int degre);
-
-// Valeur absolue
-double AbsReel (const double x);
-bool EgalZero (const double x);
-
-#endif

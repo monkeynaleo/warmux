@@ -23,13 +23,14 @@
 
 #include "camera.h"
 //-----------------------------------------------------------------------------
+#include <iostream>
 #include "map.h"
 #include "maps_list.h"
-#include "../team/teams_list.h"
 #include "../graphic/video.h"
+#include "../team/teams_list.h"
 #include "../interface/mouse.h"
 #include "../tool/Rectangle.h"
-#include <iostream>
+#include "../tool/math_tools.h"
 
 using namespace Wormux;
 //-----------------------------------------------------------------------------

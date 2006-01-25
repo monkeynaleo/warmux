@@ -19,24 +19,20 @@
  * Refresh des fichiers.
  *****************************************************************************/
 
-#ifndef GESTION_FICHIER_H
-#define GESTION_FICHIER_H
-//-----------------------------------------------------------------------------
+#ifndef FILE_TOOLS_H
+#define FILE_TOOLS_H
 #include "../include/base.h"
-//-----------------------------------------------------------------------------
 
-// Le fichier nom existe ?
-bool FichierExiste(const std::string &nom);
+// Check if a file exist
+bool IsFileExist(const std::string &name);
 
-// Extension d'un nom de fichier
-std::string ExtensionFichier (const std::string &nom);
+// Find the extension part of a filename
+std::string FileExtension(const std::string &name);
 
-// Traduit un répertoire en nom de fichier classique
-// Exemple : ~ est remplacé pa $HOME
-std::string TraduitRepertoire (const std::string &repertoire);
+// Return the path to the home directory of the user
+std::string GetHome ();
 
-// Lit le répertoire $HOME de l'utilisateur
-std::string RepertoireHome ();
+// Replace ~ by its true name
+std::string TranslateDirectory(const std::string &directory);
 
-//-----------------------------------------------------------------------------
 #endif

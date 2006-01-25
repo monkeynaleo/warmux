@@ -68,7 +68,8 @@ bool InfoTerrain::Init (const std::string &map_name,
     nomfich = m_directory+"config.xml";
 
     // Load resources
-    if (!FichierExiste(nomfich)) return false;
+    if (!IsFileExist(nomfich))
+      return false;
     res_profile = resource_manager.LoadXMLProfile( nomfich, true), 
     // Load preview
     preview = resource_manager.LoadImage( res_profile, "preview");

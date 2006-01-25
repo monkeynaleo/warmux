@@ -78,7 +78,7 @@ Font::~Font()
 bool Font::Load (const std::string& filename, int size) 
 {
   bool ok = false;
-  if (FichierExiste(filename))
+  if (IsFileExist(filename))
   {
       m_font = TTF_OpenFont(filename.c_str(), size);
       ok = (m_font != NULL);

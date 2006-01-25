@@ -63,7 +63,7 @@ bool Team::Init (const std::string &teams_dir, const std::string &id)
 
     // Charge le XML
     nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
-    if (!FichierExiste(nomfich)) return false;
+    if (!IsFileExist(nomfich)) return false;
     if (!doc.Charge (nomfich)) return false;
 
     Profile *res = resource_manager.LoadXMLProfile( nomfich, true);

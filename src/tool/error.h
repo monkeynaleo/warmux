@@ -21,20 +21,15 @@
 
 #ifndef ERROR_H
 #define ERROR_H
-//-----------------------------------------------------------------------------
 
 #ifndef BASE_H
 #  error "You have to include base.h only (not the error.h file)"
 #endif
 
-//-----------------------------------------------------------------------------
 #include <string>
-//-----------------------------------------------------------------------------
 
 void MissedAssertion (const char *filename, unsigned long line,
 		       const char *message);
-
-//-----------------------------------------------------------------------------
 
 // Assertion (disabled in release mode)
 #undef assert
@@ -49,7 +44,11 @@ void MissedAssertion (const char *filename, unsigned long line,
 #define FORCE_ASSERT(COND) \
   if (!(COND)) MissedAssertion (__FILE__, __LINE__, #COND);
 
-//-----------------------------------------------------------------------------
+void TriggerError (const char *filename, unsigned long line, 
+		      const std::string &txt);
+
+#define Error(txt) TriggerError(__FILE__, __LINE__, txt)
+
 
 class CError : public std::exception
 {
@@ -64,14 +63,4 @@ public:
   std::ostream& operator<< (std::ostream &os) const;
 };
 
-//-----------------------------------------------------------------------------
-
-void TriggerError (const char *filename, unsigned long line, 
-		      const std::string &txt);
-
-//-----------------------------------------------------------------------------
-
-#define Error(txt) TriggerError(__FILE__, __LINE__, txt)
-
-//-----------------------------------------------------------------------------
 #endif

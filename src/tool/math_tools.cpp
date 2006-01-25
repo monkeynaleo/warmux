@@ -25,22 +25,6 @@
 // Limit under which, real numbers are considered as NULL
 const double EPS_ZERO = 0.05;
 
-// Set a vector to 0
-void SetEulerVectorZero (EulerVector &vector)
-{
-  vector.x0 = 0.0 ;
-  vector.x1 = 0.0 ;
-  vector.x2 = 0.0 ;
-}
-
-/* Solve a.x'' + b.x' + c.x = d equation using Euler method */
-void ComputeOneEulerStep(EulerVector &V, double a, double b, double c, double d, double dt)
-{
-  V.x2 = (d - b * V.x1 - c * V.x0)/a ;
-  V.x1 = V.x1 + V.x2 * dt ;
-  V.x0 = V.x0 + V.x1 * dt ;
-}
-
 // Conversion degré en radian
 double Deg2Rad (int degre){ 
   return ((double)degre)*M_PI/180; 
@@ -48,8 +32,7 @@ double Deg2Rad (int degre){
 
 // Modèle pour borner une valeur entre min et max
 template <class T>
-T BorneTpl (const T &valeur, const T &min, const T &max)
-{
+T BorneTpl (const T &valeur, const T &min, const T &max){
   if (valeur < min)
     return min;
   else if (max < valeur)
@@ -58,15 +41,16 @@ T BorneTpl (const T &valeur, const T &min, const T &max)
     return valeur;
 }
 
-long BorneLong (const long &valeur, const long &min, const long &max)
-{ return BorneTpl (valeur, min, max); }
+long BorneLong (const long &valeur, const long &min, const long &max){
+	return BorneTpl (valeur, min, max);
+}
 
-double BorneDouble (const double &valeur, const double &min, const double &max)
-{ return BorneTpl (valeur, min, max); }
+double BorneDouble (const double &valeur, const double &min, const double &max){ 
+	return BorneTpl (valeur, min, max);
+}
 
 // Inverse un angle par rapport à l'axe vertical
-double InverseAngle (const double &angle)
-{
+double InverseAngle (const double &angle){
   if (angle < 0)
     return -M_PI - angle;
   else
@@ -74,14 +58,18 @@ double InverseAngle (const double &angle)
 }
 
 // Inverse un angle par rapport à l'axe vertical
-double InverseAngleDeg (const double &angle)
-{
+double InverseAngleDeg (const double &angle){
   if (angle < 0)
     return -180 - angle;
   else
     return 180 - angle;
 }
 
-double AbsReel (const double x) { return fabs(x); }
-bool EgalZero (const double x) { return AbsReel(x) <= EPS_ZERO; }
+double AbsReel (const double x){
+	return fabs(x);
+}
+
+bool EgalZero (const double x){
+	return AbsReel(x) <= EPS_ZERO;
+}
 

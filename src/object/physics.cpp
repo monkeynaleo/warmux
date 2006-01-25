@@ -61,13 +61,13 @@ const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 Physics::Physics (double mass)
 {
   m_extern_force.Clear();
-  SetEulerVectorZero(m_pos_x);
-  SetEulerVectorZero(m_pos_y);
+  m_pos_x.Clear();
+  m_pos_y.Clear();
 
   m_fix_point_gnd.Clear();
   m_fix_point_dxy.Clear();
-  SetEulerVectorZero(m_rope_angle);
-  SetEulerVectorZero(m_rope_length);
+  m_rope_angle.Clear();
+  m_rope_length.Clear();
   
   m_rebounding = false;
   m_rebound_factor = 0.01;
@@ -357,8 +357,8 @@ void Physics::UnsetPhysFixationPoint()
   m_pos_x.x2 = 0 ;
   m_pos_y.x2 = 0 ;
 
-  SetEulerVectorZero(m_rope_angle);
-  SetEulerVectorZero(m_rope_length);
+  m_rope_angle.Clear();
+  m_rope_length.Clear();
 
   m_motion_type = FreeFall ;
 }
@@ -486,7 +486,7 @@ void Physics::ComputePendulumNextXY (double delta_t)
 
   // Pendulum motion equation (angle equation)
   // a'' + (D + 2.l'/l).a' = -g/l.sin a + F/l.cos a
-  ComputeOneEulerStep(m_rope_angle,
+  m_rope_angle.ComputeOneEulerStep(
 		      /* a */ 1,
 		      /* b */ m_balancing_damping + 2 * m_rope_length.x1 / m_rope_length.x0,
 		      /* c */ 0,
@@ -537,11 +537,11 @@ void Physics::ComputeFallNextXY (double delta_t)
   air_resistance_factor = AIR_RESISTANCE_FACTOR * GetContactSurface(speed_angle) * m_air_resist_factor ;
 
   // Equation on X axys : m.x'' + k.x' = wind
-  ComputeOneEulerStep(m_pos_x, m_mass, air_resistance_factor, 0,
+  m_pos_x.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
 		      wind_force + m_extern_force.x, delta_t);
 
   // Equation on Y axys : m.y'' + k.y' = m.g
-  ComputeOneEulerStep(m_pos_y, m_mass, air_resistance_factor, 0,
+  m_pos_y.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
 		      weight_force + m_extern_force.y, delta_t);
 
   //  printf ("F : Pd(%5f) EF(%5f)\n", weight_force, m_extern_force.y);
