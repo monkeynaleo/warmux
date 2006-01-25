@@ -135,6 +135,10 @@ void Sky::CompleteDraw()
 
 void Sky::Draw()
 {
+#if defined(WIN32)
+  // TODO: Why the cache doesn't work on Windows!?
+  CompleteDraw();
+#else  
   int cx = camera.GetX();
   int cy = camera.GetY();
 
@@ -192,6 +196,7 @@ void Sky::Draw()
 		   it->h+1};
     SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
   }
+#endif
 }
 
 //-----------------------------------------------------------------------------

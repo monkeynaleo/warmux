@@ -278,6 +278,10 @@ void Ground::Draw()
 	    0, 0, 0, 255); 
   }
 
+#if defined(WIN32)
+  // TODO: Why the cache doesn't work on Windows!?
+  DrawTile();
+#else  
   if (lastx != cx || lasty != cy)
   {
     lastx = cx;
@@ -302,6 +306,7 @@ void Ground::Draw()
   it=world.to_redraw_particles->begin();
   end=world.to_redraw_particles->end();
   for (; it != end; ++it) DrawTile_Clipped(*it);
+#endif
 }
 
 //-----------------------------------------------------------------------------
