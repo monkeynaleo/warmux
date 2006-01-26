@@ -16,13 +16,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Caisse de bonus : tombe du ciel après un temps d'apparition aléatoire.
- * Lorsqu'un ver touche la caisse, il peut gagner différents bonus : munition,
- * énergie (gain ou perte!), etc.
+ * Bonus Box
  *****************************************************************************/
 
-#ifndef CAISSES_H
-#define CAISSES_H
+#ifndef BONUS_BOX_H
+#define BONUS_BOX_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "../include/base.h"
@@ -30,12 +28,12 @@
 #include "../team/team.h"
 //-----------------------------------------------------------------------------
 
-class Caisse : public PhysicalObj
+class BonusBox : public PhysicalObj
 {
 private:
+  bool enable;
+  bool still_visible;
   bool parachute; 
-  bool affiche;
-  bool desactive;
   bool pos_valide;
 
   Sprite *anim;
@@ -56,7 +54,7 @@ private:
 
 public:
   // Initialise les données
-  Caisse();
+  BonusBox();
   void Init();
   void FreeMem();
   void Reset();
@@ -78,6 +76,6 @@ public:
   bool FaitApparaitre();
 };
 
-extern Caisse caisse;
+extern BonusBox bonus_box;
 //-----------------------------------------------------------------------------
 #endif

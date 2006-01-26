@@ -173,7 +173,7 @@ void Game::Start()
       MessageEndOfGame();
 
   world.FreeMem();
-  caisse.FreeMem();
+  bonus_box.FreeMem();
   jukebox.StopAll();
    
   if (err)

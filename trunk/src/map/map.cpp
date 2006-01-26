@@ -75,7 +75,7 @@ void Map::Reset()
 
   // Configure le jeu selon que le terrain soit ouvert ou non
   bool ouvert = ground.EstOuvert();
-  caisse.Active (ouvert);
+  bonus_box.Active (ouvert);
   config.exterieur_monde_vide = ouvert;
 
   delete author_info1; author_info1 = NULL;
