@@ -27,7 +27,8 @@
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <iostream>
-#include "video.h"
+//#include "video.h"
+#include "sdlsurface.h"
 #include "../game/game.h"
 #include "../game/time.h"
 #include "../include/app.h"

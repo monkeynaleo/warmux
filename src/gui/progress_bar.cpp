@@ -25,7 +25,7 @@
 #include "../tool/math_tools.h"
 #include "../include/app.h"
 #include "../map/map.h"
-#include "../graphic/video.h"
+#include "../graphic/sdlsurface.h"
 //-----------------------------------------------------------------------------
 
 BarreProg::BarreProg()
