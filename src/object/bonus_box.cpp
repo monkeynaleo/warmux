@@ -43,15 +43,14 @@ using namespace std;
 
 #define APPARAIT_VITE
 //#define DEBUG_CADRE_TEST
-//#define MSG_DBG_CAISSE
-//#define DBG_PLACEMENT
+#define MSG_DBG_CAISSE
+#define DBG_PLACEMENT
 
 #define COUT_DBG0 cout << "[caisse]"
 #define COUT_DBG COUT_DBG0 " "
 #define COUT_PLACEMENT COUT_DBG0 "[placement "<<bcl<<"] "
 #endif
 
-// Taille du sprite de la caisse
 const double MASSE_CAISSE = 150;
 
 // Combien de temps avant qu'on fabrique une caisse ?
@@ -197,8 +196,9 @@ void Caisse::Reset()
 void Caisse::Draw()
 { 
   if (!affiche) return;
-
+  UpdatePosition ();
   anim->Draw(GetX(), GetY());
+  std::cout << GetX() << ", " << GetY() << std::endl;
 }
 
 //-----------------------------------------------------------------------------
@@ -299,6 +299,7 @@ bool Caisse::FaitApparaitre()
   if (!pos_valide) Reset();
 
   if (affiche || (global_time.Read() < temps_caisse)) return false;
+
   affiche = true;
   m_ready = false;
   Ready();

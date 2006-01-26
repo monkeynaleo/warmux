@@ -168,13 +168,12 @@ void AppWormux::DisplayLoadingPicture()
 {
   std::string txt_version = _("Version") + std::string(" ") + VERSION;
 
-  // TODO->use ressource handler
   std::string filename = config.data_dir + CONCAT_DIR("menu", CONCAT_DIR("img", "loading.png"));
-  SDL_Surface* loading_image=IMG_Load(filename.c_str());
+  Sprite * loading_image=new Sprite(IMG_Load(filename.c_str()));
+  loading_image->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
+  loading_image->Blit( app.sdlwindow, 0, 0);
 
   Wormux::global_time.Reset();
-
-  SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
 
   Text text1(_("Wormux launching..."), white_color, &global().huge_font(), true); 
   Text text2(txt_version, white_color, &global().huge_font(), true); 
@@ -184,9 +183,10 @@ void AppWormux::DisplayLoadingPicture()
   y += global().huge_font().GetHeight() + 20;
   text2.DrawCenter (x, y);
 
+
   SDL_UpdateRect(app.sdlwindow, 0, 0, 0, 0);
   SDL_Flip(app.sdlwindow);
-  SDL_FreeSurface(loading_image);
+  delete loading_image;
 }
 
 void AppWormux::InitFonts()

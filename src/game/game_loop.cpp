@@ -220,10 +220,11 @@ void InitGameData()
 void InitGame ()
 {
   // Display loading screen
-  SDL_Surface* loading_image=IMG_Load( (config.data_dir+"menu/img/loading.png").c_str());
-  SDL_BlitSurface(loading_image,NULL,app.sdlwindow,NULL);
+  Sprite * loading_image=new Sprite(IMG_Load((config.data_dir+"menu/img/loading.png").c_str()));
+  loading_image->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
+  loading_image->Blit( app.sdlwindow, 0, 0);
   SDL_Flip(app.sdlwindow);
-  SDL_FreeSurface(loading_image);
+  delete loading_image;
 
   game.MessageLoading();
 
@@ -345,6 +346,7 @@ void GameLoop::Refresh()
     lst_objets.Refresh();
     global_particle_engine.Refresh();
     curseur_ver.Refresh();
+    caisse.Refresh();
   }
   
   // Refresh the map
@@ -381,6 +383,8 @@ void GameLoop::Draw ()
   lst_objets.Draw();
   global_particle_engine.Draw();
   curseur_ver.Draw();
+
+  caisse.Draw();
 
   world.DrawWater();
 
