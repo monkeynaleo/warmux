@@ -39,36 +39,32 @@
 
 #ifdef DEBUG
 
-//#define APPARAIT_VITE
-//#define DEBUG_CADRE_TEST
-//#define MSG_DBG_CAISSE
-//#define DBG_PLACEMENT
+//#define FAST
+//#define MSG_DBG
 
-#define COUT_DBG0 std::cout << "[bonus_box]"
-#define COUT_DBG COUT_DBG0 " "
-#define COUT_PLACEMENT COUT_DBG0 "[placement "<<bcl<<"] "
+#define COUT_DBG std::cout << "[bonus_box] "
+
 #endif
 
-// Combien de temps avant qu'on fabrique une caisse ?
-#ifdef APPARAIT_VITE
-  const uint TEMPS_MIN_CREATION = 1; // secondes
-  const uint TEMPS_MAX_CREATION = 3; // secondes
+#ifdef FAST
+  const uint MIN_TIME_BETWEEN_CREATION = 1; // seconds
+  const uint MAX_TIME_BETWEEN_CREATION = 3; // seconds
 #else
-  const uint TEMPS_MIN_CREATION = 10; // secondes
-  const uint TEMPS_MAX_CREATION = 5*60; // secondes
+  const uint MIN_TIME_BETWEEN_CREATION = 10; // seconds
+  const uint MAX_TIME_BETWEEN_CREATION = 5*60; // seconds
 #endif
 
-const uint VITESSE_CAISSE = 5; // meter / seconde
-const uint VITESSE_REPLI_PARACHUTE = 170; // ms par image
+const uint SPEED = 5; // meter / seconde
+const uint SPEED_PARACHUTE = 170; // ms par image
 const uint NB_MAX_TRY = 20;
 
 // Bonus offert par la caisse
-const uint BONUS_ENERGIE=100;
-const uint BONUS_PIEGE=75;
-const uint BONUS_TELEPORTE=5;
+const uint BONUS_ENERGY=100;
+const uint BONUS_TRAP=75;
+const uint BONUS_TELEPORTATION=5;
 const uint BONUS_DYNAMITE=10;
-const uint BONUS_AERIENNE=1;
-const uint BONUS_BAZ_TETE_C=5;
+const uint BONUS_AIR_ATTACK=1;
+const uint BONUS_AUTO_BAZOOKA=5;
 
 //-----------------------------------------------------------------------------
 BonusBox bonus_box;
@@ -80,8 +76,8 @@ BonusBox::BonusBox()
   SetTestRect (29, 29, 63, 6);
   m_allow_negative_y = true;
   enable = false;
-  pos_valide = false;
   m_wind_factor = 0.0;
+  m_air_resist_factor = 5;
 }
 
 //-----------------------------------------------------------------------------
@@ -117,12 +113,12 @@ void BonusBox::Draw()
 // Signale la fin d'une chute
 void BonusBox::SignalFallEnding()
 {
-#ifdef MSG_DBG_CAISSE
+#ifdef MSG_DBG
   COUT_DBG << "Fin de la chute : parachute=" << parachute << std::endl;
 #endif
   if (!parachute) return;
 
-#ifdef MSG_DBG_CAISSE
+#ifdef MSG_DBG
   COUT_DBG << "Début de l'animation 'repli du parachute'." << std::endl;
 #endif
   parachute = false;
@@ -133,55 +129,55 @@ void BonusBox::SignalFallEnding()
 
 //-----------------------------------------------------------------------------
 
-void BonusBox::AppliqueBonus (Team &equipe, Character &ver)
+void BonusBox::ApplyBonus (Team &equipe, Character &ver)
 {
   std::ostringstream txt;
-
+  uint bonus = RandomLong (1, nb_bonus);
   switch (bonus)
   {
-  case bonusTELEPORTE: 
+  case bonusTELEPORTATION: 
     txt << Format(ngettext(
                 "%s team has won %u teleportation.", 
                 "%s team has won %u teleportations.", 
-                BONUS_TELEPORTE),
-            ActiveTeam().GetName().c_str(), BONUS_TELEPORTE);
-    equipe.m_nb_ammos[ _("Teleportation") ] += BONUS_TELEPORTE;
+                BONUS_TELEPORTATION),
+            ActiveTeam().GetName().c_str(), BONUS_TELEPORTATION);
+    equipe.m_nb_ammos[ _("Teleportation") ] += BONUS_TELEPORTATION;
     break;
 
-  case bonusENERGIE:
+  case bonusENERGY:
     txt << Format(ngettext(
                 "%s has won %u point of energy!",
                 "%s has won %u points of energy!",
-                BONUS_ENERGIE),
-            ver.m_name.c_str(), BONUS_ENERGIE);
-    ver.SetEnergyDelta (BONUS_ENERGIE);
+                BONUS_ENERGY),
+            ver.m_name.c_str(), BONUS_ENERGY);
+    ver.SetEnergyDelta (BONUS_ENERGY);
     break;
 
-  case bonusPIEGE:
+  case bonusTRAP:
     txt << Format(ngettext(
                 "%s has lost %u point of energy.",
                 "%s has lost %u points of energy.",
-                BONUS_PIEGE),
-            ver.m_name.c_str(), BONUS_PIEGE);
-    ver.SetEnergyDelta (-BONUS_PIEGE);
+                BONUS_TRAP),
+            ver.m_name.c_str(), BONUS_TRAP);
+    ver.SetEnergyDelta (-BONUS_TRAP);
     break;
 
-  case bonusAERIENNE:
+  case bonusAIR_ATTACK:
     txt << Format(ngettext(
                 "'%s has won %u air attack",
                 "'%s has won %u air attacks",
-                BONUS_AERIENNE),
-            ActiveTeam().GetName().c_str(), BONUS_AERIENNE);
-    equipe.m_nb_ammos[ _("Air attack") ] += BONUS_AERIENNE;
+                BONUS_AIR_ATTACK),
+            ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
+    equipe.m_nb_ammos[ _("Air attack") ] += BONUS_AIR_ATTACK;
     break;
 
-  case bonusBAZ_TETE_C:
+  case bonusAUTO_BAZOOKA:
     txt << Format(ngettext(
                 "%s team has won %u automatic bazooka!",
                 "%s team has won %u automatic bazookas!",
-                BONUS_BAZ_TETE_C),
-		  ActiveTeam().GetName().c_str(), BONUS_BAZ_TETE_C);
-    equipe.m_nb_ammos[ _("Automatic bazooka") ] += BONUS_BAZ_TETE_C;
+                BONUS_AUTO_BAZOOKA),
+		  ActiveTeam().GetName().c_str(), BONUS_AUTO_BAZOOKA);
+    equipe.m_nb_ammos[ _("Automatic bazooka") ] += BONUS_AUTO_BAZOOKA;
     break;
 
   default: std::cout << bonus << std::endl; assert (false);
@@ -200,15 +196,15 @@ void BonusBox::AppliqueBonus (Team &equipe, Character &ver)
 
 //-----------------------------------------------------------------------------
 
-bool BonusBox::FaitApparaitre()
+bool BonusBox::NewBonusBox()
 {
   if (!enable) return true;
 
-  if (still_visible || (Wormux::global_time.Read() < temps_caisse)) return false;
+  if (still_visible || (Wormux::global_time.Read() < time)) return false;
 
   uint bcl=0;
   bool ok;
-#ifdef DBG_PLACEMENT
+#ifdef MSG_DBG
   COUT_PLACEMENT << "Cherche une place ..." << std::endl;
 #endif
   do
@@ -217,7 +213,7 @@ bool BonusBox::FaitApparaitre()
     Ready();
     if (bcl >= NB_MAX_TRY) 
     {
-#ifdef DBG_PLACEMENT
+#ifdef MSG_DBG
       COUT_PLACEMENT << "Impossible de trouver une position initiale." << std::endl;
 #endif
       return false;
@@ -227,7 +223,7 @@ bool BonusBox::FaitApparaitre()
     int x = RandomLong(0, world.GetWidth() - GetWidth());
     int y = -GetHeight()+1;
     SetXY (x, y);
-#ifdef DBG_PLACEMENT
+#ifdef MSG_DBG
     COUT_PLACEMENT << "Test en " << x <<"," << y << std::endl;
 #endif
 
@@ -235,7 +231,7 @@ bool BonusBox::FaitApparaitre()
     ok = !IsGhost() && IsInVacuum(0,0) && IsInVacuum(0,1);
     if (!ok) 
     {
-#ifdef DBG_PLACEMENT
+#ifdef MSG_DBG
       COUT_PLACEMENT << "Placement dans un mur" << std::endl;
 #endif
       continue;
@@ -247,7 +243,7 @@ bool BonusBox::FaitApparaitre()
     if (!ok)
     {
       continue;
-#ifdef DBG_PLACEMENT
+#ifdef MSG_DBG
       COUT_PLACEMENT << "Placement dans le vide" << std::endl;
 #endif
     }
@@ -257,7 +253,7 @@ bool BonusBox::FaitApparaitre()
     {
       if (ObjTouche(*this, *ver)) 
       {
-#ifdef DBG_PLACEMENT
+#ifdef MSG_DBG
 	COUT_PLACEMENT << "La caisse touche le ver " << (*ver).m_name << std::endl;
 #endif
 	ok = false;
@@ -266,7 +262,7 @@ bool BonusBox::FaitApparaitre()
     if (ok) SetXY (x,y);
   } while (!ok);
 
-#ifdef DBG_PLACEMENT
+#ifdef MSG_DBG
   COUT_PLACEMENT << "Placée après " << bcl << " essai(s)" << std::endl;
 #endif
 
@@ -275,15 +271,13 @@ bool BonusBox::FaitApparaitre()
   anim->SetCurrentFrame(0);
   anim->Start();
 
-  temps_caisse = RandomLong(TEMPS_MIN_CREATION, 
-			    TEMPS_MAX_CREATION-TEMPS_MIN_CREATION);
-  temps_caisse *= 1000;
-  temps_caisse += Wormux::global_time.Read();
-  bonus = RandomLong (1, nbr_bonus_diff);
+  time = RandomLong(MIN_TIME_BETWEEN_CREATION, 
+			    MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
+  time *= 1000;
+  time += Wormux::global_time.Read();
 
   SetMass (30);
-  //SetSpeed (VITESSE_CAISSE, M_PI_2);
-  SetSpeed(0,0);
+  SetSpeed (SPEED, M_PI_2);
   Ready();
   return true;
 }
@@ -295,7 +289,7 @@ void BonusBox::Refresh()
   if (!still_visible) return;
 
   UpdatePosition();
-#ifdef MSG_DBG_CAISSE
+#ifdef MSG_DBG
   COUT_DBG << "Refresh() : " << GetX() << "; " << GetY() << std::endl;
 #endif
 
@@ -305,7 +299,7 @@ void BonusBox::Refresh()
     if (ObjTouche(*this, *ver))
     {
       // Offre des dynamites
-      AppliqueBonus (**equipe, *ver);
+      ApplyBonus (**equipe, *ver);
 
       // Creation d'un nouvelle caisse
       still_visible = false;
@@ -324,7 +318,7 @@ void BonusBox::Refresh()
 void BonusBox::SignalGhostState (bool)
 {
   if (!still_visible) return;
-#ifdef MSG_DBG_CAISSE
+#ifdef MSG_DBG
   COUT_DBG << "Une caisse sort de l'écran !" << std::endl;
 #endif
   still_visible = false;

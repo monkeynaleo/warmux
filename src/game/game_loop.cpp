@@ -498,7 +498,7 @@ void GameLoop::RefreshClock()
             game.SetEndOfGameStatus( true );
           else { 
             ActiveTeam().AccessWeapon().Deselect();    
-            bonus_box.FaitApparaitre();
+            bonus_box.NewBonusBox();
             SetState (gamePLAYING);
             break;
           }
