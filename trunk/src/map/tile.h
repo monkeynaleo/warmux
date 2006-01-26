@@ -25,7 +25,7 @@
 #define _TILE_H
 
 #include <vector>
-#include "../tool/Rectangle.h"
+#include "../tool/rectangle.h"
 
 struct SDL_Surface;
 class TileItem;

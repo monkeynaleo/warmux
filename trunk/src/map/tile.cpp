@@ -30,14 +30,12 @@
 #include "../include/app.h"
 #include "../map/camera.h"
 #include "../tool/error.h"
-#include "../tool/Point.h"
+#include "../tool/point.h"
 
 using namespace Wormux;
 
 const int cell_width = 128;
 const int cell_height = 128;
-
-//-----------------------------------------------------------------------------
 
 class TileItem
 {
@@ -399,17 +397,11 @@ void TileItem_ColorkeySoftware::SyncBuffer()
    SDL_UnlockSurface( m_surface);
 }
 
-
-
-// =======================================================================
 // = Tile implementation                                                 =
-// =======================================================================
 
 Tile::Tile()
 {
 }
-
-//-----------------------------------------------------------------------------
 
 void Tile::FreeMem()
 {
@@ -419,14 +411,10 @@ void Tile::FreeMem()
   item.clear();
 }
 
-//-----------------------------------------------------------------------------
-
 Tile::~Tile()
 { 
   FreeMem();
 }
-
-//-----------------------------------------------------------------------------
 
 void Tile::InitTile (unsigned int width, unsigned int height)
 {

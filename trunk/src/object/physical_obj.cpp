@@ -24,17 +24,16 @@
  * If the object go outside of the world, it become a ghost.
  *****************************************************************************/
 
-#include "../object/physical_obj.h"
-#include "../object/physics.h"
-//-----------------------------------------------------------------------------
+#include "physical_obj.h"
 #include <stdlib.h>
 #include <iostream>
+#include "physics.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../map/map.h"
 #include "../tool/math_tools.h"
-#include "../tool/Point.h"
-#include "../tool/Rectangle.h"
+#include "../tool/point.h"
+#include "../tool/rectangle.h"
 #include "../weapon/ninja_rope.h"
 using namespace Wormux;
 

@@ -47,7 +47,6 @@ Game game;  // TODO: global variables are bad
 
 Game::Game()
 {
-  //initialise = false;
   isGameLaunched = false;
   endOfGameStatus = false;
 }

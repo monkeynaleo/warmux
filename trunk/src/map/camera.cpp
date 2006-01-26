@@ -22,18 +22,16 @@
  *****************************************************************************/
 
 #include "camera.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include "map.h"
 #include "maps_list.h"
 #include "../graphic/video.h"
 #include "../interface/mouse.h"
 #include "../team/teams_list.h"
-#include "../tool/Rectangle.h"
+#include "../tool/rectangle.h"
 #include "../tool/math_tools.h"
 
 using namespace Wormux;
-//-----------------------------------------------------------------------------
 
 // Marge de cadrage 
 const int MARGE = 200;
@@ -44,20 +42,16 @@ const int PAUSE_SCROLLING = 1; // ms
 #endif
 
 #ifdef DEBUG
-
 //#define DEBUG_MSG_SCROLL
 //#define DEBUG_OBJ_SUIVI
-
 #endif
 #define COUT_DBG std::cout << "[Camera] "
 
 const double VITESSE_CAMERA = 20;
-//-----------------------------------------------------------------------------
-Camera camera;
-//-----------------------------------------------------------------------------
 
-Camera::Camera()
-{
+Camera camera;
+
+Camera::Camera(){
   pos.x=0;
   pos.y=0;
   selec_rectangle=false;
@@ -67,18 +61,21 @@ Camera::Camera()
   obj_suivi = NULL;
 }
 
-//-----------------------------------------------------------------------------
-
 // Decalage du fond
-int Camera::GetX() const { return pos.x; }
-int Camera::GetY() const { return pos.y; }
+int Camera::GetX() const{
+  return pos.x;
+}
 
-//-----------------------------------------------------------------------------
+int Camera::GetY() const{
+  return pos.y;
+}
 
-bool Camera::HasFixedX() const { return (world.GetWidth() <= GetWidth()); }
-bool Camera::HasFixedY() const { return (world.GetHeight() <= GetHeight()); }
-
-//-----------------------------------------------------------------------------
+bool Camera::HasFixedX() const{
+  return world.GetWidth() <= GetWidth();
+}
+bool Camera::HasFixedY() const{
+  return world.GetHeight() <= GetHeight();
+}
 
 void Camera::SetXYabs (int x, int y)
 { 
@@ -126,27 +123,26 @@ void Camera::SetXYabs (int x, int y)
 #endif
 }
 
-//-----------------------------------------------------------------------------
+void Camera::SetXY(int dx, int dy){ 
+  if( camera.HasFixedX() )
+    dx = 0;
+  if( camera.HasFixedY() )
+    dy = 0;
+  if( (dx == 0) && (dy == 0) )
+    return;
 
-void Camera::SetXY(int dx, int dy)
-{ 
-  if (camera.HasFixedX()) dx = 0;
-  if (camera.HasFixedY()) dy = 0;
-  if ((dx == 0) && (dy == 0)) return;
   SetXYabs (pos.x+dx,pos.y+dy);
 }
 
-//-----------------------------------------------------------------------------
-
-void Camera::CentreObjSuivi ()
-{ Centre (*obj_suivi); }
-
-//-----------------------------------------------------------------------------
+void Camera::CentreObjSuivi (){
+  Centre (*obj_suivi);
+}
 
 // Centrage immédiat sur un objet
 void Camera::Centre (const PhysicalObj &obj)
 {
-  if (obj.IsGhost()) return;
+  if (obj.IsGhost())
+    return;
 
 #ifdef DEBUG_MSG_SCROLL
   COUT_DBG << "Se centre sur " << obj.m_name << std::endl;
@@ -168,8 +164,6 @@ void Camera::Centre (const PhysicalObj &obj)
   }
   SetXYabs (x,y);
 }
-
-//-----------------------------------------------------------------------------
 
 void Camera::AutoRecadre ()
 {
@@ -216,8 +210,6 @@ void Camera::AutoRecadre ()
   SetXY (dx, dy);
 }
 
-//-----------------------------------------------------------------------------
-
 void Camera::Refresh()
 {
   lance = false;
@@ -229,13 +221,13 @@ void Camera::Refresh()
 #ifdef TODO_KEYBOARD // ??? 
   // Camera au clavier
   clavier.TestCamera();
-  if (lance) return;
+  if (lance)
+    return;
 #endif
    
-  if (autorecadre) AutoRecadre();
+  if (autorecadre)
+    AutoRecadre();
 }
-
-//-----------------------------------------------------------------------------
 
 void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
 			     bool force_recentrage)
@@ -260,31 +252,22 @@ void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
   obj_suivi = obj;
 }
 
-//-----------------------------------------------------------------------------
-
-void Camera::StopFollowingObj (PhysicalObj* obj)
-{
+void Camera::StopFollowingObj (PhysicalObj* obj){
   if( obj_suivi == obj )
-  {
     ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(),true,true,true);
-  }
 }
-
-//-----------------------------------------------------------------------------
 
 uint Camera::GetWidth() const { return video.GetWidth(); }
 uint Camera::GetHeight() const { return video.GetHeight(); }
 
-//-----------------------------------------------------------------------------
-
-bool Camera::EstVisible (const PhysicalObj &obj)
-{
+bool Camera::EstVisible (const PhysicalObj &obj){
    Rectanglei rect;
+   
    rect.x = GetX();
    rect.y = GetY();
    rect.w = GetWidth();
    rect.h = GetHeight();
+   
    return rect.Intersect (obj.GetRect());
 }
 
-//-----------------------------------------------------------------------------

@@ -23,25 +23,23 @@
  * TODO:       Scale,Rotation...
  *****************************************************************************/
 
+#include "sprite.h"
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <iostream>
-#include "sprite.h"
-#include "../map/camera.h"
-#include "../include/app.h"
-#include "../game/time.h"
-#include "../tool/Rectangle.h"
-#include "../map/map.h"
-#include "../game/game.h"
 #include "video.h"
+#include "../game/game.h"
+#include "../game/time.h"
+#include "../include/app.h"
+#include "../map/camera.h"
+#include "../map/map.h"
+#include "../tool/rectangle.h"
 
 #ifdef DBG_SPRITE
 #include <sstream>
 #endif
-// *****************************************************************************/
 
-SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed)
-{
+SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed){
   assert(p_surface != NULL);
   this->surface = p_surface;
   this->delay = p_speed;
@@ -50,11 +48,7 @@ SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed)
   rotated_flipped_surface = NULL;
 }
 
-// *****************************************************************************/
-
-
-Sprite::Sprite()
-{
+Sprite::Sprite(){
    frame_width_pix = 0;
    frame_height_pix = 0;
    scale_x = 1.0f;
@@ -80,8 +74,7 @@ Sprite::Sprite()
 #endif
 }
 
-Sprite::Sprite( const Sprite& other)
-{
+Sprite::Sprite( const Sprite& other){
    frame_width_pix = other.frame_width_pix;
    frame_height_pix = other.frame_height_pix;
    scale_x = other.scale_x;
@@ -127,8 +120,7 @@ Sprite::Sprite( const Sprite& other)
 #endif
 }
 
-Sprite::Sprite( SDL_Surface *surface)
-{   
+Sprite::Sprite( SDL_Surface *surface){
    frame_width_pix = surface->w;
    frame_height_pix = surface->h;
    frames.push_back( SpriteFrame(surface));
@@ -156,8 +148,7 @@ Sprite::Sprite( SDL_Surface *surface)
 #endif
 }
 
-Sprite::~Sprite()
-{
+Sprite::~Sprite(){
   for ( unsigned int f = 0 ; f < frames.size() ; f++)
   {
     SDL_FreeSurface( frames[f].surface);
@@ -188,8 +179,7 @@ Sprite::~Sprite()
 #endif
 }
 
-void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y)
-{
+void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y){
    this->frame_width_pix = frame_width;
    this->frame_height_pix = frame_height;
 
@@ -207,13 +197,11 @@ void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int 
        }
 }
 
-void Sprite::AddFrame(SDL_Surface* surf, unsigned int delay)
-{
+void Sprite::AddFrame(SDL_Surface* surf, unsigned int delay){
 	  frames.push_back(SpriteFrame(surf,delay));
 }
 
-void Sprite::EnableRotationCache(unsigned int cache_size)
-{
+void Sprite::EnableRotationCache(unsigned int cache_size){
   //For each frame, we pre-render 'cache_size' rotated surface
   //At runtime the prerender SDL_Surface with the nearest angle to what is asked is displayed
   assert(!have_lastframe_cache);
@@ -236,8 +224,7 @@ void Sprite::EnableRotationCache(unsigned int cache_size)
   }
 }
 
-void Sprite::EnableFlippingCache()
-{
+void Sprite::EnableFlippingCache(){
   //For each frame, we pre-render the flipped frame
   assert(!have_flipping_cache);
   assert(!have_lastframe_cache);
@@ -259,8 +246,7 @@ void Sprite::EnableFlippingCache()
   }
 }
 
-void Sprite::EnableLastFrameCache()
-{
+void Sprite::EnableLastFrameCache(){
   //The result of the last call to SDLgfx is kept in memory
   //to display it again if rotation / scale / alpha didn't changed
   assert(!have_rotation_cache);
@@ -269,109 +255,97 @@ void Sprite::EnableLastFrameCache()
   have_lastframe_cache = true;
 }
 
-void Sprite::LastFrameModified()
-{
+void Sprite::LastFrameModified(){
   //Free lastframe_cache if the next frame to be displayed
   //is not the same as the last one.
-   if(!have_lastframe_cache) return;
+  if(!have_lastframe_cache) 
+    return;
 
-   if(last_frame!=NULL)
-   {
-     SDL_FreeSurface(last_frame);
-     last_frame = NULL;
-   }
+  if(last_frame!=NULL)
+  {
+    SDL_FreeSurface(last_frame);
+    last_frame = NULL;
+  }
 }
 
-void Sprite::SetSize(unsigned int w, unsigned int h)
-{
+void Sprite::SetSize(unsigned int w, unsigned int h){
   assert(frame_width_pix == 0 && frame_height_pix == 0)
 	frame_width_pix = w;
 	frame_height_pix = h;
 }
 
-unsigned int Sprite::GetWidth()
-{
+unsigned int Sprite::GetWidth(){
    return (uint)((float)frame_width_pix * (scale_x>0?scale_x:-scale_x));
 }
 
-unsigned int Sprite::GetHeight()
-{
+unsigned int Sprite::GetHeight(){
    return (uint)((float)frame_height_pix * (scale_y>0?scale_y:-scale_y));
 }
 
-unsigned int Sprite::GetFrameCount()
-{
+unsigned int Sprite::GetFrameCount(){
    return frames.size();
 }
 
-void Sprite::SetCurrentFrame( unsigned int frame_no)
-{
+void Sprite::SetCurrentFrame( unsigned int frame_no){
   assert (frame_no < frames.size());
   current_frame = frame_no;
   LastFrameModified();
 }
 
-unsigned int Sprite::GetCurrentFrame() const
-{
+unsigned int Sprite::GetCurrentFrame() const{
    return current_frame;
 }
 
-SpriteFrame& Sprite::operator[] (unsigned int index)
-{ return frames.at(index); }
+SpriteFrame& Sprite::operator[] (unsigned int index){
+  return frames.at(index);
+}
 
-const SpriteFrame& Sprite::operator[] (unsigned int index) const
-{ return frames.at(index); }
+const SpriteFrame& Sprite::operator[] (unsigned int index) const{
+  return frames.at(index);
+}
 
-const SpriteFrame& Sprite::GetCurrentFrameObject() const
-{
+const SpriteFrame& Sprite::GetCurrentFrameObject() const{
    return frames[current_frame];
 }
 
-void Sprite::Scale( float scale_x, float scale_y)
-{
+void Sprite::Scale( float scale_x, float scale_y){
    if(this->scale_x == scale_x && this->scale_y == scale_y) return;
    this->scale_x = scale_x;
    this->scale_y = scale_y;
    LastFrameModified();
 }
 
-void Sprite::ScaleSize(int width, int height)
-{
+void Sprite::ScaleSize(int width, int height){
   Scale(float(width)/float(frame_width_pix),
         float(height)/float(frame_height_pix));
 }
 
-void Sprite::GetScaleFactors( float &scale_x, float &scale_y)
-{
+void Sprite::GetScaleFactors( float &scale_x, float &scale_y){
    scale_x = this->scale_x;
    scale_y = this->scale_y;
 }
 
-void Sprite::SetFrameSpeed(unsigned int nv_fs)
-{
+void Sprite::SetFrameSpeed(unsigned int nv_fs){
    for ( unsigned int f = 0 ; f < frames.size() ; f++)
      frames[f].delay = nv_fs;
 }
 
-void Sprite::SetSpeedFactor( float nv_speed)
-{
-   speed_factor = nv_speed;
+void Sprite::SetSpeedFactor( float nv_speed){
+  speed_factor = nv_speed;
 }
 
-void Sprite::SetAlpha( float alpha)
-{
-   if(this->alpha == alpha) return;
-   this->alpha = alpha;
-   LastFrameModified();
+void Sprite::SetAlpha( float alpha){
+  if(this->alpha == alpha)
+    return;
+  this->alpha = alpha;
+  LastFrameModified();
 }
 
-float Sprite::GetAlpha()
-{
-   return alpha;
+float Sprite::GetAlpha(){
+  return alpha;
 }
 
-void Sprite::SetRotation_deg( float angle_deg)
-{
+void Sprite::SetRotation_deg( float angle_deg){
    while(angle_deg >= 360.0)
      angle_deg -= 360.0;
    while(angle_deg < 0.0)
@@ -383,8 +357,7 @@ void Sprite::SetRotation_deg( float angle_deg)
    LastFrameModified();
 }
 
-void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface)
-{
+void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface){
   const SpriteFrame& frame = GetCurrentFrameObject();
   const SDL_Surface& surface = *frame.surface;
    // Calculate offset of the depending on hotspot rotation position :
@@ -469,13 +442,9 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    }
 
    if(this->scale_y > 0.0)
-   {
       d_angle += M_PI_2;
-   }
    else
-   {
       d_angle = - d_angle - M_PI_2;
-   }
 
    rot_x -= static_cast<int>(cos(angle - d_angle) * d);
    rot_y -= static_cast<int>(sin(angle - d_angle) * d);
@@ -511,16 +480,14 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    }
 }
 
-void Sprite::Start()
-{
+void Sprite::Start(){
    show = true;
    finished = false;
    last_update = Wormux::global_time.Read();
    LastFrameModified();
 }
 
-void Sprite::SetPlayBackward(bool enable)
-{
+void Sprite::SetPlayBackward(bool enable){
   if (enable)
     frame_delta = -1;
   else 
@@ -533,8 +500,7 @@ void Sprite::SetPlayBackward(bool enable)
 #define CACHE_WARNING
 #endif
 
-void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
-{
+void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y){
   if (!show) return;
 
 #ifndef __MINGW32__
@@ -644,8 +610,7 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y)
 
 }
 
-void Sprite::Finish()
-{
+void Sprite::Finish(){
   finished = true;
   switch(show_on_finish)
   {
@@ -663,8 +628,7 @@ void Sprite::Finish()
   LastFrameModified();
 }
 
-void Sprite::Update()
-{
+void Sprite::Update(){
   if (finished) return;
   if (Wormux::global_time.Read() < (last_update + GetCurrentFrameObject().delay))
      return;
@@ -714,8 +678,7 @@ void Sprite::Update()
   }
 }
 
-void Sprite::Draw(int pos_x, int pos_y)
-{
+void Sprite::Draw(int pos_x, int pos_y){
   if (!show) return;
   Blit(app.sdlwindow,pos_x - camera.GetX(),pos_y - camera.GetY());
 }
@@ -724,6 +687,4 @@ void Sprite::Show() { show = true; }
 void Sprite::Hide() { show = false; }
 void Sprite::SetShowOnFinish(SpriteShowOnFinish show) { show_on_finish = show; loop = false;}
 bool Sprite::IsFinished() const { return finished; }
-
-//-----------------------------------------------------------------------------
 

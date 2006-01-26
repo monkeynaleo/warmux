@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "weapon_menu.h"
-//-----------------------------------------------------------------------------
+
 #include <sstream>
 #include <math.h>
 #include "interface.h"
@@ -34,8 +34,8 @@
 #include "../map/map.h"
 #include "../team/team.h"
 #include "../team/teams_list.h"
-#include "../tool/Point.h"
-#include "../tool/Rectangle.h"
+#include "../tool/point.h"
+#include "../tool/rectangle.h"
 #include "../tool/string_tools.h"
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
@@ -43,7 +43,6 @@
 #include "../weapon/weapons_list.h"
 
 using namespace Wormux;
-//-----------------------------------------------------------------------------
 
 // Weapon menu
 const uint BUTTON_ICO_WIDTH = 58;  // Width of the button icon
@@ -67,9 +66,6 @@ const uint BUTTON_WIDTH = (int)(BUTTON_ICO_GAP + BUTTON_ICO_WIDTH  *
 const uint BUTTON_HEIGHT = (int)(BUTTON_ICO_GAP + BUTTON_ICO_HEIGHT  *
 				 (DEFAULT_ICON_SCALE+MAX_ICON_SCALE)/2);
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 WeaponMenuItem::WeaponMenuItem(uint num_sort)
 {
   zoom_start_time = 0;
@@ -77,7 +73,6 @@ WeaponMenuItem::WeaponMenuItem(uint num_sort)
   Reset();
 }
 
-//-----------------------------------------------------------------------------
 void WeaponMenuItem::Reset()
 {
   scale = DEFAULT_ICON_SCALE;
@@ -85,7 +80,6 @@ void WeaponMenuItem::Reset()
   dezoom = false;
 }
 
-//-----------------------------------------------------------------------------
 void WeaponMenuItem::ChangeZoom()
 {
   zoom_start_time = global_time.Read();
@@ -102,7 +96,6 @@ void WeaponMenuItem::ChangeZoom()
     }
 }
 
-//-----------------------------------------------------------------------------
 void WeaponMenuItem::ComputeScale()
 {
   double scale_range, time_range ;
@@ -130,7 +123,6 @@ void WeaponMenuItem::ComputeScale()
       }
 }
 
-//-----------------------------------------------------------------------------
 bool WeaponMenuItem::MouseOn(int s_x, int s_y)
 {
   ComputeScale();
@@ -159,7 +151,6 @@ bool WeaponMenuItem::MouseOn(int s_x, int s_y)
     }
 }
 
-//-----------------------------------------------------------------------------
 // Draw a button
 void WeaponMenuItem::Draw()
 {
@@ -225,9 +216,6 @@ void WeaponMenuItem::Draw()
 			    white_color);
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 WeaponsMenu::WeaponsMenu()
 {
   display = false;
@@ -237,7 +225,6 @@ WeaponsMenu::WeaponsMenu()
   motion_start_time = global_time.Read();
 }
 
-//-----------------------------------------------------------------------------
 // Add a new weapon to the weapon menu.
 void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
 {
@@ -255,7 +242,6 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
     nbr_weapon_type = num_sort;
 }
 
-//-----------------------------------------------------------------------------
 // Weapon menu display (init of the animation)
 void WeaponsMenu::Show()
 {
@@ -269,7 +255,6 @@ void WeaponsMenu::Show()
   hide = false;
 }
 
-//-----------------------------------------------------------------------------
 // Compute maximum number of icons in weapon menu columns.
 void WeaponsMenu::ComputeSize()
 {
@@ -295,7 +280,6 @@ void WeaponsMenu::ComputeSize()
     max_weapon = nbr_current_type;
 }
 
-//-----------------------------------------------------------------------------
 void WeaponsMenu::Hide()
 {
   if(display && show)
@@ -307,7 +291,6 @@ void WeaponsMenu::Hide()
   show = false;
 }
 
-//-----------------------------------------------------------------------------
 void WeaponsMenu::SwitchDisplay()
 {
   if(display && !hide)
@@ -316,37 +299,30 @@ void WeaponsMenu::SwitchDisplay()
     Show();
 }
 
-//-----------------------------------------------------------------------------
 int WeaponsMenu::GetX() const
 {
   return video.GetWidth()-GetWidth();
 }
 
-//-----------------------------------------------------------------------------
 int WeaponsMenu::GetY() const 
 {
    return video.GetHeight() - GetHeight() - ( interface.IsDisplayed() ? interface.GetHeight() : 0 );
 }
 
-//-----------------------------------------------------------------------------
 int WeaponsMenu::GetWidth() const
 {
   return BUTTON_ICO_GAP + ((nbr_weapon_type +1) * BUTTON_WIDTH) ;
 }
 
-//-----------------------------------------------------------------------------
 int WeaponsMenu::GetHeight() const
 {
   return BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon;
 }
 
-//-----------------------------------------------------------------------------
 bool WeaponsMenu::IsDisplayed() const
 {
   return display;
 }
-
-//-----------------------------------------------------------------------------
 
 void WeaponsMenu::Reset()
 {    
@@ -355,8 +331,6 @@ void WeaponsMenu::Reset()
   hide = false;
   motion_start_time = global_time.Read();
 }
-
-//-----------------------------------------------------------------------------
 
 void WeaponsMenu::Init()
 {
@@ -373,7 +347,6 @@ void WeaponsMenu::Init()
   my_button5->EnableLastFrameCache();
 }
 
-//-----------------------------------------------------------------------------
 void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column)
 {
   int delta_t=ICONS_DRAW_TIME/(2*nr_buttons);
@@ -401,8 +374,6 @@ void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column
       show = false;
     }
 }
-
-//-----------------------------------------------------------------------------
 
 bool WeaponsMenu::HideMotion(int nr_buttons,int button_no,iterator it,int column)
 {
@@ -437,7 +408,6 @@ bool WeaponsMenu::HideMotion(int nr_buttons,int button_no,iterator it,int column
   return false;
 }
 
-//-----------------------------------------------------------------------------
 void WeaponsMenu::Draw()
 {
   if (!display)
@@ -492,7 +462,6 @@ void WeaponsMenu::Draw()
   }
 }
 
-//-----------------------------------------------------------------------------
 void WeaponsMenu::MouseOver (int x, int y)
 {
   static int bouton_sous_souris = -1; //bouton survolé par la souris
@@ -523,8 +492,6 @@ void WeaponsMenu::MouseOver (int x, int y)
   bouton_sous_souris = nv_bouton_sous_souris;
 }
 
-//-----------------------------------------------------------------------------
-
 bool WeaponsMenu::ActionClic (int x, int y)
 {
   if (!display) return false;
@@ -544,4 +511,3 @@ bool WeaponsMenu::ActionClic (int x, int y)
   return false;
 }
 
-//-----------------------------------------------------------------------------

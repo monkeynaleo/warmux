@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "mouse.h"
-//-----------------------------------------------------------------------------
+
 #include "cursor.h"
 #include "interface.h"
 #include "../game/game_mode.h"
@@ -30,13 +30,12 @@
 #include "../include/constant.h" // FOND_X, FOND_Y
 #include "../map/camera.h"
 #include "../team/macro.h"
-#include "../tool/Point.h"
+#include "../tool/point.h"
 #include "../weapon/weapon.h"
 
 using namespace Wormux;
-//-----------------------------------------------------------------------------
+
 Mouse mouse;
-//-----------------------------------------------------------------------------
 
 // Vitesse du definalement à la souris
 const uint SCROLL_MOUSE = 20;
@@ -49,31 +48,21 @@ const uint SENSIT_SCROLL_MOUSE = 40; // pixels
 #  define MODE_TRICHEUR
 #endif
 
-//-----------------------------------------------------------------------------
-
 Mouse::Mouse()
 {
   scroll_actif = false;
 }
 
-
-//-----------------------------------------------------------------------------
-
 void Mouse::Reset()
 {}
-
-//-----------------------------------------------------------------------------
 
 bool Mouse::ActionClicD()
 { 
   if ( ActiveTeam().GetWeapon().CanChangeWeapon() )
-  {
     interface.weapons_menu.SwitchDisplay();
-  }
+  
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 bool Mouse::ActionClicG()
 {
@@ -81,9 +70,7 @@ bool Mouse::ActionClicG()
 	
   // Action dans le menu des armes ?
   if (interface.weapons_menu.ActionClic (GetX(),GetY())) 
-  {
     return true;
-  } 
 
   // On peut changer de ver ?
   if (game_mode.AllowCharacterSelection())
@@ -102,26 +89,24 @@ bool Mouse::ActionClicG()
         ver_choisi = true;
         break;
       }
-  }
-
-  if (ver_choisi)
-  {
-    ActiveTeam().SelectCharacterIndex (index);
-    return true;
-  }
-
-  if (ActiveCharacter().GetRect().Contains( pos_monde ))
-  {
-    curseur_ver.SuitVerActif();
-    return true;
-  }
     }
+
+    if (ver_choisi)
+    {
+      ActiveTeam().SelectCharacterIndex (index);
+      return true;
+    }
+
+    if (ActiveCharacter().GetRect().Contains( pos_monde ))
+    {
+      curseur_ver.SuitVerActif();
+      return true;
+    }
+  }
   
   // Action dans le menu des armes ?
   if (interface.weapons_menu.ActionClic (GetX(),GetY())) 
-    {
-      return true;
-    }
+    return true;
   
   // Choosing target for a weapon, many posibilities :
   // - Do nothing
@@ -135,11 +120,10 @@ bool Mouse::ActionClicG()
   return false;
 }
 
-//-----------------------------------------------------------------------------
-
 void Mouse::ChoixVerPointe()
 {
-  if (game_loop.ReadState() != gamePLAYING) return;
+  if (game_loop.ReadState() != gamePLAYING)
+    return;
 
   const Point2i pos_monde = GetPosMonde();
    
@@ -169,8 +153,6 @@ void Mouse::ChoixVerPointe()
 //  }
 }
 
-//-----------------------------------------------------------------------------
- 
 void Mouse::ScrollCamera() const
 {
   int x = GetX();
@@ -227,14 +209,11 @@ void Mouse::TestCamera()
   if(!interface.weapons_menu.IsDisplayed()) ScrollCamera();
 }
 
-//-----------------------------------------------------------------------------
-
 void Mouse::Refresh()
 {
-  if (!scroll_actif) ChoixVerPointe();
+  if (!scroll_actif)
+    ChoixVerPointe();
 }
-
-//-----------------------------------------------------------------------------
 
 int Mouse::GetX() const 
 {
@@ -268,10 +247,6 @@ Point2i Mouse::GetPosMonde() const
    return Point2i (GetXmonde(), GetYmonde());
 }
 
-
-
-//-----------------------------------------------------------------------------
-
 void Mouse::TraiteClic (const SDL_Event *event)
 {
    if ( event->type == SDL_MOUSEBUTTONDOWN )
@@ -292,4 +267,3 @@ void Mouse::TraiteClic (const SDL_Event *event)
      }
 }
 
-//-----------------------------------------------------------------------------

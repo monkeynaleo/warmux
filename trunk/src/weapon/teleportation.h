@@ -21,13 +21,10 @@
 
 #ifndef TELEPORTATION_H
 #define TELEPORTATION_H
-//-----------------------------------------------------------------------------
 #include "weapon.h"
 #include "../include/base.h"
-#include "../tool/Point.h"
-//-----------------------------------------------------------------------------
+#include "../tool/point.h"
 namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class Teleportation : public Weapon
 {
@@ -52,6 +49,5 @@ public:
 };
 
 extern Teleportation teleportation;
-//-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif
