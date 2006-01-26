@@ -34,23 +34,21 @@ private:
   bool enable;
   bool still_visible;
   bool parachute; 
-  bool pos_valide;
 
   Sprite *anim;
-  uint temps_caisse;
-  int bonus;
+  uint time;
 
   enum
   {
     // Si vous touchez à cet enum, modifiez aussi nbr_bonus_diff
     bonusDYNAMITE=1,
-    bonusTELEPORTE,
-    bonusENERGIE,
-    bonusPIEGE,
-    bonusAERIENNE,
-    bonusBAZ_TETE_C
-  } bonus_armes;
-  static const uint nbr_bonus_diff = bonusBAZ_TETE_C;
+    bonusTELEPORTATION,
+    bonusENERGY,
+    bonusTRAP,
+    bonusAIR_ATTACK,
+    bonusAUTO_BAZOOKA
+  } bonus_weapons;
+  static const uint nb_bonus = bonusAUTO_BAZOOKA;
 
 public:
   // Initialise les données
@@ -62,9 +60,6 @@ public:
   // Active les caisses ?
   void Active (bool actif);
 
-  // Applique le bonus à l'équipe qui l'a gagné
-  void AppliqueBonus (Team &team, Character &character);
-
   // Signale la fin d'une chute
   virtual void SignalFallEnding();  
 
@@ -73,7 +68,10 @@ public:
 
   void Draw();
   void Refresh();
-  bool FaitApparaitre();
+  bool NewBonusBox();
+ private:
+  void ApplyBonus (Team &team, Character &character);
+
 };
 
 extern BonusBox bonus_box;
