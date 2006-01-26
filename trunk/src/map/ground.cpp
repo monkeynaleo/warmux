@@ -28,6 +28,7 @@
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
+#include "../graphic/sdlsurface.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
 #include "../include/constant.h"

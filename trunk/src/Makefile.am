@@ -17,10 +17,11 @@ wormux_SOURCES = \
 	game/game.cpp game/game.h \
 	game/game_loop.cpp game/game_loop.h \
 	graphic/colors.h \
+	graphic/effects.cpp graphic/effects.h \
 	graphic/fps.cpp graphic/fps.h \
+	graphic/sdlsurface.cpp graphic/sdlsurface.h \
 	graphic/video.cpp graphic/video.h \
 	graphic/text.cpp graphic/text.h \
-	graphic/effects.cpp graphic/effects.h \
 	gui/button.cpp gui/button.h \
 	gui/button_text.cpp gui/button_text.h \
 	gui/check_box.cpp gui/check_box.h \
@@ -37,7 +38,7 @@ wormux_SOURCES = \
 	tool/euler_vector.cpp tool/euler_vector.h \
 	tool/file_tools.cpp tool/file_tools.h \
 	tool/math_tools.cpp tool/math_tools.h \
-	tool/Rectangle.h tool/Point.h \
+	tool/rectangle.h tool/point.h \
 	tool/resource_manager.cpp tool/resource_manager.h \
 	tool/stats.cpp tool/stats.h \
 	tool/random.cpp tool/random.h \

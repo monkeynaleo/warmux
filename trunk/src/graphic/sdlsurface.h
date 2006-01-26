@@ -16,36 +16,18 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh de la carte vidéo.
+ * SdlSurface
  *****************************************************************************/
 
-#ifndef VIDEO_H
-#define VIDEO_H
+#ifndef SDLSURFACE_H
+#define SDLSURFACE_H
+
 #include <SDL.h>
 #include "../include/base.h"
 
-class Video
-{
-private:
-  uint m_max_fps;     // If equals to zero, it means no limit
-  uint m_sleep_max_fps;
+#define EstTransparent(a)	( (a) != 255 )
 
-public:
-  void SetMaxFps (uint max_fps);
-  uint GetMaxFps();
-  uint GetSleepMaxFps();  
-
- private:
-  bool fullscreen;
-
-public:
-  Video();
-  int GetWidth(void) const;
-  int GetHeight(void) const;
-  bool IsFullScreen(void) const;
-  bool SetConfig(int width, int height, bool fullscreen);
-};
-
-extern Video video;
+SDL_Surface* CreateRGBSurface (int width, int height, Uint32 flags);
+SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags);
 
 #endif

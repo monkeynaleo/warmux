@@ -26,7 +26,7 @@
 #include "map.h"
 #include "maps_list.h"
 #include "../game/time.h"
-#include "../graphic/video.h"
+#include "../graphic/sdlsurface.h"
 #include "../include/app.h"
 #include "../interface/interface.h"
 #include "../tool/resource_manager.h"
