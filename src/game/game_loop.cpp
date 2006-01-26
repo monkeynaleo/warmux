@@ -214,7 +214,7 @@ void InitGameData()
   image_par_seconde.Reset();
   interface.Reset();
   game_messages.Reset();
-  caisse.Init();
+  bonus_box.Init();
 }
 
 void InitGame ()
@@ -346,7 +346,7 @@ void GameLoop::Refresh()
     lst_objets.Refresh();
     global_particle_engine.Refresh();
     curseur_ver.Refresh();
-    caisse.Refresh();
+    bonus_box.Refresh();
   }
   
   // Refresh the map
@@ -384,7 +384,7 @@ void GameLoop::Draw ()
   global_particle_engine.Draw();
   curseur_ver.Draw();
 
-  caisse.Draw();
+  bonus_box.Draw();
 
   world.DrawWater();
 
@@ -498,7 +498,7 @@ void GameLoop::RefreshClock()
             game.SetEndOfGameStatus( true );
           else { 
             ActiveTeam().AccessWeapon().Deselect();    
-            caisse.FaitApparaitre();
+            bonus_box.FaitApparaitre();
             SetState (gamePLAYING);
             break;
           }
