@@ -21,20 +21,20 @@
 
 #ifndef TEAM_H
 #define TEAM_H
-//-----------------------------------------------------------------------------
+
+#include <list>
+#include <map>
 #include <SDL.h>
+#include <string>
 #include "character.h"
 #include "team_energy.h"
 #include "../include/enum.h"
 #include "../include/base.h"
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon.h"
-#include "../tool/Point.h"
+#include "../tool/point.h"
 #include "../tool/resource_manager.h"
-#include <string>
-#include <list>
-#include <map>
-//-----------------------------------------------------------------------------
+
 class Character;
 class Weapon;
 
@@ -133,5 +133,5 @@ protected:
   void internal_NextCharacter();
 };
 
-//-----------------------------------------------------------------------------
 #endif // TEAM_H
+

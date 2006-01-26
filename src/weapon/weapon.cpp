@@ -24,7 +24,6 @@
  *****************************************************************************/
 
 #include "weapon.h"
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <SDL_gfxPrimitives.h>
@@ -46,10 +45,9 @@
 #include "../team/team.h"
 #include "../tool/i18n.h"
 #include "../tool/math_tools.h"
-#include "../tool/Point.h"
+#include "../tool/point.h"
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
-//-----------------------------------------------------------------------------
 
 #ifdef DEBUG
 #define COUT_DBG std::cout<<"[Weapon "<<m_name<<"] "
@@ -57,7 +55,6 @@
 //#define DEBUG_MSG_COLLISION
 #endif
 
-//-----------------------------------------------------------------------------
 const int INFINITE_AMMO = -1;
 const uint MAX_TIME_LOADING = 2000;
 
@@ -68,11 +65,8 @@ const uint UNIT_BOX_GAP = 6;
 const uint WEAPON_BOX_BUTTON_DX = 20;
 const uint WEAPON_BOX_BUTTON_DY = 50;
 
-//-----------------------------------------------------------------------------
 extern WeaponStrengthBar weapon_strength_bar;
 using namespace Wormux;
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 WeaponProjectile::WeaponProjectile (const std::string &name)
   : PhysicalObj (name, 0.0)
@@ -82,8 +76,6 @@ WeaponProjectile::WeaponProjectile (const std::string &name)
   touche_ver_objet = false;
 }
 
-//-----------------------------------------------------------------------------
-
 void WeaponProjectile::PrepareTir()
 {
   SetSize (image->GetWidth(), image->GetHeight());
@@ -91,8 +83,6 @@ void WeaponProjectile::PrepareTir()
   camera.ChangeObjSuivi(this, true, false);
   is_active = true;
 }
-
-//-----------------------------------------------------------------------------
 
 bool WeaponProjectile::TestImpact()
 {
@@ -105,8 +95,6 @@ bool WeaponProjectile::TestImpact()
   }
   return CollisionTest (0,0);
 }
-
-//-----------------------------------------------------------------------------
 
 bool WeaponProjectile::CollisionTest(int dx, int dy)
 {
@@ -151,39 +139,35 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
   return false;
 }
 
-//-----------------------------------------------------------------------------
-
 void WeaponProjectile::Refresh()
 {
-  if (!is_active) return;
+  if( !is_active )
+    return;
 
-  if (TestImpact()) { SignalCollision(); return; }
+  if( TestImpact() ){
+    SignalCollision();
+    return;
+  }
 }
-
-//-----------------------------------------------------------------------------
 
 void WeaponProjectile::Draw()
 {
-  if (!is_active) return;
+  if( !is_active )
+    return;
 
   image->Draw(GetX(), GetY());   
 }
 
-//-----------------------------------------------------------------------------
+void WeaponProjectile::SignalGhostState (bool){
+  SignalCollision();
+}
 
-void WeaponProjectile::SignalGhostState (bool) { SignalCollision(); }
+void WeaponProjectile::SignalFallEnding(){
+  SignalCollision();
+}
 
-//-----------------------------------------------------------------------------
-
-void WeaponProjectile::SignalFallEnding() { SignalCollision(); }
-
-//-----------------------------------------------------------------------------
-
-void WeaponProjectile::Reset() {}
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
+void WeaponProjectile::Reset(){
+}
 
 Weapon::Weapon(Weapon_type type, const std::string &id)
 {
@@ -220,8 +204,6 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
   channel_load = -1;
 }
 
-//-----------------------------------------------------------------------------
-
 void Weapon::Init ()
 {
   if (!use_flipping and (min_angle != max_angle))
@@ -243,8 +225,6 @@ void Weapon::p_Select () {}
 void Weapon::p_Deselect () {}
 void Weapon::HandleKeyEvent(int key, int event_type) {}
 
-//-----------------------------------------------------------------------------
-
 void Weapon::Select() 
 {
   m_is_active = false;
@@ -253,9 +233,8 @@ void Weapon::Select()
   ActiveCharacter().SetSkin("weapon-" + m_id);
 
   // is there a crosshair ?
-  if (min_angle != max_angle) {
+  if (min_angle != max_angle) 
     ActiveTeam().crosshair.enable = true; 
-  }
      
   p_Select();
 
@@ -271,15 +250,11 @@ void Weapon::Select()
   weapon_strength_bar.AjouteMarqueur (uint(val*100), 255,0,0);
 }
 
-//-----------------------------------------------------------------------------
-
 void Weapon::Deselect()
 {
   ActiveTeam().crosshair.enable = false;
   p_Deselect();
 }
-
-//-----------------------------------------------------------------------------
 
 void Weapon::Manage()
 {
@@ -302,8 +277,6 @@ void Weapon::Manage()
     }
 }
 
-//-----------------------------------------------------------------------------
-
 bool Weapon::CanChangeWeapon() const
 {
   if ( (ActiveTeam().ReadNbUnits() != m_initial_nb_unit_per_ammo) &&
@@ -313,8 +286,6 @@ bool Weapon::CanChangeWeapon() const
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void Weapon::NewActionShoot() const
 {
   action_handler.NewAction (ActionDoubleInt(
@@ -322,8 +293,6 @@ void Weapon::NewActionShoot() const
 				       m_strength,	
 				       ActiveTeam().crosshair.GetAngleVal()));
 }
-
-//-----------------------------------------------------------------------------
 
 bool Weapon::Shoot(double strength, int angle)
 {
@@ -354,8 +323,6 @@ bool Weapon::Shoot(double strength, int angle)
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 // Calcule la position de l'image de l'arme
 void Weapon::PosXY (int &x, int &y) const
 {
@@ -372,8 +339,6 @@ void Weapon::PosXY (int &x, int &y) const
     x -= m_image->GetWidth();
 }
 
-//-----------------------------------------------------------------------------
-
 // Return the absolute rotation point of the weapon
 void Weapon::RotationPointXY (int &x, int &y) const
 {
@@ -383,16 +348,11 @@ void Weapon::RotationPointXY (int &x, int &y) const
   y += m_image->GetHeight()/2;
 }
 
-
-//-----------------------------------------------------------------------------
-
 bool Weapon::EnoughAmmo() const
 {
   int ammo = ActiveTeam().ReadNbAmmos();
   return ((ammo == INFINITE_AMMO) || (0 < ammo));
 }
-
-//-----------------------------------------------------------------------------
 
 void Weapon::UseAmmo()
 {
@@ -403,15 +363,11 @@ void Weapon::UseAmmo()
   assert (*ammo >= 0 || *ammo == INFINITE_AMMO);
 }
 
-//-----------------------------------------------------------------------------
-
 bool Weapon::EnoughAmmoUnit() const
 {
   int unit = ActiveTeam().ReadNbUnits();
   return (unit > 0);
 }
-
-//-----------------------------------------------------------------------------
 
 void Weapon::UseAmmoUnit()
 {
@@ -422,55 +378,35 @@ void Weapon::UseAmmoUnit()
   assert (unit >= 0);
 }
 
-//-----------------------------------------------------------------------------
-
-int Weapon::ReadInitialNbAmmo() const
-{
+int Weapon::ReadInitialNbAmmo() const{
   return m_initial_nb_ammo;
 }
 
-//-----------------------------------------------------------------------------
-
-int Weapon::ReadInitialNbUnit() const
-{
+int Weapon::ReadInitialNbUnit() const{
   return m_initial_nb_unit_per_ammo;
 }
 
-//-----------------------------------------------------------------------------
-
-bool Weapon::CanBeUsedOnClosedMap() const
-{
+bool Weapon::CanBeUsedOnClosedMap() const{
   return can_be_used_on_closed_map;
 }
 
-
-//-----------------------------------------------------------------------------
-const std::string& Weapon::GetName() const 
-{ 
+const std::string& Weapon::GetName() const { 
   assert (!m_name.empty());
   return m_name;
 }
 
-//-----------------------------------------------------------------------------
-
-const std::string& Weapon::GetID() const 
-{ 
+const std::string& Weapon::GetID() const { 
   assert (!m_name.empty());
   return m_id;
 }
 
-//-----------------------------------------------------------------------------
-
-Weapon_type Weapon::GetType() const 
-{ 
+Weapon_type Weapon::GetType() const { 
   return m_type;
 }
 
-//-----------------------------------------------------------------------------
-
-void Weapon::UpdateStrength()
-{
-  if (max_strength == 0 || m_first_time_loading == 0) return ;
+void Weapon::UpdateStrength(){
+  if( max_strength == 0 || m_first_time_loading == 0 )
+    return ;
   
   uint time = Wormux::global_time.Read() - m_first_time_loading;
   double val = (max_strength * time) / MAX_TIME_LOADING;
@@ -480,19 +416,14 @@ void Weapon::UpdateStrength()
   weapon_strength_bar.Actu ((int)(m_strength*100));
 }
 
-
-//-----------------------------------------------------------------------------
-
-bool Weapon::IsReady() const
-{
+bool Weapon::IsReady() const{
   return EnoughAmmo() ;
 }
-//-----------------------------------------------------------------------------
 
-void Weapon::InitLoading()
-{
+void Weapon::InitLoading(){
   // no loading for weapon with max_strength = 0
-  if (max_strength == 0) return ;
+  if (max_strength == 0)
+    return ;
 
   channel_load = jukebox.Play("share","weapon/load");
    
@@ -503,19 +434,13 @@ void Weapon::InitLoading()
   game_loop.character_already_chosen = true;
 }
 
-//-----------------------------------------------------------------------------
-
-void Weapon::StopLoading()
-{
+void Weapon::StopLoading(){
   m_first_time_loading = 0 ;
 
   jukebox.Stop(channel_load);
 }
 
-//-----------------------------------------------------------------------------
-
-void Weapon::DrawWeaponBox()
-{
+void Weapon::DrawWeaponBox(){
   int c_x;
   int c_y;
 
@@ -529,11 +454,9 @@ void Weapon::DrawWeaponBox()
   SDL_BlitSurface( icone, NULL, app.sdlwindow, &dr2);
 }
 
-//-----------------------------------------------------------------------------
-
-void Weapon::Draw()
-{
-  if(game_loop.ReadState() != gamePLAYING) return;
+void Weapon::Draw(){
+  if(game_loop.ReadState() != gamePLAYING)
+    return;
 
   weapon_strength_bar.visible = false;
 
@@ -614,11 +537,7 @@ void Weapon::Draw()
    
 }
 
-//-----------------------------------------------------------------------------
-
-void Weapon::DrawUnit(int unit)
-{
-
+void Weapon::DrawUnit(int unit){
   Rectanglei rect;
 
   std::ostringstream ss;
@@ -632,8 +551,6 @@ void Weapon::DrawUnit(int unit)
 		 ss.str());
 
 }
-
-//-----------------------------------------------------------------------------
 
 bool Weapon::LoadXml(xmlpp::Element * weapon) 
 {
@@ -681,12 +598,21 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   return true;
 }
 
-//-----------------------------------------------------------------------------
+bool Weapon::IsActive() const{
+  return m_is_active;
+}
 
-bool Weapon::IsActive() const { return m_is_active; }
-const double Weapon::ReadStrength() const { return m_strength; }
-bool Weapon::IsLoading() const { return m_first_time_loading; }
-void Weapon::ChooseTarget() {}
-void Weapon::SignalTurnEnd() {};
+const double Weapon::ReadStrength() const{
+  return m_strength;
+}
 
-//-----------------------------------------------------------------------------
+bool Weapon::IsLoading() const{
+  return m_first_time_loading;
+}
+
+void Weapon::ChooseTarget(){
+}
+
+void Weapon::SignalTurnEnd(){
+}
+

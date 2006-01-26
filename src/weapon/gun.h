@@ -23,16 +23,14 @@
 
 #ifndef GUN_H
 #define GUN_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
-#include "../include/base.h"
-#include "weapon.h"
-#include "../tool/Point.h"
-#include <vector>
 
-//-----------------------------------------------------------------------------
+#include <SDL.h>
+#include <vector>
+#include "weapon.h"
+#include "../include/base.h"
+#include "../tool/point.h"
+
 namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class BalleGun : public WeaponProjectile
 {
@@ -43,8 +41,6 @@ public:
 protected:
   void SignalCollision();
 };
-
-//-----------------------------------------------------------------------------
 
 class Gun : public Weapon
 {
@@ -65,6 +61,5 @@ public:
 };
 
 extern Gun gun;
-//-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

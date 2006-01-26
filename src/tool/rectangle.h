@@ -26,7 +26,7 @@
 #define _RECTANGLE_H
 
 #include <cmath>
-#include "Point.h"
+#include "point.h"
 
 template<class T> class Wormux_Rectangle
 {
