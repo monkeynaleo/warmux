@@ -26,6 +26,7 @@
 #include "../include/constant.h" // NBR_BCL_MAX_EST_VIDE
 #include "../map/map.h"
 #include "../team/macro.h"
+#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
@@ -76,8 +77,8 @@ BonusBox::BonusBox()
   SetTestRect (29, 29, 63, 6);
   m_allow_negative_y = true;
   enable = false;
-  m_wind_factor = 0.0;
-  m_air_resist_factor = 5;
+  m_wind_factor = 0.3;
+  m_air_resist_factor = 20;
 }
 
 //-----------------------------------------------------------------------------
@@ -87,6 +88,7 @@ void BonusBox::Init()
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
   SetSize (anim->GetWidth(), anim->GetHeight());
+  anim->SetLoopMode(false);
 }
 
 //-----------------------------------------------------------------------------
@@ -124,7 +126,7 @@ void BonusBox::SignalFallEnding()
   parachute = false;
 
   anim->SetCurrentFrame(0);
-  anim->Finish();
+  anim->Start();
 }
 
 //-----------------------------------------------------------------------------
@@ -196,16 +198,19 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver)
 
 //-----------------------------------------------------------------------------
 
-bool BonusBox::NewBonusBox()
+void BonusBox::NewBonusBox()
 {
-  if (!enable) return true;
+  if (still_visible) return;
 
-  if (still_visible || (Wormux::global_time.Read() < time)) return false;
+  if (!enable || (Wormux::global_time.Read() < time)) {
+    game_loop.SetState(gamePLAYING);
+    return;
+  }
 
   uint bcl=0;
   bool ok;
 #ifdef MSG_DBG
-  COUT_PLACEMENT << "Cherche une place ..." << std::endl;
+  COUT_DBG << "Cherche une place ..." << std::endl;
 #endif
   do
   {
@@ -214,9 +219,9 @@ bool BonusBox::NewBonusBox()
     if (bcl >= NB_MAX_TRY) 
     {
 #ifdef MSG_DBG
-      COUT_PLACEMENT << "Impossible de trouver une position initiale." << std::endl;
+      COUT_DBG << "Impossible de trouver une position initiale." << std::endl;
 #endif
-      return false;
+      return;
     }
 
     // Placement au hasard en X
@@ -224,7 +229,7 @@ bool BonusBox::NewBonusBox()
     int y = -GetHeight()+1;
     SetXY (x, y);
 #ifdef MSG_DBG
-    COUT_PLACEMENT << "Test en " << x <<"," << y << std::endl;
+    COUT_DBG << "Test en " << x <<"," << y << std::endl;
 #endif
 
     // Vérifie que la caisse est dans le vide
@@ -232,7 +237,7 @@ bool BonusBox::NewBonusBox()
     if (!ok) 
     {
 #ifdef MSG_DBG
-      COUT_PLACEMENT << "Placement dans un mur" << std::endl;
+      COUT_DBG << "Placement dans un mur" << std::endl;
 #endif
       continue;
     }
@@ -244,7 +249,7 @@ bool BonusBox::NewBonusBox()
     {
       continue;
 #ifdef MSG_DBG
-      COUT_PLACEMENT << "Placement dans le vide" << std::endl;
+      COUT_DBG << "Placement dans le vide" << std::endl;
 #endif
     }
 
@@ -254,7 +259,7 @@ bool BonusBox::NewBonusBox()
       if (ObjTouche(*this, *ver)) 
       {
 #ifdef MSG_DBG
-	COUT_PLACEMENT << "La caisse touche le ver " << (*ver).m_name << std::endl;
+	COUT_DBG << "La caisse touche le ver " << (*ver).m_name << std::endl;
 #endif
 	ok = false;
       }
@@ -263,13 +268,11 @@ bool BonusBox::NewBonusBox()
   } while (!ok);
 
 #ifdef MSG_DBG
-  COUT_PLACEMENT << "Placée après " << bcl << " essai(s)" << std::endl;
+  COUT_DBG << "Placée après " << bcl << " essai(s)" << std::endl;
 #endif
-
+  anim->SetCurrentFrame(0);
   still_visible = true;
   parachute = true;
-  anim->SetCurrentFrame(0);
-  anim->Start();
 
   time = RandomLong(MIN_TIME_BETWEEN_CREATION, 
 			    MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
@@ -279,7 +282,7 @@ bool BonusBox::NewBonusBox()
   SetMass (30);
   SetSpeed (SPEED, M_PI_2);
   Ready();
-  return true;
+  return;
 }
 
 //-----------------------------------------------------------------------------
@@ -307,10 +310,17 @@ void BonusBox::Refresh()
     }
   }
 
-  // Refresh de l'animation
-  if (!parachute) anim->Update();
+  // Refresh animation
+  if (!m_ready && !parachute) anim->Update();
   
   m_ready = anim->IsFinished();
+
+  if (m_ready) {
+#ifdef MSG_DBG
+    COUT_DBG << "game_loop.SetState (gamePLAYING)" << std::endl;
+#endif
+    game_loop.SetState (gamePLAYING);
+  }
 }
 
 //-----------------------------------------------------------------------------
