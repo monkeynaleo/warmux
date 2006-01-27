@@ -27,7 +27,6 @@
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <iostream>
-//#include "video.h"
 #include "sdlsurface.h"
 #include "../game/game.h"
 #include "../game/time.h"
@@ -680,8 +679,9 @@ void Sprite::Update(){
 }
 
 void Sprite::Draw(int pos_x, int pos_y){
-  if (!show) return;
-  Blit(app.sdlwindow,pos_x - camera.GetX(),pos_y - camera.GetY());
+  if( !show )
+    return;
+  Blit( app.video.sdlwindow, pos_x - camera.GetX(), pos_y - camera.GetY() );
 }
 
 void Sprite::Show() { show = true; }

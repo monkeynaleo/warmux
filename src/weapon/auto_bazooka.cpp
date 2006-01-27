@@ -298,7 +298,7 @@ void AutomaticBazooka::DrawTarget()
   if(!cible.choisie) { return; }
 
   SDL_Rect dr = { cible.pos.x-cible.image->w/2-camera.GetX(),cible.pos.y-cible.image->h/2-camera.GetY(),cible.image->w,cible.image->h};
-  SDL_BlitSurface(cible.image, NULL, app.sdlwindow, &dr);
+  SDL_BlitSurface(cible.image, NULL, app.video.sdlwindow, &dr);
 }
 
 //-----------------------------------------------------------------------------

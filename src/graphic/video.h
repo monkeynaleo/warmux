@@ -22,6 +22,7 @@
 #ifndef VIDEO_H
 #define VIDEO_H
 #include <SDL.h>
+#include <string>
 #include "../include/base.h"
 
 class Video
@@ -31,21 +32,29 @@ private:
   uint m_sleep_max_fps;
 
 public:
+  SDL_Surface* sdlwindow;
   void SetMaxFps (uint max_fps);
   uint GetMaxFps();
-  uint GetSleepMaxFps();  
+  uint GetSleepMaxFps();
 
- private:
+private:
   bool fullscreen;
+  void SetWindowCaption(std::string caption);
+  void SetWindowIcon(std::string icon);
 
 public:
   Video();
-  int GetWidth(void) const;
-  int GetHeight(void) const;
+  
+  int  GetWidth(void) const;
+  int  GetHeight(void) const;
   bool IsFullScreen(void) const;
+  
   bool SetConfig(int width, int height, bool fullscreen);
-};
+  
+  void InitWindow(void);
+  void InitScreen(void);
 
-extern Video video;
+  void Flip(void);
+};
 
 #endif

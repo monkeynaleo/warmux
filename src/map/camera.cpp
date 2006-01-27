@@ -26,6 +26,7 @@
 #include "map.h"
 #include "maps_list.h"
 #include "../graphic/video.h"
+#include "../include/app.h"
 #include "../interface/mouse.h"
 #include "../team/teams_list.h"
 #include "../tool/rectangle.h"
@@ -257,8 +258,8 @@ void Camera::StopFollowingObj (PhysicalObj* obj){
     ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(),true,true,true);
 }
 
-uint Camera::GetWidth() const { return video.GetWidth(); }
-uint Camera::GetHeight() const { return video.GetHeight(); }
+uint Camera::GetWidth() const { return app.video.GetWidth(); }
+uint Camera::GetHeight() const { return app.video.GetHeight(); }
 
 bool Camera::EstVisible (const PhysicalObj &obj){
    Rectanglei rect;

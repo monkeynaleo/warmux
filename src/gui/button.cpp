@@ -24,48 +24,33 @@
 #include "../graphic/sprite.h"
 #include "../include/app.h"
 
-//-----------------------------------------------------------------------------
-
 Button::Button (uint x, uint y, uint w, uint h,
 		const Profile *res_profile, const std::string& resource_id)
-  : Widget(x, y, w, h)
-{
+  : Widget(x, y, w, h){
   image = resource_manager.LoadSprite(res_profile,resource_id);
   image->EnableLastFrameCache();
   image->ScaleSize(w,h);
 }
 
-//-----------------------------------------------------------------------------
-
 Button::Button (uint x, uint y, const Profile *res_profile, const std::string& resource_id)
-  : Widget(x, y, 1, 1)
-{
-  image = resource_manager.LoadSprite(res_profile,resource_id);
+  : Widget(x, y, 1, 1){
+  image = resource_manager.LoadSprite(res_profile, resource_id);
   w = image->GetWidth();
   h = image->GetHeight();
 }
 
-//-----------------------------------------------------------------------------
-
-Button::~Button()
-{
+Button::~Button(){
 	delete image;
 }
 
-//-----------------------------------------------------------------------------
+void Button::Draw (uint mouse_x, uint mouse_y){
+  uint frame = MouseIsOver(mouse_x, mouse_y)?1:0;
 
-void Button::Draw (uint mouse_x, uint mouse_y)
-{
-  uint frame = MouseIsOver(mouse_x,mouse_y)?1:0;
-  image->SetCurrentFrame (frame);
-  image->Blit(app.sdlwindow, x, y);
+  image->SetCurrentFrame(frame);
+  image->Blit(app.video.sdlwindow, x, y);
 }
 
-//-----------------------------------------------------------------------------
-
-void Button::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
-{
+void Button::SetSizePosition(uint _x, uint _y, uint _w, uint _h){
   StdSetSizePosition(_x, _y, _w, _h);
-  image->ScaleSize(w,h);
+  image->ScaleSize(w, h);
 }
-//-----------------------------------------------------------------------------

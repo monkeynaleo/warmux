@@ -82,7 +82,7 @@ void Sky::CompleteDraw()
      }
      SDL_Rect ds = {x, y,camera.GetWidth(),camera.GetHeight()};
      SDL_Rect dr = {margin_x,margin_y,camera.GetWidth(),camera.GetHeight()};
-     SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
+     SDL_BlitSurface( image, &ds, app.video.sdlwindow, &dr);
    }
    else
    {
@@ -107,25 +107,25 @@ void Sky::CompleteDraw()
 
      SDL_Rect ds = {x, y, w, h};
      SDL_Rect dr = {0,0, w, h};
-     SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
+     SDL_BlitSurface( image, &ds, app.video.sdlwindow, &dr);
 
      if(w < static_cast<int>(camera.GetWidth()))
      {
        SDL_Rect ds = {x+w-image->w, y, (int)camera.GetWidth()-w, h};
        SDL_Rect dr = {w,0, (int)camera.GetWidth()-w, h};
-       SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
+       SDL_BlitSurface( image, &ds, app.video.sdlwindow, &dr);
      }
      if(h < static_cast<int>(camera.GetHeight()))
      {
        SDL_Rect ds = {x, y+h-image->h, w, (int)camera.GetHeight()-h};
        SDL_Rect dr = {0,h, w, (int)camera.GetHeight()-h};
-       SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
+       SDL_BlitSurface( image, &ds, app.video.sdlwindow, &dr);
      }
      if(w < static_cast<int>(camera.GetWidth()) && h < static_cast<int>(camera.GetHeight()))
      {
        SDL_Rect ds = {x+w-image->w, y+h-image->h, camera.GetWidth()-w, camera.GetHeight()-h};
        SDL_Rect dr = {w,h, camera.GetWidth()-w, camera.GetHeight()-h};
-       SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
+       SDL_BlitSurface( image, &ds, app.video.sdlwindow, &dr);
      }
 
    }
@@ -179,7 +179,7 @@ void Sky::Draw()
 		   it->y-cy,
 		   it->w+1, 
 		   it->h+1};
-    SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
+    SDL_BlitSurface( image, &ds, app.video.sdlwindow, &dr);
   }
 
   for (it = world.to_redraw_particles_now->begin(); 
@@ -194,7 +194,7 @@ void Sky::Draw()
 		   it->y-cy,
 		   it->w+1, 
 		   it->h+1};
-    SDL_BlitSurface( image, &ds, app.sdlwindow, &dr);
+    SDL_BlitSurface( image, &ds, app.video.sdlwindow, &dr);
   }
 #endif
 }

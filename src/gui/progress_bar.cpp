@@ -186,7 +186,7 @@ void BarreProg::DrawXY (uint px, uint py) const
  
   // Blit internal surface to destination
   SDL_Rect d = {px, py, larg, haut};
-  SDL_BlitSurface( image, NULL, app.sdlwindow, &d);
+  SDL_BlitSurface( image, NULL, app.video.sdlwindow, &d);
 
   world.ToRedrawOnScreen(Rectanglei(d.x, d.y, d.w, d.h));
 }

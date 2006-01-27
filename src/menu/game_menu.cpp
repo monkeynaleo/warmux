@@ -272,7 +272,7 @@ void GameMenu::Draw(int mouse_x, int mouse_y)
 			      TEAM_LOGO_H,
 			      TEAM_LOGO_H};
 
-  SDL_BlitSurface (last_team->ecusson, NULL, app.sdlwindow, &team_icon_rect); 
+  SDL_BlitSurface (last_team->ecusson, NULL, app.video.sdlwindow, &team_icon_rect); 
   
   if (!terrain_init)
     {
@@ -280,7 +280,7 @@ void GameMenu::Draw(int mouse_x, int mouse_y)
       ChangeMap();
     }
   
-  map_preview->Blit ( app.sdlwindow, MAPS_X+MAPS_W+10, map_box->GetY()+5  );
+  map_preview->Blit ( app.video.sdlwindow, MAPS_X+MAPS_W+10, map_box->GetY()+5  );
 }
 
 //-----------------------------------------------------------------------------

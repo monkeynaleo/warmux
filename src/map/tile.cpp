@@ -130,7 +130,7 @@ void TileItem::Draw(const int x,const int y)
   SDL_Surface *i_surface = GetSurface();
   SDL_Rect ds = {0,0,cell_width,cell_height};
   SDL_Rect dr = {x*cell_width-camera.GetX(),y*cell_height-camera.GetY(),cell_width,cell_height};
-  SDL_BlitSurface (i_surface, &ds, app.sdlwindow, &dr); 	     
+  SDL_BlitSurface (i_surface, &ds, app.video.sdlwindow, &dr); 	     
 }
 
 bool TileItem::IsEmpty()
@@ -585,6 +585,6 @@ void Tile::DrawTile_Clipped( Rectanglei clip_r_world) const
 	  // Decall the destination rectangle along the camera offset
 	  SDL_Rect dr = { dest_x-camera.GetX(), dest_y-camera.GetY(), dest_w, dest_h};
 	  
-	  SDL_BlitSurface (item[cy*nbr_cell_width+cx]->GetSurface(), &sr, app.sdlwindow, &dr);
+	  SDL_BlitSurface (item[cy*nbr_cell_width+cx]->GetSurface(), &sr, app.video.sdlwindow, &dr);
        }
 }   
