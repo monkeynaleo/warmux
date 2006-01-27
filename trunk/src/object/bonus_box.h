@@ -68,7 +68,7 @@ public:
 
   void Draw();
   void Refresh();
-  bool NewBonusBox();
+  void NewBonusBox();
  private:
   void ApplyBonus (Team &team, Character &character);
 
