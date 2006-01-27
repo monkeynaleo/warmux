@@ -143,14 +143,14 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
   /* Check is there are any modes available */
   if(modes == (SDL_Rect **)0){
     std::ostringstream ss;
-    ss << app.sdlwindow->w << "x" << app.sdlwindow->h ;
+    ss << app.video.GetWidth() << "x" << app.video.GetHeight();
     lbox_video_mode->AddItem(false,"No modes available!", ss.str());
   } else {
     for(int i=0;modes[i];++i) {
       if (modes[i]->w < 800 || modes[i]->h < 600) break; 
       std::ostringstream ss;
       ss << modes[i]->w << "x" << modes[i]->h ;
-      if (modes[i]->w == app.sdlwindow->w && modes[i]->h == app.sdlwindow->h)
+      if (modes[i]->w == app.video.GetWidth() && modes[i]->h == app.video.GetHeight())
 	lbox_video_mode->AddItem(true, ss.str(), ss.str());
       else
 	lbox_video_mode->AddItem(false, ss.str(), ss.str());
@@ -165,11 +165,11 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
 
   resource_manager.UnLoadXMLProfile( res);
 
-  opt_max_fps->SetValue (video.GetMaxFps());
+  opt_max_fps->SetValue (app.video.GetMaxFps());
   opt_display_wind_particles->SetValue (config.display_wind_particles);
   opt_display_energy->SetValue (config.display_energy_character);
   opt_display_name->SetValue (config.display_name_character);
-  full_screen->SetValue (video.IsFullScreen());
+  full_screen->SetValue (app.video.IsFullScreen());
   opt_duration_turn->SetValue(game_mode.duration_turn);
   opt_duration_end_turn->SetValue(game_mode.duration_move_player);
   opt_nb_characters->SetValue(game_mode.max_characters);
@@ -214,15 +214,15 @@ void OptionMenu::SaveOptions()
 
   game_mode.character.init_energy = opt_energy_ini->GetValue() ;
 
-  video.SetMaxFps(opt_max_fps->GetValue());
+  app.video.SetMaxFps(opt_max_fps->GetValue());
   // Video mode
   std::string s_mode = lbox_video_mode->ReadValue();
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
-  video.SetConfig(w, h, full_screen->GetValue());
+  app.video.SetConfig(w, h, full_screen->GetValue());
   
-  uint x = (video.GetWidth()/2);
-  uint y = video.GetHeight()-50;
+  uint x = app.video.GetWidth() / 2;
+  uint y = app.video.GetHeight() - 50;
 
   SetActionButtonsXY(x, y);
    

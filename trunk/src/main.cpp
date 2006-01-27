@@ -119,8 +119,8 @@ void AppWormux::Init(int argc, char **argv)
   config.Charge();
 
   InitNetwork(argc, argv);
-  InitScreen();
-  InitWindow();
+  video.InitScreen();
+  video.InitWindow();
   InitFonts();
 
   DisplayLoadingPicture();
@@ -129,8 +129,7 @@ void AppWormux::Init(int argc, char **argv)
   jukebox.Init();
 }
 
-void AppWormux::InitNetwork(int argc, char **argv)
-{
+void AppWormux::InitNetwork(int argc, char **argv){
 #ifdef TODO_NETWORK 
   if ((argc == 3) && (strcmp(argv[1],"server")==0)) {
 	// wormux server <port>
@@ -142,64 +141,42 @@ void AppWormux::InitNetwork(int argc, char **argv)
 #endif
 }
 
-void AppWormux::InitScreen()
-{
-  if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
-    Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) );
-}
-
-void AppWormux::InitWindow()
-{
-  std::string txt_version = std::string("Wormux ") + VERSION;
-  std::string icon = config.data_dir + "wormux-32.xpm";
-
-  // Open a new window
-  app.sdlwindow = NULL;
-  video.SetConfig(config.tmp.video.width,
-		  config.tmp.video.height,
-		  config.tmp.video.fullscreen);
-
-  // Set window caption
-  SDL_WM_SetCaption(txt_version.c_str(), NULL);
-  SDL_WM_SetIcon(IMG_Load(icon.c_str()), NULL);
-}
-
-void AppWormux::DisplayLoadingPicture()
-{
+void AppWormux::DisplayLoadingPicture(){
   std::string txt_version = _("Version") + std::string(" ") + VERSION;
 
   std::string filename = config.data_dir + CONCAT_DIR("menu", CONCAT_DIR("img", "loading.png"));
-  Sprite * loading_image=new Sprite(IMG_Load(filename.c_str()));
-  loading_image->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
-  loading_image->Blit( app.sdlwindow, 0, 0);
+  Sprite * loading_image=new Sprite( IMG_Load(filename.c_str()) );
+  loading_image->ScaleSize( video.GetWidth(), video.GetHeight() );
+  loading_image->Blit( video.sdlwindow, 0, 0);
 
   Wormux::global_time.Reset();
 
+  video.Flip();
+
   Text text1(_("Wormux launching..."), white_color, &global().huge_font(), true); 
   Text text2(txt_version, white_color, &global().huge_font(), true); 
+  
   int x = video.GetWidth()/2;
   int y = video.GetHeight()/2;
+
   text1.DrawCenter (x, y);
   y += global().huge_font().GetHeight() + 20;
   text2.DrawCenter (x, y);
 
-
-  SDL_UpdateRect(app.sdlwindow, 0, 0, 0, 0);
-  SDL_Flip(app.sdlwindow);
+  SDL_UpdateRect(video.sdlwindow, 0, 0, 0, 0);
+  video.Flip();
   delete loading_image;
 }
 
-void AppWormux::InitFonts()
-{
-  if (TTF_Init()==-1)
+void AppWormux::InitFonts(){
+  if( TTF_Init() == -1 )
     Error( Format( _("Initialisation of TTF library failed: %s"), TTF_GetError() ) );
-  if (!Font::InitAllFonts())
+  if( !Font::InitAllFonts() )
     Error( _("Unable to initialise the fonts.") );
   createGlobal();
 }
 
-void AppWormux::End()
-{
+void AppWormux::End(){
   std::cout << std::endl
 	    << "[ " << _("Quit Wormux") << " ]" << std::endl;
 
@@ -217,8 +194,7 @@ void AppWormux::End()
             << std::endl;
 }
 
-void AppWormux::DisplayWelcomeMessage()
-{
+void AppWormux::DisplayWelcomeMessage(){
   std::cout << "=== " << _("Wormux version ") << VERSION << std::endl;
   std::cout << "=== " << _("Authors:") << ' ';
   for (std::vector<std::string>::iterator it=AUTHORS.begin(),

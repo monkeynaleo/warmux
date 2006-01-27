@@ -23,15 +23,16 @@
 #include <iostream>
 #include <algorithm>
 #include <sstream>
+#include <string>
 #include <SDL_endian.h>
+#include <SDL_image.h>
+#include "../game/config.h"
 #include "../tool/error.h"
 #include "../tool/i18n.h"
 #include "../include/app.h"
+#include "../include/constant.h"
 
-const int WIDTH_MIN=800;
-const int HEIGHT_MIN=600;
-
-Video video;
+using namespace Wormux;
 
 Video::Video() {
   SetMaxFps (50);
@@ -39,13 +40,12 @@ Video::Video() {
 }
 
 void Video::SetMaxFps(uint max_fps){
-	m_max_fps = max_fps;
-	if (0 < m_max_fps)
-		m_sleep_max_fps = 1000/m_max_fps;
-	else
-		m_sleep_max_fps = 0;
+  m_max_fps = max_fps;
+  if (0 < m_max_fps)
+    m_sleep_max_fps = 1000/m_max_fps;
+  else
+    m_sleep_max_fps = 0;
 }
-
 
 uint Video::GetMaxFps(){
   return m_max_fps;
@@ -56,11 +56,11 @@ uint Video::GetSleepMaxFps(){
 }
 
 int Video::GetWidth(void) const{
-  return app.sdlwindow->w;
+  return sdlwindow->w;
 }
 
 int Video::GetHeight(void) const{
-  return app.sdlwindow->h;
+  return sdlwindow->h;
 }
 
 bool Video::IsFullScreen(void) const{
@@ -69,28 +69,58 @@ bool Video::IsFullScreen(void) const{
 
 bool Video::SetConfig(int width, int height, bool _fullscreen){
   // initialize the main window
-  if ((app.sdlwindow == NULL) || 
-      (width != app.sdlwindow->w || height != app.sdlwindow->h)) {
-    app.sdlwindow = SDL_SetVideoMode(width,
-				     height,
+  if( (sdlwindow == NULL) || 
+      (width != GetWidth() || height != GetHeight() ) ){
+
+    sdlwindow = SDL_SetVideoMode(width, height,
 				     32, //resolution in bpp
 				     SDL_HWSURFACE| SDL_HWACCEL |SDL_DOUBLEBUF);
-    if (app.sdlwindow == NULL) 
-      app.sdlwindow = SDL_SetVideoMode(width,
-				       height,
+
+    if( sdlwindow == NULL ) 
+      sdlwindow = SDL_SetVideoMode(width, height,
 				       32, //resolution in bpp
 				       SDL_SWSURFACE);
-
-    if (app.sdlwindow == NULL) return false;
+    
+    if( sdlwindow == NULL )
+      return false;
     fullscreen = false;
   }
 
-  // fullscreen ?
-  if (fullscreen != _fullscreen) {
-    SDL_WM_ToggleFullScreen(app.sdlwindow);
+  if(fullscreen != _fullscreen ){
+    SDL_WM_ToggleFullScreen(sdlwindow);
     fullscreen = _fullscreen;
   }
 
   return true;
 }
 
+void Video::InitWindow(){
+  sdlwindow = NULL;
+
+  SetConfig(config.tmp.video.width,
+                  config.tmp.video.height,
+                  config.tmp.video.fullscreen);
+  
+  SetWindowCaption( std::string("Wormux ") + VERSION );
+  SetWindowIcon( config.data_dir + "wormux-32.xpm" );
+
+  if( sdlwindow == NULL )
+	  Error("dommage");
+}
+
+void Video::SetWindowCaption(std::string caption){
+  SDL_WM_SetCaption( caption.c_str(), NULL );
+}
+
+void Video::SetWindowIcon(std::string filename){
+  SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
+}
+
+void Video::InitScreen(){
+ if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
+   Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
+}
+
+void Video::Flip(){
+  SDL_Flip(sdlwindow);
+}

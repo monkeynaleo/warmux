@@ -26,8 +26,8 @@
 #include "../graphic/text.h"
 #include "../graphic/video.h"
 #include "../include/app.h" // SDL_Flip
-#include "../map/map.h"
 #include "../include/global.h"
+#include "../map/map.h"
 using namespace Wormux;
 
 //-----------------------------------------------------------------------------
@@ -65,10 +65,10 @@ void Question::TraiteTouche (SDL_Event &event)
 void Question::Draw()
 {
   DrawTmpBoxText (global().big_font(), 
-		  video.GetWidth()/2, video.GetHeight()/2,
+		  app.video.GetWidth()/2, app.video.GetHeight()/2,
 		  message,
 		  10);
-  SDL_Flip( app.sdlwindow);
+  app.video.Flip();
 }
 
 //-----------------------------------------------------------------------------

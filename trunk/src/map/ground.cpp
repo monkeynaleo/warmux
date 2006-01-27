@@ -263,18 +263,18 @@ void Ground::Draw()
   int cy = camera.GetY();  
   
   if (camera.HasFixedX()) {// ground is less wide than screen !
-    uint margin = (video.GetWidth()-GetWidth())/2;
-    boxRGBA(app.sdlwindow, 0, 0,margin, video.GetHeight(),
+    uint margin = (app.video.GetWidth()-GetWidth())/2;
+    boxRGBA(app.video.sdlwindow, 0, 0,margin, app.video.GetHeight(),
 	    0, 0, 0, 255); 
-    boxRGBA(app.sdlwindow, video.GetWidth()-margin, 0, video.GetWidth(), video.GetHeight(),
+    boxRGBA(app.video.sdlwindow, app.video.GetWidth()-margin, 0, app.video.GetWidth(), app.video.GetHeight(),
 	    0, 0, 0, 255); 
   }
 
   if (camera.HasFixedY()) {// ground is less wide than screen !
-    uint margin = (video.GetHeight()-GetHeight())/2;
-    boxRGBA(app.sdlwindow, 0, 0, video.GetWidth(), margin,
+    uint margin = (app.video.GetHeight()-GetHeight())/2;
+    boxRGBA(app.video.sdlwindow, 0, 0, app.video.GetWidth(), margin,
 	    0, 0, 0, 255); 
-    boxRGBA(app.sdlwindow, 0, video.GetHeight()-margin, video.GetWidth(), video.GetHeight(),
+    boxRGBA(app.video.sdlwindow, 0, app.video.GetHeight()-margin, app.video.GetWidth(), app.video.GetHeight(),
 	    0, 0, 0, 255); 
   }
 

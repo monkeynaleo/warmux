@@ -21,21 +21,19 @@
  *****************************************************************************/
 
 #include "main_menu.h"
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <SDL_image.h>
 #include <string>
-#include "../include/global.h"
-#include "../include/app.h"
-#include "../include/constant.h" // VERSION
+#include "infos_menu.h"
 #include "../game/config.h"
+#include "../graphic/font.h"
+#include "../include/app.h"
+#include "../include/global.h"
+#include "../include/constant.h" // VERSION
+#include "../sound/jukebox.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include "../tool/resource_manager.h"
-#include "../sound/jukebox.h"
-#include "../graphic/font.h"
-#include "infos_menu.h"
-#include "../include/global.h"
 
 //#define NETWORK_BUTTON 
 
@@ -45,17 +43,13 @@
 
 using namespace Wormux;
 using namespace std;
-//-----------------------------------------------------------------------------
 
 // Position du texte de la version
 const int VERSION_DY = -40;
 
 const int DEFAULT_SCREEN_HEIGHT = 768 ;
 
-//-----------------------------------------------------------------------------
-
-Main_Menu::~Main_Menu()
-{
+Main_Menu::~Main_Menu(){
   delete background;
   delete play;
   delete network;
@@ -67,34 +61,48 @@ Main_Menu::~Main_Menu()
   delete website_text;
 }
 
-//-----------------------------------------------------------------------------
-void Main_Menu::button_click()
-{ jukebox.Play("share", "menu/clic"); }
+void Main_Menu::button_click(){
+  jukebox.Play("share", "menu/clic");
+}
 
-bool Main_Menu::sig_play()
-{ button_click(); choice=menuPLAY;return true; }
-bool Main_Menu::sig_network()
-{ button_click(); choice=menuNETWORK;return true; }
-bool Main_Menu::sig_options()
-{ button_click(); choice=menuOPTIONS;return true; }
-bool Main_Menu::sig_infos()
-{ button_click(); menu_infos.Run();return true; }
-bool Main_Menu::sig_quit()
-{ choice=menuQUIT;return true; }
-//-----------------------------------------------------------------------------
+bool Main_Menu::sig_play(){
+  button_click();
+  choice = menuPLAY;
+  return true;
+}
 
-Main_Menu::Main_Menu()
-{
+bool Main_Menu::sig_network(){
+  button_click();
+  choice = menuNETWORK;
+  return true;
+}
+  
+bool Main_Menu::sig_options(){ 
+  button_click(); 
+  choice = menuOPTIONS;
+  return true; 
+}
+
+bool Main_Menu::sig_infos(){ 
+  button_click(); 
+  menu_infos.Run();
+  return true; 
+}
+  
+bool Main_Menu::sig_quit(){ 
+  choice=menuQUIT;return true; }
+
+Main_Menu::Main_Menu(){
   int x_button;
-  double y_scale ;
+  double y_scale;
 
-//  app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
-  background=new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
+  //app.SetBackground("../data/menu/img/background.png",BKMODE_STRETCH); -->doesn't work with relative path
+  background = new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
   background->EnableLastFrameCache();
 
-  y_scale = (double)app.sdlwindow->h / DEFAULT_SCREEN_HEIGHT ;
+  y_scale = (double)app.video.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
 
-  x_button =  app.sdlwindow->w/2 - 402/2;
+  x_button = app.video.GetWidth()/2 - 402/2;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
@@ -148,7 +156,6 @@ Main_Menu::Main_Menu()
   website_text = new Text(s2, green_color, &global().normal_font(), false);
 }
 
-//-----------------------------------------------------------------------------
 void Main_Menu::onClick ( int x, int y, int button)
 {       
   if (play->MouseIsOver (x, y)) sig_play();
@@ -160,40 +167,35 @@ void Main_Menu::onClick ( int x, int y, int button)
   else if (quit->MouseIsOver (x, y)) sig_quit();
 }
 
-//-----------------------------------------------------------------------------
-menu_item Main_Menu::Run ()
-{
+menu_item Main_Menu::Run (){
   int x=0, y=0;
 
-  SDL_Flip( app.sdlwindow);
- 
+  app.video.Flip();
+  
   choice = menuNULL;
-  while (choice == menuNULL)
-  {
+  while (choice == menuNULL){
     
     // Poll and treat events
    SDL_Event event;
      
-   while( SDL_PollEvent( &event) ) {      
-       if ( event.type == SDL_MOUSEBUTTONDOWN ) {
+   while( SDL_PollEvent( &event) ){      
+       if( event.type == SDL_MOUSEBUTTONDOWN ){
            onClick( event.button.x, event.button.y, event.button.button);
-       } else if ( event.type == SDL_KEYDOWN )  {
-	     if ( event.key.keysym.sym == SDLK_ESCAPE)
-         {
+       }else if( event.type == SDL_KEYDOWN ){
+	 if( event.key.keysym.sym == SDLK_ESCAPE ){
              choice = menuQUIT;
              break;
-         }
-         
-       } else if ( event.type == SDL_QUIT)  {
-           choice = menuQUIT;
-           break;
+         }       
+       }else if ( event.type == SDL_QUIT){
+         choice = menuQUIT;
+         break;
        }
    }
 
    SDL_GetMouseState( &x, &y);
    
-   background->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
-   background->Blit( app.sdlwindow, 0, 0);
+   background->ScaleSize(app.video.GetWidth(), app.video.GetHeight());
+   background->Blit( app.video.sdlwindow, 0, 0);
 
    play->Draw(x,y);
 #ifdef NETWORK_BUTTON  
@@ -203,15 +205,14 @@ menu_item Main_Menu::Run ()
    infos->Draw(x,y);
    quit->Draw(x,y);
 
-   version_text->DrawCenter( app.sdlwindow->w/2,
-			      app.sdlwindow->h+VERSION_DY);
-   website_text->DrawCenter( app.sdlwindow->w/2,
-			     app.sdlwindow->h+VERSION_DY/2);
+   version_text->DrawCenter( app.video.GetWidth()/2,
+			      app.video.GetHeight() + VERSION_DY);
+   website_text->DrawCenter( app.video.GetWidth()/2,
+			     app.video.GetHeight() + VERSION_DY/2);
    
-   SDL_Flip(app.sdlwindow);
+   app.video.Flip();
   }
   
   return choice;
 }
 
-//-----------------------------------------------------------------------------

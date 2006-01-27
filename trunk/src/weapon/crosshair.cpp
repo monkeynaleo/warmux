@@ -92,7 +92,7 @@ void CrossHair::Draw()
   x -= image->w/2;
   y -= image->h/2;
   SDL_Rect dest = { x-camera.GetX(),y-camera.GetY(),image->w,image->h};
-  SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
+  SDL_BlitSurface( image, NULL, app.video.sdlwindow, &dest);
 
   world.ToRedrawOnMap(Rectanglei(x, y, image->w, image->h));
 }

@@ -27,7 +27,7 @@
 class Text
 {
   SDL_Surface* surf;
-  SDL_Surface* background; //shoadow or outline or nothing;
+  SDL_Surface* background; //shadow or outline or nothing;
   std::string txt;
   Font* font;
   SDL_Color color;

@@ -72,7 +72,7 @@ void InitGameData_NetServer()
       action_handler.ExecActions();
       std::cout << msg << std::endl;
       CL_Display::clear(CL_Color::black);
-      police_grand.WriteCenterTop (video.GetWidth()/2, video.GetHeight()/2, msg);
+      police_grand.WriteCenterTop (app.video.GetWidth()/2, app.video.GetHeight()/2, msg);
       CL_Display::flip();
       CL_System::keep_alive(500);
     } while (network.state != Network::NETWORK_SERVER_INIT_GAME);
@@ -166,7 +166,7 @@ void InitGameData_NetClient()
       std::cout << network.state << std::endl;
       std::cout << msg << std::endl;
       CL_Display::clear(CL_Color::black);
-      police_grand.WriteCenterTop (video.GetWidth()/2, video.GetHeight()/2, msg);
+      police_grand.WriteCenterTop (app.video.GetWidth()/2, app.video.GetHeight()/2, msg);
       CL_Display::flip();
       CL_System::keep_alive(300);
     } while (network.state != Network::NETWORK_PLAYING);
@@ -221,9 +221,9 @@ void InitGame ()
 {
   // Display loading screen
   Sprite * loading_image=new Sprite(IMG_Load((config.data_dir+"menu/img/loading.png").c_str()));
-  loading_image->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
-  loading_image->Blit( app.sdlwindow, 0, 0);
-  SDL_Flip(app.sdlwindow);
+  loading_image->ScaleSize(app.video.GetWidth(), app.video.GetHeight());
+  loading_image->Blit( app.video.sdlwindow, 0, 0);
+  app.video.Flip();
   delete loading_image;
 
   game.MessageLoading();
@@ -418,7 +418,7 @@ void GameLoop::CallDraw()
 {
   Draw();
   StatStart("GameDraw:flip()");
-  SDL_Flip( app.sdlwindow);
+  app.video.Flip();
   StatStop("GameDraw:flip()");
 }
 
@@ -450,8 +450,8 @@ void GameLoop::Run()
 #ifdef ENABLE_LIMIT_FPS    
     delay = SDL_GetTicks()-start;
      
-    if (delay < video.GetSleepMaxFps())
-      sleep_fps = video.GetSleepMaxFps() - delay;
+    if (delay < app.video.GetSleepMaxFps())
+      sleep_fps = app.video.GetSleepMaxFps() - delay;
     else
       sleep_fps = 0;
     SDL_Delay(sleep_fps);

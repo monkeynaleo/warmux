@@ -21,25 +21,25 @@
 
 #ifndef LIST_BOX_H
 #define LIST_BOX_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
-#include "../include/base.h"
-#include "widget.h"
-#include "button.h"
+
 #include <string>
 #include <vector>
-//-----------------------------------------------------------------------------
+#include <SDL.h>
+#include "widget.h"
+#include "button.h"
+#include "../include/base.h"
 
 typedef struct s_list_box_item_t{
     std::string label;
     std::string value;
-  } list_box_item_t;
+} list_box_item_t;
 
 
 class ListBox : public Widget
 { 
- public:
+public:
   bool always_one_selected;
+  
 private:
   // for the placement
   uint nb_visible_items, nb_visible_items_max;
@@ -79,5 +79,4 @@ public:
   std::vector<list_box_item_t> * GetItemsList();
 };
 
-//-----------------------------------------------------------------------------
 #endif
