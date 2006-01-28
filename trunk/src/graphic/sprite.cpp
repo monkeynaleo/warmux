@@ -641,9 +641,6 @@ void Sprite::Blit( SDL_Surface *dest, int pos_x, int pos_y, int src_x, int src_y
   int x = pos_x + rot_x;
   int y = pos_y + rot_y;
 
-  assert(src_x < (int)tmp_surface->w && src_y < (int)tmp_surface->h);
-  assert(src_x + (int)w < (int)tmp_surface->w && src_y + (int)h < (int)tmp_surface->h);
-
   SDL_Rect src = {src_x, src_y, w, h};
   SDL_Rect dst = {x, y, w, h};
   SDL_BlitSurface (tmp_surface, &src, dest, &dst);

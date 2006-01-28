@@ -126,7 +126,7 @@ Sprite* WaveSurface(SDL_Surface* a,unsigned int nbr_frames, unsigned int duratio
 	return sprite;
 }
 
-//Modify the scale of 'spr' to make it deform as if it was rebounding
+// Modify the scale of 'spr' to make it deform as if it was rebounding
 // dy return the offset that should be used to display the sprite at the good position
 // t0 time when we began to rebound
 // per time to do one full rebound
@@ -157,3 +157,44 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
   float dt2 = ((3*per/4)-dt)/(3.0*per/4.0);
   dy += (int)((-4.0*dt2*dt2 + 4.0*dt2) * dy_max);
 }
+
+//Returns value of y_stretch and y, to be used on an object, to make him do
+// a gelatine like shaking.
+// stretch_y: number of pixel to stretch the img
+// t0 : time of begining of the effect in milliseconds
+// amp: amplitude of the oscillation in pixel
+// dur: duration of the oscillation in milliseconds
+// per: number of oscillations
+void Gelatine (int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
+{
+  uint dt = Wormux::global_time.Read() - t0;
+  if(dt >= dur)
+  {
+    y = 0;
+    stretch_y = 0;
+    return;
+  }
+
+  //Amplitude decrease linearly with time
+  amp = amp * (dur - dt) / dur;
+
+  //Scale
+  stretch_y = (int)(sin((float)per * (float)dt * 2.0 * M_PI / (float)dur) * (float)amp);
+
+  //Offset
+  if(stretch_y < 0.0)
+  {
+    y = stretch_y;
+    stretch_y = -stretch_y;
+  }
+  else
+  {
+    y = 0;
+  }
+}
+
+
+
+
+
+
