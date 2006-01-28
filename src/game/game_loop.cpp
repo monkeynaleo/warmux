@@ -221,6 +221,7 @@ void InitGame ()
 {
   // Display loading screen
   Sprite * loading_image=new Sprite(IMG_Load((config.data_dir+"menu/img/loading.png").c_str()));
+  loading_image->EnableLastFrameCache();
   loading_image->ScaleSize(app.video.GetWidth(), app.video.GetHeight());
   loading_image->Blit( app.video.sdlwindow, 0, 0);
   app.video.Flip();
