@@ -44,12 +44,6 @@ namespace Wormux
 {
 Config config;
 
-#ifndef WIN32
-const std::string REP_CONFIG="~/.wormux/";
-#else
-const std::string REP_CONFIG="";
-#endif
-
 const std::string NOMFICH="config.xml";
 
 Config::Config()
@@ -108,9 +102,6 @@ bool Config::ChargeVraiment()
     // Charge la configuration XML
     LitDocXml doc;
     m_nomfich = personal_dir+NOMFICH;
-#ifdef __MINGW32__
-printf("charge %s",m_nomfich.c_str());
-#endif
     if (!doc.Charge (m_nomfich)) return false;
     if (!ChargeXml (doc.racine())) return false;
     m_xml_charge = true;
@@ -257,15 +248,16 @@ void Config::Applique()
 bool Config::Sauve()
 {
   // Le répertoire de config n'existe pas ? le créer
-  std::string rep = TranslateDirectory(REP_CONFIG);
+  std::string rep = personal_dir;
 #ifndef WIN32
   if (!IsFileExist (rep))
   {
     if (mkdir (rep.c_str(), 0750) != 0)
     {
-      std::cout << "o Erreur lors de la création répertoire " << rep 
-		<< ", impossible de créer le fichier de configuration." 
-		<< std::endl;
+      std::cerr << "o " 
+        << Format(_("Error while creating directory \"%s\": unable to store configuration file."), 
+            rep.c_str())
+        << std::endl;
       return false;
     }
   }
