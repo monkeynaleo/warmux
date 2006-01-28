@@ -23,7 +23,7 @@
 #include "box.h"
 #include "../include/app.h"
 
-Box::Box(uint x, uint y, uint w, uint h, 
+Box::Box(int x, int y, uint w, uint h, 
 	 bool _visible) :
   Widget(x,y,w,h){
 	  
@@ -80,7 +80,7 @@ void Box::SetBorder (uint _w_border, uint _h_border){
   h_border = _h_border;
 }
 
-VBox::VBox(uint x, uint y, uint w, bool _visible) :
+VBox::VBox(int x, int y, uint w, bool _visible) :
   Box(x, y, w, 1, _visible){
 }
 
@@ -106,7 +106,7 @@ void VBox::AddWidget(Widget * a_widget){
   h = a_widget->GetY() + a_widget->GetH() - y + h_border;
 }
 
-void VBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h){
+void VBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
   x = _x;
   y = _y;
 
@@ -128,7 +128,7 @@ void VBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h){
   }
 }
 
-HBox::HBox(uint x, uint y, uint h, bool _visible) :
+HBox::HBox(int x, int y, uint h, bool _visible) :
   Box(x, y, 1, h, _visible){
 }
 
@@ -154,7 +154,7 @@ void HBox::AddWidget(Widget * a_widget){
   w = a_widget->GetX() + a_widget->GetW() - x + w_border;
 }
 
-void HBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h){
+void HBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
   x = _x;
   y = _y;
 
