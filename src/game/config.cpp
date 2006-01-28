@@ -26,6 +26,9 @@
 #include <sstream>
 #include <iostream>
 #include <sys/stat.h>
+#ifdef WIN32
+#  include <direct.h>
+#endif
 #include "game_mode.h"
 #include "../graphic/video.h"
 #include "../include/action.h"
@@ -78,7 +81,7 @@ Config::Config()
 #ifndef WIN32
   personal_dir = GetHome()+"/.wormux/";
 #else
-  personal_dir ="";
+  personal_dir = GetHome()+"\\Wormux\\";
 #endif
 }
 
@@ -247,21 +250,21 @@ void Config::Applique()
 
 bool Config::Sauve()
 {
-  // Le répertoire de config n'existe pas ? le créer
   std::string rep = personal_dir;
+  
+  // Create the directory if it doesn't exist
 #ifndef WIN32
-  if (!IsFileExist (rep))
-  {
-    if (mkdir (rep.c_str(), 0750) != 0)
-    {
-      std::cerr << "o " 
-        << Format(_("Error while creating directory \"%s\": unable to store configuration file."), 
-            rep.c_str())
-        << std::endl;
-      return false;
-    }
-  }
+   if (mkdir (personal_dir.c_str(), 0750) != 0 && errno != EEXIST)
+#else
+  if (_mkdir (personal_dir.c_str()) != 0 && errno != EEXIST)
 #endif
+  {
+    std::cerr << "o " 
+      << Format(_("Error while creating directory \"%s\": unable to store configuration file."), 
+          rep.c_str())
+      << std::endl;
+    return false;
+  }
 
   if (!SauveXml())
   {
