@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<resources>
+  <equipe>
+    <nom>Tux Team</nom>
+    <ver nom="Tux" avatar="tux" />
+	 <ver nom="Chilly Willy" avatar="tux" />
+    <ver nom="Pingu" avatar="tux" />
+    <ver nom="Royal" avatar="tux" />
+    <ver nom="Gorfou" avatar="tux" />
+    <ver nom="Papou" avatar="tux" />
+    <ver nom="Empereur" avatar="tux" />
+    <ver nom="Pygmée" avatar="tux" />
+    <ver nom="Antipode" avatar="tux" />
+    <ver nom="Adélie" avatar="tux" />
+    <ver nom="Pittsburgh" avatar="tux" />
+	 <ver nom="Pengo" avatar="tux" />
+	 <ver nom="Bandit" avatar="tux" />
+	 <ver nom="Lea" avatar="tux" />    
+  </equipe>
+  <surface name="flag" file="flag.png" />
+</resources>
