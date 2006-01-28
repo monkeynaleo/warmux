@@ -65,8 +65,8 @@ ListBox::~ListBox(){
 int ListBox::MouseIsOnWhichItem (uint mouse_x, uint mouse_y){
   if( ((int)mouse_x < x+1)
       || ((int)mouse_y < y+1)
-      || ((y+1 + h) < (int)mouse_y)
-      || ((x + w) < (int)mouse_x) )
+      || ((y+1 + (int)h) < (int)mouse_y)
+      || ((x + (int)w) < (int)mouse_x) )
     return -1;
 
   int index = (mouse_y - y) / height_item;

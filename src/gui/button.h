@@ -43,6 +43,7 @@ public:
   virtual void Draw (uint mouse_x, uint mouse_y);
   virtual void SetSizePosition(int _x, int _y, uint _w, uint _h);
   
+  Sprite* GetSprite() { return image; };
 };
 
 //-----------------------------------------------------------------------------
