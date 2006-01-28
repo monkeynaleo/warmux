@@ -251,8 +251,21 @@ void Sprite::EnableLastFrameCache(){
   //to display it again if rotation / scale / alpha didn't changed
   assert(!have_rotation_cache);
   assert(!have_flipping_cache);
-  assert(!have_lastframe_cache);
   have_lastframe_cache = true;
+}
+
+void Sprite::DisableLastFrameCache(){
+  //The result of the last call to SDLgfx is kept in memory
+  //to display it again if rotation / scale / alpha didn't changed
+  assert(!have_rotation_cache);
+  assert(!have_flipping_cache);
+  have_lastframe_cache = false;
+  
+  if(last_frame!=NULL)
+  {
+    SDL_FreeSurface(last_frame);
+    last_frame = NULL;
+  }
 }
 
 void Sprite::LastFrameModified(){
@@ -518,7 +531,7 @@ void Sprite::RefreshSurface()
       {
 #define BUGGY_SDLGFX
 #ifdef BUGGY_SDLGFX
-        if(rotation_deg != 0.0)
+        if(rotation_deg != 0.0 || (scale_x != 1.0 && scale_y == 1.0))
         {
           tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
           last_frame = tmp_surface;

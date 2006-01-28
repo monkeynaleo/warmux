@@ -73,6 +73,7 @@ typedef enum {
    void EnableRotationCache(unsigned int cache_size);
    void EnableFlippingCache();
    void EnableLastFrameCache();
+   void DisableLastFrameCache();
 
    // Get/Set physical characterisics
 	void SetSize(unsigned int w, unsigned int h);

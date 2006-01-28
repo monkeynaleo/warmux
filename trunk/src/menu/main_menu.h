@@ -49,9 +49,9 @@ private:
   Text * version_text, * website_text;
   uint start_time;
   uint last_refresh;
-  uint anim_frame_count;
   uint button_height, button_width, title_offset, skin_offset;
   int title_y, skinl_y, skinr_y;
+  bool anim_finished;
 public:
   menu_item choice;
 
