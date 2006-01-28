@@ -26,6 +26,7 @@
 #include <sstream>
 #include <iostream>
 #include <sys/stat.h>
+#include <errno.h>
 #ifdef WIN32
 #  include <direct.h>
 #endif
