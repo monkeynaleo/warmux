@@ -38,7 +38,7 @@ struct CompareItems
      }
 };
 
-ListBox::ListBox (uint _x, uint _y, uint _w, uint _h)
+ListBox::ListBox (int _x, int _y, uint _w, uint _h)
   : Widget(_x,_y,_w,_h){  
 	  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
@@ -63,10 +63,10 @@ ListBox::~ListBox(){
 }
 
 int ListBox::MouseIsOnWhichItem (uint mouse_x, uint mouse_y){
-  if( (mouse_x < x+1)
-      || (mouse_y < y+1)
-      || ((y+1 + h) < mouse_y)
-      || ((x + w) < mouse_x) )
+  if( ((int)mouse_x < x+1)
+      || ((int)mouse_y < y+1)
+      || ((y+1 + h) < (int)mouse_y)
+      || ((x + w) < (int)mouse_x) )
     return -1;
 
   int index = (mouse_y - y) / height_item;
@@ -161,7 +161,7 @@ void ListBox::Draw (uint mouse_x, uint mouse_y){
   }
 }
 
-void ListBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h){
+void ListBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
   StdSetSizePosition(_x, _y, _w, _h);
   m_up->SetSizePosition(x+w-10, y, 10, 5);
   m_down->SetSizePosition(x+w-10, y+h-5, 10, 5);  

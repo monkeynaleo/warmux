@@ -28,7 +28,7 @@
 
 using namespace Wormux;
 
-CheckBox::CheckBox (const std::string &label, uint x, uint y, uint w, bool value) :
+CheckBox::CheckBox (const std::string &label, int x, int y, uint w, bool value) :
   Widget(x, y, w, global().small_font().GetHeight()){
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadSprite( res, "menu/check");
@@ -64,7 +64,7 @@ bool CheckBox::Clic (uint mouse_x, uint mouse_y, uint button){
   return true ;
 }
 
-void CheckBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h){
+void CheckBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
   StdSetSizePosition(_x, _y, _w, _h);
 }
 

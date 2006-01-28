@@ -24,7 +24,7 @@
 #include "../graphic/sprite.h"
 #include "../include/app.h"
 
-Button::Button (uint x, uint y, uint w, uint h,
+Button::Button (int x, int y, uint w, uint h,
 		const Profile *res_profile, const std::string& resource_id)
   : Widget(x, y, w, h){
   image = resource_manager.LoadSprite(res_profile,resource_id);
@@ -32,7 +32,7 @@ Button::Button (uint x, uint y, uint w, uint h,
   image->ScaleSize(w,h);
 }
 
-Button::Button (uint x, uint y, const Profile *res_profile, const std::string& resource_id)
+Button::Button (int x, int y, const Profile *res_profile, const std::string& resource_id)
   : Widget(x, y, 1, 1){
   image = resource_manager.LoadSprite(res_profile, resource_id);
   w = image->GetWidth();
@@ -50,7 +50,7 @@ void Button::Draw (uint mouse_x, uint mouse_y){
   image->Blit(app.video.sdlwindow, x, y);
 }
 
-void Button::SetSizePosition(uint _x, uint _y, uint _w, uint _h){
+void Button::SetSizePosition(int _x, int _y, uint _w, uint _h){
   StdSetSizePosition(_x, _y, _w, _h);
   image->ScaleSize(w, h);
 }

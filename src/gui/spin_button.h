@@ -40,11 +40,11 @@ class SpinButton : public Widget
   Button *m_plus, *m_minus;
   
  public:
-  SpinButton(const std::string &label, uint x, uint y, uint w,
+  SpinButton(const std::string &label, int x, int y, uint w,
 	     int value=0, int step=1, int min_value=-1, int max_value=-1);
   virtual ~SpinButton();
 
-  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+  void SetSizePosition(int _x, int _y, uint _w, uint _h);
 
   void Draw (uint mouse_x, uint mouse_y) ;
   bool Clic (uint mouse_x, uint mouse_y, uint button) ;

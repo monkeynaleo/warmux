@@ -33,7 +33,7 @@ ButtonText::~ButtonText()
 
 //-----------------------------------------------------------------------------
 
-ButtonText::ButtonText (uint x, uint y,
+ButtonText::ButtonText (int x, int y,
 			const Profile *res_profile, const std::string& resource_id,
 			const std::string &new_text,
 			Font *font)
