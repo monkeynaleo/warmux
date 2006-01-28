@@ -38,8 +38,8 @@ Widget::~Widget()
 
 bool Widget::MouseIsOver (uint mouse_x, uint mouse_y)
 {
-  return ((x <= (int)mouse_x) && ((int)mouse_x <= x+w)
-	  && (y <= (int)mouse_y) && ((int)mouse_y <= y+h));
+  return ((x <= (int)mouse_x) && ((int)mouse_x <= x+(int)w)
+	  && (y <= (int)mouse_y) && ((int)mouse_y <= y+(int)h));
 
 }
 
