@@ -500,93 +500,116 @@ void Sprite::SetPlayBackward(bool enable){
 #define CACHE_WARNING
 #endif
 
-void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y){
+void Sprite::RefreshSurface()
+{
+  tmp_surface = NULL;
+  need_free_surface = false;
+
+  if(!have_rotation_cache && !have_flipping_cache)
+  {
+    if(!have_lastframe_cache)
+    {
+      tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+      need_free_surface = true;
+    }
+    else
+    {
+      if(last_frame == NULL)
+      {
+#define BUGGY_SDLGFX
+#ifdef BUGGY_SDLGFX
+        if(rotation_deg != 0.0)
+        {
+          tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+          last_frame = tmp_surface;
+        }
+        else
+        if(scale_x != 1.0 || scale_y != 1.0)
+        {
+#endif
+          tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_ON);
+          last_frame = tmp_surface;
+#ifdef BUGGY_SDLGFX
+        }
+        else
+        {
+          tmp_surface = frames[current_frame].surface;
+          last_frame = NULL;
+        }
+#endif
+      }
+      else
+      {
+        tmp_surface = last_frame;
+      }
+    }
+  }
+  else
+  {
+    if(have_flipping_cache && !have_rotation_cache)
+    {
+      if(rotation_deg != 0.0 || scale_y != 1.0 || (scale_x != 1.0 && scale_x != -1.0))
+      {
+        CACHE_WARNING;
+        tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+        need_free_surface = true;
+      }
+      else
+      if(scale_x == 1.0)
+        tmp_surface = frames[current_frame].surface;
+      else
+        tmp_surface = frames[current_frame].flipped_surface;
+    }
+    else
+    if(!have_flipping_cache && have_rotation_cache)
+    {
+      if(scale_x != 1.0 || scale_y != 1.0)
+      {
+        CACHE_WARNING;
+        tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+        need_free_surface = true;
+      }
+      else
+        tmp_surface = frames[current_frame].rotated_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
+    }
+    else
+    {
+      //have_flipping_cache==true && have_rotation_cache==true
+      if((scale_x != 1.0 && scale_x != -1.0)  || scale_y != 1.0)
+      {
+        CACHE_WARNING;
+        tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+        need_free_surface = true;
+      }
+      else
+      {
+        //Scale_y == 1.0
+        if(scale_x == 1.0)
+          tmp_surface = frames[current_frame].rotated_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
+        else
+          tmp_surface = frames[current_frame].rotated_flipped_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
+      }
+    }
+  }
+  assert(tmp_surface != NULL);
+}
+void Sprite::Blit( SDL_Surface *dest, uint pos_x, uint pos_y)
+{
   if (!show) return;
 
-#ifndef __MINGW32__
-   SDL_Surface *tmp_surface = NULL;
-   bool need_free_surface = false;
-
-   if(!have_rotation_cache && !have_flipping_cache)
-   {
-     if(!have_lastframe_cache)
-     {
-       tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-       need_free_surface = true;
-     }
-     else
-     {
-       if(last_frame == NULL)
-       {
-         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-         last_frame = tmp_surface;
-       }
-       else
-       {
-         tmp_surface = last_frame;
-       }
-     }
-   }
-   else
-   {
-     if(have_flipping_cache && !have_rotation_cache)
-     {
-       if(rotation_deg != 0.0 || scale_y != 1.0 || (scale_x != 1.0 && scale_x != -1.0))
-       {
-         CACHE_WARNING;
-         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-         need_free_surface = true;
-       }
-       else
-       if(scale_x == 1.0)
-         tmp_surface = frames[current_frame].surface;
-       else
-         tmp_surface = frames[current_frame].flipped_surface;
-     }
-     else
-     if(!have_flipping_cache && have_rotation_cache)
-     {
-       if(scale_x != 1.0 || scale_y != 1.0)
-       {
-         CACHE_WARNING;
-         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-         need_free_surface = true;
-       }
-       else
-         tmp_surface = frames[current_frame].rotated_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
-     }
-     else
-     {
-       //have_flipping_cache==true && have_rotation_cache==true
-       if((scale_x != 1.0 && scale_x != -1.0)  || scale_y != 1.0)
-       {
-         CACHE_WARNING;
-         tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-         need_free_surface = true;
-       }
-       else
-       {
-         //Scale_y == 1.0
-         if(scale_x == 1.0)
-           tmp_surface = frames[current_frame].rotated_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
-         else
-           tmp_surface = frames[current_frame].rotated_flipped_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
-       }
-     }
-   }
-   assert(tmp_surface != NULL);
+  RefreshSurface();
    // Calculate offset of the depending on hotspot rotation position :
-   int rot_x=0;
-   int rot_y=0;
-   if( rotation_deg!=0.0 )
-     Calculate_Rotation_Offset(rot_x, rot_y, tmp_surface);
+  int rot_x=0;
+  int rot_y=0;
+  if( rotation_deg!=0.0 )
+    Calculate_Rotation_Offset(rot_x, rot_y, tmp_surface);
 
-   int x = pos_x + rot_x;
-   int y = pos_y + rot_y;
+  int x = pos_x + rot_x;
+  int y = pos_y + rot_y;
 
-   SDL_Rect dr = {x, y, tmp_surface->w, tmp_surface->h};
+  SDL_Rect dr = {x, y, tmp_surface->w, tmp_surface->h};
 
-   SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
+  SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
 
   // For the cache mechanism
   if( game.IsGameLaunched() )
@@ -594,11 +617,6 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y){
 
   if( need_free_surface )
      SDL_FreeSurface (tmp_surface);
-#else
-   //SDL_gfx not working...
-   SDL_Rect dr = {pos_x , pos_y , frame_width_pix, frame_height_pix};
-   SDL_BlitSurface (frames[current_frame].surface, NULL, dest, &dr);
-#endif //__MINGW32__
 
 #ifdef DBG_SPRITE
    std::ostringstream ss;
@@ -607,7 +625,43 @@ void Sprite::Blit( SDL_Surface *dest, unsigned int pos_x, unsigned int pos_y){
    info->Set(s);
    info->DrawTopLeft(pos_x + frame_width_pix, pos_y);
 #endif
+}
 
+void Sprite::Blit( SDL_Surface *dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
+{
+  if (!show) return;
+
+  RefreshSurface();
+   // Calculate offset of the depending on hotspot rotation position :
+  int rot_x=0;
+  int rot_y=0;
+  if( rotation_deg!=0.0 )
+    Calculate_Rotation_Offset(rot_x, rot_y, tmp_surface);
+
+  int x = pos_x + rot_x;
+  int y = pos_y + rot_y;
+
+  assert(src_x < (int)tmp_surface->w && src_y < (int)tmp_surface->h);
+  assert(src_x + (int)w < (int)tmp_surface->w && src_y + (int)h < (int)tmp_surface->h);
+
+  SDL_Rect src = {src_x, src_y, w, h};
+  SDL_Rect dst = {x, y, w, h};
+  SDL_BlitSurface (tmp_surface, &src, dest, &dst);
+
+  // For the cache mechanism
+  if( game.IsGameLaunched() )
+    world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface->w, tmp_surface->h));
+
+  if( need_free_surface )
+     SDL_FreeSurface (tmp_surface);
+
+#ifdef DBG_SPRITE
+   std::ostringstream ss;
+   ss << pos_x << "," << pos_y << " " << current_frame << "/" << frames.size() << " L" << loop << " P" << pingpong << " R" << rotation_deg;
+   std::string s = ss.str();   
+   info->Set(s);
+   info->DrawTopLeft(pos_x + frame_width_pix, pos_y);
+#endif
 }
 
 void Sprite::Finish(){

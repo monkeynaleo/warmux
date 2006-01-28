@@ -111,7 +111,8 @@ typedef enum {
    void Hide();
 
      
-   void Blit( SDL_Surface *dest, unsigned int pox_x, unsigned int pos_y);
+   void Blit( SDL_Surface *dest, uint pox_x, uint pos_y);
+   void Blit( SDL_Surface *dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
    void Draw(int pos_x, int pos_y);
    void Update();
    bool IsFinished() const;
@@ -133,6 +134,10 @@ typedef enum {
    bool backward;
    std::vector<SpriteFrame> frames;
 
+   //For cache mecanism
+   bool need_free_surface;
+   SDL_Surface* tmp_surface;
+
    Rotation_HotSpot rot_hotspot;
    void Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface);
 
@@ -145,6 +150,7 @@ typedef enum {
    bool have_lastframe_cache;
    SDL_Surface* last_frame;
    void LastFrameModified();
+   void RefreshSurface();
 
 #ifdef DBG_SPRITE
    Text* info;
