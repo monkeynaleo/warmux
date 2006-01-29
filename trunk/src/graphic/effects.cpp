@@ -193,8 +193,3 @@ void Gelatine (int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
   }
 }
 
-
-
-
-
-

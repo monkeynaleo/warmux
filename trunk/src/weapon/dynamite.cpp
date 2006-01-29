@@ -22,7 +22,6 @@
  *****************************************************************************/
 
 #include "dynamite.h"
-//-----------------------------------------------------------------------------
 #include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
@@ -36,20 +35,15 @@
 #ifdef __MINGW32__
 #undef LoadImage
 #endif
-//-----------------------------------------------------------------------------
 namespace Wormux {
 
 #ifdef DEBUG
   //  #define DEBUG_CADRE_TEST
 #endif
 
-//-----------------------------------------------------------------------------
-
 BatonDynamite::BatonDynamite(Dynamite &p_dynamite) 
   : WeaponProjectile("baton de dynamite"), dynamite(p_dynamite)
 {}
-
-//-----------------------------------------------------------------------------
 
 void BatonDynamite::Init()
 {
@@ -76,8 +70,6 @@ void BatonDynamite::Init()
   
 }
 
-//-----------------------------------------------------------------------------
-
 void BatonDynamite::Reset()
 {
   Ready();
@@ -90,8 +82,6 @@ void BatonDynamite::Reset()
   explosion->Start();
   explosion->SetCurrentFrame(0);
 }
-
-//-----------------------------------------------------------------------------
 
 void BatonDynamite::Refresh()
 {
@@ -111,9 +101,6 @@ void BatonDynamite::Refresh()
 
 }
 
-//-----------------------------------------------------------------------------
-
-
 void BatonDynamite::Draw()
 {
   if (!is_active) return;
@@ -130,14 +117,10 @@ void BatonDynamite::Draw()
   }
 }
    
-//-----------------------------------------------------------------------------
-
 void BatonDynamite::SignalCollision() {}
 
 void BatonDynamite::SignalGhostState (bool) { is_active = false; }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 Dynamite::Dynamite() 
@@ -150,22 +133,16 @@ Dynamite::Dynamite()
    m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
 }
 
-//-----------------------------------------------------------------------------
-
 void Dynamite::p_Init()
 {
   baton.Init();
   impact = resource_manager.LoadImage(weapons_res_profile,"dynamite_impact");
 }
 
-//-----------------------------------------------------------------------------
-
 void Dynamite::p_Select()
 {
   baton.Reset();
 }
-
-//-----------------------------------------------------------------------------
 
 // Pose une dynamite
 bool Dynamite::p_Shoot ()
@@ -190,8 +167,6 @@ bool Dynamite::p_Shoot ()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void Dynamite::Refresh()
 {
   if (m_is_active) {
@@ -202,8 +177,6 @@ void Dynamite::Refresh()
     m_image->Scale(ActiveCharacter().GetDirection(), 1);
   }
 }
-
-//-----------------------------------------------------------------------------
 
 void Dynamite::FinExplosion ()
 {
@@ -223,13 +196,9 @@ void Dynamite::FinExplosion ()
   AppliqueExplosion (centre, centre, impact, cfg(), NULL, "weapon/dynamite_exp");
 }
 
-//-----------------------------------------------------------------------------
-
 DynamiteConfig& Dynamite::cfg() 
 { return static_cast<DynamiteConfig&>(*extra_params); }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 DynamiteConfig::DynamiteConfig()
@@ -243,5 +212,4 @@ void DynamiteConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitUint (elem, "duree", duree);
 }
 
-//-----------------------------------------------------------------------------
 } // namespace Wormux

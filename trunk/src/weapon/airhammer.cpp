@@ -74,7 +74,7 @@ bool Airhammer::p_Shoot()
   ActiveCharacter().SetXY(ActiveCharacter().GetX(),ActiveCharacter().GetY());
 
   world.Creuse (ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 
-		- impact->w/2,
+		- impact.GetWidth()/2,
 		ActiveCharacter().GetY() + ActiveCharacter().GetHeight() -15,
 		impact);
 

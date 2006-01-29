@@ -49,8 +49,8 @@ const float b = 1.0;
 void Water::Init(){ 
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
    surface = resource_manager.LoadImage(res, "gfx/water");
-   SDL_SetAlpha(surface, 0, 0);
-   pattern = CreateRGBASurface(180, surface->h + 40, SDL_SWSURFACE|SDL_SRCALPHA);
+   surface.SetAlpha(0, 0);
+   pattern.NewSurface(180, surface.GetHeight() + 40, SDL_SWSURFACE|SDL_SRCALPHA, true);
    shift1 = 0;
 }
 
@@ -70,8 +70,8 @@ void Water::Reset(){
 void Water::Free(){
   if(!actif)
     return;
-  SDL_FreeSurface(surface);
-  SDL_FreeSurface(pattern);
+  surface.Free();
+  pattern.Free();
   height.clear();
 }
 
@@ -101,10 +101,11 @@ void Water::Refresh(){
   {
     temps_eau = Wormux::global_time.Read();
     vague += WAVE_STEP;
-    if (surface->w <= vague) vague=0;
+    if (surface.GetWidth() <= vague)
+		vague=0;
   }
 
-  int x = -surface->w+vague;
+  int x = -surface.GetWidth() + vague;
   int y = world.GetHeight()-(hauteur_eau + height_mvt);
 
   double decree = (double) 2*M_PI/360;
@@ -140,17 +141,17 @@ void Water::Draw(){
   }
 */
   // Compute 1 pattern:
-  SDL_SetAlpha(pattern, 0, 0);
-  SDL_FillRect(pattern, NULL, 0x00000000);
+  pattern.SetAlpha( 0, 0);
+  pattern.FillRect( NULL, 0x00000000);
 
   int y0 = world.GetHeight()-(hauteur_eau + height_mvt)-20;
 
   for(uint x=0; x<180; x++)
   {
-    SDL_Rect dst = {x, height.at(x) - y0, surface->w, surface->h};
-    SDL_BlitSurface(surface,NULL, pattern,&dst);
+    SDL_Rect dst = {x, height.at(x) - y0, surface.GetWidth(), surface.GetHeight()};
+    pattern.Blit(surface, NULL, &dst);
   }
-  SDL_SetAlpha(pattern, SDL_SRCALPHA, 0);
+  pattern.SetAlpha(SDL_SRCALPHA, 0);
 
   int x0 = (int)camera.GetX();
   while(x0<0)
@@ -159,7 +160,7 @@ void Water::Draw(){
     x0-=180;
 
   for(int x=(int)camera.GetX()-x0;x<(int)camera.GetX()+(int)camera.GetWidth();x+=180)
-  for(int y=y0;y<(int)camera.GetY()+(int)camera.GetHeight();y+=surface->h)
+  for(int y=y0;y<(int)camera.GetY()+(int)camera.GetHeight();y+=surface.GetHeight())
   {
     AbsoluteDraw(pattern, x, y);
   }

@@ -24,6 +24,7 @@
 #include <SDL_endian.h>
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
+#include <SDL_rotozoom.h>
 #include "../tool/debug.h"
 #include "../tool/error.h"
 #include "../tool/i18n.h"
@@ -63,7 +64,7 @@ Surface::~Surface(){
 	AutoFree();
 }
 
-Surface &Surface::operator=(Surface & src){
+Surface &Surface::operator=(const Surface & src){
 	AutoFree();
 	surface = src.surface;
 	if( surface != NULL )
@@ -92,19 +93,19 @@ SDL_Surface *Surface::GetSurface(){
 	return surface;
 }
 
-void Surface::SetSurface(SDL_Surface *newSurface, bool freePrevious){
-	if( freePrevious )
-		Free();
+	void Surface::SetSurface(SDL_Surface *newSurface, bool freePrevious){
+		if( freePrevious )
+			Free();
 
-	surface = newSurface;
-}
+		surface = newSurface;
+	}
 
 void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha){
 	Uint32 alphaMask;
 	Uint32 redMask;
 	Uint32 greenMask;
 	Uint32 blueMask;
-	
+
 	if( autoFree )
 		Free();
 
@@ -125,16 +126,16 @@ void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha){
 
 	surface = SDL_CreateRGBSurface( flags, width, height, 32,
 			redMask, greenMask, blueMask, alphaMask );
-	    
+
 	if( surface == NULL )
 		Error( std::string("Can't create SDL RGBA surface: ") + SDL_GetError() );
 }
 
-int Surface::GetWidth(){
+int Surface::GetWidth() const{
 	return surface->w;
 }
 
-int Surface::GetHeight(){
+int Surface::GetHeight() const{
 	return surface->h;
 }
 
@@ -166,6 +167,14 @@ int Surface::SetColorKey(Uint32 flag, Uint32 key){
 	return SDL_SetColorKey( surface, flag, key );
 }
 
+int Surface::SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a){
+	return SetColorKey( flag, MapRGBA(r, g, b, a) );
+}
+
+Uint32 Surface::MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
+    return SDL_MapRGBA(surface->format, r, g, b, a);
+}
+
 void Surface::SetClipRect(SDL_Rect *rect){
 	SDL_SetClipRect( surface, rect );
 }
@@ -187,7 +196,7 @@ int Surface::FillRect(SDL_Rect *dstRect, Uint32 color){
 }
 
 int Surface::FillRect( SDL_Rect *dstRect, Uint8 r, Uint8 g, Uint8 b, Uint8 a){
-    return FillRect( dstRect, SDL_MapRGBA( surface->format, r, g, b, a) );
+	return FillRect( dstRect, MapRGBA(r, g, b, a) );
 }
 
 int Surface::ImgLoad( const char *filename ){
@@ -196,3 +205,37 @@ int Surface::ImgLoad( const char *filename ){
 
 	return surface != NULL;
 }
+
+Surface Surface::RotoZoomXY(double angle, double zoomx, double zoomy, int smooth){
+	Surface newSurf;
+
+	newSurf.SetSurface( rotozoomSurfaceXY(surface, angle, zoomx, zoomy, smooth) );
+
+	if( newSurf.IsNull() )
+		Error( "Unable to make a rotozoom on the surface !" );
+
+	return newSurf;	
+}
+
+Surface Surface::DisplayFormatAlpha(){
+	Surface newSurf;
+
+	newSurf.SetSurface( SDL_DisplayFormatAlpha( surface ) );
+
+	if( newSurf.IsNull() )
+		Error( "Unable to convert the surface to a surface compatible with the display format with alpha." );
+
+	return newSurf;
+}
+
+Surface Surface::DisplayFormat(){
+	Surface newSurf;
+
+	newSurf.SetSurface( SDL_DisplayFormat( surface ) );
+
+	if( newSurf.IsNull() )
+		Error( "Unable to convert the surface to a surface compatible with the display format." );
+
+	return newSurf;
+}
+

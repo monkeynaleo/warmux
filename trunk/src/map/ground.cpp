@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "ground.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include <SDL_video.h>
 #include <SDL_gfxPrimitives.h>
@@ -28,7 +27,7 @@
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
-#include "../graphic/sdlsurface.h"
+#include "../graphic/surface.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
 #include "../include/constant.h"
@@ -39,25 +38,19 @@
 //#  define DESSINE_BORDURE_CANVAS
 #endif
 
-//-----------------------------------------------------------------------------
 namespace Wormux {
-
-//-----------------------------------------------------------------------------
 
 Ground::Ground()
 { //FIXME (a effacer) 
 }
 
-//-----------------------------------------------------------------------------
-
-void Ground::Init()
-{
+void Ground::Init(){
   std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
   
   // Charge les données du terrain
-  SDL_Surface *m_image = lst_terrain.TerrainActif().LitImgTerrain();
-  LoadImage ( m_image);
+  Surface m_image = lst_terrain.TerrainActif().LitImgTerrain();
+  LoadImage ( m_image );
   // delete m_image; -> Done after Terrain initialization
 
   // Vérifie la taille du terrain
@@ -71,39 +64,30 @@ void Ground::Init()
   std::cout << _("done") << std::endl;
 }
 
-//-----------------------------------------------------------------------------
-
-void Ground::Reset()
-{
+void Ground::Reset(){
   Init();
   lastx = lasty = INT_MAX;
 }
 
-//-----------------------------------------------------------------------------
-
 // Lit la valeur alpha du pixel (x,y)
-bool Ground::EstDansVide (int x, int y)
-{ 
+bool Ground::EstDansVide (int x, int y){ 
   // En dehors du monde : c'est vide :-p
   //  if (monde.EstHorsMondeXY(x,y)) return config.exterieur_monde_vide;
   assert (!world.EstHorsMondeXY(x,y));
-  if(TerrainActif().infinite_bg)
-  {
+  if(TerrainActif().infinite_bg){
     if(x < 0 || y<0 || x>static_cast<int>(GetWidth()) || y>static_cast<int>(GetHeight()))
       return true;
   }
 
   // Lit le monde
-   return EstTransparent( GetAlpha(x,y) );
+  return GetAlpha(x,y) != 255; // IsTransparent
 }
 
-//-----------------------------------------------------------------------------
 //Renvoie l'angle entre la tangeante au terrain en (x,y) et l'horizontale.
 //l'angle est toujours > 0.
 //Renvoie -1.0 s'il n'y a pas de tangeante (si le pixel(x,y) ne touche
 //aucun autre morceau de terrain)
-double Ground::Tangeante(int x,int y)
-{
+double Ground::Tangeante(int x,int y){
   //Approxiamtion:on renvoie la corde de la courbe formée
   //par le terrain...
 
@@ -151,7 +135,6 @@ double Ground::Tangeante(int x,int y)
   return tangeante;
 }
 
-//-----------------------------------------------------------------------------
 bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
                            int pas_bon_x,int pas_bon_y)
 {
@@ -255,8 +238,6 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   return false;
 }
 
-//-----------------------------------------------------------------------------
-
 void Ground::Draw()
 {
   int cx = camera.GetX();
@@ -313,5 +294,4 @@ void Ground::Draw()
 #endif
 }
 
-//-----------------------------------------------------------------------------
 } // namespace Wormux

@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "interface.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include <SDL.h>
 #include <sstream>
@@ -39,12 +38,9 @@
 #include "../tool/resource_manager.h"
 #include "../weapon/weapons_list.h"
 
-//-----------------------------------------------------------------------------
 WeaponStrengthBar weapon_strength_bar;
-//-----------------------------------------------------------------------------
 
 using namespace Wormux;
-//-----------------------------------------------------------------------------
 
 // Nom du ver
 const uint NOM_VER_X = 32;
@@ -80,17 +76,11 @@ const uint BARENERGIE_HAUT = 15;
 
 const uint MARGIN = 10;
 
-//-----------------------------------------------------------------------------
 Interface interface;
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 Interface::Interface()
 {
 }
-
-//-----------------------------------------------------------------------------
 
 void Interface::Init()
 {
@@ -134,8 +124,6 @@ void Interface::Init()
   
 }
 
-//-----------------------------------------------------------------------------
-
 Interface::~Interface()
 {
   delete t_NAME;
@@ -151,8 +139,6 @@ Interface::~Interface()
   if (t_weapon_stock) delete t_weapon_stock;
 }
 
-//-----------------------------------------------------------------------------
-
 void Interface::Reset()
 {
   character_under_cursor = NULL;
@@ -160,8 +146,6 @@ void Interface::Reset()
   weapons_menu.Reset();
   barre_energie.InitVal (0, 0, game_mode.character.init_energy);
 }
-
-//-----------------------------------------------------------------------------
 
 void Interface::DisplayCharacterInfo ()
 {
@@ -203,13 +187,11 @@ void Interface::DisplayCharacterInfo ()
   barre_energie.DrawXY (bottom_bar_ox+BARENERGIE_X,bottom_bar_oy+BARENERGIE_Y);
    
   // Display team logo
-  SDL_Rect dest = { x+ECUSSON_EQUIPE_X, y+ECUSSON_EQUIPE_Y, character_under_cursor->TeamAccess().ecusson->w, character_under_cursor->TeamAccess().ecusson->h};	
+  SDL_Rect dest = { x+ECUSSON_EQUIPE_X, y+ECUSSON_EQUIPE_Y, 
+	  character_under_cursor->TeamAccess().ecusson.GetWidth(), 
+	  character_under_cursor->TeamAccess().ecusson.GetHeight()};	
   app.video.window.Blit( character_under_cursor->TeamAccess().ecusson, NULL, &dest);
-
-
 }
-
-//-----------------------------------------------------------------------------
 
 void Interface::DisplayWeaponInfo ()
 {
@@ -252,9 +234,9 @@ void Interface::DisplayWeaponInfo ()
 			      bottom_bar_oy+MUNITION_Y);
 
   // Display weapon icon
-  if( weapon->icone )
+  if( !weapon->icone.IsNull() )
     {
-      SDL_Rect dest_rect = { bottom_bar_ox+ICONE_ARME_X, bottom_bar_oy+ICONE_ARME_Y, weapon->icone->w, weapon->icone->h};	
+      SDL_Rect dest_rect = { bottom_bar_ox+ICONE_ARME_X, bottom_bar_oy+ICONE_ARME_Y, weapon->icone.GetWidth(), weapon->icone.GetHeight()};
       app.video.window.Blit( weapon->icone, NULL, &dest_rect);
     }
   else
@@ -267,12 +249,10 @@ void Interface::DisplayWeaponInfo ()
   if (weapon != NULL) weapon->DrawWeaponBox();
 }
 
-//-----------------------------------------------------------------------------
-
 void Interface::Draw ()
 {    
   // display global timer
-  SDL_Rect dest = { (app.video.window.GetWidth()/2)-40, 0, bg_time->w, bg_time->h};	
+  SDL_Rect dest = { (app.video.window.GetWidth()/2)-40, 0, bg_time.GetWidth(), bg_time.GetHeight()};	
   app.video.window.Blit( bg_time, NULL, &dest);
   std::string tmp(global_time.GetString());
   global_timer->Set(tmp);
@@ -302,7 +282,7 @@ void Interface::Draw ()
   bottom_bar_ox = x;
   bottom_bar_oy = y;
    
-  SDL_Rect dr = { x, y, game_menu->w, game_menu->h};	
+  SDL_Rect dr = { x, y, game_menu.GetWidth(), game_menu.GetHeight()};	
   app.video.window.Blit( game_menu, NULL, &dr);   
 
   Rectanglei tmpr2(dr.x,dr.y, dr.w, dr.h);
@@ -319,20 +299,14 @@ void Interface::Draw ()
   DisplayWeaponInfo();
 }
 
-//-----------------------------------------------------------------------------
-
 uint Interface::GetWidth() const { return 800; }
 uint Interface::GetHeight() const { return 70; }
-
-//-----------------------------------------------------------------------------
 
 void Interface::EnableDisplay (bool _display)
 {
   display = _display;
   camera.CentreObjSuivi ();
 }
-
-//-----------------------------------------------------------------------------
 
 void Interface::UpdateTimer(uint utimer)
 {
@@ -347,28 +321,27 @@ void Interface::UpdateTimer(uint utimer)
   }
 }
 
-
-//-----------------------------------------------------------------------------
+void AbsoluteDraw(Surface s, int x, int y){
+	AbsoluteDraw(s.GetSurface(), x, y);
+}
 
 void AbsoluteDraw(SDL_Surface* s, int x, int y)
 {
   world.ToRedrawOnMap(Rectanglei(x, y, s->w, s->h));
 
-  assert(s!=NULL);
-/*  if(x + s->w < 0 || y + s->h < 0)
+  assert( s != NULL );
+  
+  /*if(x + s->w < 0 || y + s->h < 0)
   {
     std::cout << "WARNING: Trying to display a SDL_Surface out of the screen!" << std::endl;
     return;
-  }
-*/  
+  }*/
+  
   if(x + s->w < (int)camera.GetX() || x > (int)camera.GetX()+(int)camera.GetWidth()
   || y + s->h < (int)camera.GetY() || y > (int)camera.GetY()+(int)camera.GetHeight())
-  {
-    //Drawing out of camera area
-    return;
-  }
+    return; //Drawing out of camera area
 
-  SDL_Rect src={0,0,s->w,s->h};
+  SDL_Rect src={0, 0, s->w, s->h};
   SDL_Rect dst={x - (int)camera.GetX(), y - (int)camera.GetY(), s->w , s->h};
 
   if(dst.x<0)
@@ -377,10 +350,8 @@ void AbsoluteDraw(SDL_Surface* s, int x, int y)
     src.x=0;
   }
 
-  if(dst.x+src.w>camera.GetX())
-  {
-    src.w=camera.GetWidth()-src.x;
-  }
+  if( dst.x+src.w>camera.GetX() )
+    src.w = camera.GetWidth() - src.x;
 
   if(dst.y<0)
   {
@@ -388,11 +359,10 @@ void AbsoluteDraw(SDL_Surface* s, int x, int y)
     src.y=0;
   }
 
-  if(dst.y+src.h>camera.GetY())
-  {
-    src.h=camera.GetHeight()-src.y;
-  }
+  if( dst.y + src.h > camera.GetY() )
+    src.h = camera.GetHeight() - src.y;
 
   //TODO:blit only the displayed part of the SDL_Surface
   app.video.window.Blit(s, &src, &dst);
 }
+

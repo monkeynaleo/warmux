@@ -21,13 +21,14 @@
 #define TEXT_H
 
 #include <string>
-#include "font.h"
 #include "colors.h"
+#include "font.h"
+#include "surface.h"
 
 class Text
 {
-  SDL_Surface* surf;
-  SDL_Surface* background; //shadow or outline or nothing;
+  Wormux::Surface surf;
+  Wormux::Surface background; //shadow or outline or nothing;
   std::string txt;
   Font* font;
   SDL_Color color;
@@ -52,8 +53,8 @@ public:
 
   void Set(const std::string &new_txt);
   void SetColor(SDL_Color new_color);
-  int GetWidth() const {return surf->w;};
-  int GetHeight() const {return surf->h;}
+  int GetWidth() const {return surf.GetWidth();};
+  int GetHeight() const {return surf.GetHeight();}
 };
 
 void DrawTmpBoxText(Font &font, 

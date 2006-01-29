@@ -19,21 +19,20 @@
  * Monde ou plateau de jeu.
  *****************************************************************************/
 
-#ifndef MONDE_H
-#define MONDE_H
-//-----------------------------------------------------------------------------
+#ifndef MAP_H
+#define MAP_H
+
 #include "ground.h"
 #include "sky.h"
 #include "water.h"
+#include "../graphic/surface.h"
 #include "../graphic/text.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-//-----------------------------------------------------------------------------
 
 extern const uint MAX_WIND_OBJECTS;
 
-class Map
-{
+class Map{
  private:
   Text * author_info1;
   Text * author_info2;
@@ -53,7 +52,6 @@ public:
   std::list<Rectanglei> *to_redraw_particles_now;
 
 public:
-  //void Init();
   void Reset();
   void Refresh();
   void FreeMem();
@@ -91,7 +89,7 @@ public:
   bool EstOuvert() const { return ground.EstOuvert(); }
 
   // Creuse un pixel
-  void Creuse(uint x, uint y, SDL_Surface *alpha_sur);
+  void Creuse(uint x, uint y, Wormux::Surface alpha_sur);
    
   // Lit la taille du monde
   uint GetWidth() const { return ground.GetWidth(); }
@@ -102,5 +100,4 @@ public:
 };
 
 extern Map world;
-//-----------------------------------------------------------------------------
 #endif

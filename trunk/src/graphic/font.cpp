@@ -57,7 +57,7 @@ Font::~Font(){
   for( it = surface_text_table.begin(); 
        it != surface_text_table.end(); 
        ++it ){
-    SDL_FreeSurface(it->second);
+    //SDL_FreeSurface(it->second);
     surface_text_table.erase(it->first);
   }
 }
@@ -82,13 +82,13 @@ bool Font::Load (const std::string& filename, int size) {
 
 void Font::WriteLeft (int x, int y, const std::string &txt, 
 		      SDL_Color color){ 
-  SDL_Surface * text_surface = Render(txt.c_str(), color, true);
+	Wormux::Surface text_surface = Render(txt.c_str(), color, true);
   SDL_Rect dst_rect;
 
   dst_rect.x = x;
   dst_rect.y = y;
-  dst_rect.h = text_surface->h;
-  dst_rect.w = text_surface->w;
+  dst_rect.h = text_surface.GetHeight();
+  dst_rect.w = text_surface.GetWidth();
 
   app.video.window.Blit( text_surface, NULL, &dst_rect );
   world.ToRedrawOnScreen( Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h) );
@@ -114,26 +114,26 @@ void Font::WriteCenterTop (int x, int y, const std::string &txt,
   WriteLeft( x - GetWidth(txt) / 2, y, txt, color);
 }
 
-SDL_Surface *Font::Render(const std::string &txt, SDL_Color color, bool cache){
-  SDL_Surface *surface = NULL;
+Wormux::Surface Font::Render(const std::string &txt, SDL_Color color, bool cache){
+	Wormux::Surface surface;
   
   if( cache ){
     txt_iterator p = surface_text_table.find(txt);
     if( p == surface_text_table.end() ){ 
       if( surface_text_table.size() > 5 ){
-        SDL_FreeSurface( surface_text_table.begin()->second );
+        //SDL_FreeSurface( surface_text_table.begin()->second );
         surface_text_table.erase( surface_text_table.begin() );
       }
-      surface = TTF_RenderUTF8_Blended(m_font, txt.c_str(), color);
+      surface.SetSurface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color) );
       surface_text_table.insert( txt_sample(txt, surface) );
     } else {
       txt_iterator p = surface_text_table.find( txt );
       surface = p->second;
     }
   } else
-    surface = TTF_RenderUTF8_Blended(m_font, txt.c_str(), color);
+    surface.SetSurface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color) );
   
-  assert (surface != NULL);
+  assert (surface.GetSurface() != NULL);
 
   return surface;
 }

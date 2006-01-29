@@ -21,25 +21,23 @@
 
 #ifndef LST_TERRAINS_H
 #define LST_TERRAINS_H
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <string>
 #include <map>
+#include "../graphic/surface.h"
 #include "../include/base.h"
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
-//-----------------------------------------------------------------------------
 
-class InfoTerrain
-{
+class InfoTerrain{
 public:
   std::string name;
   uint nb_mine;
   bool use_water;
   bool is_opened;
   bool infinite_bg;
-  SDL_Surface *preview;
-  SDL_Surface *img_terrain, *img_ciel;   
+  Wormux::Surface preview;
+  Wormux::Surface img_terrain, img_ciel;
   Profile *res_profile;
   std::string author_info;
   std::string m_directory;
@@ -59,14 +57,13 @@ private:
 
 public:
   InfoTerrain ();
-  SDL_Surface *LitImgTerrain();
-  SDL_Surface *LitImgCiel();
+  Wormux::Surface LitImgTerrain();
+  Wormux::Surface LitImgCiel();
   bool Init(const std::string &nom, const std::string &repertoire);
   bool DonneesChargees() const;
   void FreeData();
 };
 
-//-----------------------------------------------------------------------------
 
 class ListeTerrain
 {
@@ -93,10 +90,6 @@ public:
 InfoTerrain& TerrainActif();
 extern ListeTerrain lst_terrain;
 
-//-----------------------------------------------------------------------------
-
 bool compareMaps(const InfoTerrain& a, const InfoTerrain& b) ;
-
-//-----------------------------------------------------------------------------
 
 #endif

@@ -22,19 +22,17 @@
  *****************************************************************************/
 #ifndef MINE_H
 #define MINE_H
-//-----------------------------------------------------------------------------
+
 #include <SDL.h>
 #include "weapon.h"
+#include "../graphic/surface.h"
 #include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../team/character.h"
 
-//-----------------------------------------------------------------------------
 namespace Wormux {
-//-----------------------------------------------------------------------------
-
-     
+ 
 class ObjMine : public PhysicalObj
 {
 private:
@@ -46,7 +44,7 @@ private:
 
   // Activation des mines ?
   bool animation;//,repos;
-  SDL_Surface *impact;
+  Surface impact;
   Sprite *detection, *explosion;
   uint attente;
   uint armer;
@@ -70,8 +68,6 @@ public:
   virtual void SignalGhostState (bool etait_mort);
 };
 
-//-----------------------------------------------------------------------------
-
 class MineConfig : public ExplosiveWeaponConfig
 { 
 public: 
@@ -81,8 +77,6 @@ public:
   MineConfig();
   virtual void LoadXml(xmlpp::Element *elem);
 };
-
-//-----------------------------------------------------------------------------
 
 class Mine : public Weapon
 {
@@ -101,8 +95,6 @@ public:
   MineConfig& cfg();
 };
 
-
 extern Mine mine;
-//-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

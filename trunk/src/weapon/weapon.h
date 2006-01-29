@@ -25,10 +25,9 @@
 
 #ifndef WEAPON_H
 #define WEAPON_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
 #include <string>
 #include "weapon_cfg.h"
+#include "../graphic/surface.h"
 #include "../graphic/sprite.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
@@ -37,7 +36,6 @@
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
 #include "../team/character.h"
-//-----------------------------------------------------------------------------
 class Character;
 
 // Constante munitions illimitées
@@ -48,7 +46,6 @@ extern const uint BUTTON_ICO_HEIGHT;
 
 extern const uint WEAPON_ICO_WIDTH;
 extern const uint WEAPON_ICO_HEIGHT;
-
 
 enum weapon_visibility {
   ALWAYS_VISIBLE,
@@ -62,9 +59,6 @@ class WeaponStrengthBar : public BarreProg
  public:
   bool visible ;
 } ;
-
-
-//-----------------------------------------------------------------------------
 
 // Projectil d'une arme
 class WeaponProjectile : public PhysicalObj
@@ -146,7 +140,7 @@ protected:
 
 public:
   // Icone de l'arme dans l'interface
-  SDL_Surface *icone;
+  Wormux::Surface icone;
 
   // if max_strength != 0, display the strength bar
   double max_strength;

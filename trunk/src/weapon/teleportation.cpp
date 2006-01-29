@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "teleportation.h"
-//-----------------------------------------------------------------------------
 #include "../game/game_loop.h"
 #include "../game/game_mode.h"
 #include "../game/time.h"
@@ -30,15 +29,11 @@
 #include "../map/map.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
 namespace Wormux {
 Teleportation teleportation;
-//-----------------------------------------------------------------------------
 
 double ZOOM_MAX = 10; // zoom maximum durant le petit effet graphique
 uint ESPACE = 4;
-
-//-----------------------------------------------------------------------------
 
 Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation")
 {  
@@ -47,8 +42,6 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation")
   m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
   extra_params = new WeaponConfig();  
 }
-
-//-----------------------------------------------------------------------------
 
 bool Teleportation::p_Shoot ()
 {
@@ -69,18 +62,16 @@ bool Teleportation::p_Shoot ()
   m_direction = ActiveCharacter().GetDirection();
 
   // Compute skins animation
-  SDL_Surface* current_skin=NULL;
+  Surface current_skin;
   if(m_direction == 1)
     current_skin = ActiveCharacter().image->GetCurrentFrameObject().surface;
   else
     current_skin = ActiveCharacter().image->GetCurrentFrameObject().flipped_surface;
 
   ActiveCharacter().Hide();
-  skin = WaveSurface(current_skin, 100, game_mode.duration_move_player * 1000, 5.0, 1.5);
+  skin = WaveSurface(current_skin.GetSurface(), 100, game_mode.duration_move_player * 1000, 5.0, 1.5);
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 void Teleportation::Refresh()
 {
@@ -129,8 +120,6 @@ void Teleportation::Refresh()
 //    m_x += nv_larg;
 }
 
-//-----------------------------------------------------------------------------
-
 void Teleportation::Draw()
 {
   if (m_is_active) {
@@ -141,17 +130,12 @@ void Teleportation::Draw()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 void Teleportation::ChooseTarget()
 {
   ActiveTeam().GetWeapon().NewActionShoot();
 }
 
-//-----------------------------------------------------------------------------
-
 WeaponConfig& Teleportation::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
 
-//-----------------------------------------------------------------------------
 } // namespace Wormux

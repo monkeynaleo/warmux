@@ -21,13 +21,9 @@
 
 #ifndef EAU_H
 #define EAU_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
 #include <vector>
+#include "../graphic/surface.h"
 #include "../include/base.h"
-//-----------------------------------------------------------------------------
-
-struct SDL_Surface;
 
 const uint WATER_INITIAL_HEIGHT = 100;
 
@@ -42,8 +38,8 @@ private:
   uint hauteur_eau;
   uint temps_montee;
   std::vector<int> height;
-  SDL_Surface *surface;
-  SDL_Surface *pattern;
+  Wormux::Surface surface;
+  Wormux::Surface pattern;
 public:
   void Init();
   void Reset();
@@ -53,5 +49,4 @@ public:
   bool IsActive();
   int GetHeight(int x);
 };
-//-----------------------------------------------------------------------------
 #endif

@@ -24,6 +24,7 @@
 
 #include <SDL.h>
 #include "weapon.h"
+#include "../graphic/surface.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../tool/point.h"
@@ -33,7 +34,7 @@
 // Lance ExceptionMortVer() si le ver actif meurt
 void AppliqueExplosion (const Point2i &explosion,
 			const Point2i &trou,
-			SDL_Surface *impact,
+		    Wormux::Surface &impact,
 			const ExplosiveWeaponConfig &config,
 			PhysicalObj *obj_exclu, 
 			const std::string& son="weapon/explosion",

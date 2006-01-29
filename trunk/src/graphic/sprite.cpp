@@ -28,6 +28,7 @@
 #include <SDL_rotozoom.h>
 #include <iostream>
 #include "sdlsurface.h"
+#include "surface.h"
 #include "../game/game.h"
 #include "../game/time.h"
 #include "../include/app.h"
@@ -38,15 +39,6 @@
 #ifdef DBG_SPRITE
 #include <sstream>
 #endif
-
-SpriteFrame::SpriteFrame(SDL_Surface *p_surface, unsigned int p_speed){
-  assert(p_surface != NULL);
-  this->surface = p_surface;
-  this->delay = p_speed;
-  rotated_surface = NULL;
-  flipped_surface = NULL;
-  rotated_flipped_surface = NULL;
-}
 
 Sprite::Sprite(){
    frame_width_pix = 0;
@@ -68,13 +60,12 @@ Sprite::Sprite(){
    have_rotation_cache = false;
    have_flipping_cache = false;
    have_lastframe_cache = false;
-   last_frame = NULL;
 #ifdef DBG_SPRITE
    info = new Text("");
 #endif
 }
 
-Sprite::Sprite( const Sprite& other){
+Sprite::Sprite( Sprite& other){
    frame_width_pix = other.frame_width_pix;
    frame_height_pix = other.frame_height_pix;
    scale_x = other.scale_x;
@@ -94,19 +85,18 @@ Sprite::Sprite( const Sprite& other){
    have_rotation_cache = false;
    have_flipping_cache = false;
    have_lastframe_cache = false;
-   last_frame = NULL;
 
    for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
      {
-	  SDL_Surface *new_surf = CreateRGBASurface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA);
+		 Wormux::Surface new_surf = Wormux::Surface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
 
 	  // Disable per pixel alpha on the source surface
-          // in order to properly copy the alpha chanel to the destination suface
+      // in order to properly copy the alpha chanel to the destination suface
 	  // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-	  SDL_SetAlpha( other.frames[f].surface, 0, 0); 
-	  SDL_BlitSurface( other.frames[f].surface, NULL, new_surf, NULL);
+	  other.frames[f].surface.SetAlpha( 0, 0); 
+	  new_surf.Blit( other.frames[f].surface, NULL, NULL);
 	  // re-enable the per pixel alpha in the 
-	  SDL_SetAlpha( other.frames[f].surface, SDL_SRCALPHA, 0); 
+	  other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0); 
 	  frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
      }
      if(other.have_rotation_cache)
@@ -120,9 +110,9 @@ Sprite::Sprite( const Sprite& other){
 #endif
 }
 
-Sprite::Sprite( SDL_Surface *surface){
-   frame_width_pix = surface->w;
-   frame_height_pix = surface->h;
+Sprite::Sprite( Wormux::Surface surface){
+   frame_width_pix = surface.GetWidth();
+   frame_height_pix = surface.GetHeight();
    frames.push_back( SpriteFrame(surface));
    
    scale_x = 1.0f;
@@ -142,63 +132,47 @@ Sprite::Sprite( SDL_Surface *surface){
    have_rotation_cache = false;
    have_flipping_cache = false;
    have_lastframe_cache = false;
-   last_frame = NULL;
 #ifdef DBG_SPRITE
    info = new Text("");
 #endif
 }
 
 Sprite::~Sprite(){
-  for ( unsigned int f = 0 ; f < frames.size() ; f++)
-  {
-    SDL_FreeSurface( frames[f].surface);
-    if(have_flipping_cache)
-      SDL_FreeSurface( frames[f].flipped_surface);
-  }
-
   if(have_rotation_cache)
   {
     for ( unsigned int f = 0 ; f < frames.size() ; f++)
     {
-      for(unsigned int i = 1;i < rotation_cache_size;i++)
-      { //Begins with i=1, because frames[f].rotated_surface[0] == frames[f].surface (which is deleted just before)
-        SDL_FreeSurface( frames[f].rotated_surface[i]);
-        if(have_flipping_cache)
-          SDL_FreeSurface( frames[f].rotated_flipped_surface[i]);
-      }
       delete []frames[f].rotated_surface;
       if(have_flipping_cache)
         delete []frames[f].rotated_surface;
     }
   }
 
-  if(have_lastframe_cache && last_frame!=NULL)
-    SDL_FreeSurface(last_frame);
 #ifdef DBG_SPRITE
    delete info;
 #endif
 }
 
-void Sprite::Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y){
+void Sprite::Init( Wormux::Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y){
    this->frame_width_pix = frame_width;
    this->frame_height_pix = frame_height;
 
-   SDL_SetAlpha( surface, 0, 0);
+   surface.SetAlpha( 0, 0);
    
    for( unsigned int fy = 0 ; fy < (unsigned int)nb_frames_y ; fy++)
      for( unsigned int fx = 0 ; fx < (unsigned int)nb_frames_x ; fx++)
        {
-	  SDL_Surface *new_surf = CreateRGBASurface(frame_width, frame_height, SDL_SWSURFACE|SDL_SRCALPHA);
+		   Wormux::Surface new_surf = Wormux::Surface(frame_width, frame_height, SDL_SWSURFACE|SDL_SRCALPHA, true);
 	  SDL_Rect sr = {fx*frame_width, fy*frame_width, frame_width, frame_height};
 	  SDL_Rect dr = {0,0,frame_width,frame_height};
 	  
-	  SDL_BlitSurface( surface, &sr, new_surf, &dr);
+	    new_surf.Blit( surface, &sr, &dr);
 	  frames.push_back( SpriteFrame(new_surf));
        }
 }
 
-void Sprite::AddFrame(SDL_Surface* surf, unsigned int delay){
-	  frames.push_back(SpriteFrame(surf,delay));
+void Sprite::AddFrame(Wormux::Surface surf, unsigned int delay){
+	  frames.push_back( SpriteFrame(surf, delay) );
 }
 
 void Sprite::EnableRotationCache(unsigned int cache_size){
@@ -215,12 +189,12 @@ void Sprite::EnableRotationCache(unsigned int cache_size){
 
   for ( unsigned int f = 0 ; f < frames.size() ; f++)
   {
-    frames[f].rotated_surface=new SDL_Surface*[cache_size];
+    frames[f].rotated_surface=new Wormux::Surface[cache_size];
     frames[f].rotated_surface[0]=frames[f].surface;
-    for(unsigned int i=1 ; i< cache_size ; i++)
-    {
-      frames[f].rotated_surface[i] = rotozoomSurfaceXY(frames[f].surface, - 360.0 * (float) i / (float) cache_size, 1.0, 1.0, SMOOTHING_ON);
-    }
+    for(unsigned int i=1 ; i< cache_size ; i++){
+		Wormux::Surface rotatedSurface = frames[f].surface.RotoZoomXY( -360.0 * (float) i / (float) cache_size, 1.0, 1.0, SMOOTHING_ON);
+		frames[f].rotated_surface[i] = rotatedSurface;
+	}
   }
 }
 
@@ -233,14 +207,16 @@ void Sprite::EnableFlippingCache(){
 
   for ( unsigned int f = 0 ; f < frames.size() ; f++)
   {
-    frames[f].flipped_surface = rotozoomSurfaceXY(frames[f].surface, 0.0, -1.0, 1.0, SMOOTHING_OFF); //Smoothing == off to keep the exact flipped image
+	  Wormux::Surface flippedSurface = frames[f].surface.RotoZoomXY( 0.0, -1.0, 1.0, SMOOTHING_OFF);	  
+	  frames[f].flipped_surface = flippedSurface;
     if(have_rotation_cache)
     {
-      frames[f].rotated_flipped_surface=new SDL_Surface*[rotation_cache_size];
+      frames[f].rotated_flipped_surface=new Wormux::Surface[rotation_cache_size];
       frames[f].rotated_flipped_surface[0]=frames[f].flipped_surface;
       for(unsigned int i=1 ; i< rotation_cache_size ; i++)
       {
-        frames[f].rotated_flipped_surface[i] = rotozoomSurfaceXY(frames[f].surface, - 360.0 * (float) i / (float) rotation_cache_size, -1.0, 1.0, SMOOTHING_ON);
+		  Wormux::Surface rotatedFlippedSurface = frames[f].surface.RotoZoomXY(-360.0 * (float) i / (float) rotation_cache_size, -1.0, 1.0, SMOOTHING_ON);
+		  frames[f].rotated_flipped_surface[i] = rotatedFlippedSurface;
       }
     }
   }
@@ -260,12 +236,6 @@ void Sprite::DisableLastFrameCache(){
   assert(!have_rotation_cache);
   assert(!have_flipping_cache);
   have_lastframe_cache = false;
-  
-  if(last_frame!=NULL)
-  {
-    SDL_FreeSurface(last_frame);
-    last_frame = NULL;
-  }
 }
 
 void Sprite::LastFrameModified(){
@@ -273,12 +243,6 @@ void Sprite::LastFrameModified(){
   //is not the same as the last one.
   if(!have_lastframe_cache) 
     return;
-
-  if(last_frame!=NULL)
-  {
-    SDL_FreeSurface(last_frame);
-    last_frame = NULL;
-  }
 }
 
 void Sprite::SetSize(unsigned int w, unsigned int h){
@@ -370,14 +334,17 @@ void Sprite::SetRotation_deg( float angle_deg){
    LastFrameModified();
 }
 
-void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface){
-  const SpriteFrame& frame = GetCurrentFrameObject();
-  const SDL_Surface& surface = *frame.surface;
-   // Calculate offset of the depending on hotspot rotation position :
+void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Wormux::Surface tmp_surface){
+    const SpriteFrame& frame = GetCurrentFrameObject();
+    const Wormux::Surface &surface = frame.surface;
+    // Calculate offset of the depending on hotspot rotation position :
+  
+    int surfaceHeight = surface.GetHeight();
+	int surfaceWidth = surface.GetWidth();
 
    //Do as if hotspot is center of picture:
-   rot_x = (surface.w/2)-(tmp_surface->w/2);
-   rot_y = (surface.h/2)-(tmp_surface->h/2);
+   rot_x = surfaceWidth / 2 - tmp_surface.GetWidth() / 2;
+   rot_y = surfaceHeight / 2 - tmp_surface.GetHeight() / 2;
 
    if(rot_hotspot == center)
       return;
@@ -399,16 +366,16 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    case top_right:
    case bottom_left:
    case bottom_right:
-      d = sqrt(surface.w * surface.w +
-               surface.h * surface.h) / 2;
+      d = sqrt(surfaceWidth * surfaceWidth +
+               surfaceHeight * surfaceHeight) / 2;
       break;
    case top_center:
    case bottom_center:
-      d = surface.h / 2;
+      d = surfaceHeight / 2;
       break;
    case left_center:
    case right_center:
-      d = surface.w / 2;
+      d = surfaceWidth / 2;
       break;
    default: break;
    }
@@ -419,37 +386,37 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
       d_angle = 0.0;
       break;
    case top_left:
-      if(surface.w<surface.h)
-        d_angle = atan(surface.w / surface.h);
+      if(surfaceWidth<surfaceHeight)
+        d_angle = atan(surfaceWidth / surfaceHeight);
       else
-        d_angle = atan(surface.h / surface.w);
+        d_angle = atan(surfaceHeight / surfaceWidth);
       break;
    case left_center:
       d_angle = M_PI_2;
       break;
    case bottom_left:
-      if(surface.w<surface.h)
-        d_angle = M_PI - atan(surface.w / surface.h);
+      if(surfaceWidth<surfaceHeight)
+        d_angle = M_PI - atan(surfaceWidth / surfaceHeight);
       else
-        d_angle = M_PI - atan(surface.h / surface.w);
+        d_angle = M_PI - atan(surfaceHeight / surfaceWidth);
       break;
    case bottom_center:
       d_angle = M_PI;
       break;
    case bottom_right:
-      if(surface.w<surface.h)
-        d_angle = M_PI + atan(surface.w / surface.h);
+      if(surfaceWidth<surfaceHeight)
+        d_angle = M_PI + atan(surfaceWidth / surfaceHeight);
       else
-        d_angle = M_PI + atan(surface.h / surface.w);
+        d_angle = M_PI + atan(surfaceHeight / surfaceWidth);
       break;
    case right_center:
       d_angle =  - M_PI_2;
       break;
    case top_right:
-      if(surface.w<surface.h)
-        d_angle = - atan(surface.w / surface.h);
+      if(surfaceWidth<surfaceHeight)
+        d_angle = - atan(surfaceWidth / surfaceHeight);
       else
-        d_angle = - atan(surface.h / surface.w);
+        d_angle = - atan(surfaceHeight / surfaceWidth);
       break;
    default: break;
    }
@@ -467,12 +434,12 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    case top_left:
    case left_center:
    case bottom_left:
-      rot_x -= static_cast<int>(scale_y * surface.w / 2);
+      rot_x -= static_cast<int>(scale_y * surfaceWidth / 2);
       break;
    case top_right:
    case right_center:
    case bottom_right:
-      rot_x += static_cast<int>(scale_y * surface.w / 2);
+      rot_x += static_cast<int>(scale_y * surfaceWidth / 2);
       break;
    default: break;
    }
@@ -482,12 +449,12 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tm
    case top_left:
    case top_center:
    case top_right:
-      rot_y -= surface.h / 2;
+      rot_y -= surfaceHeight / 2;
       break;
    case bottom_left:
    case bottom_center:
    case bottom_right:
-      rot_y += surface.h / 2;
+      rot_y += surfaceHeight / 2;
       break;
    default: break;
    }
@@ -515,39 +482,40 @@ void Sprite::SetPlayBackward(bool enable){
 
 void Sprite::RefreshSurface()
 {
-  tmp_surface = NULL;
-  need_free_surface = false;
+  tmp_surface.Free();
 
   if(!have_rotation_cache && !have_flipping_cache)
   {
     if(!have_lastframe_cache)
     {
-      tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-      need_free_surface = true;
+		Wormux::Surface newTmp = frames[current_frame].surface.RotoZoomXY( -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+      tmp_surface = newTmp;
     }
     else
     {
-      if(last_frame == NULL)
+      if(last_frame.IsNull() )
       {
 #define BUGGY_SDLGFX
 #ifdef BUGGY_SDLGFX
         if(rotation_deg != 0.0 || (scale_x != 1.0 && scale_y == 1.0))
         {
-          tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+		  Wormux::Surface newTmp = frames[current_frame].surface.RotoZoomXY( -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+		  tmp_surface = newTmp;
           last_frame = tmp_surface;
         }
         else
         if(scale_x != 1.0 || scale_y != 1.0)
         {
 #endif
-          tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_ON);
+		  Wormux::Surface newTmp = frames[current_frame].surface.RotoZoomXY( -rotation_deg, scale_x, scale_y, SMOOTHING_ON);
+		  tmp_surface = newTmp;
           last_frame = tmp_surface;
 #ifdef BUGGY_SDLGFX
         }
         else
         {
           tmp_surface = frames[current_frame].surface;
-          last_frame = NULL;
+          last_frame.Free();
         }
 #endif
       }
@@ -564,8 +532,8 @@ void Sprite::RefreshSurface()
       if(rotation_deg != 0.0 || scale_y != 1.0 || (scale_x != 1.0 && scale_x != -1.0))
       {
         CACHE_WARNING;
-        tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-        need_free_surface = true;
+		Wormux::Surface newTmp = frames[current_frame].surface.RotoZoomXY( -rotation_deg, scale_x, scale_y, SMOOTHING_OFF );
+        tmp_surface = newTmp;
       }
       else
       if(scale_x == 1.0)
@@ -579,8 +547,8 @@ void Sprite::RefreshSurface()
       if(scale_x != 1.0 || scale_y != 1.0)
       {
         CACHE_WARNING;
-        tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-        need_free_surface = true;
+		Wormux::Surface newTmp = frames[current_frame].surface.RotoZoomXY( -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+        tmp_surface = newTmp;
       }
       else
         tmp_surface = frames[current_frame].rotated_surface[(unsigned int)rotation_deg*rotation_cache_size/360];
@@ -591,8 +559,8 @@ void Sprite::RefreshSurface()
       if((scale_x != 1.0 && scale_x != -1.0)  || scale_y != 1.0)
       {
         CACHE_WARNING;
-        tmp_surface = rotozoomSurfaceXY (frames[current_frame].surface, -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
-        need_free_surface = true;
+		Wormux::Surface newTmp = frames[current_frame].surface.RotoZoomXY( -rotation_deg, scale_x, scale_y, SMOOTHING_OFF);
+        tmp_surface = newTmp;
       }
       else
       {
@@ -604,9 +572,9 @@ void Sprite::RefreshSurface()
       }
     }
   }
-  assert(tmp_surface != NULL);
+  assert( !tmp_surface.IsNull() );
 }
-void Sprite::Blit( SDL_Surface *dest, uint pos_x, uint pos_y)
+void Sprite::Blit( Wormux::Surface dest, uint pos_x, uint pos_y)
 {
   if (!show) return;
 
@@ -620,16 +588,13 @@ void Sprite::Blit( SDL_Surface *dest, uint pos_x, uint pos_y)
   int x = pos_x + rot_x;
   int y = pos_y + rot_y;
 
-  SDL_Rect dr = {x, y, tmp_surface->w, tmp_surface->h};
+  SDL_Rect dr = {x, y, tmp_surface.GetWidth(), tmp_surface.GetHeight() };
 
-  SDL_BlitSurface (tmp_surface, NULL, dest, &dr);
+  dest.Blit( tmp_surface, NULL, &dr);
 
   // For the cache mechanism
   if( game.IsGameLaunched() )
-    world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface->w, tmp_surface->h));
-
-  if( need_free_surface )
-     SDL_FreeSurface (tmp_surface);
+    world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface.GetWidth(), tmp_surface.GetHeight() ));
 
 #ifdef DBG_SPRITE
    std::ostringstream ss;
@@ -640,7 +605,7 @@ void Sprite::Blit( SDL_Surface *dest, uint pos_x, uint pos_y)
 #endif
 }
 
-void Sprite::Blit( SDL_Surface *dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
+void Sprite::Blit( Wormux::Surface dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
 {
   if (!show) return;
 
@@ -656,14 +621,11 @@ void Sprite::Blit( SDL_Surface *dest, int pos_x, int pos_y, int src_x, int src_y
 
   SDL_Rect src = {src_x, src_y, w, h};
   SDL_Rect dst = {x, y, w, h};
-  SDL_BlitSurface (tmp_surface, &src, dest, &dst);
+  dest.Blit(tmp_surface, &src, &dst);
 
   // For the cache mechanism
   if( game.IsGameLaunched() )
-    world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface->w, tmp_surface->h));
-
-  if( need_free_surface )
-     SDL_FreeSurface (tmp_surface);
+    world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface.GetWidth(), tmp_surface.GetHeight() ));
 
 #ifdef DBG_SPRITE
    std::ostringstream ss;

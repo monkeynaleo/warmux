@@ -21,7 +21,6 @@
  *****************************************************************************/
 
 #include "cluster_bomb.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include <math.h>
 #include "weapon_tools.h"
@@ -37,7 +36,7 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 #include "../tool/random.h"
-//-----------------------------------------------------------------------------
+
 namespace Wormux {
 
 LanceCluster lance_cluster;
@@ -46,23 +45,17 @@ LanceCluster lance_cluster;
 #define COUT_DBG std::cout << "[ClusterBomb] "
 #endif
 
-//-----------------------------------------------------------------------------
-
 Cluster::Cluster() : WeaponProjectile ("Cluster")
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
 }
 
-//-----------------------------------------------------------------------------
-
 void Cluster::Tire (int x, int y)
 {
   PrepareTir();
   SetXY(x,y);
 }
-
-//-----------------------------------------------------------------------------
 
 void Cluster::Init()
 {
@@ -78,8 +71,6 @@ void Cluster::Init()
   SetTestRect (dx, dx, dy, dy);
 }
 
-//-----------------------------------------------------------------------------
-
 void Cluster::Refresh()
 {
   if (!is_active) return;
@@ -89,14 +80,10 @@ void Cluster::Refresh()
   image->SetRotation_deg( angle);
 }
 
-//-----------------------------------------------------------------------------
-
 void Cluster::Draw()
 {
   image->Draw(GetX(), GetY());
 }
-
-//-----------------------------------------------------------------------------
 
 void Cluster::SignalCollision()
 {
@@ -111,8 +98,6 @@ void Cluster::SignalCollision()
 }
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 ClusterBomb::ClusterBomb() : WeaponProjectile ("cluster_bomb")
 {
@@ -122,14 +107,10 @@ ClusterBomb::ClusterBomb() : WeaponProjectile ("cluster_bomb")
   m_rebounding = true;
 }
 
-//-----------------------------------------------------------------------------
-
 ClusterBomb::~ClusterBomb()
 {
   delete []tableau_cluster;
 }
-
-//-----------------------------------------------------------------------------
 
 void ClusterBomb::Tire (double force)
 {
@@ -155,8 +136,6 @@ void ClusterBomb::Tire (double force)
   temps_debut_tir = Wormux::global_time.Read();
 }
 
-//-----------------------------------------------------------------------------
-
 void ClusterBomb::Init()
 {
   image = resource_manager.LoadSprite( weapons_res_profile, "clusterbomb_sprite");
@@ -178,8 +157,6 @@ void ClusterBomb::Init()
   for(uint i=0;i<lance_cluster.cfg().nbr_fragments;i++)
     tableau_cluster[i].Init();
 }
-
-//-----------------------------------------------------------------------------
 
 void ClusterBomb::Refresh()
 {
@@ -226,8 +203,6 @@ void ClusterBomb::Refresh()
   image->SetRotation_deg( angle);
 }
 
-//-----------------------------------------------------------------------------
-
 void ClusterBomb::Draw()
 {
   if (!is_active) return;
@@ -250,8 +225,6 @@ void ClusterBomb::Draw()
   global().small_font().WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
 }
 
-//-----------------------------------------------------------------------------
-
 void ClusterBomb::SignalCollision()
 {   
   if (IsGhost())
@@ -262,8 +235,6 @@ void ClusterBomb::SignalCollision()
 }
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 LanceCluster::LanceCluster() : Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb")
 {  
@@ -272,8 +243,6 @@ LanceCluster::LanceCluster() : Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb")
   m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
   extra_params = new ClusterBombConfig();
 }
-
-//-----------------------------------------------------------------------------
 
 bool LanceCluster::p_Shoot ()
 {
@@ -286,8 +255,6 @@ bool LanceCluster::p_Shoot ()
 
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 void LanceCluster::Explosion()
 {
@@ -307,8 +274,6 @@ void LanceCluster::Explosion()
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
-//-----------------------------------------------------------------------------
-
 void LanceCluster::Refresh()
 {
   if (m_is_active)
@@ -317,21 +282,15 @@ void LanceCluster::Refresh()
   } 
 }
 
-//-----------------------------------------------------------------------------
-
 void LanceCluster::p_Init()
 {
   cluster_bomb.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
-//-----------------------------------------------------------------------------
-
 ClusterBombConfig& LanceCluster::cfg() 
 { return static_cast<ClusterBombConfig&>(*extra_params); }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 ClusterBombConfig::ClusterBombConfig()
@@ -350,5 +309,4 @@ void ClusterBombConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitUint (elem, "nbr_fragments", nbr_fragments);
 }
 
-//-----------------------------------------------------------------------------
 } // namespace Wormux
