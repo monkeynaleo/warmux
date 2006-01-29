@@ -24,10 +24,10 @@
 
 #include <list>
 #include <map>
-#include <SDL.h>
 #include <string>
 #include "character.h"
 #include "team_energy.h"
+#include "../graphic/surface.h"
 #include "../include/enum.h"
 #include "../include/base.h"
 #include "../weapon/crosshair.h"
@@ -49,7 +49,7 @@ public:
 
   // Autres
   CrossHair crosshair;
-  SDL_Surface *ecusson;
+  Wormux::Surface ecusson;
   Point2i sauve_camera;
   bool camera_est_sauve;
   TeamEnergy energie;

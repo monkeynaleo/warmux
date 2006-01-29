@@ -28,10 +28,10 @@
 
 #include <SDL.h>
 #include <vector>
+#include "spriteframe.h"
 
 #ifdef DEBUG
 //#define DBG_SPRITE
-
 #ifdef DBG_SPRITE
 #include "text.h"
 #endif
@@ -41,19 +41,7 @@
 //SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
 
 enum Rotation_HotSpot {top_left, top_center, top_right, left_center, center, right_center, bottom_left, bottom_center, bottom_right};
-
  
-class SpriteFrame
-{
-public:
-  SpriteFrame(SDL_Surface *surface, unsigned int delay=100);
-  SDL_Surface *surface;
-  SDL_Surface *flipped_surface;
-  SDL_Surface** rotated_surface;
-  SDL_Surface** rotated_flipped_surface;
-  unsigned int delay; // in millisecond
-};
-
 class Sprite
 {
   public:
@@ -65,11 +53,11 @@ typedef enum {
 	
  public:
    Sprite();
-   Sprite( const Sprite &other);
-   Sprite( SDL_Surface *surface);
+   Sprite( Sprite &other);
+   Sprite( Wormux::Surface surface);
    ~Sprite();
-   void Init( SDL_Surface *surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
-   void AddFrame(SDL_Surface* surf, unsigned int delay);
+   void Init( Wormux::Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
+   void AddFrame( Wormux::Surface surf, unsigned int delay);
    void EnableRotationCache(unsigned int cache_size);
    void EnableFlippingCache();
    void EnableLastFrameCache();
@@ -110,10 +98,9 @@ typedef enum {
 
    void Show();
    void Hide();
-
      
-   void Blit( SDL_Surface *dest, uint pox_x, uint pos_y);
-   void Blit( SDL_Surface *dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
+   void Blit( Wormux::Surface dest, uint pox_x, uint pos_y);
+   void Blit( Wormux::Surface dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
    void Draw(int pos_x, int pos_y);
    void Update();
    bool IsFinished() const;
@@ -137,10 +124,10 @@ typedef enum {
 
    //For cache mecanism
    bool need_free_surface;
-   SDL_Surface* tmp_surface;
+   Wormux::Surface tmp_surface;
 
    Rotation_HotSpot rot_hotspot;
-   void Calculate_Rotation_Offset(int & rot_x, int & rot_y, SDL_Surface* tmp_surface);
+   void Calculate_Rotation_Offset(int & rot_x, int & rot_y, Wormux::Surface tmp_surface);
 
    //Cache members / functions
    bool have_rotation_cache;
@@ -149,7 +136,7 @@ typedef enum {
    bool have_flipping_cache;
 
    bool have_lastframe_cache;
-   SDL_Surface* last_frame;
+   Wormux::Surface last_frame;
    void LastFrameModified();
    void RefreshSurface();
 

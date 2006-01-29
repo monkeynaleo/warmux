@@ -21,15 +21,12 @@
 
 #ifndef AIR_ATTACK_H
 #define AIR_ATTACK_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
+#include "../graphic/surface.h"
 #include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "weapon.h"
 
-//-----------------------------------------------------------------------------
 namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class AirAttackConfig : public ExplosiveWeaponConfig
 { 
@@ -41,12 +38,10 @@ public:
   virtual void LoadXml(xmlpp::Element *elem);
 };
 
-//-----------------------------------------------------------------------------
-
 class Obus : public WeaponProjectile
 {
 private:
-  SDL_Surface *impact; 
+  Surface impact; 
 public:
   Obus();
   void Draw();
@@ -57,8 +52,6 @@ public:
 protected:
   void SignalCollision();
 };
-
-//-----------------------------------------------------------------------------
 
 class Avion : public PhysicalObj
 {
@@ -80,8 +73,6 @@ public:
   int LitCibleX() const;
   int GetDirection() const;
 };
-
-//-----------------------------------------------------------------------------
 
 class AirAttack : public Weapon
 {
@@ -108,6 +99,5 @@ public:
 };
 
 extern AirAttack air_attack;
-//-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

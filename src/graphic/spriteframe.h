@@ -16,56 +16,23 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Holly Grenade
+ * SpriteFrame : Handle frame of sprite...
  *****************************************************************************/
 
-#ifndef HOLLY_GRENADE_H
-#define HOLLY_GRENADE_H
+#ifndef SPRITEFRAME_H
+#define SPRITEFRAME_H
 
-#include "grenade.h"
-#include "weapon.h"
-#include "../graphic/surface.h"
-#include "../gui/progress_bar.h"
-#include "../include/base.h"
+#include "graphic/surface.h"
 
-namespace Wormux {
-// The Holly Grenade
-class HollyGrenade : public WeaponProjectile
+class SpriteFrame
 {
-protected:
-  double temps_debut_tir;
-  bool sing_alleluia;
-
-  ParticleEngine smoke_engine;
-public:
-  HollyGrenade();
-  void Tire (double force);
-  void Init();
-  void Refresh();
-  void Draw();
-protected:
-  void SignalCollision();
+	public:
+		SpriteFrame( Wormux::Surface surface, unsigned int delay=100);
+		Wormux::Surface surface;
+		Wormux::Surface flipped_surface;
+		Wormux::Surface *rotated_surface;
+		Wormux::Surface *rotated_flipped_surface;
+		unsigned int delay; // in millisecond
 };
 
-class HollyGrenadeLauncher : public Weapon
-{
- private:
-  void p_Init();
-  bool p_Shoot();
-
-public:
-  Surface impact;    // Image (alpha) de l'impact
-
-  HollyGrenade grenade;
-
-  HollyGrenadeLauncher();
-  void Refresh();
-  GrenadeConfig& cfg();
-
-protected:
-  void Explosion();
-};
-
-extern HollyGrenadeLauncher holly_grenade_launcher;
-} // namespace Wormux
 #endif

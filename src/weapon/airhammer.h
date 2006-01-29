@@ -21,19 +21,18 @@
 
 #ifndef AIRHAMMER_H
 #define AIRHAMMER_H
-//-----------------------------------------------------------------------------
+
 #include <SDL.h>
 #include "../include/base.h"
 #include "weapon.h"
-//-----------------------------------------------------------------------------
+
 namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class Airhammer : public Weapon
 {
  private:
   uint m_last_jolt;
-  SDL_Surface* impact;
+  Surface impact;
 
   void p_Init();
   void p_Deselect();
@@ -48,6 +47,5 @@ class Airhammer : public Weapon
 };
 
 extern Airhammer airhammer;
-//-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

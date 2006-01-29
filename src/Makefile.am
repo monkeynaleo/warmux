@@ -18,9 +18,12 @@ wormux_SOURCES = \
 	game/game_loop.cpp game/game_loop.h \
 	graphic/colors.h \
 	graphic/effects.cpp graphic/effects.h \
+	graphic/font.cpp graphic/font.h \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/surface.cpp graphic/surface.h \
 	graphic/sdlsurface.cpp graphic/sdlsurface.h \
+	graphic/sprite.cpp graphic/sprite.h \
+	graphic/spriteframe.cpp graphic/spriteframe.h \
 	graphic/video.cpp graphic/video.h \
 	graphic/text.cpp graphic/text.h \
 	gui/button.cpp gui/button.h \
@@ -45,8 +48,6 @@ wormux_SOURCES = \
 	tool/random.cpp tool/random.h \
 	tool/debug.cpp tool/debug.h \
 	sound/jukebox.cpp sound/jukebox.h \
-	graphic/font.cpp graphic/font.h \
-	graphic/sprite.cpp graphic/sprite.h \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
 	menu/main_menu.cpp menu/main_menu.h \
 	menu/menu.cpp menu/menu.h \

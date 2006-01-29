@@ -47,7 +47,7 @@ class Gun : public Weapon
 private:
   uint temps_capture;
   std::vector<Point2i> lst_points;
-  SDL_Surface *impact;
+  Surface impact;
   void p_Init();
   bool p_Shoot();
 

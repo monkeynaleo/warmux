@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "team.h"
-//-----------------------------------------------------------------------------
 #include "../game/game.h"
 #include "../game/game_mode.h"
 #include "../interface/cursor.h"
@@ -36,11 +35,8 @@
 #include <iostream>
 using namespace Wormux;
 using namespace std;
-//-----------------------------------------------------------------------------
 
 const char* NOM_DEFAUT_EQUIPE = "Team X";
-
-//-----------------------------------------------------------------------------
 
 Team::Team()
 {
@@ -49,8 +45,6 @@ Team::Team()
   is_local = true;
   ver_actif = -1;
 }
-
-//-----------------------------------------------------------------------------
 
 bool Team::Init (const std::string &teams_dir, const std::string &id)
 {
@@ -81,8 +75,6 @@ bool Team::Init (const std::string &teams_dir, const std::string &id)
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void Team::InitEnergy (uint max)
 {
   energie.Init();
@@ -90,8 +82,6 @@ void Team::InitEnergy (uint max)
   energie.FixeMax(max);
   energie.FixeValeur(LitEnergie());
 }
-
-//-----------------------------------------------------------------------------
 
 uint Team::LitEnergie ()
 {
@@ -102,14 +92,11 @@ uint Team::LitEnergie ()
   }
   return total_energie;
 }
-//-----------------------------------------------------------------------------
 
 void Team::ActualiseBarreEnergie ()
 {
   energie.NouvelleValeur(LitEnergie());
 }
-
-//-----------------------------------------------------------------------------
 
 bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
 {
@@ -174,8 +161,6 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
   return (1 <= vers.size());
 }
 
-//-----------------------------------------------------------------------------
-
 int Team::NextCharacterIndex()
 {
   // Passe au ver suivant
@@ -189,8 +174,6 @@ int Team::NextCharacterIndex()
   return copy;
 }
 
-//-----------------------------------------------------------------------------
-
 void Team::internal_NextCharacter()
 {
   // Passe au ver suivant
@@ -202,7 +185,6 @@ void Team::internal_NextCharacter()
   } while (ActiveCharacter().IsDead());
 }
 
-//-----------------------------------------------------------------------------
 /*   not used anymore
 void Team::NextCharacter()
 {
@@ -213,7 +195,6 @@ void Team::NextCharacter()
   curseur_ver.SuitVerActif();
 }
 */
-//-----------------------------------------------------------------------------
 
 int Team::NbAliveCharacter() const
 {
@@ -222,8 +203,6 @@ int Team::NbAliveCharacter() const
     if (!vers[index].IsDead()) ++nbr;
   return nbr;
 }
-
-//-----------------------------------------------------------------------------
 
 void Team::SelectCharacterIndex (uint index)
 {
@@ -243,8 +222,6 @@ void Team::SelectCharacterIndex (uint index)
   camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
   curseur_ver.SuitVerActif();
 }
-
-//-----------------------------------------------------------------------------
 
 // Prepare le tour d'une equipe
 void Team::PrepareTour()
@@ -266,8 +243,6 @@ void Team::PrepareTour()
   AccessWeapon().Select();
 }
 
-//-----------------------------------------------------------------------------
-
 // Fin d'un tour : nettoyage avant de partir :-)
 void Team::FinTour()
 {
@@ -279,22 +254,16 @@ void Team::FinTour()
   sauve_camera = Point2i(camera.GetX(), camera.GetY());
 }
 
-//-----------------------------------------------------------------------------
-
 int Team::ActiveCharacterIndex() const
 { 
   return ver_actif;
 }
-
-//-----------------------------------------------------------------------------
 
 Character& Team::ActiveCharacter()
 { 
   assert ((uint)ver_actif < vers.size());
   return vers.at(ver_actif);
 }
-
-//-----------------------------------------------------------------------------
 
 // Change d'arme
 void Team::SetWeapon (Weapon_type type)
@@ -303,8 +272,6 @@ void Team::SetWeapon (Weapon_type type)
   active_weapon = weapons_list.GetWeapon(type);
   AccessWeapon().Select();
 }
-
-//-----------------------------------------------------------------------------
 
 int Team::ReadNbAmmos() const
 {
@@ -317,8 +284,6 @@ int Team::ReadNbAmmos() const
   return 0 ;
 }
 
-//-----------------------------------------------------------------------------
-
 int Team::ReadNbUnits() const
 {
   std::map<std::string, int>::const_iterator it 
@@ -327,8 +292,6 @@ int Team::ReadNbUnits() const
   if (it !=  m_nb_units.end())  return ( it->second ) ;  
   return 0 ;
 }
-
-//-----------------------------------------------------------------------------
 
 int Team::ReadNbAmmos(const std::string &weapon_name) const
 {
@@ -342,8 +305,6 @@ int Team::ReadNbAmmos(const std::string &weapon_name) const
   
 }
 
-//-----------------------------------------------------------------------------
-
 int Team::ReadNbUnits(const std::string &weapon_name) const
 {
   std::map<std::string, int>::const_iterator it = 
@@ -354,15 +315,11 @@ int Team::ReadNbUnits(const std::string &weapon_name) const
   
 }
 
-//-----------------------------------------------------------------------------
-
 int& Team::AccessNbAmmos()
 {
   // if value not initialized, it initialize to 0 and then return 0
   return m_nb_ammos[ active_weapon->GetName() ] ;
 }
-
-//-----------------------------------------------------------------------------
 
 int& Team::AccessNbUnits()
 {
@@ -370,19 +327,13 @@ int& Team::AccessNbUnits()
   return m_nb_units[ active_weapon->GetName() ] ;
 }
 
-//-----------------------------------------------------------------------------
-
 void Team::ResetNbUnits()
 {
   m_nb_units[ active_weapon->GetName() ] = active_weapon->ReadInitialNbUnit();
 }
 
-//-----------------------------------------------------------------------------
-
 Team::iterator Team::begin() { return vers.begin(); }
 Team::iterator Team::end() { return vers_fin_it; }
-
-//-----------------------------------------------------------------------------
 
 void Team::Reset()
 {
@@ -417,24 +368,17 @@ void Team::Reset()
   crosshair.Reset();
 }
 
-//-----------------------------------------------------------------------------
-
 void Team::Draw()
 {
   energie.Draw ();
 }
-
-//-----------------------------------------------------------------------------
 
 void Team::Refresh()
 {
   energie.Refresh();
 }
 
-//-----------------------------------------------------------------------------
-
 Weapon& Team::AccessWeapon() const { return *active_weapon; }
 const Weapon& Team::GetWeapon() const { return *active_weapon; }
 Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
 
-//-----------------------------------------------------------------------------

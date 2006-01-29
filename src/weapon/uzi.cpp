@@ -166,8 +166,8 @@ bool Uzi::p_Shoot()
       // Creuse le world
       if (!obj)
       {
-	world.Creuse (balle.GetX() - impact->w/2,
-		      balle.GetY() - impact->h/2,
+	world.Creuse (balle.GetX() - impact.GetWidth()/2,
+		      balle.GetY() - impact.GetHeight()/2,
 		      impact);
       }
       return true;

@@ -121,20 +121,20 @@ bool NinjaRope::p_Shoot()
 void NinjaRope::InitSkinSprite()
 {
   //Copy skins surface
-  SDL_Surface *new_surf = CreateRGBASurface(ActiveCharacter().GetWidth(), ActiveCharacter().GetHeight(), SDL_SWSURFACE|SDL_SRCALPHA);
+  Surface new_surf = Surface(ActiveCharacter().GetWidth(), ActiveCharacter().GetHeight(), SDL_SWSURFACE|SDL_SRCALPHA, true);
   // Disable per pixel alpha on the source surface
   // in order to properly copy the alpha chanel to the destination suface
   // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-  SDL_Surface* current_skin;
+  Surface current_skin;
   if(ActiveCharacter().GetDirection() == 1)
     current_skin = ActiveCharacter().image->GetCurrentFrameObject().surface;
   else
     current_skin = ActiveCharacter().image->GetCurrentFrameObject().flipped_surface;
 
-  SDL_SetAlpha(current_skin, 0, 0);
-  SDL_BlitSurface(current_skin, NULL, new_surf, NULL);
+  current_skin.SetAlpha(0, 0);
+  new_surf.Blit(current_skin, NULL, NULL);
   // re-enable the per pixel alpha in the
-  SDL_SetAlpha(current_skin, SDL_SRCALPHA, 0);
+  current_skin.SetAlpha(SDL_SRCALPHA, 0);
 
   skin=new Sprite(new_surf);
   skin->EnableRotationCache(64);

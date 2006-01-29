@@ -44,9 +44,9 @@ public:
   virtual ~TileItem () {};
    
   bool IsEmpty ();
-  virtual unsigned char GetAlpha (const int x,const int y) const = 0;
-  virtual void Dig (int ox, int oy, SDL_Surface *dig) = 0;
-  virtual SDL_Surface *GetSurface () = 0;
+  virtual unsigned char GetAlpha (const int x,const int y) = 0;
+  virtual void Dig (int ox, int oy, Surface dig) = 0;
+  virtual Surface GetSurface () = 0;
   virtual void SyncBuffer () = 0; // (if needed)
   virtual void Draw (const int x,const int y);
 };
@@ -57,11 +57,11 @@ public:
   TileItem_Empty () {};
   ~TileItem_Empty () {};
    
-  unsigned char GetAlpha (const int x,const int y) const {return 0;};
-  void Dig (int ox, int oy, SDL_Surface *dig) {};
-  SDL_Surface *GetSurface () {return NULL;};
-  void SyncBuffer () {};
-  void Draw (const int x,const int y) {};
+  unsigned char GetAlpha (const int x,const int y) {return 0;};
+  void Dig (int ox, int oy, Surface dig) {};
+  Surface GetSurface() {return *new Surface();};
+  void SyncBuffer() {};
+  void Draw(const int x,const int y) {};
 };
 
 class TileItem_AlphaSoftware : public TileItem
@@ -71,19 +71,19 @@ public:
   TileItem_AlphaSoftware (const TileItem_AlphaSoftware &copy);
   ~TileItem_AlphaSoftware ();
     
-  unsigned char GetAlpha (const int x, const int y) const;
-  SDL_Surface *GetSurface ();
-  void Dig (int ox, int oy, SDL_Surface *dig);
-  void SyncBuffer ();
+  unsigned char GetAlpha (const int x, const int y);
+  Surface GetSurface();
+  void Dig(int ox, int oy, Surface dig);
+  void SyncBuffer();
      
 private:
-  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const int x, const int y) const;
-  unsigned char GetAlpha_Index0 (const int x, const int y) const;
-  inline unsigned char GetAlpha_Index3 (const int x, const int y) const;
-  inline unsigned char GetAlpha_Generic (const int x, const int y) const;
+  unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const int x, const int y) ;
+  unsigned char GetAlpha_Index0 (const int x, const int y);
+  inline unsigned char GetAlpha_Index3 (const int x, const int y);
+  inline unsigned char GetAlpha_Generic (const int x, const int y);
 
   unsigned int m_width, m_height;
-  SDL_Surface *m_surface;
+  Surface m_surface;
 };  
 
 class TileItem_AlphaHardware : public TileItem
@@ -93,14 +93,14 @@ public:
   TileItem_AlphaHardware (const TileItem_AlphaHardware &copy);
   ~TileItem_AlphaHardware ();
     
-  unsigned char GetAlpha (const int x, const int y) const;
-  SDL_Surface *GetSurface ();
-  void Dig (int ox, int oy, SDL_Surface *dig);
+  unsigned char GetAlpha (const int x, const int y);
+  Surface GetSurface();
+  void Dig (int ox, int oy, Surface dig);
   void SyncBuffer ();
    
 private:
   unsigned int m_width, m_height;
-  SDL_Surface *m_surface;
+  Surface m_surface;
   unsigned char *m_buffer;
 };  
 
@@ -111,14 +111,14 @@ public:
   TileItem_ColorkeySoftware (const TileItem_ColorkeySoftware &copy);
   ~TileItem_ColorkeySoftware ();
     
-  unsigned char GetAlpha (const int x, const int y) const;
-  SDL_Surface *GetSurface ();
-  void Dig (int ox, int oy, SDL_Surface *dig);
-  void SyncBuffer ();
+  unsigned char GetAlpha (const int x, const int y);
+  Surface GetSurface ();
+  void Dig(int ox, int oy, Surface dig);
+  void SyncBuffer();
  
 private:
   unsigned int m_width, m_height;
-  SDL_Surface *m_surface;
+  Surface m_surface;
   unsigned char *m_buffer;
 };  
 
@@ -127,7 +127,7 @@ private:
 
 void TileItem::Draw(const int x,const int y)
 {
-  SDL_Surface *i_surface = GetSurface();
+  Surface i_surface = GetSurface();
   SDL_Rect ds = {0,0,cell_width,cell_height};
   SDL_Rect dr = {x*cell_width-camera.GetX(),y*cell_height-camera.GetY(),cell_width,cell_height};
   app.video.window.Blit(i_surface, &ds, &dr); 	     
@@ -137,10 +137,8 @@ bool TileItem::IsEmpty()
 {
   for ( int x = 0 ; x < cell_width ; x++)
      for ( int y = 0 ; y < cell_height ; y++)
-       {
 	  if ( GetAlpha (x,y) == 255)
 	    return false;
-       }
    
    return true;
 }
@@ -153,26 +151,19 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware (unsigned int width, unsigned int
    m_width = width;
    m_height = height;
 
-   SDL_Surface *_m_surface = CreateRGBASurface(m_width, m_height, SDL_SWSURFACE|SDL_SRCALPHA);
+   Surface _m_surface = Surface(m_width, m_height, SDL_SWSURFACE|SDL_SRCALPHA, true);
 	
-   m_surface = SDL_DisplayFormatAlpha( _m_surface);
-
-   SDL_FreeSurface( _m_surface);
-
-   if ( m_surface == NULL)
-   {
-       Error(std::string("TileItem_AlphaSofware: can't create surface: ") + SDL_GetError());
-   }
+   m_surface = _m_surface.DisplayFormatAlpha();
 
    _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
-   if ( m_surface->format->BytesPerPixel == 4)
+   if ( m_surface.GetSurface()->format->BytesPerPixel == 4)
    {
-       if (m_surface->format->Amask == 0x000000ff) {
+       if (m_surface.GetSurface()->format->Amask == 0x000000ff) {
            if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
                _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
            else
                _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
-       } else if (m_surface->format->Amask == 0xff000000) {
+       } else if (m_surface.GetSurface()->format->Amask == 0xff000000) {
            if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
                _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
            else
@@ -188,53 +179,50 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware (const TileItem_AlphaSoftware &co
 
 TileItem_AlphaSoftware::~TileItem_AlphaSoftware ()
 {
-   SDL_FreeSurface( m_surface);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha(const int x,const int y) const
+unsigned char TileItem_AlphaSoftware::GetAlpha(const int x,const int y)
 {
    return (this->*_GetAlpha)( x, y);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const int x, const int y) const
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index0 (const int x, const int y)
 {
-   return *(((unsigned char *)m_surface->pixels) + y*m_surface->pitch + x * 4 + 0);
+   return *(((unsigned char *)m_surface.GetSurface()->pixels) + y*m_surface.GetSurface()->pitch + x * 4 + 0);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const int x, const int y) const
+unsigned char TileItem_AlphaSoftware::GetAlpha_Index3 (const int x, const int y) 
 {
-   return *(((unsigned char *)m_surface->pixels) + y*m_surface->pitch + x * 4 + 3);
+   return *(((unsigned char *)m_surface.GetSurface()->pixels) + y*m_surface.GetSurface()->pitch + x * 4 + 3);
 }
 
-unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const int x, const int y) const
+unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const int x, const int y)
 {
    unsigned char r, g, b, a;
  
-   Uint32 pixel = *(Uint32 *)((unsigned char *)m_surface->pixels+y*m_surface->pitch+x*m_surface->format->BytesPerPixel); 
-   SDL_GetRGBA( pixel, m_surface->format, &r, &g, &b, &a);
+   Uint32 pixel = *(Uint32 *)((unsigned char *)m_surface.GetSurface()->pixels+y*m_surface.GetSurface()->pitch+x*m_surface.GetSurface()->format->BytesPerPixel); 
+   SDL_GetRGBA( pixel, m_surface.GetSurface()->format, &r, &g, &b, &a);
    
    return a;
 }
 
  
-void TileItem_AlphaSoftware::Dig( int ox, int oy, SDL_Surface *dig)
-{
+void TileItem_AlphaSoftware::Dig( int ox, int oy, Surface dig){
    int starting_x = ox >= 0 ? ox : 0;   
    int starting_y = oy >= 0 ? oy : 0; 
-   int ending_x = ox+dig->w <= m_surface->w ? ox+dig->w : m_surface->w;
-   int ending_y = oy+dig->h <= m_surface->h ? oy+dig->h : m_surface->h;
+   int ending_x = ox+dig.GetWidth() <= m_surface.GetWidth() ? ox+dig.GetWidth() : m_surface.GetWidth();
+   int ending_y = oy+dig.GetHeight() <= m_surface.GetHeight() ? oy+dig.GetHeight() : m_surface.GetHeight();
    
    for( int py = starting_y ; py < ending_y ; py++) 
      for( int px = starting_x ; px < ending_x ; px++)
        {
-	  if ( *(((unsigned char *)dig->pixels) + (py-oy)*dig->pitch + (px-ox) * 4 + 3) != 0)
+	  if ( *(((unsigned char *)dig.GetSurface()->pixels) + (py-oy)*dig.GetSurface()->pitch + (px-ox) * 4 + 3) != 0)
 	    
-	    *(((unsigned char *)m_surface->pixels) + py*m_surface->pitch + px * 4 + 3) = 0;
+	    *(((unsigned char *)m_surface.GetSurface()->pixels) + py*m_surface.GetSurface()->pitch + px * 4 + 3) = 0;
        }
 }
 
-SDL_Surface *TileItem_AlphaSoftware::GetSurface()
-{
+Surface TileItem_AlphaSoftware::GetSurface(){
    return m_surface;
 }
 
@@ -250,7 +238,7 @@ TileItem_AlphaHardware::TileItem_AlphaHardware (unsigned int width, unsigned int
    m_width = width;
    m_height = height;
 
-   m_surface = CreateRGBASurface(m_width, m_height, SDL_HWSURFACE|SDL_SRCALPHA);
+   m_surface.NewSurface(m_width, m_height, SDL_HWSURFACE|SDL_SRCALPHA, true);
 
    m_buffer = new unsigned char[m_height*m_width];
 }
@@ -260,9 +248,9 @@ TileItem_AlphaHardware::TileItem_AlphaHardware (const TileItem_AlphaHardware &co
    m_width = copy.m_width;
    m_height = copy.m_height;
 
-   m_surface = CreateRGBASurface(m_width, m_height, SDL_HWSURFACE|SDL_SRCALPHA);
-   SDL_Rect dest_rect = {0,0, copy.m_surface->w, copy.m_surface->h};
-   SDL_BlitSurface( copy.m_surface, NULL, m_surface, &dest_rect);
+   m_surface.NewSurface(m_width, m_height, SDL_HWSURFACE|SDL_SRCALPHA, true);
+   SDL_Rect dest_rect = {0,0, copy.m_surface.GetWidth(), copy.m_surface.GetHeight()};
+   m_surface.Blit( copy.m_surface, NULL, &dest_rect);
 
    m_buffer = new unsigned char[m_height*m_width];
    memcpy( copy.m_buffer, m_buffer, m_height*m_width*sizeof( unsigned char));
@@ -270,53 +258,50 @@ TileItem_AlphaHardware::TileItem_AlphaHardware (const TileItem_AlphaHardware &co
 
 TileItem_AlphaHardware::~TileItem_AlphaHardware ()
 {
-   SDL_FreeSurface( m_surface);
    delete[] m_buffer;
 }
 
-unsigned char TileItem_AlphaHardware::GetAlpha(const int x,const int y) const
+unsigned char TileItem_AlphaHardware::GetAlpha(const int x,const int y)
 {
    return *(m_buffer+y*m_width+x);
 }
 
-void TileItem_AlphaHardware::Dig( int ox, int oy, SDL_Surface *dig)
+void TileItem_AlphaHardware::Dig( int ox, int oy, Surface dig)
 {
    int starting_x = ox >= 0 ? ox : 0;   
    int starting_y = oy >= 0 ? oy : 0; 
-   int ending_x = ox+dig->w <= m_surface->w ? ox+dig->w : m_surface->w;
-   int ending_y = oy+dig->h <= m_surface->h ? oy+dig->h : m_surface->h;
+   int ending_x = ox+dig.GetWidth() <= m_surface.GetWidth() ? ox+dig.GetWidth() : m_surface.GetWidth();
+   int ending_y = oy+dig.GetHeight() <= m_surface.GetHeight() ? oy+dig.GetHeight() : m_surface.GetHeight();
    
-   SDL_LockSurface( m_surface);
+   m_surface.Lock();
    
    for( int py = starting_y ; py < ending_y ; py++) 
      for( int px = starting_x ; px < ending_x ; px++)
        {
-	  if ( *(((unsigned char *)dig->pixels) + (py-oy)*dig->pitch + (px-ox) * 4 + 3) != 0)	    
+	  if ( *(((unsigned char *)dig.GetSurface()->pixels) + (py-oy)*dig.GetSurface()->pitch + (px-ox) * 4 + 3) != 0)	    
 	    {
-	       *(((unsigned char *)m_surface->pixels) + py*m_surface->pitch + px * 4 + 3) = 0;
+	       *(((unsigned char *)m_surface.GetSurface()->pixels) + py*m_surface.GetSurface()->pitch + px * 4 + 3) = 0;
 	       m_buffer[py*m_width+px] = 0;
 	    }
        }
    
-   SDL_UnlockSurface( m_surface);
+   m_surface.Unlock();
 }
 
-SDL_Surface *TileItem_AlphaHardware::GetSurface()
+Surface TileItem_AlphaHardware::GetSurface()
 {
    return m_surface;
 }
 
 void TileItem_AlphaHardware::SyncBuffer()
 {
-   SDL_LockSurface( m_surface);
+   m_surface.Lock();
    
    for ( unsigned int y = 0 ; y < m_height ; y++)  
      for ( unsigned int x = 0 ; x < m_width ; x++)
-       {       
-	  m_buffer[y*m_width+x] = *(((unsigned char *)m_surface->pixels) + y*m_surface->pitch + x * 4 + 3);
-       }
+	  m_buffer[y*m_width+x] = *(((unsigned char *)m_surface.GetSurface()->pixels) + y*m_surface.GetSurface()->pitch + x * 4 + 3);
    
-   SDL_UnlockSurface( m_surface);
+   m_surface.Unlock();
 }
 
 // === Implemenation of TileItem_Software_Colorkey  ==============================
@@ -326,9 +311,9 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (unsigned int width, unsign
    m_width = width;
    m_height = height;
 
-   m_surface = CreateRGBASurface(m_width, m_height, SDL_SWSURFACE);
-   SDL_SetAlpha (m_surface,0,0);
-   SDL_SetColorKey (m_surface, SDL_SRCCOLORKEY/*|SDL_RLEACCEL*/, SDL_MapRGBA (m_surface->format,0,0,0,0));
+   m_surface.NewSurface(m_width, m_height, SDL_SWSURFACE);
+   m_surface.SetAlpha(0, 0);
+   m_surface.SetColorKey( SDL_SRCCOLORKEY, 0, 0, 0, 0);
    m_buffer = new unsigned char[m_height*m_width];
 }
 
@@ -337,11 +322,11 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (const TileItem_ColorkeySof
    m_width = copy.m_width;
    m_height = copy.m_height;
 
-   m_surface = CreateRGBSurface(m_width, m_height, SDL_SWSURFACE);
-   SDL_Rect dest_rect = {0,0, copy.m_surface->w, copy.m_surface->h};
-   SDL_BlitSurface( copy.m_surface, NULL, m_surface, &dest_rect);
-   SDL_SetAlpha (m_surface,0,0);
-   SDL_SetColorKey (m_surface, SDL_SRCCOLORKEY/*|SDL_RLEACCEL*/, SDL_MapRGBA (m_surface->format,0,0,0,0));
+   m_surface.NewSurface(m_width, m_height, SDL_SWSURFACE);
+   SDL_Rect dest_rect = {0, 0, copy.m_surface.GetWidth(), copy.m_surface.GetHeight()};
+   m_surface.Blit( copy.m_surface, NULL, &dest_rect);
+   m_surface.SetAlpha(0, 0);
+   m_surface.SetColorKey(SDL_SRCCOLORKEY, 0, 0, 0, 0);
 
    m_buffer = new unsigned char[m_height*m_width];
    memcpy( copy.m_buffer, m_buffer, m_height*m_width*sizeof( unsigned char));
@@ -349,52 +334,49 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (const TileItem_ColorkeySof
 
 TileItem_ColorkeySoftware::~TileItem_ColorkeySoftware ()
 {
-   SDL_FreeSurface( m_surface);
    delete[] m_buffer;
 }
 
-unsigned char TileItem_ColorkeySoftware::GetAlpha(const int x,const int y) const
+unsigned char TileItem_ColorkeySoftware::GetAlpha(const int x,const int y) 
 {
    return m_buffer[y*m_width+x];
 }
 
-void TileItem_ColorkeySoftware::Dig( int ox, int oy, SDL_Surface *dig)
+void TileItem_ColorkeySoftware::Dig( int ox, int oy, Surface dig)
 {
    int starting_x = ox >= 0 ? ox : 0;   
    int starting_y = oy >= 0 ? oy : 0; 
-   int ending_x = ox+dig->w <= m_surface->w ? ox+dig->w : m_surface->w;
-   int ending_y = oy+dig->h <= m_surface->h ? oy+dig->h : m_surface->h;
+   int ending_x = ox+dig.GetWidth() <= m_surface.GetWidth() ? ox+dig.GetWidth() : m_surface.GetWidth();
+   int ending_y = oy+dig.GetHeight() <= m_surface.GetHeight() ? oy+dig.GetHeight() : m_surface.GetHeight();
 
-   Uint32 transparent_color = SDL_MapRGBA (m_surface->format,0,0,0,0);
+   Uint32 transparent_color = m_surface.MapRGBA(0, 0, 0, 0);
 
    for( int py = starting_y ; py < ending_y ; py++) 
      for( int px = starting_x ; px < ending_x ; px++)
        {
-	  if ( *(((unsigned char *)dig->pixels) + (py-oy)*dig->pitch + (px-ox) * 4 + 3) != 0)
+	  if ( *(((unsigned char *)dig.GetSurface()->pixels) + (py-oy)*dig.GetSurface()->pitch + (px-ox) * 4 + 3) != 0)
 	    { 
 	       
-	       *(Uint32 *)((unsigned char *)m_surface->pixels+py*m_surface->pitch+px*4) = transparent_color;
+	       *(Uint32 *)((unsigned char *)m_surface.GetSurface()->pixels+py*m_surface.GetSurface()->pitch+px*4) = transparent_color;
 	       m_buffer[py*m_width+px] = 0;
 	    }
        }
 }
 
-SDL_Surface *TileItem_ColorkeySoftware::GetSurface()
+Surface TileItem_ColorkeySoftware::GetSurface()
 {
    return m_surface;
 }
 
 void TileItem_ColorkeySoftware::SyncBuffer()
 {
-   SDL_LockSurface( m_surface);
+   m_surface.Lock();
    
    for ( unsigned int y = 0 ; y < m_height ; y++)  
      for ( unsigned int x = 0 ; x < m_width ; x++)
-       {       
-	  m_buffer[y*m_width+x] = *(((unsigned char *)m_surface->pixels) + y*m_surface->pitch + x * 4 + 3);
-       }
+	  m_buffer[y*m_width+x] = *(((unsigned char *)m_surface.GetSurface()->pixels) + y*m_surface.GetSurface()->pitch + x * 4 + 3);
    
-   SDL_UnlockSurface( m_surface);
+   m_surface.Unlock();
 }
 
 // = Tile implementation                                                 =
@@ -442,14 +424,14 @@ int clamp (const int val, const int min, const int max)
    return ( val > max ) ? max : ( val < min ) ? min : val ;
 }
 
-void Tile::Dig (int ox, int oy, SDL_Surface *dig)
+void Tile::Dig (int ox, int oy, Surface dig)
 {  
-   Rectanglei rect = Rectanglei( ox, oy, dig->w, dig->h); 
+   Rectanglei rect = Rectanglei( ox, oy, dig.GetWidth(), dig.GetHeight()); 
 
    int first_cell_x = clamp( ox/cell_width,          0, nbr_cell_width-1);
    int first_cell_y = clamp( oy/cell_height,          0, nbr_cell_height-1);
-   int last_cell_x  = clamp( (ox+dig->w)/cell_width, 0, nbr_cell_width-1);
-   int last_cell_y  = clamp( (oy+dig->h)/cell_height, 0, nbr_cell_height-1);
+   int last_cell_x  = clamp( (ox+dig.GetWidth())/cell_width, 0, nbr_cell_width-1);
+   int last_cell_y  = clamp( (oy+dig.GetHeight())/cell_height, 0, nbr_cell_height-1);
    
    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
      for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++)
@@ -463,25 +445,21 @@ void Tile::Dig (int ox, int oy, SDL_Surface *dig)
        }
 }
 
-void Tile::LoadImage (SDL_Surface *terrain)
+void Tile::LoadImage (Surface terrain)
 {
   FreeMem();
 
-  InitTile (terrain->w, terrain->h);
+  InitTile (terrain.GetWidth(), terrain.GetHeight());
   assert (nbr_cell != 0);
 
   // Create the TileItem objects
- 
   for (uint i=0; i<nbr_cell; ++i)
-  {
      if ( config.transparency == Config::ALPHA )
        item.push_back ( new TileItem_AlphaSoftware(cell_width, cell_height));
      else
        item.push_back ( new TileItem_ColorkeySoftware(cell_width, cell_height));
-  }
    
    // Fill the TileItem objects
-   
    for ( unsigned int iy = 0 ; iy < nbr_cell_height ; iy++ )
      {
 	for ( unsigned int ix = 0 ; ix < nbr_cell_width ; ix++)
@@ -489,11 +467,10 @@ void Tile::LoadImage (SDL_Surface *terrain)
 	     unsigned int piece = iy * nbr_cell_width + ix;
 
 	     SDL_Rect sr = {ix*cell_width,iy*cell_height,cell_width,cell_height};
-	     SDL_Rect dr = {0,0,cell_width,cell_height};
+	     SDL_Rect dr = {0, 0, cell_width, cell_height};
 	     
-	     SDL_SetAlpha( terrain, 0, 0);
-	     SDL_BlitSurface( terrain, &sr, item[piece]->GetSurface(), &dr);
-	     
+	     terrain.SetAlpha(0, 0);
+	     item[piece]->GetSurface().Blit( terrain, &sr, &dr);
 	     item[piece]->SyncBuffer();
 	  }	
      }

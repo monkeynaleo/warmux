@@ -447,10 +447,13 @@ void Weapon::DrawWeaponBox(){
   c_x =  + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
   c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
 
-  SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH),(int)(c_y - 0.5 * BUTTON_ICO_HEIGHT), interface.weapon_box_button->w, interface.weapon_box_button->h};	
+  SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH),(int)(c_y - 0.5 * BUTTON_ICO_HEIGHT),
+	  interface.weapon_box_button.GetWidth(), 
+	  interface.weapon_box_button.GetHeight()};	
   app.video.window.Blit( interface.weapon_box_button, NULL, &dest);
 
-  SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT),icone->w,icone->h};	   
+  SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT),
+	  icone.GetWidth(), icone.GetHeight()};
   app.video.window.Blit( icone, NULL, &dr2);
 }
 

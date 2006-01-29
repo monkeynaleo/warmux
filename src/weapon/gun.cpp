@@ -22,7 +22,6 @@
  *****************************************************************************/
 
 #include "../weapon/gun.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include "../game/game_loop.h"
 #include "../map/map.h"
@@ -35,7 +34,7 @@
 #include "../weapon/gun.h"
 #include "../weapon/weapon_tools.h"
 using namespace std;
-//-----------------------------------------------------------------------------
+
 namespace Wormux {
 
 Gun gun;
@@ -44,16 +43,10 @@ const uint VITESSE_CAPTURE_POS_BALLE = 10;
 const uint BULLET_SPEED = 20;
 const double BULLET_BLAST = 1;
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 BalleGun::BalleGun() : WeaponProjectile("balle_gun")
 { 
   touche_ver_objet = true; 
 }
-
-//-----------------------------------------------------------------------------
 
 void BalleGun::Init()
 {
@@ -64,8 +57,6 @@ void BalleGun::Init()
   SetAirResistFactor(0);
   m_gravity_factor = 0.0;
 }
-
-//-----------------------------------------------------------------------------
 
 void BalleGun::Tire()
 {
@@ -80,8 +71,6 @@ void BalleGun::Tire()
   SetSpeed (BULLET_SPEED, ActiveTeam().crosshair.GetAngleRad());
 }
 
-//-----------------------------------------------------------------------------
-
 void BalleGun::SignalCollision()
 { 
   if ((dernier_ver_touche == NULL) && (dernier_obj_touche == NULL))
@@ -91,25 +80,17 @@ void BalleGun::SignalCollision()
   is_active = false; 
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 Gun::Gun() : Weapon(WEAPON_GUN, "gun")
 {
   m_name = _("Gun");
   extra_params = new WeaponConfig(); 
 }
 
-//-----------------------------------------------------------------------------
-
 void Gun::p_Init()
 {
   balle.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "gun_impact");  
 }
-
-//-----------------------------------------------------------------------------
 
 void Gun::Draw ()
 {
@@ -138,8 +119,6 @@ void Gun::Draw ()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 bool Gun::p_Shoot()
 {
   if (m_is_active)
@@ -158,8 +137,6 @@ bool Gun::p_Shoot()
 
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 void Gun::Refresh()
 {
@@ -199,8 +176,8 @@ void Gun::Refresh()
 	  // Creuse le monde
 	  if (!obj)
 	    {
-	       world.Creuse (balle.GetX() - impact->w/2,
-			    balle.GetY() - impact->h/2,
+	       world.Creuse (balle.GetX() - impact.GetWidth()/2,
+			    balle.GetY() - impact.GetHeight()/2,
 			    impact);
 	    }
 	}
@@ -209,10 +186,7 @@ void Gun::Refresh()
     }
 }
 
-//-----------------------------------------------------------------------------
-
 WeaponConfig& Gun::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
 
-//-----------------------------------------------------------------------------
 } // namespace Wormux

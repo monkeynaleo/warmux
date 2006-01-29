@@ -21,10 +21,10 @@
 
 #ifndef CROSSHAIR_H
 #define CROSSHAIR_H
-//-----------------------------------------------------------------------------
+
 #include <SDL.h>
+#include "../graphic/surface.h"
 #include "../include/base.h"
-//-----------------------------------------------------------------------------
 
 class CrossHair
 {
@@ -33,7 +33,7 @@ public:
   bool enable;
 
 private:
-  SDL_Surface *image;
+  Wormux::Surface image;
   uint calcul_dx, calcul_dy;
 
   int angle;
@@ -57,5 +57,4 @@ public:
   double GetAngleRad() const;
 };
 
-//-----------------------------------------------------------------------------
 #endif

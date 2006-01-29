@@ -56,12 +56,12 @@ class ResourceManager
    ~ResourceManager();
   
    void AddDataPath( std::string base_path);
-   SDL_Surface *LoadImage( const std::string ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0);
+   Wormux::Surface LoadImage( const std::string ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0);
   
    Profile *LoadXMLProfile( const std::string xml_filename, bool relative_path);
    void UnLoadXMLProfile( Profile *profile);
    
-   SDL_Surface *LoadImage( const Profile *profile, const std::string resource_name); 
+   Wormux::Surface LoadImage( const Profile *profile, const std::string resource_name); 
    Sprite *LoadSprite( const Profile *profile, const std::string resource_name); 
    
  private:

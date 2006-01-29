@@ -22,14 +22,14 @@
 
 #ifndef CLUSTER_BOMB_H
 #define CLUSTER_BOMB_H
-//-----------------------------------------------------------------------------
+
 #include "weapon.h"
+#include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-//-----------------------------------------------------------------------------
+
 namespace Wormux {
-//-----------------------------------------------------------------------------
 
 // Les fragments
 class Cluster : public WeaponProjectile
@@ -43,9 +43,6 @@ public:
 protected:
   void SignalCollision();
 };
-
-
-//-----------------------------------------------------------------------------
 
 // La ClusterBomb
 class ClusterBomb : public WeaponProjectile
@@ -65,8 +62,6 @@ protected:
   void SignalCollision();
 };
 
-//-----------------------------------------------------------------------------
-
 class ClusterBombConfig : public ExplosiveWeaponConfig
 { 
 public: 
@@ -78,8 +73,6 @@ public:
   virtual void LoadXml(xmlpp::Element *elem);
 };
 
-//-----------------------------------------------------------------------------
-
 class LanceCluster : public Weapon
 {
  private:
@@ -87,7 +80,7 @@ class LanceCluster : public Weapon
   bool p_Shoot();
 
  public:
-  SDL_Surface * impact;
+  Surface impact;
   ClusterBomb cluster_bomb;
 
   LanceCluster();
@@ -99,6 +92,5 @@ protected:
 };
 
 extern LanceCluster lance_cluster;
-//-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

@@ -20,15 +20,14 @@
  *****************************************************************************/
 
 #include "sky.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include <limits.h>
 #include <SDL.h>
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
+#include "../graphic/surface.h"
 #include "../include/app.h"
-//-----------------------------------------------------------------------------
 namespace Wormux
 {
 
@@ -36,35 +35,22 @@ namespace Wormux
 const double VITESSE_CIEL_X = 0.3;
 const double VITESSE_CIEL_Y = 1;
 
-//-----------------------------------------------------------------------------
-
-Sky::Sky()
-{
-  image = NULL;
+Sky::Sky(){
 }
 
-//-----------------------------------------------------------------------------
-
-void Sky::Init()
-{
+void Sky::Init(){
    // That is temporary -> image will be loaded directly without alpha chanel
-   SDL_Surface *tmp_image = lst_terrain.TerrainActif().LitImgCiel();
-   SDL_SetAlpha(tmp_image, 0, 0);
-   image = SDL_DisplayFormat(tmp_image);
+   Surface tmp_image = lst_terrain.TerrainActif().LitImgCiel();
+   tmp_image.SetAlpha( 0, 0);
+   image = tmp_image.DisplayFormat();
 }
 
-//-----------------------------------------------------------------------------
-
-void Sky::Reset()
-{
+void Sky::Reset(){
   Init();
   lastx = lasty = INT_MAX;
 }
 
-//-----------------------------------------------------------------------------
-
-void Sky::CompleteDraw()
-{
+void Sky::CompleteDraw(){
    int x = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
    int y = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
 
@@ -72,13 +58,13 @@ void Sky::CompleteDraw()
    {    
      uint margin_x = 0, margin_y = 0;
      
-     if (image->w < int(camera.GetWidth())) {
+     if (image.GetWidth() < int(camera.GetWidth())) {
        x = 0;
-       margin_x = (camera.GetWidth()-image->w)/2;
+       margin_x = (camera.GetWidth()-image.GetWidth())/2;
      }
-     if (image->h < int(camera.GetHeight())) {
+     if (image.GetHeight() < int(camera.GetHeight())) {
        y = 0;
-       margin_y = (camera.GetHeight()-image->h)/2;
+       margin_y = (camera.GetHeight()-image.GetHeight())/2;
      }
      SDL_Rect ds = {x, y,camera.GetWidth(),camera.GetHeight()};
      SDL_Rect dr = {margin_x,margin_y,camera.GetWidth(),camera.GetHeight()};
@@ -89,19 +75,19 @@ void Sky::CompleteDraw()
      int w,h;
 
      while(x<0)
-       x += image->w;
-     while(x>image->w)
-       x -= image->w;
+       x += image.GetWidth();
+     while(x>image.GetWidth())
+       x -= image.GetWidth();
      while(y<0)
-       y += image->h;
-     while(y>image->h)
-       y -= image->h;
+       y += image.GetHeight();
+     while(y>image.GetHeight())
+       y -= image.GetHeight();
 
-     w = image->w - x;
+     w = image.GetWidth() - x;
      if(w >= static_cast<int>(camera.GetWidth()))
        w = camera.GetWidth();
 
-     h = image->h - y;
+     h = image.GetHeight() - y;
      if(h >= static_cast<int>(camera.GetHeight()))
        h = camera.GetHeight();
 
@@ -111,27 +97,24 @@ void Sky::CompleteDraw()
 
      if(w < static_cast<int>(camera.GetWidth()))
      {
-       SDL_Rect ds = {x+w-image->w, y, (int)camera.GetWidth()-w, h};
+       SDL_Rect ds = {x+w-image.GetWidth(), y, (int)camera.GetWidth()-w, h};
        SDL_Rect dr = {w,0, (int)camera.GetWidth()-w, h};
        app.video.window.Blit( image, &ds, &dr);
      }
      if(h < static_cast<int>(camera.GetHeight()))
      {
-       SDL_Rect ds = {x, y+h-image->h, w, (int)camera.GetHeight()-h};
+       SDL_Rect ds = {x, y+h-image.GetHeight(), w, (int)camera.GetHeight()-h};
        SDL_Rect dr = {0,h, w, (int)camera.GetHeight()-h};
        app.video.window.Blit( image, &ds, &dr);
      }
      if(w < static_cast<int>(camera.GetWidth()) && h < static_cast<int>(camera.GetHeight()))
      {
-       SDL_Rect ds = {x+w-image->w, y+h-image->h, camera.GetWidth()-w, camera.GetHeight()-h};
+       SDL_Rect ds = {x+w-image.GetWidth(), y+h-image.GetHeight(), camera.GetWidth()-w, camera.GetHeight()-h};
        SDL_Rect dr = {w,h, camera.GetWidth()-w, camera.GetHeight()-h};
        app.video.window.Blit( image, &ds, &dr);
      }
-
    }
 }
-
-//-----------------------------------------------------------------------------
 
 void Sky::Draw()
 {
@@ -157,13 +140,13 @@ void Sky::Draw()
   
   uint margin_x = 0, margin_y = 0;
      
-  if (image->w < int(camera.GetWidth())) {
+  if (image.GetWidth() < int(camera.GetWidth())) {
     sky_cx = 0;
-    margin_x = (camera.GetWidth()-image->w)/2;
+    margin_x = (camera.GetWidth()-image.GetWidth())/2;
   }
-  if (image->h < int(camera.GetHeight())) {
+  if (image.GetHeight() < int(camera.GetHeight())) {
     sky_cy = 0;
-    margin_y = (camera.GetHeight()-image->h)/2;
+    margin_y = (camera.GetHeight()-image.GetHeight())/2;
   }
 
   std::list<Rectanglei>::iterator it;
@@ -199,5 +182,4 @@ void Sky::Draw()
 #endif
 }
 
-//-----------------------------------------------------------------------------
 } // namespace Wormux

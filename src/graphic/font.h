@@ -19,24 +19,22 @@
  
 #ifndef FONT_H
 #define FONT_H
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <map>
-
-#include "../include/base.h"
 #include "colors.h"
-//-----------------------------------------------------------------------------
+#include "surface.h"
+#include "../include/base.h"
 
 class Font
 {
  private:
-  typedef std::map<std::string, SDL_Surface *>::value_type 
+  typedef std::map<std::string, Wormux::Surface>::value_type 
     txt_sample;
-  typedef std::map<std::string, SDL_Surface *>::iterator 
+  typedef std::map<std::string, Wormux::Surface>::iterator 
     txt_iterator;
 
-  std::map<std::string, SDL_Surface *> surface_text_table;
+  std::map<std::string, Wormux::Surface> surface_text_table;
 
 public:
   TTF_Font *m_font;
@@ -54,7 +52,7 @@ public:
   int GetWidth (const std::string &txt);
   int GetHeight ();
   int GetHeight (const std::string &txt);
-  SDL_Surface * Render(const std::string &txt, SDL_Color color, bool cache=false);
+  Wormux::Surface Render(const std::string &txt, SDL_Color color, bool cache=false);
 
   static bool InitAllFonts();
 };

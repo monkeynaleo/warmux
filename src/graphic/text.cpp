@@ -39,8 +39,6 @@ Text::Text(const std::string &new_txt, SDL_Color new_color,
   txt = new_txt;
   color = new_color;
   font = new_font;
-  surf = NULL;
-  background = NULL;
   this->shadowed = shadowed;
 
   if( shadowed ){
@@ -59,23 +57,13 @@ Text::Text(const std::string &new_txt, SDL_Color new_color,
 }
 
 Text::~Text(){
-  if( surf != NULL )
-    SDL_FreeSurface(surf);
-  if( shadowed && (background != NULL) )
-    SDL_FreeSurface(background);
 }
 
 void Text::Render(){
-  if( surf != NULL ){
-    SDL_FreeSurface(surf);
-    if(shadowed)
-      SDL_FreeSurface(background);
-  }
-	
-  surf = TTF_RenderUTF8_Blended(font->m_font, txt.c_str(), color);
+  surf.SetSurface( TTF_RenderUTF8_Blended(font->m_font, txt.c_str(), color) );
 	
   if( shadowed )
-    background = TTF_RenderUTF8_Blended(font->m_font, txt.c_str(),black_color);
+    background.SetSurface( TTF_RenderUTF8_Blended(font->m_font, txt.c_str(),black_color) );
 }
 
 void Text::Set(const std::string &new_txt){
@@ -100,15 +88,15 @@ void Text::SetColor(SDL_Color new_color){
 }
 
 void Text::DrawCenter (int x, int y){ 
-  DrawTopLeft(x - surf->w / 2, y - surf->h / 2);
+  DrawTopLeft(x - surf.GetWidth() / 2, y - surf.GetHeight() / 2);
 }
 
 void Text::DrawTopRight (int x, int y){ 
-  DrawTopLeft( x - surf->w, y);
+  DrawTopLeft( x - surf.GetWidth(), y);
 }
 
 void Text::DrawCenterTop (int x, int y){ 
-  DrawTopLeft( x - surf->w /2, y);
+  DrawTopLeft( x - surf.GetWidth()/2, y);
 }
 
 void Text::DrawTopLeft (int x, int y){ 
@@ -116,16 +104,16 @@ void Text::DrawTopLeft (int x, int y){
   
   dst_rect.x = x;
   dst_rect.y = y;
-  dst_rect.w = surf->w;
-  dst_rect.h = surf->h;
+  dst_rect.w = surf.GetWidth();
+  dst_rect.h = surf.GetHeight();
 
   if(shadowed){
 	SDL_Rect shad_rect;
 
 	shad_rect.x = dst_rect.x + bg_offset;
     shad_rect.y = dst_rect.y + bg_offset;
-    shad_rect.w = background->w;
-    shad_rect.h = background->h;
+    shad_rect.w = background.GetWidth();
+    shad_rect.h = background.GetHeight();
 
 	app.video.window.Blit(background, NULL, &shad_rect);
     app.video.window.Blit(surf, NULL, &dst_rect);
@@ -139,11 +127,11 @@ void Text::DrawTopLeft (int x, int y){
 }
 
 void Text::DrawCenterOnMap (int x, int y){
-  DrawTopLeftOnMap(x - surf->w /2, y - surf->h / 2 );
+  DrawTopLeftOnMap(x - surf.GetWidth()/2, y - surf.GetHeight()/2 );
 }
 
 void Text::DrawCenterTopOnMap (int x, int y){
-  DrawTopLeftOnMap(x - surf->w /2, y);
+  DrawTopLeftOnMap(x - surf.GetWidth()/2, y);
 }
 
 void Text::DrawTopLeftOnMap (int x, int y){

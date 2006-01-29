@@ -21,15 +21,14 @@
 
 #ifndef INTERFACE_H
 #define INTERFACE_H
-//-----------------------------------------------------------------------------
 #include <vector>
 #include "weapon_menu.h"
+#include "../graphic/surface.h"
 #include "../graphic/sprite.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../team/character.h"
 #include "../team/team.h"
-//-----------------------------------------------------------------------------
 
 #ifdef WIN32
 #undef interface
@@ -42,7 +41,7 @@ public:
   Character *character_under_cursor;
   Weapon* weapon_under_cursor;
   WeaponsMenu weapons_menu;
-  SDL_Surface *weapon_box_button;
+  Wormux::Surface weapon_box_button;
 
  private:
    // Timers
@@ -68,8 +67,8 @@ public:
    void DisplayWeaponInfo ();
    BarreProg barre_energie;
 
-   SDL_Surface *game_menu;
-   SDL_Surface *bg_time;
+   Wormux::Surface game_menu;
+   Wormux::Surface bg_time;
    int bottom_bar_ox;
    int bottom_bar_oy;
 
@@ -92,7 +91,7 @@ public:
 
 extern Interface interface;
 
+void AbsoluteDraw(Wormux::Surface s, int x, int y);
 void AbsoluteDraw(SDL_Surface* s, int x, int y);
 
-//-----------------------------------------------------------------------------
 #endif

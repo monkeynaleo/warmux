@@ -21,12 +21,11 @@
 
 #ifndef SUICIDE_H
 #define SUICIDE_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
+
 #include "weapon.h"
-//-----------------------------------------------------------------------------
+#include "graphic/surface.h"
+
 namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class Suicide : public Weapon
 {
@@ -38,7 +37,7 @@ private:
   bool p_Shoot();
 
 public:
-  SDL_Surface *hole_image;
+  Surface hole_image;
    
   Suicide();
   void p_Select();
@@ -47,6 +46,5 @@ public:
 };
 
 extern Suicide suicide;
-//-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

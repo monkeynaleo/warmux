@@ -99,7 +99,7 @@ void BarreProg::Draw(){
   DrawXY (x,y);
 }
 
-// TODO pass SDL_Surface as parameter
+// TODO pass a Surface as parameter
 void BarreProg::DrawXY (uint px, uint py) { 
   int left, right;
    

@@ -63,56 +63,21 @@ void ResourceManager::AddDataPath( std::string base_path)
    this->base_path = base_path;
 }
 
-SDL_Surface * ResourceManager::LoadImage( const std::string resource_str, 
+Wormux::Surface ResourceManager::LoadImage( const std::string filename, 
         bool alpha, bool set_colorkey, Uint32 colorkey)
 {
-   SDL_Surface *pre_surface = NULL;
-   SDL_Surface *end_surface = NULL;
-   //std::string filename = base_path + PATH_SEPARATOR + resource_str;
-   std::string filename = resource_str;
+  Wormux::Surface pre_surface = Wormux::Surface( filename.c_str() );
+  Wormux::Surface end_surface;
+  
+  if( set_colorkey ) 
+    end_surface.SetColorKey( SDL_SRCCOLORKEY, colorkey);
 
-  pre_surface = IMG_Load(filename.c_str());
-   if (pre_surface == NULL)
-     {
-	// TODO raise an "can't load file" exception
-	Error("ResourceManager: can't load image "+resource_str);
-	return NULL;
-     }
-
-   // Convert the image to the same format as the one of the main surface
-   // So as to make blittering efficient
- 
-   if ( ! alpha )
-     {
-	end_surface = SDL_DisplayFormat( pre_surface);
-     }
-   else
-     {
-	end_surface = SDL_DisplayFormatAlpha( pre_surface);
-     }
+  if( !alpha )
+    end_surface = pre_surface.DisplayFormat();
+  else
+    end_surface = pre_surface.DisplayFormatAlpha();
    
-   if ( end_surface == NULL ) 
-     {
-	SDL_FreeSurface( pre_surface);
-	Error( "ResourceManager: error converting image " + resource_str +  ": " + SDL_GetError()); 
-	return NULL;
-     } 
-   
-   SDL_FreeSurface( pre_surface);
-   
-   // Set the transparency colorkey if requested
-
-   if ( set_colorkey ) 
-     { 
-	SDL_SetColorKey( end_surface, SDL_SRCCOLORKEY,
-			 colorkey /*SDL_MapRGB( end_surface->format, 255, 255, 255)*/) ;
-     }
-   
-#ifdef _DEBUG
-   std::cerr << "Image " << resource_str << " loaded !" << std::endl;
-#endif
-   
-   return end_surface;
+  return end_surface;
 }
 
 Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename, bool relative_path)
@@ -175,59 +140,38 @@ xmlpp::Element * ResourceManager::GetElement( const Profile *profile, const std:
    return elem;   
 }
 
-SDL_Surface *ResourceManager::LoadImage( const Profile *profile, const std::string resource_name)
+Wormux::Surface ResourceManager::LoadImage( const Profile *profile, const std::string resource_name)
 {     
-   xmlpp::Element *elem = GetElement ( profile, "surface", resource_name);
-   if ( elem == NULL)
-     {
-	// TODO raise an "requested resource is not present in the profile" exception
+  xmlpp::Element *elem = GetElement ( profile, "surface", resource_name);
+  if ( elem == NULL)
 	Error("ResourceManager: can't find image resource \""+resource_name+"\" in profile "+profile->filename);
-	
-	return NULL;
-     }
   
-   std::string filename; 
-   if ( ! profile->doc->LitAttrString( elem, "file", filename) )
-     {
-     	// TODO raise an "resource is malformed in the profile" exception
+  std::string filename; 
+  if ( ! profile->doc->LitAttrString( elem, "file", filename) )
 	Error("ResourceManager: image resource \""+resource_name+"\" has no file field in profile "+profile->filename);
-	return NULL;
-     }
    
-   // TODO load more properties in xml : alpha, colorkey....
-   //      By now force alpha and no colorkey
+ // TODO load more properties in xml : alpha, colorkey....
+ //      By now force alpha and no colorkey
    
-   bool alpha = true;
+ bool alpha = true;
    
-   return LoadImage( profile->relative_path+filename, alpha);
+ return LoadImage( profile->relative_path+filename, alpha);
 }
 
 Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string resource_name)
 {
   xmlpp::Element *elem_sprite = GetElement( profile, "sprite", resource_name);
   if ( elem_sprite == NULL)
-  {
-    // TODO raise an "requested resource is not present in the profile" exception
     Error("ResourceManager: can't find sprite resource \""+resource_name+"\" in profile "+profile->filename);;
-    return NULL;
-  }
 
   xmlpp::Element *elem_image = profile->doc->AccesBalise ( elem_sprite, "image");
 
   if ( elem_image == NULL )
-  {
-  	// TODO raise an "requested resource is not present in the profile" exception
     Error("ResourceManager: can't load (sprite) resource "+resource_name);
-    return NULL;
-  }
 
   std::string image_filename; 
   if ( ! profile->doc->LitAttrString( elem_image, "file", image_filename) )
-  {
-    // TODO raise an "resource is malformed in the profile" exception
     Error("ResourceManager: can't load (sprite) resource "+resource_name);
-    return NULL;
-  }
 
   // TODO load more properties in xml : alpha, colorkey....
   //      By now force alpha and no colorkey
@@ -240,13 +184,9 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
   if ( elem_grid == NULL )
   {
     // No grid element, Load the Sprite like a normal image
-    SDL_Surface *surface = LoadImage( profile->relative_path+image_filename, alpha);
+    Wormux::Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
-    sprite->Init( surface, surface->w, surface->h, 1, 1);
-    SDL_FreeSurface( surface);
-#ifdef DBG_RS_MANAGER
-    std::cout << "ResourceManager: sprite resource \"" << resource_name << "\" has no grid element" << std::endl;  
-#endif
+    sprite->Init( surface, surface.GetWidth(), surface.GetHeight(), 1, 1);
   }
   else
   {	
@@ -257,29 +197,21 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
     std::string size;
 
     if ( ! profile->doc->LitAttrString( elem_grid, "size", size) )
-    {
-      // TODO raise an "resource is malformed in the profile" exception
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute size");
-      return NULL;
-    }
-    if ( size.find(",") != size.npos)
+    
+	if ( size.find(",") != size.npos)
     {
       frame_width = atoi( (size.substr(0,size.find(","))).c_str());
       frame_height = atoi( (size.substr(size.find(",")+1,size.length())).c_str());
     }
     else
-    {
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed size attribute");
-      return NULL;
-    }
+	
     std::string array;
     if ( ! profile->doc->LitAttrString( elem_grid, "array", array) )
-    {
-      // TODO raise an "resource is malformed in the profile" exception
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute array");
-      return NULL;
-    }
-	  if ( array.find(",") != array.npos)
+	
+	if ( array.find(",") != array.npos)
     {
       nb_frames_x = atoi( (array.substr(0,array.find(","))).c_str());
       if ( nb_frames_x <= 0 )
@@ -289,15 +221,11 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
       nb_frames_y = 1;
     }
     else
-    {
       Error("ResourceManager: can't load (sprite) resource "+resource_name);
-      return NULL;
-    }
 
-    SDL_Surface *surface = LoadImage( profile->relative_path+image_filename, alpha);
+	Wormux::Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
     sprite->Init( surface, frame_width, frame_height, nb_frames_x, nb_frames_y);
-    SDL_FreeSurface( surface);
   }
 
   assert(sprite!=NULL);
@@ -318,9 +246,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	  std::string pp_str;
     if ( profile->doc->LitAttrString( elem, "pingpong", pp_str) )
     if (pp_str == "yes")
-    {
       sprite->SetPingPongMode();
-    }
   }
 
   elem = profile->doc->AccesBalise ( elem_sprite, "animation");
@@ -329,9 +255,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	  std::string pp_str;
     if ( profile->doc->LitAttrString( elem, "loop_mode", pp_str) )
     if (pp_str == "no")
-    {
       sprite->SetLoopMode(false);
-    }
   }
 
   return sprite;

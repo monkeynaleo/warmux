@@ -21,14 +21,14 @@
 
 #ifndef SUPERTUX_H
 #define SUPERTUX_H
-//-----------------------------------------------------------------------------
+
 #include "weapon.h"
+#include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-//-----------------------------------------------------------------------------
+
 namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
 {
@@ -37,8 +37,6 @@ public:
   SuperTuxWeaponConfig();
   virtual void LoadXml(xmlpp::Element *elem);
 };
-
-//-----------------------------------------------------------------------------
 
 class SuperTux : public WeaponProjectile
 {
@@ -64,8 +62,6 @@ protected:
   void SignalCollision();
 };
 
-//-----------------------------------------------------------------------------
-
 class TuxLauncher : public Weapon
 {
  private:
@@ -73,7 +69,7 @@ class TuxLauncher : public Weapon
   bool p_Shoot();
 
 public:
-  SDL_Surface* impact;
+  Surface impact;
   SuperTux supertux;
 
 public:
@@ -88,6 +84,5 @@ protected:
 };
 
 extern TuxLauncher tux;
-//-----------------------------------------------------------------------------
 } // namespace Wormux
 #endif

@@ -22,24 +22,17 @@
 
 #ifndef PARTICLE_H
 #define PARTICLE_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
 #include "physical_obj.h"
-//#include "../team/character.h"
 #include "../include/base.h"
 #include "../weapon/weapon_cfg.h"
 #include "../graphic/sprite.h"
-//-----------------------------------------------------------------------------
+#include "../graphic/surface.h"
 
 typedef enum { 
   particle_SMOKE,
   particle_FIRE,
   particle_STAR
 } particle_t;
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 class Particle : public PhysicalObj
 {
@@ -61,16 +54,12 @@ class Particle : public PhysicalObj
   bool StillUseful();
 };
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 class Smoke : public Particle
 {
  public:
   Smoke();
   void Init();
 };
-//-----------------------------------------------------------------------------
 
 class StarParticle : public Particle
 {
@@ -78,23 +67,15 @@ class StarParticle : public Particle
   StarParticle();
   void Init();
 };
-//-----------------------------------------------------------------------------
 
 class FireParticle : public Particle
 {
- protected:
-//  Character* dernier_ver_touche;
-//  PhysicalObj* dernier_obj_touche;
-
  public: 
-  SDL_Surface *impact;
+  Wormux::Surface impact;
   FireParticle();
   void Init();
   void SignalFallEnding();
 };
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 class ParticleEngine
 {
