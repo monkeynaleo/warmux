@@ -108,6 +108,6 @@ void ImageParSeconde::Draw(){
   buffer[sizeof(buffer)-1] = '\0';
   std::string text = Format(_("%s fps"),buffer);
   fps_txt->Set( text );
-  fps_txt->DrawTopRight(app.video.GetWidth()-1,0);
+  fps_txt->DrawTopRight(app.video.window.GetWidth()-1,0);
 }
 

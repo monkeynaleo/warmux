@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "water.h"
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "camera.h"
 #include "map.h"
@@ -32,7 +31,6 @@
 #include "../tool/resource_manager.h"
 
 using namespace Wormux;
-//-----------------------------------------------------------------------------
 
 // Vitesse d'animation des vagues
 const uint WAVE_TIME=10;
@@ -48,10 +46,7 @@ const float t = (GO_UP_OSCILLATION_TIME*1000.0);
 const float a = GO_UP_STEP/t;
 const float b = 1.0;
 
-//-----------------------------------------------------------------------------
-
-void Water::Init()
-{ 
+void Water::Init(){ 
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
    surface = resource_manager.LoadImage(res, "gfx/water");
    SDL_SetAlpha(surface, 0, 0);
@@ -59,10 +54,7 @@ void Water::Init()
    shift1 = 0;
 }
 
-//-----------------------------------------------------------------------------
-
-void Water::Reset()
-{
+void Water::Reset(){
   actif = lst_terrain.TerrainActif().use_water;
   if(!actif) return;
   Init();
@@ -75,35 +67,29 @@ void Water::Reset()
   Refresh(); // Calculate first height position
 }
 
-//-----------------------------------------------------------------------------
-
-void Water::Free()
-{
-  if(!actif) return;
+void Water::Free(){
+  if(!actif)
+    return;
   SDL_FreeSurface(surface);
   SDL_FreeSurface(pattern);
   height.clear();
 }
 
-//-----------------------------------------------------------------------------
-
-void Water::Refresh()
-{
-  if (!actif) return;
+void Water::Refresh(){
+  if (!actif)
+    return;
 
   height_mvt = 0;
 
   ////////  Height Calculation:
   if (temps_montee < Wormux::global_time.Read())
   {
-    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > Wormux::global_time.Read())
-    {
+    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > Wormux::global_time.Read()){
       uint dt=Wormux::global_time.Read()- temps_montee;
       height_mvt = GO_UP_STEP + (uint)(((float)GO_UP_STEP * sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))/GO_UP_OSCILLATION_TIME/1000.0)*2*M_PI))/(a*dt+b));
 ///;
     }
-    else
-    {
+    else{
       temps_montee += GO_UP_TIME * 60 * 1000;
       hauteur_eau += GO_UP_STEP;
     }
@@ -143,11 +129,9 @@ void Water::Refresh()
   shift1 += 4*decree;
 }
 
-//-----------------------------------------------------------------------------
-
-void Water::Draw()
-{
-  if (!actif) return;
+void Water::Draw(){
+  if (!actif)
+    return;
 
 /*  for(uint x=0; x<world.GetWidth(); x++)
   for(uint y=height.at(x); y<world.GetHeight(); y+=surface->h)
@@ -181,12 +165,8 @@ void Water::Draw()
   }
 }
 
-//-----------------------------------------------------------------------------
-
-int Water::GetHeight(int x)
-{
-  if (IsActive())
-  {
+int Water::GetHeight(int x){
+  if (IsActive()){
     while(x<0)
       x += 180;
     while(x>=180)
@@ -197,8 +177,7 @@ int Water::GetHeight(int x)
     return world.GetHeight();
 }
 
-//-----------------------------------------------------------------------------
+bool Water::IsActive(){
+  return actif;
+}
 
-bool Water::IsActive() {return actif;}
-
-//-----------------------------------------------------------------------------

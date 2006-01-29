@@ -31,6 +31,7 @@
 #  include <direct.h>
 #endif
 #include "game_mode.h"
+#include "errno.h"
 #include "../graphic/video.h"
 #include "../include/action.h"
 #include "../include/app.h"
@@ -305,8 +306,8 @@ bool Config::SauveXml()
   doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));  
   doc.EcritBalise (noeud_video, "display_energy_character", ulong2str(display_energy_character));
   doc.EcritBalise (noeud_video, "display_name_character", ulong2str(display_name_character));
-  doc.EcritBalise (noeud_video, "width", ulong2str(app.video.GetWidth()));
-  doc.EcritBalise (noeud_video, "height", ulong2str(app.video.GetHeight()));
+  doc.EcritBalise (noeud_video, "width", ulong2str(app.video.window.GetWidth()));
+  doc.EcritBalise (noeud_video, "height", ulong2str(app.video.window.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 
 		   ulong2str(static_cast<uint>(app.video.IsFullScreen())) );	  
   doc.EcritBalise (noeud_video, "max_fps", 

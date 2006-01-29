@@ -166,8 +166,8 @@ void Interface::Reset()
 void Interface::DisplayCharacterInfo ()
 {
 
-  int x = (app.video.GetWidth() - GetWidth())/2;
-  int y = app.video.GetHeight() - GetHeight();
+  int x = (app.video.window.GetWidth() - GetWidth())/2;
+  int y = app.video.window.GetHeight() - GetHeight();
 
   // Get the character
   if (character_under_cursor == NULL) character_under_cursor = &ActiveCharacter();
@@ -204,7 +204,7 @@ void Interface::DisplayCharacterInfo ()
    
   // Display team logo
   SDL_Rect dest = { x+ECUSSON_EQUIPE_X, y+ECUSSON_EQUIPE_Y, character_under_cursor->TeamAccess().ecusson->w, character_under_cursor->TeamAccess().ecusson->h};	
-  SDL_BlitSurface( character_under_cursor->TeamAccess().ecusson, NULL, app.video.sdlwindow, &dest);
+  app.video.window.Blit( character_under_cursor->TeamAccess().ecusson, NULL, &dest);
 
 
 }
@@ -255,7 +255,7 @@ void Interface::DisplayWeaponInfo ()
   if( weapon->icone )
     {
       SDL_Rect dest_rect = { bottom_bar_ox+ICONE_ARME_X, bottom_bar_oy+ICONE_ARME_Y, weapon->icone->w, weapon->icone->h};	
-      SDL_BlitSurface( weapon->icone, NULL, app.video.sdlwindow, &dest_rect);   
+      app.video.window.Blit( weapon->icone, NULL, &dest_rect);
     }
   else
     {
@@ -272,11 +272,11 @@ void Interface::DisplayWeaponInfo ()
 void Interface::Draw ()
 {    
   // display global timer
-  SDL_Rect dest = { (app.video.GetWidth()/2)-40, 0, bg_time->w, bg_time->h};	
-  SDL_BlitSurface( bg_time, NULL, app.video.sdlwindow, &dest);   
+  SDL_Rect dest = { (app.video.window.GetWidth()/2)-40, 0, bg_time->w, bg_time->h};	
+  app.video.window.Blit( bg_time, NULL, &dest);
   std::string tmp(global_time.GetString());
   global_timer->Set(tmp);
-  global_timer->DrawCenterTop(app.video.GetWidth()/2, 10); 
+  global_timer->DrawCenterTop(app.video.window.GetWidth()/2, 10); 
   
   Rectanglei tmpr(dest.x,dest.y, dest.w, dest.h);
   world.ToRedrawOnScreen(tmpr);
@@ -284,8 +284,8 @@ void Interface::Draw ()
   if ( game_loop.ReadState() == gamePLAYING && weapon_strength_bar.visible)
   {
     // Position on the screen 
-    uint barre_x = (app.video.GetWidth()-weapon_strength_bar.GetWidth())/2;
-    uint barre_y = app.video.GetHeight()-weapon_strength_bar.GetHeight() 
+    uint barre_x = (app.video.window.GetWidth()-weapon_strength_bar.GetWidth())/2;
+    uint barre_y = app.video.window.GetHeight()-weapon_strength_bar.GetHeight() 
                    - interface.GetHeight()-10;
      
     // Drawing on the screen
@@ -296,14 +296,14 @@ void Interface::Draw ()
   
   if (!display) return;
 
-  int x = (app.video.GetWidth() - GetWidth())/2;
-  int y = app.video.GetHeight() - GetHeight();
+  int x = (app.video.window.GetWidth() - GetWidth())/2;
+  int y = app.video.window.GetHeight() - GetHeight();
 
   bottom_bar_ox = x;
   bottom_bar_oy = y;
    
   SDL_Rect dr = { x, y, game_menu->w, game_menu->h};	
-  SDL_BlitSurface( game_menu, NULL, app.video.sdlwindow, &dr);   
+  app.video.window.Blit( game_menu, NULL, &dr);   
 
   Rectanglei tmpr2(dr.x,dr.y, dr.w, dr.h);
   world.ToRedrawOnScreen(tmpr2);
@@ -393,8 +393,6 @@ void AbsoluteDraw(SDL_Surface* s, int x, int y)
     src.h=camera.GetHeight()-src.y;
   }
 
-  
-
   //TODO:blit only the displayed part of the SDL_Surface
-  SDL_BlitSurface(s,&src,app.video.sdlwindow,&dst);
+  app.video.window.Blit(s, &src, &dst);
 }

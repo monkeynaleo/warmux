@@ -58,7 +58,7 @@ void GameMessages::Draw(){
   uint msgy = 50;
   
   for( iterator i=liste.begin(); i != liste.end(); ++i ){
-    i -> text->DrawCenterTop(app.video.GetWidth()/2, msgy);
+    i -> text->DrawCenterTop(app.video.window.GetWidth()/2, msgy);
     
     msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
   }

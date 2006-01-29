@@ -745,7 +745,7 @@ void Sprite::Update(){
 void Sprite::Draw(int pos_x, int pos_y){
   if( !show )
     return;
-  Blit( app.video.sdlwindow, pos_x - camera.GetX(), pos_y - camera.GetY() );
+  Blit( app.video.window.GetSurface(), pos_x - camera.GetX(), pos_y - camera.GetY() );
 }
 
 void Sprite::Show() { show = true; }

@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "ninja_rope.h"
-//-----------------------------------------------------------------------------
 #include <math.h>
 #include "weapon_tools.h"
 #include "../game/config.h"
@@ -48,7 +47,6 @@ int roundl(double nbr)
 }
 #endif
 */
-//-----------------------------------------------------------------------------
 
 namespace Wormux {
 NinjaRope ninjarope;
@@ -99,8 +97,6 @@ bool find_first_contact_point (int x1, int y1, double angle, int length,
   return false ;
 }
 
-//-----------------------------------------------------------------------------
-
 NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope")
 {
   m_name = _("NinjaRope");
@@ -108,8 +104,6 @@ NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope")
   use_unit_on_first_shoot = false;
   skin = NULL;
 }
-
-//-----------------------------------------------------------------------------
 
 bool NinjaRope::p_Shoot()
 {
@@ -124,7 +118,6 @@ bool NinjaRope::p_Shoot()
   return true ;
 }
 
-//-----------------------------------------------------------------------------
 void NinjaRope::InitSkinSprite()
 {
   //Copy skins surface
@@ -147,7 +140,6 @@ void NinjaRope::InitSkinSprite()
   skin->EnableRotationCache(64);
   ActiveCharacter().Hide();
 }
-//-----------------------------------------------------------------------------
 
 void NinjaRope::TryAttachRope()
 {
@@ -204,15 +196,11 @@ void NinjaRope::TryAttachRope()
     }
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::UnattachRope()
 {
   ActiveCharacter().UnsetPhysFixationPoint() ;
   last_node = 0;
 }
-
-//-----------------------------------------------------------------------------
 
 bool NinjaRope::TryAddNode(int CurrentSense)
 {
@@ -267,8 +255,6 @@ bool NinjaRope::TryAddNode(int CurrentSense)
 
   return AddNode ;
 }
-
-//-----------------------------------------------------------------------------
 
 bool NinjaRope::TryBreakNode(int CurrentSense)
 {
@@ -336,8 +322,6 @@ bool NinjaRope::TryBreakNode(int CurrentSense)
   return BreakNode ;
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::NotifyMove(bool collision)
 {
   bool AddNode = false ;
@@ -378,10 +362,6 @@ void NinjaRope::NotifyMove(bool collision)
   while (TryBreakNode(CurrentSense)) ;
 }
 
-
-
-//-----------------------------------------------------------------------------
-
 void NinjaRope::Refresh()
 {
   if (!m_is_active)
@@ -390,7 +370,6 @@ void NinjaRope::Refresh()
   ActiveCharacter().UpdatePosition();
 }
 
-//-----------------------------------------------------------------------------
 void NinjaRope::GoUp()
 {
   if(global_time.Read()<last_mvt+DT_MVT)
@@ -403,7 +382,6 @@ void NinjaRope::GoUp()
   delta_len = 0 ;  
 }
 
-//-----------------------------------------------------------------------------
 void NinjaRope::GoDown()
 {
   if(global_time.Read()<last_mvt+DT_MVT)
@@ -418,8 +396,6 @@ void NinjaRope::GoDown()
   ActiveCharacter().UpdatePosition() ;
   delta_len = 0 ;  
 }
-
-//-----------------------------------------------------------------------------
 
 void NinjaRope::GoRight()
 {
@@ -437,8 +413,6 @@ void NinjaRope::StopRight()
   ActiveCharacter().SetExternForce(0,0);
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::GoLeft()
 {
   go_left = true ;
@@ -454,8 +428,6 @@ void NinjaRope::StopLeft()
 
   ActiveCharacter().SetExternForce(0,0);
 }
-
-//-----------------------------------------------------------------------------
 
 void NinjaRope::Draw()
 {
@@ -552,8 +524,6 @@ void NinjaRope::Draw()
 		     rope_node[0].y - m_hook_sprite->GetHeight()/2);
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::p_Init()
 {
   m_name="ninjarope";
@@ -583,8 +553,6 @@ void NinjaRope::p_Deselect()
     skin = NULL;
   }
 }
-
-//-----------------------------------------------------------------------------
 
 void NinjaRope::HandleKeyEvent(int action, int event_type)
 {
@@ -625,17 +593,14 @@ void NinjaRope::HandleKeyEvent(int action, int event_type)
   } ;
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::SignalTurnEnd()
 {
   p_Deselect();
 }
 
-//-----------------------------------------------------------------------------
 EmptyWeaponConfig& NinjaRope::cfg()
-{ return static_cast<EmptyWeaponConfig&>(*extra_params); }
+{
+  return static_cast<EmptyWeaponConfig&>(*extra_params);
+}
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 } // namespace Wormux

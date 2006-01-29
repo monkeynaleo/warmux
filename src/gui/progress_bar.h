@@ -21,17 +21,17 @@
 
 #ifndef PROGRESS_BAR_H
 #define PROGRESS_BAR_H
-//-----------------------------------------------------------------------------
+
 #include <SDL.h>
 #include <list>
 #include "../include/base.h"
-//-----------------------------------------------------------------------------
+#include "../graphic/surface.h"
 
 class BarreProg
 {
 public:
   SDL_Color border_color, value_color, background_color;
-  SDL_Surface *image; // in order to pemit alpha blended progressbar
+  Wormux::Surface image; // in order to pemit alpha blended progressbar
 private:
   uint x, y, larg, haut; // Position
   long val, min, max; // Valeur
@@ -69,10 +69,10 @@ public:
   void SetReferenceValue (bool use, long value=0);
 
   // Draw la barre de progresssion
-  void Draw () const;
+  void Draw ();
 
   // Change les coordonnées, puis dessine la barre de progression
-  void DrawXY (uint x, uint y) const;
+  void DrawXY (uint x, uint y);
 
   // Lit sa taille
   uint GetWidth() const { return larg; }
@@ -85,5 +85,4 @@ public:
   void Reset_Marqueur();
 };
 
-//-----------------------------------------------------------------------------
 #endif

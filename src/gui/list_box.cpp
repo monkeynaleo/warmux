@@ -117,21 +117,21 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button){
 void ListBox::Draw (uint mouse_x, uint mouse_y){
   int item = MouseIsOnWhichItem(mouse_x, mouse_y);
   
-  boxRGBA(app.video.sdlwindow, x, y, x+w, y+h,
+  app.video.window.BoxRGBA(x, y, x+w, y+h,
 	  255, 255, 255, 255*3/10);
 
-  rectangleRGBA(app.video.sdlwindow, x, y, x+w, y+h,
+  app.video.window.RectangleRGBA(x, y, x+w, y+h,
 		255, 255, 255, 255);
 
   for(uint i=0; i < nb_visible_items; i++){
 	  
      if( int(i+first_visible_item) == selected_item ){
-       boxRGBA(app.video.sdlwindow, 
+       app.video.window.BoxRGBA( 
 	       x+1, y+i*height_item+1, 
 	       x+1+w-2, y+i*height_item+1+height_item-2,
 	       0,0,255*6/10,255*8/10);
      }else if( i+first_visible_item == uint(item) ){
-       boxRGBA(app.video.sdlwindow, 
+       app.video.window.BoxRGBA(
 	       x+1, y+i*height_item+1, 
 	       x+1+w-2, y+i*height_item+1+height_item-2,
 	       0,0,255*6/10,255*4/10);

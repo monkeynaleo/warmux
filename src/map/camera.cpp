@@ -258,8 +258,8 @@ void Camera::StopFollowingObj (PhysicalObj* obj){
     ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(),true,true,true);
 }
 
-uint Camera::GetWidth() const { return app.video.GetWidth(); }
-uint Camera::GetHeight() const { return app.video.GetHeight(); }
+uint Camera::GetWidth() const { return app.video.window.GetWidth(); }
+uint Camera::GetHeight() const { return app.video.window.GetHeight(); }
 
 bool Camera::EstVisible (const PhysicalObj &obj){
    Rectanglei rect;

@@ -65,7 +65,7 @@ void Question::TraiteTouche (SDL_Event &event)
 void Question::Draw()
 {
   DrawTmpBoxText (global().big_font(), 
-		  app.video.GetWidth()/2, app.video.GetHeight()/2,
+		  app.video.window.GetWidth()/2, app.video.window.GetHeight()/2,
 		  message,
 		  10);
   app.video.Flip();

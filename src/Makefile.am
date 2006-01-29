@@ -19,6 +19,7 @@ wormux_SOURCES = \
 	graphic/colors.h \
 	graphic/effects.cpp graphic/effects.h \
 	graphic/fps.cpp graphic/fps.h \
+	graphic/surface.cpp graphic/surface.h \
 	graphic/sdlsurface.cpp graphic/sdlsurface.h \
 	graphic/video.cpp graphic/video.h \
 	graphic/text.cpp graphic/text.h \

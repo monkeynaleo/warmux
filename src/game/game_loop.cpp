@@ -222,9 +222,10 @@ void InitGame ()
   // Display loading screen
   Sprite * loading_image=new Sprite(IMG_Load((config.data_dir+"menu/img/loading.png").c_str()));
   loading_image->EnableLastFrameCache();
-  loading_image->ScaleSize(app.video.GetWidth(), app.video.GetHeight());
-  loading_image->Blit( app.video.sdlwindow, 0, 0);
+  loading_image->ScaleSize(app.video.window.GetWidth(), app.video.window.GetHeight());
+  loading_image->Blit( app.video.window.GetSurface(), 0, 0);
   app.video.Flip();
+
   delete loading_image;
 
   game.MessageLoading();
