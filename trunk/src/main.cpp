@@ -49,12 +49,10 @@
 using namespace Wormux;
 AppWormux app;
 
-AppWormux::AppWormux()
-{
+AppWormux::AppWormux(){
 }
 
-int AppWormux::main (int argc, char **argv)
-{
+int AppWormux::main (int argc, char **argv){
   bool quit = false;
 
   try {
@@ -90,15 +88,13 @@ int AppWormux::main (int argc, char **argv)
 
     End();
   }
-  catch (const std::exception &e)
-  {
+  catch (const std::exception &e){
     std::cerr << std::endl
 	      << _("C++ exception caught:") << std::endl
 	      << e.what() << std::endl
 	      << std::endl;
   }
-  catch (...)
-  {
+  catch (...){
     std::cerr << std::endl
 	      << _("Unexcepted exception caught...") << std::endl
 	      << std::endl;
@@ -107,8 +103,7 @@ int AppWormux::main (int argc, char **argv)
   return 0;
 }
 
-void AppWormux::Init(int argc, char **argv)
-{
+void AppWormux::Init(int argc, char **argv){
   InitConstants();
   InitI18N();
   DisplayWelcomeMessage();
@@ -119,7 +114,6 @@ void AppWormux::Init(int argc, char **argv)
   config.Charge();
 
   InitNetwork(argc, argv);
-  video.InitScreen();
   video.InitWindow();
   InitFonts();
 
@@ -147,25 +141,22 @@ void AppWormux::DisplayLoadingPicture(){
   std::string filename = config.data_dir + CONCAT_DIR("menu", CONCAT_DIR("img", "loading.png"));
   Sprite * loading_image=new Sprite( IMG_Load(filename.c_str()) );
   loading_image->EnableLastFrameCache();
-  loading_image->ScaleSize( video.GetWidth(), video.GetHeight() );
-  loading_image->Blit( video.sdlwindow, 0, 0);
+  loading_image->ScaleSize( video.window.GetWidth(), video.window.GetHeight() );
+  loading_image->Blit( video.window.GetSurface(), 0, 0);
 
-  Wormux::global_time.Reset();
-
-  video.Flip();
+  global_time.Reset();
 
   Text text1(_("Wormux launching..."), white_color, &global().huge_font(), true); 
   Text text2(txt_version, white_color, &global().huge_font(), true); 
   
-  int x = video.GetWidth()/2;
-  int y = video.GetHeight()/2;
+  int x = video.window.GetWidth()/2;
+  int y = video.window.GetHeight()/2;
 
   text1.DrawCenter (x, y);
   y += global().huge_font().GetHeight() + 20;
   text2.DrawCenter (x, y);
 
-  SDL_UpdateRect(video.sdlwindow, 0, 0, 0, 0);
-  video.Flip();
+  video.window.Flip();
   delete loading_image;
 }
 
@@ -185,7 +176,6 @@ void AppWormux::End(){
   destroyGlobal();
   jukebox.End();
   TTF_Quit();
-  SDL_Quit();
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
@@ -198,12 +188,13 @@ void AppWormux::End(){
 void AppWormux::DisplayWelcomeMessage(){
   std::cout << "=== " << _("Wormux version ") << VERSION << std::endl;
   std::cout << "=== " << _("Authors:") << ' ';
-  for (std::vector<std::string>::iterator it=AUTHORS.begin(),
-	 fin=AUTHORS.end();
+  for( std::vector<std::string>::iterator it=AUTHORS.begin(),
+       fin=AUTHORS.end();
        it != fin;
        ++it)
   {
-    if (it != AUTHORS.begin()) std::cout << ", ";
+    if( it != AUTHORS.begin() )
+      std::cout << ", ";
     std::cout << *it;
   }
   std::cout << std::endl
@@ -215,8 +206,8 @@ void AppWormux::DisplayWelcomeMessage(){
 	    << ", Copyright (C) 2001-2004 Lawrence Azzoug"
 	    << std::endl
 	    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
-        << "This is free software, and you are welcome to redistribute it" << std::endl
-        << "under certain conditions." << std::endl
+            << "This is free software, and you are welcome to redistribute it" << std::endl
+            << "under certain conditions." << std::endl
 	    << std::endl
 	    << "Read COPYING file for details." << std::endl
 	    << std::endl;

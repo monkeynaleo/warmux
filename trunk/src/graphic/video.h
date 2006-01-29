@@ -23,38 +23,41 @@
 #define VIDEO_H
 #include <SDL.h>
 #include <string>
+#include "surface.h"
 #include "../include/base.h"
 
-class Video
-{
-private:
-  uint m_max_fps;     // If equals to zero, it means no limit
-  uint m_sleep_max_fps;
+namespace Wormux{
 
-public:
-  SDL_Surface* sdlwindow;
-  void SetMaxFps (uint max_fps);
-  uint GetMaxFps();
-  uint GetSleepMaxFps();
+	class Video{
 
-private:
-  bool fullscreen;
-  void SetWindowCaption(std::string caption);
-  void SetWindowIcon(std::string icon);
+		private:
+			uint m_max_fps;     // If equals to zero, it means no limit
+			uint m_sleep_max_fps;
+			bool SDLReady;
 
-public:
-  Video();
-  
-  int  GetWidth(void) const;
-  int  GetHeight(void) const;
-  bool IsFullScreen(void) const;
-  
-  bool SetConfig(int width, int height, bool fullscreen);
-  
-  void InitWindow(void);
-  void InitScreen(void);
+		public:
+			Surface window;
+			void SetMaxFps (uint max_fps);
+			uint GetMaxFps();
+			uint GetSleepMaxFps();
 
-  void Flip(void);
+		private:
+			bool fullscreen;
+			void SetWindowCaption(std::string caption);
+			void SetWindowIcon(std::string icon);
+
+		public:
+			Video();
+			~Video();
+
+			bool IsFullScreen(void) const;
+
+			bool SetConfig(int width, int height, bool fullscreen);
+
+			void InitWindow(void);
+			void InitSDL(void);
+
+			void Flip(void);
+	};
 };
-
 #endif

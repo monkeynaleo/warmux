@@ -260,21 +260,25 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
 void Ground::Draw()
 {
   int cx = camera.GetX();
-  int cy = camera.GetY();  
+  int cy = camera.GetY();
+  int vidWidth = app.video.window.GetWidth();
+  int vidHeight = app.video.window.GetHeight();
   
   if (camera.HasFixedX()) {// ground is less wide than screen !
-    uint margin = (app.video.GetWidth()-GetWidth())/2;
-    boxRGBA(app.video.sdlwindow, 0, 0,margin, app.video.GetHeight(),
+    uint margin = ( vidWidth - GetWidth() )/2;
+    app.video.window.BoxRGBA(0, 0,margin, vidHeight,
 	    0, 0, 0, 255); 
-    boxRGBA(app.video.sdlwindow, app.video.GetWidth()-margin, 0, app.video.GetWidth(), app.video.GetHeight(),
+    app.video.window.BoxRGBA( vidWidth - margin, 0, 
+			vidWidth, vidHeight,
 	    0, 0, 0, 255); 
   }
 
   if (camera.HasFixedY()) {// ground is less wide than screen !
-    uint margin = (app.video.GetHeight()-GetHeight())/2;
-    boxRGBA(app.video.sdlwindow, 0, 0, app.video.GetWidth(), margin,
+    uint margin = (vidHeight - GetHeight())/2;
+    app.video.window.BoxRGBA(0, 0, vidWidth, margin,
 	    0, 0, 0, 255); 
-    boxRGBA(app.video.sdlwindow, 0, app.video.GetHeight()-margin, app.video.GetWidth(), app.video.GetHeight(),
+    app.video.window.BoxRGBA(0, vidHeight - margin, 
+			vidWidth, vidHeight,
 	    0, 0, 0, 255); 
   }
 

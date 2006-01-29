@@ -40,10 +40,10 @@ Box::~Box(){
 void Box::Draw (uint mouse_x, uint mouse_y){
 	
   if( visible ){
-    boxRGBA(app.video.sdlwindow, x, y, x+w, y+h,
+    app.video.window.BoxRGBA( x, y, x+w, y+h,
 	    80, 80, 159, 206);
 
-    rectangleRGBA(app.video.sdlwindow, x, y, x+w, y+h,
+    app.video.window.RectangleRGBA( x, y, x+w, y+h,
             49, 32, 122, 255);  
   }
 

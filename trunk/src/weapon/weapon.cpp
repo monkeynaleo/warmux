@@ -448,10 +448,10 @@ void Weapon::DrawWeaponBox(){
   c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
 
   SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH),(int)(c_y - 0.5 * BUTTON_ICO_HEIGHT), interface.weapon_box_button->w, interface.weapon_box_button->h};	
-  SDL_BlitSurface( interface.weapon_box_button, NULL, app.video.sdlwindow, &dest);
+  app.video.window.Blit( interface.weapon_box_button, NULL, &dest);
 
   SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT),icone->w,icone->h};	   
-  SDL_BlitSurface( icone, NULL, app.video.sdlwindow, &dr2);
+  app.video.window.Blit( icone, NULL, &dr2);
 }
 
 void Weapon::Draw(){
@@ -532,7 +532,7 @@ void Weapon::Draw(){
   }
   if ( m_image )
     {
-      m_image->Blit( app.video.sdlwindow, x-camera.GetX(), y-camera.GetY());
+      m_image->Blit( app.video.window.GetSurface(), x-camera.GetX(), y-camera.GetY());
     }
    
 }

@@ -120,22 +120,22 @@ void Text::DrawTopLeft (int x, int y){
   dst_rect.h = surf->h;
 
   if(shadowed){
-		SDL_Rect shad_rect;
+	SDL_Rect shad_rect;
 
-		shad_rect.x = dst_rect.x + bg_offset;
+	shad_rect.x = dst_rect.x + bg_offset;
     shad_rect.y = dst_rect.y + bg_offset;
     shad_rect.w = background->w;
     shad_rect.h = background->h;
 
-		SDL_BlitSurface(background, NULL, app.video.sdlwindow, &shad_rect);
-    SDL_BlitSurface(surf, NULL, app.video.sdlwindow, &dst_rect);
+	app.video.window.Blit(background, NULL, &shad_rect);
+    app.video.window.Blit(surf, NULL, &dst_rect);
 		
     world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y,
                                       shad_rect.w + bg_offset, shad_rect.h + bg_offset));
   }else{
-    SDL_BlitSurface(surf, NULL, app.video.sdlwindow, &dst_rect);
+    app.video.window.Blit(surf, NULL, &dst_rect);
     world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
-	}		
+  }		
 }
 
 void Text::DrawCenterOnMap (int x, int y){
@@ -163,10 +163,10 @@ void DrawTmpBoxText(Font &font, int _x, int _y,
   y = _y - h / 2;
   _y -= font.GetHeight(txt)/2;
 
-  boxRGBA(app.video.sdlwindow, x, y, x + w, y + h,
+  app.video.window.BoxRGBA(x, y, x + w, y + h,
 	  80, 80, 159, 206);
 
-  rectangleRGBA(app.video.sdlwindow, x, y, x + w, y + h,
+  app.video.window.RectangleRGBA(x, y, x + w, y + h,
 		49, 32, 122, 255);  
 
   world.ToRedrawOnScreen(Rectanglei(x, y, w, h));

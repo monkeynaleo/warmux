@@ -53,7 +53,7 @@ void CheckBox::Draw (uint mouse_x, uint mouse_y){
   else 
     m_image->SetCurrentFrame(1);
 
-  m_image->Blit(app.video.sdlwindow, x+w-16, y);
+  m_image->Blit(app.video.window.GetSurface(), x+w-16, y);
 }
 
 bool CheckBox::Clic (uint mouse_x, uint mouse_y, uint button){

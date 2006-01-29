@@ -82,7 +82,7 @@ public:
   double previous_strength;
 
 private:
-  void DrawEnergyBar (int dy) const;
+  void DrawEnergyBar (int dy);
   void DrawName (int dy) const;
   void StartBreathing();
   void StartWalking();

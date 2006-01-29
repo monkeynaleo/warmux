@@ -34,8 +34,8 @@ Menu::Menu(char * bg)
 {
   close_menu = false ;
    
-  uint x = app.video.GetWidth() / 2;
-  uint y = app.video.GetHeight() - 50;
+  uint x = app.video.window.GetWidth() / 2;
+  uint y = app.video.window.GetHeight() - 50;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( resource_manager.LoadImage( res, bg));
@@ -98,8 +98,9 @@ bool Menu::BasicOnClic(int mouse_x, int mouse_y)
 
 void Menu::BasicDraw(int mouse_x, int mouse_y)
 {
-  background->ScaleSize(app.video.GetWidth(), app.video.GetHeight());
-  background->Blit( app.video.sdlwindow, 0, 0);
+  background->ScaleSize(app.video.window.GetWidth(), 
+		  app.video.window.GetHeight());
+  background->Blit( app.video.window.GetSurface(), 0, 0);
   
   actions_buttons->Draw(mouse_x,mouse_y);
 }

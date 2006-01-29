@@ -155,7 +155,7 @@ void Mouse::ScrollCamera() const{
     camera.autorecadre = false;
   }
   
-  dx = app.video.GetWidth() - x - SENSIT_SCROLL_MOUSE;
+  dx = app.video.window.GetWidth() - x - SENSIT_SCROLL_MOUSE;
   if( dx < 0 ){
     camera.SetXY(-dx/2,0);
     camera.autorecadre = false;
@@ -167,7 +167,7 @@ void Mouse::ScrollCamera() const{
     camera.autorecadre = false;
   }
   
-  dy = app.video.GetHeight() - y - SENSIT_SCROLL_MOUSE;
+  dy = app.video.window.GetHeight() - y - SENSIT_SCROLL_MOUSE;
   if( dy < 0 ){
     camera.SetXY(0,-dy/2);
     camera.autorecadre = false;

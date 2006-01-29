@@ -34,93 +34,97 @@
 
 using namespace Wormux;
 
-Video::Video() {
-  SetMaxFps (50);
-  fullscreen = false;
+Video::Video(){
+	SetMaxFps (50);
+	fullscreen = false;
+	SDLReady = false;
+}
+
+Video::~Video(){
+	if( SDLReady )
+		SDL_Quit();
 }
 
 void Video::SetMaxFps(uint max_fps){
-  m_max_fps = max_fps;
-  if (0 < m_max_fps)
-    m_sleep_max_fps = 1000/m_max_fps;
-  else
-    m_sleep_max_fps = 0;
+	m_max_fps = max_fps;
+	if (0 < m_max_fps)
+		m_sleep_max_fps = 1000/m_max_fps;
+	else
+		m_sleep_max_fps = 0;
 }
 
 uint Video::GetMaxFps(){
-  return m_max_fps;
+	return m_max_fps;
 }
 
 uint Video::GetSleepMaxFps(){
-  return m_sleep_max_fps;
-}
-
-int Video::GetWidth(void) const{
-  return sdlwindow->w;
-}
-
-int Video::GetHeight(void) const{
-  return sdlwindow->h;
+	return m_sleep_max_fps;
 }
 
 bool Video::IsFullScreen(void) const{
-  return fullscreen;
+	return fullscreen;
 }
 
 bool Video::SetConfig(int width, int height, bool _fullscreen){
-  // initialize the main window
-  if( (sdlwindow == NULL) || 
-      (width != GetWidth() || height != GetHeight() ) ){
+	// initialize the main window
+	if( (window.GetSurface() == NULL) || 
+			(width != window.GetWidth() || 
+			 height != window.GetHeight() ) ){
 
-    sdlwindow = SDL_SetVideoMode(width, height,
-				     32, //resolution in bpp
-				     SDL_HWSURFACE| SDL_HWACCEL |SDL_DOUBLEBUF);
+		window.SetSurface( SDL_SetVideoMode(width, height, 32, 
+				SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF ), false );
 
-    if( sdlwindow == NULL ) 
-      sdlwindow = SDL_SetVideoMode(width, height,
-				       32, //resolution in bpp
-				       SDL_SWSURFACE);
-    
-    if( sdlwindow == NULL )
-      return false;
-    fullscreen = false;
-  }
+		if( window.GetSurface() == NULL ) 
+			window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE) );
 
-  if(fullscreen != _fullscreen ){
-    SDL_WM_ToggleFullScreen(sdlwindow);
-    fullscreen = _fullscreen;
-  }
+		if( window.GetSurface() == NULL )
+			return false;
+		fullscreen = false;
+	}
 
-  return true;
+	if(fullscreen != _fullscreen ){
+		SDL_WM_ToggleFullScreen( window.GetSurface() );
+		fullscreen = _fullscreen;
+	}
+
+	return true;
 }
 
 void Video::InitWindow(){
-  sdlwindow = NULL;
+	InitSDL();
 
-  SetConfig(config.tmp.video.width,
-                  config.tmp.video.height,
-                  config.tmp.video.fullscreen);
-  
-  SetWindowCaption( std::string("Wormux ") + VERSION );
-  SetWindowIcon( config.data_dir + "wormux-32.xpm" );
+	window.SetSurface( NULL , false );
+	window.SetAutoFree( false );
 
-  if( sdlwindow == NULL )
-	  Error("dommage");
+	SetConfig(config.tmp.video.width,
+			config.tmp.video.height,
+			config.tmp.video.fullscreen);
+
+	if( window.GetSurface() == NULL )
+		Error( "Unable to initialize SDL window.");
+
+	SetWindowCaption( std::string("Wormux ") + VERSION );
+	SetWindowIcon( config.data_dir + "wormux-32.xpm" );
 }
 
 void Video::SetWindowCaption(std::string caption){
-  SDL_WM_SetCaption( caption.c_str(), NULL );
+	SDL_WM_SetCaption( caption.c_str(), NULL );
 }
 
 void Video::SetWindowIcon(std::string filename){
-  SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
+	SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
 }
+void Video::InitSDL(){
+	if( SDLReady )
+		return;
 
-void Video::InitScreen(){
- if ( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
-   Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
+	if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
+		Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
+
+	SDLReady = true;
 }
 
 void Video::Flip(){
-  SDL_Flip(sdlwindow);
+	window.Flip();
 }
+

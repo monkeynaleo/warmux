@@ -143,14 +143,14 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
   /* Check is there are any modes available */
   if(modes == (SDL_Rect **)0){
     std::ostringstream ss;
-    ss << app.video.GetWidth() << "x" << app.video.GetHeight();
+    ss << app.video.window.GetWidth() << "x" << app.video.window.GetHeight();
     lbox_video_mode->AddItem(false,"No modes available!", ss.str());
   } else {
     for(int i=0;modes[i];++i) {
       if (modes[i]->w < 800 || modes[i]->h < 600) break; 
       std::ostringstream ss;
       ss << modes[i]->w << "x" << modes[i]->h ;
-      if (modes[i]->w == app.video.GetWidth() && modes[i]->h == app.video.GetHeight())
+      if (modes[i]->w == app.video.window.GetWidth() && modes[i]->h == app.video.window.GetHeight())
 	lbox_video_mode->AddItem(true, ss.str(), ss.str());
       else
 	lbox_video_mode->AddItem(false, ss.str(), ss.str());
@@ -221,8 +221,8 @@ void OptionMenu::SaveOptions()
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
   app.video.SetConfig(w, h, full_screen->GetValue());
   
-  uint x = app.video.GetWidth() / 2;
-  uint y = app.video.GetHeight() - 50;
+  uint x = app.video.window.GetWidth() / 2;
+  uint y = app.video.window.GetHeight() - 50;
 
   SetActionButtonsXY(x, y);
    

@@ -90,7 +90,7 @@ void Font::WriteLeft (int x, int y, const std::string &txt,
   dst_rect.h = text_surface->h;
   dst_rect.w = text_surface->w;
 
-  SDL_BlitSurface( text_surface, NULL, app.video.sdlwindow, &dst_rect );
+  app.video.window.Blit( text_surface, NULL, &dst_rect );
   world.ToRedrawOnScreen( Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h) );
 }
 

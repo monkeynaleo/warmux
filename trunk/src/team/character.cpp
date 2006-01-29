@@ -191,9 +191,11 @@ void Character::SetDirection (int nv_direction)
 
 //-----------------------------------------------------------------------------
 
-void Character::DrawEnergyBar(int dy) const
+void Character::DrawEnergyBar(int dy)
 {
-  if(IsDead()) return;
+  if( IsDead() )
+	return;
+
   energy_bar.DrawXY ( GetCenterX()-energy_bar.GetWidth()/2-camera.GetX(), 
 		      GetY()+dy-camera.GetY());
 }

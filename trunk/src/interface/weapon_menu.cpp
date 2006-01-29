@@ -191,13 +191,13 @@ void WeaponMenuItem::Draw()
 
   // Button display  
    button->Scale( scale, scale);
-   button->Blit( app.video.sdlwindow, 
+   button->Blit( app.video.window.GetSurface(), 
 		 (int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale), 
 		 (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale));	
    
   // Weapon display
   weapon_icon->Scale( scale, scale);
-  weapon_icon->Blit( app.video.sdlwindow,
+  weapon_icon->Blit( app.video.window.GetSurface(),
 		     (int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
 		     (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale));
 
@@ -301,12 +301,12 @@ void WeaponsMenu::SwitchDisplay()
 
 int WeaponsMenu::GetX() const
 {
-  return app.video.GetWidth()-GetWidth();
+  return app.video.window.GetWidth()-GetWidth();
 }
 
 int WeaponsMenu::GetY() const 
 {
-   return app.video.GetHeight() - GetHeight() - ( interface.IsDisplayed() ? interface.GetHeight() : 0 );
+   return app.video.window.GetHeight() - GetHeight() - ( interface.IsDisplayed() ? interface.GetHeight() : 0 );
 }
 
 int WeaponsMenu::GetWidth() const
