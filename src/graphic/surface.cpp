@@ -44,18 +44,20 @@ Surface::Surface(SDL_Surface *sdl_surface){
 
 Surface::Surface(int width, int height, Uint32 flags, bool useAlpha){
 	surface = NULL;
-	NewSurface( width, height, flags, useAlpha );
 	autoFree = true;
+	NewSurface( width, height, flags, useAlpha );
 }
 
 Surface::Surface(const char *filename){
 	surface = NULL;
+	autoFree = true;
 	if( !ImgLoad(filename) )
 		Error( Format("Unable to open image file : %s", filename) );
 }
 
 Surface::Surface(const Surface &src){
 	surface = src.surface;
+	autoFree = true;
 	if( surface != NULL)
 		surface->refcount++;
 }
