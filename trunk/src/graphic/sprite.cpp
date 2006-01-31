@@ -243,6 +243,7 @@ void Sprite::LastFrameModified(){
   //is not the same as the last one.
   if(!have_lastframe_cache) 
     return;
+  last_frame.Free();
 }
 
 void Sprite::SetSize(unsigned int w, unsigned int h){
