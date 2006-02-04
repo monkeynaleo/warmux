@@ -28,8 +28,6 @@
 #include "maps_list.h"
 #include "../graphic/surface.h"
 #include "../include/app.h"
-namespace Wormux
-{
 
 // Vitesse (comprise entre 0 et 0.5)
 const double VITESSE_CIEL_X = 0.3;
@@ -181,5 +179,3 @@ void Sky::Draw()
   }
 #endif
 }
-
-} // namespace Wormux

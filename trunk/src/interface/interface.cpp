@@ -40,7 +40,6 @@
 
 WeaponStrengthBar weapon_strength_bar;
 
-using namespace Wormux;
 
 // Nom du ver
 const uint NOM_VER_X = 32;

@@ -25,8 +25,6 @@
 #include "../tool/point.h"
 #include "../tool/i18n.h"
 
-namespace Wormux 
-{
 Baseball baseball;
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball"){
@@ -98,5 +96,3 @@ void BaseballConfig::LoadXml(xmlpp::Element *elem){
   LitDocXml::LitUint (elem, "longueur", longueur);
   LitDocXml::LitUint (elem, "force", force);
 }
-
-} // namespace Wormux

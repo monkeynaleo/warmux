@@ -35,7 +35,6 @@
 #ifdef __MINGW32__
 #undef LoadImage
 #endif
-namespace Wormux {
 
 #ifdef DEBUG
   //  #define DEBUG_CADRE_TEST
@@ -212,5 +211,3 @@ void DynamiteConfig::LoadXml(xmlpp::Element *elem)
   ExplosiveWeaponConfig::LoadXml(elem);
   LitDocXml::LitUint (elem, "duree", duree);
 }
-
-} // namespace Wormux

@@ -174,12 +174,12 @@ void InfoTerrain::FreeData(){
   m_donnees_chargees = false;
 }
 
-Wormux::Surface InfoTerrain::LitImgTerrain(){ 
+Surface InfoTerrain::LitImgTerrain(){ 
   LoadData(); 
   return img_terrain;
 }
 
-Wormux::Surface InfoTerrain::LitImgCiel(){ 
+Surface InfoTerrain::LitImgCiel(){ 
   LoadData(); 
   return img_ciel;
 }
@@ -221,7 +221,7 @@ void ListeTerrain::Init()
 
   std::cout << "o " << _("Load maps:");
 
-  std::string dirname = Wormux::config.data_dir+ CONCAT_DIR("map", "");
+  std::string dirname = config.data_dir+ CONCAT_DIR("map", "");
 #if !defined(WIN32) || defined(__MINGW32__)
   DIR *dir = opendir(dirname.c_str());
   struct dirent *file;
@@ -254,7 +254,7 @@ void ListeTerrain::Init()
 
 #if !defined(WIN32) || defined(__MINGW32__)
   // Load personal maps
-  dirname = Wormux::config.GetWormuxPersonalDir() + CONCAT_DIR("map","");
+  dirname = config.GetWormuxPersonalDir() + CONCAT_DIR("map","");
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL) 

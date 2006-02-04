@@ -37,8 +37,6 @@
 #include "../tool/i18n.h"
 #include "../tool/random.h"
 
-namespace Wormux {
-
 LanceCluster lance_cluster;
 
 #ifdef DEBUG
@@ -130,7 +128,7 @@ void ClusterBomb::Tire (double force)
 #endif
 
   // Recupere le moment du départ
-  temps_debut_tir = Wormux::global_time.Read();
+  temps_debut_tir = global_time.Read();
 }
 
 void ClusterBomb::Init()
@@ -177,7 +175,7 @@ void ClusterBomb::Refresh()
   }
 
   // 5 sec après avoir été tirée, la grenade explose
-  double tmp = Wormux::global_time.Read() - temps_debut_tir;
+  double tmp = global_time.Read() - temps_debut_tir;
   if(tmp>1000 * lance_cluster.cfg().tps_avt_explosion)
   {
     DoubleVector speed_vector ;
@@ -222,7 +220,7 @@ void ClusterBomb::Draw()
   image->Draw(GetX(), GetY());
 
   int tmp = lance_cluster.cfg().tps_avt_explosion;
-  tmp -= (int)((Wormux::global_time.Read() - temps_debut_tir) / 1000);
+  tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
@@ -317,4 +315,3 @@ void ClusterBombConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitUint (elem, "nbr_fragments", nbr_fragments);
 }
 
-} // namespace Wormux

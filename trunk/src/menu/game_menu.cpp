@@ -31,10 +31,7 @@
 #include "../game/config.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
-#include "../include/global.h"
 
-using namespace Wormux;
-using namespace std;
 
 //-----------------------------------------------------------------------------
 
@@ -53,7 +50,9 @@ const uint MAP_PREVIEW_W = 300;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-GameMenu::GameMenu() : Menu("menu/bg_option")
+GameMenu::GameMenu() :
+  Menu("menu/bg_option"),
+  normal_font(16)
 {  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
 
@@ -63,7 +62,7 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
 
   /* Choose the teams !! */
   team_box = new VBox(TEAMS_X, TEAMS_Y, 475);
-  team_box->AddWidget(new Label(_("Select the teams:"), 0, 0, 0, global().normal_font()));
+  team_box->AddWidget(new Label(_("Select the teams:"), 0, 0, 0, normal_font));
 
   Box * tmp_box = new HBox(0,0, TEAMS_H, false);
   tmp_box->SetMargin(10);
@@ -102,7 +101,7 @@ GameMenu::GameMenu() : Menu("menu/bg_option")
   tmp_box->AddWidget(new NullWidget(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
   
   map_box = new VBox(MAPS_X, team_box->GetY()+team_box->GetH()+20, 475);
-  map_box->AddWidget(new Label(_("Select the world:"), 0, 0, 0, global().normal_font()));
+  map_box->AddWidget(new Label(_("Select the world:"), 0, 0, 0, normal_font));
   map_box->AddWidget(tmp_box);
 
   //-----------------------------------------------------------------------------

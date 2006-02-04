@@ -33,9 +33,6 @@
 #include "../interface/game_msg.h"
 #include "../weapon/gun.h"
 #include "../weapon/weapon_tools.h"
-using namespace std;
-
-namespace Wormux {
 
 Gun gun;
 
@@ -191,5 +188,3 @@ void Gun::Refresh()
 
 WeaponConfig& Gun::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
-
-} // namespace Wormux

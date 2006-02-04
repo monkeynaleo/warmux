@@ -32,9 +32,7 @@
 #include "../interface/game_msg.h"
 #include "../weapon/weapon_tools.h"
 
-using namespace std;
 //-----------------------------------------------------------------------------
-namespace Wormux {
 
 Airhammer airhammer; 
 
@@ -85,8 +83,8 @@ bool Airhammer::p_Shoot()
 
 void Airhammer::RepeatShoot()
 {  
-  uint time = Wormux::global_time.Read() - m_last_jolt; 
-  uint tmp = Wormux::global_time.Read();
+  uint time = global_time.Read() - m_last_jolt; 
+  uint tmp = global_time.Read();
 
   if (time >= MIN_TIME_BETWEEN_JOLT) 
   {
@@ -130,4 +128,3 @@ void Airhammer::HandleKeyEvent(int action, int event_type)
 }
 //-----------------------------------------------------------------------------
 
-} // namespace Wormux

@@ -30,7 +30,6 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
-using namespace Wormux;
 // The GNU
 class Gnu : public PhysicalObj
 {

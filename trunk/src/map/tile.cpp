@@ -32,7 +32,6 @@
 #include "../tool/error.h"
 #include "../tool/point.h"
 
-using namespace Wormux;
 
 const int cell_width = 128;
 const int cell_height = 128;

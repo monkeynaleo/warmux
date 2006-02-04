@@ -27,11 +27,11 @@
 class SpriteFrame
 {
 	public:
-		SpriteFrame( Wormux::Surface surface, unsigned int delay=100);
-		Wormux::Surface surface;
-		Wormux::Surface flipped_surface;
-		Wormux::Surface *rotated_surface;
-		Wormux::Surface *rotated_flipped_surface;
+		SpriteFrame( Surface surface, unsigned int delay=100);
+		Surface surface;
+		Surface flipped_surface;
+		Surface *rotated_surface;
+		Surface *rotated_flipped_surface;
 		unsigned int delay; // in millisecond
 };
 

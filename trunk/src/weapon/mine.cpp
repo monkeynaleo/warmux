@@ -42,9 +42,8 @@
 #undef LoadImage
 #endif
 //-----------------------------------------------------------------------------
-namespace Wormux {
+Mine mine;
 
-  Mine mine;
 #ifdef DEBUG
 
   //#define DBG_PLACEMENT
@@ -369,4 +368,3 @@ void MineConfig::LoadXml(xmlpp::Element *elem)
 }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

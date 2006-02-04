@@ -55,10 +55,10 @@ typedef enum {
  public:
    Sprite();
    Sprite( Sprite &other);
-   Sprite( Wormux::Surface surface);
+   Sprite( Surface surface);
    ~Sprite();
-   void Init( Wormux::Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
-   void AddFrame( Wormux::Surface surf, unsigned int delay);
+   void Init( Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
+   void AddFrame( Surface surf, unsigned int delay);
    void EnableRotationCache(unsigned int cache_size);
    void EnableFlippingCache();
    void EnableLastFrameCache();
@@ -100,8 +100,8 @@ typedef enum {
    void Show();
    void Hide();
      
-   void Blit( Wormux::Surface dest, uint pox_x, uint pos_y);
-   void Blit( Wormux::Surface dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
+   void Blit( Surface dest, uint pox_x, uint pos_y);
+   void Blit( Surface dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
    void Draw(int pos_x, int pos_y);
    void Update();
    bool IsFinished() const;
@@ -125,10 +125,10 @@ typedef enum {
 
    //For cache mecanism
    bool need_free_surface;
-   Wormux::Surface tmp_surface;
+   Surface tmp_surface;
 
    Rotation_HotSpot rot_hotspot;
-   void Calculate_Rotation_Offset(int & rot_x, int & rot_y, Wormux::Surface tmp_surface);
+   void Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface tmp_surface);
 
    //Cache members / functions
    bool have_rotation_cache;
@@ -137,7 +137,7 @@ typedef enum {
    bool have_flipping_cache;
 
    bool have_lastframe_cache;
-   Wormux::Surface last_frame;
+   Surface last_frame;
    void LastFrameModified();
    void RefreshSurface();
 

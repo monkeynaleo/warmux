@@ -31,7 +31,7 @@
 class AppWormux
 {
 public:
-  Wormux::Video video;
+  Video video;
 
 private:
   int x, y;

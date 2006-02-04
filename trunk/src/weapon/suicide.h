@@ -25,8 +25,6 @@
 #include "weapon.h"
 #include "graphic/surface.h"
 
-namespace Wormux {
-
 class Suicide : public Weapon
 {
 private:
@@ -46,5 +44,4 @@ public:
 };
 
 extern Suicide suicide;
-} // namespace Wormux
 #endif

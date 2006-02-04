@@ -26,8 +26,6 @@
 #include "../include/base.h"
 #include "weapon.h"
 
-namespace Wormux {
-
 class AirAttackConfig : public ExplosiveWeaponConfig
 { 
 public:
@@ -99,5 +97,4 @@ public:
 };
 
 extern AirAttack air_attack;
-} // namespace Wormux
 #endif

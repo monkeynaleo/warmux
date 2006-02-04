@@ -24,7 +24,6 @@
 #include <sstream>
 #include <iostream>
 #include "../game/config.h"
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 MenuInfos menu_infos;
 //-----------------------------------------------------------------------------

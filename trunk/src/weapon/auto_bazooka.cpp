@@ -41,8 +41,6 @@
 #undef LoadImage
 #endif
 
-namespace Wormux {
-
 AutomaticBazooka auto_bazooka;
 
 //Temps en seconde à partir duquel la roquette se dirige vers la cible
@@ -82,7 +80,7 @@ void RoquetteTeteCherche::Tire (double force,
 
   PutOutOfGround(angle);
 
-  temps_debut_tir = Wormux::global_time.Read();
+  temps_debut_tir = global_time.Read();
   angle_local=angle;
 }
 
@@ -120,7 +118,7 @@ void RoquetteTeteCherche::Refresh()
       image->SetRotation_deg(angle *180/M_PI);
       
       //2 sec après avoir été tirée, la roquette se dirige vers la cible:
-      tmp = Wormux::global_time.Read() - temps_debut_tir;
+      tmp = global_time.Read() - temps_debut_tir;
       if(tmp>1000 * TPS_AV_ATTIRANCE)
 	{
 	  m_attire = true;
@@ -273,5 +271,3 @@ bool AutomaticBazooka::IsReady() const
 
 ExplosiveWeaponConfig& AutomaticBazooka::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
-
-} // namespace Wormux

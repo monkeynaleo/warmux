@@ -156,7 +156,7 @@ public:
   // Accès à l'avatar
   const Skin& GetSkin() const;
   Skin& AccessSkin();
-  bool SetSkin(std::string skin_name);
+  bool SetSkin(const std::string& skin_name);
 
   // Hand position
   void GetHandPosition (int &x, int &y);

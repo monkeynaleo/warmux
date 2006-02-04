@@ -44,8 +44,6 @@
 #include <dirent.h>
 #endif
 
-using namespace Wormux;
-using namespace std;
 
 // Position du texte de la version
 const int VERSION_DY = -40;

@@ -28,9 +28,6 @@
 #include "../interface/game_msg.h"
 #include "../tool/math_tools.h"
 
-namespace Wormux
-{
-
 Time global_time;
 
 bool Time::IsGamePaused() const 
@@ -95,5 +92,4 @@ std::string Time::GetString()
   
   ss << ClockMin() << ":" << std::setfill('0') << std::setw(2) << ClockSec();
   return ss.str();
-}
 }

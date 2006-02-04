@@ -29,7 +29,6 @@
 #include "../map/camera.h"
 #include "../sound/jukebox.h"
 #include "teams_list.h"
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG

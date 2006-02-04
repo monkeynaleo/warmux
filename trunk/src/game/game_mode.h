@@ -27,8 +27,6 @@
 #include "../include/base.h"
 #include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class GameMode 
 {
@@ -75,5 +73,4 @@ protected:
 };
 
 extern GameMode game_mode;
-} // namespace Wormux
 #endif

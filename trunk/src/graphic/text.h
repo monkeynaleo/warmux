@@ -27,8 +27,8 @@
 
 class Text
 {
-  Wormux::Surface surf;
-  Wormux::Surface background; //shadow or outline or nothing;
+  Surface surf;
+  Surface background; //shadow or outline or nothing;
   std::string txt;
   Font* font;
   SDL_Color color;

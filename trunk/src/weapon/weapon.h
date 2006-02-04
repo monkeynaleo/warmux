@@ -140,7 +140,7 @@ protected:
 
 public:
   // Icone de l'arme dans l'interface
-  Wormux::Surface icone;
+  Surface icone;
 
   // if max_strength != 0, display the strength bar
   double max_strength;

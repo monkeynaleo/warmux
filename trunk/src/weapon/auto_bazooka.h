@@ -27,8 +27,6 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
-namespace Wormux {
-
 // Roquette du bazooka à tête chercheuse
 class RoquetteTeteCherche : public WeaponProjectile
 {
@@ -88,5 +86,4 @@ protected:
 };
 
 extern AutomaticBazooka auto_bazooka;
-} // namespace Wormux
 #endif

@@ -48,8 +48,6 @@
 #include "../weapon/weapon_tools.h"
 #include "../interface/cursor.h"
 
-using namespace std;
-using namespace Wormux;
 
 const uint HAUT_FONT_MIX = 13;
 
@@ -270,7 +268,7 @@ void Character::StartBreathing()
 
 void Character::StartWalking()
 {
-  do_nothing_time = Wormux::global_time.Read();
+  do_nothing_time = global_time.Read();
 
   if(full_walk && current_skin=="breathe")
   {
@@ -363,7 +361,7 @@ void Character::Draw()
   // Draw lost energy
   if (dessine_perte)
   {
-    ostringstream ss;
+    std::ostringstream ss;
     ss << losted_energy;
     dy -= HAUT_FONT_MIX;
     global().small_font().WriteCenterTop (GetX() +GetWidth()/2-camera.GetX(), GetY()+dy-camera.GetY(), ss.str(), white_color);    
@@ -378,7 +376,7 @@ void Character::Saute ()
 #ifdef DEBUG_CHG_ETAT
   COUT_DBG << "Saute." << endl;
 #endif
-  do_nothing_time = Wormux::global_time.Read();
+  do_nothing_time = global_time.Read();
 
   if (!CanJump()) return;
 
@@ -400,7 +398,7 @@ void Character::SuperSaut ()
 #ifdef DEBUG_CHG_ETAT
   COUT_DBG << "SuperSaut." << endl;
 #endif
-  do_nothing_time = Wormux::global_time.Read();
+  do_nothing_time = global_time.Read();
 
   if (!CanJump()) return;
 
@@ -472,7 +470,7 @@ void Character::HandleKeyEvent(int action, int event_type)
   if (action == ACTION_SHOOT)
     {
       HandleShoot(event_type);
-      do_nothing_time = Wormux::global_time.Read();
+      do_nothing_time = global_time.Read();
       curseur_ver.Cache();
       return;
     }
@@ -525,7 +523,7 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_UP:
     	        if (ActiveTeam().crosshair.enable)
               {
-                do_nothing_time = Wormux::global_time.Read();
+                do_nothing_time = global_time.Read();
                 curseur_ver.Cache();
 	              action_handler.NewAction (Action(ACTION_UP));
               }
@@ -534,7 +532,7 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_DOWN:
 	            if (ActiveTeam().crosshair.enable)
               {
-                do_nothing_time = Wormux::global_time.Read();
+                do_nothing_time = global_time.Read();
                 curseur_ver.Cache();
      	          action_handler.NewAction (Action(ACTION_DOWN));
               }
@@ -568,7 +566,7 @@ void Character::Refresh()
 
   if( &ActiveCharacter() == this && game_loop.ReadState() == gamePLAYING)
   {
-    if(do_nothing_time + do_nothing_timeout < Wormux::global_time.Read())
+    if(do_nothing_time + do_nothing_timeout < global_time.Read())
       curseur_ver.SuitVerActif();
   }
 
@@ -630,7 +628,7 @@ bool Character::CanJump() const
 
 void Character::InitMouvementDG(uint pause)
 {
-  do_nothing_time = Wormux::global_time.Read();
+  do_nothing_time = global_time.Read();
   curseur_ver.Cache();
   m_rebounding = false;
   pause_bouge_dg = global_time.Read()+pause;
@@ -715,7 +713,7 @@ Skin& Character::AccessSkin()
 }
 
 // Choose which skin to display (ie. dead skin, swiming skin...)
-bool Character::SetSkin(std::string skin_name)
+bool Character::SetSkin(const std::string& skin_name)
 {
   //Return true if the this character have this skin. (if it's set in the xml file)
 
@@ -824,7 +822,7 @@ void Character::FrameImageSuivante()
 
 void Character::Init() {}
 
-void Character::InitTeam (Team *ptr_equipe, const string &name, 
+void Character::InitTeam (Team *ptr_equipe, const std::string &name, 
 			  Skin* pskin)
 {
   SetMass (game_mode.character.mass);

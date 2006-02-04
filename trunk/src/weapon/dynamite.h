@@ -29,8 +29,6 @@
 #include "../include/base.h"
 #include "../team/character.h"
 
-namespace Wormux {
-
 class Dynamite;
 
 // La représentation d'une dynamite
@@ -84,6 +82,4 @@ public:
   void Refresh();
   DynamiteConfig &cfg();
 };
-
-} // namespace Wormux
 #endif

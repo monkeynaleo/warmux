@@ -25,60 +25,52 @@
 #include <string>
 #include "../include/base.h"
 
-namespace Wormux{
+class Surface
+{
+  SDL_Surface* surface;
+  bool autoFree;
 
-	class Surface
-	{
-		private:
-			SDL_Surface* surface;
-			bool autoFree;
+public:
+  Surface();
+  Surface(SDL_Surface *sdl_surface);
+  Surface(int width, int height, Uint32 flags, bool useAlpha = true);
+  Surface(const char *filename);
+  Surface(const Surface &src);
+  ~Surface();
+  Surface &operator=(const Surface &src);
 
-		public:
+  void Free();
+  void AutoFree();
+  void SetAutoFree(bool newAutoFree);
 
-		private:
+  void SetSurface(SDL_Surface *newSurface, bool freePrevious = true);
+  void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha = true);
 
-		public:
-			Surface();
-			Surface(SDL_Surface *sdl_surface);
-			Surface(int width, int height, Uint32 flags, bool useAlpha = true);
-			Surface(const char *filename);
-			Surface(const Surface &src);
-			~Surface();
-			Surface &operator=(const Surface &src);
-			
-			void Free();
-			void AutoFree();
-			void SetAutoFree(bool newAutoFree);
-			
-			void SetSurface(SDL_Surface *newSurface, bool freePrevious = true);
-			void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha = true);
-			
-			SDL_Surface *GetSurface();
-			int GetWidth() const;
-			int GetHeight() const;
-			int SetAlpha(Uint32 flags, Uint8 alpha);
-			Uint32 GetFlags();
-			int Lock();
-			void Unlock();
-			int Blit(SDL_Surface *src, SDL_Rect *srcRect, SDL_Rect *dstRect);
-			int Blit(Surface src, SDL_Rect *srcRect, SDL_Rect *dstRect);
-			int SetColorKey(Uint32 flag, Uint32 key);
-			int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-			Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-			void SetClipRect(SDL_Rect *rect);
-			void Flip();
-			int BoxRGBA(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-			int RectangleRGBA(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-			int FillRect( SDL_Rect *dstrect, Uint32 color);
-			int FillRect( SDL_Rect *r, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-			int ImgLoad( const char *filename );
-			inline bool IsNull( ){
-				return surface == NULL;
-			}
-			Surface Surface::RotoZoomXY(double angle, double zoomx, double zoomy, int smooth);
-			Surface Surface::DisplayFormatAlpha();
-			Surface Surface::DisplayFormat();
-	};
+  SDL_Surface *GetSurface();
+  int GetWidth() const;
+  int GetHeight() const;
+  int SetAlpha(Uint32 flags, Uint8 alpha);
+  Uint32 GetFlags();
+  int Lock();
+  void Unlock();
+  int Blit(SDL_Surface *src, SDL_Rect *srcRect, SDL_Rect *dstRect);
+  int Blit(Surface src, SDL_Rect *srcRect, SDL_Rect *dstRect);
+  int SetColorKey(Uint32 flag, Uint32 key);
+  int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  void SetClipRect(SDL_Rect *rect);
+  void Flip();
+  int BoxRGBA(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  int RectangleRGBA(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  int FillRect( SDL_Rect *dstrect, Uint32 color);
+  int FillRect( SDL_Rect *r, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  int ImgLoad( const char *filename );
+  inline bool IsNull( ){
+    return surface == NULL;
+  }
+  Surface Surface::RotoZoomXY(double angle, double zoomx, double zoomy, int smooth);
+  Surface Surface::DisplayFormatAlpha();
+  Surface Surface::DisplayFormat();
+};
 
-}
 #endif

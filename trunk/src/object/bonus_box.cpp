@@ -202,7 +202,7 @@ void BonusBox::NewBonusBox()
 {
   if (still_visible) return;
 
-  if (!enable || (Wormux::global_time.Read() < time)) {
+  if (!enable || (global_time.Read() < time)) {
     game_loop.SetState(gamePLAYING);
     return;
   }
@@ -277,7 +277,7 @@ void BonusBox::NewBonusBox()
   time = RandomLong(MIN_TIME_BETWEEN_CREATION, 
 			    MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
   time *= 1000;
-  time += Wormux::global_time.Read();
+  time += global_time.Read();
 
   SetMass (30);
   SetSpeed (SPEED, M_PI_2);

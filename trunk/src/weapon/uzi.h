@@ -26,8 +26,6 @@
 #include "weapon.h"
 #include "../include/base.h"
 
-namespace Wormux {
-
 class BalleUzi : public WeaponProjectile
 {
 public:
@@ -58,5 +56,4 @@ public:
 };
 
 extern Uzi uzi;
-} // namespace Wormux
 #endif

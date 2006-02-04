@@ -27,8 +27,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-namespace Wormux 
-{
 Suicide suicide;
 
 // Espace entre l'espace en l'image
@@ -92,4 +90,3 @@ ExplosiveWeaponConfig& Suicide::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

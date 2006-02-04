@@ -30,8 +30,6 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
-namespace Wormux {
-
 // Les fragments
 class Cluster : public WeaponProjectile
 {
@@ -93,5 +91,4 @@ protected:
 };
 
 extern LanceCluster lance_cluster;
-} // namespace Wormux
 #endif

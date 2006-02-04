@@ -41,7 +41,6 @@
 #include "../tool/i18n.h"
 #include "../weapon/weapons_list.h"
 
-using namespace Wormux;
 
 Game game;  // TODO: global variables are bad
 

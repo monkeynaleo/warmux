@@ -30,8 +30,6 @@
 #include "../tool/i18n.h"
 #include "../include/base.h"
 
-using namespace Wormux;
-
 Surface::Surface(){
 	surface = NULL;
 	autoFree = true;

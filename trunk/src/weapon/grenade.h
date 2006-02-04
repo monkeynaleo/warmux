@@ -30,8 +30,6 @@
 #include "../object/physical_obj.h"
 #include "weapon.h"
 
-namespace Wormux {
-
 // La Grenade
 class Grenade : public WeaponProjectile
 {
@@ -78,5 +76,4 @@ protected:
 };
 
 extern GrenadeLauncher lance_grenade;
-} // namespace Wormux
 #endif

@@ -34,8 +34,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
 TuxLauncher tux;
 
 const uint time_delta = 40;
@@ -70,8 +68,8 @@ void SuperTux::Tire()
   angle = ActiveTeam().crosshair.GetAngleRad();
   PutOutOfGround(angle);
   SetExternForce(tux.cfg().speed, angle);
-  time_next_action = Wormux::global_time.Read();
-  last_move = Wormux::global_time.Read();
+  time_next_action = global_time.Read();
+  last_move = global_time.Read();
   camera.ChangeObjSuivi((PhysicalObj*)this,true,true);
 }
 
@@ -102,11 +100,11 @@ void SuperTux::Refresh()
   if (TestImpact()) { SignalCollision(); return; }
 
   image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
-  if ((last_move+animation_deltat)<Wormux::global_time.Read())
+  if ((last_move+animation_deltat)<global_time.Read())
     {
       SetExternForce(tux.cfg().speed, angle);
       image->Update();
-      last_move = Wormux::global_time.Read();
+      last_move = global_time.Read();
   }
 
   particle_engine.AddPeriodic(GetX(),GetY(),angle, 0);
@@ -117,7 +115,7 @@ void SuperTux::Refresh()
 
 void SuperTux::turn_left()
 {  
-  time_now = Wormux::global_time.Read();
+  time_now = global_time.Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
@@ -130,7 +128,7 @@ void SuperTux::turn_left()
 
 void SuperTux::turn_right()
 {
-  time_now = Wormux::global_time.Read();
+  time_now = global_time.Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
@@ -265,4 +263,3 @@ SuperTuxWeaponConfig& TuxLauncher::cfg()
 { return static_cast<SuperTuxWeaponConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

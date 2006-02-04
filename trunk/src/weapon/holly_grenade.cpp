@@ -35,8 +35,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-
 HollyGrenadeLauncher holly_grenade_launcher;
 
 #ifdef DEBUG
@@ -83,7 +81,7 @@ void HollyGrenade::Tire (double force)
 #endif
 
   // Recupere le moment du départ
-  temps_debut_tir = Wormux::global_time.Read();
+  temps_debut_tir = global_time.Read();
   sing_alleluia = false;
 }
 
@@ -130,7 +128,7 @@ void HollyGrenade::Refresh()
   }
 
   //5 sec après avoir été tirée, la grenade explose
-  double tmp = Wormux::global_time.Read() - temps_debut_tir;
+  double tmp = global_time.Read() - temps_debut_tir;
   if(tmp>1000 * holly_grenade_launcher.cfg().timeout) {
     smoke_engine.Stop();
     is_active = false;
@@ -168,7 +166,7 @@ void HollyGrenade::Draw()
 
   image->Draw(GetX(),GetY());
   int tmp = holly_grenade_launcher.cfg().timeout;
-  tmp -= (int)((Wormux::global_time.Read() - temps_debut_tir) / 1000);
+  tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
@@ -259,4 +257,3 @@ GrenadeConfig& HollyGrenadeLauncher::cfg()
 { return static_cast<GrenadeConfig&>(*extra_params); }
 //-----------------------------------------------------------------------------
 
-} // namespace Wormux

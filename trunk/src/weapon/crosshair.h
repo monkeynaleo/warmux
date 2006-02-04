@@ -33,7 +33,7 @@ public:
   bool enable;
 
 private:
-  Wormux::Surface image;
+  Surface image;
   uint calcul_dx, calcul_dy;
 
   int angle;

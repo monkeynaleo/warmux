@@ -28,7 +28,6 @@
 #include "../weapon/mine.h"
 #include "bonus_box.h"
 #include <vector>
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 ListeObjets lst_objets;
 //-----------------------------------------------------------------------------

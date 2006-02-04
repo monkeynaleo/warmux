@@ -26,38 +26,32 @@
 #include "surface.h"
 #include "../include/base.h"
 
-namespace Wormux{
+class Video{
+  uint m_max_fps;     // If equals to zero, it means no limit
+  uint m_sleep_max_fps;
+  bool SDLReady;
+  bool fullscreen;
+  void SetWindowCaption(std::string caption);
+  void SetWindowIcon(std::string icon);
 
-	class Video{
+public:
+  Surface window;
+  void SetMaxFps (uint max_fps);
+  uint GetMaxFps();
+  uint GetSleepMaxFps();
 
-		private:
-			uint m_max_fps;     // If equals to zero, it means no limit
-			uint m_sleep_max_fps;
-			bool SDLReady;
+public:
+  Video();
+  ~Video();
 
-		public:
-			Surface window;
-			void SetMaxFps (uint max_fps);
-			uint GetMaxFps();
-			uint GetSleepMaxFps();
+  bool IsFullScreen(void) const;
 
-		private:
-			bool fullscreen;
-			void SetWindowCaption(std::string caption);
-			void SetWindowIcon(std::string icon);
+  bool SetConfig(int width, int height, bool fullscreen);
 
-		public:
-			Video();
-			~Video();
+  void InitWindow(void);
+  void InitSDL(void);
 
-			bool IsFullScreen(void) const;
+  void Flip(void);
+}; 
 
-			bool SetConfig(int width, int height, bool fullscreen);
-
-			void InitWindow(void);
-			void InitSDL(void);
-
-			void Flip(void);
-	};
-};
 #endif

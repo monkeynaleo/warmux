@@ -36,8 +36,8 @@ public:
   bool use_water;
   bool is_opened;
   bool infinite_bg;
-  Wormux::Surface preview;
-  Wormux::Surface img_terrain, img_ciel;
+  Surface preview;
+  Surface img_terrain, img_ciel;
   Profile *res_profile;
   std::string author_info;
   std::string m_directory;
@@ -57,8 +57,8 @@ private:
 
 public:
   InfoTerrain ();
-  Wormux::Surface LitImgTerrain();
-  Wormux::Surface LitImgCiel();
+  Surface LitImgTerrain();
+  Surface LitImgCiel();
   bool Init(const std::string &nom, const std::string &repertoire);
   bool DonneesChargees() const;
   void FreeData();

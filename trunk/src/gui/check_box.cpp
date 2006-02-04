@@ -26,7 +26,6 @@
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 
-using namespace Wormux;
 
 CheckBox::CheckBox (const std::string &label, int x, int y, uint w, bool value) :
   Widget(x, y, w, global().small_font().GetHeight()){

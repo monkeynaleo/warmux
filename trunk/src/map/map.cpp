@@ -33,8 +33,6 @@
 #include "../tool/i18n.h"
 #include "../tool/stats.h"
 
-using namespace std;
-using namespace Wormux;
 const double DST_MIN_ENTRE_VERS = 50.0;
 
 const uint AUTHOR_INFO_TIME = 5000; // ms

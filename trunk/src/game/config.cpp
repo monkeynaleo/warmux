@@ -45,8 +45,7 @@
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
 #include "../weapon/weapons_list.h"
-namespace Wormux 
-{
+
 Config config;
 
 const std::string NOMFICH="config.xml";
@@ -335,4 +334,3 @@ std::string Config::GetWormuxPersonalDir() const {
   return personal_dir;
 }
 
-}

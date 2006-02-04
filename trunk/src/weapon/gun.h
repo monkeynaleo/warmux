@@ -30,8 +30,6 @@
 #include "../include/base.h"
 #include "../tool/point.h"
 
-namespace Wormux {
-
 class BalleGun : public WeaponProjectile
 {
 public:
@@ -61,5 +59,4 @@ public:
 };
 
 extern Gun gun;
-} // namespace Wormux
 #endif

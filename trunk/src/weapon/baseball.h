@@ -25,8 +25,6 @@
 #include "../include/base.h"
 #include "weapon.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class BaseballConfig : public WeaponConfig
 {
@@ -53,5 +51,4 @@ class Baseball : public Weapon
 
 extern Baseball baseball;
 //-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif
