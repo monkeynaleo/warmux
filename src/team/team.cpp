@@ -22,6 +22,7 @@
 #include "team.h"
 #include "../game/game.h"
 #include "../game/game_mode.h"
+#include "../game/game_loop.h"
 #include "../interface/cursor.h"
 #include "../include/constant.h"
 #include "../game/config.h"
@@ -45,6 +46,27 @@ Team::Team()
   is_local = true;
   ver_actif = -1;
 }
+
+// ******* TODO: KILL THIS FUNCTIONS !!! ********
+
+Character& Team::operator[] (uint index)
+{
+  assert (index < vers.size());
+  iterator it=vers.begin();
+  for (uint i=0; i<index; ++i) ++it;
+  return *it;
+}
+
+const Character& Team::operator[] (uint index) const
+{
+  assert (index < vers.size());
+  const_iterator it=vers.begin();
+  for (uint i=0; i<index; ++i) ++it;
+  return *it;
+}
+
+// ******* end of TODO: KILL THIS FUNCTIONS !!! ********
+
 
 bool Team::Init (const std::string &teams_dir, const std::string &id)
 {
@@ -87,8 +109,8 @@ uint Team::LitEnergie ()
 {
   uint total_energie = 0;
   for (int index=0; index < vers_fin; ++index) {
-    if( !vers[index].IsDead() )
-      total_energie += vers[index].GetEnergy();
+    if( !(*this)[index].IsDead() )
+      total_energie += (*this)[index].GetEnergy();
   }
   return total_energie;
 }
@@ -145,7 +167,7 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
     }
 
     // Initialise les variables du ver, puis l'ajoute à la liste
-    Character new_character;
+    Character new_character(game_loop);
     vers.push_back(new_character);
     vers.back().InitTeam (this, character_name, skin);
 
@@ -170,7 +192,7 @@ int Team::NextCharacterIndex()
   { 
     ++copy;
     if (copy == vers_fin) copy = 0;
-  } while (vers[copy].IsDead());
+  } while ((*this)[copy].IsDead());
   return copy;
 }
 
@@ -200,7 +222,7 @@ int Team::NbAliveCharacter() const
 {
   uint nbr = 0;
   for (int index=0; index < vers_fin; ++index)
-    if (!vers[index].IsDead()) ++nbr;
+    if (!(*this)[index].IsDead()) ++nbr;
   return nbr;
 }
 
@@ -208,7 +230,7 @@ void Team::SelectCharacterIndex (uint index)
 {
   // Ver mort ?
   assert (index < vers.size());
-  if (vers.at(index).IsDead()) {
+  if ((*this)[index].IsDead()) {
     int i = (++index)%vers.size();
     SelectCharacterIndex(i);
     return;
@@ -216,9 +238,9 @@ void Team::SelectCharacterIndex (uint index)
 
   // Change de ver
   if(ver_actif != -1)
-    vers.at(ver_actif).StopPlaying();
+    (*this)[ver_actif].StopPlaying();
   ver_actif = index;
-  vers.at(ver_actif).StartPlaying();
+  (*this)[ver_actif].StartPlaying();
   camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
   curseur_ver.SuitVerActif();
 }
@@ -261,8 +283,7 @@ int Team::ActiveCharacterIndex() const
 
 Character& Team::ActiveCharacter()
 { 
-  assert ((uint)ver_actif < vers.size());
-  return vers.at(ver_actif);
+  return (*this)[ver_actif];
 }
 
 // Change d'arme

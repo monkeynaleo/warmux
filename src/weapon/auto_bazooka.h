@@ -38,7 +38,7 @@ protected:
   Point2i m_cible;
   bool m_attire;
 public:
-  RoquetteTeteCherche();
+  RoquetteTeteCherche(GameLoop &game_loop);
   void Tire (double force, uint cible_x,uint cible_y);
   uint ChoixFrame(double angle);
   void Init();

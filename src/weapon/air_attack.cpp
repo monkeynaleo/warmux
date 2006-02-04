@@ -43,7 +43,8 @@ const uint FORCE_Y_MAX = 40;
 
 const double OBUS_SPEED = 7 ;
 
-Obus::Obus() : WeaponProjectile("Obus")
+Obus::Obus(GameLoop &p_game_loop) :
+  WeaponProjectile(p_game_loop, "Obus")
 {}
 
 void Obus::Draw()
@@ -88,7 +89,8 @@ void Obus::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-Avion::Avion() : PhysicalObj("Avion", 0.0)
+Avion::Avion(GameLoop &p_game_loop) : 
+  PhysicalObj(p_game_loop, "Avion", 0.0)
 {
   m_type = objUNBREAKABLE;
   SetWindFactor(0.0);
@@ -167,7 +169,9 @@ bool Avion::PeutLacherObus() const
 
 //-----------------------------------------------------------------------------
 
-AirAttack::AirAttack() : Weapon(WEAPON_AIR_ATTACK, "air_attack")
+AirAttack::AirAttack() :
+  Weapon(WEAPON_AIR_ATTACK, "air_attack"),
+  avion(game_loop)
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
@@ -214,7 +218,7 @@ void AirAttack::Refresh()
       std::ostringstream ss;
       ss.str("");
       ss << "Obus(" << i << ')';
-      instance = new Obus();
+      instance = new Obus(game_loop);
       instance -> Init();
       instance -> m_name = ss.str();
       instance -> Reset();

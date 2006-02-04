@@ -38,7 +38,7 @@ protected:
 
   ParticleEngine smoke_engine;
 public:
-  HollyGrenade();
+  HollyGrenade(GameLoop &game_loop);
   void Tire (double force);
   void Init();
   void Refresh();

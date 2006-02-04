@@ -55,7 +55,7 @@ private:
   Character *ver_declancheur;
 
 public:
-  ObjMine();
+  ObjMine(GameLoop &game_loop);
   void Init();
   void Reset();
   void Explosion ();

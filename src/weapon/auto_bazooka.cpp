@@ -50,8 +50,8 @@ const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
 
-RoquetteTeteCherche::RoquetteTeteCherche() 
-  : WeaponProjectile("roquette tete chercheuse")
+RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop) :
+  WeaponProjectile(p_game_loop, "roquette tete chercheuse")
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
@@ -154,7 +154,9 @@ void RoquetteTeteCherche::SetTarget (int x, int y)
 
 //-----------------------------------------------------------------------------
 
-AutomaticBazooka::AutomaticBazooka() : Weapon(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka")
+AutomaticBazooka::AutomaticBazooka() : 
+  Weapon(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka"),
+  roquette(game_loop)
 {  
   m_name = _("Automatic bazooka");
 

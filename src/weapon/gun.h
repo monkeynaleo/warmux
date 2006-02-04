@@ -35,7 +35,7 @@ namespace Wormux {
 class BalleGun : public WeaponProjectile
 {
 public:
-  BalleGun();
+  BalleGun(GameLoop &game_loop);
   void Tire();
   void Init();
 protected:

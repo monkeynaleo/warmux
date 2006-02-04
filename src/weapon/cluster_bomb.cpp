@@ -45,7 +45,8 @@ LanceCluster lance_cluster;
 #define COUT_DBG std::cout << "[ClusterBomb] "
 #endif
 
-Cluster::Cluster() : WeaponProjectile ("Cluster")
+Cluster::Cluster(GameLoop &p_game_loop) :
+  WeaponProjectile (p_game_loop, "Cluster")
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
@@ -99,17 +100,13 @@ void Cluster::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-ClusterBomb::ClusterBomb() : WeaponProjectile ("cluster_bomb")
+ClusterBomb::ClusterBomb(GameLoop &p_game_loop) :
+  WeaponProjectile (p_game_loop, "cluster_bomb")
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/grenade_bounce";
   touche_ver_objet = false;
   m_rebounding = true;
-}
-
-ClusterBomb::~ClusterBomb()
-{
-  delete []tableau_cluster;
 }
 
 void ClusterBomb::Tire (double force)
@@ -153,9 +150,15 @@ void ClusterBomb::Init()
   COUT_DBG << "ClusterBomb::Init()" << std::endl;
 #endif
 
-  tableau_cluster = new Cluster[lance_cluster.cfg().nbr_fragments];
-  for(uint i=0;i<lance_cluster.cfg().nbr_fragments;i++)
-    tableau_cluster[i].Init();
+
+  tableau_cluster.clear();
+  const uint nb = lance_cluster.cfg().nbr_fragments;
+  for (uint i=0; i<nb; ++i)
+  {
+    Cluster cluster(game_loop);
+    cluster.Init();
+    tableau_cluster.push_back( cluster );
+  }
 }
 
 void ClusterBomb::Refresh()
@@ -182,15 +185,18 @@ void ClusterBomb::Refresh()
 
     GetSpeedXY(speed_vector);
 
-    for(uint i=0;i<lance_cluster.cfg().nbr_fragments;i++)
+    iterator it=tableau_cluster.begin(), end=tableau_cluster.end();
+    for (; it != end; ++it)
     {
+      Cluster &cluster = *it;
+      
       double angle = (double)RandomLong ((long)0.0, (long)(2.0 * M_PI));
       x = GetX()+(int)(cos(angle) * (double)lance_cluster.cfg().blast_range*5);
       y = GetY()+(int)(sin(angle) * (double)lance_cluster.cfg().blast_range*5);
 
-      tableau_cluster[i].Tire(x,y);
-      tableau_cluster[i].SetSpeedXY(speed_vector);
-      lst_objets.AjouteObjet((PhysicalObj*)&tableau_cluster[i],false);
+      cluster.Tire(x,y);
+      cluster.SetSpeedXY(speed_vector);
+      lst_objets.AjouteObjet((PhysicalObj*)&cluster,false);
     }
     is_active = false;
     return;
@@ -236,7 +242,9 @@ void ClusterBomb::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-LanceCluster::LanceCluster() : Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb")
+LanceCluster::LanceCluster() : 
+  Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb"),
+  cluster_bomb(game_loop)
 {  
   m_name = _("ClusterBomb");  
 

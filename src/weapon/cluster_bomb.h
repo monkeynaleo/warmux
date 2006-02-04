@@ -23,6 +23,7 @@
 #ifndef CLUSTER_BOMB_H
 #define CLUSTER_BOMB_H
 
+#include <list>
 #include "weapon.h"
 #include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
@@ -35,7 +36,7 @@ namespace Wormux {
 class Cluster : public WeaponProjectile
 {
 public:
-  Cluster();
+  Cluster(GameLoop &game_loop);
   void Init();
   void Draw();
   void Refresh();
@@ -50,10 +51,10 @@ class ClusterBomb : public WeaponProjectile
 protected:
   double temps_debut_tir;
 public:
-  Cluster* tableau_cluster;
+  std::list<Cluster> tableau_cluster;
+  typedef std::list<Cluster>::iterator iterator;
 
-  ClusterBomb();
-  ~ClusterBomb();
+  ClusterBomb(GameLoop &game_loop);
   void Tire (double force);
   void Init();
   void Draw();

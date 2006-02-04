@@ -52,7 +52,8 @@ GrenadeLauncher lance_grenade;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Grenade::Grenade() : WeaponProjectile ("grenade")
+Grenade::Grenade(GameLoop &p_game_loop) :
+  WeaponProjectile (p_game_loop, "grenade")
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/grenade_bounce";
@@ -178,7 +179,9 @@ void Grenade::SignalCollision()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-GrenadeLauncher::GrenadeLauncher() : Weapon(WEAPON_GRENADE, "grenade")
+GrenadeLauncher::GrenadeLauncher() : 
+  Weapon(WEAPON_GRENADE, "grenade"),
+  grenade(game_loop)
 {  
   m_name = _("Grenade");
  

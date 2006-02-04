@@ -43,7 +43,8 @@ const uint VITESSE_CAPTURE_POS_BALLE = 10;
 const uint BULLET_SPEED = 20;
 const double BULLET_BLAST = 1;
 
-BalleGun::BalleGun() : WeaponProjectile("balle_gun")
+BalleGun::BalleGun(GameLoop &p_game_loop) :
+  WeaponProjectile(p_game_loop, "balle_gun")
 { 
   touche_ver_objet = true; 
 }
@@ -80,7 +81,9 @@ void BalleGun::SignalCollision()
   is_active = false; 
 }
 
-Gun::Gun() : Weapon(WEAPON_GUN, "gun")
+Gun::Gun() :
+  Weapon(WEAPON_GUN, "gun"),
+  balle(game_loop)
 {
   m_name = _("Gun");
   extra_params = new WeaponConfig(); 

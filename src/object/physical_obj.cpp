@@ -61,10 +61,11 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
 
 //-----------------------------------------------------------------------------
 
-PhysicalObj::PhysicalObj (const std::string &name, double mass)
-  : m_name(name),
-    m_width(0),
-    m_height(0)
+PhysicalObj::PhysicalObj (GameLoop &p_game_loop, const std::string &name, double mass) :
+  Physics(p_game_loop),
+  m_name(name),
+  m_width(0),
+  m_height(0)
 {
   m_type = objCLASSIC;
 //  m_moving = false;

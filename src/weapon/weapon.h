@@ -74,7 +74,7 @@ protected:
   bool touche_ver_objet;
 
 public:
-  WeaponProjectile(const std::string &nom);
+  WeaponProjectile(GameLoop &game_loop, const std::string &nom);
   virtual void Draw();
   virtual void Refresh();
   virtual void Reset() ;

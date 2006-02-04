@@ -48,7 +48,8 @@ using namespace Wormux;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Gnu::Gnu() : PhysicalObj ("Gnu!")
+Gnu::Gnu(GameLoop &p_game_loop) : 
+  PhysicalObj (p_game_loop, "Gnu!")
 {
   m_allow_negative_y = true;
 }
@@ -212,7 +213,9 @@ void Gnu::Reset()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-GnuLauncher::GnuLauncher() : Weapon(WEAPON_GNU, "gnulauncher")
+GnuLauncher::GnuLauncher() : 
+  Weapon(WEAPON_GNU, "gnulauncher"),
+  gnu(game_loop)
 {
   m_name = _("GnuLauncher");
   extra_params = new GrenadeConfig();

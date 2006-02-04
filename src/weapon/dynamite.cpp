@@ -41,8 +41,9 @@ namespace Wormux {
   //  #define DEBUG_CADRE_TEST
 #endif
 
-BatonDynamite::BatonDynamite(Dynamite &p_dynamite) 
-  : WeaponProjectile("baton de dynamite"), dynamite(p_dynamite)
+BatonDynamite::BatonDynamite(GameLoop &p_game_loop, Dynamite &p_dynamite) :
+  WeaponProjectile(p_game_loop, "baton de dynamite"),
+  dynamite(p_dynamite)
 {}
 
 void BatonDynamite::Init()
@@ -67,7 +68,6 @@ void BatonDynamite::Init()
     ; // TODO explosion.set_frame_delay(i, delay) ;
 
   explosion->Start();
-  
 }
 
 void BatonDynamite::Reset()
@@ -123,8 +123,9 @@ void BatonDynamite::SignalGhostState (bool) { is_active = false; }
 
 //-----------------------------------------------------------------------------
 
-Dynamite::Dynamite() 
-  : Weapon(WEAPON_DYNAMITE, "dynamite"), baton(*this)
+Dynamite::Dynamite() :
+  Weapon(WEAPON_DYNAMITE, "dynamite"), 
+  baton(game_loop, *this)
 {
   m_name = _("Dynamite");
   extra_params = new DynamiteConfig();

@@ -68,8 +68,8 @@ const uint WEAPON_BOX_BUTTON_DY = 50;
 extern WeaponStrengthBar weapon_strength_bar;
 using namespace Wormux;
 
-WeaponProjectile::WeaponProjectile (const std::string &name)
-  : PhysicalObj (name, 0.0)
+WeaponProjectile::WeaponProjectile (GameLoop &p_game_loop, const std::string &name)
+  : PhysicalObj (p_game_loop, name, 0.0)
 {
   dernier_ver_touche = NULL;
   dernier_obj_touche = NULL;

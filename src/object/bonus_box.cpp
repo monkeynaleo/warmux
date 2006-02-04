@@ -68,11 +68,11 @@ const uint BONUS_AIR_ATTACK=1;
 const uint BONUS_AUTO_BAZOOKA=5;
 
 //-----------------------------------------------------------------------------
-BonusBox bonus_box;
+BonusBox bonus_box(game_loop);
 //-----------------------------------------------------------------------------
 
-BonusBox::BonusBox()
-  : PhysicalObj("BonusBox", 0.0)
+BonusBox::BonusBox(GameLoop &p_game_loop)
+  : PhysicalObj(p_game_loop, "BonusBox", 0.0)
 {
   SetTestRect (29, 29, 63, 6);
   m_allow_negative_y = true;
