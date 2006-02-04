@@ -50,6 +50,5 @@ public:
   void Draw();
 };
 
-extern FramePerSecond image_par_seconde;
 //-----------------------------------------------------------------------------
 #endif

@@ -32,8 +32,6 @@
 
 const uint FramePerSecond::MIN_NB_VALUES = 4;
   
-FramePerSecond image_par_seconde;
-  
 FramePerSecond::~FramePerSecond(){
   delete text;
 }    
