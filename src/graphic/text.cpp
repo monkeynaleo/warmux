@@ -42,13 +42,9 @@ Text::Text(const std::string &new_txt, SDL_Color new_color,
   this->shadowed = shadowed;
 
   if( shadowed ){
-    int width=-1;
-    
-    TTF_SizeUTF8( font->m_font, "x", &width, NULL );
+    int width = font->GetWidth("x");
     bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
-    
-    if (bg_offset < 1)
-      bg_offset = 1;
+    if (bg_offset < 1) bg_offset = 1;
   }
   else
     bg_offset = 0;
@@ -60,10 +56,9 @@ Text::~Text(){
 }
 
 void Text::Render(){
-  surf.SetSurface( TTF_RenderUTF8_Blended(font->m_font, txt.c_str(), color) );
-	
+  surf = font->CreateSurface(txt, color);
   if( shadowed )
-    background.SetSurface( TTF_RenderUTF8_Blended(font->m_font, txt.c_str(),black_color) );
+    background = font->CreateSurface(txt, black_color);
 }
 
 void Text::Set(const std::string &new_txt){

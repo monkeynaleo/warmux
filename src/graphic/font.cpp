@@ -30,14 +30,6 @@
 #include "../tool/error.h"
 #include "../tool/file_tools.h"
 
-bool Font::InitAllFonts(){ 
-  return true;
-}
-
-Font::Font(){ 
-  m_font = NULL; 
-}
-
 Font::Font(int size) { 
   m_font = NULL;
   bool ok = Load(Wormux::config.ttf_filename, size);
@@ -80,42 +72,53 @@ bool Font::Load (const std::string& filename, int size) {
   return true;
 }
 
-void Font::WriteLeft (int x, int y, const std::string &txt, 
-		      SDL_Color color){ 
-	Wormux::Surface text_surface = Render(txt.c_str(), color, true);
+void Font::Write(int x, int y, Wormux::Surface &surface){
   SDL_Rect dst_rect;
-
   dst_rect.x = x;
   dst_rect.y = y;
-  dst_rect.h = text_surface.GetHeight();
-  dst_rect.w = text_surface.GetWidth();
+  dst_rect.h = surface.GetHeight();
+  dst_rect.w = surface.GetWidth();
+  app.video.window.Blit( surface, NULL, &dst_rect );
 
-  app.video.window.Blit( text_surface, NULL, &dst_rect );
+  // TODO: Remove this line! (and use GameFont instead of Font)
   world.ToRedrawOnScreen( Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h) );
+}
+
+void Font::WriteLeft (int x, int y, const std::string &txt, SDL_Color color){
+  Wormux::Surface surface( Render(txt, color, true) );
+  Write(x, y, surface);
 }
 
 void Font::WriteLeftBottom (int x, int y, const std::string &txt,
 			    SDL_Color color){ 
-  WriteLeft(x, y - GetHeight(), txt, color);
+  Wormux::Surface surface( Render(txt, color, true) );
+  Write(x, y - surface.GetHeight(), surface);
 }
 
 void Font::WriteRight (int x, int y, const std::string &txt,
 		       SDL_Color color){ 
-  WriteLeft(x - GetWidth(txt), y, txt, color);
+  Wormux::Surface surface( Render(txt, color, true) );
+  Write(x - surface.GetWidth(), y, surface);
 }
 
 void Font::WriteCenter (int x, int y, const std::string &txt,
 			SDL_Color color){ 
-  WriteLeft( x - GetWidth(txt)/2, y - GetHeight()/2, txt, color);
+  Wormux::Surface surface( Render(txt, color, true) );
+  Write( x - surface.GetWidth()/2, y - surface.GetHeight(), surface);
 }
 
 void Font::WriteCenterTop (int x, int y, const std::string &txt,
 			   SDL_Color color){
-  WriteLeft( x - GetWidth(txt) / 2, y, txt, color);
+  Wormux::Surface surface( Render(txt, color, true) );
+  Write( x - surface.GetWidth() / 2, y, surface);
+}
+
+Wormux::Surface Font::CreateSurface(const std::string &txt, SDL_Color color){
+  return TTF_RenderUTF8_Blended(m_font, txt.c_str(), color);
 }
 
 Wormux::Surface Font::Render(const std::string &txt, SDL_Color color, bool cache){
-	Wormux::Surface surface;
+  Wormux::Surface surface;
   
   if( cache ){
     txt_iterator p = surface_text_table.find(txt);
@@ -124,17 +127,16 @@ Wormux::Surface Font::Render(const std::string &txt, SDL_Color color, bool cache
         //SDL_FreeSurface( surface_text_table.begin()->second );
         surface_text_table.erase( surface_text_table.begin() );
       }
-      surface.SetSurface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color) );
+      surface = CreateSurface(txt, color);
       surface_text_table.insert( txt_sample(txt, surface) );
     } else {
       txt_iterator p = surface_text_table.find( txt );
       surface = p->second;
     }
   } else
-    surface.SetSurface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color) );
+    surface = CreateSurface(txt, color);
   
   assert (surface.GetSurface() != NULL);
-
   return surface;
 }
 
@@ -157,4 +159,44 @@ int Font::GetHeight (const std::string &str){
 
   return height;
 }
+
+//-----------------------------------------------------------------------------
+
+GameFont::GameFont(GameLoop &p_game_loop, int size) :
+  Font(size),
+  game_loop(p_game_loop)
+{}
+
+/*void GameFont::Write(int x, int y, Wormux::Surface &surface)
+{
+  SDL_Rect dst_rect;
+  dst_rect.x = x;
+  dst_rect.y = y;
+  dst_rect.h = surface->h;
+  dst_rect.w = surface->w;
+  SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
+  game_loop.world.ToRedrawOnScreen(Rectanglei(dst_rect.x,dst_rect.y, dst_rect.w, dst_rect.h));
+}*/
+
+void GameFont::Write(int x, int y, Wormux::Surface &surface){
+  SDL_Rect dst_rect;
+  dst_rect.x = x;
+  dst_rect.y = y;
+  dst_rect.h = surface.GetHeight();
+  dst_rect.w = surface.GetWidth();
+  app.video.window.Blit( surface, NULL, &dst_rect );
+  world.ToRedrawOnScreen( Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h) );
+}
+
+//-----------------------------------------------------------------------------
+
+Fonts::Fonts(GameLoop &game_loop) :
+  huge(game_loop, 40),
+  large(game_loop, 32),
+  big(game_loop, 24),
+  normal(game_loop, 16),
+  small(game_loop, 12),
+  tiny(game_loop, 8)
+{}
+
 
