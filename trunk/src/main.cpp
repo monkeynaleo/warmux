@@ -163,8 +163,6 @@ void AppWormux::DisplayLoadingPicture(){
 void AppWormux::InitFonts(){
   if( TTF_Init() == -1 )
     Error( Format( _("Initialisation of TTF library failed: %s"), TTF_GetError() ) );
-  if( !Font::InitAllFonts() )
-    Error( _("Unable to initialise the fonts.") );
   createGlobal();
 }
 

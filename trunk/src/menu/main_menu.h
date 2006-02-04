@@ -44,7 +44,6 @@ typedef enum
 
 class Main_Menu
 {
-private:
   Sprite *background, *skin_left, *skin_right, *title;
   ButtonText *play, *network, *options, *infos, *quit;
   Text * version_text, * website_text;
@@ -54,6 +53,7 @@ private:
   int title_y, skinl_y, skinr_y;
   bool anim_finished;
   FramePerSecond fps;
+  Font normal_font, large_font;
   
 public:
   menu_item choice;

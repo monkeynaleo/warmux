@@ -112,7 +112,10 @@ bool Main_Menu::sig_infos(){
 bool Main_Menu::sig_quit(){ 
   choice=menuQUIT;return true; }
 
-Main_Menu::Main_Menu(){
+Main_Menu::Main_Menu() :
+  normal_font(16),
+  large_font(32)
+{
   int x_button;
   double y_scale;
 
@@ -147,14 +150,14 @@ Main_Menu::Main_Menu(){
   play = new ButtonText(x_button,(uint)(y * y_scale),//Position
 			res, "main_menu/button",
 			_("Play"),
-			&global().large_font());
+			&large_font);
   y += dy;
 
 #ifdef NETWORK_BUTTON  
   network = new ButtonText(x_button,(int)(y * y_scale), //Position
 			   res, "main_menu/button",
 			   _("Network Game"),
-			   &global().large_font() );
+			   &large_font );
   y += dy;
 #else
   network = NULL;
@@ -163,27 +166,27 @@ Main_Menu::Main_Menu(){
   options = new ButtonText(x_button,(int)(y * y_scale), //Position
 			   res, "main_menu/button",
 			   _("Options"),
-			   &global().large_font());
+			   &large_font);
   y += dy;
 
   infos =  new ButtonText(x_button,(int)(y * y_scale), //Position
 			  res, "main_menu/button",
 			  _("Credits"),
-			  &global().large_font());
+			  &large_font);
   y += dy;
 
   quit =  new ButtonText(x_button,(int)(y * y_scale), //Position
 			 res, "main_menu/button",
 			 _("Quit"),
-			 &global().large_font());
+			 &large_font);
 
   resource_manager.UnLoadXMLProfile( res);
 
   std::string s("Version "+VERSION);
-  version_text = new Text(s, green_color, &global().normal_font(), false);
+  version_text = new Text(s, green_color, &normal_font, false);
 
   std::string s2(WEB_SITE);
-  website_text = new Text(s2, green_color, &global().normal_font(), false);
+  website_text = new Text(s2, green_color, &normal_font, false);
 }
 
 void Main_Menu::onClick ( int x, int y, int button)
