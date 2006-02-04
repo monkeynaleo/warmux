@@ -24,8 +24,9 @@
 #define MAIN_MENU_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#include "../gui/button_text.h"
+#include "../graphic/fps.h"
 #include "../graphic/sprite.h"
+#include "../gui/button_text.h"
 #include <SDL.h>
 #include <vector>
 //-----------------------------------------------------------------------------
@@ -52,6 +53,8 @@ private:
   uint button_height, button_width, title_offset, skin_offset;
   int title_y, skinl_y, skinr_y;
   bool anim_finished;
+  FramePerSecond fps;
+  
 public:
   menu_item choice;
 

@@ -204,7 +204,7 @@ menu_item Main_Menu::Run ()
 
   background->ScaleSize(app.video.window.GetWidth(), app.video.window.GetHeight());
   EraseAll(); //Display background
-  image_par_seconde.Reset();
+  fps.Reset();
   start_time = global_time.Read();
   last_refresh = start_time;
   anim_finished = false;
@@ -246,9 +246,9 @@ menu_item Main_Menu::Run ()
   Draw(x, y);
 
   last_refresh = global_time.Read();
-  image_par_seconde.Refresh();
-  image_par_seconde.Draw();
-  image_par_seconde.AddOneFrame();
+  fps.Refresh();
+  fps.AddOneFrame();
+  fps.Draw();
   app.video.Flip();
 
   //fps limiter

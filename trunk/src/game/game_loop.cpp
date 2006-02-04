@@ -134,7 +134,7 @@ void InitGameData_NetServer()
   curseur_ver.Reset();
   global_time.Reset();
   mouse.Reset();
-  image_par_seconde.Reset();
+  fps.Reset();
   interface.Reset();
   game_messages.Reset();
   
@@ -194,7 +194,7 @@ void InitGameData_Local()
   lst_objets.Reset();
 }
 
-void InitGameData()
+void InitGameData(GameLoop &game_loop)
 {
   global_time.Reset();
   
@@ -211,13 +211,13 @@ void InitGameData()
   mouse.Reset();
   clavier.Reset();
    
-  image_par_seconde.Reset();
+  game_loop.fps.Reset();
   interface.Reset();
   game_messages.Reset();
   bonus_box.Init();
 }
 
-void InitGame ()
+void InitGame (GameLoop &game_loop)
 {
   // Display loading screen
   Sprite * loading_image=new Sprite(IMG_Load((config.data_dir+"menu/img/loading.png").c_str()));
@@ -240,7 +240,7 @@ void InitGame ()
     game_initialise = true;
   }
 
-  InitGameData();
+  InitGameData(game_loop);
 
   // Init teams
 
@@ -317,7 +317,7 @@ void GameLoop::Refresh()
      }
    
   // How many frame by seconds ?
-  image_par_seconde.Refresh();
+  fps.Refresh();
 
   //--- D'abord ce qui pourrait modifier les données d'un ver ---
 
@@ -397,7 +397,7 @@ void GameLoop::Draw ()
 
   world.DrawAuthorName();
 
-  image_par_seconde.Draw();
+  fps.Draw();
 
   StatStop("GameDraw:other");
 
@@ -413,7 +413,7 @@ void GameLoop::Draw ()
   StatStop("GameDraw:end");
 
   // Add one frame to the fps counter ;-)
-  image_par_seconde.AddOneFrame();
+  fps.AddOneFrame();
 }
 
 void GameLoop::CallDraw()

@@ -122,12 +122,12 @@ void Game::Start()
 
   try
   {
-    InitGame ();
+    InitGame (game_loop);
 
     do
     {
       isGameLaunched = true;
-      image_par_seconde.Reset();
+      game_loop.fps.Reset();
       
       game_loop.Run();
      
