@@ -24,90 +24,89 @@
 #include <SDL.h>
 #include <sstream>
 #include <iomanip>
+#include "../include/app.h"
+#include "../tool/i18n.h"
 #include "colors.h"
 #include "video.h"
 #include "text.h"
-#include "../include/app.h"
-#include "../tool/i18n.h"
 
-const uint NBR_VAL = 4; // nombre de valeurs utilisées pour calculer la moyenne
-
-ImageParSeconde image_par_seconde;
+const uint FramePerSecond::MIN_NB_VALUES = 4;
   
-ImageParSeconde::~ImageParSeconde(){
-  delete fps_txt;
+FramePerSecond image_par_seconde;
+  
+FramePerSecond::~FramePerSecond(){
+  delete text;
 }    
 
-ImageParSeconde::ImageParSeconde(){
-  fps_txt = NULL;
-  affiche = true;
-  moyenne = -1;
+FramePerSecond::FramePerSecond(){
+  text = NULL;
+  display = true;
+  average = -1;
   
-  for( uint i=0; i<=NBR_VAL; ++i )
-    nbr_img.push_back (0);
+  for( uint i=0; i<=MIN_NB_VALUES; ++i )
+    nb_frames.push_back (0);
   
-  temps_seconde = 0;
-  nbr_val_valides = -1;
+  time_in_second = 0;
+  nb_valid_values = -1;
 }
 
-void ImageParSeconde::Reset(){
-  moyenne = -1;
-  nbr_img.clear();
+void FramePerSecond::Reset(){
+  average = -1;
+  nb_frames.clear();
   
-  for( uint i=0; i<=NBR_VAL; ++i )
-    nbr_img.push_back (0);
+  for( uint i=0; i<=MIN_NB_VALUES; ++i )
+    nb_frames.push_back (0);
   
-  temps_seconde = SDL_GetTicks()+1000;
-  nbr_val_valides = -1;
+  time_in_second = SDL_GetTicks()+1000;
+  nb_valid_values = -1;
 
-  if(fps_txt == NULL)
-    fps_txt = new Text("");
+  if(text == NULL)
+    text = new Text("");
 }
 
-void ImageParSeconde::AjouteUneImage(){
-  ++nbr_img.front();
+void FramePerSecond::AddOneFrame(){
+  ++nb_frames.front();
 }
 
-void ImageParSeconde::Refresh()
+void FramePerSecond::Refresh()
 {
   uint nv_temps = SDL_GetTicks();   
    
   // Pas encore l'heure de recalculer : exit !
-  if (nv_temps <= temps_seconde)
+  if (nv_temps <= time_in_second)
     return;
 
   // On décale !
-  while (temps_seconde < nv_temps){
-    temps_seconde += 1000;
-    nbr_img.pop_back();
-    nbr_img.push_front(0);
-    if (nbr_val_valides < (int)nbr_img.size()-1)
-      nbr_val_valides++;
+  while (time_in_second < nv_temps){
+    time_in_second += 1000;
+    nb_frames.pop_back();
+    nb_frames.push_front(0);
+    if (nb_valid_values < (int)nb_frames.size()-1)
+      nb_valid_values++;
   }
 
-  // Recalcule la moyenne
-  if (0 < nbr_val_valides){
-    moyenne = 0;
-    std::list<uint>::const_iterator it=nbr_img.begin();
+  // Recalcule la average
+  if (0 < nb_valid_values){
+    average = 0;
+    std::list<uint>::const_iterator it=nb_frames.begin();
     ++it;
-    for (int i=1; i<=nbr_val_valides; ++i, ++it)
-      moyenne += *it;
-    moyenne /= nbr_val_valides;
+    for (int i=1; i<=nb_valid_values; ++i, ++it)
+      average += *it;
+    average /= nb_valid_values;
   }
 }
 
-void ImageParSeconde::Draw(){
-  if( !affiche )
+void FramePerSecond::Draw(){
+  if( !display )
     return;
-  if( moyenne < 0 )
+  if( average < 0 )
     return;
   
   char buffer[20];
   
-  snprintf(buffer, sizeof(buffer)-1, "%.1f", moyenne);
+  snprintf(buffer, sizeof(buffer)-1, "%.1f", average);
   buffer[sizeof(buffer)-1] = '\0';
-  std::string text = Format(_("%s fps"),buffer);
-  fps_txt->Set( text );
-  fps_txt->DrawTopRight(app.video.window.GetWidth()-1,0);
+  text->Set (Format(_("%s fps"), buffer));
+  text->DrawTopRight(app.video.window.GetWidth()-1,0);
 }
 

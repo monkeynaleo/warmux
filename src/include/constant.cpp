@@ -22,7 +22,7 @@
 #include "constant.h"
 namespace Wormux {
 
-const std::string VERSION("0.7beta3");
+const std::string VERSION("0.7beta3 (" __DATE__ ")");
 
 #ifndef INSTALL_DATADIR
 #  define INSTALL_DATADIR "data/"
