@@ -413,7 +413,7 @@ void GameLoop::Draw ()
   StatStop("GameDraw:end");
 
   // Add one frame to the fps counter ;-)
-  image_par_seconde.AjouteUneImage();
+  image_par_seconde.AddOneFrame();
 }
 
 void GameLoop::CallDraw()

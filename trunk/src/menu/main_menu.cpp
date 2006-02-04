@@ -248,7 +248,7 @@ menu_item Main_Menu::Run ()
   last_refresh = global_time.Read();
   image_par_seconde.Refresh();
   image_par_seconde.Draw();
-  image_par_seconde.AjouteUneImage();
+  image_par_seconde.AddOneFrame();
   app.video.Flip();
 
   //fps limiter
