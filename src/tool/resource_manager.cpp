@@ -63,11 +63,11 @@ void ResourceManager::AddDataPath( std::string base_path)
    this->base_path = base_path;
 }
 
-Wormux::Surface ResourceManager::LoadImage( const std::string filename, 
+Surface ResourceManager::LoadImage( const std::string filename, 
         bool alpha, bool set_colorkey, Uint32 colorkey)
 {
-  Wormux::Surface pre_surface = Wormux::Surface( filename.c_str() );
-  Wormux::Surface end_surface;
+  Surface pre_surface = Surface( filename.c_str() );
+  Surface end_surface;
   
   if( set_colorkey ) 
     end_surface.SetColorKey( SDL_SRCCOLORKEY, colorkey);
@@ -140,7 +140,7 @@ xmlpp::Element * ResourceManager::GetElement( const Profile *profile, const std:
    return elem;   
 }
 
-Wormux::Surface ResourceManager::LoadImage( const Profile *profile, const std::string resource_name)
+Surface ResourceManager::LoadImage( const Profile *profile, const std::string resource_name)
 {     
   xmlpp::Element *elem = GetElement ( profile, "surface", resource_name);
   if ( elem == NULL)
@@ -184,7 +184,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
   if ( elem_grid == NULL )
   {
     // No grid element, Load the Sprite like a normal image
-    Wormux::Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
+    Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
     sprite->Init( surface, surface.GetWidth(), surface.GetHeight(), 1, 1);
   }
@@ -223,7 +223,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
     else
       Error("ResourceManager: can't load (sprite) resource "+resource_name);
 
-	Wormux::Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
+	Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
     sprite->Init( surface, frame_width, frame_height, nb_frames_x, nb_frames_y);
   }

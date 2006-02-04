@@ -30,10 +30,8 @@
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-using namespace std;
 //-----------------------------------------------------------------------------
-namespace Wormux {
-  Uzi uzi;
+Uzi uzi;
 //-----------------------------------------------------------------------------
 
 const double SOUFFLE_BALLE = 1;
@@ -107,8 +105,8 @@ void Uzi::p_Deselect()
 
 void Uzi::RepeatShoot()
 {        
-  uint time = Wormux::global_time.Read() - m_first_shoot; 
-  uint tmp = Wormux::global_time.Read();
+  uint time = global_time.Read() - m_first_shoot; 
+  uint tmp = global_time.Read();
 
   if (time >= MIN_TIME_BETWEEN_SHOOT)
   {
@@ -215,4 +213,3 @@ WeaponConfig& Uzi::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

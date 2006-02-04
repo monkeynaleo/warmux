@@ -28,7 +28,6 @@
 #endif
 
 #include "i18n.h"
-using namespace std;
 
 // Test if a file exists
 bool IsFileExist(const std::string &name)

@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "constant.h"
-namespace Wormux {
 
 const std::string VERSION("0.7beta3 (" __DATE__ ")");
 
@@ -72,6 +71,4 @@ void InitConstants(){
   AUTHORS.push_back ("Matthieu FERTRE");
   AUTHORS.push_back ("Renaud LOTTIAUX");
   AUTHORS.push_back ("Victor STINNER");
-}
-
 }

@@ -30,14 +30,14 @@ class GameLoop;
 
 class Font
 {
-  typedef std::map<std::string, Wormux::Surface>::value_type 
+  typedef std::map<std::string, Surface>::value_type 
     txt_sample;
-  typedef std::map<std::string, Wormux::Surface>::iterator 
+  typedef std::map<std::string, Surface>::iterator 
     txt_iterator;
 
-  std::map<std::string, Wormux::Surface> surface_text_table;
+  std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
-  void Write(int x, int y, Wormux::Surface &surface);
+  void Write(int x, int y, Surface &surface);
 
 public:
   Font(int size);
@@ -56,14 +56,14 @@ public:
   int GetHeight ();
   int GetHeight (const std::string &txt);
 
-  Wormux::Surface Render(const std::string &txt, SDL_Color color, bool cache=false);
-  Wormux::Surface Font::CreateSurface(const std::string &txt, SDL_Color color);
+  Surface Render(const std::string &txt, SDL_Color color, bool cache=false);
+  Surface Font::CreateSurface(const std::string &txt, SDL_Color color);
 };
 
 class GameFont : public Font
 {
   GameLoop &game_loop;
-  void Write(int x, int y, Wormux::Surface &surface);
+  void Write(int x, int y, Surface &surface);
 
 public:
   GameFont(GameLoop &game_loop, int size);

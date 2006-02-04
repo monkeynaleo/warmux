@@ -31,7 +31,6 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 
-using namespace Wormux;
 
 // Distance entre le pointeur et le ver
 #define RAYON 40 // pixels

@@ -27,7 +27,6 @@
 #include <sstream>
 #include <iostream>
 #include "../include/global.h"
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 SpinButton::SpinButton (const std::string &label, int x, int y, uint w,

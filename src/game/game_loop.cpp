@@ -53,7 +53,6 @@
 #include "../tool/stats.h"
 #include "../weapon/weapons_list.h"
 
-using namespace Wormux;
 
 #define ENABLE_LIMIT_FPS    
 

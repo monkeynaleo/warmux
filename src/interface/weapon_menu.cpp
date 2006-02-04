@@ -42,7 +42,6 @@
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
 
-using namespace Wormux;
 
 // Weapon menu
 const uint BUTTON_ICO_WIDTH = 58;  // Width of the button icon

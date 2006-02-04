@@ -27,8 +27,6 @@
 #include "../game/time.h"
 #include "../graphic/text.h"
 
-using namespace std;
-using namespace Wormux;
 
 const uint BARRE_LARG = 140;
 const uint BARRE_HAUT = 13;
@@ -80,7 +78,7 @@ void TeamEnergy :: Init ()
 
 //-----------------------------------------------------------------------------
 
-void TeamEnergy :: ChoisitNom (const string &nom_equipe)
+void TeamEnergy :: ChoisitNom (const std::string &nom_equipe)
 { 
   nom = nom_equipe; 
 }

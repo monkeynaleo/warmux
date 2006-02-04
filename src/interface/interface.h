@@ -41,7 +41,7 @@ public:
   Character *character_under_cursor;
   Weapon* weapon_under_cursor;
   WeaponsMenu weapons_menu;
-  Wormux::Surface weapon_box_button;
+  Surface weapon_box_button;
 
  private:
    // Timers
@@ -67,8 +67,8 @@ public:
    void DisplayWeaponInfo ();
    BarreProg barre_energie;
 
-   Wormux::Surface game_menu;
-   Wormux::Surface bg_time;
+   Surface game_menu;
+   Surface bg_time;
    int bottom_bar_ox;
    int bottom_bar_oy;
 
@@ -91,7 +91,7 @@ public:
 
 extern Interface interface;
 
-void AbsoluteDraw(Wormux::Surface s, int x, int y);
+void AbsoluteDraw(Surface s, int x, int y);
 void AbsoluteDraw(SDL_Surface* s, int x, int y);
 
 #endif

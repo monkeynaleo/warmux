@@ -46,7 +46,6 @@
 #include "tool/random.h"
 #include "tool/stats.h"
 
-using namespace Wormux;
 AppWormux app;
 
 AppWormux::AppWormux(){

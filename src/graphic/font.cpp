@@ -32,7 +32,7 @@
 
 Font::Font(int size) { 
   m_font = NULL;
-  bool ok = Load(Wormux::config.ttf_filename, size);
+  bool ok = Load(config.ttf_filename, size);
   
   if( !ok )
     Error("Error during initialisation of a font!");
@@ -72,7 +72,7 @@ bool Font::Load (const std::string& filename, int size) {
   return true;
 }
 
-void Font::Write(int x, int y, Wormux::Surface &surface){
+void Font::Write(int x, int y, Surface &surface){
   SDL_Rect dst_rect;
   dst_rect.x = x;
   dst_rect.y = y;
@@ -85,40 +85,40 @@ void Font::Write(int x, int y, Wormux::Surface &surface){
 }
 
 void Font::WriteLeft (int x, int y, const std::string &txt, SDL_Color color){
-  Wormux::Surface surface( Render(txt, color, true) );
+  Surface surface( Render(txt, color, true) );
   Write(x, y, surface);
 }
 
 void Font::WriteLeftBottom (int x, int y, const std::string &txt,
 			    SDL_Color color){ 
-  Wormux::Surface surface( Render(txt, color, true) );
+  Surface surface( Render(txt, color, true) );
   Write(x, y - surface.GetHeight(), surface);
 }
 
 void Font::WriteRight (int x, int y, const std::string &txt,
 		       SDL_Color color){ 
-  Wormux::Surface surface( Render(txt, color, true) );
+  Surface surface( Render(txt, color, true) );
   Write(x - surface.GetWidth(), y, surface);
 }
 
 void Font::WriteCenter (int x, int y, const std::string &txt,
 			SDL_Color color){ 
-  Wormux::Surface surface( Render(txt, color, true) );
+  Surface surface( Render(txt, color, true) );
   Write( x - surface.GetWidth()/2, y - surface.GetHeight(), surface);
 }
 
 void Font::WriteCenterTop (int x, int y, const std::string &txt,
 			   SDL_Color color){
-  Wormux::Surface surface( Render(txt, color, true) );
+  Surface surface( Render(txt, color, true) );
   Write( x - surface.GetWidth() / 2, y, surface);
 }
 
-Wormux::Surface Font::CreateSurface(const std::string &txt, SDL_Color color){
+Surface Font::CreateSurface(const std::string &txt, SDL_Color color){
   return TTF_RenderUTF8_Blended(m_font, txt.c_str(), color);
 }
 
-Wormux::Surface Font::Render(const std::string &txt, SDL_Color color, bool cache){
-  Wormux::Surface surface;
+Surface Font::Render(const std::string &txt, SDL_Color color, bool cache){
+  Surface surface;
   
   if( cache ){
     txt_iterator p = surface_text_table.find(txt);
@@ -167,7 +167,7 @@ GameFont::GameFont(GameLoop &p_game_loop, int size) :
   game_loop(p_game_loop)
 {}
 
-/*void GameFont::Write(int x, int y, Wormux::Surface &surface)
+/*void GameFont::Write(int x, int y, Surface &surface)
 {
   SDL_Rect dst_rect;
   dst_rect.x = x;
@@ -178,7 +178,7 @@ GameFont::GameFont(GameLoop &p_game_loop, int size) :
   game_loop.world.ToRedrawOnScreen(Rectanglei(dst_rect.x,dst_rect.y, dst_rect.w, dst_rect.h));
 }*/
 
-void GameFont::Write(int x, int y, Wormux::Surface &surface){
+void GameFont::Write(int x, int y, Surface &surface){
   SDL_Rect dst_rect;
   dst_rect.x = x;
   dst_rect.y = y;

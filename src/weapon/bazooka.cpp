@@ -32,7 +32,6 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
-namespace Wormux {
 
 RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, Bazooka &p_bazooka) :
   WeaponProjectile (p_game_loop, "roquette_bazooka"), 
@@ -161,4 +160,3 @@ void Bazooka::p_Init()
 ExplosiveWeaponConfig& Bazooka::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
 
-} // namespace Wormux

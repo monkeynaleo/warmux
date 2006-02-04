@@ -30,7 +30,6 @@
 #include "../object/objects_list.h"
 #include "../map/camera.h"
 #include "../team/macro.h"
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 WeaponsList weapons_list;
 //-----------------------------------------------------------------------------

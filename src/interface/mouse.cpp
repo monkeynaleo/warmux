@@ -34,7 +34,6 @@
 #include "../tool/point.h"
 #include "../weapon/weapon.h"
 
-using namespace Wormux;
 
 Mouse mouse;
 

@@ -31,7 +31,7 @@ class BarreProg
 {
 public:
   SDL_Color border_color, value_color, background_color;
-  Wormux::Surface image; // in order to pemit alpha blended progressbar
+  Surface image; // in order to pemit alpha blended progressbar
 private:
   uint x, y, larg, haut; // Position
   long val, min, max; // Valeur

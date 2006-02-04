@@ -40,8 +40,6 @@
 #include <sys/stat.h>
 #endif
 
-using namespace Wormux;
-using namespace std;
 
 const std::string NOMFICH_CONFIG = "config.xml";
 //-----------------------------------------------------------------------------

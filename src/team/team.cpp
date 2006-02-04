@@ -34,8 +34,6 @@
 #include "../graphic/sprite.h"
 #include <sstream>
 #include <iostream>
-using namespace Wormux;
-using namespace std;
 
 const char* NOM_DEFAUT_EQUIPE = "Team X";
 
@@ -89,8 +87,8 @@ bool Team::Init (const std::string &teams_dir, const std::string &id)
   }
   catch (const xmlpp::exception &e)
   {
-    std::cout << std::endl
-              << Format(_("Error loading team %s:"),	id.c_str())
+    std::cerr << std::endl
+              << Format(_("Error loading team %s:"), id.c_str())
               << std::endl << e.what() << std::endl;
     return false;
   }
@@ -160,9 +158,11 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
     if (skins_list.find(skin_name) != skins_list.end()) {
       skin = &skins_list[skin_name];
     } else {
-      cout << Format(_("Error: can't find the skin \"%s\" for the team \"%s\"."),
-		     skin_name.c_str(),
-		     m_name.c_str()) << endl;
+      std::cerr 
+        << Format(_("Error: can't find the skin \"%s\" for the team \"%s\"."),
+            skin_name.c_str(),
+            m_name.c_str()) 
+        << std::endl;
       return false;
     }
 

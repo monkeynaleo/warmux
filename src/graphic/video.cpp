@@ -32,7 +32,6 @@
 #include "../include/app.h"
 #include "../include/constant.h"
 
-using namespace Wormux;
 
 Video::Video(){
 	SetMaxFps (50);

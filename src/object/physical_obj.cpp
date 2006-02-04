@@ -35,7 +35,6 @@
 #include "../tool/point.h"
 #include "../tool/rectangle.h"
 #include "../weapon/ninja_rope.h"
-using namespace Wormux;
 
 #ifdef DEBUG
 

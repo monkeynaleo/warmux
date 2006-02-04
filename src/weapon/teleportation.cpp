@@ -29,7 +29,7 @@
 #include "../map/map.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-namespace Wormux {
+
 Teleportation teleportation;
 
 double ZOOM_MAX = 10; // zoom maximum durant le petit effet graphique
@@ -57,7 +57,7 @@ bool Teleportation::p_Shoot ()
   jukebox.Play("share", "weapon/teleport_start");
   
   // Initialise les variables
-  temps = Wormux::global_time.Read();
+  temps = global_time.Read();
   retour = false;
   m_direction = ActiveCharacter().GetDirection();
 
@@ -77,7 +77,7 @@ void Teleportation::Refresh()
 {
   if (!m_is_active) return;
 
-  double dt = Wormux::global_time.Read() - temps;
+  double dt = global_time.Read() - temps;
 
   // On a fait le chemin retour ?
   if (retour) {
@@ -99,7 +99,7 @@ void Teleportation::Refresh()
     // commençant par déplacer le ver
     retour = true;
     ActiveCharacter().SetXY (dst.x, dst.y);
-    temps = Wormux::global_time.Read();
+    temps = global_time.Read();
     dt = 0.0;
     return;
   }
@@ -138,4 +138,3 @@ void Teleportation::ChooseTarget()
 WeaponConfig& Teleportation::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
 
-} // namespace Wormux

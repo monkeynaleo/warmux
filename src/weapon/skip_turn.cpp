@@ -26,10 +26,7 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-namespace Wormux 
-{
-
-  SkipTurn skipturn;
+SkipTurn skipturn;
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
@@ -66,4 +63,3 @@ void SkipTurn::Refresh()
 }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

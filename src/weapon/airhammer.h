@@ -26,8 +26,6 @@
 #include "../include/base.h"
 #include "weapon.h"
 
-namespace Wormux {
-
 class Airhammer : public Weapon
 {
  private:
@@ -47,5 +45,4 @@ class Airhammer : public Weapon
 };
 
 extern Airhammer airhammer;
-} // namespace Wormux
 #endif

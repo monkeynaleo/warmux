@@ -32,7 +32,6 @@
 #include "../tool/rectangle.h"
 #include "../tool/math_tools.h"
 
-using namespace Wormux;
 
 // Marge de cadrage 
 const int MARGE = 200;

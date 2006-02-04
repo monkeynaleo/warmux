@@ -28,7 +28,6 @@
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 
-namespace Wormux {
 // The Holly Grenade
 class HollyGrenade : public WeaponProjectile
 {
@@ -67,5 +66,4 @@ protected:
 };
 
 extern HollyGrenadeLauncher holly_grenade_launcher;
-} // namespace Wormux
 #endif

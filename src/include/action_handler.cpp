@@ -106,7 +106,7 @@ void Action_Shoot (const Action *action)
 void Action_Wind (const Action *a)
 {
 	const ActionInt& ai = dynamic_cast<const ActionInt&> (*a);
-	Wormux::wind.SetVal (ai.GetValue());
+	wind.SetVal (ai.GetValue());
 }
 
 void Action_MoveCharacter (const Action *a)
@@ -176,7 +176,7 @@ void Action_SetGameMode (const Action *a)
 #ifdef DBG_ACT
 	COUT_DBG << "SetGameMode : " << action.GetValue() << std::endl;
 #endif
-	Wormux::game_mode.Load (action.GetValue());
+	game_mode.Load (action.GetValue());
 }
 
 

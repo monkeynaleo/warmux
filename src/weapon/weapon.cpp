@@ -66,7 +66,6 @@ const uint WEAPON_BOX_BUTTON_DX = 20;
 const uint WEAPON_BOX_BUTTON_DY = 50;
 
 extern WeaponStrengthBar weapon_strength_bar;
-using namespace Wormux;
 
 WeaponProjectile::WeaponProjectile (GameLoop &p_game_loop, const std::string &name)
   : PhysicalObj (p_game_loop, name, 0.0)
@@ -408,7 +407,7 @@ void Weapon::UpdateStrength(){
   if( max_strength == 0 || m_first_time_loading == 0 )
     return ;
   
-  uint time = Wormux::global_time.Read() - m_first_time_loading;
+  uint time = global_time.Read() - m_first_time_loading;
   double val = (max_strength * time) / MAX_TIME_LOADING;
 
   m_strength = BorneDouble (val, 0.0, max_strength);
@@ -427,7 +426,7 @@ void Weapon::InitLoading(){
 
   channel_load = jukebox.Play("share","weapon/load");
    
-  m_first_time_loading = Wormux::global_time.Read();
+  m_first_time_loading = global_time.Read();
   
   m_strength = 0;
 

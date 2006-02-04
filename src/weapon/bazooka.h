@@ -26,7 +26,6 @@
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-namespace Wormux {
 
 class Bazooka;
 
@@ -62,5 +61,4 @@ protected:
   void Explosion();
 };
 
-} // namespace Wormux
 #endif

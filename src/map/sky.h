@@ -21,12 +21,11 @@
 
 #ifndef SKY_H
 #define SKY_H
+
 #include "tile.h"
 #include "../graphic/surface.h"
 #include "../include/base.h"
 
-namespace Wormux {
-   
 class Sky : public Tile{  
  private:
   int lastx, lasty;
@@ -43,5 +42,4 @@ public:
    Surface image;
 };
 
-}
 #endif

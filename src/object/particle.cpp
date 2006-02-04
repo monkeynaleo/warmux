@@ -44,7 +44,7 @@ Particle::Particle(GameLoop &p_game_loop) :
 
   m_initial_time_to_live = 20;
   m_left_time_to_live = 0;
-  m_last_refresh = Wormux::global_time.Read();
+  m_last_refresh = global_time.Read();
 }
 
 void Particle::Draw()
@@ -55,7 +55,7 @@ void Particle::Draw()
 
 void Particle::Refresh()
 {
-  uint time = Wormux::global_time.Read() - m_last_refresh; 
+  uint time = global_time.Read() - m_last_refresh; 
 
   UpdatePosition ();
 
@@ -85,7 +85,7 @@ void Particle::Refresh()
       image->Scale(1.0,1.0);
       image->SetAlpha(alpha);
     }
-    m_last_refresh = Wormux::global_time.Read() ;
+    m_last_refresh = global_time.Read() ;
   }
 }
 
@@ -214,8 +214,8 @@ void ParticleEngine::AddPeriodic(uint x, uint y,
 				 double angle, double norme)
 {
   // time spent since last refresh (in milliseconds)
-  uint time = Wormux::global_time.Read() - m_last_refresh; 
-  uint tmp = Wormux::global_time.Read();
+  uint time = global_time.Read() - m_last_refresh; 
+  uint tmp = global_time.Read();
 
   uint delta = uint(m_time_between_add * double(RandomLong(3,40))/10);
   if (time >= delta) {

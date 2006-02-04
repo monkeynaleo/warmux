@@ -30,10 +30,7 @@
 #include "../game/config.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
-#include "../include/global.h"
 
-using namespace Wormux;
-using namespace std;
 
 //-----------------------------------------------------------------------------
 
@@ -59,7 +56,9 @@ const uint TPS_FIN_TOUR_MAX = 10;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-OptionMenu::OptionMenu() : Menu("menu/bg_option")
+OptionMenu::OptionMenu() :
+  Menu("menu/bg_option"),
+  normal_font(16)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
@@ -69,7 +68,7 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
 
   /* Grapic options */
   graphic_options = new VBox(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W);
-  graphic_options->AddWidget(new Label(_("Graphic options"), 0, 0, 0, global().normal_font()));
+  graphic_options->AddWidget(new Label(_("Graphic options"), 0, 0, 0, normal_font));
 
   lbox_video_mode = new ListBox(0, 0, 0, 80);
   graphic_options->AddWidget(lbox_video_mode);
@@ -93,7 +92,7 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
 
   /* Sound options */
   sound_options = new VBox(SOUND_X, SOUND_Y, SOUND_W);
-  sound_options->AddWidget(new Label(_("Sound options"), 0, 0, 0, global().normal_font()));
+  sound_options->AddWidget(new Label(_("Sound options"), 0, 0, 0, normal_font));
 
   lbox_sound_freq = new ListBox(0, 0, 0, 80);
   sound_options->AddWidget(lbox_sound_freq);
@@ -106,7 +105,7 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
   
   /* Game options */
   game_options = new VBox(GAME_X, GAME_Y, GAME_W);
-  game_options->AddWidget(new Label(_("Game options"), 0, 0, 0, global().normal_font()));
+  game_options->AddWidget(new Label(_("Game options"), 0, 0, 0, normal_font));
 
   opt_duration_turn = new SpinButton(_("Duration of a turn:"), 0, 0, 0,
 				     TPS_TOUR_MIN, 5,

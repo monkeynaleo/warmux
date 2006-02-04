@@ -36,7 +36,6 @@
 #include "../object/objects_list.h"
 #include "../include/global.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
 GrenadeLauncher lance_grenade;
 //-----------------------------------------------------------------------------
 
@@ -85,7 +84,7 @@ void Grenade::Tire (double force)
 #endif
 
   // Recupere le moment du départ
-  temps_debut_tir = Wormux::global_time.Read();
+  temps_debut_tir = global_time.Read();
 }
 
 //-----------------------------------------------------------------------------
@@ -128,7 +127,7 @@ void Grenade::Refresh()
   }
 
   // Grenade explose after timeout
-  double tmp = Wormux::global_time.Read() - temps_debut_tir;
+  double tmp = global_time.Read() - temps_debut_tir;
   if(tmp>1000 * lance_grenade.cfg().timeout) {
     is_active = false;
     return;
@@ -156,7 +155,7 @@ void Grenade::Draw()
   image->Draw(GetX(),GetY());
 
   int tmp = lance_grenade.cfg().timeout;
-  tmp -= (int)((Wormux::global_time.Read() - temps_debut_tir) / 1000);
+  tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
@@ -270,5 +269,3 @@ void GrenadeConfig::LoadXml(xmlpp::Element *elem)
 }
 
 //-----------------------------------------------------------------------------
-
-} // namespace Wormux

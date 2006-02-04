@@ -41,7 +41,7 @@ Profile *weapons_res_profile = NULL;
 
 void AppliqueExplosion (const Point2i &explosion, 
 			const Point2i &trou, 
-			Wormux::Surface &impact,
+			Surface &impact,
 			const ExplosiveWeaponConfig &config,
 			PhysicalObj *obj_exclu,
 			const std::string& son,

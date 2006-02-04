@@ -28,7 +28,6 @@
 #include "../include/app.h" // SDL_Flip
 #include "../include/global.h"
 #include "../map/map.h"
-using namespace Wormux;
 
 //-----------------------------------------------------------------------------
 

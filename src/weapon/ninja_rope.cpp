@@ -48,7 +48,6 @@ int roundl(double nbr)
 #endif
 */
 
-namespace Wormux {
 NinjaRope ninjarope;
 
 const int DT_MVT  = 15 ; //delta_t bitween 2 up/down/left/right mvt
@@ -111,7 +110,7 @@ bool NinjaRope::p_Shoot()
 
   last_node = 0 ;
   m_attaching = true;
-  m_launch_time = Wormux::global_time.Read() ;
+  m_launch_time = global_time.Read() ;
   m_initial_angle = ActiveTeam().crosshair.GetAngleRad();
 
   last_mvt=global_time.Read();
@@ -145,7 +144,7 @@ void NinjaRope::TryAttachRope()
 {
   int x, y;
   uint length;
-  uint delta_time = Wormux::global_time.Read() - m_launch_time;
+  uint delta_time = global_time.Read() - m_launch_time;
   double angle ;
 
   // The rope is being launching. Increase the rope length and check
@@ -186,7 +185,7 @@ void NinjaRope::TryAttachRope()
       rope_node[0].y = m_fixation_y ;
       
       ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
-      m_hooked_time = Wormux::global_time.Read();
+      m_hooked_time = global_time.Read();
       InitSkinSprite();
     }
   else
@@ -602,5 +601,3 @@ EmptyWeaponConfig& NinjaRope::cfg()
 {
   return static_cast<EmptyWeaponConfig&>(*extra_params);
 }
-
-} // namespace Wormux

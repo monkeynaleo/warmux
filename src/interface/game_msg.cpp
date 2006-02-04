@@ -27,7 +27,6 @@
 #include "../include/app.h"
 #include "../include/global.h"
 
-using namespace Wormux;
 
 GameMessages game_messages;
 

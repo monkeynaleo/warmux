@@ -71,7 +71,7 @@ class StarParticle : public Particle
 class FireParticle : public Particle
 {
  public: 
-  Wormux::Surface impact;
+  Surface impact;
   FireParticle(GameLoop &game_loop);
   void Init();
   void SignalFallEnding();

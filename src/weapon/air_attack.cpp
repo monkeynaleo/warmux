@@ -32,9 +32,8 @@
 #include "../tool/random.h"
 #include "../tool/i18n.h"
 #include "../weapon/weapon_tools.h"
-namespace Wormux 
-{
-  AirAttack air_attack;
+
+AirAttack air_attack;
 
 const uint FORCE_X_MIN = 10;
 const uint FORCE_X_MAX = 120;
@@ -314,4 +313,3 @@ void AirAttackConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitDouble (elem, "speed", speed);
 }
 
-} // namespace Wormux

@@ -28,8 +28,6 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
-namespace Wormux {
-
 class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
 {
 public:
@@ -84,5 +82,4 @@ protected:
 };
 
 extern TuxLauncher tux;
-} // namespace Wormux
 #endif

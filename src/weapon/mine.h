@@ -31,8 +31,6 @@
 #include "../object/physical_obj.h"
 #include "../team/character.h"
 
-namespace Wormux {
- 
 class ObjMine : public PhysicalObj
 {
 private:
@@ -96,5 +94,4 @@ public:
 };
 
 extern Mine mine;
-} // namespace Wormux
 #endif

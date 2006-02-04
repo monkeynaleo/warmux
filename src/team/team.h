@@ -49,7 +49,7 @@ public:
 
   // Autres
   CrossHair crosshair;
-  Wormux::Surface ecusson;
+  Surface ecusson;
   Point2i sauve_camera;
   bool camera_est_sauve;
   TeamEnergy energie;
