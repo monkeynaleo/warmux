@@ -82,7 +82,7 @@ protected:
   bool m_allow_negative_y;
 
 public:
-  PhysicalObj (const std::string &name, double mass=0.0);
+  PhysicalObj (GameLoop &game_loop, const std::string &name, double mass=0.0);
   virtual ~PhysicalObj ();
 
   //-------- Set position and size -------

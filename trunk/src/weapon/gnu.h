@@ -41,7 +41,7 @@ class Gnu : public PhysicalObj
 public:
   bool is_active;
 
-  Gnu();
+  Gnu(GameLoop &game_loop);
   void Init();
   void Draw();
   void Reset();

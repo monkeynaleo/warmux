@@ -22,6 +22,7 @@
 #include "../object/objects_list.h"
 //-----------------------------------------------------------------------------
 #include "../include/app.h"
+#include "../game/game_loop.h"
 #include "../map/maps_list.h"
 #include "../map/camera.h"
 #include "../weapon/mine.h"
@@ -82,7 +83,7 @@ void ListeObjets::Reset()
 
   for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
   {
-    ObjMine *obj = new ObjMine();
+    ObjMine *obj = new ObjMine(game_loop);
     AjouteObjet (obj, true);
   }
 

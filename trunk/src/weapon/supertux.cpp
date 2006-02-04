@@ -45,8 +45,9 @@ const uint animation_deltat = 50;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-SuperTux::SuperTux() : WeaponProjectile ("supertux"), 
-		       particle_engine(particle_STAR,40)
+SuperTux::SuperTux(GameLoop &p_game_loop) :
+  WeaponProjectile (p_game_loop, "supertux"), 
+  particle_engine(particle_STAR,40)
 {
   SetWindFactor (0.8);
   m_allow_negative_y = true;
@@ -177,7 +178,9 @@ void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem)
 
 //-----------------------------------------------------------------------------
 
-TuxLauncher::TuxLauncher() : Weapon(WEAPON_SUPERTUX, "tux")
+TuxLauncher::TuxLauncher() : 
+  Weapon(WEAPON_SUPERTUX, "tux"),
+  supertux(game_loop)
 { 
   m_name = _("SuperTux");   
   override_keys = true ;

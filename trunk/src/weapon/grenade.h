@@ -38,7 +38,7 @@ class Grenade : public WeaponProjectile
 protected:
   double temps_debut_tir;
 public:
-  Grenade();
+  Grenade(GameLoop &game_loop);
   void Tire (double force);
   uint ChoixFrame(double angle);
   void Init();

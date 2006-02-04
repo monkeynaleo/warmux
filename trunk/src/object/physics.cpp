@@ -58,7 +58,8 @@ const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 
 //-----------------------------------------------------------------------------
 
-Physics::Physics (double mass)
+Physics::Physics (GameLoop &p_game_loop, double mass) :
+  game_loop(p_game_loop)
 {
   m_extern_force.Clear();
   m_pos_x.Clear();

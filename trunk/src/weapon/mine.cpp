@@ -61,7 +61,8 @@ const double DEPART_FONCTIONNEMENT = 5;
 
 //-----------------------------------------------------------------------------
 
-ObjMine::ObjMine() : PhysicalObj("mine", 0.0)
+ObjMine::ObjMine(GameLoop &p_game_loop) : 
+  PhysicalObj(p_game_loop, "mine", 0.0)
 {
   SetTestRect (0, 4, 0, 3);
   m_allow_negative_y = true; 
@@ -320,7 +321,7 @@ bool Mine::p_Shoot()
 
 void Mine::Add (int x, int y)
 {
-  ObjMine *obj = new ObjMine();
+  ObjMine *obj = new ObjMine(game_loop);
   //obj -> Init();
   obj -> SetXY (x, y);
 

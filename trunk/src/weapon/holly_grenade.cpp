@@ -51,8 +51,9 @@ HollyGrenadeLauncher holly_grenade_launcher;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-HollyGrenade::HollyGrenade() : WeaponProjectile ("holly_grenade"), 
-			       smoke_engine(particle_SMOKE,40)
+HollyGrenade::HollyGrenade(GameLoop &p_game_loop) :
+  WeaponProjectile (p_game_loop, "holly_grenade"), 
+  smoke_engine(particle_SMOKE,40)
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/holly_grenade_bounce";
@@ -191,7 +192,9 @@ void HollyGrenade::SignalCollision()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-HollyGrenadeLauncher::HollyGrenadeLauncher() : Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade")
+HollyGrenadeLauncher::HollyGrenadeLauncher() : 
+  Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade"),
+  grenade(game_loop)
 {  
   m_name = _("HollyGrenade");
 

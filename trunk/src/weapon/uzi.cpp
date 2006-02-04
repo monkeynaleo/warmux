@@ -43,7 +43,8 @@ const double MIN_TIME_BETWEEN_SHOOT = 70; // in milliseconds
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-BalleUzi::BalleUzi() : WeaponProjectile("balle_uzi")
+BalleUzi::BalleUzi(GameLoop &p_game_loop) :
+  WeaponProjectile(p_game_loop, "balle_uzi")
 { 
   touche_ver_objet = true; 
 }
@@ -74,7 +75,9 @@ void BalleUzi::SignalCollision()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Uzi::Uzi() : Weapon(WEAPON_UZI,"uzi")
+Uzi::Uzi() :
+  Weapon(WEAPON_UZI,"uzi"),
+  balle(game_loop)
 {
   m_name = _("Uzi");
   override_keys = true ;

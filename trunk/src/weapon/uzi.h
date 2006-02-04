@@ -31,7 +31,7 @@ namespace Wormux {
 class BalleUzi : public WeaponProjectile
 {
 public:
-  BalleUzi();
+  BalleUzi(GameLoop &game_loop);
   void Init();
   void SignalCollision();
   

@@ -43,7 +43,7 @@ class Obus : public WeaponProjectile
 private:
   Surface impact; 
 public:
-  Obus();
+  Obus(GameLoop &game_loop);
   void Draw();
   void Refresh();
   void Reset();
@@ -63,7 +63,7 @@ private:
   int vitesse;
 
 public:
-  Avion();
+  Avion(GameLoop &game_loop);
   void Tire();
   void Reset();
   void Init();

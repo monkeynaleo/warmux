@@ -41,8 +41,8 @@ class Weapon;
 class Team
 {
 public:
-  typedef std::vector<Character>::iterator iterator;
-  typedef std::vector<Character>::const_iterator const_iterator;
+  typedef std::list<Character>::iterator iterator;
+  typedef std::list<Character>::const_iterator const_iterator;
 
   std::map<std::string, int> m_nb_ammos;
   std::map<std::string, int> m_nb_units;
@@ -59,7 +59,7 @@ private:
   std::string m_id;
   std::string m_name;
   std::string m_sound_profile;
-  std::vector<Character> vers;
+  std::list<Character> vers;
   int ver_actif, vers_fin;
   iterator vers_fin_it;
   Weapon *active_weapon;
@@ -69,6 +69,12 @@ public:
   Team ();
   bool Init (const std::string &teams_dir, const std::string &id);
   void Reset();
+
+  // ******* TODO: KILL THIS FUNCTIONS !!! ********
+  Character& operator[] (uint index);
+  const Character& operator[] (uint index) const;
+  // ******* TODO: KILL THIS FUNCTIONS !!! ********
+
 
   // Switch to next worm.
 //  void NextCharacter();

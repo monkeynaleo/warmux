@@ -49,7 +49,7 @@ public:
   uint time_next_action;
   uint last_move;
 
-  SuperTux();
+  SuperTux(GameLoop &game_loop);
   void Init();
   void Refresh();
   void Draw();

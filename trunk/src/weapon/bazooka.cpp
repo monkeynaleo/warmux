@@ -34,8 +34,9 @@
 #include "../tool/i18n.h"
 namespace Wormux {
 
-RoquetteBazooka::RoquetteBazooka(Bazooka &p_bazooka) 
-  : WeaponProjectile ("roquette_bazooka"), bazooka(p_bazooka)
+RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, Bazooka &p_bazooka) :
+  WeaponProjectile (p_game_loop, "roquette_bazooka"), 
+  bazooka(p_bazooka)
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
@@ -97,8 +98,9 @@ void RoquetteBazooka::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-Bazooka::Bazooka() 
-  : Weapon(WEAPON_BAZOOKA, "bazooka"), roquette(*this)
+Bazooka::Bazooka() :
+  Weapon(WEAPON_BAZOOKA, "bazooka"),
+  roquette(game_loop, *this)  
 {  
   m_name = _("Bazooka");
   extra_params = new ExplosiveWeaponConfig();

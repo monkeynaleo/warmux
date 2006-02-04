@@ -94,8 +94,7 @@ private:
   virtual void SignalFallEnding();
 
 public:
-  // Initialise les variables du ver
-  Character ();
+  Character (GameLoop &game_loop);
 
   // (Re)Initialise le ver
   void Init();

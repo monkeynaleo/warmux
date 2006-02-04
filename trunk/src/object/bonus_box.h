@@ -52,7 +52,7 @@ private:
 
 public:
   // Initialise les données
-  BonusBox();
+  BonusBox(GameLoop &game_loop);
   void Init();
   void FreeMem();
   void Reset();

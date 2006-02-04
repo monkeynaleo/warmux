@@ -38,9 +38,13 @@ typedef enum
   Pendulum,
 } MotionType_t;
 
+class GameLoop;
 
 class Physics
 {
+protected:
+  GameLoop &game_loop;
+
 public:
   bool m_rebounding;
 
@@ -79,7 +83,7 @@ protected:
   bool m_elasticity_off ;
 
 public:
-  Physics (double mass=0.0);
+  Physics (GameLoop &game_loop, double mass=0.0);
   virtual ~Physics ();
 
   // Set/Get position

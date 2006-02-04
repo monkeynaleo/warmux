@@ -36,14 +36,11 @@ class Dynamite;
 // La représentation d'une dynamite
 class BatonDynamite : public WeaponProjectile
 {
-private:
-
   Sprite *explosion;
   bool explosion_active;
 
 public:
-  BatonDynamite(Dynamite &dynamite);
-
+  BatonDynamite(GameLoop &game_loop, Dynamite &dynamite);
   void Init();
   void Reset();
   void Draw();
