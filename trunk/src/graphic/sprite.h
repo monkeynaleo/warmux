@@ -29,6 +29,7 @@
 #include <SDL.h>
 #include <vector>
 #include "spriteframe.h"
+#include "include/base.h"
 
 #ifdef DEBUG
 //#define DBG_SPRITE

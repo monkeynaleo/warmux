@@ -88,8 +88,8 @@ Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename, bool r
        path = base_path;
        filename = path + xml_filename;
    } else {
-       assert ( xml_filename.rfind("/") != xml_filename.npos );
-       path = xml_filename.substr(0, xml_filename.rfind("/")+1);
+       assert ( xml_filename.rfind(PATH_SEPARATOR) != xml_filename.npos );
+       path = xml_filename.substr(0, xml_filename.rfind(PATH_SEPARATOR)+1);
        filename = xml_filename;
    }
    
