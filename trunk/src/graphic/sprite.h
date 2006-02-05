@@ -20,7 +20,6 @@
  ******************************************************************************
  * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
  *             Initial version
- * TODO:       Scale,Rotation...
  *****************************************************************************/
 
 #ifndef _SPRITE_H
@@ -31,17 +30,17 @@
 #include "spriteframe.h"
 #include "include/base.h"
 
-#ifdef DEBUG
-//#define DBG_SPRITE
-#ifdef DBG_SPRITE
-#include "text.h"
-#endif
-#endif //DEBUG
-
-// Unused
-//SDL_Surface *newFlippedSurface(SDL_Surface *src, int fliph, int flipv);
-
-enum Rotation_HotSpot {top_left, top_center, top_right, left_center, center, right_center, bottom_left, bottom_center, bottom_right};
+typedef enum {
+  top_left, 
+  top_center, 
+  top_right, 
+  left_center,
+  center,
+  right_center,
+  bottom_left,
+  bottom_center,
+  bottom_right
+} Rotation_HotSpot;
  
 class Sprite
 {
@@ -123,8 +122,9 @@ typedef enum {
    bool backward;
    std::vector<SpriteFrame> frames;
 
+   void Constructor();
+
    //For cache mecanism
-   bool need_free_surface;
    Surface tmp_surface;
 
    Rotation_HotSpot rot_hotspot;
@@ -140,10 +140,6 @@ typedef enum {
    Surface last_frame;
    void LastFrameModified();
    void RefreshSurface();
-
-#ifdef DBG_SPRITE
-   Text* info;
-#endif
 };
 
 #endif /* _SPRITE_H */
