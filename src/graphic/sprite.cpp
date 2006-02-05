@@ -20,7 +20,6 @@
  ******************************************************************************
  * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
  *             Initial version
- * TODO:       Scale,Rotation...
  *****************************************************************************/
 
 #include "sprite.h"
@@ -36,105 +35,84 @@
 #include "../map/map.h"
 #include "../tool/rectangle.h"
 
-#ifdef DBG_SPRITE
-#include <sstream>
-#endif
-
 Sprite::Sprite(){
-   frame_width_pix = 0;
-   frame_height_pix = 0;
-   scale_x = 1.0f;
-   scale_y = 1.0f;
-   alpha = 1.0f;
-   rotation_deg = 0.0f;
-   speed_factor = 1.0f;
-   current_frame = 0;
-   frame_delta = 1;
-   rot_hotspot = center;
-   show = true;
-   last_update = global_time.Read();
-   show_on_finish = show_last_frame;
-   loop = true;
-   pingpong = false;
-   finished = false;
-   have_rotation_cache = false;
-   have_flipping_cache = false;
-   have_lastframe_cache = false;
-#ifdef DBG_SPRITE
-   info = new Text("");
-#endif
-}
-
-Sprite::Sprite( Sprite& other){
-   frame_width_pix = other.frame_width_pix;
-   frame_height_pix = other.frame_height_pix;
-   scale_x = other.scale_x;
-   scale_y = other.scale_y;
-   alpha = other.alpha;
-   rotation_deg = other.rotation_deg;
-   speed_factor = other.speed_factor;
-   current_frame = other.current_frame;
-   rot_hotspot = center;
-   frame_delta = other.frame_delta;
-   show = other.show;
-   last_update = other.last_update;
-   show_on_finish = other.show_on_finish;
-   loop = other.loop;
-   pingpong = other.pingpong;
-   finished = other.finished;
-   have_rotation_cache = false;
-   have_flipping_cache = false;
-   have_lastframe_cache = false;
-
-   for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
-     {
-       Surface new_surf = Surface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
-
-	  // Disable per pixel alpha on the source surface
-      // in order to properly copy the alpha chanel to the destination suface
-	  // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-	  other.frames[f].surface.SetAlpha( 0, 0); 
-	  new_surf.Blit( other.frames[f].surface, NULL, NULL);
-	  // re-enable the per pixel alpha in the 
-	  other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0); 
-	  frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
-     }
-     if(other.have_rotation_cache)
-       EnableRotationCache(other.rotation_cache_size);
-     if(other.have_flipping_cache)
-       EnableFlippingCache();
-     if(other.have_lastframe_cache)
-       EnableLastFrameCache();
-#ifdef DBG_SPRITE
-   info = new Text("");
-#endif
+  Constructor();
+  frame_width_pix = 0;
+  frame_height_pix = 0;
 }
 
 Sprite::Sprite( Surface surface){
+   Constructor();
    frame_width_pix = surface.GetWidth();
    frame_height_pix = surface.GetHeight();
    frames.push_back( SpriteFrame(surface));
-   
+}
+
+void Sprite::Constructor() {
    scale_x = 1.0f;
    scale_y = 1.0f;
    alpha = 1.0f;
    rotation_deg = 0.0f;   
    speed_factor = 1.0f;
    current_frame = 0;
-   rot_hotspot = center;
    frame_delta = 1;
+   rot_hotspot = center;
    show = true;
-   last_update = global_time.Read();
-   show_on_finish = show_last_frame;
    loop = true;
    pingpong = false;
    finished = false;
+   show_on_finish = show_last_frame;
+   last_update = global_time.Read();
+
+   // Cache
    have_rotation_cache = false;
    have_flipping_cache = false;
    have_lastframe_cache = false;
-#ifdef DBG_SPRITE
-   info = new Text("");
-#endif
+}
+
+Sprite::Sprite( Sprite& other){
+  frame_width_pix = other.frame_width_pix;
+  frame_height_pix = other.frame_height_pix;
+  scale_x = other.scale_x;
+  scale_y = other.scale_y;
+  alpha = other.alpha;
+  rotation_deg = other.rotation_deg;
+  speed_factor = other.speed_factor;
+  current_frame = other.current_frame;
+  frame_delta = other.frame_delta;
+  show = other.show;
+  last_update = other.last_update;
+  show_on_finish = other.show_on_finish;
+  loop = other.loop;
+  pingpong = other.pingpong;
+  finished = other.finished;
+
+  have_rotation_cache = false;
+  have_flipping_cache = false;
+  have_lastframe_cache = false;
+  rot_hotspot = center;
+
+  for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
+  {
+    Surface new_surf = Surface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
+
+	// Disable per pixel alpha on the source surface
+    // in order to properly copy the alpha chanel to the destination suface
+	// see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
+	other.frames[f].surface.SetAlpha( 0, 0); 
+	new_surf.Blit( other.frames[f].surface, NULL, NULL);
+
+	// re-enable the per pixel alpha in the 
+	other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0); 
+    frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
+  }
+
+  if(other.have_rotation_cache)
+    EnableRotationCache(other.rotation_cache_size);
+  if(other.have_flipping_cache)
+    EnableFlippingCache();
+  if(other.have_lastframe_cache)
+    EnableLastFrameCache();
 }
 
 Sprite::~Sprite(){
@@ -147,10 +125,6 @@ Sprite::~Sprite(){
         delete []frames[f].rotated_surface;
     }
   }
-
-#ifdef DBG_SPRITE
-   delete info;
-#endif
 }
 
 void Sprite::Init( Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y){
@@ -596,14 +570,6 @@ void Sprite::Blit( Surface dest, uint pos_x, uint pos_y)
   // For the cache mechanism
   if( game.IsGameLaunched() )
     world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface.GetWidth(), tmp_surface.GetHeight() ));
-
-#ifdef DBG_SPRITE
-   std::ostringstream ss;
-   ss << pos_x << "," << pos_y << " " << current_frame << "/" << frames.size() << " L" << loop << " P" << pingpong << " R" << rotation_deg;
-   std::string s = ss.str();   
-   info->Set(s);
-   info->DrawTopLeft(pos_x + frame_width_pix, pos_y);
-#endif
 }
 
 void Sprite::Blit( Surface dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
@@ -627,14 +593,6 @@ void Sprite::Blit( Surface dest, int pos_x, int pos_y, int src_x, int src_y, uin
   // For the cache mechanism
   if( game.IsGameLaunched() )
     world.ToRedrawOnScreen(Rectanglei(x, y, tmp_surface.GetWidth(), tmp_surface.GetHeight() ));
-
-#ifdef DBG_SPRITE
-   std::ostringstream ss;
-   ss << pos_x << "," << pos_y << " " << current_frame << "/" << frames.size() << " L" << loop << " P" << pingpong << " R" << rotation_deg;
-   std::string s = ss.str();   
-   info->Set(s);
-   info->DrawTopLeft(pos_x + frame_width_pix, pos_y);
-#endif
 }
 
 void Sprite::Finish(){
