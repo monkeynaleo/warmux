@@ -233,7 +233,7 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
   item.weapon = new_item;
 
   item.weapon_icon = new Sprite( new_item->icone);
-  item.weapon_icon->EnableLastFrameCache();
+  item.weapon_icon->cache.EnableLastFrameCache();
 
   boutons.push_back (item);
 
@@ -335,15 +335,15 @@ void WeaponsMenu::Init()
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   my_button1 = new Sprite( resource_manager.LoadImage(res,"interface/button1_icon"));
-  my_button1->EnableLastFrameCache();
+  my_button1->cache.EnableLastFrameCache();
   my_button2 = new Sprite( resource_manager.LoadImage(res,"interface/button2_icon"));
-  my_button2->EnableLastFrameCache();
+  my_button2->cache.EnableLastFrameCache();
   my_button3 = new Sprite( resource_manager.LoadImage(res,"interface/button3_icon"));
-  my_button3->EnableLastFrameCache();
+  my_button3->cache.EnableLastFrameCache();
   my_button4 = new Sprite( resource_manager.LoadImage(res,"interface/button4_icon"));
-  my_button4->EnableLastFrameCache();
+  my_button4->cache.EnableLastFrameCache();
   my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));
-  my_button5->EnableLastFrameCache();
+  my_button5->cache.EnableLastFrameCache();
 }
 
 void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column)

@@ -78,7 +78,7 @@ void SuperTux::Tire()
 void SuperTux::Init()
 {
   image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
-  image->EnableLastFrameCache();
+  image->cache.EnableLastFrameCache();
   SetSize(image->GetWidth(), image->GetHeight());
 
   SetMass (tux.cfg().mass);

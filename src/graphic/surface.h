@@ -68,7 +68,7 @@ public:
   inline bool IsNull( ){
     return surface == NULL;
   }
-  Surface Surface::RotoZoomXY(double angle, double zoomx, double zoomy, int smooth);
+  Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth);
   Surface Surface::DisplayFormatAlpha();
   Surface Surface::DisplayFormat();
 };

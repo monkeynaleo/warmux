@@ -118,7 +118,7 @@ Main_Menu::Main_Menu() :
   double y_scale;
 
   background = new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
-  background->EnableLastFrameCache();
+  background->cache.EnableLastFrameCache();
   title = new Sprite(IMG_Load((config.data_dir+"menu/img/title.png").c_str()));
   skin_left = new Sprite(IMG_Load((config.data_dir+"menu/img/skin01.png").c_str()));
   skin_right = new Sprite(IMG_Load((config.data_dir+"menu/img/skin02.png").c_str()));
@@ -351,10 +351,10 @@ void Main_Menu::DrawSkins(uint dt)
   if(dt >= soscill_end)
   {
     //Skin final position
-    skin_left->EnableLastFrameCache();
+    skin_left->cache.EnableLastFrameCache();
     skin_left->Scale(y_scale, y_scale);
     skinl_y = app.video.window.GetHeight() - skin_left->GetHeight() - skin_offset;
-    skin_right->EnableLastFrameCache();
+    skin_right->cache.EnableLastFrameCache();
     skin_right->Scale(y_scale, y_scale);
     skinr_y = app.video.window.GetHeight() - skin_right->GetHeight() - skin_offset;
   }
@@ -364,14 +364,14 @@ void Main_Menu::DrawSkins(uint dt)
     //Make the skins oscillate
     int skin_dh = 0;
     int skin_dy = 0;
-    skin_left->DisableLastFrameCache(); //Disabled to get non smoothed scale
+    skin_left->cache.DisableLastFrameCache(); //Disabled to get non smoothed scale
     skin_left->Scale(y_scale, y_scale);
     Gelatine(skin_dy, skin_dh, start_time + sfall_end, skin_left->GetHeight()/8, soscill_end - sfall_end, 2);
 
     skinl_y = app.video.window.GetHeight() - skin_left->GetHeight() - skin_offset + skin_dy;
     skin_left->ScaleSize(skin_left->GetWidth(), skin_left->GetHeight()+skin_dh);
 
-    skin_right->DisableLastFrameCache();
+    skin_right->cache.DisableLastFrameCache();
     skin_right->Scale(y_scale, y_scale);
     skinr_y = app.video.window.GetHeight() - skin_right->GetHeight() - skin_offset + skin_dy;
     skin_right->ScaleSize(skin_right->GetWidth(), skin_right->GetHeight()+skin_dh);
@@ -381,12 +381,12 @@ void Main_Menu::DrawSkins(uint dt)
   {
     uint dt2 = dt - tfall_end;
     uint fall_duration = sfall_end - tfall_end;
-    skin_left->EnableLastFrameCache();
+    skin_left->cache.EnableLastFrameCache();
     skin_left->Scale(y_scale, y_scale);
     skinl_y = app.video.window.GetHeight() - skin_left->GetHeight() - skin_offset;
     skinl_y = (dt2*dt2*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + skinl_y;
 
-    skin_left->EnableLastFrameCache();
+    skin_left->cache.EnableLastFrameCache();
     skin_right->Scale(y_scale, y_scale);
     skinr_y = app.video.window.GetHeight() - skin_right->GetHeight() - skin_offset;
     skinr_y = (dt2*dt2*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + skinr_y;
@@ -413,7 +413,7 @@ void Main_Menu::DrawTitle(uint dt)
   if(dt >= toscill_end)
   {
     //Title final position
-    title->EnableLastFrameCache();
+    title->cache.EnableLastFrameCache();
     title->Scale(y_scale, y_scale);
     title_y = title_offset;
   }
@@ -425,7 +425,7 @@ void Main_Menu::DrawTitle(uint dt)
     int title_dy = 0;
     Gelatine(title_dy, title_dh, start_time + tfall_end, title->GetHeight()/4, toscill_end - tfall_end, 2);
 
-    title->DisableLastFrameCache();
+    title->cache.DisableLastFrameCache();
     title->Scale(y_scale, y_scale);
     title_y = title_offset + title_dy;
     title->ScaleSize(title->GetWidth(), title->GetHeight()+title_dh);
@@ -435,7 +435,7 @@ void Main_Menu::DrawTitle(uint dt)
   {
     uint dt2 = dt - bfall_end;
     uint fall_duration = tfall_end - bfall_end;
-    title->EnableLastFrameCache();
+    title->cache.EnableLastFrameCache();
     title->Scale(y_scale, y_scale);
     title_y = title_offset;
     title_y = (int)((dt2*dt2*(title->GetHeight()+title_offset)/fall_duration/fall_duration) - (title->GetHeight()+title_offset) + title_y);
@@ -479,21 +479,21 @@ void Main_Menu::DrawButtons(int mx, int my, uint dt)
   if ( dt >= boscill_end )
   {
     // Finish the animation for buttons
-    play->GetSprite()->EnableLastFrameCache();
+    play->GetSprite()->cache.EnableLastFrameCache();
     play->SetXY(x_button, y_play);
     play->SetSize(button_width, button_height);
 #ifdef NETWORK_BUTTON  
-    network->GetSprite()->EnableLastFrameCache();
+    network->GetSprite()->cache.EnableLastFrameCache();
     network->SetXY(x_button, y_network);
     network->SetSize(button_width, button_height);
 #endif
-    options->GetSprite()->EnableLastFrameCache();
+    options->GetSprite()->cache.EnableLastFrameCache();
     options->SetXY(x_button, y_options);
     options->SetSize(button_width, button_height);
-    infos->GetSprite()->EnableLastFrameCache();
+    infos->GetSprite()->cache.EnableLastFrameCache();
     infos->SetXY(x_button, y_infos);
     infos->SetSize(button_width, button_height);
-    quit->GetSprite()->EnableLastFrameCache();
+    quit->GetSprite()->cache.EnableLastFrameCache();
     quit->SetXY(x_button, y_quit);
     quit->SetSize(button_width, button_height);
   }
@@ -503,21 +503,21 @@ void Main_Menu::DrawButtons(int mx, int my, uint dt)
     //Buttons finished falling, make them oscillate
     int button_dy, button_dh;
     Gelatine(button_dy, button_dh, start_time + bfall_end, dy - button_height, boscill_end - bfall_end, 2);
-    play->GetSprite()->DisableLastFrameCache();
+    play->GetSprite()->cache.DisableLastFrameCache();
     play->SetSize(button_width, button_height + button_dh);
     play->SetXY(x_button, y_play + button_dy);
 #ifdef NETWORK_BUTTON
-    network->GetSprite()->DisableLastFrameCache();
+    network->GetSprite()->cache.DisableLastFrameCache();
     network->SetSize(button_width, button_height + button_dh);
     network->SetXY(x_button, y_network + button_dy);
 #endif
-    options->GetSprite()->DisableLastFrameCache();
+    options->GetSprite()->cache.DisableLastFrameCache();
     options->SetSize(button_width, button_height + button_dh);
     options->SetXY(x_button, y_options + button_dy);
-    infos->GetSprite()->DisableLastFrameCache();
+    infos->GetSprite()->cache.DisableLastFrameCache();
     infos->SetSize(button_width, button_height + button_dh);
     infos->SetXY(x_button, y_infos + button_dy);
-    quit->GetSprite()->DisableLastFrameCache();
+    quit->GetSprite()->cache.DisableLastFrameCache();
     quit->SetSize(button_width, button_height + button_dh);
     quit->SetXY(x_button, y_quit + button_dy);
   }
@@ -525,17 +525,17 @@ void Main_Menu::DrawButtons(int mx, int my, uint dt)
   {
     uint fall_duration = bfall_end;
     //Buttons are falling
-    play   ->GetSprite()->EnableLastFrameCache();
+    play   ->GetSprite()->cache.EnableLastFrameCache();
     play   ->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_play);
 #ifdef NETWORK_BUTTON
-    network->GetSprite()->EnableLastFrameCache();
+    network->GetSprite()->cache.EnableLastFrameCache();
     network->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_network);
 #endif
-    options->GetSprite()->EnableLastFrameCache();
+    options->GetSprite()->cache.EnableLastFrameCache();
     options->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_options);
-    infos  ->GetSprite()->EnableLastFrameCache();
+    infos  ->GetSprite()->cache.EnableLastFrameCache();
     infos  ->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_infos);
-    quit   ->GetSprite()->EnableLastFrameCache();
+    quit   ->GetSprite()->cache.EnableLastFrameCache();
     quit   ->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_quit);
   }
 

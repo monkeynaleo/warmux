@@ -28,7 +28,7 @@ Button::Button (int x, int y, uint w, uint h,
 		const Profile *res_profile, const std::string& resource_id)
   : Widget(x, y, w, h){
   image = resource_manager.LoadSprite(res_profile,resource_id);
-  image->EnableLastFrameCache();
+  image->cache.EnableLastFrameCache();
   image->ScaleSize(w,h);
 }
 

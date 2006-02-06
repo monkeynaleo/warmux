@@ -26,13 +26,11 @@
 
 class SpriteFrame
 {
-	public:
-		SpriteFrame( Surface surface, unsigned int delay=100);
-		Surface surface;
-		Surface flipped_surface;
-		Surface *rotated_surface;
-		Surface *rotated_flipped_surface;
-		unsigned int delay; // in millisecond
+public:
+  SpriteFrame( Surface surface, unsigned int delay=100);
+
+  Surface surface;
+  unsigned int delay; // in millisecond
 };
 
 #endif
