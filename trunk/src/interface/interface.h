@@ -91,7 +91,6 @@ public:
 
 extern Interface interface;
 
-void AbsoluteDraw(Surface s, int x, int y);
-void AbsoluteDraw(SDL_Surface* s, int x, int y);
+void AbsoluteDraw(Surface& s, int x, int y);
 
 #endif

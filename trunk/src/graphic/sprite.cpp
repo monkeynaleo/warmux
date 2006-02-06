@@ -41,8 +41,6 @@ Sprite::Sprite() :
   animation(*this)
 {
   Constructor();
-  frame_width_pix = 0;
-  frame_height_pix = 0;
 }
 
 Sprite::Sprite( Surface surface) :
@@ -56,35 +54,16 @@ Sprite::Sprite( Surface surface) :
 }
 
 void Sprite::Constructor() {
-   scale_x = 1.0f;
-   scale_y = 1.0f;
-   alpha = 1.0f;
-   rotation_deg = 0.0f;   
-   current_frame = 0;
-   rot_hotspot = center;
-   show = true;
-}
-
-Sprite::Sprite( Sprite& other) :
-  cache(other.cache),
-  animation(other.animation),
-  frames(other.frames)
-{
-  frame_width_pix = other.frame_width_pix;
-  frame_height_pix = other.frame_height_pix;
-  scale_x = other.scale_x;
-  scale_y = other.scale_y;
-  alpha = other.alpha;
-  rotation_deg = other.rotation_deg;
-  current_frame = other.current_frame;
-  show = other.show;
+  show = true;
+  current_frame = 0;
+  frame_width_pix = frame_height_pix = 0;
+  alpha = 1.0f;
+  scale_x = scale_y = 1.0f;
+  rotation_deg = 0.0f;   
   rot_hotspot = center;
 }
 
-Sprite::~Sprite(){
-}
-
-void Sprite::Init( Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y){
+void Sprite::Init( Surface& surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y){
    this->frame_width_pix = frame_width;
    this->frame_height_pix = frame_height;
 
@@ -192,7 +171,7 @@ void Sprite::SetRotation_deg( float angle_deg){
    cache.InvalidLastFrame();
 }
 
-void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface tmp_surface){
+void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface& tmp_surface){
     const SpriteFrame& frame = GetCurrentFrameObject();
     const Surface &surface = frame.surface;
     // Calculate offset of the depending on hotspot rotation position :

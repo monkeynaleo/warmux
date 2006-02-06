@@ -160,7 +160,7 @@ int Surface::Blit(SDL_Surface *src, SDL_Rect *srcRect, SDL_Rect *dstRect){
 	return SDL_BlitSurface( src, srcRect, surface, dstRect );
 }
 
-int Surface::Blit(Surface src, SDL_Rect *srcRect, SDL_Rect *dstRect){
+int Surface::Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect){
 	return SDL_BlitSurface( src.surface, srcRect, surface, dstRect );
 }
 

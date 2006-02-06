@@ -89,7 +89,7 @@ public:
   bool EstOuvert() const { return ground.EstOuvert(); }
 
   // Creuse un pixel
-  void Creuse(uint x, uint y, Surface alpha_sur);
+  void Creuse(uint x, uint y, Surface& alpha_sur);
    
   // Lit la taille du monde
   uint GetWidth() const { return ground.GetWidth(); }
