@@ -91,6 +91,7 @@ wormux_SOURCES = \
 	weapon/weapon_tools.cpp weapon/weapon_tools.h \
 	weapon/crosshair.cpp weapon/crosshair.h \
 	weapon/air_attack.cpp weapon/air_attack.h \
+	weapon/airhammer.cpp weapon/airhammer.h \
 	weapon/auto_bazooka.cpp weapon/auto_bazooka.h \
 	weapon/baseball.cpp weapon/baseball.h \
 	weapon/bazooka.cpp weapon/bazooka.h \
@@ -99,18 +100,17 @@ wormux_SOURCES = \
 	weapon/gnu.cpp weapon/gnu.h \
 	weapon/grenade.cpp weapon/grenade.h \
 	weapon/gun.cpp weapon/gun.h \
-	weapon/mine.cpp weapon/mine.h \
-	weapon/skip_turn.cpp weapon/skip_turn.h \
-	weapon/suicide.cpp weapon/suicide.h \
-	weapon/teleportation.cpp weapon/teleportation.h \
 	weapon/holly_grenade.cpp weapon/holly_grenade.h \
-	weapon/airhammer.cpp weapon/airhammer.h \
-	weapon/uzi.cpp weapon/uzi.h \
 	weapon/jetpack.cpp weapon/jetpack.h\
 	weapon/lowgrav.cpp weapon/lowgrav.h \
+	weapon/mine.cpp weapon/mine.h \
 	weapon/ninja_rope.cpp weapon/ninja_rope.h \
 	weapon/parachute.cpp weapon/parachute.h \
-	weapon/supertux.cpp weapon/supertux.h
+	weapon/skip_turn.cpp weapon/skip_turn.h \
+	weapon/suicide.cpp weapon/suicide.h \
+	weapon/supertux.cpp weapon/supertux.h \
+	weapon/teleportation.cpp weapon/teleportation.h \
+	weapon/uzi.cpp weapon/uzi.h
 
 #AM_CXXFLAGS = -pg @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ @PARAGUI_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
 #LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS) $(PARAGUI_LIBS)
