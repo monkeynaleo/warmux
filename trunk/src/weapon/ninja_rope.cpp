@@ -125,10 +125,7 @@ void NinjaRope::InitSkinSprite()
   // in order to properly copy the alpha chanel to the destination suface
   // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
   Surface current_skin;
-  if(ActiveCharacter().GetDirection() == 1)
-    current_skin = ActiveCharacter().image->GetCurrentFrameObject().surface;
-  else
-    current_skin = ActiveCharacter().image->GetCurrentFrameObject().flipped_surface;
+  current_skin = ActiveCharacter().image->GetSurface();
 
   current_skin.SetAlpha(0, 0);
   new_surf.Blit(current_skin, NULL, NULL);

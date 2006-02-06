@@ -63,10 +63,7 @@ bool Teleportation::p_Shoot ()
 
   // Compute skins animation
   Surface current_skin;
-  if(m_direction == 1)
-    current_skin = ActiveCharacter().image->GetCurrentFrameObject().surface;
-  else
-    current_skin = ActiveCharacter().image->GetCurrentFrameObject().flipped_surface;
+  current_skin = ActiveCharacter().image->GetSurface();
 
   ActiveCharacter().Hide();
   skin = WaveSurface(current_skin.GetSurface(), 100, game_mode.duration_move_player * 1000, 5.0, 1.5);

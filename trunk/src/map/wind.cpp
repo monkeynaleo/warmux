@@ -66,7 +66,7 @@ void WindParticle::Init()
 
   sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
   if(sprite->GetFrameCount()==1)
-    sprite->EnableLastFrameCache();
+    sprite->cache.EnableLastFrameCache();
   sprite->SetCurrentFrame ( RandomLong(0, sprite->GetFrameCount()-1));
    
   SetXY(RandomLong(0, world.GetWidth()-1), RandomLong(0, world.GetHeight()-1));

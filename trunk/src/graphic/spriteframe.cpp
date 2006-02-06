@@ -20,8 +20,8 @@
 #include "spriteframe.h"
 
 SpriteFrame::SpriteFrame(Surface p_surface, unsigned int p_speed){
-	assert( !p_surface.IsNull() );
-	this->surface = p_surface;
-	this->delay = p_speed;
+  assert( !p_surface.IsNull() );
+  this->surface = p_surface;
+  this->delay = p_speed;
 }
 

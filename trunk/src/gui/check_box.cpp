@@ -31,7 +31,7 @@ CheckBox::CheckBox (const std::string &label, int x, int y, uint w, bool value) 
   Widget(x, y, w, global().small_font().GetHeight()){
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadSprite( res, "menu/check");
-  m_image->EnableLastFrameCache();
+  m_image->cache.EnableLastFrameCache();
 
   // Copy arguments
   m_value = value;

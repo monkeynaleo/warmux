@@ -41,71 +41,115 @@ typedef enum {
   bottom_center,
   bottom_right
 } Rotation_HotSpot;
- 
+
+class SpriteFrameCache
+{
+  bool use_rotation;
+  
+public:
+  Surface flipped_surface;
+  std::vector<Surface> rotated_surface;
+  std::vector<Surface> rotated_flipped_surface;
+
+  SpriteFrameCache();
+  void CreateRotationCache(Surface &surface, unsigned int cache_size);
+  void CreateFlippingCache(Surface &surface);
+};
+
+class Sprite;
+
+class SpriteCache
+{
+  Sprite &sprite;
+   
+// TODO: Remove "public:" :-)
+public:    
+  bool have_rotation_cache;
+  unsigned int rotation_cache_size;
+  bool have_flipping_cache;
+  bool have_lastframe_cache;
+  Surface last_frame;
+  std::vector<SpriteFrameCache> frames;
+
+public:  
+  SpriteCache(Sprite &sprite);
+  SpriteCache(Sprite &sprite, const SpriteCache&);
+  
+  void EnableRotationCache(std::vector<SpriteFrame> &frames, unsigned int cache_size);
+  void EnableFlippingCache(std::vector<SpriteFrame> &frames);
+  void EnableLastFrameCache();
+  void DisableLastFrameCache();
+  void InvalidLastFrame();
+};   
+
 class Sprite
 {
-  public:
-typedef enum {
-  show_first_frame,
-  show_last_frame,
-  show_blank
-} SpriteShowOnFinish;
+public:
+  SpriteCache cache;
+
+  typedef enum {
+    show_first_frame,
+    show_last_frame,
+    show_blank
+  } SpriteShowOnFinish;
 	
- public:
-   Sprite();
-   Sprite( Sprite &other);
-   Sprite( Surface surface);
-   ~Sprite();
-   void Init( Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
-   void AddFrame( Surface surf, unsigned int delay);
-   void EnableRotationCache(unsigned int cache_size);
-   void EnableFlippingCache();
-   void EnableLastFrameCache();
-   void DisableLastFrameCache();
+public:
+  Sprite();
+  Sprite( Sprite &other);
+  Sprite( Surface surface);
+  ~Sprite();
+  void Init( Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
+  void AddFrame( Surface surf, unsigned int delay);
 
-   // Get/Set physical characterisics
-	void SetSize(unsigned int w, unsigned int h);
-   unsigned int GetWidth();
-   unsigned int GetHeight();
-   unsigned int GetFrameCount();
+  void EnableRotationCache(unsigned int cache_size);
+  void EnableFlippingCache();
+
+  // Get/Set physical characterisics
+  void SetSize(unsigned int w, unsigned int h);
+  unsigned int GetWidth();
+  unsigned int GetHeight();
+  unsigned int GetFrameCount();
    
-   // Get/Set sprite parameters
-   void SetCurrentFrame( unsigned int frame_no);    
-   unsigned int GetCurrentFrame() const;
-   SpriteFrame& operator[] (unsigned int frame_no);
-   const SpriteFrame& operator[] (unsigned int frame_no) const;
-   const SpriteFrame& GetCurrentFrameObject() const;
+  // Get/Set sprite parameters
+  void SetCurrentFrame( unsigned int frame_no);    
+  unsigned int GetCurrentFrame() const;
+  SpriteFrame& operator[] (unsigned int frame_no);
+  const SpriteFrame& operator[] (unsigned int frame_no) const;
+  const SpriteFrame& GetCurrentFrameObject() const;
 
-   void Start();
-   void Finish();
-   void SetPlayBackward(bool enable);
-   void SetLoopMode(bool enable=true) { loop = enable; };
-   void SetPingPongMode(bool enable=true) { pingpong = enable; };
-   void SetShowOnFinish(SpriteShowOnFinish show);
+  void Start();
+  void Finish();
+  void SetPlayBackward(bool enable);
+  void SetLoopMode(bool enable=true) { loop = enable; };
+  void SetPingPongMode(bool enable=true) { pingpong = enable; };
+  void SetShowOnFinish(SpriteShowOnFinish show);
 
-   void Scale( float scale_x, float scale_y);
-   void ScaleSize(int width, int height);
-   void GetScaleFactors( float &scale_x, float &scale_y);
+  void Scale( float scale_x, float scale_y);
+  void ScaleSize(int width, int height);
+  void GetScaleFactors( float &scale_x, float &scale_y);
 
-   void SetRotation_deg( float angle_deg);
-   void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
+  void SetRotation_deg( float angle_deg);
+  void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
 
-   void SetAlpha( float alpha); // Can't be combined with per pixel alpha
-   float GetAlpha();
+  void SetAlpha( float alpha); // Can't be combined with per pixel alpha
+  float GetAlpha();
 
-   void SetFrameSpeed(unsigned int nv_fs);
-   void SetSpeedFactor(float nv_speed);
+  void SetFrameSpeed(unsigned int nv_fs);
+  void SetSpeedFactor(float nv_speed);
 
-   void Show();
-   void Hide();
+  void Show();
+  void Hide();
      
-   void Blit( Surface dest, uint pox_x, uint pos_y);
-   void Blit( Surface dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
-   void Draw(int pos_x, int pos_y);
-   void Update();
-   bool IsFinished() const;
+  void Blit( Surface dest, uint pox_x, uint pos_y);
+  void Blit( Surface dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
+  void Draw(int pos_x, int pos_y);
+  void Update();
+  bool IsFinished() const;
 
- private:
+  Surface GetSurface();
+
+private:
+   Surface current_surface;
    unsigned int last_update;
    bool finished;
    bool show;
@@ -123,23 +167,10 @@ typedef enum {
    std::vector<SpriteFrame> frames;
 
    void Constructor();
-
-   //For cache mecanism
-   Surface tmp_surface;
+   void RefreshSurface();
 
    Rotation_HotSpot rot_hotspot;
    void Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface tmp_surface);
-
-   //Cache members / functions
-   bool have_rotation_cache;
-   unsigned int rotation_cache_size;
-
-   bool have_flipping_cache;
-
-   bool have_lastframe_cache;
-   Surface last_frame;
-   void LastFrameModified();
-   void RefreshSurface();
 };
 
 #endif /* _SPRITE_H */

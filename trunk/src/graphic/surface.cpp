@@ -206,7 +206,7 @@ int Surface::ImgLoad( const char *filename ){
 	return surface != NULL;
 }
 
-Surface Surface::RotoZoomXY(double angle, double zoomx, double zoomy, int smooth){
+Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
 	Surface newSurf;
 
 	newSurf.SetSurface( rotozoomSurfaceXY(surface, angle, zoomx, zoomy, smooth) );

@@ -139,7 +139,7 @@ void AppWormux::DisplayLoadingPicture(){
 
   std::string filename = config.data_dir + CONCAT_DIR("menu", CONCAT_DIR("img", "loading.png"));
   Sprite * loading_image=new Sprite( IMG_Load(filename.c_str()) );
-  loading_image->EnableLastFrameCache();
+  loading_image->cache.EnableLastFrameCache();
   loading_image->ScaleSize( video.window.GetWidth(), video.window.GetHeight() );
   loading_image->Blit( video.window.GetSurface(), 0, 0);
 
