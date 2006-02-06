@@ -119,7 +119,6 @@ AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(locale
 
 if WIN32
 wormux_SOURCES += wormux.rc
-AM_CXXFLAGS += -D_WIN32_IE=0x400
 
 .rc.o:
 	windres -o $@ -i $<
