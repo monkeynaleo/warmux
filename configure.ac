@@ -194,6 +194,16 @@ CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS"
 LIBS="$LIBS $LIBXMLPP_LIBS"
 
 dnl ========================================================================
+dnl == Set flags for various environments                                  =
+dnl ========================================================================
+AM_CONDITIONAL([WIN32],
+[case "${host}" in
+  i[[3456789]]86-*-mingw32*) WIN32=true ;;
+  *cygwin*) WIN32=true ;;
+esac],[WIN32=false])
+
+
+dnl ========================================================================
 dnl == Check for header files                                              =
 dnl ========================================================================
 
@@ -211,6 +221,7 @@ DATA_FILES=`cd data ; find . -name CVS -prune -o -name ".svn*" -prune -o -name "
 DATA_FILES=`echo $DATA_FILES`
 
 AC_SUBST([DATA_FILES])
+AC_SUBST([BUILD_ENV])
 
 AM_PO_SUBDIRS
 
