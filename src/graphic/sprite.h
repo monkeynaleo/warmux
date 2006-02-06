@@ -52,10 +52,8 @@ public:
 	
 public:
   explicit Sprite();
-  explicit Sprite( Sprite &other);
   explicit Sprite( Surface surface);
-  ~Sprite();
-  void Init( Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
+  void Init( Surface& surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
   Surface GetSurface();
    
   // Frame number
@@ -124,7 +122,7 @@ private:
 private:
    void Constructor();
    void RefreshSurface();
-   void Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface tmp_surface);
+   void Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface& tmp_surface);
 };
 
 #endif /* _SPRITE_H */

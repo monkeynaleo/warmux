@@ -31,7 +31,7 @@ class Surface
   bool autoFree;
 
 public:
-  Surface();
+  explicit Surface();
   explicit Surface(SDL_Surface *sdl_surface);
   explicit Surface(int width, int height, Uint32 flags, bool useAlpha = true);
   explicit Surface(const std::string &filename);
@@ -54,7 +54,7 @@ public:
   int Lock();
   void Unlock();
   int Blit(SDL_Surface *src, SDL_Rect *srcRect, SDL_Rect *dstRect);
-  int Blit(Surface src, SDL_Rect *srcRect, SDL_Rect *dstRect);
+  int Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect);
   int SetColorKey(Uint32 flag, Uint32 key);
   int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
   Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a);

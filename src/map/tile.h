@@ -37,10 +37,10 @@ public:
   ~Tile ();
 
   // Dig a hole
-  void Dig (int ox, int oy, Surface provider);
+  void Dig (int ox, int oy, Surface& provider);
    
   // Load an image
-  void LoadImage (Surface ground_surface);
+  void LoadImage (Surface& ground_surface);
 
   // Get size
   unsigned int GetWidth () const { return width; }

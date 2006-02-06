@@ -320,10 +320,6 @@ void Interface::UpdateTimer(uint utimer)
   }
 }
 
-void AbsoluteDraw(Surface s, int x, int y){
-	AbsoluteDraw(s.GetSurface(), x, y);
-}
-
 void AbsoluteDraw(SDL_Surface* s, int x, int y)
 {
   world.ToRedrawOnMap(Rectanglei(x, y, s->w, s->h));
@@ -363,5 +359,9 @@ void AbsoluteDraw(SDL_Surface* s, int x, int y)
 
   //TODO:blit only the displayed part of the SDL_Surface
   app.video.window.Blit(s, &src, &dst);
+}
+
+void AbsoluteDraw(Surface& s, int x, int y){
+	AbsoluteDraw(s.GetSurface(), x, y);
 }
 
