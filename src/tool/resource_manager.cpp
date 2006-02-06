@@ -246,7 +246,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	  std::string pp_str;
     if ( profile->doc->LitAttrString( elem, "pingpong", pp_str) )
     if (pp_str == "yes")
-      sprite->SetPingPongMode();
+      sprite->animation.SetPingPongMode(true);
   }
 
   elem = profile->doc->AccesBalise ( elem_sprite, "animation");
@@ -255,7 +255,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 	  std::string pp_str;
     if ( profile->doc->LitAttrString( elem, "loop_mode", pp_str) )
     if (pp_str == "no")
-      sprite->SetLoopMode(false);
+      sprite->animation.SetLoopMode(false);
   }
 
   return sprite;

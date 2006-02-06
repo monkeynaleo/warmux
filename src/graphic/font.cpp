@@ -114,7 +114,7 @@ void Font::WriteCenterTop (int x, int y, const std::string &txt,
 }
 
 Surface Font::CreateSurface(const std::string &txt, SDL_Color color){
-  return TTF_RenderUTF8_Blended(m_font, txt.c_str(), color);
+  return Surface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color) );
 }
 
 Surface Font::Render(const std::string &txt, SDL_Color color, bool cache){

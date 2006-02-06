@@ -121,7 +121,9 @@ Sprite* WaveSurface(SDL_Surface* a,unsigned int nbr_frames, unsigned int duratio
 		}
 		SDL_UnlockSurface(a);
 		SDL_UnlockSurface(b);	
-		sprite->AddFrame(b, duration / nbr_frames);
+
+        Surface surface(b);
+		sprite->AddFrame(surface, duration / nbr_frames);
 	}
 	return sprite;
 }

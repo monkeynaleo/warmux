@@ -260,8 +260,8 @@ void Character::StartBreathing()
   SetSkin("breathe");
   if(current_skin == "breathe")
   {
-    image->SetSpeedFactor((float)RandomLong(100,150)/100.0);
-    image->SetLoopMode();
+    image->animation.SetSpeedFactor((float)RandomLong(100,150)/100.0);
+    image->animation.SetLoopMode(true);
     image->Start();
   }
 }
@@ -274,8 +274,8 @@ void Character::StartWalking()
   {
     SetSkin("walking");
     image->Start();
-    image->SetLoopMode();
-    image->SetSpeedFactor(1.0);
+    image->animation.SetLoopMode(true);
+    image->animation.SetSpeedFactor(1.0);
     image->SetCurrentFrame(0);
   }
 }
@@ -547,8 +547,8 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_MOVE_RIGHT:
                if(current_skin=="walking" && full_walk)
                {
-                 image->SetSpeedFactor(2.0);
-                 image->SetLoopMode(0);
+                 image->animation.SetSpeedFactor(2.0);
+                 image->animation.SetLoopMode(0);
                }
                is_walking = false;
                break;

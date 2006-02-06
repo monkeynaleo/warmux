@@ -117,11 +117,11 @@ Main_Menu::Main_Menu() :
   int x_button;
   double y_scale;
 
-  background = new Sprite(IMG_Load((config.data_dir+"menu/img/background.png").c_str()));
+  background = new Sprite(Surface((config.data_dir+"menu/img/background.png").c_str()));
   background->cache.EnableLastFrameCache();
-  title = new Sprite(IMG_Load((config.data_dir+"menu/img/title.png").c_str()));
-  skin_left = new Sprite(IMG_Load((config.data_dir+"menu/img/skin01.png").c_str()));
-  skin_right = new Sprite(IMG_Load((config.data_dir+"menu/img/skin02.png").c_str()));
+  title = new Sprite(Surface((config.data_dir+"menu/img/title.png").c_str()));
+  skin_left = new Sprite(Surface((config.data_dir+"menu/img/skin01.png").c_str()));
+  skin_right = new Sprite(Surface((config.data_dir+"menu/img/skin02.png").c_str()));
 
   button_height = 64;
   button_width = 402;
@@ -287,7 +287,7 @@ void Main_Menu::Draw (int mx, int my) // mx,my = mouse location
 
 void Main_Menu::EraseAll()
 {
-    background->Blit( app.video.window.GetSurface(), 0, 0);
+    background->Blit( app.video.window, 0, 0);
     version_text->DrawCenter( app.video.window.GetWidth()/2,
                               app.video.window.GetHeight() + VERSION_DY);
     website_text->DrawCenter( app.video.window.GetWidth()/2,
@@ -301,19 +301,19 @@ void Main_Menu::EraseGfx(uint dt)
   if( dt < boscill_end )
   {
     //Clean buttons bg
-    background->Blit(app.video.window.GetSurface(),   play->GetX(),   play->GetY(),   play->GetX(),   play->GetY(),   play->GetW(),   play->GetH());
+    background->Blit(app.video.window,   play->GetX(),   play->GetY(),   play->GetX(),   play->GetY(),   play->GetW(),   play->GetH());
 #ifdef NETWORK_BUTTON  
-    background->Blit(app.video.window.GetSurface(),network->GetX(),network->GetY(),network->GetX(),network->GetY(),network->GetW(),network->GetH());
+    background->Blit(app.video.window,network->GetX(),network->GetY(),network->GetX(),network->GetY(),network->GetW(),network->GetH());
 #endif
-    background->Blit(app.video.window.GetSurface(),options->GetX(),options->GetY(),options->GetX(),options->GetY(),options->GetW(),options->GetH());
-    background->Blit(app.video.window.GetSurface(),  infos->GetX(),  infos->GetY(),  infos->GetX(),  infos->GetY(),  infos->GetW(),  infos->GetH());
-    background->Blit(app.video.window.GetSurface(),   quit->GetX(),   quit->GetY(),   quit->GetX(),   quit->GetY(),   quit->GetW(),   quit->GetH());
+    background->Blit(app.video.window,options->GetX(),options->GetY(),options->GetX(),options->GetY(),options->GetW(),options->GetH());
+    background->Blit(app.video.window,  infos->GetX(),  infos->GetY(),  infos->GetX(),  infos->GetY(),  infos->GetW(),  infos->GetH());
+    background->Blit(app.video.window,   quit->GetX(),   quit->GetY(),   quit->GetX(),   quit->GetY(),   quit->GetW(),   quit->GetH());
   }
   if( dt <= toscill_end && dt >= bfall_end )
   {
     // Erase previous title
     uint title_x = app.video.window.GetWidth()/2 - title->GetWidth()/2;
-    background->Blit(app.video.window.GetSurface(),title_x, title_y,
+    background->Blit(app.video.window,title_x, title_y,
                                          title_x, title_y,
                                          title->GetWidth(), title->GetHeight());
   }
@@ -322,11 +322,11 @@ void Main_Menu::EraseGfx(uint dt)
   {
     // Erase previous skin
     uint x_offset = x_button/2 - skin_left->GetWidth()/2;
-    background->Blit(app.video.window.GetSurface(),x_offset, skinl_y,
+    background->Blit(app.video.window,x_offset, skinl_y,
                                          x_offset, skinl_y,
                                          skin_left->GetWidth(), skin_left->GetHeight());
     x_offset = app.video.window.GetWidth() - x_button/2 - skin_right->GetWidth()/2;
-    background->Blit(app.video.window.GetSurface(),x_offset, skinr_y,
+    background->Blit(app.video.window,x_offset, skinr_y,
                                          x_offset, skinr_y,
                                          skin_right->GetWidth(), skin_right->GetHeight());
   }
@@ -399,9 +399,9 @@ void Main_Menu::DrawSkins(uint dt)
 
   //Draw the skins at final position/scale +- delta
   uint x_offset = x_button/2 - skin_left->GetWidth()/2;
-  skin_left->Blit(app.video.window.GetSurface(), x_offset, skinl_y);
+  skin_left->Blit(app.video.window, x_offset, skinl_y);
   x_offset = app.video.window.GetWidth() - x_button/2 - skin_right->GetWidth()/2;
-  skin_right->Blit(app.video.window.GetSurface(), x_offset, skinr_y);
+  skin_right->Blit(app.video.window, x_offset, skinr_y);
 }
 
 void Main_Menu::DrawTitle(uint dt)
@@ -446,7 +446,7 @@ void Main_Menu::DrawTitle(uint dt)
   }
   //Draw the title at final position/scale +- delta
   uint title_x = app.video.window.GetWidth()/2 - title->GetWidth()/2;
-  title->Blit(app.video.window.GetSurface(), title_x, title_y);
+  title->Blit(app.video.window, title_x, title_y);
 }
 
 void Main_Menu::DrawButtons(int mx, int my, uint dt)

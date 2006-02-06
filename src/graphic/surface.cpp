@@ -46,7 +46,8 @@ Surface::Surface(int width, int height, Uint32 flags, bool useAlpha){
 	NewSurface( width, height, flags, useAlpha );
 }
 
-Surface::Surface(const char *filename){
+Surface::Surface(const std::string &filename_str){
+    const char *filename = filename_str.c_str();
 	surface = NULL;
 	autoFree = true;
 	if( !ImgLoad(filename) )

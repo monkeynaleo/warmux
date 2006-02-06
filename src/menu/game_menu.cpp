@@ -278,7 +278,7 @@ void GameMenu::Draw(int mouse_x, int mouse_y)
       ChangeMap();
   }
   
-  map_preview->Blit ( app.video.window.GetSurface(), MAPS_X+MAPS_W+10, map_box->GetY()+5 );
+  map_preview->Blit ( app.video.window, MAPS_X+MAPS_W+10, map_box->GetY()+5 );
 }
 
 //-----------------------------------------------------------------------------

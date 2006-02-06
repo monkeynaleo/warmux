@@ -190,13 +190,13 @@ void WeaponMenuItem::Draw()
 
   // Button display  
    button->Scale( scale, scale);
-   button->Blit( app.video.window.GetSurface(), 
+   button->Blit( app.video.window, 
 		 (int)(c_x - 0.5 * BUTTON_ICO_WIDTH * scale), 
 		 (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT * scale));	
    
   // Weapon display
   weapon_icon->Scale( scale, scale);
-  weapon_icon->Blit( app.video.window.GetSurface(),
+  weapon_icon->Blit( app.video.window,
 		     (int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
 		     (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT * scale));
 

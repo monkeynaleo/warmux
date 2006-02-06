@@ -100,7 +100,7 @@ void Menu::BasicDraw(int mouse_x, int mouse_y)
 {
   background->ScaleSize(app.video.window.GetWidth(), 
 		  app.video.window.GetHeight());
-  background->Blit( app.video.window.GetSurface(), 0, 0);
+  background->Blit( app.video.window, 0, 0);
   
   actions_buttons->Draw(mouse_x,mouse_y);
 }

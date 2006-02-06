@@ -56,7 +56,7 @@ void Parachute::p_Select()
   open = false ;
   closing = false ;
   image->Start();
-  image->SetShowOnFinish(Sprite::show_last_frame);
+  image->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
 }
 
 //-----------------------------------------------------------------------------
@@ -127,8 +127,8 @@ void Parachute::Refresh()
 	  if (!closing)
 	    {
 	      /* We have just hit the ground. Start closing animation */
-	      image->SetPlayBackward(true);
-	      image->SetShowOnFinish(Sprite::show_blank);
+	      image->animation.SetPlayBackward(true);
+	      image->animation.SetShowOnFinish(SpriteAnimation::show_blank);
 	      image->Start();
 	      closing = true ;
 	    }

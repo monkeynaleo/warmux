@@ -148,7 +148,7 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
       anim.utilise = true;
       anim.image = resource_manager.LoadSprite( res, skin_name);
       anim.image->Start();
-      anim.image->SetShowOnFinish(Sprite::show_blank);
+      anim.image->animation.SetShowOnFinish(SpriteAnimation::show_blank);
       LitDocXml::LitBool(xml_config, "not_while_playing", anim.not_while_playing);
       continue;
     }
@@ -174,8 +174,8 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
       LitDocXml::LitBool(xml_config, "full_walk", config.full_walk);
       if(config.full_walk)
       {
-        config.image->SetShowOnFinish(Sprite::show_first_frame);
-        config.image->SetLoopMode();
+        config.image->animation.SetShowOnFinish(SpriteAnimation::show_first_frame);
+        config.image->animation.SetLoopMode(true);
         config.image->Finish();
       }
       GetXmlConfig(xml_config,config);
