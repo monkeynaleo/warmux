@@ -116,3 +116,11 @@ wormux_SOURCES = \
 #LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS) $(PARAGUI_LIBS)
 
 AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
+
+if WIN32
+wormux_SOURCES += wormux.rc
+AM_CXXFLAGS += -D_WIN32_IE=0x400
+
+.rc.o:
+	windres -o $@ -i $<
+endif
