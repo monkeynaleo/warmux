@@ -196,11 +196,12 @@ LIBS="$LIBS $LIBXMLPP_LIBS"
 dnl ========================================================================
 dnl == Set flags for various environments                                  =
 dnl ========================================================================
-AM_CONDITIONAL([WIN32],
-[case "${host}" in
-  i[[3456789]]86-*-mingw32*) WIN32=true ;;
-  *cygwin*) WIN32=true ;;
-esac],[WIN32=false])
+case "${host}" in
+  i[[3456789]]86-*-mingw32*) WIN32="yes" ;;
+  *cygwin*) WIN32="yes" ;;
+  *) WIN32="no" ;;
+esac
+AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
 
 
 dnl ========================================================================
