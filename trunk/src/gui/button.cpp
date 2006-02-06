@@ -47,7 +47,7 @@ void Button::Draw (uint mouse_x, uint mouse_y){
   uint frame = MouseIsOver(mouse_x, mouse_y)?1:0;
 
   image->SetCurrentFrame(frame);
-  image->Blit(app.video.window.GetSurface(), x, y);
+  image->Blit(app.video.window, x, y);
 }
 
 void Button::SetSizePosition(int _x, int _y, uint _w, uint _h){

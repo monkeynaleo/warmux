@@ -32,9 +32,9 @@ class Surface
 
 public:
   Surface();
-  Surface(SDL_Surface *sdl_surface);
-  Surface(int width, int height, Uint32 flags, bool useAlpha = true);
-  Surface(const char *filename);
+  explicit Surface(SDL_Surface *sdl_surface);
+  explicit Surface(int width, int height, Uint32 flags, bool useAlpha = true);
+  explicit Surface(const std::string &filename);
   Surface(const Surface &src);
   ~Surface();
   Surface &operator=(const Surface &src);

@@ -534,7 +534,7 @@ void Weapon::Draw(){
   }
   if ( m_image )
     {
-      m_image->Blit( app.video.window.GetSurface(), x-camera.GetX(), y-camera.GetY());
+      m_image->Blit( app.video.window, x-camera.GetX(), y-camera.GetY());
     }
    
 }

@@ -22,8 +22,10 @@ wormux_SOURCES = \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/surface.cpp graphic/surface.h \
 	graphic/sdlsurface.cpp graphic/sdlsurface.h \
-	graphic/sprite.cpp graphic/sprite.h \
 	graphic/spriteframe.cpp graphic/spriteframe.h \
+	graphic/spritecache.cpp graphic/spritecache.h \
+	graphic/spriteanimation.cpp graphic/spriteanimation.h \
+	graphic/sprite.cpp graphic/sprite.h \
 	graphic/video.cpp graphic/video.h \
 	graphic/text.cpp graphic/text.h \
 	gui/button.cpp gui/button.h \

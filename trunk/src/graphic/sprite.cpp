@@ -29,7 +29,6 @@
 #include "sdlsurface.h"
 #include "surface.h"
 #include "../game/game.h"
-#include "../game/time.h"
 #include "../include/app.h"
 #include "../map/camera.h"
 #include "../map/map.h"
@@ -37,156 +36,9 @@
 
 #define BUGGY_SDLGFX
 
-SpriteFrameCache::SpriteFrameCache() {
-  use_rotation = false;
-}
-
-
-void SpriteFrameCache::CreateRotationCache(Surface &surface, unsigned int cache_size){
-  assert (use_rotation == false);
-  use_rotation = true;
-
-  rotated_surface.push_back( surface );
-  for(unsigned int i=1 ; i< cache_size ; i++){
-    float angle = -360.0 * (float) i / (float) cache_size;
-    rotated_surface.push_back( surface.RotoZoom(angle, 1.0, 1.0, SMOOTHING_ON) );
-  }
-}
-  
-void SpriteFrameCache::CreateFlippingCache(Surface &surface)
-{
-  assert (flipped_surface.IsNull());
-  flipped_surface = surface.RotoZoom( 0.0, -1.0, 1.0, SMOOTHING_OFF);	  
-  if (use_rotation)
-  {
-    assert (rotated_surface.size() != 0);
-    assert (rotated_flipped_surface.size() == 0);
-    rotated_flipped_surface.push_back( flipped_surface );
-    const unsigned int n = rotated_surface.size();
-    for(unsigned int i=1 ; i<n; i++)
-    {
-      float angle = -360.0 * (float) i / (float) n;
-      rotated_flipped_surface.push_back( surface.RotoZoom(angle, -1.0, 1.0, SMOOTHING_ON) );
-    }
-  }
-}
-
-
-
-
-SpriteCache::SpriteCache(Sprite &p_sprite) :
-  sprite(p_sprite)
-{
-  have_rotation_cache = false;
-  have_flipping_cache = false;
-  have_lastframe_cache = false;
-  rotation_cache_size = 0;
-}
-
-SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
-  sprite(p_sprite),
-  frames(other.frames)
-{    
-#if 0  
-  have_rotation_cache = false;
-  have_flipping_cache = false;
-  have_lastframe_cache = false;
-  rotation_cache_size = 0;
-
-  for ( unsigned int f = 0 ; f < other.frames.size() ; f++)
-  {
-    Surface new_surf = Surface(frame_width_pix, frame_height_pix, SDL_SWSURFACE|SDL_SRCALPHA, true);
-
-	// Disable per pixel alpha on the source surface
-    // in order to properly copy the alpha chanel to the destination suface
-	// see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-	other.frames[f].surface.SetAlpha( 0, 0); 
-	new_surf.Blit( other.frames[f].surface, NULL, NULL);
-
-	// re-enable the per pixel alpha in the 
-	other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0); 
-    frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
-  }
-
-  if(other.have_rotation_cache)
-    EnableRotationCache(other.rotation_cache_size);
-  if(other.have_flipping_cache)
-    EnableFlippingCache();
-  if(other.have_lastframe_cache)
-    EnableLastFrameCache();
-#else
-  last_frame = other.last_frame;
-  have_rotation_cache = other.have_rotation_cache;
-  have_flipping_cache = other.have_flipping_cache;
-  have_lastframe_cache = other.have_lastframe_cache;
-  rotation_cache_size = other.rotation_cache_size;
-#endif  
-}
-
-void SpriteCache::EnableRotationCache(std::vector<SpriteFrame> &sprite_frames, unsigned int cache_size){
-  //For each frame, we pre-render 'cache_size' rotated surface
-  //At runtime the prerender SDL_Surface with the nearest angle to what is asked is displayed
-  assert(1 < cache_size and cache_size <= 360);
-  assert(!have_lastframe_cache);
-  assert(!have_flipping_cache); //Always compute rotation cache before flipping cache!
-  assert(!have_rotation_cache);
-  have_rotation_cache = true;
-
-  if (frames.empty()) 
-    frames.resize( sprite_frames.size() );
-  assert( frames.size() == sprite_frames.size() );
-  rotation_cache_size = cache_size;
-
-  for ( unsigned int f = 0 ; f < frames.size() ; f++)
-  {
-    frames[f].CreateRotationCache(sprite_frames[f].surface, cache_size);
-  }
-}
-
-void SpriteCache::EnableFlippingCache(std::vector<SpriteFrame> &sprite_frames){
-  //For each frame, we pre-render the flipped frame
-  assert(!have_flipping_cache);
-  assert(!have_lastframe_cache);
-
-  if (frames.empty()) 
-    frames.resize( sprite_frames.size() );
-  assert( frames.size() == sprite_frames.size() );
-
-  have_flipping_cache = true;
-
-  for ( unsigned int f = 0 ; f < frames.size() ; f++)
-    frames[f].CreateFlippingCache(sprite_frames[f].surface);
-}
-
-void SpriteCache::EnableLastFrameCache(){
-  //The result of the last call to SDLgfx is kept in memory
-  //to display it again if rotation / scale / alpha didn't changed
-  assert(!have_rotation_cache);
-  assert(!have_flipping_cache);
-  have_lastframe_cache = true;
-}
-
-void SpriteCache::DisableLastFrameCache(){
-  //The result of the last call to SDLgfx is kept in memory
-  //to display it again if rotation / scale / alpha didn't changed
-  assert(!have_rotation_cache);
-  assert(!have_flipping_cache);
-  have_lastframe_cache = false;
-}
-
-void SpriteCache::InvalidLastFrame(){
-  //Free lastframe_cache if the next frame to be displayed
-  //is not the same as the last one.
-  if(!have_lastframe_cache) 
-    return;
-  last_frame.Free();
-}
-
-
-
-
 Sprite::Sprite() :
-  cache(*this)
+  cache(*this),
+  animation(*this)
 {
   Constructor();
   frame_width_pix = 0;
@@ -194,7 +46,8 @@ Sprite::Sprite() :
 }
 
 Sprite::Sprite( Surface surface) :
-  cache(*this)
+  cache(*this),
+  animation(*this)
 {
    Constructor();
    frame_width_pix = surface.GetWidth();
@@ -207,20 +60,14 @@ void Sprite::Constructor() {
    scale_y = 1.0f;
    alpha = 1.0f;
    rotation_deg = 0.0f;   
-   speed_factor = 1.0f;
    current_frame = 0;
-   frame_delta = 1;
    rot_hotspot = center;
    show = true;
-   loop = true;
-   pingpong = false;
-   finished = false;
-   show_on_finish = show_last_frame;
-   last_update = global_time.Read();
 }
 
 Sprite::Sprite( Sprite& other) :
-  cache(*this),
+  cache(other.cache),
+  animation(other.animation),
   frames(other.frames)
 {
   frame_width_pix = other.frame_width_pix;
@@ -229,15 +76,8 @@ Sprite::Sprite( Sprite& other) :
   scale_y = other.scale_y;
   alpha = other.alpha;
   rotation_deg = other.rotation_deg;
-  speed_factor = other.speed_factor;
   current_frame = other.current_frame;
-  frame_delta = other.frame_delta;
   show = other.show;
-  last_update = other.last_update;
-  show_on_finish = other.show_on_finish;
-  loop = other.loop;
-  pingpong = other.pingpong;
-  finished = other.finished;
   rot_hotspot = center;
 }
 
@@ -262,7 +102,7 @@ void Sprite::Init( Surface surface, int frame_width, int frame_height, int nb_fr
        }
 }
 
-void Sprite::AddFrame(Surface surf, unsigned int delay){
+void Sprite::AddFrame(Surface &surf, unsigned int delay){
 	  frames.push_back( SpriteFrame(surf, delay) );
 }
 
@@ -286,8 +126,9 @@ unsigned int Sprite::GetFrameCount(){
 
 void Sprite::SetCurrentFrame( unsigned int frame_no){
   assert (frame_no < frames.size());
+  if (current_frame != frame_no)
+    cache.InvalidLastFrame();
   current_frame = frame_no;
-  cache.InvalidLastFrame();
 }
 
 unsigned int Sprite::GetCurrentFrame() const{
@@ -326,10 +167,6 @@ void Sprite::GetScaleFactors( float &scale_x, float &scale_y){
 void Sprite::SetFrameSpeed(unsigned int nv_fs){
    for ( unsigned int f = 0 ; f < frames.size() ; f++)
      frames[f].delay = nv_fs;
-}
-
-void Sprite::SetSpeedFactor( float nv_speed){
-  speed_factor = nv_speed;
 }
 
 void Sprite::SetAlpha( float alpha){
@@ -483,19 +320,10 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface tmp_sur
 
 void Sprite::Start(){
    show = true;
-   finished = false;
-   last_update = global_time.Read();
    cache.InvalidLastFrame();
 }
 
-void Sprite::SetPlayBackward(bool enable){
-  if (enable)
-    frame_delta = -1;
-  else 
-    frame_delta = 1;
-}
-
-void Sprite::Blit( Surface dest, uint pos_x, uint pos_y)
+void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y)
 {
   if (!show) return;
 
@@ -518,7 +346,7 @@ void Sprite::Blit( Surface dest, uint pos_x, uint pos_y)
     world.ToRedrawOnScreen(Rectanglei(x, y, current_surface.GetWidth(), current_surface.GetHeight() ));
 }
 
-void Sprite::Blit( Surface dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
+void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
 {
   if (!show) return;
 
@@ -542,17 +370,17 @@ void Sprite::Blit( Surface dest, int pos_x, int pos_y, int src_x, int src_y, uin
 }
 
 void Sprite::Finish(){
-  finished = true;
-  switch(show_on_finish)
+  animation.Finish();
+  switch(animation.GetShowOnFinish())
   {
-  case show_first_frame:
+  case SpriteAnimation::show_first_frame:
     current_frame = 0;
     break;      
-  case show_blank:
+  case SpriteAnimation::show_blank:
     show = false;
     break;      
   default:
-  case show_last_frame:
+  case SpriteAnimation::show_last_frame:
     current_frame = frames.size()-1;
     break;      
   }
@@ -560,65 +388,18 @@ void Sprite::Finish(){
 }
 
 void Sprite::Update(){
-  if (finished) return;
-  if (global_time.Read() < (last_update + GetCurrentFrameObject().delay))
-     return;
-
-  //Delta to next frame used to enable frameskip
-  //if delay between 2 frame is < fps
-  int delta_to_next_f = (int)((float)((global_time.Read() - last_update) / GetCurrentFrameObject().delay) * speed_factor);
-  last_update += (int)((float)(delta_to_next_f * GetCurrentFrameObject().delay) / speed_factor);
-
-  //Animation is finished, when last frame have been fully played
-  bool finish;
-  if (frame_delta < 0)
-    finish = ((int)current_frame + frame_delta * delta_to_next_f) <= -1;
-  else
-    finish = frames.size() <= (current_frame + frame_delta * delta_to_next_f);
-
-  if (finish && !loop && (!pingpong || frame_delta < 0))
-     Finish();
-  else
-  {
-    unsigned int next_frame = ( current_frame + frame_delta * delta_to_next_f ) % frames.size();
-
-    if(pingpong)
-    {
-      if( frame_delta>0 && ( current_frame + frame_delta * delta_to_next_f )>=frames.size())
-      {
-        next_frame = frames.size() - next_frame -2;
-        frame_delta = - frame_delta;
-      }
-      else
-      if( frame_delta<0 && ( (int)current_frame + frame_delta * delta_to_next_f ) <= -1)
-      {
-        next_frame = (-((int)current_frame + frame_delta * delta_to_next_f )) % frames.size();
-        frame_delta = - frame_delta;
-      }
-    }
-
-    if(next_frame != current_frame)
-    {
-      if(!(next_frame >= 0 && next_frame < frames.size()))
-      {
-        next_frame = 0;
-      }
-      cache.InvalidLastFrame();
-      current_frame = next_frame;
-    }
-  }
-}
+  animation.Update();
+}    
 
 void Sprite::Draw(int pos_x, int pos_y){
   if( !show )
     return;
-  Blit( app.video.window.GetSurface(), pos_x - camera.GetX(), pos_y - camera.GetY() );
+  Blit( app.video.window, pos_x - camera.GetX(), pos_y - camera.GetY() );
 }
 
 void Sprite::Show() { show = true; }
 void Sprite::Hide() { show = false; }
-void Sprite::SetShowOnFinish(SpriteShowOnFinish show) { show_on_finish = show; loop = false;}
-bool Sprite::IsFinished() const { return finished; }
+bool Sprite::IsFinished() const { return animation.IsFinished(); }
   
 void Sprite::EnableRotationCache(unsigned int cache_size) {
   cache.EnableRotationCache(frames, cache_size);

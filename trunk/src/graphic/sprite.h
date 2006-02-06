@@ -28,6 +28,8 @@
 #include <SDL.h>
 #include <vector>
 #include "spriteframe.h"
+#include "spritecache.h"
+#include "spriteanimation.h"
 #include "include/base.h"
 
 typedef enum {
@@ -42,134 +44,86 @@ typedef enum {
   bottom_right
 } Rotation_HotSpot;
 
-class SpriteFrameCache
-{
-  bool use_rotation;
-  
-public:
-  Surface flipped_surface;
-  std::vector<Surface> rotated_surface;
-  std::vector<Surface> rotated_flipped_surface;
-
-  SpriteFrameCache();
-  void CreateRotationCache(Surface &surface, unsigned int cache_size);
-  void CreateFlippingCache(Surface &surface);
-};
-
-class Sprite;
-
-class SpriteCache
-{
-  Sprite &sprite;
-   
-// TODO: Remove "public:" :-)
-public:    
-  bool have_rotation_cache;
-  unsigned int rotation_cache_size;
-  bool have_flipping_cache;
-  bool have_lastframe_cache;
-  Surface last_frame;
-  std::vector<SpriteFrameCache> frames;
-
-public:  
-  SpriteCache(Sprite &sprite);
-  SpriteCache(Sprite &sprite, const SpriteCache&);
-  
-  void EnableRotationCache(std::vector<SpriteFrame> &frames, unsigned int cache_size);
-  void EnableFlippingCache(std::vector<SpriteFrame> &frames);
-  void EnableLastFrameCache();
-  void DisableLastFrameCache();
-  void InvalidLastFrame();
-};   
-
 class Sprite
 {
 public:
   SpriteCache cache;
-
-  typedef enum {
-    show_first_frame,
-    show_last_frame,
-    show_blank
-  } SpriteShowOnFinish;
+  SpriteAnimation animation;
 	
 public:
-  Sprite();
-  Sprite( Sprite &other);
-  Sprite( Surface surface);
+  explicit Sprite();
+  explicit Sprite( Sprite &other);
+  explicit Sprite( Surface surface);
   ~Sprite();
   void Init( Surface surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
-  void AddFrame( Surface surf, unsigned int delay);
+  Surface GetSurface();
+   
+  // Frame number
+  unsigned int GetCurrentFrame() const;
+  void SetCurrentFrame( unsigned int frame_no);    
+  unsigned int GetFrameCount();
 
-  void EnableRotationCache(unsigned int cache_size);
-  void EnableFlippingCache();
-
-  // Get/Set physical characterisics
-  void SetSize(unsigned int w, unsigned int h);
+  // Size
   unsigned int GetWidth();
   unsigned int GetHeight();
-  unsigned int GetFrameCount();
-   
-  // Get/Set sprite parameters
-  void SetCurrentFrame( unsigned int frame_no);    
-  unsigned int GetCurrentFrame() const;
+  void GetScaleFactors( float &scale_x, float &scale_y);
+  void SetSize(unsigned int w, unsigned int h);
+  void Scale( float scale_x, float scale_y);
+  void ScaleSize(int width, int height);
+
+  // Rotation
+  void SetRotation_deg( float angle_deg);
+  void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
+  
   SpriteFrame& operator[] (unsigned int frame_no);
   const SpriteFrame& operator[] (unsigned int frame_no) const;
   const SpriteFrame& GetCurrentFrameObject() const;
 
+  // Prepare animation
+  void AddFrame( Surface& surf, unsigned int delay);
+  void SetFrameSpeed(unsigned int nv_fs);
+
+  // Animation
   void Start();
+  void Update();
   void Finish();
-  void SetPlayBackward(bool enable);
-  void SetLoopMode(bool enable=true) { loop = enable; };
-  void SetPingPongMode(bool enable=true) { pingpong = enable; };
-  void SetShowOnFinish(SpriteShowOnFinish show);
+  bool IsFinished() const;
 
-  void Scale( float scale_x, float scale_y);
-  void ScaleSize(int width, int height);
-  void GetScaleFactors( float &scale_x, float &scale_y);
-
-  void SetRotation_deg( float angle_deg);
-  void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
-
+  // Alpha
   void SetAlpha( float alpha); // Can't be combined with per pixel alpha
   float GetAlpha();
 
-  void SetFrameSpeed(unsigned int nv_fs);
-  void SetSpeedFactor(float nv_speed);
+  // Cache
+  void EnableRotationCache(unsigned int cache_size);
+  void EnableFlippingCache();
 
+  // Show flag
   void Show();
   void Hide();
      
-  void Blit( Surface dest, uint pox_x, uint pos_y);
-  void Blit( Surface dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
+  // Draw
+  void Blit( Surface &dest, uint pox_x, uint pos_y);
+  void Blit( Surface &dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
   void Draw(int pos_x, int pos_y);
-  void Update();
-  bool IsFinished() const;
-
-  Surface GetSurface();
 
 private:
    Surface current_surface;
-   unsigned int last_update;
-   bool finished;
    bool show;
-   bool loop;
-   bool pingpong;
-   SpriteShowOnFinish show_on_finish;
+
+   // Frames
+   unsigned int current_frame;
    int frame_width_pix,frame_height_pix;
+   std::vector<SpriteFrame> frames;
+   
+   // Gfx
+   float alpha;
    float scale_x,scale_y;
    float rotation_deg;
-   float alpha;
-   float speed_factor;
-   unsigned int current_frame;
-   int frame_delta; // Used in Update() to get next frame
-   bool backward;
-   std::vector<SpriteFrame> frames;
+   Rotation_HotSpot rot_hotspot;
 
+private:
    void Constructor();
    void RefreshSurface();
-
-   Rotation_HotSpot rot_hotspot;
    void Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface tmp_surface);
 };
 
