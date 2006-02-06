@@ -22,7 +22,9 @@
 #include "../tool/file_tools.h"
 #include <fstream>
 #ifdef _WIN32
-#  include <shlobj.h> // SHGetFolderPath
+   // To get SHGetSpecialFolderPath
+#  define _WIN32_IE   0x400
+#  include <shlobj.h>
 #else
 #  include <stdlib.h> // getenv
 #endif
@@ -64,8 +66,8 @@ std::string GetHome (){
   TCHAR szPath[MAX_PATH];
 
   // "Documents and Settings\user" is CSIDL_PROFILE
-  if(SUCCEEDED(SHGetFolderPath(NULL, CSIDL_APPDATA, 0,
-                               0 /*SHGFP_TYPE_CURRENT*/, szPath)))
+  if(SHGetSpecialFolderPath(NULL, szPath,
+                            CSIDL_APPDATA, FALSE) == TRUE)
   {
     return szPath;
   }
