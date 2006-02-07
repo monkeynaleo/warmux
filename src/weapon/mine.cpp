@@ -175,7 +175,6 @@ void ObjMine::Explosion ()
 
   Point2i centre = GetCenter();
   AppliqueExplosion (centre, centre, impact, mine.cfg(), NULL);
-  if (ver_declancheur == &ActiveCharacter()) game_loop.interaction_enabled = false;
   DesactiveDetection();
 }
 
