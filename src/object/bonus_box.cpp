@@ -244,7 +244,7 @@ void BonusBox::NewBonusBox()
 
     // Vérifie que la caisse ne tombe pas dans le vide
     DirectFall();
-    ok &= !IsGhost();
+    ok &= !IsGhost() & !IsInWater();
     if (!ok)
     {
       continue;

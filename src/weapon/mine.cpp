@@ -22,6 +22,7 @@
 
 #include "mine.h"
 //-----------------------------------------------------------------------------
+#include <iostream>
 #include <sstream>
 #include "weapon_tools.h"
 #include "../game/config.h"
@@ -46,7 +47,7 @@ Mine mine;
 
 #ifdef DEBUG
 
-  //#define DBG_PLACEMENT
+//#define DBG_PLACEMENT
 //#define DBG_DETECTION
 
 #define COUT_DBG0 std::cout << "[" << m_name << "]"
@@ -134,7 +135,7 @@ void ObjMine::Reset()
 	ok = false; 
       }
     }
-    ok &= !IsGhost() && IsInVacuum(0,0);
+    ok &= !IsGhost() && !IsInWater() && IsInVacuum(0,0);
   } while (!ok);
 #ifdef DBG_PLACEMENT
   COUT_PLACEMENT << "Placé." << std::endl;
