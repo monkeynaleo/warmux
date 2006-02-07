@@ -168,7 +168,8 @@ void WeaponProjectile::SignalFallEnding(){
 void WeaponProjectile::Reset(){
 }
 
-Weapon::Weapon(Weapon_type type, const std::string &id)
+Weapon::Weapon(Weapon_type type, const std::string &id,
+	       uint visibility)
 {
   m_type = type;
   m_id = id;
@@ -194,17 +195,14 @@ Weapon::Weapon(Weapon_type type, const std::string &id)
 
   m_can_change_weapon = false;
 
-  m_visibility = ALWAYS_VISIBLE;
+  m_visibility = visibility;
   m_unit_visibility = ALWAYS_VISIBLE;
   extra_params = NULL;
    
   m_image = NULL;
 
   channel_load = -1;
-}
 
-void Weapon::Init ()
-{
   if (!use_flipping and (min_angle != max_angle))
     use_flipping = true;
   
@@ -215,11 +213,8 @@ void Weapon::Init ()
   }
      
   icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
-   
-  p_Init();
 }
 
-void Weapon::p_Init () {}
 void Weapon::p_Select () {}
 void Weapon::p_Deselect () {}
 void Weapon::HandleKeyEvent(int key, int event_type) {}

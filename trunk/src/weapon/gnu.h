@@ -65,7 +65,6 @@ public:
   GnuLauncher();
   bool p_Shoot ();
   void Refresh();
-  void p_Init();
   GrenadeConfig& cfg();
 
   void Explosion();

@@ -44,16 +44,12 @@ Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer")
   m_name = _("Airhammer");
   override_keys = true ;
 
-  extra_params = new WeaponConfig();
-}
-
-//-----------------------------------------------------------------------------
-
-void Airhammer::p_Init()
-{
+  extra_params = new WeaponConfig();  
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
   m_last_jolt = 0;
 }
+
+//-----------------------------------------------------------------------------
 
 void Airhammer::p_Deselect()
 {

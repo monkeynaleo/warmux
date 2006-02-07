@@ -153,17 +153,15 @@ public:
   bool use_flipping;
 
 protected:
-  virtual void p_Init();
   virtual void p_Select();
   virtual void p_Deselect();
   virtual void Refresh() = 0;
   virtual bool p_Shoot() = 0;
 
 public:
-  Weapon(Weapon_type type, const std::string &id);
+  Weapon(Weapon_type type, const std::string &id,
+	 uint visibility = ALWAYS_VISIBLE);
   virtual ~Weapon() {}
-
-  void Init();
 
   // Select or deselect the weapon
   void Select(); 

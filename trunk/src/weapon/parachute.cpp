@@ -40,7 +40,9 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute")
   air_resist_factor = 140.0 ;
   open_speed_limit = 5.0 ;
   extra_params = new WeaponConfig();
-  use_unit_on_first_shoot = false;  
+  use_unit_on_first_shoot = false;    
+  
+  image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
 }
 
 //-----------------------------------------------------------------------------
@@ -62,17 +64,6 @@ void Parachute::p_Deselect()
   ActiveCharacter().SetWindFactor(0);
   m_is_active = false;
 }
-
-//-----------------------------------------------------------------------------
-
-void Parachute::p_Init()
-{
-  m_name = _("parachute");
-
-  image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
-  //TODO : image.set_play_loop(false);
-}
-
 
 //-----------------------------------------------------------------------------
 

@@ -39,7 +39,6 @@ private:
 public:
   JetPack();
   void Reset();
-  void p_Init();
   void Refresh();
   void p_Select();
   void p_Deselect();

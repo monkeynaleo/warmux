@@ -33,11 +33,11 @@
 double ZOOM_MAX = 10; // zoom maximum durant le petit effet graphique
 uint ESPACE = 4;
 
-Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation")
+Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
+					VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("Teleportation");
 
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
   extra_params = new WeaponConfig();  
 }
 

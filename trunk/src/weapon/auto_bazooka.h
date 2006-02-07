@@ -61,7 +61,6 @@ private:
     Surface image;
   } cible;
   
-  void p_Init();
   bool p_Shoot();
 
 public:

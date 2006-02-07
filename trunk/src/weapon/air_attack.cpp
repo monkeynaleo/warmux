@@ -176,6 +176,7 @@ AirAttack::AirAttack() :
   can_be_used_on_closed_map = false;
 
   extra_params = new AirAttackConfig();
+  avion.Init();
 }
 
 void AirAttack::p_Select()
@@ -289,11 +290,6 @@ void AirAttack::Draw()
   }
 
   avion.Draw ();
-}
-
-void AirAttack::p_Init()
-{
-  avion.Init();
 }
 
 AirAttackConfig& AirAttack::cfg() 

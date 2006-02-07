@@ -79,7 +79,6 @@ public:
 class ClusterLauncher : public Weapon
 {
  private:
-  void p_Init();
   bool p_Shoot();
 
  public:

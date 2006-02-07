@@ -176,14 +176,16 @@ void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem)
 //-----------------------------------------------------------------------------
 
 TuxLauncher::TuxLauncher() : 
-  Weapon(WEAPON_SUPERTUX, "tux"),
+  Weapon(WEAPON_SUPERTUX, "tux", VISIBLE_ONLY_WHEN_INACTIVE),
   supertux(game_loop, *this)
 { 
   m_name = _("SuperTux");   
   override_keys = true ;
 
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-  extra_params = new SuperTuxWeaponConfig();
+  extra_params = new SuperTuxWeaponConfig();  
+
+  supertux.Init();
+  impact = resource_manager.LoadImage(weapons_res_profile,"tux_impact");
 }
 
 //-----------------------------------------------------------------------------
@@ -225,15 +227,6 @@ void TuxLauncher::Refresh()
   if (!m_is_active) return;  
   if (!supertux.is_active) Explosion();
 }
-
-//-----------------------------------------------------------------------------
-
-void TuxLauncher::p_Init()
-{
-  supertux.Init();
-  impact = resource_manager.LoadImage(weapons_res_profile,"tux_impact");
-}
-
 
 //-----------------------------------------------------------------------------
                                                                                     

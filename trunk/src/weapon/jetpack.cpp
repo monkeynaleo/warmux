@@ -41,22 +41,16 @@ const uint DELTA_FUEL_DOWN = 200 ;  // Delta time between 2 fuel unit consumptio
 
 //-----------------------------------------------------------------------------
 
-JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack")
+JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
+			    NEVER_VISIBLE)
 {
   m_name = _("JetPack");
-  m_visibility = NEVER_VISIBLE;
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
   override_keys = true ;
-  use_unit_on_first_shoot = false;
-}
+  use_unit_on_first_shoot = false;  
 
-//-----------------------------------------------------------------------------
-
-void JetPack::p_Init()
-{
   m_name = _("jetpack");
-  icone = resource_manager.LoadImage(weapons_res_profile,"jetpack_ico");
   m_x_force = 0.0;
   m_y_force = 0.0;
 }

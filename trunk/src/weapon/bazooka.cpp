@@ -103,6 +103,9 @@ Bazooka::Bazooka() :
 {  
   m_name = _("Bazooka");
   extra_params = new ExplosiveWeaponConfig();
+
+  roquette.Init();
+  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
 }
 
 bool Bazooka::p_Shoot ()
@@ -148,13 +151,6 @@ void Bazooka::Refresh()
 {
   if (!m_is_active) return;
   if (!roquette.is_active) Explosion();
-}
-
-void Bazooka::p_Init()
-{
-
-  roquette.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
 }
 
 ExplosiveWeaponConfig& Bazooka::cfg()
