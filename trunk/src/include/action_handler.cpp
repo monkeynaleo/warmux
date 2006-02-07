@@ -66,13 +66,13 @@ void Action_MoveLeft (const Action *a)
 void Action_Jump (const Action *a)
 {
       game_loop.character_already_chosen = true;
-      ActiveCharacter().Saute(); 
+      ActiveCharacter().Jump(); 
 }
 
-void Action_SuperJump (const Action *a)
+void Action_HighJump (const Action *a)
 {
       game_loop.character_already_chosen = true;
-      ActiveCharacter().SuperSaut();
+      ActiveCharacter().HighJump();
 }
 
 void Action_Up (const Action *a)
@@ -300,7 +300,7 @@ void ActionHandler::Init()
 	Register (ACTION_UP, "up", &Action_Up);
 	Register (ACTION_DOWN, "down", &Action_Down);
 	Register (ACTION_JUMP, "jump", &Action_Jump);
-	Register (ACTION_SUPER_JUMP, "super_jump", &Action_SuperJump);
+	Register (ACTION_HIGH_JUMP, "super_jump", &Action_HighJump);
 	Register (ACTION_SHOOT, "shoot", &Action_Shoot);
 	Register (ACTION_CHANGE_WEAPON, "change_weapon", &Action_ChangeWeapon);
 	Register (ACTION_WIND, "wind", &Action_Wind);
