@@ -1,7 +1,8 @@
 #!/bin/bash
 
-## Init
+## Programs 
 PKG_CONFIG=pkg-config
+MAKE_NSIS=makensis 
 
 # Path to which all others are relative
 WORMUXDIR=..\..
@@ -10,10 +11,14 @@ WORMUXDIR=..\..
 MINGWDIR=/mingw
 
 # Windows registry software path
-HKLM_PATH=SOFTWARE\Games\Wormux
+HKLM_PATH="SOFTWARE\Games\Wormux"
+
+DEST=tmp-wormux-win32
+NSIS="$DEST\wormux.nsi"
 
 # Clean prior stuff
-rm -f Wormux-Setup*.exe
+rm -rf $DEST
+mkdir -p $DEST
 
 function pkg_path
 {
@@ -26,7 +31,7 @@ function pkg_path
 
 ## Make sure all is done
 echo "Checking make status"
-make -C "$WORMUXDIR" 2>/dev/null 1>&2 || (echo "Bad return code from make; aborting"; exit 1)
+(cd "$WORMUXDIR" && make 2>/dev/null 1>&2 || (echo "Bad return code from make; aborting"; exit 1))
 
 if ! pkg-config --help 2>/dev/null 1>&2 ; then
   echo "pkg-config not found, aborting..."
@@ -34,11 +39,11 @@ if ! pkg-config --help 2>/dev/null 1>&2 ; then
 fi
 
 # Create head
-WORMUX_VERSION=`date +"%Y%m%d"`
-cat > wormux.nsi <<EOF
+WORMUX_VERSION=$(date +"%Y%m%d")
+cat > $NSIS <<EOF
 ;based on MUI Welcome/Finish Page Example Script written by Joost Verburg
 !define MUI_ICON  ${WORMUXDIR}\src\wormux.ico
-!define MUI_UNICON  ${WORMUXDIR}\src\uninstall.ico
+!define MUI_UNICON  uninstall.ico
 !define MUI_COMPONENTSPAGE_SMALLDESC
 !define MUI_LANGDLL_ALWAYSSHOW
 !include "MUI.nsh"
@@ -130,87 +135,87 @@ Section \$(TITLE_Wormux) Sec_Wormux
   ; Set output path to the installation directory.
   SetOutPath \$INSTDIR
   File "${WORMUXDIR}\src\wormux.ico"
-  File "${WORMUXDIR}\src\uninstall.ico"
+  File "uninstall.ico"
   File "${WORMUXDIR}\src\wormux.exe"
 EOF
 
-# All iconv+gettext+jpeg+zlib+mingw stuff
+# All gettext (with iconv), jpeg and zlib stuff
 cp $MINGWDIR/bin/libintl-3.dll $MINGWDIR/bin/libiconv-2.dll \
-   $MINGWDIR/bin/jpeg62.dll $MINGWDIR/bin/zlib1.dll .
-
-# Glib
+   $MINGWDIR/bin/jpeg62.dll $MINGWDIR/bin/zlib1.dll $DEST
+ 
+# Glib (gobject, gthread, glib & gmodule)
 GLIB_PATH=$(pkg_path glib-2.0)
 cp "$GLIB_PATH/bin/libgobject"*.dll "$GLIB_PATH/bin/libgthread"*.dll \
-   "$GLIB_PATH/bin/libglib"*.dll "$GLIB_PATH/bin/libgmodule"*.dll .
+   "$GLIB_PATH/bin/libglib"*.dll "$GLIB_PATH/bin/libgmodule"*.dll $DEST
 
 # Other libs
-cp "$(pkg_path sigc++-2.0)/bin/libsigc"*.dll .
-cp "$(pkg_path libxml-2.0)/bin/libxml2"*.dll .
-cp "$(pkg_path libxml++-2.6)/bin/libxml++"*.dll .
-cp "$(pkg_path glibmm-2.4)/bin/libglibmm"*.dll .
-cp "$(pkg_path libpng13)/bin/libpng13.dll" .
+cp "$(pkg_path sigc++-2.0)/bin/libsigc"*.dll $DEST
+cp "$(pkg_path libxml-2.0)/bin/libxml2"*.dll $DEST
+cp "$(pkg_path libxml++-2.6)/bin/libxml++"*.dll $DEST
+cp "$(pkg_path glibmm-2.4)/bin/libglibmm"*.dll $DEST
+cp "$(pkg_path libpng13)/bin/libpng13.dll" $DEST
 
 # Clean up before non-strippable files
-strip ./*.dll "$WORMUXDIR"/src/*.exe
+strip $DEST/*.dll "$WORMUXDIR/src/*.exe"
 
 # Files that must not be stripped (all of SDL)
-SDL_PATH=`sdl-config --prefix`
+SDL_PATH=$(sdl-config --prefix)
 cp $MINGWDIR/bin/zlib1.dll "$SDL_PATH/bin/SDL_mixer.dll" \
    "$SDL_PATH/bin/SDL_ttf.dll"  "$SDL_PATH/bin/SDL_image.dll" \
-   "$SDL_PATH/bin/SDL.dll" .
+   "$SDL_PATH/bin/SDL.dll" $DEST
 
 # Produce installer
-echo "  ; Dlls and co" >> wormux.nsi
-echo "  File \"*.dll\"" >> wormux.nsi
+echo "  ; Dlls and co" >> $NSIS
+echo "  File \"*.dll\"" >> $NSIS
 
 ## Locale
-echo -e "\n  ; Locale\n" >> wormux.nsi
-for gmo in "$WORMUXDIR"/po/*.gmo; do
+echo -e "\n  ; Locale\n" >> $NSIS
+for gmo in "$WORMUXDIR/po/*.gmo"; do
   lg=${gmo%%.gmo}
   lg=${lg//.*\//}
   gmo=${gmo//\//\\}
-  echo "  SetOutPath \$INSTDIR\\locale\\$lg\\LC_MESSAGES" >> wormux.nsi
-  echo "  File /oname=wormux.mo $gmo" >> wormux.nsi
+  echo "  SetOutPath \$INSTDIR\\locale\\$lg\\LC_MESSAGES" >> $NSIS
+  echo "  File /oname=wormux.mo $gmo" >> $NSIS
 done
 
 ## Data - I love this syntax
-cat >> wormux.nsi <<EOF
+cat >> $NSIS <<EOF
   ; Data
   SetOutPath \$INSTDIR
   File /r /x .svn /x Makefile* /x Makefile.* ${WORMUXDIR}\data
 EOF
 
 ## License
-cat >> wormux.nsi <<EOF
+cat >> $NSIS <<EOF
   ; Licenses
   File /r /x .svn ${WORMUXDIR}\license
 EOF
 
 # End
-cat >> wormux.nsi <<EOF
+cat >> $NSIS <<EOF
 
   ; Write the installation path into the registry
-  WriteRegStr HKLM ${HKLM_PATH} "pth" "$INSTDIR"
+  WriteRegStr HKLM ${HKLM_PATH} "pth" "\$INSTDIR"
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "DisplayName" "Wormux (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "UninstallString" '"$INSTDIR\uninstall.exe"'
   WriteUninstaller "uninstall.exe"
   ; Shortcuts
   SetShellVarContext all
-  CreateDirectory "$SMPROGRAMS\Wormux"
-  CreateShortCut  "$SMPROGRAMS\Wormux\Wormux.lnk" "$INSTDIR\Wormux.exe" "" "$INSTDIR\Wormux.exe" 0
-  CreateShortCut  "$SMPROGRAMS\Wormux\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
+  CreateDirectory "\$SMPROGRAMS\Wormux"
+  CreateShortCut  "\$SMPROGRAMS\Wormux\Wormux.lnk" "\$INSTDIR\Wormux.exe" "" "\$INSTDIR\Wormux.exe" 0
+  CreateShortCut  "\$SMPROGRAMS\Wormux\Uninstall.lnk" "\$INSTDIR\uninstall.exe" "" "\$INSTDIR\uninstall.exe" 0
   ;Write language to the registry (for the uninstaller)
-  WriteRegStr HKLM ${HKLM_PATH} "Installer Language" $LANGUAGE
+  WriteRegStr HKLM ${HKLM_PATH} "Installer Language" \$LANGUAGE
 
-  GetFullPathName /SHORT $SHORTINSTDIR $INSTDIR
+  GetFullPathName /SHORT \$SHORTINSTDIR \$INSTDIR
 SectionEnd
 
 ;--------------------------------
 ;Descriptions
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-  !insertmacro MUI_DESCRIPTION_TEXT ${Sec_Wormux} $(DESC_Wormux)
+  !insertmacro MUI_DESCRIPTION_TEXT \${Sec_Wormux} \$(DESC_Wormux)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
 ;--------------------------------
@@ -248,4 +253,8 @@ FunctionEnd
 EOF
 
 ## Compile installer
-makensis wormux.nsi
+$MAKE_NSIS $NSIS
+
+## Move executable to current directory and remove temporary directory
+mv $DEST/*.exe $PWD
+rm -rf $DEST
