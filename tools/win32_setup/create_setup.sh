@@ -5,7 +5,7 @@ PKG_CONFIG=pkg-config
 MAKE_NSIS=makensis 
 
 # Path to which all others are relative
-WORMUXDIR=..\..
+WORMUXDIR="../.."
 
 # Path of MinGW installation
 MINGWDIR=/mingw
@@ -13,11 +13,20 @@ MINGWDIR=/mingw
 # Windows registry software path
 HKLM_PATH="SOFTWARE\Games\Wormux"
 
+# Version number in installer
+WORMUX_VERSION=`date +"%Y%m%d"`
+
+# Set compression and in/out
+COMPRESSION=lzma
 DEST=tmp-wormux-win32
-NSIS="$DEST\wormux.nsi"
+NSIS="$DEST/wormux.nsi"
 
 # Clean prior stuff
-rm -rf $DEST
+rm -rf $NSIS $DEST
+
+# Prepare stuff
+WIN_WORMUXDIR=$(cd "$WORMUXDIR" && cmd /c cd)
+LOCAL_PATH=$(cmd /c cd)
 mkdir -p $DEST
 
 function pkg_path
@@ -31,7 +40,10 @@ function pkg_path
 
 ## Make sure all is done
 echo "Checking make status"
-(cd "$WORMUXDIR" && make 2>/dev/null 1>&2 || (echo "Bad return code from make; aborting"; exit 1))
+if ! (cd "$WORMUXDIR" && make 1>/dev/null 2>&1); then
+  echo "Bad return code from make; aborting"
+  exit 1
+fi
 
 if ! pkg-config --help 2>/dev/null 1>&2 ; then
   echo "pkg-config not found, aborting..."
@@ -39,11 +51,10 @@ if ! pkg-config --help 2>/dev/null 1>&2 ; then
 fi
 
 # Create head
-WORMUX_VERSION=$(date +"%Y%m%d")
 cat > $NSIS <<EOF
 ;based on MUI Welcome/Finish Page Example Script written by Joost Verburg
-!define MUI_ICON  ${WORMUXDIR}\src\wormux.ico
-!define MUI_UNICON  uninstall.ico
+!define MUI_ICON  "${WIN_WORMUXDIR}\src\wormux.ico"
+!define MUI_UNICON  ${LOCAL_PATH}\uninstall.ico
 !define MUI_COMPONENTSPAGE_SMALLDESC
 !define MUI_LANGDLL_ALWAYSSHOW
 !include "MUI.nsh"
@@ -54,11 +65,8 @@ cat > $NSIS <<EOF
 Name "Wormux"
 
 ;General
-OutFile "Wormux-Setup-${WORMUX_VERSION}.exe"
-!ifndef COMPRESSION
-  !define COMPRESSION lzma
-!endif
-SetCompressor lzma
+OutFile "${LOCAL_PATH}\Wormux-Setup-${WORMUX_VERSION}.exe"
+SetCompressor $COMPRESSION
 
 !define MUI_LANGDLL_REGISTRY_ROOT "HKLM" 
 !define MUI_LANGDLL_REGISTRY_KEY "${HKLM_PATH}" 
@@ -81,42 +89,42 @@ SetCompressor lzma
 
 ;Languages
 !insertmacro MUI_LANGUAGE "English"
-LicenseLangString WormuxLicense "English" "${WORMUXDIR}\license\COPYING.en.txt"
+LicenseLangString WormuxLicense "English" "${WIN_WORMUXDIR}\doc\license\COPYING.en.txt"
 LangString TITLE_Wormux "English" "Wormux"
 LangString DESC_Wormux  "English" "Installs the game Wormux, version ${WORMUX_VERSION}"
 
 !insertmacro MUI_LANGUAGE "French"
-LicenseLangString WormuxLicense "French" "${WORMUXDIR}\license\COPYING.fr.txt"
+LicenseLangString WormuxLicense "French" "${WIN_WORMUXDIR}\doc\license\COPYING.fr.txt"
 LangString TITLE_Wormux "French" "Wormux"
 LangString DESC_Wormux  "French" "Installe le jeu Wormux, en version ${WORMUX_VERSION}"
 
 !insertmacro MUI_LANGUAGE "German"
-LicenseLangString WormuxLicense "German" "${WORMUXDIR}\license\COPYING.de.txt"
+LicenseLangString WormuxLicense "German" "${WIN_WORMUXDIR}\doc\license\COPYING.de.txt"
 LangString TITLE_Wormux "German" "Wormux"
 LangString DESC_Wormux  "German" "Das Spiel Wormux, Version ${WORMUX_VERSION} anbringen"
 
 !insertmacro MUI_LANGUAGE "Spanish"
-LicenseLangString WormuxLicense "Spanish" "${WORMUXDIR}\license\COPYING.es.txt"
+LicenseLangString WormuxLicense "Spanish" "${WIN_WORMUXDIR}\doc\license\COPYING.es.txt"
 LangString TITLE_Wormux "Spanish" "Wormux"
 LangString DESC_Wormux  "Spanish" "Instala el juego Wormux, versión ${WORMUX_VERSION}"
 
 !insertmacro MUI_LANGUAGE "Dutch"
-LicenseLangString WormuxLicense "Dutch" "${WORMUXDIR}\license\COPYING.nl.txt"
+LicenseLangString WormuxLicense "Dutch" "${WIN_WORMUXDIR}\doc\license\COPYING.nl.txt"
 LangString TITLE_Wormux "Dutch" "Wormux"
 LangString DESC_Wormux  "Dutch" "Wormux ${WORMUX_VERSION}"
 
 !insertmacro MUI_LANGUAGE "Polish"
-LicenseLangString WormuxLicense "Polish" "${WORMUXDIR}\license\COPYING.pl.txt"
+LicenseLangString WormuxLicense "Polish" "${WIN_WORMUXDIR}\doc\license\COPYING.pl.txt"
 LangString TITLE_Wormux "Polish" "Wormux"
 LangString DESC_Wormux  "Polish" "Wormux ${WORMUX_VERSION}"
 
 !insertmacro MUI_LANGUAGE "Russian"
-LicenseLangString WormuxLicense "Russian" "${WORMUXDIR}\license\COPYING.ru.txt"
+LicenseLangString WormuxLicense "Russian" "${WIN_WORMUXDIR}\doc\license\COPYING.ru.txt"
 LangString TITLE_Wormux "Russian" "Wormux"
 LangString DESC_Wormux  "Russian" "Wormux ${WORMUX_VERSION}"
 
 !insertmacro MUI_LANGUAGE "Slovenian"
-LicenseLangString WormuxLicense "Slovenian" "${WORMUXDIR}\license\COPYING.sk.txt"
+LicenseLangString WormuxLicense "Slovenian" "${WIN_WORMUXDIR}\doc\license\COPYING.sk.txt"
 LangString TITLE_Wormux "Slovenian" "Wormux"
 LangString DESC_Wormux  "Slovenian" "Wormux ${WORMUX_VERSION}"
 
@@ -134,9 +142,10 @@ AutoCloseWindow false
 Section \$(TITLE_Wormux) Sec_Wormux
   ; Set output path to the installation directory.
   SetOutPath \$INSTDIR
-  File "${WORMUXDIR}\src\wormux.ico"
-  File "uninstall.ico"
-  File "${WORMUXDIR}\src\wormux.exe"
+  File "${WIN_WORMUXDIR}\src\wormux.ico"
+  ; Executing in tmpdir, looking for file in folder below
+  File "${LOCAL_PATH}\uninstall.ico"
+  File "${WIN_WORMUXDIR}\src\wormux.exe"
 EOF
 
 # All gettext (with iconv), jpeg and zlib stuff
@@ -164,31 +173,32 @@ cp $MINGWDIR/bin/zlib1.dll "$SDL_PATH/bin/SDL_mixer.dll" \
    "$SDL_PATH/bin/SDL_ttf.dll"  "$SDL_PATH/bin/SDL_image.dll" \
    "$SDL_PATH/bin/SDL.dll" $DEST
 
-# Produce installer
-echo "  ; Dlls and co" >> $NSIS
-echo "  File \"*.dll\"" >> $NSIS
+# Continue producing installer
+cat >> $NSIS <<EOF
+  ; Dlls and co
+  File "*.dll"
+EOF
 
 ## Locale
-echo -e "\n  ; Locale\n" >> $NSIS
-for gmo in "$WORMUXDIR/po/*.gmo"; do
+echo -e "\n  ; Locale" >> $NSIS
+for gmo in "$WORMUXDIR"/po/*.gmo; do
   lg=${gmo%%.gmo}
   lg=${lg//.*\//}
-  gmo=${gmo//\//\\}
   echo "  SetOutPath \$INSTDIR\\locale\\$lg\\LC_MESSAGES" >> $NSIS
-  echo "  File /oname=wormux.mo $gmo" >> $NSIS
+  echo "  File /oname=wormux.mo \"$WIN_WORMUXDIR\\po\\$lg.gmo\"" >> $NSIS
 done
 
 ## Data - I love this syntax
 cat >> $NSIS <<EOF
   ; Data
   SetOutPath \$INSTDIR
-  File /r /x .svn /x Makefile* /x Makefile.* ${WORMUXDIR}\data
+  File /r /x .svn /x Makefile* /x Makefile.* "${WIN_WORMUXDIR}\\data"
 EOF
 
 ## License
 cat >> $NSIS <<EOF
   ; Licenses
-  File /r /x .svn ${WORMUXDIR}\license
+  File /r /x .svn "${WIN_WORMUXDIR}\\doc\\license"
 EOF
 
 # End
@@ -198,7 +208,7 @@ cat >> $NSIS <<EOF
   WriteRegStr HKLM ${HKLM_PATH} "pth" "\$INSTDIR"
   ; Write the uninstall keys for Windows
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "DisplayName" "Wormux (remove only)"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Wormux" "UninstallString" '"\$INSTDIR\uninstall.exe"'
   WriteUninstaller "uninstall.exe"
   ; Shortcuts
   SetShellVarContext all
@@ -253,8 +263,10 @@ FunctionEnd
 EOF
 
 ## Compile installer
-$MAKE_NSIS $NSIS
+if ! $MAKE_NSIS $NSIS; then
+  echo "makensis failed, aborting..."
+  exit 1
+fi
 
 ## Move executable to current directory and remove temporary directory
-mv $DEST/*.exe $PWD
-rm -rf $DEST
+rm -rf $NSIS $DEST
