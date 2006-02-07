@@ -115,8 +115,8 @@ public:
   bool IsWalking () const { return is_walking; };
 
   // Changement d'etat
-  void SuperSaut ();
-  void Saute ();
+  void HighJump ();
+  void Jump ();
 
   void Draw();
   void Refresh();

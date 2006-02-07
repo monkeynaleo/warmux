@@ -371,10 +371,10 @@ void Character::Draw()
 
 //-----------------------------------------------------------------------------
 
-void Character::Saute ()
+void Character::Jump ()
 {
 #ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "Saute." << endl;
+  COUT_DBG << "Jump." << endl;
 #endif
   do_nothing_time = global_time.Read();
 
@@ -393,10 +393,10 @@ void Character::Saute ()
   SetSpeed (game_mode.character.jump_strength, angle);
 }
 
-void Character::SuperSaut ()
+void Character::HighJump ()
 {
 #ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "SuperSaut." << endl;
+  COUT_DBG << "HighJump." << endl;
 #endif
   do_nothing_time = global_time.Read();
 
@@ -488,8 +488,8 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_JUMP:
               action_handler.NewAction (Action(ACTION_JUMP));
 	            return ;
-            case ACTION_SUPER_JUMP:
-              action_handler.NewAction (Action(ACTION_SUPER_JUMP));
+            case ACTION_HIGH_JUMP:
+              action_handler.NewAction (Action(ACTION_HIGH_JUMP));
               return ;
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:
