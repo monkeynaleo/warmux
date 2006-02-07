@@ -203,7 +203,7 @@ void Config::SetKeyboardConfig()
 	clavier.SetKeyAction(SDLK_UP,			ACTION_UP);
 	clavier.SetKeyAction(SDLK_DOWN,	ACTION_DOWN);
 	clavier.SetKeyAction(SDLK_RETURN,	ACTION_JUMP);
-	clavier.SetKeyAction(SDLK_BACKSPACE, ACTION_SUPER_JUMP);
+	clavier.SetKeyAction(SDLK_BACKSPACE, ACTION_HIGH_JUMP);
 	clavier.SetKeyAction(SDLK_SPACE, ACTION_SHOOT);
 	clavier.SetKeyAction(SDLK_TAB, ACTION_CHANGE_CHARACTER);
 	clavier.SetKeyAction(SDLK_ESCAPE, ACTION_QUIT);
