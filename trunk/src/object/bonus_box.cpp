@@ -203,7 +203,7 @@ void BonusBox::NewBonusBox()
   if (still_visible) return;
 
   if (!enable || (global_time.Read() < time)) {
-    game_loop.SetState(gamePLAYING);
+    //game_loop.SetState(gamePLAYING);
     return;
   }
 
@@ -316,10 +316,10 @@ void BonusBox::Refresh()
   m_ready = anim->IsFinished();
 
   if (m_ready) {
-#ifdef MSG_DBG
-    COUT_DBG << "game_loop.SetState (gamePLAYING)" << std::endl;
-#endif
-    game_loop.SetState (gamePLAYING);
+// #ifdef MSG_DBG
+//     COUT_DBG << "game_loop.SetState (gamePLAYING)" << std::endl;
+// #endif
+//     game_loop.SetState (gamePLAYING);
   }
 }
 
