@@ -31,6 +31,7 @@
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../map/map.h"
+#include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/point.h"
 #include "../tool/rectangle.h"
@@ -341,8 +342,13 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
     lg -= 1.0 ;    
   } while (0 < lg);
 
-   if (ninjarope.IsActive())
-    ninjarope.NotifyMove(collision) ;
+
+  if (ActiveTeam().GetWeaponType() == WEAPON_NINJA_ROPE &&
+      ActiveTeam().GetWeapon().IsActive()) {
+    Weapon& tmp = ActiveTeam().AccessWeapon();
+    NinjaRope * ninjarope = (NinjaRope *)(&tmp);
+    ninjarope->NotifyMove(collision) ;
+  }
    
   return collision;
 }
