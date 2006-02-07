@@ -58,5 +58,4 @@ public:
   WeaponConfig& cfg();
 };
 
-extern Gun gun;
 #endif

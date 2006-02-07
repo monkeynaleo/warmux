@@ -34,8 +34,6 @@
 #include "../weapon/gun.h"
 #include "../weapon/weapon_tools.h"
 
-Gun gun;
-
 const uint VITESSE_CAPTURE_POS_BALLE = 10;
 const uint BULLET_SPEED = 20;
 const double BULLET_BLAST = 1;

@@ -30,16 +30,19 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
+class ClusterLauncher;
+
 // Les fragments
 class Cluster : public WeaponProjectile
 {
 public:
-  Cluster(GameLoop &game_loop);
+  Cluster(GameLoop &game_loop, ClusterLauncher& launcher);
   void Init();
   void Draw();
   void Refresh();
   void Tire(int n_x, int n_y);
 protected:
+  ClusterLauncher& launcher;
   void SignalCollision();
 };
 
@@ -52,12 +55,13 @@ public:
   std::list<Cluster> tableau_cluster;
   typedef std::list<Cluster>::iterator iterator;
 
-  ClusterBomb(GameLoop &game_loop);
+  ClusterBomb(GameLoop &game_loop, ClusterLauncher& launcher);
   void Tire (double force);
   void Init();
   void Draw();
   void Refresh();
 protected:
+  ClusterLauncher& launcher;
   void SignalCollision();
 };
 
@@ -72,7 +76,7 @@ public:
   virtual void LoadXml(xmlpp::Element *elem);
 };
 
-class LanceCluster : public Weapon
+class ClusterLauncher : public Weapon
 {
  private:
   void p_Init();
@@ -82,7 +86,7 @@ class LanceCluster : public Weapon
   Surface impact;
   ClusterBomb cluster_bomb;
 
-  LanceCluster();
+  ClusterLauncher();
   void Refresh();
   ClusterBombConfig& cfg();
 
@@ -90,5 +94,4 @@ protected:
   void Explosion();
 };
 
-extern LanceCluster lance_cluster;
 #endif

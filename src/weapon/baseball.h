@@ -49,6 +49,5 @@ class Baseball : public Weapon
   BaseballConfig &cfg();
 };
 
-extern Baseball baseball;
 //-----------------------------------------------------------------------------
 #endif

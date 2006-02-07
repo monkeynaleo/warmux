@@ -28,6 +28,8 @@
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 
+class HollyGrenadeLauncher;
+
 // The Holly Grenade
 class HollyGrenade : public WeaponProjectile
 {
@@ -36,8 +38,9 @@ protected:
   bool sing_alleluia;
 
   ParticleEngine smoke_engine;
+  HollyGrenadeLauncher& launcher;
 public:
-  HollyGrenade(GameLoop &game_loop);
+  HollyGrenade(GameLoop &game_loop, HollyGrenadeLauncher& launcher);
   void Tire (double force);
   void Init();
   void Refresh();
@@ -65,5 +68,4 @@ protected:
   void Explosion();
 };
 
-extern HollyGrenadeLauncher holly_grenade_launcher;
 #endif

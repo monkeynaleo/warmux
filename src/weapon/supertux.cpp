@@ -34,8 +34,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-TuxLauncher tux;
-
 const uint time_delta = 40;
 const uint animation_deltat = 50;
 
@@ -43,9 +41,10 @@ const uint animation_deltat = 50;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-SuperTux::SuperTux(GameLoop &p_game_loop) :
+SuperTux::SuperTux(GameLoop &p_game_loop, TuxLauncher& p_launcher) :
   WeaponProjectile (p_game_loop, "supertux"), 
-  particle_engine(particle_STAR,40)
+  particle_engine(particle_STAR,40),
+  launcher(p_launcher)
 {
   SetWindFactor (0.8);
   m_allow_negative_y = true;
@@ -67,7 +66,7 @@ void SuperTux::Tire()
   // Fixe la force de départ
   angle = ActiveTeam().crosshair.GetAngleRad();
   PutOutOfGround(angle);
-  SetExternForce(tux.cfg().speed, angle);
+  SetExternForce(launcher.cfg().speed, angle);
   time_next_action = global_time.Read();
   last_move = global_time.Read();
   camera.ChangeObjSuivi((PhysicalObj*)this,true,true);
@@ -81,7 +80,7 @@ void SuperTux::Init()
   image->cache.EnableLastFrameCache();
   SetSize(image->GetWidth(), image->GetHeight());
 
-  SetMass (tux.cfg().mass);
+  SetMass (launcher.cfg().mass);
   m_gravity_factor = 0.0;
 
   // Fixe le rectangle de test
@@ -102,7 +101,7 @@ void SuperTux::Refresh()
   image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
   if ((last_move+animation_deltat)<global_time.Read())
     {
-      SetExternForce(tux.cfg().speed, angle);
+      SetExternForce(launcher.cfg().speed, angle);
       image->Update();
       last_move = global_time.Read();
   }
@@ -178,7 +177,7 @@ void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem)
 
 TuxLauncher::TuxLauncher() : 
   Weapon(WEAPON_SUPERTUX, "tux"),
-  supertux(game_loop)
+  supertux(game_loop, *this)
 { 
   m_name = _("SuperTux");   
   override_keys = true ;

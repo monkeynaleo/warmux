@@ -48,6 +48,5 @@ public:
   void Desactivate();
 };
 
- extern Parachute parachute;
 //-----------------------------------------------------------------------------
 #endif

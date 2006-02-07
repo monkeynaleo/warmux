@@ -43,5 +43,4 @@ public:
   ExplosiveWeaponConfig &cfg();
 };
 
-extern Suicide suicide;
 #endif

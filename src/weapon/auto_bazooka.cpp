@@ -41,15 +41,16 @@
 #undef LoadImage
 #endif
 
-AutomaticBazooka auto_bazooka;
 
 //Temps en seconde à partir duquel la roquette se dirige vers la cible
 const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
 
-RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop) :
-  WeaponProjectile(p_game_loop, "roquette tete chercheuse")
+RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop, 
+					 AutomaticBazooka &p_bazooka) :
+  WeaponProjectile(p_game_loop, "roquette tete chercheuse"),
+  auto_bazooka(p_bazooka)
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
@@ -154,7 +155,7 @@ void RoquetteTeteCherche::SetTarget (int x, int y)
 
 AutomaticBazooka::AutomaticBazooka() : 
   Weapon(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka"),
-  roquette(game_loop)
+  roquette(game_loop, *this)
 {  
   m_name = _("Automatic bazooka");
 

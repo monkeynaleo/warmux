@@ -31,8 +31,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-Uzi uzi;
-//-----------------------------------------------------------------------------
 
 const double SOUFFLE_BALLE = 1;
 const double MIN_TIME_BETWEEN_SHOOT = 70; // in milliseconds

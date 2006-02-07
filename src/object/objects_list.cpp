@@ -80,11 +80,11 @@ void ListeObjets::Reset()
 {
   VideListe();
 
-  for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
-  {
-    ObjMine *obj = new ObjMine(game_loop);
-    AjouteObjet (obj, true);
-  }
+//   for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
+//   {
+//     ObjMine *obj = new ObjMine(game_loop);
+//     AjouteObjet (obj, true);
+//   }
 
   POUR_CHAQUE_OBJET(objet) (*objet).ptr -> Reset();
 }

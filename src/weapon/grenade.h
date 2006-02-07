@@ -30,13 +30,16 @@
 #include "../object/physical_obj.h"
 #include "weapon.h"
 
+class GrenadeLauncher;
+
 // La Grenade
 class Grenade : public WeaponProjectile
 {
 protected:
   double temps_debut_tir;
+  GrenadeLauncher& launcher;
 public:
-  Grenade(GameLoop &game_loop);
+  Grenade(GameLoop &game_loop, GrenadeLauncher& launcher);
   void Tire (double force);
   uint ChoixFrame(double angle);
   void Init();
@@ -75,5 +78,4 @@ protected:
   void Explosion();
 };
 
-extern GrenadeLauncher lance_grenade;
 #endif

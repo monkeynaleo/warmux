@@ -27,6 +27,8 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
+class AutomaticBazooka;
+
 // Roquette du bazooka à tête chercheuse
 class RoquetteTeteCherche : public WeaponProjectile
 {
@@ -36,13 +38,14 @@ protected:
   Point2i m_cible;
   bool m_attire;
 public:
-  RoquetteTeteCherche(GameLoop &game_loop);
+  RoquetteTeteCherche(GameLoop &game_loop, AutomaticBazooka& autobazooka);
   void Tire (double force, uint cible_x,uint cible_y);
   uint ChoixFrame(double angle);
   void Init();
   void Reset();
   void Refresh();
 protected:
+  AutomaticBazooka& auto_bazooka;
   void SetTarget (int x,int y);
   void SignalCollision();
 };
@@ -85,5 +88,4 @@ protected:
   void Explosion();
 };
 
-extern AutomaticBazooka auto_bazooka;
 #endif

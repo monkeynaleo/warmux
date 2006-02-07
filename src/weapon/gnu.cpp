@@ -38,17 +38,14 @@
 #include "../tool/i18n.h"
 #include "../tool/random.h"
 //-----------------------------------------------------------------------------
-GnuLauncher gnu_launcher;
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Gnu::Gnu(GameLoop &p_game_loop) : 
-  PhysicalObj (p_game_loop, "Gnu!")
+Gnu::Gnu(GameLoop &p_game_loop, GnuLauncher& p_launcher) : 
+  PhysicalObj (p_game_loop, "Gnu!"),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
 }
@@ -57,7 +54,7 @@ Gnu::Gnu(GameLoop &p_game_loop) :
 
 void Gnu::Tire (double force)
 {
-  SetAirResistFactor(gnu_launcher.cfg().air_resist_factor);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 //  PrepareTir();
   m_alive = ALIVE;
 
@@ -74,7 +71,7 @@ void Gnu::Tire (double force)
   if(!PutOutOfGround(angle))
   {
     //If the gnu can't be put out of the ground, just explode right now!
-    launched_time = global_time.Read() - (1000*gnu_launcher.cfg().timeout);
+    launched_time = global_time.Read() - (1000*launcher.cfg().timeout);
     return;
   }
 
@@ -97,7 +94,7 @@ void Gnu::Init()
 {
   image = resource_manager.LoadSprite( weapons_res_profile, "gnu"); 
   SetSize (image->GetWidth(), image->GetHeight());
-  SetMass (gnu_launcher.cfg().mass);
+  SetMass (launcher.cfg().mass);
   SetTestRect ( image->GetWidth()/2-1,
                 image->GetWidth()/2-1,
                 image->GetHeight()/2-1,
@@ -111,9 +108,9 @@ void Gnu::Refresh()
   if (!is_active) return;
 
   uint tmp=global_time.Read();
-  if(tmp > (1000*gnu_launcher.cfg().timeout)+launched_time)
+  if(tmp > (1000*launcher.cfg().timeout)+launched_time)
   {
-    gnu_launcher.Explosion();
+    launcher.Explosion();
     return;
   }
 
@@ -121,7 +118,7 @@ void Gnu::Refresh()
   GetSpeed(norm,angle);
   if((!IsMoving() || norm<1.0)&& !FootsInVacuum())
   {
-    norm = RandomLong(50,100)*double(gnu_launcher.cfg().rebound_factor)/100.0;
+    norm = RandomLong(50,100)*double(launcher.cfg().rebound_factor)/100.0;
     angle = -(M_PI/2)-(m_sens*(RandomLong(0,90)*M_PI/45.0));
     SetSpeed(norm,angle);
   }
@@ -156,7 +153,7 @@ void Gnu::Refresh()
   if(IsGhost())
   {
     is_active=false;
-    gnu_launcher.Explosion();
+    launcher.Explosion();
     return;
   }
 }
@@ -171,12 +168,12 @@ void Gnu::SignalFallEnding()
 void Gnu::SignalCollision()
 {
   is_active=false;
-  gnu_launcher.Explosion();
+  launcher.Explosion();
 }
 void Gnu::SignalGhostState()
 {
   is_active=false;
-  gnu_launcher.Explosion();
+  launcher.Explosion();
 }
 
 //-----------------------------------------------------------------------------
@@ -191,7 +188,7 @@ void Gnu::Draw()
 //  else
 //    image->Draw(GetX()+image->GetWidth(),GetY());   
 
-  int tmp=gnu_launcher.cfg().timeout;
+  int tmp=launcher.cfg().timeout;
   tmp -= (int) ((global_time.Read() - launched_time) / 1000);
   std::ostringstream ss;
   ss << tmp;
@@ -214,7 +211,7 @@ void Gnu::Reset()
 
 GnuLauncher::GnuLauncher() : 
   Weapon(WEAPON_GNU, "gnulauncher"),
-  gnu(game_loop)
+  gnu(game_loop, *this)
 {
   m_name = _("GnuLauncher");
   extra_params = new GrenadeConfig();

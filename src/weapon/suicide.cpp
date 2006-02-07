@@ -27,7 +27,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-Suicide suicide;
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;

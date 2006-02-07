@@ -26,6 +26,8 @@
 #include "../include/base.h"
 #include "weapon.h"
 
+class AirAttack;
+
 class AirAttackConfig : public ExplosiveWeaponConfig
 { 
 public:
@@ -41,13 +43,14 @@ class Obus : public WeaponProjectile
 private:
   Surface impact; 
 public:
-  Obus(GameLoop &game_loop);
+  Obus(GameLoop &game_loop, AirAttack& air_attack);
   void Draw();
   void Refresh();
   void Reset();
   void Init();
 
 protected:
+  AirAttack& air_attack;
   void SignalCollision();
 };
 
@@ -59,9 +62,10 @@ public:
 private:
   int cible_x;
   int vitesse;
+  AirAttack& air_attack;
 
 public:
-  Avion(GameLoop &game_loop);
+  Avion(GameLoop &game_loop, AirAttack& air_attack);
   void Tire();
   void Reset();
   void Init();
@@ -96,5 +100,4 @@ public:
   AirAttackConfig& cfg();
 };
 
-extern AirAttack air_attack;
 #endif

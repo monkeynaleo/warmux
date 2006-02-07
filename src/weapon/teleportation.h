@@ -47,5 +47,4 @@ public:
   WeaponConfig& cfg();
 };
 
-extern Teleportation teleportation;
 #endif

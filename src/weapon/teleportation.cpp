@@ -30,8 +30,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-Teleportation teleportation;
-
 double ZOOM_MAX = 10; // zoom maximum durant le petit effet graphique
 uint ESPACE = 4;
 

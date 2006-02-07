@@ -32,9 +32,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-//-----------------------------------------------------------------------------
-JetPack jetpack;
-//-----------------------------------------------------------------------------
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
