@@ -36,7 +36,6 @@ private:
 
 public:
   Parachute();
-  void p_Init();
   void p_Select();
   void p_Deselect();
   void Refresh();

@@ -80,14 +80,8 @@ Uzi::Uzi() :
 
   m_first_shoot = 0;
 
-  m_visibility = ALWAYS_VISIBLE;
-  extra_params = new WeaponConfig();
-}
+  extra_params = new WeaponConfig();  
 
-//-----------------------------------------------------------------------------
-
-void Uzi::p_Init()
-{
   balle.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "uzi_impact");  
 }

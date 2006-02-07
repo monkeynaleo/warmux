@@ -293,12 +293,11 @@ void ObjMine::SignalGhostState (bool)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Mine::Mine() : Weapon(WEAPON_MINE, "mine")
+Mine::Mine() : Weapon(WEAPON_MINE, "mine", VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
 
   already_put = false;
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
 
   extra_params = new MineConfig();
 }

@@ -55,8 +55,6 @@ WeaponsList::~WeaponsList()
 
 void WeaponsList::AddToList(Weapon* arme, uint num_sort)
 {
-  arme->Init();
-
   // insert the pointer
   m_weapons_list.push_back(arme);
   todelete.push_back(arme);

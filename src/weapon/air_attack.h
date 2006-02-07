@@ -85,7 +85,6 @@ private:
   bool obus_laches;
   bool obus_actifs;
 
-  void p_Init();
   bool p_Shoot();
 
 public:

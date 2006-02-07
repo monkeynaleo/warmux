@@ -161,7 +161,11 @@ AutomaticBazooka::AutomaticBazooka() :
 
   m_is_active = false;
   cible.choisie = false;
-  extra_params = new ExplosiveWeaponConfig();
+  extra_params = new ExplosiveWeaponConfig();  
+
+  roquette.Init();
+  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
+  cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
 }
 
 void AutomaticBazooka::Draw()
@@ -217,13 +221,6 @@ void AutomaticBazooka::Refresh()
   {
     if (!roquette.is_active) Explosion();
   } 
-}
-
-void AutomaticBazooka::p_Init()
-{
-  roquette.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
-  cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
 }
 
 void AutomaticBazooka::p_Select()

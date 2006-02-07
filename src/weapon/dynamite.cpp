@@ -123,18 +123,13 @@ void BatonDynamite::SignalGhostState (bool) { is_active = false; }
 //-----------------------------------------------------------------------------
 
 Dynamite::Dynamite() :
-  Weapon(WEAPON_DYNAMITE, "dynamite"), 
+  Weapon(WEAPON_DYNAMITE, "dynamite", VISIBLE_ONLY_WHEN_INACTIVE), 
   baton(game_loop, *this)
 {
   m_name = _("Dynamite");
   extra_params = new DynamiteConfig();
   channel = -1;
 
-   m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-}
-
-void Dynamite::p_Init()
-{
   baton.Init();
   impact = resource_manager.LoadImage(weapons_res_profile,"dynamite_impact");
 }

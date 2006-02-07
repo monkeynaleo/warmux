@@ -73,7 +73,6 @@ private:
   BatonDynamite baton;
 
   void FinExplosion ();
-  void p_Init();
   bool p_Shoot();
 
 public:

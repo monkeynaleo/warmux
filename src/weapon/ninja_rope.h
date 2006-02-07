@@ -62,7 +62,6 @@ public:
   NinjaRope();
   void Active();
   void Refresh();
-  void p_Init();
   void p_Deselect();
   void Draw();
   void HandleKeyEvent(int key, int event_type) ;

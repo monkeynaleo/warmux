@@ -38,7 +38,6 @@ public:
 class Uzi : public Weapon
 {
  private:
-  void p_Init();
   void p_Deselect();
   bool p_Shoot();
   void RepeatShoot(); 

@@ -191,13 +191,15 @@ void HollyGrenade::SignalCollision()
 //-----------------------------------------------------------------------------
 
 HollyGrenadeLauncher::HollyGrenadeLauncher() : 
-  Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade"),
+  Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade", VISIBLE_ONLY_WHEN_INACTIVE),
   grenade(game_loop, *this)
 {  
   m_name = _("HollyGrenade");
 
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-  extra_params = new GrenadeConfig();
+  extra_params = new GrenadeConfig();  
+
+  grenade.Init();
+  impact = resource_manager.LoadImage( weapons_res_profile, "holly_grenade_impact");
 }
 
 //-----------------------------------------------------------------------------
@@ -241,14 +243,6 @@ void HollyGrenadeLauncher::Refresh()
   {
     if (!grenade.is_active) Explosion();
   } 
-}
-
-//-----------------------------------------------------------------------------
-
-void HollyGrenadeLauncher::p_Init()
-{
-  grenade.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "holly_grenade_impact");
 }
 
 //-----------------------------------------------------------------------------

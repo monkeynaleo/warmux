@@ -241,13 +241,15 @@ void ClusterBomb::SignalCollision()
 //-----------------------------------------------------------------------------
 
 ClusterLauncher::ClusterLauncher() : 
-  Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb"),
+  Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb", VISIBLE_ONLY_WHEN_INACTIVE),
   cluster_bomb(game_loop, *this)
 {  
   m_name = _("ClusterBomb");  
 
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-  extra_params = new ClusterBombConfig();
+  extra_params = new ClusterBombConfig();  
+
+  cluster_bomb.Init();
+  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
 bool ClusterLauncher::p_Shoot ()
@@ -286,12 +288,6 @@ void ClusterLauncher::Refresh()
   {
     if (!cluster_bomb.is_active) Explosion();
   } 
-}
-
-void ClusterLauncher::p_Init()
-{
-  cluster_bomb.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
 ClusterBombConfig& ClusterLauncher::cfg() 

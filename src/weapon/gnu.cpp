@@ -214,7 +214,9 @@ GnuLauncher::GnuLauncher() :
   gnu(game_loop, *this)
 {
   m_name = _("GnuLauncher");
-  extra_params = new GrenadeConfig();
+  extra_params = new GrenadeConfig();  
+  impact = resource_manager.LoadImage( weapons_res_profile, "gnulauncher_impact");
+  gnu.Init();
 }
 
 //-----------------------------------------------------------------------------
@@ -257,14 +259,6 @@ void GnuLauncher::Explosion()
 void GnuLauncher::Refresh()
 {
   if (!m_is_active) return;
-}
-
-//-----------------------------------------------------------------------------
-
-void GnuLauncher::p_Init()
-{
-  impact = resource_manager.LoadImage( weapons_res_profile, "gnulauncher_impact");
-  gnu.Init();
 }
 
 //-----------------------------------------------------------------------------

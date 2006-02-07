@@ -32,7 +32,6 @@ class Airhammer : public Weapon
   uint m_last_jolt;
   Surface impact;
 
-  void p_Init();
   void p_Deselect();
   bool p_Shoot();
   void RepeatShoot();

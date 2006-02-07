@@ -99,7 +99,18 @@ NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope")
   m_name = _("NinjaRope");
   override_keys = true ;
   use_unit_on_first_shoot = false;
-  skin = NULL;
+  skin = NULL;  
+
+  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
+  m_hook_sprite->EnableRotationCache(32);
+  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjanode");
+
+  m_is_active = false;
+  m_attaching = false;
+  m_rope_attached = false;
+  go_left = false ;
+  go_right = false ;
+  delta_len = 0 ;
 }
 
 bool NinjaRope::p_Shoot()
@@ -516,23 +527,6 @@ void NinjaRope::Draw()
   m_hook_sprite->SetRotation_deg(-prev_angle * 180.0 / M_PI);
   m_hook_sprite->Draw(rope_node[0].x - m_hook_sprite->GetWidth()/2,
 		     rope_node[0].y - m_hook_sprite->GetHeight()/2);
-}
-
-void NinjaRope::p_Init()
-{
-  m_name="ninjarope";
-  icone = resource_manager.LoadImage(weapons_res_profile,"ninjarope_ico");
-  m_image = resource_manager.LoadSprite(weapons_res_profile,"ninjarope");
-  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
-  m_hook_sprite->EnableRotationCache(32);
-  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjanode");
-
-  m_is_active = false;
-  m_attaching = false;
-  m_rope_attached = false;
-  go_left = false ;
-  go_right = false ;
-  delta_len = 0 ;
 }
 
 void NinjaRope::p_Deselect()

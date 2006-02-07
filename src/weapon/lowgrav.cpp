@@ -37,21 +37,12 @@ const double LOW_GRAVITY_FACTOR = 0.4;
 
 //-----------------------------------------------------------------------------
 
-LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav")
+LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",NEVER_VISIBLE)
 {
   m_name = _("LowGrav");
-  m_visibility = NEVER_VISIBLE;
 
   override_keys = true ;
-  use_unit_on_first_shoot = false;
-}
-
-//-----------------------------------------------------------------------------
-
-void LowGrav::p_Init()
-{
-  m_name = _("lowgrav");
-  icone = resource_manager.LoadImage(weapons_res_profile,"lowgrav_ico");
+  use_unit_on_first_shoot = false;  
 }
 
 //-----------------------------------------------------------------------------

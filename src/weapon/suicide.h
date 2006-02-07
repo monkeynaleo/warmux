@@ -31,7 +31,6 @@ private:
    int sound_channel;
    bool is_dying;
 
-  void p_Init();
   bool p_Shoot();
 
 public:

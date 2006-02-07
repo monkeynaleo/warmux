@@ -81,11 +81,7 @@ Gun::Gun() :
   balle(game_loop)
 {
   m_name = _("Gun");
-  extra_params = new WeaponConfig(); 
-}
-
-void Gun::p_Init()
-{
+  extra_params = new WeaponConfig();   
   balle.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "gun_impact");  
 }

@@ -30,7 +30,6 @@ class LowGrav : public Weapon
 public:
   LowGrav();
   void Reset();
-  void p_Init();
   void Refresh();
   void p_Deselect();
   void HandleKeyEvent(int action, int event_type);

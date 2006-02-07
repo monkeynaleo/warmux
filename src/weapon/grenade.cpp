@@ -178,13 +178,15 @@ void Grenade::SignalCollision()
 //-----------------------------------------------------------------------------
 
 GrenadeLauncher::GrenadeLauncher() : 
-  Weapon(WEAPON_GRENADE, "grenade"),
+  Weapon(WEAPON_GRENADE, "grenade", VISIBLE_ONLY_WHEN_INACTIVE),
   grenade(game_loop, *this)
 {  
   m_name = _("Grenade");
  
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-  extra_params = new GrenadeConfig();
+  extra_params = new GrenadeConfig();  
+  
+  grenade.Init();
+  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
 //-----------------------------------------------------------------------------
@@ -235,14 +237,6 @@ void GrenadeLauncher::Refresh()
   {
     if (!grenade.is_active) Explosion();
   } 
-}
-
-//-----------------------------------------------------------------------------
-
-void GrenadeLauncher::p_Init()
-{
-  grenade.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
 //-----------------------------------------------------------------------------
