@@ -35,7 +35,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-HollyGrenadeLauncher holly_grenade_launcher;
 
 #ifdef DEBUG
 
@@ -49,9 +48,10 @@ HollyGrenadeLauncher holly_grenade_launcher;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-HollyGrenade::HollyGrenade(GameLoop &p_game_loop) :
+HollyGrenade::HollyGrenade(GameLoop &p_game_loop, HollyGrenadeLauncher& p_launcher) :
   WeaponProjectile (p_game_loop, "holly_grenade"), 
-  smoke_engine(particle_SMOKE,40)
+  smoke_engine(particle_SMOKE,40),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/holly_grenade_bounce";
@@ -64,7 +64,7 @@ HollyGrenade::HollyGrenade(GameLoop &p_game_loop) :
 
 void HollyGrenade::Tire (double force)
 {
-  SetAirResistFactor(holly_grenade_launcher.cfg().air_resist_factor);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 
   PrepareTir();
 
@@ -93,9 +93,9 @@ void HollyGrenade::Init()
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight());
 
-  SetMass (holly_grenade_launcher.cfg().mass);
-  SetAirResistFactor(holly_grenade_launcher.cfg().air_resist_factor);
-  m_rebound_factor = double(holly_grenade_launcher.cfg().rebound_factor);
+  SetMass (launcher.cfg().mass);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
+  m_rebound_factor = double(launcher.cfg().rebound_factor);
 
   // Fixe le rectangle de test
   int dx = image->GetWidth()/2-1;
@@ -129,14 +129,14 @@ void HollyGrenade::Refresh()
 
   //5 sec après avoir été tirée, la grenade explose
   double tmp = global_time.Read() - temps_debut_tir;
-  if(tmp>1000 * holly_grenade_launcher.cfg().timeout) {
+  if(tmp>1000 * launcher.cfg().timeout) {
     smoke_engine.Stop();
     is_active = false;
     return;
   }
 
   // Sing Alleluia ;-)
-  if (tmp > (1000 * holly_grenade_launcher.cfg().timeout - 2000) && !sing_alleluia) {
+  if (tmp > (1000 * launcher.cfg().timeout - 2000) && !sing_alleluia) {
     jukebox.Play("share","weapon/alleluia") ;
     sing_alleluia = true;
   }
@@ -165,7 +165,7 @@ void HollyGrenade::Draw()
   smoke_engine.Draw();
 
   image->Draw(GetX(),GetY());
-  int tmp = holly_grenade_launcher.cfg().timeout;
+  int tmp = launcher.cfg().timeout;
   tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
@@ -192,7 +192,7 @@ void HollyGrenade::SignalCollision()
 
 HollyGrenadeLauncher::HollyGrenadeLauncher() : 
   Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade"),
-  grenade(game_loop)
+  grenade(game_loop, *this)
 {  
   m_name = _("HollyGrenade");
 

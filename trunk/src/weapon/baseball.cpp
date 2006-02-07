@@ -25,8 +25,6 @@
 #include "../tool/point.h"
 #include "../tool/i18n.h"
 
-Baseball baseball;
-
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball"){
   m_name = _("Baseball");
   extra_params = new BaseballConfig();

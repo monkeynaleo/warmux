@@ -31,6 +31,8 @@
 #include "../object/physical_obj.h"
 #include "../team/character.h"
 
+class Mine;
+
 class ObjMine : public PhysicalObj
 {
 private:
@@ -51,9 +53,9 @@ private:
   bool non_defectueuse;
 
   Character *ver_declancheur;
-
+  Mine& launcher;
 public:
-  ObjMine(GameLoop &game_loop);
+  ObjMine(GameLoop &game_loop, Mine &launcher);
   void Init();
   void Reset();
   void Explosion ();
@@ -93,5 +95,4 @@ public:
   MineConfig& cfg();
 };
 
-extern Mine mine;
 #endif

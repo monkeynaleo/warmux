@@ -43,7 +43,6 @@
 #undef LoadImage
 #endif
 //-----------------------------------------------------------------------------
-Mine mine;
 
 #ifdef DEBUG
 
@@ -61,8 +60,9 @@ const double DEPART_FONCTIONNEMENT = 5;
 
 //-----------------------------------------------------------------------------
 
-ObjMine::ObjMine(GameLoop &p_game_loop) : 
-  PhysicalObj(p_game_loop, "mine", 0.0)
+ObjMine::ObjMine(GameLoop &p_game_loop, Mine& p_launcher) : 
+  PhysicalObj(p_game_loop, "mine", 0.0),
+  launcher(p_launcher)
 {
   SetTestRect (0, 4, 0, 3);
   m_allow_negative_y = true; 
@@ -86,11 +86,11 @@ void ObjMine::Init()
   SetSize (detection->GetWidth(), detection->GetHeight());
 
   impact = resource_manager.LoadImage(res,"mine_impact");
-  SetMass (mine.cfg().mass);
+  SetMass (launcher.cfg().mass);
   
   explosion = resource_manager.LoadSprite(res,"explosion");
    
-  armer = global_time.Read() + mine.cfg().temps_fuite;
+  armer = global_time.Read() + launcher.cfg().temps_fuite;
   depart = uint(global_time.Read() + DEPART_FONCTIONNEMENT * 1000);
 }
 
@@ -127,7 +127,7 @@ void ObjMine::Reset()
     FOR_ALL_LIVING_CHARACTERS(equipe, ver)
     {
       if (MeterDistance (GetCenter(), ver->GetCenter()) 
-	   < mine.cfg().detection_range)
+	   < launcher.cfg().detection_range)
       { 
 #ifdef DBG_PLACEMENT
 	COUT_PLACEMENT << "Touche le ver " << (*ver).m_name << std::endl;
@@ -142,7 +142,7 @@ void ObjMine::Reset()
 #endif
 
   DirectFall();
-  SetMass(mine.cfg().mass);
+  SetMass(launcher.cfg().mass);
 }
 
 //-----------------------------------------------------------------------------
@@ -162,7 +162,7 @@ void ObjMine::SignalFallEnding()
   COUT_DBG << "Fin de la chute : la mine est a terre." << std::endl;
 #endif
 
-  SetMass (mine.cfg().mass);
+  SetMass (launcher.cfg().mass);
 }
 
 //-----------------------------------------------------------------------------
@@ -175,7 +175,7 @@ void ObjMine::Explosion ()
   affiche = false;
 
   Point2i centre = GetCenter();
-  AppliqueExplosion (centre, centre, impact, mine.cfg(), NULL);
+  AppliqueExplosion (centre, centre, impact, launcher.cfg(), NULL);
   DesactiveDetection();
 }
 
@@ -191,8 +191,8 @@ void ObjMine::ActiveDetection()
 
     animation=true;
     affiche = true;
-    armer = global_time.Read() + mine.cfg().temps_fuite;
-    attente = global_time.Read() + mine.cfg().temps_fuite;
+    armer = global_time.Read() + launcher.cfg().temps_fuite;
+    attente = global_time.Read() + launcher.cfg().temps_fuite;
     m_ready = false;
 #ifdef DBG_DETECTION
     COUT_DBG << "IsReady() : " << IsReady() << std::endl;
@@ -225,7 +225,7 @@ void ObjMine::Detection()
   FOR_ALL_LIVING_CHARACTERS(equipe, ver)
   { 
     if (MeterDistance (GetCenter(), ver->GetCenter())
-	 < mine.cfg().detection_range && !animation)
+	 < launcher.cfg().detection_range && !animation)
     {
       ver_declancheur = &(*ver);
       std::string txt = Format(_("%s is next to a mine!"),
@@ -320,7 +320,7 @@ bool Mine::p_Shoot()
 
 void Mine::Add (int x, int y)
 {
-  ObjMine *obj = new ObjMine(game_loop);
+  ObjMine *obj = new ObjMine(game_loop, *this);
   //obj -> Init();
   obj -> SetXY (x, y);
 

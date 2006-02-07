@@ -36,8 +36,6 @@
 #include "../object/objects_list.h"
 #include "../include/global.h"
 //-----------------------------------------------------------------------------
-GrenadeLauncher lance_grenade;
-//-----------------------------------------------------------------------------
 
 #ifdef DEBUG
 
@@ -51,8 +49,9 @@ GrenadeLauncher lance_grenade;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Grenade::Grenade(GameLoop &p_game_loop) :
-  WeaponProjectile (p_game_loop, "grenade")
+Grenade::Grenade(GameLoop &p_game_loop, GrenadeLauncher& p_launcher) :
+  WeaponProjectile (p_game_loop, "grenade"),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/grenade_bounce";
@@ -64,7 +63,7 @@ Grenade::Grenade(GameLoop &p_game_loop) :
 
 void Grenade::Tire (double force)
 {
-  SetAirResistFactor(lance_grenade.cfg().air_resist_factor);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 
   PrepareTir();
 
@@ -95,9 +94,9 @@ void Grenade::Init()
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight());
 
-  SetMass (lance_grenade.cfg().mass);
-  SetAirResistFactor(lance_grenade.cfg().air_resist_factor);
-  m_rebound_factor = double(lance_grenade.cfg().rebound_factor);
+  SetMass (launcher.cfg().mass);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
+  m_rebound_factor = double(launcher.cfg().rebound_factor);
 
   // Fixe le rectangle de test
   int dx = image->GetWidth()/2-1;
@@ -128,7 +127,7 @@ void Grenade::Refresh()
 
   // Grenade explose after timeout
   double tmp = global_time.Read() - temps_debut_tir;
-  if(tmp>1000 * lance_grenade.cfg().timeout) {
+  if(tmp>1000 * launcher.cfg().timeout) {
     is_active = false;
     return;
   }
@@ -154,7 +153,7 @@ void Grenade::Draw()
 
   image->Draw(GetX(),GetY());
 
-  int tmp = lance_grenade.cfg().timeout;
+  int tmp = launcher.cfg().timeout;
   tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
@@ -180,7 +179,7 @@ void Grenade::SignalCollision()
 
 GrenadeLauncher::GrenadeLauncher() : 
   Weapon(WEAPON_GRENADE, "grenade"),
-  grenade(game_loop)
+  grenade(game_loop, *this)
 {  
   m_name = _("Grenade");
  

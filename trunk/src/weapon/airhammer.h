@@ -44,5 +44,4 @@ class Airhammer : public Weapon
   void HandleKeyEvent(int action, int event_type);
 };
 
-extern Airhammer airhammer;
 #endif

@@ -55,5 +55,4 @@ public:
   void HandleKeyEvent(int action, int event_type);
 };
 
-extern Uzi uzi;
 #endif

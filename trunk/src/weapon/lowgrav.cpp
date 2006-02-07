@@ -30,10 +30,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-//-----------------------------------------------------------------------------
-LowGrav lowgrav;
-//-----------------------------------------------------------------------------
-
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
 

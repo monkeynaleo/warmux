@@ -30,17 +30,21 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
+class GnuLauncher;
+
 // The GNU
 class Gnu : public PhysicalObj
 {
+ private:
   uint launched_time;
   Sprite *image;
   int m_sens;
   double save_x,save_y;
+  GnuLauncher& launcher;
 public:
   bool is_active;
 
-  Gnu(GameLoop &game_loop);
+  Gnu(GameLoop &game_loop, GnuLauncher& launcher);
   void Init();
   void Draw();
   void Reset();
@@ -67,5 +71,4 @@ public:
   void Explosion();
 };
 
-extern GnuLauncher gnu_launcher;
 #endif

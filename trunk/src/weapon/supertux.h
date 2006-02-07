@@ -28,6 +28,8 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
+class TuxLauncher;
+
 class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
 {
 public:
@@ -40,14 +42,15 @@ class SuperTux : public WeaponProjectile
 {
  private:
   ParticleEngine particle_engine;
-
+  TuxLauncher& launcher;
+  
 public:
   double angle;
   uint time_now;
   uint time_next_action;
   uint last_move;
 
-  SuperTux(GameLoop &game_loop);
+  SuperTux(GameLoop &game_loop, TuxLauncher& launcher);
   void Init();
   void Refresh();
   void Draw();
@@ -81,5 +84,4 @@ protected:
   void Explosion();
 };
 
-extern TuxLauncher tux;
 #endif

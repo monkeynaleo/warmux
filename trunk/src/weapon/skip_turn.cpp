@@ -26,7 +26,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-SkipTurn skipturn;
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;

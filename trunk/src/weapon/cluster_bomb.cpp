@@ -37,14 +37,13 @@
 #include "../tool/i18n.h"
 #include "../tool/random.h"
 
-LanceCluster lance_cluster;
-
 #ifdef DEBUG
 #define COUT_DBG std::cout << "[ClusterBomb] "
 #endif
 
-Cluster::Cluster(GameLoop &p_game_loop) :
-  WeaponProjectile (p_game_loop, "Cluster")
+Cluster::Cluster(GameLoop &p_game_loop, ClusterLauncher& p_launcher) :
+  WeaponProjectile (p_game_loop, "Cluster"),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
@@ -62,8 +61,8 @@ void Cluster::Init()
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight()); 
 
-  SetMass (lance_cluster.cfg().mass / (lance_cluster.cfg().nbr_fragments+1));
-  SetAirResistFactor(lance_cluster.cfg().air_resist_factor);
+  SetMass (launcher.cfg().mass / (launcher.cfg().nbr_fragments+1));
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
@@ -93,13 +92,14 @@ void Cluster::SignalCollision()
     game_messages.Add (_("The rocket left the battlefield..."));
     return;
   }
-  AppliqueExplosion (GetPos(), GetPos(), lance_cluster.impact, lance_cluster.cfg(), NULL);
+  AppliqueExplosion (GetPos(), GetPos(), launcher.impact, launcher.cfg(), NULL);
 }
 
 //-----------------------------------------------------------------------------
 
-ClusterBomb::ClusterBomb(GameLoop &p_game_loop) :
-  WeaponProjectile (p_game_loop, "cluster_bomb")
+ClusterBomb::ClusterBomb(GameLoop &p_game_loop, ClusterLauncher& p_launcher) :
+  WeaponProjectile (p_game_loop, "cluster_bomb"),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/grenade_bounce";
@@ -109,7 +109,7 @@ ClusterBomb::ClusterBomb(GameLoop &p_game_loop) :
 
 void ClusterBomb::Tire (double force)
 {
-  SetAirResistFactor(lance_cluster.cfg().air_resist_factor);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 
   PrepareTir();
 
@@ -137,8 +137,8 @@ void ClusterBomb::Init()
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight()); 
 
-  SetMass (lance_cluster.cfg().mass);
-  m_rebound_factor = lance_cluster.cfg().rebound_factor;
+  SetMass (launcher.cfg().mass);
+  m_rebound_factor = launcher.cfg().rebound_factor;
 
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
@@ -150,10 +150,10 @@ void ClusterBomb::Init()
 
 
   tableau_cluster.clear();
-  const uint nb = lance_cluster.cfg().nbr_fragments;
+  const uint nb = launcher.cfg().nbr_fragments;
   for (uint i=0; i<nb; ++i)
   {
-    Cluster cluster(game_loop);
+    Cluster cluster(game_loop, launcher);
     cluster.Init();
     tableau_cluster.push_back( cluster );
   }
@@ -176,7 +176,7 @@ void ClusterBomb::Refresh()
 
   // 5 sec après avoir été tirée, la grenade explose
   double tmp = global_time.Read() - temps_debut_tir;
-  if(tmp>1000 * lance_cluster.cfg().tps_avt_explosion)
+  if(tmp>1000 * launcher.cfg().tps_avt_explosion)
   {
     DoubleVector speed_vector ;
     int x, y ;
@@ -189,8 +189,8 @@ void ClusterBomb::Refresh()
       Cluster &cluster = *it;
       
       double angle = (double)RandomLong ((long)0.0, (long)(2.0 * M_PI));
-      x = GetX()+(int)(cos(angle) * (double)lance_cluster.cfg().blast_range*5);
-      y = GetY()+(int)(sin(angle) * (double)lance_cluster.cfg().blast_range*5);
+      x = GetX()+(int)(cos(angle) * (double)launcher.cfg().blast_range*5);
+      y = GetY()+(int)(sin(angle) * (double)launcher.cfg().blast_range*5);
 
       cluster.Tire(x,y);
       cluster.SetSpeedXY(speed_vector);
@@ -219,7 +219,7 @@ void ClusterBomb::Draw()
 
   image->Draw(GetX(), GetY());
 
-  int tmp = lance_cluster.cfg().tps_avt_explosion;
+  int tmp = launcher.cfg().tps_avt_explosion;
   tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
@@ -240,9 +240,9 @@ void ClusterBomb::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-LanceCluster::LanceCluster() : 
+ClusterLauncher::ClusterLauncher() : 
   Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb"),
-  cluster_bomb(game_loop)
+  cluster_bomb(game_loop, *this)
 {  
   m_name = _("ClusterBomb");  
 
@@ -250,7 +250,7 @@ LanceCluster::LanceCluster() :
   extra_params = new ClusterBombConfig();
 }
 
-bool LanceCluster::p_Shoot ()
+bool ClusterLauncher::p_Shoot ()
 {
   // Initialise la grenade
   cluster_bomb.Tire (m_strength);
@@ -262,12 +262,12 @@ bool LanceCluster::p_Shoot ()
   return true;
 }
 
-void LanceCluster::Explosion()
+void ClusterLauncher::Explosion()
 {
   m_is_active = false;
 
 #ifdef MSG_DBG
-  COUT_DBG << "LanceCluster::Explosion()" << std::endl;
+  COUT_DBG << "ClusterLauncher::Explosion()" << std::endl;
 #endif
   
   lst_objets.RetireObjet (&cluster_bomb);
@@ -280,7 +280,7 @@ void LanceCluster::Explosion()
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
-void LanceCluster::Refresh()
+void ClusterLauncher::Refresh()
 {
   if (m_is_active)
   {
@@ -288,13 +288,13 @@ void LanceCluster::Refresh()
   } 
 }
 
-void LanceCluster::p_Init()
+void ClusterLauncher::p_Init()
 {
   cluster_bomb.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
-ClusterBombConfig& LanceCluster::cfg() 
+ClusterBombConfig& ClusterLauncher::cfg() 
 { return static_cast<ClusterBombConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
