@@ -132,8 +132,8 @@ void WeaponsList::Init()
   LowGrav* lowgrav = new LowGrav;
   AddToList(lowgrav,5);
 
-  //NinjaRope* ninjarope = new NinjaRope;
-  AddToList(&ninjarope,5);
+  NinjaRope* ninjarope = new NinjaRope;
+  AddToList(ninjarope,5);
 }
 
 //-----------------------------------------------------------------------------

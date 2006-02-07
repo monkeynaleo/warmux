@@ -86,6 +86,5 @@ protected:
   void InitSkinSprite();
 };
 
-extern NinjaRope ninjarope;
 //-----------------------------------------------------------------------------
 #endif
