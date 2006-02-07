@@ -112,7 +112,7 @@ Character::Character (GameLoop &p_game_loop) :
 void Character::SignalDeath()
 {
 #ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "Meurt." << endl;
+  COUT_DBG << "Meurt." << std::endl;
 #endif
 
   // No more energy ...
@@ -162,7 +162,7 @@ void Character::SignalGhostState (bool was_dead)
   desactive = true;
 
 #ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "Fantome." << endl;
+  COUT_DBG << "Fantome." << std::endl;
 #endif
 
   // Signal the death
@@ -374,7 +374,7 @@ void Character::Draw()
 void Character::Jump ()
 {
 #ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "Jump." << endl;
+  COUT_DBG << "Jump." << std::endl;
 #endif
   do_nothing_time = global_time.Read();
 
@@ -396,7 +396,7 @@ void Character::Jump ()
 void Character::HighJump ()
 {
 #ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "HighJump." << endl;
+  COUT_DBG << "HighJump." << std::endl;
 #endif
   do_nothing_time = global_time.Read();
 
@@ -916,7 +916,7 @@ void Character::Reset()
     DirectFall ();
     pos_ok &= !IsGhost() && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
 #ifdef DEBUG_PLACEMENT
-    if (!pos_ok) COUT_PLACEMENT << "Fantome en tombant." << endl;
+    if (!pos_ok) COUT_PLACEMENT << "Fantome en tombant." << std::endl;
 #endif
     if (!pos_ok) continue;
 
@@ -934,9 +934,9 @@ void Character::Reset()
     }
 
     // La position est bonne ?
-    pos_ok &= !IsGhost() & IsInVacuum(0,0);
+    pos_ok &= !IsGhost() & !IsInWater() & IsInVacuum(0,0);
 #ifdef DEBUG_PLACEMENT
-    if (!pos_ok) COUT_PLACEMENT << "Placement final manqué." << endl;
+    if (!pos_ok) COUT_PLACEMENT << "Placement final manqué." << std::endl;
 #endif
 
 #endif // of #ifndef NO_POSITION_CHECK
