@@ -26,7 +26,6 @@
 #include "../game/game.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
-#include "../graphic/sdlsurface.h"
 #include "../include/app.h"
 #include "../interface/mouse.h"
 #include "../map/camera.h"
