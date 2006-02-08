@@ -21,7 +21,6 @@ wormux_SOURCES = \
 	graphic/font.cpp graphic/font.h \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/surface.cpp graphic/surface.h \
-	graphic/sdlsurface.cpp graphic/sdlsurface.h \
 	graphic/spriteframe.cpp graphic/spriteframe.h \
 	graphic/spritecache.cpp graphic/spritecache.h \
 	graphic/spriteanimation.cpp graphic/spriteanimation.h \

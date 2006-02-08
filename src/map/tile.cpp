@@ -26,7 +26,6 @@
 #include <SDL.h>
 #include <SDL_endian.h>
 #include "../game/config.h"
-#include "../graphic/sdlsurface.h"
 #include "../include/app.h"
 #include "../map/camera.h"
 #include "../tool/error.h"

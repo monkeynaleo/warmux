@@ -64,7 +64,7 @@ bool Teleportation::p_Shoot ()
   current_skin = ActiveCharacter().image->GetSurface();
 
   ActiveCharacter().Hide();
-  skin = WaveSurface(current_skin.GetSurface(), 100, game_mode.duration_move_player * 1000, 5.0, 1.5);
+  skin = WaveSurface(current_skin, 100, game_mode.duration_move_player * 1000, 5.0, 1.5);
   return true;
 }
 

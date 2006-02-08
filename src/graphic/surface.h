@@ -57,6 +57,7 @@ public:
   int Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect);
   int SetColorKey(Uint32 flag, Uint32 key);
   int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  void GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a);
   Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
   void SetClipRect(SDL_Rect *rect);
   void Flip();
@@ -68,9 +69,11 @@ public:
   inline bool IsNull( ){
     return surface == NULL;
   }
-  Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth);
-  Surface Surface::DisplayFormatAlpha();
-  Surface Surface::DisplayFormat();
+  Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
+  Surface DisplayFormatAlpha();
+  Surface DisplayFormat();
+  Uint32 GetPixel(int x, int y);
+  void PutPixel(int x, int y, Uint32 pixel);
 };
 
 #endif

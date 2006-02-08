@@ -21,7 +21,6 @@
 
 #include "progress_bar.h"
 #include <SDL.h>
-#include "../graphic/sdlsurface.h"
 #include "../include/app.h"
 #include "../map/map.h"
 #include "../tool/math_tools.h"
