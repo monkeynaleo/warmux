@@ -34,7 +34,7 @@
 #include "../interface/game_msg.h"
 #include "../map/camera.h"
 #include "../map/map.h"
-#include "../object/bonus_box.h"
+//#include "../object/bonus_box.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
 #include "../tool/debug.h"
@@ -171,7 +171,7 @@ void Game::Start()
       MessageEndOfGame();
 
   world.FreeMem();
-  bonus_box.FreeMem();
+  //bonus_box.FreeMem();
   jukebox.StopAll();
    
   if (err)
