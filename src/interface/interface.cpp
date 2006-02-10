@@ -320,48 +320,36 @@ void Interface::UpdateTimer(uint utimer)
   }
 }
 
-void AbsoluteDraw(SDL_Surface* s, int x, int y)
+void AbsoluteDraw(Surface &s, int x, int y)
 {
-  world.ToRedrawOnMap(Rectanglei(x, y, s->w, s->h));
+  world.ToRedrawOnMap(Rectanglei(x, y, s.GetWidth(), s.GetHeight()));
 
-  assert( s != NULL );
-  
-  /*if(x + s->w < 0 || y + s->h < 0)
-  {
-    std::cout << "WARNING: Trying to display a SDL_Surface out of the screen!" << std::endl;
-    return;
-  }*/
-  
-  if(x + s->w < (int)camera.GetX() || x > (int)camera.GetX()+(int)camera.GetWidth()
-  || y + s->h < (int)camera.GetY() || y > (int)camera.GetY()+(int)camera.GetHeight())
+  if( x + s.GetWidth() < (int)camera.GetX() 
+	|| x > (int)camera.GetX()+(int)camera.GetWidth()
+  	|| y + s.GetHeight() < (int)camera.GetY()
+	|| y > (int)camera.GetY()+(int)camera.GetHeight() )
     return; //Drawing out of camera area
 
-  SDL_Rect src={0, 0, s->w, s->h};
-  SDL_Rect dst={x - (int)camera.GetX(), y - (int)camera.GetY(), s->w , s->h};
+  SDL_Rect src={0, 0, s.GetWidth(), s.GetHeight()};
+  SDL_Rect dst={x - (int)camera.GetX(), y - (int)camera.GetY(), s.GetWidth(), s.GetHeight()};
 
-  if(dst.x<0)
-  {
-    src.w+=src.x;
-    src.x=0;
+  if( dst.x < 0 ){
+    src.w += src.x;
+    src.x = 0;
   }
 
-  if( dst.x+src.w>camera.GetX() )
+  if( dst.x + src.w > camera.GetX() )
     src.w = camera.GetWidth() - src.x;
 
-  if(dst.y<0)
-  {
-    src.h+=src.y;
-    src.y=0;
+  if( dst.y > 0 ){
+    src.h += src.y;
+    src.y = 0;
   }
 
   if( dst.y + src.h > camera.GetY() )
     src.h = camera.GetHeight() - src.y;
 
-  //TODO:blit only the displayed part of the SDL_Surface
+  //TODO:blit only the displayed part of the Surface
   app.video.window.Blit(s, &src, &dst);
-}
-
-void AbsoluteDraw(Surface& s, int x, int y){
-	AbsoluteDraw(s.GetSurface(), x, y);
 }
 

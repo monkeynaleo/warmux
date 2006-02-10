@@ -136,7 +136,7 @@ Surface Font::Render(const std::string &txt, SDL_Color color, bool cache){
   } else
     surface = CreateSurface(txt, color);
   
-  assert (surface.GetSurface() != NULL);
+  assert( !surface.IsNull() );
   return surface;
 }
 
