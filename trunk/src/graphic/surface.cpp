@@ -132,20 +132,8 @@ void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha){
 		Error( std::string("Can't create SDL RGBA surface: ") + SDL_GetError() );
 }
 
-int Surface::GetWidth() const{
-	return surface->w;
-}
-
-int Surface::GetHeight() const{
-	return surface->h;
-}
-
 int Surface::SetAlpha(Uint32 flags, Uint8 alpha){
 	return SDL_SetAlpha( surface, flags, alpha );
-}
-
-Uint32 Surface::GetFlags(){
-	return surface->flags;
 }
 
 int Surface::Lock(){

@@ -66,17 +66,17 @@ bool Video::IsFullScreen(void) const{
 
 bool Video::SetConfig(int width, int height, bool _fullscreen){
 	// initialize the main window
-	if( (window.GetSurface() == NULL) || 
+	if( window.IsNull() || 
 			(width != window.GetWidth() || 
 			 height != window.GetHeight() ) ){
 
 		window.SetSurface( SDL_SetVideoMode(width, height, 32, 
 				SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF ), false );
 
-		if( window.GetSurface() == NULL ) 
+		if( window.IsNull() ) 
 			window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE) );
 
-		if( window.GetSurface() == NULL )
+		if( window.IsNull() )
 			return false;
 		fullscreen = false;
 	}
@@ -99,7 +99,7 @@ void Video::InitWindow(){
 			config.tmp.video.height,
 			config.tmp.video.fullscreen);
 
-	if( window.GetSurface() == NULL )
+	if( window.IsNull() )
 		Error( "Unable to initialize SDL window.");
 
 	SetWindowCaption( std::string("Wormux ") + VERSION );

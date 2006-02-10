@@ -47,10 +47,7 @@ public:
   void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha = true);
 
   SDL_Surface *GetSurface();
-  int GetWidth() const;
-  int GetHeight() const;
   int SetAlpha(Uint32 flags, Uint8 alpha);
-  Uint32 GetFlags();
   int Lock();
   void Unlock();
   int Blit(SDL_Surface *src, SDL_Rect *srcRect, SDL_Rect *dstRect);
@@ -66,14 +63,45 @@ public:
   int FillRect( SDL_Rect *dstrect, Uint32 color);
   int FillRect( SDL_Rect *r, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
   int ImgLoad( const char *filename );
-  inline bool IsNull( ){
-    return surface == NULL;
-  }
   Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
   Uint32 GetPixel(int x, int y);
   void PutPixel(int x, int y, Uint32 pixel);
+
+  inline bool IsNull() const{
+    return surface == NULL;
+  }
+
+  /// Return the width of a surface.
+  inline int GetWidth() const{
+    return surface->w;
+  }
+
+  /// Return the height of a surface.
+  inline int GetHeight() const{
+    return surface->h;
+  }
+
+  inline Uint32 GetFlags() const{
+    return surface->flags;
+  }
+
+  /// Return the length of a surface scanline in bytes.
+  inline Uint16 GetPitch() const{
+	return surface->pitch;
+  }
+
+  /// Return the number of bytes used to represent each pixel in a surface. Usually one to four.
+  inline Uint8 GetBytesPerPixel() const{
+	return surface->format->BytesPerPixel;
+  }
+
+  /// Return a pointer on the pixels data.
+  inline unsigned char *GetPixels() const{
+	return (unsigned char *) surface->pixels;
+  }
+  
 };
 
 #endif
