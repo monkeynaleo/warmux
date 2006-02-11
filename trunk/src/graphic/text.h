@@ -59,7 +59,14 @@ public:
 
 void DrawTmpBoxText(Font &font, 
 		    int x, int y, 
-		    const std::string &txt, uint space=3);
+		    const std::string &txt, uint space=3,
+                    int boxR=80, int boxG=80, int boxB=159, int boxA=206,
+                    int rectR=49, int rectG=32, int rectB=122, int rectA=255);
+void DrawTmpBoxTextWithReturns(Font &font,
+                               int _x, int _y, 
+                               const std::string &txt, uint space=3,
+                               int boxR=80, int boxG=80, int boxB=159, int boxA=206,
+                               int rectR=49, int rectG=32, int rectB=122, int rectA=255);
 
 
 #endif

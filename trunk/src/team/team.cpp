@@ -246,7 +246,7 @@ void Team::SelectCharacterIndex (uint index)
 }
 
 // Prepare le tour d'une equipe
-void Team::PrepareTour()
+void Team::PrepareTurn()
 {
   // Choisi un ver vivant si possible
   if (ActiveCharacter().IsDead())
@@ -266,7 +266,7 @@ void Team::PrepareTour()
 }
 
 // Fin d'un tour : nettoyage avant de partir :-)
-void Team::FinTour()
+void Team::EndTurn()
 {
   // Désactive notre arme
   ActiveCharacter().EndTurn();
@@ -403,3 +403,7 @@ Weapon& Team::AccessWeapon() const { return *active_weapon; }
 const Weapon& Team::GetWeapon() const { return *active_weapon; }
 Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
 
+bool Team::IsSameAs(const Team& other)
+{
+  return (strcmp(m_id.c_str(), other.GetId().c_str()) == 0);
+}

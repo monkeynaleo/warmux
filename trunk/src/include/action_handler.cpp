@@ -203,7 +203,7 @@ void Action_ChangeTeam (const Action *a)
 #endif
 	//if (!network.is_client()) return;
 	teams_list.SetActive (action.GetValue());
- 	ActiveTeam().PrepareTour();
+ 	ActiveTeam().PrepareTurn();
 	assert (!ActiveCharacter().IsDead());
 }
 
