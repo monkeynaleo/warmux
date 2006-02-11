@@ -74,7 +74,7 @@ public:
   Character& operator[] (uint index);
   const Character& operator[] (uint index) const;
   // ******* TODO: KILL THIS FUNCTIONS !!! ********
-
+  bool IsSameAs(const Team& other);
 
   // Switch to next worm.
 //  void NextCharacter();
@@ -84,8 +84,8 @@ public:
   void SelectCharacterIndex (uint index);
 
   // Prepate / End turn.
-  void PrepareTour();
-  void FinTour();
+  void PrepareTurn();
+  void EndTurn();
 
   // Access to the worms.
   int ActiveCharacterIndex() const;

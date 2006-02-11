@@ -51,7 +51,7 @@ void TeamsList::NextTeam (bool debut_jeu)
   if (debut_jeu) return;
 #ifdef CL
   if (network.is_client()) return;
-  ActiveTeam().FinTour();
+  ActiveTeam().FinTurn();
 #endif
    
   // Passe à l'équipe suivante

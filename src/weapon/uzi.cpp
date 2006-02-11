@@ -150,7 +150,10 @@ bool Uzi::p_Shoot()
       Character* ver = balle.LitDernierVerTouche();
       PhysicalObj* obj = balle.LitDernierObjTouche();
       if (ver) obj = ver;
-      if (ver) ver -> SetEnergyDelta (-cfg().damage);
+      if (ver)
+      {
+        ver -> SetEnergyDelta (-cfg().damage);
+      }
       if (obj) 
       {
 	obj -> AddSpeed (SOUFFLE_BALLE, angle);

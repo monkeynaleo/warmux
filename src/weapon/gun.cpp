@@ -161,11 +161,14 @@ void Gun::Refresh()
 	  Character* ver = balle.LitDernierVerTouche();
 	  PhysicalObj* obj = balle.LitDernierObjTouche();
 	  if (ver) obj = ver;
-	  if (ver) ver -> SetEnergyDelta (-cfg().damage);
+	  if (ver)
+          {
+            ver -> SetEnergyDelta (-cfg().damage);
+          }
 	  if (obj) 
-	    {
-	      obj -> AddSpeed (BULLET_BLAST, balle.GetSpeedAngle());
-	    }
+          {
+            obj -> AddSpeed (BULLET_BLAST, balle.GetSpeedAngle());
+          }
 	  
 	  // Creuse le monde
 	  if (!obj)

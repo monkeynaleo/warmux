@@ -542,7 +542,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
      character_already_chosen = false;
 
     // Prépare un tour pour un ver
-    FOR_ALL_LIVING_CHARACTERS(equipe,ver) ver -> PrepareTour();
+    FOR_ALL_LIVING_CHARACTERS(equipe,ver) ver -> PrepareTurn();
 
     // Changement d'équipe
     assert (!game.IsGameFinished());    

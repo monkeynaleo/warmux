@@ -256,7 +256,7 @@ Uint32 Surface::GetPixel(int x, int y){
 
     default:
 		Error("Unknow bpp!");
-//        return 0;
+        return 0;   // To make gcc happy
     }
 }
 

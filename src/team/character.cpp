@@ -89,7 +89,7 @@ Character::Character (GameLoop &p_game_loop) :
   previous_strength = 0;
   m_team = NULL;
   energy = 100;
-  losted_energy = 0;
+  lost_energy = 0;
   desactive = false;
   skin = NULL;
   walk_skin = NULL;
@@ -104,6 +104,15 @@ Character::Character (GameLoop &p_game_loop) :
   image = NULL;
   do_nothing_time = 0;
   m_allow_negative_y = true;
+
+  // Damage count
+  damage_other_team = 0;
+  damage_own_team = 0;
+  max_damage = 0;
+  current_total_damage = 0;
+
+  // Survivals
+  survivals = 0;
 
   name_text = NULL;
 }
@@ -160,8 +169,11 @@ void Character::SignalDrowning()
 // Si un ver devient un fantome, il meurt ! Signale sa mort
 void Character::SignalGhostState (bool was_dead)
 {
-  // Désactive le ver
+  // Deactivate character
   desactive = true;
+  
+  // Report to damage performer this character lost all of its energy
+  ActiveCharacter().MadeDamage(energy, *this);
 
 #ifdef DEBUG_CHG_ETAT
   COUT_DBG << "Fantome." << std::endl;
@@ -206,6 +218,9 @@ void Character::SetEnergyDelta (int delta)
   // If already dead, do nothing
   if (IsDead()) return;
 
+  // Report damage to damage performer
+  ActiveCharacter().MadeDamage(-delta, *this);
+
   uint sauve_energie = energy;
   uchar R,V,B;
 
@@ -236,18 +251,18 @@ void Character::SetEnergyDelta (int delta)
   if (delta < 0)
   {
 
-    losted_energy += (int)energy - (int)sauve_energie;
+    lost_energy += (int)energy - (int)sauve_energie;
 
-    if ( losted_energy < 33 )
+    if ( lost_energy < 33 )
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_light");
-    else if ( losted_energy < 66 )
+    else if ( lost_energy < 66 )
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_medium");
     else 
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_high");
     
   }
   else 
-    losted_energy = 0;
+    lost_energy = 0;
 
   // "Friendly fire !!"
   if ( (&ActiveCharacter() != this) && (&ActiveTeam() == m_team) )
@@ -298,7 +313,7 @@ void Character::Draw()
   // Gone in another world ?
   if (!IsActive()) return;
 
-  bool dessine_perte = (losted_energy != 0);
+  bool dessine_perte = (lost_energy != 0);
   if ((&ActiveCharacter() == this
     && game_loop.ReadState() != gameEND_TURN)
       //&& (game_loop.ReadState() != jeuANIM_FIN_TOUR)
@@ -364,7 +379,7 @@ void Character::Draw()
   if (dessine_perte)
   {
     std::ostringstream ss;
-    ss << losted_energy;
+    ss << lost_energy;
     dy -= HAUT_FONT_MIX;
     global().small_font().WriteCenterTop (GetX() +GetWidth()/2-camera.GetX(), GetY()+dy-camera.GetY(), ss.str(), white_color);    
   }
@@ -599,9 +614,10 @@ void Character::Refresh()
 }
 
 // Prepare a new turn
-void Character::PrepareTour ()
+void Character::PrepareTurn ()
 {
-  losted_energy = 0;
+  HandleMostDamage();
+  lost_energy = 0;
   pause_bouge_dg = global_time.Read();
 }
 
@@ -889,7 +905,7 @@ void Character::Reset()
   energy = game_mode.character.init_energy-1;
   energy_bar.InitVal (energy, 0, game_mode.character.init_energy);
   SetEnergyDelta (1);
-  losted_energy = 0;
+  lost_energy = 0;
 
   // Initialise la position
   uint bcl=0;
@@ -996,11 +1012,45 @@ void Character::GetHandPositionf (double &x, double &y)
     x = (double)GetX() +GetWidth() -hand.dx;
 }
 
+void Character::HandleMostDamage()
+{
+  if (current_total_damage > max_damage)
+  {
+    max_damage = current_total_damage;
+  }
+#ifdef DEBUG
+  std::cerr << m_name << " most damage: " << max_damage << std::endl;
+#endif
+  current_total_damage = 0;
+}
+
 void Character::EndTurn()
 {
   m_rebounding = true;
   is_walking = false;
+  HandleMostDamage();
 }
 
 void Character::Hide() { hidden = true; }
 void Character::Show() { hidden = false; }
+
+void Character::MadeDamage(const int Dmg, const Character &other)
+{
+  if (m_team->IsSameAs(other.GetTeam()))
+  {
+#ifdef DEBUG
+    std::cerr << m_name << " damaged own team with " << Dmg << std::endl;
+#endif
+    if (Character::IsSameAs(other))
+      damage_own_team += Dmg;
+  }
+  else
+  {
+#ifdef DEBUG
+    std::cerr << m_name << " damaged other team with " << Dmg << std::endl;
+#endif
+    damage_other_team += Dmg;
+  }
+  
+  current_total_damage += Dmg;
+}

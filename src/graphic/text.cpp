@@ -20,6 +20,7 @@
 #include <SDL_video.h>
 #include <SDL_gfxPrimitives.h>
 #include <string>
+#include <iostream> //cerr
 #include "text.h"
 #include "colors.h"
 #include "font.h"
@@ -102,20 +103,23 @@ void Text::DrawTopLeft (int x, int y){
   dst_rect.w = surf.GetWidth();
   dst_rect.h = surf.GetHeight();
 
-  if(shadowed){
-	SDL_Rect shad_rect;
-
-	shad_rect.x = dst_rect.x + bg_offset;
+  if(shadowed)
+  {
+    SDL_Rect shad_rect;
+    
+    shad_rect.x = dst_rect.x + bg_offset;
     shad_rect.y = dst_rect.y + bg_offset;
     shad_rect.w = background.GetWidth();
     shad_rect.h = background.GetHeight();
-
-	app.video.window.Blit(background, NULL, &shad_rect);
+    
+    app.video.window.Blit(background, NULL, &shad_rect);
     app.video.window.Blit(surf, NULL, &dst_rect);
 		
     world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y,
                                       shad_rect.w + bg_offset, shad_rect.h + bg_offset));
-  }else{
+  }
+  else
+  {
     app.video.window.Blit(surf, NULL, &dst_rect);
     world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
   }		
@@ -136,7 +140,10 @@ void Text::DrawTopLeftOnMap (int x, int y){
 }
 
 void DrawTmpBoxText(Font &font, int _x, int _y, 
-		    const std::string &txt, uint space){
+		    const std::string &txt, uint space,
+                    int boxR, int boxG, int boxB, int boxA,
+                    int rectR, int rectG, int rectB, int rectA)
+{
   int x, y, w, h;
   
   w = font.GetWidth(txt) + space*2;
@@ -147,12 +154,77 @@ void DrawTmpBoxText(Font &font, int _x, int _y,
   _y -= font.GetHeight(txt)/2;
 
   app.video.window.BoxRGBA(x, y, x + w, y + h,
-	  80, 80, 159, 206);
+                           boxR, boxG, boxB, boxA);
 
   app.video.window.RectangleRGBA(x, y, x + w, y + h,
-		49, 32, 122, 255);  
+                                 rectR, rectG, rectB, rectA);  
 
   world.ToRedrawOnScreen(Rectanglei(x, y, w, h));
   font.WriteCenterTop (_x, _y, txt, white_color);
 }
 
+void DrawTmpBoxTextWithReturns(Font &font, int _x, int _y, 
+                               const std::string &txt, uint space,
+                               int boxR, int boxG, int boxB, int boxA,
+                               int rectR, int rectG, int rectB, int rectA)
+
+{
+  size_t pos          = 0;
+  size_t last_pos     = 0;
+  size_t max_width    = 0;
+  size_t total_height = 0;
+  int    x, y;
+  char  *lines        = strdup(txt.c_str());
+
+  std::vector< size_t > offsets;
+
+  // Store offsets
+  offsets.push_back(0);
+  while (lines[pos] != '\0')
+  {
+    if (lines[pos] == '\n')
+    {
+      lines[pos] = 0;
+      if (!lines[pos+1]) break;
+
+      offsets.push_back(pos+1);
+      int w = font.GetWidth(lines+last_pos) + space*2;
+      if ((int)max_width < w) max_width = w;
+      total_height += font.GetHeight(lines+last_pos);
+#if DEBUG
+      if (last_pos)
+      {
+        std::cerr << "(" << pos << "," << pos-last_pos
+                  << ") >>> " << lines+last_pos << " <<<\n";
+      }
+#endif
+      last_pos = pos+1;
+    }
+    pos++;
+  }
+  if (max_width == 0) {
+    max_width = font.GetWidth(lines) + space*2;
+  }
+
+  // Initial position
+  total_height += 5*space;
+  x = _x - max_width / 2;
+  y = _y - total_height / 2;
+  app.video.window.BoxRGBA(x, y, x + max_width, y + total_height,
+                           boxR, boxG, boxB, boxA);
+
+  app.video.window.RectangleRGBA(x, y, x + max_width, y + total_height,
+                                 rectR, rectG, rectB, rectA);
+
+  world.ToRedrawOnScreen(Rectanglei(x, y, max_width, total_height));
+
+  for( std::vector<size_t>::iterator it=offsets.begin();
+       it != offsets.end();
+       ++it)
+  {
+    font.WriteLeft(x+space, y+space, lines+(*it), white_color);
+    y += font.GetHeight(lines+(*it));
+  }
+  offsets.clear();
+  free(lines);
+}
