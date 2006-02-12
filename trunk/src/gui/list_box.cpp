@@ -116,26 +116,19 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button){
 
 void ListBox::Draw (uint mouse_x, uint mouse_y){
   int item = MouseIsOnWhichItem(mouse_x, mouse_y);
+  Rectanglei rect (x, y, w, h);
   
-  app.video.window.BoxRGBA(x, y, x+w, y+h,
-	  255, 255, 255, 255*3/10);
-
-  app.video.window.RectangleRGBA(x, y, x+w, y+h,
-		255, 255, 255, 255);
+  app.video.window.BoxColor(rect, defaultListColor1);
+  app.video.window.RectangleColor(rect, white_color);
 
   for(uint i=0; i < nb_visible_items; i++){
-	  
-     if( int(i+first_visible_item) == selected_item ){
-       app.video.window.BoxRGBA( 
-	       x+1, y+i*height_item+1, 
-	       x+1+w-2, y+i*height_item+1+height_item-2,
-	       0,0,255*6/10,255*8/10);
-     }else if( i+first_visible_item == uint(item) ){
-       app.video.window.BoxRGBA(
-	       x+1, y+i*height_item+1, 
-	       x+1+w-2, y+i*height_item+1+height_item-2,
-	       0,0,255*6/10,255*4/10);
-     }
+	 Rectanglei rect(x + 1, y + i * height_item + 1, w - 2, height_item - 2);
+	 
+     if( int(i + first_visible_item) == selected_item )
+       app.video.window.BoxColor(rect, defaultListColor2);
+     else
+	   if( i+first_visible_item == uint(item) )
+         app.video.window.BoxColor(rect, defaultListColor3);
      
      global().small_font().WriteLeft( x + 5,
 			  y + i*height_item,
@@ -156,7 +149,7 @@ void ListBox::Draw (uint mouse_x, uint mouse_y){
     boxRGBA(app.video.sdlwindow, 
 	    x+w-10, tmp_y,
 	    x+w-1,  tmp_y+tmp_h,
-	    255, 255, 255, 255);
+	    white_color);
 #endif
   }
 }

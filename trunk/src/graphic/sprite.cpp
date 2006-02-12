@@ -69,15 +69,14 @@ void Sprite::Init( Surface& surface, int frame_width, int frame_height, int nb_f
    surface.SetAlpha( 0, 0);
    
    for( unsigned int fy = 0 ; fy < (unsigned int)nb_frames_y ; fy++)
-     for( unsigned int fx = 0 ; fx < (unsigned int)nb_frames_x ; fx++)
-       {
-		   Surface new_surf = Surface(frame_width, frame_height, SDL_SWSURFACE|SDL_SRCALPHA, true);
-	  SDL_Rect sr = {fx*frame_width, fy*frame_width, frame_width, frame_height};
-	  SDL_Rect dr = {0,0,frame_width,frame_height};
+     for( unsigned int fx = 0 ; fx < (unsigned int)nb_frames_x ; fx++){
+       Surface new_surf = Surface(frame_width, frame_height, SDL_SWSURFACE|SDL_SRCALPHA, true);
+       Rectanglei sr(fx*frame_width, fy*frame_width, frame_width, frame_height);
+       Point2i dp(0, 0);
 	  
-	    new_surf.Blit( surface, &sr, &dr);
-	  frames.push_back( SpriteFrame(new_surf));
-       }
+       new_surf.Blit( surface, sr, dp);
+       frames.push_back( SpriteFrame(new_surf));
+     }
 }
 
 void Sprite::AddFrame(Surface &surf, unsigned int delay){
@@ -312,16 +311,13 @@ void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y)
   if( rotation_deg!=0.0 )
     Calculate_Rotation_Offset(rot_x, rot_y, current_surface);
 
-  int x = pos_x + rot_x;
-  int y = pos_y + rot_y;
+  Rectanglei dstRect(pos_x + rot_x, pos_y + rot_y, current_surface.GetWidth(), current_surface.GetHeight() );
 
-  SDL_Rect dr = {x, y, current_surface.GetWidth(), current_surface.GetHeight() };
-
-  dest.Blit( current_surface, NULL, &dr);
+  dest.Blit( current_surface, dstRect.GetPosition() );
 
   // For the cache mechanism
   if( game.IsGameLaunched() )
-    world.ToRedrawOnScreen(Rectanglei(x, y, current_surface.GetWidth(), current_surface.GetHeight() ));
+    world.ToRedrawOnScreen( dstRect );
 }
 
 void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
@@ -335,16 +331,14 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   if( rotation_deg!=0.0 )
     Calculate_Rotation_Offset(rot_x, rot_y, current_surface);
 
-  int x = pos_x + rot_x;
-  int y = pos_y + rot_y;
-
-  SDL_Rect src = {src_x, src_y, w, h};
-  SDL_Rect dst = {x, y, w, h};
-  dest.Blit(current_surface, &src, &dst);
+  Rectanglei srcRect (src_x, src_y, w, h);
+  Rectanglei dstRect (pos_x + rot_x, pos_y + rot_y, w, h);
+  
+  dest.Blit( current_surface, srcRect, dstRect.GetPosition() );
 
   // For the cache mechanism
   if( game.IsGameLaunched() )
-    world.ToRedrawOnScreen(Rectanglei(x, y, current_surface.GetWidth(), current_surface.GetHeight() ));
+    world.ToRedrawOnScreen( dstRect );
 }
 
 void Sprite::Finish(){

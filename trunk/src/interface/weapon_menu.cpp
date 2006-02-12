@@ -128,16 +128,12 @@ bool WeaponMenuItem::MouseOn(int s_x, int s_y)
   int scaled_width = (int)(BUTTON_ICO_WIDTH * scale) ;
   int scaled_height = (int)(BUTTON_ICO_HEIGHT * scale) ;
 
-
   Rectanglei rect;
-  rect.x = interface.weapons_menu.GetX() + x - (int)(0.5 * scaled_width);
-  rect.w = scaled_width;
-  rect.y = interface.weapons_menu.GetY() + y - (int)(0.5 * scaled_height) ;
-  rect.h = scaled_height;;
+  rect.SetPosition( interface.weapons_menu.GetX() + x - (int)(0.5 * scaled_width),
+  	interface.weapons_menu.GetY() + y - (int)(0.5 * scaled_height) );
+  rect.SetSize( scaled_width, scaled_height );
 
-  Point2i point;
-  point.x = s_x;
-  point.y = s_y;
+  Point2i point (s_x, s_y);
 
 
    if( rect.Contains( point ) ) 

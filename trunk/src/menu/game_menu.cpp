@@ -266,12 +266,9 @@ void GameMenu::Draw(int mouse_x, int mouse_y)
     }
   }
    
-  SDL_Rect team_icon_rect = { space_for_logo->GetX(), 
-			      space_for_logo->GetY(),
-			      TEAM_LOGO_H,
-			      TEAM_LOGO_H};
+  Point2i dst(space_for_logo->GetX(), space_for_logo->GetY());
 
-  app.video.window.Blit( last_team->ecusson, NULL, &team_icon_rect);
+  app.video.window.Blit( last_team->ecusson, dst);
   
   if (!terrain_init){
       terrain_init = true;

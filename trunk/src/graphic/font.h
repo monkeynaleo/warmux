@@ -46,18 +46,18 @@ public:
   bool Load (const std::string& filename, int size);
   TTF_Font& GetTTF();
 
-  void WriteLeft (int x, int y, const std::string &txt, SDL_Color color);
-  void WriteLeftBottom (int x, int y, const std::string &txt, SDL_Color color);
-  void WriteRight (int x, int y, const std::string &txt, SDL_Color color);
-  void WriteCenterTop (int x, int y, const std::string &txt, SDL_Color color);
-  void WriteCenter (int x, int y, const std::string &txt, SDL_Color color);
+  void WriteLeft (int x, int y, const std::string &txt, const Color &color);
+  void WriteLeftBottom (int x, int y, const std::string &txt, const Color &color);
+  void WriteRight (int x, int y, const std::string &txt, const Color &color);
+  void WriteCenterTop (int x, int y, const std::string &txt, const Color &color);
+  void WriteCenter (int x, int y, const std::string &txt, const Color &color);
   
   int GetWidth (const std::string &txt);
   int GetHeight ();
   int GetHeight (const std::string &txt);
 
-  Surface Render(const std::string &txt, SDL_Color color, bool cache=false);
-  Surface Font::CreateSurface(const std::string &txt, SDL_Color color);
+  Surface Render(const std::string &txt, const Color &color, bool cache=false);
+  Surface Font::CreateSurface(const std::string &txt, const Color &color);
 };
 
 class GameFont : public Font

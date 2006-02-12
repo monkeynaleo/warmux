@@ -64,9 +64,9 @@ void Sky::CompleteDraw(){
        y = 0;
        margin_y = (camera.GetHeight()-image.GetHeight())/2;
      }
-     SDL_Rect ds = {x, y,camera.GetWidth(),camera.GetHeight()};
-     SDL_Rect dr = {margin_x,margin_y,camera.GetWidth(),camera.GetHeight()};
-     app.video.window.Blit( image, &ds, &dr);
+     Rectanglei ds(x, y, camera.GetWidth(), camera.GetHeight());
+     Point2i dp(margin_x, margin_y);
+     app.video.window.Blit( image, ds, dp);
    }
    else
    {
@@ -89,27 +89,26 @@ void Sky::CompleteDraw(){
      if(h >= static_cast<int>(camera.GetHeight()))
        h = camera.GetHeight();
 
-     SDL_Rect ds = {x, y, w, h};
-     SDL_Rect dr = {0,0, w, h};
-     app.video.window.Blit( image, &ds, &dr);
+     Rectanglei ds(x, y, w, h);
+     app.video.window.Blit( image, ds, Point2i(0, 0));
 
      if(w < static_cast<int>(camera.GetWidth()))
      {
-       SDL_Rect ds = {x+w-image.GetWidth(), y, (int)camera.GetWidth()-w, h};
-       SDL_Rect dr = {w,0, (int)camera.GetWidth()-w, h};
-       app.video.window.Blit( image, &ds, &dr);
+       Rectanglei ds(x + w - image.GetWidth(), y, (int)camera.GetWidth()-w, h);
+       Point2i dp(w, 0);
+       app.video.window.Blit( image, ds, dp);
      }
      if(h < static_cast<int>(camera.GetHeight()))
      {
-       SDL_Rect ds = {x, y+h-image.GetHeight(), w, (int)camera.GetHeight()-h};
-       SDL_Rect dr = {0,h, w, (int)camera.GetHeight()-h};
-       app.video.window.Blit( image, &ds, &dr);
+       Rectanglei ds(x, y + h - image.GetHeight(), w, (int)camera.GetHeight() - h );
+       Point2i dp(0, h);
+       app.video.window.Blit( image, ds, dp);
      }
      if(w < static_cast<int>(camera.GetWidth()) && h < static_cast<int>(camera.GetHeight()))
      {
-       SDL_Rect ds = {x+w-image.GetWidth(), y+h-image.GetHeight(), camera.GetWidth()-w, camera.GetHeight()-h};
-       SDL_Rect dr = {w,h, camera.GetWidth()-w, camera.GetHeight()-h};
-       app.video.window.Blit( image, &ds, &dr);
+       Rectanglei ds(x + w - image.GetWidth(), y + h - image.GetHeight(), camera.GetWidth() - w, camera.GetHeight() - h);
+       Point2i dp(w, h);
+       app.video.window.Blit( image, ds, dp);
      }
    }
 }
@@ -150,32 +149,26 @@ void Sky::Draw()
   std::list<Rectanglei>::iterator it;
   for (it = world.to_redraw_now->begin(); 
        it != world.to_redraw_now->end(); 
-       ++it)
-  {
-    SDL_Rect ds = { sky_cx + it->x - cx -margin_x, 
-		    sky_cy + it->y - cy -margin_y, 
-		    it->w+1, 
-		    it->h+1};
-    SDL_Rect dr = {it->x-cx,
-		   it->y-cy,
-		   it->w+1, 
-		   it->h+1};
-    app.video.window.Blit( image, &ds, &dr);
+       ++it){
+    Rectanglei ds(sky_cx + it->GetPositionX() - cx -margin_x, 
+		    sky_cy + it->GetPositionY() - cy -margin_y, 
+		    it->GetSizeX() + 1, 
+		    it->GetSizeY() + 1);
+    Point2i dp(it->GetPositionX() - cx,
+		   it->GetPositionY() - cy);
+    app.video.window.Blit( image, ds, dp);
   }
 
   for (it = world.to_redraw_particles_now->begin(); 
        it != world.to_redraw_particles_now->end(); 
-       ++it)
-  {
-    SDL_Rect ds = { sky_cx + it->x - cx -margin_x, 
-		    sky_cy + it->y - cy -margin_y, 
-		    it->w+1, 
-		    it->h+1};
-    SDL_Rect dr = {it->x-cx,
-		   it->y-cy,
-		   it->w+1, 
-		   it->h+1};
-    app.video.window.Blit( image, &ds, &dr);
+       ++it){
+    Rectanglei ds(sky_cx + it->GetPositionX() - cx - margin_x, 
+		    sky_cy + it->GetPositionY() - cy - margin_y, 
+		    it->GetSizeX() + 1, 
+		    it->GetSizeY() + 1);
+    Point2i dp(it->GetPositionX() - cx,
+		   it->GetPositionY() - cy);
+    app.video.window.Blit( image, ds, dp);
   }
 #endif
 }

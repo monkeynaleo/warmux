@@ -30,30 +30,58 @@
 #include "../tool/i18n.h"
 #include "../include/base.h"
 
+/**
+ * Default constructor.
+ *
+ * Build a null surface with autoFree at true.
+ */
 Surface::Surface(){
 	surface = NULL;
 	autoFree = true;
 }
 
+/**
+ * Constructor building a surface object using an existing SDL_Surface pointer.
+ *
+ * @param sdl_surface The existing sdl_surface.
+ */
 Surface::Surface(SDL_Surface *sdl_surface){
 	surface = sdl_surface;
 	autoFree = true;
 }
 
+/**
+ * Constructor building a surface object using the NewSurface function.
+ *
+ * @param width
+ * @param height
+ * @param flags
+ * @param useAlpha
+ * @see NewSurface 
+ */
 Surface::Surface(int width, int height, Uint32 flags, bool useAlpha){
 	surface = NULL;
 	autoFree = true;
 	NewSurface( width, height, flags, useAlpha );
 }
 
-Surface::Surface(const std::string &filename_str){
-    const char *filename = filename_str.c_str();
+/**
+ * Constructor building a surface by reading the image from a file.
+ *
+ * @param filename_str A string containing the path to the graphic file.
+ */
+Surface::Surface(const std::string &filename){
 	surface = NULL;
 	autoFree = true;
 	if( !ImgLoad(filename) )
-		Error( Format("Unable to open image file : %s", filename) );
+		Error( Format("Unable to open image file : %s", filename.c_str() ) );
 }
 
+/** 
+ * Copy constructor: build a surface from an other surface.
+ *
+ * The two surfaces share the same graphic data.
+ */
 Surface::Surface(const Surface &src){
 	surface = src.surface;
 	autoFree = true;
@@ -61,6 +89,11 @@ Surface::Surface(const Surface &src){
 		surface->refcount++;
 }
 
+/**
+ * Destructor of the surface.
+ *
+ * Will free the memory used by the surface if autoFree is set to true and if the counter of reference reach 0
+ */
 Surface::~Surface(){
 	AutoFree();
 }
@@ -74,6 +107,11 @@ Surface &Surface::operator=(const Surface & src){
 	return *this;
 }
 
+/**
+ * Free the memory occupied by the surface.
+ *
+ * The memory is really freed if the reference counter reach 0.
+ */
 void Surface::Free(){
 	if( surface != NULL ){
 		SDL_FreeSurface( surface );
@@ -86,21 +124,46 @@ void Surface::AutoFree(){
 		Free();
 }
 
+/** 
+ * Set the auto free status of a surface.
+ *
+ * In general it should always be true for non-system surface.
+ * @param newAutoFree the new autoFree status.
+ */
 void Surface::SetAutoFree( bool newAutoFree ){
 	autoFree = newAutoFree;
 }
 
+/**
+ * Return the pointer of the SDL_Surface.
+ *
+ * Should be used carefully.
+ */
 SDL_Surface *Surface::GetSurface(){
 	return surface;
 }
 
-	void Surface::SetSurface(SDL_Surface *newSurface, bool freePrevious){
-		if( freePrevious )
-			Free();
+/**
+ * Change the surface pointer.
+ *
+ * @param newSurface The new surface to use.
+ * @param freePrevius Indicate if the old surface should be freed.
+ */
+void Surface::SetSurface(SDL_Surface *newSurface, bool freePrevious){
+	if( freePrevious )
+		Free();
 
-		surface = newSurface;
-	}
+	surface = newSurface;
+}
 
+/**
+ * Create a new surface.
+ *
+ * @param width
+ * @param height
+ * @param flags
+ * @param useAlpha
+ */
 void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha){
 	Uint32 alphaMask;
 	Uint32 redMask;
@@ -132,73 +195,211 @@ void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha){
 		Error( std::string("Can't create SDL RGBA surface: ") + SDL_GetError() );
 }
 
+/**
+ * Set the alpha value of a surface.
+ *
+ */
 int Surface::SetAlpha(Uint32 flags, Uint8 alpha){
 	return SDL_SetAlpha( surface, flags, alpha );
 }
 
+/**
+ * Lock the surface to permit direct access.
+ *
+ */
 int Surface::Lock(){
 	return SDL_LockSurface( surface );
 }
 
+/**
+ * Unlock the surface.
+ *
+ */
 void Surface::Unlock(){
 	SDL_UnlockSurface( surface );
-}
-
-int Surface::Blit(SDL_Surface *src, SDL_Rect *srcRect, SDL_Rect *dstRect){
-	return SDL_BlitSurface( src, srcRect, surface, dstRect );
 }
 
 int Surface::Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect){
 	return SDL_BlitSurface( src.surface, srcRect, surface, dstRect );
 }
 
+/**
+ * Blit the whole surface src on the current surface.
+ *
+ * @param src The source surface.
+ */
+int Surface::Blit(const Surface& src){
+	return Blit(src, NULL, NULL);
+}
+
+/**
+ * Blit a surface (src) on the current surface at a certain position (dst)
+ *
+ * @src The source surface.
+ * @dst A point defining the destination coordinate on the current surface.
+ */
+int Surface::Blit(const Surface& src, const Point2i &dst){
+	SDL_Rect dstRect = GetSDLRect( dst );;
+	
+	return Blit(src, NULL, &dstRect);
+}
+
+/**
+ * Blit a part (srcRect) of surface (src) at a certaint position (dst) of the current surface/
+ *
+ * @param src
+ * @param srcRect
+ * @param dstPoint
+ */
+int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &dstPoint){
+	SDL_Rect sdlSrcRect = GetSDLRect( srcRect );
+	SDL_Rect sdlDstRect = GetSDLRect( dstPoint );
+
+	return Blit(src, &sdlSrcRect, &sdlDstRect);
+}
+
+/**
+ *
+ * @param flag
+ * @param key
+ */
 int Surface::SetColorKey(Uint32 flag, Uint32 key){
 	return SDL_SetColorKey( surface, flag, key );
 }
 
+/**
+ *
+ *
+ * @param flag
+ * @param r
+ * @param g
+ * @param b
+ * @param a
+ */
 int Surface::SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a){
 	return SetColorKey( flag, MapRGBA(r, g, b, a) );
 }
 
+/**
+ * @param color
+ * @param r
+ * @param g
+ * @param b
+ * @param a
+ */
 void Surface::GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a){
 	SDL_GetRGBA(color, surface->format, &r, &g, &b, &a);
 }
 
+/** 
+ * @param r
+ * @param g
+ * @param b
+ * @param a
+ */
 Uint32 Surface::MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
     return SDL_MapRGBA(surface->format, r, g, b, a);
 }
 
-void Surface::SetClipRect(SDL_Rect *rect){
-	SDL_SetClipRect( surface, rect );
+/**
+ *
+ * @param color
+ */
+Color Surface::GetColor(Uint32 color){
+	Uint8 r, g, b, a;
+	GetRGBA(color, r, g, b, a);
+	return Color(r, g, b, a);
+}
+
+/**
+ *
+ * @param color
+ */
+Uint32 Surface::MapColor(Color color){
+	return MapRGBA(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+}
+
+/** 
+ * @param rect
+ */
+void Surface::SetClipRect(const Rectanglei &rect){
+	SDL_Rect sdlRect = GetSDLRect( rect );
+	SDL_SetClipRect( surface, &sdlRect );
 }
 
 void Surface::Flip(){
 	SDL_Flip( surface );
 }
 
-int Surface::BoxRGBA(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a){
-	return boxRGBA( surface, x1, y1, x2, y2, r, g, b, a );
+int Surface::BoxColor(const Rectanglei &rect, const Color &color){
+	if( rect.IsSizeZero() )
+		return 0;
+
+	Point2i ptBR = rect.GetBottomRightPoint();
+
+	return boxRGBA( surface, rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), ptBR.GetY(), color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
-int Surface::RectangleRGBA(Sint16 x1, Sint16 y1, Sint16 x2, Sint16 y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a){
-	return rectangleRGBA( surface, x1, y1, x2, y2, r, g, b, a );
+int Surface::RectangleColor(const Rectanglei &rect, const Color &color){
+    if( rect.IsSizeZero() )
+        return 0;
+
+	Point2i ptBR = rect.GetBottomRightPoint();
+
+	return rectangleRGBA( surface, rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), ptBR.GetY(), color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
-int Surface::FillRect(SDL_Rect *dstRect, Uint32 color){
-	return SDL_FillRect( surface, dstRect, color);
+/**
+ *
+ * @param color
+ */
+int Surface::Fill(Uint32 color){
+    return SDL_FillRect( surface, NULL, color);
 }
 
-int Surface::FillRect( SDL_Rect *dstRect, Uint8 r, Uint8 g, Uint8 b, Uint8 a){
-	return FillRect( dstRect, MapRGBA(r, g, b, a) );
+int Surface::Fill(const Color &color){
+	return Fill( MapColor(color) );
 }
 
-int Surface::ImgLoad( const char *filename ){
+/** 
+ *
+ * @param dstRect
+ * @param color
+ */
+int Surface::FillRect(const Rectanglei &dstRect, Uint32 color){
+	SDL_Rect sdlDstRect = GetSDLRect( dstRect );
+
+	return SDL_FillRect( surface, &sdlDstRect, color);
+}
+
+/**
+ *
+ * @param dstRect
+ * @param color
+ */
+int Surface::FillRect(const Rectanglei &dstRect, const Color &color){
+	
+	return FillRect( dstRect, MapColor(color) );
+}
+
+/**
+ *
+ * @param filename
+ */
+int Surface::ImgLoad(std::string filename){
 	AutoFree();
-	surface = IMG_Load( filename );
+	surface = IMG_Load( filename.c_str() );
 
 	return surface != NULL;
 }
 
+/**
+ *
+ * @param angle
+ * @param zoomx
+ * @param zoomy
+ * @param smooth
+ */
 Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
 	Surface newSurf;
 
@@ -210,6 +411,9 @@ Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
 	return newSurf;	
 }
 
+/**
+ *
+ */
 Surface Surface::DisplayFormatAlpha(){
 	Surface newSurf;
 
@@ -221,6 +425,9 @@ Surface Surface::DisplayFormatAlpha(){
 	return newSurf;
 }
 
+/**
+ *
+ */
 Surface Surface::DisplayFormat(){
 	Surface newSurf;
 
@@ -232,7 +439,14 @@ Surface Surface::DisplayFormat(){
 	return newSurf;
 }
 
-// From SDL's wiki
+
+/**
+ * GetPixel.
+ *
+ * From the SDL wiki.
+ * @param x
+ * @param y
+ */
 Uint32 Surface::GetPixel(int x, int y){
     int bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to retrieve */
@@ -260,6 +474,12 @@ Uint32 Surface::GetPixel(int x, int y){
     }
 }
 
+/**
+ *
+ * @param x
+ * @param y
+ * @param pixel
+ */
 void Surface::PutPixel(int x, int y, Uint32 pixel){
     int bpp = surface->format->BytesPerPixel;
     /* Here p is the address to the pixel we want to set */
@@ -292,3 +512,24 @@ void Surface::PutPixel(int x, int y, Uint32 pixel){
     }
 }
 
+SDL_Rect Surface::GetSDLRect(const Rectanglei &r){
+	SDL_Rect sdlRect;
+
+    sdlRect.x = r.GetPositionX();
+    sdlRect.y = r.GetPositionY();
+    sdlRect.w = r.GetSizeX();
+    sdlRect.h = r.GetSizeY();
+
+	return sdlRect;	
+}
+
+SDL_Rect Surface::GetSDLRect(const Point2i &pt){
+	SDL_Rect sdlRect;
+
+	sdlRect.x = pt.GetX();
+	sdlRect.y = pt.GetY();
+	sdlRect.w = 0;
+	sdlRect.h = 0;
+
+	return sdlRect;
+}

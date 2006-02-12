@@ -28,14 +28,9 @@
 #ifndef _RESOURCE_MANAGER_H
 #define _RESOURCE_MANAGER_H
 
-#include <vector>
 #include <string>
-#include <map>
-#include <SDL.h>
-#include "../graphic/sprite.h"
 #include "xml_document.h"
-
-//struct Element;
+#include "../graphic/sprite.h"
 
 class Profile 
 { 
@@ -46,7 +41,6 @@ class Profile
 
   Profile();
   ~Profile();
-  
 };
 
 class ResourceManager
@@ -65,13 +59,9 @@ class ResourceManager
    Sprite *LoadSprite( const Profile *profile, const std::string resource_name); 
    
  private:
-   
    std::string base_path;
-// std::vector< std::string> data_pathes;
-// map < std::string, Resource *> resources;
 
    xmlpp::Element * GetElement( const Profile *profile, const std::string ressource_type, const std::string ressource_name);
-
 };
 
 extern ResourceManager resource_manager;

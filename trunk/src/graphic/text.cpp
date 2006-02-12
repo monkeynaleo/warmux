@@ -22,6 +22,7 @@
 #include <string>
 #include <iostream> //cerr
 #include "text.h"
+#include "color.h"
 #include "colors.h"
 #include "font.h"
 #include "video.h"
@@ -31,7 +32,7 @@
 #include "../map/map.h"
 #include "../include/global.h"
 
-Text::Text(const std::string &new_txt, SDL_Color new_color,
+Text::Text(const std::string &new_txt, Color new_color,
            Font* new_font, bool shadowed){
 				
   if( new_font == NULL )
@@ -72,10 +73,8 @@ void Text::Set(const std::string &new_txt){
   Render();
 }
 
-void Text::SetColor(SDL_Color new_color){
-  if(color.r == new_color.r
-  && color.g == new_color.g
-  && color.b == new_color.b)
+void Text::SetColor(const Color &new_color){
+  if(color == new_color)
     return;
 
   color = new_color;
@@ -96,32 +95,25 @@ void Text::DrawCenterTop (int x, int y){
 }
 
 void Text::DrawTopLeft (int x, int y){ 
-  SDL_Rect dst_rect;
+  Rectanglei dst_rect;
   
-  dst_rect.x = x;
-  dst_rect.y = y;
-  dst_rect.w = surf.GetWidth();
-  dst_rect.h = surf.GetHeight();
+  dst_rect.SetPosition(x, y);
+  dst_rect.SetSize(surf.GetWidth(), surf.GetHeight());
 
-  if(shadowed)
-  {
-    SDL_Rect shad_rect;
+  if(shadowed){
+    Rectanglei shad_rect;
     
-    shad_rect.x = dst_rect.x + bg_offset;
-    shad_rect.y = dst_rect.y + bg_offset;
-    shad_rect.w = background.GetWidth();
-    shad_rect.h = background.GetHeight();
+    shad_rect.SetPosition(dst_rect.GetPosition() + bg_offset);
+    shad_rect.SetSize(background.GetWidth(), background.GetHeight() );
     
-    app.video.window.Blit(background, NULL, &shad_rect);
-    app.video.window.Blit(surf, NULL, &dst_rect);
+    app.video.window.Blit(background, shad_rect.GetPosition());
+    app.video.window.Blit(surf, dst_rect.GetPosition());
 		
-    world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y,
-                                      shad_rect.w + bg_offset, shad_rect.h + bg_offset));
-  }
-  else
-  {
-    app.video.window.Blit(surf, NULL, &dst_rect);
-    world.ToRedrawOnScreen(Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h));
+    world.ToRedrawOnScreen(Rectanglei(dst_rect.GetPosition(),
+                                      shad_rect.GetSize() + bg_offset));
+  }else{
+    app.video.window.Blit(surf, dst_rect.GetPosition());
+    world.ToRedrawOnScreen(dst_rect);
   }		
 }
 
@@ -141,33 +133,26 @@ void Text::DrawTopLeftOnMap (int x, int y){
 
 void DrawTmpBoxText(Font &font, int _x, int _y, 
 		    const std::string &txt, uint space,
-                    int boxR, int boxG, int boxB, int boxA,
-                    int rectR, int rectG, int rectB, int rectA)
+                    Color boxColor, Color rectColor)
 {
-  int x, y, w, h;
+  int w = font.GetWidth(txt) + space*2;
+  int h = font.GetHeight(txt) + space*2;
   
-  w = font.GetWidth(txt) + space*2;
-  x = _x - w / 2;
-
-  h = font.GetHeight(txt) + space*2;
-  y = _y - h / 2;
   _y -= font.GetHeight(txt)/2;
 
-  app.video.window.BoxRGBA(x, y, x + w, y + h,
-                           boxR, boxG, boxB, boxA);
+  Rectanglei rect( _x - w / 2, _y -h / 2, w, h);
+  
+  app.video.window.BoxColor(rect, boxColor);
+  app.video.window.RectangleColor(rect, rectColor);  
 
-  app.video.window.RectangleRGBA(x, y, x + w, y + h,
-                                 rectR, rectG, rectB, rectA);  
-
-  world.ToRedrawOnScreen(Rectanglei(x, y, w, h));
+  world.ToRedrawOnScreen( rect );
   font.WriteCenterTop (_x, _y, txt, white_color);
 }
 
 void DrawTmpBoxTextWithReturns(Font &font, int _x, int _y, 
                                const std::string &txt, uint space,
-                               int boxR, int boxG, int boxB, int boxA,
-                               int rectR, int rectG, int rectB, int rectA)
-
+                               Color boxColor,
+                               Color rectColor)
 {
   size_t pos          = 0;
   size_t last_pos     = 0;
@@ -210,13 +195,13 @@ void DrawTmpBoxTextWithReturns(Font &font, int _x, int _y,
   total_height += 5*space;
   x = _x - max_width / 2;
   y = _y - total_height / 2;
-  app.video.window.BoxRGBA(x, y, x + max_width, y + total_height,
-                           boxR, boxG, boxB, boxA);
 
-  app.video.window.RectangleRGBA(x, y, x + max_width, y + total_height,
-                                 rectR, rectG, rectB, rectA);
+  Rectanglei rect(x, y, max_width, total_height);
+  
+  app.video.window.BoxColor(rect, boxColor);
+  app.video.window.RectangleColor(rect, rectColor);
 
-  world.ToRedrawOnScreen(Rectanglei(x, y, max_width, total_height));
+  world.ToRedrawOnScreen(rect);
 
   for( std::vector<size_t>::iterator it=offsets.begin();
        it != offsets.end();

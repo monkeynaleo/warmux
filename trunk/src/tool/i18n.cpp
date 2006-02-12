@@ -20,14 +20,12 @@
  * Eg. : Format("Hello %s", "world") returns "Hello World".
  *****************************************************************************/
 
-#include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
+#include "i18n.h"
 #include <iostream>
 #include <sstream>
 #include <stdarg.h>
-#include "../game/config.h"
 #include "../config.h"
-//-----------------------------------------------------------------------------
+#include "../game/config.h"
 
 // Package is defined by autotools
 #ifdef WIN32
@@ -35,7 +33,6 @@
 #endif
 
 #define GETTEXT_DOMAIN PACKAGE
-//-----------------------------------------------------------------------------
 
 void CopyString (std::ostream &os, 
                  const char *&txt, const char *&sauve_txt, 
@@ -47,8 +44,6 @@ void CopyString (std::ostream &os,
   sauve_txt = txt;
   ++sauve_txt;
 }
-
-//-----------------------------------------------------------------------------
 
 std::string Format (const char *txt, ...)
 {
@@ -122,21 +117,14 @@ std::string Format (const char *txt, ...)
   return ss.str();
 }
 
-//-----------------------------------------------------------------------------
-
-void I18N_SetDir(const std::string &dir)
-{
+void I18N_SetDir(const std::string &dir){
   bindtextdomain(GETTEXT_DOMAIN, dir.c_str());
   bind_textdomain_codeset (GETTEXT_DOMAIN, "UTF-8");
 }
 
-//-----------------------------------------------------------------------------
-
-void InitI18N()
-{
+void InitI18N(){
   setlocale (LC_ALL, "");
   I18N_SetDir (config.locale_dir.c_str());
   textdomain(GETTEXT_DOMAIN);
 }
 
-//-----------------------------------------------------------------------------

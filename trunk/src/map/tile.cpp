@@ -125,9 +125,9 @@ private:
 
 void TileItem::Draw(const int x,const int y){
   Surface i_surface = GetSurface();
-  SDL_Rect ds = {0,0,cell_width,cell_height};
-  SDL_Rect dr = {x*cell_width-camera.GetX(),y*cell_height-camera.GetY(),cell_width,cell_height};
-  app.video.window.Blit(i_surface, &ds, &dr); 	     
+  Rectanglei ds(0, 0, cell_width, cell_height);
+  Point2i dp( x * cell_width - camera.GetX(), y * cell_height-camera.GetY() );
+  app.video.window.Blit(i_surface, ds, dp);
 }
 
 bool TileItem::IsEmpty(){
@@ -231,8 +231,7 @@ TileItem_AlphaHardware::TileItem_AlphaHardware (const TileItem_AlphaHardware &co
    m_height = copy.m_height;
 
    m_surface.NewSurface(m_width, m_height, SDL_HWSURFACE|SDL_SRCALPHA, true);
-   SDL_Rect dest_rect = {0,0, copy.m_surface.GetWidth(), copy.m_surface.GetHeight()};
-   m_surface.Blit( copy.m_surface, NULL, &dest_rect);
+   m_surface.Blit( copy.m_surface, Point2i(0, 0));
 
    m_buffer = new unsigned char[m_height*m_width];
    memcpy( copy.m_buffer, m_buffer, m_height*m_width*sizeof( unsigned char));
@@ -256,7 +255,7 @@ void TileItem_AlphaHardware::Dig( int ox, int oy, Surface& dig){
    
    for( int py = starting_y ; py < ending_y ; py++) 
      for( int px = starting_x ; px < ending_x ; px++)
-       if ( *(((unsigned char *)dig.GetSurface()->pixels) + (py-oy)*dig.GetPitch() + (px-ox) * 4 + 3) != 0){
+       if ( *(dig.GetPixels() + (py-oy)*dig.GetPitch() + (px-ox) * 4 + 3) != 0){
         *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
         m_buffer[py*m_width+px] = 0;
      }
@@ -295,8 +294,7 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (const TileItem_ColorkeySof
    m_height = copy.m_height;
 
    m_surface.NewSurface(m_width, m_height, SDL_SWSURFACE);
-   SDL_Rect dest_rect = {0, 0, copy.m_surface.GetWidth(), copy.m_surface.GetHeight()};
-   m_surface.Blit( copy.m_surface, NULL, &dest_rect);
+   m_surface.Blit( copy.m_surface, Point2i(0, 0));
    m_surface.SetAlpha(0, 0);
    m_surface.SetColorKey(SDL_SRCCOLORKEY, 0, 0, 0, 0);
 
@@ -322,7 +320,7 @@ void TileItem_ColorkeySoftware::Dig( int ox, int oy, Surface& dig){
 
    for( int py = starting_y ; py < ending_y ; py++) 
      for( int px = starting_x ; px < ending_x ; px++)
-       if ( *(((unsigned char *)dig.GetSurface()->pixels) + (py-oy)*dig.GetPitch() + (px-ox) * 4 + 3) != 0){ 
+       if ( *(dig.GetPixels() + (py-oy)*dig.GetPitch() + (px-ox) * 4 + 3) != 0){ 
          *(Uint32 *)(m_surface.GetPixels()+py*m_surface.GetPitch()+px*4) = transparent_color;
          m_buffer[py*m_width+px] = 0;
        }
@@ -410,11 +408,10 @@ void Tile::LoadImage (Surface& terrain){
      for( unsigned int ix = 0 ; ix < nbr_cell_width ; ix++ ){
        unsigned int piece = iy * nbr_cell_width + ix;
 
-       SDL_Rect sr = {ix*cell_width,iy*cell_height, cell_width,cell_height};
-       SDL_Rect dr = {0, 0, cell_width, cell_height};
+       Rectanglei sr(ix * cell_width, iy * cell_height, cell_width, cell_height);
 
        terrain.SetAlpha(0, 0);
-       item[piece]->GetSurface().Blit( terrain, &sr, &dr);
+       item[piece]->GetSurface().Blit( terrain, sr, Point2i(0, 0));
        item[piece]->SyncBuffer();
     }	
 
@@ -451,10 +448,10 @@ void Tile::DrawTile() const{
 void Tile::DrawTile_Clipped( Rectanglei clip_r_world) const
 {
    // Select only the items that are under the clip area
-   int first_cell_x = clamp( (clip_r_world.x)/cell_width,                0, nbr_cell_width-1);
-   int first_cell_y = clamp( (clip_r_world.y)/cell_height,                0, nbr_cell_height-1);
-   int last_cell_x  = clamp( (clip_r_world.x+clip_r_world.w +1)/cell_width, 0, nbr_cell_width-1);
-   int last_cell_y  = clamp( (clip_r_world.y+clip_r_world.h +1)/cell_height, 0, nbr_cell_height-1);
+   int first_cell_x = clamp( (clip_r_world.GetPositionX())/cell_width,                0, nbr_cell_width-1);
+   int first_cell_y = clamp( (clip_r_world.GetPositionY())/cell_height,                0, nbr_cell_height-1);
+   int last_cell_x  = clamp( (clip_r_world.GetPositionX()+clip_r_world.GetSizeX() +1)/cell_width, 0, nbr_cell_width-1);
+   int last_cell_y  = clamp( (clip_r_world.GetPositionY()+clip_r_world.GetSizeY() +1)/cell_height, 0, nbr_cell_height-1);
 
    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
      for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++)
@@ -468,29 +465,29 @@ void Tile::DrawTile_Clipped( Rectanglei clip_r_world) const
 	  int src_x = 0;
 	  int src_y = 0;
 	  
-	  if ( dest_x < clip_r_world.x ){ // left clipping
-	       src_x  += clip_r_world.x - dest_x;
-	       dest_w -= clip_r_world.x - dest_x;
-	       dest_x  = clip_r_world.x;
+	  if ( dest_x < clip_r_world.GetPositionX() ){ // left clipping
+	       src_x  += clip_r_world.GetPositionX() - dest_x;
+	       dest_w -= clip_r_world.GetPositionX() - dest_x;
+	       dest_x  = clip_r_world.GetPositionX();
 	  }
 	  
-	  if ( dest_y < clip_r_world.y ){  // top clipping
-	       src_y  += clip_r_world.y - dest_y;
-	       dest_h -= clip_r_world.y - dest_y;
-	       dest_y  = clip_r_world.y;
+	  if ( dest_y < clip_r_world.GetPositionY() ){  // top clipping
+	       src_y  += clip_r_world.GetPositionY() - dest_y;
+	       dest_h -= clip_r_world.GetPositionY() - dest_y;
+	       dest_y  = clip_r_world.GetPositionY();
 	  }
 	  
-	  if ( dest_x + dest_w > clip_r_world.x + clip_r_world.w +1) // right clipping
-	       dest_w -= ( dest_x + dest_w ) - ( clip_r_world.x + clip_r_world.w +1);
+	  if ( dest_x + dest_w > clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1) // right clipping
+	       dest_w -= ( dest_x + dest_w ) - ( clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1);
 	  
-	  if ( dest_y + dest_h > clip_r_world.y + clip_r_world.h +1) // bottom clipping
-	       dest_h -= ( dest_y + dest_h ) - ( clip_r_world.y + clip_r_world.h +1);
+	  if ( dest_y + dest_h > clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1) // bottom clipping
+	       dest_h -= ( dest_y + dest_h ) - ( clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1);
 	  
-	  SDL_Rect sr = { src_x, src_y, dest_w, dest_h};
+	  Rectanglei sr(src_x, src_y, dest_w, dest_h);
 	       
 	  // Decall the destination rectangle along the camera offset
-	  SDL_Rect dr = { dest_x-camera.GetX(), dest_y-camera.GetY(), dest_w, dest_h};
+	  Point2i dr(dest_x - camera.GetX(), dest_y - camera.GetY());
 	  
-	  app.video.window.Blit( item[cy*nbr_cell_width+cx]->GetSurface(), &sr, &dr);
+	  app.video.window.Blit( item[cy*nbr_cell_width+cx]->GetSurface(), sr, dr);
        }
 }   

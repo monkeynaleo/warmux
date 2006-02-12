@@ -247,20 +247,16 @@ void Ground::Draw()
   
   if (camera.HasFixedX()) {// ground is less wide than screen !
     uint margin = ( vidWidth - GetWidth() )/2;
-    app.video.window.BoxRGBA(0, 0,margin, vidHeight,
-	    0, 0, 0, 255); 
-    app.video.window.BoxRGBA( vidWidth - margin, 0, 
-			vidWidth, vidHeight,
-	    0, 0, 0, 255); 
+	
+    app.video.window.BoxColor( Rectanglei(0, 0,margin, vidHeight), black_color); 
+    app.video.window.BoxColor( Rectanglei(vidWidth - margin, 0, margin, vidHeight), black_color); 
   }
 
   if (camera.HasFixedY()) {// ground is less wide than screen !
     uint margin = (vidHeight - GetHeight())/2;
-    app.video.window.BoxRGBA(0, 0, vidWidth, margin,
-	    0, 0, 0, 255); 
-    app.video.window.BoxRGBA(0, vidHeight - margin, 
-			vidWidth, vidHeight,
-	    0, 0, 0, 255); 
+	
+    app.video.window.BoxColor( Rectanglei(0, 0, vidWidth, margin), black_color); 
+    app.video.window.BoxColor( Rectanglei(0, vidHeight - margin, vidWidth, margin), black_color); 
   }
 
 #if defined(WIN32)

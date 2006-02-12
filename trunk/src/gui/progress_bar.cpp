@@ -26,39 +26,24 @@
 #include "../tool/math_tools.h"
 
 BarreProg::BarreProg(){   
-   border_color.r = 0;
-   border_color.g = 0;
-   border_color.b = 0;
-   value_color.r = 255;
-   value_color.g = 255;
-   value_color.b = 255;
-   background_color.r = 100;
-   background_color.g = 100;
-   background_color.b = 100;
+   border_color.SetColor(0, 0, 0, 255);
+   value_color.SetColor(255, 255, 255, 255);
+   background_color.SetColor(100, 100 ,100, 255);
    x = y = larg = haut = 0;
    val = min = max = 0;
    m_use_ref_val = false;
 }
 
-void BarreProg::SetBorderColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a){
-   border_color.r = r;
-   border_color.g = g;
-   border_color.b = b;
-   border_color.unused = a;   
+void BarreProg::SetBorderColor(Color color){
+   border_color = color;
 }
 
-void BarreProg::SetBackgroundColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a){
-   background_color.r = r;
-   background_color.g = g;
-   background_color.b = b;   
-   background_color.unused = a;   
+void BarreProg::SetBackgroundColor(Color color){
+   background_color = color;
 }
 
-void BarreProg::SetValueColor( unsigned char r, unsigned char g, unsigned char b, unsigned char a){
-   value_color.r = r;
-   value_color.g = g;
-   value_color.b = b;
-   value_color.unused = a;   
+void BarreProg::SetValueColor(Color color){
+   value_color = color;
 }
 
 void BarreProg::InitPos (uint px, uint py, uint plarg, uint phaut){
@@ -103,11 +88,11 @@ void BarreProg::DrawXY (uint px, uint py) {
   int left, right;
    
   // Bordure
-  image.FillRect( NULL, border_color.r, border_color.g, border_color.b, border_color.unused);
+  image.Fill(border_color);
    
   // Fond
-  SDL_Rect r_back = {1, 1, larg-2, haut-2};
-  image.FillRect( &r_back, background_color.r, background_color.g, background_color.b, background_color.unused);
+  Rectanglei r_back(1, 1, larg - 2, haut - 2);
+  image.FillRect(r_back, background_color);
    
   // Valeur
   if (m_use_ref_val) {
@@ -124,48 +109,34 @@ void BarreProg::DrawXY (uint px, uint py) {
     right = 1+val_barre;
   }  
 
-  SDL_Rect r_value = {left, 1, right-left, haut-2};
-  image.FillRect( &r_value, value_color.r, value_color.g, value_color.b, value_color.unused);
+  Rectanglei r_value (left, 1, right - left, haut - 2);
+  image.FillRect(r_value, value_color);
    
   if (m_use_ref_val) {
     int ref = CalculeValBarre (m_ref_val);
-    SDL_Rect r_ref = {1+ref, 1, 1, haut-2};
-	image.FillRect( &r_ref, border_color.r, border_color.g, border_color.b, border_color.unused);
+    Rectanglei r_ref(1 + ref, 1, 1, haut - 2);
+	image.FillRect(r_ref, border_color);
   }
 
   // Marqueurs
   marqueur_it_const it=marqueur.begin(), fin=marqueur.end();
   for (; it != fin; ++it)
   {
-    SDL_Rect r_marq = {1+it->val, 1, 1, haut-2};
-	image.FillRect( &r_marq, border_color.r, border_color.g, border_color.b, border_color.unused);
+    Rectanglei r_marq(1 + it->val, 1, 1, haut - 2);
+	image.FillRect( r_marq, border_color);
   }
- 
-  // Blit internal surface to destination
-  SDL_Rect d = {px, py, larg, haut};
-  app.video.window.Blit( image, NULL, &d );
+  Rectanglei dst(px, py, larg, haut); 
+  app.video.window.Blit( image, dst.GetPosition() );
 
-  world.ToRedrawOnScreen(Rectanglei(d.x, d.y, d.w, d.h));
+  world.ToRedrawOnScreen( dst );
 }
 
 // Ajoute/supprime un marqueur
-BarreProg::marqueur_it BarreProg::AjouteMarqueur (long val, const SDL_Color& color){
+BarreProg::marqueur_it BarreProg::AjouteMarqueur (long val, const Color& color){
   marqueur_t m;
   
   m.val = CalculeValBarre (val);
   m.color = color;
-  marqueur.push_back (m);
-  
-  return --marqueur.end();
-}
-
-BarreProg::marqueur_it BarreProg::AjouteMarqueur (long val, unsigned char r, unsigned char g, unsigned char b, unsigned char a){
-  marqueur_t m;
-  
-  m.val = CalculeValBarre (val);
-  m.color.r = r;
-  m.color.g = g;
-  m.color.b = b;
   marqueur.push_back (m);
   
   return --marqueur.end();

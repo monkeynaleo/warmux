@@ -16,21 +16,37 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Function used to format string.
- * Eg. : Format("Hello %s", "world") returns "Hello World".
+ * Handle a SDL_Surface.
  *****************************************************************************/
 
-#ifndef FORMAT_H
-#define FORMAT_H
+#ifndef COLOR_H
+#define COLOR_H
 
-#include "../include/base.h"
-#include <string>
-#include <libintl.h>
+#include <SDL.h>
 
-#define _(X) gettext(X)
+class Color
+{
+	private:
 
-void InitI18N();
-void I18N_SetDir(const std::string &dir);
-std::string Format (const char *txt, ...);
+	public:
+		Uint8 red;
+		Uint8 green;
+		Uint8 blue;
+		Uint8 alpha;
+		
+		Color();
+		Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+
+		bool Color::operator==(const Color &color) const;
+
+		void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+
+		Uint8 GetRed() const;
+		Uint8 GetGreen() const;
+		Uint8 GetBlue() const;
+		Uint8 GetAlpha() const;
+
+		SDL_Color GetSDLColor() const;
+};
 
 #endif

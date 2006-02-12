@@ -31,13 +31,13 @@ class Text
   Surface background; //shadow or outline or nothing;
   std::string txt;
   Font* font;
-  SDL_Color color;
+  Color color;
   bool shadowed;
   unsigned int bg_offset;
 
   void Render();
 public:
-  Text(const std::string &new_txt, SDL_Color new_color = white_color, Font* new_font = NULL, bool shadowed = true);
+  Text(const std::string &new_txt, Color new_color = white_color, Font* new_font = NULL, bool shadowed = true);
   ~Text();
 
   //Draw method using windows coordinates
@@ -52,7 +52,7 @@ public:
   void DrawCenterTopOnMap(int x, int y);
 
   void Set(const std::string &new_txt);
-  void SetColor(SDL_Color new_color);
+  void SetColor( const Color &new_color);
   int GetWidth() const {return surf.GetWidth();};
   int GetHeight() const {return surf.GetHeight();}
 };
@@ -60,13 +60,12 @@ public:
 void DrawTmpBoxText(Font &font, 
 		    int x, int y, 
 		    const std::string &txt, uint space=3,
-                    int boxR=80, int boxG=80, int boxB=159, int boxA=206,
-                    int rectR=49, int rectG=32, int rectB=122, int rectA=255);
+            Color boxColor = defaultColorBox,
+            Color rectColor = defaultColorRect);
 void DrawTmpBoxTextWithReturns(Font &font,
-                               int _x, int _y, 
-                               const std::string &txt, uint space=3,
-                               int boxR=80, int boxG=80, int boxB=159, int boxA=206,
-                               int rectR=49, int rectG=32, int rectB=122, int rectA=255);
-
+            int _x, int _y, 
+            const std::string &txt, uint space=3,
+            Color boxColor = defaultColorBox,
+            Color rectColor = defaultColorRect);
 
 #endif
