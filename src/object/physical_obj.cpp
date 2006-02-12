@@ -47,7 +47,6 @@
 #define COUT_PHYSIC COUT_DEBUG0 << "[Physique] "
 
 #endif
-//-----------------------------------------------------------------------------
 
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 6 ;
@@ -58,8 +57,6 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
 {
   return p1.Distance(p2) / PIXEL_PER_METER ;
 }
-
-//-----------------------------------------------------------------------------
 
 PhysicalObj::PhysicalObj (GameLoop &p_game_loop, const std::string &name, double mass) :
   Physics(p_game_loop),
@@ -83,20 +80,12 @@ PhysicalObj::PhysicalObj (GameLoop &p_game_loop, const std::string &name, double
   m_ready = true;
 }
 
-//-----------------------------------------------------------------------------
-
 PhysicalObj::~PhysicalObj ()
 {}
 
-//-----------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------//
-//--                                                                       --//
 //--                         Class Parameters SET/GET                      --//
-//--                                                                       --//
 //---------------------------------------------------------------------------//
-
-//-----------------------------------------------------------------------------
 
 // Set / Get positions
 
@@ -143,8 +132,6 @@ int PhysicalObj::GetY() const
   return (int)round(GetPhysY() * PIXEL_PER_METER);
 }
 
-//-----------------------------------------------------------------------------
-
 int PhysicalObj::GetCenterX() const 
 { 
   return GetX() +m_test_left +GetTestWidth()/2;
@@ -159,8 +146,6 @@ const Point2i PhysicalObj::GetCenter() const
 {
   return Point2i(GetCenterX(), GetCenterY());
 }
-
-//-----------------------------------------------------------------------------
 
 void PhysicalObj::SetSize (uint width, uint height) 
 { 
@@ -184,8 +169,6 @@ int PhysicalObj::GetHeight() const
   return m_height; 
 }
 
-//-----------------------------------------------------------------------------
-
 void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
 {
   m_test_left =  left;
@@ -193,8 +176,6 @@ void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
   m_test_top = top;
   m_test_bottom = bottom;
 }
-
-//-----------------------------------------------------------------------------
 
 int PhysicalObj::GetTestWidth() const 
 { 
@@ -206,14 +187,10 @@ int PhysicalObj::GetTestHeight() const
   return m_height -m_test_top -m_test_bottom; 
 }
 
-//-----------------------------------------------------------------------------
-
 const Rectanglei PhysicalObj::GetRect() const 
 { 
   return Rectanglei( GetX(), GetY(), m_width, m_height);
 }
-
-//-----------------------------------------------------------------------------
 
 const Rectanglei PhysicalObj::GetTestRect() const 
 { 
@@ -222,9 +199,6 @@ const Rectanglei PhysicalObj::GetTestRect() const
 		     m_width-m_test_right-m_test_left, 
 		     m_height-m_test_bottom-m_test_top);  
 }
-
-//-----------------------------------------------------------------------------
-
 
 // Move to a point with collision test
 // Return true if collision occured
@@ -361,7 +335,6 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
     return false;
 }
 #endif // TODO*/
-//-----------------------------------------------------------------------------
 
 void PhysicalObj::UpdatePosition ()
 {
@@ -392,8 +365,6 @@ void PhysicalObj::UpdatePosition ()
   }
 }
 
-
-//-----------------------------------------------------------------------------
 bool PhysicalObj::PutOutOfGround(double direction)
 {
   const int max_step = 30;
@@ -420,33 +391,30 @@ bool PhysicalObj::PutOutOfGround(double direction)
   return true;
 }
 
-//-----------------------------------------------------------------------------
 bool PhysicalObj::PutOutOfGround()
 {
-  if(IsInVacuum(0,0))
+  if( IsInVacuum(0, 0) )
     return true;
 
   bool left,right,top,bottom;
-  left   = world.IsInVacuum_left(*this,0,0);
-  right  = world.IsInVacuum_right(*this,0,0);
-  top    = world.EstDansVide_haut(*this,0,0);
-  bottom = world.EstDansVide_bas(*this,0,0);
+  left   = world.IsInVacuum_left(*this, 0, 0);
+  right  = world.IsInVacuum_right(*this, 0, 0);
+  top    = world.EstDansVide_haut(*this, 0, 0);
+  bottom = world.EstDansVide_bas(*this, 0, 0);
 
-  int dx=(int)GetTestRect().w * (right-left);
-  int dy=(int)GetTestRect().h * (top-bottom);
+  int dx = (int)GetTestRect().GetSizeX() * (right-left);
+  int dy = (int)GetTestRect().GetSizeY() * (top-bottom);
 
-  if(dx==0 && dy==0) return false; //->Don't know in which direction we should go...
+  if( dx == 0 && dy == 0 )
+    return false; //->Don't know in which direction we should go...
 
-  Point2i a(0,0);
-  Point2i b(dx,dy);
+  Point2i b(dx, dy);
 
-  double dir = a.ComputeAngle(b);
+  double dir = b.ComputeAngle();
   return PutOutOfGround(dir);
 }
 
-//-----------------------------------------------------------------------------
 void PhysicalObj::Ready()
-
 {
 #ifdef DEBUG_CHG_ETAT
   if (m_alive != ALIVE) COUT_DEBUG << "Ready." << std::endl;
@@ -455,7 +423,6 @@ void PhysicalObj::Ready()
   StopMoving();
 }
 
-//-----------------------------------------------------------------------------
 
 void PhysicalObj::Die()
 {
@@ -466,8 +433,6 @@ void PhysicalObj::Die()
   m_alive = DEAD;
   if (m_alive != DROWNED) SignalDeath();
 }
-
-//-----------------------------------------------------------------------------
 
 void PhysicalObj::Ghost ()
 {
@@ -486,8 +451,6 @@ void PhysicalObj::Ghost ()
   SignalGhostState(was_dead);
 }
 
-//-----------------------------------------------------------------------------
-
 void PhysicalObj::Drown()
 {
   assert (m_alive != DROWNED);
@@ -505,8 +468,6 @@ void PhysicalObj::Drown()
   StartMoving();
   SignalDrowning();
 }
-
-//-----------------------------------------------------------------------------
 
 bool PhysicalObj::IsReady() const
 {
@@ -530,8 +491,6 @@ void PhysicalObj::SignalRebound()
 }
 
 
-//-----------------------------------------------------------------------------
-
 bool PhysicalObj::IsOutsideWorldXY (int x, int y) const
 {
   x += m_test_left;
@@ -548,12 +507,8 @@ bool PhysicalObj::IsOutsideWorldXY (int x, int y) const
   return false;
 }    
 
-//-----------------------------------------------------------------------------
-
 bool PhysicalObj::IsOutsideWorld (int dx, int dy) const
 { return IsOutsideWorldXY (GetX()+dx, GetY()+dy); }
-
-//-----------------------------------------------------------------------------
 
 bool PhysicalObj::FootsOnFloor(int y) const
 {
@@ -564,14 +519,10 @@ bool PhysicalObj::FootsOnFloor(int y) const
   return (y_max <= y);
 }
 
-//-----------------------------------------------------------------------------
-
 bool PhysicalObj::IsInVacuum (int dx, int dy) const
 {
   return IsInVacuumXY (GetX()+dx, GetY()+dy);
 }
-
-//-----------------------------------------------------------------------------
 
 bool PhysicalObj::IsInVacuumXY (int x, int y) const
 {
@@ -587,14 +538,10 @@ bool PhysicalObj::IsInVacuumXY (int x, int y) const
   return world.RectEstDansVide (rect);
 }
 
-//-----------------------------------------------------------------------------
-
 bool PhysicalObj::FootsInVacuum() const
 {
   return FootsInVacuumXY(GetX(), GetY());
 }
-
-//-----------------------------------------------------------------------------
 
 bool PhysicalObj::FootsInVacuumXY(int x, int y) const
 {
@@ -614,11 +561,11 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
   Rectanglei rect( x+m_test_left, y_test, m_width-m_test_right-m_test_left, 1);
   if (m_allow_negative_y)
   {
-    if ( rect.y < 0 ) 
+    if ( rect.GetPositionY() < 0 ) 
        {
-	  int b = rect.y + rect.h;
-	  rect.y = 0;
-	  rect.h = ( b > 0 ) ? b - rect.y : 0;
+	  int b = rect.GetPositionY() + rect.GetSizeY();
+	  rect.SetPositionY( 0 );
+	  rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
        }
   }
    
@@ -634,8 +581,6 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
   return world.RectEstDansVide (rect);
 }
 
-//-----------------------------------------------------------------------------
-
 bool PhysicalObj::IsInWater () const
 {
   assert (!IsGhost());
@@ -644,14 +589,10 @@ bool PhysicalObj::IsInWater () const
   return (int)world.water.GetHeight(x) < GetCenterY();
 }
 
-//-----------------------------------------------------------------------------
-
 bool PhysicalObj::CollisionTest (int x, int y)
 { 
   return !IsInVacuumXY (x,y);
 }
-
-//-----------------------------------------------------------------------------
 
 void PhysicalObj::DirectFall()
 {
@@ -661,8 +602,6 @@ void PhysicalObj::DirectFall()
       SetY(GetY()+1);
    }
 }
-
-//-----------------------------------------------------------------------------
 
 bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
 {
@@ -726,15 +665,11 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   return false;
 }
 
-//-----------------------------------------------------------------------------
-
 // Est-ce que deux objets se touchent ? (utilise les rectangles de test)
 bool ObjTouche (const PhysicalObj &a, const PhysicalObj &b)
 {
   return a.GetTestRect().Intersect( b.GetTestRect() );
 }
-
-//-----------------------------------------------------------------------------
 
 // Est-ce que le point p touche l'objet a ?
 bool ObjTouche (const PhysicalObj &a, const Point2i &p)
@@ -745,4 +680,3 @@ bool ObjTouche (const PhysicalObj &a, const Point2i &p)
    return  _r.Contains( _p );
 }
 
-//-----------------------------------------------------------------------------

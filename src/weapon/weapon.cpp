@@ -105,8 +105,8 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
   if (!touche_ver_objet) return false;
 
    Rectanglei test = GetTestRect();
-   test.x += dx;
-   test.y += dy;
+   test.SetPositionX( test.GetPositionX() + dx);
+   test.SetPositionY( test.GetPositionY() + dy);
    
   FOR_ALL_LIVING_CHARACTERS(equipe,ver)
   if (&(*ver) != &ActiveCharacter())
@@ -241,7 +241,7 @@ void Weapon::Select()
   double val = ActiveCharacter().previous_strength;
   weapon_strength_bar.Reset_Marqueur();
   if (0 < val && val < max_strength)
-  weapon_strength_bar.AjouteMarqueur (uint(val*100), 255,0,0);
+  weapon_strength_bar.AjouteMarqueur (uint(val*100), primary_red_color);
 }
 
 void Weapon::Deselect()
@@ -441,14 +441,11 @@ void Weapon::DrawWeaponBox(){
   c_x =  + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
   c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
 
-  SDL_Rect dest = { (int)(c_x - 0.5 * BUTTON_ICO_WIDTH),(int)(c_y - 0.5 * BUTTON_ICO_HEIGHT),
-	  interface.weapon_box_button.GetWidth(), 
-	  interface.weapon_box_button.GetHeight()};	
-  app.video.window.Blit( interface.weapon_box_button, NULL, &dest);
+  Point2i dest( (int)(c_x - 0.5 * BUTTON_ICO_WIDTH), (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT));
+  app.video.window.Blit( interface.weapon_box_button, dest);
 
-  SDL_Rect dr2 = { (int)(c_x - 0.5 * WEAPON_ICO_WIDTH),(int)(c_y - 0.5 * WEAPON_ICO_HEIGHT),
-	  icone.GetWidth(), icone.GetHeight()};
-  app.video.window.Blit( icone, NULL, &dr2);
+  Point2i  dr2( (int)(c_x - 0.5 * WEAPON_ICO_WIDTH), (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT));
+  app.video.window.Blit( icone, dr2);
 }
 
 void Weapon::Draw(){
@@ -528,10 +525,7 @@ void Weapon::Draw(){
      break;
   }
   if ( m_image )
-    {
-      m_image->Blit( app.video.window, x-camera.GetX(), y-camera.GetY());
-    }
-   
+    m_image->Blit( app.video.window, x-camera.GetX(), y-camera.GetY());
 }
 
 void Weapon::DrawUnit(int unit){
@@ -540,13 +534,11 @@ void Weapon::DrawUnit(int unit){
   std::ostringstream ss;
 
   ss << unit;
-
  
   DrawTmpBoxText(global().small_font(),
 		 ActiveCharacter().GetCenterX()-camera.GetX(),
 		 ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP-camera.GetY(),
 		 ss.str());
-
 }
 
 bool Weapon::LoadXml(xmlpp::Element * weapon) 

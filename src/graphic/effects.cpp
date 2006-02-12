@@ -37,7 +37,7 @@ Sprite* WaveSurface(Surface &a, unsigned int nbr_frames, unsigned int duration, 
     sprite->SetSize( a.GetWidth() + 2 * (unsigned int) wave_amp, a.GetHeight() );
 	for(unsigned int f=0; f < nbr_frames; f++){
 		Surface b( a.GetWidth() + 2 * (int)wave_amp, a.GetHeight(), SDL_SWSURFACE|SDL_SRCALPHA );
-		b.FillRect(NULL, 0x00000000);
+		b.Fill(0x00000000);
 		b.SetAlpha(SDL_SRCALPHA, 0);
 		a.Lock();
 		b.Lock();

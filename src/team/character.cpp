@@ -222,29 +222,23 @@ void Character::SetEnergyDelta (int delta)
   ActiveCharacter().MadeDamage(-delta, *this);
 
   uint sauve_energie = energy;
-  uchar R,V,B;
+  Color color;
 
   // Change energy
   energy = BorneLong((int)energy +delta, 0, game_mode.character.max_energy);
   energy_bar.Actu (energy);
     
   // Energy bar color
-  if (70 < energy) {
-    V = 255;
-    R = 0;
-  } else if (50 < energy) {
-    V = 255;
-    R = 255;
-  } else if (20 < energy) {
-    V = 128;
-    R = 255;
-  } else {
-    V = 0;
-    R = 255;
-  }
-  B = 0;
+  if (70 < energy)
+	  color.SetColor(0, 255, 0, 255);
+  else if (50 < energy)
+	  color.SetColor(255, 255, 0, 255);
+  else if (20 < energy) 
+	  color.SetColor(255, 128, 0, 255);
+  else 
+	  color.SetColor(255, 0, 0, 255);
 
-  energy_bar.SetValueColor( R,V,B);
+  energy_bar.SetValueColor( color );
 
    
   // Compute energy lost
@@ -861,9 +855,8 @@ void Character::InitTeam (Team *ptr_equipe, const std::string &name,
   energy_bar.InitVal (energy, 0, game_mode.character.max_energy);
   energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
 
-  energy_bar.SetBorderColor(0,0,0);
-  energy_bar.SetBackgroundColor(100,100,100);
-
+  energy_bar.SetBorderColor( black_color );
+  energy_bar.SetBackgroundColor( gray_color );
 }
 
 void Character::Reset() 

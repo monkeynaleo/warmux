@@ -4,6 +4,9 @@
 #include <math.h>
 #define VECTOR2_EPS_ZERO (0.05)
 
+/**
+ * Class for storing a vector of two points x, y.
+ */
 template<class T> class Vector2
 {
 	private:
@@ -22,6 +25,58 @@ template<class T> class Vector2
 			this->y = y;
 		}
 
+		inline T GetX() const{
+			return x;
+		}
+
+		inline T GetY() const{
+			return y;
+		}
+
+		inline bool operator>=(const Vector2<T> &p2) const{
+			return (x >= p2.x) && (y >= p2.y);
+		}
+
+		inline bool operator<=(const Vector2<T> &p2) const{
+			return (x <= p2.x) && (y <= p2.y);
+		}
+
+		inline Vector2<T> operator+(const Vector2<T> &p2) const{
+			Vector2<T> r = *this;
+
+			r.x += p2.x;
+			r.y += p2.y;
+
+			return r;
+		}
+
+		inline Vector2<T> operator-(const Vector2<T> &p2) const{
+			Vector2<T> r = *this;
+
+			r.x -= p2.x;
+			r.y -= p2.y;
+
+			return r;
+		}
+
+		inline Vector2<T> operator+(const T val) const{
+			Vector2<T> r = *this;
+
+			r.x += val;
+			r.y += val;
+
+			return r;
+		}
+
+		inline Vector2<T> operator-(const T val) const{
+			Vector2<T> r = *this;
+
+			r.x -= val;
+			r.y -= val;
+
+			return r;
+		}
+		
 		inline double Distance(const Vector2<T> p2) const{
 			double distPow2 = (p2.x-x)*(p2.x-x) + (p2.y-y)*(p2.y-y);
 			return sqrt( distPow2 );
@@ -46,11 +101,6 @@ template<class T> class Vector2
 			y = v2.y;
 		}
 
-		void AddVector( const Vector2<T> v2 ){
-			x += v2.x;
-			y += v2.y;
-		}
-
 		inline bool IsZero(T val) const{
 			return (val <= VECTOR2_EPS_ZERO) && (-val <= VECTOR2_EPS_ZERO);
 		}
@@ -67,13 +117,16 @@ template<class T> class Vector2
 			return IsXNull() && IsYNull();
 		}
 
-		// Calcule l'angle en radian du point M dans le repère de centre O
-		// Pour O=(0,0) :
-		// - M=(10,10) -> PI/4 (0.78)
-		// - M=(0,10) -> PI/2 (1.57)
-		// - M=(-10,10) -> 3*PI/4 (2.35)
-		// - M=(10,-10) -> -PI/4 (-0.78)
-		// - M=O -> 0
+		/**
+		 *  Calcule l'angle en radian du point M dans le repère de centre O
+		 *
+		 * Pour O=(0,0) :
+		 * - M=(10,10) -> PI/4 (0.78)
+		 * - M=(0,10) -> PI/2 (1.57)
+		 * - M=(-10,10) -> 3*PI/4 (2.35)
+		 * - M=(10,-10) -> -PI/4 (-0.78)
+		 * - M=O -> 0
+		 */
 		double ComputeAngle() const{
 			double angle;
 

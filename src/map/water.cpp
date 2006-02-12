@@ -140,14 +140,14 @@ void Water::Draw(){
 */
   // Compute 1 pattern:
   pattern.SetAlpha( 0, 0);
-  pattern.FillRect( NULL, 0x00000000);
+  pattern.Fill(0x00000000);
 
   int y0 = world.GetHeight()-(hauteur_eau + height_mvt)-20;
 
   for(uint x=0; x<180; x++)
   {
-    SDL_Rect dst = {x, height.at(x) - y0, surface.GetWidth(), surface.GetHeight()};
-    pattern.Blit(surface, NULL, &dst);
+    Point2i dst(x, height.at(x) - y0);
+    pattern.Blit(surface, dst);
   }
   pattern.SetAlpha(SDL_SRCALPHA, 0);
 

@@ -21,6 +21,7 @@
 
 #include <SDL_gfxPrimitives.h>
 #include "box.h"
+#include "../graphic/colors.h"
 #include "../include/app.h"
 
 Box::Box(int x, int y, uint w, uint h, 
@@ -38,13 +39,11 @@ Box::~Box(){
 }
 
 void Box::Draw (uint mouse_x, uint mouse_y){
+  Rectanglei rect(x, y, w, h);
 	
   if( visible ){
-    app.video.window.BoxRGBA( x, y, x+w, y+h,
-	    80, 80, 159, 206);
-
-    app.video.window.RectangleRGBA( x, y, x+w, y+h,
-            49, 32, 122, 255);  
+    app.video.window.BoxColor(rect, defaultColorBox);
+    app.video.window.RectangleColor(rect, defaultColorRect);
   }
 
   std::list<Widget *>::iterator it;

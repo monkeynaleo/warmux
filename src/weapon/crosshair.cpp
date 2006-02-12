@@ -68,20 +68,22 @@ void CrossHair::ChangeAngleVal (int val)
 
 void CrossHair::Draw()
 {
-  if (!enable) return;
-  if (ActiveCharacter().IsDead()) return;
-  if (game_loop.ReadState() != gamePLAYING) return;
+  if( !enable )
+	return;
+  if( ActiveCharacter().IsDead() )
+	return;
+  if( game_loop.ReadState() != gamePLAYING )
+	return;
 
   int x,y;
-  ActiveCharacter().GetHandPosition(x,y);
+  ActiveCharacter().GetHandPosition(x, y);
   x += calcul_dx*ActiveCharacter().GetDirection();
   y += calcul_dy;
  
   x -= image.GetWidth()/2;
   y -= image.GetHeight()/2;
-  SDL_Rect dest = { x-camera.GetX(), y-camera.GetY(),
-	  image.GetWidth(), image.GetHeight() };
-  app.video.window.Blit( image, NULL, &dest);
+  Point2i dest(x - camera.GetX(), y - camera.GetY());
+  app.video.window.Blit( image, dest);
 
   world.ToRedrawOnMap(Rectanglei(x, y, image.GetWidth(), image.GetHeight()));
 }

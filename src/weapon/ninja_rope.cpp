@@ -136,7 +136,7 @@ void NinjaRope::InitSkinSprite()
   current_skin = ActiveCharacter().image->GetSurface();
 
   current_skin.SetAlpha(0, 0);
-  new_surf.Blit(current_skin, NULL, NULL);
+  new_surf.Blit(current_skin);
   // re-enable the per pixel alpha in the
   current_skin.SetAlpha(SDL_SRCALPHA, 0);
 

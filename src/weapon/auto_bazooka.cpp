@@ -256,10 +256,11 @@ void AutomaticBazooka::ChooseTarget()
 
 void AutomaticBazooka::DrawTarget()
 {
-  if(!cible.choisie) { return; }
+  if( !cible.choisie )
+	return;
 
-  SDL_Rect dr = { cible.pos.x-cible.image.GetWidth()/2-camera.GetX(),cible.pos.y-cible.image.GetHeight()/2-camera.GetY(),cible.image.GetWidth(),cible.image.GetHeight()};
-  app.video.window.Blit(cible.image, NULL, &dr);
+  Point2i dp(cible.pos.x - cible.image.GetWidth() / 2 - camera.GetX() , cible.pos.y - cible.image.GetHeight() / 2 - camera.GetY());
+  app.video.window.Blit(cible.image, dp);
 }
 
 bool AutomaticBazooka::IsReady() const

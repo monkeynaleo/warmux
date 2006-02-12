@@ -73,51 +73,48 @@ bool Font::Load (const std::string& filename, int size) {
 }
 
 void Font::Write(int x, int y, Surface &surface){
-  SDL_Rect dst_rect;
-  dst_rect.x = x;
-  dst_rect.y = y;
-  dst_rect.h = surface.GetHeight();
-  dst_rect.w = surface.GetWidth();
-  app.video.window.Blit( surface, NULL, &dst_rect );
+  Rectanglei dstRect(x, y, surface.GetHeight(), surface.GetWidth());
 
+  app.video.window.Blit( surface, dstRect.GetPosition() );
+		  
   // TODO: Remove this line! (and use GameFont instead of Font)
-  world.ToRedrawOnScreen( Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h) );
+  world.ToRedrawOnScreen( dstRect );
 }
 
-void Font::WriteLeft (int x, int y, const std::string &txt, SDL_Color color){
+void Font::WriteLeft (int x, int y, const std::string &txt,  const Color &color){
   Surface surface( Render(txt, color, true) );
   Write(x, y, surface);
 }
 
 void Font::WriteLeftBottom (int x, int y, const std::string &txt,
-			    SDL_Color color){ 
+			     const Color &color){ 
   Surface surface( Render(txt, color, true) );
   Write(x, y - surface.GetHeight(), surface);
 }
 
 void Font::WriteRight (int x, int y, const std::string &txt,
-		       SDL_Color color){ 
+		        const Color &color){ 
   Surface surface( Render(txt, color, true) );
   Write(x - surface.GetWidth(), y, surface);
 }
 
 void Font::WriteCenter (int x, int y, const std::string &txt,
-			SDL_Color color){ 
+			 const Color &color){ 
   Surface surface( Render(txt, color, true) );
   Write( x - surface.GetWidth()/2, y - surface.GetHeight(), surface);
 }
 
 void Font::WriteCenterTop (int x, int y, const std::string &txt,
-			   SDL_Color color){
+			    const Color &color){
   Surface surface( Render(txt, color, true) );
   Write( x - surface.GetWidth() / 2, y, surface);
 }
 
-Surface Font::CreateSurface(const std::string &txt, SDL_Color color){
-  return Surface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color) );
+Surface Font::CreateSurface(const std::string &txt, const Color &color){
+  return Surface( TTF_RenderUTF8_Blended(m_font, txt.c_str(), color.GetSDLColor()) );
 }
 
-Surface Font::Render(const std::string &txt, SDL_Color color, bool cache){
+Surface Font::Render(const std::string &txt, const Color &color, bool cache){
   Surface surface;
   
   if( cache ){
@@ -167,25 +164,11 @@ GameFont::GameFont(GameLoop &p_game_loop, int size) :
   game_loop(p_game_loop)
 {}
 
-/*void GameFont::Write(int x, int y, Surface &surface)
-{
-  SDL_Rect dst_rect;
-  dst_rect.x = x;
-  dst_rect.y = y;
-  dst_rect.h = surface->h;
-  dst_rect.w = surface->w;
-  SDL_BlitSurface(text_surface, NULL, app.sdlwindow, &dst_rect);
-  game_loop.world.ToRedrawOnScreen(Rectanglei(dst_rect.x,dst_rect.y, dst_rect.w, dst_rect.h));
-}*/
-
 void GameFont::Write(int x, int y, Surface &surface){
-  SDL_Rect dst_rect;
-  dst_rect.x = x;
-  dst_rect.y = y;
-  dst_rect.h = surface.GetHeight();
-  dst_rect.w = surface.GetWidth();
-  app.video.window.Blit( surface, NULL, &dst_rect );
-  world.ToRedrawOnScreen( Rectanglei(dst_rect.x, dst_rect.y, dst_rect.w, dst_rect.h) );
+  Rectanglei dstRect(x, y, surface.GetHeight(), surface.GetWidth());
+
+  app.video.window.Blit( surface, dstRect.GetPosition() );
+  world.ToRedrawOnScreen( dstRect );
 }
 
 //-----------------------------------------------------------------------------

@@ -261,12 +261,7 @@ uint Camera::GetWidth() const { return app.video.window.GetWidth(); }
 uint Camera::GetHeight() const { return app.video.window.GetHeight(); }
 
 bool Camera::EstVisible (const PhysicalObj &obj){
-   Rectanglei rect;
-   
-   rect.x = GetX();
-   rect.y = GetY();
-   rect.w = GetWidth();
-   rect.h = GetHeight();
+   Rectanglei rect( GetX(), GetY(), GetWidth(), GetHeight() );
    
    return rect.Intersect (obj.GetRect());
 }
