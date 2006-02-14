@@ -37,7 +37,8 @@ const double LOW_GRAVITY_FACTOR = 0.4;
 
 //-----------------------------------------------------------------------------
 
-LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",NEVER_VISIBLE)
+LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav", 
+			    new WeaponConfig(), NEVER_VISIBLE)
 {
   m_name = _("LowGrav");
 

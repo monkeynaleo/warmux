@@ -30,9 +30,7 @@ class BalleUzi : public WeaponProjectile
 {
 public:
   BalleUzi(GameLoop &game_loop);
-  void Init();
   void SignalCollision();
-  
 };
 
 class Uzi : public Weapon

@@ -47,7 +47,15 @@ Gnu::Gnu(GameLoop &p_game_loop, GnuLauncher& p_launcher) :
   PhysicalObj (p_game_loop, "Gnu!"),
   launcher(p_launcher)
 {
-  m_allow_negative_y = true;
+  m_allow_negative_y = true;  
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "gnu"); 
+  SetSize (image->GetWidth(), image->GetHeight());
+  SetMass (launcher.cfg().mass);
+  SetTestRect ( image->GetWidth()/2-1,
+                image->GetWidth()/2-1,
+                image->GetHeight()/2-1,
+                image->GetHeight()/2-1);
 }
 
 //-----------------------------------------------------------------------------
@@ -86,19 +94,6 @@ void Gnu::Tire (double force)
     m_sens = 1;
   else
     m_sens = -1;
-}
-
-//-----------------------------------------------------------------------------
-
-void Gnu::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "gnu"); 
-  SetSize (image->GetWidth(), image->GetHeight());
-  SetMass (launcher.cfg().mass);
-  SetTestRect ( image->GetWidth()/2-1,
-                image->GetWidth()/2-1,
-                image->GetHeight()/2-1,
-                image->GetHeight()/2-1);
 }
 
 //-----------------------------------------------------------------------------
@@ -199,24 +194,18 @@ void Gnu::Draw()
 
 }
 
-//-----------------------------------------------------------------------------
-
-void Gnu::Reset()
-{
-}
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 GnuLauncher::GnuLauncher() : 
-  Weapon(WEAPON_GNU, "gnulauncher"),
+  Weapon(WEAPON_GNU, "gnulauncher", new GrenadeConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
   gnu(game_loop, *this)
 {
   m_name = _("GnuLauncher");
-  extra_params = new GrenadeConfig();  
+
   impact = resource_manager.LoadImage( weapons_res_profile, "gnulauncher_impact");
-  gnu.Init();
 }
 
 //-----------------------------------------------------------------------------
@@ -227,7 +216,6 @@ bool GnuLauncher::p_Shoot ()
   if (m_strength == max_strength)
     m_strength = 0;
 
-  // Initialise le gnu
   lst_objets.AjouteObjet (&gnu, true);
   gnu.Tire (m_strength);
   camera.ChangeObjSuivi (&gnu,true,true,true);

@@ -39,7 +39,6 @@ class BatonDynamite : public WeaponProjectile
 
 public:
   BatonDynamite(GameLoop &game_loop, Dynamite &dynamite);
-  void Init();
   void Reset();
   void Draw();
   void Refresh();

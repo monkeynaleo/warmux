@@ -56,7 +56,7 @@ private:
   Mine& launcher;
 public:
   ObjMine(GameLoop &game_loop, Mine &launcher);
-  void Init();
+  void Init(){};
   void Reset();
   void Explosion ();
   void Draw();

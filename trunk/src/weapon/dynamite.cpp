@@ -43,9 +43,6 @@
 BatonDynamite::BatonDynamite(GameLoop &p_game_loop, Dynamite &p_dynamite) :
   WeaponProjectile(p_game_loop, "baton de dynamite"),
   dynamite(p_dynamite)
-{}
-
-void BatonDynamite::Init()
 {
   SetMass (dynamite.cfg().mass);
 
@@ -123,14 +120,12 @@ void BatonDynamite::SignalGhostState (bool) { is_active = false; }
 //-----------------------------------------------------------------------------
 
 Dynamite::Dynamite() :
-  Weapon(WEAPON_DYNAMITE, "dynamite", VISIBLE_ONLY_WHEN_INACTIVE), 
+  Weapon(WEAPON_DYNAMITE, "dynamite", new DynamiteConfig(), VISIBLE_ONLY_WHEN_INACTIVE), 
   baton(game_loop, *this)
 {
   m_name = _("Dynamite");
-  extra_params = new DynamiteConfig();
   channel = -1;
 
-  baton.Init();
   impact = resource_manager.LoadImage(weapons_res_profile,"dynamite_impact");
 }
 

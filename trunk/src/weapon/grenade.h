@@ -41,8 +41,6 @@ protected:
 public:
   Grenade(GameLoop &game_loop, GrenadeLauncher& launcher);
   void Tire (double force);
-  uint ChoixFrame(double angle);
-  void Init();
   void Refresh();
   void Draw();
 protected:

@@ -42,10 +42,6 @@ BalleGun::BalleGun(GameLoop &p_game_loop) :
   WeaponProjectile(p_game_loop, "balle_gun")
 { 
   touche_ver_objet = true; 
-}
-
-void BalleGun::Init()
-{
   image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
   SetSize (image->GetWidth(), image->GetHeight());
   SetMass (0.02);
@@ -77,12 +73,10 @@ void BalleGun::SignalCollision()
 }
 
 Gun::Gun() :
-  Weapon(WEAPON_GUN, "gun"),
+  Weapon(WEAPON_GUN, "gun", new WeaponConfig()),
   balle(game_loop)
 {
   m_name = _("Gun");
-  extra_params = new WeaponConfig();   
-  balle.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "gun_impact");  
 }
 
@@ -118,7 +112,6 @@ bool Gun::p_Shoot()
   if (m_is_active)
     return false;
 
-  // Initialise la balle
   balle.Tire();
 
   // Temps de capture

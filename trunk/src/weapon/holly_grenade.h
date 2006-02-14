@@ -42,7 +42,6 @@ protected:
 public:
   HollyGrenade(GameLoop &game_loop, HollyGrenadeLauncher& launcher);
   void Tire (double force);
-  void Init();
   void Refresh();
   void Draw();
 protected:

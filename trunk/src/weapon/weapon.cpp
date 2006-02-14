@@ -165,10 +165,9 @@ void WeaponProjectile::SignalFallEnding(){
   SignalCollision();
 }
 
-void WeaponProjectile::Reset(){
-}
-
-Weapon::Weapon(Weapon_type type, const std::string &id,
+Weapon::Weapon(Weapon_type type, 
+	       const std::string &id,
+	       EmptyWeaponConfig * params,
 	       uint visibility)
 {
   m_type = type;
@@ -206,6 +205,8 @@ Weapon::Weapon(Weapon_type type, const std::string &id,
   if (!use_flipping and (min_angle != max_angle))
     use_flipping = true;
   
+  extra_params = params;
+
   if (m_visibility != NEVER_VISIBLE)
   {
     m_image = new Sprite( resource_manager.LoadImage(weapons_res_profile, m_id));

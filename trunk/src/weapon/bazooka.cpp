@@ -40,6 +40,20 @@ RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, Bazooka &p_bazooka) :
   m_allow_negative_y = true;
   touche_ver_objet = true;
   m_wind_factor = 1.0;
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight());
+
+  SetMass (bazooka.cfg().mass);
+  SetWindFactor(5.0);
+  SetAirResistFactor(bazooka.cfg().air_resist_factor);
+
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);   
 }
 
 void RoquetteBazooka::Tire (double force)
@@ -57,23 +71,6 @@ void RoquetteBazooka::Tire (double force)
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (force, angle);
   PutOutOfGround(angle);
-}
-
-void RoquetteBazooka::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (bazooka.cfg().mass);
-  SetWindFactor(5.0);
-  SetAirResistFactor(bazooka.cfg().air_resist_factor);
-
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy); 
 }
 
 void RoquetteBazooka::Refresh()
@@ -98,13 +95,10 @@ void RoquetteBazooka::SignalCollision()
 //-----------------------------------------------------------------------------
 
 Bazooka::Bazooka() :
-  Weapon(WEAPON_BAZOOKA, "bazooka"),
+  Weapon(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig()),
   roquette(game_loop, *this)  
 {  
   m_name = _("Bazooka");
-  extra_params = new ExplosiveWeaponConfig();
-
-  roquette.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
 }
 
@@ -117,7 +111,6 @@ bool Bazooka::p_Shoot ()
     return true;
   }
 
-  // Initialise le roquette
   roquette.Tire (m_strength);
   lst_objets.AjouteObjet (&roquette, true);
   camera.ChangeObjSuivi(&roquette, 1, 1,1);

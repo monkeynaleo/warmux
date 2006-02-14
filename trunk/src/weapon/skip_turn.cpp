@@ -32,7 +32,7 @@ const uint ESPACE = 5;
 
 //-----------------------------------------------------------------------------
 
-SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn")
+SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn", new WeaponConfig())
 {
   m_name = _("Skip turn");
 }

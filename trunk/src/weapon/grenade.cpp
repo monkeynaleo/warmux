@@ -57,6 +57,19 @@ Grenade::Grenade(GameLoop &p_game_loop, GrenadeLauncher& p_launcher) :
   m_rebound_sound = "weapon/grenade_bounce";
   m_rebounding = true;
   touche_ver_objet = false;
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "grenade_sprite");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight());
+
+  SetMass (launcher.cfg().mass);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
+  m_rebound_factor = double(launcher.cfg().rebound_factor);
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);   
 }
 
 //-----------------------------------------------------------------------------
@@ -84,28 +97,6 @@ void Grenade::Tire (double force)
 
   // Recupere le moment du départ
   temps_debut_tir = global_time.Read();
-}
-
-//-----------------------------------------------------------------------------
-
-void Grenade::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "grenade_sprite");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (launcher.cfg().mass);
-  SetAirResistFactor(launcher.cfg().air_resist_factor);
-  m_rebound_factor = double(launcher.cfg().rebound_factor);
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);   
-   
-#ifdef MSG_DBG
-  COUT_DBG << "Grenade::Init()" << std::endl;
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -178,14 +169,11 @@ void Grenade::SignalCollision()
 //-----------------------------------------------------------------------------
 
 GrenadeLauncher::GrenadeLauncher() : 
-  Weapon(WEAPON_GRENADE, "grenade", VISIBLE_ONLY_WHEN_INACTIVE),
+  Weapon(WEAPON_GRENADE, "grenade", new GrenadeConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
   grenade(game_loop, *this)
 {  
   m_name = _("Grenade");
  
-  extra_params = new GrenadeConfig();  
-  
-  grenade.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
@@ -193,7 +181,6 @@ GrenadeLauncher::GrenadeLauncher() :
 
 bool GrenadeLauncher::p_Shoot ()
 {
-  // Initialise la grenade
   grenade.Tire (m_strength);
   camera.ChangeObjSuivi (&grenade, true, false);
   lst_objets.AjouteObjet (&grenade, true);

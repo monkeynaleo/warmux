@@ -34,11 +34,10 @@ double ZOOM_MAX = 10; // zoom maximum durant le petit effet graphique
 uint ESPACE = 4;
 
 Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
+					new WeaponConfig(),
 					VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("Teleportation");
-
-  extra_params = new WeaponConfig();  
 }
 
 bool Teleportation::p_Shoot ()
@@ -54,7 +53,6 @@ bool Teleportation::p_Shoot ()
 
   jukebox.Play("share", "weapon/teleport_start");
   
-  // Initialise les variables
   temps = global_time.Read();
   retour = false;
   m_direction = ActiveCharacter().GetDirection();

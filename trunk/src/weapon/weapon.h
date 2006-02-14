@@ -77,9 +77,9 @@ public:
   WeaponProjectile(GameLoop &game_loop, const std::string &nom);
   virtual void Draw();
   virtual void Refresh();
-  virtual void Reset() ;
-  virtual void Init()=0 ;
   void PrepareTir();
+  void Init() {}// TODO : to delete
+  void Reset() {}// TODO : to delete
   virtual bool CollisionTest (int dx, int dy);
   Character* LitDernierVerTouche() const { return dernier_ver_touche; }
   PhysicalObj* LitDernierObjTouche() const { return dernier_obj_touche; }
@@ -159,7 +159,9 @@ protected:
   virtual bool p_Shoot() = 0;
 
 public:
-  Weapon(Weapon_type type, const std::string &id,
+  Weapon(Weapon_type type, 
+	 const std::string &id,
+	 EmptyWeaponConfig * params,
 	 uint visibility = ALWAYS_VISIBLE);
   virtual ~Weapon() {}
 

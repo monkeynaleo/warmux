@@ -45,9 +45,9 @@ public:
   bool is_active;
 
   Gnu(GameLoop &game_loop, GnuLauncher& launcher);
-  void Init();
   void Draw();
-  void Reset();
+  void Init(){};
+  void Reset(){};
   void Tire(double force);
   void Refresh();
   void SignalFallEnding();

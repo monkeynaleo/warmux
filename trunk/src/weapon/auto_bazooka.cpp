@@ -55,6 +55,19 @@ RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop,
   m_allow_negative_y = true;
   touche_ver_objet = true;
   m_attire = false;
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight());
+
+  SetMass (auto_bazooka.cfg().mass);
+  SetWindFactor(0.1);
+  SetAirResistFactor(auto_bazooka.cfg().air_resist_factor);
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);
 }
 
 void RoquetteTeteCherche::Tire (double force, 
@@ -83,22 +96,6 @@ void RoquetteTeteCherche::Tire (double force,
 
   temps_debut_tir = global_time.Read();
   angle_local=angle;
-}
-
-void RoquetteTeteCherche::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (auto_bazooka.cfg().mass);
-  SetWindFactor(0.1);
-  SetAirResistFactor(auto_bazooka.cfg().air_resist_factor);
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);
 }
 
 void RoquetteTeteCherche::Refresh()
@@ -141,9 +138,6 @@ void RoquetteTeteCherche::SignalCollision()
   is_active = false; 
 }
 
-void RoquetteTeteCherche::Reset()
-{}
-
 // Choisit les coordonnées de la cible 	 
 void RoquetteTeteCherche::SetTarget (int x, int y) 	 
 { 	 
@@ -154,16 +148,14 @@ void RoquetteTeteCherche::SetTarget (int x, int y)
 //-----------------------------------------------------------------------------
 
 AutomaticBazooka::AutomaticBazooka() : 
-  Weapon(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka"),
+  Weapon(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new ExplosiveWeaponConfig() ),
   roquette(game_loop, *this)
 {  
   m_name = _("Automatic bazooka");
 
   m_is_active = false;
   cible.choisie = false;
-  extra_params = new ExplosiveWeaponConfig();  
 
-  roquette.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
 }
@@ -183,7 +175,6 @@ bool AutomaticBazooka::p_Shoot ()
     return true;
   }
 
-  // Initialise le roquette
   roquette.Tire (m_strength, cible.pos.x,cible.pos.y);
   lst_objets.AjouteObjet (&roquette,true);
 

@@ -37,7 +37,6 @@ class Cluster : public WeaponProjectile
 {
 public:
   Cluster(GameLoop &game_loop, ClusterLauncher& launcher);
-  void Init();
   void Draw();
   void Refresh();
   void Tire(int n_x, int n_y);
@@ -57,7 +56,6 @@ public:
 
   ClusterBomb(GameLoop &game_loop, ClusterLauncher& launcher);
   void Tire (double force);
-  void Init();
   void Draw();
   void Refresh();
 protected:

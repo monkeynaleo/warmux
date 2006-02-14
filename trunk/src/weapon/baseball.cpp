@@ -25,9 +25,9 @@
 #include "../tool/point.h"
 #include "../tool/i18n.h"
 
-Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball"){
+Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
+{
   m_name = _("Baseball");
-  extra_params = new BaseballConfig();
 }
 
 bool Baseball::p_Shoot (){
