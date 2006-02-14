@@ -35,7 +35,6 @@ class RoquetteBazooka : public WeaponProjectile
 public:
   RoquetteBazooka(GameLoop &game_loop, Bazooka& bazooka);
   void Tire (double force);
-  void Init();
   void Refresh();
 protected:
   Bazooka &bazooka;
@@ -45,7 +44,6 @@ protected:
 class Bazooka : public Weapon
 {
  private:
-  void p_Init();
   bool p_Shoot();
 
  public:

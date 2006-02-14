@@ -33,10 +33,9 @@ const uint ESPACE = 5;
 
 //-----------------------------------------------------------------------------
 
-Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide")
+Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {  
   m_name = _("Commit suicide");
-  extra_params = new ExplosiveWeaponConfig();
   sound_channel = -1;  
   hole_image = resource_manager.LoadImage( weapons_res_profile, "suicide_hole"); 
 }

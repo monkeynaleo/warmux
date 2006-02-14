@@ -50,6 +50,18 @@ SuperTux::SuperTux(GameLoop &p_game_loop, TuxLauncher& p_launcher) :
   m_allow_negative_y = true;
   touche_ver_objet = true;
 
+  image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
+  image->cache.EnableLastFrameCache();
+  SetSize(image->GetWidth(), image->GetHeight());
+
+  SetMass (launcher.cfg().mass);
+  m_gravity_factor = 0.0;
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+
+  SetTestRect (dx, dx, dy, dy);
 }
 
 //-----------------------------------------------------------------------------
@@ -70,24 +82,6 @@ void SuperTux::Tire()
   time_next_action = global_time.Read();
   last_move = global_time.Read();
   camera.ChangeObjSuivi((PhysicalObj*)this,true,true);
-}
-
-//-----------------------------------------------------------------------------
-
-void SuperTux::Init()
-{
-  image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
-  image->cache.EnableLastFrameCache();
-  SetSize(image->GetWidth(), image->GetHeight());
-
-  SetMass (launcher.cfg().mass);
-  m_gravity_factor = 0.0;
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-
-  SetTestRect (dx, dx, dy, dy);
 }
 
 //-----------------------------------------------------------------------------
@@ -176,15 +170,12 @@ void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem)
 //-----------------------------------------------------------------------------
 
 TuxLauncher::TuxLauncher() : 
-  Weapon(WEAPON_SUPERTUX, "tux", VISIBLE_ONLY_WHEN_INACTIVE),
+  Weapon(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
   supertux(game_loop, *this)
 { 
   m_name = _("SuperTux");   
   override_keys = true ;
 
-  extra_params = new SuperTuxWeaponConfig();  
-
-  supertux.Init();
   impact = resource_manager.LoadImage(weapons_res_profile,"tux_impact");
 }
 
@@ -192,7 +183,6 @@ TuxLauncher::TuxLauncher() :
 
 bool TuxLauncher::p_Shoot()
 {
-  // Initialise le supertux
   supertux.Tire ();
   lst_objets.AjouteObjet (&supertux, true);
 

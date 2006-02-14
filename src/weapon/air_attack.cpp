@@ -43,15 +43,6 @@ const double OBUS_SPEED = 7 ;
 Obus::Obus(GameLoop &p_game_loop, AirAttack& p_air_attack) :
   WeaponProjectile(p_game_loop, "Obus"),
   air_attack(p_air_attack)
-{}
-
-void Obus::Draw()
-{
-  if (!is_active) return;  
-  image->Draw (GetX(), GetY());
-}
-
-void Obus::Init()
 {
   impact = resource_manager.LoadImage(weapons_res_profile,"obus_impact");
   image = resource_manager.LoadSprite(weapons_res_profile,"obus");
@@ -59,6 +50,12 @@ void Obus::Init()
   SetMass (air_attack.cfg().mass);
   SetWindFactor (0.1);
   SetSize (image->GetWidth(), image->GetHeight());
+}
+
+void Obus::Draw()
+{
+  if (!is_active) return;  
+  image->Draw (GetX(), GetY());
 }
 
 void Obus::Refresh()
@@ -95,6 +92,12 @@ Avion::Avion(GameLoop &p_game_loop, AirAttack& p_air_attack) :
   SetWindFactor(0.0);
   m_gravity_factor = 0.0;
   m_alive = GHOST;
+
+  image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
+  SetSize (image->GetWidth(), image->GetHeight());   
+  SetMass (3000);
+  obus_dx = 100;
+  obus_dy = 50;
 }
 
 void Avion::Reset()
@@ -135,15 +138,6 @@ void Avion::Refresh()
   UpdatePosition();
 }
 
-void Avion::Init()
-{
-  image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
-  SetSize (image->GetWidth(), image->GetHeight());   
-  SetMass (3000);
-  obus_dx = 100;
-  obus_dy = 50;
-}
-
 int Avion::LitCibleX() const { return cible_x; }
 
 int Avion::GetDirection() const { 
@@ -169,14 +163,11 @@ bool Avion::PeutLacherObus() const
 //-----------------------------------------------------------------------------
 
 AirAttack::AirAttack() :
-  Weapon(WEAPON_AIR_ATTACK, "air_attack"),
+  Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig()),
   avion(game_loop, *this)
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
-
-  extra_params = new AirAttackConfig();
-  avion.Init();
 }
 
 void AirAttack::p_Select()
@@ -219,7 +210,6 @@ void AirAttack::Refresh()
       ss.str("");
       ss << "Obus(" << i << ')';
       instance = new Obus(game_loop, *this);
-      instance -> Init();
       instance -> m_name = ss.str();
       instance -> Reset();
       instance -> SetXY (x, avion.obus_dy);

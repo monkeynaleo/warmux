@@ -35,7 +35,6 @@ class BalleGun : public WeaponProjectile
 public:
   BalleGun(GameLoop &game_loop);
   void Tire();
-  void Init();
 protected:
   void SignalCollision();
 };

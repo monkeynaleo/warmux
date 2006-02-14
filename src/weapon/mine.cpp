@@ -71,14 +71,6 @@ ObjMine::ObjMine(GameLoop &p_game_loop, Mine& p_launcher) :
   affiche = true;
   non_defectueuse = RandomLong(0, 9);
   channel = -1;
-  Init();
-}
-
-//-----------------------------------------------------------------------------
-
-void ObjMine::Init()
-{
-
 
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
  
@@ -293,13 +285,11 @@ void ObjMine::SignalGhostState (bool)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Mine::Mine() : Weapon(WEAPON_MINE, "mine", VISIBLE_ONLY_WHEN_INACTIVE)
+Mine::Mine() : Weapon(WEAPON_MINE, "mine", new MineConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
 
   already_put = false;
-
-  extra_params = new MineConfig();
 }
 
 //-----------------------------------------------------------------------------
@@ -320,7 +310,6 @@ bool Mine::p_Shoot()
 void Mine::Add (int x, int y)
 {
   ObjMine *obj = new ObjMine(game_loop, *this);
-  //obj -> Init();
   obj -> SetXY (x, y);
 
   DoubleVector speed_vector ;

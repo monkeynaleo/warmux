@@ -51,7 +51,6 @@ public:
   uint last_move;
 
   SuperTux(GameLoop &game_loop, TuxLauncher& launcher);
-  void Init();
   void Refresh();
   void Draw();
 

@@ -58,6 +58,19 @@ HollyGrenade::HollyGrenade(GameLoop &p_game_loop, HollyGrenadeLauncher& p_launch
   m_rebounding = true;
   touche_ver_objet = false;
   sing_alleluia = false;
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "holly_grenade_sprite");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight());
+
+  SetMass (launcher.cfg().mass);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
+  m_rebound_factor = double(launcher.cfg().rebound_factor);
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);
 }
 
 //-----------------------------------------------------------------------------
@@ -83,28 +96,6 @@ void HollyGrenade::Tire (double force)
   // Recupere le moment du départ
   temps_debut_tir = global_time.Read();
   sing_alleluia = false;
-}
-
-//-----------------------------------------------------------------------------
-
-void HollyGrenade::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "holly_grenade_sprite");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (launcher.cfg().mass);
-  SetAirResistFactor(launcher.cfg().air_resist_factor);
-  m_rebound_factor = double(launcher.cfg().rebound_factor);
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);
-
-#ifdef MSG_DBG
-  COUT_DBG << "HollyGrenade::Init()" << std::endl;
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -191,14 +182,11 @@ void HollyGrenade::SignalCollision()
 //-----------------------------------------------------------------------------
 
 HollyGrenadeLauncher::HollyGrenadeLauncher() : 
-  Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade", VISIBLE_ONLY_WHEN_INACTIVE),
+  Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade", new GrenadeConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
   grenade(game_loop, *this)
 {  
   m_name = _("HollyGrenade");
 
-  extra_params = new GrenadeConfig();  
-
-  grenade.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "holly_grenade_impact");
 }
 
@@ -206,7 +194,6 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
 
 bool HollyGrenadeLauncher::p_Shoot ()
 {
-  // Initialise la grenade
   grenade.Tire (m_strength);
   camera.ChangeObjSuivi (&grenade, true, false);
   lst_objets.AjouteObjet (&grenade, true);

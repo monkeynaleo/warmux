@@ -43,11 +43,6 @@ BalleUzi::BalleUzi(GameLoop &p_game_loop) :
   WeaponProjectile(p_game_loop, "balle_uzi")
 { 
   touche_ver_objet = true; 
-}
-
-//-----------------------------------------------------------------------------
-void BalleUzi::Init()
-{
   image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
   SetSize (image->GetWidth(), image->GetHeight());
   SetSize (2,2);
@@ -72,7 +67,7 @@ void BalleUzi::SignalCollision()
 //-----------------------------------------------------------------------------
 
 Uzi::Uzi() :
-  Weapon(WEAPON_UZI,"uzi"),
+  Weapon(WEAPON_UZI,"uzi", new WeaponConfig()),
   balle(game_loop)
 {
   m_name = _("Uzi");
@@ -80,9 +75,6 @@ Uzi::Uzi() :
 
   m_first_shoot = 0;
 
-  extra_params = new WeaponConfig();  
-
-  balle.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "uzi_impact");  
 }
 

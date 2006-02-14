@@ -39,12 +39,11 @@ const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer")
+Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new WeaponConfig())
 {
   m_name = _("Airhammer");
   override_keys = true ;
 
-  extra_params = new WeaponConfig();  
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
   m_last_jolt = 0;
 }

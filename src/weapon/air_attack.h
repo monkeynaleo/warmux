@@ -47,7 +47,6 @@ public:
   void Draw();
   void Refresh();
   void Reset();
-  void Init();
 
 protected:
   AirAttack& air_attack;
@@ -68,9 +67,9 @@ public:
   Avion(GameLoop &game_loop, AirAttack& air_attack);
   void Tire();
   void Reset();
-  void Init();
   void Draw();
   void Refresh();
+  void Init(){};//TODO: to delete
   bool PeutLacherObus() const;
   int LitCibleX() const;
   int GetDirection() const;

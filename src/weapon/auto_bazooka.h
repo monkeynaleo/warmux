@@ -40,9 +40,6 @@ protected:
 public:
   RoquetteTeteCherche(GameLoop &game_loop, AutomaticBazooka& autobazooka);
   void Tire (double force, uint cible_x,uint cible_y);
-  uint ChoixFrame(double angle);
-  void Init();
-  void Reset();
   void Refresh();
 protected:
   AutomaticBazooka& auto_bazooka;

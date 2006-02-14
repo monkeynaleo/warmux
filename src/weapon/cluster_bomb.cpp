@@ -47,16 +47,7 @@ Cluster::Cluster(GameLoop &p_game_loop, ClusterLauncher& p_launcher) :
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
-}
 
-void Cluster::Tire (int x, int y)
-{
-  PrepareTir();
-  SetXY(x,y);
-}
-
-void Cluster::Init()
-{
   image = resource_manager.LoadSprite( weapons_res_profile, "cluster");
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight()); 
@@ -67,6 +58,12 @@ void Cluster::Init()
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
   SetTestRect (dx, dx, dy, dy);
+}
+
+void Cluster::Tire (int x, int y)
+{
+  PrepareTir();
+  SetXY(x,y);
 }
 
 void Cluster::Refresh()
@@ -105,6 +102,25 @@ ClusterBomb::ClusterBomb(GameLoop &p_game_loop, ClusterLauncher& p_launcher) :
   m_rebound_sound = "weapon/grenade_bounce";
   touche_ver_objet = false;
   m_rebounding = true;
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "clusterbomb_sprite");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight()); 
+
+  SetMass (launcher.cfg().mass);
+  m_rebound_factor = launcher.cfg().rebound_factor;
+
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);
+
+  tableau_cluster.clear();
+  const uint nb = launcher.cfg().nbr_fragments;
+  for (uint i=0; i<nb; ++i)
+  {
+    Cluster cluster(game_loop, launcher);
+    tableau_cluster.push_back( cluster );
+  }
 }
 
 void ClusterBomb::Tire (double force)
@@ -129,34 +145,6 @@ void ClusterBomb::Tire (double force)
 
   // Recupere le moment du départ
   temps_debut_tir = global_time.Read();
-}
-
-void ClusterBomb::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "clusterbomb_sprite");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight()); 
-
-  SetMass (launcher.cfg().mass);
-  m_rebound_factor = launcher.cfg().rebound_factor;
-
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);
-
-#ifdef MSG_DBG
-  COUT_DBG << "ClusterBomb::Init()" << std::endl;
-#endif
-
-
-  tableau_cluster.clear();
-  const uint nb = launcher.cfg().nbr_fragments;
-  for (uint i=0; i<nb; ++i)
-  {
-    Cluster cluster(game_loop, launcher);
-    cluster.Init();
-    tableau_cluster.push_back( cluster );
-  }
 }
 
 void ClusterBomb::Refresh()
@@ -241,20 +229,16 @@ void ClusterBomb::SignalCollision()
 //-----------------------------------------------------------------------------
 
 ClusterLauncher::ClusterLauncher() : 
-  Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb", VISIBLE_ONLY_WHEN_INACTIVE),
+  Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
   cluster_bomb(game_loop, *this)
 {  
   m_name = _("ClusterBomb");  
 
-  extra_params = new ClusterBombConfig();  
-
-  cluster_bomb.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
 bool ClusterLauncher::p_Shoot ()
 {
-  // Initialise la grenade
   cluster_bomb.Tire (m_strength);
   camera.ChangeObjSuivi (&cluster_bomb, true, false);
   lst_objets.AjouteObjet (&cluster_bomb, true);

@@ -33,13 +33,12 @@
 
 //-----------------------------------------------------------------------------
 
-Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute")
+Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new WeaponConfig())
 {
   m_name = _("Parachute");
   m_initial_nb_ammo = 2 ;
   air_resist_factor = 140.0 ;
   open_speed_limit = 5.0 ;
-  extra_params = new WeaponConfig();
   use_unit_on_first_shoot = false;    
   
   image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
