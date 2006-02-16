@@ -31,23 +31,17 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-
-//-----------------------------------------------------------------------------
-namespace Wormux 
-{
-Parachute parachute;
 //-----------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------
-
-Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute")
+Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new WeaponConfig())
 {
   m_name = _("Parachute");
   m_initial_nb_ammo = 2 ;
   air_resist_factor = 140.0 ;
   open_speed_limit = 5.0 ;
-  extra_params = new WeaponConfig();
-  use_unit_on_first_shoot = false;  
+  use_unit_on_first_shoot = false;    
+  
+  image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
 }
 
 //-----------------------------------------------------------------------------
@@ -58,7 +52,7 @@ void Parachute::p_Select()
   open = false ;
   closing = false ;
   image->Start();
-  image->SetShowOnFinish(Sprite::show_last_frame);
+  image->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
 }
 
 //-----------------------------------------------------------------------------
@@ -69,17 +63,6 @@ void Parachute::p_Deselect()
   ActiveCharacter().SetWindFactor(0);
   m_is_active = false;
 }
-
-//-----------------------------------------------------------------------------
-
-void Parachute::p_Init()
-{
-  m_name = _("parachute");
-
-  image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
-  //TODO : image.set_play_loop(false);
-}
-
 
 //-----------------------------------------------------------------------------
 
@@ -129,8 +112,8 @@ void Parachute::Refresh()
 	  if (!closing)
 	    {
 	      /* We have just hit the ground. Start closing animation */
-	      image->SetPlayBackward(true);
-	      image->SetShowOnFinish(Sprite::show_blank);
+	      image->animation.SetPlayBackward(true);
+	      image->animation.SetShowOnFinish(SpriteAnimation::show_blank);
 	      image->Start();
 	      closing = true ;
 	    }
@@ -157,4 +140,3 @@ void Parachute::SignalTurnEnd()
 }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

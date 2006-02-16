@@ -162,9 +162,9 @@
 <!-- Ninja Rope ressources -->
 
   <surface name="ninjarope_ico" file="weapon/ninjarope_ico.png" />
-  <surface name="ninjarope" file="weapon/bazooka.png" />
+  <surface name="ninjarope" file="weapon/ninjarope.png" />
   <sprite name="ninjarope">
-    <image file="weapon/bazooka.png" />
+    <image file="weapon/ninjarope.png" />
   </sprite>
   <sprite name="ninjahook">
     <image file="weapon/ninjahook.png" />

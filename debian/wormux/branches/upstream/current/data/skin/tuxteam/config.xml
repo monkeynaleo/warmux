@@ -10,8 +10,8 @@
   <image file="walking.png">
     <grid pos="0,0" size="27,42" array="8,1" />
   </image>
-  <collision_rect dx="10" top="1" bottom="3" />
-  <wormux repetition="10" />
+  <collision_rect dx="10" top="1" bottom="0" />
+  <wormux repetition="8" />
   <hand frame="*" x="23" y="25" />
 </sprite>
 
@@ -19,8 +19,8 @@
   <image file="helmet.png">
     <grid pos="0,0" size="27,44" array="8,1" />
   </image>
-  <collision_rect dx="10" top="1" bottom="3" />
-  <wormux repetition="10" />
+  <collision_rect dx="10" top="1" bottom="0" />
+  <wormux repetition="8" />
   <hand frame="*" x="23" y="25" /> 
 </sprite>
 
@@ -30,12 +30,12 @@
   </image>
   <frame speed="100" />
   <animation pingpong="yes"/>
-  <collision_rect dx="10" top="1" bottom="3" />
+  <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
 <sprite name="jetpack">
   <image file="jetpack-fly.png" />
-  <collision_rect dx="10" top="1" bottom="8" />
+  <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
 <sprite name="weapon-jetpack">
@@ -43,8 +43,8 @@
     <grid pos="0,0" size="27,42" array="8,1" />
   </image>
   <hand /> 
-  <collision_rect dx="10" top="1" bottom="3" />
-  <wormux repetition="10" />
+  <collision_rect dx="10" top="1" bottom="0" />
+  <wormux repetition="8" />
 </sprite>
 
 <sprite name="jetpack-up">
@@ -53,7 +53,7 @@
   </image>
   <frame speed="75" />
   <animation pingpong="yes"/>
-  <collision_rect dx="10" top="1" bottom="3" />
+  <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
 <sprite name="jetpack-left-right">
@@ -62,19 +62,19 @@
   </image>
   <frame speed="75" />
   <animation pingpong="yes"/>
-  <collision_rect dx="10" top="1" bottom="3" />
+  <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
 <sprite name="jetpack-fly">
   <image file="jetpack-fly.png" />
-  <collision_rect dx="10" top="1" bottom="3" />
+  <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
 <sprite name="jetpack-walk">
   <image file="jetpack-walk.png">
     <grid pos="0,0" size="27,42" array="8,1" />
   </image>
-  <collision_rect dx="10" top="1" bottom="3" />
+  <collision_rect dx="10" top="1" bottom="0" />
     <wormux repetition="5" />
   <hand/>
 </sprite>
@@ -84,18 +84,18 @@
   <image file="animation.png">
     <grid pos="0,0" size="27,42" array="8,1" />
   </image>
-  <collision_rect dx="10" top="1" bottom="3" />
+  <collision_rect dx="10" top="1" bottom="0" />
   <frame speed="300" />
 </sprite>
 
 <sprite name="jump">
   <image file="jump.png" />
-  <collision_rect dx="10" top="1" bottom="3" />
+  <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
 <sprite name="fall">
   <image file="fall.png" />
-  <collision_rect dx="10" top="1" bottom="3" />
+  <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
 <sprite name="dead">

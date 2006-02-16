@@ -20,19 +20,17 @@
  *****************************************************************************/
 
 #include "crosshair.h"
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <iostream>
 #include "weapon.h"
 #include "../game/game_loop.h"
+#include "../graphic/surface.h"
 #include "../include/app.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 
-using namespace Wormux;
-//-----------------------------------------------------------------------------
 
 // Distance entre le pointeur et le ver
 #define RAYON 40 // pixels
@@ -40,29 +38,21 @@ using namespace Wormux;
 #define HAUT_POINTEUR 11
 #define LARG_POINTEUR 11
 
-//-----------------------------------------------------------------------------
-
 CrossHair::CrossHair()
 {
   enable = false;
   angle = 0;
 }
 
-//-----------------------------------------------------------------------------
-
 void CrossHair::Reset()
 {
   ChangeAngleVal (45);
 }
 
-//-----------------------------------------------------------------------------
-
 void CrossHair::ChangeAngle (int delta)
 {
   ChangeAngleVal (angle+delta);
 }
-
-//-----------------------------------------------------------------------------
 
 void CrossHair::ChangeAngleVal (int val)
 {
@@ -76,28 +66,27 @@ void CrossHair::ChangeAngleVal (int val)
   calcul_dy = (int)(RAYON*sin( angleRAD ));
 }
 
-//-----------------------------------------------------------------------------
-
 void CrossHair::Draw()
 {
-  if (!enable) return;
-  if (ActiveCharacter().IsDead()) return;
-  if (game_loop.ReadState() != gamePLAYING) return;
+  if( !enable )
+	return;
+  if( ActiveCharacter().IsDead() )
+	return;
+  if( game_loop.ReadState() != gamePLAYING )
+	return;
 
   int x,y;
-  ActiveCharacter().GetHandPosition(x,y);
+  ActiveCharacter().GetHandPosition(x, y);
   x += calcul_dx*ActiveCharacter().GetDirection();
   y += calcul_dy;
  
-  x -= image->w/2;
-  y -= image->h/2;
-  SDL_Rect dest = { x-camera.GetX(),y-camera.GetY(),image->w,image->h};
-  SDL_BlitSurface( image, NULL, app.sdlwindow, &dest);
+  x -= image.GetWidth()/2;
+  y -= image.GetHeight()/2;
+  Point2i dest(x - camera.GetX(), y - camera.GetY());
+  app.video.window.Blit( image, dest);
 
-  world.ToRedrawOnMap(Rectanglei(x, y, image->w, image->h));
+  world.ToRedrawOnMap(Rectanglei(x, y, image.GetWidth(), image.GetHeight()));
 }
-
-//-----------------------------------------------------------------------------
 
 int CrossHair::GetAngle() const
 { 
@@ -107,12 +96,8 @@ int CrossHair::GetAngle() const
 		return angle; 
 }
 
-//-----------------------------------------------------------------------------
-
 int CrossHair::GetAngleVal() const
 { return angle; }
-
-//-----------------------------------------------------------------------------
 
 double CrossHair::GetAngleRad() const
 {
@@ -122,8 +107,6 @@ double CrossHair::GetAngleRad() const
   return angleR;
 }
 
-//-----------------------------------------------------------------------------
-
 void CrossHair::Init()
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
@@ -131,4 +114,3 @@ void CrossHair::Init()
   resource_manager.UnLoadXMLProfile( res); 
 }
 
-//-----------------------------------------------------------------------------

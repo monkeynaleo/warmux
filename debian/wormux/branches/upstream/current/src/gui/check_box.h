@@ -37,11 +37,11 @@ class CheckBox : public Widget
   Sprite *m_image;
    
  public:
-  CheckBox(const std::string &label, uint x, uint y, uint w, bool value=true) ;  
+  CheckBox(const std::string &label, int x, int y, uint w, bool value=true) ;  
   ~CheckBox();
   void Draw (uint mouse_x, uint mouse_y) ;
   bool Clic (uint mouse_x, uint mouse_y, uint button) ;
-  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+  void SetSizePosition(int _x, int _y, uint _w, uint _h);
 
   bool GetValue() const;
   void SetValue(bool value);

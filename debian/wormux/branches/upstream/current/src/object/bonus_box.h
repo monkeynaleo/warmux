@@ -16,13 +16,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Caisse de bonus : tombe du ciel après un temps d'apparition aléatoire.
- * Lorsqu'un ver touche la caisse, il peut gagner différents bonus : munition,
- * énergie (gain ou perte!), etc.
+ * Bonus Box
  *****************************************************************************/
 
-#ifndef CAISSES_H
-#define CAISSES_H
+#ifndef BONUS_BOX_H
+#define BONUS_BOX_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "../include/base.h"
@@ -30,42 +28,37 @@
 #include "../team/team.h"
 //-----------------------------------------------------------------------------
 
-class Caisse : public PhysicalObj
+class BonusBox : public PhysicalObj
 {
 private:
+  bool enable;
+  bool still_visible;
   bool parachute; 
-  bool affiche;
-  bool desactive;
-  bool pos_valide;
 
   Sprite *anim;
-  uint temps_caisse;
-  int bonus;
+  uint time;
 
   enum
   {
     // Si vous touchez à cet enum, modifiez aussi nbr_bonus_diff
     bonusDYNAMITE=1,
-    bonusTELEPORTE,
-    bonusENERGIE,
-    bonusPIEGE,
-    bonusAERIENNE,
-    bonusBAZ_TETE_C
-  } bonus_armes;
-  static const uint nbr_bonus_diff = bonusBAZ_TETE_C;
+    bonusTELEPORTATION,
+    bonusENERGY,
+    bonusTRAP,
+    bonusAIR_ATTACK,
+    bonusAUTO_BAZOOKA
+  } bonus_weapons;
+  static const uint nb_bonus = bonusAUTO_BAZOOKA;
 
 public:
   // Initialise les données
-  Caisse();
+  BonusBox(GameLoop &game_loop);
   void Init();
   void FreeMem();
   void Reset();
 
   // Active les caisses ?
   void Active (bool actif);
-
-  // Applique le bonus à l'équipe qui l'a gagné
-  void AppliqueBonus (Team &team, Character &character);
 
   // Signale la fin d'une chute
   virtual void SignalFallEnding();  
@@ -75,9 +68,12 @@ public:
 
   void Draw();
   void Refresh();
-  bool FaitApparaitre();
+  void NewBonusBox();
+ private:
+  void ApplyBonus (Team &team, Character &character);
+
 };
 
-extern Caisse caisse;
+extern BonusBox bonus_box;
 //-----------------------------------------------------------------------------
 #endif

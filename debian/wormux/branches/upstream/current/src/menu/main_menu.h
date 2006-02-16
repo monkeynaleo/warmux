@@ -24,8 +24,9 @@
 #define MAIN_MENU_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
-#include "../gui/button_text.h"
+#include "../graphic/fps.h"
 #include "../graphic/sprite.h"
+#include "../gui/button_text.h"
 #include <SDL.h>
 #include <vector>
 //-----------------------------------------------------------------------------
@@ -43,11 +44,17 @@ typedef enum
 
 class Main_Menu
 {
-private:
-  Sprite* background;
+  Sprite *background, *skin_left, *skin_right, *title;
   ButtonText *play, *network, *options, *infos, *quit;
   Text * version_text, * website_text;
-
+  uint start_time;
+  uint last_refresh;
+  uint button_height, button_width, title_offset, skin_offset;
+  int title_y, skinl_y, skinr_y;
+  bool anim_finished;
+  FramePerSecond fps;
+  Font normal_font, large_font;
+  
 public:
   menu_item choice;
 
@@ -56,6 +63,25 @@ public:
   menu_item Run ();
 private:  
   void onClick ( int x, int y, int button);
+
+  // Main drawing function: refresh parts of screen 
+  void Draw (int mx, int my);
+
+  //Draws gfx needing a refresh
+  void DrawGfx(int mx, int my, uint dt);
+
+  //Draw gfx
+  void DrawTitle(uint dt);
+  void DrawSkins(uint dt);
+  void DrawButtons(int mx, int my, uint dt);
+
+  // Erase gfx which have moved
+  void EraseGfx(uint dt);
+
+  // Erase the whole window
+  void EraseAll();
+
+
   void button_click();
   bool sig_play();
   bool sig_network();

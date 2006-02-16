@@ -19,17 +19,15 @@
  * Weapon bazooka : projette une roquette avec un angle et une force donnée.
  *****************************************************************************/
 
-#ifndef BAZ_TETE_C_H
-#define BAZ_TETE_C_H
-//-----------------------------------------------------------------------------
+#ifndef AUTO_BAZOOKA_H
+#define AUTO_BAZOOKA_H
 #include "weapon.h"
+#include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
+class AutomaticBazooka;
 
 // Roquette du bazooka à tête chercheuse
 class RoquetteTeteCherche : public WeaponProjectile
@@ -40,18 +38,14 @@ protected:
   Point2i m_cible;
   bool m_attire;
 public:
-  RoquetteTeteCherche();
+  RoquetteTeteCherche(GameLoop &game_loop, AutomaticBazooka& autobazooka);
   void Tire (double force, uint cible_x,uint cible_y);
-  uint ChoixFrame(double angle);
-  void Init();
-  void Reset();
   void Refresh();
 protected:
+  AutomaticBazooka& auto_bazooka;
   void SetTarget (int x,int y);
   void SignalCollision();
 };
-
-//-----------------------------------------------------------------------------
 
 class AutomaticBazooka : public Weapon
 {
@@ -61,14 +55,13 @@ private:
   {
     Point2i pos;
     bool choisie;
-    SDL_Surface *image;
+    Surface image;
   } cible;
   
-  void p_Init();
   bool p_Shoot();
 
 public:
-  SDL_Surface *impact;
+  Surface impact;
   RoquetteTeteCherche roquette;
 
   AutomaticBazooka();
@@ -91,7 +84,4 @@ protected:
   void Explosion();
 };
 
-extern AutomaticBazooka auto_bazooka;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif

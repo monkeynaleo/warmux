@@ -22,12 +22,12 @@
 #include "../object/objects_list.h"
 //-----------------------------------------------------------------------------
 #include "../include/app.h"
+#include "../game/game_loop.h"
 #include "../map/maps_list.h"
 #include "../map/camera.h"
 #include "../weapon/mine.h"
 #include "bonus_box.h"
 #include <vector>
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 ListeObjets lst_objets;
 //-----------------------------------------------------------------------------
@@ -80,11 +80,11 @@ void ListeObjets::Reset()
 {
   VideListe();
 
-  for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
-  {
-    ObjMine *obj = new ObjMine();
-    AjouteObjet (obj, true);
-  }
+//   for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
+//   {
+//     ObjMine *obj = new ObjMine(game_loop);
+//     AjouteObjet (obj, true);
+//   }
 
   POUR_CHAQUE_OBJET(objet) (*objet).ptr -> Reset();
 }

@@ -44,9 +44,16 @@ private:
   bool is_walking;
   bool full_walk;
 
-  // energie
+  // energy
   uint energy;
+  int  damage_other_team;
+  int  damage_own_team;
+  int  max_damage;
+  int  current_total_damage;
   BarreProg energy_bar;
+
+  // survived games
+  int survivals;
 
   // name
   Text* name_text;
@@ -54,7 +61,7 @@ private:
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
   uint do_nothing_time;
-  int losted_energy;
+  int lost_energy;
 
   Skin *skin;
   CfgSkin_Walking *walk_skin;
@@ -82,7 +89,7 @@ public:
   double previous_strength;
 
 private:
-  void DrawEnergyBar (int dy) const;
+  void DrawEnergyBar (int dy);
   void DrawName (int dy) const;
   void StartBreathing();
   void StartWalking();
@@ -94,8 +101,7 @@ private:
   virtual void SignalFallEnding();
 
 public:
-  // Initialise les variables du ver
-  Character ();
+  Character (GameLoop &game_loop);
 
   // (Re)Initialise le ver
   void Init();
@@ -116,8 +122,8 @@ public:
   bool IsWalking () const { return is_walking; };
 
   // Changement d'etat
-  void SuperSaut ();
-  void Saute ();
+  void HighJump ();
+  void Jump ();
 
   void Draw();
   void Refresh();
@@ -128,7 +134,7 @@ public:
   void HandleShoot(int event_type) ;
 
   // Se prepare a un nouveau tour
-  void PrepareTour ();
+  void PrepareTurn ();
 
   // Show hide the Character
   void StartPlaying();
@@ -154,14 +160,25 @@ public:
   Team& TeamAccess();
   const Team& GetTeam() const;
 
+  // Access to character info
+  const std::string& GetName() const { return m_name; }
+  bool IsSameAs(const Character& other) { return (m_name == other.GetName()); }
+
   // Accès à l'avatar
   const Skin& GetSkin() const;
   Skin& AccessSkin();
-  bool SetSkin(std::string skin_name);
+  bool SetSkin(const std::string& skin_name);
 
   // Hand position
   void GetHandPosition (int &x, int &y);
   void GetHandPositionf (double &x, double &y);
+
+  // Damage report
+  void HandleMostDamage();
+  void MadeDamage(const int Dmg, const Character &other);
+  int  GetMostDamage() { HandleMostDamage(); return max_damage; }
+  int  GetOwnDamage() { return damage_own_team; }
+  int  GetOtherDamage() { return damage_other_team; }
 
   void EndTurn();
 };

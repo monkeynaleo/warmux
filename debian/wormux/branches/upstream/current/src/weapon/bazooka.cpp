@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "../weapon/bazooka.h"
-//-----------------------------------------------------------------------------
 #include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
@@ -33,24 +32,29 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
-namespace Wormux {
 
-// Bazooka bazooka;
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-RoquetteBazooka::RoquetteBazooka(Bazooka &p_bazooka) 
-  : WeaponProjectile ("roquette_bazooka"), bazooka(p_bazooka)
+RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, Bazooka &p_bazooka) :
+  WeaponProjectile (p_game_loop, "roquette_bazooka"), 
+  bazooka(p_bazooka)
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
   m_wind_factor = 1.0;
-}
 
-//-----------------------------------------------------------------------------
+  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight());
+
+  SetMass (bazooka.cfg().mass);
+  SetWindFactor(5.0);
+  SetAirResistFactor(bazooka.cfg().air_resist_factor);
+
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);   
+}
 
 void RoquetteBazooka::Tire (double force)
 {
@@ -69,27 +73,6 @@ void RoquetteBazooka::Tire (double force)
   PutOutOfGround(angle);
 }
 
-//-----------------------------------------------------------------------------
-
-void RoquetteBazooka::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (bazooka.cfg().mass);
-  SetWindFactor(5.0);
-  SetAirResistFactor(bazooka.cfg().air_resist_factor);
-
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy); 
-}
-
-//-----------------------------------------------------------------------------
-
 void RoquetteBazooka::Refresh()
 {
   if (!is_active) return;
@@ -100,8 +83,6 @@ void RoquetteBazooka::Refresh()
   image->SetRotation_deg( angle);
 }
 
-//-----------------------------------------------------------------------------
-
 void RoquetteBazooka::SignalCollision()
 { 
   if (IsGhost())
@@ -111,19 +92,15 @@ void RoquetteBazooka::SignalCollision()
   is_active = false;
 }
 
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Bazooka::Bazooka() 
-  : Weapon(WEAPON_BAZOOKA, "bazooka"), roquette(*this)
+Bazooka::Bazooka() :
+  Weapon(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig()),
+  roquette(game_loop, *this)  
 {  
   m_name = _("Bazooka");
-  extra_params = new ExplosiveWeaponConfig();
+  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
 }
-
-//-----------------------------------------------------------------------------
 
 bool Bazooka::p_Shoot ()
 {
@@ -134,7 +111,6 @@ bool Bazooka::p_Shoot ()
     return true;
   }
 
-  // Initialise le roquette
   roquette.Tire (m_strength);
   lst_objets.AjouteObjet (&roquette, true);
   camera.ChangeObjSuivi(&roquette, 1, 1,1);
@@ -143,16 +119,12 @@ bool Bazooka::p_Shoot ()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 // Le bazooka explose car il a été poussé à bout !
 void Bazooka::ExplosionDirecte()
 {
   Point2i pos = ActiveCharacter().GetCenter();
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
-
-//-----------------------------------------------------------------------------
 
 void Bazooka::Explosion()
 {
@@ -168,27 +140,12 @@ void Bazooka::Explosion()
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
-//-----------------------------------------------------------------------------
-
 void Bazooka::Refresh()
 {
   if (!m_is_active) return;
   if (!roquette.is_active) Explosion();
 }
 
-//-----------------------------------------------------------------------------
-
-void Bazooka::p_Init()
-{
-
-  roquette.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
-}
-
-//-----------------------------------------------------------------------------
-
 ExplosiveWeaponConfig& Bazooka::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
 
-//-----------------------------------------------------------------------------
-} // namespace Wormux

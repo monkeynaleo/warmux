@@ -20,15 +20,11 @@
  *****************************************************************************/
 
 #include "team_energy.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include <math.h>
 #include "../map/camera.h"
 #include "../game/time.h"
 #include "../graphic/text.h"
-
-using namespace std;
-using namespace Wormux;
 
 const uint BARRE_LARG = 140;
 const uint BARRE_HAUT = 13;
@@ -49,17 +45,12 @@ const uchar R_FINAL = 255; //Couleur R à 0%
 const uchar V_FINAL = 0; //Couleur V à 0%
 const uchar B_FINAL = 0; //Couleur B à 0%
 
-
 const float DUREE_MVT = 750.0;
-
-//-----------------------------------------------------------------------------
 
 TeamEnergy :: TeamEnergy()
 {
   bar_text = NULL;
 }
-
-//-----------------------------------------------------------------------------
 
 void TeamEnergy :: Init ()
 {
@@ -70,22 +61,18 @@ void TeamEnergy :: Init ()
   status = EnergieStatusOK;
   barre_energie.InitPos (0,0, BARRE_LARG, BARRE_HAUT);
 
-  barre_energie.SetValueColor(R_INIT, V_INIT, B_INIT, ALPHA);
-  barre_energie.SetBorderColor(255, 255, 255, ALPHA);
-  barre_energie.SetBackgroundColor(255*6/10, 255*6/10, 255*6/10, ALPHA_FOND);
+  barre_energie.SetValueColor( Color(R_INIT, V_INIT, B_INIT, ALPHA) );
+  barre_energie.SetBorderColor( Color(255, 255, 255, ALPHA) );
+  barre_energie.SetBackgroundColor( Color(255*6/10, 255*6/10, 255*6/10, ALPHA_FOND) );
 
   if(bar_text == NULL)
     bar_text = new Text("");
 }
 
-//-----------------------------------------------------------------------------
-
-void TeamEnergy :: ChoisitNom (const string &nom_equipe)
+void TeamEnergy :: ChoisitNom (const std::string &nom_equipe)
 { 
   nom = nom_equipe; 
 }
-
-//-----------------------------------------------------------------------------
 
 void TeamEnergy :: Refresh ()
 {
@@ -122,8 +109,6 @@ void TeamEnergy :: Refresh ()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 void TeamEnergy :: Draw ()
 {
   barre_energie.Actu(valeur);
@@ -142,7 +127,9 @@ void TeamEnergy :: Draw ()
     b = ( 2.0 * ((B_INIT * (valeur - (valeur_max / 2))) + (B_INTER * (valeur_max - valeur)))) / valeur_max;
   }
 
-  barre_energie.SetValueColor( (unsigned char)r, (unsigned char)v, (unsigned char)b, ALPHA);
+  Color color( (unsigned char)r, (unsigned char)v, (unsigned char)b, ALPHA);
+  
+  barre_energie.SetValueColor( color );
    
   int x,y;
   x = camera.GetWidth() - (BARRE_LARG + 10) + dx;
@@ -158,18 +145,12 @@ void TeamEnergy :: Draw ()
   bar_text->DrawCenterTop(x,y);
 }
 
-//-----------------------------------------------------------------------------
-
 void TeamEnergy :: Reset ()
 {
 }
 
-//-----------------------------------------------------------------------------
-
 void TeamEnergy::FixeMax (uint energie)
 { valeur_max = energie; }
-
-//-----------------------------------------------------------------------------
 
 void TeamEnergy::FixeValeur (uint energie)
 {
@@ -178,8 +159,6 @@ void TeamEnergy::FixeValeur (uint energie)
   assert(valeur_max != 0)
   barre_energie.InitVal (energie, 0, valeur_max);
 }
-
-//-----------------------------------------------------------------------------
 
 void TeamEnergy::NouvelleValeur (uint nv_energie)
 { nv_valeur = nv_energie; }
@@ -192,8 +171,6 @@ void TeamEnergy::FixeClassement (uint classem)
 
 void TeamEnergy::NouveauClassement (uint nv_classem)
 { nv_classement = nv_classem; }
-
-//-----------------------------------------------------------------------------
 
 void TeamEnergy::Mouvement ()
 {
@@ -248,8 +225,6 @@ void TeamEnergy::Mouvement ()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 bool TeamEnergy::EstEnMouvement ()
 {
   if( dx != 0 || dy != 0 )
@@ -257,4 +232,3 @@ bool TeamEnergy::EstEnMouvement ()
   return false;
 }
 
-//-----------------------------------------------------------------------------

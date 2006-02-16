@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "air_attack.h"
-//----------------------------------------------------------------------------
 #include <sstream>
 #include "../game/game_loop.h"
 #include "../graphic/sprite.h"
@@ -33,11 +32,6 @@
 #include "../tool/random.h"
 #include "../tool/i18n.h"
 #include "../weapon/weapon_tools.h"
-//----------------------------------------------------------------------------
-namespace Wormux 
-{
-//-----------------------------------------------------------------------------
-  AirAttack air_attack;
 
 const uint FORCE_X_MIN = 10;
 const uint FORCE_X_MAX = 120;
@@ -46,24 +40,9 @@ const uint FORCE_Y_MAX = 40;
 
 const double OBUS_SPEED = 7 ;
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-Obus::Obus() : WeaponProjectile("Obus")
-{}
-
-//-----------------------------------------------------------------------------
-
-void Obus::Draw()
-{
-  if (!is_active) return;  
-  image->Draw (GetX(), GetY());
-}
-
-//-----------------------------------------------------------------------------
-
-void Obus::Init()
+Obus::Obus(GameLoop &p_game_loop, AirAttack& p_air_attack) :
+  WeaponProjectile(p_game_loop, "Obus"),
+  air_attack(p_air_attack)
 {
   impact = resource_manager.LoadImage(weapons_res_profile,"obus_impact");
   image = resource_manager.LoadSprite(weapons_res_profile,"obus");
@@ -73,21 +52,21 @@ void Obus::Init()
   SetSize (image->GetWidth(), image->GetHeight());
 }
 
-//-----------------------------------------------------------------------------
+void Obus::Draw()
+{
+  if (!is_active) return;  
+  image->Draw (GetX(), GetY());
+}
 
 void Obus::Refresh()
 {
 }
-
-//-----------------------------------------------------------------------------
 
 void Obus::Reset()
 {
   is_active = true;
   Ready();
 }
-
-//-----------------------------------------------------------------------------
 
 void Obus::SignalCollision()
 { 
@@ -104,25 +83,27 @@ void Obus::SignalCollision()
 }
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
-Avion::Avion() : PhysicalObj("Avion", 0.0)
+Avion::Avion(GameLoop &p_game_loop, AirAttack& p_air_attack) : 
+  PhysicalObj(p_game_loop, "Avion", 0.0),
+  air_attack(p_air_attack)
 {
   m_type = objUNBREAKABLE;
   SetWindFactor(0.0);
   m_gravity_factor = 0.0;
   m_alive = GHOST;
-}
 
-//-----------------------------------------------------------------------------
+  image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
+  SetSize (image->GetWidth(), image->GetHeight());   
+  SetMass (3000);
+  obus_dx = 100;
+  obus_dy = 50;
+}
 
 void Avion::Reset()
 {
   m_alive = GHOST;
 }
-
-//-----------------------------------------------------------------------------
 
 void Avion::Tire()
 {
@@ -151,23 +132,10 @@ void Avion::Tire()
   camera.ChangeObjSuivi (this, true, true);
 }
 
-//-----------------------------------------------------------------------------
-
 void Avion::Refresh()
 {
   if (IsGhost()) return;
   UpdatePosition();
-}
-
-//-----------------------------------------------------------------------------
-
-void Avion::Init()
-{
-  image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
-  SetSize (image->GetWidth(), image->GetHeight());   
-  SetMass (3000);
-  obus_dx = 100;
-  obus_dy = 50;
 }
 
 int Avion::LitCibleX() const { return cible_x; }
@@ -178,15 +146,11 @@ int Avion::GetDirection() const {
   return (x<0)?-1:1;
 }
 
-//-----------------------------------------------------------------------------
-
 void Avion::Draw()
 {
   if (IsGhost()) return;
   image->Draw( GetX(), GetY());
 }
-
-//-----------------------------------------------------------------------------
 
 bool Avion::PeutLacherObus() const
 {
@@ -197,32 +161,24 @@ bool Avion::PeutLacherObus() const
 }
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
-AirAttack::AirAttack() : Weapon(WEAPON_AIR_ATTACK, "air_attack")
+AirAttack::AirAttack() :
+  Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig()),
+  avion(game_loop, *this)
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
-
-  extra_params = new AirAttackConfig();
 }
-
-//-----------------------------------------------------------------------------
 
 void AirAttack::p_Select()
 {
   avion.Reset();
 }
 
-//-----------------------------------------------------------------------------
-
 void AirAttack::ChooseTarget()
 {
   ActiveTeam().GetWeapon().NewActionShoot();
 }
-
-//-----------------------------------------------------------------------------
 
 bool AirAttack::p_Shoot ()
 {
@@ -235,7 +191,6 @@ bool AirAttack::p_Shoot ()
   
   return true;
 }
-//-----------------------------------------------------------------------------
 
 void AirAttack::Refresh()
 {
@@ -254,8 +209,7 @@ void AirAttack::Refresh()
       std::ostringstream ss;
       ss.str("");
       ss << "Obus(" << i << ')';
-      instance = new Obus();
-      instance -> Init();
+      instance = new Obus(game_loop, *this);
       instance -> m_name = ss.str();
       instance -> Reset();
       instance -> SetXY (x, avion.obus_dy);
@@ -298,8 +252,6 @@ void AirAttack::Refresh()
   if (!obus_actifs && avion.IsGhost()) FinTir();
 }
 
-//-----------------------------------------------------------------------------
-
 void AirAttack::FinTir()
 {
   m_is_active = false;
@@ -316,8 +268,6 @@ void AirAttack::FinTir()
   game_loop.interaction_enabled=true;
 }
 
-//-----------------------------------------------------------------------------
-
 void AirAttack::Draw()
 {
   Weapon::Draw() ;
@@ -332,20 +282,9 @@ void AirAttack::Draw()
   avion.Draw ();
 }
 
-//-----------------------------------------------------------------------------
-
-void AirAttack::p_Init()
-{
-  avion.Init();
-}
-
-//-----------------------------------------------------------------------------
-
 AirAttackConfig& AirAttack::cfg() 
 { return static_cast<AirAttackConfig&>(*extra_params); }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 AirAttackConfig::AirAttackConfig()
@@ -360,5 +299,3 @@ void AirAttackConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitDouble (elem, "speed", speed);
 }
 
-//-----------------------------------------------------------------------------
-} // namespace Wormux

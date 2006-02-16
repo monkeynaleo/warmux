@@ -20,76 +20,31 @@
  *****************************************************************************/
 
 #include "video.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include <algorithm>
 #include <sstream>
+#include <string>
 #include <SDL_endian.h>
+#include <SDL_image.h>
+#include "../game/config.h"
 #include "../tool/error.h"
 #include "../tool/i18n.h"
 #include "../include/app.h"
+#include "../include/constant.h"
 
-//Diasbled -> Don't works because of clanlib bug..
 
-//#define BUGGY_CODE
-//-----------------------------------------------------------------------------
-Video video;
-//-----------------------------------------------------------------------------
-
-SDL_Surface* CreateRGBSurface (int width, int height, Uint32 flags)
-{
-  SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, 32,
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN          
-          0xff000000,  // red mask
-          0x00ff0000,  // green mask
-          0x0000ff00,  // blue mask
-#else
-          0x000000ff,  // red mask
-          0x0000ff00,  // green mask
-          0x00ff0000,  // blue mask
-#endif  
-          0 // don't use alpha
-   );          
-  if ( surface == NULL )
-      Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
-  return surface;
-}    
-
-//-----------------------------------------------------------------------------
-
-SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags)
-{
-  SDL_Surface* surface = SDL_CreateRGBSurface(flags, width, height, 32,
-#if SDL_BYTEORDER == SDL_LIL_ENDIAN          
-          0xff000000,  // red mask
-          0x00ff0000,  // green mask
-          0x0000ff00,  // blue mask
-          0x000000ff // alpha mask
-#else
-          0x000000ff,  // red mask
-          0x0000ff00,  // green mask
-          0x00ff0000,  // blue mask
-          0xff000000 // alpha mask
-#endif  
-   );          
-  if ( surface == NULL )
-      Error(std::string("Can't create SDL RGBA surface: ") + SDL_GetError());	
-  return surface;
-}    
-
-//-----------------------------------------------------------------------------
-
-const int WIDTH_MIN=800;
-const int HEIGHT_MIN=600;
-
-Video::Video() 
-{
-  SetMaxFps (50);
-  fullscreen = false;
+Video::Video(){
+	SetMaxFps (50);
+	fullscreen = false;
+	SDLReady = false;
 }
 
-void Video::SetMaxFps(uint max_fps)
-{
+Video::~Video(){
+	if( SDLReady )
+		SDL_Quit();
+}
+
+void Video::SetMaxFps(uint max_fps){
 	m_max_fps = max_fps;
 	if (0 < m_max_fps)
 		m_sleep_max_fps = 1000/m_max_fps;
@@ -97,60 +52,78 @@ void Video::SetMaxFps(uint max_fps)
 		m_sleep_max_fps = 0;
 }
 
-
-uint Video::GetMaxFps()
-{ return m_max_fps; }
-
-uint Video::GetSleepMaxFps()
-{ return m_sleep_max_fps; }
-
-//-----------------------------------------------------------------------------
-
-
-int Video::GetWidth(void) const
-{
-  return app.sdlwindow->w;
-}
-//-----------------------------------------------------------------------------
-
-int Video::GetHeight(void) const
-{
-  return app.sdlwindow->h;
-}
-//-----------------------------------------------------------------------------
-
-bool Video::IsFullScreen(void) const
-{
-  return fullscreen;
+uint Video::GetMaxFps(){
+	return m_max_fps;
 }
 
-//-----------------------------------------------------------------------------
-
-bool Video::SetConfig(int width, int height, bool _fullscreen)
-{
-  // initialize the main window
-  if ((app.sdlwindow == NULL) || 
-      (width != app.sdlwindow->w || height != app.sdlwindow->h)) {
-    app.sdlwindow = SDL_SetVideoMode(width,
-				     height,
-				     32, //resolution in bpp
-				     SDL_HWSURFACE| SDL_HWACCEL |SDL_DOUBLEBUF);
-    if (app.sdlwindow == NULL) 
-      app.sdlwindow = SDL_SetVideoMode(width,
-				       height,
-				       32, //resolution in bpp
-				       SDL_SWSURFACE);
-
-    if (app.sdlwindow == NULL) return false;
-    fullscreen = false;
-  }
-
-  // fullscreen ?
-  if (fullscreen != _fullscreen) {
-    SDL_WM_ToggleFullScreen(app.sdlwindow);
-    fullscreen = _fullscreen;
-  }
-  return true;
+uint Video::GetSleepMaxFps(){
+	return m_sleep_max_fps;
 }
 
-//-----------------------------------------------------------------------------
+bool Video::IsFullScreen(void) const{
+	return fullscreen;
+}
+
+bool Video::SetConfig(int width, int height, bool _fullscreen){
+	// initialize the main window
+	if( window.IsNull() || 
+			(width != window.GetWidth() || 
+			 height != window.GetHeight() ) ){
+
+		window.SetSurface( SDL_SetVideoMode(width, height, 32, 
+				SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF ), false );
+
+		if( window.IsNull() ) 
+			window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE) );
+
+		if( window.IsNull() )
+			return false;
+		fullscreen = false;
+	}
+
+	if(fullscreen != _fullscreen ){
+		SDL_WM_ToggleFullScreen( window.GetSurface() );
+		fullscreen = _fullscreen;
+	}
+
+	return true;
+}
+
+void Video::InitWindow(){
+	InitSDL();
+
+	window.SetSurface( NULL , false );
+	window.SetAutoFree( false );
+
+	SetConfig(config.tmp.video.width,
+			config.tmp.video.height,
+			config.tmp.video.fullscreen);
+
+	if( window.IsNull() )
+		Error( "Unable to initialize SDL window.");
+
+	SetWindowCaption( std::string("Wormux ") + VERSION );
+	SetWindowIcon( config.data_dir + "wormux-32.xpm" );
+}
+
+void Video::SetWindowCaption(std::string caption){
+	SDL_WM_SetCaption( caption.c_str(), NULL );
+}
+
+void Video::SetWindowIcon(std::string filename){
+	SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
+}
+void Video::InitSDL(){
+	if( SDLReady )
+		return;
+
+	if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
+		Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
+
+	SDLReady = true;
+}
+
+void Video::Flip(){
+	window.Flip();
+}
+

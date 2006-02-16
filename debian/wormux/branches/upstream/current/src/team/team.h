@@ -21,35 +21,35 @@
 
 #ifndef TEAM_H
 #define TEAM_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
+
+#include <list>
+#include <map>
+#include <string>
 #include "character.h"
 #include "team_energy.h"
+#include "../graphic/surface.h"
 #include "../include/enum.h"
 #include "../include/base.h"
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon.h"
-#include "../tool/Point.h"
+#include "../tool/point.h"
 #include "../tool/resource_manager.h"
-#include <string>
-#include <list>
-#include <map>
-//-----------------------------------------------------------------------------
+
 class Character;
 class Weapon;
 
 class Team
 {
 public:
-  typedef std::vector<Character>::iterator iterator;
-  typedef std::vector<Character>::const_iterator const_iterator;
+  typedef std::list<Character>::iterator iterator;
+  typedef std::list<Character>::const_iterator const_iterator;
 
   std::map<std::string, int> m_nb_ammos;
   std::map<std::string, int> m_nb_units;
 
   // Autres
   CrossHair crosshair;
-  SDL_Surface *ecusson;
+  Surface ecusson;
   Point2i sauve_camera;
   bool camera_est_sauve;
   TeamEnergy energie;
@@ -59,7 +59,7 @@ private:
   std::string m_id;
   std::string m_name;
   std::string m_sound_profile;
-  std::vector<Character> vers;
+  std::list<Character> vers;
   int ver_actif, vers_fin;
   iterator vers_fin_it;
   Weapon *active_weapon;
@@ -70,6 +70,12 @@ public:
   bool Init (const std::string &teams_dir, const std::string &id);
   void Reset();
 
+  // ******* TODO: KILL THIS FUNCTIONS !!! ********
+  Character& operator[] (uint index);
+  const Character& operator[] (uint index) const;
+  // ******* TODO: KILL THIS FUNCTIONS !!! ********
+  bool IsSameAs(const Team& other);
+
   // Switch to next worm.
 //  void NextCharacter();
   int NextCharacterIndex();
@@ -78,8 +84,8 @@ public:
   void SelectCharacterIndex (uint index);
 
   // Prepate / End turn.
-  void PrepareTour();
-  void FinTour();
+  void PrepareTurn();
+  void EndTurn();
 
   // Access to the worms.
   int ActiveCharacterIndex() const;
@@ -133,5 +139,5 @@ protected:
   void internal_NextCharacter();
 };
 
-//-----------------------------------------------------------------------------
 #endif // TEAM_H
+

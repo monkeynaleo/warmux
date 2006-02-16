@@ -26,8 +26,6 @@
 #include <string>
 #include <vector>
 //-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
 
 void InitConstants();
 
@@ -68,5 +66,4 @@ extern const uint HAUT_CELLULE_TERRAIN;
 extern const uint HAUT_MIN_TERRAIN_OUVERT;
 
 //-----------------------------------------------------------------------------
-}
 #endif

@@ -20,26 +20,17 @@
  *****************************************************************************/
 
 #include "baseball.h"
-//-----------------------------------------------------------------------------
 #include "../game/game_loop.h"
 #include "../team/macro.h"
-#include "../tool/Point.h"
+#include "../tool/point.h"
 #include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
-namespace Wormux 
-{
-Baseball baseball;
 
-Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball")
+Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 {
   m_name = _("Baseball");
-  extra_params = new BaseballConfig();
 }
 
-//-----------------------------------------------------------------------------
-
-bool Baseball::p_Shoot ()
-{
+bool Baseball::p_Shoot (){
   double angle = ActiveTeam().crosshair.GetAngleRad();
   int ver_x, ver_y;
   int x,y;
@@ -84,35 +75,22 @@ bool Baseball::p_Shoot ()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
-void Baseball::Refresh()
-{
+void Baseball::Refresh(){
   if (m_is_active)
     m_is_active = false;
 }
 
-//-----------------------------------------------------------------------------
+BaseballConfig& Baseball::cfg() {
+  return static_cast<BaseballConfig&>(*extra_params);
+}
 
-BaseballConfig& Baseball::cfg() 
-{ return static_cast<BaseballConfig&>(*extra_params); }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-BaseballConfig::BaseballConfig()
-{ 
+BaseballConfig::BaseballConfig(){ 
   longueur =  70;
   force = 250;
 }
 
-void BaseballConfig::LoadXml(xmlpp::Element *elem)
-{
+void BaseballConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
   LitDocXml::LitUint (elem, "longueur", longueur);
   LitDocXml::LitUint (elem, "force", force);
 }
-
-//-----------------------------------------------------------------------------
-} // namespace Wormux

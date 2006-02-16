@@ -25,9 +25,6 @@
 #include <string>
 #include "../include/base.h"
 
-namespace Wormux
-{
-
 class Time
 {
 private:
@@ -54,6 +51,5 @@ public:
   void Continue();
 };
 
- extern Time global_time;
-}
+extern Time global_time;
 #endif

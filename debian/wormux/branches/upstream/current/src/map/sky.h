@@ -21,18 +21,12 @@
 
 #ifndef SKY_H
 #define SKY_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
+
 #include "tile.h"
+#include "../graphic/surface.h"
 #include "../include/base.h"
 
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
-
-   
-class Sky : public Tile
-{  
+class Sky : public Tile{  
  private:
   int lastx, lasty;
   void CompleteDraw();
@@ -45,9 +39,7 @@ public:
   void Free() { FreeMem(); } 
 
  private:
-   SDL_Surface *image;
+   Surface image;
 };
 
-}
-//-----------------------------------------------------------------------------
 #endif

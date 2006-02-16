@@ -20,19 +20,15 @@
  *****************************************************************************/
 
 #include "water.h"
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
 #include "../game/time.h"
-#include "../graphic/video.h"
 #include "../include/app.h"
 #include "../interface/interface.h"
 #include "../tool/resource_manager.h"
 
-using namespace Wormux;
-//-----------------------------------------------------------------------------
 
 // Vitesse d'animation des vagues
 const uint WAVE_TIME=10;
@@ -48,21 +44,15 @@ const float t = (GO_UP_OSCILLATION_TIME*1000.0);
 const float a = GO_UP_STEP/t;
 const float b = 1.0;
 
-//-----------------------------------------------------------------------------
-
-void Water::Init()
-{ 
+void Water::Init(){ 
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
    surface = resource_manager.LoadImage(res, "gfx/water");
-   SDL_SetAlpha(surface, 0, 0);
-   pattern = CreateRGBASurface(180, surface->h + 40, SDL_SWSURFACE|SDL_SRCALPHA);
+   surface.SetAlpha(0, 0);
+   pattern.NewSurface(180, surface.GetHeight() + 40, SDL_SWSURFACE|SDL_SRCALPHA, true);
    shift1 = 0;
 }
 
-//-----------------------------------------------------------------------------
-
-void Water::Reset()
-{
+void Water::Reset(){
   actif = lst_terrain.TerrainActif().use_water;
   if(!actif) return;
   Init();
@@ -75,35 +65,29 @@ void Water::Reset()
   Refresh(); // Calculate first height position
 }
 
-//-----------------------------------------------------------------------------
-
-void Water::Free()
-{
-  if(!actif) return;
-  SDL_FreeSurface(surface);
-  SDL_FreeSurface(pattern);
+void Water::Free(){
+  if(!actif)
+    return;
+  surface.Free();
+  pattern.Free();
   height.clear();
 }
 
-//-----------------------------------------------------------------------------
-
-void Water::Refresh()
-{
-  if (!actif) return;
+void Water::Refresh(){
+  if (!actif)
+    return;
 
   height_mvt = 0;
 
   ////////  Height Calculation:
-  if (temps_montee < Wormux::global_time.Read())
+  if (temps_montee < global_time.Read())
   {
-    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > Wormux::global_time.Read())
-    {
-      uint dt=Wormux::global_time.Read()- temps_montee;
+    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > global_time.Read()){
+      uint dt=global_time.Read()- temps_montee;
       height_mvt = GO_UP_STEP + (uint)(((float)GO_UP_STEP * sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))/GO_UP_OSCILLATION_TIME/1000.0)*2*M_PI))/(a*dt+b));
 ///;
     }
-    else
-    {
+    else{
       temps_montee += GO_UP_TIME * 60 * 1000;
       hauteur_eau += GO_UP_STEP;
     }
@@ -111,14 +95,15 @@ void Water::Refresh()
 
   ////////  Wave calculation:
   // on rempli le sol avec de l'eau
-  if (WAVE_TIME < (Wormux::global_time.Read() - temps_eau))
+  if (WAVE_TIME < (global_time.Read() - temps_eau))
   {
-    temps_eau = Wormux::global_time.Read();
+    temps_eau = global_time.Read();
     vague += WAVE_STEP;
-    if (surface->w <= vague) vague=0;
+    if (surface.GetWidth() <= vague)
+		vague=0;
   }
 
-  int x = -surface->w+vague;
+  int x = -surface.GetWidth() + vague;
   int y = world.GetHeight()-(hauteur_eau + height_mvt);
 
   double decree = (double) 2*M_PI/360;
@@ -143,11 +128,9 @@ void Water::Refresh()
   shift1 += 4*decree;
 }
 
-//-----------------------------------------------------------------------------
-
-void Water::Draw()
-{
-  if (!actif) return;
+void Water::Draw(){
+  if (!actif)
+    return;
 
 /*  for(uint x=0; x<world.GetWidth(); x++)
   for(uint y=height.at(x); y<world.GetHeight(); y+=surface->h)
@@ -156,17 +139,17 @@ void Water::Draw()
   }
 */
   // Compute 1 pattern:
-  SDL_SetAlpha(pattern, 0, 0);
-  SDL_FillRect(pattern, NULL, 0x00000000);
+  pattern.SetAlpha( 0, 0);
+  pattern.Fill(0x00000000);
 
   int y0 = world.GetHeight()-(hauteur_eau + height_mvt)-20;
 
   for(uint x=0; x<180; x++)
   {
-    SDL_Rect dst = {x, height.at(x) - y0, surface->w, surface->h};
-    SDL_BlitSurface(surface,NULL, pattern,&dst);
+    Point2i dst(x, height.at(x) - y0);
+    pattern.Blit(surface, dst);
   }
-  SDL_SetAlpha(pattern, SDL_SRCALPHA, 0);
+  pattern.SetAlpha(SDL_SRCALPHA, 0);
 
   int x0 = (int)camera.GetX();
   while(x0<0)
@@ -175,18 +158,14 @@ void Water::Draw()
     x0-=180;
 
   for(int x=(int)camera.GetX()-x0;x<(int)camera.GetX()+(int)camera.GetWidth();x+=180)
-  for(int y=y0;y<(int)camera.GetY()+(int)camera.GetHeight();y+=surface->h)
+  for(int y=y0;y<(int)camera.GetY()+(int)camera.GetHeight();y+=surface.GetHeight())
   {
     AbsoluteDraw(pattern, x, y);
   }
 }
 
-//-----------------------------------------------------------------------------
-
-int Water::GetHeight(int x)
-{
-  if (IsActive())
-  {
+int Water::GetHeight(int x){
+  if (IsActive()){
     while(x<0)
       x += 180;
     while(x>=180)
@@ -197,8 +176,7 @@ int Water::GetHeight(int x)
     return world.GetHeight();
 }
 
-//-----------------------------------------------------------------------------
+bool Water::IsActive(){
+  return actif;
+}
 
-bool Water::IsActive() {return actif;}
-
-//-----------------------------------------------------------------------------

@@ -25,10 +25,9 @@
 
 #ifndef WEAPON_H
 #define WEAPON_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
 #include <string>
 #include "weapon_cfg.h"
+#include "../graphic/surface.h"
 #include "../graphic/sprite.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
@@ -37,7 +36,6 @@
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
 #include "../team/character.h"
-//-----------------------------------------------------------------------------
 class Character;
 
 // Constante munitions illimitées
@@ -48,7 +46,6 @@ extern const uint BUTTON_ICO_HEIGHT;
 
 extern const uint WEAPON_ICO_WIDTH;
 extern const uint WEAPON_ICO_HEIGHT;
-
 
 enum weapon_visibility {
   ALWAYS_VISIBLE,
@@ -62,9 +59,6 @@ class WeaponStrengthBar : public BarreProg
  public:
   bool visible ;
 } ;
-
-
-//-----------------------------------------------------------------------------
 
 // Projectil d'une arme
 class WeaponProjectile : public PhysicalObj
@@ -80,12 +74,12 @@ protected:
   bool touche_ver_objet;
 
 public:
-  WeaponProjectile(const std::string &nom);
+  WeaponProjectile(GameLoop &game_loop, const std::string &nom);
   virtual void Draw();
   virtual void Refresh();
-  virtual void Reset() ;
-  virtual void Init()=0 ;
   void PrepareTir();
+  void Init() {}// TODO : to delete
+  void Reset() {}// TODO : to delete
   virtual bool CollisionTest (int dx, int dy);
   Character* LitDernierVerTouche() const { return dernier_ver_touche; }
   PhysicalObj* LitDernierObjTouche() const { return dernier_obj_touche; }
@@ -146,7 +140,7 @@ protected:
 
 public:
   // Icone de l'arme dans l'interface
-  SDL_Surface *icone;
+  Surface icone;
 
   // if max_strength != 0, display the strength bar
   double max_strength;
@@ -159,17 +153,17 @@ public:
   bool use_flipping;
 
 protected:
-  virtual void p_Init();
   virtual void p_Select();
   virtual void p_Deselect();
   virtual void Refresh() = 0;
   virtual bool p_Shoot() = 0;
 
 public:
-  Weapon(Weapon_type type, const std::string &id);
+  Weapon(Weapon_type type, 
+	 const std::string &id,
+	 EmptyWeaponConfig * params,
+	 uint visibility = ALWAYS_VISIBLE);
   virtual ~Weapon() {}
-
-  void Init();
 
   // Select or deselect the weapon
   void Select(); 

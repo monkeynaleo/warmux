@@ -19,45 +19,67 @@
  
 #ifndef FONT_H
 #define FONT_H
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <map>
-
 #include "../include/base.h"
 #include "colors.h"
-//-----------------------------------------------------------------------------
+#include "surface.h"
+
+class GameLoop;
 
 class Font
 {
- private:
-  typedef std::map<std::string, SDL_Surface *>::value_type 
+  typedef std::map<std::string, Surface>::value_type 
     txt_sample;
-  typedef std::map<std::string, SDL_Surface *>::iterator 
+  typedef std::map<std::string, Surface>::iterator 
     txt_iterator;
 
-  std::map<std::string, SDL_Surface *> surface_text_table;
-
-public:
+  std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
+  void Write(int x, int y, Surface &surface);
 
 public:
-  Font();
   Font(int size);
   ~Font();
+  
   bool Load (const std::string& filename, int size);
-  void WriteLeft (int x, int y, const std::string &txt, SDL_Color color);
-  void WriteLeftBottom (int x, int y, const std::string &txt, SDL_Color color);
-  void WriteRight (int x, int y, const std::string &txt, SDL_Color color);
-  void WriteCenterTop (int x, int y, const std::string &txt, SDL_Color color);
-  void WriteCenter (int x, int y, const std::string &txt, SDL_Color color);
+  TTF_Font& GetTTF();
+
+  void WriteLeft (int x, int y, const std::string &txt, const Color &color);
+  void WriteLeftBottom (int x, int y, const std::string &txt, const Color &color);
+  void WriteRight (int x, int y, const std::string &txt, const Color &color);
+  void WriteCenterTop (int x, int y, const std::string &txt, const Color &color);
+  void WriteCenter (int x, int y, const std::string &txt, const Color &color);
+  
   int GetWidth (const std::string &txt);
   int GetHeight ();
   int GetHeight (const std::string &txt);
-  SDL_Surface * Render(const std::string &txt, SDL_Color color, bool cache=false);
 
-  static bool InitAllFonts();
+  Surface Render(const std::string &txt, const Color &color, bool cache=false);
+  Surface Font::CreateSurface(const std::string &txt, const Color &color);
 };
 
-//-----------------------------------------------------------------------------
+class GameFont : public Font
+{
+  GameLoop &game_loop;
+  void Write(int x, int y, Surface &surface);
+
+public:
+  GameFont(GameLoop &game_loop, int size);
+
+};
+
+class Fonts
+{
+public:
+  Fonts(GameLoop &game_loop);
+  GameFont huge;
+  GameFont large;
+  GameFont big;
+  GameFont normal;
+  GameFont small;
+  GameFont tiny;
+};
+
 #endif

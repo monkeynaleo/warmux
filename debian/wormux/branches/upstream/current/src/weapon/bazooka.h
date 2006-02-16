@@ -21,14 +21,11 @@
 
 #ifndef BAZOOKA_H
 #define BAZOOKA_H
-//-----------------------------------------------------------------------------
 #include "weapon.h"
+#include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class Bazooka;
 
@@ -36,25 +33,21 @@ class Bazooka;
 class RoquetteBazooka : public WeaponProjectile
 {
 public:
-  RoquetteBazooka(Bazooka& bazooka);
+  RoquetteBazooka(GameLoop &game_loop, Bazooka& bazooka);
   void Tire (double force);
-  void Init();
   void Refresh();
 protected:
   Bazooka &bazooka;
   void SignalCollision();
 };
 
-//-----------------------------------------------------------------------------
-
 class Bazooka : public Weapon
 {
  private:
-  void p_Init();
   bool p_Shoot();
 
  public:
-  SDL_Surface *impact;
+  Surface impact;
   RoquetteBazooka roquette;
 
   Bazooka();
@@ -66,7 +59,4 @@ protected:
   void Explosion();
 };
 
-//extern Bazooka bazooka;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif

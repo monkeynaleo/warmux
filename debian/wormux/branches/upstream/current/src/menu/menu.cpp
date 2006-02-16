@@ -34,8 +34,8 @@ Menu::Menu(char * bg)
 {
   close_menu = false ;
    
-  uint x = (video.GetWidth()/2);
-  uint y = video.GetHeight()-50;
+  uint x = app.video.window.GetWidth() / 2;
+  uint y = app.video.window.GetHeight() - 50;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( resource_manager.LoadImage( res, bg));
@@ -98,8 +98,9 @@ bool Menu::BasicOnClic(int mouse_x, int mouse_y)
 
 void Menu::BasicDraw(int mouse_x, int mouse_y)
 {
-  background->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
-  background->Blit( app.sdlwindow, 0, 0);
+  background->ScaleSize(app.video.window.GetWidth(), 
+		  app.video.window.GetHeight());
+  background->Blit( app.video.window, 0, 0);
   
   actions_buttons->Draw(mouse_x,mouse_y);
 }
@@ -159,7 +160,8 @@ void Menu::Run ()
 
    BasicDraw(x, y);
    Draw(x, y);
-   SDL_Flip( app.sdlwindow);
+
+   app.video.Flip();
 
    // to limit CPU
    delay = SDL_GetTicks()-start;   

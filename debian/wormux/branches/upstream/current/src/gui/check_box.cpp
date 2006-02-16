@@ -20,23 +20,18 @@
  *****************************************************************************/
 
 #include "check_box.h"
-//-----------------------------------------------------------------------------
 #include <algorithm>
 #include "../include/app.h"
+#include "../include/global.h"
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
-#include "../include/global.h"
-
-using namespace Wormux;
-//-----------------------------------------------------------------------------
 
 
-CheckBox::CheckBox (const std::string &label, uint x, uint y, uint w, bool value) :
-  Widget(x, y, w, global().small_font().GetHeight())
-{
+CheckBox::CheckBox (const std::string &label, int x, int y, uint w, bool value) :
+  Widget(x, y, w, global().small_font().GetHeight()){
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadSprite( res, "menu/check");
-  m_image->EnableLastFrameCache();
+  m_image->cache.EnableLastFrameCache();
 
   // Copy arguments
   m_value = value;
@@ -44,18 +39,12 @@ CheckBox::CheckBox (const std::string &label, uint x, uint y, uint w, bool value
   txt_label = new Text(label, white_color, &global().small_font());
 }
 
-//-----------------------------------------------------------------------------
-
-CheckBox::~CheckBox()
-{
+CheckBox::~CheckBox(){
   delete m_image;
   delete txt_label;
 }
 
-//-----------------------------------------------------------------------------
-
-void CheckBox::Draw (uint mouse_x, uint mouse_y)
-{
+void CheckBox::Draw (uint mouse_x, uint mouse_y){
   txt_label->DrawTopLeft(x, y);
  
   if (m_value)
@@ -63,27 +52,26 @@ void CheckBox::Draw (uint mouse_x, uint mouse_y)
   else 
     m_image->SetCurrentFrame(1);
 
-  m_image->Blit(app.sdlwindow, x+w-16, y);
+  m_image->Blit(app.video.window, x+w-16, y);
 }
 
-//-----------------------------------------------------------------------------
-
-bool CheckBox::Clic (uint mouse_x, uint mouse_y, uint button)
-{
-  if (!MouseIsOver(mouse_x, mouse_y)) return false;
+bool CheckBox::Clic (uint mouse_x, uint mouse_y, uint button){
+  if( !MouseIsOver(mouse_x, mouse_y) )
+    return false;
 
   m_value = !m_value ;
   return true ;
 }
 
-//-----------------------------------------------------------------------------
-void CheckBox::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
-{
+void CheckBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
   StdSetSizePosition(_x, _y, _w, _h);
 }
-//-----------------------------------------------------------------------------
 
-bool CheckBox::GetValue()  const { return m_value; }
-void CheckBox::SetValue(bool value)  { m_value = value; }
+bool CheckBox::GetValue() const{
+  return m_value;
+}
 
-//-----------------------------------------------------------------------------
+void CheckBox::SetValue(bool value){
+  m_value = value;
+}
+

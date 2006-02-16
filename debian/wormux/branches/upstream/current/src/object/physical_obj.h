@@ -26,13 +26,10 @@
 
 #ifndef PHYSICAL_OBJECT_H
 #define PHYSICAL_OBJECT_H
-//-----------------------------------------------------------------------------
-//#include "../include/base.h"
-//#include "../tool/math_tools.h"
-#include "../object/physics.h"
-#include "../tool/Point.h"
-#include "../tool/Rectangle.h"
-//-----------------------------------------------------------------------------
+
+#include "physics.h"
+#include "../tool/point.h"
+#include "../tool/rectangle.h"
 
 // Alive state
 typedef enum
@@ -42,8 +39,6 @@ typedef enum
   GHOST,
   DROWNED
 } alive_t;
-
-//-----------------------------------------------------------------------------
 
 // Object type
 typedef enum
@@ -56,18 +51,15 @@ typedef enum
   objCLASSIC
 } type_objet_t;
 
-//-----------------------------------------------------------------------------
 extern const double PIXEL_PER_METER ;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2) ;
-//-----------------------------------------------------------------------------
 
 class PhysicalObj : public Physics
 {
 public:
   // Object name (useful for debug ;-))
   std::string m_name;
-
   type_objet_t m_type;
 
 private:
@@ -90,7 +82,7 @@ protected:
   bool m_allow_negative_y;
 
 public:
-  PhysicalObj (const std::string &name, double mass=0.0);
+  PhysicalObj (GameLoop &game_loop, const std::string &name, double mass=0.0);
   virtual ~PhysicalObj ();
 
   //-------- Set position and size -------
@@ -187,8 +179,6 @@ private:
   bool CollisionTest (int x, int y);
 
   void SignalRebound() ;
-
-
 };
 
 // Est-ce que deux objets se touchent ? (utilise les rectangles de test)
@@ -197,5 +187,4 @@ bool ObjTouche (const PhysicalObj &a, const PhysicalObj &b);
 // Est-ce que le point p touche l'objet a ?
 bool ObjTouche (const PhysicalObj &a, const Point2i &p);
 
-//-----------------------------------------------------------------------------
 #endif

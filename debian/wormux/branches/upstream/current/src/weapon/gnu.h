@@ -21,7 +21,7 @@
 
 #ifndef GNU_H
 #define GNU_H
-//-----------------------------------------------------------------------------
+
 #include <SDL.h>
 #include "grenade.h"
 #include "weapon.h"
@@ -30,22 +30,24 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
-//-----------------------------------------------------------------------------
-using namespace Wormux;
+class GnuLauncher;
+
 // The GNU
 class Gnu : public PhysicalObj
 {
+ private:
   uint launched_time;
   Sprite *image;
   int m_sens;
   double save_x,save_y;
+  GnuLauncher& launcher;
 public:
   bool is_active;
 
-  Gnu();
-  void Init();
+  Gnu(GameLoop &game_loop, GnuLauncher& launcher);
   void Draw();
-  void Reset();
+  void Init(){};
+  void Reset(){};
   void Tire(double force);
   void Refresh();
   void SignalFallEnding();
@@ -53,25 +55,19 @@ public:
   void SignalGhostState();
 };
 
-//-----------------------------------------------------------------------------
-
 class GnuLauncher : public Weapon
 {
 public:
-  SDL_Surface *impact;
+  Surface impact;
   Gnu gnu;
 
 public:
   GnuLauncher();
   bool p_Shoot ();
   void Refresh();
-  void p_Init();
   GrenadeConfig& cfg();
 
   void Explosion();
-
 };
 
-extern GnuLauncher gnu_launcher;
-//-----------------------------------------------------------------------------
 #endif

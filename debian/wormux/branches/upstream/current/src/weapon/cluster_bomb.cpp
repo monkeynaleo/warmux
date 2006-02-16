@@ -21,7 +21,6 @@
  *****************************************************************************/
 
 #include "cluster_bomb.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include <math.h>
 #include "weapon_tools.h"
@@ -37,48 +36,35 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 #include "../tool/random.h"
-//-----------------------------------------------------------------------------
-namespace Wormux {
-
-LanceCluster lance_cluster;
 
 #ifdef DEBUG
 #define COUT_DBG std::cout << "[ClusterBomb] "
 #endif
 
-//-----------------------------------------------------------------------------
-
-Cluster::Cluster() : WeaponProjectile ("Cluster")
+Cluster::Cluster(GameLoop &p_game_loop, ClusterLauncher& p_launcher) :
+  WeaponProjectile (p_game_loop, "Cluster"),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
-}
 
-//-----------------------------------------------------------------------------
-
-void Cluster::Tire (int x, int y)
-{
-  PrepareTir();
-  SetXY(x,y);
-}
-
-//-----------------------------------------------------------------------------
-
-void Cluster::Init()
-{
   image = resource_manager.LoadSprite( weapons_res_profile, "cluster");
   image->EnableRotationCache(32);
   SetSize (image->GetWidth(), image->GetHeight()); 
 
-  SetMass (lance_cluster.cfg().mass / (lance_cluster.cfg().nbr_fragments+1));
-  SetAirResistFactor(lance_cluster.cfg().air_resist_factor);
+  SetMass (launcher.cfg().mass / (launcher.cfg().nbr_fragments+1));
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
   SetTestRect (dx, dx, dy, dy);
 }
 
-//-----------------------------------------------------------------------------
+void Cluster::Tire (int x, int y)
+{
+  PrepareTir();
+  SetXY(x,y);
+}
 
 void Cluster::Refresh()
 {
@@ -89,14 +75,10 @@ void Cluster::Refresh()
   image->SetRotation_deg( angle);
 }
 
-//-----------------------------------------------------------------------------
-
 void Cluster::Draw()
 {
   image->Draw(GetX(), GetY());
 }
-
-//-----------------------------------------------------------------------------
 
 void Cluster::SignalCollision()
 {
@@ -107,33 +89,43 @@ void Cluster::SignalCollision()
     game_messages.Add (_("The rocket left the battlefield..."));
     return;
   }
-  AppliqueExplosion (GetPos(), GetPos(), lance_cluster.impact, lance_cluster.cfg(), NULL);
+  AppliqueExplosion (GetPos(), GetPos(), launcher.impact, launcher.cfg(), NULL);
 }
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
-ClusterBomb::ClusterBomb() : WeaponProjectile ("cluster_bomb")
+ClusterBomb::ClusterBomb(GameLoop &p_game_loop, ClusterLauncher& p_launcher) :
+  WeaponProjectile (p_game_loop, "cluster_bomb"),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/grenade_bounce";
   touche_ver_objet = false;
   m_rebounding = true;
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "clusterbomb_sprite");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight()); 
+
+  SetMass (launcher.cfg().mass);
+  m_rebound_factor = launcher.cfg().rebound_factor;
+
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);
+
+  tableau_cluster.clear();
+  const uint nb = launcher.cfg().nbr_fragments;
+  for (uint i=0; i<nb; ++i)
+  {
+    Cluster cluster(game_loop, launcher);
+    tableau_cluster.push_back( cluster );
+  }
 }
-
-//-----------------------------------------------------------------------------
-
-ClusterBomb::~ClusterBomb()
-{
-  delete []tableau_cluster;
-}
-
-//-----------------------------------------------------------------------------
 
 void ClusterBomb::Tire (double force)
 {
-  SetAirResistFactor(lance_cluster.cfg().air_resist_factor);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 
   PrepareTir();
 
@@ -152,34 +144,8 @@ void ClusterBomb::Tire (double force)
 #endif
 
   // Recupere le moment du départ
-  temps_debut_tir = Wormux::global_time.Read();
+  temps_debut_tir = global_time.Read();
 }
-
-//-----------------------------------------------------------------------------
-
-void ClusterBomb::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "clusterbomb_sprite");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight()); 
-
-  SetMass (lance_cluster.cfg().mass);
-  m_rebound_factor = lance_cluster.cfg().rebound_factor;
-
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);
-
-#ifdef MSG_DBG
-  COUT_DBG << "ClusterBomb::Init()" << std::endl;
-#endif
-
-  tableau_cluster = new Cluster[lance_cluster.cfg().nbr_fragments];
-  for(uint i=0;i<lance_cluster.cfg().nbr_fragments;i++)
-    tableau_cluster[i].Init();
-}
-
-//-----------------------------------------------------------------------------
 
 void ClusterBomb::Refresh()
 {
@@ -197,23 +163,26 @@ void ClusterBomb::Refresh()
   }
 
   // 5 sec après avoir été tirée, la grenade explose
-  double tmp = Wormux::global_time.Read() - temps_debut_tir;
-  if(tmp>1000 * lance_cluster.cfg().tps_avt_explosion)
+  double tmp = global_time.Read() - temps_debut_tir;
+  if(tmp>1000 * launcher.cfg().tps_avt_explosion)
   {
     DoubleVector speed_vector ;
     int x, y ;
 
     GetSpeedXY(speed_vector);
 
-    for(uint i=0;i<lance_cluster.cfg().nbr_fragments;i++)
+    iterator it=tableau_cluster.begin(), end=tableau_cluster.end();
+    for (; it != end; ++it)
     {
+      Cluster &cluster = *it;
+      
       double angle = (double)RandomLong ((long)0.0, (long)(2.0 * M_PI));
-      x = GetX()+(int)(cos(angle) * (double)lance_cluster.cfg().blast_range*5);
-      y = GetY()+(int)(sin(angle) * (double)lance_cluster.cfg().blast_range*5);
+      x = GetX()+(int)(cos(angle) * (double)launcher.cfg().blast_range*5);
+      y = GetY()+(int)(sin(angle) * (double)launcher.cfg().blast_range*5);
 
-      tableau_cluster[i].Tire(x,y);
-      tableau_cluster[i].SetSpeedXY(speed_vector);
-      lst_objets.AjouteObjet((PhysicalObj*)&tableau_cluster[i],false);
+      cluster.Tire(x,y);
+      cluster.SetSpeedXY(speed_vector);
+      lst_objets.AjouteObjet((PhysicalObj*)&cluster,false);
     }
     is_active = false;
     return;
@@ -225,8 +194,6 @@ void ClusterBomb::Refresh()
   double angle = GetSpeedAngle() * 180/M_PI ;
   image->SetRotation_deg( angle);
 }
-
-//-----------------------------------------------------------------------------
 
 void ClusterBomb::Draw()
 {
@@ -240,8 +207,8 @@ void ClusterBomb::Draw()
 
   image->Draw(GetX(), GetY());
 
-  int tmp = lance_cluster.cfg().tps_avt_explosion;
-  tmp -= (int)((Wormux::global_time.Read() - temps_debut_tir) / 1000);
+  int tmp = launcher.cfg().tps_avt_explosion;
+  tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
@@ -249,8 +216,6 @@ void ClusterBomb::Draw()
 
   global().small_font().WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
 }
-
-//-----------------------------------------------------------------------------
 
 void ClusterBomb::SignalCollision()
 {   
@@ -262,22 +227,18 @@ void ClusterBomb::SignalCollision()
 }
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
-LanceCluster::LanceCluster() : Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb")
+ClusterLauncher::ClusterLauncher() : 
+  Weapon(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
+  cluster_bomb(game_loop, *this)
 {  
   m_name = _("ClusterBomb");  
 
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-  extra_params = new ClusterBombConfig();
+  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
-//-----------------------------------------------------------------------------
-
-bool LanceCluster::p_Shoot ()
+bool ClusterLauncher::p_Shoot ()
 {
-  // Initialise la grenade
   cluster_bomb.Tire (m_strength);
   camera.ChangeObjSuivi (&cluster_bomb, true, false);
   lst_objets.AjouteObjet (&cluster_bomb, true);
@@ -287,14 +248,12 @@ bool LanceCluster::p_Shoot ()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
-void LanceCluster::Explosion()
+void ClusterLauncher::Explosion()
 {
   m_is_active = false;
 
 #ifdef MSG_DBG
-  COUT_DBG << "LanceCluster::Explosion()" << std::endl;
+  COUT_DBG << "ClusterLauncher::Explosion()" << std::endl;
 #endif
   
   lst_objets.RetireObjet (&cluster_bomb);
@@ -307,9 +266,7 @@ void LanceCluster::Explosion()
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
-//-----------------------------------------------------------------------------
-
-void LanceCluster::Refresh()
+void ClusterLauncher::Refresh()
 {
   if (m_is_active)
   {
@@ -317,21 +274,9 @@ void LanceCluster::Refresh()
   } 
 }
 
-//-----------------------------------------------------------------------------
-
-void LanceCluster::p_Init()
-{
-  cluster_bomb.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
-}
-
-//-----------------------------------------------------------------------------
-
-ClusterBombConfig& LanceCluster::cfg() 
+ClusterBombConfig& ClusterLauncher::cfg() 
 { return static_cast<ClusterBombConfig&>(*extra_params); }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 ClusterBombConfig::ClusterBombConfig()
@@ -350,5 +295,3 @@ void ClusterBombConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitUint (elem, "nbr_fragments", nbr_fragments);
 }
 
-//-----------------------------------------------------------------------------
-} // namespace Wormux

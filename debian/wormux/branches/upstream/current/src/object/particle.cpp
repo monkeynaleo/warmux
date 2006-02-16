@@ -22,24 +22,20 @@
 #include "particle.h"
 #include <SDL.h>
 #include <map>
-#include "../object/objects_list.h"
+#include "../game/game_loop.h"
 #include "../game/time.h"
-#include "../tool/random.h"
-#include "../weapon/weapon_tools.h"
-#include "../include/app.h"
-#include "../tool/resource_manager.h"
-#include "../tool/Point.h"
 #include "../graphic/sprite.h"
+#include "../include/app.h"
+#include "../object/objects_list.h"
+#include "../tool/resource_manager.h"
+#include "../tool/random.h"
+#include "../tool/point.h"
+#include "../weapon/weapon_tools.h"
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 ParticleEngine global_particle_engine;
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-Particle::Particle() : PhysicalObj("Particle", 0.0)
+Particle::Particle(GameLoop &p_game_loop) :
+  PhysicalObj(p_game_loop, "Particle", 0.0)
 { 
   m_type = objUNBREAKABLE;
   m_wind_factor = 0.8;
@@ -48,10 +44,8 @@ Particle::Particle() : PhysicalObj("Particle", 0.0)
 
   m_initial_time_to_live = 20;
   m_left_time_to_live = 0;
-  m_last_refresh = Wormux::global_time.Read();
+  m_last_refresh = global_time.Read();
 }
-
-//-----------------------------------------------------------------------------
 
 void Particle::Draw()
 {
@@ -59,16 +53,13 @@ void Particle::Draw()
     image->Draw(GetX(),GetY());
 }
 
-//-----------------------------------------------------------------------------
-
 void Particle::Refresh()
 {
-  uint time = Wormux::global_time.Read() - m_last_refresh; 
+  uint time = global_time.Read() - m_last_refresh; 
 
   UpdatePosition ();
 
   image->Update();
-
 
   if (time >= m_time_between_scale) {  
 
@@ -94,21 +85,17 @@ void Particle::Refresh()
       image->Scale(1.0,1.0);
       image->SetAlpha(alpha);
     }
-    m_last_refresh = Wormux::global_time.Read() ;
+    m_last_refresh = global_time.Read() ;
   }
 }
-//-----------------------------------------------------------------------------
 
 bool Particle::StillUseful()
 {
   return (m_left_time_to_live > 0);
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-Smoke::Smoke() : Particle()
+Smoke::Smoke(GameLoop &p_game_loop) :
+  Particle(p_game_loop)
 {
   m_name="Smoke";
   SetMass(0.5);
@@ -118,8 +105,6 @@ Smoke::Smoke() : Particle()
   m_left_time_to_live = m_initial_time_to_live; 
   m_time_between_scale = 100;
 }
-
-//-----------------------------------------------------------------------------
 
 void Smoke::Init()
 {
@@ -133,11 +118,9 @@ void Smoke::Init()
   image->Scale(0.0,0.0);
   SetSize(1,1);
 }
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
-StarParticle::StarParticle() : Particle()
+StarParticle::StarParticle(GameLoop &p_game_loop) :
+  Particle(p_game_loop)
 {
   m_name="StarParticle";
   SetMass(0.5);  
@@ -147,8 +130,6 @@ StarParticle::StarParticle() : Particle()
   m_left_time_to_live = m_initial_time_to_live; 
   m_time_between_scale = 50;
 }
-
-//-----------------------------------------------------------------------------
 
 void StarParticle::Init()
 {
@@ -160,13 +141,10 @@ void StarParticle::Init()
   SetSize(1,1);  
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 ExplosiveWeaponConfig fire_cfg;
 
-FireParticle::FireParticle() : Particle()
+FireParticle::FireParticle(GameLoop &p_game_loop) :
+  Particle(p_game_loop)
 {
   m_name="FireParticle";
   SetMass(0.5);
@@ -180,8 +158,6 @@ FireParticle::FireParticle() : Particle()
   fire_cfg.damage = 1;
 }
 
-//-----------------------------------------------------------------------------
-
 void FireParticle::Init()
 {
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
@@ -193,37 +169,25 @@ void FireParticle::Init()
   SetSize(1,1);
 }
 
-//-----------------------------------------------------------------------------
-
 void FireParticle::SignalFallEnding()
 {
   Point2i pos = GetCenter();
-  AppliqueExplosion (pos, pos, impact, fire_cfg, NULL, 
-  		     "", false);
+  AppliqueExplosion (pos, pos, impact, fire_cfg, NULL, "", false);
   
   m_left_time_to_live = 0;
 }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 
 ParticleEngine::ParticleEngine()
 {
   type_particle = particle_SMOKE ;
   m_time_between_add = 0;
 }
-//-----------------------------------------------------------------------------
-
 
 ParticleEngine::ParticleEngine(particle_t type, uint time)
 {
   type_particle = type ;
   m_time_between_add = time ;
 }
-
-//-----------------------------------------------------------------------------
 
 void ParticleEngine::Refresh()
 {
@@ -246,14 +210,12 @@ void ParticleEngine::Refresh()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 void ParticleEngine::AddPeriodic(uint x, uint y, 
 				 double angle, double norme)
 {
   // time spent since last refresh (in milliseconds)
-  uint time = Wormux::global_time.Read() - m_last_refresh; 
-  uint tmp = Wormux::global_time.Read();
+  uint time = global_time.Read() - m_last_refresh; 
+  uint tmp = global_time.Read();
 
   uint delta = uint(m_time_between_add * double(RandomLong(3,40))/10);
   if (time >= delta) {
@@ -263,8 +225,6 @@ void ParticleEngine::AddPeriodic(uint x, uint y,
   
   Refresh();
 }
-
-//-----------------------------------------------------------------------------
 
 void ParticleEngine::AddNow(uint x, uint y, 
 			    uint nb_particles, particle_t type, 
@@ -277,11 +237,11 @@ void ParticleEngine::AddNow(uint x, uint y,
   for (uint i=0 ; i < nb_particles ; i++) {
 
     switch (type) {
-    case particle_SMOKE : particle = new Smoke();
+    case particle_SMOKE : particle = new Smoke(game_loop);
       break;
-    case particle_FIRE : particle = new FireParticle();
+    case particle_FIRE : particle = new FireParticle(game_loop);
       break;
-    case particle_STAR : particle = new StarParticle();
+    case particle_STAR : particle = new StarParticle(game_loop);
       break;
     default : particle = NULL;
       break;
@@ -303,19 +263,15 @@ void ParticleEngine::AddNow(uint x, uint y,
   }
 }
 
-//-----------------------------------------------------------------------------
-
 void ParticleEngine::Draw()
 {
   std::list<Particle *>::iterator it;
   // draw the particles
-  for(it=particles.begin(); it!=particles.end(); ++it) {
+  for(it=particles.begin(); it!=particles.end(); ++it){
     (*it)->Draw();
   }
 
 }
-
-//-----------------------------------------------------------------------------
 
 void ParticleEngine::Stop()
 {
@@ -327,9 +283,8 @@ void ParticleEngine::Stop()
     
     delete (*current);
     particles.erase(current);
-    if (it==end) break;
-    
+    if (it==end)
+      break;
   }
 }
 
-//-----------------------------------------------------------------------------

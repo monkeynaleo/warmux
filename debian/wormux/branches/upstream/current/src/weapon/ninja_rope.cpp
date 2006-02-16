@@ -20,14 +20,12 @@
  *****************************************************************************/
 
 #include "ninja_rope.h"
-//-----------------------------------------------------------------------------
 #include <math.h>
 #include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/game.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
-#include "../graphic/video.h"
 #include "../include/app.h"
 #include "../interface/mouse.h"
 #include "../map/camera.h"
@@ -48,10 +46,6 @@ int roundl(double nbr)
 }
 #endif
 */
-//-----------------------------------------------------------------------------
-
-namespace Wormux {
-NinjaRope ninjarope;
 
 const int DT_MVT  = 15 ; //delta_t bitween 2 up/down/left/right mvt
 const int DST_MIN = 6 ;  //dst_minimal bitween 2 nodes
@@ -99,17 +93,24 @@ bool find_first_contact_point (int x1, int y1, double angle, int length,
   return false ;
 }
 
-//-----------------------------------------------------------------------------
-
-NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope")
+NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new WeaponConfig())
 {
   m_name = _("NinjaRope");
   override_keys = true ;
   use_unit_on_first_shoot = false;
-  skin = NULL;
-}
+  skin = NULL;  
 
-//-----------------------------------------------------------------------------
+  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
+  m_hook_sprite->EnableRotationCache(32);
+  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjanode");
+
+  m_is_active = false;
+  m_attaching = false;
+  m_rope_attached = false;
+  go_left = false ;
+  go_right = false ;
+  delta_len = 0 ;
+}
 
 bool NinjaRope::p_Shoot()
 {
@@ -117,43 +118,38 @@ bool NinjaRope::p_Shoot()
 
   last_node = 0 ;
   m_attaching = true;
-  m_launch_time = Wormux::global_time.Read() ;
+  m_launch_time = global_time.Read() ;
   m_initial_angle = ActiveTeam().crosshair.GetAngleRad();
 
   last_mvt=global_time.Read();
   return true ;
 }
 
-//-----------------------------------------------------------------------------
 void NinjaRope::InitSkinSprite()
 {
   //Copy skins surface
-  SDL_Surface *new_surf = CreateRGBASurface(ActiveCharacter().GetWidth(), ActiveCharacter().GetHeight(), SDL_SWSURFACE|SDL_SRCALPHA);
+  Surface new_surf = Surface(ActiveCharacter().GetWidth(), ActiveCharacter().GetHeight(), SDL_SWSURFACE|SDL_SRCALPHA, true);
   // Disable per pixel alpha on the source surface
   // in order to properly copy the alpha chanel to the destination suface
   // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-  SDL_Surface* current_skin;
-  if(ActiveCharacter().GetDirection() == 1)
-    current_skin = ActiveCharacter().image->GetCurrentFrameObject().surface;
-  else
-    current_skin = ActiveCharacter().image->GetCurrentFrameObject().flipped_surface;
+  Surface current_skin;
+  current_skin = ActiveCharacter().image->GetSurface();
 
-  SDL_SetAlpha(current_skin, 0, 0);
-  SDL_BlitSurface(current_skin, NULL, new_surf, NULL);
+  current_skin.SetAlpha(0, 0);
+  new_surf.Blit(current_skin);
   // re-enable the per pixel alpha in the
-  SDL_SetAlpha(current_skin, SDL_SRCALPHA, 0);
+  current_skin.SetAlpha(SDL_SRCALPHA, 0);
 
   skin=new Sprite(new_surf);
   skin->EnableRotationCache(64);
   ActiveCharacter().Hide();
 }
-//-----------------------------------------------------------------------------
 
 void NinjaRope::TryAttachRope()
 {
   int x, y;
   uint length;
-  uint delta_time = Wormux::global_time.Read() - m_launch_time;
+  uint delta_time = global_time.Read() - m_launch_time;
   double angle ;
 
   // The rope is being launching. Increase the rope length and check
@@ -194,7 +190,7 @@ void NinjaRope::TryAttachRope()
       rope_node[0].y = m_fixation_y ;
       
       ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
-      m_hooked_time = Wormux::global_time.Read();
+      m_hooked_time = global_time.Read();
       InitSkinSprite();
     }
   else
@@ -204,15 +200,11 @@ void NinjaRope::TryAttachRope()
     }
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::UnattachRope()
 {
   ActiveCharacter().UnsetPhysFixationPoint() ;
   last_node = 0;
 }
-
-//-----------------------------------------------------------------------------
 
 bool NinjaRope::TryAddNode(int CurrentSense)
 {
@@ -267,8 +259,6 @@ bool NinjaRope::TryAddNode(int CurrentSense)
 
   return AddNode ;
 }
-
-//-----------------------------------------------------------------------------
 
 bool NinjaRope::TryBreakNode(int CurrentSense)
 {
@@ -336,8 +326,6 @@ bool NinjaRope::TryBreakNode(int CurrentSense)
   return BreakNode ;
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::NotifyMove(bool collision)
 {
   bool AddNode = false ;
@@ -378,10 +366,6 @@ void NinjaRope::NotifyMove(bool collision)
   while (TryBreakNode(CurrentSense)) ;
 }
 
-
-
-//-----------------------------------------------------------------------------
-
 void NinjaRope::Refresh()
 {
   if (!m_is_active)
@@ -390,7 +374,6 @@ void NinjaRope::Refresh()
   ActiveCharacter().UpdatePosition();
 }
 
-//-----------------------------------------------------------------------------
 void NinjaRope::GoUp()
 {
   if(global_time.Read()<last_mvt+DT_MVT)
@@ -403,7 +386,6 @@ void NinjaRope::GoUp()
   delta_len = 0 ;  
 }
 
-//-----------------------------------------------------------------------------
 void NinjaRope::GoDown()
 {
   if(global_time.Read()<last_mvt+DT_MVT)
@@ -418,8 +400,6 @@ void NinjaRope::GoDown()
   ActiveCharacter().UpdatePosition() ;
   delta_len = 0 ;  
 }
-
-//-----------------------------------------------------------------------------
 
 void NinjaRope::GoRight()
 {
@@ -437,8 +417,6 @@ void NinjaRope::StopRight()
   ActiveCharacter().SetExternForce(0,0);
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::GoLeft()
 {
   go_left = true ;
@@ -454,8 +432,6 @@ void NinjaRope::StopLeft()
 
   ActiveCharacter().SetExternForce(0,0);
 }
-
-//-----------------------------------------------------------------------------
 
 void NinjaRope::Draw()
 {
@@ -552,25 +528,6 @@ void NinjaRope::Draw()
 		     rope_node[0].y - m_hook_sprite->GetHeight()/2);
 }
 
-//-----------------------------------------------------------------------------
-
-void NinjaRope::p_Init()
-{
-  m_name="ninjarope";
-  icone = resource_manager.LoadImage(weapons_res_profile,"ninjarope_ico");
-  m_image = resource_manager.LoadSprite(weapons_res_profile,"ninjarope");
-  m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
-  m_hook_sprite->EnableRotationCache(32);
-  m_node_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjanode");
-
-  m_is_active = false;
-  m_attaching = false;
-  m_rope_attached = false;
-  go_left = false ;
-  go_right = false ;
-  delta_len = 0 ;
-}
-
 void NinjaRope::p_Deselect()
 {
   m_is_active = false;
@@ -583,8 +540,6 @@ void NinjaRope::p_Deselect()
     skin = NULL;
   }
 }
-
-//-----------------------------------------------------------------------------
 
 void NinjaRope::HandleKeyEvent(int action, int event_type)
 {
@@ -625,17 +580,12 @@ void NinjaRope::HandleKeyEvent(int action, int event_type)
   } ;
 }
 
-//-----------------------------------------------------------------------------
-
 void NinjaRope::SignalTurnEnd()
 {
   p_Deselect();
 }
 
-//-----------------------------------------------------------------------------
 EmptyWeaponConfig& NinjaRope::cfg()
-{ return static_cast<EmptyWeaponConfig&>(*extra_params); }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-} // namespace Wormux
+{
+  return static_cast<EmptyWeaponConfig&>(*extra_params);
+}

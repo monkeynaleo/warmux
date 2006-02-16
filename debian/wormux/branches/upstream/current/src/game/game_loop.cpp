@@ -43,7 +43,7 @@
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/wind.h"
-#include "../object/bonus_box.h"
+//#include "../object/bonus_box.h"
 #include "../object/objects_list.h"
 #include "../object/particle.h"
 #include "../sound/jukebox.h"
@@ -53,7 +53,6 @@
 #include "../tool/stats.h"
 #include "../weapon/weapons_list.h"
 
-using namespace Wormux;
 
 #define ENABLE_LIMIT_FPS    
 
@@ -72,7 +71,7 @@ void InitGameData_NetServer()
       action_handler.ExecActions();
       std::cout << msg << std::endl;
       CL_Display::clear(CL_Color::black);
-      police_grand.WriteCenterTop (video.GetWidth()/2, video.GetHeight()/2, msg);
+      police_grand.WriteCenterTop (app.video.GetWidth()/2, app.video.GetHeight()/2, msg);
       CL_Display::flip();
       CL_System::keep_alive(500);
     } while (network.state != Network::NETWORK_SERVER_INIT_GAME);
@@ -134,7 +133,7 @@ void InitGameData_NetServer()
   curseur_ver.Reset();
   global_time.Reset();
   mouse.Reset();
-  image_par_seconde.Reset();
+  fps.Reset();
   interface.Reset();
   game_messages.Reset();
   
@@ -166,7 +165,7 @@ void InitGameData_NetClient()
       std::cout << network.state << std::endl;
       std::cout << msg << std::endl;
       CL_Display::clear(CL_Color::black);
-      police_grand.WriteCenterTop (video.GetWidth()/2, video.GetHeight()/2, msg);
+      police_grand.WriteCenterTop (app.video.GetWidth()/2, app.video.GetHeight()/2, msg);
       CL_Display::flip();
       CL_System::keep_alive(300);
     } while (network.state != Network::NETWORK_PLAYING);
@@ -194,7 +193,7 @@ void InitGameData_Local()
   lst_objets.Reset();
 }
 
-void InitGameData()
+void InitGameData(GameLoop &game_loop)
 {
   global_time.Reset();
   
@@ -211,19 +210,21 @@ void InitGameData()
   mouse.Reset();
   clavier.Reset();
    
-  image_par_seconde.Reset();
+  game_loop.fps.Reset();
   interface.Reset();
   game_messages.Reset();
-  caisse.Init();
+  //bonus_box.Init();
 }
 
-void InitGame ()
+void InitGame (GameLoop &game_loop)
 {
   // Display loading screen
-  Sprite * loading_image=new Sprite(IMG_Load((config.data_dir+"menu/img/loading.png").c_str()));
-  loading_image->ScaleSize(app.sdlwindow->w, app.sdlwindow->h);
-  loading_image->Blit( app.sdlwindow, 0, 0);
-  SDL_Flip(app.sdlwindow);
+  Sprite * loading_image=new Sprite(Surface((config.data_dir+"menu/img/loading.png").c_str()));
+  loading_image->cache.EnableLastFrameCache();
+  loading_image->ScaleSize(app.video.window.GetWidth(), app.video.window.GetHeight());
+  loading_image->Blit( app.video.window, 0, 0);
+  app.video.Flip();
+
   delete loading_image;
 
   game.MessageLoading();
@@ -238,7 +239,7 @@ void InitGame ()
     game_initialise = true;
   }
 
-  InitGameData();
+  InitGameData(game_loop);
 
   // Init teams
 
@@ -315,7 +316,7 @@ void GameLoop::Refresh()
      }
    
   // How many frame by seconds ?
-  image_par_seconde.Refresh();
+  fps.Refresh();
 
   //--- D'abord ce qui pourrait modifier les données d'un ver ---
 
@@ -346,7 +347,7 @@ void GameLoop::Refresh()
     lst_objets.Refresh();
     global_particle_engine.Refresh();
     curseur_ver.Refresh();
-    caisse.Refresh();
+    //bonus_box.Refresh();
   }
   
   // Refresh the map
@@ -384,7 +385,7 @@ void GameLoop::Draw ()
   global_particle_engine.Draw();
   curseur_ver.Draw();
 
-  caisse.Draw();
+  //bonus_box.Draw();
 
   world.DrawWater();
 
@@ -395,7 +396,7 @@ void GameLoop::Draw ()
 
   world.DrawAuthorName();
 
-  image_par_seconde.Draw();
+  fps.Draw();
 
   StatStop("GameDraw:other");
 
@@ -411,14 +412,14 @@ void GameLoop::Draw ()
   StatStop("GameDraw:end");
 
   // Add one frame to the fps counter ;-)
-  image_par_seconde.AjouteUneImage();
+  fps.AddOneFrame();
 }
 
 void GameLoop::CallDraw()
 {
   Draw();
   StatStart("GameDraw:flip()");
-  SDL_Flip( app.sdlwindow);
+  app.video.Flip();
   StatStop("GameDraw:flip()");
 }
 
@@ -450,8 +451,8 @@ void GameLoop::Run()
 #ifdef ENABLE_LIMIT_FPS    
     delay = SDL_GetTicks()-start;
      
-    if (delay < video.GetSleepMaxFps())
-      sleep_fps = video.GetSleepMaxFps() - delay;
+    if (delay < app.video.GetSleepMaxFps())
+      sleep_fps = app.video.GetSleepMaxFps() - delay;
     else
       sleep_fps = 0;
     SDL_Delay(sleep_fps);
@@ -498,8 +499,8 @@ void GameLoop::RefreshClock()
             game.SetEndOfGameStatus( true );
           else { 
             ActiveTeam().AccessWeapon().Deselect();    
-            caisse.FaitApparaitre();
-            SetState (gamePLAYING);
+            //bonus_box.NewBonusBox(); 
+	    SetState(gamePLAYING);
             break;
           }
         } else {
@@ -541,7 +542,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
      character_already_chosen = false;
 
     // Prépare un tour pour un ver
-    FOR_ALL_LIVING_CHARACTERS(equipe,ver) ver -> PrepareTour();
+    FOR_ALL_LIVING_CHARACTERS(equipe,ver) ver -> PrepareTurn();
 
     // Changement d'équipe
     assert (!game.IsGameFinished());    

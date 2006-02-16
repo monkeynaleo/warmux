@@ -25,9 +25,9 @@
 #define _TILE_H
 
 #include <vector>
-#include "../tool/Rectangle.h"
+#include "../graphic/surface.h"
+#include "../tool/rectangle.h"
 
-struct SDL_Surface;
 class TileItem;
 
 class Tile
@@ -37,10 +37,10 @@ public:
   ~Tile ();
 
   // Dig a hole
-  void Dig (int ox, int oy, SDL_Surface *provider);
+  void Dig (int ox, int oy, Surface& provider);
    
   // Load an image
-  void LoadImage (SDL_Surface *ground_surface);
+  void LoadImage (Surface& ground_surface);
 
   // Get size
   unsigned int GetWidth () const { return width; }

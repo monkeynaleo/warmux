@@ -37,7 +37,7 @@ class Box : public Widget
   uint w_border, h_border;
 
  public:
-  Box(uint x, uint y, uint w, uint h, bool _visible=true);
+  Box(int x, int y, uint w, uint h, bool _visible=true);
   virtual ~Box();
 
   void Draw (uint mouse_x, uint mouse_y);
@@ -53,9 +53,9 @@ class Box : public Widget
 class VBox : public Box
 {
  public:
-  VBox(uint x, uint y, uint w, bool _visible=true);
+  VBox(int x, int y, uint w, bool _visible=true);
   void AddWidget(Widget * a_widget);
-  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+  void SetSizePosition(int _x, int _y, uint _w, uint _h);
 };
 
 //-----------------------------------------------------------------------------
@@ -63,9 +63,9 @@ class VBox : public Box
 class HBox : public Box
 {
  public:
-  HBox(uint x, uint y, uint h, bool _visible=true);
+  HBox(int x, int y, uint h, bool _visible=true);
   void AddWidget(Widget * a_widget);  
-  void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+  void SetSizePosition(int _x, int _y, uint _w, uint _h);
 };
 
 //-----------------------------------------------------------------------------

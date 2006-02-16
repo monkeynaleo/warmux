@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "cursor.h"
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "../game/game_loop.h"
 #include "../game/time.h"
@@ -29,20 +28,17 @@
 #include "../map/camera.h"
 #include "../object/physical_obj.h"
 #include "../team/teams_list.h" // ActiveCharacter()
-#include "../tool/Point.h"
+#include "../tool/point.h"
 #include "../tool/resource_manager.h"
 
-using namespace Wormux;
-//-----------------------------------------------------------------------------
+
 const uint show_hide_time = 200; //time to show and hide the arrow
 const uint y_min = 20; //number of pixels between the bottom of the arrow and the top of the sprite
 const uint y_max = 90; //number of pixels between the bottom of the arrow and the top of the sprite
                         //when the arrow is at the top of its movement
 const uint rebound_time = 1000; //Duration of a full rebound
 
-//-----------------------------------------------------------------------------
 CurseurVer curseur_ver;
-//-----------------------------------------------------------------------------
 
 CurseurVer::CurseurVer()
 {
@@ -59,8 +55,6 @@ CurseurVer::~CurseurVer()
   if(image) delete image;
 }
 
-//-----------------------------------------------------------------------------
-
 // Dessine le curseur
 void CurseurVer::Draw()
 {
@@ -76,8 +70,6 @@ void CurseurVer::Draw()
   image->Draw(x,y+dy);
 }
 
-//-----------------------------------------------------------------------------
-
 void CurseurVer::Refresh()
 {
   if (!IsDisplayed()) return;
@@ -85,38 +77,36 @@ void CurseurVer::Refresh()
   image->Scale(1.0,1.0);
 
   //The arrow is appearing:
-  if( actif && Wormux::global_time.Read() < time_begin_anim + show_hide_time )
+  if( actif && global_time.Read() < time_begin_anim + show_hide_time )
   {
-    dy = (int)((camera.GetY() - ActiveCharacter().GetY()) * (1.0 - (Wormux::global_time.Read() - time_begin_anim) / (float)show_hide_time));
+    dy = (int)((camera.GetY() - ActiveCharacter().GetY()) * (1.0 - (global_time.Read() - time_begin_anim) / (float)show_hide_time));
     return;
   }
 
   //If we want to hide the cursor, we have to wait the end of the current rebound to make the cursor disappear
   if(want_hide)
   {
-    if( ((Wormux::global_time.Read() - (time_begin_anim + show_hide_time)) % rebound_time < rebound_time / 2)
+    if( ((global_time.Read() - (time_begin_anim + show_hide_time)) % rebound_time < rebound_time / 2)
     &&  ((last_update                - (time_begin_anim + show_hide_time)) % rebound_time > rebound_time / 2))
     {
       //We are at the end of the rebound
       actif = false;
-      time_begin_anim = Wormux::global_time.Read();
+      time_begin_anim = global_time.Read();
     }
   }
 
   //The arrow is disappearing:
-  if( !actif && Wormux::global_time.Read() < time_begin_anim + show_hide_time )
+  if( !actif && global_time.Read() < time_begin_anim + show_hide_time )
   {
-    dy = (int)((camera.GetY() - ActiveCharacter().GetY()) * ((Wormux::global_time.Read() - time_begin_anim) / (float)show_hide_time));
+    dy = (int)((camera.GetY() - ActiveCharacter().GetY()) * ((global_time.Read() - time_begin_anim) / (float)show_hide_time));
     return;
   }
 
   //The arrow is rebounding:
   Rebound(image, dy, time_begin_anim + show_hide_time, rebound_time, -y_max - (-y_min));
 
-  last_update = Wormux::global_time.Read();
+  last_update = global_time.Read();
 }
-
-//-----------------------------------------------------------------------------
 
 // Cache le curseur
 void CurseurVer::Cache()
@@ -125,14 +115,12 @@ void CurseurVer::Cache()
   want_hide = true;
 }
 
-//-----------------------------------------------------------------------------
 void CurseurVer::Init()
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   image = resource_manager.LoadSprite( res, "gfx/curseur");
 }
 
-//-----------------------------------------------------------------------------
 void CurseurVer::Reset()
 {
   actif = false;
@@ -140,23 +128,22 @@ void CurseurVer::Reset()
   obj_designe = NULL;
 }
 
-//-----------------------------------------------------------------------------
 void CurseurVer::SuitVerActif()
 {
   PointeObj(&ActiveCharacter());
 }
 
-//-----------------------------------------------------------------------------
 void CurseurVer::PointeObj (PhysicalObj *obj)
 {
-  if(actif && obj==obj_designe) return;
+  if(actif && obj==obj_designe)
+    return;
   obj_designe = obj;
   actif = true;
   want_hide = false;
-  time_begin_anim = Wormux::global_time.Read();
+  time_begin_anim = global_time.Read();
 }
 
-//-----------------------------------------------------------------------------
 // Are we displaying the arrow on the screen ?
-bool CurseurVer::IsDisplayed() const { return actif || (Wormux::global_time.Read() < time_begin_anim + show_hide_time); }
-//-----------------------------------------------------------------------------
+bool CurseurVer::IsDisplayed() const {
+  return actif || (global_time.Read() < time_begin_anim + show_hide_time);
+}

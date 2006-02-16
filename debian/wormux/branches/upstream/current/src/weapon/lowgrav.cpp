@@ -30,12 +30,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-//-----------------------------------------------------------------------------
-namespace Wormux 
-{
-LowGrav lowgrav;
-//-----------------------------------------------------------------------------
-
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
 
@@ -43,21 +37,13 @@ const double LOW_GRAVITY_FACTOR = 0.4;
 
 //-----------------------------------------------------------------------------
 
-LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav")
+LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav", 
+			    new WeaponConfig(), NEVER_VISIBLE)
 {
   m_name = _("LowGrav");
-  m_visibility = NEVER_VISIBLE;
 
   override_keys = true ;
-  use_unit_on_first_shoot = false;
-}
-
-//-----------------------------------------------------------------------------
-
-void LowGrav::p_Init()
-{
-  m_name = _("lowgrav");
-  icone = resource_manager.LoadImage(weapons_res_profile,"lowgrav_ico");
+  use_unit_on_first_shoot = false;  
 }
 
 //-----------------------------------------------------------------------------
@@ -115,4 +101,3 @@ void LowGrav::SignalTurnEnd()
   p_Deselect();
 }
 
-} // namespace Wormux

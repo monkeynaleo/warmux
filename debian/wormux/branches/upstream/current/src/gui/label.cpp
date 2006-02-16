@@ -23,11 +23,10 @@
 //-----------------------------------------------------------------------------
 #include "../include/app.h"
 
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 
-Label::Label (const std::string &label, uint x, uint y, uint w, Font& _font) :
+Label::Label (const std::string &label, int x, int y, uint w, Font& _font) :
   Widget(x, y, w, _font.GetHeight())
 {
   txt_label = new Text(label, white_color, &_font);
@@ -48,7 +47,7 @@ void Label::Draw (uint mouse_x, uint mouse_y)
 }
 
 //-----------------------------------------------------------------------------
-void Label::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+void Label::SetSizePosition(int _x, int _y, uint _w, uint _h)
 {
   StdSetSizePosition(_x, _y, _w, _h);
 }

@@ -23,36 +23,28 @@
 
 #ifndef GUN_H
 #define GUN_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
-#include "../include/base.h"
-#include "weapon.h"
-#include "../tool/Point.h"
-#include <vector>
 
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
+#include <SDL.h>
+#include <vector>
+#include "weapon.h"
+#include "../include/base.h"
+#include "../tool/point.h"
 
 class BalleGun : public WeaponProjectile
 {
 public:
-  BalleGun();
+  BalleGun(GameLoop &game_loop);
   void Tire();
-  void Init();
 protected:
   void SignalCollision();
 };
-
-//-----------------------------------------------------------------------------
 
 class Gun : public Weapon
 {
 private:
   uint temps_capture;
   std::vector<Point2i> lst_points;
-  SDL_Surface *impact;
-  void p_Init();
+  Surface impact;
   bool p_Shoot();
 
 public:  
@@ -64,7 +56,4 @@ public:
   WeaponConfig& cfg();
 };
 
-extern Gun gun;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif

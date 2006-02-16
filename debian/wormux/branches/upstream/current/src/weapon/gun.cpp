@@ -22,7 +22,6 @@
  *****************************************************************************/
 
 #include "../weapon/gun.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include "../game/game_loop.h"
 #include "../map/map.h"
@@ -34,29 +33,15 @@
 #include "../interface/game_msg.h"
 #include "../weapon/gun.h"
 #include "../weapon/weapon_tools.h"
-using namespace std;
-//-----------------------------------------------------------------------------
-namespace Wormux {
-
-Gun gun;
 
 const uint VITESSE_CAPTURE_POS_BALLE = 10;
 const uint BULLET_SPEED = 20;
 const double BULLET_BLAST = 1;
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-BalleGun::BalleGun() : WeaponProjectile("balle_gun")
+BalleGun::BalleGun(GameLoop &p_game_loop) :
+  WeaponProjectile(p_game_loop, "balle_gun")
 { 
   touche_ver_objet = true; 
-}
-
-//-----------------------------------------------------------------------------
-
-void BalleGun::Init()
-{
   image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
   SetSize (image->GetWidth(), image->GetHeight());
   SetMass (0.02);
@@ -64,8 +49,6 @@ void BalleGun::Init()
   SetAirResistFactor(0);
   m_gravity_factor = 0.0;
 }
-
-//-----------------------------------------------------------------------------
 
 void BalleGun::Tire()
 {
@@ -80,8 +63,6 @@ void BalleGun::Tire()
   SetSpeed (BULLET_SPEED, ActiveTeam().crosshair.GetAngleRad());
 }
 
-//-----------------------------------------------------------------------------
-
 void BalleGun::SignalCollision()
 { 
   if ((dernier_ver_touche == NULL) && (dernier_obj_touche == NULL))
@@ -91,25 +72,13 @@ void BalleGun::SignalCollision()
   is_active = false; 
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
-Gun::Gun() : Weapon(WEAPON_GUN, "gun")
+Gun::Gun() :
+  Weapon(WEAPON_GUN, "gun", new WeaponConfig()),
+  balle(game_loop)
 {
   m_name = _("Gun");
-  extra_params = new WeaponConfig(); 
-}
-
-//-----------------------------------------------------------------------------
-
-void Gun::p_Init()
-{
-  balle.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "gun_impact");  
 }
-
-//-----------------------------------------------------------------------------
 
 void Gun::Draw ()
 {
@@ -138,14 +107,11 @@ void Gun::Draw ()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 bool Gun::p_Shoot()
 {
   if (m_is_active)
     return false;
 
-  // Initialise la balle
   balle.Tire();
 
   // Temps de capture
@@ -158,8 +124,6 @@ bool Gun::p_Shoot()
 
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 void Gun::Refresh()
 {
@@ -190,17 +154,20 @@ void Gun::Refresh()
 	  Character* ver = balle.LitDernierVerTouche();
 	  PhysicalObj* obj = balle.LitDernierObjTouche();
 	  if (ver) obj = ver;
-	  if (ver) ver -> SetEnergyDelta (-cfg().damage);
+	  if (ver)
+          {
+            ver -> SetEnergyDelta (-cfg().damage);
+          }
 	  if (obj) 
-	    {
-	      obj -> AddSpeed (BULLET_BLAST, balle.GetSpeedAngle());
-	    }
+          {
+            obj -> AddSpeed (BULLET_BLAST, balle.GetSpeedAngle());
+          }
 	  
 	  // Creuse le monde
 	  if (!obj)
 	    {
-	       world.Creuse (balle.GetX() - impact->w/2,
-			    balle.GetY() - impact->h/2,
+	       world.Creuse (balle.GetX() - impact.GetWidth()/2,
+			    balle.GetY() - impact.GetHeight()/2,
 			    impact);
 	    }
 	}
@@ -209,10 +176,5 @@ void Gun::Refresh()
     }
 }
 
-//-----------------------------------------------------------------------------
-
 WeaponConfig& Gun::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
-
-//-----------------------------------------------------------------------------
-} // namespace Wormux

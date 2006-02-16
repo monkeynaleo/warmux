@@ -22,31 +22,33 @@
 #ifndef FPS_H
 #define FPS_H
 //-----------------------------------------------------------------------------
-#include "text.h"
 #include <list>
+#include "text.h"
 //-----------------------------------------------------------------------------
 
-class ImageParSeconde
+class FramePerSecond
 {
 private:
-  int nbr_val_valides;
-  double moyenne;
-  std::list<uint> nbr_img;
-  uint temps_seconde;
-  Text* fps_txt;
+  // Minimum number of values needed to compute the average
+  static const uint MIN_NB_VALUES;
+
+  int nb_valid_values;
+  double average;
+  std::list<uint> nb_frames;
+  uint time_in_second;
+  Text* text;
 
 public:
-  bool affiche;
+  bool display;
   
 public:
-  ImageParSeconde();
-  ~ImageParSeconde();
+  FramePerSecond();
+  ~FramePerSecond();
   void Reset();
-  void AjouteUneImage();
+  void AddOneFrame();
   void Refresh();
   void Draw();
 };
 
-extern ImageParSeconde image_par_seconde;
 //-----------------------------------------------------------------------------
 #endif

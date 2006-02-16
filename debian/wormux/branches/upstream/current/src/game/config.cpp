@@ -26,9 +26,15 @@
 #include <sstream>
 #include <iostream>
 #include <sys/stat.h>
+#include <errno.h>
+#ifdef WIN32
+#  include <direct.h>
+#endif
 #include "game_mode.h"
+#include "errno.h"
 #include "../graphic/video.h"
 #include "../include/action.h"
+#include "../include/app.h"
 #include "../interface/keyboard.h"
 #include "../include/constant.h"
 #include "../map/maps_list.h"
@@ -39,15 +45,8 @@
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
 #include "../weapon/weapons_list.h"
-namespace Wormux 
-{
-Config config;
 
-#ifndef WIN32
-const std::string REP_CONFIG="~/.wormux/";
-#else
-const std::string REP_CONFIG="";
-#endif
+Config config;
 
 const std::string NOMFICH="config.xml";
 
@@ -83,7 +82,7 @@ Config::Config()
 #ifndef WIN32
   personal_dir = GetHome()+"/.wormux/";
 #else
-  personal_dir ="";
+  personal_dir = GetHome()+"\\Wormux\\";
 #endif
 }
 
@@ -107,9 +106,6 @@ bool Config::ChargeVraiment()
     // Charge la configuration XML
     LitDocXml doc;
     m_nomfich = personal_dir+NOMFICH;
-#ifdef __MINGW32__
-printf("charge %s",m_nomfich.c_str());
-#endif
     if (!doc.Charge (m_nomfich)) return false;
     if (!ChargeXml (doc.racine())) return false;
     m_xml_charge = true;
@@ -160,7 +156,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   {
     uint max_fps;
     if (LitDocXml::LitUint (elem, "max_fps", max_fps)) 
-      video.SetMaxFps(max_fps);
+      app.video.SetMaxFps(max_fps);
 
     LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);  
     LitDocXml::LitBool (elem, "display_energy_character", display_energy_character);
@@ -207,7 +203,7 @@ void Config::SetKeyboardConfig()
 	clavier.SetKeyAction(SDLK_UP,			ACTION_UP);
 	clavier.SetKeyAction(SDLK_DOWN,	ACTION_DOWN);
 	clavier.SetKeyAction(SDLK_RETURN,	ACTION_JUMP);
-	clavier.SetKeyAction(SDLK_BACKSPACE, ACTION_SUPER_JUMP);
+	clavier.SetKeyAction(SDLK_BACKSPACE, ACTION_HIGH_JUMP);
 	clavier.SetKeyAction(SDLK_SPACE, ACTION_SHOOT);
 	clavier.SetKeyAction(SDLK_TAB, ACTION_CHANGE_CHARACTER);
 	clavier.SetKeyAction(SDLK_ESCAPE, ACTION_QUIT);
@@ -255,20 +251,21 @@ void Config::Applique()
 
 bool Config::Sauve()
 {
-  // Le répertoire de config n'existe pas ? le créer
-  std::string rep = TranslateDirectory(REP_CONFIG);
+  std::string rep = personal_dir;
+  
+  // Create the directory if it doesn't exist
 #ifndef WIN32
-  if (!IsFileExist (rep))
-  {
-    if (mkdir (rep.c_str(), 0750) != 0)
-    {
-      std::cout << "o Erreur lors de la création répertoire " << rep 
-		<< ", impossible de créer le fichier de configuration." 
-		<< std::endl;
-      return false;
-    }
-  }
+   if (mkdir (personal_dir.c_str(), 0750) != 0 && errno != EEXIST)
+#else
+  if (_mkdir (personal_dir.c_str()) != 0 && errno != EEXIST)
 #endif
+  {
+    std::cerr << "o " 
+      << Format(_("Error while creating directory \"%s\": unable to store configuration file."), 
+          rep.c_str())
+      << std::endl;
+    return false;
+  }
 
   if (!SauveXml())
   {
@@ -308,12 +305,12 @@ bool Config::SauveXml()
   doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));  
   doc.EcritBalise (noeud_video, "display_energy_character", ulong2str(display_energy_character));
   doc.EcritBalise (noeud_video, "display_name_character", ulong2str(display_name_character));
-  doc.EcritBalise (noeud_video, "width", ulong2str(video.GetWidth()));
-  doc.EcritBalise (noeud_video, "height", ulong2str(video.GetHeight()));
+  doc.EcritBalise (noeud_video, "width", ulong2str(app.video.window.GetWidth()));
+  doc.EcritBalise (noeud_video, "height", ulong2str(app.video.window.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 
-		   ulong2str(static_cast<uint>(video.IsFullScreen())) );	  
+		   ulong2str(static_cast<uint>(app.video.IsFullScreen())) );	  
   doc.EcritBalise (noeud_video, "max_fps", 
-          long2str(static_cast<int>(video.GetMaxFps())));
+          long2str(static_cast<int>(app.video.GetMaxFps())));
 
   if ( transparency == ALPHA )
     doc.EcritBalise (noeud_video, "transparency", "alpha");
@@ -337,4 +334,3 @@ std::string Config::GetWormuxPersonalDir() const {
   return personal_dir;
 }
 
-}

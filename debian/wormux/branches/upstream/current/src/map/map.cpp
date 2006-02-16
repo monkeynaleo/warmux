@@ -20,30 +20,26 @@
  *****************************************************************************/
 
 #include "map.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include "camera.h"
 #include "maps_list.h"
 #include "wind.h"
 #include "../game/config.h"
 #include "../game/time.h"
+#include "../graphic/surface.h"
 #include "../include/constant.h"
 #include "../include/global.h"
 #include "../object/bonus_box.h"
 #include "../tool/i18n.h"
 #include "../tool/stats.h"
 
-using namespace std;
-using namespace Wormux;
-//-----------------------------------------------------------------------------
 const double DST_MIN_ENTRE_VERS = 50.0;
 
 const uint AUTHOR_INFO_TIME = 5000; // ms
 const uint AUTHOR_INFO_X = 100;
 const uint AUTHOR_INFO_Y = 50;
-//-----------------------------------------------------------------------------
+
 Map world;
-//-----------------------------------------------------------------------------
 
 Map::Map()
 {
@@ -63,9 +59,6 @@ Map::~Map()
   delete to_redraw_particles_now;
 }
 
-
-//-----------------------------------------------------------------------------
-
 void Map::Reset()
 {
   sky.Reset();
@@ -75,7 +68,7 @@ void Map::Reset()
 
   // Configure le jeu selon que le terrain soit ouvert ou non
   bool ouvert = ground.EstOuvert();
-  caisse.Active (ouvert);
+  bonus_box.Active (ouvert);
   config.exterieur_monde_vide = ouvert;
 
   delete author_info1; author_info1 = NULL;
@@ -87,15 +80,11 @@ void Map::Reset()
   to_redraw_particles_now->clear();
 }
 
-//-----------------------------------------------------------------------------
-
 void Map::Refresh()
 {
   water.Refresh();
   wind.Refresh();
 }
-
-//-----------------------------------------------------------------------------
 
 void Map::FreeMem() 
 { 
@@ -109,23 +98,17 @@ void Map::FreeMem()
   to_redraw_particles_now->clear();
 }
 
-//-----------------------------------------------------------------------------
-
 void Map::ToRedrawOnMap(Rectanglei r)
 {
   to_redraw->push_back(r);
-
 }
-
-//-----------------------------------------------------------------------------
 
 void Map::ToRedrawOnScreen(Rectanglei r)
 {
-  to_redraw->push_back(Rectanglei(r.x+camera.GetX(), 
-				  r.y+camera.GetY(), r.w, r.h));
+  r.SetPositionX( r.GetPositionX() + camera.GetX() );
+  r.SetPositionY( r.GetPositionY() + camera.GetY() );
+  to_redraw->push_back( r );
 }
-
-//-----------------------------------------------------------------------------
 
 void Map::SwitchDrawingCache()
 {
@@ -135,8 +118,6 @@ void Map::SwitchDrawingCache()
   to_redraw->clear();
 }
 
-//-----------------------------------------------------------------------------
-
 void Map::SwitchDrawingCacheParticles()
 {
   std::list<Rectanglei> *tmp = to_redraw_particles_now;
@@ -145,15 +126,11 @@ void Map::SwitchDrawingCacheParticles()
   to_redraw_particles->clear();
 }
 
-//-----------------------------------------------------------------------------
-
-void Map::Creuse (uint x, uint y, SDL_Surface *surface)
+void Map::Creuse (uint x, uint y, Surface& surface)
 {
    ground.Dig (x, y, surface);
-   to_redraw->push_back(Rectanglei(x, y, surface->w, surface->h));
+   to_redraw->push_back(Rectanglei(x, y, surface.GetWidth(), surface.GetHeight()));
 }
-
-//-----------------------------------------------------------------------------
 
 void Map::DrawSky()
 { 
@@ -162,12 +139,8 @@ void Map::DrawSky()
   sky.Draw(); 
 }
 
-//-----------------------------------------------------------------------------
-
 void Map::DrawWater()
 { water.Draw(); }
-
-//-----------------------------------------------------------------------------
 
 void Map::Draw()
 { 
@@ -181,48 +154,52 @@ void Map::Draw()
   ground.Draw(); 
 }
 
-//-----------------------------------------------------------------------------
+bool Map::EstHorsMondeX(int x) const{
+  if( TerrainActif().infinite_bg )
+    return false;
 
-bool Map::EstHorsMondeX(int x) const
-{ return ((x < 0) || ((int)GetWidth() <= x)) && !TerrainActif().infinite_bg; }
+  return (x < 0) || ((int)GetWidth() <= x);
+}
 
-bool Map::EstHorsMondeY(int y) const
-{ return (((y < 0) && !TerrainActif().infinite_bg) || ((int)GetHeight() <= y)); }
+bool Map::EstHorsMondeY(int y) const{
+  if( TerrainActif().infinite_bg )
+    return y < 0;
+  
+  return (y < 0) || ((int)GetHeight() <= y);
+}
 
-bool Map::EstHorsMondeXlarg(int x, uint larg) const
-{ return ((x+(int)larg-1 < 0) || ((int)GetWidth() <= x)) && !TerrainActif().infinite_bg; }
+bool Map::EstHorsMondeXlarg(int x, uint larg) const{
+  if( TerrainActif().infinite_bg )
+  	return false;
 
-bool Map::EstHorsMondeYhaut(int y, uint haut) const
-{ return ((y+(int)haut-1 < 0  && !TerrainActif().infinite_bg) || ((int)GetHeight() <= y)); }
+  return (x + (int)larg - 1 < 0) || ((int)GetWidth() <= x);
+}
 
-bool Map::EstHorsMondeXY(int x, int y) const
-{ return EstHorsMondeX(x) || EstHorsMondeY(y) && !TerrainActif().infinite_bg; }
+bool Map::EstHorsMondeYhaut(int y, uint haut) const{ 
+  return ((y + (int)haut - 1 < 0  && !TerrainActif().infinite_bg) || ((int)GetHeight() <= y));
+}
 
-bool Map::EstHorsMonde (const Point2i &pos) const
-{ return EstHorsMondeXY (pos.x, pos.y); }
+bool Map::EstHorsMondeXY(int x, int y) const{
+  return EstHorsMondeX(x) || EstHorsMondeY(y);
+}
 
-//-----------------------------------------------------------------------------
+bool Map::EstHorsMonde (const Point2i &pos) const{
+  return EstHorsMondeXY(pos.x, pos.y);
+}
 
-bool Map::EstDansVide(int x, int y)
-{ return ground.EstDansVide (x,y); }
-
-//-----------------------------------------------------------------------------
+bool Map::EstDansVide(int x, int y){
+  return ground.EstDansVide(x, y);
+}
 
 bool Map::LigneH_EstDansVide (int ox, int y, int width)
 { 
   // Traite une ligne
   for (int i=0; i<width; i++) 
-     {
 	if (!EstDansVide(ox+i, (uint)y)) 
-	  {
-	     return false;
-	  }
-     }
+	  return false;
    
    return true;
 }
-
-//-----------------------------------------------------------------------------
 
 bool Map::LigneV_EstDansVide (int x, int top, int bottom)
 { 
@@ -242,64 +219,48 @@ bool Map::LigneV_EstDansVide (int x, int top, int bottom)
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 bool Map::RectEstDansVide (const Rectanglei &prect)
 {
    Rectanglei rect(prect);
 
    // Clip rectangle in the the world area
-   rect.Clip( Rectanglei(0,0,GetWidth(),GetHeight())); 
+   rect.Clip( Rectanglei(0, 0, GetWidth(), GetHeight()) ); 
    
    // Check line by line
-   for (int i=rect.y; i < rect.y+rect.h; i++)
-     {
-	if (!LigneH_EstDansVide (rect.x, i, rect.w))
-	  {
-	     return false;
-	  }
-     }
+   for( int i = rect.GetPositionY(); i < rect.GetPositionY() + rect.GetSizeY(); i++ )
+     if( !LigneH_EstDansVide (rect.GetPositionX(), i, rect.GetSizeX()) )
+       return false;
    
    return true;
 }
 
-//-----------------------------------------------------------------------------
-
 bool Map::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
 {
-  return LigneH_EstDansVide (obj.GetTestRect().x+dx,
-			     obj.GetTestRect().y+obj.GetTestRect().h+dy,
-			     obj.GetTestRect().w);
+  return LigneH_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
+			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy,
+			     obj.GetTestRect().GetSizeX());
 }
-
-//-----------------------------------------------------------------------------
 
 bool Map::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
 {
-  return LigneH_EstDansVide (obj.GetTestRect().x+dx,
-			     obj.GetTestRect().y+dy,
-			     obj.GetTestRect().w);
+  return LigneH_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
+			     obj.GetTestRect().GetPositionY() + dy,
+			     obj.GetTestRect().GetSizeX());
 }
-
-//-----------------------------------------------------------------------------
 
 bool Map::IsInVacuum_left (const PhysicalObj &obj, int dx, int dy)
 {
-  return LigneV_EstDansVide (obj.GetTestRect().x+dx,
-			     obj.GetTestRect().y+dy,
-			     obj.GetTestRect().y+obj.GetTestRect().h+dy);
+  return LigneV_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
+			     obj.GetTestRect().GetPositionY() + dy,
+			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }
-
-//-----------------------------------------------------------------------------
 
 bool Map::IsInVacuum_right (const PhysicalObj &obj, int dx, int dy)
 {
-  return LigneV_EstDansVide (obj.GetTestRect().x+obj.GetTestRect().w+dx,
-			     obj.GetTestRect().y+dy,
-			     obj.GetTestRect().y+obj.GetTestRect().h+dy);
+  return LigneV_EstDansVide (obj.GetTestRect().GetPositionX() + obj.GetTestRect().GetSizeX() + dx,
+			     obj.GetTestRect().GetPositionY() + dy,
+			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }
-
-//-----------------------------------------------------------------------------
 
 void Map::DrawAuthorName()
 {
@@ -325,4 +286,3 @@ void Map::DrawAuthorName()
   author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+global().small_font().GetHeight());
 }
 
-//-----------------------------------------------------------------------------

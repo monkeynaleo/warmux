@@ -326,6 +326,13 @@
 
 <section title="Package mainteners">
   <author>
+    <name>Emily Brantley</name>
+    <email>koneko.em AT gmail.com</email>
+    <country>United States</country>
+    <description>Create package of Wormux 0.7beta2 for Fedora Core 4.</description>
+  </author>
+
+  <author>
     <name>Michael Prager</name>
     <email>X_X_L AT gmx.net</email>
     <country>Germany</country>
@@ -357,7 +364,7 @@
 
   <author>
     <name>Julien Catalano</name>
-    <email>julien.catalano AT free.fr</email>
+    <email>julien.catalano AT gmail.com</email>
     <country>France</country>
     <description>Mandrake distribution.</description>
   </author>

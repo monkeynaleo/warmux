@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "weapon_tools.h"
-//-----------------------------------------------------------------------------
+#include "../graphic/surface.h"
 #include "../graphic/video.h"
 #include "../interface/interface.h"
 #include "../map/camera.h"
@@ -32,8 +32,6 @@
 #include "../team/macro.h"
 #include "../tool/math_tools.h"
 
-//-----------------------------------------------------------------------------
-
 #ifdef DEBUG
 //#  define DEBUG_EXPLOSION
 #  define COUT_DBG cout << "[Explosion] "
@@ -41,12 +39,9 @@
 
 Profile *weapons_res_profile = NULL;
 
-//-----------------------------------------------------------------------------
-
-
 void AppliqueExplosion (const Point2i &explosion, 
 			const Point2i &trou, 
-			SDL_Surface *impact,
+			Surface &impact,
 			const ExplosiveWeaponConfig &config,
 			PhysicalObj *obj_exclu,
 			const std::string& son,
@@ -56,7 +51,7 @@ void AppliqueExplosion (const Point2i &explosion,
   bool cam_follow_character = false; //Set to true if an explosion is applied to a character. Then the camera shouldn't be following an object
 
   // Make a hole in the ground
-  world.Creuse (trou.x-impact->w/2, trou.y-impact->h/2,impact);   
+  world.Creuse (trou.x-impact.GetWidth()/2, trou.y-impact.GetHeight()/2, impact);
    
   // Play a sound
   jukebox.Play ("share", son);
@@ -149,10 +144,9 @@ void AppliqueExplosion (const Point2i &explosion,
 
   // Do we need to generate some fire particles ?
   if (fire_particle) {
-     global_particle_engine.AddNow ( trou.x - impact->w/2, trou.y-impact->h/2,
+     global_particle_engine.AddNow ( trou.x - impact.GetWidth()/2, trou.y-impact.GetHeight()/2,
 				     5, particle_FIRE );
   }
 
 }
 
-//-----------------------------------------------------------------------------

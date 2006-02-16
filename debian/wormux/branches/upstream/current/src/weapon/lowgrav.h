@@ -24,15 +24,12 @@
 //-----------------------------------------------------------------------------
 #include "weapon.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class LowGrav : public Weapon
 {
 public:
   LowGrav();
   void Reset();
-  void p_Init();
   void Refresh();
   void p_Deselect();
   void HandleKeyEvent(int action, int event_type);
@@ -41,7 +38,5 @@ public:
   void Draw();
 };
 
-extern LowGrav lowgrav;
 //-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif

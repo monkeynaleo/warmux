@@ -24,8 +24,6 @@
 //-----------------------------------------------------------------------------
 #include "weapon.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
 
 class Parachute : public Weapon
 {
@@ -38,7 +36,6 @@ private:
 
 public:
   Parachute();
-  void p_Init();
   void p_Select();
   void p_Deselect();
   void Refresh();
@@ -50,7 +47,5 @@ public:
   void Desactivate();
 };
 
- extern Parachute parachute;
 //-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif

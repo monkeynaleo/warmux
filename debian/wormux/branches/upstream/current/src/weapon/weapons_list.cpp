@@ -30,7 +30,6 @@
 #include "../object/objects_list.h"
 #include "../map/camera.h"
 #include "../team/macro.h"
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 WeaponsList weapons_list;
 //-----------------------------------------------------------------------------
@@ -54,12 +53,11 @@ WeaponsList::~WeaponsList()
 
 //-----------------------------------------------------------------------------
 
-void WeaponsList::InitAndAddToList(Weapon* arme, uint num_sort)
+void WeaponsList::AddToList(Weapon* arme, uint num_sort)
 {
-  arme->Init();
-
   // insert the pointer
   m_weapons_list.push_back(arme);
+  todelete.push_back(arme);
 
   m_weapons_map.insert(keybind(num_sort, arme));
 
@@ -71,35 +69,69 @@ void WeaponsList::InitAndAddToList(Weapon* arme, uint num_sort)
 void WeaponsList::Init()
 {
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
-  Bazooka* bazooka = new Bazooka;
-  todelete.push_back(bazooka);
-  InitAndAddToList(bazooka, 1);
   
-  InitAndAddToList(&auto_bazooka, 1);
-  InitAndAddToList(&lance_grenade, 1);
-  InitAndAddToList(&holly_grenade_launcher, 1);
-  InitAndAddToList(&lance_cluster, 1);
-  InitAndAddToList(&gun, 2);
-  InitAndAddToList(&uzi, 2);
-  InitAndAddToList(&baseball, 2);  
+  Bazooka* bazooka = new Bazooka;
+  AddToList(bazooka, 1);
+  
+  AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
+  AddToList(auto_bazooka, 1);
 
+  GrenadeLauncher* grenade_launcher = new GrenadeLauncher;
+  AddToList(grenade_launcher, 1);
+
+  HollyGrenadeLauncher* holly_grenade_launcher = new HollyGrenadeLauncher;
+  AddToList(holly_grenade_launcher, 1);
+
+  ClusterLauncher* cluster_launcher = new ClusterLauncher;
+  AddToList(cluster_launcher, 1);
+
+  Gun* gun = new Gun;
+  AddToList(gun, 2);
+
+  Uzi* uzi = new Uzi;
+  AddToList(uzi, 2);
+
+  Baseball* baseball = new Baseball;
+  AddToList(baseball, 2);  
 
   Dynamite* dynamite = new Dynamite;
-  todelete.push_back(dynamite);
-  InitAndAddToList(dynamite,3);
-  
-  InitAndAddToList(&mine,3);
-  InitAndAddToList(&air_attack,4);
-  InitAndAddToList(&tux,4);  
-  InitAndAddToList(&gnu_launcher,4); 
-  InitAndAddToList(&teleportation,5);
-  InitAndAddToList(&parachute,5);
-  InitAndAddToList(&suicide,5);
-  InitAndAddToList(&skipturn,5);
-  InitAndAddToList(&jetpack,5);
-  InitAndAddToList(&airhammer,5);
-  InitAndAddToList(&lowgrav,5);
-  InitAndAddToList(&ninjarope,5);
+  AddToList(dynamite,3);
+
+  Mine* mine = new Mine;
+  AddToList(mine,3);
+
+  AirAttack* air_attack = new AirAttack;
+  AddToList(air_attack,4);
+
+  TuxLauncher* tux = new TuxLauncher;
+  AddToList(tux,4);  
+
+  GnuLauncher* gnu_launcher = new GnuLauncher;
+  AddToList(gnu_launcher,4); 
+
+  Teleportation* teleportation = new Teleportation;
+  AddToList(teleportation,5);
+
+  Parachute* parachute = new Parachute;
+  AddToList(parachute,5);
+
+  Suicide* suicide = new Suicide;
+  AddToList(suicide,5);
+
+  SkipTurn* skipturn = new SkipTurn;
+  AddToList(skipturn,5);
+
+  JetPack* jetpack = new JetPack;
+  AddToList(jetpack,5);
+
+  Airhammer* airhammer = new Airhammer;
+  AddToList(airhammer,5);
+
+  LowGrav* lowgrav = new LowGrav;
+  AddToList(lowgrav,5);
+
+  NinjaRope* ninjarope = new NinjaRope;
+  AddToList(ninjarope,5);
 }
 
 //-----------------------------------------------------------------------------

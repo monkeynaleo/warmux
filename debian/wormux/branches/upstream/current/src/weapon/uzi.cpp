@@ -30,10 +30,6 @@
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-using namespace std;
-//-----------------------------------------------------------------------------
-namespace Wormux {
-  Uzi uzi;
 //-----------------------------------------------------------------------------
 
 const double SOUFFLE_BALLE = 1;
@@ -43,14 +39,10 @@ const double MIN_TIME_BETWEEN_SHOOT = 70; // in milliseconds
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-BalleUzi::BalleUzi() : WeaponProjectile("balle_uzi")
+BalleUzi::BalleUzi(GameLoop &p_game_loop) :
+  WeaponProjectile(p_game_loop, "balle_uzi")
 { 
   touche_ver_objet = true; 
-}
-
-//-----------------------------------------------------------------------------
-void BalleUzi::Init()
-{
   image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
   SetSize (image->GetWidth(), image->GetHeight());
   SetSize (2,2);
@@ -74,22 +66,15 @@ void BalleUzi::SignalCollision()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Uzi::Uzi() : Weapon(WEAPON_UZI,"uzi")
+Uzi::Uzi() :
+  Weapon(WEAPON_UZI,"uzi", new WeaponConfig()),
+  balle(game_loop)
 {
   m_name = _("Uzi");
   override_keys = true ;
 
   m_first_shoot = 0;
 
-  m_visibility = ALWAYS_VISIBLE;
-  extra_params = new WeaponConfig();
-}
-
-//-----------------------------------------------------------------------------
-
-void Uzi::p_Init()
-{
-  balle.Init();
   impact = resource_manager.LoadImage( weapons_res_profile, "uzi_impact");  
 }
 
@@ -104,8 +89,8 @@ void Uzi::p_Deselect()
 
 void Uzi::RepeatShoot()
 {        
-  uint time = Wormux::global_time.Read() - m_first_shoot; 
-  uint tmp = Wormux::global_time.Read();
+  uint time = global_time.Read() - m_first_shoot; 
+  uint tmp = global_time.Read();
 
   if (time >= MIN_TIME_BETWEEN_SHOOT)
   {
@@ -157,7 +142,10 @@ bool Uzi::p_Shoot()
       Character* ver = balle.LitDernierVerTouche();
       PhysicalObj* obj = balle.LitDernierObjTouche();
       if (ver) obj = ver;
-      if (ver) ver -> SetEnergyDelta (-cfg().damage);
+      if (ver)
+      {
+        ver -> SetEnergyDelta (-cfg().damage);
+      }
       if (obj) 
       {
 	obj -> AddSpeed (SOUFFLE_BALLE, angle);
@@ -166,8 +154,8 @@ bool Uzi::p_Shoot()
       // Creuse le world
       if (!obj)
       {
-	world.Creuse (balle.GetX() - impact->w/2,
-		      balle.GetY() - impact->h/2,
+	world.Creuse (balle.GetX() - impact.GetWidth()/2,
+		      balle.GetY() - impact.GetHeight()/2,
 		      impact);
       }
       return true;
@@ -212,4 +200,3 @@ WeaponConfig& Uzi::cfg()
 { return static_cast<WeaponConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux
