@@ -21,17 +21,17 @@
 
 #ifndef APP_WORMUX_H
 #define APP_WORMUX_H
-//-----------------------------------------------------------------------------
+
 #include <SDL.h>
 #include <string>
 #include "base.h"
 #include "../game/config.h"
-//-----------------------------------------------------------------------------
+#include "../graphic/video.h"
 
 class AppWormux
 {
 public:
-  SDL_Surface* sdlwindow;
+  Video video;
 
 private:
   int x, y;
@@ -53,5 +53,5 @@ public:
 };
 
 extern AppWormux app;
-//-----------------------------------------------------------------------------
+
 #endif

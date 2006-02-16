@@ -23,6 +23,7 @@
 //----------------------------------------------------------------------------
 #include <SDL.h>
 #include "camera.h"
+#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../include/action_handler.h"
 #include "../include/app.h"
@@ -42,11 +43,11 @@ const double force = 5; // Force maximale du vent en m/(sec*sec)
 const uint barre_speed = 20;
 
 //----------------------------------------------------------------------------
-namespace Wormux {
 Wind wind;
 //-----------------------------------------------------------------------------
 
-WindParticle::WindParticle() : PhysicalObj("WindParticle", 0.0)
+WindParticle::WindParticle(GameLoop &p_game_loop) :
+  PhysicalObj(p_game_loop, "WindParticle", 0.0)
 {
   m_type = objUNBREAKABLE;
   m_wind_factor = 1;
@@ -65,7 +66,7 @@ void WindParticle::Init()
 
   sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
   if(sprite->GetFrameCount()==1)
-    sprite->EnableLastFrameCache();
+    sprite->cache.EnableLastFrameCache();
   sprite->SetCurrentFrame ( RandomLong(0, sprite->GetFrameCount()-1));
    
   SetXY(RandomLong(0, world.GetWidth()-1), RandomLong(0, world.GetHeight()-1));
@@ -151,11 +152,11 @@ void WindParticle::Resize(double size)
 //-----------------------------------------------------------------------------
 
 
-   SDL_Color c_white  = {0xFF, 0xFF, 0xFF, 0x70};
-   SDL_Color c_black  = {0x00, 0x00, 0x00, 0x70};
-   SDL_Color c_red    = {0xFF, 0x00, 0x00, 0x70};
-   SDL_Color c_yellow = {0x00, 0xFF, 0xFF, 0x70};
-   SDL_Color c_grey   = {0xF0, 0xF0, 0xF0, 0x70};
+   Color c_white  (0xFF, 0xFF, 0xFF, 0x70);
+   Color c_black  (0x00, 0x00, 0x00, 0x70);
+   Color c_red    (0xFF, 0x00, 0x00, 0x70);
+   Color c_yellow (0x00, 0xFF, 0xFF, 0x70);
+   Color c_grey   (0xF0, 0xF0, 0xF0, 0x70);
    
 Wind::Wind()
 {
@@ -167,21 +168,6 @@ Wind::Wind()
   barre.value_color = c_red;
   barre.AjouteMarqueur (100, c_white);
   barre.SetReferenceValue (true, 0);
-
-  wind_particle_array = new WindParticle[MAX_WIND_OBJECTS];
-}
-
-//-----------------------------------------------------------------------------
-
-Wind::~Wind()
-{
-  delete []wind_particle_array;
-}
-
-//-----------------------------------------------------------------------------
-
-void Wind::Init()
-{
 }
 
 //-----------------------------------------------------------------------------
@@ -193,10 +179,14 @@ void Wind::Reset()
   m_val = m_nv_val = 0;
   barre.Actu (m_val);
 
-  for(uint i=0;i<TerrainActif().wind.nb_sprite; i++)
+  particles.clear();
+  const uint nb = TerrainActif().wind.nb_sprite;
+  for (uint i=0; i<nb; ++i)
   {
-    wind_particle_array[i].Init();
-    wind_particle_array[i].Resize((double)i/(double)TerrainActif().wind.nb_sprite);
+    WindParticle particle(game_loop);
+    particle.Init();
+    particle.Resize( (double)i / nb );
+    particles.push_back( particle );
   }
 }
 
@@ -226,10 +216,8 @@ void Wind::SetVal(long val)
 
 void Wind::DrawParticles()
 {
-  //  TerrainActif().wind.nbr_sprite = 1 ;
-
-  for(uint i=0;i<TerrainActif().wind.nb_sprite; i++)
-    wind_particle_array[i].Draw();
+  iterator it=particles.begin(), end=particles.end();
+  for (; it != end; ++it) it -> Draw();
 }
 
 //-----------------------------------------------------------------------------
@@ -247,10 +235,8 @@ void Wind::Refresh()
     barre.Actu(m_val); 
   }
 
-  for(uint i=0;i<TerrainActif().wind.nb_sprite; i++)
-    {
-      wind_particle_array[i].Refresh();
-    }
+  iterator it=particles.begin(), end=particles.end();
+  for (; it != end; ++it) it -> Refresh();
 }
 
 //-----------------------------------------------------------------------------
@@ -260,6 +246,3 @@ void Wind::Draw()
   barre.Draw();
 }
 
-//-----------------------------------------------------------------------------
-} //namespace Wormux
-//-----------------------------------------------------------------------------

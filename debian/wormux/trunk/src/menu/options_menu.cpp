@@ -30,10 +30,7 @@
 #include "../game/config.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
-#include "../include/global.h"
 
-using namespace Wormux;
-using namespace std;
 
 //-----------------------------------------------------------------------------
 
@@ -59,7 +56,9 @@ const uint TPS_FIN_TOUR_MAX = 10;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-OptionMenu::OptionMenu() : Menu("menu/bg_option")
+OptionMenu::OptionMenu() :
+  Menu("menu/bg_option"),
+  normal_font(16)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
@@ -69,7 +68,7 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
 
   /* Grapic options */
   graphic_options = new VBox(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W);
-  graphic_options->AddWidget(new Label(_("Graphic options"), 0, 0, 0, global().normal_font()));
+  graphic_options->AddWidget(new Label(_("Graphic options"), 0, 0, 0, normal_font));
 
   lbox_video_mode = new ListBox(0, 0, 0, 80);
   graphic_options->AddWidget(lbox_video_mode);
@@ -93,7 +92,7 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
 
   /* Sound options */
   sound_options = new VBox(SOUND_X, SOUND_Y, SOUND_W);
-  sound_options->AddWidget(new Label(_("Sound options"), 0, 0, 0, global().normal_font()));
+  sound_options->AddWidget(new Label(_("Sound options"), 0, 0, 0, normal_font));
 
   lbox_sound_freq = new ListBox(0, 0, 0, 80);
   sound_options->AddWidget(lbox_sound_freq);
@@ -106,7 +105,7 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
   
   /* Game options */
   game_options = new VBox(GAME_X, GAME_Y, GAME_W);
-  game_options->AddWidget(new Label(_("Game options"), 0, 0, 0, global().normal_font()));
+  game_options->AddWidget(new Label(_("Game options"), 0, 0, 0, normal_font));
 
   opt_duration_turn = new SpinButton(_("Duration of a turn:"), 0, 0, 0,
 				     TPS_TOUR_MIN, 5,
@@ -143,14 +142,14 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
   /* Check is there are any modes available */
   if(modes == (SDL_Rect **)0){
     std::ostringstream ss;
-    ss << app.sdlwindow->w << "x" << app.sdlwindow->h ;
+    ss << app.video.window.GetWidth() << "x" << app.video.window.GetHeight();
     lbox_video_mode->AddItem(false,"No modes available!", ss.str());
   } else {
     for(int i=0;modes[i];++i) {
       if (modes[i]->w < 800 || modes[i]->h < 600) break; 
       std::ostringstream ss;
       ss << modes[i]->w << "x" << modes[i]->h ;
-      if (modes[i]->w == app.sdlwindow->w && modes[i]->h == app.sdlwindow->h)
+      if (modes[i]->w == app.video.window.GetWidth() && modes[i]->h == app.video.window.GetHeight())
 	lbox_video_mode->AddItem(true, ss.str(), ss.str());
       else
 	lbox_video_mode->AddItem(false, ss.str(), ss.str());
@@ -165,11 +164,11 @@ OptionMenu::OptionMenu() : Menu("menu/bg_option")
 
   resource_manager.UnLoadXMLProfile( res);
 
-  opt_max_fps->SetValue (video.GetMaxFps());
+  opt_max_fps->SetValue (app.video.GetMaxFps());
   opt_display_wind_particles->SetValue (config.display_wind_particles);
   opt_display_energy->SetValue (config.display_energy_character);
   opt_display_name->SetValue (config.display_name_character);
-  full_screen->SetValue (video.IsFullScreen());
+  full_screen->SetValue (app.video.IsFullScreen());
   opt_duration_turn->SetValue(game_mode.duration_turn);
   opt_duration_end_turn->SetValue(game_mode.duration_move_player);
   opt_nb_characters->SetValue(game_mode.max_characters);
@@ -214,15 +213,15 @@ void OptionMenu::SaveOptions()
 
   game_mode.character.init_energy = opt_energy_ini->GetValue() ;
 
-  video.SetMaxFps(opt_max_fps->GetValue());
+  app.video.SetMaxFps(opt_max_fps->GetValue());
   // Video mode
   std::string s_mode = lbox_video_mode->ReadValue();
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
-  video.SetConfig(w, h, full_screen->GetValue());
+  app.video.SetConfig(w, h, full_screen->GetValue());
   
-  uint x = (video.GetWidth()/2);
-  uint y = video.GetHeight()-50;
+  uint x = app.video.window.GetWidth() / 2;
+  uint y = app.video.window.GetHeight() - 50;
 
   SetActionButtonsXY(x, y);
    

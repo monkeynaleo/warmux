@@ -22,30 +22,28 @@
 
 #ifndef CLUSTER_BOMB_H
 #define CLUSTER_BOMB_H
-//-----------------------------------------------------------------------------
+
+#include <list>
 #include "weapon.h"
+#include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
+
+class ClusterLauncher;
 
 // Les fragments
 class Cluster : public WeaponProjectile
 {
 public:
-  Cluster();
-  void Init();
+  Cluster(GameLoop &game_loop, ClusterLauncher& launcher);
   void Draw();
   void Refresh();
   void Tire(int n_x, int n_y);
 protected:
+  ClusterLauncher& launcher;
   void SignalCollision();
 };
-
-
-//-----------------------------------------------------------------------------
 
 // La ClusterBomb
 class ClusterBomb : public WeaponProjectile
@@ -53,19 +51,17 @@ class ClusterBomb : public WeaponProjectile
 protected:
   double temps_debut_tir;
 public:
-  Cluster* tableau_cluster;
+  std::list<Cluster> tableau_cluster;
+  typedef std::list<Cluster>::iterator iterator;
 
-  ClusterBomb();
-  ~ClusterBomb();
+  ClusterBomb(GameLoop &game_loop, ClusterLauncher& launcher);
   void Tire (double force);
-  void Init();
   void Draw();
   void Refresh();
 protected:
+  ClusterLauncher& launcher;
   void SignalCollision();
 };
-
-//-----------------------------------------------------------------------------
 
 class ClusterBombConfig : public ExplosiveWeaponConfig
 { 
@@ -78,19 +74,16 @@ public:
   virtual void LoadXml(xmlpp::Element *elem);
 };
 
-//-----------------------------------------------------------------------------
-
-class LanceCluster : public Weapon
+class ClusterLauncher : public Weapon
 {
  private:
-  void p_Init();
   bool p_Shoot();
 
  public:
-  SDL_Surface * impact;
+  Surface impact;
   ClusterBomb cluster_bomb;
 
-  LanceCluster();
+  ClusterLauncher();
   void Refresh();
   ClusterBombConfig& cfg();
 
@@ -98,7 +91,4 @@ protected:
   void Explosion();
 };
 
-extern LanceCluster lance_cluster;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif

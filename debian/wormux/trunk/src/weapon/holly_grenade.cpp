@@ -35,9 +35,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-
-HollyGrenadeLauncher holly_grenade_launcher;
 
 #ifdef DEBUG
 
@@ -51,21 +48,36 @@ HollyGrenadeLauncher holly_grenade_launcher;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-HollyGrenade::HollyGrenade() : WeaponProjectile ("holly_grenade"), 
-			       smoke_engine(particle_SMOKE,40)
+HollyGrenade::HollyGrenade(GameLoop &p_game_loop, HollyGrenadeLauncher& p_launcher) :
+  WeaponProjectile (p_game_loop, "holly_grenade"), 
+  smoke_engine(particle_SMOKE,40),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/holly_grenade_bounce";
   m_rebounding = true;
   touche_ver_objet = false;
   sing_alleluia = false;
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "holly_grenade_sprite");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight());
+
+  SetMass (launcher.cfg().mass);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
+  m_rebound_factor = double(launcher.cfg().rebound_factor);
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);
 }
 
 //-----------------------------------------------------------------------------
 
 void HollyGrenade::Tire (double force)
 {
-  SetAirResistFactor(holly_grenade_launcher.cfg().air_resist_factor);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 
   PrepareTir();
 
@@ -82,30 +94,8 @@ void HollyGrenade::Tire (double force)
 #endif
 
   // Recupere le moment du départ
-  temps_debut_tir = Wormux::global_time.Read();
+  temps_debut_tir = global_time.Read();
   sing_alleluia = false;
-}
-
-//-----------------------------------------------------------------------------
-
-void HollyGrenade::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "holly_grenade_sprite");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (holly_grenade_launcher.cfg().mass);
-  SetAirResistFactor(holly_grenade_launcher.cfg().air_resist_factor);
-  m_rebound_factor = double(holly_grenade_launcher.cfg().rebound_factor);
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);
-
-#ifdef MSG_DBG
-  COUT_DBG << "HollyGrenade::Init()" << std::endl;
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -129,15 +119,15 @@ void HollyGrenade::Refresh()
   }
 
   //5 sec après avoir été tirée, la grenade explose
-  double tmp = Wormux::global_time.Read() - temps_debut_tir;
-  if(tmp>1000 * holly_grenade_launcher.cfg().timeout) {
+  double tmp = global_time.Read() - temps_debut_tir;
+  if(tmp>1000 * launcher.cfg().timeout) {
     smoke_engine.Stop();
     is_active = false;
     return;
   }
 
   // Sing Alleluia ;-)
-  if (tmp > (1000 * holly_grenade_launcher.cfg().timeout - 2000) && !sing_alleluia) {
+  if (tmp > (1000 * launcher.cfg().timeout - 2000) && !sing_alleluia) {
     jukebox.Play("share","weapon/alleluia") ;
     sing_alleluia = true;
   }
@@ -166,8 +156,8 @@ void HollyGrenade::Draw()
   smoke_engine.Draw();
 
   image->Draw(GetX(),GetY());
-  int tmp = holly_grenade_launcher.cfg().timeout;
-  tmp -= (int)((Wormux::global_time.Read() - temps_debut_tir) / 1000);
+  int tmp = launcher.cfg().timeout;
+  tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
@@ -191,19 +181,19 @@ void HollyGrenade::SignalCollision()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-HollyGrenadeLauncher::HollyGrenadeLauncher() : Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade")
+HollyGrenadeLauncher::HollyGrenadeLauncher() : 
+  Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade", new GrenadeConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
+  grenade(game_loop, *this)
 {  
   m_name = _("HollyGrenade");
 
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-  extra_params = new GrenadeConfig();
+  impact = resource_manager.LoadImage( weapons_res_profile, "holly_grenade_impact");
 }
 
 //-----------------------------------------------------------------------------
 
 bool HollyGrenadeLauncher::p_Shoot ()
 {
-  // Initialise la grenade
   grenade.Tire (m_strength);
   camera.ChangeObjSuivi (&grenade, true, false);
   lst_objets.AjouteObjet (&grenade, true);
@@ -244,16 +234,7 @@ void HollyGrenadeLauncher::Refresh()
 
 //-----------------------------------------------------------------------------
 
-void HollyGrenadeLauncher::p_Init()
-{
-  grenade.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "holly_grenade_impact");
-}
-
-//-----------------------------------------------------------------------------
-
 GrenadeConfig& HollyGrenadeLauncher::cfg() 
 { return static_cast<GrenadeConfig&>(*extra_params); }
 //-----------------------------------------------------------------------------
 
-} // namespace Wormux

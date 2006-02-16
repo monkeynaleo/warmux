@@ -33,7 +33,6 @@
 #include "../game/game_mode.h"
 #include "../game/time.h"
 #include "../map/wind.h"
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 #ifdef DEBUG
@@ -58,7 +57,8 @@ const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 
 //-----------------------------------------------------------------------------
 
-Physics::Physics (double mass)
+Physics::Physics (GameLoop &p_game_loop, double mass) :
+  game_loop(p_game_loop)
 {
   m_extern_force.Clear();
   m_pos_x.Clear();
@@ -85,7 +85,7 @@ Physics::Physics (double mass)
   m_elasticity_off = true;
 
   SetMass(mass);
-  m_last_move = Wormux::global_time.Read() ;
+  m_last_move = global_time.Read() ;
 }
 
 //-----------------------------------------------------------------------------
@@ -401,7 +401,7 @@ double Physics::GetRopeLength()
 
 void Physics::StartMoving()
 {
-  m_last_move = Wormux::global_time.Read();
+  m_last_move = global_time.Read();
 
   if (m_motion_type == NoMotion)
     m_motion_type = FreeFall ;  
@@ -561,7 +561,7 @@ void Physics::ComputeNextXY (double &x, double &y, double delta_t)
   if (m_motion_type == Pendulum)
     ComputePendulumNextXY(delta_t);
 
-  m_last_move = Wormux::global_time.Read() ;
+  m_last_move = global_time.Read() ;
 
   x = m_pos_x.x0 ;
   y = m_pos_y.x0 ;
@@ -572,7 +572,7 @@ void Physics::ComputeNextXY (double &x, double &y, double delta_t)
 
 void Physics::RunPhysicalEngine ()
 {
-  double step_t, delta_t = (Wormux::global_time.Read() - m_last_move) / 1000.0;
+  double step_t, delta_t = (global_time.Read() - m_last_move) / 1000.0;
   double old_x,old_y;
   double new_x,new_y;
   double contact_x, contact_y, contact_angle;
@@ -581,7 +581,7 @@ void Physics::RunPhysicalEngine ()
   step_t = PHYS_DELTA_T;
 
   //  printf ("Delta_t = %f (last %f - current %f)\n", delta_t, m_last_move/1000.0,
-  //	  Wormux::global_time.Read()/1000.0);
+  //	  global_time.Read()/1000.0);
 
   // Compute object move for each physical engine time step.
 

@@ -23,7 +23,7 @@
 #define FILE_TOOLS_H
 #include "../include/base.h"
 
-// Check if a file exist
+// Check if a file exists
 bool IsFileExist(const std::string &name);
 
 // Find the extension part of a filename

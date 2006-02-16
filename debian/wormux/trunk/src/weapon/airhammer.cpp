@@ -32,32 +32,23 @@
 #include "../interface/game_msg.h"
 #include "../weapon/weapon_tools.h"
 
-using namespace std;
 //-----------------------------------------------------------------------------
-namespace Wormux {
-
-Airhammer airhammer; 
 
 const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer")
+Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new WeaponConfig())
 {
   m_name = _("Airhammer");
   override_keys = true ;
 
-  extra_params = new WeaponConfig();
-}
-
-//-----------------------------------------------------------------------------
-
-void Airhammer::p_Init()
-{
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
   m_last_jolt = 0;
 }
+
+//-----------------------------------------------------------------------------
 
 void Airhammer::p_Deselect()
 {
@@ -74,7 +65,7 @@ bool Airhammer::p_Shoot()
   ActiveCharacter().SetXY(ActiveCharacter().GetX(),ActiveCharacter().GetY());
 
   world.Creuse (ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 
-		- impact->w/2,
+		- impact.GetWidth()/2,
 		ActiveCharacter().GetY() + ActiveCharacter().GetHeight() -15,
 		impact);
 
@@ -85,8 +76,8 @@ bool Airhammer::p_Shoot()
 
 void Airhammer::RepeatShoot()
 {  
-  uint time = Wormux::global_time.Read() - m_last_jolt; 
-  uint tmp = Wormux::global_time.Read();
+  uint time = global_time.Read() - m_last_jolt; 
+  uint tmp = global_time.Read();
 
   if (time >= MIN_TIME_BETWEEN_JOLT) 
   {
@@ -130,4 +121,3 @@ void Airhammer::HandleKeyEvent(int action, int event_type)
 }
 //-----------------------------------------------------------------------------
 
-} // namespace Wormux

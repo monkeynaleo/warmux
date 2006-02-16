@@ -22,7 +22,7 @@
 #include "null_widget.h"
 //-----------------------------------------------------------------------------
 
-NullWidget::NullWidget (uint x, uint y, uint w, uint h):
+NullWidget::NullWidget (int x, int y, uint w, uint h):
   Widget(x, y, w, h)
 {
 }
@@ -40,7 +40,7 @@ void NullWidget::Draw (uint mouse_x, uint mouse_y)
 }
 
 //-----------------------------------------------------------------------------
-void NullWidget::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+void NullWidget::SetSizePosition(int _x, int _y, uint _w, uint _h)
 {
   StdSetSizePosition(_x, _y, _w, _h);
 }

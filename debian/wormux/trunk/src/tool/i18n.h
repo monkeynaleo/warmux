@@ -22,19 +22,15 @@
 
 #ifndef FORMAT_H
 #define FORMAT_H
-//-----------------------------------------------------------------------------
+
 #include "../include/base.h"
 #include <string>
 #include <libintl.h>
-//-----------------------------------------------------------------------------
 
 #define _(X) gettext(X)
 
 void InitI18N();
-
 void I18N_SetDir(const std::string &dir);
-
 std::string Format (const char *txt, ...);
 
-//-----------------------------------------------------------------------------
 #endif

@@ -21,22 +21,23 @@
 #define TEXT_H
 
 #include <string>
-#include "font.h"
 #include "colors.h"
+#include "font.h"
+#include "surface.h"
 
 class Text
 {
-  SDL_Surface* surf;
-  SDL_Surface* background; //shoadow or outline or nothing;
+  Surface surf;
+  Surface background; //shadow or outline or nothing;
   std::string txt;
   Font* font;
-  SDL_Color color;
+  Color color;
   bool shadowed;
   unsigned int bg_offset;
 
   void Render();
 public:
-  Text(const std::string &new_txt, SDL_Color new_color = white_color, Font* new_font = NULL, bool shadowed = true);
+  Text(const std::string &new_txt, Color new_color = white_color, Font* new_font = NULL, bool shadowed = true);
   ~Text();
 
   //Draw method using windows coordinates
@@ -51,14 +52,20 @@ public:
   void DrawCenterTopOnMap(int x, int y);
 
   void Set(const std::string &new_txt);
-  void SetColor(SDL_Color new_color);
-  int GetWidth() const {return surf->w;};
-  int GetHeight() const {return surf->h;}
+  void SetColor( const Color &new_color);
+  int GetWidth() const {return surf.GetWidth();};
+  int GetHeight() const {return surf.GetHeight();}
 };
 
 void DrawTmpBoxText(Font &font, 
 		    int x, int y, 
-		    const std::string &txt, uint space=3);
-
+		    const std::string &txt, uint space=3,
+            Color boxColor = defaultColorBox,
+            Color rectColor = defaultColorRect);
+void DrawTmpBoxTextWithReturns(Font &font,
+            int _x, int _y, 
+            const std::string &txt, uint space=3,
+            Color boxColor = defaultColorBox,
+            Color rectColor = defaultColorRect);
 
 #endif

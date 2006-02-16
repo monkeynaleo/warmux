@@ -21,37 +21,27 @@
 
 #ifndef UZI_H
 #define UZI_H
-//-----------------------------------------------------------------------------
+
 #include <vector>
 #include "weapon.h"
 #include "../include/base.h"
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
-
 
 class BalleUzi : public WeaponProjectile
 {
 public:
-  BalleUzi();
-  void Init();
+  BalleUzi(GameLoop &game_loop);
   void SignalCollision();
-  
 };
-
-
-//-----------------------------------------------------------------------------
 
 class Uzi : public Weapon
 {
  private:
-  void p_Init();
   void p_Deselect();
   bool p_Shoot();
   void RepeatShoot(); 
 
 protected:
-  SDL_Surface *impact;
+  Surface impact;
   BalleUzi balle;
   uint m_first_shoot;
 
@@ -62,7 +52,4 @@ public:
   void HandleKeyEvent(int action, int event_type);
 };
 
-extern Uzi uzi;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif

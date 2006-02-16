@@ -36,9 +36,6 @@
 #include "../object/objects_list.h"
 #include "../include/global.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-GrenadeLauncher lance_grenade;
-//-----------------------------------------------------------------------------
 
 #ifdef DEBUG
 
@@ -52,19 +49,34 @@ GrenadeLauncher lance_grenade;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Grenade::Grenade() : WeaponProjectile ("grenade")
+Grenade::Grenade(GameLoop &p_game_loop, GrenadeLauncher& p_launcher) :
+  WeaponProjectile (p_game_loop, "grenade"),
+  launcher(p_launcher)
 {
   m_allow_negative_y = true;
   m_rebound_sound = "weapon/grenade_bounce";
   m_rebounding = true;
   touche_ver_objet = false;
+
+  image = resource_manager.LoadSprite( weapons_res_profile, "grenade_sprite");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight());
+
+  SetMass (launcher.cfg().mass);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
+  m_rebound_factor = double(launcher.cfg().rebound_factor);
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);   
 }
 
 //-----------------------------------------------------------------------------
 
 void Grenade::Tire (double force)
 {
-  SetAirResistFactor(lance_grenade.cfg().air_resist_factor);
+  SetAirResistFactor(launcher.cfg().air_resist_factor);
 
   PrepareTir();
 
@@ -84,29 +96,7 @@ void Grenade::Tire (double force)
 #endif
 
   // Recupere le moment du départ
-  temps_debut_tir = Wormux::global_time.Read();
-}
-
-//-----------------------------------------------------------------------------
-
-void Grenade::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "grenade_sprite");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (lance_grenade.cfg().mass);
-  SetAirResistFactor(lance_grenade.cfg().air_resist_factor);
-  m_rebound_factor = double(lance_grenade.cfg().rebound_factor);
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);   
-   
-#ifdef MSG_DBG
-  COUT_DBG << "Grenade::Init()" << std::endl;
-#endif
+  temps_debut_tir = global_time.Read();
 }
 
 //-----------------------------------------------------------------------------
@@ -127,8 +117,8 @@ void Grenade::Refresh()
   }
 
   // Grenade explose after timeout
-  double tmp = Wormux::global_time.Read() - temps_debut_tir;
-  if(tmp>1000 * lance_grenade.cfg().timeout) {
+  double tmp = global_time.Read() - temps_debut_tir;
+  if(tmp>1000 * launcher.cfg().timeout) {
     is_active = false;
     return;
   }
@@ -154,8 +144,8 @@ void Grenade::Draw()
 
   image->Draw(GetX(),GetY());
 
-  int tmp = lance_grenade.cfg().timeout;
-  tmp -= (int)((Wormux::global_time.Read() - temps_debut_tir) / 1000);
+  int tmp = launcher.cfg().timeout;
+  tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
   std::ostringstream ss;
   ss << tmp;
   int txt_x = GetX() + GetWidth() / 2;
@@ -178,19 +168,19 @@ void Grenade::SignalCollision()
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-GrenadeLauncher::GrenadeLauncher() : Weapon(WEAPON_GRENADE, "grenade")
+GrenadeLauncher::GrenadeLauncher() : 
+  Weapon(WEAPON_GRENADE, "grenade", new GrenadeConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
+  grenade(game_loop, *this)
 {  
   m_name = _("Grenade");
  
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-  extra_params = new GrenadeConfig();
+  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
 }
 
 //-----------------------------------------------------------------------------
 
 bool GrenadeLauncher::p_Shoot ()
 {
-  // Initialise la grenade
   grenade.Tire (m_strength);
   camera.ChangeObjSuivi (&grenade, true, false);
   lst_objets.AjouteObjet (&grenade, true);
@@ -238,14 +228,6 @@ void GrenadeLauncher::Refresh()
 
 //-----------------------------------------------------------------------------
 
-void GrenadeLauncher::p_Init()
-{
-  grenade.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "grenade_impact");
-}
-
-//-----------------------------------------------------------------------------
-
 GrenadeConfig& GrenadeLauncher::cfg() 
 { return static_cast<GrenadeConfig&>(*extra_params); }
 
@@ -267,5 +249,3 @@ void GrenadeConfig::LoadXml(xmlpp::Element *elem)
 }
 
 //-----------------------------------------------------------------------------
-
-} // namespace Wormux

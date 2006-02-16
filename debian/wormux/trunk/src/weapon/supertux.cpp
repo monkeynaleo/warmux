@@ -34,10 +34,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
-TuxLauncher tux;
-
 const uint time_delta = 40;
 const uint animation_deltat = 50;
 
@@ -45,13 +41,27 @@ const uint animation_deltat = 50;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-SuperTux::SuperTux() : WeaponProjectile ("supertux"), 
-		       particle_engine(particle_STAR,40)
+SuperTux::SuperTux(GameLoop &p_game_loop, TuxLauncher& p_launcher) :
+  WeaponProjectile (p_game_loop, "supertux"), 
+  particle_engine(particle_STAR,40),
+  launcher(p_launcher)
 {
   SetWindFactor (0.8);
   m_allow_negative_y = true;
   touche_ver_objet = true;
 
+  image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
+  image->cache.EnableLastFrameCache();
+  SetSize(image->GetWidth(), image->GetHeight());
+
+  SetMass (launcher.cfg().mass);
+  m_gravity_factor = 0.0;
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+
+  SetTestRect (dx, dx, dy, dy);
 }
 
 //-----------------------------------------------------------------------------
@@ -68,28 +78,10 @@ void SuperTux::Tire()
   // Fixe la force de départ
   angle = ActiveTeam().crosshair.GetAngleRad();
   PutOutOfGround(angle);
-  SetExternForce(tux.cfg().speed, angle);
-  time_next_action = Wormux::global_time.Read();
-  last_move = Wormux::global_time.Read();
+  SetExternForce(launcher.cfg().speed, angle);
+  time_next_action = global_time.Read();
+  last_move = global_time.Read();
   camera.ChangeObjSuivi((PhysicalObj*)this,true,true);
-}
-
-//-----------------------------------------------------------------------------
-
-void SuperTux::Init()
-{
-  image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
-  image->EnableLastFrameCache();
-  SetSize(image->GetWidth(), image->GetHeight());
-
-  SetMass (tux.cfg().mass);
-  m_gravity_factor = 0.0;
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-
-  SetTestRect (dx, dx, dy, dy);
 }
 
 //-----------------------------------------------------------------------------
@@ -101,11 +93,11 @@ void SuperTux::Refresh()
   if (TestImpact()) { SignalCollision(); return; }
 
   image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
-  if ((last_move+animation_deltat)<Wormux::global_time.Read())
+  if ((last_move+animation_deltat)<global_time.Read())
     {
-      SetExternForce(tux.cfg().speed, angle);
+      SetExternForce(launcher.cfg().speed, angle);
       image->Update();
-      last_move = Wormux::global_time.Read();
+      last_move = global_time.Read();
   }
 
   particle_engine.AddPeriodic(GetX(),GetY(),angle, 0);
@@ -116,7 +108,7 @@ void SuperTux::Refresh()
 
 void SuperTux::turn_left()
 {  
-  time_now = Wormux::global_time.Read();
+  time_now = global_time.Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
@@ -129,7 +121,7 @@ void SuperTux::turn_left()
 
 void SuperTux::turn_right()
 {
-  time_now = Wormux::global_time.Read();
+  time_now = global_time.Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
@@ -177,20 +169,20 @@ void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem)
 
 //-----------------------------------------------------------------------------
 
-TuxLauncher::TuxLauncher() : Weapon(WEAPON_SUPERTUX, "tux")
+TuxLauncher::TuxLauncher() : 
+  Weapon(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
+  supertux(game_loop, *this)
 { 
   m_name = _("SuperTux");   
   override_keys = true ;
 
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-  extra_params = new SuperTuxWeaponConfig();
+  impact = resource_manager.LoadImage(weapons_res_profile,"tux_impact");
 }
 
 //-----------------------------------------------------------------------------
 
 bool TuxLauncher::p_Shoot()
 {
-  // Initialise le supertux
   supertux.Tire ();
   lst_objets.AjouteObjet (&supertux, true);
 
@@ -227,15 +219,6 @@ void TuxLauncher::Refresh()
 }
 
 //-----------------------------------------------------------------------------
-
-void TuxLauncher::p_Init()
-{
-  supertux.Init();
-  impact = resource_manager.LoadImage(weapons_res_profile,"tux_impact");
-}
-
-
-//-----------------------------------------------------------------------------
                                                                                     
 void TuxLauncher::HandleKeyEvent(int action, int event_type)
 {
@@ -262,4 +245,3 @@ SuperTuxWeaponConfig& TuxLauncher::cfg()
 { return static_cast<SuperTuxWeaponConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

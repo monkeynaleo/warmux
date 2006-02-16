@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- *  Graphic effects on sprite / pixel acces to SDL_Surface
+ *  Graphic effects on sprite
  *****************************************************************************/
 #ifndef EFFECTS_H
 #define EFFECTS_H
@@ -24,7 +24,7 @@
 #include <SDL.h>
 #include "sprite.h"
 
-Sprite* WaveSurface(SDL_Surface* a,unsigned int nbr_frames, unsigned int duration, float wave_amp, float wave_per);
+Sprite* WaveSurface(Surface &a, unsigned int nbr_frames, unsigned int duration, float wave_amp, float wave_per);
 void Rebound(Sprite* spr, int &y, uint t0, uint per, int dy_max);
-
+void Gelatine(int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per);
 #endif //EFFECTS_H

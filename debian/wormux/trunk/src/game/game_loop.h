@@ -22,12 +22,15 @@
 #ifndef GAME_LOOP_H
 #define GAME_LOOP_H
 //-----------------------------------------------------------------------------
+#include "../graphic/fps.h"
 #include "../include/base.h"
 #include "../team/character.h"
 //-----------------------------------------------------------------------------
 
+class GameLoop;
+
 // Init the game
-void InitGame ();
+void InitGame (GameLoop &game_loop);
 
 //-----------------------------------------------------------------------------
 
@@ -47,6 +50,9 @@ private:
   uint pause_seconde;
   uint duration;
 
+public:
+  FramePerSecond fps;
+  
 public:
   GameLoop();
 

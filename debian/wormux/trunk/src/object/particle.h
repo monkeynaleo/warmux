@@ -22,24 +22,17 @@
 
 #ifndef PARTICLE_H
 #define PARTICLE_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
 #include "physical_obj.h"
-//#include "../team/character.h"
 #include "../include/base.h"
 #include "../weapon/weapon_cfg.h"
 #include "../graphic/sprite.h"
-//-----------------------------------------------------------------------------
+#include "../graphic/surface.h"
 
 typedef enum { 
   particle_SMOKE,
   particle_FIRE,
   particle_STAR
 } particle_t;
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 class Particle : public PhysicalObj
 {
@@ -53,7 +46,7 @@ class Particle : public PhysicalObj
   Sprite *image;
    
  public:
-  Particle();
+  Particle(GameLoop &game_loop);
   virtual void Init()=0;
   void Draw();
   void Refresh();
@@ -61,40 +54,28 @@ class Particle : public PhysicalObj
   bool StillUseful();
 };
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 class Smoke : public Particle
 {
  public:
-  Smoke();
+  Smoke(GameLoop &game_loop);
   void Init();
 };
-//-----------------------------------------------------------------------------
 
 class StarParticle : public Particle
 {
  public:
-  StarParticle();
+  StarParticle(GameLoop &game_loop);
   void Init();
 };
-//-----------------------------------------------------------------------------
 
 class FireParticle : public Particle
 {
- protected:
-//  Character* dernier_ver_touche;
-//  PhysicalObj* dernier_obj_touche;
-
  public: 
-  SDL_Surface *impact;
-  FireParticle();
+  Surface impact;
+  FireParticle(GameLoop &game_loop);
   void Init();
   void SignalFallEnding();
 };
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 class ParticleEngine
 {

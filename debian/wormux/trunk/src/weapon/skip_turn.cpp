@@ -26,17 +26,13 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-namespace Wormux 
-{
-
-  SkipTurn skipturn;
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
 
 //-----------------------------------------------------------------------------
 
-SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn")
+SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn", new WeaponConfig())
 {
   m_name = _("Skip turn");
 }
@@ -66,4 +62,3 @@ void SkipTurn::Refresh()
 }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

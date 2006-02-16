@@ -34,15 +34,16 @@ protected:
   Sprite *image;
    
 public:
-  Button (uint x, uint y, uint w, uint h,
+  Button (int x, int y, uint w, uint h,
 	  const Profile *res_profile, const std::string& resource_id);
-  Button (uint x, uint y,
+  Button (int x, int y,
 	  const Profile *res_profile, const std::string& resource_id);
   virtual ~Button();
 
   virtual void Draw (uint mouse_x, uint mouse_y);
-  virtual void SetSizePosition(uint _x, uint _y, uint _w, uint _h);
+  virtual void SetSizePosition(int _x, int _y, uint _w, uint _h);
   
+  Sprite* GetSprite() { return image; };
 };
 
 //-----------------------------------------------------------------------------

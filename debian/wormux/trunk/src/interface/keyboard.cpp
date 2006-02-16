@@ -44,7 +44,6 @@
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
 
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 
 // Active le mode tricheur ?

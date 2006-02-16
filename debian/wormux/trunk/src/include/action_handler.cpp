@@ -66,13 +66,13 @@ void Action_MoveLeft (const Action *a)
 void Action_Jump (const Action *a)
 {
       game_loop.character_already_chosen = true;
-      ActiveCharacter().Saute(); 
+      ActiveCharacter().Jump(); 
 }
 
-void Action_SuperJump (const Action *a)
+void Action_HighJump (const Action *a)
 {
       game_loop.character_already_chosen = true;
-      ActiveCharacter().SuperSaut();
+      ActiveCharacter().HighJump();
 }
 
 void Action_Up (const Action *a)
@@ -106,7 +106,7 @@ void Action_Shoot (const Action *action)
 void Action_Wind (const Action *a)
 {
 	const ActionInt& ai = dynamic_cast<const ActionInt&> (*a);
-	Wormux::wind.SetVal (ai.GetValue());
+	wind.SetVal (ai.GetValue());
 }
 
 void Action_MoveCharacter (const Action *a)
@@ -176,7 +176,7 @@ void Action_SetGameMode (const Action *a)
 #ifdef DBG_ACT
 	COUT_DBG << "SetGameMode : " << action.GetValue() << std::endl;
 #endif
-	Wormux::game_mode.Load (action.GetValue());
+	game_mode.Load (action.GetValue());
 }
 
 
@@ -203,7 +203,7 @@ void Action_ChangeTeam (const Action *a)
 #endif
 	//if (!network.is_client()) return;
 	teams_list.SetActive (action.GetValue());
- 	ActiveTeam().PrepareTour();
+ 	ActiveTeam().PrepareTurn();
 	assert (!ActiveCharacter().IsDead());
 }
 
@@ -300,7 +300,7 @@ void ActionHandler::Init()
 	Register (ACTION_UP, "up", &Action_Up);
 	Register (ACTION_DOWN, "down", &Action_Down);
 	Register (ACTION_JUMP, "jump", &Action_Jump);
-	Register (ACTION_SUPER_JUMP, "super_jump", &Action_SuperJump);
+	Register (ACTION_HIGH_JUMP, "super_jump", &Action_HighJump);
 	Register (ACTION_SHOOT, "shoot", &Action_Shoot);
 	Register (ACTION_CHANGE_WEAPON, "change_weapon", &Action_ChangeWeapon);
 	Register (ACTION_WIND, "wind", &Action_Wind);

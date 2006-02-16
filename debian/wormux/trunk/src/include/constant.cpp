@@ -20,12 +20,8 @@
  *****************************************************************************/
 
 #include "constant.h"
-//-----------------------------------------------------------------------------
-namespace Wormux {
 
-const std::string VERSION("0.7beta3");
-
-//-----------------------------------------------------------------------------
+const std::string VERSION("0.7beta3 (" __DATE__ ")");
 
 #ifndef INSTALL_DATADIR
 #  define INSTALL_DATADIR "data/"
@@ -34,16 +30,12 @@ const std::string VERSION("0.7beta3");
 // Installation directory (with slash)
 const std::string DEFAULT_DATADIR(INSTALL_DATADIR);
 
-//-----------------------------------------------------------------------------
-
 #ifndef INSTALL_LOCALEDIR
 #  define INSTALL_LOCALEDIR "locale/"
 #endif
 
 // Installation diretory (with slash)
 const std::string DEFAULT_LOCALEDIR(INSTALL_LOCALEDIR);
-
-//-----------------------------------------------------------------------------
 
 // Nombre de boucles maximum pour le test ...
 const uint NBR_BCL_MAX_EST_VIDE = 200; // Un objet est dans le vide ?
@@ -56,8 +48,6 @@ std::vector<std::string> AUTHORS;
 
 const std::string WEB_SITE("http://www.wormux.org");
 const std::string EMAIL("wormux-dev@gna.org");
-
-//-----------------------------------------------------------------------------
 
 // Dimensions min/max du terrain (en pixel)
 const uint LARG_MIN_TERRAIN = 100;
@@ -74,17 +64,11 @@ const uint HAUT_MIN_TERRAIN_OUVERT = 40;
 // Distance minimale entre les vers lors de l'initialisation d'une partie
 const double DST_MIN_ENTRE_VERS = 200.0;
 
-//-----------------------------------------------------------------------------
-
-void InitConstants()
-{
+void InitConstants(){
   AUTHORS.push_back ("Lawrence AZZOUG");
   AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
   AUTHORS.push_back ("Jean-Christophe DUBERGA");
   AUTHORS.push_back ("Matthieu FERTRE");
   AUTHORS.push_back ("Renaud LOTTIAUX");
   AUTHORS.push_back ("Victor STINNER");
-}
-
-//-----------------------------------------------------------------------------
 }

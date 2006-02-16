@@ -23,7 +23,7 @@
 
 //-----------------------------------------------------------------------------
 
-Widget::Widget(uint _x, uint _y, uint _w, uint _h) :
+Widget::Widget(int _x, int _y, uint _w, uint _h) :
   x(_x), y(_y), w(_w), h(_h)
 {
 }
@@ -38,8 +38,8 @@ Widget::~Widget()
 
 bool Widget::MouseIsOver (uint mouse_x, uint mouse_y)
 {
-  return ((x <= mouse_x) && (mouse_x <= x+w)
-	  && (y <= mouse_y) && (mouse_y <= y+h));
+  return ((x <= (int)mouse_x) && ((int)mouse_x <= x+(int)w)
+	  && (y <= (int)mouse_y) && ((int)mouse_y <= y+(int)h));
 
 }
 
@@ -53,7 +53,7 @@ bool Widget::Clic (uint mouse_x, uint mouse_y, uint button)
 
 //-----------------------------------------------------------------------------
 
-void Widget::StdSetSizePosition(uint _x, uint _y, uint _w, uint _h)
+void Widget::StdSetSizePosition(int _x, int _y, uint _w, uint _h)
 {
   x = _x;
   y = _y;

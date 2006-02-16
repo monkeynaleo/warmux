@@ -21,12 +21,9 @@
 
 #ifndef SUICIDE_H
 #define SUICIDE_H
-//-----------------------------------------------------------------------------
-#include <SDL.h>
+
 #include "weapon.h"
-//-----------------------------------------------------------------------------
-namespace Wormux {
-//-----------------------------------------------------------------------------
+#include "graphic/surface.h"
 
 class Suicide : public Weapon
 {
@@ -34,11 +31,10 @@ private:
    int sound_channel;
    bool is_dying;
 
-  void p_Init();
   bool p_Shoot();
 
 public:
-  SDL_Surface *hole_image;
+  Surface hole_image;
    
   Suicide();
   void p_Select();
@@ -46,7 +42,4 @@ public:
   ExplosiveWeaponConfig &cfg();
 };
 
-extern Suicide suicide;
-//-----------------------------------------------------------------------------
-} // namespace Wormux
 #endif

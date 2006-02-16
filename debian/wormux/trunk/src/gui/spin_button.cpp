@@ -27,10 +27,9 @@
 #include <sstream>
 #include <iostream>
 #include "../include/global.h"
-using namespace Wormux;
 //-----------------------------------------------------------------------------
 
-SpinButton::SpinButton (const std::string &label, uint x, uint y, uint w,
+SpinButton::SpinButton (const std::string &label, int x, int y, uint w,
 			     int value, int step, int min_value, int max_value) :
   Widget(x,y,w,global().small_font().GetHeight())
 {
@@ -71,7 +70,7 @@ SpinButton::~SpinButton ()
 
 
 //-----------------------------------------------------------------------------
-void SpinButton::SetSizePosition(uint _x, uint _y, uint _w, uint _h)
+void SpinButton::SetSizePosition(int _x, int _y, uint _w, uint _h)
 {
   StdSetSizePosition(_x, _y, _w, _h);
 

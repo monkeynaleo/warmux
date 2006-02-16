@@ -21,42 +21,37 @@
 
 #ifndef VIDEO_H
 #define VIDEO_H
-//-----------------------------------------------------------------------------
 #include <SDL.h>
-#include "../include/base.h"
-#include <vector>
 #include <string>
-//-----------------------------------------------------------------------------
+#include "surface.h"
+#include "../include/base.h"
 
-#define EstTransparent(a)	( (a) != 255 )
-
-SDL_Surface* CreateRGBSurface (int width, int height, Uint32 flags);
-SDL_Surface* CreateRGBASurface (int width, int height, Uint32 flags);
-
-//-----------------------------------------------------------------------------
-
-class Video
-{
-private:
+class Video{
   uint m_max_fps;     // If equals to zero, it means no limit
   uint m_sleep_max_fps;
+  bool SDLReady;
+  bool fullscreen;
+  void SetWindowCaption(std::string caption);
+  void SetWindowIcon(std::string icon);
 
 public:
+  Surface window;
   void SetMaxFps (uint max_fps);
   uint GetMaxFps();
-  uint GetSleepMaxFps();  
-
- private:
-  bool fullscreen;
+  uint GetSleepMaxFps();
 
 public:
   Video();
-  int GetWidth(void) const;
-  int GetHeight(void) const;
-  bool IsFullScreen(void) const;
-  bool SetConfig(int width, int height, bool fullscreen);
-};
+  ~Video();
 
-extern Video video;
-//-----------------------------------------------------------------------------
+  bool IsFullScreen(void) const;
+
+  bool SetConfig(int width, int height, bool fullscreen);
+
+  void InitWindow(void);
+  void InitSDL(void);
+
+  void Flip(void);
+}; 
+
 #endif

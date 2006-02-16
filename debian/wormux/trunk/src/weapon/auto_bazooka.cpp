@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "auto_bazooka.h"
-//-----------------------------------------------------------------------------
 #include "weapon_tools.h"
 #include "../game/game_loop.h"
 #include "../game/game_mode.h"
@@ -41,27 +40,35 @@
 #ifdef __MINGW32__
 #undef LoadImage
 #endif
-//-----------------------------------------------------------------------------
-namespace Wormux {
 
-AutomaticBazooka auto_bazooka;
 
 //Temps en seconde à partir duquel la roquette se dirige vers la cible
 const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
-RoquetteTeteCherche::RoquetteTeteCherche() 
-  : WeaponProjectile("roquette tete chercheuse")
+RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop, 
+					 AutomaticBazooka &p_bazooka) :
+  WeaponProjectile(p_game_loop, "roquette tete chercheuse"),
+  auto_bazooka(p_bazooka)
 {
   m_allow_negative_y = true;
   touche_ver_objet = true;
   m_attire = false;
-}
 
-//-----------------------------------------------------------------------------
+  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
+  image->EnableRotationCache(32);
+  SetSize (image->GetWidth(), image->GetHeight());
+
+  SetMass (auto_bazooka.cfg().mass);
+  SetWindFactor(0.1);
+  SetAirResistFactor(auto_bazooka.cfg().air_resist_factor);
+
+  // Fixe le rectangle de test
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
+  SetTestRect (dx, dx, dy, dy);
+}
 
 void RoquetteTeteCherche::Tire (double force, 
 				uint cible_x, uint cible_y)
@@ -87,29 +94,9 @@ void RoquetteTeteCherche::Tire (double force,
 
   PutOutOfGround(angle);
 
-  temps_debut_tir = Wormux::global_time.Read();
+  temps_debut_tir = global_time.Read();
   angle_local=angle;
 }
-
-//-----------------------------------------------------------------------------
-
-void RoquetteTeteCherche::Init()
-{
-  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (auto_bazooka.cfg().mass);
-  SetWindFactor(0.1);
-  SetAirResistFactor(auto_bazooka.cfg().air_resist_factor);
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);
-}
-
-//-----------------------------------------------------------------------------
 
 void RoquetteTeteCherche::Refresh()
 {
@@ -129,7 +116,7 @@ void RoquetteTeteCherche::Refresh()
       image->SetRotation_deg(angle *180/M_PI);
       
       //2 sec après avoir été tirée, la roquette se dirige vers la cible:
-      tmp = Wormux::global_time.Read() - temps_debut_tir;
+      tmp = global_time.Read() - temps_debut_tir;
       if(tmp>1000 * TPS_AV_ATTIRANCE)
 	{
 	  m_attire = true;
@@ -141,7 +128,6 @@ void RoquetteTeteCherche::Refresh()
 	}
     }
 }
-//-----------------------------------------------------------------------------
 
 void RoquetteTeteCherche::SignalCollision()
 { 
@@ -152,13 +138,6 @@ void RoquetteTeteCherche::SignalCollision()
   is_active = false; 
 }
 
-//-----------------------------------------------------------------------------
-
-void RoquetteTeteCherche::Reset()
-{}
-
-//-----------------------------------------------------------------------------
-
 // Choisit les coordonnées de la cible 	 
 void RoquetteTeteCherche::SetTarget (int x, int y) 	 
 { 	 
@@ -166,28 +145,26 @@ void RoquetteTeteCherche::SetTarget (int x, int y)
   m_cible.y = y; 	 
 } 	 
 
-
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-AutomaticBazooka::AutomaticBazooka() : Weapon(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka")
+AutomaticBazooka::AutomaticBazooka() : 
+  Weapon(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new ExplosiveWeaponConfig() ),
+  roquette(game_loop, *this)
 {  
   m_name = _("Automatic bazooka");
 
   m_is_active = false;
   cible.choisie = false;
-  extra_params = new ExplosiveWeaponConfig();
-}
 
-//-----------------------------------------------------------------------------
+  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
+  cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
+}
 
 void AutomaticBazooka::Draw()
 {
   Weapon::Draw();
   DrawTarget();
 }
-
-//-----------------------------------------------------------------------------
 
 bool AutomaticBazooka::p_Shoot ()
 {
@@ -198,7 +175,6 @@ bool AutomaticBazooka::p_Shoot ()
     return true;
   }
 
-  // Initialise le roquette
   roquette.Tire (m_strength, cible.pos.x,cible.pos.y);
   lst_objets.AjouteObjet (&roquette,true);
 
@@ -207,16 +183,12 @@ bool AutomaticBazooka::p_Shoot ()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 // Le bazooka explose car il a été poussé à bout !
 void AutomaticBazooka::ExplosionDirecte()
 {
   Point2i pos = ActiveCharacter().GetCenter();
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
-
-//-----------------------------------------------------------------------------
 
 void AutomaticBazooka::Explosion()
 {
@@ -232,8 +204,6 @@ void AutomaticBazooka::Explosion()
   AppliqueExplosion (pos, pos, impact, cfg(), NULL);
 }
 
-//-----------------------------------------------------------------------------
-
 void AutomaticBazooka::Refresh()
 {
   DrawTarget();
@@ -244,46 +214,30 @@ void AutomaticBazooka::Refresh()
   } 
 }
 
-//-----------------------------------------------------------------------------
-
-void AutomaticBazooka::p_Init()
-{
-  roquette.Init();
-  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
-  cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
-}
-
-//-----------------------------------------------------------------------------
-
 void AutomaticBazooka::p_Select()
 {
   cible.choisie = false;
 }
 
-//-----------------------------------------------------------------------------
-
 void AutomaticBazooka::p_Deselect()
 {
   if (cible.choisie) {
     // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image->w/2,
-				   cible.pos.y-cible.image->h/2,
-				   cible.image->w,
-				   cible.image->h));
+    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image.GetWidth()/2,
+				   cible.pos.y-cible.image.GetHeight()/2,
+				   cible.image.GetWidth(),
+				   cible.image.GetHeight()));
   }
 }
-
-
-//-----------------------------------------------------------------------------
 
 void AutomaticBazooka::ChooseTarget()
 {
   if (cible.choisie) {
     // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image->w/2,
-				   cible.pos.y-cible.image->h/2,
-				   cible.image->w,
-				   cible.image->h));
+    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image.GetWidth()/2,
+				   cible.pos.y-cible.image.GetHeight()/2,
+				   cible.image.GetWidth(),
+				   cible.image.GetHeight()));
   }
 
   cible.pos = mouse.GetPosMonde();
@@ -291,28 +245,19 @@ void AutomaticBazooka::ChooseTarget()
   cible.choisie = true;
 }
 
-//-----------------------------------------------------------------------------
-
 void AutomaticBazooka::DrawTarget()
 {
-  if(!cible.choisie) { return; }
+  if( !cible.choisie )
+	return;
 
-  SDL_Rect dr = { cible.pos.x-cible.image->w/2-camera.GetX(),cible.pos.y-cible.image->h/2-camera.GetY(),cible.image->w,cible.image->h};
-  SDL_BlitSurface(cible.image, NULL, app.sdlwindow, &dr);
+  Point2i dp(cible.pos.x - cible.image.GetWidth() / 2 - camera.GetX() , cible.pos.y - cible.image.GetHeight() / 2 - camera.GetY());
+  app.video.window.Blit(cible.image, dp);
 }
-
-//-----------------------------------------------------------------------------
 
 bool AutomaticBazooka::IsReady() const
 {
   return (EnoughAmmo() && cible.choisie);  
 }
 
-//-----------------------------------------------------------------------------
-
 ExplosiveWeaponConfig& AutomaticBazooka::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
-
-//-----------------------------------------------------------------------------
-
-} // namespace Wormux

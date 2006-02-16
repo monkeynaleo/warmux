@@ -22,6 +22,7 @@
 
 #include "mine.h"
 //-----------------------------------------------------------------------------
+#include <iostream>
 #include <sstream>
 #include "weapon_tools.h"
 #include "../game/config.h"
@@ -42,12 +43,10 @@
 #undef LoadImage
 #endif
 //-----------------------------------------------------------------------------
-namespace Wormux {
 
-  Mine mine;
 #ifdef DEBUG
 
-  //#define DBG_PLACEMENT
+//#define DBG_PLACEMENT
 //#define DBG_DETECTION
 
 #define COUT_DBG0 std::cout << "[" << m_name << "]"
@@ -61,7 +60,9 @@ const double DEPART_FONCTIONNEMENT = 5;
 
 //-----------------------------------------------------------------------------
 
-ObjMine::ObjMine() : PhysicalObj("mine", 0.0)
+ObjMine::ObjMine(GameLoop &p_game_loop, Mine& p_launcher) : 
+  PhysicalObj(p_game_loop, "mine", 0.0),
+  launcher(p_launcher)
 {
   SetTestRect (0, 4, 0, 3);
   m_allow_negative_y = true; 
@@ -70,14 +71,6 @@ ObjMine::ObjMine() : PhysicalObj("mine", 0.0)
   affiche = true;
   non_defectueuse = RandomLong(0, 9);
   channel = -1;
-  Init();
-}
-
-//-----------------------------------------------------------------------------
-
-void ObjMine::Init()
-{
-
 
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
  
@@ -85,11 +78,11 @@ void ObjMine::Init()
   SetSize (detection->GetWidth(), detection->GetHeight());
 
   impact = resource_manager.LoadImage(res,"mine_impact");
-  SetMass (mine.cfg().mass);
+  SetMass (launcher.cfg().mass);
   
   explosion = resource_manager.LoadSprite(res,"explosion");
    
-  armer = global_time.Read() + mine.cfg().temps_fuite;
+  armer = global_time.Read() + launcher.cfg().temps_fuite;
   depart = uint(global_time.Read() + DEPART_FONCTIONNEMENT * 1000);
 }
 
@@ -126,7 +119,7 @@ void ObjMine::Reset()
     FOR_ALL_LIVING_CHARACTERS(equipe, ver)
     {
       if (MeterDistance (GetCenter(), ver->GetCenter()) 
-	   < mine.cfg().detection_range)
+	   < launcher.cfg().detection_range)
       { 
 #ifdef DBG_PLACEMENT
 	COUT_PLACEMENT << "Touche le ver " << (*ver).m_name << std::endl;
@@ -134,14 +127,14 @@ void ObjMine::Reset()
 	ok = false; 
       }
     }
-    ok &= !IsGhost() && IsInVacuum(0,0);
+    ok &= !IsGhost() && !IsInWater() && IsInVacuum(0,0);
   } while (!ok);
 #ifdef DBG_PLACEMENT
   COUT_PLACEMENT << "Placé." << std::endl;
 #endif
 
   DirectFall();
-  SetMass(mine.cfg().mass);
+  SetMass(launcher.cfg().mass);
 }
 
 //-----------------------------------------------------------------------------
@@ -161,7 +154,7 @@ void ObjMine::SignalFallEnding()
   COUT_DBG << "Fin de la chute : la mine est a terre." << std::endl;
 #endif
 
-  SetMass (mine.cfg().mass);
+  SetMass (launcher.cfg().mass);
 }
 
 //-----------------------------------------------------------------------------
@@ -174,8 +167,7 @@ void ObjMine::Explosion ()
   affiche = false;
 
   Point2i centre = GetCenter();
-  AppliqueExplosion (centre, centre, impact, mine.cfg(), NULL);
-  if (ver_declancheur == &ActiveCharacter()) game_loop.interaction_enabled = false;
+  AppliqueExplosion (centre, centre, impact, launcher.cfg(), NULL);
   DesactiveDetection();
 }
 
@@ -191,8 +183,8 @@ void ObjMine::ActiveDetection()
 
     animation=true;
     affiche = true;
-    armer = global_time.Read() + mine.cfg().temps_fuite;
-    attente = global_time.Read() + mine.cfg().temps_fuite;
+    armer = global_time.Read() + launcher.cfg().temps_fuite;
+    attente = global_time.Read() + launcher.cfg().temps_fuite;
     m_ready = false;
 #ifdef DBG_DETECTION
     COUT_DBG << "IsReady() : " << IsReady() << std::endl;
@@ -225,7 +217,7 @@ void ObjMine::Detection()
   FOR_ALL_LIVING_CHARACTERS(equipe, ver)
   { 
     if (MeterDistance (GetCenter(), ver->GetCenter())
-	 < mine.cfg().detection_range && !animation)
+	 < launcher.cfg().detection_range && !animation)
     {
       ver_declancheur = &(*ver);
       std::string txt = Format(_("%s is next to a mine!"),
@@ -293,14 +285,11 @@ void ObjMine::SignalGhostState (bool)
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Mine::Mine() : Weapon(WEAPON_MINE, "mine")
+Mine::Mine() : Weapon(WEAPON_MINE, "mine", new MineConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
 
   already_put = false;
-  m_visibility = VISIBLE_ONLY_WHEN_INACTIVE;
-
-  extra_params = new MineConfig();
 }
 
 //-----------------------------------------------------------------------------
@@ -320,8 +309,7 @@ bool Mine::p_Shoot()
 
 void Mine::Add (int x, int y)
 {
-  ObjMine *obj = new ObjMine();
-  //obj -> Init();
+  ObjMine *obj = new ObjMine(game_loop, *this);
   obj -> SetXY (x, y);
 
   DoubleVector speed_vector ;
@@ -368,4 +356,3 @@ void MineConfig::LoadXml(xmlpp::Element *elem)
 }
 
 //-----------------------------------------------------------------------------
-} // namespace Wormux

@@ -28,11 +28,7 @@
 
 class GameMenu : public Menu
 {
- public:
-   GameMenu(); 
-   ~GameMenu();
-
- private:
+   Font normal_font;
    bool terrain_init;
 
    /* Team controllers */
@@ -58,6 +54,10 @@ class GameMenu : public Menu
 
    void __sig_ok();
    void __sig_cancel();
+
+public:
+   GameMenu(); 
+   ~GameMenu();
 };
 
 #endif

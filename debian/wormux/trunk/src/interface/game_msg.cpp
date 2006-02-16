@@ -20,16 +20,15 @@
  *****************************************************************************/
 
 #include "game_msg.h"
-//-----------------------------------------------------------------------------
+#include <iostream>
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../graphic/font.h"
+#include "../include/app.h"
 #include "../include/global.h"
-#include <iostream>
-using namespace Wormux;
-//-----------------------------------------------------------------------------
+
+
 GameMessages game_messages;
-//-----------------------------------------------------------------------------
 
 // Hauteur de la police de caractere
 #define HAUT_POLICE 20 // pixels
@@ -48,52 +47,42 @@ GameMessages game_messages;
 
 const uint NBR_MSG_MAX = 14;
 
-//-----------------------------------------------------------------------------
-
 // Remise a zéro
-void GameMessages::Reset()
-{ liste.clear(); }
+void GameMessages::Reset(){
+  liste.clear();
+}
 
-//-----------------------------------------------------------------------------
-
-void GameMessages::Draw()
-{
+void GameMessages::Draw(){
   // Affichage des messages
   uint msgy = 50;
-  for (iterator i=liste.begin(); i != liste.end(); ++i)
-  {
-    i -> text->DrawCenterTop(video.GetWidth()/2, msgy);
+  
+  for( iterator i=liste.begin(); i != liste.end(); ++i ){
+    i -> text->DrawCenterTop(app.video.window.GetWidth()/2, msgy);
     
     msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
   }
 }
 
-//-----------------------------------------------------------------------------
-
 // Actualisation : Supprime les anciens messages
-void GameMessages::Refresh()
-{
+void GameMessages::Refresh(){
   bool fin;
-  iterator i,actuel;
-  for (i=liste.begin(); i != liste.end(); )
-  {
+  iterator i, actuel;
+  
+  for( i=liste.begin(); i != liste.end(); ){
     actuel = i;
     ++i;
-    if (DUREE_VIE_MSG < global_time.Read() - actuel -> time)
-    {
+    if( DUREE_VIE_MSG < global_time.Read() - actuel -> time ){
       fin = (i == liste.end());
       delete (actuel->text);
       liste.erase (actuel);
-      if (fin) break;
+      if( fin )
+        break;
     }
   }
 }
 
-//-----------------------------------------------------------------------------
-
 // Ajoute un message
-void GameMessages::Add(const std::string &message)
-{
+void GameMessages::Add(const std::string &message){
   // Affiche le message dans la console
   std::cout << "o MSG: " << message << std::endl;
 
@@ -103,7 +92,7 @@ void GameMessages::Add(const std::string &message)
 
   liste.push_back (message_t(tmp, tmp2, global_time.Read()));
 
-  while (NBR_MSG_MAX < liste.size()) liste.pop_front();
+  while( NBR_MSG_MAX < liste.size() )
+    liste.pop_front();
 }
 
-//-----------------------------------------------------------------------------

@@ -21,11 +21,17 @@
 
 #include "../tool/file_tools.h"
 #include <fstream>
-#include <stdlib.h> // getenv
-#include "i18n.h"
-using namespace std;
+#ifdef _WIN32
+   // To get SHGetSpecialFolderPath
+#  define _WIN32_IE   0x400
+#  include <shlobj.h>
+#else
+#  include <stdlib.h> // getenv
+#endif
 
-// Test if a file exist
+#include "i18n.h"
+
+// Test if a file exists
 bool IsFileExist(const std::string &name)
 {
   std::ifstream f(name.c_str());
@@ -57,6 +63,14 @@ std::string GetHome()
 }
 #else
 std::string GetHome (){
+  TCHAR szPath[MAX_PATH];
+
+  // "Documents and Settings\user" is CSIDL_PROFILE
+  if(SHGetSpecialFolderPath(NULL, szPath,
+                            CSIDL_APPDATA, FALSE) == TRUE)
+  {
+    return szPath;
+  }
   return "";
 }
 #endif
