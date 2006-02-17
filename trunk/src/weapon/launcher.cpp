@@ -22,6 +22,8 @@
 #include "launcher.h"
 
 #include <sstream>
+#include <iostream>
+
 #include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
@@ -97,9 +99,9 @@ bool WeaponProjectile::TestImpact()
 {
   if (IsReady()) 
   {
-#ifdef DEBUG_MSG_COLLISION
-    COUT_DBG << "Impact because was ready." << std::endl;
-#endif
+    //#ifdef DEBUG_MSG_COLLISION
+    std::cout << "Impact because was ready." << std::endl;
+    //#endif
     return true;
   }
   return CollisionTest (0,0);
@@ -160,7 +162,9 @@ void WeaponProjectile::Refresh()
 
   // Explose after timeout
   double tmp = global_time.Read() - begin_time;
-  if(tmp>1000 * launcher->cfg().timeout) {
+  double timeout = launcher->cfg().timeout;
+  
+  if(timeout && tmp>1000 * timeout) {
     is_active = false;
     return;
   }
