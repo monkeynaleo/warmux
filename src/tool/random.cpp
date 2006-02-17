@@ -20,33 +20,27 @@
  *****************************************************************************/
 
 #include "../tool/random.h"
-//-----------------------------------------------------------------------------
 #include <time.h>
 #include <math.h>
 #include <stdlib.h>
-//-----------------------------------------------------------------------------
 
-void InitRandom()
-{ srand ( time(NULL) ); }
-
-//---------------------------------------------------------------------------
+void InitRandom(){
+	srand ( time(NULL) );
+}
 
 // Génère un nombre entier aléatoire compris dans [min;max]
-long RandomLong (long min, long max)
-{
+long RandomLong(long min, long max){
   double r = rand();
-  r *= (max-min);
+  
+  r *= (max - min);
   r /= RAND_MAX;
   if (0 <= r) r = floor(r +0.5); else r = ceil(r -0.5);
+  
   return min + (long)r;
 }
 
-//-----------------------------------------------------------------------------
-
-bool RandomBool ()
-{
+bool RandomBool(){
   int moitie = RAND_MAX/2;
   return (rand() <= moitie);
 }
 
-//-----------------------------------------------------------------------------

@@ -20,19 +20,16 @@
  *****************************************************************************/
 
 #include "options_menu.h"
-//-----------------------------------------------------------------------------
 
 #include "../include/app.h"
-#include "../graphic/video.h"
-#include "../team/teams_list.h"
 #include "../game/game_mode.h"
-#include "../map/maps_list.h"
 #include "../game/config.h"
+#include "../graphic/video.h"
+#include "../map/maps_list.h"
+#include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
-
-
-//-----------------------------------------------------------------------------
+#include <sstream>
 
 const uint GAME_X = 20;
 const uint GAME_Y = 20;
@@ -53,85 +50,76 @@ const uint TPS_TOUR_MAX = 120;
 const uint TPS_FIN_TOUR_MIN = 1;
 const uint TPS_FIN_TOUR_MAX = 10;
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option"),
   normal_font(16)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-
-  //-----------------------------------------------------------------------------
-  // Widget creation
-  //-----------------------------------------------------------------------------
+  Rectanglei zeroRect (0, 0, 0, 0);
 
   /* Grapic options */
-  graphic_options = new VBox(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W);
-  graphic_options->AddWidget(new Label(_("Graphic options"), 0, 0, 0, normal_font));
+  graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, 1));
+  graphic_options->AddWidget(new Label(_("Graphic options"), zeroRect, normal_font));
 
-  lbox_video_mode = new ListBox(0, 0, 0, 80);
+  lbox_video_mode = new ListBox( Rectanglei(0, 0, 0, 80) );
   graphic_options->AddWidget(lbox_video_mode);
 
-  opt_max_fps = new SpinButton(_("Maximum number of FPS:"), 0, 0, 0,
+  opt_max_fps = new SpinButton(_("Maximum number of FPS:"), zeroRect,
 			       50, 5,
 			       20, 120);
   graphic_options->AddWidget(opt_max_fps);
 
-  full_screen = new CheckBox(_("Fullscreen?"), 0, 0, 0); 
+  full_screen = new CheckBox(_("Fullscreen?"), zeroRect); 
   graphic_options->AddWidget(full_screen);
 
-  opt_display_wind_particles = new CheckBox(_("Display wind particles?"), 0, 0, 0); 
+  opt_display_wind_particles = new CheckBox(_("Display wind particles?"), zeroRect);
   graphic_options->AddWidget(opt_display_wind_particles);
 
-  opt_display_energy = new CheckBox(_("Display player energy?"), 0, 0, 0); 
+  opt_display_energy = new CheckBox(_("Display player energy?"), zeroRect);
   graphic_options->AddWidget(opt_display_energy);
 
-  opt_display_name = new CheckBox(_("Display player's name?"), 0, 0, 0); 
+  opt_display_name = new CheckBox(_("Display player's name?"), zeroRect); 
   graphic_options->AddWidget(opt_display_name);
 
   /* Sound options */
-  sound_options = new VBox(SOUND_X, SOUND_Y, SOUND_W);
-  sound_options->AddWidget(new Label(_("Sound options"), 0, 0, 0, normal_font));
+  sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, 1));
+  sound_options->AddWidget(new Label(_("Sound options"), zeroRect, normal_font));
 
-  lbox_sound_freq = new ListBox(0, 0, 0, 80);
+  lbox_sound_freq = new ListBox( Rectanglei(0, 0, 0, 80) );
   sound_options->AddWidget(lbox_sound_freq);
 
-  opt_music = new CheckBox(_("Music?"), 0, 0, 0);
+  opt_music = new CheckBox(_("Music?"), zeroRect);
   sound_options->AddWidget(opt_music);
 
-  opt_sound_effects = new CheckBox(_("Sound effects?"), 0, 0, 0);
+  opt_sound_effects = new CheckBox(_("Sound effects?"), zeroRect);
   sound_options->AddWidget(opt_sound_effects);
   
   /* Game options */
-  game_options = new VBox(GAME_X, GAME_Y, GAME_W);
-  game_options->AddWidget(new Label(_("Game options"), 0, 0, 0, normal_font));
+  game_options = new VBox( Rectanglei(GAME_X, GAME_Y, GAME_W, 1) );
+  game_options->AddWidget(new Label(_("Game options"), zeroRect, normal_font));
 
-  opt_duration_turn = new SpinButton(_("Duration of a turn:"), 0, 0, 0,
+  opt_duration_turn = new SpinButton(_("Duration of a turn:"), zeroRect,
 				     TPS_TOUR_MIN, 5,
 				     TPS_TOUR_MIN, TPS_TOUR_MAX);
   game_options->AddWidget(opt_duration_turn);
 
-  opt_duration_end_turn = new SpinButton(_("Duration of the end of a turn:"), 0, 0, 0,
+  opt_duration_end_turn = new SpinButton(_("Duration of the end of a turn:"), zeroRect,
 					 TPS_FIN_TOUR_MIN, 1,
 					 TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
   game_options->AddWidget(opt_duration_end_turn);
 
-  opt_nb_characters = new SpinButton(_("Number of players per team:"), 0, 0, 0,
+  opt_nb_characters = new SpinButton(_("Number of players per team:"), zeroRect,
 				 4, 1,
 				 NBR_VER_MIN, NBR_VER_MAX);
   game_options->AddWidget(opt_nb_characters);
 
-  opt_energy_ini = new SpinButton(_("Initial energy:"), 0,0,0,
+  opt_energy_ini = new SpinButton(_("Initial energy:"), zeroRect,
 				      100, 5,
 				      50, 200);
   
   game_options->AddWidget(opt_energy_ini);
 
-
-  //-----------------------------------------------------------------------------
   // Values initialization
-  //-----------------------------------------------------------------------------
 
   //Generate video mode list
   SDL_Rect **modes;
@@ -143,7 +131,7 @@ OptionMenu::OptionMenu() :
   if(modes == (SDL_Rect **)0){
     std::ostringstream ss;
     ss << app.video.window.GetWidth() << "x" << app.video.window.GetHeight();
-    lbox_video_mode->AddItem(false,"No modes available!", ss.str());
+    lbox_video_mode->AddItem(false, "No modes available!", ss.str());
   } else {
     for(int i=0;modes[i];++i) {
       if (modes[i]->w < 800 || modes[i]->h < 600) break; 
@@ -176,10 +164,7 @@ OptionMenu::OptionMenu() :
 
   opt_music->SetValue( jukebox.UseMusic() );
   opt_sound_effects->SetValue( jukebox.UseEffects() );
-
 }
-
-//-----------------------------------------------------------------------------
 
 OptionMenu::~OptionMenu()
 {
@@ -188,17 +173,13 @@ OptionMenu::~OptionMenu()
   delete game_options;
 }
 
-//-----------------------------------------------------------------------------
-
-void OptionMenu::OnClic ( int x, int y, int button )
+void OptionMenu::OnClic(int x, int y, int button)
 {     
   if (graphic_options->Clic (x,y,button)) {
   } else if (sound_options->Clic (x,y,button)) {
   } else if (game_options->Clic (x,y,button)) {
   }
 }
-
-//-----------------------------------------------------------------------------
 
 void OptionMenu::SaveOptions()
 {
@@ -238,21 +219,15 @@ void OptionMenu::SaveOptions()
   config.Sauve();
 }
 
-//-----------------------------------------------------------------------------
-
 void OptionMenu::__sig_ok()
 {
   SaveOptions();
 }
 
-//-----------------------------------------------------------------------------
-
 void OptionMenu::__sig_cancel()
 {
   // Nothing to do
 }
-
-//-----------------------------------------------------------------------------
 
 void OptionMenu::Draw(int mouse_x, int mouse_y)
 {   
@@ -261,4 +236,3 @@ void OptionMenu::Draw(int mouse_x, int mouse_y)
   game_options->Draw(mouse_x,mouse_y);
 }
 
-//-----------------------------------------------------------------------------

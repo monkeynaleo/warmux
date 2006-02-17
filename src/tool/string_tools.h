@@ -19,15 +19,11 @@
  * Refresh des chaînes de caractère (string).
  *****************************************************************************/
 
-#ifndef GESTION_STRING_H
-#define GESTION_STRING_H
-//-----------------------------------------------------------------------------
+#ifndef STRING_TOOLS_H
+#define STRING_TOOLS__H
+
 #include "../include/base.h"
 #include <string>
-//-----------------------------------------------------------------------------
-
-// Nombres d'occurences d'un caractère dans une chaîne
-ulong occurence_caractere (const std::string &txt, char x);
 
 // Conversion string -> type
 // Renvoie false cas d'erreur
@@ -40,5 +36,4 @@ std::string long2str (long x);
 std::string ulong2str (ulong x);
 std::string double2str (ulong x);
 
-//-----------------------------------------------------------------------------
 #endif

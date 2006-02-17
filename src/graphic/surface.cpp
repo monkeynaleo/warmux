@@ -390,7 +390,7 @@ int Surface::ImgLoad(std::string filename){
 	AutoFree();
 	surface = IMG_Load( filename.c_str() );
 
-	return surface != NULL;
+	return !IsNull();
 }
 
 /**

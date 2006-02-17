@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "game_loop.h"
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <SDL_image.h>
 #include <sstream>
@@ -43,7 +42,6 @@
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/wind.h"
-//#include "../object/bonus_box.h"
 #include "../object/objects_list.h"
 #include "../object/particle.h"
 #include "../sound/jukebox.h"
@@ -599,7 +597,7 @@ PhysicalObj* GameLoop::GetMovingObject()
   {
     if (!ver -> IsReady() && !ver -> IsGhost())
     {
-      MSG_DEBUG("game.endofturn", Format("%s is not ready", (*ver).m_name.c_str()))
+      MSG_DEBUG("game.endofturn", "%s is not ready", (*ver).m_name.c_str())
       return &(*ver);
     }
   }
@@ -608,7 +606,7 @@ PhysicalObj* GameLoop::GetMovingObject()
   {
     if (!objet -> ptr -> IsReady())
     {
-      MSG_DEBUG("game.endofturn", Format("%s is not ready", objet->ptr->m_name.c_str() ))
+      MSG_DEBUG("game.endofturn", "%s is not ready", objet->ptr->m_name.c_str())
       return objet -> ptr;
     }
   }

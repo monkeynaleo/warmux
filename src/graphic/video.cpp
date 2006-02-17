@@ -15,8 +15,6 @@
  *  You should have received a copy of the GNU GeneralPublic License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Refresh de la carte vidéo.
  *****************************************************************************/
 
 #include "video.h"
@@ -31,7 +29,6 @@
 #include "../tool/i18n.h"
 #include "../include/app.h"
 #include "../include/constant.h"
-
 
 Video::Video(){
 	SetMaxFps (50);
@@ -113,6 +110,7 @@ void Video::SetWindowCaption(std::string caption){
 void Video::SetWindowIcon(std::string filename){
 	SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
 }
+
 void Video::InitSDL(){
 	if( SDLReady )
 		return;

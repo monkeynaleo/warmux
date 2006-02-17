@@ -22,12 +22,9 @@
 
 class EulerVector{
 	public:
-		double x0,x1,x2; 
+		double x0, x1, x2; 
 
-		// Set vector to 0.
 		void Clear();
-	
-		/* Compute one step to solve a.x'' + b.x' + c.x = d equation using Euler method */
 		void ComputeOneEulerStep(double a, double b, double c, double d, double dt);
 };
 

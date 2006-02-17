@@ -20,20 +20,20 @@
  *****************************************************************************/
 
 #include "check_box.h"
-#include <algorithm>
 #include "../include/app.h"
 #include "../include/global.h"
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 
-
-CheckBox::CheckBox (const std::string &label, int x, int y, uint w, bool value) :
-  Widget(x, y, w, global().small_font().GetHeight()){
+CheckBox::CheckBox (const std::string &label, const Rectanglei &rect, bool value){
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadSprite( res, "menu/check");
   m_image->cache.EnableLastFrameCache();
+ 
+  SetPosition( rect.GetPosition() );
+  SetSize( rect.GetSize() );
 
-  // Copy arguments
+  SetSizeY( global().small_font().GetHeight() );
   m_value = value;
 
   txt_label = new Text(label, white_color, &global().small_font());
@@ -45,26 +45,26 @@ CheckBox::~CheckBox(){
 }
 
 void CheckBox::Draw (uint mouse_x, uint mouse_y){
-  txt_label->DrawTopLeft(x, y);
+  txt_label->DrawTopLeft( GetPosition() );
  
   if (m_value)
     m_image->SetCurrentFrame(0);
   else 
     m_image->SetCurrentFrame(1);
 
-  m_image->Blit(app.video.window, x+w-16, y);
+  m_image->Blit(app.video.window, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
 bool CheckBox::Clic (uint mouse_x, uint mouse_y, uint button){
   if( !MouseIsOver(mouse_x, mouse_y) )
     return false;
 
-  m_value = !m_value ;
+  m_value = !m_value;
   return true ;
 }
 
-void CheckBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
-  StdSetSizePosition(_x, _y, _w, _h);
+void CheckBox::SetSizePosition(const Rectanglei &rect){
+  StdSetSizePosition(rect);
 }
 
 bool CheckBox::GetValue() const{

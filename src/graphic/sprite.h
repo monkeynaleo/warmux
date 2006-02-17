@@ -62,12 +62,15 @@ public:
   unsigned int GetFrameCount();
 
   // Size
-  unsigned int GetWidth();
-  unsigned int GetHeight();
+  unsigned int GetWidth() const;
+  unsigned int GetHeight() const;
+  Point2i GetSize() const;
   void GetScaleFactors( float &scale_x, float &scale_y);
   void SetSize(unsigned int w, unsigned int h);
+  void SetSize(const Point2i &size);
   void Scale( float scale_x, float scale_y);
   void ScaleSize(int width, int height);
+  void ScaleSize(Point2i size);
 
   // Rotation
   void SetRotation_deg( float angle_deg);
@@ -100,8 +103,10 @@ public:
   void Hide();
      
   // Draw
-  void Blit( Surface &dest, uint pox_x, uint pos_y);
-  void Blit( Surface &dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
+  void Blit(Surface &dest, uint pox_x, uint pos_y);
+  void Blit(Surface &dest, const Point2i &pos);
+  void Blit(Surface &dest, const Rectanglei &srcRect, const Point2i &destPos);
+  void Blit(Surface &dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
   void Draw(int pos_x, int pos_y);
 
 private:

@@ -22,14 +22,13 @@
 
 #ifndef MAIN_MENU_H
 #define MAIN_MENU_H
-//-----------------------------------------------------------------------------
+
 #include "../include/base.h"
 #include "../graphic/fps.h"
 #include "../graphic/sprite.h"
 #include "../gui/button_text.h"
 #include <SDL.h>
 #include <vector>
-//-----------------------------------------------------------------------------
 
 typedef enum
 {
@@ -39,8 +38,6 @@ typedef enum
   menuOPTIONS,
   menuQUIT
 } menu_item;
-
-//-----------------------------------------------------------------------------
 
 class Main_Menu
 {
@@ -81,7 +78,6 @@ private:
   // Erase the whole window
   void EraseAll();
 
-
   void button_click();
   bool sig_play();
   bool sig_network();
@@ -90,5 +86,4 @@ private:
   bool sig_quit();
 };
 
-//-----------------------------------------------------------------------------
 #endif

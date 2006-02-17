@@ -21,25 +21,22 @@
 
 #ifndef LABEL_H
 #define LABEL_H
-//-----------------------------------------------------------------------------
+
 #include "../include/base.h"
 #include "../graphic/text.h"
 #include "../gui/widget.h"
 #include <string>
-//-----------------------------------------------------------------------------
 
-class Label : public Widget
-{
+class Label : public Widget{
  private:
   Text * txt_label;
    
  public:
-  Label(const std::string &label, int x, int y, uint w, Font& font);
+  Label(const std::string &label, const Rectanglei &rect, Font& font);
   ~Label();
   void Draw (uint mouse_x, uint mouse_y) ;
-  void SetSizePosition(int _x, int _y, uint _w, uint _h);
+  void SetSizePosition(const Rectanglei &rect);
 };
 
-//-----------------------------------------------------------------------------
 #endif
 

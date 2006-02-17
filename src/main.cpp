@@ -28,7 +28,6 @@
 #include <vector>
 #include <iostream>
 #include <SDL.h>
-#include <SDL_image.h>
 #include "game/config.h"
 #include "game/time.h"
 #include "graphic/font.h"
@@ -136,27 +135,26 @@ void AppWormux::InitNetwork(int argc, char **argv){
 
 void AppWormux::DisplayLoadingPicture(){
   std::string txt_version = _("Version") + std::string(" ") + VERSION;
-
   std::string filename = config.data_dir + CONCAT_DIR("menu", CONCAT_DIR("img", "loading.png"));
-  Sprite * loading_image=new Sprite( Surface(filename.c_str()) );
-  loading_image->cache.EnableLastFrameCache();
-  loading_image->ScaleSize( video.window.GetWidth(), video.window.GetHeight() );
-  loading_image->Blit( video.window, 0, 0);
+
+  Surface surfaceLoading = Surface( filename.c_str() );
+  Sprite loading_image = Sprite( surfaceLoading );
+
+  loading_image.cache.EnableLastFrameCache();
+  loading_image.ScaleSize( video.window.GetSize() );
+  loading_image.Blit( video.window, 0, 0 );
 
   global_time.Reset();
 
   Text text1(_("Wormux launching..."), white_color, &global().huge_font(), true); 
   Text text2(txt_version, white_color, &global().huge_font(), true); 
   
-  int x = video.window.GetWidth()/2;
-  int y = video.window.GetHeight()/2;
-
-  text1.DrawCenter (x, y);
-  y += global().huge_font().GetHeight() + 20;
-  text2.DrawCenter (x, y);
+  Point2i windowCenter = video.window.GetSize() / 2;
+  
+  text1.DrawCenter( windowCenter );
+  text2.DrawCenter( windowCenter + Point2i(0, global().huge_font().GetHeight() + 20 ));
 
   video.window.Flip();
-  delete loading_image;
 }
 
 void AppWormux::InitFonts(){

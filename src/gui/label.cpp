@@ -20,35 +20,23 @@
  *****************************************************************************/
 
 #include "label.h"
-//-----------------------------------------------------------------------------
 #include "../include/app.h"
 
-//-----------------------------------------------------------------------------
-
-
-Label::Label (const std::string &label, int x, int y, uint w, Font& _font) :
-  Widget(x, y, w, _font.GetHeight())
-{
+Label::Label (const std::string &label, const Rectanglei &rect, Font& _font){
+  SetPosition( rect.GetPosition() );
+  SetSize( rect.GetSize() );
+  SetSizeY( _font.GetHeight() );
   txt_label = new Text(label, white_color, &_font);
 }
 
-//-----------------------------------------------------------------------------
-
-Label::~Label()
-{
+Label::~Label(){
   delete txt_label;
 }
 
-//-----------------------------------------------------------------------------
-
-void Label::Draw (uint mouse_x, uint mouse_y)
-{
-  txt_label->DrawTopLeft(x, y);
+void Label::Draw (uint mouse_x, uint mouse_y){
+  txt_label->DrawTopLeft( GetPosition() );
 }
 
-//-----------------------------------------------------------------------------
-void Label::SetSizePosition(int _x, int _y, uint _w, uint _h)
-{
-  StdSetSizePosition(_x, _y, _w, _h);
+void Label::SetSizePosition(const Rectanglei &rect){
+  StdSetSizePosition( rect );
 }
-//-----------------------------------------------------------------------------

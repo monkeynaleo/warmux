@@ -21,35 +21,24 @@
 
 #include "button_text.h"
 #include "include/app.h"
-//-----------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------
-
-ButtonText::~ButtonText()
-{
+ButtonText::~ButtonText(){
   delete text;
 }
 
-
-//-----------------------------------------------------------------------------
-
-ButtonText::ButtonText (int x, int y,
+ButtonText::ButtonText (Point2i position,
 			const Profile *res_profile, const std::string& resource_id,
 			const std::string &new_text,
 			Font *font)
-  : Button(x, y, res_profile, resource_id)
-{ 
+  : Button(position, res_profile, resource_id){
   text = new Text(new_text, white_color, font);
 }
 
-
-//-----------------------------------------------------------------------------
-
-void ButtonText::Draw (uint mouse_x, uint mouse_y)
-{
-  Button::Draw (mouse_x, mouse_y);
-  text->DrawCenter(GetX()+w/2,GetY()+h/2);
+void ButtonText::Draw (uint mouse_x, uint mouse_y){
+	Point2i textPosition = GetPosition() + GetSize() / 2;
+	
+    Button::Draw (mouse_x, mouse_y);
+    text->DrawCenter(textPosition);
 }
 
-//-----------------------------------------------------------------------------
 

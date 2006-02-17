@@ -19,16 +19,20 @@
 
 #include "euler_vector.h"
 
-// Set a vector to 0
+/**
+ *  Set the euler vector to (0, 0, 0).
+ */
 void EulerVector::Clear(){
   x0 = 0.0;
   x1 = 0.0;
   x2 = 0.0;
 }
 
-/* Solve a.x'' + b.x' + c.x = d equation using Euler method */
+/**
+ *  Solve a.x'' + b.x' + c.x = d equation using Euler method.
+ */
 void EulerVector::ComputeOneEulerStep(double a, double b, double c, double d, double dt){
-  x2 = (d - b * x1 - c * x0)/a;
+  x2 = (d - b * x1 - c * x0) / a;
   x1 = x1 + x2 * dt;
   x0 = x0 + x1 * dt;
 }

@@ -42,7 +42,9 @@ public:
 
   //Draw method using windows coordinates
   void DrawCenter(int x, int y);
+  void DrawCenter(const Point2i &position);
   void DrawTopLeft(int x, int y);
+  void DrawTopLeft(const Point2i &position);
   void DrawTopRight(int x, int y);
   void DrawCenterTop(int x, int y);
 

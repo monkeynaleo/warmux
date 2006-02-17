@@ -57,7 +57,7 @@ public:
   int GetHeight (const std::string &txt);
 
   Surface Render(const std::string &txt, const Color &color, bool cache=false);
-  Surface Font::CreateSurface(const std::string &txt, const Color &color);
+  Surface CreateSurface(const std::string &txt, const Color &color);
 };
 
 class GameFont : public Font

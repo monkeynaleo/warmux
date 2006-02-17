@@ -15,24 +15,22 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Checkbox in GUI.
  *****************************************************************************/
 
 #include "spin_button.h"
-//-----------------------------------------------------------------------------
+#include <sstream>
+#include <iostream>
 #include "../include/app.h"
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
-#include <sstream>
-#include <iostream>
 #include "../include/global.h"
-//-----------------------------------------------------------------------------
 
-SpinButton::SpinButton (const std::string &label, int x, int y, uint w,
-			     int value, int step, int min_value, int max_value) :
-  Widget(x,y,w,global().small_font().GetHeight())
-{
+SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
+			     int value, int step, int min_value, int max_value){
+  position =  rect.GetPosition();
+  size = rect.GetSize();
+  SetSizeY( global().small_font().GetHeight() );
+	  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
   txt_label = new Text(label, white_color, &global().small_font());
@@ -55,24 +53,19 @@ SpinButton::SpinButton (const std::string &label, int x, int y, uint w,
   
   uint margin = 5;
 
-  m_plus = new Button (x+w-5,y,5,10,res, "menu/plus");
-  m_minus = new Button (x+w-max_value_w-5-2*margin,y,5,10,res, "menu/minus");   
+  m_plus = new Button( Rectanglei(GetPositionX() + GetSizeX() - 5, GetPositionY(), 5, 10), res, "menu/plus");
+  m_minus = new Button( Rectanglei(GetPositionX() + GetSizeX() - max_value_w - 5 - 2 * margin, GetPositionY(), 5, 10), res, "menu/minus");   
 
   m_step = step;
 }
 
-//-----------------------------------------------------------------------------
-SpinButton::~SpinButton ()
-{
+SpinButton::~SpinButton (){
   delete txt_label;
   delete txt_value;
 }
 
-
-//-----------------------------------------------------------------------------
-void SpinButton::SetSizePosition(int _x, int _y, uint _w, uint _h)
-{
-  StdSetSizePosition(_x, _y, _w, _h);
+void SpinButton::SetSizePosition(const Rectanglei &rect){
+  StdSetSizePosition(rect);
 
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
@@ -80,24 +73,20 @@ void SpinButton::SetSizePosition(int _x, int _y, uint _w, uint _h)
   
   uint margin = 5;
   
-  m_plus->SetSizePosition(x+w-5,y,5,10);
-  m_minus->SetSizePosition(x+w-max_value_w-5-2*margin,y,5,10);
+  m_plus->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 5, GetPositionY(), 5, 10) );
+  m_minus->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - max_value_w - 5 - 2 * margin, GetPositionY(), 5, 10) );
 }
-
-//-----------------------------------------------------------------------------
 
 void SpinButton::Draw (uint mouse_x, uint mouse_y)
 {
-  txt_label->DrawTopLeft(x,y);
+  txt_label->DrawTopLeft( GetPosition() );
    
   m_minus->Draw (mouse_x, mouse_y);
   m_plus->Draw (mouse_x, mouse_y);
 
-  uint center = (m_plus->GetX() +5 + m_minus->GetX() )/2;
-  txt_value->DrawCenterTop(center, y);
+  uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;
+  txt_value->DrawCenterTop(center, position.y);
 }
-
-//-----------------------------------------------------------------------------
 
 bool SpinButton::Clic (uint mouse_x, uint mouse_y, uint button) 
 {
@@ -113,11 +102,7 @@ bool SpinButton::Clic (uint mouse_x, uint mouse_y, uint button)
   return false;
 }
 
-//-----------------------------------------------------------------------------
-
 int SpinButton::GetValue()  const { return m_value; }
-
-//-----------------------------------------------------------------------------
 
 void SpinButton::SetValue(int value)  
 {

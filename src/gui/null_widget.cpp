@@ -20,28 +20,21 @@
  *****************************************************************************/
 
 #include "null_widget.h"
-//-----------------------------------------------------------------------------
 
-NullWidget::NullWidget (int x, int y, uint w, uint h):
-  Widget(x, y, w, h)
+NullWidget::NullWidget (const Rectanglei &rect):
+  Widget(rect)
 {
 }
-
-//-----------------------------------------------------------------------------
 
 NullWidget::~NullWidget()
 {
 }
 
-//-----------------------------------------------------------------------------
-
 void NullWidget::Draw (uint mouse_x, uint mouse_y)
 {
 }
 
-//-----------------------------------------------------------------------------
-void NullWidget::SetSizePosition(int _x, int _y, uint _w, uint _h)
+void NullWidget::SetSizePosition(const Rectanglei &rect)
 {
-  StdSetSizePosition(_x, _y, _w, _h);
+  StdSetSizePosition(rect);
 }
-//-----------------------------------------------------------------------------

@@ -32,21 +32,11 @@
 #include "../game/time.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
+#include "../tool/debug.h"
 #include "../tool/math_tools.h"
 #include "../tool/point.h"
 #include "../tool/rectangle.h"
 #include "../weapon/ninja_rope.h"
-
-#ifdef DEBUG
-
-//#define DEBUG_CHG_ETAT
-//#define DEBUG_MSG_PHYSIQUE
-
-#define COUT_DEBUG0 std::cout << "[Objet " << m_name << "]"
-#define COUT_DEBUG COUT_DEBUG0 " "
-#define COUT_PHYSIC COUT_DEBUG0 << "[Physique] "
-
-#endif
 
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 6 ;
@@ -263,11 +253,8 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 	  {
 	    tmp_x = BorneLong(tmp_x, 0, world.GetWidth() -GetWidth() -1);
 	    tmp_y = BorneLong(tmp_y, 0, world.GetHeight() -GetHeight() -1);
-#ifdef DEBUG_CHG_ETAT
-	    COUT_DEBUG << "DeplaceTestCollision touche un bord :" 
-		       << tmp_x << "," << tmp_y
-		       << std::endl;
-#endif
+			
+		MSG_DEBUG( "physic.state", "DeplaceTestCollision touche un bord : %d, %d", tmp_x, tmp_y );
 	  }
 
 	SetXY (tmp_x, tmp_y);
@@ -278,10 +265,7 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
     // Test if we collide something...
     if (CollisionTest(tmp_x, tmp_y))
       {
-#ifdef DEBUG_CHG_ETAT
-	COUT_DEBUG << "DeplaceTestCollision: collision par TestCollision."
-		   << std::endl;
-#endif
+	  MSG_DEBUG( "physic.state", "DeplaceTestCollision: collision par TestCollision." );
 	// Yes ! There is  a collision.
 	// Set the object position to the current position.
 
@@ -304,7 +288,6 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
     contact_y = y;
   }
 
-	//        printf ("--- Collision !!! - Pos %d,%d\n", tmp_x, tmp_y);
     collision = true;
     break ;
 
@@ -326,22 +309,11 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
    
   return collision;
 }
-/*#else
-bool PhysicalObj::NotifyMove(double old_x, double old_y,
-			     double new_x, double new_y,
-			     double &contact_x, double &contact_y,
-			     double &contact_angle)
-{
-    return false;
-}
-#endif // TODO*/
 
 void PhysicalObj::UpdatePosition ()
 {
   // No ghost allowed here !
   if (IsGhost()) return; 
-
-//  if(!IsMoving() && m_type != objCLASSIC) return;
 
   if ((m_type == objCLASSIC) && !IsMoving()
       && !FootsInVacuum() && !IsInWater()) return;
@@ -349,7 +321,6 @@ void PhysicalObj::UpdatePosition ()
   if(!IsMoving() && FootsInVacuum() && m_type != objUNBREAKABLE) StartMoving();
 
   // Compute new position.
-
   RunPhysicalEngine();
 
   if (IsGhost()) return;
@@ -416,9 +387,8 @@ bool PhysicalObj::PutOutOfGround()
 
 void PhysicalObj::Ready()
 {
-#ifdef DEBUG_CHG_ETAT
-  if (m_alive != ALIVE) COUT_DEBUG << "Ready." << std::endl;
-#endif
+  if (m_alive != ALIVE)
+	MSG_DEBUG( "physic.state", "Ready.");
   m_alive = ALIVE;
   StopMoving();
 }
@@ -427,22 +397,22 @@ void PhysicalObj::Ready()
 void PhysicalObj::Die()
 {
   assert (m_alive == ALIVE || m_alive == DROWNED);
-#ifdef DEBUG_CHG_ETAT
-  COUT_DEBUG << "Meurt." << std::endl;
-#endif
+  
+  MSG_DEBUG( "physic.state", "Is dying..");
+  
   m_alive = DEAD;
-  if (m_alive != DROWNED) SignalDeath();
+  if (m_alive != DROWNED)
+	SignalDeath();
 }
 
 void PhysicalObj::Ghost ()
 {
-  if (m_alive == GHOST) return;
+  if (m_alive == GHOST)
+	return;
 
   bool was_dead = IsDead(); 
   m_alive = GHOST;
-#ifdef DEBUG_CHG_ETAT
-  COUT_DEBUG << "Fantome (etait_mort=" << was_dead << ")" << std::endl;
-#endif
+  MSG_DEBUG("physic.state", "Ghost, was_dead = %d", was_dead);
 
   // L'objet devient un fantome
   m_pos_y.x1 = 0.0 ;
@@ -454,17 +424,12 @@ void PhysicalObj::Ghost ()
 void PhysicalObj::Drown()
 {
   assert (m_alive != DROWNED);
-#ifdef DEBUG_CHG_ETAT
-  COUT_DEBUG << "Se noie !!!" << std::endl;
-#endif
+  MSG_DEBUG("physic.state", "Drowned...");
   m_alive = DROWNED;
 
   // Set the air grab to water resist factor.
   m_air_resist_factor = WATER_RESIST_FACTOR ;
 
-#ifdef DEBUG_CHG_ETAT
-  COUT_DEBUG << "Se noie speed = " << m_speed.x << "," << m_speed.y << std::endl;
-#endif
   StartMoving();
   SignalDrowning();
 }
@@ -531,10 +496,7 @@ bool PhysicalObj::IsInVacuumXY (int x, int y) const
   if (FootsOnFloor(y-1)) return false;
 
   Rectanglei rect( x+m_test_left,y+m_test_top, m_width-m_test_right-m_test_left, m_height-m_test_bottom-m_test_top/*-1*/);
-//  if (m_allow_negative_y)
-//   {
-//    if ((0<=rect.bottom) && (rect.top<0)) rect.top = 0;
-//  }
+  
   return world.RectEstDansVide (rect);
 }
 
@@ -569,15 +531,6 @@ bool PhysicalObj::FootsInVacuumXY(int x, int y) const
        }
   }
    
-/*  if ( world.RectEstDansVide (Rectanglei(rect)))
-     {
-	std::cout << "physicalobk.cpp:629: physobj " << rect.x << " " << rect.y <<" (" << rect.w << "," << rect.h <<") dans le vide" << std::endl;
-     }
-   else
-     {
-	std::cout << "physicalobk.cpp:629: physobj " << rect.x << " " << rect.y <<" EST POSE" << std::endl;	
-     }*/
-   
   return world.RectEstDansVide (rect);
 }
 
@@ -597,10 +550,7 @@ bool PhysicalObj::CollisionTest (int x, int y)
 void PhysicalObj::DirectFall()
 {
   while (!IsGhost() && !IsInWater() && FootsInVacuum())
-   {
-//      std::cout << "DirectFall " << GetX() << " " << GetY() << std::endl;
       SetY(GetY()+1);
-   }
 }
 
 bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)

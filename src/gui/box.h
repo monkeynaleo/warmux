@@ -22,10 +22,9 @@
 #ifndef GUI_BOX_H
 #define GUI_BOX_H
 
-//-----------------------------------------------------------------------------
 #include "widget.h"
 #include <list>
-//-----------------------------------------------------------------------------
+#include "../tool/point.h"
 
 class Box : public Widget
 {
@@ -34,40 +33,35 @@ class Box : public Widget
   Widget * last_widget;
   bool visible;
   uint margin;
-  uint w_border, h_border;
+  Point2i border;
 
  public:
-  Box(int x, int y, uint w, uint h, bool _visible=true);
+  Box(const Rectanglei &rect, bool _visible=true);
   virtual ~Box();
 
   void Draw (uint mouse_x, uint mouse_y);
   bool Clic (uint mouse_x, uint mouse_y, uint button);
   void SetMargin(uint _margin);
-  void SetBorder(uint _w_border, uint _h_border);
+  void SetBorder(const Point2i &newBorder);
 
   virtual void AddWidget(Widget * a_widget) = 0;
 };
 
-//-----------------------------------------------------------------------------
-
 class VBox : public Box
 {
  public:
-  VBox(int x, int y, uint w, bool _visible=true);
+  VBox(const Rectanglei &rect, bool _visible=true);
   void AddWidget(Widget * a_widget);
-  void SetSizePosition(int _x, int _y, uint _w, uint _h);
+  void SetSizePosition(const Rectanglei &rect);
 };
-
-//-----------------------------------------------------------------------------
 
 class HBox : public Box
 {
  public:
-  HBox(int x, int y, uint h, bool _visible=true);
+  HBox(const Rectanglei &rect, bool _visible=true);
   void AddWidget(Widget * a_widget);  
-  void SetSizePosition(int _x, int _y, uint _w, uint _h);
+  void SetSizePosition(const Rectanglei &rect);
 };
 
-//-----------------------------------------------------------------------------
 #endif
 

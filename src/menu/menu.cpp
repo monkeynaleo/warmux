@@ -20,18 +20,13 @@
  *****************************************************************************/
 
 #include "menu.h"
-//-----------------------------------------------------------------------------
-
 #include "../graphic/sprite.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
 #include "../tool/resource_manager.h"
 #include "../sound/jukebox.h"
 
-//-----------------------------------------------------------------------------
-
-Menu::Menu(char * bg)
-{
+Menu::Menu(char * bg){
   close_menu = false ;
    
   uint x = app.video.window.GetWidth() / 2;
@@ -40,38 +35,25 @@ Menu::Menu(char * bg)
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( resource_manager.LoadImage( res, bg));
 
-  //-----------------------------------------------------------------------------
-  // Widget creation
-  //-----------------------------------------------------------------------------
+  actions_buttons = new HBox( Rectanglei(x, y, 1, 40), false);
 
-  /* actions buttons */
-  actions_buttons = new HBox(x, y, 40, false);
-
-  b_ok = new Button(0, 0, res, "menu/valider"); 
+  b_ok = new Button( Point2i(0, 0), res, "menu/valider"); 
   actions_buttons->AddWidget(b_ok);
 
-  b_cancel = new Button(0, 0, res, "menu/annuler");
+  b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
   actions_buttons->AddWidget(b_cancel);
 }
 
-//-----------------------------------------------------------------------------
-
-Menu::~Menu()
-{
+Menu::~Menu(){
   delete background;
   delete actions_buttons;
 }
 
-//-----------------------------------------------------------------------------
-
-void Menu::sig_ok()
-{
+void Menu::sig_ok(){
   jukebox.Play("share", "menu/ok");
   __sig_ok();
   close_menu = true;
 }
-
-//-----------------------------------------------------------------------------
 
 void Menu::sig_cancel()
 {
@@ -80,32 +62,25 @@ void Menu::sig_cancel()
   close_menu = true;
 }
 
-//-----------------------------------------------------------------------------
-
 bool Menu::BasicOnClic(int mouse_x, int mouse_y)
 {
-  if (b_ok->MouseIsOver (mouse_x, mouse_y)) {
+  if (b_ok->MouseIsOver (mouse_x, mouse_y))
     sig_ok();
-  } else if (b_cancel->MouseIsOver (mouse_x, mouse_y)) {
+  else if (b_cancel->MouseIsOver (mouse_x, mouse_y))
     sig_cancel();
-  } else {
+  else
     return false;
-  }
+  
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void Menu::BasicDraw(int mouse_x, int mouse_y)
 {
-  background->ScaleSize(app.video.window.GetWidth(), 
-		  app.video.window.GetHeight());
+  background->ScaleSize(app.video.window.GetSize());
   background->Blit( app.video.window, 0, 0);
   
   actions_buttons->Draw(mouse_x,mouse_y);
 }
-
-//-----------------------------------------------------------------------------
 
 void Menu::Run ()
 { 
@@ -128,11 +103,8 @@ void Menu::Run ()
    while( SDL_PollEvent( &event) ) 
      {      
        if ( event.type == SDL_QUIT) 
-	 {  
 	   sig_cancel();
-	 }
        else if ( event.type == SDL_KEYDOWN )
-	 {	       
 	   switch ( event.key.keysym.sym)
 	     { 
 	     case SDLK_ESCAPE: 
@@ -146,14 +118,9 @@ void Menu::Run ()
 	     default:
 	       break;
 	     }  
-	 }
        else if ( event.type == SDL_MOUSEBUTTONDOWN )
-	 {
 	   if (! BasicOnClic(event.button.x, event.button.y) )
-	     {
-	       OnClic( event.button.x, event.button.y, event.button.button); //uint8 SDL_BUTTON_LEFT SDL_BUTTON_MIDDLE SDL_BUTTON_RIGHT SDL_BUTTON_WHEELUP SDL_BUTTON_WHEELDOWN
-	     }
-	 }
+	       OnClic( event.button.x, event.button.y, event.button.button);
      }
 
    SDL_GetMouseState( &x, &y);
@@ -175,9 +142,6 @@ void Menu::Run ()
 
 }
 
-//-----------------------------------------------------------------------------
-
-void Menu::SetActionButtonsXY(int x, int y)
-{
-  actions_buttons->SetSizePosition(x, y, actions_buttons->GetW(), actions_buttons->GetH());
+void Menu::SetActionButtonsXY(int x, int y){
+  actions_buttons->SetSizePosition( Rectanglei(x, y, actions_buttons->GetSizeX(), actions_buttons->GetSizeY()) );
 }

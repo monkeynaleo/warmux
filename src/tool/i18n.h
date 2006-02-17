@@ -29,8 +29,8 @@
 
 #define _(X) gettext(X)
 
+std::string Format (const char *format, ...);
 void InitI18N();
 void I18N_SetDir(const std::string &dir);
-std::string Format (const char *txt, ...);
 
 #endif

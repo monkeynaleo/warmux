@@ -23,17 +23,17 @@
 #define GUI_WIDGET_H
 
 #include "../include/base.h"
-//-----------------------------------------------------------------------------
+#include "../tool/rectangle.h"
+#include "../tool/point.h"
 
-class Widget
+class Widget : public Rectanglei
 {
  protected:
-  int x, y;
-  uint w, h;
-  void StdSetSizePosition(int _x, int _y, uint _w, uint _h);
+  void StdSetSizePosition(const Rectanglei &rect);
 
  public:
-  Widget(int _x, int _y, uint _w, uint _h);
+  Widget();
+  Widget(const Rectanglei &rect);
   virtual ~Widget();
 
   virtual void Draw (uint mouse_x, uint mouse_y) = 0;
@@ -41,16 +41,11 @@ class Widget
   bool MouseIsOver (uint mouse_x, uint mouse_y) ;
   virtual bool Clic (uint mouse_x, uint mouse_y, uint button);
 
-  virtual void SetSizePosition(int _x, int _y, uint _w, uint _h) = 0;
-  void SetSize (uint _w, uint _h) { SetSizePosition(x, y, _w, _h); };
-  void SetXY   (int  _x, int  _y) { SetSizePosition(_x, _y, w, h); };
-
-  int GetX() const {return x;}
-  int GetY() const {return y;}
-  uint GetW() const {return w;}
-  uint GetH() const {return h;}
+  virtual void SetSizePosition(const Rectanglei &rect) = 0;
+  void SetXY(int _x, int _y){ 
+	  SetSizePosition( Rectanglei(Point2i(_x, _y), size) ); 
+  };
 };
 
-//-----------------------------------------------------------------------------
 #endif
 

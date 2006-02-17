@@ -30,64 +30,54 @@
 
 Time global_time;
 
-bool Time::IsGamePaused() const 
-{ 
+bool Time::IsGamePaused() const {
   return is_game_paused;
 }
 
-Time::Time()
-{
+Time::Time(){
   pause_offset = 0;
   is_game_paused = false;
 }
 
-void Time::Reset()
-{
+void Time::Reset(){
   pause_offset = SDL_GetTicks();
   is_game_paused = false;
 }
 
-uint Time::Read() const
-{   
+uint Time::Read() const{
   return SDL_GetTicks() - pause_offset;
 }
 
-uint Time::ReadSec() const
-{
+uint Time::ReadSec() const{
   return Read() / 1000;
 }
 
-uint Time::ReadMin() const
-{
+uint Time::ReadMin() const{
   return ReadSec() / 60;
 }
-void Time::Pause()
-{
+
+void Time::Pause(){
   if (is_game_paused)
     return;
   pause_start = SDL_GetTicks();
   is_game_paused = true;
 }
 
-void Time::Continue()
-{
+void Time::Continue(){
   assert (is_game_paused);
   pause_offset += SDL_GetTicks() - pause_start;
   is_game_paused = false;
 }
 
-uint Time::ClockSec()
-{
+uint Time::ClockSec(){
   return ReadSec() % 60;
 }
 
-uint Time::ClockMin()
-{
+uint Time::ClockMin(){
   return ReadMin() % 60;
 }
 
-std::string Time::GetString()
-{
+std::string Time::GetString(){
   std::ostringstream ss;
   
   ss << ClockMin() << ":" << std::setfill('0') << std::setw(2) << ClockSec();

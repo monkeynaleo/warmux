@@ -34,12 +34,6 @@
 #include "../tool/i18n.h"
 #include "../tool/resource_manager.h"
 
-#ifdef DEBUG
-//#  define DESSINE_BORDURE_CANVAS
-#endif
-
-namespace Wormux {
-
 Ground::Ground()
 { //FIXME (a effacer) 
 }
@@ -290,4 +284,3 @@ void Ground::Draw()
 #endif
 }
 
-} // namespace Wormux

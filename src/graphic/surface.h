@@ -95,6 +95,13 @@ class Surface
 				return surface == NULL;
 			}
 
+			/** 
+			 * Return the size of a surface.
+			 */
+			inline Point2i GetSize() const{
+				return Point2i( GetWidth(), GetHeight() );
+			}
+
 			/// Return the width of a surface.
 			inline int GetWidth() const{
 				return surface->w;

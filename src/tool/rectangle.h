@@ -35,7 +35,7 @@
  */
 template<class T> class Rectangle
 {
-	private:
+	protected:
 		/** Position of the rectangle. */
 		Vector2<T> position;
 		/** Size of the rectangle. */
@@ -49,18 +49,24 @@ template<class T> class Rectangle
 		}
 		
 		/**
-		 * Constructor for building a rectangle of a certain size
+		 * Constructor for building a new rectangle.
 		 *
-		 * @param x Position among the x axe
-		 * @param y Position among the y axe
-		 * @param width Width of the new rectangle
-		 * @param height Height of the new rectangle
+		 * @param x Position among the x axe.
+		 * @param y Position among the y axe.
+		 * @param width Width of the new rectangle.
+		 * @param height Height of the new rectangle.
 		 */
 		inline Rectangle(T x, T y, T width, T height){
 			position.SetValues( x, y );
 			size.SetValues( width, height );
 		}
 
+		/**
+		 * Constructor for building a new rectangle with the position and size specified.
+		 *
+		 * @param thePosition Position of the new rectangle.
+		 * @param theSize Size of the new rectangle.
+		 */
 		inline Rectangle(Vector2<T> thePosition, Vector2<T> theSize){
 			position = thePosition;
 			size = theSize;
@@ -69,21 +75,36 @@ template<class T> class Rectangle
 		/**
 		 * Set the position of the rectangle.
 		 *
-		 * @param x new X position.
-		 * @param y new Y position.
+		 * @param x New X position.
+		 * @param y New Y position.
 		 */
 		inline void SetPosition(T x, T y){
 			position.SetValues(x, y);
 		}
 
+		/**
+		 * Change the position of the rectangle.
+		 *
+		 * @param newPos The new position of the rectangle.
+		 */
 		inline void SetPosition(const Vector2<T> &newPos){
 			position = newPos;
 		}
 
+		/** 
+		 * Change the x position of the rectangle.
+		 *
+		 * @param x New X position.
+		 */
 		inline void SetPositionX(T x){
 			position.x = x;
 		}
 
+		/** 
+		 * Change the y position of the rectangle.
+		 *
+		 * @param y New Y position.
+		 */
 		inline void SetPositionY(T y){
 			position.y = y;
 		}
@@ -98,14 +119,35 @@ template<class T> class Rectangle
 			size.SetValues(sizeX, sizeY);
 		}
 
+		/** 
+		 * Change the X size of the rectangle.
+		 *
+		 * @param x New size among x axe.
+		 */
 		inline void SetSizeX(T sizeX){
 			size.x = sizeX;
 		}
 
+		/** 
+		 * Change the Y size of the rectangle.
+		 *
+		 * @param y New size among y axe.
+		 */
 		inline void SetSizeY(T sizeY){
 			size.y = sizeY;
 		}
 
+		inline void SetSize(Vector2<T> newSize){
+			size = newSize;
+		}
+
+		inline Rectangle<T> GetRectangle() const{
+			return *this;
+		}
+
+		/**
+		 * Return the position of the rectangle.
+		 */
 		inline Vector2<T> GetPosition() const{
 			return position;
 		}
@@ -118,6 +160,9 @@ template<class T> class Rectangle
 			return position.y;
 		}
 
+		/**
+		 * Return the size of the rectangle.
+		 */
 		inline Vector2<T> GetSize() const{
 			return size;
 		}

@@ -31,6 +31,13 @@ const Color lightgray_color (169, 169, 169, SDL_ALPHA_OPAQUE);
 const Color gray_color (128, 128, 128, SDL_ALPHA_OPAQUE);
 const Color black_color (0, 0, 0, SDL_ALPHA_OPAQUE);
 
+const Color c_white  (0xFF, 0xFF, 0xFF, 0x70);
+const Color c_black  (0x00, 0x00, 0x00, 0x70);
+const Color c_red    (0xFF, 0x00, 0x00, 0x70);
+const Color c_yellow (0x00, 0xFF, 0xFF, 0x70);
+const Color c_grey   (0xF0, 0xF0, 0xF0, 0x70);
+			   
+
 // Green
 const Color green_color (68, 120, 51, SDL_ALPHA_OPAQUE);
 

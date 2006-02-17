@@ -21,18 +21,15 @@
 
 #ifndef GAME_LOOP_H
 #define GAME_LOOP_H
-//-----------------------------------------------------------------------------
+
 #include "../graphic/fps.h"
 #include "../include/base.h"
 #include "../team/character.h"
-//-----------------------------------------------------------------------------
 
 class GameLoop;
 
 // Init the game
 void InitGame (GameLoop &game_loop);
-
-//-----------------------------------------------------------------------------
 
 typedef enum
 {
@@ -40,8 +37,6 @@ typedef enum
   gameHAS_PLAYED,
   gameEND_TURN,
 } game_state;
-
-//-----------------------------------------------------------------------------
 
 class GameLoop
 {
@@ -87,5 +82,4 @@ private:
 };
 
 extern GameLoop game_loop;
-//-----------------------------------------------------------------------------
 #endif

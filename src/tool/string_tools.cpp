@@ -20,56 +20,31 @@
  *****************************************************************************/
 
 #include "../tool/string_tools.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
-//-----------------------------------------------------------------------------
-
-ulong occurence_caractere (const std::string &txt, char x)
-{
-  ulong n=0;
-  long pos = txt.find (x, 0);
-  while (0 <= pos)
-  {
-    n++;
-    pos = txt.find (x, pos+1);
-  }
-  return n;
-}
-
-//-----------------------------------------------------------------------------
 
 bool str2long (const std::string &txt, long &valeur)
 {
   std::stringstream ss;
   ss << txt;
   ss >> valeur;
-//  return ss;
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 bool str2int (const std::string &txt, int &valeur)
 {
   std::stringstream ss;
   ss << txt;
   ss >> valeur;
-//  return ss;
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 bool str2double (const std::string &txt, double &valeur)
 {
   std::stringstream ss;
   ss << txt;
   ss >> valeur;
-//  return ss;
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 std::string double2str (double x)
 {
@@ -78,16 +53,12 @@ std::string double2str (double x)
   return ss.str();
 }
 
-//-----------------------------------------------------------------------------
-
 std::string long2str (long x)
 {
   std::ostringstream ss;
   ss << x;
   return ss.str();
 }
-
-//-----------------------------------------------------------------------------
 
 std::string ulong2str (ulong x)
 {
@@ -96,4 +67,3 @@ std::string ulong2str (ulong x)
   return ss.str();
 }
 
-//-----------------------------------------------------------------------------

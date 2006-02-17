@@ -21,14 +21,12 @@
 
 #ifndef SPIN_BUTTON_H
 #define SPIN_BUTTON_H
-//-----------------------------------------------------------------------------
+
 #include "../include/base.h"
 #include "../graphic/text.h"
 #include "widget.h"
 #include "button.h"
 #include <string>
-#include <sstream>
-//-----------------------------------------------------------------------------
 
 class SpinButton : public Widget
 {
@@ -40,11 +38,11 @@ class SpinButton : public Widget
   Button *m_plus, *m_minus;
   
  public:
-  SpinButton(const std::string &label, int x, int y, uint w,
+  SpinButton(const std::string &label, const Rectanglei &rect,
 	     int value=0, int step=1, int min_value=-1, int max_value=-1);
   virtual ~SpinButton();
 
-  void SetSizePosition(int _x, int _y, uint _w, uint _h);
+  void SetSizePosition(const Rectanglei &rect);
 
   void Draw (uint mouse_x, uint mouse_y) ;
   bool Clic (uint mouse_x, uint mouse_y, uint button) ;
@@ -52,6 +50,5 @@ class SpinButton : public Widget
   void SetValue(int value);
 };
 
-//-----------------------------------------------------------------------------
 #endif
 

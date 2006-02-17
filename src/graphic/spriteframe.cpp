@@ -21,7 +21,8 @@
 
 SpriteFrame::SpriteFrame(Surface& p_surface, unsigned int p_speed){
   assert( !p_surface.IsNull() );
-  this->surface = p_surface;
-  this->delay = p_speed;
+  
+  surface = p_surface;
+  delay = p_speed;
 }
 

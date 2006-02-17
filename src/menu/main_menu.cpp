@@ -22,7 +22,7 @@
 
 #include "main_menu.h"
 #include <SDL.h>
-#include <SDL_image.h>
+//#include <SDL_image.h>
 #include <string>
 #include "infos_menu.h"
 #include "../game/config.h"
@@ -108,7 +108,9 @@ bool Main_Menu::sig_infos(){
 }
   
 bool Main_Menu::sig_quit(){ 
-  choice=menuQUIT;return true; }
+  choice = menuQUIT;
+  return true; 
+}
 
 Main_Menu::Main_Menu() :
   normal_font(16),
@@ -117,11 +119,11 @@ Main_Menu::Main_Menu() :
   int x_button;
   double y_scale;
 
-  background = new Sprite(Surface((config.data_dir+"menu/img/background.png").c_str()));
+  background = new Sprite(Surface( config.data_dir + "menu/img/background.png" ));
   background->cache.EnableLastFrameCache();
-  title = new Sprite(Surface((config.data_dir+"menu/img/title.png").c_str()));
-  skin_left = new Sprite(Surface((config.data_dir+"menu/img/skin01.png").c_str()));
-  skin_right = new Sprite(Surface((config.data_dir+"menu/img/skin02.png").c_str()));
+  title = new Sprite(Surface( config.data_dir + "menu/img/title.png" ));
+  skin_left = new Sprite(Surface( config.data_dir + "menu/img/skin01.png" ));
+  skin_right = new Sprite(Surface( config.data_dir + "menu/img/skin02.png" ));
 
   button_height = 64;
   button_width = 402;
@@ -145,14 +147,14 @@ Main_Menu::Main_Menu() :
   int dy = (y2-y)/3;
 #endif  
 
-  play = new ButtonText(x_button,(uint)(y * y_scale),//Position
+  play = new ButtonText( Point2i(x_button, (int)(y * y_scale)),
 			res, "main_menu/button",
 			_("Play"),
 			&large_font);
   y += dy;
 
 #ifdef NETWORK_BUTTON  
-  network = new ButtonText(x_button,(int)(y * y_scale), //Position
+  network = new ButtonText( Point2i(x_button, (int)(y * y_scale)),
 			   res, "main_menu/button",
 			   _("Network Game"),
 			   &large_font );
@@ -161,19 +163,19 @@ Main_Menu::Main_Menu() :
   network = NULL;
 #endif
   
-  options = new ButtonText(x_button,(int)(y * y_scale), //Position
+  options = new ButtonText( Point2i(x_button, (int)(y * y_scale) ),
 			   res, "main_menu/button",
 			   _("Options"),
 			   &large_font);
   y += dy;
 
-  infos =  new ButtonText(x_button,(int)(y * y_scale), //Position
+  infos =  new ButtonText( Point2i(x_button, (int)(y * y_scale) ),
 			  res, "main_menu/button",
 			  _("Credits"),
 			  &large_font);
   y += dy;
 
-  quit =  new ButtonText(x_button,(int)(y * y_scale), //Position
+  quit =  new ButtonText( Point2i(x_button,(int)(y * y_scale) ),
 			 res, "main_menu/button",
 			 _("Quit"),
 			 &large_font);
@@ -219,9 +221,7 @@ menu_item Main_Menu::Run ()
   while( SDL_PollEvent( &event) )
   {
     if( event.type == SDL_MOUSEBUTTONDOWN )
-    {
       onClick( event.button.x, event.button.y, event.button.button);
-    }
     else if( event.type == SDL_KEYDOWN )
     {
       if( event.key.keysym.sym == SDLK_ESCAPE )
@@ -301,19 +301,19 @@ void Main_Menu::EraseGfx(uint dt)
   if( dt < boscill_end )
   {
     //Clean buttons bg
-    background->Blit(app.video.window,   play->GetX(),   play->GetY(),   play->GetX(),   play->GetY(),   play->GetW(),   play->GetH());
+    background->Blit(app.video.window, play->GetRectangle(), play->GetPosition());
 #ifdef NETWORK_BUTTON  
-    background->Blit(app.video.window,network->GetX(),network->GetY(),network->GetX(),network->GetY(),network->GetW(),network->GetH());
+    background->Blit(app.video.window, network->GetRectangle(), network->GetPosition());
 #endif
-    background->Blit(app.video.window,options->GetX(),options->GetY(),options->GetX(),options->GetY(),options->GetW(),options->GetH());
-    background->Blit(app.video.window,  infos->GetX(),  infos->GetY(),  infos->GetX(),  infos->GetY(),  infos->GetW(),  infos->GetH());
-    background->Blit(app.video.window,   quit->GetX(),   quit->GetY(),   quit->GetX(),   quit->GetY(),   quit->GetW(),   quit->GetH());
+    background->Blit(app.video.window, options->GetRectangle(), options->GetPosition());
+    background->Blit(app.video.window, infos->GetRectangle(), infos->GetPosition());
+    background->Blit(app.video.window, quit->GetRectangle(), quit->GetPosition());
   }
   if( dt <= toscill_end && dt >= bfall_end )
   {
     // Erase previous title
     uint title_x = app.video.window.GetWidth()/2 - title->GetWidth()/2;
-    background->Blit(app.video.window,title_x, title_y,
+    background->Blit(app.video.window, title_x, title_y,
                                          title_x, title_y,
                                          title->GetWidth(), title->GetHeight());
   }
@@ -480,28 +480,27 @@ void Main_Menu::DrawButtons(int mx, int my, uint dt)
   {
     // Finish the animation for buttons
     play->GetSprite()->cache.EnableLastFrameCache();
-    play->SetXY(x_button, y_play);
-    play->SetSize(button_width, button_height);
+    play->SetSizePosition( Rectanglei(x_button, y_play, button_width, button_height) );
+	
 #ifdef NETWORK_BUTTON  
     network->GetSprite()->cache.EnableLastFrameCache();
-    network->SetXY(x_button, y_network);
-    network->SetSize(button_width, button_height);
+    network->SetSizePosition( Rectanglei(x_button, y_network, button_width, button_height) );
 #endif
+	
     options->GetSprite()->cache.EnableLastFrameCache();
-    options->SetXY(x_button, y_options);
-    options->SetSize(button_width, button_height);
+    options->SetSizePosition( Rectanglei(x_button, y_options, button_width, button_height) );
+	
     infos->GetSprite()->cache.EnableLastFrameCache();
-    infos->SetXY(x_button, y_infos);
-    infos->SetSize(button_width, button_height);
+	infos->SetSizePosition( Rectanglei(x_button, y_infos, button_width, button_height) );
+	
     quit->GetSprite()->cache.EnableLastFrameCache();
-    quit->SetXY(x_button, y_quit);
-    quit->SetSize(button_width, button_height);
+	quit->SetSizePosition( Rectanglei(x_button, y_quit, button_width, button_height) );
   }
-  else
-  if ( dt >= bfall_end && dt <= boscill_end)
+  else if ( dt >= bfall_end && dt <= boscill_end)
   {
     //Buttons finished falling, make them oscillate
     int button_dy, button_dh;
+
     Gelatine(button_dy, button_dh, start_time + bfall_end, dy - button_height, boscill_end - bfall_end, 2);
     play->GetSprite()->cache.DisableLastFrameCache();
     play->SetSize(button_width, button_height + button_dh);
@@ -539,11 +538,11 @@ void Main_Menu::DrawButtons(int mx, int my, uint dt)
     quit   ->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_quit);
   }
 
-  play->Draw(mx,my);
+  play->Draw(mx, my);
 #ifdef NETWORK_BUTTON  
-  network->Draw(mx,my);
+  network->Draw(mx, my);
 #endif   
-  options->Draw(mx,my);
-  infos->Draw(mx,my);
-  quit->Draw(mx,my);
+  options->Draw(mx, my);
+  infos->Draw(mx, my);
+  quit->Draw(mx, my);
 }

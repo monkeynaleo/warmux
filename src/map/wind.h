@@ -21,7 +21,7 @@
 
 #ifndef WIND_H
 #define WIND_H
-//-----------------------------------------------------------------------------
+
 #include <SDL.h>
 #include <list>
 #include "../game/config.h"
@@ -30,7 +30,6 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../tool/xml_document.h"
-//-----------------------------------------------------------------------------
 
 class WindParticle : public PhysicalObj
 {
@@ -46,14 +45,11 @@ public:
   void Refresh();
 };
 
-//-----------------------------------------------------------------------------
-
 class Wind
 {
   BarreProg barre;
-  long m_val,m_nv_val;
+  long m_val, m_nv_val;
   uint m_last_move;
-
   uint m_last_part_mvt;
 
 public:
@@ -71,8 +67,6 @@ public:
   void DrawParticles();
 };
 
-
 extern Wind wind;
-//-----------------------------------------------------------------------------
 #endif
 

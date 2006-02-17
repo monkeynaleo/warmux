@@ -22,11 +22,10 @@
 
 #ifndef MODE_JEU_H
 #define MODE_JEU_H
-//-----------------------------------------------------------------------------
+
 #include <string>
 #include "../include/base.h"
 #include "../tool/xml_document.h"
-//-----------------------------------------------------------------------------
 
 class GameMode 
 {

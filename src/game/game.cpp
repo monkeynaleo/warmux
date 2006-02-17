@@ -34,13 +34,11 @@
 #include "../interface/game_msg.h"
 #include "../map/camera.h"
 #include "../map/map.h"
-//#include "../object/bonus_box.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../weapon/weapons_list.h"
-
 
 Game game;  // TODO: global variables are bad
 
