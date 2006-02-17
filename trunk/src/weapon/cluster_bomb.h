@@ -24,7 +24,7 @@
 #define CLUSTER_BOMB_H
 
 #include <list>
-#include "weapon.h"
+#include "launcher.h"
 #include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
@@ -36,59 +36,40 @@ class ClusterLauncher;
 class Cluster : public WeaponProjectile
 {
 public:
-  Cluster(GameLoop &game_loop, ClusterLauncher& launcher);
-  void Draw();
+  Cluster(GameLoop &game_loop, WeaponLauncher * launcher);
   void Refresh();
-  void Tire(int n_x, int n_y);
+  void Shoot(int n_x, int n_y);
 protected:
-  ClusterLauncher& launcher;
   void SignalCollision();
 };
 
 // La ClusterBomb
 class ClusterBomb : public WeaponProjectile
 {
-protected:
-  double temps_debut_tir;
 public:
   std::list<Cluster> tableau_cluster;
   typedef std::list<Cluster>::iterator iterator;
 
-  ClusterBomb(GameLoop &game_loop, ClusterLauncher& launcher);
-  void Tire (double force);
-  void Draw();
+  ClusterBomb(GameLoop &game_loop, WeaponLauncher * launcher);
   void Refresh();
+  void Explosion();
 protected:
-  ClusterLauncher& launcher;
   void SignalCollision();
 };
 
 class ClusterBombConfig : public ExplosiveWeaponConfig
 { 
 public: 
-  uint tps_avt_explosion;
-  double rebound_factor ;
   uint nbr_fragments;
 public:
   ClusterBombConfig();
   virtual void LoadXml(xmlpp::Element *elem);
 };
 
-class ClusterLauncher : public Weapon
+class ClusterLauncher : public WeaponLauncher
 {
- private:
-  bool p_Shoot();
-
  public:
-  Surface impact;
-  ClusterBomb cluster_bomb;
-
   ClusterLauncher();
-  void Refresh();
-  ClusterBombConfig& cfg();
-
-protected:
-  void Explosion();
 };
 
 #endif

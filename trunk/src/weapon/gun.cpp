@@ -38,46 +38,31 @@ const uint VITESSE_CAPTURE_POS_BALLE = 10;
 const uint BULLET_SPEED = 20;
 const double BULLET_BLAST = 1;
 
-BalleGun::BalleGun(GameLoop &p_game_loop) :
-  WeaponProjectile(p_game_loop, "balle_gun")
+BalleGun::BalleGun(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
+  WeaponProjectile(p_game_loop, "gun_bullet", p_launcher)
 { 
-  touche_ver_objet = true; 
-  image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
-  SetSize (image->GetWidth(), image->GetHeight());
-  SetMass (0.02);
-  SetWindFactor(0.05);
-  SetAirResistFactor(0);
   m_gravity_factor = 0.0;
 }
 
-void BalleGun::Tire()
+void BalleGun::Shoot()
 {
-  PrepareTir();
-
-  // Set the initial position.
-  int x,y;
-  ActiveCharacter().GetHandPosition(x, y);
-  SetXY (x,y);
-   
-  // Set the initial speed.
-  SetSpeed (BULLET_SPEED, ActiveTeam().crosshair.GetAngleRad());
+  WeaponProjectile::Shoot(BULLET_SPEED);
 }
 
 void BalleGun::SignalCollision()
 { 
-  if ((dernier_ver_touche == NULL) && (dernier_obj_touche == NULL))
+  if ((LitDernierVerTouche() == NULL) && (LitDernierObjTouche() == NULL))
   {
     game_messages.Add (_("Your shot has missed!"));
   }
   is_active = false; 
 }
 
-Gun::Gun() :
-  Weapon(WEAPON_GUN, "gun", new WeaponConfig()),
-  balle(game_loop)
+Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new WeaponConfig())
 {
   m_name = _("Gun");
-  impact = resource_manager.LoadImage( weapons_res_profile, "gun_impact");  
+
+  projectile = new BalleGun(game_loop, this);
 }
 
 void Gun::Draw ()
@@ -112,13 +97,13 @@ bool Gun::p_Shoot()
   if (m_is_active)
     return false;
 
-  balle.Tire();
+  static_cast<BalleGun *>(projectile)->Shoot();
 
   // Temps de capture
   temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
 
   lst_points.clear();
-  lst_objets.AjouteObjet (&balle, true);
+  lst_objets.AjouteObjet (projectile, true);
 
   jukebox.Play("share","weapon/gun");
 
@@ -130,29 +115,30 @@ void Gun::Refresh()
   m_image->Scale(ActiveCharacter().GetDirection(), 1);   
 
    
-  if (balle.is_active)
+  if (projectile->is_active)
     {
-      // Une balle est en l'air : on capture sa position ?
-      if (temps_capture < global_time.Read()) 
-	{
-	  temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
 
-	  Point2i pos_balle = balle.GetPos();
-	  pos_balle.x += balle.GetWidth()/2;
-	  pos_balle.y += balle.GetHeight()/2;
-	  lst_points.push_back (pos_balle);
-	}
+//       // Une balle est en l'air : on capture sa position ?
+//       if (temps_capture < global_time.Read()) 
+// 	{
+// 	  temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
+
+// 	  Point2i pos_balle = balle.GetPos();
+// 	  pos_balle.x += balle.GetWidth()/2;
+// 	  pos_balle.y += balle.GetHeight()/2;
+// 	  lst_points.push_back (pos_balle);
+// 	}
     }
   else
     {
       if (!m_is_active) return;
       m_is_active = false;
       
-      if (!balle.IsGhost())
+      if (!projectile->IsGhost())
 	{
 	  // Si la balle a touché un ver, lui inflige des dégats
-	  Character* ver = balle.LitDernierVerTouche();
-	  PhysicalObj* obj = balle.LitDernierObjTouche();
+	  Character* ver = projectile->LitDernierVerTouche();
+	  PhysicalObj* obj = projectile->LitDernierObjTouche();
 	  if (ver) obj = ver;
 	  if (ver)
           {
@@ -160,21 +146,19 @@ void Gun::Refresh()
           }
 	  if (obj) 
           {
-            obj -> AddSpeed (BULLET_BLAST, balle.GetSpeedAngle());
+            obj -> AddSpeed (BULLET_BLAST, projectile->GetSpeedAngle());
           }
 	  
 	  // Creuse le monde
 	  if (!obj)
 	    {
-	       world.Creuse (balle.GetX() - impact.GetWidth()/2,
-			    balle.GetY() - impact.GetHeight()/2,
-			    impact);
+	       world.Creuse (projectile->GetX() - projectile->impact.GetWidth()/2,
+			    projectile->GetY() - projectile->impact.GetHeight()/2,
+			    projectile->impact);
 	    }
 	}
       
-      lst_objets.RetireObjet (&balle);
+      lst_objets.RetireObjet (projectile);
     }
 }
 
-WeaponConfig& Gun::cfg()
-{ return static_cast<WeaponConfig&>(*extra_params); }

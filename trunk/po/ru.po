@@ -18,12 +18,32 @@ msgstr ""
 "Plural-Forms:  nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
+#: src/game/game.cpp:137 src/game/game.cpp:177
+#, c-format
+msgid "  Most sold-out :  %s (%i).\n"
+msgstr ""
+
+#: src/game/game.cpp:135 src/game/game.cpp:175
+#, c-format
+msgid "  Most usefull  :  %s (%i).\n"
+msgstr ""
+
+#: src/game/game.cpp:136 src/game/game.cpp:176
+#, c-format
+msgid "  Most useless  :  %s (%i).\n"
+msgstr ""
+
+#: src/game/game.cpp:134 src/game/game.cpp:174
+#, c-format
+msgid "  Most violent  :  %s (%i).\n"
+msgstr ""
+
 #: src/map/maps_list.cpp:291
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/game/game_loop.cpp:676
+#: src/game/game_loop.cpp:677
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (команда %s) погибла."
@@ -38,7 +58,7 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:654
+#: src/game/game_loop.cpp:655
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -48,12 +68,12 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:647
+#: src/game/game_loop.cpp:648
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:659
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -74,17 +94,17 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:670
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:664
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
 
-#: src/weapon/mine.cpp:231
+#: src/weapon/mine.cpp:223
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
@@ -113,9 +133,9 @@ msgstr[0] "Команда %s выиграла %u телепортацию"
 msgstr[1] "Команда %s выиграла %u телепортации"
 msgstr[2] "Команда %s выиграла %u телепортаций"
 
-#: src/game/game.cpp:89
-#, c-format
-msgid "%s team has won."
+#: src/game/game.cpp:183
+#, fuzzy, c-format
+msgid "%s team has won.\n"
 msgstr "Команда %s победила"
 
 #: src/object/bonus_box.cpp:169
@@ -126,11 +146,11 @@ msgstr[0] "'%s выиграл %u воздушную атаку"
 msgstr[1] "'%s выиграл %u воздушных атаки"
 msgstr[2] "'%s выиграл %u воздушных атак"
 
-#: src/interface/interface.cpp:178
+#: src/interface/interface.cpp:176
 msgid "(dead)"
 msgstr "(мёртв)"
 
-#: src/interface/interface.cpp:224
+#: src/interface/interface.cpp:220
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
@@ -140,23 +160,27 @@ msgstr ""
 "Для нормальной работы <infinite_background> нужно указать значение "
 "<is_open>!!"
 
-#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:175
+#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:159
 msgid "Air attack"
 msgstr "Воздушная атака"
+
+#: src/game/game.cpp:173
+msgid "All-Team results:\n"
+msgstr ""
 
 #: src/main.cpp:187
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:159
+#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Автоматическая базука"
 
-#: src/weapon/baseball.cpp:31
+#: src/weapon/baseball.cpp:30
 msgid "Baseball"
 msgstr "Бейсбол"
 
-#: src/weapon/bazooka.cpp:104
+#: src/weapon/bazooka.cpp:63
 msgid "Bazooka"
 msgstr "Базука"
 
@@ -174,11 +198,11 @@ msgstr "Не удаётся найти команду %s!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не удаётся открыть каталог команд (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:247
+#: src/weapon/cluster_bomb.cpp:147
 msgid "ClusterBomb"
 msgstr "Кассетная бомба"
 
-#: src/weapon/suicide.cpp:39
+#: src/weapon/suicide.cpp:38
 msgid "Commit suicide"
 msgstr "Покончить жизнь самоубийством"
 
@@ -198,7 +222,7 @@ msgstr "Показать имя игрока?"
 msgid "Display wind particles?"
 msgstr "Показать "
 
-#: src/game/game.cpp:138
+#: src/game/game.cpp:230
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
@@ -210,13 +234,13 @@ msgstr "Длительность шага:"
 msgid "Duration of the end of a turn:"
 msgstr "Длительность завершения шага:"
 
-#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:129
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:126
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/game/game.cpp:81
+#: src/game/game.cpp:179
 #, fuzzy
-msgid "End of the game!"
+msgid "End of the game!\n"
 msgstr "Игра окончена!\n"
 
 #: src/interface/interface.cpp:111
@@ -254,7 +278,7 @@ msgstr "Ошибка при загрузке режима игры %s (файл 
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/game.cpp:179
+#: src/game/game.cpp:271
 #, c-format
 msgid ""
 "Error:\n"
@@ -285,7 +309,7 @@ msgstr "Настройки игры"
 msgid "Graphic options"
 msgstr "Настройки графики"
 
-#: src/weapon/grenade.cpp:185
+#: src/weapon/grenade.cpp:78
 msgid "Grenade"
 msgstr "Граната"
 
@@ -294,11 +318,11 @@ msgstr "Граната"
 msgid "Ground initialization..."
 msgstr "Инициализация"
 
-#: src/weapon/gun.cpp:85
+#: src/weapon/gun.cpp:79
 msgid "Gun"
 msgstr "Пистолет"
 
-#: src/tool/file_tools.cpp:58
+#: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Домашний каталог (переменная окружения $HOME) не найден!"
 
@@ -344,7 +368,7 @@ msgstr "Загрузка тем:"
 msgid "Load teams:"
 msgstr "Загрузка команд:"
 
-#: src/map/map.cpp:265
+#: src/map/map.cpp:278
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Карту %s создал:"
@@ -353,7 +377,7 @@ msgstr "Карту %s создал:"
 msgid "Maximum number of FPS:"
 msgstr ""
 
-#: src/weapon/mine.cpp:298
+#: src/weapon/mine.cpp:290
 msgid "Mine"
 msgstr "Мина"
 
@@ -369,10 +393,14 @@ msgstr "Имя:"
 msgid "Network Game"
 msgstr "Игра по сети"
 
-#: src/weapon/weapon.cpp:562
+#: src/weapon/weapon.cpp:550
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
+
+#: src/game/game.cpp:79
+msgid "Nobody"
+msgstr ""
 
 #: src/menu/options_menu.cpp:120
 msgid "Number of players per team:"
@@ -382,7 +410,7 @@ msgstr "Игроков в каждой команде:"
 msgid "Options"
 msgstr "Настройки"
 
-#: src/game/game.cpp:189
+#: src/game/game.cpp:281
 msgid "Pause"
 msgstr "Пауза"
 
@@ -430,19 +458,25 @@ msgstr "Начинаем новую игру"
 msgid "Stock:"
 msgstr "Боеприпасов:"
 
+#: src/game/game.cpp:133
+#, c-format
+msgid "Team %s results:\n"
+msgstr ""
+
 #: src/object/bonus_box.cpp:146 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Телепортация"
 
-#: src/weapon/auto_bazooka.cpp:138
+#: src/weapon/auto_bazooka.cpp:99
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Автоматическая ракета улетела за пределы поля битвы..."
 
-#: src/game/game.cpp:96
-msgid "The game has ended as a draw."
+#: src/game/game.cpp:187
+#, fuzzy
+msgid "The game has ended as a draw.\n"
 msgstr "Игра окончилась вничью"
 
-#: src/weapon/bazooka.cpp:93 src/weapon/cluster_bomb.cpp:93
+#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:73
 msgid "The rocket left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
 
@@ -510,7 +544,7 @@ msgstr "Оружие:"
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:673
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -542,7 +576,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 
-#: src/weapon/gun.cpp:76
+#: src/weapon/gun.cpp:70
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 

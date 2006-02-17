@@ -22,7 +22,7 @@
 #ifndef SUPERTUX_H
 #define SUPERTUX_H
 
-#include "weapon.h"
+#include "launcher.h"
 #include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
@@ -42,7 +42,6 @@ class SuperTux : public WeaponProjectile
 {
  private:
   ParticleEngine particle_engine;
-  TuxLauncher& launcher;
   
 public:
   double angle;
@@ -50,36 +49,23 @@ public:
   uint time_next_action;
   uint last_move;
 
-  SuperTux(GameLoop &game_loop, TuxLauncher& launcher);
+  SuperTux(GameLoop &game_loop, WeaponLauncher * launcher);
   void Refresh();
   void Draw();
 
   void turn_left();
   void turn_right();
-  void Tire ();
 
 protected:
   void SignalCollision();
 };
 
-class TuxLauncher : public Weapon
+class TuxLauncher : public WeaponLauncher
 {
- private:
-  bool p_Shoot();
-
-public:
-  Surface impact;
-  SuperTux supertux;
 
 public:
   TuxLauncher();
-  void Refresh();
   void HandleKeyEvent(int action, int event_type);
-   
-  SuperTuxWeaponConfig& cfg();
-
-protected:
-  void Explosion();
 };
 
 #endif

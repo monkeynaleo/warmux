@@ -26,34 +26,30 @@
 
 #include <SDL.h>
 #include <vector>
-#include "weapon.h"
+#include "launcher.h"
 #include "../include/base.h"
 #include "../tool/point.h"
 
 class BalleGun : public WeaponProjectile
 {
 public:
-  BalleGun(GameLoop &game_loop);
-  void Tire();
+  BalleGun(GameLoop &game_loop, WeaponLauncher * launcher);
+  void Shoot();
 protected:
   void SignalCollision();
 };
 
-class Gun : public Weapon
+class Gun : public WeaponLauncher
 {
 private:
   uint temps_capture;
   std::vector<Point2i> lst_points;
-  Surface impact;
   bool p_Shoot();
 
 public:  
-  BalleGun balle;
-
   Gun();
   void Draw();
   void Refresh();
-  WeaponConfig& cfg();
 };
 
 #endif

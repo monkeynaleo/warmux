@@ -41,7 +41,7 @@
 #endif
 
 BatonDynamite::BatonDynamite(GameLoop &p_game_loop, Dynamite &p_dynamite) :
-  WeaponProjectile(p_game_loop, "baton de dynamite"),
+  WeaponProjectile(p_game_loop, "dynamite_bullet", NULL),
   dynamite(p_dynamite)
 {
   SetMass (dynamite.cfg().mass);
@@ -143,7 +143,7 @@ bool Dynamite::p_Shoot ()
   int x,y;
   PosXY (x,y);
   baton.Reset ();
-  baton.PrepareTir();
+  // baton.PrepareTir();
   baton.SetXY (x, y);
   lst_objets.AjouteObjet (&baton, true);
 

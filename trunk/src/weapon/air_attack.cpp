@@ -41,21 +41,11 @@ const uint FORCE_Y_MAX = 40;
 const double OBUS_SPEED = 7 ;
 
 Obus::Obus(GameLoop &p_game_loop, AirAttack& p_air_attack) :
-  WeaponProjectile(p_game_loop, "Obus"),
+  WeaponProjectile(p_game_loop, "obus", NULL),
   air_attack(p_air_attack)
 {
-  impact = resource_manager.LoadImage(weapons_res_profile,"obus_impact");
-  image = resource_manager.LoadSprite(weapons_res_profile,"obus");
-  image->Scale(1,1);
   SetMass (air_attack.cfg().mass);
   SetWindFactor (0.1);
-  SetSize (image->GetWidth(), image->GetHeight());
-}
-
-void Obus::Draw()
-{
-  if (!is_active) return;  
-  image->Draw (GetX(), GetY());
 }
 
 void Obus::Refresh()

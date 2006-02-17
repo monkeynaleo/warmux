@@ -200,7 +200,7 @@ void Gnu::Draw()
 //-----------------------------------------------------------------------------
 
 GnuLauncher::GnuLauncher() : 
-  Weapon(WEAPON_GNU, "gnulauncher", new GrenadeConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
+  Weapon(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
   gnu(game_loop, *this)
 {
   m_name = _("GnuLauncher");
@@ -251,7 +251,7 @@ void GnuLauncher::Refresh()
 
 //-----------------------------------------------------------------------------
 
-GrenadeConfig& GnuLauncher::cfg()
-{ return static_cast<GrenadeConfig&>(*extra_params); }
+ExplosiveWeaponConfig& GnuLauncher::cfg()
+{ return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
