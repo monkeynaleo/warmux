@@ -48,54 +48,17 @@ const uint TPS_AV_ATTIRANCE = 1;
 //-----------------------------------------------------------------------------
 
 RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop, 
-					 AutomaticBazooka &p_bazooka) :
-  WeaponProjectile(p_game_loop, "roquette tete chercheuse"),
-  auto_bazooka(p_bazooka)
+					 WeaponLauncher * p_launcher) :
+  WeaponProjectile(p_game_loop, "roquette", p_launcher)
 {
-  m_allow_negative_y = true;
-  touche_ver_objet = true;
   m_attire = false;
-
-  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (auto_bazooka.cfg().mass);
-  SetWindFactor(0.1);
-  SetAirResistFactor(auto_bazooka.cfg().air_resist_factor);
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);
 }
 
-void RoquetteTeteCherche::Tire (double force, 
-				uint cible_x, uint cible_y)
+void RoquetteTeteCherche::Shoot (double strength) 
 {
-  SetAirResistFactor(auto_bazooka.cfg().air_resist_factor);
+  WeaponProjectile::Shoot(strength);
 
-  PrepareTir();
-  
-  // Set the initial position.
-  int x,y;
-  ActiveCharacter().GetHandPosition(x, y);
-  SetXY (x,y);
-
-  //On choisit la cible pour la roquette:
-  m_cible.x = cible_x;
-  m_cible.y = cible_y;
-  
-  //La roquette n'est pas attirée par la cible dès le départ:
-  m_attire = false;
-  
-  double angle = ActiveTeam().crosshair.GetAngleRad();
-  SetSpeed (force, angle);
-
-  PutOutOfGround(angle);
-
-  temps_debut_tir = global_time.Read();
-  angle_local=angle;
+  angle_local=ActiveTeam().crosshair.GetAngleRad();
 }
 
 void RoquetteTeteCherche::Refresh()
@@ -116,7 +79,7 @@ void RoquetteTeteCherche::Refresh()
       image->SetRotation_deg(angle *180/M_PI);
       
       //2 sec après avoir été tirée, la roquette se dirige vers la cible:
-      tmp = global_time.Read() - temps_debut_tir;
+      tmp = global_time.Read() - begin_time;
       if(tmp>1000 * TPS_AV_ATTIRANCE)
 	{
 	  m_attire = true;
@@ -148,15 +111,15 @@ void RoquetteTeteCherche::SetTarget (int x, int y)
 //-----------------------------------------------------------------------------
 
 AutomaticBazooka::AutomaticBazooka() : 
-  Weapon(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new ExplosiveWeaponConfig() ),
-  roquette(game_loop, *this)
+  WeaponLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new ExplosiveWeaponConfig() )
 {  
   m_name = _("Automatic bazooka");
 
   m_is_active = false;
   cible.choisie = false;
 
-  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
+  projectile = new RoquetteTeteCherche(game_loop, this);
+
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
 }
 
@@ -166,52 +129,12 @@ void AutomaticBazooka::Draw()
   DrawTarget();
 }
 
-bool AutomaticBazooka::p_Shoot ()
-{
-  if (m_strength == max_strength)
-  {
-    m_strength = 0;
-    ExplosionDirecte();
-    return true;
-  }
-
-  roquette.Tire (m_strength, cible.pos.x,cible.pos.y);
-  lst_objets.AjouteObjet (&roquette,true);
-
-  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-
-  return true;
-}
-
-// Le bazooka explose car il a été poussé à bout !
-void AutomaticBazooka::ExplosionDirecte()
-{
-  Point2i pos = ActiveCharacter().GetCenter();
-  AppliqueExplosion (pos, pos, impact, cfg(), NULL);
-}
-
-void AutomaticBazooka::Explosion()
-{
-  m_is_active = false;
-  
-  lst_objets.RetireObjet (&roquette);
-
-  // On fait un trou ?
-  if (roquette.IsGhost()) return;
-
-  // Applique les degats et le souffle aux vers
-  Point2i pos = roquette.GetCenter();
-  AppliqueExplosion (pos, pos, impact, cfg(), NULL);
-}
 
 void AutomaticBazooka::Refresh()
 {
   DrawTarget();
 
-  if (m_is_active)
-  {
-    if (!roquette.is_active) Explosion();
-  } 
+  WeaponLauncher::Refresh();
 }
 
 void AutomaticBazooka::p_Select()
@@ -243,6 +166,7 @@ void AutomaticBazooka::ChooseTarget()
   cible.pos = mouse.GetPosMonde();
   DrawTarget();
   cible.choisie = true;
+  static_cast<RoquetteTeteCherche *>(projectile)->SetTarget(cible.pos.x, cible.pos.y);
 }
 
 void AutomaticBazooka::DrawTarget()
@@ -258,6 +182,3 @@ bool AutomaticBazooka::IsReady() const
 {
   return (EnoughAmmo() && cible.choisie);  
 }
-
-ExplosiveWeaponConfig& AutomaticBazooka::cfg()
-{ return static_cast<ExplosiveWeaponConfig&>(*extra_params); }

@@ -19,7 +19,7 @@
  * Arme bazooka : projette une roquette avec un angle et une force donnée.
  *****************************************************************************/
 
-#include "../weapon/bazooka.h"
+#include "bazooka.h"
 #include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
@@ -33,51 +33,14 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, Bazooka &p_bazooka) :
-  WeaponProjectile (p_game_loop, "roquette_bazooka"), 
-  bazooka(p_bazooka)
+RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
+  WeaponProjectile (p_game_loop, "roquette", p_launcher)
 {
-  m_allow_negative_y = true;
-  touche_ver_objet = true;
-  m_wind_factor = 1.0;
-
-  image = resource_manager.LoadSprite( weapons_res_profile, "roquette");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (bazooka.cfg().mass);
-  SetWindFactor(5.0);
-  SetAirResistFactor(bazooka.cfg().air_resist_factor);
-
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);   
-}
-
-void RoquetteBazooka::Tire (double force)
-{
-  SetAirResistFactor(bazooka.cfg().air_resist_factor);
-
-  PrepareTir();
-
-  // Set the initial position.
-  int x,y;
-  ActiveCharacter().GetHandPosition(x, y);
-  SetXY (x,y);
-  
-  // Set the initial speed.
-  double angle = ActiveTeam().crosshair.GetAngleRad();
-  SetSpeed (force, angle);
-  PutOutOfGround(angle);
 }
 
 void RoquetteBazooka::Refresh()
 {
-  if (!is_active) return;
-
-  if (TestImpact()) { SignalCollision(); return; }
+  WeaponProjectile::Refresh();
 
   double angle = GetSpeedAngle() *180/M_PI;
   image->SetRotation_deg( angle);
@@ -95,57 +58,10 @@ void RoquetteBazooka::SignalCollision()
 //-----------------------------------------------------------------------------
 
 Bazooka::Bazooka() :
-  Weapon(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig()),
-  roquette(game_loop, *this)  
+  WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
 {  
   m_name = _("Bazooka");
-  impact = resource_manager.LoadImage( weapons_res_profile, "bazooka_impact");
+  projectile = new RoquetteBazooka(game_loop, this);
 }
 
-bool Bazooka::p_Shoot ()
-{
-  if (m_strength == max_strength)
-  {
-    m_strength = 0;
-    ExplosionDirecte();
-    return true;
-  }
-
-  roquette.Tire (m_strength);
-  lst_objets.AjouteObjet (&roquette, true);
-  camera.ChangeObjSuivi(&roquette, 1, 1,1);
-
-  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-  return true;
-}
-
-// Le bazooka explose car il a été poussé à bout !
-void Bazooka::ExplosionDirecte()
-{
-  Point2i pos = ActiveCharacter().GetCenter();
-  AppliqueExplosion (pos, pos, impact, cfg(), NULL);
-}
-
-void Bazooka::Explosion()
-{
-  m_is_active = false;
-  
-  lst_objets.RetireObjet (&roquette);
-
-  // On fait un trou ?
-  if (roquette.IsGhost()) return;
-
-  // Applique les degats et le souffle aux vers
-  Point2i pos = roquette.GetCenter();
-  AppliqueExplosion (pos, pos, impact, cfg(), NULL);
-}
-
-void Bazooka::Refresh()
-{
-  if (!m_is_active) return;
-  if (!roquette.is_active) Explosion();
-}
-
-ExplosiveWeaponConfig& Bazooka::cfg()
-{ return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
 

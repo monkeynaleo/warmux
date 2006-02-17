@@ -89,6 +89,7 @@ wormux_SOURCES = \
 	weapon/weapon_cfg.cpp weapon/weapon_cfg.h \
 	weapon/weapons_list.cpp weapon/weapons_list.h \
 	weapon/weapon_tools.cpp weapon/weapon_tools.h \
+	weapon/launcher.cpp weapon/launcher.h \
 	weapon/crosshair.cpp weapon/crosshair.h \
 	weapon/air_attack.cpp weapon/air_attack.h \
 	weapon/airhammer.cpp weapon/airhammer.h \

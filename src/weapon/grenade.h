@@ -28,51 +28,24 @@
 #include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
-#include "weapon.h"
+#include "launcher.h"
 
 class GrenadeLauncher;
 
 // La Grenade
 class Grenade : public WeaponProjectile
 {
-protected:
-  double temps_debut_tir;
-  GrenadeLauncher& launcher;
 public:
-  Grenade(GameLoop &game_loop, GrenadeLauncher& launcher);
-  void Tire (double force);
+  Grenade(GameLoop &game_loop, WeaponLauncher * launcher);
   void Refresh();
-  void Draw();
 protected:
   void SignalCollision();
 };
 
-class GrenadeConfig : public ExplosiveWeaponConfig
-{ 
-public: 
-  uint timeout;
-  double rebound_factor;
-public:
-  GrenadeConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
-};
-
-class GrenadeLauncher : public Weapon
+class GrenadeLauncher : public WeaponLauncher
 {
-private:
-  bool p_Shoot();
-
-public:
-  Surface impact;
-  Grenade grenade;
-  int time;
-
+ public:
   GrenadeLauncher();
-  void Refresh();
-  GrenadeConfig& cfg();
-
-protected:
-  void Explosion();
 };
 
 #endif

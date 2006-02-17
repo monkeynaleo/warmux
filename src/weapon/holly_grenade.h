@@ -22,8 +22,7 @@
 #ifndef HOLLY_GRENADE_H
 #define HOLLY_GRENADE_H
 
-#include "grenade.h"
-#include "weapon.h"
+#include "launcher.h"
 #include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
@@ -34,36 +33,21 @@ class HollyGrenadeLauncher;
 class HollyGrenade : public WeaponProjectile
 {
 protected:
-  double temps_debut_tir;
   bool sing_alleluia;
 
   ParticleEngine smoke_engine;
-  HollyGrenadeLauncher& launcher;
 public:
-  HollyGrenade(GameLoop &game_loop, HollyGrenadeLauncher& launcher);
-  void Tire (double force);
+  HollyGrenade(GameLoop &game_loop, WeaponLauncher * launcher);
   void Refresh();
   void Draw();
 protected:
   void SignalCollision();
 };
 
-class HollyGrenadeLauncher : public Weapon
+class HollyGrenadeLauncher : public WeaponLauncher
 {
- private:
-  bool p_Shoot();
-
 public:
-  Surface impact;    // Image (alpha) de l'impact
-
-  HollyGrenade grenade;
-
   HollyGrenadeLauncher();
-  void Refresh();
-  GrenadeConfig& cfg();
-
-protected:
-  void Explosion();
 };
 
 #endif

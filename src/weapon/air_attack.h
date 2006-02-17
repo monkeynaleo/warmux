@@ -24,7 +24,7 @@
 #include "../graphic/surface.h"
 #include "../graphic/sprite.h"
 #include "../include/base.h"
-#include "weapon.h"
+#include "launcher.h"
 
 class AirAttack;
 
@@ -40,11 +40,8 @@ public:
 
 class Obus : public WeaponProjectile
 {
-private:
-  Surface impact; 
 public:
   Obus(GameLoop &game_loop, AirAttack& air_attack);
-  void Draw();
   void Refresh();
   void Reset();
 

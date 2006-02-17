@@ -24,7 +24,7 @@
 #ifndef DYNAMITE_H
 #define DYNAMITE_H
 
-#include "weapon.h"
+#include "launcher.h"
 #include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../team/character.h"

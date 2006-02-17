@@ -16,16 +16,12 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon bazooka : projette une roquette avec un angle et une force donnée.
+ * 
  *****************************************************************************/
 
 #ifndef BAZOOKA_H
 #define BAZOOKA_H
-#include "weapon.h"
-#include "../graphic/surface.h"
-#include "../gui/progress_bar.h"
-#include "../include/base.h"
-#include "../object/physical_obj.h"
+#include "launcher.h"
 
 class Bazooka;
 
@@ -33,30 +29,16 @@ class Bazooka;
 class RoquetteBazooka : public WeaponProjectile
 {
 public:
-  RoquetteBazooka(GameLoop &game_loop, Bazooka& bazooka);
-  void Tire (double force);
+  RoquetteBazooka(GameLoop &game_loop, WeaponLauncher * launcher);
   void Refresh();
 protected:
-  Bazooka &bazooka;
   void SignalCollision();
 };
 
-class Bazooka : public Weapon
+class Bazooka : public WeaponLauncher
 {
- private:
-  bool p_Shoot();
-
  public:
-  Surface impact;
-  RoquetteBazooka roquette;
-
   Bazooka();
-  void Refresh();
-  void ExplosionDirecte();
-  ExplosiveWeaponConfig& cfg();
-
-protected:
-  void Explosion();
 };
 
 #endif

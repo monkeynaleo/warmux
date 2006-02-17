@@ -23,17 +23,17 @@
 #define UZI_H
 
 #include <vector>
-#include "weapon.h"
+#include "launcher.h"
 #include "../include/base.h"
 
 class BalleUzi : public WeaponProjectile
 {
 public:
-  BalleUzi(GameLoop &game_loop);
+  BalleUzi(GameLoop &game_loop, WeaponLauncher * launcher);
   void SignalCollision();
 };
 
-class Uzi : public Weapon
+class Uzi : public WeaponLauncher
 {
  private:
   void p_Deselect();
@@ -41,14 +41,10 @@ class Uzi : public Weapon
   void RepeatShoot(); 
 
 protected:
-  Surface impact;
-  BalleUzi balle;
   uint m_first_shoot;
 
 public:
   Uzi();
-  void Refresh();
-  WeaponConfig& cfg(); 
   void HandleKeyEvent(int action, int event_type);
 };
 

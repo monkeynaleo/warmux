@@ -33,7 +33,7 @@
 
 //-----------------------------------------------------------------------------
 
-Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new WeaponConfig())
+Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new WeaponConfig(), NEVER_VISIBLE)
 {
   m_name = _("Parachute");
   m_initial_nb_ammo = 2 ;

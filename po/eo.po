@@ -14,12 +14,32 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: src/game/game.cpp:137 src/game/game.cpp:177
+#, c-format
+msgid "  Most sold-out :  %s (%i).\n"
+msgstr ""
+
+#: src/game/game.cpp:135 src/game/game.cpp:175
+#, c-format
+msgid "  Most usefull  :  %s (%i).\n"
+msgstr ""
+
+#: src/game/game.cpp:136 src/game/game.cpp:176
+#, c-format
+msgid "  Most useless  :  %s (%i).\n"
+msgstr ""
+
+#: src/game/game.cpp:134 src/game/game.cpp:174
+#, c-format
+msgid "  Most violent  :  %s (%i).\n"
+msgstr ""
+
 #: src/map/maps_list.cpp:291
 #, c-format
 msgid "! Map %s not found :-("
 msgstr ""
 
-#: src/game/game_loop.cpp:676
+#: src/game/game_loop.cpp:677
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
@@ -34,7 +54,7 @@ msgstr ""
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:654
+#: src/game/game_loop.cpp:655
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -44,12 +64,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:647
+#: src/game/game_loop.cpp:648
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:659
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
@@ -68,17 +88,17 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 msgstr[1] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:670
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:664
+#: src/game/game_loop.cpp:665
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
 
-#: src/weapon/mine.cpp:231
+#: src/weapon/mine.cpp:223
 #, fuzzy, c-format
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino ..."
@@ -104,10 +124,10 @@ msgid_plural "%s team has won %u teleportations."
 msgstr[0] "La teamo '%s' elpoentis %u teleporto(j)n."
 msgstr[1] "La teamo '%s' elpoentis %u teleporto(j)n."
 
-#: src/game/game.cpp:89
-#, c-format
-msgid "%s team has won."
-msgstr ""
+#: src/game/game.cpp:183
+#, fuzzy, c-format
+msgid "%s team has won.\n"
+msgstr "La teamo '%s' elpoentis %u teleporto(j)n."
 
 #: src/object/bonus_box.cpp:169
 #, fuzzy, c-format
@@ -116,11 +136,11 @@ msgid_plural "'%s has won %u air attacks"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/interface/interface.cpp:178
+#: src/interface/interface.cpp:176
 msgid "(dead)"
 msgstr "(mortinta)"
 
-#: src/interface/interface.cpp:224
+#: src/interface/interface.cpp:220
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
@@ -128,24 +148,28 @@ msgstr "(senlimaj)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:175
+#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:159
 msgid "Air attack"
 msgstr "Aeratako"
+
+#: src/game/game.cpp:173
+msgid "All-Team results:\n"
+msgstr ""
 
 #: src/main.cpp:187
 #, fuzzy
 msgid "Authors:"
 msgstr "Auxtoroj :"
 
-#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:159
+#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Memmova bazuko"
 
-#: src/weapon/baseball.cpp:31
+#: src/weapon/baseball.cpp:30
 msgid "Baseball"
 msgstr "Bazopilkilo"
 
-#: src/weapon/bazooka.cpp:104
+#: src/weapon/bazooka.cpp:63
 msgid "Bazooka"
 msgstr "Bazuko"
 
@@ -164,11 +188,11 @@ msgstr ""
 msgid "Cannot open teams directory (%s)!"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:247
+#: src/weapon/cluster_bomb.cpp:147
 msgid "ClusterBomb"
 msgstr ""
 
-#: src/weapon/suicide.cpp:39
+#: src/weapon/suicide.cpp:38
 msgid "Commit suicide"
 msgstr "Mortigis sin"
 
@@ -190,7 +214,7 @@ msgstr "Afisxas la nomo de la ludantoj"
 msgid "Display wind particles?"
 msgstr ""
 
-#: src/game/game.cpp:138
+#: src/game/game.cpp:230
 #, fuzzy
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Cxu vi volas vere forlasi (J/N) ?"
@@ -205,13 +229,13 @@ msgstr "Vicdauxro"
 msgid "Duration of the end of a turn:"
 msgstr "Vicfindauxro"
 
-#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:129
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:126
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/game/game.cpp:81
+#: src/game/game.cpp:179
 #, fuzzy
-msgid "End of the game!"
+msgid "End of the game!\n"
 msgstr "Partifino !\n"
 
 #: src/interface/interface.cpp:111
@@ -262,7 +286,7 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/game/game.cpp:179
+#: src/game/game.cpp:271
 #, fuzzy, c-format
 msgid ""
 "Error:\n"
@@ -295,7 +319,7 @@ msgstr "Elektoj"
 msgid "Graphic options"
 msgstr ""
 
-#: src/weapon/grenade.cpp:185
+#: src/weapon/grenade.cpp:78
 msgid "Grenade"
 msgstr "Grenado"
 
@@ -304,11 +328,11 @@ msgstr "Grenado"
 msgid "Ground initialization..."
 msgstr "Preparanto"
 
-#: src/weapon/gun.cpp:85
+#: src/weapon/gun.cpp:79
 msgid "Gun"
 msgstr "Pistolo"
 
-#: src/tool/file_tools.cpp:58
+#: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 
@@ -361,7 +385,7 @@ msgstr "Muntas la avataron %s"
 msgid "Load teams:"
 msgstr "Muntas la teamo %s"
 
-#: src/map/map.cpp:265
+#: src/map/map.cpp:278
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr ""
@@ -370,7 +394,7 @@ msgstr ""
 msgid "Maximum number of FPS:"
 msgstr ""
 
-#: src/weapon/mine.cpp:298
+#: src/weapon/mine.cpp:290
 #, fuzzy
 msgid "Mine"
 msgstr "Mino"
@@ -389,9 +413,13 @@ msgstr "Nomo"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:562
+#: src/weapon/weapon.cpp:550
 #, c-format
 msgid "No element <%s> found in the xml config file!"
+msgstr ""
+
+#: src/game/game.cpp:79
+msgid "Nobody"
 msgstr ""
 
 #: src/menu/options_menu.cpp:120
@@ -403,7 +431,7 @@ msgstr "Nombro da ludantoj per teamo"
 msgid "Options"
 msgstr "Elektoj"
 
-#: src/game/game.cpp:189
+#: src/game/game.cpp:281
 msgid "Pause"
 msgstr ""
 
@@ -455,20 +483,25 @@ msgstr "Komencas novan partion"
 msgid "Stock:"
 msgstr "Municioj"
 
+#: src/game/game.cpp:133
+#, c-format
+msgid "Team %s results:\n"
+msgstr ""
+
 #: src/object/bonus_box.cpp:146 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleporto"
 
-#: src/weapon/auto_bazooka.cpp:138
+#: src/weapon/auto_bazooka.cpp:99
 #, fuzzy
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La memmova fuzilo estas malaperita en alian mondon ..."
 
-#: src/game/game.cpp:96
-msgid "The game has ended as a draw."
+#: src/game/game.cpp:187
+msgid "The game has ended as a draw.\n"
 msgstr ""
 
-#: src/weapon/bazooka.cpp:93 src/weapon/cluster_bomb.cpp:93
+#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:73
 #, fuzzy
 msgid "The rocket left the battlefield..."
 msgstr "La fuzilo estas malaperita en alian mondon ..."
@@ -541,7 +574,7 @@ msgstr "Armilo"
 msgid "Website: "
 msgstr "TTT-ejo : "
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:673
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pistolo !"
@@ -573,7 +606,7 @@ msgstr "Vi necesas almenaux du teamojn, korektu cxi tion en la menuo Elektoj !"
 msgid "You need at least two valid teams !"
 msgstr ""
 
-#: src/weapon/gun.cpp:76
+#: src/weapon/gun.cpp:70
 msgid "Your shot has missed!"
 msgstr ""
 

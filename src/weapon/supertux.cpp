@@ -41,47 +41,11 @@ const uint animation_deltat = 50;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-SuperTux::SuperTux(GameLoop &p_game_loop, TuxLauncher& p_launcher) :
-  WeaponProjectile (p_game_loop, "supertux"), 
-  particle_engine(particle_STAR,40),
-  launcher(p_launcher)
+SuperTux::SuperTux(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
+  WeaponProjectile (p_game_loop, "supertux", p_launcher), 
+  particle_engine(particle_STAR,40)
 {
-  SetWindFactor (0.8);
-  m_allow_negative_y = true;
-  touche_ver_objet = true;
-
-  image = resource_manager.LoadSprite(weapons_res_profile,"supertux");
-  image->cache.EnableLastFrameCache();
-  SetSize(image->GetWidth(), image->GetHeight());
-
-  SetMass (launcher.cfg().mass);
   m_gravity_factor = 0.0;
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-
-  SetTestRect (dx, dx, dy, dy);
-}
-
-//-----------------------------------------------------------------------------
-
-void SuperTux::Tire()
-{
-  PrepareTir();
-
-  // Set the initial position.
-  int x,y;
-  ActiveCharacter().GetHandPosition(x, y);
-  SetXY (x,y);
-
-  // Fixe la force de départ
-  angle = ActiveTeam().crosshair.GetAngleRad();
-  PutOutOfGround(angle);
-  SetExternForce(launcher.cfg().speed, angle);
-  time_next_action = global_time.Read();
-  last_move = global_time.Read();
-  camera.ChangeObjSuivi((PhysicalObj*)this,true,true);
 }
 
 //-----------------------------------------------------------------------------
@@ -95,7 +59,7 @@ void SuperTux::Refresh()
   image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
   if ((last_move+animation_deltat)<global_time.Read())
     {
-      SetExternForce(launcher.cfg().speed, angle);
+      SetExternForce(static_cast<SuperTuxWeaponConfig&>(launcher->cfg()).speed, angle);
       image->Update();
       last_move = global_time.Read();
   }
@@ -170,52 +134,12 @@ void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem)
 //-----------------------------------------------------------------------------
 
 TuxLauncher::TuxLauncher() : 
-  Weapon(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
-  supertux(game_loop, *this)
+  WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 { 
   m_name = _("SuperTux");   
   override_keys = true ;
 
-  impact = resource_manager.LoadImage(weapons_res_profile,"tux_impact");
-}
-
-//-----------------------------------------------------------------------------
-
-bool TuxLauncher::p_Shoot()
-{
-  supertux.Tire ();
-  lst_objets.AjouteObjet (&supertux, true);
-
-  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-
-  return true;
-}
-
-//-----------------------------------------------------------------------------
-
-void TuxLauncher::Explosion()
-{
-  m_is_active = false;
-  
-  lst_objets.RetireObjet (&supertux);
-
-  // On fait un trou ?
-  if (supertux.IsGhost()) return;
-
-  // Applique les degats et le souffle aux vers
-  Point2i pos = supertux.GetCenter();
-
-  AppliqueExplosion (pos, pos, impact, cfg(), NULL);
-
-
-}
-
-//-----------------------------------------------------------------------------
-
-void TuxLauncher::Refresh()
-{
-  if (!m_is_active) return;  
-  if (!supertux.is_active) Explosion();
+  projectile = new SuperTux(game_loop, this);
 }
 
 //-----------------------------------------------------------------------------
@@ -225,12 +149,12 @@ void TuxLauncher::HandleKeyEvent(int action, int event_type)
   switch (action) {
   case ACTION_MOVE_LEFT:
     if (event_type != KEY_RELEASED)
-      supertux.turn_left();
+      static_cast<SuperTux *>(projectile)->turn_left();
     break ;
     
   case ACTION_MOVE_RIGHT:
     if (event_type != KEY_RELEASED)
-      supertux.turn_right();
+      static_cast<SuperTux *>(projectile)->turn_right();
     break ;
     
   default:
@@ -239,9 +163,4 @@ void TuxLauncher::HandleKeyEvent(int action, int event_type)
 }
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
-SuperTuxWeaponConfig& TuxLauncher::cfg()
-{ return static_cast<SuperTuxWeaponConfig&>(*extra_params); }
-
-//-----------------------------------------------------------------------------

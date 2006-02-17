@@ -65,7 +65,7 @@ public:
   GnuLauncher();
   bool p_Shoot ();
   void Refresh();
-  GrenadeConfig& cfg();
+  ExplosiveWeaponConfig& cfg();
 
   void Explosion();
 };

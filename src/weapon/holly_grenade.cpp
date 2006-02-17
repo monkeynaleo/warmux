@@ -48,93 +48,33 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-HollyGrenade::HollyGrenade(GameLoop &p_game_loop, HollyGrenadeLauncher& p_launcher) :
-  WeaponProjectile (p_game_loop, "holly_grenade"), 
-  smoke_engine(particle_SMOKE,40),
-  launcher(p_launcher)
+HollyGrenade::HollyGrenade(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
+  WeaponProjectile (p_game_loop, "holly_grenade", p_launcher), 
+  smoke_engine(particle_SMOKE,40)
 {
-  m_allow_negative_y = true;
   m_rebound_sound = "weapon/holly_grenade_bounce";
   m_rebounding = true;
   touche_ver_objet = false;
   sing_alleluia = false;
 
-  image = resource_manager.LoadSprite( weapons_res_profile, "holly_grenade_sprite");
-  image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
-
-  SetMass (launcher.cfg().mass);
-  SetAirResistFactor(launcher.cfg().air_resist_factor);
-  m_rebound_factor = double(launcher.cfg().rebound_factor);
-
-  // Fixe le rectangle de test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);
-}
-
-//-----------------------------------------------------------------------------
-
-void HollyGrenade::Tire (double force)
-{
-  SetAirResistFactor(launcher.cfg().air_resist_factor);
-
-  PrepareTir();
-
-  // Set the initial position.
-  int x,y;
-  ActiveCharacter().GetHandPosition(x, y);
-  SetXY (x,y);
-
-  // Set the initial speed.
-  SetSpeed (force, ActiveTeam().crosshair.GetAngleRad());
-
-#ifdef MSG_DBG
-  COUT_DBG << "HollyGrenade::Tire()" << std::endl;
-#endif
-
-  // Recupere le moment du départ
-  temps_debut_tir = global_time.Read();
-  sing_alleluia = false;
+  m_rebound_factor = double(p_launcher->cfg().rebound_factor);
 }
 
 //-----------------------------------------------------------------------------
 
 void HollyGrenade::Refresh()
 {
-  if (!is_active) return;
+  WeaponProjectile::Refresh();
 
   smoke_engine.AddPeriodic(GetX(),GetY());
-
-#ifdef MSG_DBG
-  COUT_DBG << "HollyGrenade::Refresh()" << std::endl;
-#endif
-
-  if (IsGhost())
-  {
-    game_messages.Add ("The grenade left the battlefield before exploding.");
-    smoke_engine.Stop();
-    is_active = false;
-    return;
-  }
-
-  //5 sec après avoir été tirée, la grenade explose
-  double tmp = global_time.Read() - temps_debut_tir;
-  if(tmp>1000 * launcher.cfg().timeout) {
-    smoke_engine.Stop();
-    is_active = false;
-    return;
-  }
-
+  
+  double tmp = global_time.Read() - begin_time;
   // Sing Alleluia ;-)
-  if (tmp > (1000 * launcher.cfg().timeout - 2000) && !sing_alleluia) {
+  if (tmp > (1000 * launcher->cfg().timeout - 2000) && !sing_alleluia) {
     jukebox.Play("share","weapon/alleluia") ;
     sing_alleluia = true;
   }
   
-
-  if (TestImpact()) { SignalCollision(); return; }
-
   // rotation de l'image de la grenade...
   double angle = GetSpeedAngle() * 180.0/M_PI ;
   image->SetRotation_deg(angle);
@@ -143,26 +83,11 @@ void HollyGrenade::Refresh()
 //-----------------------------------------------------------------------------
 
 void HollyGrenade::Draw()
-{
-  if (!is_active) return;
-  if (IsGhost())
-  {
-    game_messages.Add ("The grenade left the battlefield before exploding");
-    is_active = false;
-    return;
-  }
-  
+{  
   // draw smoke particles below the grenade
   smoke_engine.Draw();
 
-  image->Draw(GetX(),GetY());
-  int tmp = launcher.cfg().timeout;
-  tmp -= (int)((global_time.Read() - temps_debut_tir) / 1000);
-  std::ostringstream ss;
-  ss << tmp;
-  int txt_x = GetX() + GetWidth() / 2;
-  int txt_y = GetY() - GetHeight();
-  global().normal_font().WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(),white_color);
+  WeaponProjectile::Draw();
 }
 
 //-----------------------------------------------------------------------------
@@ -182,59 +107,9 @@ void HollyGrenade::SignalCollision()
 //-----------------------------------------------------------------------------
 
 HollyGrenadeLauncher::HollyGrenadeLauncher() : 
-  Weapon(WEAPON_HOLLY_GRENADE, "holly_grenade", new GrenadeConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
-  grenade(game_loop, *this)
+  WeaponLauncher(WEAPON_HOLLY_GRENADE, "holly_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("HollyGrenade");
-
-  impact = resource_manager.LoadImage( weapons_res_profile, "holly_grenade_impact");
+  projectile = new HollyGrenade(game_loop, this);
 }
-
-//-----------------------------------------------------------------------------
-
-bool HollyGrenadeLauncher::p_Shoot ()
-{
-  grenade.Tire (m_strength);
-  camera.ChangeObjSuivi (&grenade, true, false);
-  lst_objets.AjouteObjet (&grenade, true);
-
-  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-  return true;
-}
-
-//-----------------------------------------------------------------------------
-
-void HollyGrenadeLauncher::Explosion()
-{
-  m_is_active = false;
-
-#ifdef MSG_DBG
-  COUT_DBG << "LanceHollyGrenade::Explosion()" << std::endl;
-#endif
-  
-  lst_objets.RetireObjet (&grenade);
-
-  // On fait un trou ?
-  if (grenade.IsGhost()) return;
-
-  // Applique les degats et le souffle aux vers
-  Point2i pos = grenade.GetCenter();
-  AppliqueExplosion (pos, pos, impact, cfg(), NULL);
-}
-
-//-----------------------------------------------------------------------------
-
-void HollyGrenadeLauncher::Refresh()
-{
-  if (m_is_active)
-  {
-    if (!grenade.is_active) Explosion();
-  } 
-}
-
-//-----------------------------------------------------------------------------
-
-GrenadeConfig& HollyGrenadeLauncher::cfg() 
-{ return static_cast<GrenadeConfig&>(*extra_params); }
-//-----------------------------------------------------------------------------
 

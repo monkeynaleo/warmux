@@ -67,103 +67,103 @@ const uint WEAPON_BOX_BUTTON_DY = 50;
 
 extern WeaponStrengthBar weapon_strength_bar;
 
-WeaponProjectile::WeaponProjectile (GameLoop &p_game_loop, const std::string &name)
-  : PhysicalObj (p_game_loop, name, 0.0)
-{
-  dernier_ver_touche = NULL;
-  dernier_obj_touche = NULL;
-  touche_ver_objet = false;
-}
+// WeaponProjectile::WeaponProjectile (GameLoop &p_game_loop, const std::string &name)
+//   : PhysicalObj (p_game_loop, name, 0.0)
+// {
+//   dernier_ver_touche = NULL;
+//   dernier_obj_touche = NULL;
+//   touche_ver_objet = false;
+// }
 
-void WeaponProjectile::PrepareTir()
-{
-  SetSize (image->GetWidth(), image->GetHeight());
-  Ready();
-  camera.ChangeObjSuivi(this, true, false);
-  is_active = true;
-}
+// void WeaponProjectile::PrepareTir()
+// {
+//   SetSize (image->GetWidth(), image->GetHeight());
+//   Ready();
+//   camera.ChangeObjSuivi(this, true, false);
+//   is_active = true;
+// }
 
-bool WeaponProjectile::TestImpact()
-{
-  if (IsReady()) 
-  {
-#ifdef DEBUG_MSG_COLLISION
-    COUT_DBG << "Impact because was ready." << std::endl;
-#endif
-    return true;
-  }
-  return CollisionTest (0,0);
-}
+// bool WeaponProjectile::TestImpact()
+// {
+//   if (IsReady()) 
+//   {
+// #ifdef DEBUG_MSG_COLLISION
+//     COUT_DBG << "Impact because was ready." << std::endl;
+// #endif
+//     return true;
+//   }
+//   return CollisionTest (0,0);
+// }
 
-bool WeaponProjectile::CollisionTest(int dx, int dy)
-{
-  dernier_ver_touche = NULL;
-  dernier_obj_touche = NULL;
+// bool WeaponProjectile::CollisionTest(int dx, int dy)
+// {
+//   dernier_ver_touche = NULL;
+//   dernier_obj_touche = NULL;
 
-  if (!IsInVacuum (dx, dy)) return true;
+//   if (!IsInVacuum (dx, dy)) return true;
 
-  if (!touche_ver_objet) return false;
+//   if (!touche_ver_objet) return false;
 
-   Rectanglei test = GetTestRect();
-   test.SetPositionX( test.GetPositionX() + dx);
-   test.SetPositionY( test.GetPositionY() + dy);
+//    Rectanglei test = GetTestRect();
+//    test.SetPositionX( test.GetPositionX() + dx);
+//    test.SetPositionY( test.GetPositionY() + dy);
    
-  FOR_ALL_LIVING_CHARACTERS(equipe,ver)
-  if (&(*ver) != &ActiveCharacter())
-  {
-    if (ver->GetTestRect().Intersect( test ))
-       {
-      dernier_ver_touche = &(*ver);
-#ifdef DEBUG_MSG_COLLISION
-      COUT_DBG << "On a touché le ver : " << ver -> m_name << std::endl;
-#endif
-      return true;
-    }
-  }
+//   FOR_ALL_LIVING_CHARACTERS(equipe,ver)
+//   if (&(*ver) != &ActiveCharacter())
+//   {
+//     if (ver->GetTestRect().Intersect( test ))
+//        {
+//       dernier_ver_touche = &(*ver);
+// #ifdef DEBUG_MSG_COLLISION
+//       COUT_DBG << "On a touché le ver : " << ver -> m_name << std::endl;
+// #endif
+//       return true;
+//     }
+//   }
 
-  FOR_EACH_OBJECT(objet)
-  if (objet -> ptr != this)
-  {
-    if ( objet->ptr->GetTestRect().Intersect( test ) )
-      {
-      dernier_obj_touche = objet -> ptr;
-#ifdef DEBUG_MSG_COLLISION
-      COUT_DBG << "On a touché un objet : " 
-                << objet -> ptr -> m_name << std::endl;      
-#endif
-      return true;
-    }
-  }
+//   FOR_EACH_OBJECT(objet)
+//   if (objet -> ptr != this)
+//   {
+//     if ( objet->ptr->GetTestRect().Intersect( test ) )
+//       {
+//       dernier_obj_touche = objet -> ptr;
+// #ifdef DEBUG_MSG_COLLISION
+//       COUT_DBG << "On a touché un objet : " 
+//                 << objet -> ptr -> m_name << std::endl;      
+// #endif
+//       return true;
+//     }
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
-void WeaponProjectile::Refresh()
-{
-  if( !is_active )
-    return;
+// void WeaponProjectile::Refresh()
+// {
+//   if( !is_active )
+//     return;
 
-  if( TestImpact() ){
-    SignalCollision();
-    return;
-  }
-}
+//   if( TestImpact() ){
+//     SignalCollision();
+//     return;
+//   }
+// }
 
-void WeaponProjectile::Draw()
-{
-  if( !is_active )
-    return;
+// void WeaponProjectile::Draw()
+// {
+//   if( !is_active )
+//     return;
 
-  image->Draw(GetX(), GetY());   
-}
+//   image->Draw(GetX(), GetY());   
+// }
 
-void WeaponProjectile::SignalGhostState (bool){
-  SignalCollision();
-}
+// void WeaponProjectile::SignalGhostState (bool){
+//   SignalCollision();
+// }
 
-void WeaponProjectile::SignalFallEnding(){
-  SignalCollision();
-}
+// void WeaponProjectile::SignalFallEnding(){
+//   SignalCollision();
+// }
 
 Weapon::Weapon(Weapon_type type, 
 	       const std::string &id,

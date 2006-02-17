@@ -21,7 +21,7 @@
 
 #ifndef AUTO_BAZOOKA_H
 #define AUTO_BAZOOKA_H
-#include "weapon.h"
+#include "launcher.h"
 #include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
@@ -34,20 +34,18 @@ class RoquetteTeteCherche : public WeaponProjectile
 {
 protected:
   double angle_local;
-  double temps_debut_tir;
   Point2i m_cible;
   bool m_attire;
 public:
-  RoquetteTeteCherche(GameLoop &game_loop, AutomaticBazooka& autobazooka);
-  void Tire (double force, uint cible_x,uint cible_y);
+  RoquetteTeteCherche(GameLoop &game_loop, WeaponLauncher * launcher);
   void Refresh();
-protected:
-  AutomaticBazooka& auto_bazooka;
+  void Shoot(double strength);
   void SetTarget (int x,int y);
+ protected:
   void SignalCollision();
 };
 
-class AutomaticBazooka : public Weapon
+class AutomaticBazooka : public WeaponLauncher
 {
 private:
 
@@ -58,30 +56,18 @@ private:
     Surface image;
   } cible;
   
-  bool p_Shoot();
-
 public:
-  Surface impact;
-  RoquetteTeteCherche roquette;
 
   AutomaticBazooka();
+
   void Draw ();
   void Refresh();
   void p_Select(); 
   void p_Deselect();
 
   bool IsReady() const;
-
-  // Le bazooka explose car il a été poussé à bout !
-  void ExplosionDirecte();
-
   virtual void ChooseTarget();
   void DrawTarget();
-
-  ExplosiveWeaponConfig& cfg();
-
-protected:
-  void Explosion();
 };
 
 #endif

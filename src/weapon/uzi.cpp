@@ -39,23 +39,17 @@ const double MIN_TIME_BETWEEN_SHOOT = 70; // in milliseconds
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-BalleUzi::BalleUzi(GameLoop &p_game_loop) :
-  WeaponProjectile(p_game_loop, "balle_uzi")
+BalleUzi::BalleUzi(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
+  WeaponProjectile(p_game_loop, "uzi_bullet", p_launcher)
 { 
   touche_ver_objet = true; 
-  image = resource_manager.LoadSprite(weapons_res_profile,"gun_bullet");
-  SetSize (image->GetWidth(), image->GetHeight());
-  SetSize (2,2);
-  SetMass (0.02);
-  SetWindFactor(0.05);
-  SetAirResistFactor(0);
 }
 
 //-----------------------------------------------------------------------------
 
 void BalleUzi::SignalCollision()
-{ 
-  if ((dernier_ver_touche == NULL) && (dernier_obj_touche == NULL))
+{   
+  if ((LitDernierVerTouche() == NULL) && (LitDernierObjTouche() == NULL))
   {
     game_messages.Add (_("Your shot has missed!"));
   }
@@ -67,15 +61,14 @@ void BalleUzi::SignalCollision()
 //-----------------------------------------------------------------------------
 
 Uzi::Uzi() :
-  Weapon(WEAPON_UZI,"uzi", new WeaponConfig()),
-  balle(game_loop)
+  WeaponLauncher(WEAPON_UZI,"uzi", new WeaponConfig())
 {
   m_name = _("Uzi");
   override_keys = true ;
 
   m_first_shoot = 0;
 
-  impact = resource_manager.LoadImage( weapons_res_profile, "uzi_impact");  
+  projectile = new BalleUzi(game_loop, this);
 }
 
 //-----------------------------------------------------------------------------
@@ -119,28 +112,28 @@ bool Uzi::p_Shoot()
   b= y-(a*x) ;
 
   // Move the bullet !!
-  balle.PrepareTir();  
-  balle.SetXY (x,y);
+  //balle.PrepareTir();  
+  projectile->SetXY (x,y);
 
-  while (balle.is_active) {
+  while (projectile->is_active) {
     y = int(double((a*x) + b)) ;
 
-    balle.SetXY(x,y);
+    projectile->SetXY(x,y);
 
     // the bullet in gone outside the map
-    if (balle.IsGhost()) {
-      balle.is_active=false;
+    if (projectile->IsGhost()) {
+      projectile->is_active=false;
       return true;
     }
     
     // is there a collision ??
-    if (balle.CollisionTest(0,0)) 
+    if (projectile->CollisionTest(0,0)) 
     {
-      balle.is_active=false;
+      projectile->is_active=false;
 
       // Si la balle a touché un ver, lui inflige des dégats
-      Character* ver = balle.LitDernierVerTouche();
-      PhysicalObj* obj = balle.LitDernierObjTouche();
+      Character* ver = projectile->LitDernierVerTouche();
+      PhysicalObj* obj = projectile->LitDernierObjTouche();
       if (ver) obj = ver;
       if (ver)
       {
@@ -154,9 +147,9 @@ bool Uzi::p_Shoot()
       // Creuse le world
       if (!obj)
       {
-	world.Creuse (balle.GetX() - impact.GetWidth()/2,
-		      balle.GetY() - impact.GetHeight()/2,
-		      impact);
+	world.Creuse (projectile->GetX() - projectile->impact.GetWidth()/2,
+		      projectile->GetY() - projectile->impact.GetHeight()/2,
+		      projectile->impact);
       }
       return true;
     }
@@ -166,12 +159,6 @@ bool Uzi::p_Shoot()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
-void Uzi::Refresh()
-{
-  m_image->Scale(ActiveCharacter().GetDirection(), 1);
-}
 //-----------------------------------------------------------------------------
 
 void Uzi::HandleKeyEvent(int action, int event_type)
@@ -193,10 +180,5 @@ void Uzi::HandleKeyEvent(int action, int event_type)
     break ;
   } ;
 }
-
-//-----------------------------------------------------------------------------
-
-WeaponConfig& Uzi::cfg()
-{ return static_cast<WeaponConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
