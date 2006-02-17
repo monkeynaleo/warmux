@@ -131,9 +131,7 @@ xmlpp::Element * ResourceManager::GetElement( const Profile *profile, const std:
 	  }
 	
 	if ( cur_elem)
-	  {
 	     elem = profile->doc->Access ( cur_elem, resource_type, r_name);
-	  }
 	
      }
    

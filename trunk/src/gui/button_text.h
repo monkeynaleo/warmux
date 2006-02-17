@@ -21,10 +21,9 @@
 
 #ifndef BUTTON_TEXT_H
 #define BUTTON_TEXT_H
-//-----------------------------------------------------------------------------
+
 #include "button.h"
 #include "../graphic/text.h"
-//-----------------------------------------------------------------------------
 
 class ButtonText : public Button
 {
@@ -32,7 +31,7 @@ private:
   Text* text;
    
 public:
-  ButtonText (int x, int y,
+  ButtonText (Point2i position,
 	      const Profile *res_profile, const std::string& resource_id,
 	      const std::string &new_text,
 	      Font * font);
@@ -41,5 +40,4 @@ public:
   void Draw (uint mouse_x, uint mouse_y);  
 };
 
-//-----------------------------------------------------------------------------
 #endif

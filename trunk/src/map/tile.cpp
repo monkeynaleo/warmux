@@ -31,7 +31,6 @@
 #include "../tool/error.h"
 #include "../tool/point.h"
 
-
 const int cell_width = 128;
 const int cell_height = 128;
 
@@ -455,39 +454,39 @@ void Tile::DrawTile_Clipped( Rectanglei clip_r_world) const
 
    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
      for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++)
-       {
-	  // For all selected items, clip source and destination
-	  // blitting rectangles 
-	  int dest_x = cx * cell_width;  
-	  int dest_y = cy * cell_height;
-	  int dest_w = cell_width;
-	  int dest_h = cell_height;
-	  int src_x = 0;
-	  int src_y = 0;
+     {
+       // For all selected items, clip source and destination
+	   // blitting rectangles 
+       int dest_x = cx * cell_width;  
+       int dest_y = cy * cell_height;
+       int dest_w = cell_width;
+       int dest_h = cell_height;
+       int src_x = 0;
+       int src_y = 0;
 	  
-	  if ( dest_x < clip_r_world.GetPositionX() ){ // left clipping
-	       src_x  += clip_r_world.GetPositionX() - dest_x;
-	       dest_w -= clip_r_world.GetPositionX() - dest_x;
-	       dest_x  = clip_r_world.GetPositionX();
-	  }
+       if ( dest_x < clip_r_world.GetPositionX() ){ // left clipping
+	     src_x  += clip_r_world.GetPositionX() - dest_x;
+	     dest_w -= clip_r_world.GetPositionX() - dest_x;
+	     dest_x  = clip_r_world.GetPositionX();
+	   }
 	  
-	  if ( dest_y < clip_r_world.GetPositionY() ){  // top clipping
-	       src_y  += clip_r_world.GetPositionY() - dest_y;
-	       dest_h -= clip_r_world.GetPositionY() - dest_y;
-	       dest_y  = clip_r_world.GetPositionY();
-	  }
+	   if ( dest_y < clip_r_world.GetPositionY() ){  // top clipping
+	     src_y  += clip_r_world.GetPositionY() - dest_y;
+	     dest_h -= clip_r_world.GetPositionY() - dest_y;
+	     dest_y  = clip_r_world.GetPositionY();
+	   }
 	  
-	  if ( dest_x + dest_w > clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1) // right clipping
+	   if ( dest_x + dest_w > clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1) // right clipping
 	       dest_w -= ( dest_x + dest_w ) - ( clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1);
 	  
-	  if ( dest_y + dest_h > clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1) // bottom clipping
+	   if ( dest_y + dest_h > clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1) // bottom clipping
 	       dest_h -= ( dest_y + dest_h ) - ( clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1);
 	  
-	  Rectanglei sr(src_x, src_y, dest_w, dest_h);
+	   Rectanglei sr(src_x, src_y, dest_w, dest_h);
 	       
-	  // Decall the destination rectangle along the camera offset
-	  Point2i dr(dest_x - camera.GetX(), dest_y - camera.GetY());
+	   // Decall the destination rectangle along the camera offset
+	   Point2i dr(dest_x - camera.GetX(), dest_y - camera.GetY());
 	  
-	  app.video.window.Blit( item[cy*nbr_cell_width+cx]->GetSurface(), sr, dr);
-       }
+	   app.video.window.Blit( item[cy*nbr_cell_width+cx]->GetSurface(), sr, dr);
+   }
 }   

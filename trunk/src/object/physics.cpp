@@ -25,37 +25,19 @@
  *****************************************************************************/
 
 #include "../object/physics.h"
-//-----------------------------------------------------------------------------
 #include <stdlib.h>
 #include "../game/config.h"
-#include "../tool/math_tools.h"
-//#include "../tool/geometry_tools.h"
 #include "../game/game_mode.h"
 #include "../game/time.h"
+#include "../tool/debug.h"
+#include "../tool/math_tools.h"
 #include "../map/wind.h"
-//-----------------------------------------------------------------------------
-
-#ifdef DEBUG
-#  include <iostream>
-
-//#define DEBUG_CHG_ETAT
-//#define DEBUG_MSG_PHYSIQUE
-
-#define COUT_DEBUG0 std::cout << "[Objet " << this << "]"
-#define COUT_DEBUG COUT_DEBUG0 " "
-#define COUT_PHYSIC COUT_DEBUG0 << "[Physique] "
-
-#endif
-//-----------------------------------------------------------------------------
 
 // Physical constants
-
 const double STOP_REBOUND_LIMIT = 0.5 ;
 const double AIR_RESISTANCE_FACTOR = 14 ;
 const double PHYS_DELTA_T = 0.01 ;         // Physical simulation time step
 const double PENDULUM_REBOUND_FACTOR = 0.8 ;
-
-//-----------------------------------------------------------------------------
 
 Physics::Physics (GameLoop &p_game_loop, double mass) :
   game_loop(p_game_loop)
@@ -88,15 +70,11 @@ Physics::Physics (GameLoop &p_game_loop, double mass) :
   m_last_move = global_time.Read() ;
 }
 
-//-----------------------------------------------------------------------------
-
 Physics::~Physics ()
 {}
 
 //---------------------------------------------------------------------------//
-//--                                                                       --//
 //--                         Class Parameters SET/GET                      --//
-//--                                                                       --//
 //---------------------------------------------------------------------------//
 
 // Set / Get positions
@@ -117,15 +95,11 @@ double Physics::GetPhysY() const
   return m_pos_y.x0; 
 }
 
-//-----------------------------------------------------------------------------
-
 void Physics::SetPhysSize (double width, double height)
 {
   m_phys_width = width ;
   m_phys_height = height ;
 }
-
-//-----------------------------------------------------------------------------
 
 // Set / Get positions
 void Physics::SetMass(double mass)
@@ -138,15 +112,11 @@ double Physics::GetMass() const
   return m_mass ;
 }
 
-//-----------------------------------------------------------------------------
-
 // Set the wind factor
 void Physics::SetWindFactor (double factor)
 { 
   m_wind_factor = factor;
 }
-
-//-----------------------------------------------------------------------------
 
 // Set the wind factor
 void Physics::SetAirResistFactor (double factor)
@@ -154,23 +124,17 @@ void Physics::SetAirResistFactor (double factor)
   m_air_resist_factor = factor;
 }
 
-//-----------------------------------------------------------------------------
-
 // Set the wind factor
 void Physics::SetGravityFactor (double factor)
 { 
   m_gravity_factor = factor;
 }
 
-//-----------------------------------------------------------------------------
-
 void Physics::SetSpeed (double length, double angle)
 {
   DoubleVector vector( length*cos(angle), length*sin(angle) );
   SetSpeedXY(vector);
 }
-
-//-----------------------------------------------------------------------------
 
 void Physics::SetSpeedXY (DoubleVector vector)
 {
@@ -185,15 +149,11 @@ void Physics::SetSpeedXY (DoubleVector vector)
   if (!was_moving && IsMoving()) StartMoving();
 }
 
-//-----------------------------------------------------------------------------
-
 void Physics::AddSpeed (double length, double angle)
 {
   DoubleVector vector( length*cos(angle), length*sin(angle) );
   AddSpeedXY (vector);
 }
-
-//-----------------------------------------------------------------------------
 
 void Physics::AddSpeedXY (DoubleVector vector)
 {
@@ -207,8 +167,6 @@ void Physics::AddSpeedXY (DoubleVector vector)
 
   if (!was_moving && IsMoving()) StartMoving();
 }
-
-//-----------------------------------------------------------------------------
 
 void Physics::GetSpeed(double &norm, double &angle)
 {
@@ -240,8 +198,6 @@ void Physics::GetSpeed(double &norm, double &angle)
   }
 }
 
-//-----------------------------------------------------------------------------
-
 void Physics::GetSpeedXY(DoubleVector &vector)
 {
   if(!IsMoving())
@@ -252,14 +208,10 @@ void Physics::GetSpeedXY(DoubleVector &vector)
   vector.SetValues(m_pos_x.x1, m_pos_y.x1);
 }
 
-//-----------------------------------------------------------------------------
-
 double Physics::GetAngularSpeed()
 {
   return m_rope_angle.x1 ;
 }
-
-//-----------------------------------------------------------------------------
 
 double Physics::GetSpeedAngle()
 {
@@ -272,16 +224,12 @@ double Physics::GetSpeedAngle()
   return angle ;
 }
 
-//-----------------------------------------------------------------------------
-
 void Physics::SetExternForce (double length, double angle)
 {
   DoubleVector vector(length*cos(angle), length*sin(angle));
 
   SetExternForceXY(vector);
 }
-
-//-----------------------------------------------------------------------------
 
 void Physics::SetExternForceXY (DoubleVector vector)
 {
@@ -293,10 +241,7 @@ void Physics::SetExternForceXY (DoubleVector vector)
     StartMoving();
 }
 
-//-----------------------------------------------------------------------------
-
 // Set fixation point positions
-
 void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
 				     double dy)
 {
@@ -388,16 +333,9 @@ double Physics::GetRopeLength()
   return m_rope_length.x0;
 }
 
-
-//-----------------------------------------------------------------------------
-
 //---------------------------------------------------------------------------//
-//--                                                                       --//
 //--                            Physical Simulation                        --//
-//--                                                                       --//
 //---------------------------------------------------------------------------//
-
-//-----------------------------------------------------------------------------
 
 void Physics::StartMoving()
 {
@@ -406,18 +344,13 @@ void Physics::StartMoving()
   if (m_motion_type == NoMotion)
     m_motion_type = FreeFall ;  
 
-#ifdef DEBUG_MSG_PHYSIQUE
-//  COUT_DEBUG0 << "Start moving." << std::endl;
-#endif
+  MSG_DEBUG ("physic.physic", "Start moving.");
 }
-
-//-----------------------------------------------------------------------------
 
 void Physics::StopMoving()
 {
-#ifdef DEBUG_MSG_PHYSIQUE
-//  if (IsMoving()) COUT_PHYSIC << "Fin d'un mouvement." << std::endl;
-#endif
+  if (IsMoving())
+	  MSG_DEBUG ("physic.physic", "End of a mouvement...");
 
   m_pos_x.x1 = 0 ;
   m_pos_x.x2 = 0 ;
@@ -429,8 +362,6 @@ void Physics::StopMoving()
   m_extern_force.Clear();
 }
 
-//-----------------------------------------------------------------------------
-
 bool Physics::IsMoving() const
 {
   return ( (!EgalZero(m_pos_x.x1)) ||
@@ -440,15 +371,11 @@ bool Physics::IsMoving() const
 //	   (m_motion_type == Pendulum) ) ;
 }
 
-//-----------------------------------------------------------------------------
-
 bool Physics::IsFalling() const
 {
   return ( ( m_motion_type == FreeFall ) &&
 	   ( m_pos_y.x1 > 0.1) );
 }
-
-//-----------------------------------------------------------------------------
 
 double Physics::GetContactSurface(double angle)
 {
@@ -464,8 +391,6 @@ double Physics::GetContactSurface(double angle)
 
   return 0.5 * (x_surface + y_surface) ;
 }
-
-//-----------------------------------------------------------------------------
 
 // Compute the next position of the object during a pendulum motion.
 void Physics::ComputePendulumNextXY (double delta_t)
@@ -504,8 +429,6 @@ void Physics::ComputePendulumNextXY (double delta_t)
 
   SetPhysXY(x,y);
 }
-
-//-----------------------------------------------------------------------------
 
 // Compute the next position of the object during a free fall.
 void Physics::ComputeFallNextXY (double delta_t)
@@ -550,8 +473,6 @@ void Physics::ComputeFallNextXY (double delta_t)
   //	  m_pos_y.x0, m_pos_x.x1, m_pos_y.x1, m_pos_x.x2, m_pos_y.x2);
 }
 
-//-----------------------------------------------------------------------------
-
 // Compute the position of the object at current time.
 void Physics::ComputeNextXY (double &x, double &y, double delta_t)
 {
@@ -566,9 +487,6 @@ void Physics::ComputeNextXY (double &x, double &y, double delta_t)
   x = m_pos_x.x0 ;
   y = m_pos_y.x0 ;
 }
-
-
-//-----------------------------------------------------------------------------
 
 void Physics::RunPhysicalEngine ()
 {
@@ -602,11 +520,7 @@ void Physics::RunPhysicalEngine ()
 
       if (contact)
 	{
-#ifdef DEBUG_MSG_PHYSIQUE
-	  COUT_PHYSIC << "Collision durant le déplacement "
-		      << '(' << old_x << ',' << old_y 
-		      << " -> " << new_x << ',' << new_y << ")." << std::endl;
-#endif
+	  MSG_DEBUG( "physic.coll", "Collision durant le déplacement (%d, %d) -> (%d, %d)", old_x , old_y, new_x, new_y);
 	  Rebound(contact_x, contact_y, contact_angle);
 	}
 
@@ -615,8 +529,6 @@ void Physics::RunPhysicalEngine ()
 
   return;
 }
-
-//-----------------------------------------------------------------------------
 
 void Physics::Rebound(double contact_x, double contact_y, double contact_angle)
 {
@@ -690,12 +602,9 @@ void Physics::Rebound(double contact_x, double contact_y, double contact_angle)
 
 }
 
-//-----------------------------------------------------------------------------
-
 void Physics::SignalGhostState(bool)  {}
 void Physics::SignalDeath() {}
 void Physics::SignalDrowning() {}
 void Physics::SignalFallEnding() {}
 void Physics::SignalRebound() {}
 
-//-----------------------------------------------------------------------------

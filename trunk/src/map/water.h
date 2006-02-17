@@ -19,8 +19,9 @@
  * Refresh de l'eau pouvant apparaitre en bas du terrain.
  *****************************************************************************/
 
-#ifndef EAU_H
-#define EAU_H
+#ifndef WATER_H
+#define WATER_H
+
 #include <vector>
 #include "../graphic/surface.h"
 #include "../include/base.h"

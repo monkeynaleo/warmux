@@ -64,7 +64,6 @@ void Text::Render(){
 }
 
 void Text::Set(const std::string &new_txt){
-				
   if(txt == new_txt)
     return;
 
@@ -86,6 +85,10 @@ void Text::DrawCenter (int x, int y){
   DrawTopLeft(x - surf.GetWidth() / 2, y - surf.GetHeight() / 2);
 }
 
+void Text::DrawCenter (const Point2i &position){
+  DrawCenter(position.GetX(), position.GetY());
+}
+
 void Text::DrawTopRight (int x, int y){ 
   DrawTopLeft( x - surf.GetWidth(), y);
 }
@@ -94,12 +97,9 @@ void Text::DrawCenterTop (int x, int y){
   DrawTopLeft( x - surf.GetWidth()/2, y);
 }
 
-void Text::DrawTopLeft (int x, int y){ 
-  Rectanglei dst_rect;
+void Text::DrawTopLeft(const Point2i &position){
+  Rectanglei dst_rect(position, surf.GetSize());
   
-  dst_rect.SetPosition(x, y);
-  dst_rect.SetSize(surf.GetWidth(), surf.GetHeight());
-
   if(shadowed){
     Rectanglei shad_rect;
     
@@ -115,6 +115,10 @@ void Text::DrawTopLeft (int x, int y){
     app.video.window.Blit(surf, dst_rect.GetPosition());
     world.ToRedrawOnScreen(dst_rect);
   }		
+}
+
+void Text::DrawTopLeft (int x, int y){ 
+  DrawTopLeft( Point2i(x, y) );
 }
 
 void Text::DrawCenterOnMap (int x, int y){

@@ -21,45 +21,70 @@
 #include <vector>
 #include <string>
 #include <string.h>
+#include <stdarg.h>
 #include "../include/base.h"
 
+/**
+ * The debug modes in use.
+ */
 std::vector<std::string> debugModes;
 
-void PrintDebug (const char *filename, unsigned long line,
-                 const char *level, std::string message)
+/**
+ * Print a debug message if needed.
+ *
+ * @param filename
+ * @param line
+ * @param level
+ * @param message
+ */
+void PrintDebug (const char *filename, const char *function, unsigned long line,
+		const char *level, const char *message, ...)
 {
-  int levelSize = strlen(level);
-  unsigned int i = 0;
-  
-  for( i = 0; i < debugModes.size(); i++ ){
-    int modeSize = debugModes[i].size();
-    const char *strMode = debugModes[i].c_str();
-     
-    if( strncmp(strMode, level, modeSize) == 0){
-      if( (levelSize != modeSize) && ( level[modeSize] != '.' ) && modeSize != 0)
-	continue;
-        
-        std::cerr << "DEBUG (" << filename << ':' << line 
-                  << ") " << level << " : " << message << "."
-                  << std::endl;
-        return;
-    }
-  }
+	int levelSize = strlen(level);
+	unsigned int i = 0;
+
+	for( i = 0; i < debugModes.size(); i++ ){
+		int modeSize = debugModes[i].size();
+		const char *strMode = debugModes[i].c_str();
+
+		if( strncmp(strMode, level, modeSize) == 0){
+			if( (levelSize != modeSize) && ( level[modeSize] != '.' ) && modeSize != 0)
+				continue;
+	        
+			va_list argp;
+			
+			fprintf(stderr, "DEBUG (%s:%s:%ld) %s : ", filename, function, line, level);
+	        va_start(argp, message);
+	        vfprintf(stderr, message, argp);
+	        va_end(argp);
+			fprintf(stderr, "\n");
+			return;
+		}
+	}
 }
 
+/** 
+ * Add a new debug mode to check.
+ */
 void AddDebugMode( std::string mode ){
-  debugModes.push_back( mode );
+	debugModes.push_back( mode );
 }
 
+/**
+ * Parse the command line arguments to find new debug mode to use.
+ * 
+ * @param argc Number of arguments.
+ * @param argv The arguments.
+ */
 void InitDebugModes( int argc, char **argv ){
-  int i;
+	int i;
 
-  for( i=0; i<argc; i++ ){
-    if( strcmp(argv[i], "--AddDebugMode") == 0 ){
-      i = i + 1;
-      if( i == argc )
-        Error( "Usage : --AddDebugMode mode.truc" );
-      AddDebugMode( argv[i] );
-    }
-  }
+	for( i=0; i<argc; i++ ){
+		if( strcmp(argv[i], "--add-debug-mode") == 0 ){
+			i = i + 1;
+			if( i == argc )
+				Error( "Usage : --add-debug-mode mode.truc" );
+			AddDebugMode( argv[i] );
+		}
+	}
 }

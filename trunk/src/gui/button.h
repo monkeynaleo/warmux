@@ -21,12 +21,11 @@
 
 #ifndef GUI_BUTTON_H
 #define GUI_BUTTON_H
-//-----------------------------------------------------------------------------
+
 #include "../include/base.h"
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 #include "widget.h"
-//-----------------------------------------------------------------------------
 
 class Button : public Widget
 {
@@ -34,17 +33,16 @@ protected:
   Sprite *image;
    
 public:
-  Button (int x, int y, uint w, uint h,
+  Button (const Rectanglei &rect,
 	  const Profile *res_profile, const std::string& resource_id);
-  Button (int x, int y,
+  Button (const Point2i &position,
 	  const Profile *res_profile, const std::string& resource_id);
   virtual ~Button();
 
   virtual void Draw (uint mouse_x, uint mouse_y);
-  virtual void SetSizePosition(int _x, int _y, uint _w, uint _h);
+  virtual void SetSizePosition(const Rectanglei &rect);
   
   Sprite* GetSprite() { return image; };
 };
 
-//-----------------------------------------------------------------------------
 #endif

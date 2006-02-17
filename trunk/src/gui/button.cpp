@@ -24,19 +24,16 @@
 #include "../graphic/sprite.h"
 #include "../include/app.h"
 
-Button::Button (int x, int y, uint w, uint h,
-		const Profile *res_profile, const std::string& resource_id)
-  : Widget(x, y, w, h){
+Button::Button (const Rectanglei &rect, const Profile *res_profile, const std::string& resource_id) : Widget(rect){
   image = resource_manager.LoadSprite(res_profile,resource_id);
   image->cache.EnableLastFrameCache();
-  image->ScaleSize(w,h);
+  image->ScaleSize(rect.GetSize());
 }
 
-Button::Button (int x, int y, const Profile *res_profile, const std::string& resource_id)
-  : Widget(x, y, 1, 1){
+Button::Button (const Point2i &m_position, const Profile *res_profile, const std::string& resource_id){
   image = resource_manager.LoadSprite(res_profile, resource_id);
-  w = image->GetWidth();
-  h = image->GetHeight();
+  position = m_position;
+  size = image->GetSize();
 }
 
 Button::~Button(){
@@ -47,10 +44,10 @@ void Button::Draw (uint mouse_x, uint mouse_y){
   uint frame = MouseIsOver(mouse_x, mouse_y)?1:0;
 
   image->SetCurrentFrame(frame);
-  image->Blit(app.video.window, x, y);
+  image->Blit(app.video.window, position);
 }
 
-void Button::SetSizePosition(int _x, int _y, uint _w, uint _h){
-  StdSetSizePosition(_x, _y, _w, _h);
-  image->ScaleSize(w, h);
+void Button::SetSizePosition(const Rectanglei &rect){
+  StdSetSizePosition(rect);
+  image->ScaleSize(size);
 }

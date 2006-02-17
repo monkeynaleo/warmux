@@ -22,7 +22,6 @@
  *****************************************************************************/
 
 #include "game_mode.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include "config.h"
 #include "game_loop.h"
@@ -30,9 +29,8 @@
 #include "../tool/i18n.h"
 #include "../weapon/all.h"
 #include "../weapon/weapons_list.h"
-//-----------------------------------------------------------------------------
+
 GameMode game_mode;
-//-----------------------------------------------------------------------------
 
 GameMode::GameMode()
 {
@@ -54,8 +52,6 @@ GameMode::GameMode()
   character.super_jump_strength = 200;
   character.super_jump_angle = -80;
 }
-
-//-----------------------------------------------------------------------------
 
 // Load data options from the selected game_mode
 bool GameMode::LoadXml(xmlpp::Element *xml)
@@ -126,8 +122,6 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 bool GameMode::Load(const std::string &mode)
 {
   if (mode == m_current) return true;
@@ -158,8 +152,6 @@ bool GameMode::Load(const std::string &mode)
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 bool GameMode::AllowCharacterSelection() const
 {
   switch (allow_character_selection)
@@ -178,4 +170,3 @@ bool GameMode::AllowCharacterSelection() const
   return true;
 }
 
-//-----------------------------------------------------------------------------

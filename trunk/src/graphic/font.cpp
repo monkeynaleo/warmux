@@ -30,7 +30,7 @@
 #include "../tool/error.h"
 #include "../tool/file_tools.h"
 
-Font::Font(int size) { 
+Font::Font(int size){ 
   m_font = NULL;
   bool ok = Load(config.ttf_filename, size);
   

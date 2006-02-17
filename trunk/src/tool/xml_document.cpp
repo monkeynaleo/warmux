@@ -2,16 +2,11 @@
  * Exemple d'utilisation de la librairie libxml++ version 1.0.
  */
 
-#include "../tool/xml_document.h"
-//-----------------------------------------------------------------------------
+#include "xml_document.h"
 #include <libxml++/libxml++.h>
 #include <iostream>
-#include "../tool/string_tools.h"
-#include "../tool/file_tools.h"
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
+#include "string_tools.h"
+#include "file_tools.h"
 
 bool LitDocXml::Charge (const std::string &nomfich)
 {
@@ -27,8 +22,6 @@ bool LitDocXml::Charge (const std::string &nomfich)
   return EstOk();
 }
 
-//-----------------------------------------------------------------------------
-
 xmlpp::Element* LitDocXml::AccesBalise (const xmlpp::Node *x, 
 					const std::string &nom)
 {
@@ -39,8 +32,6 @@ xmlpp::Element* LitDocXml::AccesBalise (const xmlpp::Node *x,
   assert (elem != NULL);
   return elem;
 }
-
-//-----------------------------------------------------------------------------
 
 xmlpp::Element* LitDocXml::Access (const xmlpp::Node *x, 
 				   const std::string &name,
@@ -62,8 +53,6 @@ xmlpp::Element* LitDocXml::Access (const xmlpp::Node *x,
   return NULL;
 }
 
-//-----------------------------------------------------------------------------
-
 bool LitDocXml::LitString (const xmlpp::Node *x, 
 			   const std::string &nom,
 			   std::string &sortie)
@@ -72,8 +61,6 @@ bool LitDocXml::LitString (const xmlpp::Node *x,
   if (elem == NULL) return false;
   return LitValeurBalise (elem, sortie);
 }
-
-//-----------------------------------------------------------------------------
 
 bool LitDocXml::LitDouble (const xmlpp::Node *x, 
 			const std::string &nom,
@@ -84,8 +71,6 @@ bool LitDocXml::LitDouble (const xmlpp::Node *x,
   return str2double (val, sortie);
 }
 
-//-----------------------------------------------------------------------------
-
 bool LitDocXml::LitInt (const xmlpp::Node *x, 
 			const std::string &nom,
 			int &sortie)
@@ -94,8 +79,6 @@ bool LitDocXml::LitInt (const xmlpp::Node *x,
   if (!LitString(x,nom,val)) return false;
   return str2int (val, sortie);
 }
-
-//-----------------------------------------------------------------------------
 
 bool LitDocXml::LitUint (const xmlpp::Node *x, 
 			const std::string &nom,
@@ -110,8 +93,6 @@ bool LitDocXml::LitUint (const xmlpp::Node *x,
     return false;
   }
 }
-
-//-----------------------------------------------------------------------------
 
 bool LitDocXml::LitBool (const xmlpp::Node *x, 
 			 const std::string &nom,
@@ -129,8 +110,6 @@ bool LitDocXml::LitBool (const xmlpp::Node *x,
     return false;
   }
 }
-
-//-----------------------------------------------------------------------------
 
 bool LitDocXml::LitValeurBalise (const xmlpp::Node *balise,
 				 std::string &sortie)
@@ -150,8 +129,6 @@ bool LitDocXml::LitValeurBalise (const xmlpp::Node *balise,
   sortie = texte -> get_content();
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 bool LitDocXml::LitListeString (const xmlpp::Node *x, 
 				const std::string &nom,
@@ -179,8 +156,6 @@ bool LitDocXml::LitListeString (const xmlpp::Node *x,
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 bool LitDocXml::LitAttrString (const xmlpp::Element *x, 
 			       const std::string &nom, 
 			       std::string &sortie)
@@ -192,8 +167,6 @@ bool LitDocXml::LitAttrString (const xmlpp::Element *x,
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 bool LitDocXml::LitAttrInt (const xmlpp::Element *x, 
 			    const std::string &nom, 
 			    int &sortie)
@@ -202,9 +175,6 @@ bool LitDocXml::LitAttrInt (const xmlpp::Element *x,
   if (!LitAttrString (x, nom, val)) return false;
   return str2int (val, sortie);
 }
-
-//-----------------------------------------------------------------------------
-
 
 bool LitDocXml::LitAttrUint (const xmlpp::Element *x, 
 			     const std::string &nom, 
@@ -220,12 +190,8 @@ bool LitDocXml::LitAttrUint (const xmlpp::Element *x,
   }
 }
 
-//-----------------------------------------------------------------------------
-
 bool LitDocXml::EstOk() const 
 { return parser; }
-
-//-----------------------------------------------------------------------------
 
 xmlpp::Element* LitDocXml::racine() const 
 { 
@@ -236,8 +202,6 @@ xmlpp::Element* LitDocXml::racine() const
 }
 
 //-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 EcritDocXml::EcritDocXml()
 {
@@ -246,21 +210,15 @@ EcritDocXml::EcritDocXml()
   m_sauve = false;
 }
 
-//-----------------------------------------------------------------------------
-
 EcritDocXml::~EcritDocXml()
 {
   Sauve();
 }
 
-//-----------------------------------------------------------------------------
-
 bool EcritDocXml::EstOk() const
 {
   return (m_doc != NULL) && (m_racine != NULL);
 }
-
-//-----------------------------------------------------------------------------
 
 void EcritDocXml::EcritBalise (xmlpp::Element *x, 
 			       const std::string &nom,
@@ -270,8 +228,6 @@ void EcritDocXml::EcritBalise (xmlpp::Element *x,
   elem -> add_child_text (valeur);
   m_sauve = false;
 }
-
-//-----------------------------------------------------------------------------
 
 bool EcritDocXml::Cree (const std::string &nomfich, 
 			const std::string &racine,
@@ -289,15 +245,11 @@ bool EcritDocXml::Cree (const std::string &nomfich,
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 xmlpp::Element* EcritDocXml::racine()
 {
   assert (m_racine != NULL);
   return m_racine;
 }
-
-//-----------------------------------------------------------------------------
 
 bool EcritDocXml::Sauve()
 {
@@ -314,4 +266,3 @@ bool EcritDocXml::Sauve()
   return true;
 }
 
-//-----------------------------------------------------------------------------

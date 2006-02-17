@@ -23,11 +23,10 @@
 
 #ifndef SCROLLING_H
 #define SCROLLING_H
-//-----------------------------------------------------------------------------
+
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-#include "../team/character.h"
-//-----------------------------------------------------------------------------
+#include "../tool/point.h"
 
 class Camera
 {
@@ -36,11 +35,7 @@ public:
   bool autorecadre;
 
 private:
-  struct s_pos
-  {
-    int x;
-    int y;
-  } pos;
+  Point2i position;
   bool selec_rectangle;
   PhysicalObj* obj_suivi;
   bool lance;
@@ -64,6 +59,7 @@ public:
   // Decalage du fond
   int GetX() const;
   int GetY() const;
+  Point2i GetPosition() const;
   uint GetWidth() const;
   uint GetHeight() const;
 
@@ -78,5 +74,5 @@ public:
 };
 
 extern Camera camera;
-//-----------------------------------------------------------------------------
+
 #endif

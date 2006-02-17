@@ -21,22 +21,17 @@
 
 #ifndef NULL_WIDGET_H
 #define NULL_WIDGET_H
-//-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../graphic/text.h"
-#include "../gui/widget.h"
-#include <string>
-//-----------------------------------------------------------------------------
+
+#include "widget.h"
 
 class NullWidget : public Widget
 {
  public:
-  NullWidget(int x, int y, uint w, uint h);
+  NullWidget(const Rectanglei &rect);
   ~NullWidget();
   void Draw (uint mouse_x, uint mouse_y) ;
-  void SetSizePosition(int _x, int _y, uint _w, uint _h);
+  void SetSizePosition(const Rectanglei &rect);
 };
 
-//-----------------------------------------------------------------------------
 #endif
 

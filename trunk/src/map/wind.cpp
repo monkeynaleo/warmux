@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "wind.h"
-//----------------------------------------------------------------------------
 #include <SDL.h>
 #include "camera.h"
 #include "../game/game_loop.h"
@@ -33,18 +32,14 @@
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
 #include "../graphic/sprite.h"
-//----------------------------------------------------------------------------
 
 const uint MAX_WIND_OBJECTS = 200;
-
 const uint BARRE_LARG = 80;
 const uint BARRE_HAUT = 10;
 const double force = 5; // Force maximale du vent en m/(sec*sec)
 const uint barre_speed = 20;
 
-//----------------------------------------------------------------------------
 Wind wind;
-//-----------------------------------------------------------------------------
 
 WindParticle::WindParticle(GameLoop &p_game_loop) :
   PhysicalObj(p_game_loop, "WindParticle", 0.0)
@@ -54,8 +49,6 @@ WindParticle::WindParticle(GameLoop &p_game_loop) :
   m_air_resist_factor = 0;
   sprite = NULL;
 }
-
-//-----------------------------------------------------------------------------
 
 void WindParticle::Init()
 {
@@ -89,13 +82,9 @@ void WindParticle::Init()
   m_allow_negative_y = true;
 }
 
-//-----------------------------------------------------------------------------
-
 void WindParticle::Reset()
 { 
 }
-
-//-----------------------------------------------------------------------------
 
 void WindParticle::Refresh()
 {
@@ -120,15 +109,12 @@ void WindParticle::Refresh()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 void WindParticle::Draw()
 {
-  if(TerrainActif().wind.need_flip)
-  {
+  if(TerrainActif().wind.need_flip){
     DoubleVector speed;
     GetSpeedXY(speed);
-    float scale_x,scale_y;
+    float scale_x, scale_y;
     sprite->GetScaleFactors( scale_x, scale_y);
     if((speed.x<0 && scale_x>0)
     || (speed.x>0 && scale_x<0))
@@ -140,8 +126,6 @@ void WindParticle::Draw()
   sprite->Draw(GetX(), GetY());
 }
 
-//-----------------------------------------------------------------------------
-
 void WindParticle::Resize(double size)
 {
   size=0.5+size/2.0;
@@ -149,17 +133,9 @@ void WindParticle::Resize(double size)
   sprite->SetAlpha( size);
 }
 
-//-----------------------------------------------------------------------------
+//---------------------------------------------------
 
-
-   Color c_white  (0xFF, 0xFF, 0xFF, 0x70);
-   Color c_black  (0x00, 0x00, 0x00, 0x70);
-   Color c_red    (0xFF, 0x00, 0x00, 0x70);
-   Color c_yellow (0x00, 0xFF, 0xFF, 0x70);
-   Color c_grey   (0xF0, 0xF0, 0xF0, 0x70);
-   
-Wind::Wind()
-{
+Wind::Wind(){
   m_val = m_nv_val = 0;
   barre.InitPos (10, 10, BARRE_LARG, BARRE_HAUT);
   barre.InitVal (0, -100, 100);
@@ -170,19 +146,17 @@ Wind::Wind()
   barre.SetReferenceValue (true, 0);
 }
 
-//-----------------------------------------------------------------------------
-
-void Wind::Reset()
-{
+void Wind::Reset(){
   m_last_move = 0;
   m_last_part_mvt = 0;
   m_val = m_nv_val = 0;
   barre.Actu (m_val);
 
   particles.clear();
+  
   const uint nb = TerrainActif().wind.nb_sprite;
-  for (uint i=0; i<nb; ++i)
-  {
+
+  for (uint i=0; i<nb; ++i){
     WindParticle particle(game_loop);
     particle.Init();
     particle.Resize( (double)i / nb );
@@ -190,42 +164,26 @@ void Wind::Reset()
   }
 }
 
-//-----------------------------------------------------------------------------
-
-double Wind::GetStrength() const
-{
-  return m_nv_val*force/100.0;
+double Wind::GetStrength() const{
+  return m_nv_val * force / 100.0;
 }
 
-//-----------------------------------------------------------------------------
-
-void Wind::ChooseRandomVal()
-{
+void Wind::ChooseRandomVal(){
   int val = RandomLong(-100, 100);
   action_handler.NewAction (ActionInt(ACTION_WIND, val));
 }
 
-//-----------------------------------------------------------------------------
-
-void Wind::SetVal(long val)
-{
+void Wind::SetVal(long val){
   m_nv_val = val;
 }
 
-//-----------------------------------------------------------------------------
-
-void Wind::DrawParticles()
-{
+void Wind::DrawParticles(){
   iterator it=particles.begin(), end=particles.end();
   for (; it != end; ++it) it -> Draw();
 }
 
-//-----------------------------------------------------------------------------
-
-void Wind::Refresh()
-{
-  if(m_last_move + barre_speed < global_time.Read())
-  {
+void Wind::Refresh(){
+  if(m_last_move + barre_speed < global_time.Read()){
     if(m_val>m_nv_val)
       --m_val;
     else
@@ -239,10 +197,7 @@ void Wind::Refresh()
   for (; it != end; ++it) it -> Refresh();
 }
 
-//-----------------------------------------------------------------------------
-
-void Wind::Draw()
-{
+void Wind::Draw(){
   barre.Draw();
 }
 

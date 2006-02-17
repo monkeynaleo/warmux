@@ -21,9 +21,10 @@
  *****************************************************************************/
 
 #include "i18n.h"
-#include <iostream>
-#include <sstream>
+#include <string>
+#include <stdio.h>
 #include <stdarg.h>
+#include "debug.h"
 #include "../config.h"
 #include "../game/config.h"
 
@@ -34,87 +35,37 @@
 
 #define GETTEXT_DOMAIN PACKAGE
 
-void CopyString (std::ostream &os, 
-                 const char *&txt, const char *&sauve_txt, 
-                 ulong &lg)
-{
-  std::string prefix(sauve_txt,0,lg);
-  os << prefix;
-  lg = 0;
-  sauve_txt = txt;
-  ++sauve_txt;
-}
+std::string Format(const char *format, ...){
+	const int bufferSize = 256;
+	char buffer[bufferSize];
+	va_list argp;
+	std::string result;
+	
+	va_start(argp, format);
+	
+	int size = vsnprintf(buffer, bufferSize, format, argp);
+	
+	if( size < 0 )
+		Error( "Error formating string...");
+	
+	if( size < bufferSize)
+		result = std::string(buffer);
+	else{
+		char *bigBuffer = (char *)malloc( (size + 1) * sizeof(char) );
+		if( bigBuffer == NULL)
+			Error( "Out of memory !");
+		
+		size = vsnprintf(bigBuffer, size + 1, format, argp);
+		if( size < 0 )
+			Error( "Error formating string...");
 
-std::string Format (const char *txt, ...)
-{
-  va_list ap;
-  va_start (ap,txt);
+		result = std::string(bigBuffer);
+		free(bigBuffer);
+	}
 
-  std::ostringstream ss;
-  const char *sauve_txt = txt;
-  ulong lg=0;
-  for (; *txt != 0; ++txt)
-  {
-    if (*txt == '%')
-    {
-      ++txt;
-      bool error = false;
-
-      switch (*txt)
-      {
-      case 's':
-      {
-        const char *x = va_arg (ap,const char *);
-        CopyString (ss, txt, sauve_txt, lg);
-        ss << x;
-        break;
-      }
-      case 'i':
-      {
-        int x = va_arg (ap,int);
-        CopyString (ss, txt, sauve_txt, lg);
-        ss << x;
-        break;
-      }
-      case 'u':
-      {
-        uint x = va_arg (ap,int);
-        CopyString (ss, txt, sauve_txt, lg);
-        ss << x;
-        break;
-      }
-      case 'l':
-        if (*(txt+1) == 'u') {
-          ulong x = va_arg(ap,ulong);
-          ++txt;
-          CopyString (ss, txt, sauve_txt, lg);
-          ss << x;
-        } else if (*(txt+1) == 'i') {
-          long x = va_arg(ap,long);
-          CopyString (ss, txt, sauve_txt, lg);
-          ss << x;
-          ++txt;
-        } else {
-          error = true;
-        }
-        break;
-      default:
-        error = true;
-      }
-
-      if (error) {
-        ss.str("");
-        ss << "Format error : unknown '%" << *txt << "' !";
-        Error(ss.str());
-      }
-    } else {
-      ++lg;
-    }
-  }
-  if (lg != 0) CopyString (ss, txt, sauve_txt, lg);
-
-  va_end (ap);
-  return ss.str();
+	va_end(argp);
+	
+	return result;
 }
 
 void I18N_SetDir(const std::string &dir){

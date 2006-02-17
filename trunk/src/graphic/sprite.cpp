@@ -42,7 +42,7 @@ Sprite::Sprite() :
   Constructor();
 }
 
-Sprite::Sprite( Surface surface) :
+Sprite::Sprite( Surface surface ) :
   cache(*this),
   animation(*this)
 {
@@ -89,12 +89,20 @@ void Sprite::SetSize(unsigned int w, unsigned int h){
 	frame_height_pix = h;
 }
 
-unsigned int Sprite::GetWidth(){
+void Sprite::SetSize(const Point2i &size){
+	SetSize(size.x, size.y);
+}
+
+unsigned int Sprite::GetWidth() const{
    return (uint)((float)frame_width_pix * (scale_x>0?scale_x:-scale_x));
 }
 
-unsigned int Sprite::GetHeight(){
+unsigned int Sprite::GetHeight() const{
    return (uint)((float)frame_height_pix * (scale_y>0?scale_y:-scale_y));
+}
+
+Point2i Sprite::GetSize() const{
+	return Point2i(GetWidth(), GetHeight());
 }
 
 unsigned int Sprite::GetFrameCount(){
@@ -125,7 +133,8 @@ const SpriteFrame& Sprite::GetCurrentFrameObject() const{
 }
 
 void Sprite::Scale( float scale_x, float scale_y){
-   if(this->scale_x == scale_x && this->scale_y == scale_y) return;
+   if(this->scale_x == scale_x && this->scale_y == scale_y)
+	   return;
    this->scale_x = scale_x;
    this->scale_y = scale_y;
    cache.InvalidLastFrame();
@@ -134,6 +143,10 @@ void Sprite::Scale( float scale_x, float scale_y){
 void Sprite::ScaleSize(int width, int height){
   Scale(float(width)/float(frame_width_pix),
         float(height)/float(frame_height_pix));
+}
+
+void Sprite::ScaleSize(Point2i size){
+	ScaleSize(size.x, size.y);
 }
 
 void Sprite::GetScaleFactors( float &scale_x, float &scale_y){
@@ -300,29 +313,23 @@ void Sprite::Start(){
    cache.InvalidLastFrame();
 }
 
-void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y)
-{
-  if (!show) return;
+void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y){
+	RefreshSurface();
 
-  RefreshSurface();
-   // Calculate offset of the depending on hotspot rotation position :
-  int rot_x=0;
-  int rot_y=0;
-  if( rotation_deg!=0.0 )
-    Calculate_Rotation_Offset(rot_x, rot_y, current_surface);
-
-  Rectanglei dstRect(pos_x + rot_x, pos_y + rot_y, current_surface.GetWidth(), current_surface.GetHeight() );
-
-  dest.Blit( current_surface, dstRect.GetPosition() );
-
-  // For the cache mechanism
-  if( game.IsGameLaunched() )
-    world.ToRedrawOnScreen( dstRect );
+    Blit(dest, pos_x, pos_y, 0, 0, current_surface.GetWidth(), current_surface.GetHeight());
 }
 
-void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h)
-{
-  if (!show) return;
+void Sprite::Blit( Surface &dest, const Point2i &pos){
+	Blit(dest, pos.GetX(), pos.GetY());
+}
+
+void Sprite::Blit( Surface &dest, const Rectanglei &srcRect, const Point2i &destPos){
+	Blit(dest, destPos.GetX(), destPos.GetY(), srcRect.GetPositionX(), srcRect.GetPositionY(), srcRect.GetSizeX(), srcRect.GetSizeY() );
+}
+
+void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, uint w, uint h){
+  if (!show)
+	return;
 
   RefreshSurface();
    // Calculate offset of the depending on hotspot rotation position :
@@ -334,7 +341,7 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   Rectanglei srcRect (src_x, src_y, w, h);
   Rectanglei dstRect (pos_x + rot_x, pos_y + rot_y, w, h);
   
-  dest.Blit( current_surface, srcRect, dstRect.GetPosition() );
+  dest.Blit(current_surface, srcRect, dstRect.GetPosition());
 
   // For the cache mechanism
   if( game.IsGameLaunched() )

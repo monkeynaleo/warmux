@@ -29,10 +29,7 @@
 #include "../interface/interface.h"
 #include "../tool/resource_manager.h"
 
-
-// Vitesse d'animation des vagues
 const uint WAVE_TIME=10;
-// le pas d'avance des vagues en pixels
 const uint WAVE_STEP=1;
 const uint WAVE_HEIGHT = 5;
 
@@ -85,7 +82,6 @@ void Water::Refresh(){
     if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > global_time.Read()){
       uint dt=global_time.Read()- temps_montee;
       height_mvt = GO_UP_STEP + (uint)(((float)GO_UP_STEP * sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))/GO_UP_OSCILLATION_TIME/1000.0)*2*M_PI))/(a*dt+b));
-///;
     }
     else{
       temps_montee += GO_UP_TIME * 60 * 1000;
@@ -114,11 +110,9 @@ void Water::Refresh(){
   {
     int offset=0;
     double y_pos = y + sin(angle1)*10 + sin(angle2)*10;
-//    do 
-//    {
-      if (0<=x+offset) height.at(x+offset) = (int)y_pos;
-//      offset += 180;
-//    } while ((uint)offset+x < world.GetWidth());
+	
+    if (0<=x+offset)
+	 height.at(x+offset) = (int)y_pos;
 
     angle1 += 2*decree;
     angle2 += 4*decree;
@@ -132,20 +126,13 @@ void Water::Draw(){
   if (!actif)
     return;
 
-/*  for(uint x=0; x<world.GetWidth(); x++)
-  for(uint y=height.at(x); y<world.GetHeight(); y+=surface->h)
-  {
-     AbsoluteDraw( surface, x, y);
-  }
-*/
   // Compute 1 pattern:
   pattern.SetAlpha( 0, 0);
   pattern.Fill(0x00000000);
 
   int y0 = world.GetHeight()-(hauteur_eau + height_mvt)-20;
 
-  for(uint x=0; x<180; x++)
-  {
+  for(uint x=0; x<180; x++){
     Point2i dst(x, height.at(x) - y0);
     pattern.Blit(surface, dst);
   }
@@ -158,10 +145,8 @@ void Water::Draw(){
     x0-=180;
 
   for(int x=(int)camera.GetX()-x0;x<(int)camera.GetX()+(int)camera.GetWidth();x+=180)
-  for(int y=y0;y<(int)camera.GetY()+(int)camera.GetHeight();y+=surface.GetHeight())
-  {
-    AbsoluteDraw(pattern, x, y);
-  }
+    for(int y=y0;y<(int)camera.GetY()+(int)camera.GetHeight();y+=surface.GetHeight())
+      AbsoluteDraw(pattern, x, y);
 }
 
 int Water::GetHeight(int x){

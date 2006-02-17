@@ -20,20 +20,16 @@
  *****************************************************************************/
 
 #include "game_menu.h"
-//-----------------------------------------------------------------------------
 
-#include "../include/app.h"
-#include "../graphic/video.h"
-#include "../team/teams_list.h"
 #include "../game/game.h"
-#include "../game/game_mode.h"
-#include "../map/maps_list.h"
 #include "../game/config.h"
+#include "../game/game_mode.h"
+#include "../graphic/video.h"
+#include "../map/maps_list.h"
+#include "../include/app.h"
+#include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
-
-
-//-----------------------------------------------------------------------------
 
 const uint TEAMS_X = 20;
 const uint TEAMS_Y = 20;
@@ -47,66 +43,60 @@ const uint MAPS_W = 160;
  
 const uint MAP_PREVIEW_W = 300;
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-
 GameMenu::GameMenu() :
   Menu("menu/bg_option"),
   normal_font(16)
 {  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
+  Rectanglei rectZero(0, 0, 0, 0);
 
-  //-----------------------------------------------------------------------------
   // Widget creation
-  //-----------------------------------------------------------------------------
 
   /* Choose the teams !! */
-  team_box = new VBox(TEAMS_X, TEAMS_Y, 475);
-  team_box->AddWidget(new Label(_("Select the teams:"), 0, 0, 0, normal_font));
+  team_box = new VBox(Rectanglei( TEAMS_X, TEAMS_Y, 475, 1));
+  team_box->AddWidget(new Label(_("Select the teams:"), rectZero, normal_font));
 
-  Box * tmp_box = new HBox(0,0, TEAMS_H, false);
+  Box * tmp_box = new HBox( Rectanglei(0,0, 1, TEAMS_H), false);
   tmp_box->SetMargin(10);
-  tmp_box->SetBorder(0,0);
+  tmp_box->SetBorder( Point2i(0,0) );
 
-  lbox_all_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5);
+  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ));
   lbox_all_teams->always_one_selected = false;
   tmp_box->AddWidget(lbox_all_teams);
 
-  Box * buttons_tmp_box = new VBox(0,0, 68, false);
+  Box * buttons_tmp_box = new VBox(Rectanglei(0, 0, 68, 1), false);
 
-  bt_add_team = new Button(0,0, 48,48,res,"menu/arrow-right");
+  bt_add_team = new Button( Rectanglei(0, 0, 48, 48) ,res,"menu/arrow-right");
   buttons_tmp_box->AddWidget(bt_add_team);
   
-  bt_remove_team = new Button(0,0,48,48,res,"menu/arrow-left");
+  bt_remove_team = new Button( Rectanglei( 0, 0, 48, 48 ),res,"menu/arrow-left");
   buttons_tmp_box->AddWidget(bt_remove_team);
 
-  space_for_logo = new NullWidget(0,0,48,48);
+  space_for_logo = new NullWidget( Rectanglei(0,0,48,48) );
   buttons_tmp_box->AddWidget(space_for_logo);
 
   tmp_box->AddWidget(buttons_tmp_box);
   
-  lbox_selected_teams = new ListBox(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5); 
+  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 )); 
   lbox_selected_teams->always_one_selected = false;
   tmp_box->AddWidget(lbox_selected_teams);
 
   team_box->AddWidget(tmp_box);
 
   /* Choose the map !! */
-  tmp_box = new HBox(0, 0, MAP_PREVIEW_W-25, false);
+  tmp_box = new HBox( Rectanglei(0, 0, 1, MAP_PREVIEW_W - 25 ), false);
   tmp_box->SetMargin(0);
-  tmp_box->SetBorder(0,0);
+  tmp_box->SetBorder( Point2i(0,0) );
 
-  lbox_maps = new ListBox(0, 0, MAPS_W, MAP_PREVIEW_W-25);
+  lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, MAP_PREVIEW_W-25 ));
   tmp_box->AddWidget(lbox_maps);
-  tmp_box->AddWidget(new NullWidget(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
+  tmp_box->AddWidget(new NullWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W)));
   
-  map_box = new VBox(MAPS_X, team_box->GetY()+team_box->GetH()+20, 475);
-  map_box->AddWidget(new Label(_("Select the world:"), 0, 0, 0, normal_font));
+  map_box = new VBox( Rectanglei(MAPS_X, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
+  map_box->AddWidget(new Label(_("Select the world:"), rectZero, normal_font));
   map_box->AddWidget(tmp_box);
 
-  //-----------------------------------------------------------------------------
   // Values initialization
-  //-----------------------------------------------------------------------------
 
   // Load Maps' list
   std::sort(lst_terrain.liste.begin(), lst_terrain.liste.end(), compareMaps);
@@ -141,15 +131,11 @@ GameMenu::GameMenu() :
   terrain_init = false;
 }
 
-//-----------------------------------------------------------------------------
-
 GameMenu::~GameMenu()
 {
   delete map_box;
   delete team_box;
 }
-
-//-----------------------------------------------------------------------------
 
 void GameMenu::OnClic ( int x, int y, int button)
 {     
@@ -166,8 +152,6 @@ void GameMenu::OnClic ( int x, int y, int button)
     MoveTeams(lbox_selected_teams, lbox_all_teams, true);
   }
 }
-
-//-----------------------------------------------------------------------------
 
 void GameMenu::SaveOptions()
 {
@@ -200,22 +184,16 @@ void GameMenu::SaveOptions()
   config.Sauve();
 }
 
-//-----------------------------------------------------------------------------
-
 void GameMenu::__sig_ok()
 {
   SaveOptions();
   game.Start();
 }
 
-//-----------------------------------------------------------------------------
-
 void GameMenu::__sig_cancel()
 {
   // Nothing to do
 }
-
-//-----------------------------------------------------------------------------
 
 void GameMenu::ChangeMap()
 {
@@ -227,8 +205,6 @@ void GameMenu::ChangeMap()
 
   map_preview->Scale (scale, scale);
 }
-
-//-----------------------------------------------------------------------------
 
 void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 {
@@ -242,8 +218,6 @@ void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
     from->RemoveSelected();
   }
 }
-
-//-----------------------------------------------------------------------------
 
 void GameMenu::Draw(int mouse_x, int mouse_y)
 {   
@@ -266,16 +240,13 @@ void GameMenu::Draw(int mouse_x, int mouse_y)
     }
   }
    
-  Point2i dst(space_for_logo->GetX(), space_for_logo->GetY());
-
-  app.video.window.Blit( last_team->ecusson, dst);
+  app.video.window.Blit( last_team->ecusson, space_for_logo->GetPosition() );
   
   if (!terrain_init){
       terrain_init = true;
       ChangeMap();
   }
   
-  map_preview->Blit ( app.video.window, MAPS_X+MAPS_W+10, map_box->GetY()+5 );
+  map_preview->Blit ( app.video.window, MAPS_X+MAPS_W+10, map_box->GetPositionY()+5 );
 }
 
-//-----------------------------------------------------------------------------

@@ -38,17 +38,19 @@ struct CompareItems
      }
 };
 
-ListBox::ListBox (int _x, int _y, uint _w, uint _h)
-  : Widget(_x,_y,_w,_h){  
-	  
+ListBox::ListBox (const Rectanglei &rect) : Widget(rect){  
+  Rectanglei buttonRect; 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  
-  m_up = new Button(x + w - 10, y, 10, 5, res, "menu/up");
-  m_down = new Button(x + w - 10, y + h - 5, 10, 5, res, "menu/down");
+
+  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 10, GetPositionY()); 
+  buttonRect.SetSize(10, 5); 
+  m_up = new Button(buttonRect, res, "menu/up");
+  buttonRect.SetSizeY(GetPositionY() + GetSizeY() - 5);
+  m_down = new Button(buttonRect, res, "menu/down");
 
   height_item = global().small_font().GetHeight();
   first_visible_item = 0;
-  nb_visible_items_max = h/height_item;
+  nb_visible_items_max = GetSizeY()/height_item;
   nb_visible_items = 0;
 
   selected_item = -1;  
@@ -63,18 +65,17 @@ ListBox::~ListBox(){
 }
 
 int ListBox::MouseIsOnWhichItem (uint mouse_x, uint mouse_y){
-  if( ((int)mouse_x < x+1)
-      || ((int)mouse_y < y+1)
-      || ((y+1 + (int)h) < (int)mouse_y)
-      || ((x + (int)w) < (int)mouse_x) )
+  if( ((int)mouse_x < GetPositionX() + 1)
+      || ((int)mouse_y < GetPositionY() + 1)
+      || ((GetPositionY() + GetSizeY() + 1) < (int)mouse_y)
+      || ((GetPositionX() + GetSizeX()) < (int)mouse_x) )
     return -1;
 
-  int index = (mouse_y - y) / height_item;
+  int index = (mouse_y - GetPositionY()) / height_item;
   return BorneLong(index + first_visible_item, 0, m_items.size() - 1);
 }
 
 bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button){
-
   // buttons for listbox with more items than visible
   if( m_items.size() > nb_visible_items_max ){
     if( (button == SDL_BUTTON_WHEELDOWN && MouseIsOver(mouse_x, mouse_y)) ||
@@ -116,23 +117,23 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button){
 
 void ListBox::Draw (uint mouse_x, uint mouse_y){
   int item = MouseIsOnWhichItem(mouse_x, mouse_y);
-  Rectanglei rect (x, y, w, h);
+  Rectanglei rect (*this);
   
   app.video.window.BoxColor(rect, defaultListColor1);
   app.video.window.RectangleColor(rect, white_color);
 
   for(uint i=0; i < nb_visible_items; i++){
-	 Rectanglei rect(x + 1, y + i * height_item + 1, w - 2, height_item - 2);
+	 Rectanglei rect(GetPositionX() + 1, GetPositionY() + i * height_item + 1, GetSizeX() - 2, height_item - 2);
 	 
      if( int(i + first_visible_item) == selected_item )
        app.video.window.BoxColor(rect, defaultListColor2);
      else
-	   if( i+first_visible_item == uint(item) )
+	   if( i + first_visible_item == uint(item) )
          app.video.window.BoxColor(rect, defaultListColor3);
      
-     global().small_font().WriteLeft( x + 5,
-			  y + i*height_item,
-			  m_items[i+first_visible_item].label,
+     global().small_font().WriteLeft( GetPositionX() + 5,
+			  GetPositionY() + i*height_item,
+			  m_items[i + first_visible_item].label,
 			  white_color);
   }  
 
@@ -154,12 +155,12 @@ void ListBox::Draw (uint mouse_x, uint mouse_y){
   }
 }
 
-void ListBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
-  StdSetSizePosition(_x, _y, _w, _h);
-  m_up->SetSizePosition(x+w-10, y, 10, 5);
-  m_down->SetSizePosition(x+w-10, y+h-5, 10, 5);  
+void ListBox::SetSizePosition(const Rectanglei &rect){
+  StdSetSizePosition(rect);
+  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 10, GetPositionY(), 10, 5) );
+  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 10, GetPositionY() + GetSizeY() - 5, 10, 5) );  
 
-  nb_visible_items_max = h/height_item;
+  nb_visible_items_max = GetSizeY()/height_item;
 }
 
 void ListBox::AddItem (bool selected, 

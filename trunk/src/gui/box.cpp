@@ -24,14 +24,11 @@
 #include "../graphic/colors.h"
 #include "../include/app.h"
 
-Box::Box(int x, int y, uint w, uint h, 
-	 bool _visible) :
-  Widget(x,y,w,h){
-	  
+Box::Box(const Rectanglei &rect, bool _visible) : Widget( rect ){
   last_widget = NULL;
   visible = _visible;
   margin = 5;
-  w_border = h_border = 5;
+  border.SetValues(5, 5);
 }
 
 Box::~Box(){
@@ -39,7 +36,7 @@ Box::~Box(){
 }
 
 void Box::Draw (uint mouse_x, uint mouse_y){
-  Rectanglei rect(x, y, w, h);
+  Rectanglei rect(position, size);
 	
   if( visible ){
     app.video.window.BoxColor(rect, defaultColorBox);
@@ -74,13 +71,12 @@ void Box::SetMargin (uint _margin){
   margin = _margin;
 }
 
-void Box::SetBorder (uint _w_border, uint _h_border){
-  w_border = _w_border;
-  h_border = _h_border;
+void Box::SetBorder (const Point2i &newBorder){
+	border = newBorder;
 }
 
-VBox::VBox(int x, int y, uint w, bool _visible) :
-  Box(x, y, w, 1, _visible){
+VBox::VBox(const Rectanglei &rect, bool _visible) : Box(rect, _visible){
+	size.y = 1;
 }
 
 void VBox::AddWidget(Widget * a_widget){
@@ -89,46 +85,46 @@ void VBox::AddWidget(Widget * a_widget){
   uint _y;
 
   if( last_widget != NULL )
-    _y = last_widget->GetY() + last_widget->GetH();
+    _y = last_widget->GetPositionY() + last_widget->GetSizeY();
   else
-    _y = y + h_border-margin;
+    _y = position.y + border.y - margin;
 
-  a_widget->SetSizePosition(x + w_border, 
+  a_widget->SetSizePosition(Rectanglei(position.x + border.x, 
 			    _y + margin, 
-			    w - 2 * w_border, 
-			    a_widget->GetH() );
+			    size.x - 2 * border.x,
+			    a_widget->GetSizeY() ));
 
   last_widget = a_widget;
 
   widgets.push_back(a_widget);
 
-  h = a_widget->GetY() + a_widget->GetH() - y + h_border;
+  size.y = a_widget->GetPositionY() + a_widget->GetSizeY() - position.y + border.y;
 }
 
-void VBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
-  x = _x;
-  y = _y;
-
+void VBox::SetSizePosition(const Rectanglei &rect){
+  position = rect.GetPosition();
+  int _y = rect.GetPositionY();
   std::list<Widget *>::iterator it;
-  for (it = widgets.begin(); 
+  for( it = widgets.begin(); 
        it != widgets.end(); 
-       ++it){
+       ++it ){
 
     assert(it != NULL);
 
     if( it == widgets.begin() )
-      _y += h_border-margin;
+      _y += border.y - margin;
 
-    (*it)->SetSizePosition(x + w_border,
+    (*it)->SetSizePosition( Rectanglei(position.x + border.x,
 			   _y + margin,
-			   (*it)->GetW(),
-			   (*it)->GetH());
-    _y = (*it)->GetY() + (*it)->GetH();
+			   (*it)->GetSizeX(),
+			   (*it)->GetSizeY() ));
+    _y = (*it)->GetPositionY() + (*it)->GetSizeY();
   }
 }
 
-HBox::HBox(int x, int y, uint h, bool _visible) :
-  Box(x, y, 1, h, _visible){
+HBox::HBox(const Rectanglei &rect, bool _visible) :
+  Box(rect, _visible){
+	  size.x = 1;
 }
 
 void HBox::AddWidget(Widget * a_widget){
@@ -137,41 +133,40 @@ void HBox::AddWidget(Widget * a_widget){
   uint _x;
 
   if (last_widget != NULL)
-    _x = last_widget->GetX() + last_widget->GetW();
+    _x = last_widget->GetPositionX() + last_widget->GetSizeX();
   else 
-    _x = x+w_border-margin;
+    _x = position.x + border.x - margin;
 
-  a_widget->SetSizePosition(_x + margin, 
-			    y + h_border, 
-			    a_widget->GetW(), 
-			    h - 2 * h_border);
+  a_widget->SetSizePosition( Rectanglei(_x + margin, 
+			    position.y + border.y, 
+			    a_widget->GetSizeX(), 
+			    size.y - 2 * border.y) );
 
   last_widget = a_widget;
 
   widgets.push_back(a_widget);
 
-  w = a_widget->GetX() + a_widget->GetW() - x + w_border;
+  size.x = a_widget->GetPositionX() + a_widget->GetSizeX() - position.x + border.x;
 }
 
-void HBox::SetSizePosition(int _x, int _y, uint _w, uint _h){
-  x = _x;
-  y = _y;
-
+void HBox::SetSizePosition(const Rectanglei &rect){
+  position = rect.GetPosition();
+  int _x = rect.GetPositionX();
+	
   std::list<Widget *>::iterator it;
-  for (it = widgets.begin(); 
+  for( it = widgets.begin(); 
        it != widgets.end(); 
-       ++it){
+       ++it ){
     assert(it != NULL);   
 
-    if (it == widgets.begin()) {
-      _x += w_border-margin;
-    }
+    if( it == widgets.begin() )
+      _x += border.x - margin;
 
-    (*it)->SetSizePosition(_x + margin,
-			   y + h_border,
-			   (*it)->GetW(),
-			   (*it)->GetH() );
-    _x = (*it)->GetX()+ (*it)->GetW();
+    (*it)->SetSizePosition( Rectanglei(_x + margin,
+			   position.y + border.y,
+			   (*it)->GetSizeX(),
+			   (*it)->GetSizeY()) );
+    _x = (*it)->GetPositionX()+ (*it)->GetSizeX();
   }
 }
 

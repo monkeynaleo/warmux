@@ -54,12 +54,12 @@ private:
   Button *m_up, *m_down;
 
 public:
-  ListBox (int _x, int _y, uint _w, uint _h);
+  ListBox (const Rectanglei &rect);
   ~ListBox();
 
   void Draw (uint mouse_x, uint mouse_y);
   bool Clic (uint mouse_x, uint mouse_y, uint button);  
-  void SetSizePosition(int _x, int _y, uint _w, uint _h);
+  void SetSizePosition(const Rectanglei &rect);
 
   void AddItem (bool selected, 
 		const std::string &label,

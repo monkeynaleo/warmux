@@ -102,9 +102,7 @@ void SpriteAnimation::Update(){
     if(next_frame != current_frame)
     {
       if(!(next_frame >= 0 && next_frame < frame_count))
-      {
         next_frame = 0;
-      }
       sprite.SetCurrentFrame(next_frame);
     }
   }
