@@ -62,11 +62,11 @@ void Menu::sig_cancel()
   close_menu = true;
 }
 
-bool Menu::BasicOnClic(int mouse_x, int mouse_y)
+bool Menu::BasicOnClic(const Point2i &mousePosition)
 {
-  if (b_ok->MouseIsOver (mouse_x, mouse_y))
+  if( b_ok->Contains(mousePosition) )
     sig_ok();
-  else if (b_cancel->MouseIsOver (mouse_x, mouse_y))
+  else if( b_cancel->Contains(mousePosition) )
     sig_cancel();
   else
     return false;
@@ -74,12 +74,12 @@ bool Menu::BasicOnClic(int mouse_x, int mouse_y)
   return true;
 }
 
-void Menu::BasicDraw(int mouse_x, int mouse_y)
+void Menu::BasicDraw(const Point2i &mousePosition)
 {
   background->ScaleSize(app.video.window.GetSize());
-  background->Blit( app.video.window, 0, 0);
+  background->Blit(app.video.window, 0, 0);
   
-  actions_buttons->Draw(mouse_x,mouse_y);
+  actions_buttons->Draw(mousePosition);
 }
 
 void Menu::Run ()
@@ -94,18 +94,19 @@ void Menu::Run ()
   
   do
   {
-    // to limit CPU  
-    uint start = SDL_GetTicks();
+   // to limit CPU  
+   uint start = SDL_GetTicks();
 
    // Poll and treat events
    SDL_Event event;
      
-   while( SDL_PollEvent( &event) ) 
-     {      
-       if ( event.type == SDL_QUIT) 
+   while( SDL_PollEvent( &event) ){
+	   Point2i mousePosition(event.button.x, event.button.y);
+	   
+       if( event.type == SDL_QUIT )
 	   sig_cancel();
-       else if ( event.type == SDL_KEYDOWN )
-	   switch ( event.key.keysym.sym)
+       else if( event.type == SDL_KEYDOWN )
+	   switch( event.key.keysym.sym)
 	     { 
 	     case SDLK_ESCAPE: 
 	       sig_cancel();
@@ -118,15 +119,16 @@ void Menu::Run ()
 	     default:
 	       break;
 	     }  
-       else if ( event.type == SDL_MOUSEBUTTONDOWN )
-	   if (! BasicOnClic(event.button.x, event.button.y) )
-	       OnClic( event.button.x, event.button.y, event.button.button);
+       else if( event.type == SDL_MOUSEBUTTONDOWN )
+	   if( !BasicOnClic(mousePosition) )
+	       OnClic(mousePosition, event.button.button);
      }
 
-   SDL_GetMouseState( &x, &y);
+   SDL_GetMouseState( &x, &y );
+   Point2i mousePosition(x, y);
 
-   BasicDraw(x, y);
-   Draw(x, y);
+   BasicDraw(mousePosition);
+   Draw(mousePosition);
 
    app.video.Flip();
 

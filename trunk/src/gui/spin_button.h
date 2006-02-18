@@ -44,8 +44,8 @@ class SpinButton : public Widget
 
   void SetSizePosition(const Rectanglei &rect);
 
-  void Draw (uint mouse_x, uint mouse_y) ;
-  bool Clic (uint mouse_x, uint mouse_y, uint button) ;
+  void Draw(const Point2i &mousePosition);
+  bool Clic(const Point2i &mousePosition, uint button);
   int GetValue() const;
   void SetValue(int value);
 };

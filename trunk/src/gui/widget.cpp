@@ -34,13 +34,7 @@ Widget::Widget(const Rectanglei &rect){
 Widget::~Widget(){
 }
 
-bool Widget::MouseIsOver (uint mouse_x, uint mouse_y){
-  Point2i mouse(mouse_x, mouse_y);
-  return Contains( mouse );
-
-}
-
-bool Widget::Clic (uint mouse_x, uint mouse_y, uint button){
+bool Widget::Clic(const Point2i &mousePosition, uint button){
   return false;
 }
 

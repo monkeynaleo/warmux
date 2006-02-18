@@ -29,12 +29,12 @@
 
 class Label : public Widget{
  private:
-  Text * txt_label;
+  Text *txt_label;
    
  public:
   Label(const std::string &label, const Rectanglei &rect, Font& font);
   ~Label();
-  void Draw (uint mouse_x, uint mouse_y) ;
+  void Draw (const Point2i &mousePosition);
   void SetSizePosition(const Rectanglei &rect);
 };
 

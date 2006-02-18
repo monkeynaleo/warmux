@@ -34,7 +34,6 @@
 #include "../tool/point.h"
 #include "../weapon/weapon.h"
 
-
 Mouse mouse;
 
 // Vitesse du definalement à la souris

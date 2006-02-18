@@ -36,10 +36,8 @@ class Widget : public Rectanglei
   Widget(const Rectanglei &rect);
   virtual ~Widget();
 
-  virtual void Draw (uint mouse_x, uint mouse_y) = 0;
-
-  bool MouseIsOver (uint mouse_x, uint mouse_y) ;
-  virtual bool Clic (uint mouse_x, uint mouse_y, uint button);
+  virtual void Draw(const Point2i &mousePosition) = 0;
+  virtual bool Clic(const Point2i &mousePosition, uint button);
 
   virtual void SetSizePosition(const Rectanglei &rect) = 0;
   void SetXY(int _x, int _y){ 

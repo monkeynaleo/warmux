@@ -21,7 +21,7 @@
 
 #ifndef ALL_WEAPONS_H
 #define ALL_WEAPONS_H
-//-----------------------------------------------------------------------------
+
 #include "airhammer.h"
 #include "air_attack.h"
 #include "auto_bazooka.h"
@@ -43,5 +43,5 @@
 #include "supertux.h"
 #include "teleportation.h"
 #include "uzi.h"
-//-----------------------------------------------------------------------------
+
 #endif

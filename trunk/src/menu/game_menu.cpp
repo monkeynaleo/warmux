@@ -137,18 +137,18 @@ GameMenu::~GameMenu()
   delete team_box;
 }
 
-void GameMenu::OnClic ( int x, int y, int button)
+void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {     
-  if (lbox_maps->Clic(x, y, button)) {
+  if (lbox_maps->Clic(mousePosition, button)) {
     ChangeMap();
-  } else if (lbox_all_teams->Clic(x, y, button)) {
+  } else if (lbox_all_teams->Clic(mousePosition, button)) {
 
-  } else if (lbox_selected_teams->Clic(x, y, button)) {
+  } else if (lbox_selected_teams->Clic(mousePosition, button)) {
 
-  } else if ( bt_add_team->MouseIsOver(x, y)) {
+  } else if ( bt_add_team->Contains(mousePosition)) {
     if (lbox_selected_teams->GetItemsList()->size() < game_mode.max_teams)
       MoveTeams(lbox_all_teams, lbox_selected_teams, false); 
-  } else if ( bt_remove_team->MouseIsOver(x, y)) {
+  } else if ( bt_remove_team->Contains(mousePosition)) {
     MoveTeams(lbox_selected_teams, lbox_all_teams, true);
   }
 }
@@ -219,20 +219,20 @@ void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
   }
 }
 
-void GameMenu::Draw(int mouse_x, int mouse_y)
+void GameMenu::Draw(const Point2i &mousePosition)
 {   
   Team* last_team = teams_list.FindByIndex(0);
    
-  map_box->Draw(mouse_x,mouse_y);
-  team_box->Draw(mouse_x,mouse_y);
+  map_box->Draw(mousePosition);
+  team_box->Draw(mousePosition);
      
-  int t = lbox_all_teams->MouseIsOnWhichItem (mouse_x,mouse_y);    
+  int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
   if (t != -1) {
     int index = -1;
     Team * new_team = teams_list.FindById(lbox_all_teams->ReadValue(t), index);
     if (new_team!=NULL) last_team = new_team;
   } else {
-    t = lbox_selected_teams->MouseIsOnWhichItem (mouse_x,mouse_y);  
+    t = lbox_selected_teams->MouseIsOnWhichItem(mousePosition);
     if (t != -1) {
       int index = -1;
       Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);

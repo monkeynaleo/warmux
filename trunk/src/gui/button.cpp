@@ -40,8 +40,8 @@ Button::~Button(){
 	delete image;
 }
 
-void Button::Draw (uint mouse_x, uint mouse_y){
-  uint frame = MouseIsOver(mouse_x, mouse_y)?1:0;
+void Button::Draw(const Point2i &mousePosition){
+  uint frame = Contains(mousePosition)?1:0;
 
   image->SetCurrentFrame(frame);
   image->Blit(app.video.window, position);

@@ -25,7 +25,7 @@
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 
-CheckBox::CheckBox (const std::string &label, const Rectanglei &rect, bool value){
+CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value){
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadSprite( res, "menu/check");
   m_image->cache.EnableLastFrameCache();
@@ -44,7 +44,7 @@ CheckBox::~CheckBox(){
   delete txt_label;
 }
 
-void CheckBox::Draw (uint mouse_x, uint mouse_y){
+void CheckBox::Draw(const Point2i &mousePosition){
   txt_label->DrawTopLeft( GetPosition() );
  
   if (m_value)
@@ -55,8 +55,8 @@ void CheckBox::Draw (uint mouse_x, uint mouse_y){
   m_image->Blit(app.video.window, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
-bool CheckBox::Clic (uint mouse_x, uint mouse_y, uint button){
-  if( !MouseIsOver(mouse_x, mouse_y) )
+bool CheckBox::Clic(const Point2i &mousePosition, uint button){
+  if( !Contains(mousePosition) )
     return false;
 
   m_value = !m_value;

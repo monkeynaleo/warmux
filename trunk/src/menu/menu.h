@@ -22,8 +22,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <iostream>
-//-----------------------------------------------------------------------------
 #include "../graphic/sprite.h"
 #include "../gui/button.h"
 #include "../gui/list_box.h"
@@ -33,7 +31,6 @@
 #include "../gui/question.h"
 #include "../gui/label.h"
 #include "../gui/null_widget.h"
-//-----------------------------------------------------------------------------
 
 class Menu
 {
@@ -52,8 +49,8 @@ private:
    Button *b_cancel;
    HBox *actions_buttons;
 
-   void BasicDraw(int mouse_x, int mouse_y);
-   bool BasicOnClic(int mouse_x, int mouse_y);
+   void BasicDraw(const Point2i &mousePosition);
+   bool BasicOnClic(const Point2i &mousePosition);
 
 protected:
    void sig_ok();
@@ -62,10 +59,9 @@ protected:
    virtual void __sig_ok() = 0;
    virtual void __sig_cancel() = 0;
 
-   virtual void Draw(int mouse_x, int mouse_y) = 0;   
-   virtual void OnClic ( int mouse_x, int mouse_y, int button) = 0;
+   virtual void Draw(const Point2i &mousePosition) = 0;   
+   virtual void OnClic(const Point2i &mousePosition, int button) = 0;
    void SetActionButtonsXY(int x, int y);
-
 };
 
 #endif

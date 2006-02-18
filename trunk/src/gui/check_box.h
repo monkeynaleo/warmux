@@ -31,15 +31,15 @@
 class CheckBox : public Widget
 {
  private:
-  Text * txt_label;
+  Text *txt_label;
   bool m_value;
   Sprite *m_image;
    
  public:
   CheckBox(const std::string &label, const Rectanglei &rect, bool value = true);
   ~CheckBox();
-  void Draw (uint mouse_x, uint mouse_y) ;
-  bool Clic (uint mouse_x, uint mouse_y, uint button) ;
+  void Draw(const Point2i &mousePosition) ;
+  bool Clic(const Point2i &mousePosition, uint button) ;
   void SetSizePosition(const Rectanglei &rect);
 
   bool GetValue() const;
