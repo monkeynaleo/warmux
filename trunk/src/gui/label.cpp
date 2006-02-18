@@ -23,9 +23,9 @@
 #include "../include/app.h"
 
 Label::Label (const std::string &label, const Rectanglei &rect, Font& _font){
-  SetPosition( rect.GetPosition() );
-  SetSize( rect.GetSize() );
-  SetSizeY( _font.GetHeight() );
+  position = rect.GetPosition();
+  size = rect.GetSize();
+  size.y = _font.GetHeight();
   txt_label = new Text(label, white_color, &_font);
 }
 
@@ -34,7 +34,7 @@ Label::~Label(){
 }
 
 void Label::Draw (uint mouse_x, uint mouse_y){
-  txt_label->DrawTopLeft( GetPosition() );
+  txt_label->DrawTopLeft( position );
 }
 
 void Label::SetSizePosition(const Rectanglei &rect){

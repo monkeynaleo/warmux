@@ -153,7 +153,7 @@ void DrawTmpBoxText(Font &font, int _x, int _y,
   font.WriteCenterTop (_x, _y, txt, white_color);
 }
 
-void DrawTmpBoxTextWithReturns(Font &font, int _x, int _y, 
+void DrawTmpBoxTextWithReturns(Font &font, const Point2i &position, 
                                const std::string &txt, uint space,
                                Color boxColor,
                                Color rectColor)
@@ -197,8 +197,8 @@ void DrawTmpBoxTextWithReturns(Font &font, int _x, int _y,
 
   // Initial position
   total_height += 5*space;
-  x = _x - max_width / 2;
-  y = _y - total_height / 2;
+  x = position.x - max_width / 2;
+  y = position.y - total_height / 2;
 
   Rectanglei rect(x, y, max_width, total_height);
   

@@ -21,29 +21,21 @@
  *****************************************************************************/
 
 #include "question.h"
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "../graphic/text.h"
 #include "../graphic/video.h"
-#include "../include/app.h" // SDL_Flip
+#include "../include/app.h"
 #include "../include/global.h"
 #include "../map/map.h"
-
-//-----------------------------------------------------------------------------
 
 Question::Question()
 {}
 
-//-----------------------------------------------------------------------------
-
-void Question::TraiteTouche (SDL_Event &event)
-{
+void Question::TraiteTouche (SDL_Event &event){
   // Teste les différents choix
   choix_iterator it=choix.begin(), fin=choix.end();
-  for (; it != fin; ++it)
-  {
-    if (event.key.keysym.sym == it -> m_touche)
-    {
+  for (; it != fin; ++it){
+    if (event.key.keysym.sym == it -> m_touche){
       reponse = it -> m_val;
       m_fin_boucle = true;
       return;
@@ -51,62 +43,44 @@ void Question::TraiteTouche (SDL_Event &event)
   }
 
   // Sinon, on utilise le choix par défaut ?
-  if (choix_defaut.actif) 
-  {
+  if (choix_defaut.actif){
     reponse = choix_defaut.valeur;
     m_fin_boucle = true;
     return;
   }
 }
 
-//-----------------------------------------------------------------------------
-
-void Question::Draw()
-{
+void Question::Draw(){
   DrawTmpBoxTextWithReturns (global().big_font(),
-                             app.video.window.GetWidth()/2, app.video.window.GetHeight()/2,
-                             message,
-                             10);
+                             app.video.window.GetSize() / 2,
+                             message, 10);
   app.video.Flip();
 }
 
-//-----------------------------------------------------------------------------
-
-int Question::PoseQuestion ()
-{
+int Question::PoseQuestion (){
   SDL_Event event;
   
   m_fin_boucle = false;
-  do
-  {
+  do{
     Draw();
 
-    while( SDL_PollEvent( &event) ) 
-    {      
-      if ( event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN )
-      {  
+    while( SDL_PollEvent( &event) ){      
+      if ( event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN ){  
         reponse = choix_defaut.valeur;
         m_fin_boucle = true;
       }
       if (event.type == SDL_KEYUP)
-      {
         TraiteTouche(event); 
-      }
     }
   } while (!m_fin_boucle);
   
   return reponse;
 }
 
-//-----------------------------------------------------------------------------
-
 void Question::Init (const std::string &pmessage, 
-		     bool pchoix_defaut, int pvaleur)
-{
+		     bool pchoix_defaut, int pvaleur){
   message = pmessage;
   choix_defaut.actif = pchoix_defaut;
   choix_defaut.valeur = pvaleur;
-  //  m_attend_touche_debut = false;
 }
 
-//-----------------------------------------------------------------------------

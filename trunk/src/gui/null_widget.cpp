@@ -21,20 +21,15 @@
 
 #include "null_widget.h"
 
-NullWidget::NullWidget (const Rectanglei &rect):
-  Widget(rect)
-{
+NullWidget::NullWidget (const Rectanglei &rect) : Widget(rect){
 }
 
-NullWidget::~NullWidget()
-{
+NullWidget::~NullWidget(){
 }
 
-void NullWidget::Draw (uint mouse_x, uint mouse_y)
-{
+void NullWidget::Draw (uint mouse_x, uint mouse_y){
 }
 
-void NullWidget::SetSizePosition(const Rectanglei &rect)
-{
+void NullWidget::SetSizePosition(const Rectanglei &rect){
   StdSetSizePosition(rect);
 }
