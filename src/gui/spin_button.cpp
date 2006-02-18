@@ -29,7 +29,7 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
 			     int value, int step, int min_value, int max_value){
   position =  rect.GetPosition();
   size = rect.GetSize();
-  SetSizeY( global().small_font().GetHeight() );
+  size.y = global().small_font().GetHeight();
 	  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
@@ -46,15 +46,14 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
   txt_value = new Text("", white_color, &global().small_font());
   SetValue(value);
 
-
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
   uint max_value_w = global().small_font().GetWidth(max_value_s.str());
   
   uint margin = 5;
 
-  m_plus = new Button( Rectanglei(GetPositionX() + GetSizeX() - 5, GetPositionY(), 5, 10), res, "menu/plus");
-  m_minus = new Button( Rectanglei(GetPositionX() + GetSizeX() - max_value_w - 5 - 2 * margin, GetPositionY(), 5, 10), res, "menu/minus");   
+  m_plus = new Button( Rectanglei(position.x + size.x - 5, position.y, 5, 10), res, "menu/plus");
+  m_minus = new Button( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10), res, "menu/minus");   
 
   m_step = step;
 }
@@ -73,12 +72,11 @@ void SpinButton::SetSizePosition(const Rectanglei &rect){
   
   uint margin = 5;
   
-  m_plus->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 5, GetPositionY(), 5, 10) );
-  m_minus->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - max_value_w - 5 - 2 * margin, GetPositionY(), 5, 10) );
+  m_plus->SetSizePosition( Rectanglei(position.x + size.x - 5, position.y, 5, 10) );
+  m_minus->SetSizePosition( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10) );
 }
 
-void SpinButton::Draw (uint mouse_x, uint mouse_y)
-{
+void SpinButton::Draw (uint mouse_x, uint mouse_y){
   txt_label->DrawTopLeft( GetPosition() );
    
   m_minus->Draw (mouse_x, mouse_y);
@@ -88,8 +86,7 @@ void SpinButton::Draw (uint mouse_x, uint mouse_y)
   txt_value->DrawCenterTop(center, position.y);
 }
 
-bool SpinButton::Clic (uint mouse_x, uint mouse_y, uint button) 
-{
+bool SpinButton::Clic (uint mouse_x, uint mouse_y, uint button){
   if ((button == SDL_BUTTON_WHEELDOWN && MouseIsOver(mouse_x, mouse_y)) ||
       (button == SDL_BUTTON_LEFT && m_minus->MouseIsOver(mouse_x, mouse_y))) {
     SetValue(m_value - m_step);
@@ -102,10 +99,11 @@ bool SpinButton::Clic (uint mouse_x, uint mouse_y, uint button)
   return false;
 }
 
-int SpinButton::GetValue()  const { return m_value; }
+int SpinButton::GetValue()  const{
+  return m_value;
+}
 
-void SpinButton::SetValue(int value)  
-{
+void SpinButton::SetValue(int value)  {
   m_value = BorneLong(value, m_min_value, m_max_value);  
 
   std::ostringstream value_s;

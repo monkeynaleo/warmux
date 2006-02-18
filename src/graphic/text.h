@@ -65,7 +65,7 @@ void DrawTmpBoxText(Font &font,
             Color boxColor = defaultColorBox,
             Color rectColor = defaultColorRect);
 void DrawTmpBoxTextWithReturns(Font &font,
-            int _x, int _y, 
+            const Point2i &position,
             const std::string &txt, uint space=3,
             Color boxColor = defaultColorBox,
             Color rectColor = defaultColorRect);
