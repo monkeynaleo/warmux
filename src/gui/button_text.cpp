@@ -26,18 +26,17 @@ ButtonText::~ButtonText(){
   delete text;
 }
 
-ButtonText::ButtonText (Point2i position,
+ButtonText::ButtonText(Point2i position,
 			const Profile *res_profile, const std::string& resource_id,
-			const std::string &new_text,
-			Font *font)
+			const std::string &new_text, Font *font)
   : Button(position, res_profile, resource_id){
   text = new Text(new_text, white_color, font);
 }
 
-void ButtonText::Draw (uint mouse_x, uint mouse_y){
-	Point2i textPosition = GetPosition() + GetSize() / 2;
+void ButtonText::Draw(const Point2i &mousePosition){
+	Point2i textPosition = position + size/2;
 	
-    Button::Draw (mouse_x, mouse_y);
+    Button::Draw(mousePosition);
     text->DrawCenter(textPosition);
 }
 

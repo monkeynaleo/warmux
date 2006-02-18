@@ -59,18 +59,18 @@ public:
   ~Main_Menu();
   menu_item Run ();
 private:  
-  void onClick ( int x, int y, int button);
+  void onClick(const Point2i &mousePosition, int button);
 
   // Main drawing function: refresh parts of screen 
-  void Draw (int mx, int my);
+  void Draw(const Point2i &mousePosition);
 
   //Draws gfx needing a refresh
-  void DrawGfx(int mx, int my, uint dt);
+  void DrawGfx(const Point2i &mousePosition, uint dt);
 
   //Draw gfx
   void DrawTitle(uint dt);
   void DrawSkins(uint dt);
-  void DrawButtons(int mx, int my, uint dt);
+  void DrawButtons(const Point2i &mousePosition, uint dt);
 
   // Erase gfx which have moved
   void EraseGfx(uint dt);

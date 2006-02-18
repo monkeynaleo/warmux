@@ -76,30 +76,31 @@ void SpinButton::SetSizePosition(const Rectanglei &rect){
   m_minus->SetSizePosition( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10) );
 }
 
-void SpinButton::Draw (uint mouse_x, uint mouse_y){
-  txt_label->DrawTopLeft( GetPosition() );
+void SpinButton::Draw(const Point2i &mousePosition){
+  txt_label->DrawTopLeft(position);
    
-  m_minus->Draw (mouse_x, mouse_y);
-  m_plus->Draw (mouse_x, mouse_y);
+  m_minus->Draw(mousePosition);
+  m_plus->Draw(mousePosition);
 
   uint center = (m_plus->GetPositionX() + 5 + m_minus->GetPositionX() )/2;
   txt_value->DrawCenterTop(center, position.y);
 }
 
-bool SpinButton::Clic (uint mouse_x, uint mouse_y, uint button){
-  if ((button == SDL_BUTTON_WHEELDOWN && MouseIsOver(mouse_x, mouse_y)) ||
-      (button == SDL_BUTTON_LEFT && m_minus->MouseIsOver(mouse_x, mouse_y))) {
+bool SpinButton::Clic(const Point2i &mousePosition, uint button){
+  if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
+      (button == SDL_BUTTON_LEFT && m_minus->Contains(mousePosition)) ){
     SetValue(m_value - m_step);
     return true;
-  } else if ((button == SDL_BUTTON_WHEELUP && MouseIsOver(mouse_x, mouse_y)) ||
-              (button == SDL_BUTTON_LEFT && m_plus->MouseIsOver(mouse_x, mouse_y))) {
-    SetValue(m_value + m_step);
-    return true;
-  }
+  } else
+  	if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
+        (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
+    	SetValue(m_value + m_step);
+    	return true;
+  	}
   return false;
 }
 
-int SpinButton::GetValue()  const{
+int SpinButton::GetValue() const{
   return m_value;
 }
 

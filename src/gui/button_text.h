@@ -28,16 +28,15 @@
 class ButtonText : public Button
 {
 private:
-  Text* text;
+  Text *text;
    
 public:
-  ButtonText (Point2i position,
+  ButtonText(Point2i position,
 	      const Profile *res_profile, const std::string& resource_id,
-	      const std::string &new_text,
-	      Font * font);
+	      const std::string &new_text, Font *font);
   ~ButtonText();
 
-  void Draw (uint mouse_x, uint mouse_y);  
+  void Draw(const Point2i &mousePosition); 
 };
 
 #endif

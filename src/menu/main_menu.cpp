@@ -189,15 +189,15 @@ Main_Menu::Main_Menu() :
   website_text = new Text(s2, green_color, &normal_font, false);
 }
 
-void Main_Menu::onClick ( int x, int y, int button)
+void Main_Menu::onClick(const Point2i &mousePosition, int button)
 {       
-  if (play->MouseIsOver (x, y)) sig_play();
+  if (play->Contains(mousePosition)) sig_play();
 #ifdef NETWORK_BUTTON  
-  else if (network->MouseIsOver (x, y)) sig_network();
+  else if (network->Contains(mousePosition)) sig_network();
 #endif  
-  else if (options->MouseIsOver (x, y)) sig_options();
-  else if (infos->MouseIsOver (x, y)) sig_infos();
-  else if (quit->MouseIsOver (x, y)) sig_quit();
+  else if (options->Contains(mousePosition)) sig_options();
+  else if (infos->Contains(mousePosition)) sig_infos();
+  else if (quit->Contains(mousePosition)) sig_quit();
 }
 
 menu_item Main_Menu::Run ()
@@ -221,7 +221,7 @@ menu_item Main_Menu::Run ()
   while( SDL_PollEvent( &event) )
   {
     if( event.type == SDL_MOUSEBUTTONDOWN )
-      onClick( event.button.x, event.button.y, event.button.button);
+      onClick( Point2i(event.button.x, event.button.y), event.button.button);
     else if( event.type == SDL_KEYDOWN )
     {
       if( event.key.keysym.sym == SDLK_ESCAPE )
@@ -244,7 +244,7 @@ menu_item Main_Menu::Run ()
 
   SDL_GetMouseState( &x, &y);
    
-  Draw(x, y);
+  Draw( Point2i(x, y) );
 
   last_refresh = global_time.Read();
   fps.Refresh();
@@ -264,7 +264,7 @@ menu_item Main_Menu::Run ()
   return choice;
 }
 
-void Main_Menu::Draw (int mx, int my) // mx,my = mouse location
+void Main_Menu::Draw(const Point2i &mousePosition)
 {
   uint dt = global_time.Read() - start_time;
   if( last_refresh / bg_refresh != global_time.Read() / bg_refresh
@@ -274,14 +274,14 @@ void Main_Menu::Draw (int mx, int my) // mx,my = mouse location
     EraseAll();
     DrawSkins(dt);
     DrawTitle(dt);
-    DrawButtons(mx,my,dt);
+    DrawButtons(mousePosition, dt);
     anim_finished = true;
   }
   else
   {
     //Refresh only modified parts
     EraseGfx(dt);
-    DrawGfx(mx,my,dt);
+    DrawGfx(mousePosition, dt);
   }
 }
 
@@ -332,13 +332,13 @@ void Main_Menu::EraseGfx(uint dt)
   }
 }
 
-void Main_Menu::DrawGfx(int mx, int my, uint dt)
+void Main_Menu::DrawGfx(const Point2i &mousePosition, uint dt)
 {
   if( dt <= toscill_end && dt >= bfall_end )
     DrawTitle(dt);
   if( dt <= soscill_end && dt >= tfall_end )
     DrawSkins(dt);
-  DrawButtons(mx, my, dt);
+  DrawButtons(mousePosition, dt);
 }
 
 void Main_Menu::DrawSkins(uint dt)
@@ -449,7 +449,7 @@ void Main_Menu::DrawTitle(uint dt)
   title->Blit(app.video.window, title_x, title_y);
 }
 
-void Main_Menu::DrawButtons(int mx, int my, uint dt)
+void Main_Menu::DrawButtons(const Point2i &mousePosition, uint dt)
 {
   //Calculate inital position of the buttons depending on windows size.
   double y_scale = (double)app.video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
@@ -538,11 +538,11 @@ void Main_Menu::DrawButtons(int mx, int my, uint dt)
     quit   ->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_quit);
   }
 
-  play->Draw(mx, my);
+  play->Draw(mousePosition);
 #ifdef NETWORK_BUTTON  
-  network->Draw(mx, my);
+  network->Draw(mousePosition);
 #endif   
-  options->Draw(mx, my);
-  infos->Draw(mx, my);
-  quit->Draw(mx, my);
+  options->Draw(mousePosition);
+  infos->Draw(mousePosition);
+  quit->Draw(mousePosition);
 }

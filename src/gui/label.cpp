@@ -33,10 +33,10 @@ Label::~Label(){
   delete txt_label;
 }
 
-void Label::Draw (uint mouse_x, uint mouse_y){
-  txt_label->DrawTopLeft( position );
+void Label::Draw(const Point2i &mousePosition){
+  txt_label->DrawTopLeft(position);
 }
 
 void Label::SetSizePosition(const Rectanglei &rect){
-  StdSetSizePosition( rect );
+  StdSetSizePosition(rect);
 }

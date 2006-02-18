@@ -39,19 +39,19 @@ class Box : public Widget
   Box(const Rectanglei &rect, bool _visible=true);
   virtual ~Box();
 
-  void Draw (uint mouse_x, uint mouse_y);
-  bool Clic (uint mouse_x, uint mouse_y, uint button);
+  void Draw(const Point2i &mousePosition);
+  bool Clic(const Point2i &mousePosition, uint button);
   void SetMargin(uint _margin);
   void SetBorder(const Point2i &newBorder);
 
-  virtual void AddWidget(Widget * a_widget) = 0;
+  virtual void AddWidget(Widget *a_widget) = 0;
 };
 
 class VBox : public Box
 {
  public:
   VBox(const Rectanglei &rect, bool _visible=true);
-  void AddWidget(Widget * a_widget);
+  void AddWidget(Widget *a_widget);
   void SetSizePosition(const Rectanglei &rect);
 };
 
@@ -59,7 +59,7 @@ class HBox : public Box
 {
  public:
   HBox(const Rectanglei &rect, bool _visible=true);
-  void AddWidget(Widget * a_widget);  
+  void AddWidget(Widget *a_widget);  
   void SetSizePosition(const Rectanglei &rect);
 };
 

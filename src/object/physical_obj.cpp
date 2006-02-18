@@ -207,10 +207,10 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 
   // Convert meters to pixels.
 
-  old_x *= PIXEL_PER_METER ;
-  old_y *= PIXEL_PER_METER ;
-  new_x *= PIXEL_PER_METER ;
-  new_y *= PIXEL_PER_METER ;
+  old_x *= PIXEL_PER_METER;
+  old_y *= PIXEL_PER_METER;
+  new_x *= PIXEL_PER_METER;
+  new_y *= PIXEL_PER_METER;
 
   // Compute distance between old and new position.
 
@@ -254,7 +254,7 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 	    tmp_x = BorneLong(tmp_x, 0, world.GetWidth() -GetWidth() -1);
 	    tmp_y = BorneLong(tmp_y, 0, world.GetHeight() -GetHeight() -1);
 			
-		MSG_DEBUG( "physic.state", "DeplaceTestCollision touche un bord : %d, %d", tmp_x, tmp_y );
+            MSG_DEBUG( "physic.state", "DeplaceTestCollision touche un bord : %d, %d", tmp_x, tmp_y );
 	  }
 
 	SetXY (tmp_x, tmp_y);
@@ -351,14 +351,10 @@ bool PhysicalObj::PutOutOfGround(double direction)
     step++;
 
   if(step<max_step)
-  {
     SetXY((int)(dx * (double)step)+GetX(),(int)(dy * (double)step)+GetY());
-  }
   else
-  {
-    //Can't put the object out of the ground
-    return false;
-  }
+    return false; //Can't put the object out of the ground
+
   return true;
 }
 
@@ -624,9 +620,6 @@ bool ObjTouche (const PhysicalObj &a, const PhysicalObj &b)
 // Est-ce que le point p touche l'objet a ?
 bool ObjTouche (const PhysicalObj &a, const Point2i &p)
 {
-   Rectanglei _r = a.GetTestRect();
-   Point2i _p = p;
-   
-   return  _r.Contains( _p );
+   return  a.GetTestRect().Contains( p );
 }
 

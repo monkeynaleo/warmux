@@ -173,11 +173,11 @@ OptionMenu::~OptionMenu()
   delete game_options;
 }
 
-void OptionMenu::OnClic(int x, int y, int button)
+void OptionMenu::OnClic(const Point2i &mousePosition, int button)
 {     
-  if (graphic_options->Clic (x,y,button)) {
-  } else if (sound_options->Clic (x,y,button)) {
-  } else if (game_options->Clic (x,y,button)) {
+  if( graphic_options->Clic(mousePosition, button) ){
+  } else if( sound_options->Clic(mousePosition, button) ){
+  } else if( game_options->Clic(mousePosition, button) ){
   }
 }
 
@@ -229,10 +229,10 @@ void OptionMenu::__sig_cancel()
   // Nothing to do
 }
 
-void OptionMenu::Draw(int mouse_x, int mouse_y)
+void OptionMenu::Draw(const Point2i &mousePosition)
 {   
-  graphic_options->Draw(mouse_x, mouse_y);
-  sound_options->Draw(mouse_x,mouse_y);
-  game_options->Draw(mouse_x,mouse_y);
+  graphic_options->Draw(mousePosition);
+  sound_options->Draw(mousePosition);
+  game_options->Draw(mousePosition);
 }
 

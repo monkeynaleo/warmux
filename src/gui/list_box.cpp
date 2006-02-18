@@ -64,22 +64,19 @@ ListBox::~ListBox(){
    m_items.clear();
 }
 
-int ListBox::MouseIsOnWhichItem (uint mouse_x, uint mouse_y){
-  if( ((int)mouse_x < GetPositionX() + 1)
-      || ((int)mouse_y < GetPositionY() + 1)
-      || ((GetPositionY() + GetSizeY() + 1) < (int)mouse_y)
-      || ((GetPositionX() + GetSizeX()) < (int)mouse_x) )
-    return -1;
+int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition){
+  if( !Contains(mousePosition) )
+	  return -1;
 
-  int index = (mouse_y - GetPositionY()) / height_item;
+  int index = (mousePosition.y - position.y) / height_item;
   return BorneLong(index + first_visible_item, 0, m_items.size() - 1);
 }
 
-bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button){
+bool ListBox::Clic(const Point2i &mousePosition, uint button){
   // buttons for listbox with more items than visible
   if( m_items.size() > nb_visible_items_max ){
-    if( (button == SDL_BUTTON_WHEELDOWN && MouseIsOver(mouse_x, mouse_y)) ||
-        (button == SDL_BUTTON_LEFT && m_down->MouseIsOver(mouse_x, mouse_y)) ){
+    if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
+        (button == SDL_BUTTON_LEFT && m_down->Contains(mousePosition)) ){
 	    
       // bottom button
       if( m_items.size() - first_visible_item > nb_visible_items_max )
@@ -87,8 +84,8 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button){
 
       return true;
     }
-    else if( (button == SDL_BUTTON_WHEELUP && MouseIsOver(mouse_x, mouse_y)) || 
-             (button == SDL_BUTTON_LEFT && m_up->MouseIsOver(mouse_x,mouse_y)) ){     
+    else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) || 
+             (button == SDL_BUTTON_LEFT && m_up->Contains(mousePosition)) ){     
 	    
       // top button
       if( first_visible_item > 0 )
@@ -99,7 +96,7 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button){
   }
 
   if( button == SDL_BUTTON_LEFT ){
-    int item = MouseIsOnWhichItem(mouse_x,mouse_y);
+    int item = MouseIsOnWhichItem(mousePosition);
     
     if( item == -1 )
       return false;
@@ -115,8 +112,8 @@ bool ListBox::Clic (uint mouse_x, uint mouse_y, uint button){
   }
 }
 
-void ListBox::Draw (uint mouse_x, uint mouse_y){
-  int item = MouseIsOnWhichItem(mouse_x, mouse_y);
+void ListBox::Draw(const Point2i &mousePosition){
+  int item = MouseIsOnWhichItem(mousePosition);
   Rectanglei rect (*this);
   
   app.video.window.BoxColor(rect, defaultListColor1);
@@ -139,8 +136,8 @@ void ListBox::Draw (uint mouse_x, uint mouse_y){
 
   // buttons for listbox with more items than visible
   if (m_items.size() > nb_visible_items_max){
-    m_up->Draw (mouse_x, mouse_y);
-    m_down->Draw (mouse_x, mouse_y);
+    m_up->Draw(mousePosition);
+    m_down->Draw(mousePosition);
 #ifdef SCROLLBAR
     uint tmp_y, tmp_h;
     tmp_y = y+10+ first_visible_item* (h-20) / m_items.size();

@@ -34,7 +34,6 @@ typedef struct s_list_box_item_t{
     std::string value;
 } list_box_item_t;
 
-
 class ListBox : public Widget
 { 
 public:
@@ -57,26 +56,25 @@ public:
   ListBox (const Rectanglei &rect);
   ~ListBox();
 
-  void Draw (uint mouse_x, uint mouse_y);
-  bool Clic (uint mouse_x, uint mouse_y, uint button);  
+  void Draw(const Point2i &mousePosition);
+  bool Clic(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
-  void AddItem (bool selected, 
-		const std::string &label,
+  void AddItem(bool selected, const std::string &label,
 		const std::string &value);
   void Sort();
 
-  int MouseIsOnWhichItem (uint mouse_x, uint mouse_y);
+  int MouseIsOnWhichItem(const Point2i &mousePosition);
 
-  void Select (uint index);
-  int GetSelectedItem ();
-  void Deselect ();
+  void Select(uint index);
+  int GetSelectedItem();
+  void Deselect();
   void RemoveSelected();
-  const std::string& ReadLabel () const;
-  const std::string& ReadValue () const;
-  const std::string& ReadValue (int index) const;
+  const std::string& ReadLabel() const;
+  const std::string& ReadValue() const;
+  const std::string& ReadValue(int index) const;
 
-  std::vector<list_box_item_t> * GetItemsList();
+  std::vector<list_box_item_t> *GetItemsList();
 };
 
 #endif

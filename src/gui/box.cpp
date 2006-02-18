@@ -35,7 +35,7 @@ Box::~Box(){
   widgets.clear();
 }
 
-void Box::Draw (uint mouse_x, uint mouse_y){
+void Box::Draw(const Point2i &mousePosition){
   Rectanglei rect(position, size);
 	
   if( visible ){
@@ -47,20 +47,17 @@ void Box::Draw (uint mouse_x, uint mouse_y){
   for (it = widgets.begin(); 
        it != widgets.end(); 
        ++it){
-    (*it)->Draw(mouse_x, mouse_y);
+    (*it)->Draw(mousePosition);
   }
 }
 
-bool Box::Clic (uint mouse_x, uint mouse_y, uint button){
-  bool r = false;
-
+bool Box::Clic (const Point2i &mousePosition, uint button){
   std::list<Widget *>::iterator it;
   for (it = widgets.begin(); 
        it != widgets.end(); 
        ++it){
     assert(it != NULL);
-    r = (*it)->Clic(mouse_x, mouse_y, button);
-    if( r )
+    if( (*it)->Clic(mousePosition, button) )
       return true;
   }
 

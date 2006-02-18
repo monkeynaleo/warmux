@@ -85,7 +85,7 @@ Surface::Surface(const std::string &filename){
 Surface::Surface(const Surface &src){
 	surface = src.surface;
 	autoFree = true;
-	if( surface != NULL)
+	if( !IsNull() )
 		surface->refcount++;
 }
 
@@ -101,7 +101,7 @@ Surface::~Surface(){
 Surface &Surface::operator=(const Surface & src){
 	AutoFree();
 	surface = src.surface;
-	if( surface != NULL )
+	if( !IsNull() )
 		surface->refcount++;
 
 	return *this;
@@ -113,7 +113,7 @@ Surface &Surface::operator=(const Surface & src){
  * The memory is really freed if the reference counter reach 0.
  */
 void Surface::Free(){
-	if( surface != NULL ){
+	if( !IsNull() ){
 		SDL_FreeSurface( surface );
 		surface = NULL;
 	}
