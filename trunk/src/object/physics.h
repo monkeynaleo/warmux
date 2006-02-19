@@ -140,9 +140,7 @@ public:
   void RunPhysicalEngine();
 
   // Notify the son class that the object has moved.
-  virtual bool NotifyMove(double old_x, double old_y, double new_x,
-			  double new_y,
-			  double &contact_x, double &contact_y,
+  virtual bool NotifyMove(Point2d oldPos, Point2d newPos, Point2d &contactPos,
 			  double &contact_angle) = 0 ;
 
   // Start moving
@@ -162,7 +160,7 @@ protected:
   double GetContactSurface(double angle) ;
 
   // Compute current (x,y) position
-  void ComputeNextXY (double &x, double &y, double delta_t);
+  Point2d ComputeNextXY(double delta_t);
 
   virtual void SignalDeath();
   virtual void SignalGhostState (bool was_already_dead);
@@ -172,12 +170,12 @@ protected:
 
 private:
 
-  void ComputeFallNextXY (double delta_t) ;
+  void ComputeFallNextXY (double delta_t);
 
-  void ComputePendulumNextXY (double delta_t) ;
+  void ComputePendulumNextXY (double delta_t);
 
   // Make the object rebound
-  void Rebound(double contact_x, double contact_y, double contact_angle) ;
+  void Rebound(Point2d contactPos, double contact_angle);
 };
 
 #endif

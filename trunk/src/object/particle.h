@@ -23,10 +23,10 @@
 #ifndef PARTICLE_H
 #define PARTICLE_H
 #include "physical_obj.h"
-#include "../include/base.h"
-#include "../weapon/weapon_cfg.h"
 #include "../graphic/sprite.h"
 #include "../graphic/surface.h"
+#include "../include/base.h"
+#include "../weapon/weapon_cfg.h"
 
 typedef enum { 
   particle_SMOKE,

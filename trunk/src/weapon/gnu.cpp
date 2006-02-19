@@ -50,8 +50,8 @@ Gnu::Gnu(GameLoop &p_game_loop, GnuLauncher& p_launcher) :
   m_allow_negative_y = true;  
 
   image = resource_manager.LoadSprite( weapons_res_profile, "gnu"); 
-  SetSize (image->GetWidth(), image->GetHeight());
-  SetMass (launcher.cfg().mass);
+  SetSize(image->GetSize());
+  SetMass(launcher.cfg().mass);
   SetTestRect ( image->GetWidth()/2-1,
                 image->GetWidth()/2-1,
                 image->GetHeight()/2-1,

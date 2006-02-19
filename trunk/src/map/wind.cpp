@@ -68,7 +68,7 @@ void WindParticle::Init()
   mass = TerrainActif().wind.particle_mass;
   mass *= (1.0 + RandomLong(-100, 100)/400.0);
   SetMass (mass);
-  SetSize( sprite->GetWidth(), sprite->GetHeight());
+  SetSize( sprite->GetSize() );
   wind_factor = TerrainActif().wind.particle_wind_factor ;
   wind_factor *= (1.0 + RandomLong(-100, 100)/400.0);  
   SetWindFactor(wind_factor);

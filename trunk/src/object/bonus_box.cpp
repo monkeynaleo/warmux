@@ -73,7 +73,7 @@ BonusBox::BonusBox(GameLoop &p_game_loop)
 void BonusBox::Init(){
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
-  SetSize (anim->GetWidth(), anim->GetHeight());
+  SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
 }
 
@@ -214,7 +214,7 @@ void BonusBox::NewBonusBox(){
     // Vérifie que le caisse ne touche aucun ver au début
     FOR_ALL_LIVING_CHARACTERS(equipe, ver)
     {
-      if (ObjTouche(*this, *ver)) 
+      if( ObjTouche(*ver) )
       {
 		  MSG_DEBUG("bonus", "La caisse touche le ver %s.", (*ver).m_name.c_str());
 		  ok = false;
@@ -250,7 +250,7 @@ void BonusBox::Refresh()
   // Si un ver touche la caisse, on la réinitialise
   FOR_ALL_LIVING_CHARACTERS(equipe, ver)
   {
-    if (ObjTouche(*this, *ver))
+    if( ObjTouche(*ver) )
     {
       // Offre des dynamites
       ApplyBonus (**equipe, *ver);

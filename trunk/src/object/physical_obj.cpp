@@ -25,8 +25,6 @@
  *****************************************************************************/
 
 #include "physical_obj.h"
-#include <stdlib.h>
-#include <iostream>
 #include "physics.h"
 #include "../game/config.h"
 #include "../game/time.h"
@@ -39,13 +37,13 @@
 #include "../weapon/ninja_rope.h"
 
 const int Y_OBJET_MIN = -10000;
-const int WATER_RESIST_FACTOR = 6 ;
+const int WATER_RESIST_FACTOR = 6;
 
-const double PIXEL_PER_METER = 40 ;
+const double PIXEL_PER_METER = 40;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2)
 {
-  return p1.Distance(p2) / PIXEL_PER_METER ;
+  return p1.Distance(p2) / PIXEL_PER_METER;
 }
 
 PhysicalObj::PhysicalObj (GameLoop &p_game_loop, const std::string &name, double mass) :
@@ -130,16 +128,12 @@ const Point2i PhysicalObj::GetCenter() const
   return Point2i(GetCenterX(), GetCenterY());
 }
 
-void PhysicalObj::SetSize (uint width, uint height){ 
-  assert (width != 0);
-  assert (height != 0);
-  m_width = width; 
-  m_height = height; 
-  SetPhysSize (width / PIXEL_PER_METER, height / PIXEL_PER_METER);
-}
-
 void PhysicalObj::SetSize(const Point2i &newSize){
-  SetSize(newSize.x, newSize.y);
+  if( newSize == Point2i(0, 0) )
+	  Error( "New size of (0, 0) !");
+  m_width = newSize.x;
+  m_height = newSize.y;
+  SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
 }
 
 // Lit les dimensions de l'objet
@@ -190,56 +184,38 @@ const Rectanglei PhysicalObj::GetTestRect() const
 
 // Move to a point with collision test
 // Return true if collision occured
-bool PhysicalObj::NotifyMove(double old_x, double old_y,
-			     double new_x, double new_y,
-			     double &contact_x, double &contact_y,
-			     double &contact_angle)
-{
-  if(IsGhost())
-    return false;
-
-  double x,y,dx,dy;
-  int tmp_x, tmp_y;
+bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
+			     Point2d &contactPos, double &contact_angle){
+  Point2d pos, offset;
   int cx, cy;
   bool collision = false ;
 
-  // Convert meters to pixels.
+  if(IsGhost())
+    return false;
 
-  old_x *= PIXEL_PER_METER;
-  old_y *= PIXEL_PER_METER;
-  new_x *= PIXEL_PER_METER;
-  new_y *= PIXEL_PER_METER;
+  // Convert meters to pixels.
+  oldPos *= PIXEL_PER_METER;
+  newPos *= PIXEL_PER_METER;
 
   // Compute distance between old and new position.
-
-  double lg = Point2d(old_x, old_y).Distance( Point2d(new_x, new_y));
+  double lg = oldPos.Distance( newPos);
 
   if (lg == 0)
     return false ;
 
   // Compute increments to move the object step by step from the old
   // to the new position.
-
-  dx = (new_x - old_x) / lg;
-  dy = (new_y - old_y) / lg;
+  offset = (newPos - oldPos) / lg;
 
   // First iteration position.
-
-  x = old_x + dx;
-  y = old_y + dy;
-
-  //  printf ("--- PhysicalObj::NotifyMove from %f,%f to %f,%f\n",
-  //  	  old_x, old_y, new_x, new_y);
-
-  //  printf ("--- PhysicalObj::MoveCollisionTest dx = %f - dy = %f - lg = %f\n",
-  //	  dx, dy, lg);
+  pos = oldPos + offset;
 
   if (m_type == objUNBREAKABLE || IsInWater())
     return false ;
 
   do
   {
-	Point2i tmpPos( (int)round(x), (int)round(y) );
+	Point2i tmpPos( (int)round(pos.x), (int)round(pos.y) );
     
     // Check if we exit the world. If so, we stop moving and return.
     if( IsOutsideWorldXY(tmpPos) ){
@@ -247,7 +223,7 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 	    	tmpPos.x = BorneLong(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
 		    tmpPos.y = BorneLong(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
 			
-            MSG_DEBUG( "physic.state", "DeplaceTestCollision touche un bord : %d, %d", tmp_x, tmp_y );
+            MSG_DEBUG( "physic.state", "DeplaceTestCollision touche un bord : %d, %d", tmpPos.x, tmpPos.y );
 	  	}
 
 		SetXY( tmpPos );
@@ -259,7 +235,7 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 		MSG_DEBUG( "physic.state", "DeplaceTestCollision: collision par TestCollision." );
 
 		// Set the object position to the current position.
-		SetXY( Point2i( (int)round(x - dx), (int)round(y - dy)) );
+		SetXY( Point2i( (int)round(pos.x - offset.x), (int)round(pos.y - offset.y)) );
 
 		// Find the contact point and collision angle.
 		// !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
@@ -267,12 +243,11 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
 		// !!! uninitialised values of cx and cy!!
 		if( ContactPoint(cx, cy) ){
 			contact_angle = world.ground.Tangeante(cx, cy);
-			contact_x = (double)cx / PIXEL_PER_METER ;
-			contact_y = (double)cy / PIXEL_PER_METER ;
+			contactPos.x = (double)cx / PIXEL_PER_METER;
+			contactPos.y = (double)cy / PIXEL_PER_METER;
 		}else{
 			contact_angle = - GetSpeedAngle();
-			contact_x = x;
-			contact_y = y;
+			contactPos = pos;
 		}
 
 		collision = true;
@@ -280,8 +255,7 @@ bool PhysicalObj::NotifyMove(double old_x, double old_y,
     }
     
 	// Next motion step
-    x += dx;
-    y += dy;
+	pos += offset;
     lg -= 1.0 ;    
   }while (0 < lg);
 
@@ -491,12 +465,12 @@ bool PhysicalObj::FootsInVacuum() const{
 bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 {
   if( IsOutsideWorldXY(position) ){
-	std::cout << "physicalobk.cpp:597: physobj is outside the world" << std::endl;
+	MSG_DEBUG("physical", "physobj is outside the world");
 	return config.exterieur_monde_vide;
   }
    
   if( FootsOnFloor(position.y) ){
-     std::cout << "physobj is on floor" << std::endl; 
+	 MSG_DEBUG("physical", "physobj is on floor");
      return false;
   }
    
@@ -595,14 +569,14 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
 }
 
 // Est-ce que deux objets se touchent ? (utilise les rectangles de test)
-bool ObjTouche (const PhysicalObj &a, const PhysicalObj &b)
+bool PhysicalObj::ObjTouche(const PhysicalObj &b) const
 {
-  return a.GetTestRect().Intersect( b.GetTestRect() );
+  return GetTestRect().Intersect( b.GetTestRect() );
 }
 
 // Est-ce que le point p touche l'objet a ?
-bool ObjTouche (const PhysicalObj &a, const Point2i &p)
+bool PhysicalObj::ObjTouche(const Point2i &p) const
 {
-   return  a.GetTestRect().Contains( p );
+   return  GetTestRect().Contains( p );
 }
 

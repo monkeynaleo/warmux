@@ -482,8 +482,7 @@ void Physics::ComputeFallNextXY (double delta_t)
 }
 
 // Compute the position of the object at current time.
-void Physics::ComputeNextXY (double &x, double &y, double delta_t)
-{
+Point2d Physics::ComputeNextXY(double delta_t){
   if (m_motion_type == FreeFall)
     ComputeFallNextXY(delta_t);
 
@@ -492,16 +491,16 @@ void Physics::ComputeNextXY (double &x, double &y, double delta_t)
 
   m_last_move = global_time.Read() ;
 
-  x = m_pos_x.x0 ;
-  y = m_pos_y.x0 ;
+  return Point2d(m_pos_x.x0, m_pos_y.x0);
 }
 
-void Physics::RunPhysicalEngine ()
+void Physics::RunPhysicalEngine()
 {
   double step_t, delta_t = (global_time.Read() - m_last_move) / 1000.0;
-  double old_x,old_y;
-  double new_x,new_y;
-  double contact_x, contact_y, contact_angle;
+  Point2d oldPos;
+  Point2d newPos;
+  Point2d contactPos;
+  double contact_angle;
   bool contact = false;
 
   step_t = PHYS_DELTA_T;
@@ -511,34 +510,29 @@ void Physics::RunPhysicalEngine ()
 
   // Compute object move for each physical engine time step.
 
-  while (delta_t > 0.0)
-    {
+  while (delta_t > 0.0){
       if (delta_t < PHYS_DELTA_T)
         step_t = delta_t ;
 
-      old_x = GetPhysX();
-      old_y = GetPhysY();
+      oldPos = GetPos();
       
-      ComputeNextXY(new_x,new_y, step_t);
+      newPos = ComputeNextXY(step_t);
 
-      if ( (new_x != old_x) || (new_y != old_y))
-	// The object has moved. Notify the son class.
-	contact = NotifyMove(old_x, old_y, new_x, new_y,
-			     contact_x, contact_y, contact_angle);
+      if( !(newPos == oldPos) )  // The object has moved. Notify the son class.
+		contact = NotifyMove(oldPos, newPos, contactPos, contact_angle);
 
-      if (contact)
-	{
-	  MSG_DEBUG( "physic.coll", "Collision durant le déplacement (%d, %d) -> (%d, %d)", old_x , old_y, new_x, new_y);
-	  Rebound(contact_x, contact_y, contact_angle);
-	}
+      if (contact){
+		  MSG_DEBUG( "physic.coll", "Collision durant le déplacement (%d, %d) -> (%d, %d)", oldPos.x, oldPos.y, newPos.x, newPos.y);
+		  Rebound(contactPos, contact_angle);
+	  }
 
       delta_t -= PHYS_DELTA_T ;
-    }
+  }
 
   return;
 }
 
-void Physics::Rebound(double contact_x, double contact_y, double contact_angle)
+void Physics::Rebound(Point2d contactPos, double contact_angle)
 {
   double norme, angle;
 
@@ -547,62 +541,54 @@ void Physics::Rebound(double contact_x, double contact_y, double contact_angle)
 
   switch (m_motion_type) {
     case FreeFall :
-      if (m_rebounding)
-	{ 
-	  // Compute rebound angle.
-	  if(contact_angle == -1.0)
-	    {
-	      angle = angle + M_PI ;
-	    }
-	  else
-	    angle -= 2.0 * (angle - contact_angle);
+		if (m_rebounding){ 
+			// Compute rebound angle.
+			if(contact_angle == -1.0)
+				angle = angle + M_PI ;
+			else
+				angle -= 2.0 * (angle - contact_angle);
 
-	  // Apply rebound factor to the object speed.
-	  norme = norme * m_rebound_factor ;
+			// Apply rebound factor to the object speed.
+			norme = norme * m_rebound_factor;
 	  	  
-	  // Apply the new speed to the object.
-	  SetSpeed(norme, angle);
+			// Apply the new speed to the object.
+			SetSpeed(norme, angle);
 	  
-	  // Check if we should stop rebounding.
-	  if (norme < STOP_REBOUND_LIMIT)
-	    {
-	      StopMoving();
-	      return;
-	    }
-	  
-	  SignalRebound();
-	}
-      else
-	{
-	  SignalFallEnding();
-	  StopMoving();
-	}
-
-      break ;
+			// Check if we should stop rebounding.
+			if (norme < STOP_REBOUND_LIMIT){
+				StopMoving();
+				return;
+		 	}
+			SignalRebound();
+		}else{
+			SignalFallEnding();
+			StopMoving();
+		}
+		break;
 
     case Pendulum:
-      {
-      DoubleVector V ;
+		{
+			DoubleVector V ;
 
-      // Recompute new angle.
-      V.x = m_pos_x.x0 + m_fix_point_dxy.x - m_fix_point_gnd.x;
-      V.y = m_pos_y.x0 + m_fix_point_dxy.y - m_fix_point_gnd.y;
-      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle();
+			// Recompute new angle.
+			V.x = m_pos_x.x0 + m_fix_point_dxy.x - m_fix_point_gnd.x;
+			V.y = m_pos_y.x0 + m_fix_point_dxy.y - m_fix_point_gnd.y;
+		
+			m_rope_angle.x0 = M_PI_2 - V.ComputeAngle();
       
-      // Convert the linear speed of the rebound to angular speed.
-      V.x = PENDULUM_REBOUND_FACTOR * norme * cos(angle);
-      V.y = PENDULUM_REBOUND_FACTOR * norme * sin(angle);
+			// Convert the linear speed of the rebound to angular speed.
+			V.x = PENDULUM_REBOUND_FACTOR * norme * cos(angle);
+			V.y = PENDULUM_REBOUND_FACTOR * norme * sin(angle);
 
-      angle = angle + M_PI;
+			angle = angle + M_PI;
 
-      m_rope_angle.x1 = (norme * cos(angle) * cos(m_rope_angle.x0) +
-			 norme * sin(angle) * sin(m_rope_angle.x0) ) /
-	                 m_rope_length.x0;
+			m_rope_angle.x1 = (norme * cos(angle) * cos(m_rope_angle.x0) +
+				norme * sin(angle) * sin(m_rope_angle.x0) ) / m_rope_length.x0;
 
-      m_rope_angle.x2 = 0;
-      m_extern_force.Clear();
-      }
-      break ;
+			m_rope_angle.x2 = 0;
+			m_extern_force.Clear();
+		}
+		break ;
      
     default:
       break ;

@@ -84,7 +84,7 @@ Avion::Avion(GameLoop &p_game_loop, AirAttack& p_air_attack) :
   m_alive = GHOST;
 
   image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
-  SetSize (image->GetWidth(), image->GetHeight());   
+  SetSize(image->GetSize());
   SetMass (3000);
   obus_dx = 100;
   obus_dy = 50;

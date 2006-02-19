@@ -75,7 +75,7 @@ ObjMine::ObjMine(GameLoop &p_game_loop, Mine& p_launcher) :
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
  
   detection = resource_manager.LoadSprite(res,"mine_anim");
-  SetSize (detection->GetWidth(), detection->GetHeight());
+  SetSize(detection->GetSize());
 
   impact = resource_manager.LoadImage(res,"mine_impact");
   SetMass (launcher.cfg().mass);

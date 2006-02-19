@@ -48,6 +48,10 @@ template<class T> class Vector2
 			return y;
 		}
 
+		inline bool operator==(const Vector2<T> &p2) const{
+			return (x == p2.x) && (y == p2.y);
+		}
+		
 		/**
 		 *
 		 * @param p2
@@ -137,6 +141,41 @@ template<class T> class Vector2
 			r.y -= val;
 
 			return r;
+		}
+
+		/**
+		 *
+		 * @param val
+		 */
+		inline void operator+=(const T val){
+			x += val;
+			y += val;
+		}
+
+		/**
+		 *
+		 * @param p2
+		 */
+		inline void operator+=(const Vector2<T> &p2){
+			x += p2.x;
+			y += p2.y;
+		}
+
+		/**
+		 *
+		 * @param val
+		 */
+		inline void operator-=(const T val){
+			x -= val;
+			y += val;
+		}
+		
+		/**
+		 *
+		 */
+		inline void operator*=(const T val){
+			x *= val;
+			y *= val;
 		}
 		
 		/**

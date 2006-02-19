@@ -739,7 +739,7 @@ bool Character::SetSkin(const std::string& skin_name)
                  AccessSkin().many_skins[skin_name].test_top, 
                  AccessSkin().many_skins[skin_name].test_bottom);
 
-    SetSize (image->GetWidth(), image->GetHeight());
+    SetSize(image->GetSize());
     image->SetCurrentFrame(0);
     image->Start();
     PutOutOfGround();     
@@ -770,7 +770,7 @@ bool Character::SetSkin(const std::string& skin_name)
                  walk_skin->test_bottom);
     m_frame_repetition = walk_skin->repetition_frame;
 
-    SetSize (image->GetWidth(), image->GetHeight());
+    SetSize(image->GetSize());
     PutOutOfGround();     
     StopWalking();
 
