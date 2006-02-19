@@ -54,7 +54,7 @@ BatonDynamite::BatonDynamite(GameLoop &p_game_loop, Dynamite &p_dynamite) :
   
   image->Start();
   
-  SetSize (image->GetWidth(), image->GetHeight());
+  SetSize(image->GetSize());
 
   SetTestRect (0, 0, 2, 3);
 

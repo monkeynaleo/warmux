@@ -62,7 +62,7 @@ bool Baseball::p_Shoot (){
     if (&(*ver) != &ActiveCharacter())
     {
       // On a touché un ver ?
-      if (ObjTouche(*ver, Point2i(x, y)))
+      if( ver->ObjTouche(Point2i(x, y)) )
       {
 	// Inflige les dégats au ver touché
 	(*ver).SetEnergyDelta (-cfg().damage);

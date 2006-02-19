@@ -55,7 +55,7 @@ WeaponProjectile::WeaponProjectile (GameLoop &p_game_loop, const std::string &na
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
-  SetSize (image->GetWidth(), image->GetHeight());
+  SetSize(image->GetSize());
 
   impact = resource_manager.LoadImage( weapons_res_profile, name + "_impact");
 

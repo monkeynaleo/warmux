@@ -57,7 +57,7 @@ void Particle::Refresh()
 {
   uint time = global_time.Read() - m_last_refresh; 
 
-  UpdatePosition ();
+  UpdatePosition();
 
   image->Update();
 
@@ -76,7 +76,7 @@ void Particle::Refresh()
     {
       float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live/2.0)));
       image->Scale(coeff,coeff);  
-      SetSize(image->GetWidth(),image->GetHeight());
+      SetSize(image->GetSize());
       image->SetAlpha(1.0);
     }
     else
@@ -116,7 +116,7 @@ void Smoke::Init()
   m_left_time_to_live = m_initial_time_to_live; 
 
   image->Scale(0.0,0.0);
-  SetSize(1,1);
+  SetSize( Point2i(1, 1) );
 }
 
 StarParticle::StarParticle(GameLoop &p_game_loop) :
@@ -137,8 +137,8 @@ void StarParticle::Init()
   image = resource_manager.LoadSprite(res,"star_particle"); 
   resource_manager.UnLoadXMLProfile( res);
 
-  image->Scale(0.0,0.0);
-  SetSize(1,1);  
+  image->Scale(0.0, 0.0);
+  SetSize( Point2i(1, 1) );
 }
 
 ExplosiveWeaponConfig fire_cfg;
@@ -166,7 +166,7 @@ void FireParticle::Init()
   resource_manager.UnLoadXMLProfile( res);
 
   image->Scale(0.0,0.0);
-  SetSize(1,1);
+  SetSize( Point2i(1, 1) );
 }
 
 void FireParticle::SignalFallEnding()
