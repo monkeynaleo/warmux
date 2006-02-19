@@ -51,10 +51,10 @@ void AppliqueExplosion (const Point2i &explosion,
   bool cam_follow_character = false; //Set to true if an explosion is applied to a character. Then the camera shouldn't be following an object
 
   // Make a hole in the ground
-  world.Creuse (trou.x-impact.GetWidth()/2, trou.y-impact.GetHeight()/2, impact);
+  world.Creuse(trou - impact.GetSize()/2, impact);
    
   // Play a sound
-  jukebox.Play ("share", son);
+  jukebox.Play("share", son);
    
   // Apply damage on the worms.
   // Do not care about the death of the active worm.
@@ -143,10 +143,7 @@ void AppliqueExplosion (const Point2i &explosion,
   }
 
   // Do we need to generate some fire particles ?
-  if (fire_particle) {
-     global_particle_engine.AddNow ( trou.x - impact.GetWidth()/2, trou.y-impact.GetHeight()/2,
-				     5, particle_FIRE );
-  }
-
+  if (fire_particle)
+     global_particle_engine.AddNow(trou - impact.GetSize()/2, 5, particle_FIRE );
 }
 

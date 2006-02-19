@@ -52,6 +52,14 @@ template<class T> class Vector2
 		 *
 		 * @param p2
 		 */
+		inline bool operator!=(const Vector2<T> &p2) const{
+			return (x != p2.x) || (y != p2.y);
+		}
+		
+		/**
+		 *
+		 * @param p2
+		 */
 		inline bool operator>=(const Vector2<T> &p2) const{
 			return (x >= p2.x) && (y >= p2.y);
 		}

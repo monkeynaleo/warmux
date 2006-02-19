@@ -21,17 +21,17 @@
 
 #ifndef _CHARACTER_H
 #define _CHARACTER_H
-//-----------------------------------------------------------------------------
+
 #include <string>
 #include <SDL.h>
 #include "skin.h"
 #include "team.h"
-#include "../include/base.h"
-#include "../object/physical_obj.h"
 #include "../gui/progress_bar.h"
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
-//-----------------------------------------------------------------------------
+#include "../include/base.h"
+#include "../object/physical_obj.h"
+
 class Team;
 
 // Un ver de terre :-)
@@ -170,7 +170,7 @@ public:
   bool SetSkin(const std::string& skin_name);
 
   // Hand position
-  void GetHandPosition (int &x, int &y);
+  Point2i GetHandPosition();
   void GetHandPositionf (double &x, double &y);
 
   // Damage report
@@ -183,5 +183,4 @@ public:
   void EndTurn();
 };
 
-//-----------------------------------------------------------------------------
 #endif

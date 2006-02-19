@@ -321,13 +321,12 @@ bool Weapon::Shoot(double strength, int angle)
 // Calcule la position de l'image de l'arme
 void Weapon::PosXY (int &x, int &y) const
 {
-  int hand_x, hand_y;
-  ActiveCharacter().GetHandPosition(hand_x, hand_y);
-  y = hand_y +position.dy;
+  Point2i handPos = ActiveCharacter().GetHandPosition();
+  y = handPos.y + position.dy;
   if (ActiveCharacter().GetDirection() == 1)
-    x = hand_x +position.dx;
+    x = handPos.x + position.dx;
   else {
-    x = hand_x -position.dx;
+    x = handPos.x - position.dx;
   }
 
   if(min_angle!=max_angle && ActiveCharacter().GetDirection()==-1)

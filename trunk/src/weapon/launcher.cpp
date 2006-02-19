@@ -83,9 +83,7 @@ void WeaponProjectile::Shoot(double strength)
   is_active = true;
 
   // Set the initial position.
-  int x,y;
-  ActiveCharacter().GetHandPosition(x, y);
-  SetXY (x,y);
+  SetXY( ActiveCharacter().GetHandPosition() );
   
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();
@@ -112,7 +110,7 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
   dernier_ver_touche = NULL;
   dernier_obj_touche = NULL;
 
-  if (!IsInVacuum (dx, dy)) return true;
+  if (!IsInVacuum ( Point2i(dx, dy)) ) return true;
 
   if (!touche_ver_objet) return false;
 

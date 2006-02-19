@@ -41,6 +41,7 @@
 #include "../map/map.h"
 #include "../map/water.h"
 #include "../sound/jukebox.h"
+#include "../tool/debug.h"
 #include "../tool/random.h"
 #include "../tool/math_tools.h"
 #include "../weapon/suicide.h"
@@ -80,8 +81,6 @@ const uint do_nothing_timeout = 5000;
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
-//-----------------------------------------------------------------------------
-
 Character::Character (GameLoop &p_game_loop) :
   PhysicalObj(p_game_loop, "Soldat inconnu", 0.0)
 {
@@ -120,9 +119,7 @@ Character::Character (GameLoop &p_game_loop) :
 // Signale la mort d'un ver
 void Character::SignalDeath()
 {
-#ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "Meurt." << std::endl;
-#endif
+  MSG_DEBUG("character", "Dying");
 
   // No more energy ...
   energy = 0;
@@ -145,9 +142,8 @@ void Character::SignalDeath()
   AppliqueExplosion (explosion, trou, img_trou, cfg, NULL);
 
   // Change test rectangle
-  int x = GetCenterX(), y = GetCenterY();
-  SetSize (image->GetWidth(), image->GetHeight());
-  SetXY (x - GetWidth()/2, y - GetHeight()/2);
+  SetSize( image->GetSize() );
+  SetXY( GetCenter() - GetSize()/2 );
 
   assert (m_alive == DEAD);
   assert (IsDead());
@@ -175,9 +171,7 @@ void Character::SignalGhostState (bool was_dead)
   // Report to damage performer this character lost all of its energy
   ActiveCharacter().MadeDamage(energy, *this);
 
-#ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "Fantome." << std::endl;
-#endif
+  MSG_DEBUG("character", "ghost");
 
   // Signal the death
   if (!was_dead) game_loop.SignalCharacterDeath (this);
@@ -380,13 +374,9 @@ void Character::Draw()
 
 }
 
-//-----------------------------------------------------------------------------
-
 void Character::Jump ()
 {
-#ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "Jump." << std::endl;
-#endif
+  MSG_DEBUG("character", "Jump");
   do_nothing_time = global_time.Read();
 
   if (!CanJump()) return;
@@ -406,9 +396,7 @@ void Character::Jump ()
 
 void Character::HighJump ()
 {
-#ifdef DEBUG_CHG_ETAT
-  COUT_DBG << "HighJump." << std::endl;
-#endif
+  MSG_DEBUG("character", "HighJump");
   do_nothing_time = global_time.Read();
 
   if (!CanJump()) return;
@@ -917,10 +905,10 @@ void Character::Reset()
     uint x = RandomLong(0, world.GetWidth() -GetWidth());
     uint y = RandomLong(0, world.GetHeight() -GetHeight());
 
-    SetXY (x, y);
+    SetXY( Point2i(x, y) );
 
 #ifndef NO_POSITION_CHECK
-    pos_ok &= !IsGhost() && IsInVacuum(0,0) && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
+    pos_ok &= !IsGhost() && IsInVacuum( Point2i(0,0) ) && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
     if (!pos_ok) continue;
 
     // Chute directe pour le sol
@@ -945,7 +933,7 @@ void Character::Reset()
     }
 
     // La position est bonne ?
-    pos_ok &= !IsGhost() & !IsInWater() & IsInVacuum(0,0);
+    pos_ok &= !IsGhost() & !IsInWater() & IsInVacuum( Point2i(0,0) );
 #ifdef DEBUG_PLACEMENT
     if (!pos_ok) COUT_PLACEMENT << "Placement final manqué." << std::endl;
 #endif
@@ -963,30 +951,32 @@ uint Character::GetEnergy() const
 }
 
 // Hand position
-void Character::GetHandPosition (int &x, int &y) 
-{
+Point2i Character::GetHandPosition() {
    int frame = image->GetCurrentFrame();
+   Point2i result;
    
-  assert(walk_skin!=NULL);
+   assert(walk_skin!=NULL);
 
-  if(current_skin=="breathe")
-  {
-    //Hand position is first frame of the hand position of the walking skin
-    skin_translate_t hand = walk_skin->hand_position.at(0);
-    y = GetY() +hand.dy;
-    if (GetDirection() == 1)
-      x = GetX() +hand.dx;
-    else
-      x = GetX() +GetWidth() -hand.dx;
-    return;
+   if(current_skin=="breathe")
+   {
+		//Hand position is first frame of the hand position of the walking skin
+		skin_translate_t hand = walk_skin->hand_position.at(0);
+		result.y = GetY() + hand.dy;
+		if (GetDirection() == 1)
+			result.x = GetX() + hand.dx;
+		else
+      		result.x = GetX() + GetWidth() - hand.dx;
+		return result;
   }
 
   skin_translate_t hand = walk_skin->hand_position.at(frame);
-  y = GetY() +hand.dy;
+  result.y = GetY() + hand.dy;
   if (GetDirection() == 1)
-    x = GetX() +hand.dx;
+    result.x = GetX() + hand.dx;
   else
-    x = GetX() +GetWidth() -hand.dx;
+    result.x = GetX() + GetWidth() - hand.dx;
+
+  return result;
 }
 
 // Hand position

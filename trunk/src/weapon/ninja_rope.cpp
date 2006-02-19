@@ -155,7 +155,9 @@ void NinjaRope::TryAttachRope()
   // The rope is being launching. Increase the rope length and check
   // collisions.
 
-  ActiveCharacter().GetHandPosition(x, y);
+  Point2i handPos = ActiveCharacter().GetHandPosition();
+  x = handPos.x;
+  y = handPos.y;
     
   length = ROPE_DRAW_SPEED * delta_time / 10;
   if (length > MAX_ROPE_LEN)
@@ -208,17 +210,17 @@ void NinjaRope::UnattachRope()
 
 bool NinjaRope::TryAddNode(int CurrentSense)
 {
-  int hand_x, hand_y, dx, dy, lg, cx, cy ;
+  int dx, dy, lg, cx, cy ;
   DoubleVector V ;
   bool AddNode = false ;
   double angle, rope_angle ;
 
-  ActiveCharacter().GetHandPosition(hand_x, hand_y);
+  Point2i handPos = ActiveCharacter().GetHandPosition();
 
   // Compute distance between hands and rope fixation point.
 
-  V.x = hand_x - m_fixation_x ;
-  V.y = hand_y - m_fixation_y ;
+  V.x = handPos.x - m_fixation_x;
+  V.y = handPos.y - m_fixation_y;
   angle = V.ComputeAngle();
   lg = (int)V.Norm();
 
@@ -238,8 +240,8 @@ bool NinjaRope::TryAddNode(int CurrentSense)
       // The rope has collided something...
       // Add a node on the rope and change the fixation point.
 
-      dx = hand_x - ActiveCharacter().GetX();
-      dy = hand_y - ActiveCharacter().GetY();
+      dx = handPos.x - ActiveCharacter().GetX();
+      dy = handPos.y - ActiveCharacter().GetY();
 
       ActiveCharacter().SetPhysFixationPointXY(cx / PIXEL_PER_METER,
 					       cy / PIXEL_PER_METER,
@@ -266,7 +268,7 @@ bool NinjaRope::TryBreakNode(int CurrentSense)
   int NodeSense ;
   double AngularSpeed ;
   bool BreakNode = false ;
-  int hand_x, hand_y, dx, dy ;
+  int dx, dy ;
 
   // Check if we can break a node.
 
@@ -312,9 +314,9 @@ bool NinjaRope::TryBreakNode(int CurrentSense)
       m_fixation_x = rope_node[last_node].x ;
       m_fixation_y = rope_node[last_node].y ;
 
-      ActiveCharacter().GetHandPosition(hand_x, hand_y);
-      dx = hand_x - ActiveCharacter().GetX();
-      dy = hand_y - ActiveCharacter().GetY();
+      Point2i handPos = ActiveCharacter().GetHandPosition();
+      dx = handPos.x - ActiveCharacter().GetX();
+      dy = handPos.y - ActiveCharacter().GetY();
 
       ActiveCharacter().SetPhysFixationPointXY(m_fixation_x / PIXEL_PER_METER,
 					       m_fixation_y / PIXEL_PER_METER,
@@ -484,7 +486,9 @@ void NinjaRope::Draw()
 
   // Draw the rope.
 
-  ActiveCharacter().GetHandPosition(x, y);
+  Point2i handPos = ActiveCharacter().GetHandPosition();
+  x = handPos.x;
+  y = handPos.y;
 
   quad.x1 = (int)round((double)x - 2 * cos(angle));
   quad.y1 = (int)round((double)y + 2 * sin(angle));

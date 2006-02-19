@@ -88,9 +88,9 @@ class ParticleEngine
  public:
   ParticleEngine();
   ParticleEngine(particle_t type, uint time=100);
-  void AddPeriodic(uint x, uint y, 
+  void AddPeriodic(const Point2i &position, 
 		   double angle=-1, double norme=-1);
-  void AddNow(uint x, uint y, 
+  void AddNow(const Point2i &position, 
 	      uint nb_particles, particle_t type, 
 	      double angle=-1, double norme=-1);
   void Refresh();

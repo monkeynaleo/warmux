@@ -43,11 +43,11 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 bool Teleportation::p_Shoot ()
 {
   // Vérifie qu'on se téléporte dans le vide !
-  dst = mouse.GetPosMonde();
-  dst.x -= ActiveCharacter().GetWidth()/2;
-  dst.y -= ActiveCharacter().GetHeight()/2;
-  if (ActiveCharacter().IsOutsideWorldXY(dst.x, dst.y)) return false;
-  if (!ActiveCharacter().IsInVacuumXY (dst.x, dst.y)) return false; 
+  dst = mouse.GetPosMonde() - ActiveCharacter().GetSize()/2;
+  if( ActiveCharacter().IsOutsideWorldXY(dst) )
+	 return false;
+  if( !ActiveCharacter().IsInVacuumXY(dst) )
+	 return false; 
 
   game_loop.interaction_enabled = false;
 
@@ -91,7 +91,7 @@ void Teleportation::Refresh()
     // Non, on fait le chemin retour en 
     // commençant par déplacer le ver
     retour = true;
-    ActiveCharacter().SetXY (dst.x, dst.y);
+    ActiveCharacter().SetXY(dst);
     temps = global_time.Read();
     dt = 0.0;
     return;

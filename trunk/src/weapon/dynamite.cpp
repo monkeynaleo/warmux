@@ -144,7 +144,7 @@ bool Dynamite::p_Shoot ()
   PosXY (x,y);
   baton.Reset ();
   // baton.PrepareTir();
-  baton.SetXY (x, y);
+  baton.SetXY( Point2i(x, y) );
   lst_objets.AjouteObjet (&baton, true);
 
   // Ajoute la vitesse actuelle du ver

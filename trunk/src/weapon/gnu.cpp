@@ -67,9 +67,7 @@ void Gnu::Tire (double force)
   m_alive = ALIVE;
 
   // Set the initial position.
-  int x,y;
-  ActiveCharacter().GetHandPosition(x, y);
-  SetXY (x,y);
+  SetXY( ActiveCharacter().GetHandPosition() );
 
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();

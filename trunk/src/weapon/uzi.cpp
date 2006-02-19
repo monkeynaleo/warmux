@@ -102,23 +102,24 @@ bool Uzi::p_Shoot()
   // Calculate movement of the bullet
   
   // Set the initial position.
-  int x,y;
-  ActiveCharacter().GetHandPosition(x, y);
+  int x = ActiveCharacter().GetHandPosition().x;
+  int y = ActiveCharacter().GetHandPosition().y;
+   
 
   // Equation of movement : y = ax + b
-  double angle,a,b ;
+  double angle, a, b;
   angle = ActiveTeam().crosshair.GetAngleRad();
   a=sin(angle)/cos(angle);
   b= y-(a*x) ;
 
   // Move the bullet !!
   //balle.PrepareTir();  
-  projectile->SetXY (x,y);
+  projectile->SetXY( Point2i(x, y) );
 
   while (projectile->is_active) {
     y = int(double((a*x) + b)) ;
 
-    projectile->SetXY(x,y);
+    projectile->SetXY( Point2i(x, y) );
 
     // the bullet in gone outside the map
     if (projectile->IsGhost()) {
@@ -127,8 +128,7 @@ bool Uzi::p_Shoot()
     }
     
     // is there a collision ??
-    if (projectile->CollisionTest(0,0)) 
-    {
+    if(projectile->CollisionTest( 0, 0 ) ){
       projectile->is_active=false;
 
       // Si la balle a touché un ver, lui inflige des dégats
@@ -147,8 +147,7 @@ bool Uzi::p_Shoot()
       // Creuse le world
       if (!obj)
       {
-	world.Creuse (projectile->GetX() - projectile->impact.GetWidth()/2,
-		      projectile->GetY() - projectile->impact.GetHeight()/2,
+	world.Creuse(projectile->GetPos() - projectile->impact.GetSize()/2,
 		      projectile->impact);
       }
       return true;

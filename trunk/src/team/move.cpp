@@ -20,16 +20,14 @@
  *****************************************************************************/
 
 #include "move.h"
-//-----------------------------------------------------------------------------
 #include <math.h>
-#include "../include/action_handler.h"
+#include "teams_list.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
+#include "../include/action_handler.h"
 #include "../map/map.h"
 #include "../map/camera.h"
 #include "../sound/jukebox.h"
-#include "teams_list.h"
-//-----------------------------------------------------------------------------
 
 #ifdef DEBUG
 #  define DEBUG_FANTOME
@@ -45,16 +43,14 @@
 // Pause entre deux deplacement
 #define PAUSE_CHG_SENS 80 // ms
 
-//-----------------------------------------------------------------------------
-
 // Calcule la hauteur a chuter ou grimper lors d'un déplacement horizontal
 // Renvoie true si le mouvement est possible
 bool CalculeHauteurBouge (Character &character, int &hauteur)
 {
   int y_floor=character.GetY();
 
-  if( character.IsInVacuum(character.GetDirection(), 0)
-  && !character.IsInVacuum(character.GetDirection(), +1))
+  if( character.IsInVacuum( Point2i(character.GetDirection(), 0))
+  && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) )
   {
     //Land is flat, we can move!
     hauteur = 0;
@@ -62,12 +58,12 @@ bool CalculeHauteurBouge (Character &character, int &hauteur)
   }
 
   //Compute height of the step:
-  if( character.IsInVacuum(character.GetDirection(), 0) )
+  if( character.IsInVacuum( Point2i(character.GetDirection(), 0)) )
   {
     //Try to go down:
     for(hauteur = 2; hauteur <= HAUTEUR_CHUTE_MAX ; hauteur++)
     {
-      if( !character.IsInVacuum(character.GetDirection(), hauteur)
+      if( !character.IsInVacuum(Point2i(character.GetDirection(), hauteur))
       ||  character.FootsOnFloor(y_floor+hauteur))
       {
         hauteur--;
@@ -85,7 +81,7 @@ bool CalculeHauteurBouge (Character &character, int &hauteur)
     //Try to go up:
     for(hauteur = -1; hauteur >= -HAUTEUR_GRIMPE_MAX ; hauteur--)
     {
-      if( character.IsInVacuum(character.GetDirection(), hauteur) )
+      if( character.IsInVacuum( Point2i(character.GetDirection(), hauteur) ) )
       {
         return true;
       }
@@ -95,8 +91,6 @@ bool CalculeHauteurBouge (Character &character, int &hauteur)
   return false;
 }
 
-//-----------------------------------------------------------------------------
-
 // Bouge un character characters la droite ou la gauche (selon le signe de direction)
 void MoveCharacter (Character &character) 
 {
@@ -105,9 +99,9 @@ void MoveCharacter (Character &character)
 
   // On est bien dans le monde ? (sinon, pas besoin de tester !)
   if (character.GetDirection() == -1)
-    fantome = character.IsOutsideWorld (-1, 0);
+    fantome = character.IsOutsideWorld ( Point2i(-1, 0) );
   else
-    fantome = character.IsOutsideWorld (1, 0);
+    fantome = character.IsOutsideWorld ( Point2i(1, 0) );
   if (fantome) 
   {
 #ifdef DEBUG_FANTOME
@@ -126,8 +120,8 @@ void MoveCharacter (Character &character)
     game_loop.character_already_chosen = true;
     // Deplace enfin le character
 
-    character.SetXY (character.GetX() +character.GetDirection(),
-		character.GetY() +hauteur);
+    character.SetXY( Point2i(character.GetX() +character.GetDirection(),
+		character.GetY() +hauteur) );
 
     // Gravite (s'il n'y a pas eu de collision
     character.UpdatePosition();
@@ -141,8 +135,6 @@ void MoveCharacter (Character &character)
 //    character.UpdatePosition();
 
 }
-//-----------------------------------------------------------------------------
-
 // Move a character to the left
 void MoveCharacterLeft (Character &character) 
 {
@@ -162,8 +154,6 @@ void MoveCharacterLeft (Character &character)
   }
 }
 
-//-----------------------------------------------------------------------------
-
 // Move a character to the right
 void MoveCharacterRight (Character &character) 
 { 
@@ -182,4 +172,3 @@ void MoveCharacterRight (Character &character)
   }
 }
 
-//-----------------------------------------------------------------------------
