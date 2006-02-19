@@ -202,7 +202,7 @@ void AirAttack::Refresh()
       instance = new Obus(game_loop, *this);
       instance -> m_name = ss.str();
       instance -> Reset();
-      instance -> SetXY (x, avion.obus_dy);
+      instance -> SetXY( Point2i(x, avion.obus_dy) );
 
       DoubleVector speed_vector ;
 

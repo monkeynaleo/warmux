@@ -85,6 +85,10 @@ void Physics::SetPhysXY(double x, double y)
   m_pos_y.x0 = y;
 }
 
+void Physics::SetPhysXY(const Point2d &position){
+	SetPhysXY(position.x, position.y);
+}
+
 double Physics::GetPhysX() const 
 {
   return m_pos_x.x0; 
@@ -93,6 +97,10 @@ double Physics::GetPhysX() const
 double Physics::GetPhysY() const 
 { 
   return m_pos_y.x0; 
+}
+
+Point2d Physics::GetPos() const{
+	return Point2d( m_pos_x.x0, m_pos_y.x0);
 }
 
 void Physics::SetPhysSize (double width, double height)

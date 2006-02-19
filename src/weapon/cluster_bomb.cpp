@@ -52,7 +52,7 @@ void Cluster::Shoot (int x, int y)
   camera.ChangeObjSuivi(this, true, false);
   is_active = true;
 
-  SetXY(x,y);
+  SetXY( Point2i(x, y) );
 }
 
 void Cluster::Refresh()

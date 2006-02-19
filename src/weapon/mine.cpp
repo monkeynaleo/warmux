@@ -108,12 +108,12 @@ void ObjMine::Reset()
     x = RandomLong(0, world.GetWidth() - GetWidth());
     y = RandomLong(0, world.GetHeight() - GetHeight());
     
-    SetXY (x, y);
+    SetXY( Point2i(x, y) );
     DirectFall ();
 #ifdef DBG_PLACEMENT
     COUT_PLACEMENT << "SetXY (" << x << "," << y << ")" << std::endl;
 #endif
-    ok &= !IsGhost() && IsInVacuum(0,0);
+    ok &= !IsGhost() && IsInVacuum( Point2i(0,0) );
     if (!ok) continue;
 
     FOR_ALL_LIVING_CHARACTERS(equipe, ver)
@@ -127,7 +127,7 @@ void ObjMine::Reset()
 	ok = false; 
       }
     }
-    ok &= !IsGhost() && !IsInWater() && IsInVacuum(0,0);
+    ok &= !IsGhost() && !IsInWater() && IsInVacuum( Point2i(0,0) );
   } while (!ok);
 #ifdef DBG_PLACEMENT
   COUT_PLACEMENT << "Placé." << std::endl;
@@ -310,7 +310,7 @@ bool Mine::p_Shoot()
 void Mine::Add (int x, int y)
 {
   ObjMine *obj = new ObjMine(game_loop, *this);
-  obj -> SetXY (x, y);
+  obj -> SetXY ( Point2i(x, y) );
 
   DoubleVector speed_vector ;
   ActiveCharacter().GetSpeedXY(speed_vector);

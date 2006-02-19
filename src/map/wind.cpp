@@ -62,7 +62,7 @@ void WindParticle::Init()
     sprite->cache.EnableLastFrameCache();
   sprite->SetCurrentFrame ( RandomLong(0, sprite->GetFrameCount()-1));
    
-  SetXY(RandomLong(0, world.GetWidth()-1), RandomLong(0, world.GetHeight()-1));
+  SetXY( Point2i(RandomLong(0, world.GetWidth()-1), RandomLong(0, world.GetHeight()-1)) );
 
   //Mass = mass_mean + or - 25%
   mass = TerrainActif().wind.particle_mass;
@@ -105,7 +105,7 @@ void WindParticle::Refresh()
       y = -GetHeight()+1;
     }
     Ready();
-    SetXY(x, y);
+    SetXY( Point2i(x, y) );
   }
 }
 

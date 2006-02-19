@@ -152,8 +152,7 @@ void Gun::Refresh()
 	  // Creuse le monde
 	  if (!obj)
 	    {
-	       world.Creuse (projectile->GetX() - projectile->impact.GetWidth()/2,
-			    projectile->GetY() - projectile->impact.GetHeight()/2,
+	       world.Creuse (projectile->GetPos() - projectile->impact.GetSize()/2,
 			    projectile->impact);
 	    }
 	}

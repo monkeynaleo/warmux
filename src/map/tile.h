@@ -37,7 +37,7 @@ public:
   ~Tile ();
 
   // Dig a hole
-  void Dig (int ox, int oy, Surface& provider);
+  void Dig(const Point2i &position, Surface& provider);
    
   // Load an image
   void LoadImage (Surface& ground_surface);

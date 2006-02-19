@@ -126,10 +126,10 @@ void Map::SwitchDrawingCacheParticles()
   to_redraw_particles->clear();
 }
 
-void Map::Creuse (uint x, uint y, Surface& surface)
+void Map::Creuse(Point2i position, Surface& surface)
 {
-   ground.Dig (x, y, surface);
-   to_redraw->push_back(Rectanglei(x, y, surface.GetWidth(), surface.GetHeight()));
+   ground.Dig (position, surface);
+   to_redraw->push_back(Rectanglei(position, surface.GetSize()));
 }
 
 void Map::DrawSky()

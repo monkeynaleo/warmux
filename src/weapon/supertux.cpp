@@ -64,7 +64,7 @@ void SuperTux::Refresh()
       last_move = global_time.Read();
   }
 
-  particle_engine.AddPeriodic(GetX(),GetY(),angle, 0);
+  particle_engine.AddPeriodic(GetPos(), angle, 0);
 }
 
 

@@ -66,7 +66,7 @@ void HollyGrenade::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  smoke_engine.AddPeriodic(GetX(),GetY());
+  smoke_engine.AddPeriodic( GetPos() );
   
   double tmp = global_time.Read() - begin_time;
   // Sing Alleluia ;-)

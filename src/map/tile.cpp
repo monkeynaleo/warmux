@@ -42,7 +42,7 @@ public:
    
   bool IsEmpty ();
   virtual unsigned char GetAlpha (const int x,const int y) = 0;
-  virtual void Dig (int ox, int oy, Surface& dig) = 0;
+  virtual void Dig(const Point2i &position, Surface& dig) = 0;
   virtual Surface GetSurface () = 0;
   virtual void SyncBuffer () = 0; // (if needed)
   virtual void Draw (const int x,const int y);
@@ -55,7 +55,7 @@ public:
   ~TileItem_Empty () {};
    
   unsigned char GetAlpha (const int x,const int y) {return 0;};
-  void Dig (int ox, int oy, Surface& dig) {};
+  void Dig(const Point2i &position, Surface& dig) {};
   Surface GetSurface() {return *new Surface();};
   void SyncBuffer() {};
   void Draw(const int x,const int y) {};
@@ -70,7 +70,7 @@ public:
     
   unsigned char GetAlpha (const int x, const int y);
   Surface GetSurface();
-  void Dig(int ox, int oy, Surface& dig);
+  void Dig(const Point2i &position, Surface& dig);
   void SyncBuffer();
      
 private:
@@ -92,7 +92,7 @@ public:
     
   unsigned char GetAlpha (const int x, const int y);
   Surface GetSurface();
-  void Dig (int ox, int oy, Surface& dig);
+  void Dig(const Point2i &position, Surface& dig);
   void SyncBuffer ();
    
 private:
@@ -110,7 +110,7 @@ public:
     
   unsigned char GetAlpha (const int x, const int y);
   Surface GetSurface ();
-  void Dig(int ox, int oy, Surface& dig);
+  void Dig(const Point2i &position, Surface& dig);
   void SyncBuffer();
  
 private:
@@ -194,15 +194,15 @@ unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const int x, const int y
    return a;
 }
 
-void TileItem_AlphaSoftware::Dig( int ox, int oy, Surface& dig){
-   int starting_x = ox >= 0 ? ox : 0;   
-   int starting_y = oy >= 0 ? oy : 0; 
-   int ending_x = ox+dig.GetWidth() <= m_surface.GetWidth() ? ox+dig.GetWidth() : m_surface.GetWidth();
-   int ending_y = oy+dig.GetHeight() <= m_surface.GetHeight() ? oy+dig.GetHeight() : m_surface.GetHeight();
+void TileItem_AlphaSoftware::Dig(const Point2i &position, Surface& dig){
+   int starting_x = position.x >= 0 ? position.x : 0;   
+   int starting_y = position.y >= 0 ? position.y : 0; 
+   int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
+   int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
    
    for( int py = starting_y ; py < ending_y ; py++) 
      for( int px = starting_x ; px < ending_x ; px++)
-       if ( *(dig.GetPixels() + (py-oy)*dig.GetPitch() + (px-ox) * 4 + 3) != 0)
+       if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
          *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
 }
 
@@ -244,17 +244,17 @@ unsigned char TileItem_AlphaHardware::GetAlpha(const int x,const int y){
    return *(m_buffer + y * m_width + x);
 }
 
-void TileItem_AlphaHardware::Dig( int ox, int oy, Surface& dig){
-   int starting_x = ox >= 0 ? ox : 0;   
-   int starting_y = oy >= 0 ? oy : 0; 
-   int ending_x = ox+dig.GetWidth() <= m_surface.GetWidth() ? ox+dig.GetWidth() : m_surface.GetWidth();
-   int ending_y = oy+dig.GetHeight() <= m_surface.GetHeight() ? oy+dig.GetHeight() : m_surface.GetHeight();
+void TileItem_AlphaHardware::Dig(const Point2i &position, Surface& dig){
+   int starting_x = position.x >= 0 ? position.x : 0;   
+   int starting_y = position.y >= 0 ? position.y : 0; 
+   int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
+   int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
    
    m_surface.Lock();
    
    for( int py = starting_y ; py < ending_y ; py++) 
      for( int px = starting_x ; px < ending_x ; px++)
-       if ( *(dig.GetPixels() + (py-oy)*dig.GetPitch() + (px-ox) * 4 + 3) != 0){
+       if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0){
         *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
         m_buffer[py*m_width+px] = 0;
      }
@@ -309,17 +309,17 @@ unsigned char TileItem_ColorkeySoftware::GetAlpha(const int x,const int y){
    return m_buffer[ y * m_width + x];
 }
 
-void TileItem_ColorkeySoftware::Dig( int ox, int oy, Surface& dig){
-   int starting_x = ox >= 0 ? ox : 0;   
-   int starting_y = oy >= 0 ? oy : 0; 
-   int ending_x = ox+dig.GetWidth() <= m_surface.GetWidth() ? ox+dig.GetWidth() : m_surface.GetWidth();
-   int ending_y = oy+dig.GetHeight() <= m_surface.GetHeight() ? oy+dig.GetHeight() : m_surface.GetHeight();
+void TileItem_ColorkeySoftware::Dig(const Point2i &position, Surface& dig){
+   int starting_x = position.x >= 0 ? position.x : 0;   
+   int starting_y = position.y >= 0 ? position.y : 0; 
+   int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
+   int ending_y = position.y+dig.GetHeight() <= m_surface.GetHeight() ? position.y+dig.GetHeight() : m_surface.GetHeight();
 
    Uint32 transparent_color = m_surface.MapRGBA(0, 0, 0, 0);
 
    for( int py = starting_y ; py < ending_y ; py++) 
      for( int px = starting_x ; px < ending_x ; px++)
-       if ( *(dig.GetPixels() + (py-oy)*dig.GetPitch() + (px-ox) * 4 + 3) != 0){ 
+       if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0){ 
          *(Uint32 *)(m_surface.GetPixels()+py*m_surface.GetPitch()+px*4) = transparent_color;
          m_buffer[py*m_width+px] = 0;
        }
@@ -372,20 +372,20 @@ int clamp (const int val, const int min, const int max){
    return ( val > max ) ? max : ( val < min ) ? min : val ;
 }
 
-void Tile::Dig (int ox, int oy, Surface& dig){  
-   Rectanglei rect = Rectanglei( ox, oy, dig.GetWidth(), dig.GetHeight()); 
+void Tile::Dig(const Point2i &position, Surface& dig){  
+   Rectanglei rect = Rectanglei( position.x, position.y, dig.GetWidth(), dig.GetHeight()); 
 
-   int first_cell_x = clamp( ox/cell_width,          0, nbr_cell_width-1);
-   int first_cell_y = clamp( oy/cell_height,          0, nbr_cell_height-1);
-   int last_cell_x  = clamp( (ox+dig.GetWidth())/cell_width, 0, nbr_cell_width-1);
-   int last_cell_y  = clamp( (oy+dig.GetHeight())/cell_height, 0, nbr_cell_height-1);
+   int first_cell_x = clamp( position.x/cell_width,          0, nbr_cell_width-1);
+   int first_cell_y = clamp( position.y/cell_height,          0, nbr_cell_height-1);
+   int last_cell_x  = clamp( (position.x+dig.GetWidth())/cell_width, 0, nbr_cell_width-1);
+   int last_cell_y  = clamp( (position.y+dig.GetHeight())/cell_height, 0, nbr_cell_height-1);
    
    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
      for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++){
-	  int offset_x = ox - cx * cell_width;
-	  int offset_y = oy - cy * cell_height;
+	  int offset_x = position.x - cx * cell_width;
+	  int offset_y = position.y - cy * cell_height;
 	  
-	  item[cy*nbr_cell_width+cx]->Dig( offset_x, offset_y, dig);
+	  item[cy*nbr_cell_width+cx]->Dig( Point2i(offset_x, offset_y), dig);
      }
 }
 

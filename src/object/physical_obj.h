@@ -90,15 +90,17 @@ public:
   // Set/Get position
   void SetX (int x);
   void SetY (int y);
-  void SetXY (int x, int y);
+  void SetXY(const Point2i &position);
   int GetX() const;
   int GetY() const;
   const Point2i GetPos() const; 
      
   // Set/Get size
   void SetSize (uint width, uint height);
+  void SetSize(const Point2i &newSize);
   int GetWidth() const;
   int GetHeight() const;
+  Point2i GetSize() const;
 
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
@@ -128,18 +130,18 @@ public:
   bool NotifyMove(double old_x, double old_y, double new_x, double new_y,
 		  double &contact_x, double &contact_y, double &contact_angle);
 
-  bool IsInVacuumXY (int x, int y) const;
-  bool IsInVacuum (int dx, int dy) const; // relative to current position
-  bool FootsInVacuum () const;
-  bool FootsInVacuumXY (int x, int y) const;
+  bool IsInVacuumXY(const Point2i &position) const;
+  bool IsInVacuum(const Point2i &offset) const; // relative to current position
+  bool FootsInVacuum() const;
+  bool FootsInVacuumXY(const Point2i &position) const;
   
   bool FootsOnFloor(int y) const;
 
   bool IsInWater () const;
 
   // The object is outside of the world
-  bool IsOutsideWorldXY (int x, int y) const;
-  bool IsOutsideWorld (int dx, int dy) const;
+  bool IsOutsideWorldXY(Point2i position) const;
+  bool IsOutsideWorld (const Point2i &offset) const;
 
   // Refresh datas
   virtual void Refresh() = 0;
@@ -176,7 +178,7 @@ private:
   bool ContactPoint (int &x, int &y);
 
   // Collision test for point (x,y)
-  bool CollisionTest (int x, int y);
+  bool CollisionTest(const Point2i &position);
 
   void SignalRebound() ;
 };

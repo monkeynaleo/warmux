@@ -29,7 +29,7 @@
 
 #include "../include/base.h"
 #include "../tool/euler_vector.h"
-#include "../tool/vector2.h"
+#include "../tool/point.h"
 
 typedef enum
 {
@@ -57,15 +57,15 @@ protected:
   EulerVector m_pos_y;          // x0 = pos, x1 = speed, x2 = acc on the Y axys
   DoubleVector m_extern_force;  // External strength applyed to the object
   uint m_last_move;             // Time since last move
-  double m_phys_width, m_phys_height ;
+  double m_phys_width, m_phys_height;
 
   DoubleVector m_fix_point_gnd;   // Rope fixation point to the ground.
   DoubleVector m_fix_point_dxy;   // Rope delta to fixation point to the object
-  EulerVector m_rope_angle ;      // Rope angle.
-  EulerVector m_rope_length ;     // Rope length.
-  double m_rope_elasticity ;      // The smallest, the more elastic.
-  double m_elasticity_damping ;   // 0 means perpetual motion.
-  double m_balancing_damping ;    // 0 means perpetual balancing.
+  EulerVector m_rope_angle;       // Rope angle.
+  EulerVector m_rope_length;      // Rope length.
+  double m_rope_elasticity;       // The smallest, the more elastic.
+  double m_elasticity_damping;    // 0 means perpetual motion.
+  double m_balancing_damping;     // 0 means perpetual balancing.
 
   // Wind effect factor on the object. 0 means not affected.
   double m_wind_factor;
@@ -88,9 +88,11 @@ public:
 
   // Set/Get position
   void SetPhysXY (double x, double y);
+  void SetPhysXY(const Point2d &position);
 
   double GetPhysX() const;
   double GetPhysY() const;
+  Point2d GetPos() const;
 
   // Set size
   void SetPhysSize (double width, double height);

@@ -210,7 +210,7 @@ void ParticleEngine::Refresh()
   }
 }
 
-void ParticleEngine::AddPeriodic(uint x, uint y, 
+void ParticleEngine::AddPeriodic(const Point2i &position, 
 				 double angle, double norme)
 {
   // time spent since last refresh (in milliseconds)
@@ -220,22 +220,20 @@ void ParticleEngine::AddPeriodic(uint x, uint y,
   uint delta = uint(m_time_between_add * double(RandomLong(3,40))/10);
   if (time >= delta) {
     m_last_refresh = tmp;
-    AddNow(x, y, 1, type_particle, angle, norme);
+    AddNow(position, 1, type_particle, angle, norme);
   }
   
   Refresh();
 }
 
-void ParticleEngine::AddNow(uint x, uint y, 
+void ParticleEngine::AddNow(const Point2i &position,
 			    uint nb_particles, particle_t type, 
 			    double angle, double norme)
 {
-  Particle * particle = NULL;
-  double tmp_angle;
-  double tmp_norme;
+  Particle *particle = NULL;
+  double tmp_angle, tmp_norme;
 
   for (uint i=0 ; i < nb_particles ; i++) {
-
     switch (type) {
     case particle_SMOKE : particle = new Smoke(game_loop);
       break;
@@ -248,15 +246,18 @@ void ParticleEngine::AddNow(uint x, uint y,
     }
   
     if (particle != NULL) {
-      
-      if ( norme == -1 ) tmp_norme = double(RandomLong(0, 5000))/1000;
-      else tmp_norme = norme;
+      if( norme == -1 )
+		  tmp_norme = double(RandomLong(0, 5000))/1000;
+      else 
+		  tmp_norme = norme;
 
-      if ( angle == -1 ) tmp_angle = - double(RandomLong(0, 3000))/1000; 
-      else tmp_angle = angle;
+      if( angle == -1 )
+		  tmp_angle = - double(RandomLong(0, 3000))/1000;
+      else 
+		  tmp_angle = angle;
       
       particle->Init();
-      particle->SetXY(x,y);
+      particle->SetXY(position);
       particle->SetSpeed(tmp_norme, tmp_angle);
       particles.push_back(particle);
     }
