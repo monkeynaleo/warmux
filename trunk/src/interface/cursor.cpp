@@ -67,7 +67,7 @@ void CurseurVer::Draw()
   uint x = centre.x - image->GetWidth()/2;
   uint y = obj_designe->GetY() - image->GetHeight() - y_min;
   
-  image->Draw(x,y+dy);
+  image->Draw( Point2i(x, y+dy) );
 }
 
 void CurseurVer::Refresh()

@@ -102,7 +102,7 @@ void ObjMine::Reset()
       if (MeterDistance (GetCenter(), ver->GetCenter()) 
 	   < launcher.cfg().detection_range)
       { 
-	    MSG_DEBUG("mine", "Touche le ver %s", (*ver).m_name);
+	    MSG_DEBUG("mine", "Touche le ver %s", (*ver).m_name.c_str());
 	    ok = false; 
       }
     }
@@ -118,7 +118,7 @@ void ObjMine::Draw()
 { 
   if (!affiche) return;
 
-  detection->Draw(GetX(), GetY());
+  detection->Draw(GetPos());
 }
 
 void ObjMine::SignalFallEnding()

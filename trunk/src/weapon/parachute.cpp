@@ -68,8 +68,8 @@ void Parachute::Draw()
   if (open)
     {
       image->Update();
-      image->Draw(ActiveCharacter().GetX() - ActiveCharacter().GetWidth()/2,
-		 ActiveCharacter().GetY() - image->GetHeight());
+      image->Draw(ActiveCharacter().GetPos() - 
+			  Point2i(ActiveCharacter().GetWidth()/2,image->GetHeight()) );
     }
 }
 

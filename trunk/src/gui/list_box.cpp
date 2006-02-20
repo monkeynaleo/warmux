@@ -128,8 +128,8 @@ void ListBox::Draw(const Point2i &mousePosition){
 	   if( i + first_visible_item == uint(item) )
          app.video.window.BoxColor(rect, defaultListColor3);
      
-     global().small_font().WriteLeft( GetPositionX() + 5,
-			  GetPositionY() + i*height_item,
+     global().small_font().WriteLeft( 
+			  GetPosition() + Point2i(5, i*height_item),
 			  m_items[i + first_visible_item].label,
 			  white_color);
   }  

@@ -107,7 +107,7 @@ public:
   void Blit(Surface &dest, const Point2i &pos);
   void Blit(Surface &dest, const Rectanglei &srcRect, const Point2i &destPos);
   void Blit(Surface &dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
-  void Draw(int pos_x, int pos_y);
+  void Draw(const Point2i &pos);
 
 private:
    Surface current_surface;

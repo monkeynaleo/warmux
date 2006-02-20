@@ -72,42 +72,40 @@ bool Font::Load (const std::string& filename, int size) {
   return true;
 }
 
-void Font::Write(int x, int y, Surface &surface){
-  Rectanglei dstRect(x, y, surface.GetHeight(), surface.GetWidth());
-
-  app.video.window.Blit( surface, dstRect.GetPosition() );
+void Font::Write(const Point2i &pos, Surface &surface){
+  app.video.window.Blit(surface, pos);
 		  
   // TODO: Remove this line! (and use GameFont instead of Font)
-  world.ToRedrawOnScreen( dstRect );
+  world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
 }
 
-void Font::WriteLeft (int x, int y, const std::string &txt,  const Color &color){
-  Surface surface( Render(txt, color, true) );
-  Write(x, y, surface);
+void Font::WriteLeft(const Point2i &pos, const std::string &txt,  const Color &color){
+  Surface surface(Render(txt, color, true));
+  Write(pos, surface);
 }
 
-void Font::WriteLeftBottom (int x, int y, const std::string &txt,
+void Font::WriteLeftBottom(const Point2i &pos, const std::string &txt,
 			     const Color &color){ 
-  Surface surface( Render(txt, color, true) );
-  Write(x, y - surface.GetHeight(), surface);
+  Surface surface(Render(txt, color, true));
+  Write(pos - Point2i(0, surface.GetHeight()), surface);
 }
 
-void Font::WriteRight (int x, int y, const std::string &txt,
+void Font::WriteRight(const Point2i &pos, const std::string &txt,
 		        const Color &color){ 
-  Surface surface( Render(txt, color, true) );
-  Write(x - surface.GetWidth(), y, surface);
+  Surface surface(Render(txt, color, true));
+  Write(pos - Point2i(surface.GetWidth(), 0), surface);
 }
 
-void Font::WriteCenter (int x, int y, const std::string &txt,
+void Font::WriteCenter (const Point2i &pos, const std::string &txt,
 			 const Color &color){ 
-  Surface surface( Render(txt, color, true) );
-  Write( x - surface.GetWidth()/2, y - surface.GetHeight(), surface);
+  Surface surface(Render(txt, color, true));
+  Write(pos - Point2i(surface.GetWidth()/2, surface.GetHeight()), surface);
 }
 
-void Font::WriteCenterTop (int x, int y, const std::string &txt,
-			    const Color &color){
-  Surface surface( Render(txt, color, true) );
-  Write( x - surface.GetWidth() / 2, y, surface);
+void Font::WriteCenterTop(const Point2i &pos, const std::string &txt,
+		const Color &color){
+	Surface surface(Render(txt, color, true));
+	Write(pos - Point2i(surface.GetWidth()/2, 0), surface);
 }
 
 Surface Font::CreateSurface(const std::string &txt, const Color &color){
@@ -164,11 +162,9 @@ GameFont::GameFont(GameLoop &p_game_loop, int size) :
   game_loop(p_game_loop)
 {}
 
-void GameFont::Write(int x, int y, Surface &surface){
-  Rectanglei dstRect(x, y, surface.GetHeight(), surface.GetWidth());
-
-  app.video.window.Blit( surface, dstRect.GetPosition() );
-  world.ToRedrawOnScreen( dstRect );
+void GameFont::Write(const Point2i &pos, Surface &surface){
+  app.video.window.Blit(surface, pos);
+  world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
 }
 
 //-----------------------------------------------------------------------------

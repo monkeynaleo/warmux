@@ -481,7 +481,7 @@ void NinjaRope::Draw()
       float angle = sin( dt * M_PI_2 / SKIN_ROTATION_TIME ) * (-skin_angle - M_PI_2);
       skin->SetRotation_deg(angle * 180 / M_PI);
     }
-    skin->Draw(ActiveCharacter().GetX(),ActiveCharacter().GetY());
+    skin->Draw(ActiveCharacter().GetPos());
   }
 
   // Draw the rope.
@@ -511,11 +511,14 @@ void NinjaRope::Draw()
       while( (step*dx*step*dx)+(step*dy*step*dy) < size )
       {
         if(m_attaching)
-          m_node_sprite->Draw(quad.x1 + (int)((float) step * dx),
-                              quad.y1 - (int)((float) step * dy));
+          m_node_sprite->Draw(
+				  Point2i(
+				  quad.x1 + (int)((float) step * dx),
+				  quad.y1 - (int)((float) step * dy)) );
         else
-          m_node_sprite->Draw(quad.x4 + (int)((float) step * dx),
-                              quad.y4 + (int)((float) step * dy));
+          m_node_sprite->Draw( Point2i(
+					  quad.x4 + (int)((float) step * dx),
+                      quad.y4 + (int)((float) step * dy)) );
         step++;
       }
       quad.x1 = quad.x4 ;
@@ -528,8 +531,8 @@ void NinjaRope::Draw()
     }
 
   m_hook_sprite->SetRotation_deg(-prev_angle * 180.0 / M_PI);
-  m_hook_sprite->Draw(rope_node[0].x - m_hook_sprite->GetWidth()/2,
-		     rope_node[0].y - m_hook_sprite->GetHeight()/2);
+  m_hook_sprite->Draw( Point2i(rope_node[0].x, rope_node[0].y)
+		  - m_hook_sprite->GetSize()/2);
 }
 
 void NinjaRope::p_Deselect()

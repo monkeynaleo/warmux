@@ -323,9 +323,8 @@ void Character::Draw()
   if(!SetSkin("weapon-" + m_team->GetWeapon().GetID()))
     SetSkin("walking");
 
-  int x = GetX();
-  int y = GetY();
-  image->Draw(x,y);
+  Point2i pos = GetPos();
+  image->Draw(pos);
    
   // Draw animation
   if(anim.draw
@@ -335,7 +334,7 @@ void Character::Draw()
     int dx = 0;
     if(GetDirection()==-1)
       dx = image->GetWidth() - anim.image->GetWidth();
-    anim.image->Draw(x+dx,y);
+    anim.image->Draw(pos + Point2i(dx, 0));
   }
 
    // Draw energy bar
@@ -366,7 +365,9 @@ void Character::Draw()
     std::ostringstream ss;
     ss << lost_energy;
     dy -= HAUT_FONT_MIX;
-    global().small_font().WriteCenterTop (GetX() +GetWidth()/2-camera.GetX(), GetY()+dy-camera.GetY(), ss.str(), white_color);    
+    global().small_font().WriteCenterTop (
+			GetPos() - camera.GetPosition() + Point2i( GetWidth()/2, dy),
+		   	ss.str(), white_color);    
   }
 
 }
