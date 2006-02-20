@@ -55,12 +55,12 @@ private:
 protected:
   EulerVector m_pos_x;          // x0 = pos, x1 = speed, x2 = acc on the X axys
   EulerVector m_pos_y;          // x0 = pos, x1 = speed, x2 = acc on the Y axys
-  DoubleVector m_extern_force;  // External strength applyed to the object
+  Point2d m_extern_force;  // External strength applyed to the object
   uint m_last_move;             // Time since last move
   double m_phys_width, m_phys_height;
 
-  DoubleVector m_fix_point_gnd;   // Rope fixation point to the ground.
-  DoubleVector m_fix_point_dxy;   // Rope delta to fixation point to the object
+  Point2d m_fix_point_gnd;   // Rope fixation point to the ground.
+  Point2d m_fix_point_dxy;   // Rope delta to fixation point to the object
   EulerVector m_rope_angle;       // Rope angle.
   EulerVector m_rope_length;      // Rope length.
   double m_rope_elasticity;       // The smallest, the more elastic.
@@ -112,21 +112,21 @@ public:
 
   // Set initial speed.
   void SetSpeed (double norme, double angle);
-  void SetSpeedXY (DoubleVector vector);
+  void SetSpeedXY (Point2d vector);
 
   // Add a initial speed to the current speed.
   void AddSpeed (double norme, double angle);
-  void AddSpeedXY (DoubleVector vector);
+  void AddSpeedXY (Point2d vector);
  
   // Get current object speed
   void GetSpeed (double &norm, double &angle);
-  void GetSpeedXY (DoubleVector &vector);
+  void GetSpeedXY (Point2d &vector);
   double GetAngularSpeed();
   double GetSpeedAngle();
 
   // Add new strength
   void SetExternForce (double length, double angle);
-  void SetExternForceXY (DoubleVector vector);
+  void SetExternForceXY (Point2d vector);
 
   // Add / Remove a fixation point.
   void SetPhysFixationPointXY(double g_x, double g_y,

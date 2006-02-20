@@ -217,7 +217,7 @@ void ParticleEngine::AddPeriodic(const Point2i &position,
   uint time = global_time.Read() - m_last_refresh; 
   uint tmp = global_time.Read();
 
-  uint delta = uint(m_time_between_add * double(RandomLong(3,40))/10);
+  uint delta = uint(m_time_between_add * double(randomObj.GetLong(3,40))/10);
   if (time >= delta) {
     m_last_refresh = tmp;
     AddNow(position, 1, type_particle, angle, norme);
@@ -247,12 +247,12 @@ void ParticleEngine::AddNow(const Point2i &position,
   
     if (particle != NULL) {
       if( norme == -1 )
-		  tmp_norme = double(RandomLong(0, 5000))/1000;
+		  tmp_norme = double(randomObj.GetLong(0, 5000))/1000;
       else 
 		  tmp_norme = norme;
 
       if( angle == -1 )
-		  tmp_angle = - double(RandomLong(0, 3000))/1000;
+		  tmp_angle = - double(randomObj.GetLong(0, 3000))/1000;
       else 
 		  tmp_angle = angle;
       

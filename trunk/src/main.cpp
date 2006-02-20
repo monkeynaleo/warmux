@@ -107,7 +107,6 @@ void AppWormux::Init(int argc, char **argv){
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
 
-  InitRandom();
   action_handler.Init();
   config.Charge();
 

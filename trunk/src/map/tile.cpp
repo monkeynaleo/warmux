@@ -362,8 +362,8 @@ void Tile::InitTile (unsigned int width, unsigned int height){
   if ((height % cell_height) != 0)
     nbr_cell_height++;
 
-  this->width = width;
-  this->height = height;
+  size.x = width;
+  size.y = height;
 
   nbr_cell = nbr_cell_width * nbr_cell_height; 
 }

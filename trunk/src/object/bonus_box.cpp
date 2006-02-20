@@ -105,7 +105,7 @@ void BonusBox::SignalFallEnding()
 
 void BonusBox::ApplyBonus (Team &equipe, Character &ver){
   std::ostringstream txt;
-  uint bonus = RandomLong (1, nb_bonus);
+  uint bonus = randomObj.GetLong (1, nb_bonus);
   switch (bonus){
   case bonusTELEPORTATION: 
     txt << Format(ngettext(
@@ -189,7 +189,7 @@ void BonusBox::NewBonusBox(){
     }
 
     // Placement au hasard en X
-    int x = RandomLong(0, world.GetWidth() - GetWidth());
+    int x = randomObj.GetLong(0, world.GetWidth() - GetWidth());
     int y = -GetHeight()+1;
     SetXY( Point2i(x, y) );
 	MSG_DEBUG("bonus", "Test en %d, %d", x, y);
@@ -229,7 +229,7 @@ void BonusBox::NewBonusBox(){
   still_visible = true;
   parachute = true;
 
-  time = RandomLong(MIN_TIME_BETWEEN_CREATION, 
+  time = randomObj.GetLong(MIN_TIME_BETWEEN_CREATION, 
 			    MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
   time *= 1000;
   time += global_time.Read();

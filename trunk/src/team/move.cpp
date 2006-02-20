@@ -28,11 +28,7 @@
 #include "../map/map.h"
 #include "../map/camera.h"
 #include "../sound/jukebox.h"
-
-#ifdef DEBUG
-#  define DEBUG_FANTOME
-#  define COUT_DBG std::cout << "[Mouvement DG] "
-#endif
+#include "../tool/debug.h"
 
 // Hauteur qu'un character peut grimper au maximum
 #define HAUTEUR_GRIMPE_MAX 30
@@ -45,27 +41,22 @@
 
 // Calcule la hauteur a chuter ou grimper lors d'un déplacement horizontal
 // Renvoie true si le mouvement est possible
-bool CalculeHauteurBouge (Character &character, int &hauteur)
-{
+bool CalculeHauteurBouge (Character &character, int &hauteur){
   int y_floor=character.GetY();
 
   if( character.IsInVacuum( Point2i(character.GetDirection(), 0))
-  && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) )
-  {
+  && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) ){
     //Land is flat, we can move!
     hauteur = 0;
     return true;
   }
 
   //Compute height of the step:
-  if( character.IsInVacuum( Point2i(character.GetDirection(), 0)) )
-  {
+  if( character.IsInVacuum( Point2i(character.GetDirection(), 0)) ){
     //Try to go down:
-    for(hauteur = 2; hauteur <= HAUTEUR_CHUTE_MAX ; hauteur++)
-    {
+    for(hauteur = 2; hauteur <= HAUTEUR_CHUTE_MAX ; hauteur++){
       if( !character.IsInVacuum(Point2i(character.GetDirection(), hauteur))
-      ||  character.FootsOnFloor(y_floor+hauteur))
-      {
+      ||  character.FootsOnFloor(y_floor+hauteur)){
         hauteur--;
         return true;
       }
@@ -76,24 +67,18 @@ bool CalculeHauteurBouge (Character &character, int &hauteur)
     character.SetSkin("fall");
     return false;
   }
-  else
-  {
+  else{
     //Try to go up:
     for(hauteur = -1; hauteur >= -HAUTEUR_GRIMPE_MAX ; hauteur--)
-    {
       if( character.IsInVacuum( Point2i(character.GetDirection(), hauteur) ) )
-      {
         return true;
-      }
-    }
   }
   //We can't move!
   return false;
 }
 
 // Bouge un character characters la droite ou la gauche (selon le signe de direction)
-void MoveCharacter (Character &character) 
-{
+void MoveCharacter(Character &character){
   int hauteur;
   bool fantome;
 
@@ -102,11 +87,8 @@ void MoveCharacter (Character &character)
     fantome = character.IsOutsideWorld ( Point2i(-1, 0) );
   else
     fantome = character.IsOutsideWorld ( Point2i(1, 0) );
-  if (fantome) 
-  {
-#ifdef DEBUG_FANTOME
-    COUT_DBG << character.m_name << " devient un fantome." << std::endl;
-#endif
+  if (fantome){
+    MSG_DEBUG("ghost", "%s will be a ghost.", character.m_name.c_str());
     character.Ghost();
     return;
   }
@@ -129,45 +111,36 @@ void MoveCharacter (Character &character)
     // Passe a l'image suivante
     character.FrameImageSuivante();
 
-  }
-  while(character.CanStillMoveDG(PAUSE_BOUGE) && CalculeHauteurBouge (character, hauteur));
+  }while(character.CanStillMoveDG(PAUSE_BOUGE) && CalculeHauteurBouge (character, hauteur));
 
 //    character.UpdatePosition();
 
 }
 // Move a character to the left
-void MoveCharacterLeft (Character &character) 
-{
+void MoveCharacterLeft(Character &character){
   // Le character est pret a bouger ?
   if (!character.MouvementDG_Autorise()) return;
 
   bool bouge = (character.GetDirection() == -1);
   if (bouge) 
-//    MoveCharacter (character); 
     action_handler.NewAction(Action(ACTION_WALK));
-
-  else
-  {
-//    character.SetDirection(-1);
+  else{
     action_handler.NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 }
 
 // Move a character to the right
-void MoveCharacterRight (Character &character) 
-{ 
+void MoveCharacterRight (Character &character){ 
   // Le character est pret a bouger ?
   if (!character.MouvementDG_Autorise()) return;
 
   bool bouge = (character.GetDirection() == 1);
   if (bouge) 
-//    MoveCharacter (character);
     action_handler.NewAction(Action(ACTION_WALK));
   else
   {
     action_handler.NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
-//    character.SetDirection(1);
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 }

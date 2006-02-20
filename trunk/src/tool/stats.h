@@ -19,12 +19,11 @@
  * Statistics. 
  *****************************************************************************/
 
-#ifndef STATISTICS_H
-#define STATISTICS_H
-//-----------------------------------------------------------------------------
+#ifndef STATS_H
+#define STATS_H
+
 #include "../include/base.h"
 #include <string>
-//-----------------------------------------------------------------------------
 
 #ifdef DEBUG
 #  define ENABLE_STATS
@@ -40,5 +39,4 @@ void SaveStatToXML(const std::string &filename);
 #define SaveStatToXML()
 #endif
 
-//-----------------------------------------------------------------------------
 #endif

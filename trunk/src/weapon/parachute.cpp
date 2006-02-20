@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "parachute.h"
-//-----------------------------------------------------------------------------
 #include "weapon_tools.h"
 #include "../game/game.h"
 #include "../game/game_mode.h"
@@ -30,8 +29,6 @@
 #include "../sound/jukebox.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-
-//-----------------------------------------------------------------------------
 
 Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new WeaponConfig(), NEVER_VISIBLE)
 {
@@ -44,8 +41,6 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new WeaponConfig(
   image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
 }
 
-//-----------------------------------------------------------------------------
-
 void Parachute::p_Select()
 {
   m_is_active = true ;
@@ -55,16 +50,12 @@ void Parachute::p_Select()
   image->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
 }
 
-//-----------------------------------------------------------------------------
-
 void Parachute::p_Deselect()
 {
   ActiveCharacter().SetAirResistFactor(game_mode.character.air_resist_factor);
   ActiveCharacter().SetWindFactor(0);
   m_is_active = false;
 }
-
-//-----------------------------------------------------------------------------
 
 bool Parachute::p_Shoot()
 {
@@ -82,11 +73,9 @@ void Parachute::Draw()
     }
 }
 
-//-----------------------------------------------------------------------------
-
 void Parachute::Refresh()
 {
-  DoubleVector speed ;
+  Point2d speed;
 
   ActiveCharacter().GetSpeedXY(speed);
 
@@ -132,11 +121,8 @@ void Parachute::Refresh()
     }
 }
 
-//-----------------------------------------------------------------------------
-
 void Parachute::SignalTurnEnd()
 {
   p_Deselect();
 }
 
-//-----------------------------------------------------------------------------

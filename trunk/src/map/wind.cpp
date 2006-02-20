@@ -60,17 +60,17 @@ void WindParticle::Init()
   sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
   if(sprite->GetFrameCount()==1)
     sprite->cache.EnableLastFrameCache();
-  sprite->SetCurrentFrame ( RandomLong(0, sprite->GetFrameCount()-1));
+  sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
    
-  SetXY( Point2i(RandomLong(0, world.GetWidth()-1), RandomLong(0, world.GetHeight()-1)) );
+  SetXY( randomObj.GetPoint(world.GetSize()) );
 
   //Mass = mass_mean + or - 25%
   mass = TerrainActif().wind.particle_mass;
-  mass *= (1.0 + RandomLong(-100, 100)/400.0);
+  mass *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
   SetMass (mass);
   SetSize( sprite->GetSize() );
   wind_factor = TerrainActif().wind.particle_wind_factor ;
-  wind_factor *= (1.0 + RandomLong(-100, 100)/400.0);  
+  wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);  
   SetWindFactor(wind_factor);
   StartMoving();
 
@@ -101,7 +101,7 @@ void WindParticle::Refresh()
       else
         x = -GetWidth()+1;
     } else {
-      x = RandomLong(0, world.GetWidth()-1);
+      x = randomObj.GetLong(0, world.GetWidth()-1);
       y = -GetHeight()+1;
     }
     Ready();
@@ -112,7 +112,7 @@ void WindParticle::Refresh()
 void WindParticle::Draw()
 {
   if(TerrainActif().wind.need_flip){
-    DoubleVector speed;
+    Point2d speed;
     GetSpeedXY(speed);
     float scale_x, scale_y;
     sprite->GetScaleFactors( scale_x, scale_y);
@@ -169,7 +169,7 @@ double Wind::GetStrength() const{
 }
 
 void Wind::ChooseRandomVal(){
-  int val = RandomLong(-100, 100);
+  int val = randomObj.GetLong(-100, 100);
   action_handler.NewAction (ActionInt(ACTION_WIND, val));
 }
 
