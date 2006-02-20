@@ -30,13 +30,13 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
-class ClusterLauncher;
+class ClusterBombConfig;
 
 // Les fragments
 class Cluster : public WeaponProjectile
 {
 public:
-  Cluster(GameLoop &game_loop, WeaponLauncher * launcher);
+  Cluster(GameLoop &game_loop, ClusterBombConfig& cfg);
   void Refresh();
   void Shoot(int n_x, int n_y);
 protected:
@@ -50,7 +50,7 @@ public:
   std::list<Cluster> tableau_cluster;
   typedef std::list<Cluster>::iterator iterator;
 
-  ClusterBomb(GameLoop &game_loop, WeaponLauncher * launcher);
+  ClusterBomb(GameLoop &game_loop, ClusterBombConfig& cfg);
   void Refresh();
   void Explosion();
 protected:
@@ -70,6 +70,9 @@ class ClusterLauncher : public WeaponLauncher
 {
  public:
   ClusterLauncher();
+
+ private:
+  ClusterBombConfig& ClusterLauncher::cfg() ;
 };
 
 #endif

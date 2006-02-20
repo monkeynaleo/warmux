@@ -41,8 +41,8 @@
 #define COUT_DBG std::cout << "[ClusterBomb] "
 #endif
 
-Cluster::Cluster(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
-  WeaponProjectile (p_game_loop, "cluster", p_launcher)
+Cluster::Cluster(GameLoop &p_game_loop, ClusterBombConfig& cfg) :
+  WeaponProjectile (p_game_loop, "cluster", cfg)
 {
 }
 
@@ -73,24 +73,24 @@ void Cluster::SignalCollision()
     game_messages.Add (_("The rocket left the battlefield..."));
     return;
   }
-  AppliqueExplosion (GetPos(), GetPos(), impact, launcher->cfg(), NULL);
+  AppliqueExplosion (GetPos(), GetPos(), impact, cfg, NULL);
 }
 
 //-----------------------------------------------------------------------------
 
-ClusterBomb::ClusterBomb(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
-  WeaponProjectile (p_game_loop, "cluster_bomb", p_launcher)
+ClusterBomb::ClusterBomb(GameLoop &p_game_loop, ClusterBombConfig& cfg) :
+  WeaponProjectile (p_game_loop, "cluster_bomb", cfg)
 {
   m_rebound_sound = "weapon/grenade_bounce";
   touche_ver_objet = false;
   m_rebounding = true;
-  m_rebound_factor = p_launcher->cfg().rebound_factor;
+  m_rebound_factor = cfg.rebound_factor;
 
   tableau_cluster.clear();
-  const uint nb = static_cast<ClusterBombConfig&>(p_launcher->cfg()).nbr_fragments;
+  const uint nb = cfg.nbr_fragments;
   for (uint i=0; i<nb; ++i)
   {
-    Cluster cluster(game_loop, p_launcher);
+    Cluster cluster(game_loop, cfg);
     tableau_cluster.push_back( cluster );
   }
 }
@@ -129,8 +129,8 @@ void ClusterBomb::Explosion()
       Cluster &cluster = *it;
       
       double angle = (double)RandomLong ((long)0.0, (long)(2.0 * M_PI));
-      x = GetX()+(int)(cos(angle) * (double)launcher->cfg().blast_range*5);
-      y = GetY()+(int)(sin(angle) * (double)launcher->cfg().blast_range*5);
+      x = GetX()+(int)(cos(angle) * (double)cfg.blast_range*5);
+      y = GetY()+(int)(sin(angle) * (double)cfg.blast_range*5);
 
       cluster.Shoot(x,y);
       cluster.SetSpeedXY(speed_vector);
@@ -146,8 +146,11 @@ ClusterLauncher::ClusterLauncher() :
 {  
   m_name = _("ClusterBomb");  
   
-  projectile = new ClusterBomb(game_loop, this);
+  projectile = new ClusterBomb(game_loop, cfg());
 }
+
+ClusterBombConfig& ClusterLauncher::cfg() 
+{ return static_cast<ClusterBombConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------
 

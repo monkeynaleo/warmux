@@ -33,9 +33,11 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
-  WeaponProjectile (p_game_loop, "roquette", p_launcher)
-{
+RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile (p_game_loop, "roquette", cfg)
+{  
+  m_rebounding = false;
+  touche_ver_objet = true;
 }
 
 void RoquetteBazooka::Refresh()
@@ -61,7 +63,7 @@ Bazooka::Bazooka() :
   WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
 {  
   m_name = _("Bazooka");
-  projectile = new RoquetteBazooka(game_loop, this);
+  projectile = new RoquetteBazooka(game_loop, cfg());
 }
 
 

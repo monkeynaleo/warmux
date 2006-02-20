@@ -26,17 +26,17 @@
 #include "launcher.h"
 #include "../include/base.h"
 
-class BalleUzi : public WeaponProjectile
+class UziBullet : public WeaponBullet
 {
 public:
-  BalleUzi(GameLoop &game_loop, WeaponLauncher * launcher);
-  void SignalCollision();
+  UziBullet(GameLoop &game_loop, ExplosiveWeaponConfig& cfg); 
+private:
+  void ShootSound();
 };
 
 class Uzi : public WeaponLauncher
 {
  private:
-  void p_Deselect();
   bool p_Shoot();
   void RepeatShoot(); 
 

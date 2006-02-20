@@ -133,7 +133,7 @@
   <surface name="gnulauncher_ico" file="weapon/gnu/gnu_ico.png" />
  
   <surface name="gnulauncher" file="weapon/gnu/gnulauncher.png" />
-  <surface name="gnulauncher_impact" file="weapon/share/larger_impact.png" />
+  <surface name="gnu_impact" file="weapon/share/larger_impact.png" />
 
   <sprite name="gnu">
     <image file="weapon/gnu/gnu.png">

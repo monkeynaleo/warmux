@@ -48,8 +48,8 @@ const uint TPS_AV_ATTIRANCE = 1;
 //-----------------------------------------------------------------------------
 
 RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop, 
-					 WeaponLauncher * p_launcher) :
-  WeaponProjectile(p_game_loop, "roquette", p_launcher)
+					 ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile(p_game_loop, "roquette", cfg)
 {
   m_attire = false;
 }
@@ -118,7 +118,7 @@ AutomaticBazooka::AutomaticBazooka() :
   m_is_active = false;
   cible.choisie = false;
 
-  projectile = new RoquetteTeteCherche(game_loop, this);
+  projectile = new RoquetteTeteCherche(game_loop, cfg());
 
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
 }

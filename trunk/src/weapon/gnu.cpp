@@ -43,50 +43,23 @@
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Gnu::Gnu(GameLoop &p_game_loop, GnuLauncher& p_launcher) : 
-  PhysicalObj (p_game_loop, "Gnu!"),
-  launcher(p_launcher)
+Gnu::Gnu(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) : 
+  WeaponProjectile(p_game_loop, "gnu", cfg)
 {
-  m_allow_negative_y = true;  
-
-  image = resource_manager.LoadSprite( weapons_res_profile, "gnu"); 
-  SetSize(image->GetSize());
-  SetMass(launcher.cfg().mass);
-  SetTestRect ( image->GetWidth()/2-1,
-                image->GetWidth()/2-1,
-                image->GetHeight()/2-1,
-                image->GetHeight()/2-1);
 }
 
 //-----------------------------------------------------------------------------
 
-void Gnu::Tire (double force)
+void Gnu::Shoot (double strength)
 {
-  SetAirResistFactor(launcher.cfg().air_resist_factor);
-//  PrepareTir();
-  m_alive = ALIVE;
-
-  // Set the initial position.
-  SetXY( ActiveCharacter().GetHandPosition() );
-
-  // Set the initial speed.
-  double angle = ActiveTeam().crosshair.GetAngleRad();
-  SetSpeed (force, angle);
-  is_active=true;
-
-  if(!PutOutOfGround(angle))
-  {
-    //If the gnu can't be put out of the ground, just explode right now!
-    launched_time = global_time.Read() - (1000*launcher.cfg().timeout);
-    return;
-  }
+  WeaponProjectile::Shoot(strength);
 
   //Dummy value, we only need save_x!=x and save_y!=y
   //To avoid a comparison in Refresh()
   save_x=(double)GetX()-1.0;
   save_y=(double)GetY()-1.0;
 
-  launched_time=global_time.Read();
+  double angle = ActiveTeam().crosshair.GetAngleRad();
 
   if(angle<M_PI/2 && angle>-M_PI/2)
     m_sens = 1;
@@ -98,24 +71,16 @@ void Gnu::Tire (double force)
 
 void Gnu::Refresh()
 {
-  if (!is_active) return;
-
-  uint tmp=global_time.Read();
-  if(tmp > (1000*launcher.cfg().timeout)+launched_time)
-  {
-    launcher.Explosion();
-    return;
-  }
+  WeaponProjectile::Refresh();
 
   double angle,norm;
   GetSpeed(norm,angle);
   if((!IsMoving() || norm<1.0)&& !FootsInVacuum())
   {
-    norm = RandomLong(50,100)*double(launcher.cfg().rebound_factor)/100.0;
+    norm = RandomLong(50,100)*double(cfg.rebound_factor)/100.0;
     angle = -(M_PI/2)-(m_sens*(RandomLong(0,90)*M_PI/45.0));
     SetSpeed(norm,angle);
   }
-
 
   angle *= 180.0/M_PI;
 
@@ -142,114 +107,26 @@ void Gnu::Refresh()
                 image->GetWidth()/2-1,
                 image->GetHeight()/2-1,
                 image->GetHeight()/2-1);
+}
 
-  if(IsGhost())
+//-----------------------------------------------------------------------------
+
+void Gnu::SignalCollision()
+{   
+  if (IsGhost())
   {
-    is_active=false;
-    launcher.Explosion();
-    return;
+    game_messages.Add ("The Gnu left the battlefield before exploding");
+    is_active = false ;
   }
 }
-
-//-----------------------------------------------------------------------------
-
-void Gnu::SignalFallEnding()
-{
-}
-
-//-----------------------------------------------------------------------------
-void Gnu::SignalCollision()
-{
-  is_active=false;
-  launcher.Explosion();
-}
-void Gnu::SignalGhostState()
-{
-  is_active=false;
-  launcher.Explosion();
-}
-
-//-----------------------------------------------------------------------------
-
-void Gnu::Draw()
-{
-  if (!is_active) return;
-
-  image->Scale(m_sens,1.0);
-//  if(m_sens==1)
-    image->Draw(GetX(),GetY());
-//  else
-//    image->Draw(GetX()+image->GetWidth(),GetY());   
-
-  int tmp=launcher.cfg().timeout;
-  tmp -= (int) ((global_time.Read() - launched_time) / 1000);
-  std::ostringstream ss;
-  ss << tmp;
-
-  int txt_x = GetX() + GetWidth() / 2;
-  int txt_y = GetY() - GetHeight();
-  global().small_font().WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
-
-}
-
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 GnuLauncher::GnuLauncher() : 
-  Weapon(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE),
-  gnu(game_loop, *this)
+  WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("GnuLauncher");
 
-  impact = resource_manager.LoadImage( weapons_res_profile, "gnulauncher_impact");
+  projectile = new Gnu(game_loop, cfg());
 }
-
-//-----------------------------------------------------------------------------
-
-bool GnuLauncher::p_Shoot ()
-{
-  ActiveCharacter().previous_strength = m_strength;
-  if (m_strength == max_strength)
-    m_strength = 0;
-
-  lst_objets.AjouteObjet (&gnu, true);
-  gnu.Tire (m_strength);
-  camera.ChangeObjSuivi (&gnu,true,true,true);
-  m_strength = 0;
-
-  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
-
-  return true;
-}
-
-//-----------------------------------------------------------------------------
-
-void GnuLauncher::Explosion()
-{
-  m_is_active = false;
-  
-  lst_objets.RetireObjet (&gnu);
-
-  // On fait un trou ?
-  if (gnu.IsGhost()||!gnu.is_active) return;
-
-  // Applique les degats et le souffle aux vers
-  Point2i pos = gnu.GetCenter();
-  AppliqueExplosion (pos, pos, impact, cfg(), NULL);
-}
-
-//-----------------------------------------------------------------------------
-
-void GnuLauncher::Refresh()
-{
-  if (!m_is_active) return;
-}
-
-//-----------------------------------------------------------------------------
-
-ExplosiveWeaponConfig& GnuLauncher::cfg()
-{ return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
 
 //-----------------------------------------------------------------------------

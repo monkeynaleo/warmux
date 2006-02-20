@@ -35,21 +35,10 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-
-#ifdef DEBUG
-
-// #define MSG_DBG
-
-#define COUT_DBG std::cout << "[HollyGrenade] "
-
-#endif
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-HollyGrenade::HollyGrenade(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
-  WeaponProjectile (p_game_loop, "holly_grenade", p_launcher), 
+HollyGrenade::HollyGrenade(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile (p_game_loop, "holly_grenade", cfg), 
   smoke_engine(particle_SMOKE,40)
 {
   m_rebound_sound = "weapon/holly_grenade_bounce";
@@ -57,7 +46,7 @@ HollyGrenade::HollyGrenade(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
   touche_ver_objet = false;
   sing_alleluia = false;
 
-  m_rebound_factor = double(p_launcher->cfg().rebound_factor);
+  m_rebound_factor = cfg.rebound_factor;
 }
 
 //-----------------------------------------------------------------------------
@@ -70,7 +59,7 @@ void HollyGrenade::Refresh()
   
   double tmp = global_time.Read() - begin_time;
   // Sing Alleluia ;-)
-  if (tmp > (1000 * launcher->cfg().timeout - 2000) && !sing_alleluia) {
+  if (tmp > (1000 * cfg.timeout - 2000) && !sing_alleluia) {
     jukebox.Play("share","weapon/alleluia") ;
     sing_alleluia = true;
   }
@@ -110,6 +99,6 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
   WeaponLauncher(WEAPON_HOLLY_GRENADE, "holly_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("HollyGrenade");
-  projectile = new HollyGrenade(game_loop, this);
+  projectile = new HollyGrenade(game_loop, cfg());
 }
 

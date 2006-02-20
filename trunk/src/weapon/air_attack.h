@@ -41,12 +41,11 @@ public:
 class Obus : public WeaponProjectile
 {
 public:
-  Obus(GameLoop &game_loop, AirAttack& air_attack);
-  void Refresh();
+  Obus(GameLoop &game_loop, AirAttackConfig& cfg);
+  //void Refresh();
   void Reset();
 
 protected:
-  AirAttack& air_attack;
   void SignalCollision();
 };
 
@@ -57,12 +56,11 @@ public:
   Sprite *image;
 private:
   int cible_x;
-  int vitesse;
-  AirAttack& air_attack;
+  double speed;
 
 public:
-  Avion(GameLoop &game_loop, AirAttack& air_attack);
-  void Tire();
+  Avion(GameLoop &game_loop, double speed);
+  void Shoot();
   void Reset();
   void Draw();
   void Refresh();
@@ -92,6 +90,8 @@ public:
   void Draw();
   void FinTir();
   virtual void ChooseTarget ();
+
+ private:
   AirAttackConfig& cfg();
 };
 

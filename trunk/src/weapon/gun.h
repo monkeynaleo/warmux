@@ -30,26 +30,19 @@
 #include "../include/base.h"
 #include "../tool/point.h"
 
-class BalleGun : public WeaponProjectile
+class GunBullet : public WeaponBullet
 {
 public:
-  BalleGun(GameLoop &game_loop, WeaponLauncher * launcher);
-  void Shoot();
-protected:
-  void SignalCollision();
+  GunBullet(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
+ private:
+  void ShootSound();
 };
 
 class Gun : public WeaponLauncher
 {
-private:
-  uint temps_capture;
-  std::vector<Point2i> lst_points;
-  bool p_Shoot();
-
 public:  
   Gun();
-  void Draw();
-  void Refresh();
+  bool p_Shoot();
 };
 
 #endif

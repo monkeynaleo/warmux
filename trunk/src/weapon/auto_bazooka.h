@@ -37,7 +37,7 @@ protected:
   Point2i m_cible;
   bool m_attire;
 public:
-  RoquetteTeteCherche(GameLoop &game_loop, WeaponLauncher * launcher);
+  RoquetteTeteCherche(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
   void Refresh();
   void Shoot(double strength);
   void SetTarget (int x,int y);
@@ -48,7 +48,7 @@ public:
 class AutomaticBazooka : public WeaponLauncher
 {
 private:
-
+  
   struct s_cible
   {
     Point2i pos;

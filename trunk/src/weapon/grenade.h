@@ -30,13 +30,11 @@
 #include "../object/physical_obj.h"
 #include "launcher.h"
 
-class GrenadeLauncher;
-
 // La Grenade
 class Grenade : public WeaponProjectile
 {
 public:
-  Grenade(GameLoop &game_loop, WeaponLauncher * launcher);
+  Grenade(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
   void Refresh();
 protected:
   void SignalCollision();

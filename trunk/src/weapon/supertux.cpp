@@ -41,8 +41,8 @@ const uint animation_deltat = 50;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-SuperTux::SuperTux(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
-  WeaponProjectile (p_game_loop, "supertux", p_launcher), 
+SuperTux::SuperTux(GameLoop &p_game_loop, SuperTuxWeaponConfig& cfg) :
+  WeaponProjectile (p_game_loop, "supertux", cfg), 
   particle_engine(particle_STAR,40)
 {
   m_gravity_factor = 0.0;
@@ -59,7 +59,7 @@ void SuperTux::Refresh()
   image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
   if ((last_move+animation_deltat)<global_time.Read())
     {
-      SetExternForce(static_cast<SuperTuxWeaponConfig&>(launcher->cfg()).speed, angle);
+      SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle);
       image->Update();
       last_move = global_time.Read();
   }
@@ -139,7 +139,7 @@ TuxLauncher::TuxLauncher() :
   m_name = _("SuperTux");   
   override_keys = true ;
 
-  projectile = new SuperTux(game_loop, this);
+  projectile = new SuperTux(game_loop, cfg());
 }
 
 //-----------------------------------------------------------------------------
@@ -164,3 +164,5 @@ void TuxLauncher::HandleKeyEvent(int action, int event_type)
 
 //-----------------------------------------------------------------------------
 
+SuperTuxWeaponConfig& TuxLauncher::cfg() 
+{ return static_cast<SuperTuxWeaponConfig&>(*extra_params); }
