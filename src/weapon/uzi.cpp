@@ -39,49 +39,36 @@ const double MIN_TIME_BETWEEN_SHOOT = 70; // in milliseconds
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-BalleUzi::BalleUzi(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
-  WeaponProjectile(p_game_loop, "uzi_bullet", p_launcher)
+UziBullet::UziBullet(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
+  WeaponBullet(p_game_loop, "uzi_bullet", cfg)
 { 
-  touche_ver_objet = true; 
 }
 
-//-----------------------------------------------------------------------------
-
-void BalleUzi::SignalCollision()
-{   
-  if ((LitDernierVerTouche() == NULL) && (LitDernierObjTouche() == NULL))
-  {
-    game_messages.Add (_("Your shot has missed!"));
-  }
-  is_active = false; 
+void UziBullet::ShootSound()
+{
+  jukebox.Play("share","weapon/uzi");
 }
-
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 Uzi::Uzi() :
-  WeaponLauncher(WEAPON_UZI,"uzi", new WeaponConfig())
+  WeaponLauncher(WEAPON_UZI,"uzi", new ExplosiveWeaponConfig())
 {
   m_name = _("Uzi");
   override_keys = true ;
 
   m_first_shoot = 0;
 
-  projectile = new BalleUzi(game_loop, this);
-}
-
-//-----------------------------------------------------------------------------
-
-void Uzi::p_Deselect()
-{
-  m_is_active = false;
+  projectile = new UziBullet(game_loop, cfg());
 }
 
 //-----------------------------------------------------------------------------
 
 void Uzi::RepeatShoot()
-{        
+{  
+  if (m_is_active)
+    return;
+      
   uint time = global_time.Read() - m_first_shoot; 
   uint tmp = global_time.Read();
 
@@ -94,6 +81,16 @@ void Uzi::RepeatShoot()
 }
 
 //-----------------------------------------------------------------------------
+
+// bool Uzi::p_Shoot()
+// {
+//   if (m_is_active)
+//     return false;
+
+//   m_is_active = true;
+//   projectile->Shoot(50);
+//   return true;
+// }
 
 bool Uzi::p_Shoot()
 {
@@ -132,8 +129,8 @@ bool Uzi::p_Shoot()
       projectile->is_active=false;
 
       // Si la balle a touché un ver, lui inflige des dégats
-      Character* ver = projectile->LitDernierVerTouche();
-      PhysicalObj* obj = projectile->LitDernierObjTouche();
+      Character* ver = projectile->dernier_ver_touche;
+      PhysicalObj* obj = projectile->dernier_obj_touche;
       if (ver) obj = ver;
       if (ver)
       {

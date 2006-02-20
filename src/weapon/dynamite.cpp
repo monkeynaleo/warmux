@@ -40,15 +40,12 @@
   //  #define DEBUG_CADRE_TEST
 #endif
 
-BatonDynamite::BatonDynamite(GameLoop &p_game_loop, Dynamite &p_dynamite) :
-  WeaponProjectile(p_game_loop, "dynamite_bullet", NULL),
-  dynamite(p_dynamite)
+BatonDynamite::BatonDynamite(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile(p_game_loop, "dynamite_bullet", cfg)
 {
-  SetMass (dynamite.cfg().mass);
-
   image = resource_manager.LoadSprite(weapons_res_profile,"dynamite_anim");
   
-  double delay = dynamite.cfg().duree/image->GetFrameCount()/1000.0 ;
+  double delay = cfg.timeout/image->GetFrameCount()/1000.0 ;
   for (uint i=0 ; i < image->GetFrameCount(); i++)
     ; // TODO // image.set_frame_delay(i, delay) ;
   
@@ -120,13 +117,11 @@ void BatonDynamite::SignalGhostState (bool) { is_active = false; }
 //-----------------------------------------------------------------------------
 
 Dynamite::Dynamite() :
-  Weapon(WEAPON_DYNAMITE, "dynamite", new DynamiteConfig(), VISIBLE_ONLY_WHEN_INACTIVE), 
-  baton(game_loop, *this)
+  Weapon(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE), 
+  baton(game_loop, cfg())
 {
   m_name = _("Dynamite");
   channel = -1;
-
-  impact = resource_manager.LoadImage(weapons_res_profile,"dynamite_impact");
 }
 
 void Dynamite::p_Select()
@@ -177,27 +172,8 @@ void Dynamite::FinExplosion ()
   jukebox.Stop(channel);
   channel = -1;
    
-  // Si la dynamite est sortie de l'écran, on ne fait rien
-  if (baton.IsGhost()) return;
-
-  // Applique les degats aux vers
-  Point2i centre = baton.GetCenter();
-  centre.y = baton.GetY()+baton.GetHeight();
-  AppliqueExplosion (centre, centre, impact, cfg(), NULL, "weapon/dynamite_exp");
+  baton.Explosion();
 }
 
-DynamiteConfig& Dynamite::cfg() 
-{ return static_cast<DynamiteConfig&>(*extra_params); }
-
-//-----------------------------------------------------------------------------
-
-DynamiteConfig::DynamiteConfig()
-{
-  duree = 2000;
-}
-
-void DynamiteConfig::LoadXml(xmlpp::Element *elem)
-{
-  ExplosiveWeaponConfig::LoadXml(elem);
-  LitDocXml::LitUint (elem, "duree", duree);
-}
+ExplosiveWeaponConfig& Dynamite::cfg()
+{ return static_cast<ExplosiveWeaponConfig&>(*extra_params); }

@@ -33,41 +33,23 @@
 class GnuLauncher;
 
 // The GNU
-class Gnu : public PhysicalObj
+class Gnu : public WeaponProjectile
 {
  private:
-  uint launched_time;
-  Sprite *image;
   int m_sens;
   double save_x,save_y;
-  GnuLauncher& launcher;
+  double angle;
 public:
-  bool is_active;
-
-  Gnu(GameLoop &game_loop, GnuLauncher& launcher);
-  void Draw();
-  void Init(){};
-  void Reset(){};
-  void Tire(double force);
+  Gnu(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
+  void Shoot(double strength);
   void Refresh();
-  void SignalFallEnding();
   void SignalCollision();
-  void SignalGhostState();
 };
 
-class GnuLauncher : public Weapon
+class GnuLauncher : public WeaponLauncher
 {
 public:
-  Surface impact;
-  Gnu gnu;
-
-public:
   GnuLauncher();
-  bool p_Shoot ();
-  void Refresh();
-  ExplosiveWeaponConfig& cfg();
-
-  void Explosion();
 };
 
 #endif

@@ -39,13 +39,43 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
+//-----------------------------------------------------------------------------
 
-WeaponProjectile::WeaponProjectile (GameLoop &p_game_loop, const std::string &name, 
-				    WeaponLauncher * p_launcher)
-  : PhysicalObj (p_game_loop, name, 0.0)
+
+WeaponBullet::WeaponBullet(GameLoop &game_loop, const std::string &name, ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile(game_loop, name, cfg)
+{ 
+  m_gravity_factor = 0.1; 
+  SetWindFactor(0.0);
+  SetAirResistFactor(1.0);
+}
+
+void WeaponBullet::SignalCollision()
+{ 
+  if ((dernier_ver_touche == NULL) && (dernier_obj_touche == NULL))
+  {
+    game_messages.Add (_("Your shot has missed!"));
+  }
+  is_active = false; 
+}
+
+void WeaponBullet::Explosion()
 {
-  launcher = p_launcher;
-  
+  if (IsGhost()) return;
+
+  // Applique les degats et le souffle aux vers
+  Point2i pos = GetCenter();
+  AppliqueExplosion (pos, pos, impact, cfg, NULL, "", false);
+}
+
+//-----------------------------------------------------------------------------
+
+
+WeaponProjectile::WeaponProjectile (GameLoop &game_loop, const std::string &name, 
+				    ExplosiveWeaponConfig& p_cfg)
+  : PhysicalObj (game_loop, name, 0.0),
+    cfg(p_cfg)
+{
   dernier_ver_touche = NULL;
   dernier_obj_touche = NULL;
 
@@ -59,11 +89,9 @@ WeaponProjectile::WeaponProjectile (GameLoop &p_game_loop, const std::string &na
 
   impact = resource_manager.LoadImage( weapons_res_profile, name + "_impact");
 
-  if (launcher != NULL) {
-    SetMass (launcher->cfg().mass);
-    SetWindFactor(launcher->cfg().wind_factor);
-    SetAirResistFactor(launcher->cfg().air_resist_factor);
-  }
+  SetMass (cfg.mass);
+  SetWindFactor(cfg.wind_factor);
+  SetAirResistFactor(cfg.air_resist_factor);
 
   // Set rectangle test
   int dx = image->GetWidth()/2-1;
@@ -79,7 +107,6 @@ WeaponProjectile::~WeaponProjectile()
 void WeaponProjectile::Shoot(double strength)
 {
   Ready();
-  camera.ChangeObjSuivi(this, true, false);
   is_active = true;
 
   // Set the initial position.
@@ -89,9 +116,28 @@ void WeaponProjectile::Shoot(double strength)
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (strength, angle);
   PutOutOfGround(angle); 
+  std::cout << m_name <<" -> " << strength << "; " << angle << std::endl;
 
-  begin_time = global_time.Read();
+  std::cout << m_name <<" -> " << GetX() << "; " << GetY() << std::endl;
+
+  begin_time = global_time.Read();  
+
+  std::cout << m_name << " - Mass : " << cfg.mass << std::endl;
+  std::cout << m_name << " - Wind : " << cfg.wind_factor << std::endl;
+  std::cout << m_name << " - AirResist : " << cfg.air_resist_factor << std::endl;
+
+  ShootSound();  
+
+  lst_objets.AjouteObjet (this, true);
+  camera.ChangeObjSuivi(this, true, true, true);
+
 }
+
+void WeaponProjectile::ShootSound()
+{
+  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
+}
+
 
 bool WeaponProjectile::TestImpact()
 {
@@ -150,6 +196,8 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
 
 void WeaponProjectile::Refresh()
 {
+  std::cout << m_name <<" " << GetX() << "; " << GetY() << std::endl;
+
   if( !is_active )
     return;
 
@@ -160,9 +208,8 @@ void WeaponProjectile::Refresh()
 
   // Explose after timeout
   double tmp = global_time.Read() - begin_time;
-  double timeout = launcher->cfg().timeout;
   
-  if(timeout && tmp>1000 * timeout) {
+  if(cfg.timeout && tmp>1000 * cfg.timeout) {
     is_active = false;
     return;
   }
@@ -175,8 +222,9 @@ void WeaponProjectile::Draw()
 
   image->Draw(GetX(), GetY());   
 
-  int tmp = launcher->cfg().timeout;
+  int tmp = cfg.timeout;
   if (tmp != 0) {
+    //std::cout << "Draw timeout" << std::endl;
     tmp -= (int)((global_time.Read() - begin_time) / 1000);
     std::ostringstream ss;
     ss << tmp;
@@ -186,11 +234,13 @@ void WeaponProjectile::Draw()
   }
 }
 
-void WeaponProjectile::SignalGhostState (bool){
+void WeaponProjectile::SignalGhostState (bool){  
+  std::cout << m_name <<" SignalGhostState " << std::endl;
   SignalCollision();
 }
 
-void WeaponProjectile::SignalFallEnding(){
+void WeaponProjectile::SignalFallEnding(){  
+  std::cout << m_name <<"SignalFallEnding " << std::endl;
   SignalCollision();
 }
 
@@ -200,7 +250,9 @@ void WeaponProjectile::Explosion()
 
   // Applique les degats et le souffle aux vers
   Point2i pos = GetCenter();
-  AppliqueExplosion (pos, pos, impact, launcher->cfg(), NULL);
+  AppliqueExplosion (pos, pos, impact, cfg, NULL);  
+
+
 }
 
 //-----------------------------------------------------------------------------
@@ -227,12 +279,8 @@ bool WeaponLauncher::p_Shoot ()
 //     DirectExplosion();
 //     return true;
 //   }
-
   projectile->Shoot (m_strength);
-  lst_objets.AjouteObjet (projectile, true);
-  camera.ChangeObjSuivi(projectile, true, true, true);
 
-  jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
   return true;
 }
 
@@ -246,9 +294,7 @@ void WeaponLauncher::DirectExplosion()
 void WeaponLauncher::Explosion()
 {
   m_is_active = false;
-  
   lst_objets.RetireObjet (projectile);
-
   projectile->Explosion();
 }
 

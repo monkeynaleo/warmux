@@ -42,15 +42,15 @@ class WeaponProjectile : public PhysicalObj
   bool touche_ver_objet;
   double begin_time;
 
-  WeaponLauncher * launcher;
+  ExplosiveWeaponConfig& cfg;
 
- private:
+ public:
   Character* dernier_ver_touche;
   PhysicalObj* dernier_obj_touche;
 
  public:
   WeaponProjectile(GameLoop &game_loop, const std::string &nom, 
-		   WeaponLauncher * p_launcher);
+		   ExplosiveWeaponConfig& cfg);
   virtual ~WeaponProjectile();
 
   virtual void Draw();
@@ -61,16 +61,24 @@ class WeaponProjectile : public PhysicalObj
   void Init() {}// TODO : to delete
   void Reset() {}// TODO : to delete
   
-  Character* LitDernierVerTouche() const { return dernier_ver_touche; }
-  PhysicalObj* LitDernierObjTouche() const { return dernier_obj_touche; }
-
   bool CollisionTest (int dx, int dy); // public only for uzi...
  protected:
   virtual void SignalCollision() = 0; 
   bool TestImpact ();
  private:
+  virtual void ShootSound();
   void SignalGhostState (bool was_dead);
   void SignalFallEnding();
+};
+
+class WeaponBullet : public WeaponProjectile
+{
+public:
+  WeaponBullet(GameLoop &game_loop, const std::string &name, ExplosiveWeaponConfig& cfg);
+  virtual ~WeaponBullet(){};
+protected:
+  void SignalCollision();
+  void Explosion(); 
 };
 
 

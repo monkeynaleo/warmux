@@ -38,7 +38,7 @@ class BatonDynamite : public WeaponProjectile
   bool explosion_active;
 
 public:
-  BatonDynamite(GameLoop &game_loop, Dynamite &dynamite);
+  BatonDynamite(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
   void Reset();
   void Draw();
   void Refresh();
@@ -46,17 +46,8 @@ public:
 protected:
   void SignalCollision();
   void SignalGhostState (bool was_dead);
-  Dynamite &dynamite;
 };
 
-class DynamiteConfig : public ExplosiveWeaponConfig 
-{ 
-public: 
-  uint duree; 
-public:
-  DynamiteConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
-};
 
 // L'arme dynamite
 class Dynamite : public Weapon
@@ -65,9 +56,6 @@ private:
   // channel used for sound
   int channel;
 
-  // Image du trou de l'explosion
-  Surface impact;
-   
   // Objet réprésentant la dynamite (= l'objet qui tombe et explose)
   BatonDynamite baton;
 
@@ -78,6 +66,7 @@ public:
   Dynamite();
   void p_Select();
   void Refresh();
-  DynamiteConfig &cfg();
+
+  ExplosiveWeaponConfig& cfg();
 };
 #endif

@@ -34,7 +34,7 @@
       <explosion_range>3</explosion_range>
       <blast_force>10</blast_force>
       <blast_range>4</blast_range>
-      <duree>3000</duree>
+      <timeout>3</timeout>
     </dynamite>
 
     <tux>
@@ -63,7 +63,7 @@
       <explosion_range>2.5</explosion_range>
       <blast_range>2.5</blast_range>
       <blast_force>6</blast_force>
-      <tps_avt_explosion>6</tps_avt_explosion>
+      <timeout>6</timeout>
       <rebound_factor>10.0</rebound_factor>
     </gnulauncher>
     

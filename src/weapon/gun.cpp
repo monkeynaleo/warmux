@@ -34,130 +34,87 @@
 #include "../weapon/gun.h"
 #include "../weapon/weapon_tools.h"
 
-const uint VITESSE_CAPTURE_POS_BALLE = 10;
 const uint BULLET_SPEED = 20;
-const double BULLET_BLAST = 1;
 
-BalleGun::BalleGun(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
-  WeaponProjectile(p_game_loop, "gun_bullet", p_launcher)
-{ 
-  m_gravity_factor = 0.0;
-}
-
-void BalleGun::Shoot()
+GunBullet::GunBullet(GameLoop &game_loop, ExplosiveWeaponConfig& cfg) :
+  WeaponBullet(game_loop, "gun_bullet", cfg)
 {
-  WeaponProjectile::Shoot(BULLET_SPEED);
 }
 
-void BalleGun::SignalCollision()
-{ 
-  if ((LitDernierVerTouche() == NULL) && (LitDernierObjTouche() == NULL))
-  {
-    game_messages.Add (_("Your shot has missed!"));
-  }
-  is_active = false; 
+void GunBullet::ShootSound()
+{
+  jukebox.Play("share","weapon/gun");
 }
 
-Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new WeaponConfig())
+//-----------------------------------------------------------------------------
+
+Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
   m_name = _("Gun");
 
-  projectile = new BalleGun(game_loop, this);
+  projectile = new GunBullet(game_loop, cfg());
 }
 
-void Gun::Draw ()
-{
-  Weapon::Draw();
-
-  // Dessine le tracé de la trajectoire
+bool Gun::p_Shoot ()
+{  
   if (m_is_active)
-  {
-#ifdef CL
-    bool noir=true;
-    for (std::vector<CL_Point>::const_iterator it=lst_points.begin();
-	 it != lst_points.end();
-	 ++it)
-    {
-      if (noir)
-	CL_Display::draw_rect (CL_Rect(it -> x, it -> y, it -> x+1, it -> y+1),
-			       CL_Color::black);
-      else
-	CL_Display::draw_rect (CL_Rect(it -> x, it -> y, it -> x+1, it -> y+1),
-			       CL_Color::white);
-      noir = !noir;
-    }
-#else
-      // TODO 
-#endif
-  }
-}
+    return false;  
 
-bool Gun::p_Shoot()
-{
-  if (m_is_active)
-    return false;
-
-  static_cast<BalleGun *>(projectile)->Shoot();
-
-  // Temps de capture
-  temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
-
-  lst_points.clear();
-  lst_objets.AjouteObjet (projectile, true);
-
-  jukebox.Play("share","weapon/gun");
+  m_is_active = true;
+  projectile->Shoot (20);
 
   return true;
 }
 
-void Gun::Refresh()
-{
-  m_image->Scale(ActiveCharacter().GetDirection(), 1);   
+// void Gun::Refresh()
+// {
+//   m_image->Scale(ActiveCharacter().GetDirection(), 1);   
 
    
-  if (projectile->is_active)
-    {
+//   if (projectile->is_active)
+//     {
 
-//       // Une balle est en l'air : on capture sa position ?
-//       if (temps_capture < global_time.Read()) 
+// //       // Une balle est en l'air : on capture sa position ?
+// //       if (temps_capture < global_time.Read()) 
+// // 	{
+// // 	  temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
+
+// // 	  Point2i pos_balle = balle.GetPos();
+// // 	  pos_balle.x += balle.GetWidth()/2;
+// // 	  pos_balle.y += balle.GetHeight()/2;
+// // 	  lst_points.push_back (pos_balle);
+// // 	}
+//     }
+//   else
+//     {
+//       if (!m_is_active) return;
+//       m_is_active = false;
+      
+//       if (!projectile->IsGhost())
 // 	{
-// 	  temps_capture = global_time.Read()+VITESSE_CAPTURE_POS_BALLE;
-
-// 	  Point2i pos_balle = balle.GetPos();
-// 	  pos_balle.x += balle.GetWidth()/2;
-// 	  pos_balle.y += balle.GetHeight()/2;
-// 	  lst_points.push_back (pos_balle);
-// 	}
-    }
-  else
-    {
-      if (!m_is_active) return;
-      m_is_active = false;
-      
-      if (!projectile->IsGhost())
-	{
-	  // Si la balle a touché un ver, lui inflige des dégats
-	  Character* ver = projectile->LitDernierVerTouche();
-	  PhysicalObj* obj = projectile->LitDernierObjTouche();
-	  if (ver) obj = ver;
-	  if (ver)
-          {
-            ver -> SetEnergyDelta (-cfg().damage);
-          }
-	  if (obj) 
-          {
-            obj -> AddSpeed (BULLET_BLAST, projectile->GetSpeedAngle());
-          }
+// 	  // Si la balle a touché un ver, lui inflige des dégats
+// 	  Character* ver = projectile->LitDernierVerTouche();
+// 	  PhysicalObj* obj = projectile->LitDernierObjTouche();
+// 	  if (ver) obj = ver;
+// 	  if (ver)
+//           {
+//             ver -> SetEnergyDelta (-cfg().damage);
+//           }
+// 	  if (obj) 
+//           {
+//             obj -> AddSpeed (BULLET_BLAST, projectile->GetSpeedAngle());
+//           }
 	  
-	  // Creuse le monde
-	  if (!obj)
-	    {
-	       world.Creuse (projectile->GetPos() - projectile->impact.GetSize()/2,
-			    projectile->impact);
-	    }
-	}
+// 	  // Creuse le monde
+// 	  if (!obj)
+// 	    {
+// 	       world.Creuse (projectile->GetPos() - projectile->impact.GetSize()/2,
+// 			    projectile->impact);
+// 	    }
+// 	}
       
-      lst_objets.RetireObjet (projectile);
-    }
-}
+//       lst_objets.RetireObjet (projectile);
+//     }
+// }
+
 

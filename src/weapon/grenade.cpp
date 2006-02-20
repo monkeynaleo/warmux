@@ -37,14 +37,14 @@
 #include "../include/global.h"
 //-----------------------------------------------------------------------------
 
-Grenade::Grenade(GameLoop &p_game_loop, WeaponLauncher * p_launcher) :
-  WeaponProjectile (p_game_loop, "grenade", p_launcher)
+Grenade::Grenade(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile (p_game_loop, "grenade", cfg)
 {
   m_rebound_sound = "weapon/grenade_bounce";
   m_rebounding = true;
   touche_ver_objet = false;
 
-  m_rebound_factor = double(p_launcher->cfg().rebound_factor);
+  m_rebound_factor = cfg.rebound_factor;
 }
 
 //-----------------------------------------------------------------------------
@@ -76,5 +76,5 @@ GrenadeLauncher::GrenadeLauncher() :
   WeaponLauncher(WEAPON_GRENADE, "grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("Grenade");
-  projectile = new Grenade(game_loop, this);
+  projectile = new Grenade(game_loop, cfg());
 }

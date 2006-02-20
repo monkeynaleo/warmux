@@ -45,11 +45,12 @@ class SuperTux : public WeaponProjectile
   
 public:
   double angle;
+  uint speed;
   uint time_now;
   uint time_next_action;
   uint last_move;
 
-  SuperTux(GameLoop &game_loop, WeaponLauncher * launcher);
+  SuperTux(GameLoop &game_loop, SuperTuxWeaponConfig& cfg);
   void Refresh();
   void Draw();
 
@@ -66,6 +67,9 @@ class TuxLauncher : public WeaponLauncher
 public:
   TuxLauncher();
   void HandleKeyEvent(int action, int event_type);
+
+ private:
+  SuperTuxWeaponConfig& cfg();
 };
 
 #endif

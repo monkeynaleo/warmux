@@ -40,17 +40,14 @@ const uint FORCE_Y_MAX = 40;
 
 const double OBUS_SPEED = 7 ;
 
-Obus::Obus(GameLoop &p_game_loop, AirAttack& p_air_attack) :
-  WeaponProjectile(p_game_loop, "obus", NULL),
-  air_attack(p_air_attack)
+Obus::Obus(GameLoop &p_game_loop, AirAttackConfig& cfg) :
+  WeaponProjectile(p_game_loop, "obus", cfg)
 {
-  SetMass (air_attack.cfg().mass);
-  SetWindFactor (0.1);
 }
 
-void Obus::Refresh()
-{
-}
+// void Obus::Refresh()
+// {
+// }
 
 void Obus::Reset()
 {
@@ -64,19 +61,18 @@ void Obus::SignalCollision()
 
   if (IsGhost()) return;
 
-  Point2i pos = GetCenter();
+//   Point2i pos = GetCenter();
 
-  AppliqueExplosion (pos, pos,
-		     impact,
-		     air_attack.cfg(),
-		     this);
+//   AppliqueExplosion (pos, pos,
+// 		     impact,
+// 		     cfg,
+// 		     this);
 }
 
 //-----------------------------------------------------------------------------
 
-Avion::Avion(GameLoop &p_game_loop, AirAttack& p_air_attack) : 
-  PhysicalObj(p_game_loop, "Avion", 0.0),
-  air_attack(p_air_attack)
+Avion::Avion(GameLoop &p_game_loop, double p_speed) : 
+  PhysicalObj(p_game_loop, "Avion", 0.0)
 {
   m_type = objUNBREAKABLE;
   SetWindFactor(0.0);
@@ -88,6 +84,7 @@ Avion::Avion(GameLoop &p_game_loop, AirAttack& p_air_attack) :
   SetMass (3000);
   obus_dx = 100;
   obus_dy = 50;
+  speed = p_speed;
 }
 
 void Avion::Reset()
@@ -95,7 +92,7 @@ void Avion::Reset()
   m_alive = GHOST;
 }
 
-void Avion::Tire()
+void Avion::Shoot()
 {
   DoubleVector speed_vector ;
   int dir = ActiveCharacter().GetDirection();
@@ -108,12 +105,12 @@ void Avion::Tire()
 
   if (dir == 1)
     {
-      speed_vector.SetValues( air_attack.cfg().speed, 0);
+      speed_vector.SetValues( speed, 0);
       SetX (-image->GetWidth()+1);
     }
   else
     {
-      speed_vector.SetValues( -air_attack.cfg().speed, 0) ;
+      speed_vector.SetValues( -speed, 0) ;
       SetX (world.GetWidth()-1);
     }
 
@@ -154,7 +151,7 @@ bool Avion::PeutLacherObus() const
 
 AirAttack::AirAttack() :
   Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig()),
-  avion(game_loop, *this)
+  avion(game_loop, cfg().speed)
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
@@ -175,7 +172,7 @@ bool AirAttack::p_Shoot ()
   game_loop.interaction_enabled=false;
 
   assert (obus.size() == 0);
-  avion.Tire ();
+  avion.Shoot ();
   obus_laches = false;
   obus_actifs = false;
   
@@ -199,7 +196,7 @@ void AirAttack::Refresh()
       std::ostringstream ss;
       ss.str("");
       ss << "Obus(" << i << ')';
-      instance = new Obus(game_loop, *this);
+      instance = new Obus(game_loop, cfg());
       instance -> m_name = ss.str();
       instance -> Reset();
       instance -> SetXY( Point2i(x, avion.obus_dy) );

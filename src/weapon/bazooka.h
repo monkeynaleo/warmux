@@ -23,13 +23,11 @@
 #define BAZOOKA_H
 #include "launcher.h"
 
-class Bazooka;
-
 // Roquette du bazooka
 class RoquetteBazooka : public WeaponProjectile
 {
 public:
-  RoquetteBazooka(GameLoop &game_loop, WeaponLauncher * launcher);
+  RoquetteBazooka(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
   void Refresh();
 protected:
   void SignalCollision();
