@@ -22,8 +22,23 @@
 #ifndef RANDOM_H
 #define RANDOM_H
 
-void InitRandom();
-bool RandomBool ();
-long RandomLong (long min, long max);
+#include "rectangle.h"
+#include "point.h"
+
+class Random{
+public:
+	Random();
+	void Init();
+
+	bool GetBool();
+	long GetLong(long min, long max);
+	double GetDouble();
+	double GetDouble(double max);
+	double GetDouble(double min, double max);
+	Point2i GetPoint(const Rectanglei &rect);
+	Point2i GetPoint(const Point2i &pt);
+};
+
+extern Random randomObj;
 
 #endif

@@ -94,6 +94,7 @@ public:
   // Lit la taille du monde
   uint GetWidth() const { return ground.GetWidth(); }
   uint GetHeight() const { return ground.GetHeight(); }
+  Point2i GetSize() const{ return ground.GetSize(); }
  private:
   void SwitchDrawingCache();
   void SwitchDrawingCacheParticles();

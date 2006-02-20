@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "gnu.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include "weapon_tools.h"
 #include "../game/config.h"
@@ -37,18 +36,11 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 #include "../tool/random.h"
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 Gnu::Gnu(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) : 
   WeaponProjectile(p_game_loop, "gnu", cfg)
 {
 }
-
-//-----------------------------------------------------------------------------
 
 void Gnu::Shoot (double strength)
 {
@@ -67,19 +59,18 @@ void Gnu::Shoot (double strength)
     m_sens = -1;
 }
 
-//-----------------------------------------------------------------------------
-
 void Gnu::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  double angle,norm;
-  GetSpeed(norm,angle);
+  double angle, norm;
+  GetSpeed(norm, angle);
   if((!IsMoving() || norm<1.0)&& !FootsInVacuum())
   {
-    norm = RandomLong(50,100)*double(cfg.rebound_factor)/100.0;
-    angle = -(M_PI/2)-(m_sens*(RandomLong(0,90)*M_PI/45.0));
-    SetSpeed(norm,angle);
+    norm = randomObj.GetDouble(0.5, 1) * cfg.rebound_factor;
+    //angle = -(M_PI/2)-(m_sens*(RandomLong(0,90)*M_PI/45.0)); ??
+	angle = randomObj.GetDouble(-M_PI_2, M_PI_2);
+    SetSpeed(norm, angle);
   }
 
   angle *= 180.0/M_PI;
@@ -92,24 +83,19 @@ void Gnu::Refresh()
   else
     m_sens=1;
 
-//  if(angle<-45 && angle>-135)
-//    angle=0;
-
   //Due to a bug in the physic engine
-  //sometimes, angle==infinite (according to gdb)
+  //sometimes, angle==infinite (according to gdb) ??
   if(angle>720)
     angle = 0;
 
   image->SetRotation_deg(angle);
   image->Update();
-  // Fixe le rectangle de test
+  // Fixe le rectangle de test  ??
   SetTestRect ( image->GetWidth()/2-1,
                 image->GetWidth()/2-1,
                 image->GetHeight()/2-1,
                 image->GetHeight()/2-1);
 }
-
-//-----------------------------------------------------------------------------
 
 void Gnu::SignalCollision()
 {   
@@ -129,4 +115,3 @@ GnuLauncher::GnuLauncher() :
   projectile = new Gnu(game_loop, cfg());
 }
 
-//-----------------------------------------------------------------------------

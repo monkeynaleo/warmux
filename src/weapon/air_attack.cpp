@@ -94,7 +94,7 @@ void Avion::Reset()
 
 void Avion::Shoot()
 {
-  DoubleVector speed_vector ;
+  Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
   cible_x = mouse.GetXmonde();
   SetY (0);
@@ -201,11 +201,11 @@ void AirAttack::Refresh()
       instance -> Reset();
       instance -> SetXY( Point2i(x, avion.obus_dy) );
 
-      DoubleVector speed_vector ;
+      Point2d speed_vector;
 
-      int fx = RandomLong (FORCE_X_MIN, FORCE_X_MAX);
+      int fx = randomObj.GetLong (FORCE_X_MIN, FORCE_X_MAX);
       fx *= avion.GetDirection();
-      int fy = RandomLong (FORCE_Y_MIN, FORCE_Y_MAX);
+      int fy = randomObj.GetLong (FORCE_Y_MIN, FORCE_Y_MAX);
 
       speed_vector.SetValues( fx/30.0, fy/30.0);
       instance -> SetSpeedXY (speed_vector);

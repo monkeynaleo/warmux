@@ -19,12 +19,11 @@
  * Mouvement droite/gauche pour un ver.
  *****************************************************************************/
 
-#ifndef MOUVEMENT_H
-#define MOUVEMENT_H
-//-----------------------------------------------------------------------------
-#include "../object/physical_obj.h"
+#ifndef MOVE_H
+#define MOVE_H
+
 #include "character.h"
-//-----------------------------------------------------------------------------
+#include "../object/physical_obj.h"
 
 // Pause entre deux deplacement
 #define PAUSE_BOUGE 30 // ms
@@ -39,5 +38,4 @@ void MoveCharacter (Character &character);
 void MoveCharacterRight (Character &character);
 void MoveCharacterLeft (Character &character);
 
-//-----------------------------------------------------------------------------
 #endif

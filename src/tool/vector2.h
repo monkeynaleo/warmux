@@ -295,6 +295,4 @@ template<class T> class Vector2
 		}
 };
 
-typedef Vector2<double> DoubleVector;
-
 #endif //_VECTOR2_H

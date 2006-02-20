@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "jetpack.h"
-//-----------------------------------------------------------------------------
 #include "weapon_tools.h"
 #include "../game/game.h"
 #include "../game/game_loop.h"
@@ -39,8 +38,6 @@ const double JETPACK_FORCE = 750.0;
 
 const uint DELTA_FUEL_DOWN = 200 ;  // Delta time between 2 fuel unit consumption.
 
-//-----------------------------------------------------------------------------
-
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 			    new WeaponConfig(),
 			    NEVER_VISIBLE)
@@ -56,11 +53,9 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   m_y_force = 0.0;
 }
 
-//-----------------------------------------------------------------------------
-
 void JetPack::Refresh()
 {
-  DoubleVector F ;
+  Point2d F;
 
   if (m_is_active)
     {
@@ -95,13 +90,9 @@ void JetPack::Refresh()
     }
 }
 
-//-----------------------------------------------------------------------------
-
 void JetPack::p_Select()
 {
 }
-
-//-----------------------------------------------------------------------------
 
 void JetPack::p_Deselect()
 {
@@ -113,8 +104,6 @@ void JetPack::p_Deselect()
   ActiveCharacter().SetSkin("walking");
 }
 
-//-----------------------------------------------------------------------------
-
 void JetPack::StartUse()
 {
   if ( (m_x_force == 0) && (m_y_force == 0))
@@ -123,8 +112,6 @@ void JetPack::StartUse()
       channel = jukebox.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
     }
 }
-
-//-----------------------------------------------------------------------------
 
 void JetPack::StopUse()
 {
@@ -136,16 +123,12 @@ void JetPack::StopUse()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 void JetPack::GoUp()
 {
   StartUse();
   m_y_force = -(ActiveCharacter().GetMass() * game_mode.gravity + JETPACK_FORCE) ;
   ActiveCharacter().SetSkin("jetpack-up");
 }
-
-//-----------------------------------------------------------------------------
 
 void JetPack::GoLeft()
 {
@@ -156,8 +139,6 @@ void JetPack::GoLeft()
   m_x_force = - JETPACK_FORCE ;
 }
 
-//-----------------------------------------------------------------------------
-
 void JetPack::GoRight()
 {
   StartUse();
@@ -167,15 +148,11 @@ void JetPack::GoRight()
   m_x_force = JETPACK_FORCE ;
 }
 
-//-----------------------------------------------------------------------------
-
 void JetPack::StopUp()
 {
   m_y_force = 0.0 ;
   StopUse();
 }
-
-//-----------------------------------------------------------------------------
 
 void JetPack::StopLeft()
 {
@@ -183,15 +160,11 @@ void JetPack::StopLeft()
   StopUse();
 }
 
-//-----------------------------------------------------------------------------
-
 void JetPack::StopRight()
 {
   m_x_force = 0.0 ;
   StopUse();
 }
-
-//-----------------------------------------------------------------------------
 
 void JetPack::HandleKeyEvent(int action, int event_type)
 {
@@ -230,8 +203,6 @@ void JetPack::HandleKeyEvent(int action, int event_type)
   } ;
 }
 
-//-----------------------------------------------------------------------------
-
 bool JetPack::p_Shoot()
 {
   m_is_active = true;
@@ -240,11 +211,8 @@ bool JetPack::p_Shoot()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void JetPack::SignalTurnEnd()
 {
   p_Deselect();
 }
 
-//-----------------------------------------------------------------------------

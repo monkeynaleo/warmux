@@ -43,14 +43,15 @@ public:
   void LoadImage (Surface& ground_surface);
 
   // Get size
-  unsigned int GetWidth () const { return width; }
-  unsigned int GetHeight () const { return height; }
+  unsigned int GetWidth() const{ return size.x; }
+  unsigned int GetHeight() const{ return size.y; }
+  Point2i GetSize() const{ return size; }
 
   // Get alpha value of a pixel
-  unsigned char GetAlpha (const int x, const int y) const;
+  unsigned char GetAlpha(const int x, const int y) const;
 
   // Draw it (on the entire visible part) 
-  void DrawTile () const;
+  void DrawTile() const;
    
   // Draw a part that is inside the given clipping rectangle
   // Clipping rectangle is in World corrdinate not screen coordinates
@@ -59,13 +60,12 @@ public:
    
 protected:
    
-  void InitTile (unsigned int width, unsigned int height);
+  void InitTile(unsigned int width, unsigned int height);
 
-  void FreeMem ();
+  void FreeMem();
 
   // Dimension du terrain
-  unsigned int width;
-  unsigned int height;
+  Point2i size;
 
   unsigned int nbr_cell_width, nbr_cell_height;
   unsigned int nbr_cell;

@@ -19,8 +19,6 @@
  * Refresh d'un ver de terre.
  *****************************************************************************/
 
-#include <SDL.h>
-
 #include "character.h"
 #include <SDL.h>
 #include <sstream>
@@ -48,7 +46,6 @@
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon_tools.h"
 #include "../interface/cursor.h"
-
 
 const uint HAUT_FONT_MIX = 13;
 
@@ -265,7 +262,7 @@ void Character::StartBreathing()
   SetSkin("breathe");
   if(current_skin == "breathe")
   {
-    image->animation.SetSpeedFactor((float)RandomLong(100,150)/100.0);
+    image->animation.SetSpeedFactor((float)randomObj.GetLong(100,150)/100.0);
     image->animation.SetLoopMode(true);
     image->Start();
   }
@@ -588,7 +585,7 @@ void Character::Refresh()
       if ( anim.image->IsFinished() )
       {
         anim.draw = false;
-        anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
+        anim.time  = randomObj.GetLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
         anim.time += global_time.Read();
       }
     }
@@ -655,7 +652,7 @@ void Character::SignalFallEnding()
   pause_bouge_dg = global_time.Read();
 
   double norme, degat;
-  DoubleVector speed_vector ;
+  Point2d speed_vector;
 
   StopWalking();
   GetSpeedXY (speed_vector);
@@ -782,7 +779,7 @@ bool Character::SetSkin(const std::string& skin_name)
     if(skin_name=="walking" || skin_name=="breathe")
     {
         anim.draw = false;
-        anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
+        anim.time  = randomObj.GetLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
         anim.time += global_time.Read();
     }
 
@@ -861,15 +858,15 @@ void Character::Reset()
   if (anim.draw)
   { 
     anim.image->Finish();
-    anim.time  = RandomLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
+    anim.time  = randomObj.GetLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
     anim.time += global_time.Read();    
   }
 
   // Initialise l'image
-  SetDirection( RandomBool()?1:-1 );
+  SetDirection( randomObj.GetBool()?1:-1 );
 
   if(!full_walk)
-    image->SetCurrentFrame ( RandomLong(0, image->GetFrameCount()-1) );
+    image->SetCurrentFrame ( randomObj.GetLong(0, image->GetFrameCount()-1) );
   else
     StartBreathing();
 
@@ -901,11 +898,7 @@ void Character::Reset()
     desactive = false;
     Ready();
 
-    // Prend des coordonnées au hasard
-    uint x = RandomLong(0, world.GetWidth() -GetWidth());
-    uint y = RandomLong(0, world.GetHeight() -GetHeight());
-
-    SetXY( Point2i(x, y) );
+    SetXY( randomObj.GetPoint(world.GetSize() - GetSize() + 1) );
 
 #ifndef NO_POSITION_CHECK
     pos_ok &= !IsGhost() && IsInVacuum( Point2i(0,0) ) && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));

@@ -38,7 +38,6 @@ const uint EnergieStatusClassementChange = 2;
 //LA jauge attend que toutes les jauges aient fini leur opération en cour
 const uint EnergieStatusAttend = 3;
 
-
 class TeamEnergy
 {
   private :

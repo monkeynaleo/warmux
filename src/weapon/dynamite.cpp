@@ -132,7 +132,7 @@ void Dynamite::p_Select()
 // Pose une dynamite
 bool Dynamite::p_Shoot ()
 {
-  DoubleVector speed_vector ;
+  Point2d speed_vector;
 
   // Ajoute la représentation
   int x,y;

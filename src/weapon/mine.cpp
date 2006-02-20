@@ -21,7 +21,6 @@
  *****************************************************************************/
 
 #include "mine.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include <sstream>
 #include "weapon_tools.h"
@@ -35,6 +34,7 @@
 #include "../map/map.h"
 #include "../object/objects_list.h"
 #include "../team/macro.h"
+#include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/random.h"
 #include "../tool/resource_manager.h"
@@ -42,23 +42,8 @@
 #ifdef __MINGW32__
 #undef LoadImage
 #endif
-//-----------------------------------------------------------------------------
-
-#ifdef DEBUG
-
-//#define DBG_PLACEMENT
-//#define DBG_DETECTION
-
-#define COUT_DBG0 std::cout << "[" << m_name << "]"
-#define COUT_DBG COUT_DBG0 " "
-#define COUT_PLACEMENT COUT_DBG0 "[Reset bcl=" << bcl << "] "
-#endif
-
-//-----------------------------------------------------------------------------
 
 const double DEPART_FONCTIONNEMENT = 5;
-
-//-----------------------------------------------------------------------------
 
 ObjMine::ObjMine(GameLoop &p_game_loop, Mine& p_launcher) : 
   PhysicalObj(p_game_loop, "mine", 0.0),
@@ -69,7 +54,7 @@ ObjMine::ObjMine(GameLoop &p_game_loop, Mine& p_launcher) :
   animation = false;
   m_rebounding = true;
   affiche = true;
-  non_defectueuse = RandomLong(0, 9);
+  non_defectueuse = randomObj.GetLong(0, 9);
   channel = -1;
 
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
@@ -86,8 +71,6 @@ ObjMine::ObjMine(GameLoop &p_game_loop, Mine& p_launcher) :
   depart = uint(global_time.Read() + DEPART_FONCTIONNEMENT * 1000);
 }
 
-//-----------------------------------------------------------------------------
-
 void ObjMine::Reset()
 {
   affiche = true;
@@ -97,22 +80,20 @@ void ObjMine::Reset()
   detection->SetCurrentFrame(0);
    
   uint bcl=0;
-  uint x = RandomLong(0, world.GetWidth() - GetWidth()), y;
+  //uint x = randomObj.GetLong(0, world.GetWidth() - GetWidth()), y;
+  Point2i pos;
   bool ok;
   do
   {
-    ok=true;
+    ok = true;
 
     Ready();
     FORCE_ASSERT (++bcl < NBR_BCL_MAX_EST_VIDE);
-    x = RandomLong(0, world.GetWidth() - GetWidth());
-    y = RandomLong(0, world.GetHeight() - GetHeight());
+	pos = randomObj.GetPoint( world.GetSize() - GetSize() );
     
-    SetXY( Point2i(x, y) );
-    DirectFall ();
-#ifdef DBG_PLACEMENT
-    COUT_PLACEMENT << "SetXY (" << x << "," << y << ")" << std::endl;
-#endif
+    SetXY( pos );
+    DirectFall();
+	MSG_DEBUG("mine", "SetXY( %d, %d )", pos.x, pos.y);
     ok &= !IsGhost() && IsInVacuum( Point2i(0,0) );
     if (!ok) continue;
 
@@ -121,23 +102,17 @@ void ObjMine::Reset()
       if (MeterDistance (GetCenter(), ver->GetCenter()) 
 	   < launcher.cfg().detection_range)
       { 
-#ifdef DBG_PLACEMENT
-	COUT_PLACEMENT << "Touche le ver " << (*ver).m_name << std::endl;
-#endif
-	ok = false; 
+	    MSG_DEBUG("mine", "Touche le ver %s", (*ver).m_name);
+	    ok = false; 
       }
     }
     ok &= !IsGhost() && !IsInWater() && IsInVacuum( Point2i(0,0) );
   } while (!ok);
-#ifdef DBG_PLACEMENT
-  COUT_PLACEMENT << "Placé." << std::endl;
-#endif
+  MSG_DEBUG("mine", "Placé.");
 
   DirectFall();
   SetMass(launcher.cfg().mass);
 }
-
-//-----------------------------------------------------------------------------
 
 void ObjMine::Draw()
 { 
@@ -146,71 +121,49 @@ void ObjMine::Draw()
   detection->Draw(GetX(), GetY());
 }
 
-//-----------------------------------------------------------------------------
-
 void ObjMine::SignalFallEnding()
 {
-#ifdef MSG_DBG_MINE
-  COUT_DBG << "Fin de la chute : la mine est a terre." << std::endl;
-#endif
-
+  MSG_DEBUG("mine", "Fin de la chute: la mine est a terre.");
   SetMass (launcher.cfg().mass);
 }
 
-//-----------------------------------------------------------------------------
-
 void ObjMine::Explosion ()
 {
-#ifdef DBG_DETECTION
-  COUT_DBG << "Explosion()" << std::endl;
-#endif
+  MSG_DEBUG("mine", "Explosion");
   affiche = false;
 
   Point2i centre = GetCenter();
-  AppliqueExplosion (centre, centre, impact, launcher.cfg(), NULL);
+  AppliqueExplosion(centre, centre, impact, launcher.cfg(), NULL);
   DesactiveDetection();
 }
-
-//-----------------------------------------------------------------------------
 
 void ObjMine::ActiveDetection()
 {
   if (!animation)
   {
-#ifdef DBG_DETECTION
-    COUT_DBG << "ActiveDetection()" << std::endl;
-#endif
-
     animation=true;
     affiche = true;
     armer = global_time.Read() + launcher.cfg().temps_fuite;
     attente = global_time.Read() + launcher.cfg().temps_fuite;
     m_ready = false;
-#ifdef DBG_DETECTION
-    COUT_DBG << "IsReady() : " << IsReady() << std::endl;
-#endif
+	MSG_DEBUG("mine", "IsReady() = %d", IsReady());
 
     channel = jukebox.Play("share", "weapon/mine_beep", -1);
   }
 }
 
-//-----------------------------------------------------------------------------
-  
 void ObjMine::DesactiveDetection()
 {
   if (animation )//&& !repos)
   {
-#ifdef DBG_DETECTION
-    COUT_DBG << "DesactiveDetection()" << std::endl;
-#endif
+	MSG_DEBUG("mine", "Desactive detection..");
+
     animation = false;
     m_ready = true;
 
     detection->SetCurrentFrame(0);
   }
 }
-
-//-----------------------------------------------------------------------------
 
 void ObjMine::Detection()
 {
@@ -228,8 +181,6 @@ void ObjMine::Detection()
     }
   }
 }
-
-//-----------------------------------------------------------------------------
 
 void ObjMine::Refresh()
 {
@@ -266,24 +217,16 @@ void ObjMine::Refresh()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 void ObjMine::SignalGhostState (bool)
 {
   if (!affiche) return;
 
   affiche=false;
 
-#ifdef MSG_DBG_MINE
-  COUT_DBG << "Une mine sort de l'écran !" << std::endl;
-#endif
+  MSG_DEBUG("mine", "Une mine sort de l'écran");
 
   Ghost();
 }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 Mine::Mine() : Weapon(WEAPON_MINE, "mine", new MineConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
@@ -291,8 +234,6 @@ Mine::Mine() : Weapon(WEAPON_MINE, "mine", new MineConfig(), VISIBLE_ONLY_WHEN_I
 
   already_put = false;
 }
-
-//-----------------------------------------------------------------------------
 
 bool Mine::p_Shoot()
 {
@@ -305,21 +246,17 @@ bool Mine::p_Shoot()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void Mine::Add (int x, int y)
 {
   ObjMine *obj = new ObjMine(game_loop, *this);
   obj -> SetXY ( Point2i(x, y) );
 
-  DoubleVector speed_vector ;
+  Point2d speed_vector;
   ActiveCharacter().GetSpeedXY(speed_vector);
   obj -> SetSpeedXY (speed_vector);
   lst_objets.AjouteObjet (obj, true);
   fuite = global_time.Read()+3000;
 }
-
-//-----------------------------------------------------------------------------
 
 void Mine::Refresh()
 {
@@ -333,14 +270,8 @@ void Mine::Refresh()
   }
 }
 
-//-----------------------------------------------------------------------------
-
 MineConfig& Mine::cfg()
 { return static_cast<MineConfig&>(*extra_params); }
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 MineConfig::MineConfig()
 {
@@ -355,4 +286,3 @@ void MineConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitUint (elem, "temps_fuite", temps_fuite);
 }
 
-//-----------------------------------------------------------------------------

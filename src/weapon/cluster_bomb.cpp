@@ -118,8 +118,8 @@ void ClusterBomb::Explosion()
 {
   if (IsGhost()) return;
 
-  DoubleVector speed_vector ;
-  int x, y ;
+  Point2d speed_vector;
+  int x, y;
 
   GetSpeedXY(speed_vector);
 
@@ -128,7 +128,7 @@ void ClusterBomb::Explosion()
     {
       Cluster &cluster = *it;
       
-      double angle = (double)RandomLong ((long)0.0, (long)(2.0 * M_PI));
+      double angle = randomObj.GetDouble(2.0 * M_PI);
       x = GetX()+(int)(cos(angle) * (double)cfg.blast_range*5);
       y = GetY()+(int)(sin(angle) * (double)cfg.blast_range*5);
 

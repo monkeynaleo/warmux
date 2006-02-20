@@ -210,10 +210,10 @@ void NinjaRope::UnattachRope()
 
 bool NinjaRope::TryAddNode(int CurrentSense)
 {
-  int dx, dy, lg, cx, cy ;
-  DoubleVector V ;
+  int dx, dy, lg, cx, cy;
+  Point2d V;
   bool AddNode = false ;
-  double angle, rope_angle ;
+  double angle, rope_angle;
 
   Point2i handPos = ActiveCharacter().GetHandPosition();
 

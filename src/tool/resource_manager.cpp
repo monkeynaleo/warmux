@@ -28,16 +28,10 @@
 #include "resource_manager.h"
 #include <string>
 #include <iostream>
-#include <SDL.h>
-#include <SDL_image.h>
-#include "../game/config.h"
-#include "../graphic/sprite.h"
 #include "error.h"
 #include "xml_document.h"
-
-#ifdef DEBUG
-//#define DBG_RS_MANAGER
-#endif
+#include "../game/config.h"
+#include "../graphic/sprite.h"
 
 Profile::Profile()
 {

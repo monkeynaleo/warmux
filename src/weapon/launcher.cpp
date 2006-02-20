@@ -39,9 +39,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-//-----------------------------------------------------------------------------
-
-
 WeaponBullet::WeaponBullet(GameLoop &game_loop, const std::string &name, ExplosiveWeaponConfig& cfg) :
   WeaponProjectile(game_loop, name, cfg)
 { 

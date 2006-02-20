@@ -140,11 +140,11 @@ void Physics::SetGravityFactor (double factor)
 
 void Physics::SetSpeed (double length, double angle)
 {
-  DoubleVector vector( length*cos(angle), length*sin(angle) );
+  Point2d vector( length*cos(angle), length*sin(angle) );
   SetSpeedXY(vector);
 }
 
-void Physics::SetSpeedXY (DoubleVector vector)
+void Physics::SetSpeedXY (Point2d vector)
 {
   if (EgalZero(vector.x)) vector.x = 0;
   if (EgalZero(vector.y)) vector.y = 0;
@@ -159,11 +159,11 @@ void Physics::SetSpeedXY (DoubleVector vector)
 
 void Physics::AddSpeed (double length, double angle)
 {
-  DoubleVector vector( length*cos(angle), length*sin(angle) );
+  Point2d vector( length*cos(angle), length*sin(angle) );
   AddSpeedXY (vector);
 }
 
-void Physics::AddSpeedXY (DoubleVector vector)
+void Physics::AddSpeedXY (Point2d vector)
 {
   if (EgalZero(vector.x)) vector.x = 0;
   if (EgalZero(vector.y)) vector.y = 0;
@@ -178,7 +178,7 @@ void Physics::AddSpeedXY (DoubleVector vector)
 
 void Physics::GetSpeed(double &norm, double &angle)
 {
-  DoubleVector speed ;
+  Point2d speed ;
 
   switch (m_motion_type) {
     case FreeFall:
@@ -206,7 +206,7 @@ void Physics::GetSpeed(double &norm, double &angle)
   }
 }
 
-void Physics::GetSpeedXY(DoubleVector &vector)
+void Physics::GetSpeedXY(Point2d &vector)
 {
   if(!IsMoving())
     {
@@ -224,7 +224,7 @@ double Physics::GetAngularSpeed()
 double Physics::GetSpeedAngle()
 {
   double angle ;
-  DoubleVector speed ;
+  Point2d speed ;
 
   GetSpeedXY(speed);
   angle = speed.ComputeAngle();
@@ -234,12 +234,12 @@ double Physics::GetSpeedAngle()
 
 void Physics::SetExternForce (double length, double angle)
 {
-  DoubleVector vector(length*cos(angle), length*sin(angle));
+  Point2d vector(length*cos(angle), length*sin(angle));
 
   SetExternForceXY(vector);
 }
 
-void Physics::SetExternForceXY (DoubleVector vector)
+void Physics::SetExternForceXY (Point2d vector)
 {
   bool was_moving = IsMoving();
 
@@ -256,7 +256,7 @@ void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
   double fix_point_x, fix_point_y ;
   double old_length ;
 
-  DoubleVector V ;
+  Point2d V ;
   m_fix_point_gnd.x = g_x ;
   m_fix_point_gnd.y = g_y ;
   m_fix_point_dxy.x = dx ;
@@ -568,7 +568,7 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
 
     case Pendulum:
 		{
-			DoubleVector V ;
+			Point2d V ;
 
 			// Recompute new angle.
 			V.x = m_pos_x.x0 + m_fix_point_dxy.x - m_fix_point_gnd.x;
