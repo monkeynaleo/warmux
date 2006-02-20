@@ -136,7 +136,7 @@ int Avion::GetDirection() const {
 void Avion::Draw()
 {
   if (IsGhost()) return;
-  image->Draw( GetX(), GetY());
+  image->Draw(GetPos());
 }
 
 bool Avion::PeutLacherObus() const

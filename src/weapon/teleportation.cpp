@@ -117,7 +117,7 @@ void Teleportation::Draw()
 {
   if (m_is_active) {
     skin->Update();
-    skin->Draw(m_x, m_y);
+    skin->Draw( Point2i(m_x, m_y) );
   } else {
     Weapon::Draw();
   }

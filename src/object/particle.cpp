@@ -50,7 +50,7 @@ Particle::Particle(GameLoop &p_game_loop) :
 void Particle::Draw()
 {
   if (m_left_time_to_live > 0) 
-    image->Draw(GetX(),GetY());
+    image->Draw(GetPos());
 }
 
 void Particle::Refresh()

@@ -150,7 +150,7 @@ void DrawTmpBoxText(Font &font, int _x, int _y,
   app.video.window.RectangleColor(rect, rectColor);  
 
   world.ToRedrawOnScreen( rect );
-  font.WriteCenterTop (_x, _y, txt, white_color);
+  font.WriteCenterTop( Point2i(_x, _y), txt, white_color);
 }
 
 void DrawTmpBoxTextWithReturns(Font &font, const Point2i &position, 
@@ -211,7 +211,7 @@ void DrawTmpBoxTextWithReturns(Font &font, const Point2i &position,
        it != offsets.end();
        ++it)
   {
-    font.WriteLeft(x+space, y+space, lines+(*it), white_color);
+    font.WriteLeft( Point2i(x+space, y+space), lines+(*it), white_color);
     y += font.GetHeight(lines+(*it));
   }
   offsets.clear();

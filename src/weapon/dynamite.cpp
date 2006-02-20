@@ -99,15 +99,10 @@ void BatonDynamite::Draw()
   if (!is_active) return;
   assert (!IsGhost());
 
-  int x = GetX();
-  int y = GetY();
   if (!explosion_active)
-    image->Draw(x,y);
-  else {
-    x -= explosion->GetWidth()/2;
-    y -= explosion->GetHeight()/2;
-    explosion->Draw(x,y);
-  }
+    image->Draw(GetPos());
+  else
+    explosion->Draw(GetPos() - explosion->GetSize()/2);
 }
    
 void BatonDynamite::SignalCollision() {}

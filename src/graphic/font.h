@@ -37,7 +37,7 @@ class Font
 
   std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
-  void Write(int x, int y, Surface &surface);
+  void Write(const Point2i &pos, Surface &surface);
 
 public:
   Font(int size);
@@ -46,15 +46,15 @@ public:
   bool Load (const std::string& filename, int size);
   TTF_Font& GetTTF();
 
-  void WriteLeft (int x, int y, const std::string &txt, const Color &color);
-  void WriteLeftBottom (int x, int y, const std::string &txt, const Color &color);
-  void WriteRight (int x, int y, const std::string &txt, const Color &color);
-  void WriteCenterTop (int x, int y, const std::string &txt, const Color &color);
-  void WriteCenter (int x, int y, const std::string &txt, const Color &color);
+  void WriteLeft(const Point2i &pos, const std::string &txt, const Color &color);
+  void WriteLeftBottom(const Point2i &pos, const std::string &txt, const Color &color);
+  void WriteRight(const Point2i &pos, const std::string &txt, const Color &color);
+  void WriteCenterTop(const Point2i &pos, const std::string &txt, const Color &color);
+  void WriteCenter(const Point2i &pos, const std::string &txt, const Color &color);
   
-  int GetWidth (const std::string &txt);
-  int GetHeight ();
-  int GetHeight (const std::string &txt);
+  int GetWidth(const std::string &txt);
+  int GetHeight();
+  int GetHeight(const std::string &txt);
 
   Surface Render(const std::string &txt, const Color &color, bool cache=false);
   Surface CreateSurface(const std::string &txt, const Color &color);
@@ -63,7 +63,7 @@ public:
 class GameFont : public Font
 {
   GameLoop &game_loop;
-  void Write(int x, int y, Surface &surface);
+  void Write(const Point2i &pos, Surface &surface);
 
 public:
   GameFont(GameLoop &game_loop, int size);

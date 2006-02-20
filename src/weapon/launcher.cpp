@@ -217,7 +217,7 @@ void WeaponProjectile::Draw()
   if( !is_active )
     return;
 
-  image->Draw(GetX(), GetY());   
+  image->Draw(GetPos());
 
   int tmp = cfg.timeout;
   if (tmp != 0) {
@@ -227,7 +227,8 @@ void WeaponProjectile::Draw()
     ss << tmp;
     int txt_x = GetX() + GetWidth() / 2;
     int txt_y = GetY() - GetHeight();
-    global().small_font().WriteCenterTop (txt_x-camera.GetX(), txt_y-camera.GetY(), ss.str(), white_color);
+    global().small_font().WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
+		   	ss.str(), white_color);
   }
 }
 

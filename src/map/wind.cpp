@@ -123,7 +123,7 @@ void WindParticle::Draw()
       sprite->Scale( scale_x, scale_y);
     }
   }
-  sprite->Draw(GetX(), GetY());
+  sprite->Draw(GetPos());
 }
 
 void WindParticle::Resize(double size)

@@ -370,10 +370,11 @@ void Sprite::Update(){
   animation.Update();
 }    
 
-void Sprite::Draw(int pos_x, int pos_y){
-  if( !show )
-    return;
-  Blit( app.video.window, pos_x - camera.GetX(), pos_y - camera.GetY() );
+void Sprite::Draw(const Point2i &pos){
+	if( !show )
+		return;
+
+	Blit(app.video.window, pos - camera.GetPosition() );	
 }
 
 void Sprite::Show() { show = true; }

@@ -205,8 +205,9 @@ void WeaponMenuItem::Draw()
   else
     txt << nb_bullets;
 
-  global().tiny_font().WriteLeftBottom((int)(c_x - 0.5 * WEAPON_ICO_WIDTH * scale),
-			    (int)(c_y + 0.5 * WEAPON_ICO_HEIGHT * scale),
+  global().tiny_font().WriteLeftBottom(
+		  Point2i(c_x - 0.5 * WEAPON_ICO_WIDTH * scale,
+			      c_y + 0.5 * WEAPON_ICO_HEIGHT * scale),
 			    txt.str(),
 			    white_color);
 }
