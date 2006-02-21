@@ -66,7 +66,7 @@ bool Mouse::ActionClicG()
   const Point2i pos_monde = GetPosMonde();   
 	
   // Action dans le menu des armes ?
-  if( interface.weapons_menu.ActionClic (GetX(),GetY()) )
+  if( interface.weapons_menu.ActionClic( GetPosition() ) )
     return true;
 
   // On peut changer de ver ?
@@ -97,7 +97,7 @@ bool Mouse::ActionClicG()
   }
   
   // Action dans le menu des armes ?
-  if (interface.weapons_menu.ActionClic (GetX(),GetY())) 
+  if( interface.weapons_menu.ActionClic(GetPosition()) ) 
     return true;
   
   // Choosing target for a weapon, many posibilities :
@@ -183,7 +183,7 @@ void Mouse::TestCamera(){
     if( scroll_actif ){
       int dx = sauve_x - _x;
       int dy = sauve_y - _y;
-      camera.SetXY(dx,dy);
+      camera.SetXY(dx, dy);
       camera.autorecadre = false;
     }else{
       scroll_actif = true;
@@ -218,6 +218,13 @@ int Mouse::GetY() const{
    return y; 
 }
 
+Point2i Mouse::GetPosition() const{
+	int x, y;
+
+	SDL_GetMouseState( &x, &y);
+	return Point2i(x, y);
+}
+
 int Mouse::GetXmonde() const{ 
    return GetX() - FOND_X + camera.GetX(); 
 }
@@ -226,9 +233,8 @@ int Mouse::GetYmonde() const{
    return GetY() - FOND_Y + camera.GetY(); 
 }
 
-
 Point2i Mouse::GetPosMonde() const{ 
-   return Point2i (GetXmonde(), GetYmonde());
+   return GetPosition() + camera.GetPosition() - Point2i(FOND_X, FOND_Y);
 }
 
 void Mouse::TraiteClic (const SDL_Event *event){

@@ -48,6 +48,7 @@ public:
   // Lit la position dans le monde
   int GetX() const;
   int GetY() const;
+  Point2i GetPosition() const;
   int GetXmonde() const;
   int GetYmonde() const;
   bool ClicG() const;

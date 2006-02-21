@@ -21,19 +21,18 @@
 
 #ifndef WEAPON_MENU_H
 #define WEAPON_MENU_H
-//-----------------------------------------------------------------------------
+
 #include "../graphic/sprite.h"
 #include "../include/base.h"
 #include "../team/character.h"
 #include "../team/team.h"
 #include "../weapon/weapon.h"
 #include <vector>
-//-----------------------------------------------------------------------------
 
 class WeaponMenuItem
 {
 public:
-  int x, y;
+  Point2i position;
   double scale;
   Weapon* weapon;
   Sprite *weapon_icon;
@@ -50,7 +49,7 @@ public:
   void Draw();
   void ChangeZoom();
 
-  bool MouseOn(int s_x, int s_y);
+  bool MouseOn(const Point2i &mousePos);
 
 private:
   void ComputeScale();
@@ -83,7 +82,7 @@ public:
   WeaponsMenu();
 
   // Renvoie true si un bouton a été cliqué
-  bool ActionClic (int x, int y);
+  bool ActionClic(const Point2i &mousePos);
 
   void Draw();
   void Init();
@@ -91,23 +90,24 @@ public:
 
   int GetX() const;
   int GetY() const;
+  Point2i GetPosition() const;
   int GetWidth() const;
   int GetHeight() const;
+  Point2i GetSize() const;
   bool IsDisplayed() const;
 
   void NewItem(Weapon* new_item, uint num_sort);
   void SwitchDisplay();
   void Hide();
 
-  void MouseOver(int x,int y);
+  void MouseOver(const Point2i &mousePos);
 
 private:
   void ComputeSize();
   void Show();
   void DrawBouton(iterator bouton);
-  void ShowMotion(int nr_bottons,int button_no,iterator it, int column);
-  bool HideMotion(int nr_buttons,int button_no,iterator it,int column);
+  void ShowMotion(int nr_bottons, int button_no, iterator it, int column);
+  bool HideMotion(int nr_buttons, int button_no, iterator it, int column);
 };
 
-//-----------------------------------------------------------------------------
 #endif
