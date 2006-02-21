@@ -116,6 +116,24 @@ template<class T> class Vector2
 			return r;
 		}
 
+		inline Vector2<T> operator*(const T val) const{
+			Vector2<T> r = *this;
+
+			r.x *= val;
+			r.y *= val;
+
+			return r;
+		}
+
+		inline Vector2<T> operator*(const Vector2<T> &p2) const{
+			Vector2<T> r = *this;
+
+			r.x *= p2.x;
+			r.y *= p2.y;
+
+			return r;
+		}
+		
 		/**
 		 *
 		 * @param val

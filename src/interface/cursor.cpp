@@ -74,7 +74,7 @@ void CurseurVer::Refresh()
 {
   if (!IsDisplayed()) return;
 
-  image->Scale(1.0,1.0);
+  image->Scale(1.0, 1.0);
 
   //The arrow is appearing:
   if( actif && global_time.Read() < time_begin_anim + show_hide_time )
