@@ -187,8 +187,8 @@ void Character::DrawEnergyBar(int dy)
   if( IsDead() )
 	return;
 
-  energy_bar.DrawXY ( GetCenterX()-energy_bar.GetWidth()/2-camera.GetX(), 
-		      GetY()+dy-camera.GetY());
+  energy_bar.DrawXY( Point2i( GetCenterX() - energy_bar.GetWidth() / 2, GetY() + dy)  
+		  - camera.GetPosition() );
 }
 
 void Character::DrawName (int dy) const

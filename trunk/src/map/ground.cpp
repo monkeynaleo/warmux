@@ -60,7 +60,7 @@ void Ground::Init(){
 
 void Ground::Reset(){
   Init();
-  lastx = lasty = INT_MAX;
+  lastPos.SetValues(INT_MAX, INT_MAX);
 }
 
 // Lit la valeur alpha du pixel (x,y)
@@ -234,38 +234,32 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
 
 void Ground::Draw()
 {
-  int cx = camera.GetX();
-  int cy = camera.GetY();
-  int vidWidth = app.video.window.GetWidth();
-  int vidHeight = app.video.window.GetHeight();
+  Point2i cPos = camera.GetPosition();
+  Point2i windowSize = app.video.window.GetSize();
   
   if (camera.HasFixedX()) {// ground is less wide than screen !
-    uint margin = ( vidWidth - GetWidth() )/2;
+    int margin = ( windowSize.x - GetWidth() )/2;
 	
-    app.video.window.BoxColor( Rectanglei(0, 0,margin, vidHeight), black_color); 
-    app.video.window.BoxColor( Rectanglei(vidWidth - margin, 0, margin, vidHeight), black_color); 
+    app.video.window.BoxColor( Rectanglei(0, 0, margin, windowSize.y), black_color); 
+    app.video.window.BoxColor( Rectanglei(windowSize.x - margin, 0, margin, windowSize.y), black_color); 
   }
 
   if (camera.HasFixedY()) {// ground is less wide than screen !
-    uint margin = (vidHeight - GetHeight())/2;
+    uint margin = (windowSize.y - GetHeight())/2;
 	
-    app.video.window.BoxColor( Rectanglei(0, 0, vidWidth, margin), black_color); 
-    app.video.window.BoxColor( Rectanglei(0, vidHeight - margin, vidWidth, margin), black_color); 
+    app.video.window.BoxColor( Rectanglei(0, 0, windowSize.x, margin), black_color); 
+    app.video.window.BoxColor( Rectanglei(0, windowSize.y - margin, windowSize.x, margin), black_color); 
   }
 
 #if defined(WIN32)
   // TODO: Why the cache doesn't work on Windows!?
   DrawTile();
 #else  
-  if (lastx != cx || lasty != cy)
-  {
-    lastx = cx;
-    lasty = cy;
+  if( lastPos != cPos ){
+    lastPos = cPos;
     DrawTile();
     return;
   }
-  lastx = cx;
-  lasty = cy; 
 
   std::list<Rectanglei>::iterator
     it=world.to_redraw_now->begin(),

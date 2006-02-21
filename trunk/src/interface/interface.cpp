@@ -181,7 +181,7 @@ void Interface::DisplayCharacterInfo ()
   t_character_energy->DrawTopLeft(bottom_bar_ox+ENERGIE_VER_X+t_ENERGY->GetWidth()+MARGIN,
 				  bottom_bar_oy+ENERGIE_VER_Y);
    
-  barre_energie.DrawXY (bottom_bar_ox+BARENERGIE_X,bottom_bar_oy+BARENERGIE_Y);
+  barre_energie.DrawXY( Point2i(bottom_bar_ox+BARENERGIE_X,bottom_bar_oy+BARENERGIE_Y) );
    
   // Display team logo
   Point2i dst(x + ECUSSON_EQUIPE_X, y + ECUSSON_EQUIPE_Y);
@@ -253,13 +253,12 @@ void Interface::Draw ()
 
   if ( game_loop.ReadState() == gamePLAYING && weapon_strength_bar.visible)
   {
-    // Position on the screen 
-    uint barre_x = (app.video.window.GetWidth()-weapon_strength_bar.GetWidth())/2;
-    uint barre_y = app.video.window.GetHeight()-weapon_strength_bar.GetHeight() 
-                   - interface.GetHeight()-10;
+    // Position on the screen
+	Point2i barPos = (app.video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1) 
+		- Point2i(0, interface.GetHeight() + 10);
      
     // Drawing on the screen
-     weapon_strength_bar.DrawXY (barre_x, barre_y);
+     weapon_strength_bar.DrawXY(barPos);
   }
        
   weapons_menu.Draw();
@@ -310,36 +309,17 @@ void Interface::UpdateTimer(uint utimer)
     timer = NULL;
 }
 
-void AbsoluteDraw(Surface &s, int x, int y)
+void AbsoluteDraw(Surface &s, Point2i pos)
 {
-  world.ToRedrawOnMap(Rectanglei(x, y, s.GetWidth(), s.GetHeight()));
+	Rectanglei rectSurface(pos, s.GetSize());
 
-  if( x + s.GetWidth() < (int)camera.GetX() 
-	|| x > (int)camera.GetX()+(int)camera.GetWidth()
-  	|| y + s.GetHeight() < (int)camera.GetY()
-	|| y > (int)camera.GetY()+(int)camera.GetHeight() )
-    return; //Drawing out of camera area
+	if( !rectSurface.Intersect(camera.GetRect()) )
+		return;
 
-  Rectanglei src(0, 0, s.GetWidth(), s.GetHeight());
-  Rectanglei dst(x - (int)camera.GetX(), y - (int)camera.GetY(), s.GetWidth(), s.GetHeight());
+	world.ToRedrawOnMap(rectSurface);
+	rectSurface.Clip( camera.GetRect() );
 
-  if( dst.GetPositionX() < 0 ){
-    src.SetSizeX( src.GetSizeX() + src.GetPositionX() );
-    src.SetPositionX( 0 );
-  }
-
-  if( dst.GetPositionX() + src.GetSizeX() > camera.GetX() )
-    src.SetSizeX( camera.GetWidth() - src.GetPositionX() );
-
-  if( dst.GetPositionY() > 0 ){
-    src.SetSizeY( src.GetSizeY() + src.GetPositionY() );
-    src.SetPositionY(0);
-  }
-
-  if( dst.GetPositionY() + src.GetSizeY() > camera.GetY() )
-    src.SetSizeY( camera.GetHeight() - src.GetPositionY() );
-
-  //TODO:blit only the displayed part of the Surface
-  app.video.window.Blit(s, src, dst.GetPosition() );
+ 	Point2i dstPos(pos - camera.GetPosition());
+	app.video.window.Blit(s, Rectanglei(pos - camera.GetPosition(), rectSurface.GetSize()), dstPos );
 }
 

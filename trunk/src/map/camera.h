@@ -42,7 +42,6 @@ public:
   Camera();
 
   // Scrolle le fond en X ou Y
-  void SetXY(int dx, int dy);
   void SetXY(Point2i pos);
   void SetXYabs(int x, int y);
   void SetXYabs(const Point2i &pos);
@@ -56,12 +55,13 @@ public:
   bool IsVisible(const PhysicalObj &obj);
 
   // Decalage du fond
-  int GetX() const;
-  int GetY() const;
+  //int GetX() const;
+  //int GetY() const;
   Point2i GetPosition() const;
-  uint GetWidth() const;
-  uint GetHeight() const;
+  int GetWidth() const;
+  int GetHeight() const;
   Point2i GetSize() const;
+  Rectanglei GetRect() const;
 
   void Refresh();
 

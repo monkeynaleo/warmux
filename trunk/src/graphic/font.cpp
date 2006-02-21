@@ -155,6 +155,10 @@ int Font::GetHeight (const std::string &str){
   return height;
 }
 
+Point2i Font::GetSize(const std::string &txt){
+	return Point2i(GetWidth(txt), GetHeight(txt));
+}
+
 //-----------------------------------------------------------------------------
 
 GameFont::GameFont(GameLoop &p_game_loop, int size) :

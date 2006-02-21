@@ -30,8 +30,7 @@
 #include "../include/app.h"
 
 // Vitesse (comprise entre 0 et 0.5)
-const double VITESSE_CIEL_X = 0.3;
-const double VITESSE_CIEL_Y = 1;
+const Point2d SKY_SPEED( 0.3, 1);
 
 Sky::Sky(){
 }
@@ -45,70 +44,57 @@ void Sky::Init(){
 
 void Sky::Reset(){
   Init();
-  lastx = lasty = INT_MAX;
+  lastPos.SetValues(INT_MAX, INT_MAX);
 }
 
 void Sky::CompleteDraw(){
-   int x = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
-   int y = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
+    Point2i pos = camera.GetPosition() * SKY_SPEED;
 
-   if(!TerrainActif().infinite_bg)
-   {    
-     uint margin_x = 0, margin_y = 0;
-     
-     if (image.GetWidth() < int(camera.GetWidth())) {
-       x = 0;
-       margin_x = (camera.GetWidth()-image.GetWidth())/2;
-     }
-     if (image.GetHeight() < int(camera.GetHeight())) {
-       y = 0;
-       margin_y = (camera.GetHeight()-image.GetHeight())/2;
-     }
-     Rectanglei ds(x, y, camera.GetWidth(), camera.GetHeight());
-     Point2i dp(margin_x, margin_y);
-     app.video.window.Blit( image, ds, dp);
-   }
-   else
-   {
-     int w,h;
+	if(!TerrainActif().infinite_bg){
+		Point2i tstVect = image.GetSize().inf( camera.GetSize() );
+		Point2i margin = tstVect * (camera.GetSize() - image.GetSize())/2;
+		pos =  pos * (Point2i(1, 1) - tstVect);
 
-     while(x<0)
-       x += image.GetWidth();
-     while(x>image.GetWidth())
-       x -= image.GetWidth();
-     while(y<0)
-       y += image.GetHeight();
-     while(y>image.GetHeight())
-       y -= image.GetHeight();
+		Rectanglei ds(pos, camera.GetSize());
+		app.video.window.Blit( image, ds, margin);
+   }else{
+     Point2i size;
 
-     w = image.GetWidth() - x;
-     if(w >= static_cast<int>(camera.GetWidth()))
-       w = camera.GetWidth();
+     while( pos.x<0 )
+       pos.x += image.GetWidth();
+     while( pos.x>image.GetWidth() )
+       pos.x -= image.GetWidth();
+     while( pos.y<0 )
+       pos.y += image.GetHeight();
+     while(pos.y>image.GetHeight())
+       pos.y -= image.GetHeight();
 
-     h = image.GetHeight() - y;
-     if(h >= static_cast<int>(camera.GetHeight()))
-       h = camera.GetHeight();
+	 size = image.GetSize() - pos;
+     if(size.x >= camera.GetWidth())
+       size.x = camera.GetWidth();
 
-     Rectanglei ds(x, y, w, h);
+     if(size.y >= camera.GetHeight())
+       size.y = camera.GetHeight();
+
+     Rectanglei ds(pos, size);
      app.video.window.Blit( image, ds, Point2i(0, 0));
 
-     if(w < static_cast<int>(camera.GetWidth()))
+     if(size.x < camera.GetWidth())
      {
-       Rectanglei ds(x + w - image.GetWidth(), y, (int)camera.GetWidth()-w, h);
-       Point2i dp(w, 0);
+       Rectanglei ds(pos.x + size.x - image.GetWidth(), pos.y, camera.GetWidth() - size.x, size.y);
+       Point2i dp(size.x, 0);
        app.video.window.Blit( image, ds, dp);
      }
-     if(h < static_cast<int>(camera.GetHeight()))
+     if(size.y < camera.GetHeight())
      {
-       Rectanglei ds(x, y + h - image.GetHeight(), w, (int)camera.GetHeight() - h );
-       Point2i dp(0, h);
+       Rectanglei ds(pos.x, pos.y + size.y - image.GetHeight(), size.x, camera.GetHeight() - size.y);
+       Point2i dp(0, size.y);
        app.video.window.Blit( image, ds, dp);
      }
-     if(w < static_cast<int>(camera.GetWidth()) && h < static_cast<int>(camera.GetHeight()))
+     if(size.x < camera.GetWidth() && size.y < camera.GetHeight())
      {
-       Rectanglei ds(x + w - image.GetWidth(), y + h - image.GetHeight(), camera.GetWidth() - w, camera.GetHeight() - h);
-       Point2i dp(w, h);
-       app.video.window.Blit( image, ds, dp);
+       Rectanglei ds(pos + size - image.GetSize(), camera.GetSize() - size);
+       app.video.window.Blit( image, ds, size);
      }
    }
 }
@@ -119,55 +105,34 @@ void Sky::Draw()
   // TODO: Why the cache doesn't work on Windows!?
   CompleteDraw();
 #else  
-  int cx = camera.GetX();
-  int cy = camera.GetY();
-
-  if (lastx != cx || lasty != cy) {
+  Point2i cPos = camera.GetPosition();
+  
+  if( lastPos != cPos){
     CompleteDraw();
-    lastx = cx;
-    lasty = cy;
+    lastPos = cPos;
     return;
   }
 
-  lastx = cx;
-  lasty = cy;
-
-  int sky_cx = static_cast<int>(camera.GetX() * VITESSE_CIEL_X);
-  int sky_cy = static_cast<int>(camera.GetY() * VITESSE_CIEL_Y);
-  
-  uint margin_x = 0, margin_y = 0;
-     
-  if (image.GetWidth() < int(camera.GetWidth())) {
-    sky_cx = 0;
-    margin_x = (camera.GetWidth()-image.GetWidth())/2;
-  }
-  if (image.GetHeight() < int(camera.GetHeight())) {
-    sky_cy = 0;
-    margin_y = (camera.GetHeight()-image.GetHeight())/2;
-  }
+  Point2i tstVect = image.GetSize().inf( camera.GetSize() );
+  Point2i margin = tstVect * (camera.GetSize() - image.GetSize())/2;
+  Point2i skyPos = camera.GetPosition() * SKY_SPEED * (Point2i(1, 1) - tstVect);
 
   std::list<Rectanglei>::iterator it;
   for (it = world.to_redraw_now->begin(); 
        it != world.to_redraw_now->end(); 
        ++it){
-    Rectanglei ds(sky_cx + it->GetPositionX() - cx -margin_x, 
-		    sky_cy + it->GetPositionY() - cy -margin_y, 
-		    it->GetSizeX() + 1, 
-		    it->GetSizeY() + 1);
-    Point2i dp(it->GetPositionX() - cx,
-		   it->GetPositionY() - cy);
+    Rectanglei ds(skyPos + it->GetPosition() - cPos - margin, 
+		    it->GetSize() + 1);
+    Point2i dp(it->GetPosition() - cPos);
     app.video.window.Blit( image, ds, dp);
   }
 
   for (it = world.to_redraw_particles_now->begin(); 
        it != world.to_redraw_particles_now->end(); 
        ++it){
-    Rectanglei ds(sky_cx + it->GetPositionX() - cx - margin_x, 
-		    sky_cy + it->GetPositionY() - cy - margin_y, 
-		    it->GetSizeX() + 1, 
-		    it->GetSizeY() + 1);
-    Point2i dp(it->GetPositionX() - cx,
-		   it->GetPositionY() - cy);
+    Rectanglei ds(skyPos + it->GetPosition() - cPos - margin, 
+		    it->GetSize() + 1);
+    Point2i dp(it->GetPosition() - cPos);
     app.video.window.Blit( image, ds, dp);
   }
 #endif

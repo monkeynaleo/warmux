@@ -138,15 +138,15 @@ void Water::Draw(){
   }
   pattern.SetAlpha(SDL_SRCALPHA, 0);
 
-  int x0 = (int)camera.GetX();
+  int x0 = camera.GetPosition().x;
   while(x0<0)
     x0+=180;
   while(x0>180)
     x0-=180;
 
-  for(int x=(int)camera.GetX()-x0;x<(int)camera.GetX()+(int)camera.GetWidth();x+=180)
-    for(int y=y0;y<(int)camera.GetY()+(int)camera.GetHeight();y+=surface.GetHeight())
-      AbsoluteDraw(pattern, x, y);
+  for(int x=camera.GetPosition().x-x0; x<camera.GetPosition().x+camera.GetSize().x; x+=180)
+    for(int y=y0; y<(int)camera.GetPosition().y+(int)camera.GetSize().y; y+=surface.GetSize().y)
+      AbsoluteDraw(pattern, Point2i(x, y));
 }
 
 int Water::GetHeight(int x){

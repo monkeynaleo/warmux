@@ -273,7 +273,7 @@ void Team::EndTurn()
   AccessWeapon().Deselect();
   camera_est_sauve = true;
 
-  sauve_camera = Point2i(camera.GetX(), camera.GetY());
+  sauve_camera = camera.GetPosition();
 }
 
 int Team::ActiveCharacterIndex() const

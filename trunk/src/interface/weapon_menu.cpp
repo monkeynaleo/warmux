@@ -397,7 +397,7 @@ void WeaponsMenu::Draw()
   if (!display)
     return;
 
-  MouseOver(mouse.GetPosMonde() - camera.GetPosition());
+  MouseOver(mouse.GetWorldPosition() - camera.GetPosition());
   ComputeSize();
    
   uint nr_buttons = max_weapon * nbr_weapon_type;

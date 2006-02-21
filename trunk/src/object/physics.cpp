@@ -522,7 +522,7 @@ void Physics::RunPhysicalEngine()
 		contact = NotifyMove(oldPos, newPos, contactPos, contact_angle);
 
       if (contact){
-		  MSG_DEBUG( "physic.coll", "Collision durant le déplacement (%d, %d) -> (%d, %d)", oldPos.x, oldPos.y, newPos.x, newPos.y);
+		  MSG_DEBUG( "physic.coll", "Collision durant le déplacement (%f, %f) -> (%f, %f)", oldPos.x, oldPos.y, newPos.x, newPos.y);
 		  Rebound(contactPos, contact_angle);
 	  }
 

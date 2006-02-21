@@ -31,8 +31,7 @@
 #include "../tool/error.h"
 #include "../tool/point.h"
 
-const int cell_width = 128;
-const int cell_height = 128;
+const Point2i CELL_SIZE(128, 128);
 
 class TileItem
 {
@@ -124,14 +123,14 @@ private:
 
 void TileItem::Draw(const int x,const int y){
   Surface i_surface = GetSurface();
-  Rectanglei ds(0, 0, cell_width, cell_height);
-  Point2i dp( x * cell_width - camera.GetX(), y * cell_height-camera.GetY() );
+  Rectanglei ds( Point2i(0, 0), CELL_SIZE);
+  Point2i dp( Point2i(x, y) * CELL_SIZE - camera.GetPosition() );
   app.video.window.Blit(i_surface, ds, dp);
 }
 
 bool TileItem::IsEmpty(){
-  for ( int x = 0 ; x < cell_width ; x++)
-     for ( int y = 0 ; y < cell_height ; y++)
+  for ( int x = 0 ; x < CELL_SIZE.x ; x++)
+     for ( int y = 0 ; y < CELL_SIZE.y ; y++)
        if ( GetAlpha (x,y) == 255)
          return false;
    
@@ -355,11 +354,11 @@ Tile::~Tile(){
 }
 
 void Tile::InitTile (unsigned int width, unsigned int height){
-  nbr_cell_width = width / cell_width;
-  if ((width % cell_width) != 0)
+  nbr_cell_width = width / CELL_SIZE.x;
+  if ((width % CELL_SIZE.x) != 0)
     nbr_cell_width++;
-  nbr_cell_height = height / cell_height;
-  if ((height % cell_height) != 0)
+  nbr_cell_height = height / CELL_SIZE.y;
+  if ((height % CELL_SIZE.y) != 0)
     nbr_cell_height++;
 
   size.x = width;
@@ -375,15 +374,15 @@ int clamp (const int val, const int min, const int max){
 void Tile::Dig(const Point2i &position, Surface& dig){  
    Rectanglei rect = Rectanglei( position.x, position.y, dig.GetWidth(), dig.GetHeight()); 
 
-   int first_cell_x = clamp( position.x/cell_width,          0, nbr_cell_width-1);
-   int first_cell_y = clamp( position.y/cell_height,          0, nbr_cell_height-1);
-   int last_cell_x  = clamp( (position.x+dig.GetWidth())/cell_width, 0, nbr_cell_width-1);
-   int last_cell_y  = clamp( (position.y+dig.GetHeight())/cell_height, 0, nbr_cell_height-1);
+   int first_cell_x = clamp( position.x/CELL_SIZE.x,          0, nbr_cell_width-1);
+   int first_cell_y = clamp( position.y/CELL_SIZE.y,          0, nbr_cell_height-1);
+   int last_cell_x  = clamp( (position.x+dig.GetWidth())/CELL_SIZE.x, 0, nbr_cell_width-1);
+   int last_cell_y  = clamp( (position.y+dig.GetHeight())/CELL_SIZE.y, 0, nbr_cell_height-1);
    
    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
      for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++){
-	  int offset_x = position.x - cx * cell_width;
-	  int offset_y = position.y - cy * cell_height;
+	  int offset_x = position.x - cx * CELL_SIZE.x;
+	  int offset_y = position.y - cy * CELL_SIZE.y;
 	  
 	  item[cy*nbr_cell_width+cx]->Dig( Point2i(offset_x, offset_y), dig);
      }
@@ -398,16 +397,16 @@ void Tile::LoadImage (Surface& terrain){
   // Create the TileItem objects
   for (uint i=0; i<nbr_cell; ++i)
      if ( config.transparency == Config::ALPHA )
-       item.push_back ( new TileItem_AlphaSoftware(cell_width, cell_height));
+       item.push_back ( new TileItem_AlphaSoftware(CELL_SIZE.x, CELL_SIZE.y));
      else
-       item.push_back ( new TileItem_ColorkeySoftware(cell_width, cell_height));
+       item.push_back ( new TileItem_ColorkeySoftware(CELL_SIZE.x, CELL_SIZE.y));
    
    // Fill the TileItem objects
    for( unsigned int iy = 0 ; iy < nbr_cell_height ; iy++ )
      for( unsigned int ix = 0 ; ix < nbr_cell_width ; ix++ ){
        unsigned int piece = iy * nbr_cell_width + ix;
 
-       Rectanglei sr(ix * cell_width, iy * cell_height, cell_width, cell_height);
+       Rectanglei sr(ix * CELL_SIZE.x, iy * CELL_SIZE.y, CELL_SIZE.x, CELL_SIZE.y);
 
        terrain.SetAlpha(0, 0);
        item[piece]->GetSurface().Blit( terrain, sr, Point2i(0, 0));
@@ -427,17 +426,16 @@ void Tile::LoadImage (Surface& terrain){
 }
 
 uchar Tile::GetAlpha (const int x, const int y) const{
-   return item[y/cell_height*nbr_cell_width+x/cell_width]->GetAlpha( x%cell_width, y%cell_height);
+   return item[y/CELL_SIZE.y*nbr_cell_width+x/CELL_SIZE.x]->GetAlpha( x%CELL_SIZE.x, y%CELL_SIZE.y);
 }
 
 void Tile::DrawTile() const{
-   int ox = camera.GetX();
-   int oy = camera.GetY();
+   Point2i camPos = camera.GetPosition();
 
-   int first_cell_x = clamp( ox/cell_width,                      0, nbr_cell_width-1);
-   int first_cell_y = clamp( oy/cell_height,                      0, nbr_cell_height-1);
-   int last_cell_x  = clamp( (ox+camera.GetWidth())/cell_width,  0, nbr_cell_width-1);
-   int last_cell_y  = clamp( (oy+camera.GetHeight())/cell_height, 0, nbr_cell_height-1);  
+   int first_cell_x = clamp( camPos.x/CELL_SIZE.x,                      0, nbr_cell_width-1);
+   int first_cell_y = clamp( camPos.y/CELL_SIZE.y,                      0, nbr_cell_height-1);
+   int last_cell_x  = clamp( (camPos.x+camera.GetWidth())/CELL_SIZE.x,  0, nbr_cell_width-1);
+   int last_cell_y  = clamp( (camPos.y+camera.GetHeight())/CELL_SIZE.y, 0, nbr_cell_height-1);  
 
    for ( int iy = first_cell_y ; iy <= last_cell_y ; iy++ )
      for ( int ix = first_cell_x ; ix <= last_cell_x ; ix++)
@@ -447,20 +445,20 @@ void Tile::DrawTile() const{
 void Tile::DrawTile_Clipped( Rectanglei clip_r_world) const
 {
    // Select only the items that are under the clip area
-   int first_cell_x = clamp( (clip_r_world.GetPositionX())/cell_width,                0, nbr_cell_width-1);
-   int first_cell_y = clamp( (clip_r_world.GetPositionY())/cell_height,                0, nbr_cell_height-1);
-   int last_cell_x  = clamp( (clip_r_world.GetPositionX()+clip_r_world.GetSizeX() +1)/cell_width, 0, nbr_cell_width-1);
-   int last_cell_y  = clamp( (clip_r_world.GetPositionY()+clip_r_world.GetSizeY() +1)/cell_height, 0, nbr_cell_height-1);
+   int first_cell_x = clamp( (clip_r_world.GetPositionX())/CELL_SIZE.x,                0, nbr_cell_width-1);
+   int first_cell_y = clamp( (clip_r_world.GetPositionY())/CELL_SIZE.y,                0, nbr_cell_height-1);
+   int last_cell_x  = clamp( (clip_r_world.GetPositionX()+clip_r_world.GetSizeX() +1)/CELL_SIZE.x, 0, nbr_cell_width-1);
+   int last_cell_y  = clamp( (clip_r_world.GetPositionY()+clip_r_world.GetSizeY() +1)/CELL_SIZE.y, 0, nbr_cell_height-1);
 
    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
      for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++)
      {
        // For all selected items, clip source and destination
 	   // blitting rectangles 
-       int dest_x = cx * cell_width;  
-       int dest_y = cy * cell_height;
-       int dest_w = cell_width;
-       int dest_h = cell_height;
+       int dest_x = cx * CELL_SIZE.x;  
+       int dest_y = cy * CELL_SIZE.y;
+       int dest_w = CELL_SIZE.x;
+       int dest_h = CELL_SIZE.y;
        int src_x = 0;
        int src_y = 0;
 	  
@@ -485,7 +483,7 @@ void Tile::DrawTile_Clipped( Rectanglei clip_r_world) const
 	   Rectanglei sr(src_x, src_y, dest_w, dest_h);
 	       
 	   // Decall the destination rectangle along the camera offset
-	   Point2i dr(dest_x - camera.GetX(), dest_y - camera.GetY());
+	   Point2i dr( Point2i(dest_x, dest_y) - camera.GetPosition());
 	  
 	   app.video.window.Blit( item[cy*nbr_cell_width+cx]->GetSurface(), sr, dr);
    }

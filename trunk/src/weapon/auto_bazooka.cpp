@@ -163,7 +163,7 @@ void AutomaticBazooka::ChooseTarget()
 				   cible.image.GetHeight()));
   }
 
-  cible.pos = mouse.GetPosMonde();
+  cible.pos = mouse.GetWorldPosition();
   DrawTarget();
   cible.choisie = true;
   static_cast<RoquetteTeteCherche *>(projectile)->SetTarget(cible.pos.x, cible.pos.y);
@@ -174,8 +174,7 @@ void AutomaticBazooka::DrawTarget()
   if( !cible.choisie )
 	return;
 
-  Point2i dp(cible.pos.x - cible.image.GetWidth() / 2 - camera.GetX() , cible.pos.y - cible.image.GetHeight() / 2 - camera.GetY());
-  app.video.window.Blit(cible.image, dp);
+  app.video.window.Blit(cible.image, cible.pos - cible.image.GetSize()/2 - camera.GetPosition());
 }
 
 bool AutomaticBazooka::IsReady() const

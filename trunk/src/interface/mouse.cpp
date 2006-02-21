@@ -42,11 +42,6 @@ const uint SCROLL_MOUSE = 20;
 // Largeur de la zone de sensibilite au camera a la souris
 const uint SENSIT_SCROLL_MOUSE = 40; // pixels
 
-// Active le mode tricheur ?
-#ifdef DEBUG
-#  define MODE_TRICHEUR
-#endif
-
 Mouse::Mouse(){
   scroll_actif = false;
 }
@@ -63,7 +58,7 @@ bool Mouse::ActionClicD(){
 
 bool Mouse::ActionClicG()
 {
-  const Point2i pos_monde = GetPosMonde();   
+  const Point2i pos_monde = GetWorldPosition();   
 	
   // Action dans le menu des armes ?
   if( interface.weapons_menu.ActionClic( GetPosition() ) )
@@ -116,7 +111,7 @@ void Mouse::ChoixVerPointe(){
   if (game_loop.ReadState() != gamePLAYING)
     return;
 
-  const Point2i pos_monde = GetPosMonde();
+  const Point2i pos_monde = GetWorldPosition();
    
   // Quel ver est pointé par la souris ? (en dehors du ver actif)
   interface.character_under_cursor = NULL;
@@ -142,34 +137,22 @@ void Mouse::ChoixVerPointe(){
 }
 
 void Mouse::ScrollCamera() const{
-  int x = GetX();
-  int y = GetY();
-  
-  //Move camera with mouse when cursor is on border of the screen
-  int dx = x - SENSIT_SCROLL_MOUSE;
-  
-  if( dx < 0){
-    camera.SetXY(dx/2,0);
-    camera.autorecadre = false;
-  }
-  
-  dx = app.video.window.GetWidth() - x - SENSIT_SCROLL_MOUSE;
-  if( dx < 0 ){
-    camera.SetXY(-dx/2,0);
-    camera.autorecadre = false;
-  }
-  
-  int dy = y - SENSIT_SCROLL_MOUSE;
-  if( dy < 0 ){
-    camera.SetXY(0,dy/2);
-    camera.autorecadre = false;
-  }
-  
-  dy = app.video.window.GetHeight() - y - SENSIT_SCROLL_MOUSE;
-  if( dy < 0 ){
-    camera.SetXY(0,-dy/2);
-    camera.autorecadre = false;
-  }
+	Point2i mousePos = GetPosition();
+	Point2i sensitZone(SENSIT_SCROLL_MOUSE, SENSIT_SCROLL_MOUSE);
+	Point2i winSize = app.video.window.GetSize();
+	Point2i tstVector;
+	
+	tstVector = mousePos.inf(sensitZone);
+	if( !tstVector.IsNull() ){
+		camera.SetXY( tstVector * (mousePos - sensitZone)/2 );
+		camera.autorecadre = false;
+	}
+
+	tstVector = winSize.inf(mousePos + sensitZone);
+	if( !tstVector.IsNull() ){
+		camera.SetXY( tstVector * (mousePos + sensitZone - winSize)/2 );
+		camera.autorecadre = false;
+	}
 }
 
 void Mouse::TestCamera(){
@@ -201,20 +184,6 @@ void Mouse::Refresh(){
     ChoixVerPointe();
 }
 
-int Mouse::GetX() const{
-   int x;
-   
-   SDL_GetMouseState( &x, NULL);
-   return x; 
-}
-
-int Mouse::GetY() const{  
-   int y;
-   
-   SDL_GetMouseState( NULL, &y);
-   return y; 
-}
-
 Point2i Mouse::GetPosition() const{
 	int x, y;
 
@@ -222,15 +191,7 @@ Point2i Mouse::GetPosition() const{
 	return Point2i(x, y);
 }
 
-int Mouse::GetXmonde() const{ 
-   return GetX() - FOND_X + camera.GetX(); 
-}
-
-int Mouse::GetYmonde() const{ 
-   return GetY() - FOND_Y + camera.GetY(); 
-}
-
-Point2i Mouse::GetPosMonde() const{ 
+Point2i Mouse::GetWorldPosition() const{ 
    return GetPosition() + camera.GetPosition() - Point2i(FOND_X, FOND_Y);
 }
 

@@ -131,26 +131,24 @@ void Text::DrawCenterTopOnMap (int x, int y){
 
 void Text::DrawTopLeftOnMap (int x, int y){
   if(shadowed)
-    AbsoluteDraw(background, bg_offset + x, bg_offset + y);
-  AbsoluteDraw(surf, x, y);
+    AbsoluteDraw(background, Point2i(bg_offset + x, bg_offset + y) );
+  AbsoluteDraw(surf, Point2i(x, y) );
 }
 
-void DrawTmpBoxText(Font &font, int _x, int _y, 
+void DrawTmpBoxText(Font &font, Point2i pos, 
 		    const std::string &txt, uint space,
-                    Color boxColor, Color rectColor)
-{
-  int w = font.GetWidth(txt) + space*2;
-  int h = font.GetHeight(txt) + space*2;
+                    Color boxColor, Color rectColor){
+  Point2i size = font.GetSize(txt) + Point2i(space, space)*2;
   
-  _y -= font.GetHeight(txt)/2;
+  pos.y -= font.GetHeight(txt)/2;
 
-  Rectanglei rect( _x - w / 2, _y -h / 2, w, h);
+  Rectanglei rect( pos - size/2, size);
   
   app.video.window.BoxColor(rect, boxColor);
   app.video.window.RectangleColor(rect, rectColor);  
 
   world.ToRedrawOnScreen( rect );
-  font.WriteCenterTop( Point2i(_x, _y), txt, white_color);
+  font.WriteCenterTop( pos, txt, white_color);
 }
 
 void DrawTmpBoxTextWithReturns(Font &font, const Point2i &position, 

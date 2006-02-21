@@ -134,7 +134,7 @@ void TeamEnergy :: Draw ()
   int x,y;
   x = camera.GetWidth() - (BARRE_LARG + 10) + dx;
   y = BARRE_HAUT +(classement * (BARRE_HAUT + ESPACEMENT)) +dy;
-  barre_energie.DrawXY(x,y);
+  barre_energie.DrawXY( Point2i(x, y) );
   
   std::ostringstream ss;
   ss << nom << "/" << valeur;
