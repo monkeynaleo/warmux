@@ -37,10 +37,6 @@
 #include "../tool/i18n.h"
 #include "../tool/random.h"
 
-#ifdef DEBUG
-#define COUT_DBG std::cout << "[ClusterBomb] "
-#endif
-
 Cluster::Cluster(GameLoop &p_game_loop, ClusterBombConfig& cfg) :
   WeaponProjectile (p_game_loop, "cluster", cfg)
 {
@@ -51,7 +47,6 @@ void Cluster::Shoot (int x, int y)
   Ready();
   camera.ChangeObjSuivi(this, true, false);
   is_active = true;
-
   SetXY( Point2i(x, y) );
 }
 
@@ -68,11 +63,13 @@ void Cluster::SignalCollision()
 {
   is_active = false;
   lst_objets.RetireObjet((PhysicalObj*)this);
+
   if (IsGhost())
   {
     game_messages.Add (_("The rocket left the battlefield..."));
     return;
   }
+
   AppliqueExplosion (GetPosition(), GetPosition(), impact, cfg, NULL);
 }
 
@@ -87,7 +84,8 @@ ClusterBomb::ClusterBomb(GameLoop &p_game_loop, ClusterBombConfig& cfg) :
   m_rebound_factor = cfg.rebound_factor;
 
   tableau_cluster.clear();
-  const uint nb = cfg.nbr_fragments;
+  const uint nb = cfg.nb_fragments;
+
   for (uint i=0; i<nb; ++i)
   {
     Cluster cluster(game_loop, cfg);
@@ -157,14 +155,13 @@ ClusterBombConfig& ClusterLauncher::cfg()
 ClusterBombConfig::ClusterBombConfig() : 
   ExplosiveWeaponConfig()
 {
-  rebound_factor = 0.75;
-  nbr_fragments = 5;
+  nb_fragments = 5;
 }
 
 
 void ClusterBombConfig::LoadXml(xmlpp::Element *elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
-  LitDocXml::LitDouble (elem, "rebound_factor", rebound_factor);
+  LitDocXml::LitUint (elem, "nb_fragments", nb_fragments);
 }
 
