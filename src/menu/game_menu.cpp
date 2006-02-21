@@ -31,7 +31,6 @@
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
 
-const uint TEAMS_X = 20;
 const uint TEAMS_Y = 20;
 const uint TEAMS_W = 160;
 const uint TEAMS_H = 160;
@@ -49,11 +48,12 @@ GameMenu::GameMenu() :
 {  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
-
-  // Widget creation
+  
+  // Center the boxes!
+  uint x = app.video.window.GetWidth()/2 - 475/2;
 
   /* Choose the teams !! */
-  team_box = new VBox(Rectanglei( TEAMS_X, TEAMS_Y, 475, 1));
+  team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
   team_box->AddWidget(new Label(_("Select the teams:"), rectZero, normal_font));
 
   Box * tmp_box = new HBox( Rectanglei(0,0, 1, TEAMS_H), false);
@@ -83,6 +83,8 @@ GameMenu::GameMenu() :
 
   team_box->AddWidget(tmp_box);
 
+  
+
   /* Choose the map !! */
   tmp_box = new HBox( Rectanglei(0, 0, 1, MAP_PREVIEW_W - 25 ), false);
   tmp_box->SetMargin(0);
@@ -92,7 +94,7 @@ GameMenu::GameMenu() :
   tmp_box->AddWidget(lbox_maps);
   tmp_box->AddWidget(new NullWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W)));
   
-  map_box = new VBox( Rectanglei(MAPS_X, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
+  map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
   map_box->AddWidget(new Label(_("Select the world:"), rectZero, normal_font));
   map_box->AddWidget(tmp_box);
 
@@ -247,6 +249,8 @@ void GameMenu::Draw(const Point2i &mousePosition)
       ChangeMap();
   }
   
-  map_preview->Blit ( app.video.window, MAPS_X+MAPS_W+10, map_box->GetPositionY()+5 );
+  map_preview->Blit ( app.video.window, 
+		      map_box->GetPositionX()+MAPS_W+10, 
+		      map_box->GetPositionY()+map_box->GetSizeY()/2-map_preview->GetHeight()/2);
 }
 
