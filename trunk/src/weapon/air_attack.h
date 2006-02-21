@@ -56,11 +56,10 @@ public:
   Sprite *image;
 private:
   int cible_x;
-  double speed;
 
 public:
-  Avion(GameLoop &game_loop, double speed);
-  void Shoot();
+  Avion(GameLoop &game_loop);
+  void Shoot(double speed);
   void Reset();
   void Draw();
   void Refresh();
