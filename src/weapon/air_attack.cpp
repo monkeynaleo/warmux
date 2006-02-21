@@ -71,11 +71,12 @@ void Obus::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-Avion::Avion(GameLoop &p_game_loop, double p_speed) : 
+Avion::Avion(GameLoop &p_game_loop) : 
   PhysicalObj(p_game_loop, "Avion", 0.0)
 {
   m_type = objUNBREAKABLE;
-  SetWindFactor(0.0);
+  SetWindFactor(1.0);  
+  SetAirResistFactor(1.0);
   m_gravity_factor = 0.0;
   m_alive = GHOST;
 
@@ -84,7 +85,6 @@ Avion::Avion(GameLoop &p_game_loop, double p_speed) :
   SetMass (3000);
   obus_dx = 100;
   obus_dy = 50;
-  speed = p_speed;
 }
 
 void Avion::Reset()
@@ -92,7 +92,7 @@ void Avion::Reset()
   m_alive = GHOST;
 }
 
-void Avion::Shoot()
+void Avion::Shoot(double speed)
 {
   Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
@@ -113,6 +113,7 @@ void Avion::Shoot()
       speed_vector.SetValues( -speed, 0) ;
       SetX (world.GetWidth()-1);
     }
+  //std::cout << "Avion::Shoot() : "<< GetX() <<";"<<GetY()<<std::endl;
 
   SetSpeedXY (speed_vector);
 
@@ -121,8 +122,10 @@ void Avion::Shoot()
 
 void Avion::Refresh()
 {
-  if (IsGhost()) return;
+  if (IsGhost()) return;  
+  //std::cout << "avt Avion::Refresh() : "<< GetX() <<";"<<GetY()<<std::endl;
   UpdatePosition();
+  //std::cout << "après Avion::Refresh() : "<< GetX() <<";"<<GetY()<<std::endl;
 }
 
 int Avion::LitCibleX() const { return cible_x; }
@@ -135,6 +138,7 @@ int Avion::GetDirection() const {
 
 void Avion::Draw()
 {
+  //std::cout << "Avion::Draw() : "<< GetX() <<";"<<GetY()<<std::endl;
   if (IsGhost()) return;
   image->Draw(GetPosition());
 }
@@ -151,7 +155,7 @@ bool Avion::PeutLacherObus() const
 
 AirAttack::AirAttack() :
   Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig()),
-  avion(game_loop, cfg().speed)
+  avion(game_loop)
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
@@ -172,10 +176,10 @@ bool AirAttack::p_Shoot ()
   game_loop.interaction_enabled=false;
 
   assert (obus.size() == 0);
-  avion.Shoot ();
+  avion.Shoot (cfg().speed);
   obus_laches = false;
   obus_actifs = false;
-  
+
   return true;
 }
 
@@ -243,7 +247,7 @@ void AirAttack::FinTir()
 {
   m_is_active = false;
 
-  camera.ChangeObjSuivi (NULL, false, false);
+  //camera.ChangeObjSuivi (NULL, false, false);
 
   iterator it=obus.begin(), fin=obus.end();
   for (; it != fin; ++it)
@@ -259,13 +263,15 @@ void AirAttack::Draw()
 {
   Weapon::Draw() ;
   
+  if (!m_is_active) return;
+
   // Dessine les obus
   if (obus_actifs)
   {
     const_iterator it=obus.begin(), fin=obus.end();
     for (; it != fin; ++it) (**it).Draw ();
   }
-
+  
   avion.Draw ();
 }
 
@@ -277,6 +283,7 @@ AirAttackConfig& AirAttack::cfg()
 AirAttackConfig::AirAttackConfig()
 {
   nbr_obus = 3;
+  speed = 7;
 }
 
 void AirAttackConfig::LoadXml(xmlpp::Element *elem)
