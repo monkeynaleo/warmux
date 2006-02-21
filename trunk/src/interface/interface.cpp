@@ -40,37 +40,18 @@
 
 WeaponStrengthBar weapon_strength_bar;
 
-
-// Nom du ver
-const uint NOM_VER_X = 32;
-const uint NOM_VER_Y = 28;
-
-// Energie du ver
-const uint ENERGIE_VER_X = NOM_VER_X;
-const uint ENERGIE_VER_Y = NOM_VER_Y+20;
-
-// Nom de l'arme
-const uint NOM_ARME_X = 508;
-const uint NOM_ARME_Y = NOM_VER_Y;
-
-// Munitions
-const uint MUNITION_X = NOM_ARME_X;
-const uint MUNITION_Y = ENERGIE_VER_Y;
-
-// Ecusson de l'équipe
-const uint ECUSSON_EQUIPE_X = 303;
-const uint ECUSSON_EQUIPE_Y = 20;
-
-// Icône de l'arme
-const uint ICONE_ARME_X = 450;
-const uint ICONE_ARME_Y = 20;
+const Point2i WORM_NAME_POS(32, 28);
+const Point2i WORM_ENERGY_POS = WORM_NAME_POS + Point2i(0, 20);
+const Point2i WEAPON_NAME_POS(508, WORM_NAME_POS.y);
+const Point2i AMMOS_POS(WEAPON_NAME_POS.x, WORM_ENERGY_POS.y);
+const Point2i TEAM_ICON_POS(303, 20);
+const Point2i WEAPON_ICON_POS(450, 20);
 
 const uint INFO_VER_X2 = 296;
 
 // Barre d'énergie
-const uint BARENERGIE_X = 170;
-const uint BARENERGIE_Y = ENERGIE_VER_Y+2;
-const uint BARENERGIE_LARG = INFO_VER_X2-BARENERGIE_X;
+const Point2i ENERGY_BAR_POS(170, WORM_ENERGY_POS.y + 2);
+const uint BARENERGIE_LARG = INFO_VER_X2 - ENERGY_BAR_POS.x;
 const uint BARENERGIE_HAUT = 15;
 
 const uint MARGIN = 10;
@@ -92,7 +73,7 @@ void Interface::Init()
   weapon_box_button = resource_manager.LoadImage( res, "interface/weapon_box_button");
    
   barre_energie.InitVal (0, 0, game_mode.character.init_energy);
-  barre_energie.InitPos (BARENERGIE_X, BARENERGIE_Y, 
+  barre_energie.InitPos (ENERGY_BAR_POS.x, ENERGY_BAR_POS.y, 
 			 BARENERGIE_LARG, BARENERGIE_HAUT);
   barre_energie.border_color = white_color;
   barre_energie.value_color = lightgray_color;
@@ -146,26 +127,22 @@ void Interface::Reset()
 
 void Interface::DisplayCharacterInfo ()
 {
-
-  int x = (app.video.window.GetWidth() - GetWidth())/2;
-  int y = app.video.window.GetHeight() - GetHeight();
+  Point2i pos = (app.video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
 
   // Get the character
   if (character_under_cursor == NULL) character_under_cursor = &ActiveCharacter();
 
   // Display name
-  t_NAME->DrawTopLeft(bottom_bar_ox+NOM_VER_X, 
-		      bottom_bar_oy+NOM_VER_Y);
+  t_NAME->DrawTopLeft(bottom_bar_pos + WORM_NAME_POS);
 
   std::string s(character_under_cursor->m_name+" ("+character_under_cursor->GetTeam().GetName()+" )");
   t_character_name->Set(s);
 
-  t_character_name->DrawTopLeft(bottom_bar_ox+NOM_VER_X+t_NAME->GetWidth()+MARGIN,
-				bottom_bar_oy+NOM_VER_Y);
+  t_character_name->DrawTopLeft(bottom_bar_pos + WORM_NAME_POS + 
+		  Point2i(t_NAME->GetWidth()+MARGIN, 0));
   
   // Display energy
-  t_ENERGY->DrawTopLeft(bottom_bar_ox+ENERGIE_VER_X,
-			bottom_bar_oy+ENERGIE_VER_Y);
+  t_ENERGY->DrawTopLeft(bottom_bar_pos + WORM_ENERGY_POS);
 
   if (!character_under_cursor->IsDead()) {
     s = ulong2str(character_under_cursor->GetEnergy())+"%";
@@ -178,13 +155,13 @@ void Interface::DisplayCharacterInfo ()
     barre_energie.Actu (0);
   }
 
-  t_character_energy->DrawTopLeft(bottom_bar_ox+ENERGIE_VER_X+t_ENERGY->GetWidth()+MARGIN,
-				  bottom_bar_oy+ENERGIE_VER_Y);
+  t_character_energy->DrawTopLeft(
+		  bottom_bar_pos + WORM_ENERGY_POS + Point2i(t_ENERGY->GetWidth()+MARGIN, 0));
    
-  barre_energie.DrawXY( Point2i(bottom_bar_ox+BARENERGIE_X,bottom_bar_oy+BARENERGIE_Y) );
+  barre_energie.DrawXY(bottom_bar_pos + ENERGY_BAR_POS);
    
   // Display team logo
-  Point2i dst(x + ECUSSON_EQUIPE_X, y + ECUSSON_EQUIPE_Y);
+  Point2i dst(pos + TEAM_ICON_POS);
   app.video.window.Blit( character_under_cursor->TeamAccess().ecusson, dst);
 }
 
@@ -206,14 +183,12 @@ void Interface::DisplayWeaponInfo ()
   }
 
   // Display the name of the weapon
-  t_WEAPON->DrawTopLeft(bottom_bar_ox+NOM_ARME_X, 
-		     bottom_bar_oy+NOM_ARME_Y);
+  t_WEAPON->DrawTopLeft(bottom_bar_pos + WEAPON_NAME_POS);
 
   std::string tmp( _(weapon->GetName().c_str()) );
   t_weapon_name->Set( tmp );
 
-  t_weapon_name->DrawTopLeft(bottom_bar_ox+NOM_ARME_X+t_WEAPON->GetWidth()+MARGIN, 
-			  bottom_bar_oy+NOM_ARME_Y);
+  t_weapon_name->DrawTopLeft(bottom_bar_pos + WEAPON_NAME_POS + Point2i(t_WEAPON->GetWidth() + MARGIN, 0));
   
   // Display number of ammo
   if (nbr_munition ==  INFINITE_AMMO)
@@ -221,18 +196,16 @@ void Interface::DisplayWeaponInfo ()
   else
     tmp = Format("%i", nbr_munition);
  
-  t_STOCK->DrawTopLeft(bottom_bar_ox+MUNITION_X, 
-		       bottom_bar_oy+MUNITION_Y);
+  t_STOCK->DrawTopLeft(bottom_bar_pos + AMMOS_POS);
 
   t_weapon_stock->Set(tmp);
-  t_weapon_stock->DrawTopLeft(bottom_bar_ox+MUNITION_X+t_STOCK->GetWidth()+MARGIN, 
-			      bottom_bar_oy+MUNITION_Y);
+  t_weapon_stock->DrawTopLeft(
+		  bottom_bar_pos + AMMOS_POS + Point2i(t_STOCK->GetWidth()+MARGIN, 0) );
 
   // Display weapon icon
-  if( !weapon->icone.IsNull() ){
-      Point2i dest (bottom_bar_ox + ICONE_ARME_X, bottom_bar_oy + ICONE_ARME_Y);
-      app.video.window.Blit( weapon->icone, dest);
-  }else
+  if( !weapon->icone.IsNull() )
+      app.video.window.Blit( weapon->icone, bottom_bar_pos + WEAPON_ICON_POS);
+  else
       std::cout << "Can't blit weapon->icone => NULL " << std::endl;
 
   // Display CURRENT weapon icon on top
@@ -265,20 +238,16 @@ void Interface::Draw ()
   
   if (!display) return;
 
-  int x = (app.video.window.GetWidth() - GetWidth())/2;
-  int y = app.video.window.GetHeight() - GetHeight();
-
-  bottom_bar_ox = x;
-  bottom_bar_oy = y;
+  bottom_bar_pos = (app.video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
    
-  Rectanglei dr( x, y, game_menu.GetWidth(), game_menu.GetHeight() );
-  app.video.window.Blit( game_menu, dr.GetPosition());
+  Rectanglei dr( bottom_bar_pos, game_menu.GetSize() );
+  app.video.window.Blit( game_menu, bottom_bar_pos);
 
   world.ToRedrawOnScreen(dr);
   
   // display time left in a turn ?
   if (timer != NULL && display_timer)
-    timer->DrawCenter(x+GetWidth()/2, y+GetHeight()/2+3);
+    timer->DrawCenter(bottom_bar_pos + GetSize()/2 + Point2i(0, 3));
   
   // display character info
   DisplayCharacterInfo();
@@ -287,8 +256,11 @@ void Interface::Draw ()
   DisplayWeaponInfo();
 }
 
-uint Interface::GetWidth() const { return 800; }
-uint Interface::GetHeight() const { return 70; }
+int Interface::GetWidth() const { return 800; }
+int Interface::GetHeight() const { return 70; }
+Point2i Interface::GetSize() const{
+	return Point2i( GetWidth(), GetHeight() );
+}
 
 void Interface::EnableDisplay (bool _display)
 {

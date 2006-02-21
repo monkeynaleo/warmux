@@ -69,8 +69,7 @@ public:
 
    Surface game_menu;
    Surface bg_time;
-   int bottom_bar_ox;
-   int bottom_bar_oy;
+   Point2i bottom_bar_pos;
 
 public:
   Interface();
@@ -82,8 +81,9 @@ public:
   bool IsDisplayed () const { return display; };
   void EnableDisplay (bool _display);
 
-  uint GetWidth() const;
-  uint GetHeight() const;
+  int GetWidth() const;
+  int GetHeight() const;
+  Point2i GetSize() const;
 
   void UpdateTimer(uint utimer);
   void EnableDisplayTimer (bool _display) {display_timer = _display;};
