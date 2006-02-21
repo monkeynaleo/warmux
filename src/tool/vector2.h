@@ -48,6 +48,11 @@ template<class T> class Vector2
 			return y;
 		}
 
+		// Comparators     
+		
+		/**
+		 *
+		 */
 		inline bool operator==(const Vector2<T> &p2) const{
 			return (x == p2.x) && (y == p2.y);
 		}
@@ -76,17 +81,14 @@ template<class T> class Vector2
 			return (x <= p2.x) && (y <= p2.y);
 		}
 
+		// Vector/Vector operations
+		
 		/** 
 		 *
 		 * @param p2
 		 */
 		inline Vector2<T> operator+(const Vector2<T> &p2) const{
-			Vector2<T> r = *this;
-
-			r.x += p2.x;
-			r.y += p2.y;
-
-			return r;
+			return Vector2<T>(x + p2.x, y + p2.y);
 		}
 
 		/**
@@ -94,72 +96,60 @@ template<class T> class Vector2
 		 * @param p2
 		 */
 		inline Vector2<T> operator-(const Vector2<T> &p2) const{
-			Vector2<T> r = *this;
-
-			r.x -= p2.x;
-			r.y -= p2.y;
-
-			return r;
+			return Vector2<T>(x - p2.x, y - p2.y);
 		}
 
 		/**
 		 *
+		 * @param p2
+		 */
+		inline Vector2<T> operator*(const Vector2<T> &p2) const{
+			return Vector2<T>(x * p2.x, y * p2.y);
+		}
+	
+		/**
+		 *
+		 * @param p2
+		 */	
+		inline Vector2<T> operator/(const Vector2<T> &p2) const{
+			return Vector2<T>(x / p2.x, y / p2.y);
+		}
+
+		// Vector/Scalar opertations
+		
+		/**
 		 *
 		 * @param val
 		 */
 		inline Vector2<T> operator+(const T val) const{
-			Vector2<T> r = *this;
-
-			r.x += val;
-			r.y += val;
-
-			return r;
-		}
-
-		inline Vector2<T> operator*(const T val) const{
-			Vector2<T> r = *this;
-
-			r.x *= val;
-			r.y *= val;
-
-			return r;
-		}
-
-		inline Vector2<T> operator*(const Vector2<T> &p2) const{
-			Vector2<T> r = *this;
-
-			r.x *= p2.x;
-			r.y *= p2.y;
-
-			return r;
+			return Vector2<T>(x + val, y + val);
 		}
 		
 		/**
 		 *
 		 * @param val
 		 */
-		inline Vector2<T> operator/(const T val) const{
-	        Vector2<T> r = *this;
+		inline Vector2<T> operator-(const T val) const{
+			return Vector2<T>(x - val, y - val);
+		}
 
-			r.x /= val;
-            r.y /= val;
-
-			return r;
-        }
-
+		/**
+		 *
+		 */
+		inline Vector2<T> operator*(const T val) const{
+			return Vector2<T>(x * val, y * val);
+		}
 
 		/**
 		 *
 		 * @param val
 		 */
-		inline Vector2<T> operator-(const T val) const{
-			Vector2<T> r = *this;
+		inline Vector2<T> operator/(const T val) const{
+			return Vector2<T>(x / val, y / val);
+        }
 
-			r.x -= val;
-			r.y -= val;
 
-			return r;
-		}
+		// Operators on itself
 
 		/**
 		 *
@@ -194,6 +184,17 @@ template<class T> class Vector2
 		inline void operator*=(const T val){
 			x *= val;
 			y *= val;
+		}
+
+		/**
+		 * Return the comparaison of two vector in the form of a vector.
+		 *
+		 * @param p2
+		 * @return A vector in which the elements are equal to 1 where the comparaison is true, 0 elsewhere.
+		 */
+		inline Vector2<T> inf(const Vector2<T> &p2){
+			return Vector2<T>( x < p2.x ? 1:0,
+					y < p2.y ? 1:0);
 		}
 		
 		/**

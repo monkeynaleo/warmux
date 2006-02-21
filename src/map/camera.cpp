@@ -36,12 +36,12 @@
 // Marge de cadrage 
 const int MARGE = 200;
 const double VITESSE_CAMERA = 20;
+const Point2i marge(200, 200);
+const Point2i vitesseCamera(20, 20);
 
 Camera camera;
 
 Camera::Camera(){
-  selec_rectangle = false;
-  pause = SDL_GetTicks();
   lance = false;
   autorecadre = true;
   obj_suivi = NULL;
@@ -65,113 +65,97 @@ bool Camera::HasFixedY() const{
   return world.GetHeight() <= GetHeight();
 }
 
+Point2i Camera::FreeDegrees() const{
+	return Point2i( HasFixedX()? 0:1,
+			HasFixedY()? 0:1 );
+}
+
+Point2i Camera::NonFreeDegrees() const{
+	return Point2i(1, 1) - FreeDegrees();
+}
+
 void Camera::SetXYabs (int x, int y){ 
-  if( !TerrainActif().infinite_bg )
+  if( !TerrainActif().infinite_bg ){
     if( !HasFixedX() )
       position.x = BorneLong(x, 0, world.GetWidth() - GetWidth());
     else
       position.x = BorneLong(x, world.GetWidth() - GetWidth(), 0);
-  else
-    position.x = x;
-
-  if( !TerrainActif().infinite_bg )
-    if( !HasFixedY() )
+    
+	if( !HasFixedY() )
       position.y = BorneLong(y, 0, world.GetHeight()-GetHeight());
     else
       position.y = BorneLong(y, world.GetHeight()-GetHeight(), 0);
-  else
-    if( y > (int)world.GetHeight()-(int)GetHeight() )
-      position.y = (int)world.GetHeight()-(int)GetHeight();
+  }else{
+    position.x = x;
+
+    if( y > world.GetHeight() - GetHeight() )
+      position.y = world.GetHeight() - GetHeight();
     else
       position.y = y;
-  
+  }
   lance = true;
 }
 
-void Camera::SetXY(int dx, int dy){ 
-  if( camera.HasFixedX() )
-    dx = 0;
-  if( camera.HasFixedY() )
-    dy = 0;
-  if( (dx == 0) && (dy == 0) )
-    return;
-
-  SetXYabs (position.x+dx,position.y+dy);
+void Camera::SetXYabs(const Point2i &pos){
+	SetXYabs(pos.x, pos.y);
 }
 
-void Camera::CentreObjSuivi (){
-  Centre (*obj_suivi);
+void Camera::SetXY(int dx, int dy){ 
+	SetXY( Point2i( dx, dy) );
+}
+
+void Camera::SetXY(Point2i pos){
+	pos = pos * FreeDegrees();
+	if( pos.IsNull() )
+		return;
+	
+	SetXYabs(position + pos);
+}
+
+void Camera::CenterOnFollowedObject(){
+  CenterOn(*obj_suivi);
 }
 
 // Centrage immédiat sur un objet
-void Camera::Centre (const PhysicalObj &obj){
+void Camera::CenterOn(const PhysicalObj &obj){
   if (obj.IsGhost())
     return;
 
   MSG_DEBUG( "camera.scroll", "centering on %s", obj.m_name.c_str() );
 
-  int x,y;
+  Point2i pos(0, 0);
 
-  if (!HasFixedX()) {
-    x  = (int)obj.GetX();
-    x -= ((int)GetWidth() - (int)obj.GetWidth())/(int)2;
-  } else
-    x = ((int)world.GetWidth() - (int)GetWidth()) / 2;
-  
-  if (!HasFixedY()) {
-    y  = (int)obj.GetY();
-    y -= ((int)GetHeight() - (int)obj.GetHeight())/(int)2;
-  } else
-    y = ((int)world.GetHeight() - (int)GetHeight()) / 2;
-  
-  SetXYabs (x,y);
+  pos += FreeDegrees() * obj.GetPosition() - ( GetSize() - obj.GetSize() )/2;
+  pos += NonFreeDegrees() * ( world.GetSize() - GetSize() )/2;
+
+  SetXYabs( pos );
 }
 
-void Camera::AutoRecadre (){
-  int dx, dy;
-  int x, y;
-  int larg, haut;
-
+void Camera::AutoRecadre(){
   if( !obj_suivi || obj_suivi -> IsGhost() )
     return;
-
-  x = (int)obj_suivi -> GetX();
-  y = (int)obj_suivi -> GetY(); 
   
-  if (y < 0 && !TerrainActif().infinite_bg)
-    y = 0;
-  
-  larg = obj_suivi -> GetWidth();
-  haut = obj_suivi -> GetHeight();
-
-  if (!EstVisible(*obj_suivi)) 
-  {
-	MSG_DEBUG( "camera.scroll", "The object is not visible." );
-    Centre (*obj_suivi);
+  if( !IsVisible(*obj_suivi) ){
+	MSG_DEBUG("camera.scroll", "The object is not visible.");
+	CenterOnFollowedObject();
     return;
   }
 
-  double dst_max = (GetWidth() - 2*MARGE)/2;
-  double dst;
+  Point2i pos = obj_suivi->GetPosition();
+  Point2i size = obj_suivi->GetSize();
   
-  if ((int)GetWidth() + position.x < x+larg+MARGE)
-    dst = x+larg+MARGE - ((int)GetWidth() + position.x);  // positif
-  else if (x-MARGE < position.x)
-    dst = (int)(x-MARGE) - position.x; // négatif
-  else
-    dst = 0;
-  dx = (int)(dst*VITESSE_CAMERA / dst_max);
+  if( pos.y < 0 && !TerrainActif().infinite_bg )
+    pos.y = 0;
 
-  dst_max = ((int)GetHeight() - 2*MARGE)/2;
-  if ((int)GetHeight() + position.y < y+haut+MARGE)
-    dst = y+haut+MARGE - (GetHeight() + position.y);
-  else if (y-MARGE < position.y)
-    dst = (int)(y-MARGE) - position.y;
-  else
-    dst = 0;
-  dy = (int)(dst*VITESSE_CAMERA / dst_max);
-
-  SetXY (dx, dy);
+  Point2i dstMax = GetSize()/2 - marge;
+  Point2i cameraBR = GetSize() + position;
+  Point2i objectBRmargin = pos + size + marge;
+  Point2i dst(0, 0);
+ 
+  dst += cameraBR.inf(objectBRmargin) * (objectBRmargin - cameraBR);
+  dst += (pos - marge).inf(position) * (pos - marge - position);
+  
+  SetXY( dst * vitesseCamera / dstMax );
 }
 
 void Camera::Refresh(){
@@ -196,9 +180,9 @@ void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
 			     bool force_recentrage){
   MSG_DEBUG( "camera.tracking", "Following object %s, recentre=%d, suit=%d", obj->m_name.c_str(), recentre, suit);
   if (recentre) 
-    if ((obj_suivi != obj) || !EstVisible(*obj) || force_recentrage) 
+    if ((obj_suivi != obj) || !IsVisible(*obj) || force_recentrage) 
     {
-      Centre (*obj);
+      CenterOn(*obj);
       autorecadre = suit;
     }
   obj_suivi = obj;
@@ -206,15 +190,19 @@ void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
 
 void Camera::StopFollowingObj (PhysicalObj* obj){
   if( obj_suivi == obj )
-    ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(),true,true,true);
+    ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(), true, true, true);
 }
 
 uint Camera::GetWidth() const { return app.video.window.GetWidth(); }
 uint Camera::GetHeight() const { return app.video.window.GetHeight(); }
 
-bool Camera::EstVisible (const PhysicalObj &obj){
-   Rectanglei rect( GetX(), GetY(), GetWidth(), GetHeight() );
+Point2i Camera::GetSize() const{
+	return app.video.window.GetSize();
+}
+
+bool Camera::IsVisible(const PhysicalObj &obj){
+   Rectanglei rect( GetPosition(), GetSize() );
    
-   return rect.Intersect (obj.GetRect());
+   return rect.Intersect( obj.GetRect() );
 }
 

@@ -87,7 +87,7 @@ void BonusBox::Reset(){
 void BonusBox::Draw()
 { 
   if (!still_visible) return;
-  anim->Draw(GetPos());
+  anim->Draw(GetPosition());
 }
 
 // Signale la fin d'une chute

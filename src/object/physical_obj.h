@@ -92,7 +92,7 @@ public:
   void SetXY(const Point2i &position);
   int GetX() const;
   int GetY() const;
-  const Point2i GetPos() const; 
+  const Point2i GetPosition() const; 
      
   // Set/Get size
   void SetSize(const Point2i &newSize);

@@ -173,23 +173,20 @@ void Mouse::ScrollCamera() const{
 }
 
 void Mouse::TestCamera(){
-  int _x, _y;       
-  SDL_GetMouseState( &_x, &_y);
-   
+  Point2i mousePos = GetPosition();
+  
   //Move camera with mouse holding Ctrl key down
   const bool demande_scroll = SDL_GetModState() & KMOD_CTRL;
    
   if( demande_scroll ){
     if( scroll_actif ){
-      int dx = sauve_x - _x;
-      int dy = sauve_y - _y;
-      camera.SetXY(dx, dy);
+	  Point2i offset = savedPos - mousePos;
+      camera.SetXY(offset);
       camera.autorecadre = false;
     }else{
       scroll_actif = true;
     }
-    sauve_x = _x;
-    sauve_y = _y;
+	savedPos = mousePos;
     return;
   }else{
     scroll_actif = false;

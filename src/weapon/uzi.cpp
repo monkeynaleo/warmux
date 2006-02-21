@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "uzi.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include "weapon_tools.h"
 #include "../game/game_loop.h"
@@ -30,14 +29,9 @@
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
 
 const double SOUFFLE_BALLE = 1;
 const double MIN_TIME_BETWEEN_SHOOT = 70; // in milliseconds
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 UziBullet::UziBullet(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
   WeaponBullet(p_game_loop, "uzi_bullet", cfg)
@@ -48,7 +42,7 @@ void UziBullet::ShootSound()
 {
   jukebox.Play("share","weapon/uzi");
 }
-//-----------------------------------------------------------------------------
+
 //-----------------------------------------------------------------------------
 
 Uzi::Uzi() :
@@ -61,8 +55,6 @@ Uzi::Uzi() :
 
   projectile = new UziBullet(game_loop, cfg());
 }
-
-//-----------------------------------------------------------------------------
 
 void Uzi::RepeatShoot()
 {  
@@ -79,8 +71,6 @@ void Uzi::RepeatShoot()
     m_first_shoot = tmp;
   }
 }
-
-//-----------------------------------------------------------------------------
 
 // bool Uzi::p_Shoot()
 // {
@@ -144,7 +134,7 @@ bool Uzi::p_Shoot()
       // Creuse le world
       if (!obj)
       {
-	world.Creuse(projectile->GetPos() - projectile->impact.GetSize()/2,
+	world.Creuse(projectile->GetPosition() - projectile->impact.GetSize()/2,
 		      projectile->impact);
       }
       return true;
@@ -154,8 +144,6 @@ bool Uzi::p_Shoot()
 
   return true;
 }
-
-//-----------------------------------------------------------------------------
 
 void Uzi::HandleKeyEvent(int action, int event_type)
 {
@@ -177,4 +165,3 @@ void Uzi::HandleKeyEvent(int action, int event_type)
   } ;
 }
 
-//-----------------------------------------------------------------------------

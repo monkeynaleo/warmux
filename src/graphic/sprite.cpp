@@ -315,7 +315,6 @@ void Sprite::Start(){
 
 void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y){
 	RefreshSurface();
-
     Blit(dest, pos_x, pos_y, 0, 0, current_surface.GetWidth(), current_surface.GetHeight());
 }
 
@@ -332,6 +331,7 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
 	return;
 
   RefreshSurface();
+
    // Calculate offset of the depending on hotspot rotation position :
   int rot_x=0;
   int rot_y=0;

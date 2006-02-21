@@ -118,7 +118,7 @@ void ObjMine::Draw()
 { 
   if (!affiche) return;
 
-  detection->Draw(GetPos());
+  detection->Draw(GetPosition());
 }
 
 void ObjMine::SignalFallEnding()

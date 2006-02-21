@@ -217,7 +217,7 @@ void WeaponProjectile::Draw()
   if( !is_active )
     return;
 
-  image->Draw(GetPos());
+  image->Draw(GetPosition());
 
   int tmp = cfg.timeout;
   if (tmp != 0) {

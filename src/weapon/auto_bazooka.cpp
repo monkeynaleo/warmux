@@ -85,7 +85,7 @@ void RoquetteTeteCherche::Refresh()
 	  m_attire = true;
 
 	  SetSpeed(0,0);
-	  angle = GetPos().ComputeAngle( m_cible );
+	  angle = GetPosition().ComputeAngle( m_cible );
 	  image->SetRotation_deg(angle *180/M_PI);
 	  SetExternForce(200, angle);
 	}
