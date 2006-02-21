@@ -45,22 +45,16 @@ BatonDynamite::BatonDynamite(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) 
 {
   channel = -1;
 
-  double delay = cfg.timeout/image->GetFrameCount()/1000.0 ;
-  for (uint i=0 ; i < image->GetFrameCount(); i++)
-    ; // TODO // image.set_frame_delay(i, delay) ;
-  
-  image->Start();
-  
+  cfg.timeout = 3;
+  unsigned int delay = (1000 * cfg.timeout)/image->GetFrameCount();
+  image->SetFrameSpeed(delay);
+  image->animation.SetLoopMode(false);
   SetSize(image->GetSize());
 
   SetTestRect (0, 0, 2, 3);
 
   explosion = resource_manager.LoadSprite(weapons_res_profile, "explosion");
-  delay = 60/explosion->GetFrameCount()/1000.0 ;
-  for (uint i=0 ; i < explosion->GetFrameCount(); i++)
-    ; // TODO explosion.set_frame_delay(i, delay) ;
-
-  explosion->Start();
+  explosion->animation.SetLoopMode(false);
 }
 
 void BatonDynamite::Reset()
@@ -69,29 +63,25 @@ void BatonDynamite::Reset()
   is_active = false;
   explosion_active = false;
 
-  image->Start();
-  image->SetCurrentFrame(0);
   image->Scale(ActiveCharacter().GetDirection(), 1);
-  explosion->Start();
-  explosion->SetCurrentFrame(0);
+  image->SetCurrentFrame(0);
+  image->Start();
 }
 
 void BatonDynamite::Refresh()
 {
-
   if (!is_active) return;
   bool fin;
   assert (!IsGhost());
   if (!explosion_active) {
     image->Update(); 
-    fin = image->GetCurrentFrame() == image->GetFrameCount()-1;
+    fin = image->IsFinished();
     if (fin) explosion_active = true;
   } else {
     explosion->Update();
-    fin = explosion->GetCurrentFrame() == explosion->GetFrameCount()-1;
+    fin = explosion->IsFinished();
     if (fin) is_active = false;
   }
-
 }
 
 void BatonDynamite::Draw()
@@ -114,7 +104,9 @@ void BatonDynamite::Explosion()
 {
   jukebox.Stop(channel);
   channel = -1;
-
+  explosion->SetCurrentFrame(0);
+  explosion->Start();
+  explosion_active = true;
   WeaponProjectile::Explosion();
 }
 
@@ -149,6 +141,7 @@ bool Dynamite::p_Shoot ()
 //   baton.Reset ();
 //   // baton.PrepareTir();
 //   baton.SetXY( Point2i(x, y) );
+  projectile->Reset();
   projectile->Shoot(0);
 
   // Ajoute la vitesse actuelle du ver
