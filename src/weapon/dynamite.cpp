@@ -45,9 +45,6 @@ BatonDynamite::BatonDynamite(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) 
 {
   channel = -1;
 
-  cfg.timeout = 3;
-  unsigned int delay = (1000 * cfg.timeout)/image->GetFrameCount();
-  image->SetFrameSpeed(delay);
   image->animation.SetLoopMode(false);
   SetSize(image->GetSize());
 
@@ -62,6 +59,9 @@ void BatonDynamite::Reset()
   Ready();
   is_active = false;
   explosion_active = false;
+
+  unsigned int delay = (1000 * cfg.timeout)/image->GetFrameCount();
+  image->SetFrameSpeed(delay);
 
   image->Scale(ActiveCharacter().GetDirection(), 1);
   image->SetCurrentFrame(0);
@@ -97,7 +97,7 @@ void BatonDynamite::Draw()
 
 void BatonDynamite::ShootSound()
 {
-  channel = jukebox.Play("share","weapon/dynamite_fuze");
+  channel = jukebox.Play("share","weapon/dynamite_fuze", -1);
 }
 
 void BatonDynamite::Explosion()
@@ -135,12 +135,6 @@ bool Dynamite::p_Shoot ()
 {
   Point2d speed_vector;
 
-  // Ajoute la représentation
-//   int x,y;
-//   PosXY (x,y);
-//   baton.Reset ();
-//   // baton.PrepareTir();
-//   baton.SetXY( Point2i(x, y) );
   projectile->Reset();
   projectile->Shoot(0);
 
