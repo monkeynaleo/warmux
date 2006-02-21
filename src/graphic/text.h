@@ -60,7 +60,7 @@ public:
 };
 
 void DrawTmpBoxText(Font &font, 
-		    int x, int y, 
+		    Point2i pos,
 		    const std::string &txt, uint space=3,
             Color boxColor = defaultColorBox,
             Color rectColor = defaultColorRect);

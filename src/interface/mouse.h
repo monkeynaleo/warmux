@@ -46,16 +46,12 @@ public:
   void ChoixVerPointe();
 
   // Lit la position dans le monde
-  int GetX() const;
-  int GetY() const;
   Point2i GetPosition() const;
-  int GetXmonde() const;
-  int GetYmonde() const;
+  Point2i GetWorldPosition() const;
   bool ClicG() const;
   bool ClicD() const;
   bool ClicM() const;
   void ScrollCamera() const;
-  Point2i GetPosMonde () const;
 };
 
 extern Mouse mouse;

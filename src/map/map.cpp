@@ -105,8 +105,7 @@ void Map::ToRedrawOnMap(Rectanglei r)
 
 void Map::ToRedrawOnScreen(Rectanglei r)
 {
-  r.SetPositionX( r.GetPositionX() + camera.GetX() );
-  r.SetPositionY( r.GetPositionY() + camera.GetY() );
+  r.SetPosition( r.GetPosition() + camera.GetPosition() );
   to_redraw->push_back( r );
 }
 

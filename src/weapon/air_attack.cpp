@@ -96,7 +96,7 @@ void Avion::Shoot()
 {
   Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
-  cible_x = mouse.GetXmonde();
+  cible_x = mouse.GetWorldPosition().x;
   SetY (0);
 
   image->Scale(dir, 1);

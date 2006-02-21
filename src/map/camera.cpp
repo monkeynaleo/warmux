@@ -50,19 +50,20 @@ Camera::Camera(){
 Point2i Camera::GetPosition() const{
 	return position;
 }
-int Camera::GetX() const{
+/*int Camera::GetX() const{
   return position.GetX();
 }
 
 int Camera::GetY() const{
   return position.GetY();
-}
+}*/
 
 bool Camera::HasFixedX() const{
-  return world.GetWidth() <= GetWidth();
+  return (int)world.GetWidth() <= GetWidth();
 }
+
 bool Camera::HasFixedY() const{
-  return world.GetHeight() <= GetHeight();
+  return (int)world.GetHeight() <= GetHeight();
 }
 
 Point2i Camera::FreeDegrees() const{
@@ -88,7 +89,7 @@ void Camera::SetXYabs (int x, int y){
   }else{
     position.x = x;
 
-    if( y > world.GetHeight() - GetHeight() )
+    if( y > (int)world.GetHeight() - (int)GetHeight() )
       position.y = world.GetHeight() - GetHeight();
     else
       position.y = y;
@@ -98,10 +99,6 @@ void Camera::SetXYabs (int x, int y){
 
 void Camera::SetXYabs(const Point2i &pos){
 	SetXYabs(pos.x, pos.y);
-}
-
-void Camera::SetXY(int dx, int dy){ 
-	SetXY( Point2i( dx, dy) );
 }
 
 void Camera::SetXY(Point2i pos){
@@ -193,11 +190,15 @@ void Camera::StopFollowingObj (PhysicalObj* obj){
     ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(), true, true, true);
 }
 
-uint Camera::GetWidth() const { return app.video.window.GetWidth(); }
-uint Camera::GetHeight() const { return app.video.window.GetHeight(); }
+int Camera::GetWidth() const { return app.video.window.GetWidth(); }
+int Camera::GetHeight() const { return app.video.window.GetHeight(); }
 
 Point2i Camera::GetSize() const{
 	return app.video.window.GetSize();
+}
+
+Rectanglei Camera::GetRect() const{
+	return Rectanglei( GetPosition(), GetSize() );
 }
 
 bool Camera::IsVisible(const PhysicalObj &obj){

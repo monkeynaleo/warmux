@@ -74,14 +74,15 @@ public:
   void SetReferenceValue (bool use, long value=0);
 
   // Draw la barre de progresssion
-  void Draw ();
+  void Draw();
 
   // Change les coordonnées, puis dessine la barre de progression
-  void DrawXY (uint x, uint y);
+  void DrawXY(const Point2i &pos);
 
   // Lit sa taille
-  uint GetWidth() const { return larg; }
-  uint GetHeight() const { return haut; }
+  int GetWidth() const { return larg; }
+  int GetHeight() const { return haut; }
+  Point2i GetSize() const { return Point2i(larg, haut); }
 
   // Ajoute/supprime un marqueur
   marqueur_it AjouteMarqueur (long val, const Color& coul);

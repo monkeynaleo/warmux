@@ -80,11 +80,11 @@ uint BarreProg::CalculeValBarre (long val) const{
 }
 
 void BarreProg::Draw(){
-  DrawXY (x,y);
+  DrawXY( Point2i(x, y) );
 }
 
 // TODO pass a Surface as parameter
-void BarreProg::DrawXY (uint px, uint py) { 
+void BarreProg::DrawXY(const Point2i &pos){ 
   int left, right;
    
   // Bordure
@@ -125,10 +125,10 @@ void BarreProg::DrawXY (uint px, uint py) {
     Rectanglei r_marq(1 + it->val, 1, 1, haut - 2);
 	image.FillRect( r_marq, border_color);
   }
-  Rectanglei dst(px, py, larg, haut); 
-  app.video.window.Blit( image, dst.GetPosition() );
+  Rectanglei dst(pos.x, pos.y, larg, haut); 
+  app.video.window.Blit(image, pos);
 
-  world.ToRedrawOnScreen( dst );
+  world.ToRedrawOnScreen(dst);
 }
 
 // Ajoute/supprime un marqueur

@@ -25,10 +25,11 @@
 #include "tile.h"
 #include "../graphic/surface.h"
 #include "../include/base.h"
+#include "../tool/point.h"
 
 class Sky : public Tile{  
  private:
-  int lastx, lasty;
+  Point2i lastPos;
   void CompleteDraw();
 
 public:

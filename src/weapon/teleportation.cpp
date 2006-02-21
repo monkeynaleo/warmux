@@ -43,7 +43,7 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 bool Teleportation::p_Shoot ()
 {
   // Vérifie qu'on se téléporte dans le vide !
-  dst = mouse.GetPosMonde() - ActiveCharacter().GetSize()/2;
+  dst = mouse.GetWorldPosition() - ActiveCharacter().GetSize()/2;
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
 	 return false;
   if( !ActiveCharacter().IsInVacuumXY(dst) )

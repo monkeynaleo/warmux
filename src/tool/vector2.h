@@ -186,6 +186,20 @@ template<class T> class Vector2
 			y *= val;
 		}
 
+		// Special operators
+		
+		/**
+		 *
+		 */
+		inline Vector2<T> operator*(const Vector2<double> &p2){
+			Vector2<T> r;
+
+			r.x = (T)((double)x * p2.x);
+			r.y = (T)((double)y * p2.y);
+
+			return r;
+		}
+
 		/**
 		 * Return the comparaison of two vector in the form of a vector.
 		 *

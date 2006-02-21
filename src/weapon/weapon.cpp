@@ -525,7 +525,7 @@ void Weapon::Draw(){
      break;
   }
   if ( m_image )
-    m_image->Blit( app.video.window, x-camera.GetX(), y-camera.GetY());
+    m_image->Blit( app.video.window, Point2i(x, y) - camera.GetPosition());
 }
 
 void Weapon::DrawUnit(int unit){
@@ -536,8 +536,8 @@ void Weapon::DrawUnit(int unit){
   ss << unit;
  
   DrawTmpBoxText(global().small_font(),
-		 ActiveCharacter().GetCenterX()-camera.GetX(),
-		 ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP-camera.GetY(),
+		 Point2i( ActiveCharacter().GetCenterX(), ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
+		 - camera.GetPosition(),
 		 ss.str());
 }
 
