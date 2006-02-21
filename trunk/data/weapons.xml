@@ -106,7 +106,7 @@
   <sprite name="grenade">
     <image file="weapon/grenade/grenade.png" />
   </sprite>
-  <surface name="grenade_impact" file="weapon/share/larger_impact.png" />
+  <surface name="grenade_impact" file="weapon/share/large_impact.png" />
 
 <!-- Gun ressources -->
 
@@ -126,14 +126,14 @@
   <sprite name="holly_grenade">
     <image file="weapon/holly_grenade/holly_grenade.png" />
   </sprite>
-  <surface name="holly_grenade_impact" file="weapon/share/larger_impact.png" />
+  <surface name="holly_grenade_impact" file="weapon/share/large_impact.png" />
 
 <!-- Gnu ressources -->
   
   <surface name="gnulauncher_ico" file="weapon/gnu/gnu_ico.png" />
  
   <surface name="gnulauncher" file="weapon/gnu/gnulauncher.png" />
-  <surface name="gnu_impact" file="weapon/share/larger_impact.png" />
+  <surface name="gnu_impact" file="weapon/share/large_impact.png" />
 
   <sprite name="gnu">
     <image file="weapon/gnu/gnu.png">
