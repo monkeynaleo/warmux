@@ -73,7 +73,7 @@ void Cluster::SignalCollision()
     game_messages.Add (_("The rocket left the battlefield..."));
     return;
   }
-  AppliqueExplosion (GetPos(), GetPos(), impact, cfg, NULL);
+  AppliqueExplosion (GetPosition(), GetPosition(), impact, cfg, NULL);
 }
 
 //-----------------------------------------------------------------------------

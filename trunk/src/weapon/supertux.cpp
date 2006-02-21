@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "supertux.h"
-//-----------------------------------------------------------------------------
 #include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
@@ -33,13 +32,8 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
 const uint time_delta = 40;
 const uint animation_deltat = 50;
-
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 SuperTux::SuperTux(GameLoop &p_game_loop, SuperTuxWeaponConfig& cfg) :
   WeaponProjectile (p_game_loop, "supertux", cfg), 
@@ -47,8 +41,6 @@ SuperTux::SuperTux(GameLoop &p_game_loop, SuperTuxWeaponConfig& cfg) :
 {
   m_gravity_factor = 0.0;
 }
-
-//-----------------------------------------------------------------------------
 
 void SuperTux::Refresh()
 {
@@ -64,11 +56,9 @@ void SuperTux::Refresh()
       last_move = global_time.Read();
   }
 
-  particle_engine.AddPeriodic(GetPos(), angle, 0);
+  particle_engine.AddPeriodic(GetPosition(), angle, 0);
 }
 
-
-//----------------------------------------------------------------------------
 
 void SuperTux::turn_left()
 {  
@@ -80,9 +70,6 @@ void SuperTux::turn_left()
     }
 }
 
-
-//----------------------------------------------------------------------------
-
 void SuperTux::turn_right()
 {
   time_now = global_time.Read();
@@ -92,8 +79,6 @@ void SuperTux::turn_right()
       angle = angle + 15.0/180.0*M_PI;
     }
 }
-
-//----------------------------------------------------------------------------
 
 void SuperTux::SignalCollision()
 { 
@@ -107,8 +92,6 @@ void SuperTux::SignalCollision()
   is_active = false; 
 }
 
-//----------------------------------------------------------------------------
-
 void SuperTux::Draw()
 { 
   particle_engine.Draw();
@@ -117,10 +100,8 @@ void SuperTux::Draw()
   WeaponProjectile::Draw(); 
 }
 
+//-----------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 SuperTuxWeaponConfig::SuperTuxWeaponConfig()
 {
 }
@@ -142,8 +123,6 @@ TuxLauncher::TuxLauncher() :
   projectile = new SuperTux(game_loop, cfg());
 }
 
-//-----------------------------------------------------------------------------
-                                                                                    
 void TuxLauncher::HandleKeyEvent(int action, int event_type)
 {
   switch (action) {
@@ -161,8 +140,6 @@ void TuxLauncher::HandleKeyEvent(int action, int event_type)
     break ;
   } ;
 }
-
-//-----------------------------------------------------------------------------
 
 SuperTuxWeaponConfig& TuxLauncher::cfg() 
 { return static_cast<SuperTuxWeaponConfig&>(*extra_params); }

@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "holly_grenade.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include "weapon_tools.h"
 #include "../game/game_loop.h"
@@ -34,8 +33,6 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 
 HollyGrenade::HollyGrenade(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
   WeaponProjectile (p_game_loop, "holly_grenade", cfg), 
@@ -49,13 +46,11 @@ HollyGrenade::HollyGrenade(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
   m_rebound_factor = cfg.rebound_factor;
 }
 
-//-----------------------------------------------------------------------------
-
 void HollyGrenade::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  smoke_engine.AddPeriodic( GetPos() );
+  smoke_engine.AddPeriodic( GetPosition() );
   
   double tmp = global_time.Read() - begin_time;
   // Sing Alleluia ;-)
@@ -69,8 +64,6 @@ void HollyGrenade::Refresh()
   image->SetRotation_deg(angle);
 }
 
-//-----------------------------------------------------------------------------
-
 void HollyGrenade::Draw()
 {  
   // draw smoke particles below the grenade
@@ -78,8 +71,6 @@ void HollyGrenade::Draw()
 
   WeaponProjectile::Draw();
 }
-
-//-----------------------------------------------------------------------------
 
 void HollyGrenade::SignalCollision()
 {   
@@ -91,8 +82,6 @@ void HollyGrenade::SignalCollision()
   }
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
 HollyGrenadeLauncher::HollyGrenadeLauncher() : 

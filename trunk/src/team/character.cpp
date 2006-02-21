@@ -35,6 +35,7 @@
 #include "../include/app.h"
 #include "../include/constant.h"
 #include "../include/global.h"
+#include "../interface/cursor.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../map/water.h"
@@ -45,7 +46,6 @@
 #include "../weapon/suicide.h"
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon_tools.h"
-#include "../interface/cursor.h"
 
 const uint HAUT_FONT_MIX = 13;
 
@@ -323,7 +323,7 @@ void Character::Draw()
   if(!SetSkin("weapon-" + m_team->GetWeapon().GetID()))
     SetSkin("walking");
 
-  Point2i pos = GetPos();
+  Point2i pos = GetPosition();
   image->Draw(pos);
    
   // Draw animation
@@ -366,7 +366,7 @@ void Character::Draw()
     ss << lost_energy;
     dy -= HAUT_FONT_MIX;
     global().small_font().WriteCenterTop (
-			GetPos() - camera.GetPosition() + Point2i( GetWidth()/2, dy),
+			GetPosition() - camera.GetPosition() + Point2i( GetWidth()/2, dy),
 		   	ss.str(), white_color);    
   }
 

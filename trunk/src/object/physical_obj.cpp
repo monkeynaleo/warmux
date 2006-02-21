@@ -84,7 +84,7 @@ void PhysicalObj::SetY (int y){
 }
 
 void PhysicalObj::SetXY(const Point2i &position){
-  if( position != GetPos() )
+  if( position != GetPosition() )
     world.ToRedrawOnMap( Rectanglei(position, GetSize()) );
 
   if( IsOutsideWorldXY( position ) )
@@ -98,7 +98,7 @@ void PhysicalObj::SetXY(const Point2i &position){
   }
 }
 
-const Point2i PhysicalObj::GetPos() const 
+const Point2i PhysicalObj::GetPosition() const 
 { 
   return Point2i(GetX(), GetY()); 
 }
@@ -289,7 +289,7 @@ void PhysicalObj::UpdatePosition ()
 
   if (m_type == objUNBREAKABLE || IsInWater())
   {
-    if( IsOutsideWorldXY(GetPos()) )
+    if( IsOutsideWorldXY(GetPosition()) )
       Ghost();
 
     return;
@@ -429,7 +429,7 @@ bool PhysicalObj::IsOutsideWorldXY(Point2i position) const{
 }    
 
 bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const{
-	return IsOutsideWorldXY( GetPos() + offset );
+	return IsOutsideWorldXY( GetPosition() + offset );
 }
 
 bool PhysicalObj::FootsOnFloor(int y) const
@@ -442,7 +442,7 @@ bool PhysicalObj::FootsOnFloor(int y) const
 }
 
 bool PhysicalObj::IsInVacuum(const Point2i &offset) const{
-  return IsInVacuumXY(GetPos() + offset);
+  return IsInVacuumXY(GetPosition() + offset);
 }
 
 bool PhysicalObj::IsInVacuumXY(const Point2i &position) const{
@@ -459,7 +459,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position) const{
 }
 
 bool PhysicalObj::FootsInVacuum() const{
-  return FootsInVacuumXY(GetPos());
+  return FootsInVacuumXY(GetPosition());
 }
 
 bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const

@@ -30,7 +30,7 @@ class Mouse
 {
 private:
   bool scroll_actif;
-  int sauve_x, sauve_y;
+  Point2i savedPos;
 
 public:
   void TraiteClic (const SDL_Event *event); 

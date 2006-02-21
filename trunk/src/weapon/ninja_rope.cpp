@@ -481,7 +481,7 @@ void NinjaRope::Draw()
       float angle = sin( dt * M_PI_2 / SKIN_ROTATION_TIME ) * (-skin_angle - M_PI_2);
       skin->SetRotation_deg(angle * 180 / M_PI);
     }
-    skin->Draw(ActiveCharacter().GetPos());
+    skin->Draw(ActiveCharacter().GetPosition());
   }
 
   // Draw the rope.

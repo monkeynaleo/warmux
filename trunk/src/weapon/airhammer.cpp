@@ -62,7 +62,7 @@ bool Airhammer::p_Shoot()
   //jukebox.Play("weapon/airhammer");
 
   // initiate movement ;-)
-  ActiveCharacter().SetXY( ActiveCharacter().GetPos() );
+  ActiveCharacter().SetXY( ActiveCharacter().GetPosition() );
 
   world.Creuse(
 		  Point2i(	ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 - impact.GetWidth()/2,

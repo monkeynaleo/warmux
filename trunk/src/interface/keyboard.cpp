@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "keyboard.h"
-//-----------------------------------------------------------------------------
 #include <sstream>
 #include <iostream>
 #include "cursor.h"
@@ -44,8 +43,6 @@
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
 
-//-----------------------------------------------------------------------------
-
 // Active le mode tricheur ?
 #ifdef DEBUG
 #  define MODE_TRICHEUR
@@ -55,15 +52,10 @@
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
 
-//-----------------------------------------------------------------------------
 Clavier clavier;
-//-----------------------------------------------------------------------------
 
 Clavier::Clavier()
 {}
-
-//-----------------------------------------------------------------------------
-
 
 void Clavier::Reset()
 {
@@ -73,14 +65,10 @@ void Clavier::Reset()
     PressedKeys[i] = false ;
 }
 
-//-----------------------------------------------------------------------------
-
 void Clavier::SetKeyAction(int key, Action_t at)
 {
   layout[key] = at;
 }
-
-//-----------------------------------------------------------------------------
 
 void Clavier::HandleKeyEvent( const SDL_Event *event)
 {
@@ -132,8 +120,6 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
    
   ActiveCharacter().HandleKeyEvent( action, event_type);
 }
-
-//-----------------------------------------------------------------------------
 
 // Handle a pressed key
 void Clavier::HandleKeyPressed (const Action_t &action)
@@ -203,8 +189,6 @@ void Clavier::HandleKeyPressed (const Action_t &action)
     }
 }
 
-//-----------------------------------------------------------------------------
-
 // Handle a released key
 void Clavier::HandleKeyReleased (const Action_t &action)
 {
@@ -245,8 +229,6 @@ void Clavier::HandleKeyReleased (const Action_t &action)
   }
 }
 
-//-----------------------------------------------------------------------------
-
 // Refresh keys which are still pressed.
 void Clavier::Refresh()
 {
@@ -266,10 +248,7 @@ void Clavier::Refresh()
   }
 }
 
-//-----------------------------------------------------------------------------
-                                                                                    
 void Clavier::TestCamera()
 {
 }
 
-//-----------------------------------------------------------------------------
