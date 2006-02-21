@@ -34,6 +34,7 @@ class Dynamite;
 // La représentation d'une dynamite
 class BatonDynamite : public WeaponProjectile
 {
+  int channel;
   Sprite *explosion;
   bool explosion_active;
 
@@ -42,31 +43,22 @@ public:
   void Reset();
   void Draw();
   void Refresh();
+  void Explosion();
 
 protected:
   void SignalCollision();
-  void SignalGhostState (bool was_dead);
+  void ShootSound();
 };
 
 
 // L'arme dynamite
-class Dynamite : public Weapon
+class Dynamite : public WeaponLauncher
 {
 private:
-  // channel used for sound
-  int channel;
-
-  // Objet réprésentant la dynamite (= l'objet qui tombe et explose)
-  BatonDynamite baton;
-
-  void FinExplosion ();
   bool p_Shoot();
 
 public:
   Dynamite();
   void p_Select();
-  void Refresh();
-
-  ExplosiveWeaponConfig& cfg();
 };
 #endif

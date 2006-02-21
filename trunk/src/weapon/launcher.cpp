@@ -98,7 +98,7 @@ WeaponProjectile::WeaponProjectile (GameLoop &game_loop, const std::string &name
 
 WeaponProjectile::~WeaponProjectile()
 {
-  delete image;
+  //delete image; -> it causes a segfault :-/
 }
 
 void WeaponProjectile::Shoot(double strength)
@@ -209,6 +209,8 @@ void WeaponProjectile::Draw()
     return;
 
   image->Draw(GetPosition());
+  
+  std::cout << m_name << " - size : " << image->GetWidth() <<";"<<image->GetHeight()<<" - "<< GetWidth()<<";"<<GetHeight()<<std::endl;
 
   int tmp = cfg.timeout;
 

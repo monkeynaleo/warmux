@@ -43,8 +43,8 @@
 BatonDynamite::BatonDynamite(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
   WeaponProjectile(p_game_loop, "dynamite_bullet", cfg)
 {
-  image = resource_manager.LoadSprite(weapons_res_profile,"dynamite_anim");
-  
+  channel = -1;
+
   double delay = cfg.timeout/image->GetFrameCount()/1000.0 ;
   for (uint i=0 ; i < image->GetFrameCount(); i++)
     ; // TODO // image.set_frame_delay(i, delay) ;
@@ -104,24 +104,38 @@ void BatonDynamite::Draw()
   else
     explosion->Draw(GetPosition() - explosion->GetSize()/2);
 }
-   
-void BatonDynamite::SignalCollision() {}
 
-void BatonDynamite::SignalGhostState (bool) { is_active = false; }
+void BatonDynamite::ShootSound()
+{
+  channel = jukebox.Play("share","weapon/dynamite_fuze");
+}
+
+void BatonDynamite::Explosion()
+{
+  jukebox.Stop(channel);
+  channel = -1;
+
+  WeaponProjectile::Explosion();
+}
+
+void BatonDynamite::SignalCollision() 
+{
+  if (IsGhost()) is_active = false;
+}
 
 //-----------------------------------------------------------------------------
 
 Dynamite::Dynamite() :
-  Weapon(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE), 
-  baton(game_loop, cfg())
+  WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Dynamite");
-  channel = -1;
+  
+  projectile = new BatonDynamite(game_loop, cfg());
 }
 
 void Dynamite::p_Select()
 {
-  baton.Reset();
+  projectile->Reset();
 }
 
 // Pose une dynamite
@@ -130,45 +144,16 @@ bool Dynamite::p_Shoot ()
   Point2d speed_vector;
 
   // Ajoute la représentation
-  int x,y;
-  PosXY (x,y);
-  baton.Reset ();
-  // baton.PrepareTir();
-  baton.SetXY( Point2i(x, y) );
-  lst_objets.AjouteObjet (&baton, true);
+//   int x,y;
+//   PosXY (x,y);
+//   baton.Reset ();
+//   // baton.PrepareTir();
+//   baton.SetXY( Point2i(x, y) );
+  projectile->Shoot(0);
 
   // Ajoute la vitesse actuelle du ver
   ActiveCharacter().GetSpeedXY (speed_vector);
-  baton.SetSpeedXY (speed_vector);
-
-  // Active l'animation
-  channel = jukebox.Play("share","weapon/dynamite_fuze");
+  projectile->SetSpeedXY (speed_vector);
 
   return true;
 }
-
-void Dynamite::Refresh()
-{
-  if (m_is_active) {
-    // Fin de l'explwosion ?
-    if (!baton.is_active) FinExplosion ();
-  } else {
-    // Change le sens de l'image si nécessaire
-    m_image->Scale(ActiveCharacter().GetDirection(), 1);
-  }
-}
-
-void Dynamite::FinExplosion ()
-{
-  m_is_active = false;
-
-  lst_objets.RetireObjet (&baton);
-
-  jukebox.Stop(channel);
-  channel = -1;
-   
-  baton.Explosion();
-}
-
-ExplosiveWeaponConfig& Dynamite::cfg()
-{ return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
