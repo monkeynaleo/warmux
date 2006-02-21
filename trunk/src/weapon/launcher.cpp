@@ -113,15 +113,8 @@ void WeaponProjectile::Shoot(double strength)
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (strength, angle);
   PutOutOfGround(angle); 
-  std::cout << m_name <<" -> " << strength << "; " << angle << std::endl;
-
-  std::cout << m_name <<" -> " << GetX() << "; " << GetY() << std::endl;
 
   begin_time = global_time.Read();  
-
-  std::cout << m_name << " - Mass : " << cfg.mass << std::endl;
-  std::cout << m_name << " - Wind : " << cfg.wind_factor << std::endl;
-  std::cout << m_name << " - AirResist : " << cfg.air_resist_factor << std::endl;
 
   ShootSound();  
 
@@ -140,9 +133,9 @@ bool WeaponProjectile::TestImpact()
 {
   if (IsReady()) 
   {
-    //#ifdef DEBUG_MSG_COLLISION
+#ifdef DEBUG_MSG_COLLISION
     std::cout << "Impact because was ready." << std::endl;
-    //#endif
+#endif
     return true;
   }
   return CollisionTest (0,0);
@@ -193,8 +186,6 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
 
 void WeaponProjectile::Refresh()
 {
-  std::cout << m_name <<" " << GetX() << "; " << GetY() << std::endl;
-
   if( !is_active )
     return;
 
@@ -206,8 +197,8 @@ void WeaponProjectile::Refresh()
   // Explose after timeout
   double tmp = global_time.Read() - begin_time;
   
-  if(cfg.timeout && tmp>1000 * cfg.timeout) {
-    is_active = false;
+  if(cfg.timeout && tmp > 1000 * cfg.timeout) {
+    is_active = false;      
     return;
   }
 }
@@ -220,25 +211,26 @@ void WeaponProjectile::Draw()
   image->Draw(GetPosition());
 
   int tmp = cfg.timeout;
-  if (tmp != 0) {
-    //std::cout << "Draw timeout" << std::endl;
+
+  if (tmp != 0) { 
     tmp -= (int)((global_time.Read() - begin_time) / 1000);
-    std::ostringstream ss;
-    ss << tmp;
-    int txt_x = GetX() + GetWidth() / 2;
-    int txt_y = GetY() - GetHeight();
-    global().small_font().WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
-		   	ss.str(), white_color);
+
+    if (tmp >= 0) {
+      std::ostringstream ss;
+      ss << tmp;
+      int txt_x = GetX() + GetWidth() / 2;
+      int txt_y = GetY() - GetHeight();
+      global().small_font().WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
+					    ss.str(), white_color);
+    }
   }
 }
 
 void WeaponProjectile::SignalGhostState (bool){  
-  std::cout << m_name <<" SignalGhostState " << std::endl;
   SignalCollision();
 }
 
 void WeaponProjectile::SignalFallEnding(){  
-  std::cout << m_name <<"SignalFallEnding " << std::endl;
   SignalCollision();
 }
 
