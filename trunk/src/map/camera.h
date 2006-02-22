@@ -27,14 +27,13 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../tool/point.h"
+#include "../tool/rectangle.h"
 
-class Camera
-{
+class Camera : public Rectanglei{
 public:
   bool autorecadre;
 
 private:
-  Point2i position;
   PhysicalObj* obj_suivi;
   bool lance;
 
@@ -53,15 +52,6 @@ public:
   void StopFollowingObj (PhysicalObj* obj);
 
   bool IsVisible(const PhysicalObj &obj);
-
-  // Decalage du fond
-  //int GetX() const;
-  //int GetY() const;
-  Point2i GetPosition() const;
-  int GetWidth() const;
-  int GetHeight() const;
-  Point2i GetSize() const;
-  Rectanglei GetRect() const;
 
   void Refresh();
 

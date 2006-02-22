@@ -29,6 +29,7 @@
 #include "../tool/i18n.h"
 #include "../include/app.h"
 #include "../include/constant.h"
+#include "../map/camera.h"
 
 Video::Video(){
 	SetMaxFps (50);
@@ -82,6 +83,8 @@ bool Video::SetConfig(int width, int height, bool _fullscreen){
 		SDL_WM_ToggleFullScreen( window.GetSurface() );
 		fullscreen = _fullscreen;
 	}
+
+	camera.SetSize(width, height);
 
 	return true;
 }

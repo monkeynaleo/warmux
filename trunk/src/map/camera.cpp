@@ -22,10 +22,8 @@
  *****************************************************************************/
 
 #include "camera.h"
-#include <iostream>
 #include "map.h"
 #include "maps_list.h"
-#include "../graphic/video.h"
 #include "../include/app.h"
 #include "../interface/mouse.h"
 #include "../team/teams_list.h"
@@ -47,23 +45,12 @@ Camera::Camera(){
   obj_suivi = NULL;
 }
 
-Point2i Camera::GetPosition() const{
-	return position;
-}
-/*int Camera::GetX() const{
-  return position.GetX();
-}
-
-int Camera::GetY() const{
-  return position.GetY();
-}*/
-
 bool Camera::HasFixedX() const{
-  return (int)world.GetWidth() <= GetWidth();
+  return (int)world.GetWidth() <= GetSizeX();
 }
 
 bool Camera::HasFixedY() const{
-  return (int)world.GetHeight() <= GetHeight();
+  return (int)world.GetHeight() <= GetSizeY();
 }
 
 Point2i Camera::FreeDegrees() const{
@@ -75,22 +62,22 @@ Point2i Camera::NonFreeDegrees() const{
 	return Point2i(1, 1) - FreeDegrees();
 }
 
-void Camera::SetXYabs (int x, int y){ 
+void Camera::SetXYabs(int x, int y){ 
   if( !TerrainActif().infinite_bg ){
     if( !HasFixedX() )
-      position.x = BorneLong(x, 0, world.GetWidth() - GetWidth());
+      position.x = BorneLong(x, 0, world.GetWidth() - GetSizeX());
     else
-      position.x = BorneLong(x, world.GetWidth() - GetWidth(), 0);
+      position.x = BorneLong(x, world.GetWidth() - GetSizeX(), 0);
     
 	if( !HasFixedY() )
-      position.y = BorneLong(y, 0, world.GetHeight()-GetHeight());
+      position.y = BorneLong(y, 0, world.GetHeight()-GetSizeY());
     else
-      position.y = BorneLong(y, world.GetHeight()-GetHeight(), 0);
+      position.y = BorneLong(y, world.GetHeight() - GetSizeY(), 0);
   }else{
     position.x = x;
 
-    if( y > (int)world.GetHeight() - (int)GetHeight() )
-      position.y = world.GetHeight() - GetHeight();
+    if( y > (int)world.GetHeight() - GetSizeY() )
+      position.y = world.GetHeight() - GetSizeY();
     else
       position.y = y;
   }
@@ -190,20 +177,7 @@ void Camera::StopFollowingObj (PhysicalObj* obj){
     ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(), true, true, true);
 }
 
-int Camera::GetWidth() const { return app.video.window.GetWidth(); }
-int Camera::GetHeight() const { return app.video.window.GetHeight(); }
-
-Point2i Camera::GetSize() const{
-	return app.video.window.GetSize();
-}
-
-Rectanglei Camera::GetRect() const{
-	return Rectanglei( GetPosition(), GetSize() );
-}
-
 bool Camera::IsVisible(const PhysicalObj &obj){
-   Rectanglei rect( GetPosition(), GetSize() );
-   
-   return rect.Intersect( obj.GetRect() );
+   return Intersect( obj.GetRect() );
 }
 
