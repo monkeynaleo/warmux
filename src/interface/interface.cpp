@@ -286,7 +286,7 @@ void AbsoluteDraw(Surface &s, Point2i pos)
 {
 	Rectanglei rectSurface(pos, s.GetSize());
 
-	if( !rectSurface.Intersect(camera.GetRect()) )
+	if( !rectSurface.Intersect(camera) )
 		return;
 	
 	world.ToRedrawOnMap(rectSurface);

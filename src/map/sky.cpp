@@ -70,28 +70,28 @@ void Sky::CompleteDraw(){
        pos.y -= image.GetHeight();
 
 	 size = image.GetSize() - pos;
-     if(size.x >= camera.GetWidth())
-       size.x = camera.GetWidth();
+     if(size.x >= camera.GetSizeX())
+       size.x = camera.GetSizeX();
 
-     if(size.y >= camera.GetHeight())
-       size.y = camera.GetHeight();
+     if(size.y >= camera.GetSizeY())
+       size.y = camera.GetSizeY();
 
      Rectanglei ds(pos, size);
      app.video.window.Blit( image, ds, Point2i(0, 0));
 
-     if(size.x < camera.GetWidth())
+     if(size.x < camera.GetSizeX())
      {
-       Rectanglei ds(pos.x + size.x - image.GetWidth(), pos.y, camera.GetWidth() - size.x, size.y);
+       Rectanglei ds(pos.x + size.x - image.GetWidth(), pos.y, camera.GetSizeX() - size.x, size.y);
        Point2i dp(size.x, 0);
        app.video.window.Blit( image, ds, dp);
      }
-     if(size.y < camera.GetHeight())
+     if(size.y < camera.GetSizeY())
      {
-       Rectanglei ds(pos.x, pos.y + size.y - image.GetHeight(), size.x, camera.GetHeight() - size.y);
+       Rectanglei ds(pos.x, pos.y + size.y - image.GetHeight(), size.x, camera.GetSizeY() - size.y);
        Point2i dp(0, size.y);
        app.video.window.Blit( image, ds, dp);
      }
-     if(size.x < camera.GetWidth() && size.y < camera.GetHeight())
+     if(size.x < camera.GetSizeX() && size.y < camera.GetSizeY())
      {
        Rectanglei ds(pos + size - image.GetSize(), camera.GetSize() - size);
        app.video.window.Blit( image, ds, size);

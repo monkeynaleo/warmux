@@ -132,13 +132,13 @@ void TeamEnergy :: Draw ()
   barre_energie.SetValueColor( color );
    
   int x,y;
-  x = camera.GetWidth() - (BARRE_LARG + 10) + dx;
+  x = camera.GetSizeX() - (BARRE_LARG + 10) + dx;
   y = BARRE_HAUT +(classement * (BARRE_HAUT + ESPACEMENT)) +dy;
   barre_energie.DrawXY( Point2i(x, y) );
   
   std::ostringstream ss;
   ss << nom << "/" << valeur;
-  x = camera.GetWidth() - ((BARRE_LARG/2) + 10) + dx;
+  x = camera.GetSizeX() - ((BARRE_LARG/2) + 10) + dx;
   y = BARRE_HAUT + (classement * (BARRE_HAUT + ESPACEMENT)) + dy;
   std::string txt = ss.str();
   bar_text->Set(txt);
