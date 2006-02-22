@@ -74,7 +74,7 @@ bool Ground::EstDansVide (int x, int y){
   }
 
   // Lit le monde
-  return GetAlpha(x,y) != 255; // IsTransparent
+  return GetAlpha( Point2i(x, y) ) != 255; // IsTransparent
 }
 
 //Renvoie l'angle entre la tangeante au terrain en (x,y) et l'horizontale.

@@ -15,16 +15,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************
- * Clipping : découpe une grosse image en petit morceaux indépendants pour
- * permettre un chargement des donnéees plus rapide. On peut ensuite creuser
- * des trous dans cette image (en touchant à la couche alpha).
  *****************************************************************************/
 
 #ifndef _TILE_H
 #define _TILE_H
 
 #include <vector>
+#include "tileitem.h"
 #include "../graphic/surface.h"
 #include "../tool/rectangle.h"
 
@@ -38,7 +35,7 @@ public:
 
   // Dig a hole
   void Dig(const Point2i &position, Surface& provider);
-   
+
   // Load an image
   void LoadImage (Surface& ground_surface);
 
@@ -48,29 +45,27 @@ public:
   Point2i GetSize() const{ return size; }
 
   // Get alpha value of a pixel
-  unsigned char GetAlpha(const int x, const int y) const;
+  unsigned char GetAlpha(const Point2i &pos) const;
 
   // Draw it (on the entire visible part) 
   void DrawTile() const;
-   
+
   // Draw a part that is inside the given clipping rectangle
   // Clipping rectangle is in World corrdinate not screen coordinates
   // usefull to redraw only a part that is under a sprite that has moved,... 
-  void DrawTile_Clipped (Rectanglei clip_rectangle) const;
-   
+  void DrawTile_Clipped(Rectanglei clip_rectangle) const;
+
 protected:
-   
-  void InitTile(unsigned int width, unsigned int height);
+  void InitTile(const Point2i &pSize);
 
   void FreeMem();
 
   // Dimension du terrain
   Point2i size;
-
-  unsigned int nbr_cell_width, nbr_cell_height;
+  Point2i nbCells;
   unsigned int nbr_cell;
 
-  // Canvas donnant accès aux cellules
+  // Canvas donnant accï¿½ aux cellules
   std::vector<TileItem *> item;
 };
 

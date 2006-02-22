@@ -53,16 +53,15 @@ Surface::Surface(SDL_Surface *sdl_surface){
 /**
  * Constructor building a surface object using the NewSurface function.
  *
- * @param width
- * @param height
+ * @param size
  * @param flags
  * @param useAlpha
  * @see NewSurface 
  */
-Surface::Surface(int width, int height, Uint32 flags, bool useAlpha){
+Surface::Surface(const Point2i &size, Uint32 flags, bool useAlpha){
 	surface = NULL;
 	autoFree = true;
-	NewSurface( width, height, flags, useAlpha );
+	NewSurface(size, flags, useAlpha);
 }
 
 /**
@@ -159,12 +158,11 @@ void Surface::SetSurface(SDL_Surface *newSurface, bool freePrevious){
 /**
  * Create a new surface.
  *
- * @param width
- * @param height
+ * @param size
  * @param flags
  * @param useAlpha
  */
-void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha){
+void Surface::NewSurface(const Point2i &size, Uint32 flags, bool useAlpha){
 	Uint32 alphaMask;
 	Uint32 redMask;
 	Uint32 greenMask;
@@ -188,7 +186,7 @@ void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha){
 	if( !useAlpha )
 		alphaMask = 0;
 
-	surface = SDL_CreateRGBSurface( flags, width, height, 32,
+	surface = SDL_CreateRGBSurface(flags, size.x, size.y, 32,
 			redMask, greenMask, blueMask, alphaMask );
 
 	if( surface == NULL )

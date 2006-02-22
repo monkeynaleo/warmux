@@ -62,19 +62,20 @@ void Sprite::Constructor() {
   rot_hotspot = center;
 }
 
-void Sprite::Init( Surface& surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y){
-   this->frame_width_pix = frame_width;
-   this->frame_height_pix = frame_height;
+void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y){
+   Point2i f;
+
+   this->frame_width_pix = frameSize.x;
+   this->frame_height_pix = frameSize.y;
 
    surface.SetAlpha( 0, 0);
    
-   for( unsigned int fy = 0 ; fy < (unsigned int)nb_frames_y ; fy++)
-     for( unsigned int fx = 0 ; fx < (unsigned int)nb_frames_x ; fx++){
-       Surface new_surf = Surface(frame_width, frame_height, SDL_SWSURFACE|SDL_SRCALPHA, true);
-       Rectanglei sr(fx*frame_width, fy*frame_width, frame_width, frame_height);
-       Point2i dp(0, 0);
+   for( f.y = 0; f.y < nb_frames_y; f.y++)
+     for( f.x = 0; f.x < nb_frames_x; f.x++){
+       Surface new_surf = Surface(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
+       Rectanglei sr(f * frameSize, frameSize);
 	  
-       new_surf.Blit( surface, sr, dp);
+       new_surf.Blit( surface, sr, Point2i(0, 0));
        frames.push_back( SpriteFrame(new_surf));
      }
 }

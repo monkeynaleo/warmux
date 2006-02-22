@@ -45,7 +45,7 @@ void Water::Init(){
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
    surface = resource_manager.LoadImage(res, "gfx/water");
    surface.SetAlpha(0, 0);
-   pattern.NewSurface(180, surface.GetHeight() + 40, SDL_SWSURFACE|SDL_SRCALPHA, true);
+   pattern.NewSurface( Point2i(180, surface.GetHeight() + 40), SDL_SWSURFACE|SDL_SRCALPHA, true);
    shift1 = 0;
 }
 

@@ -116,7 +116,7 @@ bool NinjaRope::p_Shoot()
 void NinjaRope::InitSkinSprite()
 {
   //Copy skins surface
-  Surface new_surf = Surface(ActiveCharacter().GetWidth(), ActiveCharacter().GetHeight(), SDL_SWSURFACE|SDL_SRCALPHA, true);
+  Surface new_surf = Surface(ActiveCharacter().GetSize(), SDL_SWSURFACE|SDL_SRCALPHA, true);
   // Disable per pixel alpha on the source surface
   // in order to properly copy the alpha chanel to the destination suface
   // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)

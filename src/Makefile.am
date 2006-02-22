@@ -69,14 +69,15 @@ wormux_SOURCES = \
 	object/bonus_box.cpp object/bonus_box.h \
 	object/objects_list.cpp object/objects_list.h \
 	object/particle.cpp object/particle.h \
+	map/camera.cpp map/camera.h \
+	map/ground.cpp map/ground.h \
 	map/map.cpp map/map.h \
 	map/maps_list.cpp map/maps_list.h \
 	map/sky.cpp map/sky.h \
 	map/tile.cpp map/tile.h \
+	map/tileitem.cpp map/tileitem.h \
 	map/water.cpp map/water.h \
 	map/wind.cpp map/wind.h \
-	map/camera.cpp map/camera.h \
-	map/ground.cpp map/ground.h \
 	team/macro.h \
 	team/character.cpp team/character.h \
 	team/move.cpp team/move.h \
