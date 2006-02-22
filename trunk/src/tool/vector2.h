@@ -149,7 +149,7 @@ template<class T> class Vector2
         }
 
 
-		// Operators on itself
+		// Operators on itself with a scalar
 
 		/**
 		 *
@@ -158,15 +158,6 @@ template<class T> class Vector2
 		inline void operator+=(const T val){
 			x += val;
 			y += val;
-		}
-
-		/**
-		 *
-		 * @param p2
-		 */
-		inline void operator+=(const Vector2<T> &p2){
-			x += p2.x;
-			y += p2.y;
 		}
 
 		/**
@@ -184,6 +175,25 @@ template<class T> class Vector2
 		inline void operator*=(const T val){
 			x *= val;
 			y *= val;
+		}
+
+		// Operators on itself with an other vector
+		
+		/**
+		 *
+		 * @param p2
+		 */
+		inline void operator+=(const Vector2<T> &p2){
+			x += p2.x;
+			y += p2.y;
+		}
+
+		/**
+		 * @param p2
+		 */
+		inline void operator-=(const Vector2<T> &p2){
+			x -= p2.x;
+			y -= p2.y;
 		}
 
 		// Special operators

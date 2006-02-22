@@ -33,6 +33,7 @@
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
+#include "../tool/debug.h"
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
 #include "../tool/resource_manager.h"
@@ -287,11 +288,12 @@ void AbsoluteDraw(Surface &s, Point2i pos)
 
 	if( !rectSurface.Intersect(camera.GetRect()) )
 		return;
-
+	
 	world.ToRedrawOnMap(rectSurface);
-	rectSurface.Clip( camera.GetRect() );
+
+	//rectSurface.Clip( camera.GetRect() );
 
  	Point2i dstPos(pos - camera.GetPosition());
-	app.video.window.Blit(s, Rectanglei(pos - camera.GetPosition(), rectSurface.GetSize()), dstPos );
+	app.video.window.Blit(s, Rectanglei(rectSurface.GetPosition() - pos , rectSurface.GetSize()), dstPos );
 }
 

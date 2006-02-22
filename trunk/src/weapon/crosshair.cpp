@@ -20,8 +20,6 @@
  *****************************************************************************/
 
 #include "crosshair.h"
-#include <SDL.h>
-#include <iostream>
 #include "weapon.h"
 #include "../game/game_loop.h"
 #include "../graphic/surface.h"
@@ -31,12 +29,8 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 
-
 // Distance entre le pointeur et le ver
 #define RAYON 40 // pixels
-
-#define HAUT_POINTEUR 11
-#define LARG_POINTEUR 11
 
 CrossHair::CrossHair()
 {
@@ -62,8 +56,7 @@ void CrossHair::ChangeAngleVal (int val)
   const double angleRAD = Deg2Rad(angle);
 
   // Calcul des coordonnées du point
-  calcul_dx = (int)(RAYON*cos( angleRAD ));
-  calcul_dy = (int)(RAYON*sin( angleRAD ));
+  calcul_d = Point2i(RAYON, RAYON) * Point2d(cos(angleRAD), sin(angleRAD));
 }
 
 void CrossHair::Draw()
@@ -76,13 +69,10 @@ void CrossHair::Draw()
 	return;
 
   Point2i pos = ActiveCharacter().GetHandPosition();
+  pos += calcul_d * Point2i(ActiveCharacter().GetDirection(), 1);
+  pos -= image.GetSize()/2;
   
-  pos.x += calcul_dx*ActiveCharacter().GetDirection();
-  pos.y += calcul_dy;
- 
-  pos = pos - image.GetSize()/2;
   app.video.window.Blit(image, pos - camera.GetPosition());
-
   world.ToRedrawOnMap(Rectanglei(pos, image.GetSize()));
 }
 
@@ -101,7 +91,8 @@ double CrossHair::GetAngleRad() const
 {
   double angleR = Deg2Rad(angle);
 
-  if (ActiveCharacter().GetDirection() == -1) angleR = InverseAngle (angleR);
+  if (ActiveCharacter().GetDirection() == -1)
+	  angleR = InverseAngle (angleR);
   return angleR;
 }
 

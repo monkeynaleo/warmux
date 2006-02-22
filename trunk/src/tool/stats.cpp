@@ -21,7 +21,6 @@
 
 #include "stats.h"
 #ifdef ENABLE_STATS
-//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include <map>
 #include <vector>
@@ -30,7 +29,6 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-//-----------------------------------------------------------------------------
 
 typedef uint StatTime_t;
 
@@ -69,8 +67,6 @@ public:
 
 std::map<std::string, StatItem> stats;
 typedef std::map<std::string, StatItem>::iterator stats_it;
-
-//-----------------------------------------------------------------------------
 
 void StatStart(const std::string &function)
 {
@@ -162,5 +158,4 @@ void SaveStatToXML(const std::string &filename)
   DoSaveStatToXML(filename, table, total_time);
 }
 
-//-----------------------------------------------------------------------------
 #endif // ENABLE_STATS
