@@ -31,7 +31,6 @@
 #include "../tool/point.h"
 #include "../tool/resource_manager.h"
 
-
 const uint show_hide_time = 200; //time to show and hide the arrow
 const uint y_min = 20; //number of pixels between the bottom of the arrow and the top of the sprite
 const uint y_max = 90; //number of pixels between the bottom of the arrow and the top of the sprite

@@ -282,8 +282,7 @@ void Interface::UpdateTimer(uint utimer)
     timer = NULL;
 }
 
-void AbsoluteDraw(Surface &s, Point2i pos)
-{
+void AbsoluteDraw(Surface &s, Point2i pos){
 	Rectanglei rectSurface(pos, s.GetSize());
 
 	if( !rectSurface.Intersect(camera) )
@@ -291,9 +290,11 @@ void AbsoluteDraw(Surface &s, Point2i pos)
 	
 	world.ToRedrawOnMap(rectSurface);
 
-	//rectSurface.Clip( camera.GetRect() );
+	rectSurface.Clip( camera );
 
- 	Point2i dstPos(pos - camera.GetPosition());
-	app.video.window.Blit(s, Rectanglei(rectSurface.GetPosition() - pos , rectSurface.GetSize()), dstPos );
+	Rectanglei rectSource(rectSurface.GetPosition() - pos, rectSurface.GetSize());
+	Point2i ptDest = rectSurface.GetPosition() - camera.GetPosition();
+	
+	app.video.window.Blit(s, rectSource, ptDest);
 }
 
