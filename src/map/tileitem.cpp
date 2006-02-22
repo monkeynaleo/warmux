@@ -52,24 +52,20 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size){
 
     _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
     if( m_surface.GetBytesPerPixel() == 4 ){
-       if (m_surface.GetSurface()->format->Amask == 0x000000ff) {
-           if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+       if( m_surface.GetSurface()->format->Amask == 0x000000ff ){
+           if( SDL_BYTEORDER == SDL_LIL_ENDIAN )
                _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
            else
                _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
        }else{
-           if (m_surface.GetSurface()->format->Amask == 0xff000000) {
-                if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+           if( m_surface.GetSurface()->format->Amask == 0xff000000 ){
+                if (SDL_BYTEORDER == SDL_LIL_ENDIAN )
                     _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index3;
                 else
                     _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Index0;
             }
         }
     }
-}
-
-TileItem_AlphaSoftware::TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy){
-    Error( "TileItem_Alphasoftware: copy constructor not implemented");
 }
 
 TileItem_AlphaSoftware::~TileItem_AlphaSoftware(){
@@ -126,22 +122,12 @@ TileItem_AlphaHardware::TileItem_AlphaHardware(const Point2i &size){
     m_buffer = new unsigned char[size.x*size.y];
 }
 
-TileItem_AlphaHardware::TileItem_AlphaHardware (const TileItem_AlphaHardware &copy){
-    m_size = copy.m_size;
-
-    m_surface.NewSurface(m_size, SDL_HWSURFACE|SDL_SRCALPHA, true);
-    m_surface.Blit(copy.m_surface);
-
-    m_buffer = new unsigned char[m_size.x*m_size.y];
-    memcpy(copy.m_buffer, m_buffer, m_size.x*m_size.y*sizeof(unsigned char));
-}
-
-TileItem_AlphaHardware::~TileItem_AlphaHardware (){
-   delete[] m_buffer;
+TileItem_AlphaHardware::~TileItem_AlphaHardware(){
+    delete[] m_buffer;
 }
 
 unsigned char TileItem_AlphaHardware::GetAlpha(const Point2i &pos){
-    return *(m_buffer + pos.y * m_size.x + pos.x);
+    return m_buffer[pos.y * m_size.x + pos.x];
 }
 
 void TileItem_AlphaHardware::Dig(const Point2i &position, Surface& dig){
@@ -178,7 +164,7 @@ void TileItem_AlphaHardware::SyncBuffer(){
 
 // === Implemenation of TileItem_Software_Colorkey  ==============================
 
-TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (const Point2i &size){
+TileItem_ColorkeySoftware::TileItem_ColorkeySoftware(const Point2i &size){
     m_size = size;
 
     m_surface.NewSurface(size, SDL_SWSURFACE);
@@ -186,18 +172,6 @@ TileItem_ColorkeySoftware::TileItem_ColorkeySoftware (const Point2i &size){
     m_surface.SetColorKey( SDL_SRCCOLORKEY, 0, 0, 0, 0);
 
     m_buffer = new unsigned char[m_size.x * m_size.y];
-}
-
-TileItem_ColorkeySoftware::TileItem_ColorkeySoftware(const TileItem_ColorkeySoftware &copy){
-    m_size = copy.m_size;
-
-    m_surface.NewSurface(m_size, SDL_SWSURFACE);
-    m_surface.Blit(copy.m_surface);
-    m_surface.SetAlpha(0, 0);
-    m_surface.SetColorKey(SDL_SRCCOLORKEY, 0, 0, 0, 0);
-
-    m_buffer = new unsigned char[m_size.x*m_size.y];
-    memcpy(copy.m_buffer, m_buffer, m_size.x*m_size.y*sizeof(unsigned char));
 }
 
 TileItem_ColorkeySoftware::~TileItem_ColorkeySoftware(){
@@ -237,3 +211,4 @@ void TileItem_ColorkeySoftware::SyncBuffer(){
 
     m_surface.Unlock();
 }
+

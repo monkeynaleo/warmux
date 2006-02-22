@@ -55,7 +55,6 @@ class TileItem_AlphaSoftware : public TileItem
 {
 public:
   TileItem_AlphaSoftware(const Point2i &size);
-  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
   ~TileItem_AlphaSoftware();
 
   unsigned char GetAlpha(const Point2i &pos);
@@ -64,6 +63,7 @@ public:
   void SyncBuffer();
 
 private:
+  TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);
   unsigned char (TileItem_AlphaSoftware::*_GetAlpha)(const Point2i &pos);
   unsigned char GetAlpha_Index0(const Point2i &pos);
   inline unsigned char GetAlpha_Index3(const Point2i &pos);
@@ -75,38 +75,40 @@ private:
 
 class TileItem_AlphaHardware : public TileItem
 {
+private:
+  Point2i m_size;
+  Surface m_surface;
+  unsigned char *m_buffer;
+  
+  TileItem_AlphaHardware(const TileItem_AlphaHardware &copy);
+  
 public:
   TileItem_AlphaHardware(const Point2i &size);
-  TileItem_AlphaHardware(const TileItem_AlphaHardware &copy);
   ~TileItem_AlphaHardware();
  
   unsigned char GetAlpha(const Point2i &pos);
   Surface GetSurface();
   void Dig(const Point2i &position, Surface& dig);
   void SyncBuffer();
-
-private:
-  Point2i m_size;
-  Surface m_surface;
-  unsigned char *m_buffer;
 };
 
 class TileItem_ColorkeySoftware : public TileItem
 {
+private:
+  Point2i m_size;
+  Surface m_surface;
+  unsigned char *m_buffer;
+  
+  TileItem_ColorkeySoftware(const TileItem_ColorkeySoftware &copy);
+  
 public:
   TileItem_ColorkeySoftware(const Point2i &pos);
-  TileItem_ColorkeySoftware(const TileItem_ColorkeySoftware &copy);
   ~TileItem_ColorkeySoftware();
 
   unsigned char GetAlpha(const Point2i &pos);
   Surface GetSurface();
   void Dig(const Point2i &position, Surface& dig);
   void SyncBuffer();
-
-private:
-  Point2i m_size;
-  Surface m_surface;
-  unsigned char *m_buffer;
 };
 
 #endif
