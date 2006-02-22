@@ -51,14 +51,20 @@ protected:
 
 class Avion : public PhysicalObj
 {
-public:
+public:  
+  std::list<Obus> obus;
+  typedef std::list<Obus>::iterator iterator;
+  bool obus_laches;
+  bool obus_actifs;
+
   int obus_dx, obus_dy;
   Sprite *image;
 private:
   int cible_x;
+  AirAttackConfig &cfg;
 
 public:
-  Avion(GameLoop &game_loop);
+  Avion(GameLoop &game_loop, AirAttackConfig& cfg);
   void Shoot(double speed);
   void Reset();
   void Draw();
@@ -67,17 +73,12 @@ public:
   bool PeutLacherObus() const;
   int LitCibleX() const;
   int GetDirection() const;
+  void Avion::SignalGhostState (bool was_dead);
 };
 
 class AirAttack : public Weapon
 {
 private:
-  std::vector<Obus*> obus;
-  typedef std::vector<Obus*>::iterator iterator;
-  typedef std::vector<Obus*>::const_iterator const_iterator;
-  bool obus_laches;
-  bool obus_actifs;
-
   bool p_Shoot();
 
 public:
@@ -85,9 +86,8 @@ public:
 
   AirAttack();
   void p_Select();
-  void Refresh();
-  void Draw();
   void FinTir();
+  void Refresh(){};
   virtual void ChooseTarget ();
 
  private:
