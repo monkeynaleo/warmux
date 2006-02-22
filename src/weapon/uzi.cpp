@@ -72,41 +72,28 @@ void Uzi::RepeatShoot()
   }
 }
 
-// bool Uzi::p_Shoot()
-// {
-//   if (m_is_active)
-//     return false;
-
-//   m_is_active = true;
-//   projectile->Shoot(50);
-//   return true;
-// }
-
 bool Uzi::p_Shoot()
 {
   jukebox.Play("share", "weapon/uzi");
 
   // Calculate movement of the bullet
-  
   // Set the initial position.
-  int x = ActiveCharacter().GetHandPosition().x;
-  int y = ActiveCharacter().GetHandPosition().y;
-   
+  Point2i pos = ActiveCharacter().GetHandPosition();
 
   // Equation of movement : y = ax + b
   double angle, a, b;
   angle = ActiveTeam().crosshair.GetAngleRad();
-  a=sin(angle)/cos(angle);
-  b= y-(a*x) ;
+  a = sin(angle)/cos(angle);
+  b = pos.y - ( a * pos.x ) ;
 
   // Move the bullet !!
   //balle.PrepareTir();  
-  projectile->SetXY( Point2i(x, y) );
+  projectile->SetXY( pos );
 
-  while (projectile->is_active) {
-    y = int(double((a*x) + b)) ;
+  while( projectile->is_active ){
+    pos.y = (int)((a*pos.x) + b);
 
-    projectile->SetXY( Point2i(x, y) );
+    projectile->SetXY( pos );
 
     // the bullet in gone outside the map
     if (projectile->IsGhost()) {
@@ -121,25 +108,20 @@ bool Uzi::p_Shoot()
       // Si la balle a touché un ver, lui inflige des dégats
       Character* ver = projectile->dernier_ver_touche;
       PhysicalObj* obj = projectile->dernier_obj_touche;
-      if (ver) obj = ver;
-      if (ver)
-      {
-        ver -> SetEnergyDelta (-cfg().damage);
-      }
-      if (obj) 
-      {
-	obj -> AddSpeed (SOUFFLE_BALLE, angle);
-      }
-
+	  
+      if( ver ){
+          obj = ver;
+       	  ver -> SetEnergyDelta (-cfg().damage);
+	  }
+      if( obj ) 
+          obj -> AddSpeed (SOUFFLE_BALLE, angle);
       // Creuse le world
-      if (!obj)
-      {
-	world.Creuse(projectile->GetPosition() - projectile->impact.GetSize()/2,
+      if( !obj )
+		world.Creuse(projectile->GetPosition() - projectile->impact.GetSize()/2,
 		      projectile->impact);
-      }
       return true;
     }
-    x+=ActiveCharacter().GetDirection();
+    pos.x += ActiveCharacter().GetDirection();
   }
 
   return true;
@@ -147,21 +129,17 @@ bool Uzi::p_Shoot()
 
 void Uzi::HandleKeyEvent(int action, int event_type)
 {
-
   switch (action) {    
 
   case ACTION_SHOOT:
-    
     if (event_type == KEY_REFRESH)
       RepeatShoot();
-    
     if (event_type == KEY_RELEASED)
       m_is_active = false;
 
-    break ;
-    
+    break;
   default:
-    break ;
-  } ;
+    break;
+  };
 }
 

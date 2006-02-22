@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "lowgrav.h"
-//-----------------------------------------------------------------------------
 #include "weapon_tools.h"
 #include "../game/game.h"
 #include "../game/game_loop.h"
@@ -35,8 +34,6 @@ const uint ESPACE = 5;
 
 const double LOW_GRAVITY_FACTOR = 0.4;
 
-//-----------------------------------------------------------------------------
-
 LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav", 
 			    new WeaponConfig(), NEVER_VISIBLE)
 {
@@ -46,14 +43,10 @@ LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",
   use_unit_on_first_shoot = false;  
 }
 
-//-----------------------------------------------------------------------------
-
 void LowGrav::Refresh()
 {
   ActiveCharacter().UpdatePosition();
 }
-
-//-----------------------------------------------------------------------------
 
 void LowGrav::p_Deselect()
 {
@@ -62,8 +55,6 @@ void LowGrav::p_Deselect()
   m_is_active = false;
 }
 
-//-----------------------------------------------------------------------------
-
 bool LowGrav::p_Shoot()
 {
   ActiveCharacter().SetGravityFactor(LOW_GRAVITY_FACTOR);
@@ -71,13 +62,9 @@ bool LowGrav::p_Shoot()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void LowGrav::Draw()
 {
 }
-
-//-----------------------------------------------------------------------------
 
 void LowGrav::HandleKeyEvent(int action, int event_type)
 {
@@ -93,8 +80,6 @@ void LowGrav::HandleKeyEvent(int action, int event_type)
 	break ;
     }
 }
-
-//-----------------------------------------------------------------------------
 
 void LowGrav::SignalTurnEnd()
 {

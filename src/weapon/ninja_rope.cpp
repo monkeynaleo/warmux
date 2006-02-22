@@ -35,18 +35,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-/*
-// Is this hack still needed for round()?
-#ifdef WIN32
-int roundl(double nbr)
-{
-  //If someone knows the right function to do this in visual studio,
-  //replace it quickly!
-  return (int)nbr;
-}
-#endif
-*/
-
 const int DT_MVT  = 15 ; //delta_t bitween 2 up/down/left/right mvt
 const int DST_MIN = 6 ;  //dst_minimal bitween 2 nodes
 const uint MAX_ROPE_LEN = 700 ; // Max rope length in pixels

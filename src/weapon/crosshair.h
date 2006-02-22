@@ -22,20 +22,18 @@
 #ifndef CROSSHAIR_H
 #define CROSSHAIR_H
 
-#include <SDL.h>
 #include "../graphic/surface.h"
 #include "../include/base.h"
+#include "../tool/point.h"
 
 class CrossHair
 {
 public:
-  // display CrossHair ?
   bool enable;
 
 private:
   Surface image;
-  uint calcul_dx, calcul_dy;
-
+  Point2i calcul_d;
   int angle;
 
 public:

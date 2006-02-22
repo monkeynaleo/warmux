@@ -20,18 +20,14 @@
  *****************************************************************************/
 
 #include "suicide.h"
-//-----------------------------------------------------------------------------
 #include <iostream>
 #include "weapon_tools.h"
 #include "../game/game_loop.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-//-----------------------------------------------------------------------------
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
-
-//-----------------------------------------------------------------------------
 
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {  
@@ -40,14 +36,10 @@ Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig
   hole_image = resource_manager.LoadImage( weapons_res_profile, "suicide_hole"); 
 }
 
-//-----------------------------------------------------------------------------
-
 void Suicide::p_Select()
 {
   is_dying = false;
 }
-
-//-----------------------------------------------------------------------------
 
 bool Suicide::p_Shoot()
 { 
@@ -59,26 +51,17 @@ bool Suicide::p_Shoot()
   return true;
 }
 
-//-----------------------------------------------------------------------------
-
 void Suicide::Refresh()
 {
   if (!is_dying) return;
 
-  if ( sound_channel != -1 && Mix_Playing(sound_channel) ) {
-    m_is_active = true;
-  } else {
-    m_is_active = false;
-  }
+  m_is_active = sound_channel != -1 && Mix_Playing(sound_channel);
 
-  if (!m_is_active) {
-    if ( !ActiveCharacter().IsDead() ) ActiveCharacter().Die();
-  }
+  if( !m_is_active )
+    if( !ActiveCharacter().IsDead() )
+      ActiveCharacter().Die();
 }
-
-//-----------------------------------------------------------------------------
 
 ExplosiveWeaponConfig& Suicide::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
 
-//-----------------------------------------------------------------------------
