@@ -36,10 +36,6 @@
 #undef LoadImage
 #endif
 
-#ifdef DEBUG
-  //  #define DEBUG_CADRE_TEST
-#endif
-
 BatonDynamite::BatonDynamite(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
   WeaponProjectile(p_game_loop, "dynamite_bullet", cfg)
 {

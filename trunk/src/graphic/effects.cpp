@@ -33,10 +33,11 @@
 //used on the skin during teleportation
 Sprite* WaveSurface(Surface &a, unsigned int nbr_frames, unsigned int duration, float wave_amp, float wave_per){
 	Sprite* sprite = new Sprite;
+	Point2i newSize = a.GetSize() + Point2i(2 * (int)wave_amp, 0);
 	
-    sprite->SetSize( a.GetWidth() + 2 * (unsigned int) wave_amp, a.GetHeight() );
+    sprite->SetSize(newSize);
 	for(unsigned int f=0; f < nbr_frames; f++){
-		Surface b( a.GetWidth() + 2 * (int)wave_amp, a.GetHeight(), SDL_SWSURFACE|SDL_SRCALPHA );
+		Surface b(newSize, SDL_SWSURFACE|SDL_SRCALPHA );
 		b.Fill(0x00000000);
 		b.SetAlpha(SDL_SRCALPHA, 0);
 		a.Lock();

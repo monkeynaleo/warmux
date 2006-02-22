@@ -53,7 +53,7 @@ public:
 public:
   explicit Sprite();
   explicit Sprite( Surface surface);
-  void Init( Surface& surface, int frame_width, int frame_height, int nb_frames_x, int nb_frames_y);
+  void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
   Surface GetSurface();
    
   // Frame number

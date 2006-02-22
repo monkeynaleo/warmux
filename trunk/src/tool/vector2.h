@@ -115,6 +115,10 @@ template<class T> class Vector2
 			return Vector2<T>(x / p2.x, y / p2.y);
 		}
 
+		inline Vector2<T> operator%(const Vector2<T> &p2) const{
+			return Vector2<T>(x % p2.x, y % p2.y);
+		}
+
 		// Vector/Scalar opertations
 		
 		/**

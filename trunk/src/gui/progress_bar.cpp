@@ -54,7 +54,7 @@ void BarreProg::InitPos (uint px, uint py, uint plarg, uint phaut){
   larg = plarg;
   haut = phaut;
 
-  image.NewSurface( larg, haut, SDL_SWSURFACE|SDL_SRCALPHA, true);
+  image.NewSurface(Point2i(larg, haut), SDL_SWSURFACE|SDL_SRCALPHA, true);
 }
 
 void BarreProg::InitVal (long pval, long pmin, long pmax){

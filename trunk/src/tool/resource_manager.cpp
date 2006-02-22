@@ -178,12 +178,11 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
     // No grid element, Load the Sprite like a normal image
     Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
-    sprite->Init( surface, surface.GetWidth(), surface.GetHeight(), 1, 1);
+    sprite->Init(surface, surface.GetSize(), 1, 1);
   }
   else
   {	
-    int frame_width = 0;
-    int frame_height = 0;
+	Point2i frameSize;
     int nb_frames_x = 0;
     int nb_frames_y = 0;
     std::string size;
@@ -193,8 +192,8 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
     
 	if ( size.find(",") != size.npos)
     {
-      frame_width = atoi( (size.substr(0,size.find(","))).c_str());
-      frame_height = atoi( (size.substr(size.find(",")+1,size.length())).c_str());
+      frameSize.x = atoi( (size.substr(0,size.find(","))).c_str());
+      frameSize.y = atoi( (size.substr(size.find(",")+1,size.length())).c_str());
     }
     else
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed size attribute");
@@ -217,7 +216,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 
 	Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
-    sprite->Init( surface, frame_width, frame_height, nb_frames_x, nb_frames_y);
+    sprite->Init( surface, frameSize, nb_frames_x, nb_frames_y);
   }
 
   assert(sprite!=NULL);

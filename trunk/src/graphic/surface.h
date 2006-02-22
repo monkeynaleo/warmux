@@ -41,7 +41,7 @@ class Surface
 	public:
 			explicit Surface();
 			explicit Surface(SDL_Surface *sdl_surface);
-			explicit Surface(int width, int height, Uint32 flags, bool useAlpha = true);
+			explicit Surface(const Point2i &size, Uint32 flags, bool useAlpha = true);
 			explicit Surface(const std::string &filename);
 			Surface(const Surface &src);
 			~Surface();
@@ -52,7 +52,7 @@ class Surface
 			void SetAutoFree(bool newAutoFree);
 
 			void SetSurface(SDL_Surface *newSurface, bool freePrevious = true);
-			void Surface::NewSurface(int width, int height, Uint32 flags, bool useAlpha = true);
+			void Surface::NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
 
 			SDL_Surface *GetSurface();
 
