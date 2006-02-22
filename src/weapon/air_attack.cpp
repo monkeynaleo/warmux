@@ -60,14 +60,9 @@ void Obus::SignalCollision()
   is_active = false; 
 
   if (IsGhost()) return;
-
-//   Point2i pos = GetCenter();
-
-//   AppliqueExplosion (pos, pos,
-// 		     impact,
-// 		     cfg,
-// 		     this);
 }
+
+
 
 //-----------------------------------------------------------------------------
 
@@ -127,7 +122,6 @@ void Avion::Shoot(double speed)
 void Avion::Refresh()
 {
   if (IsGhost()) return;  
-  std::cout << "avt Avion::Refresh() : "<< GetX() <<";"<<GetY()<<std::endl;
   UpdatePosition();
 
   // L'avion est arrivé au bon endroit ? Largue les obus
@@ -137,11 +131,12 @@ void Avion::Refresh()
     obus_actifs = true;
 
     int x=LitCibleX();
+    Obus * instance;
     for (uint i=0; i<cfg.nbr_obus; ++i) 
     {
-      Obus instance(game_loop, cfg);
-      instance.Reset();
-      instance.SetXY( Point2i(x, obus_dy) );
+      instance = new Obus(game_loop, cfg);
+      instance->Reset();
+      instance->SetXY( Point2i(x, obus_dy) );
 
       Point2d speed_vector;
 
@@ -150,31 +145,27 @@ void Avion::Refresh()
       int fy = randomObj.GetLong (FORCE_Y_MIN, FORCE_Y_MAX);
 
       speed_vector.SetValues( fx/30.0, fy/30.0);
-      instance.SetSpeedXY (speed_vector);
+      instance->SetSpeedXY (speed_vector);
       obus.push_back (instance);
       
-      camera.ChangeObjSuivi (&instance, true, true);
+      camera.ChangeObjSuivi (instance, true, true);
     }
   }
 
-  if (obus_actifs)
-  {
-    iterator it=obus.begin(), fin=obus.end();
-    for (; it != fin; ++it)
-    {
-      (*it).Refresh();
-      (*it).UpdatePosition();
-    }
+  obus_actifs = false;
+  iterator it=obus.begin(), fin=obus.end();
+  for (; it != fin; ++it) {
+    (*it)->Refresh();
+    (*it)->UpdatePosition();
 
-    // Tous les obus ont touchés leur cible ?
-    it=obus.begin(), fin=obus.end();
-    uint nbr_obus_actif = 0;
-    for (; it != fin; ++it)
-    {
-      if ((*it).is_active) nbr_obus_actif++;
+    if (!(*it)->is_active){
+      (*it)->Explosion();
+      obus.erase(it);
+    } else {
+      obus_actifs = true;
     }
-    if (!nbr_obus_actif) obus_actifs = false;
   }
+  
   if (!obus_actifs && IsGhost()) {  
     obus.clear();
     game_loop.interaction_enabled=true;
@@ -198,7 +189,7 @@ void Avion::Draw()
   if (obus_actifs)
   {
     iterator it=obus.begin(), fin=obus.end();
-    for (; it != fin; ++it) (*it).Draw ();
+    for (; it != fin; ++it) (*it)->Draw ();
   }
 }
 
@@ -230,6 +221,11 @@ void AirAttack::p_Select()
   avion.Reset();
 }
 
+void AirAttack::Refresh()
+{
+  if (!avion.obus_actifs && avion.obus_laches) m_is_active = false;
+}
+
 void AirAttack::ChooseTarget()
 {
   ActiveTeam().GetWeapon().NewActionShoot();
@@ -239,6 +235,7 @@ bool AirAttack::p_Shoot ()
 {
   game_loop.interaction_enabled=false;
   avion.Shoot (cfg().speed);
+  m_is_active = false;
   return true;
 }
 

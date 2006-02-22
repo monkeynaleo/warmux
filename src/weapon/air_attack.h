@@ -52,8 +52,8 @@ protected:
 class Avion : public PhysicalObj
 {
 public:  
-  std::list<Obus> obus;
-  typedef std::list<Obus>::iterator iterator;
+  std::list<Obus*> obus;
+  typedef std::list<Obus*>::iterator iterator;
   bool obus_laches;
   bool obus_actifs;
 
@@ -87,7 +87,7 @@ public:
   AirAttack();
   void p_Select();
   void FinTir();
-  void Refresh(){};
+  void Refresh();
   virtual void ChooseTarget ();
 
  private:

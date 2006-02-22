@@ -210,8 +210,6 @@ void WeaponProjectile::Draw()
 
   image->Draw(GetPosition());
   
-  std::cout << m_name << " - size : " << image->GetWidth() <<";"<<image->GetHeight()<<" - "<< GetWidth()<<";"<<GetHeight()<<std::endl;
-
   int tmp = cfg.timeout;
 
   if (tmp != 0) { 
