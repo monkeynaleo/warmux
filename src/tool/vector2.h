@@ -224,6 +224,33 @@ template<class T> class Vector2
 			return Vector2<T>( x < p2.x ? 1:0,
 					y < p2.y ? 1:0);
 		}
+
+		/**
+		 * Return a vector made of the minimum coordinate of the two vectors.
+		 * Ce clair ne pas ?
+		 *
+		 * @param p2
+		 * @return
+		 */
+		inline Vector2<T> min(const Vector2<T> &p2) const{
+			return Vector2<T>( x < p2.x? x:p2.x,
+					y < p2.y? y:p2.y );
+		}
+
+		/**
+		 * @param p2
+		 * @return
+		 */
+		inline Vector2<T> max(const Vector2<T> &p2) const{
+            return Vector2<T>( x > p2.x? x:p2.x,
+				               y > p2.y? y:p2.y );
+		}
+
+		inline Vector2<T> clamp(const Vector2<T> &min, const Vector2<T> &max) const{
+			Vector2<T> r = *this;
+			r = r.max(min);
+			return r.min(max);
+		}
 		
 		/**
 		 *

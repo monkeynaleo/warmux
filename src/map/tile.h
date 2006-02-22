@@ -59,6 +59,7 @@ protected:
   void InitTile(const Point2i &pSize);
 
   void FreeMem();
+  Point2i Tile::clamp(const Point2i &v) const;
 
   // Dimension du terrain
   Point2i size;
