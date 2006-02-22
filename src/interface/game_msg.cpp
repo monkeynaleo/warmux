@@ -27,17 +27,10 @@
 #include "../include/app.h"
 #include "../include/global.h"
 
-
 GameMessages game_messages;
-
-// Hauteur de la police de caractere
-#define HAUT_POLICE 20 // pixels
 
 // Hauteur de la police de caractere "mini"
 #define HAUT_POLICE_MINI 12 // pixels
-
-// Interligne (pour les messages)
-#define INTERLIGNE 5 // pixels
 
 // Interligne police "mini" (pour les messages)
 #define INTERLIGNE_MINI 3 // pixels
@@ -59,7 +52,7 @@ void GameMessages::Draw(){
   for( iterator i=liste.begin(); i != liste.end(); ++i ){
     i -> text->DrawCenterTop(app.video.window.GetWidth()/2, msgy);
     
-    msgy += HAUT_POLICE_MINI+INTERLIGNE_MINI;
+    msgy += HAUT_POLICE_MINI + INTERLIGNE_MINI;
   }
 }
 
