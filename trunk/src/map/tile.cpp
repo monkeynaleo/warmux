@@ -50,23 +50,21 @@ void Tile::InitTile(const Point2i &pSize){
     nbr_cell = nbCells.x * nbCells.y;
 }
 
-int clamp (const int val, const int min, const int max){   
-    return ( val > max ) ? max : ( val < min ) ? min : val ;
+Point2i Tile::clamp(const Point2i &v) const{
+	return v.clamp(Point2i(0, 0), nbCells - 1);
 }
 
 void Tile::Dig(const Point2i &position, Surface& dig){  
-    Rectanglei rect = Rectanglei(position, dig.GetSize()); 
+    Rectanglei rect = Rectanglei(position, dig.GetSize());
+	Point2i firstCell = clamp(position/CELL_SIZE);
+	Point2i lastCell = clamp((position + dig.GetSize())/CELL_SIZE);
+	Point2i c;
 
-    int first_cell_x = clamp( position.x/CELL_SIZE.x,          0, nbCells.x-1);
-    int first_cell_y = clamp( position.y/CELL_SIZE.y,          0, nbCells.y-1);
-    int last_cell_x  = clamp( (position.x+dig.GetWidth())/CELL_SIZE.x, 0, nbCells.x-1);
-    int last_cell_y  = clamp( (position.y+dig.GetHeight())/CELL_SIZE.y, 0, nbCells.y-1);
+    for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+        for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
+            Point2i offset = position - c * CELL_SIZE;
 
-    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
-        for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++){
-            Point2i offset = position - Point2i(cx, cy) * CELL_SIZE;
-
-            item[cy*nbCells.x + cx]->Dig(offset, dig);
+            item[c.y*nbCells.x + c.x]->Dig(offset, dig);
         }
 }
 
@@ -109,59 +107,51 @@ uchar Tile::GetAlpha(const Point2i &pos) const{
 }
 
 void Tile::DrawTile() const{
-   Point2i camPos = camera.GetPosition();
+    Point2i firstCell = clamp(camera.GetPosition() / CELL_SIZE);
+    Point2i lastCell = clamp((camera.GetPosition() + camera.GetSize()) / CELL_SIZE);
+	Point2i i;
 
-   int first_cell_x = clamp( camPos.x/CELL_SIZE.x,                      0, nbCells.x-1);
-   int first_cell_y = clamp( camPos.y/CELL_SIZE.y,                      0, nbCells.y-1);
-   int last_cell_x  = clamp( (camPos.x+camera.GetWidth())/CELL_SIZE.x,  0, nbCells.x-1);
-   int last_cell_y  = clamp( (camPos.y+camera.GetHeight())/CELL_SIZE.y, 0, nbCells.y-1);  
-
-    for ( int iy = first_cell_y ; iy <= last_cell_y ; iy++ )
-        for ( int ix = first_cell_x ; ix <= last_cell_x ; ix++)
-            item[iy*nbCells.x+ix]->Draw( Point2i(ix, iy) );
+    for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
+        for( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
+            item[i.y*nbCells.x + i.x]->Draw( i );
 }
 
 void Tile::DrawTile_Clipped(Rectanglei clip_r_world) const
 {
-   // Select only the items that are under the clip area
-   int first_cell_x = clamp( (clip_r_world.GetPositionX())/CELL_SIZE.x,                0, nbCells.x-1);
-   int first_cell_y = clamp( (clip_r_world.GetPositionY())/CELL_SIZE.y,                0, nbCells.y-1);
-   int last_cell_x  = clamp( (clip_r_world.GetPositionX()+clip_r_world.GetSizeX() +1)/CELL_SIZE.x, 0, nbCells.x-1);
-   int last_cell_y  = clamp( (clip_r_world.GetPositionY()+clip_r_world.GetSizeY() +1)/CELL_SIZE.y, 0, nbCells.y-1);
+    Point2i firstCell = clamp(clip_r_world.GetPosition() / CELL_SIZE);
+    Point2i lastCell  = clamp((clip_r_world.GetPosition() + clip_r_world.GetSize() + 1) / CELL_SIZE);
+	Point2i c;
 
-    for( int cy = first_cell_y ; cy <= last_cell_y ; cy++ )
-        for ( int cx = first_cell_x ; cx <= last_cell_x ; cx++){
+    for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+        for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
             // For all selected items, clip source and destination blitting rectangles 
-            int dest_x = cx * CELL_SIZE.x;  
-            int dest_y = cy * CELL_SIZE.y;
-            int dest_w = CELL_SIZE.x;
-            int dest_h = CELL_SIZE.y;
-            int src_x = 0;
-            int src_y = 0;
+			Point2i destPos = c * CELL_SIZE;
+			Point2i destSize = CELL_SIZE;
+			Point2i src;
 
-            if ( dest_x < clip_r_world.GetPositionX() ){ // left clipping
-                    src_x  += clip_r_world.GetPositionX() - dest_x;
-                    dest_w -= clip_r_world.GetPositionX() - dest_x;
-                    dest_x  = clip_r_world.GetPositionX();
+            if ( destPos.x < clip_r_world.GetPositionX() ){ // left clipping
+                    src.x  += clip_r_world.GetPositionX() - destPos.x;
+                    destSize.x -= clip_r_world.GetPositionX() - destPos.x;
+                    destPos.x  = clip_r_world.GetPositionX();
                 }
 
-                if ( dest_y < clip_r_world.GetPositionY() ){  // top clipping
-                    src_y  += clip_r_world.GetPositionY() - dest_y;
-                    dest_h -= clip_r_world.GetPositionY() - dest_y;
-                    dest_y  = clip_r_world.GetPositionY();
+                if ( destPos.y < clip_r_world.GetPositionY() ){  // top clipping
+                    src.y  += clip_r_world.GetPositionY() - destPos.y;
+                    destSize.y -= clip_r_world.GetPositionY() - destPos.y;
+                    destPos.y  = clip_r_world.GetPositionY();
                 }
 
-                if ( dest_x + dest_w > clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1) // right clipping
-                    dest_w -= ( dest_x + dest_w ) - ( clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1);
+                if ( destPos.x + destSize.x > clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1) // right clipping
+                    destSize.x -= ( destPos.x + destSize.x ) - ( clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1);
 
-                if ( dest_y + dest_h > clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1) // bottom clipping
-                    dest_h -= ( dest_y + dest_h ) - ( clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1);
+                if ( destPos.y + destSize.y > clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1) // bottom clipping
+                    destSize.y -= ( destPos.y + destSize.y ) - ( clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1);
 
-                Rectanglei sr(src_x, src_y, dest_w, dest_h);
+                Rectanglei sr(src, destSize);
 
                 // Decall the destination rectangle along the camera offset
-                Point2i dr( Point2i(dest_x, dest_y) - camera.GetPosition());
+                Point2i dr( destPos - camera.GetPosition());
 
-                app.video.window.Blit( item[cy*nbCells.x+cx]->GetSurface(), sr, dr);
+                app.video.window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), sr, dr); 
         }
 }
