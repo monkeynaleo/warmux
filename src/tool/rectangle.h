@@ -214,7 +214,7 @@ template<class T> class Rectangle
 			if( newPositionBR.y > cr.GetBottomRightPoint().y )
 				newPositionBR.y = cr.GetBottomRightPoint().y;
 
-			size = newPositionBR - position - -(1);
+			size = newPositionBR - position + 1 ;
 			assert( cr.Contains( *this ) );
 		}
 
