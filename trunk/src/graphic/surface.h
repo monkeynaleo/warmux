@@ -70,8 +70,8 @@ class Surface
 
 			void GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a);
 			Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-			Color Surface::GetColor(Uint32 color);
-			Uint32 Surface::MapColor(Color color);
+			Color GetColor(Uint32 color);
+			Uint32 MapColor(Color color);
 
 			void SetClipRect(const Rectanglei &rect);
 			void Flip();

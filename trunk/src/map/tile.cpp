@@ -21,7 +21,6 @@
 #include "../include/app.h"
 #include "../map/camera.h"
 
-// = Tile implementation
 Tile::Tile(){
 }
 
@@ -85,7 +84,6 @@ void Tile::LoadImage (Surface& terrain){
     for( int iy = 0; iy < nbCells.y; iy++ )
         for( int ix = 0; ix < nbCells.x; ix++ ){
             int piece = iy * nbCells.x + ix;
-
             Rectanglei sr( Point2i(ix, iy) * CELL_SIZE, CELL_SIZE);
 
             terrain.SetAlpha(0, 0);
@@ -116,42 +114,25 @@ void Tile::DrawTile() const{
             item[i.y*nbCells.x + i.x]->Draw( i );
 }
 
-void Tile::DrawTile_Clipped(Rectanglei clip_r_world) const
+void Tile::DrawTile_Clipped(Rectanglei worldClip) const
 {
-    Point2i firstCell = clamp(clip_r_world.GetPosition() / CELL_SIZE);
-    Point2i lastCell  = clamp((clip_r_world.GetPosition() + clip_r_world.GetSize() + 1) / CELL_SIZE);
+	worldClip.SetSize( worldClip.GetSize() + 1); // mmm, y aurait t-il quelque chose qui
+	// donne des zones trops petites à redessiner ?
+    Point2i firstCell = clamp(worldClip.GetPosition() / CELL_SIZE);
+    Point2i lastCell  = clamp((worldClip.GetBottomRightPoint()) / CELL_SIZE);
 	Point2i c;
 
     for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
         for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
             // For all selected items, clip source and destination blitting rectangles 
-			Point2i destPos = c * CELL_SIZE;
-			Point2i destSize = CELL_SIZE;
-			Point2i src;
+			Rectanglei destRect(c * CELL_SIZE, CELL_SIZE);
 
-            if ( destPos.x < clip_r_world.GetPositionX() ){ // left clipping
-                    src.x  += clip_r_world.GetPositionX() - destPos.x;
-                    destSize.x -= clip_r_world.GetPositionX() - destPos.x;
-                    destPos.x  = clip_r_world.GetPositionX();
-                }
-
-                if ( destPos.y < clip_r_world.GetPositionY() ){  // top clipping
-                    src.y  += clip_r_world.GetPositionY() - destPos.y;
-                    destSize.y -= clip_r_world.GetPositionY() - destPos.y;
-                    destPos.y  = clip_r_world.GetPositionY();
-                }
-
-                if ( destPos.x + destSize.x > clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1) // right clipping
-                    destSize.x -= ( destPos.x + destSize.x ) - ( clip_r_world.GetPositionX() + clip_r_world.GetSizeX() +1);
-
-                if ( destPos.y + destSize.y > clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1) // bottom clipping
-                    destSize.y -= ( destPos.y + destSize.y ) - ( clip_r_world.GetPositionY() + clip_r_world.GetSizeY() +1);
-
-                Rectanglei sr(src, destSize);
-
-                // Decall the destination rectangle along the camera offset
-                Point2i dr( destPos - camera.GetPosition());
-
-                app.video.window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), sr, dr); 
+			destRect.Clip(worldClip);
+			if( destRect.Intersect( camera ) ){
+				Point2i ptDest = destRect.GetPosition() - camera.GetPosition();
+				Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
+			
+                app.video.window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
+			}
         }
 }
