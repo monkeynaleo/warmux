@@ -187,7 +187,7 @@ bool Map::EstHorsMonde (const Point2i &pos) const{
 }
 
 bool Map::EstDansVide(int x, int y){
-  return ground.EstDansVide(x, y);
+  return ground.IsEmpty(Point2i(x, y));
 }
 
 bool Map::LigneH_EstDansVide (int ox, int y, int width)

@@ -40,29 +40,17 @@ const std::string DEFAULT_LOCALEDIR(INSTALL_LOCALEDIR);
 // Nombre de boucles maximum pour le test ...
 const uint NBR_BCL_MAX_EST_VIDE = 200; // Un objet est dans le vide ?
 
-// Taille (et position) de l'image de fond (et du plateau de jeu)
-uint FOND_X = 0;
-uint FOND_Y = 0;
-
 std::vector<std::string> AUTHORS;
 
 const std::string WEB_SITE("http://www.wormux.org");
 const std::string EMAIL("wormux-dev@gna.org");
 
 // Dimensions min/max du terrain (en pixel)
-const uint LARG_MIN_TERRAIN = 100;
-const uint HAUT_MIN_TERRAIN = 200;
-const uint TAILLE_MAX_TERRAIN = 4000*4000;
-
-// Taille des cellules du terrain
-const uint LARG_CELLULE_TERRAIN = 300;
-const uint HAUT_CELLULE_TERRAIN = 300;
+const Point2i MAP_MIN_SIZE(100, 200);
+const int MAP_MAX_SIZE = 4000*4000;
 
 // Hauteur minimale libre pour que le terrain soit qualifié " d'ouvert "
 const uint HAUT_MIN_TERRAIN_OUVERT = 40;
-
-// Distance minimale entre les vers lors de l'initialisation d'une partie
-const double DST_MIN_ENTRE_VERS = 200.0;
 
 void InitConstants(){
   AUTHORS.push_back ("Lawrence AZZOUG");

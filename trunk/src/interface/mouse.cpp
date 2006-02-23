@@ -28,7 +28,6 @@
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
-#include "../include/constant.h" // FOND_X, FOND_Y
 #include "../map/camera.h"
 #include "../team/macro.h"
 #include "../tool/point.h"
@@ -192,7 +191,7 @@ Point2i Mouse::GetPosition() const{
 }
 
 Point2i Mouse::GetWorldPosition() const{ 
-   return GetPosition() + camera.GetPosition() - Point2i(FOND_X, FOND_Y);
+   return GetPosition() + camera.GetPosition();
 }
 
 void Mouse::TraiteClic (const SDL_Event *event){

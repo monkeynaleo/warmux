@@ -21,11 +21,10 @@
 
 #ifndef CONSTANT_H
 #define CONSTANT_H
-//-----------------------------------------------------------------------------
 #include "base.h"
 #include <string>
 #include <vector>
-//-----------------------------------------------------------------------------
+#include "tool/point.h"
 
 void InitConstants();
 
@@ -35,10 +34,6 @@ extern const std::string VERSION;
 // Installation directories (with slash)
 extern const std::string DEFAULT_DATADIR;
 extern const std::string DEFAULT_LOCALEDIR;
-
-// Taille (et position) de l'image de fond (et du plateau de jeu)
-extern uint FOND_X;
-extern uint FOND_Y;
 
 // Nombre de boucles maximum pour le test ...
 extern const uint NBR_BCL_MAX_EST_VIDE; // Un objet est dans le vide ?
@@ -50,20 +45,12 @@ extern std::vector<std::string> AUTHORS;
 extern const std::string WEB_SITE;
 extern const std::string EMAIL;
 
-//-----------------------------------------------------------------------------
-
 // Dimensions min/max du terrain (en pixel)
-extern const uint LARG_MIN_TERRAIN;
-extern const uint HAUT_MIN_TERRAIN;
-extern const uint TAILLE_MAX_TERRAIN;
-
-// Taille des cellules du terrain
-extern const uint LARG_CELLULE_TERRAIN;
-extern const uint HAUT_CELLULE_TERRAIN;
+extern const Point2i MAP_MIN_SIZE;
+extern const int MAP_MAX_SIZE;
 
 // Hauteur (en pixel) minimale libre pour que le terrain
 // soit qualifié " d'ouvert "
 extern const uint HAUT_MIN_TERRAIN_OUVERT;
 
-//-----------------------------------------------------------------------------
 #endif
