@@ -92,8 +92,8 @@ public:
   void Creuse(Point2i position, Surface& alpha_sur);
    
   // Lit la taille du monde
-  uint GetWidth() const { return ground.GetWidth(); }
-  uint GetHeight() const { return ground.GetHeight(); }
+  uint GetWidth() const { return ground.GetSizeX(); }
+  uint GetHeight() const { return ground.GetSizeY(); }
   Point2i GetSize() const{ return ground.GetSize(); }
  private:
   void SwitchDrawingCache();

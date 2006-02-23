@@ -47,9 +47,8 @@ void Ground::Init(){
   LoadImage ( m_image );
 
   // Vérifie la taille du terrain
-  assert (LARG_MIN_TERRAIN <= GetWidth());
-  assert (HAUT_MIN_TERRAIN <= GetHeight());
-  assert ((ulong)GetWidth()*GetHeight() <= TAILLE_MAX_TERRAIN);
+  assert(MAP_MIN_SIZE <= GetSize());
+  assert(GetSizeX()*GetSizeY() <= MAP_MAX_SIZE);
   
   // Vérifie si c'est un terrain ouvert ou fermé
   ouvert = lst_terrain.TerrainActif().is_opened;
@@ -63,17 +62,15 @@ void Ground::Reset(){
 }
 
 // Lit la valeur alpha du pixel (x,y)
-bool Ground::EstDansVide (int x, int y){ 
-  // En dehors du monde : c'est vide :-p
-  //  if (monde.EstHorsMondeXY(x,y)) return config.exterieur_monde_vide;
-  assert (!world.EstHorsMondeXY(x,y));
-  if(TerrainActif().infinite_bg){
-    if(x < 0 || y<0 || x>static_cast<int>(GetWidth()) || y>static_cast<int>(GetHeight()))
-      return true;
-  }
+bool Ground::IsEmpty(const Point2i &pos){ 
+	assert( !world.EstHorsMondeXY(pos.x, pos.y) );
+	if( TerrainActif().infinite_bg){
+		if( !Contains(pos) )
+			return true;
+	}
 
-  // Lit le monde
-  return GetAlpha( Point2i(x, y) ) != 255; // IsTransparent
+	// Lit le monde
+	return GetAlpha( pos ) != 255; // IsTransparent
 }
 
 //Renvoie l'angle entre la tangeante au terrain en (x,y) et l'horizontale.
@@ -143,9 +140,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //regarde en haut à gauche
   if(x-1 != pas_bon_x
   || y-1 != pas_bon_y)
-  if(!EstDansVide(x-1,y-1)
-  &&(EstDansVide(x-1,y)
-  || EstDansVide(x,y-1)))
+  if( !IsEmpty(Point2i(x-1,y-1) )
+  &&( IsEmpty(Point2i(x-1,y))
+  || IsEmpty(Point2i(x,y-1))))
   {
     p_x=x-1;
     p_y=y-1;
@@ -154,9 +151,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //regarde en haut
   if(x != pas_bon_x
   || y-1 != pas_bon_y)
-  if(!EstDansVide(x,y-1)
-  &&(EstDansVide(x-1,y-1)
-  || EstDansVide(x+1,y-1)))
+  if(!IsEmpty(Point2i(x,y-1))
+  &&(IsEmpty(Point2i(x-1,y-1))
+  || IsEmpty(Point2i(x+1,y-1))))
   {
     p_x=x;
     p_y=y-1;
@@ -165,9 +162,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //regarde en haut à droite
   if(x+1 != pas_bon_x
   || y-1 != pas_bon_y)
-  if(!EstDansVide(x+1,y-1)
-  &&(EstDansVide(x,y-1)
-  || EstDansVide(x+1,y)))
+  if(!IsEmpty(Point2i(x+1,y-1))
+  &&(IsEmpty(Point2i(x,y-1))
+  || IsEmpty(Point2i(x+1,y))))
   {
     p_x=x+1;
     p_y=y-1;
@@ -176,9 +173,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //regarde à droite
   if(x+1 != pas_bon_x
   || y != pas_bon_y)
-  if(!EstDansVide(x+1,y)
-  &&(EstDansVide(x+1,y-1)
-  || EstDansVide(x,y+1)))
+  if(!IsEmpty(Point2i(x+1,y))
+  &&(IsEmpty(Point2i(x+1,y-1))
+  || IsEmpty(Point2i(x,y+1))))
   {
     p_x=x+1;
     p_y=y;
@@ -187,9 +184,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //regarde en bas à droite
   if(x+1 != pas_bon_x
   || y+1 != pas_bon_y)
-  if(!EstDansVide(x+1,y+1)
-  &&(EstDansVide(x+1,y)
-  || EstDansVide(x,y+1)))
+  if(!IsEmpty(Point2i(x+1,y+1))
+  &&(IsEmpty(Point2i(x+1,y))
+  || IsEmpty(Point2i(x,y+1))))
   {
     p_x=x+1;
     p_y=y+1;
@@ -198,9 +195,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //regarde en bas
   if(x != pas_bon_x
   || y+1 != pas_bon_y)
-  if(!EstDansVide(x,y+1)
-  &&(EstDansVide(x-1,y+1)
-  || EstDansVide(x+1,y+1)))
+  if(!IsEmpty(Point2i(x,y+1))
+  &&(IsEmpty(Point2i(x-1,y+1))
+  || IsEmpty(Point2i(x+1,y+1))))
   {
     p_x=x;
     p_y=y+1;
@@ -209,9 +206,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //regarde en bas à gauche
   if(x-1 != pas_bon_x
   || y+1 != pas_bon_y)
-  if(!EstDansVide(x-1,y+1)
-  &&(EstDansVide(x-1,y)
-  || EstDansVide(x,y+1)))
+  if(!IsEmpty(Point2i(x-1,y+1))
+  &&(IsEmpty(Point2i(x-1,y))
+  || IsEmpty(Point2i(x,y+1))))
   {
     p_x=x-1;
     p_y=y+1;
@@ -220,9 +217,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //regarde à gauche
   if(x-1 == pas_bon_x
   && y == pas_bon_y)
-  if(!EstDansVide(x-1,y)
-  &&(EstDansVide(x-1,y-1)
-  || EstDansVide(x-1,y+1)))
+  if(!IsEmpty(Point2i(x-1,y))
+  &&(IsEmpty(Point2i(x-1,y-1))
+  || IsEmpty(Point2i(x-1,y+1))))
   {
     p_x=x-1;
     p_y=y;

@@ -49,14 +49,14 @@ void Tile::InitTile(const Point2i &pSize){
     nbr_cell = nbCells.x * nbCells.y;
 }
 
-Point2i Tile::clamp(const Point2i &v) const{
+Point2i Tile::Clamp(const Point2i &v) const{
 	return v.clamp(Point2i(0, 0), nbCells - 1);
 }
 
 void Tile::Dig(const Point2i &position, Surface& dig){  
     Rectanglei rect = Rectanglei(position, dig.GetSize());
-	Point2i firstCell = clamp(position/CELL_SIZE);
-	Point2i lastCell = clamp((position + dig.GetSize())/CELL_SIZE);
+	Point2i firstCell = Clamp(position/CELL_SIZE);
+	Point2i lastCell = Clamp((position + dig.GetSize())/CELL_SIZE);
 	Point2i c;
 
     for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
@@ -81,10 +81,11 @@ void Tile::LoadImage (Surface& terrain){
             item.push_back ( new TileItem_ColorkeySoftware(CELL_SIZE) );
 
     // Fill the TileItem objects
-    for( int iy = 0; iy < nbCells.y; iy++ )
-        for( int ix = 0; ix < nbCells.x; ix++ ){
-            int piece = iy * nbCells.x + ix;
-            Rectanglei sr( Point2i(ix, iy) * CELL_SIZE, CELL_SIZE);
+	Point2i i;
+    for( i.y = 0; i.y < nbCells.y; i.y++ )
+        for( i.x = 0; i.x < nbCells.x; i.x++ ){
+            int piece = i.y * nbCells.x + i.x;
+            Rectanglei sr( i * CELL_SIZE, CELL_SIZE);
 
             terrain.SetAlpha(0, 0);
             item[piece]->GetSurface().Blit(terrain, sr, Point2i(0, 0));
@@ -105,8 +106,8 @@ uchar Tile::GetAlpha(const Point2i &pos) const{
 }
 
 void Tile::DrawTile() const{
-    Point2i firstCell = clamp(camera.GetPosition() / CELL_SIZE);
-    Point2i lastCell = clamp((camera.GetPosition() + camera.GetSize()) / CELL_SIZE);
+    Point2i firstCell = Clamp(camera.GetPosition() / CELL_SIZE);
+    Point2i lastCell = Clamp((camera.GetPosition() + camera.GetSize()) / CELL_SIZE);
 	Point2i i;
 
     for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
@@ -118,8 +119,8 @@ void Tile::DrawTile_Clipped(Rectanglei worldClip) const
 {
 	worldClip.SetSize( worldClip.GetSize() + 1); // mmm, y aurait t-il quelque chose qui
 	// donne des zones trops petites à redessiner ?
-    Point2i firstCell = clamp(worldClip.GetPosition() / CELL_SIZE);
-    Point2i lastCell  = clamp((worldClip.GetBottomRightPoint()) / CELL_SIZE);
+    Point2i firstCell = Clamp(worldClip.GetPosition() / CELL_SIZE);
+    Point2i lastCell  = Clamp((worldClip.GetBottomRightPoint()) / CELL_SIZE);
 	Point2i c;
 
     for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )

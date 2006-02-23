@@ -27,8 +27,7 @@
 
 class TileItem;
 
-class Tile
-{
+class Tile : public Rectanglei{
 public:
   Tile ();
   ~Tile ();
@@ -38,11 +37,6 @@ public:
 
   // Load an image
   void LoadImage (Surface& ground_surface);
-
-  // Get size
-  unsigned int GetWidth() const{ return size.x; }
-  unsigned int GetHeight() const{ return size.y; }
-  Point2i GetSize() const{ return size; }
 
   // Get alpha value of a pixel
   unsigned char GetAlpha(const Point2i &pos) const;
@@ -59,10 +53,9 @@ protected:
   void InitTile(const Point2i &pSize);
 
   void FreeMem();
-  Point2i Tile::clamp(const Point2i &v) const;
+  Point2i Clamp(const Point2i &v) const;
 
   // Dimension du terrain
-  Point2i size;
   Point2i nbCells;
   unsigned int nbr_cell;
 

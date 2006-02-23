@@ -516,7 +516,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   for (uint x=GetX()+ m_test_left; x<=(GetX()+m_width)-m_test_right; x++)
   {
     if(!world.EstHorsMonde(Point2i(x,y1)) && !world.EstHorsMonde(Point2i(x,y2))
-    && world.ground.EstDansVide(x,y2) && !world.ground.EstDansVide(x,y1))
+    && world.ground.IsEmpty(Point2i(x,y2)) && !world.ground.IsEmpty(Point2i(x,y1)))
     {
       contact_x = x;
       contact_y = GetY() +m_height-m_test_bottom;
@@ -530,7 +530,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
     if(!world.EstHorsMonde(Point2i(x1,y)) && !world.EstHorsMonde(Point2i(x2,y))
-    && !world.ground.EstDansVide(x1,y) &&  world.ground.EstDansVide(x2,y))
+    && !world.ground.IsEmpty(Point2i(x1,y)) &&  world.ground.IsEmpty(Point2i(x2,y)))
     {
       contact_x = GetX() +m_test_left;
       contact_y = y;
@@ -543,8 +543,8 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   x2 = x1-1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-    if(!world.EstHorsMonde(Point2i(x1,y)) && !world.EstHorsMonde(Point2i(x2,y))
-       && !world.ground.EstDansVide(x1,y) && world.ground.EstDansVide(x2,y))
+    if(!world.EstHorsMonde(Point2i(x1, y)) && !world.EstHorsMonde(Point2i(x2, y))
+       && !world.ground.IsEmpty(Point2i(x1, y)) && world.ground.IsEmpty(Point2i(x2, y)))
     {
       contact_x = GetX() + m_width - m_test_right;
       contact_y = y;
@@ -558,7 +558,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   for(uint x=GetX()+m_test_left;x<=GetX()+m_width-m_test_right;x++)
   {
     if(!world.EstHorsMonde(Point2i(x,y1)) && !world.EstHorsMonde(Point2i(x,y2))
-    && !world.ground.EstDansVide(x, y1) && world.ground.EstDansVide(x, y2))
+    && !world.ground.IsEmpty(Point2i(x, y1)) && world.ground.IsEmpty(Point2i(x, y2)))
     {
       contact_x =x;
       contact_y = GetY() +m_test_top;
