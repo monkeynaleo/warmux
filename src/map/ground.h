@@ -48,6 +48,8 @@ public:
   
   //Renvoie l'angle de la tangeante au terrain
   double Tangeante(int x,int y);
+
+  void RedrawParticleList(std::list<Rectanglei> &list);
 };
 
 #endif
