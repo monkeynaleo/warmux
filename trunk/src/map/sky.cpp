@@ -53,10 +53,6 @@ void Sky::Free(){
 
 void Sky::Draw()
 {
-#if defined(WIN32)
-  // TODO: Why the cache doesn't work on Windows!?
-  CompleteDraw();
-#else  
   if( lastPos != camera.GetPosition() ){
 	lastPos = camera.GetPosition();
 	RedrawParticle(camera);
@@ -65,7 +61,6 @@ void Sky::Draw()
   
   RedrawParticleList(*world.to_redraw_now);
   RedrawParticleList(*world.to_redraw_particles_now);
-#endif
 }
 
 void Sky::RedrawParticleList(std::list<Rectanglei> &list){
