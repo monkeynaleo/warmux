@@ -89,12 +89,14 @@ bool Uzi::p_Shoot()
   // Move the bullet !!
   //balle.PrepareTir();  
   projectile->SetXY( pos );
+  projectile->Ready();
+  
+  projectile->is_active = true;
 
   while( projectile->is_active ){
     pos.y = (int)((a*pos.x) + b);
 
     projectile->SetXY( pos );
-
     // the bullet in gone outside the map
     if (projectile->IsGhost()) {
       projectile->is_active=false;
