@@ -54,7 +54,7 @@ const uint ESPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
 
 #ifdef DEBUG
-#define ANIME_VITE
+//#define ANIME_VITE
 //#define DEBUG_CHG_ETAT
 //#define DEBUG_PLACEMENT
 //#define NO_POSITION_CHECK
