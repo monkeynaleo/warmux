@@ -20,9 +20,6 @@
  *****************************************************************************/
 
 #include "sky.h"
-#include <iostream>
-#include <limits.h>
-#include <SDL.h>
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
@@ -36,23 +33,29 @@ Sky::Sky(){
 }
 
 void Sky::Init(){
-   // That is temporary -> image will be loaded directly without alpha chanel
-   Surface tmp_image = lst_terrain.TerrainActif().LitImgCiel();
-   tmp_image.SetAlpha( 0, 0);
-   image = tmp_image.DisplayFormat();
+ 	// That is temporary -> image will be loaded directly without alpha chanel
+	Surface tmp_image = lst_terrain.TerrainActif().LitImgCiel();
+	tmp_image.SetAlpha( 0, 0);
+	image = tmp_image.DisplayFormat();
+
+	tstVect = image.GetSize().inf( camera.GetSize() );
+	margin = tstVect * (camera.GetSize() - image.GetSize())/2;
 }
 
 void Sky::Reset(){
-  Init();
-  lastPos.SetValues(INT_MAX, INT_MAX);
+	Init();
+	lastPos.SetValues(INT_MAX, INT_MAX);
+}
+
+void Sky::Free(){
+	image.Free();
 }
 
 void Sky::CompleteDraw(){
     Point2i pos = camera.GetPosition() * SKY_SPEED;
+	lastPos = camera.GetPosition();
 
-	if(!TerrainActif().infinite_bg){
-		Point2i tstVect = image.GetSize().inf( camera.GetSize() );
-		Point2i margin = tstVect * (camera.GetSize() - image.GetSize())/2;
+	if( !TerrainActif().infinite_bg ){
 		pos =  pos * (Point2i(1, 1) - tstVect);
 
 		Rectanglei ds(pos, camera.GetSize());
@@ -105,35 +108,29 @@ void Sky::Draw()
   // TODO: Why the cache doesn't work on Windows!?
   CompleteDraw();
 #else  
-  Point2i cPos = camera.GetPosition();
-  
-  if( lastPos != cPos){
+  if( lastPos != camera.GetPosition() ){
     CompleteDraw();
-    lastPos = cPos;
     return;
   }
-
-  Point2i tstVect = image.GetSize().inf( camera.GetSize() );
-  Point2i margin = tstVect * (camera.GetSize() - image.GetSize())/2;
-  Point2i skyPos = camera.GetPosition() * SKY_SPEED * (Point2i(1, 1) - tstVect);
-
-  std::list<Rectanglei>::iterator it;
-  for (it = world.to_redraw_now->begin(); 
-       it != world.to_redraw_now->end(); 
-       ++it){
-    Rectanglei ds(skyPos + it->GetPosition() - cPos - margin, 
-		    it->GetSize() + 1);
-    Point2i dp(it->GetPosition() - cPos);
-    app.video.window.Blit( image, ds, dp);
-  }
-
-  for (it = world.to_redraw_particles_now->begin(); 
-       it != world.to_redraw_particles_now->end(); 
-       ++it){
-    Rectanglei ds(skyPos + it->GetPosition() - cPos - margin, 
-		    it->GetSize() + 1);
-    Point2i dp(it->GetPosition() - cPos);
-    app.video.window.Blit( image, ds, dp);
-  }
+  
+  RedrawParticleList(*world.to_redraw_now);
+  RedrawParticleList(*world.to_redraw_particles_now);
 #endif
+}
+
+void Sky::RedrawParticleList(std::list<Rectanglei> &list){
+  std::list<Rectanglei>::iterator it;
+
+  for( it = list.begin(); it != list.end(); ++it )
+	  RedrawParticle(*it);
+}
+
+void Sky::RedrawParticle(const Rectanglei &particle) const{
+    Rectanglei ds(GetSkyPos() + particle.GetPosition() - camera.GetPosition() - margin, 
+		    particle.GetSize() );
+    app.video.window.Blit(image, ds, particle.GetPosition() - camera.GetPosition());
+}
+
+Point2i Sky::GetSkyPos() const{
+	return (Point2i(1, 1) - tstVect) * camera.GetPosition() * SKY_SPEED;
 }

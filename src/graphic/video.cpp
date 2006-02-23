@@ -18,9 +18,6 @@
  *****************************************************************************/
 
 #include "video.h"
-#include <iostream>
-#include <algorithm>
-#include <sstream>
 #include <string>
 #include <SDL_endian.h>
 #include <SDL_image.h>

@@ -35,7 +35,7 @@ class Video{
 
 public:
   Surface window;
-  void SetMaxFps (uint max_fps);
+  void SetMaxFps(uint max_fps);
   uint GetMaxFps();
   uint GetSleepMaxFps();
 
