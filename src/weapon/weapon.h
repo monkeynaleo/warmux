@@ -60,39 +60,6 @@ class WeaponStrengthBar : public BarreProg
   bool visible ;
 } ;
 
-/* // Projectil d'une arme */
-/* class WeaponProjectile : public PhysicalObj */
-/* { */
-/* public: */
-/*   bool is_active; */
-/*   Sprite *image; */
-/* protected: */
-/*   Character* dernier_ver_touche; */
-/*   PhysicalObj* dernier_obj_touche; */
-
-/*   // Peut toucher les vers et les objets ? (test de collision) */
-/*   bool touche_ver_objet; */
-
-/* public: */
-/*   WeaponProjectile(GameLoop &game_loop, const std::string &nom); */
-/*   virtual void Draw(); */
-/*   virtual void Refresh(); */
-/*   void PrepareTir(); */
-/*   void Init() {}// TODO : to delete */
-/*   void Reset() {}// TODO : to delete */
-/*   virtual bool CollisionTest (int dx, int dy); */
-/*   Character* LitDernierVerTouche() const { return dernier_ver_touche; } */
-/*   PhysicalObj* LitDernierObjTouche() const { return dernier_obj_touche; } */
-
-/*   // Il y a eu impact avec un ver, un objet ou le sol ? */
-/*   bool TestImpact (); */
-
-/* protected: */
-/*   virtual void SignalGhostState (bool was_dead); */
-/*   virtual void SignalFallEnding(); */
-/*   virtual void SignalCollision() = 0; */
-/* }; */
-
 //-----------------------------------------------------------------------------
 
 class Weapon 
