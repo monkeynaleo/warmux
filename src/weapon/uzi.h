@@ -39,6 +39,7 @@ class Uzi : public WeaponLauncher
  private:
   bool p_Shoot();
   void RepeatShoot(); 
+  void Refresh(){};
 
 protected:
   uint m_first_shoot;
