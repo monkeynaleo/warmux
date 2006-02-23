@@ -30,7 +30,6 @@
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 void TileItem::Draw(const Point2i &pos){
   app.video.window.Blit(GetSurface(),
-        Rectanglei(Point2i(0, 0), CELL_SIZE),
         pos * CELL_SIZE - camera.GetPosition());
 }
 
