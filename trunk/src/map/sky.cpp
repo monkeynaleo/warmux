@@ -51,57 +51,6 @@ void Sky::Free(){
 	image.Free();
 }
 
-void Sky::CompleteDraw(){
-    Point2i pos = camera.GetPosition() * SKY_SPEED;
-	lastPos = camera.GetPosition();
-
-	if( !TerrainActif().infinite_bg ){
-		pos =  pos * (Point2i(1, 1) - tstVect);
-
-		Rectanglei ds(pos, camera.GetSize());
-		app.video.window.Blit( image, ds, margin);
-   }else{
-     Point2i size;
-
-     while( pos.x<0 )
-       pos.x += image.GetWidth();
-     while( pos.x>image.GetWidth() )
-       pos.x -= image.GetWidth();
-     while( pos.y<0 )
-       pos.y += image.GetHeight();
-     while(pos.y>image.GetHeight())
-       pos.y -= image.GetHeight();
-
-	 size = image.GetSize() - pos;
-     if(size.x >= camera.GetSizeX())
-       size.x = camera.GetSizeX();
-
-     if(size.y >= camera.GetSizeY())
-       size.y = camera.GetSizeY();
-
-     Rectanglei ds(pos, size);
-     app.video.window.Blit( image, ds, Point2i(0, 0));
-
-     if(size.x < camera.GetSizeX())
-     {
-       Rectanglei ds(pos.x + size.x - image.GetWidth(), pos.y, camera.GetSizeX() - size.x, size.y);
-       Point2i dp(size.x, 0);
-       app.video.window.Blit( image, ds, dp);
-     }
-     if(size.y < camera.GetSizeY())
-     {
-       Rectanglei ds(pos.x, pos.y + size.y - image.GetHeight(), size.x, camera.GetSizeY() - size.y);
-       Point2i dp(0, size.y);
-       app.video.window.Blit( image, ds, dp);
-     }
-     if(size.x < camera.GetSizeX() && size.y < camera.GetSizeY())
-     {
-       Rectanglei ds(pos + size - image.GetSize(), camera.GetSize() - size);
-       app.video.window.Blit( image, ds, size);
-     }
-   }
-}
-
 void Sky::Draw()
 {
 #if defined(WIN32)
@@ -109,7 +58,8 @@ void Sky::Draw()
   CompleteDraw();
 #else  
   if( lastPos != camera.GetPosition() ){
-    CompleteDraw();
+	lastPos = camera.GetPosition();
+	RedrawParticle(camera);
     return;
   }
   
