@@ -45,7 +45,7 @@ WindParticle::WindParticle(GameLoop &p_game_loop) :
 {
   m_type = objUNBREAKABLE;
   m_wind_factor = 1;
-  m_air_resist_factor = 0;
+  m_air_resist_factor = 1;
   sprite = NULL;
 }
 
@@ -72,6 +72,8 @@ void WindParticle::Init()
   wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);  
   SetWindFactor(wind_factor);
   StartMoving();
+  m_air_resist_factor = TerrainActif().wind.particle_air_resist_factor ;
+  m_air_resist_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
 
   // Fixe le rectangle de test
   int dx = 0 ;

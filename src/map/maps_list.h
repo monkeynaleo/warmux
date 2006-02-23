@@ -47,6 +47,7 @@ public:
     uint default_nb_sprite;
     double particle_wind_factor;
     double particle_mass; //Mean of the mass(read in the XML file)
+    double particle_air_resist_factor;
     bool need_flip; //do we need to flip the sprite when it changes direction?
   } wind;
 

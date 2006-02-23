@@ -43,6 +43,7 @@ InfoTerrain::InfoTerrain ()
   nb_mine = 0;
   wind.nb_sprite = 0;
   wind.need_flip = false;
+  wind.particle_air_resist_factor = 1.0;
   infinite_bg = false;
 }
 
@@ -143,6 +144,7 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
       wind.particle_mass = 0.1;
     }
     LitDocXml::LitDouble (xmlwind, "wind_factor", wind.particle_wind_factor);
+    LitDocXml::LitDouble (xmlwind, "air_resist_factor", wind.particle_air_resist_factor);
     LitDocXml::LitBool (xmlwind, "need_flip", wind.need_flip);
 
     if (wind.nb_sprite > MAX_WIND_OBJECTS)
