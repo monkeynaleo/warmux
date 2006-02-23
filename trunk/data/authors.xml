@@ -41,6 +41,13 @@
   </author>
 
   <author>
+    <name>Olivier SERRES</name>
+    <email>olivier.serres AT gmail.com</email>
+    <country>France</country>
+    <description>Coder.</description>
+  </author>
+
+  <author>
     <name>Victor STINNER</name>
     <nickname>haypo</nickname>
     <email>victor.stinner AT haypocalc.com</email>
@@ -251,12 +258,6 @@
     <nickname>Adi</nickname>
     <email>adriana.chirita AT utbm.fr</email>
     <description>Draw Japon map.</description>
-  </author>
-
-  <author>
-    <name>Olivier SERRES</name>
-    <email>olivier.serres AT utbm.fr</email>
-    <description>Wrote CPU limiter with Eric HOFFMANN.</description>
   </author>
 
   <author>
