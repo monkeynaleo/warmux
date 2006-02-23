@@ -65,8 +65,8 @@ class WeaponProjectile : public PhysicalObj
  protected:
   virtual void SignalCollision() = 0; 
   bool TestImpact ();
- private:
   virtual void ShootSound();
+ private:
   void SignalGhostState (bool was_dead);
   void SignalFallEnding();
 };

@@ -43,7 +43,7 @@ WeaponBullet::WeaponBullet(GameLoop &game_loop, const std::string &name, Explosi
   WeaponProjectile(game_loop, name, cfg)
 { 
   m_gravity_factor = 0.1; 
-  SetWindFactor(0.0);
+  SetWindFactor(0.8);
   SetAirResistFactor(1.0);
 }
 

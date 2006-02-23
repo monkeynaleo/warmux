@@ -42,7 +42,7 @@ class SuperTux : public WeaponProjectile
 {
  private:
   ParticleEngine particle_engine;
-  
+
 public:
   double angle;
   uint speed;
@@ -56,7 +56,7 @@ public:
 
   void turn_left();
   void turn_right();
-
+  void Shoot(double strength);
 protected:
   void SignalCollision();
 };
@@ -68,7 +68,7 @@ public:
   TuxLauncher();
   void HandleKeyEvent(int action, int event_type);
 
- private:
+ private:  
   SuperTuxWeaponConfig& cfg();
 };
 

@@ -39,14 +39,36 @@ SuperTux::SuperTux(GameLoop &p_game_loop, SuperTuxWeaponConfig& cfg) :
   WeaponProjectile (p_game_loop, "supertux", cfg), 
   particle_engine(particle_STAR,40)
 {
-  m_gravity_factor = 0.0;
+  m_gravity_factor = 0.0;    
+  SetWindFactor(0.0);
+}
+
+void SuperTux::Shoot(double strength)
+{
+  Ready();
+  is_active = true;
+
+  // Set the initial position.  
+  SetXY( ActiveCharacter().GetHandPosition() );
+
+  // Fixe la force de départ
+  angle = ActiveTeam().crosshair.GetAngleRad();
+  PutOutOfGround(angle);
+  SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle);
+  time_next_action = global_time.Read();
+  last_move = global_time.Read();
+
+  begin_time = global_time.Read();  
+
+  ShootSound();
+
+  lst_objets.AjouteObjet (this, true);
+  camera.ChangeObjSuivi(this,true,true,true);
 }
 
 void SuperTux::Refresh()
 {
-  if (!is_active) return;
-
-  if (TestImpact()) { SignalCollision(); return; }
+  WeaponProjectile::Refresh();
 
   image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
   if ((last_move+animation_deltat)<global_time.Read())
@@ -104,6 +126,8 @@ void SuperTux::Draw()
 
 SuperTuxWeaponConfig::SuperTuxWeaponConfig()
 {
+  speed = 2;
+  timeout = 20;
 }
 
 void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem) 
