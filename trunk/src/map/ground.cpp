@@ -45,7 +45,6 @@ void Ground::Init(){
   // Charge les données du terrain
   Surface m_image = lst_terrain.TerrainActif().LitImgTerrain();
   LoadImage ( m_image );
-  // delete m_image; -> Done after Terrain initialization
 
   // Vérifie la taille du terrain
   assert (LARG_MIN_TERRAIN <= GetWidth());
@@ -236,19 +235,16 @@ void Ground::Draw()
 {
   Point2i cPos = camera.GetPosition();
   Point2i windowSize = app.video.window.GetSize();
+  Point2i margin = (windowSize - GetSize())/2;
   
   if (camera.HasFixedX()) {// ground is less wide than screen !
-    int margin = ( windowSize.x - GetWidth() )/2;
-	
-    app.video.window.BoxColor( Rectanglei(0, 0, margin, windowSize.y), black_color); 
-    app.video.window.BoxColor( Rectanglei(windowSize.x - margin, 0, margin, windowSize.y), black_color); 
+    app.video.window.BoxColor( Rectanglei(0, 0, margin.x, windowSize.y), black_color); 
+    app.video.window.BoxColor( Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color); 
   }
 
   if (camera.HasFixedY()) {// ground is less wide than screen !
-    uint margin = (windowSize.y - GetHeight())/2;
-	
-    app.video.window.BoxColor( Rectanglei(0, 0, windowSize.x, margin), black_color); 
-    app.video.window.BoxColor( Rectanglei(0, windowSize.y - margin, windowSize.x, margin), black_color); 
+    app.video.window.BoxColor( Rectanglei(0, 0, windowSize.x, margin.y), black_color); 
+    app.video.window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color); 
   }
 
 #if defined(WIN32)
@@ -261,20 +257,19 @@ void Ground::Draw()
     return;
   }
 
-  std::list<Rectanglei>::iterator
-    it=world.to_redraw_now->begin(),
-    end=world.to_redraw_now->end();
-  for (; it != end; ++it) DrawTile_Clipped(*it);
+  RedrawParticleList(*world.to_redraw_now);
 
   // Draw on top of sky (redisplayed on top of particles)
-  it=world.to_redraw_particles_now->begin();
-  end=world.to_redraw_particles_now->end();
-  for (; it != end; ++it) DrawTile_Clipped(*it);
+  RedrawParticleList(*world.to_redraw_particles_now);
 
   // Draw on top of new position of particles (redisplayed on top of particles)
-  it=world.to_redraw_particles->begin();
-  end=world.to_redraw_particles->end();
-  for (; it != end; ++it) DrawTile_Clipped(*it);
+  RedrawParticleList(*world.to_redraw_particles);
 #endif
 }
 
+void Ground::RedrawParticleList(std::list<Rectanglei> &list){
+	std::list<Rectanglei>::iterator it;
+
+	for( it = list.begin(); it != list.end(); ++it )
+		DrawTile_Clipped(*it);
+}
