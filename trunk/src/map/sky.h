@@ -23,24 +23,29 @@
 #define SKY_H
 
 #include "tile.h"
+#include <list>
 #include "../graphic/surface.h"
 #include "../include/base.h"
 #include "../tool/point.h"
+#include "../tool/rectangle.h"
 
-class Sky : public Tile{  
- private:
-  Point2i lastPos;
-  void CompleteDraw();
+class Sky{
+private:
+	Surface image;
+	Point2i lastPos;
+	Point2i tstVect;
+	Point2i margin;
+	void CompleteDraw();
+	void RedrawParticleList(std::list<Rectanglei> &list);
+	void RedrawParticle(const Rectanglei &particle) const;
+	Point2i GetSkyPos() const;
 
 public:
-  Sky();
-  void Init();
-  void Reset();
-  void Draw();
-  void Free() { FreeMem(); } 
-
- private:
-   Surface image;
+	Sky();
+	void Init();
+	void Reset();
+	void Draw();
+	void Free();
 };
 
 #endif
