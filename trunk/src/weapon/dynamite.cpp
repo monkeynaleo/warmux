@@ -61,7 +61,8 @@ void BatonDynamite::Reset()
 
   image->Scale(ActiveCharacter().GetDirection(), 1);
   image->SetCurrentFrame(0);
-  image->Start();
+  image->Start(); 
+  image->animation.Start();
 }
 
 void BatonDynamite::Refresh()
@@ -102,6 +103,7 @@ void BatonDynamite::Explosion()
   channel = -1;
   explosion->SetCurrentFrame(0);
   explosion->Start();
+  explosion->animation.Start();
   explosion_active = true;
   WeaponProjectile::Explosion();
 }

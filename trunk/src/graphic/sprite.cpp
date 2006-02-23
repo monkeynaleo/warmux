@@ -311,7 +311,7 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface& tmp_su
 
 void Sprite::Start(){
    show = true;
-   animation.Start();
+   //animation.Start();
    cache.InvalidLastFrame();
 }
 
