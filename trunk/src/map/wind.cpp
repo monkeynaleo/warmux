@@ -45,7 +45,7 @@ WindParticle::WindParticle(GameLoop &p_game_loop) :
 {
   m_type = objUNBREAKABLE;
   m_wind_factor = 1;
-  m_air_resist_factor = 1;
+  m_air_resist_factor = 2;
   sprite = NULL;
 }
 
@@ -89,8 +89,15 @@ void WindParticle::Reset()
 
 void WindParticle::Refresh()
 {
-  sprite->Update();
+  sprite->Update(); 
+  
+  double initial_air_resist_factor = m_air_resist_factor;
+  m_air_resist_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
+  
   UpdatePosition();
+  
+  m_air_resist_factor = initial_air_resist_factor;
+
   if (IsGhost())
   {
     int x, y;
