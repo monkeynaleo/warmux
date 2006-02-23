@@ -40,7 +40,6 @@ UziBullet::UziBullet(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
 
 void UziBullet::ShootSound()
 {
-  jukebox.Play("share","weapon/uzi");
 }
 
 //-----------------------------------------------------------------------------
@@ -58,9 +57,6 @@ Uzi::Uzi() :
 
 void Uzi::RepeatShoot()
 {  
-  if (m_is_active)
-    return;
-      
   uint time = global_time.Read() - m_first_shoot; 
   uint tmp = global_time.Read();
 
@@ -87,10 +83,8 @@ bool Uzi::p_Shoot()
   b = pos.y - ( a * pos.x ) ;
 
   // Move the bullet !!
-  //balle.PrepareTir();  
   projectile->SetXY( pos );
   projectile->Ready();
-  
   projectile->is_active = true;
 
   while( projectile->is_active ){
@@ -107,20 +101,8 @@ bool Uzi::p_Shoot()
     if(projectile->CollisionTest( 0, 0 ) ){
       projectile->is_active=false;
 
-      // Si la balle a touché un ver, lui inflige des dégats
-      Character* ver = projectile->dernier_ver_touche;
-      PhysicalObj* obj = projectile->dernier_obj_touche;
-	  
-      if( ver ){
-          obj = ver;
-       	  ver -> SetEnergyDelta (-cfg().damage);
-	  }
-      if( obj ) 
-          obj -> AddSpeed (SOUFFLE_BALLE, angle);
-      // Creuse le world
-      if( !obj )
-		world.Creuse(projectile->GetPosition() - projectile->impact.GetSize()/2,
-		      projectile->impact);
+      projectile->Explosion();
+
       return true;
     }
     pos.x += ActiveCharacter().GetDirection();
@@ -136,6 +118,7 @@ void Uzi::HandleKeyEvent(int action, int event_type)
   case ACTION_SHOOT:
     if (event_type == KEY_REFRESH)
       RepeatShoot();
+
     if (event_type == KEY_RELEASED)
       m_is_active = false;
 
