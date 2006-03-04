@@ -58,6 +58,13 @@
 
 <section title="Translation">
   <author>
+    <name>Eddy Petri</name>
+    <email>eddy.petrisor AT gmail.com</email>
+    <country>Romania</country>
+    <description>Translate Wormux in romanian.</description>
+  </author>
+
+  <author>
     <name>Alexandre Prokoudine</name>
     <email>alexandre.prokoudine AT gmail.com</email>
     <country>Russia</country>
