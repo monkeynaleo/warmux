@@ -179,8 +179,6 @@ public:
   int  GetMostDamage() { HandleMostDamage(); return max_damage; }
   int  GetOwnDamage() { return damage_own_team; }
   int  GetOtherDamage() { return damage_other_team; }
-
-  void EndTurn();
 };
 
 #endif

@@ -265,17 +265,6 @@ void Team::PrepareTurn()
   AccessWeapon().Select();
 }
 
-// Fin d'un tour : nettoyage avant de partir :-)
-void Team::EndTurn()
-{
-  // Désactive notre arme
-  ActiveCharacter().EndTurn();
-  AccessWeapon().Deselect();
-  camera_est_sauve = true;
-
-  sauve_camera = camera.GetPosition();
-}
-
 int Team::ActiveCharacterIndex() const
 { 
   return ver_actif;

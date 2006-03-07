@@ -1001,13 +1001,6 @@ void Character::HandleMostDamage()
   current_total_damage = 0;
 }
 
-void Character::EndTurn()
-{
-  m_rebounding = true;
-  is_walking = false;
-  HandleMostDamage();
-}
-
 void Character::Hide() { hidden = true; }
 void Character::Show() { hidden = false; }
 
