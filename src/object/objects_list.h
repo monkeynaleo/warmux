@@ -24,50 +24,47 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-#include <vector>
+#include <list>
 //-----------------------------------------------------------------------------
 
 // Boucle pour chaque objet de la liste des objets (non fantome)
-#define FOR_ALL_OBJECTS(objet) \
-  for (ListeObjets::iterator objet=lst_objets.Debut(), \
-       fin_pour_chaque_objet=lst_objets.Fin(); \
-       objet != fin_pour_chaque_objet; \
-       ++objet)
+#define FOR_ALL_OBJECTS(object) \
+  for (ObjectsList::iterator object=lst_objects.Begin(), \
+       end=lst_objects.End(); \
+       object != end; \
+       ++object)
 
 //-----------------------------------------------------------------------------
 
 // Boucle pour chaque objet de la liste des objets (non fantome)
-#define FOR_EACH_OBJECT(objet) \
-  FOR_ALL_OBJECTS(objet) \
-  if (!objet -> ptr -> IsGhost())
+#define FOR_EACH_OBJECT(object) \
+  FOR_ALL_OBJECTS(object) \
+  if (!object->ptr->IsGhost())
 
 //-----------------------------------------------------------------------------
 
-class ListeObjets
+class ObjectsList
 {
 public:
-  typedef struct objet_t {
+  typedef struct object_t {
     PhysicalObj* ptr;
-    bool efface;
-    objet_t(PhysicalObj* o, bool e) { ptr = o; efface = e; }
-  } objet_t;
-  typedef std::vector<objet_t>::iterator iterator;
+    bool to_remove;
+    object_t(PhysicalObj* o, bool e) { ptr = o; to_remove = e; }
+  } object_t;
+
+  typedef std::list<object_t>::iterator iterator;
 
 private:
-  std::vector<objet_t> liste;
+  std::list<object_t> lst;
 
 public:
-  // Remise à zéro des objets standards
-  void CreeListe();
-  void VideListe();
-  void Reset();
   void Init();
 
   // Ajoute un objet à la liste
-  void AjouteObjet (PhysicalObj *ptr_obj, bool efface_fin_partie);
+  void AddObject (PhysicalObj* obj);
 
   // Retire un objet de la liste
-  void RetireObjet (PhysicalObj *ptr_obj);
+  void RemoveObject (PhysicalObj* obj);
 
   // Refresh des tous les objets
   void Refresh();
@@ -77,13 +74,13 @@ public:
 
   // Tous les objets sont prêts ? (ou alors un objet est en cours
   // d'animation ?)
-  bool TousReady();
+  bool AllReady();
 
   // Début/fin de la liste
-  iterator Debut() { return liste.begin(); }
-  iterator Fin() { return liste.end(); }
+  iterator Begin() { return lst.begin(); }
+  iterator End() { return lst.end(); }
 };
 
-extern ListeObjets lst_objets;
+extern ObjectsList lst_objects;
 //-----------------------------------------------------------------------------
 #endif
