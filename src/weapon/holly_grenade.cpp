@@ -36,7 +36,7 @@
 
 HollyGrenade::HollyGrenade(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
   WeaponProjectile (p_game_loop, "holly_grenade", cfg), 
-  smoke_engine(particle_SMOKE,40)
+  smoke_engine(40)
 {
   m_rebound_sound = "weapon/holly_grenade_bounce";
   m_rebounding = true;
@@ -50,7 +50,7 @@ void HollyGrenade::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  smoke_engine.AddPeriodic( GetPosition() );
+  smoke_engine.AddPeriodic(GetPosition(), particle_SMOKE, false);
   
   double tmp = global_time.Read() - begin_time;
   // Sing Alleluia ;-)
@@ -64,20 +64,11 @@ void HollyGrenade::Refresh()
   image->SetRotation_deg(angle);
 }
 
-void HollyGrenade::Draw()
-{  
-  // draw smoke particles below the grenade
-  smoke_engine.Draw();
-
-  WeaponProjectile::Draw();
-}
-
 void HollyGrenade::SignalCollision()
 {   
   if (IsGhost())
   {
     game_messages.Add ("The grenade left the battlefield before exploding");
-    smoke_engine.Stop();
     is_active = false ;
   }
 }

@@ -52,7 +52,6 @@ public:
 
   SuperTux(GameLoop &game_loop, SuperTuxWeaponConfig& cfg);
   void Refresh();
-  void Draw();
 
   void turn_left();
   void turn_right();

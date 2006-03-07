@@ -342,7 +342,7 @@ void GameLoop::Refresh()
 
     ActiveTeam().AccessWeapon().Manage();
     lst_objects.Refresh();
-    global_particle_engine.Refresh();
+    ParticleEngine::Refresh();
     curseur_ver.Refresh();
     //bonus_box.Refresh();
   }
@@ -370,6 +370,9 @@ void GameLoop::Draw ()
       ver -> Draw();
     }
   }
+
+  ParticleEngine::Draw(false);
+
   ActiveCharacter().Draw();
   if (!ActiveCharacter().IsDead() && state != gameEND_TURN) {
         ActiveTeam().crosshair.Draw();
@@ -379,7 +382,7 @@ void GameLoop::Draw ()
 
   StatStart("GameDraw:other");
   lst_objects.Draw();
-  global_particle_engine.Draw();
+  ParticleEngine::Draw(true);
   curseur_ver.Draw();
 
   //bonus_box.Draw();
@@ -456,7 +459,7 @@ void GameLoop::Run()
 #endif
   } while( !game.GetEndOfGameStatus() ); 
 
-  global_particle_engine.Stop();
+  ParticleEngine::Stop();
 }
 
 void GameLoop::RefreshClock()

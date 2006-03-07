@@ -37,7 +37,7 @@ const uint animation_deltat = 50;
 
 SuperTux::SuperTux(GameLoop &p_game_loop, SuperTuxWeaponConfig& cfg) :
   WeaponProjectile (p_game_loop, "supertux", cfg), 
-  particle_engine(particle_STAR,40)
+  particle_engine(40)
 {
   m_gravity_factor = 0.0;    
   SetWindFactor(0.0);
@@ -78,7 +78,7 @@ void SuperTux::Refresh()
       last_move = global_time.Read();
   }
 
-  particle_engine.AddPeriodic(GetPosition(), angle, 0);
+  particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle, 0);
 }
 
 
@@ -104,22 +104,11 @@ void SuperTux::turn_right()
 
 void SuperTux::SignalCollision()
 { 
-
-  particle_engine.Stop();
-  
   if (IsGhost())
   {
     game_messages.Add (_("Bye bye tux..."));
   }
   is_active = false; 
-}
-
-void SuperTux::Draw()
-{ 
-  particle_engine.Draw();
-
-  // supertux must be upper the particles
-  WeaponProjectile::Draw(); 
 }
 
 //-----------------------------------------------------------------------------

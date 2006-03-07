@@ -39,7 +39,6 @@ protected:
 public:
   HollyGrenade(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
   void Refresh();
-  void Draw();
 protected:
   void SignalCollision();
 };

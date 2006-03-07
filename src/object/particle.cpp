@@ -177,40 +177,16 @@ void FireParticle::SignalFallEnding()
   m_left_time_to_live = 0;
 }
 
-ParticleEngine::ParticleEngine()
-{
-  type_particle = particle_SMOKE ;
-  m_time_between_add = 0;
-}
+//-----------------------------------------------------------------------------
 
-ParticleEngine::ParticleEngine(particle_t type, uint time)
+ParticleEngine::ParticleEngine(uint time)
 {
-  type_particle = type ;
   m_time_between_add = time ;
 }
 
-void ParticleEngine::Refresh()
-{
-  // remove old particles 
-  std::list<Particle *>::iterator it=particles.begin(), end=particles.end(), current;
-  while (it != end) {
-    current = it;
-    ++it;
 
-    if (! (*current)->StillUseful()) {
-      delete (*current);
-      particles.erase(current);
-      if (it==end) break;
-    }   
-  }
-
-  // update the particles
-  for(it=particles.begin(); it!=particles.end(); ++it) {
-    (*it)->Refresh();
-  }
-}
-
-void ParticleEngine::AddPeriodic(const Point2i &position, 
+void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
+				 bool upper,
 				 double angle, double norme)
 {
   // time spent since last refresh (in milliseconds)
@@ -220,14 +196,18 @@ void ParticleEngine::AddPeriodic(const Point2i &position,
   uint delta = uint(m_time_between_add * double(randomObj.GetLong(3,40))/10);
   if (time >= delta) {
     m_last_refresh = tmp;
-    AddNow(position, 1, type_particle, angle, norme);
+    ParticleEngine::AddNow(position, 1, type, upper, angle, norme);
   }
-  
-  Refresh();
 }
+
+//-----------------------------------------------------------------------------
+// Static methods 
+  
+std::list<drawed_particle_t> ParticleEngine::lst_particles;
 
 void ParticleEngine::AddNow(const Point2i &position,
 			    uint nb_particles, particle_t type, 
+			    bool upper,
 			    double angle, double norme)
 {
   Particle *particle = NULL;
@@ -256,34 +236,61 @@ void ParticleEngine::AddNow(const Point2i &position,
       else 
 		  tmp_angle = angle;
       
+      drawed_particle_t p;
+      p.particle = particle;
+      p.upper_objects = upper;
+	
       particle->Init();
       particle->SetXY(position);
       particle->SetSpeed(tmp_norme, tmp_angle);
-      particles.push_back(particle);
+      lst_particles.push_back(p);
     }
   }
 }
 
-void ParticleEngine::Draw()
+void ParticleEngine::Draw(bool upper)
 {
-  std::list<Particle *>::iterator it;
+  std::list<drawed_particle_t>::iterator it;
   // draw the particles
-  for(it=particles.begin(); it!=particles.end(); ++it){
-    (*it)->Draw();
+  for (it=lst_particles.begin(); it!=lst_particles.end(); ++it){
+    if ( (*it).upper_objects == upper ) {
+      (*it).particle->Draw();
+    }
   }
 
+}
+
+void ParticleEngine::Refresh()
+{
+  // remove old particles 
+  std::list<drawed_particle_t>::iterator it=lst_particles.begin(), end=lst_particles.end(), current;
+  while (it != end) {
+    current = it;
+    ++it;
+
+    if (! (*current).particle->StillUseful()) {
+      delete (*current).particle;
+      lst_particles.erase(current);
+      if (it==end) break;
+    }   
+  }
+
+  // update the particles
+  for(it=lst_particles.begin(); it!=lst_particles.end(); ++it) {
+    (*it).particle->Refresh();
+  }
 }
 
 void ParticleEngine::Stop()
 {
   // remove all the particles 
-  std::list<Particle *>::iterator it=particles.begin(), end=particles.end(), current;
+  std::list<drawed_particle_t>::iterator it=lst_particles.begin(), end=lst_particles.end(), current;
   while (it != end) {
     current = it;
     ++it;
     
-    delete (*current);
-    particles.erase(current);
+    delete (*current).particle;
+    lst_particles.erase(current);
     if (it==end)
       break;
   }
