@@ -163,7 +163,8 @@ void ObjMine::Refresh()
 	   }
 	 else
 	   {
-
+	     jukebox.Play("share", "weapon/mine_fake");
+	     ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
 	     DisableDetection();
 	   }
        }
