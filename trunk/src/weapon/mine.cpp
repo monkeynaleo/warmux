@@ -45,138 +45,92 @@
 
 const double DEPART_FONCTIONNEMENT = 5;
 
-ObjMine::ObjMine(GameLoop &p_game_loop, Mine& p_launcher) : 
-  PhysicalObj(p_game_loop, "mine", 0.0),
-  launcher(p_launcher)
+ObjMine::ObjMine(GameLoop &p_game_loop, MineConfig& cfg) : 
+  WeaponProjectile(p_game_loop, "mine", cfg)
 {
-  SetTestRect (0, 4, 0, 3);
   m_allow_negative_y = true; 
   animation = false;
   m_rebounding = true;
-  affiche = true;
-  non_defectueuse = randomObj.GetLong(0, 9);
   channel = -1;
 
-  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
- 
-  detection = resource_manager.LoadSprite(res,"mine_anim");
-  SetSize(detection->GetSize());
+  escape_time = 0;
 
-  impact = resource_manager.LoadImage(res,"mine_impact");
-  SetMass (launcher.cfg().mass);
-  
-  explosion = resource_manager.LoadSprite(res,"explosion");
-   
-  armer = global_time.Read() + launcher.cfg().temps_fuite;
-  depart = uint(global_time.Read() + DEPART_FONCTIONNEMENT * 1000);
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false); 
+  explosion = resource_manager.LoadSprite(res,"explosion");  
+
+  Ready();
+  is_active = true;
 }
 
-void ObjMine::Reset()
+void ObjMine::SignalCollision() 
 {
-  affiche = true;
-  animation = false;
-  ver_declancheur = NULL;
-
-  detection->SetCurrentFrame(0);
-   
-  uint bcl=0;
-  //uint x = randomObj.GetLong(0, world.GetWidth() - GetWidth()), y;
-  Point2i pos;
-  bool ok;
-  do
-  {
-    ok = true;
-
-    Ready();
-    FORCE_ASSERT (++bcl < NBR_BCL_MAX_EST_VIDE);
-	pos = randomObj.GetPoint( world.GetSize() - GetSize() );
-    
-    SetXY( pos );
-    DirectFall();
-	MSG_DEBUG("mine", "SetXY( %d, %d )", pos.x, pos.y);
-    ok &= !IsGhost() && IsInVacuum( Point2i(0,0) );
-    if (!ok) continue;
-
-    FOR_ALL_LIVING_CHARACTERS(equipe, ver)
-    {
-      if (MeterDistance (GetCenter(), ver->GetCenter()) 
-	   < launcher.cfg().detection_range)
-      { 
-	    MSG_DEBUG("mine", "Touche le ver %s", (*ver).m_name.c_str());
-	    ok = false; 
-      }
-    }
-    ok &= !IsGhost() && !IsInWater() && IsInVacuum( Point2i(0,0) );
-  } while (!ok);
-  MSG_DEBUG("mine", "Placé.");
-
-  DirectFall();
-  SetMass(launcher.cfg().mass);
+  if (IsGhost()) is_active = false;
 }
 
-void ObjMine::Draw()
-{ 
-  if (!affiche) return;
-
-  detection->Draw(GetPosition());
-}
-
-void ObjMine::SignalFallEnding()
-{
-  MSG_DEBUG("mine", "Fin de la chute: la mine est a terre.");
-  SetMass (launcher.cfg().mass);
-}
 
 void ObjMine::Explosion ()
 {
   MSG_DEBUG("mine", "Explosion");
-  affiche = false;
 
   Point2i centre = GetCenter();
-  AppliqueExplosion(centre, centre, impact, launcher.cfg(), NULL);
-  DesactiveDetection();
+  AppliqueExplosion(centre, centre, impact, cfg, NULL);
+  DisableDetection();  
+  lst_objects.RemoveObject (this);
 }
 
-void ObjMine::ActiveDetection()
+void ObjMine::EnableDetection()
 {
   if (!animation)
   {
     animation=true;
-    affiche = true;
-    armer = global_time.Read() + launcher.cfg().temps_fuite;
-    attente = global_time.Read() + launcher.cfg().temps_fuite;
+    MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",global_time.ReadSec() );
+    attente = global_time.ReadSec() + cfg.timeout;
+    MSG_DEBUG("mine", "EnableDetection : %d", attente);
     m_ready = false;
-	MSG_DEBUG("mine", "IsReady() = %d", IsReady());
+    MSG_DEBUG("mine", "IsReady() = %d", IsReady());
 
     channel = jukebox.Play("share", "weapon/mine_beep", -1);
   }
 }
 
-void ObjMine::DesactiveDetection()
+void ObjMine::DisableDetection()
 {
   if (animation )//&& !repos)
   {
-	MSG_DEBUG("mine", "Desactive detection..");
+    MSG_DEBUG("mine", "Desactive detection..");
 
     animation = false;
     m_ready = true;
 
-    detection->SetCurrentFrame(0);
+    image->SetCurrentFrame(0);
   }
 }
 
 void ObjMine::Detection()
 {
+  uint current_time = global_time.ReadSec();
+
+  if (escape_time == 0) {
+    escape_time = current_time + 3;
+    MSG_DEBUG("mine", "Initialize escape_time : %d", current_time);
+    return;
+  }
+
+  if (current_time < escape_time) {
+    return;
+  }
+
+  MSG_DEBUG("mine", "Escape_time is finished : %d", current_time);
+
   FOR_ALL_LIVING_CHARACTERS(equipe, ver)
   { 
     if (MeterDistance (GetCenter(), ver->GetCenter())
-	 < launcher.cfg().detection_range && !animation)
+	 < static_cast<MineConfig&>(cfg).detection_range && !animation)
     {
-      ver_declancheur = &(*ver);
       std::string txt = Format(_("%s is next to a mine!"),
 			       ver -> m_name.c_str());
       game_messages.Add (txt);
-      ActiveDetection();
+      EnableDetection();
       return;
     }
   }
@@ -184,13 +138,11 @@ void ObjMine::Detection()
 
 void ObjMine::Refresh()
 {
-  if (global_time.Read() < depart) return;
-
-  if (!affiche)
+  if (!is_active)
   {
     jukebox.Stop(channel);
     channel = -1;
-
+    escape_time = 0;
     Ghost ();
     return;
   }
@@ -198,41 +150,32 @@ void ObjMine::Refresh()
   if (!animation) Detection();
 
   if (animation) {
-     detection->Update();
+     image->Update();
 
-     if (attente < global_time.Read())
+     if (attente < global_time.ReadSec())
        {
 	 jukebox.Stop(channel);
+	 channel = -1;
 	 
-	 if (non_defectueuse)
+	 if (randomObj.GetLong(0, 9))
 	   {
 	     Explosion ();
 	   }
 	 else
 	   {
-	     affiche = false;
-	     DesactiveDetection();
+
+	     DisableDetection();
 	   }
        }
   }
 }
 
-void ObjMine::SignalGhostState (bool)
-{
-  if (!affiche) return;
+//-----------------------------------------------------------------------------
 
-  affiche=false;
 
-  MSG_DEBUG("mine", "Une mine sort de l'écran");
-
-  Ghost();
-}
-
-Mine::Mine() : Weapon(WEAPON_MINE, "mine", new MineConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", new MineConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
-
-  already_put = false;
 }
 
 bool Mine::p_Shoot()
@@ -241,33 +184,23 @@ bool Mine::p_Shoot()
   PosXY (x,y);
   Add (x, y);
 
-  already_put = true;
-
   return true;
 }
 
 void Mine::Add (int x, int y)
 {
-  ObjMine *obj = new ObjMine(game_loop, *this);
+  ObjMine *obj = new ObjMine(game_loop, cfg());
   obj -> SetXY ( Point2i(x, y) );
 
   Point2d speed_vector;
   ActiveCharacter().GetSpeedXY(speed_vector);
   obj -> SetSpeedXY (speed_vector);
   lst_objects.AddObject (obj);
-  fuite = global_time.Read()+3000;
 }
 
 void Mine::Refresh()
 {
-  if (!already_put) return ;
-
-  if (fuite < global_time.Read())
-  {
-    already_put = false;
-    m_is_active = false;
-    game_loop.SetState (gameHAS_PLAYED);
-  }
+  m_is_active = false;
 }
 
 MineConfig& Mine::cfg()
@@ -276,13 +209,12 @@ MineConfig& Mine::cfg()
 MineConfig::MineConfig()
 {
   detection_range= 1;
-  temps_fuite = 3000;
+  timeout = 3;
 }
 
 void MineConfig::LoadXml(xmlpp::Element *elem) 
 {
   ExplosiveWeaponConfig::LoadXml (elem);
   LitDocXml::LitDouble (elem, "detection_range", detection_range);
-  LitDocXml::LitUint (elem, "temps_fuite", temps_fuite);
 }
 

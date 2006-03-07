@@ -34,7 +34,7 @@
 #include "../tool/i18n.h"
 
 RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile (p_game_loop, "roquette", cfg)
+  WeaponProjectile (p_game_loop, "rocket", cfg)
 {  
   m_rebounding = false;
   touche_ver_objet = true;

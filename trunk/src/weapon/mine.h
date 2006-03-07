@@ -24,7 +24,7 @@
 #define MINE_H
 
 #include <SDL.h>
-#include "weapon.h"
+#include "launcher.h"
 #include "../graphic/surface.h"
 #include "../graphic/sprite.h"
 #include "../include/base.h"
@@ -32,66 +32,50 @@
 #include "../team/character.h"
 
 class Mine;
+class MineConfig;
 
-class ObjMine : public PhysicalObj
+class ObjMine : public WeaponProjectile
 {
 private:
   // channel used for sound
   int channel;
 
-  // La mine est affichée ?
-  bool affiche;
-
   // Activation des mines ?
   bool animation;//,repos;
-  Surface impact;
-  Sprite *detection, *explosion;
+  Sprite *explosion;
   uint attente;
-  uint armer;
-  uint depart;
+  uint escape_time;
 
-  bool non_defectueuse;
-
-  Character *ver_declancheur;
-  Mine& launcher;
 public:
-  ObjMine(GameLoop &game_loop, Mine &launcher);
-  void Init(){};
-  void Reset();
+  ObjMine(GameLoop &game_loop, MineConfig &cfg);
+  //  void Reset();
   void Explosion ();
-  void Draw();
-  void ActiveDetection();
-  void DesactiveDetection();
+  //void Draw();
+  void EnableDetection();
+  void DisableDetection();
   void Refresh();
   void Detection();
-  virtual void SignalFallEnding();
-  virtual void SignalGhostState (bool etait_mort);
+  void SignalCollision();
 };
 
 class MineConfig : public ExplosiveWeaponConfig
 { 
 public: 
   double detection_range;
-  uint temps_fuite;
 public:
   MineConfig();
   virtual void LoadXml(xmlpp::Element *elem);
 };
 
-class Mine : public Weapon
+class Mine : public WeaponLauncher
 {
 private:
-  std::vector<Mine> liste;
-  bool already_put;
-  uint fuite;
-
   bool p_Shoot();
   void Add (int x, int y);
+  void Refresh();
 
 public:
   Mine();
-  void Refresh();
-
   MineConfig& cfg();
 };
 

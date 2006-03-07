@@ -49,7 +49,7 @@ const uint TPS_AV_ATTIRANCE = 1;
 
 RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop, 
 					 ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile(p_game_loop, "roquette", cfg)
+  WeaponProjectile(p_game_loop, "rocket", cfg)
 {
   m_attire = false;
 }
