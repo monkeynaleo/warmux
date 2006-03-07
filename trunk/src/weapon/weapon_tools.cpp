@@ -144,6 +144,6 @@ void AppliqueExplosion (const Point2i &explosion,
 
   // Do we need to generate some fire particles ?
   if (fire_particle)
-     global_particle_engine.AddNow(trou - impact.GetSize()/2, 5, particle_FIRE );
+     ParticleEngine::AddNow(trou - impact.GetSize()/2, 5, particle_FIRE, true);
 }
 

@@ -77,27 +77,34 @@ class FireParticle : public Particle
   void SignalFallEnding();
 };
 
+typedef struct {
+  Particle * particle;
+  bool upper_objects; // if true displayed on top of characters and weapons
+} drawed_particle_t;
+
 class ParticleEngine
 {
  private:
   uint m_last_refresh;
   uint m_time_between_add;
-  particle_t type_particle;
-  std::list<Particle *> particles;
+
+  static std::list<drawed_particle_t> lst_particles;
 
  public:
-  ParticleEngine();
-  ParticleEngine(particle_t type, uint time=100);
+  ParticleEngine(uint time=100);
   void AddPeriodic(const Point2i &position, 
+		   particle_t type,
+		   bool upper,
 		   double angle=-1, double norme=-1);
-  void AddNow(const Point2i &position, 
-	      uint nb_particles, particle_t type, 
-	      double angle=-1, double norme=-1);
-  void Refresh();
-  void Draw();
-  void Stop();
-};
 
-extern ParticleEngine global_particle_engine;
+  static void AddNow(const Point2i &position, 
+		     uint nb_particles, particle_t type,
+		     bool upper,
+		     double angle=-1, double norme=-1);
+
+  static void Refresh();
+  static void Draw(bool upper);
+  static void Stop();
+};
 
 #endif
