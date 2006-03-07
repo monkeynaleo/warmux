@@ -98,7 +98,7 @@
     <grenade>
       <position origin="hand" x="-7" y="-9" />
       <max_strength>40</max_strength>
-      <nb_ammo>5</nb_ammo>
+      <nb_ammo>5</nb_ammo>     
       <damage>50</damage>
       <mass>30</mass>
       <air_resist_factor>0.3</air_resist_factor>
@@ -226,7 +226,7 @@
       <speed>7</speed>
     </air_attack> 
 
-    <mine>
+    <minelauncher>
       <position origin="hand" x="-4" y="-4" />
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
@@ -235,8 +235,9 @@
       <blast_range>3</blast_range>
       <blast_force>5</blast_force>
       <detection_range>1</detection_range>
-      <temps_fuite>1200</temps_fuite>
-    </mine>
+      <timeout>1</timeout>
+      <escape_time>2</escape_time>
+    </minelauncher>
 
     <skip_turn>
       <position origin="over" x="0" y="-5" />

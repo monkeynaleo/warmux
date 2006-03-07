@@ -61,6 +61,7 @@ public:
 class MineConfig : public ExplosiveWeaponConfig
 { 
 public: 
+  uint escape_time;
   double detection_range;
 public:
   MineConfig();
