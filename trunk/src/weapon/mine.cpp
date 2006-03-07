@@ -111,7 +111,7 @@ void ObjMine::Detection()
   uint current_time = global_time.ReadSec();
 
   if (escape_time == 0) {
-    escape_time = current_time + 3;
+    escape_time = current_time + static_cast<MineConfig&>(cfg).escape_time;
     MSG_DEBUG("mine", "Initialize escape_time : %d", current_time);
     return;
   }
@@ -211,11 +211,13 @@ MineConfig::MineConfig()
 {
   detection_range= 1;
   timeout = 3;
+  escape_time = 2;
 }
 
 void MineConfig::LoadXml(xmlpp::Element *elem) 
 {
   ExplosiveWeaponConfig::LoadXml (elem);
+  LitDocXml::LitUint (elem, "escape_time", escape_time);
   LitDocXml::LitDouble (elem, "detection_range", detection_range);
 }
 
