@@ -62,7 +62,7 @@ void SuperTux::Shoot(double strength)
 
   ShootSound();
 
-  lst_objets.AjouteObjet (this, true);
+  lst_objects.AddObject (this);
   camera.ChangeObjSuivi(this,true,true,true);
 }
 

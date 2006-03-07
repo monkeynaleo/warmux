@@ -116,7 +116,7 @@ void Avion::Shoot(double speed)
 
   camera.ChangeObjSuivi (this, true, true);
 
-  lst_objets.AjouteObjet(this, true);
+  lst_objects.AddObject(this);
 }
 
 void Avion::Refresh()
@@ -203,7 +203,7 @@ bool Avion::PeutLacherObus() const
 
 void Avion::SignalGhostState (bool was_dead)
 {
-  lst_objets.RetireObjet(this);
+  lst_objects.RemoveObject(this);
 }
 
 //-----------------------------------------------------------------------------

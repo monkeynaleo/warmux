@@ -62,7 +62,7 @@ void Cluster::Refresh()
 void Cluster::SignalCollision()
 {
   is_active = false;
-  lst_objets.RetireObjet((PhysicalObj*)this);
+  lst_objects.RemoveObject((PhysicalObj*)this);
 
   if (IsGhost())
   {
@@ -132,7 +132,7 @@ void ClusterBomb::Explosion()
 
       cluster.Shoot(x,y);
       cluster.SetSpeedXY(speed_vector);
-      lst_objets.AjouteObjet((PhysicalObj*)&cluster,false);
+      lst_objects.AddObject((PhysicalObj*)&cluster);
     }
   is_active = false;
 }

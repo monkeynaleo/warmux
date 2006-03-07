@@ -254,7 +254,7 @@ void Mine::Add (int x, int y)
   Point2d speed_vector;
   ActiveCharacter().GetSpeedXY(speed_vector);
   obj -> SetSpeedXY (speed_vector);
-  lst_objets.AjouteObjet (obj, true);
+  lst_objects.AddObject (obj);
   fuite = global_time.Read()+3000;
 }
 

@@ -118,7 +118,7 @@ void WeaponProjectile::Shoot(double strength)
 
   ShootSound();  
 
-  lst_objets.AjouteObjet (this, true);
+  lst_objects.AddObject (this);
   camera.ChangeObjSuivi(this, true, true, true);
 
 }
@@ -284,7 +284,7 @@ void WeaponLauncher::DirectExplosion()
 void WeaponLauncher::Explosion()
 {
   m_is_active = false;
-  lst_objets.RetireObjet (projectile);
+  lst_objects.RemoveObject (projectile);
   projectile->Explosion();
 }
 

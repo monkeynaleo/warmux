@@ -123,7 +123,7 @@ void InitGameData_NetServer()
   action_handler.NewAction (ActionInt(ACTION_CHANGE_CHARACTER, ActiveTeam().ActiveCharacterIndex()));
 
   // Create objects
-  lst_objets.Reset();
+  lst_objects.Init();
    // @@@ TODO : send objects ... @@@@
         
   // Remise à zéro
@@ -170,7 +170,7 @@ void InitGameData_NetClient()
   std::cout << network.state << " : Run game !" << std::endl;
  
   // @@@ TODO @@@
-  lst_objets.Reset();
+  lst_objects.Init();
  
   //Set the second team as a team played from the client
   ActiveTeam().is_local = false;
@@ -188,7 +188,7 @@ void InitGameData_Local()
 
   // Remise à zéro
   std::cout << "o " << _("Initialise objects") << std::endl;
-  lst_objets.Reset();
+  lst_objects.Init();
 }
 
 void InitGameData(GameLoop &game_loop)
@@ -233,7 +233,6 @@ void InitGame (GameLoop &game_loop)
     std::cout << "o " << _("Initialisation") << std::endl;
     interface.Init();
     curseur_ver.Init();
-    lst_objets.Init();
     game_initialise = true;
   }
 
@@ -342,7 +341,7 @@ void GameLoop::Refresh()
     //--- Ensuite, actualise le reste du jeu ---
 
     ActiveTeam().AccessWeapon().Manage();
-    lst_objets.Refresh();
+    lst_objects.Refresh();
     global_particle_engine.Refresh();
     curseur_ver.Refresh();
     //bonus_box.Refresh();
@@ -379,7 +378,7 @@ void GameLoop::Draw ()
   StatStop("GameDraw:characters");
 
   StatStart("GameDraw:other");
-  lst_objets.Draw();
+  lst_objects.Draw();
   global_particle_engine.Draw();
   curseur_ver.Draw();
 
@@ -602,12 +601,12 @@ PhysicalObj* GameLoop::GetMovingObject()
     }
   }
 
-  FOR_EACH_OBJECT(objet)
+  FOR_EACH_OBJECT(object)
   {
-    if (!objet -> ptr -> IsReady())
+    if (!object -> ptr ->IsReady())
     {
-      MSG_DEBUG("game.endofturn", "%s is not ready", objet->ptr->m_name.c_str())
-      return objet -> ptr;
+      MSG_DEBUG("game.endofturn", "%s is not ready", object-> ptr ->m_name.c_str())
+      return object->ptr;
     }
   }
 
