@@ -83,9 +83,8 @@ public:
   // Select an *ALIVE* character
   void SelectCharacterIndex (uint index);
 
-  // Prepate / End turn.
+  // Prepare turn.
   void PrepareTurn();
-  void EndTurn();
 
   // Access to the worms.
   int ActiveCharacterIndex() const;

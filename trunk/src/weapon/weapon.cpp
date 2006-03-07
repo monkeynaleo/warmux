@@ -43,17 +43,12 @@
 #include "../object/objects_list.h"
 #include "../team/macro.h"
 #include "../team/team.h"
+#include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/math_tools.h"
 #include "../tool/point.h"
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
-
-#ifdef DEBUG
-#define COUT_DBG std::cout<<"[Weapon "<<m_name<<"] "
-//# define DEBUG_CADRE_TEST
-//#define DEBUG_MSG_COLLISION
-#endif
 
 const int INFINITE_AMMO = -1;
 const uint MAX_TIME_LOADING = 2000;
@@ -124,7 +119,9 @@ void Weapon::p_Deselect () {}
 void Weapon::HandleKeyEvent(int key, int event_type) {}
 
 void Weapon::Select() 
-{
+{  
+  MSG_DEBUG("weapon", "Select %s", m_name.c_str());
+  
   m_is_active = false;
   m_strength = 0;
   ActiveTeam().ResetNbUnits();
@@ -151,6 +148,7 @@ void Weapon::Select()
 void Weapon::Deselect()
 {
   ActiveTeam().crosshair.enable = false;
+  MSG_DEBUG("weapon", "Deselect %s", m_name.c_str());
   p_Deselect();
 }
 

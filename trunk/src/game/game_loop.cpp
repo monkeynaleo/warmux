@@ -495,7 +495,7 @@ void GameLoop::RefreshClock()
           if (game.IsGameFinished()) 
             game.SetEndOfGameStatus( true );
           else { 
-            ActiveTeam().AccessWeapon().Deselect();    
+	    ActiveTeam().AccessWeapon().Deselect();
             //bonus_box.NewBonusBox(); 
 	    SetState(gamePLAYING);
             break;
@@ -582,8 +582,6 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     pause_seconde = global_time.Read();
 
     interaction_enabled = false; // Be sure that we can NOT play !
-
-    if (!IsAnythingMoving()) ActiveTeam().AccessWeapon().Deselect();
     break;
   }
 }
