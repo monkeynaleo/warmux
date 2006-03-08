@@ -34,7 +34,6 @@
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"
-#include "../include/global.h"
 //-----------------------------------------------------------------------------
 
 Grenade::Grenade(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :

@@ -21,7 +21,7 @@
 
 #include "check_box.h"
 #include "../include/app.h"
-#include "../include/global.h"
+#include "../graphic/font.h"
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 
@@ -33,10 +33,10 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
   SetPosition( rect.GetPosition() );
   SetSize( rect.GetSize() );
 
-  SetSizeY( global().small_font().GetHeight() );
+  SetSizeY( (*Font::GetInstance(Font::FONT_SMALL)).GetHeight() );
   m_value = value;
 
-  txt_label = new Text(label, white_color, &global().small_font());
+  txt_label = new Text(label, white_color, Font::GetInstance(Font::FONT_SMALL));
 }
 
 CheckBox::~CheckBox(){

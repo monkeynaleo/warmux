@@ -31,10 +31,10 @@
 #include "../game/time.h"
 #include "../game/config.h"
 #include "../graphic/text.h"
+#include "../graphic/font.h"
 #include "../include/action_handler.h"
 #include "../include/app.h"
 #include "../include/constant.h"
-#include "../include/global.h"
 #include "../interface/cursor.h"
 #include "../map/camera.h"
 #include "../map/map.h"
@@ -365,7 +365,7 @@ void Character::Draw()
     std::ostringstream ss;
     ss << lost_energy;
     dy -= HAUT_FONT_MIX;
-    global().small_font().WriteCenterTop (
+    (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop (
 			GetPosition() - camera.GetPosition() + Point2i( GetWidth()/2, dy),
 		   	ss.str(), white_color);    
   }

@@ -28,8 +28,8 @@
 #include "../game/time.h"
 #include "../graphic/colors.h"
 #include "../graphic/video.h"
+#include "../graphic/font.h"
 #include "../include/app.h"
-#include "../include/global.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
@@ -89,18 +89,20 @@ void Interface::Init()
   weapon_strength_bar.SetBackgroundColor(WeaponStrengthBarBackground);
 
   // constant text initialisation
-  t_NAME = new Text( _("Name:"), white_color, &global().normal_font());
-  t_ENERGY = new Text( _("Energy:"),white_color, &global().normal_font());
-  t_WEAPON = new Text( _("Weapon:"), white_color, &global().normal_font());
-  t_STOCK = new Text( _("Stock:"), white_color, &global().normal_font());
+  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
-  global_timer = new Text(ulong2str(0), white_color, &global().normal_font());
+  t_NAME = new Text( _("Name:"), white_color, normal_font);
+  t_ENERGY = new Text( _("Energy:"),white_color, normal_font);
+  t_WEAPON = new Text( _("Weapon:"), white_color, normal_font);
+  t_STOCK = new Text( _("Stock:"), white_color, normal_font);
+
+  global_timer = new Text(ulong2str(0), white_color, normal_font);
   timer = NULL;
 
-  t_character_name = new Text("None", white_color, &global().normal_font());
-  t_character_energy = new Text("Dead", white_color, &global().normal_font());
-  t_weapon_name = new Text("None", white_color, &global().normal_font());
-  t_weapon_stock = new Text("0", white_color, &global().normal_font());;
+  t_character_name = new Text("None", white_color, normal_font);
+  t_character_energy = new Text("Dead", white_color, normal_font);
+  t_weapon_name = new Text("None", white_color, normal_font);
+  t_weapon_stock = new Text("0", white_color, normal_font);;
 }
 
 Interface::~Interface()
@@ -277,7 +279,7 @@ void Interface::UpdateTimer(uint utimer)
       timer->Set(s);
     }
     else 
-	  timer = new Text(ulong2str(utimer), white_color, &global().big_font());
+	  timer = new Text(ulong2str(utimer), white_color, Font::GetInstance(Font::FONT_BIG));
   } else
     timer = NULL;
 }

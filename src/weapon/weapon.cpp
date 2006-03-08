@@ -37,7 +37,7 @@
 #include "../gui/progress_bar.h"
 #include "../include/app.h"
 #include "../include/action_handler.h"
-#include "../include/global.h"
+#include "../graphic/font.h"
 #include "../interface/interface.h"
 #include "../map/camera.h"
 #include "../object/objects_list.h"
@@ -436,7 +436,7 @@ void Weapon::DrawUnit(int unit){
 
   ss << unit;
  
-  DrawTmpBoxText(global().small_font(),
+  DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
 		 Point2i( ActiveCharacter().GetCenterX(), ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
 		 - camera.GetPosition(),
 		 ss.str());

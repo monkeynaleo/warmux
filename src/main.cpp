@@ -38,7 +38,6 @@
 #include "menu/options_menu.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
-#include "include/global.h"
 #include "sound/jukebox.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
@@ -145,13 +144,13 @@ void AppWormux::DisplayLoadingPicture(){
 
   global_time.Reset();
 
-  Text text1(_("Wormux launching..."), white_color, &global().huge_font(), true); 
-  Text text2(txt_version, white_color, &global().huge_font(), true); 
+  Text text1(_("Wormux launching..."), white_color, Font::GetInstance(Font::FONT_HUGE), true); 
+  Text text2(txt_version, white_color, Font::GetInstance(Font::FONT_HUGE), true); 
   
   Point2i windowCenter = video.window.GetSize() / 2;
   
   text1.DrawCenter( windowCenter );
-  text2.DrawCenter( windowCenter + Point2i(0, global().huge_font().GetHeight() + 20 ));
+  text2.DrawCenter( windowCenter + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE)).GetHeight() + 20 ));
 
   video.window.Flip();
 }
@@ -159,7 +158,6 @@ void AppWormux::DisplayLoadingPicture(){
 void AppWormux::InitFonts(){
   if( TTF_Init() == -1 )
     Error( Format( _("Initialisation of TTF library failed: %s"), TTF_GetError() ) );
-  createGlobal();
 }
 
 void AppWormux::End(){
@@ -167,7 +165,6 @@ void AppWormux::End(){
 	    << "[ " << _("Quit Wormux") << " ]" << std::endl;
 
   config.Sauve();
-  destroyGlobal();
   jukebox.End();
   TTF_Quit();
 

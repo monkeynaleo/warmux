@@ -30,19 +30,34 @@ class GameLoop;
 
 class Font
 {
+private:
   typedef std::map<std::string, Surface>::value_type 
     txt_sample;
   typedef std::map<std::string, Surface>::iterator 
     txt_iterator;
 
+  static const int FONT_SIZE[];
+  static Font* FONT_ARRAY[6];
+
   std::map<std::string, Surface> surface_text_table;
   TTF_Font *m_font;
   void Write(const Point2i &pos, Surface &surface);
 
-public:
   Font(int size);
+
+public:
+  static const int FONT_HUGE;
+  static const int FONT_LARGE;
+  static const int FONT_BIG;
+  static const int FONT_NORMAL;
+  static const int FONT_SMALL;
+  static const int FONT_TINY;
+
+  // type: defined as static consts above
+  static Font* GetInstance(int type);
+
   ~Font();
-  
+
   bool Load (const std::string& filename, int size);
   TTF_Font& GetTTF();
 
@@ -59,28 +74,6 @@ public:
 
   Surface Render(const std::string &txt, const Color &color, bool cache=false);
   Surface CreateSurface(const std::string &txt, const Color &color);
-};
-
-class GameFont : public Font
-{
-  GameLoop &game_loop;
-  void Write(const Point2i &pos, Surface &surface);
-
-public:
-  GameFont(GameLoop &game_loop, int size);
-
-};
-
-class Fonts
-{
-public:
-  Fonts(GameLoop &game_loop);
-  GameFont huge;
-  GameFont large;
-  GameFont big;
-  GameFont normal;
-  GameFont small;
-  GameFont tiny;
 };
 
 #endif

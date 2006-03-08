@@ -8,7 +8,6 @@ localedir=$(datadir)/@LOCALEDIR@
 wormux_SOURCES = \
 	include/base.h include/enum.h \
 	include/constant.cpp include/constant.h \
-	include/global.cpp include/global.h \
 	include/action.cpp include/action.h \
 	include/action_handler.cpp include/action_handler.h \
 	include/app.h main.cpp \

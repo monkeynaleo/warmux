@@ -25,6 +25,7 @@
 #include "../game/config.h"
 #include "../game/game_mode.h"
 #include "../graphic/video.h"
+#include "../graphic/font.h"
 #include "../map/maps_list.h"
 #include "../include/app.h"
 #include "../team/teams_list.h"
@@ -43,18 +44,19 @@ const uint MAPS_W = 160;
 const uint MAP_PREVIEW_W = 300;
 
 GameMenu::GameMenu() :
-  Menu("menu/bg_option"),
-  normal_font(16)
+  Menu("menu/bg_option")
 {  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
   
+  normal_font = Font::GetInstance(Font::FONT_NORMAL);
+
   // Center the boxes!
   uint x = app.video.window.GetWidth()/2 - 475/2;
 
   /* Choose the teams !! */
   team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
-  team_box->AddWidget(new Label(_("Select the teams:"), rectZero, normal_font));
+  team_box->AddWidget(new Label(_("Select the teams:"), rectZero, *normal_font));
 
   Box * tmp_box = new HBox( Rectanglei(0,0, 1, TEAMS_H), false);
   tmp_box->SetMargin(10);
@@ -95,7 +97,7 @@ GameMenu::GameMenu() :
   tmp_box->AddWidget(new NullWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W)));
   
   map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
-  map_box->AddWidget(new Label(_("Select the world:"), rectZero, normal_font));
+  map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
   map_box->AddWidget(tmp_box);
 
   // Values initialization

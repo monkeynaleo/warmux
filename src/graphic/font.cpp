@@ -30,7 +30,27 @@
 #include "../tool/error.h"
 #include "../tool/file_tools.h"
 
-Font::Font(int size){ 
+Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};
+
+/*
+ * Constants
+ */
+const int Font::FONT_SIZE[] = {40, 32, 24, 16, 12, 8};
+const int Font::FONT_HUGE   = 0;
+const int Font::FONT_LARGE  = 1;
+const int Font::FONT_BIG    = 2;
+const int Font::FONT_NORMAL = 3;
+const int Font::FONT_SMALL  = 4;
+const int Font::FONT_TINY   = 5;
+
+Font* Font::GetInstance(int type) {
+  if (FONT_ARRAY[type] == NULL) {
+    FONT_ARRAY[type] = new Font(FONT_SIZE[type]);
+  }
+  return FONT_ARRAY[type];
+}
+
+Font::Font(int size){
   m_font = NULL;
   bool ok = Load(config.ttf_filename, size);
   
@@ -158,28 +178,3 @@ int Font::GetHeight (const std::string &str){
 Point2i Font::GetSize(const std::string &txt){
 	return Point2i(GetWidth(txt), GetHeight(txt));
 }
-
-//-----------------------------------------------------------------------------
-
-GameFont::GameFont(GameLoop &p_game_loop, int size) :
-  Font(size),
-  game_loop(p_game_loop)
-{}
-
-void GameFont::Write(const Point2i &pos, Surface &surface){
-  app.video.window.Blit(surface, pos);
-  world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
-}
-
-//-----------------------------------------------------------------------------
-
-Fonts::Fonts(GameLoop &game_loop) :
-  huge(game_loop, 40),
-  large(game_loop, 32),
-  big(game_loop, 24),
-  normal(game_loop, 16),
-  small(game_loop, 12),
-  tiny(game_loop, 8)
-{}
-
-

@@ -31,7 +31,6 @@
 #include "../graphic/font.h"
 #include "../graphic/fps.h"
 #include "../include/app.h"
-#include "../include/global.h"
 #include "../include/constant.h" // VERSION
 #include "../sound/jukebox.h"
 #include "../tool/i18n.h"
@@ -112,12 +111,13 @@ bool Main_Menu::sig_quit(){
   return true; 
 }
 
-Main_Menu::Main_Menu() :
-  normal_font(16),
-  large_font(32)
+Main_Menu::Main_Menu()
 {
   int x_button;
   double y_scale;
+
+  normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  large_font = Font::GetInstance(Font::FONT_LARGE);
 
   background = new Sprite(Surface( config.data_dir + "menu/img/background.png" ));
   background->cache.EnableLastFrameCache();
@@ -150,14 +150,14 @@ Main_Menu::Main_Menu() :
   play = new ButtonText( Point2i(x_button, (int)(y * y_scale)),
 			res, "main_menu/button",
 			_("Play"),
-			&large_font);
+			large_font);
   y += dy;
 
 #ifdef NETWORK_BUTTON  
   network = new ButtonText( Point2i(x_button, (int)(y * y_scale)),
 			   res, "main_menu/button",
 			   _("Network Game"),
-			   &large_font );
+			   large_font );
   y += dy;
 #else
   network = NULL;
@@ -166,27 +166,27 @@ Main_Menu::Main_Menu() :
   options = new ButtonText( Point2i(x_button, (int)(y * y_scale) ),
 			   res, "main_menu/button",
 			   _("Options"),
-			   &large_font);
+			   large_font);
   y += dy;
 
   infos =  new ButtonText( Point2i(x_button, (int)(y * y_scale) ),
 			  res, "main_menu/button",
 			  _("Credits"),
-			  &large_font);
+			  large_font);
   y += dy;
 
   quit =  new ButtonText( Point2i(x_button,(int)(y * y_scale) ),
 			 res, "main_menu/button",
 			 _("Quit"),
-			 &large_font);
+			 large_font);
 
   resource_manager.UnLoadXMLProfile( res);
 
   std::string s("Version "+VERSION);
-  version_text = new Text(s, green_color, &normal_font, false);
+  version_text = new Text(s, green_color, normal_font, false);
 
   std::string s2(WEB_SITE);
-  website_text = new Text(s2, green_color, &normal_font, false);
+  website_text = new Text(s2, green_color, normal_font, false);
 }
 
 void Main_Menu::onClick(const Point2i &mousePosition, int button)
