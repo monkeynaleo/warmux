@@ -29,7 +29,6 @@
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
-#include "../include/global.h"
 #include "../interface/game_msg.h"
 #include "../interface/interface.h"
 #include "../map/camera.h"
@@ -220,7 +219,7 @@ void WeaponProjectile::Draw()
       ss << tmp;
       int txt_x = GetX() + GetWidth() / 2;
       int txt_y = GetY() - GetHeight();
-      global().small_font().WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
+      (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
 					    ss.str(), white_color);
     }
   }

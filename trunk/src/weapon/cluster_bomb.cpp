@@ -29,7 +29,6 @@
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
 #include "../interface/interface.h"
-#include "../include/global.h"
 #include "../map/camera.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"

@@ -24,7 +24,6 @@
 #include <SDL_gfxPrimitives.h>
 #include "../graphic/font.h"
 #include "../include/app.h"
-#include "../include/global.h"
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
 
@@ -48,7 +47,7 @@ ListBox::ListBox (const Rectanglei &rect) : Widget(rect){
   buttonRect.SetSizeY(GetPositionY() + GetSizeY() - 5);
   m_down = new Button(buttonRect, res, "menu/down");
 
-  height_item = global().small_font().GetHeight();
+  height_item = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
   first_visible_item = 0;
   nb_visible_items_max = GetSizeY()/height_item;
   nb_visible_items = 0;
@@ -128,7 +127,7 @@ void ListBox::Draw(const Point2i &mousePosition){
 	   if( i + first_visible_item == uint(item) )
          app.video.window.BoxColor(rect, defaultListColor3);
      
-     global().small_font().WriteLeft( 
+     (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft( 
 			  GetPosition() + Point2i(5, i*height_item),
 			  m_items[i + first_visible_item].label,
 			  white_color);

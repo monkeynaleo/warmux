@@ -26,7 +26,6 @@
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
-#include "../include/global.h"
 #include "../interface/interface.h"
 #include "../interface/game_msg.h"
 #include "../map/camera.h"

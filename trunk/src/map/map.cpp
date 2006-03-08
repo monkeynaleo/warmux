@@ -27,8 +27,8 @@
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/surface.h"
+#include "../graphic/font.h"
 #include "../include/constant.h"
-#include "../include/global.h"
 #include "../object/bonus_box.h"
 #include "../tool/i18n.h"
 #include "../tool/stats.h"
@@ -276,12 +276,12 @@ void Map::DrawAuthorName()
     std::string txt;
     txt  = Format(_("Map %s, a creation of :"),
 		  lst_terrain.TerrainActif().name.c_str());
-    author_info1 = new Text(txt, white_color, &global().small_font());
+    author_info1 = new Text(txt, white_color, Font::GetInstance(Font::FONT_SMALL));
     txt = lst_terrain.TerrainActif().author_info;
-    author_info2 = new Text(txt, white_color, &global().small_font());
+    author_info2 = new Text(txt, white_color, Font::GetInstance(Font::FONT_SMALL));
   }
   
   author_info1->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y);
-  author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+global().small_font().GetHeight());
+  author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+(*Font::GetInstance(Font::FONT_SMALL)).GetHeight());
 }
 

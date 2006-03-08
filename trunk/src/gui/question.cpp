@@ -23,9 +23,9 @@
 #include "question.h"
 #include <SDL.h>
 #include "../graphic/text.h"
+#include "../graphic/font.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
-#include "../include/global.h"
 #include "../map/map.h"
 
 Question::Question()
@@ -51,7 +51,7 @@ void Question::TraiteTouche (SDL_Event &event){
 }
 
 void Question::Draw(){
-  DrawTmpBoxTextWithReturns (global().big_font(),
+  DrawTmpBoxTextWithReturns (*Font::GetInstance(Font::FONT_BIG),
                              app.video.window.GetSize() / 2,
                              message, 10);
   app.video.Flip();

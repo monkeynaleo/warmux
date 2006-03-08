@@ -25,6 +25,7 @@
 #include "../game/game_mode.h"
 #include "../game/config.h"
 #include "../graphic/video.h"
+#include "../graphic/font.h"
 #include "../map/maps_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
@@ -51,15 +52,16 @@ const uint TPS_FIN_TOUR_MIN = 1;
 const uint TPS_FIN_TOUR_MAX = 10;
 
 OptionMenu::OptionMenu() :
-  Menu("menu/bg_option"),
-  normal_font(16)
+  Menu("menu/bg_option")
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   Rectanglei zeroRect (0, 0, 0, 0);
 
+  normal_font = Font::GetInstance(Font::FONT_NORMAL);
+
   /* Grapic options */
   graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, 1));
-  graphic_options->AddWidget(new Label(_("Graphic options"), zeroRect, normal_font));
+  graphic_options->AddWidget(new Label(_("Graphic options"), zeroRect, *normal_font));
 
   lbox_video_mode = new ListBox( Rectanglei(0, 0, 0, 80) );
   graphic_options->AddWidget(lbox_video_mode);
@@ -83,7 +85,7 @@ OptionMenu::OptionMenu() :
 
   /* Sound options */
   sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, 1));
-  sound_options->AddWidget(new Label(_("Sound options"), zeroRect, normal_font));
+  sound_options->AddWidget(new Label(_("Sound options"), zeroRect, *normal_font));
 
   lbox_sound_freq = new ListBox( Rectanglei(0, 0, 0, 80) );
   sound_options->AddWidget(lbox_sound_freq);
@@ -96,7 +98,7 @@ OptionMenu::OptionMenu() :
   
   /* Game options */
   game_options = new VBox( Rectanglei(GAME_X, GAME_Y, GAME_W, 1) );
-  game_options->AddWidget(new Label(_("Game options"), zeroRect, normal_font));
+  game_options->AddWidget(new Label(_("Game options"), zeroRect, *normal_font));
 
   opt_duration_turn = new SpinButton(_("Duration of a turn:"), zeroRect,
 				     TPS_TOUR_MIN, 5,

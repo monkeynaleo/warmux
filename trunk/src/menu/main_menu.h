@@ -50,7 +50,7 @@ class Main_Menu
   int title_y, skinl_y, skinr_y;
   bool anim_finished;
   FramePerSecond fps;
-  Font normal_font, large_font;
+  Font *normal_font, *large_font;
   
 public:
   menu_item choice;

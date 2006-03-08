@@ -30,13 +30,12 @@
 #include "../tool/error.h"
 #include "../interface/interface.h"
 #include "../map/map.h"
-#include "../include/global.h"
 
 Text::Text(const std::string &new_txt, Color new_color,
            Font* new_font, bool shadowed){
 				
   if( new_font == NULL )
-    new_font = &global().small_font();
+    new_font = Font::GetInstance(Font::FONT_SMALL);
 	
   txt = new_txt;
   color = new_color;

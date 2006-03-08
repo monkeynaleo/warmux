@@ -23,17 +23,17 @@
 #include "../include/app.h"
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
-#include "../include/global.h"
+#include "../graphic/font.h"
 
 SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
 			     int value, int step, int min_value, int max_value){
   position =  rect.GetPosition();
   size = rect.GetSize();
-  size.y = global().small_font().GetHeight();
+  size.y = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
 	  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
-  txt_label = new Text(label, white_color, &global().small_font());
+  txt_label = new Text(label, white_color, Font::GetInstance(Font::FONT_SMALL));
 
   if ( min_value != -1 && min_value <= value)
     m_min_value = min_value;
@@ -43,12 +43,12 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", white_color, &global().small_font());
+  txt_value = new Text("", white_color, Font::GetInstance(Font::FONT_SMALL));
   SetValue(value);
 
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
-  uint max_value_w = global().small_font().GetWidth(max_value_s.str());
+  uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());
   
   uint margin = 5;
 
@@ -68,7 +68,7 @@ void SpinButton::SetSizePosition(const Rectanglei &rect){
 
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
-  uint max_value_w = global().small_font().GetWidth(max_value_s.str());
+  uint max_value_w = (*Font::GetInstance(Font::FONT_SMALL)).GetWidth(max_value_s.str());
   
   uint margin = 5;
   

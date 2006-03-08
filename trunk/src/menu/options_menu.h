@@ -24,10 +24,11 @@
 
 #include "menu.h"
 #include "../include/base.h"
+#include "../graphic/font.h"
 
 class OptionMenu : public Menu
 {
-  Font normal_font;
+  Font * normal_font;
 
 public:
    OptionMenu(); 

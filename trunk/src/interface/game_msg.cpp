@@ -25,7 +25,6 @@
 #include "../graphic/video.h"
 #include "../graphic/font.h"
 #include "../include/app.h"
-#include "../include/global.h"
 
 GameMessages game_messages;
 
@@ -80,8 +79,8 @@ void GameMessages::Add(const std::string &message){
   std::cout << "o MSG: " << message << std::endl;
 
   // Ajoute le message à la liste (avec son heure d'arrivée)
-  Text * tmp = new Text(message, white_color, &global().small_font());
-  Text * tmp2 = new Text(message, black_color, &global().small_font());
+  Text * tmp = new Text(message, white_color, Font::GetInstance(Font::FONT_SMALL));
+  Text * tmp2 = new Text(message, black_color, Font::GetInstance(Font::FONT_SMALL));
 
   liste.push_back (message_t(tmp, tmp2, global_time.Read()));
 

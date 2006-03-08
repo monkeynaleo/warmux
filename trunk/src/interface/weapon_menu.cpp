@@ -25,10 +25,10 @@
 #include <math.h>
 #include "interface.h"
 #include "../graphic/video.h"
+#include "../graphic/font.h"
 #include "../game/time.h"
 #include "../include/action_handler.h"
 #include "../include/app.h"
-#include "../include/global.h"
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
@@ -193,7 +193,7 @@ void WeaponMenuItem::Draw()
   else
     txt << nb_bullets;
 
-  global().tiny_font().WriteLeftBottom(buttonCenter + Point2i(-1, 1) * iconSize / 2,
+  (*Font::GetInstance(Font::FONT_TINY)).WriteLeftBottom(buttonCenter + Point2i(-1, 1) * iconSize / 2,
 			    txt.str(), white_color);
 }
 
