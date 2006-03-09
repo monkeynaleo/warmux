@@ -31,12 +31,11 @@
 class BonusBox : public PhysicalObj
 {
 private:
-  bool enable;
-  bool still_visible;
-  bool parachute; 
+  static bool enable;
+  static uint time;
 
+  bool parachute; 
   Sprite *anim;
-  uint time;
 
   enum
   {
@@ -50,30 +49,31 @@ private:
   } bonus_weapons;
   static const uint nb_bonus = bonusAUTO_BAZOOKA;
 
-public:
-  // Initialise les données
+ private:
   BonusBox(GameLoop &game_loop);
-  void Init();
-  void FreeMem();
-  void Reset();
+  static bool PlaceBonusBox (BonusBox& bonus_box);
+
+public:
+  ~BonusBox();
 
   // Active les caisses ?
-  void Active (bool actif);
+  static void Enable (bool _enable);
+  static void NewBonusBox(GameLoop &game_loop);
 
   // Signale la fin d'une chute
   virtual void SignalFallEnding();  
 
-  // Signale un changement d'etat
-  virtual void SignalGhostState (bool etait_mort);
-
   void Draw();
   void Refresh();
-  void NewBonusBox();
+
+  void Init(){}; // TODO -> To Remove !!
+  void Reset(){}; // TODO -> To Remove !!
+
  private:
   void ApplyBonus (Team &team, Character &character);
 
 };
 
-extern BonusBox bonus_box;
+//extern BonusBox bonus_box;
 //-----------------------------------------------------------------------------
 #endif

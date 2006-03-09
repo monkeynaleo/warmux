@@ -42,6 +42,7 @@
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/wind.h"
+#include "../object/bonus_box.h"
 #include "../object/objects_list.h"
 #include "../object/particle.h"
 #include "../sound/jukebox.h"
@@ -211,7 +212,6 @@ void InitGameData(GameLoop &game_loop)
   game_loop.fps.Reset();
   interface.Reset();
   game_messages.Reset();
-  //bonus_box.Init();
 }
 
 void InitGame (GameLoop &game_loop)
@@ -344,7 +344,6 @@ void GameLoop::Refresh()
     lst_objects.Refresh();
     ParticleEngine::Refresh();
     curseur_ver.Refresh();
-    //bonus_box.Refresh();
   }
   
   // Refresh the map
@@ -384,8 +383,6 @@ void GameLoop::Draw ()
   lst_objects.Draw();
   ParticleEngine::Draw(true);
   curseur_ver.Draw();
-
-  //bonus_box.Draw();
 
   world.DrawWater();
 
@@ -499,7 +496,7 @@ void GameLoop::RefreshClock()
             game.SetEndOfGameStatus( true );
           else { 
 	    ActiveTeam().AccessWeapon().Deselect();
-            //bonus_box.NewBonusBox(); 
+            BonusBox::NewBonusBox(*this); 
 	    SetState(gamePLAYING);
             break;
           }

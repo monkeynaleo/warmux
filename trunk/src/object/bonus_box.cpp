@@ -31,13 +31,14 @@
 #include "../include/constant.h" // NBR_BCL_MAX_EST_VIDE
 #include "../interface/game_msg.h"
 #include "../map/map.h"
+#include "../object/objects_list.h"
 #include "../team/macro.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/random.h"
 #include "../tool/resource_manager.h"
 
-//#define FAST
+#define FAST
 
 #ifdef FAST
   const uint MIN_TIME_BETWEEN_CREATION = 1; // seconds
@@ -59,8 +60,6 @@ const uint BONUS_DYNAMITE=10;
 const uint BONUS_AIR_ATTACK=1;
 const uint BONUS_AUTO_BAZOOKA=5;
 
-BonusBox bonus_box(game_loop);
-
 BonusBox::BonusBox(GameLoop &p_game_loop)
   : PhysicalObj(p_game_loop, "BonusBox", 0.0){
   SetTestRect (29, 29, 63, 6);
@@ -68,26 +67,53 @@ BonusBox::BonusBox(GameLoop &p_game_loop)
   enable = false;
   m_wind_factor = 0.3;
   m_air_resist_factor = 20;
-}
 
-void BonusBox::Init(){
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
   SetSize(anim->GetSize());
-  anim->animation.SetLoopMode(false);
+  anim->animation.SetLoopMode(false);  
+  anim->SetCurrentFrame(0);
+  
+  parachute = true;  
+
+  SetMass (30);
+  SetSpeed (SPEED, M_PI_2);
 }
 
-void BonusBox::FreeMem(){
+BonusBox::~BonusBox(){
   delete anim;
-}
-
-void BonusBox::Reset(){
 }
 
 void BonusBox::Draw()
 { 
-  if (!still_visible) return;
   anim->Draw(GetPosition());
+}
+
+void BonusBox::Refresh()
+{
+  // Si un ver touche la caisse, on la réinitialise
+  FOR_ALL_LIVING_CHARACTERS(equipe, ver)
+  {
+    if( ObjTouche(*ver) )
+    {
+      // Offre des dynamites
+      ApplyBonus (**equipe, *ver);
+
+      lst_objects.RemoveObject(this);
+
+      return;
+    }
+  }
+
+  // Refresh animation
+  if (!m_ready && !parachute) anim->Update();
+  
+  m_ready = anim->IsFinished();
+
+//   if (m_ready){
+// 	  //MSG_DEBUG("bonus", "game_loop.SetState (gamePLAYING)");
+// 	  //game_loop.SetState (gamePLAYING);
+//   }
 }
 
 // Signale la fin d'une chute
@@ -102,6 +128,8 @@ void BonusBox::SignalFallEnding()
   anim->SetCurrentFrame(0);
   anim->Start();
 }
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 void BonusBox::ApplyBonus (Team &equipe, Character &ver){
   std::ostringstream txt;
@@ -166,125 +194,95 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
   game_messages.Add (txt.str());
 }
 
-void BonusBox::NewBonusBox(){
-  if (still_visible)
-	return;
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+// Static methods 
+bool BonusBox::enable = false;
+uint BonusBox::time = 0;
 
-  if (!enable || (global_time.Read() < time)) {
-    //game_loop.SetState(gamePLAYING);
-    return;
-  }
+// Active les caisses ?
+void BonusBox::Enable (bool _enable)
+{
+  MSG_DEBUG("bonus", "Enable ? %d", _enable);
+  enable = _enable;
+}
 
+bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
+{
   uint bcl=0;
   bool ok;
   MSG_DEBUG("bonus", "Cherche une place...");
+  
   do
   {
     ok = true;
-    Ready();
+    bonus_box.Ready();
     if (bcl >= NB_MAX_TRY) 
     {
-	  MSG_DEBUG("bonux", "Impossible de trouver une position initiale.");
-      return;
+      MSG_DEBUG("bonux", "Impossible de trouver une position initiale.");
+      return false;
     }
 
     // Placement au hasard en X
-    int x = randomObj.GetLong(0, world.GetWidth() - GetWidth());
-    int y = -GetHeight()+1;
-    SetXY( Point2i(x, y) );
-	MSG_DEBUG("bonus", "Test en %d, %d", x, y);
+    int x = randomObj.GetLong(0, world.GetWidth() - bonus_box.GetWidth());
+    int y = -bonus_box.GetHeight()+1;
+    bonus_box.SetXY( Point2i(x, y) );
+    MSG_DEBUG("bonus", "Test en %d, %d", x, y);
 
     // Vérifie que la caisse est dans le vide
-    ok = !IsGhost() && IsInVacuum( Point2i(0, 0) ) && IsInVacuum( Point2i(0, 1) );
+    ok = !bonus_box.IsGhost() && bonus_box.IsInVacuum( Point2i(0, 0) ) && bonus_box.IsInVacuum( Point2i(0, 1) );
     if (!ok) 
     {
-	  MSG_DEBUG("bonus", "Placement dans un mur");
+      MSG_DEBUG("bonus", "Placement dans un mur");
       continue;
     }
 
     // Vérifie que la caisse ne tombe pas dans le vide
-    DirectFall();
-    ok &= !IsGhost() & !IsInWater();
+    bonus_box.DirectFall();
+    ok &= !bonus_box.IsGhost() & !bonus_box.IsInWater();
+
     if (!ok)
     {
-	  MSG_DEBUG("bonus", "Placement dans le vide");
+      MSG_DEBUG("bonus", "Placement dans le vide");
       continue;
     }
 
     // Vérifie que le caisse ne touche aucun ver au début
     FOR_ALL_LIVING_CHARACTERS(equipe, ver)
     {
-      if( ObjTouche(*ver) )
+      if( bonus_box.ObjTouche(*ver) )
       {
-		  MSG_DEBUG("bonus", "La caisse touche le ver %s.", (*ver).m_name.c_str());
-		  ok = false;
+	MSG_DEBUG("bonus", "La caisse touche le ver %s.", (*ver).m_name.c_str());
+	ok = false;
       }
     }
     if (ok)
-		SetXY( Point2i(x, y) );
+      bonus_box.SetXY( Point2i(x, y) );
   } while (!ok);
 
   MSG_DEBUG("bonus", "Placée après %d essai(s)", bcl);
-  anim->SetCurrentFrame(0);
-  still_visible = true;
-  parachute = true;
 
   time = randomObj.GetLong(MIN_TIME_BETWEEN_CREATION, 
-			    MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
+			   MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
   time *= 1000;
   time += global_time.Read();
+  
+  return true;
+}
 
-  SetMass (30);
-  SetSpeed (SPEED, M_PI_2);
-  Ready();
+void BonusBox::NewBonusBox(GameLoop &p_game_loop)
+{
+
+  if (!enable || (global_time.Read() < time)) {
+    //game_loop.SetState(gamePLAYING);
+    return;
+  }
+
+  BonusBox * box = new BonusBox(p_game_loop);
+  if (!PlaceBonusBox(*box))
+    delete box;
+  else 
+    lst_objects.AddObject(box);
+ 
   return;
 }
-
-void BonusBox::Refresh()
-{
-  if (!still_visible) return;
-
-  UpdatePosition();
-  MSG_DEBUG("bonus", "Refresh() : %d, %d", GetX(), GetY());
-
-  // Si un ver touche la caisse, on la réinitialise
-  FOR_ALL_LIVING_CHARACTERS(equipe, ver)
-  {
-    if( ObjTouche(*ver) )
-    {
-      // Offre des dynamites
-      ApplyBonus (**equipe, *ver);
-
-      // Creation d'un nouvelle caisse
-      still_visible = false;
-      return;
-    }
-  }
-
-  // Refresh animation
-  if (!m_ready && !parachute) anim->Update();
-  
-  m_ready = anim->IsFinished();
-
-  if (m_ready){
-	  //MSG_DEBUG("bonus", "game_loop.SetState (gamePLAYING)");
-	  //game_loop.SetState (gamePLAYING);
-  }
-}
-
-void BonusBox::SignalGhostState (bool)
-{
-  if (!still_visible) return;
-
-  MSG_DEBUG("bonus", "Une caisse sort de l'écran !");
-  still_visible = false;
-}
-
-// Active les caisses ?
-void BonusBox::Active (bool actif)
-{
-  enable = actif;
-  
-  if (!enable) still_visible = false;
-}
-
