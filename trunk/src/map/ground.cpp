@@ -244,10 +244,6 @@ void Ground::Draw()
     app.video.window.BoxColor( Rectanglei(0, windowSize.y - margin.y, windowSize.x, margin.y), black_color);
   }
 
-#if defined(WIN32)
-  // TODO: Why the cache doesn't work on Windows!?
-  DrawTile();
-#else  
   if( lastPos != cPos ){
     lastPos = cPos;
     DrawTile();
@@ -261,7 +257,6 @@ void Ground::Draw()
 
   // Draw on top of new position of particles (redisplayed on top of particles)
   RedrawParticleList(*world.to_redraw_particles);
-#endif
 }
 
 void Ground::RedrawParticleList(std::list<Rectanglei> &list){
