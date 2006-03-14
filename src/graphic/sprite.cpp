@@ -32,6 +32,7 @@
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../tool/rectangle.h"
+#include "../tool/debug.h"
 
 #define BUGGY_SDLGFX
 
@@ -112,8 +113,10 @@ unsigned int Sprite::GetFrameCount(){
 
 void Sprite::SetCurrentFrame( unsigned int frame_no){
   assert (frame_no < frames.size());
-  if (current_frame != frame_no)
+  if (current_frame != frame_no) {
     cache.InvalidLastFrame();
+    MSG_DEBUG("sprite", "Set current frame : %d", frame_no);
+  }
   current_frame = frame_no;
 }
 
@@ -316,7 +319,7 @@ void Sprite::Start(){
 }
 
 void Sprite::Blit( Surface &dest, uint pos_x, uint pos_y){
-	RefreshSurface();
+  RefreshSurface();
     Blit(dest, pos_x, pos_y, 0, 0, current_surface.GetWidth(), current_surface.GetHeight());
 }
 

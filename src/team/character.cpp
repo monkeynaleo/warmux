@@ -58,7 +58,7 @@ const uint do_nothing_timeout = 5000;
 //#define DEBUG_CHG_ETAT
 //#define DEBUG_PLACEMENT
 //#define NO_POSITION_CHECK
-//#define DEBUG_SKIN
+#define DEBUG_SKIN
 
 #define COUT_DBG0 std::cerr << "[Character " << m_name << "]"
 #define COUT_DBG COUT_DBG0 " "
@@ -575,12 +575,13 @@ void Character::Refresh()
     {
       anim.image->SetCurrentFrame(0);
       anim.image->Start();
+      anim.image->animation.Start();
       anim.draw = true;
     }
 
     // Animation active
     if (anim.draw && (!GetSkin().anim.not_while_playing || &ActiveCharacter()!=this))
-    {
+    {      
       anim.image->Update();
 
       if ( anim.image->IsFinished() )
@@ -740,6 +741,7 @@ bool Character::SetSkin(const std::string& skin_name)
     SetSize(image->GetSize());
     image->SetCurrentFrame(0);
     image->Start();
+    image->animation.Start();
     PutOutOfGround();     
     //Restore skins direction
     if(current_skin!="" && sc_x<0)
