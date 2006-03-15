@@ -32,7 +32,7 @@ configure-stamp:
 	dh_testdir
 	# Add here commands to configure the package.
 	./autogen.sh
-	CFLAGS="$(CFLAGS)" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --enable-datadir-name=\$${prefix}/share/games/wormux --enable-localedir=\$${prefix}/share/locale
+	CFLAGS="$(CFLAGS)" ./configure --host=$(DEB_HOST_GNU_TYPE) --build=$(DEB_BUILD_GNU_TYPE) --prefix=/usr --mandir=\$${prefix}/share/man --infodir=\$${prefix}/share/info --with-datadir-name=\$${prefix}/share/games/wormux --with-localedir=\$${prefix}/share/locale
 
 	touch configure-stamp
 
