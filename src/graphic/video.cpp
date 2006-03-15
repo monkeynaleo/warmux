@@ -92,15 +92,16 @@ void Video::InitWindow(){
 	window.SetSurface( NULL , false );
 	window.SetAutoFree( false );
 
-	SetConfig(config.tmp.video.width,
-			config.tmp.video.height,
-			config.tmp.video.fullscreen);
+	Config * config = Config::GetInstance();
+	SetConfig(config->tmp.video.width,
+			config->tmp.video.height,
+			config->tmp.video.fullscreen);
 
 	if( window.IsNull() )
 		Error( "Unable to initialize SDL window.");
 
-	SetWindowCaption( std::string("Wormux ") + VERSION );
-	SetWindowIcon( config.data_dir + "wormux-32.xpm" );
+	SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
+	SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux-32.xpm" );
 }
 
 void Video::SetWindowCaption(std::string caption){

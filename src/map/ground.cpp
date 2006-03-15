@@ -47,8 +47,8 @@ void Ground::Init(){
   LoadImage ( m_image );
 
   // Vérifie la taille du terrain
-  assert(MAP_MIN_SIZE <= GetSize());
-  assert(GetSizeX()*GetSizeY() <= MAP_MAX_SIZE);
+  assert(Constants::MAP_MIN_SIZE <= GetSize());
+  assert(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
   
   // Vérifie si c'est un terrain ouvert ou fermé
   ouvert = lst_terrain.TerrainActif().is_opened;

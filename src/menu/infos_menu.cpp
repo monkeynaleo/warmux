@@ -76,7 +76,7 @@ std::string Author::PrettyString(bool with_email)
 
 void MenuInfos::Run()
 {
-  std::string filename = config.data_dir+"authors.xml";
+  std::string filename = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "authors.xml";
   LitDocXml doc;
   if (!doc.Charge (filename))
   {

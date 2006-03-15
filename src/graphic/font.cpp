@@ -52,7 +52,7 @@ Font* Font::GetInstance(int type) {
 
 Font::Font(int size){
   m_font = NULL;
-  bool ok = Load(config.ttf_filename, size);
+  bool ok = Load(Config::GetInstance()->GetTtfFilename(), size);
   
   if( !ok )
     Error("Error during initialisation of a font!");

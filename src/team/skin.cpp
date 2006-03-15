@@ -291,7 +291,7 @@ void InitSkins()
   std::cout << "o " << _("Load skins:");
   std::cout.flush();
    
-  std::string dirname = config.data_dir + "skin" + PATH_SEPARATOR;
+  std::string dirname = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "skin" + PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
   struct dirent *file;
   DIR *dir = opendir(dirname.c_str());
@@ -323,7 +323,7 @@ void InitSkins()
 #endif
    
 #if !defined(WIN32) || defined(__MINGW32__)
-  dirname = config.GetWormuxPersonalDir()+"skin"+PATH_SEPARATOR;
+  dirname = Config::GetInstance()->GetPersonalDir() + PATH_SEPARATOR + "skin" + PATH_SEPARATOR;
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL)

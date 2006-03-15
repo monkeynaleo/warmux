@@ -138,7 +138,7 @@ void JukeBox::LoadXML(const std::string& profile)
   LitDocXml doc;
 
   // Load the XML
-  std::string folder = config.data_dir + "sound"+ PATH_SEPARATOR + profile + PATH_SEPARATOR;
+  std::string folder = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "sound"+ PATH_SEPARATOR + profile + PATH_SEPARATOR;
   std::string xml_filename = folder + "profile.xml";
   if( !IsFileExist(xml_filename) ){
     std::cerr << "[Sound] Error : file " << xml_filename << " not found" << std::endl;

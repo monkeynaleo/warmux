@@ -2,8 +2,8 @@ SUBDIRS = .
 
 bin_PROGRAMS = wormux
 
-pkgdatadir=$(datadir)/@DATADIR@
-localedir=$(datadir)/@LOCALEDIR@
+pkgdatadir=@DATADIR@
+localedir=@LOCALEDIR@
 
 wormux_SOURCES = \
 	include/base.h include/enum.h \
@@ -112,9 +112,6 @@ wormux_SOURCES = \
 	weapon/supertux.cpp weapon/supertux.h \
 	weapon/teleportation.cpp weapon/teleportation.h \
 	weapon/uzi.cpp weapon/uzi.h
-
-#AM_CXXFLAGS = -pg @SDL_CFLAGS@ @LIBXMLPP_CFLAGS@ @PARAGUI_CFLAGS@ -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
-#LIBS = $(SDL_LIBS) $(LIBXMLPP_LIBS) $(PARAGUI_LIBS)
 
 AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
 

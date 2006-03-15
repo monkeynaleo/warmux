@@ -223,7 +223,8 @@ void ListeTerrain::Init()
 
   std::cout << "o " << _("Load maps:");
 
-  std::string dirname = config.data_dir+ CONCAT_DIR("map", "");
+  Config * config = Config::GetInstance();
+  std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "map" + PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
   DIR *dir = opendir(dirname.c_str());
   struct dirent *file;
@@ -256,7 +257,7 @@ void ListeTerrain::Init()
 
 #if !defined(WIN32) || defined(__MINGW32__)
   // Load personal maps
-  dirname = config.GetWormuxPersonalDir() + CONCAT_DIR("map","");
+  dirname = config->GetPersonalDir() + PATH_SEPARATOR + "map";
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL) 

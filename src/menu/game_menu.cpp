@@ -185,7 +185,7 @@ void GameMenu::SaveOptions()
   }
    
   //Save options in XML
-  config.Sauve();
+  Config::GetInstance()->Save();
 }
 
 void GameMenu::__sig_ok()

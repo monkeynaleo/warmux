@@ -154,10 +154,12 @@ OptionMenu::OptionMenu() :
 
   resource_manager.UnLoadXMLProfile( res);
 
+  Config * config = Config::GetInstance();
+
   opt_max_fps->SetValue (app.video.GetMaxFps());
-  opt_display_wind_particles->SetValue (config.display_wind_particles);
-  opt_display_energy->SetValue (config.display_energy_character);
-  opt_display_name->SetValue (config.display_name_character);
+  opt_display_wind_particles->SetValue (config->GetDisplayWindParticles());
+  opt_display_energy->SetValue (config->GetDisplayEnergyCharacter());
+  opt_display_name->SetValue (config->GetDisplayNameCharacter());
   full_screen->SetValue (app.video.IsFullScreen());
   opt_duration_turn->SetValue(game_mode.duration_turn);
   opt_duration_end_turn->SetValue(game_mode.duration_move_player);
@@ -186,9 +188,10 @@ void OptionMenu::OnClic(const Point2i &mousePosition, int button)
 void OptionMenu::SaveOptions()
 {
   // Save values
-  config.display_wind_particles = opt_display_wind_particles->GetValue();
-  config.display_energy_character = opt_display_energy->GetValue();
-  config.display_name_character = opt_display_name->GetValue();
+  Config * config = Config::GetInstance();
+  config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
+  config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
+  config->SetDisplayNameCharacter(opt_display_name->GetValue());
 
   game_mode.duration_turn = opt_duration_turn->GetValue() ;
   game_mode.duration_move_player = opt_duration_end_turn->GetValue() ;
@@ -218,7 +221,7 @@ void OptionMenu::SaveOptions()
   jukebox.Init(); // commit modification on sound options
    
   //Save options in XML
-  config.Sauve();
+  config->Save();
 }
 
 void OptionMenu::__sig_ok()

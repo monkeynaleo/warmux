@@ -66,6 +66,8 @@ PhysicalObj::PhysicalObj (GameLoop &p_game_loop, const std::string &name, double
   m_test_bottom = 0;
 
   m_ready = true;
+  
+  exterieur_monde_vide = Config::GetInstance()->GetExterieurMondeVide();
 }
 
 PhysicalObj::~PhysicalObj ()
@@ -219,7 +221,7 @@ bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
     
     // Check if we exit the world. If so, we stop moving and return.
     if( IsOutsideWorldXY(tmpPos) ){
-		if( !config.exterieur_monde_vide ){
+		if( !exterieur_monde_vide ){
 	    	tmpPos.x = BorneLong(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
 		    tmpPos.y = BorneLong(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
 			
@@ -435,7 +437,7 @@ bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const{
 bool PhysicalObj::FootsOnFloor(int y) const
 {
   // If outside is empty, the object can't hit the ground !
-  if (config.exterieur_monde_vide) return false;
+  if (exterieur_monde_vide) return false;
 
   const int y_max = world.GetHeight()-m_height +m_test_bottom;
   return (y_max <= y);
@@ -447,7 +449,7 @@ bool PhysicalObj::IsInVacuum(const Point2i &offset) const{
 
 bool PhysicalObj::IsInVacuumXY(const Point2i &position) const{
   if( IsOutsideWorldXY(position) )
-	  return config.exterieur_monde_vide;
+	  return exterieur_monde_vide;
   
   if( FootsOnFloor(position.y - 1) )
 	  return false;
@@ -466,7 +468,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 {
   if( IsOutsideWorldXY(position) ){
 	MSG_DEBUG("physical", "physobj is outside the world");
-	return config.exterieur_monde_vide;
+	return exterieur_monde_vide;
   }
    
   if( FootsOnFloor(position.y) ){

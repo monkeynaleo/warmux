@@ -101,20 +101,22 @@ int AppWormux::main (int argc, char **argv){
 }
 
 void AppWormux::Init(int argc, char **argv){
-  InitConstants();
+  Config * config = Config::GetInstance();
+  config->Init();
+
   InitI18N();
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
 
   action_handler.Init();
-  config.Charge();
+  config->Load();
 
   InitNetwork(argc, argv);
   video.InitWindow();
   InitFonts();
 
   DisplayLoadingPicture();
-  config.Applique();
+  config->Apply();
 
   jukebox.Init();
 }
@@ -132,8 +134,13 @@ void AppWormux::InitNetwork(int argc, char **argv){
 }
 
 void AppWormux::DisplayLoadingPicture(){
-  std::string txt_version = _("Version") + std::string(" ") + VERSION;
-  std::string filename = config.data_dir + CONCAT_DIR("menu", CONCAT_DIR("img", "loading.png"));
+  Config * config = Config::GetInstance();
+
+  std::string txt_version = _("Version") + std::string(" ") + Constants::VERSION;
+  std::string filename = config->GetDataDir() 
+    + PATH_SEPARATOR + "menu"
+    + PATH_SEPARATOR + "img"
+    + PATH_SEPARATOR + "loading.png";
 
   Surface surfaceLoading = Surface( filename.c_str() );
   Sprite loading_image = Sprite( surfaceLoading );
@@ -164,7 +171,7 @@ void AppWormux::End(){
   std::cout << std::endl
 	    << "[ " << _("Quit Wormux") << " ]" << std::endl;
 
-  config.Sauve();
+  Config::GetInstance()->Save();
   jukebox.End();
   TTF_Quit();
 
@@ -172,28 +179,28 @@ void AppWormux::End(){
   SaveStatToXML("stats.xml");
 #endif  
   std::cout << "o "
-            << _("Please tell us your opinion of Wormux via email:") << " " << EMAIL
+            << _("Please tell us your opinion of Wormux via email:") << " " << Constants::EMAIL
             << std::endl;
 }
 
 void AppWormux::DisplayWelcomeMessage(){
-  std::cout << "=== " << _("Wormux version ") << VERSION << std::endl;
+  std::cout << "=== " << _("Wormux version ") << Constants::VERSION << std::endl;
   std::cout << "=== " << _("Authors:") << ' ';
-  for( std::vector<std::string>::iterator it=AUTHORS.begin(),
-       fin=AUTHORS.end();
+  for( std::vector<std::string>::iterator it=Constants::AUTHORS.begin(),
+       fin=Constants::AUTHORS.end();
        it != fin;
        ++it)
   {
-    if( it != AUTHORS.begin() )
+    if( it != Constants::AUTHORS.begin() )
       std::cout << ", ";
     std::cout << *it;
   }
   std::cout << std::endl
-	    << "=== " << _("Website: ") << WEB_SITE << std::endl
+	    << "=== " << _("Website: ") << Constants::WEB_SITE << std::endl
 	    << std::endl;
 
   // Affiche l'absence de garantie sur le jeu
-  std::cout << "Wormux version " << VERSION
+  std::cout << "Wormux version " << Constants::VERSION
 	    << ", Copyright (C) 2001-2004 Lawrence Azzoug"
 	    << std::endl
 	    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl

@@ -69,7 +69,7 @@ void Map::Reset()
   // Configure le jeu selon que le terrain soit ouvert ou non
   bool ouvert = ground.EstOuvert();
   BonusBox::Enable(ouvert);
-  config.exterieur_monde_vide = ouvert;
+  Config::GetInstance()->SetExterieurMondeVide(  ouvert );
 
   delete author_info1; author_info1 = NULL;
   delete author_info2; author_info2 = NULL;
@@ -206,7 +206,7 @@ bool Map::LigneV_EstDansVide (int x, int top, int bottom)
 
   // Vérifie qu'on reste dans le monde
   if (EstHorsMondeX(x) || EstHorsMondeYhaut(top, bottom-top+1))
-    return config.exterieur_monde_vide;
+    return Config::GetInstance()->GetExterieurMondeVide();
   if (top < 0) top = 0;
   if ((int)GetHeight() <= bottom) bottom = GetHeight()-1;
 

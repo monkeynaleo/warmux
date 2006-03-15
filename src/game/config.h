@@ -31,12 +31,9 @@
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)
 #define PATH_SEPARATOR "\\"
-#define XXXCONCAT_DIR(a,b) a "\\" b
 #else
 #define PATH_SEPARATOR "/"
-#define XXXCONCAT_DIR(a,b) a "/" b
 #endif
-#define CONCAT_DIR(a,b) XXXCONCAT_DIR(a,b)
 
 #ifdef __MINGW32__
 #undef LoadImage
@@ -46,12 +43,29 @@
 class Config
 {
 public:
+  static const int ALPHA = 0;
+  static const int COLORKEY = 1;
+
   // Divers
-  bool exterieur_monde_vide;
-  bool display_energy_character;
-  bool display_name_character;
-  bool display_wind_particles;
-  std::string ttf_filename;
+  bool GetExterieurMondeVide() const;
+  void SetExterieurMondeVide(bool emv);
+
+  bool GetDisplayEnergyCharacter() const;
+  void SetDisplayEnergyCharacter(bool dec);
+
+  bool GetDisplayNameCharacter() const;
+  void SetDisplayNameCharacter(bool dnc);
+
+  bool GetDisplayWindParticles() const;
+  void SetDisplayWindParticles(bool dwp);
+
+  int GetTransparency() const;
+
+  std::string GetTtfFilename() const;
+
+  std::string GetDataDir() const;
+  std::string GetLocaleDir() const;
+  std::string GetPersonalDir() const;
 
   // Tempory values (loaded from XML, but may change during running)
   struct tmp_xml_config{
@@ -67,33 +81,36 @@ public:
     std::list<std::string> teams;
     std::string map_name;
   } tmp;
-   enum Transparency 
-     {
-	ALPHA,
-	COLORKEY,
-     };
-   Transparency transparency;
   
-  std::string data_dir, locale_dir, personal_dir;
-
-public:
-  Config();
-  bool Charge();
-  void Applique();
-  bool Sauve();
-
-  // Return ~/.wormux/
-  std::string GetWormuxPersonalDir() const;
+  static Config * GetInstance();
+  void Init();
+  bool Load();
+  void Apply();
+  bool Save();
 
 protected:
-  std::string m_game_mode;
   bool ChargeVraiment();
   bool ChargeXml (xmlpp::Element *xml);
   void SetKeyboardConfig();
   bool SauveXml();
+  std::string * GetEnv(const std::string & name, const std::string & dft);
+
+  std::string m_game_mode;
   bool m_xml_charge;
   std::string m_nomfich;
-};
 
-extern Config config;
+  std::string data_dir, locale_dir, personal_dir;
+
+  bool exterieur_monde_vide;
+  bool display_energy_character;
+  bool display_name_character;
+  bool display_wind_particles;
+  std::string ttf_filename;
+
+  int transparency;
+
+private:
+  Config();
+  static Config * singleton;
+};
 #endif

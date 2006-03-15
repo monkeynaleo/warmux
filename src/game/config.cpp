@@ -24,6 +24,7 @@
 #include "config.h"
 
 #include <sstream>
+#include <string>
 #include <iostream>
 #include <sys/stat.h>
 #include <errno.h>
@@ -46,9 +47,15 @@
 #include "../tool/i18n.h"
 #include "../weapon/weapons_list.h"
 
-Config config;
-
 const std::string NOMFICH="config.xml";
+Config * Config::singleton = NULL;
+
+Config * Config::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Config();
+  }
+  return singleton;
+}
 
 Config::Config()
 {
@@ -60,16 +67,6 @@ Config::Config()
   display_wind_particles = true;
   transparency = ALPHA;
    
-  // directories
-#ifndef WIN32
-  data_dir = CONCAT_DIR(INSTALL_DATADIR,"");
-  locale_dir = CONCAT_DIR(INSTALL_LOCALEDIR,"");
-#else
-  data_dir = "data\\";
-  locale_dir = "locale\\";
-#endif
-  ttf_filename = data_dir + CONCAT_DIR("font", "DejaVuSans.ttf");
-
   // video
   tmp.video.width = 800;
   tmp.video.height = 600;
@@ -78,6 +75,22 @@ Config::Config()
   tmp.sound.music = true;
   tmp.sound.effects = true;
   tmp.sound.frequency = 44100;
+}
+
+void Config::Init()
+{
+  Constants::GetInstance();
+
+  // directories
+#ifndef WIN32
+  data_dir = *GetEnv(Constants::ENV_DATADIR, Constants::DEFAULT_DATADIR);
+  locale_dir = *GetEnv(Constants::ENV_LOCALEDIR, Constants::DEFAULT_LOCALEDIR);
+#else
+  data_dir = "data\\";
+  locale_dir = "locale\\";
+#endif
+  std::string dft_font_path = std::string(data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf");
+  ttf_filename = *GetEnv(Constants::ENV_FONT_PATH, dft_font_path);
 
 #ifndef WIN32
   personal_dir = GetHome()+"/.wormux/";
@@ -86,15 +99,15 @@ Config::Config()
 #endif
 }
 
-bool Config::Charge()
+bool Config::Load()
 {
   bool result = ChargeVraiment();
   std::string dir;
   dir = TranslateDirectory(locale_dir);
-  I18N_SetDir (dir);
+  I18N_SetDir (dir + PATH_SEPARATOR);
 
   dir = TranslateDirectory(data_dir);
-  resource_manager.AddDataPath(dir);
+  resource_manager.AddDataPath(dir + PATH_SEPARATOR);
   return result;
 }
 
@@ -125,21 +138,7 @@ bool Config::ChargeVraiment()
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
   xmlpp::Element *elem;
-  std::string config_version;
   
-  if (!LitDocXml::LitString  (xml, "version", config_version)
-      || config_version != VERSION)
-  {
-      std::cerr << "! " << _("Warning: Don't load configuration (old version of Wormux).") << std::endl;
-      return false;
-  }
-
-  //=== Directories ===
-  LitDocXml::LitString  (xml, "data_dir", data_dir);
-  LitDocXml::LitString  (xml, "locale_dir", locale_dir);
-  if(!LitDocXml::LitString  (xml, "ttf_filename", ttf_filename))
-    ttf_filename = data_dir + CONCAT_DIR("font", "DejaVuSans.ttf");
- 
   //=== Map ===
   LitDocXml::LitString  (xml, "map", tmp.map_name);
 
@@ -174,7 +173,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 	  transparency = COLORKEY;
 	else
 	  {
-	    std::cerr << "o Unknow transparency \"" << transparency_str  
+	    std::cerr << "o Unknown transparency \"" << transparency_str  
 		      << "\" in config.xml [IGNORED]." << std::endl;
 	  }	  
       }
@@ -221,7 +220,7 @@ void Config::SetKeyboardConfig()
 	clavier.SetKeyAction(SDLK_c, ACTION_CENTER);
 }
 
-void Config::Applique()
+void Config::Apply()
 {
   SetKeyboardConfig();
 
@@ -249,7 +248,7 @@ void Config::Applique()
     lst_terrain.ChangeTerrain (0);
 }
 
-bool Config::Sauve()
+bool Config::Save()
 {
   std::string rep = personal_dir;
   
@@ -280,12 +279,7 @@ bool Config::SauveXml()
 
   doc.Cree (m_nomfich, "config", "1.0", "iso-8859-1");
   xmlpp::Element *racine = doc.racine();
-  doc.EcritBalise (racine, "version", VERSION);
-
-  //=== Directories ===
-  doc.EcritBalise (racine, "data_dir", data_dir);
-  doc.EcritBalise (racine, "locale_dir", locale_dir);
-  doc.EcritBalise (racine, "ttf_filename", ttf_filename);
+  doc.EcritBalise (racine, "version", Constants::VERSION);
 
   //=== Terrain ===
   doc.EcritBalise (racine, "map", lst_terrain.TerrainActif().name);
@@ -330,7 +324,83 @@ bool Config::SauveXml()
   return doc.Sauve();
 }
 
-std::string Config::GetWormuxPersonalDir() const {
+/*
+ * Return the value of the environment variable 'name' or
+ * 'dft' if not set
+ */
+std::string * Config::GetEnv(const std::string & name, const std::string & dft) {
+  std::string * value;
+  char * c_value = std::getenv(name.c_str());
+  
+  if (c_value != NULL) {
+    value = new std::string(c_value);
+  } else {
+    value = new std::string(dft);
+  }
+  return value;
+}
+
+std::string Config::GetDataDir() const
+{
+  return data_dir;
+}
+
+std::string Config::GetLocaleDir() const
+{
+  return locale_dir;
+}
+
+std::string Config::GetPersonalDir() const
+{
   return personal_dir;
 }
 
+bool Config::GetExterieurMondeVide() const
+{
+  return exterieur_monde_vide;
+}
+
+bool Config::GetDisplayEnergyCharacter() const 
+{
+  return display_energy_character;
+}
+
+bool Config::GetDisplayNameCharacter() const
+{
+  return display_name_character;
+}
+
+bool Config::GetDisplayWindParticles() const
+{
+  return display_wind_particles;
+}
+
+std::string Config::GetTtfFilename() const
+{
+  return ttf_filename;
+}
+
+void Config::SetDisplayEnergyCharacter(bool dec)
+{
+  display_energy_character = dec;
+}
+
+void Config::SetDisplayNameCharacter(bool dnc)
+{
+  display_name_character = dnc;
+}
+
+void Config::SetDisplayWindParticles(bool dwp)
+{
+  display_wind_particles = dwp;
+}
+
+void Config::SetExterieurMondeVide(bool emv)
+{
+  exterieur_monde_vide = emv;
+}
+
+int Config::GetTransparency() const
+{
+  return transparency;
+}

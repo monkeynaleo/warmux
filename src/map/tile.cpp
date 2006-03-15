@@ -75,7 +75,7 @@ void Tile::LoadImage (Surface& terrain){
 
     // Create the TileItem objects
     for (uint i=0; i<nbr_cell; ++i)
-        if ( config.transparency == Config::ALPHA )
+        if ( Config::GetInstance()->GetTransparency() == Config::ALPHA )
             item.push_back ( new TileItem_AlphaSoftware(CELL_SIZE) );
         else
             item.push_back ( new TileItem_ColorkeySoftware(CELL_SIZE) );

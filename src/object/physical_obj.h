@@ -70,6 +70,8 @@ private:
   // Rectangle used for collision tests
   uint m_test_left, m_test_right, m_test_top, m_test_bottom;
 
+  bool exterieur_monde_vide;
+
 protected:
   // Used by the sons of this class to allow modification of READY/BUSY state
   // (Unused by PhysicalObj)

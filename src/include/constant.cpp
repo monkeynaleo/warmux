@@ -21,42 +21,44 @@
 
 #include "constant.h"
 
-const std::string VERSION("0.7beta3 (" __DATE__ ")");
+const std::string Constants::VERSION = "0.7beta3 (" __DATE__ ")";
 
-#ifndef INSTALL_DATADIR
-#  define INSTALL_DATADIR "data/"
-#endif
-
-// Installation directory (with slash)
-const std::string DEFAULT_DATADIR(INSTALL_DATADIR);
-
-#ifndef INSTALL_LOCALEDIR
-#  define INSTALL_LOCALEDIR "locale/"
-#endif
-
-// Installation diretory (with slash)
-const std::string DEFAULT_LOCALEDIR(INSTALL_LOCALEDIR);
+const std::string Constants::DEFAULT_DATADIR = INSTALL_DATADIR;
+const std::string Constants::DEFAULT_LOCALEDIR = INSTALL_LOCALEDIR;
+const std::string Constants::ENV_DATADIR = "WORMUX_DATADIR";
+const std::string Constants::ENV_LOCALEDIR = "WORMUX_LOCALEDIR";
+const std::string Constants::ENV_FONT_PATH = "WORMUX_FONT_PATH";
 
 // Nombre de boucles maximum pour le test ...
-const uint NBR_BCL_MAX_EST_VIDE = 200; // Un objet est dans le vide ?
+const uint Constants::NBR_BCL_MAX_EST_VIDE = 200; // Un objet est dans le vide ?
 
-std::vector<std::string> AUTHORS;
+std::vector<std::string> Constants::AUTHORS;
 
-const std::string WEB_SITE("http://www.wormux.org");
-const std::string EMAIL("wormux-dev@gna.org");
+const std::string Constants::WEB_SITE = "http://www.wormux.org";
+const std::string Constants::EMAIL = "wormux-dev@gna.org";
 
 // Dimensions min/max du terrain (en pixel)
-const Point2i MAP_MIN_SIZE(100, 200);
-const int MAP_MAX_SIZE = 4000*4000;
+const Point2i Constants::MAP_MIN_SIZE = Point2i(100, 200);
+const int Constants::MAP_MAX_SIZE = 4000*4000;
 
 // Hauteur minimale libre pour que le terrain soit qualifié " d'ouvert "
-const uint HAUT_MIN_TERRAIN_OUVERT = 40;
+const uint Constants::HAUT_MIN_TERRAIN_OUVERT = 40;
 
-void InitConstants(){
+Constants * Constants::singleton = NULL;
+
+Constants::Constants()
+{
   AUTHORS.push_back ("Lawrence AZZOUG");
   AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
   AUTHORS.push_back ("Jean-Christophe DUBERGA");
   AUTHORS.push_back ("Matthieu FERTRE");
   AUTHORS.push_back ("Renaud LOTTIAUX");
   AUTHORS.push_back ("Victor STINNER");
+}
+
+Constants * Constants::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Constants();
+  }
+  return singleton;
 }
