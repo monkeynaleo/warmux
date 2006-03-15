@@ -113,7 +113,7 @@ void TeamsList::LoadList()
   std::cout << "o " << _("Load teams:");
   
   // Load Wormux teams
-  std::string dirname = config.data_dir + CONCAT_DIR("team", "");
+  std::string dirname = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "team" + PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
   struct dirent *file;
   DIR *dir = opendir(dirname.c_str());
@@ -143,7 +143,8 @@ void TeamsList::LoadList()
 
   // Load personal teams
 #if !defined(WIN32) || defined(__MINGW32__)
-  dirname = config.GetWormuxPersonalDir() + CONCAT_DIR("team","");
+  dirname = Config::GetInstance()->GetPersonalDir() + PATH_SEPARATOR 
+    + "team" + PATH_SEPARATOR;
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
     while ((file = readdir(dir)) != NULL) LoadOneTeam (dirname, file->d_name);

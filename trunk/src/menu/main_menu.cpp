@@ -31,7 +31,7 @@
 #include "../graphic/font.h"
 #include "../graphic/fps.h"
 #include "../include/app.h"
-#include "../include/constant.h" // VERSION
+#include "../include/constant.h"
 #include "../sound/jukebox.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
@@ -119,11 +119,31 @@ Main_Menu::Main_Menu()
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
   large_font = Font::GetInstance(Font::FONT_LARGE);
 
-  background = new Sprite(Surface( config.data_dir + "menu/img/background.png" ));
+  Config * config = Config::GetInstance();
+  background = new Sprite(Surface( 
+		 config->GetDataDir() + PATH_SEPARATOR 
+		 + "menu" + PATH_SEPARATOR 
+		 + "img" + PATH_SEPARATOR
+		 + "background.png" ));
   background->cache.EnableLastFrameCache();
-  title = new Sprite(Surface( config.data_dir + "menu/img/title.png" ));
-  skin_left = new Sprite(Surface( config.data_dir + "menu/img/skin01.png" ));
-  skin_right = new Sprite(Surface( config.data_dir + "menu/img/skin02.png" ));
+
+  title = new Sprite(Surface( 
+		 config->GetDataDir() + PATH_SEPARATOR
+		 + "menu" + PATH_SEPARATOR
+		 + "img" + PATH_SEPARATOR 
+		 + "title.png" ));
+
+  skin_left = new Sprite(Surface( 
+		 config->GetDataDir() + PATH_SEPARATOR 
+		 + "menu" + PATH_SEPARATOR 
+		 + "img" + PATH_SEPARATOR
+		 "skin01.png" ));
+
+  skin_right = new Sprite(Surface( 
+		 config->GetDataDir() + PATH_SEPARATOR
+		 + "menu" + PATH_SEPARATOR 
+		 + "img" + PATH_SEPARATOR 
+		 + "skin02.png" ));
 
   button_height = 64;
   button_width = 402;
@@ -182,10 +202,10 @@ Main_Menu::Main_Menu()
 
   resource_manager.UnLoadXMLProfile( res);
 
-  std::string s("Version "+VERSION);
+  std::string s("Version "+Constants::VERSION);
   version_text = new Text(s, green_color, normal_font, false);
 
-  std::string s2(WEB_SITE);
+  std::string s2(Constants::WEB_SITE);
   website_text = new Text(s2, green_color, normal_font, false);
 }
 

@@ -131,12 +131,18 @@ bool GameMode::Load(const std::string &mode)
   try
   {
     LitDocXml doc;
-    std::string filename = std::string("game_mode") + std::string(PATH_SEPARATOR)
-			 + mode + std::string(".xml");
-    fullname = config.GetWormuxPersonalDir() + filename;
+    std::string filename = 
+      PATH_SEPARATOR
+      + std::string("game_mode") 
+      + std::string(PATH_SEPARATOR)
+      + mode 
+      + std::string(".xml");
+
+    Config * config = Config::GetInstance();
+    fullname = config->GetPersonalDir() + filename;
 
     if( !IsFileExist(fullname) )
-      fullname = config.data_dir+filename;
+      fullname = config->GetDataDir() + filename;
     if( !doc.Charge(fullname) )
       return false;
     if( !LoadXml (doc.racine()) )

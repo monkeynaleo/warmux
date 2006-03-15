@@ -26,31 +26,57 @@
 #include <vector>
 #include "tool/point.h"
 
-void InitConstants();
+class Constants
+{
+public:
+  // Version number of Wormux
+  static const std::string VERSION;
+  
+  /*
+   * Data path: 
+   * INSTALL_DATADIR set by configure script to 
+   * "/usr/share/wormux" by default
+   * Override with --with-datadir-name
+   */
+  static const std::string DEFAULT_DATADIR;
+  
+  /*
+   * Locales path: 
+   * INSTALL_LOCALEDIR set by configure script to 
+   * "/usr/share/locale" by default
+   * Override with --with-localedir-name
+   */
+  static const std::string DEFAULT_LOCALEDIR;
+  
+  // Env variables name to override previous values
+  static const std::string ENV_DATADIR;
+  static const std::string ENV_LOCALEDIR;
+  static const std::string ENV_FONT_PATH;
+  
+  // Nombre de boucles maximum pour le test ...
+  static const uint NBR_BCL_MAX_EST_VIDE; // Un objet est dans le vide ?
+  
+  // Authors list
+  static std::vector<std::string> AUTHORS;
+  
+  // Web site address and email
+  static const std::string WEB_SITE;
+  static const std::string EMAIL;
+  
+  // Dimensions min/max du terrain (en pixel)
+  static const Point2i MAP_MIN_SIZE;
+  static const int MAP_MAX_SIZE;
+  
+  // Hauteur (en pixel) minimale libre pour que le terrain
+  // soit qualifié " d'ouvert "
+  static const uint HAUT_MIN_TERRAIN_OUVERT;
 
-// Version number of Wormux
-extern const std::string VERSION;
+  static Constants * GetInstance();
+  
+private:
+  Constants();
 
-// Installation directories (with slash)
-extern const std::string DEFAULT_DATADIR;
-extern const std::string DEFAULT_LOCALEDIR;
-
-// Nombre de boucles maximum pour le test ...
-extern const uint NBR_BCL_MAX_EST_VIDE; // Un objet est dans le vide ?
-
-// Authors list
-extern std::vector<std::string> AUTHORS;
-
-// Web site address and email
-extern const std::string WEB_SITE;
-extern const std::string EMAIL;
-
-// Dimensions min/max du terrain (en pixel)
-extern const Point2i MAP_MIN_SIZE;
-extern const int MAP_MAX_SIZE;
-
-// Hauteur (en pixel) minimale libre pour que le terrain
-// soit qualifié " d'ouvert "
-extern const uint HAUT_MIN_TERRAIN_OUVERT;
+  static Constants * singleton;
+};
 
 #endif

@@ -198,7 +198,7 @@ void Character::DrawName (int dy) const
   const int x =  GetCenterX();
   const int y = GetY()+dy;
 
-  if (config.display_name_character)
+  if (Config::GetInstance()->GetDisplayNameCharacter())
   {
     name_text->DrawCenterTopOnMap(x,y);
   }
@@ -340,7 +340,8 @@ void Character::Draw()
    // Draw energy bar
   int dy = -ESPACE;
   bool est_ver_actif = (this == &ActiveCharacter());
-  bool display_energy = config.display_energy_character;
+  Config * config = Config::GetInstance();
+  bool display_energy = config->GetDisplayEnergyCharacter();
   display_energy &= !est_ver_actif || (game_loop.ReadState() != gamePLAYING);
   display_energy |= dessine_perte;
   display_energy &= !IsDead();
@@ -352,7 +353,7 @@ void Character::Draw()
   }
 
   // Draw name
-  if (config.display_name_character && !est_ver_actif) 
+  if (config->GetDisplayNameCharacter() && !est_ver_actif) 
   { 
     dy -= HAUT_FONT_MIX;
     DrawName (dy);
@@ -877,7 +878,7 @@ void Character::Reset()
 
 
   // Prépare l'image du nom
-  if (config.display_name_character && name_text == NULL)
+  if (Config::GetInstance()->GetDisplayNameCharacter() && name_text == NULL)
   {
     name_text = new Text(m_name);
   }
@@ -894,7 +895,7 @@ void Character::Reset()
   do
   {
     // Vérifie qu'on ne tourne pas en rond
-    FORCE_ASSERT (++bcl < NBR_BCL_MAX_EST_VIDE);
+    FORCE_ASSERT (++bcl < Constants::NBR_BCL_MAX_EST_VIDE);
 
     // Objet physique dans l'état prêt
     pos_ok = true;

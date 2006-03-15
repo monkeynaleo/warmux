@@ -75,7 +75,7 @@ void I18N_SetDir(const std::string &dir){
 
 void InitI18N(){
   setlocale (LC_ALL, "");
-  I18N_SetDir (config.locale_dir.c_str());
+  I18N_SetDir (Config::GetInstance()->GetLocaleDir().c_str());
   textdomain(GETTEXT_DOMAIN);
 }
 

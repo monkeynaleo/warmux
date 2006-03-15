@@ -73,16 +73,16 @@ AC_ARG_ENABLE([static],
 #       fi
 #fi
 
-DATADIR="games/wormux"
+DATADIR="/usr/share/wormux"
 AC_ARG_WITH(datadir-name,
-    [  --with-datadir-name=DIR       specify where datas are installed],
+    [  --with-datadir-name=DIR       specify where datas are installed (default: /usr/share/wormux)],
     [DATADIR="$withval"])
 AC_SUBST([DATADIR])
 	
 
-LOCALEDIR="locale"
+LOCALEDIR="/usr/share/locale"
 AC_ARG_WITH(localedir-name,
-    [  --with-localedir-name=DIR       specify where locales are installed],
+    [  --with-localedir-name=DIR       specify where locales are installed (default: /usr/share/locale)],
     [LOCALEDIR="$withval"])
 AC_SUBST([LOCALEDIR])
 		
@@ -241,8 +241,8 @@ AC_MSG_RESULT([
 
 Configuration complete
 
-* Game data will be installed into PREFIX/$DATADIR
-* Game locale will be installed into PREFIX/$LOCALEDIR
+* Game data will be installed into $DATADIR
+* Game locale will be installed into $LOCALEDIR
 
 Execute make to compile then execute make install to install...
 

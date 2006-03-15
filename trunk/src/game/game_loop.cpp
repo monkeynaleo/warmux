@@ -217,7 +217,12 @@ void InitGameData(GameLoop &game_loop)
 void InitGame (GameLoop &game_loop)
 {
   // Display loading screen
-  Sprite * loading_image=new Sprite(Surface((config.data_dir+"menu/img/loading.png").c_str()));
+  Config * config = Config::GetInstance();
+  Sprite * loading_image = new Sprite(Surface((
+			     config->GetDataDir() + PATH_SEPARATOR
+			     + "menu" + PATH_SEPARATOR
+			     + "img" + PATH_SEPARATOR 
+			     + "loading.png").c_str()));
   loading_image->cache.EnableLastFrameCache();
   loading_image->ScaleSize(app.video.window.GetWidth(), app.video.window.GetHeight());
   loading_image->Blit( app.video.window, 0, 0);
@@ -259,7 +264,7 @@ void InitGame (GameLoop &game_loop)
   // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
    
-  if (!config.display_wind_particles) {
+  if (!config->GetDisplayWindParticles()) {
     TerrainActif().wind.nb_sprite = 0;
   } else {
     TerrainActif().wind.nb_sprite = TerrainActif().wind.default_nb_sprite;
