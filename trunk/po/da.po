@@ -36,12 +36,12 @@ msgstr "  Mest ubrugelig  :  %s (%i).\n"
 msgid "  Most violent  :  %s (%i).\n"
 msgstr "  Mest voldelig  :  %s (%i).\n"
 
-#: src/map/maps_list.cpp:293
+#: src/map/maps_list.cpp:294
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Banen %s ikke fundet :-("
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:677
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s team) blev udslettet."
@@ -56,7 +56,7 @@ msgstr "%s <%s> også kendt som %s fra %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
 
-#: src/game/game_loop.cpp:650
+#: src/game/game_loop.cpp:655
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begik selvmord !"
@@ -66,12 +66,12 @@ msgstr "%s begik selvmord !"
 msgid "%s fps"
 msgstr "%s FPS"
 
-#: src/game/game_loop.cpp:643
+#: src/game/game_loop.cpp:648
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s faldt i vandet."
 
-#: src/game/game_loop.cpp:654
+#: src/game/game_loop.cpp:659
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s faldt ud af banen!"
@@ -90,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har fået %u point energi!"
 msgstr[1] "%s har fået %u point energi!"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:670
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s er en psychopat, han dræbte et medlem fra %ss hold!"
 
-#: src/game/game_loop.cpp:660
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s døde fordi han var klodset!"
@@ -158,7 +158,7 @@ msgstr "Luftangreb"
 msgid "All-Team results:\n"
 msgstr "Alle holds resultater:\n"
 
-#: src/main.cpp:182
+#: src/main.cpp:188
 msgid "Authors:"
 msgstr "Forfattere:"
 
@@ -178,7 +178,7 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "C++ undtagelse fanget:"
 
-#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
+#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan ikke finde holdet %s!"
@@ -196,7 +196,7 @@ msgstr "Klyngebombe"
 msgid "Commit suicide"
 msgstr "Begå selvmord"
 
-#: src/menu/main_menu.cpp:174
+#: src/menu/main_menu.cpp:194
 msgid "Credits"
 msgstr "Udviklere"
 
@@ -251,7 +251,7 @@ msgstr "Fejl i %s: %lu"
 msgid "Error loading team %s:"
 msgstr "Fejl i indlæsning af hold %s:"
 
-#: src/game/config.cpp:251
+#: src/game/config.cpp:263
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -259,12 +259,12 @@ msgstr ""
 "Fejl under skabelse af katalog \"%s\": ikke i stand til at gemme "
 "konfigurationsfil."
 
-#: src/game/config.cpp:117
+#: src/game/config.cpp:129
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fejl under indlæsning af konfigurationsfil: %s"
 
-#: src/game/game_mode.cpp:147
+#: src/game/game_mode.cpp:153
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Fejl under indlæsning af spilmodus %s (file %s):"
@@ -319,11 +319,11 @@ msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 msgid "Initial energy:"
 msgstr "Energi som udgangspunkt:"
 
-#: src/game/game_loop.cpp:233
+#: src/game/game_loop.cpp:238
 msgid "Initialisation"
 msgstr "Klargører"
 
-#: src/main.cpp:161
+#: src/main.cpp:167
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Klargørelse af TTF bibliotek fejlede: %s"
@@ -377,7 +377,7 @@ msgstr "Musik?"
 msgid "Name:"
 msgstr "Navn:"
 
-#: src/menu/main_menu.cpp:159
+#: src/menu/main_menu.cpp:179
 msgid "Network Game"
 msgstr "Netværksspil"
 
@@ -394,7 +394,7 @@ msgstr "Ingen"
 msgid "Number of players per team:"
 msgstr "Antal krigere per hold:"
 
-#: src/menu/main_menu.cpp:168
+#: src/menu/main_menu.cpp:188
 msgid "Options"
 msgstr "Instillinger"
 
@@ -402,23 +402,23 @@ msgstr "Instillinger"
 msgid "Pause"
 msgstr "Pause"
 
-#: src/menu/main_menu.cpp:152
+#: src/menu/main_menu.cpp:172
 msgid "Play"
 msgstr "Spil"
 
-#: src/main.cpp:176
+#: src/main.cpp:182
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Vær venlig at fortælle os din mening af Wormux via e-mail:"
 
-#: src/menu/main_menu.cpp:180
+#: src/menu/main_menu.cpp:200
 msgid "Quit"
 msgstr "Afslut"
 
-#: src/main.cpp:166
+#: src/main.cpp:172
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
-#: src/main.cpp:212
+#: src/main.cpp:218
 msgid "Run game"
 msgstr "Kører spil"
 
@@ -467,12 +467,12 @@ msgstr "Spillet blev uafgjort.\n"
 msgid "The rocket left the battlefield..."
 msgstr "Raketten har forladt slagmarken..."
 
-#: src/graphic/video.cpp:119
+#: src/graphic/video.cpp:120
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Ikke i stand til at klargøre SDL bibliotek: %s"
 
-#: src/map/maps_list.cpp:235 src/map/maps_list.cpp:251
+#: src/map/maps_list.cpp:236 src/map/maps_list.cpp:252
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
@@ -490,7 +490,7 @@ msgstr "Uventet undtagelse fanget..."
 msgid "Unknow action"
 msgstr "Ukendt handling"
 
-#: src/main.cpp:136
+#: src/main.cpp:139
 msgid "Version"
 msgstr "Version"
 
@@ -524,20 +524,20 @@ msgstr ""
 msgid "Weapon:"
 msgstr "Våben:"
 
-#: src/main.cpp:193
+#: src/main.cpp:199
 msgid "Website: "
 msgstr "Hjemmeside: "
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:673
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hvilken skam for %s - han var dræbt af en simpel skyder!"
 
-#: src/main.cpp:148
+#: src/main.cpp:154
 msgid "Wormux launching..."
 msgstr "Wormux starter..."
 
-#: src/main.cpp:181
+#: src/main.cpp:187
 msgid "Wormux version "
 msgstr "Wormux version "
 
@@ -546,17 +546,17 @@ msgstr "Wormux version "
 msgid "XML error during loading map '%s' :"
 msgstr "XML fejl under indlæsning af bane '%s' :"
 
-#: src/map/maps_list.cpp:271
+#: src/map/maps_list.cpp:272
 msgid "You need at least one valid map !"
 msgstr "Du har brug for mindst en gyldig bane !"
 
-#: src/game/game_loop.cpp:245
+#: src/game/game_loop.cpp:250
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Du har brug for mindst to hold at spille; ændr det i 'Indstillinger' "
 "menupunktet !"
 
-#: src/team/teams_list.cpp:158
+#: src/team/teams_list.cpp:159
 msgid "You need at least two valid teams !"
 msgstr "Du har brug for mindst to gyldige hold !"
 

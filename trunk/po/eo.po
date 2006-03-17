@@ -34,12 +34,12 @@ msgstr ""
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
 
-#: src/map/maps_list.cpp:293
+#: src/map/maps_list.cpp:294
 #, c-format
 msgid "! Map %s not found :-("
 msgstr ""
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:677
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
@@ -54,7 +54,7 @@ msgstr ""
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:650
+#: src/game/game_loop.cpp:655
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -64,12 +64,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:643
+#: src/game/game_loop.cpp:648
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game_loop.cpp:654
+#: src/game/game_loop.cpp:659
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
@@ -88,12 +88,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 msgstr[1] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:670
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:660
+#: src/game/game_loop.cpp:665
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -156,7 +156,7 @@ msgstr "Aeratako"
 msgid "All-Team results:\n"
 msgstr ""
 
-#: src/main.cpp:182
+#: src/main.cpp:188
 #, fuzzy
 msgid "Authors:"
 msgstr "Auxtoroj :"
@@ -178,7 +178,7 @@ msgstr "Bazuko"
 msgid "C++ exception caught:"
 msgstr "Escepto C++ intercaptita :"
 
-#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
+#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
@@ -196,7 +196,7 @@ msgstr ""
 msgid "Commit suicide"
 msgstr "Mortigis sin"
 
-#: src/menu/main_menu.cpp:174
+#: src/menu/main_menu.cpp:194
 msgid "Credits"
 msgstr ""
 
@@ -264,7 +264,7 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/game/config.cpp:251
+#: src/game/config.cpp:263
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -272,14 +272,14 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/game/config.cpp:117
+#: src/game/config.cpp:129
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/game/game_mode.cpp:147
+#: src/game/game_mode.cpp:153
 #, fuzzy, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr ""
@@ -341,11 +341,11 @@ msgstr ""
 msgid "Initial energy:"
 msgstr "Komenca energio"
 
-#: src/game/game_loop.cpp:233
+#: src/game/game_loop.cpp:238
 msgid "Initialisation"
 msgstr "Preparanto"
 
-#: src/main.cpp:161
+#: src/main.cpp:167
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
@@ -409,7 +409,7 @@ msgstr "Muziko"
 msgid "Name:"
 msgstr "Nomo"
 
-#: src/menu/main_menu.cpp:159
+#: src/menu/main_menu.cpp:179
 msgid "Network Game"
 msgstr ""
 
@@ -427,7 +427,7 @@ msgstr ""
 msgid "Number of players per team:"
 msgstr "Nombro da ludantoj per teamo"
 
-#: src/menu/main_menu.cpp:168
+#: src/menu/main_menu.cpp:188
 msgid "Options"
 msgstr "Elektoj"
 
@@ -435,23 +435,23 @@ msgstr "Elektoj"
 msgid "Pause"
 msgstr ""
 
-#: src/menu/main_menu.cpp:152
+#: src/menu/main_menu.cpp:172
 msgid "Play"
 msgstr "Aktori"
 
-#: src/main.cpp:176
+#: src/main.cpp:182
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr ""
 
-#: src/menu/main_menu.cpp:180
+#: src/menu/main_menu.cpp:200
 msgid "Quit"
 msgstr "Forlasi"
 
-#: src/main.cpp:166
+#: src/main.cpp:172
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/main.cpp:212
+#: src/main.cpp:218
 msgid "Run game"
 msgstr "Komencas partion"
 
@@ -506,12 +506,12 @@ msgstr ""
 msgid "The rocket left the battlefield..."
 msgstr "La fuzilo estas malaperita en alian mondon ..."
 
-#: src/graphic/video.cpp:119
+#: src/graphic/video.cpp:120
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:235 src/map/maps_list.cpp:251
+#: src/map/maps_list.cpp:236 src/map/maps_list.cpp:252
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr ""
@@ -530,7 +530,7 @@ msgstr "Escepto nekonata intercaptita ..."
 msgid "Unknow action"
 msgstr ""
 
-#: src/main.cpp:136
+#: src/main.cpp:139
 #, fuzzy
 msgid "Version"
 msgstr "Versio "
@@ -565,22 +565,22 @@ msgstr ""
 msgid "Weapon:"
 msgstr "Armilo"
 
-#: src/main.cpp:193
+#: src/main.cpp:199
 #, fuzzy
 msgid "Website: "
 msgstr "TTT-ejo : "
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:673
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pistolo !"
 
-#: src/main.cpp:148
+#: src/main.cpp:154
 #, fuzzy
 msgid "Wormux launching..."
 msgstr "Wormux muntas."
 
-#: src/main.cpp:181
+#: src/main.cpp:187
 msgid "Wormux version "
 msgstr "Wormux versio "
 
@@ -589,16 +589,16 @@ msgstr "Wormux versio "
 msgid "XML error during loading map '%s' :"
 msgstr ""
 
-#: src/map/maps_list.cpp:271
+#: src/map/maps_list.cpp:272
 msgid "You need at least one valid map !"
 msgstr ""
 
-#: src/game/game_loop.cpp:245
+#: src/game/game_loop.cpp:250
 #, fuzzy
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Vi necesas almenaux du teamojn, korektu cxi tion en la menuo Elektoj !"
 
-#: src/team/teams_list.cpp:158
+#: src/team/teams_list.cpp:159
 msgid "You need at least two valid teams !"
 msgstr ""
 

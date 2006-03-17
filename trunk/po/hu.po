@@ -34,12 +34,12 @@ msgstr ""
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
 
-#: src/map/maps_list.cpp:293
+#: src/map/maps_list.cpp:294
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "Nem található %s térkép :-("
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:677
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -54,7 +54,7 @@ msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> %s csapatától"
 
-#: src/game/game_loop.cpp:650
+#: src/game/game_loop.cpp:655
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
@@ -64,12 +64,12 @@ msgstr "%s öngyilkos lett!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:643
+#: src/game/game_loop.cpp:648
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:654
+#: src/game/game_loop.cpp:659
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
@@ -88,12 +88,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiaszintje %u egységgel nõtt!"
 msgstr[1] "%s energiaszintje %u egységgel nõtt!"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:670
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
 
-#: src/game/game_loop.cpp:660
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kicsit ügyefogyott volt, így hát távozott az élõ sorából!"
@@ -156,7 +156,7 @@ msgstr "Légitámadás"
 msgid "All-Team results:\n"
 msgstr ""
 
-#: src/main.cpp:182
+#: src/main.cpp:188
 msgid "Authors:"
 msgstr "Szerzõk:"
 
@@ -176,7 +176,7 @@ msgstr "Rakétavetõ"
 msgid "C++ exception caught:"
 msgstr "Elfogtam egy C++ kivételt:"
 
-#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
+#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
@@ -194,7 +194,7 @@ msgstr "Szõnyegbomba"
 msgid "Commit suicide"
 msgstr "Öngyilkosság elkövetése"
 
-#: src/menu/main_menu.cpp:174
+#: src/menu/main_menu.cpp:194
 msgid "Credits"
 msgstr ""
 
@@ -250,18 +250,18 @@ msgstr "Hiba lépett fel (%s): %lu"
 msgid "Error loading team %s:"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/game/config.cpp:251
+#: src/game/config.cpp:263
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/game/config.cpp:117
+#: src/game/config.cpp:129
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/game/game_mode.cpp:147
+#: src/game/game_mode.cpp:153
 #, fuzzy, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
@@ -320,11 +320,11 @@ msgstr "Nem található a felhasználó könyvtára!"
 msgid "Initial energy:"
 msgstr "Induló energiaszint:"
 
-#: src/game/game_loop.cpp:233
+#: src/game/game_loop.cpp:238
 msgid "Initialisation"
 msgstr "Felkészülés"
 
-#: src/main.cpp:161
+#: src/main.cpp:167
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
@@ -385,7 +385,7 @@ msgstr "Zene"
 msgid "Name:"
 msgstr "Név"
 
-#: src/menu/main_menu.cpp:159
+#: src/menu/main_menu.cpp:179
 msgid "Network Game"
 msgstr ""
 
@@ -402,7 +402,7 @@ msgstr ""
 msgid "Number of players per team:"
 msgstr "Játékosok száma csapatonként:"
 
-#: src/menu/main_menu.cpp:168
+#: src/menu/main_menu.cpp:188
 msgid "Options"
 msgstr "Beállítások"
 
@@ -410,23 +410,23 @@ msgstr "Beállítások"
 msgid "Pause"
 msgstr "Szünet"
 
-#: src/menu/main_menu.cpp:152
+#: src/menu/main_menu.cpp:172
 msgid "Play"
 msgstr "Irány a játék!"
 
-#: src/main.cpp:176
+#: src/main.cpp:182
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Kérjük, mondd el a véleményed a Wormuxról: "
 
-#: src/menu/main_menu.cpp:180
+#: src/menu/main_menu.cpp:200
 msgid "Quit"
 msgstr "Kilépés"
 
-#: src/main.cpp:166
+#: src/main.cpp:172
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/main.cpp:212
+#: src/main.cpp:218
 msgid "Run game"
 msgstr "Játék futtatása"
 
@@ -477,12 +477,12 @@ msgstr ""
 msgid "The rocket left the battlefield..."
 msgstr ""
 
-#: src/graphic/video.cpp:119
+#: src/graphic/video.cpp:120
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:235 src/map/maps_list.cpp:251
+#: src/map/maps_list.cpp:236 src/map/maps_list.cpp:252
 #, fuzzy, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
@@ -500,7 +500,7 @@ msgstr "Elkaptam egy váratlanul fellépett kivételt..."
 msgid "Unknow action"
 msgstr ""
 
-#: src/main.cpp:136
+#: src/main.cpp:139
 msgid "Version"
 msgstr "Verzió"
 
@@ -533,20 +533,20 @@ msgstr ""
 msgid "Weapon:"
 msgstr "Fegyver"
 
-#: src/main.cpp:193
+#: src/main.cpp:199
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:673
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"
 
-#: src/main.cpp:148
+#: src/main.cpp:154
 msgid "Wormux launching..."
 msgstr "Töltõdik a Wormux..."
 
-#: src/main.cpp:181
+#: src/main.cpp:187
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
@@ -555,17 +555,17 @@ msgstr "Wormux verzió "
 msgid "XML error during loading map '%s' :"
 msgstr "XML hiba a térkép (%s) betöltése közben:"
 
-#: src/map/maps_list.cpp:271
+#: src/map/maps_list.cpp:272
 msgid "You need at least one valid map !"
 msgstr "Legalább egy térképpel rendelkezned kell!"
 
-#: src/game/game_loop.cpp:245
+#: src/game/game_loop.cpp:250
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Legalalább két csapatot kell verbuválnod a játékhoz! Ezt a Beállítások "
 "menüpont alatt teheted meg!"
 
-#: src/team/teams_list.cpp:158
+#: src/team/teams_list.cpp:159
 msgid "You need at least two valid teams !"
 msgstr "Legalább két csapatot kell verbuválnod!"
 
