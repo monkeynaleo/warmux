@@ -273,15 +273,10 @@ void Interface::EnableDisplay (bool _display)
 
 void Interface::UpdateTimer(uint utimer)
 {
-  if (utimer >= 0){
-    if (timer!= NULL) {
-      std::string s(ulong2str(utimer));
-      timer->Set(s);
-    }
-    else 
-	  timer = new Text(ulong2str(utimer), white_color, Font::GetInstance(Font::FONT_BIG));
-  } else
-    timer = NULL;
+  if (timer!= NULL)
+    timer->Set( ulong2str(utimer) );
+  else 
+    timer = new Text(ulong2str(utimer), white_color, Font::GetInstance(Font::FONT_BIG));
 }
 
 void AbsoluteDraw(Surface &s, Point2i pos){

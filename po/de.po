@@ -36,12 +36,12 @@ msgstr ""
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
 
-#: src/map/maps_list.cpp:293
+#: src/map/maps_list.cpp:294
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:677
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (Team %s) ist gestorben."
@@ -56,7 +56,7 @@ msgstr "%s <%s> aka %s aus %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> aus %s"
 
-#: src/game/game_loop.cpp:650
+#: src/game/game_loop.cpp:655
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begeht Selbstmord!"
@@ -66,12 +66,12 @@ msgstr "%s begeht Selbstmord!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:643
+#: src/game/game_loop.cpp:648
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ist ins Wasser gefallen."
 
-#: src/game/game_loop.cpp:654
+#: src/game/game_loop.cpp:659
 #, fuzzy, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ist von der Karte gefallen!"
@@ -90,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkte gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:670
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied von Team %s getötet!"
 
-#: src/game/game_loop.cpp:660
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s stirbt durch seine Tollpatschigkeit!"
@@ -158,7 +158,7 @@ msgstr "Luftangriff"
 msgid "All-Team results:\n"
 msgstr ""
 
-#: src/main.cpp:182
+#: src/main.cpp:188
 msgid "Authors:"
 msgstr "Autoren:"
 
@@ -178,7 +178,7 @@ msgstr "Panzerfaust"
 msgid "C++ exception caught:"
 msgstr "C++ Ausnahmefehler abgefangen:"
 
-#: src/team/teams_list.cpp:423 src/team/teams_list.cpp:448
+#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kann Team %s nicht finden!"
@@ -196,7 +196,7 @@ msgstr "Splittergranate"
 msgid "Commit suicide"
 msgstr "Selbstmord begehen"
 
-#: src/menu/main_menu.cpp:174
+#: src/menu/main_menu.cpp:194
 msgid "Credits"
 msgstr ""
 
@@ -252,18 +252,18 @@ msgstr "Fehler in %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Fehler beim Laden von Team %s:"
 
-#: src/game/config.cpp:251
+#: src/game/config.cpp:263
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Fehler beim Laden des Spielmodus %s (Datei %s):"
 
-#: src/game/config.cpp:117
+#: src/game/config.cpp:129
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fehler beim Laden des Spielmodus %s (Datei %s):"
 
-#: src/game/game_mode.cpp:147
+#: src/game/game_mode.cpp:153
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Fehler beim Laden des Spielmodus %s (Datei %s):"
@@ -321,11 +321,11 @@ msgstr ""
 msgid "Initial energy:"
 msgstr "Startenergie:"
 
-#: src/game/game_loop.cpp:233
+#: src/game/game_loop.cpp:238
 msgid "Initialisation"
 msgstr "Initialisierung"
 
-#: src/main.cpp:161
+#: src/main.cpp:167
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
@@ -380,7 +380,7 @@ msgstr "Musik?"
 msgid "Name:"
 msgstr "Name:"
 
-#: src/menu/main_menu.cpp:159
+#: src/menu/main_menu.cpp:179
 msgid "Network Game"
 msgstr "Netzwerkspiel"
 
@@ -397,7 +397,7 @@ msgstr ""
 msgid "Number of players per team:"
 msgstr "Zahl der Spieler pro Team:"
 
-#: src/menu/main_menu.cpp:168
+#: src/menu/main_menu.cpp:188
 msgid "Options"
 msgstr "Einstellungen"
 
@@ -405,23 +405,23 @@ msgstr "Einstellungen"
 msgid "Pause"
 msgstr "Pause"
 
-#: src/menu/main_menu.cpp:152
+#: src/menu/main_menu.cpp:172
 msgid "Play"
 msgstr "Spielen"
 
-#: src/main.cpp:176
+#: src/main.cpp:182
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Sag uns deine Meinung über Wormux via E-Mail:"
 
-#: src/menu/main_menu.cpp:180
+#: src/menu/main_menu.cpp:200
 msgid "Quit"
 msgstr "Verlassen"
 
-#: src/main.cpp:166
+#: src/main.cpp:172
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/main.cpp:212
+#: src/main.cpp:218
 msgid "Run game"
 msgstr "Spiel starten"
 
@@ -471,12 +471,12 @@ msgstr "Das Spiel endet unentschieden."
 msgid "The rocket left the battlefield..."
 msgstr "Die Rackete hat das Schlachtfeld verlassen..."
 
-#: src/graphic/video.cpp:119
+#: src/graphic/video.cpp:120
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:235 src/map/maps_list.cpp:251
+#: src/map/maps_list.cpp:236 src/map/maps_list.cpp:252
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
@@ -494,7 +494,7 @@ msgstr "Unerwarteter Ausnahmefehler abgefangen..."
 msgid "Unknow action"
 msgstr "Unbekannte Aktion"
 
-#: src/main.cpp:136
+#: src/main.cpp:139
 msgid "Version"
 msgstr "Version"
 
@@ -527,20 +527,20 @@ msgstr ""
 msgid "Weapon:"
 msgstr "Waffe:"
 
-#: src/main.cpp:193
+#: src/main.cpp:199
 msgid "Website: "
 msgstr "Webseite: "
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:673
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
 
-#: src/main.cpp:148
+#: src/main.cpp:154
 msgid "Wormux launching..."
 msgstr "Wormux startet..."
 
-#: src/main.cpp:181
+#: src/main.cpp:187
 msgid "Wormux version "
 msgstr "Wormux Version "
 
@@ -549,17 +549,17 @@ msgstr "Wormux Version "
 msgid "XML error during loading map '%s' :"
 msgstr "XML Fehler beim Laden der Karte %s :"
 
-#: src/map/maps_list.cpp:271
+#: src/map/maps_list.cpp:272
 msgid "You need at least one valid map !"
 msgstr "Du brauchst mindestens eine gültige Karte!"
 
-#: src/game/game_loop.cpp:245
+#: src/game/game_loop.cpp:250
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Du brauchst mindestens zwei Teams, ändere die Anzahl der Teams im "
 "Einstellungsmenü!"
 
-#: src/team/teams_list.cpp:158
+#: src/team/teams_list.cpp:159
 msgid "You need at least two valid teams !"
 msgstr "Du brauchst mindestens zwei gültige Teams!"
 

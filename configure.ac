@@ -49,9 +49,8 @@ AX_CFLAGS_WARN_ALL([CXXFLAGS])
 
 AC_ARG_ENABLE([debug],
 	      [  --enable-debug          Enable debug in Wormux],
-	      [if test "x${enableval}" = "xyes" ; then
-                   CXXFLAGS="$CXXFLAGS -DDEBUG -ggdb3 -O0"
-	       fi])
+          debug=$enableval,
+          debug="")
 
 AC_ARG_ENABLE([profile],
 	      [  --enable-profile        Enable profiling],
@@ -97,8 +96,45 @@ dnl ========================================================================
 
 SDL_VERSION=1.2.6
 
+dnl === Set compiler flags =================================================
 
+if test "x$GCC" = "xyes"; then
+    dnl get gcc version 
+    AC_MSG_CHECKING([gcc version])
+            gccver=$($CC -dumpversion)
+            gccvermajor=$(echo $gccver | cut -d . -f1)
+            gccverminor=$(echo $gccver | cut -d . -f2)
+            gccvernum=$(expr $gccvermajor "*" 100 + $gccverminor)
+    AC_MSG_RESULT($gccver)
 
+    dnl Enable all warnings
+    GCC_FLAGS="-Wall"
+   
+    dnl Enable *more* warnings
+    if test "$gccvernum" -ge "400"; then
+                dnl gcc 4.0 or later
+        GCC_FLAGS="$GCC_FLAGS -Wextra"
+    else
+        GCC_FLAGS="$GCC_FLAGS -W"
+    fi
+    
+    dnl Skip 'unused parameter' warning
+    GCC_FLAGS="$GCC_FLAGS -Wno-unused-parameter"
+
+    if test "${debug}" = "yes"; then
+        AC_DEFINE_UNQUOTED([DEBUG],[1],[Will compile development debug message])
+        GCC_FLAGS="$GCC_FLAGS -O0 -g"
+    else    
+        GCC_FLAGS="$GCC_FLAGS -O2"
+    fi
+    
+    CFLAGS="$CFLAGS $GCC_FLAGS"
+    CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
+else
+    if test "${debug}" = "yes"; then
+        AC_DEFINE_UNQUOTED([DEBUG],[1],[Will compile development debug message])
+    fi
+fi
 
 dnl === Check for SDL ======================================================
 
@@ -109,7 +145,6 @@ CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 CPPFLAGS="$CPPFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
-
 
 dnl === Check for SDL_image ================================================
 
