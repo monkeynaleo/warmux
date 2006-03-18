@@ -38,6 +38,17 @@ SpriteAnimation::SpriteAnimation(Sprite &p_sprite) :
    pingpong = false;
 }
 
+SpriteAnimation::SpriteAnimation(const SpriteAnimation &other, Sprite &p_sprite) :
+  sprite(p_sprite)
+{
+   last_update = other.last_update;
+   speed_factor = other.speed_factor;
+   frame_delta = other.frame_delta;
+   finished = other.finished;
+   show_on_finish = other.show_on_finish;
+   loop = other.loop;
+   pingpong = other.pingpong;
+}
 
 void SpriteAnimation::SetSpeedFactor( float nv_speed){
   speed_factor = nv_speed;

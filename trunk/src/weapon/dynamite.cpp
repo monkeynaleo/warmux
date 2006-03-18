@@ -62,7 +62,6 @@ void BatonDynamite::Reset()
   image->Scale(ActiveCharacter().GetDirection(), 1);
   image->SetCurrentFrame(0);
   image->Start(); 
-  image->animation.Start();
 }
 
 void BatonDynamite::Refresh()
