@@ -68,7 +68,7 @@ Sprite::Sprite(const Sprite &other) :
   show = other.show;
 
   for(unsigned int f=0;f<other.frames.size();f++)
-    AddFrame(other.frames[f].surface);
+    AddFrame(other.frames[f].surface,other.frames[f].delay);
 }
 
 void Sprite::Constructor() {
