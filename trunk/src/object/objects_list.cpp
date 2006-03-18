@@ -72,14 +72,23 @@ void ObjectsList::RemoveObject (PhysicalObj* obj)
 
 void ObjectsList::Refresh()
 {
-  FOR_EACH_OBJECT(object)
+  ObjectsList::iterator object=lst_objects.Begin();
+  ObjectsList::iterator end=lst_objects.End();
+  ObjectsList::iterator next;
+
+  while(object != end)
   {
+    next = object;
+    next++;
+
     if (!object->to_remove) {
       object->ptr->UpdatePosition();
       object->ptr->Refresh();
     } else {
       lst.erase(object);
     }
+
+    object = next;
   }
 }
 
