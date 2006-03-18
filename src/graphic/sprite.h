@@ -53,6 +53,8 @@ public:
 public:
   explicit Sprite();
   explicit Sprite( Surface surface);
+  Sprite(const Sprite &other);
+
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
   Surface GetSurface();
    
@@ -81,7 +83,7 @@ public:
   const SpriteFrame& GetCurrentFrameObject() const;
 
   // Prepare animation
-  void AddFrame( Surface& surf, unsigned int delay);
+  void AddFrame( const Surface& surf, unsigned int delay = 100);
   void SetFrameSpeed(unsigned int nv_fs);
 
   // Animation

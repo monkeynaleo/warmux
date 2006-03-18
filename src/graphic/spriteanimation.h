@@ -56,6 +56,7 @@ private:
 
 public:
   SpriteAnimation(Sprite &sprite);
+  SpriteAnimation(const SpriteAnimation &other,Sprite &sprite);
 
   // Control animation
   void Start();

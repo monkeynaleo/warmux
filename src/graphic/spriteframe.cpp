@@ -19,7 +19,7 @@
 
 #include "spriteframe.h"
 
-SpriteFrame::SpriteFrame(Surface& p_surface, unsigned int p_speed){
+SpriteFrame::SpriteFrame(const Surface& p_surface, unsigned int p_speed){
   assert( !p_surface.IsNull() );
   
   surface = p_surface;

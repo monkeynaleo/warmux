@@ -53,6 +53,24 @@ Sprite::Sprite( Surface surface ) :
    frames.push_back( SpriteFrame(surface));
 }
 
+Sprite::Sprite(const Sprite &other) :
+  cache(*this),
+  animation(other.animation,*this)
+{
+  frame_width_pix = other.frame_width_pix;
+  frame_height_pix = other.frame_height_pix;
+  scale_x = other.scale_x;
+  scale_y = other.scale_y;
+  alpha = other.alpha;
+  rotation_deg = other.rotation_deg;
+  current_frame = other.current_frame;
+  rot_hotspot = other.rot_hotspot;
+  show = other.show;
+
+  for(unsigned int f=0;f<other.frames.size();f++)
+    AddFrame(other.frames[f].surface);
+}
+
 void Sprite::Constructor() {
   show = true;
   current_frame = 0;
@@ -81,7 +99,7 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
      }
 }
 
-void Sprite::AddFrame(Surface &surf, unsigned int delay){
+void Sprite::AddFrame(const Surface &surf, unsigned int delay){
 	  frames.push_back( SpriteFrame(surf, delay) );
 }
 
@@ -314,7 +332,7 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface& tmp_su
 
 void Sprite::Start(){
    show = true;
-   //animation.Start();
+   animation.Start();
    cache.InvalidLastFrame();
 }
 
