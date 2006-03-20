@@ -122,8 +122,7 @@ if test "x$GCC" = "xyes"; then
     GCC_FLAGS="$GCC_FLAGS -Wno-unused-parameter"
 
     if test "${debug}" = "yes"; then
-        AC_DEFINE_UNQUOTED([DEBUG],[1],[Will compile development debug message])
-        GCC_FLAGS="$GCC_FLAGS -O0 -g"
+        GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG"
     else    
         GCC_FLAGS="$GCC_FLAGS -O2"
     fi
@@ -132,7 +131,8 @@ if test "x$GCC" = "xyes"; then
     CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
 else
     if test "${debug}" = "yes"; then
-        AC_DEFINE_UNQUOTED([DEBUG],[1],[Will compile development debug message])
+        CFLAGS="$CFLAGS -DDEBUG"
+        CXXFLAGS="$CXXFLAGS -DDEBUG"
     fi
 fi
 
