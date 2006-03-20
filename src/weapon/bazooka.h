@@ -27,7 +27,7 @@
 class RoquetteBazooka : public WeaponProjectile
 {
 public:
-  RoquetteBazooka(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
+  RoquetteBazooka(ExplosiveWeaponConfig& cfg);
   void Refresh();
 protected:
   void SignalCollision();

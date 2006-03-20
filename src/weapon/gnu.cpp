@@ -23,7 +23,6 @@
 #include <sstream>
 #include "weapon_tools.h"
 #include "../game/config.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/interface.h"
@@ -36,8 +35,8 @@
 #include "../tool/i18n.h"
 #include "../tool/random.h"
 
-Gnu::Gnu(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) : 
-  WeaponProjectile(p_game_loop, "gnu", cfg)
+Gnu::Gnu(ExplosiveWeaponConfig& cfg) : 
+  WeaponProjectile("gnu", cfg)
 {
 }
 
@@ -111,6 +110,6 @@ GnuLauncher::GnuLauncher() :
 {
   m_name = _("GnuLauncher");
 
-  projectile = new Gnu(game_loop, cfg());
+  projectile = new Gnu(cfg());
 }
 

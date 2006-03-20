@@ -50,7 +50,7 @@ public:
   uint time_next_action;
   uint last_move;
 
-  SuperTux(GameLoop &game_loop, SuperTuxWeaponConfig& cfg);
+  SuperTux(SuperTuxWeaponConfig& cfg);
   void Refresh();
 
   void turn_left();

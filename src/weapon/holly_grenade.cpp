@@ -22,7 +22,6 @@
 #include "holly_grenade.h"
 #include <sstream>
 #include "weapon_tools.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
@@ -33,8 +32,8 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-HollyGrenade::HollyGrenade(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile (p_game_loop, "holly_grenade", cfg), 
+HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile ("holly_grenade", cfg), 
   smoke_engine(40)
 {
   m_rebound_sound = "weapon/holly_grenade_bounce";
@@ -78,6 +77,6 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
   WeaponLauncher(WEAPON_HOLLY_GRENADE, "holly_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("HollyGrenade");
-  projectile = new HollyGrenade(game_loop, cfg());
+  projectile = new HollyGrenade(cfg());
 }
 

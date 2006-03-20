@@ -37,7 +37,7 @@ public:
   Sprite *sprite;
      
 public:
-  WindParticle(GameLoop &game_loop);
+  WindParticle();
   void Reset();
   void Init();
   void Resize(double size);

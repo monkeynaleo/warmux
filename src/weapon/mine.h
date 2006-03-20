@@ -47,7 +47,7 @@ private:
   uint escape_time;
 
 public:
-  ObjMine(GameLoop &game_loop, MineConfig &cfg);
+  ObjMine(MineConfig &cfg);
   //  void Reset();
   void Explosion ();
   //void Draw();

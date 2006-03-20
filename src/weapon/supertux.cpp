@@ -22,7 +22,6 @@
 #include "supertux.h"
 #include "weapon_tools.h"
 #include "../game/config.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
@@ -35,8 +34,8 @@
 const uint time_delta = 40;
 const uint animation_deltat = 50;
 
-SuperTux::SuperTux(GameLoop &p_game_loop, SuperTuxWeaponConfig& cfg) :
-  WeaponProjectile (p_game_loop, "supertux", cfg), 
+SuperTux::SuperTux(SuperTuxWeaponConfig& cfg) :
+  WeaponProjectile ("supertux", cfg), 
   particle_engine(40)
 {
   m_gravity_factor = 0.0;    
@@ -133,7 +132,7 @@ TuxLauncher::TuxLauncher() :
   m_name = _("SuperTux");   
   override_keys = true ;
 
-  projectile = new SuperTux(game_loop, cfg());
+  projectile = new SuperTux(cfg());
 }
 
 void TuxLauncher::HandleKeyEvent(int action, int event_type)

@@ -50,7 +50,7 @@ private:
   static const uint nb_bonus = bonusAUTO_BAZOOKA;
 
  private:
-  BonusBox(GameLoop &game_loop);
+  BonusBox();
   static bool PlaceBonusBox (BonusBox& bonus_box);
 
 public:
@@ -58,7 +58,7 @@ public:
 
   // Active les caisses ?
   static void Enable (bool _enable);
-  static void NewBonusBox(GameLoop &game_loop);
+  static void NewBonusBox();
 
   // Signale la fin d'une chute
   virtual void SignalFallEnding();  

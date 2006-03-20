@@ -22,7 +22,6 @@
 #include "bazooka.h"
 #include "weapon_tools.h"
 #include "../game/config.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
@@ -33,8 +32,8 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-RoquetteBazooka::RoquetteBazooka(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile (p_game_loop, "rocket", cfg)
+RoquetteBazooka::RoquetteBazooka(ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile ("rocket", cfg)
 {  
   m_rebounding = false;
   touche_ver_objet = true;
@@ -63,7 +62,7 @@ Bazooka::Bazooka() :
   WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
 {  
   m_name = _("Bazooka");
-  projectile = new RoquetteBazooka(game_loop, cfg());
+  projectile = new RoquetteBazooka(cfg());
 }
 
 

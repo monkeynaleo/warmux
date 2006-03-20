@@ -42,9 +42,6 @@ class GameLoop;
 
 class Physics
 {
-protected:
-  GameLoop &game_loop;
-
 public:
   bool m_rebounding;
 
@@ -83,7 +80,7 @@ protected:
   bool m_elasticity_off ;
 
 public:
-  Physics (GameLoop &game_loop, double mass=0.0);
+  Physics (double mass=0.0);
   virtual ~Physics ();
 
   // Set/Get position

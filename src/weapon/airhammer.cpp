@@ -22,8 +22,8 @@
 #include "../weapon/airhammer.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
-#include "../game/game_loop.h"
 #include "../game/game.h"
+#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../map/map.h"
 #include "../object/objects_list.h"
@@ -109,7 +109,7 @@ void Airhammer::HandleKeyEvent(int action, int event_type)
       // stop when key is released
       ActiveTeam().AccessNbUnits() = 0;
       m_is_active = false;
-      game_loop.SetState(gameHAS_PLAYED);
+      GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
     }
 
     break ;

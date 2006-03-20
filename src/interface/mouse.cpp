@@ -98,7 +98,7 @@ bool Mouse::ActionClicG()
   // - Do nothing
   // - Choose a target but don't fire
   // - Choose a target and fire it !
-  if (game_loop.ReadState() == gamePLAYING) {
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
     ActiveTeam().AccessWeapon().ChooseTarget();
     return true ;
   }
@@ -107,7 +107,7 @@ bool Mouse::ActionClicG()
 }
 
 void Mouse::ChoixVerPointe(){
-  if (game_loop.ReadState() != gamePLAYING)
+  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
     return;
 
   const Point2i pos_monde = GetWorldPosition();

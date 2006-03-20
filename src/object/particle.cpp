@@ -22,7 +22,6 @@
 #include "particle.h"
 #include <SDL.h>
 #include <map>
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/sprite.h"
 #include "../include/app.h"
@@ -34,8 +33,8 @@
 
 ParticleEngine global_particle_engine;
 
-Particle::Particle(GameLoop &p_game_loop) :
-  PhysicalObj(p_game_loop, "Particle", 0.0)
+Particle::Particle() :
+  PhysicalObj("Particle", 0.0)
 { 
   m_type = objUNBREAKABLE;
   m_wind_factor = 0.8;
@@ -94,8 +93,8 @@ bool Particle::StillUseful()
   return (m_left_time_to_live > 0);
 }
 
-Smoke::Smoke(GameLoop &p_game_loop) :
-  Particle(p_game_loop)
+Smoke::Smoke() :
+  Particle()
 {
   m_name="Smoke";
   SetMass(0.5);
@@ -119,8 +118,8 @@ void Smoke::Init()
   SetSize( Point2i(1, 1) );
 }
 
-StarParticle::StarParticle(GameLoop &p_game_loop) :
-  Particle(p_game_loop)
+StarParticle::StarParticle() :
+  Particle()
 {
   m_name="StarParticle";
   SetMass(0.5);  
@@ -143,8 +142,8 @@ void StarParticle::Init()
 
 ExplosiveWeaponConfig fire_cfg;
 
-FireParticle::FireParticle(GameLoop &p_game_loop) :
-  Particle(p_game_loop)
+FireParticle::FireParticle() :
+  Particle()
 {
   m_name="FireParticle";
   SetMass(0.5);
@@ -215,11 +214,11 @@ void ParticleEngine::AddNow(const Point2i &position,
 
   for (uint i=0 ; i < nb_particles ; i++) {
     switch (type) {
-    case particle_SMOKE : particle = new Smoke(game_loop);
+    case particle_SMOKE : particle = new Smoke();
       break;
-    case particle_FIRE : particle = new FireParticle(game_loop);
+    case particle_FIRE : particle = new FireParticle();
       break;
-    case particle_STAR : particle = new StarParticle(game_loop);
+    case particle_STAR : particle = new StarParticle();
       break;
     default : particle = NULL;
       break;

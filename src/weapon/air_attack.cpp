@@ -40,8 +40,8 @@ const uint FORCE_Y_MAX = 40;
 
 const double OBUS_SPEED = 7 ;
 
-Obus::Obus(GameLoop &p_game_loop, AirAttackConfig& cfg) :
-  WeaponProjectile(p_game_loop, "obus", cfg)
+Obus::Obus(AirAttackConfig& cfg) :
+  WeaponProjectile("obus", cfg)
 {
 }
 
@@ -66,8 +66,8 @@ void Obus::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-Avion::Avion(GameLoop &p_game_loop, AirAttackConfig &p_cfg) : 
-  PhysicalObj(p_game_loop, "Avion", 0.0),
+Avion::Avion(AirAttackConfig &p_cfg) : 
+  PhysicalObj("Avion", 0.0),
   cfg(p_cfg)
 {
   m_type = objUNBREAKABLE;
@@ -134,7 +134,7 @@ void Avion::Refresh()
     Obus * instance;
     for (uint i=0; i<cfg.nbr_obus; ++i) 
     {
-      instance = new Obus(game_loop, cfg);
+      instance = new Obus(cfg);
       instance->Reset();
       instance->SetXY( Point2i(x, obus_dy) );
 
@@ -168,7 +168,7 @@ void Avion::Refresh()
   
   if (!obus_actifs && IsGhost()) {  
     obus.clear();
-    game_loop.interaction_enabled=true;
+    GameLoop::GetInstance()->interaction_enabled=true;
   }
 }
 
@@ -210,7 +210,7 @@ void Avion::SignalGhostState (bool was_dead)
 
 AirAttack::AirAttack() :
   Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE),
-  avion(game_loop, cfg())
+  avion(cfg())
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
@@ -233,7 +233,7 @@ void AirAttack::ChooseTarget()
 
 bool AirAttack::p_Shoot ()
 {
-  game_loop.interaction_enabled=false;
+  GameLoop::GetInstance()->interaction_enabled=false;
   avion.Shoot (cfg().speed);
   m_is_active = false;
   return true;

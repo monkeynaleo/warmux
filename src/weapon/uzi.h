@@ -29,7 +29,7 @@
 class UziBullet : public WeaponBullet
 {
 public:
-  UziBullet(GameLoop &game_loop, ExplosiveWeaponConfig& cfg); 
+  UziBullet(ExplosiveWeaponConfig& cfg); 
 private:
   void ShootSound();
 };

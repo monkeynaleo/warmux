@@ -203,7 +203,7 @@ int Game::AskQuestion (bool draw)
   global_time.Pause();
 
   if (draw) 
-    game_loop.Draw ();
+    GameLoop::GetInstance()->Draw ();
   
   question.PoseQuestion ();
 
@@ -219,14 +219,14 @@ void Game::Start()
 
   try
   {
-    InitGame (game_loop);
+    GameLoop::GetInstance()->Init ();
 
     do
     {
       isGameLaunched = true;
-      game_loop.fps.Reset();
+      GameLoop::GetInstance()->fps.Reset();
       
-      game_loop.Run();
+      GameLoop::GetInstance()->Run();
      
       MSG_DEBUG( "game", "End of game_loop.Run()" ); 
       isGameLaunched = false;

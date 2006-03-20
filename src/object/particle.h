@@ -46,7 +46,7 @@ class Particle : public PhysicalObj
   Sprite *image;
    
  public:
-  Particle(GameLoop &game_loop);
+  Particle();
   virtual void Init()=0;
   void Draw();
   void Refresh();
@@ -57,14 +57,14 @@ class Particle : public PhysicalObj
 class Smoke : public Particle
 {
  public:
-  Smoke(GameLoop &game_loop);
+  Smoke();
   void Init();
 };
 
 class StarParticle : public Particle
 {
  public:
-  StarParticle(GameLoop &game_loop);
+  StarParticle();
   void Init();
 };
 
@@ -72,7 +72,7 @@ class FireParticle : public Particle
 {
  public: 
   Surface impact;
-  FireParticle(GameLoop &game_loop);
+  FireParticle();
   void Init();
   void SignalFallEnding();
 };

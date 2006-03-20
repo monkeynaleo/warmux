@@ -26,7 +26,6 @@
 
 #include "weapon_tools.h"
 #include "../game/config.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
@@ -38,8 +37,8 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-WeaponBullet::WeaponBullet(GameLoop &game_loop, const std::string &name, ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile(game_loop, name, cfg)
+WeaponBullet::WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile(name, cfg)
 { 
   m_gravity_factor = 0.1; 
   SetWindFactor(0.8);
@@ -67,9 +66,9 @@ void WeaponBullet::Explosion()
 //-----------------------------------------------------------------------------
 
 
-WeaponProjectile::WeaponProjectile (GameLoop &game_loop, const std::string &name, 
+WeaponProjectile::WeaponProjectile (const std::string &name, 
 				    ExplosiveWeaponConfig& p_cfg)
-  : PhysicalObj (game_loop, name, 0.0),
+  : PhysicalObj (name, 0.0),
     cfg(p_cfg)
 {
   dernier_ver_touche = NULL;

@@ -49,7 +49,7 @@ bool Teleportation::p_Shoot ()
   if( !ActiveCharacter().IsInVacuumXY(dst) )
 	 return false; 
 
-  game_loop.interaction_enabled = false;
+  GameLoop::GetInstance()->interaction_enabled = false;
 
   jukebox.Play("share", "weapon/teleport_start");
   
@@ -80,7 +80,7 @@ void Teleportation::Refresh()
     ActiveCharacter().SetSpeed(0.0,0.0);
     ActiveCharacter().Show();
     jukebox.Play("share","weapon/teleport_end");
-    game_loop.interaction_enabled = true;
+    GameLoop::GetInstance()->interaction_enabled = true;
     delete skin;
     return;
   }

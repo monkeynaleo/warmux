@@ -167,7 +167,7 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
     }
 
     // Initialise les variables du ver, puis l'ajoute à la liste
-    Character new_character(game_loop);
+    Character new_character;
     vers.push_back(new_character);
     vers.back().InitTeam (this, character_name, skin);
 

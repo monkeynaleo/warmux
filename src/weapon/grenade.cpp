@@ -28,7 +28,6 @@
 #include "../interface/interface.h"
 #include "../graphic/video.h"
 #include "../tool/math_tools.h"
-#include "../game/game_loop.h"
 #include "../map/camera.h"
 #include "../weapon/weapon_tools.h"
 #include "../interface/game_msg.h"
@@ -36,8 +35,8 @@
 #include "../object/objects_list.h"
 //-----------------------------------------------------------------------------
 
-Grenade::Grenade(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile (p_game_loop, "grenade", cfg)
+Grenade::Grenade(ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile ("grenade", cfg)
 {
   m_rebound_sound = "weapon/grenade_bounce";
   m_rebounding = true;
@@ -75,5 +74,5 @@ GrenadeLauncher::GrenadeLauncher() :
   WeaponLauncher(WEAPON_GRENADE, "grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("Grenade");
-  projectile = new Grenade(game_loop, cfg());
+  projectile = new Grenade(cfg());
 }

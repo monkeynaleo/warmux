@@ -21,7 +21,6 @@
 
 #include "auto_bazooka.h"
 #include "weapon_tools.h"
-#include "../game/game_loop.h"
 #include "../game/game_mode.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
@@ -47,9 +46,8 @@ const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
 
-RoquetteTeteCherche::RoquetteTeteCherche(GameLoop &p_game_loop, 
-					 ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile(p_game_loop, "rocket", cfg)
+RoquetteTeteCherche::RoquetteTeteCherche(ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile("rocket", cfg)
 {
   m_attire = false;
 }
@@ -118,7 +116,7 @@ AutomaticBazooka::AutomaticBazooka() :
   m_is_active = false;
   cible.choisie = false;
 
-  projectile = new RoquetteTeteCherche(game_loop, cfg());
+  projectile = new RoquetteTeteCherche(cfg());
 
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
 }
