@@ -46,7 +46,6 @@ void Parachute::p_Select()
   m_is_active = true ;
   open = false ;
   closing = false ;
-  image->Start();
   image->animation.SetShowOnFinish(SpriteAnimation::show_last_frame);
 }
 
@@ -89,6 +88,9 @@ void Parachute::Refresh()
 	      ActiveCharacter().SetAirResistFactor(air_resist_factor);
 	      ActiveCharacter().SetWindFactor(2);
 	      open = true ;
+         image->animation.SetPlayBackward(false);
+         image->Start();
+
 	    }
 	}
     }
