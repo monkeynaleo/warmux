@@ -230,7 +230,7 @@ void InitGame (GameLoop &game_loop)
 
   delete loading_image;
 
-  game.MessageLoading();
+  Game::GetInstance()->MessageLoading();
 
   // Init all needed data
   if (!game_initialise)
@@ -270,7 +270,7 @@ void InitGame (GameLoop &game_loop)
     TerrainActif().wind.nb_sprite = TerrainActif().wind.default_nb_sprite;
   }
 
-  game.SetEndOfGameStatus( false );
+  Game::GetInstance()->SetEndOfGameStatus( false );
   game_loop.SetState (gamePLAYING, true);
 }
 
@@ -295,7 +295,7 @@ void GameLoop::Refresh()
         if ( event.type == SDL_QUIT) 
           {  
              std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
-             game.SetEndOfGameStatus( true );
+             Game::GetInstance()->SetEndOfGameStatus( true );
              std::cout << "FIN PARTIE" << std::endl;
              return;
           }
@@ -308,7 +308,7 @@ void GameLoop::Refresh()
           {               
              if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
              {
-                  game.SetEndOfGameStatus( true );
+                  Game::GetInstance()->SetEndOfGameStatus( true );
                   std::cout << "FIN PARTIE" << std::endl;
                   return;
              }
@@ -439,7 +439,7 @@ void GameLoop::Run()
     unsigned int start = SDL_GetTicks();
 #endif    
      
-    game.SetEndOfGameStatus( false );
+    Game::GetInstance()->SetEndOfGameStatus( false );
 
     // one loop
     StatStart("GameLoop:Refresh()");
@@ -459,7 +459,7 @@ void GameLoop::Run()
       sleep_fps = 0;
     SDL_Delay(sleep_fps);
 #endif
-  } while( !game.GetEndOfGameStatus() ); 
+  } while( !Game::GetInstance()->GetEndOfGameStatus() ); 
 
   ParticleEngine::Stop();
 }
@@ -497,8 +497,8 @@ void GameLoop::RefreshClock()
         if (duration <= 1) {
           if (IsAnythingMoving()) break;
 
-          if (game.IsGameFinished()) 
-            game.SetEndOfGameStatus( true );
+          if (Game::GetInstance()->IsGameFinished()) 
+            Game::GetInstance()->SetEndOfGameStatus( true );
           else { 
 	    ActiveTeam().AccessWeapon().Deselect();
             BonusBox::NewBonusBox(*this); 
@@ -547,7 +547,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     FOR_ALL_LIVING_CHARACTERS(equipe,ver) ver -> PrepareTurn();
 
     // Changement d'équipe
-    assert (!game.IsGameFinished());    
+    assert (!Game::GetInstance()->IsGameFinished());    
     do
     {
       teams_list.NextTeam (begin_game);
@@ -641,7 +641,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
 {
   std::string txt;
 
-  if (!game.IsGameLaunched())
+  if (!Game::GetInstance()->IsGameLaunched())
     return;
 
   if (character -> IsDrowned()) {

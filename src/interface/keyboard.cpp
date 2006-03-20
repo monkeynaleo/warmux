@@ -198,11 +198,11 @@ void Clavier::HandleKeyReleased (const Action_t &action)
 
   switch(action) {
     case ACTION_QUIT:
-      game.SetEndOfGameStatus( true );
+      Game::GetInstance()->SetEndOfGameStatus( true );
       return;
 
     case ACTION_PAUSE:
-      game.Pause();
+      Game::GetInstance()->Pause();
       return;
 
     case ACTION_FULLSCREEN:
