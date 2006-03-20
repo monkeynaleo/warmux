@@ -40,7 +40,15 @@
 #include "../tool/i18n.h"
 #include "../weapon/weapons_list.h"
 
-Game game;  // TODO: global variables are bad
+Game * Game::singleton = NULL;
+
+Game * Game::GetInstance() 
+{
+  if (singleton == NULL) {
+    singleton = new Game();
+  }
+  return singleton;
+}
 
 Game::Game()
 {

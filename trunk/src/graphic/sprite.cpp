@@ -367,7 +367,7 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   dest.Blit(current_surface, srcRect, dstRect.GetPosition());
 
   // For the cache mechanism
-  if( game.IsGameLaunched() )
+  if( Game::GetInstance()->IsGameLaunched() )
     world.ToRedrawOnScreen( dstRect );
 }
 

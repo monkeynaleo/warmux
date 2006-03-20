@@ -191,7 +191,7 @@ void GameMenu::SaveOptions()
 void GameMenu::__sig_ok()
 {
   SaveOptions();
-  game.Start();
+  Game::GetInstance()->Start();
 }
 
 void GameMenu::__sig_cancel()
