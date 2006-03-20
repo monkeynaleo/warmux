@@ -33,7 +33,7 @@
 class GunBullet : public WeaponBullet
 {
 public:
-  GunBullet(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
+  GunBullet(ExplosiveWeaponConfig& cfg);
  private:
   void ShootSound();
 };

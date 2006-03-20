@@ -22,7 +22,6 @@
 #include "uzi.h"
 #include <sstream>
 #include "weapon_tools.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../interface/game_msg.h"
 #include "../map/map.h"
@@ -33,8 +32,8 @@
 const double SOUFFLE_BALLE = 1;
 const double MIN_TIME_BETWEEN_SHOOT = 70; // in milliseconds
 
-UziBullet::UziBullet(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
-  WeaponBullet(p_game_loop, "uzi_bullet", cfg)
+UziBullet::UziBullet(ExplosiveWeaponConfig& cfg) :
+  WeaponBullet("uzi_bullet", cfg)
 { 
 }
 
@@ -52,7 +51,7 @@ Uzi::Uzi() :
 
   m_first_shoot = 0;
 
-  projectile = new UziBullet(game_loop, cfg());
+  projectile = new UziBullet(cfg());
 }
 
 void Uzi::RepeatShoot()

@@ -36,7 +36,7 @@ class ClusterBombConfig;
 class Cluster : public WeaponProjectile
 {
 public:
-  Cluster(GameLoop &game_loop, ClusterBombConfig& cfg);
+  Cluster(ClusterBombConfig& cfg);
   void Refresh();
   void Shoot(int n_x, int n_y);
 protected:
@@ -50,7 +50,7 @@ public:
   std::list<Cluster> tableau_cluster;
   typedef std::list<Cluster>::iterator iterator;
 
-  ClusterBomb(GameLoop &game_loop, ClusterBombConfig& cfg);
+  ClusterBomb(ClusterBombConfig& cfg);
   void Refresh();
   void Explosion();
 protected:

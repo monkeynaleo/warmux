@@ -46,8 +46,8 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
   return p1.Distance(p2) / PIXEL_PER_METER;
 }
 
-PhysicalObj::PhysicalObj (GameLoop &p_game_loop, const std::string &name, double mass) :
-  Physics(p_game_loop),
+PhysicalObj::PhysicalObj (const std::string &name, double mass) :
+  Physics(),
   m_name(name),
   m_width(0),
   m_height(0)

@@ -24,7 +24,6 @@
 #include <sstream>
 #include <math.h>
 #include "weapon_tools.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
@@ -36,8 +35,8 @@
 #include "../tool/i18n.h"
 #include "../tool/random.h"
 
-Cluster::Cluster(GameLoop &p_game_loop, ClusterBombConfig& cfg) :
-  WeaponProjectile (p_game_loop, "cluster", cfg)
+Cluster::Cluster(ClusterBombConfig& cfg) :
+  WeaponProjectile ("cluster", cfg)
 {
 }
 
@@ -74,8 +73,8 @@ void Cluster::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-ClusterBomb::ClusterBomb(GameLoop &p_game_loop, ClusterBombConfig& cfg) :
-  WeaponProjectile (p_game_loop, "cluster_bomb", cfg)
+ClusterBomb::ClusterBomb(ClusterBombConfig& cfg) :
+  WeaponProjectile ("cluster_bomb", cfg)
 {
   m_rebound_sound = "weapon/grenade_bounce";
   touche_ver_objet = false;
@@ -87,7 +86,7 @@ ClusterBomb::ClusterBomb(GameLoop &p_game_loop, ClusterBombConfig& cfg) :
 
   for (uint i=0; i<nb; ++i)
   {
-    Cluster cluster(game_loop, cfg);
+    Cluster cluster(cfg);
     tableau_cluster.push_back( cluster );
   }
 }
@@ -143,7 +142,7 @@ ClusterLauncher::ClusterLauncher() :
 {  
   m_name = _("ClusterBomb");  
   
-  projectile = new ClusterBomb(game_loop, cfg());
+  projectile = new ClusterBomb(cfg());
 }
 
 ClusterBombConfig& ClusterLauncher::cfg() 

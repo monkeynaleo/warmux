@@ -55,12 +55,26 @@
 
 #define ENABLE_LIMIT_FPS    
 
-GameLoop game_loop;
 bool game_initialise = false;
 bool game_fin_partie;
 
+GameLoop * GameLoop::singleton = NULL;
+
+GameLoop * GameLoop::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new GameLoop();
+  }
+  return singleton;
+}
+
+GameLoop::GameLoop()
+{
+  state = PLAYING;
+  interaction_enabled = true;
+}
+
 #ifdef TODO_NETWORK 
-void InitGameData_NetServer()
+void GameLoop::InitGameData_NetServer()
 {
   //        action_handler.NewAction(Action(ACTION_ASK_TEAM));
   do
@@ -139,7 +153,7 @@ void InitGameData_NetServer()
   action_handler.NewAction (Action(ACTION_START_GAME));
 }
 
-void InitGameData_NetClient()
+void GameLoop::InitGameData_NetClient()
 {
   do
     {
@@ -179,7 +193,7 @@ void InitGameData_NetClient()
 
 #endif // TODO_NETWORK
 
-void InitGameData_Local()
+void GameLoop::InitData_Local()
 {
   // Placement des vers
   std::cout << "o " << _("Find a random position for characters") << std::endl;
@@ -192,7 +206,7 @@ void InitGameData_Local()
   lst_objects.Init();
 }
 
-void InitGameData(GameLoop &game_loop)
+void GameLoop::InitData()
 {
   global_time.Reset();
   
@@ -203,18 +217,18 @@ void InitGameData(GameLoop &game_loop)
     InitGameData_NetClient();
   else        
 #endif
-  InitGameData_Local();
+  InitData_Local();
 
   curseur_ver.Reset();
   mouse.Reset();
   clavier.Reset();
    
-  game_loop.fps.Reset();
+  fps.Reset();
   interface.Reset();
   game_messages.Reset();
 }
 
-void InitGame (GameLoop &game_loop)
+void GameLoop::Init ()
 {
   // Display loading screen
   Config * config = Config::GetInstance();
@@ -241,7 +255,7 @@ void InitGame (GameLoop &game_loop)
     game_initialise = true;
   }
 
-  InitGameData(game_loop);
+  InitData();
 
   // Init teams
 
@@ -271,13 +285,7 @@ void InitGame (GameLoop &game_loop)
   }
 
   Game::GetInstance()->SetEndOfGameStatus( false );
-  game_loop.SetState (gamePLAYING, true);
-}
-
-GameLoop::GameLoop()
-{
-  state = gamePLAYING;
-  interaction_enabled = true;
+  SetState (PLAYING, true);
 }
 
 void GameLoop::Refresh()
@@ -327,7 +335,7 @@ void GameLoop::Refresh()
      
     // Keyboard and mouse refresh
     if ( 
-        (interaction_enabled && state != gameEND_TURN)
+        (interaction_enabled && state != END_TURN)
         || (ActiveTeam().GetWeapon().IsActive() && ActiveTeam().GetWeapon().override_keys) // for driving supertux for example
         )
     {
@@ -378,7 +386,7 @@ void GameLoop::Draw ()
   ParticleEngine::Draw(false);
 
   ActiveCharacter().Draw();
-  if (!ActiveCharacter().IsDead() && state != gameEND_TURN) {
+  if (!ActiveCharacter().IsDead() && state != END_TURN) {
         ActiveTeam().crosshair.Draw();
         ActiveTeam().AccessWeapon().Draw();
   }
@@ -474,26 +482,26 @@ void GameLoop::RefreshClock()
 
       switch (state) {
 
-      case gamePLAYING:
+      case PLAYING:
         if (duration <= 1) {
            jukebox.Play("share", "end_turn");
-           SetState (gameEND_TURN);
+           SetState (END_TURN);
         } else {
           duration--;
           interface.UpdateTimer(duration);
         }
         break;
 
-      case gameHAS_PLAYED:
+      case HAS_PLAYED:
         if (duration <= 1) {
-          SetState (gameEND_TURN);
+          SetState (END_TURN);
         } else {
           duration--;
           interface.UpdateTimer(duration);
         }
         break;
 
-      case gameEND_TURN:
+      case END_TURN:
         if (duration <= 1) {
           if (IsAnythingMoving()) break;
 
@@ -501,8 +509,8 @@ void GameLoop::RefreshClock()
             Game::GetInstance()->SetEndOfGameStatus( true );
           else { 
 	    ActiveTeam().AccessWeapon().Deselect();
-            BonusBox::NewBonusBox(*this); 
-	    SetState(gamePLAYING);
+            BonusBox::NewBonusBox(); 
+	    SetState(PLAYING);
             break;
           }
         } else {
@@ -513,7 +521,7 @@ void GameLoop::RefreshClock()
     }// if
 }
 
-void GameLoop::SetState(game_state new_state, bool begin_game)
+void GameLoop::SetState(int new_state, bool begin_game)
 {
   // already in good state, nothing to do 
   if ((state == new_state) && !begin_game) return;
@@ -527,7 +535,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
   switch (state)
   {
   // Début d'un tour
-  case gamePLAYING:
+  case PLAYING:
     MSG_DEBUG("game.statechange", "Playing" );
 
     // Init. le compteur
@@ -568,7 +576,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     break;
 
   // Un ver a joué son arme, mais peut encore se déplacer
-  case gameHAS_PLAYED:
+  case HAS_PLAYED:
     MSG_DEBUG("game.statechange", "Has played, now can move");
     duration = game_mode.duration_move_player;
     pause_seconde = global_time.Read();
@@ -577,7 +585,7 @@ void GameLoop::SetState(game_state new_state, bool begin_game)
     break;
 
   // Fin du tour : petite pause
-  case gameEND_TURN:
+  case END_TURN:
     MSG_DEBUG("game.statechange", "End of turn");
     ActiveTeam().AccessWeapon().SignalTurnEnd();
     curseur_ver.Cache();
@@ -655,7 +663,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
       txt = Format(_("%s commits suicide !"), character -> m_name.c_str());
       
       // Dead in moving ?
-    } else if (state == gamePLAYING) {
+    } else if (state == PLAYING) {
       txt = Format(_("%s has fallen off the map!"),
                    character -> m_name.c_str());
        jukebox.Play(ActiveTeam().GetSoundProfile(), "out");
@@ -682,7 +690,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
   game_messages.Add (txt);
   
   // Si c'est le ver actif qui est mort, fin du tour
-  if (character == &ActiveCharacter()) SetState (gameEND_TURN);
+  if (character == &ActiveCharacter()) SetState (END_TURN);
 }
 
 // Signal falling (with damage) of a character
@@ -690,6 +698,6 @@ void GameLoop::SignalCharacterDamageFalling (Character *character)
 {
   if (character == &ActiveCharacter())
     {
-      SetState (gameEND_TURN);
+      SetState (END_TURN);
     }
 }

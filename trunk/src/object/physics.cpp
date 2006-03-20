@@ -39,8 +39,7 @@ const double AIR_RESISTANCE_FACTOR = 14 ;
 const double PHYS_DELTA_T = 0.01 ;         // Physical simulation time step
 const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 
-Physics::Physics (GameLoop &p_game_loop, double mass) :
-  game_loop(p_game_loop)
+Physics::Physics (double mass)
 {
   m_extern_force.Clear();
   m_pos_x.Clear();

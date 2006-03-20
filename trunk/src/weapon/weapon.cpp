@@ -159,7 +159,9 @@ void Weapon::Manage()
 
   Refresh();
 
-  if (game_loop.ReadState() != gamePLAYING)
+  GameLoop * game_loop = GameLoop::GetInstance();
+
+  if (game_loop->ReadState() != GameLoop::PLAYING)
     return;
 
   if ( (ActiveTeam().ReadNbUnits() == 0) )
@@ -169,7 +171,7 @@ void Weapon::Manage()
       if (m_can_change_weapon)
 	Select();
       else
-	game_loop.SetState(gameHAS_PLAYED);
+	game_loop->SetState(GameLoop::HAS_PLAYED);
     }
 }
 
@@ -214,7 +216,7 @@ bool Weapon::Shoot(double strength, int angle)
 
   if (max_strength != 0) ActiveCharacter().previous_strength = m_strength;
 
-  game_loop.character_already_chosen = true;
+  GameLoop::GetInstance()->character_already_chosen = true;
 
   return true;
 }
@@ -326,7 +328,7 @@ void Weapon::InitLoading(){
   
   m_strength = 0;
 
-  game_loop.character_already_chosen = true;
+  GameLoop::GetInstance()->character_already_chosen = true;
 }
 
 void Weapon::StopLoading(){
@@ -350,7 +352,7 @@ void Weapon::DrawWeaponBox(){
 }
 
 void Weapon::Draw(){
-  if(game_loop.ReadState() != gamePLAYING)
+  if(GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
     return;
 
   weapon_strength_bar.visible = false;

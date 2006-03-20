@@ -25,7 +25,6 @@
 #include <sstream>
 #include "weapon_tools.h"
 #include "../game/config.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/sprite.h"
 #include "../include/app.h"
@@ -45,8 +44,8 @@
 
 const double DEPART_FONCTIONNEMENT = 5;
 
-ObjMine::ObjMine(GameLoop &p_game_loop, MineConfig& cfg) : 
-  WeaponProjectile(p_game_loop, "mine", cfg)
+ObjMine::ObjMine(MineConfig& cfg) : 
+  WeaponProjectile("mine", cfg)
 {
   m_allow_negative_y = true; 
   animation = false;
@@ -190,7 +189,7 @@ bool Mine::p_Shoot()
 
 void Mine::Add (int x, int y)
 {
-  ObjMine *obj = new ObjMine(game_loop, cfg());
+  ObjMine *obj = new ObjMine(cfg());
   obj -> SetXY ( Point2i(x, y) );
 
   Point2d speed_vector;

@@ -130,7 +130,7 @@ void Clavier::HandleKeyPressed (const Action_t &action)
   if(!ActiveTeam().is_local)
     return;
 
-  if (game_loop.ReadState() == gamePLAYING &&
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
       ActiveTeam().GetWeapon().CanChangeWeapon())
     {
       int weapon_sort = -1;

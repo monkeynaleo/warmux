@@ -227,7 +227,7 @@ void Interface::Draw ()
   
   world.ToRedrawOnScreen(dest);
 
-  if ( game_loop.ReadState() == gamePLAYING && weapon_strength_bar.visible)
+  if ( GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING && weapon_strength_bar.visible)
   {
     // Position on the screen
 	Point2i barPos = (app.video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1) 

@@ -45,7 +45,7 @@ bool Suicide::p_Shoot()
 { 
   sound_channel = jukebox.Play ("share", "weapon/suicide");
 
-  game_loop.interaction_enabled=false;
+  GameLoop::GetInstance()->interaction_enabled=false;
   is_dying = true;
 
   return true;

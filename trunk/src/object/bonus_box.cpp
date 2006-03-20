@@ -60,8 +60,8 @@ const uint BONUS_DYNAMITE=10;
 const uint BONUS_AIR_ATTACK=1;
 const uint BONUS_AUTO_BAZOOKA=5;
 
-BonusBox::BonusBox(GameLoop &p_game_loop)
-  : PhysicalObj(p_game_loop, "BonusBox", 0.0){
+BonusBox::BonusBox()
+  : PhysicalObj("BonusBox", 0.0){
   SetTestRect (29, 29, 63, 6);
   m_allow_negative_y = true;
   enable = false;
@@ -270,7 +270,7 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
   return true;
 }
 
-void BonusBox::NewBonusBox(GameLoop &p_game_loop)
+void BonusBox::NewBonusBox()
 {
 
   if (!enable || (global_time.Read() < time)) {
@@ -278,7 +278,7 @@ void BonusBox::NewBonusBox(GameLoop &p_game_loop)
     return;
   }
 
-  BonusBox * box = new BonusBox(p_game_loop);
+  BonusBox * box = new BonusBox();
   if (!PlaceBonusBox(*box))
     delete box;
   else 

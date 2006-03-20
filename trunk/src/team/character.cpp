@@ -78,8 +78,8 @@ const uint do_nothing_timeout = 5000;
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
-Character::Character (GameLoop &p_game_loop) :
-  PhysicalObj(p_game_loop, "Soldat inconnu", 0.0)
+Character::Character () :
+  PhysicalObj("Soldat inconnu", 0.0)
 {
   pause_bouge_dg = 0;
   previous_strength = 0;
@@ -146,7 +146,7 @@ void Character::SignalDeath()
   assert (IsDead());
   
   // Signal the death
-  game_loop.SignalCharacterDeath (this);
+  GameLoop::GetInstance()->SignalCharacterDeath (this);
 }
 
 void Character::SignalDrowning()
@@ -156,7 +156,7 @@ void Character::SignalDrowning()
   SetSkin("drowned");
 
   jukebox.Play (GetTeam().GetSoundProfile(),"sink");
-  game_loop.SignalCharacterDeath (this);
+  GameLoop::GetInstance()->SignalCharacterDeath (this);
 }
 
 // Si un ver devient un fantome, il meurt ! Signale sa mort
@@ -171,7 +171,7 @@ void Character::SignalGhostState (bool was_dead)
   MSG_DEBUG("character", "ghost");
 
   // Signal the death
-  if (!was_dead) game_loop.SignalCharacterDeath (this);
+  if (!was_dead) GameLoop::GetInstance()->SignalCharacterDeath (this);
 }
 
 void Character::SetDirection (int nv_direction)
@@ -300,14 +300,14 @@ void Character::Draw()
 
   bool dessine_perte = (lost_energy != 0);
   if ((&ActiveCharacter() == this
-    && game_loop.ReadState() != gameEND_TURN)
+    && GameLoop::GetInstance()->ReadState() != GameLoop::END_TURN)
       //&& (game_loop.ReadState() != jeuANIM_FIN_TOUR)
     || IsDead()
      )
     dessine_perte = false;
 
   // Draw skin
-  if(full_walk && !image->IsFinished() && game_loop.ReadState() == gameEND_TURN)
+  if(full_walk && !image->IsFinished() && GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
     StopWalking();
 
   if(!skin_is_walking || full_walk) //walking skins image update only when a keyboard key is pressed
@@ -342,7 +342,7 @@ void Character::Draw()
   bool est_ver_actif = (this == &ActiveCharacter());
   Config * config = Config::GetInstance();
   bool display_energy = config->GetDisplayEnergyCharacter();
-  display_energy &= !est_ver_actif || (game_loop.ReadState() != gamePLAYING);
+  display_energy &= !est_ver_actif || (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING);
   display_energy |= dessine_perte;
   display_energy &= !IsDead();
   if (display_energy)
@@ -426,7 +426,7 @@ void Character::HandleShoot(int event_type)
       if (ActiveTeam().GetWeapon().max_strength == 0)
 	DoShoot();
       else
-	if ( (game_loop.ReadState() == gamePLAYING)
+	if ( (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
 	     && ActiveTeam().GetWeapon().IsReady() )
 	  ActiveTeam().AccessWeapon().InitLoading();
       break ;
@@ -459,7 +459,7 @@ void Character::HandleShoot(int event_type)
 void Character::HandleKeyEvent(int action, int event_type)
 {
   // The character cannot move anymove if the turn is over...
-  if (game_loop.ReadState() == gameEND_TURN)
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
     return ;
 
   if (ActiveCharacter().IsDead())
@@ -562,7 +562,7 @@ void Character::Refresh()
 
   UpdatePosition ();
 
-  if( &ActiveCharacter() == this && game_loop.ReadState() == gamePLAYING)
+  if( &ActiveCharacter() == this && GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
   {
     if(do_nothing_time + do_nothing_timeout < global_time.Read())
       curseur_ver.SuitVerActif();
@@ -665,7 +665,7 @@ void Character::SignalFallEnding()
     degat = norme * game_mode.damage_per_fall_unit;
     SetEnergyDelta (-(int)degat);
     SetSkin("hard_fall_ending");
-    game_loop.SignalCharacterDamageFalling(this);
+    GameLoop::GetInstance()->SignalCharacterDamageFalling(this);
   }
   if((current_skin=="jump" || current_skin=="fall"))
   {

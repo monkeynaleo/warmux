@@ -39,7 +39,7 @@ class BatonDynamite : public WeaponProjectile
   bool explosion_active;
 
 public:
-  BatonDynamite(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
+  BatonDynamite(ExplosiveWeaponConfig& cfg);
   void Reset();
   void Draw();
   void Refresh();

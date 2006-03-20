@@ -40,7 +40,7 @@ class Gnu : public WeaponProjectile
   double save_x,save_y;
   double angle;
 public:
-  Gnu(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
+  Gnu(ExplosiveWeaponConfig& cfg);
   void Shoot(double strength);
   void Refresh();
   void SignalCollision();

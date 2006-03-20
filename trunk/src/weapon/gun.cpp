@@ -23,7 +23,6 @@
 
 #include "../weapon/gun.h"
 #include <sstream>
-#include "../game/game_loop.h"
 #include "../map/map.h"
 #include "../game/time.h"
 #include "../object/objects_list.h"
@@ -36,8 +35,8 @@
 
 const uint BULLET_SPEED = 20;
 
-GunBullet::GunBullet(GameLoop &game_loop, ExplosiveWeaponConfig& cfg) :
-  WeaponBullet(game_loop, "gun_bullet", cfg)
+GunBullet::GunBullet(ExplosiveWeaponConfig& cfg) :
+  WeaponBullet("gun_bullet", cfg)
 {
 }
 
@@ -52,7 +51,7 @@ Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
   m_name = _("Gun");
 
-  projectile = new GunBullet(game_loop, cfg());
+  projectile = new GunBullet(cfg());
 }
 
 bool Gun::p_Shoot ()

@@ -65,13 +65,13 @@ void Action_MoveLeft (const Action *a)
 
 void Action_Jump (const Action *a)
 {
-      game_loop.character_already_chosen = true;
+      GameLoop::GetInstance()->character_already_chosen = true;
       ActiveCharacter().Jump(); 
 }
 
 void Action_HighJump (const Action *a)
 {
-      game_loop.character_already_chosen = true;
+      GameLoop::GetInstance()->character_already_chosen = true;
       ActiveCharacter().HighJump();
 }
 

@@ -34,7 +34,7 @@
 class Grenade : public WeaponProjectile
 {
 public:
-  Grenade(GameLoop &game_loop, ExplosiveWeaponConfig& cfg);
+  Grenade(ExplosiveWeaponConfig& cfg);
   void Refresh();
 protected:
   void SignalCollision();

@@ -49,7 +49,7 @@ class WeaponProjectile : public PhysicalObj
   PhysicalObj* dernier_obj_touche;
 
  public:
-  WeaponProjectile(GameLoop &game_loop, const std::string &nom, 
+  WeaponProjectile(const std::string &nom, 
 		   ExplosiveWeaponConfig& cfg);
   virtual ~WeaponProjectile();
 
@@ -74,7 +74,7 @@ class WeaponProjectile : public PhysicalObj
 class WeaponBullet : public WeaponProjectile
 {
 public:
-  WeaponBullet(GameLoop &game_loop, const std::string &name, ExplosiveWeaponConfig& cfg);
+  WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg);
   virtual ~WeaponBullet(){};
 protected:
   void SignalCollision();

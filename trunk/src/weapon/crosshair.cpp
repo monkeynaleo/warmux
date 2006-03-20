@@ -65,7 +65,7 @@ void CrossHair::Draw()
 	return;
   if( ActiveCharacter().IsDead() )
 	return;
-  if( game_loop.ReadState() != gamePLAYING )
+  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING )
 	return;
 
   Point2i pos = ActiveCharacter().GetHandPosition();

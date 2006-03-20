@@ -99,7 +99,7 @@ void MoveCharacter(Character &character){
   do
   {
     // Bouge !
-    game_loop.character_already_chosen = true;
+    GameLoop::GetInstance()->character_already_chosen = true;
     // Deplace enfin le character
 
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),

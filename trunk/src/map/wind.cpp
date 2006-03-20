@@ -21,7 +21,6 @@
 
 #include "wind.h"
 #include "camera.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/sprite.h"
 #include "../include/action_handler.h"
@@ -40,8 +39,8 @@ const uint barre_speed = 20;
 
 Wind wind;
 
-WindParticle::WindParticle(GameLoop &p_game_loop) :
-  PhysicalObj(p_game_loop, "WindParticle", 0.0)
+WindParticle::WindParticle() :
+  PhysicalObj("WindParticle", 0.0)
 {
   m_type = objUNBREAKABLE;
   m_wind_factor = 3;
@@ -169,7 +168,7 @@ void Wind::Reset(){
   const uint nb = TerrainActif().wind.nb_sprite;
 
   for (uint i=0; i<nb; ++i){
-    WindParticle particle(game_loop);
+    WindParticle particle;
     particle.Init();
     particle.Resize( (double)i / nb );
     particles.push_back( particle );

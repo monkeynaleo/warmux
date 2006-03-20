@@ -41,7 +41,7 @@ public:
 class Obus : public WeaponProjectile
 {
 public:
-  Obus(GameLoop &game_loop, AirAttackConfig& cfg);
+  Obus(AirAttackConfig& cfg);
   //void Refresh();
   void Reset();
 
@@ -64,7 +64,7 @@ private:
   AirAttackConfig &cfg;
 
 public:
-  Avion(GameLoop &game_loop, AirAttackConfig& cfg);
+  Avion(AirAttackConfig& cfg);
   void Shoot(double speed);
   void Reset();
   void Draw();

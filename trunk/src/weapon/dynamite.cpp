@@ -24,7 +24,6 @@
 #include "dynamite.h"
 #include "weapon_tools.h"
 #include "../game/config.h"
-#include "../game/game_loop.h"
 #include "../game/game_mode.h"
 #include "../include/app.h"
 #include "../object/objects_list.h"
@@ -36,8 +35,8 @@
 #undef LoadImage
 #endif
 
-BatonDynamite::BatonDynamite(GameLoop &p_game_loop, ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile(p_game_loop, "dynamite_bullet", cfg)
+BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg) :
+  WeaponProjectile("dynamite_bullet", cfg)
 {
   channel = -1;
 
@@ -119,7 +118,7 @@ Dynamite::Dynamite() :
 {
   m_name = _("Dynamite");
   
-  projectile = new BatonDynamite(game_loop, cfg());
+  projectile = new BatonDynamite(cfg());
 }
 
 void Dynamite::p_Select()
