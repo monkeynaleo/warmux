@@ -56,6 +56,4 @@ public:
   bool GetEndOfGameStatus();
   void SetEndOfGameStatus(bool status);
 };
-
-extern Game game;
 #endif
