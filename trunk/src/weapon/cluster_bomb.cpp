@@ -63,7 +63,7 @@ void Cluster::SignalCollision()
 
   if (IsGhost())
   {
-    game_messages.Add (_("The rocket left the battlefield..."));
+    GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
     return;
   }
 
@@ -104,7 +104,7 @@ void ClusterBomb::SignalCollision()
 {   
   if (IsGhost())
   {
-    game_messages.Add ("The Cluster Bomb left the battlefield before it could explode.");
+    GameMessages::GetInstance()->Add ("The Cluster Bomb left the battlefield before it could explode.");
     is_active = false ;
   }
 }

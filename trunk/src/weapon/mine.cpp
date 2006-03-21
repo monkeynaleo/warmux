@@ -128,7 +128,7 @@ void ObjMine::Detection()
     {
       std::string txt = Format(_("%s is next to a mine!"),
 			       ver -> m_name.c_str());
-      game_messages.Add (txt);
+      GameMessages::GetInstance()->Add (txt);
       EnableDetection();
       return;
     }

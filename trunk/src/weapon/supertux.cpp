@@ -106,7 +106,7 @@ void SuperTux::SignalCollision()
 { 
   if (IsGhost())
   {
-    game_messages.Add (_("Bye bye tux..."));
+    GameMessages::GetInstance()->Add (_("Bye bye tux..."));
   }
   is_active = false; 
 }

@@ -65,7 +65,7 @@ void HollyGrenade::SignalCollision()
 {   
   if (IsGhost())
   {
-    game_messages.Add ("The grenade left the battlefield before exploding");
+    GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
     is_active = false ;
   }
 }

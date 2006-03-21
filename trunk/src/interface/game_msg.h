@@ -40,10 +40,15 @@ public:
   std::list<message_t> liste;
   typedef std::list<message_t>::iterator iterator;
 
-public:
+ private:
+  static GameMessages * singleton;
+
+ public:
+  static GameMessages * GetInstance();
+
   // Remise a zéro
   void Reset();
-
+  
   // Affiche tous les messages
   void Draw();
 
@@ -53,9 +58,10 @@ public:
   // Ajoute un message
   // [titre] message
   void Add(const std::string &message);
-};
 
-extern GameMessages game_messages;
+ private:
+  GameMessages();
+};
 
 //-----------------------------------------------------------------------------
 #endif

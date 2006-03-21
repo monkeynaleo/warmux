@@ -150,7 +150,7 @@ void GameLoop::InitGameData_NetServer()
   Mouse::GetInstance()->Reset();
   fps.Reset();
   Interface::GetInstance()->Reset();
-  game_messages.Reset();
+  GameMessages::GetInstance()->Reset();
   
   action_handler->NewAction (Action(ACTION_START_GAME));
 }
@@ -227,7 +227,7 @@ void GameLoop::InitData()
    
   fps.Reset();
   Interface::GetInstance()->Reset();
-  game_messages.Reset();
+  GameMessages::GetInstance()->Reset();
 }
 
 void GameLoop::Init ()
@@ -295,7 +295,7 @@ void GameLoop::Init ()
 void GameLoop::Refresh()
 {  
   RefreshClock();
-  game_messages.Refresh();
+  GameMessages::GetInstance()->Refresh();
   camera.Refresh();
 
   // Mise à jeu des entrées (clavier / mouse)
@@ -406,7 +406,7 @@ void GameLoop::Draw ()
   FOR_EACH_TEAM(team)
     (**team).Draw();
 
-  game_messages.Draw();
+  GameMessages::GetInstance()->Draw();
 
   world.DrawAuthorName();
 
@@ -698,7 +698,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
                  character -> GetTeam().GetName().c_str());
   }
   
-  game_messages.Add (txt);
+  GameMessages::GetInstance()->Add (txt);
   
   // Si c'est le ver actif qui est mort, fin du tour
   if (character == &ActiveCharacter()) SetState (END_TURN);

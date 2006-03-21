@@ -58,7 +58,7 @@ void Parachute::p_Deselect()
 
 bool Parachute::p_Shoot()
 {
-  game_messages.Add(_("Parachute is activated automatically."));
+  GameMessages::GetInstance()->Add(_("Parachute is activated automatically."));
   return false;
 }
 

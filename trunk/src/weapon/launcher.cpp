@@ -48,7 +48,7 @@ void WeaponBullet::SignalCollision()
 { 
   if ((dernier_ver_touche == NULL) && (dernier_obj_touche == NULL))
   {
-    game_messages.Add (_("Your shot has missed!"));
+    GameMessages::GetInstance()->Add (_("Your shot has missed!"));
   }
   is_active = false; 
 }

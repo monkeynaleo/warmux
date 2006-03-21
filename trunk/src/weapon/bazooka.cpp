@@ -50,7 +50,7 @@ void RoquetteBazooka::SignalCollision()
 { 
   if (IsGhost())
   {
-    game_messages.Add (_("The rocket left the battlefield..."));
+    GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
   }
   is_active = false;
 }
