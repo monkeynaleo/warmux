@@ -169,7 +169,7 @@ void Clavier::HandleKeyPressed (const Action_t &action)
 	  break;
 
         case ACTION_CHANGE_CHARACTER:
-	  if (game_mode.AllowCharacterSelection())
+	  if (GameMode::GetInstance()->AllowCharacterSelection())
 	    ActionHandler::GetInstance()->NewAction(ActionInt(action,
 					ActiveTeam().NextCharacterIndex()));
 	  return ;

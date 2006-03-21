@@ -150,7 +150,7 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
   } else if (lbox_selected_teams->Clic(mousePosition, button)) {
 
   } else if ( bt_add_team->Contains(mousePosition)) {
-    if (lbox_selected_teams->GetItemsList()->size() < game_mode.max_teams)
+    if (lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
       MoveTeams(lbox_all_teams, lbox_selected_teams, false); 
   } else if ( bt_remove_team->Contains(mousePosition)) {
     MoveTeams(lbox_selected_teams, lbox_all_teams, true);

@@ -422,7 +422,7 @@ void Physics::ComputePendulumNextXY (double delta_t)
 		      /* a */ 1,
 		      /* b */ m_balancing_damping + 2 * m_rope_length.x1 / m_rope_length.x0,
 		      /* c */ 0,
-		      /* d */ -game_mode.gravity / m_rope_length.x0 * sin (m_rope_angle.x0)
+		      /* d */ -GameMode::GetInstance()->gravity / m_rope_length.x0 * sin (m_rope_angle.x0)
 		              +m_extern_force.x / m_rope_length.x0 * cos (m_rope_angle.x0),
                       delta_t);
 
@@ -454,7 +454,7 @@ void Physics::ComputeFallNextXY (double delta_t)
   //  printf ("av : (%5f,%5f) - (%5f,%5f) - (%5f,%5f)\n", m_pos_x.x0,
   //	  m_pos_y.x0, m_pos_x.x1, m_pos_y.x1, m_pos_x.x2, m_pos_y.x2);
 
-  weight_force = game_mode.gravity * m_gravity_factor * m_mass ;
+  weight_force = GameMode::GetInstance()->gravity * m_gravity_factor * m_mass ;
 
   // Wind force
 

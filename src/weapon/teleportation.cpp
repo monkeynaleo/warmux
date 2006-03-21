@@ -62,7 +62,7 @@ bool Teleportation::p_Shoot ()
   current_skin = ActiveCharacter().image->GetSurface();
 
   ActiveCharacter().Hide();
-  skin = WaveSurface(current_skin, 100, game_mode.duration_move_player * 1000, 5.0, 1.5);
+  skin = WaveSurface(current_skin, 100, GameMode::GetInstance()->duration_move_player * 1000, 5.0, 1.5);
   return true;
 }
 
@@ -86,7 +86,7 @@ void Teleportation::Refresh()
   }
 
   // Fin du chronometre ?
-  if (game_mode.duration_move_player * 1000 < dt)
+  if (GameMode::GetInstance()->duration_move_player * 1000 < dt)
   {
     // Non, on fait le chemin retour en 
     // commençant par déplacer le ver
@@ -97,7 +97,7 @@ void Teleportation::Refresh()
     return;
   }
 
-  if (game_mode.duration_move_player * 1000 / 2 < dt)
+  if (GameMode::GetInstance()->duration_move_player * 1000 / 2 < dt)
   {
     m_x = dst.x;
     m_y = dst.y - skin->GetHeight()/2;

@@ -227,7 +227,7 @@ void Config::Apply()
   // Charge le mode jeu
   weapons_list.Init();
   
-  game_mode.Load(m_game_mode);
+  GameMode::GetInstance()->Load(m_game_mode);
 
   // Son
   jukebox.ActiveMusic (tmp.sound.music);

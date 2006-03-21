@@ -64,7 +64,7 @@ bool Mouse::ActionClicG()
     return true;
 
   // On peut changer de ver ?
-  if( game_mode.AllowCharacterSelection() ){
+  if( GameMode::GetInstance()->AllowCharacterSelection() ){
     // Sélection d'un ver se son équipe ?
     bool ver_choisi=false;
     Team::iterator it=ActiveTeam().begin(),

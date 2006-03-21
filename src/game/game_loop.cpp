@@ -267,7 +267,7 @@ void GameLoop::Init ()
   if (teams_list.playing_list.size() < 2)
     Error(_("You need at least two teams to play: "
              "change this in 'Options menu' !"));
-  assert (teams_list.playing_list.size() <= game_mode.max_teams);
+  assert (teams_list.playing_list.size() <= GameMode::GetInstance()->max_teams);
 
   // Initialization of teams' energy
   teams_list.InitEnergy();
@@ -541,6 +541,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
   interface.weapons_menu.Hide();
 
   Time * global_time = Time::GetInstance();
+  GameMode * game_mode = GameMode::GetInstance();
 
   switch (state)
   {
@@ -549,7 +550,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
     MSG_DEBUG("game.statechange", "Playing" );
 
     // Init. le compteur
-    duration = game_mode.duration_turn;
+    duration = game_mode->duration_turn;
     interface.UpdateTimer(duration);
     interface.EnableDisplayTimer(true);
     pause_seconde = global_time->Read();
@@ -571,8 +572,8 @@ void GameLoop::SetState(int new_state, bool begin_game)
       teams_list.NextTeam (begin_game);
       action_handler->ExecActions();
     } while (ActiveTeam().NbAliveCharacter() == 0);
-    if( game_mode.allow_character_selection==GameMode::CHANGE_ON_END_TURN
-     || game_mode.allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
+    if( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
+     || game_mode->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
     {
             action_handler->NewAction(ActionInt(ACTION_CHANGE_CHARACTER,
                                      ActiveTeam().NextCharacterIndex()));
@@ -588,7 +589,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
   // Un ver a joué son arme, mais peut encore se déplacer
   case HAS_PLAYED:
     MSG_DEBUG("game.statechange", "Has played, now can move");
-    duration = game_mode.duration_move_player;
+    duration = game_mode->duration_move_player;
     pause_seconde = global_time->Read();
     interface.UpdateTimer(duration);
     curseur_ver.Cache();
@@ -599,7 +600,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
     MSG_DEBUG("game.statechange", "End of turn");
     ActiveTeam().AccessWeapon().SignalTurnEnd();
     curseur_ver.Cache();
-    duration = game_mode.duration_exchange_player;
+    duration = game_mode->duration_exchange_player;
     interface.UpdateTimer(duration);
     interface.EnableDisplayTimer(false);
     pause_seconde = global_time->Read();

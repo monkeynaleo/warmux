@@ -216,7 +216,7 @@ void Character::SetEnergyDelta (int delta)
   Color color;
 
   // Change energy
-  energy = BorneLong((int)energy +delta, 0, game_mode.character.max_energy);
+  energy = BorneLong((int)energy +delta, 0, GameMode::GetInstance()->character.max_energy);
   energy_bar.Actu (energy);
     
   // Energy bar color
@@ -388,9 +388,9 @@ void Character::Jump ()
     SetSkin("jump");
 
   // Initialise la force
-  double angle = Deg2Rad(game_mode.character.jump_angle);
+  double angle = Deg2Rad(GameMode::GetInstance()->character.jump_angle);
   if (GetDirection() == -1) angle = InverseAngle(angle);
-  SetSpeed (game_mode.character.jump_strength, angle);
+  SetSpeed (GameMode::GetInstance()->character.jump_strength, angle);
 }
 
 void Character::HighJump ()
@@ -408,9 +408,9 @@ void Character::HighJump ()
     SetSkin("jump");
 
   // Initialise la force
-  double angle = Deg2Rad(game_mode.character.super_jump_angle);
+  double angle = Deg2Rad(GameMode::GetInstance()->character.super_jump_angle);
   if (GetDirection() == -1) angle = InverseAngle(angle);
-  SetSpeed (game_mode.character.super_jump_strength, angle);
+  SetSpeed (GameMode::GetInstance()->character.super_jump_strength, angle);
 }
 
 void Character::DoShoot()
@@ -658,14 +658,15 @@ void Character::SignalFallEnding()
 
   double norme, degat;
   Point2d speed_vector;
+  GameMode * game_mode = GameMode::GetInstance();
 
   StopWalking();
   GetSpeedXY (speed_vector);
   norme = speed_vector.Norm();
-  if (norme > game_mode.safe_fall && speed_vector.y>0.0)
+  if (norme > game_mode->safe_fall && speed_vector.y>0.0)
   {
-    norme -= game_mode.safe_fall;
-    degat = norme * game_mode.damage_per_fall_unit;
+    norme -= game_mode->safe_fall;
+    degat = norme * game_mode->damage_per_fall_unit;
     SetEnergyDelta (-(int)degat);
     SetSkin("hard_fall_ending");
     GameLoop::GetInstance()->SignalCharacterDamageFalling(this);
@@ -827,8 +828,9 @@ void Character::Init() {}
 void Character::InitTeam (Team *ptr_equipe, const std::string &name, 
 			  Skin* pskin)
 {
-  SetMass (game_mode.character.mass);
-  SetAirResistFactor (game_mode.character.air_resist_factor);
+  GameMode * game_mode = GameMode::GetInstance();
+  SetMass (game_mode->character.mass);
+  SetAirResistFactor (game_mode->character.air_resist_factor);
   m_team = ptr_equipe;
   m_name = name;
   skin = pskin;
@@ -842,7 +844,7 @@ void Character::InitTeam (Team *ptr_equipe, const std::string &name,
   }
 
   // Energie
-  energy_bar.InitVal (energy, 0, game_mode.character.max_energy);
+  energy_bar.InitVal (energy, 0, game_mode->character.max_energy);
   energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
 
   energy_bar.SetBorderColor( black_color );
@@ -885,8 +887,8 @@ void Character::Reset()
   }
 
   // Energie
-  energy = game_mode.character.init_energy-1;
-  energy_bar.InitVal (energy, 0, game_mode.character.init_energy);
+  energy = GameMode::GetInstance()->character.init_energy-1;
+  energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.init_energy);
   SetEnergyDelta (1);
   lost_energy = 0;
 

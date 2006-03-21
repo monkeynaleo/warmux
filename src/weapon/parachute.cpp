@@ -51,7 +51,7 @@ void Parachute::p_Select()
 
 void Parachute::p_Deselect()
 {
-  ActiveCharacter().SetAirResistFactor(game_mode.character.air_resist_factor);
+  ActiveCharacter().SetAirResistFactor(GameMode::GetInstance()->character.air_resist_factor);
   ActiveCharacter().SetWindFactor(0);
   m_is_active = false;
 }

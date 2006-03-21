@@ -126,7 +126,7 @@ void JetPack::StopUse()
 void JetPack::GoUp()
 {
   StartUse();
-  m_y_force = -(ActiveCharacter().GetMass() * game_mode.gravity + JETPACK_FORCE) ;
+  m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE) ;
   ActiveCharacter().SetSkin("jetpack-up");
 }
 

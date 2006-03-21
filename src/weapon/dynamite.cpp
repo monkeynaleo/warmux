@@ -24,7 +24,6 @@
 #include "dynamite.h"
 #include "weapon_tools.h"
 #include "../game/config.h"
-#include "../game/game_mode.h"
 #include "../include/app.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
