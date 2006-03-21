@@ -34,13 +34,18 @@ private:
   std::map<int, Action_t> layout;
   bool PressedKeys[ACTION_MAX];
 
+  static Clavier * singleton;
+
 private:
   // Traite une touche relachée
   void HandleKeyPressed (const Action_t &action);
   void HandleKeyReleased (const Action_t &action);
-public:
-  void HandleKeyEvent( const SDL_Event *event) ;
   Clavier();
+
+ public:
+  static Clavier * GetInstance();
+
+  void HandleKeyEvent( const SDL_Event *event) ;
   void Reset();
 
   // On veut bouger la caméra au clavier ?
@@ -53,8 +58,6 @@ public:
   void SetKeyAction(int key, Action_t at);
 
 };
-
-extern Clavier clavier;
 
 //-----------------------------------------------------------------------------
 #endif
