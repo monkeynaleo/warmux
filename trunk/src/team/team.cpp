@@ -242,7 +242,7 @@ void Team::SelectCharacterIndex (uint index)
   ver_actif = index;
   (*this)[ver_actif].StartPlaying();
   camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
-  curseur_ver.SuitVerActif();
+  CurseurVer::GetInstance()->SuitVerActif();
 }
 
 // Prepare le tour d'une equipe
@@ -259,7 +259,7 @@ void Team::PrepareTurn()
   camera.ChangeObjSuivi (&ActiveCharacter(), 
 			 !camera_est_sauve, !camera_est_sauve, 
 			 true);
-  curseur_ver.SuitVerActif();
+  CurseurVer::GetInstance()->SuitVerActif();
 
   // Active notre arme
   AccessWeapon().Select();

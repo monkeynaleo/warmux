@@ -37,7 +37,14 @@ const uint y_max = 90; //number of pixels between the bottom of the arrow and th
                         //when the arrow is at the top of its movement
 const uint rebound_time = 1000; //Duration of a full rebound
 
-CurseurVer curseur_ver;
+CurseurVer * CurseurVer::singleton = NULL;
+
+CurseurVer * CurseurVer::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new CurseurVer();
+  }
+  return singleton;
+}
 
 CurseurVer::CurseurVer()
 {

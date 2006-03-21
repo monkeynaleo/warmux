@@ -40,9 +40,10 @@ private:
   bool actif;
   bool want_hide;
 
+  static CurseurVer * singleton;
+
 public:
-  CurseurVer();
-  ~CurseurVer();
+  static CurseurVer * GetInstance();
 
   void Init();
   void Reset();
@@ -58,10 +59,14 @@ public:
   // Cache le curseur
   void Cache();
 
+  
+
 private:
+  CurseurVer();
+  ~CurseurVer();
+
   bool IsDisplayed() const;
 };
 
-extern CurseurVer curseur_ver;
 //-----------------------------------------------------------------------------
 #endif

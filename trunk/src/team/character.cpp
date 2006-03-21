@@ -469,7 +469,7 @@ void Character::HandleKeyEvent(int action, int event_type)
     {
       HandleShoot(event_type);
       do_nothing_time = Time::GetInstance()->Read();
-      curseur_ver.Cache();
+      CurseurVer::GetInstance()->Cache();
       return;
     }
 
@@ -524,7 +524,7 @@ void Character::HandleKeyEvent(int action, int event_type)
     	        if (ActiveTeam().crosshair.enable)
               {
                 do_nothing_time = Time::GetInstance()->Read();
-                curseur_ver.Cache();
+                CurseurVer::GetInstance()->Cache();
 	              action_handler->NewAction (Action(ACTION_UP));
               }
 	      break ;
@@ -533,7 +533,7 @@ void Character::HandleKeyEvent(int action, int event_type)
 	            if (ActiveTeam().crosshair.enable)
               {
                 do_nothing_time = Time::GetInstance()->Read();
-                curseur_ver.Cache();
+                CurseurVer::GetInstance()->Cache();
      	          action_handler->NewAction (Action(ACTION_DOWN));
               }
 	      break ;
@@ -568,7 +568,7 @@ void Character::Refresh()
   if( &ActiveCharacter() == this && GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
   {
     if(do_nothing_time + do_nothing_timeout < global_time->Read())
-      curseur_ver.SuitVerActif();
+      CurseurVer::GetInstance()->SuitVerActif();
   }
 
   // Refresh de l'animation
@@ -631,7 +631,7 @@ bool Character::CanJump() const
 void Character::InitMouvementDG(uint pause)
 {
   do_nothing_time = Time::GetInstance()->Read();
-  curseur_ver.Cache();
+  CurseurVer::GetInstance()->Cache();
   m_rebounding = false;
   pause_bouge_dg = Time::GetInstance()->Read()+pause;
 
