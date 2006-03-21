@@ -138,7 +138,7 @@ void Mouse::ChoixVerPointe(){
 void Mouse::ScrollCamera() const{
 	Point2i mousePos = GetPosition();
 	Point2i sensitZone(SENSIT_SCROLL_MOUSE, SENSIT_SCROLL_MOUSE);
-	Point2i winSize = app.video.window.GetSize();
+	Point2i winSize = AppWormux::GetInstance()->video.window.GetSize();
 	Point2i tstVector;
 	
 	tstVector = mousePos.inf(sensitZone);

@@ -126,7 +126,7 @@ void BarreProg::DrawXY(const Point2i &pos){
 	image.FillRect( r_marq, border_color);
   }
   Rectanglei dst(pos.x, pos.y, larg, haut); 
-  app.video.window.Blit(image, pos);
+  AppWormux::GetInstance()->video.window.Blit(image, pos);
 
   world.ToRedrawOnScreen(dst);
 }

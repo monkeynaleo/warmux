@@ -155,7 +155,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   {
     uint max_fps;
     if (LitDocXml::LitUint (elem, "max_fps", max_fps)) 
-      app.video.SetMaxFps(max_fps);
+      AppWormux::GetInstance()->video.SetMaxFps(max_fps);
 
     LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);  
     LitDocXml::LitBool (elem, "display_energy_character", display_energy_character);
@@ -295,16 +295,18 @@ bool Config::SauveXml()
   }
 
   //=== Video ===
+  AppWormux * app = AppWormux::GetInstance();
+
   xmlpp::Element *noeud_video = racine -> add_child("video");
   doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));  
   doc.EcritBalise (noeud_video, "display_energy_character", ulong2str(display_energy_character));
   doc.EcritBalise (noeud_video, "display_name_character", ulong2str(display_name_character));
-  doc.EcritBalise (noeud_video, "width", ulong2str(app.video.window.GetWidth()));
-  doc.EcritBalise (noeud_video, "height", ulong2str(app.video.window.GetHeight()));
+  doc.EcritBalise (noeud_video, "width", ulong2str(app->video.window.GetWidth()));
+  doc.EcritBalise (noeud_video, "height", ulong2str(app->video.window.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen", 
-		   ulong2str(static_cast<uint>(app.video.IsFullScreen())) );	  
+		   ulong2str(static_cast<uint>(app->video.IsFullScreen())) );	  
   doc.EcritBalise (noeud_video, "max_fps", 
-          long2str(static_cast<int>(app.video.GetMaxFps())));
+          long2str(static_cast<int>(app->video.GetMaxFps())));
 
   if ( transparency == ALPHA )
     doc.EcritBalise (noeud_video, "transparency", "alpha");

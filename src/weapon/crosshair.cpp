@@ -72,7 +72,7 @@ void CrossHair::Draw()
   pos += calcul_d * Point2i(ActiveCharacter().GetDirection(), 1);
   pos -= image.GetSize()/2;
   
-  app.video.window.Blit(image, pos - camera.GetPosition());
+  AppWormux::GetInstance()->video.window.Blit(image, pos - camera.GetPosition());
   world.ToRedrawOnMap(Rectanglei(pos, image.GetSize()));
 }
 

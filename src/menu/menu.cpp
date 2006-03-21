@@ -28,9 +28,10 @@
 
 Menu::Menu(char * bg){
   close_menu = false ;
-   
-  uint x = app.video.window.GetWidth() / 2;
-  uint y = app.video.window.GetHeight() - 50;
+  AppWormux * app = AppWormux::GetInstance();
+
+  uint x = app->video.window.GetWidth() / 2;
+  uint y = app->video.window.GetHeight() - 50;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( resource_manager.LoadImage( res, bg));
@@ -76,8 +77,8 @@ bool Menu::BasicOnClic(const Point2i &mousePosition)
 
 void Menu::BasicDraw(const Point2i &mousePosition)
 {
-  background->ScaleSize(app.video.window.GetSize());
-  background->Blit(app.video.window, 0, 0);
+  background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
+  background->Blit(AppWormux::GetInstance()->video.window, 0, 0);
   
   actions_buttons->Draw(mousePosition);
 }
@@ -130,7 +131,7 @@ void Menu::Run ()
    BasicDraw(mousePosition);
    Draw(mousePosition);
 
-   app.video.Flip();
+   AppWormux::GetInstance()->video.Flip();
 
    // to limit CPU
    delay = SDL_GetTicks()-start;   

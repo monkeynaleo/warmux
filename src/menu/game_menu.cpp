@@ -52,7 +52,7 @@ GameMenu::GameMenu() :
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   // Center the boxes!
-  uint x = app.video.window.GetWidth()/2 - 475/2;
+  uint x = AppWormux::GetInstance()->video.window.GetWidth()/2 - 475/2;
 
   /* Choose the teams !! */
   team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
@@ -244,14 +244,15 @@ void GameMenu::Draw(const Point2i &mousePosition)
     }
   }
    
-  app.video.window.Blit( last_team->ecusson, space_for_logo->GetPosition() );
+  AppWormux * app = AppWormux::GetInstance();
+  app->video.window.Blit( last_team->ecusson, space_for_logo->GetPosition() );
   
   if (!terrain_init){
       terrain_init = true;
       ChangeMap();
   }
   
-  map_preview->Blit ( app.video.window, 
+  map_preview->Blit ( app->video.window, 
 		      map_box->GetPositionX()+MAPS_W+10, 
 		      map_box->GetPositionY()+map_box->GetSizeY()/2-map_preview->GetHeight()/2);
 }

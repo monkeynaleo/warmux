@@ -172,7 +172,7 @@ void AutomaticBazooka::DrawTarget()
   if( !cible.choisie )
 	return;
 
-  app.video.window.Blit(cible.image, cible.pos - cible.image.GetSize()/2 - camera.GetPosition());
+  AppWormux::GetInstance()->video.window.Blit(cible.image, cible.pos - cible.image.GetSize()/2 - camera.GetPosition());
 }
 
 bool AutomaticBazooka::IsReady() const

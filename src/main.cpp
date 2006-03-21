@@ -44,7 +44,14 @@
 #include "tool/random.h"
 #include "tool/stats.h"
 
-AppWormux app;
+AppWormux * AppWormux::singleton = NULL;
+
+AppWormux * AppWormux::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new AppWormux();
+  }
+  return singleton;
+}
 
 AppWormux::AppWormux(){
 }
@@ -220,6 +227,6 @@ void AppWormux::DisplayWelcomeMessage(){
 
 int main (int argc, char **argv)
 {
-  app.main(argc,argv);
+  AppWormux::GetInstance()->main(argc,argv);
   return EXIT_SUCCESS;
 }

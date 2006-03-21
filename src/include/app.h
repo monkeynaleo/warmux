@@ -37,6 +37,8 @@ private:
   int x, y;
   std::string titre_fenetre;
 
+  static AppWormux * singleton;
+
 private:
   void Init(int, char**);
   void InitNetwork(int argc, char **argv);
@@ -46,12 +48,12 @@ private:
   void InitFonts();
   void End();
   void DisplayWelcomeMessage();
+  AppWormux();
 
 public:
-  AppWormux();
+  static AppWormux * GetInstance();
+
   int main( int argc, char ** argv );
 };
-
-extern AppWormux app;
 
 #endif

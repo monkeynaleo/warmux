@@ -344,11 +344,13 @@ void Weapon::DrawWeaponBox(){
   c_x =  + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
   c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
 
+  AppWormux * app = AppWormux::GetInstance();
+
   Point2i dest( (int)(c_x - 0.5 * BUTTON_ICO_WIDTH), (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT));
-  app.video.window.Blit( interface.weapon_box_button, dest);
+  app->video.window.Blit( interface.weapon_box_button, dest);
 
   Point2i  dr2( (int)(c_x - 0.5 * WEAPON_ICO_WIDTH), (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT));
-  app.video.window.Blit( icone, dr2);
+  app->video.window.Blit( icone, dr2);
 }
 
 void Weapon::Draw(){
@@ -428,7 +430,7 @@ void Weapon::Draw(){
      break;
   }
   if ( m_image )
-    m_image->Blit( app.video.window, Point2i(x, y) - camera.GetPosition());
+    m_image->Blit( AppWormux::GetInstance()->video.window, Point2i(x, y) - camera.GetPosition());
 }
 
 void Weapon::DrawUnit(int unit){

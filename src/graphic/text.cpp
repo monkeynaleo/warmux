@@ -98,20 +98,21 @@ void Text::DrawCenterTop (int x, int y){
 
 void Text::DrawTopLeft(const Point2i &position){
   Rectanglei dst_rect(position, surf.GetSize());
-  
+  AppWormux * app = AppWormux::GetInstance();
+
   if(shadowed){
     Rectanglei shad_rect;
     
     shad_rect.SetPosition(dst_rect.GetPosition() + bg_offset);
     shad_rect.SetSize(background.GetWidth(), background.GetHeight() );
     
-    app.video.window.Blit(background, shad_rect.GetPosition());
-    app.video.window.Blit(surf, dst_rect.GetPosition());
+    app->video.window.Blit(background, shad_rect.GetPosition());
+    app->video.window.Blit(surf, dst_rect.GetPosition());
 		
     world.ToRedrawOnScreen(Rectanglei(dst_rect.GetPosition(),
                                       shad_rect.GetSize() + bg_offset));
   }else{
-    app.video.window.Blit(surf, dst_rect.GetPosition());
+    app->video.window.Blit(surf, dst_rect.GetPosition());
     world.ToRedrawOnScreen(dst_rect);
   }		
 }
@@ -143,8 +144,10 @@ void DrawTmpBoxText(Font &font, Point2i pos,
 
   Rectanglei rect( pos - size/2, size);
   
-  app.video.window.BoxColor(rect, boxColor);
-  app.video.window.RectangleColor(rect, rectColor);  
+  AppWormux * app = AppWormux::GetInstance();
+
+  app->video.window.BoxColor(rect, boxColor);
+  app->video.window.RectangleColor(rect, rectColor);  
 
   world.ToRedrawOnScreen( rect );
   font.WriteCenterTop( pos, txt, white_color);
@@ -199,8 +202,10 @@ void DrawTmpBoxTextWithReturns(Font &font, const Point2i &position,
 
   Rectanglei rect(x, y, max_width, total_height);
   
-  app.video.window.BoxColor(rect, boxColor);
-  app.video.window.RectangleColor(rect, rectColor);
+  AppWormux * app = AppWormux::GetInstance();
+
+  app->video.window.BoxColor(rect, boxColor);
+  app->video.window.RectangleColor(rect, rectColor);
 
   world.ToRedrawOnScreen(rect);
 

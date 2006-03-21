@@ -153,9 +153,9 @@ Main_Menu::Main_Menu()
   skinr_y = 0;
   title_y = 0;
 
-  y_scale = (double)app.video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
+  y_scale = (double)AppWormux::GetInstance()->video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
 
-  x_button = app.video.window.GetWidth()/2 - button_width/2;
+  x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - button_width/2;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
@@ -225,7 +225,7 @@ menu_item Main_Menu::Run ()
   int x=0, y=0;
   uint sleep_fps=0;
 
-  background->ScaleSize(app.video.window.GetWidth(), app.video.window.GetHeight());
+  background->ScaleSize(AppWormux::GetInstance()->video.window.GetWidth(), AppWormux::GetInstance()->video.window.GetHeight());
   EraseAll(); //Display background
   fps.Reset();
   start_time = global_time.Read();
@@ -270,7 +270,7 @@ menu_item Main_Menu::Run ()
   fps.Refresh();
   fps.AddOneFrame();
   fps.Draw();
-  app.video.Flip();
+  AppWormux::GetInstance()->video.Flip();
 
   //fps limiter
   uint delay = SDL_GetTicks()-start;
@@ -307,33 +307,37 @@ void Main_Menu::Draw(const Point2i &mousePosition)
 
 void Main_Menu::EraseAll()
 {
-    background->Blit( app.video.window, 0, 0);
-    version_text->DrawCenter( app.video.window.GetWidth()/2,
-                              app.video.window.GetHeight() + VERSION_DY);
-    website_text->DrawCenter( app.video.window.GetWidth()/2,
-                              app.video.window.GetHeight() + VERSION_DY/2);
+  AppWormux * app = AppWormux::GetInstance();
+  
+  background->Blit( app->video.window, 0, 0);
+  version_text->DrawCenter( app->video.window.GetWidth()/2,
+			    app->video.window.GetHeight() + VERSION_DY);
+  website_text->DrawCenter( app->video.window.GetWidth()/2,
+			    app->video.window.GetHeight() + VERSION_DY/2);
 }
 
 void Main_Menu::EraseGfx(uint dt)
 {
+  AppWormux * app = AppWormux::GetInstance();
+
   //Show background behind gfxs
-  int x_button = app.video.window.GetWidth()/2 - button_width/2;
+  int x_button = app->video.window.GetWidth()/2 - button_width/2;
   if( dt < boscill_end )
   {
     //Clean buttons bg
-    background->Blit(app.video.window, play->GetRectangle(), play->GetPosition());
+    background->Blit(app->video.window, play->GetRectangle(), play->GetPosition());
 #ifdef NETWORK_BUTTON  
-    background->Blit(app.video.window, network->GetRectangle(), network->GetPosition());
+    background->Blit(app->video.window, network->GetRectangle(), network->GetPosition());
 #endif
-    background->Blit(app.video.window, options->GetRectangle(), options->GetPosition());
-    background->Blit(app.video.window, infos->GetRectangle(), infos->GetPosition());
-    background->Blit(app.video.window, quit->GetRectangle(), quit->GetPosition());
+    background->Blit(app->video.window, options->GetRectangle(), options->GetPosition());
+    background->Blit(app->video.window, infos->GetRectangle(), infos->GetPosition());
+    background->Blit(app->video.window, quit->GetRectangle(), quit->GetPosition());
   }
   if( dt <= toscill_end && dt >= bfall_end )
   {
     // Erase previous title
-    uint title_x = app.video.window.GetWidth()/2 - title->GetWidth()/2;
-    background->Blit(app.video.window, title_x, title_y,
+    uint title_x = app->video.window.GetWidth()/2 - title->GetWidth()/2;
+    background->Blit(app->video.window, title_x, title_y,
                                          title_x, title_y,
                                          title->GetWidth(), title->GetHeight());
   }
@@ -342,11 +346,11 @@ void Main_Menu::EraseGfx(uint dt)
   {
     // Erase previous skin
     uint x_offset = x_button/2 - skin_left->GetWidth()/2;
-    background->Blit(app.video.window,x_offset, skinl_y,
+    background->Blit(app->video.window,x_offset, skinl_y,
                                          x_offset, skinl_y,
                                          skin_left->GetWidth(), skin_left->GetHeight());
-    x_offset = app.video.window.GetWidth() - x_button/2 - skin_right->GetWidth()/2;
-    background->Blit(app.video.window,x_offset, skinr_y,
+    x_offset = app->video.window.GetWidth() - x_button/2 - skin_right->GetWidth()/2;
+    background->Blit(app->video.window,x_offset, skinr_y,
                                          x_offset, skinr_y,
                                          skin_right->GetWidth(), skin_right->GetHeight());
   }
@@ -363,9 +367,11 @@ void Main_Menu::DrawGfx(const Point2i &mousePosition, uint dt)
 
 void Main_Menu::DrawSkins(uint dt)
 {
+  AppWormux * app = AppWormux::GetInstance();
+
   //Calculate inital position of the buttons depending on windows size.
-  double y_scale = (double)app.video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
-  int x_button = app.video.window.GetWidth()/2 - button_width/2;
+  double y_scale = (double)app->video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
+  int x_button = app->video.window.GetWidth()/2 - button_width/2;
 
   ////////////////////////////////  Skins XY, scale ///////////////////////////
   if(dt >= soscill_end)
@@ -373,10 +379,10 @@ void Main_Menu::DrawSkins(uint dt)
     //Skin final position
     skin_left->cache.EnableLastFrameCache();
     skin_left->Scale(y_scale, y_scale);
-    skinl_y = app.video.window.GetHeight() - skin_left->GetHeight() - skin_offset;
+    skinl_y = app->video.window.GetHeight() - skin_left->GetHeight() - skin_offset;
     skin_right->cache.EnableLastFrameCache();
     skin_right->Scale(y_scale, y_scale);
-    skinr_y = app.video.window.GetHeight() - skin_right->GetHeight() - skin_offset;
+    skinr_y = app->video.window.GetHeight() - skin_right->GetHeight() - skin_offset;
   }
   else
   if(dt >= sfall_end)
@@ -388,12 +394,12 @@ void Main_Menu::DrawSkins(uint dt)
     skin_left->Scale(y_scale, y_scale);
     Gelatine(skin_dy, skin_dh, start_time + sfall_end, skin_left->GetHeight()/8, soscill_end - sfall_end, 2);
 
-    skinl_y = app.video.window.GetHeight() - skin_left->GetHeight() - skin_offset + skin_dy;
+    skinl_y = app->video.window.GetHeight() - skin_left->GetHeight() - skin_offset + skin_dy;
     skin_left->ScaleSize(skin_left->GetWidth(), skin_left->GetHeight()+skin_dh);
 
     skin_right->cache.DisableLastFrameCache();
     skin_right->Scale(y_scale, y_scale);
-    skinr_y = app.video.window.GetHeight() - skin_right->GetHeight() - skin_offset + skin_dy;
+    skinr_y = app->video.window.GetHeight() - skin_right->GetHeight() - skin_offset + skin_dy;
     skin_right->ScaleSize(skin_right->GetWidth(), skin_right->GetHeight()+skin_dh);
   }
   else
@@ -403,13 +409,13 @@ void Main_Menu::DrawSkins(uint dt)
     uint fall_duration = sfall_end - tfall_end;
     skin_left->cache.EnableLastFrameCache();
     skin_left->Scale(y_scale, y_scale);
-    skinl_y = app.video.window.GetHeight() - skin_left->GetHeight() - skin_offset;
-    skinl_y = (dt2*dt2*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + skinl_y;
+    skinl_y = app->video.window.GetHeight() - skin_left->GetHeight() - skin_offset;
+    skinl_y = (dt2*dt2*app->video.window.GetHeight()/fall_duration/fall_duration) - app->video.window.GetHeight() + skinl_y;
 
     skin_left->cache.EnableLastFrameCache();
     skin_right->Scale(y_scale, y_scale);
-    skinr_y = app.video.window.GetHeight() - skin_right->GetHeight() - skin_offset;
-    skinr_y = (dt2*dt2*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + skinr_y;
+    skinr_y = app->video.window.GetHeight() - skin_right->GetHeight() - skin_offset;
+    skinr_y = (dt2*dt2*app->video.window.GetHeight()/fall_duration/fall_duration) - app->video.window.GetHeight() + skinr_y;
   }
   else
   {
@@ -419,15 +425,17 @@ void Main_Menu::DrawSkins(uint dt)
 
   //Draw the skins at final position/scale +- delta
   uint x_offset = x_button/2 - skin_left->GetWidth()/2;
-  skin_left->Blit(app.video.window, x_offset, skinl_y);
-  x_offset = app.video.window.GetWidth() - x_button/2 - skin_right->GetWidth()/2;
-  skin_right->Blit(app.video.window, x_offset, skinr_y);
+  skin_left->Blit(app->video.window, x_offset, skinl_y);
+  x_offset = app->video.window.GetWidth() - x_button/2 - skin_right->GetWidth()/2;
+  skin_right->Blit(app->video.window, x_offset, skinr_y);
 }
 
 void Main_Menu::DrawTitle(uint dt)
 {
+  AppWormux * app = AppWormux::GetInstance();
+
   //Calculate inital position of the buttons depending on windows size.
-  double y_scale = (double)app.video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
+  double y_scale = (double)app->video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
 
   ////////////////////////////////  Title XY, scale ///////////////////////////
   if(dt >= toscill_end)
@@ -465,15 +473,17 @@ void Main_Menu::DrawTitle(uint dt)
     title_y = -title->GetHeight();
   }
   //Draw the title at final position/scale +- delta
-  uint title_x = app.video.window.GetWidth()/2 - title->GetWidth()/2;
-  title->Blit(app.video.window, title_x, title_y);
+  uint title_x = app->video.window.GetWidth()/2 - title->GetWidth()/2;
+  title->Blit(app->video.window, title_x, title_y);
 }
 
 void Main_Menu::DrawButtons(const Point2i &mousePosition, uint dt)
 {
+  AppWormux * app = AppWormux::GetInstance();
+
   //Calculate inital position of the buttons depending on windows size.
-  double y_scale = (double)app.video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
-  int x_button = app.video.window.GetWidth()/2 - button_width/2;
+  double y_scale = (double)app->video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
+  int x_button = app->video.window.GetWidth()/2 - button_width/2;
 
   //////////////////////////// Buttons position / scale //////////////////
 
@@ -545,17 +555,17 @@ void Main_Menu::DrawButtons(const Point2i &mousePosition, uint dt)
     uint fall_duration = bfall_end;
     //Buttons are falling
     play   ->GetSprite()->cache.EnableLastFrameCache();
-    play   ->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_play);
+    play   ->SetXY(x_button, (dt*dt*app->video.window.GetHeight()/fall_duration/fall_duration) - app->video.window.GetHeight() + y_play);
 #ifdef NETWORK_BUTTON
     network->GetSprite()->cache.EnableLastFrameCache();
-    network->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_network);
+    network->SetXY(x_button, (dt*dt*app->video.window.GetHeight()/fall_duration/fall_duration) - app->video.window.GetHeight() + y_network);
 #endif
     options->GetSprite()->cache.EnableLastFrameCache();
-    options->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_options);
+    options->SetXY(x_button, (dt*dt*app->video.window.GetHeight()/fall_duration/fall_duration) - app->video.window.GetHeight() + y_options);
     infos  ->GetSprite()->cache.EnableLastFrameCache();
-    infos  ->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_infos);
+    infos  ->SetXY(x_button, (dt*dt*app->video.window.GetHeight()/fall_duration/fall_duration) - app->video.window.GetHeight() + y_infos);
     quit   ->GetSprite()->cache.EnableLastFrameCache();
-    quit   ->SetXY(x_button, (dt*dt*app.video.window.GetHeight()/fall_duration/fall_duration) - app.video.window.GetHeight() + y_quit);
+    quit   ->SetXY(x_button, (dt*dt*app->video.window.GetHeight()/fall_duration/fall_duration) - app->video.window.GetHeight() + y_quit);
   }
 
   play->Draw(mousePosition);

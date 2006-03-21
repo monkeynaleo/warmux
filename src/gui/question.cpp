@@ -51,10 +51,12 @@ void Question::TraiteTouche (SDL_Event &event){
 }
 
 void Question::Draw(){
+  AppWormux * app = AppWormux::GetInstance();
+  
   DrawTmpBoxTextWithReturns (*Font::GetInstance(Font::FONT_BIG),
-                             app.video.window.GetSize() / 2,
+                             app->video.window.GetSize() / 2,
                              message, 10);
-  app.video.Flip();
+  app->video.Flip();
 }
 
 int Question::PoseQuestion (){

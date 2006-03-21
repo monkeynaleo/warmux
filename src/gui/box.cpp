@@ -39,8 +39,8 @@ void Box::Draw(const Point2i &mousePosition){
   Rectanglei rect(position, size);
 	
   if( visible ){
-    app.video.window.BoxColor(rect, defaultColorBox);
-    app.video.window.RectangleColor(rect, defaultColorRect);
+    AppWormux::GetInstance()->video.window.BoxColor(rect, defaultColorBox);
+    AppWormux::GetInstance()->video.window.RectangleColor(rect, defaultColorRect);
   }
 
   std::list<Widget *>::iterator it;

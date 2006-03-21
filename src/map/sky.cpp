@@ -73,7 +73,7 @@ void Sky::RedrawParticleList(std::list<Rectanglei> &list){
 void Sky::RedrawParticle(const Rectanglei &particle) const{
     Rectanglei ds(GetSkyPos() + particle.GetPosition() - camera.GetPosition() - margin, 
 		    particle.GetSize() );
-    app.video.window.Blit(image, ds, particle.GetPosition() - camera.GetPosition());
+    AppWormux::GetInstance()->video.window.Blit(image, ds, particle.GetPosition() - camera.GetPosition());
 }
 
 Point2i Sky::GetSkyPos() const{
