@@ -148,7 +148,7 @@ void Camera::Refresh(){
   lance = false;
 
   // Camera à la souris
-  mouse.TestCamera();
+  Mouse::GetInstance()->TestCamera();
   if (lance) return;
 
 #ifdef TODO_KEYBOARD // ??? 

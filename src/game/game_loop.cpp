@@ -147,7 +147,7 @@ void GameLoop::InitGameData_NetServer()
   std::cout << "o " << _("Initialise data") << std::endl;
   CurseurVer::GetInstance()->Reset();
   Time::GetInstance()->Reset();
-  mouse.Reset();
+  Mouse::GetInstance()->Reset();
   fps.Reset();
   Interface::GetInstance()->Reset();
   game_messages.Reset();
@@ -222,7 +222,7 @@ void GameLoop::InitData()
   InitData_Local();
 
   CurseurVer::GetInstance()->Reset();
-  mouse.Reset();
+  Mouse::GetInstance()->Reset();
   clavier.Reset();
    
   fps.Reset();
@@ -313,7 +313,7 @@ void GameLoop::Refresh()
           }
         if ( event.type == SDL_MOUSEBUTTONDOWN )
           {
-             mouse.TraiteClic( &event);
+             Mouse::GetInstance()->TraiteClic( &event);
           }
         if ( event.type == SDL_KEYDOWN 
         ||   event.type == SDL_KEYUP)
@@ -343,7 +343,7 @@ void GameLoop::Refresh()
         || (ActiveTeam().GetWeapon().IsActive() && ActiveTeam().GetWeapon().override_keys) // for driving supertux for example
         )
     {
-      mouse.Refresh();
+      Mouse::GetInstance()->Refresh();
       clavier.Refresh();
     }
    

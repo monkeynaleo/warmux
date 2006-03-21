@@ -94,7 +94,7 @@ void Avion::Shoot(double speed)
   obus_actifs = false;
   Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
-  cible_x = mouse.GetWorldPosition().x;
+  cible_x = Mouse::GetInstance()->GetWorldPosition().x;
   SetY (0);
 
   image->Scale(dir, 1);

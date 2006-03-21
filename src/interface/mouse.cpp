@@ -33,13 +33,20 @@
 #include "../tool/point.h"
 #include "../weapon/weapon.h"
 
-Mouse mouse;
-
 // Vitesse du definalement à la souris
 const uint SCROLL_MOUSE = 20;
 
 // Largeur de la zone de sensibilite au camera a la souris
 const uint SENSIT_SCROLL_MOUSE = 40; // pixels
+
+Mouse * Mouse::singleton = NULL;
+
+Mouse * Mouse::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Mouse();
+  }
+  return singleton;
+}
 
 Mouse::Mouse(){
   scroll_actif = false;

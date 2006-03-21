@@ -32,9 +32,15 @@ private:
   bool scroll_actif;
   Point2i savedPos;
 
-public:
-  void TraiteClic (const SDL_Event *event); 
+  static Mouse * singleton;
+
+ private:
   Mouse();
+  
+public:
+  static Mouse * GetInstance();
+
+  void TraiteClic (const SDL_Event *event); 
 
   void Reset();
 
@@ -54,5 +60,4 @@ public:
   void ScrollCamera() const;
 };
 
-extern Mouse mouse;
 #endif
