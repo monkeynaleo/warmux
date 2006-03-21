@@ -191,7 +191,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
     break;
   }
 
-  game_messages.Add (txt.str());
+  GameMessages::GetInstance()->Add (txt.str());
 }
 
 //-----------------------------------------------------------------------------

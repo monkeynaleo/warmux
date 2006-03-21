@@ -98,7 +98,7 @@ void Gnu::SignalCollision()
 {   
   if (IsGhost())
   {
-    game_messages.Add ("The Gnu left the battlefield before exploding");
+    GameMessages::GetInstance()->Add ("The Gnu left the battlefield before exploding");
     is_active = false ;
   }
 }

@@ -26,8 +26,6 @@
 #include "../graphic/font.h"
 #include "../include/app.h"
 
-GameMessages game_messages;
-
 // Hauteur de la police de caractere "mini"
 #define HAUT_POLICE_MINI 12 // pixels
 
@@ -38,6 +36,18 @@ GameMessages game_messages;
 #define DUREE_VIE_MSG 7000 // ms  
 
 const uint NBR_MSG_MAX = 14;
+
+GameMessages * GameMessages::singleton = NULL;
+
+GameMessages * GameMessages::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new GameMessages();
+  }
+  return singleton;
+}
+
+GameMessages::GameMessages() {
+}
 
 // Remise a zéro
 void GameMessages::Reset(){

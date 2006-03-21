@@ -92,7 +92,7 @@ void RoquetteTeteCherche::SignalCollision()
 { 
   if (IsGhost())
   {
-    game_messages.Add (_("The automatic rocket has left the battlefield..."));
+    GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
   }
   is_active = false; 
 }
