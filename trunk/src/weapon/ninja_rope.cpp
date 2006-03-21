@@ -27,7 +27,6 @@
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../include/app.h"
-#include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../sound/jukebox.h"

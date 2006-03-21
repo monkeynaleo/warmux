@@ -159,7 +159,7 @@ void AutomaticBazooka::ChooseTarget()
 				   cible.image.GetHeight()));
   }
 
-  cible.pos = mouse.GetWorldPosition();
+  cible.pos = Mouse::GetInstance()->GetWorldPosition();
   DrawTarget();
   cible.choisie = true;
   static_cast<RoquetteTeteCherche *>(projectile)->SetTarget(cible.pos.x, cible.pos.y);
