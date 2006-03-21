@@ -197,27 +197,29 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 
 void Config::SetKeyboardConfig()
 {
-	clavier.SetKeyAction(SDLK_LEFT,		ACTION_MOVE_LEFT);		
-	clavier.SetKeyAction(SDLK_RIGHT,	ACTION_MOVE_RIGHT);
-	clavier.SetKeyAction(SDLK_UP,			ACTION_UP);
-	clavier.SetKeyAction(SDLK_DOWN,	ACTION_DOWN);
-	clavier.SetKeyAction(SDLK_RETURN,	ACTION_JUMP);
-	clavier.SetKeyAction(SDLK_BACKSPACE, ACTION_HIGH_JUMP);
-	clavier.SetKeyAction(SDLK_SPACE, ACTION_SHOOT);
-	clavier.SetKeyAction(SDLK_TAB, ACTION_CHANGE_CHARACTER);
-	clavier.SetKeyAction(SDLK_ESCAPE, ACTION_QUIT);
-	clavier.SetKeyAction(SDLK_p, ACTION_PAUSE);
-	clavier.SetKeyAction(SDLK_F10, ACTION_FULLSCREEN);
-	clavier.SetKeyAction(SDLK_F9, ACTION_TOGGLE_INTERFACE);
-	clavier.SetKeyAction(SDLK_F1, ACTION_WEAPONS1);
-	clavier.SetKeyAction(SDLK_F2, ACTION_WEAPONS2);
-	clavier.SetKeyAction(SDLK_F3, ACTION_WEAPONS3);
-	clavier.SetKeyAction(SDLK_F4, ACTION_WEAPONS4);
-	clavier.SetKeyAction(SDLK_F5, ACTION_WEAPONS5);
-	clavier.SetKeyAction(SDLK_F6, ACTION_WEAPONS6);
-	clavier.SetKeyAction(SDLK_F7, ACTION_WEAPONS7);
-	clavier.SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
-	clavier.SetKeyAction(SDLK_c, ACTION_CENTER);
+  Clavier * clavier = Clavier::GetInstance();
+  
+  clavier->SetKeyAction(SDLK_LEFT,		ACTION_MOVE_LEFT);		
+  clavier->SetKeyAction(SDLK_RIGHT,	ACTION_MOVE_RIGHT);
+  clavier->SetKeyAction(SDLK_UP,			ACTION_UP);
+  clavier->SetKeyAction(SDLK_DOWN,	ACTION_DOWN);
+  clavier->SetKeyAction(SDLK_RETURN,	ACTION_JUMP);
+  clavier->SetKeyAction(SDLK_BACKSPACE, ACTION_HIGH_JUMP);
+  clavier->SetKeyAction(SDLK_SPACE, ACTION_SHOOT);
+  clavier->SetKeyAction(SDLK_TAB, ACTION_CHANGE_CHARACTER);
+  clavier->SetKeyAction(SDLK_ESCAPE, ACTION_QUIT);
+  clavier->SetKeyAction(SDLK_p, ACTION_PAUSE);
+  clavier->SetKeyAction(SDLK_F10, ACTION_FULLSCREEN);
+  clavier->SetKeyAction(SDLK_F9, ACTION_TOGGLE_INTERFACE);
+  clavier->SetKeyAction(SDLK_F1, ACTION_WEAPONS1);
+  clavier->SetKeyAction(SDLK_F2, ACTION_WEAPONS2);
+  clavier->SetKeyAction(SDLK_F3, ACTION_WEAPONS3);
+  clavier->SetKeyAction(SDLK_F4, ACTION_WEAPONS4);
+  clavier->SetKeyAction(SDLK_F5, ACTION_WEAPONS5);
+  clavier->SetKeyAction(SDLK_F6, ACTION_WEAPONS6);
+  clavier->SetKeyAction(SDLK_F7, ACTION_WEAPONS7);
+  clavier->SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
+  clavier->SetKeyAction(SDLK_c, ACTION_CENTER);
 }
 
 void Config::Apply()

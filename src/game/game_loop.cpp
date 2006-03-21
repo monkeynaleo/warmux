@@ -223,7 +223,7 @@ void GameLoop::InitData()
 
   CurseurVer::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
-  clavier.Reset();
+  Clavier::GetInstance()->Reset();
    
   fps.Reset();
   Interface::GetInstance()->Reset();
@@ -325,7 +325,7 @@ void GameLoop::Refresh()
                   return;
              }
              
-             clavier.HandleKeyEvent( &event);
+             Clavier::GetInstance()->HandleKeyEvent( &event);
           }
      }
    
@@ -344,7 +344,7 @@ void GameLoop::Refresh()
         )
     {
       Mouse::GetInstance()->Refresh();
-      clavier.Refresh();
+      Clavier::GetInstance()->Refresh();
     }
    
     ActionHandler::GetInstance()->ExecActions();

@@ -52,7 +52,14 @@
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
 
-Clavier clavier;
+Clavier * Clavier::singleton = NULL;
+
+Clavier * Clavier::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Clavier();
+  }
+  return singleton;
+}
 
 Clavier::Clavier()
 {}
