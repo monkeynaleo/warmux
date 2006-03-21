@@ -145,7 +145,7 @@ void GameLoop::InitGameData_NetServer()
         
   // Remise à zéro
   std::cout << "o " << _("Initialise data") << std::endl;
-  curseur_ver.Reset();
+  CurseurVer::GetInstance()->Reset();
   Time::GetInstance()->Reset();
   mouse.Reset();
   fps.Reset();
@@ -221,7 +221,7 @@ void GameLoop::InitData()
 #endif
   InitData_Local();
 
-  curseur_ver.Reset();
+  CurseurVer::GetInstance()->Reset();
   mouse.Reset();
   clavier.Reset();
    
@@ -255,7 +255,7 @@ void GameLoop::Init ()
   {
     std::cout << "o " << _("Initialisation") << std::endl;
     Interface::GetInstance()->Init();
-    curseur_ver.Init();
+    CurseurVer::GetInstance()->Init();
     game_initialise = true;
   }
 
@@ -360,7 +360,7 @@ void GameLoop::Refresh()
     ActiveTeam().AccessWeapon().Manage();
     lst_objects.Refresh();
     ParticleEngine::Refresh();
-    curseur_ver.Refresh();
+    CurseurVer::GetInstance()->Refresh();
   }
   
   // Refresh the map
@@ -399,7 +399,7 @@ void GameLoop::Draw ()
   StatStart("GameDraw:other");
   lst_objects.Draw();
   ParticleEngine::Draw(true);
-  curseur_ver.Draw();
+  CurseurVer::GetInstance()->Draw();
 
   world.DrawWater();
 
@@ -592,14 +592,14 @@ void GameLoop::SetState(int new_state, bool begin_game)
     duration = game_mode->duration_move_player;
     pause_seconde = global_time->Read();
     Interface::GetInstance()->UpdateTimer(duration);
-    curseur_ver.Cache();
+    CurseurVer::GetInstance()->Cache();
     break;
 
   // Fin du tour : petite pause
   case END_TURN:
     MSG_DEBUG("game.statechange", "End of turn");
     ActiveTeam().AccessWeapon().SignalTurnEnd();
-    curseur_ver.Cache();
+    CurseurVer::GetInstance()->Cache();
     duration = game_mode->duration_exchange_player;
     Interface::GetInstance()->UpdateTimer(duration);
     Interface::GetInstance()->EnableDisplayTimer(false);
@@ -667,7 +667,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
     txt = Format(_("%s has fallen in water."), character -> m_name.c_str());
     
   } else if (&ActiveCharacter() == character) { // Active Character is dead 
-    curseur_ver.Cache();
+    CurseurVer::GetInstance()->Cache();
 
     // Is this a suicide ?
     if (ActiveTeam().GetWeaponType() == WEAPON_SUICIDE) {

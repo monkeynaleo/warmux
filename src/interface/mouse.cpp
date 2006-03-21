@@ -85,7 +85,7 @@ bool Mouse::ActionClicG()
     }
 
     if( ActiveCharacter().GetRect().Contains( pos_monde ) ){
-      curseur_ver.SuitVerActif();
+      CurseurVer::GetInstance()->SuitVerActif();
       return true;
     }
   }
