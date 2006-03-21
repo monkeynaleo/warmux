@@ -26,7 +26,6 @@
 #include "../include/app.h"
 #include "../interface/game_msg.h"
 #include "../interface/mouse.h"
-#include "../interface/interface.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../map/wind.h"

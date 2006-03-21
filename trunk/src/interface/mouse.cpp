@@ -50,7 +50,7 @@ void Mouse::Reset(){
 
 bool Mouse::ActionClicD(){ 
   if( ActiveTeam().GetWeapon().CanChangeWeapon() )
-    interface.weapons_menu.SwitchDisplay();
+    Interface::GetInstance()->weapons_menu.SwitchDisplay();
   
   return true;
 }
@@ -60,7 +60,7 @@ bool Mouse::ActionClicG()
   const Point2i pos_monde = GetWorldPosition();   
 	
   // Action dans le menu des armes ?
-  if( interface.weapons_menu.ActionClic( GetPosition() ) )
+  if( Interface::GetInstance()->weapons_menu.ActionClic( GetPosition() ) )
     return true;
 
   // On peut changer de ver ?
@@ -91,7 +91,7 @@ bool Mouse::ActionClicG()
   }
   
   // Action dans le menu des armes ?
-  if( interface.weapons_menu.ActionClic(GetPosition()) ) 
+  if( Interface::GetInstance()->weapons_menu.ActionClic(GetPosition()) ) 
     return true;
   
   // Choosing target for a weapon, many posibilities :
@@ -113,18 +113,18 @@ void Mouse::ChoixVerPointe(){
   const Point2i pos_monde = GetWorldPosition();
    
   // Quel ver est pointé par la souris ? (en dehors du ver actif)
-  interface.character_under_cursor = NULL;
+  Interface::GetInstance()->character_under_cursor = NULL;
   FOR_ALL_LIVING_CHARACTERS(equipe,ver){
     if ((&(*ver) != &ActiveCharacter())
        && ver->GetRect().Contains(pos_monde) ){
-      interface.character_under_cursor = &(*ver);
+      Interface::GetInstance()->character_under_cursor = &(*ver);
     }
   }
   
   // Aucun ver n'est pointé ... et le ver actif alors ?
-  if ((interface.character_under_cursor == NULL)
+  if ((Interface::GetInstance()->character_under_cursor == NULL)
       && ActiveCharacter().GetRect().Contains( pos_monde)){
-      interface.character_under_cursor = &ActiveCharacter();
+      Interface::GetInstance()->character_under_cursor = &ActiveCharacter();
   }
   
   // Dessine le curseur autour du ver pointé s'il y en a un
@@ -174,7 +174,7 @@ void Mouse::TestCamera(){
     scroll_actif = false;
   }
 
-  if(!interface.weapons_menu.IsDisplayed())
+  if(!Interface::GetInstance()->weapons_menu.IsDisplayed())
     ScrollCamera();
 }
 

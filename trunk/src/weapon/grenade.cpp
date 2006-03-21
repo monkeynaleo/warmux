@@ -25,7 +25,6 @@
 #include <sstream>
 #include "../game/time.h"
 #include "../team/teams_list.h"
-#include "../interface/interface.h"
 #include "../graphic/video.h"
 #include "../tool/math_tools.h"
 #include "../map/camera.h"

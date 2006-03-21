@@ -149,7 +149,7 @@ void GameLoop::InitGameData_NetServer()
   Time::GetInstance()->Reset();
   mouse.Reset();
   fps.Reset();
-  interface.Reset();
+  Interface::GetInstance()->Reset();
   game_messages.Reset();
   
   action_handler->NewAction (Action(ACTION_START_GAME));
@@ -226,7 +226,7 @@ void GameLoop::InitData()
   clavier.Reset();
    
   fps.Reset();
-  interface.Reset();
+  Interface::GetInstance()->Reset();
   game_messages.Reset();
 }
 
@@ -254,7 +254,7 @@ void GameLoop::Init ()
   if (!game_initialise)
   {
     std::cout << "o " << _("Initialisation") << std::endl;
-    interface.Init();
+    Interface::GetInstance()->Init();
     curseur_ver.Init();
     game_initialise = true;
   }
@@ -416,7 +416,7 @@ void GameLoop::Draw ()
 
   // Draw the interface (current team's information, weapon's ammo)
   StatStart("GameDraw:interface");
-  interface.Draw ();
+  Interface::GetInstance()->Draw ();
   StatStop("GameDraw:interface");
 
   StatStart("GameDraw:end");
@@ -493,7 +493,7 @@ void GameLoop::RefreshClock()
            SetState (END_TURN);
         } else {
           duration--;
-          interface.UpdateTimer(duration);
+          Interface::GetInstance()->UpdateTimer(duration);
         }
         break;
 
@@ -502,7 +502,7 @@ void GameLoop::RefreshClock()
           SetState (END_TURN);
         } else {
           duration--;
-          interface.UpdateTimer(duration);
+          Interface::GetInstance()->UpdateTimer(duration);
         }
         break;
 
@@ -538,7 +538,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
   action_handler->ExecActions();
 
   //
-  interface.weapons_menu.Hide();
+  Interface::GetInstance()->weapons_menu.Hide();
 
   Time * global_time = Time::GetInstance();
   GameMode * game_mode = GameMode::GetInstance();
@@ -551,8 +551,8 @@ void GameLoop::SetState(int new_state, bool begin_game)
 
     // Init. le compteur
     duration = game_mode->duration_turn;
-    interface.UpdateTimer(duration);
-    interface.EnableDisplayTimer(true);
+    Interface::GetInstance()->UpdateTimer(duration);
+    Interface::GetInstance()->EnableDisplayTimer(true);
     pause_seconde = global_time->Read();
 
 #ifdef TODO_NETWORK 
@@ -591,7 +591,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
     MSG_DEBUG("game.statechange", "Has played, now can move");
     duration = game_mode->duration_move_player;
     pause_seconde = global_time->Read();
-    interface.UpdateTimer(duration);
+    Interface::GetInstance()->UpdateTimer(duration);
     curseur_ver.Cache();
     break;
 
@@ -601,8 +601,8 @@ void GameLoop::SetState(int new_state, bool begin_game)
     ActiveTeam().AccessWeapon().SignalTurnEnd();
     curseur_ver.Cache();
     duration = game_mode->duration_exchange_player;
-    interface.UpdateTimer(duration);
-    interface.EnableDisplayTimer(false);
+    Interface::GetInstance()->UpdateTimer(duration);
+    Interface::GetInstance()->EnableDisplayTimer(false);
     pause_seconde = global_time->Read();
 
     interaction_enabled = false; // Be sure that we can NOT play !

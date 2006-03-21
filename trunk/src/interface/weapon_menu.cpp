@@ -127,7 +127,7 @@ bool WeaponMenuItem::MouseOn(const Point2i &mousePos)
   ComputeScale();
 
   Point2i scaled( (int)(BUTTON_ICO_WIDTH * scale), (int)(BUTTON_ICO_HEIGHT * scale) );
-  Rectanglei rect(interface.weapons_menu.GetPosition() - scaled/2 + position, scaled );
+  Rectanglei rect(Interface::GetInstance()->weapons_menu.GetPosition() - scaled/2 + position, scaled );
 
   if( rect.Contains(mousePos) )
      return true;
@@ -142,8 +142,10 @@ bool WeaponMenuItem::MouseOn(const Point2i &mousePos)
 // Draw a button
 void WeaponMenuItem::Draw()
 {
+  Interface * interface = Interface::GetInstance();
+
   ComputeScale();
-  Point2i buttonCenter(interface.weapons_menu.GetPosition() + position);
+  Point2i buttonCenter(interface->weapons_menu.GetPosition() + position);
   Point2i buttonSize( (int)(BUTTON_ICO_WIDTH * scale), (int)(BUTTON_ICO_HEIGHT * scale) );
   Point2i iconSize( (int)(WEAPON_ICO_WIDTH * scale), (int)(WEAPON_ICO_HEIGHT * scale) );
   std::ostringstream txt;
@@ -153,27 +155,27 @@ void WeaponMenuItem::Draw()
    
   switch(weapon_type){
     case 1:
-      button = interface.weapons_menu.my_button1;
+      button = interface->weapons_menu.my_button1;
       break ;
 
     case 2:
-      button = interface.weapons_menu.my_button2;
+      button = interface->weapons_menu.my_button2;
       break ;
 
     case 3:
-      button = interface.weapons_menu.my_button3;
+      button = interface->weapons_menu.my_button3;
       break ;
 
     case 4:
-      button = interface.weapons_menu.my_button4;
+      button = interface->weapons_menu.my_button4;
       break ;
 
     case 5:
-      button = interface.weapons_menu.my_button5;
+      button = interface->weapons_menu.my_button5;
       break ;
 
   default:
-      button = interface.weapons_menu.my_button1;
+      button = interface->weapons_menu.my_button1;
       break ;
   }
 
@@ -285,11 +287,11 @@ int WeaponsMenu::GetX() const{
 }
 
 int WeaponsMenu::GetY() const{
-   return AppWormux::GetInstance()->video.window.GetHeight() - GetHeight() - ( interface.IsDisplayed() ? interface.GetHeight() : 0 );
+   return AppWormux::GetInstance()->video.window.GetHeight() - GetHeight() - ( Interface::GetInstance()->IsDisplayed() ? Interface::GetInstance()->GetHeight() : 0 );
 }
 
 Point2i WeaponsMenu::GetPosition() const{
-	return AppWormux::GetInstance()->video.window.GetSize() - GetSize() - Point2i(0, interface.IsDisplayed() ? interface.GetHeight() : 0);
+	return AppWormux::GetInstance()->video.window.GetSize() - GetSize() - Point2i(0, Interface::GetInstance()->IsDisplayed() ? Interface::GetInstance()->GetHeight() : 0);
 }
 
 int WeaponsMenu::GetWidth() const{
@@ -450,12 +452,12 @@ void WeaponsMenu::MouseOver(const Point2i &mousePos)
   int button_no=0;
   int nv_bouton_sous_souris=-1;
   iterator it=boutons.begin(), fin=boutons.end();
-  interface.weapon_under_cursor = NULL;
+  Interface::GetInstance()->weapon_under_cursor = NULL;
   for (; it != fin; ++it)
     {
       if(it->MouseOn(mousePos))
 	{
-          interface.weapon_under_cursor = it->weapon;
+          Interface::GetInstance()->weapon_under_cursor = it->weapon;
 	  nv_bouton_sous_souris = button_no;
 	  if(button_no != bouton_sous_souris)
 	    {//Le curseur arrive sur un nouveau bouton
