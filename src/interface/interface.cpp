@@ -57,7 +57,14 @@ const uint BARENERGIE_HAUT = 15;
 
 const uint MARGIN = 10;
 
-Interface interface;
+Interface * Interface::singleton = NULL;
+
+Interface * Interface::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Interface();
+  }
+  return singleton;
+}
 
 Interface::Interface()
 {
@@ -234,7 +241,7 @@ void Interface::Draw ()
   {
     // Position on the screen
 	Point2i barPos = (app->video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1) 
-		- Point2i(0, interface.GetHeight() + 10);
+		- Point2i(0, GetHeight() + 10);
      
     // Drawing on the screen
      weapon_strength_bar.DrawXY(barPos);

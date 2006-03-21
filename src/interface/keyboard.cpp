@@ -195,6 +195,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
   PressedKeys[action] = false ;
 
   // We manage here only actions which are active on KEY_RELEASED event.
+  Interface * interface = Interface::GetInstance();
 
   switch(action) {
     case ACTION_QUIT:
@@ -212,7 +213,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
 
     case ACTION_TOGGLE_INTERFACE:
-      interface.EnableDisplay (!interface.IsDisplayed());
+      interface->EnableDisplay (!interface->IsDisplayed());
       return;
 
     case ACTION_CENTER:
@@ -221,7 +222,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
 
     case ACTION_TOGGLE_WEAPONS_MENUS:
-      interface.weapons_menu.SwitchDisplay();
+      interface->weapons_menu.SwitchDisplay();
       return;
 
     default:

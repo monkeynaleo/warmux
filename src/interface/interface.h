@@ -71,25 +71,29 @@ public:
    Surface bg_time;
    Point2i bottom_bar_pos;
 
-public:
-  Interface();
-  ~Interface();
-  void Init();
-  void Reset();
-  void Draw();
+   static Interface * singleton;
 
-  bool IsDisplayed () const { return display; };
-  void EnableDisplay (bool _display);
+ private:
+   Interface();
+   ~Interface();   
+   
+ public:
+   static Interface * GetInstance();
 
-  int GetWidth() const;
-  int GetHeight() const;
-  Point2i GetSize() const;
-
-  void UpdateTimer(uint utimer);
-  void EnableDisplayTimer (bool _display) {display_timer = _display;};
+   void Init();
+   void Reset();
+   void Draw();
+   
+   bool IsDisplayed () const { return display; };
+   void EnableDisplay (bool _display);
+   
+   int GetWidth() const;
+   int GetHeight() const;
+   Point2i GetSize() const;
+   
+   void UpdateTimer(uint utimer);
+   void EnableDisplayTimer (bool _display) {display_timer = _display;};
 };
-
-extern Interface interface;
 
 void AbsoluteDraw(Surface& s, Point2i pos);
 

@@ -347,7 +347,7 @@ void Weapon::DrawWeaponBox(){
   AppWormux * app = AppWormux::GetInstance();
 
   Point2i dest( (int)(c_x - 0.5 * BUTTON_ICO_WIDTH), (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT));
-  app->video.window.Blit( interface.weapon_box_button, dest);
+  app->video.window.Blit( Interface::GetInstance()->weapon_box_button, dest);
 
   Point2i  dr2( (int)(c_x - 0.5 * WEAPON_ICO_WIDTH), (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT));
   app->video.window.Blit( icone, dr2);

@@ -22,7 +22,6 @@
 #include "weapon_tools.h"
 #include "../graphic/surface.h"
 #include "../graphic/video.h"
-#include "../interface/interface.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../object/objects_list.h"
