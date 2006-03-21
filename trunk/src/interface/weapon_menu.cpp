@@ -179,11 +179,11 @@ void WeaponMenuItem::Draw()
 
   // Button display  
   button->Scale(scale, scale);
-  button->Blit(app.video.window, buttonCenter - buttonSize/2);
+  button->Blit(AppWormux::GetInstance()->video.window, buttonCenter - buttonSize/2);
    
   // Weapon display
   weapon_icon->Scale(scale, scale);
-  weapon_icon->Blit(app.video.window, buttonCenter - iconSize/2);
+  weapon_icon->Blit(AppWormux::GetInstance()->video.window, buttonCenter - iconSize/2);
    
   // Amunitions display
   nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetName());
@@ -280,15 +280,15 @@ void WeaponsMenu::SwitchDisplay()
 }
 
 int WeaponsMenu::GetX() const{
-  return app.video.window.GetWidth()-GetWidth();
+  return AppWormux::GetInstance()->video.window.GetWidth()-GetWidth();
 }
 
 int WeaponsMenu::GetY() const{
-   return app.video.window.GetHeight() - GetHeight() - ( interface.IsDisplayed() ? interface.GetHeight() : 0 );
+   return AppWormux::GetInstance()->video.window.GetHeight() - GetHeight() - ( interface.IsDisplayed() ? interface.GetHeight() : 0 );
 }
 
 Point2i WeaponsMenu::GetPosition() const{
-	return app.video.window.GetSize() - GetSize() - Point2i(0, interface.IsDisplayed() ? interface.GetHeight() : 0);
+	return AppWormux::GetInstance()->video.window.GetSize() - GetSize() - Point2i(0, interface.IsDisplayed() ? interface.GetHeight() : 0);
 }
 
 int WeaponsMenu::GetWidth() const{

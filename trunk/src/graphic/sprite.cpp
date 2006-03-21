@@ -397,7 +397,7 @@ void Sprite::Draw(const Point2i &pos){
 	if( !show )
 		return;
 
-	Blit(app.video.window, pos - camera.GetPosition() );	
+	Blit(AppWormux::GetInstance()->video.window, pos - camera.GetPosition() );	
 }
 
 void Sprite::Show() { show = true; }

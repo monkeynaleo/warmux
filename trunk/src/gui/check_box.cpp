@@ -52,7 +52,7 @@ void CheckBox::Draw(const Point2i &mousePosition){
   else 
     m_image->SetCurrentFrame(1);
 
-  m_image->Blit(app.video.window, GetPositionX() + GetSizeX() - 16, GetPositionY());
+  m_image->Blit(AppWormux::GetInstance()->video.window, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
 bool CheckBox::Clic(const Point2i &mousePosition, uint button){

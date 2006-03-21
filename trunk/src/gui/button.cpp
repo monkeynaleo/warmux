@@ -44,7 +44,7 @@ void Button::Draw(const Point2i &mousePosition){
   uint frame = Contains(mousePosition)?1:0;
 
   image->SetCurrentFrame(frame);
-  image->Blit(app.video.window, position);
+  image->Blit(AppWormux::GetInstance()->video.window, position);
 }
 
 void Button::SetSizePosition(const Rectanglei &rect){

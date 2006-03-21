@@ -232,15 +232,17 @@ void GameLoop::Init ()
 {
   // Display loading screen
   Config * config = Config::GetInstance();
+  AppWormux * app = AppWormux::GetInstance();  
+  
   Sprite * loading_image = new Sprite(Surface((
 			     config->GetDataDir() + PATH_SEPARATOR
 			     + "menu" + PATH_SEPARATOR
 			     + "img" + PATH_SEPARATOR 
 			     + "loading.png").c_str()));
   loading_image->cache.EnableLastFrameCache();
-  loading_image->ScaleSize(app.video.window.GetWidth(), app.video.window.GetHeight());
-  loading_image->Blit( app.video.window, 0, 0);
-  app.video.Flip();
+  loading_image->ScaleSize(app->video.window.GetWidth(), app->video.window.GetHeight());
+  loading_image->Blit( app->video.window, 0, 0);
+  app->video.Flip();
 
   delete loading_image;
 
@@ -429,7 +431,7 @@ void GameLoop::CallDraw()
 {
   Draw();
   StatStart("GameDraw:flip()");
-  app.video.Flip();
+  AppWormux::GetInstance()->video.Flip();
   StatStop("GameDraw:flip()");
 }
 
@@ -461,8 +463,8 @@ void GameLoop::Run()
 #ifdef ENABLE_LIMIT_FPS    
     delay = SDL_GetTicks()-start;
      
-    if (delay < app.video.GetSleepMaxFps())
-      sleep_fps = app.video.GetSleepMaxFps() - delay;
+    if (delay < AppWormux::GetInstance()->video.GetSleepMaxFps())
+      sleep_fps = AppWormux::GetInstance()->video.GetSleepMaxFps() - delay;
     else
       sleep_fps = 0;
     SDL_Delay(sleep_fps);

@@ -93,7 +93,7 @@ bool Font::Load (const std::string& filename, int size) {
 }
 
 void Font::Write(const Point2i &pos, Surface &surface){
-  app.video.window.Blit(surface, pos);
+  AppWormux::GetInstance()->video.window.Blit(surface, pos);
 		  
   // TODO: Remove this line! (and use GameFont instead of Font)
   world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );

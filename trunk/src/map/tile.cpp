@@ -133,7 +133,7 @@ void Tile::DrawTile_Clipped(Rectanglei worldClip) const
 				Point2i ptDest = destRect.GetPosition() - camera.GetPosition();
 				Point2i ptSrc = destRect.GetPosition() - c * CELL_SIZE;
 			
-                app.video.window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
+                AppWormux::GetInstance()->video.window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
 			}
         }
 }

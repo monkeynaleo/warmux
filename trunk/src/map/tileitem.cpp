@@ -29,7 +29,7 @@
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 void TileItem::Draw(const Point2i &pos){
-  app.video.window.Blit(GetSurface(),
+  AppWormux::GetInstance()->video.window.Blit(GetSurface(),
         pos * CELL_SIZE - camera.GetPosition());
 }
 

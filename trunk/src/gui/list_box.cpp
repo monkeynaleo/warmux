@@ -114,18 +114,19 @@ bool ListBox::Clic(const Point2i &mousePosition, uint button){
 void ListBox::Draw(const Point2i &mousePosition){
   int item = MouseIsOnWhichItem(mousePosition);
   Rectanglei rect (*this);
-  
-  app.video.window.BoxColor(rect, defaultListColor1);
-  app.video.window.RectangleColor(rect, white_color);
+  AppWormux * app = AppWormux::GetInstance();
+
+  app->video.window.BoxColor(rect, defaultListColor1);
+  app->video.window.RectangleColor(rect, white_color);
 
   for(uint i=0; i < nb_visible_items; i++){
 	 Rectanglei rect(GetPositionX() + 1, GetPositionY() + i * height_item + 1, GetSizeX() - 2, height_item - 2);
 	 
      if( int(i + first_visible_item) == selected_item )
-       app.video.window.BoxColor(rect, defaultListColor2);
+       app->video.window.BoxColor(rect, defaultListColor2);
      else
 	   if( i + first_visible_item == uint(item) )
-         app.video.window.BoxColor(rect, defaultListColor3);
+         app->video.window.BoxColor(rect, defaultListColor3);
      
      (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft( 
 			  GetPosition() + Point2i(5, i*height_item),
@@ -143,7 +144,7 @@ void ListBox::Draw(const Point2i &mousePosition){
     tmp_h = nb_visible_items_max * (h-20) / m_items.size();
     if (tmp_h < 5) tmp_h =5;
 
-    boxRGBA(app.video.sdlwindow, 
+    boxRGBA(app->video.sdlwindow, 
 	    x+w-10, tmp_y,
 	    x+w-1,  tmp_y+tmp_h,
 	    white_color);

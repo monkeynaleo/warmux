@@ -130,7 +130,8 @@ void Interface::Reset()
 
 void Interface::DisplayCharacterInfo ()
 {
-  Point2i pos = (app.video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
+  AppWormux * app = AppWormux::GetInstance();
+  Point2i pos = (app->video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
 
   // Get the character
   if (character_under_cursor == NULL) character_under_cursor = &ActiveCharacter();
@@ -165,7 +166,7 @@ void Interface::DisplayCharacterInfo ()
    
   // Display team logo
   Point2i dst(pos + TEAM_ICON_POS);
-  app.video.window.Blit( character_under_cursor->TeamAccess().ecusson, dst);
+  app->video.window.Blit( character_under_cursor->TeamAccess().ecusson, dst);
 }
 
 void Interface::DisplayWeaponInfo ()
@@ -207,7 +208,7 @@ void Interface::DisplayWeaponInfo ()
 
   // Display weapon icon
   if( !weapon->icone.IsNull() )
-      app.video.window.Blit( weapon->icone, bottom_bar_pos + WEAPON_ICON_POS);
+      AppWormux::GetInstance()->video.window.Blit( weapon->icone, bottom_bar_pos + WEAPON_ICON_POS);
   else
       std::cout << "Can't blit weapon->icone => NULL " << std::endl;
 
@@ -218,19 +219,21 @@ void Interface::DisplayWeaponInfo ()
 
 void Interface::Draw ()
 {    
+  AppWormux * app = AppWormux::GetInstance();
+
   // display global timer
-  Rectanglei dest ( (app.video.window.GetWidth()/2)-40, 0, bg_time.GetWidth(), bg_time.GetHeight() );	
-  app.video.window.Blit( bg_time, dest.GetPosition() );
+  Rectanglei dest ( (app->video.window.GetWidth()/2)-40, 0, bg_time.GetWidth(), bg_time.GetHeight() );	
+  app->video.window.Blit( bg_time, dest.GetPosition() );
   std::string tmp(global_time.GetString());
   global_timer->Set(tmp);
-  global_timer->DrawCenterTop(app.video.window.GetWidth()/2, 10); 
+  global_timer->DrawCenterTop(app->video.window.GetWidth()/2, 10); 
   
   world.ToRedrawOnScreen(dest);
 
   if ( GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING && weapon_strength_bar.visible)
   {
     // Position on the screen
-	Point2i barPos = (app.video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1) 
+	Point2i barPos = (app->video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1) 
 		- Point2i(0, interface.GetHeight() + 10);
      
     // Drawing on the screen
@@ -241,10 +244,10 @@ void Interface::Draw ()
   
   if (!display) return;
 
-  bottom_bar_pos = (app.video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
+  bottom_bar_pos = (app->video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
    
   Rectanglei dr( bottom_bar_pos, game_menu.GetSize() );
-  app.video.window.Blit( game_menu, bottom_bar_pos);
+  app->video.window.Blit( game_menu, bottom_bar_pos);
 
   world.ToRedrawOnScreen(dr);
   
@@ -292,6 +295,6 @@ void AbsoluteDraw(Surface &s, Point2i pos){
 	Rectanglei rectSource(rectSurface.GetPosition() - pos, rectSurface.GetSize());
 	Point2i ptDest = rectSurface.GetPosition() - camera.GetPosition();
 	
-	app.video.window.Blit(s, rectSource, ptDest);
+	AppWormux::GetInstance()->video.window.Blit(s, rectSource, ptDest);
 }
 
