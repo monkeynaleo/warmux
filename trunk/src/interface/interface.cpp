@@ -73,7 +73,7 @@ void Interface::Init()
   weapons_menu.Init();
   weapon_box_button = resource_manager.LoadImage( res, "interface/weapon_box_button");
    
-  barre_energie.InitVal (0, 0, game_mode.character.init_energy);
+  barre_energie.InitVal (0, 0, GameMode::GetInstance()->character.init_energy);
   barre_energie.InitPos (ENERGY_BAR_POS.x, ENERGY_BAR_POS.y, 
 			 BARENERGIE_LARG, BARENERGIE_HAUT);
   barre_energie.border_color = white_color;
@@ -125,7 +125,7 @@ void Interface::Reset()
   character_under_cursor = NULL;
   weapon_under_cursor = NULL;
   weapons_menu.Reset();
-  barre_energie.InitVal (0, 0, game_mode.character.init_energy);
+  barre_energie.InitVal (0, 0, GameMode::GetInstance()->character.init_energy);
 }
 
 void Interface::DisplayCharacterInfo ()

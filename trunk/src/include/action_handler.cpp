@@ -186,7 +186,7 @@ void Action_SetGameMode (const Action *a)
 #ifdef DBG_ACT
 	COUT_DBG << "SetGameMode : " << action.GetValue() << std::endl;
 #endif
-	game_mode.Load (action.GetValue());
+	GameMode::GetInstance()->Load (action.GetValue());
 }
 
 

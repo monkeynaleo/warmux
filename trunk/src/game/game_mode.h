@@ -41,7 +41,7 @@ public:
 
   struct s_character
   {
-	uint init_energy;
+    uint init_energy;
     uint max_energy;
     uint mass;
     double air_resist_factor;
@@ -51,25 +51,29 @@ public:
     int super_jump_angle;
   } character;
 
-  enum {
-    ALWAYS,
-    BEFORE_FIRST_ACTION,
-    BEFORE_FIRST_ACTION_AND_END_TURN,
-    CHANGE_ON_END_TURN,
-    NEVER
-  } allow_character_selection;
+  int allow_character_selection;
+
+  static const int ALWAYS = 0;
+  static const int BEFORE_FIRST_ACTION = 1;
+  static const int BEFORE_FIRST_ACTION_AND_END_TURN = 2;
+  static const int CHANGE_ON_END_TURN = 3;
+  static const int NEVER = 4;
  
 private:
   std::string m_current;
+  static GameMode * singleton;
     
 public:
-  GameMode();
+  static GameMode * GetInstance();
+
   bool Load(const std::string &mode);
   bool AllowCharacterSelection() const;
+
+private:
+  GameMode();  
 
 protected:
   bool LoadXml (xmlpp::Element *xml);
 };
 
-extern GameMode game_mode;
 #endif

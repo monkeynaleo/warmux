@@ -21,7 +21,6 @@
 
 #include "auto_bazooka.h"
 #include "weapon_tools.h"
-#include "../game/game_mode.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../include/app.h"

@@ -174,7 +174,7 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
     // C'est la fin ?
     ++it;
     fin_bcl = (it == fin);
-    fin_bcl |= (game_mode.max_characters <= vers.size());
+    fin_bcl |= (GameMode::GetInstance()->max_characters <= vers.size());
   } while (!fin_bcl);
 
   ver_actif = 0;
@@ -372,7 +372,7 @@ void Team::Reset()
     vers_fin_it = it;
     ++vers_fin_it;
     it -> Reset();
-    if (n == game_mode.max_characters) break;
+    if (n == GameMode::GetInstance()->max_characters) break;
   }
   vers_fin = n;
   crosshair.Reset();
