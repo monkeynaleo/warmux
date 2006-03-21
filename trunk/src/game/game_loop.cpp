@@ -77,28 +77,30 @@ GameLoop::GameLoop()
 void GameLoop::InitGameData_NetServer()
 {
   //        action_handler.NewAction(Action(ACTION_ASK_TEAM));
+  ActionHandler * action_handler = ActionHandler::GetInstance();
+  AppWormux * app = AppWormux::GetInstance();
   do
     {
-      action_handler.NewAction(Action(ACTION_ASK_VERSION));
+      action_handler->NewAction(Action(ACTION_ASK_VERSION));
       std::string msg=_("Wait for clients");
-      action_handler.ExecActions();
+      action_handler->ExecActions();
       std::cout << msg << std::endl;
       CL_Display::clear(CL_Color::black);
-      police_grand.WriteCenterTop (app.video.GetWidth()/2, app.video.GetHeight()/2, msg);
+      police_grand.WriteCenterTop (app->video.GetWidth()/2, app->video.GetHeight()/2, msg);
       CL_Display::flip();
       CL_System::keep_alive(500);
     } while (network.state != Network::NETWORK_SERVER_INIT_GAME);
   std::cout << "Server init game." << std::endl;
         
   std::cout << "o " << _("Load map") << std::endl;
-  action_handler.NewAction (ActionString(ACTION_SET_MAP, TerrainActif().name));
+  action_handler->NewAction (ActionString(ACTION_SET_MAP, TerrainActif().name));
   world.Reset();
 
   std::cout << "o " << _("Initialise teams") << std::endl;
   teams_list.Reset();
 
   // For cliens : Create teams
-  action_handler.NewAction (Action(ACTION_CLEAR_TEAMS));
+  action_handler->NewAction (Action(ACTION_CLEAR_TEAMS));
   
   TeamsList::iterator 
     it=teams_list.playing_list.begin(),
@@ -109,10 +111,10 @@ void GameLoop::InitGameData_NetServer()
       Team& team = **it;
                 
       // cliens : Create teams
-      action_handler.NewAction (ActionString(ACTION_NEW_TEAM, team.GetId()));
+      action_handler->NewAction (ActionString(ACTION_NEW_TEAM, team.GetId()));
                 
       // cliens : Place characters
-      action_handler.NewAction (ActionString(ACTION_CHANGE_TEAM, team.GetId()));
+      action_handler->NewAction (ActionString(ACTION_CHANGE_TEAM, team.GetId()));
       Team::iterator
         tit = team.begin(),
         tend = team.end();
@@ -120,22 +122,22 @@ void GameLoop::InitGameData_NetServer()
       for (; tit != tend; ++tit, ++i)
         {
           Character &character = *tit;
-          action_handler.NewAction (ActionInt(
+          action_handler->NewAction (ActionInt(
                                               ACTION_CHANGE_CHARACTER, i));
-          action_handler.NewAction (ActionInt2(
+          action_handler->NewAction (ActionInt2(
                                                ACTION_MOVE_CHARACTER, 
                                                character.GetX(), character.GetY()));
-          action_handler.NewAction (ActionInt(
+          action_handler->NewAction (ActionInt(
                                               ACTION_SET_CHARACTER_DIRECTION, 
                                               character.GetDirection()));
         }
 
       // Select first character
-      action_handler.NewAction (ActionInt(ACTION_CHANGE_CHARACTER, 0));
+      action_handler->NewAction (ActionInt(ACTION_CHANGE_CHARACTER, 0));
     }
         
-  action_handler.NewAction (ActionString(ACTION_CHANGE_TEAM, ActiveTeam().GetId()));
-  action_handler.NewAction (ActionInt(ACTION_CHANGE_CHARACTER, ActiveTeam().ActiveCharacterIndex()));
+  action_handler->NewAction (ActionString(ACTION_CHANGE_TEAM, ActiveTeam().GetId()));
+  action_handler->NewAction (ActionInt(ACTION_CHANGE_CHARACTER, ActiveTeam().ActiveCharacterIndex()));
 
   // Create objects
   lst_objects.Init();
@@ -144,13 +146,13 @@ void GameLoop::InitGameData_NetServer()
   // Remise à zéro
   std::cout << "o " << _("Initialise data") << std::endl;
   curseur_ver.Reset();
-  global_time.Reset();
+  Time::GetInstance()->Reset();
   mouse.Reset();
   fps.Reset();
   interface.Reset();
   game_messages.Reset();
   
-  action_handler.NewAction (Action(ACTION_START_GAME));
+  action_handler->NewAction (Action(ACTION_START_GAME));
 }
 
 void GameLoop::InitGameData_NetClient()
@@ -174,11 +176,11 @@ void GameLoop::InitGameData_NetClient()
           std::cout << "Unknow action for network in game_loop.cpp" << std::endl;
           break;
         }
-      action_handler.ExecActions();
+      action_handler->ExecActions();
       std::cout << network.state << std::endl;
       std::cout << msg << std::endl;
       CL_Display::clear(CL_Color::black);
-      police_grand.WriteCenterTop (app.video.GetWidth()/2, app.video.GetHeight()/2, msg);
+      police_grand.WriteCenterTop (app->video.GetWidth()/2, app->video.GetHeight()/2, msg);
       CL_Display::flip();
       CL_System::keep_alive(300);
     } while (network.state != Network::NETWORK_PLAYING);
@@ -208,7 +210,7 @@ void GameLoop::InitData_Local()
 
 void GameLoop::InitData()
 {
-  global_time.Reset();
+  Time::GetInstance()->Reset();
   
 #ifdef TODO_NETWORK 
   if (network.is_server())
@@ -332,7 +334,7 @@ void GameLoop::Refresh()
 
   //--- D'abord ce qui pourrait modifier les données d'un ver ---
 
-  if (!global_time.IsGamePaused())
+  if (!Time::GetInstance()->IsGamePaused())
   {
      
     // Keyboard and mouse refresh
@@ -345,7 +347,7 @@ void GameLoop::Refresh()
       clavier.Refresh();
     }
    
-    action_handler.ExecActions();
+    ActionHandler::GetInstance()->ExecActions();
     FOR_ALL_CHARACTERS(equipe,ver) ver -> Refresh();
 
     // Recalcule l'energie des equipes
@@ -476,11 +478,12 @@ void GameLoop::Run()
 
 void GameLoop::RefreshClock()
 {
-  if (global_time.IsGamePaused()) return;
+  Time * global_time = Time::GetInstance();
+  if (global_time->IsGamePaused()) return;
 
-  if (1000 < global_time.Read() - pause_seconde) 
+  if (1000 < global_time->Read() - pause_seconde) 
     {
-      pause_seconde = global_time.Read();
+      pause_seconde = global_time->Read();
 
       switch (state) {
 
@@ -525,14 +528,19 @@ void GameLoop::RefreshClock()
 
 void GameLoop::SetState(int new_state, bool begin_game)
 {
+  ActionHandler * action_handler = ActionHandler::GetInstance();
+
   // already in good state, nothing to do 
   if ((state == new_state) && !begin_game) return;
 
   state = new_state;
-  action_handler.ExecActions();
+
+  action_handler->ExecActions();
 
   //
   interface.weapons_menu.Hide();
+
+  Time * global_time = Time::GetInstance();
 
   switch (state)
   {
@@ -544,7 +552,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
     duration = game_mode.duration_turn;
     interface.UpdateTimer(duration);
     interface.EnableDisplayTimer(true);
-    pause_seconde = global_time.Read();
+    pause_seconde = global_time->Read();
 
 #ifdef TODO_NETWORK 
     if (network.is_server() || network.is_local())
@@ -561,16 +569,16 @@ void GameLoop::SetState(int new_state, bool begin_game)
     do
     {
       teams_list.NextTeam (begin_game);
-      action_handler.ExecActions();
+      action_handler->ExecActions();
     } while (ActiveTeam().NbAliveCharacter() == 0);
     if( game_mode.allow_character_selection==GameMode::CHANGE_ON_END_TURN
      || game_mode.allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
     {
-            action_handler.NewAction(ActionInt(ACTION_CHANGE_CHARACTER,
+            action_handler->NewAction(ActionInt(ACTION_CHANGE_CHARACTER,
                                      ActiveTeam().NextCharacterIndex()));
     }
 
-    action_handler.ExecActions();
+    action_handler->ExecActions();
 
     assert (!ActiveCharacter().IsDead());
     camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
@@ -581,7 +589,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
   case HAS_PLAYED:
     MSG_DEBUG("game.statechange", "Has played, now can move");
     duration = game_mode.duration_move_player;
-    pause_seconde = global_time.Read();
+    pause_seconde = global_time->Read();
     interface.UpdateTimer(duration);
     curseur_ver.Cache();
     break;
@@ -594,7 +602,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
     duration = game_mode.duration_exchange_player;
     interface.UpdateTimer(duration);
     interface.EnableDisplayTimer(false);
-    pause_seconde = global_time.Read();
+    pause_seconde = global_time->Read();
 
     interaction_enabled = false; // Be sure that we can NOT play !
     break;

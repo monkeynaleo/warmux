@@ -77,10 +77,11 @@ void Water::Refresh(){
   height_mvt = 0;
 
   ////////  Height Calculation:
-  if (temps_montee < global_time.Read())
+  Time * global_time = Time::GetInstance();
+  if (temps_montee < global_time->Read())
   {
-    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > global_time.Read()){
-      uint dt=global_time.Read()- temps_montee;
+    if(temps_montee + GO_UP_OSCILLATION_TIME * 1000 > global_time->Read()){
+      uint dt=global_time->Read()- temps_montee;
       height_mvt = GO_UP_STEP + (uint)(((float)GO_UP_STEP * sin(((float)(dt*(GO_UP_OSCILLATION_NBR-0.25))/GO_UP_OSCILLATION_TIME/1000.0)*2*M_PI))/(a*dt+b));
     }
     else{
@@ -91,9 +92,9 @@ void Water::Refresh(){
 
   ////////  Wave calculation:
   // on rempli le sol avec de l'eau
-  if (WAVE_TIME < (global_time.Read() - temps_eau))
+  if (WAVE_TIME < (global_time->Read() - temps_eau))
   {
-    temps_eau = global_time.Read();
+    temps_eau = global_time->Read();
     vague += WAVE_STEP;
     if (surface.GetWidth() <= vague)
 		vague=0;

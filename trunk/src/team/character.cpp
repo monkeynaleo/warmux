@@ -270,7 +270,7 @@ void Character::StartBreathing()
 
 void Character::StartWalking()
 {
-  do_nothing_time = global_time.Read();
+  do_nothing_time = Time::GetInstance()->Read();
 
   if(full_walk && current_skin=="breathe")
   {
@@ -376,7 +376,7 @@ void Character::Draw()
 void Character::Jump ()
 {
   MSG_DEBUG("character", "Jump");
-  do_nothing_time = global_time.Read();
+  do_nothing_time = Time::GetInstance()->Read();
 
   if (!CanJump()) return;
 
@@ -396,7 +396,7 @@ void Character::Jump ()
 void Character::HighJump ()
 {
   MSG_DEBUG("character", "HighJump");
-  do_nothing_time = global_time.Read();
+  do_nothing_time = Time::GetInstance()->Read();
 
   if (!CanJump()) return;
 
@@ -468,10 +468,12 @@ void Character::HandleKeyEvent(int action, int event_type)
   if (action == ACTION_SHOOT)
     {
       HandleShoot(event_type);
-      do_nothing_time = global_time.Read();
+      do_nothing_time = Time::GetInstance()->Read();
       curseur_ver.Cache();
       return;
     }
+
+  ActionHandler * action_handler = ActionHandler::GetInstance();
 
   if (!ActiveCharacter().IsReady())
     return;
@@ -484,10 +486,10 @@ void Character::HandleKeyEvent(int action, int event_type)
           switch (action)
           {
             case ACTION_JUMP:
-              action_handler.NewAction (Action(ACTION_JUMP));
+              action_handler->NewAction (Action(ACTION_JUMP));
 	            return ;
             case ACTION_HIGH_JUMP:
-              action_handler.NewAction (Action(ACTION_HIGH_JUMP));
+              action_handler->NewAction (Action(ACTION_HIGH_JUMP));
               return ;
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:
@@ -521,18 +523,18 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_UP:
     	        if (ActiveTeam().crosshair.enable)
               {
-                do_nothing_time = global_time.Read();
+                do_nothing_time = Time::GetInstance()->Read();
                 curseur_ver.Cache();
-	              action_handler.NewAction (Action(ACTION_UP));
+	              action_handler->NewAction (Action(ACTION_UP));
               }
 	      break ;
 
             case ACTION_DOWN:
 	            if (ActiveTeam().crosshair.enable)
               {
-                do_nothing_time = global_time.Read();
+                do_nothing_time = Time::GetInstance()->Read();
                 curseur_ver.Cache();
-     	          action_handler.NewAction (Action(ACTION_DOWN));
+     	          action_handler->NewAction (Action(ACTION_DOWN));
               }
 	      break ;
             default:
@@ -561,10 +563,11 @@ void Character::Refresh()
   if (desactive) return;
 
   UpdatePosition ();
+  Time * global_time = Time::GetInstance();
 
   if( &ActiveCharacter() == this && GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
   {
-    if(do_nothing_time + do_nothing_timeout < global_time.Read())
+    if(do_nothing_time + do_nothing_timeout < global_time->Read())
       curseur_ver.SuitVerActif();
   }
 
@@ -572,7 +575,7 @@ void Character::Refresh()
   if (GetSkin().anim.utilise)
   {
     // C'est le début d'une animation ?
-    if (!anim.draw && (anim.time < global_time.Read())) 
+    if (!anim.draw && (anim.time < global_time->Read())) 
     {
       anim.image->SetCurrentFrame(0);
       anim.image->Start();
@@ -588,7 +591,7 @@ void Character::Refresh()
       {
         anim.draw = false;
         anim.time  = randomObj.GetLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
-        anim.time += global_time.Read();
+        anim.time += global_time->Read();
       }
     }
   }
@@ -599,7 +602,7 @@ void Character::PrepareTurn ()
 {
   HandleMostDamage();
   lost_energy = 0;
-  pause_bouge_dg = global_time.Read();
+  pause_bouge_dg = Time::GetInstance()->Read();
 }
 
 const Team& Character::GetTeam() const
@@ -617,7 +620,7 @@ Team& Character::TeamAccess()
 bool Character::MouvementDG_Autorise() const
 {
   if (!IsReady() || IsFalling()) return false;
-  return pause_bouge_dg < global_time.Read();
+  return pause_bouge_dg < Time::GetInstance()->Read();
 }
 
 bool Character::CanJump() const
@@ -627,17 +630,17 @@ bool Character::CanJump() const
 
 void Character::InitMouvementDG(uint pause)
 {
-  do_nothing_time = global_time.Read();
+  do_nothing_time = Time::GetInstance()->Read();
   curseur_ver.Cache();
   m_rebounding = false;
-  pause_bouge_dg = global_time.Read()+pause;
+  pause_bouge_dg = Time::GetInstance()->Read()+pause;
 
   StartWalking();
 }
 
 bool Character::CanStillMoveDG(uint pause)
 {
-  if(pause_bouge_dg+pause<global_time.Read())
+  if(pause_bouge_dg+pause<Time::GetInstance()->Read())
   {
     pause_bouge_dg += pause;
     return true;
@@ -651,7 +654,7 @@ void Character::SignalFallEnding()
   // Do not manage dead worms.
   if (IsDead()) return;
 
-  pause_bouge_dg = global_time.Read();
+  pause_bouge_dg = Time::GetInstance()->Read();
 
   double norme, degat;
   Point2d speed_vector;
@@ -782,7 +785,7 @@ bool Character::SetSkin(const std::string& skin_name)
     {
         anim.draw = false;
         anim.time  = randomObj.GetLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
-        anim.time += global_time.Read();
+        anim.time += Time::GetInstance()->Read();
     }
 
     current_skin = skin_name;
@@ -861,7 +864,7 @@ void Character::Reset()
   { 
     anim.image->Finish();
     anim.time  = randomObj.GetLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
-    anim.time += global_time.Read();    
+    anim.time += Time::GetInstance()->Read();    
   }
 
   // Initialise l'image

@@ -50,7 +50,7 @@ void HollyGrenade::Refresh()
 
   smoke_engine.AddPeriodic(GetPosition(), particle_SMOKE, false);
   
-  double tmp = global_time.Read() - begin_time;
+  double tmp = Time::GetInstance()->Read() - begin_time;
   // Sing Alleluia ;-)
   if (tmp > (1000 * cfg.timeout - 2000) && !sing_alleluia) {
     jukebox.Play("share","weapon/alleluia") ;

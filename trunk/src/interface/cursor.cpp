@@ -75,36 +75,38 @@ void CurseurVer::Refresh()
 
   image->Scale(1.0, 1.0);
 
+  Time * global_time = Time::GetInstance();
+
   //The arrow is appearing:
-  if( actif && global_time.Read() < time_begin_anim + show_hide_time )
+  if( actif && global_time->Read() < time_begin_anim + show_hide_time )
   {
-    dy = (int)((camera.GetPosition().y - ActiveCharacter().GetY()) * (1.0 - (global_time.Read() - time_begin_anim) / (float)show_hide_time));
+    dy = (int)((camera.GetPosition().y - ActiveCharacter().GetY()) * (1.0 - (global_time->Read() - time_begin_anim) / (float)show_hide_time));
     return;
   }
 
   //If we want to hide the cursor, we have to wait the end of the current rebound to make the cursor disappear
   if(want_hide)
   {
-    if( ((global_time.Read() - (time_begin_anim + show_hide_time)) % rebound_time < rebound_time / 2)
+    if( ((global_time->Read() - (time_begin_anim + show_hide_time)) % rebound_time < rebound_time / 2)
     &&  ((last_update                - (time_begin_anim + show_hide_time)) % rebound_time > rebound_time / 2))
     {
       //We are at the end of the rebound
       actif = false;
-      time_begin_anim = global_time.Read();
+      time_begin_anim = global_time->Read();
     }
   }
 
   //The arrow is disappearing:
-  if( !actif && global_time.Read() < time_begin_anim + show_hide_time )
+  if( !actif && global_time->Read() < time_begin_anim + show_hide_time )
   {
-    dy = (int)((camera.GetPosition().y - ActiveCharacter().GetY()) * ((global_time.Read() - time_begin_anim) / (float)show_hide_time));
+    dy = (int)((camera.GetPosition().y - ActiveCharacter().GetY()) * ((global_time->Read() - time_begin_anim) / (float)show_hide_time));
     return;
   }
 
   //The arrow is rebounding:
   Rebound(image, dy, time_begin_anim + show_hide_time, rebound_time, -y_max - (-y_min));
 
-  last_update = global_time.Read();
+  last_update = global_time->Read();
 }
 
 // Cache le curseur
@@ -139,10 +141,10 @@ void CurseurVer::PointeObj (PhysicalObj *obj)
   obj_designe = obj;
   actif = true;
   want_hide = false;
-  time_begin_anim = global_time.Read();
+  time_begin_anim = Time::GetInstance()->Read();
 }
 
 // Are we displaying the arrow on the screen ?
 bool CurseurVer::IsDisplayed() const {
-  return actif || (global_time.Read() < time_begin_anim + show_hide_time);
+  return actif || (Time::GetInstance()->Read() < time_begin_anim + show_hide_time);
 }

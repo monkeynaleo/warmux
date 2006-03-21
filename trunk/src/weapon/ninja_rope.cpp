@@ -106,10 +106,10 @@ bool NinjaRope::p_Shoot()
 
   last_node = 0 ;
   m_attaching = true;
-  m_launch_time = global_time.Read() ;
+  m_launch_time = Time::GetInstance()->Read() ;
   m_initial_angle = ActiveTeam().crosshair.GetAngleRad();
 
-  last_mvt=global_time.Read();
+  last_mvt=Time::GetInstance()->Read();
   return true ;
 }
 
@@ -137,7 +137,7 @@ void NinjaRope::TryAttachRope()
 {
   int x, y;
   uint length;
-  uint delta_time = global_time.Read() - m_launch_time;
+  uint delta_time = Time::GetInstance()->Read() - m_launch_time;
   double angle ;
 
   // The rope is being launching. Increase the rope length and check
@@ -180,7 +180,7 @@ void NinjaRope::TryAttachRope()
       rope_node[0].y = m_fixation_y ;
       
       ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
-      m_hooked_time = global_time.Read();
+      m_hooked_time = Time::GetInstance()->Read();
       InitSkinSprite();
     }
   else
@@ -366,9 +366,9 @@ void NinjaRope::Refresh()
 
 void NinjaRope::GoUp()
 {
-  if(global_time.Read()<last_mvt+DT_MVT)
+  if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
     return;
-  last_mvt = global_time.Read();
+  last_mvt = Time::GetInstance()->Read();
 
   delta_len = -0.1 ;
   ActiveCharacter().ChangePhysRopeSize (delta_len);
@@ -378,9 +378,9 @@ void NinjaRope::GoUp()
 
 void NinjaRope::GoDown()
 {
-  if(global_time.Read()<last_mvt+DT_MVT)
+  if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
     return;
-  last_mvt = global_time.Read();
+  last_mvt = Time::GetInstance()->Read();
 
   if (ActiveCharacter().GetRopeLength() >= MAX_ROPE_LEN / PIXEL_PER_METER)
     return;
@@ -459,13 +459,13 @@ void NinjaRope::Draw()
     else
       skin_angle = prev_angle - M_PI;
     //Skin display:
-    if( global_time.Read() >= m_hooked_time + SKIN_ROTATION_TIME )
+    if( Time::GetInstance()->Read() >= m_hooked_time + SKIN_ROTATION_TIME )
     {
       skin->SetRotation_deg((- skin_angle * 180 / M_PI) - 90);
     }
     else
     {
-      uint dt = global_time.Read() - m_hooked_time;
+      uint dt = Time::GetInstance()->Read() - m_hooked_time;
       float angle = sin( dt * M_PI_2 / SKIN_ROTATION_TIME ) * (-skin_angle - M_PI_2);
       skin->SetRotation_deg(angle * 180 / M_PI);
     }

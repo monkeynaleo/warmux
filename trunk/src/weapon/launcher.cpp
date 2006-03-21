@@ -112,7 +112,7 @@ void WeaponProjectile::Shoot(double strength)
   SetSpeed (strength, angle);
   PutOutOfGround(angle); 
 
-  begin_time = global_time.Read();  
+  begin_time = Time::GetInstance()->Read();  
 
   ShootSound();  
 
@@ -193,7 +193,7 @@ void WeaponProjectile::Refresh()
   }  
 
   // Explose after timeout
-  double tmp = global_time.Read() - begin_time;
+  double tmp = Time::GetInstance()->Read() - begin_time;
   
   if(cfg.timeout && tmp > 1000 * cfg.timeout) {
     is_active = false;      
@@ -211,7 +211,7 @@ void WeaponProjectile::Draw()
   int tmp = cfg.timeout;
 
   if (tmp != 0) { 
-    tmp -= (int)((global_time.Read() - begin_time) / 1000);
+    tmp -= (int)((Time::GetInstance()->Read() - begin_time) / 1000);
 
     if (tmp >= 0) {
       std::ostringstream ss;

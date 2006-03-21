@@ -123,7 +123,7 @@ void Network::client_on_receive_action(CL_NetPacket &packet,
  		                              CL_NetComputer &computer) 
 {
 	Action *a = make_action(packet);
-	action_handler.NewAction(*a, false);
+	ActionHandler::GetInstance()->NewAction(*a, false);
 	delete a;
 }
 
@@ -180,7 +180,7 @@ void Network::server_on_receive_action(CL_NetPacket &packet, CL_NetComputer &com
 #endif
 	// Add the Action to the stack
 	Action *a = make_action(packet);
-	action_handler.NewAction(*a, false);
+	ActionHandler::GetInstance()->NewAction(*a, false);
 	delete a;
 
 	// Resend to other computers the packet

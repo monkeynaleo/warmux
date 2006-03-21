@@ -82,8 +82,8 @@ void ObjMine::EnableDetection()
   if (!animation)
   {
     animation=true;
-    MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",global_time.ReadSec() );
-    attente = global_time.ReadSec() + cfg.timeout;
+    MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
+    attente = Time::GetInstance()->ReadSec() + cfg.timeout;
     MSG_DEBUG("mine", "EnableDetection : %d", attente);
     m_ready = false;
     MSG_DEBUG("mine", "IsReady() = %d", IsReady());
@@ -107,7 +107,7 @@ void ObjMine::DisableDetection()
 
 void ObjMine::Detection()
 {
-  uint current_time = global_time.ReadSec();
+  uint current_time = Time::GetInstance()->ReadSec();
 
   if (escape_time == 0) {
     escape_time = current_time + static_cast<MineConfig&>(cfg).escape_time;
@@ -151,7 +151,7 @@ void ObjMine::Refresh()
   if (animation) {
      image->Update();
 
-     if (attente < global_time.ReadSec())
+     if (attente < Time::GetInstance()->ReadSec())
        {
 	 jukebox.Stop(channel);
 	 channel = -1;

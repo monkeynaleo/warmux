@@ -41,10 +41,20 @@
 #define COUT_DBG std::cout << "[Action Handler] "
 #endif
 
-ActionHandler action_handler;
-
 // Delta appliqué à l'angle du viseur
 #define DELTA_CROSSHAIR 2
+
+ActionHandler * ActionHandler::singleton = NULL;
+
+ActionHandler * ActionHandler::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new ActionHandler();
+  }
+  return singleton;
+}
+
+ActionHandler::ActionHandler() {
+}
 
 void Action_Walk (const Action *a)
 {
@@ -212,7 +222,7 @@ void Action_AskVersion (const Action *a)
 #ifdef CL
         if (!network.is_client()) return;
 	if (network.state != Network::NETWORK_WAIT_SERVER) return;
-	action_handler.NewAction(ActionString(ACTION_SEND_VERSION, VERSION));
+	NewAction(ActionString(ACTION_SEND_VERSION, VERSION));
 	network.state = Network::NETWORK_WAIT_MAP;
 #endif
 }

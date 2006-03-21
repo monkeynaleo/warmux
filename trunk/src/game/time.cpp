@@ -28,7 +28,14 @@
 #include "../interface/game_msg.h"
 #include "../tool/math_tools.h"
 
-Time global_time;
+Time * Time::singleton = NULL;
+
+Time * Time::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Time();
+  }
+  return singleton;
+}
 
 bool Time::IsGamePaused() const {
   return is_game_paused;

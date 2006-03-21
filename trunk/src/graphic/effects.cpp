@@ -71,7 +71,7 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
 {
   float scale_x, scale_y;
   int spr_w, spr_h;
-  uint dt = (global_time.Read() - t0) % per;
+  uint dt = (Time::GetInstance()->Read() - t0) % per;
 
   spr->Scale(1.0,1.0);
   spr_w = spr->GetWidth();
@@ -103,7 +103,7 @@ void Rebound(Sprite* spr, int &dy, uint t0, uint per, int dy_max)
 // per: number of oscillations
 void Gelatine (int &y, int &stretch_y, uint t0, uint amp, uint dur, uint per)
 {
-  uint dt = global_time.Read() - t0;
+  uint dt = Time::GetInstance()->Read() - t0;
   if(dt >= dur)
   {
     y = 0;

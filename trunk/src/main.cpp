@@ -115,7 +115,7 @@ void AppWormux::Init(int argc, char **argv){
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
 
-  action_handler.Init();
+  ActionHandler::GetInstance()->Init();
   config->Load();
 
   InitNetwork(argc, argv);
@@ -156,7 +156,7 @@ void AppWormux::DisplayLoadingPicture(){
   loading_image.ScaleSize( video.window.GetSize() );
   loading_image.Blit( video.window, 0, 0 );
 
-  global_time.Reset();
+  Time::GetInstance()->Reset();
 
   Text text1(_("Wormux launching..."), white_color, Font::GetInstance(Font::FONT_HUGE), true); 
   Text text2(txt_version, white_color, Font::GetInstance(Font::FONT_HUGE), true); 

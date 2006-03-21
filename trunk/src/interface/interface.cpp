@@ -224,7 +224,7 @@ void Interface::Draw ()
   // display global timer
   Rectanglei dest ( (app->video.window.GetWidth()/2)-40, 0, bg_time.GetWidth(), bg_time.GetHeight() );	
   app->video.window.Blit( bg_time, dest.GetPosition() );
-  std::string tmp(global_time.GetString());
+  std::string tmp(Time::GetInstance()->GetString());
   global_timer->Set(tmp);
   global_timer->DrawCenterTop(app->video.window.GetWidth()/2, 10); 
   

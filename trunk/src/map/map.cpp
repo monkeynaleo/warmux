@@ -263,7 +263,7 @@ bool Map::IsInVacuum_right (const PhysicalObj &obj, int dx, int dy)
 
 void Map::DrawAuthorName()
 {
-  if (AUTHOR_INFO_TIME < global_time.Read()) {
+  if (AUTHOR_INFO_TIME < Time::GetInstance()->Read()) {
     if (author_info1 != NULL) {
       delete author_info1;
       delete author_info2;

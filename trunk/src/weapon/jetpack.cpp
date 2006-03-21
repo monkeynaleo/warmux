@@ -69,7 +69,7 @@ void JetPack::Refresh()
 	{
 	  // We are using fuel !!!
 
-	  uint current = global_time.Read() ;
+	  uint current = Time::GetInstance()->Read() ;
 	  double delta = (double)(current - m_last_fuel_down);
 
 	  while (delta >= DELTA_FUEL_DOWN)
@@ -108,7 +108,7 @@ void JetPack::StartUse()
 {
   if ( (m_x_force == 0) && (m_y_force == 0))
     {
-      m_last_fuel_down = global_time.Read();
+      m_last_fuel_down = Time::GetInstance()->Read();
       channel = jukebox.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
     }
 }

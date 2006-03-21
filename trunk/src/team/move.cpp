@@ -123,9 +123,9 @@ void MoveCharacterLeft(Character &character){
 
   bool bouge = (character.GetDirection() == -1);
   if (bouge) 
-    action_handler.NewAction(Action(ACTION_WALK));
+    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
   else{
-    action_handler.NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
+    ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 }
@@ -137,10 +137,10 @@ void MoveCharacterRight (Character &character){
 
   bool bouge = (character.GetDirection() == 1);
   if (bouge) 
-    action_handler.NewAction(Action(ACTION_WALK));
+    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
   else
   {
-    action_handler.NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
+    ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 }

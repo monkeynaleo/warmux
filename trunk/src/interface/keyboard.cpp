@@ -170,7 +170,7 @@ void Clavier::HandleKeyPressed (const Action_t &action)
 
         case ACTION_CHANGE_CHARACTER:
 	  if (game_mode.AllowCharacterSelection())
-	    action_handler.NewAction(ActionInt(action,
+	    ActionHandler::GetInstance()->NewAction(ActionInt(action,
 					ActiveTeam().NextCharacterIndex()));
 	  return ;
 
@@ -182,7 +182,7 @@ void Clavier::HandleKeyPressed (const Action_t &action)
         {
           Weapon_type weapon;
           if (weapons_list.GetWeaponBySort(weapon_sort, weapon))
-            action_handler.NewAction(ActionInt(ACTION_CHANGE_WEAPON, weapon));
+            ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_CHANGE_WEAPON, weapon));
 
           return;
         }

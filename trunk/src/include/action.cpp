@@ -52,7 +52,7 @@ Action* Action::clone() const
 
 std::ostream& Action::out(std::ostream&os) const
 {
-	os << action_handler.GetActionName(m_type);
+	os << ActionHandler::GetInstance()->GetActionName(m_type);
 	return os;
 }
 
