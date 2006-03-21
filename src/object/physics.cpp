@@ -66,7 +66,7 @@ Physics::Physics (double mass)
   m_elasticity_off = true;
 
   SetMass(mass);
-  m_last_move = global_time.Read() ;
+  m_last_move = Time::GetInstance()->Read() ;
 }
 
 Physics::~Physics ()
@@ -346,7 +346,7 @@ double Physics::GetRopeLength()
 
 void Physics::StartMoving()
 {
-  m_last_move = global_time.Read();
+  m_last_move = Time::GetInstance()->Read();
 
   if (m_motion_type == NoMotion)
     m_motion_type = FreeFall ;  
@@ -488,14 +488,14 @@ Point2d Physics::ComputeNextXY(double delta_t){
   if (m_motion_type == Pendulum)
     ComputePendulumNextXY(delta_t);
 
-  m_last_move = global_time.Read() ;
+  m_last_move = Time::GetInstance()->Read() ;
 
   return Point2d(m_pos_x.x0, m_pos_y.x0);
 }
 
 void Physics::RunPhysicalEngine()
 {
-  double step_t, delta_t = (global_time.Read() - m_last_move) / 1000.0;
+  double step_t, delta_t = (Time::GetInstance()->Read() - m_last_move) / 1000.0;
   Point2d oldPos;
   Point2d newPos;
   Point2d contactPos;

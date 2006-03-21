@@ -228,7 +228,7 @@ menu_item Main_Menu::Run ()
   background->ScaleSize(AppWormux::GetInstance()->video.window.GetWidth(), AppWormux::GetInstance()->video.window.GetHeight());
   EraseAll(); //Display background
   fps.Reset();
-  start_time = global_time.Read();
+  start_time = Time::GetInstance()->Read();
   last_refresh = start_time;
   anim_finished = false;
   choice = menuNULL;
@@ -266,7 +266,7 @@ menu_item Main_Menu::Run ()
    
   Draw( Point2i(x, y) );
 
-  last_refresh = global_time.Read();
+  last_refresh = Time::GetInstance()->Read();
   fps.Refresh();
   fps.AddOneFrame();
   fps.Draw();
@@ -286,8 +286,8 @@ menu_item Main_Menu::Run ()
 
 void Main_Menu::Draw(const Point2i &mousePosition)
 {
-  uint dt = global_time.Read() - start_time;
-  if( last_refresh / bg_refresh != global_time.Read() / bg_refresh
+  uint dt = Time::GetInstance()->Read() - start_time;
+  if( last_refresh / bg_refresh != Time::GetInstance()->Read() / bg_refresh
   || (!anim_finished && dt > soscill_end))
   {
     //Refresh all the screen

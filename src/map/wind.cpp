@@ -181,7 +181,7 @@ double Wind::GetStrength() const{
 
 void Wind::ChooseRandomVal(){
   int val = randomObj.GetLong(-100, 100);
-  action_handler.NewAction (ActionInt(ACTION_WIND, val));
+  ActionHandler::GetInstance()->NewAction (ActionInt(ACTION_WIND, val));
 }
 
 void Wind::SetVal(long val){
@@ -194,13 +194,13 @@ void Wind::DrawParticles(){
 }
 
 void Wind::Refresh(){
-  if(m_last_move + barre_speed < global_time.Read()){
+  if(m_last_move + barre_speed < Time::GetInstance()->Read()){
     if(m_val>m_nv_val)
       --m_val;
     else
     if(m_val<m_nv_val)
       ++m_val;
-    m_last_move = global_time.Read();
+    m_last_move = Time::GetInstance()->Read();
     barre.Actu(m_val); 
   }
 

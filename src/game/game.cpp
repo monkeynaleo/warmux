@@ -200,14 +200,15 @@ void Game::MessageEndOfGame()
 
 int Game::AskQuestion (bool draw)
 {
-  global_time.Pause();
+  Time * global_time = Time::GetInstance();
+  global_time->Pause();
 
   if (draw) 
     GameLoop::GetInstance()->Draw ();
   
   question.PoseQuestion ();
 
-  global_time.Continue(); 
+  global_time->Continue(); 
   return question.reponse;
 }
 

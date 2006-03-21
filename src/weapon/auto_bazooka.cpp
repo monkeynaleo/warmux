@@ -77,7 +77,7 @@ void RoquetteTeteCherche::Refresh()
       image->SetRotation_deg(angle *180/M_PI);
       
       //2 sec après avoir été tirée, la roquette se dirige vers la cible:
-      tmp = global_time.Read() - begin_time;
+      tmp = Time::GetInstance()->Read() - begin_time;
       if(tmp>1000 * TPS_AV_ATTIRANCE)
 	{
 	  m_attire = true;

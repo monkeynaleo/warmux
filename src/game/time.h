@@ -31,9 +31,14 @@ private:
   uint pause_start;
   uint pause_offset;// Offset between get_time() and LitTemps()
   bool is_game_paused;
+  static Time * singleton;
+
+private:
+  Time();
    
 public:
-  Time();
+  static Time * GetInstance();
+
   void Reset();
   bool IsGamePaused() const;
 
@@ -51,5 +56,4 @@ public:
   void Continue();
 };
 
-extern Time global_time;
 #endif

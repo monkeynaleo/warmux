@@ -42,19 +42,23 @@ private:
 
 	// Action queue
 	std::list<Action*> queue;
-	
+
+	static ActionHandler * singleton;
+
 public:
+	static ActionHandler * GetInstance();
+
 	void NewAction (const Action &a, bool repeat_to_network=true);
 	void ExecActions ();
 	void Init();
 	std::string GetActionName(Action_t action);
 	
 private:
+	ActionHandler();
+
 	void Exec (const Action *a);
 	void Register (Action_t action, const std::string &name, callback_t fct);
 };
-
-extern ActionHandler action_handler;
 
 //-----------------------------------------------------------------------------
 #endif

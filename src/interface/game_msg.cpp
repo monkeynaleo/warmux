@@ -63,7 +63,7 @@ void GameMessages::Refresh(){
   for( i=liste.begin(); i != liste.end(); ){
     actuel = i;
     ++i;
-    if( DUREE_VIE_MSG < global_time.Read() - actuel -> time ){
+    if( DUREE_VIE_MSG < Time::GetInstance()->Read() - actuel -> time ){
       fin = (i == liste.end());
       delete (actuel->text);
       liste.erase (actuel);
@@ -82,7 +82,7 @@ void GameMessages::Add(const std::string &message){
   Text * tmp = new Text(message, white_color, Font::GetInstance(Font::FONT_SMALL));
   Text * tmp2 = new Text(message, black_color, Font::GetInstance(Font::FONT_SMALL));
 
-  liste.push_back (message_t(tmp, tmp2, global_time.Read()));
+  liste.push_back (message_t(tmp, tmp2, Time::GetInstance()->Read()));
 
   while( NBR_MSG_MAX < liste.size() )
     liste.pop_front();

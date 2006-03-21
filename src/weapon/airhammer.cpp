@@ -76,8 +76,8 @@ bool Airhammer::p_Shoot()
 
 void Airhammer::RepeatShoot()
 {  
-  uint time = global_time.Read() - m_last_jolt; 
-  uint tmp = global_time.Read();
+  uint time = Time::GetInstance()->Read() - m_last_jolt; 
+  uint tmp = Time::GetInstance()->Read();
 
   if (time >= MIN_TIME_BETWEEN_JOLT) 
   {

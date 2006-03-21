@@ -43,7 +43,7 @@ Particle::Particle() :
 
   m_initial_time_to_live = 20;
   m_left_time_to_live = 0;
-  m_last_refresh = global_time.Read();
+  m_last_refresh = Time::GetInstance()->Read();
 }
 
 void Particle::Draw()
@@ -54,7 +54,7 @@ void Particle::Draw()
 
 void Particle::Refresh()
 {
-  uint time = global_time.Read() - m_last_refresh; 
+  uint time = Time::GetInstance()->Read() - m_last_refresh; 
 
   UpdatePosition();
 
@@ -84,7 +84,7 @@ void Particle::Refresh()
       image->Scale(1.0,1.0);
       image->SetAlpha(alpha);
     }
-    m_last_refresh = global_time.Read() ;
+    m_last_refresh = Time::GetInstance()->Read() ;
   }
 }
 
@@ -189,8 +189,8 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
 				 double angle, double norme)
 {
   // time spent since last refresh (in milliseconds)
-  uint time = global_time.Read() - m_last_refresh; 
-  uint tmp = global_time.Read();
+  uint time = Time::GetInstance()->Read() - m_last_refresh; 
+  uint tmp = Time::GetInstance()->Read();
 
   uint delta = uint(m_time_between_add * double(randomObj.GetLong(3,40))/10);
   if (time >= delta) {

@@ -54,10 +54,12 @@ void SuperTux::Shoot(double strength)
   angle = ActiveTeam().crosshair.GetAngleRad();
   PutOutOfGround(angle);
   SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle);
-  time_next_action = global_time.Read();
-  last_move = global_time.Read();
+  
+  Time * global_time = Time::GetInstance();
+  time_next_action = global_time->Read();
+  last_move = global_time->Read();
 
-  begin_time = global_time.Read();  
+  begin_time = global_time->Read();  
 
   ShootSound();
 
@@ -70,11 +72,11 @@ void SuperTux::Refresh()
   WeaponProjectile::Refresh();
 
   image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
-  if ((last_move+animation_deltat)<global_time.Read())
+  if ((last_move+animation_deltat)<Time::GetInstance()->Read())
     {
       SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle);
       image->Update();
-      last_move = global_time.Read();
+      last_move = Time::GetInstance()->Read();
   }
 
   particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle, 0);
@@ -83,7 +85,7 @@ void SuperTux::Refresh()
 
 void SuperTux::turn_left()
 {  
-  time_now = global_time.Read();
+  time_now = Time::GetInstance()->Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
@@ -93,7 +95,7 @@ void SuperTux::turn_left()
 
 void SuperTux::turn_right()
 {
-  time_now = global_time.Read();
+  time_now = Time::GetInstance()->Read();
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;

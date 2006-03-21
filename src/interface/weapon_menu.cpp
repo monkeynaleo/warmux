@@ -81,7 +81,7 @@ void WeaponMenuItem::Reset()
 
 void WeaponMenuItem::ChangeZoom()
 {
-  zoom_start_time = global_time.Read();
+  zoom_start_time = Time::GetInstance()->Read();
 
   if(!zoom && scale < 1)
     {
@@ -99,7 +99,7 @@ void WeaponMenuItem::ComputeScale()
 {
   double scale_range, time_range;
 
-  time_range = ((double)global_time.Read() - zoom_start_time) / ICON_ZOOM_TIME;
+  time_range = ((double)Time::GetInstance()->Read() - zoom_start_time) / ICON_ZOOM_TIME;
   if (time_range > 1)
     time_range = 1;
 
@@ -203,7 +203,7 @@ WeaponsMenu::WeaponsMenu()
   show = false;
   hide = false;
   nbr_weapon_type = 0;
-  motion_start_time = global_time.Read();
+  motion_start_time = Time::GetInstance()->Read();
 }
 
 // Add a new weapon to the weapon menu.
@@ -225,10 +225,11 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
 // Weapon menu display (init of the animation)
 void WeaponsMenu::Show()
 {
+  Time * global_time = Time::GetInstance();
   if(display && hide)
-    motion_start_time = global_time.Read() - (ICONS_DRAW_TIME - (global_time.Read()-motion_start_time));
+    motion_start_time = global_time->Read() - (ICONS_DRAW_TIME - (global_time->Read()-motion_start_time));
   else
-    motion_start_time = global_time.Read();
+    motion_start_time = global_time->Read();
 
   display = true;
   show = true;
@@ -263,9 +264,9 @@ void WeaponsMenu::ComputeSize()
 void WeaponsMenu::Hide()
 {
   if(display && show)
-    motion_start_time = global_time.Read() - (ICONS_DRAW_TIME - (global_time.Read()-motion_start_time));
+    motion_start_time = Time::GetInstance()->Read() - (ICONS_DRAW_TIME - (Time::GetInstance()->Read()-motion_start_time));
   else
-    motion_start_time = global_time.Read();
+    motion_start_time = Time::GetInstance()->Read();
 
   hide = true;
   show = false;
@@ -313,7 +314,7 @@ void WeaponsMenu::Reset()
   display = false;
   show = false;
   hide = false;
-  motion_start_time = global_time.Read();
+  motion_start_time = Time::GetInstance()->Read();
 }
 
 void WeaponsMenu::Init()
@@ -334,13 +335,14 @@ void WeaponsMenu::Init()
 void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column)
 {
   int delta_t=ICONS_DRAW_TIME/(2*nr_buttons);
+  Time * global_time = Time::GetInstance();
 
-  if((global_time.Read() > motion_start_time + (delta_t*button_no))
-     && (global_time.Read() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(button_no))))
+  if((global_time->Read() > motion_start_time + (delta_t*button_no))
+     && (global_time->Read() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(button_no))))
     {
       double delta_sin = -(asin((column+1.0)/(column+2.0)) - (M_PI/2));
       
-      uint tps = global_time.Read() - (motion_start_time + delta_t*button_no);
+      uint tps = global_time->Read() - (motion_start_time + delta_t*button_no);
       
       double tps_sin = ((double)tps * ((M_PI/2) + delta_sin)/(ICONS_DRAW_TIME/2));
       
@@ -348,12 +350,12 @@ void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column
       it->position.x += (BUTTON_WIDTH * (column+1));
     }
   else
-    if(global_time.Read() < motion_start_time + (delta_t*button_no))
+    if(global_time->Read() < motion_start_time + (delta_t*button_no))
       {
 		it->position.x += (BUTTON_WIDTH * (column+1));
       }
   
-  if(global_time.Read() > motion_start_time + ICONS_DRAW_TIME)
+  if(global_time->Read() > motion_start_time + ICONS_DRAW_TIME)
     {
       show = false;
     }
@@ -363,12 +365,13 @@ bool WeaponsMenu::HideMotion(int nr_buttons,int button_no,iterator it,int column
 {
   int delta_t=ICONS_DRAW_TIME/(2*nr_buttons);
 
-  if((global_time.Read() > motion_start_time + (delta_t*(nr_buttons-button_no)))
-     && (global_time.Read() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(nr_buttons-button_no))))
+  Time * global_time = Time::GetInstance();
+  if((global_time->Read() > motion_start_time + (delta_t*(nr_buttons-button_no)))
+     && (global_time->Read() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(nr_buttons-button_no))))
     {
       double delta_sin = -(asin((column+1.0)/(column+2.0)) - (M_PI/2));
       
-      uint tps = global_time.Read() - (motion_start_time + delta_t*(nr_buttons-button_no));
+      uint tps = global_time->Read() - (motion_start_time + delta_t*(nr_buttons-button_no));
       double tps_sin = ((double)tps * ((M_PI/2) + delta_sin)/(ICONS_DRAW_TIME/2));
       tps_sin = ((M_PI/2) + delta_sin) - tps_sin;
       
@@ -376,13 +379,13 @@ bool WeaponsMenu::HideMotion(int nr_buttons,int button_no,iterator it,int column
       it->position.x += BUTTON_WIDTH * (column+1);
     }
   else
-    if(global_time.Read() > motion_start_time + (delta_t*(nr_buttons-button_no)))
+    if(global_time->Read() > motion_start_time + (delta_t*(nr_buttons-button_no)))
       {
 	it->position.x += BUTTON_WIDTH * (column+1);
 	it->Reset();
       }
   
-  if(global_time.Read() > motion_start_time + ICONS_DRAW_TIME)
+  if(global_time->Read() > motion_start_time + ICONS_DRAW_TIME)
     {
       hide = false;
       display = false;
@@ -478,7 +481,7 @@ bool WeaponsMenu::ActionClic(const Point2i &mousePos)
   {
     if( it->MouseOn(mousePos) )
     {
-	  action_handler.NewAction (ActionInt(
+	  ActionHandler::GetInstance()->NewAction (ActionInt(
 	    ACTION_CHANGE_WEAPON, 
 		it -> weapon -> GetType()));
       SwitchDisplay();

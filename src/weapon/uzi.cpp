@@ -56,8 +56,8 @@ Uzi::Uzi() :
 
 void Uzi::RepeatShoot()
 {  
-  uint time = global_time.Read() - m_first_shoot; 
-  uint tmp = global_time.Read();
+  uint time = Time::GetInstance()->Read() - m_first_shoot; 
+  uint tmp = Time::GetInstance()->Read();
 
   if (time >= MIN_TIME_BETWEEN_SHOOT)
   {

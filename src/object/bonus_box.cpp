@@ -265,7 +265,7 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
   time = randomObj.GetLong(MIN_TIME_BETWEEN_CREATION, 
 			   MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
   time *= 1000;
-  time += global_time.Read();
+  time += Time::GetInstance()->Read();
   
   return true;
 }
@@ -273,7 +273,7 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
 void BonusBox::NewBonusBox()
 {
 
-  if (!enable || (global_time.Read() < time)) {
+  if (!enable || (Time::GetInstance()->Read() < time)) {
     //game_loop.SetState(gamePLAYING);
     return;
   }

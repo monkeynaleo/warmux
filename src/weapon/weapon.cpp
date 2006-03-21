@@ -186,7 +186,7 @@ bool Weapon::CanChangeWeapon() const
 
 void Weapon::NewActionShoot() const
 {
-  action_handler.NewAction (ActionDoubleInt(
+  ActionHandler::GetInstance()->NewAction (ActionDoubleInt(
 				       ACTION_SHOOT,
 				       m_strength,	
 				       ActiveTeam().crosshair.GetAngleVal()));
@@ -305,7 +305,7 @@ void Weapon::UpdateStrength(){
   if( max_strength == 0 || m_first_time_loading == 0 )
     return ;
   
-  uint time = global_time.Read() - m_first_time_loading;
+  uint time = Time::GetInstance()->Read() - m_first_time_loading;
   double val = (max_strength * time) / MAX_TIME_LOADING;
 
   m_strength = BorneDouble (val, 0.0, max_strength);
@@ -324,7 +324,7 @@ void Weapon::InitLoading(){
 
   channel_load = jukebox.Play("share","weapon/load");
    
-  m_first_time_loading = global_time.Read();
+  m_first_time_loading = Time::GetInstance()->Read();
   
   m_strength = 0;
 

@@ -53,7 +53,7 @@ bool Teleportation::p_Shoot ()
 
   jukebox.Play("share", "weapon/teleport_start");
   
-  temps = global_time.Read();
+  temps = Time::GetInstance()->Read();
   retour = false;
   m_direction = ActiveCharacter().GetDirection();
 
@@ -70,7 +70,7 @@ void Teleportation::Refresh()
 {
   if (!m_is_active) return;
 
-  double dt = global_time.Read() - temps;
+  double dt = Time::GetInstance()->Read() - temps;
 
   // On a fait le chemin retour ?
   if (retour) {
@@ -92,7 +92,7 @@ void Teleportation::Refresh()
     // commençant par déplacer le ver
     retour = true;
     ActiveCharacter().SetXY(dst);
-    temps = global_time.Read();
+    temps = Time::GetInstance()->Read();
     dt = 0.0;
     return;
   }
