@@ -213,6 +213,7 @@ EcritDocXml::EcritDocXml()
 EcritDocXml::~EcritDocXml()
 {
   Sauve();
+  delete m_doc;
 }
 
 bool EcritDocXml::EstOk() const
