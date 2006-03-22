@@ -180,6 +180,9 @@ void AppWormux::End(){
 
   Config::GetInstance()->Save();
   jukebox.End();
+  delete Config::GetInstance();
+  delete Time::GetInstance();
+  delete Constants::GetInstance();
   TTF_Quit();
 
 #ifdef ENABLE_STATS
@@ -228,5 +231,6 @@ void AppWormux::DisplayWelcomeMessage(){
 int main (int argc, char **argv)
 {
   AppWormux::GetInstance()->main(argc,argv);
-  return EXIT_SUCCESS;
+  delete AppWormux::GetInstance();
+  exit (EXIT_SUCCESS);
 }
