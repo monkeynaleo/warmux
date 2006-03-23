@@ -261,8 +261,13 @@ void Team::PrepareTurn()
 			 true);
   CurseurVer::GetInstance()->SuitVerActif();
 
-  // Active notre arme
-  AccessWeapon().Select();
+  // Active last weapon use if EnoughAmmo
+  if (AccessWeapon().EnoughAmmo())
+    AccessWeapon().Select();
+  else { // try to find another weapon !!
+    active_weapon = weapons_list.GetWeapon(WEAPON_BAZOOKA);
+    AccessWeapon().Select();
+  }
 }
 
 int Team::ActiveCharacterIndex() const

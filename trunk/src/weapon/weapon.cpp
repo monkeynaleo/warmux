@@ -194,15 +194,42 @@ void Weapon::NewActionShoot() const
 
 bool Weapon::Shoot(double strength, int angle)
 {
+  MSG_DEBUG("weapon_shoot", "Try to shoot");
+
   ActiveTeam().crosshair.ChangeAngleVal(angle);
   m_strength = strength;
 
-  if (!EnoughAmmo() 
-      || (use_unit_on_first_shoot && !EnoughAmmoUnit())) 
-    return false;
+  MSG_DEBUG("weapon_shoot", "Enough ammo ? %d", EnoughAmmo() );
+  MSG_DEBUG("weapon_shoot", "Enough ammo unit ? %d", EnoughAmmoUnit() );
+  MSG_DEBUG("weapon_shoot", "Use unit on 1st shoot ? %d", use_unit_on_first_shoot );
 
+
+  {
+    // WARNING: The following commented code is wrong! Please see explanation following
+    //   if (!EnoughAmmo() 
+    //       || (use_unit_on_first_shoot && !EnoughAmmoUnit())) 
+    //     return false;
+
+
+    // Gentildemon : YES the following code seems strange!
+    // BUT when have only one ammo left, you shoot, then nb_ammo == 0
+    // then you need to be able to use the left ammo units
+
+    if (use_unit_on_first_shoot && !EnoughAmmoUnit())
+      return false;
+    
+    if (!EnoughAmmo())
+      if ( ! (ActiveTeam().ReadNbAmmos() == 0 
+	      && use_unit_on_first_shoot && EnoughAmmoUnit()) )
+	return false;
+  }
+	     
+  MSG_DEBUG("weapon_shoot", "Enough ammo");
+  
   if (!p_Shoot()) return false;
   
+  MSG_DEBUG("weapon_shoot", "shoot!");
+
   // Is this the first shoot for this ammo use ?
   if (ActiveTeam().ReadNbUnits() == m_initial_nb_unit_per_ammo) {
     UseAmmo();
