@@ -136,7 +136,7 @@ void Character::SignalDeath()
  
   ExplosiveWeaponConfig cfg;
 
-  AppliqueExplosion (explosion, trou, img_trou, cfg, NULL);
+  ApplyExplosion (explosion, trou, img_trou, cfg, NULL);
 
   // Change test rectangle
   SetSize( image->GetSize() );

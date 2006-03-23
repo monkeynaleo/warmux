@@ -29,25 +29,23 @@
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
+#include "../tool/debug.h"
 #include "../tool/math_tools.h"
-
-#ifdef DEBUG
-//#  define DEBUG_EXPLOSION
-#  define COUT_DBG cout << "[Explosion] "
-#endif
 
 Profile *weapons_res_profile = NULL;
 
-void AppliqueExplosion (const Point2i &explosion, 
-			const Point2i &trou, 
-			Surface &impact,
-			const ExplosiveWeaponConfig &config,
-			PhysicalObj *obj_exclu,
-			const std::string& son,
-			bool fire_particle
-			)
+void ApplyExplosion (const Point2i &explosion, 
+		     const Point2i &trou, 
+		     Surface &impact,
+		     const ExplosiveWeaponConfig &config,
+		     PhysicalObj *obj_exclu,
+		     const std::string& son,
+		     bool fire_particle
+		     )
 {
   bool cam_follow_character = false; //Set to true if an explosion is applied to a character. Then the camera shouldn't be following an object
+
+  MSG_DEBUG("explosion", "explosion range : %f\n", config.explosion_range);
 
   // Make a hole in the ground
   world.Creuse(trou - impact.GetSize()/2, impact);
@@ -64,18 +62,17 @@ void AppliqueExplosion (const Point2i &explosion,
 
     double distance, angle;
     distance = MeterDistance (explosion, ver -> GetCenter());
-#ifdef DEBUG_EXPLOSION
-    COUT_DBG << " ver " << ver -> nom << " : distance=" << distance;
-#endif
+
+    MSG_DEBUG("explosion", "\n*Character %s : distance= %e", ver->m_name.c_str(), distance);
 
     // If the worm is in the explosion range, apply damage on it !
     if (distance <= config.explosion_range)
     {
       uint hit_point_loss = (uint)(distance*config.damage/config.explosion_range);
       hit_point_loss = config.damage-hit_point_loss;
-#ifdef DEBUG_EXPLOSION
-      COUT_DBG << "Hit_Point_Loss énergie=" << hit_point_loss << endl;
-#endif
+
+      //MSG_DEBUG("explosion", "hit_point_loss energy= %d", ver->m_name.c_str(), hit_point_loss);
+
       ver -> SetEnergyDelta (-hit_point_loss);
     }
 
@@ -94,26 +91,22 @@ void AppliqueExplosion (const Point2i &explosion,
         force = config.blast_force;
         angle = -M_PI/2;
       }
-#ifdef DEBUG_EXPLOSION
-      cout << ", force=" << force << endl;
-#endif
+      
+      //MSG_DEBUG("explosion", "force = %e", force);
+
 //      camera.ChangeObjSuivi ((PhysicalObj*)&ver, true, true);
       cam_follow_character = true;
       ver -> AddSpeed (force, angle);
       ver -> UpdatePosition();
     } else {
-#ifdef DEBUG_EXPLOSION
-      cout << " -> trop loin." << endl;
-#endif
+
+      MSG_DEBUG("explosion", " -> too far");
+
     }
 
     // Update the worm state.
     ver -> Refresh();
-#ifdef DEBUG_EXPLOSION
-    COUT_DBG << ver -> nom << " fantome " << ver -> IsGhost()
-	     << " mort " << ver -> IsDead() 
-	     << " actif " << ver -> EstActif() << endl;
-#endif
+
   }
 
   // Apply the blast on physical objects.

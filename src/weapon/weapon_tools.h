@@ -32,14 +32,14 @@
 
 // Applique au explosion au point centre
 // Lance ExceptionMortVer() si le ver actif meurt
-void AppliqueExplosion (const Point2i &explosion,
-			const Point2i &trou,
-			Surface &impact,
-			const ExplosiveWeaponConfig &config,
-			PhysicalObj *obj_exclu, 
-			const std::string& son="weapon/explosion",
-			bool fire_particle = true
-			);
+void ApplyExplosion (const Point2i &explosion,
+		     const Point2i &trou,
+		     Surface &impact,
+		     const ExplosiveWeaponConfig &config,
+		     PhysicalObj *obj_exclu, 
+		     const std::string& son="weapon/explosion",
+		     bool fire_particle = true
+		     );
 
 void UpdateStrengthBar(double strength);
 
