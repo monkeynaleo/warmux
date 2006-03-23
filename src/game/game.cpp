@@ -270,7 +270,6 @@ void Game::Start()
       MessageEndOfGame();
 
   world.FreeMem();
-  //bonus_box.FreeMem();
   jukebox.StopAll();
    
   if (err)

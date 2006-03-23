@@ -30,12 +30,10 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new WeaponConfig(), NEVER_VISIBLE)
+Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConfig(), NEVER_VISIBLE)
 {
   m_name = _("Parachute");
   m_initial_nb_ammo = 2 ;
-  air_resist_factor = 140.0 ;
-  open_speed_limit = 5.0 ;
   use_unit_on_first_shoot = false;    
   
   image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
@@ -80,16 +78,16 @@ void Parachute::Refresh()
 
   if (ActiveCharacter().FootsInVacuum())
     {
-      if (!open && (speed.y > open_speed_limit))
+      if (!open && (speed.y > cfg().open_speed_limit))
 	{
 	  if (EnoughAmmo())
 	    {
 	      UseAmmo();
-	      ActiveCharacter().SetAirResistFactor(air_resist_factor);
-	      ActiveCharacter().SetWindFactor(2);
+	      ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
+	      ActiveCharacter().SetWindFactor(cfg().wind_factor);
 	      open = true ;
-         image->animation.SetPlayBackward(false);
-         image->Start();
+	      image->animation.SetPlayBackward(false);
+	      image->Start();
 
 	    }
 	}
@@ -128,3 +126,19 @@ void Parachute::SignalTurnEnd()
   p_Deselect();
 }
 
+ParachuteConfig& Parachute::cfg() {
+  return static_cast<ParachuteConfig&>(*extra_params);
+}
+
+ParachuteConfig::ParachuteConfig(){ 
+  wind_factor = 10.0;
+  air_resist_factor = 140.0 ;
+  open_speed_limit = 2.0 ;
+}
+
+void ParachuteConfig::LoadXml(xmlpp::Element *elem){
+  WeaponConfig::LoadXml(elem);
+  LitDocXml::LitDouble (elem, "wind_factor", wind_factor);
+  LitDocXml::LitDouble (elem, "air_resist_factor", air_resist_factor);
+  LitDocXml::LitDouble (elem, "open_speed_limit", open_speed_limit);
+}

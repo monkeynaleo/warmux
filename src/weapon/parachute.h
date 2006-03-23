@@ -24,13 +24,24 @@
 
 #include "weapon.h"
 
+class ParachuteConfig : public WeaponConfig
+{
+public:
+  double wind_factor ;
+  double air_resist_factor ;
+  double open_speed_limit ;
+public:
+  ParachuteConfig();
+  void LoadXml(xmlpp::Element *elem);
+};
+
+//-----------------------------------------------------------------------------
+
 class Parachute : public Weapon
 {
 private:
   bool open ;
   bool closing ;
-  double air_resist_factor ;
-  double open_speed_limit ;
   Sprite* image;
 
 public:
@@ -41,9 +52,8 @@ public:
   void Draw() ;
   bool p_Shoot();
   void SignalTurnEnd();
-  
-  void Activate();
-  void Desactivate();
+
+  ParachuteConfig& cfg();
 };
 
 #endif
