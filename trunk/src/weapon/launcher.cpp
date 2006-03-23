@@ -22,7 +22,6 @@
 #include "launcher.h"
 
 #include <sstream>
-#include <iostream>
 
 #include "weapon_tools.h"
 #include "../game/config.h"
@@ -33,6 +32,7 @@
 #include "../object/objects_list.h"
 #include "../team/macro.h"
 #include "../team/teams_list.h"
+#include "../tool/debug.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
@@ -42,6 +42,8 @@ WeaponBullet::WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg) 
   m_gravity_factor = 0.1; 
   SetWindFactor(0.8);
   SetAirResistFactor(1.0);
+
+  cfg.explosion_range = 1;
 }
 
 void WeaponBullet::SignalCollision()
@@ -57,9 +59,13 @@ void WeaponBullet::Explosion()
 {
   if (IsGhost()) return;
 
-  // Applique les degats et le souffle aux vers
-  Point2i pos = GetCenter();
-  AppliqueExplosion (pos, pos, impact, cfg, NULL, "", false);
+  if (dernier_ver_touche == NULL) {
+    // Applique les degats et le souffle aux vers
+    Point2i pos = GetCenter();
+    ApplyExplosion (pos, pos, impact, cfg, NULL, "", false);
+  } else {
+    dernier_ver_touche -> SetEnergyDelta (-cfg.damage);
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -130,9 +136,7 @@ bool WeaponProjectile::TestImpact()
 {
   if (IsReady()) 
   {
-#ifdef DEBUG_MSG_COLLISION
-    std::cout << "Impact because was ready." << std::endl;
-#endif
+    MSG_DEBUG("weapon_collision", "Impact because was ready.\n");
     return true;
   }
   return CollisionTest (0,0);
@@ -157,9 +161,7 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
     if (ver->GetTestRect().Intersect( test ))
        {
       dernier_ver_touche = &(*ver);
-#ifdef DEBUG_MSG_COLLISION
-      COUT_DBG << "On a touché le ver : " << ver -> m_name << std::endl;
-#endif
+      MSG_DEBUG("weapon_collision", "Character %s has been damaged", ver -> m_name.c_str());
       return true;
     }
   }
@@ -170,10 +172,7 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
     if ( objet->ptr->GetTestRect().Intersect( test ) )
       {
       dernier_obj_touche = objet -> ptr;
-#ifdef DEBUG_MSG_COLLISION
-      COUT_DBG << "On a touché un objet : " 
-                << objet -> ptr -> m_name << std::endl;      
-#endif
+      MSG_DEBUG("weapon_collision", "Object %s has been touched", objet -> ptr -> m_name.c_str());
       return true;
     }
   }
@@ -237,7 +236,7 @@ void WeaponProjectile::Explosion()
 
   // Applique les degats et le souffle aux vers
   Point2i pos = GetCenter();
-  AppliqueExplosion (pos, pos, impact, cfg, NULL);  
+  ApplyExplosion (pos, pos, impact, cfg, NULL);  
 
 
 }
@@ -275,7 +274,7 @@ bool WeaponLauncher::p_Shoot ()
 void WeaponLauncher::DirectExplosion()
 {
   Point2i pos = ActiveCharacter().GetCenter();
-  AppliqueExplosion (pos, pos, projectile->impact, cfg(), NULL);
+  ApplyExplosion (pos, pos, projectile->impact, cfg(), NULL);
 }
 
 void WeaponLauncher::Explosion()

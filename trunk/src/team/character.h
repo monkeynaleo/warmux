@@ -65,8 +65,9 @@ private:
 
   Skin *skin;
   CfgSkin_Walking *walk_skin;
+ public:
   std::string current_skin;
-
+ private:
   // Animation
   struct s_anim{
     Sprite *image;
