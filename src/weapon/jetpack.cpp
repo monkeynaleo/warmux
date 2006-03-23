@@ -26,6 +26,7 @@
 #include "../game/game_mode.h"
 #include "../game/time.h"
 #include "../interface/game_msg.h"
+#include "../map/camera.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
 #include "../team/teams_list.h"
@@ -110,6 +111,10 @@ void JetPack::StartUse()
     {
       m_last_fuel_down = Time::GetInstance()->Read();
       channel = jukebox.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
+
+      camera.ChangeObjSuivi (&ActiveCharacter(),true, true, true); 
+// 			     bool suit, bool recentre,
+// 			     bool force_recentrage=false);
     }
 }
 
