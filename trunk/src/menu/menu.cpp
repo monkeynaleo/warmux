@@ -35,6 +35,7 @@ Menu::Menu(char * bg){
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   background = new Sprite( resource_manager.LoadImage( res, bg));
+  background->cache.EnableLastFrameCache();
 
   actions_buttons = new HBox( Rectanglei(x, y, 1, 40), false);
 
