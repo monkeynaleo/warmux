@@ -71,7 +71,6 @@ class StarParticle : public Particle
 class FireParticle : public Particle
 {
  public: 
-  Surface impact;
   FireParticle();
   void Init();
   void SignalFallEnding();

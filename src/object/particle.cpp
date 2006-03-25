@@ -161,7 +161,6 @@ void FireParticle::Init()
 {
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
   image = resource_manager.LoadSprite(res,"fire_particle");
-  impact = resource_manager.LoadImage(res,"fire_impact");
   resource_manager.UnLoadXMLProfile( res);
 
   image->Scale(0.0,0.0);

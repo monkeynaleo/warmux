@@ -34,8 +34,6 @@ private:
   bool p_Shoot();
 
 public:
-  Surface hole_image;
-   
   Suicide();
   void p_Select();
   void Refresh();
