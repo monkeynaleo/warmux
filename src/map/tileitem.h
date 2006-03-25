@@ -22,7 +22,7 @@
 
 #include "graphic/surface.h"
 
-const Point2i CELL_SIZE(128, 128);
+const Point2i CELL_SIZE(128,128);
 
 class TileItem
 {
@@ -32,7 +32,8 @@ public:
 
   bool IsEmpty ();
   virtual unsigned char GetAlpha(const Point2i &pos) = 0;
-  virtual void Dig(const Point2i &position, Surface& dig) = 0;
+  virtual void Dig(const Point2i &position, const Surface& dig) = 0;
+  virtual void Dig(const Point2i &center, const uint radius) = 0;
   virtual Surface GetSurface() = 0;
   virtual void SyncBuffer() = 0; // (if needed)
   virtual void Draw(const Point2i &pos);
@@ -45,8 +46,9 @@ public:
   ~TileItem_Empty () {};
 
   unsigned char GetAlpha (const Point2i &pos){return 0;};
-  void Dig(const Point2i &position, Surface& dig){};
+  void Dig(const Point2i &position, const Surface& dig){};
   Surface GetSurface(){return *new Surface();};
+  void Dig(const Point2i &center, const uint radius) {};
   void SyncBuffer(){};
   void Draw(const Point2i &pos){};
 };
@@ -59,7 +61,8 @@ public:
 
   unsigned char GetAlpha(const Point2i &pos);
   Surface GetSurface();
-  void Dig(const Point2i &position, Surface& dig);
+  void Dig(const Point2i &position, const Surface& dig);
+  void Dig(const Point2i &center, const uint radius);
   void SyncBuffer();
 
 private:
@@ -88,7 +91,8 @@ public:
  
   unsigned char GetAlpha(const Point2i &pos);
   Surface GetSurface();
-  void Dig(const Point2i &position, Surface& dig);
+  void Dig(const Point2i &position, const Surface& dig);
+  void Dig(const Point2i &center, const uint radius){};
   void SyncBuffer();
 };
 
@@ -107,7 +111,8 @@ public:
 
   unsigned char GetAlpha(const Point2i &pos);
   Surface GetSurface();
-  void Dig(const Point2i &position, Surface& dig);
+  void Dig(const Point2i &position, const Surface& dig);
+  void Dig(const Point2i &center, const uint radius){};
   void SyncBuffer();
 };
 

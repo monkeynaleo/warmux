@@ -125,18 +125,9 @@ void Character::SignalDeath()
 
   SetSkin("dead");
 
-  //--- Do the skin explosion :-) ---
-  Surface img_trou =   resource_manager.LoadImage( weapons_res_profile, "suicide_hole"); 
-   
-  // The hole is at the center
-  Point2i trou(GetCenter());
-   
-  // But the explosion is on the foots :)
-  Point2i explosion(GetCenterX(), GetY()+ GetHeight());
- 
   ExplosiveWeaponConfig cfg;
 
-  ApplyExplosion (explosion, trou, img_trou, cfg, NULL);
+  ApplyExplosion ( GetCenter(), cfg, NULL);
 
   // Change test rectangle
   SetSize( image->GetSize() );

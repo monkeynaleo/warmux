@@ -67,7 +67,7 @@ void Cluster::SignalCollision()
     return;
   }
 
-  ApplyExplosion (GetPosition(), GetPosition(), impact, cfg, NULL);
+  ApplyExplosion (GetPosition(), cfg, NULL);
 }
 
 //-----------------------------------------------------------------------------

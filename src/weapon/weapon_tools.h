@@ -32,9 +32,7 @@
 
 // Applique au explosion au point centre
 // Lance ExceptionMortVer() si le ver actif meurt
-void ApplyExplosion (const Point2i &explosion,
-		     const Point2i &trou,
-		     Surface &impact,
+void ApplyExplosion (const Point2i &pos,
 		     const ExplosiveWeaponConfig &config,
 		     PhysicalObj *obj_exclu, 
 		     const std::string& son="weapon/explosion",

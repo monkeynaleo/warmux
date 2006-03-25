@@ -88,8 +88,10 @@ public:
   // C'est un terrain ouvert ?
   bool EstOuvert() const { return ground.EstOuvert(); }
 
-  // Creuse un pixel
-  void Creuse(Point2i position, Surface& alpha_sur);
+  // Dig the map using a picture
+  void Dig(const Point2i position, const Surface& alpha_sur);
+  // Dig a circle hole in the map
+  void Dig(const Point2i center, const uint radius);
    
   // Lit la taille du monde
   int GetWidth() const { return ground.GetSizeX(); }

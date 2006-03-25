@@ -125,10 +125,16 @@ void Map::SwitchDrawingCacheParticles()
   to_redraw_particles->clear();
 }
 
-void Map::Creuse(Point2i position, Surface& surface)
+void Map::Dig(const Point2i position, const Surface& surface)
 {
    ground.Dig (position, surface);
    to_redraw->push_back(Rectanglei(position, surface.GetSize()));
+}
+
+void Map::Dig(const Point2i center, const uint radius)
+{
+   ground.Dig (center, radius);
+   to_redraw->push_back(Rectanglei(center - Point2i(radius,radius), Point2i(2*radius,2*radius)));
 }
 
 void Map::DrawSky()

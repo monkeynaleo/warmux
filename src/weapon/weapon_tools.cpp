@@ -34,9 +34,7 @@
 
 Profile *weapons_res_profile = NULL;
 
-void ApplyExplosion (const Point2i &explosion, 
-		     const Point2i &trou, 
-		     Surface &impact,
+void ApplyExplosion (const Point2i &pos,
 		     const ExplosiveWeaponConfig &config,
 		     PhysicalObj *obj_exclu,
 		     const std::string& son,
@@ -48,7 +46,7 @@ void ApplyExplosion (const Point2i &explosion,
   MSG_DEBUG("explosion", "explosion range : %f\n", config.explosion_range);
 
   // Make a hole in the ground
-  world.Creuse(trou - impact.GetSize()/2, impact);
+  world.Dig(pos, (uint)(config.explosion_range*25.0));
    
   // Play a sound
   jukebox.Play("share", son);
@@ -61,7 +59,7 @@ void ApplyExplosion (const Point2i &explosion,
     if ((obj_exclu != NULL) && (&(*ver) == obj_exclu)) continue;
 
     double distance, angle;
-    distance = MeterDistance (explosion, ver -> GetCenter());
+    distance = MeterDistance (pos, ver -> GetCenter());
 
     MSG_DEBUG("explosion", "\n*Character %s : distance= %e", ver->m_name.c_str(), distance);
 
@@ -84,7 +82,7 @@ void ApplyExplosion (const Point2i &explosion,
       {
         force *= config.blast_force / config.blast_range;
         force  = config.blast_force - force;
-        angle  = explosion.ComputeAngle(ver -> GetCenter());
+        angle  = pos.ComputeAngle(ver -> GetCenter());
       }
       else
       {
@@ -116,13 +114,13 @@ void ApplyExplosion (const Point2i &explosion,
     if ((obj_exclu != NULL) && (obj -> ptr == obj_exclu)) continue;
 
     double distance, angle;
-    distance = MeterDistance (explosion, obj -> ptr -> GetCenter());
+    distance = MeterDistance (pos, obj -> ptr -> GetCenter());
     if (distance <= config.blast_range)
     {
       if (!EgalZero(distance)) {
 	distance *= config.blast_force / config.blast_range;
 	distance  = config.blast_force - distance;
-	angle  = explosion.ComputeAngle(obj -> ptr -> GetCenter());
+	angle  = pos.ComputeAngle(obj -> ptr -> GetCenter());
       } else {
 	distance = config.blast_force;
 	angle = -M_PI_2;
@@ -136,6 +134,6 @@ void ApplyExplosion (const Point2i &explosion,
 
   // Do we need to generate some fire particles ?
   if (fire_particle)
-     ParticleEngine::AddNow(trou - impact.GetSize()/2, 5, particle_FIRE, true);
+     ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
 }
 

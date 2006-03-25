@@ -62,7 +62,7 @@ void WeaponBullet::Explosion()
   if (dernier_ver_touche == NULL) {
     // Applique les degats et le souffle aux vers
     Point2i pos = GetCenter();
-    ApplyExplosion (pos, pos, impact, cfg, NULL, "", false);
+    ApplyExplosion (pos, cfg, NULL, "", false);
   } else {
     dernier_ver_touche -> SetEnergyDelta (-cfg.damage);
   }
@@ -86,8 +86,6 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
   SetSize(image->GetSize());
-
-  impact = resource_manager.LoadImage( weapons_res_profile, name + "_impact");
 
   SetMass (cfg.mass);
   SetWindFactor(cfg.wind_factor);
@@ -236,7 +234,7 @@ void WeaponProjectile::Explosion()
 
   // Applique les degats et le souffle aux vers
   Point2i pos = GetCenter();
-  ApplyExplosion (pos, pos, impact, cfg, NULL);  
+  ApplyExplosion (pos, cfg, NULL);  
 
 
 }
@@ -274,7 +272,7 @@ bool WeaponLauncher::p_Shoot ()
 void WeaponLauncher::DirectExplosion()
 {
   Point2i pos = ActiveCharacter().GetCenter();
-  ApplyExplosion (pos, pos, projectile->impact, cfg(), NULL);
+  ApplyExplosion (pos, cfg(), NULL);
 }
 
 void WeaponLauncher::Explosion()

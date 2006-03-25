@@ -64,7 +64,7 @@ bool Airhammer::p_Shoot()
   // initiate movement ;-)
   ActiveCharacter().SetXY( ActiveCharacter().GetPosition() );
 
-  world.Creuse(
+  world.Dig(
 		  Point2i(	ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 - impact.GetWidth()/2,
             		ActiveCharacter().GetY() + ActiveCharacter().GetHeight() -15) ,
 		  impact);
