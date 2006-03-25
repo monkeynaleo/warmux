@@ -91,7 +91,7 @@ unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos){
     return a;
 }
 
-void TileItem_AlphaSoftware::Dig(const Point2i &position, Surface& dig){
+void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig){
     int starting_x = position.x >= 0 ? position.x : 0;
     int starting_y = position.y >= 0 ? position.y : 0;
     int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
@@ -101,6 +101,49 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, Surface& dig){
         for( int px = starting_x ; px < ending_x ; px++)
             if ( *(dig.GetPixels() + (py-position.y)*dig.GetPitch() + (px-position.x) * 4 + 3) != 0)
                 *(m_surface.GetPixels() + py*m_surface.GetPitch() + px * 4 + 3) = 0;
+}
+
+void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
+  unsigned char* buf   = m_surface.GetPixels();
+  const uint line_size = m_surface.GetPitch();
+  const uint bpp       = m_surface.GetBytesPerPixel();
+
+  int y = (center.y - (int)radius >= 0) ? (center.y - (int)radius) : 0;
+  assert( (uint) y <= center.y + radius && y < CELL_SIZE.y );
+  buf += y * line_size;
+
+  //Empties each line of the tile horizontaly that are in the cirlce
+  while ( (uint) y <= center.y + radius && y < CELL_SIZE.y )
+  {
+    //Abscisse distance from the center of the circle to the circle
+    int dac = center.y - y;
+
+    //Angle on the circle 
+    float angle = asin( (float)dac / (float)radius);
+
+    //Zone of the line which needs to be 
+    int start_x, end_x, lenght;
+    lenght = (int) ((float) radius * cos (angle));
+    lenght = lenght > 0 ? lenght : - lenght;
+    start_x = center.x - lenght;
+    lenght *= 2;
+    end_x = start_x + lenght;
+
+    if( start_x < CELL_SIZE.x && end_x >= 0)
+    {
+      //Clamp the value to empty only the in this tile
+      int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
+      assert( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
+      int tile_lenght = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
+      assert( tile_lenght > 0);
+      assert( tile_start_x + tile_lenght <= CELL_SIZE.x);
+
+      assert(buf + tile_start_x * bpp + bpp * (tile_lenght-1) < m_surface.GetPixels() + CELL_SIZE.x * CELL_SIZE.y * bpp); //Check for overflow
+      memset(buf + tile_start_x * bpp, 0 , bpp * tile_lenght);
+    }
+    buf += line_size;
+    y++;
+  }
 }
 
 Surface TileItem_AlphaSoftware::GetSurface(){
@@ -129,7 +172,7 @@ unsigned char TileItem_AlphaHardware::GetAlpha(const Point2i &pos){
     return m_buffer[pos.y * m_size.x + pos.x];
 }
 
-void TileItem_AlphaHardware::Dig(const Point2i &position, Surface& dig){
+void TileItem_AlphaHardware::Dig(const Point2i &position, const Surface& dig){
    int starting_x = position.x >= 0 ? position.x : 0;
    int starting_y = position.y >= 0 ? position.y : 0;
    int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
@@ -181,7 +224,7 @@ unsigned char TileItem_ColorkeySoftware::GetAlpha(const Point2i &pos){
     return m_buffer[pos.y * m_size.x + pos.x];
 }
 
-void TileItem_ColorkeySoftware::Dig(const Point2i &position, Surface& dig){
+void TileItem_ColorkeySoftware::Dig(const Point2i &position, const Surface& dig){
     int starting_x = position.x >= 0 ? position.x : 0;
     int starting_y = position.y >= 0 ? position.y : 0;
     int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();

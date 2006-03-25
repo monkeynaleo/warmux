@@ -53,8 +53,8 @@ Point2i Tile::Clamp(const Point2i &v) const{
 	return v.clamp(Point2i(0, 0), nbCells - 1);
 }
 
-void Tile::Dig(const Point2i &position, Surface& dig){  
-    Rectanglei rect = Rectanglei(position, dig.GetSize());
+void Tile::Dig(const Point2i &position, const Surface& dig){
+   Rectanglei rect = Rectanglei(position, dig.GetSize());
 	Point2i firstCell = Clamp(position/CELL_SIZE);
 	Point2i lastCell = Clamp((position + dig.GetSize())/CELL_SIZE);
 	Point2i c;
@@ -64,6 +64,22 @@ void Tile::Dig(const Point2i &position, Surface& dig){
             Point2i offset = position - c * CELL_SIZE;
 
             item[c.y*nbCells.x + c.x]->Dig(offset, dig);
+        }
+}
+
+void Tile::Dig(const Point2i &center, const uint radius){  
+   Point2i size = Point2i(2 * radius, 2 * radius);
+   Point2i position = center - Point2i(radius,radius);
+
+   Rectanglei rect = Rectanglei(position, size);
+	Point2i firstCell = Clamp(position/CELL_SIZE);
+	Point2i lastCell = Clamp((position+size)/CELL_SIZE);
+	Point2i c;
+
+    for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+    for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
+            Point2i offset = center - c * CELL_SIZE;
+            item[c.y*nbCells.x + c.x]->Dig(offset, radius);
         }
 }
 

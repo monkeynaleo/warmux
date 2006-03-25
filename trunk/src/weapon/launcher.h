@@ -33,7 +33,6 @@ class WeaponProjectile : public PhysicalObj
 {
  public:
   bool is_active;
-  Surface impact;
 
  protected:
   Sprite *image;  

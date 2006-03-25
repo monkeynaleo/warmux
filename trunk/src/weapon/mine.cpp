@@ -72,7 +72,7 @@ void ObjMine::Explosion ()
   MSG_DEBUG("mine", "Explosion");
 
   Point2i centre = GetCenter();
-  ApplyExplosion(centre, centre, impact, cfg, NULL);
+  ApplyExplosion(centre, cfg, NULL);
   DisableDetection();  
   lst_objects.RemoveObject (this);
 }
