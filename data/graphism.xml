@@ -16,6 +16,8 @@
 <section name="menu">  
 
   <surface name="bg_option" file="menu/img/background_options.png" />
+  <surface name="bg_play" file="menu/img/background_play.png" />
+  
 
   <sprite name="valider">
     <image file="menu/img/validate.png">

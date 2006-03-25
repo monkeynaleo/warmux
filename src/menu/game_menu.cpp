@@ -44,7 +44,7 @@ const uint MAPS_W = 160;
 const uint MAP_PREVIEW_W = 300;
 
 GameMenu::GameMenu() :
-  Menu("menu/bg_option")
+  Menu("menu/bg_play")
 {  
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
@@ -52,7 +52,7 @@ GameMenu::GameMenu() :
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   // Center the boxes!
-  uint x = AppWormux::GetInstance()->video.window.GetWidth()/2 - 475/2;
+  uint x = 30;
 
   /* Choose the teams !! */
   team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));

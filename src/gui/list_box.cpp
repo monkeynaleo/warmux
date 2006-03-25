@@ -125,7 +125,7 @@ void ListBox::Draw(const Point2i &mousePosition){
      if( int(i + first_visible_item) == selected_item )
        app->video.window.BoxColor(rect, defaultListColor2);
      else
-	   if( i + first_visible_item == uint(item) )
+       if( i + first_visible_item == uint(item) )
          app->video.window.BoxColor(rect, defaultListColor3);
      
      (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft( 
