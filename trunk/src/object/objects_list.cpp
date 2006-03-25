@@ -23,11 +23,14 @@
 //-----------------------------------------------------------------------------
 #include "../include/app.h"
 #include "../game/game_loop.h"
+#include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/camera.h"
+#include "../tool/random.h"
+#include "../tool/rectangle.h"
 #include "../weapon/mine.h"
-#include "bonus_box.h"
 #include <vector>
+
 //-----------------------------------------------------------------------------
 ObjectsList lst_objects;
 //-----------------------------------------------------------------------------
@@ -37,11 +40,13 @@ void ObjectsList::Init()
 {
   lst.clear();
 
-//   for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
-//   {
-//     ObjMine *obj = new ObjMine(game_loop);
-//     AjouteObjet (obj, true);
-//   }
+  for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
+  {
+    ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
+
+    obj -> SetXY ( randomObj.GetPoint( Rectanglei(0, 0, world.GetWidth(), 1) ) );
+    AddObject (obj);
+  }
 
   FOR_EACH_OBJECT(object) object -> ptr ->Reset();
 }

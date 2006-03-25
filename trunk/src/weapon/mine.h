@@ -60,11 +60,16 @@ public:
 
 class MineConfig : public ExplosiveWeaponConfig
 { 
-public: 
+ private:
+  static MineConfig * singleton;
+ public: 
   uint escape_time;
   double detection_range;
-public:
+
+ private:
   MineConfig();
+public:
+  static MineConfig * GetInstance();
   virtual void LoadXml(xmlpp::Element *elem);
 };
 
