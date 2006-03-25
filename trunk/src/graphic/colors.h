@@ -47,10 +47,13 @@ const Color primary_red_color(255, 0, 0, SDL_ALPHA_OPAQUE);
 const Color defaultColorBox(80, 80, 159, 206);
 const Color defaultColorRect(49, 32, 122, 255);
 
-const Color defaultListColor1(255, 255, 255, 255*3/10);
+const Color defaultOptionColorBox(34, 133, 175, 206);
+const Color defaultOptionColorRect(59,88,129,206);
+
+//const Color defaultListColor1(255, 255, 255, 255*3/10);
+const Color defaultListColor1(75, 163, 200, 255*3/10);
 const Color defaultListColor2(0, 0, 255*6/10, 255*8/10);
 const Color defaultListColor3(0, 0, 255*6/10, 255*4/10);
-
 
 const Color WeaponStrengthBarValue(255, 255, 255, 127);
 const Color WeaponStrengthBarBorder(0, 0, 0, 127);
