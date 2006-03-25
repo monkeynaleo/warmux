@@ -76,44 +76,4 @@ private:
   Surface m_surface;
 };
 
-class TileItem_AlphaHardware : public TileItem
-{
-private:
-  Point2i m_size;
-  Surface m_surface;
-  unsigned char *m_buffer;
-  
-  TileItem_AlphaHardware(const TileItem_AlphaHardware &copy);
-  
-public:
-  TileItem_AlphaHardware(const Point2i &size);
-  ~TileItem_AlphaHardware();
- 
-  unsigned char GetAlpha(const Point2i &pos);
-  Surface GetSurface();
-  void Dig(const Point2i &position, const Surface& dig);
-  void Dig(const Point2i &center, const uint radius){};
-  void SyncBuffer();
-};
-
-class TileItem_ColorkeySoftware : public TileItem
-{
-private:
-  Point2i m_size;
-  Surface m_surface;
-  unsigned char *m_buffer;
-  
-  TileItem_ColorkeySoftware(const TileItem_ColorkeySoftware &copy);
-  
-public:
-  TileItem_ColorkeySoftware(const Point2i &pos);
-  ~TileItem_ColorkeySoftware();
-
-  unsigned char GetAlpha(const Point2i &pos);
-  Surface GetSurface();
-  void Dig(const Point2i &position, const Surface& dig);
-  void Dig(const Point2i &center, const uint radius){};
-  void SyncBuffer();
-};
-
 #endif

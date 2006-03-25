@@ -163,22 +163,6 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     LitDocXml::LitInt (elem, "width", tmp.video.width);
     LitDocXml::LitInt (elem, "height", tmp.video.height);
     LitDocXml::LitBool (elem, "full_screen", tmp.video.fullscreen);
-
-    std::string transparency_str;
-    if ( LitDocXml::LitString (elem, "transparency", transparency_str))
-      {
-	if ( transparency_str == "alpha" )
-	  transparency = ALPHA;
-	else if ( transparency_str == "colorkey" )
-	  transparency = COLORKEY;
-	else
-	  {
-	    std::cerr << "o Unknown transparency \"" << transparency_str  
-		      << "\" in config.xml [IGNORED]." << std::endl;
-	  }	  
-      }
-     
-	 
   }
 
   //=== Son ===
