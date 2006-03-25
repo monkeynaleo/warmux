@@ -172,8 +172,19 @@ void ObjMine::Refresh()
 
 //-----------------------------------------------------------------------------
 
+MineConfig * MineConfig::singleton = NULL;
 
-Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", new MineConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+MineConfig * MineConfig::GetInstance() 
+{
+  if (singleton == NULL) {
+    singleton = new MineConfig();
+  }
+  return singleton;
+}
+
+//-----------------------------------------------------------------------------
+
+Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
 }
