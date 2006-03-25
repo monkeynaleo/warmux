@@ -33,7 +33,6 @@ Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig
 {  
   m_name = _("Commit suicide");
   sound_channel = -1;  
-  hole_image = resource_manager.LoadImage( weapons_res_profile, "suicide_hole"); 
 }
 
 void Suicide::p_Select()
