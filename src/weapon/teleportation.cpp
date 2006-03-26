@@ -101,6 +101,11 @@ void Teleportation::Refresh()
   {
     m_x = dst.x;
     m_y = dst.y - skin->GetHeight()/2;
+
+    float alpha = (float)dt/(float)(GameMode::GetInstance()->duration_move_player * 1000);
+    alpha = (alpha - 0.5) * 2.0;
+    skin->SetAlpha(alpha);
+
     return;
   }
 
@@ -108,6 +113,10 @@ void Teleportation::Refresh()
 
   m_x = ActiveCharacter().GetX() - (skin->GetWidth()-larg)/2;
   m_y = ActiveCharacter().GetY();
+
+  float alpha = (float)dt/(float)(GameMode::GetInstance()->duration_move_player * 1000);
+  alpha = (0.5 - alpha) * 2.0;
+  skin->SetAlpha(alpha);
 
 //  if(ActiveCharacter().GetDirection() == -1)
 //    m_x += nv_larg;
