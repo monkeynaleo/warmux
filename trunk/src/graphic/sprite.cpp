@@ -182,10 +182,10 @@ void Sprite::SetFrameSpeed(unsigned int nv_fs){
 }
 
 void Sprite::SetAlpha( float alpha){
+  assert(alpha >= 0.0 && alpha <= 1.0);
   if(this->alpha == alpha)
     return;
   this->alpha = alpha;
-  cache.InvalidLastFrame();
 }
 
 float Sprite::GetAlpha(){
@@ -355,7 +355,7 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
 
   RefreshSurface();
 
-   // Calculate offset of the depending on hotspot rotation position :
+   // Calculate offset of the sprite depending on hotspot rotation position :
   int rot_x=0;
   int rot_y=0;
   if( rotation_deg!=0.0 )
@@ -364,7 +364,17 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
   Rectanglei srcRect (src_x, src_y, w, h);
   Rectanglei dstRect (pos_x + rot_x, pos_y + rot_y, w, h);
   
-  dest.Blit(current_surface, srcRect, dstRect.GetPosition());
+  if(alpha == 1.0)
+    dest.Blit(current_surface, srcRect, dstRect.GetPosition());
+  else
+  {
+    Surface surf_alpha;
+    surf_alpha.NewSurface(srcRect.GetSize(),SDL_SWSURFACE,false);
+    surf_alpha.Blit(dest,dstRect,Point2i(0,0));
+    surf_alpha.SetAlpha(SDL_SRCALPHA, (int)(alpha * 255.0));
+    surf_alpha.Blit(current_surface,srcRect,Point2i(0,0));
+    dest.Blit(surf_alpha, srcRect, dstRect.GetPosition());
+  }
 
   // For the cache mechanism
   if( Game::GetInstance()->IsGameLaunched() )
