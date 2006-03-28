@@ -118,11 +118,70 @@ void Smoke::Init()
   SetSize( Point2i(1, 1) );
 }
 
+ExplosionSmoke::ExplosionSmoke(const uint size_init) :
+  Particle()
+{
+  m_name="ExplosionSmoke";
+  SetMass(0.5);
+
+  m_initial_size = size_init;
+  m_initial_time_to_live = 30;
+  m_left_time_to_live = m_initial_time_to_live; 
+  m_time_between_scale = 25;
+}
+
+void ExplosionSmoke::Init()
+{
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
+  image = resource_manager.LoadSprite(res,"smoke_explosion"); 
+//  image->cache.EnableLastFrameCache();
+  resource_manager.UnLoadXMLProfile( res);
+   
+  m_initial_time_to_live = 30;
+  m_left_time_to_live = m_initial_time_to_live;
+  mvt_freq = randomObj.GetDouble(-2.0, 2.0);
+  SetGravityFactor(randomObj.GetDouble(-1.0,-2.0));
+
+  image->ScaleSize(m_initial_size, m_initial_size);
+  SetSize( Point2i(m_initial_size, m_initial_size) );
+  StartMoving();
+}
+
+void ExplosionSmoke::Refresh()
+{
+  uint time = Time::GetInstance()->Read() - m_last_refresh; 
+
+  UpdatePosition();
+
+  image->Update();
+
+  if (time >= m_time_between_scale) {  
+    //assert(m_left_time_to_live > 0);
+    if (m_left_time_to_live <= 0) return ;
+
+    m_left_time_to_live--;
+
+    float lived_time = m_initial_time_to_live - m_left_time_to_live;
+
+    float coeff = cos((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live)));
+    image->ScaleSize(int(coeff * m_initial_size),int(coeff * m_initial_size));
+
+    dx = int((int)m_initial_size * sin(5.0 * ((float)lived_time/((float)m_initial_time_to_live)) * M_PI * mvt_freq / 2.0) / 2);
+    m_last_refresh = Time::GetInstance()->Read() ;
+  }
+}
+
+void ExplosionSmoke::Draw()
+{
+  if (m_left_time_to_live > 0) 
+    image->Draw(GetPosition()+Point2i(dx,0));
+}
+
 StarParticle::StarParticle() :
   Particle()
 {
   m_name="StarParticle";
-  SetMass(0.5);  
+  SetMass(0.5);
   SetGravityFactor(0.0);
   m_wind_factor = 0.2;
   m_initial_time_to_live = 30;
@@ -244,6 +303,61 @@ void ParticleEngine::AddNow(const Point2i &position,
       lst_particles.push_back(p);
     }
   }
+}
+
+void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius)
+{
+  const uint little_partic_nbr = 10;
+  const uint big_partic_nbr = 5;
+
+  // Sin / cos  precomputed value, to avoid recomputing them and speed up.
+  // see the commented value of 'angle' to see how it was generated
+  const float little_cos[] = { 1,000000, 0,809017, 0,309017, -0,309017, -0,809017, -1,000000, -0,809017, -0,309017, 0,309017, 0,809017 };
+  const float little_sin[] = { 0,000000, 0,587785, 0,951057, 0,951056, 0,587785, -0,000000, -0,587785, -0,951056, -0,951056, -0,587785 }; 
+  const float big_cos[] = { 1,000000, -0,809017, 0,309017, 0,309017, -0,809017 };
+  const float big_sin[] = { 0,000000, 0,587785, -0,951056, 0,951057, -0,587785 };
+
+
+  Particle *particle = NULL;
+  float norme;
+  uint size;
+
+  for(uint i=0; i < little_partic_nbr ; i++)
+  {
+//      angle = (float) i * M_PI * 2.0 / (float) little_partic_nbr;
+      size = uint(radius / 1.5);
+      norme = 2.5 * radius / 3.0;
+      particle = new ExplosionSmoke(size);
+      drawed_particle_t p;
+      p.particle = particle;
+      p.upper_objects = true;
+
+      Point2i pos = position; //Set position to center of explosion
+      pos = pos - size / 2;       //Set the center of the smoke to the center..
+      pos = pos + Point2i(int(norme * little_cos[i]),int(norme * little_sin[i])); //Put inside the circle of the explosion
+
+      particle->Init();
+      particle->SetXY(pos);
+      lst_particles.push_back(p);
+  }    
+  for(uint i=0; i < big_partic_nbr ; i++)
+  {
+//      angle = (float) i * M_PI * 4.0 / (float)big_partic_nbr;
+      size = radius;
+      norme = radius / 3.0;
+      particle = new ExplosionSmoke(size);
+      drawed_particle_t p;
+      p.particle = particle;
+      p.upper_objects = true;
+
+      Point2i pos = position; //Set position to center of explosion
+      pos = pos - size / 2;       //Set the center of the smoke to the center..
+      pos = pos + Point2i(int(norme * big_cos[i]),int(norme * big_sin[i])); //Put inside the circle of the explosion
+
+      particle->Init();
+      particle->SetXY(pos);
+      lst_particles.push_back(p);
+  }    
 }
 
 void ParticleEngine::Draw(bool upper)
