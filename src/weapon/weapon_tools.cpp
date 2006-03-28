@@ -132,6 +132,8 @@ void ApplyExplosion (const Point2i &pos,
     }
   }
 
+  ParticleEngine::AddExplosionSmoke(pos, (uint)config.explosion_range * 25);
+
   // Do we need to generate some fire particles ?
   if (fire_particle)
      ParticleEngine::AddNow(pos , 5, particle_FIRE, true);

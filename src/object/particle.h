@@ -48,10 +48,21 @@ class Particle : public PhysicalObj
  public:
   Particle();
   virtual void Init()=0;
-  void Draw();
-  void Refresh();
+  virtual void Draw();
+  virtual void Refresh();
   void Reset(){};
   bool StillUseful();
+};
+
+class ExplosionSmoke : public Particle
+{
+  uint m_initial_size, dx;
+  float mvt_freq;
+ public:
+  ExplosionSmoke(const uint size_init);
+  void Init();
+  void Refresh();
+  void Draw();
 };
 
 class Smoke : public Particle
@@ -100,6 +111,8 @@ class ParticleEngine
 		     uint nb_particles, particle_t type,
 		     bool upper,
 		     double angle=-1, double norme=-1);
+
+  static void AddExplosionSmoke(const Point2i &pos, const uint &radius);
 
   static void Refresh();
   static void Draw(bool upper);
