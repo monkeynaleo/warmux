@@ -214,6 +214,7 @@ FireParticle::FireParticle() :
   m_left_time_to_live = m_initial_time_to_live; 
   m_time_between_scale = 50;
   fire_cfg.damage = 1;
+  fire_cfg.explosion_range = 5;
 }
 
 void FireParticle::Init()
@@ -229,7 +230,7 @@ void FireParticle::Init()
 void FireParticle::SignalFallEnding()
 {
   Point2i pos = GetCenter();
-  ApplyExplosion (pos, fire_cfg, NULL, "", false);
+  ApplyExplosion (pos, fire_cfg, NULL, "", false, false);
   
   m_left_time_to_live = 0;
 }
