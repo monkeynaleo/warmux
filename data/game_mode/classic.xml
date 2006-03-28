@@ -31,7 +31,7 @@
       <nb_ammo>3</nb_ammo>
       <damage>75</damage>
       <mass>1</mass>
-      <explosion_range>3</explosion_range>
+      <explosion_range>75</explosion_range>
       <blast_force>10</blast_force>
       <blast_range>4</blast_range>
       <timeout>3</timeout>
@@ -44,7 +44,7 @@
       <mass>30</mass>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>5</explosion_range>
+      <explosion_range>125</explosion_range>
       <blast_range>3</blast_range>
       <blast_force>20</blast_force>
       <speed>60</speed>
@@ -60,7 +60,7 @@
       <air_resist_factor>0</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>2.5</explosion_range>
+      <explosion_range>65</explosion_range>
       <blast_range>2.5</blast_range>
       <blast_force>6</blast_force>
       <timeout>6</timeout>
@@ -76,7 +76,7 @@
       <air_resist_factor>0.8</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>2</explosion_range>
+      <explosion_range>50</explosion_range>
       <blast_range>3.5</blast_range>
       <blast_force>5</blast_force>
     </bazooka>
@@ -90,7 +90,7 @@
       <air_resist_factor>0.8</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>2</explosion_range>
+      <explosion_range>50</explosion_range>
       <blast_range>3.5</blast_range>
       <blast_force>5</blast_force>
     </automatic_bazooka>
@@ -104,7 +104,7 @@
       <air_resist_factor>0.3</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>2</explosion_range>
+      <explosion_range>50</explosion_range>
       <blast_range>4</blast_range>
       <blast_force>8</blast_force>
       <timeout>3</timeout>
@@ -120,7 +120,7 @@
       <air_resist_factor>0.0</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>3</explosion_range>
+      <explosion_range>75</explosion_range>
       <blast_range>6</blast_range>
       <blast_force>15</blast_force>
       <timeout>5</timeout>
@@ -136,7 +136,7 @@
       <air_resist_factor>0.0</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
-      <explosion_range>2</explosion_range>
+      <explosion_range>50</explosion_range>
       <blast_range>3</blast_range>
       <blast_force>5</blast_force>
       <timeout>3</timeout>
@@ -215,7 +215,7 @@
       <position origin="over" x="0" y="-5" />
       <nb_ammo>-1</nb_ammo>
       <damage>20</damage>
-      <explosion_range>2.5</explosion_range>
+      <explosion_range>65</explosion_range>
       <blast_range>4</blast_range>
       <blast_force>7</blast_force>
     </suicide>
@@ -234,7 +234,7 @@
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
       <mass>1</mass>
-      <explosion_range>2</explosion_range>
+      <explosion_range>50</explosion_range>
       <blast_range>3</blast_range>
       <blast_force>5</blast_force>
       <detection_range>1</detection_range>

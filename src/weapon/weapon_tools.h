@@ -36,7 +36,8 @@ void ApplyExplosion (const Point2i &pos,
 		     const ExplosiveWeaponConfig &config,
 		     PhysicalObj *obj_exclu, 
 		     const std::string& son="weapon/explosion",
-		     bool fire_particle = true
+		     bool fire_particle = true,
+           bool smoke = true
 		     );
 
 void UpdateStrengthBar(double strength);

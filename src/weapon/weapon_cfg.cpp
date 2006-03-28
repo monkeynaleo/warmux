@@ -44,7 +44,7 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
   mass = 2;
   wind_factor=1.0;
   air_resist_factor=1.0 ;
-  explosion_range = 2.5 ;
+  explosion_range = 50 ;
   blast_range = 2.5 ;
   blast_force = 2.5 ;
   rebound_factor=1.0;
@@ -57,7 +57,7 @@ void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitDouble (elem, "mass", mass);
   LitDocXml::LitDouble (elem, "wind_factor", mass);
   LitDocXml::LitDouble (elem, "air_resist_factor", air_resist_factor);
-  LitDocXml::LitDouble (elem, "explosion_range", explosion_range);
+  LitDocXml::LitUint (elem, "explosion_range", explosion_range);
   LitDocXml::LitDouble (elem, "blast_range", blast_range);
   LitDocXml::LitDouble (elem, "blast_force", blast_force);
   LitDocXml::LitDouble (elem, "rebound_factor", rebound_factor);

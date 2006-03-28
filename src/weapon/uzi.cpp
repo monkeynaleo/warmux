@@ -35,6 +35,7 @@ const double MIN_TIME_BETWEEN_SHOOT = 70; // in milliseconds
 UziBullet::UziBullet(ExplosiveWeaponConfig& cfg) :
   WeaponBullet("uzi_bullet", cfg)
 { 
+  cfg.explosion_range = 15;
 }
 
 void UziBullet::ShootSound()

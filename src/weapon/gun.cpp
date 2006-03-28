@@ -38,6 +38,7 @@ const uint BULLET_SPEED = 20;
 GunBullet::GunBullet(ExplosiveWeaponConfig& cfg) :
   WeaponBullet("gun_bullet", cfg)
 {
+  cfg.explosion_range = 5;
 }
 
 void GunBullet::ShootSound()

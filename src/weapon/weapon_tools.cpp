@@ -38,7 +38,8 @@ void ApplyExplosion (const Point2i &pos,
 		     const ExplosiveWeaponConfig &config,
 		     PhysicalObj *obj_exclu,
 		     const std::string& son,
-		     bool fire_particle
+		     bool fire_particle,
+		     bool smoke
 		     )
 {
   bool cam_follow_character = false; //Set to true if an explosion is applied to a character. Then the camera shouldn't be following an object
@@ -46,8 +47,10 @@ void ApplyExplosion (const Point2i &pos,
   MSG_DEBUG("explosion", "explosion range : %f\n", config.explosion_range);
 
   // Make a hole in the ground
-  world.Dig(pos, (uint)(config.explosion_range*25.0));
-   
+  world.Dig(pos, config.explosion_range);
+  float range = config.explosion_range / PIXEL_PER_METER;
+  range *= 1.5;
+
   // Play a sound
   jukebox.Play("share", son);
    
@@ -64,9 +67,9 @@ void ApplyExplosion (const Point2i &pos,
     MSG_DEBUG("explosion", "\n*Character %s : distance= %e", ver->m_name.c_str(), distance);
 
     // If the worm is in the explosion range, apply damage on it !
-    if (distance <= config.explosion_range)
+    if (distance <= range)
     {
-      uint hit_point_loss = (uint)(distance*config.damage/config.explosion_range);
+      uint hit_point_loss = (uint)(distance*config.damage/range);
       hit_point_loss = config.damage-hit_point_loss;
 
       //MSG_DEBUG("explosion", "hit_point_loss energy= %d", ver->m_name.c_str(), hit_point_loss);
@@ -132,7 +135,8 @@ void ApplyExplosion (const Point2i &pos,
     }
   }
 
-  ParticleEngine::AddExplosionSmoke(pos, (uint)config.explosion_range * 25);
+  if(smoke)
+    ParticleEngine::AddExplosionSmoke(pos, config.explosion_range);
 
   // Do we need to generate some fire particles ?
   if (fire_particle)
