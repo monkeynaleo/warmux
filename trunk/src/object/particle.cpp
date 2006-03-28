@@ -313,11 +313,10 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
 
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
-  const float little_cos[] = { 1,000000, 0,809017, 0,309017, -0,309017, -0,809017, -1,000000, -0,809017, -0,309017, 0,309017, 0,809017 };
-  const float little_sin[] = { 0,000000, 0,587785, 0,951057, 0,951056, 0,587785, -0,000000, -0,587785, -0,951056, -0,951056, -0,587785 }; 
-  const float big_cos[] = { 1,000000, -0,809017, 0,309017, 0,309017, -0,809017 };
-  const float big_sin[] = { 0,000000, 0,587785, -0,951056, 0,951057, -0,587785 };
-
+  const float little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
+  const float little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 }; 
+  const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
+  const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
 
   Particle *particle = NULL;
   float norme;
@@ -358,7 +357,7 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
       particle->Init();
       particle->SetXY(pos);
       lst_particles.push_back(p);
-  }    
+  }
 }
 
 void ParticleEngine::Draw(bool upper)
