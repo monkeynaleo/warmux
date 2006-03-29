@@ -86,7 +86,7 @@ void ObjectsList::Refresh()
     next = object;
     next++;
 
-    if (!object->to_remove) {
+    if (!object->to_remove && !object->ptr->IsGhost()) {
       object->ptr->UpdatePosition();
       object->ptr->Refresh();
     } else {
