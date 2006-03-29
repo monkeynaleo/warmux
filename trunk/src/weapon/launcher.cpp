@@ -183,11 +183,6 @@ void WeaponProjectile::Refresh()
   if( !is_active )
     return;
 
-  if( TestImpact() ){
-    SignalCollision();
-    return;
-  }  
-
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
   
@@ -195,6 +190,11 @@ void WeaponProjectile::Refresh()
     is_active = false;      
     return;
   }
+
+  if( TestImpact() ){
+    SignalCollision();
+    return;
+  }  
 }
 
 void WeaponProjectile::Draw()
