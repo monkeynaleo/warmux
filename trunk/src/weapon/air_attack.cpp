@@ -51,6 +51,7 @@ Obus::Obus(AirAttackConfig& cfg) :
 
 void Obus::Reset()
 {
+  exploded = false;
   is_active = true;
   Ready();
 }
@@ -154,18 +155,21 @@ void Avion::Refresh()
 
   obus_actifs = false;
   iterator it=obus.begin(), fin=obus.end();
-  for (; it != fin; ++it) {
-    (*it)->Refresh();
-    (*it)->UpdatePosition();
 
-    if (!(*it)->is_active){
-      (*it)->Explosion();
-      obus.erase(it);
-    } else {
+  
+  for (; it != fin; ++it) {
+    if ((*it)->is_active){
+      (*it)->Refresh();
+      (*it)->UpdatePosition();
       obus_actifs = true;
+    } else {
+      if((*it)->exploded != true) {
+        (*it)->Explosion();
+        (*it)->exploded = true;
+      }
     }
   }
-  
+
   if (!obus_actifs && IsGhost()) {  
     obus.clear();
     GameLoop::GetInstance()->interaction_enabled=true;
