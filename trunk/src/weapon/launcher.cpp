@@ -81,6 +81,7 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
 
   m_allow_negative_y = true;
   touche_ver_objet = true;
+  explode_colliding_character = false;
   m_wind_factor = 1.0;
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
@@ -175,6 +176,11 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
        {
       dernier_ver_touche = &(*ver);
       MSG_DEBUG("weapon_collision", "Character %s has been damaged", ver -> m_name.c_str());
+
+      if (explode_colliding_character) {
+	MSG_DEBUG("weapon_collision", "Projectile explode before timeout because of a collision", ver -> m_name.c_str());
+	is_active = false;
+      }
       return true;
     }
   }

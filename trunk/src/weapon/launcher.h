@@ -39,6 +39,7 @@ class WeaponProjectile : public PhysicalObj
 
   // Peut toucher les vers et les objets ? (test de collision)
   bool touche_ver_objet;
+  bool explode_colliding_character; // before timeout. touche_ver_objet must be true
   double begin_time;
 
   ExplosiveWeaponConfig& cfg;
