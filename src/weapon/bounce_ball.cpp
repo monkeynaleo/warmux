@@ -41,6 +41,7 @@ BounceBall::BounceBall(ExplosiveWeaponConfig& cfg) :
   m_rebound_sound = "weapon/grenade_bounce";
   m_rebounding = true;
   touche_ver_objet = true;
+  explode_colliding_character = true;
 }
 
 //-----------------------------------------------------------------------------
