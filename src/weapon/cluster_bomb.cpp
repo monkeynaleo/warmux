@@ -78,7 +78,6 @@ ClusterBomb::ClusterBomb(ClusterBombConfig& cfg) :
   m_rebound_sound = "weapon/grenade_bounce";
   touche_ver_objet = false;
   m_rebounding = true;
-  m_rebound_factor = cfg.rebound_factor;
 
   tableau_cluster.clear();
   const uint nb = cfg.nb_fragments;

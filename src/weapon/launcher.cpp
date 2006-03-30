@@ -90,6 +90,7 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   SetMass (cfg.mass);
   SetWindFactor(cfg.wind_factor);
   SetAirResistFactor(cfg.air_resist_factor);
+  m_rebound_factor = cfg.rebound_factor;
 
   // Set rectangle test
   int dx = image->GetWidth()/2-1;
