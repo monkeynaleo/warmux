@@ -64,10 +64,10 @@ private:
 public:
   Avion(AirAttackConfig& cfg);
   void Shoot(double speed);
-  void Reset();
   void Draw();
   void Refresh();
   void Init(){};//TODO: to delete
+  void Reset(){};//TODO: to delete
   bool PeutLacherObus() const;
   int LitCibleX() const;
   int GetDirection() const;
@@ -83,7 +83,6 @@ public:
   Avion avion;
 
   AirAttack();
-  void p_Select();
   void FinTir();
   void Refresh();
   virtual void ChooseTarget ();
