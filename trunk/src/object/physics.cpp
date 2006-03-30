@@ -466,6 +466,8 @@ void Physics::ComputeFallNextXY (double delta_t)
 
   air_resistance_factor = AIR_RESISTANCE_FACTOR * GetContactSurface(speed_angle) * m_air_resist_factor ;
 
+  MSG_DEBUG( "physic.fall", "Fall %s; mass %5f, weight %5f, wind %5f, air %5f", typeid(*this).name(), m_mass, weight_force,wind_force, air_resistance_factor);
+
   // Equation on X axys : m.x'' + k.x' = wind
   m_pos_x.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
 		      wind_force + m_extern_force.x, delta_t);
@@ -517,13 +519,16 @@ void Physics::RunPhysicalEngine()
       
       newPos = ComputeNextXY(step_t);
 
-      if( !(newPos == oldPos) )  // The object has moved. Notify the son class.
+      if( !(newPos == oldPos) )  {
+	// The object has moved. Notify the son class.
+	MSG_DEBUG( "physic.move", "Move %s (%f, %f) -> (%f, %f)", typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
 		contact = NotifyMove(oldPos, newPos, contactPos, contact_angle);
+      }
 
       if (contact){
 		  MSG_DEBUG( "physic.coll", "Collision durant le déplacement (%f, %f) -> (%f, %f)", oldPos.x, oldPos.y, newPos.x, newPos.y);
 		  Rebound(contactPos, contact_angle);
-	  }
+      }
 
       delta_t -= PHYS_DELTA_T ;
   }
