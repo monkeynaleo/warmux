@@ -75,11 +75,6 @@ Avion::Avion(AirAttackConfig &p_cfg) :
   obus_dy = 50;
 }
 
-void Avion::Reset()
-{
-  m_alive = GHOST;
-}
-
 void Avion::Shoot(double speed)
 {  
   obus_laches = false;
@@ -209,11 +204,6 @@ AirAttack::AirAttack() :
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
-}
-
-void AirAttack::p_Select()
-{
-  avion.Reset();
 }
 
 void AirAttack::Refresh()
