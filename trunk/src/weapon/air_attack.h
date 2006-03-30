@@ -41,9 +41,7 @@ public:
 class Obus : public WeaponProjectile
 {
 public:
-  bool exploded;
   Obus(AirAttackConfig& cfg);
-  //void Refresh();
   void Reset();
 
 protected:
