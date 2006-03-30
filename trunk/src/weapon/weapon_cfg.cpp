@@ -42,12 +42,13 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
 {
   timeout = 0;
   mass = 2;
-  wind_factor=1.0;
-  air_resist_factor=1.0 ;
   explosion_range = 50 ;
   blast_range = 2.5 ;
   blast_force = 2.5 ;
-  rebound_factor=1.0;
+
+  wind_factor=1.0;
+  air_resist_factor=1.0 ;
+  rebound_factor=0.01;
 }
 
 void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem) 
