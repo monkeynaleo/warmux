@@ -87,6 +87,12 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   image->EnableRotationCache(32);
   SetSize(image->GetSize());
 
+  // Please do not set the physical factors from cfg here since the xml 
+  // config file is still not loading
+
+  // WARNING: If you remove it, weapon which do not use method Shoot() 
+  // are completely crazy...!!!
+  // TODO: find a clean solution !!! -> BUG #5631
   SetMass (cfg.mass);
   SetWindFactor(cfg.wind_factor);
   SetAirResistFactor(cfg.air_resist_factor);
@@ -104,9 +110,17 @@ WeaponProjectile::~WeaponProjectile()
 }
 
 void WeaponProjectile::Shoot(double strength)
-{
+{    
+  MSG_DEBUG("weapon_projectile", "shoot.\n");
+
   Ready();
   is_active = true;
+
+  // Set the physical factors
+  SetMass (cfg.mass);
+  SetWindFactor(cfg.wind_factor);
+  SetAirResistFactor(cfg.air_resist_factor);
+  m_rebound_factor = cfg.rebound_factor;
 
   // Set the initial position.
   SetXY( ActiveCharacter().GetHandPosition() );
