@@ -40,8 +40,6 @@ Grenade::Grenade(ExplosiveWeaponConfig& cfg) :
   m_rebound_sound = "weapon/grenade_bounce";
   m_rebounding = true;
   touche_ver_objet = false;
-
-  m_rebound_factor = cfg.rebound_factor;
 }
 
 //-----------------------------------------------------------------------------

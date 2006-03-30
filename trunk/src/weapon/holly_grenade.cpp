@@ -39,8 +39,6 @@ HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg) :
   m_rebounding = true;
   touche_ver_objet = false;
   sing_alleluia = false;
-
-  m_rebound_factor = cfg.rebound_factor;
 }
 
 void HollyGrenade::Refresh()
