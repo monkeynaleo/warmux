@@ -45,16 +45,12 @@ Obus::Obus(AirAttackConfig& cfg) :
 {
 }
 
-// void Obus::Refresh()
-// {
-// }
-
 void Obus::Reset()
 {
-  exploded = false;
   is_active = true;
   Ready();
 }
+
 
 void Obus::SignalCollision()
 { 
@@ -154,19 +150,18 @@ void Avion::Refresh()
   }
 
   obus_actifs = false;
-  iterator it=obus.begin(), fin=obus.end();
+  iterator it=obus.begin(), end=obus.end();
 
-  
-  for (; it != fin; ++it) {
-    if ((*it)->is_active){
-      (*it)->Refresh();
-      (*it)->UpdatePosition();
-      obus_actifs = true;
+  while (it != end) {
+    (*it)->Refresh();
+    (*it)->UpdatePosition();
+
+    if (!(*it)->is_active){
+      (*it)->Explosion();
+      it = obus.erase(it);
     } else {
-      if((*it)->exploded != true) {
-        (*it)->Explosion();
-        (*it)->exploded = true;
-      }
+      obus_actifs = true;
+      ++it;
     }
   }
 
