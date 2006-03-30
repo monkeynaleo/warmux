@@ -109,6 +109,9 @@ void WeaponsList::Init()
   GnuLauncher* gnu_launcher = new GnuLauncher;
   AddToList(gnu_launcher,4); 
 
+  BounceBallLauncher* bounce_ball_launcher = new BounceBallLauncher;
+  AddToList(bounce_ball_launcher,4); 
+
   Teleportation* teleportation = new Teleportation;
   AddToList(teleportation,5);
 

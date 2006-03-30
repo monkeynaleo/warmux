@@ -67,6 +67,15 @@
     </image>
   </sprite>
 
+<!-- Bounce ball ressources -->
+
+  <surface name="bounce_ball_ico" file="weapon/bounce_ball/bounce_ball_ico.png" />
+
+  <surface name="bounce_ball" file="weapon/bounce_ball/ball_16.png" />
+  <sprite name="bounce_ball">
+    <image file="weapon/bounce_ball/ball_16.png" />
+  </sprite>
+
 <!-- Clusterbomb ressources -->
 
   <surface name="cluster_bomb_ico" file="weapon/cluster_bomb/clusterbomb_ico.png" />
