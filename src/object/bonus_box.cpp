@@ -119,6 +119,8 @@ void BonusBox::Refresh()
 // Signale la fin d'une chute
 void BonusBox::SignalFallEnding()
 {
+  m_air_resist_factor = 1.0;
+
   MSG_DEBUG("bonus", "Fin de la chute: parachute=%d", parachute);
   if (!parachute) return;
 
