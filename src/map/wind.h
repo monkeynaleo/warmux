@@ -38,8 +38,6 @@ public:
      
 public:
   WindParticle();
-  void Reset();
-  void Init();
   void Resize(double size);
   void Draw();
   void Refresh();

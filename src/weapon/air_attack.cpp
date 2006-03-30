@@ -123,7 +123,6 @@ void Avion::Refresh()
     for (uint i=0; i<cfg.nbr_obus; ++i) 
     {
       instance = new Obus(cfg);
-      instance->Reset();
       instance->SetXY( Point2i(x, obus_dy) );
 
       Point2d speed_vector;

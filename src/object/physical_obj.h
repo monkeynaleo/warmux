@@ -148,12 +148,6 @@ public:
   // Draw the object
   virtual void Draw() = 0;
 
-  // Initialisation of datas (only called once)
-  virtual void Init() = 0;
-
-  // Reset datas
-  virtual void Reset() = 0;
-
   //-------- state ----
   void Ready();
   void Die();

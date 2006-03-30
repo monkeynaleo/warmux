@@ -66,8 +66,6 @@ public:
   void Shoot(double speed);
   void Draw();
   void Refresh();
-  void Init(){};//TODO: to delete
-  void Reset(){};//TODO: to delete
   bool PeutLacherObus() const;
   int LitCibleX() const;
   int GetDirection() const;
