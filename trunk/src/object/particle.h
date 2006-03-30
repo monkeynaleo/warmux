@@ -50,7 +50,6 @@ class Particle : public PhysicalObj
   virtual void Init()=0;
   virtual void Draw();
   virtual void Refresh();
-  void Reset(){};
   bool StillUseful();
 };
 

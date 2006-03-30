@@ -43,17 +43,6 @@ WindParticle::WindParticle() :
   PhysicalObj("WindParticle", 0.0)
 {
   m_type = objUNBREAKABLE;
-  m_wind_factor = 3;
-  m_air_resist_factor = 2;
-  sprite = NULL;
-}
-
-void WindParticle::Init()
-{
-  double mass, wind_factor ;
-
-  if(sprite != NULL)
-    delete sprite;
 
   sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
   if(sprite->GetFrameCount()==1)
@@ -61,6 +50,8 @@ void WindParticle::Init()
   sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
    
   SetXY( randomObj.GetPoint(world.GetSize()) );
+
+  double mass, wind_factor ; 
 
   //Mass = mass_mean + or - 25%
   mass = TerrainActif().wind.particle_mass;
@@ -80,10 +71,6 @@ void WindParticle::Init()
   SetTestRect (dx, dx, dy, dy);
 
   m_allow_negative_y = true;
-}
-
-void WindParticle::Reset()
-{ 
 }
 
 void WindParticle::Refresh()
@@ -169,7 +156,6 @@ void Wind::Reset(){
 
   for (uint i=0; i<nb; ++i){
     WindParticle particle;
-    particle.Init();
     particle.Resize( (double)i / nb );
     particles.push_back( particle );
   }

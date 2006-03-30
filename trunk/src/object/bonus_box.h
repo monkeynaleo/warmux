@@ -66,9 +66,6 @@ public:
   void Draw();
   void Refresh();
 
-  void Init(){}; // TODO -> To Remove !!
-  void Reset(){}; // TODO -> To Remove !!
-
  private:
   void ApplyBonus (Team &team, Character &character);
 

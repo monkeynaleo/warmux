@@ -122,7 +122,7 @@ Dynamite::Dynamite() :
 
 void Dynamite::p_Select()
 {
-  projectile->Reset();
+  dynamic_cast<BatonDynamite *>(projectile)->Reset();
 }
 
 // Pose une dynamite
@@ -130,7 +130,7 @@ bool Dynamite::p_Shoot ()
 {
   Point2d speed_vector;
 
-  projectile->Reset();
+  dynamic_cast<BatonDynamite *>(projectile)->Reset();
   projectile->Shoot(0);
 
   // Ajoute la vitesse actuelle du ver

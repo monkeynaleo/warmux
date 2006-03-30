@@ -58,9 +58,6 @@ class WeaponProjectile : public PhysicalObj
   virtual void Shoot(double strength);
   virtual void Explosion();
 
-  void Init() {}// TODO : to delete
-  void Reset() {}// TODO : to delete
-  
   bool CollisionTest (int dx, int dy); // public only for uzi...
  protected:
   virtual void SignalCollision() = 0; 

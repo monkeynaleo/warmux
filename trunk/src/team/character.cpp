@@ -814,8 +814,6 @@ void Character::FrameImageSuivante()
   }
 }
 
-void Character::Init() {}
-
 void Character::InitTeam (Team *ptr_equipe, const std::string &name, 
 			  Skin* pskin)
 {

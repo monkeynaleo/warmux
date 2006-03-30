@@ -47,8 +47,6 @@ void ObjectsList::Init()
     obj -> SetXY ( randomObj.GetPoint( Rectanglei(0, 0, world.GetWidth(), 1) ) );
     AddObject (obj);
   }
-
-  FOR_EACH_OBJECT(object) object -> ptr ->Reset();
 }
 
 //-----------------------------------------------------------------------------
