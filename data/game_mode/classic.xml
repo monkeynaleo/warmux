@@ -95,6 +95,22 @@
       <blast_force>5</blast_force>
     </automatic_bazooka>
 
+    <bounce_ball>
+      <position origin="hand" x="-7" y="-9" />
+      <max_strength>40</max_strength>
+      <nb_ammo>5</nb_ammo>     
+      <damage>50</damage>
+      <mass>10</mass>
+      <air_resist_factor>0.3</air_resist_factor>
+      <min_angle>-89</min_angle>
+      <max_angle>89</max_angle>
+      <explosion_range>50</explosion_range>
+      <blast_range>4</blast_range>
+      <blast_force>8</blast_force>
+      <timeout>20</timeout>
+      <rebound_factor>40</rebound_factor>
+    </bounce_ball>
+
     <grenade>
       <position origin="hand" x="-7" y="-9" />
       <max_strength>40</max_strength>

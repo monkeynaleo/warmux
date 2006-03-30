@@ -16,33 +16,33 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Include file to include all weapons in one shot ;-)
+ * Bounce ball:
+ * bounce since it has not collide a character
  *****************************************************************************/
 
-#ifndef ALL_WEAPONS_H
-#define ALL_WEAPONS_H
+#ifndef BOUNCE_BALL_H
+#define BOUNCE_BALL_H
 
-#include "airhammer.h"
-#include "air_attack.h"
-#include "auto_bazooka.h"
-#include "baseball.h"
-#include "bazooka.h"
-#include "bounce_ball.h"
-#include "cluster_bomb.h"
-#include "dynamite.h"
-#include "grenade.h"
-#include "gun.h"
-#include "gnu.h"
-#include "holly_grenade.h"
-#include "jetpack.h"
-#include "lowgrav.h"
-#include "mine.h"
-#include "ninja_rope.h"
-#include "parachute.h"
-#include "skip_turn.h"
-#include "suicide.h"
-#include "supertux.h"
-#include "teleportation.h"
-#include "uzi.h"
+#include <SDL.h>
+#include "../include/base.h"
+#include "../graphic/surface.h"
+#include "../gui/progress_bar.h"
+#include "../object/physical_obj.h"
+#include "launcher.h"
+
+class BounceBall : public WeaponProjectile
+{
+public:
+  BounceBall(ExplosiveWeaponConfig& cfg);
+  void Refresh();
+protected:
+  void SignalCollision();
+};
+
+class BounceBallLauncher : public WeaponLauncher
+{
+ public:
+  BounceBallLauncher();
+};
 
 #endif
