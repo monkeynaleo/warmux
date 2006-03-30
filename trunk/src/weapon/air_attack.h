@@ -42,7 +42,6 @@ class Obus : public WeaponProjectile
 {
 public:
   Obus(AirAttackConfig& cfg);
-  void Reset();
 
 protected:
   void SignalCollision();

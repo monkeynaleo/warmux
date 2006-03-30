@@ -43,14 +43,9 @@ const double OBUS_SPEED = 7 ;
 Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("obus", cfg)
 {
-}
-
-void Obus::Reset()
-{
   is_active = true;
   Ready();
 }
-
 
 void Obus::SignalCollision()
 { 
@@ -126,9 +121,10 @@ void Avion::Refresh()
   {
     obus_laches = true;
     obus_actifs = true;
-
+    
     int x=LitCibleX();
     Obus * instance;
+
     for (uint i=0; i<cfg.nbr_obus; ++i) 
     {
       instance = new Obus(cfg);
@@ -152,7 +148,7 @@ void Avion::Refresh()
   obus_actifs = false;
   iterator it=obus.begin(), end=obus.end();
 
-  while (it != end) {
+  while (it != end) {     
     (*it)->Refresh();
     (*it)->UpdatePosition();
 
