@@ -43,16 +43,12 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg) :
   SetSize(image->GetSize());
 
   SetTestRect (0, 0, 2, 3);
-
-  explosion = resource_manager.LoadSprite(weapons_res_profile, "explosion");
-  explosion->animation.SetLoopMode(false);
 }
 
 void BatonDynamite::Reset()
 {
   Ready();
   is_active = false;
-  explosion_active = false;
 
   unsigned int delay = (1000 * cfg.timeout)/image->GetFrameCount();
   image->SetFrameSpeed(delay);
@@ -65,28 +61,16 @@ void BatonDynamite::Reset()
 void BatonDynamite::Refresh()
 {
   if (!is_active) return;
-  bool fin;
   assert (!IsGhost());
-  if (!explosion_active) {
-    image->Update(); 
-    fin = image->IsFinished();
-    if (fin) explosion_active = true;
-  } else {
-    explosion->Update();
-    fin = explosion->IsFinished();
-    if (fin) is_active = false;
-  }
+  image->Update(); 
+  is_active = !image->IsFinished();
 }
 
 void BatonDynamite::Draw()
 {
   if (!is_active) return;
   assert (!IsGhost());
-
-  if (!explosion_active)
-    image->Draw(GetPosition());
-  else
-    explosion->Draw(GetPosition() - explosion->GetSize()/2);
+  image->Draw(GetPosition());
 }
 
 void BatonDynamite::ShootSound()
@@ -98,10 +82,6 @@ void BatonDynamite::Explosion()
 {
   jukebox.Stop(channel);
   channel = -1;
-  explosion->SetCurrentFrame(0);
-  explosion->Start();
-  explosion->animation.Start();
-  explosion_active = true;
   WeaponProjectile::Explosion();
 }
 
