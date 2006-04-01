@@ -230,7 +230,7 @@ void FireParticle::Init()
 void FireParticle::SignalFallEnding()
 {
   Point2i pos = GetCenter();
-  ApplyExplosion (pos, fire_cfg, NULL, "", false, false);
+  ApplyExplosion (pos, fire_cfg, NULL, "", false, ParticleEngine::NoESmoke);
   
   m_left_time_to_live = 0;
 }
@@ -306,17 +306,15 @@ void ParticleEngine::AddNow(const Point2i &position,
   }
 }
 
-void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius)
+void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
 {
-  const uint little_partic_nbr = 10;
-  const uint big_partic_nbr = 5;
+  //Add many little smoke particles
 
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
+  const uint little_partic_nbr = 10;
   const float little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
   const float little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 }; 
-  const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
-  const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
 
   Particle *particle = NULL;
   float norme;
@@ -340,6 +338,20 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
       particle->SetXY(pos);
       lst_particles.push_back(p);
   }    
+}
+
+void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius)
+{
+  //Add a few big smoke particles
+  const uint big_partic_nbr = 5;
+  // Sin / cos  precomputed value, to avoid recomputing them and speed up.
+  // see the commented value of 'angle' to see how it was generated
+  const float big_cos[] = { 1.000000, -0.809017, 0.309017, 0.309017, -0.809017 };
+  const float big_sin[] = { 0.000000, 0.587785, -0.951056, 0.951057, -0.587785 };
+
+  Particle *particle = NULL;
+  float norme;
+  uint size;
   for(uint i=0; i < big_partic_nbr ; i++)
   {
 //      angle = (float) i * M_PI * 4.0 / (float)big_partic_nbr;
@@ -358,6 +370,13 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
       particle->SetXY(pos);
       lst_particles.push_back(p);
   }
+}
+
+void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius, ESmokeStyle &style)
+{
+  if(style == NoESmoke) return;
+  AddLittleESmoke (position, radius);
+  if(style == BigESmoke) AddBigESmoke (position, radius);
 }
 
 void ParticleEngine::Draw(bool upper)

@@ -39,7 +39,7 @@ void ApplyExplosion (const Point2i &pos,
 		     PhysicalObj *obj_exclu,
 		     const std::string& son,
 		     bool fire_particle,
-		     bool smoke
+		     ParticleEngine::ESmokeStyle smoke
 		     )
 {
   bool cam_follow_character = false; //Set to true if an explosion is applied to a character. Then the camera shouldn't be following an object
@@ -135,8 +135,7 @@ void ApplyExplosion (const Point2i &pos,
     }
   }
 
-  if(smoke)
-    ParticleEngine::AddExplosionSmoke(pos, config.explosion_range);
+  ParticleEngine::AddExplosionSmoke(pos, config.explosion_range, smoke);
 
   // Do we need to generate some fire particles ?
   if (fire_particle)

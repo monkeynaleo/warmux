@@ -27,8 +27,8 @@
 #include "../graphic/surface.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
+#include "../object/particle.h"
 #include "../tool/point.h"
-#include "../tool/resource_manager.h"
 
 // Applique au explosion au point centre
 // Lance ExceptionMortVer() si le ver actif meurt
@@ -37,7 +37,7 @@ void ApplyExplosion (const Point2i &pos,
 		     PhysicalObj *obj_exclu, 
 		     const std::string& son="weapon/explosion",
 		     bool fire_particle = true,
-           bool smoke = true
+           ParticleEngine::ESmokeStyle smoke = ParticleEngine::BigESmoke
 		     );
 
 void UpdateStrengthBar(double strength);
