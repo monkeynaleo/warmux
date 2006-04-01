@@ -26,6 +26,7 @@
 #include "../map/camera.h"
 #include "../tool/error.h"
 #include "../tool/point.h"
+#include "../tool/stats.h"
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
 void TileItem::Draw(const Point2i &pos){
@@ -140,6 +141,11 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
 
       assert(buf + tile_start_x * bpp + bpp * (tile_lenght-1) < m_surface.GetPixels() + CELL_SIZE.x * CELL_SIZE.y * bpp); //Check for overflow
       memset(buf + tile_start_x * bpp, 0 , bpp * tile_lenght);
+
+/*      unsigned int* tmpbuf = (unsigned int*)(buf + tile_start_x * bpp);
+
+      while(tile_lenght--)
+        *(tmpbuf++) = 0;*/
     }
     buf += line_size;
     y++;

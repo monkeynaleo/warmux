@@ -99,6 +99,9 @@ class ParticleEngine
 
   static std::list<drawed_particle_t> lst_particles;
 
+  static void AddLittleESmoke(const Point2i &pos, const uint &radius);
+  static void AddBigESmoke(const Point2i &pos, const uint &radius);
+
  public:
   ParticleEngine(uint time=100);
   void AddPeriodic(const Point2i &position, 
@@ -111,7 +114,8 @@ class ParticleEngine
 		     bool upper,
 		     double angle=-1, double norme=-1);
 
-  static void AddExplosionSmoke(const Point2i &pos, const uint &radius);
+  enum ESmokeStyle { NoESmoke, LittleESmoke, BigESmoke }; // Style of smoke explosion (quantitie of smoke)
+  static void AddExplosionSmoke(const Point2i &pos, const uint &radius, ESmokeStyle &style);
 
   static void Refresh();
   static void Draw(bool upper);
