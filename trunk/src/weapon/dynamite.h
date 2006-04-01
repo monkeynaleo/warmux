@@ -35,8 +35,6 @@ class Dynamite;
 class BatonDynamite : public WeaponProjectile
 {
   int channel;
-  Sprite *explosion;
-  bool explosion_active;
 
 public:
   BatonDynamite(ExplosiveWeaponConfig& cfg);

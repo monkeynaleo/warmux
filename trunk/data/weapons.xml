@@ -3,13 +3,6 @@
 
 <!-- Common ressources (explosion and impact) -->
   
-  <sprite name="explosion">
-    <image file="weapon/dynamite/explosion.png">
-      <grid pos="0,0" size="210,200" array="5,1" />
-      <animation speed="1" loop="no" />
-    </image>
-  </sprite>
-
   <sprite name="smoke">
     <image file="object/smoke2.png" />
   </sprite>

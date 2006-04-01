@@ -54,9 +54,6 @@ ObjMine::ObjMine(MineConfig& cfg) :
 
   escape_time = 0;
 
-  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false); 
-  explosion = resource_manager.LoadSprite(res,"explosion");  
-
   Ready();
   is_active = true;
 }

@@ -42,7 +42,6 @@ private:
 
   // Activation des mines ?
   bool animation;//,repos;
-  Sprite *explosion;
   uint attente;
   uint escape_time;
 
