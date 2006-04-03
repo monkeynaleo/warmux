@@ -83,10 +83,10 @@
 
     <automatic_bazooka>
       <position origin="hand" x="-20" y="-18" />
-      <max_strength>60</max_strength>
+      <max_strength>30</max_strength>
       <nb_ammo>3</nb_ammo>
       <damage>50</damage>
-      <mass>10.0</mass>
+      <mass>20.0</mass>
       <air_resist_factor>0.8</air_resist_factor>
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
