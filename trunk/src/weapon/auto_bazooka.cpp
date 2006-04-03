@@ -33,7 +33,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"
-
 #ifdef __MINGW32__
 #undef LoadImage
 #endif
@@ -85,11 +84,17 @@ void RoquetteTeteCherche::Refresh()
 	  image->SetRotation_deg(angle *180/M_PI);
 	  SetExternForce(200, angle);
 	}
+    }  
+  else 
+    {
+      angle = GetSpeedAngle() *180/M_PI;
+      image->SetRotation_deg( angle);
     }
 }
 
 void RoquetteTeteCherche::SignalCollision()
 { 
+  m_attire = false;
   if (IsGhost())
   {
     GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
