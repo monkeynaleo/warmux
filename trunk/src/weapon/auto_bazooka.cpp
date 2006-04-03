@@ -78,11 +78,10 @@ void RoquetteTeteCherche::Refresh()
       if(tmp>1000 * TPS_AV_ATTIRANCE)
 	{
 	  m_attire = true;
-
 	  SetSpeed(0,0);
 	  angle = GetPosition().ComputeAngle( m_cible );
 	  image->SetRotation_deg(angle *180/M_PI);
-	  SetExternForce(200, angle);
+	  SetExternForce(2000, angle);
 	}
     }  
   else 
@@ -104,7 +103,7 @@ void RoquetteTeteCherche::SignalCollision()
 
 // Choisit les coordonnées de la cible 	 
 void RoquetteTeteCherche::SetTarget (int x, int y) 	 
-{ 	 
+{ 
   m_cible.x = x; 	 
   m_cible.y = y; 	 
 } 	 
