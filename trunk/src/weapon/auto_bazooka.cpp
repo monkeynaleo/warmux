@@ -47,6 +47,7 @@ RoquetteTeteCherche::RoquetteTeteCherche(ExplosiveWeaponConfig& cfg) :
   WeaponProjectile("rocket", cfg)
 {
   m_attire = false;
+  SetGravityFactor(0.0);
 }
 
 void RoquetteTeteCherche::Shoot (double strength) 
