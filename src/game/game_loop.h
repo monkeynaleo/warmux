@@ -72,10 +72,8 @@ public:
 private:
   GameLoop();
 
-#ifdef TODO_NETWORK 
   void GameLoop::InitGameData_NetServer();
   void GameLoop::InitGameData_NetClient();
-#endif  
   void GameLoop::InitData_Local();
   void GameLoop::InitData();
     

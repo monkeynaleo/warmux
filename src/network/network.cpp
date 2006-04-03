@@ -40,41 +40,53 @@ Network::Network()
 	m_is_server = false;
 	m_is_client = false;
 	state = NETWORK_NOT_CONNECTED;
+#ifdef CL
 	session = NULL;
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 void Network::Init()
 {
+#ifdef CL
 	if (session != NULL) return;
 	session = new CL_NetSession("Wormux");
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
 Network::~Network() 
 {
+#ifdef CL
 	delete session;
+#endif
 }
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 CL_NetSession& Network::GetSession()
 {
 	assert (session != NULL);
 	return *session;
 }
+#endif
 
 //-----------------------------------------------------------------------------
 
 void Network::disconnect() 
 {
 	if( m_is_server ) {
+#ifdef CL
 		GetSession().get_all().disconnect();
 		GetSession().stop_listen();
+#endif
 	} else {
+#ifdef CL
 		server.disconnect();
+#endif
 	}
 	m_is_connected = false;
 	m_is_server = false;
@@ -92,15 +104,18 @@ void Network::client_connect(const std::string &host, const std::string& port)
 	m_is_client = true;
 	m_is_server = false;
 	state = NETWORK_WAIT_SERVER;
+#ifdef CL
 	server = GetSession().connect(CL_IPAddress(host, port));
  	slots.connect(GetSession().sig_computer_disconnected(), this, &Network::client_on_disconnect);
 	slots.connect(GetSession().sig_netpacket_receive("lobby"), this, &Network::client_on_receive_lobby);
 	slots.connect(GetSession().sig_netpacket_receive("game"), this, &Network::client_on_receive_action);
+#endif
 	m_is_connected = true;
 }
 
 //-----------------------------------------------------------------------------
 
+#ifdef CL
 void Network::client_on_disconnect(CL_NetComputer &computer) 
 {
 #ifdef DBG_MSG
@@ -126,7 +141,7 @@ void Network::client_on_receive_action(CL_NetPacket &packet,
 	ActionHandler::GetInstance()->NewAction(*a, false);
 	delete a;
 }
-
+#endif //CL
 //-----------------------------------------------------------------------------
 
 void Network::server_start(const std::string &port) 
@@ -139,14 +154,17 @@ void Network::server_start(const std::string &port)
 	m_is_server = true;
 	m_is_client = false;
 	state = NETWORK_WAIT_CLIENTS;
+#ifdef CL
 	slots.connect(GetSession().sig_computer_connected(), this, &Network::server_on_connect);
  	slots.connect(GetSession().sig_computer_disconnected(), this, &Network::server_on_disconnect);
  	slots.connect(GetSession().sig_netpacket_receive("lobby"), this, &Network::server_on_receive_lobby);
  	slots.connect(GetSession().sig_netpacket_receive("game"), this, &Network::server_on_receive_action);
  	GetSession().start_listen(port);
+#endif
 }
 
 //-----------------------------------------------------------------------------
+#ifdef CL
 
 void Network::server_on_connect(CL_NetComputer &computer) 
 {
@@ -156,7 +174,6 @@ void Network::server_on_connect(CL_NetComputer &computer)
 }
 
 //-----------------------------------------------------------------------------
-
 void Network::server_on_disconnect(CL_NetComputer &computer) 
 {	
 #ifdef DBG_MSG
@@ -188,7 +205,7 @@ void Network::server_on_receive_action(CL_NetPacket &packet, CL_NetComputer &com
 	grp.remove( computer );
 	grp.send("game", packet);
 }
-
+#endif //CL
 //-----------------------------------------------------------------------------
 
 // Send Messages
@@ -197,18 +214,22 @@ void Network::send_action(const Action &action)
 	if (!m_is_connected) return;
 
 	if (m_is_server) {
+#ifdef CL
 	// Send to Clients
 		CL_NetPacket p = make_packet(action);
 		GetSession().get_all().send("game", p);
+#endif
 	} else {
+#ifdef CL
 	// Send to Server
 		CL_NetPacket msg = make_packet(action);
 		server.send("game",msg);
+#endif
 	}
 }
 
 //-----------------------------------------------------------------------------
-
+#ifdef CL
 CL_NetPacket Network::make_packet(const Action &action) 
 {
 	CL_NetPacket packet;
@@ -260,7 +281,7 @@ Action* Network::make_action(CL_NetPacket &packet)
 		return new Action(type);
 	}
 }
-
+#endif //CL
 //-----------------------------------------------------------------------------
 
 bool Network::is_connected() { return m_is_connected; }
