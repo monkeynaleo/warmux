@@ -42,6 +42,7 @@
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/wind.h"
+#include "../network/network.h"
 #include "../object/bonus_box.h"
 #include "../object/objects_list.h"
 #include "../object/particle.h"
@@ -73,22 +74,23 @@ GameLoop::GameLoop()
   interaction_enabled = true;
 }
 
-#ifdef TODO_NETWORK 
 void GameLoop::InitGameData_NetServer()
 {
   //        action_handler.NewAction(Action(ACTION_ASK_TEAM));
   ActionHandler * action_handler = ActionHandler::GetInstance();
-  AppWormux * app = AppWormux::GetInstance();
+//  AppWormux * app = AppWormux::GetInstance();
   do
     {
       action_handler->NewAction(Action(ACTION_ASK_VERSION));
       std::string msg=_("Wait for clients");
       action_handler->ExecActions();
       std::cout << msg << std::endl;
-      CL_Display::clear(CL_Color::black);
+#ifdef CL
       police_grand.WriteCenterTop (app->video.GetWidth()/2, app->video.GetHeight()/2, msg);
+      CL_Display::clear(CL_Color::black);
       CL_Display::flip();
       CL_System::keep_alive(500);
+#endif
     } while (network.state != Network::NETWORK_SERVER_INIT_GAME);
   std::cout << "Server init game." << std::endl;
         
@@ -157,6 +159,7 @@ void GameLoop::InitGameData_NetServer()
 
 void GameLoop::InitGameData_NetClient()
 {
+  ActionHandler * action_handler = ActionHandler::GetInstance();
   do
     {
       std::string msg=_("Wait for server informations");
@@ -179,10 +182,12 @@ void GameLoop::InitGameData_NetClient()
       action_handler->ExecActions();
       std::cout << network.state << std::endl;
       std::cout << msg << std::endl;
-      CL_Display::clear(CL_Color::black);
+#ifdef CL
       police_grand.WriteCenterTop (app->video.GetWidth()/2, app->video.GetHeight()/2, msg);
+      CL_Display::clear(CL_Color::black);
       CL_Display::flip();
       CL_System::keep_alive(300);
+#endif
     } while (network.state != Network::NETWORK_PLAYING);
   std::cout << network.state << " : Run game !" << std::endl;
  
@@ -192,8 +197,6 @@ void GameLoop::InitGameData_NetClient()
   //Set the second team as a team played from the client
   ActiveTeam().is_local = false;
 }
-
-#endif // TODO_NETWORK
 
 void GameLoop::InitData_Local()
 {
@@ -212,13 +215,11 @@ void GameLoop::InitData()
 {
   Time::GetInstance()->Reset();
   
-#ifdef TODO_NETWORK 
   if (network.is_server())
     InitGameData_NetServer();
   else if (network.is_client())
     InitGameData_NetClient();
   else        
-#endif
   InitData_Local();
 
   CurseurVer::GetInstance()->Reset();
@@ -555,9 +556,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
     Interface::GetInstance()->EnableDisplayTimer(true);
     pause_seconde = global_time->Read();
 
-#ifdef TODO_NETWORK 
     if (network.is_server() || network.is_local())
-#endif
      wind.ChooseRandomVal();
     
      character_already_chosen = false;

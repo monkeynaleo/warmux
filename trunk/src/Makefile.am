@@ -77,6 +77,7 @@ wormux_SOURCES = \
 	map/tileitem.cpp map/tileitem.h \
 	map/water.cpp map/water.h \
 	map/wind.cpp map/wind.h \
+	network/network.cpp network/network.h \
 	team/macro.h \
 	team/character.cpp team/character.h \
 	team/move.cpp team/move.h \
