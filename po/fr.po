@@ -22,22 +22,22 @@ msgstr ""
 #: src/game/game.cpp:135 src/game/game.cpp:175
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
-msgstr ""
+msgstr " Le plus traitre : %s (%i).\n"
 
 #: src/game/game.cpp:133 src/game/game.cpp:173
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
-msgstr ""
+msgstr " Le plus utile : %s (%i).\n"
 
 #: src/game/game.cpp:134 src/game/game.cpp:174
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
-msgstr ""
+msgstr "  Le plus inutile  :  %s (%i).\n"
 
 #: src/game/game.cpp:132 src/game/game.cpp:172
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
-msgstr ""
+msgstr "  Le plus violent  :  %s (%i).\n"
 
 #: src/map/maps_list.cpp:294
 #, c-format
@@ -161,7 +161,7 @@ msgstr "Attaque aérienne"
 
 #: src/game/game.cpp:171
 msgid "All-Team results:\n"
-msgstr ""
+msgstr "Statistiques toutes équipes confondues:\n"
 
 #: src/main.cpp:188
 msgid "Authors:"
@@ -394,7 +394,7 @@ msgstr ""
 
 #: src/game/game.cpp:77
 msgid "Nobody"
-msgstr ""
+msgstr "Personne"
 
 #: src/menu/options_menu.cpp:113
 msgid "Number of players per team:"
@@ -455,7 +455,7 @@ msgstr "Munitions :"
 #: src/game/game.cpp:131
 #, c-format
 msgid "Team %s results:\n"
-msgstr ""
+msgstr "Statistiques de l'équipe %s:\n"
 
 #: src/object/bonus_box.cpp:144 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
@@ -569,7 +569,7 @@ msgstr "Il faut au minimum deux équipes valides !"
 
 #: src/map/ground.cpp:56
 msgid "done"
-msgstr ""
+msgstr "terminé"
 
 #~ msgid "Warning: Don't load configuration (old version of Wormux)."
 #~ msgstr ""
