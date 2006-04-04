@@ -41,6 +41,7 @@ wormux_SOURCES = \
 	tool/i18n.cpp tool/i18n.h \
 	tool/error.cpp tool/error.h \
 	tool/euler_vector.cpp tool/euler_vector.h \
+	tool/vector2.h \
 	tool/file_tools.cpp tool/file_tools.h \
 	tool/math_tools.cpp tool/math_tools.h \
 	tool/rectangle.h tool/point.h \
