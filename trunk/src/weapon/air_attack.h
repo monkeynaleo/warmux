@@ -69,7 +69,7 @@ public:
   bool PeutLacherObus() const;
   int LitCibleX() const;
   int GetDirection() const;
-  void Avion::SignalGhostState (bool was_dead);
+  void SignalGhostState (bool was_dead);
 };
 
 class AirAttack : public Weapon

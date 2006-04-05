@@ -72,10 +72,10 @@ public:
 private:
   GameLoop();
 
-  void GameLoop::InitGameData_NetServer();
-  void GameLoop::InitGameData_NetClient();
-  void GameLoop::InitData_Local();
-  void GameLoop::InitData();
+  void InitGameData_NetServer();
+  void InitGameData_NetClient();
+  void InitData_Local();
+  void InitData();
     
   void RefreshClock();
   void CallDraw();

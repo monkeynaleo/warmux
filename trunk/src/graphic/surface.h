@@ -52,7 +52,7 @@ class Surface
 			void SetAutoFree(bool newAutoFree);
 
 			void SetSurface(SDL_Surface *newSurface, bool freePrevious = true);
-			void Surface::NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
+			void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
 
 			SDL_Surface *GetSurface();
 

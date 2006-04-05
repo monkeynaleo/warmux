@@ -37,7 +37,7 @@ class Color
 		Color();
 		Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 
-		bool Color::operator==(const Color &color) const;
+		bool operator==(const Color &color) const;
 
 		void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 

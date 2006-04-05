@@ -56,7 +56,6 @@ bool Box::Clic (const Point2i &mousePosition, uint button){
   for (it = widgets.begin(); 
        it != widgets.end(); 
        ++it){
-    assert(it != NULL);
     if( (*it)->Clic(mousePosition, button) )
       return true;
   }
@@ -106,8 +105,6 @@ void VBox::SetSizePosition(const Rectanglei &rect){
        it != widgets.end(); 
        ++it ){
 
-    assert(it != NULL);
-
     if( it == widgets.begin() )
       _y += border.y - margin;
 
@@ -154,7 +151,6 @@ void HBox::SetSizePosition(const Rectanglei &rect){
   for( it = widgets.begin(); 
        it != widgets.end(); 
        ++it ){
-    assert(it != NULL);   
 
     if( it == widgets.begin() )
       _x += border.x - margin;
