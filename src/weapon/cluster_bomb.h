@@ -72,7 +72,7 @@ class ClusterLauncher : public WeaponLauncher
   ClusterLauncher();
 
  private:
-  ClusterBombConfig& ClusterLauncher::cfg() ;
+  ClusterBombConfig& cfg() ;
 };
 
 #endif
