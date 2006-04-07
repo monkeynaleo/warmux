@@ -24,6 +24,11 @@
   <hand frame="10" x="18" y="39" />
 </sprite>
 
+<sprite name="black">
+  <image file="black.png" />
+  <collision_rect dx="0" top="0" bottom="0" />
+</sprite>
+
 <sprite name="helmet">
   <image file="helmet.png">
     <grid pos="0,0" size="33,49" array="10,1" />
