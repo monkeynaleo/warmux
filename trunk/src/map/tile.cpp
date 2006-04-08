@@ -68,8 +68,10 @@ void Tile::Dig(const Point2i &position, const Surface& dig){
 }
 
 void Tile::Dig(const Point2i &center, const uint radius){  
-   Point2i size = Point2i(2 * radius, 2 * radius);
-   Point2i position = center - Point2i(radius,radius);
+   Point2i size = Point2i(2 * (radius + EXPLOSION_BORDER_SIZE),
+                          2 * (radius + EXPLOSION_BORDER_SIZE));
+   Point2i position = center - Point2i(radius + EXPLOSION_BORDER_SIZE,
+                                       radius + EXPLOSION_BORDER_SIZE);
 
    Rectanglei rect = Rectanglei(position, size);
 	Point2i firstCell = Clamp(position/CELL_SIZE);

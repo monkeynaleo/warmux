@@ -25,6 +25,8 @@
 #include "../graphic/surface.h"
 #include "../tool/rectangle.h"
 
+const uint EXPLOSION_BORDER_SIZE = 10;
+
 class TileItem;
 
 class Tile : public Rectanglei{
