@@ -21,6 +21,7 @@
 #include <iostream>
 #include <SDL.h>
 #include <SDL_endian.h>
+#include "tile.h"
 #include "../game/config.h"
 #include "../include/app.h"
 #include "../map/camera.h"
@@ -109,46 +110,94 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
   const uint line_size = m_surface.GetPitch();
   const uint bpp       = m_surface.GetBytesPerPixel();
 
-  int y = (center.y - (int)radius >= 0) ? (center.y - (int)radius) : 0;
-  assert( (uint) y <= center.y + radius && y < CELL_SIZE.y );
+  int y = (center.y - (int)radius - (int)EXPLOSION_BORDER_SIZE >= 0) ? (center.y - (int)radius - EXPLOSION_BORDER_SIZE) : 0;
   buf += y * line_size;
 
-  //Empties each line of the tile horizontaly that are in the cirlce
-  while ( (uint) y <= center.y + radius && y < CELL_SIZE.y )
+  //Empties each line of the tile horizontaly that are in the circle
+  while ( (uint) y <= center.y + radius + EXPLOSION_BORDER_SIZE&& y < CELL_SIZE.y )
   {
     //Abscisse distance from the center of the circle to the circle
     int dac = center.y - y;
 
-    //Angle on the circle 
+    //Angle on the circle
     float angle = asin( (float)dac / (float)radius);
 
-    //Zone of the line which needs to be 
+    //Zone of the line which needs to be emptied
     int start_x, end_x, lenght;
     lenght = (int) ((float) radius * cos (angle));
     lenght = lenght > 0 ? lenght : - lenght;
     start_x = center.x - lenght;
     lenght *= 2;
     end_x = start_x + lenght;
+    Empty(start_x, end_x, buf, bpp);
 
-    if( start_x < CELL_SIZE.x && end_x >= 0)
-    {
-      //Clamp the value to empty only the in this tile
-      int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
-      assert( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
-      int tile_lenght = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
-      assert( tile_lenght > 0);
-      assert( tile_start_x + tile_lenght <= CELL_SIZE.x);
+    //Darken the border of the removed ground
+    // Left half of the circle
+    int bstart_x, bend_x, blenght;
+    angle = asin( (float)dac / (float)(radius + EXPLOSION_BORDER_SIZE));
+    blenght = (int) ((float) (radius + EXPLOSION_BORDER_SIZE) * cos (angle));
+    blenght = blenght > 0 ? blenght : - blenght;
+    bstart_x = center.x - blenght;
+    bend_x = bstart_x + (blenght - lenght/2);
+    Darken(bstart_x, bend_x, buf, bpp);
 
-      assert(buf + tile_start_x * bpp + bpp * (tile_lenght-1) < m_surface.GetPixels() + CELL_SIZE.x * CELL_SIZE.y * bpp); //Check for overflow
-      memset(buf + tile_start_x * bpp, 0 , bpp * tile_lenght);
+    // Right half of the circle
+    bstart_x = center.x + lenght/2 + 1;
+    bend_x = bstart_x + (blenght - lenght/2);
+    Darken(bstart_x, bend_x, buf, bpp);
 
-/*      unsigned int* tmpbuf = (unsigned int*)(buf + tile_start_x * bpp);
-
-      while(tile_lenght--)
-        *(tmpbuf++) = 0;*/
-    }
     buf += line_size;
     y++;
+  }
+}
+
+void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp)
+{
+  if( start_x < CELL_SIZE.x && end_x >= 0)
+  {
+    //Clamp the value to empty only the in this tile
+    int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
+    assert( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
+    int tile_lenght = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
+    assert( tile_lenght > 0);
+    assert( tile_start_x + tile_lenght <= CELL_SIZE.x);
+
+    assert(buf + tile_start_x * bpp + bpp * (tile_lenght-1) < m_surface.GetPixels() + CELL_SIZE.x * CELL_SIZE.y * bpp); //Check for overflow
+    memset(buf + tile_start_x * bpp, 0 , bpp * tile_lenght);
+
+/*    unsigned int* tmpbuf = (unsigned int*)(buf + tile_start_x * bpp);
+
+    while(tile_lenght--)
+      *(tmpbuf++) = 0;*/
+  }
+}
+
+void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned char* buf, const int bpp)
+{
+  if( start_x < CELL_SIZE.x && end_x >= 0)
+  {
+    //Clamp the value to empty only the in this tile
+    int tile_start_x = (start_x < 0) ? 0 : (start_x >= CELL_SIZE.x) ? CELL_SIZE.x - 1 : start_x;
+    assert( tile_start_x >= 0 && tile_start_x < CELL_SIZE.x);
+    int tile_lenght = (end_x >= CELL_SIZE.x) ? CELL_SIZE.x - tile_start_x : end_x - tile_start_x + 1;
+    assert( tile_lenght > 0);
+    assert( tile_start_x + tile_lenght <= CELL_SIZE.x);
+
+    buf += tile_start_x * bpp;
+    while(tile_lenght--)
+    {
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+      *(buf++) /= 2;
+      *(buf++) /= 2;
+      *(buf++) /= 2;
+      buf++; //skip alpha chanel
+#else
+      buf++; //skip alpha chanel
+      *(buf++) /= 2;
+      *(buf++) /= 2;
+      *(buf++) /= 2;
+#endif
+    }
   }
 }
 
