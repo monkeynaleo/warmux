@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon "batte de baseball" : permet de donner un coup à un autre ver.
+ * Weapon baseball bat
  *****************************************************************************/
 
 #ifndef BASEBALL_H
@@ -29,8 +29,8 @@
 class BaseballConfig : public WeaponConfig
 {
 public:
-  uint longueur;
-  uint force;
+  uint range;
+  uint strength;
 public:
   BaseballConfig();
   void LoadXml(xmlpp::Element *elem);

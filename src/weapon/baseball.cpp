@@ -45,9 +45,9 @@ bool Baseball::p_Shoot (){
   {
     // On a fini les calculs ?
     rayon += 1.0;
-    if (cfg().longueur < rayon) 
+    if (cfg().range < rayon) 
     {
-      rayon = cfg().longueur;
+      rayon = cfg().range;
       fin = true;
     }
 
@@ -66,7 +66,7 @@ bool Baseball::p_Shoot (){
       {
 	// Inflige les dégats au ver touché
 	(*ver).SetEnergyDelta (-cfg().damage);
-	(*ver).SetSpeed (cfg().force, angle);
+	(*ver).SetSpeed (cfg().strength, angle);
 	return true;
       }
     }
@@ -85,12 +85,12 @@ BaseballConfig& Baseball::cfg() {
 }
 
 BaseballConfig::BaseballConfig(){ 
-  longueur =  70;
-  force = 250;
+  range =  70;
+  strength = 250;
 }
 
 void BaseballConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
-  LitDocXml::LitUint (elem, "longueur", longueur);
-  LitDocXml::LitUint (elem, "force", force);
+  LitDocXml::LitUint (elem, "range", range);
+  LitDocXml::LitUint (elem, "strength", strength);
 }
