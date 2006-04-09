@@ -69,6 +69,7 @@ POTFILES = \
 	src/weapon/dynamite.cpp \
 	src/weapon/grenade.cpp \
 	src/weapon/gun.cpp \
+	src/weapon/launcher.cpp \
 	src/weapon/mine.cpp \
 	src/weapon/suicide.cpp \
 	src/weapon/teleportation.cpp \
