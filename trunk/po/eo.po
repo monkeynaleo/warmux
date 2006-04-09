@@ -14,22 +14,22 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/game/game.cpp:135 src/game/game.cpp:175
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:133 src/game/game.cpp:173
+#: src/game/game.cpp:141 src/game/game.cpp:181
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:134 src/game/game.cpp:174
+#: src/game/game.cpp:142 src/game/game.cpp:182
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:132 src/game/game.cpp:172
+#: src/game/game.cpp:140 src/game/game.cpp:180
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
@@ -39,7 +39,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr ""
 
-#: src/game/game_loop.cpp:677
+#: src/game/game_loop.cpp:695
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
@@ -54,7 +54,7 @@ msgstr ""
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:655
+#: src/game/game_loop.cpp:673
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -64,83 +64,83 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:648
+#: src/game/game_loop.cpp:666
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game_loop.cpp:659
+#: src/game/game_loop.cpp:677
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:158
+#: src/object/bonus_box.cpp:160
 #, fuzzy, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "Le ludanto '%s' perdis %u energiajn poentojn :-("
 msgstr[1] "Le ludanto '%s' perdis %u energiajn poentojn :-("
 
-#: src/object/bonus_box.cpp:149
+#: src/object/bonus_box.cpp:151
 #, fuzzy, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 msgstr[1] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 
-#: src/game/game_loop.cpp:670
+#: src/game/game_loop.cpp:688
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:683
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
 
-#: src/weapon/mine.cpp:130
+#: src/weapon/mine.cpp:126
 #, fuzzy, c-format
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino ..."
 
-#: src/object/bonus_box.cpp:176
+#: src/object/bonus_box.cpp:178
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 msgstr[1] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 
-#: src/object/bonus_box.cpp:186
+#: src/object/bonus_box.cpp:188
 #, fuzzy, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "La teamo '%s' elpoentis %u dinamito(j)n !"
 msgstr[1] "La teamo '%s' elpoentis %u dinamito(j)n !"
 
-#: src/object/bonus_box.cpp:140
+#: src/object/bonus_box.cpp:142
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "La teamo '%s' elpoentis %u teleporto(j)n."
 msgstr[1] "La teamo '%s' elpoentis %u teleporto(j)n."
 
-#: src/game/game.cpp:181
+#: src/game/game.cpp:189
 #, fuzzy, c-format
 msgid "%s team has won.\n"
 msgstr "La teamo '%s' elpoentis %u teleporto(j)n."
 
-#: src/object/bonus_box.cpp:167
+#: src/object/bonus_box.cpp:169
 #, fuzzy, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/interface/interface.cpp:156
+#: src/interface/interface.cpp:164
 msgid "(dead)"
 msgstr "(mortinta)"
 
-#: src/interface/interface.cpp:198
+#: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
@@ -148,20 +148,20 @@ msgstr "(senlimaj)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:171 src/weapon/air_attack.cpp:215
+#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:204
 msgid "Air attack"
 msgstr "Aeratako"
 
-#: src/game/game.cpp:171
+#: src/game/game.cpp:179
 msgid "All-Team results:\n"
 msgstr ""
 
-#: src/main.cpp:188
+#: src/main.cpp:197
 #, fuzzy
 msgid "Authors:"
 msgstr "Auxtoroj :"
 
-#: src/object/bonus_box.cpp:180 src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:117
 msgid "Automatic bazooka"
 msgstr "Memmova bazuko"
 
@@ -169,11 +169,11 @@ msgstr "Memmova bazuko"
 msgid "Baseball"
 msgstr "Bazopilkilo"
 
-#: src/weapon/bazooka.cpp:65
+#: src/weapon/bazooka.cpp:63
 msgid "Bazooka"
 msgstr "Bazuko"
 
-#: src/main.cpp:90
+#: src/main.cpp:98
 #, fuzzy
 msgid "C++ exception caught:"
 msgstr "Escepto C++ intercaptita :"
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Cannot open teams directory (%s)!"
 msgstr ""
 
-#: src/weapon/cluster_bomb.cpp:144
+#: src/weapon/cluster_bomb.cpp:141
 msgid "ClusterBomb"
 msgstr ""
 
@@ -214,7 +214,7 @@ msgstr "Afisxas la nomo de la ludantoj"
 msgid "Display wind particles?"
 msgstr ""
 
-#: src/game/game.cpp:228
+#: src/game/game.cpp:237
 #, fuzzy
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Cxu vi volas vere forlasi (J/N) ?"
@@ -229,16 +229,16 @@ msgstr "Vicdauxro"
 msgid "Duration of the end of a turn:"
 msgstr "Vicfindauxro"
 
-#: src/object/bonus_box.cpp:190 src/weapon/dynamite.cpp:121
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/game/game.cpp:177
+#: src/game/game.cpp:185
 #, fuzzy
 msgid "End of the game!\n"
 msgstr "Partifino !\n"
 
-#: src/interface/interface.cpp:95
+#: src/interface/interface.cpp:102
 #, fuzzy
 msgid "Energy:"
 msgstr "Energio"
@@ -264,7 +264,7 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/game/config.cpp:263
+#: src/game/config.cpp:249
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -279,14 +279,14 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/game/game_mode.cpp:153
+#: src/game/game_mode.cpp:159
 #, fuzzy, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/game/game.cpp:269
+#: src/game/game.cpp:277
 #, fuzzy, c-format
 msgid ""
 "Error:\n"
@@ -300,7 +300,7 @@ msgstr ""
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr ""
 
-#: src/game/game_loop.cpp:185
+#: src/game/game_loop.cpp:204
 #, fuzzy
 msgid "Find a random position for characters"
 msgstr "Metas hazarde la vermojn"
@@ -319,7 +319,7 @@ msgstr "Elektoj"
 msgid "Graphic options"
 msgstr ""
 
-#: src/weapon/grenade.cpp:77
+#: src/weapon/grenade.cpp:73
 msgid "Grenade"
 msgstr "Grenado"
 
@@ -341,31 +341,31 @@ msgstr ""
 msgid "Initial energy:"
 msgstr "Komenca energio"
 
-#: src/game/game_loop.cpp:238
+#: src/game/game_loop.cpp:257
 msgid "Initialisation"
 msgstr "Preparanto"
 
-#: src/main.cpp:167
+#: src/main.cpp:173
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:131
+#: src/game/game_loop.cpp:149
 #, fuzzy
 msgid "Initialise data"
 msgstr "Preparanto"
 
-#: src/game/game_loop.cpp:191
+#: src/game/game_loop.cpp:210
 #, fuzzy
 msgid "Initialise objects"
 msgstr "Preparanto"
 
-#: src/game/game_loop.cpp:83
+#: src/game/game_loop.cpp:101
 #, fuzzy
 msgid "Initialise teams"
 msgstr "Preparanto"
 
-#: src/game/game_loop.cpp:79
+#: src/game/game_loop.cpp:97
 #, fuzzy
 msgid "Load map"
 msgstr "Muntas la terenon %s"
@@ -385,7 +385,7 @@ msgstr "Muntas la avataron %s"
 msgid "Load teams:"
 msgstr "Muntas la teamo %s"
 
-#: src/map/map.cpp:277
+#: src/map/map.cpp:283
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr ""
@@ -394,7 +394,7 @@ msgstr ""
 msgid "Maximum number of FPS:"
 msgstr ""
 
-#: src/weapon/mine.cpp:179
+#: src/weapon/mine.cpp:186
 #, fuzzy
 msgid "Mine"
 msgstr "Mino"
@@ -404,7 +404,7 @@ msgstr "Mino"
 msgid "Music?"
 msgstr "Muziko"
 
-#: src/interface/interface.cpp:94
+#: src/interface/interface.cpp:101
 #, fuzzy
 msgid "Name:"
 msgstr "Nomo"
@@ -413,12 +413,12 @@ msgstr "Nomo"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:450
+#: src/weapon/weapon.cpp:481
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr ""
 
-#: src/game/game.cpp:77
+#: src/game/game.cpp:85
 msgid "Nobody"
 msgstr ""
 
@@ -431,7 +431,7 @@ msgstr "Nombro da ludantoj per teamo"
 msgid "Options"
 msgstr "Elektoj"
 
-#: src/game/game.cpp:279
+#: src/game/game.cpp:287
 msgid "Pause"
 msgstr ""
 
@@ -439,7 +439,7 @@ msgstr ""
 msgid "Play"
 msgstr "Aktori"
 
-#: src/main.cpp:182
+#: src/main.cpp:191
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr ""
 
@@ -447,11 +447,11 @@ msgstr ""
 msgid "Quit"
 msgstr "Forlasi"
 
-#: src/main.cpp:172
+#: src/main.cpp:178
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/main.cpp:218
+#: src/main.cpp:227
 msgid "Run game"
 msgstr "Komencas partion"
 
@@ -473,35 +473,35 @@ msgstr "Sonaji efektoj"
 msgid "Sound options"
 msgstr "Elektoj"
 
-#: src/game/game.cpp:71
+#: src/game/game.cpp:79
 #, fuzzy
 msgid "Starting a new game"
 msgstr "Komencas novan partion"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:104
 #, fuzzy
 msgid "Stock:"
 msgstr "Municioj"
 
-#: src/game/game.cpp:131
+#: src/game/game.cpp:139
 #, c-format
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:144 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:146 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleporto"
 
-#: src/weapon/auto_bazooka.cpp:99
+#: src/weapon/auto_bazooka.cpp:100
 #, fuzzy
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La memmova fuzilo estas malaperita en alian mondon ..."
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:193
 msgid "The game has ended as a draw.\n"
 msgstr ""
 
-#: src/weapon/bazooka.cpp:55 src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:66
 #, fuzzy
 msgid "The rocket left the battlefield..."
 msgstr "La fuzilo estas malaperita en alian mondon ..."
@@ -521,37 +521,37 @@ msgstr ""
 msgid "Unable to open skins directory (%s)!"
 msgstr ""
 
-#: src/main.cpp:96
+#: src/main.cpp:104
 #, fuzzy
 msgid "Unexcepted exception caught..."
 msgstr "Escepto nekonata intercaptita ..."
 
-#: src/game/game_loop.cpp:159
+#: src/game/game_loop.cpp:178
 msgid "Unknow action"
 msgstr ""
 
-#: src/main.cpp:139
+#: src/main.cpp:145
 #, fuzzy
 msgid "Version"
 msgstr "Versio "
 
-#: src/game/game_loop.cpp:69
+#: src/game/game_loop.cpp:85
 msgid "Wait for clients"
 msgstr ""
 
-#: src/game/game_loop.cpp:153
+#: src/game/game_loop.cpp:172
 msgid "Wait for map"
 msgstr ""
 
-#: src/game/game_loop.cpp:150
+#: src/game/game_loop.cpp:169
 msgid "Wait for server"
 msgstr ""
 
-#: src/game/game_loop.cpp:146
+#: src/game/game_loop.cpp:165
 msgid "Wait for server informations"
 msgstr ""
 
-#: src/game/game_loop.cpp:156
+#: src/game/game_loop.cpp:175
 #, fuzzy
 msgid "Wait teams"
 msgstr "Venkinto : teamo %s"
@@ -560,27 +560,27 @@ msgstr "Venkinto : teamo %s"
 msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 msgstr ""
 
-#: src/interface/interface.cpp:96
+#: src/interface/interface.cpp:103
 #, fuzzy
 msgid "Weapon:"
 msgstr "Armilo"
 
-#: src/main.cpp:199
+#: src/main.cpp:208
 #, fuzzy
 msgid "Website: "
 msgstr "TTT-ejo : "
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:691
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pistolo !"
 
-#: src/main.cpp:154
+#: src/main.cpp:160
 #, fuzzy
 msgid "Wormux launching..."
 msgstr "Wormux muntas."
 
-#: src/main.cpp:187
+#: src/main.cpp:196
 msgid "Wormux version "
 msgstr "Wormux versio "
 
@@ -593,7 +593,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr ""
 
-#: src/game/game_loop.cpp:250
+#: src/game/game_loop.cpp:269
 #, fuzzy
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Vi necesas almenaux du teamojn, korektu cxi tion en la menuo Elektoj !"
