@@ -255,7 +255,8 @@ msgstr "%s takımı yüklenirken hata:"
 
 #: src/game/config.cpp:249
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
 #: src/game/config.cpp:129
@@ -560,4 +561,3 @@ msgstr "En az iki geçerli takıma ihtiyacınız var !"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
-
