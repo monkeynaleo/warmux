@@ -29,10 +29,12 @@
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../map/map.h"
+#include "../team/macro.h"
 #include "../team/teams_list.h"
 #include "../tool/debug.h"
 #include "../tool/math_tools.h"
 #include "../tool/point.h"
+#include "../tool/random.h"
 #include "../tool/rectangle.h"
 #include "../weapon/ninja_rope.h"
 
@@ -582,3 +584,76 @@ bool PhysicalObj::ObjTouche(const Point2i &p) const
    return  GetTestRect().Contains( p );
 }
 
+bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters)
+{
+  uint bcl=0;
+  uint NB_MAX_TRY = 20;
+  bool ok;
+  int x, y;
+
+  MSG_DEBUG("physic.position", "Search a position...");
+  
+  do
+  {
+    ok = true;
+    Ready();
+    
+    if (bcl >= NB_MAX_TRY) {
+      MSG_DEBUG("physic.position", "Impossible to find an initial position !!");
+      return false;
+    }
+
+    if (on_top_of_world) {
+      // Placement au hasard en X
+      x = randomObj.GetLong(0, world.GetWidth() - GetWidth());
+      y = -GetHeight()+1;
+      SetXY( Point2i(x, y) );
+    } else {
+      SetXY( randomObj.GetPoint(world.GetSize() - GetSize() + 1) );
+    }
+    MSG_DEBUG("physic.position", "Test in %d, %d", x, y);
+
+    // Check physical object is not in the ground
+    ok &= !IsGhost() && IsInVacuum( Point2i(0,0) )  && IsInVacuum( Point2i(0, 1) );
+    if (!ok) {
+      MSG_DEBUG("physic.position", "Put it in the ground -> try again !");
+      continue;
+    }
+
+    // Check object does not go in water or outside the map
+    DirectFall();
+    ok &= !IsGhost() && !IsInWater() && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
+
+    if (!ok) {
+      MSG_DEBUG("physic.position", "Put in outside the map or in water -> try again");
+      continue;
+    }
+
+    // Check distance with characters
+    FOR_ALL_LIVING_CHARACTERS(equipe, ver) if (&(*ver) != this)
+    {
+      if (min_dst_with_characters == 0) {
+
+	if( ObjTouche(*ver) ) {
+	    MSG_DEBUG("physic.position", "Object is too close from character %s", (*ver).m_name.c_str());
+	    ok = false;
+	} 
+      } else {
+	Point2i p1 = ver->GetCenter();
+	Point2i p2 = GetCenter();
+	double dst = p1.Distance( p2 );
+	  
+	// ok this test is not perfect but quite efficient ;-)
+	// else we need to check each distance between each "corner" 
+	if (dst < min_dst_with_characters) ok = false;
+      }
+    }
+
+    if (ok && on_top_of_world) SetXY( Point2i(x, y) );
+    bcl++;
+  } while (!ok);
+
+  MSG_DEBUG("physic.position", "Putted after  %d try", bcl);
+  
+  return true;
+}

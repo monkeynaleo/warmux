@@ -53,18 +53,6 @@ const uint HAUT_FONT_MIX = 13;
 const uint ESPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
 
-#ifdef DEBUG
-//#define ANIME_VITE
-//#define DEBUG_CHG_ETAT
-//#define DEBUG_PLACEMENT
-//#define NO_POSITION_CHECK
-//#define DEBUG_SKIN
-
-#define COUT_DBG0 std::cerr << "[Character " << m_name << "]"
-#define COUT_DBG COUT_DBG0 " "
-#define COUT_PLACEMENT COUT_DBG0 "[Init bcl=" << bcl << "] "
-#endif
-
 // Pause for the animation
 #ifdef ANIME_VITE
   const uint ANIM_PAUSE_MIN = 100;
@@ -881,54 +869,8 @@ void Character::Reset()
   SetEnergyDelta (1);
   lost_energy = 0;
 
-  // Initialise la position
-  uint bcl=0;
-  bool pos_ok;
-  do
-  {
-    // Vérifie qu'on ne tourne pas en rond
-    FORCE_ASSERT (++bcl < Constants::NBR_BCL_MAX_EST_VIDE);
+  PutRandomly(false, world.dst_min_entre_vers);
 
-    // Objet physique dans l'état prêt
-    pos_ok = true;
-    desactive = false;
-    Ready();
-
-    SetXY( randomObj.GetPoint(world.GetSize() - GetSize() + 1) );
-
-#ifndef NO_POSITION_CHECK
-    pos_ok &= !IsGhost() && IsInVacuum( Point2i(0,0) ) && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
-    if (!pos_ok) continue;
-
-    // Chute directe pour le sol
-    DirectFall ();
-    pos_ok &= !IsGhost() && (GetY() < static_cast<int>(world.GetHeight() - (WATER_INITIAL_HEIGHT + 30)));
-#ifdef DEBUG_PLACEMENT
-    if (!pos_ok) COUT_PLACEMENT << "Fantome en tombant." << std::endl;
-#endif
-    if (!pos_ok) continue;
-
-    // Vérifie que le ver ne fois pas trop près de ses voisins
-    FOR_ALL_LIVING_CHARACTERS(it_equipe,ver) if (&(*ver) != this)
-    {
-       Point2i p1 = ver->GetCenter();
-       Point2i p2 = GetCenter();
-       double dst = p1.Distance( p2 );
-
-      if (dst < world.dst_min_entre_vers) {
-	pos_ok = false;
-      }
-       
-    }
-
-    // La position est bonne ?
-    pos_ok &= !IsGhost() & !IsInWater() & IsInVacuum( Point2i(0,0) );
-#ifdef DEBUG_PLACEMENT
-    if (!pos_ok) COUT_PLACEMENT << "Placement final manqué." << std::endl;
-#endif
-
-#endif // of #ifndef NO_POSITION_CHECK
-  } while (!pos_ok);
   assert (!IsDead());
   Ready();
 }

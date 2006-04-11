@@ -130,6 +130,7 @@ void AppWormux::Init(int argc, char **argv){
 }
 
 void AppWormux::InitNetwork(int argc, char **argv){
+#ifdef TODO_NETWORK
   if ((argc == 3) && (strcmp(argv[1],"server")==0)) {
 	// wormux server <port>
 	network.server_start (argv[2]);
@@ -137,6 +138,7 @@ void AppWormux::InitNetwork(int argc, char **argv){
 	// wormux <server_ip> <server_port>
 	network.client_connect(argv[1], argv[2]);
   }
+#endif
 }
 
 void AppWormux::DisplayLoadingPicture(){
