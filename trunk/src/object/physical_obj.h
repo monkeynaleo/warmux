@@ -165,11 +165,7 @@ public:
   // Est-ce que le point p touche l'objet ?
   bool ObjTouche(const Point2i &p) const;
 
-
-protected:
-
-  // The object fall directly to the ground (or become a ghost)
-  void DirectFall();
+  bool PutRandomly(bool on_top_of_world, double min_dst_with_characters);
 
 private:
   //Renvoie la position du point de contact entre
@@ -180,6 +176,9 @@ private:
   bool CollisionTest(const Point2i &position);
 
   void SignalRebound();
+  
+  // The object fall directly to the ground (or become a ghost)
+  void DirectFall();
 };
 
 #endif

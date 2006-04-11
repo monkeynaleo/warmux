@@ -109,11 +109,6 @@ void BonusBox::Refresh()
   if (!m_ready && !parachute) anim->Update();
   
   m_ready = anim->IsFinished();
-
-//   if (m_ready){
-// 	  //MSG_DEBUG("bonus", "game_loop.SetState (gamePLAYING)");
-// 	  //game_loop.SetState (gamePLAYING);
-//   }
 }
 
 // Signale la fin d'une chute
@@ -211,58 +206,7 @@ void BonusBox::Enable (bool _enable)
 
 bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
 {
-  uint bcl=0;
-  bool ok;
-  MSG_DEBUG("bonus", "Cherche une place...");
-  
-  do
-  {
-    ok = true;
-    bonus_box.Ready();
-    if (bcl >= NB_MAX_TRY) 
-    {
-      MSG_DEBUG("bonux", "Impossible de trouver une position initiale.");
-      return false;
-    }
-
-    // Placement au hasard en X
-    int x = randomObj.GetLong(0, world.GetWidth() - bonus_box.GetWidth());
-    int y = -bonus_box.GetHeight()+1;
-    bonus_box.SetXY( Point2i(x, y) );
-    MSG_DEBUG("bonus", "Test en %d, %d", x, y);
-
-    // Vérifie que la caisse est dans le vide
-    ok = !bonus_box.IsGhost() && bonus_box.IsInVacuum( Point2i(0, 0) ) && bonus_box.IsInVacuum( Point2i(0, 1) );
-    if (!ok) 
-    {
-      MSG_DEBUG("bonus", "Placement dans un mur");
-      continue;
-    }
-
-    // Vérifie que la caisse ne tombe pas dans le vide
-    bonus_box.DirectFall();
-    ok &= !bonus_box.IsGhost() & !bonus_box.IsInWater();
-
-    if (!ok)
-    {
-      MSG_DEBUG("bonus", "Placement dans le vide");
-      continue;
-    }
-
-    // Vérifie que le caisse ne touche aucun ver au début
-    FOR_ALL_LIVING_CHARACTERS(equipe, ver)
-    {
-      if( bonus_box.ObjTouche(*ver) )
-      {
-	MSG_DEBUG("bonus", "La caisse touche le ver %s.", (*ver).m_name.c_str());
-	ok = false;
-      }
-    }
-    if (ok)
-      bonus_box.SetXY( Point2i(x, y) );
-  } while (!ok);
-
-  MSG_DEBUG("bonus", "Placée après %d essai(s)", bcl);
+  if (!bonus_box.PutRandomly(true, 0)) return false;
 
   time = randomObj.GetLong(MIN_TIME_BETWEEN_CREATION, 
 			   MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);

@@ -44,8 +44,10 @@ void ObjectsList::Init()
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
-    obj -> SetXY ( randomObj.GetPoint( Rectanglei(0, 0, world.GetWidth(), 1) ) );
-    AddObject (obj);
+    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range + 30 ))
+      AddObject (obj);
+    else
+      delete obj;
   }
 }
 
