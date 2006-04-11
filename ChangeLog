@@ -1,3 +1,34 @@
+> 04/04/2006 - 0.7 release
+  - Graphic enhancement in menus and loading screen
+  - Improved game graphics (explosions with smoke)
+  - New maps: Desert, Monkey Bubble, King Kong, Wild West DV, 
+  - New teams: Tux team, Nupik, Wilber, PHP, Snort, Thunderbird, WorkRave,
+  BattleNight
+  - New weapons: bounce ball
+  - Translations: Dutch, Romanian, Danish, 
+  - Code cleaning: implement some design patterns, translate some variables
+  and functions name, remove dead Clanlib code
+  - Compilation process more clean
+  - Bug fixes
+
+> 23/01/2006 - 0.7beta3 release
+  - New traduction: russian
+  - New font: manage east-european languages
+  - Handle conflict with old ~/.wormux/config.xml
+  - New map: hell
+  - PowerPC support
+  - Fix bugs
+
+> 11/01/2006 - 0.7beta1 release
+  - Switch to SDL 1.2 -> completed
+  - New graphic engine, reduced CPU cost
+  - New weapons: ninja rope, jetpack, air hammer, gnu launcher, low
+  gravity
+  - New physical engine: allows crazy things !
+  - New skins: Gnu Team, Firefox Team, Nuts Team, Tux Team, Konqui team
+  - Options menu splitted into game menu and options menu
+  - Bug fixes
+
 > 01/09/2005
   - Switch to SDL -> beginning
 
