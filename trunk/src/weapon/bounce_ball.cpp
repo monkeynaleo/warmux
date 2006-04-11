@@ -77,3 +77,13 @@ BounceBallLauncher::BounceBallLauncher() :
   m_name = _("BounceBall");
   projectile = new BounceBall(cfg());
 }
+
+bool BounceBallLauncher::p_Shoot ()
+{  
+  if (max_strength == 0)
+    projectile->Shoot (10);
+  else 
+    projectile->Shoot (m_strength);
+
+  return true;
+}
