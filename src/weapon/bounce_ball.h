@@ -41,6 +41,8 @@ protected:
 
 class BounceBallLauncher : public WeaponLauncher
 {
+ private:
+  bool p_Shoot ();
  public:
   BounceBallLauncher();
 };
