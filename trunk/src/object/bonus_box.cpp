@@ -38,7 +38,7 @@
 #include "../tool/random.h"
 #include "../tool/resource_manager.h"
 
-#define FAST
+//#define FAST
 
 #ifdef FAST
   const uint MIN_TIME_BETWEEN_CREATION = 1; // seconds
@@ -225,10 +225,13 @@ void BonusBox::NewBonusBox()
   }
 
   BonusBox * box = new BonusBox();
-  if (!PlaceBonusBox(*box))
+  if (!PlaceBonusBox(*box)) {
+    MSG_DEBUG("bonus", "Missed to put the bonus box");
     delete box;
-  else 
+  } else {
     lst_objects.AddObject(box);
+    GameMessages::GetInstance()->Add (_("Is it a gift ?"));
+  }
  
   return;
 }
