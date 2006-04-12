@@ -75,7 +75,7 @@ msgstr "%s wpadł do wody."
 msgid "%s has fallen off the map!"
 msgstr "%s wyleciał poza mapę!"
 
-#: src/object/bonus_box.cpp:160
+#: src/object/bonus_box.cpp:155
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
@@ -83,7 +83,7 @@ msgstr[0] "%s stracił %u punkt energii."
 msgstr[1] "%s stracił %u punkty energii."
 msgstr[2] "%s stracił %u punktów energii."
 
-#: src/object/bonus_box.cpp:151
+#: src/object/bonus_box.cpp:146
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -106,7 +106,7 @@ msgstr "%s nieżyje przez swoją niezdarność!"
 msgid "%s is next to a mine!"
 msgstr "%s jest blisko miny!"
 
-#: src/object/bonus_box.cpp:178
+#: src/object/bonus_box.cpp:173
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -114,7 +114,7 @@ msgstr[0] "Drużyna %s zyskała %u automatyczną wyrzutnię rakiet!"
 msgstr[1] "Drużyna %s zyskała %u automatyczne wyrzutnie rakiet!"
 msgstr[2] "Drużyna %s zyskała %u automatycznych wyrzutni rakiet!"
 
-#: src/object/bonus_box.cpp:188
+#: src/object/bonus_box.cpp:183
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
@@ -122,7 +122,7 @@ msgstr[0] "Drużyna %s zyskała %u laskę dynamitu!"
 msgstr[1] "Drużyna %s zyskała %u laski dynamitu!"
 msgstr[2] "Drużyna %s zyskała %u lasek dynamitu!"
 
-#: src/object/bonus_box.cpp:142
+#: src/object/bonus_box.cpp:137
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -135,7 +135,7 @@ msgstr[2] "Drużyna %s zyskała %u teleportacji."
 msgid "%s team has won.\n"
 msgstr "Drużyna %s wygrała."
 
-#: src/object/bonus_box.cpp:169
+#: src/object/bonus_box.cpp:164
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -155,7 +155,7 @@ msgstr "(nieograniczony)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr "<infinite_background> wymaga odpowiednio ustawionego <is_open>!!"
 
-#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:204
+#: src/object/bonus_box.cpp:168 src/weapon/air_attack.cpp:204
 msgid "Air attack"
 msgstr "Atak powietrzny"
 
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autorzy:"
 
-#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:117
+#: src/object/bonus_box.cpp:177 src/weapon/auto_bazooka.cpp:117
 msgid "Automatic bazooka"
 msgstr "Automatyczna wyrzutnia rakiet"
 
@@ -229,7 +229,7 @@ msgstr "Czas kolejki:"
 msgid "Duration of the end of a turn:"
 msgstr "Czas do zakończenia rundy:"
 
-#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:187 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -459,7 +459,7 @@ msgstr "Stan:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:146 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportacja"
 
@@ -566,15 +566,16 @@ msgstr "Musisz mieć co najmniej dwie drużyny by grać. Zmień to w opcjach !"
 msgid "You need at least two valid teams !"
 msgstr "Musisz ustawić przynajmniej dwie drużyny !"
 
+#: src/weapon/launcher.cpp:53
+msgid "Your shot has missed!"
+msgstr "Spudłowałeś!"
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
 
 #~ msgid "Warning: Don't load configuration (old version of Wormux)."
 #~ msgstr "Ostrzeżenie: Nie ładujemy konfiguracji (stara wersja Wormuksa)."
-
-#~ msgid "Your shot has missed!"
-#~ msgstr "Spudłowałeś!"
 
 #~ msgid "End of game"
 #~ msgstr "Koniec gry !"
