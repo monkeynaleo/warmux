@@ -20,19 +20,15 @@
  *****************************************************************************/
 
 #include "maps_list.h"
-#include <iostream>
 #include "map.h"
 #include "../game/config.h"
+#include "../tool/debug.h"
 #include "../tool/file_tools.h"
 #include "../tool/i18n.h"
+#include <iostream>
 #if !defined(WIN32) || defined(__MINGW32__)
 #include <dirent.h>
 #include <sys/stat.h>
-#endif
-
-#ifdef DEBUG
-//#  define VERBOSE_MAP_LOADING
-#  define DBG_COUT std::cout << "[Map " << name << "] "
 #endif
 
 ListeTerrain lst_terrain;
@@ -81,9 +77,7 @@ bool InfoTerrain::Init (const std::string &map_name,
     return false;
   }
  
-#ifdef VERBOSE_MAP_LOADING
-  DBG_COUT << "Map loaded." << std::endl;
-#endif
+  MSG_DEBUG("map.load", "Map loaded: %s", map_name.c_str());
 
   return true;
 }
@@ -140,7 +134,7 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
     LitDocXml::LitDouble (xmlwind, "mass", wind.particle_mass);
     if(wind.particle_mass<0.1)
     {
-      printf("\n%s\n",_("Warning! Winds particles mass is too low! Set by default to 0.3"));
+      std::cout <<_("Warning! Winds particles mass is too low! Set by default to 0.3") << std::endl;
       wind.particle_mass = 0.1;
     }
     LitDocXml::LitDouble (xmlwind, "wind_factor", wind.particle_wind_factor);
@@ -161,10 +155,8 @@ void InfoTerrain::LoadData(){
   if (m_donnees_chargees)
     return;
   m_donnees_chargees = true;
-
-#ifdef VERBOSE_MAP_LOADING
-  DBG_COUT << "Map data loaded." << std::endl;
-#endif
+ 
+  MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
   img_terrain = resource_manager.LoadImage(res_profile, "map");
   img_ciel = resource_manager.LoadImage(res_profile,"sky");   
@@ -302,10 +294,6 @@ void ListeTerrain::ChangeTerrain (uint index){
     return;
 
   terrain_actif = index;
-  //monde.terrain.terrain_charge = false;
-  //monde.terrain.Init();
-  //monde.ciel.charge = false;
-  //monde.ciel.Init();
 }
 
 InfoTerrain& ListeTerrain::TerrainActif(){
