@@ -23,23 +23,16 @@
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
 #include "../include/constant.h"
+#include "../network/network.h"
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/wind.h"
 #include "../team/macro.h"
 #include "../team/move.h"
+#include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
-#ifdef CL
-# include "../network/network.h"
-#endif
-
-#ifdef DEBUG
-// Love debug message ?
-//#define DBG_ACT
-#define COUT_DBG std::cout << "[Action Handler] "
-#endif
 
 // Delta appliqué à l'angle du viseur
 #define DELTA_CROSSHAIR 2
@@ -125,15 +118,13 @@ void Action_MoveCharacter (const Action *a)
 	const ActionInt2& ap = dynamic_cast<const ActionInt2&> (*a);
         if (network.is_server())
 	{
-#ifdef DBG_ACT
-	COUT_DBG << ActiveCharacter().m_name << " is " << ActiveCharacter().GetX() << ", " << ActiveCharacter().GetY() << std::endl;
-#endif
-		return;
+	  MSG_DEBUG("action.handler", "%s is %d, %d", ActiveCharacter().m_name.c_str(), ActiveCharacter().GetX(), ActiveCharacter().GetY());
+	  return;
 	}
 	if (!network.is_client()) return;
-#ifdef DBG_ACT
-	COUT_DBG << ActiveCharacter().m_name << " move to " << ap.GetValue1() << ", " << ap.GetValue2() << std::endl;
-#endif
+
+	MSG_DEBUG("action.handler", "%s move to  %d, %d", ActiveCharacter().m_name.c_str(), ap.GetValue1(), ap.GetValue2());
+
 	ActiveCharacter().SetXY (ap.GetValue1(), ap.GetValue2());
 #endif // CL defined
 }
@@ -148,9 +139,9 @@ void Action_SetMap (const Action *a)
 {
 #ifdef CL
 	const ActionString& action = dynamic_cast<const ActionString&> (*a);
-#ifdef DBG_ACT
-	COUT_DBG << "SetMap : " << action.GetValue() << std::endl;
-#endif
+
+	MSG_DEBUG("action.handler", "SetMap : %s", action.GetValue().c_str());
+
         if (!network.is_client()) return;
         lst_terrain.ChangeTerrainNom (action.GetValue());
 	network.state = Network::NETWORK_WAIT_TEAMS;
@@ -160,9 +151,7 @@ void Action_SetMap (const Action *a)
 
 void Action_ClearTeams (const Action *a)
 {
-#ifdef DBG_ACT
-	COUT_DBG << "ClearTeams" << std::endl;
-#endif
+  MSG_DEBUG("action.handler", "ClearTeams");
 #ifdef CL
         if (!network.is_client()) return;
 	teams_list.Clear();
@@ -171,9 +160,7 @@ void Action_ClearTeams (const Action *a)
 
 void Action_StartGame (const Action *a)
 {
-#ifdef DBG_ACT
-	COUT_DBG << "StartGame" << std::endl;
-#endif
+  MSG_DEBUG("action.handler", "StartGame");
 #ifdef CL
         if (!network.is_client()) return;
 	network.state = Network::NETWORK_PLAYING;
@@ -183,9 +170,9 @@ void Action_StartGame (const Action *a)
 void Action_SetGameMode (const Action *a)
 {
 	const ActionString& action = dynamic_cast<const ActionString&> (*a);
-#ifdef DBG_ACT
-	COUT_DBG << "SetGameMode : " << action.GetValue() << std::endl;
-#endif
+	
+	MSG_DEBUG("action.handler", "SetGameMode : %s", action.GetValue().c_str());
+
 	GameMode::GetInstance()->Load (action.GetValue());
 }
 
@@ -194,10 +181,9 @@ void Action_NewTeam (const Action *a)
 {
 #ifdef CL
 	const ActionString& action = dynamic_cast<const ActionString&> (*a);
-#ifdef DBG_ACT
-	COUT_DBG << "NewTeam : " << action.GetValue() << std::endl;
-#endif
-   
+
+	MSG_DEBUG("action.handler", "NewTeam : %s", action.GetValue().c_str());
+
         if (!network.is_client()) return;
 	teams_list.AddTeam (action.GetValue());
 	teams_list.SetActive (action.GetValue());
@@ -208,9 +194,9 @@ void Action_NewTeam (const Action *a)
 void Action_ChangeTeam (const Action *a)
 {
 	const ActionString& action = dynamic_cast<const ActionString&> (*a);
-#ifdef DBG_ACT
-	COUT_DBG << "ChangeTeam : " << action.GetValue() << std::endl;
-#endif
+
+	MSG_DEBUG("action.handler", "ChangeTeam : %s", action.GetValue().c_str());
+
 	//if (!network.is_client()) return;
 	teams_list.SetActive (action.GetValue());
  	ActiveTeam().PrepareTurn();
@@ -267,9 +253,9 @@ void ActionHandler::ExecActions()
 
 void ActionHandler::NewAction(const Action &a, bool repeat_to_network)
 {
-#ifdef DBG_ACT
-	COUT_DBG << "New action " << a << std::endl;
-#endif
+// #ifdef DBG_ACT
+// 	COUT_DBG << "New action " << a << std::endl;
+// #endif
 	Action *clone = a.clone();
 	queue.push_back(clone);
 #ifdef CL
@@ -286,9 +272,9 @@ void ActionHandler::Register (Action_t action,
 
 void ActionHandler::Exec(const Action *a)
 {
-#ifdef DBG_ACT
-	COUT_DBG << "Exec action " << *a << std::endl;
-#endif
+// #ifdef DBG_ACT
+// 	COUT_DBG << "Exec action " << *a << std::endl;
+// #endif
 
         handler_it it=handler.find(a->GetType());
 	assert(it != handler.end());
