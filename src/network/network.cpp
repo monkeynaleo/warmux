@@ -22,13 +22,8 @@
 #include "network.h"
 //-----------------------------------------------------------------------------
 #include "../include/action_handler.h"
+#include "../tool/debug.h"
 //-----------------------------------------------------------------------------
-
-#ifdef DEBUG
-#define COUT_DBG std::cout<<"[Network] "
-#define DBG_MSG
-#include <iostream>
-#endif
 
 //-----------------------------------------------------------------------------
 Network network;
@@ -98,9 +93,9 @@ void Network::disconnect()
 void Network::client_connect(const std::string &host, const std::string& port) 
 {
 	Init();
-#ifdef DBG_MSG
-	COUT_DBG << "Client connect to " << host << ":" << port << std::endl;
-#endif
+
+	MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
+
 	m_is_client = true;
 	m_is_server = false;
 	state = NETWORK_WAIT_SERVER;
@@ -118,9 +113,8 @@ void Network::client_connect(const std::string &host, const std::string& port)
 #ifdef CL
 void Network::client_on_disconnect(CL_NetComputer &computer) 
 {
-#ifdef DBG_MSG
-	COUT_DBG << "client_on_disconnect" << std::endl;
-#endif
+  MSG_DEBUG("network", "client_on_disconnect");
+
 	m_is_connected = false;
 	state = NETWORK_NOT_CONNECTED;
 }
@@ -147,9 +141,9 @@ void Network::client_on_receive_action(CL_NetPacket &packet,
 void Network::server_start(const std::string &port) 
 {
 	Init();
-#ifdef DBG_MSG
-	COUT_DBG << "Start server on port " << port << "." << std::endl;
-#endif
+
+	MSG_DEBUG("network", "Start server on port %s", port.c_str());
+
 	m_is_connected = true;
 	m_is_server = true;
 	m_is_client = false;
@@ -168,17 +162,14 @@ void Network::server_start(const std::string &port)
 
 void Network::server_on_connect(CL_NetComputer &computer) 
 {
-#ifdef DBG_MSG
-  COUT_DBG << "Server_on_connect" << std::endl;
-#endif
+  MSG_DEBUG("network","Server_on_connect");
 }
 
 //-----------------------------------------------------------------------------
 void Network::server_on_disconnect(CL_NetComputer &computer) 
-{	
-#ifdef DBG_MSG
-  COUT_DBG << "Server_on_disconnect" << std::endl;
-#endif
+{
+  MSG_DEBUG("network","Server_on_disconnect");	
+
 	state = NETWORK_NOT_CONNECTED;
 }
 
@@ -192,9 +183,8 @@ void Network::server_on_receive_lobby(CL_NetPacket &packet, CL_NetComputer &comp
 
 void Network::server_on_receive_action(CL_NetPacket &packet, CL_NetComputer &computer)
 {
-#ifdef DBG_MSG
-	COUT_DBG << "Server received packet." << std::endl;
-#endif
+  MSG_DEBUG("network","Server received packet.");
+
 	// Add the Action to the stack
 	Action *a = make_action(packet);
 	ActionHandler::GetInstance()->NewAction(*a, false);
