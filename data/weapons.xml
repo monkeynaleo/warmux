@@ -82,17 +82,17 @@
 
 <!-- Dynamite ressources -->
 
-  <surface name="dynamite_ico" file="weapon/dynamite/icon.png" />
-  <surface name="dynamite" file="weapon/dynamite/weapon.png" />
+  <surface name="dynamite_ico" file="weapon/dynamite/dynamite_ico.png" />
+  <surface name="dynamite" file="weapon/dynamite/dynamite.png" />
 
   <sprite name="dynamite_bullet">
-    <image file="weapon/dynamite/animation.png">
-      <grid pos="0,0" size="12,12" array="16,1" />
+    <image file="weapon/dynamite/dynamite_ani.png">
+      <grid pos="0,0" size="14,15" array="11,1" />
     </image>
   </sprite>
   <sprite name="dynamite_anim">
-    <image file="weapon/dynamite/animation.png">
-      <grid pos="0,0" size="12,12" array="16,1" />
+    <image file="weapon/dynamite/dynamite_ani.png">
+      <grid pos="0,0" size="14,15" array="11,1" />
     </image>
   </sprite>
 
