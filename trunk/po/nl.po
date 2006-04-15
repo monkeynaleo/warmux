@@ -74,14 +74,14 @@ msgstr "%s is in het water gevallen."
 msgid "%s has fallen off the map!"
 msgstr "%s is van de kaart gevallen!"
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:160
 #, fuzzy, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s verloor %u punten energie"
 msgstr[1] "%s verloor %u punten energie"
 
-#: src/object/bonus_box.cpp:146
+#: src/object/bonus_box.cpp:151
 #, fuzzy, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -103,21 +103,21 @@ msgstr "%s is dood door zijn onhandigheid!"
 msgid "%s is next to a mine!"
 msgstr "%s staat naast een mijn!"
 
-#: src/object/bonus_box.cpp:173
+#: src/object/bonus_box.cpp:178
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "Het team %s heeft %u automatische bazooka's gekregen!"
 msgstr[1] "Het team %s heeft %u automatische bazooka's gekregen!"
 
-#: src/object/bonus_box.cpp:183
+#: src/object/bonus_box.cpp:188
 #, fuzzy, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "Het team %s heeft %u dynamiet gekregen!"
 msgstr[1] "Het team %s heeft %u dynamiet gekregen!"
 
-#: src/object/bonus_box.cpp:137
+#: src/object/bonus_box.cpp:142
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -129,7 +129,7 @@ msgstr[1] "%s heeft %u teleportaties gekregen."
 msgid "%s team has won.\n"
 msgstr "Team %s heeft gewonnen."
 
-#: src/object/bonus_box.cpp:164
+#: src/object/bonus_box.cpp:169
 #, fuzzy, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -149,7 +149,7 @@ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 "Om <infinite_background> goed te laten werken moet <is_open> ingesteld zijn!!"
 
-#: src/object/bonus_box.cpp:168 src/weapon/air_attack.cpp:204
+#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:204
 msgid "Air attack"
 msgstr "Luchtaanval"
 
@@ -161,7 +161,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Auteurs:"
 
-#: src/object/bonus_box.cpp:177 src/weapon/auto_bazooka.cpp:117
+#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:117
 msgid "Automatic bazooka"
 msgstr "Automatische bazooka"
 
@@ -223,7 +223,7 @@ msgstr "Duur van een beurt:"
 msgid "Duration of the end of a turn:"
 msgstr "Duur van einde van een beurt:"
 
-#: src/object/bonus_box.cpp:187 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamiet"
 
@@ -452,7 +452,7 @@ msgstr "Voorraad:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:146 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportatie"
 
@@ -560,13 +560,12 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "U heeft minimaal twee geldige teams nodig !"
 
-#: src/weapon/launcher.cpp:53
-msgid "Your shot has missed!"
-msgstr "U schoot mis!"
-
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#~ msgid "Your shot has missed!"
+#~ msgstr "U schoot mis!"
 
 #~ msgid "Authors"
 #~ msgstr "Auteurs"

@@ -76,14 +76,14 @@ msgstr "%s ist ins Wasser gefallen."
 msgid "%s has fallen off the map!"
 msgstr "%s ist von der Karte gefallen!"
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:160
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s verliert %u Lebenspunkt."
 msgstr[1] "%s verliert %u Lebenspunkte."
 
-#: src/object/bonus_box.cpp:146
+#: src/object/bonus_box.cpp:151
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -105,21 +105,21 @@ msgstr "%s stirbt durch seine Tollpatschigkeit!"
 msgid "%s is next to a mine!"
 msgstr "%s ist neben einer Mine!"
 
-#: src/object/bonus_box.cpp:173
+#: src/object/bonus_box.cpp:178
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "Team %s hat %u Lenkrakete gewonnen!"
 msgstr[1] "Team %s hat %u Lenkraketen gewonnen!"
 
-#: src/object/bonus_box.cpp:183
+#: src/object/bonus_box.cpp:188
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "Team %s hat %u Stange Dynamit gewonnen!"
 msgstr[1] "Team %s hat %u Stangen Dynamit gewonnen!"
 
-#: src/object/bonus_box.cpp:137
+#: src/object/bonus_box.cpp:142
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -131,7 +131,7 @@ msgstr[1] "Team %s hat %u Teleporter gewonnen."
 msgid "%s team has won.\n"
 msgstr "Team %s hat gewonnen.\n"
 
-#: src/object/bonus_box.cpp:164
+#: src/object/bonus_box.cpp:169
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -150,7 +150,7 @@ msgstr "(unbegrenzt)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr "<infinite_background> braucht ein <is_open> um richtig zu arbeiten!!"
 
-#: src/object/bonus_box.cpp:168 src/weapon/air_attack.cpp:204
+#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:204
 msgid "Air attack"
 msgstr "Luftangriff"
 
@@ -162,7 +162,7 @@ msgstr "Gesammtergebnisse:\n"
 msgid "Authors:"
 msgstr "Autoren:"
 
-#: src/object/bonus_box.cpp:177 src/weapon/auto_bazooka.cpp:117
+#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:117
 msgid "Automatic bazooka"
 msgstr "Lenkrakete"
 
@@ -225,7 +225,7 @@ msgstr "Dauer einer Runde:"
 msgid "Duration of the end of a turn:"
 msgstr "Dauer des Endes einer Runde:"
 
-#: src/object/bonus_box.cpp:187 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -453,7 +453,7 @@ msgstr "Vorrat:"
 msgid "Team %s results:\n"
 msgstr "Ergebnisse von Team %s:\n"
 
-#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:146 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportation"
 
@@ -561,13 +561,12 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Du brauchst mindestens zwei gültige Teams!"
 
-#: src/weapon/launcher.cpp:53
-msgid "Your shot has missed!"
-msgstr "Dein Schuss ging daneben!"
-
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "fertig"
+
+#~ msgid "Your shot has missed!"
+#~ msgstr "Dein Schuss ging daneben!"
 
 #~ msgid "End of game"
 #~ msgstr "Spielende"
