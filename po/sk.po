@@ -76,14 +76,14 @@ msgstr "%s spadol do vody."
 msgid "%s has fallen off the map!"
 msgstr "%s vypadol z mapy!"
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:160
 #, fuzzy, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s stratil %u bodov energie."
 msgstr[1] "%s stratil %u bodov energie."
 
-#: src/object/bonus_box.cpp:146
+#: src/object/bonus_box.cpp:151
 #, fuzzy, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -105,21 +105,21 @@ msgstr "%s je mŕtvy, pretože bol nemotorný!"
 msgid "%s is next to a mine!"
 msgstr "%s je veľmi blízko míny!"
 
-#: src/object/bonus_box.cpp:173
+#: src/object/bonus_box.cpp:178
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "%s tým vyhral %u automatickými bazukami!"
 msgstr[1] "%s tým vyhral %u automatickými bazukami!"
 
-#: src/object/bonus_box.cpp:183
+#: src/object/bonus_box.cpp:188
 #, fuzzy, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "%s tým vyhral %u dynamitmi !"
 msgstr[1] "%s tým vyhral %u dynamitmi !"
 
-#: src/object/bonus_box.cpp:137
+#: src/object/bonus_box.cpp:142
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -131,7 +131,7 @@ msgstr[1] "%s tým vyhral %u teleportáciami!"
 msgid "%s team has won.\n"
 msgstr "%s tým vyhral."
 
-#: src/object/bonus_box.cpp:164
+#: src/object/bonus_box.cpp:169
 #, fuzzy, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -152,7 +152,7 @@ msgstr ""
 "<infinite_background> potrebuje <is_open> byť nastavené aby pracovalo "
 "správne!!"
 
-#: src/object/bonus_box.cpp:168 src/weapon/air_attack.cpp:204
+#: src/object/bonus_box.cpp:173 src/weapon/air_attack.cpp:204
 msgid "Air attack"
 msgstr "Letecký útok"
 
@@ -164,7 +164,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autory:"
 
-#: src/object/bonus_box.cpp:177 src/weapon/auto_bazooka.cpp:117
+#: src/object/bonus_box.cpp:182 src/weapon/auto_bazooka.cpp:117
 msgid "Automatic bazooka"
 msgstr "Automatická bazuka"
 
@@ -226,7 +226,7 @@ msgstr "Dľžka trvania ťahu:"
 msgid "Duration of the end of a turn:"
 msgstr "Trvanie konca ťahu:"
 
-#: src/object/bonus_box.cpp:187 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -455,7 +455,7 @@ msgstr "Munícia:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:146 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleport"
 
@@ -562,13 +562,12 @@ msgstr "Potrebuješ najmenej dva tými na hru: zmeň si to v menu 'Nastavenie' !
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tými !"
 
-#: src/weapon/launcher.cpp:53
-msgid "Your shot has missed!"
-msgstr "Tvoja strela minula!"
-
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#~ msgid "Your shot has missed!"
+#~ msgstr "Tvoja strela minula!"
 
 #~ msgid "End of game"
 #~ msgstr "Koniec hry !"
