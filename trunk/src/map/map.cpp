@@ -134,7 +134,8 @@ void Map::Dig(const Point2i position, const Surface& surface)
 void Map::Dig(const Point2i center, const uint radius)
 {
    ground.Dig (center, radius);
-   to_redraw->push_back(Rectanglei(center - Point2i(radius,radius), Point2i(2*radius,2*radius)));
+   to_redraw->push_back(Rectanglei(center - Point2i(radius+EXPLOSION_BORDER_SIZE,radius+EXPLOSION_BORDER_SIZE)
+                                      , Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
 void Map::DrawSky()
