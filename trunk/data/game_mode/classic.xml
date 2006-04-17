@@ -183,7 +183,7 @@
     </uzi>
 
     <baseball>
-      <position origin="hand" x="-9" y="-3" />
+      <position origin="hand" x="0" y="-3" />
       <min_angle>-30</min_angle>
       <max_angle>75</max_angle>
       <nb_ammo>-1</nb_ammo>

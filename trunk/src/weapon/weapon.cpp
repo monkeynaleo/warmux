@@ -266,10 +266,9 @@ void Weapon::PosXY (int &x, int &y) const
 // Return the absolute rotation point of the weapon
 void Weapon::RotationPointXY (int &x, int &y) const
 {
-  PosXY(x,y);
-
-  x += m_image->GetWidth()/2;
-  y += m_image->GetHeight()/2;
+  Point2i handPos = ActiveCharacter().GetHandPosition();
+  x = handPos.x;
+  y = handPos.y;
 }
 
 bool Weapon::EnoughAmmo() const
@@ -515,6 +514,9 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
 
   // Load extra parameters if existing
   if (extra_params != NULL) extra_params->LoadXml(elem);
+
+  if (m_visibility != NEVER_VISIBLE && position.origin == weapon_origin_HAND)
+    m_image->SetRotation_HotSpot(Point2i(-position.dx,-position.dy));
 
   return true;
 }

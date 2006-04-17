@@ -41,7 +41,8 @@ typedef enum {
   right_center,
   bottom_left,
   bottom_center,
-  bottom_right
+  bottom_right,
+  user_defined // Sprite::rot_hotspot is set to this value, when the hotspot is set as a Point2i
 } Rotation_HotSpot;
 
 class Sprite
@@ -76,7 +77,8 @@ public:
 
   // Rotation
   void SetRotation_deg( float angle_deg);
-  void SetRotation_HotSpot( Rotation_HotSpot rhs) {rot_hotspot = rhs;};
+  void SetRotation_HotSpot( const Point2i new_hotspot);
+  void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   
   SpriteFrame& operator[] (unsigned int frame_no);
   const SpriteFrame& operator[] (unsigned int frame_no) const;
@@ -124,6 +126,7 @@ private:
    float alpha;
    float scale_x,scale_y;
    float rotation_deg;
+   Point2i rhs_pos;
    Rotation_HotSpot rot_hotspot;
 
 private:
