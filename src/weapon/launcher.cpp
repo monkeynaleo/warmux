@@ -55,6 +55,14 @@ void WeaponBullet::SignalCollision()
   is_active = false; 
 }
 
+void WeaponBullet::Refresh()
+{
+  WeaponProjectile::Refresh();
+
+  double angle = GetSpeedAngle() *180/M_PI;
+  image->SetRotation_deg( angle);
+}
+
 void WeaponBullet::Explosion()
 {
   if (IsGhost()) return;

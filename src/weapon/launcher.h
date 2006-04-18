@@ -73,6 +73,7 @@ class WeaponBullet : public WeaponProjectile
 public:
   WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg);
   virtual ~WeaponBullet(){};
+  virtual void Refresh();
 protected:
   void SignalCollision();
   void Explosion(); 
