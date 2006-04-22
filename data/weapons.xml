@@ -24,7 +24,11 @@
   <surface name="air_attack_ico" file="weapon/air_attack/air_attack_ico.png" />
 
   <surface name="air_attack" file="weapon/air_attack/air_attack.png" />
-  <surface name="air_attack_plane" file="weapon/air_attack/air_attack_plane.png" />
+  <sprite name="air_attack_plane">
+    <image file="weapon/air_attack/air_attack_plane.png">
+      <grid pos="0,0" size="400,56" array="1,1" />
+    </image>
+  </sprite>
   <sprite name="obus">
     <image file="weapon/air_attack/obus.png" />
   </sprite>

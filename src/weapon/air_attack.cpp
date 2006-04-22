@@ -68,7 +68,7 @@ Avion::Avion(AirAttackConfig &p_cfg) :
   m_gravity_factor = 0.0;
   m_alive = GHOST;
 
-  image = new Sprite( resource_manager.LoadImage( weapons_res_profile, "air_attack_plane"));
+  image = resource_manager.LoadSprite( weapons_res_profile, "air_attack_plane");
   SetSize(image->GetSize());
   SetMass (3000);
   obus_dx = 100;
@@ -110,6 +110,8 @@ void Avion::Refresh()
 {
   if (IsGhost()) return;  
   UpdatePosition();
+
+  image->Update();
 
   // L'avion est arrivé au bon endroit ? Largue les obus
   if (!obus_laches && PeutLacherObus())
