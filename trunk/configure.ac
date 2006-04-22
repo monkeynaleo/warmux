@@ -166,6 +166,12 @@ AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,
         AC_MSG_ERROR([SDL_ttf library is required]))
 LIBS="$LIBS -lSDL_ttf"
 
+dnl === Check for SDL_net ==================================================
+
+AC_CHECK_LIB([SDL_net], [SDLNet_Init],, 
+        AC_MSG_ERROR([SDL_net library is required]))
+LIBS="$LIBS -lSDL_net"
+
 dnl === Check for SDL_gfx ==================================================
 
 AC_ARG_WITH(sdl-gfx-prefix,

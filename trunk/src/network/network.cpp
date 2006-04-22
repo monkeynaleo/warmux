@@ -48,6 +48,8 @@ void Network::Init()
 	if (session != NULL) return;
 	session = new CL_NetSession("Wormux");
 #endif
+
+  SDLNet_Init();
 }
 
 //-----------------------------------------------------------------------------
@@ -57,6 +59,8 @@ Network::~Network()
 #ifdef CL
 	delete session;
 #endif
+
+  SDLNet_Quit();
 }
 
 //-----------------------------------------------------------------------------

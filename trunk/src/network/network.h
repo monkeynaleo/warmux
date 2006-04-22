@@ -22,6 +22,7 @@
 #ifndef NETWORK_H 
 #define NETWORK_H
 //-----------------------------------------------------------------------------
+#include <SDL_net.h>
 #include "../include/base.h" 
 #include <vector>
 #include <string>
