@@ -76,21 +76,17 @@ GameLoop::GameLoop()
 
 void GameLoop::InitGameData_NetServer()
 {
-  //        action_handler.NewAction(Action(ACTION_ASK_TEAM));
+  AppWormux * app = AppWormux::GetInstance();
+  app->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Server mode");
+
   ActionHandler * action_handler = ActionHandler::GetInstance();
-//  AppWormux * app = AppWormux::GetInstance();
+//  action_handler.NewAction(Action(ACTION_ASK_TEAM));
   do
     {
       action_handler->NewAction(Action(ACTION_ASK_VERSION));
       std::string msg=_("Wait for clients");
       action_handler->ExecActions();
       std::cout << msg << std::endl;
-#ifdef CL
-      police_grand.WriteCenterTop (app->video.GetWidth()/2, app->video.GetHeight()/2, msg);
-      CL_Display::clear(CL_Color::black);
-      CL_Display::flip();
-      CL_System::keep_alive(500);
-#endif
     } while (network.state != Network::NETWORK_SERVER_INIT_GAME);
   std::cout << "Server init game." << std::endl;
         
@@ -148,7 +144,6 @@ void GameLoop::InitGameData_NetServer()
   // Remise à zéro
   std::cout << "o " << _("Initialise data") << std::endl;
   CurseurVer::GetInstance()->Reset();
-  Time::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
   fps.Reset();
   Interface::GetInstance()->Reset();
@@ -159,6 +154,8 @@ void GameLoop::InitGameData_NetServer()
 
 void GameLoop::InitGameData_NetClient()
 {
+  AppWormux * app = AppWormux::GetInstance();
+  app->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
   ActionHandler * action_handler = ActionHandler::GetInstance();
   do
     {
@@ -182,12 +179,7 @@ void GameLoop::InitGameData_NetClient()
       action_handler->ExecActions();
       std::cout << network.state << std::endl;
       std::cout << msg << std::endl;
-#ifdef CL
-      police_grand.WriteCenterTop (app->video.GetWidth()/2, app->video.GetHeight()/2, msg);
-      CL_Display::clear(CL_Color::black);
-      CL_Display::flip();
-      CL_System::keep_alive(300);
-#endif
+      SDL_Delay(100);
     } while (network.state != Network::NETWORK_PLAYING);
   std::cout << network.state << " : Run game !" << std::endl;
  
@@ -302,7 +294,7 @@ void GameLoop::Refresh()
   // Mise à jeu des entrées (clavier / mouse)
   // Poll and treat events
   SDL_Event event;
-   
+ 
    while( SDL_PollEvent( &event) ) 
      {      
         if ( event.type == SDL_QUIT) 
@@ -470,7 +462,8 @@ void GameLoop::Run()
       sleep_fps = AppWormux::GetInstance()->video.GetSleepMaxFps() - delay;
     else
       sleep_fps = 0;
-    SDL_Delay(sleep_fps);
+    if(sleep_fps >= SDL_TIMESLICE)
+      SDL_Delay(sleep_fps);
 #endif
   } while( !Game::GetInstance()->GetEndOfGameStatus() ); 
 

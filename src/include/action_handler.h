@@ -22,6 +22,7 @@
 #ifndef ACTION_HANDLER_H
 #define ACTION_HANDLER_H
 //-----------------------------------------------------------------------------
+#include <SDL_mutex.h>
 #include <map>
 #include <list>
 #include "action.h"
@@ -31,33 +32,36 @@
 class ActionHandler
 {
 private:
-	// Handler for each action
-	typedef void (*callback_t) (const Action *a);
-	std::map<Action_t, callback_t> handler;
-	typedef std::map<Action_t, callback_t>::const_iterator handler_it;
+  // Mutex needed to be thread safe for the network
+  SDL_mutex* mutex;
 
-	// Action strings
-	std::map<Action_t, std::string> action_name;
-	typedef std::map<Action_t, std::string>::const_iterator name_it;
+  // Handler for each action
+  typedef void (*callback_t) (const Action *a);
+  std::map<Action_t, callback_t> handler;
+  typedef std::map<Action_t, callback_t>::const_iterator handler_it;
 
-	// Action queue
-	std::list<Action*> queue;
+  // Action strings
+  std::map<Action_t, std::string> action_name;
+  typedef std::map<Action_t, std::string>::const_iterator name_it;
 
-	static ActionHandler * singleton;
+  // Action queue
+  std::list<Action*> queue;
+
+  static ActionHandler * singleton;
 
 public:
-	static ActionHandler * GetInstance();
+  static ActionHandler * GetInstance();
 
-	void NewAction (const Action &a, bool repeat_to_network=true);
-	void ExecActions ();
-	void Init();
-	std::string GetActionName(Action_t action);
+  void NewAction (const Action &a, bool repeat_to_network=true);
+  void ExecActions ();
+  void Init();
+  std::string GetActionName(Action_t action);
 	
 private:
-	ActionHandler();
+  ActionHandler();
 
-	void Exec (const Action *a);
-	void Register (Action_t action, const std::string &name, callback_t fct);
+  void Exec (const Action *a);
+  void Register (Action_t action, const std::string &name, callback_t fct);
 };
 
 //-----------------------------------------------------------------------------

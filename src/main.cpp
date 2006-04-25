@@ -130,11 +130,13 @@ void AppWormux::Init(int argc, char **argv){
 }
 
 void AppWormux::InitNetwork(int argc, char **argv){
-  if ((argc == 3) && (strcmp(argv[1],"server")==0)) {
+  if (argc >= 2 && strcmp(argv[1],"server")==0) {
 	// wormux server <port>
+	network.Init();
 	network.server_start (argv[2]);
   } else if (argc >= 3 && strcmp(argv[1], "--add-debug-mode") != 0) {
 	// wormux <server_ip> <server_port>
+	network.Init();
 	network.client_connect(argv[1], argv[2]);
   }
 }
