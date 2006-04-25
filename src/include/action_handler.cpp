@@ -54,6 +54,7 @@ ActionHandler::ActionHandler()
 
 void Action_Walk (const Action *a)
 {
+  assert(false);
   MoveCharacter (ActiveCharacter());
 }
 
@@ -118,16 +119,35 @@ void Action_Wind (const Action *a)
 void Action_MoveCharacter (const Action *a)
 {
   const ActionInt2& ap = dynamic_cast<const ActionInt2&> (*a);
-  if (network.is_server())
-  {
+//  if (network.is_server())
+//  {
 //    MSG_DEBUG("action.handler", "%s is %d, %d", ActiveCharacter().m_name, ActiveCharacter().GetX(), ActiveCharacter().GetY());
-    return;
-  }
-  if (!network.is_client()) return;
+//    return;
+//  }
+//  if (!network.is_client()) return;
 
 //  MSG_DEBUG("action.handler", "%s move to  %d, %d", ActiveCharacter().m_name, ap.GetValue1(), ap.GetValue2());
 
   ActiveCharacter().SetXY (Point2i(ap.GetValue1(), ap.GetValue2()));
+}
+
+void Action_SetFrame (const Action *a)
+{
+  //Set the frame of the walking skin, to get the position of the hand synced
+  const ActionInt& ai = dynamic_cast<const ActionInt&> (*a);
+  if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
+  {
+    ActiveTeam().ActiveCharacter().image->SetCurrentFrame((uint)ai.GetValue());
+  }
+}
+
+void Action_SetSkin (const Action *a)
+{
+  const ActionString& action = dynamic_cast<const ActionString&> (*a);
+  if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
+  {
+    ActiveTeam().ActiveCharacter().SetSkin(action.GetValue());
+  }
 }
 
 void Action_SetCharacterDirection (const Action *a)
@@ -156,7 +176,6 @@ void Action_ClearTeams (const Action *a)
 void Action_StartGame (const Action *a)
 {
   MSG_DEBUG("action.handler", "StartGame");
-  if (!network.is_client()) return;
   network.state = Network::NETWORK_PLAYING;
 }
 
@@ -296,6 +315,8 @@ void ActionHandler::Init()
   Register (ACTION_NEW_TEAM, "new_team", &Action_NewTeam);
   Register (ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
   Register (ACTION_MOVE_CHARACTER, "move_character", &Action_MoveCharacter);
+  Register (ACTION_SET_SKIN, "set_skin", &Action_SetSkin);
+  Register (ACTION_SET_FRAME, "set_frame", &Action_SetFrame);
   Register (ACTION_SET_CHARACTER_DIRECTION, "set_character_direction", &Action_SetCharacterDirection);
   Register (ACTION_START_GAME, "start_game", &Action_StartGame);
   Register (ACTION_ASK_VERSION, "ask_version", &Action_AskVersion);

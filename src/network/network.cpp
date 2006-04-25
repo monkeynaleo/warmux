@@ -226,6 +226,7 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_CHANGE_WEAPON:
   case ACTION_WIND:
   case ACTION_SET_CHARACTER_DIRECTION:
+  case ACTION_SET_FRAME:
     return new ActionInt(type, input);
 
   case ACTION_SET_GAME_MODE:
@@ -234,6 +235,7 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_NEW_TEAM:
   case ACTION_SEND_VERSION:
   case ACTION_SEND_TEAM:
+  case ACTION_SET_SKIN:
     return new ActionString(type, input);
 
   case ACTION_WALK:

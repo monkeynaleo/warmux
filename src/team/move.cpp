@@ -103,7 +103,7 @@ void MoveCharacter(Character &character){
     // Deplace enfin le character
 
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),
-		character.GetY() +hauteur) );
+                             character.GetY() +hauteur) );
 
     // Gravite (s'il n'y a pas eu de collision
     character.UpdatePosition();
@@ -112,6 +112,11 @@ void MoveCharacter(Character &character){
     character.FrameImageSuivante();
 
   }while(character.CanStillMoveDG(PAUSE_BOUGE) && CalculeHauteurBouge (character, hauteur));
+
+  ActionHandler::GetInstance()->NewAction(ActionString(ACTION_SET_SKIN,character.current_skin));
+  ActionHandler::GetInstance()->NewAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
+  ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_FRAME,(int)character.image->GetCurrentFrame()));
+  
 
 //    character.UpdatePosition();
 
@@ -122,8 +127,11 @@ void MoveCharacterLeft(Character &character){
   if (!character.MouvementDG_Autorise()) return;
 
   bool bouge = (character.GetDirection() == -1);
-  if (bouge) 
-    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
+  if (bouge)
+  {
+//    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
+    MoveCharacter(character);
+  }
   else{
     ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
@@ -136,8 +144,11 @@ void MoveCharacterRight (Character &character){
   if (!character.MouvementDG_Autorise()) return;
 
   bool bouge = (character.GetDirection() == 1);
-  if (bouge) 
-    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
+  if (bouge)
+  {
+//    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
+    MoveCharacter(character);
+  }
   else
   {
     ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
