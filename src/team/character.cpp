@@ -62,6 +62,10 @@ const uint do_nothing_timeout = 5000;
   const uint ANIM_PAUSE_MAX = 60*1000;
 #endif
 
+#ifdef DEBUG
+//#define DEBUG_STATS
+#endif
+
 // Barre d'énergie
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
@@ -932,7 +936,7 @@ void Character::HandleMostDamage()
   {
     max_damage = current_total_damage;
   }
-#ifdef DEBUG
+#ifdef DEBUG_STATS
   std::cerr << m_name << " most damage: " << max_damage << std::endl;
 #endif
   current_total_damage = 0;
@@ -945,7 +949,7 @@ void Character::MadeDamage(const int Dmg, const Character &other)
 {
   if (m_team->IsSameAs(other.GetTeam()))
   {
-#ifdef DEBUG
+#ifdef DEBUG_STATS
     std::cerr << m_name << " damaged own team with " << Dmg << std::endl;
 #endif
     if (Character::IsSameAs(other))
@@ -953,7 +957,7 @@ void Character::MadeDamage(const int Dmg, const Character &other)
   }
   else
   {
-#ifdef DEBUG
+#ifdef DEBUG_STATS
     std::cerr << m_name << " damaged other team with " << Dmg << std::endl;
 #endif
     damage_other_team += Dmg;
