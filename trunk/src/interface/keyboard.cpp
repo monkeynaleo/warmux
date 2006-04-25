@@ -87,55 +87,63 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
   Action_t action = it->second;
 
   //We can perform the next actions, only if the player is played localy:
-//  if(!ActiveTeam().is_local)
-//    return;
+  if(ActiveTeam().is_local)
+  {
 
-  if(action <= ACTION_CHANGE_CHARACTER)
-    {
-      switch (action) {
-//         case ACTION_ADD:
-// 	  if (lance_grenade.time < 15)
-// 	    lance_grenade.time ++;
-// 	  break ;
+    if(action <= ACTION_CHANGE_CHARACTER)
+      {
+        switch (action) {
+//           case ACTION_ADD:
+//   	  if (lance_grenade.time < 15)
+//   	    lance_grenade.time ++;
+//   	    break ;
 	  
-//         case ACTION_SUBSTRACT:
-// 	  if (lance_grenade.time > 1)
-// 	    lance_grenade.time --;
-// 	  break ;
-        default:
-	  break ;
+//           case ACTION_SUBSTRACT:
+//      if (lance_grenade.time > 1)
+//   	    lance_grenade.time --;
+//   	  break ;
+          default:
+	    break ;
+        }
       }
-    }
 
-   int event_type=0;
-   switch( event->type)
-     {
+     int event_type=0;
+     switch( event->type)
+       {
+        case SDL_KEYDOWN: event_type = KEY_PRESSED;break;
+        case SDL_KEYUP: event_type = KEY_RELEASED;break;
+       }
+    if(event_type==KEY_PRESSED)
+      HandleKeyPressed(action);
+    if(event_type==KEY_RELEASED)
+      HandleKeyReleased(action);
+
+    if (ActiveTeam().GetWeapon().override_keys &&
+        ActiveTeam().GetWeapon().IsActive())
+      {
+        ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
+        return ;
+      }
+    ActiveCharacter().HandleKeyEvent( action, event_type);
+  }
+  else
+  {
+    int event_type=0;
+    switch( event->type)
+    {
       case SDL_KEYDOWN: event_type = KEY_PRESSED;break;
       case SDL_KEYUP: event_type = KEY_RELEASED;break;
-     }
-  if(event_type==KEY_PRESSED)
-    HandleKeyPressed(action);
-  if(event_type==KEY_RELEASED)
-    HandleKeyReleased(action);
-
-  if (ActiveTeam().GetWeapon().override_keys &&
-      ActiveTeam().GetWeapon().IsActive())
-    {
-      ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
-      return ;
     }
-   
-  ActiveCharacter().HandleKeyEvent( action, event_type);
+    //Current player is on the network
+    if(event_type==KEY_RELEASED)
+      HandleKeyReleased(action);
+  }
 }
 
 // Handle a pressed key
 void Clavier::HandleKeyPressed (const Action_t &action)
 {
   PressedKeys[action] = true ;
-
-  //We can perform the next actions, only if the player is played localy:
-//  if(!ActiveTeam().is_local)
-//    return;
 
   if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
       ActiveTeam().GetWeapon().CanChangeWeapon())
@@ -204,7 +212,8 @@ void Clavier::HandleKeyReleased (const Action_t &action)
   // We manage here only actions which are active on KEY_RELEASED event.
   Interface * interface = Interface::GetInstance();
 
-  switch(action) {
+  switch((int)action) // Convert to int to avoid a warning
+  {
     case ACTION_QUIT:
       Game::GetInstance()->SetEndOfGameStatus( true );
       return;
@@ -219,15 +228,20 @@ void Clavier::HandleKeyReleased (const Action_t &action)
 #endif
       return;
 
-    case ACTION_TOGGLE_INTERFACE:
-      interface->EnableDisplay (!interface->IsDisplayed());
-      return;
-
     case ACTION_CENTER:
       CurseurVer::GetInstance()->SuitVerActif();
       camera.ChangeObjSuivi (&ActiveCharacter(), true, true, true);
       return;
 
+    case ACTION_TOGGLE_INTERFACE:
+      interface->EnableDisplay (!interface->IsDisplayed());
+      return;
+  }
+
+  if( ! ActiveTeam().is_local)
+    return;
+
+  switch(action) {
     case ACTION_TOGGLE_WEAPONS_MENUS:
       interface->weapons_menu.SwitchDisplay();
       return;

@@ -128,6 +128,9 @@ void GameLoop::InitGameData_NetServer()
           action_handler->NewAction (ActionInt(
                                               ACTION_SET_CHARACTER_DIRECTION, 
                                               character.GetDirection()));
+          action_handler->NewAction (ActionInt(
+                                              ACTION_SET_FRAME, 
+                                              (int)character.image->GetCurrentFrame()));
         }
 
       // Select first character
@@ -148,6 +151,12 @@ void GameLoop::InitGameData_NetServer()
   fps.Reset();
   Interface::GetInstance()->Reset();
   GameMessages::GetInstance()->Reset();
+
+  //Set the second team as a team played from the client
+  TeamsList::iterator team = teams_list.playing_list.begin();
+  (*team)->is_local = true;
+  team++;
+  (*team)->is_local = false;
   
   action_handler->NewAction (Action(ACTION_START_GAME));
 }
@@ -187,7 +196,10 @@ void GameLoop::InitGameData_NetClient()
   lst_objects.Init();
  
   //Set the second team as a team played from the client
-  ActiveTeam().is_local = false;
+  TeamsList::iterator team = teams_list.playing_list.begin();
+  (*team)->is_local = false;
+  team++;
+  (*team)->is_local = true;
 }
 
 void GameLoop::InitData_Local()
