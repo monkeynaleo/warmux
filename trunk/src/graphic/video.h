@@ -30,11 +30,11 @@ class Video{
   uint m_sleep_max_fps;
   bool SDLReady;
   bool fullscreen;
-  void SetWindowCaption(std::string caption);
   void SetWindowIcon(std::string icon);
 
 public:
   Surface window;
+  void SetWindowCaption(std::string caption);
   void SetMaxFps(uint max_fps);
   uint GetMaxFps();
   uint GetSleepMaxFps();

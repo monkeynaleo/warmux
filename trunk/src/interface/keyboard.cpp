@@ -87,8 +87,8 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
   Action_t action = it->second;
 
   //We can perform the next actions, only if the player is played localy:
-  //if(!ActiveTeam().is_local)
-  //  return;
+//  if(!ActiveTeam().is_local)
+//    return;
 
   if(action <= ACTION_CHANGE_CHARACTER)
     {
@@ -134,8 +134,8 @@ void Clavier::HandleKeyPressed (const Action_t &action)
   PressedKeys[action] = true ;
 
   //We can perform the next actions, only if the player is played localy:
-  if(!ActiveTeam().is_local)
-    return;
+//  if(!ActiveTeam().is_local)
+//    return;
 
   if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
       ActiveTeam().GetWeapon().CanChangeWeapon())

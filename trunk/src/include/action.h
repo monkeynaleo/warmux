@@ -22,30 +22,24 @@
 #ifndef ACTION_H
 #define ACTION_H
 //-----------------------------------------------------------------------------
-#include <iostream>
+#include <SDL.h>
 #include <string>
+#include <iostream>
 #include "base.h"
 #include "enum.h"
 //-----------------------------------------------------------------------------
 
-typedef std::ostream CL_OutputSource;
-typedef std::istream CL_InputSource;
-
 class Action
 {
-private:
-	Action_t m_type;
+protected:
+  Action_t m_type;
 public:
-	Action (Action_t type);
-	virtual ~Action();
-	virtual Action_t GetType() const;
-//#ifdef CL
-        virtual void Write(CL_OutputSource &os) const;
-//#else
-//        virtual void Write( std::string str) const;
-//#endif
-        virtual Action* clone() const;
-	virtual std::ostream& out(std::ostream&os) const;
+  Action (Action_t type);
+  virtual ~Action();
+  virtual Action_t GetType() const;
+  virtual void Write(Uint32 *os) const;
+  virtual Action* clone() const;
+  virtual std::ostream& out(std::ostream &os) const;
 };
 
 //-----------------------------------------------------------------------------
@@ -53,20 +47,14 @@ public:
 class ActionInt : public Action
 {
 private:
-	int m_value;
+  int m_value;
 public:
-	ActionInt (Action_t type, int value);
-//#ifdef CL
-        ActionInt (Action_t type, CL_InputSource &is);
-//#else
-//#endif
-        int GetValue() const;
-//#ifdef CL
-        void Write(CL_OutputSource &os) const;
-//#else
-//#endif
-        Action* clone() const;
-	std::ostream& out(std::ostream&os) const;
+  ActionInt (Action_t type, int value);
+  ActionInt (Action_t type, Uint32* is);
+  int GetValue() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
+  std::ostream& out(std::ostream &os) const;
 };
 
 //-----------------------------------------------------------------------------
@@ -74,22 +62,16 @@ public:
 class ActionInt2 : public Action
 {
 private:
-	int m_value1;
-	int m_value2;
+  int m_value1;
+  int m_value2;
 public:
-	ActionInt2 (Action_t type, int val1, int val2);
-//#ifdef CL
-        ActionInt2 (Action_t type, CL_InputSource &is);
-//#else
-//#endif
-        int GetValue1() const;
-	int GetValue2() const;
-//#ifdef CL
-        void Write(CL_OutputSource &os) const;
-//#else
-//#endif
-        Action* clone() const;
-	std::ostream& out(std::ostream&os) const;
+  ActionInt2 (Action_t type, int val1, int val2);
+  ActionInt2 (Action_t type, Uint32* is);
+  int GetValue1() const;
+  int GetValue2() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
+  std::ostream& out(std::ostream &os) const;
 };
 
 //-----------------------------------------------------------------------------
@@ -97,22 +79,16 @@ public:
 class ActionDoubleInt : public Action
 {
 private:
-	double m_value1;
-	int m_value2;
+  double m_value1;
+  int m_value2;
 public:
-	ActionDoubleInt (Action_t type, double val1, int val2);
-//#ifdef CL
-	ActionDoubleInt (Action_t type, CL_InputSource &is);
-//#else
-//#endif
-        double GetValue1() const;
-	int GetValue2() const;
-//#ifdef CL
-        void Write(CL_OutputSource &os) const;
-//#else
-//#endif   
-        Action* clone() const;
-	std::ostream& out(std::ostream&os) const;
+  ActionDoubleInt (Action_t type, double val1, int val2);
+  ActionDoubleInt (Action_t type, Uint32* is);
+  double GetValue1() const;
+  int GetValue2() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
+  std::ostream& out(std::ostream &os) const;
 };
 
 //-----------------------------------------------------------------------------
@@ -120,24 +96,19 @@ public:
 class ActionString : public Action
 {
 private:
-	std::string m_value;
+  char* m_value;
+  uint m_length;
 public:
-	ActionString (Action_t type, const std::string& value);
-//#ifdef CL
-        ActionString (Action_t type, CL_InputSource &is);
-//#else
-//#endif
-        std::string GetValue() const;
-//#ifdef CL
-	void Write(CL_OutputSource &os) const;
-//#else
-//#endif
-        Action* clone() const;
-	std::ostream& out(std::ostream&os) const;
+  ~ActionString();
+  ActionString (Action_t type, const std::string& value);
+  ActionString (Action_t type, Uint32* is);
+  char* GetValue() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
+  std::ostream& out(std::ostream &os) const;
 };
 
 //-----------------------------------------------------------------------------
-
 // Output action in a ostream (for debug)
 std::ostream& operator<<(std::ostream& os, const Action &a);
 

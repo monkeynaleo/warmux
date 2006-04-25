@@ -23,16 +23,11 @@
 #define NETWORK_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
+#include <SDL_thread.h>
 #include "../include/base.h" 
 #include <vector>
 #include <string>
 #include "../include/action.h" 
-//-----------------------------------------------------------------------------
-
-typedef struct s_lobby_info
-{
-} lobby_info;
-
 //-----------------------------------------------------------------------------
 
 class Network
@@ -51,31 +46,23 @@ public:
 	network_state_t state;
 		
 private:
-#ifdef CL
-	CL_NetSession *session;
-	CL_SlotContainer slots;
-#endif
+  TCPsocket socket;
+  TCPsocket client;
+  SDL_Thread* thread;
 	
 	bool m_is_connected;
 	bool m_is_server;
 	bool m_is_client;
 
 	// Server Connection
-#ifdef CL
-	CL_NetComputer server;
-	
-	CL_NetPacket make_packet(const Action &p_action);
-	Action* make_action(CL_NetPacket &packet);
-#endif
+	Action* make_action(Uint32* packet);
+
 public:
 
 	Network();
 	~Network();
 	void Init();
 	
-#ifdef CL
-	CL_NetSession& GetSession();
-#endif
 	bool is_connected();
 	bool is_local();
 	bool is_server();
@@ -84,23 +71,11 @@ public:
 	void disconnect();
 	
 	void client_connect(const std::string &host, const std::string &port);
-#ifdef CL
-	void client_on_receive_lobby(CL_NetPacket&, CL_NetComputer&);
-	void client_on_receive_action(CL_NetPacket&, CL_NetComputer&);
-	void client_on_disconnect(CL_NetComputer &computer);
-#endif
 
 	void server_start(const std::string &port);
-#ifdef CL
-	void server_on_connect(CL_NetComputer &computer);
-	void server_on_disconnect(CL_NetComputer &computer);
-	void server_on_receive_lobby(CL_NetPacket&, CL_NetComputer&);
-	void server_on_receive_action(CL_NetPacket&, CL_NetComputer&);
-#endif
-	
-	// Send Messages
-	void send_lobby(const lobby_info&);
-	void send_action(const Action&);
+
+   void SendAction(const Action &action);
+   void ReceiveActions();
 };
 
 extern Network network;

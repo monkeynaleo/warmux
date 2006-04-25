@@ -21,252 +21,201 @@
 
 #include "action.h"
 //-----------------------------------------------------------------------------
+#include <SDL.h>
 #include "action_handler.h"
 //-----------------------------------------------------------------------------
 
+// Copy b(unknown type, 32bits) to a(Uint32), bit for bit
+#define TO_UINT32(a, b) a=*((Uint32*)(&(b)))
+// Copy b(Uint32) to a(unknown type,32bits), bit for bit
+#define FROM_UINT32(a, b) *((Uint32*)(&(a)))=b
+
+// Copy b(unknown type, 64bits) to a(Uint32), bit for bit
+#define TO_2UINT32(a, b) a=*((Uint32*)(&(b))); \
+                         *((&a)+1)=*(((Uint32*)(&(b)))+1)
+
+// Copy b(Uint32) to a(unknown type,64bits), bit for bit
+#define FROM_2UINT32(a, b) *((Uint32*)(&(a)))=b; \
+                           *(((Uint32*)(&(a)))+1)=*((&b)+1); \
+
 Action::Action (Action_t type) 
 { 
-   m_type = type; 
+  m_type = type; 
 }
 
 Action::~Action () {}
 
 Action_t Action::GetType() const 
 { 
-   return m_type; 
+  return m_type; 
 }
 
-void Action::Write(CL_OutputSource &os) const 
+void Action::Write(Uint32* os) const 
 { 
-#ifdef CL
-   os.write_int32 (m_type); 
-#else
-   os << m_type;
-#endif
+  TO_UINT32(os[0],m_type);
 }
 
 Action* Action::clone() const 
 { 
-   return new Action(*this); 
+  return new Action(*this); 
 }
 
-std::ostream& Action::out(std::ostream&os) const
+std::ostream& Action::out(std::ostream &os) const
 {
-	os << ActionHandler::GetInstance()->GetActionName(m_type);
-	return os;
+  os << ActionHandler::GetInstance()->GetActionName(m_type);
+  return os;
 }
 
 //-----------------------------------------------------------------------------
 
 ActionInt2::ActionInt2 (Action_t type, int v1, int v2) : Action(type) 
 { 
-   m_value1 = v1; m_value2 = v2; 
+  m_value1 = v1; m_value2 = v2; 
 }
 
-ActionInt2::ActionInt2(Action_t type, CL_InputSource &is) : Action(type)
+ActionInt2::ActionInt2(Action_t type, Uint32* is) : Action(type)
 { 
-#ifdef CL
-        m_value1 = is.read_int32 (); 
-	m_value2 = is.read_int32 (); 
-#else
-   is >> m_value1;
-   is >> m_value2;
-#endif
+  FROM_UINT32(m_value1, is[0]);
+  FROM_UINT32(m_value2, is[1]);
 }
 
 int ActionInt2::GetValue1() const 
 { 
-   return m_value1; 
+  return m_value1; 
 }
 
 int ActionInt2::GetValue2() const 
 { 
-   return m_value2; 
+  return m_value2; 
 }
 
-void ActionInt2::Write(CL_OutputSource &os) const 
+void ActionInt2::Write(Uint32* os) const 
 { 
-	Action::Write(os);
-#ifdef CL
-        os.write_int32 (m_value1); 
-	os.write_int32 (m_value2); 
-#else
-   os << m_value1; 
-   os << m_value2; 
-#endif
+  Action::Write(os);
+  TO_UINT32(os[1], m_value1);
+  TO_UINT32(os[2], m_value2);
 }
 
 Action* ActionInt2::clone() const { return new ActionInt2(*this); }
-std::ostream& ActionInt2::out(std::ostream&os) const
+std::ostream& ActionInt2::out(std::ostream &os) const
 {
-	Action::out (os);
-	os << " (2x int) = " << m_value1 << ", " << m_value2;
-	return os;
+  Action::out (os);
+  os <<  " (2x int) = " << m_value1 << ", " << m_value2;
+  return os;
 }
 
 //-----------------------------------------------------------------------------
 
 ActionInt::ActionInt (Action_t type, int value) : Action(type) 
 { m_value = value; }
-ActionInt::ActionInt (Action_t type, CL_InputSource &is) : Action(type)
+ActionInt::ActionInt (Action_t type, Uint32* is) : Action(type)
 { 
-#ifdef CL
-   m_value = is.read_int32 (); 
-#else
-   is >> m_value;
-#endif
+  FROM_UINT32(m_value, is[0]);
 }
 int ActionInt::GetValue() const { return m_value; }
-void ActionInt::Write(CL_OutputSource &os) const 
+void ActionInt::Write(Uint32* os) const 
 { 
-	Action::Write(os);
-#ifdef CL
-   os.write_int32 (m_value); 
-#else
-   os << m_value;
-#endif
+  Action::Write(os);
+  TO_UINT32(os[1], m_value);
 }
 Action* ActionInt::clone() const { return new ActionInt(*this); }
-std::ostream& ActionInt::out(std::ostream&os) const
+std::ostream& ActionInt::out(std::ostream &os) const
 {
-	Action::out (os);
-	os << " (int) = " << m_value;
-	return os;
+  Action::out (os);
+  os << " (int) = " << m_value;
+  return os;
 }
 
 //-----------------------------------------------------------------------------
 
-double read_double(CL_InputSource &is)
-{
-  double answer;
-  std::cout << "read_double"<< std::endl;
-   
-#ifdef CL
-   if ( is.read(&answer, sizeof(double)) != sizeof(double)) 
-    throw CErreur("action.cpp", 91, "read_double() failed");
-#else
-   is >> answer;
-#endif
-   
-  //if (little_endian_mode)
-  //  {
-#ifdef CL
-   SWAP_IF_BIG(answer);
-#endif
-   //  }
-      //else
-      //{
-      //SWAP_IF_LITTLE(answer);
-      //}
-  return answer;
-}
-
-void write_double(CL_OutputSource &os, double data)
-{
-  double final = data;
-  std::cout << "write_double"<< std::endl;
-//   if (little_endian_mode)
-//     {
-#ifdef CL
-   SWAP_IF_BIG(final);
-#endif
-//     }
-//   else
-//     {
-//       SWAP_IF_LITTLE(final);
-//     }
-#ifdef CL
-   os.write(&final, sizeof(double));
-#else
-   os << final;
-#endif
-}
-
 ActionDoubleInt::ActionDoubleInt (Action_t type, double v1, int v2) : Action(type) 
 { 
-   m_value1 = v1; 
-   m_value2 = v2; 
+  m_value1 = v1; 
+  m_value2 = v2; 
 }
 
-ActionDoubleInt::ActionDoubleInt(Action_t type, CL_InputSource &is) : Action(type)
-{ 
-#ifdef CL
-        m_value1 = read_double (is); // CL_InputSource::read_double32 does not exist 
-	m_value2 = is.read_int32 (); 
-#else
-   is >> m_value1;
-   is >> m_value2;
-#endif
+ActionDoubleInt::ActionDoubleInt(Action_t type, Uint32* is) : Action(type)
+{
+  assert( sizeof(m_value1) == 8);
+//  ((Uint32*)&m_value1)[0] = is[0];
+//  ((Uint32*)&m_value1)[1] = is[1];
+  FROM_2UINT32(m_value1, is[0]);
+  FROM_UINT32(m_value2, is[2]);
 }
 
 double ActionDoubleInt::GetValue1() const 
 { 
-   return m_value1; 
+  return m_value1; 
 }
 
 int ActionDoubleInt::GetValue2() const 
 { 
-   return m_value2; 
+  return m_value2; 
 }
 
-void ActionDoubleInt::Write(CL_OutputSource &os) const 
+void ActionDoubleInt::Write(Uint32* os) const
 { 
-	Action::Write(os);
-	write_double (os, m_value1);  // CL_InputSource::write_double32 does not exist 
-#ifdef CL
-   os.write_int32 (m_value2);  
-#else
-   os << m_value2;
-#endif
+  Action::Write(os);
+//  os[1] = ((Uint32*)&m_value1)[0];
+//  os[2] = ((Uint32*)&m_value1)[1];
+  TO_2UINT32(os[1], m_value1);
+  TO_UINT32(os[3], m_value2);
 }
 
 Action* ActionDoubleInt::clone() const 
 { 
-   return new ActionDoubleInt(*this); 
+  return new ActionDoubleInt(*this); 
 }
 
-std::ostream& ActionDoubleInt::out(std::ostream&os) const
+std::ostream& ActionDoubleInt::out(std::ostream &os) const
 {
-	Action::out (os);
-	os << " (double, int) = " << m_value1 << ", " << m_value2;
-	return os;
+  Action::out (os);
+  os << " (double, int) = " << m_value1 << ", " << m_value2;
+  return os;
 }
 
 //-----------------------------------------------------------------------------
 
-ActionString::ActionString (Action_t type, const std::string &value) : Action(type) { m_value = value; }
-ActionString::ActionString (Action_t type, CL_InputSource &is) : Action(type)
-{ 
-#ifdef CL
-   m_value = is.read_string(); 
-#else
-   is >> m_value;
-#endif
-}
-std::string ActionString::GetValue() const { return m_value; }
-void ActionString::Write(CL_OutputSource &os) const 
-{ 
-	Action::Write(os);
-#ifdef CL
-   os.write_string (m_value); 
-#else
-   os << m_value;
-#endif
-}
-Action* ActionString::clone() const { return new ActionString(*this); }
-std::ostream& ActionString::out(std::ostream&os) const
+ActionString::ActionString (Action_t type, const std::string &value) : Action(type)
 {
-	Action::out (os);
-	os << " (string) = " << m_value;
-	return os;
+  m_length = strlen(value.c_str())+1;
+  m_value = new char[m_length];
+  strcpy(m_value, value.c_str());
+}
+
+ActionString::ActionString (Action_t type, Uint32 *is) : Action(type)
+{
+  m_length = is[0];
+  m_value = new char[m_length];
+  strcpy(m_value,(char*)(&is[1]));
+}
+
+ActionString::~ActionString ()
+{
+  delete []m_value;
+}
+
+char* ActionString::GetValue() const { return m_value; }
+void ActionString::Write(Uint32 *os) const 
+{ 
+  Action::Write(os);
+  os[1] = m_length;
+  strcpy((char*)(&os[2]),m_value);
+}
+
+Action* ActionString::clone() const { return new ActionString(m_type, std::string(m_value)); }
+std::ostream& ActionString::out(std::ostream &os) const
+{
+  Action::out (os);
+  os << " (string) = " << m_value;
+  return os;
 }
 
 //-----------------------------------------------------------------------------
-
-std::ostream& operator<<(std::ostream& os, const Action &a)
+std::ostream& operator<<(std::ostream &os, const Action &a)
 {
-	a.out(os);
-	return os;
+  a.out(os);
+  return os;
 }
 
 //-----------------------------------------------------------------------------
