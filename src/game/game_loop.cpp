@@ -571,17 +571,22 @@ void GameLoop::SetState(int new_state, bool begin_game)
 
     // Changement d'équipe
     assert (!Game::GetInstance()->IsGameFinished());    
-    do
+
+    if(network.is_local() || network.is_server())
     {
-      teams_list.NextTeam (begin_game);
-      action_handler->ExecActions();
-    } while (ActiveTeam().NbAliveCharacter() == 0);
-    if( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
-     || game_mode->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
-    {
-            action_handler->NewAction(ActionInt(ACTION_CHANGE_CHARACTER,
-                                     ActiveTeam().NextCharacterIndex()));
-    }
+      do
+      {
+        teams_list.NextTeam (begin_game);
+        action_handler->ExecActions();
+      } while (ActiveTeam().NbAliveCharacter() == 0);
+
+      if( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
+       || game_mode->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
+      {
+              action_handler->NewAction(ActionInt(ACTION_CHANGE_CHARACTER,
+                                       ActiveTeam().NextCharacterIndex()));
+      }
+    } 
 
     action_handler->ExecActions();
 
