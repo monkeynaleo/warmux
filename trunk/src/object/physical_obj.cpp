@@ -39,7 +39,7 @@
 #include "../weapon/ninja_rope.h"
 
 const int Y_OBJET_MIN = -10000;
-const int WATER_RESIST_FACTOR = 800;
+const int WATER_RESIST_FACTOR = 6;
 
 const double PIXEL_PER_METER = 40;
 
