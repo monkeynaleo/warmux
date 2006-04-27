@@ -287,12 +287,6 @@ void GameLoop::Init ()
   // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
    
-  if (!config->GetDisplayWindParticles()) {
-    TerrainActif().wind.nb_sprite = 0;
-  } else {
-    TerrainActif().wind.nb_sprite = TerrainActif().wind.default_nb_sprite;
-  }
-
   Game::GetInstance()->SetEndOfGameStatus( false );
   SetState (PLAYING, true);
 }

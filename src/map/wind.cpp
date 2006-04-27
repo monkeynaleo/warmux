@@ -21,6 +21,7 @@
 
 #include "wind.h"
 #include "camera.h"
+#include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/sprite.h"
 #include "../include/action_handler.h"
@@ -151,8 +152,11 @@ void Wind::Reset(){
   barre.Actu (m_val);
 
   particles.clear();
-  
-  const uint nb = TerrainActif().wind.nb_sprite;
+
+  if (!Config::GetInstance()->GetDisplayWindParticles())
+    return ;
+
+  uint nb = TerrainActif().wind.nb_sprite;
 
   for (uint i=0; i<nb; ++i){
     WindParticle particle;
