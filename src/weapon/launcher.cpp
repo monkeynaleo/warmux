@@ -73,6 +73,9 @@ void WeaponBullet::Explosion()
     ApplyExplosion (pos, cfg, NULL, "", false, ParticleEngine::LittleESmoke);
   } else {
     dernier_ver_touche -> SetEnergyDelta (-cfg.damage);
+    
+    dernier_ver_touche -> AddSpeed (2, GetSpeedAngle());
+    dernier_ver_touche -> UpdatePosition();
   }
 }
 
