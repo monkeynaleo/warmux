@@ -44,7 +44,8 @@ void ObjectsList::Init()
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
-    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range + 30 ))
+    if (obj->PutRandomly(false, MineConfig::GetInstance()->detection_range * 40 *1.5 )) 
+      // 40 is current PIXEL_PER_METER and detection range is in meter
       AddObject (obj);
     else
       delete obj;
