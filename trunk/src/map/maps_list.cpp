@@ -119,7 +119,7 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
   LitDocXml::LitBool (xml, "water", use_water);
   LitDocXml::LitUint (xml, "nb_mine", nb_mine);
   LitDocXml::LitBool (xml, "is_open", is_opened);
-  LitDocXml::LitBool (xml, "infinite_background", infinite_bg);
+//  LitDocXml::LitBool (xml, "infinite_background", infinite_bg);
 
   if(!is_opened && infinite_bg)
   {
