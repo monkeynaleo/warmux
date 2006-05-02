@@ -113,11 +113,6 @@ void MoveCharacter(Character &character){
 
   }while(character.CanStillMoveDG(PAUSE_BOUGE) && CalculeHauteurBouge (character, hauteur));
 
-  ActionHandler::GetInstance()->NewAction(ActionString(ACTION_SET_SKIN,character.current_skin));
-  ActionHandler::GetInstance()->NewAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
-  ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_FRAME,(int)character.image->GetCurrentFrame()));
-  
-
 //    character.UpdatePosition();
 
 }

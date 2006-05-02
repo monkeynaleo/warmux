@@ -335,7 +335,6 @@ void GameLoop::Refresh()
 
   if (!Time::GetInstance()->IsGamePaused())
   {
-     
     // Keyboard and mouse refresh
     if ( 
         (interaction_enabled && state != END_TURN)
@@ -345,9 +344,16 @@ void GameLoop::Refresh()
       Mouse::GetInstance()->Refresh();
       Clavier::GetInstance()->Refresh();
     }
-   
-    ActionHandler::GetInstance()->ExecActions();
+
     FOR_ALL_CHARACTERS(equipe,ver) ver -> Refresh();
+    //Refresh skin position across network
+    if( !network.is_local() && ActiveTeam().is_local)
+    {
+      ActionHandler::GetInstance()->NewAction(ActionString(ACTION_SET_SKIN,ActiveCharacter().current_skin));
+      ActionHandler::GetInstance()->NewAction(ActionInt2(ACTION_MOVE_CHARACTER,ActiveCharacter().GetX(),ActiveCharacter().GetY()));
+      ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_FRAME,ActiveCharacter().image->GetCurrentFrame()));
+    }
+    ActionHandler::GetInstance()->ExecActions();     
 
     // Recalcule l'energie des equipes
     FOR_EACH_TEAM(team)
@@ -360,6 +366,7 @@ void GameLoop::Refresh()
     lst_objects.Refresh();
     ParticleEngine::Refresh();
     CurseurVer::GetInstance()->Refresh();
+
   }
   
   // Refresh the map
