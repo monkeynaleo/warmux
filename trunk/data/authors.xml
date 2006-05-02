@@ -58,6 +58,14 @@
 
 <section title="Translation">
   <author>
+    <name>Bastian Salmela</name>
+    <nickname>basse</nickname>
+    <email>basse AT kulma.org</email>
+    <country>Finland</country>
+    <description>Translate Wormux 0.7 in Finnish.</description>
+  </author>
+
+  <author>
     <name>Luciano Ferraro</name>
     <nickname>lux</nickname>
     <email>rebelcoders AT gmail.com</email>
