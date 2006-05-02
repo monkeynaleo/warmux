@@ -76,6 +76,20 @@ public:
 
 //-----------------------------------------------------------------------------
 
+class ActionDouble : public Action
+{
+private:
+  double m_value;
+public:
+  ActionDouble (Action_t type, double value);
+  ActionDouble (Action_t type, Uint32* is);
+  double GetValue() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
+  std::ostream& out(std::ostream &os) const;
+};
+//-----------------------------------------------------------------------------
+
 class ActionDoubleInt : public Action
 {
 private:

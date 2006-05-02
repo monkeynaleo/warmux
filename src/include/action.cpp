@@ -128,6 +128,28 @@ std::ostream& ActionInt::out(std::ostream &os) const
 
 //-----------------------------------------------------------------------------
 
+ActionDouble::ActionDouble (Action_t type, double value) : Action(type) 
+{ m_value = value; }
+ActionDouble::ActionDouble (Action_t type, Uint32* is) : Action(type)
+{ 
+  FROM_2UINT32(m_value, is[0]);
+}
+double ActionDouble::GetValue() const { return m_value; }
+void ActionDouble::Write(Uint32* os) const 
+{ 
+  Action::Write(os);
+  TO_2UINT32(os[1], m_value);
+}
+Action* ActionDouble::clone() const { return new ActionDouble(*this); }
+std::ostream& ActionDouble::out(std::ostream &os) const
+{
+  Action::out (os);
+  os << " (double) = " << m_value;
+  return os;
+}
+
+//-----------------------------------------------------------------------------
+
 ActionDoubleInt::ActionDoubleInt (Action_t type, double v1, int v2) : Action(type) 
 { 
   m_value1 = v1; 

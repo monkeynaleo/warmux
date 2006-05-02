@@ -28,6 +28,7 @@
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/wind.h"
+#include "../network/randomsync.h"
 #include "../team/macro.h"
 #include "../team/move.h"
 #include "../tool/debug.h"
@@ -239,6 +240,13 @@ void Action_AskTeam (const Action *a)
 //	action_handler.NewAction(ActionString(ACTION_SEND_TEAM, ???));
 }
 
+void Action_SendRandom (const Action *a)
+{
+  if (!network.is_client()) return;
+  const ActionDouble& action = dynamic_cast<const ActionDouble&> (*a);
+  randomSync.AddToTable(action.GetValue());
+}
+
 void ActionHandler::ExecActions()
 {
   assert(mutex!=NULL);
@@ -323,6 +331,7 @@ void ActionHandler::Init()
   Register (ACTION_ASK_TEAM, "ask_team", &Action_AskTeam);
   Register (ACTION_SEND_VERSION, "send_version", &Action_SendVersion);
   Register (ACTION_SEND_TEAM, "send_team", &Action_SendTeam);
+  Register (ACTION_SEND_RANDOM, "send_random", &Action_SendRandom);
   SDL_UnlockMutex(mutex);
 }
 

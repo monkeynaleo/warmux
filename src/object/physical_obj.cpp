@@ -29,12 +29,12 @@
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../map/map.h"
+#include "../network/randomsync.h"
 #include "../team/macro.h"
 #include "../team/teams_list.h"
 #include "../tool/debug.h"
 #include "../tool/math_tools.h"
 #include "../tool/point.h"
-#include "../tool/random.h"
 #include "../tool/rectangle.h"
 #include "../weapon/ninja_rope.h"
 
@@ -605,11 +605,11 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 
     if (on_top_of_world) {
       // Placement au hasard en X
-      x = randomObj.GetLong(0, world.GetWidth() - GetWidth());
+      x = randomSync.GetLong(0, world.GetWidth() - GetWidth());
       y = -GetHeight()+1;
       SetXY( Point2i(x, y) );
     } else {
-      SetXY( randomObj.GetPoint(world.GetSize() - GetSize() + 1) );
+      SetXY( randomSync.GetPoint(world.GetSize() - GetSize() + 1) );
     }
     MSG_DEBUG("physic.position", "Test in %d, %d", x, y);
 
