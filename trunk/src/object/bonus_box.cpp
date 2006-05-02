@@ -31,11 +31,11 @@
 #include "../include/constant.h" // NBR_BCL_MAX_EST_VIDE
 #include "../interface/game_msg.h"
 #include "../map/map.h"
+#include "../network/randomsync.h"
 #include "../object/objects_list.h"
 #include "../team/macro.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
-#include "../tool/random.h"
 #include "../tool/resource_manager.h"
 
 //#define FAST
@@ -130,7 +130,7 @@ void BonusBox::SignalFallEnding()
 
 void BonusBox::ApplyBonus (Team &equipe, Character &ver){
   std::ostringstream txt;
-  uint bonus = randomObj.GetLong (1, nb_bonus);
+  uint bonus = randomSync.GetLong (1, nb_bonus);
   switch (bonus){
   case bonusTELEPORTATION: 
     txt << Format(ngettext(
@@ -208,7 +208,7 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
 {
   if (!bonus_box.PutRandomly(true, 0)) return false;
 
-  time = randomObj.GetLong(MIN_TIME_BETWEEN_CREATION, 
+  time = randomSync.GetLong(MIN_TIME_BETWEEN_CREATION, 
 			   MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
   time *= 1000;
   time += Time::GetInstance()->Read();

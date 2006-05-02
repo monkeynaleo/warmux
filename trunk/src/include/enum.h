@@ -85,6 +85,7 @@ typedef enum
 	ACTION_ASK_TEAM,
 	ACTION_SEND_VERSION,
 	ACTION_SEND_TEAM,
+	ACTION_SEND_RANDOM,
 	
 	// Actions "hors-jeu", en local seulement.
 	ACTION_QUIT,

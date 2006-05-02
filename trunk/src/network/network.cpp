@@ -219,6 +219,9 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SHOOT:
     return new ActionDoubleInt(type, input);
 
+  case ACTION_SEND_RANDOM:
+    return new ActionDouble(type, input);
+
   case ACTION_MOVE_CHARACTER:
     return new ActionInt2(type, input);
 

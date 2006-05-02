@@ -43,6 +43,7 @@
 #include "../map/maps_list.h"
 #include "../map/wind.h"
 #include "../network/network.h"
+#include "../network/randomsync.h"
 #include "../object/bonus_box.h"
 #include "../object/objects_list.h"
 #include "../object/particle.h"
@@ -224,8 +225,9 @@ void GameLoop::InitData()
   else if (network.is_client())
     InitGameData_NetClient();
   else        
-  InitData_Local();
+    InitData_Local();
 
+  randomSync.Init();
   CurseurVer::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
   Clavier::GetInstance()->Reset();
