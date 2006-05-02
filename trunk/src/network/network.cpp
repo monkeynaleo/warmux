@@ -25,6 +25,7 @@
 #include <SDL_thread.h>
 #include "../include/action_handler.h"
 #include "../tool/debug.h"
+#include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -52,7 +53,9 @@ int net_thread_func(void* no_param)
 void Network::Init()
 {
   assert(thread == NULL);
-  SDLNet_Init();
+  if (SDLNet_Init()) {
+      Error(_("Fail to initialize network library!"));
+  }
   thread = SDL_CreateThread( &net_thread_func, NULL);
 }
 

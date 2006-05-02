@@ -98,11 +98,13 @@ int AppWormux::main (int argc, char **argv){
 	      << _("C++ exception caught:") << std::endl
 	      << e.what() << std::endl
 	      << std::endl;
+    WakeUpDebugger();
   }
   catch (...){
     std::cerr << std::endl
 	      << _("Unexcepted exception caught...") << std::endl
 	      << std::endl;
+    WakeUpDebugger();
   }
 
   return 0;
@@ -130,7 +132,7 @@ void AppWormux::Init(int argc, char **argv){
 }
 
 void AppWormux::InitNetwork(int argc, char **argv){
-  if (argc >= 2 && strcmp(argv[1],"server")==0) {
+  if (argc >= 3 && strcmp(argv[1],"server")==0) {
 	// wormux server <port>
 	network.Init();
 	network.server_start (argv[2]);
