@@ -72,14 +72,18 @@ AC_ARG_ENABLE([static],
 #       fi
 #fi
 
-DATADIR="/usr/share/wormux"
+if test "x${prefix}" = "xNONE"; then
+  prefix="${ac_default_prefix}"
+fi
+
+DATADIR="${prefix}/share/wormux"
 AC_ARG_WITH(datadir-name,
     [  --with-datadir-name=DIR       specify where datas are installed (default: /usr/share/wormux)],
     [DATADIR="$withval"])
 AC_SUBST([DATADIR])
 	
 
-LOCALEDIR="/usr/share/locale"
+LOCALEDIR="${prefix}/share/locale"
 AC_ARG_WITH(localedir-name,
     [  --with-localedir-name=DIR       specify where locales are installed (default: /usr/share/locale)],
     [LOCALEDIR="$withval"])
