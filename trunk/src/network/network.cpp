@@ -27,6 +27,7 @@
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
+const uint packet_max_size = 100;
 
 //-----------------------------------------------------------------------------
 Network network;
@@ -160,15 +161,23 @@ void Network::SendAction(const Action &action)
 {
   if (!m_is_connected) return;
 
-  Uint32 packet[100];
-  memset(packet,0,400);
+  char size = packet_max_size;
+  Uint32 packet[packet_max_size];
+  memset(packet,0,packet_max_size);
   action.Write(packet);
 
-  if(m_is_client)
-    SDLNet_TCP_Send(socket, packet, 100);
-  else
-    SDLNet_TCP_Send(client, packet, 100);
+  assert(*((char*)packet) != 0 );
 
+  if(m_is_client)
+  {
+    SDLNet_TCP_Send(socket, &size, 1);
+    SDLNet_TCP_Send(socket, packet, packet_max_size);
+  }
+  else
+  {
+    SDLNet_TCP_Send(client, &size, 1);
+    SDLNet_TCP_Send(client, packet, 100);
+  }
   std::cout << "sending " << action << std::endl;
 }
 
@@ -178,35 +187,63 @@ void Network::ReceiveActions()
 {
 	while (!m_is_connected) SDL_Delay(1000);
 
-  Uint32 packet[100];
-  memset(packet,0, 400);
+  Uint32 packet[packet_max_size];
+  memset(packet,0, packet_max_size);
+
+  int received, i;
+  char packet_size = 0;
 
   if(m_is_client)
   {
-    int received;
     do
     {
-      received = SDLNet_TCP_Recv(socket, packet, 100);
-      Action* a = make_action(packet);
-      std::cout << "received " << *a << std::endl;
+      packet_size = 0;
+      i = 0;
+      // Read the size of the packet
+      while(SDLNet_TCP_Recv(socket, &packet_size, 1) <= 0) SDL_Delay(10); //Loop while nothing is received
+
+      // Fill the packet while it didn't reached its size
+      memset(packet,0, packet_max_size);
+      while(packet_size != i)
+      {
+        received = SDLNet_TCP_Recv(socket, packet+i, packet_size - i);
+        if(received > 0)
+        {
+          i+=received;
+        }
+      }
+
+      Action* a = make_action((Uint32*)packet);
+      std::cout << "received " << *a << " (" << (int)packet_size << " octets)" << std::endl;
       ActionHandler::GetInstance()->NewAction(*a, false);
-      memset(packet,0, 400);
       delete a;
-    } while(received > 0);
+    } while(m_is_connected);
   }
   else
   {
     do
     {
-      if( SDLNet_TCP_Recv(client, packet, 100) > 0 )
+      packet_size = 0;
+      i = 0;
+      // Read the size of the packet
+      while(SDLNet_TCP_Recv(client, &packet_size, 1) <= 0) SDL_Delay(10); //Loop while nothing is received
+
+      // Fill the packet while it didn't reached its size
+      memset(packet,0, packet_max_size);
+      while(packet_size != i)
       {
-        Action* a = make_action(packet);
-        std::cout << "received " << *a << std::endl;
-        ActionHandler::GetInstance()->NewAction(*a, false);
-        memset(packet,0, 400);
-        delete a;
+        received = SDLNet_TCP_Recv(client, packet+i, packet_size - i);
+        if(received > 0)
+        {
+          i+=received;
+        }
       }
-    } while(true);
+
+      Action* a = make_action((Uint32*)packet);
+      std::cout << "received " << *a << " (" << (int)packet_size << " octets)" << std::endl;
+      ActionHandler::GetInstance()->NewAction(*a, false);
+      delete a;
+    } while(m_is_connected);
   }
 }
 
@@ -244,7 +281,6 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SET_SKIN:
     return new ActionString(type, input);
 
-  case ACTION_WALK:
   case ACTION_MOVE_LEFT:
   case ACTION_MOVE_RIGHT:
   case ACTION_JUMP:
@@ -256,6 +292,7 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_ASK_VERSION:
     return new Action(type);
 
+  case ACTION_WALK:
   default:
     assert(false);
     return new Action(type);
