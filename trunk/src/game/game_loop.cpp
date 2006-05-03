@@ -159,7 +159,16 @@ void GameLoop::InitGameData_NetServer()
   team++;
   (*team)->is_local = false;
   
+  //Signale les clients que le jeu peut démarrer
   action_handler->NewAction (Action(ACTION_START_GAME));
+  action_handler->ExecActions();
+  network.state = Network::NETWORK_WAIT_CLIENTS;
+  //Attend que le client ait démarré
+  while (network.state != Network::NETWORK_PLAYING)
+  {
+    action_handler->ExecActions();
+    SDL_Delay(200);
+  }
 }
 
 void GameLoop::InitGameData_NetClient()
@@ -201,6 +210,9 @@ void GameLoop::InitGameData_NetClient()
   (*team)->is_local = false;
   team++;
   (*team)->is_local = true;
+
+  //Signal au serveur que la partie démarre
+  action_handler->NewAction (Action(ACTION_START_GAME));
 }
 
 void GameLoop::InitData_Local()
