@@ -27,9 +27,9 @@
 #include "../interface/mouse.h"
 #include "../map/map.h"
 #include "../map/camera.h"
+#include "../network/randomsync.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
-#include "../tool/random.h"
 #include "../tool/i18n.h"
 #include "../weapon/weapon_tools.h"
 
@@ -129,9 +129,9 @@ void Avion::Refresh()
 
       Point2d speed_vector;
 
-      int fx = randomObj.GetLong (FORCE_X_MIN, FORCE_X_MAX);
+      int fx = randomSync.GetLong (FORCE_X_MIN, FORCE_X_MAX);
       fx *= GetDirection();
-      int fy = randomObj.GetLong (FORCE_Y_MIN, FORCE_Y_MAX);
+      int fy = randomSync.GetLong (FORCE_Y_MIN, FORCE_Y_MAX);
 
       speed_vector.SetValues( fx/30.0, fy/30.0);
       instance->SetSpeedXY (speed_vector);
