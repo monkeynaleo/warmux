@@ -89,8 +89,7 @@ void Config::Init()
   data_dir = "data\\";
   locale_dir = "locale\\";
 #endif
-  std::string dft_font_path = std::string(data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf");
-  ttf_filename = *GetEnv(Constants::ENV_FONT_PATH, dft_font_path);
+  ttf_filename = *GetEnv(Constants::ENV_FONT_PATH, Constants::DEFAULT_FONT_PATH);
 
 #ifndef WIN32
   personal_dir = GetHome()+"/.wormux/";
