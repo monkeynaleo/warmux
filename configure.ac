@@ -78,16 +78,22 @@ fi
 
 DATADIR="${prefix}/share/wormux"
 AC_ARG_WITH(datadir-name,
-    [  --with-datadir-name=DIR       specify where datas are installed (default: /usr/share/wormux)],
+    [  --with-datadir-name=DIR       specify where datas are installed (default: ${prefix}/share/wormux)],
     [DATADIR="$withval"])
 AC_SUBST([DATADIR])
 	
 
 LOCALEDIR="${prefix}/share/locale"
 AC_ARG_WITH(localedir-name,
-    [  --with-localedir-name=DIR       specify where locales are installed (default: /usr/share/locale)],
+    [  --with-localedir-name=DIR       specify where locales are installed (default: ${prefix}/share/locale)],
     [LOCALEDIR="$withval"])
 AC_SUBST([LOCALEDIR])
+		
+FONTFILE="\${DATADIR}/font/DejaVuSans.ttf"
+AC_ARG_WITH(font-path,
+    [  --with-font-path=FILE       specify the font file (default: ${datadir}/font/DejaVuSans.ttf)],
+    [FONTFILE="$withval"])
+AC_SUBST([FONTFILE])
 		
 AM_CONDITIONAL([STATIC], [test x$static = xyes])
 AM_CONDITIONAL([GCC], [test x$GXX = xyes])
@@ -288,6 +294,7 @@ Configuration complete
 
 * Game data will be installed into $DATADIR
 * Game locale will be installed into $LOCALEDIR
+* Font file will be $FONTFILE
 
 Execute make to compile then execute make install to install...
 

@@ -48,6 +48,8 @@ public:
    */
   static const std::string DEFAULT_LOCALEDIR;
   
+  static const std::string DEFAULT_FONT_PATH;
+
   // Env variables name to override previous values
   static const std::string ENV_DATADIR;
   static const std::string ENV_LOCALEDIR;

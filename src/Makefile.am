@@ -4,6 +4,7 @@ bin_PROGRAMS = wormux
 
 pkgdatadir=@DATADIR@
 localedir=@LOCALEDIR@
+fontfile=@FONTFILE@
 
 wormux_SOURCES = \
 	include/base.h include/enum.h \
@@ -117,7 +118,7 @@ wormux_SOURCES = \
 	weapon/teleportation.cpp weapon/teleportation.h \
 	weapon/uzi.cpp weapon/uzi.h
 
-AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\"
+AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\" -DFONT_FILE=\"$(fontfile)\"
 
 if WIN32
 wormux_SOURCES += wormux.rc
