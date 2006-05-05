@@ -206,8 +206,8 @@
   <surface name="tux" file="weapon/supertux/supertux.png" />
   <sprite name="supertux" base_angle="-85">
     <image file="weapon/supertux/superman.png">
-      <grid pos="0,0" size="30,30" array="8,1" />
-      <animation speed="100" loop="yes" />
+      <grid pos="0,0" size="23,37" array="2,1" />
+      <animation speed="800" loop="yes" />
     </image>
   </sprite>
 
