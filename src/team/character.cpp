@@ -138,6 +138,7 @@ void Character::SignalDrowning()
   //m_type = objINSENSIBLE;
   SetSkin("drowned");
 
+  StartMoving();
   jukebox.Play (GetTeam().GetSoundProfile(),"sink");
   GameLoop::GetInstance()->SignalCharacterDeath (this);
 }
