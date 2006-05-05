@@ -27,6 +27,7 @@
 #include "../include/action_handler.h"
 #include "../map/map.h"
 #include "../map/camera.h"
+#include "../network/network.h"
 #include "../sound/jukebox.h"
 #include "../tool/debug.h"
 
@@ -131,6 +132,14 @@ void MoveCharacterLeft(Character &character){
     ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
+
+  //Refresh skin position across network
+  if( !network.is_local() && ActiveTeam().is_local)
+  {
+    network.SendAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
+    network.SendAction(ActionString(ACTION_SET_SKIN,character.current_skin));
+    network.SendAction(ActionInt(ACTION_SET_FRAME,character.image->GetCurrentFrame()));
+  }
 }
 
 // Move a character to the right
@@ -148,6 +157,15 @@ void MoveCharacterRight (Character &character){
   {
     ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
+  }
+
+
+  //Refresh skin position across network
+  if( !network.is_local() && ActiveTeam().is_local)
+  {
+    network.SendAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
+    network.SendAction(ActionString(ACTION_SET_SKIN,character.current_skin));
+    network.SendAction(ActionInt(ACTION_SET_FRAME,character.image->GetCurrentFrame()));
   }
 }
 

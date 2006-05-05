@@ -359,15 +359,8 @@ void GameLoop::Refresh()
       Clavier::GetInstance()->Refresh();
     }
 
-    FOR_ALL_CHARACTERS(equipe,ver) ver -> Refresh();
-    //Refresh skin position across network
-    if( !network.is_local() && ActiveTeam().is_local)
-    {
-      ActionHandler::GetInstance()->NewAction(ActionString(ACTION_SET_SKIN,ActiveCharacter().current_skin));
-      ActionHandler::GetInstance()->NewAction(ActionInt2(ACTION_MOVE_CHARACTER,ActiveCharacter().GetX(),ActiveCharacter().GetY()));
-      ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_FRAME,ActiveCharacter().image->GetCurrentFrame()));
-    }
     ActionHandler::GetInstance()->ExecActions();     
+    FOR_ALL_CHARACTERS(equipe,ver) ver -> Refresh();
 
     // Recalcule l'energie des equipes
     FOR_EACH_TEAM(team)
@@ -605,7 +598,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
 
     action_handler->ExecActions();
 
-    assert (!ActiveCharacter().IsDead());
+//    assert (!ActiveCharacter().IsDead());
     camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
     interaction_enabled = true; // Be sure that we can play !
     break;
