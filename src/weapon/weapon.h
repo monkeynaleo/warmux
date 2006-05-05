@@ -80,6 +80,9 @@ protected:
     weapon_origin_t origin;
   } position;
 
+  // Time when the weapon is selected for the animation
+  uint m_time_anim_begin;
+
   // Actual strength of the weapon
   double m_strength;
 

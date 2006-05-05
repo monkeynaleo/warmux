@@ -60,6 +60,8 @@ const uint UNIT_BOX_GAP = 6;
 const uint WEAPON_BOX_BUTTON_DX = 20;
 const uint WEAPON_BOX_BUTTON_DY = 50;
 
+const uint ANIM_DISPLAY_TIME = 400;
+
 extern WeaponStrengthBar weapon_strength_bar;
 
 
@@ -73,6 +75,7 @@ Weapon::Weapon(Weapon_type type,
 
   m_is_active = false;
 
+  m_time_anim_begin = Time::GetInstance()->Read();
   m_initial_nb_ammo = INFINITE_AMMO;
   m_initial_nb_unit_per_ammo = 1;
   use_unit_on_first_shoot = true;
@@ -108,7 +111,8 @@ Weapon::Weapon(Weapon_type type,
   if (m_visibility != NEVER_VISIBLE)
   {
     m_image = new Sprite( resource_manager.LoadImage(weapons_res_profile, m_id));
-    m_image->cache.EnableLastFrameCache();
+    if(min_angle != max_angle)
+      m_image->cache.EnableLastFrameCache();
   }
      
   icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
@@ -122,6 +126,7 @@ void Weapon::Select()
 {  
   MSG_DEBUG("weapon", "Select %s", m_name.c_str());
   
+  m_time_anim_begin = Time::GetInstance()->Read();
   m_is_active = false;
   m_strength = 0;
   ActiveTeam().ResetNbUnits();
@@ -251,16 +256,27 @@ bool Weapon::Shoot(double strength, int angle)
 // Calcule la position de l'image de l'arme
 void Weapon::PosXY (int &x, int &y) const
 {
-  Point2i handPos = ActiveCharacter().GetHandPosition();
-  y = handPos.y + position.dy;
-  if (ActiveCharacter().GetDirection() == 1)
-    x = handPos.x + position.dx;
-  else {
-    x = handPos.x - position.dx;
-  }
+  if(position.origin == weapon_origin_HAND)
+  {
+    Point2i handPos = ActiveCharacter().GetHandPosition();
+    y = handPos.y + position.dy;
+    if (ActiveCharacter().GetDirection() == 1)
+      x = handPos.x + position.dx;
+    else {
+      x = handPos.x - position.dx;
+    }
 
-  if(min_angle!=max_angle && ActiveCharacter().GetDirection()==-1)
-    x -= m_image->GetWidth();
+    if(ActiveCharacter().GetDirection()==-1)
+      x -= m_image->GetWidth();
+  }
+  else
+  if(position.origin == weapon_origin_OVER)
+  {
+    x = ActiveCharacter().GetCenterX()-m_image->GetWidth()/2+position.dx;
+    y = ActiveCharacter().GetY()-m_image->GetHeight()+position.dy;
+  }
+  else
+    assert(false);
 }
 
 // Return the absolute rotation point of the weapon
@@ -428,6 +444,10 @@ void Weapon::Draw(){
   || ActiveCharacter().IsDead())
     return;
 
+  // Reset the Sprite:
+  m_image->SetRotation_deg(0.0);
+  m_image->Scale(1.0,1.0);
+
   // rotate weapon if needed
   if (min_angle != max_angle)
   {
@@ -445,16 +465,26 @@ void Weapon::Draw(){
 
   // Calculate position of the image
   int x,y;
-  switch (position.origin) 
+  PosXY (x, y);
+
+  // Animate the display of the weapon:
+  if( m_time_anim_begin + ANIM_DISPLAY_TIME > Time::GetInstance()->Read())
   {
-  case weapon_origin_OVER:
-    x = ActiveCharacter().GetCenterX()-m_image->GetWidth()/2+position.dx;
-    y = ActiveCharacter().GetY()-m_image->GetHeight()+position.dy;
-     break;
-  case weapon_origin_HAND:
-    PosXY (x, y);
-     break;
+    if (min_angle != max_angle)
+    {
+      float angle = m_image->GetRotation_deg();
+      angle += sin( M_PI_2 * double(Time::GetInstance()->Read() - m_time_anim_begin) /(double) ANIM_DISPLAY_TIME) * 360.0;
+      m_image->SetRotation_deg (angle);
+    }
+    else
+    {
+      float scale = sin( 1.5 * M_PI_2 * double(Time::GetInstance()->Read() - m_time_anim_begin) /(double) ANIM_DISPLAY_TIME) / sin(1.5 * M_PI_2);
+      m_image->Scale(ActiveCharacter().GetDirection() * scale,scale);
+
+      if(position.origin == weapon_origin_OVER) PosXY(x,y); //Recompute position to get the icon centered over the skin
+    }
   }
+
   if ( m_image )
     m_image->Blit( AppWormux::GetInstance()->video.window, Point2i(x, y) - camera.GetPosition());
 }
