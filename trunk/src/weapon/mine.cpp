@@ -35,7 +35,7 @@
 #include "../team/macro.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
-#include "../tool/random.h"
+#include "../network/randomsync.h"
 #include "../tool/resource_manager.h"
 
 #ifdef __MINGW32__
@@ -153,7 +153,7 @@ void ObjMine::Refresh()
 	 jukebox.Stop(channel);
 	 channel = -1;
 	 
-	 if (randomObj.GetLong(0, 9))
+	 if (randomSync.GetLong(0, 9))
 	   {
 	     Explosion ();
 	   }
