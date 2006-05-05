@@ -139,7 +139,8 @@ void Sprite::SetCurrentFrame( unsigned int frame_no){
 }
 
 unsigned int Sprite::GetCurrentFrame() const{
-   return current_frame;
+  assert(current_frame < frames.size());
+  return current_frame;
 }
 
 SpriteFrame& Sprite::operator[] (unsigned int index){
@@ -202,6 +203,11 @@ void Sprite::SetRotation_deg( float angle_deg){
 
    rotation_deg = angle_deg;
    cache.InvalidLastFrame();
+}
+
+float Sprite::GetRotation_deg()
+{
+  return rotation_deg;
 }
 
 void Sprite::SetRotation_HotSpot( const Point2i new_hotspot)
