@@ -77,6 +77,7 @@ public:
 
   // Rotation
   void SetRotation_deg( float angle_deg);
+  float GetRotation_deg();
   void SetRotation_HotSpot( const Point2i new_hotspot);
   void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   
