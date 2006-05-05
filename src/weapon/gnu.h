@@ -37,7 +37,7 @@ class Gnu : public WeaponProjectile
 {
  private:
   int m_sens;
-  double save_x,save_y;
+  int save_x, save_y;
   double angle;
 public:
   Gnu(ExplosiveWeaponConfig& cfg);

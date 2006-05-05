@@ -32,7 +32,7 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
-#include "../tool/random.h"
+#include "../network/randomsync.h"
 
 Gnu::Gnu(ExplosiveWeaponConfig& cfg) : 
   WeaponProjectile("gnu", cfg)
@@ -43,10 +43,8 @@ void Gnu::Shoot (double strength)
 {
   WeaponProjectile::Shoot(strength);
 
-  //Dummy value, we only need save_x!=x and save_y!=y
-  //To avoid a comparison in Refresh()
-  save_x=(double)GetX()-1.0;
-  save_y=(double)GetY()-1.0;
+  save_x=GetX();
+  save_y=GetY();
 
   double angle = ActiveTeam().crosshair.GetAngleRad();
 
@@ -60,32 +58,31 @@ void Gnu::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  double angle, norm;
-  GetSpeed(norm, angle);
-  if((!IsMoving() || norm<1.0)&& !FootsInVacuum())
+  double norme, angle;
+  //When we hit the ground, jump !
+  if(!IsMoving()&& !FootsInVacuum())
   {
-    norm = randomObj.GetDouble(0.5, 1) * cfg.rebound_factor;
-    //angle = -(M_PI/2)-(m_sens*(RandomLong(0,90)*M_PI/45.0)); ??
-	angle = randomObj.GetDouble(-M_PI_2, M_PI_2);
-    SetSpeed(norm, angle);
-  }
+    //If the GNU is stuck in ground -> change direction
+    int x = GetX();
+    int y = GetY();
+    if(x==save_x && y==save_y)
+      m_sens = - m_sens;
+    save_x = x;
+    save_y = y;
 
-  angle *= 180.0/M_PI;
-
-  if(angle<-90 || angle>90)
-  {
-    m_sens=-1;
-    angle=-angle + 180;
+    //Do the jump
+    norme = 10.0 * randomSync.GetDouble(0.5, 1.0) * cfg.rebound_factor;
+    PutOutOfGround();
+    SetSpeedXY(Point2d(m_sens * norme , - norme * 3.0));
   }
-  else
-    m_sens=1;
 
   //Due to a bug in the physic engine
   //sometimes, angle==infinite (according to gdb) ??
-  if(angle>720)
-    angle = 0;
+  GetSpeed(norme, angle);
+  if(angle > 720) angle = 0;
 
   image->SetRotation_deg(angle);
+  image->Scale((double)m_sens,1.0);
   image->Update();
   // Fixe le rectangle de test  ??
   SetTestRect ( image->GetWidth()/2-1,

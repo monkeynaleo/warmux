@@ -32,7 +32,7 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
-#include "../tool/random.h"
+#include "../network/randomsync.h"
 
 Cluster::Cluster(ClusterBombConfig& cfg) :
   WeaponProjectile ("cluster", cfg)
@@ -122,7 +122,7 @@ void ClusterBomb::Explosion()
     {
       Cluster &cluster = *it;
       
-      double angle = randomObj.GetDouble(2.0 * M_PI);
+      double angle = randomSync.GetDouble(2.0 * M_PI);
       x = GetX()+(int)(cos(angle) * (double)cfg.blast_range*5);
       y = GetY()+(int)(sin(angle) * (double)cfg.blast_range*5);
 
