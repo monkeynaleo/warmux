@@ -47,6 +47,7 @@ RoquetteTeteCherche::RoquetteTeteCherche(ExplosiveWeaponConfig& cfg) :
   WeaponProjectile("rocket", cfg)
 {
   m_attire = false;
+  explode_colliding_character = true;
   SetGravityFactor(0.0);
 }
 

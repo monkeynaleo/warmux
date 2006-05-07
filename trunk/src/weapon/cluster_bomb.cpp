@@ -37,6 +37,7 @@
 Cluster::Cluster(ClusterBombConfig& cfg) :
   WeaponProjectile ("cluster", cfg)
 {
+  explode_colliding_character = true;
 }
 
 void Cluster::Shoot (int x, int y)

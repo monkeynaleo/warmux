@@ -98,7 +98,7 @@ bool Uzi::p_Shoot()
     }
     
     // is there a collision ??
-    if(projectile->CollisionTest( 0, 0 ) ){
+    if(projectile->CollisionTest( pos ) ){
       projectile->is_active=false;
 
       projectile->Explosion();

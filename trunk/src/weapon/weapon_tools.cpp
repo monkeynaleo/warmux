@@ -98,7 +98,7 @@ void ApplyExplosion (const Point2i &pos,
 //      camera.ChangeObjSuivi ((PhysicalObj*)&ver, true, true);
       cam_follow_character = true;
       ver -> AddSpeed (force, angle);
-      ver -> UpdatePosition();
+//      ver -> UpdatePosition();
     } else {
 
       MSG_DEBUG("explosion", " -> too far");
@@ -131,7 +131,7 @@ void ApplyExplosion (const Point2i &pos,
       if(!cam_follow_character)
         camera.ChangeObjSuivi (obj->ptr, true, true);
       obj -> ptr -> AddSpeed (distance, angle);
-      obj -> ptr -> UpdatePosition();
+//      obj -> ptr -> UpdatePosition();
     }
   }
 

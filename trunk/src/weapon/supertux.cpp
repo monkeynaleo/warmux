@@ -37,6 +37,7 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg) :
   WeaponProjectile ("supertux", cfg), 
   particle_engine(40)
 {
+  explode_colliding_character = true;
   m_gravity_factor = 0.0;    
   SetWindFactor(0.0);
 }
