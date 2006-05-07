@@ -135,7 +135,7 @@
 
   <sprite name="gnu">
     <image file="weapon/gnu/gnu.png">
-      <grid pos="0,0" size="42,42" array="3,1" />
+      <grid pos="0,0" size="47,38" array="4,1" />
     </image>
     <animation play_speed="35" play_options="pingpong" />
   </sprite>
@@ -206,7 +206,7 @@
   <surface name="tux" file="weapon/supertux/supertux.png" />
   <sprite name="supertux" base_angle="-85">
     <image file="weapon/supertux/superman.png">
-      <grid pos="0,0" size="23,37" array="2,1" />
+      <grid pos="0,0" size="23g,37" array="2,1" />
       <animation speed="800" loop="yes" />
     </image>
   </sprite>
