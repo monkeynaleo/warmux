@@ -201,6 +201,14 @@
 
 <section title="Contributors">
   <author>
+    <name>Sébastien Gonzalve</name>
+    <nickname>OznOg</nickname>
+    <email>oznog AT zarb.org</email>
+    <country>France</country>
+    <description>Fix some memory leaks.</description>
+  </author>
+
+  <author>
     <name>Glenn ROLLAND</name>
     <nickname>Glenux</nickname>
     <email>glenux AT gmail.com</email>
