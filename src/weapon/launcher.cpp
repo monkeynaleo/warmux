@@ -44,6 +44,7 @@ WeaponBullet::WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg) 
   SetAirResistFactor(1.0);
 
   cfg.explosion_range = 1;
+  explode_colliding_character = true;
 }
 
 void WeaponBullet::SignalCollision()
@@ -111,14 +112,14 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   m_rebound_factor = cfg.rebound_factor;
 
   // Set rectangle test
-  int dx = image->GetWidth()/2-1;
-  int dy = image->GetHeight()/2-1;
-  SetTestRect (dx, dx, dy, dy);   
+  int dx = image->GetWidth()/4-1;
+  int dy = image->GetHeight()/4-1;
+  SetTestRect (dx, dx, dy, dy);
 }
 
 WeaponProjectile::~WeaponProjectile()
 {
-  //delete image; -> it causes a segfault :-/
+//  delete image; /*-> it causes a segfault :-/ */
 }
 
 void WeaponProjectile::Shoot(double strength)
@@ -164,13 +165,17 @@ bool WeaponProjectile::TestImpact()
     MSG_DEBUG("weapon_collision", "Impact because was ready.\n");
     return true;
   }
-  return CollisionTest (0,0);
+//  return CollisionTest (0,0); ---> CollisionTest called from PhysicalObj::NotifyMove(...)
+  return false;
 }
 
-bool WeaponProjectile::CollisionTest(int dx, int dy)
+bool WeaponProjectile::CollisionTest(const Point2i &position)
 {
   dernier_ver_touche = NULL;
   dernier_obj_touche = NULL;
+
+  int dx = position.x - GetX();
+  int dy = position.y - GetY();
 
   if (!IsInVacuum ( Point2i(dx, dy)) ) return true;
 
@@ -180,19 +185,20 @@ bool WeaponProjectile::CollisionTest(int dx, int dy)
    test.SetPositionX( test.GetPositionX() + dx);
    test.SetPositionY( test.GetPositionY() + dy);
    
-  FOR_ALL_LIVING_CHARACTERS(equipe,ver)
-  if (&(*ver) != &ActiveCharacter())
+  if (explode_colliding_character)
   {
-    if (ver->GetTestRect().Intersect( test ))
-       {
-      dernier_ver_touche = &(*ver);
-      MSG_DEBUG("weapon_collision", "Character %s has been damaged", ver -> m_name.c_str());
+    FOR_ALL_LIVING_CHARACTERS(equipe,ver)
+    if (&(*ver) != &ActiveCharacter())
+    {
+      if (ver->GetTestRect().Intersect( test ))
+      {
+        dernier_ver_touche = &(*ver);
+        MSG_DEBUG("weapon_collision", "Character %s has been damaged", ver -> m_name.c_str());
 
-      if (explode_colliding_character) {
-	MSG_DEBUG("weapon_collision", "Projectile explode before timeout because of a collision", ver -> m_name.c_str());
-	is_active = false;
+        MSG_DEBUG("weapon_collision", "Projectile explode before timeout because of a collision", ver -> m_name.c_str());
+        is_active = false;
+        return true;
       }
-      return true;
     }
   }
 

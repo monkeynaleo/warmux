@@ -44,6 +44,7 @@ Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("obus", cfg)
 {
   is_active = true;
+  explode_colliding_character = true;
   Ready();
 }
 

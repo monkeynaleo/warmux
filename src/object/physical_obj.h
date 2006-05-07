@@ -173,7 +173,7 @@ private:
   bool ContactPoint (int &x, int &y);
 
   // Collision test for point (x,y)
-  bool CollisionTest(const Point2i &position);
+  virtual bool CollisionTest(const Point2i &position);
 
   void SignalRebound();
   

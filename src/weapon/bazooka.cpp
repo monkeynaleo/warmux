@@ -36,6 +36,7 @@ RoquetteBazooka::RoquetteBazooka(ExplosiveWeaponConfig& cfg) :
 {  
   m_rebounding = false;
   touche_ver_objet = true;
+  explode_colliding_character = true;
 }
 
 void RoquetteBazooka::Refresh()

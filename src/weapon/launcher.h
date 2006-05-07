@@ -58,7 +58,7 @@ class WeaponProjectile : public PhysicalObj
   virtual void Shoot(double strength);
   virtual void Explosion();
 
-  bool CollisionTest (int dx, int dy); // public only for uzi...
+  virtual bool CollisionTest (const Point2i &position); // public only for uzi...
  protected:
   virtual void SignalCollision() = 0; 
   bool TestImpact ();
