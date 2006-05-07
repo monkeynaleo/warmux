@@ -137,6 +137,13 @@ GameMenu::GameMenu() :
 
 GameMenu::~GameMenu()
 {
+  delete bt_remove_team;
+  delete bt_add_team;
+  delete lbox_maps;
+  delete map_preview;
+  delete lbox_all_teams;
+  delete space_for_logo;
+  delete lbox_selected_teams;
   delete map_box;
   delete team_box;
 }
@@ -203,6 +210,8 @@ void GameMenu::ChangeMap()
 {
   std::string map_id = lbox_maps->ReadLabel();
   uint map = lst_terrain.FindMapById(map_id);
+  if(map_preview) /* FIXME deleting if not NULL is usually not really nice */
+    delete map_preview;
   map_preview = new Sprite(lst_terrain.liste[map].preview);
   float scale = std::min( float(MAP_PREVIEW_W)/map_preview->GetHeight(), 
                           float(MAP_PREVIEW_W)/map_preview->GetWidth() ) ;
