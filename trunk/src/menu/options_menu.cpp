@@ -175,6 +175,19 @@ OptionMenu::OptionMenu() :
 
 OptionMenu::~OptionMenu()
 {
+  delete opt_display_name;
+  delete opt_duration_turn;
+  delete full_screen;
+  delete lbox_sound_freq;
+  delete opt_music;
+  delete lbox_video_mode;
+  delete opt_max_fps;
+  delete opt_duration_end_turn;
+  delete opt_energy_ini;
+  delete opt_display_energy;
+  delete opt_nb_characters;
+  delete opt_sound_effects;
+  delete opt_display_wind_particles;
   delete graphic_options;
   delete sound_options;
   delete game_options;

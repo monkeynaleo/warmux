@@ -47,6 +47,8 @@ Menu::Menu(char * bg){
 }
 
 Menu::~Menu(){
+  delete b_ok;
+  delete b_cancel;
   delete background;
   delete actions_buttons;
 }
