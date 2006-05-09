@@ -33,43 +33,39 @@
 class Question
 {
 public:
-  // Message affiché durant le jeu
+  // Message to display
   std::string message;
 
-  // Un choix = une touche renvoie une valeur
+  // A choice = a key return a value
   typedef struct choix_t
   {
-    int m_touche;
+    int m_key;
     int m_val;
-    choix_t (int touche, int valeur) 
-    { m_touche = touche; m_val = valeur; }
-  } choix_t;
+    choix_t (int key, int value) 
+    { m_key = key; m_val = value; }
+  } choice_t;
 
-  // Liste des choix
-  std::list<choix_t> choix;
-  typedef std::list<choix_t>::iterator choix_iterator;
+  // Choices list
+  std::list<choice_t> choices;
+  typedef std::list<choix_t>::iterator choice_iterator;
 
-  // Choix par défaut : si une autre touche est pressée
-  struct s_choix_defaut
+  // Default choice used when another key is pressed
+  struct s_default_choice
   {
-    bool actif;
-    int valeur;
-  } choix_defaut;
+    bool active;
+    int value;
+  } default_choice;
 
-  // Réponse renvoyée par l'utilisateur
-  int reponse;
-
-private:
-  void TraiteTouche (SDL_Event &event);
-  bool m_fin_boucle;
-
-private:
+ private:
+  int TreatsKey (SDL_Event &event);
   void Draw();
 
  public:
   Question();
-  void Init (const std::string &message, bool choix_defaut, int valeur);
-  int PoseQuestion ();
+  void Set(const std::string &message, 
+	   bool default_active, 
+	   int default_value);
+  int AskQuestion ();
 };
 
 //-----------------------------------------------------------------------------
