@@ -29,6 +29,7 @@
 #include "../graphic/video.h"
 #include "../include/app.h"
 #include "../map/camera.h"
+#include "../map/map.h"
 #include "../team/macro.h"
 #include "../tool/point.h"
 #include "../weapon/weapon.h"
@@ -50,6 +51,16 @@ Mouse * Mouse::GetInstance() {
 
 Mouse::Mouse(){
   scroll_actif = false;
+
+  // Load the different pointers  
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  pointer_select = resource_manager.LoadImage(res, "mouse/pointer_select");
+  pointer_move = resource_manager.LoadImage(res, "mouse/pointer_move");
+  pointer_aim = resource_manager.LoadImage(res, "mouse/pointer_aim");
+
+  current_pointer = POINTER_STANDARD;
+  previous_pointer = POINTER_SELECT;
+  delete res;
 }
 
 void Mouse::Reset(){
@@ -142,23 +153,38 @@ void Mouse::ChoixVerPointe(){
 //  }
 }
 
-void Mouse::ScrollCamera() const{
-	Point2i mousePos = GetPosition();
-	Point2i sensitZone(SENSIT_SCROLL_MOUSE, SENSIT_SCROLL_MOUSE);
-	Point2i winSize = AppWormux::GetInstance()->video.window.GetSize();
-	Point2i tstVector;
-	
-	tstVector = mousePos.inf(sensitZone);
-	if( !tstVector.IsNull() ){
-		camera.SetXY( tstVector * (mousePos - sensitZone)/2 );
-		camera.autorecadre = false;
-	}
+void Mouse::ScrollCamera() {
+  bool scroll = false;
 
-	tstVector = winSize.inf(mousePos + sensitZone);
-	if( !tstVector.IsNull() ){
-		camera.SetXY( tstVector * (mousePos + sensitZone - winSize)/2 );
-		camera.autorecadre = false;
-	}
+  Point2i mousePos = GetPosition();
+  Point2i sensitZone(SENSIT_SCROLL_MOUSE, SENSIT_SCROLL_MOUSE);
+  Point2i winSize = AppWormux::GetInstance()->video.window.GetSize();
+  Point2i tstVector;
+	
+  tstVector = mousePos.inf(sensitZone);
+  if( !tstVector.IsNull() ){
+    camera.SetXY( tstVector * (mousePos - sensitZone)/2 );
+    camera.autorecadre = false;
+    scroll = true;
+  } 
+  
+  tstVector = winSize.inf(mousePos + sensitZone);
+  if( !tstVector.IsNull() ){
+    camera.SetXY( tstVector * (mousePos + sensitZone - winSize)/2 );
+    camera.autorecadre = false;
+    scroll = true;
+  }
+
+  if (scroll) { 
+    if (current_pointer != POINTER_MOVE 
+	&& current_pointer != POINTER_STANDARD)
+      previous_pointer = current_pointer;
+    SetPointer(POINTER_MOVE);
+  } else {
+    SetPointer(previous_pointer);
+  }
+
+
 }
 
 void Mouse::TestCamera(){
@@ -216,3 +242,37 @@ void Mouse::TraiteClic (const SDL_Event *event){
   }
 }
 
+void Mouse::SetPointer(pointer_t pointer)
+{
+  if (current_pointer == pointer) return;
+
+  current_pointer = pointer;
+
+  if (pointer == POINTER_STANDARD) SDL_ShowCursor(true);
+  else SDL_ShowCursor(false);
+}
+
+void Mouse::Draw()
+{
+  switch (current_pointer) 
+    {
+    case POINTER_STANDARD: // use standard SDL cursor
+      break;
+    case POINTER_SELECT:
+      AppWormux::GetInstance()->video.window.Blit( pointer_select, GetPosition() ); 
+      world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_select.GetWidth(), pointer_select.GetHeight()));
+      break;
+    case POINTER_MOVE:
+      AppWormux::GetInstance()->video.window.Blit( pointer_move, GetPosition() ); 
+      world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_move.GetWidth(), pointer_move.GetHeight()));
+      break;
+    case POINTER_AIM:
+      AppWormux::GetInstance()->video.window.Blit( pointer_aim, Point2i(GetPosition().x-7, GetPosition().y-10 )); 
+      world.ToRedrawOnScreen(Rectanglei(GetPosition().x-7, GetPosition().y-10, pointer_aim.GetWidth(), pointer_aim.GetHeight()));
+      break;
+    default:
+      break;
+      // to do
+    };
+
+}

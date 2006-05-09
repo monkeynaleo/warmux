@@ -32,6 +32,7 @@
 #include "../interface/cursor.h"
 #include "../interface/keyboard.h"
 #include "../interface/game_msg.h"
+#include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../sound/jukebox.h"
@@ -272,7 +273,8 @@ void Game::Start()
 
   world.FreeMem();
   jukebox.StopAll();
-   
+  Mouse::GetInstance()->SetPointer(POINTER_STANDARD);
+
   if (err)
   {
     std::string txt = Format(_("Error:\n%s"), err_msg.c_str());
