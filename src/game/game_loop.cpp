@@ -522,7 +522,12 @@ void GameLoop::RefreshClock()
 
       case END_TURN:
         if (duration <= 1) {
-          if (IsAnythingMoving()) break;
+          if (IsAnythingMoving()) {
+	    duration = 1; 
+	    // Hack to be sure that nothing is moving since enough time
+	    // it avoids giving hand to another team during the end of an explosion for example
+	    break;
+	  }
 
           if (Game::GetInstance()->IsGameFinished()) 
             Game::GetInstance()->SetEndOfGameStatus( true );

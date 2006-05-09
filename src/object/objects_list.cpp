@@ -68,7 +68,8 @@ void ObjectsList::RemoveObject (PhysicalObj* obj)
     if ( it->ptr == obj) 
     {
       it->to_remove = true;
-      camera.StopFollowingObj(obj);
+      // please, do not call camera.StopFollowingObj(obj) here, 
+      // because we want to see the end of an explosion when removing projectiles
       return;
     }
   }
