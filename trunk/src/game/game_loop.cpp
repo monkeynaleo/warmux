@@ -522,6 +522,7 @@ void GameLoop::RefreshClock()
 
       case END_TURN:
         if (duration <= 1) {
+
           if (IsAnythingMoving()) {
 	    duration = 1; 
 	    // Hack to be sure that nothing is moving since enough time
@@ -531,9 +532,10 @@ void GameLoop::RefreshClock()
 
           if (Game::GetInstance()->IsGameFinished()) 
             Game::GetInstance()->SetEndOfGameStatus( true );
-          else { 
+          else if (BonusBox::NewBonusBox())
+	    break;
+	  else {
 	    ActiveTeam().AccessWeapon().Deselect();
-            BonusBox::NewBonusBox(); 
 	    SetState(PLAYING);
             break;
           }

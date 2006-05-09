@@ -30,6 +30,7 @@
 #include "../include/app.h"
 #include "../include/constant.h" // NBR_BCL_MAX_EST_VIDE
 #include "../interface/game_msg.h"
+#include "../map/camera.h"
 #include "../map/map.h"
 #include "../network/randomsync.h"
 #include "../object/objects_list.h"
@@ -216,12 +217,11 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
   return true;
 }
 
-void BonusBox::NewBonusBox()
+bool BonusBox::NewBonusBox()
 {
 
   if (!enable || (Time::GetInstance()->Read() < time)) {
-    //game_loop.SetState(gamePLAYING);
-    return;
+    return false;
   }
 
   BonusBox * box = new BonusBox();
@@ -230,8 +230,10 @@ void BonusBox::NewBonusBox()
     delete box;
   } else {
     lst_objects.AddObject(box);
+    camera.ChangeObjSuivi(box, true, true);
     GameMessages::GetInstance()->Add (_("Is it a gift ?"));
+    return true;
   }
  
-  return;
+  return false;
 }
