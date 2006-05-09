@@ -79,6 +79,20 @@ void Gnu::Refresh()
   //Due to a bug in the physic engine
   //sometimes, angle==infinite (according to gdb) ??
   GetSpeed(norme, angle);
+
+  while(angle < -M_PI) angle += M_PI;
+  while(angle > M_PI) angle -= M_PI;
+
+  angle *= 180.0 / M_PI;
+  angle /= 2.0;
+  if(m_sens == -1)
+  {
+    if(angle > 0)
+      angle -= 90.0;
+    else
+      angle += 90.0;
+  }
+
   if(angle > 720) angle = 0;
 
   image->SetRotation_deg(angle);
