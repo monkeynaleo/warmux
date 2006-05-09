@@ -58,7 +58,7 @@ public:
 
   // Active les caisses ?
   static void Enable (bool _enable);
-  static void NewBonusBox();
+  static bool NewBonusBox();
 
   // Signale la fin d'une chute
   virtual void SignalFallEnding();  
