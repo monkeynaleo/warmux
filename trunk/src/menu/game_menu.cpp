@@ -210,7 +210,7 @@ void GameMenu::ChangeMap()
 {
   std::string map_id = lbox_maps->ReadLabel();
   uint map = lst_terrain.FindMapById(map_id);
-  if(map_preview) /* FIXME deleting if not NULL is usually not really nice */
+  if(terrain_init)
     delete map_preview;
   map_preview = new Sprite(lst_terrain.liste[map].preview);
   float scale = std::min( float(MAP_PREVIEW_W)/map_preview->GetHeight(), 
@@ -257,8 +257,8 @@ void GameMenu::Draw(const Point2i &mousePosition)
   app->video.window.Blit( last_team->ecusson, space_for_logo->GetPosition() );
   
   if (!terrain_init){
-      terrain_init = true;
       ChangeMap();
+      terrain_init = true;
   }
   
   map_preview->Blit ( app->video.window, 
