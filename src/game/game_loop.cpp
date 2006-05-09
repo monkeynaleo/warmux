@@ -302,6 +302,9 @@ void GameLoop::Init ()
   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
    
   Game::GetInstance()->SetEndOfGameStatus( false );
+
+  Mouse::GetInstance()->SetPointer(POINTER_SELECT);
+
   SetState (PLAYING, true);
 }
 
@@ -440,6 +443,9 @@ void GameLoop::Draw ()
 
   // Add one frame to the fps counter ;-)
   fps.AddOneFrame();
+
+  // Draw the mouse pointer
+  Mouse::GetInstance()->Draw();
 }
 
 void GameLoop::CallDraw()

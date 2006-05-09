@@ -87,6 +87,12 @@
   <surface name="fond_compteur" file="interface/compteur.png"/>
 </section>
 
+<section name ="mouse">
+  <surface name="pointer_select" file="interface/pointer_select.png"/>
+  <surface name="pointer_move" file="interface/pointer_move.png"/>
+  <surface name="pointer_aim" file="interface/pointer_aim.png"/>
+</section>
+
 
 <section name="gfx">
   <surface name="pointeur1" file="gfx/pointer.png" />
