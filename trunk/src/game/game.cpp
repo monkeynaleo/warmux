@@ -194,7 +194,7 @@ void Game::MessageEndOfGame()
   }
   std::cout << txt << std::endl;
 
-  question.Init (txt, true, 0);
+  question.Set (txt, true, 0);
   AskQuestion();
 }
 
@@ -206,10 +206,10 @@ int Game::AskQuestion (bool draw)
   if (draw) 
     GameLoop::GetInstance()->Draw ();
   
-  question.PoseQuestion ();
+  int answer = question.AskQuestion ();
 
   global_time->Continue(); 
-  return question.reponse;
+  return answer;
 }
 
 void Game::Start()
@@ -235,7 +235,7 @@ void Game::Start()
       if (!IsGameFinished()) 
       {
         const char *msg = _("Do you really want to quit? (Y/N)");
-        question.Init (msg, true, 0);
+        question.Set (msg, true, 0);
 	
         {
           /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
@@ -248,7 +248,8 @@ void Game::Start()
             abort();
           if (!isalpha(key_x)) /* sanity check */
             abort();
-	   question.choix.push_back ( Question::choix_t(SDLK_a + (int)key_x - 'a', 1) );
+
+	  question.choices.push_back ( Question::choix_t(SDLK_a + (int)key_x - 'a', 1) );
 	}
 	
         jukebox.Pause();
@@ -276,7 +277,7 @@ void Game::Start()
   {
     std::string txt = Format(_("Error:\n%s"), err_msg.c_str());
     std::cout << std::endl << txt << std::endl;
-    question.Init (txt, true, 0);
+    question.Set (txt, true, 0);
     AskQuestion (false);
   }
 }
@@ -284,7 +285,7 @@ void Game::Start()
 void Game::Pause()
 {
   jukebox.Pause();
-  question.Init (_("Pause"), true, 0);
+  question.Set (_("Pause"), true, 0);
   AskQuestion();
   jukebox.Resume();
 }
