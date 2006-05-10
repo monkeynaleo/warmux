@@ -51,8 +51,7 @@
   <image file="jetpack-fly-move.png">
     <grid size="31,51" array="2,1" />
   </image>
-  <frame speed="100" />
-  <animation pingpong="yes"/>
+  <animation speed="100" loop_mode="pingpong"/>
   <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
@@ -74,8 +73,7 @@
   <image file="jetpack-fly-move.png">
     <grid size="31,51" array="2,1" />
   </image>
-  <frame speed="75" />
-  <animation pingpong="yes"/>
+  <animation speed="75" loop_mode="pingpong"/>
   <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
@@ -83,8 +81,7 @@
   <image file="jetpack-fly-move.png">
     <grid size="31,51" array="2,1" />
   </image>
-  <frame speed="75" />
-  <animation pingpong="yes"/>
+  <animation speed="75" loop_mode="pingpong"/>
   <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
@@ -108,7 +105,7 @@
     <grid pos="0,0" size="33,49" array="2,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="0" />
-  <frame speed="5000" />
+  <animation speed="5000" />
 </sprite>
 
 <sprite name="jump">

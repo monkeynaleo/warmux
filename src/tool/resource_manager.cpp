@@ -150,6 +150,24 @@ Surface ResourceManager::LoadImage( const Profile *profile, const std::string re
  return LoadImage( profile->relative_path+filename, alpha);
 }
 
+bool xmlIsBool(const std::string &str, bool &value)
+{
+  // Try to convert str to a boolean value
+  // return true and set the value on succeed 
+  // return if false its not a boolean
+  if(str=="1" || str=="true" || str=="on")
+  {
+    value = true;
+    return true;
+  }
+  if(str=="0" || str=="false" || str=="off")
+  {
+    value = false;
+    return true;
+  }
+  return false;
+}
+
 Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string resource_name)
 {
   xmlpp::Element *elem_sprite = GetElement( profile, "sprite", resource_name);
@@ -221,34 +239,26 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 
   assert(sprite!=NULL);
 
-  xmlpp::Element *elem = profile->doc->AccesBalise ( elem_sprite, "frame");
+  xmlpp::Element *elem = profile->doc->AccesBalise ( elem_sprite, "animation");
   if ( elem != NULL )
   {
-	  std::string fs_str;
-    int fs=0;
-    if ( profile->doc->LitAttrString( elem, "speed", fs_str) )
-	    fs = atoi( fs_str.c_str());
-    sprite->SetFrameSpeed(fs);
-  }
+    std::string str;
+    // Set the frame speed
+    if ( profile->doc->LitAttrString( elem, "speed", str) )
+      sprite->SetFrameSpeed( atoi(str.c_str()) );
 
-  elem = profile->doc->AccesBalise ( elem_sprite, "animation");
-  if ( elem != NULL )
-  {
-	  std::string pp_str;
-    if ( profile->doc->LitAttrString( elem, "pingpong", pp_str) )
-    if (pp_str == "yes")
-      sprite->animation.SetPingPongMode(true);
+    if ( profile->doc->LitAttrString( elem, "loop_mode", str) )
+    {
+      bool loop_value;
+      if(xmlIsBool(str,loop_value))
+        sprite->animation.SetLoopMode(loop_value);
+      else
+      if(str=="pingpong")
+        sprite->animation.SetPingPongMode(true);
+      else
+        std::cerr << "Unrecognized xml option loop_mode=\"" << str << "\" in resource " << resource_name;
+    }
   }
-
-  elem = profile->doc->AccesBalise ( elem_sprite, "animation");
-  if ( elem != NULL )
-  {
-	  std::string pp_str;
-    if ( profile->doc->LitAttrString( elem, "loop_mode", pp_str) )
-    if (pp_str == "no")
-      sprite->animation.SetLoopMode(false);
-  }
-
   return sprite;
 }
 

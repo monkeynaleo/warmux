@@ -9,15 +9,12 @@
       <grid pos="0,0" size="402,64" array="2,1" />
     </image>
   </sprite>
-
-  
 </section>
 
 <section name="menu">  
 
   <surface name="bg_option" file="menu/img/background_options.png" />
   <surface name="bg_play" file="menu/img/background_play.png" />
-  
 
   <sprite name="valider">
     <image file="menu/img/validate.png">
@@ -70,7 +67,7 @@
   <sprite name="caisse">
     <image file="object/bonus_box.png">
       <grid pos="0,0" size="84,88" array="4,1" />
-      <animation loop="false" speed="1" />
+      <animation loop_mode="false"/>
     </image>
   </sprite>
 </section>

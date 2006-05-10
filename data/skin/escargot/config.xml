@@ -59,7 +59,7 @@
   </image>
   <collision_rect dx="12" top="0" bottom="14" />
   <translation origin="top_left" x="0" y="-1" />
-  <animation pingpong="yes"/>
+  <animation loop_mode="pingpong"/>
 </sprite>
 
 <sprite name="jetpack-left-right">
@@ -68,7 +68,7 @@
   </image>
   <collision_rect dx="12" top="0" bottom="14" />
   <translation origin="top_left" x="0" y="-1" />
-  <animation pingpong="yes"/>
+  <animation loop_mode="pingpong"/>
 </sprite>
 
 <sprite name="dead">
