@@ -112,8 +112,8 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   m_rebound_factor = cfg.rebound_factor;
 
   // Set rectangle test
-  int dx = image->GetWidth()/4-1;
-  int dy = image->GetHeight()/4-1;
+  int dx = image->GetWidth()/2-1;
+  int dy = image->GetHeight()/2-1;
   SetTestRect (dx, dx, dy, dy);
 }
 

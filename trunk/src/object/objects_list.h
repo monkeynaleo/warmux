@@ -32,7 +32,8 @@
   for (ObjectsList::iterator object=lst_objects.Begin(), \
        end=lst_objects.End(); \
        object != end; \
-       ++object)
+       ++object) \
+	if(!object->to_remove)
 
 //-----------------------------------------------------------------------------
 
