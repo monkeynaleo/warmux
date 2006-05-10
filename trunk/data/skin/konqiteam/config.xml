@@ -33,7 +33,7 @@
   <image file="jetpack-fly-move.png">
     <grid size="40,47" array="2,1" />
   </image>
-  <frame speed="50" />
+  <animation speed="50" />
   <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
@@ -47,7 +47,7 @@
     <grid pos="0,0" size="38,46" array="4,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="0" />
-    <wormux repetition="7" />
+  <wormux repetition="7" />
   <hand/>
 </sprite>
 
@@ -55,7 +55,7 @@
   <image file="jetpack-fly-move.png">
     <grid size="40,47" array="2,1" />
   </image>
-  <frame speed="30" />
+  <animation speed="30" />
   <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
@@ -63,7 +63,7 @@
   <image file="jetpack-fly-move.png">
     <grid size="40,47" array="2,1" />
   </image>
-  <frame speed="30" />
+  <animation speed="30" />
   <collision_rect dx="10" top="1" bottom="0" />
 </sprite>
 
@@ -77,7 +77,7 @@
     <grid pos="0,0" size="38,46" array="4,1" />
   </image>
   <collision_rect dx="10" top="1" bottom="0" />
-    <wormux repetition="5" />
+  <wormux repetition="5" />
   <hand/>
 </sprite>
   

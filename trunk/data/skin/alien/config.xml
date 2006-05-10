@@ -40,15 +40,14 @@
   </image>
 
   <collision_rect dx="10" top="1" bottom="3" />
-  <frame speed="50" />
+  <animation speed="50" />
 </sprite>
 
 <sprite name="jetpack-up">
   <image file="alien-jet-fly-move.png">
     <grid size="40,44" array="5,1" />
   </image>
-  <frame speed="100" />
-  <animation pingpong="yes"/>
+  <animation speed="100" loop_mode="pingpong"/>
   <collision_rect dx="10" top="1" bottom="6" />
 </sprite>
 
@@ -56,8 +55,7 @@
   <image file="alien-jet-fly-leftright.png">
     <grid size="40,44" array="3,1" />
   </image>
-  <frame speed="100" />
-  <animation pingpong="yes"/>
+  <animation speed="100" loop_mode="pingpong"/>
   <collision_rect dx="10" top="1" bottom="6" />
 </sprite>
 
@@ -106,7 +104,7 @@
   <image file="noye.png">
     <grid size="42,63" array="10,1" />
   </image>
-  <frame speed="6" />
+  <animation speed="20" />
 </sprite>
 
 </resources>

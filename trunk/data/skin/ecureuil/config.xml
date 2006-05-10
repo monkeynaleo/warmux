@@ -63,8 +63,7 @@
     <grid pos="0,0" size="35,43" array="3,1" />
   </image>
   <collision_rect dx="10" top="3" bottom="4" />
-  <frame speed="100"/>
-  <animation pingpong="yes"/>
+  <animation speed="100" loop_mode="pingpong"/>
 </sprite>
 
 <sprite name="jetpack-left-right">
@@ -72,8 +71,7 @@
     <grid pos="0,0" size="35,40" array="3,1" />
   </image>
   <collision_rect dx="10" top="3" bottom="1" />
-  <frame speed="100"/>
-  <animation pingpong="yes"/>
+  <animation speed="100" loop_mode="pingpong"/>
 </sprite>
 
 <sprite name="dead">

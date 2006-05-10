@@ -54,6 +54,9 @@ const uint ESPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
 
 // Pause for the animation
+#ifdef DEBUG
+#define ANIME_VITE
+#endif
 #ifdef ANIME_VITE
   const uint ANIM_PAUSE_MIN = 100;
   const uint ANIM_PAUSE_MAX = 150;
