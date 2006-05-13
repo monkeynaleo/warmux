@@ -92,13 +92,16 @@ void PhysicalObj::SetXY(const Point2i &position){
     world.ToRedrawOnMap( Rectanglei(position, GetSize()) );
 
   if( IsOutsideWorldXY( position ) )
-      Ghost();
-  else{
-	  Point2d physPos(position.x, position.y);
-	  
-      SetPhysXY( physPos / PIXEL_PER_METER );
-      if( FootsInVacuum() )
-		  StartMoving();
+  {
+    Point2d physPos(position.x, position.y);
+    SetPhysXY( physPos / PIXEL_PER_METER );
+    Ghost();
+  }
+  else
+  {
+    Point2d physPos(position.x, position.y);
+    SetPhysXY( physPos / PIXEL_PER_METER );
+    if( FootsInVacuum() ) StartMoving();
   }
 }
 
