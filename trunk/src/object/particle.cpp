@@ -46,6 +46,11 @@ Particle::Particle() :
   m_last_refresh = Time::GetInstance()->Read();
 }
 
+Particle::~Particle()
+{
+  delete image;
+}
+
 void Particle::Draw()
 {
   if (m_left_time_to_live > 0) 
@@ -199,6 +204,47 @@ void StarParticle::Init()
   SetSize( Point2i(1, 1) );
 }
 
+MagicStarParticle::MagicStarParticle() :
+  Particle()
+{
+  m_name="MagicStarParticle";
+  SetMass(0.5);
+  SetGravityFactor(0.0);
+  m_wind_factor = 0.2;
+  m_initial_time_to_live = 30;
+  m_left_time_to_live = m_initial_time_to_live; 
+  m_time_between_scale = 25;
+}
+
+void MagicStarParticle::Init()
+{
+  Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
+  uint color=randomObj.GetLong(0,2);
+  switch(color)
+  {
+    case 0 : image = resource_manager.LoadSprite(res,"pink_star_particle"); break;
+    case 1 : image = resource_manager.LoadSprite(res,"blue_star_particle"); break;
+    case 2 : image = resource_manager.LoadSprite(res,"yellow_star_particle"); break;
+    default: assert(false);
+  }
+  resource_manager.UnLoadXMLProfile( res);
+//  image->EnableRotationCache(32);
+  image->Scale(0.0, 0.0);
+  SetSize( Point2i(1, 1) );
+}
+
+void MagicStarParticle::Refresh()
+{
+  uint time = Time::GetInstance()->Read() - m_last_refresh; 
+  if (time >= m_time_between_scale) {
+    if (m_left_time_to_live <= 0) return ;
+    float lived_time = m_initial_time_to_live - m_left_time_to_live;
+    float coeff = sin((M_PI/2.0)*((float)lived_time/((float)m_initial_time_to_live)));
+    image->SetRotation_deg(coeff * 360.0);
+  }
+  Particle::Refresh();
+}
+
 ExplosiveWeaponConfig fire_cfg;
 
 FireParticle::FireParticle() :
@@ -278,6 +324,8 @@ void ParticleEngine::AddNow(const Point2i &position,
     case particle_FIRE : particle = new FireParticle();
       break;
     case particle_STAR : particle = new StarParticle();
+      break;
+    case particle_MAGIC_STAR : particle = new MagicStarParticle();
       break;
     default : particle = NULL;
       break;

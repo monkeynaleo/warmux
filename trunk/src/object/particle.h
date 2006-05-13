@@ -31,7 +31,8 @@
 typedef enum { 
   particle_SMOKE,
   particle_FIRE,
-  particle_STAR
+  particle_STAR,
+  particle_MAGIC_STAR
 } particle_t;
 
 class Particle : public PhysicalObj
@@ -47,6 +48,7 @@ class Particle : public PhysicalObj
    
  public:
   Particle();
+  ~Particle();
   virtual void Init()=0;
   virtual void Draw();
   virtual void Refresh();
@@ -76,6 +78,14 @@ class StarParticle : public Particle
  public:
   StarParticle();
   void Init();
+};
+
+class MagicStarParticle: public Particle
+{
+ public:
+  MagicStarParticle();
+  void Init();
+  void Refresh();
 };
 
 class FireParticle : public Particle
