@@ -39,6 +39,7 @@ protected:
 public:
   HollyGrenade(ExplosiveWeaponConfig& cfg);
   void Refresh();
+  void Explosion();
 protected:
   void SignalCollision();
 };

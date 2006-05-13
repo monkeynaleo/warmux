@@ -41,12 +41,44 @@ HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg) :
   sing_alleluia = false;
 }
 
+void HollyGrenade::Explosion()
+{
+  const uint star_nbr = 9;
+  const float cos_angle[] = {1.000000, 0.766044, 0.173648, -0.500000, -0.939693, -0.939693, -0.500000, 0.173648, 0.766044};
+  const float sin_angle[] = {0.000000, 0.642788, 0.984808, 0.866025, 0.342020, -0.342020, -0.866025, -0.984808, -0.642788};
+
+  for(uint i=0;i < star_nbr;i++)
+  {
+    double angle = 2.0*(double)i*M_PI/(double)star_nbr;
+    //  cos_angle[i] = cos(angle);
+    //  sin_angle[i] = sin(angle);
+    smoke_engine.AddNow(Point2i(GetX()+(int)(cos_angle[i]*(float)cfg.explosion_range),
+                                GetY()+(int)(sin_angle[i]*(float)cfg.explosion_range)),
+                                1,particle_MAGIC_STAR,false,angle,2.5);
+  }
+  WeaponProjectile::Explosion();
+}
+
 void HollyGrenade::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  smoke_engine.AddPeriodic(GetPosition(), particle_SMOKE, false);
-  
+#ifdef HAVE_A_REALLY_BIG_CPU
+  if(IsMoving())
+  {
+    double norme,angle;
+    GetSpeed(norme,angle);
+    for(int i = -3; i<4 ; i++)
+      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,angle+(i*M_PI_4/3.0)+M_PI_2,2.0);
+  }
+  else
+  {
+      smoke_engine.AddNow(GetPosition(), 1,particle_MAGIC_STAR, false,((float)(Time::GetInstance()->Read()%500)-250.0) * M_PI / 250.0,3.0);
+  }
+#else //  :-P
+  smoke_engine.AddPeriodic(GetPosition(), particle_MAGIC_STAR, false);
+#endif //HAVE_A_REALLY_BIG_CPU
+
   double tmp = Time::GetInstance()->Read() - begin_time;
   // Sing Alleluia ;-)
   if (tmp > (1000 * cfg.timeout - 2000) && !sing_alleluia) {
@@ -60,7 +92,7 @@ void HollyGrenade::Refresh()
 }
 
 void HollyGrenade::SignalCollision()
-{   
+{
   if (IsGhost())
   {
     GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
