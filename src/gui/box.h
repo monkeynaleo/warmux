@@ -30,7 +30,6 @@ class Box : public Widget
 {
  protected:
   std::list<Widget *> widgets;
-  Widget * last_widget;
   bool visible;
   uint margin;
   Point2i border;
