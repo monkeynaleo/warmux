@@ -78,7 +78,6 @@ GameMenu::GameMenu() :
   buttons_tmp_box->AddWidget(space_for_logo);
 
   tmp_box->AddWidget(buttons_tmp_box);
-  
   lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 )); 
   lbox_selected_teams->always_one_selected = false;
   tmp_box->AddWidget(lbox_selected_teams);
@@ -99,7 +98,6 @@ GameMenu::GameMenu() :
   map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
   map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
   map_box->AddWidget(tmp_box);
-
   // Values initialization
 
   // Load Maps' list
@@ -137,13 +135,6 @@ GameMenu::GameMenu() :
 
 GameMenu::~GameMenu()
 {
-  delete bt_remove_team;
-  delete bt_add_team;
-  delete lbox_maps;
-  delete map_preview;
-  delete lbox_all_teams;
-  delete space_for_logo;
-  delete lbox_selected_teams;
   delete map_box;
   delete team_box;
 }
