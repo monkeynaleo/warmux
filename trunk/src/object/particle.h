@@ -35,6 +35,9 @@ typedef enum {
   particle_MAGIC_STAR
 } particle_t;
 
+enum particle_spr{ SMOKE_spr, EXPLOSION_SMOKE_spr, FIRE_spr, STAR_spr, MAGIC_STAR_R_spr, MAGIC_STAR_Y_spr, MAGIC_STAR_B_spr };
+const int particle_spr_nbr = 7;
+
 class Particle : public PhysicalObj
 {
  protected:
@@ -107,6 +110,7 @@ class ParticleEngine
   uint m_last_refresh;
   uint m_time_between_add;
 
+  static Sprite* particle_sprite[particle_spr_nbr];
   static std::list<drawed_particle_t> lst_particles;
 
   static void AddLittleESmoke(const Point2i &pos, const uint &radius);
@@ -118,6 +122,10 @@ class ParticleEngine
 		   particle_t type,
 		   bool upper,
 		   double angle=-1, double norme=-1);
+
+  static void Init();
+  static void FreeMem();
+  static Sprite* GetSprite(particle_spr type);
 
   static void AddNow(const Point2i &position, 
 		     uint nb_particles, particle_t type,
