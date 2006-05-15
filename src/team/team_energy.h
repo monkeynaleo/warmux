@@ -21,7 +21,7 @@
 
 #ifndef ENERGIE_EQUIPE_H
 #define ENERGIE_EQUIPE_H
- 
+
 #include "../graphic/text.h"
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
@@ -52,16 +52,17 @@ class TeamEnergy
 
     uint classement; //0 = première position au classement
     uint nv_classement;
-    
+
     std::string nom;
 
     uint tps_debut_mvt;
-  
+
   public :
     uint classement_tmp;
     uint status;
-    
+
     TeamEnergy();
+    ~TeamEnergy();
     void Init();
     void ChoisitNom(const std::string &nom_equipe);
     void Refresh();
@@ -71,7 +72,7 @@ class TeamEnergy
     void FixeValeur(uint energie); //(sans animation)
     void FixeMax(uint energie); //Choisit la valeur maximale de la jauge
     void NouvelleValeur(uint nv_energie); //(avec animation)
-    
+
     void FixeClassement(uint classem); //(sans animation)
     void NouveauClassement(uint nv_classem); //(avec animation)
 
