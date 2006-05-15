@@ -69,9 +69,14 @@ void TeamEnergy :: Init ()
     bar_text = new Text("");
 }
 
+TeamEnergy :: ~TeamEnergy ()
+{
+  delete bar_text;
+}
+
 void TeamEnergy :: ChoisitNom (const std::string &nom_equipe)
-{ 
-  nom = nom_equipe; 
+{
+  nom = nom_equipe;
 }
 
 void TeamEnergy :: Refresh ()
@@ -128,14 +133,14 @@ void TeamEnergy :: Draw ()
   }
 
   Color color( (unsigned char)r, (unsigned char)v, (unsigned char)b, ALPHA);
-  
+
   barre_energie.SetValueColor( color );
-   
+
   int x,y;
   x = camera.GetSizeX() - (BARRE_LARG + 10) + dx;
   y = BARRE_HAUT +(classement * (BARRE_HAUT + ESPACEMENT)) +dy;
   barre_energie.DrawXY( Point2i(x, y) );
-  
+
   std::ostringstream ss;
   ss << nom << "/" << valeur;
   x = camera.GetSizeX() - ((BARRE_LARG/2) + 10) + dx;
@@ -183,7 +188,7 @@ void TeamEnergy::Mouvement ()
     status = EnergieStatusAttend;
     return;
   }
-  
+
   if( classement == nv_classement && !EstEnMouvement())
   {
     //D'autres jauges sont en train de changer de classement
@@ -197,16 +202,16 @@ void TeamEnergy::Mouvement ()
   {
     if(tps_debut_mvt == 0)
       tps_debut_mvt = global_time->Read();
-    
+
     dy = (int)(( (BARRE_HAUT+ESPACEMENT) * ((float)nv_classement - classement))
              * ((global_time->Read() - tps_debut_mvt) / DUREE_MVT));
-    
-    // Déplacement en arc de cercle seulement quand la jauge descend 
+
+    // Déplacement en arc de cercle seulement quand la jauge descend
     // dans le classement
     if( nv_classement > classement )
       dx = (int)(( 3.0 * (BARRE_HAUT+ESPACEMENT) * ((float)classement - nv_classement))
              * sin( M_PI * ((global_time->Read() - tps_debut_mvt) /DUREE_MVT)));
-    
+
     //Mouvement terminé?
     if( (global_time->Read() - tps_debut_mvt) > DUREE_MVT )
     {
