@@ -39,25 +39,52 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #endif
-
-
 const std::string NOMFICH_CONFIG = "config.xml";
 //-----------------------------------------------------------------------------
 typedef std::map<std::string, Skin>::value_type paire_avatar;
 std::map<std::string, Skin> skins_list;
 //-----------------------------------------------------------------------------
-CfgSkin::CfgSkin() { Reset(); }
-CfgSkin::~CfgSkin() { Reset(); }
+CfgSkin::CfgSkin() { image = NULL; test_bottom = 0;
+    test_top = 0;
+      test_dx = 0;
+     /* Reset();*/ }
+
+CfgSkin::CfgSkin(const CfgSkin &a_CfgSkin)
+{
+  if(a_CfgSkin.image)
+  {
+    image = new Sprite(*a_CfgSkin.image);
+  }
+  else
+    image = NULL;
+  test_bottom = a_CfgSkin.test_bottom;
+  test_top = a_CfgSkin.test_top;
+  test_dx = a_CfgSkin.test_dx;
+}
+
+
+CfgSkin::~CfgSkin()
+{
+  if(image)
+  {
+    delete image;
+    image = NULL;
+  }
+}
+
 void CfgSkin::Reset()
 {
-  image = new Sprite();
+  if(image)
+    delete image;
+
   test_bottom = 0;
   test_top = 0;
   test_dx = 0;
 }
+
 //-----------------------------------------------------------------------------
-CfgSkin_Walking::CfgSkin_Walking() 
-{ 
+CfgSkin_Walking::CfgSkin_Walking()
+{
    Reset();
 }
 
@@ -69,7 +96,7 @@ void CfgSkin_Walking::Reset()
   full_walk = false;
 }
 //-----------------------------------------------------------------------------
-CfgSkin_Anim::CfgSkin_Anim() { Reset(); }
+CfgSkin_Anim::CfgSkin_Anim() { image = NULL; Reset(); }
 void CfgSkin_Anim::Reset()
 {
   utilise = false;
@@ -87,7 +114,7 @@ void Skin::Reset()
 {
   many_walking_skins.clear();
   many_skins.clear();
-  anim.Reset();
+ // anim.Reset();
   anim.utilise = false;
   anim.vitesse = 100;
 }
@@ -109,7 +136,7 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
     if (!doc.Charge (nomfich)) {
        return false;
     }
-    
+
     LoadManySkins(doc.racine(),res);
 
   }
@@ -125,12 +152,14 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
 
 //-----------------------------------------------------------------------------
 
-void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {   
-  many_skins.clear();
+void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
+  assert(root);
+  assert(res);
+  //many_skins.clear();
   anim.utilise = false;
 
   xmlpp::Node::NodeList nodes = root -> get_children("sprite");
-  xmlpp::Node::NodeList::iterator 
+  xmlpp::Node::NodeList::iterator
   it=nodes.begin(),
   end=nodes.end();
 
@@ -142,9 +171,11 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
     if (!LitDocXml::LitAttrString(elem, "name", skin_name)) {
        continue;
     }
+    xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
+
     if (skin_name=="animation") {
     // <animation>
-      xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
+      //xml_config = LitDocXml::Access (root, "sprite", skin_name);
       anim.utilise = true;
       anim.image = resource_manager.LoadSprite( res, skin_name);
       anim.image->Start();
@@ -154,10 +185,10 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
     }
 
     xmlpp::Node::NodeList nodes = elem -> get_children("hand");
-    if(nodes.end()==nodes.begin())
+    if(nodes.empty())
     {
       CfgSkin config;
-      xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
+      //xml_config = LitDocXml::Access (root, "sprite", skin_name);
       Xml_LitRectTest(xml_config,config);
       config.image = resource_manager.LoadSprite( res, skin_name);
       config.image->EnableFlippingCache();
@@ -166,7 +197,7 @@ void Skin::LoadManySkins(xmlpp::Element *root, Profile *res) {
     else
     {
       CfgSkin_Walking config;
-      xmlpp::Element *xml_config = LitDocXml::Access (root, "sprite", skin_name);
+      //xml_config = LitDocXml::Access (root, "sprite", skin_name);
       Xml_LitRectTest(xml_config,config);
       config.image = resource_manager.LoadSprite( res, skin_name);
       config.image->EnableFlippingCache();
@@ -208,7 +239,7 @@ void Skin::Xml_ReadHandPosition(xmlpp::Element *root, CfgSkin_Walking &config) {
   config.hand_position.assign (n, pos);
 
   xmlpp::Node::NodeList nodes = root -> get_children("hand");
-  xmlpp::Node::NodeList::iterator 
+  xmlpp::Node::NodeList::iterator
     it=nodes.begin(),
     end=nodes.end();
 
@@ -223,7 +254,7 @@ void Skin::Xml_ReadHandPosition(xmlpp::Element *root, CfgSkin_Walking &config) {
     if (!LitDocXml::LitAttrString(elem, "frame", frame_str)) continue;
 
     if (frame_str == "*") {
-      config.hand_position.assign (n, pos);	
+      config.hand_position.assign (n, pos);
     } else {
       int frame;
       if (!str2int (frame_str, frame)) continue;
@@ -244,13 +275,13 @@ bool Skin::GetXmlConfig (xmlpp::Element *xml, CfgSkin_Walking &config)
     // <walking><wormux repetition="xxx">
     xmlpp::Element *animation = LitDocXml::AccesBalise (xml, "wormux");
     if (animation != NULL) {
-      LitDocXml::LitAttrUint (animation, "repetition", 
+      LitDocXml::LitAttrUint (animation, "repetition",
 			      config.repetition_frame);
     }
 
     Xml_ReadHandPosition(xml,config);
   }
-  
+
   return true;
 }
 
@@ -287,10 +318,10 @@ void LoadOneSkin (const std::string &dir, const std::string &file)
 //-----------------------------------------------------------------------------
 
 void InitSkins()
-{  
+{
   std::cout << "o " << _("Load skins:");
   std::cout.flush();
-   
+
   std::string dirname = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "skin" + PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
   struct dirent *file;
@@ -300,7 +331,7 @@ void InitSkins()
       LoadOneSkin(dirname, file->d_name);
     closedir (dir);
   } else {
-	  Error (Format(_("Unable to open skins directory (%s)!"), 
+	  Error (Format(_("Unable to open skins directory (%s)!"),
 				     dirname.c_str()));
   }
 #else
@@ -316,12 +347,12 @@ void InitSkins()
 	    LoadOneSkin(dirname,file.cFileName);
 	}
   } else {
-	  Error (Format(_("Unable to open skins directory (%s)!"), 
+	  Error (Format(_("Unable to open skins directory (%s)!"),
 				     dirname.c_str()));
   }
   FindClose(file_search);
 #endif
-   
+
 #if !defined(WIN32) || defined(__MINGW32__)
   dirname = Config::GetInstance()->GetPersonalDir() + PATH_SEPARATOR + "skin" + PATH_SEPARATOR;
   dir = opendir(dirname.c_str());

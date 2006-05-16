@@ -48,6 +48,7 @@ public:
 public:
   CfgSkin();
   ~CfgSkin();
+  CfgSkin(const CfgSkin &a_CfgSkin);
   void Reset();
 };
 
@@ -110,7 +111,7 @@ protected:
   bool GetXmlConfig (xmlpp::Element *xml, CfgSkin_Walking &config);
   void Xml_LitRectTest (xmlpp::Element *elem, CfgSkin &config);
   void Xml_ReadHandPosition(xmlpp::Element *elem, CfgSkin_Walking &config);
-  void LoadManySkins(xmlpp::Element *elem, Profile *res);   
+  void LoadManySkins(xmlpp::Element *elem, Profile *res);
 };
 
 //-----------------------------------------------------------------------------
