@@ -69,7 +69,7 @@ void JukeBox::Init()
     return;
   } 
   
-  int audio_buffer = 4096;
+  int audio_buffer = 1024;
 
   /* Open the audio device */
   if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, audio_buffer) < 0) {
