@@ -247,6 +247,7 @@ void GameLoop::InitData()
   fps.Reset();
   Interface::GetInstance()->Reset();
   GameMessages::GetInstance()->Reset();
+  ParticleEngine::Init();
 }
 
 void GameLoop::Init ()
