@@ -35,7 +35,7 @@ public:
   {
     Text * text;
     uint time;
-    message_t (Text * t, Text * t2, uint _time) { text = t; time = _time; }
+    message_t (Text * t, uint _time) { text = t; time = _time; }
   } message_t;
   std::list<message_t> liste;
   typedef std::list<message_t>::iterator iterator;
