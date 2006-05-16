@@ -90,9 +90,8 @@ void GameMessages::Add(const std::string &message){
 
   // Ajoute le message à la liste (avec son heure d'arrivée)
   Text * tmp = new Text(message, white_color, Font::GetInstance(Font::FONT_SMALL));
-  Text * tmp2 = new Text(message, black_color, Font::GetInstance(Font::FONT_SMALL));
 
-  liste.push_back (message_t(tmp, tmp2, Time::GetInstance()->Read()));
+  liste.push_back (message_t(tmp, Time::GetInstance()->Read()));
 
   while( NBR_MSG_MAX < liste.size() )
     liste.pop_front();
