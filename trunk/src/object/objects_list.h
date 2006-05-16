@@ -60,6 +60,7 @@ private:
 
 public:
   void Init();
+  ~ObjectsList();
 
   // Ajoute un objet à la liste
   void AddObject (PhysicalObj* obj);
