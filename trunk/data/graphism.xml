@@ -82,6 +82,7 @@
   <surface name="button5_icon" file="interface/button5.png"/>
   <surface name="weapon_box_button" file="interface/Grey-Button.png"/>
   <surface name="fond_compteur" file="interface/compteur.png"/>
+  <surface name="pause_screen" file="interface/pause.png"/>
 </section>
 
 <section name ="mouse">

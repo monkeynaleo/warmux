@@ -29,6 +29,7 @@
 #include "game_mode.h"
 #include "../graphic/video.h"
 #include "../graphic/fps.h"
+#include "../include/app.h"
 #include "../interface/cursor.h"
 #include "../interface/keyboard.h"
 #include "../interface/game_msg.h"
@@ -39,6 +40,7 @@
 #include "../team/macro.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
+#include "../tool/resource_manager.h"
 #include "../weapon/weapons_list.h"
 
 Game * Game::singleton = NULL;
@@ -206,7 +208,7 @@ int Game::AskQuestion (bool draw)
 
   if (draw) 
     GameLoop::GetInstance()->Draw ();
-  
+
   int answer = question.AskQuestion ();
 
   global_time->Continue(); 
@@ -287,8 +289,20 @@ void Game::Start()
 void Game::Pause()
 {
   jukebox.Pause();
-  question.Set (_("Pause"), true, 0);
-  AskQuestion();
+
+  //Pause screen
+  Profile* xml_profile = resource_manager.LoadXMLProfile("graphism.xml",false);
+  Sprite* pause_screen = new Sprite(resource_manager.LoadImage(xml_profile, "interface/pause_screen"));
+  resource_manager.UnLoadXMLProfile( xml_profile );
+  pause_screen->cache.EnableLastFrameCache();
+  AppWormux* app = AppWormux::GetInstance();
+  pause_screen->ScaleSize(app->video.window.GetSize());
+  pause_screen->Blit( app->video.window, 0, 0);
+  app->video.Flip();
+  delete pause_screen;
+
+  question.Set (_("Press a key to continue."), true, 0);
+  AskQuestion(false);
   jukebox.Resume();
 }
 
