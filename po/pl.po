@@ -15,22 +15,22 @@ msgstr ""
 "Plural-Forms: nplurals=3;    plural=n==1 ? 0 :    n%10>=2 && n%10<=4 && (n%"
 "100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: src/game/game.cpp:143 src/game/game.cpp:183
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:141 src/game/game.cpp:181
+#: src/game/game.cpp:142 src/game/game.cpp:182
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:142 src/game/game.cpp:182
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:140 src/game/game.cpp:180
+#: src/game/game.cpp:141 src/game/game.cpp:181
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
@@ -40,7 +40,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nie odnaleziona :-("
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:726
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (drużyna %s) umarł."
@@ -55,7 +55,7 @@ msgstr "%s <%s> aka %s z %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> z %s"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s popełnił samobójstwo !"
@@ -65,17 +65,17 @@ msgstr "%s popełnił samobójstwo !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:691
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s wpadł do wody."
 
-#: src/game/game_loop.cpp:702
+#: src/game/game_loop.cpp:708
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s wyleciał poza mapę!"
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:156
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
@@ -83,7 +83,7 @@ msgstr[0] "%s stracił %u punkt energii."
 msgstr[1] "%s stracił %u punkty energii."
 msgstr[2] "%s stracił %u punktów energii."
 
-#: src/object/bonus_box.cpp:146
+#: src/object/bonus_box.cpp:147
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -91,12 +91,12 @@ msgstr[0] "%s zyskał %u punkt energii!"
 msgstr[1] "%s zyskał %u punkty energii!"
 msgstr[2] "%s zyskał %u punktów energii!"
 
-#: src/game/game_loop.cpp:713
+#: src/game/game_loop.cpp:719
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s jest psychopatą, zabił członka drużyny %s !"
 
-#: src/game/game_loop.cpp:708
+#: src/game/game_loop.cpp:714
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s nieżyje przez swoją niezdarność!"
@@ -106,7 +106,7 @@ msgstr "%s nieżyje przez swoją niezdarność!"
 msgid "%s is next to a mine!"
 msgstr "%s jest blisko miny!"
 
-#: src/object/bonus_box.cpp:173
+#: src/object/bonus_box.cpp:174
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -114,7 +114,7 @@ msgstr[0] "Drużyna %s zyskała %u automatyczną wyrzutnię rakiet!"
 msgstr[1] "Drużyna %s zyskała %u automatyczne wyrzutnie rakiet!"
 msgstr[2] "Drużyna %s zyskała %u automatycznych wyrzutni rakiet!"
 
-#: src/object/bonus_box.cpp:183
+#: src/object/bonus_box.cpp:184
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
@@ -122,7 +122,7 @@ msgstr[0] "Drużyna %s zyskała %u laskę dynamitu!"
 msgstr[1] "Drużyna %s zyskała %u laski dynamitu!"
 msgstr[2] "Drużyna %s zyskała %u lasek dynamitu!"
 
-#: src/object/bonus_box.cpp:137
+#: src/object/bonus_box.cpp:138
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -130,12 +130,12 @@ msgstr[0] "Drużyna %s zyskała %u teleportację."
 msgstr[1] "Drużyna %s zyskała %u teleportacje."
 msgstr[2] "Drużyna %s zyskała %u teleportacji."
 
-#: src/game/game.cpp:189
+#: src/game/game.cpp:190
 #, fuzzy, c-format
 msgid "%s team has won.\n"
 msgstr "Drużyna %s wygrała."
 
-#: src/object/bonus_box.cpp:164
+#: src/object/bonus_box.cpp:165
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -155,11 +155,11 @@ msgstr "(nieograniczony)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr "<infinite_background> wymaga odpowiednio ustawionego <is_open>!!"
 
-#: src/object/bonus_box.cpp:168 src/weapon/air_attack.cpp:206
+#: src/object/bonus_box.cpp:169 src/weapon/air_attack.cpp:207
 msgid "Air attack"
 msgstr "Atak powietrzny"
 
-#: src/game/game.cpp:179
+#: src/game/game.cpp:180
 msgid "All-Team results:\n"
 msgstr ""
 
@@ -167,7 +167,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autorzy:"
 
-#: src/object/bonus_box.cpp:177 src/weapon/auto_bazooka.cpp:117
+#: src/object/bonus_box.cpp:178 src/weapon/auto_bazooka.cpp:118
 msgid "Automatic bazooka"
 msgstr "Automatyczna wyrzutnia rakiet"
 
@@ -175,7 +175,7 @@ msgstr "Automatyczna wyrzutnia rakiet"
 msgid "Baseball"
 msgstr "Pałka"
 
-#: src/weapon/bazooka.cpp:63
+#: src/weapon/bazooka.cpp:64
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -193,7 +193,7 @@ msgstr "Nie mogę znaleźć drużyny %s!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nie mogę otworzyć katalogu drużyn (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:141
+#: src/weapon/cluster_bomb.cpp:142
 msgid "ClusterBomb"
 msgstr "Bomba rozpryskowa"
 
@@ -217,7 +217,7 @@ msgstr "Wyświetlać imiona graczy?"
 msgid "Display wind particles?"
 msgstr "Wyświetlać cząsteczki wiatru?"
 
-#: src/game/game.cpp:237
+#: src/game/game.cpp:238
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Naprawdę chcesz wyjść (T/N) ?"
 
@@ -229,11 +229,11 @@ msgstr "Czas kolejki:"
 msgid "Duration of the end of a turn:"
 msgstr "Czas do zakończenia rundy:"
 
-#: src/object/bonus_box.cpp:187 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:188 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:186
 #, fuzzy
 msgid "End of the game!\n"
 msgstr "Koniec gry !\n"
@@ -257,13 +257,13 @@ msgstr "Błąd w %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Błąd podczas ładowania drużyny %s:"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:248
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Błąd podczas ładowania trybu gry %s (plik %s):"
 
-#: src/game/config.cpp:129
+#: src/game/config.cpp:128
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Błąd podczas ładowania trybu gry %s (plik %s):"
@@ -273,7 +273,7 @@ msgstr "Błąd podczas ładowania trybu gry %s (plik %s):"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Błąd podczas ładowania trybu gry %s (plik %s):"
 
-#: src/game/game.cpp:277
+#: src/game/game.cpp:280
 #, c-format
 msgid ""
 "Error:\n"
@@ -348,7 +348,7 @@ msgstr "Inicjalizacja drużyn"
 msgid "Initialise teams"
 msgstr "Inicjalizacja drużyn"
 
-#: src/object/bonus_box.cpp:233
+#: src/object/bonus_box.cpp:234
 msgid "Is it a gift ?"
 msgstr ""
 
@@ -393,12 +393,12 @@ msgstr "Nazwa:"
 msgid "Network Game"
 msgstr "Gra sieciowa"
 
-#: src/weapon/weapon.cpp:480
+#: src/weapon/weapon.cpp:510
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Element <%s> nie został odnaleziony w pliku konfiguracyjnym xml!"
 
-#: src/game/game.cpp:85
+#: src/game/game.cpp:86
 msgid "Nobody"
 msgstr ""
 
@@ -410,7 +410,7 @@ msgstr "Liczba graczy w drużynie:"
 msgid "Options"
 msgstr "Opcje"
 
-#: src/game/game.cpp:287
+#: src/game/game.cpp:290
 msgid "Pause"
 msgstr "Pauza"
 
@@ -450,7 +450,7 @@ msgstr "Efekty dźwiękowe?"
 msgid "Sound options"
 msgstr "Opcje dźwiękowe"
 
-#: src/game/game.cpp:79
+#: src/game/game.cpp:80
 msgid "Starting a new game"
 msgstr "Uruchamianie nowej gry"
 
@@ -458,25 +458,25 @@ msgstr "Uruchamianie nowej gry"
 msgid "Stock:"
 msgstr "Stan:"
 
-#: src/game/game.cpp:139
+#: src/game/game.cpp:140
 #, c-format
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:142 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportacja"
 
-#: src/weapon/auto_bazooka.cpp:100
+#: src/weapon/auto_bazooka.cpp:101
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automatyczna rakieta opuściła pole bitwy..."
 
-#: src/game/game.cpp:193
+#: src/game/game.cpp:194
 #, fuzzy
 msgid "The game has ended as a draw.\n"
 msgstr "Gra zakończona remisem."
 
-#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:66
+#: src/weapon/bazooka.cpp:54 src/weapon/cluster_bomb.cpp:67
 msgid "The rocket left the battlefield..."
 msgstr "Rakieta opuściła pole bitwy..."
 
@@ -540,7 +540,7 @@ msgstr "Broń:"
 msgid "Website: "
 msgstr "Strona domowa: "
 
-#: src/game/game_loop.cpp:716
+#: src/game/game_loop.cpp:722
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Co za wstyd dla %s - został zabity zwykłym pistoletem!"
@@ -570,7 +570,7 @@ msgstr "Musisz mieć co najmniej dwie drużyny by grać. Zmień to w opcjach !"
 msgid "You need at least two valid teams !"
 msgstr "Musisz ustawić przynajmniej dwie drużyny !"
 
-#: src/weapon/launcher.cpp:53
+#: src/weapon/launcher.cpp:54
 msgid "Your shot has missed!"
 msgstr "Spudłowałeś!"
 
