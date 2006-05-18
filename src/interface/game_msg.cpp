@@ -25,6 +25,7 @@
 #include "../graphic/video.h"
 #include "../graphic/font.h"
 #include "../include/app.h"
+#include "game_msg.h"
 
 // Hauteur de la police de caractere "mini"
 #define HAUT_POLICE_MINI 12 // pixels
@@ -33,7 +34,7 @@
 #define INTERLIGNE_MINI 3 // pixels
 
 // Duree de vie d'un message
-#define DUREE_VIE_MSG 7000 // ms  
+#define DUREE_VIE_MSG 7000 // ms
 
 const uint NBR_MSG_MAX = 14;
 
@@ -57,29 +58,24 @@ void GameMessages::Reset(){
 void GameMessages::Draw(){
   // Affichage des messages
   uint msgy = 50;
-  
+
   for( iterator i=liste.begin(); i != liste.end(); ++i ){
-    i -> text->DrawCenterTop(AppWormux::GetInstance()->video.window.GetWidth()/2, msgy);
-    
+    (*i)->DrawCenterTop(AppWormux::GetInstance()->video.window.GetWidth()/2, msgy);
     msgy += HAUT_POLICE_MINI + INTERLIGNE_MINI;
   }
 }
 
 // Actualisation : Supprime les anciens messages
 void GameMessages::Refresh(){
-  bool fin;
-  iterator i, actuel;
-  
+  iterator i;
   for( i=liste.begin(); i != liste.end(); ){
-    actuel = i;
-    ++i;
-    if( DUREE_VIE_MSG < Time::GetInstance()->Read() - actuel -> time ){
-      fin = (i == liste.end());
-      delete (actuel->text);
-      liste.erase (actuel);
-      if( fin )
-        break;
+    Message * msg = *i;
+    if( DUREE_VIE_MSG < Time::GetInstance()->Read() - msg->get_time() ){
+      delete (msg);
+      i = liste.erase (i);
     }
+    else
+      i++;
   }
 }
 
@@ -89,10 +85,8 @@ void GameMessages::Add(const std::string &message){
   std::cout << "o MSG: " << message << std::endl;
 
   // Ajoute le message à la liste (avec son heure d'arrivée)
-  Text * tmp = new Text(message, white_color, Font::GetInstance(Font::FONT_SMALL));
-
-  liste.push_back (message_t(tmp, Time::GetInstance()->Read()));
-
+  Message * newMessage = new Message(message, white_color, Font::GetInstance(Font::FONT_SMALL), Time::GetInstance()->Read());
+  liste.push_back (newMessage);
   while( NBR_MSG_MAX < liste.size() )
     liste.pop_front();
 }

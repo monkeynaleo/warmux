@@ -28,27 +28,33 @@
 #include <list>
 //-----------------------------------------------------------------------------
 
+
+class Message : public Text
+{
+  public:
+    Message(const std::string &new_txt,
+            const Color &new_color, Font* new_font,
+            uint _time) :
+      Text(new_txt, new_color, new_font),
+      time(_time) {};
+    inline uint get_time()
+    { return time; }
+  private:
+    uint time;
+};
+
 class GameMessages
 {
 public:
-  typedef struct message_t
-  {
-    Text * text;
-    uint time;
-    message_t (Text * t, uint _time) { text = t; time = _time; }
-  } message_t;
-  std::list<message_t> liste;
-  typedef std::list<message_t>::iterator iterator;
-
- private:
-  static GameMessages * singleton;
+  std::list<Message *> liste;
+  typedef std::list<Message *>::iterator iterator;
 
  public:
   static GameMessages * GetInstance();
 
   // Remise a zéro
   void Reset();
-  
+
   // Affiche tous les messages
   void Draw();
 
@@ -60,6 +66,7 @@ public:
   void Add(const std::string &message);
 
  private:
+  static GameMessages * singleton;
   GameMessages();
 };
 
