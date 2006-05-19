@@ -33,8 +33,8 @@
 // Interligne police "mini" (pour les messages)
 #define INTERLIGNE_MINI 3 // pixels
 
-// Duree de vie d'un message
-#define DUREE_VIE_MSG 7000 // ms
+// Lifespan of messages
+#define MSG_LIFESPAN 7000 // ms
 
 const uint NBR_MSG_MAX = 14;
 
@@ -50,13 +50,19 @@ GameMessages * GameMessages::GetInstance() {
 GameMessages::GameMessages() {
 }
 
-// Remise a zéro
+// Clean up the message list
 void GameMessages::Reset(){
+  iterator i;
+  for( i=liste.begin(); i != liste.end(); ){
+    Message * msg = *i;
+    assert(msg); /* the message must be valid if nothing went wrong */
+    delete (msg);
+  }
   liste.clear();
 }
 
 void GameMessages::Draw(){
-  // Affichage des messages
+  // Display messages
   uint msgy = 50;
 
   for( iterator i=liste.begin(); i != liste.end(); ++i ){
@@ -65,29 +71,35 @@ void GameMessages::Draw(){
   }
 }
 
-// Actualisation : Supprime les anciens messages
+// Erase messages older than MSG_LIFESPAN
 void GameMessages::Refresh(){
   iterator i;
   for( i=liste.begin(); i != liste.end(); ){
     Message * msg = *i;
-    if( DUREE_VIE_MSG < Time::GetInstance()->Read() - msg->get_time() ){
+    if( MSG_LIFESPAN < Time::GetInstance()->Read() - msg->get_time() ){
       delete (msg);
+      /* erase method return the next element */
       i = liste.erase (i);
     }
-    else
+    else /* nothing was removed, take next */
       i++;
   }
 }
 
-// Ajoute un message
+// Add a message to the end of a the list of messages
 void GameMessages::Add(const std::string &message){
-  // Affiche le message dans la console
+  // Debug message
   std::cout << "o MSG: " << message << std::endl;
-
-  // Ajoute le message à la liste (avec son heure d'arrivée)
+  // Add message at the end of the list
   Message * newMessage = new Message(message, white_color, Font::GetInstance(Font::FONT_SMALL), Time::GetInstance()->Read());
   liste.push_back (newMessage);
-  while( NBR_MSG_MAX < liste.size() )
+
+  /* if there are too many messages, remove some of them */
+  while( NBR_MSG_MAX < liste.size()) {
+    Message * msg = liste.front();
+    assert(msg); /* the message must be valid if nothing went wrong */
     liste.pop_front();
+    delete msg;
+  }
 }
 

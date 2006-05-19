@@ -28,7 +28,11 @@
 #include <list>
 //-----------------------------------------------------------------------------
 
-
+/*
+ * Class Message
+ * derivated from Text
+ * Stores a Text and a date (typically the date of creation of the message)
+ */
 class Message : public Text
 {
   public:
@@ -42,30 +46,34 @@ class Message : public Text
   private:
     uint time;
 };
-
+/*
+ * class GameMessages
+ * stores and displays messages on the screen
+ *
+ * use
+ * void Add(const std::string &message)
+ * to add a message
+ */
 class GameMessages
 {
-public:
-  std::list<Message *> liste;
-  typedef std::list<Message *>::iterator iterator;
-
  public:
   static GameMessages * GetInstance();
 
-  // Remise a zéro
+  // remove all messages
   void Reset();
 
-  // Affiche tous les messages
+  // display all messages in list
   void Draw();
 
-  // Actualisation : Supprime les anciens messages
+  // Remove too old messages
   void Refresh();
 
-  // Ajoute un message
-  // [titre] message
+  // Add a message
   void Add(const std::string &message);
 
  private:
+  std::list<Message *> liste;
+  typedef std::list<Message *>::iterator iterator;
   static GameMessages * singleton;
   GameMessages();
 };
