@@ -41,7 +41,7 @@ const uint FORCE_Y_MAX = 40;
 const double OBUS_SPEED = 7 ;
 
 Obus::Obus(AirAttackConfig& cfg) :
-  WeaponProjectile("obus", cfg)
+  WeaponProjectile("air_attack_projectile", cfg)
 {
   is_active = true;
   explode_colliding_character = true;
@@ -60,18 +60,14 @@ void Obus::SignalCollision()
 //-----------------------------------------------------------------------------
 
 Avion::Avion(AirAttackConfig &p_cfg) : 
-  PhysicalObj("Avion", 0.0),
+  PhysicalObj("air_attack_plane"),
   cfg(p_cfg)
 {
   m_type = objUNBREAKABLE;
-  SetWindFactor(1.0);  
-  SetAirResistFactor(1.0);
-  m_gravity_factor = 0.0;
   m_alive = GHOST;
 
   image = resource_manager.LoadSprite( weapons_res_profile, "air_attack_plane");
   SetSize(image->GetSize());
-  SetMass (3000);
   obus_dx = 100;
   obus_dy = 50;
 }
@@ -243,4 +239,3 @@ void AirAttackConfig::LoadXml(xmlpp::Element *elem)
   LitDocXml::LitUint (elem, "nbr_obus", nbr_obus);
   LitDocXml::LitDouble (elem, "speed", speed);
 }
-

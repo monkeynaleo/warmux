@@ -46,6 +46,24 @@ bool str2double (const std::string &txt, double &valeur)
   return true;
 }
 
+bool str2bool(const std::string &str, bool &value)
+{
+  // Try to convert str to a boolean value
+  // return true and set the value on succeed
+  // return if false its not a boolean
+  if(str=="1" || str=="true" || str=="on")
+  {
+    value = true;
+    return true;
+  }
+  if(str=="0" || str=="false" || str=="off")
+  {
+    value = false;
+    return true;
+  }
+  return false;
+}
+
 std::string double2str (double x)
 {
   std::ostringstream ss;
@@ -64,6 +82,16 @@ std::string ulong2str (ulong x)
 {
   std::ostringstream ss;
   ss << x;
+  return ss.str();
+}
+
+std::string bol2str (bool x)
+{
+  std::ostringstream ss;
+  if(x)
+    ss << "true";
+  else
+    ss << "false";
   return ss.str();
 }
 

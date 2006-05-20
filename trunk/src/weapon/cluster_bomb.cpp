@@ -45,6 +45,7 @@ void Cluster::Shoot (int x, int y)
   Ready();
   camera.ChangeObjSuivi(this, true, false);
   is_active = true;
+  ResetConstants();
   SetXY( Point2i(x, y) );
 }
 
@@ -78,7 +79,6 @@ ClusterBomb::ClusterBomb(ClusterBombConfig& cfg) :
 {
   m_rebound_sound = "weapon/grenade_bounce";
   touche_ver_objet = false;
-  m_rebounding = true;
 
   tableau_cluster.clear();
   const uint nb = cfg.nb_fragments;

@@ -68,6 +68,7 @@ wormux_SOURCES = \
 	object/physical_obj.cpp object/physical_obj.h \
 	object/physics.cpp object/physics.h \
 	object/bonus_box.cpp object/bonus_box.h \
+	object/object_cfg.cpp object/object_cfg.h \
 	object/objects_list.cpp object/objects_list.h \
 	object/particle.cpp object/particle.h \
 	map/camera.cpp map/camera.h \

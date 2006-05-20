@@ -39,7 +39,6 @@ BounceBall::BounceBall(ExplosiveWeaponConfig& cfg) :
   WeaponProjectile ("bounce_ball", cfg)
 {
   m_rebound_sound = "weapon/grenade_bounce";
-  m_rebounding = true;
   touche_ver_objet = true;
   explode_colliding_character = true;
 }
@@ -60,8 +59,6 @@ void BounceBall::Refresh()
 
 void BounceBall::SignalCollision()
 {   
-  MSG_DEBUG("bounce_ball", "rebound factor :%f", m_rebound_factor);
-
   if (IsGhost())
   {
     GameMessages::GetInstance()->Add ("The ball left the battlefield before exploding");

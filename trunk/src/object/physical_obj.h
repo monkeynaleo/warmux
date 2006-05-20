@@ -58,11 +58,10 @@ double MeterDistance (const Point2i &p1, const Point2i &p2);
 class PhysicalObj : public Physics
 {
 public:
-  // Object name (useful for debug ;-))
-  std::string m_name;
   type_objet_t m_type;
 
 private:
+  std::string m_name;
   // Object size and position.
   uint m_width, m_height;
   int m_posx, m_posy;
@@ -83,7 +82,7 @@ protected:
   bool m_allow_negative_y;
 
 public:
-  PhysicalObj (const std::string &name, double mass=0.0);
+  PhysicalObj (const std::string &name);
   virtual ~PhysicalObj ();
 
   //-------- Set position and size -------
@@ -109,7 +108,7 @@ public:
   int GetTestHeight() const;
 
   //----------- Access to datas (read only) ----------
-
+  virtual const std::string &GetName() const { return m_name; }
   int GetCenterX() const;
   int GetCenterY() const;
   const Point2i GetCenter() const;

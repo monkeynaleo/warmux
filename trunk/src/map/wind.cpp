@@ -41,7 +41,7 @@ const uint barre_speed = 20;
 Wind wind;
 
 WindParticle::WindParticle() :
-  PhysicalObj("WindParticle", 0.0)
+  PhysicalObj("wind_particle")
 {
   m_type = objUNBREAKABLE;
 
@@ -63,8 +63,7 @@ WindParticle::WindParticle() :
   wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);  
   SetWindFactor(wind_factor);
   StartMoving();
-  m_air_resist_factor = TerrainActif().wind.particle_air_resist_factor ;
-  m_air_resist_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
+  SetAirResistFactor(TerrainActif().wind.particle_air_resist_factor * (1.0 + randomObj.GetLong(-100, 100)/400.0));
 
   // Fixe le rectangle de test
   int dx = 0 ;
@@ -78,16 +77,18 @@ void WindParticle::Refresh()
 {
   sprite->Update(); 
   
-  double initial_air_resist_factor = m_air_resist_factor;
+/*  double initial_air_resist_factor = m_air_resist_factor;
   m_air_resist_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
 
   double initial_wind_factor = m_wind_factor;
   m_wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
-
+*/
   UpdatePosition();
   
+/*
   m_air_resist_factor = initial_air_resist_factor;
   m_wind_factor = initial_wind_factor;
+*/
 
   if (IsGhost())
   {

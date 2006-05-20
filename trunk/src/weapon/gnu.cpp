@@ -71,7 +71,7 @@ void Gnu::Refresh()
     save_y = y;
 
     //Do the jump
-    norme = 10.0 * randomSync.GetDouble(0.5, 1.0) * cfg.rebound_factor;
+    norme = randomSync.GetDouble(2.0, 5.0);
     PutOutOfGround();
     SetSpeedXY(Point2d(m_sens * norme , - norme * 3.0));
   }

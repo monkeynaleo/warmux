@@ -89,7 +89,7 @@ void MoveCharacter(Character &character){
   else
     fantome = character.IsOutsideWorld ( Point2i(1, 0) );
   if (fantome){
-    MSG_DEBUG("ghost", "%s will be a ghost.", character.m_name.c_str());
+    MSG_DEBUG("ghost", "%s will be a ghost.", character.GetName().c_str());
     character.Ghost();
     return;
   }

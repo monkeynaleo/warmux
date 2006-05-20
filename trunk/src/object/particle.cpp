@@ -33,14 +33,10 @@
 
 ParticleEngine global_particle_engine;
 
-Particle::Particle() :
-  PhysicalObj("Particle", 0.0)
+Particle::Particle(const std::string &name) :
+  PhysicalObj(name)
 { 
   m_type = objUNBREAKABLE;
-  m_wind_factor = 0.8;
-  m_air_resist_factor = 0.2;
-  m_rebounding = 0;
-
   m_initial_time_to_live = 20;
   m_left_time_to_live = 0;
   m_last_refresh = Time::GetInstance()->Read();
@@ -99,12 +95,8 @@ bool Particle::StillUseful()
 }
 
 Smoke::Smoke() :
-  Particle()
+  Particle("smoke_particle")
 {
-  m_name="Smoke";
-  SetMass(0.5);
-  SetGravityFactor(-1.0);
-
   m_initial_time_to_live = 10;
   m_left_time_to_live = m_initial_time_to_live; 
   m_time_between_scale = 100;
@@ -120,11 +112,8 @@ void Smoke::Init()
 }
 
 ExplosionSmoke::ExplosionSmoke(const uint size_init) :
-  Particle()
+  Particle("explosion_smoke_particle")
 {
-  m_name="ExplosionSmoke";
-  SetMass(0.5);
-
   m_initial_size = size_init;
   m_initial_time_to_live = 30;
   m_left_time_to_live = m_initial_time_to_live; 
@@ -176,12 +165,8 @@ void ExplosionSmoke::Draw()
 }
 
 StarParticle::StarParticle() :
-  Particle()
+  Particle("star_particle")
 {
-  m_name="StarParticle";
-  SetMass(0.5);
-  SetGravityFactor(0.0);
-  m_wind_factor = 0.2;
   m_initial_time_to_live = 30;
   m_left_time_to_live = m_initial_time_to_live; 
   m_time_between_scale = 50;
@@ -195,12 +180,8 @@ void StarParticle::Init()
 }
 
 MagicStarParticle::MagicStarParticle() :
-  Particle()
+  Particle("magic_star_particle")
 {
-  m_name="MagicStarParticle";
-  SetMass(0.5);
-  SetGravityFactor(0.0);
-  m_wind_factor = 0.2;
   m_initial_time_to_live = 30;
   m_left_time_to_live = m_initial_time_to_live; 
   m_time_between_scale = 25;
@@ -235,14 +216,9 @@ void MagicStarParticle::Refresh()
 ExplosiveWeaponConfig fire_cfg;
 
 FireParticle::FireParticle() :
-  Particle()
+  Particle("fire_particle")
 {
-  m_name="FireParticle";
-  SetMass(0.5);
   m_type = objCLASSIC;
-  m_rebounding = false;
-  m_wind_factor = 0.2;
-
   m_initial_time_to_live = 15;
   m_left_time_to_live = m_initial_time_to_live; 
   m_time_between_scale = 50;

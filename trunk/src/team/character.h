@@ -38,6 +38,7 @@ class Team;
 class Character : public PhysicalObj
 {
 private:
+  std::string character_name;
   Team *m_team;
   bool desactive;       // Disable the characte ? (no display, nor handling)
   bool skin_is_walking; // True if the curent is a walking skin.
@@ -162,8 +163,8 @@ public:
   const Team& GetTeam() const;
 
   // Access to character info
-  const std::string& GetName() const { return m_name; }
-  bool IsSameAs(const Character& other) { return (m_name == other.GetName()); }
+  const std::string& GetName() const { return character_name; }
+  bool IsSameAs(const Character& other) { return (GetName() == other.GetName()); }
 
   // Accès à l'avatar
   const Skin& GetSkin() const;
