@@ -34,7 +34,6 @@
 RoquetteBazooka::RoquetteBazooka(ExplosiveWeaponConfig& cfg) :
   WeaponProjectile ("rocket", cfg)
 {  
-  m_rebounding = false;
   touche_ver_objet = true;
   explode_colliding_character = true;
 }
@@ -64,5 +63,3 @@ Bazooka::Bazooka() :
   m_name = _("Bazooka");
   projectile = new RoquetteBazooka(cfg());
 }
-
-

@@ -41,27 +41,18 @@ void WeaponConfig::LoadXml(xmlpp::Element *elem)
 ExplosiveWeaponConfig::ExplosiveWeaponConfig()
 {
   timeout = 0;
-  mass = 2;
   explosion_range = 50 ;
   blast_range = 2.5 ;
   blast_force = 2.5 ;
-
-  wind_factor=1.0;
-  air_resist_factor=1.0 ;
-  rebound_factor=0.01;
 }
 
 void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem) 
 {
   WeaponConfig::LoadXml (elem);
   LitDocXml::LitUint (elem, "timeout", timeout);
-  LitDocXml::LitDouble (elem, "mass", mass);
-  LitDocXml::LitDouble (elem, "wind_factor", mass);
-  LitDocXml::LitDouble (elem, "air_resist_factor", air_resist_factor);
   LitDocXml::LitUint (elem, "explosion_range", explosion_range);
   LitDocXml::LitDouble (elem, "blast_range", blast_range);
   LitDocXml::LitDouble (elem, "blast_force", blast_force);
-  LitDocXml::LitDouble (elem, "rebound_factor", rebound_factor);
 }
 
 //-----------------------------------------------------------------------------

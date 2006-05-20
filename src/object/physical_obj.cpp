@@ -24,6 +24,7 @@
  * If the object go outside of the world, it become a ghost.
  *****************************************************************************/
 
+#include <iostream>
 #include "physical_obj.h"
 #include "physics.h"
 #include "../game/config.h"
@@ -48,8 +49,7 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
   return p1.Distance(p2) / PIXEL_PER_METER;
 }
 
-PhysicalObj::PhysicalObj (const std::string &name, double mass) :
-  Physics(),
+PhysicalObj::PhysicalObj (const std::string &name) :
   m_name(name),
   m_width(0),
   m_height(0)
@@ -70,6 +70,8 @@ PhysicalObj::PhysicalObj (const std::string &name, double mass) :
   m_ready = true;
   
   exterieur_monde_vide = Config::GetInstance()->GetExterieurMondeVide();
+  m_cfg.LoadXml(m_name);  // Load physics constants from the xml file
+  ResetConstants();       // Set physics constants from the xml file
 }
 
 PhysicalObj::~PhysicalObj ()
@@ -392,7 +394,7 @@ void PhysicalObj::Drown()
   m_alive = DROWNED;
 
   // Set the air grab to water resist factor.
-  m_air_resist_factor = WATER_RESIST_FACTOR ;
+  SetAirResistFactor(WATER_RESIST_FACTOR);
 
   StartMoving();
   SignalDrowning();

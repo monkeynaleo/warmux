@@ -50,7 +50,7 @@ void LowGrav::Refresh()
 
 void LowGrav::p_Deselect()
 {
-  ActiveCharacter().SetGravityFactor(1.0);
+  ActiveCharacter().ResetConstants();
   ActiveCharacter().SetSkin("walking");
   m_is_active = false;
 }

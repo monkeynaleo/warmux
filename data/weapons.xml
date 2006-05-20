@@ -41,7 +41,7 @@
     </image>
     <animation speed="10"/>
   </sprite>
-  <sprite name="obus">
+  <sprite name="air_attack_projectile">
     <image file="weapon/air_attack/obus.png" />
   </sprite>
 

@@ -49,7 +49,6 @@ ObjMine::ObjMine(MineConfig& cfg) :
 {
   m_allow_negative_y = true; 
   animation = false;
-  m_rebounding = true;
   channel = -1;
 
   escape_time = 0;
@@ -124,7 +123,7 @@ void ObjMine::Detection()
 	 < static_cast<MineConfig&>(cfg).detection_range && !animation)
     {
       std::string txt = Format(_("%s is next to a mine!"),
-			       ver -> m_name.c_str());
+			       ver -> GetName().c_str());
       GameMessages::GetInstance()->Add (txt);
       EnableDetection();
       return;

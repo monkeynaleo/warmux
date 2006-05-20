@@ -74,7 +74,7 @@ const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
 Character::Character () :
-  PhysicalObj("Soldat inconnu", 0.0)
+  PhysicalObj("character")
 {
   pause_bouge_dg = 0;
   previous_strength = 0;
@@ -84,9 +84,6 @@ Character::Character () :
   desactive = false;
   skin = NULL;
   walk_skin = NULL;
-  m_wind_factor = 0.0;
-  m_rebound_factor = 0.25;
-  m_rebounding = true;
   skin_is_walking = true;
   is_walking = false;
   current_skin = "";
@@ -368,7 +365,7 @@ void Character::Jump ()
 
   jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
    
-  m_rebounding = false;
+  SetRebounding(false);
 
   if(current_skin=="walking" || current_skin=="breathe")
     SetSkin("jump");
@@ -386,7 +383,7 @@ void Character::HighJump ()
 
   if (!CanJump()) return;
 
-  m_rebounding = false;
+  SetRebounding(false);
 
   jukebox.Play (ActiveTeam().GetSoundProfile(), "superjump");
    
@@ -618,7 +615,7 @@ void Character::InitMouvementDG(uint pause)
 {
   do_nothing_time = Time::GetInstance()->Read();
   CurseurVer::GetInstance()->Cache();
-  m_rebounding = false;
+  SetRebounding(false);
   pause_bouge_dg = Time::GetInstance()->Read()+pause;
 
   StartWalking();
@@ -813,10 +810,8 @@ void Character::InitTeam (Team *ptr_equipe, const std::string &name,
 			  Skin* pskin)
 {
   GameMode * game_mode = GameMode::GetInstance();
-  SetMass (game_mode->character.mass);
-  SetAirResistFactor (game_mode->character.air_resist_factor);
   m_team = ptr_equipe;
-  m_name = name;
+  character_name = name;
   skin = pskin;
 
   // Animation ?
@@ -840,6 +835,7 @@ void Character::Reset()
   // Reset de l'état du ver
   desactive = false;
 
+  ResetConstants();
   Ready();
 
   //  Reset de l'image et les dimensions
@@ -867,7 +863,7 @@ void Character::Reset()
   // Prépare l'image du nom
   if (Config::GetInstance()->GetDisplayNameCharacter() && name_text == NULL)
   {
-    name_text = new Text(m_name);
+    name_text = new Text(character_name);
   }
 
   // Energie

@@ -62,12 +62,10 @@ const uint BONUS_AIR_ATTACK=1;
 const uint BONUS_AUTO_BAZOOKA=5;
 
 BonusBox::BonusBox()
-  : PhysicalObj("BonusBox", 0.0){
+  : PhysicalObj("bonus_box"){
   SetTestRect (29, 29, 63, 6);
   m_allow_negative_y = true;
   enable = false;
-  m_wind_factor = 0.3;
-  m_air_resist_factor = 20;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
@@ -77,7 +75,6 @@ BonusBox::BonusBox()
   
   parachute = true;  
 
-  SetMass (30);
   SetSpeed (SPEED, M_PI_2);
 }
 
@@ -115,7 +112,7 @@ void BonusBox::Refresh()
 // Signale la fin d'une chute
 void BonusBox::SignalFallEnding()
 {
-  m_air_resist_factor = 1.0;
+  SetAirResistFactor(1.0);
 
   MSG_DEBUG("bonus", "Fin de la chute: parachute=%d", parachute);
   if (!parachute) return;
@@ -147,7 +144,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "%s has won %u point of energy!",
                 "%s has won %u points of energy!",
                 BONUS_ENERGY),
-            ver.m_name.c_str(), BONUS_ENERGY);
+            ver.GetName().c_str(), BONUS_ENERGY);
     ver.SetEnergyDelta (BONUS_ENERGY);
     break;
 
@@ -156,7 +153,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "%s has lost %u point of energy.",
                 "%s has lost %u points of energy.",
                 BONUS_TRAP),
-            ver.m_name.c_str(), BONUS_TRAP);
+            ver.GetName().c_str(), BONUS_TRAP);
     ver.SetEnergyDelta (-BONUS_TRAP);
     break;
 

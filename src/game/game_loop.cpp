@@ -649,7 +649,7 @@ PhysicalObj* GameLoop::GetMovingObject()
   {
     if (!ver -> IsReady() && !ver -> IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "%s is not ready", (*ver).m_name.c_str())
+      MSG_DEBUG("game.endofturn", "%s is not ready", (*ver).GetName().c_str())
       return &(*ver);
     }
   }
@@ -658,7 +658,7 @@ PhysicalObj* GameLoop::GetMovingObject()
   {
     if (!object -> ptr ->IsReady())
     {
-      MSG_DEBUG("game.endofturn", "%s is not ready", object-> ptr ->m_name.c_str())
+      MSG_DEBUG("game.endofturn", "%s is not ready", object-> ptr ->GetName().c_str())
       return object->ptr;
     }
   }
@@ -695,37 +695,37 @@ void GameLoop::SignalCharacterDeath (Character *character)
     return;
 
   if (character -> IsDrowned()) {
-    txt = Format(_("%s has fallen in water."), character -> m_name.c_str());
+    txt = Format(_("%s has fallen in water."), character -> GetName().c_str());
     
   } else if (&ActiveCharacter() == character) { // Active Character is dead 
     CurseurVer::GetInstance()->Cache();
 
     // Is this a suicide ?
     if (ActiveTeam().GetWeaponType() == WEAPON_SUICIDE) {
-      txt = Format(_("%s commits suicide !"), character -> m_name.c_str());
+      txt = Format(_("%s commits suicide !"), character -> GetName().c_str());
       
       // Dead in moving ?
     } else if (state == PLAYING) {
       txt = Format(_("%s has fallen off the map!"),
-                   character -> m_name.c_str());
+                   character -> GetName().c_str());
        jukebox.Play(ActiveTeam().GetSoundProfile(), "out");
        
       // Mort en se faisant toucher par son arme / la mort d'un ennemi ?
     } else {
       txt = Format(_("%s is dead because he is clumsy!"), 
-                   character -> m_name.c_str());
+                   character -> GetName().c_str());
     }
   } else if ((!ActiveCharacter().IsDead())
              && (&character -> GetTeam() == &ActiveTeam())) {
     txt = Format(_("%s is a psychopath, he has killed a member of %s team!"),
-                 ActiveCharacter().m_name.c_str(), character -> m_name.c_str());
+                 ActiveCharacter().GetName().c_str(), character -> GetName().c_str());
   } else if (ActiveTeam().GetWeaponType() == WEAPON_GUN) {
     txt = Format(_("What a shame for %s - he was killed by a simple gun!"),
-                 character -> m_name.c_str());
+                 character -> GetName().c_str());
   } else {
     // Affiche la mort du ver
     txt = Format(_("%s (%s team) has died."),
-                 character -> m_name.c_str(), 
+                 character -> GetName().c_str(), 
                  character -> GetTeam().GetName().c_str());
   }
   

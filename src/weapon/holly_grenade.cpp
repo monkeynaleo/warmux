@@ -36,7 +36,6 @@ HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg) :
   smoke_engine(40)
 {
   m_rebound_sound = "weapon/holly_grenade_bounce";
-  m_rebounding = true;
   touche_ver_objet = false;
   sing_alleluia = false;
 }

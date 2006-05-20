@@ -107,7 +107,7 @@ void Camera::CenterOn(const PhysicalObj &obj){
   if (obj.IsGhost())
     return;
 
-  MSG_DEBUG( "camera.scroll", "centering on %s", obj.m_name.c_str() );
+  MSG_DEBUG( "camera.scroll", "centering on %s", obj.GetName().c_str() );
 
   Point2i pos(0, 0);
 
@@ -164,7 +164,7 @@ void Camera::Refresh(){
 
 void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
 			     bool force_recentrage){
-  MSG_DEBUG( "camera.tracking", "Following object %s, recentre=%d, suit=%d", obj->m_name.c_str(), recentre, suit);
+  MSG_DEBUG( "camera.tracking", "Following object %s, recentre=%d, suit=%d", obj->GetName().c_str(), recentre, suit);
   if (recentre) 
     if ((obj_suivi != obj) || !IsVisible(*obj) || force_recentrage) 
     {

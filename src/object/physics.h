@@ -30,6 +30,7 @@
 #include "../include/base.h"
 #include "../tool/euler_vector.h"
 #include "../tool/point.h"
+#include "object_cfg.h"
 
 typedef enum
 {
@@ -40,13 +41,9 @@ typedef enum
 
 class GameLoop;
 
-class Physics
+class Physics : private ObjectConfig
 {
-public:
-  bool m_rebounding;
-
 private:
-  double m_mass;
   MotionType_t m_motion_type ;
 
 protected:
@@ -64,23 +61,13 @@ protected:
   double m_elasticity_damping;    // 0 means perpetual motion.
   double m_balancing_damping;     // 0 means perpetual balancing.
 
-  // Wind effect factor on the object. 0 means not affected.
-  double m_wind_factor;
-
-  // Air resistance factor. 1 = normal air resistance.
-  double m_air_resist_factor ;
-
-  // Define how the object is affected by gravity.
-  double m_gravity_factor ;
-  
-  // Object rebound factor when the object collide with the ground.
-  double m_rebound_factor;
-
   // Define if the rope is elastic or not.
   bool m_elasticity_off ;
 
+  // Other physics constants stored there :
+  ObjectConfig m_cfg;
 public:
-  Physics (double mass=0.0);
+  Physics ();
   virtual ~Physics ();
 
   // Set/Get position
@@ -106,6 +93,12 @@ public:
 
   // Set Gravity Factor
   void SetGravityFactor (double factor);
+
+  // Set Gravity Factor
+  void SetRebounding (bool rebounding) { m_rebounding = rebounding;} ;
+
+  // Reset the physics constant to the default values in the cfg
+  void ResetConstants();
 
   // Set initial speed.
   void SetSpeed (double norme, double angle);

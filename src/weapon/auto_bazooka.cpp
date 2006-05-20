@@ -48,13 +48,11 @@ RoquetteTeteCherche::RoquetteTeteCherche(ExplosiveWeaponConfig& cfg) :
 {
   m_attire = false;
   explode_colliding_character = true;
-  SetGravityFactor(0.0);
 }
 
 void RoquetteTeteCherche::Shoot (double strength) 
 {
   WeaponProjectile::Shoot(strength);
-
   angle_local=ActiveTeam().crosshair.GetAngleRad();
 }
 

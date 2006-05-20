@@ -146,7 +146,7 @@ void Interface::DisplayCharacterInfo ()
   // Display name
   t_NAME->DrawTopLeft(bottom_bar_pos + WORM_NAME_POS);
 
-  std::string s(character_under_cursor->m_name+" ("+character_under_cursor->GetTeam().GetName()+" )");
+  std::string s(character_under_cursor->GetName()+" ("+character_under_cursor->GetTeam().GetName()+" )");
   t_character_name->Set(s);
 
   t_character_name->DrawTopLeft(bottom_bar_pos + WORM_NAME_POS + 

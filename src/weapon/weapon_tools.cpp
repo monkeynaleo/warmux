@@ -64,7 +64,7 @@ void ApplyExplosion (const Point2i &pos,
     double distance, angle;
     distance = MeterDistance (pos, ver -> GetCenter());
 
-    MSG_DEBUG("explosion", "\n*Character %s : distance= %e", ver->m_name.c_str(), distance);
+    MSG_DEBUG("explosion", "\n*Character %s : distance= %e", ver->GetName().c_str(), distance);
 
     // If the worm is in the explosion range, apply damage on it !
     if (distance <= range)

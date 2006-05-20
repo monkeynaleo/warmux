@@ -50,7 +50,7 @@ class Particle : public PhysicalObj
   Sprite *image;
    
  public:
-  Particle();
+  Particle(const std::string &name);
   ~Particle();
   virtual void Init()=0;
   virtual void Draw();

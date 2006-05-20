@@ -30,6 +30,7 @@
 #include <iostream>
 #include "error.h"
 #include "xml_document.h"
+#include "string_tools.h"
 #include "../game/config.h"
 #include "../graphic/sprite.h"
 
@@ -150,24 +151,6 @@ Surface ResourceManager::LoadImage( const Profile *profile, const std::string re
  return LoadImage( profile->relative_path+filename, alpha);
 }
 
-bool xmlIsBool(const std::string &str, bool &value)
-{
-  // Try to convert str to a boolean value
-  // return true and set the value on succeed 
-  // return if false its not a boolean
-  if(str=="1" || str=="true" || str=="on")
-  {
-    value = true;
-    return true;
-  }
-  if(str=="0" || str=="false" || str=="off")
-  {
-    value = false;
-    return true;
-  }
-  return false;
-}
-
 Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string resource_name)
 {
   xmlpp::Element *elem_sprite = GetElement( profile, "sprite", resource_name);
@@ -250,7 +233,7 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
     if ( profile->doc->LitAttrString( elem, "loop_mode", str) )
     {
       bool loop_value;
-      if(xmlIsBool(str,loop_value))
+      if(str2bool(str,loop_value))
         sprite->animation.SetLoopMode(loop_value);
       else
       if(str=="pingpong")

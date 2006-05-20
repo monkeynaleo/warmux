@@ -51,12 +51,8 @@ class ExplosiveWeaponConfig : public WeaponConfig
 {
 public:
   uint timeout;
-  double mass;
-  double air_resist_factor;
-  double wind_factor;
   double blast_range ;
   double blast_force ;  
-  double rebound_factor;
   uint explosion_range;
 public:
   ExplosiveWeaponConfig();
