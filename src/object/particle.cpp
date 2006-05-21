@@ -35,7 +35,7 @@ ParticleEngine global_particle_engine;
 
 Particle::Particle(const std::string &name) :
   PhysicalObj(name)
-{ 
+{
   m_type = objUNBREAKABLE;
   m_initial_time_to_live = 20;
   m_left_time_to_live = 0;
@@ -49,19 +49,19 @@ Particle::~Particle()
 
 void Particle::Draw()
 {
-  if (m_left_time_to_live > 0) 
+  if (m_left_time_to_live > 0)
     image->Draw(GetPosition());
 }
 
 void Particle::Refresh()
 {
-  uint time = Time::GetInstance()->Read() - m_last_refresh; 
+  uint time = Time::GetInstance()->Read() - m_last_refresh;
 
   UpdatePosition();
 
   image->Update();
 
-  if (time >= m_time_between_scale) {  
+  if (time >= m_time_between_scale) {
 
     //assert(m_left_time_to_live > 0);
     if (m_left_time_to_live <= 0) return ;
@@ -98,7 +98,7 @@ Smoke::Smoke() :
   Particle("smoke_particle")
 {
   m_initial_time_to_live = 10;
-  m_left_time_to_live = m_initial_time_to_live; 
+  m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 100;
 }
 
@@ -116,7 +116,7 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
 {
   m_initial_size = size_init;
   m_initial_time_to_live = 30;
-  m_left_time_to_live = m_initial_time_to_live; 
+  m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 25;
   dx = 0;
 }
@@ -136,13 +136,13 @@ void ExplosionSmoke::Init()
 
 void ExplosionSmoke::Refresh()
 {
-  uint time = Time::GetInstance()->Read() - m_last_refresh; 
+  uint time = Time::GetInstance()->Read() - m_last_refresh;
 
   UpdatePosition();
 
   image->Update();
 
-  if (time >= m_time_between_scale) {  
+  if (time >= m_time_between_scale) {
     //assert(m_left_time_to_live > 0);
     if (m_left_time_to_live <= 0) return ;
 
@@ -168,7 +168,7 @@ StarParticle::StarParticle() :
   Particle("star_particle")
 {
   m_initial_time_to_live = 30;
-  m_left_time_to_live = m_initial_time_to_live; 
+  m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 50;
 }
 
@@ -183,7 +183,7 @@ MagicStarParticle::MagicStarParticle() :
   Particle("magic_star_particle")
 {
   m_initial_time_to_live = 30;
-  m_left_time_to_live = m_initial_time_to_live; 
+  m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 25;
 }
 
@@ -203,7 +203,7 @@ void MagicStarParticle::Init()
 
 void MagicStarParticle::Refresh()
 {
-  uint time = Time::GetInstance()->Read() - m_last_refresh; 
+  uint time = Time::GetInstance()->Read() - m_last_refresh;
   if (time >= m_time_between_scale) {
     if (m_left_time_to_live <= 0) return ;
     float lived_time = m_initial_time_to_live - m_left_time_to_live;
@@ -220,7 +220,7 @@ FireParticle::FireParticle() :
 {
   m_type = objCLASSIC;
   m_initial_time_to_live = 15;
-  m_left_time_to_live = m_initial_time_to_live; 
+  m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 50;
   fire_cfg.damage = 1;
   fire_cfg.explosion_range = 5;
@@ -237,7 +237,7 @@ void FireParticle::SignalFallEnding()
 {
   Point2i pos = GetCenter();
   ApplyExplosion (pos, fire_cfg, NULL, "", false, ParticleEngine::NoESmoke);
-  
+
   m_left_time_to_live = 0;
 }
 
@@ -254,7 +254,7 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
 				 double angle, double norme)
 {
   // time spent since last refresh (in milliseconds)
-  uint time = Time::GetInstance()->Read() - m_last_refresh; 
+  uint time = Time::GetInstance()->Read() - m_last_refresh;
   uint tmp = Time::GetInstance()->Read();
 
   uint delta = uint(m_time_between_add * double(randomObj.GetLong(3,40))/10);
@@ -265,8 +265,8 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
 }
 
 //-----------------------------------------------------------------------------
-// Static methods 
-  
+// Static methods
+
 std::list<drawed_particle_t> ParticleEngine::lst_particles;
 Sprite* ParticleEngine::particle_sprite[particle_spr_nbr];
 
@@ -300,7 +300,7 @@ Sprite* ParticleEngine::GetSprite(particle_spr type)
 }
 
 void ParticleEngine::AddNow(const Point2i &position,
-			    uint nb_particles, particle_t type, 
+			    uint nb_particles, particle_t type,
 			    bool upper,
 			    double angle, double norme)
 {
@@ -320,22 +320,22 @@ void ParticleEngine::AddNow(const Point2i &position,
     default : particle = NULL;
       break;
     }
-  
+
     if (particle != NULL) {
       if( norme == -1 )
 		  tmp_norme = double(randomObj.GetLong(0, 5000))/1000;
-      else 
+      else
 		  tmp_norme = norme;
 
       if( angle == -1 )
 		  tmp_angle = - double(randomObj.GetLong(0, 3000))/1000;
-      else 
+      else
 		  tmp_angle = angle;
-      
+
       drawed_particle_t p;
       p.particle = particle;
       p.upper_objects = upper;
-	
+
       particle->Init();
       particle->SetXY(position);
       particle->SetSpeed(tmp_norme, tmp_angle);
@@ -351,7 +351,7 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
   // see the commented value of 'angle' to see how it was generated
   const uint little_partic_nbr = 10;
   const float little_cos[] = { 1.000000, 0.809017, 0.309017, -0.309017, -0.809017, -1.000000, -0.809017, -0.309017, 0.309017, 0.809017 };
-  const float little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 }; 
+  const float little_sin[] = { 0.000000, 0.587785, 0.951057, 0.951056, 0.587785, -0.000000, -0.587785, -0.951056, -0.951056, -0.587785 };
 
   Particle *particle = NULL;
   float norme;
@@ -374,7 +374,7 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
       particle->Init();
       particle->SetXY(pos);
       lst_particles.push_back(p);
-  }    
+  }
 }
 
 void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius)
@@ -430,17 +430,15 @@ void ParticleEngine::Draw(bool upper)
 
 void ParticleEngine::Refresh()
 {
-  // remove old particles 
+  // remove old particles
   std::list<drawed_particle_t>::iterator it=lst_particles.begin(), end=lst_particles.end(), current;
   while (it != end) {
-    current = it;
-    ++it;
-
-    if (! (*current).particle->StillUseful()) {
-      delete (*current).particle;
-      lst_particles.erase(current);
-      if (it==end) break;
-    }   
+    if (! (*it).particle->StillUseful()) {
+      delete (*it).particle;
+      it = lst_particles.erase(it);
+    }
+    else
+      it++;
   }
 
   // update the particles
@@ -451,16 +449,11 @@ void ParticleEngine::Refresh()
 
 void ParticleEngine::Stop()
 {
-  // remove all the particles 
+  // remove all the particles
   std::list<drawed_particle_t>::iterator it=lst_particles.begin(), end=lst_particles.end(), current;
   while (it != end) {
-    current = it;
-    ++it;
-    
-    delete (*current).particle;
-    lst_particles.erase(current);
-    if (it==end)
-      break;
+    delete (*it).particle;
+    it = lst_particles.erase(it);
   }
 }
 
