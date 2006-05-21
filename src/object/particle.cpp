@@ -267,7 +267,7 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
 //-----------------------------------------------------------------------------
 // Static methods
 
-std::list<drawed_particle_t> ParticleEngine::lst_particles;
+std::list<Particle*> ParticleEngine::lst_particles;
 Sprite* ParticleEngine::particle_sprite[particle_spr_nbr];
 
 void ParticleEngine::Init()
@@ -309,16 +309,17 @@ void ParticleEngine::AddNow(const Point2i &position,
 
   for (uint i=0 ; i < nb_particles ; i++) {
     switch (type) {
-    case particle_SMOKE : particle = new Smoke();
-      break;
-    case particle_FIRE : particle = new FireParticle();
-      break;
-    case particle_STAR : particle = new StarParticle();
-      break;
-    case particle_MAGIC_STAR : particle = new MagicStarParticle();
-      break;
-    default : particle = NULL;
-      break;
+      case particle_SMOKE : particle = new Smoke();
+                            break;
+      case particle_FIRE : particle = new FireParticle();
+                           break;
+      case particle_STAR : particle = new StarParticle();
+                           break;
+      case particle_MAGIC_STAR : particle = new MagicStarParticle();
+                                 break;
+      default : particle = NULL;
+                assert(0);
+                break;
     }
 
     if (particle != NULL) {
@@ -332,14 +333,11 @@ void ParticleEngine::AddNow(const Point2i &position,
       else
 		  tmp_angle = angle;
 
-      drawed_particle_t p;
-      p.particle = particle;
-      p.upper_objects = upper;
-
       particle->Init();
+      particle->SetOnTop(upper);
       particle->SetXY(position);
       particle->SetSpeed(tmp_norme, tmp_angle);
-      lst_particles.push_back(p);
+      lst_particles.push_back(particle);
     }
   }
 }
@@ -362,18 +360,17 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
 //      angle = (float) i * M_PI * 2.0 / (float) little_partic_nbr;
       size = uint(radius / 1.5);
       norme = 2.5 * radius / 3.0;
+
       particle = new ExplosionSmoke(size);
-      drawed_particle_t p;
-      p.particle = particle;
-      p.upper_objects = true;
+      particle->Init();
+      particle->SetOnTop(true);
 
       Point2i pos = position; //Set position to center of explosion
       pos = pos - size / 2;       //Set the center of the smoke to the center..
       pos = pos + Point2i(int(norme * little_cos[i]),int(norme * little_sin[i])); //Put inside the circle of the explosion
 
-      particle->Init();
       particle->SetXY(pos);
-      lst_particles.push_back(p);
+      lst_particles.push_back(particle);
   }
 }
 
@@ -395,17 +392,15 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
       size = radius;
       norme = radius / 3.0;
       particle = new ExplosionSmoke(size);
-      drawed_particle_t p;
-      p.particle = particle;
-      p.upper_objects = true;
+      particle->Init();
+      particle->SetOnTop(true);
 
       Point2i pos = position; //Set position to center of explosion
       pos = pos - size / 2;       //Set the center of the smoke to the center..
       pos = pos + Point2i(int(norme * big_cos[i]),int(norme * big_sin[i])); //Put inside the circle of the explosion
 
-      particle->Init();
       particle->SetXY(pos);
-      lst_particles.push_back(p);
+      lst_particles.push_back(particle);
   }
 }
 
@@ -418,11 +413,11 @@ void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radi
 
 void ParticleEngine::Draw(bool upper)
 {
-  std::list<drawed_particle_t>::iterator it;
+  std::list<Particle *>::iterator Particle_it;
   // draw the particles
-  for (it=lst_particles.begin(); it!=lst_particles.end(); ++it){
-    if ( (*it).upper_objects == upper ) {
-      (*it).particle->Draw();
+  for (Particle_it=lst_particles.begin(); Particle_it!=lst_particles.end(); ++Particle_it){
+    if ( (*Particle_it)->IsOnTop() == upper) {
+      (*Particle_it)->Draw();
     }
   }
 
@@ -431,10 +426,10 @@ void ParticleEngine::Draw(bool upper)
 void ParticleEngine::Refresh()
 {
   // remove old particles
-  std::list<drawed_particle_t>::iterator it=lst_particles.begin(), end=lst_particles.end(), current;
+  std::list<Particle*>::iterator it=lst_particles.begin(), end=lst_particles.end();
   while (it != end) {
-    if (! (*it).particle->StillUseful()) {
-      delete (*it).particle;
+    if (! (*it)->StillUseful()) {
+      delete *it;
       it = lst_particles.erase(it);
     }
     else
@@ -443,16 +438,16 @@ void ParticleEngine::Refresh()
 
   // update the particles
   for(it=lst_particles.begin(); it!=lst_particles.end(); ++it) {
-    (*it).particle->Refresh();
+    (*it)->Refresh();
   }
 }
 
 void ParticleEngine::Stop()
 {
   // remove all the particles
-  std::list<drawed_particle_t>::iterator it=lst_particles.begin(), end=lst_particles.end(), current;
+  std::list<Particle*>::iterator it=lst_particles.begin(), end=lst_particles.end();
   while (it != end) {
-    delete (*it).particle;
+    delete *it;
     it = lst_particles.erase(it);
   }
 }

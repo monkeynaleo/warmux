@@ -28,7 +28,7 @@
 #include "../include/base.h"
 #include "../weapon/weapon_cfg.h"
 
-typedef enum { 
+typedef enum {
   particle_SMOKE,
   particle_FIRE,
   particle_STAR,
@@ -41,6 +41,7 @@ const int particle_spr_nbr = 7;
 class Particle : public PhysicalObj
 {
  protected:
+  bool on_top; // if true displayed on top of characters and weapons
   uint m_initial_time_to_live;
   uint m_left_time_to_live;
 
@@ -48,13 +49,15 @@ class Particle : public PhysicalObj
   uint m_last_refresh;
 
   Sprite *image;
-   
+
  public:
   Particle(const std::string &name);
   ~Particle();
   virtual void Init()=0;
   virtual void Draw();
   virtual void Refresh();
+  void SetOnTop(bool b) { on_top = b; }
+  bool IsOnTop() { return on_top; }
   bool StillUseful();
 };
 
@@ -93,16 +96,11 @@ class MagicStarParticle: public Particle
 
 class FireParticle : public Particle
 {
- public: 
+ public:
   FireParticle();
   void Init();
   void SignalFallEnding();
 };
-
-typedef struct {
-  Particle * particle;
-  bool upper_objects; // if true displayed on top of characters and weapons
-} drawed_particle_t;
 
 class ParticleEngine
 {
@@ -111,14 +109,14 @@ class ParticleEngine
   uint m_time_between_add;
 
   static Sprite* particle_sprite[particle_spr_nbr];
-  static std::list<drawed_particle_t> lst_particles;
+  static std::list<Particle *> lst_particles;
 
   static void AddLittleESmoke(const Point2i &pos, const uint &radius);
   static void AddBigESmoke(const Point2i &pos, const uint &radius);
 
  public:
   ParticleEngine(uint time=100);
-  void AddPeriodic(const Point2i &position, 
+  void AddPeriodic(const Point2i &position,
 		   particle_t type,
 		   bool upper,
 		   double angle=-1, double norme=-1);
@@ -127,7 +125,7 @@ class ParticleEngine
   static void FreeMem();
   static Sprite* GetSprite(particle_spr type);
 
-  static void AddNow(const Point2i &position, 
+  static void AddNow(const Point2i &position,
 		     uint nb_particles, particle_t type,
 		     bool upper,
 		     double angle=-1, double norme=-1);
