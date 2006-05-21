@@ -59,7 +59,6 @@ Mouse::Mouse(){
   pointer_aim = resource_manager.LoadImage(res, "mouse/pointer_aim");
 
   current_pointer = POINTER_STANDARD;
-  previous_pointer = POINTER_SELECT;
   delete res;
 }
 
@@ -175,16 +174,6 @@ void Mouse::ScrollCamera() {
     scroll = true;
   }
 
-  if (scroll) { 
-    if (current_pointer != POINTER_MOVE 
-	&& current_pointer != POINTER_STANDARD)
-      previous_pointer = current_pointer;
-    SetPointer(POINTER_MOVE);
-  } else {
-    SetPointer(previous_pointer);
-  }
-
-
 }
 
 void Mouse::TestCamera(){
@@ -252,12 +241,57 @@ void Mouse::SetPointer(pointer_t pointer)
   else SDL_ShowCursor(false);
 }
 
+bool Mouse::ScrollPointer()
+{ 
+
+  Point2i mousePos = GetPosition();
+  Point2i winSize = AppWormux::GetInstance()->video.window.GetSize();
+  Point2i cameraPos = camera.GetPosition();
+
+  // tries to go on the left
+  if ( (mousePos.x > 0 && mousePos.x < SENSIT_SCROLL_MOUSE) 
+       && (cameraPos.x > 0) )
+      return true;
+
+  // tries to go on the right
+  if ( (mousePos.x > winSize.x - SENSIT_SCROLL_MOUSE) 
+       && ( cameraPos.x + winSize.x < world.GetWidth() ))
+      return true;
+
+  // tries to go up
+  if ( (mousePos.y > 0 && mousePos.y < SENSIT_SCROLL_MOUSE)
+       && (cameraPos.y > 0) )
+      return true;
+  
+  // tries to go down
+  if ( (mousePos.y > winSize.y - SENSIT_SCROLL_MOUSE) 
+       && (cameraPos.y + winSize.y < world.GetHeight()) )
+    return true;
+
+
+  return false;
+}
+
+bool Mouse::DrawMovePointer()
+{
+  if (ScrollPointer() ) {
+    AppWormux::GetInstance()->video.window.Blit( pointer_move, GetPosition() ); 
+    world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_move.GetWidth(), pointer_move.GetHeight()));
+    return true;
+  }
+  return false;
+}
+
 void Mouse::Draw()
 {
+  if (current_pointer == POINTER_STANDARD)
+    return; // use standard SDL cursor
+
+  if ( DrawMovePointer() ) 
+    return;
+
   switch (current_pointer) 
     {
-    case POINTER_STANDARD: // use standard SDL cursor
-      break;
     case POINTER_SELECT:
       AppWormux::GetInstance()->video.window.Blit( pointer_select, GetPosition() ); 
       world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_select.GetWidth(), pointer_select.GetHeight()));
@@ -272,7 +306,5 @@ void Mouse::Draw()
       break;
     default:
       break;
-      // to do
     };
-
 }

@@ -39,7 +39,7 @@ class Mouse
 {
 private:
   bool scroll_actif;
-  pointer_t current_pointer, previous_pointer;
+  pointer_t current_pointer;
 
   Point2i savedPos;
 
@@ -47,8 +47,9 @@ private:
 
   Surface pointer_select, pointer_move, pointer_aim;
 
- private:
   Mouse();
+  bool ScrollPointer();
+  bool DrawMovePointer();
   
 public:
   

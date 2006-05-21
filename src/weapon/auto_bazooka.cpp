@@ -140,6 +140,8 @@ void AutomaticBazooka::Refresh()
 void AutomaticBazooka::p_Select()
 {
   cible.choisie = false;
+  
+  Mouse::GetInstance()->SetPointer(POINTER_AIM);
 }
 
 void AutomaticBazooka::p_Deselect()
@@ -151,6 +153,8 @@ void AutomaticBazooka::p_Deselect()
 				   cible.image.GetWidth(),
 				   cible.image.GetHeight()));
   }
+
+  Mouse::GetInstance()->SetPointer(POINTER_SELECT);
 }
 
 void AutomaticBazooka::ChooseTarget()
