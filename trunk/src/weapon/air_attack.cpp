@@ -51,15 +51,17 @@ Obus::Obus(AirAttackConfig& cfg) :
 void Obus::SignalCollision()
 { 
   is_active = false; 
+  lst_objects.RemoveObject(this);
 
-  if (IsGhost()) return;
+  if (!IsGhost())
+    Explosion();
 }
 
 
 
 //-----------------------------------------------------------------------------
 
-Avion::Avion(AirAttackConfig &p_cfg) : 
+Plane::Plane(AirAttackConfig &p_cfg) : 
   PhysicalObj("air_attack_plane"),
   cfg(p_cfg)
 {
@@ -69,13 +71,14 @@ Avion::Avion(AirAttackConfig &p_cfg) :
   image = resource_manager.LoadSprite( weapons_res_profile, "air_attack_plane");
   SetSize(image->GetSize());
   obus_dx = 100;
-  obus_dy = 50;
+  obus_dy = GetY()+GetHeight();
 }
 
-void Avion::Shoot(double speed)
-{  
-  obus_laches = false;
-  obus_actifs = false;
+void Plane::Shoot(double speed)
+{
+  nb_dropped_bombs = 0;
+  last_dropped_bomb = NULL;
+
   Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
   cible_x = Mouse::GetInstance()->GetWorldPosition().x;
@@ -103,85 +106,61 @@ void Avion::Shoot(double speed)
   lst_objects.AddObject(this);
 }
 
-void Avion::Refresh()
+void Plane::DropBomb()
 {
-  if (IsGhost()) return;  
-  UpdatePosition();
+  Obus * instance = new Obus(cfg);
+  instance->SetXY( Point2i(GetX(), obus_dy) );
+  
+  Point2d speed_vector;
+  
+  int fx = randomSync.GetLong (FORCE_X_MIN, FORCE_X_MAX);
+  fx *= GetDirection();
+  int fy = randomSync.GetLong (FORCE_Y_MIN, FORCE_Y_MAX);
+  
+  speed_vector.SetValues( fx/30.0, fy/30.0);
+  instance->SetSpeedXY (speed_vector);
+  
+  lst_objects.AddObject(instance);
+  
+  camera.ChangeObjSuivi (instance, true, true);
+  
+  last_dropped_bomb = instance;
+  nb_dropped_bombs++;
+}
 
-  image->Update();
+void Plane::Refresh()
+{
+  if ( ! IsGhost() ) {
 
-  // L'avion est arrivé au bon endroit ? Largue les obus
-  if (!obus_laches && PeutLacherObus())
-  {
-    obus_laches = true;
-    obus_actifs = true;
+    UpdatePosition();
     
-    int x=LitCibleX();
-    Obus * instance;
-
-    for (uint i=0; i<cfg.nbr_obus; ++i) 
-    {
-      instance = new Obus(cfg);
-      instance->SetXY( Point2i(x, obus_dy) );
-
-      Point2d speed_vector;
-
-      int fx = randomSync.GetLong (FORCE_X_MIN, FORCE_X_MAX);
-      fx *= GetDirection();
-      int fy = randomSync.GetLong (FORCE_Y_MIN, FORCE_Y_MAX);
-
-      speed_vector.SetValues( fx/30.0, fy/30.0);
-      instance->SetSpeedXY (speed_vector);
-      obus.push_back (instance);
-      
-      camera.ChangeObjSuivi (instance, true, true);
+    image->Update();
+    
+    // First shoot !!
+    if ( OnTopOfTarget() && nb_dropped_bombs == 0)
+      DropBomb();
+    else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
+      // Get the last rocket and check the position to be sure to not collide with it
+      if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+10 )
+	DropBomb();
     }
-  }
-
-  obus_actifs = false;
-  iterator it=obus.begin(), end=obus.end();
-
-  while (it != end) {     
-    (*it)->Refresh();
-    (*it)->UpdatePosition();
-
-    if (!(*it)->is_active){
-      (*it)->Explosion();
-      it = obus.erase(it);
-    } else {
-      obus_actifs = true;
-      ++it;
-    }
-  }
-
-  if (!obus_actifs && IsGhost()) {  
-    obus.clear();
-    GameLoop::GetInstance()->interaction_enabled=true;
   }
 }
 
-int Avion::LitCibleX() const { return cible_x; }
-
-int Avion::GetDirection() const { 
+int Plane::GetDirection() const 
+{ 
   float x,y;
   image->GetScaleFactors(x,y);
   return (x<0)?-1:1;
 }
 
-void Avion::Draw()
+void Plane::Draw()
 {
   if (IsGhost()) return;  
   image->Draw(GetPosition());  
-
-  // Dessine les obus
-  if (obus_actifs)
-  {
-    iterator it=obus.begin(), fin=obus.end();
-    for (; it != fin; ++it) (*it)->Draw ();
-  }
 }
 
-bool Avion::PeutLacherObus() const
+bool Plane::OnTopOfTarget() const
 {
   if (GetDirection() == 1) 
     return (cible_x <= GetX()+obus_dx);
@@ -189,7 +168,7 @@ bool Avion::PeutLacherObus() const
     return (GetX()+(int)image->GetWidth()-obus_dx <= cible_x);
 }
 
-void Avion::SignalGhostState (bool was_dead)
+void Plane::SignalGhostState (bool was_dead)
 {
   lst_objects.RemoveObject(this);
 }
@@ -198,7 +177,7 @@ void Avion::SignalGhostState (bool was_dead)
 
 AirAttack::AirAttack() :
   Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE),
-  avion(cfg())
+  plane(cfg())
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
@@ -206,7 +185,7 @@ AirAttack::AirAttack() :
 
 void AirAttack::Refresh()
 {
-  if (!avion.obus_actifs && avion.obus_laches) m_is_active = false;
+  m_is_active = false;
 }
 
 void AirAttack::ChooseTarget()
@@ -216,9 +195,7 @@ void AirAttack::ChooseTarget()
 
 bool AirAttack::p_Shoot ()
 {
-  GameLoop::GetInstance()->interaction_enabled=false;
-  avion.Shoot (cfg().speed);
-  m_is_active = false;
+  plane.Shoot (cfg().speed);
   return true;
 }
 
