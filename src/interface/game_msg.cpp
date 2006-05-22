@@ -53,10 +53,11 @@ GameMessages::GameMessages() {
 // Clean up the message list
 void GameMessages::Reset(){
   iterator i;
-  for( i=liste.begin(); i != liste.end(); ){
+  for( i=liste.begin(); i != liste.end(); i++){
     Message * msg = *i;
     assert(msg); /* the message must be valid if nothing went wrong */
     delete (msg);
+    msg = NULL;
   }
   liste.clear();
 }
