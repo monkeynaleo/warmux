@@ -24,8 +24,13 @@
 	</sprite>
 	<wind>
 		<nbr_sprite>10</nbr_sprite>
-		<mass>0.3</mass>
-		<wind_factor>0.5</wind_factor>
 		<need_flip>0</need_flip>
+
+    <mass>3.0</mass>
+    <wind_factor>10.0</wind_factor>
+    <air_resist_factor>1.0</air_resist_factor>
+    <gravity_factor>1.0</gravity_factor>
+    <rebounding>false</rebounding>
+    <rebound_factor>1.0</rebound_factor>
 	</wind>
 </resources>

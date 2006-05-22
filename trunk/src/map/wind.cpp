@@ -207,6 +207,9 @@ void Wind::RandomizeParticlesPos()
 {
   iterator it=particles.begin(), end=particles.end();
   for (; it != end; ++it)
-    it -> SetXY( Point2i( randomObj.GetLong(camera.GetPositionX(), camera.GetPositionX()+camera.GetSizeX()),
-                          randomObj.GetLong(camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY())));
+  {
+    if(!camera.IsVisible(*it))
+      it -> SetXY( Point2i( randomObj.GetLong(camera.GetPositionX(), camera.GetPositionX()+camera.GetSizeX()),
+                            randomObj.GetLong(camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY())));
+  }
 }

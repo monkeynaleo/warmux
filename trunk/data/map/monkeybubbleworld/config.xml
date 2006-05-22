@@ -23,8 +23,13 @@
   </sprite>
   <wind>
     <nbr_sprite>30</nbr_sprite>
+    <need_flip>1</need_flip>
+
     <mass>0.2</mass>
     <wind_factor>0.3</wind_factor>
-    <need_flip>1</need_flip>
+    <air_resist_factor>1.0</air_resist_factor>
+    <gravity_factor>1.0</gravity_factor>
+    <rebounding>false</rebounding>
+    <rebound_factor>1.0</rebound_factor>
   </wind>
 </resources>
