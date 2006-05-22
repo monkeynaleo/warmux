@@ -63,6 +63,7 @@ public:
   void Reset();
   void Draw();
   void DrawParticles();
+  void RandomizeParticlesPos(); // Put particles randomly on the screen
 };
 
 extern Wind wind;

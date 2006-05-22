@@ -24,6 +24,7 @@
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
+#include "wind.h"
 #include "../include/app.h"
 #include "../interface/mouse.h"
 #include "../team/teams_list.h"
@@ -121,9 +122,10 @@ void Camera::AutoRecadre(){
   if( !obj_suivi || obj_suivi -> IsGhost() )
     return;
   
-  if( !IsVisible(*obj_suivi) ){
-	MSG_DEBUG("camera.scroll", "The object is not visible.");
-	CenterOnFollowedObject();
+  if( !IsVisible(*obj_suivi) )
+  {
+    MSG_DEBUG("camera.scroll", "The object is not visible.");
+    CenterOnFollowedObject();
     return;
   }
 
@@ -165,12 +167,15 @@ void Camera::Refresh(){
 void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
 			     bool force_recentrage){
   MSG_DEBUG( "camera.tracking", "Following object %s, recentre=%d, suit=%d", obj->GetName().c_str(), recentre, suit);
-  if (recentre) 
-    if ((obj_suivi != obj) || !IsVisible(*obj) || force_recentrage) 
-    {
-      CenterOn(*obj);
-      autorecadre = suit;
-    }
+  if (recentre)
+  if ((obj_suivi != obj) || !IsVisible(*obj) || force_recentrage) 
+  {
+    bool visible = IsVisible(*obj);
+    CenterOn(*obj);
+    autorecadre = suit;
+    if(!visible)
+      wind.RandomizeParticlesPos();
+  }
   obj_suivi = obj;
 }
 
