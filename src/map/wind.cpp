@@ -40,8 +40,8 @@ const uint barre_speed = 20;
 
 Wind wind;
 
-WindParticle::WindParticle() :
-  PhysicalObj("wind_particle")
+WindParticle::WindParticle(std::string &xml_file) :
+  PhysicalObj("wind",xml_file)
 {
   m_type = objUNBREAKABLE;
 
@@ -55,15 +55,15 @@ WindParticle::WindParticle() :
   double mass, wind_factor ; 
 
   //Mass = mass_mean + or - 25%
-  mass = TerrainActif().wind.particle_mass;
+  mass = GetMass();
   mass *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
   SetMass (mass);
   SetSize( sprite->GetSize() );
-  wind_factor = TerrainActif().wind.particle_wind_factor ;
+  wind_factor = GetWindFactor() ;
   wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);  
   SetWindFactor(wind_factor);
   StartMoving();
-  SetAirResistFactor(TerrainActif().wind.particle_air_resist_factor * (1.0 + randomObj.GetLong(-100, 100)/400.0));
+  SetAirResistFactor(GetAirResistFactor() * (1.0 + randomObj.GetLong(-100, 100)/400.0));
 
   // Fixe le rectangle de test
   int dx = 0 ;
@@ -159,10 +159,14 @@ void Wind::Reset(){
 
   uint nb = TerrainActif().wind.nb_sprite;
 
+  if(!nb) return;
+
+  std::string config_file = TerrainActif().m_directory + PATH_SEPARATOR + "config.xml";
+  WindParticle tmp = WindParticle(config_file);
+
   for (uint i=0; i<nb; ++i){
-    WindParticle particle;
-    particle.Resize( (double)i / nb );
-    particles.push_back( particle );
+    tmp.Resize( (double)i / nb );
+    particles.push_back( tmp );
   }
 }
 

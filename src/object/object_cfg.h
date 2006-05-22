@@ -50,7 +50,7 @@ public:
   ObjectConfig();
   ~ObjectConfig();
 
-  void LoadXml(std::string obj_name);
+  void LoadXml(const std::string& obj_name, const std::string &config_file);
 };
 
 #endif // OBJECT_CFG_H

@@ -104,15 +104,10 @@ void Physics::SetPhysSize (double width, double height)
   m_phys_height = height ;
 }
 
-// Set / Get positions
+// Set positions
 void Physics::SetMass(double mass)
 {
   m_mass = mass ;
-}
-
-double Physics::GetMass() const
-{
-  return m_mass ;
 }
 
 // Set the wind factor
@@ -121,7 +116,7 @@ void Physics::SetWindFactor (double factor)
   m_wind_factor = factor;
 }
 
-// Set the wind factor
+// Set the air resist factor
 void Physics::SetAirResistFactor (double factor)
 { 
   m_air_resist_factor = factor;

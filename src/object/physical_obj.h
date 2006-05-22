@@ -82,7 +82,7 @@ protected:
   bool m_allow_negative_y;
 
 public:
-  PhysicalObj (const std::string &name);
+  PhysicalObj (const std::string &name, const std::string &xml_config="");
   virtual ~PhysicalObj ();
 
   //-------- Set position and size -------
