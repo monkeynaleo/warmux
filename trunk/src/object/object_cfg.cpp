@@ -35,21 +35,26 @@ ObjectConfig::ObjectConfig()
   m_air_resist_factor = 1.0;
   m_wind_factor = 1.0;
   m_gravity_factor = 1.0;
-  m_mass = 0.0;
+  m_mass = 1.0;
 }
 
 ObjectConfig::~ObjectConfig()
 {
 }
 
-void ObjectConfig::LoadXml(std::string obj_name)
+void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &config_file)
 {
+  std::string file;
+  if(config_file=="")
+    file = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "game_mode" + PATH_SEPARATOR + "objects.xml";
+  else
+    file = config_file;
+
   // Charge la configuration XML
   LitDocXml doc;
-  std::string m_nomfich = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "game_mode" + PATH_SEPARATOR + "objects.xml";
+  assert(doc.Charge (file));
+  xmlpp::Element* elem = LitDocXml::AccesBalise(doc.racine(), obj_name);
 
-  assert(doc.Charge (m_nomfich));
-  xmlpp::Element *elem = LitDocXml::AccesBalise(doc.racine(), obj_name);
   assert(elem != NULL);
   LitDocXml::LitDouble (elem, "mass", m_mass);
   LitDocXml::LitDouble (elem, "wind_factor", m_wind_factor);

@@ -81,21 +81,20 @@ public:
   // Set size
   void SetPhysSize (double width, double height);
 
-  // Set / Get mass
   void SetMass (double mass);
-  double GetMass() const;
+  const double GetMass() const { return m_mass; }
 
-  // Set Wind Factor
   void SetWindFactor (double wind_factor);
+  const double GetWindFactor () const { return m_wind_factor; }
 
-  // Set Air Resist Factor
   void SetAirResistFactor (double factor);
+  const double GetAirResistFactor () const{ return m_air_resist_factor; }
 
-  // Set Gravity Factor
   void SetGravityFactor (double factor);
+  const double GetGravityFactor () const { return m_gravity_factor; }
 
-  // Set Gravity Factor
-  void SetRebounding (bool rebounding) { m_rebounding = rebounding;} ;
+  void SetRebounding (bool rebounding) { m_rebounding = rebounding; }
+  const bool GetRebounding () const { return m_rebounding; }
 
   // Reset the physics constant to the default values in the cfg
   void ResetConstants();

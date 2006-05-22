@@ -49,7 +49,7 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
   return p1.Distance(p2) / PIXEL_PER_METER;
 }
 
-PhysicalObj::PhysicalObj (const std::string &name) :
+PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config) :
   m_name(name),
   m_width(0),
   m_height(0)
@@ -70,7 +70,7 @@ PhysicalObj::PhysicalObj (const std::string &name) :
   m_ready = true;
   
   exterieur_monde_vide = Config::GetInstance()->GetExterieurMondeVide();
-  m_cfg.LoadXml(m_name);  // Load physics constants from the xml file
+  m_cfg.LoadXml(m_name,xml_config);  // Load physics constants from the xml file
   ResetConstants();       // Set physics constants from the xml file
 }
 

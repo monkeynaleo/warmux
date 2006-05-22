@@ -39,7 +39,6 @@ InfoTerrain::InfoTerrain ()
   nb_mine = 0;
   wind.nb_sprite = 0;
   wind.need_flip = false;
-  wind.particle_air_resist_factor = 1.0;
   infinite_bg = false;
 }
 
@@ -131,14 +130,6 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
   if (xmlwind != NULL)
   {
     LitDocXml::LitUint (xmlwind, "nbr_sprite", wind.nb_sprite);
-    LitDocXml::LitDouble (xmlwind, "mass", wind.particle_mass);
-    if(wind.particle_mass<0.1)
-    {
-      std::cout <<_("Warning! Winds particles mass is too low! Set by default to 0.3") << std::endl;
-      wind.particle_mass = 0.1;
-    }
-    LitDocXml::LitDouble (xmlwind, "wind_factor", wind.particle_wind_factor);
-    LitDocXml::LitDouble (xmlwind, "air_resist_factor", wind.particle_air_resist_factor);
     LitDocXml::LitBool (xmlwind, "need_flip", wind.need_flip);
 
     if (wind.nb_sprite > MAX_WIND_OBJECTS)
@@ -159,7 +150,7 @@ void InfoTerrain::LoadData(){
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
   img_terrain = resource_manager.LoadImage(res_profile, "map");
-  img_ciel = resource_manager.LoadImage(res_profile,"sky");   
+  img_ciel = resource_manager.LoadImage(res_profile,"sky");
 }
 
 void InfoTerrain::FreeData(){

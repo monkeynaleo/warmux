@@ -37,7 +37,7 @@ public:
   Sprite *sprite;
      
 public:
-  WindParticle();
+  WindParticle(std::string& xml_file);
   void Resize(double size);
   void Draw();
   void Refresh();
