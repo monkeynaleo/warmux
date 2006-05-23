@@ -46,6 +46,7 @@ private:
   bool m_attaching;
   bool m_rope_attached;
   double m_initial_angle;
+  int m_initial_direction;
   uint m_launch_time;
   uint m_hooked_time;
   Sprite* m_hook_sprite;
