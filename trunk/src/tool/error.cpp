@@ -31,7 +31,6 @@
 
 void WakeUpDebugger()
 {
-#if defined DEBUG
 
 #ifdef LOVE_HAYPO_HACKS
   // Generate SIGTRAP
@@ -40,7 +39,6 @@ void WakeUpDebugger()
     
 #if !defined WIN32
   kill (getpid(), SIGABRT);
-#endif
 #endif
 }
 
@@ -51,8 +49,10 @@ void MissedAssertion (const char *filename, unsigned long line,
   std::cerr << filename << ':' << line 
 	    << ": Missed assertion \"" << message << "\"."
 	    << std::endl;
+#if defined DEBUG
   WakeUpDebugger();
   abort();
+#endif
 }
 
 CError::CError (const char *filename, unsigned long line, 
