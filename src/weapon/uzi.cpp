@@ -81,18 +81,33 @@ bool Uzi::p_Shoot()
   angle = ActiveTeam().crosshair.GetAngleRad();
   a = sin(angle)/cos(angle);
   b = pos.y - ( a * pos.x ) ;
+  	Point2i delta_pos ;
 
   // Move the bullet !!
   projectile->SetXY( pos );
   projectile->Ready();
   projectile->is_active = true;
-
+	
   while( projectile->is_active ){
-    pos.y = (int)((a*pos.x) + b);
+	
+	// shooting upwards  ( -3pi/4 < angle <-pi/4 ) 
+	if (angle < -0.78 && angle > -2.36){ 
+		pos.x = (int)((pos.y-b)/a);  	//Calculate x
+		delta_pos.y=-1;			//Increment y
+	//shooting downwards ( 3pi/4 > angle > pi/4 )
+	}else if (angle > 0.78 && angle < 2.36){ 
+		pos.x = (int)((pos.y-b)/a);	//Calculate x
+		delta_pos.y=1;			//Increment y
+	// else shooting at right or left 
+	}else{ 
+    		pos.y = (int)((a*pos.x) + b);	//Calculate y
+		delta_pos.x=ActiveCharacter().GetDirection();	//Increment x
+	}
 
     projectile->SetXY( pos );
+
     // the bullet in gone outside the map
-    if (projectile->IsGhost()) {
+   if ( ( world.EstHorsMondeX(projectile->GetX()) ) || ( world.EstHorsMondeY(projectile->GetY()) )) {  //IsGhost does not check the Y side.
       projectile->is_active=false;
       return true;
     }
@@ -105,7 +120,7 @@ bool Uzi::p_Shoot()
 
       return true;
     }
-    pos.x += ActiveCharacter().GetDirection();
+  pos += delta_pos;
   }
 
   return true;
