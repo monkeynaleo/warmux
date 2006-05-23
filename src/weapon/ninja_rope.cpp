@@ -107,7 +107,7 @@ bool NinjaRope::p_Shoot()
   m_attaching = true;
   m_launch_time = Time::GetInstance()->Read() ;
   m_initial_angle = ActiveTeam().crosshair.GetAngleRad();
-
+  m_initial_direction = ActiveCharacter().GetDirection(); 
   last_mvt=Time::GetInstance()->Read();
   return true ;
 }
@@ -394,6 +394,7 @@ void NinjaRope::GoRight()
 {
   go_right = true ;
   ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
+  ActiveCharacter().SetDirection(1); 
 }
 
 void NinjaRope::StopRight()
@@ -410,6 +411,7 @@ void NinjaRope::GoLeft()
 {
   go_left = true ;
   ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
+  ActiveCharacter().SetDirection(-1); 
 }
 
 void NinjaRope::StopLeft()
@@ -468,6 +470,7 @@ void NinjaRope::Draw()
       float angle = sin( dt * M_PI_2 / SKIN_ROTATION_TIME ) * (-skin_angle - M_PI_2);
       skin->SetRotation_deg(angle * 180 / M_PI);
     }
+    skin->Scale(m_initial_direction*ActiveCharacter().GetDirection(),1);
     skin->Draw(ActiveCharacter().GetPosition());
   }
 
