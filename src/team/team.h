@@ -63,7 +63,8 @@ private:
   int ver_actif, vers_fin;
   iterator vers_fin_it;
   Weapon *active_weapon;
-   bool ChargeDonnee( xmlpp::Element *xml, Profile *res_profile);
+  bool LoadData( xmlpp::Element *xml, Profile *res_profile);
+  bool LoadCharacters( xmlpp::Element *xml);
 public:
   // Initialization
   Team ();

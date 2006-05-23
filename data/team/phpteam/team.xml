@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <equipe>
-    <nom>PHP Team</nom>
-    <ver nom="PHP" avatar="phpteam" />
-	 <ver nom="Jumbo" avatar="phpteam" />
-    <ver nom="Dumbo" avatar="phpteam" />
-    <ver nom="Babar" avatar="phpteam" />
-    <ver nom="Joseph Merrick" avatar="phpteam" />
-    <ver nom="Ganesh" avatar="phpteam" />
- 	 <ver nom="Gus Van Sant" avatar="phpteam" />
-	 <ver nom="The White Stripes" avatar="phpteam" />
-    <ver nom="Loxodonta cyclotis" avatar="phpteam" />
-    <ver nom="Loxodonta africana" avatar="phpteam" />
-    <ver nom="Elephas maximus" avatar="phpteam" />
-    <ver nom="Elephas recki" avatar="phpteam" />
-    <ver nom="Stegodon" avatar="phpteam" />
-	 <ver nom="Mammuthus" avatar="phpteam" />
-  </equipe>
+  <name>PHP Team</name>
   <surface name="flag" file="flag.png" />
+  <team>
+    <character name="PHP" skin="phpteam" />
+    <character name="Jumbo" skin="phpteam" />
+    <character name="Dumbo" skin="phpteam" />
+    <character name="Babar" skin="phpteam" />
+    <character name="Joseph Merrick" skin="phpteam" />
+    <character name="Ganesh" skin="phpteam" />
+    <character name="Gus Van Sant" skin="phpteam" />
+    <character name="The White Stripes" skin="phpteam" />
+    <character name="Loxodonta cyclotis" skin="phpteam" />
+    <character name="Loxodonta africana" skin="phpteam" />
+    <character name="Elephas maximus" skin="phpteam" />
+    <character name="Elephas recki" skin="phpteam" />
+    <character name="Stegodon" skin="phpteam" />
+    <character name="Mammuthus" skin="phpteam" />
+  </team>
 </resources>

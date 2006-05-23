@@ -28,6 +28,7 @@
 #include "../game/config.h"
 #include "../map/camera.h"
 #include "../weapon/weapons_list.h"
+#include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include "../tool/resource_manager.h"
@@ -75,15 +76,15 @@ bool Team::Init (const std::string &teams_dir, const std::string &id)
     LitDocXml doc;
     m_id = id;
 
-    // Charge le XML
+    // Load XML
     nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
     if (!IsFileExist(nomfich)) return false;
     if (!doc.Charge (nomfich)) return false;
 
     Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
      
-    // Charge les données
-    if (!ChargeDonnee (doc.racine(), res)) return false;
+    // Load Data
+    if (!LoadData (doc.racine(), res)) return false;
   }
   catch (const xmlpp::exception &e)
   {
@@ -118,28 +119,12 @@ void Team::ActualiseBarreEnergie ()
   energie.NouvelleValeur(LitEnergie());
 }
 
-bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
+bool Team::LoadCharacters( xmlpp::Element *xml)
 {
-  xml = LitDocXml::AccesBalise (xml, "equipe");
-  // Valeurs par défaut
-  camera_est_sauve = false;
-  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
+  // Create the characters
+  xml = LitDocXml::AccesBalise (xml, "team");
 
-  m_name = "Team unamed";
-  m_sound_profile="default";
-  crosshair.Init();
-
-  // Lit le nom
-  if (!LitDocXml::LitString(xml, "nom", m_name)) return false;
-
-  // Ecusson
-  ecusson = resource_manager.LoadImage( res_profile, "flag");
-   
-  // Recupère le nom du profile sonore
-  LitDocXml::LitString(xml, "sound_profile", m_sound_profile);
-
-  // Créer les vers
-  xmlpp::Node::NodeList nodes = xml -> get_children("ver");
+  xmlpp::Node::NodeList nodes = xml -> get_children("character");
   xmlpp::Node::NodeList::iterator 
     it=nodes.begin(),
     fin=nodes.end();
@@ -152,8 +137,8 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
     Skin *skin;
     std::string character_name="Soldat Inconnu";
     std::string skin_name="ver_jaune";
-    LitDocXml::LitAttrString(elem, "nom", character_name);
-    LitDocXml::LitAttrString(elem, "avatar", skin_name);
+    LitDocXml::LitAttrString(elem, "name", character_name);
+    LitDocXml::LitAttrString(elem, "skin", skin_name);
 
     if (skins_list.find(skin_name) != skins_list.end()) {
       skin = &skins_list[skin_name];
@@ -171,6 +156,8 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
     vers.push_back(new_character);
     vers.back().InitTeam (this, character_name, skin);
 
+    MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
+
     // C'est la fin ?
     ++it;
     fin_bcl = (it == fin);
@@ -181,6 +168,28 @@ bool Team::ChargeDonnee( xmlpp::Element *xml, Profile *res_profile)
   vers_fin = vers.size();
   vers_fin_it = vers.end();
   return (1 <= vers.size());
+}
+
+bool Team::LoadData( xmlpp::Element *xml, Profile *res_profile)
+{
+  // Default value
+  camera_est_sauve = false;
+  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
+
+  m_name = "Team unamed";
+  m_sound_profile="default";
+  crosshair.Init();
+
+  // Load name
+  if (!LitDocXml::LitString(xml, "name", m_name)) return false;
+
+  // Load flag
+  ecusson = resource_manager.LoadImage( res_profile, "flag");
+
+  // Get sound profile
+  LitDocXml::LitString(xml, "sound_profile", m_sound_profile);
+    
+  return LoadCharacters(xml);
 }
 
 int Team::NextCharacterIndex()
