@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <resources>
-  <equipe>
-    <nom>Konqi Team</nom>
-    <ver nom="Konqui" avatar="konqiteam" />
-    <ver nom="Quest" avatar="konqiteam" />
-    <ver nom="Sheron" avatar="konqiteam" />
-    <ver nom="Double" avatar="konqiteam" />
-    <ver nom="32/64" avatar="konqiteam" />
-    <ver nom="Ramoth" avatar="konqiteam" />
-    <ver nom="US M47" avatar="konqiteam" />
-    <ver nom="Hapan Battle" avatar="konqiteam" />
-    <ver nom="HMS" avatar="konqiteam" />
-    <ver nom="Timaeus" avatar="konqiteam" />
-    <ver nom="Idris" avatar="konqiteam" />
-    <ver nom="Man" avatar="konqiteam" />
-    <ver nom="Tales" avatar="konqiteam" />
-    <ver nom="Swamp" avatar="konqiteam" />   
-    <sound_profile>flying</sound_profile> 
-  </equipe>
+  <name>Konqi Team</name>
   <surface name="flag" file="flag.png" />
+  <sound_profile>flying</sound_profile>
+  <team>
+    <character name="Konqui" skin="konqiteam" />
+    <character name="Quest" skin="konqiteam" />
+    <character name="Sheron" skin="konqiteam" />
+    <character name="Double" skin="konqiteam" />
+    <character name="32/64" skin="konqiteam" />
+    <character name="Ramoth" skin="konqiteam" />
+    <character name="US M47" skin="konqiteam" />
+    <character name="Hapan Battle" skin="konqiteam" />
+    <character name="HMS" skin="konqiteam" />
+    <character name="Timaeus" skin="konqiteam" />
+    <character name="Idris" skin="konqiteam" />
+    <character name="Man" skin="konqiteam" />
+    <character name="Tales" skin="konqiteam" />
+    <character name="Swamp" skin="konqiteam" />   
+  </team>
 </resources>
