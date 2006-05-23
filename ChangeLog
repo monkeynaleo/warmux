@@ -1,3 +1,10 @@
+> 18/05/2006 - 0.7.2 release
+  - New translation: finnish
+  - New map: island
+  - Misc weapon improvements
+  - Fix some memory leak
+  - Fix minor bugs
+
 > 24/04/2006 - 0.7.1 release
   - New graphisms for weapons from yeKcim and ZeOlive
   - New Bounceball weapon
