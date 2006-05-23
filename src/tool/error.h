@@ -34,12 +34,8 @@ void WakeUpDebugger();
 
 // Assertion (disabled in release mode)
 #undef assert
-#ifdef DEBUG
 #  define assert(COND) \
      if (!(COND)) MissedAssertion (__FILE__, __LINE__, #COND);
-#else
-#  define assert(COND)
-#endif
 
 // Force une assertion
 #define FORCE_ASSERT(COND) \
