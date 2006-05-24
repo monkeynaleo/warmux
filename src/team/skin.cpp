@@ -138,7 +138,7 @@ bool Skin::Charge (const std::string &nom, const std::string &repertoire)
     }
 
     LoadManySkins(doc.racine(),res);
-
+    delete res;
   }
   catch (const xmlpp::exception &e)
   {
