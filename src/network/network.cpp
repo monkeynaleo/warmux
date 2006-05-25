@@ -118,12 +118,14 @@ void Network::client_connect(const std::string &host, const std::string& port)
 
 void Network::server_start(const std::string &port) 
 {
+  // The server starts listening for clients
   MSG_DEBUG("network", "Start server on port %s", port.c_str());
 
   m_is_server = true;
   m_is_client = false;
   state = NETWORK_WAIT_CLIENTS;
 
+  // Convert port number (std::string port) into SDL port number format:
   IPaddress ip;
   int prt;
   sscanf(port.c_str(),"%i",&prt);
@@ -134,6 +136,7 @@ void Network::server_start(const std::string &port)
     exit(1);
   }
 
+  // Open the port to listen to
   socket = SDLNet_TCP_Open(&ip);
 
   if(!socket)
@@ -142,6 +145,7 @@ void Network::server_start(const std::string &port)
     exit(2);
   }
 
+  // Wait for an incoming connection
   do
   {
     client = SDLNet_TCP_Accept(socket);
@@ -149,6 +153,7 @@ void Network::server_start(const std::string &port)
     SDL_Delay(1000);
   } while(!client);
 
+  SDLNet_TCP_Close(socket);
   m_is_connected = true;
   printf("\nConnected\n");
   state = NETWORK_SERVER_INIT_GAME;
