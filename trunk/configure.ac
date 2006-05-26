@@ -280,6 +280,7 @@ AM_PO_SUBDIRS
 AC_CONFIG_FILES([Makefile
 		 data/Makefile
 		 src/Makefile
+		 doc/Makefile
 		 ])
 
 AC_CONFIG_FILES([po/Makefile], [AM_POSTPROCESS_PO_MAKEFILE])
