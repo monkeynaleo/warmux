@@ -1,9 +1,12 @@
 > 18/05/2006 - 0.7.2 release
   - New translation: finnish
-  - New map: island
-  - Misc weapon improvements
+  - New map: island, cheese
+  - Misc weapon improvements (ninja rope, uzi, air attack)
   - Fix some memory leak
   - Fix minor bugs
+  - Build process improvements (manpage, font path)
+  - Experimental network support
+  - New Pause screen
 
 > 24/04/2006 - 0.7.1 release
   - New graphisms for weapons from yeKcim and ZeOlive
