@@ -1,1 +1,1 @@
-SUBDIRS = data src po
+SUBDIRS = data src po doc
