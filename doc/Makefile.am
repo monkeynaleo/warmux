@@ -1,4 +1,4 @@
 SUBDIRS = .
 
 man6_MANS = wormux.man
-EXTRA_DIST = $(man_MANS)
+EXTRA_DIST = $(man6_MANS)
