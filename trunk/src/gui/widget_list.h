@@ -16,39 +16,33 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Widget
+ * Widget list : store all widgets displayed on one screen
  *****************************************************************************/
+#ifndef WIDGET_LIST_H
+#define WIDGET_LIST_H
 
-#ifndef GUI_WIDGET_H
-#define GUI_WIDGET_H
-
+#include <list>
 #include <SDL_keyboard.h>
-#include "../include/base.h"
-#include "../tool/rectangle.h"
-#include "../tool/point.h"
+#include "widget.h"
 
-class Widget : public Rectanglei
+
+class WidgetList
 {
- protected:
-  void StdSetSizePosition(const Rectanglei &rect);
+private:
+  Widget* last_clicked;
 
- public:
-  bool enabled;
-  bool have_focus;
+protected:
+  std::list<Widget*> widget_list;
+  virtual void DelFirstWidget();
 
-  Widget();
-  Widget(const Rectanglei &rect);
-  virtual ~Widget();
+public:
+  WidgetList();
+  virtual ~WidgetList();
 
+  virtual void AddWidget(Widget*);
   virtual void SendKey(SDL_keysym key);
-  virtual void Draw(const Point2i &mousePosition) = 0;
   virtual Widget* Clic(const Point2i &mousePosition, uint button);
-
-  virtual void SetSizePosition(const Rectanglei &rect) = 0;
-  void SetXY(int _x, int _y){ 
-	  SetSizePosition( Rectanglei(Point2i(_x, _y), size) ); 
-  };
+  virtual void Draw(const Point2i &mousePosition);
 };
 
-#endif
-
+#endif // WIDGET_LIST_H

@@ -432,6 +432,20 @@ void TeamsList::AddTeam (const std::string &id, bool generate_error)
   
 //-----------------------------------------------------------------------------
 
+void TeamsList::DelTeam (const std::string &id)
+{
+    int pos;
+    Team *equipe = FindById (id, pos);
+    assert(equipe != NULL);
+    
+    selection.erase(find(selection.begin(),selection.end(),(uint)pos));
+    playing_list.erase(find(playing_list.begin(),playing_list.end(),equipe));
+
+   m_equipe_active = playing_list.begin();
+}
+  
+//-----------------------------------------------------------------------------
+
 void TeamsList::SetActive(const std::string &id)
 {
 	iterator

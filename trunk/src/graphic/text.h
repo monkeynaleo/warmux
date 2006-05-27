@@ -54,9 +54,10 @@ public:
   void DrawCenterTopOnMap(int x, int y);
 
   void Set(const std::string &new_txt);
+  std::string& GetText();
   void SetColor( const Color &new_color);
-  int GetWidth() const {return surf.GetWidth();};
-  int GetHeight() const {return surf.GetHeight();}
+  int GetWidth() const;
+  int GetHeight() const;
 };
 
 void DrawTmpBoxText(Font &font, 

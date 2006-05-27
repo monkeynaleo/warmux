@@ -39,6 +39,7 @@
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../map/water.h"
+#include "../network/network.h"
 #include "../sound/jukebox.h"
 #include "../tool/debug.h"
 #include "../tool/random.h"
@@ -865,7 +866,8 @@ void Character::Reset()
   SetEnergyDelta (1);
   lost_energy = 0;
 
-  PutRandomly(false, world.dst_min_entre_vers);
+  if(network.is_server() || network.is_local())
+    PutRandomly(false, world.dst_min_entre_vers);
 
   assert (!IsDead());
   Ready();

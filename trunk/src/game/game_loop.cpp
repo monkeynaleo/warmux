@@ -77,66 +77,53 @@ GameLoop::GameLoop()
 
 void GameLoop::InitGameData_NetServer()
 {
+  network.client_inited = 1;
   AppWormux * app = AppWormux::GetInstance();
   app->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Server mode");
 
   ActionHandler * action_handler = ActionHandler::GetInstance();
-//  action_handler.NewAction(Action(ACTION_ASK_TEAM));
-  do
-    {
-      action_handler->NewAction(Action(ACTION_ASK_VERSION));
-      std::string msg=_("Wait for clients");
-      action_handler->ExecActions();
-      std::cout << msg << std::endl;
-    } while (network.state != Network::NETWORK_SERVER_INIT_GAME);
-  std::cout << "Server init game." << std::endl;
-        
-  std::cout << "o " << _("Load map") << std::endl;
-  action_handler->NewAction (ActionString(ACTION_SET_MAP, TerrainActif().name));
+
+  network.SendAction (Action(ACTION_START_GAME));
+  network.state = Network::NETWORK_INIT_GAME;
   world.Reset();
 
   std::cout << "o " << _("Initialise teams") << std::endl;
   teams_list.Reset();
 
   // For cliens : Create teams
-  action_handler->NewAction (Action(ACTION_CLEAR_TEAMS));
+//  action_handler->NewAction (Action(ACTION_CLEAR_TEAMS));
   
   TeamsList::iterator 
     it=teams_list.playing_list.begin(),
     end=teams_list.playing_list.end();
 
   for (; it != end; ++it)
-    {
-      Team& team = **it;
+  {
+    Team& team = **it;
                 
-      // cliens : Create teams
-      action_handler->NewAction (ActionString(ACTION_NEW_TEAM, team.GetId()));
+    // cliens : Create teams
+//    action_handler->NewAction (ActionString(ACTION_NEW_TEAM, team.GetId()));
                 
-      // cliens : Place characters
-      action_handler->NewAction (ActionString(ACTION_CHANGE_TEAM, team.GetId()));
-      Team::iterator
+    // cliens : Place characters
+    action_handler->NewAction (ActionString(ACTION_CHANGE_TEAM, team.GetId()));
+    Team::iterator
         tit = team.begin(),
         tend = team.end();
-      int i=0;
-      for (; tit != tend; ++tit, ++i)
-        {
-          Character &character = *tit;
-          action_handler->NewAction (ActionInt(
-                                              ACTION_CHANGE_CHARACTER, i));
-          action_handler->NewAction (ActionInt2(
-                                               ACTION_MOVE_CHARACTER, 
-                                               character.GetX(), character.GetY()));
-          action_handler->NewAction (ActionInt(
-                                              ACTION_SET_CHARACTER_DIRECTION, 
-                                              character.GetDirection()));
-          action_handler->NewAction (ActionInt(
-                                              ACTION_SET_FRAME, 
-                                              (int)character.image->GetCurrentFrame()));
-        }
-
-      // Select first character
-      action_handler->NewAction (ActionInt(ACTION_CHANGE_CHARACTER, 0));
+    int i=0;
+    for (; tit != tend; ++tit, ++i)
+    {
+      Character &character = *tit;
+      action_handler->NewAction (ActionInt(ACTION_CHANGE_CHARACTER, i));
+      action_handler->NewAction (ActionInt2(ACTION_MOVE_CHARACTER, 
+                                            character.GetX(), character.GetY()));
+      action_handler->NewAction (ActionInt(ACTION_SET_CHARACTER_DIRECTION, 
+                                           character.GetDirection()));
+      action_handler->NewAction (ActionInt(ACTION_SET_FRAME, 
+                                           (int)character.image->GetCurrentFrame()));
     }
+    // Select first character
+    action_handler->NewAction (ActionInt(ACTION_CHANGE_CHARACTER, 0));
+  }
         
   action_handler->NewAction (ActionString(ACTION_CHANGE_TEAM, ActiveTeam().GetId()));
   action_handler->NewAction (ActionInt(ACTION_CHANGE_CHARACTER, ActiveTeam().ActiveCharacterIndex()));
@@ -153,22 +140,16 @@ void GameLoop::InitGameData_NetServer()
   Interface::GetInstance()->Reset();
   GameMessages::GetInstance()->Reset();
 
-  //Set the second team as a team played from the client
-  TeamsList::iterator team = teams_list.playing_list.begin();
-  (*team)->is_local = true;
-  team++;
-  (*team)->is_local = false;
-  
   //Signale les clients que le jeu peut démarrer
-  action_handler->NewAction (Action(ACTION_START_GAME));
-  action_handler->ExecActions();
-  network.state = Network::NETWORK_WAIT_CLIENTS;
   //Attend que le client ait démarré
-  while (network.state != Network::NETWORK_PLAYING)
+  network.SendAction (Action(ACTION_START_GAME));
+  while (network.state != Network::NETWORK_READY_TO_PLAY)
   {
     action_handler->ExecActions();
     SDL_Delay(200);
   }
+  network.SendAction (Action(ACTION_START_GAME));
+  network.state = Network::NETWORK_PLAYING;
 }
 
 void GameLoop::InitGameData_NetClient()
@@ -176,43 +157,42 @@ void GameLoop::InitGameData_NetClient()
   AppWormux * app = AppWormux::GetInstance();
   app->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
   ActionHandler * action_handler = ActionHandler::GetInstance();
-  do
-    {
-      std::string msg=_("Wait for server informations");
-      switch(network.state)
-        {
-        case Network::NETWORK_WAIT_SERVER:
-          msg = _("Wait for server");
-          break;
-        case Network::NETWORK_WAIT_MAP:
-          msg = _("Wait for map");
-          break;
-        case Network::NETWORK_WAIT_TEAMS:
-          msg = _("Wait teams");
-          break;
-        default:
-          msg = _("Unknow action");
-          std::cout << "Unknow action for network in game_loop.cpp" << std::endl;
-          break;
-        }
-      action_handler->ExecActions();
-      std::cout << network.state << std::endl;
-      std::cout << msg << std::endl;
-      SDL_Delay(100);
-    } while (network.state != Network::NETWORK_PLAYING);
-  std::cout << network.state << " : Run game !" << std::endl;
- 
-  // @@@ TODO @@@
+/*
+  network.SendAction (Action(ACTION_START_GAME));
+
+  while (network.state != Network::NETWORK_INIT_GAME)
+  {
+    // The server is still in the option screen
+    // We can receive new team / map selection
+    action_handler->ExecActions();
+    SDL_Delay(100);
+  }
+*/
+  std::cout << "o " << _("Initialise teams") << std::endl;
+
+  world.Reset();
+  teams_list.Reset();
+
+  network.SendAction (Action(ACTION_START_GAME));
+  while (network.state != Network::NETWORK_READY_TO_PLAY)
+  {
+    // The server is placing characters on the map
+    // We can receive new team / map selection
+    action_handler->ExecActions();
+    SDL_Delay(100);
+  }
+
   lst_objects.Init();
  
-  //Set the second team as a team played from the client
-  TeamsList::iterator team = teams_list.playing_list.begin();
-  (*team)->is_local = false;
-  team++;
-  (*team)->is_local = true;
-
-  //Signal au serveur que la partie démarre
-  action_handler->NewAction (Action(ACTION_START_GAME));
+  std::cout << network.state << " : Waiting for people over the network" << std::endl;
+  while (network.state != Network::NETWORK_PLAYING)
+  {
+    // The server is placing characters on the map
+    // We can receive new team / map selection
+    action_handler->ExecActions();
+    SDL_Delay(100);
+  }
+  std::cout << network.state << " : Run game !" << std::endl;
 }
 
 void GameLoop::InitData_Local()

@@ -44,6 +44,7 @@ Menu::Menu(char * bg){
 
   b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
   actions_buttons->AddWidget(b_cancel);
+  widgets.AddWidget(actions_buttons);
 }
 
 Menu::~Menu(){
@@ -51,6 +52,8 @@ Menu::~Menu(){
 }
 
 void Menu::sig_ok(){
+  if(!b_ok->enabled) return;
+
   jukebox.Play("share", "menu/ok");
   __sig_ok();
   close_menu = true;
@@ -58,6 +61,8 @@ void Menu::sig_ok(){
 
 void Menu::sig_cancel()
 {
+  if(!b_cancel->enabled) return;
+
   jukebox.Play("share", "menu/cancel");
   __sig_cancel();
   close_menu = true;
@@ -65,9 +70,9 @@ void Menu::sig_cancel()
 
 bool Menu::BasicOnClic(const Point2i &mousePosition)
 {
-  if( b_ok->Contains(mousePosition) )
+  if( b_ok->Contains(mousePosition) && b_ok->enabled)
     sig_ok();
-  else if( b_cancel->Contains(mousePosition) )
+  else if( b_cancel->Contains(mousePosition) && b_cancel->enabled)
     sig_cancel();
   else
     return false;
@@ -80,7 +85,7 @@ void Menu::BasicDraw(const Point2i &mousePosition)
   background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
   background->Blit(AppWormux::GetInstance()->video.window, 0, 0);
   
-  actions_buttons->Draw(mousePosition);
+  widgets.Draw(mousePosition);
 }
 
 void Menu::Run ()
@@ -89,60 +94,60 @@ void Menu::Run ()
 
   close_menu = false;
 
+  do
+  {
+    // Poll and treat events
+    SDL_Event event;
+     
+    while( SDL_PollEvent( &event) )
+    {
+      Point2i mousePosition(event.button.x, event.button.y);
+	   
+      if( event.type == SDL_QUIT )
+        sig_cancel();
+      else if( event.type == SDL_KEYDOWN )
+        switch( event.key.keysym.sym)
+        {
+        case SDLK_ESCAPE: 
+          if(b_cancel->enabled)
+            sig_cancel();
+          break;
+        case SDLK_RETURN: 
+          if(b_ok->enabled)
+            sig_ok();
+          break;
+        default:
+          widgets.SendKey(event.key.keysym);
+          break;
+        }  
+      else if( event.type == SDL_MOUSEBUTTONDOWN )
+      if( !BasicOnClic(mousePosition) )
+        OnClic(mousePosition, event.button.button);
+    }
+    SDL_GetMouseState( &x, &y );
+    Point2i mousePosition(x, y);
+    Display(mousePosition);
+  } while (!close_menu);
+}
+
+void Menu::Display(const Point2i& mousePosition)
+{
   // to limit CPU  
   uint sleep_fps=0;
   uint delay = 0;
-  
-  do
-  {
-   // to limit CPU  
-   uint start = SDL_GetTicks();
+  uint start = SDL_GetTicks();
 
-   // Poll and treat events
-   SDL_Event event;
-     
-   while( SDL_PollEvent( &event) ){
-	   Point2i mousePosition(event.button.x, event.button.y);
-	   
-       if( event.type == SDL_QUIT )
-	   sig_cancel();
-       else if( event.type == SDL_KEYDOWN )
-	   switch( event.key.keysym.sym)
-	     { 
-	     case SDLK_ESCAPE: 
-	       sig_cancel();
-	       break;
-	       
-	     case SDLK_RETURN: 
-	       sig_ok();
-	       break;
-		  
-	     default:
-	       break;
-	     }  
-       else if( event.type == SDL_MOUSEBUTTONDOWN )
-	   if( !BasicOnClic(mousePosition) )
-	       OnClic(mousePosition, event.button.button);
-     }
+  BasicDraw(mousePosition);
+  Draw(mousePosition);
+  AppWormux::GetInstance()->video.Flip();
 
-   SDL_GetMouseState( &x, &y );
-   Point2i mousePosition(x, y);
-
-   BasicDraw(mousePosition);
-   Draw(mousePosition);
-
-   AppWormux::GetInstance()->video.Flip();
-
-   // to limit CPU
-   delay = SDL_GetTicks()-start;   
-   if (delay < 200)
-     sleep_fps = 200 - delay;
-   else
-     sleep_fps = 0;
-   SDL_Delay(sleep_fps);
-
-  } while (!close_menu);
-
+  // to limit CPU
+  delay = SDL_GetTicks()-start;   
+  if (delay < 200)
+    sleep_fps = 200 - delay;
+  else
+    sleep_fps = 0;
+  SDL_Delay(sleep_fps);
 }
 
 void Menu::SetActionButtonsXY(int x, int y){

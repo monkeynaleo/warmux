@@ -86,18 +86,18 @@ void SpinButton::Draw(const Point2i &mousePosition){
   txt_value->DrawCenterTop(center, position.y);
 }
 
-bool SpinButton::Clic(const Point2i &mousePosition, uint button){
+Widget* SpinButton::Clic(const Point2i &mousePosition, uint button){
   if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
       (button == SDL_BUTTON_LEFT && m_minus->Contains(mousePosition)) ){
     SetValue(m_value - m_step);
-    return true;
+    return this;
   } else
   	if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
         (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
     	SetValue(m_value + m_step);
-    	return true;
+    	return this;
   	}
-  return false;
+  return NULL;
 }
 
 int SpinButton::GetValue() const{

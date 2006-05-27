@@ -16,38 +16,23 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Widget
+ * TextBox widget
  *****************************************************************************/
 
-#ifndef GUI_WIDGET_H
-#define GUI_WIDGET_H
+#ifndef TEXT_BOX_H
+#define TEXT_BOX_H
 
 #include <SDL_keyboard.h>
-#include "../include/base.h"
-#include "../tool/rectangle.h"
-#include "../tool/point.h"
+#include "label.h"
 
-class Widget : public Rectanglei
+class TextBox : public Label
 {
- protected:
-  void StdSetSizePosition(const Rectanglei &rect);
+public:
+  TextBox(const std::string &label, const Rectanglei &rect, Font& _font);
+  ~TextBox();
 
- public:
-  bool enabled;
-  bool have_focus;
-
-  Widget();
-  Widget(const Rectanglei &rect);
-  virtual ~Widget();
-
-  virtual void SendKey(SDL_keysym key);
-  virtual void Draw(const Point2i &mousePosition) = 0;
-  virtual Widget* Clic(const Point2i &mousePosition, uint button);
-
-  virtual void SetSizePosition(const Rectanglei &rect) = 0;
-  void SetXY(int _x, int _y){ 
-	  SetSizePosition( Rectanglei(Point2i(_x, _y), size) ); 
-  };
+  void SendKey(SDL_keysym key);
+  void Draw(const Point2i &mousePosition);
 };
 
 #endif

@@ -119,6 +119,7 @@ void Video::InitSDL(){
 	if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
 		Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
 
+   SDL_EnableUNICODE(1);
 	SDLReady = true;
 }
 
