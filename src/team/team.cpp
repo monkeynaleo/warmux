@@ -152,9 +152,8 @@ bool Team::LoadCharacters( xmlpp::Element *xml)
     }
 
     // Initialise les variables du ver, puis l'ajoute à la liste
-    Character new_character;
+    Character new_character (*this, character_name, skin);
     vers.push_back(new_character);
-    vers.back().InitTeam (this, character_name, skin);
 
     MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 

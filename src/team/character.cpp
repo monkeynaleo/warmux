@@ -73,12 +73,12 @@ const uint do_nothing_timeout = 5000;
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
-Character::Character () :
-  PhysicalObj("character")
+Character::Character (Team& my_team, const std::string &name, 
+		      Skin *pskin) :
+  PhysicalObj("character"), m_team(my_team)
 {
   pause_bouge_dg = 0;
   previous_strength = 0;
-  m_team = NULL;
   energy = 100;
   lost_energy = 0;
   desactive = false;
@@ -103,6 +103,25 @@ Character::Character () :
   survivals = 0;
 
   name_text = NULL;
+
+  GameMode * game_mode = GameMode::GetInstance();
+  character_name = name;
+  skin = pskin;
+
+  // Animation ?
+  anim.draw = false;
+  if (GetSkin().anim.utilise)
+  { 
+    anim.draw = true;
+    anim.image = new Sprite(*GetSkin().anim.image);
+  }
+
+  // Energie
+  energy_bar.InitVal (energy, 0, game_mode->character.max_energy);
+  energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
+
+  energy_bar.SetBorderColor( black_color );
+  energy_bar.SetBackgroundColor( gray_color );
 }
 
 // Signale la mort d'un ver
@@ -233,7 +252,7 @@ void Character::SetEnergyDelta (int delta)
     lost_energy = 0;
 
   // "Friendly fire !!"
-  if ( (&ActiveCharacter() != this) && (&ActiveTeam() == m_team) )
+  if ( (&ActiveCharacter() != this) && (&ActiveTeam() == &m_team) )
   jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
    
   // Dead character ?
@@ -303,7 +322,7 @@ void Character::Draw()
   if(current_skin=="hard_fall_ending") image->Update();
 
   if(current_skin=="hard_fall_ending" && image->IsFinished())
-  if(!SetSkin("weapon-" + m_team->GetWeapon().GetID()))
+  if(!SetSkin("weapon-" + m_team.GetWeapon().GetID()))
     SetSkin("walking");
 
   Point2i pos = GetPosition();
@@ -590,14 +609,12 @@ void Character::PrepareTurn ()
 
 const Team& Character::GetTeam() const
 {
-  assert (m_team != NULL);
-  return *m_team;
+  return m_team;
 }
 
 Team& Character::TeamAccess()
 {
-  assert (m_team != NULL);
-  return *m_team;
+  return m_team;
 }
 
 bool Character::MouvementDG_Autorise() const
@@ -656,7 +673,7 @@ void Character::SignalFallEnding()
   }
   if((current_skin=="jump" || current_skin=="fall"))
   {
-    if(!SetSkin("weapon-" + m_team->GetWeapon().GetID()))
+    if(!SetSkin("weapon-" + m_team.GetWeapon().GetID()))
       SetSkin("walking");
   }
 }
@@ -682,7 +699,7 @@ void Character::StartPlaying()
 {
   assert (!IsGhost());
   desactive = false;
-  SetSkin("weapon-" + m_team->GetWeapon().GetID());
+  SetSkin("weapon-" + m_team.GetWeapon().GetID());
 }
 
 // Accès à l'avatar
@@ -802,32 +819,8 @@ void Character::FrameImageSuivante()
   image->SetCurrentFrame (m_image_frame/m_frame_repetition); 
 
   if ( channel_step == -1 || !Mix_Playing(channel_step) ) {
-    channel_step = jukebox.Play (m_team->GetSoundProfile(), "step");
+    channel_step = jukebox.Play (m_team.GetSoundProfile(), "step");
   }
-}
-
-void Character::InitTeam (Team *ptr_equipe, const std::string &name, 
-			  Skin* pskin)
-{
-  GameMode * game_mode = GameMode::GetInstance();
-  m_team = ptr_equipe;
-  character_name = name;
-  skin = pskin;
-
-  // Animation ?
-  anim.draw = false;
-  if (GetSkin().anim.utilise)
-  { 
-    anim.draw = true;
-    anim.image = new Sprite(*GetSkin().anim.image);
-  }
-
-  // Energie
-  energy_bar.InitVal (energy, 0, game_mode->character.max_energy);
-  energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
-
-  energy_bar.SetBorderColor( black_color );
-  energy_bar.SetBackgroundColor( gray_color );
 }
 
 void Character::Reset() 
@@ -946,7 +939,7 @@ void Character::Show() { hidden = false; }
 
 void Character::MadeDamage(const int Dmg, const Character &other)
 {
-  if (m_team->IsSameAs(other.GetTeam()))
+  if (m_team.IsSameAs(other.GetTeam()))
   {
 #ifdef DEBUG_STATS
     std::cerr << m_name << " damaged own team with " << Dmg << std::endl;

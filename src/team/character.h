@@ -39,7 +39,7 @@ class Character : public PhysicalObj
 {
 private:
   std::string character_name;
-  Team *m_team;
+  Team& m_team;
   bool desactive;       // Disable the characte ? (no display, nor handling)
   bool skin_is_walking; // True if the curent is a walking skin.
   bool is_walking;
@@ -103,14 +103,11 @@ private:
   virtual void SignalFallEnding();
 
 public:
-  Character ();
+  Character (Team& my_team, const std::string &name, 
+	     Skin *skin);
 
   // (Re)Initialise le ver
-  void Init();
   void Reset();
-  void InitTeam (Team *equipe, const std::string &nom, 
-		 Skin *skin);
-  void DebutPartie();
 
   // Change le niveau d'énergie
   void SetEnergyDelta (int delta);
