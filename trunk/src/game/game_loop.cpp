@@ -88,6 +88,7 @@ void GameLoop::InitGameData_NetServer()
   world.Reset();
 
   std::cout << "o " << _("Initialise teams") << std::endl;
+  randomSync.Init();
   teams_list.Reset();
 
   // For cliens : Create teams
@@ -170,6 +171,7 @@ void GameLoop::InitGameData_NetClient()
 */
   std::cout << "o " << _("Initialise teams") << std::endl;
 
+  randomSync.Init();
   world.Reset();
   teams_list.Reset();
 
@@ -219,7 +221,6 @@ void GameLoop::InitData()
   else        
     InitData_Local();
 
-  randomSync.Init();
   CurseurVer::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
   Clavier::GetInstance()->Reset();
