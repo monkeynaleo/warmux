@@ -42,13 +42,13 @@ int Question::TreatsKey (SDL_Event &event){
   // No key corresponding to the correct choice, so we use default choice
   if (default_choice.active)
     return default_choice.value;
-  
+
   return -1;
 }
 
 void Question::Draw(){
   AppWormux * app = AppWormux::GetInstance();
-  
+
   DrawTmpBoxTextWithReturns (*Font::GetInstance(Font::FONT_BIG),
                              app->video.window.GetSize() / 2,
                              message, 10);
@@ -58,13 +58,13 @@ void Question::Draw(){
 int Question::AskQuestion (){
   SDL_Event event;
 
-  int answer;
+  int answer = default_choice.value;
   bool end_of_boucle = false;
 
   do{
     Draw();
 
-    while( SDL_PollEvent( &event) ){      
+    while( SDL_PollEvent( &event) ){
       if (( event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN ) && default_choice.active ){
 	answer = default_choice.value;
 	end_of_boucle = true;
@@ -72,17 +72,17 @@ int Question::AskQuestion (){
 
       if (event.type == SDL_KEYUP) {
 	answer = TreatsKey(event);
-	if (answer != -1) 
+	if (answer != -1)
 	  end_of_boucle = true;
       }
     } // SDL_PollEvent
 
   } while (!end_of_boucle);
-  
+
   return answer;
 }
 
-void Question::Set (const std::string &pmessage, 
+void Question::Set (const std::string &pmessage,
 		    bool default_active, int default_value){
   message = pmessage;
   default_choice.active = default_active;
