@@ -26,6 +26,7 @@
 #include "../include/base.h"
 #include "../graphic/fps.h"
 #include "../graphic/sprite.h"
+#include "../gui/widget_list.h"
 #include "../gui/button_text.h"
 #include <SDL.h>
 #include <vector>
@@ -36,12 +37,14 @@ typedef enum
   menuPLAY,
   menuNETWORK,
   menuOPTIONS,
+  menuINFOS,
   menuQUIT
 } menu_item;
 
 class Main_Menu
 {
   Sprite *background, *skin_left, *skin_right, *title;
+  WidgetList widgets;
   ButtonText *play, *network, *options, *infos, *quit;
   Text * version_text, * website_text;
   uint start_time;
@@ -79,11 +82,6 @@ private:
   void EraseAll();
 
   void button_click();
-  bool sig_play();
-  bool sig_network();
-  bool sig_options();
-  bool sig_infos();
-  bool sig_quit();
 };
 
 #endif

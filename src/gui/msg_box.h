@@ -16,38 +16,25 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Widget
+ * Message box widget
  *****************************************************************************/
 
-#ifndef GUI_WIDGET_H
-#define GUI_WIDGET_H
+#ifndef MSG_BOX_H
+#define MSG_BOX_H
 
-#include <SDL_keyboard.h>
 #include "../include/base.h"
-#include "../tool/rectangle.h"
-#include "../tool/point.h"
+#include "../graphic/font.h"
+#include "box.h"
 
-class Widget : public Rectanglei
+class MessageBox : public VBox
 {
+  Font* font;
  protected:
-  void StdSetSizePosition(const Rectanglei &rect);
-
  public:
-  bool enabled;
-  bool have_focus;
 
-  Widget();
-  Widget(const Rectanglei &rect);
-  virtual ~Widget();
+  MessageBox(int message_nbr, const Rectanglei& rect, Font* _font);
 
-  virtual void SendKey(SDL_keysym key);
-  virtual void Draw(const Point2i &mousePosition) = 0;
-  virtual Widget* Clic(const Point2i &mousePosition, uint button);
-
-  virtual void SetSizePosition(const Rectanglei &rect) = 0;
-  void SetXY(int _x, int _y){ 
-	  SetSizePosition( Rectanglei(Point2i(_x, _y), size) ); 
-  };
+  void NewMessage(const std::string& msg);
 };
 
 #endif

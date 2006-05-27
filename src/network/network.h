@@ -25,39 +25,44 @@
 #include <SDL_net.h>
 #include <SDL_thread.h>
 #include "../include/base.h" 
-#include <vector>
+#include <list>
 #include <string>
 #include "../include/action.h" 
 //-----------------------------------------------------------------------------
 
 class Network
 {
+  bool inited;
 public:
 	typedef enum
 	{
 		NETWORK_NOT_CONNECTED,
-		NETWORK_SERVER_INIT_GAME,
-		NETWORK_WAIT_CLIENTS,
-		NETWORK_WAIT_SERVER,
-		NETWORK_WAIT_MAP,
-		NETWORK_WAIT_TEAMS,
+		NETWORK_OPTION_SCREEN,
+      NETWORK_INIT_GAME,
+      NETWORK_READY_TO_PLAY,
 		NETWORK_PLAYING
 	} network_state_t;
 	network_state_t state;
+  std::list<TCPsocket> conn;
 		
 private:
-  TCPsocket socket;
-  TCPsocket client;
-  SDL_Thread* thread;
 	
-	bool m_is_connected;
-	bool m_is_server;
-	bool m_is_client;
+  bool m_is_connected;
+  bool m_is_server;
+  bool m_is_client;
 
-	// Server Connection
-	Action* make_action(Uint32* packet);
+  TCPsocket server_socket; // Wait for incoming connections on this socket
+  SDL_Thread* thread; // network thread, where we receive data from network
+  SDLNet_SocketSet socket_set;
+  IPaddress ip; // for server : store listening port
+                // for client : store server address/port
+
+  Action* make_action(Uint32* packet);
 
 public:
+  uint max_player_number;
+  uint connected_player;
+  uint client_inited;
 
 	Network();
 	~Network();
@@ -69,13 +74,15 @@ public:
 	bool is_client();
 	
 	void disconnect();
-	
 	void client_connect(const std::string &host, const std::string &port);
-
 	void server_start(const std::string &port);
 
-   void SendAction(const Action &action);
-   void ReceiveActions();
+  void SendAction(const Action &action);
+  void ReceiveActions();
+
+  void AcceptIncoming();
+  void RejectIncoming();
+  std::list<TCPsocket>::iterator CloseConnection(std::list<TCPsocket>::iterator closed);
 };
 
 extern Network network;

@@ -29,6 +29,7 @@
 #include "../map/maps_list.h"
 #include "../map/wind.h"
 #include "../network/randomsync.h"
+#include "../network/network.h"
 #include "../team/macro.h"
 #include "../team/move.h"
 #include "../tool/debug.h"
@@ -163,8 +164,6 @@ void Action_SetMap (const Action *a)
   MSG_DEBUG("action.handler", "SetMap : %s", action.GetValue());
   if (!network.is_client()) return;
   lst_terrain.ChangeTerrainNom (action.GetValue());
-  network.state = Network::NETWORK_WAIT_TEAMS;
-  world.Reset();
 }
 
 void Action_ClearTeams (const Action *a)
@@ -177,7 +176,45 @@ void Action_ClearTeams (const Action *a)
 void Action_StartGame (const Action *a)
 {
   MSG_DEBUG("action.handler", "StartGame");
-  network.state = Network::NETWORK_PLAYING;
+
+printf("game starting..\n");
+  if(network.is_server())
+  {
+    switch(network.state)
+    {
+    case Network::NETWORK_OPTION_SCREEN:
+      // State is changed when server clicks on the launch game button
+      network.client_inited++;
+      break;
+    case Network::NETWORK_INIT_GAME:
+      // One more client is ready to play
+      network.client_inited++;
+      if(network.client_inited == network.connected_player)
+        network.state = Network::NETWORK_READY_TO_PLAY;
+      break;
+    default:
+      assert(false);
+      break;
+    }
+  }
+
+  if(network.is_client())
+  {
+    switch(network.state)
+    {
+    case Network::NETWORK_OPTION_SCREEN:
+      network.state = Network::NETWORK_INIT_GAME;
+      break;
+    case Network::NETWORK_INIT_GAME:
+      network.state = Network::NETWORK_READY_TO_PLAY;
+      break;
+    case Network::NETWORK_READY_TO_PLAY:
+      network.state = Network::NETWORK_PLAYING;
+      break;
+    default:
+       assert(false);
+    }
+  }
 }
 
 void Action_SetGameMode (const Action *a)
@@ -193,10 +230,19 @@ void Action_NewTeam (const Action *a)
   const ActionString& action = dynamic_cast<const ActionString&> (*a);
   MSG_DEBUG("action.handler", "NewTeam : %s", action.GetValue());
 
-  if (!network.is_client()) return;
   teams_list.AddTeam (action.GetValue());
-  teams_list.SetActive (action.GetValue());
-  ActiveTeam().Reset();
+//  teams_list.SetActive (action.GetValue());
+//  ActiveTeam().Reset();
+}
+
+void Action_DelTeam (const Action *a)
+{
+  const ActionString& action = dynamic_cast<const ActionString&> (*a);
+  MSG_DEBUG("action.handler", "DelTeam : %s", action.GetValue());
+
+  teams_list.DelTeam (action.GetValue());
+//  teams_list.SetActive (action.GetValue());
+//  ActiveTeam().Reset();
 }
 
 void Action_ChangeTeam (const Action *a)
@@ -212,9 +258,7 @@ void Action_ChangeTeam (const Action *a)
 void Action_AskVersion (const Action *a)
 {
   if (!network.is_client()) return;
-  if (network.state != Network::NETWORK_WAIT_SERVER) return;
   ActionHandler::GetInstance()->NewAction(ActionString(ACTION_SEND_VERSION, Constants::VERSION));
-  network.state = Network::NETWORK_WAIT_MAP;
 }
 
 void Action_SendVersion (const Action *a)
@@ -226,7 +270,6 @@ void Action_SendVersion (const Action *a)
     Error(Format(_("Wormux versions are differents : client=%s, server=%s."),
     action.GetValue(), Constants::VERSION.c_str()));
   }
-  network.state = Network::NETWORK_SERVER_INIT_GAME;
 }
 
 void Action_SendTeam (const Action *a)
@@ -321,6 +364,7 @@ void ActionHandler::Init()
   Register (ACTION_SET_MAP, "set_map", &Action_SetMap);
   Register (ACTION_CLEAR_TEAMS, "clear_teams", &Action_ClearTeams);
   Register (ACTION_NEW_TEAM, "new_team", &Action_NewTeam);
+  Register (ACTION_DEL_TEAM, "del_team", &Action_DelTeam);
   Register (ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
   Register (ACTION_MOVE_CHARACTER, "move_character", &Action_MoveCharacter);
   Register (ACTION_SET_SKIN, "set_skin", &Action_SetSkin);

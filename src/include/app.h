@@ -41,7 +41,6 @@ private:
 
 private:
   void Init(int, char**);
-  void InitNetwork(int argc, char **argv);
   void InitScreen();
   void InitWindow();
   void DisplayLoadingPicture();

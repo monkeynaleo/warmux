@@ -71,7 +71,7 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition){
   return BorneLong(index + first_visible_item, 0, m_items.size() - 1);
 }
 
-bool ListBox::Clic(const Point2i &mousePosition, uint button){
+Widget* ListBox::Clic(const Point2i &mousePosition, uint button){
   // buttons for listbox with more items than visible
   if( m_items.size() > nb_visible_items_max ){
     if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
@@ -81,7 +81,7 @@ bool ListBox::Clic(const Point2i &mousePosition, uint button){
       if( m_items.size() - first_visible_item > nb_visible_items_max )
         first_visible_item++ ;
 
-      return true;
+      return this;
     }
     else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) || 
              (button == SDL_BUTTON_LEFT && m_up->Contains(mousePosition)) ){     
@@ -90,7 +90,7 @@ bool ListBox::Clic(const Point2i &mousePosition, uint button){
       if( first_visible_item > 0 )
         first_visible_item-- ;
 
-      return true;
+      return this;
     }
   }
 
@@ -98,16 +98,16 @@ bool ListBox::Clic(const Point2i &mousePosition, uint button){
     int item = MouseIsOnWhichItem(mousePosition);
     
     if( item == -1 )
-      return false;
+      return NULL;
     
     if( item == selected_item ){
         //Deselect ();
     } else
       Select (item);
-    return true;
+    return this;
   }
   else{
-    return false;
+    return NULL;
   }
 }
 
@@ -122,7 +122,7 @@ void ListBox::Draw(const Point2i &mousePosition){
   for(uint i=0; i < nb_visible_items; i++){
 	 Rectanglei rect(GetPositionX() + 1, GetPositionY() + i * height_item + 1, GetSizeX() - 2, height_item - 2);
 	 
-     if( int(i + first_visible_item) == selected_item )
+     if( int(i + first_visible_item) == selected_item)
        app->video.window.BoxColor(rect, defaultListColor2);
      else
        if( i + first_visible_item == uint(item) )
@@ -132,6 +132,8 @@ void ListBox::Draw(const Point2i &mousePosition){
 			  GetPosition() + Point2i(5, i*height_item),
 			  m_items[i + first_visible_item].label,
 			  white_color);
+     if(!m_items[i].enabled)
+       app->video.window.BoxColor(rect, defaultDisabledColorBox);
   }  
 
   // buttons for listbox with more items than visible
@@ -162,13 +164,15 @@ void ListBox::SetSizePosition(const Rectanglei &rect){
 
 void ListBox::AddItem (bool selected, 
 		       const std::string &label,
-		       const std::string &value){ 
+		       const std::string &value,
+             bool enabled){
   uint pos = m_items.size();
 
   // Push item
   list_box_item_t item;
   item.label = label;
   item.value = value;
+  item.enabled = enabled;
   m_items.push_back (item);
 
   // Select it if selected
@@ -199,8 +203,22 @@ void ListBox::RemoveSelected(){
 
 void ListBox::Select (uint index){
   assert(index < m_items.size());
-
   selected_item = index;
+}
+
+void ListBox::Select(const std::string& val)
+{
+  uint index = 0;
+  for(std::vector<list_box_item_t>::iterator it=m_items.begin();
+      it != m_items.end();
+      it++,index++)
+  {
+    if(it->label == val)
+    {
+      Select(index);
+      return;
+    }
+  }
 }
 
 void ListBox::Deselect (){

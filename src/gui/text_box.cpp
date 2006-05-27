@@ -16,39 +16,45 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Widget
+ * Text box widget
  *****************************************************************************/
 
-#ifndef GUI_WIDGET_H
-#define GUI_WIDGET_H
+#include "../include/app.h"
+#include "text_box.h"
+#include "label.h"
 
-#include <SDL_keyboard.h>
-#include "../include/base.h"
-#include "../tool/rectangle.h"
-#include "../tool/point.h"
-
-class Widget : public Rectanglei
+TextBox::TextBox (const std::string &label, const Rectanglei &rect, Font& _font) :
+  Label(label, rect, _font)
 {
- protected:
-  void StdSetSizePosition(const Rectanglei &rect);
+}
 
- public:
-  bool enabled;
-  bool have_focus;
+TextBox::~TextBox(){
+}
 
-  Widget();
-  Widget(const Rectanglei &rect);
-  virtual ~Widget();
+void TextBox::SendKey(SDL_keysym key)
+{
+  std::string new_txt = GetText();
+  if (strcmp(SDL_GetKeyName(key.sym),"backspace")==0)
+  {
+    if(new_txt != "")
+      new_txt = new_txt.substr(0, new_txt.size()-1);
+  }
+  else
+  {
+    if(key.unicode < 0x80 && key.unicode > 0)
+      new_txt = new_txt + (char)key.unicode;
+  }
 
-  virtual void SendKey(SDL_keysym key);
-  virtual void Draw(const Point2i &mousePosition) = 0;
-  virtual Widget* Clic(const Point2i &mousePosition, uint button);
+  SetText(new_txt);
+}
 
-  virtual void SetSizePosition(const Rectanglei &rect) = 0;
-  void SetXY(int _x, int _y){ 
-	  SetSizePosition( Rectanglei(Point2i(_x, _y), size) ); 
-  };
-};
+void TextBox::Draw(const Point2i &mousePosition)
+{
+  Rectanglei rect(position, size);
+    AppWormux::GetInstance()->video.window.RectangleColor(rect, defaultOptionColorRect);
 
-#endif
+  if(have_focus)
+    AppWormux::GetInstance()->video.window.BoxColor(rect, highlightOptionColorBox);
 
+  Label::Draw(mousePosition);
+}

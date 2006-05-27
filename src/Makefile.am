@@ -33,9 +33,12 @@ wormux_SOURCES = \
 	gui/check_box.cpp gui/check_box.h \
 	gui/label.cpp gui/label.h \
 	gui/list_box.cpp gui/list_box.h \
+	gui/msg_box.cpp gui/msg_box.h \
 	gui/spin_button.cpp gui/spin_button.h \
+	gui/text_box.cpp gui/text_box.h \
 	gui/box.cpp gui/box.h \
 	gui/widget.cpp gui/widget.h \
+	gui/widget_list.cpp gui/widget_list.h \
 	gui/null_widget.cpp gui/null_widget.h \
 	tool/string_tools.cpp tool/string_tools.h \
 	tool/xml_document.cpp tool/xml_document.h \
@@ -54,6 +57,7 @@ wormux_SOURCES = \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
 	menu/main_menu.cpp menu/main_menu.h \
 	menu/menu.cpp menu/menu.h \
+	menu/network_menu.cpp menu/network_menu.h \
 	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/options_menu.cpp menu/options_menu.h \
 	menu/game_menu.cpp menu/game_menu.h \

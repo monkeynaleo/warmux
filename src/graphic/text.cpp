@@ -57,6 +57,8 @@ Text::~Text(){
 }
 
 void Text::Render(){
+  if(txt=="") return;
+
   surf = font->CreateSurface(txt, color);
   if( shadowed )
     background = font->CreateSurface(txt, black_color);
@@ -69,6 +71,10 @@ void Text::Set(const std::string &new_txt){
   txt = new_txt;
 	
   Render();
+}
+
+std::string& Text::GetText(){
+  return txt;
 }
 
 void Text::SetColor(const Color &new_color){
@@ -97,6 +103,8 @@ void Text::DrawCenterTop (int x, int y){
 }
 
 void Text::DrawTopLeft(const Point2i &position){
+  if(txt == "") return;
+
   Rectanglei dst_rect(position, surf.GetSize());
   AppWormux * app = AppWormux::GetInstance();
 
@@ -133,6 +141,18 @@ void Text::DrawTopLeftOnMap (int x, int y){
   if(shadowed)
     AbsoluteDraw(background, Point2i(bg_offset + x, bg_offset + y) );
   AbsoluteDraw(surf, Point2i(x, y) );
+}
+
+int Text::GetWidth() const
+{
+  if(txt=="") return 0;
+  return surf.GetWidth();
+}
+
+int Text::GetHeight() const
+{
+  if(txt=="") return 0;
+  return surf.GetHeight();
 }
 
 void DrawTmpBoxText(Font &font, Point2i pos, 

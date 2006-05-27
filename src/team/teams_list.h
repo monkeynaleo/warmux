@@ -51,6 +51,7 @@ public:
 
   // Add a new team to playing, and change active team
   void AddTeam (const std::string &id, bool generate_error=true);
+  void DelTeam (const std::string &id);
   void SetActive(const std::string &id);
   void InitList (const std::list<std::string> &liste_nom);
   void InitEnergy ();
