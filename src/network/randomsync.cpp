@@ -64,6 +64,7 @@ double RandomSync::GetRand()
 {
   if(network.is_server() || network.is_local()) GenerateTable();
 
+  assert(rnd_table.size() != 0);
   double nbr = rnd_table.front();
   rnd_table.pop_front();
   return nbr;
