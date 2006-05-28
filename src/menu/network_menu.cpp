@@ -185,8 +185,8 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == start_client)
   {
     network.Init();
-    network.client_connect(server_adress->GetText(),WORMUX_NETWORK_PORT);
-    if(network.is_connected())
+    network.ClientConnect(server_adress->GetText(),WORMUX_NETWORK_PORT);
+    if(network.IsConnected())
     {
       team_box->enabled = true;
       map_box->enabled = true;
@@ -204,8 +204,8 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == start_server)
   {
     network.Init();
-    network.server_start(WORMUX_NETWORK_PORT);
-    if(network.is_connected())
+    network.ServerStart(WORMUX_NETWORK_PORT);
+    if(network.IsConnected())
     {
       network.client_inited = 1;
       team_box->enabled = true;
@@ -299,10 +299,10 @@ void NetworkMenu::SaveOptions()
 
 void NetworkMenu::__sig_ok()
 {
-  if(network.is_client())
+  if(network.IsClient())
   {
     // Wait for the server, and stay in the menu map / team can still be changed
-    network.SendAction(Action(ACTION_START_GAME));
+    network.SendAction(Action(ACTION_CHANGE_STATE));
     b_ok->enabled = false;
     b_cancel->enabled = false;
     team_box->enabled = false;
@@ -318,7 +318,7 @@ void NetworkMenu::__sig_ok()
 
 void NetworkMenu::__sig_cancel()
 {
-  network.disconnect();
+  network.Disconnect();
 }
 
 void NetworkMenu::ChangeMap()
@@ -364,7 +364,7 @@ void NetworkMenu::MoveDisableTeams(ListBox * from, ListBox * to, bool sort)
 
 void NetworkMenu::Draw(const Point2i &mousePosition)
 {
-  if(network.is_connected())
+  if(network.IsConnected())
   {
     Team* last_team = teams_list.FindByIndex(0);
     // Display the ecusson of the team
@@ -408,7 +408,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     if(inited_players->GetText() != pl)
       inited_players->SetText(pl);
 
-    if(network.is_server())
+    if(network.IsServer())
     {
       if(network.connected_player > 1 && network.client_inited == network.connected_player)
         b_ok->enabled = true;
@@ -456,12 +456,12 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     ActionHandler * action_handler = ActionHandler::GetInstance();
     action_handler->ExecActions();
 
-    if(network.is_client())
+    if(network.IsClient())
     {
       //Check for changes sent by the server
       if(network.conn.size()==0)
       {
-        network.disconnect();
+        network.Disconnect();
         Reset();
       }
       // Check map changement

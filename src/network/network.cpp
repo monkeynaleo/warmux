@@ -70,14 +70,14 @@ void Network::Init()
 
 Network::~Network() 
 {
-  disconnect();
+  Disconnect();
   if(inited)
     SDLNet_Quit();
 }
 
 //-----------------------------------------------------------------------------
 
-void Network::disconnect() 
+void Network::Disconnect() 
 {
   if(!m_is_connected) return;
 
@@ -104,7 +104,7 @@ void Network::disconnect()
 
 //-----------------------------------------------------------------------------
 
-void Network::client_connect(const std::string &host, const std::string& port) 
+void Network::ClientConnect(const std::string &host, const std::string& port) 
 {
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
@@ -146,7 +146,7 @@ void Network::client_connect(const std::string &host, const std::string& port)
 
 //-----------------------------------------------------------------------------
 
-void Network::server_start(const std::string &port) 
+void Network::ServerStart(const std::string &port) 
 {
   // The server starts listening for clients
   MSG_DEBUG("network", "Start server on port %s", port.c_str());
@@ -228,11 +228,11 @@ void Network::ReceiveActions()
   int received, i;
   char packet_size = 0;
 
-  while(network.is_connected() && (conn.size()==1 || m_is_server))
+  while(m_is_connected && (conn.size()==1 || m_is_server))
   {
     packet_size = 0;
     i = 0;
-    while(SDLNet_CheckSockets(socket_set, 10) == 0 && network.is_connected()) //Loop while nothing is received
+    while(SDLNet_CheckSockets(socket_set, 10) == 0 && m_is_connected) //Loop while nothing is received
     if(m_is_server && server_socket)
     {
       // Check for an incoming connection
@@ -279,7 +279,7 @@ void Network::ReceiveActions()
 
         // Repeat the packet to other clients:
         if(a->GetType() != ACTION_SEND_VERSION
-        && a->GetType() != ACTION_START_GAME)
+        && a->GetType() != ACTION_CHANGE_STATE)
         for(std::list<TCPsocket>::iterator client = conn.begin();
             client != conn.end();
             client++)
@@ -319,10 +319,10 @@ void Network::SendAction(const Action &action)
 
 //-----------------------------------------------------------------------------
 
-bool Network::is_connected() { return m_is_connected; }
-bool Network::is_local() { return !m_is_server && !m_is_client; }
-bool Network::is_server() { return m_is_server; }
-bool Network::is_client() { return m_is_client; }
+const bool Network::IsConnected() const { return m_is_connected; }
+const bool Network::IsLocal() const { return !m_is_server && !m_is_client; }
+const bool Network::IsServer() const { return m_is_server; }
+const bool Network::IsClient() const { return m_is_client; }
 
 //-----------------------------------------------------------------------------
 
@@ -366,7 +366,7 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_UP:
   case ACTION_DOWN:
   case ACTION_CLEAR_TEAMS:
-  case ACTION_START_GAME:
+  case ACTION_CHANGE_STATE:
   case ACTION_ASK_VERSION:
     return new Action(type);
 

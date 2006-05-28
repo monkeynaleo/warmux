@@ -121,15 +121,6 @@ void Action_Wind (const Action *a)
 void Action_MoveCharacter (const Action *a)
 {
   const ActionInt2& ap = dynamic_cast<const ActionInt2&> (*a);
-//  if (network.is_server())
-//  {
-//    MSG_DEBUG("action.handler", "%s is %d, %d", ActiveCharacter().m_name, ActiveCharacter().GetX(), ActiveCharacter().GetY());
-//    return;
-//  }
-//  if (!network.is_client()) return;
-
-//  MSG_DEBUG("action.handler", "%s move to  %d, %d", ActiveCharacter().m_name, ap.GetValue1(), ap.GetValue2());
-
   ActiveCharacter().SetXY (Point2i(ap.GetValue1(), ap.GetValue2()));
 }
 
@@ -162,23 +153,22 @@ void Action_SetMap (const Action *a)
 {
   const ActionString& action = dynamic_cast<const ActionString&> (*a);
   MSG_DEBUG("action.handler", "SetMap : %s", action.GetValue());
-  if (!network.is_client()) return;
+  if (!network.IsClient()) return;
   lst_terrain.ChangeTerrainNom (action.GetValue());
 }
 
 void Action_ClearTeams (const Action *a)
 {
   MSG_DEBUG("action.handler", "ClearTeams");
-  if (!network.is_client()) return;
+  if (!network.IsClient()) return;
   teams_list.Clear();
 }
 
-void Action_StartGame (const Action *a)
+void Action_ChangeState (const Action *a)
 {
-  MSG_DEBUG("action.handler", "StartGame");
+  MSG_DEBUG("action.handler", "ChangeState");
 
-printf("game starting..\n");
-  if(network.is_server())
+  if(network.IsServer())
   {
     switch(network.state)
     {
@@ -198,7 +188,7 @@ printf("game starting..\n");
     }
   }
 
-  if(network.is_client())
+  if(network.IsClient())
   {
     switch(network.state)
     {
@@ -231,8 +221,6 @@ void Action_NewTeam (const Action *a)
   MSG_DEBUG("action.handler", "NewTeam : %s", action.GetValue());
 
   teams_list.AddTeam (action.GetValue());
-//  teams_list.SetActive (action.GetValue());
-//  ActiveTeam().Reset();
 }
 
 void Action_DelTeam (const Action *a)
@@ -241,15 +229,13 @@ void Action_DelTeam (const Action *a)
   MSG_DEBUG("action.handler", "DelTeam : %s", action.GetValue());
 
   teams_list.DelTeam (action.GetValue());
-//  teams_list.SetActive (action.GetValue());
-//  ActiveTeam().Reset();
 }
 
 void Action_ChangeTeam (const Action *a)
 {
   const ActionString& action = dynamic_cast<const ActionString&> (*a);
   MSG_DEBUG("action.handler", "ChangeTeam : %s", action.GetValue());
-//  if (!network.is_client()) return;
+//  if (!network.IsClient()) return;
   teams_list.SetActive (std::string(action.GetValue()));
   ActiveTeam().PrepareTurn();
   assert (!ActiveCharacter().IsDead());
@@ -257,13 +243,13 @@ void Action_ChangeTeam (const Action *a)
 
 void Action_AskVersion (const Action *a)
 {
-  if (!network.is_client()) return;
+  if (!network.IsClient()) return;
   ActionHandler::GetInstance()->NewAction(ActionString(ACTION_SEND_VERSION, Constants::VERSION));
 }
 
 void Action_SendVersion (const Action *a)
 {
-  if (!network.is_server()) return;
+  if (!network.IsServer()) return;
   const ActionString& action = dynamic_cast<const ActionString&> (*a);
   if (action.GetValue() != Constants::VERSION)
   {
@@ -272,20 +258,9 @@ void Action_SendVersion (const Action *a)
   }
 }
 
-void Action_SendTeam (const Action *a)
-{
-	// @@@ TODO @@@
-}
-
-void Action_AskTeam (const Action *a)
-{
-  if (!network.is_client()) return;
-//	action_handler.NewAction(ActionString(ACTION_SEND_TEAM, ???));
-}
-
 void Action_SendRandom (const Action *a)
 {
-  if (!network.is_client()) return;
+  if (!network.IsClient()) return;
   const ActionDouble& action = dynamic_cast<const ActionDouble&> (*a);
   randomSync.AddToTable(action.GetValue());
 }
@@ -370,11 +345,9 @@ void ActionHandler::Init()
   Register (ACTION_SET_SKIN, "set_skin", &Action_SetSkin);
   Register (ACTION_SET_FRAME, "set_frame", &Action_SetFrame);
   Register (ACTION_SET_CHARACTER_DIRECTION, "set_character_direction", &Action_SetCharacterDirection);
-  Register (ACTION_START_GAME, "start_game", &Action_StartGame);
+  Register (ACTION_CHANGE_STATE, "change_state", &Action_ChangeState);
   Register (ACTION_ASK_VERSION, "ask_version", &Action_AskVersion);
-  Register (ACTION_ASK_TEAM, "ask_team", &Action_AskTeam);
   Register (ACTION_SEND_VERSION, "send_version", &Action_SendVersion);
-  Register (ACTION_SEND_TEAM, "send_team", &Action_SendTeam);
   Register (ACTION_SEND_RANDOM, "send_random", &Action_SendRandom);
   SDL_UnlockMutex(mutex);
 }
