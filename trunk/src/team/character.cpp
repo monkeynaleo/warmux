@@ -40,6 +40,7 @@
 #include "../map/map.h"
 #include "../map/water.h"
 #include "../network/network.h"
+#include "../network/randomsync.h"
 #include "../sound/jukebox.h"
 #include "../tool/debug.h"
 #include "../tool/random.h"
@@ -844,7 +845,7 @@ void Character::Reset()
   }
 
   // Initialise l'image
-  SetDirection( randomObj.GetBool()?1:-1 );
+  SetDirection( randomSync.GetBool()?1:-1 );
 
   if(!full_walk)
     image->SetCurrentFrame ( randomObj.GetLong(0, image->GetFrameCount()-1) );
@@ -866,8 +867,7 @@ void Character::Reset()
   SetEnergyDelta (1);
   lost_energy = 0;
 
-  if(network.is_server() || network.is_local())
-    PutRandomly(false, world.dst_min_entre_vers);
+  PutRandomly(false, world.dst_min_entre_vers);
 
   assert (!IsDead());
   Ready();

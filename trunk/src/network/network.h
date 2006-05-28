@@ -68,14 +68,14 @@ public:
 	~Network();
 	void Init();
 	
-	bool is_connected();
-	bool is_local();
-	bool is_server();
-	bool is_client();
+	const bool IsConnected() const;
+	const bool IsLocal() const;
+	const bool IsServer() const;
+	const bool IsClient() const;
 	
-	void disconnect();
-	void client_connect(const std::string &host, const std::string &port);
-	void server_start(const std::string &port);
+	void Disconnect();
+	void ClientConnect(const std::string &host, const std::string &port);
+	void ServerStart(const std::string &port);
 
   void SendAction(const Action &action);
   void ReceiveActions();

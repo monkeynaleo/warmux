@@ -134,7 +134,7 @@ void MoveCharacterLeft(Character &character){
   }
 
   //Refresh skin position across network
-  if( !network.is_local() && ActiveTeam().is_local)
+  if( !network.IsLocal() && ActiveTeam().is_local)
   {
     network.SendAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
     network.SendAction(ActionString(ACTION_SET_SKIN,character.current_skin));
@@ -161,7 +161,7 @@ void MoveCharacterRight (Character &character){
 
 
   //Refresh skin position across network
-  if( !network.is_local() && ActiveTeam().is_local)
+  if( !network.IsLocal() && ActiveTeam().is_local)
   {
     network.SendAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
     network.SendAction(ActionString(ACTION_SET_SKIN,character.current_skin));
