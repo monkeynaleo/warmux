@@ -28,7 +28,7 @@
 #include "../graphic/video.h"
 #include "../tool/math_tools.h"
 #include "../map/camera.h"
-#include "../weapon/weapon_tools.h"
+#include "../weapon/explosion.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"

@@ -23,7 +23,7 @@
 //-----------------------------------------------------------------------------
 #include <algorithm>
 #include "all.h"
-#include "weapon_tools.h"
+#include "explosion.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../interface/interface.h"

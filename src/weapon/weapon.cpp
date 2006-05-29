@@ -29,7 +29,7 @@
 #include <SDL_gfxPrimitives.h>
 #include <iostream>
 #include <sstream>
-#include "weapon_tools.h"
+#include "explosion.h"
 #include "../game/time.h"
 #include "../game/game_loop.h"
 #include "../graphic/video.h"

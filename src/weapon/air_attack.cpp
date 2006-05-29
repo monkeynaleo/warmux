@@ -31,7 +31,7 @@
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-#include "../weapon/weapon_tools.h"
+#include "../weapon/explosion.h"
 
 const uint FORCE_X_MIN = 10;
 const uint FORCE_X_MAX = 120;

@@ -21,7 +21,7 @@
 
 #include "suicide.h"
 #include <iostream>
-#include "weapon_tools.h"
+#include "explosion.h"
 #include "../game/game_loop.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
