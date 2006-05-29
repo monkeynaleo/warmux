@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "parachute.h"
-#include "weapon_tools.h"
+#include "explosion.h"
 #include "../game/game.h"
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"

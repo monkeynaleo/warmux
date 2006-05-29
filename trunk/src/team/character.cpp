@@ -47,7 +47,7 @@
 #include "../tool/math_tools.h"
 #include "../weapon/suicide.h"
 #include "../weapon/crosshair.h"
-#include "../weapon/weapon_tools.h"
+#include "../weapon/explosion.h"
 
 const uint HAUT_FONT_MIX = 13;
 

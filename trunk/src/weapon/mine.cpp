@@ -23,7 +23,7 @@
 #include "mine.h"
 #include <iostream>
 #include <sstream>
-#include "weapon_tools.h"
+#include "explosion.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/sprite.h"

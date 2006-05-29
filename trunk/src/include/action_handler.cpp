@@ -36,7 +36,7 @@
 #include "../tool/i18n.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
-#include "../weapon/weapon_tools.h"
+#include "../weapon/explosion.h"
 
 // Delta appliqué à l'angle du viseur
 #define DELTA_CROSSHAIR 2

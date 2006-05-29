@@ -22,7 +22,7 @@
  *****************************************************************************/
 
 #include "dynamite.h"
-#include "weapon_tools.h"
+#include "explosion.h"
 #include "../game/config.h"
 #include "../include/app.h"
 #include "../object/objects_list.h"

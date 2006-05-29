@@ -29,7 +29,7 @@
 #include "../tool/resource_manager.h"
 #include "../tool/random.h"
 #include "../tool/point.h"
-#include "../weapon/weapon_tools.h"
+#include "../weapon/explosion.h"
 
 ParticleEngine global_particle_engine;
 
