@@ -22,8 +22,10 @@
 #include "weapon_tools.h"
 #include "../graphic/surface.h"
 #include "../graphic/video.h"
+#include "../include/action_handler.h"
 #include "../map/camera.h"
 #include "../map/map.h"
+#include "../network/network.h"
 #include "../object/objects_list.h"
 #include "../object/particle.h"
 #include "../object/physical_obj.h"
@@ -34,14 +36,39 @@
 
 Profile *weapons_res_profile = NULL;
 
+// Network explosion defined below
+void ApplyExplosion_server (const Point2i &pos,
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+		     ParticleEngine::ESmokeStyle smoke);
+
 void ApplyExplosion (const Point2i &pos,
 		     const ExplosiveWeaponConfig &config,
-		     PhysicalObj *obj_exclu,
 		     const std::string& son,
 		     bool fire_particle,
 		     ParticleEngine::ESmokeStyle smoke
 		     )
 {
+  if(network.IsLocal())
+    ApplyExplosion_common(pos, config, son, fire_particle, smoke);
+  else
+  if(network.IsServer())
+    ApplyExplosion_server(pos, config, son, fire_particle, smoke);
+  else
+  if(network.IsClient())
+    return;
+  // client receives explosion via the action handler
+}
+
+void ApplyExplosion_common (const Point2i &pos,
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+		     ParticleEngine::ESmokeStyle smoke
+		     )
+{
+
   bool cam_follow_character = false; //Set to true if an explosion is applied to a character. Then the camera shouldn't be following an object
 
   MSG_DEBUG("explosion", "explosion range : %f\n", config.explosion_range);
@@ -58,9 +85,6 @@ void ApplyExplosion (const Point2i &pos,
   // Do not care about the death of the active worm.
   FOR_ALL_CHARACTERS(equipe,ver)
   {
-    // Is it the object we do not want to manage ?
-    if ((obj_exclu != NULL) && (&(*ver) == obj_exclu)) continue;
-
     double distance, angle;
     distance = MeterDistance (pos, ver -> GetCenter());
 
@@ -113,9 +137,6 @@ void ApplyExplosion (const Point2i &pos,
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(obj) if (obj -> ptr -> GetObjectType() == objCLASSIC)
   { 
-    // Is this the object we do not want to manage ?
-    if ((obj_exclu != NULL) && (obj -> ptr == obj_exclu)) continue;
-
     double distance, angle;
     distance = MeterDistance (pos, obj -> ptr -> GetCenter());
     if (distance <= config.blast_range)
@@ -140,5 +161,93 @@ void ApplyExplosion (const Point2i &pos,
   // Do we need to generate some fire particles ?
   if (fire_particle)
      ParticleEngine::AddNow(pos , 5, particle_FIRE, true);
+}
+
+void ApplyExplosion_server (const Point2i &pos,
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+		     ParticleEngine::ESmokeStyle smoke
+		     )
+{
+  ActionHandler* action_handler = ActionHandler::GetInstance();
+
+  Action a_begin_sync(ACTION_SYNC_BEGIN);
+  network.SendAction(&a_begin_sync);
+
+  world.Dig(pos, config.explosion_range);
+  float range = config.explosion_range / PIXEL_PER_METER;
+  range *= 1.5;
+
+  Team* distant_team = &ActiveTeam(); // Active team on the client
+
+  TeamsList::iterator
+    it=teams_list.playing_list.begin(),
+    end=teams_list.playing_list.end();
+
+  for (; it != end; ++it)
+  {
+    Team& team = **it;
+    Team::iterator
+        tit = team.begin(),
+        tend = team.end();
+    int i=0;
+
+    Character* distant_character = &team.ActiveCharacter(); // Active character of the team *it on the clients
+    for (; tit != tend; ++tit, ++i)
+    {
+      Character &character = *tit;
+      double distance;
+      distance = MeterDistance (pos, character.GetCenter());
+
+      // If the worm is in the explosion range, apply damage on it !
+      if (distance <= range || distance < config.blast_range)
+      {
+        // cliens : Place characters
+        if(&team != distant_team)
+        {
+          action_handler->NewAction (new ActionString(ACTION_CHANGE_TEAM, team.GetId()));
+          distant_team = &team;
+        }
+        if(&character != distant_character)
+        {
+          action_handler->NewAction (new ActionInt(ACTION_CHANGE_CHARACTER, i));
+          distant_character = &character;
+        }
+        action_handler->NewAction (new ActionInt2(ACTION_MOVE_CHARACTER,
+                                              character.GetX(), character.GetY()));
+        Point2d speed;
+        character.GetSpeedXY(speed);
+        action_handler->NewAction (new ActionDouble2(ACTION_SET_CHARACTER_SPEED,
+                                              speed.x, speed.y));
+      }
+    }
+    if(&team.ActiveCharacter() != distant_character)
+    {
+      // Restore active character of this team
+      action_handler->NewAction (new ActionInt(ACTION_CHANGE_CHARACTER, team.ActiveCharacterIndex()));
+    }
+  }
+
+  if(&ActiveTeam() != distant_team)
+  {
+    action_handler->NewAction (new ActionString(ACTION_CHANGE_TEAM, ActiveTeam().GetId()));
+  }
+
+  ActionMulti a(ACTION_EXPLOSION);
+  a.Push(pos.x);
+  a.Push(pos.y);
+  a.Push((int)config.explosion_range);
+  a.Push((int)config.damage);
+  a.Push(config.blast_range);
+  a.Push(config.blast_force);
+  a.Push(son);
+  a.Push(fire_particle);
+  a.Push(smoke);
+
+  network.SendAction(&a);
+  Action a_sync_end(ACTION_SYNC_END);
+  network.SendAction(&a_sync_end);
+  ActionHandler::GetInstance()->ExecActions();
 }
 

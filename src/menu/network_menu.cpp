@@ -221,7 +221,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == lbox_maps)
   {
     ChangeMap();
-    action_handler->NewAction (ActionString(ACTION_SET_MAP, TerrainActif().name));
+    action_handler->NewAction (new ActionString(ACTION_SET_MAP, TerrainActif().name));
   }
 
   if (w == bt_add_team) {
@@ -230,7 +230,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
       int index = -1;
       teams_list.FindById(lbox_all_teams->ReadValue(),index)->is_local = true;
       std::string team_id = teams_list.FindById(lbox_all_teams->ReadValue(),index)->GetId();
-      action_handler->NewAction (ActionString(ACTION_NEW_TEAM, team_id));
+      action_handler->NewAction (new ActionString(ACTION_NEW_TEAM, team_id));
       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
     }
   }
@@ -239,7 +239,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     if(teams_list.FindById(lbox_selected_teams->ReadValue(),index)->is_local)
     {
       std::string team_id = teams_list.FindById(lbox_selected_teams->ReadValue(),index)->GetId();
-      action_handler->NewAction (ActionString(ACTION_DEL_TEAM, team_id));
+      action_handler->NewAction (new ActionString(ACTION_DEL_TEAM, team_id));
       MoveTeams(lbox_selected_teams, lbox_all_teams, true);
     }
   }
@@ -258,9 +258,6 @@ void NetworkMenu::Reset()
   lbox_maps->enabled = true;
 
   // Remove selected teams from the list
-//  for(std::vector<list_box_item_t>::iterator lst_it = lbox_selected_teams->GetItemsList()->begin();
-//      lst_it != lbox_selected_teams->GetItemsList()->end();
-//      lst_it++)
   while(lbox_selected_teams->GetItemsList()->size()!=0)
   {
     lbox_selected_teams->Select(0);
@@ -302,7 +299,8 @@ void NetworkMenu::__sig_ok()
   if(network.IsClient())
   {
     // Wait for the server, and stay in the menu map / team can still be changed
-    network.SendAction(Action(ACTION_CHANGE_STATE));
+    Action a(ACTION_CHANGE_STATE);
+    network.SendAction(&a);
     b_ok->enabled = false;
     b_cancel->enabled = false;
     team_box->enabled = false;

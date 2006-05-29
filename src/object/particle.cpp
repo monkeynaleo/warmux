@@ -235,8 +235,8 @@ void FireParticle::Init()
 
 void FireParticle::SignalFallEnding()
 {
-  Point2i pos = GetCenter();
-  ApplyExplosion (pos, fire_cfg, NULL, "", false, ParticleEngine::NoESmoke);
+//  Point2i pos = GetCenter();
+//  ApplyExplosion (pos, fire_cfg, "", false, ParticleEngine::NoESmoke);
 
   m_left_time_to_live = 0;
 }

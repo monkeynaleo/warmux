@@ -36,7 +36,7 @@ private:
   SDL_mutex* mutex;
 
   // Handler for each action
-  typedef void (*callback_t) (const Action *a);
+  typedef void (*callback_t) (Action *a);
   std::map<Action_t, callback_t> handler;
   typedef std::map<Action_t, callback_t>::const_iterator handler_it;
 
@@ -52,7 +52,7 @@ private:
 public:
   static ActionHandler * GetInstance();
 
-  void NewAction (const Action &a, bool repeat_to_network=true);
+  void NewAction (Action* a, bool repeat_to_network=true);
   void ExecActions ();
   void Init();
   std::string GetActionName(Action_t action);
@@ -60,7 +60,7 @@ public:
 private:
   ActionHandler();
 
-  void Exec (const Action *a);
+  void Exec (Action *a);
   void Register (Action_t action, const std::string &name, callback_t fct);
 };
 

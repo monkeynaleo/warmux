@@ -125,20 +125,23 @@ void MoveCharacterLeft(Character &character){
   bool bouge = (character.GetDirection() == -1);
   if (bouge)
   {
-//    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
+//    ActionHandler::GetInstance()->NewAction(new Action(ACTION_WALK));
     MoveCharacter(character);
   }
   else{
-    ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
+    ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 
   //Refresh skin position across network
   if( !network.IsLocal() && ActiveTeam().is_local)
   {
-    network.SendAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
-    network.SendAction(ActionString(ACTION_SET_SKIN,character.current_skin));
-    network.SendAction(ActionInt(ACTION_SET_FRAME,character.image->GetCurrentFrame()));
+    ActionInt2 a_move_char(ACTION_MOVE_CHARACTER, character.GetX(),character.GetY());
+    ActionString a_set_skin(ACTION_SET_SKIN,character.current_skin);
+    ActionInt a_set_frame(ACTION_SET_FRAME,character.image->GetCurrentFrame());
+    network.SendAction(&a_move_char);
+    network.SendAction(&a_set_skin);
+    network.SendAction(&a_set_frame);
   }
 }
 
@@ -150,12 +153,12 @@ void MoveCharacterRight (Character &character){
   bool bouge = (character.GetDirection() == 1);
   if (bouge)
   {
-//    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
+//    ActionHandler::GetInstance()->NewAction(new Action(ACTION_WALK));
     MoveCharacter(character);
   }
   else
   {
-    ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
+    ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 
@@ -163,9 +166,12 @@ void MoveCharacterRight (Character &character){
   //Refresh skin position across network
   if( !network.IsLocal() && ActiveTeam().is_local)
   {
-    network.SendAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
-    network.SendAction(ActionString(ACTION_SET_SKIN,character.current_skin));
-    network.SendAction(ActionInt(ACTION_SET_FRAME,character.image->GetCurrentFrame()));
+    ActionInt2 a_move_char(ACTION_MOVE_CHARACTER, character.GetX(),character.GetY());
+    ActionString a_set_skin(ACTION_SET_SKIN,character.current_skin);
+    ActionInt a_set_frame(ACTION_SET_FRAME,character.image->GetCurrentFrame());
+    network.SendAction(&a_move_char);
+    network.SendAction(&a_set_skin);
+    network.SendAction(&a_set_frame);
   }
 }
 

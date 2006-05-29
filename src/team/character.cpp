@@ -140,7 +140,7 @@ void Character::SignalDeath()
 
   ExplosiveWeaponConfig cfg;
 
-  ApplyExplosion ( GetCenter(), cfg, NULL);
+  ApplyExplosion ( GetCenter(), cfg);
 
   // Change test rectangle
   SetSize( image->GetSize() );
@@ -490,10 +490,10 @@ void Character::HandleKeyEvent(int action, int event_type)
           switch (action)
           {
             case ACTION_JUMP:
-              action_handler->NewAction (Action(ACTION_JUMP));
+              action_handler->NewAction (new Action(ACTION_JUMP));
 	            return ;
             case ACTION_HIGH_JUMP:
-              action_handler->NewAction (Action(ACTION_HIGH_JUMP));
+              action_handler->NewAction (new Action(ACTION_HIGH_JUMP));
               return ;
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:
@@ -529,7 +529,7 @@ void Character::HandleKeyEvent(int action, int event_type)
               {
                 do_nothing_time = Time::GetInstance()->Read();
                 CurseurVer::GetInstance()->Cache();
-	              action_handler->NewAction (Action(ACTION_UP));
+	              action_handler->NewAction (new Action(ACTION_UP));
               }
 	      break ;
 
@@ -538,7 +538,7 @@ void Character::HandleKeyEvent(int action, int event_type)
               {
                 do_nothing_time = Time::GetInstance()->Read();
                 CurseurVer::GetInstance()->Cache();
-     	          action_handler->NewAction (Action(ACTION_DOWN));
+     	          action_handler->NewAction (new Action(ACTION_DOWN));
               }
 	      break ;
             default:

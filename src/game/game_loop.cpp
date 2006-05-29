@@ -83,7 +83,8 @@ void GameLoop::InitGameData_NetServer()
 
   ActionHandler * action_handler = ActionHandler::GetInstance();
 
-  network.SendAction (Action(ACTION_CHANGE_STATE));
+  Action a_change_state(ACTION_CHANGE_STATE);
+  network.SendAction ( &a_change_state );
   network.state = Network::NETWORK_INIT_GAME;
   world.Reset();
 
@@ -105,13 +106,13 @@ void GameLoop::InitGameData_NetServer()
 
   //Signale les clients que le jeu peut démarrer
   //Attend que le client ait démarré
-  network.SendAction (Action(ACTION_CHANGE_STATE));
+  network.SendAction ( &a_change_state );
   while (network.state != Network::NETWORK_READY_TO_PLAY)
   {
     action_handler->ExecActions();
     SDL_Delay(200);
   }
-  network.SendAction (Action(ACTION_CHANGE_STATE));
+  network.SendAction ( &a_change_state );
   network.state = Network::NETWORK_PLAYING;
 }
 
@@ -124,7 +125,9 @@ void GameLoop::InitGameData_NetClient()
 
   world.Reset();
 
-  network.SendAction (Action(ACTION_CHANGE_STATE));
+  Action a_change_state(ACTION_CHANGE_STATE);
+
+  network.SendAction (&a_change_state);
   while (network.state != Network::NETWORK_READY_TO_PLAY)
   {
     // The server is placing characters on the map
@@ -293,7 +296,13 @@ void GameLoop::Refresh()
       Clavier::GetInstance()->Refresh();
     }
 
-    ActionHandler::GetInstance()->ExecActions();     
+    do
+    {
+      ActionHandler::GetInstance()->ExecActions();
+      if(network.sync_lock) SDL_Delay(SDL_TIMESLICE);
+    }
+    while(network.sync_lock);
+
     FOR_ALL_CHARACTERS(equipe,ver) ver -> Refresh();
 
     // Recalcule l'energie des equipes
@@ -535,7 +544,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
       if( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
        || game_mode->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
       {
-              action_handler->NewAction(ActionInt(ACTION_CHANGE_CHARACTER,
+              action_handler->NewAction(new ActionInt(ACTION_CHANGE_CHARACTER,
                                        ActiveTeam().NextCharacterIndex()));
       }
     } 

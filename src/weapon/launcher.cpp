@@ -67,7 +67,7 @@ void WeaponBullet::Explosion()
   if (dernier_ver_touche == NULL) {
     // Applique les degats et le souffle aux vers
     Point2i pos = GetCenter();
-    ApplyExplosion (pos, cfg, NULL, "", false, ParticleEngine::LittleESmoke);
+    ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke);
   } else {
     dernier_ver_touche -> SetEnergyDelta (-cfg.damage);
     
@@ -253,7 +253,7 @@ void WeaponProjectile::Explosion()
 
   // Applique les degats et le souffle aux vers
   Point2i pos = GetCenter();
-  ApplyExplosion (pos, cfg, NULL);
+  ApplyExplosion (pos, cfg);
 }
 
 //-----------------------------------------------------------------------------
@@ -289,7 +289,7 @@ bool WeaponLauncher::p_Shoot ()
 void WeaponLauncher::DirectExplosion()
 {
   Point2i pos = ActiveCharacter().GetCenter();
-  ApplyExplosion (pos, cfg(), NULL);
+  ApplyExplosion (pos, cfg());
 }
 
 void WeaponLauncher::Explosion()
