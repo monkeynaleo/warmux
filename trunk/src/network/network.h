@@ -63,6 +63,7 @@ public:
   uint max_player_number;
   uint connected_player;
   uint client_inited;
+  bool sync_lock;
 
 	Network();
 	~Network();
@@ -77,7 +78,7 @@ public:
 	void ClientConnect(const std::string &host, const std::string &port);
 	void ServerStart(const std::string &port);
 
-  void SendAction(const Action &action);
+  void SendAction(Action* action);
   void ReceiveActions();
 
   void AcceptIncoming();

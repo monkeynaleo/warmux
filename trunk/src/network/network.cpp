@@ -44,6 +44,7 @@ Network::Network()
   m_is_client = false;
   state = NETWORK_NOT_CONNECTED;
   inited = false;
+  sync_lock = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -246,7 +247,7 @@ void Network::ReceiveActions()
         printf("New client connected\n");
         if(connected_player >= max_player_number)
           RejectIncoming();
-        ActionHandler::GetInstance()->NewAction(Action(ACTION_ASK_VERSION));
+        ActionHandler::GetInstance()->NewAction(new Action(ACTION_ASK_VERSION));
       }
     }
 
@@ -275,7 +276,7 @@ void Network::ReceiveActions()
 
         Action* a = make_action((Uint32*)packet);
         std::cout << "received " << *a << " (" << (int)packet_size << " octets)" << std::endl;
-        ActionHandler::GetInstance()->NewAction(*a, false);
+        ActionHandler::GetInstance()->NewAction(a, false);
 
         // Repeat the packet to other clients:
         if(a->GetType() != ACTION_SEND_VERSION
@@ -288,7 +289,6 @@ void Network::ReceiveActions()
           SDLNet_TCP_Send(*client,&packet_size,1);
           SDLNet_TCP_Send(*client,packet,packet_max_size);
         }
-        delete a;
       }
       sock++;
     }
@@ -296,14 +296,14 @@ void Network::ReceiveActions()
 }
 
 // Send Messages
-void Network::SendAction(const Action &action) 
+void Network::SendAction(Action* action)
 {
   if (!m_is_connected) return;
 
   char size = packet_max_size;
   Uint32 packet[packet_max_size];
   memset(packet,0,packet_max_size);
-  action.Write(packet);
+  action->Write(packet);
 
   assert(*((char*)packet) != 0 );
 
@@ -314,7 +314,7 @@ void Network::SendAction(const Action &action)
     SDLNet_TCP_Send(*client,&size,1);
     SDLNet_TCP_Send(*client,packet,packet_max_size);
   }
-  std::cout << "sending " << action << std::endl;
+  std::cout << "sending " << *action << std::endl;
 }
 
 //-----------------------------------------------------------------------------
@@ -336,11 +336,17 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SHOOT:
     return new ActionDoubleInt(type, input);
 
+  case ACTION_EXPLOSION:
+    return new ActionMulti(type, input);
+
   case ACTION_SEND_RANDOM:
     return new ActionDouble(type, input);
 
   case ACTION_MOVE_CHARACTER:
     return new ActionInt2(type, input);
+
+  case ACTION_SET_CHARACTER_SPEED:
+    return new ActionDouble2(type, input);
 
   case ACTION_CHANGE_CHARACTER:
   case ACTION_CHANGE_WEAPON:
@@ -368,6 +374,8 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_CLEAR_TEAMS:
   case ACTION_CHANGE_STATE:
   case ACTION_ASK_VERSION:
+  case ACTION_SYNC_BEGIN:
+  case ACTION_SYNC_END:
     return new Action(type);
 
   case ACTION_WALK:

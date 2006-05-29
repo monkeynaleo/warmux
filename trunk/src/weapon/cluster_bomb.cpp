@@ -69,7 +69,7 @@ void Cluster::SignalCollision()
     return;
   }
 
-  ApplyExplosion (GetPosition(), cfg, NULL, "weapon/explosion", false, ParticleEngine::LittleESmoke);
+  ApplyExplosion (GetPosition(), cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
 }
 
 //-----------------------------------------------------------------------------
