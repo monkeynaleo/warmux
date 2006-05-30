@@ -208,13 +208,14 @@ void Character::DrawName (int dy) const
   }
 }
 
-void Character::SetEnergyDelta (int delta)
+void Character::SetEnergyDelta (int delta, bool do_report)
 {
   // If already dead, do nothing
   if (IsDead()) return;
 
   // Report damage to damage performer
-  ActiveCharacter().MadeDamage(-delta, *this);
+  if (do_report)
+    ActiveCharacter().MadeDamage(-delta, *this);
 
   uint sauve_energie = energy;
   Color color;
@@ -826,7 +827,7 @@ void Character::FrameImageSuivante()
 }
 
 void Character::Reset() 
-{
+{  
   // Reset de l'état du ver
   desactive = false;
 
@@ -864,7 +865,7 @@ void Character::Reset()
   // Energie
   energy = GameMode::GetInstance()->character.init_energy-1;
   energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.init_energy);
-  SetEnergyDelta (1);
+  SetEnergyDelta (1, false);
   lost_energy = 0;
 
   PutRandomly(false, world.dst_min_entre_vers);

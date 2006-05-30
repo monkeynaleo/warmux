@@ -58,7 +58,7 @@ void TeamEnergy :: Init ()
   dy = 0;
   tps_debut_mvt = 0;
   valeur_max = 0;
-  status = EnergieStatusOK;
+  status = EnergyStatusOK;
   barre_energie.InitPos (0,0, BARRE_LARG, BARRE_HAUT);
 
   barre_energie.SetValueColor( Color(R_INIT, V_INIT, B_INIT, ALPHA) );
@@ -84,32 +84,32 @@ void TeamEnergy :: Refresh ()
   switch(status)
   {
   //La valeur de l'énergie d'une des équipe change
-  case EnergieStatusValeurChange:
+  case EnergyStatusValueChange:
     if(nv_valeur > valeur)
       valeur = nv_valeur;
     if(valeur > nv_valeur)
       --valeur;
     if(valeur == nv_valeur)
-      status = EnergieStatusAttend;
+      status = EnergyStatusWait;
     break;
 
   //Le classement se modifie
-  case EnergieStatusClassementChange:
+  case EnergyStatusClassementChange:
     Mouvement();
     break;
 
   //Aucun changement ne s'effectue en ce moment
-  case EnergieStatusOK:
+  case EnergyStatusOK:
     if( valeur != nv_valeur && !EstEnMouvement())
-      status = EnergieStatusValeurChange;
+      status = EnergyStatusValueChange;
     else
     if( classement != nv_classement )
-      status = EnergieStatusClassementChange;
+      status = EnergyStatusClassementChange;
     break;
 
   //Cette barre d'énergie n'a plus rien à faire
   //Elle attend une synchronisation avec les autres barres
-  case EnergieStatusAttend:
+  case EnergyStatusWait:
     break;
   }
 }
@@ -185,14 +185,14 @@ void TeamEnergy::Mouvement ()
     //D'autres jauges sont en train de changer de classement
     //Celle-là ne doit pas changer de classement tant que sa
     //valeur d'énergie n'a pas été actualisée à l'écran
-    status = EnergieStatusAttend;
+    status = EnergyStatusWait;
     return;
   }
 
   if( classement == nv_classement && !EstEnMouvement())
   {
     //D'autres jauges sont en train de changer de classement
-    status = EnergieStatusAttend;
+    status = EnergyStatusWait;
     return;
   }
 
@@ -219,7 +219,7 @@ void TeamEnergy::Mouvement ()
       dx = 0;
       classement = nv_classement;
       tps_debut_mvt = 0;
-      status = EnergieStatusAttend;
+      status = EnergyStatusWait;
       return;
     }
   }

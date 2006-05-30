@@ -348,7 +348,6 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SET_CHARACTER_SPEED:
     return new ActionDouble2(type, input);
 
-  case ACTION_CHANGE_CHARACTER:
   case ACTION_CHANGE_WEAPON:
   case ACTION_WIND:
   case ACTION_SET_CHARACTER_DIRECTION:
@@ -365,6 +364,7 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SET_SKIN:
     return new ActionString(type, input);
 
+  case ACTION_CHANGE_CHARACTER:
   case ACTION_MOVE_LEFT:
   case ACTION_MOVE_RIGHT:
   case ACTION_JUMP:

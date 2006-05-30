@@ -86,18 +86,20 @@ bool Mouse::ActionClicG()
     bool ver_choisi=false;
     Team::iterator it=ActiveTeam().begin(),
 	                 fin=ActiveTeam().end();
-    uint index=0;
-    for( ; it != fin; ++it, ++index ){
+
+    for( ; it != fin; ++it) {
       if( &(*it) != &ActiveCharacter()
         && !it -> IsDead()
         && it->GetRect().Contains( pos_monde ) ){
-        ver_choisi = true;
+	
+	ver_choisi = true;
         break;
       }
     }
 
     if( ver_choisi ){
-      ActiveTeam().SelectCharacterIndex (index);
+      while ( &(*it) != &ActiveCharacter() )
+	ActiveTeam().NextCharacter ();
       return true;
     }
 

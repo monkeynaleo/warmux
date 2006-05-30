@@ -42,10 +42,12 @@ private:
 
 public:
   TeamsList();
+  ~TeamsList();
   void LoadList ();
   void NextTeam (bool debut_jeu);
   Team& ActiveTeam();
-  void Reset();
+  void LoadGamingData(uint how_many_characters);
+  void UnloadGamingData();
   void Clear();
 
 

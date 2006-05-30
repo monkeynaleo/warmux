@@ -43,6 +43,12 @@ TeamsList teams_list;
 TeamsList::TeamsList()
 {}
 
+TeamsList::~TeamsList()
+{
+  Clear();
+  full_list.clear();
+}
+
 //-----------------------------------------------------------------------------
 
 void TeamsList::NextTeam (bool debut_jeu)
@@ -87,21 +93,13 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
   if (!S_ISDIR(stat_file.st_mode)) return;
 #endif
 	
-  // Add a new empty team
-  Team nv_equipe;
-  full_list.push_back(nv_equipe);
-
-  // Try to load team 
-  bool ok = full_list.back().Init (dir, team);
-
-  // If fails, remove the team
-  if (!ok)
-  {
-    full_list.pop_back();
-	return;
+  // Add the team
+  Team * tmp = Team::CreateTeam (dir, team);
+  if (tmp != NULL) {
+    full_list.push_back(*tmp);
+    std::cout << ((1<full_list.size())?", ":" ") << team;
+    std::cout.flush();
   }
-  std::cout << ((1<full_list.size())?", ":" ") << team;
-  std::cout.flush();
 }
 
 //-----------------------------------------------------------------------------
@@ -169,21 +167,24 @@ void TeamsList::LoadList()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::Reset()
+void TeamsList::LoadGamingData(uint how_many_characters)
 {
   m_equipe_active = playing_list.begin();
 
-  // Commence par désactiver tous les vers
-  iterator it=playing_list.begin(), fin=playing_list.end();
-/*  for (; it != fin; ++it) 
-  {
-	Team &team = **it;
-    Team::iterator ver=team.begin(), dernier_ver=team.end();
-    for (; ver != dernier_ver; ++ver) (*ver).StopPlaying();
-  } 
-*/
-  // Reset de toutes les équipes
-  for (it=playing_list.begin(); it != fin; ++it) (**it).Reset();
+  iterator it=playing_list.begin(), end=playing_list.end();
+
+  // Load the data of all teams
+  for (; it != end; ++it) (**it).LoadGamingData(how_many_characters);
+}
+
+//-----------------------------------------------------------------------------
+
+void TeamsList::UnloadGamingData()
+{ 
+  iterator it=playing_list.begin(), end=playing_list.end();
+
+  // Unload the data of all teams
+  for (; it != end; ++it) (**it).UnloadGamingData();
 }
 
 //-----------------------------------------------------------------------------
@@ -238,8 +239,8 @@ void TeamsList::InitEnergy ()
   uint max = 0;
   for (; it != fin; ++it)
   {
-    if( (**it).LitEnergie() > max)
-      max = (**it).LitEnergie();
+    if( (**it).ReadEnergy() > max)
+      max = (**it).ReadEnergy();
   }
 
   //Initialisation de la barre d'énergie de chaque équipe
@@ -260,23 +261,23 @@ void TeamsList::InitEnergy ()
     for (; it2 != fin; ++it2)
     {
       if((it != it2)
-      && (**it2).LitEnergie() > (**it).LitEnergie() )
+      && (**it2).ReadEnergy() > (**it).ReadEnergy() )
         ++classement;
     }
-    (**it).energie.classement_tmp = classement;
+    (**it).energy.classement_tmp = classement;
   }
   it=playing_list.begin();
   for (; it != fin; ++it)
   {
-    uint classement = (**it).energie.classement_tmp;
+    uint classement = (**it).energy.classement_tmp;
     iterator it2=playing_list.begin();
     for (it2 = it; it2 != fin; ++it2)
     {
       if((it != it2)
-      && (**it2).LitEnergie() == (**it).LitEnergie() )
+      && (**it2).ReadEnergy() == (**it).ReadEnergy() )
         ++classement;
     }
-    (**it).energie.FixeClassement(classement);
+    (**it).energy.FixeClassement(classement);
   }
 }
 
@@ -291,12 +292,12 @@ void TeamsList::RefreshEnergy ()
   // - On prépare les jauges à l'évenement suivant
   
   iterator it=playing_list.begin(), fin=playing_list.end();
-  uint status;
+  energy_t status;
 
   bool en_attente = true; // Toute les jauges sont en attente
 
   for (; it != fin; ++it) {
-    if( (**it).energie.status != EnergieStatusAttend)
+    if( (**it).energy.status != EnergyStatusWait)
     {
       en_attente = false;
       break;
@@ -306,21 +307,21 @@ void TeamsList::RefreshEnergy ()
   //Une des jauge éxécute un ordre?
   if(!en_attente)
   {
-    status = EnergieStatusOK;
+    status = EnergyStatusOK;
 
     //Une des jauges change de valeur?
     for (it=playing_list.begin(); it != fin; ++it) {
-      if( (**it).energie.status == EnergieStatusValeurChange) {
-        status = EnergieStatusValeurChange;
+      if( (**it).energy.status == EnergyStatusValueChange) {
+        status = EnergyStatusValueChange;
         break;
       }
     }
   
     //Une des jauges change de classement?
     for (it=playing_list.begin(); it != fin; ++it) {
-      if( (**it).energie.status == EnergieStatusClassementChange
-      && ((**it).energie.EstEnMouvement() || status == EnergieStatusOK)) {
-        status = EnergieStatusClassementChange;
+      if( (**it).energy.status == EnergyStatusClassementChange
+      && ((**it).energy.EstEnMouvement() || status == EnergyStatusOK)) {
+        status = EnergyStatusClassementChange;
         break;
       }
     }
@@ -328,22 +329,22 @@ void TeamsList::RefreshEnergy ()
   else {
     //Les jauges sont toutes en attente
     //->on les met OK pour un nouvel ordre
-    status = EnergieStatusOK;
+    status = EnergyStatusOK;
   }
 
   // On recopie l'ordre a donner aux jauges
-  if(status != EnergieStatusOK || en_attente)
+  if(status != EnergyStatusOK || en_attente)
   {
     it=playing_list.begin();
     for (; it != fin; ++it) {
-      (**it).energie.status = status;
+      (**it).energy.status = status;
     }
   }
 
   // Actualisation des valeurs (pas d'actualisation de l'affichage)
   for (it=playing_list.begin(); it != fin; ++it)
   {
-    (**it).ActualiseBarreEnergie();
+    (**it).UpdateEnergyBar();
     RefreshSort();
   }
 }
@@ -363,25 +364,25 @@ void TeamsList::RefreshSort ()
     for (; it2 != fin; ++it2)
     {
       if((it != it2)
-      && (**it2).LitEnergie() > (**it).LitEnergie() )
+      && (**it2).ReadEnergy() > (**it).ReadEnergy() )
         ++classement;
     }
-    (**it).energie.classement_tmp = classement;
+    (**it).energy.classement_tmp = classement;
   }
 
   //Réglage des égalités
   it=playing_list.begin();
   for (; it != fin; ++it)
   {
-    classement = (**it).energie.classement_tmp;
+    classement = (**it).energy.classement_tmp;
     iterator it2=playing_list.begin();
     for (it2 = it; it2 != fin; ++it2)
     {
       if((it != it2)
-      && (**it2).LitEnergie() == (**it).LitEnergie() )
+      && (**it2).ReadEnergy() == (**it).ReadEnergy() )
         ++classement;
     }
-    (**it).energie.NouveauClassement(classement);
+    (**it).energy.NouveauClassement(classement);
   }
 }
 
