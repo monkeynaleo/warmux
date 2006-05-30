@@ -36,221 +36,187 @@
 #include <sstream>
 #include <iostream>
 
-const char* NOM_DEFAUT_EQUIPE = "Team X";
-
-Team::Team()
+Team::Team(const std::string& _teams_dir,
+	   const std::string& _id, 
+	   const std::string& _name, 
+	   const Surface& _flag, 
+	   const std::string& _sound_profile)
 {
-  vers_fin = 0;
-  vers_fin_it = vers.end();
   is_local = true;
-  ver_actif = -1;
+  active_character = NULL;
+
+  camera_est_sauve = false;
+  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
+
+  m_teams_dir = _teams_dir;
+  m_id = _id;
+  m_name = _name;
+  m_sound_profile = _sound_profile;
+
+  flag = _flag;
+  crosshair.Init();
 }
 
-// ******* TODO: KILL THIS FUNCTIONS !!! ********
-
-Character& Team::operator[] (uint index)
-{
-  assert (index < vers.size());
-  iterator it=vers.begin();
-  for (uint i=0; i<index; ++i) ++it;
-  return *it;
-}
-
-const Character& Team::operator[] (uint index) const
-{
-  assert (index < vers.size());
-  const_iterator it=vers.begin();
-  for (uint i=0; i<index; ++i) ++it;
-  return *it;
-}
-
-// ******* end of TODO: KILL THIS FUNCTIONS !!! ********
-
-
-bool Team::Init (const std::string &teams_dir, const std::string &id)
+Team * Team::CreateTeam (const std::string& teams_dir, 
+			 const std::string& id)
 {
   std::string nomfich;
-  ver_actif = -1;
   try
   {
     LitDocXml doc;
-    m_id = id;
 
     // Load XML
     nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
     if (!IsFileExist(nomfich)) return false;
     if (!doc.Charge (nomfich)) return false;
 
+    // Load name
+    std::string name;
+    if (!LitDocXml::LitString(doc.racine(), "name", name)) return NULL;
+
+    // Load flag
     Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
-     
-    // Load Data
-    if (!LoadData (doc.racine(), res)) return false;
+    Surface flag = resource_manager.LoadImage(res, "flag");
+
+    // Get sound profile
+    std::string sound_profile;
+    if (!LitDocXml::LitString(doc.racine(), "sound_profile", sound_profile))
+      sound_profile = "default";
+
+    return new Team(teams_dir, id, name, flag, sound_profile) ;
   }
   catch (const xmlpp::exception &e)
   {
     std::cerr << std::endl
               << Format(_("Error loading team %s:"), id.c_str())
               << std::endl << e.what() << std::endl;
-    return false;
+    return NULL;
   }
-  return true;
+
+  return NULL;
+}
+
+
+bool Team::LoadCharacters(uint howmany)
+{
+  assert(howmany <= GameMode::GetInstance()->max_characters);
+
+  std::string nomfich;
+  try
+  {
+    LitDocXml doc;
+
+    // Load XML
+    nomfich = m_teams_dir+m_id+PATH_SEPARATOR+ "team.xml";
+    if (!IsFileExist(nomfich)) return false;
+    if (!doc.Charge (nomfich)) return false;
+
+    // Create the characters
+    xmlpp::Element *xml = LitDocXml::AccesBalise (doc.racine(), "team");
+    
+    xmlpp::Node::NodeList nodes = xml -> get_children("character");
+    xmlpp::Node::NodeList::iterator 
+      it=nodes.begin(),
+      fin=nodes.end();
+
+    characters.clear();
+    bool fin_bcl;
+    active_character = NULL;
+    do
+      {
+	xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
+	Skin *skin;
+	std::string character_name="Soldat Inconnu";
+	std::string skin_name="ver_jaune";
+	LitDocXml::LitAttrString(elem, "name", character_name);
+	LitDocXml::LitAttrString(elem, "skin", skin_name);
+	
+	if (skins_list.find(skin_name) != skins_list.end()) {
+	  skin = &skins_list[skin_name];
+	} else {
+	  std::cerr 
+	    << Format(_("Error: can't find the skin \"%s\" for the team \"%s\"."),
+		      skin_name.c_str(),
+		      m_name.c_str()) 
+	    << std::endl;
+	  return false;
+	}
+	
+	// Initialise les variables du ver, puis l'ajoute à la liste
+	Character new_character(*this, character_name, skin);
+	characters.push_back(new_character);
+	characters.back().Reset();
+	
+	MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
+	
+	// C'est la fin ?
+	++it;
+	fin_bcl = (it == fin);
+	fin_bcl |= (howmany <= characters.size());
+      } while (!fin_bcl);
+    
+    active_character = characters.begin();
+    
+  }
+  catch (const xmlpp::exception &e)
+    {
+      std::cerr << std::endl
+		<< Format(_("Error loading team's data %s:"), m_id.c_str())
+		<< std::endl << e.what() << std::endl;
+      return false;
+    }
+
+  return (characters.size() == howmany);
 }
 
 void Team::InitEnergy (uint max)
 {
-  energie.Init();
-  energie.ChoisitNom(m_name);
-  energie.FixeMax(max);
-  energie.FixeValeur(LitEnergie());
+  energy.Init();
+  energy.ChoisitNom(m_name);
+  energy.FixeMax(max);
+  energy.FixeValeur(ReadEnergy());
 }
 
-uint Team::LitEnergie ()
+uint Team::ReadEnergy ()
 {
-  uint total_energie = 0;
-  for (int index=0; index < vers_fin; ++index) {
-    if( !(*this)[index].IsDead() )
-      total_energie += (*this)[index].GetEnergy();
+  uint total_energy = 0;
+  
+  iterator it = characters.begin(), end = characters.end();
+
+  for (; it != end; ++it) {
+    if ( !(*it).IsDead() )
+      total_energy += (*it).GetEnergy();
   }
-  return total_energie;
+
+  return total_energy;
 }
 
-void Team::ActualiseBarreEnergie ()
+void Team::UpdateEnergyBar ()
 {
-  energie.NouvelleValeur(LitEnergie());
+  energy.NouvelleValeur(ReadEnergy());
 }
 
-bool Team::LoadCharacters( xmlpp::Element *xml)
-{
-  // Create the characters
-  xml = LitDocXml::AccesBalise (xml, "team");
-
-  xmlpp::Node::NodeList nodes = xml -> get_children("character");
-  xmlpp::Node::NodeList::iterator 
-    it=nodes.begin(),
-    fin=nodes.end();
-
-  vers.clear();
-  bool fin_bcl;
-  do
-  {
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-    Skin *skin;
-    std::string character_name="Soldat Inconnu";
-    std::string skin_name="ver_jaune";
-    LitDocXml::LitAttrString(elem, "name", character_name);
-    LitDocXml::LitAttrString(elem, "skin", skin_name);
-
-    if (skins_list.find(skin_name) != skins_list.end()) {
-      skin = &skins_list[skin_name];
-    } else {
-      std::cerr 
-        << Format(_("Error: can't find the skin \"%s\" for the team \"%s\"."),
-            skin_name.c_str(),
-            m_name.c_str()) 
-        << std::endl;
-      return false;
-    }
-
-    // Initialise les variables du ver, puis l'ajoute à la liste
-    Character new_character (*this, character_name, skin);
-    vers.push_back(new_character);
-
-    MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
-
-    // C'est la fin ?
-    ++it;
-    fin_bcl = (it == fin);
-    fin_bcl |= (GameMode::GetInstance()->max_characters <= vers.size());
-  } while (!fin_bcl);
-
-  ver_actif = 0;
-  vers_fin = vers.size();
-  vers_fin_it = vers.end();
-  return (1 <= vers.size());
-}
-
-bool Team::LoadData( xmlpp::Element *xml, Profile *res_profile)
-{
-  // Default value
-  camera_est_sauve = false;
-  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
-
-  m_name = "Team unamed";
-  m_sound_profile="default";
-  crosshair.Init();
-
-  // Load name
-  if (!LitDocXml::LitString(xml, "name", m_name)) return false;
-
-  // Load flag
-  ecusson = resource_manager.LoadImage( res_profile, "flag");
-
-  // Get sound profile
-  LitDocXml::LitString(xml, "sound_profile", m_sound_profile);
-    
-  return LoadCharacters(xml);
-}
-
-int Team::NextCharacterIndex()
-{
-  // Passe au ver suivant
-  assert (0 < NbAliveCharacter());
-  int copy = ver_actif;
-  do
-  { 
-    ++copy;
-    if (copy == vers_fin) copy = 0;
-  } while ((*this)[copy].IsDead());
-  return copy;
-}
-
-void Team::internal_NextCharacter()
-{
-  // Passe au ver suivant
-  assert (0 < NbAliveCharacter());
-  do
-  { 
-    ++ver_actif;
-    if (ver_actif == vers_fin) ver_actif = 0;
-  } while (ActiveCharacter().IsDead());
-}
-
-/*   not used anymore
 void Team::NextCharacter()
 {
-  internal_NextCharacter();
-
-  // Prépare le tour pour le nouveau ver
-  camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
-  curseur_ver.SuitVerActif();
+  // Passe au ver suivant
+  assert (0 < NbAliveCharacter());
+  do
+  { 
+    ++active_character;
+    if (active_character == characters.end()) 
+      active_character = characters.begin();
+  } while (ActiveCharacter().IsDead());
 }
-*/
 
 int Team::NbAliveCharacter() const
 {
   uint nbr = 0;
-  for (int index=0; index < vers_fin; ++index)
-    if (!(*this)[index].IsDead()) ++nbr;
+  const_iterator it= characters.begin(), end=characters.end();
+  
+  for (; it!=end; ++it)
+    if ( !(*it).IsDead() ) nbr++;
+
   return nbr;
-}
-
-void Team::SelectCharacterIndex (uint index)
-{
-  // Ver mort ?
-  assert (index < vers.size());
-  if ((*this)[index].IsDead()) {
-    int i = (++index)%vers.size();
-    SelectCharacterIndex(i);
-    return;
-  }
-
-  // Change de ver
-  if(ver_actif != -1)
-    (*this)[ver_actif].StopPlaying();
-  ver_actif = index;
-  (*this)[ver_actif].StartPlaying();
-  camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
-  CurseurVer::GetInstance()->SuitVerActif();
 }
 
 // Prepare le tour d'une equipe
@@ -260,7 +226,7 @@ void Team::PrepareTurn()
   if (ActiveCharacter().IsDead())
   {
     camera_est_sauve = false;
-    internal_NextCharacter();
+    NextCharacter();
   }
 
   if (camera_est_sauve) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
@@ -278,14 +244,9 @@ void Team::PrepareTurn()
   }
 }
 
-int Team::ActiveCharacterIndex() const
-{ 
-  return ver_actif;
-}
-
 Character& Team::ActiveCharacter()
 { 
-  return (*this)[ver_actif];
+  return (*active_character);
 }
 
 // Change d'arme
@@ -355,12 +316,12 @@ void Team::ResetNbUnits()
   m_nb_units[ active_weapon->GetName() ] = active_weapon->ReadInitialNbUnit();
 }
 
-Team::iterator Team::begin() { return vers.begin(); }
-Team::iterator Team::end() { return vers_fin_it; }
+Team::iterator Team::begin() { return characters.begin(); }
+Team::iterator Team::end() { return characters.end(); }
 
-void Team::Reset()
+void Team::LoadGamingData(uint how_many_characters)
 {
-  // Reset des munitions
+  // Reset ammos
   m_nb_ammos.clear();
   m_nb_units.clear();
   std::list<Weapon *> l_weapons_list = weapons_list.GetList() ;
@@ -375,30 +336,25 @@ void Team::Reset()
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
   camera_est_sauve = false;
 
-  // Reset des vers
-  ver_actif = 0;
-  vers_fin_it = vers.end();
-  iterator it=vers.begin(), fin=vers.end();
-  uint n = 1;
-  for (; it != fin; ++it, ++n) 
-  {
-    vers_fin_it = it;
-    ++vers_fin_it;
-    it -> Reset();
-    if (n == GameMode::GetInstance()->max_characters) break;
-  }
-  vers_fin = n;
+  LoadCharacters(how_many_characters);
+
   crosshair.Reset();
+}
+
+void Team::UnloadGamingData()
+{
+  // Clear list of characters
+  characters.clear();
 }
 
 void Team::Draw()
 {
-  energie.Draw ();
+  energy.Draw ();
 }
 
 void Team::Refresh()
 {
-  energie.Refresh();
+  energy.Refresh();
 }
 
 Weapon& Team::AccessWeapon() const { return *active_weapon; }

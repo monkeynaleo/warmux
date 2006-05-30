@@ -173,7 +173,7 @@ void Interface::DisplayCharacterInfo ()
    
   // Display team logo
   Point2i dst(pos + TEAM_ICON_POS);
-  app->video.window.Blit( character_under_cursor->TeamAccess().ecusson, dst);
+  app->video.window.Blit( character_under_cursor->TeamAccess().flag, dst);
 }
 
 void Interface::DisplayWeaponInfo ()

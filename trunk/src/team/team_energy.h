@@ -26,17 +26,19 @@
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
 
-//Les jauges sont prêtes pour une nouvelle opération
-const uint EnergieStatusOK = 0;
+typedef enum {
+  //Les jauges sont prêtes pour une nouvelle opération
+  EnergyStatusOK,
 
-//Les jauges peuvent changer leur valeur
-const uint EnergieStatusValeurChange = 1;
+  //Les jauges peuvent changer leur valeur
+  EnergyStatusValueChange,
 
-//Les jauges peuvent changer leur classement
-const uint EnergieStatusClassementChange = 2;
+  //Les jauges peuvent changer leur classement
+  EnergyStatusClassementChange,
 
-//LA jauge attend que toutes les jauges aient fini leur opération en cour
-const uint EnergieStatusAttend = 3;
+  //LA jauge attend que toutes les jauges aient fini leur opération en cour
+  EnergyStatusWait
+} energy_t;
 
 class TeamEnergy
 {
@@ -59,7 +61,7 @@ class TeamEnergy
 
   public :
     uint classement_tmp;
-    uint status;
+    energy_t status;
 
     TeamEnergy();
     ~TeamEnergy();

@@ -365,7 +365,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
   if(network.IsConnected())
   {
     Team* last_team = teams_list.FindByIndex(0);
-    // Display the ecusson of the team
+    // Display the flags of the team
     int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
     if (t != -1) {
       int index = -1;
@@ -381,7 +381,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     }
 
     AppWormux * app = AppWormux::GetInstance();
-    app->video.window.Blit( last_team->ecusson, space_for_logo->GetPosition() );
+    app->video.window.Blit( last_team->flag, space_for_logo->GetPosition() );
   
     // Display the map preview
     if (!terrain_init){

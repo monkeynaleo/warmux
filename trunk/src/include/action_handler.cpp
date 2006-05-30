@@ -103,8 +103,7 @@ void Action_ChangeWeapon (Action *a)
 
 void Action_ChangeCharacter (Action *a)
 {
-  ActionInt* ai = dynamic_cast<ActionInt*>(a);
-  ActiveTeam().SelectCharacterIndex (ai->GetValue());
+  ActiveTeam().NextCharacter();
 }
 
 void Action_Shoot (Action *action)

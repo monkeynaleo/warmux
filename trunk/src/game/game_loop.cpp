@@ -91,7 +91,7 @@ void GameLoop::InitGameData_NetServer()
   randomSync.Init();
 
   std::cout << "o " << _("Initialise teams") << std::endl;
-  teams_list.Reset();
+  teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
 
   // Create objects
   lst_objects.Init();
@@ -136,7 +136,7 @@ void GameLoop::InitGameData_NetClient()
     SDL_Delay(100);
   }
 
-  teams_list.Reset();
+  teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
   lst_objects.Init();
  
   std::cout << network.state << " : Waiting for people over the network" << std::endl;
@@ -155,7 +155,7 @@ void GameLoop::InitData_Local()
   std::cout << "o " << _("Find a random position for characters") << std::endl;
   world.Reset();
   lst_terrain.TerrainActif().FreeData();
-  teams_list.Reset();
+  teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
 
   // Remise à zéro
   std::cout << "o " << _("Initialise objects") << std::endl;
@@ -544,8 +544,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
       if( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
        || game_mode->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
       {
-              action_handler->NewAction(new ActionInt(ACTION_CHANGE_CHARACTER,
-                                       ActiveTeam().NextCharacterIndex()));
+	action_handler->NewAction(new Action(ACTION_CHANGE_CHARACTER));
       }
     } 
 

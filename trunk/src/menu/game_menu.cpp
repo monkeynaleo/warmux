@@ -246,7 +246,7 @@ void GameMenu::Draw(const Point2i &mousePosition)
   }
 
   AppWormux * app = AppWormux::GetInstance();
-  app->video.window.Blit( last_team->ecusson, space_for_logo->GetPosition() );
+  app->video.window.Blit( last_team->flag, space_for_logo->GetPosition() );
 
   if (!terrain_init){
       ChangeMap();

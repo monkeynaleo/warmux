@@ -274,6 +274,7 @@ void Game::Start()
       MessageEndOfGame();
 
   world.FreeMem();
+  teams_list.UnloadGamingData();
   jukebox.StopAll();
   Mouse::GetInstance()->SetPointer(POINTER_STANDARD);
 

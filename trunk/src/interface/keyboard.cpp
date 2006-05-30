@@ -185,8 +185,7 @@ void Clavier::HandleKeyPressed (const Action_t &action)
 
         case ACTION_CHANGE_CHARACTER:
 	  if (GameMode::GetInstance()->AllowCharacterSelection())
-	    ActionHandler::GetInstance()->NewAction(new ActionInt(action,
-					ActiveTeam().NextCharacterIndex()));
+	    ActionHandler::GetInstance()->NewAction(new Action(action));
 	  return ;
 
         default:

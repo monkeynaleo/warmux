@@ -224,8 +224,9 @@ void ApplyExplosion_server (const Point2i &pos,
     }
     if(&team.ActiveCharacter() != distant_character)
     {
+#warning "We have perhaps something to do here"
       // Restore active character of this team
-      action_handler->NewAction (new ActionInt(ACTION_CHANGE_CHARACTER, team.ActiveCharacterIndex()));
+      //action_handler->NewAction (new ActionInt(ACTION_CHANGE_CHARACTER, team.ActiveCharacterIndex()));
     }
   }
 

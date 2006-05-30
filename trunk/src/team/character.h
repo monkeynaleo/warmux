@@ -110,7 +110,7 @@ public:
   void Reset();
 
   // Change le niveau d'énergie
-  void SetEnergyDelta (int delta);
+  void SetEnergyDelta (int delta, bool do_report=true);
 
   // Changement de direction
   void SetDirection (int direction);

@@ -49,46 +49,47 @@ public:
 
   // Autres
   CrossHair crosshair;
-  Surface ecusson;
+  Surface flag;
   Point2i sauve_camera;
   bool camera_est_sauve;
-  TeamEnergy energie;
+  TeamEnergy energy;
 
- 
 private:
+  std::string m_teams_dir; // parent directory hosting the data
   std::string m_id;
   std::string m_name;
   std::string m_sound_profile;
-  std::list<Character> vers;
-  int ver_actif, vers_fin;
-  iterator vers_fin_it;
+  std::list<Character> characters;
+  iterator active_character;
   Weapon *active_weapon;
-  bool LoadData( xmlpp::Element *xml, Profile *res_profile);
-  bool LoadCharacters( xmlpp::Element *xml);
+
+  Team (const std::string& _teams_dir,
+	const std::string& _id, 
+	const std::string& _name, 
+	const Surface &_flag,
+	const std::string& _sound_profile);  
+
+  bool LoadCharacters(uint howmany);
 public:
-  // Initialization
-  Team ();
-  bool Init (const std::string &teams_dir, const std::string &id);
-  void Reset();
+  static Team* CreateTeam (const std::string &teams_dir, const std::string &id);
+
+  void LoadGamingData(uint how_many_characters);
+  void UnloadGamingData();
 
   // ******* TODO: KILL THIS FUNCTIONS !!! ********
-  Character& operator[] (uint index);
-  const Character& operator[] (uint index) const;
+  //  Character& operator[] (uint index);
+  //const Character& operator[] (uint index) const;
   // ******* TODO: KILL THIS FUNCTIONS !!! ********
   bool IsSameAs(const Team& other);
 
   // Switch to next worm.
-//  void NextCharacter();
-  int NextCharacterIndex();
-
-  // Select an *ALIVE* character
-  void SelectCharacterIndex (uint index);
+  void NextCharacter();
 
   // Prepare turn.
   void PrepareTurn();
 
   // Access to the worms.
-  int ActiveCharacterIndex() const;
+  //int ActiveCharacterIndex() const;
   Character& ActiveCharacter();
 
   void Draw();
@@ -107,10 +108,10 @@ public:
   void InitEnergy (uint max);
 
   // Update the energy bar values of the team.
-  void ActualiseBarreEnergie();
+  void UpdateEnergyBar();
 
   // Read the total energy of the team.
-  uint LitEnergie();
+  uint ReadEnergy();
 
   // Access to data.
   const std::string& GetName() const { return m_name; }
@@ -135,8 +136,6 @@ public:
   // true if the team belong to a local player
   // false if the team belong to a player on the network
   bool is_local;
-protected:
-  void internal_NextCharacter();
 };
 
 #endif // TEAM_H
