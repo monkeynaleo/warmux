@@ -83,6 +83,7 @@
   <surface name="weapon_box_button" file="interface/Grey-Button.png"/>
   <surface name="fond_compteur" file="interface/compteur.png"/>
   <surface name="pause_screen" file="interface/pause.png"/>
+  <surface name="quit_screen" file="interface/quit.png"/>
 </section>
 
 <section name ="mouse">

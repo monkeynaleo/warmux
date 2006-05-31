@@ -25,10 +25,20 @@
 #include "../graphic/font.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
+#include "../interface/interface.h"
 #include "../map/map.h"
+#include "../tool/resource_manager.h"
 
 Question::Question()
-{}
+{
+  background = NULL;
+}
+
+Question::~Question()
+{
+  if(background != NULL)
+    delete background;
+}
 
 int Question::TreatsKey (SDL_Event &event){
 
@@ -49,10 +59,16 @@ int Question::TreatsKey (SDL_Event &event){
 void Question::Draw(){
   AppWormux * app = AppWormux::GetInstance();
 
-  DrawTmpBoxTextWithReturns (*Font::GetInstance(Font::FONT_BIG),
-                             app->video.window.GetSize() / 2,
-                             message, 10);
-  app->video.Flip();
+  if(background != NULL)
+  {
+    background->Blit(app->video.window,  app->video.window.GetSize() / 2 - background->GetSize() / 2);
+  }
+  if(message != "")
+  {
+    DrawTmpBoxTextWithReturns (*Font::GetInstance(Font::FONT_BIG),
+                               app->video.window.GetSize() / 2,
+                               message, 10);
+  }
 }
 
 int Question::AskQuestion (){
@@ -61,8 +77,8 @@ int Question::AskQuestion (){
   int answer = default_choice.value;
   bool end_of_boucle = false;
 
+  Draw();
   do{
-    Draw();
 
     while( SDL_PollEvent( &event) ){
       if (( event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN ) && default_choice.active ){
@@ -77,15 +93,30 @@ int Question::AskQuestion (){
       }
     } // SDL_PollEvent
 
+    AppWormux::GetInstance()->video.Flip();
   } while (!end_of_boucle);
 
   return answer;
 }
 
 void Question::Set (const std::string &pmessage,
-		    bool default_active, int default_value){
+		    bool default_active, int default_value,const std::string& bg_sprite){
   message = pmessage;
   default_choice.active = default_active;
   default_choice.value = default_value;
-}
 
+  if(background != NULL)
+  {
+    delete background;
+    background = NULL;
+  }
+
+  if(bg_sprite != "")
+  {
+    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+    background = new Sprite(resource_manager.LoadImage(res,bg_sprite));
+    background->cache.EnableLastFrameCache();
+    background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
+    resource_manager.UnLoadXMLProfile( res);
+  }
+}

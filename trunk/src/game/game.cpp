@@ -238,7 +238,7 @@ void Game::Start()
       if (!IsGameFinished()) 
       {
         const char *msg = _("Do you really want to quit? (Y/N)");
-        question.Set (msg, true, 0);
+        question.Set (msg, true, 0, "interface/quit_screen");
 	
         {
           /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
@@ -252,14 +252,16 @@ void Game::Start()
           if (!isalpha(key_x)) /* sanity check */
             abort();
 
-	  question.choices.push_back ( Question::choix_t(SDLK_a + (int)key_x - 'a', 1) );
-	}
+          question.choices.push_back ( Question::choix_t(SDLK_a + (int)key_x - 'a', 1) );
+        }
 	
         jukebox.Pause();
         end = (AskQuestion() == 1);
         jukebox.Resume();
+        if(!end)
+          world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
       } else {
-	end = true;
+        end = true;
       }
     } while (!end);
     err = false;
@@ -292,17 +294,7 @@ void Game::Pause()
   jukebox.Pause();
 
   //Pause screen
-  Profile* xml_profile = resource_manager.LoadXMLProfile("graphism.xml",false);
-  Sprite* pause_screen = new Sprite(resource_manager.LoadImage(xml_profile, "interface/pause_screen"));
-  resource_manager.UnLoadXMLProfile( xml_profile );
-  pause_screen->cache.EnableLastFrameCache();
-  AppWormux* app = AppWormux::GetInstance();
-  pause_screen->ScaleSize(app->video.window.GetSize());
-  pause_screen->Blit( app->video.window, 0, 0);
-  app->video.Flip();
-  delete pause_screen;
-
-  question.Set (_("Press a key to continue."), true, 0);
+  question.Set ("", true, 0, "interface/pause_screen");
   AskQuestion(false);
   jukebox.Resume();
 }
