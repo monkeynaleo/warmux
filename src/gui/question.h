@@ -24,6 +24,7 @@
 #define QUESTION_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
+#include "../graphic/sprite.h"
 #include <string>
 #include <list>
 #include <SDL_events.h>
@@ -32,6 +33,8 @@
 
 class Question
 {
+  Sprite* background;
+
 public:
   // Message to display
   std::string message;
@@ -62,9 +65,11 @@ public:
 
  public:
   Question();
+  ~Question();
   void Set(const std::string &message, 
 	   bool default_active, 
-	   int default_value);
+	   int default_value,
+      const std::string &bg_sprite="");
   int AskQuestion ();
 };
 
