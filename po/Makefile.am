@@ -6,7 +6,7 @@
 #
 
 #MAINTAINERCLEANFILES = Makefile.in
-MAINTAINERCLEANFILES = 
+MAINTAINERCLEANFILES =
 
 POTFILES = \
 	src/game/config.cpp \
@@ -75,7 +75,6 @@ POTFILES = \
 	src/weapon/suicide.cpp \
 	src/weapon/teleportation.cpp \
 	src/weapon/weapon.cpp \
-	src/weapon/weapon_tools.cpp \
 	src/weapon/weapons_list.cpp
 
 DOMAIN = $(PACKAGE)
@@ -186,7 +185,7 @@ $(POFILES): $(srcdir)/$(DOMAIN).pot
 	echo "Update $${lang}.po"; \
 	cd $(srcdir) && $(MSGMERGE_UPDATE) $${lang}.po $(DOMAIN).pot && \
 	sed -e '/^"POT-Creation-Date:/D' <$${lang}.po >t-$${lang}.po && \
-	mv -f t-$${lang}.po $${lang}.po 
+	mv -f t-$${lang}.po $${lang}.po
 
 
 install-data-local: install-data-local-@USE_NLS@
