@@ -41,7 +41,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (equipa %s) morreu."
@@ -56,7 +56,7 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:643
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s matou se !"
@@ -66,12 +66,12 @@ msgstr "%s matou se !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:636
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s caiu na água."
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:647
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s caiu fora do map!"
@@ -90,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s ganho %u pointos de vida !"
 msgstr[1] "%s ganho %u pointos de vida !"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s é um psicopata, matou um membro da equipa %s !"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:653
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s morreu por causa da sua inaptidão."
@@ -179,12 +179,12 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Excepção C++ interceptada :"
 
-#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Equipa %s não encontrada!"
 
-#: src/team/teams_list.cpp:124 src/team/teams_list.cpp:139
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Não pode abrir diretório da equipa (%s)"
@@ -254,6 +254,11 @@ msgstr "Erro em %s.%lu"
 msgid "Error loading team %s:"
 msgstr "Erro no carregamento da equipa %s"
 
+#: src/team/team.cpp:164
+#, fuzzy, c-format
+msgid "Error loading team's data %s:"
+msgstr "Erro no carregamento da equipa %s"
+
 #: src/game/config.cpp:248
 #, fuzzy, c-format
 msgid ""
@@ -270,7 +275,7 @@ msgstr "Erro no carregamento da modalidade de jogo %s (ficheiro %s):"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Erro no carregamento da modalidade de jogo %s (ficheiro %s):"
 
-#: src/game/game.cpp:282
+#: src/game/game.cpp:285
 #, c-format
 msgid ""
 "Error:\n"
@@ -279,12 +284,12 @@ msgstr ""
 "Erro:\n"
 "%s"
 
-#: src/team/team.cpp:162
+#: src/team/team.cpp:138
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Erro: não pode incontrar o skin \"%s\" para a equipe \"%s\"."
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:155
 #, fuzzy
 msgid "Find a random position for characters"
 msgstr "Encotre uma colocação aleatória dos worms"
@@ -322,7 +327,7 @@ msgstr "Diretório home (ambiente variável $HOME) não pode ser incontrado!"
 msgid "Initial energy:"
 msgstr "Energia inicial:"
 
-#: src/game/game_loop.cpp:276
+#: src/game/game_loop.cpp:209
 msgid "Initialisation"
 msgstr "Iniciação"
 
@@ -331,26 +336,22 @@ msgstr "Iniciação"
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:149
+#: src/game/game_loop.cpp:100
 msgid "Initialise data"
 msgstr "Iniciação dos dados"
 
-#: src/game/game_loop.cpp:227
+#: src/game/game_loop.cpp:161
 #, fuzzy
 msgid "Initialise objects"
 msgstr "Iniciação das equipas"
 
-#: src/game/game_loop.cpp:98
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Iniciação das equipas"
 
 #: src/object/bonus_box.cpp:231
 msgid "Is it a gift ?"
 msgstr ""
-
-#: src/game/game_loop.cpp:94
-msgid "Load map"
-msgstr "Carregamento do terreno"
 
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
@@ -360,7 +361,7 @@ msgstr "Carregamento dos terrenos:"
 msgid "Load skins:"
 msgstr "Carregamento dos skins:"
 
-#: src/team/teams_list.cpp:113
+#: src/team/teams_list.cpp:111
 msgid "Load teams:"
 msgstr "Carregamento das equipas:"
 
@@ -413,10 +414,6 @@ msgstr "Jogar"
 #: src/main.cpp:188
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Por favor diga nos a vossa opinião sobre Wormux por email:"
-
-#: src/game/game.cpp:304
-msgid "Press a key to continue."
-msgstr ""
 
 #: src/menu/main_menu.cpp:160
 msgid "Quit"
@@ -496,34 +493,10 @@ msgstr "Incapaz de abrir o diretório dos skins (%s)!"
 msgid "Unexcepted exception caught..."
 msgstr "Excepção desconhecida interceptada ..."
 
-#: src/game/game_loop.cpp:194
-msgid "Unknow action"
-msgstr "Ação desconhecida"
-
 #: src/main.cpp:142
 #, fuzzy
 msgid "Version"
 msgstr "Versão "
-
-#: src/game/game_loop.cpp:88
-msgid "Wait for clients"
-msgstr "A espera de clientes"
-
-#: src/game/game_loop.cpp:188
-msgid "Wait for map"
-msgstr "A espera do mapa"
-
-#: src/game/game_loop.cpp:185
-msgid "Wait for server"
-msgstr "A espera do server"
-
-#: src/game/game_loop.cpp:181
-msgid "Wait for server informations"
-msgstr "A espera de informações do server"
-
-#: src/game/game_loop.cpp:191
-msgid "Wait teams"
-msgstr "A espera de equipas"
 
 #: src/interface/interface.cpp:103
 msgid "Weapon:"
@@ -533,7 +506,7 @@ msgstr "Arma:"
 msgid "Website: "
 msgstr "Web site: "
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Demasiada vergonha para  %s : foi matado por uma simple pistola !"
@@ -555,12 +528,12 @@ msgstr "Erro XML durante o carregamento do mapa '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Você necessita ao menos um mapa válido!"
 
-#: src/game/game_loop.cpp:288
+#: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Tem necessidade pelo menos de duas equipas, corrige isto no 'menu Opções' !"
 
-#: src/team/teams_list.cpp:159
+#: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
 msgstr "Você necessita ao menos de dois equipas válidas!"
 
@@ -571,6 +544,27 @@ msgstr "Seu tiro faltou!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#~ msgid "Load map"
+#~ msgstr "Carregamento do terreno"
+
+#~ msgid "Unknow action"
+#~ msgstr "Ação desconhecida"
+
+#~ msgid "Wait for clients"
+#~ msgstr "A espera de clientes"
+
+#~ msgid "Wait for map"
+#~ msgstr "A espera do mapa"
+
+#~ msgid "Wait for server"
+#~ msgstr "A espera do server"
+
+#~ msgid "Wait for server informations"
+#~ msgstr "A espera de informações do server"
+
+#~ msgid "Wait teams"
+#~ msgstr "A espera de equipas"
 
 #~ msgid "Pause"
 #~ msgstr "Pausa"

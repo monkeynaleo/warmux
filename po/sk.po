@@ -41,7 +41,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebola nájdená :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s tým) zomrel."
@@ -56,7 +56,7 @@ msgstr "%s <%s> aka %s od %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> od %s"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:643
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s spáchal samovraždu !"
@@ -66,12 +66,12 @@ msgstr "%s spáchal samovraždu !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:636
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s spadol do vody."
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:647
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s vypadol z mapy!"
@@ -90,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s zvíťazil %u bodov energie !"
 msgstr[1] "%s zvíťazil %u bodov energie !"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s je psychopat, zabil člena svojho %s týmu!"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:653
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mŕtvy, pretože bol nemotorný!"
@@ -180,12 +180,12 @@ msgstr "Bazuka"
 msgid "C++ exception caught:"
 msgstr "Zachytená výnimka C++ :"
 
-#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nemôžem nájsť tým %s!"
 
-#: src/team/teams_list.cpp:124 src/team/teams_list.cpp:139
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár týmov (%s)!"
@@ -254,6 +254,11 @@ msgstr "Chyba v %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Chyba počas načítavania týmu %s:"
 
+#: src/team/team.cpp:164
+#, fuzzy, c-format
+msgid "Error loading team's data %s:"
+msgstr "Chyba počas načítavania týmu %s:"
+
 #: src/game/config.cpp:248
 #, fuzzy, c-format
 msgid ""
@@ -270,7 +275,7 @@ msgstr "Chyba počas načítavania herného módu %s (súbor %s):"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Chyba počas načítavania herného módu %s (súbor %s):"
 
-#: src/game/game.cpp:282
+#: src/game/game.cpp:285
 #, c-format
 msgid ""
 "Error:\n"
@@ -279,12 +284,12 @@ msgstr ""
 "Chyba:\n"
 "%s"
 
-#: src/team/team.cpp:162
+#: src/team/team.cpp:138
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť skin \"%s\" pre tým \"%s\"."
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:155
 #, fuzzy
 msgid "Find a random position for characters"
 msgstr "Náhodná poloha pre červa"
@@ -322,7 +327,7 @@ msgstr "Domovský priečinok (Prostredie premennej $HOME) sa nenašiel!"
 msgid "Initial energy:"
 msgstr "Počiatočná energia"
 
-#: src/game/game_loop.cpp:276
+#: src/game/game_loop.cpp:209
 msgid "Initialisation"
 msgstr "Inicializácia"
 
@@ -331,26 +336,22 @@ msgstr "Inicializácia"
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:149
+#: src/game/game_loop.cpp:100
 msgid "Initialise data"
 msgstr "Inicializácia dát"
 
-#: src/game/game_loop.cpp:227
+#: src/game/game_loop.cpp:161
 #, fuzzy
 msgid "Initialise objects"
 msgstr "Inicializácia týmov"
 
-#: src/game/game_loop.cpp:98
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Inicializácia týmov"
 
 #: src/object/bonus_box.cpp:231
 msgid "Is it a gift ?"
 msgstr ""
-
-#: src/game/game_loop.cpp:94
-msgid "Load map"
-msgstr "Načítavam mapu"
 
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
@@ -360,7 +361,7 @@ msgstr "Načítavam mapy:"
 msgid "Load skins:"
 msgstr "Načítavam skiny:"
 
-#: src/team/teams_list.cpp:113
+#: src/team/teams_list.cpp:111
 msgid "Load teams:"
 msgstr "Načítavam tými"
 
@@ -413,10 +414,6 @@ msgstr "Hraj"
 #: src/main.cpp:188
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Prosím vyjadri nám svoj názor na Wormux cez email:"
-
-#: src/game/game.cpp:304
-msgid "Press a key to continue."
-msgstr ""
 
 #: src/menu/main_menu.cpp:160
 msgid "Quit"
@@ -495,33 +492,9 @@ msgstr "Nedá sa otvoriť adresár skinov (%s)!"
 msgid "Unexcepted exception caught..."
 msgstr "Neočakávaná výnimka zachytená..."
 
-#: src/game/game_loop.cpp:194
-msgid "Unknow action"
-msgstr "Neznáma akcia"
-
 #: src/main.cpp:142
 msgid "Version"
 msgstr "Verzia"
-
-#: src/game/game_loop.cpp:88
-msgid "Wait for clients"
-msgstr "Čakám na klientov"
-
-#: src/game/game_loop.cpp:188
-msgid "Wait for map"
-msgstr "Čakám na mapu"
-
-#: src/game/game_loop.cpp:185
-msgid "Wait for server"
-msgstr "Čakám na server"
-
-#: src/game/game_loop.cpp:181
-msgid "Wait for server informations"
-msgstr "Čakám na informácie o serveri"
-
-#: src/game/game_loop.cpp:191
-msgid "Wait teams"
-msgstr "Čakám tými"
 
 #: src/interface/interface.cpp:103
 msgid "Weapon:"
@@ -531,7 +504,7 @@ msgstr "Zbraň:"
 msgid "Website: "
 msgstr "Web stránka: "
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
@@ -553,11 +526,11 @@ msgstr "XML chyba počas načítavania mapy '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 
-#: src/game/game_loop.cpp:288
+#: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Potrebuješ najmenej dva tými na hru: zmeň si to v menu 'Nastavenie' !"
 
-#: src/team/teams_list.cpp:159
+#: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tými !"
 
@@ -568,6 +541,27 @@ msgstr "Tvoja strela minula!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#~ msgid "Load map"
+#~ msgstr "Načítavam mapu"
+
+#~ msgid "Unknow action"
+#~ msgstr "Neznáma akcia"
+
+#~ msgid "Wait for clients"
+#~ msgstr "Čakám na klientov"
+
+#~ msgid "Wait for map"
+#~ msgstr "Čakám na mapu"
+
+#~ msgid "Wait for server"
+#~ msgstr "Čakám na server"
+
+#~ msgid "Wait for server informations"
+#~ msgstr "Čakám na informácie o serveri"
+
+#~ msgid "Wait teams"
+#~ msgstr "Čakám tými"
 
 #~ msgid "Pause"
 #~ msgstr "Pauza"

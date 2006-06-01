@@ -41,7 +41,7 @@ msgstr "  Väkivaltaisin  :  %s (%i)\n"
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (joukkue %s) kuoli."
@@ -56,7 +56,7 @@ msgstr "%s < %s > aka %s %s:stä"
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:643
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suoritti itsemurhan !"
@@ -66,12 +66,12 @@ msgstr "%s suoritti itsemurhan !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:636
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s sukelsi syvyyksiin."
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:647
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
@@ -90,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:653
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kuoli kömpelyyteensä!"
@@ -179,12 +179,12 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "C++ poikkeus saatu kiinni:"
 
-#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ei löydy joukkuetta %s!"
 
-#: src/team/teams_list.cpp:124 src/team/teams_list.cpp:139
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
@@ -252,6 +252,11 @@ msgstr "Virhe kohdassa %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
+#: src/team/team.cpp:164
+#, fuzzy, c-format
+msgid "Error loading team's data %s:"
+msgstr "Virhe ladattessa joukkuetta %s:"
+
 #: src/game/config.cpp:248
 #, c-format
 msgid ""
@@ -268,7 +273,7 @@ msgstr "Virhe luettaessa asetustiedostoa: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Virhe ladataessa pelityyppiä %s (tiedosto %s):"
 
-#: src/game/game.cpp:282
+#: src/game/game.cpp:285
 #, c-format
 msgid ""
 "Error:\n"
@@ -277,12 +282,12 @@ msgstr ""
 "Virhe:\n"
 "%s"
 
-#: src/team/team.cpp:162
+#: src/team/team.cpp:138
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:155
 msgid "Find a random position for characters"
 msgstr "Etsi satunnaiset sijainnit hahmoille"
 
@@ -318,7 +323,7 @@ msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 msgid "Initial energy:"
 msgstr "Aloitus voimat:"
 
-#: src/game/game_loop.cpp:276
+#: src/game/game_loop.cpp:209
 msgid "Initialisation"
 msgstr "Alustus"
 
@@ -327,25 +332,21 @@ msgstr "Alustus"
 msgid "Initialisation of TTF library failed: %s"
 msgstr "TTF kirjaston alustus epäonnistui: %s"
 
-#: src/game/game_loop.cpp:149
+#: src/game/game_loop.cpp:100
 msgid "Initialise data"
 msgstr "Alusta tiedot"
 
-#: src/game/game_loop.cpp:227
+#: src/game/game_loop.cpp:161
 msgid "Initialise objects"
 msgstr "Alusta objektit"
 
-#: src/game/game_loop.cpp:98
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
 #: src/object/bonus_box.cpp:231
 msgid "Is it a gift ?"
 msgstr "Onko se lahja?"
-
-#: src/game/game_loop.cpp:94
-msgid "Load map"
-msgstr "Lataa kartta"
 
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
@@ -355,7 +356,7 @@ msgstr "Lataa kartat:"
 msgid "Load skins:"
 msgstr "Lataa ulkoasut:"
 
-#: src/team/teams_list.cpp:113
+#: src/team/teams_list.cpp:111
 msgid "Load teams:"
 msgstr "Lataa joukkueet:"
 
@@ -408,10 +409,6 @@ msgstr "Pelaa"
 #: src/main.cpp:188
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Ole hyvä ja kerro mielipiteesi Wormuxista sähköpostilla:"
-
-#: src/game/game.cpp:304
-msgid "Press a key to continue."
-msgstr ""
 
 #: src/menu/main_menu.cpp:160
 msgid "Quit"
@@ -489,33 +486,9 @@ msgstr "Ulkoasuhakemiston avaus epäonnistui (%s)!"
 msgid "Unexcepted exception caught..."
 msgstr "Odottamaton poikkeus saatiin kiinni..."
 
-#: src/game/game_loop.cpp:194
-msgid "Unknow action"
-msgstr "Tuntematon toiminto"
-
 #: src/main.cpp:142
 msgid "Version"
 msgstr "Versio"
-
-#: src/game/game_loop.cpp:88
-msgid "Wait for clients"
-msgstr "Odota asiakkaita"
-
-#: src/game/game_loop.cpp:188
-msgid "Wait for map"
-msgstr "Odota karttaa"
-
-#: src/game/game_loop.cpp:185
-msgid "Wait for server"
-msgstr "Odota palvelinta"
-
-#: src/game/game_loop.cpp:181
-msgid "Wait for server informations"
-msgstr "Odota palvelimen tietoja"
-
-#: src/game/game_loop.cpp:191
-msgid "Wait teams"
-msgstr "Odota joukkueita"
 
 #: src/interface/interface.cpp:103
 msgid "Weapon:"
@@ -525,7 +498,7 @@ msgstr "Ase:"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -547,13 +520,13 @@ msgstr "XML virhe ladattaessa karttaa '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
-#: src/game/game_loop.cpp:288
+#: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Tarvitset ainakin kaksi joukkuetta pelataksesi: vaihda tätä 'Asetukset "
 "valikosta' !"
 
-#: src/team/teams_list.cpp:159
+#: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
@@ -564,6 +537,27 @@ msgstr "Ammuit ohi!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "valmis"
+
+#~ msgid "Load map"
+#~ msgstr "Lataa kartta"
+
+#~ msgid "Unknow action"
+#~ msgstr "Tuntematon toiminto"
+
+#~ msgid "Wait for clients"
+#~ msgstr "Odota asiakkaita"
+
+#~ msgid "Wait for map"
+#~ msgstr "Odota karttaa"
+
+#~ msgid "Wait for server"
+#~ msgstr "Odota palvelinta"
+
+#~ msgid "Wait for server informations"
+#~ msgstr "Odota palvelimen tietoja"
+
+#~ msgid "Wait teams"
+#~ msgstr "Odota joukkueita"
 
 #~ msgid "Pause"
 #~ msgstr "Tauko"

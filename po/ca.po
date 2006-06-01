@@ -39,7 +39,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s no trobat :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (L'equip %s ) ha mort."
@@ -54,7 +54,7 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:643
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s es suicida!"
@@ -64,12 +64,12 @@ msgstr "%s es suicida!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:636
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s ha caigut del mapa!"
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:647
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ha caigut del mapa!"
@@ -88,12 +88,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "El jugador '%s' ha augmentat %u punts de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip : %s!"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:653
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ha mort per ser un maldestre!"
@@ -176,12 +176,12 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Excepció C++ interceptada :"
 
-#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
 
-#: src/team/teams_list.cpp:124 src/team/teams_list.cpp:139
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
@@ -251,6 +251,11 @@ msgstr "Error en %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Error carregant l'equip %s :"
 
+#: src/team/team.cpp:164
+#, fuzzy, c-format
+msgid "Error loading team's data %s:"
+msgstr "Error carregant l'equip %s :"
+
 #: src/game/config.cpp:248
 #, fuzzy, c-format
 msgid ""
@@ -267,7 +272,7 @@ msgstr "Error carregant l'equip %s :"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Error carregant l'equip %s :"
 
-#: src/game/game.cpp:282
+#: src/game/game.cpp:285
 #, c-format
 msgid ""
 "Error:\n"
@@ -276,12 +281,12 @@ msgstr ""
 "Error :\n"
 "%s"
 
-#: src/team/team.cpp:162
+#: src/team/team.cpp:138
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:155
 #, fuzzy
 msgid "Find a random position for characters"
 msgstr "Colocacio aleatoria"
@@ -321,7 +326,7 @@ msgstr "El directori HOME (la variable de entorn $HOME) no pot ser trobat!"
 msgid "Initial energy:"
 msgstr "Energia inicial:"
 
-#: src/game/game_loop.cpp:276
+#: src/game/game_loop.cpp:209
 msgid "Initialisation"
 msgstr "Inicialització"
 
@@ -330,16 +335,16 @@ msgstr "Inicialització"
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:149
+#: src/game/game_loop.cpp:100
 msgid "Initialise data"
 msgstr "Inicialització de les dades"
 
-#: src/game/game_loop.cpp:227
+#: src/game/game_loop.cpp:161
 #, fuzzy
 msgid "Initialise objects"
 msgstr "Inicialització de les dades"
 
-#: src/game/game_loop.cpp:98
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 #, fuzzy
 msgid "Initialise teams"
 msgstr "Inicialització de les dades"
@@ -347,11 +352,6 @@ msgstr "Inicialització de les dades"
 #: src/object/bonus_box.cpp:231
 msgid "Is it a gift ?"
 msgstr ""
-
-#: src/game/game_loop.cpp:94
-#, fuzzy
-msgid "Load map"
-msgstr "Carrega el mapa %s"
 
 #: src/map/maps_list.cpp:207
 #, fuzzy
@@ -363,7 +363,7 @@ msgstr "Carrega el mapa %s"
 msgid "Load skins:"
 msgstr "Carrega la pell %s"
 
-#: src/team/teams_list.cpp:113
+#: src/team/teams_list.cpp:111
 #, fuzzy
 msgid "Load teams:"
 msgstr "Carrega l'equip %s."
@@ -418,10 +418,6 @@ msgstr "Jugar"
 #: src/main.cpp:188
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Siusplau dona'ns la teva opinió de Wormux per correu electrónic:"
-
-#: src/game/game.cpp:304
-msgid "Press a key to continue."
-msgstr ""
 
 #: src/menu/main_menu.cpp:160
 msgid "Quit"
@@ -502,33 +498,9 @@ msgstr "Imposible obrir el directori dels skins (%s) !"
 msgid "Unexcepted exception caught..."
 msgstr "Excepció interceptada imprevista ..."
 
-#: src/game/game_loop.cpp:194
-msgid "Unknow action"
-msgstr ""
-
 #: src/main.cpp:142
 msgid "Version"
 msgstr "Versió"
-
-#: src/game/game_loop.cpp:88
-msgid "Wait for clients"
-msgstr ""
-
-#: src/game/game_loop.cpp:188
-msgid "Wait for map"
-msgstr ""
-
-#: src/game/game_loop.cpp:185
-msgid "Wait for server"
-msgstr ""
-
-#: src/game/game_loop.cpp:181
-msgid "Wait for server informations"
-msgstr ""
-
-#: src/game/game_loop.cpp:191
-msgid "Wait teams"
-msgstr ""
 
 #: src/interface/interface.cpp:103
 #, fuzzy
@@ -539,7 +511,7 @@ msgstr "Arma"
 msgid "Website: "
 msgstr "Lloc web: "
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s : ha estat mort per una simple pistola!"
@@ -561,12 +533,12 @@ msgstr "Error XML durant la carrega del mapa '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Tu necesites almenys un mapa vàlid!"
 
-#: src/game/game_loop.cpp:288
+#: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Necesites almenys dos equips per jugar, canvia això en 'Opcions del menú'!"
 
-#: src/team/teams_list.cpp:159
+#: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
 msgstr "Tu necesites almenys dos equips vàlids!"
 
@@ -577,6 +549,10 @@ msgstr "Has fallat el tir!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Load map"
+#~ msgstr "Carrega el mapa %s"
 
 #~ msgid "Pause"
 #~ msgstr "Pausa"

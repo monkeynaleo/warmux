@@ -43,7 +43,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (команда %s) погибла."
@@ -58,7 +58,7 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:643
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -68,12 +68,12 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:636
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:647
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -94,12 +94,12 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:653
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
@@ -188,12 +188,12 @@ msgstr "Базука"
 msgid "C++ exception caught:"
 msgstr "Исключительная ситуация C++:"
 
-#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не удаётся найти команду %s!"
 
-#: src/team/teams_list.cpp:124 src/team/teams_list.cpp:139
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не удаётся открыть каталог команд (%s)!"
@@ -262,6 +262,11 @@ msgstr "Ошибка в %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
+#: src/team/team.cpp:164
+#, fuzzy, c-format
+msgid "Error loading team's data %s:"
+msgstr "Ошибка при загрузке команды %s:"
+
 #: src/game/config.cpp:248
 #, fuzzy, c-format
 msgid ""
@@ -278,7 +283,7 @@ msgstr "Ошибка при загрузке режима игры %s (файл 
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/game.cpp:282
+#: src/game/game.cpp:285
 #, c-format
 msgid ""
 "Error:\n"
@@ -287,12 +292,12 @@ msgstr ""
 "Ошибка:\n"
 "%s"
 
-#: src/team/team.cpp:162
+#: src/team/team.cpp:138
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:155
 #, fuzzy
 msgid "Find a random position for characters"
 msgstr "Найти для червяков случайное местоположение"
@@ -330,7 +335,7 @@ msgstr "Домашний каталог (переменная окружения
 msgid "Initial energy:"
 msgstr "Энергии в начале:"
 
-#: src/game/game_loop.cpp:276
+#: src/game/game_loop.cpp:209
 msgid "Initialisation"
 msgstr "Инициализация"
 
@@ -339,26 +344,22 @@ msgstr "Инициализация"
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:149
+#: src/game/game_loop.cpp:100
 msgid "Initialise data"
 msgstr "Инициализация данных"
 
-#: src/game/game_loop.cpp:227
+#: src/game/game_loop.cpp:161
 #, fuzzy
 msgid "Initialise objects"
 msgstr "Инициализация команд"
 
-#: src/game/game_loop.cpp:98
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
 #: src/object/bonus_box.cpp:231
 msgid "Is it a gift ?"
 msgstr ""
-
-#: src/game/game_loop.cpp:94
-msgid "Load map"
-msgstr "Загрузка карты"
 
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
@@ -368,7 +369,7 @@ msgstr "Загрузка карт:"
 msgid "Load skins:"
 msgstr "Загрузка тем:"
 
-#: src/team/teams_list.cpp:113
+#: src/team/teams_list.cpp:111
 msgid "Load teams:"
 msgstr "Загрузка команд:"
 
@@ -421,10 +422,6 @@ msgstr "Играть"
 #: src/main.cpp:188
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Напишите нам по почте, что вы думаете о Wormux:"
-
-#: src/game/game.cpp:304
-msgid "Press a key to continue."
-msgstr ""
 
 #: src/menu/main_menu.cpp:160
 msgid "Quit"
@@ -503,33 +500,9 @@ msgstr "Невозможно открыть каталог с темами (%s)!
 msgid "Unexcepted exception caught..."
 msgstr "Неожиданная исключительная ситуация..."
 
-#: src/game/game_loop.cpp:194
-msgid "Unknow action"
-msgstr "Неизвестное действие"
-
 #: src/main.cpp:142
 msgid "Version"
 msgstr "Версия"
-
-#: src/game/game_loop.cpp:88
-msgid "Wait for clients"
-msgstr "Ожидание клиентов"
-
-#: src/game/game_loop.cpp:188
-msgid "Wait for map"
-msgstr "Ожидание карты"
-
-#: src/game/game_loop.cpp:185
-msgid "Wait for server"
-msgstr "Ожидание сервера"
-
-#: src/game/game_loop.cpp:181
-msgid "Wait for server informations"
-msgstr "Ожидание данных от сервера"
-
-#: src/game/game_loop.cpp:191
-msgid "Wait teams"
-msgstr "Ожидание команд"
 
 #: src/interface/interface.cpp:103
 msgid "Weapon:"
@@ -539,7 +512,7 @@ msgstr "Оружие:"
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -561,13 +534,13 @@ msgstr "Ошибка разбора XML при загрузке карты '%s' 
 msgid "You need at least one valid map !"
 msgstr "Вам нужна хотя бы одна карта!"
 
-#: src/game/game_loop.cpp:288
+#: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Для игры нужно иметь хотя бы две команды: зайдите для этого в меню "
 "\"Настройки\"!"
 
-#: src/team/teams_list.cpp:159
+#: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 
@@ -578,6 +551,27 @@ msgstr "Вы промазали!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#~ msgid "Load map"
+#~ msgstr "Загрузка карты"
+
+#~ msgid "Unknow action"
+#~ msgstr "Неизвестное действие"
+
+#~ msgid "Wait for clients"
+#~ msgstr "Ожидание клиентов"
+
+#~ msgid "Wait for map"
+#~ msgstr "Ожидание карты"
+
+#~ msgid "Wait for server"
+#~ msgstr "Ожидание сервера"
+
+#~ msgid "Wait for server informations"
+#~ msgstr "Ожидание данных от сервера"
+
+#~ msgid "Wait teams"
+#~ msgstr "Ожидание команд"
 
 #~ msgid "Pause"
 #~ msgstr "Пауза"

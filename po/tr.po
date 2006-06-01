@@ -41,7 +41,7 @@ msgstr "  En cabbar  :  %s (%i).\n"
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s takımı) öldü."
@@ -56,7 +56,7 @@ msgstr "%s'den %s <%s> aka %s"
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:643
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -66,12 +66,12 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:636
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:647
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
@@ -90,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s, %u enerji kazandı!"
 msgstr[1] "%s, %u enerji kazandı!"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:653
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -180,12 +180,12 @@ msgstr "Bazuka"
 msgid "C++ exception caught:"
 msgstr "C++ istisnası oluştu:"
 
-#: src/team/teams_list.cpp:424 src/team/teams_list.cpp:449
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
 
-#: src/team/teams_list.cpp:124 src/team/teams_list.cpp:139
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
@@ -253,6 +253,11 @@ msgstr "%s:%lu'da hata"
 msgid "Error loading team %s:"
 msgstr "%s takımı yüklenirken hata:"
 
+#: src/team/team.cpp:164
+#, fuzzy, c-format
+msgid "Error loading team's data %s:"
+msgstr "%s takımı yüklenirken hata:"
+
 #: src/game/config.cpp:248
 #, c-format
 msgid ""
@@ -269,7 +274,7 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "%s oyun modu yüklenirken hata (dosya %s):"
 
-#: src/game/game.cpp:282
+#: src/game/game.cpp:285
 #, c-format
 msgid ""
 "Error:\n"
@@ -278,12 +283,12 @@ msgstr ""
 "Hata:\n"
 "%s"
 
-#: src/team/team.cpp:162
+#: src/team/team.cpp:138
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:155
 msgid "Find a random position for characters"
 msgstr "Karakterler için rastgele yer bul"
 
@@ -319,7 +324,7 @@ msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 msgid "Initial energy:"
 msgstr "Başlangıç enerjisi:"
 
-#: src/game/game_loop.cpp:276
+#: src/game/game_loop.cpp:209
 msgid "Initialisation"
 msgstr "Ayarlama"
 
@@ -328,25 +333,21 @@ msgstr "Ayarlama"
 msgid "Initialisation of TTF library failed: %s"
 msgstr "TTF kütüphanesi başlatılmasında hata: %s"
 
-#: src/game/game_loop.cpp:149
+#: src/game/game_loop.cpp:100
 msgid "Initialise data"
 msgstr "Veriler yükleniyor"
 
-#: src/game/game_loop.cpp:227
+#: src/game/game_loop.cpp:161
 msgid "Initialise objects"
 msgstr "Nesneler yükleniyor"
 
-#: src/game/game_loop.cpp:98
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
 #: src/object/bonus_box.cpp:231
 msgid "Is it a gift ?"
 msgstr ""
-
-#: src/game/game_loop.cpp:94
-msgid "Load map"
-msgstr "Haritayı yükle"
 
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
@@ -356,7 +357,7 @@ msgstr "Haritaları yükle:"
 msgid "Load skins:"
 msgstr "Temaları yükle:"
 
-#: src/team/teams_list.cpp:113
+#: src/team/teams_list.cpp:111
 msgid "Load teams:"
 msgstr "Takımları yükle:"
 
@@ -409,10 +410,6 @@ msgstr "Oyna"
 #: src/main.cpp:188
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Lütfen e-posta ile Wormux hakkındaki düşüncelerinizi bize iletin:"
-
-#: src/game/game.cpp:304
-msgid "Press a key to continue."
-msgstr ""
 
 #: src/menu/main_menu.cpp:160
 msgid "Quit"
@@ -490,33 +487,9 @@ msgstr "(%s) tema dizini açılamadı!"
 msgid "Unexcepted exception caught..."
 msgstr "Beklenmeyen istisna oluştu..."
 
-#: src/game/game_loop.cpp:194
-msgid "Unknow action"
-msgstr "Bilinmeyen eylem"
-
 #: src/main.cpp:142
 msgid "Version"
 msgstr "Sürüm"
-
-#: src/game/game_loop.cpp:88
-msgid "Wait for clients"
-msgstr "İstemciler bekleniyor"
-
-#: src/game/game_loop.cpp:188
-msgid "Wait for map"
-msgstr "Harita bekleniyor"
-
-#: src/game/game_loop.cpp:185
-msgid "Wait for server"
-msgstr "Sunucu bekleniyor"
-
-#: src/game/game_loop.cpp:181
-msgid "Wait for server informations"
-msgstr "Sunucu bilgisi bekleniyor"
-
-#: src/game/game_loop.cpp:191
-msgid "Wait teams"
-msgstr "Takımlar bekleniyor"
 
 #: src/interface/interface.cpp:103
 msgid "Weapon:"
@@ -526,7 +499,7 @@ msgstr "Silah:"
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
@@ -548,13 +521,13 @@ msgstr "'%s' haritası yüklenirken XML hatası :"
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game_loop.cpp:288
+#: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden "
 "değiştirin !"
 
-#: src/team/teams_list.cpp:159
+#: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
@@ -565,6 +538,27 @@ msgstr ""
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
+
+#~ msgid "Load map"
+#~ msgstr "Haritayı yükle"
+
+#~ msgid "Unknow action"
+#~ msgstr "Bilinmeyen eylem"
+
+#~ msgid "Wait for clients"
+#~ msgstr "İstemciler bekleniyor"
+
+#~ msgid "Wait for map"
+#~ msgstr "Harita bekleniyor"
+
+#~ msgid "Wait for server"
+#~ msgstr "Sunucu bekleniyor"
+
+#~ msgid "Wait for server informations"
+#~ msgstr "Sunucu bilgisi bekleniyor"
+
+#~ msgid "Wait teams"
+#~ msgstr "Takımlar bekleniyor"
 
 #~ msgid "Pause"
 #~ msgstr "Durdur"
