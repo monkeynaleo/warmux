@@ -5,7 +5,8 @@
 # Makefile configuration - processed by automake.
 #
 
-MAINTAINERCLEANFILES = Makefile.in
+#MAINTAINERCLEANFILES = Makefile.in
+MAINTAINERCLEANFILES = 
 
 POTFILES = \
 	src/game/config.cpp \
