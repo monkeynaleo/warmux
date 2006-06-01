@@ -281,9 +281,10 @@ AC_CONFIG_FILES([Makefile
 		 data/Makefile
 		 src/Makefile
 		 doc/Makefile
+		 po/Makefile
 		 ])
 
-AC_CONFIG_FILES([po/Makefile], [AM_POSTPROCESS_PO_MAKEFILE])
+dnl AC_CONFIG_FILES([po/Makefile], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)
 
