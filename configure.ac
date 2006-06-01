@@ -81,20 +81,20 @@ AC_ARG_WITH(datadir-name,
     [  --with-datadir-name=DIR       specify where datas are installed (default: ${prefix}/share/wormux)],
     [DATADIR="$withval"])
 AC_SUBST([DATADIR])
-	
+
 
 LOCALEDIR="${prefix}/share/locale"
 AC_ARG_WITH(localedir-name,
     [  --with-localedir-name=DIR       specify where locales are installed (default: ${prefix}/share/locale)],
     [LOCALEDIR="$withval"])
 AC_SUBST([LOCALEDIR])
-		
+
 FONTFILE="\${DATADIR}/font/DejaVuSans.ttf"
 AC_ARG_WITH(font-path,
     [  --with-font-path=FILE       specify the font file (default: ${datadir}/font/DejaVuSans.ttf)],
     [FONTFILE="$withval"])
 AC_SUBST([FONTFILE])
-		
+
 AM_CONDITIONAL([STATIC], [test x$static = xyes])
 AM_CONDITIONAL([GCC], [test x$GXX = xyes])
 AM_CONDITIONAL([INCLUDEDINTL], [test x$nls_cv_use_gnu_gettext = xyes])
@@ -109,7 +109,7 @@ SDL_VERSION=1.2.6
 dnl === Set compiler flags =================================================
 
 if test "x$GCC" = "xyes"; then
-    dnl get gcc version 
+    dnl get gcc version
     AC_MSG_CHECKING([gcc version])
             gccver=$($CC -dumpversion)
             gccvermajor=$(echo $gccver | cut -d . -f1)
@@ -119,7 +119,7 @@ if test "x$GCC" = "xyes"; then
 
     dnl Enable all warnings
     GCC_FLAGS="-Wall"
-   
+
     dnl Enable *more* warnings
     if test "$gccvernum" -ge "400"; then
                 dnl gcc 4.0 or later
@@ -127,16 +127,16 @@ if test "x$GCC" = "xyes"; then
     else
         GCC_FLAGS="$GCC_FLAGS -W"
     fi
-    
+
     dnl Skip 'unused parameter' warning
     GCC_FLAGS="$GCC_FLAGS -Wno-unused-parameter"
 
     if test "${debug}" = "yes"; then
         GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG"
-    else    
+    else
         GCC_FLAGS="$GCC_FLAGS -O2"
     fi
-    
+
     CFLAGS="$CFLAGS $GCC_FLAGS"
     CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
 else
@@ -172,13 +172,13 @@ LIBS="$LIBS -lSDL_mixer"
 
 dnl === Check for SDL_ttf ==================================================
 
-AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],, 
+AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,
         AC_MSG_ERROR([SDL_ttf library is required]))
 LIBS="$LIBS -lSDL_ttf"
 
 dnl === Check for SDL_net ==================================================
 
-AC_CHECK_LIB([SDL_net], [SDLNet_Init],, 
+AC_CHECK_LIB([SDL_net], [SDLNet_Init],,
         AC_MSG_ERROR([SDL_net library is required]))
 LIBS="$LIBS -lSDL_net"
 
@@ -191,7 +191,7 @@ AC_SUBST(SDL_GFX_PREFIX)
 if test "x$SDL_GFX_PREFIX" != "x"; then
   CPPFLAGS="$CPPFLAGS -I$SDL_GFX_PREFIX/include/SDL"
   CXXFLAGS="$CXXFLAGS -I$SDL_GFX_PREFIX/include/SDL"
-fi  
+fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,
 	AC_MSG_ERROR([SDL_gfx library >= 2.0.13 required]))
 AC_CHECK_HEADERS(SDL_rotozoom.h,,
@@ -202,7 +202,7 @@ LIBS="$LIBS -lSDL_gfx"
 #dnl === Check for paragui-config  ==========================================
 
 #AC_PATH_PROGS([PGUI_CONFIG], [paragui-config], [none])
-#if test "x$PGUI_CONFIG" = "xnone"; then	
+#if test "x$PGUI_CONFIG" = "xnone"; then
 #	AC_MSG_ERROR([*** paragui-config has not been found.])
 #fi
 #AC_MSG_CHECKING(for Paragui)
@@ -221,11 +221,11 @@ LIBS="$LIBS -lSDL_gfx"
 
 dnl === Check for libxml++ 2.6 =============================================
 
-dnl Check first for pkg-config  
+dnl Check first for pkg-config
 
 AC_PATH_PROGS([PACKAGE_CONFIG], [pkg-config], [none])
 if test "x$PACKAGE_CONFIG" = "xnone"; then
-	
+
 	AC_MSG_ERROR([*** pkg-config, needed to check for libxml++ existence
 has not been found.])
 fi
@@ -282,9 +282,7 @@ AC_CONFIG_FILES([Makefile
 		 src/Makefile
 		 doc/Makefile
 		 po/Makefile
-		 ])
-
-dnl AC_CONFIG_FILES([po/Makefile], [AM_POSTPROCESS_PO_MAKEFILE])
+		 ], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)
 
