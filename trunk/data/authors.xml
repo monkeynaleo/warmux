@@ -201,6 +201,21 @@
 
 <section title="Contributors">
   <author>
+    <name>Toon Verstraelen</name>
+    <email>Toon.Verstraelen AT ugent.be</email>
+    <country>Belgium</country>
+    <description>Map 'Leafs'</description>
+  </author>
+
+  <author>
+    <name>Anonyme guy</name>
+    <nickname>Kurosu</nickname>
+    <email>kurosu AT free.fr</email>
+    <country>France</country>
+    <description>Windows port</description>
+  </author>
+
+  <author>
     <name>Sébastien Gonzalve</name>
     <nickname>OznOg</nickname>
     <email>oznog AT zarb.org</email>
