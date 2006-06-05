@@ -43,12 +43,6 @@
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
 
-// Active le mode tricheur ?
-#ifdef DEBUG
-#  define MODE_TRICHEUR
-//#  define USE_HAND_POSITION_MODIFIER
-#endif
-
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
 
