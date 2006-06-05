@@ -173,7 +173,7 @@ strip "$DEST/"*.dll "$WORMUXDIR/src/"*.exe
 SDL_PATH=$(sdl-config --prefix)
 cp "$SDL_PATH/bin/SDL_mixer.dll" "$SDL_PATH/bin/SDL_ttf.dll" \
    "$SDL_PATH/bin/SDL_image.dll" "$SDL_PATH/bin/SDL.dll" \
-   "$GLIB_PATH/bin/zlib1.dll" $DEST
+   "$SDL_PATH/bin/SDL_net.dll" "$GLIB_PATH/bin/zlib1.dll" $DEST
 
 # Continue producing installer
 cat >> $NSIS <<EOF
