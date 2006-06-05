@@ -76,14 +76,27 @@ if test "x${prefix}" = "xNONE"; then
   prefix="${ac_default_prefix}"
 fi
 
-DATADIR="${prefix}/share/wormux"
+# ========================================================================
+# == Set flags for various environments                                  =
+# ========================================================================
+case "${host}" in
+  i[[3456789]]86-*-mingw32*) WIN32="yes" ;;
+  *cygwin*) WIN32="yes" ;;
+  *) WIN32="no" ;;
+esac
+AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
+
+
+if test "${WIN32}" = "yes"; then DATADIR="data"
+else DATADIR="${prefix}/share/wormux"; fi
 AC_ARG_WITH(datadir-name,
     [  --with-datadir-name=DIR       specify where datas are installed (default: ${prefix}/share/wormux)],
     [DATADIR="$withval"])
 AC_SUBST([DATADIR])
 
 
-LOCALEDIR="${prefix}/share/locale"
+if test "${WIN32}" = "yes"; then LOCALEDIR="locale"
+else LOCALEDIR="${prefix}/share/locale"; fi
 AC_ARG_WITH(localedir-name,
     [  --with-localedir-name=DIR       specify where locales are installed (default: ${prefix}/share/locale)],
     [LOCALEDIR="$withval"])
@@ -243,17 +256,6 @@ LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
 CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS"
 CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS"
 LIBS="$LIBS $LIBXMLPP_LIBS"
-
-dnl ========================================================================
-dnl == Set flags for various environments                                  =
-dnl ========================================================================
-case "${host}" in
-  i[[3456789]]86-*-mingw32*) WIN32="yes" ;;
-  *cygwin*) WIN32="yes" ;;
-  *) WIN32="no" ;;
-esac
-AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
-
 
 dnl ========================================================================
 dnl == Check for header files                                              =

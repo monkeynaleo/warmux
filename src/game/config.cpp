@@ -82,15 +82,13 @@ void Config::Init()
   Constants::GetInstance();
 
   // directories
-#ifndef WIN32
   data_dir = *GetEnv(Constants::ENV_DATADIR, Constants::DEFAULT_DATADIR);
   locale_dir = *GetEnv(Constants::ENV_LOCALEDIR, Constants::DEFAULT_LOCALEDIR);
   ttf_filename = *GetEnv(Constants::ENV_FONT_PATH, Constants::DEFAULT_FONT_PATH);
+
+#ifndef WIN32
   personal_dir = GetHome()+"/.wormux/";
 #else
-  data_dir = "data\\";
-  locale_dir = "locale\\";
-  ttf_filename = "data\\font\\DejaVuSans.ttf";
   personal_dir = GetHome()+"\\Wormux\\";
 #endif
 }
