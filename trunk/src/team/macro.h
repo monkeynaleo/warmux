@@ -38,7 +38,7 @@
        fin_pour_chaque_ver = (*(equipe)).end(); \
        ver != fin_pour_chaque_ver; \
        ++ver) \
-  if (ver -> IsActive())
+  if (!ver -> IsGhost())
 
 // Boucle pour chaque ver vivant d'une equipe
 #define FOR_EACH_LIVING_CHARACTER(equipe,ver) \

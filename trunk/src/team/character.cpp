@@ -83,7 +83,6 @@ Character::Character (Team& my_team, const std::string &name,
   previous_strength = 0;
   energy = 100;
   lost_energy = 0;
-  desactive = false;
   skin = NULL;
   walk_skin = NULL;
   skin_is_walking = true;
@@ -203,10 +202,7 @@ void Character::SignalDrowning()
 
 // Si un ver devient un fantome, il meurt ! Signale sa mort
 void Character::SignalGhostState (bool was_dead)
-{
-  // Deactivate character
-  desactive = true;
-  
+{  
   // Report to damage performer this character lost all of its energy
   ActiveCharacter().MadeDamage(energy, *this);
 
@@ -339,7 +335,7 @@ void Character::Draw()
   if (hidden) return;
 
   // Gone in another world ?
-  if (!IsActive()) return;
+  if (IsGhost()) return;
 
   bool dessine_perte = (lost_energy != 0);
   if ((&ActiveCharacter() == this
@@ -603,7 +599,7 @@ void Character::HandleKeyEvent(int action, int event_type)
 
 void Character::Refresh()
 {
-  if (desactive) return;
+  if (IsGhost()) return;
 
   UpdatePosition ();
   Time * global_time = Time::GetInstance();
@@ -726,9 +722,6 @@ int Character::GetDirection() const
   return (x<0)?-1:1;
 }
 
-bool Character::IsActive() const 
-{ return !desactive; }
-
 // End of turn or change of character
 void Character::StopPlaying()
 {
@@ -739,7 +732,6 @@ void Character::StopPlaying()
 void Character::StartPlaying()
 {
   assert (!IsGhost());
-  desactive = false;
   SetSkin("weapon-" + m_team.GetWeapon().GetID());
 }
 

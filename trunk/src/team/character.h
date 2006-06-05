@@ -40,7 +40,6 @@ class Character : public PhysicalObj
 private:
   std::string character_name;
   Team& m_team;
-  bool desactive;       // Disable the characte ? (no display, nor handling)
   bool skin_is_walking; // True if the curent is a walking skin.
   bool is_walking;
   bool full_walk;
@@ -138,9 +137,6 @@ public:
   void StopPlaying();
   void Hide();
   void Show();
-
-  // Un ver est actif ? (affiché et ses données sont calculées ?)
-  bool IsActive() const; 
 
   // Les mouvements droite/gauche sont autorisés ? (pause assez longue ?)
   bool MouvementDG_Autorise() const;
