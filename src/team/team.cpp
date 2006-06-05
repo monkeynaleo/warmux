@@ -147,6 +147,7 @@ bool Team::LoadCharacters(uint howmany)
 	// Initialise les variables du ver, puis l'ajoute à la liste
 	Character new_character(*this, character_name, skin);
 	characters.push_back(new_character);
+	active_character = characters.begin(); // we need active_character to be initialized here !!
 	characters.back().PutRandomly(false, world.dst_min_entre_vers);
 	characters.back().Ready();
 	
