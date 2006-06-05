@@ -47,12 +47,7 @@ const uchar B_FINAL = 0; //Couleur B à 0%
 
 const float DUREE_MVT = 750.0;
 
-TeamEnergy :: TeamEnergy()
-{
-  bar_text = NULL;
-}
-
-void TeamEnergy :: Init ()
+TeamEnergy :: TeamEnergy(const std::string &_team_name)
 {
   dx = 0;
   dy = 0;
@@ -65,8 +60,8 @@ void TeamEnergy :: Init ()
   barre_energie.SetBorderColor( Color(255, 255, 255, ALPHA) );
   barre_energie.SetBackgroundColor( Color(255*6/10, 255*6/10, 255*6/10, ALPHA_FOND) );
 
-  if(bar_text == NULL)
-    bar_text = new Text("");
+  bar_text = new Text("");
+  team_name = _team_name;
 }
 
 TeamEnergy :: ~TeamEnergy ()
@@ -74,9 +69,15 @@ TeamEnergy :: ~TeamEnergy ()
   delete bar_text;
 }
 
-void TeamEnergy :: ChoisitNom (const std::string &nom_equipe)
+void TeamEnergy::Config(uint _current_energy,
+			uint _max_energy)
 {
-  nom = nom_equipe;
+  valeur_max = _max_energy;
+
+  valeur = _current_energy;
+  nv_valeur = _current_energy;
+  assert(valeur_max != 0)
+  barre_energie.InitVal (valeur, 0, valeur_max);
 }
 
 void TeamEnergy :: Refresh ()
@@ -142,27 +143,12 @@ void TeamEnergy :: Draw ()
   barre_energie.DrawXY( Point2i(x, y) );
 
   std::ostringstream ss;
-  ss << nom << "/" << valeur;
+  ss << team_name << "/" << valeur;
   x = camera.GetSizeX() - ((BARRE_LARG/2) + 10) + dx;
   y = BARRE_HAUT + (classement * (BARRE_HAUT + ESPACEMENT)) + dy;
   std::string txt = ss.str();
   bar_text->Set(txt);
   bar_text->DrawCenterTop(x,y);
-}
-
-void TeamEnergy :: Reset ()
-{
-}
-
-void TeamEnergy::FixeMax (uint energie)
-{ valeur_max = energie; }
-
-void TeamEnergy::FixeValeur (uint energie)
-{
-  valeur = energie;
-  nv_valeur = energie;
-  assert(valeur_max != 0)
-  barre_energie.InitVal (energie, 0, valeur_max);
 }
 
 void TeamEnergy::NouvelleValeur (uint nv_energie)

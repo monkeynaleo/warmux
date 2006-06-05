@@ -55,7 +55,7 @@ class TeamEnergy
     uint classement; //0 = première position au classement
     uint nv_classement;
 
-    std::string nom;
+    std::string team_name;
 
     uint tps_debut_mvt;
 
@@ -63,16 +63,14 @@ class TeamEnergy
     uint classement_tmp;
     energy_t status;
 
-    TeamEnergy();
+    TeamEnergy(const std::string& _team_name);
     ~TeamEnergy();
-    void Init();
-    void ChoisitNom(const std::string &nom_equipe);
+    void Config(uint _current_energy,
+		uint _max_energy);
+
     void Refresh();
     void Draw();
-    void Reset();
 
-    void FixeValeur(uint energie); //(sans animation)
-    void FixeMax(uint energie); //Choisit la valeur maximale de la jauge
     void NouvelleValeur(uint nv_energie); //(avec animation)
 
     void FixeClassement(uint classem); //(sans animation)
