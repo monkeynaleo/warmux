@@ -212,6 +212,10 @@ void Team::NextCharacter()
   camera.ChangeObjSuivi (&ActiveCharacter(), 
 			 !camera_est_sauve, !camera_est_sauve, 
 			 true);
+  MSG_DEBUG("team", "%s (%d, %d)is now the active character", 
+	    ActiveCharacter().GetName().c_str(),
+	    ActiveCharacter().GetX(),
+	    ActiveCharacter().GetY());
 }
 
 int Team::NbAliveCharacter() const
