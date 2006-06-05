@@ -125,9 +125,9 @@ wormux_SOURCES = \
 
 AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\" -DFONT_FILE=\"$(fontfile)\"
 
-wormux_SOURCES += wormux.rc wormux.ico
 
 if WIN32
+wormux_SOURCES += wormux.rc wormux.ico
 .rc.o:
 	windres -o $@ -i $<
 endif
