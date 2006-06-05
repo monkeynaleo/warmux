@@ -181,6 +181,9 @@ void NinjaRope::TryAttachRope()
       ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
       m_hooked_time = Time::GetInstance()->Read();
       InitSkinSprite();
+
+     ActiveTeam().crosshair.ChangeAngleVal(-60);
+	
     }
   else
     {
