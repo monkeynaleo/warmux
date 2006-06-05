@@ -27,6 +27,7 @@
 #include "../include/constant.h"
 #include "../game/config.h"
 #include "../map/camera.h"
+#include "../map/map.h"
 #include "../weapon/weapons_list.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
@@ -40,7 +41,8 @@ Team::Team(const std::string& _teams_dir,
 	   const std::string& _id, 
 	   const std::string& _name, 
 	   const Surface& _flag, 
-	   const std::string& _sound_profile)
+	   const std::string& _sound_profile) :
+  energy(_name)
 {
   is_local = true;
   active_character = NULL;
@@ -145,7 +147,8 @@ bool Team::LoadCharacters(uint howmany)
 	// Initialise les variables du ver, puis l'ajoute à la liste
 	Character new_character(*this, character_name, skin);
 	characters.push_back(new_character);
-	characters.back().Reset();
+	characters.back().PutRandomly(false, world.dst_min_entre_vers);
+	characters.back().Ready();
 	
 	MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 	
@@ -171,10 +174,7 @@ bool Team::LoadCharacters(uint howmany)
 
 void Team::InitEnergy (uint max)
 {
-  energy.Init();
-  energy.ChoisitNom(m_name);
-  energy.FixeMax(max);
-  energy.FixeValeur(ReadEnergy());
+  energy.Config(ReadEnergy(), max);
 }
 
 uint Team::ReadEnergy ()
@@ -205,7 +205,12 @@ void Team::NextCharacter()
     ++active_character;
     if (active_character == characters.end()) 
       active_character = characters.begin();
-  } while (ActiveCharacter().IsDead());
+  } while (ActiveCharacter().IsDead());  
+
+  if (camera_est_sauve) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
+  camera.ChangeObjSuivi (&ActiveCharacter(), 
+			 !camera_est_sauve, !camera_est_sauve, 
+			 true);
 }
 
 int Team::NbAliveCharacter() const

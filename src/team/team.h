@@ -76,10 +76,6 @@ public:
   void LoadGamingData(uint how_many_characters);
   void UnloadGamingData();
 
-  // ******* TODO: KILL THIS FUNCTIONS !!! ********
-  //  Character& operator[] (uint index);
-  //const Character& operator[] (uint index) const;
-  // ******* TODO: KILL THIS FUNCTIONS !!! ********
   bool IsSameAs(const Team& other);
 
   // Switch to next worm.
@@ -89,7 +85,6 @@ public:
   void PrepareTurn();
 
   // Access to the worms.
-  //int ActiveCharacterIndex() const;
   Character& ActiveCharacter();
 
   void Draw();

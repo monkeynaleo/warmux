@@ -57,7 +57,7 @@ const uint do_nothing_timeout = 5000;
 
 // Pause for the animation
 #ifdef DEBUG
-#define ANIME_VITE
+//#define ANIME_VITE
 #endif
 #ifdef ANIME_VITE
   const uint ANIM_PAUSE_MIN = 100;
@@ -104,26 +104,64 @@ Character::Character (Team& my_team, const std::string &name,
   // Survivals
   survivals = 0;
 
-  name_text = NULL;
-
-  GameMode * game_mode = GameMode::GetInstance();
   character_name = name;
   skin = pskin;
+  
+  ResetConstants();
 
   // Animation ?
-  anim.draw = false;
-  if (GetSkin().anim.utilise)
-  { 
-    anim.draw = true;
-    anim.image = new Sprite(*GetSkin().anim.image);
+  {
+    anim.draw = false;
+    if (GetSkin().anim.utilise)
+      { 
+	anim.draw = true;
+	anim.image = new Sprite(*GetSkin().anim.image);
+	anim.image->Finish();
+	anim.time  = randomObj.GetLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
+	anim.time += Time::GetInstance()->Read();    
+      }
+  }    
+
+  // Skin
+  {
+    SetSkin("walking");
+    SetDirection( randomSync.GetBool()?1:-1 );
+    
+    if(!full_walk)
+      image->SetCurrentFrame ( randomObj.GetLong(0, image->GetFrameCount()-1) );
+    else
+      StartBreathing();
+
+    m_image_frame = image->GetCurrentFrame();   
   }
 
-  // Energie
-  energy_bar.InitVal (energy, 0, game_mode->character.max_energy);
-  energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
+  // Name Text object
+  if (Config::GetInstance()->GetDisplayNameCharacter())
+    name_text = new Text(character_name);
+  else
+    name_text = NULL;
 
-  energy_bar.SetBorderColor( black_color );
-  energy_bar.SetBackgroundColor( gray_color );
+  // Energy
+  {
+    energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.max_energy);
+    energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
+
+    energy_bar.SetBorderColor( black_color );
+    energy_bar.SetBackgroundColor( gray_color );
+
+    energy = GameMode::GetInstance()->character.init_energy-1;
+    energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.init_energy);
+    SetEnergyDelta (1, false);
+    lost_energy = 0;
+  }
+  MSG_DEBUG("character", "Load character %s", character_name.c_str());
+}
+
+Character::~Character()
+{
+  MSG_DEBUG("character", "Unload character %s", character_name.c_str());
+  //  if (name_text != NULL) delete name_text;
+  //delete anim.image;
 }
 
 // Signale la mort d'un ver
@@ -824,54 +862,6 @@ void Character::FrameImageSuivante()
   if ( channel_step == -1 || !Mix_Playing(channel_step) ) {
     channel_step = jukebox.Play (m_team.GetSoundProfile(), "step");
   }
-}
-
-void Character::Reset() 
-{  
-  // Reset de l'état du ver
-  desactive = false;
-
-  ResetConstants();
-  Ready();
-
-  //  Reset de l'image et les dimensions
-  SetSkin("walking");
-
-  // Animation ?
-  if (anim.draw)
-  { 
-    anim.image->Finish();
-    anim.time  = randomObj.GetLong (ANIM_PAUSE_MIN, ANIM_PAUSE_MAX);
-    anim.time += Time::GetInstance()->Read();    
-  }
-
-  // Initialise l'image
-  SetDirection( randomSync.GetBool()?1:-1 );
-
-  if(!full_walk)
-    image->SetCurrentFrame ( randomObj.GetLong(0, image->GetFrameCount()-1) );
-  else
-    StartBreathing();
-
-  m_image_frame = image->GetCurrentFrame();   
-
-
-  // Prépare l'image du nom
-  if (Config::GetInstance()->GetDisplayNameCharacter() && name_text == NULL)
-  {
-    name_text = new Text(character_name);
-  }
-
-  // Energie
-  energy = GameMode::GetInstance()->character.init_energy-1;
-  energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.init_energy);
-  SetEnergyDelta (1, false);
-  lost_energy = 0;
-
-  PutRandomly(false, world.dst_min_entre_vers);
-
-  assert (!IsDead());
-  Ready();
 }
 
 uint Character::GetEnergy() const 

@@ -105,7 +105,7 @@ public:
 public:
   Skin();
   void Reset();
-  bool Charge (const std::string &nom, const std::string &repertoire);
+  bool Load (const std::string &nom, const std::string &repertoire);
 
 protected:
   bool GetXmlConfig (xmlpp::Element *xml, CfgSkin_Walking &config);

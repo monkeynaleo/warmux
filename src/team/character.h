@@ -105,9 +105,7 @@ private:
 public:
   Character (Team& my_team, const std::string &name, 
 	     Skin *skin);
-
-  // (Re)Initialise le ver
-  void Reset();
+  ~Character();
 
   // Change le niveau d'énergie
   void SetEnergyDelta (int delta, bool do_report=true);

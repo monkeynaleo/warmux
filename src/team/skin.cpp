@@ -121,7 +121,7 @@ void Skin::Reset()
 
 //-----------------------------------------------------------------------------
 
-bool Skin::Charge (const std::string &nom, const std::string &repertoire)
+bool Skin::Load (const std::string &nom, const std::string &repertoire)
 {
   try
   {
@@ -306,7 +306,7 @@ void LoadOneSkin (const std::string &dir, const std::string &file)
 
   // Try to load the skin
   Skin skin;
-  if (!skin.Charge (file, fullname+PATH_SEPARATOR)) return;
+  if (!skin.Load (file, fullname+PATH_SEPARATOR)) return;
 
   // Add the skin to the list
   if (!skins_list.empty()) std::cout << ',';
