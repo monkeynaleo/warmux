@@ -88,6 +88,7 @@ Weapon::Weapon(Weapon_type type,
   use_flipping = true;
 
   override_keys = false ;
+  force_override_keys = false;
 
   position.origin = weapon_origin_HAND;
   position.dx = 0;

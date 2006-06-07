@@ -41,6 +41,7 @@ WeaponBullet::WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg) 
 { 
   cfg.explosion_range = 1;
   explode_colliding_character = true;
+
 }
 
 void WeaponBullet::SignalCollision()
@@ -99,6 +100,8 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
   SetTestRect (dx, dx, dy, dy);
+  
+  ResetTimeOut();
 }
 
 WeaponProjectile::~WeaponProjectile()
@@ -205,7 +208,7 @@ void WeaponProjectile::Refresh()
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
   
-  if(cfg.timeout && tmp > 1000 * cfg.timeout) {
+  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
     is_active = false;      
     return;
   }
@@ -223,14 +226,14 @@ void WeaponProjectile::Draw()
 
   image->Draw(GetPosition());
   
-  int tmp = cfg.timeout;
+  int tmp = GetTotalTimeout();
 
   if (tmp != 0) { 
     tmp -= (int)((Time::GetInstance()->Read() - begin_time) / 1000);
 
     if (tmp >= 0) {
       std::ostringstream ss;
-      ss << tmp;
+      ss << tmp ;
       int txt_x = GetX() + GetWidth() / 2;
       int txt_y = GetY() - GetHeight();
       (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
@@ -256,6 +259,34 @@ void WeaponProjectile::Explosion()
   ApplyExplosion (pos, cfg);
 }
 
+
+void WeaponProjectile::IncrementTimeOut()
+{
+  if (GetTotalTimeout()<cfg.timeout*2) 
+	 m_timeout_modifier += 1 ;
+
+}
+
+void WeaponProjectile::DecrementTimeOut()
+{
+  if (GetTotalTimeout()>1) 
+	 m_timeout_modifier -= 1 ;	//-1s for grenade timout. 1 is min.
+	
+}
+
+void WeaponProjectile::ResetTimeOut()
+{
+	 m_timeout_modifier = 0 ;	
+	
+}
+
+int WeaponProjectile::GetTotalTimeout()
+{
+  return cfg.timeout+m_timeout_modifier;
+}
+
+
+
 //-----------------------------------------------------------------------------
 
 WeaponLauncher::WeaponLauncher(Weapon_type type, 
@@ -265,6 +296,7 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
   Weapon(type, id, params, visibility)
 {  
   projectile = NULL;
+  m_allow_change_timeout = false;
 }
 
 WeaponLauncher::~WeaponLauncher()
@@ -304,6 +336,68 @@ void WeaponLauncher::Refresh()
   if (!m_is_active) return;
   if (!projectile->is_active) Explosion();
 }
+
+
+void WeaponLauncher::Draw()
+{
+  //Display timeout for projectil if can be changed.
+  if (m_allow_change_timeout == true)
+  {
+   if( IsActive() ) //Do not display after launching.
+      return;
+      
+    int tmp = projectile->GetTotalTimeout();
+        std::ostringstream ss;
+        ss << tmp;
+              ss << "s";
+        int txt_x = ActiveCharacter().GetX() + ActiveCharacter().GetWidth() / 2;
+        int txt_y = ActiveCharacter().GetY() - ActiveCharacter().GetHeight();
+        (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
+  					    ss.str(), white_color);
+  }
+  
+  Weapon::Draw();
+}
+
+void WeaponLauncher::p_Select()
+{
+  if (m_allow_change_timeout == true) 
+  {
+    force_override_keys = true; //Allow overriding key during movement.
+     projectile->ResetTimeOut(); 
+  }
+}
+
+void WeaponLauncher::p_Deselect()
+{
+  if (m_allow_change_timeout == true)
+  {
+    force_override_keys = false;
+  }
+}
+
+
+void WeaponLauncher::HandleKeyEvent(int action, int event_type)
+{
+
+ if (event_type == KEY_RELEASED)
+  switch (action) {
+    case ACTION_WEAPON_MORE:  
+	      projectile->IncrementTimeOut();
+      	break ;
+
+    case ACTION_WEAPON_LESS:  
+	      projectile->DecrementTimeOut();
+      	break	;
+
+  default:
+  break	;     
+
+  };
+ActiveCharacter().HandleKeyEvent(action, event_type);
+}
+
+
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }

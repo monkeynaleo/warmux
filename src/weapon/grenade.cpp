@@ -23,6 +23,7 @@
 #include "grenade.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
+#include <iostream>
 #include "../game/time.h"
 #include "../team/teams_list.h"
 #include "../graphic/video.h"
@@ -38,7 +39,7 @@ Grenade::Grenade(ExplosiveWeaponConfig& cfg) :
   WeaponProjectile ("grenade", cfg)
 {
   m_rebound_sound = "weapon/grenade_bounce";
-  touche_ver_objet = false;
+  touche_ver_objet = false;  
 }
 
 //-----------------------------------------------------------------------------
@@ -51,7 +52,6 @@ void Grenade::Refresh()
   double angle = GetSpeedAngle() * 180/M_PI ;
   image->SetRotation_deg( angle);
 }
-
 
 //-----------------------------------------------------------------------------
 
@@ -69,6 +69,11 @@ void Grenade::SignalCollision()
 GrenadeLauncher::GrenadeLauncher() : 
   WeaponLauncher(WEAPON_GRENADE, "grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
+
   m_name = _("Grenade");
   projectile = new Grenade(cfg());
+  m_allow_change_timeout = true;
+ 
 }
+
+

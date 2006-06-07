@@ -41,7 +41,8 @@ class WeaponProjectile : public PhysicalObj
   bool touche_ver_objet;
   bool explode_colliding_character; // before timeout. touche_ver_objet must be true
   double begin_time;
-
+  int m_timeout_modifier ;
+  
   ExplosiveWeaponConfig& cfg;
 
  public:
@@ -59,6 +60,12 @@ class WeaponProjectile : public PhysicalObj
   virtual void Explosion();
 
   virtual bool CollisionTest (const Point2i &position); // public only for uzi...
+  
+  void IncrementTimeOut();
+  void DecrementTimeOut();
+  int GetTotalTimeout();
+  void ResetTimeOut();
+  
  protected:
   virtual void SignalCollision() = 0; 
   bool TestImpact ();
@@ -84,9 +91,12 @@ class WeaponLauncher : public Weapon
 {
  protected:
   WeaponProjectile * projectile;
-
+  virtual bool p_Shoot();
+  virtual void p_Select();
+  virtual void p_Deselect();
+  bool m_allow_change_timeout;
  private:
-  bool p_Shoot();
+
   void DirectExplosion();
   void Explosion();
   
@@ -98,6 +108,8 @@ class WeaponLauncher : public Weapon
   virtual ~WeaponLauncher();
 
   void Refresh();
+  virtual void Draw();
+  void HandleKeyEvent(int action, int event_type);
   ExplosiveWeaponConfig& cfg();
 };
 
