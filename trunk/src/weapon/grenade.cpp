@@ -23,7 +23,6 @@
 #include "grenade.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
-#include <iostream>
 #include "../game/time.h"
 #include "../team/teams_list.h"
 #include "../graphic/video.h"
