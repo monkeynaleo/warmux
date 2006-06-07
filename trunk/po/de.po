@@ -468,7 +468,7 @@ msgstr "Das Spiel endet unentschieden.\n"
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
-msgstr "Die Rackete hat das Schlachtfeld verlassen..."
+msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 
 #: src/graphic/video.cpp:120
 #, c-format
