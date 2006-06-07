@@ -21,7 +21,7 @@
 
 #include "constant.h"
 
-const std::string Constants::VERSION = "0.7.2";
+const std::string Constants::VERSION = "0.7.3";
 
 const std::string Constants::DEFAULT_DATADIR = INSTALL_DATADIR;
 const std::string Constants::DEFAULT_LOCALEDIR = INSTALL_LOCALEDIR;
