@@ -129,7 +129,7 @@ LangString TITLE_Wormux "Slovenian" "Wormux"
 LangString DESC_Wormux  "Slovenian" "Wormux ${WORMUX_VERSION}"
 
 ;Folder-selection page
-InstallDir "$PROGRAMFILES\Wormux"
+InstallDir "\$PROGRAMFILES\Wormux"
 ; Registry key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
 InstallDirRegKey HKLM ${HKLM_PATH} "pth"
@@ -150,12 +150,12 @@ EOF
 
 # Glib (gobject, gthread, glib & gmodule)
 GLIB_PATH=$(pkg_path glib-2.0)
-cp "$GLIB_PATH/bin/libgobject"*.dll "$GLIB_PATH/bin/libgthread"*.dll \
+cp "$GLIB_PATH/bin/libgobject"*.dll "$GLIB_PATH/bin/libgthread"*.dll	\
    "$GLIB_PATH/bin/libglib"*.dll "$GLIB_PATH/bin/libgmodule"*.dll "$DEST"
 
 # All gettext (with iconv), jpeg and zlib stuff should be within
 # glademm install path <=> glib path
-cp "$GLIB_PATH/bin/intl.dll" "$GLIB_PATH/bin/iconv.dll" \
+cp "$GLIB_PATH/bin/intl.dll" "$GLIB_PATH/bin/iconv.dll"		\
    "$GLIB_PATH/bin/jpeg62.dll" "$DEST"
 
 # Other libs
@@ -171,9 +171,11 @@ strip "$DEST/"*.dll "$WORMUXDIR/src/"*.exe
 
 # Files that must not be stripped (all of SDL)
 SDL_PATH=$(sdl-config --prefix)
-cp "$SDL_PATH/bin/SDL_mixer.dll" "$SDL_PATH/bin/SDL_ttf.dll" \
-   "$SDL_PATH/bin/SDL_image.dll" "$SDL_PATH/bin/SDL.dll" \
-   "$SDL_PATH/bin/SDL_net.dll" "$GLIB_PATH/bin/zlib1.dll" $DEST
+cp "$SDL_PATH/bin/SDL_mixer.dll" "$SDL_PATH/bin/SDL_ttf.dll"	\
+   "$SDL_PATH/bin/SDL_image.dll" "$SDL_PATH/bin/SDL.dll"	\
+   "$SDL_PATH/bin/SDL_net.dll" "$GLIB_PATH/bin/intl.dll"	\
+   "$GLIB_PATH/bin/iconv.dll" "$GLIB_PATH/bin/jpeg62.dll"	\
+   "$GLIB_PATH/bin/zlib1.dll" $DEST
 
 # Continue producing installer
 cat >> $NSIS <<EOF
