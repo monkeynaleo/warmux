@@ -1,4 +1,12 @@
-> 18/05/2006 - 0.7.2 release
+> /06/2006 - 0.7.3 release
+  - Network menu (still experimental)
+  - New quit screen
+  - New wormux menu icon
+  - New maps: Leafs, Paradis
+  - Minor bug fixes
+  - Code cleaning
+
+> 26/05/2006 - 0.7.2 release
   - New translation: finnish
   - New map: island, cheese
   - Misc weapon improvements (ninja rope, uzi, air attack)
