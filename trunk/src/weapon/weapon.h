@@ -117,7 +117,10 @@ public:
 
   // True if the weapon uses keys when activated.
   bool override_keys ;
-
+  
+  //Force weapons to use keys when true 
+  bool force_override_keys ;
+   
   // Angle in degrees between -90 to 90
   int min_angle, max_angle;
   bool use_flipping;

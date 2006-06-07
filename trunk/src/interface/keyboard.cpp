@@ -112,8 +112,8 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
     if(event_type==KEY_RELEASED)
       HandleKeyReleased(action);
 
-    if (ActiveTeam().GetWeapon().override_keys &&
-        ActiveTeam().GetWeapon().IsActive())
+    if ((ActiveTeam().GetWeapon().override_keys &&
+        ActiveTeam().GetWeapon().IsActive()) || ActiveTeam().GetWeapon().force_override_keys)
       {
         ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
         return ;
