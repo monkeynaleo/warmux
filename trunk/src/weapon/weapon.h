@@ -198,6 +198,10 @@ public:
   // Return false if it not fire directly after
   virtual void ChooseTarget ();
 
+  //Misc actions. 
+  virtual void ActionUp ();//called by mousse.cpp when mousewhellup
+  virtual void ActionDown ();//called by mousse.cpp when mousewhelldown
+  
   // Handle a keyboard event.
   virtual void HandleKeyEvent(int key, int event_type) ;
 

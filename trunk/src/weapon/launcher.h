@@ -109,7 +109,12 @@ class WeaponLauncher : public Weapon
 
   void Refresh();
   virtual void Draw();
-  void HandleKeyEvent(int action, int event_type);
+  void HandleKeyEvent(int action, int event_type);  
+  
+  //Misc actions
+  void ActionUp ();//called by mousse.cpp when mousewhellup
+  void ActionDown ();//called by mousse.cpp when mousewhelldown
+  
   ExplosiveWeaponConfig& cfg();
 };
 

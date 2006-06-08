@@ -65,12 +65,32 @@ Mouse::Mouse(){
 void Mouse::Reset(){
 }
 
-bool Mouse::ActionClicD(){
+bool Mouse::ActionClicD(){ 
   if( ActiveTeam().GetWeapon().CanChangeWeapon() )
     Interface::GetInstance()->weapons_menu.SwitchDisplay();
 
   return true;
 }
+
+//WORKING=============================================
+bool Mouse::ActionWhellUp(){
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
+    ActiveTeam().AccessWeapon().ActionUp(); 
+    return true ;
+    }
+    
+  return true;
+}
+
+bool Mouse::ActionWhellDown(){
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
+    ActiveTeam().AccessWeapon().ActionDown();
+    return true ;
+    }
+    
+  return true;
+}
+//==========================================================
 
 bool Mouse::ActionClicG()
 {
@@ -220,6 +240,7 @@ Point2i Mouse::GetWorldPosition() const{
 
 void Mouse::TraiteClic (const SDL_Event *event){
   if( event->type == SDL_MOUSEBUTTONDOWN ){
+  
     if( event->button.button == SDL_BUTTON_RIGHT ){
       ActionClicD();
       return;
@@ -230,6 +251,18 @@ void Mouse::TraiteClic (const SDL_Event *event){
       ActionClicG();
       return;
     }
+    
+
+    if (event->button.button == SDL_BUTTON_WHEELDOWN){
+      ActionWhellDown(); 
+      return;
+    }
+       
+    if (event->button.button == SDL_BUTTON_WHEELUP){
+      ActionWhellUp(); 
+      return;
+    }
+    
   }
 }
 
