@@ -570,3 +570,9 @@ void Weapon::ChooseTarget(){
 void Weapon::SignalTurnEnd(){
 }
 
+void Weapon::ActionUp(){ //called by mousse.cpp when mousewhellup
+}
+
+
+void Weapon::ActionDown(){//called by mousse.cpp when mousewhelldown
+}

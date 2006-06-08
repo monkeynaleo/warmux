@@ -397,7 +397,14 @@ void WeaponLauncher::HandleKeyEvent(int action, int event_type)
 ActiveCharacter().HandleKeyEvent(action, event_type);
 }
 
+void WeaponLauncher::ActionUp(){ //called by mousse.cpp when mousewhellup 
+  projectile->IncrementTimeOut();
+}
 
+
+void WeaponLauncher::ActionDown(){//called by mousse.cpp when mousewhelldown
+   projectile->DecrementTimeOut();
+}
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
