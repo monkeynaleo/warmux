@@ -70,6 +70,15 @@
     <image file="weapon/bazooka/missile.png" />
   </sprite>
 
+<!-- Riot bomb ressources -->
+
+  <surface name="riot_bomb_ico" file="weapon/riot_bomb/riot_ico.png" />
+  <surface name="riot_bomb" file="weapon/bazooka/bazooka.png" />
+  <surface name="riot_cible" file="weapon/bazooka/baz_cible.png" />
+  <sprite name="riot_rocket">
+    <image file="weapon/riot_bomb/missile.png" />
+  </sprite>
+
 <!-- Bounce ball ressources -->
 
   <surface name="bounce_ball_ico" file="weapon/bounce_ball/bounce_ball_ico.png" />

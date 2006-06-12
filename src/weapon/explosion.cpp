@@ -156,7 +156,7 @@ void ApplyExplosion_common (const Point2i &pos,
     }
   }
 
-  ParticleEngine::AddExplosionSmoke(pos, config.explosion_range, smoke);
+  ParticleEngine::AddExplosionSmoke(pos, config.particle_range, smoke);
 
   // Do we need to generate some fire particles ?
   if (fire_particle)
@@ -252,4 +252,3 @@ void ApplyExplosion_server (const Point2i &pos,
   network.SendAction(&a_sync_end);
   ActionHandler::GetInstance()->ExecActions();
 }
-
