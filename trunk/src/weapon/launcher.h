@@ -63,6 +63,7 @@ class WeaponProjectile : public PhysicalObj
   
   void IncrementTimeOut();
   void DecrementTimeOut();
+  void SetTimeOut(int timeout);
   int GetTotalTimeout();
   void ResetTimeOut();
   

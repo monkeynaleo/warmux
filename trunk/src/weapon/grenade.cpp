@@ -72,7 +72,6 @@ GrenadeLauncher::GrenadeLauncher() :
   m_name = _("Grenade");
   projectile = new Grenade(cfg());
   m_allow_change_timeout = true;
- 
 }
 
 

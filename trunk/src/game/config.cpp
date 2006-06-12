@@ -198,6 +198,15 @@ void Config::SetKeyboardConfig()
   clavier->SetKeyAction(SDLK_F7, ACTION_WEAPONS7);
   clavier->SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
   clavier->SetKeyAction(SDLK_c, ACTION_CENTER);
+  clavier->SetKeyAction(SDLK_1, ACTION_WEAPON_1);
+  clavier->SetKeyAction(SDLK_2, ACTION_WEAPON_2);
+  clavier->SetKeyAction(SDLK_3, ACTION_WEAPON_3);
+  clavier->SetKeyAction(SDLK_4, ACTION_WEAPON_4);
+  clavier->SetKeyAction(SDLK_5, ACTION_WEAPON_5);
+  clavier->SetKeyAction(SDLK_6, ACTION_WEAPON_6);
+  clavier->SetKeyAction(SDLK_7, ACTION_WEAPON_7);
+  clavier->SetKeyAction(SDLK_8, ACTION_WEAPON_8);
+  clavier->SetKeyAction(SDLK_9, ACTION_WEAPON_9);
   clavier->SetKeyAction(SDLK_PAGEUP, ACTION_WEAPON_MORE);
   clavier->SetKeyAction(SDLK_PAGEDOWN, ACTION_WEAPON_LESS);
 }

@@ -140,8 +140,8 @@ ClusterLauncher::ClusterLauncher() :
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("ClusterBomb");  
-  
   projectile = new ClusterBomb(cfg());
+  m_allow_change_timeout = true;
 }
 
 ClusterBombConfig& ClusterLauncher::cfg() 

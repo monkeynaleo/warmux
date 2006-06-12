@@ -106,5 +106,6 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
 {  
   m_name = _("HollyGrenade");
   projectile = new HollyGrenade(cfg());
+  m_allow_change_timeout = true;
 }
 
