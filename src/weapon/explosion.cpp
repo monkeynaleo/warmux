@@ -197,21 +197,22 @@ void ApplyExplosion_server (const Point2i &pos,
     for (; tit != tend; ++tit, ++i)
     {
       Character &character = *tit;
+
       double distance;
       distance = MeterDistance (pos, character.GetCenter());
 
       // If the worm is in the explosion range, apply damage on it !
-      if (distance <= range || distance < config.blast_range)
+//      if (distance <= range || distance < config.blast_range)
       {
         // cliens : Place characters
-        if(&team != distant_team)
+//        if(&team != distant_team)
         {
           action_handler->NewAction (new ActionString(ACTION_CHANGE_TEAM, team.GetId()));
           distant_team = &team;
         }
-        if(&character != distant_character)
+//        if(&character != distant_character)
         {
-          action_handler->NewAction (new ActionInt(ACTION_CHANGE_CHARACTER, i));
+          action_handler->NewAction (new Action(ACTION_CHANGE_CHARACTER));
           distant_character = &character;
         }
         action_handler->NewAction (new ActionInt2(ACTION_MOVE_CHARACTER,
@@ -222,11 +223,11 @@ void ApplyExplosion_server (const Point2i &pos,
                                               speed.x, speed.y));
       }
     }
-    if(&team.ActiveCharacter() != distant_character)
+//    if(&team.ActiveCharacter() != distant_character)
     {
-#warning "We have perhaps something to do here"
+//#warning "We have perhaps something to do here"
       // Restore active character of this team
-      //action_handler->NewAction (new ActionInt(ACTION_CHANGE_CHARACTER, team.ActiveCharacterIndex()));
+      action_handler->NewAction (new Action(ACTION_CHANGE_CHARACTER));
     }
   }
 
