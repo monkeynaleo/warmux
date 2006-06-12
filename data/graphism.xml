@@ -15,6 +15,7 @@
 
   <surface name="bg_option" file="menu/img/background_options.png" />
   <surface name="bg_play" file="menu/img/background_play.png" />
+  <surface name="bg_network" file="menu/img/background_network.png" />
 
   <sprite name="valider">
     <image file="menu/img/validate.png">
