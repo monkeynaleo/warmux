@@ -86,6 +86,19 @@
       <blast_force>5</blast_force>
     </automatic_bazooka>
 
+    <riot_bomb>
+      <position origin="hand" x="-20" y="-18" />
+      <max_strength>50</max_strength>
+      <nb_ammo>3</nb_ammo>
+      <damage>0</damage>
+      <min_angle>-89</min_angle>
+      <max_angle>89</max_angle>
+      <explosion_range>125</explosion_range>
+      <particle_range>25</particle_range>
+      <blast_range>0</blast_range>
+      <blast_force>0</blast_force>
+    </riot_bomb>
+
     <bounce_ball>
       <position origin="hand" x="-7" y="-9" />
       <max_strength>0</max_strength>

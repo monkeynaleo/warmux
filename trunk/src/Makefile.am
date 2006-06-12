@@ -105,6 +105,7 @@ wormux_SOURCES = \
 	weapon/auto_bazooka.cpp weapon/auto_bazooka.h \
 	weapon/baseball.cpp weapon/baseball.h \
 	weapon/bazooka.cpp weapon/bazooka.h \
+	weapon/riot_bomb.cpp weapon/riot_bomb.h \
 	weapon/bounce_ball.cpp weapon/bounce_ball.h \
 	weapon/cluster_bomb.cpp weapon/cluster_bomb.h \
 	weapon/dynamite.cpp weapon/dynamite.h \

@@ -60,6 +60,7 @@ const uint BONUS_TELEPORTATION=5;
 const uint BONUS_DYNAMITE=10;
 const uint BONUS_AIR_ATTACK=1;
 const uint BONUS_AUTO_BAZOOKA=5;
+const uint BONUS_RIOT_BOMB=5;
 
 BonusBox::BonusBox()
   : PhysicalObj("bonus_box"){
@@ -173,6 +174,15 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 BONUS_AUTO_BAZOOKA),
 		  ActiveTeam().GetName().c_str(), BONUS_AUTO_BAZOOKA);
     equipe.m_nb_ammos[ _("Automatic bazooka") ] += BONUS_AUTO_BAZOOKA;
+    break;
+
+  case bonusRIOT_BOMB:
+    txt << Format(ngettext(
+                "%s team has won %u riot bomb!",
+                "%s team has won %u riot bombs!",
+                BONUS_RIOT_BOMB),
+		  ActiveTeam().GetName().c_str(), BONUS_RIOT_BOMB);
+    equipe.m_nb_ammos[ _("Riot bomb") ] += BONUS_RIOT_BOMB;
     break;
 
   default: std::cout << bonus << std::endl; assert (false);

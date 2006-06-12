@@ -76,6 +76,9 @@ void WeaponsList::Init()
   AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
   AddToList(auto_bazooka, 1);
 
+  RiotBomb* riot_bomb = new RiotBomb;
+  AddToList(riot_bomb, 1);
+  
   GrenadeLauncher* grenade_launcher = new GrenadeLauncher;
   AddToList(grenade_launcher, 1);
 

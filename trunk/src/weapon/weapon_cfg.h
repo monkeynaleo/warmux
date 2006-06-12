@@ -54,6 +54,7 @@ public:
   double blast_range ;
   double blast_force ;  
   uint explosion_range;
+  uint particle_range;
 public:
   ExplosiveWeaponConfig();
   virtual ~ExplosiveWeaponConfig() {};

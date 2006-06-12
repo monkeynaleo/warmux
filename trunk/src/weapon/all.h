@@ -27,6 +27,7 @@
 #include "auto_bazooka.h"
 #include "baseball.h"
 #include "bazooka.h"
+#include "riot_bomb.h"
 #include "bounce_ball.h"
 #include "cluster_bomb.h"
 #include "dynamite.h"
