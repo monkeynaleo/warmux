@@ -120,7 +120,7 @@ void Menu::Run ()
           widgets.SendKey(event.key.keysym);
           break;
         }  
-      else if( event.type == SDL_MOUSEBUTTONDOWN )
+      else if( event.type == SDL_MOUSEBUTTONUP)
       if( !BasicOnClic(mousePosition) )
         OnClic(mousePosition, event.button.button);
     }
