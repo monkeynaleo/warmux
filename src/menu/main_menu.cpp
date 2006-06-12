@@ -190,7 +190,7 @@ void Main_Menu::onClick(const Point2i &mousePosition, int button)
   else if(b == infos) choice = menuINFOS;
   else if(b == quit) choice = menuQUIT;
 
-  if(b != quit) button_click();
+  if(b != quit && b != NULL) button_click();
 }
 
 menu_item Main_Menu::Run ()
@@ -213,7 +213,7 @@ menu_item Main_Menu::Run ()
      
   while( SDL_PollEvent( &event) )
   {
-    if( event.type == SDL_MOUSEBUTTONDOWN )
+    if( event.type == SDL_MOUSEBUTTONUP )
       onClick( Point2i(event.button.x, event.button.y), event.button.button);
     else if( event.type == SDL_KEYDOWN )
     {
