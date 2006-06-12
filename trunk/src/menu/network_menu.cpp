@@ -48,7 +48,7 @@ const uint MAP_PREVIEW_W = 300;
 #define WORMUX_NETWORK_PORT "9999"
 
 NetworkMenu::NetworkMenu() :
-  Menu("menu/bg_play")
+  Menu("menu/bg_network")
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
