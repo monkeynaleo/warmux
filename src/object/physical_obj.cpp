@@ -295,6 +295,7 @@ void PhysicalObj::UpdatePosition ()
   if (IsGhost()) return;
 
   if (IsInWater() && (m_alive != DROWNED) && m_type != objUNBREAKABLE) Drown();
+  else if (!IsInWater() && m_alive == DROWNED && m_type != objUNBREAKABLE) GoOutOfWater();
 
   if (m_type == objUNBREAKABLE || IsInWater())
   {
@@ -398,6 +399,18 @@ void PhysicalObj::Drown()
 
   StartMoving();
   SignalDrowning();
+}
+
+void PhysicalObj::GoOutOfWater()
+{
+  assert (m_alive == DROWNED);
+  MSG_DEBUG("physic.state", "%s - Go out of water!...", m_name.c_str());
+  m_alive = ALIVE;
+
+  // Set the air grab to normal air resist factor.
+  SetAirResistFactor(m_cfg.m_air_resist_factor);
+
+  StartMoving();
 }
 
 bool PhysicalObj::IsReady() const
