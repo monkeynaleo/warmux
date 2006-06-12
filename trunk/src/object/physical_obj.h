@@ -152,6 +152,7 @@ public:
   void Die();
   void Ghost();
   void Drown();
+  void GoOutOfWater(); // usefull for supertux.
   
   bool IsReady() const;
   bool IsDead() const;
