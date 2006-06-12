@@ -119,7 +119,7 @@ GnuLauncher::GnuLauncher() :
   WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("GnuLauncher");
-
   projectile = new Gnu(cfg());
+  m_allow_change_timeout = true;
 }
 

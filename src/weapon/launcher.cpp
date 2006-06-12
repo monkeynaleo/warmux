@@ -274,6 +274,13 @@ void WeaponProjectile::DecrementTimeOut()
 	
 }
 
+void WeaponProjectile::SetTimeOut(int timeout)
+{
+  if (timeout <= cfg.timeout*2 && timeout >= 1) 
+	 m_timeout_modifier = timeout - cfg.timeout ;
+
+}
+
 void WeaponProjectile::ResetTimeOut()
 {
 	 m_timeout_modifier = 0 ;	
@@ -382,6 +389,34 @@ void WeaponLauncher::HandleKeyEvent(int action, int event_type)
 
  if (event_type == KEY_RELEASED)
   switch (action) {
+    case ACTION_WEAPON_1:
+	      projectile->SetTimeOut(1);
+	break;
+    case ACTION_WEAPON_2:
+	      projectile->SetTimeOut(2);
+	break;
+    case ACTION_WEAPON_3:
+	      projectile->SetTimeOut(3);
+	break;
+    case ACTION_WEAPON_4:
+	      projectile->SetTimeOut(4);
+	break;
+    case ACTION_WEAPON_5:
+	      projectile->SetTimeOut(5);
+	break;
+    case ACTION_WEAPON_6:
+	      projectile->SetTimeOut(6);
+	break;
+    case ACTION_WEAPON_7:
+	      projectile->SetTimeOut(7);
+	break;
+    case ACTION_WEAPON_8:
+	      projectile->SetTimeOut(8);
+	break;
+    case ACTION_WEAPON_9:
+	      projectile->SetTimeOut(9);
+	break;
+
     case ACTION_WEAPON_MORE:  
 	      projectile->IncrementTimeOut();
       	break ;

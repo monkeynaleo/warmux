@@ -96,13 +96,14 @@ Dynamite::Dynamite() :
   WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Dynamite");
-  
   projectile = new BatonDynamite(cfg());
+  m_allow_change_timeout = true;
 }
 
 void Dynamite::p_Select()
 {
   dynamic_cast<BatonDynamite *>(projectile)->Reset();
+  WeaponLauncher::p_Select();
 }
 
 // Pose une dynamite
