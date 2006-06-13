@@ -90,8 +90,20 @@ NetworkMenu::NetworkMenu() :
   options_box->enabled = false;
   widgets.AddWidget(options_box);
 
-  msg_box = new MessageBox(10, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), normal_font);
+  msg_box = new MessageBox(11, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(msg_box);
+
+  msg_box->NewMessage("WARNING!! Network is still under heavy");
+  msg_box->NewMessage(" developement and therefore a little");
+  msg_box->NewMessage(" experimental.");
+  msg_box->NewMessage("Wait for everybody to be connected");
+  msg_box->NewMessage(" before selecting your options!");
+  msg_box->NewMessage("Some weapons don't work yet");
+  msg_box->NewMessage(" (supertux, teleportation, ninjarope,");
+  msg_box->NewMessage(" jetpack, airhammer), and surely");
+  msg_box->NewMessage(" many other things don't work either!");
+  msg_box->NewMessage("Have a good game!");
+  msg_box->NewMessage(""); // Skip a line
 
   // Center the boxes!
   uint x = 30;
@@ -194,8 +206,8 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
       connection_box->enabled = false;
       b_ok->enabled = true;
       msg_box->NewMessage(_("Connected to ") + server_adress->GetText());
-      msg_box->NewMessage(_("Click the green check when"));
-      msg_box->NewMessage(_("you are ready to play!"));
+      msg_box->NewMessage("Click the green check when you are ready to");
+      msg_box->NewMessage("play!");
     }
     else
       msg_box->NewMessage(_("Unable to connect"));
