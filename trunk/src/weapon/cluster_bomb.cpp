@@ -141,7 +141,6 @@ ClusterLauncher::ClusterLauncher() :
 {  
   m_name = _("ClusterBomb");  
   projectile = new ClusterBomb(cfg());
-  m_allow_change_timeout = true;
 }
 
 ClusterBombConfig& ClusterLauncher::cfg() 

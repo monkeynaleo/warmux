@@ -55,6 +55,7 @@ public:
   void Refresh();
   void Detection();
   void SignalCollision();
+  void Draw();
 };
 
 class MineConfig : public ExplosiveWeaponConfig
@@ -82,6 +83,7 @@ private:
 public:
   Mine();
   MineConfig& cfg();
+  
 };
 
 #endif

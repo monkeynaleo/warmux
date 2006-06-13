@@ -165,7 +165,10 @@ void ObjMine::Refresh()
        }
   }
 }
-
+void ObjMine::Draw()
+{
+    image->Draw(GetPosition());
+}
 //-----------------------------------------------------------------------------
 
 MineConfig * MineConfig::singleton = NULL;
@@ -183,6 +186,7 @@ MineConfig * MineConfig::GetInstance()
 Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
+  projectile = new ObjMine(cfg());
 }
 
 bool Mine::p_Shoot()
@@ -197,6 +201,7 @@ bool Mine::p_Shoot()
 void Mine::Add (int x, int y)
 {
   ObjMine *obj = new ObjMine(cfg());
+  
   obj -> SetXY ( Point2i(x, y) );
 
   Point2d speed_vector;
@@ -219,6 +224,7 @@ MineConfig::MineConfig()
   timeout = 3;
   escape_time = 2;
 }
+
 
 void MineConfig::LoadXml(xmlpp::Element *elem) 
 {

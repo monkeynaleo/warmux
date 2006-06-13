@@ -73,7 +73,6 @@ BounceBallLauncher::BounceBallLauncher() :
 {  
   m_name = _("BounceBall");
   projectile = new BounceBall(cfg());
-  m_allow_change_timeout = true;
 }
 
 bool BounceBallLauncher::p_Shoot ()

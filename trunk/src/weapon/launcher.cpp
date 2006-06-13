@@ -41,7 +41,7 @@ WeaponBullet::WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg) 
 { 
   cfg.explosion_range = 1;
   explode_colliding_character = true;
-
+  ResetTimeOut();
 }
 
 void WeaponBullet::SignalCollision()
@@ -207,9 +207,10 @@ void WeaponProjectile::Refresh()
 
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
-  
+   
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
-    is_active = false;      
+    is_active = false;    
+     
     return;
   }
 
@@ -228,7 +229,7 @@ void WeaponProjectile::Draw()
   
   int tmp = GetTotalTimeout();
 
-  if (tmp != 0) { 
+  if (cfg.timeout && tmp != 0) { 
     tmp -= (int)((Time::GetInstance()->Read() - begin_time) / 1000);
 
     if (tmp >= 0) {
@@ -262,6 +263,7 @@ void WeaponProjectile::Explosion()
 
 void WeaponProjectile::IncrementTimeOut()
 {
+if (cfg.allow_change_timeout)
   if (GetTotalTimeout()<cfg.timeout*2) 
 	 m_timeout_modifier += 1 ;
 
@@ -269,6 +271,7 @@ void WeaponProjectile::IncrementTimeOut()
 
 void WeaponProjectile::DecrementTimeOut()
 {
+if (cfg.allow_change_timeout)
   if (GetTotalTimeout()>1) 
 	 m_timeout_modifier -= 1 ;	//-1s for grenade timout. 1 is min.
 	
@@ -276,6 +279,7 @@ void WeaponProjectile::DecrementTimeOut()
 
 void WeaponProjectile::SetTimeOut(int timeout)
 {
+if (cfg.allow_change_timeout)
   if (timeout <= cfg.timeout*2 && timeout >= 1) 
 	 m_timeout_modifier = timeout - cfg.timeout ;
 
@@ -289,10 +293,14 @@ void WeaponProjectile::ResetTimeOut()
 
 int WeaponProjectile::GetTotalTimeout()
 {
-  return cfg.timeout+m_timeout_modifier;
+  return (int)(cfg.timeout)+m_timeout_modifier;
 }
 
-
+//Public function which let know if changing timeout is allowed.
+bool WeaponProjectile::change_timeout_allowed()
+{
+  return cfg.allow_change_timeout;
+}
 
 //-----------------------------------------------------------------------------
 
@@ -303,7 +311,6 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
   Weapon(type, id, params, visibility)
 {  
   projectile = NULL;
-  m_allow_change_timeout = false;
 }
 
 WeaponLauncher::~WeaponLauncher()
@@ -348,7 +355,7 @@ void WeaponLauncher::Refresh()
 void WeaponLauncher::Draw()
 {
   //Display timeout for projectil if can be changed.
-  if (m_allow_change_timeout == true)
+  if (projectile->change_timeout_allowed())
   {
    if( IsActive() ) //Do not display after launching.
       return;
@@ -368,7 +375,8 @@ void WeaponLauncher::Draw()
 
 void WeaponLauncher::p_Select()
 {
-  if (m_allow_change_timeout == true) 
+ 
+  if (projectile->change_timeout_allowed())
   {
     force_override_keys = true; //Allow overriding key during movement.
      projectile->ResetTimeOut(); 
@@ -377,7 +385,8 @@ void WeaponLauncher::p_Select()
 
 void WeaponLauncher::p_Deselect()
 {
-  if (m_allow_change_timeout == true)
+
+  if (projectile->change_timeout_allowed())
   {
     force_override_keys = false;
   }
@@ -433,7 +442,7 @@ ActiveCharacter().HandleKeyEvent(action, event_type);
 }
 
 void WeaponLauncher::ActionUp(){ //called by mousse.cpp when mousewhellup 
-  projectile->IncrementTimeOut();
+    projectile->IncrementTimeOut();
 }
 
 
