@@ -38,7 +38,7 @@
 #include "../weapon/weapons_list.h"
 #include "../weapon/explosion.h"
 
-// Delta appliqué à l'angle du viseur
+// Delta appliquï¿½ï¿½l'angle du viseur
 #define DELTA_CROSSHAIR 2
 
 ActionHandler * ActionHandler::singleton = NULL;
@@ -285,9 +285,8 @@ void Action_SyncEnd (Action *a)
   network.sync_lock = false;
 }
 
-void Action_Explosion (Action *action)
+void Action_Explosion (Action *a)
 {
-  ActionMulti* a = dynamic_cast<ActionMulti*>(action);
   MSG_DEBUG("action.handler", "Explosion !");
 
   Point2i pos;

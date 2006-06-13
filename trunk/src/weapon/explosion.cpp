@@ -175,7 +175,7 @@ void ApplyExplosion_server (const Point2i &pos,
   Action a_begin_sync(ACTION_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
 
-  world.Dig(pos, config.explosion_range);
+//  world.Dig(pos, config.explosion_range);
   float range = config.explosion_range / PIXEL_PER_METER;
   range *= 1.5;
 
@@ -236,18 +236,19 @@ void ApplyExplosion_server (const Point2i &pos,
     action_handler->NewAction (new ActionString(ACTION_CHANGE_TEAM, ActiveTeam().GetId()));
   }
 
-  ActionMulti a(ACTION_EXPLOSION);
-  a.Push(pos.x);
-  a.Push(pos.y);
-  a.Push((int)config.explosion_range);
-  a.Push((int)config.damage);
-  a.Push(config.blast_range);
-  a.Push(config.blast_force);
-  a.Push(son);
-  a.Push(fire_particle);
-  a.Push(smoke);
+  Action* a = new Action(ACTION_EXPLOSION);
+  a->Push(pos.x);
+  a->Push(pos.y);
+  a->Push((int)config.explosion_range);
+  a->Push((int)config.damage);
+  a->Push(config.blast_range);
+  a->Push(config.blast_force);
+  a->Push(son);
+  a->Push(fire_particle);
+  a->Push(smoke);
 
-  network.SendAction(&a);
+  action_handler->NewAction(a);
+//  network.SendAction(&a);
   Action a_sync_end(ACTION_SYNC_END);
   network.SendAction(&a_sync_end);
   ActionHandler::GetInstance()->ExecActions();
