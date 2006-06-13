@@ -305,7 +305,7 @@ void Network::SendAction(Action* action)
   memset(packet,0,packet_max_size);
   action->Write(packet);
 
-  assert(*((char*)packet) != 0 );
+  assert(packet[0] != 0 );
 
   for(std::list<TCPsocket>::iterator client = conn.begin();
       client != conn.end();
@@ -328,16 +328,13 @@ const bool Network::IsClient() const { return m_is_client; }
 
 Action* Network::make_action(Uint32* packet)
 {
-  Action_t type = (Action_t)(packet[0]);
+  Action_t type = (Action_t)SDLNet_Read32(packet);
   Uint32* input = &packet[1];
 
   switch(type)
   {
   case ACTION_SHOOT:
     return new ActionDoubleInt(type, input);
-
-  case ACTION_EXPLOSION:
-    return new ActionMulti(type, input);
 
   case ACTION_SEND_RANDOM:
     return new ActionDouble(type, input);
@@ -376,7 +373,8 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_ASK_VERSION:
   case ACTION_SYNC_BEGIN:
   case ACTION_SYNC_END:
-    return new Action(type);
+  case ACTION_EXPLOSION:
+    return new Action(type,input);
 
   case ACTION_WALK:
   default:
