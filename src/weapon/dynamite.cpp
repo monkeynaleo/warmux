@@ -50,7 +50,7 @@ void BatonDynamite::Reset()
   Ready();
   is_active = false;
 
-  unsigned int delay = (1000 * cfg.timeout)/image->GetFrameCount();
+  unsigned int delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
   image->SetFrameSpeed(delay);
 
   image->Scale(ActiveCharacter().GetDirection(), 1);
@@ -97,7 +97,6 @@ Dynamite::Dynamite() :
 {
   m_name = _("Dynamite");
   projectile = new BatonDynamite(cfg());
-  m_allow_change_timeout = true;
 }
 
 void Dynamite::p_Select()

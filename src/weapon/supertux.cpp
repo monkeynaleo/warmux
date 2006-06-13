@@ -118,12 +118,11 @@ void SuperTux::SignalCollision()
 SuperTuxWeaponConfig::SuperTuxWeaponConfig()
 {
   speed = 2;
-  timeout = 20;
 }
 
 void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem) 
 {
-  WeaponConfig::LoadXml (elem);
+  ExplosiveWeaponConfig::LoadXml (elem);
   LitDocXml::LitUint (elem, "speed", speed);
 }
 

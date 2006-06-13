@@ -66,6 +66,7 @@ class WeaponProjectile : public PhysicalObj
   void SetTimeOut(int timeout);
   int GetTotalTimeout();
   void ResetTimeOut();
+  bool change_timeout_allowed();
   
  protected:
   virtual void SignalCollision() = 0; 

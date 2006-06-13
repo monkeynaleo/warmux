@@ -120,6 +120,5 @@ GnuLauncher::GnuLauncher() :
 {
   m_name = _("GnuLauncher");
   projectile = new Gnu(cfg());
-  m_allow_change_timeout = true;
 }
 
