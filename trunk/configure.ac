@@ -290,6 +290,8 @@ AM_CONFIG_HEADER(src/config.h)
 
 AC_OUTPUT
 
+if test "${WIN32}" = "yes"; then INSTALL_OP="build NSIS installer..."
+else INSTALL_OP="install..."; fi
 AC_MSG_RESULT([
 
 Configuration complete
@@ -298,6 +300,6 @@ Configuration complete
 * Game locale will be installed into $LOCALEDIR
 * Font file will be $FONTFILE
 
-Execute make to compile then execute make install to install...
+Execute make to compile then execute make install to $INSTALL_OP
 
 ])
