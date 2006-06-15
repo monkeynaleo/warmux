@@ -14,12 +14,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.11.2\n"
 
 #: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
-msgstr "Najviše se prodao: %s (%i).\n "
+msgstr "Najviše se prodao: %s (%i).\n"
 
 #: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
