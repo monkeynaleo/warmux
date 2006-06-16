@@ -284,6 +284,7 @@ AC_CONFIG_FILES([Makefile
 		 src/Makefile
 		 doc/Makefile
 		 po/Makefile
+		 tools/map-generator/Makefile
 		 ], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)
