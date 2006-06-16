@@ -167,6 +167,9 @@ public:
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters);
 
+protected:
+  void SignalRebound();
+
 private:
   //Renvoie la position du point de contact entre
   //l'obj et le terrain
@@ -175,7 +178,6 @@ private:
   // Collision test for point (x,y)
   virtual bool CollisionTest(const Point2i &position);
 
-  void SignalRebound();
   
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();

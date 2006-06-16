@@ -87,6 +87,15 @@
     <rebound_factor>0.01</rebound_factor>
   </magic_star_particle>
 
+  <bullet_particle> <!-- the gun and uzi -->
+    <mass>2.0</mass>
+    <wind_factor>0.01</wind_factor>
+    <air_resist_factor>0.01</air_resist_factor>
+    <gravity_factor>1.0</gravity_factor>
+    <rebounding>true</rebounding>
+    <rebound_factor>0.7</rebound_factor>
+  </bullet_particle>
+
   <!-- Weapons Configs -->
   <!-- Weapons bullets -->
   <gun_bullet>

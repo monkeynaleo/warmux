@@ -257,6 +257,37 @@ void FireParticle::SignalFallEnding()
 }
 
 //-----------------------------------------------------------------------------
+BulletParticle::BulletParticle() :
+  Particle("bullet_particle")
+{
+  m_rebound_sound = "weapon/grenade_bounce";
+  m_left_time_to_live = 1;
+  m_type = objCLASSIC;
+}
+
+void BulletParticle::Init()
+{
+  image = ParticleEngine::GetSprite(BULLET_spr);
+  image->Scale(1.0,1.0);
+  SetSize( Point2i(1, 1) );
+}
+
+void BulletParticle::Refresh()
+{
+  UpdatePosition();
+  image->SetRotation_deg((Time::GetInstance()->Read()/4) % 360);
+  image->Update();
+  if(m_alive == GHOST)
+    m_left_time_to_live = 0;
+}
+
+void BulletParticle::SignalRebound()
+{
+  PhysicalObj::SignalRebound();
+  m_type = objUNBREAKABLE;
+}
+
+//-----------------------------------------------------------------------------
 
 ParticleEngine::ParticleEngine(uint time)
 {
@@ -300,6 +331,8 @@ void ParticleEngine::Init()
   particle_sprite[MAGIC_STAR_Y_spr]->EnableRotationCache(32);
   particle_sprite[MAGIC_STAR_B_spr] = resource_manager.LoadSprite(res,"blue_star_particle");
   particle_sprite[MAGIC_STAR_B_spr]->EnableRotationCache(32);
+  particle_sprite[BULLET_spr] = resource_manager.LoadSprite(res,"bullet_particle");
+  particle_sprite[BULLET_spr]->EnableRotationCache(12);
   resource_manager.UnLoadXMLProfile( res);
 }
 
@@ -332,6 +365,8 @@ void ParticleEngine::AddNow(const Point2i &position,
       case particle_FIRE : particle = new FireParticle();
                            break;
       case particle_STAR : particle = new StarParticle();
+                           break;
+      case particle_BULLET : particle = new BulletParticle();
                            break;
       case particle_MAGIC_STAR : particle = new MagicStarParticle();
                                  break;
