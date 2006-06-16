@@ -78,7 +78,7 @@ msgstr "%s упал в воду."
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
 
-#: src/object/bonus_box.cpp:153
+#: src/object/bonus_box.cpp:154
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
@@ -86,7 +86,7 @@ msgstr[0] "%s потерял %u единицу энергии."
 msgstr[1] "%s потерял %u единицы энергии."
 msgstr[2] "%s потерял %u единиц энергии."
 
-#: src/object/bonus_box.cpp:144
+#: src/object/bonus_box.cpp:145
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -109,7 +109,7 @@ msgstr "%s погиб, потому что он недотёпа!"
 msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
 
-#: src/object/bonus_box.cpp:171
+#: src/object/bonus_box.cpp:172
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -118,6 +118,14 @@ msgstr[1] "Команда %s выиграла %u автоматические б
 msgstr[2] "Команда %s выиграла %u автоматических базук!"
 
 #: src/object/bonus_box.cpp:181
+#, fuzzy, c-format
+msgid "%s team has won %u riot bomb!"
+msgid_plural "%s team has won %u riot bombs!"
+msgstr[0] "Команда %s выиграла %u автоматическую базуку!"
+msgstr[1] "Команда %s выиграла %u автоматические базуки!"
+msgstr[2] "Команда %s выиграла %u автоматических базук!"
+
+#: src/object/bonus_box.cpp:191
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
@@ -125,7 +133,7 @@ msgstr[0] "Команда %s выиграла %u динамитную шашку
 msgstr[1] "Команда %s выиграла %u динамитные шашки!"
 msgstr[2] "Команда %s выиграла %u динамитных шашек!"
 
-#: src/object/bonus_box.cpp:135
+#: src/object/bonus_box.cpp:136
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -138,7 +146,7 @@ msgstr[2] "Команда %s выиграла %u телепортаций"
 msgid "%s team has won.\n"
 msgstr "Команда %s победила"
 
-#: src/object/bonus_box.cpp:162
+#: src/object/bonus_box.cpp:163
 #, fuzzy, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -160,7 +168,7 @@ msgstr ""
 "Для нормальной работы <infinite_background> нужно указать значение "
 "<is_open>!!"
 
-#: src/object/bonus_box.cpp:166 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Воздушная атака"
 
@@ -172,7 +180,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: src/object/bonus_box.cpp:175 src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Автоматическая базука"
 
@@ -234,7 +242,7 @@ msgstr "Длительность шага:"
 msgid "Duration of the end of a turn:"
 msgstr "Длительность завершения шага:"
 
-#: src/object/bonus_box.cpp:185 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Динамит"
 
@@ -257,23 +265,23 @@ msgstr "Ошибка при загрузке темы %s:"
 msgid "Error in %s:%lu"
 msgstr "Ошибка в %s:%lu"
 
-#: src/team/team.cpp:91
+#: src/team/team.cpp:93
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/team/team.cpp:164
+#: src/team/team.cpp:168
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/game/config.cpp:248
+#: src/game/config.cpp:254
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/config.cpp:128
+#: src/game/config.cpp:123
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
@@ -292,7 +300,7 @@ msgstr ""
 "Ошибка:\n"
 "%s"
 
-#: src/team/team.cpp:138
+#: src/team/team.cpp:140
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
@@ -357,7 +365,7 @@ msgstr "Инициализация команд"
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
-#: src/object/bonus_box.cpp:231
+#: src/object/bonus_box.cpp:241
 msgid "Is it a gift ?"
 msgstr ""
 
@@ -382,7 +390,7 @@ msgstr "Карту %s создал:"
 msgid "Maximum number of FPS:"
 msgstr ""
 
-#: src/weapon/mine.cpp:185
+#: src/weapon/mine.cpp:188
 msgid "Mine"
 msgstr "Мина"
 
@@ -398,7 +406,7 @@ msgstr "Имя:"
 msgid "Network Game"
 msgstr "Игра по сети"
 
-#: src/weapon/weapon.cpp:510
+#: src/weapon/weapon.cpp:514
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
@@ -429,6 +437,10 @@ msgstr "Выйти"
 
 #: src/main.cpp:175
 msgid "Quit Wormux"
+msgstr ""
+
+#: src/object/bonus_box.cpp:185
+msgid "Riot bomb"
 msgstr ""
 
 #: src/main.cpp:224
@@ -464,7 +476,7 @@ msgstr "Боеприпасов:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Телепортация"
 
@@ -544,7 +556,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 
-#: src/weapon/launcher.cpp:50
+#: src/weapon/launcher.cpp:51
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 

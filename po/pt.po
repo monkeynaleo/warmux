@@ -76,14 +76,14 @@ msgstr "%s caiu na água."
 msgid "%s has fallen off the map!"
 msgstr "%s caiu fora do map!"
 
-#: src/object/bonus_box.cpp:153
+#: src/object/bonus_box.cpp:154
 #, fuzzy, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s perdeu %u pontos de vida."
 msgstr[1] "%s perdeu %u pontos de vida."
 
-#: src/object/bonus_box.cpp:144
+#: src/object/bonus_box.cpp:145
 #, fuzzy, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -105,7 +105,7 @@ msgstr "%s morreu por causa da sua inaptidão."
 msgid "%s is next to a mine!"
 msgstr "%s esta perto de uma mina ..."
 
-#: src/object/bonus_box.cpp:171
+#: src/object/bonus_box.cpp:172
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -114,12 +114,19 @@ msgstr[1] "A equipa '%s' ganho %u bazooka(s) automático(s) !"
 
 #: src/object/bonus_box.cpp:181
 #, fuzzy, c-format
+msgid "%s team has won %u riot bomb!"
+msgid_plural "%s team has won %u riot bombs!"
+msgstr[0] "A equipa '%s' ganho %u bazooka(s) automático(s) !"
+msgstr[1] "A equipa '%s' ganho %u bazooka(s) automático(s) !"
+
+#: src/object/bonus_box.cpp:191
+#, fuzzy, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "A equipa '%s' ganho %u dinamite(s) !"
 msgstr[1] "A equipa '%s' ganho %u dinamite(s) !"
 
-#: src/object/bonus_box.cpp:135
+#: src/object/bonus_box.cpp:136
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -131,7 +138,7 @@ msgstr[1] "A equipa '%s' ganho %u teleportações."
 msgid "%s team has won.\n"
 msgstr "A equipa %s ganhou."
 
-#: src/object/bonus_box.cpp:162
+#: src/object/bonus_box.cpp:163
 #, fuzzy, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -150,7 +157,7 @@ msgstr "(ilimitadas)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:166 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr " Ataque aéreo"
 
@@ -162,7 +169,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/object/bonus_box.cpp:175 src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Bazooka automático"
 
@@ -226,7 +233,7 @@ msgstr "Duração d'uma volta:"
 msgid "Duration of the end of a turn:"
 msgstr "Duração do fim d'uma volta:"
 
-#: src/object/bonus_box.cpp:185 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamite"
 
@@ -249,23 +256,23 @@ msgstr "Erro no carregamento do skin%s"
 msgid "Error in %s:%lu"
 msgstr "Erro em %s.%lu"
 
-#: src/team/team.cpp:91
+#: src/team/team.cpp:93
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Erro no carregamento da equipa %s"
 
-#: src/team/team.cpp:164
+#: src/team/team.cpp:168
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Erro no carregamento da equipa %s"
 
-#: src/game/config.cpp:248
+#: src/game/config.cpp:254
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Erro no carregamento da modalidade de jogo %s (ficheiro %s):"
 
-#: src/game/config.cpp:128
+#: src/game/config.cpp:123
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Erro no carregamento da modalidade de jogo %s (ficheiro %s):"
@@ -284,7 +291,7 @@ msgstr ""
 "Erro:\n"
 "%s"
 
-#: src/team/team.cpp:138
+#: src/team/team.cpp:140
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Erro: não pode incontrar o skin \"%s\" para a equipe \"%s\"."
@@ -349,7 +356,7 @@ msgstr "Iniciação das equipas"
 msgid "Initialise teams"
 msgstr "Iniciação das equipas"
 
-#: src/object/bonus_box.cpp:231
+#: src/object/bonus_box.cpp:241
 msgid "Is it a gift ?"
 msgstr ""
 
@@ -374,7 +381,7 @@ msgstr "Mappa %s, uma criação de :"
 msgid "Maximum number of FPS:"
 msgstr ""
 
-#: src/weapon/mine.cpp:185
+#: src/weapon/mine.cpp:188
 msgid "Mine"
 msgstr "Mina"
 
@@ -390,7 +397,7 @@ msgstr "Nome:"
 msgid "Network Game"
 msgstr "Jogo de rede"
 
-#: src/weapon/weapon.cpp:510
+#: src/weapon/weapon.cpp:514
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenhum elemento <%s> encontrado no ficheiro xml!"
@@ -421,6 +428,10 @@ msgstr "Deixar"
 
 #: src/main.cpp:175
 msgid "Quit Wormux"
+msgstr ""
+
+#: src/object/bonus_box.cpp:185
+msgid "Riot bomb"
 msgstr ""
 
 #: src/main.cpp:224
@@ -456,7 +467,7 @@ msgstr "Munição:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportação"
 
@@ -537,7 +548,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Você necessita ao menos de dois equipas válidas!"
 
-#: src/weapon/launcher.cpp:50
+#: src/weapon/launcher.cpp:51
 msgid "Your shot has missed!"
 msgstr "Seu tiro faltou!"
 
