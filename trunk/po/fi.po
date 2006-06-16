@@ -76,14 +76,14 @@ msgstr "%s sukelsi syvyyksiin."
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
 
-#: src/object/bonus_box.cpp:153
+#: src/object/bonus_box.cpp:154
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s menetti %u voimapisteen."
 msgstr[1] "%s menetti %u voimapistettä."
 
-#: src/object/bonus_box.cpp:144
+#: src/object/bonus_box.cpp:145
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -105,7 +105,7 @@ msgstr "%s kuoli kömpelyyteensä!"
 msgid "%s is next to a mine!"
 msgstr "%s on aivan miinan vieressä!"
 
-#: src/object/bonus_box.cpp:171
+#: src/object/bonus_box.cpp:172
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -113,13 +113,20 @@ msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
 #: src/object/bonus_box.cpp:181
+#, fuzzy, c-format
+msgid "%s team has won %u riot bomb!"
+msgid_plural "%s team has won %u riot bombs!"
+msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
+msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
+
+#: src/object/bonus_box.cpp:191
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "Joukkue %s voitti %u dynamiittipötkön."
 msgstr[1] "Joukkue %s voitti %u dynamiittipötköä."
 
-#: src/object/bonus_box.cpp:135
+#: src/object/bonus_box.cpp:136
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -131,7 +138,7 @@ msgstr[1] "Joukkue %s voitti %u teleportaatiota."
 msgid "%s team has won.\n"
 msgstr "Joukkue %s voitti.\n"
 
-#: src/object/bonus_box.cpp:162
+#: src/object/bonus_box.cpp:163
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -151,7 +158,7 @@ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 "<infinite_background> tarvitsee <is_open> asetuksen toimiakseen oikein!!"
 
-#: src/object/bonus_box.cpp:166 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Ilmaisku"
 
@@ -163,7 +170,7 @@ msgstr "Joukkueesi tulokset:\n"
 msgid "Authors:"
 msgstr "Tekijät:"
 
-#: src/object/bonus_box.cpp:175 src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Automaattibazooka"
 
@@ -225,7 +232,7 @@ msgstr "Vuoron kesto:"
 msgid "Duration of the end of a turn:"
 msgstr "Vuoron lopun kesto:"
 
-#: src/object/bonus_box.cpp:185 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
@@ -247,23 +254,23 @@ msgstr "Virhe ladattessa ulkoasua %s:"
 msgid "Error in %s:%lu"
 msgstr "Virhe kohdassa %s:%lu"
 
-#: src/team/team.cpp:91
+#: src/team/team.cpp:93
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
-#: src/team/team.cpp:164
+#: src/team/team.cpp:168
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
-#: src/game/config.cpp:248
+#: src/game/config.cpp:254
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Virhe luodessa hakemistoa \"%s\":  asetustiedostoa ei voida tallentaa."
 
-#: src/game/config.cpp:128
+#: src/game/config.cpp:123
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
@@ -282,7 +289,7 @@ msgstr ""
 "Virhe:\n"
 "%s"
 
-#: src/team/team.cpp:138
+#: src/team/team.cpp:140
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
@@ -344,7 +351,7 @@ msgstr "Alusta objektit"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/object/bonus_box.cpp:231
+#: src/object/bonus_box.cpp:241
 msgid "Is it a gift ?"
 msgstr "Onko se lahja?"
 
@@ -369,7 +376,7 @@ msgstr "Kartta %s, tehnyt :"
 msgid "Maximum number of FPS:"
 msgstr "Enimmäismäärä FPS:lle:"
 
-#: src/weapon/mine.cpp:185
+#: src/weapon/mine.cpp:188
 msgid "Mine"
 msgstr "Miina"
 
@@ -385,7 +392,7 @@ msgstr "Nimi:"
 msgid "Network Game"
 msgstr "Nettipeli"
 
-#: src/weapon/weapon.cpp:510
+#: src/weapon/weapon.cpp:514
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
@@ -417,6 +424,10 @@ msgstr "Lopeta"
 #: src/main.cpp:175
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
+
+#: src/object/bonus_box.cpp:185
+msgid "Riot bomb"
+msgstr ""
 
 #: src/main.cpp:224
 msgid "Run game"
@@ -451,7 +462,7 @@ msgstr "Varasto:"
 msgid "Team %s results:\n"
 msgstr "Joukkueen %s tulokset:\n"
 
-#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportaatio"
 
@@ -530,7 +541,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
-#: src/weapon/launcher.cpp:50
+#: src/weapon/launcher.cpp:51
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 
