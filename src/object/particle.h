@@ -29,14 +29,15 @@
 #include "../weapon/weapon_cfg.h"
 
 typedef enum {
+  particle_DARK_SMOKE,
   particle_SMOKE,
   particle_FIRE,
   particle_STAR,
   particle_MAGIC_STAR
 } particle_t;
 
-enum particle_spr{ SMOKE_spr, EXPLOSION_SMOKE_spr, FIRE_spr, STAR_spr, MAGIC_STAR_R_spr, MAGIC_STAR_Y_spr, MAGIC_STAR_B_spr };
-const int particle_spr_nbr = 7;
+enum particle_spr{ SMOKE_spr, EXPLOSION_SMOKE_spr, FIRE_spr, STAR_spr, MAGIC_STAR_R_spr, MAGIC_STAR_Y_spr, MAGIC_STAR_B_spr, DARK_SMOKE_spr };
+const int particle_spr_nbr = 8;
 
 class Particle : public PhysicalObj
 {
@@ -76,6 +77,13 @@ class Smoke : public Particle
 {
  public:
   Smoke();
+  void Init();
+};
+
+class DarkSmoke : public Particle
+{
+ public:
+  DarkSmoke();
   void Init();
 };
 

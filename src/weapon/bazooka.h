@@ -26,6 +26,7 @@
 // Roquette du bazooka
 class RoquetteBazooka : public WeaponProjectile
 {
+  ParticleEngine smoke_engine;
 public:
   RoquetteBazooka(ExplosiveWeaponConfig& cfg);
   void Refresh();

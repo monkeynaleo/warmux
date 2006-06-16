@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme bazooka : projette une roquette avec un angle et une force donnée.
+ * Arme bazooka : projette une roquette avec un angle et une force donnï¿½.
  *****************************************************************************/
 
 #include "bazooka.h"
@@ -32,8 +32,9 @@
 #include "../tool/i18n.h"
 
 RoquetteBazooka::RoquetteBazooka(ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile ("rocket", cfg)
-{  
+  WeaponProjectile ("rocket", cfg),
+  smoke_engine(20)
+{
   touche_ver_objet = true;
   explode_colliding_character = true;
 }
@@ -44,6 +45,8 @@ void RoquetteBazooka::Refresh()
 
   double angle = GetSpeedAngle() *180/M_PI;
   image->SetRotation_deg( angle);
+  smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
+                                   GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
 }
 
 void RoquetteBazooka::SignalCollision()

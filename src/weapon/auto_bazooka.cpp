@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme bazooka : projette une roquette avec un angle et une force donnée.
+ * Arme bazooka : projette une roquette avec un angle et une force donnï¿½.
  *****************************************************************************/
 
 #include "auto_bazooka.h"
@@ -38,13 +38,14 @@
 #endif
 
 
-//Temps en seconde à partir duquel la roquette se dirige vers la cible
+//Temps en seconde ï¿½partir duquel la roquette se dirige vers la cible
 const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
 
 RoquetteTeteCherche::RoquetteTeteCherche(ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile("rocket", cfg)
+  WeaponProjectile("rocket", cfg),
+  smoke_engine(20)
 {
   m_attire = false;
   explode_colliding_character = true;
@@ -66,14 +67,14 @@ void RoquetteTeteCherche::Refresh()
 
   if (!m_attire)
     {
-      //La roquette tourne sur elle-même
+      //La roquette tourne sur elle-mï¿½e
       angle_local += M_PI / 8;
       if(angle_local > M_PI) angle_local = - M_PI;
       angle = angle_local;
   
       image->SetRotation_deg(angle *180/M_PI);
       
-      //2 sec après avoir été tirée, la roquette se dirige vers la cible:
+      //2 sec aprï¿½ avoir ï¿½ï¿½tirï¿½, la roquette se dirige vers la cible:
       tmp = Time::GetInstance()->Read() - begin_time;
       if(tmp>1000 * TPS_AV_ATTIRANCE)
 	{
@@ -88,6 +89,9 @@ void RoquetteTeteCherche::Refresh()
     {
       angle = GetSpeedAngle() *180/M_PI;
       image->SetRotation_deg( angle);
+      smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
+                                   GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+
     }
 }
 
@@ -101,7 +105,7 @@ void RoquetteTeteCherche::SignalCollision()
   is_active = false; 
 }
 
-// Choisit les coordonnées de la cible 	 
+// Choisit les coordonnï¿½s de la cible 	 
 void RoquetteTeteCherche::SetTarget (int x, int y) 	 
 { 
   m_cible.x = x; 	 
