@@ -5,33 +5,41 @@
 # Furkan Duman <coderlord@gmail.com>, 2006.
 msgid ""
 msgstr ""
-"Project-Id-Version: tr.new\n"
+"Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-04-09 00:11+0300\n"
-"Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
+"PO-Revision-Date: 2006-06-16 11:45+0100\n"
+"Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms:  nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: KBabel 1.11\n"
+"POT-Creation-Date: \n"
+"X-Poedit-Language: Turkish\n"
+"X-Poedit-Country: TURKEY\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146 src/game/game.cpp:186
+#: src/game/game.cpp:146
+#: src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr "  En fazla tükenen : : %s (%i).\n"
 
-#: src/game/game.cpp:144 src/game/game.cpp:184
+#: src/game/game.cpp:144
+#: src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr "  En kullanışlı  :  %s (%i).\n"
 
-#: src/game/game.cpp:145 src/game/game.cpp:185
+#: src/game/game.cpp:145
+#: src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr "  En kullanışsız  :  %s (%i).\n"
 
-#: src/game/game.cpp:143 src/game/game.cpp:183
+#: src/game/game.cpp:143
+#: src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr "  En cabbar  :  %s (%i).\n"
@@ -155,11 +163,10 @@ msgstr "(sınırsız)"
 
 #: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr ""
-"Düzgün çalışması için, <infinite_background> <is_open> olarak ayarlanması "
-"gerekli!!"
+msgstr "Düzgün çalışması için, <infinite_background> <is_open> olarak ayarlanması gerekli!!"
 
-#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167
+#: src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Hava saldırısı"
 
@@ -171,7 +178,8 @@ msgstr "Bütün takımların sonuçları:\n"
 msgid "Authors:"
 msgstr "Yazarlar:"
 
-#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176
+#: src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Otomatik bazuka"
 
@@ -187,12 +195,14 @@ msgstr "Bazuka"
 msgid "C++ exception caught:"
 msgstr "C++ istisnası oluştu:"
 
-#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425
+#: src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
 
-#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122
+#: src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
@@ -233,7 +243,8 @@ msgstr "Tur zamanı:"
 msgid "Duration of the end of a turn:"
 msgstr "Tur bitiş zamanı:"
 
-#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195
+#: src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamit"
 
@@ -267,8 +278,7 @@ msgstr "%s takımı yüklenirken hata:"
 
 #: src/game/config.cpp:254
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
 #: src/game/config.cpp:123
@@ -348,7 +358,8 @@ msgstr "Veriler yükleniyor"
 msgid "Initialise objects"
 msgstr "Nesneler yükleniyor"
 
-#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93
+#: src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
@@ -463,7 +474,8 @@ msgstr "Stok:"
 msgid "Team %s results:\n"
 msgstr "%s takımı sonuçları:\n"
 
-#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140
+#: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Işınlanma"
 
@@ -475,7 +487,8 @@ msgstr "Otomatik roket savaş alanını terketti..."
 msgid "The game has ended as a draw.\n"
 msgstr "Oyun berabere bitti.\n"
 
-#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:53
+#: src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Roket savaş alanını terketti..."
 
@@ -484,12 +497,14 @@ msgstr "Roket savaş alanını terketti..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "SDL kütüphanesi başlatılamadı: %s"
 
-#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
+#: src/team/skin.cpp:334
+#: src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "(%s) tema dizini açılamadı!"
@@ -534,9 +549,7 @@ msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
 #: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr ""
-"Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden "
-"değiştirin !"
+msgstr "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden değiştirin !"
 
 #: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
@@ -552,27 +565,20 @@ msgstr "tamam"
 
 #~ msgid "Load map"
 #~ msgstr "Haritayı yükle"
-
 #~ msgid "Unknow action"
 #~ msgstr "Bilinmeyen eylem"
-
 #~ msgid "Wait for clients"
 #~ msgstr "İstemciler bekleniyor"
-
 #~ msgid "Wait for map"
 #~ msgstr "Harita bekleniyor"
-
 #~ msgid "Wait for server"
 #~ msgstr "Sunucu bekleniyor"
-
 #~ msgid "Wait for server informations"
 #~ msgstr "Sunucu bilgisi bekleniyor"
-
 #~ msgid "Wait teams"
 #~ msgstr "Takımlar bekleniyor"
-
 #~ msgid "Pause"
 #~ msgstr "Durdur"
-
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr "Uyarı! Rüzgar parçacık yığını çok düşük! Öntanımlı 0,3'e ayarlayın"
+

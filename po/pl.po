@@ -4,33 +4,40 @@
 # Bartosz Feński aka fEnIo <fenio@debian.org>, 2004-2005.
 msgid ""
 msgstr ""
-"Project-Id-Version: Wormux 0.5\n"
+"Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-01-17 16:17+0100\n"
-"Last-Translator: Bartosz Fenski <fenio@debian.org>\n"
+"PO-Revision-Date: 2006-06-16 11:39+0100\n"
+"Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Polish <pddp@debian.linux.org.pl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;    plural=n==1 ? 0 :    n%10>=2 && n%10<=4 && (n%"
-"100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3;    plural=n==1 ? 0 :    n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"POT-Creation-Date: \n"
+"X-Poedit-Language: Polish\n"
+"X-Poedit-Country: POLAND\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146 src/game/game.cpp:186
+#: src/game/game.cpp:146
+#: src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:144 src/game/game.cpp:184
+#: src/game/game.cpp:144
+#: src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:145 src/game/game.cpp:185
+#: src/game/game.cpp:145
+#: src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:143 src/game/game.cpp:183
+#: src/game/game.cpp:143
+#: src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
@@ -163,7 +170,8 @@ msgstr "(nieograniczony)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr "<infinite_background> wymaga odpowiednio ustawionego <is_open>!!"
 
-#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167
+#: src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Atak powietrzny"
 
@@ -175,7 +183,8 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autorzy:"
 
-#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176
+#: src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Automatyczna wyrzutnia rakiet"
 
@@ -191,12 +200,14 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Złapany wyjątek C++:"
 
-#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425
+#: src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nie mogę znaleźć drużyny %s!"
 
-#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122
+#: src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nie mogę otworzyć katalogu drużyn (%s)!"
@@ -237,7 +248,8 @@ msgstr "Czas kolejki:"
 msgid "Duration of the end of a turn:"
 msgstr "Czas do zakończenia rundy:"
 
-#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195
+#: src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -272,8 +284,7 @@ msgstr "Błąd podczas ładowania drużyny %s:"
 
 #: src/game/config.cpp:254
 #, fuzzy, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Błąd podczas ładowania trybu gry %s (plik %s):"
 
 #: src/game/config.cpp:123
@@ -332,8 +343,7 @@ msgstr "Pistolet"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr ""
-"Katalog domowy (zmienna środowiskowa $HOME) nie mógł zostać odnaleziony!"
+msgstr "Katalog domowy (zmienna środowiskowa $HOME) nie mógł zostać odnaleziony!"
 
 #: src/menu/options_menu.cpp:118
 msgid "Initial energy:"
@@ -357,7 +367,8 @@ msgstr "Inicjalizacja danych"
 msgid "Initialise objects"
 msgstr "Inicjalizacja drużyn"
 
-#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93
+#: src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Inicjalizacja drużyn"
 
@@ -472,7 +483,8 @@ msgstr "Stan:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140
+#: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportacja"
 
@@ -485,7 +497,8 @@ msgstr "Automatyczna rakieta opuściła pole bitwy..."
 msgid "The game has ended as a draw.\n"
 msgstr "Gra zakończona remisem."
 
-#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:53
+#: src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Rakieta opuściła pole bitwy..."
 
@@ -494,12 +507,14 @@ msgstr "Rakieta opuściła pole bitwy..."
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nie mogę otworzyć katalogu z mapami (%s)!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
+#: src/team/skin.cpp:334
+#: src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Nie mogę otworzyć katalogu ze skórkami (%s)!"
@@ -560,78 +575,57 @@ msgstr ""
 
 #~ msgid "Load map"
 #~ msgstr "Załaduj mapę"
-
 #~ msgid "Unknow action"
 #~ msgstr "Nieznana akcja"
-
 #~ msgid "Wait for clients"
 #~ msgstr "Oczekiwanie na klientów"
-
 #~ msgid "Wait for map"
 #~ msgstr "Oczekiwanie na mapę"
-
 #~ msgid "Wait for server"
 #~ msgstr "Oczekiwanie na serwer"
-
 #~ msgid "Wait for server informations"
 #~ msgstr "Oczekiwanie na informacje z serwera"
-
 #~ msgid "Wait teams"
 #~ msgstr "Drużyn oczekujące"
-
 #~ msgid "Pause"
 #~ msgstr "Pauza"
-
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr ""
 #~ "Uwaga! Masa cząsteczek wiatru jest zbyt niska! Ustawiona domyślnie na 0.3"
-
 #~ msgid "Warning: Don't load configuration (old version of Wormux)."
 #~ msgstr "Ostrzeżenie: Nie ładujemy konfiguracji (stara wersja Wormuksa)."
-
 #~ msgid "End of game"
 #~ msgstr "Koniec gry !"
-
 #~ msgid "Authors"
 #~ msgstr "Autorzy"
-
 #~ msgid "Info"
 #~ msgstr "Informacje"
-
 #~ msgid "Ok"
 #~ msgstr "Ok"
 
 #, fuzzy
 #~ msgid "Load game data..."
 #~ msgstr "Ładowanie danych ..."
-
 #~ msgid "ClanLib error :"
 #~ msgstr "Błąd ClanLib :"
-
 #~ msgid "Sound error :"
 #~ msgstr "Błąd dźwięku :"
 
 #, fuzzy
 #~ msgid "Use sound?"
 #~ msgstr "Dźwięk"
-
 #~ msgid "%s is stupidly dead because he gone out of the map ..."
 #~ msgstr "%s głupio umarł wychodząc poza mapę ..."
-
 #~ msgid "Dead of %s (%s)."
 #~ msgstr "Trup %s (%s)."
-
 #~ msgid "Drawn game :-("
 #~ msgstr "Remis :-("
-
 #~ msgid "Init data"
 #~ msgstr "Inicjalizacja danych"
-
 #~ msgid "PAUSE"
 #~ msgstr "Pauza"
-
 #~ msgid "Thank you to deliver your opinion by following email :"
 #~ msgstr "Dziękujemy za wszelkie opinie przesłane na adres :"
-
 #~ msgid "=== Loading ==="
 #~ msgstr "=== Ładuję ==="
+

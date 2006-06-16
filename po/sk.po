@@ -3,34 +3,40 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: wormux 0.5\n"
+"Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-06-15 14:22+0100\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2006-06-16 11:44+0100\n"
+"Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: sk <stryco@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Slovak\n"
 "X-Poedit-Country: SLOVAKIA\n"
-"X-Poedit-SourceCharset: iso-8859-2\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"POT-Creation-Date: \n"
 
-#: src/game/game.cpp:146 src/game/game.cpp:186
+#: src/game/game.cpp:146
+#: src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr "  Najvypredávanejší :  %s (%i).\n"
 
-#: src/game/game.cpp:144 src/game/game.cpp:184
+#: src/game/game.cpp:144
+#: src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr "  Najužitočnejší  :  %s (%i).\n"
 
-#: src/game/game.cpp:145 src/game/game.cpp:185
+#: src/game/game.cpp:145
+#: src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr "  Najneužitočnejší :  %s (%i).\n"
 
-#: src/game/game.cpp:143 src/game/game.cpp:183
+#: src/game/game.cpp:143
+#: src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr "  Najnásilnejší  :  %s (%i).\n"
@@ -76,14 +82,14 @@ msgid "%s has fallen off the map!"
 msgstr "%s vypadol z mapy!"
 
 #: src/object/bonus_box.cpp:154
-#, fuzzy, c-format
+#, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s stratil %u bod energie."
 msgstr[1] "%s stratil %u bodov energie."
 
 #: src/object/bonus_box.cpp:145
-#, fuzzy, c-format
+#, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s zvíťazil s %u bodom energie !"
@@ -105,32 +111,32 @@ msgid "%s is next to a mine!"
 msgstr "%s je veľmi blízko míny!"
 
 #: src/object/bonus_box.cpp:172
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
-msgstr[0] "%s tím vyhral %u navádzanou strelou!"
-msgstr[1] "%s tím vyhral %u navádzanými strelami!"
+msgstr[0] "%s tím vyhral %u navádzanou strelou !"
+msgstr[1] "%s tím vyhral %u navádzanými strelami !"
 
 #: src/object/bonus_box.cpp:181
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
-msgstr[0] "%s tím vyhral %u navádzanou strelou!"
-msgstr[1] "%s tím vyhral %u navádzanými strelami!"
+msgstr[0] "%s tím vyhral %u navádzanou strelou !"
+msgstr[1] "%s tím vyhral %u navádzanými strelami !"
 
 #: src/object/bonus_box.cpp:191
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "%s tím vyhral %u dynamitom !"
 msgstr[1] "%s tím vyhral %u dynamitmi !"
 
 #: src/object/bonus_box.cpp:136
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
-msgstr[0] "%s tím vyhral %u teleportácou!"
-msgstr[1] "%s tím vyhral %u teleportáciami!"
+msgstr[0] "%s tím vyhral %u teleportácou !"
+msgstr[1] "%s tím vyhral %u teleportáciami !"
 
 #: src/game/game.cpp:192
 #, c-format
@@ -138,11 +144,11 @@ msgid "%s team has won.\n"
 msgstr "%s tím vyhral.\n"
 
 #: src/object/bonus_box.cpp:163
-#, fuzzy, c-format
+#, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
-msgstr[0] "Hráč '%s' zvíťazil %u leteckým útokom!"
-msgstr[1] "Hráč '%s' zvíťazil %u leteckými útokmi!"
+msgstr[0] "Hráč '%s' zvíťazil %u leteckým útokom !"
+msgstr[1] "Hráč '%s' zvíťazil %u leteckými útokmi !"
 
 #: src/interface/interface.cpp:164
 msgid "(dead)"
@@ -154,11 +160,10 @@ msgstr "(neobmedzene)"
 
 #: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr ""
-"<infinite_background> potrebuje <is_open> byť nastavené aby pracovalo "
-"správne!!"
+msgstr "<infinite_background> potrebuje <is_open> byť nastavené aby pracovalo správne!!"
 
-#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167
+#: src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Letecký útok"
 
@@ -170,7 +175,8 @@ msgstr "Výsledky všetkých tímov:\n"
 msgid "Authors:"
 msgstr "Autory:"
 
-#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176
+#: src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Navádzaná strela"
 
@@ -186,12 +192,14 @@ msgstr "Raketomet"
 msgid "C++ exception caught:"
 msgstr "Zachytená výnimka C++ :"
 
-#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425
+#: src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nemôžem nájsť tím %s!"
 
-#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122
+#: src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nedá sa otvoriť adresár tímov (%s)!"
@@ -232,7 +240,8 @@ msgstr "Dľžka trvania ťahu:"
 msgid "Duration of the end of a turn:"
 msgstr "Trvanie konca ťahu:"
 
-#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195
+#: src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -266,10 +275,8 @@ msgstr "Chyba počas načítavania dát tímu %s:"
 
 #: src/game/config.cpp:254
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Chyba počas vytvárania adresára \"%s\": Nedá sa uložiť konfiguračný súbor."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Chyba počas vytvárania adresára \"%s\": Nedá sa uložiť konfiguračný súbor."
 
 #: src/game/config.cpp:123
 #, c-format
@@ -348,7 +355,8 @@ msgstr "Inicializácia dát"
 msgid "Initialise objects"
 msgstr "Inicializácia objektov"
 
-#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93
+#: src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Inicializácia tímov"
 
@@ -428,7 +436,7 @@ msgstr "Vypnúť Wormux"
 
 #: src/object/bonus_box.cpp:185
 msgid "Riot bomb"
-msgstr ""
+msgstr "Navádzanou strelou"
 
 #: src/main.cpp:224
 msgid "Run game"
@@ -463,7 +471,8 @@ msgstr "Munícia:"
 msgid "Team %s results:\n"
 msgstr "Výsledky tímu %s :\n"
 
-#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140
+#: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleport"
 
@@ -475,7 +484,8 @@ msgstr "Automatická raketa opustila bojisko ..."
 msgid "The game has ended as a draw.\n"
 msgstr "Hra skončila remízou.\n"
 
-#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:53
+#: src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Raketa opustila bojisko..."
 
@@ -484,12 +494,14 @@ msgstr "Raketa opustila bojisko..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nedá sa inicializovať SDL knižnca: %s "
 
-#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
+#: src/team/skin.cpp:334
+#: src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Nedá sa otvoriť adresár skinov (%s)!"
@@ -550,41 +562,29 @@ msgstr "hotovo"
 
 #~ msgid "Load map"
 #~ msgstr "Načítavam mapu"
-
 #~ msgid "Unknow action"
 #~ msgstr "Neznáma akcia"
-
 #~ msgid "Wait for clients"
 #~ msgstr "Čakám na klientov"
-
 #~ msgid "Wait for map"
 #~ msgstr "Čakám na mapu"
-
 #~ msgid "Wait for server"
 #~ msgstr "Čakám na server"
-
 #~ msgid "Wait for server informations"
 #~ msgstr "Čakám na informácie o serveri"
-
 #~ msgid "Wait teams"
 #~ msgstr "Čakám tími"
-
 #~ msgid "Pause"
 #~ msgstr "Pauza"
-
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr ""
 #~ "Pozor! Množstvo častíc vetra je príliš nízke! Nastavené defaultne na 0.3"
-
 #~ msgid "End of game"
 #~ msgstr "Koniec hry !"
-
 #~ msgid "Authors"
 #~ msgstr "Autory"
-
 #~ msgid "Info"
 #~ msgstr "Info"
-
 #~ msgid "Ok"
 #~ msgstr "OK"
 
@@ -595,55 +595,40 @@ msgstr "hotovo"
 #, fuzzy
 #~ msgid "Load game data..."
 #~ msgstr "Načítavam údaje hry ..."
-
 #~ msgid "ClanLib error :"
 #~ msgstr "Chyba ClanLib :"
-
 #~ msgid "File \"%s\" does not exist !"
 #~ msgstr "Súbor \"%s\" neexistuje !"
-
 #~ msgid "Sound error :"
 #~ msgstr "Chyba zvuku :"
 
 #, fuzzy
 #~ msgid "Use sound?"
 #~ msgstr "Použi zvuk"
-
 #~ msgid "%s is stupidly dead because he gone out of the map ..."
 #~ msgstr "%s je hlúpo mŕtvy, lebo sa dostal mimo mapy ..."
-
 #~ msgid "=== Loading ==="
 #~ msgstr "=== Načítavam ==="
-
 #~ msgid "A blow in the vacuum ..."
 #~ msgstr "Vcucnutie do vákua ..."
-
 #~ msgid "Dead of %s (%s)."
 #~ msgstr "Zabitý %s (%s)."
-
 #~ msgid "Drawn game :-("
 #~ msgstr "Vyrovnaná hra :-("
-
 #~ msgid "Init data"
 #~ msgstr "za"
-
 #~ msgid "PAUSE"
 #~ msgstr "PAUZA"
-
 #~ msgid "Skip turn"
 #~ msgstr "Preskoč kolo"
-
 #~ msgid "Thank you to deliver your opinion by following email :"
 #~ msgstr "Vdaka za doručenie tvojho názoru na tento mail :"
-
 #~ msgid "The team '%s' give its turn."
 #~ msgstr "tím '%s' obetoval svoj ťah."
-
 #~ msgid "Weapon %s not loaded :-("
 #~ msgstr "Zbraň %s nie je nabitá :-("
-
 #~ msgid "Weapon %s succesfully loaded"
 #~ msgstr "Zbraň %s bola úspešne nabitá"
-
 #~ msgid "Winner : team %s"
 #~ msgstr "Víťaz : tím %s"
+
