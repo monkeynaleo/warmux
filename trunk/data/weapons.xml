@@ -19,6 +19,10 @@
     <image file="object/star.png" />
   </sprite>
 
+  <sprite name="dark_smoke">
+    <image file="object/dark_smoke.png" />
+  </sprite>
+
   <sprite name="yellow_star_particle">
     <image file="object/yellow_star.png" />
   </sprite>

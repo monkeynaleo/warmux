@@ -179,6 +179,21 @@ void StarParticle::Init()
   SetSize( Point2i(1, 1) );
 }
 
+DarkSmoke::DarkSmoke() :
+  Particle("dark_smoke")
+{
+  m_initial_time_to_live = 20;
+  m_left_time_to_live = m_initial_time_to_live;
+  m_time_between_scale = 15;
+}
+
+void DarkSmoke::Init()
+{
+  image = ParticleEngine::GetSprite(DARK_SMOKE_spr);
+  image->Scale(0.0, 0.0);
+  SetSize( Point2i(1, 1) );
+}
+
 MagicStarParticle::MagicStarParticle() :
   Particle("magic_star_particle")
 {
@@ -278,6 +293,7 @@ void ParticleEngine::Init()
   particle_sprite[EXPLOSION_SMOKE_spr] = resource_manager.LoadSprite(res,"smoke_explosion");
   particle_sprite[FIRE_spr]  = resource_manager.LoadSprite(res,"fire_particle");
   particle_sprite[STAR_spr]  = resource_manager.LoadSprite(res,"star_particle");
+  particle_sprite[DARK_SMOKE_spr]  = resource_manager.LoadSprite(res,"dark_smoke");
   particle_sprite[MAGIC_STAR_R_spr] = resource_manager.LoadSprite(res,"pink_star_particle");
   particle_sprite[MAGIC_STAR_R_spr]->EnableRotationCache(32);
   particle_sprite[MAGIC_STAR_Y_spr] = resource_manager.LoadSprite(res,"yellow_star_particle");
@@ -310,6 +326,8 @@ void ParticleEngine::AddNow(const Point2i &position,
   for (uint i=0 ; i < nb_particles ; i++) {
     switch (type) {
       case particle_SMOKE : particle = new Smoke();
+                            break;
+      case particle_DARK_SMOKE : particle = new DarkSmoke();
                             break;
       case particle_FIRE : particle = new FireParticle();
                            break;
