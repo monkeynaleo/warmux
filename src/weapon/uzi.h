@@ -36,6 +36,7 @@ private:
 
 class Uzi : public WeaponLauncher
 {
+  ParticleEngine particle;
  private:
   bool p_Shoot();
   void RepeatShoot(); 

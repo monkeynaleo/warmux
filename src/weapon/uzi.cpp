@@ -83,6 +83,9 @@ bool Uzi::p_Shoot()
   b = pos.y - ( a * pos.x ) ;
   	Point2i delta_pos ;
 
+  particle.AddNow(pos, 1, particle_BULLET, true, angle + M_PI + ActiveCharacter().GetDirection() * M_PI_4,
+                  5.0 + (Time::GetInstance()->Read() % 6));
+
   // Move the bullet !!
   projectile->SetXY( pos );
   projectile->Ready();

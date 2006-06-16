@@ -35,6 +35,10 @@
     <image file="object/pink_star.png" />
   </sprite>
 
+  <sprite name="bullet_particle">
+    <image file="weapon/gun/gun_bullet.png" />
+  </sprite>
+
 <!-- Air attack ressources -->
   
   <surface name="air_attack_ico" file="weapon/air_attack/air_attack_ico.png" />
