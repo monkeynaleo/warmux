@@ -104,7 +104,6 @@ void Tile::LoadImage (Surface& terrain){
 
             terrain.SetAlpha(0, 0);
             item[piece]->GetSurface().Blit(terrain, sr, Point2i(0, 0));
-            item[piece]->SyncBuffer();
         }
 
     // Replace transparent tiles by TileItem_Empty tiles
@@ -151,4 +150,42 @@ void Tile::DrawTile_Clipped(Rectanglei worldClip) const
                 AppWormux::GetInstance()->video.window.Blit( item[c.y*nbCells.x + c.x]->GetSurface(), Rectanglei(ptSrc, destRect.GetSize()) , ptDest); 
 			}
         }
+}
+
+Surface Tile::GetPart(Rectanglei& rec)
+{
+  Surface part(rec.GetSize(), SDL_SWSURFACE|SDL_SRCALPHA, true);
+  part.SetAlpha(0,0);
+  part.Fill(0x00000000);
+  part.SetAlpha(SDL_SRCALPHA,0);
+
+  Point2i firstCell = Clamp(rec.GetPosition() / CELL_SIZE);
+  Point2i lastCell = Clamp((rec.GetPosition() + rec.GetSize()) / CELL_SIZE);
+  Point2i i = nbCells - 1;
+
+  for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
+  for( i.x = firstCell.x; i.x <= lastCell.x; i.x++ )
+  {
+    if(item[i.y*nbCells.x + i.x]->IsTotallyEmpty()) continue;
+
+    Point2i cell_pos = i * CELL_SIZE;
+    Rectanglei src;
+    Point2i dst;
+    src.SetPosition( rec.GetPosition() - cell_pos );
+    if(src.GetPositionX() < 0) src.SetPositionX(0);
+    if(src.GetPositionY() < 0) src.SetPositionY(0);
+
+    src.SetSize( rec.GetPosition() + rec.GetSize() - cell_pos - src.GetPosition());
+    if(src.GetSizeX() + src.GetPositionX() > CELL_SIZE.x) src.SetSizeX(CELL_SIZE.x - src.GetPositionX());
+    if(src.GetSizeY() + src.GetPositionY() > CELL_SIZE.y) src.SetSizeY(CELL_SIZE.y - src.GetPositionY());
+
+    dst =  cell_pos - rec.GetPosition();
+    if(dst.x < 0) dst.x = 0;
+    if(dst.y < 0) dst.y = 0;
+
+    item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(0, 0);
+    part.Blit(item[i.y*nbCells.x + i.x]->GetSurface(), src, dst);
+    item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
+  }
+  return part;
 }

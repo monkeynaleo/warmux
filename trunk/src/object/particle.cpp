@@ -30,6 +30,7 @@
 #include "../tool/random.h"
 #include "../tool/point.h"
 #include "../weapon/explosion.h"
+#include "../map/map.h"
 
 ParticleEngine global_particle_engine;
 
@@ -288,6 +289,37 @@ void BulletParticle::SignalRebound()
 }
 
 //-----------------------------------------------------------------------------
+GroundParticle::GroundParticle(Point2i _size) :
+  Particle("ground_particle")
+{
+  m_left_time_to_live = 1;
+  image = NULL;
+  size = _size;
+}
+
+void GroundParticle::Init()
+{
+  SetSize( Point2i(1, 1) );
+  GetGround();
+}
+
+void GroundParticle::GetGround()
+{
+  Rectanglei rec;
+  rec.SetPosition( GetPosition() - size / 2);
+  rec.SetSize( size );
+  image = new Sprite(world.ground.GetPart(rec));
+}
+
+void GroundParticle::Refresh()
+{
+  UpdatePosition();
+  image->SetRotation_deg((Time::GetInstance()->Read()/2) % 360);
+  image->Update();
+  if(m_alive == GHOST)
+    m_left_time_to_live = 0;
+}
+//-----------------------------------------------------------------------------
 
 ParticleEngine::ParticleEngine(uint time)
 {
@@ -332,7 +364,7 @@ void ParticleEngine::Init()
   particle_sprite[MAGIC_STAR_B_spr] = resource_manager.LoadSprite(res,"blue_star_particle");
   particle_sprite[MAGIC_STAR_B_spr]->EnableRotationCache(32);
   particle_sprite[BULLET_spr] = resource_manager.LoadSprite(res,"bullet_particle");
-  particle_sprite[BULLET_spr]->EnableRotationCache(12);
+  particle_sprite[BULLET_spr]->EnableRotationCache(6);
   resource_manager.UnLoadXMLProfile( res);
 }
 
@@ -368,6 +400,12 @@ void ParticleEngine::AddNow(const Point2i &position,
                            break;
       case particle_BULLET : particle = new BulletParticle();
                            break;
+      case particle_GROUND : particle = new GroundParticle(Point2i(10,10));
+                           break;
+      case particle_AIR_HAMMER : particle = new GroundParticle(Point2i(21,18)); // Half the size of the airhammer impact
+                                                                                // Dirty, but we have no way to read the
+                                                                                // impact size from here ...
+                           break;
       case particle_MAGIC_STAR : particle = new MagicStarParticle();
                                  break;
       default : particle = NULL;
@@ -386,9 +424,9 @@ void ParticleEngine::AddNow(const Point2i &position,
       else
 		  tmp_angle = angle;
 
+      particle->SetXY(position);
       particle->Init();
       particle->SetOnTop(upper);
-      particle->SetXY(position);
       particle->SetSpeed(tmp_norme, tmp_angle);
       lst_particles.push_back(particle);
     }
@@ -444,15 +482,16 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
 //      angle = (float) i * M_PI * 4.0 / (float)big_partic_nbr;
       size = radius;
       norme = radius / 3.0;
-      particle = new ExplosionSmoke(size);
-      particle->Init();
-      particle->SetOnTop(true);
 
       Point2i pos = position; //Set position to center of explosion
       pos = pos - size / 2;       //Set the center of the smoke to the center..
       pos = pos + Point2i(int(norme * big_cos[i]),int(norme * big_sin[i])); //Put inside the circle of the explosion
 
+      particle = new ExplosionSmoke(size);
       particle->SetXY(pos);
+      particle->Init();
+      particle->SetOnTop(true);
+
       lst_particles.push_back(particle);
   }
 }

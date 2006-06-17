@@ -73,6 +73,19 @@ void ApplyExplosion_common (const Point2i &pos,
 
   MSG_DEBUG("explosion", "explosion range : %f\n", config.explosion_range);
 
+  // Add particles based on the ground image
+  if(config.explosion_range >= 15)
+  {
+    for(int y=-config.explosion_range; y < (int)config.explosion_range; y += 10)
+    {
+      int dx = (int) (cos(asin((float)y / config.explosion_range)) * (float) y);
+      for(int x=-dx; x < dx; x += 10)
+        ParticleEngine::AddNow(pos + Point2i(x-5,y-5), 1, particle_GROUND, true);
+    }
+  }
+  else
+    ParticleEngine::AddNow(pos, 1, particle_GROUND, true);
+
   // Make a hole in the ground
   world.Dig(pos, config.explosion_range);
   float range = config.explosion_range / PIXEL_PER_METER;
@@ -80,7 +93,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
   // Play a sound
   jukebox.Play("share", son);
-   
+
   // Apply damage on the worms.
   // Do not care about the death of the active worm.
   FOR_ALL_CHARACTERS(equipe,ver)

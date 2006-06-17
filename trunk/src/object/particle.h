@@ -34,6 +34,8 @@ typedef enum {
   particle_FIRE,
   particle_STAR,
   particle_BULLET,
+  particle_GROUND,
+  particle_AIR_HAMMER,
   particle_MAGIC_STAR
 } particle_t;
 
@@ -118,6 +120,16 @@ class FireParticle : public Particle
   FireParticle();
   void Init();
   void SignalFallEnding();
+};
+
+class GroundParticle : public Particle
+{
+  Point2i size;
+ public:
+  GroundParticle(Point2i _size);
+  void Init();
+  void GetGround();
+  void Refresh();
 };
 
 class ParticleEngine
