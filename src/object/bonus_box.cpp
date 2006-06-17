@@ -71,10 +71,10 @@ BonusBox::BonusBox()
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
   SetSize(anim->GetSize());
-  anim->animation.SetLoopMode(false);  
+  anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
-  
-  parachute = true;  
+
+  parachute = true;
 
   SetSpeed (SPEED, M_PI_2);
 }
@@ -84,7 +84,7 @@ BonusBox::~BonusBox(){
 }
 
 void BonusBox::Draw()
-{ 
+{
   anim->Draw(GetPosition());
 }
 
@@ -106,7 +106,7 @@ void BonusBox::Refresh()
 
   // Refresh animation
   if (!m_ready && !parachute) anim->Update();
-  
+
   m_ready = anim->IsFinished();
 }
 
@@ -131,10 +131,10 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
   std::ostringstream txt;
   uint bonus = randomSync.GetLong (1, nb_bonus);
   switch (bonus){
-  case bonusTELEPORTATION: 
+  case bonusTELEPORTATION:
     txt << Format(ngettext(
-                "%s team has won %u teleportation.", 
-                "%s team has won %u teleportations.", 
+                "%s team has won %u teleportation.",
+                "%s team has won %u teleportations.",
                 BONUS_TELEPORTATION),
             ActiveTeam().GetName().c_str(), BONUS_TELEPORTATION);
     equipe.m_nb_ammos[ _("Teleportation") ] += BONUS_TELEPORTATION;
@@ -186,13 +186,13 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
     break;
 
   default: std::cout << bonus << std::endl; assert (false);
-  case bonusDYNAMITE:  
+  case bonusDYNAMITE:
     txt << Format(ngettext(
                 "%s team has won %u stick of dynamite!",
                 "%s team has won %u sticks of dynamite!",
                 BONUS_DYNAMITE),
             ActiveTeam().GetName().c_str(), BONUS_DYNAMITE);
-    equipe.m_nb_ammos[ _("Dynamite") ] += BONUS_DYNAMITE; 
+    equipe.m_nb_ammos[ _("Dynamite") ] += BONUS_DYNAMITE;
     break;
   }
 
@@ -201,7 +201,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-// Static methods 
+// Static methods
 bool BonusBox::enable = false;
 uint BonusBox::time = 0;
 
@@ -216,11 +216,11 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
 {
   if (!bonus_box.PutRandomly(true, 0)) return false;
 
-  time = randomSync.GetLong(MIN_TIME_BETWEEN_CREATION, 
+  time = randomSync.GetLong(MIN_TIME_BETWEEN_CREATION,
 			   MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
   time *= 1000;
   time += Time::GetInstance()->Read();
-  
+
   return true;
 }
 
@@ -238,9 +238,9 @@ bool BonusBox::NewBonusBox()
   } else {
     lst_objects.AddObject(box);
     camera.ChangeObjSuivi(box, true, true);
-    GameMessages::GetInstance()->Add (_("Is it a gift ?"));
+    GameMessages::GetInstance()->Add (_("Is it a gift?"));
     return true;
   }
- 
+
   return false;
 }
