@@ -38,6 +38,31 @@ class Team;
 class Character : public PhysicalObj
 {
 private:
+  //Almost empty character - hoping not initializing m_team
+  //will still be OK
+  Character () 
+      : PhysicalObj("character")
+      , character_name("Nobody")
+      , m_team()
+      , skin_is_walking(false)
+      , is_walking(false)
+      , full_walk(false)
+      , energy(0)
+      , damage_other_team(0)
+      , damage_own_team(0)
+      , max_damage(0)
+      , current_total_damage(0)
+      , survivals(0)
+      , name_text(NULL)
+      , pause_bouge_dg(0)
+      , do_nothing_time(0)
+      , lost_energy(0)
+      , skin(NULL)
+      , walk_skin(NULL)
+      , current_skin("")
+      , image(NULL)
+  {};
+
   std::string character_name;
   Team& m_team;
   bool skin_is_walking; // True if the curent is a walking skin.
@@ -102,8 +127,8 @@ private:
   virtual void SignalFallEnding();
 
 public:
-  Character (Team& my_team, const std::string &name, 
-	     Skin *skin);
+  Character (Team& my_team, const std::string &name, Skin *skin);
+  static const Character* getNobody();
   ~Character();
 
   // Change le niveau d'énergie
@@ -169,9 +194,9 @@ public:
   // Damage report
   void HandleMostDamage();
   void MadeDamage(const int Dmg, const Character &other);
-  int  GetMostDamage() { HandleMostDamage(); return max_damage; }
-  int  GetOwnDamage() { return damage_own_team; }
-  int  GetOtherDamage() { return damage_other_team; }
+  int  GetMostDamage() const { return max_damage; }
+  int  GetOwnDamage() const { return damage_own_team; }
+  int  GetOtherDamage() const { return damage_other_team; }
 };
 
 #endif

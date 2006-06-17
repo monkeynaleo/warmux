@@ -61,6 +61,7 @@ wormux_SOURCES = \
 	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/options_menu.cpp menu/options_menu.h \
 	menu/game_menu.cpp menu/game_menu.h \
+	menu/results_menu.cpp menu/results_menu.h \
 	game/time.cpp game/time.h \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/question.cpp gui/question.h \
@@ -93,6 +94,7 @@ wormux_SOURCES = \
 	team/team.cpp team/team.h \
 	team/team_energy.cpp team/team_energy.h \
 	team/teams_list.cpp team/teams_list.h \
+	team/results.cpp team/results.h \
 	weapon/all.h \
 	weapon/weapon.cpp weapon/weapon.h \
 	weapon/weapon_cfg.cpp weapon/weapon_cfg.h \
