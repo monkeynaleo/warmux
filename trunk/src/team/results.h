@@ -48,8 +48,8 @@ class TeamResults
  public:
     static TeamResults* createTeamResults(Team* team);
     static TeamResults* createGlobalResults(std::vector<TeamResults*>* list);
-    static std::vector<TeamResults*>* TeamResults::createAllResults(void);
-    static void TeamResults::deleteAllResults(std::vector<TeamResults*>* results_list);
+    static std::vector<TeamResults*>* createAllResults(void);
+    static void deleteAllResults(std::vector<TeamResults*>* results_list);
     void RenderText(std::string& str);
     const char*      getTeamName() const { return teamName; };
     const Character* getMostViolent() const { return mostViolent; };
