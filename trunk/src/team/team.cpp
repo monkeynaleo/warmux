@@ -38,14 +38,14 @@
 #include <iostream>
 
 Team::Team(const std::string& _teams_dir,
-	   const std::string& _id, 
-	   const std::string& _name, 
-	   const Surface& _flag, 
+	   const std::string& _id,
+	   const std::string& _name,
+	   const Surface& _flag,
 	   const std::string& _sound_profile) :
   energy(_name)
 {
   is_local = true;
-  active_character = NULL;
+  active_character = characters.end();
 
   camera_est_sauve = false;
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
@@ -59,7 +59,7 @@ Team::Team(const std::string& _teams_dir,
   crosshair.Init();
 }
 
-Team * Team::CreateTeam (const std::string& teams_dir, 
+Team * Team::CreateTeam (const std::string& teams_dir,
 			 const std::string& id)
 {
   std::string nomfich;
@@ -115,15 +115,15 @@ bool Team::LoadCharacters(uint howmany)
 
     // Create the characters
     xmlpp::Element *xml = LitDocXml::AccesBalise (doc.racine(), "team");
-    
+
     xmlpp::Node::NodeList nodes = xml -> get_children("character");
-    xmlpp::Node::NodeList::iterator 
+    xmlpp::Node::NodeList::iterator
       it=nodes.begin(),
       fin=nodes.end();
 
     characters.clear();
     bool fin_bcl;
-    active_character = NULL;
+    active_character = characters.end();
     do
       {
 	xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
@@ -132,35 +132,35 @@ bool Team::LoadCharacters(uint howmany)
 	std::string skin_name="ver_jaune";
 	LitDocXml::LitAttrString(elem, "name", character_name);
 	LitDocXml::LitAttrString(elem, "skin", skin_name);
-	
+
 	if (skins_list.find(skin_name) != skins_list.end()) {
 	  skin = &skins_list[skin_name];
 	} else {
-	  std::cerr 
+	  std::cerr
 	    << Format(_("Error: can't find the skin \"%s\" for the team \"%s\"."),
 		      skin_name.c_str(),
-		      m_name.c_str()) 
+		      m_name.c_str())
 	    << std::endl;
 	  return false;
 	}
-	
+
 	// Initialise les variables du ver, puis l'ajoute à la liste
 	Character new_character(*this, character_name, skin);
 	characters.push_back(new_character);
 	active_character = characters.begin(); // we need active_character to be initialized here !!
 	characters.back().PutRandomly(false, world.dst_min_entre_vers);
 	characters.back().Ready();
-	
+
 	MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
-	
+
 	// C'est la fin ?
 	++it;
 	fin_bcl = (it == fin);
 	fin_bcl |= (howmany <= characters.size());
       } while (!fin_bcl);
-    
+
     active_character = characters.begin();
-    
+
   }
   catch (const xmlpp::exception &e)
     {
@@ -181,7 +181,7 @@ void Team::InitEnergy (uint max)
 uint Team::ReadEnergy ()
 {
   uint total_energy = 0;
-  
+
   iterator it = characters.begin(), end = characters.end();
 
   for (; it != end; ++it) {
@@ -202,17 +202,17 @@ void Team::NextCharacter()
   // Passe au ver suivant
   assert (0 < NbAliveCharacter());
   do
-  { 
+  {
     ++active_character;
-    if (active_character == characters.end()) 
+    if (active_character == characters.end())
       active_character = characters.begin();
-  } while (ActiveCharacter().IsDead());  
+  } while (ActiveCharacter().IsDead());
 
   if (camera_est_sauve) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
-  camera.ChangeObjSuivi (&ActiveCharacter(), 
-			 !camera_est_sauve, !camera_est_sauve, 
+  camera.ChangeObjSuivi (&ActiveCharacter(),
+			 !camera_est_sauve, !camera_est_sauve,
 			 true);
-  MSG_DEBUG("team", "%s (%d, %d)is now the active character", 
+  MSG_DEBUG("team", "%s (%d, %d)is now the active character",
 	    ActiveCharacter().GetName().c_str(),
 	    ActiveCharacter().GetX(),
 	    ActiveCharacter().GetY());
@@ -222,7 +222,7 @@ int Team::NbAliveCharacter() const
 {
   uint nbr = 0;
   const_iterator it= characters.begin(), end=characters.end();
-  
+
   for (; it!=end; ++it)
     if ( !(*it).IsDead() ) nbr++;
 
@@ -240,8 +240,8 @@ void Team::PrepareTurn()
   }
 
   if (camera_est_sauve) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
-  camera.ChangeObjSuivi (&ActiveCharacter(), 
-			 !camera_est_sauve, !camera_est_sauve, 
+  camera.ChangeObjSuivi (&ActiveCharacter(),
+			 !camera_est_sauve, !camera_est_sauve,
 			 true);
   CurseurVer::GetInstance()->SuitVerActif();
 
@@ -255,7 +255,7 @@ void Team::PrepareTurn()
 }
 
 Character& Team::ActiveCharacter()
-{ 
+{
   return (*active_character);
 }
 
@@ -271,19 +271,19 @@ int Team::ReadNbAmmos() const
 {
   // Read in the Map
   // The same method as in AccesNbAmmos can't be use on const team !
-  std::map<std::string, int>::const_iterator it 
+  std::map<std::string, int>::const_iterator it
     = m_nb_ammos.find( active_weapon->GetName() ) ;
-  
-  if (it != m_nb_ammos.end())  return ( it->second ) ;  
+
+  if (it != m_nb_ammos.end())  return ( it->second ) ;
   return 0 ;
 }
 
 int Team::ReadNbUnits() const
 {
-  std::map<std::string, int>::const_iterator it 
+  std::map<std::string, int>::const_iterator it
     = m_nb_units.find( active_weapon->GetName() ) ;
-  
-  if (it !=  m_nb_units.end())  return ( it->second ) ;  
+
+  if (it !=  m_nb_units.end())  return ( it->second ) ;
   return 0 ;
 }
 
@@ -291,22 +291,22 @@ int Team::ReadNbAmmos(const std::string &weapon_name) const
 {
   // Read in the Map
   // The same method as in AccesNbAmmos can't be use on const team !
-  std::map<std::string, int>::const_iterator it = 
+  std::map<std::string, int>::const_iterator it =
     m_nb_ammos.find( weapon_name );
-  
-  if (it !=  m_nb_ammos.end()) return ( it->second ) ;  
+
+  if (it !=  m_nb_ammos.end()) return ( it->second ) ;
   return 0 ;
-  
+
 }
 
 int Team::ReadNbUnits(const std::string &weapon_name) const
 {
-  std::map<std::string, int>::const_iterator it = 
+  std::map<std::string, int>::const_iterator it =
     m_nb_units.find( weapon_name );
-  
-  if (it !=  m_nb_units.end()) return ( it->second ) ;  
+
+  if (it !=  m_nb_units.end()) return ( it->second ) ;
   return 0 ;
-  
+
 }
 
 int& Team::AccessNbAmmos()
@@ -335,14 +335,14 @@ void Team::LoadGamingData(uint how_many_characters)
   m_nb_ammos.clear();
   m_nb_units.clear();
   std::list<Weapon *> l_weapons_list = weapons_list.GetList() ;
-  std::list<Weapon *>::iterator itw = l_weapons_list.begin(), 
+  std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
     end = l_weapons_list.end();
 
   for (; itw != end ; ++itw) {
     m_nb_ammos[ (*itw)->GetName() ] = (*itw)->ReadInitialNbAmmo();
     m_nb_units[ (*itw)->GetName() ] = (*itw)->ReadInitialNbUnit();
   }
-  
+
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
   camera_est_sauve = false;
 
