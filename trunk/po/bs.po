@@ -15,31 +15,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.11.2\n"
-"POT-Creation-Date: \n"
 "X-Poedit-Language: Bosnian\n"
 "X-Poedit-Country: BOSNIA AND HERZEGOVINA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146
-#: src/game/game.cpp:186
+#: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr "Najviše se prodao: %s (%i).\n"
 
-#: src/game/game.cpp:144
-#: src/game/game.cpp:184
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr "Najkorisniji:  %s (%i).\n"
 
-#: src/game/game.cpp:145
-#: src/game/game.cpp:185
+#: src/game/game.cpp:145 src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr "Najbeskorisniji : %s (%i).\n"
 
-#: src/game/game.cpp:143
-#: src/game/game.cpp:183
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr "Najagresivniji : %s (%i).\n"
@@ -163,10 +158,11 @@ msgstr "(neograničeno)"
 
 #: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr "<infinite_background> treba <is_open> biti postavljena da bi ispravno radila!!"
+msgstr ""
+"<infinite_background> treba <is_open> biti postavljena da bi ispravno "
+"radila!!"
 
-#: src/object/bonus_box.cpp:167
-#: src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Zračni napad"
 
@@ -178,8 +174,7 @@ msgstr "Rezultat svih timova:\n"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/object/bonus_box.cpp:176
-#: src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Automatska bazuka"
 
@@ -187,7 +182,7 @@ msgstr "Automatska bazuka"
 msgid "Baseball"
 msgstr "Baseball palica"
 
-#: src/weapon/bazooka.cpp:63
+#: src/weapon/bazooka.cpp:66
 msgid "Bazooka"
 msgstr "Bazuka"
 
@@ -195,14 +190,12 @@ msgstr "Bazuka"
 msgid "C++ exception caught:"
 msgstr "C++ izuzetak nađen:"
 
-#: src/team/teams_list.cpp:425
-#: src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Nemože naći timove %s!"
 
-#: src/team/teams_list.cpp:122
-#: src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nemogu otvorit timov direktorij  (%s)!"
@@ -243,8 +236,7 @@ msgstr "Trajanje reda:"
 msgid "Duration of the end of a turn:"
 msgstr "Trajanje kraja reda:"
 
-#: src/object/bonus_box.cpp:195
-#: src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamit"
 
@@ -278,8 +270,11 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:254
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi konfiguracionu datoteku."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
+"konfiguracionu datoteku."
 
 #: src/game/config.cpp:123
 #, c-format
@@ -358,13 +353,13 @@ msgstr "Inicijaniranje podataka"
 msgid "Initialise objects"
 msgstr "Inicijaliziranje objekata"
 
-#: src/game/game_loop.cpp:93
-#: src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Inicijaliziranje timova"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+#, fuzzy
+msgid "Is it a gift?"
 msgstr "Da li je to poklon?"
 
 #: src/map/maps_list.cpp:207
@@ -474,12 +469,11 @@ msgstr "Zaliha:"
 msgid "Team %s results:\n"
 msgstr "Rezultati %s tima:\n"
 
-#: src/object/bonus_box.cpp:140
-#: src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportacija"
 
-#: src/weapon/auto_bazooka.cpp:99
+#: src/weapon/auto_bazooka.cpp:103
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Autotamska rakete je napustila bojište..."
 
@@ -487,8 +481,7 @@ msgstr "Autotamska rakete je napustila bojište..."
 msgid "The game has ended as a draw.\n"
 msgstr "Igra je završena kao neriješena.\n"
 
-#: src/weapon/bazooka.cpp:53
-#: src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Raketa je napustila bojište..."
 
@@ -497,14 +490,12 @@ msgstr "Raketa je napustila bojište..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nije u stanju da inicijaliyira SDL biblioteku: %s"
 
-#: src/map/maps_list.cpp:219
-#: src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
-#: src/team/skin.cpp:334
-#: src/team/skin.cpp:350
+#: src/team/skin.cpp:334 src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Nije u stanju da otvori direktorij sa skinovima (%s)!"
@@ -565,18 +556,24 @@ msgstr "gotov"
 
 #~ msgid "Load map"
 #~ msgstr "Učitaj mapu"
+
 #~ msgid "Press a key to continue."
 #~ msgstr "Pritisni tipku da nastavis."
+
 #~ msgid "Unknow action"
 #~ msgstr "Nepoznata akcija"
+
 #~ msgid "Wait for clients"
 #~ msgstr "Sačekajte klijente"
+
 #~ msgid "Wait for map"
 #~ msgstr "Sačekaj mapu"
+
 #~ msgid "Wait for server"
 #~ msgstr "Sačekaj server"
+
 #~ msgid "Wait for server informations"
 #~ msgstr "Sačekaj za server informacije"
+
 #~ msgid "Wait teams"
 #~ msgstr "Sačekaj timove"
-

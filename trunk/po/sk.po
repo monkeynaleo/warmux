@@ -356,7 +356,8 @@ msgid "Initialise teams"
 msgstr "Inicializácia tímov"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+#, fuzzy
+msgid "Is it a gift?"
 msgstr "Je to dar ?"
 
 #: src/map/maps_list.cpp:207

@@ -16,31 +16,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"POT-Creation-Date: \n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146
-#: src/game/game.cpp:186
+#: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:144
-#: src/game/game.cpp:184
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:145
-#: src/game/game.cpp:185
+#: src/game/game.cpp:145 src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:143
-#: src/game/game.cpp:183
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
@@ -166,8 +161,7 @@ msgstr "(ilimitadas)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:167
-#: src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr " Ataque aéreo"
 
@@ -179,8 +173,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/object/bonus_box.cpp:176
-#: src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Bazooka automático"
 
@@ -188,7 +181,7 @@ msgstr "Bazooka automático"
 msgid "Baseball"
 msgstr "Baseball"
 
-#: src/weapon/bazooka.cpp:63
+#: src/weapon/bazooka.cpp:66
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -197,14 +190,12 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Excepção C++ interceptada :"
 
-#: src/team/teams_list.cpp:425
-#: src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Equipa %s não encontrada!"
 
-#: src/team/teams_list.cpp:122
-#: src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Não pode abrir diretório da equipa (%s)"
@@ -246,8 +237,7 @@ msgstr "Duração d'uma volta:"
 msgid "Duration of the end of a turn:"
 msgstr "Duração do fim d'uma volta:"
 
-#: src/object/bonus_box.cpp:195
-#: src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamite"
 
@@ -282,7 +272,8 @@ msgstr "Erro no carregamento da equipa %s"
 
 #: src/game/config.cpp:254
 #, fuzzy, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Erro no carregamento da modalidade de jogo %s (ficheiro %s):"
 
 #: src/game/config.cpp:123
@@ -365,13 +356,12 @@ msgstr "Iniciação dos dados"
 msgid "Initialise objects"
 msgstr "Iniciação das equipas"
 
-#: src/game/game_loop.cpp:93
-#: src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Iniciação das equipas"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+msgid "Is it a gift?"
 msgstr ""
 
 #: src/map/maps_list.cpp:207
@@ -481,12 +471,11 @@ msgstr "Munição:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:140
-#: src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportação"
 
-#: src/weapon/auto_bazooka.cpp:99
+#: src/weapon/auto_bazooka.cpp:103
 msgid "The automatic rocket has left the battlefield..."
 msgstr "O foguete automático partiu num outro mundo ..."
 
@@ -495,8 +484,7 @@ msgstr "O foguete automático partiu num outro mundo ..."
 msgid "The game has ended as a draw.\n"
 msgstr "O jogo acabou-se sobre um empate."
 
-#: src/weapon/bazooka.cpp:53
-#: src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "O foguete partiu num outro mundo ..."
 
@@ -505,14 +493,12 @@ msgstr "O foguete partiu num outro mundo ..."
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:219
-#: src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 
-#: src/team/skin.cpp:334
-#: src/team/skin.cpp:350
+#: src/team/skin.cpp:334 src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Incapaz de abrir o diretório dos skins (%s)!"
@@ -559,7 +545,8 @@ msgstr "Você necessita ao menos um mapa válido!"
 
 #: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr "Tem necessidade pelo menos de duas equipas, corrige isto no 'menu Opções' !"
+msgstr ""
+"Tem necessidade pelo menos de duas equipas, corrige isto no 'menu Opções' !"
 
 #: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
@@ -575,32 +562,42 @@ msgstr ""
 
 #~ msgid "Load map"
 #~ msgstr "Carregamento do terreno"
+
 #~ msgid "Unknow action"
 #~ msgstr "Ação desconhecida"
+
 #~ msgid "Wait for clients"
 #~ msgstr "A espera de clientes"
+
 #~ msgid "Wait for map"
 #~ msgstr "A espera do mapa"
+
 #~ msgid "Wait for server"
 #~ msgstr "A espera do server"
+
 #~ msgid "Wait for server informations"
 #~ msgstr "A espera de informações do server"
+
 #~ msgid "Wait teams"
 #~ msgstr "A espera de equipas"
+
 #~ msgid "Pause"
 #~ msgstr "Pausa"
+
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr ""
 #~ "Aviso! A massa das partículas dos ventos é demasiado baixa!  Ajuste pelo "
 #~ "defeito a 0,3"
+
 #~ msgid "End of game"
 #~ msgstr "Fim da partida"
+
 #~ msgid "Authors"
 #~ msgstr "Autores"
 
 #, fuzzy
 #~ msgid "Info"
 #~ msgstr "Infos"
+
 #~ msgid "Ok"
 #~ msgstr "Ok"
-

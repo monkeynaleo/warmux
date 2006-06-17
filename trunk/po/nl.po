@@ -14,31 +14,26 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"POT-Creation-Date: \n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146
-#: src/game/game.cpp:186
+#: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:144
-#: src/game/game.cpp:184
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:145
-#: src/game/game.cpp:185
+#: src/game/game.cpp:145 src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:143
-#: src/game/game.cpp:183
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
@@ -162,10 +157,10 @@ msgstr "(onbegrensd)"
 
 #: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr "Om <infinite_background> goed te laten werken moet <is_open> ingesteld zijn!!"
+msgstr ""
+"Om <infinite_background> goed te laten werken moet <is_open> ingesteld zijn!!"
 
-#: src/object/bonus_box.cpp:167
-#: src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Luchtaanval"
 
@@ -177,8 +172,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Auteurs:"
 
-#: src/object/bonus_box.cpp:176
-#: src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Automatische bazooka"
 
@@ -186,7 +180,7 @@ msgstr "Automatische bazooka"
 msgid "Baseball"
 msgstr "Honkbalknuppel"
 
-#: src/weapon/bazooka.cpp:63
+#: src/weapon/bazooka.cpp:66
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -194,14 +188,12 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "C++ uitzondering gevangen:"
 
-#: src/team/teams_list.cpp:425
-#: src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan team %s niet vinden!"
 
-#: src/team/teams_list.cpp:122
-#: src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan teams directory niet openen (%s)!"
@@ -242,8 +234,7 @@ msgstr "Duur van een beurt:"
 msgid "Duration of the end of a turn:"
 msgstr "Duur van einde van een beurt:"
 
-#: src/object/bonus_box.cpp:195
-#: src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamiet"
 
@@ -278,7 +269,8 @@ msgstr "Fout bij het laden van team %s:"
 
 #: src/game/config.cpp:254
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 
 #: src/game/config.cpp:123
@@ -361,13 +353,12 @@ msgstr "Initialiseer data"
 msgid "Initialise objects"
 msgstr "Initialiseer teams"
 
-#: src/game/game_loop.cpp:93
-#: src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Initialiseer teams"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+msgid "Is it a gift?"
 msgstr ""
 
 #: src/map/maps_list.cpp:207
@@ -477,12 +468,11 @@ msgstr "Voorraad:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:140
-#: src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportatie"
 
-#: src/weapon/auto_bazooka.cpp:99
+#: src/weapon/auto_bazooka.cpp:103
 msgid "The automatic rocket has left the battlefield..."
 msgstr "De automatische raket heeft het slagveld verlaten..."
 
@@ -491,8 +481,7 @@ msgstr "De automatische raket heeft het slagveld verlaten..."
 msgid "The game has ended as a draw.\n"
 msgstr "Het spel eindigde in een gelijkspel."
 
-#: src/weapon/bazooka.cpp:53
-#: src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "De raket heeft het slagveld verlaten..."
 
@@ -501,14 +490,12 @@ msgstr "De raket heeft het slagveld verlaten..."
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:219
-#: src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kon kaarten directory niet openen (%s)!"
 
-#: src/team/skin.cpp:334
-#: src/team/skin.cpp:350
+#: src/team/skin.cpp:334 src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Kon skins directory niet openen (%s)!"
@@ -553,7 +540,9 @@ msgstr "U heeft minimaal één geldige kaart nodig !"
 
 #: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr "U heeft minimaal twee teams nodig om te spelen: verander dit in 'Opties menu' !"
+msgstr ""
+"U heeft minimaal twee teams nodig om te spelen: verander dit in 'Opties "
+"menu' !"
 
 #: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
@@ -569,54 +558,74 @@ msgstr ""
 
 #~ msgid "Load map"
 #~ msgstr "Laad kaart"
+
 #~ msgid "Unknow action"
 #~ msgstr "Onbekende actie"
+
 #~ msgid "Wait for clients"
 #~ msgstr "Wacht op clients"
+
 #~ msgid "Wait for map"
 #~ msgstr "Wacht op kaart"
+
 #~ msgid "Wait for server"
 #~ msgstr "Wacht op server"
+
 #~ msgid "Wait for server informations"
 #~ msgstr "Wacht op server informatie"
+
 #~ msgid "Wait teams"
 #~ msgstr "Wacht teams"
+
 #~ msgid "Pause"
 #~ msgstr "Pauze"
+
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr "Waarschuwing! Gewicht van wind deeltjes te laag ! Standaard is 0.3"
+
 #~ msgid "Authors"
 #~ msgstr "Auteurs"
+
 #~ msgid "End of game"
 #~ msgstr "Einde van het spel"
+
 #~ msgid "Info"
 #~ msgstr "Info"
+
 #~ msgid "Ok"
 #~ msgstr "Ok"
 
 #, fuzzy
 #~ msgid "Load game data..."
 #~ msgstr "Spel gegevens laden ..."
+
 #~ msgid "ClanLib error :"
 #~ msgstr "ClanLib fout :"
+
 #~ msgid "Sound error :"
 #~ msgstr "Fout met het geluid :"
 
 #, fuzzy
 #~ msgid "Use sound?"
 #~ msgstr "Gebruik geluid"
+
 #~ msgid "%s is stupidly dead because he gone out of the map ..."
 #~ msgstr "%s is stom dood gegaan, omdat hij van het terrein afging ..."
+
 #~ msgid "Dead of %s (%s)."
 #~ msgstr "Dood van %s (%s)."
+
 #~ msgid "Drawn game :-("
 #~ msgstr "Gelijkspel :-("
+
 #~ msgid "Init data"
 #~ msgstr "Initialiseren van gegevens"
+
 #~ msgid "PAUSE"
 #~ msgstr "Pause"
+
 #~ msgid "Thank you to deliver your opinion by following email :"
 #~ msgstr "Gelieve uw mening naar het volgende e-mailadres te sturen :"
+
 #~ msgid "=== Loading ==="
 #~ msgstr "=== Laden ==="
-
