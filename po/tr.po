@@ -353,7 +353,8 @@ msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+#, fuzzy
+msgid "Is it a gift?"
 msgstr "Bu bir hediye mi?"
 
 #: src/map/maps_list.cpp:207

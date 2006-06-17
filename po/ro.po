@@ -13,33 +13,29 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1))\n"
+"Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1))\n"
 "X-Generator: KBabel 1.11.2\n"
-"POT-Creation-Date: \n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146
-#: src/game/game.cpp:186
+#: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr "  Cel mai mare trădător :  %s (%i).\n"
 
-#: src/game/game.cpp:144
-#: src/game/game.cpp:184
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr "  Cel mai folositor     :  %s (%i).\n"
 
-#: src/game/game.cpp:145
-#: src/game/game.cpp:185
+#: src/game/game.cpp:145 src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr "  Cel mai inutil        :  %s (%i).\n"
 
-#: src/game/game.cpp:143
-#: src/game/game.cpp:183
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr "  Cel mai violent       :  %s (%i).\n"
@@ -171,10 +167,11 @@ msgstr "(infinit)"
 
 #: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr "<infinite_background> are nevoie ca <is_open> să fie activ pentru a funcţiona corect!!"
+msgstr ""
+"<infinite_background> are nevoie ca <is_open> să fie activ pentru a "
+"funcţiona corect!!"
 
-#: src/object/bonus_box.cpp:167
-#: src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Atac aerian"
 
@@ -186,8 +183,7 @@ msgstr "Rezultate generale:\n"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/object/bonus_box.cpp:176
-#: src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Rachetă automată"
 
@@ -195,7 +191,7 @@ msgstr "Rachetă automată"
 msgid "Baseball"
 msgstr "Bâtă de basebal"
 
-#: src/weapon/bazooka.cpp:63
+#: src/weapon/bazooka.cpp:66
 msgid "Bazooka"
 msgstr "Proiectil reactiv"
 
@@ -203,14 +199,12 @@ msgstr "Proiectil reactiv"
 msgid "C++ exception caught:"
 msgstr "O excepţie C++ a fost captată:"
 
-#: src/team/teams_list.cpp:425
-#: src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
 
-#: src/team/teams_list.cpp:122
-#: src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
@@ -251,8 +245,7 @@ msgstr "Durata unei ture:"
 msgid "Duration of the end of a turn:"
 msgstr "Durata sfârşitului de tură:"
 
-#: src/object/bonus_box.cpp:195
-#: src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamită"
 
@@ -286,8 +279,11 @@ msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
 #: src/game/config.cpp:254
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Eroare în timpul creări directorului „%s”: fişierul de configurare nu poate fi stocat."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
+msgstr ""
+"Eroare în timpul creări directorului „%s”: fişierul de configurare nu poate "
+"fi stocat."
 
 #: src/game/config.cpp:123
 #, c-format
@@ -366,13 +362,13 @@ msgstr "Iniţializare date"
 msgid "Initialise objects"
 msgstr "Iniţializare obiecte"
 
-#: src/game/game_loop.cpp:93
-#: src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Iniţializare echipe"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+#, fuzzy
+msgid "Is it a gift?"
 msgstr "Oare e un cadou?"
 
 #: src/map/maps_list.cpp:207
@@ -435,7 +431,8 @@ msgstr "Porneşte jocul"
 
 #: src/main.cpp:188
 msgid "Please tell us your opinion of Wormux via email:"
-msgstr "Vă rugăm să ne spuneţi părerea dvs. despre Wormux prin poştă electronică:"
+msgstr ""
+"Vă rugăm să ne spuneţi părerea dvs. despre Wormux prin poştă electronică:"
 
 #: src/menu/main_menu.cpp:160
 msgid "Quit"
@@ -482,12 +479,11 @@ msgstr "Stoc:"
 msgid "Team %s results:\n"
 msgstr "Rezultatele echipei %s:\n"
 
-#: src/object/bonus_box.cpp:140
-#: src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportare"
 
-#: src/weapon/auto_bazooka.cpp:99
+#: src/weapon/auto_bazooka.cpp:103
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Racheta automată a părăsit câmpul de luptă..."
 
@@ -495,8 +491,7 @@ msgstr "Racheta automată a părăsit câmpul de luptă..."
 msgid "The game has ended as a draw.\n"
 msgstr "Jocul s-a terminat cu scor egal.\n"
 
-#: src/weapon/bazooka.cpp:53
-#: src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Racheta a părăsit câmpul de luptă..."
 
@@ -505,14 +500,12 @@ msgstr "Racheta a părăsit câmpul de luptă..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
 
-#: src/map/maps_list.cpp:219
-#: src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
 
-#: src/team/skin.cpp:334
-#: src/team/skin.cpp:350
+#: src/team/skin.cpp:334 src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu aspecte (%s)!"
@@ -557,7 +550,9 @@ msgstr "Aveţi nevoie de cel puţin o hartă validă !"
 
 #: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr "Aveţi nevoie de cel puţin două echipe ca să jucaţi: schimbaţi acest lucru în meniul 'Opţiuni' !"
+msgstr ""
+"Aveţi nevoie de cel puţin două echipe ca să jucaţi: schimbaţi acest lucru în "
+"meniul 'Opţiuni' !"
 
 #: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
@@ -573,21 +568,28 @@ msgstr "finalizat"
 
 #~ msgid "Load map"
 #~ msgstr "Încărcare hartă"
+
 #~ msgid "Unknow action"
 #~ msgstr "Acţiune necunoscută"
+
 #~ msgid "Wait for clients"
 #~ msgstr "Se aşteaptă clienţii"
+
 #~ msgid "Wait for map"
 #~ msgstr "Se aşteaptă harta"
+
 #~ msgid "Wait for server"
 #~ msgstr "Se aşteaptă serverul"
+
 #~ msgid "Wait for server informations"
 #~ msgstr "Se aşteaptă informaţiile serverului"
+
 #~ msgid "Wait teams"
 #~ msgstr "Se aşteaptă echipele"
+
 #~ msgid "Pause"
 #~ msgstr "Pauză"
+
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr ""
 #~ "Atenţie! particulele de vânt au masa prea mică! Implicit ajustată la 0.3"
-

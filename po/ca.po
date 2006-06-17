@@ -13,32 +13,27 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: \n"
 "X-Poedit-Language: Catalan\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/game/game.cpp:146
-#: src/game/game.cpp:186
+#: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:144
-#: src/game/game.cpp:184
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:145
-#: src/game/game.cpp:185
+#: src/game/game.cpp:145 src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:143
-#: src/game/game.cpp:183
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
@@ -164,8 +159,7 @@ msgstr "(ilimitat)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:167
-#: src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Atac aeri"
 
@@ -177,8 +171,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autors:"
 
-#: src/object/bonus_box.cpp:176
-#: src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Bazooka automatic"
 
@@ -186,7 +179,7 @@ msgstr "Bazooka automatic"
 msgid "Baseball"
 msgstr "Baseball"
 
-#: src/weapon/bazooka.cpp:63
+#: src/weapon/bazooka.cpp:66
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -194,14 +187,12 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Excepció C++ interceptada :"
 
-#: src/team/teams_list.cpp:425
-#: src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
 
-#: src/team/teams_list.cpp:122
-#: src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
@@ -242,8 +233,7 @@ msgstr "Duració del torn:"
 msgid "Duration of the end of a turn:"
 msgstr "Duracio del temps despres del torn:"
 
-#: src/object/bonus_box.cpp:195
-#: src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamita"
 
@@ -277,7 +267,8 @@ msgstr ""
 
 #: src/game/config.cpp:254
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 
 #: src/game/config.cpp:123
@@ -357,13 +348,12 @@ msgstr "Inicialització de les dades"
 msgid "Initialise objects"
 msgstr "Inicialització de les dades"
 
-#: src/game/game_loop.cpp:93
-#: src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Inicialització de les dades"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+msgid "Is it a gift?"
 msgstr ""
 
 #: src/map/maps_list.cpp:207
@@ -473,12 +463,11 @@ msgstr "Stock :"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:140
-#: src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teletransportació"
 
-#: src/weapon/auto_bazooka.cpp:99
+#: src/weapon/auto_bazooka.cpp:103
 msgid "The automatic rocket has left the battlefield..."
 msgstr "El cohet automatic ha anat a un altre món..."
 
@@ -486,8 +475,7 @@ msgstr "El cohet automatic ha anat a un altre món..."
 msgid "The game has ended as a draw.\n"
 msgstr "El joc ha acabat en empat.\n"
 
-#: src/weapon/bazooka.cpp:53
-#: src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "El cohet ha anat a un altre mon..."
 
@@ -496,14 +484,12 @@ msgstr "El cohet ha anat a un altre mon..."
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:219
-#: src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
-#: src/team/skin.cpp:334
-#: src/team/skin.cpp:350
+#: src/team/skin.cpp:334 src/team/skin.cpp:350
 #, fuzzy, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Imposible obrir el directori dels skins (%s) !"
@@ -548,7 +534,8 @@ msgstr "Tu necesites almenys un mapa vàlid!"
 
 #: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr "Necesites almenys dos equips per jugar, canvia això en 'Opcions del menú'!"
+msgstr ""
+"Necesites almenys dos equips per jugar, canvia això en 'Opcions del menú'!"
 
 #: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
@@ -565,36 +552,47 @@ msgstr ""
 #, fuzzy
 #~ msgid "Load map"
 #~ msgstr "Carrega el mapa %s"
+
 #~ msgid "Pause"
 #~ msgstr "Pausa"
+
 #~ msgid "End of game"
 #~ msgstr "Final de la partida"
 
 #, fuzzy
 #~ msgid "Authors"
 #~ msgstr "Autors:"
+
 #~ msgid "Info"
 #~ msgstr "Informació"
+
 #~ msgid "ClanLib error during loading map '%s' :"
 #~ msgstr "ClanLib error durant la carrega del mapa '%s' :"
+
 #~ msgid "Load game data..."
 #~ msgstr "Carregant les dades del joc ..."
+
 #~ msgid "ClanLib error :"
 #~ msgstr "Error ClanLib :"
+
 #~ msgid "File \"%s\" does not exist !"
 #~ msgstr "Arxiu \"%s\" no existeix !"
+
 #~ msgid ""
 #~ "SDL option changed:\n"
 #~ "You have to restart Wormux to apply the new settings."
 #~ msgstr ""
 #~ "La opció SDL ha canviat:\n"
 #~ "Ha de reiniciar de nou Wormux per aplicar els nous ajustos."
+
 #~ msgid "Sound error :"
 #~ msgstr "Error de so :"
+
 #~ msgid "Use SDL?"
 #~ msgstr "Utilitza SDL?"
+
 #~ msgid "Use sound?"
 #~ msgstr "Utilitza so?"
+
 #~ msgid "Load weapon %s"
 #~ msgstr "Carregant l'arma %s"
-

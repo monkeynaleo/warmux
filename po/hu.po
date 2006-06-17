@@ -14,31 +14,26 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"POT-Creation-Date: \n"
 "X-Poedit-Language: Hungarian\n"
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146
-#: src/game/game.cpp:186
+#: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:144
-#: src/game/game.cpp:184
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:145
-#: src/game/game.cpp:185
+#: src/game/game.cpp:145 src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:143
-#: src/game/game.cpp:183
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
@@ -164,8 +159,7 @@ msgstr "(korlátlan)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:167
-#: src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Légitámadás"
 
@@ -177,8 +171,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Szerzők:"
 
-#: src/object/bonus_box.cpp:176
-#: src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Automatikus tűzelésű rakétavető"
 
@@ -186,7 +179,7 @@ msgstr "Automatikus tűzelésű rakétavető"
 msgid "Baseball"
 msgstr "Baseball"
 
-#: src/weapon/bazooka.cpp:63
+#: src/weapon/bazooka.cpp:66
 msgid "Bazooka"
 msgstr "Rakétavető"
 
@@ -194,14 +187,12 @@ msgstr "Rakétavető"
 msgid "C++ exception caught:"
 msgstr "Elfogtam egy C++ kivételt:"
 
-#: src/team/teams_list.cpp:425
-#: src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
 
-#: src/team/teams_list.cpp:122
-#: src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
@@ -242,8 +233,7 @@ msgstr "Egy forduló ideje:"
 msgid "Duration of the end of a turn:"
 msgstr "Egy forduló ideje:"
 
-#: src/object/bonus_box.cpp:195
-#: src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamit"
 
@@ -278,7 +268,8 @@ msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
 #: src/game/config.cpp:254
 #, fuzzy, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
 #: src/game/config.cpp:123
@@ -363,14 +354,13 @@ msgstr "Felkészülés"
 msgid "Initialise objects"
 msgstr "Felkészülés"
 
-#: src/game/game_loop.cpp:93
-#: src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 #, fuzzy
 msgid "Initialise teams"
 msgstr "Felkészülés"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+msgid "Is it a gift?"
 msgstr ""
 
 #: src/map/maps_list.cpp:207
@@ -486,12 +476,11 @@ msgstr "Raktár"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:140
-#: src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleport"
 
-#: src/weapon/auto_bazooka.cpp:99
+#: src/weapon/auto_bazooka.cpp:103
 msgid "The automatic rocket has left the battlefield..."
 msgstr ""
 
@@ -499,8 +488,7 @@ msgstr ""
 msgid "The game has ended as a draw.\n"
 msgstr ""
 
-#: src/weapon/bazooka.cpp:53
-#: src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr ""
 
@@ -509,14 +497,12 @@ msgstr ""
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:219
-#: src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
 #, fuzzy, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
 
-#: src/team/skin.cpp:334
-#: src/team/skin.cpp:350
+#: src/team/skin.cpp:334 src/team/skin.cpp:350
 #, fuzzy, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
@@ -562,7 +548,9 @@ msgstr "Legalább egy térképpel rendelkezned kell!"
 
 #: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr "Legalalább két csapatot kell verbuválnod a játékhoz! Ezt a Beállítások menüpont alatt teheted meg!"
+msgstr ""
+"Legalalább két csapatot kell verbuválnod a játékhoz! Ezt a Beállítások "
+"menüpont alatt teheted meg!"
 
 #: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
@@ -579,34 +567,44 @@ msgstr ""
 #, fuzzy
 #~ msgid "Load map"
 #~ msgstr "%s térkép betöltése"
+
 #~ msgid "Pause"
 #~ msgstr "Szünet"
+
 #~ msgid "End of game"
 #~ msgstr "Vége!"
 
 #, fuzzy
 #~ msgid "Authors"
 #~ msgstr "Szerzők:"
+
 #~ msgid "Info"
 #~ msgstr "Információ"
+
 #~ msgid "ClanLib error during loading map '%s' :"
 #~ msgstr "ClanLib hiba lépett fel a pálya (%s) betöltése közben:"
+
 #~ msgid "Load game data..."
 #~ msgstr "Adatok betöltése..."
+
 #~ msgid "ClanLib error :"
 #~ msgstr "ClanLib hiba:"
+
 #~ msgid "File \"%s\" does not exist !"
 #~ msgstr "%s fájl nem létezik!"
+
 #~ msgid ""
 #~ "SDL option changed:\n"
 #~ "You have to restart Wormux to apply the new settings."
 #~ msgstr ""
 #~ "Megváltoztak az SDL beállítások:\n"
 #~ "Újra kell indítanod a Wormuxot a beállítások érvényesítéséhez!"
+
 #~ msgid "Sound error :"
 #~ msgstr "Hanghiba:"
+
 #~ msgid "Use sound?"
 #~ msgstr "Hang bekapcsolása"
+
 #~ msgid "Load weapon %s"
 #~ msgstr "%s fegyver betöltése"
-

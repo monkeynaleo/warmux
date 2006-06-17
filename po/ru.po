@@ -15,32 +15,28 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.10.2\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"POT-Creation-Date: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
+"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146
-#: src/game/game.cpp:186
+#: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:144
-#: src/game/game.cpp:184
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:145
-#: src/game/game.cpp:185
+#: src/game/game.cpp:145 src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr ""
 
-#: src/game/game.cpp:143
-#: src/game/game.cpp:183
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr ""
@@ -171,10 +167,11 @@ msgstr "(бесконечно)"
 
 #: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr "Для нормальной работы <infinite_background> нужно указать значение <is_open>!!"
+msgstr ""
+"Для нормальной работы <infinite_background> нужно указать значение "
+"<is_open>!!"
 
-#: src/object/bonus_box.cpp:167
-#: src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Воздушная атака"
 
@@ -186,8 +183,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: src/object/bonus_box.cpp:176
-#: src/weapon/auto_bazooka.cpp:116
+#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Автоматическая базука"
 
@@ -195,7 +191,7 @@ msgstr "Автоматическая базука"
 msgid "Baseball"
 msgstr "Бейсбол"
 
-#: src/weapon/bazooka.cpp:63
+#: src/weapon/bazooka.cpp:66
 msgid "Bazooka"
 msgstr "Базука"
 
@@ -203,14 +199,12 @@ msgstr "Базука"
 msgid "C++ exception caught:"
 msgstr "Исключительная ситуация C++:"
 
-#: src/team/teams_list.cpp:425
-#: src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не удаётся найти команду %s!"
 
-#: src/team/teams_list.cpp:122
-#: src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не удаётся открыть каталог команд (%s)!"
@@ -251,8 +245,7 @@ msgstr "Длительность шага:"
 msgid "Duration of the end of a turn:"
 msgstr "Длительность завершения шага:"
 
-#: src/object/bonus_box.cpp:195
-#: src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Динамит"
 
@@ -287,7 +280,8 @@ msgstr "Ошибка при загрузке команды %s:"
 
 #: src/game/config.cpp:254
 #, fuzzy, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
 #: src/game/config.cpp:123
@@ -370,13 +364,12 @@ msgstr "Инициализация данных"
 msgid "Initialise objects"
 msgstr "Инициализация команд"
 
-#: src/game/game_loop.cpp:93
-#: src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
 #: src/object/bonus_box.cpp:241
-msgid "Is it a gift ?"
+msgid "Is it a gift?"
 msgstr ""
 
 #: src/map/maps_list.cpp:207
@@ -486,12 +479,11 @@ msgstr "Боеприпасов:"
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/object/bonus_box.cpp:140
-#: src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Телепортация"
 
-#: src/weapon/auto_bazooka.cpp:99
+#: src/weapon/auto_bazooka.cpp:103
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Автоматическая ракета улетела за пределы поля битвы..."
 
@@ -500,8 +492,7 @@ msgstr "Автоматическая ракета улетела за преде
 msgid "The game has ended as a draw.\n"
 msgstr "Игра окончилась вничью"
 
-#: src/weapon/bazooka.cpp:53
-#: src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
 
@@ -510,14 +501,12 @@ msgstr "Ракета улетела за пределы поля битвы..."
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:219
-#: src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
 
-#: src/team/skin.cpp:334
-#: src/team/skin.cpp:350
+#: src/team/skin.cpp:334 src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Невозможно открыть каталог с темами (%s)!"
@@ -562,7 +551,9 @@ msgstr "Вам нужна хотя бы одна карта!"
 
 #: src/game/game_loop.cpp:221
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr "Для игры нужно иметь хотя бы две команды: зайдите для этого в меню \"Настройки\"!"
+msgstr ""
+"Для игры нужно иметь хотя бы две команды: зайдите для этого в меню "
+"\"Настройки\"!"
 
 #: src/team/teams_list.cpp:157
 msgid "You need at least two valid teams !"
@@ -578,30 +569,41 @@ msgstr ""
 
 #~ msgid "Load map"
 #~ msgstr "Загрузка карты"
+
 #~ msgid "Unknow action"
 #~ msgstr "Неизвестное действие"
+
 #~ msgid "Wait for clients"
 #~ msgstr "Ожидание клиентов"
+
 #~ msgid "Wait for map"
 #~ msgstr "Ожидание карты"
+
 #~ msgid "Wait for server"
 #~ msgstr "Ожидание сервера"
+
 #~ msgid "Wait for server informations"
 #~ msgstr "Ожидание данных от сервера"
+
 #~ msgid "Wait teams"
 #~ msgstr "Ожидание команд"
+
 #~ msgid "Pause"
 #~ msgstr "Пауза"
+
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr ""
 #~ "Внимание! Масса носимых ветром слишком мала! Установите исходное значение "
 #~ "0.3"
+
 #~ msgid "End of game"
 #~ msgstr "Конец игры"
+
 #~ msgid "Authors"
 #~ msgstr "Авторы"
+
 #~ msgid "Info"
 #~ msgstr "Информация"
+
 #~ msgid "Ok"
 #~ msgstr "ОК"
-
