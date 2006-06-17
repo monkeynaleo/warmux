@@ -36,8 +36,10 @@
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
+#include "../menu/results_menu.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
+#include "../team/results.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/resource_manager.h"
@@ -85,120 +87,30 @@ void Game::MessageLoading()
 
 void Game::MessageEndOfGame()
 {
-  const char *Nobody                    = _("Nobody");
-  const char *winner_name               = NULL;
-  int         value_all_most_violent    = 0;
-  const char *name_all_most_violent     = Nobody;
-  int         value_all_most_useless    = 0x0FFFFFFF;
-  const char *name_all_most_useless     = Nobody;
-  int         value_all_most_usefull    = 0;
-  const char *name_all_most_usefull     = Nobody;
-  int         value_all_most_traitor    = 0;
-  const char *name_all_most_traitor     = Nobody;
+  std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
+  const char *winner_name = NULL;
 
-  std::string txt("");
-
-  FOR_EACH_TEAM(equipe)
+  FOR_EACH_TEAM(team)
   {
-    int         value_team_most_violent = 0;
-    const char *name_team_most_violent  = Nobody;
-    int         value_team_most_useless = 0x0FFFFFFF;
-    const char *name_team_most_useless  = Nobody;
-    int         value_team_most_usefull = 0;
-    const char *name_team_most_usefull  = Nobody;
-    int         value_team_most_traitor = 0;
-    const char *name_team_most_traitor  = Nobody;
-
-    // Search best/worst performers
-    FOR_EACH_CHARACTER(*(equipe), ver)
-    {
-      // Most damage in one shot
-      if (ver->GetMostDamage() > value_team_most_violent)
-      {
-        value_team_most_violent = ver->GetMostDamage();
-        name_team_most_violent  = ver->GetName().c_str();
-      }
-      // Most damage overall to other teams
-      if (ver->GetOtherDamage() > value_team_most_usefull)
-      {
-        value_team_most_usefull = ver->GetOtherDamage();
-        name_team_most_usefull  = ver->GetName().c_str();
-      }
-      // Least damage overall to other teams
-      if (ver->GetOtherDamage() < value_team_most_useless)
-      {
-        value_team_most_useless = ver->GetOtherDamage();
-        name_team_most_useless  = ver->GetName().c_str();
-      }
-      // Most damage overall to his own team
-      if (ver->GetOwnDamage() > value_team_most_traitor)
-      {
-        value_team_most_traitor = ver->GetOwnDamage();
-        name_team_most_traitor  = ver->GetName().c_str();
-      }
-    }
-
-    // Print out results
-    txt += Format(_("Team %s results:\n"), (**equipe).GetName().c_str());
-    txt += Format(_("  Most violent  :  %s (%i).\n"), name_team_most_violent, value_team_most_violent);
-    txt += Format(_("  Most usefull  :  %s (%i).\n"), name_team_most_usefull, value_team_most_usefull);
-    txt += Format(_("  Most useless  :  %s (%i).\n"), name_team_most_useless, value_team_most_useless);
-    txt += Format(_("  Most sold-out :  %s (%i).\n"), name_team_most_traitor, value_team_most_traitor);
-
-    // Set all team best
-    if (value_team_most_violent > value_all_most_violent)
-    {
-      value_all_most_violent = value_team_most_violent;
-      name_all_most_violent = name_team_most_violent;
-    }
-    // Most damage overall to other teams
-    if (value_team_most_usefull > value_all_most_usefull)
-    {
-      value_all_most_usefull = value_team_most_usefull;
-      name_all_most_usefull = name_team_most_usefull;
-    }
-    // Least damage overall to other teams
-    if (value_team_most_useless < value_all_most_useless)
-    {
-      value_all_most_useless = value_team_most_useless;
-      name_all_most_useless = name_team_most_useless;
-    }
-    // Most damage overall to his own team
-    if (value_team_most_traitor > value_all_most_traitor)
-    {
-      value_all_most_traitor = value_team_most_traitor;
-      name_all_most_traitor = name_team_most_traitor;
-    }
-
     // Determine winner
-    if (0 < (**equipe).NbAliveCharacter())
+    if (0 < (**team).NbAliveCharacter())
     {
-      winner_name = (**equipe).GetName().c_str();
+      winner_name = (**team).GetName().c_str();
       break;
     }
   }
- 
+
   // Print out results
-  txt += _("All-Team results:\n");
-  txt += Format(_("  Most violent  :  %s (%i).\n"), name_all_most_violent, value_all_most_violent);
-  txt += Format(_("  Most usefull  :  %s (%i).\n"), name_all_most_usefull, value_all_most_usefull);
-  txt += Format(_("  Most useless  :  %s (%i).\n"), name_all_most_useless, value_all_most_useless);
-  txt += Format(_("  Most sold-out :  %s (%i).\n"), name_all_most_traitor, value_all_most_traitor);
-
-  txt += _("End of the game!\n");
   if (winner_name)
-  {
     jukebox.Play("share","victory");
-    txt += Format(_("%s team has won.\n"), winner_name);
-  }
-  else
-  {
-    txt += _("The game has ended as a draw.\n");
-  }
-  std::cout << txt << std::endl;
 
-  question.Set (txt, true, 0);
-  AskQuestion();
+  //question.Set (txt, true, 0);
+  //AskQuestion();
+  Mouse::GetInstance()->SetPointer(POINTER_STANDARD);
+  ResultsMenu menu(results_list, winner_name);
+  menu.Run();
+
+  TeamResults::deleteAllResults(results_list);
 }
 
 int Game::AskQuestion (bool draw)

@@ -75,6 +75,10 @@ const uint do_nothing_timeout = 5000;
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
+// Empty character
+static const Character* Nobody = NULL;
+
+
 Character::Character (Team& my_team, const std::string &name, 
 		      Skin *pskin) :
   PhysicalObj("character"), m_team(my_team)
@@ -154,6 +158,13 @@ Character::Character (Team& my_team, const std::string &name,
     lost_energy = 0;
   }
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
+}
+
+const Character* Character::getNobody()
+{
+  if (Nobody == NULL)
+    Nobody = new Character();
+  return Nobody;
 }
 
 Character::~Character()
