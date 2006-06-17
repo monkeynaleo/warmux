@@ -60,7 +60,7 @@ void RoquetteRiotBomb::Explosion()
 {
   // Applique les degats et le souffle aux vers
   Point2i pos = GetCenter();
-  ApplyExplosion (pos, cfg, "weapon/riot_bomb_exp", false, ParticleEngine::LittleESmoke);
+  ApplyExplosion (pos, cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
 }
 //-----------------------------------------------------------------------------
 
