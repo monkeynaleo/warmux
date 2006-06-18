@@ -264,7 +264,7 @@ void WeaponProjectile::Explosion()
 void WeaponProjectile::IncrementTimeOut()
 {
 if (cfg.allow_change_timeout)
-  if (GetTotalTimeout()<cfg.timeout*2) 
+  if (GetTotalTimeout()<(int)cfg.timeout*2) 
 	 m_timeout_modifier += 1 ;
 
 }
@@ -280,7 +280,7 @@ if (cfg.allow_change_timeout)
 void WeaponProjectile::SetTimeOut(int timeout)
 {
 if (cfg.allow_change_timeout)
-  if (timeout <= cfg.timeout*2 && timeout >= 1) 
+  if (timeout <= (int)cfg.timeout*2 && timeout >= 1) 
 	 m_timeout_modifier = timeout - cfg.timeout ;
 
 }
@@ -331,7 +331,7 @@ bool WeaponLauncher::p_Shoot ()
   return true;
 }
 
-// Le bazooka explose car il a été poussé à bout !
+// Le bazooka explose car il a ï¿½ï¿½poussï¿½ï¿½bout !
 void WeaponLauncher::DirectExplosion()
 {
   Point2i pos = ActiveCharacter().GetCenter();
