@@ -38,31 +38,6 @@ class Team;
 class Character : public PhysicalObj
 {
 private:
-  //Almost empty character - hoping not initializing m_team
-  //will still be OK
-  Character () 
-      : PhysicalObj("character")
-      , character_name("Nobody")
-      , m_team()
-      , skin_is_walking(false)
-      , is_walking(false)
-      , full_walk(false)
-      , energy(0)
-      , damage_other_team(0)
-      , damage_own_team(0)
-      , max_damage(0)
-      , current_total_damage(0)
-      , survivals(0)
-      , name_text(NULL)
-      , pause_bouge_dg(0)
-      , do_nothing_time(0)
-      , lost_energy(0)
-      , skin(NULL)
-      , walk_skin(NULL)
-      , current_skin("")
-      , image(NULL)
-  {};
-
   std::string character_name;
   Team& m_team;
   bool skin_is_walking; // True if the curent is a walking skin.
@@ -128,16 +103,15 @@ private:
 
 public:
   Character (Team& my_team, const std::string &name, Skin *skin);
-  static const Character* getNobody();
   ~Character();
 
-  // Change le niveau d'énergie
+  // Change le niveau d'ï¿½ergie
   void SetEnergyDelta (int delta, bool do_report=true);
 
   // Changement de direction
   void SetDirection (int direction);
 
-  // Initialise un mouvement à droite ou à gauche
+  // Initialise un mouvement ï¿½droite ou ï¿½gauche
   void InitMouvementDG (uint pause);
   bool CanStillMoveDG (uint pause);
   bool IsWalking () const { return is_walking; };
@@ -163,18 +137,18 @@ public:
   void Hide();
   void Show();
 
-  // Les mouvements droite/gauche sont autorisés ? (pause assez longue ?)
+  // Les mouvements droite/gauche sont autorisï¿½ ? (pause assez longue ?)
   bool MouvementDG_Autorise() const;
   bool CanJump() const;
   void FrameImageSuivante ();
 
-  // Lecture du niveau d'énergie en pourcent
+  // Lecture du niveau d'ï¿½ergie en pourcent
   uint GetEnergy() const;
 
-  // Lecture de la direction d'un (+1 à droite, -1 à gauche)
+  // Lecture de la direction d'un (+1 ï¿½droite, -1 ï¿½gauche)
   int GetDirection() const;
 
-  // Acces à l'équipe d'un ver
+  // Acces ï¿½l'ï¿½uipe d'un ver
   Team& TeamAccess();
   const Team& GetTeam() const;
 
@@ -182,7 +156,7 @@ public:
   const std::string& GetName() const { return character_name; }
   bool IsSameAs(const Character& other) { return (GetName() == other.GetName()); }
 
-  // Accès à l'avatar
+  // Accï¿½ ï¿½l'avatar
   const Skin& GetSkin() const;
   Skin& AccessSkin();
   bool SetSkin(const std::string& skin_name);

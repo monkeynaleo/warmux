@@ -71,13 +71,9 @@ const uint do_nothing_timeout = 5000;
 //#define DEBUG_STATS
 #endif
 
-// Barre d'énergie
+// Barre d'ï¿½ergie
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
-
-// Empty character
-static const Character* Nobody = NULL;
-
 
 Character::Character (Team& my_team, const std::string &name, 
 		      Skin *pskin) :
@@ -158,13 +154,6 @@ Character::Character (Team& my_team, const std::string &name,
     lost_energy = 0;
   }
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
-}
-
-const Character* Character::getNobody()
-{
-  if (Nobody == NULL)
-    Nobody = new Character();
-  return Nobody;
 }
 
 Character::~Character()
@@ -624,7 +613,7 @@ void Character::Refresh()
   // Refresh de l'animation
   if (GetSkin().anim.utilise)
   {
-    // C'est le début d'une animation ?
+    // C'est le dï¿½ut d'une animation ?
     if (!anim.draw && (anim.time < global_time->Read())) 
     {
       anim.image->SetCurrentFrame(0);
@@ -746,7 +735,7 @@ void Character::StartPlaying()
   SetSkin("weapon-" + m_team.GetWeapon().GetID());
 }
 
-// Accès à l'avatar
+// Accï¿½ ï¿½l'avatar
 const Skin& Character::GetSkin() const
 {
   assert (skin != NULL);

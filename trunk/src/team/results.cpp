@@ -19,6 +19,7 @@
  * Results
  *****************************************************************************/
 
+#include <sstream>
 #include "../include/app.h"
 #include "../include/constant.h"
 #include "results.h"
@@ -38,12 +39,7 @@ TeamResults::TeamResults(const char*      name,
   , mostUseless(MUs)
   , biggestTraitor(BT)
 {
-  // I needed a nobody Character :/
-  if (!MV) mostViolent = Character::getNobody();
-  if (!MUl) mostUsefull = Character::getNobody();
-  if (!MUs) mostUseless = Character::getNobody();
-  if (!BT) biggestTraitor = Character::getNobody();
-};
+}
 
 TeamResults* TeamResults::createTeamResults(Team* team)
 {
@@ -114,6 +110,7 @@ TeamResults* TeamResults::createGlobalResults(std::vector<TeamResults*>* list)
     const Character* player;
     // Most damage in one shot
     player = (*(result))->getMostViolent();
+    if(player == NULL) continue;
     if (player->GetMostDamage() > most_violent)
     {
       most_violent = player->GetMostDamage();
@@ -179,20 +176,36 @@ void TeamResults::deleteAllResults(std::vector<TeamResults*>* results_list)
 
 void TeamResults::RenderText(std::string& txt)
 {
+  std::ostringstream mv;
+  std::ostringstream muf;
+  std::ostringstream mul;
+  std::ostringstream bt;
+  if(mostViolent)
+    mv << mostViolent->GetName() << " (" << mostViolent->GetMostDamage() << ").\n";
+  else
+    mv << _("Nobody!");
+
+  if(mostUsefull)
+    mv << mostUsefull->GetName() << " (" << mostUsefull->GetMostDamage() << ").\n";
+  else
+    mv << _("Nobody!");
+
+  if(mostUseless)
+    mv << mostUseless->GetName() << " (" << mostUseless->GetMostDamage() << ").\n";
+  else
+    mv << _("Nobody!");
+
+  if(biggestTraitor)
+    mv << biggestTraitor->GetName() << " (" << biggestTraitor->GetMostDamage() << ").\n";
+  else
+    mv << _("Nobody!");
+
   if (teamName)
     txt += Format(_("Team %s results:\n"), teamName);
   else
     txt += _("All teams results:\n");
-  txt += Format(_("  Most violent  :  %s (%i).\n"),
-                mostViolent->GetName().c_str(),
-                mostViolent->GetMostDamage());
-  txt += Format(_("  Most usefull  :  %s (%i).\n"),
-                mostUsefull->GetName().c_str(),
-                mostUsefull->GetMostDamage());
-  txt += Format(_("  Most useless  :  %s (%i).\n"),
-                mostUseless->GetName().c_str(),
-                mostUseless->GetMostDamage());
-  txt += Format(_("  Most sold-out :  %s (%i).\n"),
-                biggestTraitor->GetName().c_str(),
-                biggestTraitor->GetMostDamage());
+  txt += _("  Most violent  :  ") + mv.str();
+  txt += _("  Most usefull  :  ") + muf.str();
+  txt += _("  Most useless  :  ") + mul.str();
+  txt += _("  Most sold-out  :  ") + bt.str();
 }
