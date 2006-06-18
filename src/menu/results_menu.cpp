@@ -99,7 +99,6 @@ void ResultBox::SetResult(const std::string& name, int score)
   score_lbl->SetText(score_str);
 }
 
-
 ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
                          const char *winner_name)
   : Menu("menu/bg_play")
@@ -241,23 +240,31 @@ void ResultsMenu::SetResult(int i)
 
   //Most violent
   player = res->getMostViolent();
-  assert(player);
-  most_violent->SetResult(player->GetName(), player->GetMostDamage());
+  if(player)
+    most_violent->SetResult(player->GetName(), player->GetMostDamage());
+  else
+    most_violent->SetResult(_("Nobody!"), 0);
 
   //Most usefull
   player = res->getMostUsefull();
-  assert(player);
-  most_usefull->SetResult(player->GetName(), player->GetOtherDamage());
-  
+  if(player)
+    most_usefull->SetResult(player->GetName(), player->GetOtherDamage());
+  else
+    most_usefull->SetResult(_("Nobody!"), 0);
+
   //Most usefull
   player = res->getMostUseless();
-  assert(player);
-  most_useless->SetResult(player->GetName(), player->GetOtherDamage());
+  if(player)
+    most_useless->SetResult(player->GetName(), player->GetOtherDamage());
+  else
+    most_useless->SetResult(_("Nobody!"), 0);
 
   // Biggest sold-out
   player = res->getBiggestTraitor();
-  assert(player);
-  biggest_traitor->SetResult(player->GetName(), player->GetOwnDamage());
+  if(player)
+    biggest_traitor->SetResult(player->GetName(), player->GetOwnDamage());
+  else
+    biggest_traitor->SetResult(_("Nobody!"), 0);
 }
 
 void ResultsMenu::OnClic(const Point2i &mousePosition, int button)
