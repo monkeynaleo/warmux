@@ -7,14 +7,14 @@
 		<country>France</country>
 	</author>
 
-	<surface name="sky" file="desert_bg.jpg" />
-	<surface name="map" file="desert.png" />
-	<surface name="preview" file="desert_preview.jpg" />
+	<surface name="sky" file="sky.png" />
+	<surface name="map" file="background.png" />
+	<surface name="preview" file="preview.jpg" />
 
 
-	<name>Desert</name>
+	<name>Champignon</name>
 	<water>1</water>
-	<nb_mine>7</nb_mine>
+	<nb_mine>10</nb_mine>
 	<is_open>1</is_open>
   <infinite_background>0</infinite_background>
 </resources>
