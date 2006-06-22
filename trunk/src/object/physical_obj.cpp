@@ -546,7 +546,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
     }
   }
 
-  // On cherche un point de contact à gauche de l'objet:
+  // On cherche un point de contact ï¿½gauche de l'objet:
   x1 = GetX()+m_test_left;
   x2 = x1+1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
@@ -560,7 +560,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
     }
   }
 
-  // On cherche un point de contact à droite de l'objet:
+  // On cherche un point de contact ï¿½droite de l'objet:
   x1 = (GetX()+m_width-m_test_right);
   x2 = x1-1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
@@ -613,6 +613,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 
   do
   {
+    bcl++;
     ok = true;
     Ready();
 
@@ -668,7 +669,6 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     }
 
     if (ok && on_top_of_world) SetXY( Point2i(x, y) );
-    bcl++;
   } while (!ok);
 
   MSG_DEBUG("physic.position", "Putted after  %d try", m_name.c_str(), bcl);
