@@ -55,11 +55,17 @@ ObjMine::ObjMine(MineConfig& cfg) :
 
   Ready();
   is_active = true;
+
+  // is it a fake mine ?
+  fake = !(randomSync.GetLong(0, 9));
 }
 
 void ObjMine::SignalCollision() 
 {
-  if (IsGhost()) is_active = false;
+  if (IsGhost()) {
+    is_active = false;
+    lst_objects.RemoveObject (this);
+  }
 }
 
 
@@ -69,11 +75,29 @@ void ObjMine::Explosion ()
 
   Point2i centre = GetCenter();
   ApplyExplosion(centre, cfg);
-  DisableDetection();  
   lst_objects.RemoveObject (this);
 }
 
-void ObjMine::EnableDetection()
+void ObjMine::FakeExplosion()
+{
+  MSG_DEBUG("mine", "Fake explosion");
+
+  jukebox.Play("share", "weapon/mine_fake");
+  ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
+  is_active = false;
+
+  if (animation )//&& !repos)
+  {
+    MSG_DEBUG("mine", "Desactive detection..");
+
+    animation = false;
+    m_ready = true;
+
+    image->SetCurrentFrame(0);
+  }
+}
+
+void ObjMine::StartTimeout()
 {
   if (!animation)
   {
@@ -85,19 +109,6 @@ void ObjMine::EnableDetection()
     MSG_DEBUG("mine", "IsReady() = %d", IsReady());
 
     channel = jukebox.Play("share", "weapon/mine_beep", -1);
-  }
-}
-
-void ObjMine::DisableDetection()
-{
-  if (animation )//&& !repos)
-  {
-    MSG_DEBUG("mine", "Desactive detection..");
-
-    animation = false;
-    m_ready = true;
-
-    image->SetCurrentFrame(0);
   }
 }
 
@@ -125,7 +136,7 @@ void ObjMine::Detection()
       std::string txt = Format(_("%s is next to a mine!"),
 			       ver -> GetName().c_str());
       GameMessages::GetInstance()->Add (txt);
-      EnableDetection();
+      StartTimeout();
       return;
     }
   }
@@ -133,38 +144,36 @@ void ObjMine::Detection()
 
 void ObjMine::Refresh()
 {
+  // the mine is now out of the map
+  // or it's a fake mine that has already exploded!
   if (!is_active)
   {
     jukebox.Stop(channel);
     channel = -1;
     escape_time = 0;
-    Ghost ();
     return;
   }
 
+  // try to detect a character near the mine
   if (!animation) Detection();
 
   if (animation) {
      image->Update();
 
+     // the timeout is finished !!
      if (attente < Time::GetInstance()->ReadSec())
        {
 	 jukebox.Stop(channel);
 	 channel = -1;
 	 
-	 if (randomSync.GetLong(0, 9))
-	   {
-	     Explosion ();
-	   }
+	 if (!fake)
+	   Explosion ();
 	 else
-	   {
-	     jukebox.Play("share", "weapon/mine_fake");
-	     ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
-	     DisableDetection();
-	   }
+	   FakeExplosion();
        }
   }
 }
+
 void ObjMine::Draw()
 {
     image->Draw(GetPosition());
