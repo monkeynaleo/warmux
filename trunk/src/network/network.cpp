@@ -271,7 +271,8 @@ void Network::ReceiveActions()
           received = SDLNet_TCP_Recv(*sock, packet+i, packet_size - i);
           if(received > 0)
             i+=received;
-          if(received < 0) break;
+          if(received < 0)
+            std::cerr << "Malformed packet" << std::endl;
         }
 
         Action* a = make_action((Uint32*)packet);
