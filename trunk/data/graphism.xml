@@ -87,6 +87,13 @@
   <surface name="quit_screen" file="interface/quit.png"/>
 </section>
 
+<section name="loading_screen">
+  <surface name="map_icon" file="menu/img/ico_maps.png"/>
+  <surface name="team_icon" file="menu/img/ico_skins.png"/>
+  <surface name="sound_icon" file="menu/img/ico_sounds.png"/>
+  <surface name="weapon_icon" file="menu/img/ico_weapons.png"/>
+</section>
+
 <section name ="mouse">
   <surface name="pointer_select" file="interface/pointer_select.png"/>
   <surface name="pointer_move" file="interface/pointer_move.png"/>
@@ -98,6 +105,7 @@
   <surface name="pointeur1" file="gfx/pointer.png" />
 
   <sprite name="curseur">
+  
     <image file="gfx/arrow.png" />
   </sprite>
 
