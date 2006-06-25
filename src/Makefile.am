@@ -55,6 +55,7 @@ wormux_SOURCES = \
 	tool/debug.cpp tool/debug.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
+	interface/loading_screen.cpp interface/loading_screen.h \
 	menu/main_menu.cpp menu/main_menu.h \
 	menu/menu.cpp menu/menu.h \
 	menu/network_menu.cpp menu/network_menu.h \

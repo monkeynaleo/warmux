@@ -87,7 +87,7 @@ public:
   // Access to the worms.
   Character& ActiveCharacter();
 
-  void Draw();
+  void DrawEnergy();
   void Refresh();
 
   // Change the weapon.

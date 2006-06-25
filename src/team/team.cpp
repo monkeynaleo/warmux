@@ -357,7 +357,7 @@ void Team::UnloadGamingData()
   characters.clear();
 }
 
-void Team::Draw()
+void Team::DrawEnergy()
 {
   energy.Draw ();
 }

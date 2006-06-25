@@ -37,6 +37,7 @@
 #include "../interface/game_msg.h"
 #include "../interface/interface.h"
 #include "../interface/keyboard.h"
+#include "../interface/loading_screen.h"
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
@@ -185,21 +186,8 @@ void GameLoop::InitData()
 
 void GameLoop::Init ()
 {
-  // Display loading screen
-  Config * config = Config::GetInstance();
-  AppWormux * app = AppWormux::GetInstance();  
-  
-  Sprite * loading_image = new Sprite(Surface((
-			     config->GetDataDir() + PATH_SEPARATOR
-			     + "menu" + PATH_SEPARATOR
-			     + "img" + PATH_SEPARATOR 
-			     + "loading.png").c_str()));
-  loading_image->cache.EnableLastFrameCache();
-  loading_image->ScaleSize(app->video.window.GetWidth(), app->video.window.GetHeight());
-  loading_image->Blit( app->video.window, 0, 0);
-  app->video.Flip();
-
-  delete loading_image;
+  // Display Loading screen
+  LoadingScreen::GetInstance()->DrawBackground();
 
   Game::GetInstance()->MessageLoading();
 
@@ -211,10 +199,13 @@ void GameLoop::Init ()
     CurseurVer::GetInstance()->Init();
     game_initialise = true;
   }
-
+  
+  // Load the map
+  LoadingScreen::GetInstance()->StartLoading(1, "map_icon", _("Maps"));
   InitData();
 
   // Init teams
+  LoadingScreen::GetInstance()->StartLoading(2, "team_icon", _("Teams"));
 
   // Teams' creation
   if (teams_list.playing_list.size() < 2)
@@ -223,9 +214,13 @@ void GameLoop::Init ()
   assert (teams_list.playing_list.size() <= GameMode::GetInstance()->max_teams);
 
   // Initialization of teams' energy
+  LoadingScreen::GetInstance()->StartLoading(3, "weapon_icon", _("Weapons"));
+
   teams_list.InitEnergy();
 
   // Load teams' sound profiles
+  LoadingScreen::GetInstance()->StartLoading(4, "sound_icon", _("Sounds"));
+
   jukebox.LoadXML("default");
   FOR_EACH_TEAM(team) 
     if ( (**team).GetSoundProfile() != "default" )
@@ -342,31 +337,52 @@ void GameLoop::Draw ()
       ver -> Draw();
     }
   }
-
+  
+  StatStart("GameDraw:particles_behind_active_character");
   ParticleEngine::Draw(false);
+  StatStop("GameDraw:particles_behind_active_character");
 
+  StatStart("GameDraw:active_character");
   ActiveCharacter().Draw();
   if (!ActiveCharacter().IsDead() && state != END_TURN) {
         ActiveTeam().crosshair.Draw();
         ActiveTeam().AccessWeapon().Draw();
   }
+  StatStop("GameDraw:active_character");
   StatStop("GameDraw:characters");
 
-  StatStart("GameDraw:other");
+  // Draw objects
+  StatStart("GameDraw:objects");
   lst_objects.Draw();
   ParticleEngine::Draw(true);
+  StatStart("GameDraw:objects");
+
+  // Draw arrow on top of character
+  StatStart("GameDraw:arrow_character");
   CurseurVer::GetInstance()->Draw();
+  StatStop("GameDraw:arrow_character");
 
+  // Draw waters
+  StatStart("GameDraw:water");
   world.DrawWater();
+  StatStop("GameDraw:water");
 
+  // Draw teams energy
+  StatStart("GameDraw::team_energy");
   FOR_EACH_TEAM(team)
-    (**team).Draw();
+    (**team).DrawEnergy();
+  StatStop("GameDraw::team_energy");
 
+  // Draw game messages
+  StatStart("GameDraw::game_messages");
   GameMessages::GetInstance()->Draw();
+  StatStop("GameDraw::game_messages");
 
+  // Draw optionals
+  StatStart("GameDraw:fps_and_map_author_name");
   world.DrawAuthorName();
-
   fps.Draw();
+  StatStop("GameDraw:fps_and_map_author_name");
 
   StatStop("GameDraw:other");
 
@@ -375,17 +391,18 @@ void GameLoop::Draw ()
   Interface::GetInstance()->Draw ();
   StatStop("GameDraw:interface");
 
-  StatStart("GameDraw:end");
-
   // Display wind bar
+  StatStart("GameDraw:wind_bar");
   wind.Draw();
-  StatStop("GameDraw:end");
+  StatStop("GameDraw:wind_bar");
 
   // Add one frame to the fps counter ;-)
   fps.AddOneFrame();
 
   // Draw the mouse pointer
+  StatStart("GameDraw:mouse_pointer");
   Mouse::GetInstance()->Draw();
+  StatStart("GameDraw:mouse_pointer");
 }
 
 void GameLoop::CallDraw()
