@@ -90,6 +90,12 @@ int AppWormux::main (int argc, char **argv){
             options_menu.Run();
             break;
           }
+	case menuCREDITS:
+	  {
+	    CreditsMenu credits_menu;
+	    credits_menu.Run();
+	    break;
+	  }
         case menuQUIT:
           quit = true; 
         default:

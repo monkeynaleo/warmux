@@ -37,7 +37,7 @@ typedef enum
   menuPLAY,
   menuNETWORK,
   menuOPTIONS,
-  menuINFOS,
+  menuCREDITS,
   menuQUIT
 } menu_item;
 

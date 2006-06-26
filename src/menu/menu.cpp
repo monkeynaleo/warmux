@@ -44,7 +44,9 @@ Menu::Menu(char * bg){
 
   b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
   actions_buttons->AddWidget(b_cancel);
-  widgets.AddWidget(actions_buttons);
+  widgets.AddWidget(actions_buttons);  
+
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 Menu::~Menu(){

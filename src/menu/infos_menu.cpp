@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Menu informations.
+ * Credits Menu
  *****************************************************************************/
 
 #include "infos_menu.h"
@@ -24,8 +24,7 @@
 #include <sstream>
 #include <iostream>
 #include "../game/config.h"
-//-----------------------------------------------------------------------------
-MenuInfos menu_infos;
+#include "../include/app.h"
 //-----------------------------------------------------------------------------
 
 class Author
@@ -55,7 +54,7 @@ bool Author::Feed (const xmlpp::Node *node)
 std::string Author::PrettyString(bool with_email)
 {
    std::ostringstream ss;
-   ss << name;
+   ss << "* " << name;
    if (with_email)
    {
      ss << " <" << email << ">";
@@ -73,8 +72,34 @@ std::string Author::PrettyString(bool with_email)
 }
 
 //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
-void MenuInfos::Run()
+CreditsMenu::CreditsMenu()  :
+  Menu("menu/bg_network")
+{  
+  lbox_authors = new ListBox( Rectanglei( 30, 30, 
+					  AppWormux::GetInstance()->video.window.GetWidth()-60,  
+					  AppWormux::GetInstance()->video.window.GetHeight()-60));
+  lbox_authors->always_one_selected = false;
+  PrepareAuthorsList();
+}
+
+CreditsMenu::~CreditsMenu()
+{
+  delete lbox_authors;
+}
+
+void CreditsMenu::__sig_ok() 
+{
+  // Nothing to do
+}
+void CreditsMenu::__sig_cancel()
+{
+  // Nothing to do
+}
+
+
+void CreditsMenu::PrepareAuthorsList()
 {
   std::string filename = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "authors.xml";
   LitDocXml doc;
@@ -103,14 +128,18 @@ void MenuInfos::Run()
         continue;
     }
     if (!LitDocXml::LitAttrString(elem, "title", title)) continue;
+
     std::cout << "=== " << title << " ===" << std::endl;
-    
+
+    lbox_authors->AddItem (false, "=== "+title+" ===", title);
+
     for (; node != end; ++node)
     {
         Author author;
         if (author.Feed(*node))
         {
-          std::cout << "* " << author.PrettyString(false) << std::endl;
+          std::cout << author.PrettyString(false) << std::endl;
+	  lbox_authors->AddItem (false, author.PrettyString(false), author.name);
         }
     }
     std::cout << std::endl;
@@ -118,4 +147,13 @@ void MenuInfos::Run()
 
 }
 
+void CreditsMenu::Draw(const Point2i& mousePosition)
+{
+  lbox_authors->Draw(mousePosition);
+}
+
+void CreditsMenu::OnClic(const Point2i &mousePosition, int button)
+{
+  if (lbox_authors->Clic(mousePosition, button)) return;
+}
 //-----------------------------------------------------------------------------
