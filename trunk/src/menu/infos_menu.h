@@ -16,21 +16,32 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Menu informations.
+ * Credits menu
  *****************************************************************************/
 
-#ifndef MENU_INFOS_H
-#define MENU_INFOS_H
-//-----------------------------------------------------------------------------
-#include "../include/base.h"
-//-----------------------------------------------------------------------------
+#ifndef CREDITS_MENU_H
+#define CREDITS_MENU_H
 
-class MenuInfos
+#include "../include/base.h"
+#include "../graphic/font.h"
+#include "../gui/list_box.h"
+#include "../menu/menu.h"
+
+class CreditsMenu : public Menu
 {
-public:
-  void Run();
+ private:
+  ListBox *lbox_authors;
+  
+  void PrepareAuthorsList();
+  
+  void __sig_ok();
+  void __sig_cancel();   
+
+  void Draw(const Point2i &mousePosition);   
+  void OnClic(const Point2i &mousePosition, int button);
+ public:
+  CreditsMenu(); 
+  ~CreditsMenu();
 };
 
-extern MenuInfos menu_infos;
-//-----------------------------------------------------------------------------
 #endif

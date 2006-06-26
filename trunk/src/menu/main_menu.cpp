@@ -187,7 +187,7 @@ void Main_Menu::onClick(const Point2i &mousePosition, int button)
   else if(b == network) choice = menuNETWORK;
 #endif  
   else if(b == options) choice = menuOPTIONS;
-  else if(b == infos) choice = menuINFOS;
+  else if(b == infos) choice = menuCREDITS;
   else if(b == quit) choice = menuQUIT;
 
   if(b != quit && b != NULL) button_click();
