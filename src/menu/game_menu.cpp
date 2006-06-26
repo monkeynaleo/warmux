@@ -49,7 +49,7 @@ GameMenu::GameMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
 
-  normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   // Center the boxes!
   uint x = 30;
@@ -131,6 +131,8 @@ GameMenu::GameMenu() :
   }
 
   terrain_init = false;
+
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 GameMenu::~GameMenu()
