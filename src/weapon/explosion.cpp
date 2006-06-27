@@ -264,5 +264,4 @@ void ApplyExplosion_server (const Point2i &pos,
 //  network.SendAction(&a);
   Action a_sync_end(ACTION_SYNC_END);
   network.SendAction(&a_sync_end);
-  ActionHandler::GetInstance()->ExecActions();
 }
