@@ -22,7 +22,6 @@
 
 #include "main_menu.h"
 #include <string>
-#include "infos_menu.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/effects.h"
