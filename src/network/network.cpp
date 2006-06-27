@@ -29,7 +29,7 @@
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-const uint packet_max_size = 100;
+const uint packet_max_size = 100; // in bytes
 
 //-----------------------------------------------------------------------------
 Network network;
@@ -224,7 +224,7 @@ void Network::RejectIncoming()
 //-----------------------------------------------------------------------------
 void Network::ReceiveActions()
 {
-  Uint32 packet[packet_max_size];
+  Uint32 packet[packet_max_size / 4];
 
   int received, i;
   char packet_size = 0;
@@ -268,7 +268,7 @@ void Network::ReceiveActions()
         memset(packet,0, packet_max_size);
         while(packet_size != i)
         {
-          received = SDLNet_TCP_Recv(*sock, packet+i, packet_size - i);
+          received = SDLNet_TCP_Recv(*sock, packet+i/4, packet_size - i);
           if(received > 0)
             i+=received;
           if(received < 0)
