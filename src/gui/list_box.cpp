@@ -41,10 +41,10 @@ ListBox::ListBox (const Rectanglei &rect) : Widget(rect){
   Rectanglei buttonRect; 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
-  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 10, GetPositionY()); 
+  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 12, GetPositionY() + 2); 
   buttonRect.SetSize(10, 5); 
   m_up = new Button(buttonRect, res, "menu/up");
-  buttonRect.SetSizeY(GetPositionY() + GetSizeY() - 5);
+  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7);
   m_down = new Button(buttonRect, res, "menu/down");
 
   height_item = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
@@ -156,8 +156,8 @@ void ListBox::Draw(const Point2i &mousePosition){
 
 void ListBox::SetSizePosition(const Rectanglei &rect){
   StdSetSizePosition(rect);
-  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 10, GetPositionY(), 10, 5) );
-  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 10, GetPositionY() + GetSizeY() - 5, 10, 5) );  
+  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 12, GetPositionY()+2, 10, 5) );
+  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7, 10, 5) );  
 
   nb_visible_items_max = GetSizeY()/height_item;
 }
