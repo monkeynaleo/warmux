@@ -237,7 +237,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   }
 
   if (w == bt_add_team) {
-    if (lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
+    if (lbox_all_teams->GetSelectedItem() != -1 && lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
     {
       int index = -1;
       teams_list.FindById(lbox_all_teams->ReadValue(),index)->is_local = true;
@@ -248,7 +248,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   }
   if (w == bt_remove_team) {
     int index = -1;
-    if(teams_list.FindById(lbox_selected_teams->ReadValue(),index)->is_local)
+    if(lbox_selected_teams->GetSelectedItem() != -1 && teams_list.FindById(lbox_selected_teams->ReadValue(),index)->is_local)
     {
       std::string team_id = teams_list.FindById(lbox_selected_teams->ReadValue(),index)->GetId();
       action_handler->NewAction (new ActionString(ACTION_DEL_TEAM, team_id));
