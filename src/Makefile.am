@@ -59,7 +59,7 @@ wormux_SOURCES = \
 	menu/main_menu.cpp menu/main_menu.h \
 	menu/menu.cpp menu/menu.h \
 	menu/network_menu.cpp menu/network_menu.h \
-	menu/infos_menu.cpp menu/infos_menu.h \
+	menu/credits_menu.cpp menu/credits_menu.h \
 	menu/options_menu.cpp menu/options_menu.h \
 	menu/game_menu.cpp menu/game_menu.h \
 	menu/results_menu.cpp menu/results_menu.h \

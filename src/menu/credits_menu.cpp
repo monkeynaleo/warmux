@@ -19,7 +19,7 @@
  * Credits Menu
  *****************************************************************************/
 
-#include "infos_menu.h"
+#include "credits_menu.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include <iostream>
@@ -77,9 +77,10 @@ std::string Author::PrettyString(bool with_email)
 CreditsMenu::CreditsMenu()  :
   Menu("menu/bg_network")
 {  
-  lbox_authors = new ListBox( Rectanglei( 30, 30, 
+  int title_height = AppWormux::GetInstance()->video.window.GetHeight() * 110 / 600;
+  lbox_authors = new ListBox( Rectanglei( 30, title_height, 
 					  AppWormux::GetInstance()->video.window.GetWidth()-60,  
-					  AppWormux::GetInstance()->video.window.GetHeight()-60));
+					  AppWormux::GetInstance()->video.window.GetHeight()-60-title_height));
   lbox_authors->always_one_selected = false;
   PrepareAuthorsList();
 }
