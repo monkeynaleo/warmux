@@ -3,7 +3,7 @@
 
 <section title="Authors of Wormux">
   <author>
-    <name>Lawrence AZZOUG</name>
+    <name>Lawrence Azzoug</name>
     <nickname>lami</nickname>
     <email>lawrenceazzoug AT wanadoo.fr</email>
     <country>France</country>
@@ -11,7 +11,7 @@
   </author>
 
   <author>
-    <name>Laurent DEFERT SIMONNEAU</name>
+    <name>Laurent Defert Simonneau</name>
     <nickname>lodesi</nickname>
     <email>lodesi2 AT yahoo.fr</email>
     <country>France</country>
@@ -19,14 +19,14 @@
   </author>
 
   <author>
-    <name>Jean-Christophe DUBERGA</name>
+    <name>Jean-Christophe Duberga</name>
     <email>jcduberga AT gmx.de</email>
     <country>France/Germany</country>
     <description>Coder.</description>
   </author>
 
   <author>
-    <name>Matthieu FERTRE</name>
+    <name>Matthieu Fertré</name>
     <nickname>gentildemon</nickname>
     <email>matthieu.fertre AT free.fr</email>
     <country>France</country>
@@ -34,21 +34,21 @@
   </author>
 
   <author>
-    <name>Renaud LOTTIAUX</name>
+    <name>Renaud Lottiaux</name>
     <email>renaud.lottiaux AT free.fr</email>
     <country>France</country>
     <description>Coder.</description>
   </author>
 
   <author>
-    <name>Olivier SERRES</name>
+    <name>Olivier Serres</name>
     <email>olivier.serres AT gmail.com</email>
     <country>France</country>
     <description>Coder.</description>
   </author>
 
   <author>
-    <name>Victor STINNER</name>
+    <name>Victor Stinner</name>
     <nickname>haypo</nickname>
     <email>victor.stinner AT haypocalc.com</email>
     <country>France</country>
@@ -101,13 +101,13 @@
   </author>
 
   <author>
-    <name>Nicolas LETAVENIER</name>
+    <name>Nicolas Letavenier</name>
     <email>nicolas.letavenier AT utbm.fr</email>
     <description>Help for English translation of the website.</description>
   </author>
 
   <author>
-    <name>Eduard BERMEJO</name>
+    <name>Eduard Bermejo</name>
     <email>templer AT iespana.es</email>
     <description>Add spain and catalan translation in Wormux.</description>
   </author>
@@ -120,7 +120,7 @@
   </author>
 
   <author>
-    <name>Packo ASSAMITA</name>
+    <name>Packo Assamita</name>
     <email>packo_assamita AT supercable.es</email>
     <description>Translate the whole website in spanish.</description>
   </author>
@@ -157,14 +157,14 @@
   </author>
 
   <author>
-    <name>Victor STINNER</name>
+    <name>Victor Stinner</name>
     <email>victor.stinner AT haypocalc.com</email>
     <country>France</country>
     <description>Very-First esperanto version of Wormux.</description>
   </author>
 
   <author>
-    <name>Bruno PIRES</name>
+    <name>Bruno Pires</name>
     <email>bruno.pires AT utbm.fr</email>
     <country>France</country>
     <description>First portuguese version of Wormux.</description>
@@ -238,7 +238,7 @@
   </author>
 
   <author>
-    <name>Glenn ROLLAND</name>
+    <name>Glenn Rolland</name>
     <nickname>Glenux</nickname>
     <email>glenux AT gmail.com</email>
     <country>France</country>
@@ -258,8 +258,16 @@
     <nickname>yeKcim</nickname>
     <email>yeknan AT yahoo.fr</email>
     <country>France</country>
-    <description>Cute skins "tux", "gnou" and "firefox".</description>
+    <description>Cute skins "tux", "gnou", "firefox", ...</description>
   </author>
+
+  <author>
+    <name>Olivier Boyer</name>
+    <nickname>Zi Olive</nickname>
+    <email>ziolive AT gmail.com</email>
+    <country>France</country>
+    <description>Beautiful images for menus, maps, ...</description>
+  </author>  
 
   <author>
     <name>Dino Ghilardi</name>
@@ -276,7 +284,7 @@
   </author>
 
   <author>
-    <name>Larry COW</name>
+    <name>Larry Cow</name>
     <email>larry AT doubidou.net</email>
     <description>Patch for Linux.</description>
   </author>
@@ -295,14 +303,14 @@
   </author>
 
   <author>
-    <name>Lionel ALLORGE</name>
+    <name>Lionel Allorge</name>
     <email>lallorge AT april.org</email>
     <country>France</country>
     <description>Sounds. See its website: http://www.lunerouge.com/</description>
   </author>
 
   <author>
-    <name>Denis DEVEDJIAN</name>
+    <name>Denis Devedjian</name>
     <email>ddevedjian AT tema.rms.fr</email>
     <country>France</country>
     <description>CSS stylesheet for the website.</description>
@@ -342,21 +350,21 @@
   </author>
 
   <author>
-    <name>Eric HOFFMANN</name>
+    <name>Eric Hoffmann</name>
     <email>eric.hoffmann AT utbm.fr</email>
-    <description>Wrote CPU limiter with Olivier SERRES.</description>
+    <description>Wrote CPU limiter with Olivier Serres.</description>
   </author>
 
   <author>
-    <name>Yann BARB</name>
+    <name>Yann Barb</name>
     <email>yann.barb AT utbm.fr</email>
-    <description>Wrote SuperTux weapon with Colin DIDIER.</description>
+    <description>Wrote SuperTux weapon with Colin Didier.</description>
   </author>
 
   <author>
-    <name>Colin DIDIER</name>
+    <name>Colin Didier</name>
     <email>colin.didier AT utbm.fr</email>
-    <description>Wrote SuperTux weapon with Yann BARB.</description>
+    <description>Wrote SuperTux weapon with Yann Barb.</description>
   </author>
 
   <author>
