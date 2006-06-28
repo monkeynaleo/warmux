@@ -324,6 +324,7 @@ void GroundParticle::Refresh()
 ParticleEngine::ParticleEngine(uint time)
 {
   m_time_between_add = time ;
+  m_last_refresh = Time::GetInstance()->Read();
 }
 
 
