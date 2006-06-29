@@ -1,0 +1,17 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Icon=wormux_128x128.xpm
+Exec=/usr/games/wormux
+Terminal=false
+StartupNotify=false
+
+Name=Wormux
+GenericName=Arcade Game
+Comment=A 2D game where funny characters launch funny weapons
+Comment[fr_FR]=Un jeu en 2D où de drôles de personnages s'étripent joyeusement
+Comment[ro_RO]=Un joc în 2D în care personaje amuzante lansează arme amuzante
+Comment[de]=Ein 2D Spiel mit lustigen Figuren und Waffen
+
+Categories=Application;Game;ArcadeGame
