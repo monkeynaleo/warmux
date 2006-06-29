@@ -212,11 +212,6 @@ msgstr "Dynamit"
 msgid "Energy:"
 msgstr "Energia:"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "Chyba počas načítavania skinu %s:"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -329,10 +324,6 @@ msgstr "Je to dar ?"
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Načítavam mapy:"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr "Načítavam skiny:"
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -459,11 +450,6 @@ msgstr "Nedá sa inicializovať SDL knižnca: %s"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Nedá sa otvoriť adresár skinov (%s)!"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Neočakávaná výnimka zachytená..."
@@ -522,6 +508,15 @@ msgstr "Tvoja strela minula!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "koniec"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Chyba počas načítavania skinu %s:"
+
+#~ msgid "Load skins:"
+#~ msgstr "Načítavam skiny:"
+
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Nedá sa otvoriť adresár skinov (%s)!"
 
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr " Najvypredávanejší :  %s (%i).\n"

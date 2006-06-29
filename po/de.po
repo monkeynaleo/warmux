@@ -214,11 +214,6 @@ msgstr "Dynamit"
 msgid "Energy:"
 msgstr "Energie:"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "Fehler beim Laden des Skins %s:"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -331,10 +326,6 @@ msgstr "Ist das ein Geschenk?"
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Lade Karten:"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr "Lade Skins:"
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -461,11 +452,6 @@ msgstr "Kann SDL Bibliothek nicht initialisieren: %s"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Kann das Skins-Verzeichnis (%s) nicht öffnen!"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Unerwarteter Ausnahmefehler abgefangen..."
@@ -526,6 +512,15 @@ msgstr "Dein Schuss ging daneben!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "fertig"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Fehler beim Laden des Skins %s:"
+
+#~ msgid "Load skins:"
+#~ msgstr "Lade Skins:"
+
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Kann das Skins-Verzeichnis (%s) nicht öffnen!"
 
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr "  Ausverkauftester  :  %s (%i).\n"

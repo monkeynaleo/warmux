@@ -214,11 +214,6 @@ msgstr "Dinamit"
 msgid "Energy:"
 msgstr "Enerji:"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "%s teması yüklenirken hata:"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -328,10 +323,6 @@ msgstr "Bu bir hediye mi?"
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Haritaları yükle:"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr "Temaları yükle:"
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -458,11 +449,6 @@ msgstr "SDL kütüphanesi başlatılamadı: %s"
 msgid "Unable to open maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "(%s) tema dizini açılamadı!"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Beklenmeyen istisna oluştu..."
@@ -523,6 +509,15 @@ msgstr "Iskaladın!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "%s teması yüklenirken hata:"
+
+#~ msgid "Load skins:"
+#~ msgstr "Temaları yükle:"
+
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "(%s) tema dizini açılamadı!"
 
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr "  En fazla tükenen : : %s (%i).\n"

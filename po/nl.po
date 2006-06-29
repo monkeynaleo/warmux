@@ -213,11 +213,6 @@ msgstr "Dynamiet"
 msgid "Energy:"
 msgstr "Energie:"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "Fout bij het laden van skin %s:"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -330,10 +325,6 @@ msgstr "Is het een geschenk ?"
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Kaarten worden geladen:"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr "Skins worden geladen:"
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -460,11 +451,6 @@ msgstr "Kon SDL bibliotheek niet initialiseren: %s"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kon kaarten directory niet openen (%s)!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Kon skins directory niet openen (%s)!"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Onverwachte uitzondering gevangen..."
@@ -525,6 +511,15 @@ msgstr "U schoot mis!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "klaar"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Fout bij het laden van skin %s:"
+
+#~ msgid "Load skins:"
+#~ msgstr "Skins worden geladen:"
+
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Kon skins directory niet openen (%s)!"
 
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr "  Meest uitverkocht :  %s (%i).\n"

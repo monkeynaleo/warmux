@@ -219,13 +219,6 @@ msgstr "Dinamito"
 msgid "Energy:"
 msgstr "Energio"
 
-#: src/team/skin.cpp:146
-#, fuzzy, c-format
-msgid "Error during loading skin %s:"
-msgstr ""
-"Eraro :\n"
-"%s"
-
 #: src/tool/error.cpp:81
 #, fuzzy, c-format
 msgid "Error in %s:%lu"
@@ -356,11 +349,6 @@ msgstr ""
 #, fuzzy
 msgid "Load maps:"
 msgstr "Muntas la terenon %s"
-
-#: src/team/skin.cpp:322
-#, fuzzy
-msgid "Load skins:"
-msgstr "Muntas la avataron %s"
 
 #: src/team/teams_list.cpp:112
 #, fuzzy
@@ -498,11 +486,6 @@ msgstr ""
 msgid "Unable to open maps directory (%s)!"
 msgstr ""
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr ""
-
 #: src/main.cpp:117
 #, fuzzy
 msgid "Unexcepted exception caught..."
@@ -567,6 +550,16 @@ msgstr ""
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Error during loading skin %s:"
+#~ msgstr ""
+#~ "Eraro :\n"
+#~ "%s"
+
+#, fuzzy
+#~ msgid "Load skins:"
+#~ msgstr "Muntas la avataron %s"
 
 #, fuzzy
 #~ msgid "%s team has won.\n"

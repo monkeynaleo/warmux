@@ -212,11 +212,6 @@ msgstr "Dinamit"
 msgid "Energy:"
 msgstr ""
 
-#: src/team/skin.cpp:146
-#, fuzzy, c-format
-msgid "Error during loading skin %s:"
-msgstr "Hiba lépett fel a smink (%s) betöltése közben:"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -333,11 +328,6 @@ msgstr ""
 #, fuzzy
 msgid "Load maps:"
 msgstr "%s térkép betöltése"
-
-#: src/team/skin.cpp:322
-#, fuzzy
-msgid "Load skins:"
-msgstr "%s smink betöltése"
 
 #: src/team/teams_list.cpp:112
 #, fuzzy
@@ -468,11 +458,6 @@ msgstr ""
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, fuzzy, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Elkaptam egy váratlanul fellépett kivételt..."
@@ -534,6 +519,18 @@ msgstr "Ezt elnézted!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Hiba lépett fel a smink (%s) betöltése közben:"
+
+#, fuzzy
+#~ msgid "Load skins:"
+#~ msgstr "%s smink betöltése"
+
+#, fuzzy
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
 
 #, fuzzy
 #~ msgid "%s team has won.\n"
