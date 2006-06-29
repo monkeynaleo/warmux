@@ -265,7 +265,7 @@ void Network::ReceiveActions()
         assert(packet_size > 0);
 
         // Fill the packet while it didn't reached its size
-        memset(packet,0, packet_max_size * 4);
+        memset(packet,0, packet_max_size);
         while(packet_size != i)
         {
           received = SDLNet_TCP_Recv(*sock, packet+i/4, packet_size - i);
