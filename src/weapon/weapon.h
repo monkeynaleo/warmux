@@ -16,10 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classes virtuelles permettant de définir une arme et un projectile. Les
- * armes ont un nom, une image, un état actif/inactif et une icône (affichée
+ * Classes virtuelles permettant de dï¿½inir une arme et un projectile. Les
+ * armes ont un nom, une image, un ï¿½at actif/inactif et une icï¿½e (affichï¿½
  * dans l'interface). Les projectiles sont des objets physiques qui ont un
- * comportement spécial lorsqu'ils entrent en collision ou qu'ils sortent du
+ * comportement spï¿½ial lorsqu'ils entrent en collision ou qu'ils sortent du
  * terrain.
  *****************************************************************************/
 
@@ -38,7 +38,7 @@
 #include "../team/character.h"
 class Character;
 
-// Constante munitions illimitées
+// Constante munitions illimitï¿½s
 extern const int INFINITE_AMMO;
 
 extern const uint BUTTON_ICO_WIDTH;
@@ -161,6 +161,7 @@ public:
   int ReadInitialNbUnit() const;
 
   bool CanBeUsedOnClosedMap() const;
+  bool UseCrossHair() const { return min_angle != max_angle; };
 
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
@@ -169,7 +170,7 @@ public:
   void NewActionShoot() const;
 
   // Tire avec l'arme
-  // Renvoie true si l'arme a pu être enclanchée
+  // Renvoie true si l'arme a pu ï¿½re enclanchï¿½
   bool Shoot(double strength, int angle);
 
   // L'arme est encore active (animation par ex.) ?
@@ -215,7 +216,7 @@ public:
   // return the strength of the weapon
   const double ReadStrength() const;
 
-  // Accès aux données
+  // Accï¿½ aux donnï¿½s
   const std::string& GetName() const;
   const std::string& GetID() const;
   Weapon_type GetType() const;

@@ -59,7 +59,7 @@ NetworkMenu::NetworkMenu() :
   connection_box = new VBox(Rectanglei( 475 + 30 + 5, TEAMS_Y, 800-475-40, 1));
   connection_box->AddWidget(new Label(_("Server adress:"), rectZero, *normal_font));
 
-  server_adress = new TextBox("127.0.0.1", rectZero, *normal_font);
+  server_adress = new TextBox("192.168.0.13", rectZero, *normal_font);
   connection_box->AddWidget(server_adress);
 
   start_client = new ButtonText( Point2i(400,30),

@@ -16,10 +16,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Une équipe de vers.
+ * Une ï¿½uipe de vers.
  *****************************************************************************/
 
 #include "team.h"
+#include "body_list.h"
 #include "../game/game.h"
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
@@ -127,27 +128,27 @@ bool Team::LoadCharacters(uint howmany)
     do
       {
 	xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-	Skin *skin;
+	Body* body;
 	std::string character_name="Soldat Inconnu";
-	std::string skin_name="ver_jaune";
+	std::string body_name="";
 	LitDocXml::LitAttrString(elem, "name", character_name);
-	LitDocXml::LitAttrString(elem, "skin", skin_name);
+	LitDocXml::LitAttrString(elem, "body", body_name);
 
-	if (skins_list.find(skin_name) != skins_list.end()) {
-	  skin = &skins_list[skin_name];
-	} else {
+	if (!(body = body_list.GetBody(body_name)) )
+	{
 	  std::cerr
-	    << Format(_("Error: can't find the skin \"%s\" for the team \"%s\"."),
-		      skin_name.c_str(),
+	    << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
+		      body_name.c_str(),
 		      m_name.c_str())
 	    << std::endl;
 	  return false;
 	}
 
-	// Initialise les variables du ver, puis l'ajoute à la liste
-	Character new_character(*this, character_name, skin);
+	// Initialise les variables du ver, puis l'ajoute ï¿½la liste
+	Character new_character(*this, character_name);
 	characters.push_back(new_character);
 	active_character = characters.begin(); // we need active_character to be initialized here !!
+	characters.back().SetBody(body);
 	characters.back().PutRandomly(false, world.dst_min_entre_vers);
 	characters.back().Ready();
 

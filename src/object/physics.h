@@ -132,6 +132,8 @@ public:
   virtual bool NotifyMove(Point2d oldPos, Point2d newPos, Point2d &contactPos,
 			  double &contact_angle) = 0 ;
 
+  virtual void SignalExplosion() {};
+
   // Start moving
   void StartMoving();
 

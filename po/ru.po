@@ -21,32 +21,12 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/game/game.cpp:146 src/game/game.cpp:186
-#, c-format
-msgid "  Most sold-out :  %s (%i).\n"
-msgstr ""
-
-#: src/game/game.cpp:144 src/game/game.cpp:184
-#, c-format
-msgid "  Most usefull  :  %s (%i).\n"
-msgstr ""
-
-#: src/game/game.cpp:145 src/game/game.cpp:185
-#, c-format
-msgid "  Most useless  :  %s (%i).\n"
-msgstr ""
-
-#: src/game/game.cpp:143 src/game/game.cpp:183
-#, c-format
-msgid "  Most violent  :  %s (%i).\n"
-msgstr ""
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:682
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (команда %s) погибла."
@@ -61,7 +41,7 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:643
+#: src/game/game_loop.cpp:660
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -71,12 +51,12 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:636
+#: src/game/game_loop.cpp:653
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:647
+#: src/game/game_loop.cpp:664
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -97,17 +77,17 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:653
+#: src/game/game_loop.cpp:670
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
 
-#: src/weapon/mine.cpp:125
+#: src/weapon/mine.cpp:136
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
@@ -144,11 +124,6 @@ msgstr[0] "Команда %s выиграла %u телепортацию"
 msgstr[1] "Команда %s выиграла %u телепортации"
 msgstr[2] "Команда %s выиграла %u телепортаций"
 
-#: src/game/game.cpp:192
-#, fuzzy, c-format
-msgid "%s team has won.\n"
-msgstr "Команда %s победила"
-
 #: src/object/bonus_box.cpp:163
 #, fuzzy, c-format
 msgid "'%s has won %u air attack"
@@ -175,11 +150,7 @@ msgstr ""
 msgid "Air attack"
 msgstr "Воздушная атака"
 
-#: src/game/game.cpp:182
-msgid "All-Team results:\n"
-msgstr ""
-
-#: src/main.cpp:194
+#: src/main.cpp:200
 msgid "Authors:"
 msgstr "Авторы:"
 
@@ -195,16 +166,16 @@ msgstr "Бейсбол"
 msgid "Bazooka"
 msgstr "Базука"
 
-#: src/main.cpp:104
+#: src/main.cpp:110
 msgid "C++ exception caught:"
 msgstr "Исключительная ситуация C++:"
 
-#: src/team/teams_list.cpp:425 src/team/teams_list.cpp:464
+#: src/team/teams_list.cpp:427 src/team/teams_list.cpp:466
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не удаётся найти команду %s!"
 
-#: src/team/teams_list.cpp:122 src/team/teams_list.cpp:137
+#: src/team/teams_list.cpp:123 src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не удаётся открыть каталог команд (%s)!"
@@ -217,7 +188,7 @@ msgstr "Кассетная бомба"
 msgid "Commit suicide"
 msgstr "Покончить жизнь самоубийством"
 
-#: src/menu/main_menu.cpp:154
+#: src/menu/main_menu.cpp:153
 msgid "Credits"
 msgstr ""
 
@@ -233,7 +204,7 @@ msgstr "Показать имя игрока?"
 msgid "Display wind particles?"
 msgstr "Показать "
 
-#: src/game/game.cpp:240
+#: src/game/game.cpp:152
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
@@ -249,11 +220,6 @@ msgstr "Длительность завершения шага:"
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/game/game.cpp:188
-#, fuzzy
-msgid "End of the game!\n"
-msgstr "Игра окончена!\n"
-
 #: src/interface/interface.cpp:102
 msgid "Energy:"
 msgstr "Энергия:"
@@ -268,23 +234,23 @@ msgstr "Ошибка при загрузке темы %s:"
 msgid "Error in %s:%lu"
 msgstr "Ошибка в %s:%lu"
 
-#: src/team/team.cpp:93
+#: src/team/team.cpp:94
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/team/team.cpp:168
+#: src/team/team.cpp:169
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/game/config.cpp:254
+#: src/game/config.cpp:251
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/config.cpp:123
+#: src/game/config.cpp:121
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
@@ -294,7 +260,7 @@ msgstr "Ошибка при загрузке режима игры %s (файл 
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/game.cpp:285
+#: src/game/game.cpp:197
 #, c-format
 msgid ""
 "Error:\n"
@@ -304,11 +270,11 @@ msgstr ""
 "%s"
 
 #: src/team/team.cpp:140
-#, c-format
-msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
+#, fuzzy, c-format
+msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
 
-#: src/game/game_loop.cpp:155
+#: src/game/game_loop.cpp:156
 #, fuzzy
 msgid "Find a random position for characters"
 msgstr "Найти для червяков случайное местоположение"
@@ -346,25 +312,25 @@ msgstr "Домашний каталог (переменная окружения
 msgid "Initial energy:"
 msgstr "Энергии в начале:"
 
-#: src/game/game_loop.cpp:209
+#: src/game/game_loop.cpp:197
 msgid "Initialisation"
 msgstr "Инициализация"
 
-#: src/main.cpp:170
+#: src/main.cpp:176
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:100
+#: src/game/game_loop.cpp:101
 msgid "Initialise data"
 msgstr "Инициализация данных"
 
-#: src/game/game_loop.cpp:161
+#: src/game/game_loop.cpp:162
 #, fuzzy
 msgid "Initialise objects"
 msgstr "Инициализация команд"
 
-#: src/game/game_loop.cpp:93 src/game/game_loop.cpp:124
+#: src/game/game_loop.cpp:94 src/game/game_loop.cpp:125
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
@@ -380,7 +346,7 @@ msgstr "Загрузка карт:"
 msgid "Load skins:"
 msgstr "Загрузка тем:"
 
-#: src/team/teams_list.cpp:111
+#: src/team/teams_list.cpp:112
 msgid "Load teams:"
 msgstr "Загрузка команд:"
 
@@ -389,11 +355,15 @@ msgstr "Загрузка команд:"
 msgid "Map %s, a creation of :"
 msgstr "Карту %s создал:"
 
+#: src/game/game_loop.cpp:204
+msgid "Maps"
+msgstr ""
+
 #: src/menu/options_menu.cpp:69
 msgid "Maximum number of FPS:"
 msgstr ""
 
-#: src/weapon/mine.cpp:188
+#: src/weapon/mine.cpp:197
 msgid "Mine"
 msgstr "Мина"
 
@@ -405,40 +375,36 @@ msgstr "Музыка?"
 msgid "Name:"
 msgstr "Имя:"
 
-#: src/menu/main_menu.cpp:139
+#: src/menu/main_menu.cpp:138
 msgid "Network Game"
 msgstr "Игра по сети"
 
-#: src/weapon/weapon.cpp:514
+#: src/weapon/weapon.cpp:513
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
-
-#: src/game/game.cpp:88
-msgid "Nobody"
-msgstr ""
 
 #: src/menu/options_menu.cpp:113
 msgid "Number of players per team:"
 msgstr "Игроков в каждой команде:"
 
-#: src/menu/main_menu.cpp:148
+#: src/menu/main_menu.cpp:147
 msgid "Options"
 msgstr "Настройки"
 
-#: src/menu/main_menu.cpp:132
+#: src/menu/main_menu.cpp:131
 msgid "Play"
 msgstr "Играть"
 
-#: src/main.cpp:188
+#: src/main.cpp:194
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Напишите нам по почте, что вы думаете о Wormux:"
 
-#: src/menu/main_menu.cpp:160
+#: src/menu/main_menu.cpp:159
 msgid "Quit"
 msgstr "Выйти"
 
-#: src/main.cpp:175
+#: src/main.cpp:181
 msgid "Quit Wormux"
 msgstr ""
 
@@ -446,7 +412,7 @@ msgstr ""
 msgid "Riot bomb"
 msgstr ""
 
-#: src/main.cpp:224
+#: src/main.cpp:230
 msgid "Run game"
 msgstr "Начать игру"
 
@@ -466,7 +432,12 @@ msgstr "Звуковые эффекты?"
 msgid "Sound options"
 msgstr "Настройки звука"
 
-#: src/game/game.cpp:82
+#: src/game/game_loop.cpp:222
+#, fuzzy
+msgid "Sounds"
+msgstr "Настройки звука"
+
+#: src/game/game.cpp:84
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
@@ -474,9 +445,8 @@ msgstr "Начинаем новую игру"
 msgid "Stock:"
 msgstr "Боеприпасов:"
 
-#: src/game/game.cpp:142
-#, c-format
-msgid "Team %s results:\n"
+#: src/game/game_loop.cpp:208
+msgid "Teams"
 msgstr ""
 
 #: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
@@ -486,11 +456,6 @@ msgstr "Телепортация"
 #: src/weapon/auto_bazooka.cpp:103
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Автоматическая ракета улетела за пределы поля битвы..."
-
-#: src/game/game.cpp:196
-#, fuzzy
-msgid "The game has ended as a draw.\n"
-msgstr "Игра окончилась вничью"
 
 #: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
@@ -511,11 +476,11 @@ msgstr "Невозможно открыть каталог с картами (%s
 msgid "Unable to open skins directory (%s)!"
 msgstr "Невозможно открыть каталог с темами (%s)!"
 
-#: src/main.cpp:111
+#: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Неожиданная исключительная ситуация..."
 
-#: src/main.cpp:142
+#: src/main.cpp:148
 msgid "Version"
 msgstr "Версия"
 
@@ -523,20 +488,25 @@ msgstr "Версия"
 msgid "Weapon:"
 msgstr "Оружие:"
 
-#: src/main.cpp:205
+#: src/game/game_loop.cpp:217
+#, fuzzy
+msgid "Weapons"
+msgstr "Оружие:"
+
+#: src/main.cpp:211
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:661
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
 
-#: src/main.cpp:157
+#: src/main.cpp:163
 msgid "Wormux launching..."
 msgstr "Запуск Wormux..."
 
-#: src/main.cpp:193
+#: src/main.cpp:199
 msgid "Wormux version "
 msgstr "Wormux версии "
 
@@ -549,13 +519,13 @@ msgstr "Ошибка разбора XML при загрузке карты '%s' 
 msgid "You need at least one valid map !"
 msgstr "Вам нужна хотя бы одна карта!"
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Для игры нужно иметь хотя бы две команды: зайдите для этого в меню "
 "\"Настройки\"!"
 
-#: src/team/teams_list.cpp:157
+#: src/team/teams_list.cpp:158
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 
@@ -566,6 +536,18 @@ msgstr "Вы промазали!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#, fuzzy
+#~ msgid "%s team has won.\n"
+#~ msgstr "Команда %s победила"
+
+#, fuzzy
+#~ msgid "End of the game!\n"
+#~ msgstr "Игра окончена!\n"
+
+#, fuzzy
+#~ msgid "The game has ended as a draw.\n"
+#~ msgstr "Игра окончилась вничью"
 
 #~ msgid "Load map"
 #~ msgstr "Загрузка карты"

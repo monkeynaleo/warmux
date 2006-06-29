@@ -64,8 +64,7 @@ void Parachute::Draw()
   if (open)
     {
       image->Update();
-      image->Draw(ActiveCharacter().GetPosition() - 
-			  Point2i(ActiveCharacter().GetWidth()/2,image->GetHeight()) );
+      image->Draw(ActiveCharacter().GetHandPosition() - Point2i(image->GetWidth()/2,image->GetHeight()));
     }
 }
 
@@ -87,7 +86,7 @@ void Parachute::Refresh()
 	      open = true ;
 	      image->animation.SetPlayBackward(false);
 	      image->Start();
-
+	      ActiveCharacter().SetMovement("parachute");
 	    }
 	}
     }

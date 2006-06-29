@@ -89,9 +89,13 @@ wormux_SOURCES = \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
 	team/macro.h \
+	team/body.cpp team/body.h \
+	team/body_list.cpp team/body_list.h \
 	team/character.cpp team/character.h \
+	team/clothe.cpp team/clothe.h \
+	team/member.cpp team/member.h \
 	team/move.cpp team/move.h \
-	team/skin.cpp team/skin.h \
+	team/movement.cpp team/movement.h \
 	team/team.cpp team/team.h \
 	team/team_energy.cpp team/team_energy.h \
 	team/teams_list.cpp team/teams_list.h \

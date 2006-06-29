@@ -135,6 +135,7 @@ void ApplyExplosion_common (const Point2i &pos,
 //      camera.ChangeObjSuivi ((PhysicalObj*)&ver, true, true);
       cam_follow_character = true;
       ver -> AddSpeed (force, angle);
+      ver->SignalExplosion();
 //      ver -> UpdatePosition();
     } else {
 
@@ -165,6 +166,7 @@ void ApplyExplosion_common (const Point2i &pos,
       if(!cam_follow_character)
         camera.ChangeObjSuivi (obj->ptr, true, true);
       obj -> ptr -> AddSpeed (distance, angle);
+      obj->ptr->SignalExplosion();
 //      obj -> ptr -> UpdatePosition();
     }
   }

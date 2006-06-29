@@ -265,7 +265,7 @@ void Network::ReceiveActions()
         assert(packet_size > 0);
 
         // Fill the packet while it didn't reached its size
-        memset(packet,0, packet_max_size);
+        memset(packet,0, packet_max_size * 4);
         while(packet_size != i)
         {
           received = SDLNet_TCP_Recv(*sock, packet+i/4, packet_size - i);
@@ -359,7 +359,8 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_DEL_TEAM:
   case ACTION_SEND_VERSION:
   case ACTION_SEND_TEAM:
-  case ACTION_SET_SKIN:
+  case ACTION_SET_CLOTHE:
+  case ACTION_SET_MOVEMENT:
     return new ActionString(type, input);
 
   case ACTION_CHANGE_CHARACTER:

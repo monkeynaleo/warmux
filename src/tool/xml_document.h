@@ -18,7 +18,7 @@ public:
   // Charge un document XML
   bool Charge(const std::string &nomfich);
 
-  // Le document a été correctement chargé ?
+  // Le document a ï¿½ï¿½correctement chargï¿½?
   bool EstOk() const;
 
   // Lit la racine
@@ -41,7 +41,7 @@ public:
 		       const std::string &nom,
 		       bool &sortie);
 
-  // Lit les différentes valeurs d'une balise
+  // Lit les diffï¿½entes valeurs d'une balise
   static bool LitListeString (const xmlpp::Node *x, 
 					 const std::string &nom,
 					 std::list<std::string> &sortie);
@@ -50,7 +50,7 @@ public:
   static bool LitValeurBalise (const xmlpp::Node *balise,
 			       std::string &sortie);
 
-  // Accès à une balise
+  // Accï¿½ ï¿½une balise
   static xmlpp::Element* AccesBalise (const xmlpp::Node *x,
 				      const std::string &nom);
 
@@ -72,6 +72,9 @@ public:
   static bool LitAttrUint (const xmlpp::Element *x, 
 			  const std::string &nom, 
 			  unsigned int &sortie);
+  static bool LitAttrBool (const xmlpp::Element *x,
+			  const std::string &nom,
+			  bool &sortie);
 };
 
 //-----------------------------------------------------------------------------
@@ -93,7 +96,7 @@ public:
   bool Cree(const std::string &nomfich, const std::string &racine,
 	    const std::string &version, const std::string &encodage);
 
-  // Le document a été correctement chargé ?
+  // Le document a ï¿½ï¿½correctement chargï¿½?
   bool EstOk() const;
 
   // Lit la racine

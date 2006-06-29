@@ -24,7 +24,7 @@
 
 #include <string>
 #include <SDL.h>
-#include "skin.h"
+#include "body.h"
 #include "team.h"
 #include "../gui/progress_bar.h"
 #include "../graphic/sprite.h"
@@ -32,6 +32,7 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
+class Body;
 class Team;
 
 // Un ver de terre :-)
@@ -40,9 +41,7 @@ class Character : public PhysicalObj
 private:
   std::string character_name;
   Team& m_team;
-  bool skin_is_walking; // True if the curent is a walking skin.
   bool is_walking;
-  bool full_walk;
 
   // energy
   uint energy;
@@ -61,22 +60,8 @@ private:
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
   uint do_nothing_time;
+  uint animation_time;
   int lost_energy;
-
-  Skin *skin;
-  CfgSkin_Walking *walk_skin;
- public:
-  std::string current_skin;
- private:
-  // Animation
-  struct s_anim{
-    Sprite *image;
-    bool draw;
-    uint time; // Time for next animation
-  } anim;
-
-  uint m_image_frame; // Current image frame
-  uint m_frame_repetition; // Number of frame repetition (used for walking)
   bool hidden; //The character is hidden (needed by teleportation)
 
   // Channel used for sound
@@ -84,17 +69,14 @@ private:
 
 public:
 
-  Sprite *image;
-
   // Previous strength 
   double previous_strength;
+
+  Body* body;
 
 private:
   void DrawEnergyBar (int dy);
   void DrawName (int dy) const;
-  void StartBreathing();
-  void StartWalking();
-  void StopWalking();
 
   virtual void SignalDeath();
   virtual void SignalDrowning();
@@ -102,8 +84,11 @@ private:
   virtual void SignalFallEnding();
 
 public:
-  Character (Team& my_team, const std::string &name, Skin *skin);
+
+  Character (Team& my_team, const std::string &name);
   ~Character();
+
+  virtual void SignalExplosion();
 
   // Change le niveau d'�ergie
   void SetEnergyDelta (int delta, bool do_report=true);
@@ -140,7 +125,6 @@ public:
   // Les mouvements droite/gauche sont autoris� ? (pause assez longue ?)
   bool MouvementDG_Autorise() const;
   bool CanJump() const;
-  void FrameImageSuivante ();
 
   // Lecture du niveau d'�ergie en pourcent
   uint GetEnergy() const;
@@ -156,11 +140,6 @@ public:
   const std::string& GetName() const { return character_name; }
   bool IsSameAs(const Character& other) { return (GetName() == other.GetName()); }
 
-  // Acc� �l'avatar
-  const Skin& GetSkin() const;
-  Skin& AccessSkin();
-  bool SetSkin(const std::string& skin_name);
-
   // Hand position
   Point2i GetHandPosition();
   void GetHandPositionf (double &x, double &y);
@@ -171,6 +150,13 @@ public:
   int  GetMostDamage() const { return max_damage; }
   int  GetOwnDamage() const { return damage_own_team; }
   int  GetOtherDamage() const { return damage_other_team; }
+
+  // Body handling
+  void SetBody(Body* _body);
+  void SetClothe(std::string name) { body->SetClothe(name); };
+  void SetMovement(std::string name);
+  void SetClotheOnce(std::string name) { body->SetClotheOnce(name); };
+  void SetMovementOnce(std::string name);
 };
 
 #endif

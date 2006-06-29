@@ -16,10 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classes virtuelles permettant de définir une arme et un projectile. Les
- * armes ont un nom, une image, un état actif/inactif et une icône (affichée
+ * Classes virtuelles permettant de dï¿½inir une arme et un projectile. Les
+ * armes ont un nom, une image, un ï¿½at actif/inactif et une icï¿½e (affichï¿½
  * dans l'interface). Les projectiles sont des objets physiques qui ont un
- * comportement spécial lorsqu'ils entrent en collision ou qu'ils sortent du
+ * comportement spï¿½ial lorsqu'ils entrent en collision ou qu'ils sortent du
  * terrain.
  *****************************************************************************/
 
@@ -131,7 +131,7 @@ void Weapon::Select()
   m_is_active = false;
   m_strength = 0;
   ActiveTeam().ResetNbUnits();
-  ActiveCharacter().SetSkin("weapon-" + m_id);
+  ActiveCharacter().SetClothe("weapon-" + m_id);
 
   // is there a crosshair ?
   if (min_angle != max_angle) 
@@ -266,9 +266,8 @@ void Weapon::PosXY (int &x, int &y) const
     y = handPos.y + position.dy;
     if (ActiveCharacter().GetDirection() == 1)
       x = handPos.x + position.dx;
-    else {
+    else
       x = handPos.x - position.dx;
-    }
 
     if(ActiveCharacter().GetDirection()==-1)
       x -= m_image->GetWidth();
