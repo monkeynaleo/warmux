@@ -136,16 +136,25 @@ void Action_SetFrame (Action *a)
   ActionInt* ai = dynamic_cast<ActionInt*>(a);
   if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
   {
-    ActiveTeam().ActiveCharacter().image->SetCurrentFrame((uint)ai->GetValue());
+    ActiveTeam().ActiveCharacter().body->SetFrame((uint)ai->GetValue());
   }
 }
 
-void Action_SetSkin (Action *a)
+void Action_SetClothe (Action *a)
 {
   ActionString* action = dynamic_cast<ActionString*>(a);
   if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
   {
-    ActiveTeam().ActiveCharacter().SetSkin(action->GetValue());
+    ActiveTeam().ActiveCharacter().SetClothe(action->GetValue());
+  }
+}
+
+void Action_SetMovement (Action *a)
+{
+  ActionString* action = dynamic_cast<ActionString*>(a);
+  if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
+  {
+    ActiveTeam().ActiveCharacter().SetMovement(action->GetValue());
   }
 }
 
@@ -382,7 +391,8 @@ void ActionHandler::Init()
   Register (ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
   Register (ACTION_MOVE_CHARACTER, "move_character", &Action_MoveCharacter);
   Register (ACTION_SET_CHARACTER_SPEED, "set_character_speed", &Action_SetCharacterSpeed);
-  Register (ACTION_SET_SKIN, "set_skin", &Action_SetSkin);
+  Register (ACTION_SET_MOVEMENT, "set_movement", &Action_SetMovement);
+  Register (ACTION_SET_CLOTHE, "set_clothe", &Action_SetClothe);
   Register (ACTION_SET_FRAME, "set_frame", &Action_SetFrame);
   Register (ACTION_SET_CHARACTER_DIRECTION, "set_character_direction", &Action_SetCharacterDirection);
   Register (ACTION_CHANGE_STATE, "change_state", &Action_ChangeState);

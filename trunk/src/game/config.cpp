@@ -16,9 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Configuration de Wormux : toutes les variables qui sont intéressantes à
- * modifier se retrouvent ici. Les variables ont une valeur par défaut qui
- * peut être modifiée avec le fichier de configuration.
+ * Configuration de Wormux : toutes les variables qui sont intï¿½essantes ï¿½ * modifier se retrouvent ici. Les variables ont une valeur par dï¿½aut qui
+ * peut ï¿½re modifiï¿½ avec le fichier de configuration.
  *****************************************************************************/
 
 #include "config.h"
@@ -41,7 +40,6 @@
 #include "../map/maps_list.h"
 #include "../sound/jukebox.h"
 #include "../team/teams_list.h"
-#include "../team/skin.h"
 #include "../tool/file_tools.h"
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
@@ -128,7 +126,7 @@ bool Config::ChargeVraiment()
   return true;
 }
 
-// Lit les données sur une équipe
+// Lit les donnï¿½s sur une ï¿½uipe
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
   xmlpp::Element *elem;
@@ -143,7 +141,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     LitDocXml::LitListeString (elem, "team", tmp.teams);
   }
 
-  //=== Vidéo ===
+  //=== Vidï¿½ ===
   elem = LitDocXml::AccesBalise (xml, "video");
   if (elem != NULL)
   {
@@ -225,8 +223,7 @@ void Config::Apply()
   jukebox.ActiveEffects (tmp.sound.effects);
   jukebox.SetFrequency (tmp.sound.frequency);
 
-  // Charge les équipes 
-  InitSkins();
+  // Charge les ï¿½uipes
   teams_list.LoadList();
   if (m_xml_charge)
     teams_list.InitList (tmp.teams);

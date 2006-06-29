@@ -51,14 +51,14 @@ void LowGrav::Refresh()
 void LowGrav::p_Deselect()
 {
   ActiveCharacter().ResetConstants();
-  ActiveCharacter().SetSkin("walking");
+  ActiveCharacter().SetClothe("normal");
   m_is_active = false;
 }
 
 bool LowGrav::p_Shoot()
 {
   ActiveCharacter().SetGravityFactor(LOW_GRAVITY_FACTOR);
-  ActiveCharacter().SetSkin("helmet");
+  ActiveCharacter().SetClothe("helmet");
   return true;
 }
 

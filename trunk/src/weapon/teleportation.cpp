@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Téléportation : déplacement d'un ver n'importe où sur le terrain.
+ * Tï¿½ï¿½ortation : dï¿½lacement d'un ver n'importe o sur le terrain.
  *****************************************************************************/
 
 #include "teleportation.h"
@@ -42,7 +42,7 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 
 bool Teleportation::p_Shoot ()
 {
-  // Vérifie qu'on se téléporte dans le vide !
+  // Vï¿½ifie qu'on se tï¿½ï¿½orte dans le vide !
   dst = Mouse::GetInstance()->GetWorldPosition() - ActiveCharacter().GetSize()/2;
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
 	 return false;
@@ -58,12 +58,12 @@ bool Teleportation::p_Shoot ()
   m_direction = ActiveCharacter().GetDirection();
 
   // Compute skins animation
-  Surface current_skin;
+/*  Surface current_skin;
   current_skin = ActiveCharacter().image->GetSurface();
 
   ActiveCharacter().Hide();
   skin = WaveSurface(current_skin, 100, GameMode::GetInstance()->duration_move_player * 1000, 5.0, 1.5);
-  return true;
+*/  return true;
 }
 
 void Teleportation::Refresh()
@@ -74,14 +74,14 @@ void Teleportation::Refresh()
 
   // On a fait le chemin retour ?
   if (retour) {
-    // Oui, c'est la fin de la téléportation
+    // Oui, c'est la fin de la tï¿½ï¿½ortation
     m_is_active = false;
-    ActiveCharacter().image->Scale (m_direction, 1);
+//    ActiveCharacter().image->Scale (m_direction, 1);
     ActiveCharacter().SetSpeed(0.0,0.0);
     ActiveCharacter().Show();
     jukebox.Play("share","weapon/teleport_end");
     GameLoop::GetInstance()->interaction_enabled = true;
-    delete skin;
+//    delete skin;
     return;
   }
 
@@ -89,7 +89,7 @@ void Teleportation::Refresh()
   if (GameMode::GetInstance()->duration_move_player * 1000 < dt)
   {
     // Non, on fait le chemin retour en 
-    // commençant par déplacer le ver
+    // commenï¿½nt par dï¿½lacer le ver
     retour = true;
     ActiveCharacter().SetXY(dst);
     temps = Time::GetInstance()->Read();

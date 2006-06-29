@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme "batte de baseball" : permet de donner un coup à un autre ver.
+ * Arme "batte de baseball" : permet de donner un coup ï¿½un autre ver.
  *****************************************************************************/
 
 #include "baseball.h"
@@ -51,22 +51,22 @@ bool Baseball::p_Shoot (){
       fin = true;
     }
 
-    // Calcul des coordonnées du point
+    // Calcul des coordonnï¿½s du point
     dx = (int)(rayon*cos( angle ));
     dy = (int)(rayon*sin( angle ));
     x = ver_x +(int)dx;
     y = ver_y +(int)dy;
 
-    // Teste un ver après l'autre
+    // Teste un ver aprï¿½ l'autre
     FOR_ALL_LIVING_CHARACTERS(equipe,ver)
     if (&(*ver) != &ActiveCharacter())
     {
-      // On a touché un ver ?
+      // On a touchï¿½un ver ?
       if( ver->ObjTouche(Point2i(x, y)) )
       {
-	// Inflige les dégats au ver touché
-	(*ver).SetEnergyDelta (-cfg().damage);
+	// Inflige les dï¿½ats au ver touchï¿½	(*ver).SetEnergyDelta (-cfg().damage);
 	(*ver).SetSpeed (cfg().strength, angle);
+	(*ver).SetMovement("fly");
 	return true;
       }
     }

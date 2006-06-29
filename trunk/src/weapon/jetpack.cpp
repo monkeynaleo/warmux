@@ -93,6 +93,7 @@ void JetPack::Refresh()
 
 void JetPack::p_Select()
 {
+  ActiveCharacter().SetClothe("jetpack");
 }
 
 void JetPack::p_Deselect()
@@ -102,11 +103,13 @@ void JetPack::p_Deselect()
   m_y_force = 0;
   ActiveCharacter().SetExternForce(0,0);
   StopUse();
-  ActiveCharacter().SetSkin("walking");
+  ActiveCharacter().SetClothe("normal");
+  ActiveCharacter().SetMovement("walk");
 }
 
 void JetPack::StartUse()
 {
+  ActiveCharacter().SetMovement("jetpack-fire");
   if ( (m_x_force == 0) && (m_y_force == 0))
     {
       m_last_fuel_down = Time::GetInstance()->Read();
@@ -120,11 +123,11 @@ void JetPack::StartUse()
 
 void JetPack::StopUse()
 {
+  ActiveCharacter().SetMovement("jetpack-nofire");
   if (m_x_force == 0.0 && m_y_force == 0.0)
   {
     jukebox.Stop(channel);
     channel = -1;
-    ActiveCharacter().SetSkin("jetpack");
   }
 }
 
@@ -132,25 +135,22 @@ void JetPack::GoUp()
 {
   StartUse();
   m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE) ;
-  ActiveCharacter().SetSkin("jetpack-up");
 }
 
 void JetPack::GoLeft()
 {
   StartUse();
-  ActiveCharacter().SetSkin("jetpack-left-right");
-  ActiveCharacter().image->Scale (-1, 1);
-
   m_x_force = - JETPACK_FORCE ;
+  if(ActiveCharacter().GetDirection() == 1)
+    ActiveCharacter().SetDirection(-1);
 }
 
 void JetPack::GoRight()
 {
   StartUse();
-  ActiveCharacter().SetSkin("jetpack-left-right");
-  ActiveCharacter().image->Scale (1, 1);
-
   m_x_force = JETPACK_FORCE ;
+  if(ActiveCharacter().GetDirection() == -1)
+    ActiveCharacter().SetDirection(1);
 }
 
 void JetPack::StopUp()
@@ -211,7 +211,7 @@ void JetPack::HandleKeyEvent(int action, int event_type)
 bool JetPack::p_Shoot()
 {
   m_is_active = true;
-  ActiveCharacter().SetSkin("jetpack");
+  ActiveCharacter().SetClothe("jetpack-fire");
 
   return true;
 }
@@ -220,4 +220,3 @@ void JetPack::SignalTurnEnd()
 {
   p_Deselect();
 }
-

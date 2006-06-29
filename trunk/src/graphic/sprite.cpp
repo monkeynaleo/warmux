@@ -117,8 +117,22 @@ unsigned int Sprite::GetWidth() const{
    return (uint)((float)frame_width_pix * (scale_x>0?scale_x:-scale_x));
 }
 
+unsigned int Sprite::GetWidthMax() const{
+  if(!current_surface.IsNull() )
+    return current_surface.GetWidth();
+  else
+    return GetWidth();
+}
+
 unsigned int Sprite::GetHeight() const{
    return (uint)((float)frame_height_pix * (scale_y>0?scale_y:-scale_y));
+}
+
+unsigned int Sprite::GetHeightMax() const{
+  if(!current_surface.IsNull() )
+    return current_surface.GetHeight();
+  else
+    return GetHeight();
 }
 
 Point2i Sprite::GetSize() const{
@@ -216,7 +230,7 @@ void Sprite::SetRotation_HotSpot( const Point2i new_hotspot)
   rhs_pos = new_hotspot;
 }
 
-void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface& tmp_surface){
+void Sprite::Calculate_Rotation_Offset(Surface& tmp_surface){
   const SpriteFrame& frame = GetCurrentFrameObject();
   const Surface &surface = frame.surface;
   // Calculate offset of the depending on hotspot rotation position :
@@ -225,8 +239,8 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface& tmp_su
   int surfaceWidth = surface.GetWidth();
 
   //Do as if hotspot is center of picture:
-  rot_x = surfaceWidth  / 2 - tmp_surface.GetWidth()  / 2;
-  rot_y = surfaceHeight / 2 - tmp_surface.GetHeight() / 2;
+  rotation_point.x = surfaceWidth  / 2 - tmp_surface.GetWidth()  / 2;
+  rotation_point.y = surfaceHeight / 2 - tmp_surface.GetHeight() / 2;
 
   if(rot_hotspot == center)
       return;
@@ -270,10 +284,10 @@ void Sprite::Calculate_Rotation_Offset(int & rot_x, int & rot_y, Surface& tmp_su
   Point2i rhs_new_pos =  Point2i(surfaceWidth /2 + int(cos(rhs_angle) * rhs_dst),
                                  surfaceHeight/2 + int(sin(rhs_angle) * rhs_dst));
 
-  rot_x -= rhs_new_pos.x;
-  rot_y -= rhs_new_pos.y;
-  rot_x += rhs_pos_tmp.x;
-  rot_y += rhs_pos_tmp.y;
+  rotation_point.x -= rhs_new_pos.x;
+  rotation_point.y -= rhs_new_pos.y;
+  rotation_point.x += rhs_pos_tmp.x;
+  rotation_point.y += rhs_pos_tmp.y;
 }
 
 void Sprite::Start(){
@@ -301,14 +315,8 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
 
   RefreshSurface();
 
-   // Calculate offset of the sprite depending on hotspot rotation position :
-  int rot_x=0;
-  int rot_y=0;
-  if(rot_hotspot != center || rotation_deg!=0.0)
-    Calculate_Rotation_Offset(rot_x, rot_y, current_surface);
-
   Rectanglei srcRect (src_x, src_y, w, h);
-  Rectanglei dstRect (pos_x + rot_x, pos_y + rot_y, w, h);
+  Rectanglei dstRect (pos_x + rotation_point.x, pos_y + rotation_point.y, w, h);
   
   if(alpha == 1.0)
     dest.Blit(current_surface, srcRect, dstRect.GetPosition());
@@ -445,6 +453,12 @@ void Sprite::RefreshSurface()
     }
   }
   assert( !current_surface.IsNull() );
+
+  // Calculate offset of the sprite depending on hotspot rotation position :
+  rotation_point.x=0;
+  rotation_point.y=0;
+  if(rot_hotspot != center || rotation_deg!=0.0)
+    Calculate_Rotation_Offset(current_surface);
 }
 
 Surface Sprite::GetSurface() {
