@@ -55,15 +55,8 @@ bool Teleportation::p_Shoot ()
   
   temps = Time::GetInstance()->Read();
   retour = false;
-  m_direction = ActiveCharacter().GetDirection();
 
-  // Compute skins animation
-/*  Surface current_skin;
-  current_skin = ActiveCharacter().image->GetSurface();
-
-  ActiveCharacter().Hide();
-  skin = WaveSurface(current_skin, 100, GameMode::GetInstance()->duration_move_player * 1000, 5.0, 1.5);
-*/  return true;
+  return true;
 }
 
 void Teleportation::Refresh()
@@ -76,12 +69,9 @@ void Teleportation::Refresh()
   if (retour) {
     // Oui, c'est la fin de la t��ortation
     m_is_active = false;
-//    ActiveCharacter().image->Scale (m_direction, 1);
     ActiveCharacter().SetSpeed(0.0,0.0);
-    ActiveCharacter().Show();
     jukebox.Play("share","weapon/teleport_end");
     GameLoop::GetInstance()->interaction_enabled = true;
-//    delete skin;
     return;
   }
 
@@ -96,37 +86,11 @@ void Teleportation::Refresh()
     dt = 0.0;
     return;
   }
-
-  if (GameMode::GetInstance()->duration_move_player * 1000 / 2 < dt)
-  {
-    m_x = dst.x;
-    m_y = dst.y - skin->GetHeight()/2;
-
-    float alpha = (float)dt/(float)(GameMode::GetInstance()->duration_move_player * 1000);
-    alpha = (alpha - 0.5) * 2.0;
-    skin->SetAlpha(alpha);
-
-    return;
-  }
-
-  uint larg=ActiveCharacter().GetWidth();
-
-  m_x = ActiveCharacter().GetX() - (skin->GetWidth()-larg)/2;
-  m_y = ActiveCharacter().GetY();
-
-  float alpha = (float)dt/(float)(GameMode::GetInstance()->duration_move_player * 1000);
-  alpha = (0.5 - alpha) * 2.0;
-  skin->SetAlpha(alpha);
-
-//  if(ActiveCharacter().GetDirection() == -1)
-//    m_x += nv_larg;
 }
 
 void Teleportation::Draw()
 {
   if (m_is_active) {
-    skin->Update();
-    skin->Draw( Point2i(m_x, m_y) );
   } else {
     Weapon::Draw();
   }
