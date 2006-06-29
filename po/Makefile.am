@@ -41,7 +41,7 @@ POTFILES = \
 	src/map/water.cpp \
 	src/map/wind.cpp \
 	src/menu/game_menu.cpp \
-	src/menu/infos_menu.cpp \
+	src/menu/credits_menu.cpp \
 	src/menu/main_menu.cpp \
 	src/menu/options_menu.cpp \
 	src/object/bonus_box.cpp \
