@@ -50,7 +50,6 @@ POTFILES = \
 	src/sound/jukebox.cpp \
 	src/team/character.cpp \
 	src/team/move.cpp \
-	src/team/skin.cpp \
 	src/team/team.cpp \
 	src/team/team_energy.cpp \
 	src/team/teams_list.cpp \

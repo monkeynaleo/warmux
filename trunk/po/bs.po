@@ -215,11 +215,6 @@ msgstr "Dinamit"
 msgid "Energy:"
 msgstr "Energija"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "Greška tokom učitavanja skina %s:"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -332,10 +327,6 @@ msgstr "Da li je to poklon?"
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Učitaj mape:"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr "Učitaj skinove:"
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -462,11 +453,6 @@ msgstr "Nije u stanju da inicijaliyira SDL biblioteku: %s"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Nije u stanju da otvori direktorij sa skinovima (%s)!"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Neočekivani izuzetak uhvaćen..."
@@ -525,6 +511,15 @@ msgstr "Vaš hitac je promašio!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "gotov"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Greška tokom učitavanja skina %s:"
+
+#~ msgid "Load skins:"
+#~ msgstr "Učitaj skinove:"
+
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Nije u stanju da otvori direktorij sa skinovima (%s)!"
 
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr "Najviše se prodao: %s (%i).\n"

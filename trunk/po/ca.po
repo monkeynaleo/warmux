@@ -212,11 +212,6 @@ msgstr "Dinamita"
 msgid "Energy:"
 msgstr "Energia :"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "Error durant la carrega del skin %s :"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -326,10 +321,6 @@ msgstr ""
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Carrega les mapas"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr ""
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -456,11 +447,6 @@ msgstr ""
 msgid "Unable to open maps directory (%s)!"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, fuzzy, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Imposible obrir el directori dels skins (%s) !"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Excepció interceptada imprevista ..."
@@ -520,6 +506,13 @@ msgstr "Has fallat el tir!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Error durant la carrega del skin %s :"
+
+#, fuzzy
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Imposible obrir el directori dels skins (%s) !"
 
 #~ msgid "%s team has won.\n"
 #~ msgstr "L'equip %s ha guanyat.\n"

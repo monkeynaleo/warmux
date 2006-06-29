@@ -215,11 +215,6 @@ msgstr "Dynamite"
 msgid "Energy:"
 msgstr "Énergie :"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "Erreur durant le chargement de l'avatar %s :"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -329,10 +324,6 @@ msgstr "Tiens, un cadeau !"
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Chargement des terrains :"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr "Charge les avatars :"
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -460,11 +451,6 @@ msgstr "Échec de l'initialisation de la bibliothèque SDL : %s"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des terrains (%s) !"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Impossible d'ouvrir le répertoire des avatars (%s) !"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Exception inconnue interceptée ..."
@@ -525,6 +511,15 @@ msgstr "Tir dans le vide..."
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "terminé"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Erreur durant le chargement de l'avatar %s :"
+
+#~ msgid "Load skins:"
+#~ msgstr "Charge les avatars :"
+
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Impossible d'ouvrir le répertoire des avatars (%s) !"
 
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr " Le plus traitre : %s (%i).\n"

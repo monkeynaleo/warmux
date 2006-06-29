@@ -224,11 +224,6 @@ msgstr "Dinamită"
 msgid "Energy:"
 msgstr "Energie:"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "Eroare în timpul încărcării aspectului %s:"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -341,10 +336,6 @@ msgstr "Oare e un cadou?"
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Încărcare hărţi:"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr "Încărcare aspecte:"
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -472,11 +463,6 @@ msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Nu a fost posibilă deschiderea directorului cu aspecte (%s)!"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "S-a captat o excepţie neaştepată..."
@@ -537,6 +523,15 @@ msgstr "Focul dvs. a fost tras în aer!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "finalizat"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Eroare în timpul încărcării aspectului %s:"
+
+#~ msgid "Load skins:"
+#~ msgstr "Încărcare aspecte:"
+
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Nu a fost posibilă deschiderea directorului cu aspecte (%s)!"
 
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr "  Cel mai mare trădător :  %s (%i).\n"

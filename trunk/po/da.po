@@ -213,11 +213,6 @@ msgstr "Dynamit"
 msgid "Energy:"
 msgstr "Energi:"
 
-#: src/team/skin.cpp:146
-#, c-format
-msgid "Error during loading skin %s:"
-msgstr "Fejl mens indlæsning af 'skin' %s:"
-
 #: src/tool/error.cpp:81
 #, c-format
 msgid "Error in %s:%lu"
@@ -329,10 +324,6 @@ msgstr ""
 #: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Indlæser baner:"
-
-#: src/team/skin.cpp:322
-msgid "Load skins:"
-msgstr "Indlæser 'skins':"
 
 #: src/team/teams_list.cpp:112
 msgid "Load teams:"
@@ -459,11 +450,6 @@ msgstr "Ikke i stand til at klargøre SDL bibliotek: %s"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
 
-#: src/team/skin.cpp:334 src/team/skin.cpp:350
-#, c-format
-msgid "Unable to open skins directory (%s)!"
-msgstr "Ikke i stand til at åbne 'skins' kataloget (%s)!"
-
 #: src/main.cpp:117
 msgid "Unexcepted exception caught..."
 msgstr "Uventet undtagelse fanget..."
@@ -524,6 +510,15 @@ msgstr ""
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "færdig"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Fejl mens indlæsning af 'skin' %s:"
+
+#~ msgid "Load skins:"
+#~ msgstr "Indlæser 'skins':"
+
+#~ msgid "Unable to open skins directory (%s)!"
+#~ msgstr "Ikke i stand til at åbne 'skins' kataloget (%s)!"
 
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr "  Mest udsolgt  :  %s (%i).\n"
