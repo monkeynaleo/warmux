@@ -59,7 +59,7 @@ const double MIN_SPEED_TO_FLY = 4.0;
 
 // Pause for the animation
 #ifdef DEBUG
-//#define ANIME_VITE
+#define ANIME_VITE
 #endif
 #ifdef ANIME_VITE
   const uint ANIM_PAUSE_MIN = 100;
@@ -299,8 +299,7 @@ void Character::Draw()
 
   if(Time::GetInstance()->Read() > animation_time && &ActiveCharacter()!=this && !IsDead())
   {
-    SetClotheOnce("animation");
-    SetMovementOnce("animation");
+    body->PlayAnimation();
     animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   }
 

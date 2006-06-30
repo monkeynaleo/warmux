@@ -43,6 +43,15 @@
 	<image file="arm.png"/>
 	<anchor dx="2" dy="0"/>
 	<attached member_type="weapon" frame="*" dx="3" dy="7"/>
+	<attached member_type="yoyo" frame="*" dx="3" dy="10"/>
+</sprite>
+
+<sprite name="yoyo" type="yoyo">
+	<image file="yoyo.png">
+		<grid pos="0,0" size="32,42" array="36,1" />
+	</image>
+	<anchor dx="29" dy="25"/>
+	<animation speed="150" />
 </sprite>
 
 <!--             LEGS DEFINITIONS         -->
@@ -81,9 +90,22 @@
 	<member name="arm-right-normal" layer="5"/>
 	<member name="weapon" layer="6"/>
 </clothe>
+
 <clothe name="dead">
 	<member name="body-dead" layer="0"/>
 </clothe>
+
+<clothe name="animation0">
+	<member name="arm-left-normal" layer="0"/>
+	<member name="foot-left-normal" layer="1"/>
+	<member name="body-normal" layer="2"/>
+	<member name="head-normal" layer="3"/>
+	<member name="foot-right-normal" layer="4"/>
+	<member name="arm-right-normal" layer="5"/>
+	<member name="weapon" layer="6"/>
+	<member name="yoyo" layer="7"/>
+</clothe>
+
 <clothe name="helmet">
 	<member name="arm-left-normal" layer="0"/>
 	<member name="foot-left-normal" layer="1"/>
@@ -201,7 +223,15 @@
 	</frame>
 </movement>
 
-<movement name="animation" speed="100">
+<movement name="animation0" speed="5400"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame number="0">
+		<member type="arm-right" angle="-90"/>
+		<member type="yoyo" angle="90"/>
+	</frame>
+</movement>
+
+<movement name="animation1" speed="100">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="body" angle="0"/>

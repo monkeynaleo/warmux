@@ -19,6 +19,7 @@
  * Character of a team.
  *****************************************************************************/
 #include "body.h"
+#include <sstream>
 #include <iostream>
 #include <map>
 #include "clothe.h"
@@ -27,12 +28,14 @@
 #include "../game/time.h"
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
+#include "../tool/random.h"
 
 Body::Body(xmlpp::Element* xml, Profile* res)
 {
   current_clothe = NULL;
   current_mvt = NULL;
   walk_events = 0;
+  animation_number = 0;
 
   // Load members
   xmlpp::Node::NodeList nodes = xml -> get_children("sprite");
@@ -78,6 +81,8 @@ Body::Body(xmlpp::Element* xml, Profile* res)
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it3);
     std::string name;
     LitDocXml::LitAttrString( elem, "name", name);
+    if(strncmp(name.c_str(),"animation", 9)==0)
+      animation_number++;
 
     Movement* mvt = new Movement(elem);
     mvt_lst[name] = mvt;
@@ -91,6 +96,7 @@ Body::Body(Body *_body)
   current_clothe = NULL;
   current_mvt = NULL;
   walk_events = 0;
+  animation_number = _body->animation_number;
 
   // Clean the members list
   std::map<std::string, Member*>::iterator it1 = _body->members_lst.begin();
@@ -353,6 +359,14 @@ void Body::SetMovement(std::string name)
   play_once_mvt_sauv = NULL;
 
   assert(current_mvt != NULL);
+}
+
+void Body::PlayAnimation()
+{
+  std::ostringstream name;
+  name << "animation" << randomObj.GetLong(0, animation_number - 1);
+  SetClotheOnce(name.str());
+  SetMovementOnce(name.str());
 }
 
 void Body::SetClotheOnce(std::string name)

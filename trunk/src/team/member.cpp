@@ -136,6 +136,7 @@ void Member::Draw(int flip_center, int direction)
     posi.x = 2 * flip_center - posi.x - spr->GetWidth();
   }
 
+  spr->Update();
   spr->Draw(posi);
 }
 
