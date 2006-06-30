@@ -89,7 +89,7 @@ public:
   Body(Body *_body);
   ~Body();
 
-  Point2i GetSize() {return Point2i(45,45);};
+  Point2i GetSize() {return Point2i(30,45);};
 
 
   void Draw(const Point2i& pos);

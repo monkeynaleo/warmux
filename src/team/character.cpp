@@ -622,6 +622,7 @@ void Character::SignalExplosion()
 {
   double n, a;
   GetSpeed(n, a);
+  SetRebounding(true);
   if(n > MIN_SPEED_TO_FLY)
     SetMovement("fly");
 }

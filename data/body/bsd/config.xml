@@ -54,7 +54,7 @@
 </clothe>
 
 <movement name="ninja-rope" speed="100">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="body" angle="-90" follow_speed="true" follow_direction="true"/>
 		<member type="arm-left" angle="-10"/>
@@ -65,7 +65,7 @@
 </movement>
 
 <movement name="parachute" speed="100">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="180"/>
@@ -75,7 +75,7 @@
 </movement>
 
 <movement name="jump" speed="100">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="head" follow_crosshair="true"/> <!-- follow_crosshair : the head rotates when we move the crosshair -->
 		<member type="arm-left" angle="90" follow_speed="true"/> <!--follow_speed : rotates in the direction where the character is going -->
@@ -86,7 +86,7 @@
 </movement>
 
 <movement name="fall" speed="100">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="head" follow_crosshair="true"/> <!-- follow_crosshair : the head rotates when we move the crosshair -->
 		<member type="arm-left" angle="90" follow_speed="true"/> <!--follow_speed : rotates in the direction where the character is going -->
@@ -97,7 +97,7 @@
 </movement>
 
 <movement name="hard-land" speed="50">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" dy="-2"/>
@@ -137,7 +137,7 @@
 </movement>
 
 <movement name="animation" speed="100">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="body" angle="0"/>
 		<member type="head" angle="0"/>
@@ -229,7 +229,7 @@
 </movement>
 
 <movement name="fly" speed="150">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="body" angle="90" follow_speed="true" /> 
 		<member type="head" angle="-140"/>
@@ -264,7 +264,7 @@
 	</frame>
 </movement>
 <movement name="drowned" speed="150">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="body" angle="90" follow_speed="true" /> 
 		<member type="head" angle="-140"/>
@@ -300,7 +300,7 @@
 </movement>
 
 <movement name="walk" speed="30">
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="head" follow_crosshair="true"/>
 		<member type="arm-left" angle="40" />
@@ -416,7 +416,7 @@
 </movement>
 
 <movement name="jetpack-nofire" speed="100"> <!-- When jetpack is used, but no key is pressed -->
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="arm-left" follow_speed="true" />
 		<member type="arm-right" follow_speed="true"/>
@@ -426,7 +426,7 @@
 	</frame>
 </movement>
 <movement name="jetpack-fire" speed="100"> <!-- When jetpack is used and a key is pressed -->
-	<collision_rect left="12" right="25" top="10" bottom="2" />
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="jetpack-fire" dy="0" />
 		<member type="arm-left" follow_speed="true" />

@@ -62,9 +62,11 @@ bool Airhammer::p_Shoot()
   //jukebox.Play("weapon/airhammer");
 
   // initiate movement ;-)
+  ActiveCharacter().SetRebounding(false);
   ActiveCharacter().SetXY( ActiveCharacter().GetPosition() );
   Point2i pos = Point2i(ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 - impact.GetWidth()/2,
-                        ActiveCharacter().GetY() + ActiveCharacter().GetHeight() -15);
+                        ActiveCharacter().GetTestRect().GetPositionY() +
+                        ActiveCharacter().GetHeight()  -15);
 
   ParticleEngine::AddNow(pos + Point2i(impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
                          true, -3.0 * M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
