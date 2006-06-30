@@ -75,6 +75,8 @@ class Body
                                         // Secnd element: parent member
   int direction;
 
+  int animation_number;
+
   void ResetMovement();
   void ApplyMovement(Movement* mvt, uint frame);
   void ApplySqueleton(const Point2f &pos);
@@ -99,6 +101,7 @@ public:
   void SetMovementOnce(std::string name); //play the movement only once
   void SetFrame(uint no);
   void SetDirection(int dir);
+  void PlayAnimation();
 
   const std::string& GetMovement();
   const std::string& GetClothe();

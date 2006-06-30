@@ -136,7 +136,7 @@
 	</frame>
 </movement>
 
-<movement name="animation" speed="100">
+<movement name="animation0" speed="100">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="body" angle="0"/>
