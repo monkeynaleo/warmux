@@ -59,7 +59,7 @@ const double MIN_SPEED_TO_FLY = 4.0;
 
 // Pause for the animation
 #ifdef DEBUG
-#define ANIME_VITE
+//#define ANIME_VITE
 #endif
 #ifdef ANIME_VITE
   const uint ANIM_PAUSE_MIN = 100;
