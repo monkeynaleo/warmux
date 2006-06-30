@@ -61,17 +61,20 @@ public:
   type_objet_t m_type;
 
 private:
-  std::string m_name;
-  // Object size and position.
-  uint m_width, m_height;
   int m_posx, m_posy;
+
+
+protected:
+  bool exterieur_monde_vide;
+
+  std::string m_name;
 
   // Rectangle used for collision tests
   uint m_test_left, m_test_right, m_test_top, m_test_bottom;
 
-  bool exterieur_monde_vide;
+  // Object size and position.
+  uint m_width, m_height;
 
-protected:
   // Used by the sons of this class to allow modification of READY/BUSY state
   // (Unused by PhysicalObj)
   bool m_ready;
@@ -128,10 +131,10 @@ public:
   bool NotifyMove(Point2d oldPos, Point2d newPos, Point2d &contactPos,
 		  double &contact_angle);
 
-  bool IsInVacuumXY(const Point2i &position) const;
+  virtual bool IsInVacuumXY(const Point2i &position) const;
   bool IsInVacuum(const Point2i &offset) const; // relative to current position
+  virtual bool FootsInVacuumXY(const Point2i &position) const;
   bool FootsInVacuum() const;
-  bool FootsInVacuumXY(const Point2i &position) const;
   
   bool FootsOnFloor(int y) const;
 
