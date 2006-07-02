@@ -32,9 +32,11 @@ public:
   Point2f pos;
   int angle; // angle in degrees
   bool follow_crosshair;
+  bool follow_half_crosshair;
   bool follow_speed;
   bool follow_direction;
-  member_mvt() { pos.x = pos.y = angle = follow_crosshair = follow_speed = follow_direction = 0; };
+  member_mvt() { pos.x = pos.y = angle = follow_crosshair = follow_half_crosshair
+                       = follow_speed = follow_direction = 0; };
 };
 
 class Movement

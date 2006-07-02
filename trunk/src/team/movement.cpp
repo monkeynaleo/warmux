@@ -71,6 +71,7 @@ Movement::Movement(xmlpp::Element *xml)
       LitDocXml::LitAttrInt(elem2, "dy", dy);
       LitDocXml::LitAttrInt(elem2, "angle", mvt.angle);
       LitDocXml::LitAttrBool(elem2, "follow_crosshair", mvt.follow_crosshair);
+      LitDocXml::LitAttrBool(elem2, "follow_half_crosshair", mvt.follow_half_crosshair);
       LitDocXml::LitAttrBool(elem2, "follow_speed", mvt.follow_speed);
       LitDocXml::LitAttrBool(elem2, "follow_direction", mvt.follow_direction);
       mvt.pos.x = dx;
