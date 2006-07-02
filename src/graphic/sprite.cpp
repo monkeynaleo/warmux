@@ -228,6 +228,10 @@ void Sprite::SetRotation_HotSpot( const Point2i new_hotspot)
 {
   rot_hotspot = user_defined;
   rhs_pos = new_hotspot;
+
+  if(rhs_pos.x == GetWidth() / 2
+  && rhs_pos.y == GetHeight() / 2)
+    rot_hotspot = center; // avoid using Calculate_Rotation_Offset, thus avoiding a division by zero
 }
 
 void Sprite::Calculate_Rotation_Offset(Surface& tmp_surface){
@@ -275,6 +279,8 @@ void Sprite::Calculate_Rotation_Offset(Surface& tmp_surface){
 
   rhs_dst = sqrt(float((surfaceWidth /2 - rhs_pos_tmp.x)*(surfaceWidth /2 - rhs_pos_tmp.x)
                      + (surfaceHeight/2 - rhs_pos_tmp.y)*(surfaceHeight/2 - rhs_pos_tmp.y)));
+  assert(rhs_dst != 0.0);
+
   rhs_angle = - acos ( float(rhs_pos_tmp.x - surfaceWidth/2) / rhs_dst );
   if(surfaceHeight/2 - rhs_pos.y < 0) rhs_angle = -rhs_angle;
   float angle_rad = rotation_deg / 180.0 * M_PI; //Rotation angle of the sprite in radian

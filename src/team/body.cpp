@@ -36,6 +36,7 @@ Body::Body(xmlpp::Element* xml, Profile* res)
   current_mvt = NULL;
   walk_events = 0;
   animation_number = 0;
+  direction = 1;
 
   // Load members
   xmlpp::Node::NodeList nodes = xml -> get_children("sprite");
@@ -97,6 +98,7 @@ Body::Body(Body *_body)
   current_mvt = NULL;
   walk_events = 0;
   animation_number = _body->animation_number;
+  direction = 1;
 
   // Clean the members list
   std::map<std::string, Member*>::iterator it1 = _body->members_lst.begin();
