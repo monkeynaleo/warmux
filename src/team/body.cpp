@@ -173,6 +173,26 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
         mb_mvt.angle += angle ;
       }
 
+      if(mb_mvt.follow_half_crosshair && ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
+      {
+        // Use the movement of the crosshair
+        int angle = ActiveTeam().crosshair.GetAngle(); // returns -180 < angle < 180
+        if(ActiveCharacter().GetDirection() == 1)
+          angle /= 2; // -90 < angle < 90
+        else
+        if(angle > 90)
+          angle = 45 + (90 - angle) / 2;
+        else
+          angle = -45 + (-90 - angle) / 2;
+
+
+
+        if(angle < 0)
+          angle += 360; // so now 0 < angle < 360;
+
+        mb_mvt.angle += angle ;
+      }
+
       if(mb_mvt.follow_speed)
       {
         // Use the movement of the character
