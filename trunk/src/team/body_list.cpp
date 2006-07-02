@@ -96,5 +96,11 @@ Body* BodyList::GetBody(const std::string &name)
 {
   if(list[name] == NULL)
     Load(name);
+
+  if(list[name] == NULL)
+  {
+    std::cerr << "Unable to load body \"" << name << "\"" << std::endl;
+    return NULL;
+  }
   return new Body(list[name]);
 }
