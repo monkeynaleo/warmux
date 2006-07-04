@@ -226,8 +226,9 @@ void Network::ReceiveActions()
 {
   Uint32 packet[packet_max_size / 4];
 
-  int received, i;
-  char packet_size = 0;
+  uint i;
+  int received;
+  Uint32 packet_size = 0;
 
   while(m_is_connected && (conn.size()==1 || m_is_server))
   {
@@ -257,12 +258,15 @@ void Network::ReceiveActions()
       if(SDLNet_SocketReady(*sock)) // Check if this socket contains data to receive
       {
         // Read the size of the packet
-        if(SDLNet_TCP_Recv(*sock, &packet_size, 1) <= 0)
+        Uint32 net_size=0;
+        if(SDLNet_TCP_Recv(*sock, &net_size, 4) <= 0)
         {
           sock = CloseConnection(sock);
           continue;
         }
+        packet_size = SDLNet_Read32(&net_size);
         assert(packet_size > 0);
+
 
         // Fill the packet while it didn't reached its size
         memset(packet,0, packet_max_size);
@@ -301,18 +305,25 @@ void Network::SendAction(Action* action)
 {
   if (!m_is_connected) return;
 
-  char size = packet_max_size;
-  Uint32 packet[packet_max_size];
+  Uint32 size;
+  SDLNet_Write32(packet_max_size, &size);
+  Uint32 packet[packet_max_size/4];
   memset(packet,0,packet_max_size);
   action->Write(packet);
 
-  assert(packet[0] != 0 );
+  packet[(packet_max_size/4)-1] = 0xFFFFFFFF;
 
+  assert(packet[0] != 0 );
+/*
+  for(uint i=0; i < packet_max_size;i++)
+    printf("%i=%c ", (uint)*(((char*)packet)+i),*(((char*)packet)+i));
+  printf("\n");
+ */
   for(std::list<TCPsocket>::iterator client = conn.begin();
       client != conn.end();
       client++)
   {
-    SDLNet_TCP_Send(*client,&size,1);
+    SDLNet_TCP_Send(*client,&size,4);
     SDLNet_TCP_Send(*client,packet,packet_max_size);
   }
   std::cout << "sending " << *action << std::endl;
