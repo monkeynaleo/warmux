@@ -123,29 +123,18 @@ OptionMenu::OptionMenu() :
 
   // Values initialization
 
-  //Generate video mode list
-  SDL_Rect **modes;
-
-  /* Get available fullscreen/hardware modes */
-  modes=SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
-
-  /* Check is there are any modes available */
+  // Get available video resolution
   AppWormux * app = AppWormux::GetInstance();
+  std::list<Point2i>& video_res = AppWormux::GetInstance()->video.GetAvailableConfigs();
 
-  if(modes == (SDL_Rect **)0){
+  std::list<Point2i>::iterator it = video_res.begin(), end = video_res.end();
+  for (; it != end ; ++it) {
     std::ostringstream ss;
-    ss << app->video.window.GetWidth() << "x" << app->video.window.GetHeight();
-    lbox_video_mode->AddItem(false, "No modes available!", ss.str());
-  } else {
-    for(int i=0;modes[i];++i) {
-      if (modes[i]->w < 800 || modes[i]->h < 600) break; 
-      std::ostringstream ss;
-      ss << modes[i]->w << "x" << modes[i]->h ;
-      if (modes[i]->w == app->video.window.GetWidth() && modes[i]->h == app->video.window.GetHeight())
-	lbox_video_mode->AddItem(true, ss.str(), ss.str());
-      else
-	lbox_video_mode->AddItem(false, ss.str(), ss.str());
-    }
+    ss << (*it).x << "x" << (*it).y ;
+    if ((*it).x == app->video.window.GetWidth() && (*it).y == app->video.window.GetHeight())
+      lbox_video_mode->AddItem(true, ss.str(), ss.str());
+    else
+      lbox_video_mode->AddItem(false, ss.str(), ss.str());
   }
 
   // Generate sound mode list
