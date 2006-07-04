@@ -124,13 +124,11 @@ int AppWormux::main (int argc, char **argv){
 
 void AppWormux::Init(int argc, char **argv){
   Config * config = Config::GetInstance();
-  config->Init();
 
   InitI18N();
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
 
-  ActionHandler::GetInstance()->Init();
   config->Load();
 
   video.InitWindow();

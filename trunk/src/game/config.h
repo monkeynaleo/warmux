@@ -83,7 +83,6 @@ public:
   } tmp;
   
   static Config * GetInstance();
-  void Init();
   bool Load();
   void Apply();
   bool Save();

@@ -16,8 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Configuration de Wormux : toutes les variables qui sont int�essantes � * modifier se retrouvent ici. Les variables ont une valeur par d�aut qui
- * peut �re modifi� avec le fichier de configuration.
+ * Wormux configuration : all variables interesting to tweak should be here.
+ * A default value is affected for each variable, the value can be changed by
+ * the configuration file.
  *****************************************************************************/
 
 #include "config.h"
@@ -72,11 +73,8 @@ Config::Config()
 
   tmp.sound.music = true;
   tmp.sound.effects = true;
-  tmp.sound.frequency = 44100;
-}
+  tmp.sound.frequency = 44100;  
 
-void Config::Init()
-{
   Constants::GetInstance();
 
   // directories
