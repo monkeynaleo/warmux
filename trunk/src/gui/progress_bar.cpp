@@ -123,7 +123,7 @@ void BarreProg::DrawXY(const Point2i &pos){
   for (; it != fin; ++it)
   {
     Rectanglei r_marq(1 + it->val, 1, 1, haut - 2);
-	image.FillRect( r_marq, border_color);
+	image.FillRect( r_marq, it->color);
   }
   Rectanglei dst(pos.x, pos.y, larg, haut); 
   AppWormux::GetInstance()->video.window.Blit(image, pos);
