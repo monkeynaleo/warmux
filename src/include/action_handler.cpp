@@ -50,11 +50,6 @@ ActionHandler * ActionHandler::GetInstance()
   return singleton;
 }
 
-ActionHandler::ActionHandler()
-{
-  mutex = NULL;
-}
-
 void Action_Walk (Action *a)
 {
   assert(false);
@@ -368,7 +363,7 @@ std::string ActionHandler::GetActionName (Action_t action)
   return it->second;
 }
 
-void ActionHandler::Init()
+ActionHandler::ActionHandler()
 {
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
@@ -404,4 +399,3 @@ void ActionHandler::Init()
   Register (ACTION_EXPLOSION, "explosion", &Action_Explosion);
   SDL_UnlockMutex(mutex);
 }
-

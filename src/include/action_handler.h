@@ -54,7 +54,6 @@ public:
 
   void NewAction (Action* a, bool repeat_to_network=true);
   void ExecActions ();
-  void Init();
   std::string GetActionName(Action_t action);
 	
 private:
