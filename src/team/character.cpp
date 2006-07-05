@@ -55,7 +55,7 @@ const uint HAUT_FONT_MIX = 13;
 // Space between the name, the skin and the energy bar
 const uint ESPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
-const double MIN_SPEED_TO_FLY = 4.0;
+const double MIN_SPEED_TO_FLY = 7.0;
 
 // Pause for the animation
 #ifdef DEBUG
@@ -303,6 +303,14 @@ void Character::Draw()
     animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   }
 
+  // Stop the animation if we are playing
+  if(&ActiveCharacter() == this && body->GetMovement().substr(0,9) == "animation")
+  {
+    SetClothe("normal");
+    SetMovement("walk");
+  }
+
+  // Stop flying if we don't go fast enough
   double n, a;
   GetSpeed(n, a);
   if(body->GetMovement() == "fly" && n < MIN_SPEED_TO_FLY)
@@ -619,11 +627,18 @@ void Character::SignalFallEnding()
 
 void Character::SignalExplosion()
 {
+  if(IsDead()) return;
+
   double n, a;
   GetSpeed(n, a);
   SetRebounding(true);
   if(n > MIN_SPEED_TO_FLY)
     SetMovement("fly");
+  else
+  {
+    SetClotheOnce("black");
+    SetMovementOnce("black");
+  }
 }
 
 int Character::GetDirection() const 
@@ -701,6 +716,7 @@ void Character::MadeDamage(const int Dmg, const Character &other)
 
 void Character::SetMovement(std::string name)
 {
+  MSG_DEBUG("body","Character %s -> SetMovement : %s",character_name.c_str(),name.c_str());
   body->SetMovement(name);
   uint l,r,t,b;
   body->GetTestRect(l,r,t,b);
@@ -709,10 +725,23 @@ void Character::SetMovement(std::string name)
 
 void Character::SetMovementOnce(std::string name)
 {
+  MSG_DEBUG("body","Character %s -> SetMovementOnce : %s",character_name.c_str(),name.c_str());
   body->SetMovementOnce(name);
   uint l,r,t,b;
   body->GetTestRect(l,r,t,b);
   SetTestRect(l,r,t,b);
+}
+
+void Character::SetClothe(std::string name)
+{
+  MSG_DEBUG("body","Character %s -> SetClothe : %s",character_name.c_str(),name.c_str());
+  body->SetClothe(name);
+}
+
+void Character::SetClotheOnce(std::string name)
+{
+  MSG_DEBUG("body","Character %s -> SetClotheOnce : %s",character_name.c_str(),name.c_str());
+  body->SetClotheOnce(name);
 }
 
 bool Character::IsInVacuumXY(const Point2i &position) const{

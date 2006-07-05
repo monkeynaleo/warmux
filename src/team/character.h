@@ -157,9 +157,9 @@ public:
 
   // Body handling
   void SetBody(Body* _body);
-  void SetClothe(std::string name) { body->SetClothe(name); };
+  void SetClothe(std::string name);
   void SetMovement(std::string name);
-  void SetClotheOnce(std::string name) { body->SetClotheOnce(name); };
+  void SetClotheOnce(std::string name);
   void SetMovementOnce(std::string name);
 };
 

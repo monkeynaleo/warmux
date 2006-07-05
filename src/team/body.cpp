@@ -26,9 +26,10 @@
 #include "member.h"
 #include "teams_list.h"
 #include "../game/time.h"
+#include "../tool/debug.h"
+#include "../tool/random.h"
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
-#include "../tool/random.h"
 
 Body::Body(xmlpp::Element* xml, Profile* res)
 {
@@ -249,7 +250,8 @@ void Body::Draw(const Point2i& _pos)
   {
     current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->speed;
     last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->speed) * current_mvt->speed;
-    if(current_frame != current_frame % current_mvt->frames.size())
+
+    if(current_frame >= current_mvt->frames.size())
     {
       if(play_once_clothe_sauv)
         SetClothe(play_once_clothe_sauv->name);
@@ -361,6 +363,9 @@ void Body::SetClothe(std::string name)
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
   }
+  else
+    MSG_DEBUG("body","Clothe not found");
+
 
   play_once_clothe_sauv = NULL;
 
@@ -371,12 +376,18 @@ void Body::SetMovement(std::string name)
 {
   if(current_mvt && current_mvt->type == name) return;
 
+  // Dirty trick to get the "black" movement to be played fully
+  if(current_clothe && current_clothe->name == "black"
+  && current_mvt    && current_mvt->type == "black" ) return;
+
   if(mvt_lst.find(name) != mvt_lst.end())
   {
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
     last_refresh = Time::GetInstance()->Read();
   }
+  else
+    MSG_DEBUG("body","Movement not found");
 
   play_once_mvt_sauv = NULL;
 
@@ -397,10 +408,13 @@ void Body::SetClotheOnce(std::string name)
 
   if(clothes_lst.find(name) != clothes_lst.end())
   {
-    play_once_clothe_sauv = current_clothe;
+    if(!play_once_clothe_sauv)
+      play_once_clothe_sauv = current_clothe;
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
   }
+  else
+    MSG_DEBUG("body","Clothe not found");
 
   assert(current_clothe != NULL);
 }
@@ -409,14 +423,24 @@ void Body::SetMovementOnce(std::string name)
 {
   if(current_mvt && current_mvt->type == name) return;
 
-  if(mvt_lst.find(name) != mvt_lst.end())
+  // Dirty trick to get the "black" movement to be played fully
+  if(current_clothe && current_clothe->name == "black"
+  && current_mvt    && current_mvt->type == "black" ) return;
+
+ if(mvt_lst.find(name) != mvt_lst.end())
   {
-    play_once_mvt_sauv = current_mvt;
+    if(!play_once_mvt_sauv)
+    {
+      play_once_mvt_sauv = current_mvt;
+      play_once_frame_sauv = current_frame;
+    }
+
     current_mvt = mvt_lst.find(name)->second;
-    play_once_frame_sauv = current_frame;
     current_frame = 0;
     last_refresh = Time::GetInstance()->Read();
   }
+  else
+    MSG_DEBUG("body","Movement not found");
 
   assert(current_mvt != NULL);
 }
