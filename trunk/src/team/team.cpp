@@ -243,7 +243,7 @@ void Team::PrepareTurn()
   camera.ChangeObjSuivi (&ActiveCharacter(),
 			 !camera_est_sauve, !camera_est_sauve,
 			 true);
-  CurseurVer::GetInstance()->SuitVerActif();
+  CharacterCursor::GetInstance()->FollowActiveCharacter();
 
   // Active last weapon use if EnoughAmmo
   if (AccessWeapon().EnoughAmmo())

@@ -58,7 +58,6 @@
 
 #define ENABLE_LIMIT_FPS    
 
-bool game_initialise = false;
 bool game_fin_partie;
 
 GameLoop * GameLoop::singleton = NULL;
@@ -99,7 +98,7 @@ void GameLoop::InitGameData_NetServer()
         
   // Remise à zéro
   std::cout << "o " << _("Initialise data") << std::endl;
-  CurseurVer::GetInstance()->Reset();
+  CharacterCursor::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
   fps.Reset();
   Interface::GetInstance()->Reset();
@@ -174,7 +173,7 @@ void GameLoop::InitData()
   else        
     InitData_Local();
 
-  CurseurVer::GetInstance()->Reset();
+  CharacterCursor::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
   Clavier::GetInstance()->Reset();
    
@@ -192,13 +191,7 @@ void GameLoop::Init ()
   Game::GetInstance()->MessageLoading();
 
   // Init all needed data
-  if (!game_initialise)
-  {
-    std::cout << "o " << _("Initialisation") << std::endl;
-    Interface::GetInstance()->Init();
-    CurseurVer::GetInstance()->Init();
-    game_initialise = true;
-  }
+  std::cout << "o " << _("Initialisation") << std::endl;
   
   // Load the map
   LoadingScreen::GetInstance()->StartLoading(1, "map_icon", _("Maps"));
@@ -310,7 +303,7 @@ void GameLoop::Refresh()
     ActiveTeam().AccessWeapon().Manage();
     lst_objects.Refresh();
     ParticleEngine::Refresh();
-    CurseurVer::GetInstance()->Refresh();
+    CharacterCursor::GetInstance()->Refresh();
 
   }
   
@@ -359,7 +352,7 @@ void GameLoop::Draw ()
 
   // Draw arrow on top of character
   StatStart("GameDraw:arrow_character");
-  CurseurVer::GetInstance()->Draw();
+  CharacterCursor::GetInstance()->Draw();
   StatStop("GameDraw:arrow_character");
 
   // Draw waters
@@ -578,14 +571,14 @@ void GameLoop::SetState(int new_state, bool begin_game)
     duration = game_mode->duration_move_player;
     pause_seconde = global_time->Read();
     Interface::GetInstance()->UpdateTimer(duration);
-    CurseurVer::GetInstance()->Cache();
+    CharacterCursor::GetInstance()->Hide();
     break;
 
   // Fin du tour : petite pause
   case END_TURN:
     MSG_DEBUG("game.statechange", "End of turn");
     ActiveTeam().AccessWeapon().SignalTurnEnd();
-    CurseurVer::GetInstance()->Cache();
+    CharacterCursor::GetInstance()->Hide();
     duration = game_mode->duration_exchange_player;
     Interface::GetInstance()->UpdateTimer(duration);
     Interface::GetInstance()->EnableDisplayTimer(false);
@@ -653,7 +646,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
     txt = Format(_("%s has fallen in water."), character -> GetName().c_str());
     
   } else if (&ActiveCharacter() == character) { // Active Character is dead 
-    CurseurVer::GetInstance()->Cache();
+    CharacterCursor::GetInstance()->Hide();
 
     // Is this a suicide ?
     if (ActiveTeam().GetWeaponType() == WEAPON_SUICIDE) {

@@ -68,16 +68,11 @@ Interface * Interface::GetInstance() {
 
 Interface::Interface()
 {
-}
-
-void Interface::Init()
-{
   display = true;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   game_menu = resource_manager.LoadImage( res, "interface/menu_jeu");
   bg_time = resource_manager.LoadImage( res, "interface/fond_compteur");
-  weapons_menu.Init();
   weapon_box_button = resource_manager.LoadImage( res, "interface/weapon_box_button");
    
   barre_energie.InitVal (0, 0, GameMode::GetInstance()->character.init_energy);

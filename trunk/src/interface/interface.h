@@ -80,7 +80,6 @@ public:
  public:
    static Interface * GetInstance();
 
-   void Init();
    void Reset();
    void Draw();
    

@@ -222,7 +222,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
 
     case ACTION_CENTER:
-      CurseurVer::GetInstance()->SuitVerActif();
+      CharacterCursor::GetInstance()->FollowActiveCharacter();
       camera.ChangeObjSuivi (&ActiveCharacter(), true, true, true);
       return;
 
