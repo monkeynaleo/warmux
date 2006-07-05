@@ -57,7 +57,6 @@ Team::Team(const std::string& _teams_dir,
   m_sound_profile = _sound_profile;
 
   flag = _flag;
-  crosshair.Init();
 }
 
 Team * Team::CreateTeam (const std::string& teams_dir,
