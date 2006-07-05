@@ -57,7 +57,6 @@ class Particle : public PhysicalObj
  public:
   Particle(const std::string &name);
   ~Particle();
-  virtual void Init()=0;
   virtual void Draw();
   virtual void Refresh();
   void SetOnTop(bool b) { on_top = b; }
@@ -71,7 +70,6 @@ class ExplosionSmoke : public Particle
   float mvt_freq;
  public:
   ExplosionSmoke(const uint size_init);
-  void Init();
   void Refresh();
   void Draw();
 };
@@ -80,28 +78,24 @@ class Smoke : public Particle
 {
  public:
   Smoke();
-  void Init();
 };
 
 class DarkSmoke : public Particle
 {
  public:
   DarkSmoke();
-  void Init();
 };
 
 class StarParticle : public Particle
 {
  public:
   StarParticle();
-  void Init();
 };
 
 class BulletParticle : public Particle
 {
  public:
   BulletParticle();
-  void Init();
   void Refresh();
   void SignalRebound();
 };
@@ -110,7 +104,6 @@ class MagicStarParticle: public Particle
 {
  public:
   MagicStarParticle();
-  void Init();
   void Refresh();
 };
 
@@ -118,17 +111,13 @@ class FireParticle : public Particle
 {
  public:
   FireParticle();
-  void Init();
   void SignalFallEnding();
 };
 
 class GroundParticle : public Particle
 {
-  Point2i size;
  public:
-  GroundParticle(Point2i _size);
-  void Init();
-  void GetGround();
+  GroundParticle(const Point2i& size, const Point2i& position);
   void Refresh();
 };
 
