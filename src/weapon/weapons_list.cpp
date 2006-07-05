@@ -44,7 +44,7 @@ WeaponsList::WeaponsList()
 
 WeaponsList::~WeaponsList()
 {
-  weapons_list_it it=todelete.begin(), end=todelete.end();
+  weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
   for (; it != end; ++it)
   {
     delete *it;
@@ -57,7 +57,6 @@ void WeaponsList::AddToList(Weapon* arme, uint num_sort)
 {
   // insert the pointer
   m_weapons_list.push_back(arme);
-  todelete.push_back(arme);
 
   m_weapons_map.insert(keybind(num_sort, arme));
 

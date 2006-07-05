@@ -28,11 +28,7 @@
 Random randomObj;
 
 Random::Random(){
-	Init();
-}
-
-void Random::Init(){
-	srand( time(NULL) );
+  srand( time(NULL) );
 }
 
 bool Random::GetBool(){
