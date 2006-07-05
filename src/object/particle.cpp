@@ -95,22 +95,21 @@ bool Particle::StillUseful()
   return (m_left_time_to_live > 0);
 }
 
+// ==============================================
+
 Smoke::Smoke() :
   Particle("smoke_particle")
 {
   m_initial_time_to_live = 10;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 100;
-}
 
-void Smoke::Init()
-{
-  m_initial_time_to_live = 10;
-  m_left_time_to_live = m_initial_time_to_live;
   image = ParticleEngine::GetSprite(SMOKE_spr);
   image->Scale(0.0,0.0);
   SetSize( Point2i(1, 1) );
 }
+
+// ==============================================
 
 ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   Particle("explosion_smoke_particle")
@@ -120,13 +119,8 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 25;
   dx = 0;
-}
 
-void ExplosionSmoke::Init()
-{
   image = ParticleEngine::GetSprite(EXPLOSION_SMOKE_spr);
-  m_initial_time_to_live = 30;
-  m_left_time_to_live = m_initial_time_to_live;
   mvt_freq = randomObj.GetDouble(-2.0, 2.0);
   SetGravityFactor(randomObj.GetDouble(-1.0,-2.0));
 
@@ -165,20 +159,21 @@ void ExplosionSmoke::Draw()
     image->Draw(GetPosition()+Point2i(dx,0));
 }
 
+// ==============================================
+
 StarParticle::StarParticle() :
   Particle("star_particle")
 {
   m_initial_time_to_live = 30;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 50;
-}
 
-void StarParticle::Init()
-{
   image = ParticleEngine::GetSprite(STAR_spr);
   image->Scale(0.0, 0.0);
   SetSize( Point2i(1, 1) );
 }
+
+// ==============================================
 
 DarkSmoke::DarkSmoke() :
   Particle("dark_smoke")
@@ -186,14 +181,13 @@ DarkSmoke::DarkSmoke() :
   m_initial_time_to_live = 20;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 15;
-}
 
-void DarkSmoke::Init()
-{
   image = ParticleEngine::GetSprite(DARK_SMOKE_spr);
   image->Scale(0.0, 0.0);
   SetSize( Point2i(1, 1) );
 }
+
+// ==============================================
 
 MagicStarParticle::MagicStarParticle() :
   Particle("magic_star_particle")
@@ -201,10 +195,7 @@ MagicStarParticle::MagicStarParticle() :
   m_initial_time_to_live = 30;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 25;
-}
 
-void MagicStarParticle::Init()
-{
   uint color=randomObj.GetLong(0,2);
   switch(color)
   {
@@ -229,6 +220,8 @@ void MagicStarParticle::Refresh()
   Particle::Refresh();
 }
 
+// ==============================================
+
 ExplosiveWeaponConfig fire_cfg;
 
 FireParticle::FireParticle() :
@@ -240,10 +233,7 @@ FireParticle::FireParticle() :
   m_time_between_scale = 50;
   fire_cfg.damage = 1;
   fire_cfg.explosion_range = 5;
-}
 
-void FireParticle::Init()
-{
   image = ParticleEngine::GetSprite(FIRE_spr);
   image->Scale(0.0,0.0);
   SetSize( Point2i(1, 1) );
@@ -257,17 +247,15 @@ void FireParticle::SignalFallEnding()
   m_left_time_to_live = 0;
 }
 
-//-----------------------------------------------------------------------------
+// ==============================================
+
 BulletParticle::BulletParticle() :
   Particle("bullet_particle")
 {
   m_rebound_sound = "weapon/grenade_bounce";
   m_left_time_to_live = 1;
   m_type = objCLASSIC;
-}
 
-void BulletParticle::Init()
-{
   image = ParticleEngine::GetSprite(BULLET_spr);
   image->Scale(1.0,1.0);
   SetSize( Point2i(1, 1) );
@@ -288,25 +276,16 @@ void BulletParticle::SignalRebound()
   m_type = objUNBREAKABLE;
 }
 
-//-----------------------------------------------------------------------------
-GroundParticle::GroundParticle(Point2i _size) :
+// ==============================================
+
+GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
   Particle("ground_particle")
 {
   m_left_time_to_live = 1;
   image = NULL;
-  size = _size;
-}
 
-void GroundParticle::Init()
-{
-  SetSize( Point2i(1, 1) );
-  GetGround();
-}
-
-void GroundParticle::GetGround()
-{
   Rectanglei rec;
-  rec.SetPosition( GetPosition() - size / 2);
+  rec.SetPosition( position - size / 2);
   rec.SetSize( size );
   image = new Sprite(world.ground.GetPart(rec));
 }
@@ -319,7 +298,8 @@ void GroundParticle::Refresh()
   if(m_alive == GHOST)
     m_left_time_to_live = 0;
 }
-//-----------------------------------------------------------------------------
+
+// ==============================================
 
 ParticleEngine::ParticleEngine(uint time)
 {
@@ -401,11 +381,12 @@ void ParticleEngine::AddNow(const Point2i &position,
                            break;
       case particle_BULLET : particle = new BulletParticle();
                            break;
-      case particle_GROUND : particle = new GroundParticle(Point2i(10,10));
+      case particle_GROUND : particle = new GroundParticle(Point2i(10,10), position);
                            break;
-      case particle_AIR_HAMMER : particle = new GroundParticle(Point2i(21,18)); // Half the size of the airhammer impact
-                                                                                // Dirty, but we have no way to read the
-                                                                                // impact size from here ...
+      case particle_AIR_HAMMER : particle = new GroundParticle(Point2i(21,18), position); 
+	// Half the size of the airhammer impact
+	// Dirty, but we have no way to read the
+	// impact size from here ...
                            break;
       case particle_MAGIC_STAR : particle = new MagicStarParticle();
                                  break;
@@ -426,7 +407,6 @@ void ParticleEngine::AddNow(const Point2i &position,
 		  tmp_angle = angle;
 
       particle->SetXY(position);
-      particle->Init();
       particle->SetOnTop(upper);
       particle->SetSpeed(tmp_norme, tmp_angle);
       lst_particles.push_back(particle);
@@ -454,7 +434,6 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
       norme = 2.5 * radius / 3.0;
 
       particle = new ExplosionSmoke(size);
-      particle->Init();
       particle->SetOnTop(true);
 
       Point2i pos = position; //Set position to center of explosion
@@ -490,7 +469,6 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
 
       particle = new ExplosionSmoke(size);
       particle->SetXY(pos);
-      particle->Init();
       particle->SetOnTop(true);
 
       lst_particles.push_back(particle);
