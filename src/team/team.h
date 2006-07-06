@@ -114,6 +114,7 @@ public:
   const std::string& GetSoundProfile() const { return m_sound_profile; }
   iterator begin();
   iterator end();
+  Character* FindByIndex(uint index);
 
   // Number of ammo for the current selected weapon.
   // (return INFINITE_AMMO is ammo are unlimited !)

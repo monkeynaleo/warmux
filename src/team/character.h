@@ -161,6 +161,9 @@ public:
   void SetMovement(std::string name);
   void SetClotheOnce(std::string name);
   void SetMovementOnce(std::string name);
+
+  uint GetTeamIndex();
+  uint GetCharacterIndex();
 };
 
 #endif

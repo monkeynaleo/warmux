@@ -329,6 +329,19 @@ void Team::ResetNbUnits()
 Team::iterator Team::begin() { return characters.begin(); }
 Team::iterator Team::end() { return characters.end(); }
 
+Character* Team::FindByIndex(uint index)
+{
+  assert(index < characters.size());
+  iterator it= characters.begin(), end=characters.end();
+
+  while(index != 0 && it != characters.end())
+  {
+    index--;
+    it++;
+  }
+  return &(*it);
+}
+
 void Team::LoadGamingData(uint how_many_characters)
 {
   // Reset ammos

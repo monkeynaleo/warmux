@@ -351,12 +351,6 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SEND_RANDOM:
     return new ActionDouble(type, input);
 
-  case ACTION_MOVE_CHARACTER:
-    return new ActionInt2(type, input);
-
-  case ACTION_SET_CHARACTER_SPEED:
-    return new ActionDouble2(type, input);
-
   case ACTION_CHANGE_WEAPON:
   case ACTION_WIND:
   case ACTION_SET_CHARACTER_DIRECTION:
@@ -387,9 +381,9 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SYNC_BEGIN:
   case ACTION_SYNC_END:
   case ACTION_EXPLOSION:
+  case ACTION_SET_CHARACTER_PHYSICS:
     return new Action(type,input);
 
-  case ACTION_WALK:
   default:
     assert(false);
     return new Action(type);

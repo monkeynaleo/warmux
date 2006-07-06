@@ -63,5 +63,7 @@ private:
   void Register (Action_t action, const std::string &name, callback_t fct);
 };
 
+Action* BuildActionSendCharacterPhysics(int team_no, int char_no);
+
 //-----------------------------------------------------------------------------
 #endif

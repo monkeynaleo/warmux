@@ -34,6 +34,7 @@
 #include "../team/move.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
+#include "../tool/vector2.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
 #include "../weapon/explosion.h"
@@ -48,12 +49,6 @@ ActionHandler * ActionHandler::GetInstance()
   if (singleton == NULL)
     singleton = new ActionHandler();
   return singleton;
-}
-
-void Action_Walk (Action *a)
-{
-  assert(false);
-  MoveCharacter (ActiveCharacter());
 }
 
 void Action_MoveRight (Action *a)
@@ -113,16 +108,37 @@ void Action_Wind (Action *a)
   wind.SetVal (ai->GetValue());
 }
 
-void Action_MoveCharacter (Action *a)
+Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
 {
-  ActionInt2* ap = dynamic_cast<ActionInt2*>(a);
-  ActiveCharacter().SetXY (Point2i(ap->GetValue1(), ap->GetValue2()));
+  Action* a = new Action(ACTION_SET_CHARACTER_PHYSICS);
+  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  a->Push(team_no);
+  a->Push(char_no);
+  a->Push(c->GetPhysX());
+  a->Push(c->GetPhysY());
+  Point2d speed;
+  c->GetSpeedXY(speed);
+  a->Push(speed.x);
+  a->Push(speed.y);
+  return a;
 }
 
-void Action_SetCharacterSpeed (Action *a)
+void Action_SetCharacterPhysics (Action *a)
 {
-  ActionDouble2* ap = dynamic_cast<ActionDouble2*>(a);
-  ActiveCharacter().SetSpeedXY (Point2d(ap->GetValue1(), ap->GetValue2()));
+  int team_no, char_no;
+  double x, y, s_x, s_y;
+
+  team_no = a->PopInt();
+  char_no = a->PopInt();
+  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  assert(c != NULL);
+
+  x = a->PopDouble();
+  y = a->PopDouble();
+  s_x = a->PopDouble();
+  s_y = a->PopDouble();
+  c->SetPhysXY(x, y);
+  c->SetSpeedXY(Point2d(s_x, s_y));
 }
 
 void Action_SetFrame (Action *a)
@@ -367,7 +383,6 @@ ActionHandler::ActionHandler()
 {
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
-  Register (ACTION_WALK, "walk", &Action_Walk);
   Register (ACTION_MOVE_LEFT, "move_left", &Action_MoveLeft);
   Register (ACTION_MOVE_RIGHT, "move_right", &Action_MoveRight);
   Register (ACTION_UP, "up", &Action_Up);
@@ -384,8 +399,7 @@ ActionHandler::ActionHandler()
   Register (ACTION_NEW_TEAM, "new_team", &Action_NewTeam);
   Register (ACTION_DEL_TEAM, "del_team", &Action_DelTeam);
   Register (ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
-  Register (ACTION_MOVE_CHARACTER, "move_character", &Action_MoveCharacter);
-  Register (ACTION_SET_CHARACTER_SPEED, "set_character_speed", &Action_SetCharacterSpeed);
+  Register (ACTION_SET_CHARACTER_PHYSICS, "set_character_physics", &Action_SetCharacterPhysics);
   Register (ACTION_SET_MOVEMENT, "set_movement", &Action_SetMovement);
   Register (ACTION_SET_CLOTHE, "set_clothe", &Action_SetClothe);
   Register (ACTION_SET_FRAME, "set_frame", &Action_SetFrame);

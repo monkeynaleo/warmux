@@ -194,22 +194,18 @@ void ApplyExplosion_server (const Point2i &pos,
   float range = config.explosion_range / PIXEL_PER_METER;
   range *= 1.5;
 
-  Team* distant_team = &ActiveTeam(); // Active team on the client
-
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
     end=teams_list.playing_list.end();
 
-  for (; it != end; ++it)
+  for (int team_no = 0; it != end; ++it, ++team_no)
   {
     Team& team = **it;
     Team::iterator
         tit = team.begin(),
         tend = team.end();
-    int i=0;
 
-    Character* distant_character = &team.ActiveCharacter(); // Active character of the team *it on the clients
-    for (; tit != tend; ++tit, ++i)
+    for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
       Character &character = *tit;
 
@@ -217,38 +213,13 @@ void ApplyExplosion_server (const Point2i &pos,
       distance = MeterDistance (pos, character.GetCenter());
 
       // If the worm is in the explosion range, apply damage on it !
-//      if (distance <= range || distance < config.blast_range)
+      if (distance <= range || distance < config.blast_range)
       {
         // cliens : Place characters
-//        if(&team != distant_team)
-        {
-          action_handler->NewAction (new ActionString(ACTION_CHANGE_TEAM, team.GetId()));
-          distant_team = &team;
-        }
-//        if(&character != distant_character)
-        {
-          action_handler->NewAction (new Action(ACTION_CHANGE_CHARACTER));
-          distant_character = &character;
-        }
-        action_handler->NewAction (new ActionInt2(ACTION_MOVE_CHARACTER,
-                                              character.GetX(), character.GetY()));
-        Point2d speed;
-        character.GetSpeedXY(speed);
-        action_handler->NewAction (new ActionDouble2(ACTION_SET_CHARACTER_SPEED,
-                                              speed.x, speed.y));
+        Action* a = BuildActionSendCharacterPhysics(team_no, char_no);
+        action_handler->NewAction(a);
       }
     }
-//    if(&team.ActiveCharacter() != distant_character)
-    {
-//#warning "We have perhaps something to do here"
-      // Restore active character of this team
-      action_handler->NewAction (new Action(ACTION_CHANGE_CHARACTER));
-    }
-  }
-
-  if(&ActiveTeam() != distant_team)
-  {
-    action_handler->NewAction (new ActionString(ACTION_CHANGE_TEAM, ActiveTeam().GetId()));
   }
 
   Action* a = new Action(ACTION_EXPLOSION);
