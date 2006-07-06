@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-06-29 13:50+0100\n"
+"PO-Revision-Date: 2006-07-06 17:41+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: RebelCode <info@rebelcoders.org>; TeMpLeR <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,6 +18,7 @@ msgstr ""
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"POT-Creation-Date: \n"
 
 #: src/map/maps_list.cpp:277
 #, c-format
@@ -135,7 +136,8 @@ msgstr "(illimitato)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr "<infinite_background> needs <is_open> to be set to work correctly!!"
 
-#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167
+#: src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Attacco aereo"
 
@@ -143,7 +145,8 @@ msgstr "Attacco aereo"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
+#: src/object/bonus_box.cpp:176
+#: src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Bazooka automatico"
 
@@ -159,12 +162,14 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Eccezione C++:"
 
-#: src/team/teams_list.cpp:427 src/team/teams_list.cpp:466
+#: src/team/teams_list.cpp:427
+#: src/team/teams_list.cpp:466
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossibile trovare la squadra %s!"
 
-#: src/team/teams_list.cpp:123 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:123
+#: src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossibile aprire la directory delle squadra (%s)!"
@@ -205,7 +210,8 @@ msgstr "Durata del turno :"
 msgid "Duration of the end of a turn:"
 msgstr "Durata della fine del turno :"
 
-#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195
+#: src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamite"
 
@@ -230,11 +236,8 @@ msgstr "Errore nel caricamento della squadra %s :"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Errore nella creazione della directory \"%s\" : impossibile salvare il file "
-"di configurazione."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Errore nella creazione della directory \"%s\" : impossibile salvare il file di configurazione."
 
 #: src/game/config.cpp:121
 #, c-format
@@ -256,7 +259,7 @@ msgstr ""
 "%s"
 
 #: src/team/team.cpp:140
-#, fuzzy, c-format
+#, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Errore: impossibile trovare la skin \"%s\" per la squadra \"%s\"."
 
@@ -313,7 +316,8 @@ msgstr "Inizializzazione data"
 msgid "Initialise objects"
 msgstr "Inizializzazione oggetti"
 
-#: src/game/game_loop.cpp:94 src/game/game_loop.cpp:125
+#: src/game/game_loop.cpp:94
+#: src/game/game_loop.cpp:125
 msgid "Initialise teams"
 msgstr "Inizializzazione squadre"
 
@@ -336,7 +340,7 @@ msgstr "Mapa %s, creata da :"
 
 #: src/game/game_loop.cpp:204
 msgid "Maps"
-msgstr ""
+msgstr "Mappa"
 
 #: src/menu/options_menu.cpp:69
 msgid "Maximum number of FPS:"
@@ -412,7 +416,6 @@ msgid "Sound options"
 msgstr "Opzioni del suono"
 
 #: src/game/game_loop.cpp:222
-#, fuzzy
 msgid "Sounds"
 msgstr "Opzioni del suono"
 
@@ -426,9 +429,10 @@ msgstr "Munizioni :"
 
 #: src/game/game_loop.cpp:208
 msgid "Teams"
-msgstr ""
+msgstr "Squadre"
 
-#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140
+#: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teletrasporto"
 
@@ -436,7 +440,8 @@ msgstr "Teletrasporto"
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Il razzo automatico è passato in un altro mondo..."
 
-#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56
+#: src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Il razzo è passato in un altro mondo..."
 
@@ -445,7 +450,8 @@ msgstr "Il razzo è passato in un altro mondo..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Impossibile avviare le librerie SDL: %s"
 
-#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossibile aprire la directory delle mappe (%s)!"
@@ -463,9 +469,8 @@ msgid "Weapon:"
 msgstr "Armi :"
 
 #: src/game/game_loop.cpp:217
-#, fuzzy
 msgid "Weapons"
-msgstr "Armi :"
+msgstr "Armi"
 
 #: src/main.cpp:211
 msgid "Website: "
@@ -495,9 +500,7 @@ msgstr "Hai bisogno di ammeno una valida mappa !"
 
 #: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr ""
-"Hai bisogno di almeno due squadre : cambia le impostazione nel menu "
-"'Opzioni' !"
+msgstr "Hai bisogno di almeno due squadre : cambia le impostazione nel menu 'Opzioni' !"
 
 #: src/team/teams_list.cpp:158
 msgid "You need at least two valid teams !"
@@ -513,88 +516,64 @@ msgstr "completo"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Errore nel caricamento della skin %s:"
-
 #~ msgid "Load skins:"
 #~ msgstr "Caricamento skin :"
-
 #~ msgid "Unable to open skins directory (%s)!"
 #~ msgstr "Impossibile aprire la directory delle skin (%s)!"
-
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr "  Most sold-out :  %s (%i).\n"
-
 #~ msgid "  Most usefull  :  %s (%i).\n"
 #~ msgstr "  Il più utile :  %s (%i).\n"
-
 #~ msgid "  Most useless  :  %s (%i).\n"
 #~ msgstr "  Il meno utile  :  %s (%i).\n"
-
 #~ msgid "  Most violent  :  %s (%i).\n"
 #~ msgstr "  Il più violento  :  %s (%i).\n"
-
 #~ msgid "%s team has won.\n"
 #~ msgstr "La squadra %s vince.\n"
-
 #~ msgid "All-Team results:\n"
 #~ msgstr "I risultati di tutte le squadre:\n"
-
 #~ msgid "End of the game!\n"
 #~ msgstr "Fine della partita !\n"
-
 #~ msgid "Nobody"
 #~ msgstr "Nessuno"
-
 #~ msgid "Team %s results:\n"
 #~ msgstr "Risultati della squadra %s:\n"
-
 #~ msgid "The game has ended as a draw.\n"
 #~ msgstr "Il gioco è finito pari.\n"
 
 #, fuzzy
 #~ msgid "Load map"
 #~ msgstr "Caricamento mappa"
-
 #~ msgid "Unknow action"
 #~ msgstr "Azione ignota"
-
 #~ msgid "Wait for clients"
 #~ msgstr "Aspetto i giocatori"
-
 #~ msgid "Wait for map"
 #~ msgstr "Aspetto la mappa"
-
 #~ msgid "Wait for server"
 #~ msgstr "Aspetto il server"
-
 #~ msgid "Wait for server informations"
 #~ msgstr "Aspetto le informazioni del server"
-
 #~ msgid "Wait teams"
 #~ msgstr "Aspetto le squadre"
-
 #~ msgid "Pause"
 #~ msgstr "Pausa"
-
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr "Attenzione! I dettagli del vento sono troppo lenti! Abbassati a 0.3"
-
 #~ msgid "End of game"
 #~ msgstr "Fine della partita"
 
 #, fuzzy
 #~ msgid "Authors"
 #~ msgstr "Autori :"
-
 #~ msgid "Info"
 #~ msgstr "Informazione"
 
 #, fuzzy
 #~ msgid "Load game data..."
 #~ msgstr "Carico i dati di gioco  ..."
-
 #~ msgid "ClanLib error :"
 #~ msgstr "Errore ClanLib :"
-
 #~ msgid "Sound error :"
 #~ msgstr "Errore sonoro :"
 
@@ -605,3 +584,4 @@ msgstr "completo"
 #, fuzzy
 #~ msgid "Load weapon %s"
 #~ msgstr "Caricamento mappa %s"
+
