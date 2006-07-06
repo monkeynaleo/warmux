@@ -161,40 +161,6 @@ std::ostream& Action::out(std::ostream &os) const
 }
 //-----------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------
-
-ActionInt2::ActionInt2 (Action_t type, int v1, int v2) : Action(type) 
-{ 
-  m_value1 = v1; m_value2 = v2; 
-  Push(v1);
-  Push(v2);
-}
-
-ActionInt2::ActionInt2(Action_t type, Uint32* is) : Action(type, is)
-{
-  m_value1 = PopInt();
-  m_value2 = PopInt();
-}
-
-int ActionInt2::GetValue1() const 
-{ 
-  return m_value1; 
-}
-
-int ActionInt2::GetValue2() const 
-{ 
-  return m_value2; 
-}
-
-std::ostream& ActionInt2::out(std::ostream &os) const
-{
-  Action::out (os);
-  os <<  " (2x int) = " << m_value1 << ", " << m_value2;
-  return os;
-}
-
-//-----------------------------------------------------------------------------
-
 ActionInt::ActionInt (Action_t type, int value) : Action(type)
 {
   m_value = value;
@@ -234,38 +200,6 @@ std::ostream& ActionDouble::out(std::ostream &os) const
 {
   Action::out (os);
   os << " (double) = " << m_value;
-  return os;
-}
-
-//-----------------------------------------------------------------------------
-
-ActionDouble2::ActionDouble2 (Action_t type, double v1, double v2) : Action(type) 
-{ 
-  m_value1 = v1; m_value2 = v2;
-  Push(v1);
-  Push(v2);
-}
-
-ActionDouble2::ActionDouble2(Action_t type, Uint32* is) : Action(type, is)
-{
-  m_value1 = PopDouble();
-  m_value2 = PopDouble();
-}
-
-double ActionDouble2::GetValue1() const 
-{ 
-  return m_value1; 
-}
-
-double ActionDouble2::GetValue2() const 
-{ 
-  return m_value2; 
-}
-
-std::ostream& ActionDouble2::out(std::ostream &os) const
-{
-  Action::out (os);
-  os <<  " (2x double) = " << m_value1 << ", " << m_value2;
   return os;
 }
 

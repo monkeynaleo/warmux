@@ -798,3 +798,24 @@ bool Character::FootsInVacuumXY(const Point2i &position) const
 
   return world.RectEstDansVide (rect);
 }
+
+uint Character::GetTeamIndex()
+{
+  uint index = 0;
+  teams_list.FindPlayingById( GetTeam().GetId(), index);
+  return index;
+}
+
+uint Character::GetCharacterIndex()
+{
+  uint index = 0;
+  for(Team::iterator it = TeamAccess().begin();
+                     it != TeamAccess().end() ; ++it, ++index )
+  {
+    if( &(*it) == this)
+      return index;
+  }
+  assert(false);
+  return 0;
+}
+

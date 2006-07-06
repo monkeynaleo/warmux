@@ -109,9 +109,6 @@ void MoveCharacter(Character &character){
     // Gravite (s'il n'y a pas eu de collision
     character.UpdatePosition();
 
-    // Passe a l'image suivante
-//    character.FrameImageSuivante();
-
   }while(character.CanStillMoveDG(PAUSE_BOUGE) && CalculeHauteurBouge (character, hauteur));
 }
 // Move a character to the left
@@ -132,11 +129,12 @@ void MoveCharacterLeft(Character &character){
   //Refresh skin position across network
   if( !network.IsLocal() && ActiveTeam().is_local)
   {
-    ActionInt2 a_move_char(ACTION_MOVE_CHARACTER, character.GetX(),character.GetY());
+    Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
     ActionString a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
     ActionString a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
     ActionInt a_set_frame(ACTION_SET_FRAME,character.body->GetFrame());
-    network.SendAction(&a_move_char);
+    network.SendAction(a);
+    delete a;
     network.SendAction(&a_set_clothe);
     network.SendAction(&a_set_movement);
     network.SendAction(&a_set_frame);
@@ -163,11 +161,12 @@ void MoveCharacterRight (Character &character){
   //Refresh skin position across network
   if( !network.IsLocal() && ActiveTeam().is_local)
   {
-    ActionInt2 a_move_char(ACTION_MOVE_CHARACTER, character.GetX(),character.GetY());
+    Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
     ActionString a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
     ActionString a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
     ActionInt a_set_frame(ACTION_SET_FRAME,character.body->GetFrame());
-    network.SendAction(&a_move_char);
+    network.SendAction(a);
+    delete a;
     network.SendAction(&a_set_clothe);
     network.SendAction(&a_set_movement);
     network.SendAction(&a_set_frame);

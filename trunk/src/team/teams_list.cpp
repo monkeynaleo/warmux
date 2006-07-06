@@ -223,6 +223,29 @@ Team *TeamsList::FindByIndex (uint index)
 
 //-----------------------------------------------------------------------------
 
+Team *TeamsList::FindPlayingByIndex (uint index)
+{
+  assert(index < playing_list.size());
+  return playing_list[index];
+}
+
+//-----------------------------------------------------------------------------
+
+Team* TeamsList::FindPlayingById(const std::string &id, uint &index)
+{
+  iterator it = playing_list.begin(), end = playing_list.end();
+  index=0;
+  for (; it != end; ++it, ++index) 
+  {
+    if ((*it) -> GetId() == id) 
+      return *it;
+  }
+  assert(false);
+  return NULL;
+}
+
+//-----------------------------------------------------------------------------
+
 void TeamsList::InitList (const std::list<std::string> &liste_nom)
 {
   Clear();
