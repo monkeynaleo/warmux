@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-06-17 17:41+0100\n"
-"Last-Translator: Stinner Victor <victor.stinner AT haypocalc.com>\n"
+"PO-Revision-Date: 2006-07-06 17:39+0100\n"
+"Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -18,6 +18,7 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: KBabel 1.11\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"POT-Creation-Date: \n"
 
 #: src/map/maps_list.cpp:277
 #, c-format
@@ -133,11 +134,10 @@ msgstr "(illimitées)"
 
 #: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr ""
-"La balise <infinite_background> a besoin de la balise <is_open> pour "
-"fonctionner correctment."
+msgstr "La balise <infinite_background> a besoin de la balise <is_open> pour fonctionner correctment."
 
-#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167
+#: src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Attaque aérienne"
 
@@ -145,7 +145,8 @@ msgstr "Attaque aérienne"
 msgid "Authors:"
 msgstr "Auteurs :"
 
-#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
+#: src/object/bonus_box.cpp:176
+#: src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Bazooka automatique"
 
@@ -161,12 +162,14 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Exception C++ interceptée :"
 
-#: src/team/teams_list.cpp:427 src/team/teams_list.cpp:466
+#: src/team/teams_list.cpp:427
+#: src/team/teams_list.cpp:466
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Impossible de trouver l'équipe %s !"
 
-#: src/team/teams_list.cpp:123 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:123
+#: src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
@@ -207,7 +210,8 @@ msgstr "Durée d'un tour :"
 msgid "Duration of the end of a turn:"
 msgstr "Durée de la fin d'un tour :"
 
-#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195
+#: src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamite"
 
@@ -232,8 +236,7 @@ msgstr "Erreur durant le chargement de l'équipe %s :"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Erreur lors du chargement du fichier de configuration: \"%s\""
 
 #: src/game/config.cpp:121
@@ -256,7 +259,7 @@ msgstr ""
 "%s"
 
 #: src/team/team.cpp:140
-#, fuzzy, c-format
+#, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : impossible de trouver le skin \"%s\" pour l'équipe \"%s\"."
 
@@ -313,7 +316,8 @@ msgstr "Initialisation des données"
 msgid "Initialise objects"
 msgstr "Initialisation des objets"
 
-#: src/game/game_loop.cpp:94 src/game/game_loop.cpp:125
+#: src/game/game_loop.cpp:94
+#: src/game/game_loop.cpp:125
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
@@ -336,7 +340,7 @@ msgstr "Terrain %s, une création de :"
 
 #: src/game/game_loop.cpp:204
 msgid "Maps"
-msgstr ""
+msgstr "Terrains"
 
 #: src/menu/options_menu.cpp:69
 msgid "Maximum number of FPS:"
@@ -361,8 +365,7 @@ msgstr "Jeu en Réseau"
 #: src/weapon/weapon.cpp:513
 #, c-format
 msgid "No element <%s> found in the xml config file!"
-msgstr ""
-"Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
+msgstr "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
 #: src/menu/options_menu.cpp:113
 msgid "Number of players per team:"
@@ -413,7 +416,6 @@ msgid "Sound options"
 msgstr "Options sonores"
 
 #: src/game/game_loop.cpp:222
-#, fuzzy
 msgid "Sounds"
 msgstr "Options sonores"
 
@@ -427,9 +429,10 @@ msgstr "Munitions :"
 
 #: src/game/game_loop.cpp:208
 msgid "Teams"
-msgstr ""
+msgstr "Équipes"
 
-#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140
+#: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Téléportation"
 
@@ -437,7 +440,8 @@ msgstr "Téléportation"
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La roquette automatique est partie dans un autre monde ..."
 
-#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56
+#: src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "La roquette est partie dans un autre monde ..."
 
@@ -446,7 +450,8 @@ msgstr "La roquette est partie dans un autre monde ..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Échec de l'initialisation de la bibliothèque SDL : %s"
 
-#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des terrains (%s) !"
@@ -464,9 +469,8 @@ msgid "Weapon:"
 msgstr "Arme :"
 
 #: src/game/game_loop.cpp:217
-#, fuzzy
 msgid "Weapons"
-msgstr "Arme :"
+msgstr "Armes"
 
 #: src/main.cpp:211
 msgid "Website: "
@@ -496,9 +500,7 @@ msgstr "Il faut au minimum un terrain valide !"
 
 #: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr ""
-"Vous avez besoin d'au moins deux équipes, corrigez ceci dans le menu "
-"Options !"
+msgstr "Vous avez besoin d'au moins deux équipes, corrigez ceci dans le menu Options !"
 
 #: src/team/teams_list.cpp:158
 msgid "You need at least two valid teams !"
@@ -514,76 +516,54 @@ msgstr "terminé"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Erreur durant le chargement de l'avatar %s :"
-
 #~ msgid "Load skins:"
 #~ msgstr "Charge les avatars :"
-
 #~ msgid "Unable to open skins directory (%s)!"
 #~ msgstr "Impossible d'ouvrir le répertoire des avatars (%s) !"
-
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr " Le plus traitre : %s (%i).\n"
-
 #~ msgid "  Most usefull  :  %s (%i).\n"
 #~ msgstr " Le plus utile : %s (%i).\n"
-
 #~ msgid "  Most useless  :  %s (%i).\n"
 #~ msgstr "  Le plus inutile  :  %s (%i).\n"
-
 #~ msgid "  Most violent  :  %s (%i).\n"
 #~ msgstr "  Le plus violent  :  %s (%i).\n"
-
 #~ msgid "%s team has won.\n"
 #~ msgstr "L'équipe %s a gagné.\n"
-
 #~ msgid "All-Team results:\n"
 #~ msgstr "Statistiques toutes équipes confondues:\n"
-
 #~ msgid "End of the game!\n"
 #~ msgstr "Fin de la partie !\n"
-
 #~ msgid "Nobody"
 #~ msgstr "Personne"
-
 #~ msgid "Team %s results:\n"
 #~ msgstr "Statistiques de l'équipe %s:\n"
-
 #~ msgid "The game has ended as a draw.\n"
 #~ msgstr "Match nul.\n"
-
 #~ msgid "Load map"
 #~ msgstr "Chargement du terrain"
-
 #~ msgid "Unknow action"
 #~ msgstr "Action inconnue"
-
 #~ msgid "Wait for clients"
 #~ msgstr "Attente des clients"
-
 #~ msgid "Wait for map"
 #~ msgstr "Attente du terrain"
-
 #~ msgid "Wait for server"
 #~ msgstr "Attente du serveur"
-
 #~ msgid "Wait for server informations"
 #~ msgstr "Attente des informations du serveur"
-
 #~ msgid "Wait teams"
 #~ msgstr "Attente des équipes"
-
 #~ msgid "Pause"
 #~ msgstr "Pause"
-
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr ""
 #~ "Attention! La masse des particules est trop faible ! Utilise la valeur "
 #~ "par défaut (0.3)."
-
 #~ msgid "Warning: Don't load configuration (old version of Wormux)."
 #~ msgstr ""
 #~ "Avertissement: Ne charge pas la configuration (ancienne version de "
 #~ "Wormux)."
-
 #~ msgid "Unable to initialise the fonts."
 #~ msgstr "Échec de l'initialisation des polices de caractères."
+

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-06-16 11:35+0100\n"
+"PO-Revision-Date: 2006-07-06 17:37+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"POT-Creation-Date: \n"
 
 #: src/map/maps_list.cpp:277
 #, c-format
@@ -132,10 +133,10 @@ msgstr "(ilimitado)"
 
 #: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr ""
-"<infinite_background> necesita <is_open> para funcionar correctamente!!"
+msgstr "<infinite_background> necesita <is_open> para funcionar correctamente!!"
 
-#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167
+#: src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Ataque aereo"
 
@@ -143,7 +144,8 @@ msgstr "Ataque aereo"
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
+#: src/object/bonus_box.cpp:176
+#: src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Bazooka automatico"
 
@@ -159,12 +161,14 @@ msgstr "Bazooka"
 msgid "C++ exception caught:"
 msgstr "Excepcion C++ interceptada:"
 
-#: src/team/teams_list.cpp:427 src/team/teams_list.cpp:466
+#: src/team/teams_list.cpp:427
+#: src/team/teams_list.cpp:466
 #, c-format
 msgid "Can't find team %s!"
 msgstr "equipo %s no encontrado!"
 
-#: src/team/teams_list.cpp:123 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:123
+#: src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "¡No se puede abrir el directorio de equipos (%s)!"
@@ -205,7 +209,8 @@ msgstr "Duración del turno:"
 msgid "Duration of the end of a turn:"
 msgstr "Duración de fin de turno:"
 
-#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195
+#: src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dinamita"
 
@@ -230,11 +235,8 @@ msgstr "Error cargando datos del equipo %s :"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Error mientras se creaba el directorio \"%s\" : no se puede guardar el "
-"fichero de configuración."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Error mientras se creaba el directorio \"%s\" : no se puede guardar el fichero de configuración."
 
 #: src/game/config.cpp:121
 #, c-format
@@ -256,7 +258,7 @@ msgstr ""
 "%s"
 
 #: src/team/team.cpp:140
-#, fuzzy, c-format
+#, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no se puede encontrar el skin \"%s\" para el equipo \"%s\"."
 
@@ -313,12 +315,12 @@ msgstr "Inicialización de datos"
 msgid "Initialise objects"
 msgstr "Inicialización de objetos"
 
-#: src/game/game_loop.cpp:94 src/game/game_loop.cpp:125
+#: src/game/game_loop.cpp:94
+#: src/game/game_loop.cpp:125
 msgid "Initialise teams"
 msgstr "Inicialización de equipos"
 
 #: src/object/bonus_box.cpp:241
-#, fuzzy
 msgid "Is it a gift?"
 msgstr "¿Es un regalo?"
 
@@ -337,7 +339,7 @@ msgstr "Mapa %s, hecho por :"
 
 #: src/game/game_loop.cpp:204
 msgid "Maps"
-msgstr ""
+msgstr "Mapas"
 
 #: src/menu/options_menu.cpp:69
 msgid "Maximum number of FPS:"
@@ -413,7 +415,6 @@ msgid "Sound options"
 msgstr "Opciones de sonido"
 
 #: src/game/game_loop.cpp:222
-#, fuzzy
 msgid "Sounds"
 msgstr "Opciones de sonido"
 
@@ -427,9 +428,10 @@ msgstr "Munición:"
 
 #: src/game/game_loop.cpp:208
 msgid "Teams"
-msgstr ""
+msgstr "Equipos"
 
-#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140
+#: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teletransportación"
 
@@ -437,7 +439,8 @@ msgstr "Teletransportación"
 msgid "The automatic rocket has left the battlefield..."
 msgstr "El cohete automatico ha ido a otro mundo..."
 
-#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56
+#: src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "El cohete ha ido a otro mundo..."
 
@@ -446,7 +449,8 @@ msgstr "El cohete ha ido a otro mundo..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Imposible inicializar la libreria SDL: %s"
 
-#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "¡Imposible abrir el directorio de los mapas (%s) !"
@@ -464,9 +468,8 @@ msgid "Weapon:"
 msgstr "Arma:"
 
 #: src/game/game_loop.cpp:217
-#, fuzzy
 msgid "Weapons"
-msgstr "Arma:"
+msgstr "Armas"
 
 #: src/main.cpp:211
 msgid "Website: "
@@ -496,8 +499,7 @@ msgstr "¡Necesitas al menos un mapa válido!"
 
 #: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr ""
-"¡Necesitas al menos dos equipos para jugar, cambia las opciones del menu!"
+msgstr "¡Necesitas al menos dos equipos para jugar, cambia las opciones del menu!"
 
 #: src/team/teams_list.cpp:158
 msgid "You need at least two valid teams !"
@@ -513,87 +515,64 @@ msgstr "Terminado"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Error durante la carga del skin (%s) :"
-
 #~ msgid "Load skins:"
 #~ msgstr "Carga los temas %s"
-
 #~ msgid "Unable to open skins directory (%s)!"
 #~ msgstr "¡Imposible abrir el directorio de los skins (%s) !"
-
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr " El más traidor  :  %s (%i).\n"
-
 #~ msgid "  Most usefull  :  %s (%i).\n"
 #~ msgstr " El más útil  :  %s (%i).\n"
-
 #~ msgid "  Most useless  :  %s (%i).\n"
 #~ msgstr " El más inutil  :  %s (%i).\n"
-
 #~ msgid "  Most violent  :  %s (%i).\n"
 #~ msgstr " El más violento  :  %s (%i).\n"
-
 #~ msgid "%s team has won.\n"
 #~ msgstr "El equipo %s ha ganado.\n"
-
 #~ msgid "All-Team results:\n"
 #~ msgstr "Estadisticas de todos los equipos:\n"
-
 #~ msgid "End of the game!\n"
 #~ msgstr "¡Final de la partida!\n"
-
 #~ msgid "Nobody"
 #~ msgstr "Nadie"
-
 #~ msgid "Team %s results:\n"
 #~ msgstr "Estadisticas del equipo %s:\n"
-
 #~ msgid "The game has ended as a draw.\n"
 #~ msgstr "El juego ha terminado en empate.\n"
 
 #, fuzzy
 #~ msgid "Load map"
 #~ msgstr "Carga el mapa %s"
-
 #~ msgid "Pause"
 #~ msgstr "Pausa"
-
 #~ msgid "End of game"
 #~ msgstr "Final de la partida"
 
 #, fuzzy
 #~ msgid "Authors"
 #~ msgstr "Autores:"
-
 #~ msgid "Info"
 #~ msgstr "Información"
-
 #~ msgid "ClanLib error during loading map '%s' :"
 #~ msgstr "ClanLib error durante la carga del mapa '%s' :"
-
 #~ msgid "Load game data..."
 #~ msgstr "Cargando los datos del juego..."
-
 #~ msgid "ClanLib error :"
 #~ msgstr "Error ClanLib :"
-
 #~ msgid "File \"%s\" does not exist !"
 #~ msgstr "¡Archivo \"%s\" no existe !"
-
 #~ msgid ""
 #~ "SDL option changed:\n"
 #~ "You have to restart Wormux to apply the new settings."
 #~ msgstr ""
 #~ "La opción SDL ha canviado:\n"
 #~ "Ha de reiniciar de nuevo Wormux para aplicar los nuevos ajustes."
-
 #~ msgid "Sound error :"
 #~ msgstr "Error de sonido :"
-
 #~ msgid "Use SDL?"
 #~ msgstr "¿Usar SDL?"
-
 #~ msgid "Use sound?"
 #~ msgstr "¿Usar sonido?"
-
 #~ msgid "Load weapon %s"
 #~ msgstr "Carga el arma %s"
+
