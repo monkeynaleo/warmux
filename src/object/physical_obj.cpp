@@ -55,7 +55,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_height(0)
 {
   m_type = objCLASSIC;
-//  m_moving = false;
 
   m_allow_negative_y = false;
   m_alive = ALIVE;
@@ -284,26 +283,31 @@ void PhysicalObj::UpdatePosition ()
   // No ghost allowed here !
   if (IsGhost()) return;
 
-  if ((m_type == objCLASSIC) && !IsMoving()
-      && !FootsInVacuum() && !IsInWater()) return;
-
-  if(!IsMoving() && FootsInVacuum() && m_type != objUNBREAKABLE) StartMoving();
+  if ( m_type == objCLASSIC ) 
+    {
+      // object is not moving and has no reason to move
+      if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
+      
+      // object is not moving BUT it should fall !
+      if ( !IsMoving() && FootsInVacuum() ) StartMoving();
+    }
 
   // Compute new position.
   RunPhysicalEngine();
 
+  // Test if object is still inside the world
+  if( IsOutsideWorldXY(GetPosition()) )
+    Ghost();
+
   if (IsGhost()) return;
 
-  if (IsInWater() && (m_alive != DROWNED) && m_type != objUNBREAKABLE) Drown();
-  else if (!IsInWater() && m_alive == DROWNED && m_type != objUNBREAKABLE) GoOutOfWater();
+  // Classical object sometimes sink in water and sometimes go out of water!
+  if (m_type == objCLASSIC)
+    {
+      if ( IsInWater() && m_alive != DROWNED ) Drown();
+      else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
+    }
 
-  if (m_type == objUNBREAKABLE || IsInWater())
-  {
-    if( IsOutsideWorldXY(GetPosition()) )
-      Ghost();
-
-    return;
-  }
 }
 
 bool PhysicalObj::PutOutOfGround(double direction)
