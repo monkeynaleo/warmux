@@ -291,16 +291,23 @@ void Action_SendRandom (Action *a)
   randomSync.AddToTable(action->GetValue());
 }
 
-void Action_SyncBegin (Action *a)
+void Action_GameLoopState (Action *a)
 {
   MSG_DEBUG("action.handler", "ChangeState");
+  ActionInt* ai = dynamic_cast<ActionInt*>(a);
+  GameLoop::GetInstance()->SetState(ai->GetValue());
+}
+
+void Action_SyncBegin (Action *a)
+{
+  MSG_DEBUG("action.handler", "SyncBegin");
   assert(!network.sync_lock);
   network.sync_lock = true;
 }
 
 void Action_SyncEnd (Action *a)
 {
-  MSG_DEBUG("action.handler", "ChangeState");
+  MSG_DEBUG("action.handler", "SyncEnd");
   assert(network.sync_lock);
   network.sync_lock = false;
 }
@@ -329,9 +336,11 @@ void Action_SetTarget (Action *a)
 {
   MSG_DEBUG("action.handler", "Set target by clicking");
 
+  ActionInt2* ai = dynamic_cast<ActionInt2*>(ai);
+
   Point2i target;
-  target.x = a->PopInt();
-  target.y = a->PopInt();
+  target.x = ai->GetValue1();
+  target.y = ai->GetValue2();
 
   ActiveTeam().AccessWeapon().ChooseTarget (target);
 }
