@@ -266,7 +266,7 @@ void BulletParticle::Refresh()
   UpdatePosition();
   image->SetRotation_deg((Time::GetInstance()->Read()/4) % 360);
   image->Update();
-  if(m_alive == GHOST)
+  if(IsOutsideWorld(GetPosition()))
     m_left_time_to_live = 0;
 }
 
@@ -295,7 +295,7 @@ void GroundParticle::Refresh()
   UpdatePosition();
   image->SetRotation_deg((Time::GetInstance()->Read()/2) % 360);
   image->Update();
-  if(m_alive == GHOST)
+  if(IsOutsideWorld(GetPosition()))
     m_left_time_to_live = 0;
 }
 
