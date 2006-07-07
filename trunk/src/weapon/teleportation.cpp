@@ -25,6 +25,7 @@
 #include "../game/time.h"
 #include "../graphic/effects.h"
 #include "../include/action_handler.h"
+#include "../map/camera.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
@@ -79,6 +80,7 @@ void Teleportation::Refresh()
     // Non, on fait le chemin retour en 
     // commen�nt par d�lacer le ver
     retour = true;
+    camera.SetXYabs(dst - camera.GetSize()/2);
     ActiveCharacter().SetXY(dst);
     temps = Time::GetInstance()->Read();
     dt = 0.0;
