@@ -74,14 +74,14 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   obus_dy = GetY()+GetHeight();
 }
 
-void Plane::Shoot(double speed)
+void Plane::Shoot(double speed, Point2i& target)
 {
   nb_dropped_bombs = 0;
   last_dropped_bomb = NULL;
 
   Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
-  cible_x = Mouse::GetInstance()->GetWorldPosition().x;
+  cible_x = target.x;
   SetY (0);
 
   image->Scale(dir, 1);
@@ -190,12 +190,13 @@ void AirAttack::Refresh()
 
 void AirAttack::ChooseTarget(Point2i mouse_pos)
 {
+  target = mouse_pos;
   ActiveTeam().GetWeapon().NewActionShoot();
 }
 
 bool AirAttack::p_Shoot ()
 {
-  plane.Shoot (cfg().speed);
+  plane.Shoot (cfg().speed, target);
   return true;
 }
 
