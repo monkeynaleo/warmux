@@ -336,11 +336,9 @@ void Action_SetTarget (Action *a)
 {
   MSG_DEBUG("action.handler", "Set target by clicking");
 
-  ActionInt2* ai = dynamic_cast<ActionInt2*>(ai);
-
   Point2i target;
-  target.x = ai->GetValue1();
-  target.y = ai->GetValue2();
+  target.x = a->PopInt();
+  target.y = a->PopInt();
 
   ActiveTeam().AccessWeapon().ChooseTarget (target);
 }

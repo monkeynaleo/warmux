@@ -69,21 +69,6 @@ public:
 
 //-----------------------------------------------------------------------------
 
-class ActionInt2 : public Action
-{
-private:
-  int m_value1;
-  int m_value2;
-public:
-  ActionInt2 (Action_t type, int val1, int val2);
-  ActionInt2 (Action_t type, Uint32* is);
-  int GetValue1() const;
-  int GetValue2() const;
-  std::ostream& out(std::ostream &os) const;
-};
-
-//-----------------------------------------------------------------------------
-
 class ActionDouble : public Action
 {
 private:

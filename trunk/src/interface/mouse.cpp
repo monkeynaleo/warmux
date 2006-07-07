@@ -139,8 +139,10 @@ bool Mouse::ActionClicG()
   // - Choose a target but don't fire
   // - Choose a target and fire it !
   if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    ActionHandler::GetInstance()->NewAction (new ActionInt2(ACTION_SET_TARGET,
-							    GetWorldPosition().x, GetWorldPosition().y));
+    Action* a = new Action(ACTION_SET_TARGET);
+    a->Push(GetWorldPosition().x);
+    a->Push(GetWorldPosition().y);
+    ActionHandler::GetInstance()->NewAction (a);
     return true ;
   }
 
