@@ -188,7 +188,7 @@ void AirAttack::Refresh()
   m_is_active = false;
 }
 
-void AirAttack::ChooseTarget()
+void AirAttack::ChooseTarget(Point2i mouse_pos)
 {
   ActiveTeam().GetWeapon().NewActionShoot();
 }

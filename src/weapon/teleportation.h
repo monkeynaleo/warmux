@@ -38,7 +38,7 @@ public:
   Teleportation();
   void Refresh();
   void Draw();
-  virtual void ChooseTarget();
+  virtual void ChooseTarget(Point2i mouse_pos);
   WeaponConfig& cfg();
 };
 

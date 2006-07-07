@@ -325,6 +325,17 @@ void Action_Explosion (Action *a)
   ApplyExplosion_common(pos, config, son, fire_particle, smoke);
 }
 
+void Action_SetTarget (Action *a)
+{
+  MSG_DEBUG("action.handler", "Set target by clicking");
+
+  Point2i target;
+  target.x = a->PopInt();
+  target.y = a->PopInt();
+
+  ActiveTeam().AccessWeapon().ChooseTarget (target);
+}
+
 void ActionHandler::ExecActions()
 {
   assert(mutex!=NULL);
@@ -411,5 +422,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_SYNC_BEGIN, "sync_begin", &Action_SyncBegin);
   Register (ACTION_SYNC_END, "sync_end", &Action_SyncEnd);
   Register (ACTION_EXPLOSION, "explosion", &Action_Explosion);
+  Register (ACTION_SET_TARGET, "set_target", &Action_SetTarget);
   SDL_UnlockMutex(mutex);
 }

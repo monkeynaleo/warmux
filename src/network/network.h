@@ -34,15 +34,15 @@ class Network
 {
   bool inited;
 public:
-	typedef enum
-	{
-		NETWORK_NOT_CONNECTED,
-		NETWORK_OPTION_SCREEN,
+  typedef enum
+    {
+      NETWORK_NOT_CONNECTED,
+      NETWORK_OPTION_SCREEN,
       NETWORK_INIT_GAME,
       NETWORK_READY_TO_PLAY,
-		NETWORK_PLAYING
-	} network_state_t;
-	network_state_t state;
+      NETWORK_PLAYING
+    } network_state_t;
+  network_state_t state;
   std::list<TCPsocket> conn;
 		
 private:
@@ -65,18 +65,18 @@ public:
   uint client_inited;
   bool sync_lock;
 
-	Network();
-	~Network();
-	void Init();
-	
-	const bool IsConnected() const;
-	const bool IsLocal() const;
-	const bool IsServer() const;
-	const bool IsClient() const;
-	
-	void Disconnect();
-	void ClientConnect(const std::string &host, const std::string &port);
-	void ServerStart(const std::string &port);
+  Network();
+  ~Network();
+  void Init();
+  
+  const bool IsConnected() const;
+  const bool IsLocal() const;
+  const bool IsServer() const;
+  const bool IsClient() const;
+  
+  void Disconnect();
+  void ClientConnect(const std::string &host, const std::string &port);
+  void ServerStart(const std::string &port);
 
   void SendAction(Action* action);
   void ReceiveActions();

@@ -96,7 +96,7 @@ void Teleportation::Draw()
   }
 }
 
-void Teleportation::ChooseTarget()
+void Teleportation::ChooseTarget(Point2i mouse_pos)
 {
   ActiveTeam().GetWeapon().NewActionShoot();
 }

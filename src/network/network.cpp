@@ -279,6 +279,11 @@ void Network::ReceiveActions()
             std::cerr << "Malformed packet" << std::endl;
         }
 
+	printf("\n\n");
+	for(uint t=0; t < packet_max_size;t++)
+	  printf("%i ", (uint)*(((char*)packet)+t)); //,*(((char*)packet)+t));
+	printf("\n");
+
         Action* a = make_action((Uint32*)packet);
         std::cout << "received " << *a << " (" << (int)packet_size << " octets)" << std::endl;
         ActionHandler::GetInstance()->NewAction(a, false);
@@ -339,9 +344,12 @@ const bool Network::IsClient() const { return m_is_client; }
 //-----------------------------------------------------------------------------
 
 Action* Network::make_action(Uint32* packet)
-{
+{ 
+
   Action_t type = (Action_t)SDLNet_Read32(packet);
   Uint32* input = &packet[1];
+
+  printf("-> %i\n", type);
 
   switch(type)
   {
@@ -350,6 +358,9 @@ Action* Network::make_action(Uint32* packet)
 
   case ACTION_SEND_RANDOM:
     return new ActionDouble(type, input);
+
+  case ACTION_SET_TARGET:
+    return new ActionInt2(type, input);
 
   case ACTION_CHANGE_WEAPON:
   case ACTION_WIND:

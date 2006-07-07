@@ -28,6 +28,7 @@
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
+#include "../include/action_handler.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../team/macro.h"
@@ -138,7 +139,8 @@ bool Mouse::ActionClicG()
   // - Choose a target but don't fire
   // - Choose a target and fire it !
   if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    ActiveTeam().AccessWeapon().ChooseTarget();
+    ActionHandler::GetInstance()->NewAction (new ActionInt2(ACTION_SET_TARGET,
+							    GetWorldPosition().x, GetWorldPosition().y));
     return true ;
   }
 

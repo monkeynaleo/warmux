@@ -197,7 +197,7 @@ public:
 
   // Choose a target.
   // Return false if it not fire directly after
-  virtual void ChooseTarget ();
+  virtual void ChooseTarget (Point2i mouse_pos);
 
   //Misc actions. 
   virtual void ActionUp ();//called by mousse.cpp when mousewhellup

@@ -81,7 +81,7 @@ private:
 public:
   AirAttack();
   void Refresh();
-  virtual void ChooseTarget ();
+  virtual void ChooseTarget (Point2i mouse_pos);
 
  private:
   AirAttackConfig& cfg();
