@@ -24,7 +24,6 @@
 #include "../game/game_mode.h"
 #include "../game/time.h"
 #include "../graphic/effects.h"
-#include "../interface/mouse.h"
 #include "../include/action_handler.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
@@ -43,7 +42,6 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 bool Teleportation::p_Shoot ()
 {
   // V�ifie qu'on se t��orte dans le vide !
-  dst = Mouse::GetInstance()->GetWorldPosition() - ActiveCharacter().GetSize()/2;
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
 	 return false;
   if( !ActiveCharacter().IsInVacuumXY(dst) )
@@ -98,6 +96,7 @@ void Teleportation::Draw()
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)
 {
+  dst = mouse_pos - ActiveCharacter().GetSize()/2;
   ActiveTeam().GetWeapon().NewActionShoot();
 }
 
