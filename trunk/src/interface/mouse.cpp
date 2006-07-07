@@ -35,7 +35,7 @@
 #include "../tool/point.h"
 #include "../weapon/weapon.h"
 
-// Vitesse du definalement à la souris
+// Vitesse du definalement ï¿½la souris
 const uint SCROLL_MOUSE = 20;
 
 // Largeur de la zone de sensibilite au camera a la souris
@@ -95,6 +95,9 @@ bool Mouse::ActionWhellDown(){
 
 bool Mouse::ActionClicG()
 {
+  if(!ActiveTeam().is_local)
+    return false;
+
   const Point2i pos_monde = GetWorldPosition();
 
   // Action dans le menu des armes ?
@@ -103,7 +106,7 @@ bool Mouse::ActionClicG()
 
   // On peut changer de ver ?
   if( GameMode::GetInstance()->AllowCharacterSelection() ){
-    // Sélection d'un ver se son équipe ?
+    // Sï¿½ection d'un ver se son ï¿½uipe ?
     bool ver_choisi=false;
     Team::iterator it=ActiveTeam().begin(),
 	                 fin=ActiveTeam().end();
@@ -155,7 +158,7 @@ void Mouse::ChoixVerPointe(){
 
   const Point2i pos_monde = GetWorldPosition();
 
-  // Quel ver est pointé par la souris ? (en dehors du ver actif)
+  // Quel ver est pointï¿½par la souris ? (en dehors du ver actif)
   Interface::GetInstance()->character_under_cursor = NULL;
   FOR_ALL_LIVING_CHARACTERS(equipe,ver){
     if ((&(*ver) != &ActiveCharacter())
@@ -164,13 +167,13 @@ void Mouse::ChoixVerPointe(){
     }
   }
 
-  // Aucun ver n'est pointé ... et le ver actif alors ?
+  // Aucun ver n'est pointï¿½... et le ver actif alors ?
   if ((Interface::GetInstance()->character_under_cursor == NULL)
       && ActiveCharacter().GetRect().Contains( pos_monde)){
       Interface::GetInstance()->character_under_cursor = &ActiveCharacter();
   }
 
-  // Dessine le curseur autour du ver pointé s'il y en a un
+  // Dessine le curseur autour du ver pointï¿½s'il y en a un
 //  if (interface.character_under_cursor != NULL) {
 //    curseur_ver.PointeObj (interface.character_under_cursor);
 //  } else {
