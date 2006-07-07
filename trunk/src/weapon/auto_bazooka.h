@@ -67,7 +67,7 @@ public:
   void p_Deselect();
 
   bool IsReady() const;
-  virtual void ChooseTarget();
+  virtual void ChooseTarget(Point2i mouse_pos);
   void DrawTarget();
 };
 

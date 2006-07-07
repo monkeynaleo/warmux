@@ -161,7 +161,7 @@ void AutomaticBazooka::p_Deselect()
   Mouse::GetInstance()->SetPointer(POINTER_SELECT);
 }
 
-void AutomaticBazooka::ChooseTarget()
+void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 {
   if (cible.choisie) {
     // need to clear the old target
@@ -171,9 +171,9 @@ void AutomaticBazooka::ChooseTarget()
 				   cible.image.GetHeight()));
   }
 
-  cible.pos = Mouse::GetInstance()->GetWorldPosition();
-  DrawTarget();
+  cible.pos = mouse_pos;
   cible.choisie = true;
+  DrawTarget();
   static_cast<RoquetteTeteCherche *>(projectile)->SetTarget(cible.pos.x, cible.pos.y);
 }
 
