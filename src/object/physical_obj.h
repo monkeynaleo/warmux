@@ -40,32 +40,18 @@ typedef enum
   DROWNED
 } alive_t;
 
-// Object type
-typedef enum
-{
-  // Unbreakable object : detected by collision test, but isn't touch by
-  // explosion
-  objUNBREAKABLE,
-
-  // Regular object : detected by collision test, suffers from explosions blast.
-  objCLASSIC
-} type_objet_t;
-
 extern const double PIXEL_PER_METER;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2);
 
 class PhysicalObj : public Physics
 {
-public:
-  type_objet_t m_type;
-
 private:
   int m_posx, m_posy;
 
-
 protected:
   bool exterieur_monde_vide;
+  bool m_go_through_wall;
 
   std::string m_name;
 
@@ -116,7 +102,7 @@ public:
   int GetCenterY() const;
   const Point2i GetCenter() const;
   const Rectanglei GetRect() const;
-  type_objet_t GetObjectType() const { return m_type; }
+  bool GoThroughWall() const { return m_go_through_wall; }
 
   //----------- Physics related function ----------
 

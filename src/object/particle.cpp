@@ -37,7 +37,7 @@ ParticleEngine global_particle_engine;
 Particle::Particle(const std::string &name) :
   PhysicalObj(name)
 {
-  m_type = objUNBREAKABLE;
+  m_go_through_wall = true;
   m_initial_time_to_live = 20;
   m_left_time_to_live = 0;
   m_last_refresh = Time::GetInstance()->Read();
@@ -227,7 +227,7 @@ ExplosiveWeaponConfig fire_cfg;
 FireParticle::FireParticle() :
   Particle("fire_particle")
 {
-  m_type = objCLASSIC;
+  m_go_through_wall = false;
   m_initial_time_to_live = 15;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 50;
@@ -252,9 +252,9 @@ void FireParticle::SignalFallEnding()
 BulletParticle::BulletParticle() :
   Particle("bullet_particle")
 {
+  m_go_through_wall = false;
   m_rebound_sound = "weapon/grenade_bounce";
   m_left_time_to_live = 1;
-  m_type = objCLASSIC;
 
   image = ParticleEngine::GetSprite(BULLET_spr);
   image->Scale(1.0,1.0);
@@ -273,7 +273,7 @@ void BulletParticle::Refresh()
 void BulletParticle::SignalRebound()
 {
   PhysicalObj::SignalRebound();
-  m_type = objUNBREAKABLE;
+  m_go_through_wall = true;
 }
 
 // ==============================================

@@ -149,7 +149,7 @@ void ApplyExplosion_common (const Point2i &pos,
   }
 
   // Apply the blast on physical objects.
-  FOR_EACH_OBJECT(obj) if (obj -> ptr -> GetObjectType() == objCLASSIC)
+  FOR_EACH_OBJECT(obj) if ( !(obj -> ptr -> GoThroughWall()) )
   { 
     double distance, angle;
     distance = MeterDistance (pos, obj -> ptr -> GetCenter());

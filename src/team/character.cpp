@@ -176,7 +176,6 @@ void Character::SignalDeath()
 void Character::SignalDrowning()
 {
   energy = 0;
-  m_type = objUNBREAKABLE;
   SetMovement("drowned");
 
   jukebox.Play (GetTeam().GetSoundProfile(),"sink");
