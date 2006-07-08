@@ -304,10 +304,8 @@ void Action_SupertuxState (Action *a)
   tux->angle = a->PopDouble();
   x = a->PopDouble();
   y = a->PopDouble();
-  s_x = a->PopDouble();
-  s_y = a->PopDouble();
   tux->SetPhysXY(x, y);
-  tux->SetSpeedXY(Point2d(s_x, s_y));
+  tux->SetSpeedXY(Point2d(0,0));
 }
 
 void Action_SyncBegin (Action *a)
