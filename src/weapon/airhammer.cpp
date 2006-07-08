@@ -25,6 +25,7 @@
 #include "../game/game.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
+#include "../include/action_handler.h"
 #include "../map/map.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
@@ -87,7 +88,11 @@ void Airhammer::RepeatShoot()
   if (time >= MIN_TIME_BETWEEN_JOLT) 
   {
     m_is_active = false;
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SYNC_BEGIN));
+    ActionHandler::GetInstance()->NewAction(
+      BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex()));
     NewActionShoot();
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SYNC_END));
     m_last_jolt = tmp;
   }    
 
