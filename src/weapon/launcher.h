@@ -116,7 +116,8 @@ class WeaponLauncher : public Weapon
   //Misc actions
   void ActionUp ();//called by mousse.cpp when mousewhellup
   void ActionDown ();//called by mousse.cpp when mousewhelldown
-  
+
+  WeaponProjectile* GetProjectile() { return projectile; };
   ExplosiveWeaponConfig& cfg();
 };
 

@@ -35,6 +35,8 @@
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/vector2.h"
+#include "../weapon/launcher.h"
+#include "../weapon/supertux.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
 #include "../weapon/explosion.h"
@@ -240,7 +242,6 @@ void Action_SetGameMode (Action *a)
   GameMode::GetInstance()->Load (action->GetValue());
 }
 
-
 void Action_NewTeam (Action *a)
 {
   ActionString* action = dynamic_cast<ActionString*>(a);
@@ -291,11 +292,22 @@ void Action_SendRandom (Action *a)
   randomSync.AddToTable(action->GetValue());
 }
 
-void Action_GameLoopState (Action *a)
+void Action_SupertuxState (Action *a)
 {
-  MSG_DEBUG("action.handler", "ChangeState");
-  ActionInt* ai = dynamic_cast<ActionInt*>(a);
-  GameLoop::GetInstance()->SetState(ai->GetValue());
+  MSG_DEBUG("action.handler", "SupertuxState");
+  assert(ActiveTeam().GetWeaponType() == WEAPON_SUPERTUX);
+  WeaponLauncher* launcher = static_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
+  SuperTux* tux = static_cast<SuperTux*>(launcher->GetProjectile());
+
+  double x, y, s_x, s_y;
+
+  tux->angle = a->PopDouble();
+  x = a->PopDouble();
+  y = a->PopDouble();
+  s_x = a->PopDouble();
+  s_y = a->PopDouble();
+  tux->SetPhysXY(x, y);
+  tux->SetSpeedXY(Point2d(s_x, s_y));
 }
 
 void Action_SyncBegin (Action *a)
@@ -430,5 +442,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_SYNC_END, "sync_end", &Action_SyncEnd);
   Register (ACTION_EXPLOSION, "explosion", &Action_Explosion);
   Register (ACTION_SET_TARGET, "set_target", &Action_SetTarget);
+  Register (ACTION_SUPERTUX_STATE, "supertux_state", &Action_SupertuxState);
   SDL_UnlockMutex(mutex);
 }

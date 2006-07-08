@@ -391,6 +391,7 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_EXPLOSION:
   case ACTION_SET_CHARACTER_PHYSICS:  
   case ACTION_SET_TARGET:
+  case ACTION_SUPERTUX_STATE:
     return new Action(type,input);
 
   default:
