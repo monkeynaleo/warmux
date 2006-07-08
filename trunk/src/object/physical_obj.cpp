@@ -54,8 +54,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_width(0),
   m_height(0)
 {
-  m_type = objCLASSIC;
-
+  m_go_through_wall = false;
   m_allow_negative_y = false;
   m_alive = ALIVE;
 
@@ -218,7 +217,7 @@ bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
   // First iteration position.
   pos = oldPos + offset;
 
-  if (m_type == objUNBREAKABLE || IsInWater())
+  if (m_go_through_wall || IsInWater())
     return false ;
 
   do
@@ -283,7 +282,7 @@ void PhysicalObj::UpdatePosition ()
   // No ghost allowed here !
   if (IsGhost()) return;
 
-  if ( m_type == objCLASSIC ) 
+  if ( !m_go_through_wall ) 
     {
       // object is not moving and has no reason to move
       if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
@@ -301,8 +300,8 @@ void PhysicalObj::UpdatePosition ()
 
   if (IsGhost()) return;
 
-  // Classical object sometimes sink in water and sometimes go out of water!
-  if (m_type == objCLASSIC)
+  // Classical object sometimes sinks in water and sometimes goes out of water!
+  if ( !m_go_through_wall )
     {
       if ( IsInWater() && m_alive != DROWNED ) Drown();
       else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
