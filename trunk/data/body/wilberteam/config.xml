@@ -117,7 +117,7 @@
 </sprite>
 
 <!-- ###### Yoyo ###### -->
-<sprite name="yoyo" type="yoyo">
+<sprite name="yoyo" type="yoyo" go_through_ground="true">
 	<image file="yoyo.png">
 		<grid pos="0,0" size="32,42" array="36,1" />
 	</image>

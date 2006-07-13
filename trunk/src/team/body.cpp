@@ -281,7 +281,8 @@ void Body::Draw(const Point2i& _pos)
   if(current_clothe->layers[lay]->name != "weapon")
   {
     Member* member = current_clothe->layers[lay];
-    if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max)
+    if(member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y > y_max
+    && !member->go_through_ground)
       y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
   }
   body_mvt.pos.y = pos.y + (float)GetSize().y - y_max + current_mvt->test_bottom;
