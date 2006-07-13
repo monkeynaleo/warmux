@@ -45,8 +45,8 @@ public:
 
   Point2f pos;
   int angle;
-
   std::string type;
+  bool go_through_ground;
 
   virtual ~Member();
   Member(xmlpp::Element *xml, Profile* res);

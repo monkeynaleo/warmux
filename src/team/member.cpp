@@ -56,6 +56,9 @@ Member::Member(xmlpp::Element *xml, Profile* res)
     spr->SetRotation_HotSpot(Point2i(dx,dy));
   }
 
+  go_through_ground = false;
+  LitDocXml::LitAttrBool(xml, "go_through_ground", go_through_ground);
+
   xmlpp::Node::NodeList nodes = xml -> get_children("attached");
   xmlpp::Node::NodeList::iterator
     it=nodes.begin(),
