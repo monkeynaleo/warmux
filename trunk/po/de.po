@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-06-17 17:41+0100\n"
-"Last-Translator: Stinner Victor <victor.stinner AT haypocalc.com>\n"
+"PO-Revision-Date: 2006-07-17 15:20+0100\n"
+"Last-Translator: Michael Prager <X_X_L@gmx.net>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,6 +19,7 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"POT-Creation-Date: \n"
 
 #: src/map/maps_list.cpp:277
 #, c-format
@@ -136,7 +137,8 @@ msgstr "(unbegrenzt)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr "<infinite_background> braucht ein <is_open> um richtig zu arbeiten!!"
 
-#: src/object/bonus_box.cpp:167 src/weapon/air_attack.cpp:182
+#: src/object/bonus_box.cpp:167
+#: src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Luftangriff"
 
@@ -144,7 +146,8 @@ msgstr "Luftangriff"
 msgid "Authors:"
 msgstr "Autoren:"
 
-#: src/object/bonus_box.cpp:176 src/weapon/auto_bazooka.cpp:120
+#: src/object/bonus_box.cpp:176
+#: src/weapon/auto_bazooka.cpp:120
 msgid "Automatic bazooka"
 msgstr "Lenkrakete"
 
@@ -160,12 +163,14 @@ msgstr "Panzerfaust"
 msgid "C++ exception caught:"
 msgstr "C++ Ausnahmefehler abgefangen:"
 
-#: src/team/teams_list.cpp:427 src/team/teams_list.cpp:466
+#: src/team/teams_list.cpp:427
+#: src/team/teams_list.cpp:466
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kann Team %s nicht finden!"
 
-#: src/team/teams_list.cpp:123 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:123
+#: src/team/teams_list.cpp:138
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kann das Teams Verzeichnis (%s) nicht öfnen!"
@@ -206,7 +211,8 @@ msgstr "Dauer einer Runde:"
 msgid "Duration of the end of a turn:"
 msgstr "Dauer des Endes einer Runde:"
 
-#: src/object/bonus_box.cpp:195 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:195
+#: src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -231,11 +237,8 @@ msgstr "Fehler beim Laden von Team %s:"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
-"nicht speichern."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei nicht speichern."
 
 #: src/game/config.cpp:121
 #, c-format
@@ -257,9 +260,9 @@ msgstr ""
 "%s"
 
 #: src/team/team.cpp:140
-#, fuzzy, c-format
+#, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
-msgstr "Fehler: kann das Skin \"%s\" für Team \"%s\" nicht finden."
+msgstr "Fehler: kann den Körper \"%s\" für Team \"%s\" nicht finden."
 
 #: src/game/game_loop.cpp:156
 msgid "Find a random position for characters"
@@ -291,8 +294,7 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr ""
-"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #: src/menu/options_menu.cpp:118
 msgid "Initial energy:"
@@ -315,7 +317,8 @@ msgstr "Initialisiere Daten"
 msgid "Initialise objects"
 msgstr "Initialisiere Objekte"
 
-#: src/game/game_loop.cpp:94 src/game/game_loop.cpp:125
+#: src/game/game_loop.cpp:94
+#: src/game/game_loop.cpp:125
 msgid "Initialise teams"
 msgstr "Initialisiere Teams"
 
@@ -338,7 +341,7 @@ msgstr "Karte %s, eine Kreation von: "
 
 #: src/game/game_loop.cpp:204
 msgid "Maps"
-msgstr ""
+msgstr "Karten"
 
 #: src/menu/options_menu.cpp:69
 msgid "Maximum number of FPS:"
@@ -414,9 +417,8 @@ msgid "Sound options"
 msgstr "Soundeinstellungen"
 
 #: src/game/game_loop.cpp:222
-#, fuzzy
 msgid "Sounds"
-msgstr "Soundeinstellungen"
+msgstr "Klänge"
 
 #: src/game/game.cpp:84
 msgid "Starting a new game"
@@ -428,9 +430,10 @@ msgstr "Vorrat:"
 
 #: src/game/game_loop.cpp:208
 msgid "Teams"
-msgstr ""
+msgstr "Teams"
 
-#: src/object/bonus_box.cpp:140 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:140
+#: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportation"
 
@@ -438,7 +441,8 @@ msgstr "Teleportation"
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
 
-#: src/weapon/bazooka.cpp:56 src/weapon/cluster_bomb.cpp:68
+#: src/weapon/bazooka.cpp:56
+#: src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 
@@ -447,7 +451,8 @@ msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Kann SDL Bibliothek nicht initialisieren: %s"
 
-#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
+#: src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
@@ -465,9 +470,8 @@ msgid "Weapon:"
 msgstr "Waffe:"
 
 #: src/game/game_loop.cpp:217
-#, fuzzy
 msgid "Weapons"
-msgstr "Waffe:"
+msgstr "Waffen"
 
 #: src/main.cpp:211
 msgid "Website: "
@@ -497,9 +501,7 @@ msgstr "Du brauchst mindestens eine gültige Karte!"
 
 #: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr ""
-"Du brauchst mindestens zwei Teams, ändere die Anzahl der Teams im "
-"Einstellungsmenü!"
+msgstr "Du brauchst mindestens zwei Teams, ändere die Anzahl der Teams im Einstellungsmenü!"
 
 #: src/team/teams_list.cpp:158
 msgid "You need at least two valid teams !"
@@ -515,39 +517,28 @@ msgstr "fertig"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Fehler beim Laden des Skins %s:"
-
 #~ msgid "Load skins:"
 #~ msgstr "Lade Skins:"
-
 #~ msgid "Unable to open skins directory (%s)!"
 #~ msgstr "Kann das Skins-Verzeichnis (%s) nicht öffnen!"
-
 #~ msgid "  Most sold-out :  %s (%i).\n"
 #~ msgstr "  Ausverkauftester  :  %s (%i).\n"
-
 #~ msgid "  Most usefull  :  %s (%i).\n"
 #~ msgstr "  Nützlichster  :  %s (%i).\n"
-
 #~ msgid "  Most useless  :  %s (%i).\n"
 #~ msgstr "  Nutzlosester  :  %s (%i).\n"
-
 #~ msgid "  Most violent  :  %s (%i).\n"
 #~ msgstr "  Brutalster  :  %s (%i).\n"
-
 #~ msgid "%s team has won.\n"
 #~ msgstr "Team %s hat gewonnen.\n"
-
 #~ msgid "All-Team results:\n"
 #~ msgstr "Gesammtergebnisse:\n"
-
 #~ msgid "End of the game!\n"
 #~ msgstr "Ende des Spiels!\n"
-
 #~ msgid "Nobody"
 #~ msgstr "Niemand"
-
 #~ msgid "Team %s results:\n"
 #~ msgstr "Ergebnisse von Team %s:\n"
-
 #~ msgid "The game has ended as a draw.\n"
 #~ msgstr "Das Spiel endet unentschieden.\n"
+
