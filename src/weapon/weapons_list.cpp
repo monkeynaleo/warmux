@@ -23,7 +23,7 @@
 //-----------------------------------------------------------------------------
 #include <algorithm>
 #include "all.h"
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../interface/interface.h"
@@ -44,7 +44,7 @@ WeaponsList::WeaponsList()
 
 WeaponsList::~WeaponsList()
 {
-  weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
+  weapons_list_it it=todelete.begin(), end=todelete.end();
   for (; it != end; ++it)
   {
     delete *it;
@@ -57,6 +57,7 @@ void WeaponsList::AddToList(Weapon* arme, uint num_sort)
 {
   // insert the pointer
   m_weapons_list.push_back(arme);
+  todelete.push_back(arme);
 
   m_weapons_map.insert(keybind(num_sort, arme));
 
@@ -75,9 +76,6 @@ void WeaponsList::Init()
   AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
   AddToList(auto_bazooka, 1);
 
-  RiotBomb* riot_bomb = new RiotBomb;
-  AddToList(riot_bomb, 1);
-  
   GrenadeLauncher* grenade_launcher = new GrenadeLauncher;
   AddToList(grenade_launcher, 1);
 

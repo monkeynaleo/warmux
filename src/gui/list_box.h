@@ -32,7 +32,6 @@
 typedef struct s_list_box_item_t{
     std::string label;
     std::string value;
-    bool enabled;
 } list_box_item_t;
 
 class ListBox : public Widget
@@ -58,17 +57,16 @@ public:
   ~ListBox();
 
   void Draw(const Point2i &mousePosition);
-  Widget* Clic(const Point2i &mousePosition, uint button);
+  bool Clic(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
   void AddItem(bool selected, const std::string &label,
-		const std::string &value, bool enabled = true);
+		const std::string &value);
   void Sort();
 
   int MouseIsOnWhichItem(const Point2i &mousePosition);
 
   void Select(uint index);
-  void Select(const std::string& val);
   int GetSelectedItem();
   void Deselect();
   void RemoveSelected();

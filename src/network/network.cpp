@@ -23,28 +23,23 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <SDL_thread.h>
-#include "../game/game_mode.h"
-#include "../gui/question.h"
 #include "../include/action_handler.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-const uint packet_max_size = 100; // in bytes
+const uint packet_max_size = 100;
 
 //-----------------------------------------------------------------------------
 Network network;
-
 //-----------------------------------------------------------------------------
 
 Network::Network()
 {
-  max_player_number = 0;
+  thread = NULL;
   m_is_connected = false;
   m_is_server = false;
   m_is_client = false;
   state = NETWORK_NOT_CONNECTED;
-  inited = false;
-  sync_lock = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -58,56 +53,43 @@ int net_thread_func(void* no_param)
 
 void Network::Init()
 {
-  if(inited) return;
+  assert(thread == NULL);
   if (SDLNet_Init()) {
-      Error(_("Failed to initialize network library!"));
+      Error(_("Fail to initialize network library!"));
   }
-  inited = true;
-  max_player_number = GameMode::GetInstance()->max_teams;
-  connected_player = 0;
+  thread = SDL_CreateThread( &net_thread_func, NULL);
 }
 
 //-----------------------------------------------------------------------------
 
 Network::~Network() 
 {
-  Disconnect();
-  if(inited)
-    SDLNet_Quit();
+  SDLNet_Quit();
 }
 
 //-----------------------------------------------------------------------------
 
-void Network::Disconnect() 
+void Network::disconnect() 
 {
-  if(!m_is_connected) return;
-
-  m_is_connected = false; // To make the threads terminate
-
-  SDL_WaitThread(thread,NULL);
-  printf("Network thread finished\n");
-  for(std::list<TCPsocket>::iterator client=conn.begin();
-      client != conn.end();
-      client++)
-  {
-    SDLNet_TCP_DelSocket(socket_set,*client);
-    SDLNet_TCP_Close(*client);
-  }
-  conn.clear();
-  SDLNet_FreeSocketSet(socket_set);
-
   if(m_is_server)
-    SDLNet_TCP_Close(server_socket);
+    SDLNet_TCP_Close(client);
 
+  SDLNet_TCP_Close(socket);
+
+  m_is_connected = false;
   m_is_server = false;
   m_is_client = false;
 }
 
 //-----------------------------------------------------------------------------
 
-void Network::ClientConnect(const std::string &host, const std::string& port) 
+void Network::client_connect(const std::string &host, const std::string& port) 
 {
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
+
+  m_is_client = true;
+  m_is_server = false;
+  state = NETWORK_WAIT_SERVER;
 
   int prt=0;
   IPaddress ip;
@@ -115,241 +97,167 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
 
   if(SDLNet_ResolveHost(&ip,host.c_str(),prt)==-1)
   {
-    Question question;
-    question.Set(_("Invalid server adress!"),1,0);
-    question.AskQuestion();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return;
+    exit(1);
   }
 
-  TCPsocket socket = SDLNet_TCP_Open(&ip);
+  socket = SDLNet_TCP_Open(&ip);
 
   if(!socket)
   {
-    Question question;
-    question.Set(_("Unable to contact server!"),1,0);
-    question.AskQuestion();
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return;
+    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    exit(2);
   }
 
-  m_is_client = true;
-  m_is_server = false;
-  state = NETWORK_OPTION_SCREEN;
-  m_is_connected = true;
+	m_is_connected = true;
 
-  socket_set = SDLNet_AllocSocketSet(1);
-  SDLNet_TCP_AddSocket(socket_set, socket);
-  connected_player = 1;
-  conn.push_back(socket);
-  thread = SDL_CreateThread(net_thread_func,NULL);
+  printf("\nConnected\n");
 }
 
 //-----------------------------------------------------------------------------
 
-void Network::ServerStart(const std::string &port) 
+void Network::server_start(const std::string &port) 
 {
   // The server starts listening for clients
   MSG_DEBUG("network", "Start server on port %s", port.c_str());
 
-  conn.clear();
+  m_is_server = true;
+  m_is_client = false;
+  state = NETWORK_WAIT_CLIENTS;
+
   // Convert port number (std::string port) into SDL port number format:
+  IPaddress ip;
   int prt;
   sscanf(port.c_str(),"%i",&prt);
 
   if(SDLNet_ResolveHost(&ip,NULL,prt)==-1)
   {
-    Question question;
-    question.Set(_("Invalid port!"),1,0);
-    question.AskQuestion();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return;
+    exit(1);
   }
-
-  m_is_server = true;
-  m_is_client = false;
-  m_is_connected = true;
 
   // Open the port to listen to
-  AcceptIncoming();
-  connected_player = 1;
+  socket = SDLNet_TCP_Open(&ip);
+
+  if(!socket)
+  {
+    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    exit(2);
+  }
+
+  // Wait for an incoming connection
+  do
+  {
+    client = SDLNet_TCP_Accept(socket);
+    printf("Waiting for client ... \n");
+    SDL_Delay(1000);
+  } while(!client);
+
+  SDLNet_TCP_Close(socket);
+  m_is_connected = true;
   printf("\nConnected\n");
-  state = NETWORK_OPTION_SCREEN;
-  socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
-  thread = SDL_CreateThread(net_thread_func,NULL);
+  state = NETWORK_SERVER_INIT_GAME;
 }
 
 //-----------------------------------------------------------------------------
-std::list<TCPsocket>::iterator Network::CloseConnection(std::list<TCPsocket>::iterator closed)
-{
-  printf("Client disconnected\n");
-  SDLNet_TCP_DelSocket(socket_set,*closed);
-  SDLNet_TCP_Close(*closed);
-  if(m_is_server && connected_player == max_player_number)
-  {
-    // A new player will be able to connect, so we reopen the socket
-    // For incoming connections
-    AcceptIncoming();
-  }
-
-  connected_player--;
-  return conn.erase(closed);
-}
-
-void Network::AcceptIncoming()
-{
-  assert(m_is_server);
-  if(state == NETWORK_PLAYING) return;
-
-  server_socket = SDLNet_TCP_Open(&ip);
-  if(!server_socket)
-  {
-    Question question;
-    question.Set(_("Unable to listen for client!"),1,0);
-    question.AskQuestion();
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return;
-  }
-  printf("\nStart listening");
-}
-
-void Network::RejectIncoming()
-{
-  assert(m_is_server);
-  if(!server_socket) return;
-  SDLNet_TCP_Close(server_socket);
-  server_socket = NULL;
-  printf("\nStop listening");
-}
-//-----------------------------------------------------------------------------
-void Network::ReceiveActions()
-{
-  Uint32 packet[packet_max_size / 4];
-
-  uint i;
-  int received;
-  Uint32 packet_size = 0;
-
-  while(m_is_connected && (conn.size()==1 || m_is_server))
-  {
-    packet_size = 0;
-    i = 0;
-    while(SDLNet_CheckSockets(socket_set, 10) == 0 && m_is_connected) //Loop while nothing is received
-    if(m_is_server && server_socket)
-    {
-      // Check for an incoming connection
-      TCPsocket incoming;
-      incoming = SDLNet_TCP_Accept(server_socket);
-      if(incoming)
-      {
-        SDLNet_TCP_AddSocket(socket_set, incoming);
-        conn.push_back(incoming);
-        connected_player++;
-        printf("New client connected\n");
-        if(connected_player >= max_player_number)
-          RejectIncoming();
-        ActionHandler::GetInstance()->NewAction(new Action(ACTION_ASK_VERSION));
-      }
-    }
-
-    std::list<TCPsocket>::iterator sock=conn.begin();
-    while(sock != conn.end() && m_is_connected)
-    {
-      if(SDLNet_SocketReady(*sock)) // Check if this socket contains data to receive
-      {
-        // Read the size of the packet
-        Uint32 net_size=0;
-        if(SDLNet_TCP_Recv(*sock, &net_size, 4) <= 0)
-        {
-          sock = CloseConnection(sock);
-          continue;
-        }
-        packet_size = SDLNet_Read32(&net_size);
-        assert(packet_size > 0);
-
-
-        // Fill the packet while it didn't reached its size
-        memset(packet,0, packet_max_size);
-        while(packet_size != i)
-        {
-          received = SDLNet_TCP_Recv(*sock, packet+i/4, packet_size - i);
-          if(received > 0)
-            i+=received;
-          if(received < 0)
-            std::cerr << "Malformed packet" << std::endl;
-        }
-
-	printf("\n\n");
-	for(uint t=0; t < packet_max_size;t++)
-	  printf("%i ", (uint)*(((char*)packet)+t)); //,*(((char*)packet)+t));
-	printf("\n");
-
-        Action* a = make_action((Uint32*)packet);
-        std::cout << "received " << *a << " (" << (int)packet_size << " octets)" << std::endl;
-        ActionHandler::GetInstance()->NewAction(a, false);
-
-        // Repeat the packet to other clients:
-        if(a->GetType() != ACTION_SEND_VERSION
-        && a->GetType() != ACTION_CHANGE_STATE)
-        for(std::list<TCPsocket>::iterator client = conn.begin();
-            client != conn.end();
-            client++)
-        if(client != sock)
-        {
-          SDLNet_TCP_Send(*client,&packet_size,1);
-          SDLNet_TCP_Send(*client,packet,packet_max_size);
-        }
-      }
-      sock++;
-    }
-  }
-}
 
 // Send Messages
-void Network::SendAction(Action* action)
+void Network::SendAction(const Action &action) 
 {
   if (!m_is_connected) return;
 
-  Uint32 size;
-  SDLNet_Write32(packet_max_size, &size);
-  Uint32 packet[packet_max_size/4];
+  char size = packet_max_size;
+  Uint32 packet[packet_max_size];
   memset(packet,0,packet_max_size);
-  action->Write(packet);
+  action.Write(packet);
 
-  packet[(packet_max_size/4)-1] = 0xFFFFFFFF;
+  assert(*((char*)packet) != 0 );
 
-  assert(packet[0] != 0 );
-/*
-  for(uint i=0; i < packet_max_size;i++)
-    printf("%i=%c ", (uint)*(((char*)packet)+i),*(((char*)packet)+i));
-  printf("\n");
- */
-  for(std::list<TCPsocket>::iterator client = conn.begin();
-      client != conn.end();
-      client++)
+  if(m_is_client)
   {
-    SDLNet_TCP_Send(*client,&size,4);
-    SDLNet_TCP_Send(*client,packet,packet_max_size);
+    SDLNet_TCP_Send(socket, &size, 1);
+    SDLNet_TCP_Send(socket, packet, packet_max_size);
   }
-  std::cout << "sending " << *action << std::endl;
+  else
+  {
+    SDLNet_TCP_Send(client, &size, 1);
+    SDLNet_TCP_Send(client, packet, 100);
+  }
+  std::cout << "sending " << action << std::endl;
 }
 
 //-----------------------------------------------------------------------------
+// Send Messages
+void Network::ReceiveActions() 
+{
+	while (!m_is_connected) SDL_Delay(1000);
 
-const bool Network::IsConnected() const { return m_is_connected; }
-const bool Network::IsLocal() const { return !m_is_server && !m_is_client; }
-const bool Network::IsServer() const { return m_is_server; }
-const bool Network::IsClient() const { return m_is_client; }
+  Uint32 packet[packet_max_size];
+  memset(packet,0, packet_max_size);
+
+  int received, i;
+  char packet_size = 0;
+
+  if(m_is_client)
+  {
+    do
+    {
+      packet_size = 0;
+      i = 0;
+      // Read the size of the packet
+      while(SDLNet_TCP_Recv(socket, &packet_size, 1) <= 0) SDL_Delay(10); //Loop while nothing is received
+
+      // Fill the packet while it didn't reached its size
+      memset(packet,0, packet_max_size);
+      while(packet_size != i)
+      {
+        received = SDLNet_TCP_Recv(socket, packet+i, packet_size - i);
+        if(received > 0)
+        {
+          i+=received;
+        }
+      }
+
+      Action* a = make_action((Uint32*)packet);
+      std::cout << "received " << *a << " (" << (int)packet_size << " octets)" << std::endl;
+      ActionHandler::GetInstance()->NewAction(*a, false);
+      delete a;
+    } while(m_is_connected);
+  }
+  else
+  {
+    do
+    {
+      packet_size = 0;
+      i = 0;
+      // Read the size of the packet
+      while(SDLNet_TCP_Recv(client, &packet_size, 1) <= 0) SDL_Delay(10); //Loop while nothing is received
+
+      // Fill the packet while it didn't reached its size
+      memset(packet,0, packet_max_size);
+      while(packet_size != i)
+      {
+        received = SDLNet_TCP_Recv(client, packet+i, packet_size - i);
+        if(received > 0)
+        {
+          i+=received;
+        }
+      }
+
+      Action* a = make_action((Uint32*)packet);
+      std::cout << "received " << *a << " (" << (int)packet_size << " octets)" << std::endl;
+      ActionHandler::GetInstance()->NewAction(*a, false);
+      delete a;
+    } while(m_is_connected);
+  }
+}
 
 //-----------------------------------------------------------------------------
 
 Action* Network::make_action(Uint32* packet)
-{ 
-
-  Action_t type = (Action_t)SDLNet_Read32(packet);
+{
+  Action_t type = (Action_t)(packet[0]);
   Uint32* input = &packet[1];
-
-  printf("-> %i\n", type);
 
   switch(type)
   {
@@ -359,6 +267,10 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SEND_RANDOM:
     return new ActionDouble(type, input);
 
+  case ACTION_MOVE_CHARACTER:
+    return new ActionInt2(type, input);
+
+  case ACTION_CHANGE_CHARACTER:
   case ACTION_CHANGE_WEAPON:
   case ACTION_WIND:
   case ACTION_SET_CHARACTER_DIRECTION:
@@ -369,14 +281,11 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SET_MAP:
   case ACTION_CHANGE_TEAM:
   case ACTION_NEW_TEAM:
-  case ACTION_DEL_TEAM:
   case ACTION_SEND_VERSION:
   case ACTION_SEND_TEAM:
-  case ACTION_SET_CLOTHE:
-  case ACTION_SET_MOVEMENT:
+  case ACTION_SET_SKIN:
     return new ActionString(type, input);
 
-  case ACTION_CHANGE_CHARACTER:
   case ACTION_MOVE_LEFT:
   case ACTION_MOVE_RIGHT:
   case ACTION_JUMP:
@@ -384,20 +293,22 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_UP:
   case ACTION_DOWN:
   case ACTION_CLEAR_TEAMS:
-  case ACTION_CHANGE_STATE:
+  case ACTION_START_GAME:
   case ACTION_ASK_VERSION:
-  case ACTION_SYNC_BEGIN:
-  case ACTION_SYNC_END:
-  case ACTION_EXPLOSION:
-  case ACTION_SET_CHARACTER_PHYSICS:  
-  case ACTION_SET_TARGET:
-  case ACTION_SUPERTUX_STATE:
-    return new Action(type,input);
+    return new Action(type);
 
+  case ACTION_WALK:
   default:
     assert(false);
     return new Action(type);
   }
 }
+
+//-----------------------------------------------------------------------------
+
+bool Network::is_connected() { return m_is_connected; }
+bool Network::is_local() { return !m_is_server && !m_is_client; }
+bool Network::is_server() { return m_is_server; }
+bool Network::is_client() { return m_is_client; }
 
 //-----------------------------------------------------------------------------

@@ -23,7 +23,7 @@
 
 #include <sstream>
 
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
@@ -41,7 +41,6 @@ WeaponBullet::WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg) 
 { 
   cfg.explosion_range = 1;
   explode_colliding_character = true;
-  ResetTimeOut();
 }
 
 void WeaponBullet::SignalCollision()
@@ -68,7 +67,7 @@ void WeaponBullet::Explosion()
   if (dernier_ver_touche == NULL) {
     // Applique les degats et le souffle aux vers
     Point2i pos = GetCenter();
-    ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke);
+    ApplyExplosion (pos, cfg, NULL, "", false, ParticleEngine::LittleESmoke);
   } else {
     dernier_ver_touche -> SetEnergyDelta (-cfg.damage);
     
@@ -100,8 +99,6 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
   SetTestRect (dx, dx, dy, dy);
-  
-  ResetTimeOut();
 }
 
 WeaponProjectile::~WeaponProjectile()
@@ -207,10 +204,9 @@ void WeaponProjectile::Refresh()
 
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
-   
-  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
-    is_active = false;    
-     
+  
+  if(cfg.timeout && tmp > 1000 * cfg.timeout) {
+    is_active = false;      
     return;
   }
 
@@ -227,14 +223,14 @@ void WeaponProjectile::Draw()
 
   image->Draw(GetPosition());
   
-  int tmp = GetTotalTimeout();
+  int tmp = cfg.timeout;
 
-  if (cfg.timeout && tmp != 0) { 
+  if (tmp != 0) { 
     tmp -= (int)((Time::GetInstance()->Read() - begin_time) / 1000);
 
     if (tmp >= 0) {
       std::ostringstream ss;
-      ss << tmp ;
+      ss << tmp;
       int txt_x = GetX() + GetWidth() / 2;
       int txt_y = GetY() - GetHeight();
       (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
@@ -257,49 +253,7 @@ void WeaponProjectile::Explosion()
 
   // Applique les degats et le souffle aux vers
   Point2i pos = GetCenter();
-  ApplyExplosion (pos, cfg);
-}
-
-
-void WeaponProjectile::IncrementTimeOut()
-{
-if (cfg.allow_change_timeout)
-  if (GetTotalTimeout()<(int)cfg.timeout*2) 
-	 m_timeout_modifier += 1 ;
-
-}
-
-void WeaponProjectile::DecrementTimeOut()
-{
-if (cfg.allow_change_timeout)
-  if (GetTotalTimeout()>1) 
-	 m_timeout_modifier -= 1 ;	//-1s for grenade timout. 1 is min.
-	
-}
-
-void WeaponProjectile::SetTimeOut(int timeout)
-{
-if (cfg.allow_change_timeout)
-  if (timeout <= (int)cfg.timeout*2 && timeout >= 1) 
-	 m_timeout_modifier = timeout - cfg.timeout ;
-
-}
-
-void WeaponProjectile::ResetTimeOut()
-{
-	 m_timeout_modifier = 0 ;	
-	
-}
-
-int WeaponProjectile::GetTotalTimeout()
-{
-  return (int)(cfg.timeout)+m_timeout_modifier;
-}
-
-//Public function which let know if changing timeout is allowed.
-bool WeaponProjectile::change_timeout_allowed()
-{
-  return cfg.allow_change_timeout;
+  ApplyExplosion (pos, cfg, NULL);
 }
 
 //-----------------------------------------------------------------------------
@@ -331,11 +285,11 @@ bool WeaponLauncher::p_Shoot ()
   return true;
 }
 
-// Le bazooka explose car il a ï¿½ï¿½poussï¿½ï¿½bout !
+// Le bazooka explose car il a été poussé à bout !
 void WeaponLauncher::DirectExplosion()
 {
   Point2i pos = ActiveCharacter().GetCenter();
-  ApplyExplosion (pos, cfg());
+  ApplyExplosion (pos, cfg(), NULL);
 }
 
 void WeaponLauncher::Explosion()
@@ -349,105 +303,6 @@ void WeaponLauncher::Refresh()
 {
   if (!m_is_active) return;
   if (!projectile->is_active) Explosion();
-}
-
-
-void WeaponLauncher::Draw()
-{
-  //Display timeout for projectil if can be changed.
-  if (projectile->change_timeout_allowed())
-  {
-   if( IsActive() ) //Do not display after launching.
-      return;
-      
-    int tmp = projectile->GetTotalTimeout();
-        std::ostringstream ss;
-        ss << tmp;
-              ss << "s";
-        int txt_x = ActiveCharacter().GetX() + ActiveCharacter().GetWidth() / 2;
-        int txt_y = ActiveCharacter().GetY() - ActiveCharacter().GetHeight();
-        (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
-  					    ss.str(), white_color);
-  }
-  
-  Weapon::Draw();
-}
-
-void WeaponLauncher::p_Select()
-{
- 
-  if (projectile->change_timeout_allowed())
-  {
-    force_override_keys = true; //Allow overriding key during movement.
-     projectile->ResetTimeOut(); 
-  }
-}
-
-void WeaponLauncher::p_Deselect()
-{
-
-  if (projectile->change_timeout_allowed())
-  {
-    force_override_keys = false;
-  }
-}
-
-
-void WeaponLauncher::HandleKeyEvent(int action, int event_type)
-{
-
- if (event_type == KEY_RELEASED)
-  switch (action) {
-    case ACTION_WEAPON_1:
-	      projectile->SetTimeOut(1);
-	break;
-    case ACTION_WEAPON_2:
-	      projectile->SetTimeOut(2);
-	break;
-    case ACTION_WEAPON_3:
-	      projectile->SetTimeOut(3);
-	break;
-    case ACTION_WEAPON_4:
-	      projectile->SetTimeOut(4);
-	break;
-    case ACTION_WEAPON_5:
-	      projectile->SetTimeOut(5);
-	break;
-    case ACTION_WEAPON_6:
-	      projectile->SetTimeOut(6);
-	break;
-    case ACTION_WEAPON_7:
-	      projectile->SetTimeOut(7);
-	break;
-    case ACTION_WEAPON_8:
-	      projectile->SetTimeOut(8);
-	break;
-    case ACTION_WEAPON_9:
-	      projectile->SetTimeOut(9);
-	break;
-
-    case ACTION_WEAPON_MORE:  
-	      projectile->IncrementTimeOut();
-      	break ;
-
-    case ACTION_WEAPON_LESS:  
-	      projectile->DecrementTimeOut();
-      	break	;
-
-  default:
-  break	;     
-
-  };
-ActiveCharacter().HandleKeyEvent(action, event_type);
-}
-
-void WeaponLauncher::ActionUp(){ //called by mousse.cpp when mousewhellup 
-    projectile->IncrementTimeOut();
-}
-
-
-void WeaponLauncher::ActionDown(){//called by mousse.cpp when mousewhelldown
-   projectile->DecrementTimeOut();
 }
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg()

@@ -30,15 +30,13 @@
 class Label : public Widget{
  private:
   Text *txt_label;
-  Font *font;
    
  public:
   Label(const std::string &label, const Rectanglei &rect, Font& font);
   ~Label();
   void Draw (const Point2i &mousePosition);
   void SetSizePosition(const Rectanglei &rect);
-  void SetText(std::string &new_txt);
-  std::string &GetText();
 };
 
 #endif
+

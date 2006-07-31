@@ -19,7 +19,6 @@
 
 #include "video.h"
 #include <string>
-#include <iostream>
 #include <SDL_endian.h>
 #include <SDL_image.h>
 #include "../game/config.h"
@@ -60,74 +59,6 @@ bool Video::IsFullScreen(void) const{
 	return fullscreen;
 }
 
-bool CompareConfigs(const Point2i& a, const Point2i& b)
-{
-  return  (a.x >= b.x) && (a.y >= b.y);
-}
-
-void Video::ComputeAvailableConfigs()
-{ 
-  // Add the current resolution
-  available_configs.push_back(Point2i(AppWormux::GetInstance()->video.window.GetWidth(),
-					  AppWormux::GetInstance()->video.window.GetHeight()));
-
-  //Generate video mode list
-  SDL_Rect **modes;
-
-  // Get available fullscreen/hardware modes
-  modes=SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
-
-  // Check is there are any modes available 
-  if(modes != (SDL_Rect **)0){
-    // We also had the current window resolution if it is not already in the list!
-    for(int i=0;modes[i];++i) {
-      // We accept only modes that are bigger than 800x600
-      if (modes[i]->w < 800 || modes[i]->h < 600) break; 
-      available_configs.push_back(Point2i(modes[i]->w, modes[i]->h));
-    }
-  }    
-
-  // Sort the list
-  available_configs.sort(CompareConfigs);
-
-  // If biggest resolution is big enough, we propose standard resolution such as 
-  // 800x600, 1024x768, 1280x1024, 1600x1200
-  Point2i a(800, 600);
-  if ( CompareConfigs((*available_configs.begin()), a))
-    available_configs.push_back(a);
-  Point2i b(1024, 768);
-  if ( CompareConfigs((*available_configs.begin()), b))
-    available_configs.push_back(b);
-  Point2i c(1280, 1024);
-  if ( CompareConfigs((*available_configs.begin()), c))
-    available_configs.push_back(c);
-  Point2i d(1600, 1200);
-  if ( CompareConfigs((*available_configs.begin()), d))
-    available_configs.push_back(d);
-
-  // Sort the list again...
-  available_configs.sort(CompareConfigs);
-
-  // Remove double items
-  std::list<Point2i>::iterator prev = available_configs.begin(),
-    it = available_configs.begin() , 
-    end = available_configs.end();
-
-  for (++it; it != end ; ++it) {
-    if ((*prev)==(*it)) // the two items are equals
-      prev = available_configs.erase(prev);
-    else 
-      prev++;
-  }
-
-
-}
-
-std::list<Point2i>& Video::GetAvailableConfigs()
-{
-  return available_configs;
-}
-
 bool Video::SetConfig(int width, int height, bool _fullscreen){
 	// initialize the main window
 	if( window.IsNull() || 
@@ -137,10 +68,8 @@ bool Video::SetConfig(int width, int height, bool _fullscreen){
 		window.SetSurface( SDL_SetVideoMode(width, height, 32, 
 				SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF ), false );
 
-		if( window.IsNull() ) {
+		if( window.IsNull() ) 
 			window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE) );
-			std::cerr << "WARNING: Video not using hardware acceleration!" << std::endl;
-		}
 
 		if( window.IsNull() )
 			return false;
@@ -173,8 +102,6 @@ void Video::InitWindow(){
 
 	SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
 	SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux-32.xpm" );
-
-	ComputeAvailableConfigs();
 }
 
 void Video::SetWindowCaption(std::string caption){
@@ -192,7 +119,6 @@ void Video::InitSDL(){
 	if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
 		Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
 
-   SDL_EnableUNICODE(1);
 	SDLReady = true;
 }
 

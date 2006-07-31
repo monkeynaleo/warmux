@@ -45,8 +45,7 @@ private:
     bonusENERGY,
     bonusTRAP,
     bonusAIR_ATTACK,
-    bonusAUTO_BAZOOKA,
-    bonusRIOT_BOMB
+    bonusAUTO_BAZOOKA
   } bonus_weapons;
   static const uint nb_bonus = bonusAUTO_BAZOOKA;
 

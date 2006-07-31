@@ -26,7 +26,6 @@ Label::Label (const std::string &label, const Rectanglei &rect, Font& _font){
   position = rect.GetPosition();
   size = rect.GetSize();
   size.y = _font.GetHeight();
-  font = &_font;
   txt_label = new Text(label, white_color, &_font);
 }
 
@@ -41,15 +40,3 @@ void Label::Draw(const Point2i &mousePosition){
 void Label::SetSizePosition(const Rectanglei &rect){
   StdSetSizePosition(rect);
 }
-
-void Label::SetText(std::string &new_txt)
-{
-  delete txt_label;
-  txt_label = new Text(new_txt, white_color, font);
-}
-
-std::string& Label::GetText()
-{
-  return txt_label->GetText();
-}
-

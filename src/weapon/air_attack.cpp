@@ -31,7 +31,7 @@
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-#include "../weapon/explosion.h"
+#include "../weapon/weapon_tools.h"
 
 const uint FORCE_X_MIN = 10;
 const uint FORCE_X_MAX = 120;
@@ -57,13 +57,15 @@ void Obus::SignalCollision()
     Explosion();
 }
 
+
+
 //-----------------------------------------------------------------------------
 
 Plane::Plane(AirAttackConfig &p_cfg) : 
   PhysicalObj("air_attack_plane"),
   cfg(p_cfg)
 {
-  m_go_through_wall = true;
+  m_type = objUNBREAKABLE;
   m_alive = GHOST;
 
   image = resource_manager.LoadSprite( weapons_res_profile, "air_attack_plane");
@@ -72,14 +74,14 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   obus_dy = GetY()+GetHeight();
 }
 
-void Plane::Shoot(double speed, Point2i& target)
+void Plane::Shoot(double speed)
 {
   nb_dropped_bombs = 0;
   last_dropped_bomb = NULL;
 
   Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
-  cible_x = target.x;
+  cible_x = Mouse::GetInstance()->GetWorldPosition().x;
   SetY (0);
 
   image->Scale(dir, 1);
@@ -186,15 +188,14 @@ void AirAttack::Refresh()
   m_is_active = false;
 }
 
-void AirAttack::ChooseTarget(Point2i mouse_pos)
+void AirAttack::ChooseTarget()
 {
-  target = mouse_pos;
   ActiveTeam().GetWeapon().NewActionShoot();
 }
 
 bool AirAttack::p_Shoot ()
 {
-  plane.Shoot (cfg().speed, target);
+  plane.Shoot (cfg().speed);
   return true;
 }
 

@@ -21,7 +21,7 @@
 
 #include "holly_grenade.h"
 #include <sstream>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
@@ -106,6 +106,5 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
 {  
   m_name = _("HollyGrenade");
   projectile = new HollyGrenade(cfg());
-  m_allow_change_timeout = true;
 }
 

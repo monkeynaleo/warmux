@@ -43,6 +43,12 @@
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
 
+// Active le mode tricheur ?
+#ifdef DEBUG
+#  define MODE_TRICHEUR
+//#  define USE_HAND_POSITION_MODIFIER
+#endif
+
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
 
@@ -112,8 +118,8 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
     if(event_type==KEY_RELEASED)
       HandleKeyReleased(action);
 
-    if ((ActiveTeam().GetWeapon().override_keys &&
-        ActiveTeam().GetWeapon().IsActive()) || ActiveTeam().GetWeapon().force_override_keys)
+    if (ActiveTeam().GetWeapon().override_keys &&
+        ActiveTeam().GetWeapon().IsActive())
       {
         ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
         return ;
@@ -179,7 +185,8 @@ void Clavier::HandleKeyPressed (const Action_t &action)
 
         case ACTION_CHANGE_CHARACTER:
 	  if (GameMode::GetInstance()->AllowCharacterSelection())
-	    ActionHandler::GetInstance()->NewAction(new Action(action));
+	    ActionHandler::GetInstance()->NewAction(ActionInt(action,
+					ActiveTeam().NextCharacterIndex()));
 	  return ;
 
         default:
@@ -190,7 +197,7 @@ void Clavier::HandleKeyPressed (const Action_t &action)
         {
           Weapon_type weapon;
           if (weapons_list.GetWeaponBySort(weapon_sort, weapon))
-            ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_CHANGE_WEAPON, weapon));
+            ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_CHANGE_WEAPON, weapon));
 
           return;
         }
@@ -222,7 +229,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
 
     case ACTION_CENTER:
-      CharacterCursor::GetInstance()->FollowActiveCharacter();
+      CurseurVer::GetInstance()->SuitVerActif();
       camera.ChangeObjSuivi (&ActiveCharacter(), true, true, true);
       return;
 

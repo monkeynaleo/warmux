@@ -21,7 +21,7 @@
 
 #include "ninja_rope.h"
 #include <math.h>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/game.h"
 #include "../game/game_loop.h"
@@ -39,6 +39,8 @@ const int DST_MIN = 6 ;  //dst_minimal bitween 2 nodes
 const uint MAX_ROPE_LEN = 700 ; // Max rope length in pixels
 const uint ROPE_DRAW_SPEED = 12 ; // Pixel per 1/100 second.
 const int ROPE_PUSH_FORCE = 10;
+
+const uint SKIN_ROTATION_TIME = 300; //Time the skin takes to get to the correct position, when the rope is launched
 
 bool find_first_contact_point (int x1, int y1, double angle, int length,
 			       int skip, int &cx, int &cy)
@@ -83,6 +85,7 @@ NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new WeaponConfig
   m_name = _("NinjaRope");
   override_keys = true ;
   use_unit_on_first_shoot = false;
+  skin = NULL;  
 
   m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
   m_hook_sprite->EnableRotationCache(32);
@@ -107,6 +110,26 @@ bool NinjaRope::p_Shoot()
   m_initial_direction = ActiveCharacter().GetDirection(); 
   last_mvt=Time::GetInstance()->Read();
   return true ;
+}
+
+void NinjaRope::InitSkinSprite()
+{
+  //Copy skins surface
+  Surface new_surf = Surface(ActiveCharacter().GetSize(), SDL_SWSURFACE|SDL_SRCALPHA, true);
+  // Disable per pixel alpha on the source surface
+  // in order to properly copy the alpha chanel to the destination suface
+  // see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
+  Surface current_skin;
+  current_skin = ActiveCharacter().image->GetSurface();
+
+  current_skin.SetAlpha(0, 0);
+  new_surf.Blit(current_skin);
+  // re-enable the per pixel alpha in the
+  current_skin.SetAlpha(SDL_SRCALPHA, 0);
+
+  skin=new Sprite(new_surf);
+  skin->EnableRotationCache(64);
+  ActiveCharacter().Hide();
 }
 
 void NinjaRope::TryAttachRope()
@@ -157,10 +180,7 @@ void NinjaRope::TryAttachRope()
       
       ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
       m_hooked_time = Time::GetInstance()->Read();
-      ActiveCharacter().SetMovement("ninja-rope");
-
-     ActiveTeam().crosshair.ChangeAngleVal(-60);
-	
+      InitSkinSprite();
     }
   else
     {
@@ -374,7 +394,7 @@ void NinjaRope::GoRight()
 {
   go_right = true ;
   ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
-  ActiveCharacter().SetDirection(1);
+  ActiveCharacter().SetDirection(1); 
 }
 
 void NinjaRope::StopRight()
@@ -391,7 +411,7 @@ void NinjaRope::GoLeft()
 {
   go_left = true ;
   ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
-  ActiveCharacter().SetDirection(-1);
+  ActiveCharacter().SetDirection(-1); 
 }
 
 void NinjaRope::StopLeft()
@@ -431,6 +451,28 @@ void NinjaRope::Draw()
     angle = ActiveCharacter().GetRopeAngle();
   prev_angle = angle;
 
+
+  if(!m_attaching)
+  {
+    float skin_angle;
+    if(ActiveCharacter().GetDirection() == 1)
+      skin_angle = prev_angle;
+    else
+      skin_angle = prev_angle - M_PI;
+    //Skin display:
+    if( Time::GetInstance()->Read() >= m_hooked_time + SKIN_ROTATION_TIME )
+    {
+      skin->SetRotation_deg((- skin_angle * 180 / M_PI) - 90);
+    }
+    else
+    {
+      uint dt = Time::GetInstance()->Read() - m_hooked_time;
+      float angle = sin( dt * M_PI_2 / SKIN_ROTATION_TIME ) * (-skin_angle - M_PI_2);
+      skin->SetRotation_deg(angle * 180 / M_PI);
+    }
+    skin->Scale(m_initial_direction*ActiveCharacter().GetDirection(),1);
+    skin->Draw(ActiveCharacter().GetPosition());
+  }
 
   // Draw the rope.
 
@@ -489,6 +531,11 @@ void NinjaRope::p_Deselect()
   ActiveCharacter().Show();
   ActiveCharacter().SetExternForce(0,0);
   ActiveCharacter().UnsetPhysFixationPoint() ;
+  if (skin)
+  {
+    delete skin;
+    skin = NULL;
+  }
 }
 
 void NinjaRope::HandleKeyEvent(int action, int event_type)

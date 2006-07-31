@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Wormux configuration : all variables interesting to tweak should be here.
- * A default value is affected for each variable, the value can be changed by
- * the configuration file.
+ * Configuration de Wormux : toutes les variables qui sont intéressantes à
+ * modifier se retrouvent ici. Les variables ont une valeur par défaut qui
+ * peut être modifiée avec le fichier de configuration.
  *****************************************************************************/
 
 #include "config.h"
@@ -41,6 +41,7 @@
 #include "../map/maps_list.h"
 #include "../sound/jukebox.h"
 #include "../team/teams_list.h"
+#include "../team/skin.h"
 #include "../tool/file_tools.h"
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
@@ -73,13 +74,21 @@ Config::Config()
 
   tmp.sound.music = true;
   tmp.sound.effects = true;
-  tmp.sound.frequency = 44100;  
+  tmp.sound.frequency = 44100;
+}
 
+void Config::Init()
+{
   Constants::GetInstance();
 
   // directories
+#ifndef WIN32
   data_dir = *GetEnv(Constants::ENV_DATADIR, Constants::DEFAULT_DATADIR);
   locale_dir = *GetEnv(Constants::ENV_LOCALEDIR, Constants::DEFAULT_LOCALEDIR);
+#else
+  data_dir = "data\\";
+  locale_dir = "locale\\";
+#endif
   ttf_filename = *GetEnv(Constants::ENV_FONT_PATH, Constants::DEFAULT_FONT_PATH);
 
 #ifndef WIN32
@@ -124,7 +133,7 @@ bool Config::ChargeVraiment()
   return true;
 }
 
-// Lit les donnï¿½s sur une ï¿½uipe
+// Lit les données sur une équipe
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
   xmlpp::Element *elem;
@@ -139,7 +148,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     LitDocXml::LitListeString (elem, "team", tmp.teams);
   }
 
-  //=== Vidï¿½ ===
+  //=== Vidéo ===
   elem = LitDocXml::AccesBalise (xml, "video");
   if (elem != NULL)
   {
@@ -194,17 +203,6 @@ void Config::SetKeyboardConfig()
   clavier->SetKeyAction(SDLK_F7, ACTION_WEAPONS7);
   clavier->SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
   clavier->SetKeyAction(SDLK_c, ACTION_CENTER);
-  clavier->SetKeyAction(SDLK_1, ACTION_WEAPON_1);
-  clavier->SetKeyAction(SDLK_2, ACTION_WEAPON_2);
-  clavier->SetKeyAction(SDLK_3, ACTION_WEAPON_3);
-  clavier->SetKeyAction(SDLK_4, ACTION_WEAPON_4);
-  clavier->SetKeyAction(SDLK_5, ACTION_WEAPON_5);
-  clavier->SetKeyAction(SDLK_6, ACTION_WEAPON_6);
-  clavier->SetKeyAction(SDLK_7, ACTION_WEAPON_7);
-  clavier->SetKeyAction(SDLK_8, ACTION_WEAPON_8);
-  clavier->SetKeyAction(SDLK_9, ACTION_WEAPON_9);
-  clavier->SetKeyAction(SDLK_PAGEUP, ACTION_WEAPON_MORE);
-  clavier->SetKeyAction(SDLK_PAGEDOWN, ACTION_WEAPON_LESS);
 }
 
 void Config::Apply()
@@ -221,7 +219,8 @@ void Config::Apply()
   jukebox.ActiveEffects (tmp.sound.effects);
   jukebox.SetFrequency (tmp.sound.frequency);
 
-  // Charge les ï¿½uipes
+  // Charge les équipes 
+  InitSkins();
   teams_list.LoadList();
   if (m_xml_charge)
     teams_list.InitList (tmp.teams);

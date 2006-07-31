@@ -204,3 +204,7 @@ void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned
 Surface TileItem_AlphaSoftware::GetSurface(){
     return m_surface;
 }
+
+void TileItem_AlphaSoftware::SyncBuffer(){
+   // nothing to do
+}

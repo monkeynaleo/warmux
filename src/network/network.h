@@ -25,65 +25,57 @@
 #include <SDL_net.h>
 #include <SDL_thread.h>
 #include "../include/base.h" 
-#include <list>
+#include <vector>
 #include <string>
 #include "../include/action.h" 
 //-----------------------------------------------------------------------------
 
 class Network
 {
-  bool inited;
 public:
-  typedef enum
-    {
-      NETWORK_NOT_CONNECTED,
-      NETWORK_OPTION_SCREEN,
-      NETWORK_INIT_GAME,
-      NETWORK_READY_TO_PLAY,
-      NETWORK_PLAYING
-    } network_state_t;
-  network_state_t state;
-  std::list<TCPsocket> conn;
+	typedef enum
+	{
+		NETWORK_NOT_CONNECTED,
+		NETWORK_SERVER_INIT_GAME,
+		NETWORK_WAIT_CLIENTS,
+		NETWORK_WAIT_SERVER,
+		NETWORK_WAIT_MAP,
+		NETWORK_WAIT_TEAMS,
+		NETWORK_PLAYING
+	} network_state_t;
+	network_state_t state;
 		
 private:
+  TCPsocket socket;
+  TCPsocket client;
+  SDL_Thread* thread;
 	
-  bool m_is_connected;
-  bool m_is_server;
-  bool m_is_client;
+	bool m_is_connected;
+	bool m_is_server;
+	bool m_is_client;
 
-  TCPsocket server_socket; // Wait for incoming connections on this socket
-  SDL_Thread* thread; // network thread, where we receive data from network
-  SDLNet_SocketSet socket_set;
-  IPaddress ip; // for server : store listening port
-                // for client : store server address/port
-
-  Action* make_action(Uint32* packet);
+	// Server Connection
+	Action* make_action(Uint32* packet);
 
 public:
-  uint max_player_number;
-  uint connected_player;
-  uint client_inited;
-  bool sync_lock;
 
-  Network();
-  ~Network();
-  void Init();
-  
-  const bool IsConnected() const;
-  const bool IsLocal() const;
-  const bool IsServer() const;
-  const bool IsClient() const;
-  
-  void Disconnect();
-  void ClientConnect(const std::string &host, const std::string &port);
-  void ServerStart(const std::string &port);
+	Network();
+	~Network();
+	void Init();
+	
+	bool is_connected();
+	bool is_local();
+	bool is_server();
+	bool is_client();
+	
+	void disconnect();
+	
+	void client_connect(const std::string &host, const std::string &port);
 
-  void SendAction(Action* action);
-  void ReceiveActions();
+	void server_start(const std::string &port);
 
-  void AcceptIncoming();
-  void RejectIncoming();
-  std::list<TCPsocket>::iterator CloseConnection(std::list<TCPsocket>::iterator closed);
+   void SendAction(const Action &action);
+   void ReceiveActions();
 };
 
 extern Network network;

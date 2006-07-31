@@ -26,19 +26,17 @@
 #include "../gui/progress_bar.h"
 #include "../object/physical_obj.h"
 
-typedef enum {
-  //Les jauges sont prêtes pour une nouvelle opération
-  EnergyStatusOK,
+//Les jauges sont prêtes pour une nouvelle opération
+const uint EnergieStatusOK = 0;
 
-  //Les jauges peuvent changer leur valeur
-  EnergyStatusValueChange,
+//Les jauges peuvent changer leur valeur
+const uint EnergieStatusValeurChange = 1;
 
-  //Les jauges peuvent changer leur classement
-  EnergyStatusClassementChange,
+//Les jauges peuvent changer leur classement
+const uint EnergieStatusClassementChange = 2;
 
-  //LA jauge attend que toutes les jauges aient fini leur opération en cour
-  EnergyStatusWait
-} energy_t;
+//LA jauge attend que toutes les jauges aient fini leur opération en cour
+const uint EnergieStatusAttend = 3;
 
 class TeamEnergy
 {
@@ -55,22 +53,24 @@ class TeamEnergy
     uint classement; //0 = première position au classement
     uint nv_classement;
 
-    std::string team_name;
+    std::string nom;
 
     uint tps_debut_mvt;
 
   public :
     uint classement_tmp;
-    energy_t status;
+    uint status;
 
-    TeamEnergy(const std::string& _team_name);
+    TeamEnergy();
     ~TeamEnergy();
-    void Config(uint _current_energy,
-		uint _max_energy);
-
+    void Init();
+    void ChoisitNom(const std::string &nom_equipe);
     void Refresh();
     void Draw();
+    void Reset();
 
+    void FixeValeur(uint energie); //(sans animation)
+    void FixeMax(uint energie); //Choisit la valeur maximale de la jauge
     void NouvelleValeur(uint nv_energie); //(avec animation)
 
     void FixeClassement(uint classem); //(sans animation)

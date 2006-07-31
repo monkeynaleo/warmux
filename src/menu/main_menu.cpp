@@ -21,7 +21,10 @@
  *****************************************************************************/
 
 #include "main_menu.h"
+#include <SDL.h>
+//#include <SDL_image.h>
 #include <string>
+#include "infos_menu.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/effects.h"
@@ -34,7 +37,7 @@
 #include "../tool/file_tools.h"
 #include "../tool/resource_manager.h"
 
-#define NETWORK_BUTTON 
+//#define NETWORK_BUTTON 
 
 #ifndef WIN32
 #include <dirent.h>
@@ -65,9 +68,47 @@ Main_Menu::~Main_Menu(){
   delete title;
   delete skin_left;
   delete skin_right;
+  delete play;
+  delete network;
+  delete options;
+  delete infos;
+  delete quit;
 
   delete version_text;
   delete website_text;
+}
+
+void Main_Menu::button_click(){
+  jukebox.Play("share", "menu/clic");
+}
+
+bool Main_Menu::sig_play(){
+  button_click();
+  choice = menuPLAY;
+  return true;
+}
+
+bool Main_Menu::sig_network(){
+  button_click();
+  choice = menuNETWORK;
+  return true;
+}
+  
+bool Main_Menu::sig_options(){ 
+  button_click(); 
+  choice = menuOPTIONS;
+  return true; 
+}
+
+bool Main_Menu::sig_infos(){ 
+  button_click(); 
+  menu_infos.Run();
+  return true; 
+}
+  
+bool Main_Menu::sig_quit(){ 
+  choice = menuQUIT;
+  return true; 
 }
 
 Main_Menu::Main_Menu()
@@ -159,12 +200,6 @@ Main_Menu::Main_Menu()
 			 _("Quit"),
 			 large_font);
 
-  widgets.AddWidget(play);
-  widgets.AddWidget(network);
-  widgets.AddWidget(options);
-  widgets.AddWidget(infos);
-  widgets.AddWidget(quit);
-
   resource_manager.UnLoadXMLProfile( res);
 
   std::string s("Version "+Constants::VERSION);
@@ -174,22 +209,15 @@ Main_Menu::Main_Menu()
   website_text = new Text(s2, green_color, normal_font, false);
 }
 
-void Main_Menu::button_click(){
-  jukebox.Play("share", "menu/clic");
-}
-
 void Main_Menu::onClick(const Point2i &mousePosition, int button)
-{
-  Widget* b = widgets.Clic(mousePosition,button);
-  if(b == play) choice = menuPLAY;
+{       
+  if (play->Contains(mousePosition)) sig_play();
 #ifdef NETWORK_BUTTON  
-  else if(b == network) choice = menuNETWORK;
+  else if (network->Contains(mousePosition)) sig_network();
 #endif  
-  else if(b == options) choice = menuOPTIONS;
-  else if(b == infos) choice = menuCREDITS;
-  else if(b == quit) choice = menuQUIT;
-
-  if(b != quit && b != NULL) button_click();
+  else if (options->Contains(mousePosition)) sig_options();
+  else if (infos->Contains(mousePosition)) sig_infos();
+  else if (quit->Contains(mousePosition)) sig_quit();
 }
 
 menu_item Main_Menu::Run ()
@@ -212,7 +240,7 @@ menu_item Main_Menu::Run ()
      
   while( SDL_PollEvent( &event) )
   {
-    if( event.type == SDL_MOUSEBUTTONUP )
+    if( event.type == SDL_MOUSEBUTTONDOWN )
       onClick( Point2i(event.button.x, event.button.y), event.button.button);
     else if( event.type == SDL_KEYDOWN )
     {

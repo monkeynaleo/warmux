@@ -28,6 +28,7 @@
 
 class GameMenu : public Menu
 {
+   Font * normal_font;
    bool terrain_init;
 
    /* Team controllers */

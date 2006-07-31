@@ -22,7 +22,7 @@
  *****************************************************************************/
 
 #include "dynamite.h"
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/config.h"
 #include "../include/app.h"
 #include "../object/objects_list.h"
@@ -50,7 +50,7 @@ void BatonDynamite::Reset()
   Ready();
   is_active = false;
 
-  unsigned int delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
+  unsigned int delay = (1000 * cfg.timeout)/image->GetFrameCount();
   image->SetFrameSpeed(delay);
 
   image->Scale(ActiveCharacter().GetDirection(), 1);
@@ -96,13 +96,13 @@ Dynamite::Dynamite() :
   WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Dynamite");
+  
   projectile = new BatonDynamite(cfg());
 }
 
 void Dynamite::p_Select()
 {
   dynamic_cast<BatonDynamite *>(projectile)->Reset();
-  WeaponLauncher::p_Select();
 }
 
 // Pose une dynamite

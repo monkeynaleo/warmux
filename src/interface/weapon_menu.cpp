@@ -206,18 +206,6 @@ WeaponsMenu::WeaponsMenu()
   hide = false;
   nbr_weapon_type = 0;
   motion_start_time = Time::GetInstance()->Read();
-
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  my_button1 = new Sprite( resource_manager.LoadImage(res,"interface/button1_icon"));
-  my_button1->cache.EnableLastFrameCache();
-  my_button2 = new Sprite( resource_manager.LoadImage(res,"interface/button2_icon"));
-  my_button2->cache.EnableLastFrameCache();
-  my_button3 = new Sprite( resource_manager.LoadImage(res,"interface/button3_icon"));
-  my_button3->cache.EnableLastFrameCache();
-  my_button4 = new Sprite( resource_manager.LoadImage(res,"interface/button4_icon"));
-  my_button4->cache.EnableLastFrameCache();
-  my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));  
-  my_button5->cache.EnableLastFrameCache();
 }
 
 // Add a new weapon to the weapon menu.
@@ -329,6 +317,21 @@ void WeaponsMenu::Reset()
   show = false;
   hide = false;
   motion_start_time = Time::GetInstance()->Read();
+}
+
+void WeaponsMenu::Init()
+{
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  my_button1 = new Sprite( resource_manager.LoadImage(res,"interface/button1_icon"));
+  my_button1->cache.EnableLastFrameCache();
+  my_button2 = new Sprite( resource_manager.LoadImage(res,"interface/button2_icon"));
+  my_button2->cache.EnableLastFrameCache();
+  my_button3 = new Sprite( resource_manager.LoadImage(res,"interface/button3_icon"));
+  my_button3->cache.EnableLastFrameCache();
+  my_button4 = new Sprite( resource_manager.LoadImage(res,"interface/button4_icon"));
+  my_button4->cache.EnableLastFrameCache();
+  my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));
+  my_button5->cache.EnableLastFrameCache();
 }
 
 void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column)
@@ -480,7 +483,8 @@ bool WeaponsMenu::ActionClic(const Point2i &mousePos)
   {
     if( it->MouseOn(mousePos) )
     {
-	  ActionHandler::GetInstance()->NewAction (new ActionInt(ACTION_CHANGE_WEAPON, 
+	  ActionHandler::GetInstance()->NewAction (ActionInt(
+	    ACTION_CHANGE_WEAPON, 
 		it -> weapon -> GetType()));
       SwitchDisplay();
       return true;

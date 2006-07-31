@@ -31,7 +31,7 @@
 #include "../interface/game_msg.h"
 #include "../interface/game_msg.h"
 #include "../weapon/gun.h"
-#include "../weapon/explosion.h"
+#include "../weapon/weapon_tools.h"
 
 const uint BULLET_SPEED = 20;
 

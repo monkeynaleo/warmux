@@ -40,10 +40,8 @@ void WeaponConfig::LoadXml(xmlpp::Element *elem)
 
 ExplosiveWeaponConfig::ExplosiveWeaponConfig()
 {
-  timeout = 0; 
-  allow_change_timeout = false;
+  timeout = 0;
   explosion_range = 50 ;
-  particle_range = explosion_range;
   blast_range = 2.5 ;
   blast_force = 2.5 ;
 }
@@ -52,9 +50,7 @@ void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem)
 {
   WeaponConfig::LoadXml (elem);
   LitDocXml::LitUint (elem, "timeout", timeout);
-  LitDocXml::LitBool (elem, "allow_change_timeout", allow_change_timeout);
   LitDocXml::LitUint (elem, "explosion_range", explosion_range);
-  LitDocXml::LitUint (elem, "particle_range", particle_range);
   LitDocXml::LitDouble (elem, "blast_range", blast_range);
   LitDocXml::LitDouble (elem, "blast_force", blast_force);
 }

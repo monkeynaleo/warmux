@@ -35,7 +35,7 @@ public:
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
   virtual void Dig(const Point2i &center, const uint radius) = 0;
   virtual Surface GetSurface() = 0;
-  virtual bool IsTotallyEmpty() = 0;
+  virtual void SyncBuffer() = 0; // (if needed)
   virtual void Draw(const Point2i &pos);
 };
 
@@ -49,7 +49,7 @@ public:
   void Dig(const Point2i &position, const Surface& dig){};
   Surface GetSurface(){return *new Surface();};
   void Dig(const Point2i &center, const uint radius) {};
-  bool IsTotallyEmpty(){ return true; };
+  void SyncBuffer(){};
   void Draw(const Point2i &pos){};
 };
 
@@ -63,7 +63,7 @@ public:
   Surface GetSurface();
   void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
-  bool IsTotallyEmpty() { return false; };
+  void SyncBuffer();
 
 private:
   TileItem_AlphaSoftware(const TileItem_AlphaSoftware &copy);

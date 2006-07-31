@@ -33,12 +33,9 @@ wormux_SOURCES = \
 	gui/check_box.cpp gui/check_box.h \
 	gui/label.cpp gui/label.h \
 	gui/list_box.cpp gui/list_box.h \
-	gui/msg_box.cpp gui/msg_box.h \
 	gui/spin_button.cpp gui/spin_button.h \
-	gui/text_box.cpp gui/text_box.h \
 	gui/box.cpp gui/box.h \
 	gui/widget.cpp gui/widget.h \
-	gui/widget_list.cpp gui/widget_list.h \
 	gui/null_widget.cpp gui/null_widget.h \
 	tool/string_tools.cpp tool/string_tools.h \
 	tool/xml_document.cpp tool/xml_document.h \
@@ -55,14 +52,11 @@ wormux_SOURCES = \
 	tool/debug.cpp tool/debug.h \
 	sound/jukebox.cpp sound/jukebox.h \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
-	interface/loading_screen.cpp interface/loading_screen.h \
 	menu/main_menu.cpp menu/main_menu.h \
 	menu/menu.cpp menu/menu.h \
-	menu/network_menu.cpp menu/network_menu.h \
-	menu/credits_menu.cpp menu/credits_menu.h \
+	menu/infos_menu.cpp menu/infos_menu.h \
 	menu/options_menu.cpp menu/options_menu.h \
 	menu/game_menu.cpp menu/game_menu.h \
-	menu/results_menu.cpp menu/results_menu.h \
 	game/time.cpp game/time.h \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/question.cpp gui/question.h \
@@ -89,22 +83,17 @@ wormux_SOURCES = \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
 	team/macro.h \
-	team/body.cpp team/body.h \
-	team/body_list.cpp team/body_list.h \
 	team/character.cpp team/character.h \
-	team/clothe.cpp team/clothe.h \
-	team/member.cpp team/member.h \
 	team/move.cpp team/move.h \
-	team/movement.cpp team/movement.h \
+	team/skin.cpp team/skin.h \
 	team/team.cpp team/team.h \
 	team/team_energy.cpp team/team_energy.h \
 	team/teams_list.cpp team/teams_list.h \
-	team/results.cpp team/results.h \
 	weapon/all.h \
 	weapon/weapon.cpp weapon/weapon.h \
 	weapon/weapon_cfg.cpp weapon/weapon_cfg.h \
 	weapon/weapons_list.cpp weapon/weapons_list.h \
-	weapon/explosion.cpp weapon/explosion.h \
+	weapon/weapon_tools.cpp weapon/weapon_tools.h \
 	weapon/launcher.cpp weapon/launcher.h \
 	weapon/crosshair.cpp weapon/crosshair.h \
 	weapon/air_attack.cpp weapon/air_attack.h \
@@ -112,7 +101,6 @@ wormux_SOURCES = \
 	weapon/auto_bazooka.cpp weapon/auto_bazooka.h \
 	weapon/baseball.cpp weapon/baseball.h \
 	weapon/bazooka.cpp weapon/bazooka.h \
-	weapon/riot_bomb.cpp weapon/riot_bomb.h \
 	weapon/bounce_ball.cpp weapon/bounce_ball.h \
 	weapon/cluster_bomb.cpp weapon/cluster_bomb.h \
 	weapon/dynamite.cpp weapon/dynamite.h \
@@ -131,11 +119,11 @@ wormux_SOURCES = \
 	weapon/teleportation.cpp weapon/teleportation.h \
 	weapon/uzi.cpp weapon/uzi.h
 
-AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\" -DFONT_FILE=\"$(fontfile)\" -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\"
-
+AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\" -DFONT_FILE=\"$(fontfile)\"
 
 if WIN32
-wormux_SOURCES += wormux.rc wormux.ico
+wormux_SOURCES += wormux.rc
+
 .rc.o:
 	windres -o $@ -i $<
 endif

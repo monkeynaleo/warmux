@@ -19,10 +19,6 @@
     <image file="object/star.png" />
   </sprite>
 
-  <sprite name="dark_smoke">
-    <image file="object/dark_smoke.png" />
-  </sprite>
-
   <sprite name="yellow_star_particle">
     <image file="object/yellow_star.png" />
   </sprite>
@@ -33,10 +29,6 @@
 
   <sprite name="pink_star_particle">
     <image file="object/pink_star.png" />
-  </sprite>
-
-  <sprite name="bullet_particle">
-    <image file="weapon/gun/gun_bullet.png" />
   </sprite>
 
 <!-- Air attack ressources -->
@@ -76,15 +68,6 @@
   <surface name="baz_cible" file="weapon/bazooka/baz_cible.png" />
   <sprite name="rocket">
     <image file="weapon/bazooka/missile.png" />
-  </sprite>
-
-<!-- Riot bomb ressources -->
-
-  <surface name="riot_bomb_ico" file="weapon/riot_bomb/riot_ico.png" />
-  <surface name="riot_bomb" file="weapon/bazooka/bazooka.png" />
-  <surface name="riot_cible" file="weapon/bazooka/baz_cible.png" />
-  <sprite name="riot_rocket">
-    <image file="weapon/riot_bomb/missile.png" />
   </sprite>
 
 <!-- Bounce ball ressources -->

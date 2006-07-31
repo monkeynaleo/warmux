@@ -21,159 +21,104 @@
 
 #include "action.h"
 //-----------------------------------------------------------------------------
-#include <SDL_net.h>
+#include <SDL.h>
 #include "action_handler.h"
 //-----------------------------------------------------------------------------
 
-Action::Action (Action_t type)
-{
+// Copy b(unknown type, 32bits) to a(Uint32), bit for bit
+#define TO_UINT32(a, b) a=*((Uint32*)(&(b)))
+// Copy b(Uint32) to a(unknown type,32bits), bit for bit
+#define FROM_UINT32(a, b) *((Uint32*)(&(a)))=b
+
+// Copy b(unknown type, 64bits) to a(Uint32), bit for bit
+#define TO_2UINT32(a, b) a=*((Uint32*)(&(b))); \
+                         *((&a)+1)=*(((Uint32*)(&(b)))+1)
+
+// Copy b(Uint32) to a(unknown type,64bits), bit for bit
+#define FROM_2UINT32(a, b) *((Uint32*)(&(a)))=b; \
+                           *(((Uint32*)(&(a)))+1)=*((&b)+1); \
+
+Action::Action (Action_t type) 
+{ 
   m_type = type; 
 }
 
-Action::Action (Action_t type, Uint32 *is)
-{
-  m_type = type; 
-  int m_lenght = SDLNet_Read32(is);
-  is++;
-
-  for(int i=0; i < m_lenght; i++)
-  {
-    Uint32 val = SDLNet_Read32(is);
-    var.push_back(val);
-    is++;
-  }
-}
-
-Action::~Action ()
-{
-}
+Action::~Action () {}
 
 Action_t Action::GetType() const 
 { 
   return m_type; 
 }
 
-void Action::Write(Uint32 *os)
+void Action::Write(Uint32* os) const 
 { 
-  SDLNet_Write32(m_type, os);
-  os++;
-  Uint32 tmp;
-  int size = (int)var.size();
-  memcpy(&tmp, &size, 4);
-  SDLNet_Write32(tmp, os);
-  os++;
-
-  for(std::list<Uint32>::iterator val = var.begin(); val!=var.end(); val++)
-  {
-    SDLNet_Write32(*val, os);
-    os++;
-  }
+  TO_UINT32(os[0],m_type);
 }
 
-void Action::Push(int val)
-{
-  Uint32 tmp;
-  memcpy(&tmp, &val, 4);
-  var.push_back(tmp);
-  std::cout << "Pushing int value: " << val << std::endl;
-}
-
-void Action::Push(double val)
-{
-  Uint32 tmp[2];
-  memcpy(&tmp, &val, 8);
-  var.push_back(tmp[0]);
-  var.push_back(tmp[1]);
-  std::cout << "Pushing double value: " << val << " (" << tmp << ")" << std::endl;
-}
-
-void Action::Push(std::string val)
-{
-  //Cut the string into 32bit values
-  //But first, we write the size of the string:
-  var.push_back((Uint32)val.size());
-  char* ch = (char*)val.c_str();
-
-  int count = val.size();
-  while(count > 0)
-  {
-    Uint32 tmp;
-    // Fix-me : We are reading out of the c_str() buffer there :
-    memcpy(&tmp, ch, 4);
-    var.push_back(tmp);
-    ch += 4;
-    count -= 4;
-  }
-  std::cout << "Pushing string value: " << val << std::endl;
-}
-
-int Action::PopInt()
-{
-  assert(var.size() > 0);
-  int val;
-  Uint32 tmp = var.front();
-  memcpy(&val, &tmp, 4);
-  var.pop_front();
-  std::cout << "Poping int value: " << val << std::endl;
-  return val;
-}
-
-double Action::PopDouble()
-{
-  assert(var.size() > 0);
-  double val;
-  Uint32 tmp[2];
-  tmp[0] = var.front();
-  var.pop_front();
-  tmp[1] = var.front();
-  var.pop_front();
-  memcpy(&val, &tmp, 8);
-  std::cout << "Poping double value: " << val << " (" << tmp << ")" << std::endl;
-  return val;
-}
-
-std::string Action::PopString()
-{
-  assert(var.size() > 1);
-  int lenght = (int) var.front();
-  var.pop_front();
-
-  std::string str="";
-  assert((int)var.size() >= lenght/4);
-  while(lenght > 0)
-  {
-    Uint32 tmp = var.front();  
-    var.pop_front();
-    char tmp_str[5] = {0, 0, 0, 0, 0};
-    memcpy(tmp_str, &tmp, 4);
-    str += tmp_str;
-    lenght -= 4;
-  }
-  std::cout << "Poping string value: " << str << std::endl;
-  return str;
+Action* Action::clone() const 
+{ 
+  return new Action(*this); 
 }
 
 std::ostream& Action::out(std::ostream &os) const
 {
   os << ActionHandler::GetInstance()->GetActionName(m_type);
-  os << " (Mutliformat) ";
   return os;
 }
+
 //-----------------------------------------------------------------------------
 
-ActionInt::ActionInt (Action_t type, int value) : Action(type)
-{
-  m_value = value;
-  Push(value);
+ActionInt2::ActionInt2 (Action_t type, int v1, int v2) : Action(type) 
+{ 
+  m_value1 = v1; m_value2 = v2; 
 }
 
-ActionInt::ActionInt (Action_t type, Uint32* is) : Action(type, is)
-{
-  m_value = PopInt();
+ActionInt2::ActionInt2(Action_t type, Uint32* is) : Action(type)
+{ 
+  FROM_UINT32(m_value1, is[0]);
+  FROM_UINT32(m_value2, is[1]);
 }
 
+int ActionInt2::GetValue1() const 
+{ 
+  return m_value1; 
+}
+
+int ActionInt2::GetValue2() const 
+{ 
+  return m_value2; 
+}
+
+void ActionInt2::Write(Uint32* os) const 
+{ 
+  Action::Write(os);
+  TO_UINT32(os[1], m_value1);
+  TO_UINT32(os[2], m_value2);
+}
+
+Action* ActionInt2::clone() const { return new ActionInt2(*this); }
+std::ostream& ActionInt2::out(std::ostream &os) const
+{
+  Action::out (os);
+  os <<  " (2x int) = " << m_value1 << ", " << m_value2;
+  return os;
+}
+
+//-----------------------------------------------------------------------------
+
+ActionInt::ActionInt (Action_t type, int value) : Action(type) 
+{ m_value = value; }
+ActionInt::ActionInt (Action_t type, Uint32* is) : Action(type)
+{ 
+  FROM_UINT32(m_value, is[0]);
+}
 int ActionInt::GetValue() const { return m_value; }
-
+void ActionInt::Write(Uint32* os) const 
+{ 
+  Action::Write(os);
+  TO_UINT32(os[1], m_value);
+}
+Action* ActionInt::clone() const { return new ActionInt(*this); }
 std::ostream& ActionInt::out(std::ostream &os) const
 {
   Action::out (os);
@@ -183,19 +128,19 @@ std::ostream& ActionInt::out(std::ostream &os) const
 
 //-----------------------------------------------------------------------------
 
-ActionDouble::ActionDouble (Action_t type, double value) : Action(type)
-{
-  m_value = value;
-  Push(value);
+ActionDouble::ActionDouble (Action_t type, double value) : Action(type) 
+{ m_value = value; }
+ActionDouble::ActionDouble (Action_t type, Uint32* is) : Action(type)
+{ 
+  FROM_2UINT32(m_value, is[0]);
 }
-
-ActionDouble::ActionDouble (Action_t type, Uint32* is) : Action(type, is)
-{
-  m_value = PopDouble();
-}
-
 double ActionDouble::GetValue() const { return m_value; }
-
+void ActionDouble::Write(Uint32* os) const 
+{ 
+  Action::Write(os);
+  TO_2UINT32(os[1], m_value);
+}
+Action* ActionDouble::clone() const { return new ActionDouble(*this); }
 std::ostream& ActionDouble::out(std::ostream &os) const
 {
   Action::out (os);
@@ -206,17 +151,18 @@ std::ostream& ActionDouble::out(std::ostream &os) const
 //-----------------------------------------------------------------------------
 
 ActionDoubleInt::ActionDoubleInt (Action_t type, double v1, int v2) : Action(type) 
-{
-  m_value1 = v1;
-  m_value2 = v2;
-  Push(m_value1);
-  Push(m_value2);
+{ 
+  m_value1 = v1; 
+  m_value2 = v2; 
 }
 
-ActionDoubleInt::ActionDoubleInt(Action_t type, Uint32* is) : Action(type, is)
+ActionDoubleInt::ActionDoubleInt(Action_t type, Uint32* is) : Action(type)
 {
-  m_value1 = PopDouble();
-  m_value2 = PopInt();
+  assert( sizeof(m_value1) == 8);
+//  ((Uint32*)&m_value1)[0] = is[0];
+//  ((Uint32*)&m_value1)[1] = is[1];
+  FROM_2UINT32(m_value1, is[0]);
+  FROM_UINT32(m_value2, is[2]);
 }
 
 double ActionDoubleInt::GetValue1() const 
@@ -227,6 +173,20 @@ double ActionDoubleInt::GetValue1() const
 int ActionDoubleInt::GetValue2() const 
 { 
   return m_value2; 
+}
+
+void ActionDoubleInt::Write(Uint32* os) const
+{ 
+  Action::Write(os);
+//  os[1] = ((Uint32*)&m_value1)[0];
+//  os[2] = ((Uint32*)&m_value1)[1];
+  TO_2UINT32(os[1], m_value1);
+  TO_UINT32(os[3], m_value2);
+}
+
+Action* ActionDoubleInt::clone() const 
+{ 
+  return new ActionDoubleInt(*this); 
 }
 
 std::ostream& ActionDoubleInt::out(std::ostream &os) const
@@ -240,21 +200,32 @@ std::ostream& ActionDoubleInt::out(std::ostream &os) const
 
 ActionString::ActionString (Action_t type, const std::string &value) : Action(type)
 {
-  m_value = value;
-  Push(m_value);
+  m_length = strlen(value.c_str())+1;
+  m_value = new char[m_length];
+  strcpy(m_value, value.c_str());
 }
 
-ActionString::ActionString (Action_t type, Uint32 *is) : Action(type, is)
+ActionString::ActionString (Action_t type, Uint32 *is) : Action(type)
 {
-  m_value = PopString();
+  m_length = is[0];
+  m_value = new char[m_length];
+  strcpy(m_value,(char*)(&is[1]));
 }
 
 ActionString::~ActionString ()
 {
+  delete []m_value;
 }
 
-const char* ActionString::GetValue() const { return m_value.c_str(); }
+char* ActionString::GetValue() const { return m_value; }
+void ActionString::Write(Uint32 *os) const 
+{ 
+  Action::Write(os);
+  os[1] = m_length;
+  strcpy((char*)(&os[2]),m_value);
+}
 
+Action* ActionString::clone() const { return new ActionString(m_type, std::string(m_value)); }
 std::ostream& ActionString::out(std::ostream &os) const
 {
   Action::out (os);
@@ -269,3 +240,4 @@ std::ostream& operator<<(std::ostream &os, const Action &a)
   return os;
 }
 
+//-----------------------------------------------------------------------------

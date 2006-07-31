@@ -16,10 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classes virtuelles permettant de dï¿½inir une arme et un projectile. Les
- * armes ont un nom, une image, un ï¿½at actif/inactif et une icï¿½e (affichï¿½
+ * Classes virtuelles permettant de définir une arme et un projectile. Les
+ * armes ont un nom, une image, un état actif/inactif et une icône (affichée
  * dans l'interface). Les projectiles sont des objets physiques qui ont un
- * comportement spï¿½ial lorsqu'ils entrent en collision ou qu'ils sortent du
+ * comportement spécial lorsqu'ils entrent en collision ou qu'ils sortent du
  * terrain.
  *****************************************************************************/
 
@@ -38,7 +38,7 @@
 #include "../team/character.h"
 class Character;
 
-// Constante munitions illimitï¿½s
+// Constante munitions illimitées
 extern const int INFINITE_AMMO;
 
 extern const uint BUTTON_ICO_WIDTH;
@@ -117,10 +117,7 @@ public:
 
   // True if the weapon uses keys when activated.
   bool override_keys ;
-  
-  //Force weapons to use keys when true 
-  bool force_override_keys ;
-   
+
   // Angle in degrees between -90 to 90
   int min_angle, max_angle;
   bool use_flipping;
@@ -161,7 +158,6 @@ public:
   int ReadInitialNbUnit() const;
 
   bool CanBeUsedOnClosedMap() const;
-  bool UseCrossHair() const { return min_angle != max_angle; };
 
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
@@ -170,7 +166,7 @@ public:
   void NewActionShoot() const;
 
   // Tire avec l'arme
-  // Renvoie true si l'arme a pu ï¿½re enclanchï¿½
+  // Renvoie true si l'arme a pu être enclanchée
   bool Shoot(double strength, int angle);
 
   // L'arme est encore active (animation par ex.) ?
@@ -197,12 +193,8 @@ public:
 
   // Choose a target.
   // Return false if it not fire directly after
-  virtual void ChooseTarget (Point2i mouse_pos);
+  virtual void ChooseTarget ();
 
-  //Misc actions. 
-  virtual void ActionUp ();//called by mousse.cpp when mousewhellup
-  virtual void ActionDown ();//called by mousse.cpp when mousewhelldown
-  
   // Handle a keyboard event.
   virtual void HandleKeyEvent(int key, int event_type) ;
 
@@ -216,7 +208,7 @@ public:
   // return the strength of the weapon
   const double ReadStrength() const;
 
-  // Accï¿½ aux donnï¿½s
+  // Accès aux données
   const std::string& GetName() const;
   const std::string& GetID() const;
   Weapon_type GetType() const;

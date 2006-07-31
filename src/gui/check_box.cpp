@@ -55,9 +55,12 @@ void CheckBox::Draw(const Point2i &mousePosition){
   m_image->Blit(AppWormux::GetInstance()->video.window, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
-Widget* CheckBox::Clic(const Point2i &mousePosition, uint button){
+bool CheckBox::Clic(const Point2i &mousePosition, uint button){
+  if( !Contains(mousePosition) )
+    return false;
+
   m_value = !m_value;
-  return this ;
+  return true ;
 }
 
 void CheckBox::SetSizePosition(const Rectanglei &rect){

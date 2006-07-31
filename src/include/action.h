@@ -25,34 +25,22 @@
 #include <SDL.h>
 #include <string>
 #include <iostream>
-#include <list>
 #include "base.h"
 #include "enum.h"
 //-----------------------------------------------------------------------------
 
 class Action
 {
-private:
-  std::list<Uint32> var;
 protected:
   Action_t m_type;
 public:
   Action (Action_t type);
-  Action (Action_t type, Uint32* is);
   virtual ~Action();
-
+  virtual Action_t GetType() const;
+  virtual void Write(Uint32 *os) const;
+  virtual Action* clone() const;
   virtual std::ostream& out(std::ostream &os) const;
-  void Push(int val);
-  void Push(double val);
-  void Push(std::string val);
-  int PopInt();
-  double PopDouble();
-  std::string PopString();
-
-  void Write(Uint32 *os);
-  Action_t GetType() const;
 };
-
 
 //-----------------------------------------------------------------------------
 
@@ -64,6 +52,25 @@ public:
   ActionInt (Action_t type, int value);
   ActionInt (Action_t type, Uint32* is);
   int GetValue() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
+  std::ostream& out(std::ostream &os) const;
+};
+
+//-----------------------------------------------------------------------------
+
+class ActionInt2 : public Action
+{
+private:
+  int m_value1;
+  int m_value2;
+public:
+  ActionInt2 (Action_t type, int val1, int val2);
+  ActionInt2 (Action_t type, Uint32* is);
+  int GetValue1() const;
+  int GetValue2() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
   std::ostream& out(std::ostream &os) const;
 };
 
@@ -77,9 +84,10 @@ public:
   ActionDouble (Action_t type, double value);
   ActionDouble (Action_t type, Uint32* is);
   double GetValue() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
   std::ostream& out(std::ostream &os) const;
 };
-
 //-----------------------------------------------------------------------------
 
 class ActionDoubleInt : public Action
@@ -92,6 +100,8 @@ public:
   ActionDoubleInt (Action_t type, Uint32* is);
   double GetValue1() const;
   int GetValue2() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
   std::ostream& out(std::ostream &os) const;
 };
 
@@ -100,16 +110,17 @@ public:
 class ActionString : public Action
 {
 private:
-  std::string m_value;
+  char* m_value;
+  uint m_length;
 public:
   ~ActionString();
   ActionString (Action_t type, const std::string& value);
   ActionString (Action_t type, Uint32* is);
-  const char* GetValue() const;
+  char* GetValue() const;
+  void Write(Uint32* os) const;
+  Action* clone() const;
   std::ostream& out(std::ostream &os) const;
 };
-
-//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 // Output action in a ostream (for debug)

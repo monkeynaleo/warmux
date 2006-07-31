@@ -23,7 +23,7 @@
 #include "cluster_bomb.h"
 #include <sstream>
 #include <math.h>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
@@ -69,7 +69,7 @@ void Cluster::SignalCollision()
     return;
   }
 
-  ApplyExplosion (GetPosition(), cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
+  ApplyExplosion (GetPosition(), cfg, NULL, "weapon/explosion", false, ParticleEngine::LittleESmoke);
 }
 
 //-----------------------------------------------------------------------------
@@ -140,6 +140,7 @@ ClusterLauncher::ClusterLauncher() :
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("ClusterBomb");  
+  
   projectile = new ClusterBomb(cfg());
 }
 

@@ -517,7 +517,7 @@ void Physics::RunPhysicalEngine()
       }
 
       if (contact){
-		  MSG_DEBUG( "physic.coll", "Collision durant le dï¿½lacement (%f, %f) -> (%f, %f)", oldPos.x, oldPos.y, newPos.x, newPos.y);
+		  MSG_DEBUG( "physic.coll", "Collision durant le déplacement (%f, %f) -> (%f, %f)", oldPos.x, oldPos.y, newPos.x, newPos.y);
 		  Rebound(contactPos, contact_angle);
       }
 
@@ -551,7 +551,6 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
 	  
 			// Check if we should stop rebounding.
 			if (norme < STOP_REBOUND_LIMIT){
-				SignalFallEnding();
 				StopMoving();
 				return;
 		 	}

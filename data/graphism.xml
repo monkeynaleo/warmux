@@ -15,7 +15,6 @@
 
   <surface name="bg_option" file="menu/img/background_options.png" />
   <surface name="bg_play" file="menu/img/background_play.png" />
-  <surface name="bg_network" file="menu/img/background_network.png" />
 
   <sprite name="valider">
     <image file="menu/img/validate.png">
@@ -84,14 +83,6 @@
   <surface name="weapon_box_button" file="interface/Grey-Button.png"/>
   <surface name="fond_compteur" file="interface/compteur.png"/>
   <surface name="pause_screen" file="interface/pause.png"/>
-  <surface name="quit_screen" file="interface/quit.png"/>
-</section>
-
-<section name="loading_screen">
-  <surface name="map_icon" file="menu/img/ico_maps.png"/>
-  <surface name="team_icon" file="menu/img/ico_skins.png"/>
-  <surface name="sound_icon" file="menu/img/ico_sounds.png"/>
-  <surface name="weapon_icon" file="menu/img/ico_weapons.png"/>
 </section>
 
 <section name ="mouse">
@@ -105,7 +96,6 @@
   <surface name="pointeur1" file="gfx/pointer.png" />
 
   <sprite name="curseur">
-  
     <image file="gfx/arrow.png" />
   </sprite>
 

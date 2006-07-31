@@ -35,8 +35,6 @@
 class Menu
 {
 public:
-   WidgetList widgets;
-
    Menu(char* bg); 
    virtual ~Menu();
 
@@ -47,15 +45,14 @@ private:
    bool close_menu;
 
    /* Actions buttons  */
+   Button *b_ok;
+   Button *b_cancel;
    HBox *actions_buttons;
 
    void BasicDraw(const Point2i &mousePosition);
    bool BasicOnClic(const Point2i &mousePosition);
 
 protected:
-   Button *b_cancel;
-   Button *b_ok;
-
    void sig_ok();
    void sig_cancel();
 
@@ -65,7 +62,6 @@ protected:
    virtual void Draw(const Point2i &mousePosition) = 0;   
    virtual void OnClic(const Point2i &mousePosition, int button) = 0;
    void SetActionButtonsXY(int x, int y);
-   void Display(const Point2i& mousePosition);
 };
 
 #endif

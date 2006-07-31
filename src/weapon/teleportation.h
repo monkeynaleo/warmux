@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Tï¿½ï¿½ortation : dï¿½lacement d'un ver n'importe o sur le terrain.
+ * Téléportation : déplacement d'un ver n'importe où sur le terrain.
  *****************************************************************************/
 
 #ifndef TELEPORTATION_H
@@ -31,6 +31,11 @@ private:
   bool retour; // on est dans le retour ?
   uint temps;
   Point2i src, dst;
+  int m_x,m_y;
+  float m_zoom;
+  int m_direction;
+
+  Sprite* skin;
 
   bool p_Shoot();
 
@@ -38,7 +43,7 @@ public:
   Teleportation();
   void Refresh();
   void Draw();
-  virtual void ChooseTarget(Point2i mouse_pos);
+  virtual void ChooseTarget();
   WeaponConfig& cfg();
 };
 

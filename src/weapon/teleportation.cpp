@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Tï¿½ï¿½ortation : dï¿½lacement d'un ver n'importe o sur le terrain.
+ * Téléportation : déplacement d'un ver n'importe où sur le terrain.
  *****************************************************************************/
 
 #include "teleportation.h"
@@ -24,8 +24,8 @@
 #include "../game/game_mode.h"
 #include "../game/time.h"
 #include "../graphic/effects.h"
+#include "../interface/mouse.h"
 #include "../include/action_handler.h"
-#include "../map/camera.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
@@ -42,7 +42,8 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 
 bool Teleportation::p_Shoot ()
 {
-  // Vï¿½ifie qu'on se tï¿½ï¿½orte dans le vide !
+  // Vérifie qu'on se téléporte dans le vide !
+  dst = Mouse::GetInstance()->GetWorldPosition() - ActiveCharacter().GetSize()/2;
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
 	 return false;
   if( !ActiveCharacter().IsInVacuumXY(dst) )
@@ -54,7 +55,14 @@ bool Teleportation::p_Shoot ()
   
   temps = Time::GetInstance()->Read();
   retour = false;
+  m_direction = ActiveCharacter().GetDirection();
 
+  // Compute skins animation
+  Surface current_skin;
+  current_skin = ActiveCharacter().image->GetSurface();
+
+  ActiveCharacter().Hide();
+  skin = WaveSurface(current_skin, 100, GameMode::GetInstance()->duration_move_player * 1000, 5.0, 1.5);
   return true;
 }
 
@@ -66,11 +74,14 @@ void Teleportation::Refresh()
 
   // On a fait le chemin retour ?
   if (retour) {
-    // Oui, c'est la fin de la tï¿½ï¿½ortation
+    // Oui, c'est la fin de la téléportation
     m_is_active = false;
+    ActiveCharacter().image->Scale (m_direction, 1);
     ActiveCharacter().SetSpeed(0.0,0.0);
+    ActiveCharacter().Show();
     jukebox.Play("share","weapon/teleport_end");
     GameLoop::GetInstance()->interaction_enabled = true;
+    delete skin;
     return;
   }
 
@@ -78,27 +89,51 @@ void Teleportation::Refresh()
   if (GameMode::GetInstance()->duration_move_player * 1000 < dt)
   {
     // Non, on fait le chemin retour en 
-    // commenï¿½nt par dï¿½lacer le ver
+    // commençant par déplacer le ver
     retour = true;
-    camera.SetXYabs(dst - camera.GetSize()/2);
     ActiveCharacter().SetXY(dst);
     temps = Time::GetInstance()->Read();
     dt = 0.0;
     return;
   }
+
+  if (GameMode::GetInstance()->duration_move_player * 1000 / 2 < dt)
+  {
+    m_x = dst.x;
+    m_y = dst.y - skin->GetHeight()/2;
+
+    float alpha = (float)dt/(float)(GameMode::GetInstance()->duration_move_player * 1000);
+    alpha = (alpha - 0.5) * 2.0;
+    skin->SetAlpha(alpha);
+
+    return;
+  }
+
+  uint larg=ActiveCharacter().GetWidth();
+
+  m_x = ActiveCharacter().GetX() - (skin->GetWidth()-larg)/2;
+  m_y = ActiveCharacter().GetY();
+
+  float alpha = (float)dt/(float)(GameMode::GetInstance()->duration_move_player * 1000);
+  alpha = (0.5 - alpha) * 2.0;
+  skin->SetAlpha(alpha);
+
+//  if(ActiveCharacter().GetDirection() == -1)
+//    m_x += nv_larg;
 }
 
 void Teleportation::Draw()
 {
   if (m_is_active) {
+    skin->Update();
+    skin->Draw( Point2i(m_x, m_y) );
   } else {
     Weapon::Draw();
   }
 }
 
-void Teleportation::ChooseTarget(Point2i mouse_pos)
+void Teleportation::ChooseTarget()
 {
-  dst = mouse_pos - ActiveCharacter().GetSize()/2;
   ActiveTeam().GetWeapon().NewActionShoot();
 }
 

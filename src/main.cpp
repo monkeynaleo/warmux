@@ -32,11 +32,11 @@
 #include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
-#include "menu/credits_menu.h"
 #include "menu/game_menu.h"
+#include "menu/infos_menu.h"
 #include "menu/main_menu.h"
-#include "menu/network_menu.h"
 #include "menu/options_menu.h"
+#include "network/network.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
@@ -78,24 +78,12 @@ int AppWormux::main (int argc, char **argv){
 	    game_menu.Run();
 	    break;
 	  }
-        case menuNETWORK:
-	  {
-	    NetworkMenu network_menu;
-	    network_menu.Run();
-	    break;
-	  }
         case menuOPTIONS:
           {
             OptionMenu options_menu;
             options_menu.Run();
             break;
           }
-	case menuCREDITS:
-	  {
-	    CreditsMenu credits_menu;
-	    credits_menu.Run();
-	    break;
-	  }
         case menuQUIT:
           quit = true; 
         default:
@@ -124,13 +112,16 @@ int AppWormux::main (int argc, char **argv){
 
 void AppWormux::Init(int argc, char **argv){
   Config * config = Config::GetInstance();
+  config->Init();
 
   InitI18N();
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
 
+  ActionHandler::GetInstance()->Init();
   config->Load();
 
+  InitNetwork(argc, argv);
   video.InitWindow();
   InitFonts();
 
@@ -138,6 +129,18 @@ void AppWormux::Init(int argc, char **argv){
   config->Apply();
 
   jukebox.Init();
+}
+
+void AppWormux::InitNetwork(int argc, char **argv){
+  if (argc >= 3 && strcmp(argv[1],"server")==0) {
+	// wormux server <port>
+	network.Init();
+	network.server_start (argv[2]);
+  } else if (argc >= 3 && strcmp(argv[1], "--add-debug-mode") != 0) {
+	// wormux <server_ip> <server_port>
+	network.Init();
+	network.client_connect(argv[1], argv[2]);
+  }
 }
 
 void AppWormux::DisplayLoadingPicture(){

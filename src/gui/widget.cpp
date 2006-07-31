@@ -23,30 +23,23 @@
 #include "../tool/point.h"
 
 Widget::Widget(){
-  enabled = true;
-  have_focus = false;
+
 }
 
 Widget::Widget(const Rectanglei &rect){
 	position = rect.GetPosition();
 	size = rect.GetSize();
-  enabled = true;
-  have_focus = false;
 }
 
 Widget::~Widget(){
 }
 
-void Widget::SendKey(SDL_keysym key){
-}
-
-Widget* Widget::Clic(const Point2i &mousePosition, uint button){
-  if(enabled)
-    return this;
-  return NULL;
+bool Widget::Clic(const Point2i &mousePosition, uint button){
+  return false;
 }
 
 void Widget::StdSetSizePosition(const Rectanglei &rect){
 	position = rect.GetPosition();
 	size = rect.GetSize();
 }
+

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arrow on top of the active character
+ * Curseur clignotant montrant la position d'un ver actif.
  *****************************************************************************/
 
 #include "cursor.h"
@@ -37,35 +37,32 @@ const uint y_max = 90; //number of pixels between the bottom of the arrow and th
                         //when the arrow is at the top of its movement
 const uint rebound_time = 1000; //Duration of a full rebound
 
-CharacterCursor * CharacterCursor::singleton = NULL;
+CurseurVer * CurseurVer::singleton = NULL;
 
-CharacterCursor * CharacterCursor::GetInstance() {
+CurseurVer * CurseurVer::GetInstance() {
   if (singleton == NULL) {
-    singleton = new CharacterCursor();
+    singleton = new CurseurVer();
   }
   return singleton;
 }
 
-CharacterCursor::CharacterCursor()
+CurseurVer::CurseurVer()
 {
   actif = false;
   want_hide = false;
   time_begin_anim = 0;
   last_update = 0;
   image = NULL;
-  dy = 0;  
-
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  image = resource_manager.LoadSprite( res, "gfx/curseur");
+  dy = 0;
 }
 
-CharacterCursor::~CharacterCursor()
+CurseurVer::~CurseurVer()
 {
   if(image) delete image;
 }
 
 // Dessine le curseur
-void CharacterCursor::Draw()
+void CurseurVer::Draw()
 {
   if (!IsDisplayed()) return;
   if (obj_designe == NULL) return;
@@ -79,7 +76,7 @@ void CharacterCursor::Draw()
   image->Draw( Point2i(x, y+dy) );
 }
 
-void CharacterCursor::Refresh()
+void CurseurVer::Refresh()
 {
   if (!IsDisplayed()) return;
 
@@ -119,26 +116,32 @@ void CharacterCursor::Refresh()
   last_update = global_time->Read();
 }
 
-// Hide the cursor
-void CharacterCursor::Hide()
+// Cache le curseur
+void CurseurVer::Cache()
 {
   if(!actif) return;
   want_hide = true;
 }
 
-void CharacterCursor::Reset()
+void CurseurVer::Init()
+{
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  image = resource_manager.LoadSprite( res, "gfx/curseur");
+}
+
+void CurseurVer::Reset()
 {
   actif = false;
   want_hide = false;
   obj_designe = NULL;
 }
 
-void CharacterCursor::FollowActiveCharacter()
+void CurseurVer::SuitVerActif()
 {
   PointeObj(&ActiveCharacter());
 }
 
-void CharacterCursor::PointeObj (PhysicalObj *obj)
+void CurseurVer::PointeObj (PhysicalObj *obj)
 {
   if(actif && obj==obj_designe)
     return;
@@ -149,6 +152,6 @@ void CharacterCursor::PointeObj (PhysicalObj *obj)
 }
 
 // Are we displaying the arrow on the screen ?
-bool CharacterCursor::IsDisplayed() const {
+bool CurseurVer::IsDisplayed() const {
   return actif || (Time::GetInstance()->Read() < time_begin_anim + show_hide_time);
 }

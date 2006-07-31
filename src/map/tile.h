@@ -53,9 +53,6 @@ public:
   // usefull to redraw only a part that is under a sprite that has moved,... 
   void DrawTile_Clipped(Rectanglei clip_rectangle) const;
 
-  // Return a surface of the ground inside the rect
-  Surface GetPart(Rectanglei& rec);
-
 protected:
   void InitTile(const Point2i &pSize);
 

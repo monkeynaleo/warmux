@@ -25,20 +25,10 @@
 #include "../graphic/font.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
-#include "../interface/interface.h"
 #include "../map/map.h"
-#include "../tool/resource_manager.h"
 
 Question::Question()
-{
-  background = NULL;
-}
-
-Question::~Question()
-{
-  if(background != NULL)
-    delete background;
-}
+{}
 
 int Question::TreatsKey (SDL_Event &event){
 
@@ -52,35 +42,29 @@ int Question::TreatsKey (SDL_Event &event){
   // No key corresponding to the correct choice, so we use default choice
   if (default_choice.active)
     return default_choice.value;
-
+  
   return -1;
 }
 
 void Question::Draw(){
   AppWormux * app = AppWormux::GetInstance();
-
-  if(background != NULL)
-  {
-    background->Blit(app->video.window,  app->video.window.GetSize() / 2 - background->GetSize() / 2);
-  }
-  if(message != "")
-  {
-    DrawTmpBoxTextWithReturns (*Font::GetInstance(Font::FONT_BIG),
-                               app->video.window.GetSize() / 2,
-                               message, 10);
-  }
+  
+  DrawTmpBoxTextWithReturns (*Font::GetInstance(Font::FONT_BIG),
+                             app->video.window.GetSize() / 2,
+                             message, 10);
+  app->video.Flip();
 }
 
 int Question::AskQuestion (){
   SDL_Event event;
 
-  int answer = default_choice.value;
+  int answer;
   bool end_of_boucle = false;
 
-  Draw();
   do{
+    Draw();
 
-    while( SDL_PollEvent( &event) ){
+    while( SDL_PollEvent( &event) ){      
       if (( event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN ) && default_choice.active ){
 	answer = default_choice.value;
 	end_of_boucle = true;
@@ -88,35 +72,20 @@ int Question::AskQuestion (){
 
       if (event.type == SDL_KEYUP) {
 	answer = TreatsKey(event);
-	if (answer != -1)
+	if (answer != -1) 
 	  end_of_boucle = true;
       }
     } // SDL_PollEvent
 
-    AppWormux::GetInstance()->video.Flip();
   } while (!end_of_boucle);
-
+  
   return answer;
 }
 
-void Question::Set (const std::string &pmessage,
-		    bool default_active, int default_value,const std::string& bg_sprite){
+void Question::Set (const std::string &pmessage, 
+		    bool default_active, int default_value){
   message = pmessage;
   default_choice.active = default_active;
   default_choice.value = default_value;
-
-  if(background != NULL)
-  {
-    delete background;
-    background = NULL;
-  }
-
-  if(bg_sprite != "")
-  {
-    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-    background = new Sprite(resource_manager.LoadImage(res,bg_sprite));
-    background->cache.EnableLastFrameCache();
-    background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
-    resource_manager.UnLoadXMLProfile( res);
-  }
 }
+

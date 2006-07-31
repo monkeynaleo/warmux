@@ -43,7 +43,8 @@ Wind wind;
 WindParticle::WindParticle(std::string &xml_file) :
   PhysicalObj("wind",xml_file)
 {
-  m_go_through_wall = true;
+  m_type = objUNBREAKABLE;
+
   sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
 //  if(sprite->GetFrameCount()==1)
 //    sprite->cache.EnableLastFrameCache();
@@ -171,7 +172,7 @@ double Wind::GetStrength() const{
 
 void Wind::ChooseRandomVal(){
   int val = randomObj.GetLong(-100, 100);
-  ActionHandler::GetInstance()->NewAction (new ActionInt(ACTION_WIND, val));
+  ActionHandler::GetInstance()->NewAction (ActionInt(ACTION_WIND, val));
 }
 
 void Wind::SetVal(long val){

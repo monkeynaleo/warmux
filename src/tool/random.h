@@ -28,6 +28,7 @@
 class Random{
 public:
 	Random();
+	void Init();
 
 	bool GetBool();
 	long GetLong(long min, long max);

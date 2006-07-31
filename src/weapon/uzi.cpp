@@ -21,7 +21,7 @@
 
 #include "uzi.h"
 #include <sstream>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/time.h"
 #include "../interface/game_msg.h"
 #include "../map/map.h"
@@ -51,7 +51,6 @@ Uzi::Uzi() :
   override_keys = true ;
 
   m_first_shoot = 0;
-  last_angle = 0.0;
 
   projectile = new UziBullet(cfg());
 }
@@ -84,14 +83,6 @@ bool Uzi::p_Shoot()
   b = pos.y - ( a * pos.x ) ;
   	Point2i delta_pos ;
 
-  // Add a particle for the empty bullet
-  particle.AddNow(pos, 1, particle_BULLET, true, angle + M_PI + ActiveCharacter().GetDirection() * M_PI_4,
-                  5.0 + (Time::GetInstance()->Read() % 6));
-
-  // If we already shooted in this direction reuse the last trajectorie of the bullet
-  if(m_first_shoot!=0 && last_angle==angle && ActiveCharacter().GetHandPosition()==last_uzi_pos)
-    pos = last_bullet_pos;
-
   // Move the bullet !!
   projectile->SetXY( pos );
   projectile->Ready();
@@ -118,19 +109,15 @@ bool Uzi::p_Shoot()
     // the bullet in gone outside the map
    if ( ( world.EstHorsMondeX(projectile->GetX()) ) || ( world.EstHorsMondeY(projectile->GetY()) )) {  //IsGhost does not check the Y side.
       projectile->is_active=false;
-      last_angle = angle;
-      last_bullet_pos = pos;
-      last_uzi_pos = ActiveCharacter().GetHandPosition();
       return true;
     }
-
+    
     // is there a collision ??
     if(projectile->CollisionTest( pos ) ){
       projectile->is_active=false;
-      last_angle = angle;
-      last_bullet_pos = pos;
-      last_uzi_pos = ActiveCharacter().GetHandPosition();
+
       projectile->Explosion();
+
       return true;
     }
   pos += delta_pos;

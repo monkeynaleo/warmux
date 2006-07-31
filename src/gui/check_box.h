@@ -39,7 +39,7 @@ class CheckBox : public Widget
   CheckBox(const std::string &label, const Rectanglei &rect, bool value = true);
   ~CheckBox();
   void Draw(const Point2i &mousePosition) ;
-  Widget* Clic(const Point2i &mousePosition, uint button) ;
+  bool Clic(const Point2i &mousePosition, uint button) ;
   void SetSizePosition(const Rectanglei &rect);
 
   bool GetValue() const;

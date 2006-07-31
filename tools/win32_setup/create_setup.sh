@@ -2,7 +2,7 @@
 
 ## Programs 
 PKG_CONFIG=pkg-config
-MAKE_NSIS=makensis
+MAKE_NSIS=makensis 
 
 # Path to which all others are relative
 WORMUXDIR="../.."
@@ -129,7 +129,7 @@ LangString TITLE_Wormux "Slovenian" "Wormux"
 LangString DESC_Wormux  "Slovenian" "Wormux ${WORMUX_VERSION}"
 
 ;Folder-selection page
-InstallDir "\$PROGRAMFILES\Wormux"
+InstallDir "$PROGRAMFILES\Wormux"
 ; Registry key to check for directory (so if you install again, it will 
 ; overwrite the old one automatically)
 InstallDirRegKey HKLM ${HKLM_PATH} "pth"
@@ -148,15 +148,14 @@ Section \$(TITLE_Wormux) Sec_Wormux
   File "${WIN_WORMUXDIR}\src\wormux.exe"
 EOF
 
+# All gettext (with iconv), jpeg and zlib stuff
+cp $MINGWDIR/bin/libintl-3.dll $MINGWDIR/bin/libiconv-2.dll \
+   $MINGWDIR/bin/jpeg62.dll $MINGWDIR/bin/zlib1.dll $DEST
+ 
 # Glib (gobject, gthread, glib & gmodule)
 GLIB_PATH=$(pkg_path glib-2.0)
-cp "$GLIB_PATH/bin/libgobject"*.dll "$GLIB_PATH/bin/libgthread"*.dll	\
-   "$GLIB_PATH/bin/libglib"*.dll "$GLIB_PATH/bin/libgmodule"*.dll "$DEST"
-
-# All gettext (with iconv), jpeg and zlib stuff should be within
-# glademm install path <=> glib path
-cp "$GLIB_PATH/bin/intl.dll" "$GLIB_PATH/bin/iconv.dll"		\
-   "$GLIB_PATH/bin/jpeg62.dll" "$DEST"
+cp "$GLIB_PATH/bin/libgobject"*.dll "$GLIB_PATH/bin/libgthread"*.dll \
+   "$GLIB_PATH/bin/libglib"*.dll "$GLIB_PATH/bin/libgmodule"*.dll $DEST
 
 # Other libs
 cp "$(pkg_path sigc++-2.0)/bin/libsigc"*.dll $DEST
@@ -166,16 +165,13 @@ cp "$(pkg_path glibmm-2.4)/bin/libglibmm"*.dll $DEST
 cp "$(pkg_path libpng13)/bin/libpng13.dll" $DEST
 
 # Clean up before non-strippable files
-# WARNING Stripping some dlls corrupts them beyond use
-strip "$DEST/"*.dll "$WORMUXDIR/src/"*.exe
+strip $DEST/*.dll "$WORMUXDIR/src/*.exe"
 
 # Files that must not be stripped (all of SDL)
 SDL_PATH=$(sdl-config --prefix)
-cp "$SDL_PATH/bin/SDL_mixer.dll" "$SDL_PATH/bin/SDL_ttf.dll"	\
-   "$SDL_PATH/bin/SDL_image.dll" "$SDL_PATH/bin/SDL.dll"	\
-   "$SDL_PATH/bin/SDL_net.dll" "$GLIB_PATH/bin/intl.dll"	\
-   "$GLIB_PATH/bin/iconv.dll" "$GLIB_PATH/bin/jpeg62.dll"	\
-   "$GLIB_PATH/bin/zlib1.dll" $DEST
+cp $MINGWDIR/bin/zlib1.dll "$SDL_PATH/bin/SDL_mixer.dll" \
+   "$SDL_PATH/bin/SDL_ttf.dll"  "$SDL_PATH/bin/SDL_image.dll" \
+   "$SDL_PATH/bin/SDL.dll" $DEST
 
 # Continue producing installer
 cat >> $NSIS <<EOF

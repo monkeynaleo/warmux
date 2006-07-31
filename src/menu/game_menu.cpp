@@ -49,7 +49,7 @@ GameMenu::GameMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
 
-  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   // Center the boxes!
   uint x = 30;
@@ -131,8 +131,6 @@ GameMenu::GameMenu() :
   }
 
   terrain_init = false;
-
-  resource_manager.UnLoadXMLProfile(res);
 }
 
 GameMenu::~GameMenu()
@@ -248,7 +246,7 @@ void GameMenu::Draw(const Point2i &mousePosition)
   }
 
   AppWormux * app = AppWormux::GetInstance();
-  app->video.window.Blit( last_team->flag, space_for_logo->GetPosition() );
+  app->video.window.Blit( last_team->ecusson, space_for_logo->GetPosition() );
 
   if (!terrain_init){
       ChangeMap();

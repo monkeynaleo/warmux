@@ -20,14 +20,12 @@
  *****************************************************************************/
 
 #include "supertux.h"
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
-#include "../include/action_handler.h"
 #include "../interface/game_msg.h"
 #include "../map/camera.h"
-#include "../network/network.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
@@ -82,15 +80,6 @@ void SuperTux::Refresh()
       last_move = Time::GetInstance()->Read();
   }
 
-  if(ActiveTeam().is_local)
-  {
-    Action a(ACTION_SUPERTUX_STATE);
-    a.Push(angle);
-    a.Push(GetPhysX());
-    a.Push(GetPhysY());
-    Point2d speed;
-    network.SendAction(&a);
-  }
   particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle, 0);
 }
 
@@ -129,11 +118,12 @@ void SuperTux::SignalCollision()
 SuperTuxWeaponConfig::SuperTuxWeaponConfig()
 {
   speed = 2;
+  timeout = 20;
 }
 
 void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem) 
 {
-  ExplosiveWeaponConfig::LoadXml (elem);
+  WeaponConfig::LoadXml (elem);
   LitDocXml::LitUint (elem, "speed", speed);
 }
 
