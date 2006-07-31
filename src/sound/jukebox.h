@@ -42,6 +42,8 @@ private:
 
   std::multimap<std::string, std::string> m_soundsamples;
 
+  std::map<int, Mix_Chunk*> chunks;
+
   struct s_m_config{
     bool music;
     bool effects;
@@ -52,6 +54,8 @@ private:
   bool m_init;
 
   std::set<std::string> m_profiles_loaded;
+
+  static void EndChunk(int channel);
 
 public:
   JukeBox();

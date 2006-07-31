@@ -80,6 +80,8 @@ void JukeBox::Init()
     std::cout << "Opened audio at " << m_config.frequency <<" Hz "<< (audio_format&0xFF) 
 	      <<" bit " << std::endl;
   }
+  Mix_ChannelFinished(JukeBox::EndChunk);
+  
   m_init = true;  
   
   LoadXML("share");
@@ -237,7 +239,19 @@ int JukeBox::PlaySample (Mix_Chunk * sample, int loop)
 
   if (channel == -1) {
 	MSG_DEBUG("jukebox", "Error: Jukebox::PlaySample: %s", Mix_GetError());
+	Mix_FreeChunk(sample);
   }
+  else
+    chunks[channel] = sample;
   return channel;
 }
 
+void JukeBox::EndChunk(int channel)
+{
+	Mix_Chunk* chk = jukebox.chunks[channel];
+
+	if(!chk) return;
+
+	Mix_FreeChunk(chk);
+	jukebox.chunks[channel] = 0;
+}
