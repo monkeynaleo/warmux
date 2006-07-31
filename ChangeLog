@@ -1,3 +1,10 @@
+> 31/07/2006 - 0.7.3 release
+  - Fix memory leak bug in sound managment (bug #5738)
+  - Fix maximum number of character per team (bug #6183)
+  - Add map Aquarium, Cheese, Catacombes, Champignon, Electronik, Leafs,
+    Paradis, Vulcano. Remove CheeseBeta.
+  - Add bosnian translation
+
 > 18/05/2006 - 0.7.2 release
   - New translation: finnish
   - New map: island, cheese
@@ -19,11 +26,11 @@
 > 04/04/2006 - 0.7 release
   - Graphic enhancement in menus and loading screen
   - Improved game graphics (explosions with smoke)
-  - New maps: Desert, Monkey Bubble, King Kong, Wild West DV, 
+  - New maps: Desert, Monkey Bubble, King Kong, Wild West DV,
   - New teams: Tux team, Nupik, Wilber, PHP, Snort, Thunderbird, WorkRave,
   BattleNight
   - New weapons: bounce ball
-  - Translations: Dutch, Romanian, Danish, 
+  - Translations: Dutch, Romanian, Danish,
   - Code cleaning: implement some design patterns, translate some variables
   and functions name, remove dead Clanlib code
   - Compilation process more clean
@@ -60,7 +67,7 @@
 > 29/06/2005 (Korgon)
   - Jetpack weapon
   - Add a secondary unit for weapons ammo. Draw a box with secondary
-    weapon units remaining when using such a weapon. 
+    weapon units remaining when using such a weapon.
 
 > 19/06/2005 (Gentildemon)
   - New game loop
@@ -125,7 +132,7 @@
   - Teams are identified by an id
   - Translate some team members into english
   - BUGFIX: Don't show cursor when shown object is a ghost
-  
+
 > 05/01/2005 (Gentildemon)
   - New main menu
   - Uzi weapon (still buggy :)
@@ -151,7 +158,7 @@
    - Translate game mode into english
    - When loading a game mode, try to open ~/.wormux/game_mode/<mode>.xml first
    - Fix a lot of bugs around game mode : set default character options value,
-     character energy progress bar use initial energy instead of 100 for 
+     character energy progress bar use initial energy instead of 100 for
 	 maximum value, etc.
    - gravity becomes a game option
    - When the last character of a team die, end the current turn

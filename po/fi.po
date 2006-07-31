@@ -16,47 +16,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: KBabel 1.11.2\n"
 
-#: src/game/game.cpp:144 src/game/game.cpp:184
+#: src/game/game.cpp:146 src/game/game.cpp:186
 #, c-format
 msgid "  Most sold-out :  %s (%i).\n"
 msgstr "  Eniten myyty :  %s (%i).\n"
 
-#: src/game/game.cpp:142 src/game/game.cpp:182
+#: src/game/game.cpp:144 src/game/game.cpp:184
 #, c-format
 msgid "  Most usefull  :  %s (%i).\n"
 msgstr "  Hyödyllisin  :  %s (%i).\n"
 
-#: src/game/game.cpp:143 src/game/game.cpp:183
+#: src/game/game.cpp:145 src/game/game.cpp:185
 #, c-format
 msgid "  Most useless  :  %s (%i).\n"
 msgstr "  Hyödyttömin  :  %s (%i).\n"
 
-#: src/game/game.cpp:141 src/game/game.cpp:181
+#: src/game/game.cpp:143 src/game/game.cpp:183
 #, c-format
 msgid "  Most violent  :  %s (%i).\n"
 msgstr "  Väkivaltaisin  :  %s (%i)\n"
 
-#: src/map/maps_list.cpp:286
+#: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/game/game_loop.cpp:726
+#: src/game/game_loop.cpp:727
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (joukkue %s) kuoli."
 
-#: src/map/maps_list.cpp:105
+#: src/map/maps_list.cpp:104
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s < %s > aka %s %s:stä"
 
-#: src/map/maps_list.cpp:112
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
 
-#: src/game/game_loop.cpp:704
+#: src/game/game_loop.cpp:705
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suoritti itsemurhan !"
@@ -66,72 +66,72 @@ msgstr "%s suoritti itsemurhan !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:697
+#: src/game/game_loop.cpp:698
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s sukelsi syvyyksiin."
 
-#: src/game/game_loop.cpp:708
+#: src/game/game_loop.cpp:709
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
 
-#: src/object/bonus_box.cpp:156
+#: src/object/bonus_box.cpp:153
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s menetti %u voimapisteen."
 msgstr[1] "%s menetti %u voimapistettä."
 
-#: src/object/bonus_box.cpp:147
+#: src/object/bonus_box.cpp:144
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game_loop.cpp:719
+#: src/game/game_loop.cpp:720
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/game/game_loop.cpp:714
+#: src/game/game_loop.cpp:715
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kuoli kömpelyyteensä!"
 
-#: src/weapon/mine.cpp:126
+#: src/weapon/mine.cpp:125
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s on aivan miinan vieressä!"
 
-#: src/object/bonus_box.cpp:174
+#: src/object/bonus_box.cpp:171
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "Joukkue %s voitti %u automaattibazookan!"
 msgstr[1] "Joukkue %s voitti %u automaattibazookaa!"
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:181
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "Joukkue %s voitti %u dynamiittipötkön."
 msgstr[1] "Joukkue %s voitti %u dynamiittipötköä."
 
-#: src/object/bonus_box.cpp:138
+#: src/object/bonus_box.cpp:135
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "Joukkue %s voitti %u teleportaation."
 msgstr[1] "Joukkue %s voitti %u teleportaatiota."
 
-#: src/game/game.cpp:190
+#: src/game/game.cpp:192
 #, c-format
 msgid "%s team has won.\n"
 msgstr "Joukkue %s voitti.\n"
 
-#: src/object/bonus_box.cpp:165
+#: src/object/bonus_box.cpp:162
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -146,16 +146,16 @@ msgstr "(kuollut)"
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
-#: src/map/maps_list.cpp:126
+#: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 "<infinite_background> tarvitsee <is_open> asetuksen toimiakseen oikein!!"
 
-#: src/object/bonus_box.cpp:169 src/weapon/air_attack.cpp:207
+#: src/object/bonus_box.cpp:166 src/weapon/air_attack.cpp:182
 msgid "Air attack"
 msgstr "Ilmaisku"
 
-#: src/game/game.cpp:180
+#: src/game/game.cpp:182
 msgid "All-Team results:\n"
 msgstr "Joukkueesi tulokset:\n"
 
@@ -163,7 +163,7 @@ msgstr "Joukkueesi tulokset:\n"
 msgid "Authors:"
 msgstr "Tekijät:"
 
-#: src/object/bonus_box.cpp:178 src/weapon/auto_bazooka.cpp:118
+#: src/object/bonus_box.cpp:175 src/weapon/auto_bazooka.cpp:116
 msgid "Automatic bazooka"
 msgstr "Automaattibazooka"
 
@@ -171,7 +171,7 @@ msgstr "Automaattibazooka"
 msgid "Baseball"
 msgstr "Pesäpallomaila"
 
-#: src/weapon/bazooka.cpp:64
+#: src/weapon/bazooka.cpp:63
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -213,7 +213,7 @@ msgstr "Näytä pelaajien nimet?"
 msgid "Display wind particles?"
 msgstr "Näytä tuuli?"
 
-#: src/game/game.cpp:238
+#: src/game/game.cpp:240
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
@@ -225,11 +225,11 @@ msgstr "Vuoron kesto:"
 msgid "Duration of the end of a turn:"
 msgstr "Vuoron lopun kesto:"
 
-#: src/object/bonus_box.cpp:188 src/weapon/dynamite.cpp:98
+#: src/object/bonus_box.cpp:185 src/weapon/dynamite.cpp:98
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game.cpp:186
+#: src/game/game.cpp:188
 msgid "End of the game!\n"
 msgstr "Peli loppui!\n"
 
@@ -237,7 +237,7 @@ msgstr "Peli loppui!\n"
 msgid "Energy:"
 msgstr "Voima:"
 
-#: src/team/skin.cpp:119
+#: src/team/skin.cpp:146
 #, c-format
 msgid "Error during loading skin %s:"
 msgstr "Virhe ladattessa ulkoasua %s:"
@@ -247,7 +247,7 @@ msgstr "Virhe ladattessa ulkoasua %s:"
 msgid "Error in %s:%lu"
 msgstr "Virhe kohdassa %s:%lu"
 
-#: src/team/team.cpp:91
+#: src/team/team.cpp:92
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
@@ -268,7 +268,7 @@ msgstr "Virhe luettaessa asetustiedostoa: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Virhe ladataessa pelityyppiä %s (tiedosto %s):"
 
-#: src/game/game.cpp:280
+#: src/game/game.cpp:282
 #, c-format
 msgid ""
 "Error:\n"
@@ -277,7 +277,7 @@ msgstr ""
 "Virhe:\n"
 "%s"
 
-#: src/team/team.cpp:162
+#: src/team/team.cpp:147
 #, c-format
 msgid "Error: can't find the skin \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
@@ -298,7 +298,7 @@ msgstr "Pelin asetukset"
 msgid "Graphic options"
 msgstr "Grafiikka asetukset"
 
-#: src/weapon/grenade.cpp:73
+#: src/weapon/grenade.cpp:72
 msgid "Grenade"
 msgstr "Kranaatti"
 
@@ -318,7 +318,7 @@ msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 msgid "Initial energy:"
 msgstr "Aloitus voimat:"
 
-#: src/game/game_loop.cpp:275
+#: src/game/game_loop.cpp:276
 msgid "Initialisation"
 msgstr "Alustus"
 
@@ -339,7 +339,7 @@ msgstr "Alusta objektit"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/object/bonus_box.cpp:234
+#: src/object/bonus_box.cpp:231
 msgid "Is it a gift ?"
 msgstr "Onko se lahja?"
 
@@ -347,11 +347,11 @@ msgstr "Onko se lahja?"
 msgid "Load map"
 msgstr "Lataa kartta"
 
-#: src/map/maps_list.cpp:216
+#: src/map/maps_list.cpp:207
 msgid "Load maps:"
 msgstr "Lataa kartat:"
 
-#: src/team/skin.cpp:291
+#: src/team/skin.cpp:322
 msgid "Load skins:"
 msgstr "Lataa ulkoasut:"
 
@@ -368,7 +368,7 @@ msgstr "Kartta %s, tehnyt :"
 msgid "Maximum number of FPS:"
 msgstr "Enimmäismäärä FPS:lle:"
 
-#: src/weapon/mine.cpp:186
+#: src/weapon/mine.cpp:185
 msgid "Mine"
 msgstr "Miina"
 
@@ -389,7 +389,7 @@ msgstr "Nettipeli"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
 
-#: src/game/game.cpp:86
+#: src/game/game.cpp:88
 msgid "Nobody"
 msgstr "Ei kukaan"
 
@@ -401,10 +401,6 @@ msgstr "Pelaajien määrä joukkueessa:"
 msgid "Options"
 msgstr "Asetukset"
 
-#: src/game/game.cpp:290
-msgid "Pause"
-msgstr "Tauko"
-
 #: src/menu/main_menu.cpp:172
 msgid "Play"
 msgstr "Pelaa"
@@ -412,6 +408,10 @@ msgstr "Pelaa"
 #: src/main.cpp:195
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Ole hyvä ja kerro mielipiteesi Wormuxista sähköpostilla:"
+
+#: src/game/game.cpp:304
+msgid "Press a key to continue."
+msgstr ""
 
 #: src/menu/main_menu.cpp:200
 msgid "Quit"
@@ -429,7 +429,7 @@ msgstr "Aloita peli"
 msgid "Select the teams:"
 msgstr "Valitse joukkueet:"
 
-#: src/menu/game_menu.cpp:100
+#: src/menu/game_menu.cpp:99
 msgid "Select the world:"
 msgstr "Valitse maailma:"
 
@@ -441,7 +441,7 @@ msgstr "Ääniefektit?"
 msgid "Sound options"
 msgstr "Ääni asetukset"
 
-#: src/game/game.cpp:80
+#: src/game/game.cpp:82
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
@@ -449,24 +449,24 @@ msgstr "Aloitetaan uusi peli"
 msgid "Stock:"
 msgstr "Varasto:"
 
-#: src/game/game.cpp:140
+#: src/game/game.cpp:142
 #, c-format
 msgid "Team %s results:\n"
 msgstr "Joukkueen %s tulokset:\n"
 
-#: src/object/bonus_box.cpp:142 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportaatio"
 
-#: src/weapon/auto_bazooka.cpp:101
+#: src/weapon/auto_bazooka.cpp:99
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaattiohjus on poistunut taistelukentältä..."
 
-#: src/game/game.cpp:194
+#: src/game/game.cpp:196
 msgid "The game has ended as a draw.\n"
 msgstr "Peli on päättynyt tasapeliin.\n"
 
-#: src/weapon/bazooka.cpp:54 src/weapon/cluster_bomb.cpp:67
+#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:68
 msgid "The rocket left the battlefield..."
 msgstr "Ohjus on poistunut taistelukentältä..."
 
@@ -475,12 +475,12 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "SDL kirjaston alustus epäonnistui:%s"
 
-#: src/map/maps_list.cpp:228 src/map/maps_list.cpp:244
+#: src/map/maps_list.cpp:219 src/map/maps_list.cpp:235
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/team/skin.cpp:303 src/team/skin.cpp:319
+#: src/team/skin.cpp:334 src/team/skin.cpp:350
 #, c-format
 msgid "Unable to open skins directory (%s)!"
 msgstr "Ulkoasuhakemiston avaus epäonnistui (%s)!"
@@ -517,10 +517,6 @@ msgstr "Odota palvelimen tietoja"
 msgid "Wait teams"
 msgstr "Odota joukkueita"
 
-#: src/map/maps_list.cpp:137
-msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
-msgstr "Varoitus! Tuuli partikkelien massa on liian pieni! Oletusarvo on 0.3"
-
 #: src/interface/interface.cpp:103
 msgid "Weapon:"
 msgstr "Ase:"
@@ -529,7 +525,7 @@ msgstr "Ase:"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:723
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -542,16 +538,16 @@ msgstr "Wormux käynnistyy..."
 msgid "Wormux version "
 msgstr "Wormux versio"
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:73
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "XML virhe ladattaessa karttaa '%s' :"
 
-#: src/map/maps_list.cpp:264
+#: src/map/maps_list.cpp:255
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
-#: src/game/game_loop.cpp:287
+#: src/game/game_loop.cpp:288
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Tarvitset ainakin kaksi joukkuetta pelataksesi: vaihda tätä 'Asetukset "
@@ -561,10 +557,17 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
-#: src/weapon/launcher.cpp:54
+#: src/weapon/launcher.cpp:50
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "valmis"
+
+#~ msgid "Pause"
+#~ msgstr "Tauko"
+
+#~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
+#~ msgstr ""
+#~ "Varoitus! Tuuli partikkelien massa on liian pieni! Oletusarvo on 0.3"
