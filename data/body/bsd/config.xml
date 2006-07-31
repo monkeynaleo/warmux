@@ -33,11 +33,11 @@
 </sprite>
 
 <!--             LEGS DEFINITIONS         -->
-<sprite name="foot-left-normal" type="foot-left" on_ground="true">
+<sprite name="foot-left-normal" type="foot-left" >
 	<image file="foot.png"/>
 	<anchor dx="3" dy="1"/>
 </sprite>
-<sprite name="foot-right-normal" type="foot-right" on_ground="true">
+<sprite name="foot-right-normal" type="foot-right" >
 	<image file="foot.png"/>
 	<anchor dx="3" dy="1"/>
 </sprite>
