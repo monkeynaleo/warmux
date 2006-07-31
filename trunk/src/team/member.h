@@ -35,6 +35,7 @@ class c_junction; //defined in body.h
 
 class Member
 {
+  Member* parent;
 protected:
   Point2f anchor;
 
@@ -53,7 +54,7 @@ public:
   virtual void Draw(int flip_x, int direction);
   void RotateSprite();
   void ResetMovement();
-  void ApplySqueleton(Member* parent);
+  void ApplySqueleton(Member* parent_member);
   void ApplyMovement(member_mvt& mvt, std::vector<class c_junction>& squel_lst);
 };
 

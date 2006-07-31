@@ -29,6 +29,7 @@
 
 Member::Member(xmlpp::Element *xml, Profile* res)
 {
+  parent = NULL;
   if(xml == NULL) return;
   name="";
   LitDocXml::LitAttrString( xml, "name", name);
@@ -139,6 +140,12 @@ void Member::Draw(int flip_center, int direction)
     posi.x = 2 * flip_center - posi.x - spr->GetWidth();
   }
 
+  if(parent == NULL && type != "body")
+  {
+    std::cerr << "Error : Member " << name << " have no parent member!" << std::endl;
+    return;
+  }
+
   spr->Update();
   spr->Draw(posi);
 }
@@ -150,14 +157,15 @@ void Member::ResetMovement()
   angle = 0;
 }
 
-void Member::ApplySqueleton(Member* parent)
+void Member::ApplySqueleton(Member* parent_member)
 {
   // Place the member to shape the squeleton
-  if(parent == NULL)
+  if(parent_member == NULL)
   {
     std::cerr << "Member " << name << " have no parent member!" << std::endl;
     return;
   }
+  parent = parent_member;
 
   assert(parent->name != "weapon" && parent->type != "weapon");
 
