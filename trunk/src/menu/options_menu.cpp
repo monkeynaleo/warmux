@@ -45,7 +45,7 @@ const uint GRAPHIC_Y = GAME_Y;
 const uint GRAPHIC_W = 230;
 
 const uint NBR_VER_MIN = 1;
-const uint NBR_VER_MAX = 10;
+const uint NBR_VER_MAX = 6;
 const uint TPS_TOUR_MIN = 10;
 const uint TPS_TOUR_MAX = 120;
 const uint TPS_FIN_TOUR_MIN = 1;
@@ -71,7 +71,7 @@ OptionMenu::OptionMenu() :
 			       20, 120);
   graphic_options->AddWidget(opt_max_fps);
 
-  full_screen = new CheckBox(_("Fullscreen?"), zeroRect); 
+  full_screen = new CheckBox(_("Fullscreen?"), zeroRect);
   graphic_options->AddWidget(full_screen);
 
   opt_display_wind_particles = new CheckBox(_("Display wind particles?"), zeroRect);
@@ -80,7 +80,7 @@ OptionMenu::OptionMenu() :
   opt_display_energy = new CheckBox(_("Display player energy?"), zeroRect);
   graphic_options->AddWidget(opt_display_energy);
 
-  opt_display_name = new CheckBox(_("Display player's name?"), zeroRect); 
+  opt_display_name = new CheckBox(_("Display player's name?"), zeroRect);
   graphic_options->AddWidget(opt_display_name);
 
   /* Sound options */
@@ -95,7 +95,7 @@ OptionMenu::OptionMenu() :
 
   opt_sound_effects = new CheckBox(_("Sound effects?"), zeroRect);
   sound_options->AddWidget(opt_sound_effects);
-  
+
   /* Game options */
   game_options = new VBox( Rectanglei(GAME_X, GAME_Y, GAME_W, 1) );
   game_options->AddWidget(new Label(_("Game options"), zeroRect, *normal_font));
@@ -118,7 +118,7 @@ OptionMenu::OptionMenu() :
   opt_energy_ini = new SpinButton(_("Initial energy:"), zeroRect,
 				      100, 5,
 				      50, 200);
-  
+
   game_options->AddWidget(opt_energy_ini);
 
   // Values initialization
@@ -167,7 +167,7 @@ OptionMenu::~OptionMenu()
 }
 
 void OptionMenu::OnClic(const Point2i &mousePosition, int button)
-{     
+{
   if( graphic_options->Clic(mousePosition, button) ){
   } else if( sound_options->Clic(mousePosition, button) ){
   } else if( game_options->Clic(mousePosition, button) ){
@@ -196,21 +196,21 @@ void OptionMenu::SaveOptions()
   int w, h;
   sscanf(s_mode.c_str(),"%dx%d", &w, &h);
   app->video.SetConfig(w, h, full_screen->GetValue());
-  
+
   uint x = app->video.window.GetWidth() / 2;
   uint y = app->video.window.GetHeight() - 50;
 
   SetActionButtonsXY(x, y);
-   
+
   // Sound
   jukebox.ActiveMusic( opt_music->GetValue() );
   jukebox.ActiveEffects( opt_sound_effects->GetValue() );
   std::string sfreq = lbox_sound_freq->ReadValue();
   long freq;
   if (str2long(sfreq,freq)) jukebox.SetFrequency (freq);
-  
+
   jukebox.Init(); // commit modification on sound options
-   
+
   //Save options in XML
   config->Save();
 }
@@ -226,7 +226,7 @@ void OptionMenu::__sig_cancel()
 }
 
 void OptionMenu::Draw(const Point2i &mousePosition)
-{   
+{
   graphic_options->Draw(mousePosition);
   sound_options->Draw(mousePosition);
   game_options->Draw(mousePosition);
