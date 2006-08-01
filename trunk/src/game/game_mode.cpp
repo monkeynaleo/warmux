@@ -16,9 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Configuration de Wormux : toutes les variables qui sont intéressantes à
- * modifier se retrouvent ici. Les variables ont une valeur par défaut qui
- * peut être modifiée avec le fichier de configuration.
+ * Wormux configuration : all main configuration variables have there default
+ * value here. They should all be modifiable using the xml config file
  *****************************************************************************/
 
 #include "game_mode.h"
@@ -45,6 +44,7 @@ GameMode::GameMode()
   max_teams = 4;
   duration_turn = 60;
   duration_exchange_player = 2;
+  duration_before_death_mode = 20 * 60;
   gravity = 9.81;
   safe_fall = 10;
   damage_per_fall_unit = 7;
@@ -81,6 +81,7 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   LitDocXml::LitUint (xml, "duration_turn", duration_turn);
   LitDocXml::LitUint (xml, "duration_move_player", duration_move_player);
   LitDocXml::LitUint (xml, "duration_exchange_player", duration_exchange_player);
+  LitDocXml::LitUint (xml, "duration_before_death_mode", duration_before_death_mode);
   LitDocXml::LitUint (xml, "max_teams", max_teams);
   LitDocXml::LitUint (xml, "max_characters", max_characters);
   LitDocXml::LitDouble (xml, "gravity", gravity);
