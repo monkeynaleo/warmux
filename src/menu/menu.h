@@ -31,6 +31,7 @@
 #include "../gui/question.h"
 #include "../gui/label.h"
 #include "../gui/null_widget.h"
+#include "../gui/picture_widget.h"
 
 class Menu
 {

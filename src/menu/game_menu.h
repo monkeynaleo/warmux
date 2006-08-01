@@ -26,23 +26,27 @@
 #include "../include/base.h"
 #include "../graphic/font.h"
 
+class Team;
+
 class GameMenu : public Menu
 {
-   bool terrain_init;
-
    /* Team controllers */
    ListBox *lbox_all_teams;   
    ListBox *lbox_selected_teams;
    Button *bt_add_team;
    Button *bt_remove_team;
-   NullWidget *space_for_logo;
+   PictureWidget *team_logo;
+
+   Team * last_team;
 
    /* Map controllers */
    ListBox *lbox_maps;
-   Sprite *map_preview;  
+   PictureWidget *map_preview;  
+   
    Box * map_box;
 
    void ChangeMap();   
+   void SelectTeamLogo(Team *t);
    void MoveTeams(ListBox * from, ListBox * to, bool sort);
 
    void SaveOptions();
