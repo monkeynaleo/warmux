@@ -26,7 +26,9 @@
 #include "../tool/resource_manager.h"
 #include "../sound/jukebox.h"
 
-Menu::Menu(char * bg){
+Menu::Menu(char * bg, t_action _actions) :
+  actions(_actions)
+{
   close_menu = false ;
   AppWormux * app = AppWormux::GetInstance();
 
@@ -37,14 +39,25 @@ Menu::Menu(char * bg){
   background = new Sprite( resource_manager.LoadImage( res, bg));
   background->cache.EnableLastFrameCache();
 
-  actions_buttons = new HBox( Rectanglei(x, y, 1, 40), false);
+  if (actions == vOk || actions == vOkCancel) {
 
-  b_ok = new Button( Point2i(0, 0), res, "menu/valider"); 
-  actions_buttons->AddWidget(b_ok);
+    actions_buttons = new HBox( Rectanglei(x, y, 1, 40), false);
 
-  b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
-  actions_buttons->AddWidget(b_cancel);
-  widgets.AddWidget(actions_buttons);  
+    b_ok = new Button( Point2i(0, 0), res, "menu/valider"); 
+    actions_buttons->AddWidget(b_ok);
+
+    if (actions == vOkCancel) {
+      b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
+      actions_buttons->AddWidget(b_cancel);
+    } else {
+      b_cancel = NULL;
+    }
+
+    widgets.AddWidget(actions_buttons);  
+  } else {
+    b_ok = NULL;
+    actions_buttons = NULL;
+  }
 
   resource_manager.UnLoadXMLProfile(res);
 }
@@ -72,9 +85,9 @@ void Menu::sig_cancel()
 
 bool Menu::BasicOnClic(const Point2i &mousePosition)
 {
-  if( b_ok->Contains(mousePosition) && b_ok->enabled)
+  if( b_ok != NULL &&  b_ok->Contains(mousePosition) && b_ok->enabled )
     sig_ok();
-  else if( b_cancel->Contains(mousePosition) && b_cancel->enabled)
+  else if( b_cancel != NULL && b_cancel->Contains(mousePosition) && b_cancel->enabled )
     sig_cancel();
   else
     return false;
@@ -111,11 +124,11 @@ void Menu::Run ()
         switch( event.key.keysym.sym)
         {
         case SDLK_ESCAPE: 
-          if(b_cancel->enabled)
+          if(b_cancel != NULL && b_cancel->enabled)
             sig_cancel();
           break;
         case SDLK_RETURN: 
-          if(b_ok->enabled)
+          if(b_ok != NULL && b_ok->enabled)
             sig_ok();
           break;
         default:
@@ -153,5 +166,6 @@ void Menu::Display(const Point2i& mousePosition)
 }
 
 void Menu::SetActionButtonsXY(int x, int y){
-  actions_buttons->SetSizePosition( Rectanglei(x, y, actions_buttons->GetSizeX(), actions_buttons->GetSizeY()) );
+  if (actions_buttons != NULL)
+    actions_buttons->SetSizePosition( Rectanglei(x, y, actions_buttons->GetSizeX(), actions_buttons->GetSizeY()) );
 }
