@@ -32,6 +32,7 @@
 #include "../gui/label.h"
 #include "../gui/null_widget.h"
 #include "../gui/picture_widget.h"
+#include "../gui/container.h"
 
 typedef enum {
   vOkCancel,
@@ -39,7 +40,7 @@ typedef enum {
   vNo
 } t_action;
 
-class Menu
+class Menu : public Container
 {
 public:
    WidgetList widgets;
@@ -49,6 +50,7 @@ public:
    virtual ~Menu();
 
    void Run ();
+   void Redraw(const Rectanglei& rect);
 
 private:
    Sprite *background;
@@ -57,7 +59,7 @@ private:
    /* Actions buttons  */
    HBox *actions_buttons;
 
-   void BasicDraw(const Point2i &mousePosition);
+   void DrawBackground(const Point2i &mousePosition);
    bool BasicOnClic(const Point2i &mousePosition);
 
 protected:

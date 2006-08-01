@@ -59,6 +59,7 @@ Menu::Menu(char * bg, t_action _actions) :
     actions_buttons = NULL;
   }
 
+  widgets.SetContainer(this);
   resource_manager.UnLoadXMLProfile(res);
 }
 
@@ -95,12 +96,15 @@ bool Menu::BasicOnClic(const Point2i &mousePosition)
   return true;
 }
 
-void Menu::BasicDraw(const Point2i &mousePosition)
+void Menu::DrawBackground(const Point2i &mousePosition)
 {
   background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
   background->Blit(AppWormux::GetInstance()->video.window, 0, 0);
-  
-  widgets.Draw(mousePosition);
+}
+
+void Menu::Redraw(const Rectanglei& rect)
+{
+  background->Blit(AppWormux::GetInstance()->video.window, rect, rect.GetPosition());
 }
 
 void Menu::Run ()
@@ -108,6 +112,9 @@ void Menu::Run ()
   int x=0, y=0;
 
   close_menu = false;
+
+  // Display the background
+  DrawBackground(Point2i(0,0));
 
   do
   {
@@ -152,7 +159,7 @@ void Menu::Display(const Point2i& mousePosition)
   uint delay = 0;
   uint start = SDL_GetTicks();
 
-  BasicDraw(mousePosition);
+  widgets.Draw(mousePosition);
   Draw(mousePosition);
   AppWormux::GetInstance()->video.Flip();
 

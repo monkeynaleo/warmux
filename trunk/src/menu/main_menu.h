@@ -44,8 +44,8 @@ typedef enum
 class Main_Menu
 {
   Sprite *background, *skin_left, *skin_right, *title;
-  WidgetList widgets;
   ButtonText *play, *network, *options, *infos, *quit;
+  WidgetList widgets;
   Text * version_text, * website_text;
   uint start_time;
   uint last_refresh;
@@ -62,7 +62,7 @@ public:
   ~Main_Menu();
   menu_item Run ();
 private:  
-  void onClick(const Point2i &mousePosition, int button);
+  void OnClic(const Point2i &mousePosition, int button);
 
   // Main drawing function: refresh parts of screen 
   void Draw(const Point2i &mousePosition);
@@ -80,8 +80,8 @@ private:
 
   // Erase the whole window
   void EraseAll();
-
-  void button_click();
+  
+  void button_clic();
 };
 
 #endif

@@ -27,6 +27,7 @@
 WidgetList::WidgetList()
 {
   last_clicked = NULL;
+  ct = NULL;
 }
 
 WidgetList::~WidgetList()
@@ -57,6 +58,12 @@ void WidgetList::Draw(const Point2i &mousePosition)
       w != widget_list.end();
       w++)
   {
+    // Redraw bottom layer before
+    if (ct != NULL) {
+      ct->Redraw(**w);
+    }
+
+    // Then redraw the widget
     if((*w)->enabled)
       (*w)->Draw(mousePosition);
     else
@@ -93,4 +100,9 @@ Widget* WidgetList::Clic(const Point2i &mousePosition, uint button)
     }
   }
   return NULL;
+}
+
+void WidgetList::SetContainer( Container * _ct)
+{
+  ct = _ct;
 }

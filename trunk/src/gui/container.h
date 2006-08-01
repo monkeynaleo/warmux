@@ -16,36 +16,18 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Widget list : store all widgets displayed on one screen
+ * Container
  *****************************************************************************/
-#ifndef WIDGET_LIST_H
-#define WIDGET_LIST_H
 
-#include <list>
-#include <SDL_keyboard.h>
-#include "widget.h"
-#include "container.h"
+#ifndef CONTAINER_WIDGET_H
+#define CONTAINER_WIDGET_H
 
-class WidgetList
+class Container
 {
-private:
-  Widget* last_clicked;
-
-protected:
-  Container * ct;
-  std::list<Widget*> widget_list;
-  virtual void DelFirstWidget();
-
-public:
-  WidgetList();
-  virtual ~WidgetList();
-
-  virtual void AddWidget(Widget*);
-  virtual void SendKey(SDL_keysym key);
-  virtual Widget* Clic(const Point2i &mousePosition, uint button);
-  virtual void Draw(const Point2i &mousePosition);
-
-  void SetContainer(Container * _ct);
+ public:
+  virtual ~Container() {};
+  virtual void Redraw(const Rectanglei& rect) = 0;
 };
 
-#endif // WIDGET_LIST_H
+#endif
+

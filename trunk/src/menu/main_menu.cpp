@@ -174,11 +174,11 @@ Main_Menu::Main_Menu()
   website_text = new Text(s2, green_color, normal_font, false);
 }
 
-void Main_Menu::button_click(){
+void Main_Menu::button_clic(){
   jukebox.Play("share", "menu/clic");
 }
 
-void Main_Menu::onClick(const Point2i &mousePosition, int button)
+void Main_Menu::OnClic(const Point2i &mousePosition, int button)
 {
   Widget* b = widgets.Clic(mousePosition,button);
   if(b == play) choice = menuPLAY;
@@ -189,7 +189,7 @@ void Main_Menu::onClick(const Point2i &mousePosition, int button)
   else if(b == infos) choice = menuCREDITS;
   else if(b == quit) choice = menuQUIT;
 
-  if(b != quit && b != NULL) button_click();
+  if(b != quit && b != NULL) button_clic();
 }
 
 menu_item Main_Menu::Run ()
@@ -213,7 +213,7 @@ menu_item Main_Menu::Run ()
   while( SDL_PollEvent( &event) )
   {
     if( event.type == SDL_MOUSEBUTTONUP )
-      onClick( Point2i(event.button.x, event.button.y), event.button.button);
+      OnClic( Point2i(event.button.x, event.button.y), event.button.button);
     else if( event.type == SDL_KEYDOWN )
     {
       if( event.key.keysym.sym == SDLK_ESCAPE )
