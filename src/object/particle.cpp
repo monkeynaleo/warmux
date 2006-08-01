@@ -266,8 +266,10 @@ void BulletParticle::Refresh()
   UpdatePosition();
   image->SetRotation_deg((Time::GetInstance()->Read()/4) % 360);
   image->Update();
-  if(IsOutsideWorld(GetPosition()))
+  if(IsOutsideWorldXY(GetPosition()))
+  {
     m_left_time_to_live = 0;
+  }
 }
 
 void BulletParticle::SignalRebound()
