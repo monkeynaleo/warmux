@@ -73,6 +73,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
   MSG_DEBUG("explosion", "explosion range : %f\n", config.explosion_range);
 
+#ifdef HAVE_A_REALLY_BIG_CPU
   // Add particles based on the ground image
   if(config.explosion_range >= 15)
   {
@@ -85,6 +86,7 @@ void ApplyExplosion_common (const Point2i &pos,
   }
   else
     ParticleEngine::AddNow(pos, 1, particle_GROUND, true);
+#endif
 
   // Make a hole in the ground
   world.Dig(pos, config.explosion_range);
