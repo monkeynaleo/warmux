@@ -78,16 +78,18 @@ CreditsMenu::CreditsMenu()  :
   Menu("menu/bg_network")
 {  
   int title_height = AppWormux::GetInstance()->video.window.GetHeight() * 110 / 600;
-  lbox_authors = new ListBox( Rectanglei( 30, title_height, 
-					  AppWormux::GetInstance()->video.window.GetWidth()-60,  
-					  AppWormux::GetInstance()->video.window.GetHeight()-60-title_height));
+  ListBox * lbox_authors = new ListBox( Rectanglei( 30, title_height, 
+						    AppWormux::GetInstance()->video.window.GetWidth()-60,  
+						    AppWormux::GetInstance()->video.window.GetHeight()-60-title_height));
   lbox_authors->always_one_selected = false;
-  PrepareAuthorsList();
+
+  widgets.AddWidget(lbox_authors);
+
+  PrepareAuthorsList(lbox_authors);
 }
 
 CreditsMenu::~CreditsMenu()
 {
-  delete lbox_authors;
 }
 
 void CreditsMenu::__sig_ok() 
@@ -100,7 +102,7 @@ void CreditsMenu::__sig_cancel()
 }
 
 
-void CreditsMenu::PrepareAuthorsList()
+void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
 {
   std::string filename = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "authors.xml";
   LitDocXml doc;
@@ -150,11 +152,11 @@ void CreditsMenu::PrepareAuthorsList()
 
 void CreditsMenu::Draw(const Point2i& mousePosition)
 {
-  lbox_authors->Draw(mousePosition);
 }
 
 void CreditsMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  if (lbox_authors->Clic(mousePosition, button)) return;
+  widgets.Clic(mousePosition, button);
 }
+
 //-----------------------------------------------------------------------------

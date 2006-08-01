@@ -30,9 +30,7 @@
 class CreditsMenu : public Menu
 {
  private:
-  ListBox *lbox_authors;
-  
-  void PrepareAuthorsList();
+  void PrepareAuthorsList(ListBox *lbox_authors);
   
   void __sig_ok();
   void __sig_cancel();   
