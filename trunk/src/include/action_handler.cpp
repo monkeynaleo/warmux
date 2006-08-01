@@ -299,7 +299,7 @@ void Action_SupertuxState (Action *a)
   WeaponLauncher* launcher = static_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
   SuperTux* tux = static_cast<SuperTux*>(launcher->GetProjectile());
 
-  double x, y, s_x, s_y;
+  double x, y;
 
   tux->angle = a->PopDouble();
   x = a->PopDouble();
