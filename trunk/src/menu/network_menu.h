@@ -30,10 +30,11 @@
 #include "../gui/msg_box.h"
 #include "../gui/text_box.h"
 
+class Team;
+
 class NetworkMenu : public Menu
 {
    Font * normal_font;
-   bool terrain_init;
 
    std::list<std::string> connected_client;
 
@@ -56,15 +57,17 @@ class NetworkMenu : public Menu
    ListBox *lbox_selected_teams;
    Button *bt_add_team;
    Button *bt_remove_team;
-   NullWidget *space_for_logo;
+   PictureWidget *team_logo;
    VBox *team_box;
+   Team * last_team;
 
    /* Map controllers */
    ListBox *lbox_maps;
-   Sprite *map_preview;  
+   PictureWidget *map_preview;  
    VBox *map_box;
 
-   void ChangeMap();   
+   void ChangeMap(); 
+   void SelectTeamLogo(Team *t);  
    void MoveTeams(ListBox * from, ListBox * to, bool sort);
    void MoveDisableTeams(ListBox * from, ListBox * to, bool sort);
 
