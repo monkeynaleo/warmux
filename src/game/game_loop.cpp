@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Boucle de jeu : dessin et gestion des données.
+ * Game loop : drawing and data handling
  *****************************************************************************/
 
 #include "game_loop.h"
@@ -93,10 +93,7 @@ void GameLoop::InitGameData_NetServer()
   std::cout << "o " << _("Initialise teams") << std::endl;
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
 
-  // Create objects
   lst_objects.Init();
-        
-  // Remise à zéro
   std::cout << "o " << _("Initialise data") << std::endl;
   CharacterCursor::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
@@ -104,9 +101,10 @@ void GameLoop::InitGameData_NetServer()
   Interface::GetInstance()->Reset();
   GameMessages::GetInstance()->Reset();
 
-  //Signale les clients que le jeu peut dÃ©marrer
-  //Attend que le client ait dÃ©marrÃ©
+  // Tells all clients that the server is ready to play
   network.SendAction ( &a_change_state );
+
+  // Wait for all clients to be ready to play
   while (network.state != Network::NETWORK_READY_TO_PLAY)
   {
     action_handler->ExecActions();
@@ -151,13 +149,11 @@ void GameLoop::InitGameData_NetClient()
 
 void GameLoop::InitData_Local()
 {
-  // Placement des vers
   std::cout << "o " << _("Find a random position for characters") << std::endl;
   world.Reset();
   lst_terrain.TerrainActif().FreeData();
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
 
-  // Remise à zéro
   std::cout << "o " << _("Initialise objects") << std::endl;
   lst_objects.Init();
 }
@@ -236,8 +232,7 @@ void GameLoop::Refresh()
   GameMessages::GetInstance()->Refresh();
   camera.Refresh();
 
-  // Mise à jeu des entrées (clavier / mouse)
-  // Poll and treat events
+  // Poll and treat keyboard and mouse events
   SDL_Event event;
  
    while( SDL_PollEvent( &event) ) 
@@ -270,8 +265,6 @@ void GameLoop::Refresh()
   // How many frame by seconds ?
   fps.Refresh();
 
-  //--- D'abord ce qui pourrait modifier les données d'un ver ---
-
   if (!Time::GetInstance()->IsGamePaused())
   {
     // Keyboard and mouse refresh
@@ -293,12 +286,10 @@ void GameLoop::Refresh()
 
     FOR_ALL_CHARACTERS(equipe,ver) ver -> Refresh();
 
-    // Recalcule l'energie des equipes
+    // Recompute energy of each team
     FOR_EACH_TEAM(team)
       (**team).Refresh();
     teams_list.RefreshEnergy();
-
-    //--- Ensuite, actualise le reste du jeu ---
 
     ActiveTeam().AccessWeapon().Manage();
     lst_objects.Refresh();
@@ -306,7 +297,7 @@ void GameLoop::Refresh()
     CharacterCursor::GetInstance()->Refresh();
 
   }
-  
+
   // Refresh the map
   world.Refresh();
 }
@@ -514,7 +505,6 @@ void GameLoop::SetState(int new_state, bool begin_game)
 
   action_handler->ExecActions();
 
-  //
   Interface::GetInstance()->weapons_menu.Hide();
 
   Time * global_time = Time::GetInstance();
@@ -522,10 +512,9 @@ void GameLoop::SetState(int new_state, bool begin_game)
 
   switch (state)
   {
-  // Début d'un tour
+  // Begining of a new turn:
   case PLAYING:
     MSG_DEBUG("game.statechange", "Playing" );
-
     // Init. le compteur
     duration = game_mode->duration_turn;
     Interface::GetInstance()->UpdateTimer(duration);
@@ -537,10 +526,10 @@ void GameLoop::SetState(int new_state, bool begin_game)
     
      character_already_chosen = false;
 
-    // Prépare un tour pour un ver
+    // Prepare each character for a new turn
     FOR_ALL_LIVING_CHARACTERS(equipe,ver) ver -> PrepareTurn();
 
-    // Changement d'équipe
+    // Select the next team
     assert (!Game::GetInstance()->IsGameFinished());    
 
     if(network.IsLocal() || network.IsServer())
@@ -563,9 +552,12 @@ void GameLoop::SetState(int new_state, bool begin_game)
 //    assert (!ActiveCharacter().IsDead());
     camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
     interaction_enabled = true; // Be sure that we can play !
+
+    ApplyDeathMode();
+
     break;
 
-  // Un ver a joué son arme, mais peut encore se déplacer
+  // The character have shooted, but can still move
   case HAS_PLAYED:
     MSG_DEBUG("game.statechange", "Has played, now can move");
     duration = game_mode->duration_move_player;
@@ -574,7 +566,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
     CharacterCursor::GetInstance()->Hide();
     break;
 
-  // Fin du tour : petite pause
+  // Little pause at the end of the turn
   case END_TURN:
     MSG_DEBUG("game.statechange", "End of turn");
     ActiveTeam().AccessWeapon().SignalTurnEnd();
@@ -658,7 +650,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
                    character -> GetName().c_str());
        jukebox.Play(ActiveTeam().GetSoundProfile(), "out");
        
-      // Mort en se faisant toucher par son arme / la mort d'un ennemi ?
+      // The playing character killed hisself
     } else {
       txt = Format(_("%s is dead because he is clumsy!"), 
                    character -> GetName().c_str());
@@ -671,7 +663,6 @@ void GameLoop::SignalCharacterDeath (Character *character)
     txt = Format(_("What a shame for %s - he was killed by a simple gun!"),
                  character -> GetName().c_str());
   } else {
-    // Affiche la mort du ver
     txt = Format(_("%s (%s team) has died."),
                  character -> GetName().c_str(), 
                  character -> GetTeam().GetName().c_str());
@@ -679,7 +670,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
   
   GameMessages::GetInstance()->Add (txt);
   
-  // Si c'est le ver actif qui est mort, fin du tour
+  // Turn end if the playing character is dead
   if (character == &ActiveCharacter()) SetState (END_TURN);
 }
 
@@ -690,4 +681,17 @@ void GameLoop::SignalCharacterDamageFalling (Character *character)
     {
       SetState (END_TURN);
     }
+}
+
+// Reduce energy of each character if we are in death mode
+void GameLoop::ApplyDeathMode ()
+{
+  if(Time::GetInstance()->Read() > GameMode::GetInstance()->duration_before_death_mode * 1000)
+  {
+    GameMessages::GetInstance()->Add (_("Hurry up, you are too slow !!"));
+    FOR_ALL_LIVING_CHARACTERS(team, character)
+    {
+      character->SetEnergyDelta(-1);
+    }
+  }
 }
