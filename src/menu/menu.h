@@ -33,12 +33,19 @@
 #include "../gui/null_widget.h"
 #include "../gui/picture_widget.h"
 
+typedef enum {
+  vOkCancel,
+  vOk,
+  vNo
+} t_action;
+
 class Menu
 {
 public:
    WidgetList widgets;
+   const t_action actions;
 
-   Menu(char* bg); 
+   Menu(char* bg, t_action actions = vOkCancel); 
    virtual ~Menu();
 
    void Run ();
@@ -62,7 +69,6 @@ protected:
 
    virtual void __sig_ok() = 0;
    virtual void __sig_cancel() = 0;
-
    virtual void Draw(const Point2i &mousePosition) = 0;   
    virtual void OnClic(const Point2i &mousePosition, int button) = 0;
    void SetActionButtonsXY(int x, int y);

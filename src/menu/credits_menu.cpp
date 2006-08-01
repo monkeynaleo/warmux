@@ -75,7 +75,7 @@ std::string Author::PrettyString(bool with_email)
 //-----------------------------------------------------------------------------
 
 CreditsMenu::CreditsMenu()  :
-  Menu("menu/bg_network")
+  Menu("menu/bg_network", vOk)
 {  
   int title_height = AppWormux::GetInstance()->video.window.GetHeight() * 110 / 600;
   ListBox * lbox_authors = new ListBox( Rectanglei( 30, title_height, 

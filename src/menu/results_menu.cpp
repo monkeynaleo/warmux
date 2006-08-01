@@ -101,7 +101,7 @@ void ResultBox::SetResult(const std::string& name, int score)
 
 ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
                          const char *winner_name)
-  : Menu("menu/bg_play")
+  : Menu("menu/bg_play", vOk)
   , results(v)
   , index(0)
   , max_height(DEF_SIZE+3*DEF_BORDER)
