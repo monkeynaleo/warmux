@@ -43,20 +43,17 @@ private:
    CheckBox *opt_display_name;
    CheckBox *full_screen; 
    SpinButton *opt_max_fps;
-   VBox *graphic_options;
 
    /* Sound options controllers */
    ListBox *lbox_sound_freq;
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
-   VBox *sound_options;
 
    /* Game options controllers */
    SpinButton *opt_duration_turn;
    SpinButton *opt_duration_end_turn;
    SpinButton *opt_nb_characters;
    SpinButton *opt_energy_ini;
-   VBox *game_options;
 
    void SaveOptions();
    void OnClic(const Point2i &mousePosition, int button);
