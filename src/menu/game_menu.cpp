@@ -55,7 +55,7 @@ GameMenu::GameMenu() :
   uint x = 30;
 
   /* Choose the teams !! */
-  team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
+  Box * team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
   team_box->AddWidget(new Label(_("Select the teams:"), rectZero, *normal_font));
 
   Box * tmp_box = new HBox( Rectanglei(0,0, 1, TEAMS_H), false);
@@ -84,7 +84,7 @@ GameMenu::GameMenu() :
 
   team_box->AddWidget(tmp_box);
 
-
+  widgets.AddWidget(team_box);
 
   /* Choose the map !! */
   tmp_box = new HBox( Rectanglei(0, 0, 1, MAP_PREVIEW_W - 25 ), false);
@@ -98,6 +98,9 @@ GameMenu::GameMenu() :
   map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
   map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
   map_box->AddWidget(tmp_box);
+
+  widgets.AddWidget(map_box);
+
   // Values initialization
 
   // Load Maps' list
@@ -138,8 +141,6 @@ GameMenu::GameMenu() :
 GameMenu::~GameMenu()
 {
   delete map_preview;
-  delete map_box;
-  delete team_box;
 }
 
 void GameMenu::OnClic(const Point2i &mousePosition, int button)
@@ -229,9 +230,6 @@ void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 void GameMenu::Draw(const Point2i &mousePosition)
 {
   Team* last_team = teams_list.FindByIndex(0);
-
-  map_box->Draw(mousePosition);
-  team_box->Draw(mousePosition);
 
   int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
   if (t != -1) {

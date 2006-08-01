@@ -36,12 +36,11 @@ class GameMenu : public Menu
    Button *bt_add_team;
    Button *bt_remove_team;
    NullWidget *space_for_logo;
-   VBox *team_box;
 
    /* Map controllers */
    ListBox *lbox_maps;
    Sprite *map_preview;  
-   VBox *map_box;
+   Box * map_box;
 
    void ChangeMap();   
    void MoveTeams(ListBox * from, ListBox * to, bool sort);
