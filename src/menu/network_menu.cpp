@@ -128,8 +128,8 @@ NetworkMenu::NetworkMenu() :
   bt_remove_team = new Button( Rectanglei( 0, 0, 48, 48 ),res,"menu/arrow-left");
   buttons_tmp_box->AddWidget(bt_remove_team);
 
-  space_for_logo = new NullWidget( Rectanglei(0,0,48,48) );
-  buttons_tmp_box->AddWidget(space_for_logo);
+  team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
+  buttons_tmp_box->AddWidget(team_logo);
 
   tmp_box->AddWidget(buttons_tmp_box);
   
@@ -141,14 +141,18 @@ NetworkMenu::NetworkMenu() :
   team_box->enabled = false;
   widgets.AddWidget(team_box);
 
+  last_team = NULL;
+
   /* Choose the map !! */
   tmp_box = new HBox( Rectanglei(0, 0, 1, MAP_PREVIEW_W - 25 ), false);
-  tmp_box->SetMargin(0);
+  tmp_box->SetMargin(2);
   tmp_box->SetBorder( Point2i(0,0) );
 
   lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, MAP_PREVIEW_W-25 ));
   tmp_box->AddWidget(lbox_maps);
-  tmp_box->AddWidget(new NullWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W)));
+
+  map_preview = new PictureWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
+  tmp_box->AddWidget(map_preview);
   
   map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
   map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
@@ -179,11 +183,12 @@ NetworkMenu::NetworkMenu() :
   for (; it != end; ++it)
     lbox_all_teams->AddItem (false, (*it).GetName(), (*it).GetId());
 
-  terrain_init = false;
   b_ok->enabled = false;
 
   teams_list.Clear();
   Reset();
+
+  ChangeMap();
 }
 
 NetworkMenu::~NetworkMenu()
@@ -336,13 +341,16 @@ void NetworkMenu::ChangeMap()
   std::string map_id = lbox_maps->ReadLabel();
   uint map = lst_terrain.FindMapById(map_id);
   lst_terrain.ChangeTerrainNom(map_id);
-  if(terrain_init)
-    delete map_preview;
-  map_preview = new Sprite(lst_terrain.liste[map].preview);
-  float scale = std::min( float(MAP_PREVIEW_W)/map_preview->GetHeight(), 
-                          float(MAP_PREVIEW_W)/map_preview->GetWidth() ) ;
-  map_preview->Scale (scale, scale);
-  terrain_init = true;
+
+  map_preview->SetSurface(lst_terrain.liste[map].preview, false);
+}
+
+void NetworkMenu::SelectTeamLogo(Team * t)
+{
+  if (last_team != t) {
+    last_team = t;
+    team_logo->SetSurface(last_team->flag);
+  }
 }
 
 void NetworkMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
@@ -376,35 +384,21 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
 {
   if(network.IsConnected())
   {
-    Team* last_team = teams_list.FindByIndex(0);
-    // Display the flags of the team
     int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
     if (t != -1) {
       int index = -1;
       Team * new_team = teams_list.FindById(lbox_all_teams->ReadValue(t), index);
-      if (new_team!=NULL) last_team = new_team;
+      SelectTeamLogo(new_team);
     } else {
       t = lbox_selected_teams->MouseIsOnWhichItem(mousePosition);
       if (t != -1) {
-        int index = -1;
-        Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);
-        if (new_team!=NULL) last_team = new_team;
+	int index = -1;
+	Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);
+	SelectTeamLogo(new_team);
       }
     }
 
-    AppWormux * app = AppWormux::GetInstance();
-    app->video.window.Blit( last_team->flag, space_for_logo->GetPosition() );
-  
-    // Display the map preview
-    if (!terrain_init){
-        ChangeMap();
-        terrain_init = true;
-    }
-  
     map_box->Draw(mousePosition);
-    map_preview->Blit ( app->video.window, 
-		      map_box->GetPositionX()+MAPS_W+10, 
-		      map_box->GetPositionY()+map_box->GetSizeY()/2-map_preview->GetHeight()/2);
 
     //Refresh the number of connected players:
     char nbr[3];
