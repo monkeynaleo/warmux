@@ -192,31 +192,35 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   bt_next_team = new Button(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)),
                             res, "menu/arrow-right");
   team_box->AddWidget(bt_next_team);
+
+  widgets.AddWidget(team_box);
   
   //Results
   most_violent = new ResultBox(Rectanglei(x, y+int(1.5*max_height), total_width, max_height),
                                true, _("Most violent"), *big_font,
                                type_size, name_size, score_size);
+  widgets.AddWidget(most_violent);
+
   most_usefull = new ResultBox(Rectanglei(x, y+3*max_height, total_width, max_height),
                                true, _("Most usefull"), *big_font,
                                type_size, name_size, score_size);
+  widgets.AddWidget(most_usefull);
+
   most_useless = new ResultBox(Rectanglei(x, y+int(4.5*max_height), total_width, max_height),
                                true, _("Most useless"), *big_font,
                                type_size, name_size, score_size);
+  widgets.AddWidget(most_useless);
+
   biggest_traitor = new ResultBox(Rectanglei(x, y+6*max_height, total_width, max_height),
                                   true, _("Most sold-out"), *big_font,
                                   type_size, name_size, score_size);
+  widgets.AddWidget(biggest_traitor);
 
   SetResult(0);
 }
 
 ResultsMenu::~ResultsMenu()
 {
-  delete team_box;
-  delete most_violent;
-  delete most_usefull;
-  delete most_useless;
-  delete biggest_traitor;
 }
 
 void ResultsMenu::SetResult(int i)
@@ -277,11 +281,5 @@ void ResultsMenu::OnClic(const Point2i &mousePosition, int button)
 
 void ResultsMenu::Draw(const Point2i &mousePosition)
 {
-  team_box->Draw(mousePosition);
-
-  most_violent->Draw(mousePosition);
-  most_usefull->Draw(mousePosition);
-  most_useless->Draw(mousePosition);
-  biggest_traitor->Draw(mousePosition);
 }
 
