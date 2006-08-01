@@ -60,7 +60,7 @@ OptionMenu::OptionMenu() :
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   /* Grapic options */
-  graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, 1));
+  Box * graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, 1));
   graphic_options->AddWidget(new Label(_("Graphic options"), zeroRect, *normal_font));
 
   lbox_video_mode = new ListBox( Rectanglei(0, 0, 0, 80) );
@@ -83,8 +83,10 @@ OptionMenu::OptionMenu() :
   opt_display_name = new CheckBox(_("Display player's name?"), zeroRect);
   graphic_options->AddWidget(opt_display_name);
 
+  widgets.AddWidget(graphic_options);
+
   /* Sound options */
-  sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, 1));
+  Box * sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, 1));
   sound_options->AddWidget(new Label(_("Sound options"), zeroRect, *normal_font));
 
   lbox_sound_freq = new ListBox( Rectanglei(0, 0, 0, 80) );
@@ -96,8 +98,10 @@ OptionMenu::OptionMenu() :
   opt_sound_effects = new CheckBox(_("Sound effects?"), zeroRect);
   sound_options->AddWidget(opt_sound_effects);
 
+  widgets.AddWidget(sound_options);
+
   /* Game options */
-  game_options = new VBox( Rectanglei(GAME_X, GAME_Y, GAME_W, 1) );
+  Box * game_options = new VBox( Rectanglei(GAME_X, GAME_Y, GAME_W, 1) );
   game_options->AddWidget(new Label(_("Game options"), zeroRect, *normal_font));
 
   opt_duration_turn = new SpinButton(_("Duration of a turn:"), zeroRect,
@@ -120,6 +124,8 @@ OptionMenu::OptionMenu() :
 				      50, 200);
 
   game_options->AddWidget(opt_energy_ini);
+
+  widgets.AddWidget(game_options);
 
   // Values initialization
 
@@ -168,10 +174,7 @@ OptionMenu::~OptionMenu()
 
 void OptionMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  if( graphic_options->Clic(mousePosition, button) ){
-  } else if( sound_options->Clic(mousePosition, button) ){
-  } else if( game_options->Clic(mousePosition, button) ){
-  }
+  widgets.Clic(mousePosition, button);
 }
 
 void OptionMenu::SaveOptions()
@@ -227,8 +230,5 @@ void OptionMenu::__sig_cancel()
 
 void OptionMenu::Draw(const Point2i &mousePosition)
 {
-  graphic_options->Draw(mousePosition);
-  sound_options->Draw(mousePosition);
-  game_options->Draw(mousePosition);
 }
 
