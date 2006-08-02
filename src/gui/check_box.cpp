@@ -25,7 +25,8 @@
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 
-CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value){
+CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
+{
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadSprite( res, "menu/check");
   m_image->cache.EnableLastFrameCache();
@@ -39,12 +40,14 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
   txt_label = new Text(label, white_color, Font::GetInstance(Font::FONT_SMALL));
 }
 
-CheckBox::~CheckBox(){
+CheckBox::~CheckBox()
+{
   delete m_image;
   delete txt_label;
 }
 
-void CheckBox::Draw(const Point2i &mousePosition){
+void CheckBox::Draw(const Point2i &mousePosition)
+{
   txt_label->DrawTopLeft( GetPosition() );
  
   if (m_value)
@@ -55,20 +58,25 @@ void CheckBox::Draw(const Point2i &mousePosition){
   m_image->Blit(AppWormux::GetInstance()->video.window, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
-Widget* CheckBox::Clic(const Point2i &mousePosition, uint button){
+Widget* CheckBox::Clic(const Point2i &mousePosition, uint button)
+{
+  need_redrawing = true;
   m_value = !m_value;
   return this ;
 }
 
-void CheckBox::SetSizePosition(const Rectanglei &rect){
+void CheckBox::SetSizePosition(const Rectanglei &rect)
+{
   StdSetSizePosition(rect);
 }
 
-bool CheckBox::GetValue() const{
+bool CheckBox::GetValue() const
+{
   return m_value;
 }
 
-void CheckBox::SetValue(bool value){
+void CheckBox::SetValue(bool value)
+{
   m_value = value;
 }
 

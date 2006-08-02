@@ -33,6 +33,8 @@ TextBox::~TextBox(){
 
 void TextBox::SendKey(SDL_keysym key)
 {
+  need_redrawing = true;
+
   std::string new_txt = GetText();
   if (strcmp(SDL_GetKeyName(key.sym),"backspace")==0)
   {

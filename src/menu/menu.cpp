@@ -146,9 +146,16 @@ void Menu::Run ()
       if( !BasicOnClic(mousePosition) )
         OnClic(mousePosition, event.button.button);
     }
-    SDL_GetMouseState( &x, &y );
-    Point2i mousePosition(x, y);
-    Display(mousePosition);
+
+    // Avoid to calculate redraw menu when comming back for closing.
+    if (!close_menu) {
+
+      SDL_GetMouseState( &x, &y );
+      Point2i mousePosition(x, y);
+      
+      Display(mousePosition);
+    }
+
   } while (!close_menu);
 }
 

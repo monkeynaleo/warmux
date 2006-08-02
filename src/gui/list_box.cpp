@@ -72,6 +72,8 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition){
 }
 
 Widget* ListBox::Clic(const Point2i &mousePosition, uint button){
+  need_redrawing = true;
+
   // buttons for listbox with more items than visible
   if( m_items.size() > nb_visible_items_max ){
     if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
