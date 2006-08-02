@@ -347,6 +347,9 @@ int Surface::RectangleColor(const Rectanglei &rect, const Color &color){
 	return rectangleRGBA( surface, rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), ptBR.GetY(), color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
+int Surface::VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color){
+	return vlineRGBA( surface, x1, y1, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+}
 /**
  *
  * @param color
