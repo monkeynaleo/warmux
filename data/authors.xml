@@ -58,6 +58,14 @@
 
 <section title="Translation">
   <author>
+    <name>Bruno Queirós</name>
+    <nickname>LnxSlck</nickname>
+    <email>brunomiguelqueiros AT gmail.com</email>
+    <country>Portugal</country>
+    <description>Translate Wormux 0.7 in Portuguese.</description>
+  </author>
+
+  <author>
     <name>Bastian Salmela</name>
     <nickname>basse</nickname>
     <email>basse AT kulma.org</email>
@@ -274,7 +282,7 @@
     <email>ziolive AT gmail.com</email>
     <country>France</country>
     <description>Beautiful images for menus, maps, ...</description>
-  </author>  
+  </author>
 
   <author>
     <name>Dino Ghilardi</name>
@@ -391,7 +399,7 @@
     <email>jerome.glatigny AT utbm.fr</email>
     <description>Write first network patch with François Bleibel.</description>
   </author>
-  
+
   <author>
     <name>François Bleibel</name>
     <email>francois.bleibel AT utbm.fr</email>
