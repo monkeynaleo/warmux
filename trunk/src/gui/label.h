@@ -28,8 +28,9 @@
 #include <string>
 
 class Label : public Widget{
- private:
+ protected:
   Text *txt_label;
+ private:
   Font *font;
    
  public:
