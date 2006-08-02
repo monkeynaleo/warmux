@@ -33,6 +33,7 @@
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include "../tool/resource_manager.h"
+#include <iostream>
 
 #define NETWORK_BUTTON 
 
@@ -160,7 +161,9 @@ Main_Menu::Main_Menu()
 			 large_font);
 
   widgets.AddWidget(play);
+#ifdef NETWORK_BUTTON 
   widgets.AddWidget(network);
+#endif
   widgets.AddWidget(options);
   widgets.AddWidget(infos);
   widgets.AddWidget(quit);
@@ -206,51 +209,51 @@ menu_item Main_Menu::Run ()
   choice = menuNULL;
   while (choice == menuNULL){
     
-  // Poll and treat events
-  SDL_Event event;
-  unsigned int start = SDL_GetTicks();
-     
-  while( SDL_PollEvent( &event) )
-  {
-    if( event.type == SDL_MOUSEBUTTONUP )
-      OnClic( Point2i(event.button.x, event.button.y), event.button.button);
-    else if( event.type == SDL_KEYDOWN )
-    {
-      if( event.key.keysym.sym == SDLK_ESCAPE )
+    // Poll and treat events
+    SDL_Event event;
+    unsigned int start = SDL_GetTicks();
+    
+    while( SDL_PollEvent( &event) )
       {
-        choice = menuQUIT;
-        break;
-      }       
-      if( event.key.keysym.sym == SDLK_RETURN )
-      {
-        choice = menuPLAY;
-        break;
-      }       
-    }
-    else if ( event.type == SDL_QUIT)
-    {
-      choice = menuQUIT;
-      break;
-    }
-  }
+	if( event.type == SDL_MOUSEBUTTONUP )
+	  OnClic( Point2i(event.button.x, event.button.y), event.button.button);
+	else if( event.type == SDL_KEYDOWN )
+	  {
+	    if( event.key.keysym.sym == SDLK_ESCAPE )
+	      {
+		choice = menuQUIT;
+		break;
+	      }       
+	    if( event.key.keysym.sym == SDLK_RETURN )
+	      {
+		choice = menuPLAY;
+		break;
+	      }       
+	  }
+	else if ( event.type == SDL_QUIT)
+	  {
+	    choice = menuQUIT;
+	    break;
+	  }
+      }
 
-  SDL_GetMouseState( &x, &y);
-   
-  Draw( Point2i(x, y) );
+    SDL_GetMouseState( &x, &y);
+    
+    Draw( Point2i(x, y) );
+    
+    last_refresh = Time::GetInstance()->Read();
+    fps.Refresh();
+    fps.AddOneFrame();
+    //fps.Draw();
+    AppWormux::GetInstance()->video.Flip();
 
-  last_refresh = Time::GetInstance()->Read();
-  fps.Refresh();
-  fps.AddOneFrame();
-  fps.Draw();
-  AppWormux::GetInstance()->video.Flip();
-
-  //fps limiter
-  uint delay = SDL_GetTicks()-start;
-  if (delay < 1000 / max_fps)
-    sleep_fps = 1000 / max_fps - delay;
-  else
-    sleep_fps = 0;
-  SDL_Delay(sleep_fps);
+    //fps limiter
+    uint delay = SDL_GetTicks()-start;
+    if (delay < 1000 / max_fps)
+      sleep_fps = 1000 / max_fps - delay;
+    else
+      sleep_fps = 0;
+    SDL_Delay(sleep_fps);  
   }
 
   return choice;
@@ -259,19 +262,24 @@ menu_item Main_Menu::Run ()
 void Main_Menu::Draw(const Point2i &mousePosition)
 {
   uint dt = Time::GetInstance()->Read() - start_time;
+
   if( last_refresh / bg_refresh != Time::GetInstance()->Read() / bg_refresh
   || (!anim_finished && dt > soscill_end))
   {
-    //Refresh all the screen
-    EraseAll();
-    DrawSkins(dt);
-    DrawTitle(dt);
-    DrawButtons(mousePosition, dt);
-    anim_finished = true;
+    //Refresh all the screen    
+    if (!anim_finished) {
+      std::cout << "Refresh all the screen"<< std::endl;
+      EraseAll();
+      DrawSkins(dt);
+      DrawTitle(dt);
+      DrawButtons(mousePosition, dt);
+      anim_finished = true;
+    } else {
+      widgets.Draw(mousePosition);
+    }
   }
   else
   {
-    //Refresh only modified parts
     EraseGfx(dt);
     DrawGfx(mousePosition, dt);
   }
@@ -294,17 +302,7 @@ void Main_Menu::EraseGfx(uint dt)
 
   //Show background behind gfxs
   int x_button = app->video.window.GetWidth()/2 - button_width/2;
-  if( dt < boscill_end )
-  {
-    //Clean buttons bg
-    background->Blit(app->video.window, play->GetRectangle(), play->GetPosition());
-#ifdef NETWORK_BUTTON  
-    background->Blit(app->video.window, network->GetRectangle(), network->GetPosition());
-#endif
-    background->Blit(app->video.window, options->GetRectangle(), options->GetPosition());
-    background->Blit(app->video.window, infos->GetRectangle(), infos->GetPosition());
-    background->Blit(app->video.window, quit->GetRectangle(), quit->GetPosition());
-  }
+
   if( dt <= toscill_end && dt >= bfall_end )
   {
     // Erase previous title
@@ -326,6 +324,11 @@ void Main_Menu::EraseGfx(uint dt)
                                          x_offset, skinr_y,
                                          skin_right->GetWidth(), skin_right->GetHeight());
   }
+}
+
+void Main_Menu::Redraw(const Rectanglei& rect)
+{
+  background->Blit(AppWormux::GetInstance()->video.window, rect, rect.GetPosition());
 }
 
 void Main_Menu::DrawGfx(const Point2i &mousePosition, uint dt)
@@ -478,28 +481,38 @@ void Main_Menu::DrawButtons(const Point2i &mousePosition, uint dt)
   y += dy;
   int y_quit =  (int)(y * y_scale); //Position
 
-  if ( dt >= boscill_end )
+  if ( dt >= boscill_end)
   {
-    // Finish the animation for buttons
-    play->GetSprite()->cache.EnableLastFrameCache();
-    play->SetSizePosition( Rectanglei(x_button, y_play, button_width, button_height) );
-	
+    if (!anim_finished) {
+      std::cout << "if ( dt >= boscill_end )" << std::endl;
+      
+      // Finish the animation for buttons
+      play->GetSprite()->cache.EnableLastFrameCache();
+      play->SetSizePosition( Rectanglei(x_button, y_play, button_width, button_height) );
+      play->ForceRedraw();
 #ifdef NETWORK_BUTTON  
-    network->GetSprite()->cache.EnableLastFrameCache();
-    network->SetSizePosition( Rectanglei(x_button, y_network, button_width, button_height) );
+      network->GetSprite()->cache.EnableLastFrameCache();
+      network->SetSizePosition( Rectanglei(x_button, y_network, button_width, button_height) );
+      network->ForceRedraw();
 #endif
 	
-    options->GetSprite()->cache.EnableLastFrameCache();
-    options->SetSizePosition( Rectanglei(x_button, y_options, button_width, button_height) );
-	
-    infos->GetSprite()->cache.EnableLastFrameCache();
-	infos->SetSizePosition( Rectanglei(x_button, y_infos, button_width, button_height) );
-	
-    quit->GetSprite()->cache.EnableLastFrameCache();
-	quit->SetSizePosition( Rectanglei(x_button, y_quit, button_width, button_height) );
+      options->GetSprite()->cache.EnableLastFrameCache();
+      options->SetSizePosition( Rectanglei(x_button, y_options, button_width, button_height) );
+      options->ForceRedraw();
+      
+      infos->GetSprite()->cache.EnableLastFrameCache();
+      infos->SetSizePosition( Rectanglei(x_button, y_infos, button_width, button_height) );
+      infos->ForceRedraw();	
+      
+      quit->GetSprite()->cache.EnableLastFrameCache();
+      quit->SetSizePosition( Rectanglei(x_button, y_quit, button_width, button_height) );
+      quit->ForceRedraw();
+    }
   }
   else if ( dt >= bfall_end && dt <= boscill_end)
-  {
+  {    
+    std::cout <<  "else if ( dt >= bfall_end && dt <= boscill_end)" << std::endl;
+
     //Buttons finished falling, make them oscillate
     int button_dy, button_dh;
 
@@ -507,23 +520,30 @@ void Main_Menu::DrawButtons(const Point2i &mousePosition, uint dt)
     play->GetSprite()->cache.DisableLastFrameCache();
     play->SetSize(button_width, button_height + button_dh);
     play->SetXY(x_button, y_play + button_dy);
+    play->ForceRedraw();
 #ifdef NETWORK_BUTTON
     network->GetSprite()->cache.DisableLastFrameCache();
     network->SetSize(button_width, button_height + button_dh);
     network->SetXY(x_button, y_network + button_dy);
+    network->ForceRedraw();
 #endif
     options->GetSprite()->cache.DisableLastFrameCache();
     options->SetSize(button_width, button_height + button_dh);
     options->SetXY(x_button, y_options + button_dy);
+    options->ForceRedraw();
     infos->GetSprite()->cache.DisableLastFrameCache();
     infos->SetSize(button_width, button_height + button_dh);
     infos->SetXY(x_button, y_infos + button_dy);
+    infos->ForceRedraw();
     quit->GetSprite()->cache.DisableLastFrameCache();
     quit->SetSize(button_width, button_height + button_dh);
     quit->SetXY(x_button, y_quit + button_dy);
+    quit->ForceRedraw();
   }
   else
   {
+    std::cout <<  "else //Buttons are falling " << std::endl;
+
     uint fall_duration = bfall_end;
     //Buttons are falling
     play   ->GetSprite()->cache.EnableLastFrameCache();
@@ -540,11 +560,5 @@ void Main_Menu::DrawButtons(const Point2i &mousePosition, uint dt)
     quit   ->SetXY(x_button, (dt*dt*app->video.window.GetHeight()/fall_duration/fall_duration) - app->video.window.GetHeight() + y_quit);
   }
 
-  play->Draw(mousePosition);
-#ifdef NETWORK_BUTTON  
-  network->Draw(mousePosition);
-#endif   
-  options->Draw(mousePosition);
-  infos->Draw(mousePosition);
-  quit->Draw(mousePosition);
+  widgets.Draw(mousePosition);
 }

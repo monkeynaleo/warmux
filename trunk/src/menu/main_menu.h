@@ -41,7 +41,7 @@ typedef enum
   menuQUIT
 } menu_item;
 
-class Main_Menu
+class Main_Menu : public Container
 {
   Sprite *background, *skin_left, *skin_right, *title;
   ButtonText *play, *network, *options, *infos, *quit;
@@ -74,7 +74,10 @@ private:
   void DrawTitle(uint dt);
   void DrawSkins(uint dt);
   void DrawButtons(const Point2i &mousePosition, uint dt);
-
+  
+  //Draw part of the background (implements Container)
+  void Redraw(const Rectanglei& rect);
+    
   // Erase gfx which have moved
   void EraseGfx(uint dt);
 

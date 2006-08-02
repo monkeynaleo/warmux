@@ -19,7 +19,7 @@
  * Picture widget: A widget containing a picture
  *****************************************************************************/
 #include "picture_widget.h"
-#include <SDL_gfxPrimitives.h>
+//#include <SDL_gfxPrimitives.h>
 #include "../graphic/colors.h"
 #include "../include/app.h"
 
@@ -36,6 +36,8 @@ PictureWidget::~PictureWidget()
 
 void PictureWidget::SetSurface(Surface& s, bool enable_scaling)
 {
+  need_redrawing = true;
+
   if (spr != NULL)
     delete spr;
 

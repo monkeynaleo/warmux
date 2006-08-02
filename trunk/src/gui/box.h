@@ -22,12 +22,11 @@
 #ifndef GUI_BOX_H
 #define GUI_BOX_H
 
-#include "widget.h"
 #include "widget_list.h"
 #include <list>
 #include "../tool/point.h"
 
-class Box : public Widget, public WidgetList
+class Box : public WidgetList
 {
  protected:
   bool visible;
@@ -38,8 +37,12 @@ class Box : public Widget, public WidgetList
   Box(const Rectanglei &rect, bool _visible=true);
   virtual ~Box();
 
+  void Update(const Point2i &mousePosition,
+	      const Point2i &lastMousePosition);
   void Draw(const Point2i &mousePosition);
+  void Redraw(const Rectanglei& rect);
   Widget* Clic(const Point2i &mousePosition, uint button);
+
   void SetMargin(uint _margin);
   void SetBorder(const Point2i &newBorder);
 

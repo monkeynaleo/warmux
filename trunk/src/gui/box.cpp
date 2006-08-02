@@ -24,40 +24,69 @@
 #include "../graphic/colors.h"
 #include "../include/app.h"
 
-Box::Box(const Rectanglei &rect, bool _visible) : Widget( rect ){
+Box::Box(const Rectanglei &rect, bool _visible) : WidgetList( rect )
+{
   visible = _visible;
   margin = 5;
   border.SetValues(5, 5);
 }
 
-Box::~Box(){
+Box::~Box()
+{
 }
 
-void Box::Draw(const Point2i &mousePosition){
+void Box::Redraw(const Rectanglei& rect)
+{
+  // Redraw bottom layer container
+  WidgetList::Redraw(rect);
+
+  if ( visible ) {
+    // Redraw
+    AppWormux::GetInstance()->video.window.BoxColor(rect, defaultOptionColorBox);
+  }
+}
+
+void Box::Update(const Point2i &mousePosition,
+		 const Point2i &lastMousePosition)
+{
+  if (need_redrawing) {
+    Draw(mousePosition);
+  }
+
+  WidgetList::Draw(mousePosition);
+  need_redrawing = false;
+}
+
+void Box::Draw(const Point2i &mousePosition)
+{
   Rectanglei rect(position, size);
 	
   if( visible ){
     AppWormux::GetInstance()->video.window.BoxColor(rect, defaultOptionColorBox);
     AppWormux::GetInstance()->video.window.RectangleColor(rect, defaultOptionColorRect);
   }
-
-  WidgetList::Draw(mousePosition);
 }
 
-Widget* Box::Clic (const Point2i &mousePosition, uint button){
+Widget* Box::Clic (const Point2i &mousePosition, uint button)
+{
   return WidgetList::Clic(mousePosition, button);
 }
 
-void Box::SetMargin (uint _margin){
+void Box::SetMargin (uint _margin)
+{
   margin = _margin;
 }
 
-void Box::SetBorder (const Point2i &newBorder){
-	border = newBorder;
+void Box::SetBorder (const Point2i &newBorder)
+{
+  border = newBorder;
 }
 
-VBox::VBox(const Rectanglei &rect, bool _visible) : Box(rect, _visible){
-	size.y = 1;
+// --------------------------------------------------
+
+VBox::VBox(const Rectanglei &rect, bool _visible) : Box(rect, _visible)
+{
+  size.y = 1;
 }
 
 void VBox::DelFirstWidget()
@@ -74,7 +103,8 @@ void VBox::DelFirstWidget()
   size.y -= w_height + margin;
 }
 
-void VBox::AddWidget(Widget * a_widget){
+void VBox::AddWidget(Widget * a_widget)
+{
   assert(a_widget != NULL);
 
   uint _y;
@@ -93,7 +123,8 @@ void VBox::AddWidget(Widget * a_widget){
   WidgetList::AddWidget(a_widget);
 }
 
-void VBox::SetSizePosition(const Rectanglei &rect){
+void VBox::SetSizePosition(const Rectanglei &rect)
+{
   position = rect.GetPosition();
   int _y = rect.GetPositionY();
   std::list<Widget *>::iterator it;
@@ -112,12 +143,15 @@ void VBox::SetSizePosition(const Rectanglei &rect){
   }
 }
 
-HBox::HBox(const Rectanglei &rect, bool _visible) :
-  Box(rect, _visible){
-	  size.x = 1;
+// --------------------------------------------------
+
+HBox::HBox(const Rectanglei &rect, bool _visible) : Box(rect, _visible)
+{
+  size.x = 1;
 }
 
-void HBox::AddWidget(Widget * a_widget){
+void HBox::AddWidget(Widget * a_widget)
+{
   assert(a_widget != NULL);
 
   uint _x;
@@ -137,7 +171,8 @@ void HBox::AddWidget(Widget * a_widget){
   WidgetList::AddWidget(a_widget);
 }
 
-void HBox::SetSizePosition(const Rectanglei &rect){
+void HBox::SetSizePosition(const Rectanglei &rect)
+{
   position = rect.GetPosition();
   int _x = rect.GetPositionX();
 	

@@ -24,30 +24,35 @@
 #include "../graphic/sprite.h"
 #include "../include/app.h"
 
-Button::Button (const Rectanglei &rect, const Profile *res_profile, const std::string& resource_id) : Widget(rect){
+Button::Button (const Rectanglei &rect, const Profile *res_profile, const std::string& resource_id) : Widget(rect)
+{
   image = resource_manager.LoadSprite(res_profile,resource_id);
   image->cache.EnableLastFrameCache();
   image->ScaleSize(rect.GetSize());
 }
 
-Button::Button (const Point2i &m_position, const Profile *res_profile, const std::string& resource_id){
+Button::Button (const Point2i &m_position, const Profile *res_profile, const std::string& resource_id)
+{
   image = resource_manager.LoadSprite(res_profile, resource_id);
   position = m_position;
   size = image->GetSize();
 }
 
-Button::~Button(){
-	delete image;
+Button::~Button()
+{
+  delete image;
 }
 
-void Button::Draw(const Point2i &mousePosition){
+void Button::Draw(const Point2i &mousePosition)
+{
   uint frame = Contains(mousePosition)?1:0;
 
   image->SetCurrentFrame(frame);
   image->Blit(AppWormux::GetInstance()->video.window, position);
 }
 
-void Button::SetSizePosition(const Rectanglei &rect){
+void Button::SetSizePosition(const Rectanglei &rect)
+{
   StdSetSizePosition(rect);
   image->ScaleSize(size);
 }

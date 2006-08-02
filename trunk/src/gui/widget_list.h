@@ -17,6 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
  * Widget list : store all widgets displayed on one screen
+ * It is a fake widget
  *****************************************************************************/
 #ifndef WIDGET_LIST_H
 #define WIDGET_LIST_H
@@ -26,26 +27,34 @@
 #include "widget.h"
 #include "container.h"
 
-class WidgetList
+class WidgetList : public Widget, public Container
 {
 private:
+  Point2i lastMousePosition;
   Widget* last_clicked;
 
 protected:
-  Container * ct;
   std::list<Widget*> widget_list;
-  virtual void DelFirstWidget();
+  virtual void DelFirstWidget(); // usefull only for message_box
 
 public:
   WidgetList();
+  WidgetList(const Rectanglei &rect);
   virtual ~WidgetList();
 
-  virtual void AddWidget(Widget*);
+  // methods specialized from Widget to manage the list of widgets
   virtual void SendKey(SDL_keysym key);
   virtual Widget* Clic(const Point2i &mousePosition, uint button);
   virtual void Draw(const Point2i &mousePosition);
 
-  void SetContainer(Container * _ct);
+  // needed to implements Widget
+  virtual void SetSizePosition(const Rectanglei &rect) {};  
+
+  // to add a widget
+  virtual void AddWidget(Widget*);
+
+  // redraw bottom layer container
+  virtual void Redraw(const Rectanglei& rect);
 };
 
 #endif // WIDGET_LIST_H

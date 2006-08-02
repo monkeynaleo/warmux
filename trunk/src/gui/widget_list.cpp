@@ -17,17 +17,22 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
  * Widget list : store all widgets displayed on one screen
+ * It is a fake widget.
  *****************************************************************************/
 #include "../include/app.h"
 #include "../graphic/colors.h"
 #include "widget_list.h"
 #include "widget.h"
-
+#include <iostream>
 
 WidgetList::WidgetList()
 {
   last_clicked = NULL;
-  ct = NULL;
+}
+
+WidgetList::WidgetList(const Rectanglei &rect) : Widget(rect)
+{
+  last_clicked = NULL;
 }
 
 WidgetList::~WidgetList()
@@ -50,6 +55,7 @@ void WidgetList::AddWidget(Widget* w)
 {
   assert(w!=NULL);
   widget_list.push_back(w);
+  w->SetContainer(this);
 }
 
 void WidgetList::Draw(const Point2i &mousePosition)
@@ -58,20 +64,26 @@ void WidgetList::Draw(const Point2i &mousePosition)
       w != widget_list.end();
       w++)
   {
-    // Redraw bottom layer before
-    if (ct != NULL) {
-      ct->Redraw(**w);
-    }
-
     // Then redraw the widget
     if((*w)->enabled)
-      (*w)->Draw(mousePosition);
+      (*w)->Update(mousePosition, lastMousePosition);
     else
     {
-      (*w)->Draw(Point2i(-1,-1));
+      (*w)->Update(Point2i(-1,-1), Point2i(-1,-1));
       // Gray the widget if it's disabled
       AppWormux::GetInstance()->video.window.BoxColor((**w), defaultDisabledColorBox);
     }
+  }
+
+  lastMousePosition = mousePosition;
+}
+
+
+void WidgetList::Redraw(const Rectanglei& rect)
+{
+  // Redraw bottom layer
+  if (ct != NULL) {
+    ct->Redraw(rect);
   }
 }
 
@@ -102,7 +114,3 @@ Widget* WidgetList::Clic(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
-void WidgetList::SetContainer( Container * _ct)
-{
-  ct = _ct;
-}
