@@ -52,11 +52,13 @@ void TextBox::SendKey(SDL_keysym key)
 
 void TextBox::Draw(const Point2i &mousePosition)
 {
-  Rectanglei rect(position, size);
-    AppWormux::GetInstance()->video.window.RectangleColor(rect, defaultOptionColorRect);
-
   if(have_focus)
-    AppWormux::GetInstance()->video.window.BoxColor(rect, highlightOptionColorBox);
+    AppWormux::GetInstance()->video.window.BoxColor(*this, highlightOptionColorBox);
+
+  AppWormux::GetInstance()->video.window.RectangleColor(*this, defaultOptionColorRect);
 
   Label::Draw(mousePosition);
+  AppWormux::GetInstance()->video.window.VlineColor(GetPositionX()+txt_label->GetWidth(), 
+						    GetPositionY()+2, 
+						    GetPositionY()+GetSizeY()-4, c_white);
 }
