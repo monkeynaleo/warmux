@@ -78,7 +78,8 @@ class Surface
 
 			int BoxColor(const Rectanglei &rect, const Color &color);
 			int RectangleColor(const Rectanglei &rect, const Color &color);
-			
+			int VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color);
+
 			int Fill(Uint32 color);
 			int Fill(const Color &color);
 			int FillRect(const Rectanglei &dstRect, Uint32 color);
