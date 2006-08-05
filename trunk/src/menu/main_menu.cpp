@@ -153,7 +153,7 @@ void Main_Menu::OnClic(const Point2i &mousePosition, int button)
   if(b == play)
   {
     choice = menuPLAY;
-    close_menu = false;
+    close_menu = true;
     button_clic();
   }
 #ifdef NETWORK_BUTTON  
