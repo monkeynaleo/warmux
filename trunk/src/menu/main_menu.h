@@ -41,10 +41,20 @@ typedef enum
   menuQUIT
 } menu_item;
 
+
+struct MainMenuImg 
+{
+  Point2i pos;
+  Sprite * spr;
+};
+
 class Main_Menu : public Container
 {
-  Sprite *background, *skin_left, *skin_right, *title;
+  Sprite *background;
+  MainMenuImg skin_left, skin_right, title;
+
   ButtonText *play, *network, *options, *infos, *quit;
+  
   WidgetList widgets;
   Text * version_text, * website_text;
   uint start_time;
@@ -82,7 +92,7 @@ private:
   void EraseGfx(uint dt);
 
   // Erase the whole window
-  void EraseAll();
+  void DrawBackground();
   
   void button_clic();
 };
