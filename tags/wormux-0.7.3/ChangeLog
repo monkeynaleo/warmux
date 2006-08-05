@@ -1,9 +1,11 @@
-> 31/07/2006 - 0.7.3 release
+> 05/08/2006 - 0.7.3 release
   - Fix memory leak bug in sound managment (bug #5738)
   - Fix maximum number of character per team (bug #6183)
   - Add map Aquarium, Cheese, Catacombes, Champignon, Electronik, Leafs,
     Paradis, Vulcano. Remove CheeseBeta.
   - Add bosnian translation
+  - Add zioliver (Olivier Boyer) and yekcim (Anthony Carre) to Changelog
+  - Bump version to 0.7.3
 
 > 18/05/2006 - 0.7.2 release
   - New translation: finnish

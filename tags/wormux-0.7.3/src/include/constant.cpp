@@ -21,7 +21,7 @@
 
 #include "constant.h"
 
-const std::string Constants::VERSION = "0.7.2";
+const std::string Constants::VERSION = "0.7.3";
 
 const std::string Constants::DEFAULT_DATADIR = INSTALL_DATADIR;
 const std::string Constants::DEFAULT_LOCALEDIR = INSTALL_LOCALEDIR;
@@ -49,10 +49,12 @@ Constants * Constants::singleton = NULL;
 
 Constants::Constants()
 {
-  AUTHORS.push_back ("Lawrence AZZOUG");
-  AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
+  AUTHORS.push_back ("Anthony CARRE");
   AUTHORS.push_back ("Jean-Christophe DUBERGA");
+  AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
+  AUTHORS.push_back ("Lawrence AZZOUG");
   AUTHORS.push_back ("Matthieu FERTRE");
+  AUTHORS.push_back ("Olivier Boyer");
   AUTHORS.push_back ("Renaud LOTTIAUX");
   AUTHORS.push_back ("Victor STINNER");
 }
