@@ -2,7 +2,11 @@
 <resources>
 
 <section name="main_menu">
-  <surface name="bg" file="menu/img/background.png" />
+  <surface name="bg_main" file="menu/img/background.png" />
+
+  <surface name="skin_1" file="menu/img/skin01.png" />
+  <surface name="skin_2" file="menu/img/skin02.png" />
+  <surface name="title" file="menu/img/title.png" />
 
   <sprite name="button">
     <image file="menu/img/button.png">

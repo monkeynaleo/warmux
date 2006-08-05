@@ -54,7 +54,6 @@ public:
 
 private:
    Sprite *background;
-   bool close_menu;
 
    /* Actions buttons  */
    HBox *actions_buttons;
@@ -65,10 +64,13 @@ private:
 protected:
    Button *b_cancel;
    Button *b_ok;
+   bool close_menu;
 
    void sig_ok();
    void sig_cancel();
 
+   virtual void key_ok() {};
+   virtual void key_cancel() {};
    virtual void __sig_ok() = 0;
    virtual void __sig_cancel() = 0;
    virtual void Draw(const Point2i &mousePosition) = 0;   
