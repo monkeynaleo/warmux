@@ -133,15 +133,19 @@ void Menu::Run ()
         case SDLK_ESCAPE: 
           if(b_cancel != NULL && b_cancel->enabled)
             sig_cancel();
+          else
+            key_cancel();
           break;
         case SDLK_RETURN: 
           if(b_ok != NULL && b_ok->enabled)
             sig_ok();
+          else
+            key_ok();
           break;
         default:
           widgets.SendKey(event.key.keysym);
           break;
-        }  
+        }
       else if( event.type == SDL_MOUSEBUTTONUP)
       if( !BasicOnClic(mousePosition) )
         OnClic(mousePosition, event.button.button);

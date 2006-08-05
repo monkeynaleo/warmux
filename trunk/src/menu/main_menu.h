@@ -25,9 +25,11 @@
 
 #include "../include/base.h"
 #include "../graphic/fps.h"
-#include "../graphic/sprite.h"
+#include "../graphic/surface.h"
 #include "../gui/widget_list.h"
 #include "../gui/button_text.h"
+#include "../gui/picture_widget.h"
+#include "../menu/menu.h"
 #include <SDL.h>
 #include <vector>
 
@@ -41,59 +43,34 @@ typedef enum
   menuQUIT
 } menu_item;
 
-
-struct MainMenuImg 
+class Main_Menu : public Menu
 {
-  Point2i pos;
-  Sprite * spr;
-};
-
-class Main_Menu : public Container
-{
-  Sprite *background;
-  MainMenuImg skin_left, skin_right, title;
+  PictureWidget *skin_left, *skin_right, *title;
+  Surface s_skin_left, s_skin_right, s_title;
 
   ButtonText *play, *network, *options, *infos, *quit;
-  
-  WidgetList widgets;
+
   Text * version_text, * website_text;
-  uint start_time;
-  uint last_refresh;
-  uint button_height, button_width, title_offset, skin_offset;
-  int title_y, skinl_y, skinr_y;
-  bool anim_finished;
-  FramePerSecond fps;
   Font *normal_font, *large_font;
-  
+
 public:
   menu_item choice;
 
   Main_Menu();
   ~Main_Menu();
   menu_item Run ();
-private:  
+
+protected:
+   void __sig_ok() {};
+   void __sig_cancel() {};
+   void key_ok();
+   void key_cancel();
+
+private:
   void OnClic(const Point2i &mousePosition, int button);
 
   // Main drawing function: refresh parts of screen 
-  void Draw(const Point2i &mousePosition);
-
-  //Draws gfx needing a refresh
-  void DrawGfx(const Point2i &mousePosition, uint dt);
-
-  //Draw gfx
-  void DrawTitle(uint dt);
-  void DrawSkins(uint dt);
-  void DrawButtons(const Point2i &mousePosition, uint dt);
-  
-  //Draw part of the background (implements Container)
-  void Redraw(const Rectanglei& rect);
-    
-  // Erase gfx which have moved
-  void EraseGfx(uint dt);
-
-  // Erase the whole window
-  void DrawBackground();
-  
+  void Draw(const Point2i &mousePosition) {};
   void button_clic();
 };
 
