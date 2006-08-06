@@ -65,7 +65,7 @@ Config::Config()
   display_name_character = true;
   display_wind_particles = true;
   transparency = ALPHA;
-   
+
   // video
   tmp.video.width = 800;
   tmp.video.height = 600;
@@ -73,14 +73,14 @@ Config::Config()
 
   tmp.sound.music = true;
   tmp.sound.effects = true;
-  tmp.sound.frequency = 44100;  
+  tmp.sound.frequency = 44100;
 
   Constants::GetInstance();
 
   // directories
-  data_dir = *GetEnv(Constants::ENV_DATADIR, Constants::DEFAULT_DATADIR);
-  locale_dir = *GetEnv(Constants::ENV_LOCALEDIR, Constants::DEFAULT_LOCALEDIR);
-  ttf_filename = *GetEnv(Constants::ENV_FONT_PATH, Constants::DEFAULT_FONT_PATH);
+  data_dir = GetEnv(Constants::ENV_DATADIR, Constants::DEFAULT_DATADIR);
+  locale_dir = GetEnv(Constants::ENV_LOCALEDIR, Constants::DEFAULT_LOCALEDIR);
+  ttf_filename = GetEnv(Constants::ENV_FONT_PATH, Constants::DEFAULT_FONT_PATH);
 
 #ifndef WIN32
   personal_dir = GetHome()+"/.wormux/";
@@ -119,7 +119,7 @@ bool Config::ChargeVraiment()
         << _("Error while loading configuration file: %s") << std::endl
         << e.what() << std::endl;
     return false;
-  } 
+  }
 
   return true;
 }
@@ -128,7 +128,7 @@ bool Config::ChargeVraiment()
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
   xmlpp::Element *elem;
-  
+
   //=== Map ===
   LitDocXml::LitString  (xml, "map", tmp.map_name);
 
@@ -144,10 +144,10 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   if (elem != NULL)
   {
     uint max_fps;
-    if (LitDocXml::LitUint (elem, "max_fps", max_fps)) 
+    if (LitDocXml::LitUint (elem, "max_fps", max_fps))
       AppWormux::GetInstance()->video.SetMaxFps(max_fps);
 
-    LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);  
+    LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);
     LitDocXml::LitBool (elem, "display_energy_character", display_energy_character);
     LitDocXml::LitBool (elem, "display_name_character", display_name_character);
     LitDocXml::LitInt (elem, "width", tmp.video.width);
@@ -172,8 +172,8 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 void Config::SetKeyboardConfig()
 {
   Clavier * clavier = Clavier::GetInstance();
-  
-  clavier->SetKeyAction(SDLK_LEFT,		ACTION_MOVE_LEFT);		
+
+  clavier->SetKeyAction(SDLK_LEFT,		ACTION_MOVE_LEFT);
   clavier->SetKeyAction(SDLK_RIGHT,	ACTION_MOVE_RIGHT);
   clavier->SetKeyAction(SDLK_UP,			ACTION_UP);
   clavier->SetKeyAction(SDLK_DOWN,	ACTION_DOWN);
@@ -213,7 +213,7 @@ void Config::Apply()
 
   // Charge le mode jeu
   weapons_list.Init();
-  
+
   GameMode::GetInstance()->Load(m_game_mode);
 
   // Son
@@ -225,10 +225,10 @@ void Config::Apply()
   teams_list.LoadList();
   if (m_xml_charge)
     teams_list.InitList (tmp.teams);
-   
+
   // Charge les terrains
   lst_terrain.Init();
-  if (m_xml_charge && !tmp.map_name.empty()) 
+  if (m_xml_charge && !tmp.map_name.empty())
     lst_terrain.ChangeTerrainNom (tmp.map_name);
   else
     lst_terrain.ChangeTerrain (0);
@@ -237,7 +237,7 @@ void Config::Apply()
 bool Config::Save()
 {
   std::string rep = personal_dir;
-  
+
   // Create the directory if it doesn't exist
 #ifndef WIN32
    if (mkdir (personal_dir.c_str(), 0750) != 0 && errno != EEXIST)
@@ -245,8 +245,8 @@ bool Config::Save()
   if (_mkdir (personal_dir.c_str()) != 0 && errno != EEXIST)
 #endif
   {
-    std::cerr << "o " 
-      << Format(_("Error while creating directory \"%s\": unable to store configuration file."), 
+    std::cerr << "o "
+      << Format(_("Error while creating directory \"%s\": unable to store configuration file."),
           rep.c_str())
       << std::endl;
     return false;
@@ -284,29 +284,29 @@ bool Config::SauveXml()
   AppWormux * app = AppWormux::GetInstance();
 
   xmlpp::Element *noeud_video = racine -> add_child("video");
-  doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));  
+  doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));
   doc.EcritBalise (noeud_video, "display_energy_character", ulong2str(display_energy_character));
   doc.EcritBalise (noeud_video, "display_name_character", ulong2str(display_name_character));
   doc.EcritBalise (noeud_video, "width", ulong2str(app->video.window.GetWidth()));
   doc.EcritBalise (noeud_video, "height", ulong2str(app->video.window.GetHeight()));
-  doc.EcritBalise (noeud_video, "full_screen", 
-		   ulong2str(static_cast<uint>(app->video.IsFullScreen())) );	  
-  doc.EcritBalise (noeud_video, "max_fps", 
+  doc.EcritBalise (noeud_video, "full_screen",
+		   ulong2str(static_cast<uint>(app->video.IsFullScreen())) );
+  doc.EcritBalise (noeud_video, "max_fps",
           long2str(static_cast<int>(app->video.GetMaxFps())));
 
   if ( transparency == ALPHA )
     doc.EcritBalise (noeud_video, "transparency", "alpha");
   else if ( transparency == COLORKEY )
     doc.EcritBalise (noeud_video, "transparency", "colorkey");
- 
+
   //=== Son ===
   xmlpp::Element *noeud_son = racine -> add_child("sound");
   doc.EcritBalise (noeud_son, "music", ulong2str(jukebox.UseMusic()));
-  doc.EcritBalise (noeud_son, "effects", 
+  doc.EcritBalise (noeud_son, "effects",
 		   ulong2str(jukebox.UseEffects()));
   doc.EcritBalise (noeud_son, "frequency",
 		   ulong2str(jukebox.GetFrequency()));
-   
+
   //=== Mode de jeu ===
   doc.EcritBalise (racine, "game_mode", m_game_mode);
   return doc.Sauve();
@@ -314,18 +314,16 @@ bool Config::SauveXml()
 
 /*
  * Return the value of the environment variable 'name' or
- * 'dft' if not set
+ * 'default' if not set
  */
-std::string * Config::GetEnv(const std::string & name, const std::string & dft) {
-  std::string * value;
-  char * c_value = std::getenv(name.c_str());
-  
-  if (c_value != NULL) {
-    value = new std::string(c_value);
+std::string Config::GetEnv(const std::string & name, const std::string &default_value)
+{
+  const char *env = std::getenv(name.c_str());
+  if (env != NULL) {
+    return env;
   } else {
-    value = new std::string(dft);
+    return default_value;
   }
-  return value;
 }
 
 std::string Config::GetDataDir() const
@@ -348,7 +346,7 @@ bool Config::GetExterieurMondeVide() const
   return exterieur_monde_vide;
 }
 
-bool Config::GetDisplayEnergyCharacter() const 
+bool Config::GetDisplayEnergyCharacter() const
 {
   return display_energy_character;
 }

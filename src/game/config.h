@@ -81,7 +81,7 @@ public:
     std::list<std::string> teams;
     std::string map_name;
   } tmp;
-  
+
   static Config * GetInstance();
   bool Load();
   void Apply();
@@ -92,7 +92,7 @@ protected:
   bool ChargeXml (xmlpp::Element *xml);
   void SetKeyboardConfig();
   bool SauveXml();
-  std::string * GetEnv(const std::string & name, const std::string & dft);
+  std::string GetEnv(const std::string & name, const std::string &default_value);
 
   std::string m_game_mode;
   bool m_xml_charge;
