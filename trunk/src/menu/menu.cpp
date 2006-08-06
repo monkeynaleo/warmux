@@ -56,6 +56,7 @@ Menu::Menu(char * bg, t_action _actions) :
     widgets.AddWidget(actions_buttons);  
   } else {
     b_ok = NULL;
+    b_cancel = NULL;
     actions_buttons = NULL;
   }
 
