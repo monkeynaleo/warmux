@@ -132,6 +132,9 @@ void WeaponsList::Init()
   Airhammer* airhammer = new Airhammer;
   AddToList(airhammer,5);
 
+  Construct* construct = new Construct;
+  AddToList(construct,5);
+
   LowGrav* lowgrav = new LowGrav;
   AddToList(lowgrav,5);
 

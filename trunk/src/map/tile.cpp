@@ -85,6 +85,48 @@ void Tile::Dig(const Point2i &center, const uint radius){
         }
 }
 
+void Tile::PutSprite(const Point2i pos, Sprite* spr)
+{
+  Rectanglei rec = Rectanglei(pos, spr->GetSizeMax());
+  Point2i firstCell = Clamp(pos/CELL_SIZE);
+  Point2i lastCell = Clamp((pos + spr->GetSizeMax())/CELL_SIZE);
+  Point2i c;
+  Surface s = spr->GetSurface();
+  s.SetAlpha(0, 0);
+
+  for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+  for( c.x = firstCell.x; c.x <= lastCell.x; c.x++)
+  {
+    if(item[c.y*nbCells.x + c.x]->IsTotallyEmpty())
+    {
+      delete item[c.y*nbCells.x + c.x];
+      item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(CELL_SIZE);
+      item[c.y*nbCells.x + c.x]->GetSurface().SetAlpha(0,0);
+      item[c.y*nbCells.x + c.x]->GetSurface().Fill(0x00000000);
+      item[c.y*nbCells.x + c.x]->GetSurface().SetAlpha(SDL_SRCALPHA,0);
+    }
+
+    Point2i cell_pos = c * CELL_SIZE;
+    Rectanglei src;
+    Rectanglei dst;
+    src.SetPosition( rec.GetPosition() - cell_pos );
+    if(src.GetPositionX() < 0) src.SetPositionX(0);
+    if(src.GetPositionY() < 0) src.SetPositionY(0);
+
+    src.SetSize( rec.GetPosition() + rec.GetSize() - cell_pos - src.GetPosition());
+    if(src.GetSizeX() + src.GetPositionX() > CELL_SIZE.x) src.SetSizeX(CELL_SIZE.x - src.GetPositionX());
+    if(src.GetSizeY() + src.GetPositionY() > CELL_SIZE.y) src.SetSizeY(CELL_SIZE.y - src.GetPositionY());
+
+    dst.SetPosition( cell_pos - rec.GetPosition() );
+    if(dst.GetPositionX() < 0) dst.SetPositionX(0);
+    if(dst.GetPositionY() < 0) dst.SetPositionY(0);
+    dst.SetSize(src.GetSize());
+
+    item[c.y*nbCells.x + c.x]->GetSurface().Blit(s, dst, src.GetPosition());
+  }
+  s.SetAlpha(SDL_SRCALPHA, 0);
+}
+
 void Tile::LoadImage (Surface& terrain){
     FreeMem();
 

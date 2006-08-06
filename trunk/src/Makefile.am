@@ -117,6 +117,7 @@ wormux_SOURCES = \
 	weapon/riot_bomb.cpp weapon/riot_bomb.h \
 	weapon/bounce_ball.cpp weapon/bounce_ball.h \
 	weapon/cluster_bomb.cpp weapon/cluster_bomb.h \
+	weapon/construct.cpp weapon/construct.h \
 	weapon/dynamite.cpp weapon/dynamite.h \
 	weapon/gnu.cpp weapon/gnu.h \
 	weapon/grenade.cpp weapon/grenade.h \
