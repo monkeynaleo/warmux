@@ -51,7 +51,8 @@ typedef enum
 	WEAPON_SKIP_TURN,
 	WEAPON_JETPACK,
         WEAPON_PARACHUTE,
-	WEAPON_AIR_HAMMER
+	WEAPON_AIR_HAMMER,
+	WEAPON_CONSTRUCT
 } Weapon_type;
 
 //-----------------------------------------------------------------------------

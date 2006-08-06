@@ -138,6 +138,12 @@ void Map::Dig(const Point2i center, const uint radius)
                                       , Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
+void Map::PutSprite(const Point2i pos, Sprite* spr)
+{
+   ground.PutSprite (pos, spr);
+   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
+}
+
 void Map::DrawSky()
 { 
   SwitchDrawingCache();
@@ -211,7 +217,7 @@ bool Map::LigneV_EstDansVide (int x, int top, int bottom)
 { 
   assert (top <= bottom);
 
-  // Vérifie qu'on reste dans le monde
+  // Vï¿½ifie qu'on reste dans le monde
   if (EstHorsMondeX(x) || EstHorsMondeYhaut(top, bottom-top+1))
     return Config::GetInstance()->GetExterieurMondeVide();
   if (top < 0) top = 0;

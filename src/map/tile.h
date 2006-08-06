@@ -23,6 +23,7 @@
 #include <vector>
 #include "tileitem.h"
 #include "../graphic/surface.h"
+#include "../graphic/sprite.h"
 #include "../tool/rectangle.h"
 
 const uint EXPLOSION_BORDER_SIZE = 10;
@@ -38,6 +39,9 @@ public:
   void Dig(const Point2i &position, const Surface& provider);
   // Dig a circle hole
   void Dig(const Point2i &center, const uint radius);
+
+  // Insert a sprite into the ground
+  void PutSprite(const Point2i pos, Sprite* spr);
 
   // Load an image
   void LoadImage (Surface& ground_surface);

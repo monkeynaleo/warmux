@@ -139,6 +139,10 @@ Point2i Sprite::GetSize() const{
 	return Point2i(GetWidth(), GetHeight());
 }
 
+Point2i Sprite::GetSizeMax() const{
+	return Point2i(GetWidthMax(), GetHeightMax());
+}
+
 unsigned int Sprite::GetFrameCount(){
    return frames.size();
 }

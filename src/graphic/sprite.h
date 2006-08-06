@@ -72,6 +72,8 @@ public:
   unsigned int GetHeightMax() const; // gives height of the surface
                                      // (takes rotations into acount)
   Point2i GetSize() const;
+  Point2i GetSizeMax() const;
+
   void GetScaleFactors( float &scale_x, float &scale_y);
   void SetSize(unsigned int w, unsigned int h);
   void SetSize(const Point2i &size);

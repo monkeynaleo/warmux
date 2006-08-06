@@ -106,6 +106,14 @@
     <image file="weapon/cluster_bomb/cluster.png" />
   </sprite>
 
+<!-- Construct resources -->
+
+  <surface name="construct_ico" file="weapon/airhammer/airhammer_ico.png" />
+  <surface name="construct" file="weapon/airhammer/airhammer.png" />
+  <sprite name="construct_spr">
+    <image file="weapon/construct/construct_spr.png" />
+  </sprite>
+
 <!-- Dynamite ressources -->
 
   <surface name="dynamite_ico" file="weapon/dynamite/dynamite_ico.png" />

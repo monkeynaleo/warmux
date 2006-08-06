@@ -16,35 +16,34 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Include file to include all weapons in one shot ;-)
+ * Add a structure to the ground
  *****************************************************************************/
 
-#ifndef ALL_WEAPONS_H
-#define ALL_WEAPONS_H
+#ifndef CONSTRUCT_H
+#define CONSTRUCT_H
+#include "weapon.h"
+#include "../include/base.h"
+#include "../tool/point.h"
+#include "../graphic/sprite.h"
 
-#include "airhammer.h"
-#include "air_attack.h"
-#include "auto_bazooka.h"
-#include "baseball.h"
-#include "bazooka.h"
-#include "riot_bomb.h"
-#include "bounce_ball.h"
-#include "cluster_bomb.h"
-#include "construct.h"
-#include "dynamite.h"
-#include "grenade.h"
-#include "gun.h"
-#include "gnu.h"
-#include "holly_grenade.h"
-#include "jetpack.h"
-#include "lowgrav.h"
-#include "mine.h"
-#include "ninja_rope.h"
-#include "parachute.h"
-#include "skip_turn.h"
-#include "suicide.h"
-#include "supertux.h"
-#include "teleportation.h"
-#include "uzi.h"
+class Construct : public Weapon
+{
+  Sprite* construct_spr;
+  int angle;
+  Point2i dst;
+
+private:
+  bool p_Shoot();
+
+public:
+  Construct();
+  ~Construct();
+  void Refresh();
+  void Draw();
+  void ChooseTarget(Point2i mouse_pos);
+  void HandleKeyEvent(int key, int event_type);
+
+  WeaponConfig& cfg();
+};
 
 #endif
