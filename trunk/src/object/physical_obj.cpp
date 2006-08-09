@@ -282,11 +282,11 @@ void PhysicalObj::UpdatePosition ()
   // No ghost allowed here !
   if (IsGhost()) return;
 
-  if ( !m_go_through_wall ) 
+  if ( !m_go_through_wall )
     {
       // object is not moving and has no reason to move
       if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
-      
+
       // object is not moving BUT it should fall !
       if ( !IsMoving() && FootsInVacuum() ) StartMoving();
     }
@@ -610,7 +610,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
   uint bcl=0;
   uint NB_MAX_TRY = 20;
   bool ok;
-  int x, y;
+  Point2i position;
 
   MSG_DEBUG("physic.position", "%s - Search a position...", m_name.c_str());
 
@@ -627,13 +627,13 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
 
     if (on_top_of_world) {
       // Placement au hasard en X
-      x = randomSync.GetLong(0, world.GetWidth() - GetWidth());
-      y = -GetHeight()+1;
-      SetXY( Point2i(x, y) );
-      MSG_DEBUG("physic.position", "%s - Test in %d, %d",  m_name.c_str(), x, y);
+      position.x = randomSync.GetLong(0, world.GetWidth() - GetWidth());
+      position.y = -GetHeight()+1;
     } else {
-      SetXY( randomSync.GetPoint(world.GetSize() - GetSize() + 1) );
+      position = randomSync.GetPoint(world.GetSize() - GetSize() + 1);
     }
+    SetXY(position);
+    MSG_DEBUG("physic.position", "%s - Test in %d, %d",  m_name.c_str(), position.x, position.y);
 
     // Check physical object is not in the ground
     ok &= !IsGhost() && IsInVacuum( Point2i(0,0) )  && IsInVacuum( Point2i(0, 1) );
@@ -671,7 +671,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
       }
     }
 
-    if (ok && on_top_of_world) SetXY( Point2i(x, y) );
+    if (ok && on_top_of_world) SetXY(position);
   } while (!ok);
 
   MSG_DEBUG("physic.position", "Putted after  %d try", m_name.c_str(), bcl);
