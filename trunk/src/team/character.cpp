@@ -81,11 +81,11 @@ Character::Character (Team& my_team, const std::string &name) :
   PhysicalObj("character"), m_team(my_team)
 {
   body = NULL;
+  step_sound_played = true;
   pause_bouge_dg = 0;
   previous_strength = 0;
   energy = 100;
   lost_energy = 0;
-  is_walking = false;
   channel_step = -1;
   hidden = false;
   do_nothing_time = 0;
@@ -548,6 +548,24 @@ void Character::Refresh()
     if(do_nothing_time + do_nothing_timeout < global_time->Read())
       CharacterCursor::GetInstance()->FollowActiveCharacter();
   }
+
+  if(body->IsWalking())
+  {
+    // Play the step sound only twice during the walking animation
+    uint frame_nbr = body->GetFrameCount();
+    uint cur = body->GetFrame();
+    frame_nbr /= 2;
+    cur %= frame_nbr;
+
+    if(cur < frame_nbr / 2 && !step_sound_played)
+    {
+      step_sound_played = true;
+      jukebox.Play (GetTeam().GetSoundProfile(),"step");
+    }
+
+    if(cur > frame_nbr / 2)
+      step_sound_played = false;
+  }
 }
 
 // Prepare a new turn
@@ -583,6 +601,7 @@ void Character::InitMouvementDG(uint pause)
 {
   do_nothing_time = Time::GetInstance()->Read();
   CharacterCursor::GetInstance()->Hide();
+  step_sound_played = true;
   SetRebounding(false);
   pause_bouge_dg = Time::GetInstance()->Read()+pause;
 }

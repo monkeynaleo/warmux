@@ -41,7 +41,7 @@ class Character : public PhysicalObj
 private:
   std::string character_name;
   Team& m_team;
-  bool is_walking;
+  bool step_sound_played;
 
   // energy
   uint energy;
@@ -99,7 +99,6 @@ public:
   // Initialise un mouvement �droite ou �gauche
   void InitMouvementDG (uint pause);
   bool CanStillMoveDG (uint pause);
-  bool IsWalking () const { return is_walking; };
 
   // Changement d'etat
   void HighJump ();
