@@ -427,6 +427,14 @@
     <country>France</country>
     <description>Progressive camera scrolling with mouse patch.</description>
   </author>
+
+  <author>
+    <name>Yannig PERRE</name>
+    <nickname>drayan</nickname>
+    <email>yannig.perre AT gmail DOT com</email>
+    <description>Write snipe_rifle.</description>
+  </author>
+
 </section>
 
 <section title="Package mainteners">
@@ -480,6 +488,7 @@
     <email>che666 AT uni.de</email>
     <description>Fedora Core 3 packager.</description>
   </author>
+
 </section>
 
 <section title="Thanks to">
