@@ -212,5 +212,6 @@ void SnipeRifle::HandleKeyEvent(int action, int event_type)
 void SnipeRifle::Draw()
 {
   WeaponLauncher::Draw();
-  m_laser_image->Draw(*GetCrossPoint());
+  if(GetCrossPoint() != NULL)
+    m_laser_image->Draw(*GetCrossPoint());
 }
