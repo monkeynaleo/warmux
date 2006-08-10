@@ -57,8 +57,11 @@ void Suicide::Refresh()
   m_is_active = sound_channel != -1 && Mix_Playing(sound_channel);
 
   if( !m_is_active )
-    if( !ActiveCharacter().IsDead() )
-      ActiveCharacter().Die();
+  if( !ActiveCharacter().IsDead() )
+  {
+    ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
+    ActiveCharacter().Die();
+  }
 }
 
 ExplosiveWeaponConfig& Suicide::cfg()

@@ -41,10 +41,13 @@ protected:
 
 public:
   Sprite* spr;
+
   std::string name;
   std::map<std::string, v_attached> attached_members;
 
   Point2f pos;
+  Point2f scale;
+  float alpha;
   int angle;
   std::string type;
   bool go_through_ground;
@@ -56,6 +59,7 @@ public:
   void ResetMovement();
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(member_mvt& mvt, std::vector<class c_junction>& squel_lst);
+  const Point2i GetPos();
 };
 
 class WeaponMember : public Member
