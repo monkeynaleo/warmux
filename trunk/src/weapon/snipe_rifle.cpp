@@ -177,7 +177,6 @@ bool SnipeRifle::ComputeCrossPoint()
     // is there a collision ??
     if(projectile->CollisionTest( pos ) ){
       *cross_point=pos;
-      printf("%d %d\n",cross_point->GetX(),cross_point->GetY());
       return true;
     }
     pos += delta_pos;
