@@ -39,25 +39,25 @@ Menu::Menu(char * bg, t_action _actions) :
   background = new Sprite( resource_manager.LoadImage( res, bg));
   background->cache.EnableLastFrameCache();
 
-  if (actions == vOk || actions == vOkCancel) {
+  b_ok = NULL;
+  b_cancel = NULL;
+  if (actions == vNo) {
+    actions_buttons = NULL;    
+  } else {
 
     actions_buttons = new HBox( Rectanglei(x, y, 1, 40), false);
 
-    b_ok = new Button( Point2i(0, 0), res, "menu/valider"); 
-    actions_buttons->AddWidget(b_ok);
-
-    if (actions == vOkCancel) {
-      b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
-      actions_buttons->AddWidget(b_cancel);
-    } else {
-      b_cancel = NULL;
+    if (actions == vOk || actions == vOkCancel) {
+      b_ok = new Button( Point2i(0, 0), res, "menu/valider"); 
+      actions_buttons->AddWidget(b_ok);
     }
 
-    widgets.AddWidget(actions_buttons);  
-  } else {
-    b_ok = NULL;
-    b_cancel = NULL;
-    actions_buttons = NULL;
+    if (actions == vCancel  || actions == vOkCancel) {
+      b_cancel = new Button( Point2i(0, 0), res, "menu/annuler");
+      actions_buttons->AddWidget(b_cancel);
+    }
+
+    widgets.AddWidget(actions_buttons);
   }
 
   widgets.SetContainer(this);

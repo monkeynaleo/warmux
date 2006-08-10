@@ -33,7 +33,6 @@
 #include "../tool/i18n.h"
 #include "../tool/file_tools.h"
 #include "../tool/resource_manager.h"
-#include <iostream>
 
 #define NETWORK_BUTTON 
 
@@ -46,7 +45,10 @@ const int VERSION_DY = -40;
 
 const int DEFAULT_SCREEN_HEIGHT = 768 ;
 
-Main_Menu::~Main_Menu(){
+Main_Menu::~Main_Menu()
+{
+  delete skin_left;
+  delete skin_right;
   delete version_text;
   delete website_text;
 }
@@ -57,10 +59,11 @@ Main_Menu::Main_Menu() :
   int x_button;
   double y_scale;
 
-  normal_font = Font::GetInstance(Font::FONT_NORMAL);
-  large_font = Font::GetInstance(Font::FONT_LARGE);
+  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  Font * large_font = Font::GetInstance(Font::FONT_LARGE);
 
   int button_width = 402;
+  int button_height = 64;
 
   y_scale = (double)AppWormux::GetInstance()->video.window.GetHeight() / DEFAULT_SCREEN_HEIGHT ;
 
@@ -68,35 +71,29 @@ Main_Menu::Main_Menu() :
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
-  s_skin_left = resource_manager.LoadImage(res,"main_menu/skin_1");
-  skin_left = new PictureWidget(Rectanglei(0, AppWormux::GetInstance()->video.window.GetHeight() - s_skin_left.GetHeight(), 269, 427));
-  skin_left->SetSurface(s_skin_left);
-
-  s_skin_right = resource_manager.LoadImage(res,"main_menu/skin_2");
-  skin_right = new PictureWidget(Rectanglei(AppWormux::GetInstance()->video.window.GetWidth()  - s_skin_right.GetWidth(),
-                                            AppWormux::GetInstance()->video.window.GetHeight() - s_skin_right.GetHeight(), 380, 329));
-  skin_right->SetSurface(s_skin_right);
+  skin_left = new Sprite( resource_manager.LoadImage(res,"main_menu/skin_1"));
+  skin_right = new Sprite( resource_manager.LoadImage(res,"main_menu/skin_2"));
 
   s_title = resource_manager.LoadImage(res,"main_menu/title");
   title = new PictureWidget(Rectanglei(AppWormux::GetInstance()->video.window.GetWidth()/2  - s_title.GetWidth()/2 + 10, 0, 648, 168));
   title->SetSurface(s_title);
 
-  int y = 300;
-  const int y2 = 580;
+  int y = int(290 * y_scale) ;
+  const int y2 = AppWormux::GetInstance()->video.window.GetHeight() + VERSION_DY -20 - button_height;
 #ifdef NETWORK_BUTTON  
-  int dy = (y2-y)/4;
+  int dy = std::max((y2-y)/4, button_height);
 #else  
-  int dy = (y2-y)/3;
+  int dy = std::max(((y2-y)/3, button_height);
 #endif  
 
-  play = new ButtonText( Point2i(x_button, (int)(y * y_scale)),
+  play = new ButtonText( Point2i(x_button, y),
 			res, "main_menu/button",
 			_("Play"),
 			large_font);
   y += dy;
 
 #ifdef NETWORK_BUTTON  
-  network = new ButtonText( Point2i(x_button, (int)(y * y_scale)),
+  network = new ButtonText( Point2i(x_button, y),
 			   res, "main_menu/button",
 			   _("Network Game"),
 			   large_font );
@@ -105,25 +102,23 @@ Main_Menu::Main_Menu() :
   network = NULL;
 #endif
   
-  options = new ButtonText( Point2i(x_button, (int)(y * y_scale) ),
+  options = new ButtonText( Point2i(x_button, y),
 			   res, "main_menu/button",
 			   _("Options"),
-			   large_font);
+			   large_font);  
   y += dy;
 
-  infos =  new ButtonText( Point2i(x_button, (int)(y * y_scale) ),
+  infos =  new ButtonText( Point2i(x_button, y),
 			  res, "main_menu/button",
 			  _("Credits"),
-			  large_font);
+			  large_font);  
   y += dy;
 
-  quit =  new ButtonText( Point2i(x_button,(int)(y * y_scale) ),
+  quit =  new ButtonText( Point2i(x_button, y),
 			 res, "main_menu/button",
 			 _("Quit"),
-			 large_font);
+			 large_font);  
 
-  widgets.AddWidget(skin_right);
-  widgets.AddWidget(skin_left);
   widgets.AddWidget(play);
 #ifdef NETWORK_BUTTON 
   widgets.AddWidget(network);
@@ -204,4 +199,52 @@ void Main_Menu::key_cancel()
 {
   choice = menuQUIT;
   close_menu = true;
+}
+
+void Main_Menu::DrawBackground(const Point2i &mousePosition)
+{
+  Surface& window = AppWormux::GetInstance()->video.window;
+
+  Menu::DrawBackground(mousePosition);
+  skin_left->Blit(window, 0, window.GetHeight() - skin_left->GetHeight());
+  skin_right->Blit(window, window.GetWidth()  - skin_right->GetWidth(),
+		   window.GetHeight() - skin_right->GetHeight());
+  
+  version_text->DrawCenter( window.GetWidth()/2,
+                            window.GetHeight() + VERSION_DY);
+  website_text->DrawCenter( window.GetWidth()/2,
+                            window.GetHeight() + VERSION_DY/2);
+
+}
+
+void Main_Menu::Redraw(const Rectanglei& rect)
+{
+  Menu::Redraw(rect);
+
+  // we never had to redraw texts
+  // but sometimes we need to redraw the skins...
+  Surface& window = AppWormux::GetInstance()->video.window;
+
+  Rectanglei dest(0, window.GetHeight() - skin_left->GetHeight(),
+		  skin_left->GetWidth(), skin_left->GetHeight());
+  dest.Clip(rect);
+
+  Rectanglei src(rect.GetPositionX() - 0, 
+		 rect.GetPositionY() - (window.GetHeight() - skin_left->GetHeight()), 
+		 dest.GetSizeX(), dest.GetSizeY());
+
+  skin_left->Blit(window, src, dest.GetPosition());
+
+  Rectanglei dest2(window.GetWidth()  - skin_right->GetWidth(),
+		   window.GetHeight() - skin_right->GetHeight(),
+		   skin_right->GetWidth(), skin_right->GetHeight());
+  dest2.Clip(rect);
+	 
+  Rectanglei src2(dest2.GetPositionX() - (window.GetWidth()  - skin_right->GetWidth()), 
+		  dest2.GetPositionY() - (window.GetHeight() - skin_right->GetHeight()), 
+		  dest2.GetSizeX(), dest2.GetSizeY());
+
+  skin_right->Blit(window, src2, dest2.GetPosition());
+
+
 }
