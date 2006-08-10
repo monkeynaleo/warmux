@@ -71,12 +71,14 @@ void WeaponsList::Init()
   Bazooka* bazooka = new Bazooka;
   Uzi* uzi = new Uzi;
   Gun* gun = new Gun;
+  SnipeRifle* snipe_rifle = new SnipeRifle;
   RiotBomb* riot_bomb = new RiotBomb;
   AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
   Dynamite* dynamite = new Dynamite;
   GrenadeLauncher* grenade_launcher = new GrenadeLauncher;
   HollyGrenadeLauncher* holly_grenade_launcher = new HollyGrenadeLauncher;
   ClusterLauncher* cluster_launcher = new ClusterLauncher;
+
   Baseball* baseball = new Baseball;
   Mine* mine = new Mine;
   AirAttack* air_attack = new AirAttack;
@@ -96,6 +98,7 @@ void WeaponsList::Init()
   // Category 1
   AddToList(bazooka, 1);
   AddToList(uzi, 1);
+  AddToList(snipe_rifle, 1);
   AddToList(gun, 1);
   AddToList(riot_bomb, 1);
   AddToList(auto_bazooka, 1);

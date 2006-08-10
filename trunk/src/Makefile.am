@@ -132,7 +132,8 @@ wormux_SOURCES = \
 	weapon/suicide.cpp weapon/suicide.h \
 	weapon/supertux.cpp weapon/supertux.h \
 	weapon/teleportation.cpp weapon/teleportation.h \
-	weapon/uzi.cpp weapon/uzi.h
+	weapon/uzi.cpp weapon/uzi.h \
+	weapon/snipe_rifle.cpp weapon/snipe_rifle.h
 
 AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\" -DFONT_FILE=\"$(fontfile)\" -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" -Werror
 
