@@ -35,6 +35,7 @@
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
 #include "menu/main_menu.h"
+#include "menu/network_connection_menu.h"
 #include "menu/network_menu.h"
 #include "menu/options_menu.h"
 #include "include/action_handler.h"
@@ -80,8 +81,8 @@ int AppWormux::main (int argc, char **argv){
 	  }
         case menuNETWORK:
 	  {
-	    NetworkMenu network_menu;
-	    network_menu.Run();
+	    NetworkConnectionMenu network_connection_menu;
+	    network_connection_menu.Run();
 	    break;
 	  }
         case menuOPTIONS:

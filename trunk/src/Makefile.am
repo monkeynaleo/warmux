@@ -60,6 +60,7 @@ wormux_SOURCES = \
 	interface/loading_screen.cpp interface/loading_screen.h \
 	menu/main_menu.cpp menu/main_menu.h \
 	menu/menu.cpp menu/menu.h \
+	menu/network_connection_menu.cpp menu/network_connection_menu.h \
 	menu/network_menu.cpp menu/network_menu.h \
 	menu/credits_menu.cpp menu/credits_menu.h \
 	menu/options_menu.cpp menu/options_menu.h \
