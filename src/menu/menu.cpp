@@ -69,7 +69,7 @@ Menu::~Menu(){
 }
 
 void Menu::sig_ok(){
-  if(!b_ok->enabled) return;
+  if(b_ok != NULL && !b_ok->enabled) return;
 
   jukebox.Play("share", "menu/ok");
   __sig_ok();
@@ -78,7 +78,7 @@ void Menu::sig_ok(){
 
 void Menu::sig_cancel()
 {
-  if(!b_cancel->enabled) return;
+  if(b_cancel != NULL && !b_cancel->enabled) return;
 
   jukebox.Play("share", "menu/cancel");
   __sig_cancel();
