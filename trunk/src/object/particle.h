@@ -1,4 +1,3 @@
-
 /******************************************************************************
  *  Wormux, a free clone of the game Worms from Team17.
  *  Copyright (C) 2001-2004 Lawrence Azzoug.
@@ -36,7 +35,8 @@ typedef enum {
   particle_BULLET,
   particle_GROUND,
   particle_AIR_HAMMER,
-  particle_MAGIC_STAR
+  particle_MAGIC_STAR,
+  particle_BODY_MEMBER
 } particle_t;
 
 enum particle_spr{ SMOKE_spr, EXPLOSION_SMOKE_spr, FIRE_spr, STAR_spr, MAGIC_STAR_R_spr, MAGIC_STAR_Y_spr, MAGIC_STAR_B_spr, DARK_SMOKE_spr, BULLET_spr };
@@ -121,6 +121,14 @@ class GroundParticle : public Particle
   void Refresh();
 };
 
+class BodyMemberParticle : public Particle
+{
+  int angle;
+ public:
+  BodyMemberParticle(Sprite* spr, const Point2i& position);
+  void Refresh();
+};
+
 class ParticleEngine
 {
  private:
@@ -148,6 +156,7 @@ class ParticleEngine
 		     uint nb_particles, particle_t type,
 		     bool upper,
 		     double angle=-1, double norme=-1);
+  static void AddNow(Particle* particle);
 
   enum ESmokeStyle { NoESmoke, LittleESmoke, BigESmoke }; // Style of smoke explosion (quantitie of smoke)
   static void AddExplosionSmoke(const Point2i &pos, const uint &radius, ESmokeStyle &style);

@@ -303,6 +303,36 @@ void GroundParticle::Refresh()
 
 // ==============================================
 
+BodyMemberParticle::BodyMemberParticle(Sprite* spr, const Point2i& position) :
+  Particle("body_member_particle")
+{
+  m_go_through_wall = false;
+  m_left_time_to_live = 100;
+  image = new Sprite(spr->GetSurface());
+  image->EnableRotationCache(32);
+  assert(image->GetWidth() != 0 && image->GetHeight()!=0);
+  SetXY(position);
+  SetSize(image->GetSize());
+  angle = 0;
+}
+
+void BodyMemberParticle::Refresh()
+{
+  m_left_time_to_live--;
+  UpdatePosition();
+  Point2d speed;
+  GetSpeedXY(speed);
+
+  angle += int(speed.Norm() * 10.0);
+  angle %= 360;
+  if(m_left_time_to_live < 50)
+    image->SetAlpha(m_left_time_to_live / 50.0);
+  image->SetRotation_deg(angle);
+  image->Update();
+}
+
+// ==============================================
+
 ParticleEngine::ParticleEngine(uint time)
 {
   m_time_between_add = time ;
@@ -348,7 +378,7 @@ void ParticleEngine::Init()
   particle_sprite[MAGIC_STAR_B_spr]->EnableRotationCache(32);
   particle_sprite[BULLET_spr] = resource_manager.LoadSprite(res,"bullet_particle");
   particle_sprite[BULLET_spr]->EnableRotationCache(6);
-  resource_manager.UnLoadXMLProfile( res);
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 void ParticleEngine::FreeMem()
@@ -414,6 +444,11 @@ void ParticleEngine::AddNow(const Point2i &position,
       lst_particles.push_back(particle);
     }
   }
+}
+
+void ParticleEngine::AddNow(Particle* particle)
+{
+  lst_particles.push_back(particle);
 }
 
 void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)

@@ -84,6 +84,7 @@ class Body
   void BuildSqueleton();
   void AddChildMembers(Member* parent);
 
+  void Build(const Point2i& pos);
 public:
   Character* owner;
 
@@ -92,7 +93,6 @@ public:
   ~Body();
 
   Point2i GetSize() {return Point2i(30,45);};
-
 
   void Draw(const Point2i& pos);
   void SetClothe(std::string name);
@@ -116,6 +116,8 @@ public:
   void StopWalk();
   void ResetWalk();
   bool IsWalking() { return walk_events > 0; };
+
+  void MakeParticles(const Point2i& pos);
 };
 
 #endif //BODY_H

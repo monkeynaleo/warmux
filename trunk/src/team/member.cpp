@@ -39,7 +39,7 @@ Member::Member(xmlpp::Element *xml, Profile* res)
   spr = resource_manager.LoadSprite( res, name);
 //  spr->EnableRotationCache(64);
 //  spr->EnableFlippingCache();
-  spr->cache.EnableLastFrameCache();
+//  spr->cache.EnableLastFrameCache();
 
   // Get the various option
   type="";
@@ -118,7 +118,7 @@ Member::~Member()
 void Member::RotateSprite()
 {
   spr->SetRotation_deg(angle);
-  spr->Scale(1.0,1.0);
+  spr->Scale(scale.x, scale.y);
   spr->RefreshSurface();
 }
 
@@ -131,11 +131,11 @@ void Member::Draw(int flip_center, int direction)
   if(direction == 1)
   {
     spr->SetRotation_deg(angle);
-    spr->Scale(1.0,1.0);
+    spr->Scale(scale.x,scale.y);
   }
   else
   {
-    spr->Scale(-1.0,1.0);
+    spr->Scale(-scale.x,scale.y);
     spr->SetRotation_deg(-angle);
     posi.x = 2 * flip_center - posi.x - spr->GetWidth();
   }
@@ -146,6 +146,7 @@ void Member::Draw(int flip_center, int direction)
     return;
   }
 
+  spr->SetAlpha(alpha);
   spr->Update();
   spr->Draw(posi);
 }
@@ -155,6 +156,9 @@ void Member::ResetMovement()
   pos.x = 0;
   pos.y = 0;
   angle = 0;
+  alpha = 1.0;
+  scale.x = 1.0;
+  scale.y = 1.0;
 }
 
 void Member::ApplySqueleton(Member* parent_member)
@@ -230,7 +234,6 @@ void Member::ApplyMovement(member_mvt &mvt, std::vector<junction>& squel_lst)
           child_mvt.pos.x += radius * (cos(angle_init + angle_r + mvt_angle_r) - cos(angle_init + angle_r));
           child_mvt.pos.y += radius * (sin(angle_init + angle_r + mvt_angle_r) - sin(angle_init + angle_r));
         }
-
         // Apply recursively to childrens:
         member->member->ApplyMovement(child_mvt, squel_lst);
       }
@@ -240,6 +243,14 @@ void Member::ApplyMovement(member_mvt &mvt, std::vector<junction>& squel_lst)
   // Apply the movement to the current member
   angle += mvt.angle;
   pos += mvt.pos;
+  alpha *= mvt.alpha;
+  scale = scale * mvt.scale;
+}
+
+const Point2i Member::GetPos()
+{
+  Point2i posi((int)pos.x, (int)pos.y);
+  return posi;
 }
 
 WeaponMember::WeaponMember() : Member(NULL, NULL)

@@ -208,6 +208,16 @@ bool LitDocXml::LitAttrBool (const xmlpp::Element *x,
   return str2bool(val, sortie);
 }
 
+
+bool LitDocXml::LitAttrDouble (const xmlpp::Element *x, 
+			    const std::string &nom, 
+			    double &sortie)
+{
+  std::string val;
+  if (!LitAttrString(x,nom,val)) return false;
+  return str2double (val, sortie);
+}
+
 bool LitDocXml::EstOk() const 
 { return parser; }
 

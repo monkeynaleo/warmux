@@ -30,13 +30,16 @@ class member_mvt
 {  // Position of a member relative to its superior one
 public:
   Point2f pos;
+  Point2f scale;
+  float alpha;
   int angle; // angle in degrees
   bool follow_crosshair;
   bool follow_half_crosshair;
   bool follow_speed;
   bool follow_direction;
   member_mvt() { pos.x = pos.y = angle = follow_crosshair = follow_half_crosshair
-                       = follow_speed = follow_direction = 0; };
+                       = follow_speed = follow_direction = 0; 
+                 alpha = scale.x = scale.y = 1.0;};
 };
 
 class Movement

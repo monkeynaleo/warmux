@@ -238,7 +238,7 @@ void Body::ApplySqueleton(const Point2f& pos)
   }
 }
 
-void Body::Draw(const Point2i& _pos)
+void Body::Build(const Point2i& _pos)
 {
   Point2f pos;
   pos.x = (float) _pos.x;
@@ -296,10 +296,14 @@ void Body::Draw(const Point2i& _pos)
     weapon_pos = Point2i((int)current_weapon_member->pos.x,(int)current_weapon_member->pos.y);
   else
     weapon_pos = Point2i(2 * (int)pos.x + GetSize().x - (int)current_weapon_member->pos.x,(int)current_weapon_member->pos.y);
+}
 
+void Body::Draw(const Point2i& _pos)
+{
+  Build(_pos);
   // Finally draw each layer one by one
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-    current_clothe->layers[layer]->Draw((int)pos.x + GetSize().x/2, direction);
+    current_clothe->layers[layer]->Draw(_pos.x + GetSize().x/2, direction);
 }
 
 void Body::AddChildMembers(Member* parent)
@@ -509,6 +513,16 @@ void Body::SetFrame(uint no)
 {
   assert(no < current_mvt->frames.size());
   current_frame = no;
+}
+
+void Body::MakeParticles(const Point2i& pos)
+{
+  Build(pos);
+
+  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
+  if(current_clothe->layers[layer]->type != "weapon")
+    ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->layers[layer]->spr,
+                                                  current_clothe->layers[layer]->GetPos()));
 }
 
 const std::string& Body::GetMovement() { return current_mvt->type; }
