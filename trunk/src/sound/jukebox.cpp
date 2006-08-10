@@ -42,14 +42,14 @@ JukeBox::JukeBox()
 
 void JukeBox::Pause() 
 {
-    Mix_Pause(-1);
-    Mix_PauseMusic();
+  Mix_Pause(-1);
+  Mix_PauseMusic();
 }
 
 void JukeBox::Resume() 
 {    
-    Mix_Resume(-1);
-    Mix_ResumeMusic();
+  Mix_Resume(-1);
+  Mix_ResumeMusic();
 }
 
 void JukeBox::Init() 
@@ -137,6 +137,8 @@ void JukeBox::LoadXML(const std::string& profile)
 	  MSG_DEBUG("jukebox", "Profile %s is already loaded !", profile.c_str());
       return;
   } 
+  std::cout << "o Loading sound profile " << profile << std::endl;
+
   LitDocXml doc;
 
   // Load the XML
@@ -205,7 +207,7 @@ int JukeBox::Play (const std::string& category, const std::string& sample,
 
     // Play the sound
     Mix_Chunk * sampleChunk = Mix_LoadWAV(it->second.c_str());
-
+    MSG_DEBUG("jukebox.play", "Playing sample %s/%s", category.c_str(), sample.c_str());
     return PlaySample(sampleChunk, loop);
   }
   else if (category != "default") { // try with default profile
@@ -248,10 +250,10 @@ int JukeBox::PlaySample (Mix_Chunk * sample, int loop)
 
 void JukeBox::EndChunk(int channel)
 {
-	Mix_Chunk* chk = jukebox.chunks[channel];
-
-	if(!chk) return;
-
-	Mix_FreeChunk(chk);
-	jukebox.chunks[channel] = 0;
+  Mix_Chunk* chk = jukebox.chunks[channel];
+  
+  if(!chk) return;
+  
+  Mix_FreeChunk(chk);
+  jukebox.chunks[channel] = 0;
 }
