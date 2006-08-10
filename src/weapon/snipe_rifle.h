@@ -16,36 +16,46 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Include file to include all weapons in one shot ;-)
+ * Snipe Rifle
  *****************************************************************************/
 
-#ifndef ALL_WEAPONS_H
-#define ALL_WEAPONS_H
+#ifndef __SNIPE_RIFLE_H
+#define __SNIPE_RIFLE_H
 
-#include "airhammer.h"
-#include "air_attack.h"
-#include "auto_bazooka.h"
-#include "baseball.h"
-#include "bazooka.h"
-#include "riot_bomb.h"
-#include "bounce_ball.h"
-#include "cluster_bomb.h"
-#include "construct.h"
-#include "dynamite.h"
-#include "grenade.h"
-#include "gun.h"
-#include "gnu.h"
-#include "holly_grenade.h"
-#include "jetpack.h"
-#include "lowgrav.h"
-#include "mine.h"
-#include "ninja_rope.h"
-#include "parachute.h"
-#include "skip_turn.h"
-#include "snipe_rifle.h"
-#include "suicide.h"
-#include "supertux.h"
-#include "teleportation.h"
-#include "uzi.h"
+#include <vector>
+#include "launcher.h"
+#include "../include/base.h"
 
-#endif
+class SnipeBullet : public WeaponBullet
+{
+public:
+  SnipeBullet(ExplosiveWeaponConfig& cfg); 
+private:
+  void ShootSound();
+};
+
+class SnipeRifle : public WeaponLauncher
+{
+  ParticleEngine particle;
+  double last_angle;
+  Point2i last_bullet_pos;
+  Point2i last_rifle_pos;
+  Point2i * cross_point;
+  Sprite * m_laser_image;
+ private:
+  bool p_Shoot();
+  void RepeatShoot(); 
+  void Refresh(){};
+
+protected:
+  uint m_first_shoot;
+
+public:
+  SnipeRifle();
+  void Draw();
+  Point2i * GetCrossPoint();
+  bool ComputeCrossPoint();
+  void HandleKeyEvent(int action, int event_type);
+};
+
+#endif /* __SNIPE_RIFLE_H */
