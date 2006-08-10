@@ -192,7 +192,8 @@ const Rectanglei PhysicalObj::GetTestRect() const
 // Move to a point with collision test
 // Return true if collision occured
 bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
-			     Point2d &contactPos, double &contact_angle){
+			     Point2d &contactPos, double &contact_angle)
+{
   Point2d pos, offset;
   int cx, cy;
   bool collision = false ;
@@ -222,49 +223,73 @@ bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
 
   do
   {
-	Point2i tmpPos( (int)round(pos.x), (int)round(pos.y) );
+    Point2i tmpPos( (int)round(pos.x), (int)round(pos.y) );
 
     // Check if we exit the world. If so, we stop moving and return.
     if( IsOutsideWorldXY(tmpPos) ){
-		if( !exterieur_monde_vide ){
-	    	tmpPos.x = BorneLong(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
-		    tmpPos.y = BorneLong(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
+      
+      if( !exterieur_monde_vide ){
+	tmpPos.x = BorneLong(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
+	tmpPos.y = BorneLong(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
+	
+	MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
+      }
 
-            MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
-	  	}
-
-		SetXY( tmpPos );
-		break;
+      SetXY( tmpPos );
+      break;
+    }
+ 
+    { // Test if we collide characters...
+      int y_test = m_posy + m_height - m_test_bottom;
+      double norm, angle;
+      GetSpeed(norm, angle);
+      
+      Rectanglei rect( m_posx + m_test_left, y_test,
+		       m_width - m_test_right - m_test_left, 1);
+      
+      FOR_ALL_LIVING_CHARACTERS(team, character)
+	if ((PhysicalObj*)&(*character) != this)
+	  {
+	    if (character->GetTestRect().Intersect( GetTestRect() )) {
+	      // Give speed to other player...     
+	      MSG_DEBUG( "physic.test", "%s - Collision with %s - Give it speed (%d, %d)", m_name.c_str(), character->m_name.c_str(), 
+			 norm, angle );
+	      character->SetSpeed(norm, angle);
+	    }
+	  }
+      //collision = true;
+      //break;
     }
 
-    // Test if we collide something...
+    // Test if we collide on the ground...
     if( CollisionTest(tmpPos) ){
-		MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision: collision en %d,%d par TestCollision.", m_name.c_str(), tmpPos.x, tmpPos.y );
+      MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision: collision en %d,%d par TestCollision.", m_name.c_str(), tmpPos.x, tmpPos.y );
+      
+      // Set the object position to the current position.
+      SetXY( Point2i( (int)round(pos.x - offset.x), (int)round(pos.y - offset.y)) );
+      
+      // Find the contact point and collision angle.
+      // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
+      // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
+      // !!! uninitialised values of cx and cy!!
+      if( ContactPoint(cx, cy) ){
+	contact_angle = world.ground.Tangeante(cx, cy);
+	contactPos.x = (double)cx / PIXEL_PER_METER;
+	contactPos.y = (double)cy / PIXEL_PER_METER;
+      }else{
+	contact_angle = - GetSpeedAngle();
+	contactPos = pos;
+      }
+      
+      collision = true;
+      break;
 
-		// Set the object position to the current position.
-		SetXY( Point2i( (int)round(pos.x - offset.x), (int)round(pos.y - offset.y)) );
-
-		// Find the contact point and collision angle.
-		// !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
-		// !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
-		// !!! uninitialised values of cx and cy!!
-		if( ContactPoint(cx, cy) ){
-			contact_angle = world.ground.Tangeante(cx, cy);
-			contactPos.x = (double)cx / PIXEL_PER_METER;
-			contactPos.y = (double)cy / PIXEL_PER_METER;
-		}else{
-			contact_angle = - GetSpeedAngle();
-			contactPos = pos;
-		}
-
-		collision = true;
-		break;
     }
 
-	// Next motion step
-	pos += offset;
+    // Next motion step
+    pos += offset;
     lg -= 1.0 ;
-  }while (0 < lg);
+  } while (0 < lg);
 
 
   if (ActiveTeam().GetWeaponType() == WEAPON_NINJA_ROPE &&
