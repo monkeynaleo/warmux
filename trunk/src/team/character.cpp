@@ -743,9 +743,10 @@ void Character::SetClotheOnce(std::string name)
   body->SetClotheOnce(name);
 }
 
-bool Character::IsInVacuumXY(const Point2i &position) const{
+bool Character::IsInVacuumXY(const Point2i &position) const
+{
   if( IsOutsideWorldXY(position) )
-	  return exterieur_monde_vide;
+    return exterieur_monde_vide;
 
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
   m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
