@@ -200,7 +200,7 @@
       <nb_ammo>-1</nb_ammo>
       <damage>25</damage>
       <strength>20</strength>
-      <range>25</range>
+      <range>45</range>
     </baseball>
 
     <teleportation>
