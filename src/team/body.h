@@ -115,7 +115,7 @@ public:
   void StartWalk();
   void StopWalk();
   void ResetWalk();
-  bool IsWalking() { return walk_events > 0; };
+  bool IsWalking() { return walk_events > 0 && current_mvt->type == "walk";};
 
   void MakeParticles(const Point2i& pos);
 };
