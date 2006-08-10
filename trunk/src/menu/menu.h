@@ -37,6 +37,7 @@
 typedef enum {
   vOkCancel,
   vOk,
+  vCancel,
   vNo
 } t_action;
 
@@ -50,7 +51,7 @@ public:
    virtual ~Menu();
 
    void Run ();
-   void Redraw(const Rectanglei& rect);
+   virtual void Redraw(const Rectanglei& rect);
 
 private:
    Sprite *background;
@@ -58,7 +59,6 @@ private:
    /* Actions buttons  */
    HBox *actions_buttons;
 
-   void DrawBackground(const Point2i &mousePosition);
    bool BasicOnClic(const Point2i &mousePosition);
 
 protected:
@@ -68,6 +68,7 @@ protected:
 
    void sig_ok();
    void sig_cancel();
+   virtual void DrawBackground(const Point2i &mousePosition);
 
    virtual void key_ok() {};
    virtual void key_cancel() {};

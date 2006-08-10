@@ -45,13 +45,15 @@ typedef enum
 
 class Main_Menu : public Menu
 {
-  PictureWidget *skin_left, *skin_right, *title;
-  Surface s_skin_left, s_skin_right, s_title;
+  PictureWidget *title;
+  Surface s_title;
+
+  Sprite *skin_left, *skin_right;
 
   ButtonText *play, *network, *options, *infos, *quit;
 
-  Text * version_text, * website_text;
-  Font *normal_font, *large_font;
+  Text *version_text, *website_text;
+ 
 
 public:
   menu_item choice;
@@ -60,6 +62,8 @@ public:
   ~Main_Menu();
   menu_item Run ();
 
+  void Redraw(const Rectanglei& rect);
+
 protected:
    void __sig_ok() {};
    void __sig_cancel() {};
@@ -67,7 +71,8 @@ protected:
    void key_cancel();
 
 private:
-  void OnClic(const Point2i &mousePosition, int button);
+   virtual void DrawBackground(const Point2i &mousePosition);
+   void OnClic(const Point2i &mousePosition, int button);
 
   // Main drawing function: refresh parts of screen 
   void Draw(const Point2i &mousePosition) {};
