@@ -65,14 +65,7 @@ void WidgetList::Draw(const Point2i &mousePosition)
       w++)
   {
     // Then redraw the widget
-    if((*w)->enabled)
-      (*w)->Update(mousePosition, lastMousePosition);
-    else
-    {
-      (*w)->Update(Point2i(-1,-1), Point2i(-1,-1));
-      // Gray the widget if it's disabled
-      AppWormux::GetInstance()->video.window.BoxColor((**w), defaultDisabledColorBox);
-    }
+    (*w)->Update(mousePosition, lastMousePosition);
   }
 
   lastMousePosition = mousePosition;
@@ -89,7 +82,7 @@ void WidgetList::Redraw(const Rectanglei& rect)
 
 void WidgetList::SendKey(SDL_keysym key)
 {
-  if(last_clicked != NULL && last_clicked->enabled)
+  if(last_clicked != NULL)
     last_clicked -> SendKey(key);
 }
 
@@ -99,7 +92,7 @@ Widget* WidgetList::Clic(const Point2i &mousePosition, uint button)
       w != widget_list.end();
       w++)
   {
-    if((*w)->enabled && (*w)->Contains(mousePosition))
+    if((*w)->Contains(mousePosition))
     {
       Widget* child = (*w)->Clic(mousePosition,button);
       if(child != NULL)

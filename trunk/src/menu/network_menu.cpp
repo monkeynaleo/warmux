@@ -87,7 +87,7 @@ NetworkMenu::NetworkMenu() :
   inited_players = new Label((std::string)"0" + _(" players ready"), rectZero, *normal_font);
   options_box->AddWidget(connected_players);
   options_box->AddWidget(inited_players);
-  options_box->enabled = false;
+  //options_box->enabled = false;
   widgets.AddWidget(options_box);
 
   msg_box = new MessageBox(11, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), Font::GetInstance(Font::FONT_SMALL));
@@ -138,7 +138,7 @@ NetworkMenu::NetworkMenu() :
   tmp_box->AddWidget(lbox_selected_teams);
 
   team_box->AddWidget(tmp_box);
-  team_box->enabled = false;
+  //team_box->enabled = false;
   widgets.AddWidget(team_box);
 
   last_team = NULL;
@@ -157,7 +157,7 @@ NetworkMenu::NetworkMenu() :
   map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
   map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
   map_box->AddWidget(tmp_box);
-  map_box->enabled = false;
+  //map_box->enabled = false;
   widgets.AddWidget(map_box);
 
   // Values initialization
@@ -183,7 +183,7 @@ NetworkMenu::NetworkMenu() :
   for (; it != end; ++it)
     lbox_all_teams->AddItem (false, (*it).GetName(), (*it).GetId());
 
-  b_ok->enabled = false;
+  //b_ok->enabled = false;
 
   teams_list.Clear();
   Reset();
@@ -205,11 +205,11 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     network.ClientConnect(server_adress->GetText(),WORMUX_NETWORK_PORT);
     if(network.IsConnected())
     {
-      team_box->enabled = true;
-      map_box->enabled = true;
-      lbox_maps->enabled = false;
-      connection_box->enabled = false;
-      b_ok->enabled = true;
+      //team_box->enabled = true;
+      //map_box->enabled = true;
+      //lbox_maps->enabled = false;
+      //connection_box->enabled = false;
+      //b_ok->enabled = true;
       msg_box->NewMessage(_("Connected to ") + server_adress->GetText());
       msg_box->NewMessage("Click the green check when you are ready to");
       msg_box->NewMessage("play!");
@@ -225,10 +225,10 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     if(network.IsConnected())
     {
       network.client_inited = 1;
-      team_box->enabled = true;
-      map_box->enabled = true;
-      options_box->enabled = true;
-      connection_box->enabled = false;
+      // team_box->enabled = true;
+//       map_box->enabled = true;
+//       options_box->enabled = true;
+//       connection_box->enabled = false;
       msg_box->NewMessage(_("Server started"));
     }
     else
@@ -269,10 +269,10 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 void NetworkMenu::Reset()
 {
   //If we are a client and the server disconnected:
-  map_box->enabled = false;
-  team_box->enabled = false;
-  connection_box->enabled = true;
-  lbox_maps->enabled = true;
+//   map_box->enabled = false;
+//   team_box->enabled = false;
+//   connection_box->enabled = true;
+//   lbox_maps->enabled = true;
 
   // Remove selected teams from the list
   while(lbox_selected_teams->GetItemsList()->size()!=0)
@@ -318,9 +318,9 @@ void NetworkMenu::__sig_ok()
     // Wait for the server, and stay in the menu map / team can still be changed
     Action a(ACTION_CHANGE_STATE);
     network.SendAction(&a);
-    b_ok->enabled = false;
-    b_cancel->enabled = false;
-    team_box->enabled = false;
+//     b_ok->enabled = false;
+//     b_cancel->enabled = false;
+//     team_box->enabled = false;
     while(network.state != Network::NETWORK_INIT_GAME)
     {
       Display(Point2i(-1,-1));
@@ -414,10 +414,10 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
 
     if(network.IsServer())
     {
-      if(network.connected_player > 1 && network.client_inited == network.connected_player)
-        b_ok->enabled = true;
-      else
-        b_ok->enabled = false;
+//       if(network.connected_player > 1 && network.client_inited == network.connected_player)
+//         b_ok->enabled = true;
+//       else
+//         b_ok->enabled = false;
       // Check for newly connected client:
       for(std::list<TCPsocket>::iterator adr=network.conn.begin();
           adr != network.conn.end();
