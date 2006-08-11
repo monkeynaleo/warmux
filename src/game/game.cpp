@@ -82,7 +82,6 @@ void Game::MessageLoading()
 {
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
-  std::cout << "Loading game... => Splashscreen is TODO" << std::endl;
 }
 
 void Game::MessageEndOfGame()
