@@ -84,7 +84,6 @@ class Body
   void BuildSqueleton();
   void AddChildMembers(Member* parent);
 
-  void Build(const Point2i& pos);
 public:
   Character* owner;
 
@@ -102,6 +101,7 @@ public:
   void SetFrame(uint no);
   void SetDirection(int dir);
   void PlayAnimation();
+  void Build(const Point2i& pos);
 
   const std::string& GetMovement();
   const std::string& GetClothe();

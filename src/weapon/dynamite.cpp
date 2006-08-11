@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme dynamite : lorqu'on "tire", un baton de dynamite est lâché. Celui
- * explos après un laps de temps. La baton fait alors un gros trou dans la
- * carte, souffle les vers qui sont autour en leur faisant perdre de l'énergie.
+ * Arme dynamite : lorqu'on "tire", un baton de dynamite est lï¿½hï¿½ Celui
+ * explos aprï¿½ un laps de temps. La baton fait alors un gros trou dans la
+ * carte, souffle les vers qui sont autour en leur faisant perdre de l'ï¿½ergie.
  *****************************************************************************/
 
 #include "dynamite.h"
@@ -114,8 +114,10 @@ bool Dynamite::p_Shoot ()
   projectile->Shoot(0);
 
   // Ajoute la vitesse actuelle du ver
-  ActiveCharacter().GetSpeedXY (speed_vector);
-  projectile->SetSpeedXY (speed_vector);
+  if(ActiveCharacter().GetDirection() == 1)
+    projectile->SetSpeed(3.0, -M_PI_4);
+  else
+    projectile->SetSpeed(3.0, -3.0 * M_PI_4);
 
   return true;
 }
