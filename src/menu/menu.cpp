@@ -64,13 +64,13 @@ Menu::Menu(char * bg, t_action _actions) :
   resource_manager.UnLoadXMLProfile(res);
 }
 
-Menu::~Menu(){
+Menu::~Menu()
+{
   delete background;
 }
 
-void Menu::sig_ok(){
-  if(b_ok != NULL && !b_ok->enabled) return;
-
+void Menu::sig_ok()
+{
   jukebox.Play("share", "menu/ok");
   __sig_ok();
   close_menu = true;
@@ -78,8 +78,6 @@ void Menu::sig_ok(){
 
 void Menu::sig_cancel()
 {
-  if(b_cancel != NULL && !b_cancel->enabled) return;
-
   jukebox.Play("share", "menu/cancel");
   __sig_cancel();
   close_menu = true;
@@ -87,9 +85,9 @@ void Menu::sig_cancel()
 
 bool Menu::BasicOnClic(const Point2i &mousePosition)
 {
-  if( b_ok != NULL &&  b_ok->Contains(mousePosition) && b_ok->enabled )
+  if( b_ok != NULL &&  b_ok->Contains(mousePosition) )
     sig_ok();
-  else if( b_cancel != NULL && b_cancel->Contains(mousePosition) && b_cancel->enabled )
+  else if( b_cancel != NULL && b_cancel->Contains(mousePosition) )
     sig_cancel();
   else
     return false;
@@ -132,13 +130,13 @@ void Menu::Run ()
         switch( event.key.keysym.sym)
         {
         case SDLK_ESCAPE: 
-          if(b_cancel != NULL && b_cancel->enabled)
+          if(b_cancel != NULL)
             sig_cancel();
           else
             key_cancel();
           break;
         case SDLK_RETURN: 
-          if(b_ok != NULL && b_ok->enabled)
+          if(b_ok != NULL)
             sig_ok();
           else
             key_ok();

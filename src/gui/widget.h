@@ -37,7 +37,6 @@ class Widget : public Rectanglei
   void StdSetSizePosition(const Rectanglei &rect);
 
  public:
-  bool enabled;
   bool have_focus;
 
   Widget();

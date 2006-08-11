@@ -24,7 +24,6 @@
 
 Widget::Widget()
 {
-  enabled = true;
   have_focus = false;
   ct = NULL;
 
@@ -35,7 +34,6 @@ Widget::Widget(const Rectanglei &rect)
 {
   position = rect.GetPosition();
   size = rect.GetSize();
-  enabled = true;
   have_focus = false;
   ct = NULL;
   
@@ -54,9 +52,7 @@ Widget* Widget::Clic(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
-  if(enabled)
-    return this;
-  return NULL;
+  return this;
 }
 
 void Widget::StdSetSizePosition(const Rectanglei &rect)
