@@ -239,7 +239,9 @@ bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
       break;
     }
  
-    { // Test if we collide characters...
+    if ( typeid(*this) == typeid(Character) ) 
+    { 
+      // Test if we collide characters...
       int y_test = m_posy + m_height - m_test_bottom;
       double norm, angle;
       GetSpeed(norm, angle);
@@ -259,7 +261,7 @@ bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
 	  }
       //collision = true;
       //break;
-    }
+    } 
 
     // Test if we collide on the ground...
     if( CollisionTest(tmpPos) ){
