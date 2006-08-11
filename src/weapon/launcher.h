@@ -41,13 +41,13 @@ class WeaponProjectile : public PhysicalObj
   bool touche_ver_objet;
   bool explode_colliding_character; // before timeout. touche_ver_objet must be true
   double begin_time;
-  int m_timeout_modifier ;
   
   ExplosiveWeaponConfig& cfg;
 
  public:
   Character* dernier_ver_touche;
   PhysicalObj* dernier_obj_touche;
+  int m_timeout_modifier ;
 
  public:
   WeaponProjectile(const std::string &nom, 

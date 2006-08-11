@@ -392,6 +392,7 @@ Action* Network::make_action(Uint32* packet)
   case ACTION_SET_CHARACTER_PHYSICS:  
   case ACTION_SET_TARGET:
   case ACTION_SUPERTUX_STATE:
+  case ACTION_SET_TIMEOUT:
     return new Action(type,input);
 
   default:

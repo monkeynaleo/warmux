@@ -353,6 +353,13 @@ void Action_SetTarget (Action *a)
   ActiveTeam().AccessWeapon().ChooseTarget (target);
 }
 
+void Action_SetTimeout (Action *a)
+{
+  WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
+  assert(launcher != NULL);
+  launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
+}
+
 void ActionHandler::ExecActions()
 {
   assert(mutex!=NULL);
@@ -441,5 +448,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_EXPLOSION, "explosion", &Action_Explosion);
   Register (ACTION_SET_TARGET, "set_target", &Action_SetTarget);
   Register (ACTION_SUPERTUX_STATE, "supertux_state", &Action_SupertuxState);
+  Register (ACTION_SET_TIMEOUT, "set_timeout", &Action_SetTimeout);
   SDL_UnlockMutex(mutex);
 }

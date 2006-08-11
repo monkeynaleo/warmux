@@ -27,6 +27,7 @@
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
+#include "../include/action_handler.h"
 #include "../interface/game_msg.h"
 #include "../map/camera.h"
 #include "../object/objects_list.h"
@@ -438,7 +439,12 @@ void WeaponLauncher::HandleKeyEvent(int action, int event_type)
   break	;     
 
   };
-ActiveCharacter().HandleKeyEvent(action, event_type);
+
+  if((action >= ACTION_WEAPON_1 && action <= ACTION_WEAPON_9)
+  || action == ACTION_WEAPON_MORE || action == ACTION_WEAPON_LESS)
+    ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
+
+  ActiveCharacter().HandleKeyEvent(action, event_type);
 }
 
 void WeaponLauncher::ActionUp(){ //called by mousse.cpp when mousewhellup 
