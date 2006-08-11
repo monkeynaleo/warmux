@@ -28,10 +28,10 @@
 
 class SnipeBullet : public WeaponBullet
 {
-public:
-  SnipeBullet(ExplosiveWeaponConfig& cfg); 
-private:
-  void ShootSound();
+  public:
+    SnipeBullet(ExplosiveWeaponConfig& cfg); 
+  private:
+    void ShootSound();
 };
 
 class SnipeRifle : public WeaponLauncher
@@ -40,22 +40,25 @@ class SnipeRifle : public WeaponLauncher
   double last_angle;
   Point2i last_bullet_pos;
   Point2i last_rifle_pos;
+  Point2i current_rifle_pos;
   Point2i * cross_point;
+  bool targeting_something;
   Sprite * m_laser_image;
- private:
-  bool p_Shoot();
-  void RepeatShoot(); 
-  void Refresh(){};
+  private:
+    bool p_Shoot();
+    void RepeatShoot(); 
+    void Refresh(){};
 
-protected:
-  uint m_first_shoot;
+  protected:
+    uint m_first_shoot;
 
-public:
-  SnipeRifle();
-  void Draw();
-  Point2i * GetCrossPoint();
-  bool ComputeCrossPoint();
-  void HandleKeyEvent(int action, int event_type);
+  public:
+    SnipeRifle();
+    void Draw();
+    Point2i * GetCrossPoint();
+    bool ComputeCrossPoint();
+    bool isTargetingSomething();
+    void HandleKeyEvent(int action, int event_type);
 };
 
 #endif /* __SNIPE_RIFLE_H */

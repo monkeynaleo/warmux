@@ -33,7 +33,7 @@ const double SOUFFLE_BALLE = 2;
 const double MIN_TIME_BETWEEN_SHOOT = 1000; // in milliseconds
 
 SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg) :
-  WeaponBullet("snipe_rifle_bullet", cfg)
+    WeaponBullet("snipe_rifle_bullet", cfg)
 { 
   cfg.explosion_range = 15;
 }
@@ -54,7 +54,7 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
 
   projectile = new SnipeBullet(cfg());
   cross_point = new Point2i();
-  //m_laser_image = NULL ;
+  targeting_something = false;
   m_laser_image = new Sprite( resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
 }
 
@@ -74,11 +74,12 @@ void SnipeRifle::RepeatShoot()
 bool SnipeRifle::p_Shoot()
 {
   jukebox.Play("share", "weapon/uzi"); // TODO : Change this sound for another ?
-  
   // Calculate movement of the bullet
   // Set the initial position.
   Point2i pos = ActiveCharacter().GetHandPosition();
 
+  m_first_shoot=Time::GetInstance()->Read();
+  
   // Equation of movement : y = ax + b
   double angle, a, b;
   angle = ActiveTeam().crosshair.GetAngleRad();
@@ -100,25 +101,25 @@ bool SnipeRifle::p_Shoot()
   projectile->is_active = true;
   
   while( projectile->is_active ){
-	
-	// shooting upwards  ( -3pi/4 < angle <-pi/4 ) 
-	if (angle < -0.78 && angle > -2.36){ 
-		pos.x = (int)((pos.y-b)/a);  	//Calculate x
-		delta_pos.y=-1;			//Increment y
-	//shooting downwards ( 3pi/4 > angle > pi/4 )
-	}else if (angle > 0.78 && angle < 2.36){ 
-		pos.x = (int)((pos.y-b)/a);	//Calculate x
-		delta_pos.y=1;			//Increment y
-	// else shooting at right or left 
-	}else{ 
-    		pos.y = (int)((a*pos.x) + b);	//Calculate y
-		delta_pos.x=ActiveCharacter().GetDirection();	//Increment x
-	}
+        
+        // shooting upwards  ( -3pi/4 < angle <-pi/4 ) 
+    if (angle < -0.78 && angle > -2.36){ 
+      pos.x = (int)((pos.y-b)/a);     //Calculate x
+      delta_pos.y=-1;                 //Increment y
+        //shooting downwards ( 3pi/4 > angle > pi/4 )
+    }else if (angle > 0.78 && angle < 2.36){ 
+      pos.x = (int)((pos.y-b)/a);     //Calculate x
+      delta_pos.y=1;                  //Increment y
+        // else shooting at right or left 
+    }else{ 
+      pos.y = (int)((a*pos.x) + b);   //Calculate y
+      delta_pos.x=ActiveCharacter().GetDirection();   //Increment x
+    }
 
     projectile->SetXY( pos );
 
     // the bullet in gone outside the map
-   if ( ( world.EstHorsMondeX(projectile->GetX()) ) || ( world.EstHorsMondeY(projectile->GetY()) )) {  //IsGhost does not check the Y side.
+    if ( ( world.EstHorsMondeX(projectile->GetX()) ) || ( world.EstHorsMondeY(projectile->GetY()) )) {  //IsGhost does not check the Y side.
       projectile->is_active=false;
       last_angle = angle;
       last_bullet_pos = pos;
@@ -135,7 +136,7 @@ bool SnipeRifle::p_Shoot()
       projectile->Explosion();
       return true;
     }
-  pos += delta_pos;
+    pos += delta_pos;
   }
 
   return true;
@@ -143,13 +144,19 @@ bool SnipeRifle::p_Shoot()
 
 bool SnipeRifle::ComputeCrossPoint()
 {
+  // Did the current character is moving ?
+  Point2i pos = ActiveCharacter().GetHandPosition();
+  double angle = ActiveTeam().crosshair.GetAngleRad();
+  if ( (current_rifle_pos == pos) && (last_angle == angle)) return targeting_something;
+  else {
+    current_rifle_pos=pos;
+    last_angle=angle;
+  }
+
   // Get the target point
   // Set the initial position.
-  Point2i pos = ActiveCharacter().GetHandPosition();
-
   // Equation of movement : y = ax + b
-  double angle, a, b;
-  angle = ActiveTeam().crosshair.GetAngleRad();
+  double a, b;
   a = sin(angle)/cos(angle);
   b = pos.y - ( a * pos.x ) ;
   Point2i delta_pos;
@@ -171,23 +178,28 @@ bool SnipeRifle::ComputeCrossPoint()
 
     // the point is outside the map
     if ( ( world.EstHorsMondeX(pos.x) ) || ( world.EstHorsMondeY(pos.y) )) {
-      return false;
+      *cross_point=pos;
+      return targeting_something = false;
     }
 
     // is there a collision ??
     if(projectile->CollisionTest( pos ) ){
       *cross_point=pos;
-      return true;
+      return targeting_something = true;
     }
     pos += delta_pos;
   }
-  return false;
+  return targeting_something = false;
 }
 
 Point2i * SnipeRifle::GetCrossPoint()
 {
-  if (ComputeCrossPoint()) return cross_point;
-  else return NULL;
+  return cross_point;
+}
+
+bool SnipeRifle::isTargetingSomething()
+{
+  return targeting_something;
 }
 
 void SnipeRifle::HandleKeyEvent(int action, int event_type)
@@ -195,22 +207,23 @@ void SnipeRifle::HandleKeyEvent(int action, int event_type)
   GetCrossPoint();
   switch (action) {    
 
-  case ACTION_SHOOT:
-    if (event_type == KEY_REFRESH)
-      RepeatShoot();
+    case ACTION_SHOOT:
+      if (event_type == KEY_REFRESH)
+        RepeatShoot();
 
-    if (event_type == KEY_RELEASED)
-      m_is_active = false;
+      if (event_type == KEY_RELEASED)
+        m_is_active = false;
 
-    break;
-  default:
-    break;
+      break;
+    default:
+      break;
   };
 }
 
 void SnipeRifle::Draw()
 {
+  if( IsActive() ) return ;
+  ComputeCrossPoint();
+  if(targeting_something) m_laser_image->Draw(*GetCrossPoint());      // Draw the laser impact
   WeaponLauncher::Draw();
-  if(GetCrossPoint() != NULL)
-    m_laser_image->Draw(*GetCrossPoint());
 }
