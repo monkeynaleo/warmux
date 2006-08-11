@@ -493,7 +493,6 @@ void Physics::RunPhysicalEngine()
   Point2d newPos;
   Point2d contactPos;
   double contact_angle;
-  bool contact = false;
 
   step_t = PHYS_DELTA_T;
 
@@ -510,15 +509,15 @@ void Physics::RunPhysicalEngine()
     
     newPos = ComputeNextXY(step_t);
     
-    if( !(newPos == oldPos) )  {
+    if( newPos != oldPos)  {
       // The object has moved. Notify the son class.
       MSG_DEBUG( "physic.move", "Move %s (%f, %f) -> (%f, %f)", typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
-      contact = NotifyMove(oldPos, newPos, contactPos, contact_angle);
-    }
-    
-    if (contact){
-      MSG_DEBUG( "physic.coll", "Collision durant le d�lacement (%f, %f) -> (%f, %f)", oldPos.x, oldPos.y, newPos.x, newPos.y);
-      Rebound(contactPos, contact_angle);
+
+      
+      if ( NotifyMove(oldPos, newPos, contactPos, contact_angle) ) {
+	MSG_DEBUG( "physic.coll", "Collision durant le d�lacement (%f, %f) -> (%f, %f)", oldPos.x, oldPos.y, newPos.x, newPos.y);
+	Rebound(contactPos, contact_angle);
+      }
     }
     
     delta_t -= PHYS_DELTA_T ;
