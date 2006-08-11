@@ -42,6 +42,7 @@ private:
   std::string character_name;
   Team& m_team;
   bool step_sound_played;
+  bool prepare_shoot;
 
   // energy
   uint energy;
@@ -109,7 +110,8 @@ public:
 
   // Handle a key event on the character.
   void HandleKeyEvent(int key, int event_type) ;
-  void DoShoot() ;
+  void PrepareShoot();
+  void DoShoot();
   void HandleShoot(int event_type) ;
 
   // Se prepare a un nouveau tour

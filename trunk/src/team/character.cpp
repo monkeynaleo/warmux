@@ -91,6 +91,7 @@ Character::Character (Team& my_team, const std::string &name) :
   do_nothing_time = 0;
   m_allow_negative_y = true;
   animation_time = Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
+  prepare_shoot = false;
 
   // Damage count
   damage_other_team = 0;
@@ -317,6 +318,18 @@ void Character::Draw()
 
 
   Point2i pos = GetPosition();
+
+  if(prepare_shoot)
+  {
+    body->Build(Point2i(0,0)); // Refresh the body
+    if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
+    {
+      // if the movement is finnished, shoot !
+      DoShoot();
+      prepare_shoot = false;
+    }
+  }
+
   body->Draw(pos);
 
    // Draw energy bar
@@ -391,9 +404,22 @@ void Character::HighJump ()
   SetSpeed (GameMode::GetInstance()->character.super_jump_strength, angle);
 }
 
+void Character::PrepareShoot()
+{
+  SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot");
+  if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
+  {
+    // If a movement is defined for this weapon, just shoot
+    DoShoot();
+  }
+  else
+    prepare_shoot = true;
+}
+
 void Character::DoShoot()
 {
   ActiveTeam().AccessWeapon().StopLoading();
+  SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
   ActiveTeam().GetWeapon().NewActionShoot();
 }
 
@@ -402,16 +428,16 @@ void Character::HandleShoot(int event_type)
   switch (event_type) {
     case KEY_PRESSED:
       if (ActiveTeam().GetWeapon().max_strength == 0)
-	DoShoot();
+        PrepareShoot();
       else
-	if ( (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
-	     && ActiveTeam().GetWeapon().IsReady() )
-	  ActiveTeam().AccessWeapon().InitLoading();
+      if ( (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
+         && ActiveTeam().GetWeapon().IsReady() )
+        ActiveTeam().AccessWeapon().InitLoading();
       break ;
 
     case KEY_RELEASED:
       if (ActiveTeam().GetWeapon().IsLoading())
-	DoShoot();
+	PrepareShoot();
       break ;
 
     case KEY_REFRESH:
@@ -420,7 +446,7 @@ void Character::HandleShoot(int event_type)
 	  // Strength == max strength -> Fire !!!
 	  if (ActiveTeam().GetWeapon().ReadStrength() >=
 	      ActiveTeam().GetWeapon().max_strength)
-	    DoShoot();
+	    PrepareShoot();
 	  else
 	    {
 	      // still pressing the Space key

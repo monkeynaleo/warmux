@@ -74,6 +74,20 @@ Body::Body(xmlpp::Element* xml, Profile* res)
     it2++;
   }
 
+  // Load movements alias
+  xmlpp::Node::NodeList nodes4 = xml -> get_children("alias");
+  xmlpp::Node::NodeList::iterator it4=nodes4.begin();
+  std::map<std::string, std::string> mvt_alias;
+  while(it4 != nodes4.end())
+   {
+    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it4);
+    std::string mvt, corresp;
+    LitDocXml::LitAttrString( elem, "movement", mvt);
+    LitDocXml::LitAttrString( elem, "correspond_to", corresp);
+    mvt_alias.insert(std::make_pair(mvt,corresp));
+    it4++;
+  }
+
   // Load movements
   xmlpp::Node::NodeList nodes3 = xml -> get_children("movement");
   xmlpp::Node::NodeList::iterator it3=nodes3.begin();
@@ -88,6 +102,15 @@ Body::Body(xmlpp::Element* xml, Profile* res)
 
     Movement* mvt = new Movement(elem);
     mvt_lst[name] = mvt;
+
+    for(std::map<std::string, std::string>::iterator it = mvt_alias.begin();
+        it != mvt_alias.end();  ++it)
+    if(it->second == name)
+    {
+      Movement* mvt = new Movement(elem);
+      mvt->type = it->first;
+      mvt_lst[it->first] = mvt;
+    }
 
     it3++;
   }
