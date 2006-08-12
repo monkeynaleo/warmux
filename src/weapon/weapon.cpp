@@ -68,7 +68,7 @@ extern WeaponStrengthBar weapon_strength_bar;
 Weapon::Weapon(Weapon_type type, 
 	       const std::string &id,
 	       EmptyWeaponConfig * params,
-	       uint visibility)
+	       weapon_visibility_t visibility)
 {
   m_type = type;
   m_id = id;
