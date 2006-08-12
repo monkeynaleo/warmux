@@ -716,7 +716,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     MSG_DEBUG("physic.position", "%s - Test in %d, %d",  m_name.c_str(), position.x, position.y);
 
     // Check physical object is not in the ground
-    ok &= !IsGhost() && IsInVacuum( Point2i(0,0) )  && IsInVacuum( Point2i(0, 1) );
+    ok &= !IsGhost() && world.ParanoiacRectIsInVacuum(GetTestRect())  && IsInVacuum( Point2i(0, 1) );
     if (!ok) {
       MSG_DEBUG("physic.position", "%s - Put it in the ground -> try again !", m_name.c_str());
       continue;

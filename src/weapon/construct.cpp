@@ -77,7 +77,7 @@ void Construct::Draw()
 void Construct::ChooseTarget(Point2i mouse_pos)
 {
   dst = mouse_pos;
-  if( !world.RectEstDansVide(
+  if( !world.ParanoiacRectIsInVacuum(
           Rectanglei(dst - construct_spr->GetSizeMax()/2,
                      construct_spr->GetSizeMax() ))
   || ActiveCharacter().IsMoving())
@@ -98,7 +98,7 @@ void Construct::HandleKeyEvent(int action, int event_type)
         angle -= angle_step;
       break ;
     case ACTION_SHOOT:
-      if(world.RectEstDansVide( Rectanglei(dst - construct_spr->GetSizeMax()/2,
+      if(world.ParanoiacRectIsInVacuum( Rectanglei(dst - construct_spr->GetSizeMax()/2,
                                            construct_spr->GetSizeMax() ))
       && !ActiveCharacter().IsMoving())
         ActiveTeam().GetWeapon().NewActionShoot();

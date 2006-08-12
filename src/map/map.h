@@ -70,6 +70,7 @@ public:
   bool LigneH_EstDansVide (int left, int y,  int right);
   bool LigneV_EstDansVide (int x,  int top, int bottom);
   bool RectEstDansVide (const Rectanglei &rect);
+  bool ParanoiacRectIsInVacuum (const Rectanglei &rect);
 
   // La ligne du haut/bas d'un objet physique est dans le vide ?
   // Le test se fait sur le rectangle de test d�al�de dx et dy.
