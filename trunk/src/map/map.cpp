@@ -213,6 +213,7 @@ bool Map::LigneH_EstDansVide (int ox, int y, int width)
    return true;
 }
 
+// TODO : for consistency, LigneV_EstDansVide should use a 'height' as LigneH does it ...
 bool Map::LigneV_EstDansVide (int x, int top, int bottom)
 { 
   assert (top <= bottom);
@@ -236,13 +237,27 @@ bool Map::RectEstDansVide (const Rectanglei &prect)
    Rectanglei rect(prect);
 
    // Clip rectangle in the the world area
-   rect.Clip( Rectanglei(0, 0, GetWidth(), GetHeight()) ); 
-   
-   // Check line by line
-   for( int i = rect.GetPositionY(); i < rect.GetPositionY() + rect.GetSizeY(); i++ )
-     if( !LigneH_EstDansVide (rect.GetPositionX(), i, rect.GetSizeX()) )
+   rect.Clip( Rectanglei(0, 0, GetWidth(), GetHeight()) );
+
+   // Only check the borders of the rectangle
+   if(rect.GetSizeX()==0 || rect.GetSizeY()==0)
+     return true;
+
+   if(!LigneH_EstDansVide (rect.GetPositionX(), rect.GetPositionY(), rect.GetSizeX()))
+     return false;
+
+   if(rect.GetSizeY() > 1)
+   {
+     if(!LigneH_EstDansVide (rect.GetPositionX(), rect.GetPositionY() + rect.GetSizeY() - 1, rect.GetSizeX()))
        return false;
-   
+     if(!LigneV_EstDansVide (rect.GetPositionX(), rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
+       return false;
+
+     if(rect.GetSizeX() > 1)
+     if(!LigneV_EstDansVide (rect.GetPositionX()+rect.GetSizeX()-1, rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
+       return false;
+   }
+
    return true;
 }
 
