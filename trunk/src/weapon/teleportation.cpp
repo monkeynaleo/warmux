@@ -45,7 +45,11 @@ bool Teleportation::p_Shoot ()
   // V�ifie qu'on se t��orte dans le vide !
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
 	 return false;
-  if( !ActiveCharacter().IsInVacuumXY(dst) )
+
+  Rectanglei rect = ActiveCharacter().GetTestRect();
+  rect.SetPosition(dst); 
+
+  if(!world.ParanoiacRectIsInVacuum(rect))
 	 return false; 
 
   GameLoop::GetInstance()->interaction_enabled = false;

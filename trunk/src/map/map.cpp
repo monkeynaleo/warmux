@@ -234,6 +234,8 @@ bool Map::LigneV_EstDansVide (int x, int top, int bottom)
 
 bool Map::RectEstDansVide (const Rectanglei &prect)
 {
+   // only check whether the border touch the ground
+
    Rectanglei rect(prect);
 
    // Clip rectangle in the the world area
@@ -257,6 +259,24 @@ bool Map::RectEstDansVide (const Rectanglei &prect)
      if(!LigneV_EstDansVide (rect.GetPositionX()+rect.GetSizeX()-1, rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
        return false;
    }
+
+   return true;
+}
+
+bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect)
+{
+   // only check whether the rectangle touch the ground pixel by pixel
+   // Prefere using the method above, as performing a pixel by pixel test is quite slow!
+
+   Rectanglei rect(prect);
+
+   // Clip rectangle in the the world area
+   rect.Clip( Rectanglei(0, 0, GetWidth(), GetHeight()) );
+
+   // Check line by line
+   for( int i = rect.GetPositionY(); i < rect.GetPositionY() + rect.GetSizeY(); i++ )
+     if( !LigneH_EstDansVide (rect.GetPositionX(), i, rect.GetSizeX()) )
+       return false;
 
    return true;
 }
