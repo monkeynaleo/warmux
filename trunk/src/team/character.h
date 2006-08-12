@@ -152,10 +152,6 @@ public:
   int  GetOwnDamage() const { return damage_own_team; }
   int  GetOtherDamage() const { return damage_other_team; }
 
-  // Physics handling
-  virtual bool IsInVacuumXY(const Point2i &position) const;
-  virtual bool FootsInVacuumXY(const Point2i &position) const;
-
   // Body handling
   void SetBody(Body* _body);
   void SetClothe(std::string name);

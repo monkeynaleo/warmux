@@ -37,7 +37,7 @@ ParticleEngine global_particle_engine;
 Particle::Particle(const std::string &name) :
   PhysicalObj(name)
 {
-  m_go_through_wall = true;
+  m_goes_through_wall = true;
   m_initial_time_to_live = 20;
   m_left_time_to_live = 0;
   m_last_refresh = Time::GetInstance()->Read();
@@ -227,7 +227,7 @@ ExplosiveWeaponConfig fire_cfg;
 FireParticle::FireParticle() :
   Particle("fire_particle")
 {
-  m_go_through_wall = false;
+  m_goes_through_wall = false;
   m_initial_time_to_live = 15;
   m_left_time_to_live = m_initial_time_to_live;
   m_time_between_scale = 50;
@@ -252,7 +252,7 @@ void FireParticle::SignalFallEnding()
 BulletParticle::BulletParticle() :
   Particle("bullet_particle")
 {
-  m_go_through_wall = false;
+  m_goes_through_wall = false;
   m_rebound_sound = "weapon/grenade_bounce";
   m_left_time_to_live = 1;
 
@@ -275,7 +275,7 @@ void BulletParticle::Refresh()
 void BulletParticle::SignalRebound()
 {
   PhysicalObj::SignalRebound();
-  m_go_through_wall = true;
+  m_goes_through_wall = true;
 }
 
 // ==============================================
@@ -306,7 +306,7 @@ void GroundParticle::Refresh()
 BodyMemberParticle::BodyMemberParticle(Sprite* spr, const Point2i& position) :
   Particle("body_member_particle")
 {
-  m_go_through_wall = false;
+  m_goes_through_wall = false;
   m_left_time_to_live = 100;
   image = new Sprite(spr->GetSurface());
   image->EnableRotationCache(32);

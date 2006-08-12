@@ -80,6 +80,10 @@ const uint HAUT_ENERGIE = 6;
 Character::Character (Team& my_team, const std::string &name) :
   PhysicalObj("character"), m_team(my_team)
 {
+  m_goes_through_wall = false;
+  m_collides_with_characters = true;
+  m_collides_with_objects = false;
+
   body = NULL;
   step_sound_played = true;
   pause_bouge_dg = 0;
@@ -786,62 +790,6 @@ void Character::SetClotheOnce(std::string name)
 {
   MSG_DEBUG("body","Character %s -> SetClotheOnce : %s",character_name.c_str(),name.c_str());
   body->SetClotheOnce(name);
-}
-
-bool Character::IsInVacuumXY(const Point2i &position) const
-{
-  if( IsOutsideWorldXY(position) )
-    return exterieur_monde_vide;
-
-  Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
-  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
-
-  FOR_ALL_LIVING_CHARACTERS(equipe,ver)
-  if ((PhysicalObj*)&(*ver) != this)
-  {
-    if (ver->GetTestRect().Intersect( rect ))
-        return false;
-  }
-
-  if( FootsOnFloor(position.y - 1) )
-	  return false;
-
-  return world.RectEstDansVide (rect);
-}
-
-bool Character::FootsInVacuumXY(const Point2i &position) const
-{
-  if( IsOutsideWorldXY(position) ){
-	MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
-	return exterieur_monde_vide;
-  }
-
-  if( FootsOnFloor(position.y) ){
-	 MSG_DEBUG("physical", "%s - physobj is on floor", m_name.c_str());
-     return false;
-  }
-
-
-  int y_test = position.y + m_height - m_test_bottom;
-
-  Rectanglei rect( position.x + m_test_left, y_test,
-		 m_width - m_test_right - m_test_left, 1);
-
-  FOR_ALL_LIVING_CHARACTERS(equipe,ver)
-  if ((PhysicalObj*)&(*ver) != this)
-  {
-    if (ver->GetTestRect().Intersect( rect ))
-        return false;
-  }
-
-  if( m_allow_negative_y && rect.GetPositionY() < 0){
-	  int b = rect.GetPositionY() + rect.GetSizeY();
-
-	  rect.SetPositionY( 0 );
-	  rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
-  }
-
-  return world.RectEstDansVide (rect);
 }
 
 uint Character::GetTeamIndex()

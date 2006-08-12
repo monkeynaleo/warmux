@@ -51,7 +51,11 @@ private:
 
 protected:
   bool exterieur_monde_vide;
-  bool m_go_through_wall;
+  
+  // collision management
+  bool m_goes_through_wall;
+  bool m_collides_with_characters;
+  bool m_collides_with_objects;
 
   std::string m_name;
 
@@ -102,7 +106,7 @@ public:
   int GetCenterY() const;
   const Point2i GetCenter() const;
   const Rectanglei GetRect() const;
-  bool GoThroughWall() const { return m_go_through_wall; }
+  bool GoesThroughWall() const { return m_goes_through_wall; }
 
   //----------- Physics related function ----------
 
@@ -115,9 +119,9 @@ public:
                                          // where the object is moved
 
 
-  virtual bool IsInVacuumXY(const Point2i &position) const;
+  bool IsInVacuumXY(const Point2i &position) const;
   bool IsInVacuum(const Point2i &offset) const; // relative to current position
-  virtual bool FootsInVacuumXY(const Point2i &position) const;
+  bool FootsInVacuumXY(const Point2i &position) const;
   bool FootsInVacuum() const;
   
   bool FootsOnFloor(int y) const;
