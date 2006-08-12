@@ -43,7 +43,7 @@ Wind wind;
 WindParticle::WindParticle(std::string &xml_file) :
   PhysicalObj("wind",xml_file)
 {
-  m_go_through_wall = true;
+  m_goes_through_wall = true;
   sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
 //  if(sprite->GetFrameCount()==1)
 //    sprite->cache.EnableLastFrameCache();

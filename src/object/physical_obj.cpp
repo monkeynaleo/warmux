@@ -27,6 +27,7 @@
 #include <iostream>
 #include "physical_obj.h"
 #include "physics.h"
+#include "objects_list.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../map/map.h"
@@ -54,7 +55,10 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_width(0),
   m_height(0)
 {
-  m_go_through_wall = false;
+  m_goes_through_wall = false;
+  m_collides_with_characters = false;
+  m_collides_with_objects = false;
+
   m_allow_negative_y = false;
   m_alive = ALIVE;
 
@@ -219,7 +223,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   // First iteration position.
   pos = oldPos + offset;
 
-  if (m_go_through_wall || IsInWater())
+  if (m_goes_through_wall || IsInWater())
     return;
 
   do
@@ -313,7 +317,7 @@ void PhysicalObj::UpdatePosition ()
   // No ghost allowed here !
   if (IsGhost()) return;
 
-  if ( !m_go_through_wall )
+  if ( !m_goes_through_wall )
     {
       // object is not moving and has no reason to move
       if ( !IsMoving() && !FootsInVacuum() && !IsInWater() ) return;
@@ -332,7 +336,7 @@ void PhysicalObj::UpdatePosition ()
   if (IsGhost()) return;
 
   // Classical object sometimes sinks in water and sometimes goes out of water!
-  if ( !m_go_through_wall )
+  if ( !m_goes_through_wall )
     {
       if ( IsInWater() && m_alive != DROWNED ) Drown();
       else if ( !IsInWater() && m_alive == DROWNED ) GoOutOfWater();
@@ -497,11 +501,13 @@ bool PhysicalObj::FootsOnFloor(int y) const
   return (y_max <= y);
 }
 
-bool PhysicalObj::IsInVacuum(const Point2i &offset) const{
+bool PhysicalObj::IsInVacuum(const Point2i &offset) const
+{
   return IsInVacuumXY(GetPosition() + offset);
 }
 
-bool PhysicalObj::IsInVacuumXY(const Point2i &position) const{
+bool PhysicalObj::IsInVacuumXY(const Point2i &position) const
+{
   if( IsOutsideWorldXY(position) )
 	  return exterieur_monde_vide;
 
@@ -511,7 +517,28 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position) const{
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
 		  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
+  if (m_collides_with_characters)
+    {
+      FOR_ALL_LIVING_CHARACTERS(equipe,ver)
+	if ((PhysicalObj*)&(*ver) != this)
+	  {
+	    if (ver->GetTestRect().Intersect( rect ))
+	      return false;
+	  }
+    }
+
+  if (m_collides_with_objects)
+    {
+      FOR_EACH_OBJECT(object)
+	if (object -> ptr != this)
+	  {
+	    if ( object->ptr->GetTestRect().Intersect( rect ) )
+	      return false;
+	  }
+    }
+
   return world.RectEstDansVide (rect);
+
 }
 
 bool PhysicalObj::FootsInVacuum() const{
@@ -534,14 +561,36 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 
   Rectanglei rect( position.x + m_test_left, y_test,
 		 m_width - m_test_right - m_test_left, 1);
-  if( m_allow_negative_y && rect.GetPositionY() < 0){
-	  int b = rect.GetPositionY() + rect.GetSizeY();
 
-	  rect.SetPositionY( 0 );
-	  rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
+  if( m_allow_negative_y && rect.GetPositionY() < 0){
+    int b = rect.GetPositionY() + rect.GetSizeY();
+
+    rect.SetPositionY( 0 );
+    rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
   }
 
+  if (m_collides_with_characters)
+    {
+      FOR_ALL_LIVING_CHARACTERS(equipe,ver)
+	if ((PhysicalObj*)&(*ver) != this)
+	  {
+	    if (ver->GetTestRect().Intersect( rect ))
+	      return false;
+	  }
+    }
+
+  if (m_collides_with_objects)
+    {
+      FOR_EACH_OBJECT(object)
+	if (object -> ptr != this)
+	  {
+	    if ( object->ptr->GetTestRect().Intersect( rect ) )
+	      return false;
+	  }
+    }
+
   return world.RectEstDansVide (rect);
+
 }
 
 bool PhysicalObj::IsInWater () const

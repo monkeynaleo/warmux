@@ -63,7 +63,7 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   PhysicalObj("air_attack_plane"),
   cfg(p_cfg)
 {
-  m_go_through_wall = true;
+  m_goes_through_wall = true;
   m_alive = GHOST;
 
   image = resource_manager.LoadSprite( weapons_res_profile, "air_attack_plane");
