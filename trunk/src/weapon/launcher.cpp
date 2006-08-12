@@ -308,7 +308,7 @@ bool WeaponProjectile::change_timeout_allowed()
 WeaponLauncher::WeaponLauncher(Weapon_type type, 
 			       const std::string &id,
 			       EmptyWeaponConfig * params,
-			       uint visibility) :
+			       weapon_visibility_t visibility) :
   Weapon(type, id, params, visibility)
 {  
   projectile = NULL;

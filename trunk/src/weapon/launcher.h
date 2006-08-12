@@ -106,7 +106,7 @@ class WeaponLauncher : public Weapon
   WeaponLauncher(Weapon_type type, 
 		 const std::string &id,
 		 EmptyWeaponConfig * params,
-		 uint visibility = ALWAYS_VISIBLE);
+		 weapon_visibility_t visibility = ALWAYS_VISIBLE);
   virtual ~WeaponLauncher();
 
   void Refresh();

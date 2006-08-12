@@ -47,12 +47,12 @@ extern const uint BUTTON_ICO_HEIGHT;
 extern const uint WEAPON_ICO_WIDTH;
 extern const uint WEAPON_ICO_HEIGHT;
 
-enum weapon_visibility {
+typedef enum weapon_visibility {
   ALWAYS_VISIBLE,
   NEVER_VISIBLE,
   VISIBLE_ONLY_WHEN_ACTIVE,
   VISIBLE_ONLY_WHEN_INACTIVE
-};
+} weapon_visibility_t;
 
 class WeaponStrengthBar : public BarreProg
 {
@@ -96,8 +96,8 @@ protected:
   EmptyWeaponConfig *extra_params;
 
   // Visibility
-  uint m_visibility;
-  uint m_unit_visibility;
+  weapon_visibility_t m_visibility;
+  weapon_visibility_t m_unit_visibility;
 
   // how many times can we use this weapon (since the beginning of the game) ?
   int m_initial_nb_ammo;
@@ -135,7 +135,7 @@ public:
   Weapon(Weapon_type type, 
 	 const std::string &id,
 	 EmptyWeaponConfig * params,
-	 uint visibility = ALWAYS_VISIBLE);
+	 weapon_visibility_t visibility = ALWAYS_VISIBLE);
   virtual ~Weapon() {}
 
   // Select or deselect the weapon
