@@ -114,8 +114,6 @@ public:
   bool PutOutOfGround(double direction); //Where direction is the angle of the direction
                                          // where the object is moved
 
-  bool NotifyMove(Point2d oldPos, Point2d newPos, Point2d &contactPos,
-		  double &contact_angle);
 
   virtual bool IsInVacuumXY(const Point2i &position) const;
   bool IsInVacuum(const Point2i &offset) const; // relative to current position
@@ -166,6 +164,8 @@ private:
 
   // Collision test for point (x,y)
   virtual bool CollisionTest(const Point2i &position);
+
+  void NotifyMove(Point2d oldPos, Point2d newPos);
 
   
   // The object fall directly to the ground (or become a ghost)

@@ -191,15 +191,16 @@ const Rectanglei PhysicalObj::GetTestRect() const
 
 // Move to a point with collision test
 // Return true if collision occured
-bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
-			     Point2d &contactPos, double &contact_angle)
+void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 {
   Point2d pos, offset;
   int cx, cy;
   bool collision = false ;
+  Point2d contactPos(0,0);
+  double contact_angle=0;
 
   if(IsGhost())
-    return false;
+    return;
 
   // Convert meters to pixels.
   oldPos *= PIXEL_PER_METER;
@@ -209,7 +210,7 @@ bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
   double lg = oldPos.Distance( newPos);
 
   if (lg == 0)
-    return false ;
+    return;
 
   // Compute increments to move the object step by step from the old
   // to the new position.
@@ -219,7 +220,7 @@ bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
   pos = oldPos + offset;
 
   if (m_go_through_wall || IsInWater())
-    return false ;
+    return;
 
   do
   {
@@ -301,7 +302,10 @@ bool PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos,
     ninjarope->NotifyMove(collision) ;
   }
 
-  return collision;
+  if (collision)
+    Rebound(contactPos, contact_angle);
+
+  return;
 }
 
 void PhysicalObj::UpdatePosition ()
