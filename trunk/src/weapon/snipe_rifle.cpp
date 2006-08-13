@@ -29,6 +29,7 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
+
 const double SOUFFLE_BALLE = 2;
 const double MIN_TIME_BETWEEN_SHOOT = 1000; // in milliseconds
 
@@ -40,6 +41,7 @@ SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg) :
 
 void SnipeBullet::ShootSound()
 {
+  jukebox.Play("share","weapon/gun");
 }
 
 //-----------------------------------------------------------------------------
@@ -58,86 +60,13 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   m_laser_image = new Sprite( resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
 }
 
-void SnipeRifle::RepeatShoot()
-{  
-  uint time = Time::GetInstance()->Read() - m_first_shoot; 
-  uint tmp = Time::GetInstance()->Read();
-
-  if (time >= MIN_TIME_BETWEEN_SHOOT)
-  {
-    m_is_active = false;
-    NewActionShoot();
-    m_first_shoot = tmp;
-  }
-}
-
 bool SnipeRifle::p_Shoot()
 {
-  jukebox.Play("share", "weapon/uzi"); // TODO : Change this sound for another ?
-  // Calculate movement of the bullet
-  // Set the initial position.
-  Point2i pos = ActiveCharacter().GetHandPosition();
+  if (m_is_active)
+    return false;  
 
-  m_first_shoot=Time::GetInstance()->Read();
-  
-  // Equation of movement : y = ax + b
-  double angle, a, b;
-  angle = ActiveTeam().crosshair.GetAngleRad();
-  a = sin(angle)/cos(angle);
-  b = pos.y - ( a * pos.x ) ;
-  Point2i delta_pos ;
-
-  // Add a particle for the empty bullet
-  particle.AddNow(pos, 1, particle_BULLET, true, angle + M_PI + ActiveCharacter().GetDirection() * M_PI_4,
-                  5.0 + (Time::GetInstance()->Read() % 6));
-
-  // If we already shooted in this direction reuse the last trajectorie of the bullet
-  if(m_first_shoot!=0 && last_angle==angle && ActiveCharacter().GetHandPosition()==last_rifle_pos)
-    pos = last_bullet_pos;
-
-  // Move the bullet !!
-  projectile->SetXY( pos );
-  projectile->Ready();
-  projectile->is_active = true;
-  
-  while( projectile->is_active ){
-        
-        // shooting upwards  ( -3pi/4 < angle <-pi/4 ) 
-    if (angle < -0.78 && angle > -2.36){ 
-      pos.x = (int)((pos.y-b)/a);     //Calculate x
-      delta_pos.y=-1;                 //Increment y
-        //shooting downwards ( 3pi/4 > angle > pi/4 )
-    }else if (angle > 0.78 && angle < 2.36){ 
-      pos.x = (int)((pos.y-b)/a);     //Calculate x
-      delta_pos.y=1;                  //Increment y
-        // else shooting at right or left 
-    }else{ 
-      pos.y = (int)((a*pos.x) + b);   //Calculate y
-      delta_pos.x=ActiveCharacter().GetDirection();   //Increment x
-    }
-
-    projectile->SetXY( pos );
-
-    // the bullet in gone outside the map
-    if ( ( world.EstHorsMondeX(projectile->GetX()) ) || ( world.EstHorsMondeY(projectile->GetY()) )) {  //IsGhost does not check the Y side.
-      projectile->is_active=false;
-      last_angle = angle;
-      last_bullet_pos = pos;
-      last_rifle_pos = ActiveCharacter().GetHandPosition();
-      return true;
-    }
-
-    // is there a collision ??
-    if(projectile->CollisionTest( pos ) ){
-      projectile->is_active=false;
-      last_angle = angle;
-      last_bullet_pos = pos;
-      last_rifle_pos = ActiveCharacter().GetHandPosition();
-      projectile->Explosion();
-      return true;
-    }
-    pos += delta_pos;
-  }
+  m_is_active = true;
+  projectile->Shoot (20);
 
   return true;
 }
@@ -147,9 +76,9 @@ bool SnipeRifle::ComputeCrossPoint()
   // Did the current character is moving ?
   Point2i pos = ActiveCharacter().GetHandPosition();
   double angle = ActiveTeam().crosshair.GetAngleRad();
-  if ( (current_rifle_pos == pos) && (last_angle == angle)) return targeting_something;
+  if ( (last_rifle_pos == pos) && (last_angle == angle)) return targeting_something;
   else {
-    current_rifle_pos=pos;
+    last_rifle_pos=pos;
     last_angle=angle;
   }
 
@@ -200,24 +129,6 @@ Point2i * SnipeRifle::GetCrossPoint()
 bool SnipeRifle::isTargetingSomething()
 {
   return targeting_something;
-}
-
-void SnipeRifle::HandleKeyEvent(int action, int event_type)
-{
-  GetCrossPoint();
-  switch (action) {    
-
-    case ACTION_SHOOT:
-      if (event_type == KEY_REFRESH)
-        RepeatShoot();
-
-      if (event_type == KEY_RELEASED)
-        m_is_active = false;
-
-      break;
-    default:
-      break;
-  };
 }
 
 void SnipeRifle::Draw()
