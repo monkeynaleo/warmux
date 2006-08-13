@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <name>OOo Team</name>
+  <surface name="flag" file="flag.png" />
+  <team>
+    <character name="1" body="oooteam" />
+    <character name="2" body="oooteam" />
+    <character name="3" body="oooteam" />
+    <character name="4" body="oooteam" />
+    <character name="5" body="oooteam" />
+    <character name="6" body="oooteam" />
+    <character name="7" body="oooteam" />
+    <character name="8" body="oooteam" />    
+    <character name="9" body="oooteam" />
+    <character name="10" body="oooteam" />
+    <character name="11" body="oooteam" />
+    <character name="12" body="oooteam" />
+    <character name="13" body="oooteam" />
+    <character name="14" body="oooteam" />
+  </team>
+</resources>
