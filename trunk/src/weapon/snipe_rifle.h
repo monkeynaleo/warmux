@@ -40,9 +40,11 @@ class SnipeRifle : public WeaponLauncher
   double last_angle;
   Point2i last_bullet_pos;
   Point2i last_rifle_pos;
+  Point2i laser_beam_pos;
   Point2i * cross_point;
   bool targeting_something;
   Sprite * m_laser_image;
+  Sprite * m_laser_beam_image;
   private:
     bool p_Shoot();
 
@@ -51,10 +53,12 @@ class SnipeRifle : public WeaponLauncher
 
   public:
     SnipeRifle();
-    void Draw();  // In order to draw the laser beam.
     Point2i * GetCrossPoint();
     bool ComputeCrossPoint();
     bool isTargetingSomething();
+    
+    void PrepareLaserBeam();
+    void Draw();  // In order to draw the laser beam.
 };
 
 #endif /* __SNIPE_RIFLE_H */

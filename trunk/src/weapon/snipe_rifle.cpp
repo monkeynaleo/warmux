@@ -28,6 +28,7 @@
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
+#include "../include/app.h"
 
 
 const double SOUFFLE_BALLE = 2;
@@ -52,12 +53,13 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   override_keys = true ;
 
   m_first_shoot = 0;
-  last_angle = 0.0;
+  last_angle = -361.0;
 
   projectile = new SnipeBullet(cfg());
   cross_point = new Point2i();
   targeting_something = false;
   m_laser_image = new Sprite( resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
+  m_laser_beam_image=NULL;
 }
 
 bool SnipeRifle::p_Shoot()
@@ -107,18 +109,20 @@ bool SnipeRifle::ComputeCrossPoint()
 
     // the point is outside the map
     if ( ( world.EstHorsMondeX(pos.x) ) || ( world.EstHorsMondeY(pos.y) )) {
-      *cross_point=pos;
-      return targeting_something = false;
+      targeting_something = false;
+      break;
     }
 
     // is there a collision ??
     if(projectile->CollisionTest( pos ) ){
-      *cross_point=pos;
-      return targeting_something = true;
+      targeting_something = true;
+      break;
     }
     pos += delta_pos;
   }
-  return targeting_something = false;
+  *cross_point=pos;
+  PrepareLaserBeam();
+  return targeting_something;
 }
 
 Point2i * SnipeRifle::GetCrossPoint()
@@ -131,10 +135,42 @@ bool SnipeRifle::isTargetingSomething()
   return targeting_something;
 }
 
+void SnipeRifle::PrepareLaserBeam()
+{
+  Color red = Color (255,0,0,255);
+  uint x1,x2,x_max,x_min,x_orig,x_dest,y1,y2,y_max,y_min,y_orig,y_dest;
+  Point2i pos = ActiveCharacter().GetHandPosition();
+  if (pos.GetX() >= cross_point->GetX()) {
+    x_max=x1=pos.GetX();
+    x_min=x2=cross_point->GetX();
+    x_orig=x1 - x2; x_dest=1;
+  } else {
+    x_min=x2=pos.GetX();
+    x_max=x1=cross_point->GetX();
+    x_dest=x1 - x2; x_orig=1;
+  }
+  if (pos.GetY() >= cross_point->GetY()) {
+    y_max=y1=pos.GetY();
+    y_min=y2=cross_point->GetY();
+    y_orig=y1 - y2; y_dest=1;
+  } else {
+    y_min=y2=pos.GetY();
+    y_max=y1=cross_point->GetY();
+    y_dest=y1 - y2; y_orig=1;
+  }
+  Point2i size = Point2i( x1 - x2 + 1 , y1 - y2 + 1 );
+  laser_beam_pos = Point2i(x_min,y_min);
+  Surface laser_beam_surface = Surface(size,SDL_SWSURFACE,true);
+  laser_beam_surface.LineColor(x_orig,x_dest,y_orig,y_dest,red);
+  if ( m_laser_beam_image != NULL ) delete(m_laser_beam_image);
+  m_laser_beam_image = new Sprite(laser_beam_surface);
+}
+
 void SnipeRifle::Draw()
 {
   if( IsActive() ) return ;
   ComputeCrossPoint();
-  if(targeting_something) m_laser_image->Draw(*GetCrossPoint());      // Draw the laser impact
+  m_laser_beam_image->Draw(laser_beam_pos);
+  if(targeting_something) m_laser_image->Draw(*cross_point);      // Draw the laser impact
   WeaponLauncher::Draw();
 }
