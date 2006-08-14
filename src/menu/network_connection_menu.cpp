@@ -132,7 +132,7 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
 
   // for the moment, it's just for test...
   //close_menu = true;
-  sig_ok();
+  //sig_ok();
 }
 
 void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
