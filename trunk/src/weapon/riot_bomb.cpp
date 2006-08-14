@@ -35,7 +35,6 @@
 RoquetteRiotBomb::RoquetteRiotBomb(ExplosiveWeaponConfig& cfg) :
   WeaponProjectile ("riot_rocket", cfg)
 {  
-  touche_ver_objet = true;
   explode_colliding_character = true;
 }
 

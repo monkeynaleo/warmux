@@ -79,17 +79,17 @@ private:
   void DrawEnergyBar (int dy);
   void DrawName (int dy) const;
 
-  virtual void SignalDeath();
-  virtual void SignalDrowning();
-  virtual void SignalGhostState (bool was_dead);
-  virtual void SignalFallEnding();
+  void SignalDeath();
+  void SignalDrowning();
+  void SignalGhostState (bool was_dead);
+  void SignalFallEnding();
 
 public:
 
   Character (Team& my_team, const std::string &name);
   ~Character();
 
-  virtual void SignalExplosion();
+  void SignalExplosion();
 
   // Change le niveau d'�ergie
   void SetEnergyDelta (int delta, bool do_report=true);

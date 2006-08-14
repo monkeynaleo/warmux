@@ -58,6 +58,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_goes_through_wall = false;
   m_collides_with_characters = false;
   m_collides_with_objects = false;
+  m_last_colliding_object = NULL;
 
   m_allow_negative_y = false;
   m_alive = ALIVE;
@@ -69,9 +70,9 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_test_top = 0;
   m_test_bottom = 0;
 
-  m_ready = true;
+  m_ready = true; // TO REMOVE !!
 
-  exterieur_monde_vide = Config::GetInstance()->GetExterieurMondeVide();
+  exterieur_monde_vide = Config::GetInstance()->GetExterieurMondeVide(); // TO REMOVE!! It is the same for all physical objects !
   m_cfg.LoadXml(m_name,xml_config);  // Load physics constants from the xml file
   ResetConstants();       // Set physics constants from the xml file
 }
@@ -198,10 +199,13 @@ const Rectanglei PhysicalObj::GetTestRect() const
 void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 {
   Point2d pos, offset;
-  int cx, cy;
-  bool collision = false ;
-  Point2d contactPos(0,0);
-  double contact_angle=0;
+
+  typedef enum {
+    NO_COLLISION = 0,
+    COLLISION_ON_GROUND,
+    COLLISION_ON_OBJECT
+  } collision_t;
+  collision_t collision;
 
   if(IsGhost())
     return;
@@ -244,53 +248,21 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       break;
     }
  
-    if ( typeid(*this) == typeid(Character) ) 
-    { 
-      // Test if we collide characters...
-      int y_test = m_posy + m_height - m_test_bottom;
-      double norm, angle;
-      GetSpeed(norm, angle);
-      
-      Rectanglei rect( m_posx + m_test_left, y_test,
-		       m_width - m_test_right - m_test_left, 1);
-      
-      FOR_ALL_LIVING_CHARACTERS(team, character)
-	if ((PhysicalObj*)&(*character) != this)
-	  {
-	    if (character->GetTestRect().Intersect( GetTestRect() )) {
-	      // Give speed to other player...     
-	      MSG_DEBUG( "physic.test", "%s - Collision with %s - Give it speed (%d, %d)", m_name.c_str(), character->m_name.c_str(), 
-			 norm, angle );
-	      character->SetSpeed(norm, angle);
-	    }
-	  }
-      //collision = true;
-      //break;
-    } 
-
-    // Test if we collide on the ground...
+    // Test if we collide...
     if( CollisionTest(tmpPos) ){
       MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision: collision en %d,%d par TestCollision.", m_name.c_str(), tmpPos.x, tmpPos.y );
       
       // Set the object position to the current position.
       SetXY( Point2i( (int)round(pos.x - offset.x), (int)round(pos.y - offset.y)) );
       
-      // Find the contact point and collision angle.
-      // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
-      // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
-      // !!! uninitialised values of cx and cy!!
-      if( ContactPoint(cx, cy) ){
-	contact_angle = world.ground.Tangeante(cx, cy);
-	contactPos.x = (double)cx / PIXEL_PER_METER;
-	contactPos.y = (double)cy / PIXEL_PER_METER;
-      }else{
-	contact_angle = - GetSpeedAngle();
-	contactPos = pos;
+      // we collides on an object (or character)
+      if (m_last_colliding_object != NULL) {
+	collision = COLLISION_ON_OBJECT;
+      } else {
+	collision = COLLISION_ON_GROUND;
       }
-      
-      collision = true;
-      break;
 
+      break;
     }
 
     // Next motion step
@@ -299,6 +271,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   } while (0 < lg);
 
 
+  // Only for ninja rope... TO REMOVE!!
   if (ActiveTeam().GetWeaponType() == WEAPON_NINJA_ROPE &&
       ActiveTeam().GetWeapon().IsActive()) {
     Weapon& tmp = ActiveTeam().AccessWeapon();
@@ -306,8 +279,48 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     ninjarope->NotifyMove(collision) ;
   }
 
-  if (collision)
+  if ( collision == NO_COLLISION ) // Nothing more to do!
+    return; 
+
+  if ( collision == COLLISION_ON_GROUND ) {
+      // Find the contact point and collision angle.
+//       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
+//       // !!! WeaponProjectiles collide on objects, so computing the tangeante to the ground leads
+//       // !!! uninitialised values of cx and cy!!
+//       if( ContactPoint(cx, cy) ){
+    int cx, cy;
+    Point2d contactPos;
+    double contact_angle=0;
+  
+    if (ContactPoint(cx, cy)) {
+      contact_angle = world.ground.Tangeante(cx, cy);
+      contactPos.x = (double)cx / PIXEL_PER_METER;
+      contactPos.y = (double)cy / PIXEL_PER_METER;
+    } else {
+      contact_angle = - GetSpeedAngle();
+      contactPos = pos;
+    }
+
+    // Make it rebound on the ground !!
     Rebound(contactPos, contact_angle);
+
+  } else if ( collision == COLLISION_ON_OBJECT ) {
+    SignalCollisionObject();
+
+    // Get the current speed
+    double norm, angle;
+    GetSpeed(norm, angle);
+
+    // Give speed to the other object
+    // m1V1 + m2V2 = m1V'1 + m2V'2
+    // Since V2 is equal to (0;0)
+    // m1V1 = m1V'1 + m2V'2
+    // We set the speed proportionally to the mass
+    double total_mass = GetMass() + m_last_colliding_object->GetMass();
+
+    m_last_colliding_object->SetSpeed(m_last_colliding_object->GetMass()*norm/total_mass, angle);
+    SetSpeed(GetMass()*norm/total_mass, angle);
+  }
 
   return;
 }
@@ -472,6 +485,31 @@ void PhysicalObj::SignalRebound()
      jukebox.Play("share", m_rebound_sound) ;
 }
 
+void PhysicalObj::SetCollisionModel(bool goes_through_wall,
+				    bool collides_with_characters,
+				    bool collides_with_objects)
+{
+  m_goes_through_wall = goes_through_wall;
+  m_collides_with_characters = collides_with_characters;
+  m_collides_with_objects = collides_with_objects;
+
+  // Check boolean values
+  {
+    if (m_collides_with_characters || m_collides_with_objects)
+      assert(m_goes_through_wall == false);
+    
+    if (m_goes_through_wall) {
+      assert(m_collides_with_characters == false);
+      assert(m_collides_with_objects == false);
+    }
+  }
+}
+
+PhysicalObj* PhysicalObj::GetLastCollidingObject() const
+{
+  assert(m_collides_with_characters || m_collides_with_objects);
+  return m_last_colliding_object;
+}
 
 bool PhysicalObj::IsOutsideWorldXY(Point2i position) const{
   int x = position.x + m_test_left;
@@ -488,8 +526,9 @@ bool PhysicalObj::IsOutsideWorldXY(Point2i position) const{
   return false;
 }
 
-bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const{
-	return IsOutsideWorldXY( GetPosition() + offset );
+bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const
+{
+  return IsOutsideWorldXY( GetPosition() + offset );
 }
 
 bool PhysicalObj::FootsOnFloor(int y) const
@@ -501,30 +540,37 @@ bool PhysicalObj::FootsOnFloor(int y) const
   return (y_max <= y);
 }
 
-bool PhysicalObj::IsInVacuum(const Point2i &offset) const
+bool PhysicalObj::IsInVacuum(const Point2i &offset)
 {
   return IsInVacuumXY(GetPosition() + offset);
 }
 
-bool PhysicalObj::IsInVacuumXY(const Point2i &position) const
+bool PhysicalObj::IsInVacuumXY(const Point2i &position)
 {
   if( IsOutsideWorldXY(position) )
-	  return exterieur_monde_vide;
+    return exterieur_monde_vide;
 
   if( FootsOnFloor(position.y - 1) )
-	  return false;
+    return false;
 
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
 		  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
   if (m_collides_with_characters)
     {
-      FOR_ALL_LIVING_CHARACTERS(equipe,ver)
-	if ((PhysicalObj*)&(*ver) != this)
-	  {
-	    if (ver->GetTestRect().Intersect( rect ))
-	      return false;
-	  }
+      Character * tmp = NULL;
+      FOR_ALL_LIVING_CHARACTERS(team,character) 
+	{
+	  tmp = &(*character);
+	  if (tmp != this && tmp != &ActiveCharacter())
+	    {
+	      if (tmp->GetTestRect().Intersect( rect )) 
+		{
+		  m_last_colliding_object = (PhysicalObj*)tmp;
+		  return false;
+		}
+	    }
+	}
     }
 
   if (m_collides_with_objects)
@@ -532,8 +578,11 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position) const
       FOR_EACH_OBJECT(object)
 	if (object -> ptr != this)
 	  {
-	    if ( object->ptr->GetTestRect().Intersect( rect ) )
-	      return false;
+	    if ( object->ptr->GetTestRect().Intersect( rect ) ) 
+	      {
+		m_last_colliding_object = object->ptr;
+		return false;
+	      }
 	  }
     }
 
@@ -548,13 +597,13 @@ bool PhysicalObj::FootsInVacuum() const{
 bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 {
   if( IsOutsideWorldXY(position) ){
-	MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
-	return exterieur_monde_vide;
+    MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
+    return exterieur_monde_vide;
   }
 
   if( FootsOnFloor(position.y) ){
-	 MSG_DEBUG("physical", "%s - physobj is on floor", m_name.c_str());
-     return false;
+    MSG_DEBUG("physical", "%s - physobj is on floor", m_name.c_str());
+    return false;
   }
 
   int y_test = position.y + m_height - m_test_bottom;
@@ -571,11 +620,13 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 
   if (m_collides_with_characters)
     {
-      FOR_ALL_LIVING_CHARACTERS(equipe,ver)
-	if ((PhysicalObj*)&(*ver) != this)
+      FOR_ALL_LIVING_CHARACTERS(team, character)
+	if ((PhysicalObj*)&(*character) != this)
 	  {
-	    if (ver->GetTestRect().Intersect( rect ))
+	    if (character->GetTestRect().Intersect( rect )) {
+	      //m_last_colliding_object = character;
 	      return false;
+	    }
 	  }
     }
 
@@ -584,8 +635,10 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
       FOR_EACH_OBJECT(object)
 	if (object -> ptr != this)
 	  {
-	    if ( object->ptr->GetTestRect().Intersect( rect ) )
+	    if ( object->ptr->GetTestRect().Intersect( rect ) ) {
+	      //m_last_colliding_object = object->ptr;
 	      return false;
+	    }
 	  }
     }
 
@@ -602,6 +655,7 @@ bool PhysicalObj::IsInWater () const
 }
 
 bool PhysicalObj::CollisionTest(const Point2i &position){
+  m_last_colliding_object = NULL;
   return !IsInVacuumXY(position);
 }
 

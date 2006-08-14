@@ -49,14 +49,15 @@ class PhysicalObj : public Physics
 private:
   int m_posx, m_posy;
 
-protected:
-  bool exterieur_monde_vide;
-  
   // collision management
   bool m_goes_through_wall;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
+  PhysicalObj * m_last_colliding_object;
 
+protected:
+  bool exterieur_monde_vide;// TO REMOVE!! It is the same for all physical objects !
+  
   std::string m_name;
 
   // Rectangle used for collision tests
@@ -118,9 +119,17 @@ public:
   bool PutOutOfGround(double direction); //Where direction is the angle of the direction
                                          // where the object is moved
 
+  // Collision management
+  void SetCollisionModel(bool goes_through_wall,
+			 bool collides_with_characters,
+			 bool collides_with_objects);  
 
-  bool IsInVacuumXY(const Point2i &position) const;
-  bool IsInVacuum(const Point2i &offset) const; // relative to current position
+  // Collision test for point (x,y) -- public only for Uzi...
+  bool CollisionTest(const Point2i &position);
+
+  PhysicalObj* GetLastCollidingObject() const;
+  bool IsInVacuumXY(const Point2i &position);
+  bool IsInVacuum(const Point2i &offset); // relative to current position
   bool FootsInVacuumXY(const Point2i &position) const;
   bool FootsInVacuum() const;
   
@@ -166,8 +175,7 @@ private:
   //l'obj et le terrain
   bool ContactPoint (int &x, int &y);
 
-  // Collision test for point (x,y)
-  virtual bool CollisionTest(const Point2i &position);
+
 
   void NotifyMove(Point2d oldPos, Point2d newPos);
 

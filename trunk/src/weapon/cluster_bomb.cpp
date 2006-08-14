@@ -78,7 +78,6 @@ ClusterBomb::ClusterBomb(ClusterBombConfig& cfg) :
   WeaponProjectile ("cluster_bomb", cfg)
 {
   m_rebound_sound = "weapon/grenade_bounce";
-  touche_ver_objet = false;
 
   tableau_cluster.clear();
   const uint nb = cfg.nb_fragments;

@@ -589,4 +589,4 @@ void Physics::SignalDeath() {}
 void Physics::SignalDrowning() {}
 void Physics::SignalFallEnding() {}
 void Physics::SignalRebound() {}
-
+void Physics::SignalCollisionObject() {}

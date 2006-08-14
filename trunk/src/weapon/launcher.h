@@ -37,9 +37,7 @@ class WeaponProjectile : public PhysicalObj
  protected:
   Sprite *image;  
 
-  // Peut toucher les vers et les objets ? (test de collision)
-  bool touche_ver_objet;
-  bool explode_colliding_character; // before timeout. touche_ver_objet must be true
+  bool explode_colliding_character; // before timeout.
   double begin_time;
   
   ExplosiveWeaponConfig& cfg;
@@ -59,8 +57,6 @@ class WeaponProjectile : public PhysicalObj
   virtual void Shoot(double strength);
   virtual void Explosion();
 
-  virtual bool CollisionTest (const Point2i &position); // public only for uzi...
-  
   void IncrementTimeOut();
   void DecrementTimeOut();
   void SetTimeOut(int timeout);
@@ -75,6 +71,7 @@ class WeaponProjectile : public PhysicalObj
  private:
   void SignalGhostState (bool was_dead);
   void SignalFallEnding();
+  void SignalCollisionObject();
 };
 
 class WeaponBullet : public WeaponProjectile

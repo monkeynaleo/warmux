@@ -35,7 +35,6 @@ RoquetteBazooka::RoquetteBazooka(ExplosiveWeaponConfig& cfg) :
   WeaponProjectile ("rocket", cfg),
   smoke_engine(20)
 {
-  touche_ver_objet = true;
   explode_colliding_character = true;
 }
 
