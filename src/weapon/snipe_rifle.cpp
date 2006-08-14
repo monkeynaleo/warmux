@@ -53,7 +53,7 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   override_keys = true ;
 
   m_first_shoot = 0;
-  last_angle = -361.0;
+  last_angle = 0.0;
 
   projectile = new SnipeBullet(cfg());
   cross_point = new Point2i();
@@ -91,6 +91,7 @@ bool SnipeRifle::ComputeCrossPoint()
   a = sin(angle)/cos(angle);
   b = pos.y - ( a * pos.x ) ;
   Point2i delta_pos;
+  int first_step = 0;
   // While test is not finished
   while( true ){
     // going upwards ( -3pi/4 < angle <-pi/4 ) 
@@ -108,17 +109,18 @@ bool SnipeRifle::ComputeCrossPoint()
     }
 
     // the point is outside the map
-    if ( ( world.EstHorsMondeX(pos.x) ) || ( world.EstHorsMondeY(pos.y) )) {
+    if ( (first_step > 30) && ( world.EstHorsMondeX(pos.x) ) || ( world.EstHorsMondeY(pos.y) )) {
       targeting_something = false;
       break;
     }
 
     // is there a collision ??
-    if(projectile->CollisionTest( pos ) ){
+    if ( first_step > 30 && projectile->CollisionTest( pos )){
       targeting_something = true;
       break;
     }
     pos += delta_pos;
+    first_step++;
   }
   *cross_point=pos;
   PrepareLaserBeam();
@@ -143,20 +145,20 @@ void SnipeRifle::PrepareLaserBeam()
   if (pos.GetX() >= cross_point->GetX()) {
     x_max=x1=pos.GetX();
     x_min=x2=cross_point->GetX();
-    x_orig=x1 - x2; x_dest=1;
+    x_orig=x1 - x2; x_dest=0;
   } else {
     x_min=x2=pos.GetX();
     x_max=x1=cross_point->GetX();
-    x_dest=x1 - x2; x_orig=1;
+    x_dest=x1 - x2; x_orig=0;
   }
   if (pos.GetY() >= cross_point->GetY()) {
     y_max=y1=pos.GetY();
     y_min=y2=cross_point->GetY();
-    y_orig=y1 - y2; y_dest=1;
+    y_orig=y1 - y2; y_dest=0;
   } else {
     y_min=y2=pos.GetY();
     y_max=y1=cross_point->GetY();
-    y_dest=y1 - y2; y_orig=1;
+    y_dest=y1 - y2; y_orig=0;
   }
   Point2i size = Point2i( x1 - x2 + 1 , y1 - y2 + 1 );
   laser_beam_pos = Point2i(x_min,y_min);
