@@ -47,7 +47,7 @@ WeaponBullet::WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg) 
 
 void WeaponBullet::SignalCollision()
 { 
-  if ((dernier_ver_touche == NULL) && (dernier_obj_touche == NULL))
+  if ( GetLastCollidingObject() == NULL )
   {
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
   }
@@ -66,15 +66,19 @@ void WeaponBullet::Explosion()
 {
   if (IsGhost()) return;
 
-  if (dernier_ver_touche == NULL) {
+  if ( GetLastCollidingObject() == NULL ) {
     // Applique les degats et le souffle aux vers
     Point2i pos = GetCenter();
     ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke);
   } else {
-    dernier_ver_touche -> SetEnergyDelta (-cfg.damage);
-    
-    dernier_ver_touche -> AddSpeed (2, GetSpeedAngle());
-    dernier_ver_touche -> UpdatePosition();
+    PhysicalObj * obj = GetLastCollidingObject();
+
+    if (typeid(*obj) == typeid(Character)) {
+      Character * tmp = (Character*)(obj);      
+      tmp -> SetEnergyDelta (-cfg.damage);
+      tmp -> AddSpeed (2, GetSpeedAngle());
+      tmp -> UpdatePosition();
+    }
   }
 }
 
@@ -86,11 +90,8 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   : PhysicalObj (name),
     cfg(p_cfg)
 {
-  dernier_ver_touche = NULL;
-  dernier_obj_touche = NULL;
-
   m_allow_negative_y = true;
-  touche_ver_objet = true;
+  SetCollisionModel(false, true, true);
   explode_colliding_character = false;
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
@@ -154,52 +155,17 @@ bool WeaponProjectile::TestImpact()
   return false;
 }
 
-bool WeaponProjectile::CollisionTest(const Point2i &position)
+void WeaponProjectile::SignalCollisionObject()
 {
-  dernier_ver_touche = NULL;
-  dernier_obj_touche = NULL;
+  if (!explode_colliding_character) return;
 
-  int dx = position.x - GetX();
-  int dy = position.y - GetY();
-
-  if (!IsInVacuum ( Point2i(dx, dy)) ) return true;
-
-  if (!touche_ver_objet) return false;
-
-   Rectanglei test = GetTestRect();
-   test.SetPositionX( test.GetPositionX() + dx);
-   test.SetPositionY( test.GetPositionY() + dy);
-   
-  if (explode_colliding_character)
-  {
-    FOR_ALL_LIVING_CHARACTERS(equipe,ver)
-    if (&(*ver) != &ActiveCharacter())
-    {
-      if (ver->GetTestRect().Intersect( test ))
-      {
-        dernier_ver_touche = &(*ver);
-        MSG_DEBUG("weapon_collision", "Character %s has been damaged", ver -> GetName().c_str());
-
-        MSG_DEBUG("weapon_collision", "Projectile explode before timeout because of a collision", ver -> GetName().c_str());
-        is_active = false;
-        return true;
-      }
-    }
-  }
-
-  FOR_EACH_OBJECT(objet)
-  if (objet -> ptr != this)
-  {
-    if ( objet->ptr->GetTestRect().Intersect( test ) )
-      {
-      dernier_obj_touche = objet -> ptr;
-      MSG_DEBUG("weapon_collision", "Object %s has been touched", objet -> ptr -> GetName().c_str());
-      return true;
-    }
-  }
-
-  return false;
+  PhysicalObj * obj = GetLastCollidingObject();
+  assert (obj != NULL);
+  
+  if (typeid(*obj) == typeid(Character))
+    is_active = false;
 }
+
 
 void WeaponProjectile::Refresh()
 {

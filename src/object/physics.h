@@ -131,8 +131,6 @@ public:
   // Notify the son class that the object has moved.
   virtual void NotifyMove(Point2d oldPos, Point2d newPos) = 0 ;
 
-  virtual void SignalExplosion() {};
-
   // Start moving
   void StartMoving();
 
@@ -157,6 +155,7 @@ protected:
   virtual void SignalFallEnding();
   virtual void SignalDrowning();
   virtual void SignalRebound();
+  virtual void SignalCollisionObject();
 
   // Make the object rebound
   void Rebound(Point2d contactPos, double contact_angle);
