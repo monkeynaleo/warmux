@@ -319,7 +319,13 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     double total_mass = GetMass() + m_last_colliding_object->GetMass();
 
     m_last_colliding_object->SetSpeed(m_last_colliding_object->GetMass()*norm/total_mass, angle);
-    SetSpeed(GetMass()*norm/total_mass, angle);
+    SetSpeed(GetMass()*norm/total_mass, angle);      
+
+    // Check if we should stop moving. Really really not sure it's good!!
+    if (norm < 0.5){
+      SignalFallEnding();
+      StopMoving();
+    }
   }
 
   return;
@@ -624,6 +630,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 	if ((PhysicalObj*)&(*character) != this)
 	  {
 	    if (character->GetTestRect().Intersect( rect )) {
+	      MSG_DEBUG("physical", "%s - physobj is on a character", m_name.c_str());
 	      //m_last_colliding_object = character;
 	      return false;
 	    }
@@ -636,6 +643,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 	if (object -> ptr != this)
 	  {
 	    if ( object->ptr->GetTestRect().Intersect( rect ) ) {
+	      MSG_DEBUG("physical", "%s - physobj is on an object", m_name.c_str());
 	      //m_last_colliding_object = object->ptr;
 	      return false;
 	    }
