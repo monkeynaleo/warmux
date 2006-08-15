@@ -122,9 +122,9 @@ SUFFIXES = .po .gmo .mo .sed .sin .nop .po-update
 	@mv t-$@ $@
 
 
-all-local: all-local-@USE_NLS@ $(GMOFILES)
+all-local: all-local-@USE_NLS@
 
-all-local-yes: stamp-po
+all-local-yes: $(GMOFILES)
 all-local-no:
 
 # stamp-po is a timestamp denoting the last time at which the CATALOGS have
