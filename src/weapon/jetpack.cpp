@@ -52,6 +52,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   m_name = _("jetpack");
   m_x_force = 0.0;
   m_y_force = 0.0;
+  channel = -1;
 }
 
 void JetPack::Refresh()
@@ -122,7 +123,8 @@ void JetPack::StopUse()
 {
   if (m_x_force == 0.0 && m_y_force == 0.0)
   {
-    jukebox.Stop(channel);
+    if(channel != -1)
+      jukebox.Stop(channel);
     channel = -1;
     ActiveCharacter().SetSkin("jetpack");
   }
