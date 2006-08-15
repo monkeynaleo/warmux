@@ -132,7 +132,7 @@ if test "x$GCC" = "xyes"; then
     GCC_FLAGS="$GCC_FLAGS -Wno-unused-parameter"
 
     if test "${debug}" = "yes"; then
-        GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG"
+        GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG -Werror"
     else
         GCC_FLAGS="$GCC_FLAGS -O2"
     fi
