@@ -3,19 +3,20 @@
   <name>OOo Team</name>
   <surface name="flag" file="flag.png" />
   <team>
-    <character name="1" body="oooteam" />
-    <character name="2" body="oooteam" />
-    <character name="3" body="oooteam" />
-    <character name="4" body="oooteam" />
-    <character name="5" body="oooteam" />
-    <character name="6" body="oooteam" />
-    <character name="7" body="oooteam" />
-    <character name="8" body="oooteam" />    
-    <character name="9" body="oooteam" />
-    <character name="10" body="oooteam" />
-    <character name="11" body="oooteam" />
-    <character name="12" body="oooteam" />
-    <character name="13" body="oooteam" />
-    <character name="14" body="oooteam" />
+    <character name="OOo" body="oooteam" />
+    <character name="Writer" body="oooteam" />
+    <character name="Calc" body="oooteam" />
+    <character name="Impress" body="oooteam" />
+    <character name="Base" body="oooteam" />
+    <character name="Draw" body="oooteam" />
+    <character name="Math" body="oooteam" />
+    <character name="Quickstarter" body="oooteam" />    
+    <character name="OpenDocument" body="oooteam" />
+    <character name="OOoConv" body="oooteam" />
+    <character name="PortableOOo" body="oooteam" />
+    <character name="OOo HG" body="oooteam" />
+    <character name="Cart'OOo" body="oooteam" />
+    <character name="Hist'OOo" body="oooteam" />
+    <character name="Gé'OOo" body="oooteam" />
   </team>
 </resources>
