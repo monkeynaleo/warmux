@@ -8,7 +8,7 @@
   </author>
 
   <surface name="preview" file="preview.jpg" />
-  <surface name="sky" file="fond.png" />
+  <surface name="sky" file="fond.jpg" />
   <surface name="map" file="araignee.png" />
 
   <name>Araignee</name>
