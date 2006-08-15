@@ -205,7 +205,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     COLLISION_ON_GROUND,
     COLLISION_ON_OBJECT
   } collision_t;
-  collision_t collision;
+  collision_t collision = NO_COLLISION;
 
   if(IsGhost())
     return;
