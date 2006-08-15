@@ -25,13 +25,12 @@
 #include "../game/game.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
-#include "../include/action_handler.h"
 #include "../map/map.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../interface/game_msg.h"
-#include "../weapon/explosion.h"
+#include "../weapon/weapon_tools.h"
 
 //-----------------------------------------------------------------------------
 
@@ -63,17 +62,12 @@ bool Airhammer::p_Shoot()
   //jukebox.Play("weapon/airhammer");
 
   // initiate movement ;-)
-  ActiveCharacter().SetRebounding(false);
   ActiveCharacter().SetXY( ActiveCharacter().GetPosition() );
-  Point2i pos = Point2i(ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 - impact.GetWidth()/2,
-                        ActiveCharacter().GetTestRect().GetPositionY() +
-                        ActiveCharacter().GetHeight()  -15);
 
-  ParticleEngine::AddNow(pos + Point2i(impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
-                         true, -3.0 * M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
-  ParticleEngine::AddNow(pos + Point2i(3*impact.GetWidth()/4,9), 1, particle_AIR_HAMMER,
-                         true, -M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
-  world.Dig( pos, impact );
+  world.Dig(
+		  Point2i(	ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2 - impact.GetWidth()/2,
+            		ActiveCharacter().GetY() + ActiveCharacter().GetHeight() -15) ,
+		  impact);
 
   return true;
 }
@@ -88,11 +82,7 @@ void Airhammer::RepeatShoot()
   if (time >= MIN_TIME_BETWEEN_JOLT) 
   {
     m_is_active = false;
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SYNC_BEGIN));
-    ActionHandler::GetInstance()->NewAction(
-      BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex()));
     NewActionShoot();
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SYNC_END));
     m_last_jolt = tmp;
   }    
 

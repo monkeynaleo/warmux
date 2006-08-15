@@ -6,7 +6,7 @@
     <country>Germany</country>
   </author>
 
-  <surface name="sky" file="islands.jpg" />
+  <surface name="sky" file="islands.png" />
   <surface name="map" file="pirates.png" />
   <surface name="preview" file="preview.jpg" />
 

@@ -42,15 +42,15 @@ void Ground::Init(){
   std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
   
-  // Charge les donnï¿½s du terrain
+  // Charge les données du terrain
   Surface m_image = lst_terrain.TerrainActif().LitImgTerrain();
   LoadImage ( m_image );
 
-  // Vï¿½ifie la taille du terrain
+  // Vérifie la taille du terrain
   assert(Constants::MAP_MIN_SIZE <= GetSize());
   assert(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
   
-  // Vï¿½ifie si c'est un terrain ouvert ou fermï¿½
+  // Vérifie si c'est un terrain ouvert ou fermé
   ouvert = lst_terrain.TerrainActif().is_opened;
 
   std::cout << _("done") << std::endl;
@@ -78,15 +78,15 @@ bool Ground::IsEmpty(const Point2i &pos){
 //Renvoie -1.0 s'il n'y a pas de tangeante (si le pixel(x,y) ne touche
 //aucun autre morceau de terrain)
 double Ground::Tangeante(int x,int y){
-  //Approxiamtion:on renvoie la corde de la courbe formï¿½
+  //Approxiamtion:on renvoie la corde de la courbe formée
   //par le terrain...
 
-  //On cherche deux points du terrain autour de (x,y), ï¿½la limite entre le terrain
+  //On cherche deux points du terrain autour de (x,y), à la limite entre le terrain
   //et le vide:
-  //(p1 = 1er point ï¿½gauche
-  // p2 = 1er point ï¿½droite
-  // p3 = 2em point ï¿½gauche
-  // p4 = 2em point ï¿½droite)
+  //(p1 = 1er point à gauche
+  // p2 = 1er point à droite
+  // p3 = 2em point à gauche
+  // p4 = 2em point à droite)
   Point2i p1,p2,p3,p4;
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
     return -1.0;
@@ -128,16 +128,16 @@ double Ground::Tangeante(int x,int y){
 bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
                            int pas_bon_x,int pas_bon_y)
 {
-  //Cherche un pixel autour du pixel(x,y) qui est ï¿½la limite entre
+  //Cherche un pixel autour du pixel(x,y) qui est à la limite entre
   //le terrin et le vide.
-  //renvoie true (+ p_x et p_y) si on a trouvï¿½qqch, sinon false
+  //renvoie true (+ p_x et p_y) si on a trouvé qqch, sinon false
   if(world.EstHorsMonde(Point2i(x-1,y))
   || world.EstHorsMonde(Point2i(x+1,y))
   || world.EstHorsMonde(Point2i(x,y-1))
   || world.EstHorsMonde(Point2i(x,y+1)) )
     return false;
    
-  //regarde en haut ï¿½gauche
+  //regarde en haut à gauche
   if(x-1 != pas_bon_x
   || y-1 != pas_bon_y)
   if( !IsEmpty(Point2i(x-1,y-1) )
@@ -159,7 +159,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y-1;
     return true;
   }
-  //regarde en haut ï¿½droite
+  //regarde en haut à droite
   if(x+1 != pas_bon_x
   || y-1 != pas_bon_y)
   if(!IsEmpty(Point2i(x+1,y-1))
@@ -170,7 +170,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y-1;
     return true;
   }
-  //regarde ï¿½droite
+  //regarde à droite
   if(x+1 != pas_bon_x
   || y != pas_bon_y)
   if(!IsEmpty(Point2i(x+1,y))
@@ -181,7 +181,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y;
     return true;
   }
-  //regarde en bas ï¿½droite
+  //regarde en bas à droite
   if(x+1 != pas_bon_x
   || y+1 != pas_bon_y)
   if(!IsEmpty(Point2i(x+1,y+1))
@@ -203,7 +203,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y+1;
     return true;
   }
-  //regarde en bas ï¿½gauche
+  //regarde en bas à gauche
   if(x-1 != pas_bon_x
   || y+1 != pas_bon_y)
   if(!IsEmpty(Point2i(x-1,y+1))
@@ -214,7 +214,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y+1;
     return true;
   }
-  //regarde ï¿½gauche
+  //regarde à gauche
   if(x-1 == pas_bon_x
   && y == pas_bon_y)
   if(!IsEmpty(Point2i(x-1,y))

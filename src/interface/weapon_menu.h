@@ -85,6 +85,7 @@ public:
   bool ActionClic(const Point2i &mousePos);
 
   void Draw();
+  void Init();
   void Reset();
 
   int GetX() const;

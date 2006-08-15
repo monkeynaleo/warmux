@@ -28,14 +28,13 @@
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../include/app.h"
-#include "../include/action_handler.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../team/macro.h"
 #include "../tool/point.h"
 #include "../weapon/weapon.h"
 
-// Vitesse du definalement ï¿½la souris
+// Vitesse du definalement à la souris
 const uint SCROLL_MOUSE = 20;
 
 // Largeur de la zone de sensibilite au camera a la souris
@@ -53,7 +52,7 @@ Mouse * Mouse::GetInstance() {
 Mouse::Mouse(){
   scroll_actif = false;
 
-  // Load the different pointers
+  // Load the different pointers  
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   pointer_select = resource_manager.LoadImage(res, "mouse/pointer_select");
   pointer_move = resource_manager.LoadImage(res, "mouse/pointer_move");
@@ -69,86 +68,58 @@ void Mouse::Reset(){
 bool Mouse::ActionClicD(){ 
   if( ActiveTeam().GetWeapon().CanChangeWeapon() )
     Interface::GetInstance()->weapons_menu.SwitchDisplay();
-
+  
   return true;
 }
-
-//WORKING=============================================
-bool Mouse::ActionWhellUp(){
-  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    ActiveTeam().AccessWeapon().ActionUp(); 
-    return true ;
-    }
-    
-  return true;
-}
-
-bool Mouse::ActionWhellDown(){
-  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    ActiveTeam().AccessWeapon().ActionDown();
-    return true ;
-    }
-    
-  return true;
-}
-//==========================================================
 
 bool Mouse::ActionClicG()
 {
-  if(!ActiveTeam().is_local)
-    return false;
-
-  const Point2i pos_monde = GetWorldPosition();
-
+  const Point2i pos_monde = GetWorldPosition();   
+	
   // Action dans le menu des armes ?
   if( Interface::GetInstance()->weapons_menu.ActionClic( GetPosition() ) )
     return true;
 
   // On peut changer de ver ?
   if( GameMode::GetInstance()->AllowCharacterSelection() ){
-    // Sï¿½ection d'un ver se son ï¿½uipe ?
+    // Sélection d'un ver se son équipe ?
     bool ver_choisi=false;
     Team::iterator it=ActiveTeam().begin(),
 	                 fin=ActiveTeam().end();
-
-    for( ; it != fin; ++it) {
+    uint index=0;
+    for( ; it != fin; ++it, ++index ){
       if( &(*it) != &ActiveCharacter()
-        && !it -> IsDead()
+        && !it -> IsDead() 
         && it->GetRect().Contains( pos_monde ) ){
-	
-	ver_choisi = true;
+        ver_choisi = true;
         break;
       }
     }
 
     if( ver_choisi ){
-      while ( &(*it) != &ActiveCharacter() )
-	ActiveTeam().NextCharacter ();
+      ActiveTeam().SelectCharacterIndex (index);
       return true;
     }
 
     if( ActiveCharacter().GetRect().Contains( pos_monde ) ){
-      CharacterCursor::GetInstance()->FollowActiveCharacter();
+      CurseurVer::GetInstance()->SuitVerActif();
       return true;
     }
   }
-
+  
   // Action dans le menu des armes ?
-  if( Interface::GetInstance()->weapons_menu.ActionClic(GetPosition()) )
+  if( Interface::GetInstance()->weapons_menu.ActionClic(GetPosition()) ) 
     return true;
-
+  
   // Choosing target for a weapon, many posibilities :
   // - Do nothing
   // - Choose a target but don't fire
   // - Choose a target and fire it !
   if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    Action* a = new Action(ACTION_SET_TARGET);
-    a->Push(GetWorldPosition().x);
-    a->Push(GetWorldPosition().y);
-    ActionHandler::GetInstance()->NewAction (a);
+    ActiveTeam().AccessWeapon().ChooseTarget();
     return true ;
   }
-
+  
   return false;
 }
 
@@ -157,8 +128,8 @@ void Mouse::ChoixVerPointe(){
     return;
 
   const Point2i pos_monde = GetWorldPosition();
-
-  // Quel ver est pointï¿½par la souris ? (en dehors du ver actif)
+   
+  // Quel ver est pointé par la souris ? (en dehors du ver actif)
   Interface::GetInstance()->character_under_cursor = NULL;
   FOR_ALL_LIVING_CHARACTERS(equipe,ver){
     if ((&(*ver) != &ActiveCharacter())
@@ -166,14 +137,14 @@ void Mouse::ChoixVerPointe(){
       Interface::GetInstance()->character_under_cursor = &(*ver);
     }
   }
-
-  // Aucun ver n'est pointï¿½... et le ver actif alors ?
+  
+  // Aucun ver n'est pointé ... et le ver actif alors ?
   if ((Interface::GetInstance()->character_under_cursor == NULL)
       && ActiveCharacter().GetRect().Contains( pos_monde)){
       Interface::GetInstance()->character_under_cursor = &ActiveCharacter();
   }
-
-  // Dessine le curseur autour du ver pointï¿½s'il y en a un
+  
+  // Dessine le curseur autour du ver pointé s'il y en a un
 //  if (interface.character_under_cursor != NULL) {
 //    curseur_ver.PointeObj (interface.character_under_cursor);
 //  } else {
@@ -188,14 +159,14 @@ void Mouse::ScrollCamera() {
   Point2i sensitZone(SENSIT_SCROLL_MOUSE, SENSIT_SCROLL_MOUSE);
   Point2i winSize = AppWormux::GetInstance()->video.window.GetSize();
   Point2i tstVector;
-
+	
   tstVector = mousePos.inf(sensitZone);
   if( !tstVector.IsNull() ){
     camera.SetXY( tstVector * (mousePos - sensitZone)/2 );
     camera.autorecadre = false;
     scroll = true;
-  }
-
+  } 
+  
   tstVector = winSize.inf(mousePos + sensitZone);
   if( !tstVector.IsNull() ){
     camera.SetXY( tstVector * (mousePos + sensitZone - winSize)/2 );
@@ -207,10 +178,10 @@ void Mouse::ScrollCamera() {
 
 void Mouse::TestCamera(){
   Point2i mousePos = GetPosition();
-
+  
   //Move camera with mouse holding Ctrl key down
   const bool demande_scroll = SDL_GetModState() & KMOD_CTRL;
-
+   
   if( demande_scroll ){
     if( scroll_actif ){
 	  Point2i offset = savedPos - mousePos;
@@ -241,35 +212,22 @@ Point2i Mouse::GetPosition() const{
 	return Point2i(x, y);
 }
 
-Point2i Mouse::GetWorldPosition() const{
+Point2i Mouse::GetWorldPosition() const{ 
    return GetPosition() + camera.GetPosition();
 }
 
 void Mouse::TraiteClic (const SDL_Event *event){
   if( event->type == SDL_MOUSEBUTTONDOWN ){
-  
     if( event->button.button == SDL_BUTTON_RIGHT ){
       ActionClicD();
       return;
     }
-
+	
     // Clic gauche de la souris ?
     if( event->button.button == SDL_BUTTON_LEFT ){
       ActionClicG();
       return;
     }
-    
-
-    if (event->button.button == SDL_BUTTON_WHEELDOWN){
-      ActionWhellDown(); 
-      return;
-    }
-       
-    if (event->button.button == SDL_BUTTON_WHEELUP){
-      ActionWhellUp(); 
-      return;
-    }
-    
   }
 }
 
@@ -284,29 +242,29 @@ void Mouse::SetPointer(pointer_t pointer)
 }
 
 bool Mouse::ScrollPointer()
-{
+{ 
 
   Point2i mousePos = GetPosition();
   Point2i winSize = AppWormux::GetInstance()->video.window.GetSize();
   Point2i cameraPos = camera.GetPosition();
 
   // tries to go on the left
-  if ( (mousePos.x > 0 && mousePos.x < (int)SENSIT_SCROLL_MOUSE)
+  if ( (mousePos.x > 0 && mousePos.x < SENSIT_SCROLL_MOUSE) 
        && (cameraPos.x > 0) )
       return true;
 
   // tries to go on the right
-  if ( (mousePos.x > winSize.x - (int)SENSIT_SCROLL_MOUSE)
+  if ( (mousePos.x > winSize.x - SENSIT_SCROLL_MOUSE) 
        && ( cameraPos.x + winSize.x < world.GetWidth() ))
       return true;
 
   // tries to go up
-  if ( (mousePos.y > 0 && mousePos.y < (int)SENSIT_SCROLL_MOUSE)
+  if ( (mousePos.y > 0 && mousePos.y < SENSIT_SCROLL_MOUSE)
        && (cameraPos.y > 0) )
       return true;
-
+  
   // tries to go down
-  if ( (mousePos.y > winSize.y - (int)SENSIT_SCROLL_MOUSE)
+  if ( (mousePos.y > winSize.y - SENSIT_SCROLL_MOUSE) 
        && (cameraPos.y + winSize.y < world.GetHeight()) )
     return true;
 
@@ -317,7 +275,7 @@ bool Mouse::ScrollPointer()
 bool Mouse::DrawMovePointer()
 {
   if (ScrollPointer() ) {
-    AppWormux::GetInstance()->video.window.Blit( pointer_move, GetPosition() );
+    AppWormux::GetInstance()->video.window.Blit( pointer_move, GetPosition() ); 
     world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_move.GetWidth(), pointer_move.GetHeight()));
     return true;
   }
@@ -329,27 +287,22 @@ void Mouse::Draw()
   if (current_pointer == POINTER_STANDARD)
     return; // use standard SDL cursor
 
-  if ( DrawMovePointer() )
+  if ( DrawMovePointer() ) 
     return;
 
-  switch (current_pointer)
+  switch (current_pointer) 
     {
     case POINTER_SELECT:
-      AppWormux::GetInstance()->video.window.Blit( pointer_select, GetPosition() );
+      AppWormux::GetInstance()->video.window.Blit( pointer_select, GetPosition() ); 
       world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_select.GetWidth(), pointer_select.GetHeight()));
       break;
     case POINTER_MOVE:
-      AppWormux::GetInstance()->video.window.Blit( pointer_move, GetPosition() );
+      AppWormux::GetInstance()->video.window.Blit( pointer_move, GetPosition() ); 
       world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_move.GetWidth(), pointer_move.GetHeight()));
       break;
     case POINTER_AIM:
-      if(ActiveTeam().is_local) {
-	AppWormux::GetInstance()->video.window.Blit( pointer_aim, Point2i(GetPosition().x-7, GetPosition().y-10 ));
-	world.ToRedrawOnScreen(Rectanglei(GetPosition().x-7, GetPosition().y-10, pointer_aim.GetWidth(), pointer_aim.GetHeight()));
-      } else {
-	AppWormux::GetInstance()->video.window.Blit( pointer_select, GetPosition() );
-	world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_select.GetWidth(), pointer_select.GetHeight()));
-      }
+      AppWormux::GetInstance()->video.window.Blit( pointer_aim, Point2i(GetPosition().x-7, GetPosition().y-10 )); 
+      world.ToRedrawOnScreen(Rectanglei(GetPosition().x-7, GetPosition().y-10, pointer_aim.GetWidth(), pointer_aim.GetHeight()));
       break;
     default:
       break;

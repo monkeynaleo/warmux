@@ -60,7 +60,7 @@ OptionMenu::OptionMenu() :
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   /* Grapic options */
-  Box * graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, 1));
+  graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, 1));
   graphic_options->AddWidget(new Label(_("Graphic options"), zeroRect, *normal_font));
 
   lbox_video_mode = new ListBox( Rectanglei(0, 0, 0, 80) );
@@ -83,10 +83,8 @@ OptionMenu::OptionMenu() :
   opt_display_name = new CheckBox(_("Display player's name?"), zeroRect);
   graphic_options->AddWidget(opt_display_name);
 
-  widgets.AddWidget(graphic_options);
-
   /* Sound options */
-  Box * sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, 1));
+  sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, 1));
   sound_options->AddWidget(new Label(_("Sound options"), zeroRect, *normal_font));
 
   lbox_sound_freq = new ListBox( Rectanglei(0, 0, 0, 80) );
@@ -98,10 +96,8 @@ OptionMenu::OptionMenu() :
   opt_sound_effects = new CheckBox(_("Sound effects?"), zeroRect);
   sound_options->AddWidget(opt_sound_effects);
 
-  widgets.AddWidget(sound_options);
-
   /* Game options */
-  Box * game_options = new VBox( Rectanglei(GAME_X, GAME_Y, GAME_W, 1) );
+  game_options = new VBox( Rectanglei(GAME_X, GAME_Y, GAME_W, 1) );
   game_options->AddWidget(new Label(_("Game options"), zeroRect, *normal_font));
 
   opt_duration_turn = new SpinButton(_("Duration of a turn:"), zeroRect,
@@ -125,22 +121,31 @@ OptionMenu::OptionMenu() :
 
   game_options->AddWidget(opt_energy_ini);
 
-  widgets.AddWidget(game_options);
-
   // Values initialization
 
-  // Get available video resolution
-  AppWormux * app = AppWormux::GetInstance();
-  std::list<Point2i>& video_res = AppWormux::GetInstance()->video.GetAvailableConfigs();
+  //Generate video mode list
+  SDL_Rect **modes;
 
-  std::list<Point2i>::iterator it = video_res.begin(), end = video_res.end();
-  for (; it != end ; ++it) {
+  /* Get available fullscreen/hardware modes */
+  modes=SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
+
+  /* Check is there are any modes available */
+  AppWormux * app = AppWormux::GetInstance();
+
+  if(modes == (SDL_Rect **)0){
     std::ostringstream ss;
-    ss << (*it).x << "x" << (*it).y ;
-    if ((*it).x == app->video.window.GetWidth() && (*it).y == app->video.window.GetHeight())
-      lbox_video_mode->AddItem(true, ss.str(), ss.str());
-    else
-      lbox_video_mode->AddItem(false, ss.str(), ss.str());
+    ss << app->video.window.GetWidth() << "x" << app->video.window.GetHeight();
+    lbox_video_mode->AddItem(false, "No modes available!", ss.str());
+  } else {
+    for(int i=0;modes[i];++i) {
+      if (modes[i]->w < 800 || modes[i]->h < 600) break;
+      std::ostringstream ss;
+      ss << modes[i]->w << "x" << modes[i]->h ;
+      if (modes[i]->w == app->video.window.GetWidth() && modes[i]->h == app->video.window.GetHeight())
+	lbox_video_mode->AddItem(true, ss.str(), ss.str());
+      else
+	lbox_video_mode->AddItem(false, ss.str(), ss.str());
+    }
   }
 
   // Generate sound mode list
@@ -174,7 +179,10 @@ OptionMenu::~OptionMenu()
 
 void OptionMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  widgets.Clic(mousePosition, button);
+  if( graphic_options->Clic(mousePosition, button) ){
+  } else if( sound_options->Clic(mousePosition, button) ){
+  } else if( game_options->Clic(mousePosition, button) ){
+  }
 }
 
 void OptionMenu::SaveOptions()
@@ -230,5 +238,8 @@ void OptionMenu::__sig_cancel()
 
 void OptionMenu::Draw(const Point2i &mousePosition)
 {
+  graphic_options->Draw(mousePosition);
+  sound_options->Draw(mousePosition);
+  game_options->Draw(mousePosition);
 }
 

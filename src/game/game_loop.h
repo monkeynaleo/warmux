@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game loop : drawing and data handling
+ * Boucle de jeu : dessin et gestion des données.
  *****************************************************************************/
 
 #ifndef GAME_LOOP_H
@@ -50,13 +50,13 @@ public:
   bool character_already_chosen;
   bool interaction_enabled;
 
-  // Draw to screen
+  // Dessin du jeu au complet.
   void Draw();
 
-  // Main loop
+  // La boucle principale du jeu
   void Run();
 
-  // Refresh all objects (position, state ...)
+  // Refresh du jeu en entier !
   void Refresh();
 
   // Read/Set State
@@ -82,6 +82,5 @@ private:
 
   PhysicalObj* GetMovingObject();
   bool IsAnythingMoving();
-  void ApplyDeathMode();
 };
 #endif

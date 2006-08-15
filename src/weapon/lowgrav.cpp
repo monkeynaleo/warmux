@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "lowgrav.h"
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/game.h"
 #include "../game/game_loop.h"
 #include "../object/physical_obj.h"
@@ -51,14 +51,14 @@ void LowGrav::Refresh()
 void LowGrav::p_Deselect()
 {
   ActiveCharacter().ResetConstants();
-  ActiveCharacter().SetClothe("normal");
+  ActiveCharacter().SetSkin("walking");
   m_is_active = false;
 }
 
 bool LowGrav::p_Shoot()
 {
   ActiveCharacter().SetGravityFactor(LOW_GRAVITY_FACTOR);
-  ActiveCharacter().SetClothe("helmet");
+  ActiveCharacter().SetSkin("helmet");
   return true;
 }
 

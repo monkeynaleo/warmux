@@ -129,7 +129,8 @@ public:
   void RunPhysicalEngine();
 
   // Notify the son class that the object has moved.
-  virtual void NotifyMove(Point2d oldPos, Point2d newPos) = 0 ;
+  virtual bool NotifyMove(Point2d oldPos, Point2d newPos, Point2d &contactPos,
+			  double &contact_angle) = 0 ;
 
   // Start moving
   void StartMoving();
@@ -155,15 +156,15 @@ protected:
   virtual void SignalFallEnding();
   virtual void SignalDrowning();
   virtual void SignalRebound();
-  virtual void SignalCollisionObject();
 
-  // Make the object rebound
-  void Rebound(Point2d contactPos, double contact_angle);
 private:
 
   void ComputeFallNextXY (double delta_t);
 
   void ComputePendulumNextXY (double delta_t);
+
+  // Make the object rebound
+  void Rebound(Point2d contactPos, double contact_angle);
 };
 
 #endif

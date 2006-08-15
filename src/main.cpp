@@ -32,12 +32,11 @@
 #include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
-#include "menu/credits_menu.h"
 #include "menu/game_menu.h"
+#include "menu/infos_menu.h"
 #include "menu/main_menu.h"
-#include "menu/network_connection_menu.h"
-#include "menu/network_menu.h"
 #include "menu/options_menu.h"
+#include "network/network.h"
 #include "include/action_handler.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
@@ -79,26 +78,14 @@ int AppWormux::main (int argc, char **argv){
 	    game_menu.Run();
 	    break;
 	  }
-        case menuNETWORK:
-	  {
-	    NetworkConnectionMenu network_connection_menu;
-	    network_connection_menu.Run();
-	    break;
-	  }
         case menuOPTIONS:
           {
             OptionMenu options_menu;
             options_menu.Run();
             break;
           }
-	case menuCREDITS:
-	  {
-	    CreditsMenu credits_menu;
-	    credits_menu.Run();
-	    break;
-	  }
         case menuQUIT:
-          quit = true; 
+          quit = true;
         default:
           break;
         }
@@ -125,13 +112,16 @@ int AppWormux::main (int argc, char **argv){
 
 void AppWormux::Init(int argc, char **argv){
   Config * config = Config::GetInstance();
+  config->Init();
 
   InitI18N();
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
 
+  ActionHandler::GetInstance()->Init();
   config->Load();
 
+  InitNetwork(argc, argv);
   video.InitWindow();
   InitFonts();
 
@@ -141,11 +131,23 @@ void AppWormux::Init(int argc, char **argv){
   jukebox.Init();
 }
 
+void AppWormux::InitNetwork(int argc, char **argv){
+  if (argc >= 3 && strcmp(argv[1],"server")==0) {
+	// wormux server <port>
+	network.Init();
+	network.server_start (argv[2]);
+  } else if (argc >= 3 && strcmp(argv[1], "--add-debug-mode") != 0) {
+	// wormux <server_ip> <server_port>
+	network.Init();
+	network.client_connect(argv[1], argv[2]);
+  }
+}
+
 void AppWormux::DisplayLoadingPicture(){
   Config * config = Config::GetInstance();
 
   std::string txt_version = _("Version") + std::string(" ") + Constants::VERSION;
-  std::string filename = config->GetDataDir() 
+  std::string filename = config->GetDataDir()
     + PATH_SEPARATOR + "menu"
     + PATH_SEPARATOR + "img"
     + PATH_SEPARATOR + "loading.png";
@@ -159,11 +161,11 @@ void AppWormux::DisplayLoadingPicture(){
 
   Time::GetInstance()->Reset();
 
-  Text text1(_("Wormux launching..."), white_color, Font::GetInstance(Font::FONT_HUGE), true); 
-  Text text2(txt_version, white_color, Font::GetInstance(Font::FONT_HUGE), true); 
-  
+  Text text1(_("Wormux launching..."), white_color, Font::GetInstance(Font::FONT_HUGE), true);
+  Text text2(txt_version, white_color, Font::GetInstance(Font::FONT_HUGE), true);
+
   Point2i windowCenter = video.window.GetSize() / 2;
-  
+
   text1.DrawCenter( windowCenter );
   text2.DrawCenter( windowCenter + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE)).GetHeight() + 20 ));
 
@@ -188,7 +190,7 @@ void AppWormux::End(){
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
-#endif  
+#endif
   std::cout << "o "
             << _("Please tell us your opinion of Wormux via email:") << " " << Constants::EMAIL
             << std::endl;
@@ -212,7 +214,7 @@ void AppWormux::DisplayWelcomeMessage(){
 
   // Affiche l'absence de garantie sur le jeu
   std::cout << "Wormux version " << Constants::VERSION
-	    << ", Copyright (C) 2001-2004 Lawrence Azzoug"
+	    << ", Copyright (C) 2001-2006 Wormux team"
 	    << std::endl
 	    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
             << "This is free software, and you are welcome to redistribute it" << std::endl

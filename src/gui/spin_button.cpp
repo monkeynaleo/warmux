@@ -26,8 +26,7 @@
 #include "../graphic/font.h"
 
 SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
-			int value, int step, int min_value, int max_value)
-{
+			     int value, int step, int min_value, int max_value){
   position =  rect.GetPosition();
   size = rect.GetSize();
   size.y = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
@@ -59,14 +58,12 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
   m_step = step;
 }
 
-SpinButton::~SpinButton ()
-{
+SpinButton::~SpinButton (){
   delete txt_label;
   delete txt_value;
 }
 
-void SpinButton::SetSizePosition(const Rectanglei &rect)
-{
+void SpinButton::SetSizePosition(const Rectanglei &rect){
   StdSetSizePosition(rect);
 
   std::ostringstream max_value_s;
@@ -79,8 +76,7 @@ void SpinButton::SetSizePosition(const Rectanglei &rect)
   m_minus->SetSizePosition( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10) );
 }
 
-void SpinButton::Draw(const Point2i &mousePosition)
-{
+void SpinButton::Draw(const Point2i &mousePosition){
   txt_label->DrawTopLeft(position);
    
   m_minus->Draw(mousePosition);
@@ -90,30 +86,25 @@ void SpinButton::Draw(const Point2i &mousePosition)
   txt_value->DrawCenterTop(center, position.y);
 }
 
-Widget* SpinButton::Clic(const Point2i &mousePosition, uint button)
-{
-  need_redrawing = true;
-
+bool SpinButton::Clic(const Point2i &mousePosition, uint button){
   if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
       (button == SDL_BUTTON_LEFT && m_minus->Contains(mousePosition)) ){
     SetValue(m_value - m_step);
-    return this;
+    return true;
   } else
   	if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
         (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
     	SetValue(m_value + m_step);
-    	return this;
+    	return true;
   	}
-  return NULL;
+  return false;
 }
 
-int SpinButton::GetValue() const
-{
+int SpinButton::GetValue() const{
   return m_value;
 }
 
-void SpinButton::SetValue(int value)  
-{
+void SpinButton::SetValue(int value)  {
   m_value = BorneLong(value, m_min_value, m_max_value);  
 
   std::ostringstream value_s;

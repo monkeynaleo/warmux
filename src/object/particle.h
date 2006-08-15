@@ -1,3 +1,4 @@
+
 /******************************************************************************
  *  Wormux, a free clone of the game Worms from Team17.
  *  Copyright (C) 2001-2004 Lawrence Azzoug.
@@ -28,19 +29,14 @@
 #include "../weapon/weapon_cfg.h"
 
 typedef enum {
-  particle_DARK_SMOKE,
   particle_SMOKE,
   particle_FIRE,
   particle_STAR,
-  particle_BULLET,
-  particle_GROUND,
-  particle_AIR_HAMMER,
-  particle_MAGIC_STAR,
-  particle_BODY_MEMBER
+  particle_MAGIC_STAR
 } particle_t;
 
-enum particle_spr{ SMOKE_spr, EXPLOSION_SMOKE_spr, FIRE_spr, STAR_spr, MAGIC_STAR_R_spr, MAGIC_STAR_Y_spr, MAGIC_STAR_B_spr, DARK_SMOKE_spr, BULLET_spr };
-const int particle_spr_nbr = 9;
+enum particle_spr{ SMOKE_spr, EXPLOSION_SMOKE_spr, FIRE_spr, STAR_spr, MAGIC_STAR_R_spr, MAGIC_STAR_Y_spr, MAGIC_STAR_B_spr };
+const int particle_spr_nbr = 7;
 
 class Particle : public PhysicalObj
 {
@@ -57,6 +53,7 @@ class Particle : public PhysicalObj
  public:
   Particle(const std::string &name);
   ~Particle();
+  virtual void Init()=0;
   virtual void Draw();
   virtual void Refresh();
   void SetOnTop(bool b) { on_top = b; }
@@ -70,6 +67,7 @@ class ExplosionSmoke : public Particle
   float mvt_freq;
  public:
   ExplosionSmoke(const uint size_init);
+  void Init();
   void Refresh();
   void Draw();
 };
@@ -78,32 +76,21 @@ class Smoke : public Particle
 {
  public:
   Smoke();
-};
-
-class DarkSmoke : public Particle
-{
- public:
-  DarkSmoke();
+  void Init();
 };
 
 class StarParticle : public Particle
 {
  public:
   StarParticle();
-};
-
-class BulletParticle : public Particle
-{
- public:
-  BulletParticle();
-  void Refresh();
-  void SignalRebound();
+  void Init();
 };
 
 class MagicStarParticle: public Particle
 {
  public:
   MagicStarParticle();
+  void Init();
   void Refresh();
 };
 
@@ -111,22 +98,8 @@ class FireParticle : public Particle
 {
  public:
   FireParticle();
+  void Init();
   void SignalFallEnding();
-};
-
-class GroundParticle : public Particle
-{
- public:
-  GroundParticle(const Point2i& size, const Point2i& position);
-  void Refresh();
-};
-
-class BodyMemberParticle : public Particle
-{
-  int angle;
- public:
-  BodyMemberParticle(Sprite* spr, const Point2i& position);
-  void Refresh();
 };
 
 class ParticleEngine
@@ -156,7 +129,6 @@ class ParticleEngine
 		     uint nb_particles, particle_t type,
 		     bool upper,
 		     double angle=-1, double norme=-1);
-  static void AddNow(Particle* particle);
 
   enum ESmokeStyle { NoESmoke, LittleESmoke, BigESmoke }; // Style of smoke explosion (quantitie of smoke)
   static void AddExplosionSmoke(const Point2i &pos, const uint &radius, ESmokeStyle &style);

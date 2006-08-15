@@ -36,10 +36,6 @@ private:
 
 class Uzi : public WeaponLauncher
 {
-  ParticleEngine particle;
-  double last_angle;
-  Point2i last_bullet_pos;
-  Point2i last_uzi_pos;
  private:
   bool p_Shoot();
   void RepeatShoot(); 

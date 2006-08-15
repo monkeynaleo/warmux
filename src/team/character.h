@@ -24,7 +24,7 @@
 
 #include <string>
 #include <SDL.h>
-#include "body.h"
+#include "skin.h"
 #include "team.h"
 #include "../gui/progress_bar.h"
 #include "../graphic/sprite.h"
@@ -32,7 +32,6 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 
-class Body;
 class Team;
 
 // Un ver de terre :-)
@@ -40,9 +39,11 @@ class Character : public PhysicalObj
 {
 private:
   std::string character_name;
-  Team& m_team;
-  bool step_sound_played;
-  bool prepare_shoot;
+  Team *m_team;
+  bool desactive;       // Disable the characte ? (no display, nor handling)
+  bool skin_is_walking; // True if the curent is a walking skin.
+  bool is_walking;
+  bool full_walk;
 
   // energy
   uint energy;
@@ -61,8 +62,22 @@ private:
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
   uint do_nothing_time;
-  uint animation_time;
   int lost_energy;
+
+  Skin *skin;
+  CfgSkin_Walking *walk_skin;
+ public:
+  std::string current_skin;
+ private:
+  // Animation
+  struct s_anim{
+    Sprite *image;
+    bool draw;
+    uint time; // Time for next animation
+  } anim;
+
+  uint m_image_frame; // Current image frame
+  uint m_frame_repetition; // Number of frame repetition (used for walking)
   bool hidden; //The character is hidden (needed by teleportation)
 
   // Channel used for sound
@@ -70,36 +85,43 @@ private:
 
 public:
 
+  Sprite *image;
+
   // Previous strength 
   double previous_strength;
-
-  Body* body;
 
 private:
   void DrawEnergyBar (int dy);
   void DrawName (int dy) const;
+  void StartBreathing();
+  void StartWalking();
+  void StopWalking();
 
-  void SignalDeath();
-  void SignalDrowning();
-  void SignalGhostState (bool was_dead);
-  void SignalFallEnding();
+  virtual void SignalDeath();
+  virtual void SignalDrowning();
+  virtual void SignalGhostState (bool was_dead);
+  virtual void SignalFallEnding();
 
 public:
+  Character ();
 
-  Character (Team& my_team, const std::string &name);
-  ~Character();
+  // (Re)Initialise le ver
+  void Init();
+  void Reset();
+  void InitTeam (Team *equipe, const std::string &nom, 
+		 Skin *skin);
+  void DebutPartie();
 
-  void SignalExplosion();
-
-  // Change le niveau d'ï¿½ergie
-  void SetEnergyDelta (int delta, bool do_report=true);
+  // Change le niveau d'énergie
+  void SetEnergyDelta (int delta);
 
   // Changement de direction
   void SetDirection (int direction);
 
-  // Initialise un mouvement ï¿½droite ou ï¿½gauche
+  // Initialise un mouvement à droite ou à gauche
   void InitMouvementDG (uint pause);
   bool CanStillMoveDG (uint pause);
+  bool IsWalking () const { return is_walking; };
 
   // Changement d'etat
   void HighJump ();
@@ -110,8 +132,7 @@ public:
 
   // Handle a key event on the character.
   void HandleKeyEvent(int key, int event_type) ;
-  void PrepareShoot();
-  void DoShoot();
+  void DoShoot() ;
   void HandleShoot(int event_type) ;
 
   // Se prepare a un nouveau tour
@@ -123,23 +144,32 @@ public:
   void Hide();
   void Show();
 
-  // Les mouvements droite/gauche sont autorisï¿½ ? (pause assez longue ?)
+  // Un ver est actif ? (affiché et ses données sont calculées ?)
+  bool IsActive() const; 
+
+  // Les mouvements droite/gauche sont autorisés ? (pause assez longue ?)
   bool MouvementDG_Autorise() const;
   bool CanJump() const;
+  void FrameImageSuivante ();
 
-  // Lecture du niveau d'ï¿½ergie en pourcent
+  // Lecture du niveau d'énergie en pourcent
   uint GetEnergy() const;
 
-  // Lecture de la direction d'un (+1 ï¿½droite, -1 ï¿½gauche)
+  // Lecture de la direction d'un (+1 à droite, -1 à gauche)
   int GetDirection() const;
 
-  // Acces ï¿½l'ï¿½uipe d'un ver
+  // Acces à l'équipe d'un ver
   Team& TeamAccess();
   const Team& GetTeam() const;
 
   // Access to character info
   const std::string& GetName() const { return character_name; }
   bool IsSameAs(const Character& other) { return (GetName() == other.GetName()); }
+
+  // Accès à l'avatar
+  const Skin& GetSkin() const;
+  Skin& AccessSkin();
+  bool SetSkin(const std::string& skin_name);
 
   // Hand position
   Point2i GetHandPosition();
@@ -148,19 +178,9 @@ public:
   // Damage report
   void HandleMostDamage();
   void MadeDamage(const int Dmg, const Character &other);
-  int  GetMostDamage() const { return max_damage; }
-  int  GetOwnDamage() const { return damage_own_team; }
-  int  GetOtherDamage() const { return damage_other_team; }
-
-  // Body handling
-  void SetBody(Body* _body);
-  void SetClothe(std::string name);
-  void SetMovement(std::string name);
-  void SetClotheOnce(std::string name);
-  void SetMovementOnce(std::string name);
-
-  uint GetTeamIndex();
-  uint GetCharacterIndex();
+  int  GetMostDamage() { HandleMostDamage(); return max_damage; }
+  int  GetOwnDamage() { return damage_own_team; }
+  int  GetOtherDamage() { return damage_other_team; }
 };
 
 #endif

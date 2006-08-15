@@ -7,9 +7,9 @@
     <email>norman AT xael.org</email>
   </author>
 
-  <surface name="sky" file="cowland_bg.jpg" />
+  <surface name="sky" file="cowland_bg.png" />
   <surface name="map" file="cowland.png" />
-  <surface name="preview" file="preview.jpg" />
+  <surface name="preview" file="preview.png" />
 
   <name>Cowland</name>
   <water>0</water>

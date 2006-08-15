@@ -47,21 +47,26 @@ const uchar B_FINAL = 0; //Couleur B à 0%
 
 const float DUREE_MVT = 750.0;
 
-TeamEnergy :: TeamEnergy(const std::string &_team_name)
+TeamEnergy :: TeamEnergy()
+{
+  bar_text = NULL;
+}
+
+void TeamEnergy :: Init ()
 {
   dx = 0;
   dy = 0;
   tps_debut_mvt = 0;
   valeur_max = 0;
-  status = EnergyStatusOK;
+  status = EnergieStatusOK;
   barre_energie.InitPos (0,0, BARRE_LARG, BARRE_HAUT);
 
   barre_energie.SetValueColor( Color(R_INIT, V_INIT, B_INIT, ALPHA) );
   barre_energie.SetBorderColor( Color(255, 255, 255, ALPHA) );
   barre_energie.SetBackgroundColor( Color(255*6/10, 255*6/10, 255*6/10, ALPHA_FOND) );
 
-  bar_text = new Text("");
-  team_name = _team_name;
+  if(bar_text == NULL)
+    bar_text = new Text("");
 }
 
 TeamEnergy :: ~TeamEnergy ()
@@ -69,15 +74,9 @@ TeamEnergy :: ~TeamEnergy ()
   delete bar_text;
 }
 
-void TeamEnergy::Config(uint _current_energy,
-			uint _max_energy)
+void TeamEnergy :: ChoisitNom (const std::string &nom_equipe)
 {
-  valeur_max = _max_energy;
-
-  valeur = _current_energy;
-  nv_valeur = _current_energy;
-  assert(valeur_max != 0)
-  barre_energie.InitVal (valeur, 0, valeur_max);
+  nom = nom_equipe;
 }
 
 void TeamEnergy :: Refresh ()
@@ -85,32 +84,32 @@ void TeamEnergy :: Refresh ()
   switch(status)
   {
   //La valeur de l'énergie d'une des équipe change
-  case EnergyStatusValueChange:
+  case EnergieStatusValeurChange:
     if(nv_valeur > valeur)
       valeur = nv_valeur;
     if(valeur > nv_valeur)
       --valeur;
     if(valeur == nv_valeur)
-      status = EnergyStatusWait;
+      status = EnergieStatusAttend;
     break;
 
   //Le classement se modifie
-  case EnergyStatusClassementChange:
+  case EnergieStatusClassementChange:
     Mouvement();
     break;
 
   //Aucun changement ne s'effectue en ce moment
-  case EnergyStatusOK:
+  case EnergieStatusOK:
     if( valeur != nv_valeur && !EstEnMouvement())
-      status = EnergyStatusValueChange;
+      status = EnergieStatusValeurChange;
     else
     if( classement != nv_classement )
-      status = EnergyStatusClassementChange;
+      status = EnergieStatusClassementChange;
     break;
 
   //Cette barre d'énergie n'a plus rien à faire
   //Elle attend une synchronisation avec les autres barres
-  case EnergyStatusWait:
+  case EnergieStatusAttend:
     break;
   }
 }
@@ -143,12 +142,27 @@ void TeamEnergy :: Draw ()
   barre_energie.DrawXY( Point2i(x, y) );
 
   std::ostringstream ss;
-  ss << team_name << "/" << valeur;
+  ss << nom << "/" << valeur;
   x = camera.GetSizeX() - ((BARRE_LARG/2) + 10) + dx;
   y = BARRE_HAUT + (classement * (BARRE_HAUT + ESPACEMENT)) + dy;
   std::string txt = ss.str();
   bar_text->Set(txt);
   bar_text->DrawCenterTop(x,y);
+}
+
+void TeamEnergy :: Reset ()
+{
+}
+
+void TeamEnergy::FixeMax (uint energie)
+{ valeur_max = energie; }
+
+void TeamEnergy::FixeValeur (uint energie)
+{
+  valeur = energie;
+  nv_valeur = energie;
+  assert(valeur_max != 0)
+  barre_energie.InitVal (energie, 0, valeur_max);
 }
 
 void TeamEnergy::NouvelleValeur (uint nv_energie)
@@ -171,14 +185,14 @@ void TeamEnergy::Mouvement ()
     //D'autres jauges sont en train de changer de classement
     //Celle-là ne doit pas changer de classement tant que sa
     //valeur d'énergie n'a pas été actualisée à l'écran
-    status = EnergyStatusWait;
+    status = EnergieStatusAttend;
     return;
   }
 
   if( classement == nv_classement && !EstEnMouvement())
   {
     //D'autres jauges sont en train de changer de classement
-    status = EnergyStatusWait;
+    status = EnergieStatusAttend;
     return;
   }
 
@@ -205,7 +219,7 @@ void TeamEnergy::Mouvement ()
       dx = 0;
       classement = nv_classement;
       tps_debut_mvt = 0;
-      status = EnergyStatusWait;
+      status = EnergieStatusAttend;
       return;
     }
   }

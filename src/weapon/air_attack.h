@@ -65,7 +65,7 @@ private:
 
 public:
   Plane(AirAttackConfig& cfg);
-  void Shoot(double speed, Point2i& target);
+  void Shoot(double speed);
   void Draw();
   void Refresh();
 
@@ -76,13 +76,12 @@ class AirAttack : public Weapon
 {
 private:
   bool p_Shoot();
-  Point2i target;
   Plane plane;
 
 public:
   AirAttack();
   void Refresh();
-  virtual void ChooseTarget (Point2i mouse_pos);
+  virtual void ChooseTarget ();
 
  private:
   AirAttackConfig& cfg();

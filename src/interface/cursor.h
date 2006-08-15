@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arrow on top of the active character
+ * Curseur clignotant montrant la position d'un ver actif.
  *****************************************************************************/
 
 #ifndef CURSOR_H
@@ -27,7 +27,7 @@
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
-class CharacterCursor
+class CurseurVer
 {
 public:
    Sprite *image;
@@ -40,11 +40,12 @@ private:
   bool actif;
   bool want_hide;
 
-  static CharacterCursor * singleton;
+  static CurseurVer * singleton;
 
 public:
-  static CharacterCursor * GetInstance();
+  static CurseurVer * GetInstance();
 
+  void Init();
   void Reset();
   void Draw();
   void Refresh();
@@ -53,16 +54,16 @@ public:
   void PointeObj (PhysicalObj *obj);
 
   // Pointe un objet
-  void FollowActiveCharacter ();
+  void SuitVerActif ();
 
-  // Hide the cursor
-  void Hide();
+  // Cache le curseur
+  void Cache();
 
   
 
 private:
-  CharacterCursor();
-  ~CharacterCursor();
+  CurseurVer();
+  ~CurseurVer();
 
   bool IsDisplayed() const;
 };

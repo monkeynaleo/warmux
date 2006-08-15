@@ -138,12 +138,6 @@ void Map::Dig(const Point2i center, const uint radius)
                                       , Point2i(2*(radius+EXPLOSION_BORDER_SIZE),2*(radius+EXPLOSION_BORDER_SIZE))));
 }
 
-void Map::PutSprite(const Point2i pos, Sprite* spr)
-{
-   ground.PutSprite (pos, spr);
-   to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
-}
-
 void Map::DrawSky()
 { 
   SwitchDrawingCache();
@@ -213,12 +207,11 @@ bool Map::LigneH_EstDansVide (int ox, int y, int width)
    return true;
 }
 
-// TODO : for consistency, LigneV_EstDansVide should use a 'height' as LigneH does it ...
 bool Map::LigneV_EstDansVide (int x, int top, int bottom)
 { 
   assert (top <= bottom);
 
-  // Vï¿½ifie qu'on reste dans le monde
+  // Vérifie qu'on reste dans le monde
   if (EstHorsMondeX(x) || EstHorsMondeYhaut(top, bottom-top+1))
     return Config::GetInstance()->GetExterieurMondeVide();
   if (top < 0) top = 0;
@@ -234,50 +227,16 @@ bool Map::LigneV_EstDansVide (int x, int top, int bottom)
 
 bool Map::RectEstDansVide (const Rectanglei &prect)
 {
-   // only check whether the border touch the ground
-
    Rectanglei rect(prect);
 
    // Clip rectangle in the the world area
-   rect.Clip( Rectanglei(0, 0, GetWidth(), GetHeight()) );
-
-   // Only check the borders of the rectangle
-   if(rect.GetSizeX()==0 || rect.GetSizeY()==0)
-     return true;
-
-   if(!LigneH_EstDansVide (rect.GetPositionX(), rect.GetPositionY(), rect.GetSizeX()))
-     return false;
-
-   if(rect.GetSizeY() > 1)
-   {
-     if(!LigneH_EstDansVide (rect.GetPositionX(), rect.GetPositionY() + rect.GetSizeY() - 1, rect.GetSizeX()))
-       return false;
-     if(!LigneV_EstDansVide (rect.GetPositionX(), rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
-       return false;
-
-     if(rect.GetSizeX() > 1)
-     if(!LigneV_EstDansVide (rect.GetPositionX()+rect.GetSizeX()-1, rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
-       return false;
-   }
-
-   return true;
-}
-
-bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect)
-{
-   // only check whether the rectangle touch the ground pixel by pixel
-   // Prefere using the method above, as performing a pixel by pixel test is quite slow!
-
-   Rectanglei rect(prect);
-
-   // Clip rectangle in the the world area
-   rect.Clip( Rectanglei(0, 0, GetWidth(), GetHeight()) );
-
+   rect.Clip( Rectanglei(0, 0, GetWidth(), GetHeight()) ); 
+   
    // Check line by line
    for( int i = rect.GetPositionY(); i < rect.GetPositionY() + rect.GetSizeY(); i++ )
      if( !LigneH_EstDansVide (rect.GetPositionX(), i, rect.GetSizeX()) )
        return false;
-
+   
    return true;
 }
 

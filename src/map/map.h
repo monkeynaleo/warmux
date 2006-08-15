@@ -26,7 +26,6 @@
 #include "sky.h"
 #include "water.h"
 #include "../graphic/surface.h"
-#include "../graphic/sprite.h"
 #include "../graphic/text.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
@@ -70,10 +69,9 @@ public:
   bool LigneH_EstDansVide (int left, int y,  int right);
   bool LigneV_EstDansVide (int x,  int top, int bottom);
   bool RectEstDansVide (const Rectanglei &rect);
-  bool ParanoiacRectIsInVacuum (const Rectanglei &rect);
 
   // La ligne du haut/bas d'un objet physique est dans le vide ?
-  // Le test se fait sur le rectangle de test dï¿½alï¿½de dx et dy.
+  // Le test se fait sur le rectangle de test décalé de dx et dy.
   bool EstDansVide_haut (const PhysicalObj &obj, int dx, int dy);
   bool EstDansVide_bas (const PhysicalObj &obj, int dx, int dy);
   bool IsInVacuum_left (const PhysicalObj &obj, int dx, int dy);
@@ -94,10 +92,7 @@ public:
   void Dig(const Point2i position, const Surface& alpha_sur);
   // Dig a circle hole in the map
   void Dig(const Point2i center, const uint radius);
-
-  // Insert a sprite into the ground
-  void PutSprite(const Point2i pos, Sprite* spr);
-
+   
   // Lit la taille du monde
   int GetWidth() const { return ground.GetSizeX(); }
   int GetHeight() const { return ground.GetSizeY(); }

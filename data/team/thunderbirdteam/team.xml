@@ -3,19 +3,19 @@
   <name>Thunderbird Team</name>
   <surface name="flag" file="flag.png" />
   <team>
-    <character name="Thunderbird" body="thunderbirdteam" />
-    <character name="Gibson" body="thunderbirdteam" />
-    <character name="Phorusrhacidae" body="thunderbirdteam" />
-    <character name="Dromornithidae" body="thunderbirdteam" />
-    <character name="Train" body="thunderbirdteam" />
-    <character name="Ford" body="thunderbirdteam" />
-    <character name="Triumph" body="thunderbirdteam" />
-    <character name="Royal Enfield" body="thunderbirdteam" />    
-    <character name="Albuquerque" body="thunderbirdteam" />
-    <character name="UBC" body="thunderbirdteam" />
-    <character name="Hamilton" body="thunderbirdteam" />
-    <character name="Seattle" body="thunderbirdteam" />
-    <character name="Squadron" body="thunderbirdteam" />
-    <character name="Missile" body="thunderbirdteam" />
+    <character name="Thunderbird" skin="thunderbirdteam" />
+    <character name="Gibson" skin="thunderbirdteam" />
+    <character name="Phorusrhacidae" skin="thunderbirdteam" />
+    <character name="Dromornithidae" skin="thunderbirdteam" />
+    <character name="Train" skin="thunderbirdteam" />
+    <character name="Ford" skin="thunderbirdteam" />
+    <character name="Triumph" skin="thunderbirdteam" />
+    <character name="Royal Enfield" skin="thunderbirdteam" />
+    <character name="Albuquerque" skin="thunderbirdteam" />
+    <character name="UBC" skin="thunderbirdteam" />
+    <character name="Hamilton" skin="thunderbirdteam" />
+    <character name="Seattle" skin="thunderbirdteam" />
+    <character name="squadron" skin="thunderbirdteam" />
+    <character name="missile" skin="thunderbirdteam" />    
   </team>
 </resources>

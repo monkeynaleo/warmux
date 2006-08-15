@@ -7,7 +7,7 @@
     <email>norman AT xael.org</email>
   </author>
 
-  <surface name="sky" file="fond.jpg" />
+  <surface name="sky" file="fond.png" />
   <surface name="map" file="prehistorik.png" />
   <surface name="preview" file="preview.jpg" />
 

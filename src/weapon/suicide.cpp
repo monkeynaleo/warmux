@@ -21,7 +21,7 @@
 
 #include "suicide.h"
 #include <iostream>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/game_loop.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
@@ -57,11 +57,8 @@ void Suicide::Refresh()
   m_is_active = sound_channel != -1 && Mix_Playing(sound_channel);
 
   if( !m_is_active )
-  if( !ActiveCharacter().IsDead() )
-  {
-    ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
-    ActiveCharacter().Die();
-  }
+    if( !ActiveCharacter().IsDead() )
+      ActiveCharacter().Die();
 }
 
 ExplosiveWeaponConfig& Suicide::cfg()

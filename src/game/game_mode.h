@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game mode : duration of a turn, weapons configurations, max number of character
- * per team, etc.
+ * Mode de jeu : temps d'un tour, configuration des armes, nombre de ver
+ * maximum par équipe, etc.
  *****************************************************************************/
 
 #ifndef MODE_JEU_H
@@ -35,7 +35,6 @@ public:
   uint duration_turn;
   uint duration_move_player;
   uint duration_exchange_player;
-  uint duration_before_death_mode;
   double gravity;
   double safe_fall ;
   double damage_per_fall_unit ;

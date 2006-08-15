@@ -23,7 +23,7 @@
 //-----------------------------------------------------------------------------
 #include <algorithm>
 #include "all.h"
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../interface/interface.h"
@@ -44,7 +44,7 @@ WeaponsList::WeaponsList()
 
 WeaponsList::~WeaponsList()
 {
-  weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
+  weapons_list_it it=todelete.begin(), end=todelete.end();
   for (; it != end; ++it)
   {
     delete *it;
@@ -57,6 +57,7 @@ void WeaponsList::AddToList(Weapon* arme, uint num_sort)
 {
   // insert the pointer
   m_weapons_list.push_back(arme);
+  todelete.push_back(arme);
 
   m_weapons_map.insert(keybind(num_sort, arme));
 
@@ -68,67 +69,72 @@ void WeaponsList::AddToList(Weapon* arme, uint num_sort)
 void WeaponsList::Init()
 {
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
+  
   Bazooka* bazooka = new Bazooka;
-  Uzi* uzi = new Uzi;
-  Gun* gun = new Gun;
-  SnipeRifle* snipe_rifle = new SnipeRifle;
-  RiotBomb* riot_bomb = new RiotBomb;
-  AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
-  Dynamite* dynamite = new Dynamite;
-  GrenadeLauncher* grenade_launcher = new GrenadeLauncher;
-  HollyGrenadeLauncher* holly_grenade_launcher = new HollyGrenadeLauncher;
-  ClusterLauncher* cluster_launcher = new ClusterLauncher;
-
-  Baseball* baseball = new Baseball;
-  Mine* mine = new Mine;
-  AirAttack* air_attack = new AirAttack;
-  TuxLauncher* tux = new TuxLauncher;
-  GnuLauncher* gnu_launcher = new GnuLauncher;
-  BounceBallLauncher* bounce_ball_launcher = new BounceBallLauncher;
-  Teleportation* teleportation = new Teleportation;
-  Parachute* parachute = new Parachute;
-  Suicide* suicide = new Suicide;
-  SkipTurn* skipturn = new SkipTurn;
-  JetPack* jetpack = new JetPack;
-  Airhammer* airhammer = new Airhammer;
-  Construct* construct = new Construct;
-  LowGrav* lowgrav = new LowGrav;
-  NinjaRope* ninjarope = new NinjaRope;
-
-  // Category 1
   AddToList(bazooka, 1);
-  AddToList(uzi, 1);
-  AddToList(snipe_rifle, 1);
-  AddToList(gun, 1);
-  AddToList(riot_bomb, 1);
+  
+  AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
   AddToList(auto_bazooka, 1);
 
-  // Category 2
-  AddToList(dynamite,2);
-  AddToList(grenade_launcher, 2);
-  AddToList(cluster_launcher, 2);
-  AddToList(holly_grenade_launcher, 2);
-  AddToList(mine,2);
+  GrenadeLauncher* grenade_launcher = new GrenadeLauncher;
+  AddToList(grenade_launcher, 1);
 
-  // Category 3
-  AddToList(baseball, 3);
-  AddToList(tux,3);
-  AddToList(gnu_launcher,3);
-  AddToList(air_attack,3);
-  AddToList(bounce_ball_launcher,3);
+  HollyGrenadeLauncher* holly_grenade_launcher = new HollyGrenadeLauncher;
+  AddToList(holly_grenade_launcher, 1);
 
-  // Category 4
-  AddToList(ninjarope,4);
-  AddToList(jetpack,4);
-  AddToList(parachute,4);
-  AddToList(teleportation,4);
-  AddToList(lowgrav,4);
+  ClusterLauncher* cluster_launcher = new ClusterLauncher;
+  AddToList(cluster_launcher, 1);
 
-  // Category 5
-  AddToList(skipturn,5);
-  AddToList(airhammer,5);
-  AddToList(construct,5);
+  Gun* gun = new Gun;
+  AddToList(gun, 2);
+
+  Uzi* uzi = new Uzi;
+  AddToList(uzi, 2);
+
+  Baseball* baseball = new Baseball;
+  AddToList(baseball, 2);  
+
+  Dynamite* dynamite = new Dynamite;
+  AddToList(dynamite,3);
+
+  Mine* mine = new Mine;
+  AddToList(mine,3);
+
+  AirAttack* air_attack = new AirAttack;
+  AddToList(air_attack,4);
+
+  TuxLauncher* tux = new TuxLauncher;
+  AddToList(tux,4);  
+
+  GnuLauncher* gnu_launcher = new GnuLauncher;
+  AddToList(gnu_launcher,4); 
+
+  BounceBallLauncher* bounce_ball_launcher = new BounceBallLauncher;
+  AddToList(bounce_ball_launcher,4); 
+
+  Teleportation* teleportation = new Teleportation;
+  AddToList(teleportation,5);
+
+  Parachute* parachute = new Parachute;
+  AddToList(parachute,5);
+
+  Suicide* suicide = new Suicide;
   AddToList(suicide,5);
+
+  SkipTurn* skipturn = new SkipTurn;
+  AddToList(skipturn,5);
+
+  JetPack* jetpack = new JetPack;
+  AddToList(jetpack,5);
+
+  Airhammer* airhammer = new Airhammer;
+  AddToList(airhammer,5);
+
+  LowGrav* lowgrav = new LowGrav;
+  AddToList(lowgrav,5);
+
+  NinjaRope* ninjarope = new NinjaRope;
+  AddToList(ninjarope,5);
 }
 
 //-----------------------------------------------------------------------------
@@ -151,26 +157,26 @@ bool WeaponsList::GetWeaponBySort(uint sort, Weapon_type &type)
 {
   uint nb_weapons = m_weapons_map.count(sort);
   if (nb_weapons == 0) return false;
-
+	
   // One or many weapons on this key
-  std::pair<std::multimap<uint, Weapon*>::iterator,
+  std::pair<std::multimap<uint, Weapon*>::iterator, 
     std::multimap<uint, Weapon*>::iterator> p = m_weapons_map.equal_range(sort);
-
-  std::multimap<uint, Weapon*>::iterator
+  
+  std::multimap<uint, Weapon*>::iterator 
 	it = p.first,
     end = p.second;
-
+  
   // we turn between the differents possibility
   if (nb_weapons > 1)
     {
       while ( (*it).second != &(ActiveTeam().GetWeapon()) && it != end) it++ ;
-
+      
       // the previous selected weapon has been founded
       if (it != end) it++;
 
       if (it == end) it = p.first;
-    }
-
+    } 
+  
   // then we selected the "next" one
   type = (*it).second -> GetType();
   return true;
@@ -182,7 +188,7 @@ class test_weapon_type {
   private:
 	Weapon_type m_type;
   public:
-    test_weapon_type(Weapon_type type) { m_type = type; }
+    test_weapon_type(Weapon_type type) { m_type = type; } 
 	bool operator() (const Weapon* w) const { return w->GetType()==m_type; }
 };
 

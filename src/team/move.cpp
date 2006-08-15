@@ -40,7 +40,7 @@
 // Pause entre deux deplacement
 #define PAUSE_CHG_SENS 80 // ms
 
-// Calcule la hauteur a chuter ou grimper lors d'un dï¿½lacement horizontal
+// Calcule la hauteur a chuter ou grimper lors d'un déplacement horizontal
 // Renvoie true si le mouvement est possible
 bool CalculeHauteurBouge (Character &character, int &hauteur){
   int y_floor=character.GetY();
@@ -65,7 +65,7 @@ bool CalculeHauteurBouge (Character &character, int &hauteur){
     //We can go down, but the step is to big -> the character will fall.
     character.SetX (character.GetX() +character.GetDirection());
     character.UpdatePosition();
-    character.SetMovement("fall");
+    character.SetSkin("fall");
     return false;
   }
   else{
@@ -109,7 +109,13 @@ void MoveCharacter(Character &character){
     // Gravite (s'il n'y a pas eu de collision
     character.UpdatePosition();
 
+    // Passe a l'image suivante
+    character.FrameImageSuivante();
+
   }while(character.CanStillMoveDG(PAUSE_BOUGE) && CalculeHauteurBouge (character, hauteur));
+
+//    character.UpdatePosition();
+
 }
 // Move a character to the left
 void MoveCharacterLeft(Character &character){
@@ -119,25 +125,20 @@ void MoveCharacterLeft(Character &character){
   bool bouge = (character.GetDirection() == -1);
   if (bouge)
   {
+//    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
     MoveCharacter(character);
   }
   else{
-    ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
+    ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 
   //Refresh skin position across network
-  if( !network.IsLocal() && ActiveTeam().is_local)
+  if( !network.is_local() && ActiveTeam().is_local)
   {
-    Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-    ActionString a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
-    ActionString a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
-    ActionInt a_set_frame(ACTION_SET_FRAME,character.body->GetFrame());
-    network.SendAction(a);
-    delete a;
-    network.SendAction(&a_set_clothe);
-    network.SendAction(&a_set_movement);
-    network.SendAction(&a_set_frame);
+    network.SendAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
+    network.SendAction(ActionString(ACTION_SET_SKIN,character.current_skin));
+    network.SendAction(ActionInt(ACTION_SET_FRAME,character.image->GetCurrentFrame()));
   }
 }
 
@@ -149,27 +150,22 @@ void MoveCharacterRight (Character &character){
   bool bouge = (character.GetDirection() == 1);
   if (bouge)
   {
+//    ActionHandler::GetInstance()->NewAction(Action(ACTION_WALK));
     MoveCharacter(character);
   }
   else
   {
-    ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
+    ActionHandler::GetInstance()->NewAction(ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 
 
   //Refresh skin position across network
-  if( !network.IsLocal() && ActiveTeam().is_local)
+  if( !network.is_local() && ActiveTeam().is_local)
   {
-    Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-    ActionString a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
-    ActionString a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
-    ActionInt a_set_frame(ACTION_SET_FRAME,character.body->GetFrame());
-    network.SendAction(a);
-    delete a;
-    network.SendAction(&a_set_clothe);
-    network.SendAction(&a_set_movement);
-    network.SendAction(&a_set_frame);
+    network.SendAction(ActionInt2(ACTION_MOVE_CHARACTER,character.GetX(),character.GetY()));
+    network.SendAction(ActionString(ACTION_SET_SKIN,character.current_skin));
+    network.SendAction(ActionInt(ACTION_SET_FRAME,character.image->GetCurrentFrame()));
   }
 }
 

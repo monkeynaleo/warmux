@@ -29,19 +29,14 @@
 #include "../map/maps_list.h"
 #include "../map/wind.h"
 #include "../network/randomsync.h"
-#include "../network/network.h"
 #include "../team/macro.h"
 #include "../team/move.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
-#include "../tool/vector2.h"
-#include "../weapon/launcher.h"
-#include "../weapon/supertux.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
-#include "../weapon/explosion.h"
 
-// Delta appliquï¿½ï¿½l'angle du viseur
+// Delta appliqué à l'angle du viseur
 #define DELTA_CROSSHAIR 2
 
 ActionHandler * ActionHandler::singleton = NULL;
@@ -53,311 +48,203 @@ ActionHandler * ActionHandler::GetInstance()
   return singleton;
 }
 
-void Action_MoveRight (Action *a)
+ActionHandler::ActionHandler()
+{
+  mutex = NULL;
+}
+
+void Action_Walk (const Action *a)
+{
+  assert(false);
+  MoveCharacter (ActiveCharacter());
+}
+
+void Action_MoveRight (const Action *a)
 {
   assert(false);
   MoveCharacterRight (ActiveCharacter());
 }
 
-void Action_MoveLeft (Action *a)
+void Action_MoveLeft (const Action *a)
 {
   assert(false);
   MoveCharacterLeft (ActiveCharacter());
 }
 
-void Action_Jump (Action *a)
+void Action_Jump (const Action *a)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
   ActiveCharacter().Jump(); 
 }
 
-void Action_HighJump (Action *a)
+void Action_HighJump (const Action *a)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
   ActiveCharacter().HighJump();
 }
 
-void Action_Up (Action *a)
+void Action_Up (const Action *a)
 {
   ActiveTeam().crosshair.ChangeAngle (-DELTA_CROSSHAIR);
 }
 
-void Action_Down (Action *a)
+void Action_Down (const Action *a)
 {
   ActiveTeam().crosshair.ChangeAngle (DELTA_CROSSHAIR);
 }
 
-void Action_ChangeWeapon (Action *a)
+void Action_ChangeWeapon (const Action *a)
 {
-  ActionInt* ai = dynamic_cast<ActionInt*>(a);
-  ActiveTeam().SetWeapon((Weapon_type)ai->GetValue());
+  const ActionInt& ai = dynamic_cast<const ActionInt&> (*a);
+  ActiveTeam().SetWeapon((Weapon_type)ai.GetValue());
 }
 
-void Action_ChangeCharacter (Action *a)
+void Action_ChangeCharacter (const Action *a)
 {
-  ActiveTeam().NextCharacter();
+  const ActionInt& ai = dynamic_cast<const ActionInt&> (*a);
+  ActiveTeam().SelectCharacterIndex (ai.GetValue());
 }
 
-void Action_Shoot (Action *action)
+void Action_Shoot (const Action *action)
 {
-  ActionDoubleInt* a = dynamic_cast<ActionDoubleInt*>(action);
-  ActiveTeam().AccessWeapon().Shoot(a->GetValue1(), a->GetValue2());
+  const ActionDoubleInt& a = dynamic_cast<const ActionDoubleInt&> (*action);
+  ActiveTeam().AccessWeapon().Shoot(a.GetValue1(), a.GetValue2());
 }
 
-void Action_Wind (Action *a)
+void Action_Wind (const Action *a)
 {
-  ActionInt* ai = dynamic_cast<ActionInt*>(a);
-  wind.SetVal (ai->GetValue());
+  const ActionInt& ai = dynamic_cast<const ActionInt&> (*a);
+  wind.SetVal (ai.GetValue());
 }
 
-Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
+void Action_MoveCharacter (const Action *a)
 {
-  Action* a = new Action(ACTION_SET_CHARACTER_PHYSICS);
-  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  a->Push(team_no);
-  a->Push(char_no);
-  a->Push(c->GetPhysX());
-  a->Push(c->GetPhysY());
-  Point2d speed;
-  c->GetSpeedXY(speed);
-  a->Push(speed.x);
-  a->Push(speed.y);
-  return a;
+  const ActionInt2& ap = dynamic_cast<const ActionInt2&> (*a);
+//  if (network.is_server())
+//  {
+//    MSG_DEBUG("action.handler", "%s is %d, %d", ActiveCharacter().m_name, ActiveCharacter().GetX(), ActiveCharacter().GetY());
+//    return;
+//  }
+//  if (!network.is_client()) return;
+
+//  MSG_DEBUG("action.handler", "%s move to  %d, %d", ActiveCharacter().m_name, ap.GetValue1(), ap.GetValue2());
+
+  ActiveCharacter().SetXY (Point2i(ap.GetValue1(), ap.GetValue2()));
 }
 
-void Action_SetCharacterPhysics (Action *a)
-{
-  int team_no, char_no;
-  double x, y, s_x, s_y;
-
-  team_no = a->PopInt();
-  char_no = a->PopInt();
-  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  assert(c != NULL);
-
-  x = a->PopDouble();
-  y = a->PopDouble();
-  s_x = a->PopDouble();
-  s_y = a->PopDouble();
-  c->SetPhysXY(x, y);
-  c->SetSpeedXY(Point2d(s_x, s_y));
-}
-
-void Action_SetFrame (Action *a)
+void Action_SetFrame (const Action *a)
 {
   //Set the frame of the walking skin, to get the position of the hand synced
-  ActionInt* ai = dynamic_cast<ActionInt*>(a);
+  const ActionInt& ai = dynamic_cast<const ActionInt&> (*a);
   if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
   {
-    ActiveTeam().ActiveCharacter().body->SetFrame((uint)ai->GetValue());
+    ActiveTeam().ActiveCharacter().image->SetCurrentFrame((uint)ai.GetValue());
   }
 }
 
-void Action_SetClothe (Action *a)
+void Action_SetSkin (const Action *a)
 {
-  ActionString* action = dynamic_cast<ActionString*>(a);
+  const ActionString& action = dynamic_cast<const ActionString&> (*a);
   if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
   {
-    ActiveTeam().ActiveCharacter().SetClothe(action->GetValue());
+    ActiveTeam().ActiveCharacter().SetSkin(action.GetValue());
   }
 }
 
-void Action_SetMovement (Action *a)
+void Action_SetCharacterDirection (const Action *a)
 {
-  ActionString* action = dynamic_cast<ActionString*>(a);
-  if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
-  {
-    ActiveTeam().ActiveCharacter().SetMovement(action->GetValue());
-  }
+  const ActionInt& ai = dynamic_cast<const ActionInt&> (*a);
+  ActiveCharacter().SetDirection (ai.GetValue());
 }
 
-void Action_SetCharacterDirection (Action *a)
+void Action_SetMap (const Action *a)
 {
-  ActionInt* ai = dynamic_cast<ActionInt*>(a);
-  ActiveCharacter().SetDirection (ai->GetValue());
+  const ActionString& action = dynamic_cast<const ActionString&> (*a);
+  MSG_DEBUG("action.handler", "SetMap : %s", action.GetValue());
+  if (!network.is_client()) return;
+  lst_terrain.ChangeTerrainNom (action.GetValue());
+  network.state = Network::NETWORK_WAIT_TEAMS;
+  world.Reset();
 }
 
-void Action_SetMap (Action *a)
-{
-  ActionString* action = dynamic_cast<ActionString*>(a);
-  MSG_DEBUG("action.handler", "SetMap : %s", action->GetValue());
-  if (!network.IsClient()) return;
-  lst_terrain.ChangeTerrainNom (action->GetValue());
-}
-
-void Action_ClearTeams (Action *a)
+void Action_ClearTeams (const Action *a)
 {
   MSG_DEBUG("action.handler", "ClearTeams");
-  if (!network.IsClient()) return;
+  if (!network.is_client()) return;
   teams_list.Clear();
 }
 
-void Action_ChangeState (Action *a)
+void Action_StartGame (const Action *a)
 {
-  MSG_DEBUG("action.handler", "ChangeState");
-
-  if(network.IsServer())
-  {
-    switch(network.state)
-    {
-    case Network::NETWORK_OPTION_SCREEN:
-      // State is changed when server clicks on the launch game button
-      network.client_inited++;
-      break;
-    case Network::NETWORK_INIT_GAME:
-      // One more client is ready to play
-      network.client_inited++;
-      if(network.client_inited == network.connected_player)
-        network.state = Network::NETWORK_READY_TO_PLAY;
-      break;
-    default:
-      assert(false);
-      break;
-    }
-  }
-
-  if(network.IsClient())
-  {
-    switch(network.state)
-    {
-    case Network::NETWORK_OPTION_SCREEN:
-      network.state = Network::NETWORK_INIT_GAME;
-      break;
-    case Network::NETWORK_INIT_GAME:
-      network.state = Network::NETWORK_READY_TO_PLAY;
-      break;
-    case Network::NETWORK_READY_TO_PLAY:
-      network.state = Network::NETWORK_PLAYING;
-      break;
-    default:
-       assert(false);
-    }
-  }
+  MSG_DEBUG("action.handler", "StartGame");
+  network.state = Network::NETWORK_PLAYING;
 }
 
-void Action_SetGameMode (Action *a)
+void Action_SetGameMode (const Action *a)
 {
-  ActionString* action = dynamic_cast<ActionString*>(a);	
-  MSG_DEBUG("action.handler", "SetGameMode : %s", action->GetValue());
-  GameMode::GetInstance()->Load (action->GetValue());
+  const ActionString& action = dynamic_cast<const ActionString&> (*a);	
+  MSG_DEBUG("action.handler", "SetGameMode : %s", action.GetValue());
+  GameMode::GetInstance()->Load (action.GetValue());
 }
 
-void Action_NewTeam (Action *a)
-{
-  ActionString* action = dynamic_cast<ActionString*>(a);
-  MSG_DEBUG("action.handler", "NewTeam : %s", action->GetValue());
 
-  teams_list.AddTeam (action->GetValue());
+void Action_NewTeam (const Action *a)
+{
+  const ActionString& action = dynamic_cast<const ActionString&> (*a);
+  MSG_DEBUG("action.handler", "NewTeam : %s", action.GetValue());
+
+  if (!network.is_client()) return;
+  teams_list.AddTeam (action.GetValue());
+  teams_list.SetActive (action.GetValue());
+  ActiveTeam().Reset();
 }
 
-void Action_DelTeam (Action *a)
+void Action_ChangeTeam (const Action *a)
 {
-  ActionString* action = dynamic_cast<ActionString*>(a);
-  MSG_DEBUG("action.handler", "DelTeam : %s", action->GetValue());
-
-  teams_list.DelTeam (action->GetValue());
-}
-
-void Action_ChangeTeam (Action *a)
-{
-  ActionString* action = dynamic_cast<ActionString*>(a);
-  MSG_DEBUG("action.handler", "ChangeTeam : %s", action->GetValue());
-//  if (!network.IsClient()) return;
-  teams_list.SetActive (std::string(action->GetValue()));
+  const ActionString& action = dynamic_cast<const ActionString&> (*a);
+  MSG_DEBUG("action.handler", "ChangeTeam : %s", action.GetValue());
+//  if (!network.is_client()) return;
+  teams_list.SetActive (std::string(action.GetValue()));
   ActiveTeam().PrepareTurn();
   assert (!ActiveCharacter().IsDead());
 }
 
-void Action_AskVersion (Action *a)
+void Action_AskVersion (const Action *a)
 {
-  if (!network.IsClient()) return;
-  ActionHandler::GetInstance()->NewAction(new ActionString(ACTION_SEND_VERSION, Constants::VERSION));
+  if (!network.is_client()) return;
+  if (network.state != Network::NETWORK_WAIT_SERVER) return;
+  ActionHandler::GetInstance()->NewAction(ActionString(ACTION_SEND_VERSION, Constants::VERSION));
+  network.state = Network::NETWORK_WAIT_MAP;
 }
 
-void Action_SendVersion (Action *a)
+void Action_SendVersion (const Action *a)
 {
-  if (!network.IsServer()) return;
-  ActionString* action = dynamic_cast<ActionString*>(a);
-  if (action->GetValue() != Constants::VERSION)
+  if (!network.is_server()) return;
+  const ActionString& action = dynamic_cast<const ActionString&> (*a);
+  if (action.GetValue() != Constants::VERSION)
   {
     Error(Format(_("Wormux versions are differents : client=%s, server=%s."),
-    action->GetValue(), Constants::VERSION.c_str()));
+    action.GetValue(), Constants::VERSION.c_str()));
   }
+  network.state = Network::NETWORK_SERVER_INIT_GAME;
 }
 
-void Action_SendRandom (Action *a)
+void Action_SendTeam (const Action *a)
 {
-  if (!network.IsClient()) return;
-  ActionDouble* action = dynamic_cast<ActionDouble*>(a);
-  randomSync.AddToTable(action->GetValue());
+	// @@@ TODO @@@
 }
 
-void Action_SupertuxState (Action *a)
+void Action_AskTeam (const Action *a)
 {
-  MSG_DEBUG("action.handler", "SupertuxState");
-  assert(ActiveTeam().GetWeaponType() == WEAPON_SUPERTUX);
-  WeaponLauncher* launcher = static_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
-  SuperTux* tux = static_cast<SuperTux*>(launcher->GetProjectile());
-
-  double x, y;
-
-  tux->angle = a->PopDouble();
-  x = a->PopDouble();
-  y = a->PopDouble();
-  tux->SetPhysXY(x, y);
-  tux->SetSpeedXY(Point2d(0,0));
+  if (!network.is_client()) return;
+//	action_handler.NewAction(ActionString(ACTION_SEND_TEAM, ???));
 }
 
-void Action_SyncBegin (Action *a)
+void Action_SendRandom (const Action *a)
 {
-  MSG_DEBUG("action.handler", "SyncBegin");
-  assert(!network.sync_lock);
-  network.sync_lock = true;
-}
-
-void Action_SyncEnd (Action *a)
-{
-  MSG_DEBUG("action.handler", "SyncEnd");
-  assert(network.sync_lock);
-  network.sync_lock = false;
-}
-
-void Action_Explosion (Action *a)
-{
-  MSG_DEBUG("action.handler", "Explosion !");
-
-  Point2i pos;
-  ExplosiveWeaponConfig config;
-
-  pos.x = a->PopInt();
-  pos.y = a->PopInt();
-  config.explosion_range = a->PopInt();
-  config.damage = a->PopInt();
-  config.blast_range = a->PopDouble();
-  config.blast_force = a->PopDouble();
-  std::string son = a->PopString();
-  bool fire_particle = a->PopInt();
-  ParticleEngine::ESmokeStyle smoke = (ParticleEngine::ESmokeStyle)a->PopInt();
-
-  ApplyExplosion_common(pos, config, son, fire_particle, smoke);
-}
-
-void Action_SetTarget (Action *a)
-{
-  MSG_DEBUG("action.handler", "Set target by clicking");
-
-  Point2i target;
-  target.x = a->PopInt();
-  target.y = a->PopInt();
-
-  ActiveTeam().AccessWeapon().ChooseTarget (target);
-}
-
-void Action_SetTimeout (Action *a)
-{
-  WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
-  assert(launcher != NULL);
-  launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
+  if (!network.is_client()) return;
+  const ActionDouble& action = dynamic_cast<const ActionDouble&> (*a);
+  randomSync.AddToTable(action.GetValue());
 }
 
 void ActionHandler::ExecActions()
@@ -374,13 +261,14 @@ void ActionHandler::ExecActions()
   }
 }
 
-void ActionHandler::NewAction(Action* a, bool repeat_to_network)
+void ActionHandler::NewAction(const Action &a, bool repeat_to_network)
 {
   assert(mutex!=NULL);
   SDL_LockMutex(mutex);
   //  MSG_DEBUG("action.handler","New action : %s",a.out());
   //  std::cout << "New action " << a ;
-  queue.push_back(a);
+  Action *clone = a.clone();
+  queue.push_back(clone);
   //  std::cout << "  queue_size " << queue.size() << std::endl;
   SDL_UnlockMutex(mutex);
   if (repeat_to_network) network.SendAction(a);
@@ -393,7 +281,7 @@ void ActionHandler::Register (Action_t action,
   action_name[action] = name;
 }
 
-void ActionHandler::Exec(Action *a)
+void ActionHandler::Exec(const Action *a)
 {
 // #ifdef DBG_ACT
   // std::cout << "Exec action " << *a << std::endl;
@@ -414,10 +302,11 @@ std::string ActionHandler::GetActionName (Action_t action)
   return it->second;
 }
 
-ActionHandler::ActionHandler()
+void ActionHandler::Init()
 {
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
+  Register (ACTION_WALK, "walk", &Action_Walk);
   Register (ACTION_MOVE_LEFT, "move_left", &Action_MoveLeft);
   Register (ACTION_MOVE_RIGHT, "move_right", &Action_MoveRight);
   Register (ACTION_UP, "up", &Action_Up);
@@ -432,22 +321,17 @@ ActionHandler::ActionHandler()
   Register (ACTION_SET_MAP, "set_map", &Action_SetMap);
   Register (ACTION_CLEAR_TEAMS, "clear_teams", &Action_ClearTeams);
   Register (ACTION_NEW_TEAM, "new_team", &Action_NewTeam);
-  Register (ACTION_DEL_TEAM, "del_team", &Action_DelTeam);
   Register (ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
-  Register (ACTION_SET_CHARACTER_PHYSICS, "set_character_physics", &Action_SetCharacterPhysics);
-  Register (ACTION_SET_MOVEMENT, "set_movement", &Action_SetMovement);
-  Register (ACTION_SET_CLOTHE, "set_clothe", &Action_SetClothe);
+  Register (ACTION_MOVE_CHARACTER, "move_character", &Action_MoveCharacter);
+  Register (ACTION_SET_SKIN, "set_skin", &Action_SetSkin);
   Register (ACTION_SET_FRAME, "set_frame", &Action_SetFrame);
   Register (ACTION_SET_CHARACTER_DIRECTION, "set_character_direction", &Action_SetCharacterDirection);
-  Register (ACTION_CHANGE_STATE, "change_state", &Action_ChangeState);
+  Register (ACTION_START_GAME, "start_game", &Action_StartGame);
   Register (ACTION_ASK_VERSION, "ask_version", &Action_AskVersion);
+  Register (ACTION_ASK_TEAM, "ask_team", &Action_AskTeam);
   Register (ACTION_SEND_VERSION, "send_version", &Action_SendVersion);
+  Register (ACTION_SEND_TEAM, "send_team", &Action_SendTeam);
   Register (ACTION_SEND_RANDOM, "send_random", &Action_SendRandom);
-  Register (ACTION_SYNC_BEGIN, "sync_begin", &Action_SyncBegin);
-  Register (ACTION_SYNC_END, "sync_end", &Action_SyncEnd);
-  Register (ACTION_EXPLOSION, "explosion", &Action_Explosion);
-  Register (ACTION_SET_TARGET, "set_target", &Action_SetTarget);
-  Register (ACTION_SUPERTUX_STATE, "supertux_state", &Action_SupertuxState);
-  Register (ACTION_SET_TIMEOUT, "set_timeout", &Action_SetTimeout);
   SDL_UnlockMutex(mutex);
 }
+

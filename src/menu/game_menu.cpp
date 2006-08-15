@@ -49,13 +49,13 @@ GameMenu::GameMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
 
-  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   // Center the boxes!
   uint x = 30;
 
   /* Choose the teams !! */
-  Box * team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
+  team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
   team_box->AddWidget(new Label(_("Select the teams:"), rectZero, *normal_font));
 
   Box * tmp_box = new HBox( Rectanglei(0,0, 1, TEAMS_H), false);
@@ -74,9 +74,8 @@ GameMenu::GameMenu() :
   bt_remove_team = new Button( Rectanglei( 0, 0, 48, 48 ),res,"menu/arrow-left");
   buttons_tmp_box->AddWidget(bt_remove_team);
 
-  team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
-  buttons_tmp_box->AddWidget(team_logo);
-  last_team = NULL;
+  space_for_logo = new NullWidget( Rectanglei(0,0,48,48) );
+  buttons_tmp_box->AddWidget(space_for_logo);
 
   tmp_box->AddWidget(buttons_tmp_box);
   lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ));
@@ -85,25 +84,20 @@ GameMenu::GameMenu() :
 
   team_box->AddWidget(tmp_box);
 
-  widgets.AddWidget(team_box);
+
 
   /* Choose the map !! */
   tmp_box = new HBox( Rectanglei(0, 0, 1, MAP_PREVIEW_W - 25 ), false);
-  tmp_box->SetMargin(2);
+  tmp_box->SetMargin(0);
   tmp_box->SetBorder( Point2i(0,0) );
 
   lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, MAP_PREVIEW_W-25 ));
   tmp_box->AddWidget(lbox_maps);
-
-  map_preview = new PictureWidget(Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
-  tmp_box->AddWidget(map_preview);
+  tmp_box->AddWidget(new NullWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W)));
 
   map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
   map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
   map_box->AddWidget(tmp_box);
-
-  widgets.AddWidget(map_box);
-
   // Values initialization
 
   // Load Maps' list
@@ -136,13 +130,14 @@ GameMenu::GameMenu() :
     ++i;
   }
 
-  resource_manager.UnLoadXMLProfile(res);
-
-  ChangeMap();
+  terrain_init = false;
 }
 
 GameMenu::~GameMenu()
 {
+  delete map_preview;
+  delete map_box;
+  delete team_box;
 }
 
 void GameMenu::OnClic(const Point2i &mousePosition, int button)
@@ -207,8 +202,13 @@ void GameMenu::ChangeMap()
 {
   std::string map_id = lbox_maps->ReadLabel();
   uint map = lst_terrain.FindMapById(map_id);
+  if(terrain_init)
+    delete map_preview;
+  map_preview = new Sprite(lst_terrain.liste[map].preview);
+  float scale = std::min( float(MAP_PREVIEW_W)/map_preview->GetHeight(),
+                          float(MAP_PREVIEW_W)/map_preview->GetWidth() ) ;
 
-  map_preview->SetSurface(lst_terrain.liste[map].preview, false);
+  map_preview->Scale (scale, scale);
 }
 
 void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
@@ -224,28 +224,37 @@ void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
   }
 }
 
-void GameMenu::SelectTeamLogo(Team * t)
-{
-  if (last_team != t) {
-    last_team = t;
-    team_logo->SetSurface(last_team->flag);
-  }
-}
-
 void GameMenu::Draw(const Point2i &mousePosition)
 {
+  Team* last_team = teams_list.FindByIndex(0);
+
+  map_box->Draw(mousePosition);
+  team_box->Draw(mousePosition);
+
   int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
   if (t != -1) {
     int index = -1;
     Team * new_team = teams_list.FindById(lbox_all_teams->ReadValue(t), index);
-    SelectTeamLogo(new_team);
+    if (new_team!=NULL) last_team = new_team;
   } else {
     t = lbox_selected_teams->MouseIsOnWhichItem(mousePosition);
     if (t != -1) {
       int index = -1;
       Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);
-      SelectTeamLogo(new_team);
+      if (new_team!=NULL) last_team = new_team;
     }
   }
+
+  AppWormux * app = AppWormux::GetInstance();
+  app->video.window.Blit( last_team->ecusson, space_for_logo->GetPosition() );
+
+  if (!terrain_init){
+      ChangeMap();
+      terrain_init = true;
+  }
+
+  map_preview->Blit ( app->video.window,
+		      map_box->GetPositionX()+MAPS_W+10,
+		      map_box->GetPositionY()+map_box->GetSizeY()/2-map_preview->GetHeight()/2);
 }
 

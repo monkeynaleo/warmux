@@ -40,27 +40,21 @@ private:
   // channel used for sound
   int channel;
 
-  // this is a fake mine ?
-  bool fake;
-
   // Activation des mines ?
-  bool animation;
+  bool animation;//,repos;
   uint attente;
   uint escape_time;
 
 public:
   ObjMine(MineConfig &cfg);
-
+  //  void Reset();
   void Explosion ();
-  void FakeExplosion ();
-
-  void SignalCollision();
-
-  void StartTimeout();
-  void Detection();
-
-  void Draw();
+  //void Draw();
+  void EnableDetection();
+  void DisableDetection();
   void Refresh();
+  void Detection();
+  void SignalCollision();
 };
 
 class MineConfig : public ExplosiveWeaponConfig
@@ -88,7 +82,6 @@ private:
 public:
   Mine();
   MineConfig& cfg();
-  
 };
 
 #endif

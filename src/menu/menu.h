@@ -31,53 +31,37 @@
 #include "../gui/question.h"
 #include "../gui/label.h"
 #include "../gui/null_widget.h"
-#include "../gui/picture_widget.h"
-#include "../gui/container.h"
 
-typedef enum {
-  vOkCancel,
-  vOk,
-  vCancel,
-  vNo
-} t_action;
-
-class Menu : public Container
+class Menu
 {
 public:
-   WidgetList widgets;
-   const t_action actions;
-
-   Menu(char* bg, t_action actions = vOkCancel); 
+   Menu(char* bg); 
    virtual ~Menu();
 
    void Run ();
-   virtual void Redraw(const Rectanglei& rect);
 
 private:
    Sprite *background;
+   bool close_menu;
 
    /* Actions buttons  */
+   Button *b_ok;
+   Button *b_cancel;
    HBox *actions_buttons;
 
+   void BasicDraw(const Point2i &mousePosition);
    bool BasicOnClic(const Point2i &mousePosition);
 
 protected:
-   Button *b_cancel;
-   Button *b_ok;
-   bool close_menu;
-
    void sig_ok();
    void sig_cancel();
-   virtual void DrawBackground(const Point2i &mousePosition);
 
-   virtual void key_ok() {};
-   virtual void key_cancel() {};
    virtual void __sig_ok() = 0;
    virtual void __sig_cancel() = 0;
+
    virtual void Draw(const Point2i &mousePosition) = 0;   
    virtual void OnClic(const Point2i &mousePosition, int button) = 0;
    void SetActionButtonsXY(int x, int y);
-   void Display(const Point2i& mousePosition);
 };
 
 #endif

@@ -22,41 +22,27 @@
 #ifndef GUI_WIDGET_H
 #define GUI_WIDGET_H
 
-#include <SDL_keyboard.h>
 #include "../include/base.h"
 #include "../tool/rectangle.h"
 #include "../tool/point.h"
 
-#include "container.h"
-
 class Widget : public Rectanglei
 {
  protected:
-  Container * ct;
-  bool need_redrawing;
   void StdSetSizePosition(const Rectanglei &rect);
 
  public:
-  bool have_focus;
-
   Widget();
   Widget(const Rectanglei &rect);
   virtual ~Widget();
 
-  virtual void Update(const Point2i &mousePosition,
-		      const Point2i &lastMousePosition); // virtual only for Box !!
   virtual void Draw(const Point2i &mousePosition) = 0;
-  void ForceRedraw(); // set need_redrawing to true;
-
-  virtual void SendKey(SDL_keysym key);
-  virtual Widget* Clic(const Point2i &mousePosition, uint button);
-
-  void SetContainer(Container * _ct);
+  virtual bool Clic(const Point2i &mousePosition, uint button);
 
   virtual void SetSizePosition(const Rectanglei &rect) = 0;
   void SetXY(int _x, int _y){ 
 	  SetSizePosition( Rectanglei(Point2i(_x, _y), size) ); 
-  };  
+  };
 };
 
 #endif

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon bazooka : projette une roquette avec un angle et une force donnï¿½.
+ * Weapon bazooka : projette une roquette avec un angle et une force donnée.
  *****************************************************************************/
 
 #ifndef AUTO_BAZOOKA_H
@@ -29,10 +29,9 @@
 
 class AutomaticBazooka;
 
-// Roquette du bazooka ï¿½tï¿½e chercheuse
+// Roquette du bazooka à tête chercheuse
 class RoquetteTeteCherche : public WeaponProjectile
 {
-  ParticleEngine smoke_engine;
 protected:
   double angle_local;
   Point2i m_cible;
@@ -67,7 +66,7 @@ public:
   void p_Deselect();
 
   bool IsReady() const;
-  virtual void ChooseTarget(Point2i mouse_pos);
+  virtual void ChooseTarget();
   void DrawTarget();
 };
 

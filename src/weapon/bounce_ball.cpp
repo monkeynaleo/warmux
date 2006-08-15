@@ -29,7 +29,7 @@
 #include "../graphic/video.h"
 #include "../tool/math_tools.h"
 #include "../map/camera.h"
-#include "../weapon/explosion.h"
+#include "../weapon/weapon_tools.h"
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"
@@ -39,6 +39,7 @@ BounceBall::BounceBall(ExplosiveWeaponConfig& cfg) :
   WeaponProjectile ("bounce_ball", cfg)
 {
   m_rebound_sound = "weapon/grenade_bounce";
+  touche_ver_objet = true;
   explode_colliding_character = true;
 }
 

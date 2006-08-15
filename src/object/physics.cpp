@@ -491,6 +491,9 @@ void Physics::RunPhysicalEngine()
   double step_t, delta_t = (Time::GetInstance()->Read() - m_last_move) / 1000.0;
   Point2d oldPos;
   Point2d newPos;
+  Point2d contactPos;
+  double contact_angle;
+  bool contact = false;
 
   step_t = PHYS_DELTA_T;
 
@@ -500,20 +503,25 @@ void Physics::RunPhysicalEngine()
   // Compute object move for each physical engine time step.
 
   while (delta_t > 0.0){
-    if (delta_t < PHYS_DELTA_T)
-      step_t = delta_t ;
-    
-    oldPos = GetPos();
-    
-    newPos = ComputeNextXY(step_t);
-    
-    if( newPos != oldPos)  {
-      // The object has moved. Notify the son class.
-      MSG_DEBUG( "physic.move", "Move %s (%f, %f) -> (%f, %f)", typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);      
-      NotifyMove(oldPos, newPos);
-    }
-    
-    delta_t -= PHYS_DELTA_T ;
+      if (delta_t < PHYS_DELTA_T)
+        step_t = delta_t ;
+
+      oldPos = GetPos();
+      
+      newPos = ComputeNextXY(step_t);
+
+      if( !(newPos == oldPos) )  {
+	// The object has moved. Notify the son class.
+	MSG_DEBUG( "physic.move", "Move %s (%f, %f) -> (%f, %f)", typeid(*this).name(), oldPos.x, oldPos.y, newPos.x, newPos.y);
+		contact = NotifyMove(oldPos, newPos, contactPos, contact_angle);
+      }
+
+      if (contact){
+		  MSG_DEBUG( "physic.coll", "Collision durant le déplacement (%f, %f) -> (%f, %f)", oldPos.x, oldPos.y, newPos.x, newPos.y);
+		  Rebound(contactPos, contact_angle);
+      }
+
+      delta_t -= PHYS_DELTA_T ;
   }
 
   return;
@@ -527,59 +535,58 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
   GetSpeed(norme, angle);
 
   switch (m_motion_type) {
-  case FreeFall :
-    if (m_rebounding){ 
-      // Compute rebound angle.
-      if(contact_angle == -1.0)
-	angle = angle + M_PI ;
-      else
-	angle -= 2.0 * (angle - contact_angle);
+    case FreeFall :
+		if (m_rebounding){ 
+			// Compute rebound angle.
+			if(contact_angle == -1.0)
+				angle = angle + M_PI ;
+			else
+				angle -= 2.0 * (angle - contact_angle);
 
-      // Apply rebound factor to the object speed.
-      norme = norme * m_rebound_factor;
+			// Apply rebound factor to the object speed.
+			norme = norme * m_rebound_factor;
 	  	  
-      // Apply the new speed to the object.
-      SetSpeed(norme, angle);
+			// Apply the new speed to the object.
+			SetSpeed(norme, angle);
 	  
-      // Check if we should stop rebounding.
-      if (norme < STOP_REBOUND_LIMIT){
-	SignalFallEnding();
-	StopMoving();
-	return;
-      }
-      SignalRebound();
-    }else{
-      SignalFallEnding();
-      StopMoving();
-    }
-    break;
+			// Check if we should stop rebounding.
+			if (norme < STOP_REBOUND_LIMIT){
+				StopMoving();
+				return;
+		 	}
+			SignalRebound();
+		}else{
+			SignalFallEnding();
+			StopMoving();
+		}
+		break;
 
-  case Pendulum:
-    {
-      Point2d V ;
+    case Pendulum:
+		{
+			Point2d V ;
 
-      // Recompute new angle.
-      V.x = m_pos_x.x0 + m_fix_point_dxy.x - m_fix_point_gnd.x;
-      V.y = m_pos_y.x0 + m_fix_point_dxy.y - m_fix_point_gnd.y;
+			// Recompute new angle.
+			V.x = m_pos_x.x0 + m_fix_point_dxy.x - m_fix_point_gnd.x;
+			V.y = m_pos_y.x0 + m_fix_point_dxy.y - m_fix_point_gnd.y;
 		
-      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle();
+			m_rope_angle.x0 = M_PI_2 - V.ComputeAngle();
       
-      // Convert the linear speed of the rebound to angular speed.
-      V.x = PENDULUM_REBOUND_FACTOR * norme * cos(angle);
-      V.y = PENDULUM_REBOUND_FACTOR * norme * sin(angle);
+			// Convert the linear speed of the rebound to angular speed.
+			V.x = PENDULUM_REBOUND_FACTOR * norme * cos(angle);
+			V.y = PENDULUM_REBOUND_FACTOR * norme * sin(angle);
 
-      angle = angle + M_PI;
+			angle = angle + M_PI;
 
-      m_rope_angle.x1 = (norme * cos(angle) * cos(m_rope_angle.x0) +
-			 norme * sin(angle) * sin(m_rope_angle.x0) ) / m_rope_length.x0;
+			m_rope_angle.x1 = (norme * cos(angle) * cos(m_rope_angle.x0) +
+				norme * sin(angle) * sin(m_rope_angle.x0) ) / m_rope_length.x0;
 
-      m_rope_angle.x2 = 0;
-      m_extern_force.Clear();
-    }
-    break ;
+			m_rope_angle.x2 = 0;
+			m_extern_force.Clear();
+		}
+		break ;
      
-  default:
-    break ;
+    default:
+      break ;
   }
 
 }
@@ -589,4 +596,4 @@ void Physics::SignalDeath() {}
 void Physics::SignalDrowning() {}
 void Physics::SignalFallEnding() {}
 void Physics::SignalRebound() {}
-void Physics::SignalCollisionObject() {}
+

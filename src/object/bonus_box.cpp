@@ -60,7 +60,6 @@ const uint BONUS_TELEPORTATION=5;
 const uint BONUS_DYNAMITE=10;
 const uint BONUS_AIR_ATTACK=1;
 const uint BONUS_AUTO_BAZOOKA=5;
-const uint BONUS_RIOT_BOMB=5;
 
 BonusBox::BonusBox()
   : PhysicalObj("bonus_box"){
@@ -71,10 +70,10 @@ BonusBox::BonusBox()
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
   SetSize(anim->GetSize());
-  anim->animation.SetLoopMode(false);
+  anim->animation.SetLoopMode(false);  
   anim->SetCurrentFrame(0);
-
-  parachute = true;
+  
+  parachute = true;  
 
   SetSpeed (SPEED, M_PI_2);
 }
@@ -84,7 +83,7 @@ BonusBox::~BonusBox(){
 }
 
 void BonusBox::Draw()
-{
+{ 
   anim->Draw(GetPosition());
 }
 
@@ -106,7 +105,7 @@ void BonusBox::Refresh()
 
   // Refresh animation
   if (!m_ready && !parachute) anim->Update();
-
+  
   m_ready = anim->IsFinished();
 }
 
@@ -131,10 +130,10 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
   std::ostringstream txt;
   uint bonus = randomSync.GetLong (1, nb_bonus);
   switch (bonus){
-  case bonusTELEPORTATION:
+  case bonusTELEPORTATION: 
     txt << Format(ngettext(
-                "%s team has won %u teleportation.",
-                "%s team has won %u teleportations.",
+                "%s team has won %u teleportation.", 
+                "%s team has won %u teleportations.", 
                 BONUS_TELEPORTATION),
             ActiveTeam().GetName().c_str(), BONUS_TELEPORTATION);
     equipe.m_nb_ammos[ _("Teleportation") ] += BONUS_TELEPORTATION;
@@ -176,23 +175,14 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
     equipe.m_nb_ammos[ _("Automatic bazooka") ] += BONUS_AUTO_BAZOOKA;
     break;
 
-  case bonusRIOT_BOMB:
-    txt << Format(ngettext(
-                "%s team has won %u riot bomb!",
-                "%s team has won %u riot bombs!",
-                BONUS_RIOT_BOMB),
-		  ActiveTeam().GetName().c_str(), BONUS_RIOT_BOMB);
-    equipe.m_nb_ammos[ _("Riot bomb") ] += BONUS_RIOT_BOMB;
-    break;
-
   default: std::cout << bonus << std::endl; assert (false);
-  case bonusDYNAMITE:
+  case bonusDYNAMITE:  
     txt << Format(ngettext(
                 "%s team has won %u stick of dynamite!",
                 "%s team has won %u sticks of dynamite!",
                 BONUS_DYNAMITE),
             ActiveTeam().GetName().c_str(), BONUS_DYNAMITE);
-    equipe.m_nb_ammos[ _("Dynamite") ] += BONUS_DYNAMITE;
+    equipe.m_nb_ammos[ _("Dynamite") ] += BONUS_DYNAMITE; 
     break;
   }
 
@@ -201,7 +191,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
-// Static methods
+// Static methods 
 bool BonusBox::enable = false;
 uint BonusBox::time = 0;
 
@@ -216,11 +206,11 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
 {
   if (!bonus_box.PutRandomly(true, 0)) return false;
 
-  time = randomSync.GetLong(MIN_TIME_BETWEEN_CREATION,
+  time = randomSync.GetLong(MIN_TIME_BETWEEN_CREATION, 
 			   MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
   time *= 1000;
   time += Time::GetInstance()->Read();
-
+  
   return true;
 }
 
@@ -238,9 +228,9 @@ bool BonusBox::NewBonusBox()
   } else {
     lst_objects.AddObject(box);
     camera.ChangeObjSuivi(box, true, true);
-    GameMessages::GetInstance()->Add (_("Is it a gift?"));
+    GameMessages::GetInstance()->Add (_("Is it a gift ?"));
     return true;
   }
-
+ 
   return false;
 }

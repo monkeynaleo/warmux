@@ -7,7 +7,7 @@
     <email>lawrenceazzoug AT wanadoo.fr</email>
   </author>
 
-  <surface name="sky" file="jungle.jpg" />
+  <surface name="sky" file="jungle.png" />
   <surface name="map" file="grenouilles.png" />
   <surface name="preview" file="preview.jpg" />
 

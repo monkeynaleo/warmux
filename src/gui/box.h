@@ -22,13 +22,14 @@
 #ifndef GUI_BOX_H
 #define GUI_BOX_H
 
-#include "widget_list.h"
+#include "widget.h"
 #include <list>
 #include "../tool/point.h"
 
-class Box : public WidgetList
+class Box : public Widget
 {
  protected:
+  std::list<Widget *> widgets;
   bool visible;
   uint margin;
   Point2i border;
@@ -37,12 +38,8 @@ class Box : public WidgetList
   Box(const Rectanglei &rect, bool _visible=true);
   virtual ~Box();
 
-  void Update(const Point2i &mousePosition,
-	      const Point2i &lastMousePosition);
   void Draw(const Point2i &mousePosition);
-  void Redraw(const Rectanglei& rect);
-  Widget* Clic(const Point2i &mousePosition, uint button);
-
+  bool Clic(const Point2i &mousePosition, uint button);
   void SetMargin(uint _margin);
   void SetBorder(const Point2i &newBorder);
 
@@ -53,17 +50,16 @@ class VBox : public Box
 {
  public:
   VBox(const Rectanglei &rect, bool _visible=true);
-  void DelFirstWidget();
-  void SetSizePosition(const Rectanglei &rect);
   void AddWidget(Widget *a_widget);
+  void SetSizePosition(const Rectanglei &rect);
 };
 
 class HBox : public Box
 {
  public:
   HBox(const Rectanglei &rect, bool _visible=true);
+  void AddWidget(Widget *a_widget);  
   void SetSizePosition(const Rectanglei &rect);
-  void AddWidget(Widget *a_widget);
 };
 
 #endif

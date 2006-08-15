@@ -40,32 +40,38 @@ typedef enum
   DROWNED
 } alive_t;
 
+// Object type
+typedef enum
+{
+  // Unbreakable object : detected by collision test, but isn't touch by
+  // explosion
+  objUNBREAKABLE,
+
+  // Regular object : detected by collision test, suffers from explosions blast.
+  objCLASSIC
+} type_objet_t;
+
 extern const double PIXEL_PER_METER;
 
 double MeterDistance (const Point2i &p1, const Point2i &p2);
 
 class PhysicalObj : public Physics
 {
+public:
+  type_objet_t m_type;
+
 private:
-  int m_posx, m_posy;
-
-  // collision management
-  bool m_goes_through_wall;
-  bool m_collides_with_characters;
-  bool m_collides_with_objects;
-  PhysicalObj * m_last_colliding_object;
-
-protected:
-  bool exterieur_monde_vide;// TO REMOVE!! It is the same for all physical objects !
-  
   std::string m_name;
+  // Object size and position.
+  uint m_width, m_height;
+  int m_posx, m_posy;
 
   // Rectangle used for collision tests
   uint m_test_left, m_test_right, m_test_top, m_test_bottom;
 
-  // Object size and position.
-  uint m_width, m_height;
+  bool exterieur_monde_vide;
 
+protected:
   // Used by the sons of this class to allow modification of READY/BUSY state
   // (Unused by PhysicalObj)
   bool m_ready;
@@ -107,7 +113,7 @@ public:
   int GetCenterY() const;
   const Point2i GetCenter() const;
   const Rectanglei GetRect() const;
-  bool GoesThroughWall() const { return m_goes_through_wall; }
+  type_objet_t GetObjectType() const { return m_type; }
 
   //----------- Physics related function ----------
 
@@ -119,19 +125,13 @@ public:
   bool PutOutOfGround(double direction); //Where direction is the angle of the direction
                                          // where the object is moved
 
-  // Collision management
-  void SetCollisionModel(bool goes_through_wall,
-			 bool collides_with_characters,
-			 bool collides_with_objects);  
+  bool NotifyMove(Point2d oldPos, Point2d newPos, Point2d &contactPos,
+		  double &contact_angle);
 
-  // Collision test for point (x,y) -- public only for Uzi...
-  bool CollisionTest(const Point2i &position);
-
-  PhysicalObj* GetLastCollidingObject() const;
-  bool IsInVacuumXY(const Point2i &position);
-  bool IsInVacuum(const Point2i &offset); // relative to current position
-  bool FootsInVacuumXY(const Point2i &position) const;
+  bool IsInVacuumXY(const Point2i &position) const;
+  bool IsInVacuum(const Point2i &offset) const; // relative to current position
   bool FootsInVacuum() const;
+  bool FootsInVacuumXY(const Point2i &position) const;
   
   bool FootsOnFloor(int y) const;
 
@@ -152,7 +152,6 @@ public:
   void Die();
   void Ghost();
   void Drown();
-  void GoOutOfWater(); // usefull for supertux.
   
   bool IsReady() const;
   bool IsDead() const;
@@ -167,18 +166,15 @@ public:
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters);
 
-protected:
-  void SignalRebound();
-
 private:
   //Renvoie la position du point de contact entre
   //l'obj et le terrain
   bool ContactPoint (int &x, int &y);
 
+  // Collision test for point (x,y)
+  virtual bool CollisionTest(const Point2i &position);
 
-
-  void NotifyMove(Point2d oldPos, Point2d newPos);
-
+  void SignalRebound();
   
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();

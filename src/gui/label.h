@@ -28,18 +28,15 @@
 #include <string>
 
 class Label : public Widget{
- protected:
-  Text *txt_label;
  private:
-  Font *font;
+  Text *txt_label;
    
  public:
   Label(const std::string &label, const Rectanglei &rect, Font& font);
   ~Label();
   void Draw (const Point2i &mousePosition);
   void SetSizePosition(const Rectanglei &rect);
-  void SetText(std::string &new_txt);
-  std::string &GetText();
 };
 
 #endif
+

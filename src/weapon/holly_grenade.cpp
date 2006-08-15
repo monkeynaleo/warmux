@@ -21,7 +21,7 @@
 
 #include "holly_grenade.h"
 #include <sstream>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
@@ -36,6 +36,7 @@ HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg) :
   smoke_engine(40)
 {
   m_rebound_sound = "weapon/holly_grenade_bounce";
+  touche_ver_objet = false;
   sing_alleluia = false;
 }
 
@@ -105,6 +106,5 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
 {  
   m_name = _("HollyGrenade");
   projectile = new HollyGrenade(cfg());
-  m_allow_change_timeout = true;
 }
 

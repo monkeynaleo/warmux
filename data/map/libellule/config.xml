@@ -7,7 +7,7 @@
     <country>France</country>
   </author>
 
-  <surface name="sky" file="libellule-bg.jpg" />
+  <surface name="sky" file="libellule-bg.png" />
   <surface name="map" file="libellule.png" />
   <surface name="preview" file="preview.jpg" />
 

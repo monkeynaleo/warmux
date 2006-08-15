@@ -25,6 +25,7 @@ AM_INIT_AUTOMAKE([foreign 1.5])
 AM_MAINTAINER_MODE
 AM_GNU_GETTEXT([external])
 
+
 dnl ========================================================================
 dnl === Check for tools                                                    =
 dnl ========================================================================
@@ -75,27 +76,14 @@ if test "x${prefix}" = "xNONE"; then
   prefix="${ac_default_prefix}"
 fi
 
-# ========================================================================
-# == Set flags for various environments                                  =
-# ========================================================================
-case "${host}" in
-  i[[3456789]]86-*-mingw32*) WIN32="yes" ;;
-  *cygwin*) WIN32="yes" ;;
-  *) WIN32="no" ;;
-esac
-AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
-
-
-if test "${WIN32}" = "yes"; then DATADIR="data"
-else DATADIR="${prefix}/share/wormux"; fi
+DATADIR="${prefix}/share/wormux"
 AC_ARG_WITH(datadir-name,
     [  --with-datadir-name=DIR       specify where datas are installed (default: ${prefix}/share/wormux)],
     [DATADIR="$withval"])
 AC_SUBST([DATADIR])
 
 
-if test "${WIN32}" = "yes"; then LOCALEDIR="locale"
-else LOCALEDIR="${prefix}/share/locale"; fi
+LOCALEDIR="${prefix}/share/locale"
 AC_ARG_WITH(localedir-name,
     [  --with-localedir-name=DIR       specify where locales are installed (default: ${prefix}/share/locale)],
     [LOCALEDIR="$withval"])
@@ -257,6 +245,17 @@ CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS"
 LIBS="$LIBS $LIBXMLPP_LIBS"
 
 dnl ========================================================================
+dnl == Set flags for various environments                                  =
+dnl ========================================================================
+case "${host}" in
+  i[[3456789]]86-*-mingw32*) WIN32="yes" ;;
+  *cygwin*) WIN32="yes" ;;
+  *) WIN32="no" ;;
+esac
+AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
+
+
+dnl ========================================================================
 dnl == Check for header files                                              =
 dnl ========================================================================
 
@@ -282,16 +281,14 @@ AC_CONFIG_FILES([Makefile
 		 data/Makefile
 		 src/Makefile
 		 doc/Makefile
-		 po/Makefile
-		 tools/map-generator/Makefile
-		 ], [AM_POSTPROCESS_PO_MAKEFILE])
+		 ])
+
+AC_CONFIG_FILES([po/Makefile], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)
 
 AC_OUTPUT
 
-if test "${WIN32}" = "yes"; then INSTALL_OP="build NSIS installer..."
-else INSTALL_OP="install..."; fi
 AC_MSG_RESULT([
 
 Configuration complete
@@ -300,6 +297,6 @@ Configuration complete
 * Game locale will be installed into $LOCALEDIR
 * Font file will be $FONTFILE
 
-Execute make to compile then execute make install to $INSTALL_OP
+Execute make to compile then execute make install to install...
 
 ])

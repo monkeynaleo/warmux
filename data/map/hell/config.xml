@@ -7,7 +7,7 @@
 		<country>Poland</country>
 	</author>
 	
-	<surface name="sky" file="hellsky.jpg" />
+	<surface name="sky" file="hellsky.png" />
 	<surface name="map" file="hell.png" />
 	<surface name="preview" file="preview.jpg" />
 	

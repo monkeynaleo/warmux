@@ -39,6 +39,7 @@ private:
 public:
   CrossHair();
 
+  void Init();
   void Reset();
 
   // Change angle 

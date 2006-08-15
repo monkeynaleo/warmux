@@ -64,8 +64,6 @@ public:
   void TestCamera();
   bool ActionClicG();
   bool ActionClicD();
-  bool ActionWhellDown();
-  bool ActionWhellUp();
   void ChoixVerPointe();
 
   // Lit la position dans le monde

@@ -68,11 +68,16 @@ Interface * Interface::GetInstance() {
 
 Interface::Interface()
 {
+}
+
+void Interface::Init()
+{
   display = true;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   game_menu = resource_manager.LoadImage( res, "interface/menu_jeu");
   bg_time = resource_manager.LoadImage( res, "interface/fond_compteur");
+  weapons_menu.Init();
   weapon_box_button = resource_manager.LoadImage( res, "interface/weapon_box_button");
    
   barre_energie.InitVal (0, 0, GameMode::GetInstance()->character.init_energy);
@@ -168,7 +173,7 @@ void Interface::DisplayCharacterInfo ()
    
   // Display team logo
   Point2i dst(pos + TEAM_ICON_POS);
-  app->video.window.Blit( character_under_cursor->TeamAccess().flag, dst);
+  app->video.window.Blit( character_under_cursor->TeamAccess().ecusson, dst);
 }
 
 void Interface::DisplayWeaponInfo ()

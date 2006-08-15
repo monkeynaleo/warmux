@@ -35,11 +35,7 @@
 CrossHair::CrossHair()
 {
   enable = false;
-  angle = 0;  
-
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  image = resource_manager.LoadImage(res, "gfx/pointeur1");
-  resource_manager.UnLoadXMLProfile( res); 
+  angle = 0;
 }
 
 void CrossHair::Reset()
@@ -99,3 +95,11 @@ double CrossHair::GetAngleRad() const
 	  angleR = InverseAngle (angleR);
   return angleR;
 }
+
+void CrossHair::Init()
+{
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  image = resource_manager.LoadImage(res, "gfx/pointeur1");
+  resource_manager.UnLoadXMLProfile( res); 
+}
+

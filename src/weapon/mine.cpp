@@ -23,7 +23,7 @@
 #include "mine.h"
 #include <iostream>
 #include <sstream>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/sprite.h"
@@ -55,17 +55,11 @@ ObjMine::ObjMine(MineConfig& cfg) :
 
   Ready();
   is_active = true;
-
-  // is it a fake mine ?
-  fake = !(randomSync.GetLong(0, 9));
 }
 
 void ObjMine::SignalCollision() 
 {
-  if (IsGhost()) {
-    is_active = false;
-    lst_objects.RemoveObject (this);
-  }
+  if (IsGhost()) is_active = false;
 }
 
 
@@ -74,30 +68,12 @@ void ObjMine::Explosion ()
   MSG_DEBUG("mine", "Explosion");
 
   Point2i centre = GetCenter();
-  ApplyExplosion(centre, cfg);
+  ApplyExplosion(centre, cfg, NULL);
+  DisableDetection();  
   lst_objects.RemoveObject (this);
 }
 
-void ObjMine::FakeExplosion()
-{
-  MSG_DEBUG("mine", "Fake explosion");
-
-  jukebox.Play("share", "weapon/mine_fake");
-  ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
-  is_active = false;
-
-  if (animation )//&& !repos)
-  {
-    MSG_DEBUG("mine", "Desactive detection..");
-
-    animation = false;
-    m_ready = true;
-
-    image->SetCurrentFrame(0);
-  }
-}
-
-void ObjMine::StartTimeout()
+void ObjMine::EnableDetection()
 {
   if (!animation)
   {
@@ -109,6 +85,19 @@ void ObjMine::StartTimeout()
     MSG_DEBUG("mine", "IsReady() = %d", IsReady());
 
     channel = jukebox.Play("share", "weapon/mine_beep", -1);
+  }
+}
+
+void ObjMine::DisableDetection()
+{
+  if (animation )//&& !repos)
+  {
+    MSG_DEBUG("mine", "Desactive detection..");
+
+    animation = false;
+    m_ready = true;
+
+    image->SetCurrentFrame(0);
   }
 }
 
@@ -136,7 +125,7 @@ void ObjMine::Detection()
       std::string txt = Format(_("%s is next to a mine!"),
 			       ver -> GetName().c_str());
       GameMessages::GetInstance()->Add (txt);
-      StartTimeout();
+      EnableDetection();
       return;
     }
   }
@@ -144,40 +133,39 @@ void ObjMine::Detection()
 
 void ObjMine::Refresh()
 {
-  // the mine is now out of the map
-  // or it's a fake mine that has already exploded!
   if (!is_active)
   {
     jukebox.Stop(channel);
     channel = -1;
     escape_time = 0;
+    Ghost ();
     return;
   }
 
-  // try to detect a character near the mine
   if (!animation) Detection();
 
   if (animation) {
      image->Update();
 
-     // the timeout is finished !!
      if (attente < Time::GetInstance()->ReadSec())
        {
 	 jukebox.Stop(channel);
 	 channel = -1;
 	 
-	 if (!fake)
-	   Explosion ();
+	 if (randomSync.GetLong(0, 9))
+	   {
+	     Explosion ();
+	   }
 	 else
-	   FakeExplosion();
+	   {
+	     jukebox.Play("share", "weapon/mine_fake");
+	     ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
+	     DisableDetection();
+	   }
        }
   }
 }
 
-void ObjMine::Draw()
-{
-    image->Draw(GetPosition());
-}
 //-----------------------------------------------------------------------------
 
 MineConfig * MineConfig::singleton = NULL;
@@ -195,7 +183,6 @@ MineConfig * MineConfig::GetInstance()
 Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
-  projectile = new ObjMine(cfg());
 }
 
 bool Mine::p_Shoot()
@@ -210,7 +197,6 @@ bool Mine::p_Shoot()
 void Mine::Add (int x, int y)
 {
   ObjMine *obj = new ObjMine(cfg());
-  
   obj -> SetXY ( Point2i(x, y) );
 
   Point2d speed_vector;
@@ -233,7 +219,6 @@ MineConfig::MineConfig()
   timeout = 3;
   escape_time = 2;
 }
-
 
 void MineConfig::LoadXml(xmlpp::Element *elem) 
 {

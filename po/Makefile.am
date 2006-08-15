@@ -5,8 +5,7 @@
 # Makefile configuration - processed by automake.
 #
 
-#MAINTAINERCLEANFILES = Makefile.in
-MAINTAINERCLEANFILES =
+MAINTAINERCLEANFILES = Makefile.in
 
 POTFILES = \
 	src/game/config.cpp \
@@ -41,7 +40,7 @@ POTFILES = \
 	src/map/water.cpp \
 	src/map/wind.cpp \
 	src/menu/game_menu.cpp \
-	src/menu/credits_menu.cpp \
+	src/menu/infos_menu.cpp \
 	src/menu/main_menu.cpp \
 	src/menu/options_menu.cpp \
 	src/object/bonus_box.cpp \
@@ -50,6 +49,7 @@ POTFILES = \
 	src/sound/jukebox.cpp \
 	src/team/character.cpp \
 	src/team/move.cpp \
+	src/team/skin.cpp \
 	src/team/team.cpp \
 	src/team/team_energy.cpp \
 	src/team/teams_list.cpp \
@@ -74,6 +74,7 @@ POTFILES = \
 	src/weapon/suicide.cpp \
 	src/weapon/teleportation.cpp \
 	src/weapon/weapon.cpp \
+	src/weapon/weapon_tools.cpp \
 	src/weapon/weapons_list.cpp
 
 DOMAIN = $(PACKAGE)
@@ -121,9 +122,9 @@ SUFFIXES = .po .gmo .mo .sed .sin .nop .po-update
 	@mv t-$@ $@
 
 
-all-local: all-local-@USE_NLS@
+all-local: all-local-@USE_NLS@ $(GMOFILES)
 
-all-local-yes: $(GMOFILES)
+all-local-yes: stamp-po
 all-local-no:
 
 # stamp-po is a timestamp denoting the last time at which the CATALOGS have
@@ -184,7 +185,7 @@ $(POFILES): $(srcdir)/$(DOMAIN).pot
 	echo "Update $${lang}.po"; \
 	cd $(srcdir) && $(MSGMERGE_UPDATE) $${lang}.po $(DOMAIN).pot && \
 	sed -e '/^"POT-Creation-Date:/D' <$${lang}.po >t-$${lang}.po && \
-	mv -f t-$${lang}.po $${lang}.po
+	mv -f t-$${lang}.po $${lang}.po 
 
 
 install-data-local: install-data-local-@USE_NLS@

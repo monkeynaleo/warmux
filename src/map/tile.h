@@ -23,7 +23,6 @@
 #include <vector>
 #include "tileitem.h"
 #include "../graphic/surface.h"
-#include "../graphic/sprite.h"
 #include "../tool/rectangle.h"
 
 const uint EXPLOSION_BORDER_SIZE = 10;
@@ -40,9 +39,6 @@ public:
   // Dig a circle hole
   void Dig(const Point2i &center, const uint radius);
 
-  // Insert a sprite into the ground
-  void PutSprite(const Point2i pos, Sprite* spr);
-
   // Load an image
   void LoadImage (Surface& ground_surface);
 
@@ -56,9 +52,6 @@ public:
   // Clipping rectangle is in World corrdinate not screen coordinates
   // usefull to redraw only a part that is under a sprite that has moved,... 
   void DrawTile_Clipped(Rectanglei clip_rectangle) const;
-
-  // Return a surface of the ground inside the rect
-  Surface GetPart(Rectanglei& rec);
 
 protected:
   void InitTile(const Point2i &pSize);

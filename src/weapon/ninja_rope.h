@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Tï¿½ï¿½ortation : dï¿½lacement d'un ver n'importe o sur le terrain.
+ * Téléportation : déplacement d'un ver n'importe où sur le terrain.
  *****************************************************************************/
 
 #ifndef NINJA_ROPE_H
@@ -51,6 +51,7 @@ private:
   uint m_hooked_time;
   Sprite* m_hook_sprite;
   Sprite* m_node_sprite;
+  Sprite* skin;
 
 public:
   s_rope_node rope_node[node_max];
@@ -82,6 +83,7 @@ protected:
   bool TryAddNode(int CurrentSense) ;
   bool TryBreakNode(int CurrentSense) ;
   void SignalTurnEnd() ;
+  void InitSkinSprite();
 };
 
 //-----------------------------------------------------------------------------

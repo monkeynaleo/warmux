@@ -16,10 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classes virtuelles permettant de dï¿½inir une arme et un projectile. Les
- * armes ont un nom, une image, un ï¿½at actif/inactif et une icï¿½e (affichï¿½
+ * Classes virtuelles permettant de définir une arme et un projectile. Les
+ * armes ont un nom, une image, un état actif/inactif et une icône (affichée
  * dans l'interface). Les projectiles sont des objets physiques qui ont un
- * comportement spï¿½ial lorsqu'ils entrent en collision ou qu'ils sortent du
+ * comportement spécial lorsqu'ils entrent en collision ou qu'ils sortent du
  * terrain.
  *****************************************************************************/
 
@@ -29,7 +29,7 @@
 #include <SDL_gfxPrimitives.h>
 #include <iostream>
 #include <sstream>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/time.h"
 #include "../game/game_loop.h"
 #include "../graphic/video.h"
@@ -68,7 +68,7 @@ extern WeaponStrengthBar weapon_strength_bar;
 Weapon::Weapon(Weapon_type type, 
 	       const std::string &id,
 	       EmptyWeaponConfig * params,
-	       weapon_visibility_t visibility)
+	       uint visibility)
 {
   m_type = type;
   m_id = id;
@@ -88,7 +88,6 @@ Weapon::Weapon(Weapon_type type,
   use_flipping = true;
 
   override_keys = false ;
-  force_override_keys = false;
 
   position.origin = weapon_origin_HAND;
   position.dx = 0;
@@ -131,7 +130,7 @@ void Weapon::Select()
   m_is_active = false;
   m_strength = 0;
   ActiveTeam().ResetNbUnits();
-  ActiveCharacter().SetClothe("weapon-" + m_id);
+  ActiveCharacter().SetSkin("weapon-" + m_id);
 
   // is there a crosshair ?
   if (min_angle != max_angle) 
@@ -183,9 +182,6 @@ void Weapon::Manage()
 
 bool Weapon::CanChangeWeapon() const
 {
-  if ( !ActiveTeam().is_local )
-    return false;
-
   if ( (ActiveTeam().ReadNbUnits() != m_initial_nb_unit_per_ammo) &&
        (m_can_change_weapon == false))
     return false;
@@ -195,7 +191,7 @@ bool Weapon::CanChangeWeapon() const
 
 void Weapon::NewActionShoot() const
 {
-  ActionHandler::GetInstance()->NewAction (new ActionDoubleInt(
+  ActionHandler::GetInstance()->NewAction (ActionDoubleInt(
 				       ACTION_SHOOT,
 				       m_strength,	
 				       ActiveTeam().crosshair.GetAngleVal()));
@@ -266,8 +262,9 @@ void Weapon::PosXY (int &x, int &y) const
     y = handPos.y + position.dy;
     if (ActiveCharacter().GetDirection() == 1)
       x = handPos.x + position.dx;
-    else
+    else {
       x = handPos.x - position.dx;
+    }
 
     if(ActiveCharacter().GetDirection()==-1)
       x -= m_image->GetWidth();
@@ -566,15 +563,9 @@ bool Weapon::IsLoading() const{
   return m_first_time_loading;
 }
 
-void Weapon::ChooseTarget(Point2i mouse_pos){
+void Weapon::ChooseTarget(){
 }
 
 void Weapon::SignalTurnEnd(){
 }
 
-void Weapon::ActionUp(){ //called by mousse.cpp when mousewhellup
-}
-
-
-void Weapon::ActionDown(){//called by mousse.cpp when mousewhelldown
-}

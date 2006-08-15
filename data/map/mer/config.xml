@@ -7,7 +7,7 @@
     <country>France</country>
   </author>
 
-  <surface name="sky" file="mer-ciel.jpg" />
+  <surface name="sky" file="mer-ciel.png" />
   <surface name="map" file="mer.png" />
   <surface name="preview" file="preview.jpg" />
 

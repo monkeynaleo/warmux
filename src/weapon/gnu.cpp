@@ -21,7 +21,7 @@
 
 #include "gnu.h"
 #include <sstream>
-#include "explosion.h"
+#include "weapon_tools.h"
 #include "../game/config.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
@@ -119,6 +119,7 @@ GnuLauncher::GnuLauncher() :
   WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("GnuLauncher");
+
   projectile = new Gnu(cfg());
 }
 

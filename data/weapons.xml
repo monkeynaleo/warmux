@@ -19,10 +19,6 @@
     <image file="object/star.png" />
   </sprite>
 
-  <sprite name="dark_smoke">
-    <image file="object/dark_smoke.png" />
-  </sprite>
-
   <sprite name="yellow_star_particle">
     <image file="object/yellow_star.png" />
   </sprite>
@@ -33,10 +29,6 @@
 
   <sprite name="pink_star_particle">
     <image file="object/pink_star.png" />
-  </sprite>
-
-  <sprite name="bullet_particle">
-    <image file="weapon/gun/gun_bullet.png" />
   </sprite>
 
 <!-- Air attack ressources -->
@@ -78,15 +70,6 @@
     <image file="weapon/bazooka/missile.png" />
   </sprite>
 
-<!-- Riot bomb ressources -->
-
-  <surface name="riot_bomb_ico" file="weapon/riot_bomb/riot_ico.png" />
-  <surface name="riot_bomb" file="weapon/bazooka/bazooka.png" />
-  <surface name="riot_cible" file="weapon/bazooka/baz_cible.png" />
-  <sprite name="riot_rocket">
-    <image file="weapon/riot_bomb/missile.png" />
-  </sprite>
-
 <!-- Bounce ball ressources -->
 
   <surface name="bounce_ball_ico" file="weapon/bounce_ball/bounce_ball_ico.png" />
@@ -104,14 +87,6 @@
   </sprite>
   <sprite name="cluster">
     <image file="weapon/cluster_bomb/cluster.png" />
-  </sprite>
-
-<!-- Construct resources -->
-
-  <surface name="construct_ico" file="weapon/construct/construct_icon.png" />
-  <surface name="construct" file="weapon/construct/construct_icon_mini.png" />
-  <sprite name="construct_spr">
-    <image file="weapon/construct/construct_spr.png" />
   </sprite>
 
 <!-- Dynamite ressources -->
@@ -235,26 +210,12 @@
   <surface name="teleportation_ico" file="weapon/teleportation/teleportation_ico.png" />
   <surface name="teleportation" file="weapon/teleportation/teleportation.png" />
 
-  <!-- Uzi ressources -->
-  
-  <surface name="uzi_ico" file="weapon/uzi/uzi_ico.png" />
-  <sprite name="uzi_bullet">
-    <image file="weapon/gun/gun_bullet.png" />
-  </sprite>
-  <surface name="uzi" file="weapon/uzi/uzi.png" />
-  <surface name="uzi_ico" file="weapon/uzi/uzi_ico.png" />
-  <sprite name="uzi_bullet">
-    <image file="weapon/gun/gun_bullet.png" />
-  </sprite>
-  <surface name="uzi" file="weapon/uzi/uzi.png" />
+<!-- Uzi ressources -->
 
-  <!-- Snipe rifle ressources -->
-  
-  <surface name="snipe_rifle" file="weapon/snipe_rifle/snipe_rifle.png" />
-  <surface name="snipe_rifle_ico" file="weapon/snipe_rifle/snipe_rifle_ico.png" />
-  <surface name="snipe_rifle_laser" file="weapon/snipe_rifle/snipe_rifle_laser.png" />
-  <sprite name="snipe_rifle_bullet">
+  <surface name="uzi_ico" file="weapon/uzi/uzi_ico.png" />
+  <sprite name="uzi_bullet">
     <image file="weapon/gun/gun_bullet.png" />
-  </sprite>     
+  </sprite>	
+  <surface name="uzi" file="weapon/uzi/uzi.png" />
 
 </resources>

@@ -41,10 +41,10 @@ ListBox::ListBox (const Rectanglei &rect) : Widget(rect){
   Rectanglei buttonRect; 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
-  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 12, GetPositionY() + 2); 
+  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 10, GetPositionY()); 
   buttonRect.SetSize(10, 5); 
   m_up = new Button(buttonRect, res, "menu/up");
-  buttonRect.SetPosition(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7);
+  buttonRect.SetSizeY(GetPositionY() + GetSizeY() - 5);
   m_down = new Button(buttonRect, res, "menu/down");
 
   height_item = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
@@ -71,9 +71,7 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition){
   return BorneLong(index + first_visible_item, 0, m_items.size() - 1);
 }
 
-Widget* ListBox::Clic(const Point2i &mousePosition, uint button){
-  need_redrawing = true;
-
+bool ListBox::Clic(const Point2i &mousePosition, uint button){
   // buttons for listbox with more items than visible
   if( m_items.size() > nb_visible_items_max ){
     if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
@@ -83,7 +81,7 @@ Widget* ListBox::Clic(const Point2i &mousePosition, uint button){
       if( m_items.size() - first_visible_item > nb_visible_items_max )
         first_visible_item++ ;
 
-      return this;
+      return true;
     }
     else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) || 
              (button == SDL_BUTTON_LEFT && m_up->Contains(mousePosition)) ){     
@@ -92,7 +90,7 @@ Widget* ListBox::Clic(const Point2i &mousePosition, uint button){
       if( first_visible_item > 0 )
         first_visible_item-- ;
 
-      return this;
+      return true;
     }
   }
 
@@ -100,16 +98,16 @@ Widget* ListBox::Clic(const Point2i &mousePosition, uint button){
     int item = MouseIsOnWhichItem(mousePosition);
     
     if( item == -1 )
-      return NULL;
+      return false;
     
     if( item == selected_item ){
         //Deselect ();
     } else
       Select (item);
-    return this;
+    return true;
   }
   else{
-    return NULL;
+    return false;
   }
 }
 
@@ -124,7 +122,7 @@ void ListBox::Draw(const Point2i &mousePosition){
   for(uint i=0; i < nb_visible_items; i++){
 	 Rectanglei rect(GetPositionX() + 1, GetPositionY() + i * height_item + 1, GetSizeX() - 2, height_item - 2);
 	 
-     if( int(i + first_visible_item) == selected_item)
+     if( int(i + first_visible_item) == selected_item )
        app->video.window.BoxColor(rect, defaultListColor2);
      else
        if( i + first_visible_item == uint(item) )
@@ -134,8 +132,6 @@ void ListBox::Draw(const Point2i &mousePosition){
 			  GetPosition() + Point2i(5, i*height_item),
 			  m_items[i + first_visible_item].label,
 			  white_color);
-     if(!m_items[i].enabled)
-       app->video.window.BoxColor(rect, defaultDisabledColorBox);
   }  
 
   // buttons for listbox with more items than visible
@@ -158,23 +154,21 @@ void ListBox::Draw(const Point2i &mousePosition){
 
 void ListBox::SetSizePosition(const Rectanglei &rect){
   StdSetSizePosition(rect);
-  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 12, GetPositionY()+2, 10, 5) );
-  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7, 10, 5) );  
+  m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 10, GetPositionY(), 10, 5) );
+  m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 10, GetPositionY() + GetSizeY() - 5, 10, 5) );  
 
   nb_visible_items_max = GetSizeY()/height_item;
 }
 
 void ListBox::AddItem (bool selected, 
 		       const std::string &label,
-		       const std::string &value,
-             bool enabled){
+		       const std::string &value){ 
   uint pos = m_items.size();
 
   // Push item
   list_box_item_t item;
   item.label = label;
   item.value = value;
-  item.enabled = enabled;
   m_items.push_back (item);
 
   // Select it if selected
@@ -205,22 +199,8 @@ void ListBox::RemoveSelected(){
 
 void ListBox::Select (uint index){
   assert(index < m_items.size());
-  selected_item = index;
-}
 
-void ListBox::Select(const std::string& val)
-{
-  uint index = 0;
-  for(std::vector<list_box_item_t>::iterator it=m_items.begin();
-      it != m_items.end();
-      it++,index++)
-  {
-    if(it->label == val)
-    {
-      Select(index);
-      return;
-    }
-  }
+  selected_item = index;
 }
 
 void ListBox::Deselect (){

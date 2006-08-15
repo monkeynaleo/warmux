@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh des diffï¿½entes ï¿½uipes.
+ * Refresh des différentes équipes.
  *****************************************************************************/
 
 #ifndef GESTION_EQUIPE_H
@@ -42,22 +42,19 @@ private:
 
 public:
   TeamsList();
-  ~TeamsList();
   void LoadList ();
   void NextTeam (bool debut_jeu);
   Team& ActiveTeam();
-  void LoadGamingData(uint how_many_characters);
-  void UnloadGamingData();
+  void Reset();
   void Clear();
 
 
   // Add a new team to playing, and change active team
   void AddTeam (const std::string &id, bool generate_error=true);
-  void DelTeam (const std::string &id);
   void SetActive(const std::string &id);
   void InitList (const std::list<std::string> &liste_nom);
   void InitEnergy ();
-  void RefreshEnergy (); //Actualise les jauges d'ï¿½ergie
+  void RefreshEnergy (); //Actualise les jauges d'énergie
   void RefreshSort (); //Actualise le classement des jauges
   void ChangeSelection (const std::list<uint>& liste);
   bool IsSelected (uint index);
@@ -65,9 +62,6 @@ public:
   // Find a team by its id or index (in full_list)
   Team* FindById (const std::string &id, int &pos);
   Team* FindByIndex (uint index);
-  // Find a team by its id or index (in playing full_list)
-  Team* FindPlayingById(const std::string &id, uint &index);
-  Team* FindPlayingByIndex(uint index);
 };
 
 extern TeamsList teams_list;
