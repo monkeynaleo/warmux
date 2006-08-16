@@ -221,7 +221,8 @@ void GameLoop::Init ()
   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
    
   Game::GetInstance()->SetEndOfGameStatus( false );
-
+  
+  Mouse::GetInstance()->CenterPointer();
   Mouse::GetInstance()->SetPointer(POINTER_SELECT);
 
   // First "selection" of a weapon -> fix bug 6576

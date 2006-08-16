@@ -79,6 +79,9 @@ public:
   // Choose the pointer
   void SetPointer(pointer_t pointer);
   void Draw();
+
+  // Center the pointer on the screen
+  void CenterPointer();
 };
 
 #endif
