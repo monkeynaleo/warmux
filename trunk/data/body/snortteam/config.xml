@@ -28,52 +28,53 @@
 <sprite name="body-normal" type="body">
 	<image file="body.png"/>
 	<anchor dx="16" dy="17"/>
-	<attached member_type="head" frame="*" dx="9" dy="6"/>
-	<attached member_type="arm-right" frame="*" dx="3" dy="18"/>
-	<attached member_type="arm-left" frame="*" dx="08" dy="17"/>
-	<attached member_type="foot-left" frame="*" dx="11" dy="30"/>
-	<attached member_type="foot-right" frame="*" dx="5" dy="31"/>
-	<attached member_type="jetpack-belt" frame="*" dx="1" dy="21"/>
-	<attached member_type="jetpack-right" frame="*" dx="1" dy="23"/>
-	<attached member_type="jetpack-left" frame="*" dx="9" dy="23"/>
-	<attached member_type="tail" frame="*" dx="2" dy="28"/>
+	<attached member_type="head" frame="*" dx="5" dy="7"/>
+	<attached member_type="arm-right" frame="*" dx="5" dy="17"/>
+	<attached member_type="arm-left" frame="*" dx="10" dy="16"/>
+	<attached member_type="foot-left" frame="*" dx="13" dy="30"/>
+	<attached member_type="foot-right" frame="*" dx="7" dy="31"/>
+	<attached member_type="jetpack-belt" frame="*" dx="1" dy="22"/>
+	<attached member_type="jetpack-right" frame="*" dx="12" dy="32"/>
+	<attached member_type="jetpack-left" frame="*" dx="12" dy="31"/>
+	<attached member_type="tail" frame="*" dx="3" dy="31"/>
 </sprite>
+
 
 <!-- ###### Tail ###### -->
 <sprite name="tail" type="tail">
 	<image file="tail.png"/>
-	<anchor dx="8" dy="6"/>
+	<anchor dx="8" dy="2"/>
 </sprite>
 
 <!-- ###### Head ###### -->
 <sprite name="head" type="head">
 	<image file="head.png"/>
-	<anchor dx="11" dy="12"/>
-	<attached member_type="helmet" frame="*" dx="9" dy="11"/>
+	<anchor dx="7" dy="11"/>
+	<attached member_type="helmet" frame="*" dx="7" dy="10"/>
 </sprite>
 
 <!-- ###### Arms ###### -->
 <sprite name="arm-left" type="arm-left">
 	<image file="arm.png"/>
-	<anchor dx="5" dy="3"/>
+	<anchor dx="3" dy="0"/>
 </sprite>
 
 <sprite name="arm-right" type="arm-right">
 	<image file="arm.png"/>
-	<anchor dx="5" dy="3"/>
-	<attached member_type="weapon" frame="*" dx="3" dy="16"/>
-	<attached member_type="yoyo" frame="*" dx="3" dy="16"/>
+	<anchor dx="3" dy="0"/>
+	<attached member_type="weapon" frame="*" dx="3" dy="10"/>
+	<attached member_type="yoyo" frame="*" dx="3" dy="8"/>
 </sprite>
 
 <!-- ###### Legs ###### -->
 <sprite name="foot-left" type="foot-left" on_ground="true">
-	<image file="foot.png"/>
-	<anchor dx="5" dy="3"/>
+	<image file="arm.png"/>
+	<anchor dx="2" dy="0"/>
 </sprite>
 
 <sprite name="foot-right" type="foot-right" on_ground="true">
-	<image file="foot.png"/>
-	<anchor dx="5" dy="3"/>
+	<image file="arm.png"/>
+	<anchor dx="2" dy="0"/>
 </sprite>
 
 <!-- ###### Jetpack ###### -->
@@ -85,13 +86,13 @@
 <sprite name="jetpack-right" type="jetpack-right" on_ground="true">
 	<image file="jetpack.png"/>
 	<anchor dx="4" dy="10"/>
-	<attached member_type="jetpack-fire-right" frame="*" dx="3" dy="13"/>
+	<attached member_type="jetpack-fire-right" frame="*" dx="4" dy="3"/>
 </sprite>
 
 <sprite name="jetpack-left" type="jetpack-left" on_ground="true">
 	<image file="jetpack.png"/>
 	<anchor dx="4" dy="10"/>
-	<attached member_type="jetpack-fire-left" frame="*" dx="3" dy="13"/>
+	<attached member_type="jetpack-fire-left" frame="*" dx="4" dy="3"/>
 </sprite>
 
 <sprite name="jetpack-fire-right" type="jetpack-fire-right" on_ground="true">
@@ -147,9 +148,9 @@
 	<member name="foot-left" layer="2"/>
 	<member name="body-normal" layer="3"/>
 	<member name="head" layer="4"/>
-	<member name="foot-right" layer="7"/>
-	<member name="arm-right" layer="8"/>
-	<member name="weapon" layer="9"/>
+	<member name="foot-right" layer="5"/>
+	<member name="arm-right" layer="6"/>
+	<member name="weapon" layer="7"/>
 </clothe>
 
 
@@ -159,12 +160,12 @@
 	<member name="arm-left" layer="1"/>
 	<member name="foot-left" layer="2"/>
 	<member name="jetpack-left" layer="3"/>
-	<member name="jetpack-right" layer="4"/>
-	<member name="body-normal" layer="5"/>
+	<member name="body-normal" layer="4"/>
+	<member name="jetpack-right" layer="5"/>
 	<member name="head" layer="6"/>
-	<member name="foot-right" layer="9"/>
-	<member name="jetpack-belt" layer="10"/>
-	<member name="arm-right" layer="11"/>
+	<member name="foot-right" layer="7"/>
+	<member name="jetpack-belt" layer="8"/>
+	<member name="arm-right" layer="9"/>
 </clothe>
 
 <clothe name="jetpack-fire"> <!-- When jetpack weapon is selected and used -->
@@ -173,13 +174,13 @@
 	<member name="foot-left" layer="2"/>
 	<member name="jetpack-fire-left" layer="3"/>
 	<member name="jetpack-left" layer="4"/>
-	<member name="jetpack-fire-right" layer="5"/>
-	<member name="jetpack-right" layer="6"/>
-	<member name="body-normal" layer="7"/>
-	<member name="head" layer="8"/>
-	<member name="jetpack-belt" layer="11"/>
-	<member name="foot-right" layer="12"/>
-	<member name="arm-right" layer="13"/>
+	<member name="body-normal" layer="5"/>
+	<member name="head" layer="6"/>
+	<member name="jetpack-belt" layer="7"/>
+	<member name="foot-right" layer="8"/>
+	<member name="arm-right" layer="9"/>
+	<member name="jetpack-fire-right" layer="10"/>
+	<member name="jetpack-right" layer="11"/>
 </clothe>
 
 <!-- ###### Helmet ###### -->
@@ -189,9 +190,9 @@
 	<member name="foot-left" layer="2"/>
 	<member name="body-normal" layer="3"/>
 	<member name="head" layer="4"/>
-	<member name="foot-right" layer="7"/>
-	<member name="arm-right" layer="8"/>
-	<member name="helmet" layer="9"/>
+	<member name="foot-right" layer="5"/>
+	<member name="arm-right" layer="6"/>
+	<member name="helmet" layer="7"/>
 </clothe>
 
 <!-- ###### Animation Yoyo ###### -->
@@ -201,9 +202,9 @@
 	<member name="foot-left" layer="2"/>
 	<member name="body-normal" layer="3"/>
 	<member name="head" layer="4"/>
-	<member name="foot-right" layer="7"/>
-	<member name="yoyo" layer="8"/>
-	<member name="arm-right" layer="9"/>
+	<member name="foot-right" layer="5"/>
+	<member name="yoyo" layer="6"/>
+	<member name="arm-right" layer="7"/>
 </clothe>
 
 <!-- ###### Dead ###### -->
@@ -232,132 +233,132 @@
 <movement name="walk" speed="30">
 	<collision_rect left="5" right="5" top="10" bottom="2"/>
 	<frame number="0">
+		<member type="tail" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="40"/>
 		<member type="arm-right" angle="-40"/>
 		<member type="foot-left" angle="-40"/>
-		<member type="foot-right" angle="40"/>	
-		<member type="tail" angle="0" />			
+		<member type="foot-right" angle="40"/>		
 	</frame>
 	<frame number="1">
+		<member type="tail" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="30"/>
 		<member type="arm-right" angle="-30"/>
 		<member type="foot-left" angle="-30"/>
-		<member type="foot-right" angle="30"/>	
-		<member type="tail" angle="0" />			
+		<member type="foot-right" angle="30"/>		
 	</frame>
 	<frame number="2">
+		<member type="tail" angle="10"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="20"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="foot-left" angle="-20"/>
-		<member type="foot-right" angle="20"/>	
-		<member type="tail" angle="10" />			
+		<member type="foot-right" angle="20"/>		
 	</frame>
 	<frame number="3">
+		<member type="tail" angle="10"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="10"/>
 		<member type="arm-right" angle="-10"/>
 		<member type="foot-left" angle="-10"/>
-		<member type="foot-right" angle="10"/>	
-		<member type="tail" angle="10" />			
+		<member type="foot-right" angle="10"/>		
 	</frame>
 	<frame number="4">
+		<member type="tail" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="0"/>
 		<member type="foot-left" angle="0"/>
-		<member type="foot-right" angle="0"/>
-		<member type="tail" angle="0" />				
+		<member type="foot-right" angle="0"/>		
 	</frame>
 	<frame number="5">
+		<member type="tail" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-10"/>
 		<member type="arm-right" angle="10"/>
 		<member type="foot-left" angle="10"/>
-		<member type="foot-right" angle="-10"/>	
-		<member type="tail" angle="0" />			
+		<member type="foot-right" angle="-10"/>		
 	</frame>
 	<frame number="6">
+		<member type="tail" angle="-10"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm-right" angle="20"/>
 		<member type="foot-left" angle="20"/>
-		<member type="foot-right" angle="-20"/>	
-		<member type="tail" angle="-10" />			
+		<member type="foot-right" angle="-20"/>		
 	</frame>
 	<frame number="7">
+		<member type="tail" angle="-10"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-30"/>
 		<member type="arm-right" angle="30"/>
 		<member type="foot-left" angle="30"/>
 		<member type="foot-right" angle="-30"/>
-		<member type="tail" angle="-10" />		
 	</frame>
 	<frame number="8">
+		<member type="tail" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-40"/>
 		<member type="arm-right" angle="40"/>
 		<member type="foot-left" angle="40"/>
 		<member type="foot-right" angle="-40"/>
-		<member type="tail" angle="0" />		
 	</frame>
 	<frame number="9">
+		<member type="tail" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-30"/>
 		<member type="arm-right" angle="30"/>
 		<member type="foot-left" angle="30"/>
 		<member type="foot-right" angle="-30"/>
-		<member type="tail" angle="0" />		
 	</frame>
 	<frame number="10">
+		<member type="tail" angle="10"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-20"/>
 		<member type="arm-right" angle="20"/>
 		<member type="foot-left" angle="20"/>
 		<member type="foot-right" angle="-20"/>
-		<member type="tail" angle="10" />
 	</frame>
 	<frame number="11">
+		<member type="tail" angle="10"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="-10"/>
 		<member type="arm-right" angle="10"/>
 		<member type="foot-left" angle="10"/>
 		<member type="foot-right" angle="-10"/>
-		<member type="tail" angle="10" />		
 	</frame>
 	<frame number="12">
+		<member type="tail" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="0"/>
 		<member type="arm-right" angle="0"/>
 		<member type="foot-left" angle="0"/>
-		<member type="foot-right" angle="0"/>
-		<member type="tail" angle="0" />
+		<member type="foot-right" angle="0"/>		
 	</frame>
 	<frame number="13">
+		<member type="tail" angle="0"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="10"/>
 		<member type="arm-right" angle="-10"/>
 		<member type="foot-left" angle="-10"/>
-		<member type="foot-right" angle="10"/>	
-		<member type="tail" angle="0" />	
+		<member type="foot-right" angle="10"/>		
 	</frame>
 	<frame number="14">
+		<member type="tail" angle="-10"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="20"/>
 		<member type="arm-right" angle="-20"/>
 		<member type="foot-left" angle="-20"/>
-		<member type="foot-right" angle="20"/>
-		<member type="tail" angle="-10" />		
+		<member type="foot-right" angle="20"/>		
 	</frame>
 	<frame number="15">
+		<member type="tail" angle="-10"/>
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="arm-left" angle="30"/>
 		<member type="arm-right" angle="-30"/>
 		<member type="foot-left" angle="-30"/>
-		<member type="foot-right" angle="30"/>
-		<member type="tail" angle="-10" />	
+		<member type="foot-right" angle="30"/>		
 	</frame>
 </movement>
 
@@ -531,52 +532,74 @@
 
 <!-- ###### Jetpack - no fire ###### -->
 <movement name="jetpack-nofire" speed="100"> <!-- When jetpack is used, but no key is pressed -->
-	<collision_rect left="5" right="5" top="10" bottom="2"/>
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
-		<member type="arm-left" follow_speed="true"/>
+		<member type="arm-left" follow_speed="true" />
 		<member type="arm-right" follow_speed="true"/>
 		<member type="foot-left" follow_speed="true"/>
 		<member type="foot-right" follow_speed="true"/>
-		<member type="jetpack-fire" dy="-5"/> <!-- hide the fire under the jetpack -->
+		<member type="jetpack-fire" dy="-5" /> <!-- hide the fire under the jetpack -->
 	</frame>
 </movement>
 
 <!-- ###### Jetpack - fire ###### -->
-<movement name="jetpack-fire" speed="100"> <!-- When jetpack is used and a key is pressed -->
-	<collision_rect left="5" right="5" top="10" bottom="2"/>
+<movement name="jetpack-fire" speed="50"> <!-- When jetpack is used and a key is pressed -->
+	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
-		<member type="arm-left" follow_speed="true"/>
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
+		<member type="body" angle="45" />
+		<member type="tail" angle="-100" dx="2" />
+		<member type="arm-left" angle="-100" dx="-1" />
+		<member type="arm-right" angle="80" dx="-3" dy="-3" />
+		<member type="foot-left" angle="50" dx="2" dy="2" />
+		<member type="foot-right" angle="50" dy="3" />
+		<member type="head" angle="-50" dx="1" />
+		<member type="jetpack-belt" dx="1" dy="1" />
+		<member type="jetpack-right" angle="-30" dx="-4" dy="-15" />
+		<member type="jetpack-left" angle="-30" dx="16" dy="-1" />
+		<member type="jetpack-fire-right" dx="0" dy="0" />
+		<member type="jetpack-fire-left" dx="0" dy="0" />
 	</frame>
 	<frame number="1">
-		<member type="jetpack-fire-right" dy="7"/>
-		<member type="jetpack-fire-left" dy="7"/>
-		<member type="arm-left" follow_speed="true"/>
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
+		<member type="body" angle="45" />
+		<member type="tail" angle="-100" dx="2" />
+		<member type="arm-left" angle="-100" dx="-1" />
+		<member type="arm-right" angle="80" dx="-3" dy="-3" />
+		<member type="foot-left" angle="50" dx="2" dy="2" />
+		<member type="foot-right" angle="50" dy="3" />
+		<member type="head" angle="-50" dx="1" />
+		<member type="jetpack-belt" dx="1" dy="1" />
+		<member type="jetpack-right" angle="-30" dx="-4" dy="-15" />
+		<member type="jetpack-left" angle="-30" dx="16" dy="-1" />
+		<member type="jetpack-fire-right" dx="-4" dy="5" />
+		<member type="jetpack-fire-left" dx="-4" dy="5" />
 	</frame>
 	<frame number="2">
-		<member type="arm-left" follow_speed="true"/>
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
+		<member type="body" angle="45" />
+		<member type="tail" angle="-90" dx="2" />
+		<member type="arm-left" angle="-100" dx="-1" />
+		<member type="arm-right" angle="80" dx="-3" dy="-3" />
+		<member type="foot-left" angle="50" dx="2" dy="2" />
+		<member type="foot-right" angle="50" dy="3" />
+		<member type="head" angle="-50" dx="1" />
+		<member type="jetpack-belt" dx="1" dy="1" />
+		<member type="jetpack-right" angle="-30" dx="-4" dy="-15" />
+		<member type="jetpack-left" angle="-30" dx="16" dy="-1" />
+		<member type="jetpack-fire-right" dx="0" dy="0" />
+		<member type="jetpack-fire-left" dx="0" dy="0" />
 	</frame>
 	<frame number="3">
-		<member type="jetpack-fire-right" dy="7"/>
-		<member type="jetpack-fire-left" dy="7"/>
-		<member type="arm-left" follow_speed="true"/>
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
-	</frame>
-	<frame number="4">
-		<member type="arm-left" follow_speed="true"/>
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
+		<member type="body" angle="45" />
+		<member type="tail" angle="-90" dx="2" />
+		<member type="arm-left" angle="-100" dx="-1" />
+		<member type="arm-right" angle="80" dx="-3" dy="-3" />
+		<member type="foot-left" angle="50" dx="2" dy="2" />
+		<member type="foot-right" angle="50" dy="3" />
+		<member type="head" angle="-50" dx="1" />
+		<member type="jetpack-belt" dx="1" dy="1" />
+		<member type="jetpack-right" angle="-30" dx="-4" dy="-15" />
+		<member type="jetpack-left" angle="-30" dx="16" dy="-1" />
+		<member type="jetpack-fire-right" dx="0" dy="0" />
+		<member type="jetpack-fire-left" dx="0" dy="0" />
 	</frame>
 </movement>
 
