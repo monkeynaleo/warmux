@@ -88,11 +88,8 @@
 
 <!-- ###### Dead ###### -->
 <sprite name="body-dead" type="body">
-	<image file="dead.png">
-		<grid pos="0,0" size="27,31" array="6,1"/>
-	</image>
+	<image file="dead.png" />
 	<anchor dx="0" dy="0"/>
-	<animation speed="150"/>
 </sprite>
 
 
