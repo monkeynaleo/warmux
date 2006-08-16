@@ -62,7 +62,8 @@ bool game_fin_partie;
 
 GameLoop * GameLoop::singleton = NULL;
 
-GameLoop * GameLoop::GetInstance() {
+GameLoop * GameLoop::GetInstance() 
+{
   if (singleton == NULL) {
     singleton = new GameLoop();
   }
@@ -222,6 +223,9 @@ void GameLoop::Init ()
   Game::GetInstance()->SetEndOfGameStatus( false );
 
   Mouse::GetInstance()->SetPointer(POINTER_SELECT);
+
+  // First "selection" of a weapon -> fix bug 5676
+  ActiveTeam().AccessWeapon().Select();
 
   SetState (PLAYING, true);
 }
