@@ -16,11 +16,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Snipe Rifle
+ * Snipe Rifle. Overide the Draw method in order to draw the laser beam.
  *****************************************************************************/
 
-#ifndef __SNIPE_RIFLE_H
-#define __SNIPE_RIFLE_H
+#ifndef SNIPE_RIFLE_H
+#define SNIPE_RIFLE_H
 
 #include <vector>
 #include "launcher.h"
@@ -36,29 +36,25 @@ class SnipeBullet : public WeaponBullet
 
 class SnipeRifle : public WeaponLauncher
 {
-  ParticleEngine particle;
-  double last_angle;
-  Point2i last_bullet_pos;
-  Point2i last_rifle_pos;
-  Point2i laser_beam_pos;
-  Point2i * cross_point;
-  bool targeting_something;
-  Sprite * m_laser_image;
-  Sprite * m_laser_beam_image;
+  private:
+    double last_angle;
+    Point2i last_rifle_pos;
+    Point2i laser_beam_pos;
+    Point2i laser_beam_start;
+    Point2i targeted_point;
+    bool targeting_something;
+    Sprite * m_laser_image;
+    Sprite * m_laser_beam_image;
+
   private:
     bool p_Shoot();
-
   protected:
-    uint m_first_shoot;
-
+    void p_Deselect();
   public:
     SnipeRifle();
-    Point2i * GetCrossPoint();
-    bool ComputeCrossPoint();
-    bool isTargetingSomething();
-    
+    bool ComputeCrossPoint();    
     void PrepareLaserBeam();
     void Draw();  // In order to draw the laser beam.
 };
 
-#endif /* __SNIPE_RIFLE_H */
+#endif /* SNIPE_RIFLE_H */
