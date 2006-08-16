@@ -62,6 +62,7 @@ Wormux is available out-of-the-box on a wide variety of systems  (have
 a look at http://wormux.org/wiki/packages.php for an up-to-date list):
 
 * Linux based systems:
+  * Debian Sarge
   * Debian Etch
   * Debian Sid
   * Ubuntu Dapper
