@@ -355,3 +355,11 @@ void Mouse::Draw()
       break;
     };
 }
+  
+
+// Center the pointer on the screen
+void Mouse::CenterPointer()
+{
+  SDL_WarpMouse(AppWormux::GetInstance()->video.window.GetWidth()/2,
+		AppWormux::GetInstance()->video.window.GetHeight()/2);
+}
