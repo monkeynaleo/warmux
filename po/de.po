@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-08-05 13:59+0200\n"
 "PO-Revision-Date: 2006-04-04 16:58+0100\n"
 "Last-Translator: Michael Prager <X_X_L@gmx.net>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
@@ -42,7 +41,7 @@ msgstr "  Brutalster  :  %s (%i).\n"
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:729
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (Team %s) ist gestorben."
@@ -57,7 +56,7 @@ msgstr "%s <%s> aka %s aus %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> aus %s"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begeht Selbstmord!"
@@ -67,12 +66,12 @@ msgstr "%s begeht Selbstmord!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ist ins Wasser gefallen."
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:711
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ist von der Karte gefallen!"
@@ -91,12 +90,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:722
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied von Team %s getötet!"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:717
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s stirbt durch seine Tollpatschigkeit!"
@@ -529,7 +528,7 @@ msgstr "Waffe:"
 msgid "Website: "
 msgstr "Webseite: "
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:725
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"

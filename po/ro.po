@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-08-05 13:59+0200\n"
 "PO-Revision-Date: 2006-04-08 23:27+0300\n"
 "Last-Translator: Eddy Petrişor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -43,7 +42,7 @@ msgstr "  Cel mai violent       :  %s (%i).\n"
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:729
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (echipa %s) a murit."
@@ -58,7 +57,7 @@ msgstr "%s <%s> cunoscut şi ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -68,12 +67,12 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:711
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
@@ -94,13 +93,13 @@ msgstr[0] "%s a câştigat %u punct de energie!"
 msgstr[1] "%s a câştigat %u puncte de energie!"
 msgstr[2] "%s a câştigat %u de puncte de energie!"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:722
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "Psihopatia sălăşluieşte în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:717
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -538,7 +537,7 @@ msgstr "Arma:"
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:725
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"

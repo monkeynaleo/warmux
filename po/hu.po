@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux 0.5.0\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-08-05 13:59+0200\n"
 "PO-Revision-Date: 2004-12-19 12:00+0100\n"
 "Last-Translator: Török Gábor <slink@lxp.hu>\n"
 "Language-Team: hu <gabo@lxp.hu>\n"
@@ -40,7 +39,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Nem található %s térkép :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:729
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -55,7 +54,7 @@ msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> %s csapatától"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
@@ -65,12 +64,12 @@ msgstr "%s öngyilkos lett!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:700
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:711
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
@@ -89,12 +88,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiaszintje %u egységgel nõtt!"
 msgstr[1] "%s energiaszintje %u egységgel nõtt!"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:722
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:717
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kicsit ügyefogyott volt, így hát távozott az élõ sorából!"
@@ -538,7 +537,7 @@ msgstr "Fegyver"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:725
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"

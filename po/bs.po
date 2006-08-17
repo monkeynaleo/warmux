@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-08-05 13:59+0200\n"
 "PO-Revision-Date: 2006-06-16 11:33+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Bosnian <en@li.org>\n"
@@ -45,7 +44,7 @@ msgstr "Najagresivniji : %s (%i).\n"
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:729
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s tim) je mrtav."
@@ -60,7 +59,7 @@ msgstr "%s <%s> aka %s iz %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz %s"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izvršava samoubistvo !"
@@ -70,12 +69,12 @@ msgstr "%s izvršava samoubistvo !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s je pao u ovdu."
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:711
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s je ispao sa mape!"
@@ -94,12 +93,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s je dobio %u poena energije!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:722
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s je psihopata, ubio je člana %s tima!"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:717
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mrtav zato što je smotan!"
@@ -533,7 +532,7 @@ msgstr "Oružje:"
 msgid "Website: "
 msgstr "Web stranica:"
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:725
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Koja sramota za %s - koji je ubijen najobičnijim pištoljem!"
