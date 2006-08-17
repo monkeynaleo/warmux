@@ -480,7 +480,7 @@ bool WeaponsMenu::ActionClic(const Point2i &mousePos)
   {
     if( it->MouseOn(mousePos) )
     {
-	  ActionHandler::GetInstance()->NewAction (new ActionInt(ACTION_CHANGE_WEAPON, 
+	  ActionHandler::GetInstance()->NewAction (new Action(ACTION_CHANGE_WEAPON, 
 		it -> weapon -> GetType()));
       SwitchDisplay();
       return true;

@@ -238,7 +238,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == lbox_maps)
   {
     ChangeMap();
-    action_handler->NewAction (new ActionString(ACTION_SET_MAP, TerrainActif().name));
+    action_handler->NewAction (new Action(ACTION_SET_MAP, TerrainActif().name));
   }
 
   if (w == bt_add_team) {
@@ -247,7 +247,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
       int index = -1;
       teams_list.FindById(lbox_all_teams->ReadValue(),index)->is_local = true;
       std::string team_id = teams_list.FindById(lbox_all_teams->ReadValue(),index)->GetId();
-      action_handler->NewAction (new ActionString(ACTION_NEW_TEAM, team_id));
+      action_handler->NewAction (new Action(ACTION_NEW_TEAM, team_id));
       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
     }
   }
@@ -256,7 +256,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     if(lbox_selected_teams->GetSelectedItem() != -1 && teams_list.FindById(lbox_selected_teams->ReadValue(),index)->is_local)
     {
       std::string team_id = teams_list.FindById(lbox_selected_teams->ReadValue(),index)->GetId();
-      action_handler->NewAction (new ActionString(ACTION_DEL_TEAM, team_id));
+      action_handler->NewAction (new Action(ACTION_DEL_TEAM, team_id));
       MoveTeams(lbox_selected_teams, lbox_all_teams, true);
     }
   }

@@ -104,7 +104,8 @@ void Network::Disconnect()
 }
 
 //-----------------------------------------------------------------------------
-
+//----------------       Client specific methods   ----------------------------
+//-----------------------------------------------------------------------------
 void Network::ClientConnect(const std::string &host, const std::string& port) 
 {
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
@@ -146,6 +147,8 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
 }
 
 //-----------------------------------------------------------------------------
+//----------------       Server specific methods   ----------------------------
+//-----------------------------------------------------------------------------
 
 void Network::ServerStart(const std::string &port) 
 {
@@ -179,7 +182,6 @@ void Network::ServerStart(const std::string &port)
   thread = SDL_CreateThread(net_thread_func,NULL);
 }
 
-//-----------------------------------------------------------------------------
 std::list<TCPsocket>::iterator Network::CloseConnection(std::list<TCPsocket>::iterator closed)
 {
   printf("Client disconnected\n");
@@ -221,10 +223,13 @@ void Network::RejectIncoming()
   server_socket = NULL;
   printf("\nStop listening");
 }
+
+//-----------------------------------------------------------------------------
+//----------------       Action handling methods   ----------------------------
 //-----------------------------------------------------------------------------
 void Network::ReceiveActions()
 {
-  Uint32 packet[packet_max_size / 4];
+  char packet[packet_max_size];
 
   uint i;
   int received;
@@ -272,20 +277,17 @@ void Network::ReceiveActions()
         memset(packet,0, packet_max_size);
         while(packet_size != i)
         {
-          received = SDLNet_TCP_Recv(*sock, packet+i/4, packet_size - i);
+          received = SDLNet_TCP_Recv(*sock, packet + i, packet_size - i);
           if(received > 0)
-            i+=received;
+            i += received;
           if(received < 0)
             std::cerr << "Malformed packet" << std::endl;
         }
 
-	printf("\n\n");
-	for(uint t=0; t < packet_max_size;t++)
-	  printf("%i ", (uint)*(((char*)packet)+t)); //,*(((char*)packet)+t));
-	printf("\n");
+        Action* a = make_action(packet);
+        MSG_DEBUG("network.traffic","Received action %s",
+                ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
-        Action* a = make_action((Uint32*)packet);
-        std::cout << "received " << *a << " (" << (int)packet_size << " octets)" << std::endl;
         ActionHandler::GetInstance()->NewAction(a, false);
 
         // Repeat the packet to other clients:
@@ -306,24 +308,23 @@ void Network::ReceiveActions()
 }
 
 // Send Messages
-void Network::SendAction(Action* action)
+void Network::SendAction(Action* a)
 {
   if (!m_is_connected) return;
 
+  MSG_DEBUG("network.traffic","Send action %s",
+        ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+
   Uint32 size;
   SDLNet_Write32(packet_max_size, &size);
-  Uint32 packet[packet_max_size/4];
+  char packet[packet_max_size];
   memset(packet,0,packet_max_size);
-  action->Write(packet);
+  a->Write(packet);
 
-  packet[(packet_max_size/4)-1] = 0xFFFFFFFF;
+  packet[packet_max_size - 1] = 0xFF;
 
   assert(packet[0] != 0 );
-/*
-  for(uint i=0; i < packet_max_size;i++)
-    printf("%i=%c ", (uint)*(((char*)packet)+i),*(((char*)packet)+i));
-  printf("\n");
- */
+
   for(std::list<TCPsocket>::iterator client = conn.begin();
       client != conn.end();
       client++)
@@ -331,7 +332,6 @@ void Network::SendAction(Action* action)
     SDLNet_TCP_Send(*client,&size,4);
     SDLNet_TCP_Send(*client,packet,packet_max_size);
   }
-  std::cout << "sending " << *action << std::endl;
 }
 
 //-----------------------------------------------------------------------------
@@ -343,62 +343,10 @@ const bool Network::IsClient() const { return m_is_client; }
 
 //-----------------------------------------------------------------------------
 
-Action* Network::make_action(Uint32* packet)
+Action* Network::make_action(char* packet)
 { 
-
   Action_t type = (Action_t)SDLNet_Read32(packet);
-  Uint32* input = &packet[1];
-
-  printf("-> %i\n", type);
-
-  switch(type)
-  {
-  case ACTION_SHOOT:
-    return new ActionDoubleInt(type, input);
-
-  case ACTION_SEND_RANDOM:
-    return new ActionDouble(type, input);
-
-  case ACTION_CHANGE_WEAPON:
-  case ACTION_WIND:
-  case ACTION_SET_CHARACTER_DIRECTION:
-  case ACTION_SET_FRAME:
-    return new ActionInt(type, input);
-
-  case ACTION_SET_GAME_MODE:
-  case ACTION_SET_MAP:
-  case ACTION_CHANGE_TEAM:
-  case ACTION_NEW_TEAM:
-  case ACTION_DEL_TEAM:
-  case ACTION_SEND_VERSION:
-  case ACTION_SEND_TEAM:
-  case ACTION_SET_CLOTHE:
-  case ACTION_SET_MOVEMENT:
-    return new ActionString(type, input);
-
-  case ACTION_CHANGE_CHARACTER:
-  case ACTION_MOVE_LEFT:
-  case ACTION_MOVE_RIGHT:
-  case ACTION_JUMP:
-  case ACTION_HIGH_JUMP:
-  case ACTION_UP:
-  case ACTION_DOWN:
-  case ACTION_CLEAR_TEAMS:
-  case ACTION_CHANGE_STATE:
-  case ACTION_ASK_VERSION:
-  case ACTION_SYNC_BEGIN:
-  case ACTION_SYNC_END:
-  case ACTION_EXPLOSION:
-  case ACTION_SET_CHARACTER_PHYSICS:  
-  case ACTION_SET_TARGET:
-  case ACTION_SUPERTUX_STATE:
-  case ACTION_SET_TIMEOUT:
-    return new Action(type,input);
-
-  default:
-    assert(false);
-    return new Action(type);
-  }
+  return new Action(type);
 }
 
 //-----------------------------------------------------------------------------

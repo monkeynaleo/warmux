@@ -122,7 +122,7 @@ void MoveCharacterLeft(Character &character){
     MoveCharacter(character);
   }
   else{
-    ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_SET_CHARACTER_DIRECTION,-1));
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SET_CHARACTER_DIRECTION,-1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 
@@ -130,9 +130,9 @@ void MoveCharacterLeft(Character &character){
   if( !network.IsLocal() && ActiveTeam().is_local)
   {
     Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-    ActionString a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
-    ActionString a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
-    ActionInt a_set_frame(ACTION_SET_FRAME,character.body->GetFrame());
+    Action a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
+    Action a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
+    Action a_set_frame(ACTION_SET_FRAME,(int)character.body->GetFrame());
     network.SendAction(a);
     delete a;
     network.SendAction(&a_set_clothe);
@@ -153,7 +153,7 @@ void MoveCharacterRight (Character &character){
   }
   else
   {
-    ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_SET_CHARACTER_DIRECTION,1));
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SET_CHARACTER_DIRECTION,1));
     character.InitMouvementDG (PAUSE_CHG_SENS);
   }
 
@@ -162,9 +162,9 @@ void MoveCharacterRight (Character &character){
   if( !network.IsLocal() && ActiveTeam().is_local)
   {
     Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-    ActionString a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
-    ActionString a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
-    ActionInt a_set_frame(ACTION_SET_FRAME,character.body->GetFrame());
+    Action a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
+    Action a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
+    Action a_set_frame(ACTION_SET_FRAME,(int)character.body->GetFrame());
     network.SendAction(a);
     delete a;
     network.SendAction(&a_set_clothe);

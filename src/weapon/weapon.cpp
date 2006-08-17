@@ -195,7 +195,7 @@ bool Weapon::CanChangeWeapon() const
 
 void Weapon::NewActionShoot() const
 {
-  ActionHandler::GetInstance()->NewAction (new ActionDoubleInt(
+  ActionHandler::GetInstance()->NewAction (new Action(
 				       ACTION_SHOOT,
 				       m_strength,	
 				       ActiveTeam().crosshair.GetAngleVal()));

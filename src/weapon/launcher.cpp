@@ -408,7 +408,7 @@ void WeaponLauncher::HandleKeyEvent(int action, int event_type)
 
   if((action >= ACTION_WEAPON_1 && action <= ACTION_WEAPON_9)
   || action == ACTION_WEAPON_MORE || action == ACTION_WEAPON_LESS)
-    ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
 
   ActiveCharacter().HandleKeyEvent(action, event_type);
 }

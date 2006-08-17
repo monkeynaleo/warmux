@@ -68,7 +68,7 @@ void TeamsList::NextTeam (bool debut_jeu)
       ++it;
       if (it == playing_list.end()) it = playing_list.begin();
     } while ((**it).NbAliveCharacter() == 0);
-  ActionHandler::GetInstance()->NewAction(new ActionString(ACTION_CHANGE_TEAM, (**it).GetId()));
+  ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHANGE_TEAM, (**it).GetId()));
 }
 
 //-----------------------------------------------------------------------------
