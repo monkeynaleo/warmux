@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-08-05 13:59+0200\n"
 "PO-Revision-Date: 2004-10-03 13:48+0200\n"
 "Last-Translator: Damien BOUCARD <damien.boucard@tchoy.net>\n"
 "Language-Team: eo <victor.stinner@haypocalc.com>\n"
@@ -40,7 +39,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr ""
 
-#: src/game/game_loop.cpp:727
+#: src/game/game_loop.cpp:729
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
@@ -55,7 +54,7 @@ msgstr ""
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -65,12 +64,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game_loop.cpp:709
+#: src/game/game_loop.cpp:711
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
@@ -89,12 +88,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 msgstr[1] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 
-#: src/game/game_loop.cpp:720
+#: src/game/game_loop.cpp:722
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:715
+#: src/game/game_loop.cpp:717
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -571,7 +570,7 @@ msgstr "Armilo"
 msgid "Website: "
 msgstr "TTT-ejo : "
 
-#: src/game/game_loop.cpp:723
+#: src/game/game_loop.cpp:725
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pistolo !"
