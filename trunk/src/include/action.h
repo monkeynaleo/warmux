@@ -37,11 +37,22 @@ private:
 protected:
   Action_t m_type;
 public:
+  // Action without parameter
   Action (Action_t type);
-  Action (Action_t type, Uint32* is);
-  virtual ~Action();
+  // Action with various parameter
+  Action (Action_t type, int value);
+  Action (Action_t type, double value);
+  Action (Action_t type, double value1, int value2);
+  Action (Action_t type, const std::string& value);
 
-  virtual std::ostream& out(std::ostream &os) const;
+  // Build an action from a network packet
+  Action (Action_t type, char* is);
+
+  ~Action();
+
+  std::ostream& out(std::ostream &os) const;
+  // Push / Back functions to add / retreive datas
+  // Work as a FIFO container, inspiteof the name of methods !
   void Push(int val);
   void Push(double val);
   void Push(std::string val);
@@ -49,67 +60,9 @@ public:
   double PopDouble();
   std::string PopString();
 
-  void Write(Uint32 *os);
+  void Write(char* os);
   Action_t GetType() const;
 };
-
-
-//-----------------------------------------------------------------------------
-
-class ActionInt : public Action
-{
-private:
-  int m_value;
-public:
-  ActionInt (Action_t type, int value);
-  ActionInt (Action_t type, Uint32* is);
-  int GetValue() const;
-  std::ostream& out(std::ostream &os) const;
-};
-
-//-----------------------------------------------------------------------------
-
-class ActionDouble : public Action
-{
-private:
-  double m_value;
-public:
-  ActionDouble (Action_t type, double value);
-  ActionDouble (Action_t type, Uint32* is);
-  double GetValue() const;
-  std::ostream& out(std::ostream &os) const;
-};
-
-//-----------------------------------------------------------------------------
-
-class ActionDoubleInt : public Action
-{
-private:
-  double m_value1;
-  int m_value2;
-public:
-  ActionDoubleInt (Action_t type, double val1, int val2);
-  ActionDoubleInt (Action_t type, Uint32* is);
-  double GetValue1() const;
-  int GetValue2() const;
-  std::ostream& out(std::ostream &os) const;
-};
-
-//-----------------------------------------------------------------------------
-
-class ActionString : public Action
-{
-private:
-  std::string m_value;
-public:
-  ~ActionString();
-  ActionString (Action_t type, const std::string& value);
-  ActionString (Action_t type, Uint32* is);
-  const char* GetValue() const;
-  std::ostream& out(std::ostream &os) const;
-};
-
-//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 // Output action in a ostream (for debug)

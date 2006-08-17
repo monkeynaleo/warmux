@@ -57,7 +57,7 @@ private:
   IPaddress ip; // for server : store listening port
                 // for client : store server address/port
 
-  Action* make_action(Uint32* packet);
+  Action* make_action(char* packet);
 
 public:
   uint max_player_number;
@@ -74,16 +74,22 @@ public:
   const bool IsServer() const;
   const bool IsClient() const;
   
+  // Network functions common to client and server
   void Disconnect();
-  void ClientConnect(const std::string &host, const std::string &port);
-  void ServerStart(const std::string &port);
 
+  // Action handling
   void SendAction(Action* action);
   void ReceiveActions();
 
+  // Client specific
+  void ClientConnect(const std::string &host, const std::string &port);
+
+  // Serveur specific methods
+  void ServerStart(const std::string &port);
   void AcceptIncoming();
   void RejectIncoming();
   std::list<TCPsocket>::iterator CloseConnection(std::list<TCPsocket>::iterator closed);
+
 };
 
 extern Network network;

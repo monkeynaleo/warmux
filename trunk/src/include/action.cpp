@@ -23,24 +23,40 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include "action_handler.h"
-//-----------------------------------------------------------------------------
+#include "../tool/debug.h"
 
+//-----------------------------------------------------------------------------
+// Action without parameter
 Action::Action (Action_t type)
 {
   m_type = type; 
 }
 
-Action::Action (Action_t type, Uint32 *is)
+// Action with various parameters
+Action::Action (Action_t type, int value) : m_type(type)
+{  Push(value);  }
+
+Action::Action (Action_t type, double value) : m_type(type)
+{  Push(value);  }
+
+Action::Action (Action_t type, const std::string& value) : m_type(type)
+{  Push(value);  }
+
+Action::Action (Action_t type, double value1, int value2) : m_type(type)
+{  Push(value1); Push(value2);  }
+
+// Build an action from a network packet
+Action::Action (Action_t type, char *is)
 {
   m_type = type; 
   int m_lenght = SDLNet_Read32(is);
-  is++;
+  is += 4;
 
   for(int i=0; i < m_lenght; i++)
   {
     Uint32 val = SDLNet_Read32(is);
     var.push_back(val);
-    is++;
+    is += 4;
   }
 }
 
@@ -53,29 +69,33 @@ Action_t Action::GetType() const
   return m_type; 
 }
 
-void Action::Write(Uint32 *os)
-{ 
+// Convert the action to a packet
+void Action::Write(char* os)
+{
   SDLNet_Write32(m_type, os);
-  os++;
+  os += 4;
   Uint32 tmp;
   int size = (int)var.size();
   memcpy(&tmp, &size, 4);
   SDLNet_Write32(tmp, os);
-  os++;
+  os += 4;
 
   for(std::list<Uint32>::iterator val = var.begin(); val!=var.end(); val++)
   {
     SDLNet_Write32(*val, os);
-    os++;
+    os += 4;
   }
 }
 
+//-------------  Add datas to the action  ----------------
 void Action::Push(int val)
 {
   Uint32 tmp;
   memcpy(&tmp, &val, 4);
   var.push_back(tmp);
-  std::cout << "Pushing int value: " << val << std::endl;
+  MSG_DEBUG( "action", " (%s) Pushing int : %i",
+        ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
+
 }
 
 void Action::Push(double val)
@@ -84,7 +104,8 @@ void Action::Push(double val)
   memcpy(&tmp, &val, 8);
   var.push_back(tmp[0]);
   var.push_back(tmp[1]);
-  std::cout << "Pushing double value: " << val << " (" << tmp << ")" << std::endl;
+  MSG_DEBUG( "action", " (%s) Pushing double : %f",
+        ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
 }
 
 void Action::Push(std::string val)
@@ -104,9 +125,11 @@ void Action::Push(std::string val)
     ch += 4;
     count -= 4;
   }
-  std::cout << "Pushing string value: " << val << std::endl;
+  MSG_DEBUG( "action", " (%s) Pushing string : %s",
+        ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val.c_str());
 }
 
+//-------------  Retrieve datas from the action  ----------------
 int Action::PopInt()
 {
   assert(var.size() > 0);
@@ -114,7 +137,8 @@ int Action::PopInt()
   Uint32 tmp = var.front();
   memcpy(&val, &tmp, 4);
   var.pop_front();
-  std::cout << "Poping int value: " << val << std::endl;
+  MSG_DEBUG( "action", " (%s) Poping int : %i",
+        ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
   return val;
 }
 
@@ -128,7 +152,8 @@ double Action::PopDouble()
   tmp[1] = var.front();
   var.pop_front();
   memcpy(&val, &tmp, 8);
-  std::cout << "Poping double value: " << val << " (" << tmp << ")" << std::endl;
+  MSG_DEBUG( "action", " (%s) Poping double : %f",
+        ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
   return val;
 }
 
@@ -149,123 +174,9 @@ std::string Action::PopString()
     str += tmp_str;
     lenght -= 4;
   }
-  std::cout << "Poping string value: " << str << std::endl;
+  MSG_DEBUG( "action", " (%s) Poping string : %s",
+        ActionHandler::GetInstance()->GetActionName(m_type).c_str(), str.c_str());
   return str;
 }
 
-std::ostream& Action::out(std::ostream &os) const
-{
-  os << ActionHandler::GetInstance()->GetActionName(m_type);
-  os << " (Mutliformat) ";
-  return os;
-}
 //-----------------------------------------------------------------------------
-
-ActionInt::ActionInt (Action_t type, int value) : Action(type)
-{
-  m_value = value;
-  Push(value);
-}
-
-ActionInt::ActionInt (Action_t type, Uint32* is) : Action(type, is)
-{
-  m_value = PopInt();
-}
-
-int ActionInt::GetValue() const { return m_value; }
-
-std::ostream& ActionInt::out(std::ostream &os) const
-{
-  Action::out (os);
-  os << " (int) = " << m_value;
-  return os;
-}
-
-//-----------------------------------------------------------------------------
-
-ActionDouble::ActionDouble (Action_t type, double value) : Action(type)
-{
-  m_value = value;
-  Push(value);
-}
-
-ActionDouble::ActionDouble (Action_t type, Uint32* is) : Action(type, is)
-{
-  m_value = PopDouble();
-}
-
-double ActionDouble::GetValue() const { return m_value; }
-
-std::ostream& ActionDouble::out(std::ostream &os) const
-{
-  Action::out (os);
-  os << " (double) = " << m_value;
-  return os;
-}
-
-//-----------------------------------------------------------------------------
-
-ActionDoubleInt::ActionDoubleInt (Action_t type, double v1, int v2) : Action(type) 
-{
-  m_value1 = v1;
-  m_value2 = v2;
-  Push(m_value1);
-  Push(m_value2);
-}
-
-ActionDoubleInt::ActionDoubleInt(Action_t type, Uint32* is) : Action(type, is)
-{
-  m_value1 = PopDouble();
-  m_value2 = PopInt();
-}
-
-double ActionDoubleInt::GetValue1() const 
-{ 
-  return m_value1; 
-}
-
-int ActionDoubleInt::GetValue2() const 
-{ 
-  return m_value2; 
-}
-
-std::ostream& ActionDoubleInt::out(std::ostream &os) const
-{
-  Action::out (os);
-  os << " (double, int) = " << m_value1 << ", " << m_value2;
-  return os;
-}
-
-//-----------------------------------------------------------------------------
-
-ActionString::ActionString (Action_t type, const std::string &value) : Action(type)
-{
-  m_value = value;
-  Push(m_value);
-}
-
-ActionString::ActionString (Action_t type, Uint32 *is) : Action(type, is)
-{
-  m_value = PopString();
-}
-
-ActionString::~ActionString ()
-{
-}
-
-const char* ActionString::GetValue() const { return m_value.c_str(); }
-
-std::ostream& ActionString::out(std::ostream &os) const
-{
-  Action::out (os);
-  os << " (string) = " << m_value;
-  return os;
-}
-
-//-----------------------------------------------------------------------------
-std::ostream& operator<<(std::ostream &os, const Action &a)
-{
-  a.out(os);
-  return os;
-}
-

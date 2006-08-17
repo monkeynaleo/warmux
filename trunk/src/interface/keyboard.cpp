@@ -190,7 +190,7 @@ void Clavier::HandleKeyPressed (const Action_t &action)
         {
           Weapon_type weapon;
           if (weapons_list.GetWeaponBySort(weapon_sort, weapon))
-            ActionHandler::GetInstance()->NewAction(new ActionInt(ACTION_CHANGE_WEAPON, weapon));
+            ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHANGE_WEAPON, weapon));
 
           return;
         }

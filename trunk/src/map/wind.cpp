@@ -172,7 +172,7 @@ double Wind::GetStrength() const{
 
 void Wind::ChooseRandomVal(){
   int val = randomObj.GetLong(-100, 100);
-  ActionHandler::GetInstance()->NewAction (new ActionInt(ACTION_WIND, val));
+  ActionHandler::GetInstance()->NewAction (new Action(ACTION_WIND, val));
 }
 
 void Wind::SetVal(long val){
