@@ -48,12 +48,13 @@ class SnipeRifle : public WeaponLauncher
 
   private:
     bool p_Shoot();
+    bool ComputeCrossPoint(bool force);
+    void PrepareLaserBeam();
   protected:
     void p_Deselect();
   public:
     SnipeRifle();
-    bool ComputeCrossPoint();    
-    void PrepareLaserBeam();
+    void Refresh();
     void Draw();  // In order to draw the laser beam.
 };
 
