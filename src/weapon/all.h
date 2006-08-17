@@ -47,5 +47,6 @@
 #include "supertux.h"
 #include "teleportation.h"
 #include "uzi.h"
+#include "submachine_gun.h"
 
 #endif
