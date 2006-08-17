@@ -7,7 +7,7 @@
     <email>glenux AT gmail.com</email>
   </author>
 
-  <surface name="sky" file="battlenight-bg.png" />
+  <surface name="sky" file="battlenight-bg.jpg" />
   <surface name="map" file="battlenight-fg.png" />
   <surface name="preview" file="battlenight-all.jpg" />
 
