@@ -7,7 +7,7 @@
     <email>yeknan AT yahoo DOT fr</email>
   </author>
 
-  <surface name="sky" file="sky.png" />
+  <surface name="sky" file="sky.jpg" />
   <surface name="map" file="goodandevil.png" />
   <surface name="preview" file="preview.jpg" />
 

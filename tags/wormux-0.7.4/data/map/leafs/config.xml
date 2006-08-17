@@ -7,7 +7,7 @@
     <country>Belgium</country>
   </author>
 
-  <surface name="sky" file="back.png" />
+  <surface name="sky" file="back.jpg" />
   <surface name="map" file="front.png" />
   <surface name="preview" file="preview.jpg" />
 
