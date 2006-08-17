@@ -29,6 +29,7 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../include/app.h"
+#include "../game/game_loop.h"
 
 
 const uint SNIPE_RIFLE_EXPLOSION_RANGE = 15;
@@ -73,12 +74,19 @@ bool SnipeRifle::p_Shoot()
   return true;
 }
 
-bool SnipeRifle::ComputeCrossPoint()
+void SnipeRifle::Refresh()
+{
+  bool tmp = projectile->is_active;
+  WeaponLauncher::Refresh();
+  ComputeCrossPoint(!tmp);
+}
+
+bool SnipeRifle::ComputeCrossPoint(bool force = false)
 {
   // Did the current character is moving ?
   Point2i pos = ActiveCharacter().GetHandPosition();
   double angle = ActiveTeam().crosshair.GetAngleRad();
-  if ( last_rifle_pos == pos && last_angle == angle ) return targeting_something;
+  if ( !force && last_rifle_pos == pos && last_angle == angle ) return targeting_something;
   else {
     last_rifle_pos=pos;
     last_angle=angle;
@@ -167,9 +175,9 @@ void SnipeRifle::PrepareLaserBeam()
 
 void SnipeRifle::Draw()
 {
-  if( IsActive() ) return ;
+  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsActive() ) return;
   ComputeCrossPoint();
   m_laser_beam_image->Draw(laser_beam_pos);
-  if(targeting_something) m_laser_image->Draw(targeted_point);      // Draw the laser impact
+  if( targeting_something ) m_laser_image->Draw(targeted_point - (m_laser_image->GetSize()/2));      // Draw the laser impact
   WeaponLauncher::Draw();
 }
