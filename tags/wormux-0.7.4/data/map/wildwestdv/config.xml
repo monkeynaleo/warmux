@@ -7,7 +7,7 @@
 		<country>Poland</country>
 	</author>
 
-  <surface name="sky" file="backgr.png" />
+  <surface name="sky" file="backgr.jpg" />
   <surface name="map" file="wildwestdv.png" />
   <surface name="preview" file="preview.jpg" />
 
