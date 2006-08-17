@@ -405,8 +405,7 @@ void Body::SetMovement(std::string name)
   if(current_mvt && current_mvt->type == name) return;
 
   // Dirty trick to get the "black" movement to be played fully
-  if(current_clothe && current_clothe->name == "black"
-  && current_mvt    && current_mvt->type == "black" ) return;
+  if(current_clothe && current_clothe->name == "black") return;
 
   if(mvt_lst.find(name) != mvt_lst.end())
   {
@@ -452,10 +451,9 @@ void Body::SetMovementOnce(std::string name)
   if(current_mvt && current_mvt->type == name) return;
 
   // Dirty trick to get the "black" movement to be played fully
-  if(current_clothe && current_clothe->name == "black"
-  && current_mvt    && current_mvt->type == "black" ) return;
+  if(current_clothe && current_clothe->name == "black"  && name != "black") return;
 
- if(mvt_lst.find(name) != mvt_lst.end())
+  if(mvt_lst.find(name) != mvt_lst.end())
   {
     if(!play_once_mvt_sauv)
     {
@@ -506,6 +504,10 @@ const Point2i Body::GetHandPosition()
 
 void Body::StartWalk()
 {
+  // walk events happens when the player hits the left/right key
+  // counting how much they are pressed allow to get skin walking
+  // if the key was hit while the character was jumping or using an other
+  // animation than the walk animation
   walk_events++;
   if(walk_events == 1)
     last_refresh = Time::GetInstance()->Read();
@@ -515,6 +517,8 @@ void Body::StopWalk()
 {
   if(walk_events > 0)
     walk_events--;
+  if(current_mvt->type == "walk")
+    SetFrame(0);
 }
 
 void Body::ResetWalk()

@@ -55,7 +55,7 @@ const uint HAUT_FONT_MIX = 13;
 // Space between the name, the skin and the energy bar
 const uint ESPACE = 3; // pixels
 const uint do_nothing_timeout = 5000;
-const double MIN_SPEED_TO_FLY = 7.0;
+const double MIN_SPEED_TO_FLY = 15.0;
 
 // Pause for the animation
 #ifdef DEBUG
@@ -73,7 +73,7 @@ const double MIN_SPEED_TO_FLY = 7.0;
 //#define DEBUG_STATS
 #endif
 
-// Barre d'�ergie
+// Energy bar
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
@@ -149,7 +149,7 @@ void Character::SetBody(Body* _body)
   SetSize(body->GetSize());
 }
 
-// Signale la mort d'un ver
+// Signal the death of the skin
 void Character::SignalDeath()
 {
   MSG_DEBUG("character", "Dying");
@@ -305,8 +305,11 @@ void Character::Draw()
     animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   }
 
-  // Stop the animation if we are playing
-  if(&ActiveCharacter() == this && body->GetMovement().substr(0,9) == "animation")
+  // Stop the animation or the black skin if we are playing
+  if(&ActiveCharacter() == this
+  &&(body->GetMovement().substr(0,9) == "animation"
+  || body->GetClothe().substr(0,9) == "animation"
+  || body->GetClothe() == "black"))
   {
     SetClothe("normal");
     SetMovement("walk");
@@ -684,6 +687,9 @@ void Character::SignalExplosion()
   {
     SetClotheOnce("black");
     SetMovementOnce("black");
+    if(body->GetClothe() == "black"
+    && body->GetMovement() != "black")
+      std::cerr << "Error: the clothe \"black\" of the character " << GetName() << " is set, but the skin have no \"black\" movement !!!" << std::endl;
   }
 }
 
