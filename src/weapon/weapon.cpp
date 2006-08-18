@@ -131,7 +131,8 @@ void Weapon::Select()
   m_is_active = false;
   m_strength = 0;
   ActiveTeam().ResetNbUnits();
-  ActiveCharacter().SetClothe("weapon-" + m_id);
+
+  ActiveCharacter().SetWeaponClothe();
 
   // is there a crosshair ?
   if (min_angle != max_angle) 
