@@ -201,12 +201,14 @@ void Team::NextCharacter()
 {
   // Passe au ver suivant
   assert (0 < NbAliveCharacter());
+  ActiveCharacter().StopPlaying();
   do
   {
     ++active_character;
     if (active_character == characters.end())
       active_character = characters.begin();
   } while (ActiveCharacter().IsDead());
+  ActiveCharacter().StartPlaying();
 
   if (camera_est_sauve) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
   camera.ChangeObjSuivi (&ActiveCharacter(),

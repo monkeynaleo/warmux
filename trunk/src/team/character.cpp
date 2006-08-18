@@ -701,6 +701,8 @@ int Character::GetDirection() const
 // End of turn or change of character
 void Character::StopPlaying()
 {
+  assert(!IsDead());
+  SetClothe("normal");
   SetMovement("walk");
   body->ResetWalk();
 }
@@ -709,7 +711,7 @@ void Character::StopPlaying()
 void Character::StartPlaying()
 {
   assert (!IsGhost());
-  SetClothe("weapon-" + m_team.GetWeapon().GetID());
+  SetWeaponClothe();
 }
 
 uint Character::GetEnergy() const 
@@ -764,6 +766,13 @@ void Character::MadeDamage(const int Dmg, const Character &other)
   }
   
   current_total_damage += Dmg;
+}
+
+void Character::SetWeaponClothe()
+{
+  SetClothe("weapon-" + m_team.GetWeapon().GetID());
+  if(body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID())
+    SetClothe("normal");
 }
 
 void Character::SetMovement(std::string name)

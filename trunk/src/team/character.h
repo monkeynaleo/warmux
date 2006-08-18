@@ -154,6 +154,7 @@ public:
 
   // Body handling
   void SetBody(Body* _body);
+  void SetWeaponClothe();
   void SetClothe(std::string name);
   void SetMovement(std::string name);
   void SetClotheOnce(std::string name);
