@@ -777,6 +777,7 @@ void Character::SetWeaponClothe()
 
 void Character::SetMovement(std::string name)
 {
+  if(IsDead()) return;
   MSG_DEBUG("body","Character %s -> SetMovement : %s",character_name.c_str(),name.c_str());
   body->SetMovement(name);
   uint l,r,t,b;
@@ -786,6 +787,7 @@ void Character::SetMovement(std::string name)
 
 void Character::SetMovementOnce(std::string name)
 {
+  if(IsDead()) return;
   MSG_DEBUG("body","Character %s -> SetMovementOnce : %s",character_name.c_str(),name.c_str());
   body->SetMovementOnce(name);
   uint l,r,t,b;
@@ -795,12 +797,14 @@ void Character::SetMovementOnce(std::string name)
 
 void Character::SetClothe(std::string name)
 {
+  if(IsDead() && name!="dead") return;
   MSG_DEBUG("body","Character %s -> SetClothe : %s",character_name.c_str(),name.c_str());
   body->SetClothe(name);
 }
 
 void Character::SetClotheOnce(std::string name)
 {
+  if(IsDead()) return;
   MSG_DEBUG("body","Character %s -> SetClotheOnce : %s",character_name.c_str(),name.c_str());
   body->SetClotheOnce(name);
 }
