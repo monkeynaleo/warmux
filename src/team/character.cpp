@@ -701,7 +701,7 @@ int Character::GetDirection() const
 // End of turn or change of character
 void Character::StopPlaying()
 {
-  assert(!IsDead());
+  if(IsDead()) return;
   SetClothe("normal");
   SetMovement("walk");
   body->ResetWalk();
