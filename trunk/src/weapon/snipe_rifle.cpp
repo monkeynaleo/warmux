@@ -34,8 +34,8 @@
 
 const uint SNIPE_RIFLE_EXPLOSION_RANGE = 15;
 const uint SNIPE_RIFLE_BEAM_START = 40;
-const uint SNIPE_RIFLE_BULLET_SPEED = 50;
-const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500 - SNIPE_RIFLE_BEAM_START;
+const uint SNIPE_RIFLE_BULLET_SPEED = 20;
+const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
 
 SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg) :
     WeaponBullet("snipe_rifle_bullet", cfg)
@@ -58,8 +58,9 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   last_angle = 0.0;
   projectile = new SnipeBullet(cfg());
   targeting_something = false;
-  m_laser_image = new Sprite( resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
-  Surface * tmp = new Surface(Point2i(SNIPE_RIFLE_MAX_BEAM_SIZE,SNIPE_RIFLE_MAX_BEAM_SIZE),SDL_SWSURFACE,true);
+  m_laser_image = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
+  int size = SNIPE_RIFLE_MAX_BEAM_SIZE - SNIPE_RIFLE_BEAM_START;
+  Surface * tmp = new Surface(Point2i(size,size),SDL_SWSURFACE|SDL_SRCALPHA,true);
   m_laser_beam_image = new Sprite(*tmp);
 }
 
@@ -137,40 +138,34 @@ bool SnipeRifle::ComputeCrossPoint(bool force = false)
 // Reset crosshair when switching from a weapon to another to avoid misused
 void SnipeRifle::p_Deselect()
 {
-  ActiveTeam().crosshair.Reset();
+  ActiveTeam().crosshair.ChangeAngleVal(0);
 }
 
 // Prepare the laser beam Sprite
 void SnipeRifle::PrepareLaserBeam()
 {
-  Color red = Color (255,0,0,255);
-  uint x1,x2,x_orig,x_dest,y1,y2,y_orig,y_dest;
+  uint x_orig,x_dest,y_orig,y_dest;
   Point2i pos = laser_beam_start;
   if (pos.x >= targeted_point.x) {
-    x1 = pos.x;
-    laser_beam_pos.x = x2 = targeted_point.x;
-    x_orig = x1 - x2;
+    laser_beam_pos.x = targeted_point.x;
+    x_orig = pos.x - targeted_point.x;
     x_dest = 0;
   } else {
-    laser_beam_pos.x = x2 = pos.x;
-    x1 = targeted_point.x;
-    x_dest = x1 - x2;
+    laser_beam_pos.x = pos.x;
+    x_dest = targeted_point.x - pos.x;
     x_orig = 0;
   }
   if (pos.y >= targeted_point.y) {
-    y1 = pos.y;
-    laser_beam_pos.y = y2 = targeted_point.y;
-    y_orig = y1 - y2;
+    laser_beam_pos.y = targeted_point.y;
+    y_orig = pos.y - targeted_point.y;
     y_dest = 0;
   } else {
-    laser_beam_pos.y = y2 = pos.y;
-    y1 = targeted_point.y;
-    y_dest = y1 - y2;
+    laser_beam_pos.y = pos.y;
+    y_dest = targeted_point.y - pos.y;
     y_orig = 0;
   }
-  Point2i size = Point2i( x1 - x2 + 1 , y1 - y2 + 1 );
   (*m_laser_beam_image)[0].surface.Fill(0);
-  (*m_laser_beam_image)[0].surface.LineColor(x_orig,x_dest,y_orig,y_dest,red);
+  (*m_laser_beam_image)[0].surface.LineColor(x_orig,x_dest,y_orig,y_dest,Color(255,0,0,255));
 }
 
 void SnipeRifle::Draw()
