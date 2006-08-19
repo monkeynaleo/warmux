@@ -568,7 +568,10 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position)
       FOR_ALL_LIVING_CHARACTERS(team,character) 
 	{
 	  tmp = &(*character);
-	  if (tmp != this && tmp != &ActiveCharacter())
+	  if (tmp != this 
+	      && (tmp != &ActiveCharacter() || typeid(*this) == typeid(Character))) // hack to avoid collision between
+	    // active character and a weapon projectile when launching it
+	    // but manage collision of character between character (see bug 6684)
 	    {
 	      if (tmp->GetTestRect().Intersect( rect )) 
 		{
