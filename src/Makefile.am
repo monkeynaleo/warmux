@@ -95,7 +95,7 @@ wormux_SOURCES = \
 	particles/dark_smoke.cpp particles/dark_smoke.h \
 	particles/explosion_smoke.cpp particles/explosion_smoke.h \
 	particles/fire.cpp particles/fire.h \
-	particles/ground.cpp particles/ground.h \
+	particles/ground_particles.cpp particles/ground_particles.h \
 	particles/magic_star.cpp particles/magic_star.h \
 	particles/particle.cpp particles/particle.h \
 	particles/smoke.cpp particles/smoke.h \

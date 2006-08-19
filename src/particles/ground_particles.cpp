@@ -19,15 +19,28 @@
  * Particle Engine
  *****************************************************************************/
 
-#ifndef GROUND_H
-#define GROUND_H
+#include "ground_particles.h"
 #include "particle.h"
+#include "../game/time.h"
+#include "../map/map.h"
 
-class GroundParticle : public Particle
+GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
+  Particle("ground_particle")
 {
- public:
-  GroundParticle(const Point2i& size, const Point2i& position);
-  void Refresh();
-};
+  m_left_time_to_live = 1;
+  image = NULL;
 
-#endif
+  Rectanglei rec;
+  rec.SetPosition( position - size / 2);
+  rec.SetSize( size );
+  image = new Sprite(world.ground.GetPart(rec));
+}
+
+void GroundParticle::Refresh()
+{
+  UpdatePosition();
+  image->SetRotation_deg((Time::GetInstance()->Read()/2) % 360);
+  image->Update();
+  if(IsOutsideWorld(GetPosition()))
+    m_left_time_to_live = 0;
+}
