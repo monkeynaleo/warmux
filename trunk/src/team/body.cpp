@@ -30,6 +30,7 @@
 #include "../tool/random.h"
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
+#include "../particles/body_member.h"
 
 Body::Body(xmlpp::Element* xml, Profile* res)
 {
