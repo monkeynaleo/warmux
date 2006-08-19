@@ -32,7 +32,7 @@
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 #include "../include/enum.h"
-#include "../object/particle.h"
+#include "../particles/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
 #include "../team/character.h"

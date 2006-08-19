@@ -27,7 +27,7 @@
 #include "../graphic/surface.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
-#include "../object/particle.h"
+#include "../particles/particle.h"
 #include "../tool/point.h"
 
 void ApplyExplosion (const Point2i &pos,

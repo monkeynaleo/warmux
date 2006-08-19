@@ -79,7 +79,6 @@ wormux_SOURCES = \
 	object/bonus_box.cpp object/bonus_box.h \
 	object/object_cfg.cpp object/object_cfg.h \
 	object/objects_list.cpp object/objects_list.h \
-	object/particle.cpp object/particle.h \
 	map/camera.cpp map/camera.h \
 	map/ground.cpp map/ground.h \
 	map/map.cpp map/map.h \
@@ -91,6 +90,7 @@ wormux_SOURCES = \
 	map/wind.cpp map/wind.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
+	particles/particle.cpp particles/particle.h \
 	team/macro.h \
 	team/body.cpp team/body.h \
 	team/body_list.cpp team/body_list.h \
