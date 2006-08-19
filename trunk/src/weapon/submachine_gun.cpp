@@ -33,19 +33,19 @@
 #include "../weapon/explosion.h"
 #include "../weapon/submachine_gun.h"
 
-const uint    SUBMACHINE_BULLET_SPEED       = 50;
+const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_EXPLOSION_RANGE    = 15;
 const double  SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
 
 SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg) :
-    WeaponBullet("uzi_bullet", cfg)
+    WeaponBullet("m16_bullet", cfg)
 {
   cfg.explosion_range = SUBMACHINE_EXPLOSION_RANGE;
 }
 
 void SubMachineGunBullet::ShootSound()
 {
-  jukebox.Play("share", "weapon/uzi");
+  jukebox.Play("share", "weapon/uzi"); // TODO: change for m16
 }
 
 void SubMachineGunBullet::SignalCollision()
@@ -61,13 +61,14 @@ void SubMachineGunBullet::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "uzi", new ExplosiveWeaponConfig())
+SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", new ExplosiveWeaponConfig())
 {
   m_name = _("Submachine Gun");
 
   override_keys = true ;
   m_first_shoot = 0;
-  projectile = new SubMachineGunBullet(cfg());
+  is_loaded = false;
+  Reload();
 }
 
 bool SubMachineGun::p_Shoot ()
@@ -77,6 +78,7 @@ bool SubMachineGun::p_Shoot ()
   
   Reload();
   projectile->Shoot(SUBMACHINE_BULLET_SPEED);
+  is_loaded = false;
   
   m_is_active = true;
   return true;
@@ -102,6 +104,7 @@ void SubMachineGun::RepeatShoot()
 // Load the machine gun with a projectile which is not in use
 void SubMachineGun::Reload()
 {
+  if (is_loaded) return;
   projectile = new SubMachineGunBullet(cfg());
   projectile_list.push_back(dynamic_cast<WeaponBullet *> (projectile));
 }

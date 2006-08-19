@@ -49,13 +49,13 @@ class SubMachineGun : public WeaponLauncher
     ProjectileList projectile_list;
     ProjectileIterator projectile_iterator;
     uint m_first_shoot;
+    bool is_loaded;
   private:
     void Reload();
     void RepeatShoot();
   public:
     SubMachineGun();
     bool p_Shoot();
-    void Refresh(){}
     void HandleKeyEvent(int action, int event_type);
 };
 
