@@ -118,75 +118,25 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   uint x = 60;
   uint y = 60;
 
-#if 0 // Determining sizes really doesn't work so hardcoding them at init
-  score_size = big_font->GetSize("999");
-
-  // Type size
-  type_size = type_size.max(big_font->GetSize(_("Most violent")));
-  type_size = type_size.max(big_font->GetSize(_("Most useless")));
-  type_size = type_size.max(big_font->GetSize(_("Most usefull")));
-  type_size = type_size.max(big_font->GetSize(_("Most sold-out")));
-
-  for (const_res_iterator it=v.begin(), end = v.end(); it!=end; ++it)
-  {
-    //Team size
-    std::string name;
-
-    if ((*it)->getTeamName() == NULL) name = std::string(_("All teams"));
-    else name = (*it)->getTeamName();
-    team_size = team_size.max(big_font->GetSize(name));
-
-    //Name size
-    name = (*it)->getMostViolent()->GetName();
-    name_size = name_size.max(big_font->GetSize(name));
-    name = (*it)->getMostUsefull()->GetName();
-    name_size = name_size.max(big_font->GetSize(name));
-    name = (*it)->getMostUseless()->GetName();
-    name_size.max(big_font->GetSize(name));
-    name = (*it)->getBiggestTraitor()->GetName();
-    name_size = name_size.max(big_font->GetSize(name));
-  }
-
-  //Scaling
-  score_size = score_size*Zoom;
-  name_size  = name_size*Zoom;
-  type_size  = type_size;
-  team_size  = team_size;
-
-  //Total width
-  total_width = score_size.GetX() + type_size.GetX() + name_size.GetX();
-
-  //Max height
-  if (score_size.GetY() > max_height) max_height = score_size.GetY();
-  if (team_size.GetY() > max_height) max_height = team_size.GetY();
-  if (name_size.GetY() > max_height) max_height = name_size.GetY();
-  if (type_size.GetY() > max_height) max_height = type_size.GetY();
-  max_height += 2*DEF_BORDER;
-
-  fprintf(stdout, "Determined:\n"
-          "  * team_size = (%i,%i)\n"
-          "  * type_size = (%i,%i)\n"
-          "  * name_size = (%i,%i)\n"
-          "  * score_size = (%i,%i)\n"
-          "  * box size = (%i, %i)\n",
-          team_size.GetX(), team_size.GetY(),
-          type_size.GetX(), type_size.GetY(),
-          name_size.GetX(), name_size.GetY(),
-          score_size.GetX(), score_size.GetY(),
-          total_width, max_height);
-#endif
-
   //Team selection
   team_box = new HBox(Rectanglei(x, y, total_width, max_height), true);
   team_box->SetMargin(DEF_MARGIN);
   team_box->SetBorder(Point2i(DEF_BORDER, DEF_BORDER));
+
   bt_prev_team = new Button(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)),
                             res, "menu/arrow-left");
   team_box->AddWidget(bt_prev_team);
+
   pos.SetValues(pos.GetX()+DEF_SIZE, pos.GetY());
+
   HBox* tmp_box = new HBox( Rectanglei(pos, team_size), true);
-  team_name = new Label("", Rectanglei(pos, team_size), *big_font);
+  team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
+  tmp_box->AddWidget(team_logo);
+
+  pos.SetValues(pos.GetX()+team_logo->GetSizeX(),pos.GetY());
+  team_name = new Label("", Rectanglei(pos, team_size-48), *big_font);
   tmp_box->AddWidget(team_name);
+
   team_box->AddWidget(tmp_box);
   pos.SetValues(pos.GetX()+team_size.GetX(), pos.GetY());
   bt_next_team = new Button(Rectanglei(pos, Point2i(DEF_SIZE, DEF_SIZE)),
@@ -236,8 +186,13 @@ void ResultsMenu::SetResult(int i)
   assert(res);
 
   //Team name
-  if (res->getTeamName() == NULL) name = std::string(_("All teams"));
-  else name = res->getTeamName();
+  if (res->getTeamName() == NULL) {
+    name = std::string(_("All teams"));
+    team_logo->SetNoSurface();
+  }  else  {
+    name = res->getTeamName();
+    team_logo->SetSurface( *(res->getTeamLogo()) );
+  }
   printf("Now result %i/%i: team '%s'\n",
          index, results->size(), name.c_str());
   team_name->SetText(name);

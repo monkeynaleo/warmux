@@ -46,6 +46,7 @@ class ResultsMenu : public Menu
     /* Team controllers */
     Button  *bt_prev_team;
     Button  *bt_next_team;
+    PictureWidget *team_logo;
     Label   *team_name;
     HBox    *team_box;
     
