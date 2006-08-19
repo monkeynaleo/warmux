@@ -63,7 +63,7 @@ class Particle : public PhysicalObj
   bool IsOnTop() { return on_top; }
   bool StillUseful();
 };
-
+#if 0
 class ExplosionSmoke : public Particle
 {
   uint m_initial_size, dx;
@@ -128,6 +128,7 @@ class BodyMemberParticle : public Particle
   BodyMemberParticle(Sprite* spr, const Point2i& position);
   void Refresh();
 };
+#endif
 
 class ParticleEngine
 {

@@ -90,7 +90,16 @@ wormux_SOURCES = \
 	map/wind.cpp map/wind.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
+	particles/body_member.cpp particles/body_member.h \
+	particles/bullet.cpp particles/bullet.h \
+	particles/dark_smoke.cpp particles/dark_smoke.h \
+	particles/explosion_smoke.cpp particles/explosion_smoke.h \
+	particles/fire.cpp particles/fire.h \
+	particles/ground.cpp particles/ground.h \
+	particles/magic_star.cpp particles/magic_star.h \
 	particles/particle.cpp particles/particle.h \
+	particles/smoke.cpp particles/smoke.h \
+	particles/star.cpp particles/star.h \
 	team/macro.h \
 	team/body.cpp team/body.h \
 	team/body_list.cpp team/body_list.h \
