@@ -142,7 +142,6 @@ wormux_SOURCES = \
 	weapon/suicide.cpp weapon/suicide.h \
 	weapon/supertux.cpp weapon/supertux.h \
 	weapon/teleportation.cpp weapon/teleportation.h \
-	weapon/uzi.cpp weapon/uzi.h \
 	weapon/snipe_rifle.cpp weapon/snipe_rifle.h \
 	weapon/submachine_gun.cpp weapon/submachine_gun.h
 
