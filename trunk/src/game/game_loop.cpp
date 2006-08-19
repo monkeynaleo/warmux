@@ -47,7 +47,7 @@
 #include "../network/randomsync.h"
 #include "../object/bonus_box.h"
 #include "../object/objects_list.h"
-#include "../object/particle.h"
+#include "../particles/particle.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
 #include "../tool/debug.h"

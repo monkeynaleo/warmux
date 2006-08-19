@@ -21,7 +21,7 @@
 
 #ifndef PARTICLE_H
 #define PARTICLE_H
-#include "physical_obj.h"
+#include "../object/physical_obj.h"
 #include "../graphic/sprite.h"
 #include "../graphic/surface.h"
 #include "../include/base.h"
