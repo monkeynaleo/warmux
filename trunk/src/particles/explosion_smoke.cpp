@@ -1,3 +1,4 @@
+
 /******************************************************************************
  *  Wormux, a free clone of the game Worms from Team17.
  *  Copyright (C) 2001-2004 Lawrence Azzoug.
@@ -21,6 +22,8 @@
 
 #include "explosion_smoke.h"
 #include "particle.h"
+#include "../game/time.h"
+#include "../tool/random.h"
 
 ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   Particle("explosion_smoke_particle")

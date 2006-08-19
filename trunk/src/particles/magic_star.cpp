@@ -1,3 +1,4 @@
+
 /******************************************************************************
  *  Wormux, a free clone of the game Worms from Team17.
  *  Copyright (C) 2001-2004 Lawrence Azzoug.
@@ -21,6 +22,8 @@
 
 #include "magic_star.h"
 #include "particle.h"
+#include "../tool/random.h"
+#include "../game/time.h"
 
 MagicStarParticle::MagicStarParticle() :
   Particle("magic_star_particle")

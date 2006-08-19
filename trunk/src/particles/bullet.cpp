@@ -21,6 +21,7 @@
 
 #include "bullet.h"
 #include "particle.h"
+#include "../game/time.h"
 
 BulletParticle::BulletParticle() :
   Particle("bullet_particle")

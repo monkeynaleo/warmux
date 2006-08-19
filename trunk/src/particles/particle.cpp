@@ -37,9 +37,8 @@
 #include "dark_smoke.h"
 #include "explosion_smoke.h"
 #include "fire.h"
-#include "ground.h"
+#include "ground_particles.h"
 #include "magic_star.h"
-#include "particle.h"
 #include "smoke.h"
 #include "star.h"
 
