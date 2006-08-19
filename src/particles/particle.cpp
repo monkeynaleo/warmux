@@ -32,6 +32,17 @@
 #include "../weapon/explosion.h"
 #include "../map/map.h"
 
+#include "body_member.h"
+#include "bullet.h"
+#include "dark_smoke.h"
+#include "explosion_smoke.h"
+#include "fire.h"
+#include "ground.h"
+#include "magic_star.h"
+#include "particle.h"
+#include "smoke.h"
+#include "star.h"
+
 ParticleEngine global_particle_engine;
 
 Particle::Particle(const std::string &name) :
@@ -96,7 +107,7 @@ bool Particle::StillUseful()
 }
 
 // ==============================================
-
+#if 0
 Smoke::Smoke() :
   Particle("smoke_particle")
 {
@@ -330,7 +341,7 @@ void BodyMemberParticle::Refresh()
   image->SetRotation_deg(angle);
   image->Update();
 }
-
+#endif
 // ==============================================
 
 ParticleEngine::ParticleEngine(uint time)
