@@ -175,14 +175,14 @@
       <blast_force>5</blast_force>
     </gun>
 
-    <uzi>
+    <m16>
       <position origin="hand" x="-7" y="-5" />
       <min_angle>-40</min_angle>
       <max_angle>89</max_angle>
       <nb_ammo>6</nb_ammo>
       <unit_per_ammo>10</unit_per_ammo>
       <damage>5</damage>
-    </uzi>
+    </m16>
     
     <snipe_rifle>
       <position origin="hand" x="-7" y="-10" />

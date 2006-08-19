@@ -235,18 +235,13 @@
   <surface name="teleportation_ico" file="weapon/teleportation/teleportation_ico.png" />
   <surface name="teleportation" file="weapon/teleportation/teleportation.png" />
 
-  <!-- Uzi ressources -->
+  <!-- M16 ressources -->
   
-  <surface name="uzi_ico" file="weapon/uzi/uzi_ico.png" />
-  <sprite name="uzi_bullet">
+  <surface name="m16_ico" file="weapon/m16/m16_ico.png" />
+  <sprite name="m16_bullet">
     <image file="weapon/gun/gun_bullet.png" />
   </sprite>
-  <surface name="uzi" file="weapon/uzi/uzi.png" />
-  <surface name="uzi_ico" file="weapon/uzi/uzi_ico.png" />
-  <sprite name="uzi_bullet">
-    <image file="weapon/gun/gun_bullet.png" />
-  </sprite>
-  <surface name="uzi" file="weapon/uzi/uzi.png" />
+  <surface name="m16" file="weapon/m16/m16.png" />
 
   <!-- Snipe rifle ressources -->
   

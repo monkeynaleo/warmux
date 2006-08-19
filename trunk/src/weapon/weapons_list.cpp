@@ -69,7 +69,6 @@ void WeaponsList::Init()
 {
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
   Bazooka* bazooka = new Bazooka;
-  Uzi* uzi = new Uzi;
   SubMachineGun* submachine_gun = new SubMachineGun;
   Gun* gun = new Gun;
   SnipeRifle* snipe_rifle = new SnipeRifle;
@@ -97,7 +96,6 @@ void WeaponsList::Init()
 
   // Category 1
   AddToList(bazooka, 1);
-  AddToList(uzi, 1);
   AddToList(submachine_gun, 1);
   AddToList(snipe_rifle, 1);
   AddToList(gun, 1);

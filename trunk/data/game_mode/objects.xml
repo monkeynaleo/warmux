@@ -87,7 +87,7 @@
     <rebound_factor>0.01</rebound_factor>
   </magic_star_particle>
 
-  <bullet_particle> <!-- the gun and uzi -->
+  <bullet_particle> <!-- the gun and M16 -->
     <mass>2.0</mass>
     <wind_factor>0.01</wind_factor>
     <air_resist_factor>0.01</air_resist_factor>
@@ -125,14 +125,14 @@
     <rebound_factor>0.01</rebound_factor>
   </gun_bullet>
 
-  <uzi_bullet>
+  <m16_bullet>
     <mass>2.0</mass>
     <wind_factor>0.8</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>0.1</gravity_factor>
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
-  </uzi_bullet>
+  </m16_bullet>
   
   <snipe_rifle_bullet>
     <mass>2.0</mass>
