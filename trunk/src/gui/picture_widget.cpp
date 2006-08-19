@@ -34,7 +34,7 @@ PictureWidget::~PictureWidget()
     delete spr;
 }
 
-void PictureWidget::SetSurface(Surface& s, bool enable_scaling)
+void PictureWidget::SetSurface(const Surface& s, bool enable_scaling)
 {
   need_redrawing = true;
 
@@ -48,6 +48,16 @@ void PictureWidget::SetSurface(Surface& s, bool enable_scaling)
   
     spr->Scale (scale, scale);
   }
+}
+
+void PictureWidget::SetNoSurface()
+{
+  need_redrawing = true;
+
+  if (spr != NULL)
+    delete spr;
+
+  spr = NULL;
 }
 
 void PictureWidget::Draw(const Point2i &mousePosition)

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Results
+ * Manage the end of game results of a team
  *****************************************************************************/
 
 #include <sstream>
@@ -28,16 +28,18 @@
 #include "macro.h"
 #include "../tool/i18n.h"
 
-TeamResults::TeamResults(const char*      name,
+TeamResults::TeamResults(const char* name,
+			 const Surface* logo,
                          const Character* MV,
                          const Character* MUl,
                          const Character* MUs,
                          const Character* BT)
-  : teamName(name)
-  , mostViolent(MV)
-  , mostUsefull(MUl)
-  , mostUseless(MUs)
-  , biggestTraitor(BT)
+  : teamName(name),
+    team_logo(logo),
+    mostViolent(MV),
+    mostUsefull(MUl),
+    mostUseless(MUs),
+    biggestTraitor(BT)
 {
 }
 
@@ -86,6 +88,7 @@ TeamResults* TeamResults::createTeamResults(Team* team)
   }
 
   return new TeamResults(team->GetName().c_str(),
+			 &team->flag,
                          MostViolent,
                          MostUsefull,
                          MostUseless,
@@ -138,6 +141,7 @@ TeamResults* TeamResults::createGlobalResults(std::vector<TeamResults*>* list)
 
   // We'll do as if NULL is for all teams
   return new TeamResults(NULL,
+			 NULL,
                          MostViolent,
                          MostUsefull,
                          MostUseless,

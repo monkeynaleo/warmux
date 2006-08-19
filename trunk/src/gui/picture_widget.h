@@ -33,7 +33,8 @@ class PictureWidget : public Widget
  public:
   PictureWidget(const Rectanglei &rect);
   ~PictureWidget();
-  void SetSurface(Surface& s, bool enable_scaling=false);
+  void SetSurface(const Surface& s, bool enable_scaling=false);
+  void SetNoSurface();
   void Draw(const Point2i &mousePosition);
   void SetSizePosition(const Rectanglei &rect);
 };
