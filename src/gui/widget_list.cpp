@@ -107,3 +107,14 @@ Widget* WidgetList::Clic(const Point2i &mousePosition, uint button)
   return NULL;
 }
 
+void WidgetList::ForceRedraw()
+{
+  need_redrawing = true;
+
+  for(std::list<Widget*>::iterator w=widget_list.begin();
+      w != widget_list.end();
+      w++)
+  {
+    (*w)->ForceRedraw();
+  }
+}

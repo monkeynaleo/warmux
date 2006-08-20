@@ -46,7 +46,7 @@ class Widget : public Rectanglei
   virtual void Update(const Point2i &mousePosition,
 		      const Point2i &lastMousePosition); // virtual only for Box !!
   virtual void Draw(const Point2i &mousePosition) = 0;
-  void ForceRedraw(); // set need_redrawing to true;
+  virtual void ForceRedraw(); // set need_redrawing to true; -- virtual for widget_list
 
   virtual void SendKey(SDL_keysym key);
   virtual Widget* Clic(const Point2i &mousePosition, uint button);

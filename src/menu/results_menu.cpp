@@ -97,6 +97,8 @@ void ResultBox::SetResult(const std::string& name, int score)
 
   name_lbl->SetText(copy_name);
   score_lbl->SetText(score_str);
+
+  ForceRedraw();
 }
 
 ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
@@ -196,6 +198,7 @@ void ResultsMenu::SetResult(int i)
   printf("Now result %i/%i: team '%s'\n",
          index, results->size(), name.c_str());
   team_name->SetText(name);
+  team_box->ForceRedraw();
 
   //Most violent
   player = res->getMostViolent();
