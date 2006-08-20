@@ -79,7 +79,6 @@ private:
   void DrawEnergyBar (int dy);
   void DrawName (int dy) const;
 
-  void SignalDeath();
   void SignalDrowning();
   void SignalGhostState (bool was_dead);
   void SignalFallEnding();
@@ -91,51 +90,51 @@ public:
 
   void SignalExplosion();
 
-  // Change le niveau d'�ergie
+  // Energy related
   void SetEnergyDelta (int delta, bool do_report=true);
-
-  // Changement de direction
-  void SetDirection (int direction);
-
-  // Initialise un mouvement �droite ou �gauche
-  void InitMouvementDG (uint pause);
-  bool CanStillMoveDG (uint pause);
-
-  // Changement d'etat
-  void HighJump ();
-  void Jump ();
+  uint GetEnergy() const;
+  void Die();
 
   void Draw();
   void Refresh();
 
-  // Handle a key event on the character.
+
+  void PrepareTurn ();
+  void StartPlaying();
+  void StopPlaying();
+
+// Handle a key event on the character.
   void HandleKeyEvent(int key, int event_type) ;
   void PrepareShoot();
   void DoShoot();
   void HandleShoot(int event_type) ;
 
-  // Se prepare a un nouveau tour
-  void PrepareTurn ();
-
   // Show hide the Character
-  void StartPlaying();
-  void StopPlaying();
   void Hide();
   void Show();
 
-  // Les mouvements droite/gauche sont autoris� ? (pause assez longue ?)
+  // ---- Movement  -----
+  // Can we move (check a timeout)
   bool MouvementDG_Autorise() const;
   bool CanJump() const;
 
-  // Lecture du niveau d'�ergie en pourcent
-  uint GetEnergy() const;
+  // Jumps
+  void HighJump ();
+  void Jump ();
 
-  // Lecture de la direction d'un (+1 �droite, -1 �gauche)
+  // Initialise left or right movement
+  void InitMouvementDG (uint pause);
+  bool CanStillMoveDG (uint pause);
+
+  // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
+  void SetDirection (int direction);
   int GetDirection() const;
 
-  // Acces �l'�uipe d'un ver
+  // Team owner
   Team& TeamAccess();
   const Team& GetTeam() const;
+  uint GetTeamIndex();
+  uint GetCharacterIndex();
 
   // Access to character info
   const std::string& GetName() const { return character_name; }
@@ -159,9 +158,6 @@ public:
   void SetMovement(std::string name);
   void SetClotheOnce(std::string name);
   void SetMovementOnce(std::string name);
-
-  uint GetTeamIndex();
-  uint GetCharacterIndex();
 };
 
 #endif
