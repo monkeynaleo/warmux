@@ -149,33 +149,6 @@ void Character::SetBody(Body* _body)
   SetSize(body->GetSize());
 }
 
-// Signal the death of the skin
-void Character::SignalDeath()
-{
-  MSG_DEBUG("character", "Dying");
-
-  // No more energy ...
-  energy = 0;
-
-  jukebox.Play(GetTeam().GetSoundProfile(),"death");
-  SetClothe("dead");
-  SetMovement("dead");
-
-  ExplosiveWeaponConfig cfg;
-
-  ApplyExplosion ( GetCenter(), cfg);
-
-  // Change test rectangle
-  SetSize( body->GetSize() );
-  SetXY( GetCenter() - GetSize()/2 );
-
-  assert (m_alive == DEAD);
-  assert (IsDead());
-  
-  // Signal the death
-  GameLoop::GetInstance()->SignalCharacterDeath (this);
-}
-
 void Character::SignalDrowning()
 {
   energy = 0;
@@ -279,6 +252,31 @@ void Character::SetEnergyDelta (int delta, bool do_report)
    
   // Dead character ?
   if (energy == 0) Die();
+}
+
+void Character::Die()
+{
+  assert (m_alive == ALIVE || m_alive == DROWNED);
+
+  MSG_DEBUG("character", "Dying");
+
+  if (m_alive != DROWNED)
+  {
+    m_alive = DEAD;
+
+    energy = 0;
+
+    jukebox.Play(GetTeam().GetSoundProfile(),"death");
+    SetClothe("dead");
+    SetMovement("dead");
+
+    ExplosiveWeaponConfig cfg;
+    ApplyExplosion ( GetCenter(), cfg);
+    assert (IsDead());
+  
+    // Signal the death
+    GameLoop::GetInstance()->SignalCharacterDeath (this);
+  }
 }
 
 void Character::Draw()
@@ -828,4 +826,3 @@ uint Character::GetCharacterIndex()
   assert(false);
   return 0;
 }
-

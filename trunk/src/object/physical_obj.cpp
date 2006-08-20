@@ -417,18 +417,6 @@ void PhysicalObj::Ready()
   StopMoving();
 }
 
-
-void PhysicalObj::Die()
-{
-  assert (m_alive == ALIVE || m_alive == DROWNED);
-
-  MSG_DEBUG( "physic.state", "%s - Is dying..", m_name.c_str());
-
-  m_alive = DEAD;
-  if (m_alive != DROWNED)
-	SignalDeath();
-}
-
 void PhysicalObj::Ghost ()
 {
   if (m_alive == GHOST)

@@ -87,8 +87,8 @@ public:
   void SetXY(const Point2i &position);
   int GetX() const;
   int GetY() const;
-  const Point2i GetPosition() const; 
-     
+  const Point2i GetPosition() const;
+
   // Set/Get size
   void SetSize(const Point2i &newSize);
   int GetWidth() const;
@@ -149,7 +149,6 @@ public:
 
   //-------- state ----
   void Ready();
-  void Die();
   void Ghost();
   void Drown();
   void GoOutOfWater(); // usefull for supertux.
