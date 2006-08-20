@@ -75,6 +75,11 @@
       <animation loop_mode="false"/>
     </image>
   </sprite>
+  <sprite name="barrel">
+    <image file="object/barrel.png">
+      <grid pos="0,0" size="30,36" array="6,1" />
+    </image>
+  </sprite>
 </section>
 
 <section name="interface">

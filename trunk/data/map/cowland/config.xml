@@ -14,6 +14,7 @@
   <name>Cowland</name>
   <water>0</water>
   <nb_mine>3</nb_mine>
+  <nb_barrel>1</nb_barrel>
   <is_open>1</is_open>
 
   <sprite name="wind_particle">

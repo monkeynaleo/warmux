@@ -76,6 +76,7 @@ wormux_SOURCES = \
 	interface/keyboard.cpp interface/keyboard.h \
 	object/physical_obj.cpp object/physical_obj.h \
 	object/physics.cpp object/physics.h \
+	object/barrel.cpp object/barrel.h \
 	object/bonus_box.cpp object/bonus_box.h \
 	object/object_cfg.cpp object/object_cfg.h \
 	object/objects_list.cpp object/objects_list.h \

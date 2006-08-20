@@ -37,6 +37,7 @@ InfoTerrain::InfoTerrain ()
 { 
   m_donnees_chargees = false;
   nb_mine = 0;
+  nb_barrel = 0;
   wind.nb_sprite = 0;
   wind.need_flip = false;
   infinite_bg = false;
@@ -117,6 +118,7 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
   LitDocXml::LitString (xml, "name", name);
   LitDocXml::LitBool (xml, "water", use_water);
   LitDocXml::LitUint (xml, "nb_mine", nb_mine);
+  LitDocXml::LitUint (xml, "nb_barrel", nb_barrel);
   LitDocXml::LitBool (xml, "is_open", is_opened);
 //  LitDocXml::LitBool (xml, "infinite_background", infinite_bg);
 
