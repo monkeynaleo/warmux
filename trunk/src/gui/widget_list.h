@@ -55,6 +55,9 @@ public:
 
   // redraw bottom layer container
   virtual void Redraw(const Rectanglei& rect);
+  
+  // set need_redrawing to true for all sub widgets;
+  void ForceRedraw(); 
 };
 
 #endif // WIDGET_LIST_H
