@@ -31,8 +31,9 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile ("holly_grenade", cfg), 
+HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg,
+                           WeaponLauncher * p_launcher) :
+  WeaponProjectile ("holly_grenade", cfg, p_launcher),
   smoke_engine(40)
 {
   m_rebound_sound = "weapon/holly_grenade_bounce";
@@ -104,7 +105,7 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
   WeaponLauncher(WEAPON_HOLLY_GRENADE, "holly_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("HollyGrenade");
-  projectile = new HollyGrenade(cfg());
+  projectile = new HollyGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this));
   m_allow_change_timeout = true;
 }
 

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon grenade : lance une grenade avec un angle et une force donnée. Explose 
+ * Weapon grenade : lance une grenade avec un angle et une force donnï¿½. Explose 
  * au bout de quelques secondes
  *****************************************************************************/
 
@@ -36,7 +36,8 @@ class ClusterBombConfig;
 class Cluster : public WeaponProjectile
 {
 public:
-  Cluster(ClusterBombConfig& cfg);
+  Cluster(ClusterBombConfig& cfg,
+          WeaponLauncher * p_launcher);
   void Refresh();
   void Shoot(int n_x, int n_y);
 protected:
@@ -50,7 +51,8 @@ public:
   std::list<Cluster> tableau_cluster;
   typedef std::list<Cluster>::iterator iterator;
 
-  ClusterBomb(ClusterBombConfig& cfg);
+  ClusterBomb(ClusterBombConfig& cfg,
+              WeaponLauncher * p_launcher);
   void Refresh();
   void Explosion();
 protected:

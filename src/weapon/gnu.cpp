@@ -34,8 +34,9 @@
 #include "../tool/i18n.h"
 #include "../network/randomsync.h"
 
-Gnu::Gnu(ExplosiveWeaponConfig& cfg) : 
-  WeaponProjectile("gnu", cfg)
+Gnu::Gnu(ExplosiveWeaponConfig& cfg,
+         WeaponLauncher * p_launcher) :
+  WeaponProjectile("gnu", cfg, p_launcher)
 {
 }
 
@@ -119,6 +120,6 @@ GnuLauncher::GnuLauncher() :
   WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("GnuLauncher");
-  projectile = new Gnu(cfg());
+  projectile = new Gnu(cfg(),dynamic_cast<WeaponLauncher *>(this));
 }
 

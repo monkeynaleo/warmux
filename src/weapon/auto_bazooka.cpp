@@ -43,9 +43,9 @@ const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
 
-RoquetteTeteCherche::RoquetteTeteCherche(ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile("rocket", cfg),
-  smoke_engine(20)
+RoquetteTeteCherche::RoquetteTeteCherche(ExplosiveWeaponConfig& cfg,
+                                         WeaponLauncher * p_launcher) :
+  WeaponProjectile("rocket", cfg, p_launcher), smoke_engine(20)
 {
   m_attire = false;
   explode_colliding_character = true;
@@ -122,7 +122,7 @@ AutomaticBazooka::AutomaticBazooka() :
   m_is_active = false;
   cible.choisie = false;
 
-  projectile = new RoquetteTeteCherche(cfg());
+  projectile = new RoquetteTeteCherche(cfg(),dynamic_cast<WeaponLauncher *>(this));
 
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
 }

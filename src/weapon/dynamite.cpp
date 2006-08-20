@@ -34,8 +34,9 @@
 #undef LoadImage
 #endif
 
-BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile("dynamite_bullet", cfg)
+BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
+                             WeaponLauncher * p_launcher) :
+  WeaponProjectile("dynamite_bullet", cfg, p_launcher)
 {
   channel = -1;
 
@@ -96,7 +97,7 @@ Dynamite::Dynamite() :
   WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Dynamite");
-  projectile = new BatonDynamite(cfg());
+  projectile = new BatonDynamite(cfg(),dynamic_cast<WeaponLauncher *>(this));
 }
 
 void Dynamite::p_Select()

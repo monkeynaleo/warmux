@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon dynamite : lorqu'on "tire", un baton de dynamite est lâché. Celui
- * explos après un laps de temps. La baton fait alors un gros trou dans la
- * carte, souffle les vers qui sont autour en leur faisant perdre de l'énergie.
+ * Weapon dynamite : lorqu'on "tire", un baton de dynamite est lï¿½hï¿½ Celui
+ * explos aprï¿½ un laps de temps. La baton fait alors un gros trou dans la
+ * carte, souffle les vers qui sont autour en leur faisant perdre de l'ï¿½ergie.
  *****************************************************************************/
 
 #ifndef DYNAMITE_H
@@ -31,13 +31,14 @@
 
 class Dynamite;
 
-// La représentation d'une dynamite
+// La reprï¿½entation d'une dynamite
 class BatonDynamite : public WeaponProjectile
 {
   int channel;
 
 public:
-  BatonDynamite(ExplosiveWeaponConfig& cfg);
+  BatonDynamite(ExplosiveWeaponConfig& cfg,
+                WeaponLauncher * p_launcher);
   void Reset();
   void Draw();
   void Refresh();

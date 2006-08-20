@@ -33,7 +33,8 @@
 class BounceBall : public WeaponProjectile
 {
 public:
-  BounceBall(ExplosiveWeaponConfig& cfg);
+  BounceBall(ExplosiveWeaponConfig& cfg,
+             WeaponLauncher * p_launcher);
   void Refresh();
 protected:
   void SignalCollision();

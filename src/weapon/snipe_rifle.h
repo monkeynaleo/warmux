@@ -29,7 +29,8 @@
 class SnipeBullet : public WeaponBullet
 {
   public:
-    SnipeBullet(ExplosiveWeaponConfig& cfg); 
+    SnipeBullet(ExplosiveWeaponConfig& cfg,
+                WeaponLauncher * p_launcher); 
   private:
     void ShootSound();
 };

@@ -38,7 +38,8 @@ protected:
   Point2i m_cible;
   bool m_attire;
 public:
-  RoquetteTeteCherche(ExplosiveWeaponConfig& cfg);
+  RoquetteTeteCherche(ExplosiveWeaponConfig& cfg,
+                      WeaponLauncher * p_launcher);
   void Refresh();
   void Shoot(double strength);
   void SetTarget (int x,int y);

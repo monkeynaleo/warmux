@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon bazooka : projette une roquette avec un angle et une force donnée.
+ * Weapon bazooka : projette une roquette avec un angle et une force donnï¿½.
  *****************************************************************************/
 
 #ifndef GNU_H
@@ -40,7 +40,8 @@ class Gnu : public WeaponProjectile
   int save_x, save_y;
   double angle;
 public:
-  Gnu(ExplosiveWeaponConfig& cfg);
+  Gnu(ExplosiveWeaponConfig& cfg,
+      WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
   void SignalCollision();

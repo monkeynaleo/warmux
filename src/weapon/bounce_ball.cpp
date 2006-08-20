@@ -35,8 +35,9 @@
 #include "../object/objects_list.h"
 //-----------------------------------------------------------------------------
 
-BounceBall::BounceBall(ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile ("bounce_ball", cfg)
+BounceBall::BounceBall(ExplosiveWeaponConfig& cfg,
+                       WeaponLauncher * p_launcher) :
+  WeaponProjectile ("bounce_ball", cfg, p_launcher)
 {
   m_rebound_sound = "weapon/grenade_bounce";
   explode_colliding_character = true;
@@ -71,7 +72,7 @@ BounceBallLauncher::BounceBallLauncher() :
   WeaponLauncher(WEAPON_BOUNCE_BALL, "bounce_ball", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("BounceBall");
-  projectile = new BounceBall(cfg());
+  projectile = new BounceBall(cfg(),dynamic_cast<WeaponLauncher *>(this));
 }
 
 bool BounceBallLauncher::p_Shoot ()

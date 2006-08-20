@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme gun : la balle part tout droit dans la direction donnée par
+ * Arme gun : la balle part tout droit dans la direction donnï¿½ par
  * le viseur. Si la balle ne touche pas un ver, elle va faire un trou dans
- * le terrain. La balle peut également toucher les objets du plateau du jeu.
+ * le terrain. La balle peut ï¿½alement toucher les objets du plateau du jeu.
  *****************************************************************************/
 
 #include "../weapon/gun.h"
@@ -35,8 +35,9 @@
 
 const uint BULLET_SPEED = 20;
 
-GunBullet::GunBullet(ExplosiveWeaponConfig& cfg) :
-  WeaponBullet("gun_bullet", cfg)
+GunBullet::GunBullet(ExplosiveWeaponConfig& cfg,
+                     WeaponLauncher * p_launcher) :
+  WeaponBullet("gun_bullet", cfg, p_launcher)
 {
   cfg.explosion_range = 5;
 }
@@ -52,7 +53,7 @@ Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
   m_name = _("Gun");
 
-  projectile = new GunBullet(cfg());
+  projectile = new GunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this));
 }
 
 bool Gun::p_Shoot ()

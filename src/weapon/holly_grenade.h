@@ -37,7 +37,8 @@ protected:
 
   ParticleEngine smoke_engine;
 public:
-  HollyGrenade(ExplosiveWeaponConfig& cfg);
+  HollyGrenade(ExplosiveWeaponConfig& cfg,
+               WeaponLauncher * p_launcher);
   void Refresh();
   void Explosion();
 protected:
