@@ -33,6 +33,7 @@ class InfoTerrain{
 public:
   std::string name;
   uint nb_mine;
+  uint nb_barrel;
   bool use_water;
   bool is_opened;
   bool infinite_bg;

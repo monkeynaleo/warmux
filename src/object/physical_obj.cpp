@@ -55,6 +55,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_width(0),
   m_height(0)
 {
+  life_points = -1; // Disable lifepoints
   m_goes_through_wall = false;
   m_collides_with_characters = false;
   m_collides_with_objects = false;
@@ -194,6 +195,17 @@ const Rectanglei PhysicalObj::GetTestRect() const
 		     m_height-m_test_bottom-m_test_top);
 }
 
+void PhysicalObj::AddDamage(uint damage_points)
+{
+  if(life_points == -1)
+    return;
+  life_points -= damage_points;
+  if(life_points <= 0)
+  {
+    SignalDeath();
+    life_points = -1;
+  }
+}
 // Move to a point with collision test
 // Return true if collision occured
 void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
