@@ -32,8 +32,9 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-RoquetteRiotBomb::RoquetteRiotBomb(ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile ("riot_rocket", cfg)
+RoquetteRiotBomb::RoquetteRiotBomb(ExplosiveWeaponConfig& cfg,
+                                   WeaponLauncher * p_launcher) :
+  WeaponProjectile ("riot_rocket", cfg, p_launcher)
 {  
   explode_colliding_character = true;
 }
@@ -67,5 +68,5 @@ RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
 {  
   m_name = _("Riot bomb");
-  projectile = new RoquetteRiotBomb(cfg());
+  projectile = new RoquetteRiotBomb(cfg(),dynamic_cast<WeaponLauncher *>(this));
 }

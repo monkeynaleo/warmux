@@ -40,8 +40,8 @@ const uint FORCE_Y_MAX = 40;
 
 const double OBUS_SPEED = 7 ;
 
-Obus::Obus(AirAttackConfig& cfg) :
-  WeaponProjectile("air_attack_projectile", cfg)
+Obus::Obus(AirAttackConfig& cfg,WeaponLauncher * p_launcher) :
+  WeaponProjectile("air_attack_projectile", cfg, p_launcher)
 {
   is_active = true;
   explode_colliding_character = true;
@@ -106,7 +106,7 @@ void Plane::Shoot(double speed, Point2i& target)
 
 void Plane::DropBomb()
 {
-  Obus * instance = new Obus(cfg);
+  Obus * instance = new Obus(cfg,dynamic_cast<WeaponLauncher *>(this));
   instance->SetXY( Point2i(GetX(), obus_dy) );
   
   Point2d speed_vector;

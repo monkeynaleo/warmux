@@ -27,7 +27,8 @@
 class RoquetteRiotBomb : public WeaponProjectile
 {
 public:
-  RoquetteRiotBomb(ExplosiveWeaponConfig& cfg);
+  RoquetteRiotBomb(ExplosiveWeaponConfig& cfg,
+                   WeaponLauncher * p_launcher);
   void Refresh();
 protected:
   void SignalCollision();

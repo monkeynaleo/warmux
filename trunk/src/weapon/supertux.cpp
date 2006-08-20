@@ -35,8 +35,9 @@
 const uint time_delta = 40;
 const uint animation_deltat = 50;
 
-SuperTux::SuperTux(SuperTuxWeaponConfig& cfg) :
-  WeaponProjectile ("supertux", cfg), 
+SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
+                   WeaponLauncher * p_launcher) :
+  WeaponProjectile ("supertux", cfg, p_launcher), 
   particle_engine(40)
 {
   explode_colliding_character = true;
@@ -145,7 +146,7 @@ TuxLauncher::TuxLauncher() :
   m_name = _("SuperTux");   
   override_keys = true ;
 
-  projectile = new SuperTux(cfg());
+  projectile = new SuperTux(cfg(),dynamic_cast<WeaponLauncher *>(this));
 }
 
 void TuxLauncher::HandleKeyEvent(int action, int event_type)

@@ -34,7 +34,8 @@
 class SubMachineGunBullet : public WeaponBullet
 {
   public:
-    SubMachineGunBullet(ExplosiveWeaponConfig& cfg);
+    SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
+                        WeaponLauncher * p_launcher);
   protected:
     void SignalCollision();
   private:

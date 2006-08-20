@@ -37,8 +37,9 @@ const uint SNIPE_RIFLE_BEAM_START = 40;
 const uint SNIPE_RIFLE_BULLET_SPEED = 20;
 const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
 
-SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg) :
-    WeaponBullet("snipe_rifle_bullet", cfg)
+SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
+                     WeaponLauncher * p_launcher) :
+    WeaponBullet("snipe_rifle_bullet", cfg, p_launcher)
 { 
   cfg.explosion_range = SNIPE_RIFLE_EXPLOSION_RANGE;
 }
@@ -56,7 +57,7 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
 
   override_keys = true ;
   last_angle = 0.0;
-  projectile = new SnipeBullet(cfg());
+  projectile = new SnipeBullet(cfg(),dynamic_cast<WeaponLauncher *>(this));
   targeting_something = false;
   m_laser_image = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
   int size = SNIPE_RIFLE_MAX_BEAM_SIZE - SNIPE_RIFLE_BEAM_START;

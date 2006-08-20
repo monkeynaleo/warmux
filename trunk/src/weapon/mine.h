@@ -17,7 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
  * Mine : Il s'agit de mines capables de detecter la presence d'un ver. Si 
- * c'est le cas, elle s'arme et là... faut pas y toucher ;) Apres un temps si
+ * c'est le cas, elle s'arme et lï¿½.. faut pas y toucher ;) Apres un temps si
  * elle ne detecte personne elle se desarme.
  *****************************************************************************/
 #ifndef MINE_H
@@ -49,7 +49,8 @@ private:
   uint escape_time;
 
 public:
-  ObjMine(MineConfig &cfg);
+  ObjMine(MineConfig &cfg,
+          WeaponLauncher * p_launcher = NULL);
 
   void Explosion ();
   void FakeExplosion ();

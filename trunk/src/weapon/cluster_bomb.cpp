@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme grenade à fragmentation(cluster bomb)
+ * Arme grenade ï¿½fragmentation(cluster bomb)
  * Explose au bout de quelques secondes 
  *****************************************************************************/
 
@@ -34,8 +34,9 @@
 #include "../tool/i18n.h"
 #include "../network/randomsync.h"
 
-Cluster::Cluster(ClusterBombConfig& cfg) :
-  WeaponProjectile ("cluster", cfg)
+Cluster::Cluster(ClusterBombConfig& cfg,
+                 WeaponLauncher * p_launcher) :
+  WeaponProjectile ("cluster", cfg, p_launcher)
 {
   explode_colliding_character = true;
 }
@@ -74,8 +75,9 @@ void Cluster::SignalCollision()
 
 //-----------------------------------------------------------------------------
 
-ClusterBomb::ClusterBomb(ClusterBombConfig& cfg) :
-  WeaponProjectile ("cluster_bomb", cfg)
+ClusterBomb::ClusterBomb(ClusterBombConfig& cfg,
+                         WeaponLauncher * p_launcher)
+  : WeaponProjectile ("cluster_bomb", cfg, p_launcher)
 {
   m_rebound_sound = "weapon/grenade_bounce";
 
@@ -84,7 +86,7 @@ ClusterBomb::ClusterBomb(ClusterBombConfig& cfg) :
 
   for (uint i=0; i<nb; ++i)
   {
-    Cluster cluster(cfg);
+    Cluster cluster(cfg,p_launcher);
     tableau_cluster.push_back( cluster );
   }
 }
@@ -139,7 +141,7 @@ ClusterLauncher::ClusterLauncher() :
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("ClusterBomb");  
-  projectile = new ClusterBomb(cfg());
+  projectile = new ClusterBomb(cfg(),dynamic_cast<WeaponLauncher *>(this));
 }
 
 ClusterBombConfig& ClusterLauncher::cfg() 

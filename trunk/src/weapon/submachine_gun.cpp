@@ -37,8 +37,9 @@ const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_EXPLOSION_RANGE    = 15;
 const double  SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
 
-SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg) :
-    WeaponBullet("m16_bullet", cfg)
+SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
+                                         WeaponLauncher * p_launcher) :
+  WeaponBullet("m16_bullet", cfg, p_launcher)
 {
   cfg.explosion_range = SUBMACHINE_EXPLOSION_RANGE;
 }
@@ -105,7 +106,7 @@ void SubMachineGun::RepeatShoot()
 void SubMachineGun::Reload()
 {
   if (is_loaded) return;
-  projectile = new SubMachineGunBullet(cfg());
+  projectile = new SubMachineGunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this));
   projectile_list.push_back(dynamic_cast<WeaponBullet *> (projectile));
 }
 

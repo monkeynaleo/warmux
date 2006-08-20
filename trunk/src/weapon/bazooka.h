@@ -28,7 +28,7 @@ class RoquetteBazooka : public WeaponProjectile
 {
   ParticleEngine smoke_engine;
 public:
-  RoquetteBazooka(ExplosiveWeaponConfig& cfg);
+  RoquetteBazooka(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
 protected:
   void SignalCollision();

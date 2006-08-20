@@ -37,8 +37,10 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-WeaponBullet::WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile(name, cfg)
+WeaponBullet::WeaponBullet(const std::string &name,
+                           ExplosiveWeaponConfig& cfg,
+                           WeaponLauncher * p_launcher) :
+  WeaponProjectile(name, cfg,p_launcher)
 { 
   cfg.explosion_range = 1;
   explode_colliding_character = true;
@@ -86,13 +88,15 @@ void WeaponBullet::Explosion()
 
 
 WeaponProjectile::WeaponProjectile (const std::string &name, 
-				    ExplosiveWeaponConfig& p_cfg)
+                                    ExplosiveWeaponConfig& p_cfg,
+                                    WeaponLauncher * p_launcher)
   : PhysicalObj (name),
     cfg(p_cfg)
 {
   m_allow_negative_y = true;
   SetCollisionModel(false, true, true);
   explode_colliding_character = false;
+  launcher = p_launcher;
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
@@ -165,7 +169,6 @@ void WeaponProjectile::SignalCollisionObject()
   if (typeid(*obj) == typeid(Character))
     is_active = false;
 }
-
 
 void WeaponProjectile::Refresh()
 {

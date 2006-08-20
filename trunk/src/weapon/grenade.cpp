@@ -34,8 +34,9 @@
 #include "../object/objects_list.h"
 //-----------------------------------------------------------------------------
 
-Grenade::Grenade(ExplosiveWeaponConfig& cfg) :
-  WeaponProjectile ("grenade", cfg)
+Grenade::Grenade(ExplosiveWeaponConfig& cfg,
+                 WeaponLauncher * p_launcher) :
+  WeaponProjectile ("grenade", cfg, p_launcher)
 {
   m_rebound_sound = "weapon/grenade_bounce";
 }
@@ -69,7 +70,7 @@ GrenadeLauncher::GrenadeLauncher() :
 {  
 
   m_name = _("Grenade");
-  projectile = new Grenade(cfg());
+  projectile = new Grenade(cfg(),dynamic_cast<WeaponLauncher *>(this));
   m_allow_change_timeout = true;
 }
 

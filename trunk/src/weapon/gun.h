@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon gun : la balle part tout droit dans la direction donnée par
+ * Weapon gun : la balle part tout droit dans la direction donnï¿½ par
  * le viseur. Si la balle ne touche pas un ver, elle va faire un trou dans
- * le terrain. La balle peut également toucher les objets du plateau du jeu.
+ * le terrain. La balle peut ï¿½alement toucher les objets du plateau du jeu.
  *****************************************************************************/
 
 #ifndef GUN_H
@@ -33,7 +33,8 @@
 class GunBullet : public WeaponBullet
 {
 public:
-  GunBullet(ExplosiveWeaponConfig& cfg);
+  GunBullet(ExplosiveWeaponConfig& cfg,
+            WeaponLauncher * p_launcher);
  private:
   void ShootSound();
 };

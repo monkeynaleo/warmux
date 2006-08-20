@@ -45,11 +45,13 @@ class WeaponProjectile : public PhysicalObj
  public:
   Character* dernier_ver_touche;
   PhysicalObj* dernier_obj_touche;
+  WeaponLauncher * launcher;
   int m_timeout_modifier ;
 
  public:
   WeaponProjectile(const std::string &nom, 
-		   ExplosiveWeaponConfig& cfg);
+                   ExplosiveWeaponConfig& cfg,
+                   WeaponLauncher * p_launcher);
   virtual ~WeaponProjectile();
 
   virtual void Draw();
@@ -77,7 +79,9 @@ class WeaponProjectile : public PhysicalObj
 class WeaponBullet : public WeaponProjectile
 {
 public:
-  WeaponBullet(const std::string &name, ExplosiveWeaponConfig& cfg);
+  WeaponBullet(const std::string &name,
+               ExplosiveWeaponConfig& cfg,
+               WeaponLauncher * p_launcher);
   virtual ~WeaponBullet(){};
   virtual void Refresh();
 protected:

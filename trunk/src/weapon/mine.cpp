@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Objet Mine: Si on active les mines, elles seront placées de maniere
+ * Objet Mine: Si on active les mines, elles seront placï¿½s de maniere
  * aleatoire sur le terrain. Au contact d'un ver, ca fait BOOM!!! ;)
  *****************************************************************************/
 
@@ -44,8 +44,9 @@
 
 const double DEPART_FONCTIONNEMENT = 5;
 
-ObjMine::ObjMine(MineConfig& cfg) : 
-  WeaponProjectile("mine", cfg)
+ObjMine::ObjMine(MineConfig& cfg,
+                 WeaponLauncher * p_launcher) :
+  WeaponProjectile("mine", cfg, p_launcher)
 {
   m_allow_negative_y = true; 
   animation = false;
@@ -67,7 +68,6 @@ void ObjMine::SignalCollision()
     lst_objects.RemoveObject (this);
   }
 }
-
 
 void ObjMine::Explosion ()
 {
@@ -195,7 +195,7 @@ MineConfig * MineConfig::GetInstance()
 Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
-  projectile = new ObjMine(cfg());
+  projectile = new ObjMine(cfg(), dynamic_cast<WeaponLauncher *>(this));
 }
 
 bool Mine::p_Shoot()
