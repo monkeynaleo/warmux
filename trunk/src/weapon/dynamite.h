@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon dynamite : lorqu'on "tire", un baton de dynamite est l�h� Celui
- * explos apr� un laps de temps. La baton fait alors un gros trou dans la
- * carte, souffle les vers qui sont autour en leur faisant perdre de l'�ergie.
+ * Weapon dynamite : When fired, explode after a short laps of time. Then make a
+ * big hole, eject character and made them lost energy.
+ * Like a dynamite after all :)
  *****************************************************************************/
 
 #ifndef DYNAMITE_H
