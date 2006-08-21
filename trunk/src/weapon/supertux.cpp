@@ -123,6 +123,9 @@ void SuperTux::SignalCollision()
     GameMessages::GetInstance()->Add (_("Bye bye tux..."));
   }
   is_active = false; 
+  lst_objects.RemoveObject(this);
+  if (!IsGhost()) Explosion();
+  if (launcher != NULL) launcher->SignalProjectileCollision();
 }
 
 //-----------------------------------------------------------------------------

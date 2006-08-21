@@ -63,8 +63,10 @@ ObjMine::ObjMine(MineConfig& cfg,
 
 void ObjMine::SignalCollision() 
 {
-  if (IsGhost()) {
+  if (IsGhost())
+  {
     is_active = false;
+    if (launcher != NULL) launcher->SignalProjectileCollision();
     lst_objects.RemoveObject (this);
   }
 }

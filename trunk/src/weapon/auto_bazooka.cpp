@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme bazooka : projette une roquette avec un angle et une force donn�.
+ * auto bazooka : launch a homing missile
  *****************************************************************************/
 
 #include "auto_bazooka.h"
@@ -38,7 +38,7 @@
 #endif
 
 
-//Temps en seconde �partir duquel la roquette se dirige vers la cible
+// time in second before rocket look for the target
 const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
@@ -97,12 +97,17 @@ void RoquetteTeteCherche::Refresh()
 
 void RoquetteTeteCherche::SignalCollision()
 { 
-  m_attire = false;
-  if (IsGhost())
+  is_active = false;
+  
+  if ( GetLastCollidingObject() == NULL )
   {
     GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
   }
-  is_active = false; 
+
+  lst_objects.RemoveObject(this);
+  if (!IsGhost()) Explosion();
+  if (launcher != NULL) launcher->SignalProjectileCollision();
+  m_attire = false;
 }
 
 // Choisit les coordonn�s de la cible 	 
