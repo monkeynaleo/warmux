@@ -55,7 +55,9 @@ void HollyGrenade::Explosion()
                                 GetY()+(int)(sin_angle[i]*(float)cfg.explosion_range)),
                                 1,particle_MAGIC_STAR,false,angle,2.5);
   }
+  lst_objects.RemoveObject(this);
   WeaponProjectile::Explosion();
+  if (launcher != NULL) launcher->SignalProjectileCollision();
 }
 
 void HollyGrenade::Refresh()
@@ -96,6 +98,8 @@ void HollyGrenade::SignalCollision()
   {
     GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
     is_active = false ;
+    lst_objects.RemoveObject(this);
+    if (launcher != NULL) launcher->SignalProjectileCollision();
   }
 }
 
