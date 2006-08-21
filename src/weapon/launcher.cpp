@@ -73,9 +73,9 @@ void WeaponBullet::Refresh()
 // Explode if hit the ground or apply damage to character
 void WeaponBullet::Explosion()
 {
-  MSG_DEBUG(m_name->c_str(), "Impact");
+  MSG_DEBUG(m_name.c_str(), "Impact");
   if (IsGhost()) return;
-
+  
   if ( GetLastCollidingObject() == NULL ) {
     Point2i pos = GetCenter();
     ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke);
@@ -192,6 +192,9 @@ void WeaponProjectile::Refresh()
    
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
     is_active = false;
+    lst_objects.RemoveObject(this);
+    Explosion();
+    if (launcher != NULL) launcher->SignalProjectileCollision();
     return;
   }
 
@@ -268,8 +271,7 @@ void WeaponProjectile::SetTimeOut(int timeout)
 
 void WeaponProjectile::ResetTimeOut()
 {
-  m_timeout_modifier = 0 ;       
-        
+  m_timeout_modifier = 0 ;
 }
 
 int WeaponProjectile::GetTotalTimeout()

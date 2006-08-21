@@ -55,11 +55,13 @@ void Grenade::Refresh()
 //-----------------------------------------------------------------------------
 
 void Grenade::SignalCollision()
-{   
+{
   if (IsGhost())
   {
-    GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
+    GameMessages::GetInstance()->Add (_("The grenade left the battlefield before exploding"));
     is_active = false ;
+    lst_objects.RemoveObject(this);
+    if (launcher != NULL) launcher->SignalProjectileCollision();
   }
 }
 
@@ -73,5 +75,3 @@ GrenadeLauncher::GrenadeLauncher() :
   projectile = new Grenade(cfg(),dynamic_cast<WeaponLauncher *>(this));
   m_allow_change_timeout = true;
 }
-
-
