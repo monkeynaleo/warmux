@@ -73,7 +73,7 @@ void WeaponBullet::Refresh()
 // Explode if hit the ground or apply damage to character
 void WeaponBullet::Explosion()
 {
-  MSG_DEBUG(m_name, "Impact");
+  MSG_DEBUG(m_name->c_str(), "Impact");
   if (IsGhost()) return;
 
   if ( GetLastCollidingObject() == NULL ) {
