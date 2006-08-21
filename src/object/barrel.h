@@ -34,6 +34,8 @@ public:
   ~PetrolBarrel();
   void Draw();
   void Refresh();
+
+  void SignalDeath();
 };
 
 #endif

@@ -154,6 +154,12 @@ void ApplyExplosion_common (const Point2i &pos,
   { 
     double distance, angle;
     distance = MeterDistance (pos, obj -> ptr -> GetCenter());
+    if (distance <= range)
+    {
+      uint hit_point_loss = (uint)(distance*config.damage/range);
+      hit_point_loss = config.damage-hit_point_loss;
+      obj -> ptr -> AddDamage (hit_point_loss);
+    }
     if (distance <= config.blast_range)
     {
       if (!EgalZero(distance)) {
