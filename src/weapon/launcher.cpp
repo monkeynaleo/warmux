@@ -40,20 +40,26 @@
 WeaponBullet::WeaponBullet(const std::string &name,
                            ExplosiveWeaponConfig& cfg,
                            WeaponLauncher * p_launcher) :
-  WeaponProjectile(name, cfg,p_launcher)
+  WeaponProjectile(name, cfg, p_launcher)
 { 
   cfg.explosion_range = 1;
   explode_colliding_character = true;
   ResetTimeOut();
 }
 
+// Signal that the bullet has hit the ground or is out of the world
 void WeaponBullet::SignalCollision()
-{ 
+{
   if ( GetLastCollidingObject() == NULL )
   {
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
   }
-  is_active = false; 
+  is_active = false;
+
+  // projectile explode and signal to the launcher the collision
+  lst_objects.RemoveObject(this);
+  if (!IsGhost()) Explosion();
+  if (launcher != NULL) launcher->SignalProjectileCollision();
 }
 
 void WeaponBullet::Refresh()
@@ -61,15 +67,16 @@ void WeaponBullet::Refresh()
   WeaponProjectile::Refresh();
 
   double angle = GetSpeedAngle() *180/M_PI;
-  image->SetRotation_deg( angle);
+  image->SetRotation_deg(angle);
 }
 
+// Explode if hit the ground or apply damage to character
 void WeaponBullet::Explosion()
 {
+  MSG_DEBUG(m_name, "Impact");
   if (IsGhost()) return;
 
   if ( GetLastCollidingObject() == NULL ) {
-    // Applique les degats et le souffle aux vers
     Point2i pos = GetCenter();
     ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke);
   } else {
@@ -90,8 +97,7 @@ void WeaponBullet::Explosion()
 WeaponProjectile::WeaponProjectile (const std::string &name, 
                                     ExplosiveWeaponConfig& p_cfg,
                                     WeaponLauncher * p_launcher)
-  : PhysicalObj (name),
-    cfg(p_cfg)
+  : PhysicalObj (name), cfg(p_cfg)
 {
   m_allow_negative_y = true;
   SetCollisionModel(false, true, true);
@@ -112,7 +118,7 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
 
 WeaponProjectile::~WeaponProjectile()
 {
-//  delete image; /*-> it causes a segfault :-/ */
+  //  delete image; /*-> it causes a segfault :-/ */
 }
 
 void WeaponProjectile::Shoot(double strength)
@@ -120,6 +126,9 @@ void WeaponProjectile::Shoot(double strength)
   MSG_DEBUG("weapon_projectile", "shoot.\n");
 
   Ready();
+
+  if (launcher != NULL) launcher->IncActiveProjectile();
+
   is_active = true;
 
   // Set the physical factors
@@ -131,15 +140,14 @@ void WeaponProjectile::Shoot(double strength)
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (strength, angle);
-  PutOutOfGround(angle); 
+  PutOutOfGround(angle);
 
-  begin_time = Time::GetInstance()->Read();  
+  begin_time = Time::GetInstance()->Read();
 
-  ShootSound();  
+  ShootSound();
 
   lst_objects.AddObject (this);
   camera.ChangeObjSuivi(this, true, true, true);
-
 }
 
 void WeaponProjectile::ShootSound()
@@ -147,7 +155,7 @@ void WeaponProjectile::ShootSound()
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
 }
 
-
+// To remove ?
 bool WeaponProjectile::TestImpact()
 {
   if (IsReady()) 
@@ -159,15 +167,19 @@ bool WeaponProjectile::TestImpact()
   return false;
 }
 
+// projectile explode and signal to the launcher the collision
 void WeaponProjectile::SignalCollisionObject()
-{
+{  
   if (!explode_colliding_character) return;
 
   PhysicalObj * obj = GetLastCollidingObject();
   assert (obj != NULL);
   
-  if (typeid(*obj) == typeid(Character))
-    is_active = false;
+  if (typeid(*obj) == typeid(Character)) is_active = false;
+
+  lst_objects.RemoveObject(this);
+  if (!IsGhost()) Explosion();
+  if (launcher != NULL) launcher->SignalProjectileCollision();
 }
 
 void WeaponProjectile::Refresh()
@@ -179,15 +191,15 @@ void WeaponProjectile::Refresh()
   double tmp = Time::GetInstance()->Read() - begin_time;
    
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
-    is_active = false;    
-     
+    is_active = false;
     return;
   }
 
+  // To remove ???
   if( TestImpact() ){
     SignalCollision();
     return;
-  }  
+  }
 }
 
 void WeaponProjectile::Draw()
@@ -208,7 +220,7 @@ void WeaponProjectile::Draw()
       int txt_x = GetX() + GetWidth() / 2;
       int txt_y = GetY() - GetHeight();
       (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
-					    ss.str(), white_color);
+      ss.str(), white_color);
     }
   }
 }
@@ -217,15 +229,14 @@ void WeaponProjectile::SignalGhostState (bool){
   SignalCollision();
 }
 
-void WeaponProjectile::SignalFallEnding(){  
+void WeaponProjectile::SignalFallEnding(){
   SignalCollision();
 }
 
 void WeaponProjectile::Explosion()
 {
+  MSG_DEBUG (m_name, "Explosion");
   if (IsGhost()) return;
-
-  // Applique les degats et le souffle aux vers
   Point2i pos = GetCenter();
   ApplyExplosion (pos, cfg);
 }
@@ -233,32 +244,32 @@ void WeaponProjectile::Explosion()
 
 void WeaponProjectile::IncrementTimeOut()
 {
-if (cfg.allow_change_timeout)
-  if (GetTotalTimeout()<(int)cfg.timeout*2) 
-	 m_timeout_modifier += 1 ;
+  if (cfg.allow_change_timeout)
+    if (GetTotalTimeout()<(int)cfg.timeout*2) 
+      m_timeout_modifier += 1 ;
 
 }
 
 void WeaponProjectile::DecrementTimeOut()
 {
-if (cfg.allow_change_timeout)
-  if (GetTotalTimeout()>1) 
-	 m_timeout_modifier -= 1 ;	//-1s for grenade timout. 1 is min.
-	
+  if (cfg.allow_change_timeout)
+    if (GetTotalTimeout()>1) 
+      m_timeout_modifier -= 1 ;      //-1s for grenade timout. 1 is min.
+        
 }
 
 void WeaponProjectile::SetTimeOut(int timeout)
 {
-if (cfg.allow_change_timeout)
-  if (timeout <= (int)cfg.timeout*2 && timeout >= 1) 
-	 m_timeout_modifier = timeout - cfg.timeout ;
+  if (cfg.allow_change_timeout)
+    if (timeout <= (int)cfg.timeout*2 && timeout >= 1) 
+      m_timeout_modifier = timeout - cfg.timeout ;
 
 }
 
 void WeaponProjectile::ResetTimeOut()
 {
-	 m_timeout_modifier = 0 ;	
-	
+  m_timeout_modifier = 0 ;       
+        
 }
 
 int WeaponProjectile::GetTotalTimeout()
@@ -275,12 +286,13 @@ bool WeaponProjectile::change_timeout_allowed()
 //-----------------------------------------------------------------------------
 
 WeaponLauncher::WeaponLauncher(Weapon_type type, 
-			       const std::string &id,
-			       EmptyWeaponConfig * params,
-			       weapon_visibility_t visibility) :
-  Weapon(type, id, params, visibility)
+                               const std::string &id,
+                               EmptyWeaponConfig * params,
+                               weapon_visibility_t visibility) :
+    Weapon(type, id, params, visibility)
 {  
   projectile = NULL;
+  nb_active_projectile = 0;
 }
 
 WeaponLauncher::~WeaponLauncher()
@@ -297,47 +309,55 @@ bool WeaponLauncher::p_Shoot ()
 //     return true;
 //   }
   projectile->Shoot (m_strength);
-
   return true;
 }
 
-// Le bazooka explose car il a ��pouss��bout !
+// Direct Explosion when pushing weapon to max power !
 void WeaponLauncher::DirectExplosion()
 {
   Point2i pos = ActiveCharacter().GetCenter();
   ApplyExplosion (pos, cfg());
 }
 
-void WeaponLauncher::Explosion()
+// Signal that a projectile fired by this weapon has hit something (ground, character etc)
+void WeaponLauncher::SignalProjectileCollision()
 {
+  DecActiveProjectile();
   m_is_active = false;
-  lst_objects.RemoveObject (projectile);
-  projectile->Explosion();
 }
 
+// Keep the total amount of active projectile
+void WeaponLauncher::IncActiveProjectile()
+{
+  ++nb_active_projectile;
+}
+
+void WeaponLauncher::DecActiveProjectile()
+{
+  --nb_active_projectile;
+}
+
+// Call by the object list class to refresh the weapon's state
 void WeaponLauncher::Refresh()
 {
-  if (!m_is_active) return;
-  if (!projectile->is_active) Explosion();
 }
-
 
 void WeaponLauncher::Draw()
 {
   //Display timeout for projectil if can be changed.
   if (projectile->change_timeout_allowed())
   {
-   if( IsActive() ) //Do not display after launching.
+    if( IsActive() ) //Do not display after launching.
       return;
       
     int tmp = projectile->GetTotalTimeout();
-        std::ostringstream ss;
-        ss << tmp;
-              ss << "s";
-        int txt_x = ActiveCharacter().GetX() + ActiveCharacter().GetWidth() / 2;
-        int txt_y = ActiveCharacter().GetY() - ActiveCharacter().GetHeight();
-        (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
-  					    ss.str(), white_color);
+    std::ostringstream ss;
+    ss << tmp;
+    ss << "s";
+    int txt_x = ActiveCharacter().GetX() + ActiveCharacter().GetWidth() / 2;
+    int txt_y = ActiveCharacter().GetY() - ActiveCharacter().GetHeight();
+    (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
+    ss.str(), white_color);
   }
   
   Weapon::Draw();
@@ -345,86 +365,81 @@ void WeaponLauncher::Draw()
 
 void WeaponLauncher::p_Select()
 {
- 
   if (projectile->change_timeout_allowed())
   {
     force_override_keys = true; //Allow overriding key during movement.
-     projectile->ResetTimeOut(); 
+    projectile->ResetTimeOut(); 
   }
 }
 
 void WeaponLauncher::p_Deselect()
 {
-
   if (projectile->change_timeout_allowed())
   {
     force_override_keys = false;
   }
 }
 
-
 void WeaponLauncher::HandleKeyEvent(int action, int event_type)
 {
+  if (event_type == KEY_RELEASED)
+    switch (action) {
+      case ACTION_WEAPON_1:
+        projectile->SetTimeOut(1);
+        break;
+      case ACTION_WEAPON_2:
+        projectile->SetTimeOut(2);
+        break;
+      case ACTION_WEAPON_3:
+        projectile->SetTimeOut(3);
+        break;
+      case ACTION_WEAPON_4:
+        projectile->SetTimeOut(4);
+        break;
+      case ACTION_WEAPON_5:
+        projectile->SetTimeOut(5);
+        break;
+      case ACTION_WEAPON_6:
+        projectile->SetTimeOut(6);
+        break;
+      case ACTION_WEAPON_7:
+        projectile->SetTimeOut(7);
+        break;
+      case ACTION_WEAPON_8:
+        projectile->SetTimeOut(8);
+        break;
+      case ACTION_WEAPON_9:
+        projectile->SetTimeOut(9);
+        break;
 
- if (event_type == KEY_RELEASED)
-  switch (action) {
-    case ACTION_WEAPON_1:
-	      projectile->SetTimeOut(1);
-	break;
-    case ACTION_WEAPON_2:
-	      projectile->SetTimeOut(2);
-	break;
-    case ACTION_WEAPON_3:
-	      projectile->SetTimeOut(3);
-	break;
-    case ACTION_WEAPON_4:
-	      projectile->SetTimeOut(4);
-	break;
-    case ACTION_WEAPON_5:
-	      projectile->SetTimeOut(5);
-	break;
-    case ACTION_WEAPON_6:
-	      projectile->SetTimeOut(6);
-	break;
-    case ACTION_WEAPON_7:
-	      projectile->SetTimeOut(7);
-	break;
-    case ACTION_WEAPON_8:
-	      projectile->SetTimeOut(8);
-	break;
-    case ACTION_WEAPON_9:
-	      projectile->SetTimeOut(9);
-	break;
+      case ACTION_WEAPON_MORE:  
+        projectile->IncrementTimeOut();
+        break ;
 
-    case ACTION_WEAPON_MORE:  
-	      projectile->IncrementTimeOut();
-      	break ;
+      case ACTION_WEAPON_LESS:  
+        projectile->DecrementTimeOut();
+        break   ;
 
-    case ACTION_WEAPON_LESS:  
-	      projectile->DecrementTimeOut();
-      	break	;
+      default:
+        break ;     
 
-  default:
-  break	;     
+    };
 
-  };
+    if((action >= ACTION_WEAPON_1 && action <= ACTION_WEAPON_9)
+        || action == ACTION_WEAPON_MORE || action == ACTION_WEAPON_LESS)
+      ActionHandler::GetInstance()->NewAction(new Action(ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
 
-  if((action >= ACTION_WEAPON_1 && action <= ACTION_WEAPON_9)
-  || action == ACTION_WEAPON_MORE || action == ACTION_WEAPON_LESS)
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
-
-  ActiveCharacter().HandleKeyEvent(action, event_type);
+    ActiveCharacter().HandleKeyEvent(action, event_type);
 }
 
 void WeaponLauncher::ActionUp(){ //called by mousse.cpp when mousewhellup 
-    projectile->IncrementTimeOut();
+  projectile->IncrementTimeOut();
 }
 
 
 void WeaponLauncher::ActionDown(){//called by mousse.cpp when mousewhelldown
-   projectile->DecrementTimeOut();
+  projectile->DecrementTimeOut();
 }
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg()
 { return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
-

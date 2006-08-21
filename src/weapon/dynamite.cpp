@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme dynamite : lorqu'on "tire", un baton de dynamite est l�h� Celui
- * explos apr� un laps de temps. La baton fait alors un gros trou dans la
- * carte, souffle les vers qui sont autour en leur faisant perdre de l'�ergie.
+ * Weapon dynamite : When fired, explode after a short laps of time. Then make a
+ * big hole, eject character and made them lost energy.
+ * Like a dynamite after all :)
  *****************************************************************************/
 
 #include "dynamite.h"
@@ -29,6 +29,7 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../tool/resource_manager.h"
+#include "../tool/debug.h"
 
 #ifdef __MINGW32__
 #undef LoadImage
@@ -65,6 +66,7 @@ void BatonDynamite::Refresh()
   assert (!IsGhost());
   image->Update(); 
   is_active = !image->IsFinished();
+  if (!is_active) Explosion();
 }
 
 void BatonDynamite::Draw()
@@ -83,18 +85,19 @@ void BatonDynamite::Explosion()
 {
   jukebox.Stop(channel);
   channel = -1;
-  WeaponProjectile::Explosion();
+  MSG_DEBUG (m_name, "Explosion");
+  if (IsGhost()) return;
+  Point2i pos = GetCenter();
+  ApplyExplosion (pos, cfg);
 }
 
 void BatonDynamite::SignalCollision() 
-{
-  if (IsGhost()) is_active = false;
-}
+{}
 
 //-----------------------------------------------------------------------------
 
 Dynamite::Dynamite() :
-  WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+    WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Dynamite");
   projectile = new BatonDynamite(cfg(),dynamic_cast<WeaponLauncher *>(this));

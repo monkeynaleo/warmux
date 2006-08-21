@@ -49,17 +49,6 @@ void SubMachineGunBullet::ShootSound()
   jukebox.Play("share", "weapon/uzi"); // TODO: change for m16
 }
 
-void SubMachineGunBullet::SignalCollision()
-{ 
-  if ( GetLastCollidingObject() == NULL )
-  {
-    GameMessages::GetInstance()->Add (_("Your shot has missed!"));
-  }
-  is_active = false;
-  lst_objects.RemoveObject(this);
-  if (!IsGhost()) Explosion();
-}
-
 //-----------------------------------------------------------------------------
 
 SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", new ExplosiveWeaponConfig())
