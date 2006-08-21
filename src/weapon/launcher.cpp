@@ -238,7 +238,7 @@ void WeaponProjectile::SignalFallEnding(){
 
 void WeaponProjectile::Explosion()
 {
-  MSG_DEBUG (m_name, "Explosion");
+  MSG_DEBUG (m_name.c_str(), "Explosion");
   if (IsGhost()) return;
   Point2i pos = GetCenter();
   ApplyExplosion (pos, cfg);

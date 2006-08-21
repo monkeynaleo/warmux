@@ -85,7 +85,7 @@ void BatonDynamite::Explosion()
 {
   jukebox.Stop(channel);
   channel = -1;
-  MSG_DEBUG (m_name, "Explosion");
+  MSG_DEBUG (m_name.c_str(), "Explosion");
   if (IsGhost()) return;
   Point2i pos = GetCenter();
   ApplyExplosion (pos, cfg);
