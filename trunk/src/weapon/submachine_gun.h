@@ -36,8 +36,6 @@ class SubMachineGunBullet : public WeaponBullet
   public:
     SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                         WeaponLauncher * p_launcher);
-  protected:
-    void SignalCollision();
   private:
     void ShootSound();
 };
@@ -58,6 +56,7 @@ class SubMachineGun : public WeaponLauncher
     SubMachineGun();
     bool p_Shoot();
     void HandleKeyEvent(int action, int event_type);
+    void SignalProjectileCollision();
 };
 
 #endif /* SUBMACHINE_GUN_H */
