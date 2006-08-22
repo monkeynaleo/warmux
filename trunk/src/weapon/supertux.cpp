@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme Supertux : and now the flying magic pinguin !
+ * Arme Supertux : Look ! it's the famous flying magic pinguin !
  *****************************************************************************/
 
 #include "supertux.h"
@@ -46,7 +46,6 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 void SuperTux::Shoot(double strength)
 {
   Ready();
-  is_active = true;
 
   // Set physics constants.
   ResetConstants();
@@ -122,10 +121,7 @@ void SuperTux::SignalCollision()
   {
     GameMessages::GetInstance()->Add (_("Bye bye tux..."));
   }
-  is_active = false; 
-  lst_objects.RemoveObject(this);
-  if (!IsGhost()) Explosion();
-  if (launcher != NULL) launcher->SignalProjectileCollision();
+  WeaponProjectile::SignalCollision();
 }
 
 //-----------------------------------------------------------------------------
@@ -154,7 +150,8 @@ TuxLauncher::TuxLauncher() :
 
 void TuxLauncher::HandleKeyEvent(int action, int event_type)
 {
-  switch (action) {
+  switch (action)
+  {
   case ACTION_MOVE_LEFT:
     if (event_type != KEY_RELEASED)
       static_cast<SuperTux *>(projectile)->turn_left();
@@ -171,4 +168,6 @@ void TuxLauncher::HandleKeyEvent(int action, int event_type)
 }
 
 SuperTuxWeaponConfig& TuxLauncher::cfg() 
-{ return static_cast<SuperTuxWeaponConfig&>(*extra_params); }
+{
+  return static_cast<SuperTuxWeaponConfig&>(*extra_params);
+}

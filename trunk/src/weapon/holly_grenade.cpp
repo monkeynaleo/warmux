@@ -38,6 +38,7 @@ HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg,
 {
   m_rebound_sound = "weapon/holly_grenade_bounce";
   sing_alleluia = false;
+  explode_with_collision = false;
 }
 
 void HollyGrenade::Explosion()
@@ -55,9 +56,9 @@ void HollyGrenade::Explosion()
                                 GetY()+(int)(sin_angle[i]*(float)cfg.explosion_range)),
                                 1,particle_MAGIC_STAR,false,angle,2.5);
   }
-  lst_objects.RemoveObject(this);
+  RemoveFromPhysicalEngine();
   WeaponProjectile::Explosion();
-  if (launcher != NULL) launcher->SignalProjectileCollision();
+  if (launcher != NULL) launcher->SignalProjectileExplosion();
 }
 
 void HollyGrenade::Refresh()
@@ -97,10 +98,8 @@ void HollyGrenade::SignalCollision()
   if (IsGhost())
   {
     GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
-    is_active = false ;
-    lst_objects.RemoveObject(this);
-    if (launcher != NULL) launcher->SignalProjectileCollision();
   }
+  WeaponProjectile::SignalCollision();
 }
 
 //-----------------------------------------------------------------------------

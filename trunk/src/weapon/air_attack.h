@@ -41,8 +41,7 @@ public:
 class Obus : public WeaponProjectile
 {
 public:
-  Obus(AirAttackConfig& cfg,
-       WeaponLauncher * p_launcher);
+  Obus(AirAttackConfig& cfg);
 
 protected:
   void SignalCollision();

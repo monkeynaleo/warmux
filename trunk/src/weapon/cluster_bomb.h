@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon grenade : lance une grenade avec un angle et une force donn�. Explose 
- * au bout de quelques secondes
+ * Cluster Bomb : launch a grenade will exploding, it produce new little cluster
+ * exploding bomb
  *****************************************************************************/
 
 #ifndef CLUSTER_BOMB_H
@@ -42,6 +42,7 @@ public:
   void Shoot(int n_x, int n_y);
 protected:
   void SignalCollision();
+  void DoExplosion();
 };
 
 // La ClusterBomb
@@ -54,8 +55,8 @@ public:
   ClusterBomb(ClusterBombConfig& cfg,
               WeaponLauncher * p_launcher);
   void Refresh();
-  void Explosion();
 protected:
+  void Explosion();
   void SignalCollision();
 };
 

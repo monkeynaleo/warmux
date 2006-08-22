@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * auto bazooka : launch a homing missile
+ * Arme bazooka : projette une roquette avec un angle et une force donn�.
  *****************************************************************************/
 
 #include "auto_bazooka.h"
@@ -38,7 +38,7 @@
 #endif
 
 
-// time in second before rocket look for the target
+// time in second. After this time, the rocket homing to the target
 const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
@@ -61,61 +61,52 @@ void RoquetteTeteCherche::Refresh()
 {
   double angle, tmp ;
 
-  if (!is_active) return;
-
-  if (TestImpact()) { SignalCollision(); return; }
-
   if (!m_attire)
-    {
-      //La roquette tourne sur elle-m�e
-      angle_local += M_PI / 8;
-      if(angle_local > M_PI) angle_local = - M_PI;
-      angle = angle_local;
-  
-      image->SetRotation_deg(angle *180/M_PI);
-      
-      //2 sec apr� avoir ��tir�, la roquette se dirige vers la cible:
-      tmp = Time::GetInstance()->Read() - begin_time;
-      if(tmp>1000 * TPS_AV_ATTIRANCE)
-	{
-	  m_attire = true;
-	  SetSpeed(0,0);
-	  angle = GetPosition().ComputeAngle( m_cible );
-	  image->SetRotation_deg(angle *180/M_PI);
-	  SetExternForce(2000, angle);
-	}
-    }  
-  else 
-    {
-      angle = GetSpeedAngle() *180/M_PI;
-      image->SetRotation_deg( angle);
-      smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
-                                   GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+  {
+    // rocket is turning around herself
+    angle_local += M_PI / 8;
+    if(angle_local > M_PI) angle_local = - M_PI;
+    angle = angle_local;
 
+    image->SetRotation_deg(angle *180/M_PI);
+
+    // 2 sec later being launched, the rocket is homing to the target
+    tmp = Time::GetInstance()->Read() - begin_time;
+    if(tmp>1000 * TPS_AV_ATTIRANCE)
+    {
+      m_attire = true;
+      SetSpeed(0,0);
+      angle = GetPosition().ComputeAngle( m_cible );
+      image->SetRotation_deg(angle *180/M_PI);
+      SetExternForce(2000, angle);
     }
+  }  
+  else
+  {
+    angle = GetSpeedAngle() *180/M_PI;
+    image->SetRotation_deg( angle);
+    smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
+                                     GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+  }
 }
 
 void RoquetteTeteCherche::SignalCollision()
 { 
-  is_active = false;
-  
-  if ( GetLastCollidingObject() == NULL )
+  m_attire = false;
+  if (IsGhost())
   {
     GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
   }
-
-  lst_objects.RemoveObject(this);
-  if (!IsGhost()) Explosion();
-  if (launcher != NULL) launcher->SignalProjectileCollision();
-  m_attire = false;
+  WeaponProjectile::SignalCollision();
+  Explosion();
 }
 
-// Choisit les coordonn�s de la cible 	 
-void RoquetteTeteCherche::SetTarget (int x, int y) 	 
-{ 
-  m_cible.x = x; 	 
-  m_cible.y = y; 	 
-} 	 
+// Set the coordinate of the target
+void RoquetteTeteCherche::SetTarget (int x, int y)
+{
+  m_cible.x = x;
+  m_cible.y = y;
+}
 
 //-----------------------------------------------------------------------------
 
@@ -124,11 +115,9 @@ AutomaticBazooka::AutomaticBazooka() :
 {  
   m_name = _("Automatic bazooka");
 
-  m_is_active = false;
-  cible.choisie = false;
-
   projectile = new RoquetteTeteCherche(cfg(),dynamic_cast<WeaponLauncher *>(this));
 
+  cible.choisie = false;
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
 }
 
@@ -142,7 +131,6 @@ void AutomaticBazooka::Draw()
 void AutomaticBazooka::Refresh()
 {
   DrawTarget();
-
   WeaponLauncher::Refresh();
 }
 
@@ -155,27 +143,11 @@ void AutomaticBazooka::p_Select()
 
 void AutomaticBazooka::p_Deselect()
 {
-  if (cible.choisie) {
-    // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image.GetWidth()/2,
-				   cible.pos.y-cible.image.GetHeight()/2,
-				   cible.image.GetWidth(),
-				   cible.image.GetHeight()));
-  }
-
   Mouse::GetInstance()->SetPointer(POINTER_SELECT);
 }
 
 void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 {
-  if (cible.choisie) {
-    // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image.GetWidth()/2,
-				   cible.pos.y-cible.image.GetHeight()/2,
-				   cible.image.GetWidth(),
-				   cible.image.GetHeight()));
-  }
-
   cible.pos = mouse_pos;
   cible.choisie = true;
 
@@ -187,8 +159,7 @@ void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 
 void AutomaticBazooka::DrawTarget()
 {
-  if( !cible.choisie )
-	return;
+  if( !cible.choisie ) return;
 
   AppWormux::GetInstance()->video.window.Blit(cible.image, cible.pos - cible.image.GetSize()/2 - camera.GetPosition());
 }

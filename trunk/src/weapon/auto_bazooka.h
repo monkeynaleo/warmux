@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * auto bazooka : launch a homing missile
+ * Weapon bazooka : projette une roquette avec un angle et une force donn�.
  *****************************************************************************/
 
 #ifndef AUTO_BAZOOKA_H
@@ -29,6 +29,7 @@
 
 class AutomaticBazooka;
 
+// Roquette du bazooka �t�e chercheuse
 class RoquetteTeteCherche : public WeaponProjectile
 {
   ParticleEngine smoke_engine;

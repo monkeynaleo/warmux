@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme grenade �fragmentation(cluster bomb)
- * Explose au bout de quelques secondes 
+ * Cluster Bomb : launch a grenade will exploding, it produce new little cluster
+ * exploding bomb
  *****************************************************************************/
 
 #include "cluster_bomb.h"
@@ -45,31 +45,28 @@ void Cluster::Shoot (int x, int y)
 {
   Ready();
   camera.ChangeObjSuivi(this, true, false);
-  is_active = true;
   ResetConstants();
   SetXY( Point2i(x, y) );
 }
 
 void Cluster::Refresh()
 {
-  if (!is_active) return;
-
   double angle = GetSpeedAngle() * 180/M_PI ;
-
-  image->SetRotation_deg( angle);
+  image->SetRotation_deg( angle );
 }
 
 void Cluster::SignalCollision()
 {
-  is_active = false;
-  lst_objects.RemoveObject((PhysicalObj*)this);
-
   if (IsGhost())
   {
     GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
-    return;
   }
+  WeaponProjectile::SignalCollision();
+  Explosion();
+}
 
+void Cluster::DoExplosion()
+{
   ApplyExplosion (GetPosition(), cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
 }
 
@@ -80,13 +77,14 @@ ClusterBomb::ClusterBomb(ClusterBombConfig& cfg,
   : WeaponProjectile ("cluster_bomb", cfg, p_launcher)
 {
   m_rebound_sound = "weapon/grenade_bounce";
+  explode_with_collision = false;
 
   tableau_cluster.clear();
   const uint nb = cfg.nb_fragments;
 
   for (uint i=0; i<nb; ++i)
   {
-    Cluster cluster(cfg,p_launcher);
+    Cluster cluster(cfg, launcher);
     tableau_cluster.push_back( cluster );
   }
 }
@@ -95,24 +93,28 @@ void ClusterBomb::Refresh()
 {
   WeaponProjectile::Refresh();
   
-  // rotation de l'image de la grenade...
   double angle = GetSpeedAngle() * 180/M_PI ;
   image->SetRotation_deg( angle);
 }
 
 
 void ClusterBomb::SignalCollision()
-{   
+{
   if (IsGhost())
   {
-    GameMessages::GetInstance()->Add ("The Cluster Bomb left the battlefield before it could explode.");
-    is_active = false ;
+    RemoveFromPhysicalEngine();
+    GameMessages::GetInstance()->Add (_("The Cluster Bomb left the battlefield before it could explode."));
   }
+  WeaponProjectile::SignalCollision();
 }
 
 void ClusterBomb::Explosion()
 {
-  if (IsGhost()) return;
+  if (IsGhost())
+  {
+    WeaponProjectile::Explosion();
+    return;
+  }
 
   Point2d speed_vector;
   int x, y;
@@ -121,18 +123,18 @@ void ClusterBomb::Explosion()
 
   iterator it=tableau_cluster.begin(), end=tableau_cluster.end();
   for (; it != end; ++it)
-    {
-      Cluster &cluster = *it;
-      
-      double angle = randomSync.GetDouble(2.0 * M_PI);
-      x = GetX()+(int)(cos(angle) * (double)cfg.blast_range*5);
-      y = GetY()+(int)(sin(angle) * (double)cfg.blast_range*5);
+  {
+    Cluster &cluster = *it;
 
-      cluster.Shoot(x,y);
-      cluster.SetSpeedXY(speed_vector);
-      lst_objects.AddObject((PhysicalObj*)&cluster);
-    }
-  is_active = false;
+    double angle = randomSync.GetDouble(2.0 * M_PI);
+    x = GetX()+(int)(cos(angle) * (double)cfg.blast_range*5);
+    y = GetY()+(int)(sin(angle) * (double)cfg.blast_range*5);
+
+    cluster.Shoot(x,y);
+    cluster.SetSpeedXY(speed_vector);
+    lst_objects.AddObject((PhysicalObj*)&cluster);
+  }
+  WeaponProjectile::Explosion();
 }
 
 //-----------------------------------------------------------------------------

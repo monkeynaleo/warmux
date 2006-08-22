@@ -32,7 +32,7 @@ public:
   void Refresh();
 protected:
   void SignalCollision();
-  void Explosion();
+  void DoExplosion();
 };
 
 class RiotBomb : public WeaponLauncher

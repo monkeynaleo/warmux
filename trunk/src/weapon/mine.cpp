@@ -51,33 +51,15 @@ ObjMine::ObjMine(MineConfig& cfg,
   m_allow_negative_y = true; 
   animation = false;
   channel = -1;
+  is_active = true;
+  explode_with_collision = false;
 
   escape_time = 0;
 
   Ready();
-  is_active = true;
 
   // is it a fake mine ?
   fake = !(randomSync.GetLong(0, 9));
-}
-
-void ObjMine::SignalCollision() 
-{
-  if (IsGhost())
-  {
-    is_active = false;
-    if (launcher != NULL) launcher->SignalProjectileCollision();
-    lst_objects.RemoveObject (this);
-  }
-}
-
-void ObjMine::Explosion ()
-{
-  MSG_DEBUG("mine", "Explosion");
-
-  Point2i centre = GetCenter();
-  ApplyExplosion(centre, cfg);
-  lst_objects.RemoveObject (this);
 }
 
 void ObjMine::FakeExplosion()
@@ -86,17 +68,17 @@ void ObjMine::FakeExplosion()
 
   jukebox.Play("share", "weapon/mine_fake");
   ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
-  is_active = false;
 
-  if (animation )//&& !repos)
+  if ( animation )//&& !repos)
   {
     MSG_DEBUG("mine", "Desactive detection..");
 
     animation = false;
     m_ready = true;
-
     image->SetCurrentFrame(0);
   }
+  is_active = false;
+  if (launcher != NULL) launcher->SignalProjectileTimeout();
 }
 
 void ObjMine::StartTimeout()
@@ -118,25 +100,24 @@ void ObjMine::Detection()
 {
   uint current_time = Time::GetInstance()->ReadSec();
 
-  if (escape_time == 0) {
+  if (escape_time == 0)
+  {
     escape_time = current_time + static_cast<MineConfig&>(cfg).escape_time;
     MSG_DEBUG("mine", "Initialize escape_time : %d", current_time);
     return;
   }
 
-  if (current_time < escape_time) {
-    return;
-  }
+  if (current_time < escape_time) return;
 
   MSG_DEBUG("mine", "Escape_time is finished : %d", current_time);
 
   FOR_ALL_LIVING_CHARACTERS(equipe, ver)
   { 
-    if (MeterDistance (GetCenter(), ver->GetCenter())
-	 < static_cast<MineConfig&>(cfg).detection_range && !animation)
+    if (MeterDistance (GetCenter(), ver->GetCenter()) < static_cast<MineConfig&>(cfg).detection_range
+        && !animation)
     {
       std::string txt = Format(_("%s is next to a mine!"),
-			       ver -> GetName().c_str());
+                                  ver -> GetName().c_str());
       GameMessages::GetInstance()->Add (txt);
       StartTimeout();
       return;
@@ -157,28 +138,29 @@ void ObjMine::Refresh()
   }
 
   // try to detect a character near the mine
-  if (!animation) Detection();
+  if (!animation)
+  {
+    Detection();
+  }
+  else 
+  {
+    image->Update();
 
-  if (animation) {
-     image->Update();
-
-     // the timeout is finished !!
-     if (attente < Time::GetInstance()->ReadSec())
-       {
-	 jukebox.Stop(channel);
-	 channel = -1;
-	 
-	 if (!fake)
-	   Explosion ();
-	 else
-	   FakeExplosion();
-       }
+    // the timeout is finished !!
+    if (attente < Time::GetInstance()->ReadSec())
+    {
+      jukebox.Stop(channel);
+      channel = -1;
+      if (!fake) Explosion();
+      else  FakeExplosion();
+      if (launcher != NULL) launcher->SignalProjectileTimeout();
+    }
   }
 }
 
 void ObjMine::Draw()
 {
-    image->Draw(GetPosition());
+  image->Draw(GetPosition());
 }
 //-----------------------------------------------------------------------------
 
@@ -219,11 +201,6 @@ void Mine::Add (int x, int y)
   ActiveCharacter().GetSpeedXY(speed_vector);
   obj -> SetSpeedXY (speed_vector);
   lst_objects.AddObject (obj);
-}
-
-void Mine::Refresh()
-{
-  m_is_active = false;
 }
 
 MineConfig& Mine::cfg()

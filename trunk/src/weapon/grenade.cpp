@@ -39,6 +39,7 @@ Grenade::Grenade(ExplosiveWeaponConfig& cfg,
   WeaponProjectile ("grenade", cfg, p_launcher)
 {
   m_rebound_sound = "weapon/grenade_bounce";
+  explode_with_collision = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -47,7 +48,6 @@ void Grenade::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  // rotation de l'image de la grenade...
   double angle = GetSpeedAngle() * 180/M_PI ;
   image->SetRotation_deg( angle);
 }
@@ -55,14 +55,12 @@ void Grenade::Refresh()
 //-----------------------------------------------------------------------------
 
 void Grenade::SignalCollision()
-{
+{   
   if (IsGhost())
   {
-    GameMessages::GetInstance()->Add (_("The grenade left the battlefield before exploding"));
-    is_active = false ;
-    lst_objects.RemoveObject(this);
-    if (launcher != NULL) launcher->SignalProjectileCollision();
+    GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
   }
+  WeaponProjectile::SignalCollision();
 }
 
 //-----------------------------------------------------------------------------
@@ -75,3 +73,5 @@ GrenadeLauncher::GrenadeLauncher() :
   projectile = new Grenade(cfg(),dynamic_cast<WeaponLauncher *>(this));
   m_allow_change_timeout = true;
 }
+
+
