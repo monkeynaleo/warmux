@@ -67,20 +67,14 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
 
 bool SnipeRifle::p_Shoot()
 {
-  if (m_is_active)
-    return false;  
-
-  m_is_active = true;
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
-
   return true;
 }
 
-void SnipeRifle::Refresh()
+// When an explosion occurs, we compute a new targeted point
+void SnipeRifle::SignalProjectileExplosion()
 {
-  bool tmp = projectile->is_active;
-  WeaponLauncher::Refresh();
-  ComputeCrossPoint(!tmp);
+  ComputeCrossPoint(true);
 }
 
 bool SnipeRifle::ComputeCrossPoint(bool force = false)

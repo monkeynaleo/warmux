@@ -56,7 +56,6 @@ class SubMachineGun : public WeaponLauncher
     SubMachineGun();
     bool p_Shoot();
     void HandleKeyEvent(int action, int event_type);
-    void SignalProjectileCollision();
 };
 
 #endif /* SUBMACHINE_GUN_H */

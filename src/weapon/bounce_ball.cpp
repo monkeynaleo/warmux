@@ -62,7 +62,8 @@ void BounceBall::SignalCollision()
   if (IsGhost())
   {
     GameMessages::GetInstance()->Add ("The ball left the battlefield before exploding");
-    is_active = false ;
+    WeaponProjectile::SignalCollision();
+    Explosion();
   }
 }
 

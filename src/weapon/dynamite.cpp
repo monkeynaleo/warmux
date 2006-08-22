@@ -40,6 +40,7 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
   WeaponProjectile("dynamite_bullet", cfg, p_launcher)
 {
   channel = -1;
+  explode_with_collision = false;
 
   image->animation.SetLoopMode(false);
   SetSize(image->GetSize());
@@ -50,28 +51,24 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
 void BatonDynamite::Reset()
 {
   Ready();
-  is_active = false;
 
   unsigned int delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
   image->SetFrameSpeed(delay);
 
   image->Scale(ActiveCharacter().GetDirection(), 1);
   image->SetCurrentFrame(0);
-  image->Start(); 
+  image->Start();
 }
 
 void BatonDynamite::Refresh()
 {
-  if (!is_active) return;
   assert (!IsGhost());
-  image->Update(); 
-  is_active = !image->IsFinished();
-  if (!is_active) Explosion();
+  image->Update();
+  if (image->IsFinished()) Explosion();
 }
 
 void BatonDynamite::Draw()
 {
-  if (!is_active) return;
   assert (!IsGhost());
   image->Draw(GetPosition());
 }
@@ -85,14 +82,8 @@ void BatonDynamite::Explosion()
 {
   jukebox.Stop(channel);
   channel = -1;
-  MSG_DEBUG (m_name.c_str(), "Explosion");
-  if (IsGhost()) return;
-  Point2i pos = GetCenter();
-  ApplyExplosion (pos, cfg);
+  WeaponProjectile::Explosion();
 }
-
-void BatonDynamite::SignalCollision() 
-{}
 
 //-----------------------------------------------------------------------------
 

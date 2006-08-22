@@ -54,12 +54,8 @@ void WeaponBullet::SignalCollision()
   {
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
   }
-  is_active = false;
-
-  // projectile explode and signal to the launcher the collision
-  lst_objects.RemoveObject(this);
-  if (!IsGhost()) Explosion();
-  if (launcher != NULL) launcher->SignalProjectileCollision();
+  WeaponProjectile::SignalCollision();
+  Explosion();
 }
 
 void WeaponBullet::Refresh()
@@ -73,24 +69,39 @@ void WeaponBullet::Refresh()
 // Explode if hit the ground or apply damage to character
 void WeaponBullet::Explosion()
 {
-  MSG_DEBUG(m_name.c_str(), "Impact");
-  if (IsGhost()) return;
-  
-  if ( GetLastCollidingObject() == NULL ) {
-    Point2i pos = GetCenter();
-    ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke);
-  } else {
-    PhysicalObj * obj = GetLastCollidingObject();
+  RemoveFromPhysicalEngine();
 
-    if (typeid(*obj) == typeid(Character)) {
+  if (IsGhost())
+  {
+    MSG_DEBUG (m_name.c_str(), "Ghost");
+    if (launcher != NULL) launcher->SignalProjectileExplosion();
+    return;
+  }
+  
+  MSG_DEBUG(m_name.c_str(), "Impact");
+  if ( GetLastCollidingObject() == NULL )
+  {
+    DoExplosion();
+  }
+  else
+  {
+    PhysicalObj * obj = GetLastCollidingObject();
+    if (typeid(*obj) == typeid(Character))
+    {
       Character * tmp = (Character*)(obj);      
       tmp -> SetEnergyDelta (-cfg.damage);
       tmp -> AddSpeed (2, GetSpeedAngle());
       tmp -> UpdatePosition();
     }
   }
+  if (launcher != NULL) launcher->SignalProjectileExplosion();
 }
 
+void WeaponBullet::DoExplosion()
+{
+  Point2i pos = GetCenter();
+  ApplyExplosion (pos, cfg, "", false, ParticleEngine::LittleESmoke);
+}
 //-----------------------------------------------------------------------------
 
 
@@ -103,6 +114,9 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   SetCollisionModel(false, true, true);
   explode_colliding_character = false;
   launcher = p_launcher;
+
+  explode_with_timeout = true;
+  explode_with_collision = true;
 
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
@@ -122,14 +136,12 @@ WeaponProjectile::~WeaponProjectile()
 }
 
 void WeaponProjectile::Shoot(double strength)
-{    
+{
   MSG_DEBUG("weapon_projectile", "shoot.\n");
 
   Ready();
 
   if (launcher != NULL) launcher->IncActiveProjectile();
-
-  is_active = true;
 
   // Set the physical factors
   ResetConstants();
@@ -155,69 +167,30 @@ void WeaponProjectile::ShootSound()
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
 }
 
-// To remove ?
-bool WeaponProjectile::TestImpact()
+void WeaponProjectile::RemoveFromPhysicalEngine()
 {
-  if (IsReady()) 
-  {
-    MSG_DEBUG("weapon_collision", "Impact because was ready.\n");
-    return true;
-  }
-//  return CollisionTest (0,0); ---> CollisionTest called from PhysicalObj::NotifyMove(...)
-  return false;
-}
-
-// projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalCollisionObject()
-{  
-  if (!explode_colliding_character) return;
-
-  PhysicalObj * obj = GetLastCollidingObject();
-  assert (obj != NULL);
-  
-  if (typeid(*obj) == typeid(Character)) is_active = false;
-
   lst_objects.RemoveObject(this);
-  if (!IsGhost()) Explosion();
-  if (launcher != NULL) launcher->SignalProjectileCollision();
 }
 
 void WeaponProjectile::Refresh()
 {
-  if( !is_active )
-    return;
-
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
    
-  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) {
-    is_active = false;
-    lst_objects.RemoveObject(this);
-    Explosion();
-    if (launcher != NULL) launcher->SignalProjectileCollision();
-    return;
-  }
-
-  // To remove ???
-  if( TestImpact() ){
-    SignalCollision();
-    return;
-  }
+  if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 }
 
 void WeaponProjectile::Draw()
 {
-  if( !is_active )
-    return;
-
   image->Draw(GetPosition());
   
   int tmp = GetTotalTimeout();
 
-  if (cfg.timeout && tmp != 0) { 
+  if (cfg.timeout && tmp != 0) 
+  { 
     tmp -= (int)((Time::GetInstance()->Read() - begin_time) / 1000);
-
-    if (tmp >= 0) {
+    if (tmp >= 0)
+    {
       std::ostringstream ss;
       ss << tmp ;
       int txt_x = GetX() + GetWidth() / 2;
@@ -228,45 +201,79 @@ void WeaponProjectile::Draw()
   }
 }
 
-void WeaponProjectile::SignalGhostState (bool){  
+// projectile explode and signal to the launcher the collision
+void WeaponProjectile::SignalCollisionObject()
+{  
+  if (!explode_colliding_character || !explode_with_collision ) return;
+
+  PhysicalObj * obj = GetLastCollidingObject();
+  assert (obj != NULL);
+  
+  if (launcher != NULL) launcher->SignalProjectileCollision();
+  if (typeid(*obj) == typeid(Character) && !IsGhost()) Explosion();
+}
+
+// Default behavior : signal to launcher a collision and explode
+void WeaponProjectile::SignalCollision()
+{
+  if (launcher != NULL) launcher->SignalProjectileCollision();
+  if (explode_with_collision || IsGhost()) Explosion();
+}
+
+void WeaponProjectile::SignalGhostState (bool)
+{
   SignalCollision();
 }
 
-void WeaponProjectile::SignalFallEnding(){
+void WeaponProjectile::SignalFallEnding()
+{
   SignalCollision();
 }
 
+// the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
 {
+  RemoveFromPhysicalEngine();
+
+  if (IsGhost())
+  {
+    MSG_DEBUG (m_name.c_str(), "Ghost");
+    SignalExplosion();
+    return;
+  }
   MSG_DEBUG (m_name.c_str(), "Explosion");
-  if (IsGhost()) return;
+  DoExplosion();
+  SignalExplosion();
+}
+
+void WeaponProjectile::SignalExplosion()
+{
+  if (launcher != NULL) launcher->SignalProjectileExplosion();
+}
+
+void WeaponProjectile::DoExplosion()
+{
   Point2i pos = GetCenter();
   ApplyExplosion (pos, cfg);
 }
 
-
 void WeaponProjectile::IncrementTimeOut()
 {
-  if (cfg.allow_change_timeout)
-    if (GetTotalTimeout()<(int)cfg.timeout*2) 
+  if (cfg.allow_change_timeout && GetTotalTimeout()<(int)cfg.timeout*2) 
       m_timeout_modifier += 1 ;
-
 }
 
 void WeaponProjectile::DecrementTimeOut()
 {
-  if (cfg.allow_change_timeout)
-    if (GetTotalTimeout()>1) 
-      m_timeout_modifier -= 1 ;      //-1s for grenade timout. 1 is min.
-        
+  // -1s for grenade timout. 1 is min.
+  if (cfg.allow_change_timeout && GetTotalTimeout()>1) 
+      m_timeout_modifier -= 1 ;
 }
 
 void WeaponProjectile::SetTimeOut(int timeout)
 {
-  if (cfg.allow_change_timeout)
-    if (timeout <= (int)cfg.timeout*2 && timeout >= 1) 
+  if (cfg.allow_change_timeout && timeout <= (int)cfg.timeout*2 && timeout >= 1)
       m_timeout_modifier = timeout - cfg.timeout ;
-
 }
 
 void WeaponProjectile::ResetTimeOut()
@@ -277,6 +284,13 @@ void WeaponProjectile::ResetTimeOut()
 int WeaponProjectile::GetTotalTimeout()
 {
   return (int)(cfg.timeout)+m_timeout_modifier;
+}
+
+// Signal a projectile timeout and explode
+void WeaponProjectile::SignalTimeout()
+{
+  if (launcher != NULL) launcher->SignalProjectileTimeout();
+  if (explode_with_timeout || IsGhost()) Explosion();
 }
 
 //Public function which let know if changing timeout is allowed.
@@ -321,10 +335,22 @@ void WeaponLauncher::DirectExplosion()
   ApplyExplosion (pos, cfg());
 }
 
+// Signal that a projectile explosion
+void WeaponLauncher::SignalProjectileExplosion()
+{
+  DecActiveProjectile();
+  m_is_active = false;
+}
+
 // Signal that a projectile fired by this weapon has hit something (ground, character etc)
 void WeaponLauncher::SignalProjectileCollision()
 {
-  DecActiveProjectile();
+  m_is_active = false;
+}
+
+// Signal a projectile timeout (for exemple: grenade, holly grenade ... etc.)
+void WeaponLauncher::SignalProjectileTimeout()
+{
   m_is_active = false;
 }
 
@@ -434,14 +460,19 @@ void WeaponLauncher::HandleKeyEvent(int action, int event_type)
     ActiveCharacter().HandleKeyEvent(action, event_type);
 }
 
-void WeaponLauncher::ActionUp(){ //called by mousse.cpp when mousewhellup 
+// called by mousse.cpp when mousewhellup 
+void WeaponLauncher::ActionUp()
+{
   projectile->IncrementTimeOut();
 }
 
-
-void WeaponLauncher::ActionDown(){//called by mousse.cpp when mousewhelldown
+// called by mousse.cpp when mousewhelldown
+void WeaponLauncher::ActionDown()
+{
   projectile->DecrementTimeOut();
 }
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg()
-{ return static_cast<ExplosiveWeaponConfig&>(*extra_params); }
+{
+  return static_cast<ExplosiveWeaponConfig&>(*extra_params);
+}

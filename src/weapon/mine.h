@@ -43,19 +43,19 @@ private:
   // this is a fake mine ?
   bool fake;
 
+  // Is this mine active ?
+  bool is_active;
+
   // Activation des mines ?
   bool animation;
   uint attente;
   uint escape_time;
 
+protected:
+  void FakeExplosion();
 public:
   ObjMine(MineConfig &cfg,
           WeaponLauncher * p_launcher = NULL);
-
-  void Explosion ();
-  void FakeExplosion ();
-
-  void SignalCollision();
 
   void StartTimeout();
   void Detection();
@@ -84,7 +84,6 @@ class Mine : public WeaponLauncher
 private:
   bool p_Shoot();
   void Add (int x, int y);
-  void Refresh();
 
 public:
   Mine();

@@ -31,7 +31,6 @@
 
 class Dynamite;
 
-// La repr�entation d'une dynamite
 class BatonDynamite : public WeaponProjectile
 {
   int channel;
@@ -42,10 +41,9 @@ public:
   void Reset();
   void Draw();
   void Refresh();
-  void Explosion();
 
 protected:
-  void SignalCollision();
+  void Explosion();
   void ShootSound();
 };
 

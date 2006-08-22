@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * riot bomb :
- * fire a rocket that doesn't any damage but makes a bigger hole with angle and force
+ * riot bomb : fire a rocket that doesn't make any damage but makes a big
+ * hole with angle and force
  *****************************************************************************/
 
 #include "riot_bomb.h"
@@ -53,12 +53,12 @@ void RoquetteRiotBomb::SignalCollision()
   {
     GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
   }
-  is_active = false;
+  WeaponProjectile::SignalCollision();
+  Explosion();
 }
 
-void RoquetteRiotBomb::Explosion()
+void RoquetteRiotBomb::DoExplosion()
 {
-  // Applique les degats et le souffle aux vers
   Point2i pos = GetCenter();
   ApplyExplosion (pos, cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
 }

@@ -39,12 +39,13 @@ class Gnu : public WeaponProjectile
   int m_sens;
   int save_x, save_y;
   double angle;
-public:
+ protected:
+  void SignalCollision();
+ public:
   Gnu(ExplosiveWeaponConfig& cfg,
       WeaponLauncher * p_launcher);
   void Shoot(double strength);
   void Refresh();
-  void SignalCollision();
 };
 
 class GnuLauncher : public WeaponLauncher

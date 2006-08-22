@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Bazooka : launch a rocket with a given angle and strength
+ * Arme bazooka : projette une roquette avec un angle et une force donn�.
  *****************************************************************************/
 
 #include "bazooka.h"
@@ -50,14 +50,12 @@ void RoquetteBazooka::Refresh()
 
 void RoquetteBazooka::SignalCollision()
 { 
-  is_active = false;
   if (IsGhost())
   {
     GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
   }
-  lst_objects.RemoveObject(this);
-  if (!IsGhost()) Explosion();
-  if (launcher != NULL) launcher->SignalProjectileCollision();
+  WeaponProjectile::SignalCollision();
+  Explosion();
 }
 
 //-----------------------------------------------------------------------------

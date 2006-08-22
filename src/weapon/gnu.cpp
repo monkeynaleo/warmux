@@ -38,6 +38,7 @@ Gnu::Gnu(ExplosiveWeaponConfig& cfg,
          WeaponLauncher * p_launcher) :
   WeaponProjectile("gnu", cfg, p_launcher)
 {
+  explode_with_collision = false;
 }
 
 void Gnu::Shoot (double strength)
@@ -111,8 +112,8 @@ void Gnu::SignalCollision()
   if (IsGhost())
   {
     GameMessages::GetInstance()->Add ("The Gnu left the battlefield before exploding");
-    is_active = false ;
   }
+  WeaponProjectile::SignalCollision();
 }
 //-----------------------------------------------------------------------------
 

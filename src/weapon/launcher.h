@@ -31,13 +31,12 @@ class WeaponLauncher;
 
 class WeaponProjectile : public PhysicalObj
 {
-  public:
-    bool is_active;
-
   protected:
     Sprite *image;
 
     bool explode_colliding_character; // before timeout.
+    bool explode_with_timeout;
+    bool explode_with_collision;
     double begin_time;
   
     ExplosiveWeaponConfig& cfg;
@@ -57,7 +56,6 @@ class WeaponProjectile : public PhysicalObj
     virtual void Draw();
     virtual void Refresh();
     virtual void Shoot(double strength);
-    virtual void Explosion();
 
     void IncrementTimeOut();
     void DecrementTimeOut();
@@ -67,9 +65,13 @@ class WeaponProjectile : public PhysicalObj
     bool change_timeout_allowed();
   
   protected:
-    virtual void SignalCollision() = 0;
-    bool TestImpact ();
+    virtual void SignalCollision();
+    virtual void SignalTimeout();
+    virtual void SignalExplosion();
     virtual void ShootSound();
+    void RemoveFromPhysicalEngine();
+    void Explosion();
+    void DoExplosion();
   private:
     void SignalGhostState (bool was_dead);
     void SignalFallEnding();
@@ -86,7 +88,8 @@ class WeaponBullet : public WeaponProjectile
     virtual void Refresh();
   protected:
     void SignalCollision();
-    void Explosion(); 
+    void Explosion();
+    void DoExplosion();
 };
 
 
@@ -115,7 +118,10 @@ class WeaponLauncher : public Weapon
     void HandleKeyEvent(int action, int event_type);
  
   // Handle of projectile events
+    void SignalProjectileExplosion();
     void SignalProjectileCollision();
+    void SignalProjectileTimeout();
+
     void IncActiveProjectile();
     void DecActiveProjectile();
   

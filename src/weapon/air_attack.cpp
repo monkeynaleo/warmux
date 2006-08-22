@@ -40,17 +40,15 @@ const uint FORCE_Y_MAX = 40;
 
 const double OBUS_SPEED = 7 ;
 
-Obus::Obus(AirAttackConfig& cfg,WeaponLauncher * p_launcher) :
-  WeaponProjectile("air_attack_projectile", cfg, p_launcher)
+Obus::Obus(AirAttackConfig& cfg) :
+  WeaponProjectile("air_attack_projectile", cfg, NULL)
 {
-  is_active = true;
   explode_colliding_character = true;
   Ready();
 }
 
 void Obus::SignalCollision()
 { 
-  is_active = false; 
   lst_objects.RemoveObject(this);
 
   if (!IsGhost())
@@ -106,7 +104,7 @@ void Plane::Shoot(double speed, Point2i& target)
 
 void Plane::DropBomb()
 {
-  Obus * instance = new Obus(cfg,dynamic_cast<WeaponLauncher *>(this));
+  Obus * instance = new Obus(cfg);
   instance->SetXY( Point2i(GetX(), obus_dy) );
   
   Point2d speed_vector;
@@ -140,7 +138,7 @@ void Plane::Refresh()
     else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
       // Get the last rocket and check the position to be sure to not collide with it
       if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+10 )
-	DropBomb();
+        DropBomb();
     }
   }
 }
