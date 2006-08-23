@@ -39,7 +39,6 @@ GunBullet::GunBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :
   WeaponBullet("gun_bullet", cfg, p_launcher)
 {
-  cfg.explosion_range = 5;
 }
 
 void GunBullet::ShootSound()
@@ -66,6 +65,4 @@ bool Gun::p_Shoot ()
 
   return true;
 }
-
-
 
