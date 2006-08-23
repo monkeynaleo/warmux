@@ -193,7 +193,7 @@ bool Mine::p_Shoot()
 
 void Mine::Add (int x, int y)
 {
-  ObjMine *obj = new ObjMine(cfg());
+  ObjMine *obj = new ObjMine(cfg(), dynamic_cast<WeaponLauncher *>(this));
   
   obj -> SetXY ( Point2i(x, y) );
 
