@@ -55,7 +55,6 @@ void WeaponBullet::SignalCollision()
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
   }
   WeaponProjectile::SignalCollision();
-  Explosion();
 }
 
 void WeaponBullet::Refresh()
@@ -380,7 +379,7 @@ void WeaponLauncher::Draw()
   {
     if( IsActive() ) //Do not display after launching.
       return;
-      
+
     int tmp = projectile->GetTotalTimeout();
     std::ostringstream ss;
     ss << tmp;
