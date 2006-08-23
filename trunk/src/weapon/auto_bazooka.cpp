@@ -98,7 +98,6 @@ void RoquetteTeteCherche::SignalCollision()
     GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
   }
   WeaponProjectile::SignalCollision();
-  Explosion();
 }
 
 // Set the coordinate of the target
@@ -143,11 +142,27 @@ void AutomaticBazooka::p_Select()
 
 void AutomaticBazooka::p_Deselect()
 {
+  if (cible.choisie) {
+    // need to clear the old target
+    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image.GetWidth()/2,
+                        cible.pos.y-cible.image.GetHeight()/2,
+                        cible.image.GetWidth(),
+                        cible.image.GetHeight()));
+  }
+
   Mouse::GetInstance()->SetPointer(POINTER_SELECT);
 }
 
 void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 {
+  if (cible.choisie) {
+    // need to clear the old target
+    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image.GetWidth()/2,
+                        cible.pos.y-cible.image.GetHeight()/2,
+                        cible.image.GetWidth(),
+                        cible.image.GetHeight()));
+  }
+
   cible.pos = mouse_pos;
   cible.choisie = true;
 
