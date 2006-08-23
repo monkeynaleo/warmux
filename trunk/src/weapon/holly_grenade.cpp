@@ -56,9 +56,7 @@ void HollyGrenade::Explosion()
                                 GetY()+(int)(sin_angle[i]*(float)cfg.explosion_range)),
                                 1,particle_MAGIC_STAR,false,angle,2.5);
   }
-  RemoveFromPhysicalEngine();
   WeaponProjectile::Explosion();
-  if (launcher != NULL) launcher->SignalProjectileExplosion();
 }
 
 void HollyGrenade::Refresh()
@@ -110,5 +108,6 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
   m_name = _("HollyGrenade");
   projectile = new HollyGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this));
   m_allow_change_timeout = true;
+  ignore_collision_signal = true;
 }
 

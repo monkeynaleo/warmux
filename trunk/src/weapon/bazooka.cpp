@@ -55,7 +55,6 @@ void RoquetteBazooka::SignalCollision()
     GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
   }
   WeaponProjectile::SignalCollision();
-  Explosion();
 }
 
 //-----------------------------------------------------------------------------

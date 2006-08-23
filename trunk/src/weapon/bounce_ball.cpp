@@ -63,7 +63,6 @@ void BounceBall::SignalCollision()
   {
     GameMessages::GetInstance()->Add ("The ball left the battlefield before exploding");
     WeaponProjectile::SignalCollision();
-    Explosion();
   }
 }
 

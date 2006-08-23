@@ -62,7 +62,6 @@ void Cluster::SignalCollision()
     GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
   }
   WeaponProjectile::SignalCollision();
-  Explosion();
 }
 
 void Cluster::DoExplosion()
@@ -97,12 +96,10 @@ void ClusterBomb::Refresh()
   image->SetRotation_deg( angle);
 }
 
-
 void ClusterBomb::SignalCollision()
 {
   if (IsGhost())
   {
-    RemoveFromPhysicalEngine();
     GameMessages::GetInstance()->Add (_("The Cluster Bomb left the battlefield before it could explode."));
   }
   WeaponProjectile::SignalCollision();
@@ -142,8 +139,9 @@ void ClusterBomb::Explosion()
 ClusterLauncher::ClusterLauncher() : 
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
-  m_name = _("ClusterBomb");  
+  m_name = _("ClusterBomb");
   projectile = new ClusterBomb(cfg(),dynamic_cast<WeaponLauncher *>(this));
+  ignore_collision_signal = true;
 }
 
 ClusterBombConfig& ClusterLauncher::cfg() 
@@ -151,12 +149,11 @@ ClusterBombConfig& ClusterLauncher::cfg()
 
 //-----------------------------------------------------------------------------
 
-ClusterBombConfig::ClusterBombConfig() : 
+ClusterBombConfig::ClusterBombConfig() :
   ExplosiveWeaponConfig()
 {
   nb_fragments = 5;
 }
-
 
 void ClusterBombConfig::LoadXml(xmlpp::Element *elem)
 {

@@ -16,14 +16,13 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * 
+ * Bazooka : launch a rocket with a given angle and strength
  *****************************************************************************/
 
 #ifndef BAZOOKA_H
 #define BAZOOKA_H
 #include "launcher.h"
 
-// Roquette du bazooka
 class RoquetteBazooka : public WeaponProjectile
 {
   ParticleEngine smoke_engine;
