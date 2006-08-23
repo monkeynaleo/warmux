@@ -66,16 +66,15 @@ class WeaponProjectile : public PhysicalObj
   
   protected:
     virtual void SignalCollision();
+    virtual void SignalCollisionObject();
     virtual void SignalTimeout();
     virtual void SignalExplosion();
     virtual void ShootSound();
-    void RemoveFromPhysicalEngine();
-    void Explosion();
-    void DoExplosion();
-  private:
+    virtual void Explosion();
+    virtual void DoExplosion();
     void SignalGhostState (bool was_dead);
     void SignalFallEnding();
-    void SignalCollisionObject();
+    void RemoveFromPhysicalEngine();
 };
 
 class WeaponBullet : public WeaponProjectile
