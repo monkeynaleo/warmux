@@ -230,6 +230,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
 
 void Ground::Draw()
 {
+  CheckEmptyTiles();
   AppWormux * app = AppWormux::GetInstance();
 
   Point2i cPos = camera.GetPosition();

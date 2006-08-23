@@ -50,7 +50,7 @@ public:
   unsigned char GetAlpha(const Point2i &pos) const;
 
   // Draw it (on the entire visible part) 
-  void DrawTile() const;
+  void DrawTile();
 
   // Draw a part that is inside the given clipping rectangle
   // Clipping rectangle is in World corrdinate not screen coordinates
@@ -60,6 +60,8 @@ public:
   // Return a surface of the ground inside the rect
   Surface GetPart(Rectanglei& rec);
 
+  // Check if a title is empty, so we can delete it
+  void CheckEmptyTiles();
 protected:
   void InitTile(const Point2i &pSize);
 

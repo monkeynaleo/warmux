@@ -28,28 +28,28 @@
 #include "../tool/error.h"
 #include "../tool/point.h"
 #include "../tool/stats.h"
+#ifdef DBG_TILE
+#include "../graphic/colors.h"
+#endif
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================
-void TileItem::Draw(const Point2i &pos){
+void TileItem_AlphaSoftware::Draw(const Point2i &pos){
   AppWormux::GetInstance()->video.window.Blit(GetSurface(),
         pos * CELL_SIZE - camera.GetPosition());
 }
 
-bool TileItem::IsEmpty(){
-  Point2i pos;
-
-  for( pos.x = 0 ; pos.x < CELL_SIZE.x; pos.x++ )
-     for( pos.y = 0 ; pos.y < CELL_SIZE.y; pos.y++ )
-       if( GetAlpha(pos) == 255 )
-         return false;
-
-   return true;
+void TileItem_Empty::Draw(const Point2i &pos)
+{
+#ifdef DBG_TILE
+  AppWormux::GetInstance()->video.window.FillRect(Rectanglei(pos * CELL_SIZE - camera.GetPosition(),CELL_SIZE), c_red);
+#endif
 }
-
 // === Implemenation of TileItem_Software_ALpha ==============================
 TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size){
     m_size = size;
     m_surface = Surface(size, SDL_SWSURFACE|SDL_SRCALPHA, true).DisplayFormatAlpha();
+    need_delete = false;
+    ResetEmptyCheck();
 
     _GetAlpha = &TileItem_AlphaSoftware::GetAlpha_Generic;
     if( m_surface.GetBytesPerPixel() == 4 ){
@@ -70,6 +70,12 @@ TileItem_AlphaSoftware::TileItem_AlphaSoftware(const Point2i &size){
 }
 
 TileItem_AlphaSoftware::~TileItem_AlphaSoftware(){
+}
+
+void TileItem_AlphaSoftware::ResetEmptyCheck()
+{
+  need_check_empty = true;
+  last_filled_pixel = m_surface.GetPixels();
 }
 
 unsigned char TileItem_AlphaSoftware::GetAlpha(const Point2i &pos){
@@ -94,6 +100,7 @@ unsigned char TileItem_AlphaSoftware::GetAlpha_Generic (const Point2i &pos){
 }
 
 void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig){
+    need_check_empty = true;
     int starting_x = position.x >= 0 ? position.x : 0;
     int starting_y = position.y >= 0 ? position.y : 0;
     int ending_x = position.x+dig.GetWidth() <= m_surface.GetWidth() ? position.x+dig.GetWidth() : m_surface.GetWidth();
@@ -106,6 +113,7 @@ void TileItem_AlphaSoftware::Dig(const Point2i &position, const Surface& dig){
 }
 
 void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
+  need_check_empty = true;
   unsigned char* buf   = m_surface.GetPixels();
   const uint line_size = m_surface.GetPitch();
   const uint bpp       = m_surface.GetBytesPerPixel();
@@ -203,4 +211,53 @@ void TileItem_AlphaSoftware::Darken(const int start_x, const int end_x, unsigned
 
 Surface TileItem_AlphaSoftware::GetSurface(){
     return m_surface;
+}
+
+#ifdef DBG_TILE
+void TileItem_AlphaSoftware::FillWithRGB(Uint8 r, Uint8 g, Uint8 b)
+{
+  int x=0, y=0;
+  while(y < CELL_SIZE.y)
+  {
+    Uint32 pixel = *(Uint32 *)(m_surface.GetPixels() + y*m_surface.GetPitch() + x*m_surface.GetBytesPerPixel()); 
+    Uint8 tmp,a;
+    m_surface.GetRGBA(pixel, tmp, tmp, tmp, a);
+    if(a != SDL_ALPHA_TRANSPARENT)
+    {
+      Uint32 col = m_surface.MapRGBA(r, g, b, a);
+      m_surface.PutPixel(x, y, col);
+    }
+    x++;
+    if(x == CELL_SIZE.y)
+    {
+      x = 0;
+      y++;
+    }
+  }
+}
+#endif
+
+void TileItem_AlphaSoftware::CheckEmpty()
+{
+  assert(need_check_empty);
+  unsigned char alpha;
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+  alpha = last_filled_pixel[3];
+#else
+  alpha = last_filled_pixel[0];
+#endif
+
+  if(alpha == SDL_ALPHA_TRANSPARENT)
+  {
+    last_filled_pixel += 4;
+    if( last_filled_pixel > m_surface.GetPixels() + (m_surface.GetPitch() * CELL_SIZE.y))
+    {
+      need_delete = true;
+      need_check_empty = false;
+    }
+  }
+  else
+  {
+    need_check_empty = false;
+  }
 }

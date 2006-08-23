@@ -123,6 +123,7 @@ void Tile::PutSprite(const Point2i pos, Sprite* spr)
     dst.SetSize(src.GetSize());
 
     item[c.y*nbCells.x + c.x]->GetSurface().Blit(s, dst, src.GetPosition());
+    static_cast<TileItem_AlphaSoftware*>(item[c.y*nbCells.x + c.x])->ResetEmptyCheck();
   }
   s.SetAlpha(SDL_SRCALPHA, 0);
 }
@@ -150,10 +151,28 @@ void Tile::LoadImage (Surface& terrain){
 
     // Replace transparent tiles by TileItem_Empty tiles
     for( uint i=0; i<nbr_cell; ++i )
-        if( item[i]->IsEmpty() ){
-            delete item[i];
-            item[i] = (TileItem*)new TileItem_Empty;
-        }
+    {
+      TileItem_AlphaSoftware* t = static_cast<TileItem_AlphaSoftware*>(item[i]);
+      while(t->need_check_empty)
+        t->CheckEmpty();
+      if(t->NeedDelete())
+      {
+#ifdef DBG_TILE
+        printf("\nDeleting tile %i",i);
+#endif
+        delete item[i];
+        item[i] = (TileItem*)new TileItem_Empty;
+      }
+#ifdef DBG_TILE
+      else
+      {
+        if(i % nbCells.x % 2 == (i / nbCells.x) % 2)
+          item[i]->FillWithRGB(0, 0, 255);
+        else
+          item[i]->FillWithRGB(0, 255, 0);
+      }
+#endif
+    }
 }
 
 uchar Tile::GetAlpha(const Point2i &pos) const{
@@ -161,14 +180,13 @@ uchar Tile::GetAlpha(const Point2i &pos) const{
     return item[cell]->GetAlpha(pos % CELL_SIZE);
 }
 
-void Tile::DrawTile() const{
+void Tile::DrawTile() {
     Point2i firstCell = Clamp(camera.GetPosition() / CELL_SIZE);
     Point2i lastCell = Clamp((camera.GetPosition() + camera.GetSize()) / CELL_SIZE);
 	Point2i i;
-
     for( i.y = firstCell.y; i.y <= lastCell.y; i.y++ )
         for( i.x = firstCell.x; i.x <= lastCell.x; i.x++)
-            item[i.y*nbCells.x + i.x]->Draw( i );
+	  item[i.y*nbCells.x + i.x]->Draw( i );
 }
 
 void Tile::DrawTile_Clipped(Rectanglei worldClip) const
@@ -181,7 +199,7 @@ void Tile::DrawTile_Clipped(Rectanglei worldClip) const
 
     for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
         for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
-            // For all selected items, clip source and destination blitting rectangles 
+		// For all selected items, clip source and destination blitting rectangles 
 			Rectanglei destRect(c * CELL_SIZE, CELL_SIZE);
 
 			destRect.Clip(worldClip);
@@ -230,4 +248,25 @@ Surface Tile::GetPart(Rectanglei& rec)
     item[i.y*nbCells.x + i.x]->GetSurface().SetAlpha(SDL_SRCALPHA, 0);
   }
   return part;
+}
+
+void Tile::CheckEmptyTiles()
+{
+  for( int i = 0; i < nbCells.x * nbCells.y; i++ )
+  {
+    if(item[i]->IsTotallyEmpty()) continue;
+
+    TileItem_AlphaSoftware* t = static_cast<TileItem_AlphaSoftware*>(item[i]);
+    if(t->need_check_empty)
+      t->CheckEmpty();
+    if(t->need_delete)
+   {
+      // no need to display this tile as it can be deleted!
+#ifdef DBG_TILE
+     printf("Deleting tile %i\n",i);
+#endif
+      delete item[i];
+      item[i] = (TileItem*)new TileItem_Empty;
+    }
+  }
 }
