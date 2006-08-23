@@ -41,7 +41,7 @@
 #include "../weapon/weapons_list.h"
 #include "../weapon/explosion.h"
 
-// Delta appliqu��l'angle du viseur
+// Delta angle used to move the crosshair
 #define DELTA_CROSSHAIR 2
 
 ActionHandler * ActionHandler::singleton = NULL;
@@ -99,9 +99,9 @@ void Action_ChangeCharacter (Action *a)
 
 void Action_Shoot (Action *a)
 {
-  double angle = a->PopDouble();
-  int force = a->PopInt();
-  ActiveTeam().AccessWeapon().Shoot(angle, force);
+  double strength = a->PopDouble();
+  int angle = a->PopInt();
+  ActiveTeam().AccessWeapon().Shoot(strength, angle);
 }
 
 void Action_Wind (Action *a)
