@@ -47,14 +47,6 @@ Obus::Obus(AirAttackConfig& cfg) :
   Ready();
 }
 
-void Obus::SignalCollision()
-{ 
-  lst_objects.RemoveObject(this);
-
-  if (!IsGhost())
-    Explosion();
-}
-
 //-----------------------------------------------------------------------------
 
 Plane::Plane(AirAttackConfig &p_cfg) : 
