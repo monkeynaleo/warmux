@@ -39,7 +39,6 @@ public:
   BatonDynamite(ExplosiveWeaponConfig& cfg,
                 WeaponLauncher * p_launcher);
   void Reset();
-  void Draw();
   void Refresh();
 
 protected:

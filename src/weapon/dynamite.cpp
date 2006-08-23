@@ -62,15 +62,9 @@ void BatonDynamite::Reset()
 
 void BatonDynamite::Refresh()
 {
-  assert (!IsGhost());
+  // Why we can be here as a Ghost ??? assert (!IsGhost());
   image->Update();
   if (image->IsFinished()) Explosion();
-}
-
-void BatonDynamite::Draw()
-{
-  assert (!IsGhost());
-  image->Draw(GetPosition());
 }
 
 void BatonDynamite::ShootSound()
