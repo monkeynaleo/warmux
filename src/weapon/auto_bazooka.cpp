@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme bazooka : projette une roquette avec un angle et une force donn�.
+ * auto bazooka : launch a homing missile
  *****************************************************************************/
 
 #include "auto_bazooka.h"
@@ -38,7 +38,7 @@
 #endif
 
 
-// time in second. After this time, the rocket homing to the target
+// time in second before rocket look for the target
 const uint TPS_AV_ATTIRANCE = 1;
 
 //-----------------------------------------------------------------------------
