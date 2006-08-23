@@ -42,9 +42,6 @@ class Obus : public WeaponProjectile
 {
 public:
   Obus(AirAttackConfig& cfg);
-
-protected:
-  void SignalCollision();
 };
 
 class Plane : public PhysicalObj
