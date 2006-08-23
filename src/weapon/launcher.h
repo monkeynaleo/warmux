@@ -95,6 +95,10 @@ class WeaponBullet : public WeaponProjectile
 
 class WeaponLauncher : public Weapon
 {
+  public:
+    bool ignore_timeout_signal;
+    bool ignore_collision_signal;
+    bool ignore_explosion_signal;
   protected:
     WeaponProjectile * projectile;
     uint nb_active_projectile;
