@@ -74,7 +74,7 @@ void WeaponBullet::Explosion()
   if (IsGhost())
   {
     MSG_DEBUG (m_name.c_str(), "Ghost");
-    if (launcher != NULL) launcher->SignalProjectileExplosion();
+    if (launcher != NULL && !launcher->ignore_explosion_signal) launcher->SignalProjectileExplosion();
     return;
   }
   
@@ -94,7 +94,7 @@ void WeaponBullet::Explosion()
       tmp -> UpdatePosition();
     }
   }
-  if (launcher != NULL) launcher->SignalProjectileExplosion();
+  if (launcher != NULL && !launcher->ignore_explosion_signal) launcher->SignalProjectileExplosion();
 }
 
 void WeaponBullet::DoExplosion()
@@ -209,18 +209,18 @@ void WeaponProjectile::SignalCollisionObject()
   PhysicalObj * obj = GetLastCollidingObject();
   assert (obj != NULL);
   
-  if (launcher != NULL) launcher->SignalProjectileCollision();
+  if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
   if (typeid(*obj) == typeid(Character) && !IsGhost()) Explosion();
 }
 
 // Default behavior : signal to launcher a collision and explode
 void WeaponProjectile::SignalCollision()
 {
-  if (launcher != NULL) launcher->SignalProjectileCollision();
+  if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
   if (explode_with_collision || IsGhost()) Explosion();
 }
 
-void WeaponProjectile::SignalGhostState (bool)
+void WeaponProjectile::SignalGhostState(bool)
 {
   SignalCollision();
 }
@@ -248,7 +248,7 @@ void WeaponProjectile::Explosion()
 
 void WeaponProjectile::SignalExplosion()
 {
-  if (launcher != NULL) launcher->SignalProjectileExplosion();
+  if (launcher != NULL && !launcher->ignore_explosion_signal) launcher->SignalProjectileExplosion();
 }
 
 void WeaponProjectile::DoExplosion()
@@ -260,20 +260,20 @@ void WeaponProjectile::DoExplosion()
 void WeaponProjectile::IncrementTimeOut()
 {
   if (cfg.allow_change_timeout && GetTotalTimeout()<(int)cfg.timeout*2) 
-      m_timeout_modifier += 1 ;
+    m_timeout_modifier += 1 ;
 }
 
 void WeaponProjectile::DecrementTimeOut()
 {
   // -1s for grenade timout. 1 is min.
   if (cfg.allow_change_timeout && GetTotalTimeout()>1) 
-      m_timeout_modifier -= 1 ;
+    m_timeout_modifier -= 1 ;
 }
 
 void WeaponProjectile::SetTimeOut(int timeout)
 {
   if (cfg.allow_change_timeout && timeout <= (int)cfg.timeout*2 && timeout >= 1)
-      m_timeout_modifier = timeout - cfg.timeout ;
+    m_timeout_modifier = timeout - cfg.timeout ;
 }
 
 void WeaponProjectile::ResetTimeOut()
@@ -289,7 +289,7 @@ int WeaponProjectile::GetTotalTimeout()
 // Signal a projectile timeout and explode
 void WeaponProjectile::SignalTimeout()
 {
-  if (launcher != NULL) launcher->SignalProjectileTimeout();
+  if (launcher != NULL && !launcher->ignore_timeout_signal) launcher->SignalProjectileTimeout();
   if (explode_with_timeout || IsGhost()) Explosion();
 }
 
@@ -309,6 +309,9 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
 {  
   projectile = NULL;
   nb_active_projectile = 0;
+  ignore_timeout_signal = false;
+  ignore_collision_signal = false;
+  ignore_explosion_signal = false;
 }
 
 WeaponLauncher::~WeaponLauncher()
