@@ -54,7 +54,6 @@ void RoquetteRiotBomb::SignalCollision()
     GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
   }
   WeaponProjectile::SignalCollision();
-  Explosion();
 }
 
 void RoquetteRiotBomb::DoExplosion()
