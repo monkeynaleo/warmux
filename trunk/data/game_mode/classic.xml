@@ -37,6 +37,7 @@
       <nb_ammo>3</nb_ammo>
       <damage>75</damage>
       <explosion_range>75</explosion_range>
+      <particle_range>82</particle_range>
       <blast_force>10</blast_force>
       <blast_range>4</blast_range>
       <timeout>3</timeout>
@@ -50,6 +51,7 @@
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>75</explosion_range>
+      <particle_range>82</particle_range>
       <blast_range>4</blast_range>
       <blast_force>10</blast_force>
       <speed>60</speed>
@@ -65,6 +67,7 @@
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>65</explosion_range>
+      <particle_range>71</particle_range>
       <blast_range>2.5</blast_range>
       <blast_force>6</blast_force>
       <timeout>6</timeout>
@@ -79,6 +82,7 @@
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>50</explosion_range>
+      <particle_range>55</particle_range>
       <blast_range>3.5</blast_range>
       <blast_force>5</blast_force>
     </bazooka>
@@ -91,6 +95,7 @@
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>50</explosion_range>
+      <particle_range>55</particle_range>
       <blast_range>3.5</blast_range>
       <blast_force>5</blast_force>
     </automatic_bazooka>
@@ -116,6 +121,7 @@
       <min_angle>45</min_angle>
       <max_angle>45</max_angle>
       <explosion_range>50</explosion_range>
+      <particle_range>55</particle_range>
       <blast_range>4</blast_range>
       <blast_force>8</blast_force>
       <timeout>10</timeout>
@@ -130,6 +136,7 @@
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>50</explosion_range>
+      <particle_range>55</particle_range>
       <blast_range>4</blast_range>
       <blast_force>8</blast_force>
       <timeout>3</timeout>
@@ -143,6 +150,7 @@
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>75</explosion_range>
+      <particle_range>82</particle_range>
       <blast_range>6</blast_range>
       <blast_force>15</blast_force>
       <timeout>5</timeout>
@@ -157,6 +165,7 @@
       <min_angle>-89</min_angle>
       <max_angle>89</max_angle>
       <explosion_range>50</explosion_range>
+      <particle_range>55</particle_range>
       <blast_range>3</blast_range>
       <blast_force>5</blast_force>
       <timeout>3</timeout>
@@ -171,17 +180,21 @@
       <nb_ammo>-1</nb_ammo>
       <unit_per_ammo>2</unit_per_ammo>
       <damage>25</damage>
+      <explosion_range>5</explosion_range>
+      <particle_range>5</particle_range>
       <blast_range>2</blast_range>
       <blast_force>5</blast_force>
     </gun>
 
-    <m16>
+    <m16> <!-- Aka submachine gun -->
       <position origin="hand" x="-7" y="-5" />
       <min_angle>-40</min_angle>
       <max_angle>89</max_angle>
       <nb_ammo>6</nb_ammo>
       <unit_per_ammo>10</unit_per_ammo>
       <damage>5</damage>
+      <explosion_range>15</explosion_range>
+      <particle_range>16</particle_range>
     </m16>
     
     <snipe_rifle>
@@ -191,6 +204,8 @@
       <nb_ammo>2</nb_ammo>
       <unit_per_ammo>2</unit_per_ammo>
       <damage>35</damage>
+      <explosion_range>15</explosion_range>
+      <particle_range>16</particle_range>
     </snipe_rifle>
     
     <baseball>
@@ -243,6 +258,7 @@
       <nb_ammo>-1</nb_ammo>
       <damage>20</damage>
       <explosion_range>65</explosion_range>
+      <particle_range>71</particle_range>
       <blast_range>4</blast_range>
       <blast_force>7</blast_force>
     </suicide>
@@ -261,6 +277,7 @@
       <nb_ammo>-1</nb_ammo>
       <damage>50</damage>
       <explosion_range>50</explosion_range>
+      <particle_range>55</particle_range>
       <blast_range>3</blast_range>
       <blast_force>5</blast_force>
       <detection_range>1</detection_range>

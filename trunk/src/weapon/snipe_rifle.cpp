@@ -32,7 +32,6 @@
 #include "../game/game_loop.h"
 
 
-const uint SNIPE_RIFLE_EXPLOSION_RANGE = 15;
 const uint SNIPE_RIFLE_BEAM_START = 40;
 const uint SNIPE_RIFLE_BULLET_SPEED = 20;
 const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
@@ -41,7 +40,6 @@ SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :
     WeaponBullet("snipe_rifle_bullet", cfg, p_launcher)
 { 
-  cfg.explosion_range = SNIPE_RIFLE_EXPLOSION_RANGE;
 }
 
 void SnipeBullet::ShootSound()
