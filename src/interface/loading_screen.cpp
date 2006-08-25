@@ -62,6 +62,7 @@ LoadingScreen * LoadingScreen::GetInstance()
 
 void LoadingScreen::DrawBackground() 
 {
+  loading_bg->ScaleSize(AppWormux::GetInstance()->video.window.GetWidth(), AppWormux::GetInstance()->video.window.GetHeight());
   loading_bg->Blit( AppWormux::GetInstance()->video.window, 0, 0);
   AppWormux::GetInstance()->video.Flip();
 }
