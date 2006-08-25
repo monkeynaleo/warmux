@@ -46,7 +46,7 @@ SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
 
 void SubMachineGunBullet::ShootSound()
 {
-  jukebox.Play("share", "weapon/uzi"); // TODO: change for m16
+  jukebox.Play("share", "weapon/m16");
 }
 
 //-----------------------------------------------------------------------------
