@@ -80,6 +80,7 @@ class Surface
 			int RectangleColor(const Rectanglei &rect, const Color &color);
 			int VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color);
                         int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
+                        int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
 
 			int Fill(Uint32 color);
 			int Fill(const Color &color);

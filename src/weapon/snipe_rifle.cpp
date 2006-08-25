@@ -25,6 +25,7 @@
 #include "../game/time.h"
 #include "../interface/game_msg.h"
 #include "../map/map.h"
+#include "../map/camera.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
@@ -58,9 +59,6 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   projectile = new SnipeBullet(cfg(),dynamic_cast<WeaponLauncher *>(this));
   targeting_something = false;
   m_laser_image = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
-  int size = SNIPE_RIFLE_MAX_BEAM_SIZE - SNIPE_RIFLE_BEAM_START;
-  Surface * tmp = new Surface(Point2i(size,size),SDL_SWSURFACE|SDL_SRCALPHA,true);
-  m_laser_beam_image = new Sprite(*tmp);
 }
 
 bool SnipeRifle::p_Shoot()
@@ -124,7 +122,6 @@ bool SnipeRifle::ComputeCrossPoint(bool force = false)
     distance = (int) start_point.Distance(pos);
   }
   targeted_point=pos;
-  PrepareLaserBeam();
   return targeting_something;
 }
 
@@ -134,38 +131,60 @@ void SnipeRifle::p_Deselect()
   ActiveTeam().crosshair.ChangeAngleVal(0);
 }
 
-// Prepare the laser beam Sprite
-void SnipeRifle::PrepareLaserBeam()
+void SnipeRifle::DrawBeam()
 {
-  uint x_orig,x_dest,y_orig,y_dest;
-  Point2i pos = laser_beam_start;
-  if (pos.x >= targeted_point.x) {
-    laser_beam_pos.x = targeted_point.x;
-    x_orig = pos.x - targeted_point.x;
-    x_dest = 0;
-  } else {
-    laser_beam_pos.x = pos.x;
-    x_dest = targeted_point.x - pos.x;
-    x_orig = 0;
+  Point2i pos1 = laser_beam_start - camera.GetPosition();
+  Point2i pos2 = targeted_point - camera.GetPosition();
+  AppWormux::GetInstance()->video.window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, Color(255, 0, 0, 100));
+
+  // Set area of the screen to be redrawn:
+  // Splited into little rectangles to avoid too large area of redraw
+  float redraw_size = 20.0;
+  float dst = laser_beam_start.Distance(targeted_point);
+  Point2f pos = Point2f((float)laser_beam_start.x, (float)laser_beam_start.y);
+  Point2f delta = ( Point2f((float)targeted_point.x, (float)targeted_point.y) - pos ) * redraw_size / dst;
+  Point2i delta_i((int)delta.x, (int)delta.y);
+
+  if(delta_i.x < 0) delta_i.x = - delta_i.x; // the Map::ToRedraw method doesn't support negative rectangles
+  if(delta_i.y < 0) delta_i.y = - delta_i.y;
+  delta_i.x += 6; // We have to increase the size of the rectangle so the corner of the rectangles overlaps
+  delta_i.y += 6;
+
+  int i = 0;
+  while( (float)i * redraw_size < dst )
+  {
+    // float to int conversion...
+    Point2i pos_i((int)pos.x, (int)pos.y);
+    if(delta.x < 0.0)
+    {
+      pos_i.x -= delta_i.x;
+      pos_i.x += 3;
+    }
+    else
+      pos_i.x -= 3;
+
+    if(delta.y < 0.0)
+    {
+      pos_i.y -= delta_i.y;
+      pos_i.y += 3;
+    }
+    else
+      pos_i.y -= 3;
+
+    world.ToRedrawOnMap(Rectanglei( pos_i, delta_i ));
+    pos += delta;
+    i++;
   }
-  if (pos.y >= targeted_point.y) {
-    laser_beam_pos.y = targeted_point.y;
-    y_orig = pos.y - targeted_point.y;
-    y_dest = 0;
-  } else {
-    laser_beam_pos.y = pos.y;
-    y_dest = targeted_point.y - pos.y;
-    y_orig = 0;
-  }
-  (*m_laser_beam_image)[0].surface.Fill(0);
-  (*m_laser_beam_image)[0].surface.LineColor(x_orig,x_dest,y_orig,y_dest,Color(255,0,0,255));
 }
 
 void SnipeRifle::Draw()
 {
   if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsActive() ) return;
   ComputeCrossPoint();
-  m_laser_beam_image->Draw(laser_beam_pos);
+//  (*m_laser_beam_image)[0].surface.LineColor(x_orig,x_dest,y_orig,y_dest,Color(255,0,0,255));
+//  m_laser_beam_image->Draw(laser_beam_pos);
+  DrawBeam();
+
   if( targeting_something ) m_laser_image->Draw(targeted_point - (m_laser_image->GetSize()/2));      // Draw the laser impact
   WeaponLauncher::Draw();
 }
