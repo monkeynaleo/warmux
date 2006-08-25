@@ -40,23 +40,21 @@ class SnipeRifle : public WeaponLauncher
   private:
     double last_angle;
     Point2i last_rifle_pos;
-    Point2i laser_beam_pos;
     Point2i laser_beam_start;
     Point2i targeted_point;
     bool targeting_something;
     Sprite * m_laser_image;
-    Sprite * m_laser_beam_image;
 
   private:
     bool p_Shoot();
     bool ComputeCrossPoint(bool force);
-    void PrepareLaserBeam();
   protected:
     void SignalProjectileExplosion();
     void p_Deselect();
   public:
     SnipeRifle();
-    void Draw();  // In order to draw the laser beam.
+    void DrawBeam();
+    void Draw();  // In order to draw the laser beam / and the contact point.
 };
 
 #endif /* SNIPE_RIFLE_H */
