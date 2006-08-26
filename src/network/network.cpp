@@ -323,7 +323,7 @@ void Network::SendAction(Action* a)
 
   packet[packet_max_size - 1] = 0xFF;
 
-  assert(packet[0] != 0 );
+  assert(*((int*)packet) != 0 );
 
   for(std::list<TCPsocket>::iterator client = conn.begin();
       client != conn.end();
