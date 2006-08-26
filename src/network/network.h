@@ -57,8 +57,6 @@ private:
   IPaddress ip; // for server : store listening port
                 // for client : store server address/port
 
-  Action* make_action(char* packet);
-
 public:
   uint max_player_number;
   uint connected_player;
