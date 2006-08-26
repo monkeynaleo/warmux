@@ -60,7 +60,7 @@ public:
   double PopDouble();
   std::string PopString();
 
-  void Write(char* os);
+  void WritePacket(char* & packet, Uint32 & size);
   Action_t GetType() const;
 };
 

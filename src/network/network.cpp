@@ -29,9 +29,6 @@
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
-const uint packet_max_size = 100; // in bytes
-
-//-----------------------------------------------------------------------------
 Network network;
 
 //-----------------------------------------------------------------------------
@@ -229,7 +226,7 @@ void Network::RejectIncoming()
 //-----------------------------------------------------------------------------
 void Network::ReceiveActions()
 {
-  char packet[packet_max_size];
+  char* packet;
 
   uint i;
   int received;
@@ -269,19 +266,20 @@ void Network::ReceiveActions()
           sock = CloseConnection(sock);
           continue;
         }
-        packet_size = SDLNet_Read32(&net_size);
+        packet_size = (int)SDLNet_Read32(&net_size);
         assert(packet_size > 0);
 
-
         // Fill the packet while it didn't reached its size
-        memset(packet,0, packet_max_size);
+        packet = (char*)malloc(packet_size);
         while(packet_size != i)
         {
           received = SDLNet_TCP_Recv(*sock, packet + i, packet_size - i);
           if(received > 0)
             i += received;
           if(received < 0)
+	  {assert(false);
             std::cerr << "Malformed packet" << std::endl;
+	  }
         }
 
         Action* a = new Action(packet);
@@ -298,9 +296,10 @@ void Network::ReceiveActions()
             client++)
         if(client != sock)
         {
-          SDLNet_TCP_Send(*client,&packet_size,1);
-          SDLNet_TCP_Send(*client,packet,packet_max_size);
+          SDLNet_TCP_Send(*client,&packet_size,4);
+          SDLNet_TCP_Send(*client,packet,packet_size);
         }
+	free(packet);
       }
       sock++;
     }
@@ -315,13 +314,11 @@ void Network::SendAction(Action* a)
   MSG_DEBUG("network.traffic","Send action %s",
         ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
+  Uint32 size_tmp;
+  char* packet;
+  a->WritePacket(packet, size_tmp);
   Uint32 size;
-  SDLNet_Write32(packet_max_size, &size);
-  char packet[packet_max_size];
-  memset(packet,0,packet_max_size);
-  a->Write(packet);
-
-  packet[packet_max_size - 1] = 0xFF;
+  SDLNet_Write32(size_tmp, &size);
 
   assert(*((int*)packet) != 0 );
 
@@ -330,8 +327,9 @@ void Network::SendAction(Action* a)
       client++)
   {
     SDLNet_TCP_Send(*client,&size,4);
-    SDLNet_TCP_Send(*client,packet,packet_max_size);
+    SDLNet_TCP_Send(*client,packet,size_tmp);
   }
+  free(packet);
 }
 
 //-----------------------------------------------------------------------------

@@ -71,14 +71,19 @@ Action_t Action::GetType() const
 }
 
 // Convert the action to a packet
-void Action::Write(char* os)
+void Action::WritePacket(char* &packet, Uint32 & size)
 {
+  size = 4 //Size of the type;
+        + 4 //Size of the number of variable
+        + var.size() * 4;
+
+  packet = (char*)malloc(size);
+  char* os = packet;
+
   SDLNet_Write32(m_type, os);
   os += 4;
-  Uint32 tmp;
-  int size = (int)var.size();
-  memcpy(&tmp, &size, 4);
-  SDLNet_Write32(tmp, os);
+  Uint32 param_size = (Uint32)var.size();
+  SDLNet_Write32(param_size, os);
   os += 4;
 
   for(std::list<Uint32>::iterator val = var.begin(); val!=var.end(); val++)
