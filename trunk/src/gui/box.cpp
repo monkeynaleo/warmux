@@ -63,7 +63,7 @@ void Box::Draw(const Point2i &mousePosition)
 	
   if( visible ){
     AppWormux::GetInstance()->video.window.BoxColor(rect, defaultOptionColorBox);
-    AppWormux::GetInstance()->video.window.RectangleColor(rect, defaultOptionColorRect);
+    AppWormux::GetInstance()->video.window.RectangleColor(rect, defaultOptionColorRect,2);
   }
 }
 
