@@ -55,32 +55,9 @@ NetworkMenu::NetworkMenu() :
   
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
-  // Connection related widgets
-  connection_box = new VBox(Rectanglei( 475 + 30 + 5, TEAMS_Y, 800-475-40, 1));
-  connection_box->AddWidget(new Label(_("Server adress:"), rectZero, *normal_font));
-
-  server_adress = new TextBox("192.168.0.13", rectZero, *normal_font);
-  connection_box->AddWidget(server_adress);
-
-  start_client = new ButtonText( Point2i(400,30),
-                        res, "main_menu/button",
-                        _("Connect to game"),
-                        normal_font);
-  start_client->SetSizePosition(Rectanglei(600,30, 150, 30));
-  connection_box->AddWidget(start_client);
-
-  start_server = new ButtonText( Point2i(400,30),
-                        res, "main_menu/button",
-                        _("Host a game"),
-                        normal_font);
-  start_server->SetSizePosition(Rectanglei(600,90, 150, 30));
-  connection_box->AddWidget(start_server);
-
-  widgets.AddWidget(connection_box);
-
   // Game options widgets
   player_number = new SpinButton(_("Max number of players:"), rectZero, GameMode::GetInstance()->max_teams, 1, 2, GameMode::GetInstance()->max_teams);
-  options_box = new VBox(Rectanglei( 475 + 30 + 5, connection_box->GetSizeY() + 2 * TEAMS_Y, 800-475-40, 1));
+  options_box = new VBox(Rectanglei( 475 + 30 + 5, TEAMS_Y + 2 * TEAMS_Y, 800-475-40, 1));
   options_box->AddWidget(new Label(_("Game options:"),rectZero, *normal_font));
   options_box->AddWidget(player_number);
   connected_players = new Label((std::string)"0" + _(" players connected"), rectZero, *normal_font);
@@ -92,18 +69,6 @@ NetworkMenu::NetworkMenu() :
 
   msg_box = new MessageBox(11, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(msg_box);
-
-  msg_box->NewMessage("WARNING!! Network is still under heavy");
-  msg_box->NewMessage(" developement and therefore a little");
-  msg_box->NewMessage(" experimental.");
-  msg_box->NewMessage("Wait for everybody to be connected");
-  msg_box->NewMessage(" before selecting your options!");
-  msg_box->NewMessage("Some weapons don't work yet");
-  msg_box->NewMessage(" (supertux, teleportation, ninjarope,");
-  msg_box->NewMessage(" jetpack, airhammer), and surely");
-  msg_box->NewMessage(" many other things don't work either!");
-  msg_box->NewMessage("Have a good game!");
-  msg_box->NewMessage(""); // Skip a line
 
   // Center the boxes!
   uint x = 30;
@@ -199,41 +164,6 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 {     
   ActionHandler * action_handler = ActionHandler::GetInstance();
   Widget* w = widgets.Clic(mousePosition, button);
-  if (w == start_client)
-  {
-    network.Init();
-    network.ClientConnect(server_adress->GetText(),WORMUX_NETWORK_PORT);
-    if(network.IsConnected())
-    {
-      //team_box->enabled = true;
-      //map_box->enabled = true;
-      //lbox_maps->enabled = false;
-      //connection_box->enabled = false;
-      //b_ok->enabled = true;
-      msg_box->NewMessage(_("Connected to ") + server_adress->GetText());
-      msg_box->NewMessage("Click the green check when you are ready to");
-      msg_box->NewMessage("play!");
-    }
-    else
-      msg_box->NewMessage(_("Unable to connect"));
-  }
-
-  if (w == start_server)
-  {
-    network.Init();
-    network.ServerStart(WORMUX_NETWORK_PORT);
-    if(network.IsConnected())
-    {
-      network.client_inited = 1;
-      // team_box->enabled = true;
-//       map_box->enabled = true;
-//       options_box->enabled = true;
-//       connection_box->enabled = false;
-      msg_box->NewMessage(_("Server started"));
-    }
-    else
-      msg_box->NewMessage(_("Unable to start server"));
-  }
 
   if (w == lbox_maps)
   {
@@ -398,7 +328,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
       }
     }
 
-    map_box->Draw(mousePosition);
+    //map_box->Draw(mousePosition);
 
     //Refresh the number of connected players:
     char nbr[3];
