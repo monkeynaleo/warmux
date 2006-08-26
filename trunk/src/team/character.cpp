@@ -80,7 +80,7 @@ const uint HAUT_ENERGIE = 6;
 Character::Character (Team& my_team, const std::string &name) :
   PhysicalObj("character"), m_team(my_team)
 {
-  SetCollisionModel(false, true, false);
+  SetCollisionModel(false, true, true);
 
   body = NULL;
   step_sound_played = true;

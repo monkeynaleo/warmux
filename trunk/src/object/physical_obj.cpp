@@ -39,6 +39,7 @@
 #include "../tool/point.h"
 #include "../tool/rectangle.h"
 #include "../weapon/ninja_rope.h"
+#include "../weapon/launcher.h"
 
 const int Y_OBJET_MIN = -10000;
 const int WATER_RESIST_FACTOR = 6;
@@ -569,7 +570,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position)
 	{
 	  tmp = &(*character);
 	  if (tmp != this 
-	      && (tmp != &ActiveCharacter() || typeid(*this) == typeid(Character))) // hack to avoid collision between
+	      && (tmp != &ActiveCharacter() || typeid(*this) != typeid(WeaponProjectile))) // hack to avoid collision between
 	    // active character and a weapon projectile when launching it
 	    // but manage collision of character between character (see bug 6684)
 	    {
