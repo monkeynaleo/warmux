@@ -46,7 +46,7 @@ public:
   Action (Action_t type, const std::string& value);
 
   // Build an action from a network packet
-  Action (Action_t type, char* is);
+  Action (const char* is);
 
   ~Action();
 

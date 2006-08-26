@@ -284,7 +284,7 @@ void Network::ReceiveActions()
             std::cerr << "Malformed packet" << std::endl;
         }
 
-        Action* a = make_action(packet);
+        Action* a = new Action(packet);
         MSG_DEBUG("network.traffic","Received action %s",
                 ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
@@ -340,13 +340,5 @@ const bool Network::IsConnected() const { return m_is_connected; }
 const bool Network::IsLocal() const { return !m_is_server && !m_is_client; }
 const bool Network::IsServer() const { return m_is_server; }
 const bool Network::IsClient() const { return m_is_client; }
-
-//-----------------------------------------------------------------------------
-
-Action* Network::make_action(char* packet)
-{ 
-  Action_t type = (Action_t)SDLNet_Read32(packet);
-  return new Action(type);
-}
 
 //-----------------------------------------------------------------------------

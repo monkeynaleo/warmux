@@ -46,9 +46,10 @@ Action::Action (Action_t type, double value1, int value2) : m_type(type)
 {  Push(value1); Push(value2);  }
 
 // Build an action from a network packet
-Action::Action (Action_t type, char *is)
+Action::Action (const char *is)
 {
-  m_type = type; 
+  m_type = (Action_t)SDLNet_Read32(is);
+  is += 4;
   int m_lenght = SDLNet_Read32(is);
   is += 4;
 
