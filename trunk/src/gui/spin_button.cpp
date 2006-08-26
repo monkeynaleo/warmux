@@ -53,8 +53,8 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
   
   uint margin = 5;
 
-  m_plus = new Button( Rectanglei(position.x + size.x - 5, position.y, 5, 10), res, "menu/plus");
-  m_minus = new Button( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10), res, "menu/minus");   
+  m_plus = new Button( Point2i(position.x + size.x - 5, position.y), res, "menu/plus");
+  m_minus = new Button( Point2i(position.x + size.x - max_value_w - 5 - 2 * margin, position.y), res, "menu/minus");   
 
   m_step = step;
 }
