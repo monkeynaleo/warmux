@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <name>Beastie Team</name>
+  <surface name="flag" file="flag.png" />
+  <team>
+    <character name="Beastie" body="beastieteam" />
+    <character name="FreeBsd" body="beastieteam" />
+    <character name="OpenBsd" body="beastieteam" />
+    <character name="OpenSSH" body="beastieteam" />
+    <character name="NetBsd" body="beastieteam" />
+    <character name="PCBsd" body="beastieteam" />
+    <character name="OpenNTPD" body="beastieteam" />
+    <character name="666" body="beastieteam" />
+    <character name="Deamon" body="beastieteam" />
+  </team>
+</resources>
