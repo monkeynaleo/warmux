@@ -338,13 +338,37 @@ int Surface::BoxColor(const Rectanglei &rect, const Color &color){
 	return boxRGBA( surface, rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), ptBR.GetY(), color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
-int Surface::RectangleColor(const Rectanglei &rect, const Color &color){
-    if( rect.IsSizeZero() )
-        return 0;
+int Surface::RectangleColor(const Rectanglei &rect, const Color &color, const uint &border_size)
+{
+  if( rect.IsSizeZero() )
+    return 0;
+  
+  Point2i ptBR = rect.GetBottomRightPoint();
+  
+  if (border_size == 1)
+    return rectangleRGBA( surface, rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), ptBR.GetY(), color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 
-	Point2i ptBR = rect.GetBottomRightPoint();
+  // top border
+  boxRGBA (surface, 
+	   rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), rect.GetPositionY()+border_size, 
+	   color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+  
+  // bottom border
+  boxRGBA (surface, 
+	   rect.GetPositionX(), ptBR.GetY() - border_size, ptBR.GetX(), ptBR.GetY(), 
+	   color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 
-	return rectangleRGBA( surface, rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), ptBR.GetY(), color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+  // left border
+  boxRGBA (surface, 
+	   rect.GetPositionX(), rect.GetPositionY() + border_size, rect.GetPositionX()+border_size, ptBR.GetY()-border_size, 
+	   color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+
+  // right border
+  boxRGBA (surface, 
+	   ptBR.GetX() - border_size, rect.GetPositionY() + border_size, ptBR.GetX(), ptBR.GetY()-border_size, 
+	   color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+
+  return 1;
 }
 
 int Surface::VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color){

@@ -77,7 +77,7 @@ class Surface
 			void Flip();
 
 			int BoxColor(const Rectanglei &rect, const Color &color);
-			int RectangleColor(const Rectanglei &rect, const Color &color);
+			int RectangleColor(const Rectanglei &rect, const Color &color, const uint &border_size = 1);
 			int VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color);
                         int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
                         int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
