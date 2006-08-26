@@ -22,12 +22,14 @@
 #include "label.h"
 #include "../include/app.h"
 
-Label::Label (const std::string &label, const Rectanglei &rect, Font& _font){
+Label::Label (const std::string &label, const Rectanglei &rect, Font& _font,
+	      const Color& color) : font_color(color)
+{
   position = rect.GetPosition();
   size = rect.GetSize();
   size.y = _font.GetHeight();
   font = &_font;
-  txt_label = new Text(label, white_color, &_font);
+  txt_label = new Text(label, font_color, &_font);
 }
 
 Label::~Label(){
@@ -45,7 +47,7 @@ void Label::SetSizePosition(const Rectanglei &rect){
 void Label::SetText(std::string &new_txt)
 {
   delete txt_label;
-  txt_label = new Text(new_txt, white_color, font);
+  txt_label = new Text(new_txt, font_color, font);
 }
 
 std::string& Label::GetText()

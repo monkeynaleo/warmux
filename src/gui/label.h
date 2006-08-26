@@ -32,14 +32,18 @@ class Label : public Widget{
   Text *txt_label;
  private:
   Font *font;
-   
+  const Color& font_color;
+
  public:
-  Label(const std::string &label, const Rectanglei &rect, Font& font);
+  Label(const std::string &label, const Rectanglei &rect, Font& font,
+	const Color& color = white_color);
   ~Label();
   void Draw (const Point2i &mousePosition);
   void SetSizePosition(const Rectanglei &rect);
   void SetText(std::string &new_txt);
   std::string &GetText();
+
+  void SetFontColor(const Color& color);
 };
 
 #endif
