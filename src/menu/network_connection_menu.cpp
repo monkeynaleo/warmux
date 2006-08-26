@@ -136,11 +136,11 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
     // run the network menu ! :-)
     NetworkMenu nm;
     nm.Run();
-  }
 
-  // for the moment, it's just for test...
-  close_menu = true;
-  sig_ok();
+    // for the moment, it's just for test...
+    close_menu = true;
+    sig_ok();
+  }
 }
 
 void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
