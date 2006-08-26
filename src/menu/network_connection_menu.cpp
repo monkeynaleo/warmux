@@ -22,6 +22,7 @@
 
 
 #include "network_connection_menu.h"
+#include "network_menu.h"
 
 #include "../game/game.h"
 #include "../game/config.h"
@@ -130,9 +131,16 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
       msg_box->NewMessage(_("Unable to start server"));
   }
 
+
+  if (network.IsConnected()) {
+    // run the network menu ! :-)
+    NetworkMenu nm;
+    nm.Run();
+  }
+
   // for the moment, it's just for test...
-  //close_menu = true;
-  //sig_ok();
+  close_menu = true;
+  sig_ok();
 }
 
 void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}

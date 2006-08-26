@@ -38,12 +38,6 @@ class NetworkMenu : public Menu
 
    std::list<std::string> connected_client;
 
-   /* Connection controllers */
-   TextBox* server_adress;
-   ButtonText* start_client;
-   ButtonText* start_server;
-   VBox* connection_box;
-
    /* Options controllers */
    SpinButton* player_number;
    VBox* options_box;
