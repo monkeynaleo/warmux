@@ -98,7 +98,6 @@ Weapon::Weapon(Weapon_type type,
 
   m_visibility = visibility;
   m_unit_visibility = ALWAYS_VISIBLE;
-  extra_params = NULL;
    
   m_image = NULL;
 
