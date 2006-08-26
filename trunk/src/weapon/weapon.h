@@ -136,7 +136,7 @@ public:
 	 const std::string &id,
 	 EmptyWeaponConfig * params,
 	 weapon_visibility_t visibility = ALWAYS_VISIBLE);
-  virtual ~Weapon() {}
+  virtual ~Weapon();
 
   // Select or deselect the weapon
   void Select(); 
