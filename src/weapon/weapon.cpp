@@ -118,6 +118,12 @@ Weapon::Weapon(Weapon_type type,
   icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
 }
 
+Weapon::~Weapon()
+{
+  if (extra_params)
+    delete extra_params;
+}
+
 void Weapon::p_Select () {}
 void Weapon::p_Deselect () {}
 void Weapon::HandleKeyEvent(int key, int event_type) {}
