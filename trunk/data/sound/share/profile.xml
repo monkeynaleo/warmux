@@ -18,7 +18,7 @@
   <sound sample="weapon/mine_beep" file="../../weapon/sound/mine_beep.ogg" />
   <sound sample="weapon/load" file="../../weapon/sound/load.ogg" />
   <sound sample="weapon/explosion" file="explosion.ogg" />
-  <sound sample="weapon/uzi" file="../../weapon/sound/uzi.ogg" />
+  <sound sample="weapon/m16" file="../../weapon/sound/m16.ogg" />
   <sound sample="weapon/alleluia" file="../../weapon/sound/alleluia.ogg" />
 
 
