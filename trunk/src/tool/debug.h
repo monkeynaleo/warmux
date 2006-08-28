@@ -27,8 +27,8 @@
  * MSG_DEBUG use standart printf style for the message.
  * 
  * A debug will be printed only if there is a mode game or game.pause. A mode can be added by running wormux with:
- * ./wormux --add-debug-mode game        # print all messages in game section
- * ./wormux --add-debug-mode ""          # print all debug messages
+ * ./wormux -d game        # print all messages in game section
+ * ./wormux -d ""          # print all debug messages
  *
  */
 #ifdef DEBUG
