@@ -19,12 +19,14 @@
 <!ELEMENT is_open (#PCDATA)>
 <!ELEMENT infinite_background (#PCDATA)>
 
-<!ELEMENT sprite (image)>
+<!ELEMENT sprite (image, animation?)>
 <!ATTLIST sprite name CDATA #REQUIRED>
-<!ELEMENT image (grid?, animation?)>
+<!ELEMENT image (grid?)>
 <!ATTLIST image file CDATA #REQUIRED>
 <!ELEMENT grid EMPTY>
 <!ATTLIST grid pos CDATA #REQUIRED size CDATA #REQUIRED array CDATA #REQUIRED>
+<!ELEMENT animation EMPTY>
+<!ATTLIST animation speed CDATA #IMPLIED loop_mode CDATA #IMPLIED >
 
 <!ELEMENT wind (nbr_sprite, need_flip?, mass, wind_factor, air_resist_factor, gravity_factor, rebounding, rebound_factor)>
 <!ELEMENT nbr_sprite (#PCDATA)>
