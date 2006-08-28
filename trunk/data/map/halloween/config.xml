@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE map SYSTEM "map.dtd" []>
+<!DOCTYPE resources SYSTEM "../map.dtd" []>
 <resources>
   <author>
     <name>Lawrence AZZOUG</name>
     <nickname>Lami</nickname>
-    <country>France</country>
     <email>lawrenceazzoug AT wanadoo.fr</email>
+    <country>France</country>
   </author>
 
   <surface name="sky" file="noir_lune.jpg" />
   <surface name="map" file="halloween.png" />
   <surface name="preview" file="preview.jpg" />
+
+  <name>Halloween</name>
+  <water>0</water>
+  <nb_mine>3</nb_mine>
+  <is_open>1</is_open>
 
     <sprite name="wind_particle">
       <image file="confetis.png">
@@ -18,11 +23,6 @@
       </image>
       <animation speed="100" />
     </sprite>
-
-  <name>Halloween</name>
-  <water>0</water>
-  <nb_mine>3</nb_mine>
-  <is_open>1</is_open>
 
   <wind>
     <nbr_sprite>30</nbr_sprite>

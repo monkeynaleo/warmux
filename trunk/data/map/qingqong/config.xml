@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE map SYSTEM "map.dtd" []>
+<!DOCTYPE resources SYSTEM "../map.dtd" []>
 <resources>
   <author>
     <name>Anthony CARRÉ and Olivier Boyer</name>
     <nickname>yeKcim and Zi Olive</nickname>
-    <country>France</country>
     <email>yeknan AT yahoo DOT fr</email>
+    <country>France</country>
   </author>
 
   <surface name="sky" file="sky.jpg" />

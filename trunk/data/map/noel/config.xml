@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE map SYSTEM "map.dtd" []>
+<!DOCTYPE resources SYSTEM "../map.dtd" []>
 <resources>
   <author>
     <name>Lawrence AZZOUG</name>
     <nickname>Lami</nickname>
-    <country>France</country>
     <email>lawrenceazzoug AT wanadoo.fr</email>
+    <country>France</country>
   </author>
 
   <surface name="sky" file="bleu.jpg" />

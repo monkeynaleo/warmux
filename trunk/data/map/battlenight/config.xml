@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE map SYSTEM "map.dtd" []>
+<!DOCTYPE resources SYSTEM "../map.dtd" []>
 <resources>
   <author>
     <name>Glenn ROLLAND</name>
     <nickname>Glenux</nickname>
-    <country>France</country>
     <email>glenux AT gmail.com</email>
+    <country>France</country>
   </author>
 
   <surface name="sky" file="battlenight-bg.jpg" />
