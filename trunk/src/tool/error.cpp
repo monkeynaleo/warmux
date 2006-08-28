@@ -81,5 +81,6 @@ void TriggerError (const char *filename, unsigned long line,
 	    << Format(_("Error in %s:%lu"), filename, line)
 	    << ": " << txt << std::endl;
 
+  assert(false);
   throw CError (filename, line, txt);
 }
