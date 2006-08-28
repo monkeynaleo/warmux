@@ -45,8 +45,6 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 
 void SuperTux::Shoot(double strength)
 {
-  Ready();
-
   // Set physics constants.
   ResetConstants();
 

@@ -50,8 +50,7 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
 
 void BatonDynamite::Reset()
 {
-  Ready();
-
+  StopMoving();
   unsigned int delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
   image->SetFrameSpeed(delay);
 

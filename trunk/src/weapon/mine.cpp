@@ -56,8 +56,6 @@ ObjMine::ObjMine(MineConfig& cfg,
 
   escape_time = 0;
 
-  Ready();
-
   // is it a fake mine ?
   fake = !(randomSync.GetLong(0, 9));
 }
@@ -74,7 +72,6 @@ void ObjMine::FakeExplosion()
     MSG_DEBUG("mine", "Desactive detection..");
 
     animation = false;
-    m_ready = true;
     image->SetCurrentFrame(0);
   }
   is_active = false;
@@ -89,8 +86,6 @@ void ObjMine::StartTimeout()
     MSG_DEBUG("mine", "EnableDetection - CurrentTime : %d",Time::GetInstance()->ReadSec() );
     attente = Time::GetInstance()->ReadSec() + cfg.timeout;
     MSG_DEBUG("mine", "EnableDetection : %d", attente);
-    m_ready = false;
-    MSG_DEBUG("mine", "IsReady() = %d", IsReady());
 
     channel = jukebox.Play("share", "weapon/mine_beep", -1);
   }
