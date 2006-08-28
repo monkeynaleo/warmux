@@ -143,7 +143,6 @@ void ParticleEngine::Init()
   particle_sprite[EXPLOSION_SMOKE_spr] = resource_manager.LoadSprite(res,"smoke_explosion");
   particle_sprite[FIRE_spr]  = resource_manager.LoadSprite(res,"fire_particle");
   particle_sprite[FIRE_spr]->EnableRotationCache(32);
-  particle_sprite[FIRE_spr]->EnableFlippingCache();
   particle_sprite[STAR_spr]  = resource_manager.LoadSprite(res,"star_particle");
   particle_sprite[DARK_SMOKE_spr]  = resource_manager.LoadSprite(res,"dark_smoke");
   particle_sprite[MAGIC_STAR_R_spr] = resource_manager.LoadSprite(res,"pink_star_particle");

@@ -26,10 +26,13 @@
 class FireParticle : public Particle
 {
   int direction;
+  int creation_time;
+  bool on_ground;
+  int oscil_delta;
  public:
   FireParticle();
-  void SignalFallEnding();
   void Refresh();
+  void Draw();
 };
 
 #endif
