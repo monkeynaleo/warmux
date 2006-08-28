@@ -250,7 +250,7 @@ void TileItem_AlphaSoftware::CheckEmpty()
   if(alpha == SDL_ALPHA_TRANSPARENT)
   {
     last_filled_pixel += 4;
-    if( last_filled_pixel > m_surface.GetPixels() + (m_surface.GetPitch() * CELL_SIZE.y))
+    if( last_filled_pixel >= m_surface.GetPixels() + (m_surface.GetPitch() * CELL_SIZE.y))
     {
       need_delete = true;
       need_check_empty = false;
