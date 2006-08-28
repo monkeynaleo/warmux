@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT resources (authos, sprite+, clothe, movement+)>
+
+<!-- Author part -->
+<!ELEMENT author (name,nickname?,email,country)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT nickname (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+
+<!-- sprite -->
+<!ELEMENT sprite (image, anchor?, (attached+)? )>
+<!ATTLIST sprite name CDATA #REQUIRED type CDATA #REQUIRED>
+
+<!ELEMENT image (grid?)>
+<!ATTLIST image file CDATA #REQUIRED>
+<!ELEMENT grid EMPTY>
+<!ATTLIST grid pos CDATA #REQUIRED size CDATA #REQUIRED array CDATA #REQUIRED>
+
+<!ELEMENT anchor EMPTY>
+<!ATTLIST anchor dx CDATA #REQUIRED dy CDATA #REQUIRED>
+
+<!ELEMENT attached EMPTY>
+<!ATTLIST attached member_type CDATA #REQUIRED frame CDATA #REQUIRED dx CDATA #REQUIRED dy CDATA #REQUIRED>
+
+<!-- clothe -->
+<!ELEMENT clothe (member+)>
+<!ATTLIST clothe name CDATA #FIXED "normal">
+
+<!ELEMENT member EMPTY>
+<!ATTLIST member name CDATA #REQUIRED layer CDATA #REQUIRED>
+
+<!-- movement -->
+<!ELEMENT movement (collision_rect, frame+)>
+<!ATTLIST movement name CDATA #REQUIRED speed CDATA #REQUIRED>
