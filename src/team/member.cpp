@@ -109,6 +109,25 @@ Member::Member(xmlpp::Element *xml, Profile* res)
   }
 }
 
+Member::Member(Member* m)
+{
+  parent = NULL;
+  name = m->name;
+  spr = new Sprite(*m->spr);
+  type = m->type;
+  anchor = m->anchor;
+  Point2i rot = Point2i((int)anchor.x, (int)anchor.y);
+  spr->SetRotation_HotSpot(rot);
+  go_through_ground = m->go_through_ground;
+
+  for(std::map<std::string, v_attached>::iterator it = m->attached_members.begin();
+      it != m->attached_members.end();
+      ++it)
+  {
+    attached_members[it->first] = it->second;
+  }
+}
+
 Member::~Member()
 {
   delete spr;
@@ -122,11 +141,12 @@ void Member::RotateSprite()
   spr->RefreshSurface();
 }
 
-void Member::Draw(int flip_center, int direction)
+void Member::Draw(const Point2i & _pos, int flip_center, int direction)
 {
   assert(name != "weapon" && type!="weapon");
 
   Point2i posi((int)pos.x, (int)pos.y);
+  posi += _pos;
 
   if(direction == 1)
   {
@@ -265,7 +285,7 @@ WeaponMember::~WeaponMember()
 {
 }
 
-void WeaponMember::Draw(int flip_center, int direction)
+void WeaponMember::Draw(const Point2i & _pos, int flip_center, int direction)
 {
   // Would be cool to display the weapon from here...
 }

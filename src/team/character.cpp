@@ -324,7 +324,7 @@ void Character::Draw()
 
   if(prepare_shoot)
   {
-    body->Build(Point2i(0,0)); // Refresh the body
+    body->Build(); // Refresh the body
     if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
     {
       // if the movement is finnished, shoot !

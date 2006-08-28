@@ -37,6 +37,7 @@ public:
 
   ~Clothe();
   Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst);
+  Clothe(Clothe* c, std::map<std::string, Member*>& members_lst);
 };
 
 #endif //CLOTHE_H

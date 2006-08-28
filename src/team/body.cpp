@@ -34,6 +34,7 @@
 
 Body::Body(xmlpp::Element* xml, Profile* res)
 {
+  need_rebuild = true;
   current_clothe = NULL;
   current_mvt = NULL;
   walk_events = 0;
@@ -57,7 +58,8 @@ Body::Body(xmlpp::Element* xml, Profile* res)
   }
 
   // Add a special weapon member to the body
-  members_lst["weapon"] = new WeaponMember();
+  weapon_member = new WeaponMember();
+  members_lst["weapon"] = weapon_member;
 
   // Load clothes
   xmlpp::Node::NodeList nodes2 = xml -> get_children("clothe");
@@ -112,42 +114,49 @@ Body::Body(xmlpp::Element* xml, Profile* res)
       mvt->type = it->first;
       mvt_lst[it->first] = mvt;
     }
-
     it3++;
   }
 }
 
 Body::Body(Body *_body)
 {
+  need_rebuild = true;
   current_clothe = NULL;
   current_mvt = NULL;
   walk_events = 0;
   animation_number = _body->animation_number;
   direction = 1;
 
-  // Clean the members list
+  // Add a special weapon member to the body
+  weapon_member = new WeaponMember();
+  members_lst["weapon"] = weapon_member;
+
+  // Make a copy of members
   std::map<std::string, Member*>::iterator it1 = _body->members_lst.begin();
   while(it1 != _body->members_lst.end())
+  if(it1->second->name != "weapon")
   {
     std::pair<std::string,Member*> p;
     p.first = it1->first;
-    p.second = it1->second;
+    p.second = new Member(it1->second);
     members_lst.insert(p);
     it1++;
   }
+  else
+    it1++;
 
-  // Clean the clothes list
+  // Make a copy of clothes
   std::map<std::string, Clothe*>::iterator it2 = _body->clothes_lst.begin();
   while(it2 != _body->clothes_lst.end())
   {
     std::pair<std::string,Clothe*> p;
     p.first = it2->first;
-    p.second = it2->second;
+    p.second = new Clothe(it2->second, members_lst);
     clothes_lst.insert(p);
     it2++;
   }
 
-  // Clean the movements list
+  // Movement are shared
   std::map<std::string, Movement*>::iterator it3 = _body->mvt_lst.begin();
   while(it3 != _body->mvt_lst.end())
   {
@@ -162,6 +171,22 @@ Body::Body(Body *_body)
 Body::~Body()
 {
   // Pointers inside those lists are freed from the body_list
+  // Clean the members list
+  std::map<std::string, Member*>::iterator it = members_lst.begin();
+  while(it != members_lst.end())
+  {
+    delete it->second;
+    it++;
+  }
+
+  // Clean the clothes list
+  std::map<std::string, Clothe*>::iterator it2 = clothes_lst.begin();
+  while(it2 != clothes_lst.end())
+  {
+    delete it2->second;
+    it2++;
+  }
+
   members_lst.clear();
   clothes_lst.clear();
   mvt_lst.clear();
@@ -245,12 +270,12 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
   }
 }
 
-void Body::ApplySqueleton(const Point2f& pos)
+void Body::ApplySqueleton()
 {
   // Move each member following the squeleton
   std::vector<junction>::iterator member = squel_lst.begin();
   // The first member is the body, we set it to pos:
-  member->member->pos = pos;
+  member->member->pos = Point2f(0,0);
   member->member->angle = 0;
   member++;
 
@@ -262,13 +287,10 @@ void Body::ApplySqueleton(const Point2f& pos)
   }
 }
 
-void Body::Build(const Point2i& _pos)
+void Body::Build()
 {
-  Point2f pos;
-  pos.x = (float) _pos.x;
-  pos.y = (float) _pos.y;
-
   // Increase frame number if needed
+  unsigned int last_frame = current_frame;
   if(walk_events > 0 || current_mvt->type!="walk")
   if(Time::GetInstance()->Read() > last_refresh + current_mvt->speed)
   {
@@ -288,8 +310,14 @@ void Body::Build(const Point2i& _pos)
     current_frame %= current_mvt->frames.size();
   }
 
+  need_rebuild |= (last_frame == current_frame);
+  need_rebuild |= current_mvt->always_moving;
+
+  if(!need_rebuild)
+    return;
+
   ResetMovement();
-  ApplySqueleton(pos);
+  ApplySqueleton();
   ApplyMovement(current_mvt, current_frame);
 
   // Rotate each sprite, because the next part need to know the height of the sprite
@@ -309,25 +337,27 @@ void Body::Build(const Point2i& _pos)
     && !member->go_through_ground)
       y_max = member->pos.y + member->spr->GetHeightMax() + member->spr->GetRotationPoint().y;
   }
-  body_mvt.pos.y = pos.y + (float)GetSize().y - y_max + current_mvt->test_bottom;
-
-  // And center the "body" horizontally in the object:
+  body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->test_bottom;
   body_mvt.pos.x = GetSize().x / 2.0 - squel_lst.front().member->spr->GetWidth() / 2.0;
   squel_lst.front().member->ApplyMovement(body_mvt, squel_lst);
 
-  // update the weapon position
-  if(direction == 1)
-    weapon_pos = Point2i((int)current_weapon_member->pos.x,(int)current_weapon_member->pos.y);
-  else
-    weapon_pos = Point2i(2 * (int)pos.x + GetSize().x - (int)current_weapon_member->pos.x,(int)current_weapon_member->pos.y);
+  need_rebuild = false;
 }
 
 void Body::Draw(const Point2i& _pos)
 {
-  Build(_pos);
+  Build();
+
+  // update the weapon position
+  if(direction == 1)
+    weapon_pos = Point2i((int)weapon_member->pos.x,(int)weapon_member->pos.y);
+  else
+    weapon_pos = Point2i(GetSize().x - (int)weapon_member->pos.x,(int)weapon_member->pos.y);
+  weapon_pos += _pos;
+
   // Finally draw each layer one by one
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-    current_clothe->layers[layer]->Draw(_pos.x + GetSize().x/2, direction);
+    current_clothe->layers[layer]->Draw(_pos, _pos.x + GetSize().x/2, direction);
 }
 
 void Body::AddChildMembers(Member* parent)
@@ -352,8 +382,6 @@ void Body::AddChildMembers(Member* parent)
         // continue recursively
         AddChildMembers(current_clothe->layers[lay]);
       }
-      if(current_clothe->layers[lay]->name == "weapon")
-        current_weapon_member = current_clothe->layers[lay];
     }
   }
 }
@@ -372,6 +400,7 @@ void Body::BuildSqueleton()
     body.member = current_clothe->layers[lay];
     body.parent = NULL;
     squel_lst.push_back(body);
+    break;
   }
 
   if(squel_lst.size() == 0)
@@ -391,6 +420,7 @@ void Body::SetClothe(std::string name)
   {
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
+    need_rebuild = true;
   }
   else
     MSG_DEBUG("body","Clothe not found");
@@ -413,6 +443,7 @@ void Body::SetMovement(std::string name)
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
     last_refresh = Time::GetInstance()->Read();
+    need_rebuild = true;
   }
   else
     MSG_DEBUG("body","Movement not found");
@@ -440,6 +471,7 @@ void Body::SetClotheOnce(std::string name)
       play_once_clothe_sauv = current_clothe;
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
+    need_rebuild = true;
   }
   else
     MSG_DEBUG("body","Clothe not found");
@@ -465,6 +497,7 @@ void Body::SetMovementOnce(std::string name)
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
     last_refresh = Time::GetInstance()->Read();
+    need_rebuild = true;
   }
   else
     MSG_DEBUG("body","Movement not found");
@@ -545,7 +578,7 @@ void Body::SetFrame(uint no)
 
 void Body::MakeParticles(const Point2i& pos)
 {
-  Build(pos);
+  Build();
 
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
   if(current_clothe->layers[layer]->type != "weapon")

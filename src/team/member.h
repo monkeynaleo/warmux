@@ -54,7 +54,8 @@ public:
 
   virtual ~Member();
   Member(xmlpp::Element *xml, Profile* res);
-  virtual void Draw(int flip_x, int direction);
+  Member(Member* m);
+  virtual void Draw(const Point2i & _pos, int flip_x, int direction);
   void RotateSprite();
   void ResetMovement();
   void ApplySqueleton(Member* parent_member);
@@ -67,7 +68,7 @@ class WeaponMember : public Member
 public:
   WeaponMember();
   ~WeaponMember();
-  void Draw(int flip_x, int direction);
+  void Draw(const Point2i & _pos, int flip_x, int direction);
 };
 
 #endif //MEMBER_H

@@ -26,6 +26,7 @@
 
 Movement::Movement(xmlpp::Element *xml)
 {
+  always_moving = false;
   LitDocXml::LitAttrString( xml, "name", type);
   assert(type!="");
 
@@ -84,6 +85,11 @@ Movement::Movement(xmlpp::Element *xml)
       mvt.pos.y = dy;
       mvt.alpha = tmp_alpha;
       mvt.scale = Point2f(scale_x, scale_y);
+
+      always_moving |= mvt.follow_crosshair;
+      always_moving |= mvt.follow_half_crosshair;
+      always_moving |= mvt.follow_speed;
+      always_moving |= mvt.follow_direction;
 
       if((int)frames.size() <= frame_number)
         frames.resize(frame_number+1);

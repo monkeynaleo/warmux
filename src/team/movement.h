@@ -44,11 +44,11 @@ public:
 
 class Movement
 {
-
   typedef std::map<std::string, struct member_mvt> member_def; // Describe the position of each member for a given frame
 
 public:
   std::vector<member_def> frames;
+  bool always_moving;
   int speed;
   uint test_left, test_right, test_top, test_bottom;
 

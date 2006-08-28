@@ -44,22 +44,6 @@ void BodyList::FreeMem()
   std::map<std::string, Body*>::iterator it = list.begin();
   while(it != list.end())
   {
-    // Clean the members list
-    std::map<std::string, Member*>::iterator it1 = it->second->members_lst.begin();
-    while(it1 != it->second->members_lst.end())
-    {
-      delete it1->second;
-      it1++;
-    }
-
-    // Clean the clothes list
-    std::map<std::string, Clothe*>::iterator it2 = it->second->clothes_lst.begin();
-    while(it2 != it->second->clothes_lst.end())
-    {
-      delete it2->second;
-      it2++;
-    }
-
     // Clean the movements list
     std::map<std::string, Movement*>::iterator it3 = it->second->mvt_lst.begin();
     while(it3 != it->second->mvt_lst.end())
