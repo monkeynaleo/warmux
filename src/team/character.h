@@ -119,8 +119,10 @@ public:
   bool CanJump() const;
 
   // Jumps
-  void HighJump ();
-  void Jump ();
+  void Jump(double strength, int angle);
+  void Jump();
+  void HighJump();
+  void BackJump();
 
   // Initialise left or right movement
   void InitMouvementDG (uint pause);

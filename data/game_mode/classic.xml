@@ -295,6 +295,7 @@
     <energy initial="100" maximum="200" />
     <jump strength="8" angle="-60" />
     <super_jump strength="11" angle="-80" />
+    <back_jump strength="9" angle="-100" />
   </character>
 
 </game_mode>
