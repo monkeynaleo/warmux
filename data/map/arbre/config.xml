@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE map SYSTEM "map.dtd" []>
+<!DOCTYPE resources SYSTEM "../map.dtd" []>
 <resources>
   <author>
     <name>Alexandre NORMAN</name>
     <nickname>Xael</nickname>
-    <country>France</country>
     <email>norman AT xael.org</email>
+    <country>France</country>
   </author>
 
   <surface name="sky" file="fond.jpg" />
