@@ -78,7 +78,7 @@
   </sprite>
   <sprite name="barrel">
     <image file="object/barrel.png">
-      <grid pos="0,0" size="30,36" array="6,1" />
+      <grid pos="0,0" size="32,35" array="6,1" />
     </image>
   </sprite>
 </section>
