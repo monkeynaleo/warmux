@@ -16,9 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Caisse de bonus : tombe du ciel après un temps d'apparition aléatoire.
- * Lorsqu'un ver touche la caisse, il peut gagner différents bonus : munition,
- * énergie (gain ou perte!), etc.
+ * Bonus box : fall from the sky at random time.
+ * The box can contain bonus or mallus (dynamite, Guns, loss of energy etc).
  *****************************************************************************/
 
 #include "bonus_box.h"
@@ -90,12 +89,12 @@ void BonusBox::Draw()
 
 void BonusBox::Refresh()
 {
-  // Si un ver touche la caisse, on la réinitialise
+  // If we touch a character, we remove the bonus box
   FOR_ALL_LIVING_CHARACTERS(equipe, ver)
   {
     if( ObjTouche(*ver) )
     {
-      // Offre des dynamites
+      // here is the gift (truly a gift ?!? :)
       ApplyBonus (**equipe, *ver);
 
       lst_objects.RemoveObject(this);
@@ -105,9 +104,7 @@ void BonusBox::Refresh()
   }
 
   // Refresh animation
-  if (!m_ready && !parachute) anim->Update();
-
-  m_ready = anim->IsFinished();
+  if (!anim->IsFinished() && !parachute) anim->Update();
 }
 
 // Signale la fin d'une chute
@@ -115,10 +112,10 @@ void BonusBox::SignalFallEnding()
 {
   SetAirResistFactor(1.0);
 
-  MSG_DEBUG("bonus", "Fin de la chute: parachute=%d", parachute);
+  MSG_DEBUG("bonus", "End of the fall: parachute=%d", parachute);
   if (!parachute) return;
 
-  MSG_DEBUG("bonus", "Début de l'animation 'repli du parachute'.");
+  MSG_DEBUG("bonus", "Start of the animation 'fold of the parachute'.");
   parachute = false;
 
   anim->SetCurrentFrame(0);
