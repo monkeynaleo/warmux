@@ -43,7 +43,6 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot (int x, int y)
 {
-  Ready();
   camera.ChangeObjSuivi(this, true, false);
   ResetConstants();
   SetXY( Point2i(x, y) );
@@ -160,4 +159,3 @@ void ClusterBombConfig::LoadXml(xmlpp::Element *elem)
   ExplosiveWeaponConfig::LoadXml(elem);
   LitDocXml::LitUint (elem, "nb_fragments", nb_fragments);
 }
-
