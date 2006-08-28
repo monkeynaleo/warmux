@@ -70,7 +70,18 @@ Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
     i++;
   else
     i=layers.erase(i);
+}
 
+Clothe::Clothe(Clothe* c, std::map<std::string, Member*>& members_lst)
+{
+  name = c->name;
+
+  for (std::vector<Member*>::iterator it = c->layers.begin();
+      it != c->layers.end();
+      ++it)
+  {
+    layers.push_back(members_lst.find((*it)->name)->second);
+  }
 }
 
 Clothe::~Clothe()

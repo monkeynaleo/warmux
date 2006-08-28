@@ -62,7 +62,7 @@ class Body
   uint play_once_frame_sauv;
 
   // For weapon position handling
-  Member* current_weapon_member;
+  Member* weapon_member;
   Point2i weapon_pos;
 
   uint last_refresh; // Time elapsed since last refresh
@@ -76,10 +76,11 @@ class Body
   int direction;
 
   int animation_number;
+  bool need_rebuild;
 
   void ResetMovement();
   void ApplyMovement(Movement* mvt, uint frame);
-  void ApplySqueleton(const Point2f &pos);
+  void ApplySqueleton();
 
   void BuildSqueleton();
   void AddChildMembers(Member* parent);
@@ -101,7 +102,7 @@ public:
   void SetFrame(uint no);
   void SetDirection(int dir);
   void PlayAnimation();
-  void Build(const Point2i& pos);
+  void Build();
 
   const std::string& GetMovement();
   const std::string& GetClothe();
