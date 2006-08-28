@@ -227,8 +227,8 @@
   <sprite name="supertux">
     <image file="weapon/supertux/superman.png">
       <grid pos="0,0" size="23,37" array="2,1" />
-      <animation speed="800"/>
     </image>
+    <animation speed="800"/>
   </sprite>
 
 <!-- Teleportation ressources -->

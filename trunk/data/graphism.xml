@@ -73,8 +73,8 @@
   <sprite name="caisse">
     <image file="object/bonus_box.png">
       <grid pos="0,0" size="84,88" array="4,1" />
-      <animation loop_mode="false"/>
     </image>
+    <animation loop_mode="false"/>
   </sprite>
   <sprite name="barrel">
     <image file="object/barrel.png">
