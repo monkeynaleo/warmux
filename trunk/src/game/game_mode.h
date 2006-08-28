@@ -50,6 +50,8 @@ public:
     int jump_angle;
     uint super_jump_strength;
     int super_jump_angle;
+    uint back_jump_strength;
+    int back_jump_angle;
   } character;
 
   int allow_character_selection;

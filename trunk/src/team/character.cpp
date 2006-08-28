@@ -371,40 +371,43 @@ void Character::Draw()
 
 }
 
-void Character::Jump ()
+void Character::Jump(double strength, int deg_angle)
 {
-  MSG_DEBUG("character", "Jump");
   do_nothing_time = Time::GetInstance()->Read();
 
   if (!CanJump()) return;
 
-  jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
-   
   SetRebounding(false);
   SetMovement("jump");
 
-  // Initialise la force
-  double angle = Deg2Rad(GameMode::GetInstance()->character.jump_angle);
+  // Jump !
+  double angle = Deg2Rad(deg_angle);
   if (GetDirection() == -1) angle = InverseAngle(angle);
-  SetSpeed (GameMode::GetInstance()->character.jump_strength, angle);
+  SetSpeed (strength, angle);
 }
 
-void Character::HighJump ()
+void Character::Jump()
+{
+  MSG_DEBUG("character", "Jump");
+  jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
+  Jump(GameMode::GetInstance()->character.jump_strength,
+       GameMode::GetInstance()->character.jump_angle);
+}
+
+void Character::HighJump()
 {
   MSG_DEBUG("character", "HighJump");
-  do_nothing_time = Time::GetInstance()->Read();
-
-  if (!CanJump()) return;
-
-  SetRebounding(false);
-
   jukebox.Play (ActiveTeam().GetSoundProfile(), "superjump");
-  SetMovement("jump");
+  Jump(GameMode::GetInstance()->character.super_jump_strength,
+       GameMode::GetInstance()->character.super_jump_angle);
+}
 
-  // Initialise la force
-  double angle = Deg2Rad(GameMode::GetInstance()->character.super_jump_angle);
-  if (GetDirection() == -1) angle = InverseAngle(angle);
-  SetSpeed (GameMode::GetInstance()->character.super_jump_strength, angle);
+void Character::BackJump()
+{
+  MSG_DEBUG("character", "BackJump");
+  jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
+  Jump(GameMode::GetInstance()->character.back_jump_strength,
+       GameMode::GetInstance()->character.back_jump_angle);
 }
 
 void Character::PrepareShoot()
@@ -496,6 +499,10 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_HIGH_JUMP:
               if(ActiveCharacter().IsReady())
                 action_handler->NewAction (new Action(ACTION_HIGH_JUMP));
+              return ;
+            case ACTION_BACK_JUMP:
+              if(ActiveCharacter().IsReady())
+                action_handler->NewAction (new Action(ACTION_BACK_JUMP));
               return ;
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:

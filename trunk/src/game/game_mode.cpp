@@ -58,6 +58,8 @@ GameMode::GameMode()
   character.jump_angle = -60;
   character.super_jump_strength = 200;
   character.super_jump_angle = -80;
+  character.super_jump_strength = 120;
+  character.super_jump_angle = -100;
 }
 
 // Load data options from the selected game_mode
@@ -92,26 +94,31 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   xmlpp::Element *xmlver = LitDocXml::AccesBalise (xml, "character");
   if (xmlver != NULL)
   {
-	xmlpp::Element *item = LitDocXml::AccesBalise (xmlver, "energy");
-	if (item != NULL) {
+    xmlpp::Element *item = LitDocXml::AccesBalise (xmlver, "energy");
+    if (item != NULL) {
       LitDocXml::LitAttrUint (item, "initial", character.init_energy);
       LitDocXml::LitAttrUint (item, "maximum", character.max_energy);
-	  if (character.init_energy==0) character.init_energy = 1;
-	  if (character.max_energy==0) character.max_energy = 1;
-	}
+      if (character.init_energy==0) character.init_energy = 1;
+      if (character.max_energy==0) character.max_energy = 1;
+    }
     LitDocXml::LitUint (xmlver, "mass", character.mass);
     LitDocXml::LitDouble (xmlver, "air_resist_factor", character.air_resist_factor);
-	item = LitDocXml::AccesBalise (xmlver, "jump");
-	if (item != NULL) {
+    item = LitDocXml::AccesBalise (xmlver, "jump");
+    if (item != NULL) {
       LitDocXml::LitAttrUint (item, "strength", character.jump_strength);
       LitDocXml::LitAttrInt  (item, "angle", character.jump_angle);
-	}
-	
-	item = LitDocXml::AccesBalise (xmlver, "super_jump");
-	if (item != NULL) {
+    }
+
+    item = LitDocXml::AccesBalise (xmlver, "super_jump");
+    if (item != NULL) {
       LitDocXml::LitAttrUint (item, "strength", character.super_jump_strength);
       LitDocXml::LitAttrInt  (item, "angle", character.super_jump_angle);
-	}
+    }
+    item = LitDocXml::AccesBalise (xmlver, "back_jump");
+    if (item != NULL) {
+      LitDocXml::LitAttrUint (item, "strength", character.back_jump_strength);
+      LitDocXml::LitAttrInt  (item, "angle", character.back_jump_angle);
+    }
   }
 
   //=== Weapons ===

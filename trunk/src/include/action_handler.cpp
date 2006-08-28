@@ -77,6 +77,12 @@ void Action_HighJump (Action *a)
   ActiveCharacter().HighJump();
 }
 
+void Action_BackJump (Action *a)
+{
+  GameLoop::GetInstance()->character_already_chosen = true;
+  ActiveCharacter().BackJump();
+}
+
 void Action_Up (Action *a)
 {
   ActiveTeam().crosshair.ChangeAngle (-DELTA_CROSSHAIR);
@@ -397,6 +403,7 @@ ActionHandler::ActionHandler()
   Register (ACTION_DOWN, "down", &Action_Down);
   Register (ACTION_JUMP, "jump", &Action_Jump);
   Register (ACTION_HIGH_JUMP, "super_jump", &Action_HighJump);
+  Register (ACTION_BACK_JUMP, "back_jump", &Action_BackJump);
   Register (ACTION_SHOOT, "shoot", &Action_Shoot);
   Register (ACTION_CHANGE_WEAPON, "change_weapon", &Action_ChangeWeapon);
   Register (ACTION_WIND, "wind", &Action_Wind);

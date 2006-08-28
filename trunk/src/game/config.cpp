@@ -124,7 +124,7 @@ bool Config::ChargeVraiment()
   return true;
 }
 
-// Lit les donn�s sur une �uipe
+// Read data for a team
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
   xmlpp::Element *elem;
@@ -139,7 +139,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     LitDocXml::LitListeString (elem, "team", tmp.teams);
   }
 
-  //=== Vid� ===
+  //=== Video ===
   elem = LitDocXml::AccesBalise (xml, "video");
   if (elem != NULL)
   {
@@ -173,38 +173,39 @@ void Config::SetKeyboardConfig()
 {
   Clavier * clavier = Clavier::GetInstance();
 
-  clavier->SetKeyAction(SDLK_LEFT,		ACTION_MOVE_LEFT);
-  clavier->SetKeyAction(SDLK_RIGHT,	ACTION_MOVE_RIGHT);
-  clavier->SetKeyAction(SDLK_UP,			ACTION_UP);
-  clavier->SetKeyAction(SDLK_DOWN,	ACTION_DOWN);
-  clavier->SetKeyAction(SDLK_RETURN,	ACTION_JUMP);
+  clavier->SetKeyAction(SDLK_LEFT,      ACTION_MOVE_LEFT);
+  clavier->SetKeyAction(SDLK_RIGHT,     ACTION_MOVE_RIGHT);
+  clavier->SetKeyAction(SDLK_UP,        ACTION_UP);
+  clavier->SetKeyAction(SDLK_DOWN,      ACTION_DOWN);
+  clavier->SetKeyAction(SDLK_RETURN,    ACTION_JUMP);
   clavier->SetKeyAction(SDLK_BACKSPACE, ACTION_HIGH_JUMP);
-  clavier->SetKeyAction(SDLK_SPACE, ACTION_SHOOT);
-  clavier->SetKeyAction(SDLK_TAB, ACTION_CHANGE_CHARACTER);
-  clavier->SetKeyAction(SDLK_ESCAPE, ACTION_QUIT);
-  clavier->SetKeyAction(SDLK_p, ACTION_PAUSE);
-  clavier->SetKeyAction(SDLK_F10, ACTION_FULLSCREEN);
-  clavier->SetKeyAction(SDLK_F9, ACTION_TOGGLE_INTERFACE);
-  clavier->SetKeyAction(SDLK_F1, ACTION_WEAPONS1);
-  clavier->SetKeyAction(SDLK_F2, ACTION_WEAPONS2);
-  clavier->SetKeyAction(SDLK_F3, ACTION_WEAPONS3);
-  clavier->SetKeyAction(SDLK_F4, ACTION_WEAPONS4);
-  clavier->SetKeyAction(SDLK_F5, ACTION_WEAPONS5);
-  clavier->SetKeyAction(SDLK_F6, ACTION_WEAPONS6);
-  clavier->SetKeyAction(SDLK_F7, ACTION_WEAPONS7);
-  clavier->SetKeyAction(SDLK_F8, ACTION_WEAPONS8);
-  clavier->SetKeyAction(SDLK_c, ACTION_CENTER);
-  clavier->SetKeyAction(SDLK_1, ACTION_WEAPON_1);
-  clavier->SetKeyAction(SDLK_2, ACTION_WEAPON_2);
-  clavier->SetKeyAction(SDLK_3, ACTION_WEAPON_3);
-  clavier->SetKeyAction(SDLK_4, ACTION_WEAPON_4);
-  clavier->SetKeyAction(SDLK_5, ACTION_WEAPON_5);
-  clavier->SetKeyAction(SDLK_6, ACTION_WEAPON_6);
-  clavier->SetKeyAction(SDLK_7, ACTION_WEAPON_7);
-  clavier->SetKeyAction(SDLK_8, ACTION_WEAPON_8);
-  clavier->SetKeyAction(SDLK_9, ACTION_WEAPON_9);
-  clavier->SetKeyAction(SDLK_PAGEUP, ACTION_WEAPON_MORE);
-  clavier->SetKeyAction(SDLK_PAGEDOWN, ACTION_WEAPON_LESS);
+  clavier->SetKeyAction(SDLK_b,         ACTION_BACK_JUMP);
+  clavier->SetKeyAction(SDLK_SPACE,     ACTION_SHOOT);
+  clavier->SetKeyAction(SDLK_TAB,       ACTION_CHANGE_CHARACTER);
+  clavier->SetKeyAction(SDLK_ESCAPE,    ACTION_QUIT);
+  clavier->SetKeyAction(SDLK_p,         ACTION_PAUSE);
+  clavier->SetKeyAction(SDLK_F10,       ACTION_FULLSCREEN);
+  clavier->SetKeyAction(SDLK_F9,        ACTION_TOGGLE_INTERFACE);
+  clavier->SetKeyAction(SDLK_F1,        ACTION_WEAPONS1);
+  clavier->SetKeyAction(SDLK_F2,        ACTION_WEAPONS2);
+  clavier->SetKeyAction(SDLK_F3,        ACTION_WEAPONS3);
+  clavier->SetKeyAction(SDLK_F4,        ACTION_WEAPONS4);
+  clavier->SetKeyAction(SDLK_F5,        ACTION_WEAPONS5);
+  clavier->SetKeyAction(SDLK_F6,        ACTION_WEAPONS6);
+  clavier->SetKeyAction(SDLK_F7,        ACTION_WEAPONS7);
+  clavier->SetKeyAction(SDLK_F8,        ACTION_WEAPONS8);
+  clavier->SetKeyAction(SDLK_c,         ACTION_CENTER);
+  clavier->SetKeyAction(SDLK_1,         ACTION_WEAPON_1);
+  clavier->SetKeyAction(SDLK_2,         ACTION_WEAPON_2);
+  clavier->SetKeyAction(SDLK_3,         ACTION_WEAPON_3);
+  clavier->SetKeyAction(SDLK_4,         ACTION_WEAPON_4);
+  clavier->SetKeyAction(SDLK_5,         ACTION_WEAPON_5);
+  clavier->SetKeyAction(SDLK_6,         ACTION_WEAPON_6);
+  clavier->SetKeyAction(SDLK_7,         ACTION_WEAPON_7);
+  clavier->SetKeyAction(SDLK_8,         ACTION_WEAPON_8);
+  clavier->SetKeyAction(SDLK_9,         ACTION_WEAPON_9);
+  clavier->SetKeyAction(SDLK_PAGEUP,    ACTION_WEAPON_MORE);
+  clavier->SetKeyAction(SDLK_PAGEDOWN,  ACTION_WEAPON_LESS);
 }
 
 void Config::Apply()
@@ -221,12 +222,12 @@ void Config::Apply()
   jukebox.ActiveEffects (tmp.sound.effects);
   jukebox.SetFrequency (tmp.sound.frequency);
 
-  // Charge les �uipes
+  // load the teams
   teams_list.LoadList();
   if (m_xml_charge)
     teams_list.InitList (tmp.teams);
 
-  // Charge les terrains
+  // Load maps
   lst_terrain.Init();
   if (m_xml_charge && !tmp.map_name.empty())
     lst_terrain.ChangeTerrainNom (tmp.map_name);
