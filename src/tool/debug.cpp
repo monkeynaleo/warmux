@@ -80,10 +80,10 @@ void InitDebugModes( int argc, char **argv ){
 	int i;
 
 	for( i=0; i<argc; i++ ){
-		if( strcmp(argv[i], "--add-debug-mode") == 0 ){
+		if( strcmp(argv[i], "-d") == 0 ){
 			i = i + 1;
 			if( i == argc )
-				Error( "Usage : --add-debug-mode mode.truc" );
+				Error( "Usage : -d mode.truc" );
 			AddDebugMode( argv[i] );
 		}
 	}
