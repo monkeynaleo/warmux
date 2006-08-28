@@ -21,6 +21,7 @@
 
 #include "fire.h"
 #include "particle.h"
+#include "../network/randomsync.h"
 
 ExplosiveWeaponConfig fire_cfg;
 
@@ -33,9 +34,8 @@ FireParticle::FireParticle() :
   m_time_between_scale = 50;
   fire_cfg.damage = 1;
   fire_cfg.explosion_range = 5;
-
+  direction = randomSync.GetBool() ? -1 : 1;
   image = ParticleEngine::GetSprite(FIRE_spr);
-  image->Scale(0.0,0.0);
   SetSize( Point2i(1, 1) );
 }
 
@@ -45,4 +45,12 @@ void FireParticle::SignalFallEnding()
 //  ApplyExplosion (pos, fire_cfg, "", false, ParticleEngine::NoESmoke);
 
   m_left_time_to_live = 0;
+}
+
+void FireParticle::Refresh()
+{
+  Particle::Refresh();
+  double angle = GetSpeedAngle() * 180/M_PI ;
+  image->SetRotation_deg( angle * direction);
+  image->Scale(direction, 1.0);
 }
