@@ -124,15 +124,15 @@ void Action::Push(std::string val)
   int count = val.size();
   while(count > 0)
   {
-    Uint32 tmp;
+    Uint32 tmp = 0;
     // Fix-me : We are reading out of the c_str() buffer there :
-    memcpy(&tmp, ch, 4);
+    strncpy((char*)&tmp, ch, 4);
     var.push_back(tmp);
     ch += 4;
     count -= 4;
   }
   MSG_DEBUG( "action", " (%s) Pushing string : %s",
-        ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val.c_str());
+  ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val.c_str());
 }
 
 //-------------  Retrieve datas from the action  ----------------
