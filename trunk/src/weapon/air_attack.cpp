@@ -44,7 +44,6 @@ Obus::Obus(AirAttackConfig& cfg) :
   WeaponProjectile("air_attack_projectile", cfg, NULL)
 {
   explode_colliding_character = true;
-  Ready();
 }
 
 //-----------------------------------------------------------------------------
@@ -54,7 +53,6 @@ Plane::Plane(AirAttackConfig &p_cfg) :
   cfg(p_cfg)
 {
   SetCollisionModel(true, false, false);
-  m_alive = GHOST;
 
   image = resource_manager.LoadSprite( weapons_res_profile, "air_attack_plane");
   SetSize(image->GetSize());
@@ -73,8 +71,6 @@ void Plane::Shoot(double speed, Point2i& target)
   SetY (0);
 
   image->Scale(dir, 1);
-   
-  Ready();
 
   if (dir == 1)
     {
@@ -118,20 +114,15 @@ void Plane::DropBomb()
 
 void Plane::Refresh()
 {
-  if ( ! IsGhost() ) {
-
-    UpdatePosition();
-    
-    image->Update();
-    
-    // First shoot !!
-    if ( OnTopOfTarget() && nb_dropped_bombs == 0)
+  UpdatePosition();
+  image->Update();
+  // First shoot !!
+  if ( OnTopOfTarget() && nb_dropped_bombs == 0)
+    DropBomb();
+  else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
+    // Get the last rocket and check the position to be sure to not collide with it
+    if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+10 )
       DropBomb();
-    else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
-      // Get the last rocket and check the position to be sure to not collide with it
-      if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+10 )
-        DropBomb();
-    }
   }
 }
 
