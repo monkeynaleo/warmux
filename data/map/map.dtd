@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!ELEMENT resources (author,surface+,name,water,nb_mine,is_open,infinite_background) >
+<!ELEMENT section (author+)>
+<!ATTLIST section title CDATA #REQUIRED>
+
+<!ELEMENT author (name,nickname,email,country)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT nickname (#PCDATA)>
+<!ELEMENT email (#PCDATA)>
+<!ELEMENT country (#PCDATA)>
+
+<!ELEMENT surface EMPTY>
+<!ATTLIST surface name CDATA #REQUIRED file CDATA #REQUIRED>
+
+<!ELEMENT water (#PCDATA)>
+<!ELEMENT nb_mine (#PCDATA)>
+<!ELEMENT is_open (#PCDATA)>
+<!ELEMENT infinite_background (#PCDATA)>
