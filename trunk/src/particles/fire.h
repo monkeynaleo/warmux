@@ -25,9 +25,11 @@
 
 class FireParticle : public Particle
 {
+  int direction;
  public:
   FireParticle();
   void SignalFallEnding();
+  void Refresh();
 };
 
 #endif
