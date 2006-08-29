@@ -43,6 +43,7 @@ private:
   Team& m_team;
   bool step_sound_played;
   bool prepare_shoot;
+  bool back_jumping;
 
   // energy
   uint energy;
