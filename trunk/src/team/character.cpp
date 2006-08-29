@@ -94,6 +94,7 @@ Character::Character (Team& my_team, const std::string &name) :
   m_allow_negative_y = true;
   animation_time = Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   prepare_shoot = false;
+  back_jumping = false;
 
   // Damage count
   damage_other_team = 0;
@@ -405,6 +406,7 @@ void Character::HighJump()
 void Character::BackJump()
 {
   MSG_DEBUG("character", "BackJump");
+  back_jumping = true;
   jukebox.Play (ActiveTeam().GetSoundProfile(), "jump");
   Jump(GameMode::GetInstance()->character.back_jump_strength,
        GameMode::GetInstance()->character.back_jump_angle);
@@ -602,6 +604,20 @@ void Character::Refresh()
     if(cur > frame_nbr / 2)
       step_sound_played = false;
   }
+
+  if(back_jumping)
+  {
+    assert(&ActiveCharacter() == this);
+    int rotation;
+    static double speed_init = GameMode::GetInstance()->character.back_jump_strength *
+       sin(GameMode::GetInstance()->character.back_jump_angle);
+
+    Point2d speed;
+    GetSpeedXY(speed);
+    rotation = - (int)(180.0 * speed.y / speed_init);
+
+	  body->SetRotation(rotation);
+  }
 }
 
 // Prepare a new turn
@@ -659,7 +675,7 @@ void Character::SignalFallEnding()
   if (IsDead()) return;
 
   pause_bouge_dg = Time::GetInstance()->Read();
-
+  back_jumping = false;
   double norme, degat;
   Point2d speed_vector;
   GameMode * game_mode = GameMode::GetInstance();

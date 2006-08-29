@@ -40,6 +40,7 @@ Body::Body(xmlpp::Element* xml, Profile* res)
   walk_events = 0;
   animation_number = 0;
   direction = 1;
+  main_rotation = 0;
 
   // Load members
   xmlpp::Node::NodeList nodes = xml -> get_children("sprite");
@@ -126,6 +127,7 @@ Body::Body(Body *_body)
   walk_events = 0;
   animation_number = _body->animation_number;
   direction = 1;
+  main_rotation = 0;
 
   // Add a special weapon member to the body
   weapon_member = new WeaponMember();
@@ -339,6 +341,7 @@ void Body::Build()
   }
   body_mvt.pos.y = (float)GetSize().y - y_max + current_mvt->test_bottom;
   body_mvt.pos.x = GetSize().x / 2.0 - squel_lst.front().member->spr->GetWidth() / 2.0;
+  body_mvt.angle = main_rotation;
   squel_lst.front().member->ApplyMovement(body_mvt, squel_lst);
 
   need_rebuild = false;
@@ -420,6 +423,7 @@ void Body::SetClothe(std::string name)
   {
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
+    main_rotation = 0;
     need_rebuild = true;
   }
   else
@@ -443,6 +447,7 @@ void Body::SetMovement(std::string name)
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
     last_refresh = Time::GetInstance()->Read();
+    main_rotation = 0;
     need_rebuild = true;
   }
   else
@@ -471,6 +476,7 @@ void Body::SetClotheOnce(std::string name)
       play_once_clothe_sauv = current_clothe;
     current_clothe = clothes_lst.find(name)->second;
     BuildSqueleton();
+    main_rotation = 0;
     need_rebuild = true;
   }
   else
@@ -497,6 +503,7 @@ void Body::SetMovementOnce(std::string name)
     current_mvt = mvt_lst.find(name)->second;
     current_frame = 0;
     last_refresh = Time::GetInstance()->Read();
+    main_rotation = 0;
     need_rebuild = true;
   }
   else
@@ -584,6 +591,12 @@ void Body::MakeParticles(const Point2i& pos)
   if(current_clothe->layers[layer]->type != "weapon")
     ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->layers[layer]->spr,
                                                   current_clothe->layers[layer]->GetPos()));
+}
+
+void Body::SetRotation(int angle)
+{
+  main_rotation = angle;
+  need_rebuild = true;
 }
 
 const std::string& Body::GetMovement() { return current_mvt->type; }
