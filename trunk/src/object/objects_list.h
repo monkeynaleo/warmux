@@ -16,18 +16,18 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Liste des objets qui sont sur le plateau de jeu.
+ * Stores most of the object playing in the game
  *****************************************************************************/
 
-#ifndef OBJETS_H
-#define OBJETS_H
+#ifndef OBJECTS_LIST_H
+#define OBJECTS_LIST_H
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include <list>
 //-----------------------------------------------------------------------------
 
-// Boucle pour chaque objet de la liste des objets (non fantome)
+// Loop for all objects
 #define FOR_ALL_OBJECTS(object) \
   for (ObjectsList::iterator object=lst_objects.Begin(), \
        end=lst_objects.End(); \
@@ -37,7 +37,7 @@
 
 //-----------------------------------------------------------------------------
 
-// Boucle pour chaque objet de la liste des objets (non fantome)
+// Loop for all objects that aren't out of the screen
 #define FOR_EACH_OBJECT(object) \
   FOR_ALL_OBJECTS(object) \
   if (!object->ptr->IsGhost())
@@ -59,28 +59,26 @@ private:
   std::list<object_t> lst;
 
 public:
-  void Init();
   ~ObjectsList();
 
-  // Ajoute un objet à la liste
   void AddObject (PhysicalObj* obj);
-
-  // Retire un objet de la liste
   void RemoveObject (PhysicalObj* obj);
-
-  // Refresh des tous les objets
+  // Call the Refresh method of all the objects
   void Refresh();
-
-  // Draw tous les objets
+  // Call the Draw method of all the objects
   void Draw();
 
-  // Tous les objets sont prêts ? (ou alors un objet est en cours
-  // d'animation ?)
   bool AllReady();
 
-  // Début/fin de la liste
   iterator Begin() { return lst.begin(); }
   iterator End() { return lst.end(); }
+
+  // Place mines randomly on the map
+  void PlaceMines();
+  // Place barrels randomly on the map
+  void PlaceBarrels();
+
+  void FreeMem();
 };
 
 extern ObjectsList lst_objects;

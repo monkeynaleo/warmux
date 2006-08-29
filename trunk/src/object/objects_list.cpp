@@ -27,8 +27,10 @@
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/camera.h"
+#include "../tool/debug.h"
 #include "../tool/random.h"
 #include "../tool/rectangle.h"
+#include "../game/time.h"
 #include "../weapon/mine.h"
 #include <vector>
 
@@ -37,10 +39,9 @@ ObjectsList lst_objects;
 //-----------------------------------------------------------------------------
 
 // Initialise la liste des objets standards
-void ObjectsList::Init()
+void ObjectsList::PlaceMines()
 {
-  lst.clear();
-
+  MSG_DEBUG("lst_objects","Placing mines");
   for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
@@ -51,6 +52,11 @@ void ObjectsList::Init()
     else
       delete obj;
   }
+}
+
+void ObjectsList::PlaceBarrels()
+{
+  MSG_DEBUG("lst_objects","Placing barrels");
   for (uint i= 0; i<lst_terrain.TerrainActif().nb_barrel; ++i)
   {
     PetrolBarrel *obj = new PetrolBarrel();
@@ -58,10 +64,7 @@ void ObjectsList::Init()
     if (obj->PutRandomly(false, 20.0))
       AddObject (obj);
     else
-    {
       delete obj;
-	    printf("not placed\n");
-    }
   }
 }
 
@@ -69,25 +72,20 @@ void ObjectsList::Init()
 
 void ObjectsList::AddObject (PhysicalObj* obj)
 {
+  MSG_DEBUG("lst_objects","Adding \"%s\" to the object list", obj->GetName().c_str());
   lst.push_back (object_t(obj,false));
 }
 
 ObjectsList::~ObjectsList()
 {
-
-  std::list<object_t>::iterator object;
-  for (object = lst.begin();
-       object != lst.end();
-       ++object) {
-    if((*object).ptr)
-      delete (*object).ptr;
-  }
+  FreeMem();
 }
 
 //-----------------------------------------------------------------------------
 
 void ObjectsList::RemoveObject (PhysicalObj* obj)
 {
+  MSG_DEBUG("lst_objects","Object \"%s\" wants to be removed from the object list", obj->GetName().c_str());
   FOR_EACH_OBJECT(it)
   {
     if ( it->ptr == obj)
@@ -98,10 +96,10 @@ void ObjectsList::RemoveObject (PhysicalObj* obj)
       return;
     }
   }
+  assert(false);
 }
 
 //-----------------------------------------------------------------------------
-
 void ObjectsList::Refresh()
 {
   ObjectsList::iterator object=lst_objects.Begin();
@@ -113,23 +111,33 @@ void ObjectsList::Refresh()
       object->ptr->Refresh();
       object++;
     } else {
+      MSG_DEBUG("lst_objects","Erasing object \"%s\" from the object list", object->ptr->GetName().c_str());
       object = lst.erase(object);
     }
   }
 }
 
 //-----------------------------------------------------------------------------
-
 void ObjectsList::Draw()
 {
-  FOR_EACH_OBJECT(object) object->ptr->Draw ();
+  for (ObjectsList::iterator it = lst.begin();
+       it != lst.end();
+       ++it)
+	if(!it->to_remove)
+	{
+		assert(it->ptr != NULL);
+		if(Time::GetInstance()->IsGamePaused())
+		{
+			MSG_DEBUG("lst_objects","Displaying %s",it->ptr->GetName().c_str());
+		}
+                if (!it->ptr->IsGhost())
+		{
+			it->ptr->Draw();
+		}
+	}
 }
 
-
 //-----------------------------------------------------------------------------
-
-// Tous les objets sont prêts ? (ou alors un objet est en cours
-// d'animation ?)
 bool ObjectsList::AllReady()
 {
   FOR_EACH_OBJECT(object)
@@ -140,3 +148,17 @@ bool ObjectsList::AllReady()
 }
 
 //-----------------------------------------------------------------------------
+
+void ObjectsList::FreeMem()
+{
+  MSG_DEBUG("lst_objects", "Erasing object list");
+  std::list<object_t>::iterator object;
+  for (object = lst.begin();
+       object != lst.end();
+       ++object) {
+    if((*object).ptr)
+      delete (*object).ptr;
+  }
+  lst.clear();
+}
+

@@ -37,6 +37,7 @@
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../menu/results_menu.h"
+#include "../object/objects_list.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
 #include "../team/results.h"
@@ -186,9 +187,7 @@ void Game::Start()
     if (IsGameFinished()) 
       MessageEndOfGame();
 
-  world.FreeMem();
-  teams_list.UnloadGamingData();
-  jukebox.StopAll();
+  UnloadDatas();
   Mouse::GetInstance()->SetPointer(POINTER_STANDARD);
 
   if (err)
@@ -198,6 +197,15 @@ void Game::Start()
     question.Set (txt, true, 0);
     AskQuestion (false);
   }
+}
+
+void Game::UnloadDatas()
+{
+  world.FreeMem();
+  lst_objects.FreeMem();
+  ParticleEngine::Stop();
+  teams_list.UnloadGamingData();
+  jukebox.StopAll();
 }
 
 void Game::Pause()

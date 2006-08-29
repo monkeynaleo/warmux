@@ -91,10 +91,12 @@ void GameLoop::InitGameData_NetServer()
 
   randomSync.Init();
 
+  lst_objects.PlaceBarrels();
+
   std::cout << "o " << _("Initialise teams") << std::endl;
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
 
-  lst_objects.Init();
+  lst_objects.PlaceMines();
   std::cout << "o " << _("Initialise data") << std::endl;
   CharacterCursor::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
@@ -135,8 +137,9 @@ void GameLoop::InitGameData_NetClient()
     SDL_Delay(100);
   }
 
+  lst_objects.PlaceBarrels();
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
-  lst_objects.Init();
+  lst_objects.PlaceMines();
  
   std::cout << network.state << " : Waiting for people over the network" << std::endl;
   while (network.state != Network::NETWORK_PLAYING)
@@ -153,10 +156,11 @@ void GameLoop::InitData_Local()
   std::cout << "o " << _("Find a random position for characters") << std::endl;
   world.Reset();
   lst_terrain.TerrainActif().FreeData();
+  lst_objects.PlaceBarrels();
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
 
   std::cout << "o " << _("Initialise objects") << std::endl;
-  lst_objects.Init();
+  lst_objects.PlaceMines();
 }
 
 void GameLoop::InitData()
@@ -409,7 +413,7 @@ void GameLoop::Run()
   uint delay=0;
 #endif 
 
-  // boucle until game is finished
+  // loop until game is finished
   do
   {
 #ifdef ENABLE_LIMIT_FPS    
@@ -438,8 +442,6 @@ void GameLoop::Run()
       SDL_Delay(sleep_fps);
 #endif
   } while( !Game::GetInstance()->GetEndOfGameStatus() ); 
-
-  ParticleEngine::Stop();
 }
 
 void GameLoop::RefreshClock()
