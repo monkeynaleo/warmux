@@ -13,7 +13,9 @@
   </sprite>
   
   <sprite name="fire_particle">
-    <image file="object/fire.png" />
+    <image file="object/fire.png" >
+      <grid pos="0,0" size="32,35" array="6,1" />
+    </image>
   </sprite>
   
   <sprite name="star_particle">
