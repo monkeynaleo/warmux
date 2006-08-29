@@ -42,6 +42,7 @@ public:
   static Game * GetInstance();
 
   void Start();
+  void UnloadDatas();
   
   bool IsGameFinished();
   bool IsGameLaunched() const;
