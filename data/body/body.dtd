@@ -28,9 +28,24 @@
 <!ELEMENT clothe (member+)>
 <!ATTLIST clothe name CDATA #FIXED "normal">
 
-<!ELEMENT member EMPTY>
-<!ATTLIST member name CDATA #REQUIRED layer CDATA #REQUIRED>
-
 <!-- movement -->
 <!ELEMENT movement (collision_rect, frame+)>
 <!ATTLIST movement name CDATA #REQUIRED speed CDATA #REQUIRED>
+
+<!ELEMENT collision_rect EMPTY>
+<!ATTLIST collision_rect left CDATA #REQUIRED right CDATA #REQUIRED top CDATA #REQUIRED bottom CDATA #REQUIRED>
+
+<!ELEMENT frame (member+)>
+<!ATTLIST frame number CDATA #REQUIRED>
+
+<!ELEMENT member EMPTY>
+<!ATTLIST member
+          name CDATA #IMPLIED
+          layer CDATA #IMPLIED
+          type CDATA #IMPLIED
+          dx CDATA #IMPLIED
+          dy CDATA #IMPLIED
+          angle CDATA #IMPLIED
+          follow_crosshair CDATA #IMPLIED
+          follow_speed CDATA #IMPLIED
+          follow_direction CDATA #IMPLIED>
