@@ -331,6 +331,7 @@ bool WeaponLauncher::p_Shoot ()
 //   }
   ReloadLauncher();
   projectile->Shoot (m_strength);
+  launcher_is_loaded = false;
   return true;
 }
 
