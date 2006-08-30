@@ -33,7 +33,7 @@
 #include "../weapon/gun.h"
 #include "../weapon/explosion.h"
 
-const uint BULLET_SPEED = 20;
+const uint GUN_BULLET_SPEED = 20;
 
 GunBullet::GunBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :
@@ -51,17 +51,24 @@ void GunBullet::ShootSound()
 Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
   m_name = _("Gun");
+  ReloadLauncher();
+}
 
-  projectile = new GunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this));
+WeaponProjectile * Gun::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new GunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 bool Gun::p_Shoot ()
-{  
+{
   if (m_is_active)
     return false;  
 
   m_is_active = true;
-  projectile->Shoot (20);
+  ReloadLauncher();
+  projectile->Shoot (GUN_BULLET_SPEED);
+  launcher_is_loaded = false;
 
   return true;
 }

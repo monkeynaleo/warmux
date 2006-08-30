@@ -44,6 +44,8 @@ class Gun : public WeaponLauncher
 public:  
   Gun();
   bool p_Shoot();
+protected:
+  WeaponProjectile * GetProjectileInstance();
 };
 
 #endif

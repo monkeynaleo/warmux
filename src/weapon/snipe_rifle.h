@@ -51,6 +51,7 @@ class SnipeRifle : public WeaponLauncher
   protected:
     void SignalProjectileExplosion();
     void p_Deselect();
+    WeaponProjectile * GetProjectileInstance();
   public:
     SnipeRifle();
     void DrawBeam();

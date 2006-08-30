@@ -142,8 +142,13 @@ TuxLauncher::TuxLauncher() :
 { 
   m_name = _("SuperTux");   
   override_keys = true ;
+  ReloadLauncher();
+}
 
-  projectile = new SuperTux(cfg(),dynamic_cast<WeaponLauncher *>(this));
+WeaponProjectile * TuxLauncher::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new SuperTux(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 void TuxLauncher::HandleKeyEvent(int action, int event_type)

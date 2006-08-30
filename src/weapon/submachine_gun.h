@@ -43,15 +43,11 @@ class SubMachineGunBullet : public WeaponBullet
 class SubMachineGun : public WeaponLauncher
 {
   private:
-    typedef std::list<WeaponBullet *> ProjectileList;
-    typedef ProjectileList::iterator ProjectileIterator;
-    ProjectileList projectile_list;
-    ProjectileIterator projectile_iterator;
     uint m_first_shoot;
-    bool is_loaded;
   private:
-    void Reload();
     void RepeatShoot();
+  protected:
+    WeaponProjectile * GetProjectileInstance();
   public:
     SubMachineGun();
     bool p_Shoot();

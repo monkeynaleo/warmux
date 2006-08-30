@@ -84,7 +84,8 @@ class Mine : public WeaponLauncher
 private:
   bool p_Shoot();
   void Add (int x, int y);
-
+protected:
+  WeaponProjectile * GetProjectileInstance();
 public:
   Mine();
   MineConfig& cfg();

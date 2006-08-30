@@ -70,8 +70,14 @@ GrenadeLauncher::GrenadeLauncher() :
 {  
 
   m_name = _("Grenade");
-  projectile = new Grenade(cfg(),dynamic_cast<WeaponLauncher *>(this));
   m_allow_change_timeout = true;
+  ReloadLauncher();
+}
+
+WeaponProjectile * GrenadeLauncher::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new Grenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 

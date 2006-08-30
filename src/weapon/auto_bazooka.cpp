@@ -114,10 +114,15 @@ AutomaticBazooka::AutomaticBazooka() :
 {  
   m_name = _("Automatic bazooka");
 
-  projectile = new RoquetteTeteCherche(cfg(),dynamic_cast<WeaponLauncher *>(this));
-
   cible.choisie = false;
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
+  ReloadLauncher();
+}
+
+WeaponProjectile * AutomaticBazooka::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new RoquetteTeteCherche(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 void AutomaticBazooka::Draw()
@@ -125,7 +130,6 @@ void AutomaticBazooka::Draw()
   Weapon::Draw();
   DrawTarget();
 }
-
 
 void AutomaticBazooka::Refresh()
 {

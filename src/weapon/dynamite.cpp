@@ -48,6 +48,12 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
   SetTestRect (0, 0, 2, 3);
 }
 
+void BatonDynamite::Shoot(double strength)
+{
+  Reset();
+  WeaponProjectile::Shoot(strength);
+}
+
 void BatonDynamite::Reset()
 {
   StopMoving();
@@ -84,13 +90,13 @@ Dynamite::Dynamite() :
     WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Dynamite");
-  projectile = new BatonDynamite(cfg(),dynamic_cast<WeaponLauncher *>(this));
+  ReloadLauncher();
 }
 
-void Dynamite::p_Select()
+WeaponProjectile * Dynamite::GetProjectileInstance()
 {
-  dynamic_cast<BatonDynamite *>(projectile)->Reset();
-  WeaponLauncher::p_Select();
+  return dynamic_cast<WeaponProjectile *>
+      (new BatonDynamite(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 // Pose une dynamite

@@ -54,16 +54,24 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
 {
   m_name = _("Snipe Rifle");
 
-  override_keys = true ;
   last_angle = 0.0;
-  projectile = new SnipeBullet(cfg(),dynamic_cast<WeaponLauncher *>(this));
   targeting_something = false;
   m_laser_image = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
+
+  ReloadLauncher();
+}
+
+WeaponProjectile * SnipeRifle::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new SnipeBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 bool SnipeRifle::p_Shoot()
 {
+  ReloadLauncher();
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
+  launcher_is_loaded = false;
   return true;
 }
 
@@ -181,8 +189,6 @@ void SnipeRifle::Draw()
 {
   if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsActive() ) return;
   ComputeCrossPoint();
-//  (*m_laser_beam_image)[0].surface.LineColor(x_orig,x_dest,y_orig,y_dest,Color(255,0,0,255));
-//  m_laser_beam_image->Draw(laser_beam_pos);
   DrawBeam();
 
   if( targeting_something ) m_laser_image->Draw(targeted_point - (m_laser_image->GetSize()/2));      // Draw the laser impact

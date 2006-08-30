@@ -52,6 +52,8 @@ class GnuLauncher : public WeaponLauncher
 {
 public:
   GnuLauncher();
+protected:
+  WeaponProjectile * GetProjectileInstance();
 };
 
 #endif

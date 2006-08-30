@@ -37,6 +37,8 @@ class Bazooka : public WeaponLauncher
 {
  public:
   Bazooka();
+ protected:
+  WeaponProjectile * GetProjectileInstance();
 };
 
 #endif

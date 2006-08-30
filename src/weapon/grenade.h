@@ -45,6 +45,8 @@ class GrenadeLauncher : public WeaponLauncher
 {
  public:
   GrenadeLauncher();
+ protected:
+  WeaponProjectile * GetProjectileInstance();
 };
 
 #endif

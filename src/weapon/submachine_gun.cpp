@@ -59,8 +59,15 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   ignore_collision_signal = true;
   ignore_explosion_signal = true;
   m_first_shoot = 0;
-  is_loaded = false;
-  Reload();
+
+  ReloadLauncher();
+}
+
+// Return a projectile instance for the submachine gun
+WeaponProjectile * SubMachineGun::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new SubMachineGunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 bool SubMachineGun::p_Shoot ()
@@ -68,9 +75,9 @@ bool SubMachineGun::p_Shoot ()
   if (m_is_active)
     return false;
   
-  Reload();
+  ReloadLauncher();
   projectile->Shoot(SUBMACHINE_BULLET_SPEED);
-  is_loaded = false;
+  launcher_is_loaded = false;
   
   m_is_active = true;
   return true;
@@ -91,14 +98,6 @@ void SubMachineGun::RepeatShoot()
       m_first_shoot = tmp;
     }
   }
-}
-
-// Load the machine gun with a projectile which is not in use
-void SubMachineGun::Reload()
-{
-  if (is_loaded) return;
-  projectile = new SubMachineGunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this));
-  projectile_list.push_back(dynamic_cast<WeaponBullet *> (projectile));
 }
 
 // Special handle to allow multiple shoot at a time

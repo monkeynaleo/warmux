@@ -121,6 +121,11 @@ GnuLauncher::GnuLauncher() :
   WeaponLauncher(WEAPON_GNU, "gnulauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("GnuLauncher");
-  projectile = new Gnu(cfg(),dynamic_cast<WeaponLauncher *>(this));
+  ReloadLauncher();
 }
 
+WeaponProjectile * GnuLauncher::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new Gnu(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+}
