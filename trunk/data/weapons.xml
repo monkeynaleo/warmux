@@ -183,7 +183,7 @@
   <surface name="minelauncher" file="weapon/mine/mine.png" />
   <sprite name="mine">
     <image file="weapon/mine/mine_anim.png">
-      <grid size="16,8" array="2,1" />
+      <grid pos="0,0" size="16,8" array="2,1" />
     </image>
   </sprite>
   <surface name="mine_impact" file="weapon/mine/mine_impact.png" />
