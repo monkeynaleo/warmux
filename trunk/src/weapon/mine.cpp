@@ -174,7 +174,13 @@ MineConfig * MineConfig::GetInstance()
 Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
-  projectile = new ObjMine(cfg(), dynamic_cast<WeaponLauncher *>(this));
+  ReloadLauncher();
+}
+
+WeaponProjectile * Mine::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new ObjMine(cfg(), dynamic_cast<WeaponLauncher *>(this)));
 }
 
 bool Mine::p_Shoot()
@@ -188,18 +194,21 @@ bool Mine::p_Shoot()
 
 void Mine::Add (int x, int y)
 {
-  ObjMine *obj = new ObjMine(cfg(), dynamic_cast<WeaponLauncher *>(this));
-  
-  obj -> SetXY ( Point2i(x, y) );
+  ReloadLauncher();
+  launcher_is_loaded = false;
+
+  projectile -> SetXY ( Point2i(x, y) );
 
   Point2d speed_vector;
   ActiveCharacter().GetSpeedXY(speed_vector);
-  obj -> SetSpeedXY (speed_vector);
-  lst_objects.AddObject (obj);
+  projectile -> SetSpeedXY (speed_vector);
+  lst_objects.AddObject (projectile);
 }
 
 MineConfig& Mine::cfg()
-{ return static_cast<MineConfig&>(*extra_params); }
+{
+  return static_cast<MineConfig&>(*extra_params);
+}
 
 MineConfig::MineConfig()
 {
@@ -208,11 +217,9 @@ MineConfig::MineConfig()
   escape_time = 2;
 }
 
-
 void MineConfig::LoadXml(xmlpp::Element *elem) 
 {
   ExplosiveWeaponConfig::LoadXml (elem);
   LitDocXml::LitUint (elem, "escape_time", escape_time);
   LitDocXml::LitDouble (elem, "detection_range", detection_range);
 }
-

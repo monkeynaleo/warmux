@@ -39,6 +39,8 @@ class RiotBomb : public WeaponLauncher
 {
  public:
   RiotBomb();
+ protected:
+  WeaponProjectile * GetProjectileInstance();
 };
 
 #endif

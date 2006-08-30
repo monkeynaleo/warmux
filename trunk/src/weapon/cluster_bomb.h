@@ -73,7 +73,8 @@ class ClusterLauncher : public WeaponLauncher
 {
  public:
   ClusterLauncher();
-
+ protected:
+  WeaponProjectile * GetProjectileInstance();
  private:
   ClusterBombConfig& cfg() ;
 };

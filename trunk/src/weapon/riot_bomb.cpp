@@ -67,5 +67,11 @@ RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
 {  
   m_name = _("Riot bomb");
-  projectile = new RoquetteRiotBomb(cfg(),dynamic_cast<WeaponLauncher *>(this));
+  ReloadLauncher();
+}
+
+WeaponProjectile * RiotBomb::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new RoquetteRiotBomb(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }

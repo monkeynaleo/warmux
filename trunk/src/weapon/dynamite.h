@@ -40,6 +40,7 @@ public:
                 WeaponLauncher * p_launcher);
   void Reset();
   void Refresh();
+  void Shoot(double strength);
 
 protected:
   void Explosion();
@@ -52,9 +53,9 @@ class Dynamite : public WeaponLauncher
 {
 private:
   bool p_Shoot();
-
+protected:
+  WeaponProjectile * GetProjectileInstance();
 public:
   Dynamite();
-  void p_Select();
 };
 #endif

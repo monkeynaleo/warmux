@@ -69,6 +69,9 @@ public:
   bool IsReady() const;
   virtual void ChooseTarget(Point2i mouse_pos);
   void DrawTarget();
+
+protected:
+  WeaponProjectile * GetProjectileInstance();
 };
 
 #endif

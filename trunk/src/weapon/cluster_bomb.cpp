@@ -139,8 +139,14 @@ ClusterLauncher::ClusterLauncher() :
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("ClusterBomb");
-  projectile = new ClusterBomb(cfg(),dynamic_cast<WeaponLauncher *>(this));
   ignore_collision_signal = true;
+  ReloadLauncher();
+}
+
+WeaponProjectile * ClusterLauncher::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new ClusterBomb(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 ClusterBombConfig& ClusterLauncher::cfg() 

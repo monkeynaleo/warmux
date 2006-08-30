@@ -70,17 +70,24 @@ void BounceBall::SignalCollision()
 
 BounceBallLauncher::BounceBallLauncher() : 
   WeaponLauncher(WEAPON_BOUNCE_BALL, "bounce_ball", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
-{  
+{
   m_name = _("BounceBall");
-  projectile = new BounceBall(cfg(),dynamic_cast<WeaponLauncher *>(this));
+  ReloadLauncher();
+}
+
+WeaponProjectile * BounceBallLauncher::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new BounceBall(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 bool BounceBallLauncher::p_Shoot ()
-{  
+{
+  ReloadLauncher();
   if (max_strength == 0)
     projectile->Shoot (10);
   else 
     projectile->Shoot (m_strength);
-
+  launcher_is_loaded = false;
   return true;
 }

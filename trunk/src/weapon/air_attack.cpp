@@ -180,7 +180,9 @@ bool AirAttack::p_Shoot ()
 }
 
 AirAttackConfig& AirAttack::cfg() 
-{ return static_cast<AirAttackConfig&>(*extra_params); }
+{
+  return static_cast<AirAttackConfig&>(*extra_params);
+}
 
 //-----------------------------------------------------------------------------
 

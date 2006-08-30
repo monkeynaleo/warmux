@@ -106,8 +106,13 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
   WeaponLauncher(WEAPON_HOLLY_GRENADE, "holly_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("HollyGrenade");
-  projectile = new HollyGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this));
   m_allow_change_timeout = true;
   ignore_collision_signal = true;
+  ReloadLauncher();
 }
 
+WeaponProjectile * HollyGrenadeLauncher::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new HollyGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+}

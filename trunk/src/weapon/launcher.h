@@ -101,11 +101,16 @@ class WeaponLauncher : public Weapon
   protected:
     WeaponProjectile * projectile;
     uint nb_active_projectile;
+    bool m_allow_change_timeout;
+    bool launcher_is_loaded;
+    typedef std::list<WeaponProjectile *> ProjectileList;
+    ProjectileList projectile_list;
   protected:
     virtual bool p_Shoot();
     virtual void p_Select();
     virtual void p_Deselect();
-    bool m_allow_change_timeout;
+    virtual WeaponProjectile * GetProjectileInstance() = 0;
+    virtual bool ReloadLauncher();
   private:
     void DirectExplosion();
   

@@ -63,5 +63,11 @@ Bazooka::Bazooka() :
   WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
 {  
   m_name = _("Bazooka");
-  projectile = new RoquetteBazooka(cfg(),dynamic_cast<WeaponLauncher *>(this));
+  ReloadLauncher();
+}
+
+WeaponProjectile * Bazooka::GetProjectileInstance()
+{
+  return dynamic_cast<WeaponProjectile *>
+      (new RoquetteBazooka(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }

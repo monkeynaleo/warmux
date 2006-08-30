@@ -305,7 +305,8 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
                                EmptyWeaponConfig * params,
                                weapon_visibility_t visibility) :
     Weapon(type, id, params, visibility)
-{  
+{
+  launcher_is_loaded = false;
   projectile = NULL;
   nb_active_projectile = 0;
   ignore_timeout_signal = false;
@@ -315,7 +316,9 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
 
 WeaponLauncher::~WeaponLauncher()
 {
-  if (projectile != NULL) delete projectile;
+  ProjectileList::iterator it;
+  for (it = projectile_list.begin();it != projectile_list.end() ; it++)
+    delete *it;
 }
 
 bool WeaponLauncher::p_Shoot ()
@@ -326,7 +329,17 @@ bool WeaponLauncher::p_Shoot ()
 //     DirectExplosion();
 //     return true;
 //   }
+  ReloadLauncher();
   projectile->Shoot (m_strength);
+  return true;
+}
+
+bool WeaponLauncher::ReloadLauncher()
+{
+  if (launcher_is_loaded) return false;
+  projectile = GetProjectileInstance();
+  projectile_list.push_back(dynamic_cast<WeaponProjectile *> (projectile));
+  launcher_is_loaded = true;
   return true;
 }
 
