@@ -54,12 +54,12 @@ GameMode::GameMode()
   character.max_energy = 200;
   character.mass = 100;
   character.air_resist_factor = 1.0;
-  character.jump_strength = 100;
+  character.jump_strength = 8;
   character.jump_angle = -60;
-  character.super_jump_strength = 200;
+  character.super_jump_strength = 11;
   character.super_jump_angle = -80;
-  character.super_jump_strength = 120;
-  character.super_jump_angle = -100;
+  character.back_jump_strength = 9;
+  character.back_jump_angle = -100;
 }
 
 // Load data options from the selected game_mode
