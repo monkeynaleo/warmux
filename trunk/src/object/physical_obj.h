@@ -66,10 +66,6 @@ protected:
   // Object size and position.
   uint m_width, m_height;
 
-  // Used by the sons of this class to allow modification of READY/BUSY state
-  // (Unused by PhysicalObj)
-  bool m_ready;
-
   std::string m_rebound_sound;
 
   alive_t m_alive;
@@ -153,12 +149,12 @@ public:
   void AddDamage(uint damage_points);
 
   //-------- state ----
-  void Ready();
+  void Init();
   void Ghost();
   void Drown();
   void GoOutOfWater(); // usefull for supertux.
-  
-  bool IsReady() const;
+
+  bool IsImmobile() const;
   bool IsDead() const;
   bool IsGhost() const;
   bool IsDrowned() const;

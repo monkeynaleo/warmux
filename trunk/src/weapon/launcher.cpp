@@ -138,7 +138,7 @@ void WeaponProjectile::Shoot(double strength)
 {
   MSG_DEBUG("weapon_projectile", "shoot.\n");
 
-  Ready();
+  Init();
 
   if (launcher != NULL) launcher->IncActiveProjectile();
 
