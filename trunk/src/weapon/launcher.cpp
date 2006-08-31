@@ -68,8 +68,6 @@ void WeaponBullet::Refresh()
 // Explode if hit the ground or apply damage to character
 void WeaponBullet::Explosion()
 {
-  RemoveFromPhysicalEngine();
-
   if (IsGhost())
   {
     MSG_DEBUG (m_name.c_str(), "Ghost");
@@ -94,6 +92,7 @@ void WeaponBullet::Explosion()
     }
   }
   if (launcher != NULL && !launcher->ignore_explosion_signal) launcher->SignalProjectileExplosion();
+  Ghost();
 }
 
 void WeaponBullet::DoExplosion()
@@ -219,21 +218,23 @@ void WeaponProjectile::SignalCollision()
   if (explode_with_collision || IsGhost()) Explosion();
 }
 
+// Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
-  SignalCollision();
+  RemoveFromPhysicalEngine();
+  if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState();
 }
 
+// Signal a fall ending
 void WeaponProjectile::SignalFallEnding()
 {
-  SignalCollision();
+  if (launcher != NULL && !launcher->ignore_fall_ending_signal) launcher->SignalProjectileFallEnding();
+  if (explode_with_collision || IsGhost()) Explosion();  // To remove !
 }
 
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
 {
-  RemoveFromPhysicalEngine();
-
   if (IsGhost())
   {
     MSG_DEBUG (m_name.c_str(), "Ghost");
@@ -243,6 +244,7 @@ void WeaponProjectile::Explosion()
   MSG_DEBUG (m_name.c_str(), "Explosion");
   DoExplosion();
   SignalExplosion();
+  Ghost();
 }
 
 void WeaponProjectile::SignalExplosion()
@@ -311,7 +313,9 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
   nb_active_projectile = 0;
   ignore_timeout_signal = false;
   ignore_collision_signal = false;
+  ignore_fall_ending_signal = false;
   ignore_explosion_signal = false;
+  ignore_ghost_state_signal = true;
 }
 
 WeaponLauncher::~WeaponLauncher()
@@ -360,6 +364,18 @@ void WeaponLauncher::SignalProjectileExplosion()
 
 // Signal that a projectile fired by this weapon has hit something (ground, character etc)
 void WeaponLauncher::SignalProjectileCollision()
+{
+  m_is_active = false;
+}
+
+// Signal a fall ending of a projectile
+void WeaponLauncher::SignalProjectileFallEnding()
+{
+  m_is_active = false;
+}
+
+// Signal a ghost state
+void WeaponLauncher::SignalProjectileGhostState()
 {
   m_is_active = false;
 }
