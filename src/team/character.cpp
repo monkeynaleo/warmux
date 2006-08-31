@@ -495,15 +495,15 @@ void Character::HandleKeyEvent(int action, int event_type)
           switch (action)
           {
             case ACTION_JUMP:
-              if(ActiveCharacter().IsReady())
+              if(ActiveCharacter().IsImmobile())
                 action_handler->NewAction (new Action(ACTION_JUMP));
 	            return ;
             case ACTION_HIGH_JUMP:
-              if(ActiveCharacter().IsReady())
+              if(ActiveCharacter().IsImmobile())
                 action_handler->NewAction (new Action(ACTION_HIGH_JUMP));
               return ;
             case ACTION_BACK_JUMP:
-              if(ActiveCharacter().IsReady())
+              if(ActiveCharacter().IsImmobile())
                 action_handler->NewAction (new Action(ACTION_BACK_JUMP));
               return ;
             case ACTION_MOVE_LEFT:
@@ -518,7 +518,7 @@ void Character::HandleKeyEvent(int action, int event_type)
         case KEY_REFRESH:
           switch (action) {
             case ACTION_MOVE_LEFT:
-              if(ActiveCharacter().IsReady())
+              if(ActiveCharacter().IsImmobile())
               {
                 if(event_type==KEY_PRESSED)
                   InitMouvementDG(PAUSE_BOUGE);
@@ -527,7 +527,7 @@ void Character::HandleKeyEvent(int action, int event_type)
               break ;
 
             case ACTION_MOVE_RIGHT:
-              if(ActiveCharacter().IsReady())
+              if(ActiveCharacter().IsImmobile())
               {
                 if(event_type==KEY_PRESSED)
                   InitMouvementDG(PAUSE_BOUGE);
@@ -536,7 +536,7 @@ void Character::HandleKeyEvent(int action, int event_type)
               break ;
 
             case ACTION_UP:
-              if(ActiveCharacter().IsReady())
+              if(ActiveCharacter().IsImmobile())
               {
                 if (ActiveTeam().crosshair.enable)
                 {
@@ -548,7 +548,7 @@ void Character::HandleKeyEvent(int action, int event_type)
 	      break ;
 
             case ACTION_DOWN:
-              if(ActiveCharacter().IsReady())
+              if(ActiveCharacter().IsImmobile())
               {
                 if (ActiveTeam().crosshair.enable)
                 {
@@ -640,7 +640,7 @@ Team& Character::TeamAccess()
 
 bool Character::MouvementDG_Autorise() const
 {
-  if (!IsReady() || IsFalling()) return false;
+  if (!IsImmobile() || IsFalling()) return false;
   return pause_bouge_dg < Time::GetInstance()->Read();
 }
 

@@ -142,7 +142,7 @@ bool ObjectsList::AllReady()
 {
   FOR_EACH_OBJECT(object)
   {
-    if (!object->ptr->IsReady()) return false;
+    if (!object->ptr->IsImmobile()) return false;
   }
   return true;
 }

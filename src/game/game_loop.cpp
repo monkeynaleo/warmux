@@ -590,11 +590,11 @@ void GameLoop::SetState(int new_state, bool begin_game)
 
 PhysicalObj* GameLoop::GetMovingObject()
 {
-  if (!ActiveCharacter().IsReady()) return &ActiveCharacter();
+  if (!ActiveCharacter().IsImmobile()) return &ActiveCharacter();
 
   FOR_ALL_CHARACTERS(equipe,ver)
   {
-    if (!ver -> IsReady() && !ver -> IsGhost())
+    if (!ver -> IsImmobile() && !ver -> IsGhost())
     {
       MSG_DEBUG("game.endofturn", "%s is not ready", (*ver).GetName().c_str())
       return &(*ver);
@@ -603,9 +603,9 @@ PhysicalObj* GameLoop::GetMovingObject()
 
   FOR_EACH_OBJECT(object)
   {
-    if (!object -> ptr ->IsReady())
+    if (!object -> ptr ->IsImmobile())
     {
-      MSG_DEBUG("game.endofturn", "%s is not ready", object-> ptr ->GetName().c_str())
+      MSG_DEBUG("game.endofturn", "%s is moving", object-> ptr ->GetName().c_str())
       return object->ptr;
     }
   }

@@ -149,7 +149,7 @@ bool Team::LoadCharacters(uint howmany)
 	active_character = characters.begin(); // we need active_character to be initialized here !!
 	characters.back().SetBody(body);
 	characters.back().PutRandomly(false, world.dst_min_entre_vers);
-	characters.back().Ready();
+        characters.back().Init();
 
 	MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 

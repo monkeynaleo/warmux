@@ -72,8 +72,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_test_top = 0;
   m_test_bottom = 0;
 
-  m_ready = true; // TO REMOVE !!
-
   exterieur_monde_vide = Config::GetInstance()->GetExterieurMondeVide(); // TO REMOVE!! It is the same for all physical objects !
   m_cfg.LoadXml(m_name,xml_config);  // Load physics constants from the xml file
   ResetConstants();       // Set physics constants from the xml file
@@ -422,10 +420,10 @@ bool PhysicalObj::PutOutOfGround()
   return PutOutOfGround(dir);
 }
 
-void PhysicalObj::Ready()
+void PhysicalObj::Init()
 {
   if (m_alive != ALIVE)
-	MSG_DEBUG( "physic.state", "%s - Ready.", m_name.c_str());
+    MSG_DEBUG( "physic.state", "%s - Init.", m_name.c_str());
   m_alive = ALIVE;
   StopMoving();
 }
@@ -471,9 +469,9 @@ void PhysicalObj::GoOutOfWater()
   StartMoving();
 }
 
-bool PhysicalObj::IsReady() const
+bool PhysicalObj::IsImmobile() const
 {
-  return (!IsMoving() && !FootsInVacuum() && m_ready)||(m_alive == GHOST);
+  return (!IsMoving() && !FootsInVacuum())||(m_alive == GHOST);
 }
 
 bool PhysicalObj::IsDead () const
@@ -764,7 +762,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
   {
     bcl++;
     ok = true;
-    Ready();
+    Init();
 
     if (bcl >= NB_MAX_TRY) {
       MSG_DEBUG("physic.position", "%s - Impossible to find an initial position !!", m_name.c_str());
