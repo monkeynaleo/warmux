@@ -87,6 +87,9 @@ void GameLoop::InitGameData_NetServer()
   Action a_change_state(ACTION_CHANGE_STATE);
   network.SendAction ( &a_change_state );
   network.state = Network::NETWORK_INIT_GAME;
+
+  SendGameMode();
+
   world.Reset();
 
   randomSync.Init();

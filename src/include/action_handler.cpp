@@ -236,7 +236,54 @@ void Action_ChangeState (Action *a)
 
 void Action_SetGameMode (Action *a)
 {
-  GameMode::GetInstance()->Load (a->PopString());
+  assert(network.IsClient());
+  GameMode::GetInstance()->max_characters = a->PopInt();
+  GameMode::GetInstance()->max_teams = a->PopInt();
+  GameMode::GetInstance()->duration_turn = a->PopInt();
+  GameMode::GetInstance()->duration_exchange_player = a->PopInt();
+  GameMode::GetInstance()->duration_before_death_mode = a->PopInt();
+  GameMode::GetInstance()->gravity = a->PopDouble();
+  GameMode::GetInstance()->safe_fall = a->PopDouble();
+  GameMode::GetInstance()->damage_per_fall_unit = a->PopDouble();
+  GameMode::GetInstance()->duration_move_player = a->PopInt();
+  GameMode::GetInstance()->allow_character_selection = a->PopInt();
+  GameMode::GetInstance()->character.init_energy = a->PopInt();
+  GameMode::GetInstance()->character.max_energy = a->PopInt();
+  GameMode::GetInstance()->character.mass = a->PopInt();
+  GameMode::GetInstance()->character.air_resist_factor = a->PopDouble();
+  GameMode::GetInstance()->character.jump_strength = a->PopInt();
+  GameMode::GetInstance()->character.jump_angle = a->PopInt();
+  GameMode::GetInstance()->character.super_jump_strength = a->PopInt();
+  GameMode::GetInstance()->character.super_jump_angle = a->PopInt();
+  GameMode::GetInstance()->character.back_jump_strength = a->PopInt();
+  GameMode::GetInstance()->character.back_jump_angle = a->PopInt();
+}
+
+void SendGameMode()
+{
+  assert(network.IsServer());
+  Action a(ACTION_SET_GAME_MODE);
+  a.Push((int)GameMode::GetInstance()->max_characters);
+  a.Push((int)GameMode::GetInstance()->max_teams);
+  a.Push((int)GameMode::GetInstance()->duration_turn);
+  a.Push((int)GameMode::GetInstance()->duration_exchange_player);
+  a.Push((int)GameMode::GetInstance()->duration_before_death_mode);
+  a.Push(GameMode::GetInstance()->gravity);
+  a.Push(GameMode::GetInstance()->safe_fall);
+  a.Push(GameMode::GetInstance()->damage_per_fall_unit);
+  a.Push((int)GameMode::GetInstance()->duration_move_player);
+  a.Push(GameMode::GetInstance()->allow_character_selection);
+  a.Push((int)GameMode::GetInstance()->character.init_energy);
+  a.Push((int)GameMode::GetInstance()->character.max_energy);
+  a.Push((int)GameMode::GetInstance()->character.mass);
+  a.Push(GameMode::GetInstance()->character.air_resist_factor);
+  a.Push((int)GameMode::GetInstance()->character.jump_strength);
+  a.Push(GameMode::GetInstance()->character.jump_angle);
+  a.Push((int)GameMode::GetInstance()->character.super_jump_strength);
+  a.Push(GameMode::GetInstance()->character.super_jump_angle);
+  a.Push((int)GameMode::GetInstance()->character.back_jump_strength);
+  a.Push(GameMode::GetInstance()->character.back_jump_angle);
+  network.SendAction(&a);
 }
 
 void Action_NewTeam (Action *a)
