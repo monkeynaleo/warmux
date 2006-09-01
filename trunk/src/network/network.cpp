@@ -28,6 +28,7 @@
 #include "../include/action_handler.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
+#include "distant_cpu.h"
 //-----------------------------------------------------------------------------
 Network network;
 
@@ -83,14 +84,13 @@ void Network::Disconnect()
 
   SDL_WaitThread(thread,NULL);
   printf("Network thread finished\n");
-  for(std::list<TCPsocket>::iterator client=conn.begin();
-      client != conn.end();
+  for(std::list<DistantComputer*>::iterator client = cpu.begin();
+      client != cpu.end();
       client++)
   {
-    SDLNet_TCP_DelSocket(socket_set,*client);
-    SDLNet_TCP_Close(*client);
+    delete *client;
   }
-  conn.clear();
+  cpu.clear();
   SDLNet_FreeSocketSet(socket_set);
 
   if(m_is_server)
@@ -137,9 +137,8 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
   m_is_connected = true;
 
   socket_set = SDLNet_AllocSocketSet(1);
-  SDLNet_TCP_AddSocket(socket_set, socket);
   connected_player = 1;
-  conn.push_back(socket);
+  cpu.push_back(new DistantComputer(socket));
   thread = SDL_CreateThread(net_thread_func,NULL);
 }
 
@@ -152,7 +151,7 @@ void Network::ServerStart(const std::string &port)
   // The server starts listening for clients
   MSG_DEBUG("network", "Start server on port %s", port.c_str());
 
-  conn.clear();
+  cpu.clear();
   // Convert port number (std::string port) into SDL port number format:
   int prt;
   sscanf(port.c_str(),"%i",&prt);
@@ -179,11 +178,10 @@ void Network::ServerStart(const std::string &port)
   thread = SDL_CreateThread(net_thread_func,NULL);
 }
 
-std::list<TCPsocket>::iterator Network::CloseConnection(std::list<TCPsocket>::iterator closed)
+std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
   printf("Client disconnected\n");
-  SDLNet_TCP_DelSocket(socket_set,*closed);
-  SDLNet_TCP_Close(*closed);
+  delete *closed;
   if(m_is_server && connected_player == max_player_number)
   {
     // A new player will be able to connect, so we reopen the socket
@@ -192,7 +190,7 @@ std::list<TCPsocket>::iterator Network::CloseConnection(std::list<TCPsocket>::it
   }
 
   connected_player--;
-  return conn.erase(closed);
+  return cpu.erase(closed);
 }
 
 void Network::AcceptIncoming()
@@ -228,14 +226,8 @@ void Network::ReceiveActions()
 {
   char* packet;
 
-  uint i;
-  int received;
-  Uint32 packet_size = 0;
-
-  while(m_is_connected && (conn.size()==1 || m_is_server))
+  while(m_is_connected && (cpu.size()==1 || m_is_server))
   {
-    packet_size = 0;
-    i = 0;
     while(SDLNet_CheckSockets(socket_set, 10) == 0 && m_is_connected) //Loop while nothing is received
     if(m_is_server && server_socket)
     {
@@ -245,7 +237,7 @@ void Network::ReceiveActions()
       if(incoming)
       {
         SDLNet_TCP_AddSocket(socket_set, incoming);
-        conn.push_back(incoming);
+        cpu.push_back(new DistantComputer(incoming));
         connected_player++;
         printf("New client connected\n");
         if(connected_player >= max_player_number)
@@ -254,32 +246,17 @@ void Network::ReceiveActions()
       }
     }
 
-    std::list<TCPsocket>::iterator sock=conn.begin();
-    while(sock != conn.end() && m_is_connected)
+    std::list<DistantComputer*>::iterator dst_cpu = cpu.begin();
+    while(dst_cpu != cpu.end() && m_is_connected)
     {
-      if(SDLNet_SocketReady(*sock)) // Check if this socket contains data to receive
+      if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
         // Read the size of the packet
-        Uint32 net_size=0;
-        if(SDLNet_TCP_Recv(*sock, &net_size, 4) <= 0)
+	int packet_size = (*dst_cpu)->ReceiveDatas(packet);
+        if( packet_size <= 0)
         {
-          sock = CloseConnection(sock);
+          dst_cpu = CloseConnection(dst_cpu);
           continue;
-        }
-        packet_size = (int)SDLNet_Read32(&net_size);
-        assert(packet_size > 0);
-
-        // Fill the packet while it didn't reached its size
-        packet = (char*)malloc(packet_size);
-        while(packet_size != i)
-        {
-          received = SDLNet_TCP_Recv(*sock, packet + i, packet_size - i);
-          if(received > 0)
-            i += received;
-          if(received < 0)
-	  {assert(false);
-            std::cerr << "Malformed packet" << std::endl;
-	  }
         }
 
         Action* a = new Action(packet);
@@ -291,17 +268,16 @@ void Network::ReceiveActions()
         // Repeat the packet to other clients:
         if(a->GetType() != ACTION_SEND_VERSION
         && a->GetType() != ACTION_CHANGE_STATE)
-        for(std::list<TCPsocket>::iterator client = conn.begin();
-            client != conn.end();
+        for(std::list<DistantComputer*>::iterator client = cpu.begin();
+            client != cpu.end();
             client++)
-        if(client != sock)
+        if(client != dst_cpu)
         {
-          SDLNet_TCP_Send(*client,&packet_size,4);
-          SDLNet_TCP_Send(*client,packet,packet_size);
+          (*client)->SendDatas(packet, packet_size);
         }
 	free(packet);
       }
-      sock++;
+      dst_cpu++;
     }
   }
 }
@@ -314,22 +290,24 @@ void Network::SendAction(Action* a)
   MSG_DEBUG("network.traffic","Send action %s",
         ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
-  Uint32 size_tmp;
+  int size;
   char* packet;
-  a->WritePacket(packet, size_tmp);
-  Uint32 size;
-  SDLNet_Write32(size_tmp, &size);
+  a->WritePacket(packet, size);
 
   assert(*((int*)packet) != 0 );
+  SendPacket(packet, size);
 
-  for(std::list<TCPsocket>::iterator client = conn.begin();
-      client != conn.end();
+  free(packet);
+}
+
+void Network::SendPacket(char* packet, int size)
+{
+  for(std::list<DistantComputer*>::iterator client = cpu.begin();
+      client != cpu.end();
       client++)
   {
-    SDLNet_TCP_Send(*client,&size,4);
-    SDLNet_TCP_Send(*client,packet,size_tmp);
+    (*client)->SendDatas(packet, size);
   }
-  free(packet);
 }
 
 //-----------------------------------------------------------------------------

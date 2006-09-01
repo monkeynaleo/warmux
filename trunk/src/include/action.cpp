@@ -71,7 +71,7 @@ Action_t Action::GetType() const
 }
 
 // Convert the action to a packet
-void Action::WritePacket(char* &packet, Uint32 & size)
+void Action::WritePacket(char* &packet, int & size)
 {
   size = 4 //Size of the type;
         + 4 //Size of the number of variable

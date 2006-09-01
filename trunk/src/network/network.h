@@ -27,11 +27,13 @@
 #include "../include/base.h" 
 #include <list>
 #include <string>
-#include "../include/action.h" 
+#include "../include/action.h"
+#include "distant_cpu.h"
 //-----------------------------------------------------------------------------
-
 class Network
 {
+  friend class DistantComputer;
+
   bool inited;
 public:
   typedef enum
@@ -43,10 +45,8 @@ public:
       NETWORK_PLAYING
     } network_state_t;
   network_state_t state;
-  std::list<TCPsocket> conn;
 		
-private:
-	
+protected:
   bool m_is_connected;
   bool m_is_server;
   bool m_is_client;
@@ -58,6 +58,7 @@ private:
                 // for client : store server address/port
 
 public:
+  std::list<DistantComputer*> cpu; // list of the connected computer
   uint max_player_number;
   uint connected_player;
   uint client_inited;
@@ -77,6 +78,7 @@ public:
 
   // Action handling
   void SendAction(Action* action);
+  void SendPacket(char* packet, int size);
   void ReceiveActions();
 
   // Client specific
@@ -86,7 +88,7 @@ public:
   void ServerStart(const std::string &port);
   void AcceptIncoming();
   void RejectIncoming();
-  std::list<TCPsocket>::iterator CloseConnection(std::list<TCPsocket>::iterator closed);
+  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
 
 };
 
