@@ -42,7 +42,6 @@ WeaponBullet::WeaponBullet(const std::string &name,
                            WeaponLauncher * p_launcher) :
   WeaponProjectile(name, cfg, p_launcher)
 { 
-  cfg.explosion_range = 1;
   explode_colliding_character = true;
   ResetTimeOut();
 }
