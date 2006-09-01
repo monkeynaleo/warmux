@@ -89,6 +89,7 @@ wormux_SOURCES = \
 	map/tileitem.cpp map/tileitem.h \
 	map/water.cpp map/water.h \
 	map/wind.cpp map/wind.h \
+	network/distant_cpu.cpp network/distant_cpu.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
 	particles/body_member.cpp particles/body_member.h \

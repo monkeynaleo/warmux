@@ -349,12 +349,11 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
 //       else
 //         b_ok->enabled = false;
       // Check for newly connected client:
-      for(std::list<TCPsocket>::iterator adr=network.conn.begin();
-          adr != network.conn.end();
+      for(std::list<DistantComputer*>::iterator adr=network.cpu.begin();
+          adr != network.cpu.end();
           adr++)
       {
-        IPaddress* ip = SDLNet_TCP_GetPeerAddress(*adr);
-        std::string address = SDLNet_ResolveIP(ip);
+        std::string address = (*adr)->GetAdress();
         if(std::find(connected_client.begin(),connected_client.end(),address) == connected_client.end())
         {
           msg_box->NewMessage(address + _(" has joined the party"));
@@ -366,12 +365,11 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
       while(str != connected_client.end())
       {
         bool found = false;
-        for(std::list<TCPsocket>::iterator adr=network.conn.begin();
-            adr != network.conn.end();
+        for(std::list<DistantComputer*>::iterator adr=network.cpu.begin();
+            adr != network.cpu.end();
             adr++)
         {
-          IPaddress* ip = SDLNet_TCP_GetPeerAddress(*adr);
-          std::string address = SDLNet_ResolveIP(ip);
+          std::string address = (*adr)->GetAdress();
           if(address == *str)
           {
             found = true;
@@ -393,7 +391,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     if(network.IsClient())
     {
       //Check for changes sent by the server
-      if(network.conn.size()==0)
+      if(network.cpu.size()==0)
       {
         network.Disconnect();
         Reset();

@@ -16,57 +16,32 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Define all Wormux actions.
+ * Handle distant computers
  *****************************************************************************/
 
-#ifndef ACTION_H
-#define ACTION_H
+#ifndef DISTANT_CPU_H
+#define DISTANT_CPU_H
 //-----------------------------------------------------------------------------
-#include <SDL.h>
-#include <string>
-#include <iostream>
+#include <SDL_net.h>
+#include <SDL_thread.h>
+#include "../include/base.h" 
 #include <list>
-#include "base.h"
-#include "enum.h"
+#include <string>
+#include "../include/action.h" 
 //-----------------------------------------------------------------------------
-
-class Action
+class DistantComputer
 {
-private:
-  std::list<Uint32> var;
-protected:
-  Action_t m_type;
+  TCPsocket sock;
 public:
-  // Action without parameter
-  Action (Action_t type);
-  // Action with various parameter
-  Action (Action_t type, int value);
-  Action (Action_t type, double value);
-  Action (Action_t type, double value1, int value2);
-  Action (Action_t type, const std::string& value);
+  DistantComputer(TCPsocket new_sock);
+  ~DistantComputer();
 
-  // Build an action from a network packet
-  Action (const char* is);
+  bool SocketReady();
+  int ReceiveDatas(char* & buf);
+  void SendDatas(char* paket, int size);
 
-  ~Action();
-
-  std::ostream& out(std::ostream &os) const;
-  // Push / Back functions to add / retreive datas
-  // Work as a FIFO container, inspiteof the name of methods !
-  void Push(int val);
-  void Push(double val);
-  void Push(std::string val);
-  int PopInt();
-  double PopDouble();
-  std::string PopString();
-
-  void WritePacket(char* & packet, int & size);
-  Action_t GetType() const;
+  std::string GetAdress();
 };
 
-//-----------------------------------------------------------------------------
-// Output action in a ostream (for debug)
-std::ostream& operator<<(std::ostream& os, const Action &a);
-
-//-----------------------------------------------------------------------------
 #endif
+
