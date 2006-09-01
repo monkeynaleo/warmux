@@ -76,20 +76,17 @@ void WeaponBullet::Explosion()
   }
   
   MSG_DEBUG(m_name.c_str(), "Impact");
-  if ( GetLastCollidingObject() == NULL )
+  PhysicalObj * obj = GetLastCollidingObject();
+  if ( obj == NULL || (typeid(*obj) != typeid(Character)))
   {
     DoExplosion();
   }
   else
   {
-    PhysicalObj * obj = GetLastCollidingObject();
-    if (typeid(*obj) == typeid(Character))
-    {
-      Character * tmp = (Character*)(obj);      
-      tmp -> SetEnergyDelta (-cfg.damage);
-      tmp -> AddSpeed (2, GetSpeedAngle());
-      tmp -> UpdatePosition();
-    }
+    Character * tmp = (Character*)(obj);
+    tmp -> SetEnergyDelta (-cfg.damage);
+    tmp -> AddSpeed (2, GetSpeedAngle());
+    tmp -> UpdatePosition();
   }
   if (launcher != NULL && !launcher->ignore_explosion_signal) launcher->SignalProjectileExplosion();
   Ghost();
@@ -229,7 +226,7 @@ void WeaponProjectile::SignalGhostState(bool)
 void WeaponProjectile::SignalFallEnding()
 {
   if (launcher != NULL && !launcher->ignore_fall_ending_signal) launcher->SignalProjectileFallEnding();
-  if (explode_with_collision || IsGhost()) Explosion();  // To remove !
+  if (explode_with_collision) Explosion();
 }
 
 // the projectile explode and signal the explosion to launcher
@@ -315,7 +312,7 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
   ignore_collision_signal = false;
   ignore_fall_ending_signal = false;
   ignore_explosion_signal = false;
-  ignore_ghost_state_signal = true;
+  ignore_ghost_state_signal = false;
 }
 
 WeaponLauncher::~WeaponLauncher()
