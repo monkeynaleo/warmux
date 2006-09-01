@@ -40,6 +40,7 @@
 #include "mine.h"
 #include "ninja_rope.h"
 #include "parachute.h"
+#include "polecat.h"
 #include "riot_bomb.h"
 #include "skip_turn.h"
 #include "snipe_rifle.h"
