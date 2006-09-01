@@ -143,6 +143,21 @@
       <allow_change_timeout>1</allow_change_timeout>
     </gnulauncher>
     
+    <polecatlauncher>
+      <position origin="hand" x="-8" y="-3" />
+      <max_strength>25</max_strength>
+      <nb_ammo>1</nb_ammo>
+      <damage>30</damage>
+      <min_angle>-89</min_angle>
+      <max_angle>89</max_angle>
+      <explosion_range>35</explosion_range>
+      <particle_range>41</particle_range>
+      <blast_range>1.5</blast_range>
+      <blast_force>2</blast_force>
+      <timeout>6</timeout>
+      <allow_change_timeout>1</allow_change_timeout>
+    </polecatlauncher>
+    
     <grenade>
       <position origin="hand" x="-7" y="-9" />
       <max_strength>40</max_strength>

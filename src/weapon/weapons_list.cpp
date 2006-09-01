@@ -83,6 +83,7 @@ void WeaponsList::Init()
   AirAttack* air_attack = new AirAttack;
   TuxLauncher* tux = new TuxLauncher;
   GnuLauncher* gnu_launcher = new GnuLauncher;
+  PolecatLauncher* polecat_launcher = new PolecatLauncher;
   BounceBallLauncher* bounce_ball_launcher = new BounceBallLauncher;
   Teleportation* teleportation = new Teleportation;
   Parachute* parachute = new Parachute;
@@ -113,6 +114,7 @@ void WeaponsList::Init()
   AddToList(baseball, 3);
   AddToList(tux,3);
   AddToList(gnu_launcher,3);
+  AddToList(polecat_launcher,3);
   AddToList(air_attack,3);
   AddToList(bounce_ball_launcher,3);
 

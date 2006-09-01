@@ -156,7 +156,7 @@
     <image file="weapon/holly_grenade/holly_grenade.png" />
   </sprite>
 
-<!-- Gnu ressources -->
+  <!-- Gnu ressources -->
   
   <surface name="gnulauncher_ico" file="weapon/gnu/gnu_ico.png" />
   <surface name="gnulauncher" file="weapon/gnu/gnulauncher.png" />
@@ -166,7 +166,18 @@
     </image>
     <animation speed="35" loop_mode="pingpong" />
   </sprite>
-
+  
+  <!-- Polecat ressources -->
+  
+  <surface name="polecatlauncher_ico" file="weapon/polecat/polecat_ico.png" />
+  <surface name="polecatlauncher" file="weapon/polecat/polecatlauncher.png" />
+  <sprite name="polecat">
+    <image file="weapon/polecat/polecat.png">
+      <grid pos="0,0" size="47,38" array="1,1" />
+    </image>
+    <animation speed="35" loop_mode="pingpong" />
+  </sprite>
+  
 <!-- JetPack ressources -->
 
   <surface name="jetpack" file="weapon/jet_pack/jet_pack.png" />
