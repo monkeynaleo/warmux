@@ -263,7 +263,16 @@ void Network::ReceiveActions()
         MSG_DEBUG("network.traffic","Received action %s",
                 ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
-        ActionHandler::GetInstance()->NewAction(a, false);
+        if( a->GetType() != ACTION_NEW_TEAM
+        &&  a->GetType() != ACTION_DEL_TEAM)
+	{
+          ActionHandler::GetInstance()->NewAction(a, false);
+	}
+	else
+	{
+          (*dst_cpu)->ManageTeam(a);
+	  delete a;
+        }
 
         // Repeat the packet to other clients:
         if(a->GetType() != ACTION_SEND_VERSION
