@@ -28,6 +28,7 @@
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/wind.h"
+#include "../menu/network_menu.h"
 #include "../network/randomsync.h"
 #include "../network/network.h"
 #include "../team/macro.h"
@@ -182,6 +183,7 @@ void Action_SetMap (Action *a)
 {
   if (!network.IsClient()) return;
   lst_terrain.ChangeTerrainNom (a->PopString());
+  network.network_menu->ChangeMapCallback();
 }
 
 void Action_ClearTeams (Action *a)
@@ -288,12 +290,16 @@ void SendGameMode()
 
 void Action_NewTeam (Action *a)
 {
-  teams_list.AddTeam (a->PopString());
+  std::string team = a->PopString();
+  teams_list.AddTeam (team);
+  network.network_menu->AddTeamCallback(team);
 }
 
 void Action_DelTeam (Action *a)
 {
-  teams_list.DelTeam (a->PopString());
+  std::string team = a->PopString();
+  teams_list.DelTeam (team);
+  network.network_menu->DelTeamCallback(team);
 }
 
 void Action_ChangeTeam (Action *a)

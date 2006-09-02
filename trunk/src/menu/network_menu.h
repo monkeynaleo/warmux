@@ -36,15 +36,11 @@ class NetworkMenu : public Menu
 {
    Font * normal_font;
 
-   std::list<std::string> connected_client;
-
    /* Options controllers */
    SpinButton* player_number;
    VBox* options_box;
    Label* connected_players;
    Label* inited_players;
-
-   MessageBox *msg_box;
 
    /* Team controllers */
    ListBox *lbox_all_teams;   
@@ -76,6 +72,13 @@ class NetworkMenu : public Menu
 public:
    NetworkMenu(); 
    ~NetworkMenu();
+
+   void AddTeamCallback(std::string team);
+   void DelTeamCallback(std::string team);
+   void ChangeMapCallback();
+
+   MessageBox *msg_box;
+
 };
 
 #endif

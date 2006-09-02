@@ -24,27 +24,18 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <SDL_thread.h>
-#include "../include/base.h" 
 #include <list>
 #include <string>
-#include "../include/action.h"
 #include "distant_cpu.h"
+#include "../include/action.h"
+#include "../include/base.h" 
+#include "../menu/network_menu.h"
 //-----------------------------------------------------------------------------
 class Network
 {
   friend class DistantComputer;
 
   bool inited;
-public:
-  typedef enum
-    {
-      NETWORK_NOT_CONNECTED,
-      NETWORK_OPTION_SCREEN,
-      NETWORK_INIT_GAME,
-      NETWORK_READY_TO_PLAY,
-      NETWORK_PLAYING
-    } network_state_t;
-  network_state_t state;
 		
 protected:
   bool m_is_connected;
@@ -58,6 +49,18 @@ protected:
                 // for client : store server address/port
 
 public:
+  NetworkMenu* network_menu;
+
+  typedef enum
+    {
+      NETWORK_NOT_CONNECTED,
+      NETWORK_OPTION_SCREEN,
+      NETWORK_INIT_GAME,
+      NETWORK_READY_TO_PLAY,
+      NETWORK_PLAYING
+    } network_state_t;
+  network_state_t state;
+
   std::list<DistantComputer*> cpu; // list of the connected computer
   uint max_player_number;
   uint connected_player;

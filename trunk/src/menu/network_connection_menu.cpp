@@ -135,6 +135,7 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
   if (network.IsConnected()) {
     // run the network menu ! :-)
     NetworkMenu nm;
+    network.network_menu = &nm;
     nm.Run();
 
     // for the moment, it's just for test...
