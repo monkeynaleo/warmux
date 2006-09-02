@@ -43,6 +43,7 @@ Network::Network()
   state = NETWORK_NOT_CONNECTED;
   inited = false;
   sync_lock = false;
+  network_menu = NULL;
 }
 
 //-----------------------------------------------------------------------------

@@ -341,117 +341,50 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     pl = (std::string)nbr + _(" players ready");
     if(inited_players->GetText() != pl)
       inited_players->SetText(pl);
-
-    if(network.IsServer())
-    {
-//       if(network.connected_player > 1 && network.client_inited == network.connected_player)
-//         b_ok->enabled = true;
-//       else
-//         b_ok->enabled = false;
-      // Check for newly connected client:
-      for(std::list<DistantComputer*>::iterator adr=network.cpu.begin();
-          adr != network.cpu.end();
-          adr++)
-      {
-        std::string address = (*adr)->GetAdress();
-        if(std::find(connected_client.begin(),connected_client.end(),address) == connected_client.end())
-        {
-          msg_box->NewMessage(address + _(" has joined the party"));
-          connected_client.push_back(address);
-        }
-      }
-      // Check for disconnected client:
-      std::list<std::string>::iterator str=connected_client.begin();
-      while(str != connected_client.end())
-      {
-        bool found = false;
-        for(std::list<DistantComputer*>::iterator adr=network.cpu.begin();
-            adr != network.cpu.end();
-            adr++)
-        {
-          std::string address = (*adr)->GetAdress();
-          if(address == *str)
-          {
-            found = true;
-            break;
-          }
-        }
-        if(!found)
-        {
-          msg_box->NewMessage(*str + _(" just left the party"));
-          str = connected_client.erase(str);
-        }
-        else
-          str++;
-      }
     }
     ActionHandler * action_handler = ActionHandler::GetInstance();
     action_handler->ExecActions();
+}
 
-    if(network.IsClient())
+void NetworkMenu::DelTeamCallback(std::string team)
+{
+  // Called from the action handler
+  for(std::vector<list_box_item_t>::iterator lst_it = lbox_selected_teams->GetItemsList()->begin();
+      lst_it != lbox_selected_teams->GetItemsList()->end();
+      lst_it++)
+  {
+    if(lst_it->value == team)
     {
-      //Check for changes sent by the server
-      if(network.cpu.size()==0)
-      {
-        network.Disconnect();
-        Reset();
-      }
-      // Check map changement
-      if( TerrainActif().name != lbox_maps->ReadLabel() )
-      {
-        msg_box->NewMessage(_("Chosen map : ") + TerrainActif().name);
-        lbox_maps->Select(TerrainActif().name);
-        ChangeMap();
-      }
-    }
-    //Check for team addition:
-    for(TeamsList::iterator it=teams_list.playing_list.begin();
-        it != teams_list.playing_list.end();
-        it++)
-    {
-      bool found = false;
-      std::string id = (*it)->GetId();
-      for(std::vector<list_box_item_t>::iterator lst_it = lbox_selected_teams->GetItemsList()->begin();
-          lst_it != lbox_selected_teams->GetItemsList()->end();
-          lst_it++)
-      {
-        if(lst_it->value == id)
-        {
-          found = true;
-          break;
-        }
-      }
-      if(!found)
-      {
-        (*it)->is_local = false;
-        lbox_all_teams->Select((*it)->GetName());
-        msg_box->NewMessage((*it)->GetName() + " selected");
-        MoveDisableTeams(lbox_all_teams, lbox_selected_teams, false);        
-      }
-    }
-    //Check for team removal:
-    for(std::vector<list_box_item_t>::iterator lst_it = lbox_selected_teams->GetItemsList()->begin();
-        lst_it != lbox_selected_teams->GetItemsList()->end();
-        lst_it++)
-    {
-      bool found = false;
-      for(TeamsList::iterator it=teams_list.playing_list.begin();
-          it != teams_list.playing_list.end();
-          it++)
-      {
-        std::string id = (*it)->GetId();
-        if(lst_it->value == id)
-        {
-          found = true;
-          break;
-        }
-      }
-      if(!found)
-      {
-        lbox_selected_teams->Select(lst_it->label);
-        msg_box->NewMessage(lst_it->label + " unselected");
-        MoveTeams(lbox_selected_teams, lbox_all_teams, true);
-      }
+      lbox_selected_teams->Select(lst_it->label);
+      msg_box->NewMessage(lst_it->label + " unselected");
+      MoveTeams(lbox_selected_teams, lbox_all_teams, true);
+      return;
     }
   }
+}
+
+void NetworkMenu::AddTeamCallback(std::string team)
+{
+  // Called from the action handler
+  for(std::vector<list_box_item_t>::iterator lst_it = lbox_all_teams->GetItemsList()->begin();
+      lst_it != lbox_all_teams->GetItemsList()->end();
+      lst_it++)
+  {
+    if(lst_it->value == team)
+    {
+      int index;
+      teams_list.FindById(team, index)->is_local = false;
+
+      lbox_all_teams->Select(lst_it->label);
+      msg_box->NewMessage(lst_it->label + " selected");
+      MoveDisableTeams(lbox_all_teams, lbox_selected_teams, false);
+      return;
+    }
+  }
+}
+
+void NetworkMenu::ChangeMapCallback()
+{
+  // Called from the action handler
+  map_preview->SetSurface(TerrainActif().preview, false);
 }

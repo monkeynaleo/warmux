@@ -23,11 +23,13 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <SDL_thread.h>
-#include "../team/teams_list.h"
-#include "../tool/debug.h"
-#include "../map/maps_list.h"
 #include "network.h"
 #include "../include/action_handler.h"
+#include "../map/maps_list.h"
+#include "../menu/network_menu.h"
+#include "../team/teams_list.h"
+#include "../tool/debug.h"
+#include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
 
 DistantComputer::DistantComputer(TCPsocket new_sock)
@@ -57,12 +59,22 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
       free(pack);
     }
   }
+
+  if(network.network_menu != NULL)
+  {
+    // Display a message in the network menu
+    network.network_menu->msg_box->NewMessage( GetAdress() + _(" has joined the party"));
+  }
 }
 
 DistantComputer::~DistantComputer()
 {
+  // Display a message in the network menu
+  network.network_menu->msg_box->NewMessage( GetAdress() + _(" has left the party"));
+
   SDLNet_TCP_DelSocket(network.socket_set, sock);
   SDLNet_TCP_Close(sock);
+
   if(network.IsServer())
   {
     for(std::list<std::string>::iterator team = owned_teams.begin();
