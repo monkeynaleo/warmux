@@ -23,21 +23,56 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <SDL_thread.h>
-#include "../include/action_handler.h"
+#include "../team/teams_list.h"
 #include "../tool/debug.h"
+#include "../map/maps_list.h"
 #include "network.h"
+#include "../include/action_handler.h"
 //-----------------------------------------------------------------------------
 
 DistantComputer::DistantComputer(TCPsocket new_sock)
   : sock(new_sock)
 {
   SDLNet_TCP_AddSocket(network.socket_set, sock);
+
+  // If we are the server, we have to tell this new computer
+  // what teams / maps have alreayd been selected
+  if( network.IsServer() )
+  {
+    Action a(ACTION_SET_MAP, TerrainActif().name);
+    int size;
+    char* pack;
+    a.WritePacket(pack, size);
+    SendDatas(pack, size);
+    free(pack);
+
+    // Teams infos of already connected computers
+    for(TeamsList::iterator team = teams_list.playing_list.begin();
+      team != teams_list.playing_list.end();
+      ++team)
+    {
+      Action b(ACTION_NEW_TEAM, (*team)->GetId());
+      b.WritePacket(pack, size);
+      SendDatas(pack, size);
+      free(pack);
+    }
+  }
 }
 
 DistantComputer::~DistantComputer()
 {
-    SDLNet_TCP_DelSocket(network.socket_set, sock);
-    SDLNet_TCP_Close(sock);
+  SDLNet_TCP_DelSocket(network.socket_set, sock);
+  SDLNet_TCP_Close(sock);
+  if(network.IsServer())
+  {
+    for(std::list<std::string>::iterator team = owned_teams.begin();
+      team != owned_teams.end();
+      ++team)
+    {
+      ActionHandler::GetInstance()->NewAction(new Action(ACTION_DEL_TEAM, *team));
+    }
+  }
+  owned_teams.clear();
 }
 
 bool DistantComputer::SocketReady()
@@ -89,4 +124,25 @@ std::string DistantComputer::GetAdress()
   IPaddress* ip = SDLNet_TCP_GetPeerAddress(sock);
   std::string address = SDLNet_ResolveIP(ip);
   return address;
+}
+
+void DistantComputer::ManageTeam(Action* team)
+{
+  std::string name = team->PopString();
+  if(team->GetType() == ACTION_NEW_TEAM)
+  {
+    owned_teams.push_back(name);
+  }
+  else
+  if(team->GetType() == ACTION_DEL_TEAM)
+  {
+    std::list<std::string>::iterator it;
+    it = find(owned_teams.begin(), owned_teams.end(), name);
+    assert(it != owned_teams.end());
+    owned_teams.erase(it);
+  }
+  else
+    assert(false);
+
+  ActionHandler::GetInstance()->NewAction(new Action(team->GetType(), name), false);
 }

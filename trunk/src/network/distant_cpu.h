@@ -32,6 +32,7 @@
 class DistantComputer
 {
   TCPsocket sock;
+  std::list<std::string> owned_teams;
 public:
   DistantComputer(TCPsocket new_sock);
   ~DistantComputer();
@@ -41,6 +42,8 @@ public:
   void SendDatas(char* paket, int size);
 
   std::string GetAdress();
+
+  void ManageTeam(Action* team);
 };
 
 #endif
