@@ -35,7 +35,7 @@ const int angle_step = 30; // should be a multiple of 360
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
 					new WeaponConfig(),
-					VISIBLE_ONLY_WHEN_INACTIVE)
+					NEVER_VISIBLE)
 {
   construct_spr = resource_manager.LoadSprite( weapons_res_profile, "construct_spr");
   construct_spr->EnableRotationCache(360 / angle_step);
