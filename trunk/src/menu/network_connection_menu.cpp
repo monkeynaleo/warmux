@@ -59,7 +59,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   connection_box->SetBorder(Point2i(0,0));
   connection_box->AddWidget(new Label(_("Server adress:"), rectZero, *normal_font));
 
-  server_adress = new TextBox("192.168.0.13", rectZero, *normal_font);
+  server_adress = new TextBox("localhost", rectZero, *normal_font);
   connection_box->AddWidget(server_adress);
 
   start_client = new ButtonText( Point2i(0,0),

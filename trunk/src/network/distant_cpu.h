@@ -44,6 +44,7 @@ public:
   std::string GetAdress();
 
   void ManageTeam(Action* team);
+  void SendChatMessage(Action* a);
 };
 
 #endif

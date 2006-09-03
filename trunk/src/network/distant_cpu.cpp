@@ -158,3 +158,16 @@ void DistantComputer::ManageTeam(Action* team)
 
   ActionHandler::GetInstance()->NewAction(new Action(team->GetType(), name), false);
 }
+
+void DistantComputer::SendChatMessage(Action* a)
+{
+  std::string txt = a->PopString();
+  if(network.IsServer())
+  {
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, GetAdress() + ">"+txt));
+  }
+  else
+  {
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, txt), false);
+  }
+}

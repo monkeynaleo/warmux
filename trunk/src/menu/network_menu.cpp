@@ -70,6 +70,11 @@ NetworkMenu::NetworkMenu() :
   msg_box = new MessageBox(11, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(msg_box);
 
+  chat_box = new TextBox(std::string(""),Rectanglei(475 + 30 + 5, 600 - 100, 800 - 475 + 40, 25), *Font::GetInstance(Font::FONT_SMALL));
+  widgets.AddWidget(chat_box);
+  send_txt = new ButtonText(Point2i(475 + 30 + 5, 600 - 75), res, "main_menu/button", "Send text !",normal_font);
+  widgets.AddWidget(send_txt);
+
   // Center the boxes!
   uint x = 30;
 
@@ -193,6 +198,12 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   if(w == player_number)
   {
     network.max_player_number = player_number->GetValue();
+  }
+  if(w == send_txt)
+  {
+    std::string empty = "";
+    network.SendChatMessage(chat_box->GetText());
+    chat_box->SetText(empty);
   }
 }
 

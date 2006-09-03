@@ -93,6 +93,7 @@ public:
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
 
+  void SendChatMessage(std::string txt);
 };
 
 extern Network network;
