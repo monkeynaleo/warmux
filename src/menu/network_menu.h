@@ -41,6 +41,8 @@ class NetworkMenu : public Menu
    VBox* options_box;
    Label* connected_players;
    Label* inited_players;
+   TextBox* chat_box;
+   ButtonText* send_txt;
 
    /* Team controllers */
    ListBox *lbox_all_teams;   

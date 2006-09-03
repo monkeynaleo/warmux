@@ -264,15 +264,21 @@ void Network::ReceiveActions()
         MSG_DEBUG("network.traffic","Received action %s",
                 ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
-        if( a->GetType() != ACTION_NEW_TEAM
-        &&  a->GetType() != ACTION_DEL_TEAM)
-	{
-          ActionHandler::GetInstance()->NewAction(a, false);
-	}
-	else
+        if( a->GetType() == ACTION_NEW_TEAM
+        &&  a->GetType() == ACTION_DEL_TEAM)
 	{
           (*dst_cpu)->ManageTeam(a);
 	  delete a;
+        }
+	else
+	if(a->GetType() == ACTION_CHAT_MESSAGE)
+	{
+          (*dst_cpu)->SendChatMessage(a);
+          delete a;
+        }
+        else
+        {
+          ActionHandler::GetInstance()->NewAction(a, false);
         }
 
         // Repeat the packet to other clients:
@@ -320,6 +326,19 @@ void Network::SendPacket(char* packet, int size)
   }
 }
 
+void Network::SendChatMessage(std::string txt)
+{
+  if(IsServer())
+  {
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, std::string(_("Server")) + std::string(">") + txt));
+  }
+  else
+  {
+    Action a(ACTION_CHAT_MESSAGE, txt);
+    network.SendAction(&a);
+  }
+}
+  
 //-----------------------------------------------------------------------------
 
 const bool Network::IsConnected() const { return m_is_connected; }

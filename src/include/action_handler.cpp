@@ -302,6 +302,11 @@ void Action_DelTeam (Action *a)
   network.network_menu->DelTeamCallback(team);
 }
 
+void Action_ChatMessage (Action *a)
+{
+  network.network_menu->msg_box->NewMessage(a->PopString());
+}
+
 void Action_ChangeTeam (Action *a)
 {
   teams_list.SetActive (a->PopString());
@@ -482,5 +487,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_SET_TARGET, "set_target", &Action_SetTarget);
   Register (ACTION_SUPERTUX_STATE, "supertux_state", &Action_SupertuxState);
   Register (ACTION_SET_TIMEOUT, "set_timeout", &Action_SetTimeout);
+  Register (ACTION_CHAT_MESSAGE, "chat_message", &Action_ChatMessage);
   SDL_UnlockMutex(mutex);
 }
