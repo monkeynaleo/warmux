@@ -16,9 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon gun : la balle part tout droit dans la direction donn� par
- * le viseur. Si la balle ne touche pas un ver, elle va faire un trou dans
- * le terrain. La balle peut �alement toucher les objets du plateau du jeu.
+ * gun Weapon : The bullet made a great hole if we hit the ground or made damage
+ * if we hit a character.
  *****************************************************************************/
 
 #ifndef GUN_H
@@ -41,14 +40,9 @@ class GunBullet : public WeaponBullet
 
 class Gun : public WeaponLauncher
 {
-  private:
-    Sprite * gun_fire;
-    uint last_fire;
   public:
     Gun();
-    void Draw();
     bool p_Shoot();
-    Point2i GetGunHolePosition();
   protected:
     WeaponProjectile * GetProjectileInstance();
 };

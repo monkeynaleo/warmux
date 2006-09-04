@@ -73,7 +73,7 @@ class WeaponProjectile : public PhysicalObj
     virtual void Explosion();
     virtual void DoExplosion();
     void SignalGhostState (bool was_dead);
-    //void SignalFallEnding();
+    void SignalStopMoving();  // To remove. Use something else
     void RemoveFromPhysicalEngine();
 };
 
@@ -102,7 +102,9 @@ class WeaponLauncher : public Weapon
     bool ignore_ghost_state_signal;
   protected:
     WeaponProjectile * projectile;
+    Sprite * weapon_fire;
     uint nb_active_projectile;
+    uint last_fire_time;
     bool m_allow_change_timeout;
     bool launcher_is_loaded;
     typedef std::list<WeaponProjectile *> ProjectileList;
@@ -125,6 +127,7 @@ class WeaponLauncher : public Weapon
 
     void Refresh();
     virtual void Draw();
+    virtual void DrawWeaponFire();
     void HandleKeyEvent(int action, int event_type);
  
   // Handle of projectile events
@@ -134,6 +137,7 @@ class WeaponLauncher : public Weapon
     void SignalProjectileGhostState();
     void SignalProjectileTimeout();
 
+    virtual Point2i GetGunHolePosition();
     void IncActiveProjectile();
     void DecActiveProjectile();
   
