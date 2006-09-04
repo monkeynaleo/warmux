@@ -335,6 +335,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     // Check if we should stop moving. Really really not sure it's good!!
     if (norm < 0.5){
+      SignalStopMoving();
       StopMoving();
     }
   }

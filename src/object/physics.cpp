@@ -358,8 +358,6 @@ void Physics::StopMoving()
     m_motion_type = NoMotion ;
 
   m_extern_force.Clear();
-
-  SignalStopMoving();
 }
 
 bool Physics::IsMoving() const
@@ -545,11 +543,13 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
 	  
       // Check if we should stop rebounding.
       if (norme < STOP_REBOUND_LIMIT){
+	SignalStopMoving();
 	StopMoving();
 	return;
       }
       SignalRebound();
     }else{
+      SignalStopMoving();
       StopMoving();
     }
     break;
