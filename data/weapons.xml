@@ -144,6 +144,7 @@
 
   <surface name="gun_ico" file="weapon/gun/gun_ico.png" />
   <surface name="gun" file="weapon/gun/gun.png" />
+  <surface name="gun_fire" file="weapon/gun/gun_fire.png" />
   <sprite name="gun_bullet">
     <image file="weapon/gun/gun_bullet.png" />
   </sprite>	
@@ -171,6 +172,7 @@
   
   <surface name="polecatlauncher_ico" file="weapon/polecat/polecat_ico.png" />
   <surface name="polecatlauncher" file="weapon/polecat/polecatlauncher.png" />
+  <surface name="polecatfart" file="weapon/polecat/polecat_fart.png" />
   <sprite name="polecat">
     <image file="weapon/polecat/polecat.png">
       <grid pos="0,0" size="47,38" array="1,1" />

@@ -31,6 +31,7 @@
 #include "../interface/game_msg.h"
 #include "../interface/game_msg.h"
 #include "../weapon/gun.h"
+#include "../tool/math_tools.h"
 #include "../weapon/explosion.h"
 
 const uint GUN_BULLET_SPEED = 20;
@@ -51,6 +52,9 @@ void GunBullet::ShootSound()
 Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
   m_name = _("Gun");
+  gun_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
+  gun_fire->EnableRotationCache(32);
+  last_fire = 0;
   ReloadLauncher();
 }
 
@@ -60,12 +64,35 @@ WeaponProjectile * Gun::GetProjectileInstance()
       (new GunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
+Point2i Gun::GetGunHolePosition()
+{
+  int rayon = m_image->GetWidth();
+  double angleRAD = Deg2Rad(ActiveTeam().crosshair.GetAngleVal());
+  Point2i hole_position = Point2i(rayon, rayon) * Point2d(cos(angleRAD), sin(angleRAD));
+  hole_position.x += position.dx;
+  hole_position.y += position.dy;
+  Point2i tmp = ActiveCharacter().GetHandPosition() + (hole_position * Point2i(ActiveCharacter().GetDirection(),1));
+  return tmp;
+}
+
+void Gun::Draw()
+{
+  WeaponLauncher::Draw();
+  if (last_fire + 100 < Time::GetInstance()->Read()) return;
+  Point2i size = gun_fire->GetSize();
+  size.x = (ActiveCharacter().GetDirection() == 1 ? 0 : size.x);
+  size.y /= 2;
+  gun_fire->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
+  gun_fire->Draw( GetGunHolePosition() - size );
+}
+
 bool Gun::p_Shoot ()
 {
   if (m_is_active)
     return false;  
 
   m_is_active = true;
+  last_fire = Time::GetInstance()->Read();
   ReloadLauncher();
   projectile->Shoot (GUN_BULLET_SPEED);
   launcher_is_loaded = false;
