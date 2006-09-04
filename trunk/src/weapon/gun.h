@@ -32,20 +32,25 @@
 
 class GunBullet : public WeaponBullet
 {
-public:
-  GunBullet(ExplosiveWeaponConfig& cfg,
-            WeaponLauncher * p_launcher);
- private:
-  void ShootSound();
+  public:
+    GunBullet(ExplosiveWeaponConfig& cfg,
+              WeaponLauncher * p_launcher);
+  private:
+    void ShootSound();
 };
 
 class Gun : public WeaponLauncher
 {
-public:  
-  Gun();
-  bool p_Shoot();
-protected:
-  WeaponProjectile * GetProjectileInstance();
+  private:
+    Sprite * gun_fire;
+    uint last_fire;
+  public:
+    Gun();
+    void Draw();
+    bool p_Shoot();
+    Point2i GetGunHolePosition();
+  protected:
+    WeaponProjectile * GetProjectileInstance();
 };
 
 #endif
