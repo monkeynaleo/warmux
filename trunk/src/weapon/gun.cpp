@@ -16,9 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme gun : la balle part tout droit dans la direction donn� par
- * le viseur. Si la balle ne touche pas un ver, elle va faire un trou dans
- * le terrain. La balle peut �alement toucher les objets du plateau du jeu.
+ * gun Weapon : The bullet made a great hole if we hit the ground or made damage
+ * if we hit a character.
  *****************************************************************************/
 
 #include "../weapon/gun.h"
@@ -52,9 +51,8 @@ void GunBullet::ShootSound()
 Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
   m_name = _("Gun");
-  gun_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
-  gun_fire->EnableRotationCache(32);
-  last_fire = 0;
+  weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
+  weapon_fire->EnableRotationCache(32);
   ReloadLauncher();
 }
 
@@ -64,35 +62,13 @@ WeaponProjectile * Gun::GetProjectileInstance()
       (new GunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-Point2i Gun::GetGunHolePosition()
-{
-  int rayon = m_image->GetWidth();
-  double angleRAD = Deg2Rad(ActiveTeam().crosshair.GetAngleVal());
-  Point2i hole_position = Point2i(rayon, rayon) * Point2d(cos(angleRAD), sin(angleRAD));
-  hole_position.x += position.dx;
-  hole_position.y += position.dy;
-  Point2i tmp = ActiveCharacter().GetHandPosition() + (hole_position * Point2i(ActiveCharacter().GetDirection(),1));
-  return tmp;
-}
-
-void Gun::Draw()
-{
-  WeaponLauncher::Draw();
-  if (last_fire + 100 < Time::GetInstance()->Read()) return;
-  Point2i size = gun_fire->GetSize();
-  size.x = (ActiveCharacter().GetDirection() == 1 ? 0 : size.x);
-  size.y /= 2;
-  gun_fire->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
-  gun_fire->Draw( GetGunHolePosition() - size );
-}
-
-bool Gun::p_Shoot ()
+bool Gun::p_Shoot()
 {
   if (m_is_active)
     return false;  
 
   m_is_active = true;
-  last_fire = Time::GetInstance()->Read();
+  last_fire_time = Time::GetInstance()->Read();
   ReloadLauncher();
   projectile->Shoot (GUN_BULLET_SPEED);
   launcher_is_loaded = false;

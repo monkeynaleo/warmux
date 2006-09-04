@@ -254,6 +254,7 @@
   <!-- M16 ressources -->
   
   <surface name="m16_ico" file="weapon/m16/m16_ico.png" />
+  <surface name="m16_fire" file="weapon/gun/gun_fire.png" />
   <sprite name="m16_bullet">
     <image file="weapon/gun/gun_bullet.png" />
   </sprite>
@@ -264,6 +265,7 @@
   <surface name="snipe_rifle" file="weapon/snipe_rifle/snipe_rifle.png" />
   <surface name="snipe_rifle_ico" file="weapon/snipe_rifle/snipe_rifle_ico.png" />
   <surface name="snipe_rifle_laser" file="weapon/snipe_rifle/snipe_rifle_laser.png" />
+  <surface name="snipe_rifle_fire" file="weapon/gun/gun_fire.png" />
   <sprite name="snipe_rifle_bullet">
     <image file="weapon/gun/gun_bullet.png" />
   </sprite>     

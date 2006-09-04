@@ -57,6 +57,8 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   last_angle = 0.0;
   targeting_something = false;
   m_laser_image = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
+  weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
+  weapon_fire->EnableRotationCache(32);
 
   ReloadLauncher();
 }
@@ -70,6 +72,7 @@ WeaponProjectile * SnipeRifle::GetProjectileInstance()
 bool SnipeRifle::p_Shoot()
 {
   ReloadLauncher();
+  last_fire_time = Time::GetInstance()->Read();
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
   launcher_is_loaded = false;
   return true;

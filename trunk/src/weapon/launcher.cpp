@@ -221,12 +221,12 @@ void WeaponProjectile::SignalGhostState(bool)
   if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState();
 }
 
-// Signal a fall ending
-// void WeaponProjectile::SignalFallEnding()
-// {
-//   if (launcher != NULL && !launcher->ignore_fall_ending_signal) launcher->SignalProjectileFallEnding();
-//   if (explode_with_collision) Explosion();
-// }
+// Signal end of moving TODO: To remove. Use something else
+void WeaponProjectile::SignalStopMoving()
+{
+  //if (launcher != NULL && !launcher->ignore_fall_ending_signal) launcher->SignalProjectileFallEnding();
+  if (explode_with_collision) Explosion();
+}
 
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
@@ -306,6 +306,8 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
 {
   launcher_is_loaded = false;
   projectile = NULL;
+  weapon_fire = NULL;
+  last_fire_time = 0;
   nb_active_projectile = 0;
   ignore_timeout_signal = false;
   ignore_collision_signal = false;
@@ -330,6 +332,7 @@ bool WeaponLauncher::p_Shoot ()
 //     return true;
 //   }
   ReloadLauncher();
+  last_fire_time = Time::GetInstance()->Read();
   projectile->Shoot (m_strength);
   launcher_is_loaded = false;
   return true;
@@ -342,6 +345,27 @@ bool WeaponLauncher::ReloadLauncher()
   projectile_list.push_back(dynamic_cast<WeaponProjectile *> (projectile));
   launcher_is_loaded = true;
   return true;
+}
+
+Point2i WeaponLauncher::GetGunHolePosition()
+{
+  int rayon = m_image->GetWidth();
+  double angleRAD = Deg2Rad(ActiveTeam().crosshair.GetAngleVal());
+  Point2i hole_position = Point2i(rayon, rayon) * Point2d(cos(angleRAD), sin(angleRAD));
+  hole_position.x += position.dx;
+  hole_position.y += position.dy;
+  return ActiveCharacter().GetHandPosition() + (hole_position * Point2i(ActiveCharacter().GetDirection(),1));
+}
+
+// Draw the weapon fire when firing
+void WeaponLauncher::DrawWeaponFire()
+{
+  if (weapon_fire == NULL) return;
+  Point2i size = weapon_fire->GetSize();
+  size.x = (ActiveCharacter().GetDirection() == 1 ? 0 : size.x);
+  size.y /= 2;
+  weapon_fire->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
+  weapon_fire->Draw( GetGunHolePosition() - size );
 }
 
 // Direct Explosion when pushing weapon to max power !
@@ -415,8 +439,9 @@ void WeaponLauncher::Draw()
     (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop( Point2i(txt_x, txt_y) - camera.GetPosition(),
     ss.str(), white_color);
   }
-  
+
   Weapon::Draw();
+  if (last_fire_time + 100 > Time::GetInstance()->Read()) DrawWeaponFire();
 }
 
 void WeaponLauncher::p_Select()
