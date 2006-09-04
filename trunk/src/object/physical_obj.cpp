@@ -317,6 +317,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   } else if ( collision == COLLISION_ON_OBJECT ) {
     SignalCollisionObject();
+    m_last_colliding_object->SignalCollisionObject();
 
     // Get the current speed
     double norm, angle;
@@ -334,7 +335,6 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     // Check if we should stop moving. Really really not sure it's good!!
     if (norm < 0.5){
-      SignalFallEnding();
       StopMoving();
     }
   }

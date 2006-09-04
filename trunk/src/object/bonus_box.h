@@ -62,7 +62,7 @@ public:
   static bool NewBonusBox();
 
   // Signale la fin d'une chute
-  virtual void SignalFallEnding();  
+  virtual void SignalStopMoving();  
 
   void Draw();
   void Refresh();

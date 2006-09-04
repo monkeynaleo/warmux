@@ -152,7 +152,7 @@ protected:
 
   virtual void SignalDeath();
   virtual void SignalGhostState (bool was_already_dead);
-  virtual void SignalFallEnding();
+  virtual void SignalStopMoving();
   virtual void SignalDrowning();
   virtual void SignalRebound();
   virtual void SignalCollisionObject();
