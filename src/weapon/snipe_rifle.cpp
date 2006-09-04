@@ -87,7 +87,7 @@ void SnipeRifle::SignalProjectileExplosion()
 bool SnipeRifle::ComputeCrossPoint(bool force = false)
 {
   // Did the current character is moving ?
-  Point2i pos = ActiveCharacter().GetHandPosition();
+  Point2i pos = GetGunHolePosition();
   double angle = ActiveTeam().crosshair.GetAngleRad();
   if ( !force && last_rifle_pos == pos && last_angle == angle ) return targeting_something;
   else {
