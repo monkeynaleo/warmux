@@ -141,7 +141,7 @@ void WeaponProjectile::Shoot(double strength)
   ResetConstants();
 
   // Set the initial position.
-  SetXY( ActiveCharacter().GetHandPosition() );
+  SetXY( launcher->GetGunHolePosition() );
   
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();
