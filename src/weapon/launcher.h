@@ -73,7 +73,7 @@ class WeaponProjectile : public PhysicalObj
     virtual void Explosion();
     virtual void DoExplosion();
     void SignalGhostState (bool was_dead);
-    void SignalFallEnding();
+    //void SignalFallEnding();
     void RemoveFromPhysicalEngine();
 };
 
@@ -130,7 +130,7 @@ class WeaponLauncher : public Weapon
   // Handle of projectile events
     void SignalProjectileExplosion();
     void SignalProjectileCollision();
-    void SignalProjectileFallEnding();
+    //void SignalProjectileFallEnding();
     void SignalProjectileGhostState();
     void SignalProjectileTimeout();
 

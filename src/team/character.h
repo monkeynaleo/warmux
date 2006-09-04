@@ -82,7 +82,7 @@ private:
 
   void SignalDrowning();
   void SignalGhostState (bool was_dead);
-  void SignalFallEnding();
+  void SignalStopMoving();
 
 public:
 

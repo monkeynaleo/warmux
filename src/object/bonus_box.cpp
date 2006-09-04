@@ -108,7 +108,7 @@ void BonusBox::Refresh()
 }
 
 // Signale la fin d'une chute
-void BonusBox::SignalFallEnding()
+void BonusBox::SignalStopMoving()
 {
   SetAirResistFactor(1.0);
 

@@ -222,11 +222,11 @@ void WeaponProjectile::SignalGhostState(bool)
 }
 
 // Signal a fall ending
-void WeaponProjectile::SignalFallEnding()
-{
-  if (launcher != NULL && !launcher->ignore_fall_ending_signal) launcher->SignalProjectileFallEnding();
-  if (explode_with_collision) Explosion();
-}
+// void WeaponProjectile::SignalFallEnding()
+// {
+//   if (launcher != NULL && !launcher->ignore_fall_ending_signal) launcher->SignalProjectileFallEnding();
+//   if (explode_with_collision) Explosion();
+// }
 
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
@@ -365,10 +365,10 @@ void WeaponLauncher::SignalProjectileCollision()
 }
 
 // Signal a fall ending of a projectile
-void WeaponLauncher::SignalProjectileFallEnding()
-{
-  m_is_active = false;
-}
+// void WeaponLauncher::SignalProjectileFallEnding()
+// {
+//   m_is_active = false;
+// }
 
 // Signal a ghost state
 void WeaponLauncher::SignalProjectileGhostState()
