@@ -27,6 +27,7 @@
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
+#include "../network/network.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
@@ -91,11 +92,11 @@ void Construct::HandleKeyEvent(int action, int event_type)
   switch (action) {
     case ACTION_UP:
       if (event_type == KEY_PRESSED)
-        angle += angle_step;
+        Up();
       break ;
     case ACTION_DOWN:
       if (event_type == KEY_PRESSED)
-        angle -= angle_step;
+        Down();
       break ;
     case ACTION_SHOOT:
       if(world.ParanoiacRectIsInVacuum( Rectanglei(dst - construct_spr->GetSizeMax()/2,
@@ -108,6 +109,22 @@ void Construct::HandleKeyEvent(int action, int event_type)
       ActiveCharacter().HandleKeyEvent( action, event_type);
       break ;
   }
+}
+
+void Construct::Up()
+{
+  Action a(ACTION_CONSTRUCTION_UP);
+  if(ActiveTeam().is_local)
+    network.SendAction(&a);
+  angle += angle_step;
+}
+
+void Construct::Down()
+{
+  Action a(ACTION_CONSTRUCTION_UP);
+  if(ActiveTeam().is_local)
+    network.SendAction(&a);
+  angle -= angle_step;
 }
 
 WeaponConfig& Construct::cfg()
