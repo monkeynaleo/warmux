@@ -567,6 +567,7 @@ void Character::HandleKeyEvent(int action, int event_type)
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:
                body->StopWalk();
+               SendCharacterPosition();
                break;
             }
         default: break;
