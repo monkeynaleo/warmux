@@ -25,7 +25,7 @@
 #include <string>
 #include <SDL.h>
 #include "body.h"
-#include "team.h"
+#include "../team/team.h"
 #include "../gui/progress_bar.h"
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"

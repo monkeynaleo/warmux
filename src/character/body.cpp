@@ -24,7 +24,7 @@
 #include <map>
 #include "clothe.h"
 #include "member.h"
-#include "teams_list.h"
+#include "../team/teams_list.h"
 #include "../game/time.h"
 #include "../tool/debug.h"
 #include "../tool/random.h"

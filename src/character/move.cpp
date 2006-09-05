@@ -21,7 +21,7 @@
 
 #include "move.h"
 #include <math.h>
-#include "teams_list.h"
+#include "../team/teams_list.h"
 #include "../game/config.h"
 #include "../game/game_loop.h"
 #include "../include/action_handler.h"

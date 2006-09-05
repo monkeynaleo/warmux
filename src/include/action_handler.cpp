@@ -32,7 +32,7 @@
 #include "../network/randomsync.h"
 #include "../network/network.h"
 #include "../team/macro.h"
-#include "../team/move.h"
+#include "../character/move.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/vector2.h"

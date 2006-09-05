@@ -27,7 +27,7 @@
 #include "../graphic/sprite.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
-#include "../team/character.h"
+#include "../character/character.h"
 #include "../team/team.h"
 
 #ifdef WIN32
