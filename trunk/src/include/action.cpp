@@ -29,25 +29,27 @@
 // Action without parameter
 Action::Action (Action_t type)
 {
+  var.clear();
   m_type = type; 
 }
 
 // Action with various parameters
 Action::Action (Action_t type, int value) : m_type(type)
-{  Push(value);  }
+{  var.clear();  Push(value);  }
 
 Action::Action (Action_t type, double value) : m_type(type)
-{  Push(value);  }
+{  var.clear();  Push(value);  }
 
 Action::Action (Action_t type, const std::string& value) : m_type(type)
-{  Push(value);  }
+{  var.clear();  Push(value);  }
 
 Action::Action (Action_t type, double value1, int value2) : m_type(type)
-{  Push(value1); Push(value2);  }
+{  var.clear();  Push(value1); Push(value2);  }
 
 // Build an action from a network packet
 Action::Action (const char *is)
 {
+  var.clear();
   m_type = (Action_t)SDLNet_Read32(is);
   is += 4;
   int m_lenght = SDLNet_Read32(is);
@@ -75,7 +77,7 @@ void Action::WritePacket(char* &packet, int & size)
 {
   size = 4 //Size of the type;
         + 4 //Size of the number of variable
-        + var.size() * 4;
+        + int(var.size()) * 4;
 
   packet = (char*)malloc(size);
   char* os = packet;
@@ -118,7 +120,7 @@ void Action::Push(std::string val)
 {
   //Cut the string into 32bit values
   //But first, we write the size of the string:
-  var.push_back((Uint32)val.size());
+  Push((int)val.size());
   char* ch = (char*)val.c_str();
 
   int count = val.size();
@@ -166,8 +168,7 @@ double Action::PopDouble()
 std::string Action::PopString()
 {
   assert(var.size() > 1);
-  int lenght = (int) var.front();
-  var.pop_front();
+  int lenght = PopInt();
 
   std::string str="";
   assert((int)var.size() >= lenght/4);
