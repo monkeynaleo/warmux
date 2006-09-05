@@ -44,7 +44,7 @@ class SpinButton : public Widget
 
   void SetSizePosition(const Rectanglei &rect);
 
-  void Draw(const Point2i &mousePosition);
+  void Draw(const Point2i &mousePosition, Surface& surf);
   Widget* Clic(const Point2i &mousePosition, uint button);
   int GetValue() const;
   void SetValue(int value);

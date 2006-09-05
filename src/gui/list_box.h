@@ -57,7 +57,7 @@ public:
   ListBox (const Rectanglei &rect);
   ~ListBox();
 
-  void Draw(const Point2i &mousePosition);
+  void Draw(const Point2i &mousePosition, Surface& surf);
   Widget* Clic(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 

@@ -43,12 +43,12 @@ Button::~Button()
   delete image;
 }
 
-void Button::Draw(const Point2i &mousePosition)
+void Button::Draw(const Point2i &mousePosition, Surface& surf)
 {
   uint frame = Contains(mousePosition)?1:0;
 
   image->SetCurrentFrame(frame);
-  image->Blit(AppWormux::GetInstance()->video.window, position);
+  image->Blit(surf, position);
 }
 
 void Button::SetSizePosition(const Rectanglei &rect)

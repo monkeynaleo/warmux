@@ -51,7 +51,7 @@ public:
    virtual ~Menu();
 
    void Run ();
-   virtual void Redraw(const Rectanglei& rect);
+   virtual void Redraw(const Rectanglei& rect, Surface& surf);
 
 private:
    Sprite *background;

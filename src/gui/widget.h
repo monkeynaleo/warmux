@@ -44,8 +44,10 @@ class Widget : public Rectanglei
   virtual ~Widget();
 
   virtual void Update(const Point2i &mousePosition,
-		      const Point2i &lastMousePosition); // virtual only for Box !!
-  virtual void Draw(const Point2i &mousePosition) = 0;
+		      const Point2i &lastMousePosition,
+		      Surface& surf); // virtual only for Box !!
+  virtual void Draw(const Point2i &mousePosition, 
+		    Surface& surf) = 0;
   virtual void ForceRedraw(); // set need_redrawing to true; -- virtual for widget_list
 
   virtual void SendKey(SDL_keysym key);

@@ -38,9 +38,12 @@ class Box : public WidgetList
   virtual ~Box();
 
   void Update(const Point2i &mousePosition,
-	      const Point2i &lastMousePosition);
-  void Draw(const Point2i &mousePosition);
-  void Redraw(const Rectanglei& rect);
+	      const Point2i &lastMousePosition,
+	      Surface& surf);
+  void Draw(const Point2i &mousePosition,
+	    Surface& surf);
+  void Redraw(const Rectanglei& rect,
+	      Surface& surf);
   Widget* Clic(const Point2i &mousePosition, uint button);
 
   void SetMargin(uint _margin);

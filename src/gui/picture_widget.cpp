@@ -60,16 +60,15 @@ void PictureWidget::SetNoSurface()
   spr = NULL;
 }
 
-void PictureWidget::Draw(const Point2i &mousePosition)
+void PictureWidget::Draw(const Point2i &mousePosition,
+			 Surface& surf)
 {
   if (spr != NULL) {
     int x = GetPositionX() + ( GetSizeX()/2 ) - (spr->GetWidth()/2);
     int y = GetPositionY() + ( GetSizeY()/2 ) - (spr->GetHeight()/2);
 
-    spr->Blit ( AppWormux::GetInstance()->video.window, x, y);
+    spr->Blit ( surf, x, y);
   }
-
-  //AppWormux::GetInstance()->video.window.RectangleColor(*this, c_red);
 }
 
 void PictureWidget::SetSizePosition(const Rectanglei &rect)

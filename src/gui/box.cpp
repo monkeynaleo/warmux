@@ -35,35 +35,38 @@ Box::~Box()
 {
 }
 
-void Box::Redraw(const Rectanglei& rect)
+void Box::Redraw(const Rectanglei& rect,
+		 Surface& surf)
 {
   // Redraw bottom layer container
-  WidgetList::Redraw(rect);
+  WidgetList::Redraw(rect, surf);
 
   if ( visible ) {
     // Redraw
-    AppWormux::GetInstance()->video.window.BoxColor(rect, defaultOptionColorBox);
+    surf.BoxColor(rect, defaultOptionColorBox);
   }
 }
 
 void Box::Update(const Point2i &mousePosition,
-		 const Point2i &lastMousePosition)
+		 const Point2i &lastMousePosition,
+		 Surface& surf)
 {
   if (need_redrawing) {
-    Draw(mousePosition);
+    Draw(mousePosition, surf);
   }
 
-  WidgetList::Draw(mousePosition);
+  WidgetList::Draw(mousePosition, surf);
   need_redrawing = false;
 }
 
-void Box::Draw(const Point2i &mousePosition)
+void Box::Draw(const Point2i &mousePosition,
+	       Surface& surf)
 {
   Rectanglei rect(position, size);
 	
   if( visible ){
-    AppWormux::GetInstance()->video.window.BoxColor(rect, defaultOptionColorBox);
-    AppWormux::GetInstance()->video.window.RectangleColor(rect, defaultOptionColorRect,2);
+    surf.BoxColor(rect, defaultOptionColorBox);
+    surf.RectangleColor(rect, defaultOptionColorRect,2);
   }
 }
 

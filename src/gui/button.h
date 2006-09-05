@@ -39,7 +39,7 @@ public:
 	  const Profile *res_profile, const std::string& resource_id);
   virtual ~Button();
 
-  virtual void Draw(const Point2i &mousePosition);
+  virtual void Draw(const Point2i &mousePosition, Surface& surf);
   virtual void SetSizePosition(const Rectanglei &rect);
   
   Sprite* GetSprite() { return image; };

@@ -37,7 +37,8 @@ struct CompareItems
      }
 };
 
-ListBox::ListBox (const Rectanglei &rect) : Widget(rect){  
+ListBox::ListBox (const Rectanglei &rect) : Widget(rect)
+{  
   Rectanglei buttonRect; 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
 
@@ -56,14 +57,16 @@ ListBox::ListBox (const Rectanglei &rect) : Widget(rect){
   always_one_selected = true;
 }
 
-ListBox::~ListBox(){
+ListBox::~ListBox()
+{
    delete m_up;
    delete m_down;
 
    m_items.clear();
 }
 
-int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition){
+int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition)
+{
   if( !Contains(mousePosition) )
 	  return -1;
 
@@ -71,7 +74,8 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition){
   return BorneLong(index + first_visible_item, 0, m_items.size() - 1);
 }
 
-Widget* ListBox::Clic(const Point2i &mousePosition, uint button){
+Widget* ListBox::Clic(const Point2i &mousePosition, uint button)
+{
   need_redrawing = true;
 
   // buttons for listbox with more items than visible
@@ -113,42 +117,42 @@ Widget* ListBox::Clic(const Point2i &mousePosition, uint button){
   }
 }
 
-void ListBox::Draw(const Point2i &mousePosition){
+void ListBox::Draw(const Point2i &mousePosition, Surface& surf)
+{
   int item = MouseIsOnWhichItem(mousePosition);
   Rectanglei rect (*this);
-  AppWormux * app = AppWormux::GetInstance();
 
-  app->video.window.BoxColor(rect, defaultListColor1);
-  app->video.window.RectangleColor(rect, white_color);
+  surf.BoxColor(rect, defaultListColor1);
+  surf.RectangleColor(rect, white_color);
 
   for(uint i=0; i < nb_visible_items; i++){
 	 Rectanglei rect(GetPositionX() + 1, GetPositionY() + i * height_item + 1, GetSizeX() - 2, height_item - 2);
 	 
      if( int(i + first_visible_item) == selected_item)
-       app->video.window.BoxColor(rect, defaultListColor2);
+       surf.BoxColor(rect, defaultListColor2);
      else
        if( i + first_visible_item == uint(item) )
-         app->video.window.BoxColor(rect, defaultListColor3);
+         surf.BoxColor(rect, defaultListColor3);
      
      (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft( 
 			  GetPosition() + Point2i(5, i*height_item),
 			  m_items[i + first_visible_item].label,
 			  white_color);
      if(!m_items[i].enabled)
-       app->video.window.BoxColor(rect, defaultDisabledColorBox);
+       surf.BoxColor(rect, defaultDisabledColorBox);
   }  
 
   // buttons for listbox with more items than visible
   if (m_items.size() > nb_visible_items_max){
-    m_up->Draw(mousePosition);
-    m_down->Draw(mousePosition);
+    m_up->Draw(mousePosition, surf);
+    m_down->Draw(mousePosition, surf);
 #ifdef SCROLLBAR
     uint tmp_y, tmp_h;
     tmp_y = y+10+ first_visible_item* (h-20) / m_items.size();
     tmp_h = nb_visible_items_max * (h-20) / m_items.size();
     if (tmp_h < 5) tmp_h =5;
 
-    boxRGBA(app->video.sdlwindow, 
+    boxRGBA(surf, 
 	    x+w-10, tmp_y,
 	    x+w-1,  tmp_y+tmp_h,
 	    white_color);
@@ -156,7 +160,8 @@ void ListBox::Draw(const Point2i &mousePosition){
   }
 }
 
-void ListBox::SetSizePosition(const Rectanglei &rect){
+void ListBox::SetSizePosition(const Rectanglei &rect)
+{
   StdSetSizePosition(rect);
   m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 12, GetPositionY()+2, 10, 5) );
   m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7, 10, 5) );  
@@ -167,7 +172,8 @@ void ListBox::SetSizePosition(const Rectanglei &rect){
 void ListBox::AddItem (bool selected, 
 		       const std::string &label,
 		       const std::string &value,
-             bool enabled){
+             bool enabled)
+{
   uint pos = m_items.size();
 
   // Push item
@@ -186,11 +192,13 @@ void ListBox::AddItem (bool selected,
     nb_visible_items = nb_visible_items_max;
 }
 
-void ListBox::Sort(){
+void ListBox::Sort()
+{
   std::sort( m_items.begin(), m_items.end(), CompareItems() );
 }
 
-void ListBox::RemoveSelected(){
+void ListBox::RemoveSelected()
+{
   assert (always_one_selected == false);
 
   if( selected_item != -1 ){
@@ -203,7 +211,8 @@ void ListBox::RemoveSelected(){
     nb_visible_items = nb_visible_items_max;
 }
 
-void ListBox::Select (uint index){
+void ListBox::Select (uint index)
+{
   assert(index < m_items.size());
   selected_item = index;
 }
@@ -223,30 +232,36 @@ void ListBox::Select(const std::string& val)
   }
 }
 
-void ListBox::Deselect (){
+void ListBox::Deselect ()
+{
   assert (always_one_selected == false);
   selected_item = -1;
 }
 
-int ListBox::GetSelectedItem (){
+int ListBox::GetSelectedItem ()
+{
   return selected_item;
 }
 
-const std::string& ListBox::ReadLabel () const{
+const std::string& ListBox::ReadLabel () const
+{
   assert (selected_item != -1);
   return m_items.at(selected_item).label;
 }
 
-const std::string& ListBox::ReadValue () const{
+const std::string& ListBox::ReadValue () const
+{
   assert (selected_item != -1);
   return m_items.at(selected_item).value;
 }
 
-const std::string& ListBox::ReadValue (int index) const{
+const std::string& ListBox::ReadValue (int index) const
+{
   assert (index != -1 && index < (int)m_items.size());
   return m_items.at(index).value;
 }
   
-std::vector<list_box_item_t> * ListBox::GetItemsList(){
+std::vector<list_box_item_t> * ListBox::GetItemsList()
+{
   return &m_items;
 }

@@ -27,17 +27,19 @@ ButtonText::~ButtonText(){
 }
 
 ButtonText::ButtonText(Point2i position,
-			const Profile *res_profile, const std::string& resource_id,
-			const std::string &new_text, Font *font)
-  : Button(position, res_profile, resource_id){
+		       const Profile *res_profile, const std::string& resource_id,
+		       const std::string &new_text, Font *font)
+  : Button(position, res_profile, resource_id)
+{
   text = new Text(new_text, white_color, font);
 }
 
-void ButtonText::Draw(const Point2i &mousePosition){
-	Point2i textPosition = position + size/2;
+void ButtonText::Draw(const Point2i &mousePosition, Surface& surf)
+{
+  Point2i textPosition = position + size/2;
 	
-    Button::Draw(mousePosition);
-    text->DrawCenter(textPosition);
+  Button::Draw(mousePosition, surf);
+  text->DrawCenter(textPosition);
 }
 
 

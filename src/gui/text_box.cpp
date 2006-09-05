@@ -50,15 +50,15 @@ void TextBox::SendKey(SDL_keysym key)
   SetText(new_txt);
 }
 
-void TextBox::Draw(const Point2i &mousePosition)
+void TextBox::Draw(const Point2i &mousePosition, Surface& surf)
 {
   if(have_focus)
-    AppWormux::GetInstance()->video.window.BoxColor(*this, highlightOptionColorBox);
+    surf.BoxColor(*this, highlightOptionColorBox);
 
-  AppWormux::GetInstance()->video.window.RectangleColor(*this, defaultOptionColorRect);
+  surf.RectangleColor(*this, defaultOptionColorRect);
 
-  Label::Draw(mousePosition);
-  AppWormux::GetInstance()->video.window.VlineColor(GetPositionX()+txt_label->GetWidth(), 
-						    GetPositionY()+2, 
-						    GetPositionY()+GetSizeY()-4, c_white);
+  Label::Draw(mousePosition, surf);
+  surf.VlineColor(GetPositionX()+txt_label->GetWidth(), 
+		  GetPositionY()+2, 
+		  GetPositionY()+GetSizeY()-4, c_white);
 }
