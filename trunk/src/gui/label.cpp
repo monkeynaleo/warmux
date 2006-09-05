@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "label.h"
-#include "../include/app.h"
 
 Label::Label (const std::string &label, const Rectanglei &rect, Font& _font,
 	      const Color& color) : font_color(color)
@@ -32,15 +31,18 @@ Label::Label (const std::string &label, const Rectanglei &rect, Font& _font,
   txt_label = new Text(label, font_color, &_font);
 }
 
-Label::~Label(){
+Label::~Label()
+{
   delete txt_label;
 }
 
-void Label::Draw(const Point2i &mousePosition){
+void Label::Draw(const Point2i &mousePosition, Surface& surf)
+{
   txt_label->DrawTopLeft(position);
 }
 
-void Label::SetSizePosition(const Rectanglei &rect){
+void Label::SetSizePosition(const Rectanglei &rect)
+{
   StdSetSizePosition(rect);
 }
 

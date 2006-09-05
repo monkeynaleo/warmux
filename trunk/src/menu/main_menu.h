@@ -62,7 +62,7 @@ public:
   ~Main_Menu();
   menu_item Run ();
 
-  void Redraw(const Rectanglei& rect);
+  void Redraw(const Rectanglei& rect, Surface& surf);
 
 protected:
    void __sig_ok() {};

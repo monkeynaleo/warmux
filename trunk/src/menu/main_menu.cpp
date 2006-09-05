@@ -217,13 +217,12 @@ void Main_Menu::DrawBackground(const Point2i &mousePosition)
 
 }
 
-void Main_Menu::Redraw(const Rectanglei& rect)
+void Main_Menu::Redraw(const Rectanglei& rect, Surface &window)
 {
-  Menu::Redraw(rect);
+  Menu::Redraw(rect, window);
 
   // we never had to redraw texts
   // but sometimes we need to redraw the skins...
-  Surface& window = AppWormux::GetInstance()->video.window;
 
   Rectanglei dest(0, window.GetHeight() - skin_left->GetHeight(),
 		  skin_left->GetWidth(), skin_left->GetHeight());

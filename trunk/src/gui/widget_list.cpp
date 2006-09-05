@@ -58,25 +58,25 @@ void WidgetList::AddWidget(Widget* w)
   w->SetContainer(this);
 }
 
-void WidgetList::Draw(const Point2i &mousePosition)
+void WidgetList::Draw(const Point2i &mousePosition, Surface& surf)
 {
   for(std::list<Widget*>::iterator w=widget_list.begin();
       w != widget_list.end();
       w++)
   {
     // Then redraw the widget
-    (*w)->Update(mousePosition, lastMousePosition);
+    (*w)->Update(mousePosition, lastMousePosition, surf);
   }
 
   lastMousePosition = mousePosition;
 }
 
 
-void WidgetList::Redraw(const Rectanglei& rect)
+void WidgetList::Redraw(const Rectanglei& rect, Surface& surf)
 {
   // Redraw bottom layer
   if (ct != NULL) {
-    ct->Redraw(rect);
+    ct->Redraw(rect, surf);
   }
 }
 

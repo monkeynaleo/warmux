@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "check_box.h"
-#include "../include/app.h"
 #include "../graphic/font.h"
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
@@ -46,7 +45,7 @@ CheckBox::~CheckBox()
   delete txt_label;
 }
 
-void CheckBox::Draw(const Point2i &mousePosition)
+void CheckBox::Draw(const Point2i &mousePosition, Surface& surf)
 {
   txt_label->DrawTopLeft( GetPosition() );
  
@@ -55,7 +54,7 @@ void CheckBox::Draw(const Point2i &mousePosition)
   else 
     m_image->SetCurrentFrame(1);
 
-  m_image->Blit(AppWormux::GetInstance()->video.window, GetPositionX() + GetSizeX() - 16, GetPositionY());
+  m_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
 Widget* CheckBox::Clic(const Point2i &mousePosition, uint button)

@@ -101,9 +101,9 @@ void Menu::DrawBackground(const Point2i &mousePosition)
   background->Blit(AppWormux::GetInstance()->video.window, 0, 0);
 }
 
-void Menu::Redraw(const Rectanglei& rect)
+void Menu::Redraw(const Rectanglei& rect, Surface& surf)
 {
-  background->Blit(AppWormux::GetInstance()->video.window, rect, rect.GetPosition());
+  background->Blit(surf, rect, rect.GetPosition());
 }
 
 void Menu::Run ()
@@ -169,7 +169,7 @@ void Menu::Display(const Point2i& mousePosition)
   uint delay = 0;
   uint start = SDL_GetTicks();
 
-  widgets.Draw(mousePosition);
+  widgets.Draw(mousePosition, AppWormux::GetInstance()->video.window);
   Draw(mousePosition);
   AppWormux::GetInstance()->video.Flip();
 

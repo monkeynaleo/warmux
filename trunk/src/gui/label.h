@@ -38,7 +38,7 @@ class Label : public Widget{
   Label(const std::string &label, const Rectanglei &rect, Font& font,
 	const Color& color = white_color);
   ~Label();
-  void Draw (const Point2i &mousePosition);
+  void Draw (const Point2i &mousePosition, Surface& surf);
   void SetSizePosition(const Rectanglei &rect);
   void SetText(std::string &new_txt);
   std::string &GetText();
