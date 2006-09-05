@@ -43,8 +43,6 @@ class SubMachineGunBullet : public WeaponBullet
 class SubMachineGun : public WeaponLauncher
 {
   private:
-    uint m_first_shoot;
-  private:
     void RepeatShoot();
   protected:
     WeaponProjectile * GetProjectileInstance();
