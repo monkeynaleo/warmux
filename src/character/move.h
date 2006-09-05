@@ -38,4 +38,6 @@ void MoveCharacter (Character &character);
 void MoveCharacterRight (Character &character);
 void MoveCharacterLeft (Character &character);
 
+void SendCharacterPosition();
+
 #endif

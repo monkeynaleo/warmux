@@ -128,17 +128,7 @@ void MoveCharacterLeft(Character &character){
 
   //Refresh skin position across network
   if( !network.IsLocal() && ActiveTeam().is_local)
-  {
-    Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-    Action a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
-    Action a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
-    Action a_set_frame(ACTION_SET_FRAME,(int)character.body->GetFrame());
-    network.SendAction(a);
-    delete a;
-    network.SendAction(&a_set_clothe);
-    network.SendAction(&a_set_movement);
-    network.SendAction(&a_set_frame);
-  }
+    SendCharacterPosition();
 }
 
 // Move a character to the right
@@ -160,16 +150,19 @@ void MoveCharacterRight (Character &character){
 
   //Refresh skin position across network
   if( !network.IsLocal() && ActiveTeam().is_local)
-  {
-    Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-    Action a_set_clothe(ACTION_SET_CLOTHE,character.body->GetClothe());
-    Action a_set_movement(ACTION_SET_MOVEMENT,character.body->GetMovement());
-    Action a_set_frame(ACTION_SET_FRAME,(int)character.body->GetFrame());
-    network.SendAction(a);
-    delete a;
-    network.SendAction(&a_set_clothe);
-    network.SendAction(&a_set_movement);
-    network.SendAction(&a_set_frame);
-  }
+    SendCharacterPosition();
 }
 
+void SendCharacterPosition()
+{
+  assert(ActiveTeam().is_local);
+  Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  Action a_set_clothe(ACTION_SET_CLOTHE,ActiveCharacter().body->GetClothe());
+  Action a_set_movement(ACTION_SET_MOVEMENT,ActiveCharacter().body->GetMovement());
+  Action a_set_frame(ACTION_SET_FRAME,(int)ActiveCharacter().body->GetFrame());
+  network.SendAction(a);
+  delete a;
+  network.SendAction(&a_set_clothe);
+  network.SendAction(&a_set_movement);
+  network.SendAction(&a_set_frame);
+}

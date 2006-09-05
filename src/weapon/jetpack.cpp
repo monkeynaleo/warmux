@@ -27,11 +27,12 @@
 #include "../game/time.h"
 #include "../interface/game_msg.h"
 #include "../map/camera.h"
+#include "../network/network.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
-
+#include "../character/move.h"
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
@@ -57,6 +58,9 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
 void JetPack::Refresh()
 {
+  if(!ActiveTeam().is_local)
+    return;
+
   Point2d F;
 
   if (m_is_active)
@@ -66,6 +70,9 @@ void JetPack::Refresh()
 
       ActiveCharacter().SetExternForceXY(F);
       ActiveCharacter().UpdatePosition();
+      SendCharacterPosition();
+      Action a(ACTION_SET_CHARACTER_DIRECTION, ActiveCharacter().GetDirection());
+      network.SendAction(&a);
 
       if( !F.IsNull() )
 	{
