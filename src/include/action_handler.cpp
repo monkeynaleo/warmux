@@ -372,6 +372,7 @@ void Action_Explosion (Action *a)
   pos.x = a->PopInt();
   pos.y = a->PopInt();
   config.explosion_range = a->PopInt();
+  config.particle_range = a->PopInt();
   config.damage = a->PopInt();
   config.blast_range = a->PopDouble();
   config.blast_force = a->PopDouble();

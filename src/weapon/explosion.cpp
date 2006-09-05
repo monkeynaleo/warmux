@@ -231,6 +231,7 @@ void ApplyExplosion_server (const Point2i &pos,
   a->Push(pos.x);
   a->Push(pos.y);
   a->Push((int)config.explosion_range);
+  a->Push((int)config.particle_range);
   a->Push((int)config.damage);
   a->Push(config.blast_range);
   a->Push(config.blast_force);
