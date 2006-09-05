@@ -35,6 +35,7 @@
 #include "../tool/file_tools.h"
 #include "../tool/resource_manager.h"
 #include "../graphic/sprite.h"
+#include "../network/network.h"
 #include <sstream>
 #include <iostream>
 
@@ -357,6 +358,11 @@ void Team::LoadGamingData(uint how_many_characters)
     m_nb_ammos[ (*itw)->GetName() ] = (*itw)->ReadInitialNbAmmo();
     m_nb_units[ (*itw)->GetName() ] = (*itw)->ReadInitialNbUnit();
   }
+
+  // Disable ninja rope during network game
+  if(network.IsConnected())
+    m_nb_ammos[ "NinjaRope" ] = 0;
+
 
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
   camera_est_sauve = false;
