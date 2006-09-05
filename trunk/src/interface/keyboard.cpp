@@ -35,7 +35,7 @@
 #include "../include/constant.h"
 #include "../map/camera.h"
 #include "../team/macro.h"
-#include "../team/move.h"
+#include "../character/move.h"
 #include "../tool/i18n.h"
 #include "../tool/math_tools.h"
 #include "../sound/jukebox.h"

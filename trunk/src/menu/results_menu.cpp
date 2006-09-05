@@ -22,7 +22,7 @@
 #include "results_menu.h"
 
 #include "../team/results.h"
-#include "../team/character.h"
+#include "../character/character.h"
 #include "../include/app.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"

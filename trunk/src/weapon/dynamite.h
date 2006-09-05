@@ -27,7 +27,7 @@
 #include "launcher.h"
 #include "../graphic/sprite.h"
 #include "../include/base.h"
-#include "../team/character.h"
+#include "../character/character.h"
 
 class Dynamite;
 

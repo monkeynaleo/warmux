@@ -7,6 +7,13 @@ localedir=@LOCALEDIR@
 fontfile=@FONTFILE@
 
 wormux_SOURCES = \
+	character/body.cpp character/body.h \
+	character/body_list.cpp character/body_list.h \
+	character/character.cpp character/character.h \
+	character/clothe.cpp character/clothe.h \
+	character/member.cpp character/member.h \
+	character/move.cpp character/move.h \
+	character/movement.cpp character/movement.h \
 	include/base.h include/enum.h \
 	include/constant.cpp include/constant.h \
 	include/action.cpp include/action.h \
@@ -103,13 +110,6 @@ wormux_SOURCES = \
 	particles/smoke.cpp particles/smoke.h \
 	particles/star.cpp particles/star.h \
 	team/macro.h \
-	team/body.cpp team/body.h \
-	team/body_list.cpp team/body_list.h \
-	team/character.cpp team/character.h \
-	team/clothe.cpp team/clothe.h \
-	team/member.cpp team/member.h \
-	team/move.cpp team/move.h \
-	team/movement.cpp team/movement.h \
 	team/team.cpp team/team.h \
 	team/team_energy.cpp team/team_energy.h \
 	team/teams_list.cpp team/teams_list.h \

@@ -21,7 +21,7 @@
 
 #include "teams_list.h"
 //-----------------------------------------------------------------------------
-#include "body_list.h"
+#include "../character/body_list.h"
 #include "../include/action_handler.h"
 #ifdef CL
 #include "../network/network.h"

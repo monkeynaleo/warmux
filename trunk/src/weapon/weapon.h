@@ -35,7 +35,7 @@
 #include "../particles/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
-#include "../team/character.h"
+#include "../character/character.h"
 class Character;
 
 // Constante munitions illimit�s

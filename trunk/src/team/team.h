@@ -25,8 +25,8 @@
 #include <list>
 #include <map>
 #include <string>
-#include "character.h"
 #include "team_energy.h"
+#include "../character/character.h"
 #include "../graphic/surface.h"
 #include "../include/enum.h"
 #include "../include/base.h"

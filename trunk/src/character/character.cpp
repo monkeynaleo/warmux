@@ -24,7 +24,7 @@
 #include <sstream>
 #include <iostream>
 #include "body.h"
-#include "macro.h"
+#include "../team/macro.h"
 #include "move.h"
 #include "../game/game.h"
 #include "../game/game_mode.h"

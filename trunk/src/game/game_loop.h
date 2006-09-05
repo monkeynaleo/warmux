@@ -24,7 +24,7 @@
 
 #include "../graphic/fps.h"
 #include "../include/base.h"
-#include "../team/character.h"
+#include "../character/character.h"
 
 class GameLoop
 {
