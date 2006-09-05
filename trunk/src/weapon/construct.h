@@ -43,6 +43,9 @@ public:
   void ChooseTarget(Point2i mouse_pos);
   void HandleKeyEvent(int key, int event_type);
 
+  void Up();
+  void Down();
+
   WeaponConfig& cfg();
 };
 

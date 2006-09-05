@@ -36,6 +36,7 @@
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/vector2.h"
+#include "../weapon/construct.h"
 #include "../weapon/launcher.h"
 #include "../weapon/supertux.h"
 #include "../weapon/weapon.h"
@@ -372,7 +373,6 @@ void Action_Explosion (Action *a)
   pos.x = a->PopInt();
   pos.y = a->PopInt();
   config.explosion_range = a->PopInt();
-  config.particle_range = a->PopInt();
   config.damage = a->PopInt();
   config.blast_range = a->PopDouble();
   config.blast_force = a->PopDouble();
@@ -399,6 +399,20 @@ void Action_SetTimeout (Action *a)
   WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
   assert(launcher != NULL);
   launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
+}
+
+void Action_ConstructionUp (Action *a)
+{
+  Construct* launcher = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
+  assert(launcher != NULL);
+  launcher->Up();
+}
+
+void Action_ConstructionDown (Action *a)
+{
+  Construct* launcher = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
+  assert(launcher != NULL);
+  launcher->Down();
 }
 
 void ActionHandler::ExecActions()
@@ -488,6 +502,7 @@ ActionHandler::ActionHandler()
   Register (ACTION_SET_TARGET, "set_target", &Action_SetTarget);
   Register (ACTION_SUPERTUX_STATE, "supertux_state", &Action_SupertuxState);
   Register (ACTION_SET_TIMEOUT, "set_timeout", &Action_SetTimeout);
-  Register (ACTION_CHAT_MESSAGE, "chat_message", &Action_ChatMessage);
+  Register (ACTION_CONSTRUCTION_UP, "construction_up", &Action_ConstructionUp);
+  Register (ACTION_CONSTRUCTION_DOWN, "construction_down", &Action_ConstructionDown);
   SDL_UnlockMutex(mutex);
 }
