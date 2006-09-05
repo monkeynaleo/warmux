@@ -121,7 +121,7 @@ void Construct::Up()
 
 void Construct::Down()
 {
-  Action a(ACTION_CONSTRUCTION_UP);
+  Action a(ACTION_CONSTRUCTION_DOWN);
   if(ActiveTeam().is_local)
     network.SendAction(&a);
   angle -= angle_step;
