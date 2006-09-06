@@ -584,3 +584,8 @@ void Weapon::ActionUp(){ //called by mousse.cpp when mousewhellup
 
 void Weapon::ActionDown(){//called by mousse.cpp when mousewhelldown
 }
+
+void Weapon::ActionStopUse()
+{
+  assert(false);
+}

@@ -45,6 +45,8 @@ public:
   bool p_Shoot();
   void SignalTurnEnd();
 
+  void ActionStopUse();
+
 protected:
   void GoUp();
   void GoLeft();

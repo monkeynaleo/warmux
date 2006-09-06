@@ -33,6 +33,7 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../character/move.h"
+#include "../include/action_handler.h"
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
@@ -209,7 +210,7 @@ void JetPack::HandleKeyEvent(int action, int event_type)
 
     case ACTION_SHOOT:
       if (event_type == KEY_PRESSED)
-	p_Deselect();
+        ActionHandler::GetInstance()->NewAction(new Action(ACTION_WEAPON_STOP_USE));
       break ;
 
     default:
@@ -226,6 +227,11 @@ bool JetPack::p_Shoot()
 }
 
 void JetPack::SignalTurnEnd()
+{
+  p_Deselect();
+}
+
+void JetPack::ActionStopUse()
 {
   p_Deselect();
 }

@@ -209,6 +209,9 @@ public:
   // Get informed that the turn is over.
   virtual void SignalTurnEnd();
 
+  // Stop using this weapon (only used with lowgrav and jetpack)
+  virtual void ActionStopUse();
+
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
   bool LoadXml(xmlpp::Element * weapon);  
