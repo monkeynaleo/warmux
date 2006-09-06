@@ -23,7 +23,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s no trobat :-("
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:676
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (L'equip %s ) ha mort."
@@ -38,7 +38,7 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:652
+#: src/game/game_loop.cpp:655
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s es suicida!"
@@ -48,36 +48,36 @@ msgstr "%s es suicida!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:645
+#: src/game/game_loop.cpp:648
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ha caigut del mapa."
 
-#: src/game/game_loop.cpp:656
+#: src/game/game_loop.cpp:659
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ha caigut del mapa!"
 
-#: src/object/bonus_box.cpp:151
+#: src/object/bonus_box.cpp:159
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "El jugador '%s' ha perdut %u punt de vida."
 msgstr[1] "El jugador '%s' ha perdut %u punts de vida."
 
-#: src/object/bonus_box.cpp:142
+#: src/object/bonus_box.cpp:150
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "El jugador '%s' ha augmentat %u punt de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game_loop.cpp:667
+#: src/game/game_loop.cpp:670
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip : %s!"
 
-#: src/game/game_loop.cpp:662
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ha mort per ser un maldestre!"
@@ -87,35 +87,35 @@ msgstr "%s ha mort per ser un maldestre!"
 msgid "%s is next to a mine!"
 msgstr "%s esta aprop d'una mina!"
 
-#: src/object/bonus_box.cpp:169
+#: src/object/bonus_box.cpp:177
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "L'equip '%s' ha conseguit %u bazooka automatic!"
 msgstr[1] "L'equip '%s' ha conseguit %u bazookas automatics!"
 
-#: src/object/bonus_box.cpp:178
+#: src/object/bonus_box.cpp:186
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "L'equip '%s' ha conseguit %u bazookas automatics!"
 msgstr[1] "L'equip '%s' ha conseguit %u bazooka(s) automatic(s)!"
 
-#: src/object/bonus_box.cpp:188
+#: src/object/bonus_box.cpp:196
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "L'equip '%s' ha conseguit %u dinamita!"
 msgstr[1] "L'equip '%s' ha conseguit %u dinamitaes!"
 
-#: src/object/bonus_box.cpp:133
+#: src/object/bonus_box.cpp:141
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "L'equip '%s' ha conseguit %u teletransportacion."
 msgstr[1] "L'equip '%s' ha conseguit %u teletransportacions."
 
-#: src/object/bonus_box.cpp:160
+#: src/object/bonus_box.cpp:168
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -134,7 +134,7 @@ msgstr "(ilimitat)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:161
+#: src/object/bonus_box.cpp:172 src/weapon/air_attack.cpp:161
 msgid "Air attack"
 msgstr "Atac aeri"
 
@@ -142,7 +142,7 @@ msgstr "Atac aeri"
 msgid "Authors:"
 msgstr "Autors:"
 
-#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:115
+#: src/object/bonus_box.cpp:181 src/weapon/auto_bazooka.cpp:115
 msgid "Automatic bazooka"
 msgstr "Bazooka automatic"
 
@@ -204,7 +204,7 @@ msgstr "Duració del torn:"
 msgid "Duration of the end of a turn:"
 msgstr "Duracio del temps despres del torn:"
 
-#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:86
+#: src/object/bonus_box.cpp:200 src/weapon/dynamite.cpp:92
 msgid "Dynamite"
 msgstr "Dinamita"
 
@@ -217,12 +217,12 @@ msgstr "Energia :"
 msgid "Error in %s:%lu"
 msgstr "Error en %s:%lu"
 
-#: src/team/team.cpp:93
+#: src/team/team.cpp:94
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Error carregant l'equip %s :"
 
-#: src/team/team.cpp:168
+#: src/team/team.cpp:169
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr ""
@@ -252,12 +252,12 @@ msgstr ""
 "Error :\n"
 "%s"
 
-#: src/team/team.cpp:139
+#: src/team/team.cpp:140
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 
-#: src/game/game_loop.cpp:156
+#: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
 msgstr "Colocacio aleatoria"
 
@@ -289,7 +289,7 @@ msgstr "Pistola"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "El directori HOME (la variable de entorn $HOME) no pot ser trobat !"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:701
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -297,7 +297,7 @@ msgstr ""
 msgid "Initial energy:"
 msgstr "Energia inicial:"
 
-#: src/game/game_loop.cpp:195
+#: src/game/game_loop.cpp:198
 msgid "Initialisation"
 msgstr "Inicialització"
 
@@ -306,19 +306,19 @@ msgstr "Inicialització"
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:100
+#: src/game/game_loop.cpp:103
 msgid "Initialise data"
 msgstr "Inicialització de les dades"
 
-#: src/game/game_loop.cpp:162
+#: src/game/game_loop.cpp:165
 msgid "Initialise objects"
 msgstr "Inicialització de les dades"
 
-#: src/game/game_loop.cpp:96 src/game/game_loop.cpp:125
+#: src/game/game_loop.cpp:99 src/game/game_loop.cpp:128
 msgid "Initialise teams"
 msgstr "Inicialització de les dades"
 
-#: src/object/bonus_box.cpp:238
+#: src/object/bonus_box.cpp:246
 msgid "Is it a gift?"
 msgstr ""
 
@@ -335,7 +335,7 @@ msgstr ""
 msgid "Map %s, a creation of :"
 msgstr "Mapa %s, fet per :"
 
-#: src/game/game_loop.cpp:198
+#: src/game/game_loop.cpp:201
 msgid "Maps"
 msgstr ""
 
@@ -388,7 +388,7 @@ msgstr "Sortir"
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:190
 msgid "Riot bomb"
 msgstr ""
 
@@ -412,7 +412,7 @@ msgstr "Efectes sonors?"
 msgid "Sound options"
 msgstr ""
 
-#: src/game/game_loop.cpp:216
+#: src/game/game_loop.cpp:219
 #, fuzzy
 msgid "Sounds"
 msgstr "Efectes sonors?"
@@ -425,11 +425,11 @@ msgstr "Començant un nou joc"
 msgid "Stock:"
 msgstr "Stock :"
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:205
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:145 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teletransportació"
 
@@ -467,7 +467,7 @@ msgstr "Versió"
 msgid "Weapon:"
 msgstr "Arma :"
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:214
 #, fuzzy
 msgid "Weapons"
 msgstr "Arma :"
@@ -476,7 +476,7 @@ msgstr "Arma :"
 msgid "Website: "
 msgstr "Lloc web: "
 
-#: src/game/game_loop.cpp:670
+#: src/game/game_loop.cpp:673
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s : ha estat mort per una simple pistola!"
@@ -498,7 +498,7 @@ msgstr "Error XML durant la carrega del mapa '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Tu necesites almenys un mapa vàlid!"
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:209
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Necesites almenys dos equips per jugar, canvia això en 'Opcions del menú'!"
@@ -507,7 +507,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Tu necesites almenys dos equips vàlids!"
 
-#: src/weapon/launcher.cpp:55
+#: src/weapon/launcher.cpp:52
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
