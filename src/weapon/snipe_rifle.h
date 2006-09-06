@@ -49,7 +49,7 @@ class SnipeRifle : public WeaponLauncher
     bool p_Shoot();
     bool ComputeCrossPoint(bool force);
   protected:
-    void SignalProjectileExplosion();
+    void SignalProjectileGhostState();
     void p_Deselect();
     WeaponProjectile * GetProjectileInstance();
   public:

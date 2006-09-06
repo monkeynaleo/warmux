@@ -33,7 +33,7 @@
 #include "../game/game_loop.h"
 
 
-const uint SNIPE_RIFLE_BEAM_START = 40;
+const uint SNIPE_RIFLE_BEAM_START = 5;
 const uint SNIPE_RIFLE_BULLET_SPEED = 20;
 const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
 
@@ -79,7 +79,7 @@ bool SnipeRifle::p_Shoot()
 }
 
 // When an explosion occurs, we compute a new targeted point
-void SnipeRifle::SignalProjectileExplosion()
+void SnipeRifle::SignalProjectileGhostState()
 {
   ComputeCrossPoint(true);
 }
@@ -190,10 +190,10 @@ void SnipeRifle::DrawBeam()
 
 void SnipeRifle::Draw()
 {
+  WeaponLauncher::Draw();
   if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsActive() ) return;
   ComputeCrossPoint();
   DrawBeam();
-
-  if( targeting_something ) m_laser_image->Draw(targeted_point - (m_laser_image->GetSize()/2));      // Draw the laser impact
-  WeaponLauncher::Draw();
+  // Draw the laser impact
+  if( targeting_something ) m_laser_image->Draw(targeted_point - (m_laser_image->GetSize()/2));
 }
