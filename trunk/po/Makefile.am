@@ -9,6 +9,8 @@
 MAINTAINERCLEANFILES =
 
 POTFILES = \
+	src/character/character.cpp \
+	src/character/move.cpp \
 	src/game/config.cpp \
 	src/game/game.cpp \
 	src/game/game_loop.cpp \
@@ -48,8 +50,6 @@ POTFILES = \
 	src/object/objects_list.cpp \
 	src/object/physical_obj.cpp \
 	src/sound/jukebox.cpp \
-	src/team/character.cpp \
-	src/team/move.cpp \
 	src/team/team.cpp \
 	src/team/team_energy.cpp \
 	src/team/teams_list.cpp \

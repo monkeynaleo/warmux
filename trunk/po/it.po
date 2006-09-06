@@ -24,7 +24,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! La mappa %s non è stata trovata :-("
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:676
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (squadra %s) è morto."
@@ -39,7 +39,7 @@ msgstr "%s <%s>  chiamato %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:652
+#: src/game/game_loop.cpp:655
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s si è suicidato!"
@@ -49,36 +49,36 @@ msgstr "%s si è suicidato!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:645
+#: src/game/game_loop.cpp:648
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s è caduto nell'acqua."
 
-#: src/game/game_loop.cpp:656
+#: src/game/game_loop.cpp:659
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s è caduto fuori dalla mappa!"
 
-#: src/object/bonus_box.cpp:151
+#: src/object/bonus_box.cpp:159
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "Il giocatore '%s' ha perso %u punto di vita."
 msgstr[1] "Il giocatore '%s' ha perso %u punti di vita."
 
-#: src/object/bonus_box.cpp:142
+#: src/object/bonus_box.cpp:150
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Il giocatore '%s' vince %u punto di vita !"
 msgstr[1] "Il giocatore '%s' vince %u punti di vita !"
 
-#: src/game/game_loop.cpp:667
+#: src/game/game_loop.cpp:670
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s è uno psicopatico, ha ucciso un membro del suo team: %s !"
 
-#: src/game/game_loop.cpp:662
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s è morto da maldestro!"
@@ -88,35 +88,35 @@ msgstr "%s è morto da maldestro!"
 msgid "%s is next to a mine!"
 msgstr "%s è vicino a une mina!"
 
-#: src/object/bonus_box.cpp:169
+#: src/object/bonus_box.cpp:177
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "La squadra %s vince %u bazooka automatico !"
 msgstr[1] "La squadra %s vince %u bazooka automatici !"
 
-#: src/object/bonus_box.cpp:178
+#: src/object/bonus_box.cpp:186
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "La squadra %s vince %u bazooka automatico !"
 msgstr[1] "La squadra %s vince %u bazooka automatici !"
 
-#: src/object/bonus_box.cpp:188
+#: src/object/bonus_box.cpp:196
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "La squadra %s vince %u candelotto di dinamite !"
 msgstr[1] "La squadra %s vince %u candelotti di dinamite !"
 
-#: src/object/bonus_box.cpp:133
+#: src/object/bonus_box.cpp:141
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "la squadra %s vince %u teletrasporto."
 msgstr[1] "la squadra %s vince %u teletrasporti."
 
-#: src/object/bonus_box.cpp:160
+#: src/object/bonus_box.cpp:168
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -135,7 +135,7 @@ msgstr "(illimitato)"
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr "<infinite_background> needs <is_open> to be set to work correctly!!"
 
-#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:161
+#: src/object/bonus_box.cpp:172 src/weapon/air_attack.cpp:161
 msgid "Air attack"
 msgstr "Attacco aereo"
 
@@ -143,7 +143,7 @@ msgstr "Attacco aereo"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:115
+#: src/object/bonus_box.cpp:181 src/weapon/auto_bazooka.cpp:115
 msgid "Automatic bazooka"
 msgstr "Bazooka automatico"
 
@@ -205,7 +205,7 @@ msgstr "Durata del turno :"
 msgid "Duration of the end of a turn:"
 msgstr "Durata della fine del turno :"
 
-#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:86
+#: src/object/bonus_box.cpp:200 src/weapon/dynamite.cpp:92
 msgid "Dynamite"
 msgstr "Dinamite"
 
@@ -218,12 +218,12 @@ msgstr "Vita:"
 msgid "Error in %s:%lu"
 msgstr "Errore in %s : %lu"
 
-#: src/team/team.cpp:93
+#: src/team/team.cpp:94
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Errore nel caricamento della squadra %s :"
 
-#: src/team/team.cpp:168
+#: src/team/team.cpp:169
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Errore nel caricamento della squadra %s :"
@@ -255,12 +255,12 @@ msgstr ""
 "Errore :\n"
 "%s"
 
-#: src/team/team.cpp:139
+#: src/team/team.cpp:140
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Errore: impossibile trovare la skin \"%s\" per la squadra \"%s\"."
 
-#: src/game/game_loop.cpp:156
+#: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
 msgstr "Trova una posizione casuale"
 
@@ -292,7 +292,7 @@ msgstr "Pistola"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directory HOME (environment variable $HOME) non esiste!"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:701
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -300,7 +300,7 @@ msgstr ""
 msgid "Initial energy:"
 msgstr "Energia iniziale:"
 
-#: src/game/game_loop.cpp:195
+#: src/game/game_loop.cpp:198
 msgid "Initialisation"
 msgstr "Inizializzazione"
 
@@ -309,19 +309,19 @@ msgstr "Inizializzazione"
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Inizializzazione delle librerie TTF fallita: %s"
 
-#: src/game/game_loop.cpp:100
+#: src/game/game_loop.cpp:103
 msgid "Initialise data"
 msgstr "Inizializzazione data"
 
-#: src/game/game_loop.cpp:162
+#: src/game/game_loop.cpp:165
 msgid "Initialise objects"
 msgstr "Inizializzazione oggetti"
 
-#: src/game/game_loop.cpp:96 src/game/game_loop.cpp:125
+#: src/game/game_loop.cpp:99 src/game/game_loop.cpp:128
 msgid "Initialise teams"
 msgstr "Inizializzazione squadre"
 
-#: src/object/bonus_box.cpp:238
+#: src/object/bonus_box.cpp:246
 msgid "Is it a gift?"
 msgstr "È un regalo ?"
 
@@ -338,7 +338,7 @@ msgstr "Caricamento squadre :"
 msgid "Map %s, a creation of :"
 msgstr "Mapa %s, creata da :"
 
-#: src/game/game_loop.cpp:198
+#: src/game/game_loop.cpp:201
 msgid "Maps"
 msgstr "Mappa"
 
@@ -391,7 +391,7 @@ msgstr "Esci"
 msgid "Quit Wormux"
 msgstr "Esci da Wormux"
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:190
 msgid "Riot bomb"
 msgstr "Bazooka automatico"
 
@@ -415,7 +415,7 @@ msgstr "Effetti sonori ?"
 msgid "Sound options"
 msgstr "Opzioni del suono"
 
-#: src/game/game_loop.cpp:216
+#: src/game/game_loop.cpp:219
 msgid "Sounds"
 msgstr "Opzioni del suono"
 
@@ -427,11 +427,11 @@ msgstr "Avvia una nuova partita"
 msgid "Stock:"
 msgstr "Munizioni :"
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:205
 msgid "Teams"
 msgstr "Squadre"
 
-#: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:145 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teletrasporto"
 
@@ -469,7 +469,7 @@ msgstr "Versione"
 msgid "Weapon:"
 msgstr "Armi :"
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:214
 msgid "Weapons"
 msgstr "Armi"
 
@@ -477,7 +477,7 @@ msgstr "Armi"
 msgid "Website: "
 msgstr "Sito web: "
 
-#: src/game/game_loop.cpp:670
+#: src/game/game_loop.cpp:673
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Che vergogna per %s : E' stato ucciso da una semplice pistola !"
@@ -499,7 +499,7 @@ msgstr "Errore XML nell'avvio della mappa '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Hai bisogno di ammeno una valida mappa !"
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:209
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Hai bisogno di almeno due squadre : cambia le impostazione nel menu "
@@ -509,7 +509,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Hai bisogno di almeno due squadre valide !"
 
-#: src/weapon/launcher.cpp:55
+#: src/weapon/launcher.cpp:52
 msgid "Your shot has missed!"
 msgstr "Bersaglio mancato"
 
