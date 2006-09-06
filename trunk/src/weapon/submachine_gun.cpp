@@ -58,6 +58,8 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   override_keys = true ;
   ignore_collision_signal = true;
   ignore_explosion_signal = true;
+  ignore_ghost_state_signal = true;
+
   weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   weapon_fire->EnableRotationCache(32);
 
@@ -108,9 +110,10 @@ void SubMachineGun::HandleKeyEvent(int action, int event_type)
   switch (action) {
     case ACTION_SHOOT:
       if (event_type == KEY_REFRESH)
-        RepeatShoot();
+        m_is_active = true;
       if (event_type == KEY_RELEASED)
         m_is_active = false;
+      if (m_is_active) RepeatShoot();
       break;
     default:
       break;
