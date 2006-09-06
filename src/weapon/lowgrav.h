@@ -34,6 +34,8 @@ public:
   bool p_Shoot();
   void SignalTurnEnd();
   void Draw();
+
+  void ActionStopUse();
 };
 
 #endif

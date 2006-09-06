@@ -416,6 +416,11 @@ void Action_ConstructionDown (Action *a)
   launcher->Down();
 }
 
+void Action_WeaponStopUse(Action *a)
+{
+  ActiveTeam().AccessWeapon().ActionStopUse();
+}
+
 void ActionHandler::ExecActions()
 {
   assert(mutex!=NULL);
@@ -505,5 +510,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_SET_TIMEOUT, "set_timeout", &Action_SetTimeout);
   Register (ACTION_CONSTRUCTION_UP, "construction_up", &Action_ConstructionUp);
   Register (ACTION_CONSTRUCTION_DOWN, "construction_down", &Action_ConstructionDown);
+  Register (ACTION_WEAPON_STOP_USE, "weapon_stop_use", &Action_WeaponStopUse);
   SDL_UnlockMutex(mutex);
 }

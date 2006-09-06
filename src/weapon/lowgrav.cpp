@@ -28,6 +28,7 @@
 #include "../interface/game_msg.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
+#include "../include/action_handler.h"
 
 // Espace entre l'espace en l'image
 const uint ESPACE = 5;
@@ -71,8 +72,8 @@ void LowGrav::HandleKeyEvent(int action, int event_type)
   switch (action)
     {
       case ACTION_SHOOT:
-	if (event_type == KEY_PRESSED)
-	  UseAmmoUnit();
+        if (event_type == KEY_PRESSED)
+          ActionHandler::GetInstance()->NewAction(new Action(ACTION_WEAPON_STOP_USE));
 	break ;
 
       default:
@@ -86,3 +87,7 @@ void LowGrav::SignalTurnEnd()
   p_Deselect();
 }
 
+void LowGrav::ActionStopUse()
+{
+  UseAmmoUnit();
+}
