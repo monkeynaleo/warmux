@@ -152,10 +152,8 @@ protected:
 
   virtual void SignalDeath();
   virtual void SignalGhostState (bool was_already_dead);
-  virtual void SignalStopMoving();
   virtual void SignalDrowning();
   virtual void SignalRebound();
-  virtual void SignalCollisionObject();
 
   // Make the object rebound
   void Rebound(Point2d contactPos, double contact_angle);

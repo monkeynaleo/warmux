@@ -108,7 +108,7 @@ void BonusBox::Refresh()
 }
 
 // Signale la fin d'une chute
-void BonusBox::SignalStopMoving()
+void BonusBox::SignalCollision()
 {
   SetAirResistFactor(1.0);
 
@@ -121,6 +121,14 @@ void BonusBox::SignalStopMoving()
   anim->SetCurrentFrame(0);
   anim->Start();
 }
+
+void BonusBox::SignalObjectCollision(PhysicalObj * obj)
+{
+  // here is the gift (truly a gift ?!? :)
+  ApplyBonus(ActiveTeam(),ActiveCharacter());
+  lst_objects.RemoveObject(this);
+}
+
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 

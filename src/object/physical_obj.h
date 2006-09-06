@@ -168,18 +168,18 @@ public:
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters);
 
 protected:
-  void SignalRebound();
+  virtual void SignalRebound();
+  virtual void SignalObjectCollision(PhysicalObj * obj);
+  virtual void SignalGroundCollision();
+  virtual void SignalCollision();
 
 private:
   //Renvoie la position du point de contact entre
   //l'obj et le terrain
   bool ContactPoint (int &x, int &y);
 
-
-
   void NotifyMove(Point2d oldPos, Point2d newPos);
 
-  
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();
 };

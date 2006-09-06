@@ -670,7 +670,7 @@ bool Character::CanStillMoveDG(uint pause)
 }
 
 // Signal the end of a fall
-void Character::SignalStopMoving()
+void Character::SignalCollision()
 {
   // Do not manage dead worms.
   if (IsDead()) return;
