@@ -39,7 +39,7 @@ private:
 
   enum
   {
-    // Si vous touchez à cet enum, modifiez aussi nbr_bonus_diff
+    // If you modify this enum, modify also nbr_bonus_diff
     bonusDYNAMITE=1,
     bonusTELEPORTATION,
     bonusENERGY,
@@ -57,12 +57,13 @@ private:
 public:
   ~BonusBox();
 
-  // Active les caisses ?
+  // Activate bonus box ?
   static void Enable (bool _enable);
   static bool NewBonusBox();
 
   // Signale la fin d'une chute
-  virtual void SignalStopMoving();  
+  virtual void SignalCollision();
+  virtual void SignalObjectCollision(PhysicalObj * obj);
 
   void Draw();
   void Refresh();

@@ -543,13 +543,11 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
 	  
       // Check if we should stop rebounding.
       if (norme < STOP_REBOUND_LIMIT){
-	SignalStopMoving();
 	StopMoving();
 	return;
       }
       SignalRebound();
     }else{
-      SignalStopMoving();
       StopMoving();
     }
     break;
@@ -587,6 +585,4 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
 void Physics::SignalGhostState(bool)  {}
 void Physics::SignalDeath() {}
 void Physics::SignalDrowning() {}
-void Physics::SignalStopMoving() {}
 void Physics::SignalRebound() {}
-void Physics::SignalCollisionObject() {}

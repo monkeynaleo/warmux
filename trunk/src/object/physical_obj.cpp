@@ -292,7 +292,6 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   if ( collision == NO_COLLISION ) // Nothing more to do!
     return; 
-
   if ( collision == COLLISION_ON_GROUND ) {
       // Find the contact point and collision angle.
 //       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
@@ -312,12 +311,13 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       contactPos = pos;
     }
 
+    SignalGroundCollision();
     // Make it rebound on the ground !!
     Rebound(contactPos, contact_angle);
 
   } else if ( collision == COLLISION_ON_OBJECT ) {
-    SignalCollisionObject();
-    m_last_colliding_object->SignalCollisionObject();
+    SignalObjectCollision(m_last_colliding_object);
+    m_last_colliding_object->SignalObjectCollision(this);
 
     // Get the current speed
     double norm, angle;
@@ -335,11 +335,10 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     // Check if we should stop moving. Really really not sure it's good!!
     if (norm < 0.5){
-      SignalStopMoving();
       StopMoving();
     }
   }
-
+  SignalCollision();
   return;
 }
 
@@ -490,6 +489,12 @@ void PhysicalObj::SignalRebound()
    if (!m_rebound_sound.empty())
      jukebox.Play("share", m_rebound_sound) ;
 }
+
+void PhysicalObj::SignalObjectCollision(PhysicalObj * obj) {}
+
+void PhysicalObj::SignalGroundCollision() {}
+
+void PhysicalObj::SignalCollision() {}
 
 void PhysicalObj::SetCollisionModel(bool goes_through_wall,
 				    bool collides_with_characters,

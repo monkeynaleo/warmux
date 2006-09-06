@@ -46,14 +46,24 @@ WeaponBullet::WeaponBullet(const std::string &name,
   ResetTimeOut();
 }
 
-// Signal that the bullet has hit the ground or is out of the world
-void WeaponBullet::SignalCollision()
+// Signal that the bullet has hit the ground
+void WeaponBullet::SignalGroundCollision()
 {
-  if ( GetLastCollidingObject() == NULL )
-  {
-    GameMessages::GetInstance()->Add (_("Your shot has missed!"));
+  GameMessages::GetInstance()->Add (_("Your shot has missed!"));
+  WeaponProjectile::SignalGroundCollision();
+}
+
+void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
+{
+  if (typeid(*obj) != typeid(Character)) {
+    Explosion();
+  } else {
+    Character * tmp = (Character*)(obj);
+    tmp -> SetEnergyDelta (-cfg.damage);
+    tmp -> AddSpeed (2, GetSpeedAngle());
+    tmp -> UpdatePosition();
+    Ghost();
   }
-  WeaponProjectile::SignalCollision();
 }
 
 void WeaponBullet::Refresh()
@@ -62,33 +72,6 @@ void WeaponBullet::Refresh()
 
   double angle = GetSpeedAngle() *180/M_PI;
   image->SetRotation_deg(angle);
-}
-
-// Explode if hit the ground or apply damage to character
-void WeaponBullet::Explosion()
-{
-  if (IsGhost())
-  {
-    MSG_DEBUG (m_name.c_str(), "Ghost");
-    if (launcher != NULL && !launcher->ignore_explosion_signal) launcher->SignalProjectileExplosion();
-    return;
-  }
-  
-  MSG_DEBUG(m_name.c_str(), "Impact");
-  PhysicalObj * obj = GetLastCollidingObject();
-  if ( obj == NULL || (typeid(*obj) != typeid(Character)))
-  {
-    DoExplosion();
-  }
-  else
-  {
-    Character * tmp = (Character*)(obj);
-    tmp -> SetEnergyDelta (-cfg.damage);
-    tmp -> AddSpeed (2, GetSpeedAngle());
-    tmp -> UpdatePosition();
-  }
-  if (launcher != NULL && !launcher->ignore_explosion_signal) launcher->SignalProjectileExplosion();
-  Ghost();
 }
 
 void WeaponBullet::DoExplosion()
@@ -106,9 +89,9 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
 {
   m_allow_negative_y = true;
   SetCollisionModel(false, true, true);
-  explode_colliding_character = false;
   launcher = p_launcher;
 
+  explode_colliding_character = false;
   explode_with_timeout = true;
   explode_with_collision = true;
 
@@ -196,22 +179,27 @@ void WeaponProjectile::Draw()
 }
 
 // projectile explode and signal to the launcher the collision
-void WeaponProjectile::SignalCollisionObject()
+void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {  
-  if (!explode_colliding_character || !explode_with_collision ) return;
-
-  PhysicalObj * obj = GetLastCollidingObject();
   assert (obj != NULL);
-  
-  if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
-  if (typeid(*obj) == typeid(Character) && !IsGhost()) Explosion();
+
+  SignalCollision();
+  if (explode_colliding_character)
+    Explosion();
+}
+
+// projectile explode when hiting the ground
+void WeaponProjectile::SignalGroundCollision()
+{
+  SignalCollision();
+  if (explode_with_collision)
+    Explosion();
 }
 
 // Default behavior : signal to launcher a collision and explode
 void WeaponProjectile::SignalCollision()
 {
   if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
-  if (explode_with_collision || IsGhost()) Explosion();
 }
 
 // Signal a ghost state
@@ -221,22 +209,9 @@ void WeaponProjectile::SignalGhostState(bool)
   if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState();
 }
 
-// Signal end of moving TODO: To remove. Use something else
-void WeaponProjectile::SignalStopMoving()
-{
-  //if (launcher != NULL && !launcher->ignore_fall_ending_signal) launcher->SignalProjectileFallEnding();
-  if (explode_with_collision) Explosion();
-}
-
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
 {
-  if (IsGhost())
-  {
-    MSG_DEBUG (m_name.c_str(), "Ghost");
-    SignalExplosion();
-    return;
-  }
   MSG_DEBUG (m_name.c_str(), "Explosion");
   DoExplosion();
   SignalExplosion();
@@ -287,7 +262,7 @@ int WeaponProjectile::GetTotalTimeout()
 void WeaponProjectile::SignalTimeout()
 {
   if (launcher != NULL && !launcher->ignore_timeout_signal) launcher->SignalProjectileTimeout();
-  if (explode_with_timeout || IsGhost()) Explosion();
+  if (explode_with_timeout) Explosion();
 }
 
 //Public function which let know if changing timeout is allowed.
@@ -311,7 +286,6 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
   nb_active_projectile = 0;
   ignore_timeout_signal = false;
   ignore_collision_signal = false;
-  ignore_fall_ending_signal = false;
   ignore_explosion_signal = false;
   ignore_ghost_state_signal = false;
 }

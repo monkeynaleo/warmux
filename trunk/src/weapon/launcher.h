@@ -65,15 +65,17 @@ class WeaponProjectile : public PhysicalObj
     bool change_timeout_allowed();
   
   protected:
+    virtual void SignalObjectCollision(PhysicalObj * obj);
+    virtual void SignalGroundCollision();
     virtual void SignalCollision();
-    virtual void SignalCollisionObject();
+
     virtual void SignalTimeout();
     virtual void SignalExplosion();
+    void SignalGhostState (bool was_dead);
+
     virtual void ShootSound();
     virtual void Explosion();
     virtual void DoExplosion();
-    void SignalGhostState (bool was_dead);
-    void SignalStopMoving();  // To remove. Use something else
     void RemoveFromPhysicalEngine();
 };
 
@@ -86,8 +88,8 @@ class WeaponBullet : public WeaponProjectile
     virtual ~WeaponBullet(){};
     virtual void Refresh();
   protected:
-    void SignalCollision();
-    void Explosion();
+    virtual void SignalGroundCollision();
+    virtual void SignalObjectCollision(PhysicalObj * obj);
     void DoExplosion();
 };
 
@@ -97,7 +99,6 @@ class WeaponLauncher : public Weapon
   public:
     bool ignore_timeout_signal;
     bool ignore_collision_signal;
-    bool ignore_fall_ending_signal;
     bool ignore_explosion_signal;
     bool ignore_ghost_state_signal;
   protected:
@@ -131,11 +132,10 @@ class WeaponLauncher : public Weapon
     void HandleKeyEvent(int action, int event_type);
  
   // Handle of projectile events
-    void SignalProjectileExplosion();
-    void SignalProjectileCollision();
-    //void SignalProjectileFallEnding();
-    void SignalProjectileGhostState();
-    void SignalProjectileTimeout();
+    virtual void SignalProjectileExplosion();
+    virtual void SignalProjectileCollision();
+    virtual void SignalProjectileGhostState();
+    virtual void SignalProjectileTimeout();
 
     virtual Point2i GetGunHolePosition();
     void IncActiveProjectile();
