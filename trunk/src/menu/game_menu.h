@@ -43,7 +43,12 @@ class GameMenu : public Menu
    ListBox *lbox_maps;
    PictureWidget *map_preview;  
    
-   Box * map_box;
+   /* Game options controllers */
+   SpinButton *opt_duration_turn;
+   SpinButton *opt_duration_end_turn;
+   SpinButton *opt_nb_characters;
+   SpinButton *opt_energy_ini;
+
 
    void ChangeMap();   
    void SelectTeamLogo(Team *t);
