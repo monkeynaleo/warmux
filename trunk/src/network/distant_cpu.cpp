@@ -134,7 +134,11 @@ void DistantComputer::SendDatas(char* packet, int size_tmp)
 std::string DistantComputer::GetAdress()
 {
   IPaddress* ip = SDLNet_TCP_GetPeerAddress(sock);
-  std::string address = SDLNet_ResolveIP(ip);
+  std::string address;
+  if(SDLNet_ResolveIP(ip))
+    address = SDLNet_ResolveIP(ip);
+  else
+    return "Unresolved address";
   return address;
 }
 
