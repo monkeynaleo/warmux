@@ -49,12 +49,6 @@ private:
    CheckBox *opt_music;
    CheckBox *opt_sound_effects;
 
-   /* Game options controllers */
-   SpinButton *opt_duration_turn;
-   SpinButton *opt_duration_end_turn;
-   SpinButton *opt_nb_characters;
-   SpinButton *opt_energy_ini;
-
    void SaveOptions();
    void OnClic(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);

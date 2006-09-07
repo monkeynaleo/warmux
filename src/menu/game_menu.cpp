@@ -32,6 +32,10 @@
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
 
+const uint MARGIN_TOP    = 20;
+const uint MARGIN_SIDE   = 20;
+const uint MARGIN_BOTTOM = 70;
+
 const uint TEAMS_Y = 20;
 const uint TEAMS_W = 160;
 const uint TEAMS_H = 160;
@@ -41,7 +45,12 @@ const uint TEAM_LOGO_H = 48;
 const uint MAPS_X = 20;
 const uint MAPS_W = 160;
 
-const uint MAP_PREVIEW_W = 300;
+const uint NBR_VER_MIN = 1;
+const uint NBR_VER_MAX = 6;
+const uint TPS_TOUR_MIN = 10;
+const uint TPS_TOUR_MAX = 120;
+const uint TPS_FIN_TOUR_MIN = 1;
+const uint TPS_FIN_TOUR_MAX = 10;
 
 GameMenu::GameMenu() :
   Menu("menu/bg_play")
@@ -51,18 +60,26 @@ GameMenu::GameMenu() :
 
   Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
-  // Center the boxes!
-  uint x = 30;
+  Surface window = AppWormux::GetInstance()->video.window;
+
+  // Calculate main box size
+  uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
+  uint mainBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)/3;
 
   /* Choose the teams !! */
-  Box * team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
-  team_box->AddWidget(new Label(_("Select the teams:"), rectZero, *normal_font));
+  Box * team_box = new VBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP, 
+				       mainBoxWidth, mainBoxHeight));
+  Label * select_teams_label = new Label(_("Select the teams:"), rectZero, *normal_font);
 
-  Box * tmp_box = new HBox( Rectanglei(0,0, 1, TEAMS_H), false);
+  team_box->AddWidget(select_teams_label);
+
+  Box * tmp_box = new HBox( Rectanglei(0,0, mainBoxWidth, 
+				       mainBoxHeight - select_teams_label->GetSizeY())
+			    , false);
   tmp_box->SetMargin(10);
   tmp_box->SetBorder( Point2i(0,0) );
 
-  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ));
+  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, tmp_box->GetSizeY() - 2*10 ));
   lbox_all_teams->always_one_selected = false;
   tmp_box->AddWidget(lbox_all_teams);
 
@@ -79,7 +96,7 @@ GameMenu::GameMenu() :
   last_team = NULL;
 
   tmp_box->AddWidget(buttons_tmp_box);
-  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ));
+  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, tmp_box->GetSizeY() - 2*10 ));
   lbox_selected_teams->always_one_selected = false;
   tmp_box->AddWidget(lbox_selected_teams);
 
@@ -88,21 +105,56 @@ GameMenu::GameMenu() :
   widgets.AddWidget(team_box);
 
   /* Choose the map !! */
-  tmp_box = new HBox( Rectanglei(0, 0, 1, MAP_PREVIEW_W - 25 ), false);
-  tmp_box->SetMargin(2);
+  Box * map_box = new VBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE, 
+				 mainBoxWidth, mainBoxHeight));
+  Label * select_world_label = new Label(_("Select the world:"), rectZero, *normal_font);
+  map_box->AddWidget(select_world_label);
+
+  uint map_preview_height = mainBoxHeight - select_world_label->GetSizeY() -2*10;
+  
+  tmp_box = new HBox( Rectanglei(0, 0, 1, map_preview_height+2*10 ), false);
+  tmp_box->SetMargin(10);
   tmp_box->SetBorder( Point2i(0,0) );
 
-  lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, MAP_PREVIEW_W-25 ));
+  lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, map_preview_height ));
   tmp_box->AddWidget(lbox_maps);
 
-  map_preview = new PictureWidget(Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
+  map_preview = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3, map_preview_height));
   tmp_box->AddWidget(map_preview);
 
-  map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
-  map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
   map_box->AddWidget(tmp_box);
 
   widgets.AddWidget(map_box);
+
+  /* Choose other game options */
+  Box * game_options = new VBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 
+					    mainBoxWidth/2, mainBoxHeight) );
+  game_options->AddWidget(new Label(_("Game options"), rectZero, *normal_font));
+  
+
+  opt_duration_turn = new SpinButton(_("Duration of a turn:"), rectZero,
+				     TPS_TOUR_MIN, 5,
+				     TPS_TOUR_MIN, TPS_TOUR_MAX);
+  game_options->AddWidget(opt_duration_turn);
+
+  opt_duration_end_turn = new SpinButton(_("Duration of the end of a turn:"), rectZero,
+					 TPS_FIN_TOUR_MIN, 1,
+					 TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
+  game_options->AddWidget(opt_duration_end_turn);
+
+  opt_nb_characters = new SpinButton(_("Number of players per team:"), rectZero,
+				 4, 1,
+				 NBR_VER_MIN, NBR_VER_MAX);
+  game_options->AddWidget(opt_nb_characters);
+
+  opt_energy_ini = new SpinButton(_("Initial energy:"), rectZero,
+				      100, 5,
+				      50, 200);
+
+  game_options->AddWidget(opt_energy_ini);
+
+  widgets.AddWidget(game_options);
+
 
   // Values initialization
 
@@ -117,6 +169,8 @@ GameMenu::GameMenu() :
     bool choisi = terrain -> name == lst_terrain.TerrainActif().name;
     lbox_maps->AddItem (choisi, terrain -> name, terrain -> name);
   }
+
+  ChangeMap();
 
   // Load Teams' list
   teams_list.full_list.sort(compareTeams);
@@ -136,9 +190,15 @@ GameMenu::GameMenu() :
     ++i;
   }
 
-  resource_manager.UnLoadXMLProfile(res);
+  // Load game options  
+  GameMode * game_mode = GameMode::GetInstance();
+  opt_duration_turn->SetValue(game_mode->duration_turn);
+  opt_duration_end_turn->SetValue(game_mode->duration_move_player);
+  opt_nb_characters->SetValue(game_mode->max_characters);
+  opt_energy_ini->SetValue(game_mode->character.init_energy);
 
-  ChangeMap();
+
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 GameMenu::~GameMenu()
@@ -190,6 +250,14 @@ void GameMenu::SaveOptions()
 
   //Save options in XML
   Config::GetInstance()->Save();
+
+  GameMode * game_mode = GameMode::GetInstance();
+  game_mode->duration_turn = opt_duration_turn->GetValue() ;
+  game_mode->duration_move_player = opt_duration_end_turn->GetValue() ;
+  game_mode->max_characters = opt_nb_characters->GetValue() ;
+
+  game_mode->character.init_energy = opt_energy_ini->GetValue() ;
+
 }
 
 void GameMenu::__sig_ok()
@@ -208,7 +276,7 @@ void GameMenu::ChangeMap()
   std::string map_id = lbox_maps->ReadLabel();
   uint map = lst_terrain.FindMapById(map_id);
 
-  map_preview->SetSurface(lst_terrain.liste[map].preview, false);
+  map_preview->SetSurface(lst_terrain.liste[map].preview, true);
 }
 
 void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)

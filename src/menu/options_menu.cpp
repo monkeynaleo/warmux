@@ -44,13 +44,6 @@ const uint GRAPHIC_X = SOUND_X+SOUND_W+30;
 const uint GRAPHIC_Y = GAME_Y;
 const uint GRAPHIC_W = 230;
 
-const uint NBR_VER_MIN = 1;
-const uint NBR_VER_MAX = 6;
-const uint TPS_TOUR_MIN = 10;
-const uint TPS_TOUR_MAX = 120;
-const uint TPS_FIN_TOUR_MIN = 1;
-const uint TPS_FIN_TOUR_MAX = 10;
-
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
 {
@@ -100,33 +93,6 @@ OptionMenu::OptionMenu() :
 
   widgets.AddWidget(sound_options);
 
-  /* Game options */
-  Box * game_options = new VBox( Rectanglei(GAME_X, GAME_Y, GAME_W, 1) );
-  game_options->AddWidget(new Label(_("Game options"), zeroRect, *normal_font));
-
-  opt_duration_turn = new SpinButton(_("Duration of a turn:"), zeroRect,
-				     TPS_TOUR_MIN, 5,
-				     TPS_TOUR_MIN, TPS_TOUR_MAX);
-  game_options->AddWidget(opt_duration_turn);
-
-  opt_duration_end_turn = new SpinButton(_("Duration of the end of a turn:"), zeroRect,
-					 TPS_FIN_TOUR_MIN, 1,
-					 TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
-  game_options->AddWidget(opt_duration_end_turn);
-
-  opt_nb_characters = new SpinButton(_("Number of players per team:"), zeroRect,
-				 4, 1,
-				 NBR_VER_MIN, NBR_VER_MAX);
-  game_options->AddWidget(opt_nb_characters);
-
-  opt_energy_ini = new SpinButton(_("Initial energy:"), zeroRect,
-				      100, 5,
-				      50, 200);
-
-  game_options->AddWidget(opt_energy_ini);
-
-  widgets.AddWidget(game_options);
-
   // Values initialization
 
   // Get available video resolution
@@ -152,17 +118,13 @@ OptionMenu::OptionMenu() :
   resource_manager.UnLoadXMLProfile( res);
 
   Config * config = Config::GetInstance();
-  GameMode * game_mode = GameMode::GetInstance();
 
   opt_max_fps->SetValue (app->video.GetMaxFps());
   opt_display_wind_particles->SetValue (config->GetDisplayWindParticles());
   opt_display_energy->SetValue (config->GetDisplayEnergyCharacter());
   opt_display_name->SetValue (config->GetDisplayNameCharacter());
   full_screen->SetValue (app->video.IsFullScreen());
-  opt_duration_turn->SetValue(game_mode->duration_turn);
-  opt_duration_end_turn->SetValue(game_mode->duration_move_player);
-  opt_nb_characters->SetValue(game_mode->max_characters);
-  opt_energy_ini->SetValue(game_mode->character.init_energy);
+
 
   opt_music->SetValue( jukebox.UseMusic() );
   opt_sound_effects->SetValue( jukebox.UseEffects() );
@@ -184,13 +146,6 @@ void OptionMenu::SaveOptions()
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
-
-  GameMode * game_mode = GameMode::GetInstance();
-  game_mode->duration_turn = opt_duration_turn->GetValue() ;
-  game_mode->duration_move_player = opt_duration_end_turn->GetValue() ;
-  game_mode->max_characters = opt_nb_characters->GetValue() ;
-
-  game_mode->character.init_energy = opt_energy_ini->GetValue() ;
 
   AppWormux * app = AppWormux::GetInstance();
   app->video.SetMaxFps(opt_max_fps->GetValue());
