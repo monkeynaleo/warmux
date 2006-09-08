@@ -44,7 +44,7 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
 
   image->animation.SetLoopMode(false);
   SetSize(image->GetSize());
-
+  SetCollisionModel(false,false,false);
   SetTestRect (0, 0, 2, 3);
 }
 
@@ -67,7 +67,6 @@ void BatonDynamite::Reset()
 
 void BatonDynamite::Refresh()
 {
-  // Why we can be here as a Ghost ??? assert (!IsGhost());
   image->Update();
   if (image->IsFinished()) Explosion();
 }
@@ -77,11 +76,11 @@ void BatonDynamite::ShootSound()
   channel = jukebox.Play("share","weapon/dynamite_fuze", -1);
 }
 
-void BatonDynamite::Explosion()
+void BatonDynamite::SignalGhostState(bool already_dead)
 {
   jukebox.Stop(channel);
   channel = -1;
-  WeaponProjectile::Explosion();
+  launcher->SignalProjectileGhostState();
 }
 
 //-----------------------------------------------------------------------------
@@ -99,7 +98,7 @@ WeaponProjectile * Dynamite::GetProjectileInstance()
       (new BatonDynamite(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-// Pose une dynamite
+// drop a dynamite
 bool Dynamite::p_Shoot ()
 {
   Point2d speed_vector;
@@ -107,7 +106,7 @@ bool Dynamite::p_Shoot ()
   dynamic_cast<BatonDynamite *>(projectile)->Reset();
   projectile->Shoot(0);
 
-  // Ajoute la vitesse actuelle du ver
+  // add the character speed
   if(ActiveCharacter().GetDirection() == 1)
     projectile->SetSpeed(3.0, -M_PI_4);
   else
