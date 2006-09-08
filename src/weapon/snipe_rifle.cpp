@@ -81,6 +81,7 @@ bool SnipeRifle::p_Shoot()
 // When an explosion occurs, we compute a new targeted point
 void SnipeRifle::SignalProjectileGhostState()
 {
+  ReloadLauncher();
   ComputeCrossPoint(true);
 }
 
