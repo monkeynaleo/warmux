@@ -72,7 +72,7 @@ void ObjectsList::PlaceBarrels()
 
 void ObjectsList::AddObject (PhysicalObj* obj)
 {
-  MSG_DEBUG("lst_objects","Adding \"%s\" to the object list", obj->GetName().c_str());
+  MSG_DEBUG("lst_objects","Adding \"%s\"(%p) to the object list", obj->GetName().c_str(), obj);
   lst.push_back (object_t(obj,false));
 }
 
@@ -85,8 +85,8 @@ ObjectsList::~ObjectsList()
 
 void ObjectsList::RemoveObject (PhysicalObj* obj)
 {
-  MSG_DEBUG("lst_objects","Object \"%s\" wants to be removed from the object list", obj->GetName().c_str());
-  FOR_EACH_OBJECT(it)
+  MSG_DEBUG("lst_objects","Object \"%s\"(%p) wants to be removed from the object list", obj->GetName().c_str(),obj);
+  FOR_ALL_OBJECTS(it)
   {
     if ( it->ptr == obj)
     {
