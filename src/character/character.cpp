@@ -376,7 +376,7 @@ void Character::Jump(double strength, int deg_angle)
 {
   do_nothing_time = Time::GetInstance()->Read();
 
-  if (!CanJump()) return;
+  if (!CanJump() && ActiveTeam().is_local) return;
 
   SetRebounding(false);
   SetMovement("jump");
@@ -491,30 +491,6 @@ void Character::HandleKeyEvent(int action, int event_type)
     {
       switch (event_type)
       {
-        case KEY_PRESSED:
-          switch (action)
-          {
-            case ACTION_JUMP:
-              if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(ACTION_JUMP));
-	            return ;
-            case ACTION_HIGH_JUMP:
-              if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(ACTION_HIGH_JUMP));
-              return ;
-            case ACTION_BACK_JUMP:
-              if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(ACTION_BACK_JUMP));
-              return ;
-            case ACTION_MOVE_LEFT:
-            case ACTION_MOVE_RIGHT:
-              body->StartWalk();
-              break;
-            default:
-      	      break;
-          }
-          //no break!! -> it's normal
-
         case KEY_REFRESH:
           switch (action) {
             case ACTION_MOVE_LEFT:
@@ -524,6 +500,7 @@ void Character::HandleKeyEvent(int action, int event_type)
                   InitMouvementDG(PAUSE_BOUGE);
                 MoveCharacterLeft(ActiveCharacter());
               }
+              return;
               break ;
 
             case ACTION_MOVE_RIGHT:
@@ -533,8 +510,15 @@ void Character::HandleKeyEvent(int action, int event_type)
                   InitMouvementDG(PAUSE_BOUGE);
                 MoveCharacterRight(ActiveCharacter());
               }
+              return;
               break ;
-
+            default:
+	      break ;
+          }
+          //no break!! -> it's normal
+        case KEY_PRESSED:
+          switch (action)
+          {
             case ACTION_UP:
               if(ActiveCharacter().IsImmobile())
               {
@@ -558,10 +542,30 @@ void Character::HandleKeyEvent(int action, int event_type)
                 }
               }
 	      break ;
+            case ACTION_MOVE_LEFT:
+            case ACTION_MOVE_RIGHT:
+              body->StartWalk();
+              break;
+            // WARNING!! ALL JUMP KEYS NEEDS TO BE PROCESSED BEFORE AFTER ANY MOVEMENT KEYS
+            // OTHERWISE, THE JUMP ACTION WILL BYPASSED ON DISTANT COMPUTERS BYE THE REFRESH
+            // OF THE WALK
+            case ACTION_JUMP:
+              if(ActiveCharacter().IsImmobile())
+                action_handler->NewAction (new Action(ACTION_JUMP));
+	            return ;
+            case ACTION_HIGH_JUMP:
+              if(ActiveCharacter().IsImmobile())
+                action_handler->NewAction (new Action(ACTION_HIGH_JUMP));
+              return ;
+            case ACTION_BACK_JUMP:
+              if(ActiveCharacter().IsImmobile())
+                action_handler->NewAction (new Action(ACTION_BACK_JUMP));
+              return ;
             default:
-	      break ;
+      	      break;
           }
           break;
+
         case KEY_RELEASED:
           switch (action) {
             case ACTION_MOVE_LEFT:
@@ -616,8 +620,7 @@ void Character::Refresh()
     Point2d speed;
     GetSpeedXY(speed);
     rotation = - (int)(180.0 * speed.y / speed_init);
-
-	  body->SetRotation(rotation);
+    body->SetRotation(rotation);
   }
 }
 
