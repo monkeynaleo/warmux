@@ -144,11 +144,6 @@ void WeaponProjectile::ShootSound()
   jukebox.Play(ActiveTeam().GetSoundProfile(), "fire");
 }
 
-void WeaponProjectile::RemoveFromPhysicalEngine()
-{
-  lst_objects.RemoveObject(this);
-}
-
 void WeaponProjectile::Refresh()
 {
   // Explose after timeout
@@ -205,7 +200,6 @@ void WeaponProjectile::SignalCollision()
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
-  RemoveFromPhysicalEngine();
   if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState();
 }
 

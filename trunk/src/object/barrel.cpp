@@ -56,7 +56,6 @@ void PetrolBarrel::Refresh()
 void PetrolBarrel::SignalDeath()
 {
   ParticleEngine::AddNow(GetCenter() , 50, particle_FIRE, true);
-  lst_objects.RemoveObject (this);
 
   ExplosiveWeaponConfig cfg;
   cfg.blast_range = 5;
@@ -64,4 +63,5 @@ void PetrolBarrel::SignalDeath()
   cfg.explosion_range = 5;
   cfg.particle_range = 50;
   ApplyExplosion(GetCenter(), cfg);
+  Ghost();
 }

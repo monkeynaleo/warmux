@@ -65,8 +65,6 @@ public:
   void Shoot(double speed, Point2i& target);
   void Draw();
   void Refresh();
-
-  void SignalGhostState (bool was_dead);
 };
 
 class AirAttack : public Weapon
