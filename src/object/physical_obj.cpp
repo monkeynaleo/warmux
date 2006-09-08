@@ -209,6 +209,7 @@ void PhysicalObj::AddDamage(uint damage_points)
 // Return true if collision occured
 void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 {
+  if (IsGhost()) return;
   Point2d pos, offset;
 
   typedef enum {
@@ -316,6 +317,8 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     Rebound(contactPos, contact_angle);
 
   } else if ( collision == COLLISION_ON_OBJECT ) {
+    // Why we're here !?!
+    if (m_last_colliding_object == NULL) return;
     SignalObjectCollision(m_last_colliding_object);
     m_last_colliding_object->SignalObjectCollision(this);
 
@@ -437,11 +440,17 @@ void PhysicalObj::Ghost ()
   m_alive = GHOST;
   MSG_DEBUG("physic.state", "%s - Ghost, was_dead = %d", m_name.c_str(), was_dead);
 
-  // L'objet devient un fantome
+  // The object became a gost
   m_pos_y.x1 = 0.0 ;
   StopMoving();
 
   SignalGhostState(was_dead);
+  RemoveFromPhysicalEngine();
+}
+
+void PhysicalObj::RemoveFromPhysicalEngine()
+{
+  lst_objects.RemoveObject(this);
 }
 
 void PhysicalObj::Drown()

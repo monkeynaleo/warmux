@@ -153,6 +153,7 @@ public:
   void Ghost();
   void Drown();
   void GoOutOfWater(); // usefull for supertux.
+  void RemoveFromPhysicalEngine();
 
   bool IsImmobile() const;
   bool IsDead() const;

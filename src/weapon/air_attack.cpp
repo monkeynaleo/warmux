@@ -147,11 +147,6 @@ bool Plane::OnTopOfTarget() const
     return (GetX()+(int)image->GetWidth()-obus_dx <= cible_x);
 }
 
-void Plane::SignalGhostState (bool was_dead)
-{
-  lst_objects.RemoveObject(this);
-}
-
 //-----------------------------------------------------------------------------
 
 AirAttack::AirAttack() :

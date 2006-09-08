@@ -96,9 +96,7 @@ void BonusBox::Refresh()
     {
       // here is the gift (truly a gift ?!? :)
       ApplyBonus (**equipe, *ver);
-
-      lst_objects.RemoveObject(this);
-
+      Ghost();
       return;
     }
   }
@@ -126,7 +124,7 @@ void BonusBox::SignalObjectCollision(PhysicalObj * obj)
 {
   // here is the gift (truly a gift ?!? :)
   ApplyBonus(ActiveTeam(),ActiveCharacter());
-  lst_objects.RemoveObject(this);
+  Ghost();
 }
 
 //-----------------------------------------------------------------------------
