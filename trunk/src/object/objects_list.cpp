@@ -33,6 +33,7 @@
 #include "../game/time.h"
 #include "../weapon/mine.h"
 #include <vector>
+#include <iostream>
 
 //-----------------------------------------------------------------------------
 ObjectsList lst_objects;
@@ -106,10 +107,19 @@ void ObjectsList::Refresh()
 
   while(object != lst_objects.End())
   {
-    if (!object->to_remove && !object->ptr->IsGhost()) {
-      object->ptr->UpdatePosition();
-      object->ptr->Refresh();
-      object++;
+    if (!object->to_remove) {
+      if(object->ptr->IsGhost())
+      {
+#ifdef DEBUG
+        std::cerr << "Warning, \"" << object->ptr->GetName() << "\" is ghost, and still in the the object list" << std::endl;
+#endif
+      }
+      else
+      {
+        object->ptr->UpdatePosition();
+        object->ptr->Refresh();
+        object++;
+      }
     } else {
       MSG_DEBUG("lst_objects","Erasing object \"%s\" from the object list", object->ptr->GetName().c_str());
       object = lst.erase(object);
@@ -123,18 +133,16 @@ void ObjectsList::Draw()
   for (ObjectsList::iterator it = lst.begin();
        it != lst.end();
        ++it)
-	if(!it->to_remove)
-	{
-		assert(it->ptr != NULL);
-		if(Time::GetInstance()->IsGamePaused())
-		{
-			MSG_DEBUG("lst_objects","Displaying %s",it->ptr->GetName().c_str());
-		}
-                if (!it->ptr->IsGhost())
-		{
-			it->ptr->Draw();
-		}
-	}
+  if(!it->to_remove)
+  {
+    assert(it->ptr != NULL);
+    if(Time::GetInstance()->IsGamePaused())
+    {
+      MSG_DEBUG("lst_objects","Displaying %s",it->ptr->GetName().c_str());
+    }
+    if (!it->ptr->IsGhost())
+      it->ptr->Draw();
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -142,7 +150,11 @@ bool ObjectsList::AllReady()
 {
   FOR_EACH_OBJECT(object)
   {
-    if (!object->ptr->IsImmobile()) return false;
+    if (!object->ptr->IsImmobile())
+    {
+      MSG_DEBUG("lst_objects", "\"%s\" is not ready ( IsImmobile()==fasle )", object->ptr->GetName().c_str());
+      return false;
+    }
   }
   return true;
 }
