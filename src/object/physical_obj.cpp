@@ -445,7 +445,6 @@ void PhysicalObj::Ghost ()
   StopMoving();
 
   SignalGhostState(was_dead);
-  RemoveFromPhysicalEngine();
 }
 
 void PhysicalObj::RemoveFromPhysicalEngine()

@@ -201,6 +201,7 @@ void WeaponProjectile::SignalCollision()
 void WeaponProjectile::SignalGhostState(bool)
 {
   if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState();
+  lst_objects.RemoveObject(this);
 }
 
 // the projectile explode and signal the explosion to launcher
