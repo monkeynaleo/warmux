@@ -495,23 +495,13 @@ void Character::HandleKeyEvent(int action, int event_type)
           switch (action) {
             case ACTION_MOVE_LEFT:
               if(ActiveCharacter().IsImmobile())
-              {
-                if(event_type==KEY_PRESSED)
-                  InitMouvementDG(PAUSE_BOUGE);
                 MoveCharacterLeft(ActiveCharacter());
-              }
               return;
-              break ;
-
             case ACTION_MOVE_RIGHT:
               if(ActiveCharacter().IsImmobile())
-              {
-                if(event_type==KEY_PRESSED)
-                  InitMouvementDG(PAUSE_BOUGE);
                 MoveCharacterRight(ActiveCharacter());
-              }
               return;
-              break ;
+
             default:
 	      break ;
           }
@@ -544,6 +534,7 @@ void Character::HandleKeyEvent(int action, int event_type)
 	      break ;
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:
+              InitMouvementDG(PAUSE_BOUGE);
               body->StartWalk();
               break;
             // WARNING!! ALL JUMP KEYS NEEDS TO BE PROCESSED BEFORE AFTER ANY MOVEMENT KEYS
