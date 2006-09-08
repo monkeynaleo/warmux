@@ -118,12 +118,12 @@ void ObjectsList::Refresh()
       {
         object->ptr->UpdatePosition();
         object->ptr->Refresh();
-        object++;
       }
     } else {
       MSG_DEBUG("lst_objects","Erasing object \"%s\" from the object list", object->ptr->GetName().c_str());
       object = lst.erase(object);
     }
+    object++;
   }
 }
 
