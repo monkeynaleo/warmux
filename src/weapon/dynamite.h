@@ -43,8 +43,8 @@ public:
   void Shoot(double strength);
 
 protected:
-  void Explosion();
   void ShootSound();
+  void SignalGhostState(bool already_dead);
 };
 
 
