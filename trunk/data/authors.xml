@@ -42,6 +42,14 @@
   </author>
 
   <author>
+    <name>Yannig Perré</name>
+    <nickname>drayan</nickname>
+    <email>yannig.perre AT gmail DOT com</email>
+    <country>France</country>
+    <description>Coder.</description>
+  </author>
+
+  <author>
     <name>Olivier Serres</name>
     <email>olivier.serres AT gmail.com</email>
     <country>France</country>
@@ -435,14 +443,6 @@
     <country>France</country>
     <description>Progressive camera scrolling with mouse patch.</description>
   </author>
-
-  <author>
-    <name>Yannig PERRÉ</name>
-    <nickname>drayan</nickname>
-    <email>yannig.perre AT gmail DOT com</email>
-    <description>Write snipe_rifle.</description>
-  </author>
-
 </section>
 
 <section title="Package mainteners">
