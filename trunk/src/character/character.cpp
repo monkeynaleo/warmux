@@ -298,7 +298,9 @@ void Character::Draw()
   if(GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN && body->IsWalking())
     body->ResetWalk();
 
-  if(Time::GetInstance()->Read() > animation_time && &ActiveCharacter()!=this && !IsDead())
+  if(Time::GetInstance()->Read() > animation_time && &ActiveCharacter()!=this && !IsDead()
+  && body->GetMovement().substr(0,9) != "animation"
+  &&  body->GetClothe().substr(0,9) != "animation")
   {
     body->PlayAnimation();
     animation_time = Time::GetInstance()->Read() + body->GetMovementDuration() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
