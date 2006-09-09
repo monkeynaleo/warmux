@@ -317,10 +317,8 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     Rebound(contactPos, contact_angle);
 
   } else if ( collision == COLLISION_ON_OBJECT ) {
-    // Why we're here !?!
     if (m_last_colliding_object == NULL) return;
     SignalObjectCollision(m_last_colliding_object);
-    m_last_colliding_object->SignalObjectCollision(this);
 
     // Get the current speed
     double norm, angle;
