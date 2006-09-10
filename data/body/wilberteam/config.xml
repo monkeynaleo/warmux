@@ -610,38 +610,16 @@
 <movement name="jetpack-fire" speed="100"> <!-- When jetpack is used and a key is pressed -->
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
-		<member type="arm-left" follow_speed="true" />
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
+		<member type="jetpack-fire-right" dy="0" />
+		<member type="jetpack-fire-left" dy="0" />
+		<member type="arm-left" angle="30" />
+		<member type="arm-right" angle="30" />
 	</frame>
 	<frame number="1">
 		<member type="jetpack-fire-right" dy="7" />
 		<member type="jetpack-fire-left" dy="7" />
-		<member type="arm-left" follow_speed="true" />
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
-	</frame>
-	<frame number="2">
-		<member type="arm-left" follow_speed="true" />
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
-	</frame>
-	<frame number="3">
-		<member type="jetpack-fire-right" dy="7" />
-		<member type="jetpack-fire-left" dy="7" />
-		<member type="arm-left" follow_speed="true" />
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
-	</frame>
-	<frame number="4">
-		<member type="arm-left" follow_speed="true" />
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
+		<member type="arm-left" angle="30" />
+		<member type="arm-right" angle="30" />
 	</frame>
 </movement>
 
