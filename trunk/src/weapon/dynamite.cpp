@@ -101,8 +101,6 @@ WeaponProjectile * Dynamite::GetProjectileInstance()
 // drop a dynamite
 bool Dynamite::p_Shoot ()
 {
-  Point2d speed_vector;
-
   dynamic_cast<BatonDynamite *>(projectile)->Reset();
   projectile->Shoot(0);
 
