@@ -477,7 +477,9 @@ void PhysicalObj::GoOutOfWater()
 
 bool PhysicalObj::IsImmobile() const
 {
-  return (!IsMoving() && !FootsInVacuum())||(m_alive == GHOST);
+  // return (!IsMoving() && !FootsInVacuum())||(m_alive == GHOST);
+  // Sometimes we can be in vacuum but due to a bug we can't fall so turn never end
+  return (!IsMoving()||m_alive == GHOST);
 }
 
 bool PhysicalObj::IsDead () const
@@ -610,11 +612,11 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position)
 
 }
 
-bool PhysicalObj::FootsInVacuum() const{
+bool PhysicalObj::FootsInVacuum() {
   return FootsInVacuumXY(GetPosition());
 }
 
-bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
+bool PhysicalObj::FootsInVacuumXY(const Point2i &position)
 {
   if( IsOutsideWorldXY(position) ){
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
@@ -658,7 +660,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 	  {
 	    if ( object->ptr->GetTestRect().Intersect( rect ) ) {
 	      MSG_DEBUG("physical", "%s - physobj is on an object", m_name.c_str());
-	      //m_last_colliding_object = object->ptr;
+              object->ptr->SignalObjectCollision(this);
 	      return false;
 	    }
 	  }

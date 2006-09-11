@@ -128,8 +128,8 @@ public:
   PhysicalObj* GetLastCollidingObject() const;
   bool IsInVacuumXY(const Point2i &position);
   bool IsInVacuum(const Point2i &offset); // relative to current position
-  bool FootsInVacuumXY(const Point2i &position) const;
-  bool FootsInVacuum() const;
+  bool FootsInVacuumXY(const Point2i &position);
+  bool FootsInVacuum();
   
   bool FootsOnFloor(int y) const;
 
