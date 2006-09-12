@@ -32,17 +32,15 @@
 #include "../tool/string_tools.h"
 #include <sstream>
 
-const uint GAME_X = 20;
-const uint GAME_Y = 20;
-const uint GAME_W = 230;
-
-const uint SOUND_X = GAME_X+GAME_W+30;
-const uint SOUND_Y = GAME_Y;
+const uint SOUND_X = 30;
+const uint SOUND_Y = 30;
 const uint SOUND_W = 230;
+const uint SOUND_H = 170;
 
-const uint GRAPHIC_X = SOUND_X+SOUND_W+30;
-const uint GRAPHIC_Y = GAME_Y;
+const uint GRAPHIC_X = 30;
+const uint GRAPHIC_Y = SOUND_X + SOUND_H + 30;
 const uint GRAPHIC_W = 230;
+const uint GRAPHIC_H = 240;
 
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
@@ -53,44 +51,59 @@ OptionMenu::OptionMenu() :
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   /* Grapic options */
-  Box * graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, 1));
-  graphic_options->AddWidget(new Label(_("Graphic options"), zeroRect, *normal_font));
+  Box * graphic_options = new HBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
+
+  Surface tmp_surf = resource_manager.LoadImage(res, "menu/video_label");
+  PictureWidget * pic_widget = new PictureWidget(Rectanglei(0,0,tmp_surf.GetWidth(),tmp_surf.GetHeight()));
+  pic_widget->SetSurface(tmp_surf, false);
+  graphic_options->AddWidget(pic_widget);
+
+  Box * tmp_graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H), false);
+  tmp_graphic_options->AddWidget(new Label(_("Graphic options"), zeroRect, *normal_font));
 
   lbox_video_mode = new ListBox( Rectanglei(0, 0, 0, 80) );
-  graphic_options->AddWidget(lbox_video_mode);
+  tmp_graphic_options->AddWidget(lbox_video_mode);
 
   opt_max_fps = new SpinButton(_("Maximum number of FPS:"), zeroRect,
 			       50, 5,
 			       20, 120);
-  graphic_options->AddWidget(opt_max_fps);
+  tmp_graphic_options->AddWidget(opt_max_fps);
 
   full_screen = new CheckBox(_("Fullscreen?"), zeroRect);
-  graphic_options->AddWidget(full_screen);
+  tmp_graphic_options->AddWidget(full_screen);
 
   opt_display_wind_particles = new CheckBox(_("Display wind particles?"), zeroRect);
-  graphic_options->AddWidget(opt_display_wind_particles);
+  tmp_graphic_options->AddWidget(opt_display_wind_particles);
 
   opt_display_energy = new CheckBox(_("Display player energy?"), zeroRect);
-  graphic_options->AddWidget(opt_display_energy);
+  tmp_graphic_options->AddWidget(opt_display_energy);
 
   opt_display_name = new CheckBox(_("Display player's name?"), zeroRect);
-  graphic_options->AddWidget(opt_display_name);
+  tmp_graphic_options->AddWidget(opt_display_name);
 
+  graphic_options->AddWidget(tmp_graphic_options);
   widgets.AddWidget(graphic_options);
 
-  /* Sound options */
-  Box * sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, 1));
-  sound_options->AddWidget(new Label(_("Sound options"), zeroRect, *normal_font));
+  /* Sound options */  
+  Box * sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H));
+  Surface tmp_sound_surf = resource_manager.LoadImage(res, "menu/audio_label");
+  pic_widget = new PictureWidget(Rectanglei(0,0,tmp_surf.GetWidth(),tmp_surf.GetHeight()));
+  pic_widget->SetSurface(tmp_sound_surf, false);
+  sound_options->AddWidget(pic_widget);
+
+  Box * tmp_sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H),false);
+  tmp_sound_options->AddWidget(new Label(_("Sound options"), zeroRect, *normal_font));
 
   lbox_sound_freq = new ListBox( Rectanglei(0, 0, 0, 80) );
-  sound_options->AddWidget(lbox_sound_freq);
+  tmp_sound_options->AddWidget(lbox_sound_freq);
 
   opt_music = new CheckBox(_("Music?"), zeroRect);
-  sound_options->AddWidget(opt_music);
+  tmp_sound_options->AddWidget(opt_music);
 
   opt_sound_effects = new CheckBox(_("Sound effects?"), zeroRect);
-  sound_options->AddWidget(opt_sound_effects);
+  tmp_sound_options->AddWidget(opt_sound_effects);
 
+  sound_options->AddWidget(tmp_sound_options);
   widgets.AddWidget(sound_options);
 
   // Values initialization
