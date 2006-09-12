@@ -62,6 +62,9 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_objects = false;
   m_last_colliding_object = NULL;
 
+  // No collision with this object until we have gone out of his collision rectangle
+  m_overlapping_object = NULL;
+
   m_allow_negative_y = false;
   m_alive = ALIVE;
 
@@ -161,6 +164,30 @@ int PhysicalObj::GetHeight() const{
 
 Point2i PhysicalObj::GetSize() const{
 	return Point2i(m_width, m_height);
+}
+
+void PhysicalObj::SetOverlappingObject(PhysicalObj* obj)
+{
+  m_overlapping_object = obj;
+  MSG_DEBUG( "physic.overlapping", "\"%s\" doesn't check any collision with \"%s\" anymore", GetName().c_str(), obj->GetName().c_str());
+  CheckOverlapping();
+}
+
+void PhysicalObj::CheckOverlapping()
+{
+  if(m_overlapping_object == NULL)
+    return;
+
+  // Check if we are still overlapping with this object
+  if (!m_overlapping_object->GetTestRect().Intersect( GetTestRect() ))
+  {
+    MSG_DEBUG( "physic.overlapping", "\"%s\" just stopped overlapping with \"%s\"", GetName().c_str(), m_overlapping_object->GetName().c_str());
+    m_overlapping_object = NULL;
+  }
+  else
+  {
+    MSG_DEBUG( "physic.overlapping", "\"%s\" is overlapping with \"%s\"", GetName().c_str(), m_overlapping_object->GetName().c_str());
+  }
 }
 
 void PhysicalObj::SetTestRect (uint left, uint right, uint top, uint bottom)
@@ -572,23 +599,20 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position)
   if( FootsOnFloor(position.y - 1) )
     return false;
 
+  CheckOverlapping();
+
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
 		  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
   if (m_collides_with_characters)
     {
-      Character * tmp = NULL;
       FOR_ALL_LIVING_CHARACTERS(team,character) 
 	{
-	  tmp = &(*character);
-	  if (tmp != this 
-	      && (tmp != &ActiveCharacter() || typeid(*this) != typeid(WeaponProjectile))) // hack to avoid collision between
-	    // active character and a weapon projectile when launching it
-	    // but manage collision of character between character (see bug 6684)
+	  if (&(*character) != this && &(*character) != m_overlapping_object)
 	    {
-	      if (tmp->GetTestRect().Intersect( rect )) 
+	      if (character->GetTestRect().Intersect( rect )) 
 		{
-		  m_last_colliding_object = (PhysicalObj*)tmp;
+		  m_last_colliding_object = (PhysicalObj*) &(*character);
 		  return false;
 		}
 	    }
@@ -598,7 +622,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position)
   if (m_collides_with_objects)
     {
       FOR_EACH_OBJECT(object)
-	if (object -> ptr != this)
+	if (object -> ptr != this && object->ptr != m_overlapping_object)
 	  {
 	    if ( object->ptr->GetTestRect().Intersect( rect ) ) 
 	      {

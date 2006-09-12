@@ -47,21 +47,20 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
   SetTestRect (0, 0, 2, 3);
 }
 
-void BatonDynamite::Shoot(double strength)
+BatonDynamite::~BatonDynamite()
 {
-  Reset();
-  WeaponProjectile::Shoot(strength);
+  jukebox.Stop(channel);
 }
 
-void BatonDynamite::Reset()
+void BatonDynamite::Shoot(double strength)
 {
-  StopMoving();
   unsigned int delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
   image->SetFrameSpeed(delay);
 
   image->Scale(ActiveCharacter().GetDirection(), 1);
   image->SetCurrentFrame(0);
   image->Start();
+  WeaponProjectile::Shoot(strength);
 }
 
 void BatonDynamite::Refresh()
@@ -73,13 +72,6 @@ void BatonDynamite::Refresh()
 void BatonDynamite::ShootSound()
 {
   channel = jukebox.Play("share","weapon/dynamite_fuze", -1);
-}
-
-void BatonDynamite::SignalGhostState(bool already_dead)
-{
-  jukebox.Stop(channel);
-  channel = -1;
-  launcher->SignalProjectileGhostState();
 }
 
 //-----------------------------------------------------------------------------
@@ -100,7 +92,6 @@ WeaponProjectile * Dynamite::GetProjectileInstance()
 // drop a dynamite
 bool Dynamite::p_Shoot ()
 {
-  dynamic_cast<BatonDynamite *>(projectile)->Reset();
   projectile->Shoot(0);
 
   // add the character speed

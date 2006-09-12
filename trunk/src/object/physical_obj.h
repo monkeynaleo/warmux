@@ -53,7 +53,10 @@ private:
   bool m_goes_through_wall;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
-  PhysicalObj * m_last_colliding_object;
+  PhysicalObj* m_last_colliding_object;
+  PhysicalObj* m_overlapping_object;
+
+  void CheckOverlapping();
 
 protected:
   bool exterieur_monde_vide;// TO REMOVE!! It is the same for all physical objects !
@@ -120,7 +123,8 @@ public:
   // Collision management
   void SetCollisionModel(bool goes_through_wall,
 			 bool collides_with_characters,
-			 bool collides_with_objects);  
+			 bool collides_with_objects);
+  void SetOverlappingObject(PhysicalObj* obj);
 
   // Collision test for point (x,y) -- public only for Uzi...
   bool CollisionTest(const Point2i &position);
