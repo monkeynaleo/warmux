@@ -179,7 +179,6 @@ void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {  
   assert (obj != NULL);
 
-  SignalCollision();
   if (explode_colliding_character)
     Explosion();
 }
@@ -187,7 +186,6 @@ void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 // projectile explode when hiting the ground
 void WeaponProjectile::SignalGroundCollision()
 {
-  SignalCollision();
   if (explode_with_collision)
     Explosion();
 }
@@ -319,7 +317,7 @@ bool WeaponLauncher::ReloadLauncher()
 
 Point2i WeaponLauncher::GetGunHolePosition()
 {
-  int rayon = m_image->GetWidth();
+  int rayon = m_image->GetWidth() / 2;
   double angleRAD = Deg2Rad(ActiveTeam().crosshair.GetAngleVal());
   Point2i hole_position = Point2i(rayon, rayon) * Point2d(cos(angleRAD), sin(angleRAD));
   hole_position.x += position.dx;
