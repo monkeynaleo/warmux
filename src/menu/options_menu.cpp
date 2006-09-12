@@ -52,11 +52,7 @@ OptionMenu::OptionMenu() :
 
   /* Grapic options */
   Box * graphic_options = new HBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
-
-  Surface tmp_surf = resource_manager.LoadImage(res, "menu/video_label");
-  PictureWidget * pic_widget = new PictureWidget(Rectanglei(0,0,tmp_surf.GetWidth(),tmp_surf.GetHeight()));
-  pic_widget->SetSurface(tmp_surf, false);
-  graphic_options->AddWidget(pic_widget);
+  graphic_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,136), "menu/video_label"));
 
   Box * tmp_graphic_options = new VBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H), false);
   tmp_graphic_options->AddWidget(new Label(_("Graphic options"), zeroRect, *normal_font));
@@ -86,10 +82,7 @@ OptionMenu::OptionMenu() :
 
   /* Sound options */  
   Box * sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H));
-  Surface tmp_sound_surf = resource_manager.LoadImage(res, "menu/audio_label");
-  pic_widget = new PictureWidget(Rectanglei(0,0,tmp_surf.GetWidth(),tmp_surf.GetHeight()));
-  pic_widget->SetSurface(tmp_sound_surf, false);
-  sound_options->AddWidget(pic_widget);
+  sound_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,138), "menu/audio_label"));
 
   Box * tmp_sound_options = new VBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H),false);
   tmp_sound_options->AddWidget(new Label(_("Sound options"), zeroRect, *normal_font));

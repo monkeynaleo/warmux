@@ -36,7 +36,6 @@ const uint MARGIN_TOP    = 20;
 const uint MARGIN_SIDE   = 20;
 const uint MARGIN_BOTTOM = 70;
 
-const uint TEAMS_Y = 20;
 const uint TEAMS_W = 160;
 const uint TEAMS_H = 160;
 const uint TEAM_LOGO_Y = 290;
@@ -66,12 +65,17 @@ GameMenu::GameMenu() :
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
   uint mainBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)/3;
 
-  /* Choose the teams !! */
-  Box * team_box = new VBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP, 
+  /* Choose the teams !! */  
+  Box * team_box = new HBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP, 
 				       mainBoxWidth, mainBoxHeight));
+
+  team_box->AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
+
+  Box * tmp_team_box = new VBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP, 
+					   mainBoxWidth-60, mainBoxHeight), false);
   Label * select_teams_label = new Label(_("Select the teams:"), rectZero, *normal_font);
 
-  team_box->AddWidget(select_teams_label);
+  tmp_team_box->AddWidget(select_teams_label);
 
   Box * tmp_box = new HBox( Rectanglei(0,0, mainBoxWidth, 
 				       mainBoxHeight - select_teams_label->GetSizeY())
@@ -100,15 +104,21 @@ GameMenu::GameMenu() :
   lbox_selected_teams->always_one_selected = false;
   tmp_box->AddWidget(lbox_selected_teams);
 
-  team_box->AddWidget(tmp_box);
-
+  tmp_team_box->AddWidget(tmp_box);
+  team_box->AddWidget(tmp_team_box);
   widgets.AddWidget(team_box);
 
   /* Choose the map !! */
-  Box * map_box = new VBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE, 
-				 mainBoxWidth, mainBoxHeight));
+  Box * map_box = new HBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE, 
+				       mainBoxWidth, mainBoxHeight));
+
+  map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
+
+  Box * tmp_map_box = new VBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE, 
+				       mainBoxWidth-60, mainBoxHeight), false);
+
   Label * select_world_label = new Label(_("Select the world:"), rectZero, *normal_font);
-  map_box->AddWidget(select_world_label);
+  tmp_map_box->AddWidget(select_world_label);
 
   uint map_preview_height = mainBoxHeight - select_world_label->GetSizeY() -2*10;
   
@@ -122,37 +132,41 @@ GameMenu::GameMenu() :
   map_preview = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3, map_preview_height));
   tmp_box->AddWidget(map_preview);
 
-  map_box->AddWidget(tmp_box);
-
+  tmp_map_box->AddWidget(tmp_box);
+  map_box->AddWidget(tmp_map_box);
   widgets.AddWidget(map_box);
 
   /* Choose other game options */
-  Box * game_options = new VBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 
+  Box * game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 
 					    mainBoxWidth/2, mainBoxHeight) );
-  game_options->AddWidget(new Label(_("Game options"), rectZero, *normal_font));
+  game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
+
+  Box * tmp_game_options = new VBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 
+						mainBoxWidth/2-40, mainBoxHeight), false );
+  tmp_game_options->AddWidget(new Label(_("Game options"), rectZero, *normal_font));
   
 
   opt_duration_turn = new SpinButton(_("Duration of a turn:"), rectZero,
 				     TPS_TOUR_MIN, 5,
 				     TPS_TOUR_MIN, TPS_TOUR_MAX);
-  game_options->AddWidget(opt_duration_turn);
+  tmp_game_options->AddWidget(opt_duration_turn);
 
   opt_duration_end_turn = new SpinButton(_("Duration of the end of a turn:"), rectZero,
 					 TPS_FIN_TOUR_MIN, 1,
 					 TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
-  game_options->AddWidget(opt_duration_end_turn);
+  tmp_game_options->AddWidget(opt_duration_end_turn);
 
   opt_nb_characters = new SpinButton(_("Number of players per team:"), rectZero,
 				 4, 1,
 				 NBR_VER_MIN, NBR_VER_MAX);
-  game_options->AddWidget(opt_nb_characters);
+  tmp_game_options->AddWidget(opt_nb_characters);
 
   opt_energy_ini = new SpinButton(_("Initial energy:"), rectZero,
 				      100, 5,
 				      50, 200);
 
-  game_options->AddWidget(opt_energy_ini);
-
+  tmp_game_options->AddWidget(opt_energy_ini);
+  game_options->AddWidget(tmp_game_options);
   widgets.AddWidget(game_options);
 
 

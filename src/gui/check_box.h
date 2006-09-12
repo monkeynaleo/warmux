@@ -30,10 +30,10 @@
 
 class CheckBox : public Widget
 {
- private:
+ protected:
   Text *txt_label;
   bool m_value;
-  Sprite *m_image;
+  Sprite *m_checked_image;
    
  public:
   CheckBox(const std::string &label, const Rectanglei &rect, bool value = true);
