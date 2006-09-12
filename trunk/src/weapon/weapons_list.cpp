@@ -81,6 +81,7 @@ void WeaponsList::Init()
   Baseball* baseball = new Baseball;
   Mine* mine = new Mine;
   AirAttack* air_attack = new AirAttack;
+  AnvilLauncher* anvil = new AnvilLauncher;
   TuxLauncher* tux = new TuxLauncher;
   GnuLauncher* gnu_launcher = new GnuLauncher;
   PolecatLauncher* polecat_launcher = new PolecatLauncher;
@@ -116,6 +117,7 @@ void WeaponsList::Init()
   AddToList(gnu_launcher,3);
   AddToList(polecat_launcher,3);
   AddToList(air_attack,3);
+  AddToList(anvil,3);
   AddToList(bounce_ball_launcher,3);
 
   // Category 4

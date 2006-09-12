@@ -123,6 +123,7 @@ wormux_SOURCES = \
 	weapon/crosshair.cpp weapon/crosshair.h \
 	weapon/air_attack.cpp weapon/air_attack.h \
 	weapon/airhammer.cpp weapon/airhammer.h \
+	weapon/anvil.cpp weapon/anvil.h \
 	weapon/auto_bazooka.cpp weapon/auto_bazooka.h \
 	weapon/baseball.cpp weapon/baseball.h \
 	weapon/bazooka.cpp weapon/bazooka.h \

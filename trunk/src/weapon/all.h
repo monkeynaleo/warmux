@@ -24,6 +24,7 @@
 
 #include "airhammer.h"
 #include "air_attack.h"
+#include "anvil.h"
 #include "auto_bazooka.h"
 #include "baseball.h"
 #include "bazooka.h"
