@@ -44,7 +44,6 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
 
   image->animation.SetLoopMode(false);
   SetSize(image->GetSize());
-  SetCollisionModel(false,false,false);
   SetTestRect (0, 0, 2, 3);
 }
 
