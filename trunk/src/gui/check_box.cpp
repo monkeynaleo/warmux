@@ -27,8 +27,8 @@
 CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
-  m_image = resource_manager.LoadSprite( res, "menu/check");
-  m_image->cache.EnableLastFrameCache();
+  m_checked_image = resource_manager.LoadSprite( res, "menu/check");
+  m_checked_image->cache.EnableLastFrameCache();
  
   SetPosition( rect.GetPosition() );
   SetSize( rect.GetSize() );
@@ -41,7 +41,7 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
 
 CheckBox::~CheckBox()
 {
-  delete m_image;
+  delete m_checked_image;
   delete txt_label;
 }
 
@@ -50,11 +50,11 @@ void CheckBox::Draw(const Point2i &mousePosition, Surface& surf)
   txt_label->DrawTopLeft( GetPosition() );
  
   if (m_value)
-    m_image->SetCurrentFrame(0);
+    m_checked_image->SetCurrentFrame(0);
   else 
-    m_image->SetCurrentFrame(1);
+    m_checked_image->SetCurrentFrame(1);
 
-  m_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
+  m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
 }
 
 Widget* CheckBox::Clic(const Point2i &mousePosition, uint button)

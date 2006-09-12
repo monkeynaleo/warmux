@@ -22,10 +22,21 @@
 //#include <SDL_gfxPrimitives.h>
 #include "../graphic/colors.h"
 #include "../include/app.h"
+#include "../tool/resource_manager.h"
 
 PictureWidget::PictureWidget (const Rectanglei &rect) : Widget(rect)
 {
   spr = NULL;
+}
+
+PictureWidget::PictureWidget (const Rectanglei &rect, std::string resource_id) : Widget(rect)
+{
+  spr = NULL;
+
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
+  Surface tmp = resource_manager.LoadImage(res, resource_id);
+  SetSurface(tmp, false);  
+  resource_manager.UnLoadXMLProfile( res);
 }
 
 PictureWidget::~PictureWidget()
