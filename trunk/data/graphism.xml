@@ -22,6 +22,9 @@
   <surface name="bg_play" file="menu/img/background_play.png" />
   <surface name="bg_network" file="menu/img/background_network.png" />
 
+  <surface name="video_label" file="menu/img/video_label.png" />
+  <surface name="audio_label" file="menu/img/audio_label.png" />
+
   <sprite name="valider">
     <image file="menu/img/validate.png">
       <grid pos="0,0" size="32,32" array="1,2" />
