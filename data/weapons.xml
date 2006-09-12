@@ -90,6 +90,15 @@
     <image file="weapon/riot_bomb/missile.png" />
   </sprite>
 
+  <!-- Anvil ressources -->
+
+  <surface name="anvil_launcher" file="weapon/anvil/anvil.png" />
+  <surface name="anvil_launcher_ico" file="weapon/anvil/anvil_ico.png" />
+  <surface name="anvil" file="weapon/anvil/anvil.png" />
+  <sprite name="anvil">
+    <image file="weapon/anvil/anvil.png" />
+  </sprite>
+
 <!-- Bounce ball ressources -->
 
   <surface name="bounce_ball_ico" file="weapon/bounce_ball/bounce_ball_ico.png" />

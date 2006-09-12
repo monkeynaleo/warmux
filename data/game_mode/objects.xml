@@ -31,6 +31,15 @@
     <rebound_factor>0.01</rebound_factor>
   </barrel>
 
+  <anvil>
+    <mass>10000.0</mass>
+    <wind_factor>0.3</wind_factor>
+    <air_resist_factor>20.0</air_resist_factor>
+    <gravity_factor>1.0</gravity_factor>
+    <rebounding>false</rebounding>
+    <rebound_factor>0.01</rebound_factor>
+  </anvil>
+
   <!-- Dummy value, will be overwritten by the value contained in each
        map config file  -->
   <wind_particle>
@@ -78,7 +87,7 @@
     <rebounding>false</rebounding>
     <rebound_factor>0.01</rebound_factor>
   </dark_smoke>
-
+  
   <star_particle>  <!-- Particle for tux weapon -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
