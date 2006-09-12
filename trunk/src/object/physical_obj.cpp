@@ -575,9 +575,9 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position)
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
 		  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
-  Character * tmp = NULL;
   if (m_collides_with_characters)
     {
+      Character * tmp = NULL;
       FOR_ALL_LIVING_CHARACTERS(team,character) 
 	{
 	  tmp = &(*character);
@@ -594,21 +594,22 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position)
 	    }
 	}
     }
-  if (m_collides_with_objects) {
-    FOR_EACH_OBJECT(object) {
-      if (object -> ptr == this) continue;
-      // Hack to avoid the current character stuck with a dynamite. (see bug 6939)
-      if (typeid(*(object->ptr)) == typeid(Character)) {
-        tmp = (Character *)object->ptr;
-        if (tmp == &ActiveCharacter()) continue;
-      }
-      if ( object->ptr->GetTestRect().Intersect( rect ) ) {
-        m_last_colliding_object = object->ptr;
-        return false;
-      }
+
+  if (m_collides_with_objects)
+    {
+      FOR_EACH_OBJECT(object)
+	if (object -> ptr != this)
+	  {
+	    if ( object->ptr->GetTestRect().Intersect( rect ) ) 
+	      {
+		m_last_colliding_object = object->ptr;
+		return false;
+	      }
+	  }
     }
-  }
+
   return world.RectEstDansVide (rect);
+
 }
 
 bool PhysicalObj::FootsInVacuum() {
