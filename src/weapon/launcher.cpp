@@ -125,7 +125,8 @@ void WeaponProjectile::Shoot(double strength)
 
   // Set the initial position.
   SetXY( launcher->GetGunHolePosition() );
-  
+  SetOverlappingObject(&ActiveCharacter());
+
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();
   SetSpeed (strength, angle);

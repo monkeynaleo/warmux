@@ -45,27 +45,13 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 
 void SuperTux::Shoot(double strength)
 {
-  // Set physics constants.
-  ResetConstants();
-
-  // Set the initial position.
-  SetXY( ActiveCharacter().GetHandPosition() );
-
-  // Fixe la force de départ
+  WeaponProjectile::Shoot(strength);
   angle = ActiveTeam().crosshair.GetAngleRad();
-  PutOutOfGround(angle);
-  SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle);
-  
+
   Time * global_time = Time::GetInstance();
   time_next_action = global_time->Read();
   last_move = global_time->Read();
-
   begin_time = global_time->Read();  
-
-  ShootSound();
-
-  lst_objects.AddObject (this);
-  camera.ChangeObjSuivi(this,true,true,true);
 }
 
 void SuperTux::Refresh()

@@ -38,13 +38,13 @@ class BatonDynamite : public WeaponProjectile
 public:
   BatonDynamite(ExplosiveWeaponConfig& cfg,
                 WeaponLauncher * p_launcher);
-  void Reset();
-  void Refresh();
+  ~BatonDynamite();
+
   void Shoot(double strength);
+  void Refresh();
 
 protected:
   void ShootSound();
-  void SignalGhostState(bool already_dead);
 };
 
 
