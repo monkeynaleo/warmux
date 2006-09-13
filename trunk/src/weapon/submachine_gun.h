@@ -38,6 +38,8 @@ class SubMachineGunBullet : public WeaponBullet
                         WeaponLauncher * p_launcher);
   private:
     void ShootSound();
+  protected:
+    void RandomizeShoot(double &angle,double &strength);
 };
 
 class SubMachineGun : public WeaponLauncher

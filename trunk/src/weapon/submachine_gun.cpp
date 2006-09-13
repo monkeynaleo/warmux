@@ -32,16 +32,23 @@
 #include "../interface/game_msg.h"
 #include "../weapon/explosion.h"
 #include "../weapon/submachine_gun.h"
+#include "../network/randomsync.h"
 
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_EXPLOSION_RANGE    = 15;
 const double  SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
+const double  SUBMACHINE_RANDOM_ANGLE       = 0.1;
 
 SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                                          WeaponLauncher * p_launcher) :
   WeaponBullet("m16_bullet", cfg, p_launcher)
 {
   cfg.explosion_range = SUBMACHINE_EXPLOSION_RANGE;
+}
+
+void SubMachineGunBullet::RandomizeShoot(double &angle,double &strength)
+{
+  angle *= 1.0 + randomSync.GetDouble(-SUBMACHINE_RANDOM_ANGLE,SUBMACHINE_RANDOM_ANGLE);
 }
 
 void SubMachineGunBullet::ShootSound()

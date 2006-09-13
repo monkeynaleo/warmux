@@ -129,6 +129,7 @@ void WeaponProjectile::Shoot(double strength)
 
   // Set the initial speed.
   double angle = ActiveTeam().crosshair.GetAngleRad();
+  RandomizeShoot(angle,strength);
   SetSpeed (strength, angle);
   PutOutOfGround(angle);
 
@@ -201,6 +202,11 @@ void WeaponProjectile::SignalGhostState(bool)
 {
   if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState((WeaponProjectile *)(this));
   lst_objects.RemoveObject(this);
+}
+
+// Implement it in subclass to randomize fire
+void WeaponProjectile::RandomizeShoot(double &angle,double &strength)
+{
 }
 
 // the projectile explode and signal the explosion to launcher

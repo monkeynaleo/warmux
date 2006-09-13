@@ -75,6 +75,7 @@ class WeaponProjectile : public PhysicalObj
 
     virtual void ShootSound();
     virtual void Explosion();
+    virtual void RandomizeShoot(double &angle,double &strength);
     virtual void DoExplosion();
     void RemoveFromPhysicalEngine();
 };
