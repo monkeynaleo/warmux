@@ -42,7 +42,7 @@ public:
   void Refresh();
   void Explosion();
 protected:
-  void SignalCollision();
+  void SignalOutOfMap();
 };
 
 class HollyGrenadeLauncher : public WeaponLauncher

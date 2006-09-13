@@ -75,7 +75,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_test_top = 0;
   m_test_bottom = 0;
 
-  exterieur_monde_vide = Config::GetInstance()->GetExterieurMondeVide(); // TO REMOVE!! It is the same for all physical objects !
   m_cfg.LoadXml(m_name,xml_config);  // Load physics constants from the xml file
   ResetConstants();       // Set physics constants from the xml file
 }
@@ -275,22 +274,24 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     // Check if we exit the world. If so, we stop moving and return.
     if( IsOutsideWorldXY(tmpPos) ){
-      
-      if( !exterieur_monde_vide ){
-	tmpPos.x = BorneLong(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
-	tmpPos.y = BorneLong(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
-	
-	MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
+
+      if( !Config::GetInstance()->GetExterieurMondeVide() ){
+        tmpPos.x = BorneLong(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
+        tmpPos.y = BorneLong(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
+        MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
+        collision = COLLISION_ON_GROUND;
+        break;
       }
 
       SetXY( tmpPos );
-      break;
+      SignalOutOfMap();
+      return;
     }
  
     // Test if we collide...
     if( CollisionTest(tmpPos) ){
       MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision: collision en %d,%d par TestCollision.", m_name.c_str(), tmpPos.x, tmpPos.y );
-      
+
       // Set the object position to the current position.
       SetXY( Point2i( (int)round(pos.x - offset.x), (int)round(pos.y - offset.y)) );
       
@@ -531,6 +532,8 @@ void PhysicalObj::SignalGroundCollision() {}
 
 void PhysicalObj::SignalCollision() {}
 
+void PhysicalObj::SignalOutOfMap() {}
+
 void PhysicalObj::SetCollisionModel(bool goes_through_wall,
 				    bool collides_with_characters,
 				    bool collides_with_objects)
@@ -580,7 +583,7 @@ bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const
 bool PhysicalObj::FootsOnFloor(int y) const
 {
   // If outside is empty, the object can't hit the ground !
-  if (exterieur_monde_vide) return false;
+  if ( Config::GetInstance()->GetExterieurMondeVide() ) return false;
 
   const int y_max = world.GetHeight()-m_height +m_test_bottom;
   return (y_max <= y);
@@ -594,7 +597,7 @@ bool PhysicalObj::IsInVacuum(const Point2i &offset)
 bool PhysicalObj::IsInVacuumXY(const Point2i &position)
 {
   if( IsOutsideWorldXY(position) )
-    return exterieur_monde_vide;
+    return Config::GetInstance()->GetExterieurMondeVide();
 
   if( FootsOnFloor(position.y - 1) )
     return false;
@@ -644,7 +647,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position)
 {
   if( IsOutsideWorldXY(position) ){
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
-    return exterieur_monde_vide;
+    return Config::GetInstance()->GetExterieurMondeVide();
   }
 
   if( FootsOnFloor(position.y) ){

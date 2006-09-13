@@ -43,7 +43,7 @@ public:
   void Shoot(double strength);
   void SetTarget (int x,int y);
  protected:
-  void SignalCollision();
+  void SignalOutOfMap();
 };
 
 class AutomaticBazooka : public WeaponLauncher

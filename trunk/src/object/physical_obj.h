@@ -59,8 +59,6 @@ private:
   void CheckOverlapping();
 
 protected:
-  bool exterieur_monde_vide;// TO REMOVE!! It is the same for all physical objects !
-  
   std::string m_name;
 
   // Rectangle used for collision tests
@@ -177,6 +175,7 @@ protected:
   virtual void SignalObjectCollision(PhysicalObj * obj);
   virtual void SignalGroundCollision();
   virtual void SignalCollision();
+  virtual void SignalOutOfMap();
 
 private:
   //Renvoie la position du point de contact entre

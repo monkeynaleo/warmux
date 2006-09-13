@@ -99,13 +99,10 @@ void SuperTux::turn_right()
     }
 }
 
-void SuperTux::SignalCollision()
-{ 
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add (_("Bye bye tux..."));
-  }
-  WeaponProjectile::SignalCollision();
+void SuperTux::SignalOutOfMap()
+{
+  GameMessages::GetInstance()->Add (_("Bye bye tux..."));
+  WeaponProjectile::SignalOutOfMap();
 }
 
 //-----------------------------------------------------------------------------

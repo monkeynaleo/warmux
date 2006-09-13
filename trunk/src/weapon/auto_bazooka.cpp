@@ -90,14 +90,10 @@ void RoquetteTeteCherche::Refresh()
   }
 }
 
-void RoquetteTeteCherche::SignalCollision()
+void RoquetteTeteCherche::SignalOutOfMap()
 { 
-  m_attire = false;
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
-  }
-  WeaponProjectile::SignalCollision();
+  GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
+  WeaponProjectile::SignalOutOfMap();
 }
 
 // Set the coordinate of the target

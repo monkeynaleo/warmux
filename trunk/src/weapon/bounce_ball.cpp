@@ -57,13 +57,10 @@ void BounceBall::Refresh()
 
 //-----------------------------------------------------------------------------
 
-void BounceBall::SignalCollision()
+void BounceBall::SignalOutOfMap()
 {   
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add ("The ball left the battlefield before exploding");
-    WeaponProjectile::SignalCollision();
-  }
+  GameMessages::GetInstance()->Add ("The ball left the battlefield before exploding");
+  WeaponProjectile::SignalOutOfMap();
 }
 
 //-----------------------------------------------------------------------------

@@ -41,7 +41,7 @@ public:
   void Refresh();
   void Shoot(int n_x, int n_y);
 protected:
-  void SignalCollision();
+  void SignalOutOfMap();
   void DoExplosion();
 };
 
@@ -57,7 +57,7 @@ public:
   void Refresh();
 protected:
   void Explosion();
-  void SignalCollision();
+  void SignalOutOfMap();
 };
 
 class ClusterBombConfig : public ExplosiveWeaponConfig
