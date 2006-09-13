@@ -199,7 +199,7 @@ void WeaponProjectile::SignalCollision()
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
-  if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState();
+  if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState((WeaponProjectile *)(this));
   lst_objects.RemoveObject(this);
 }
 
@@ -356,16 +356,11 @@ void WeaponLauncher::SignalProjectileCollision()
   m_is_active = false;
 }
 
-// Signal a fall ending of a projectile
-// void WeaponLauncher::SignalProjectileFallEnding()
-// {
-//   m_is_active = false;
-// }
-
 // Signal a ghost state
-void WeaponLauncher::SignalProjectileGhostState()
+void WeaponLauncher::SignalProjectileGhostState(WeaponProjectile * proj)
 {
   m_is_active = false;
+  projectile_list.remove(proj);
 }
 
 // Signal a projectile timeout (for exemple: grenade, holly grenade ... etc.)

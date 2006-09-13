@@ -134,7 +134,7 @@ class WeaponLauncher : public Weapon
   // Handle of projectile events
     virtual void SignalProjectileExplosion();
     virtual void SignalProjectileCollision();
-    virtual void SignalProjectileGhostState();
+    virtual void SignalProjectileGhostState(WeaponProjectile * proj);
     virtual void SignalProjectileTimeout();
 
     virtual Point2i GetGunHolePosition();
