@@ -28,6 +28,9 @@
   <surface name="map_label" file="menu/img/map_label.png" />
   <surface name="mode_label" file="menu/img/mode_label.png" />
 
+  <surface name="music_enable" file="menu/img/music_enable.png" />
+  <surface name="sound_effects_enable" file="menu/img/sound_effects_enable.png" />
+
   <sprite name="valider">
     <image file="menu/img/validate.png">
       <grid pos="0,0" size="32,32" array="1,2" />

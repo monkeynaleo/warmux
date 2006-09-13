@@ -47,6 +47,7 @@ wormux_SOURCES = \
 	gui/widget.cpp gui/widget.h \
 	gui/widget_list.cpp gui/widget_list.h \
 	gui/null_widget.cpp gui/null_widget.h \
+	gui/picture_text_cbox.cpp gui/picture_text_cbox.h \
 	gui/picture_widget.cpp gui/picture_widget.h \
 	gui/container.h \
 	tool/string_tools.cpp tool/string_tools.h \

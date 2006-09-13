@@ -32,6 +32,7 @@
 #include "../gui/label.h"
 #include "../gui/null_widget.h"
 #include "../gui/picture_widget.h"
+#include "../gui/picture_text_cbox.h"
 #include "../gui/container.h"
 
 typedef enum {
