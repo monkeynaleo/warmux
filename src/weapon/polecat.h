@@ -44,7 +44,7 @@ class Polecat : public WeaponProjectile
   int save_x, save_y;
   double angle;
  protected:
-  void SignalCollision();
+  void SignalOutOfMap();
  public:
   Polecat(ExplosiveWeaponConfig& cfg,
       WeaponLauncher * p_launcher);

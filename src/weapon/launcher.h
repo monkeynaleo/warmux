@@ -68,6 +68,7 @@ class WeaponProjectile : public PhysicalObj
     virtual void SignalObjectCollision(PhysicalObj * obj);
     virtual void SignalGroundCollision();
     virtual void SignalCollision();
+    virtual void SignalOutOfMap();
 
     virtual void SignalTimeout();
     virtual void SignalExplosion();

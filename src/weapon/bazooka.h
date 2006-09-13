@@ -30,7 +30,7 @@ public:
   RoquetteBazooka(ExplosiveWeaponConfig& cfg, WeaponLauncher * p_launcher);
   void Refresh();
 protected:
-  void SignalCollision();
+  void SignalOutOfMap();
 };
 
 class Bazooka : public WeaponLauncher

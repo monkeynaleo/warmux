@@ -54,13 +54,10 @@ void Grenade::Refresh()
 
 //-----------------------------------------------------------------------------
 
-void Grenade::SignalCollision()
-{   
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
-  }
-  WeaponProjectile::SignalCollision();
+void Grenade::SignalOutOfMap()
+{
+  GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
+  WeaponProjectile::SignalOutOfMap();
 }
 
 //-----------------------------------------------------------------------------

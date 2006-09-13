@@ -54,13 +54,10 @@ void Cluster::Refresh()
   image->SetRotation_deg( angle );
 }
 
-void Cluster::SignalCollision()
+void Cluster::SignalOutOfMap()
 {
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
-  }
-  WeaponProjectile::SignalCollision();
+  GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
+  WeaponProjectile::SignalOutOfMap();
 }
 
 void Cluster::DoExplosion()
@@ -95,13 +92,10 @@ void ClusterBomb::Refresh()
   image->SetRotation_deg( angle);
 }
 
-void ClusterBomb::SignalCollision()
+void ClusterBomb::SignalOutOfMap()
 {
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add (_("The Cluster Bomb left the battlefield before it could explode."));
-  }
-  WeaponProjectile::SignalCollision();
+  GameMessages::GetInstance()->Add (_("The Cluster Bomb left the battlefield before it could explode."));
+  WeaponProjectile::SignalOutOfMap();
 }
 
 void ClusterBomb::Explosion()

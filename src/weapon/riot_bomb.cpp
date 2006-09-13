@@ -47,13 +47,10 @@ void RoquetteRiotBomb::Refresh()
   image->SetRotation_deg( angle);
 }
 
-void RoquetteRiotBomb::SignalCollision()
-{ 
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
-  }
-  WeaponProjectile::SignalCollision();
+void RoquetteRiotBomb::SignalOutOfMap()
+{
+  GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
+  WeaponProjectile::SignalOutOfMap();
 }
 
 void RoquetteRiotBomb::DoExplosion()

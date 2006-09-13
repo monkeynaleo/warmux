@@ -107,13 +107,10 @@ void Gnu::Refresh()
                 image->GetHeight()/2-1);
 }
 
-void Gnu::SignalCollision()
-{   
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add ("The Gnu left the battlefield before exploding");
-  }
-  WeaponProjectile::SignalCollision();
+void Gnu::SignalOutOfMap()
+{
+  GameMessages::GetInstance()->Add ("The Gnu left the battlefield before exploding");
+  WeaponProjectile::SignalOutOfMap();
 }
 //-----------------------------------------------------------------------------
 

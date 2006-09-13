@@ -91,13 +91,10 @@ void HollyGrenade::Refresh()
   image->SetRotation_deg(angle);
 }
 
-void HollyGrenade::SignalCollision()
+void HollyGrenade::SignalOutOfMap()
 {
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
-  }
-  WeaponProjectile::SignalCollision();
+  GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
+  WeaponProjectile::SignalOutOfMap();
 }
 
 //-----------------------------------------------------------------------------

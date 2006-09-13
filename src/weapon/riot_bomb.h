@@ -31,7 +31,7 @@ public:
                    WeaponLauncher * p_launcher);
   void Refresh();
 protected:
-  void SignalCollision();
+  void SignalOutOfMap();
   void DoExplosion();
 };
 

@@ -58,7 +58,7 @@ public:
   void turn_right();
   void Shoot(double strength);
 protected:
-  void SignalCollision();
+  void SignalOutOfMap();
 };
 
 class TuxLauncher : public WeaponLauncher

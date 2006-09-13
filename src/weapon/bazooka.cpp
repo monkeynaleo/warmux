@@ -48,13 +48,10 @@ void RoquetteBazooka::Refresh()
                                    GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
 }
 
-void RoquetteBazooka::SignalCollision()
+void RoquetteBazooka::SignalOutOfMap()
 { 
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
-  }
-  WeaponProjectile::SignalCollision();
+  GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
+  WeaponProjectile::SignalOutOfMap();
 }
 
 //-----------------------------------------------------------------------------

@@ -40,8 +40,8 @@ class Gnu : public WeaponProjectile
   int save_x, save_y;
   double angle;
  protected:
-  void SignalCollision();
- public:
+  void SignalOutOfMap();
+public:
   Gnu(ExplosiveWeaponConfig& cfg,
       WeaponLauncher * p_launcher);
   void Shoot(double strength);

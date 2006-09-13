@@ -114,13 +114,10 @@ void Polecat::Refresh()
                 image->GetHeight()/2-1);
 }
 
-void Polecat::SignalCollision()
-{   
-  if (IsGhost())
-  {
-    GameMessages::GetInstance()->Add ("The Polecat left the battlefield before exploding");
-  }
-  WeaponProjectile::SignalCollision();
+void Polecat::SignalOutOfMap()
+{
+  GameMessages::GetInstance()->Add ("The Polecat left the battlefield before exploding");
+  WeaponProjectile::SignalOutOfMap();
 }
 //-----------------------------------------------------------------------------
 
