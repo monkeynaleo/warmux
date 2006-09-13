@@ -68,7 +68,6 @@ GameMenu::GameMenu() :
   /* Choose the teams !! */  
   Box * team_box = new HBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP, 
 				       mainBoxWidth, mainBoxHeight));
-
   team_box->AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
 
   Box * tmp_team_box = new VBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP, 
@@ -111,7 +110,6 @@ GameMenu::GameMenu() :
   /* Choose the map !! */
   Box * map_box = new HBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE, 
 				       mainBoxWidth, mainBoxHeight));
-
   map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
   Box * tmp_map_box = new VBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE, 
@@ -138,7 +136,7 @@ GameMenu::GameMenu() :
 
   /* Choose other game options */
   Box * game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 
-					    mainBoxWidth/2, mainBoxHeight) );
+					    mainBoxWidth/2, mainBoxHeight) );  
   game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
 
   Box * tmp_game_options = new VBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 

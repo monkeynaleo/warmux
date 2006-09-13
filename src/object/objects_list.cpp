@@ -97,7 +97,7 @@ void ObjectsList::RemoveObject (PhysicalObj* obj)
       return;
     }
   }
-  assert(false);
+  // assert(false);
 }
 
 //-----------------------------------------------------------------------------
