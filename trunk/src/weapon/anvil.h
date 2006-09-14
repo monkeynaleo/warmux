@@ -39,10 +39,14 @@ class Anvil : public WeaponProjectile
 
 class AnvilLauncher : public WeaponLauncher
 {
+  private:
+    Point2i target;
   public:
     AnvilLauncher();
+    void ChooseTarget (Point2i mouse_pos);
   protected:
     WeaponProjectile * GetProjectileInstance();
+    bool p_Shoot();
 };
 
 #endif /* ANVIL_H */
