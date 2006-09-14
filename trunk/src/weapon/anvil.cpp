@@ -68,10 +68,10 @@ void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 
 bool AnvilLauncher::p_Shoot ()
 {
-  ReloadLauncher();
   projectile->SetXY(target);
   lst_objects.AddObject(projectile);
-  launcher_is_loaded = false;
+  projectile = NULL;
+  ReloadLauncher();
   return true;
 }
 

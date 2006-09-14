@@ -84,11 +84,11 @@ bool SubMachineGun::p_Shoot ()
 {  
   if (m_is_active)
     return false;
-  
-  ReloadLauncher();
+
   projectile->Shoot(SUBMACHINE_BULLET_SPEED);
-  launcher_is_loaded = false;
-  
+  projectile = NULL;
+  ReloadLauncher();
+
   m_is_active = true;
   return true;
 }
