@@ -42,9 +42,13 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
 
 void PictureTextCBox::Draw(const Point2i &mousePosition, Surface& surf)
 {
-  AppWormux::GetInstance()->video.window.Blit(m_image, GetPosition());
+  // center the image
+  uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth() - 20)/2 ;
+  uint tmp_y = GetPositionY() + (GetSizeY() - m_image.GetHeight() - txt_label->GetHeight() - 5) /2;
 
-  txt_label->DrawTopLeft( GetPositionX(), GetPositionY()+m_image.GetHeight() );
+  AppWormux::GetInstance()->video.window.Blit(m_image, Point2i(tmp_x, tmp_y));
+
+  txt_label->DrawTopLeft( GetPositionX(), GetPositionY() + GetSizeY() - txt_label->GetHeight() );
   
   if (m_value)
     m_checked_image->SetCurrentFrame(0);
@@ -53,6 +57,6 @@ void PictureTextCBox::Draw(const Point2i &mousePosition, Surface& surf)
 
   m_checked_image->Blit(surf, 
 			GetPositionX() + GetSizeX() - 16, 
-			GetPositionY() + m_image.GetHeight()/2);
+			GetPositionY() + (GetSizeY()-16)/2 );
 }
 

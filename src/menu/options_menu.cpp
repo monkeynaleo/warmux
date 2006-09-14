@@ -52,7 +52,7 @@ OptionMenu::OptionMenu() :
 
   /* Grapic options */
   Box * graphic_options = new HBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
-  graphic_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,136), "menu/video_label"));
+  graphic_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,136), "menu/video_label"));
 
   lbox_video_mode = new ListBox( Rectanglei(0, 0, 80, 80) );
   graphic_options->AddWidget(lbox_video_mode);
@@ -62,24 +62,23 @@ OptionMenu::OptionMenu() :
 			       20, 120);
   graphic_options->AddWidget(opt_max_fps);
 
-  full_screen = new CheckBox(_("Fullscreen?"), stdRect);
+  full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdRect);
   graphic_options->AddWidget(full_screen);
 
-  opt_display_wind_particles = new CheckBox(_("Display wind particles?"), stdRect);
+  opt_display_wind_particles = new PictureTextCBox(_("Display wind particles?"), "menu/display_wind_particles", stdRect);
   graphic_options->AddWidget(opt_display_wind_particles);
 
-  opt_display_energy = new CheckBox(_("Display player energy?"), stdRect);
+  opt_display_energy = new PictureTextCBox(_("Display player energy?"), "menu/display_energy", stdRect);
   graphic_options->AddWidget(opt_display_energy);
 
-  opt_display_name = new CheckBox(_("Display player's name?"), stdRect);
+  opt_display_name = new PictureTextCBox(_("Display player's name?"), "menu/display_name", stdRect);
   graphic_options->AddWidget(opt_display_name);
 
   widgets.AddWidget(graphic_options);
 
   /* Sound options */  
   Box * sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H));
-  sound_options->SetMargin(10);
-  sound_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,138), "menu/audio_label"));
+  sound_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,138), "menu/audio_label"));
 
   lbox_sound_freq = new ListBox( Rectanglei(0, 0, 80, 80) );
   sound_options->AddWidget(lbox_sound_freq);
