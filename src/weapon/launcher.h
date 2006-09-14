@@ -105,9 +105,7 @@ class WeaponLauncher : public Weapon
     bool ignore_ghost_state_signal;
   protected:
     WeaponProjectile * projectile;
-    Sprite * weapon_fire;
     uint nb_active_projectile;
-    uint last_fire_time;
     bool m_allow_change_timeout;
     bool launcher_is_loaded;
     typedef std::list<WeaponProjectile *> ProjectileList;
@@ -130,9 +128,8 @@ class WeaponLauncher : public Weapon
 
     void Refresh();
     virtual void Draw();
-    virtual void DrawWeaponFire();
     void HandleKeyEvent(int action, int event_type);
- 
+
   // Handle of projectile events
     virtual void SignalProjectileExplosion();
     virtual void SignalProjectileCollision();
@@ -142,7 +139,7 @@ class WeaponLauncher : public Weapon
     virtual Point2i GetGunHolePosition();
     void IncActiveProjectile();
     void DecActiveProjectile();
-  
+
   //Misc actions
     void ActionUp ();//called by mousse.cpp when mousewhellup
     void ActionDown ();//called by mousse.cpp when mousewhelldown

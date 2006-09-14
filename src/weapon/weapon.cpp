@@ -83,7 +83,7 @@ Weapon::Weapon(Weapon_type type,
 
   m_strength = 0;
   m_first_time_loading = 0;
-
+  m_last_fire_time = 0;
   max_strength = min_angle = max_angle = 0;
   use_flipping = true;
 
@@ -100,6 +100,7 @@ Weapon::Weapon(Weapon_type type,
   m_unit_visibility = ALWAYS_VISIBLE;
    
   m_image = NULL;
+  m_weapon_fire = NULL;
 
   channel_load = -1;
 
@@ -242,7 +243,8 @@ bool Weapon::Shoot(double strength, int angle)
   MSG_DEBUG("weapon_shoot", "Enough ammo");
   
   if (!p_Shoot()) return false;
-  
+  m_last_fire_time = Time::GetInstance()->Read();
+
   MSG_DEBUG("weapon_shoot", "shoot!");
 
   // Is this the first shoot for this ammo use ?
@@ -405,9 +407,12 @@ void Weapon::DrawWeaponBox(){
 }
 
 void Weapon::Draw(){
-  if(GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
+  if(GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING &&
+     m_last_fire_time + 100 < Time::GetInstance()->Read())
     return;
 
+  if (m_last_fire_time + 100 > Time::GetInstance()->Read())
+    DrawWeaponFire();
   weapon_strength_bar.visible = false;
 
   switch (m_unit_visibility)
@@ -496,6 +501,22 @@ void Weapon::Draw(){
 
   if ( m_image )
     m_image->Blit( AppWormux::GetInstance()->video.window, Point2i(x, y) - camera.GetPosition());
+}
+
+// Draw the weapon fire when firing
+void Weapon::DrawWeaponFire()
+{
+  if (m_weapon_fire == NULL) return;
+  Point2i size = m_weapon_fire->GetSize();
+  size.x = (ActiveCharacter().GetDirection() == 1 ? 0 : size.x);
+  size.y /= 2;
+  m_weapon_fire->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
+  m_weapon_fire->Draw( GetGunHolePosition() - size );
+}
+
+Point2i Weapon::GetGunHolePosition()
+{
+  return ActiveCharacter().GetHandPosition();
 }
 
 void Weapon::DrawUnit(int unit){

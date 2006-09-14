@@ -51,8 +51,8 @@ void GunBullet::ShootSound()
 Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
   m_name = _("Gun");
-  weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
-  weapon_fire->EnableRotationCache(32);
+  m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
+  m_weapon_fire->EnableRotationCache(32);
   ReloadLauncher();
 }
 
@@ -68,7 +68,6 @@ bool Gun::p_Shoot()
     return false;  
 
   m_is_active = true;
-  last_fire_time = Time::GetInstance()->Read();
   ReloadLauncher();
   projectile->Shoot (GUN_BULLET_SPEED);
   launcher_is_loaded = false;

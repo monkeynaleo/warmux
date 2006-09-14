@@ -285,8 +285,6 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
 {
   launcher_is_loaded = false;
   projectile = NULL;
-  weapon_fire = NULL;
-  last_fire_time = 0;
   nb_active_projectile = 0;
   ignore_timeout_signal = false;
   ignore_collision_signal = false;
@@ -310,7 +308,6 @@ bool WeaponLauncher::p_Shoot ()
 //     return true;
 //   }
   ReloadLauncher();
-  last_fire_time = Time::GetInstance()->Read();
   projectile->Shoot (m_strength);
   launcher_is_loaded = false;
   return true;
@@ -333,17 +330,6 @@ Point2i WeaponLauncher::GetGunHolePosition()
   hole_position.x += position.dx;
   hole_position.y += position.dy;
   return ActiveCharacter().GetHandPosition() + (hole_position * Point2i(ActiveCharacter().GetDirection(),1));
-}
-
-// Draw the weapon fire when firing
-void WeaponLauncher::DrawWeaponFire()
-{
-  if (weapon_fire == NULL) return;
-  Point2i size = weapon_fire->GetSize();
-  size.x = (ActiveCharacter().GetDirection() == 1 ? 0 : size.x);
-  size.y /= 2;
-  weapon_fire->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
-  weapon_fire->Draw( GetGunHolePosition() - size );
 }
 
 // Direct Explosion when pushing weapon to max power !
@@ -414,7 +400,6 @@ void WeaponLauncher::Draw()
   }
 
   Weapon::Draw();
-  if (last_fire_time + 100 > Time::GetInstance()->Read()) DrawWeaponFire();
 }
 
 void WeaponLauncher::p_Select()
