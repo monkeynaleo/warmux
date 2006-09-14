@@ -47,11 +47,6 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
   SetTestRect (0, 0, 2, 3);
 }
 
-BatonDynamite::~BatonDynamite()
-{
-  jukebox.Stop(channel);
-}
-
 void BatonDynamite::Shoot(double strength)
 {
   unsigned int delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
@@ -72,6 +67,16 @@ void BatonDynamite::Refresh()
 void BatonDynamite::ShootSound()
 {
   channel = jukebox.Play("share","weapon/dynamite_fuze", -1);
+}
+
+void BatonDynamite::SignalExplosion()
+{
+  jukebox.Stop(channel);
+}
+
+void BatonDynamite::SignalOutOfMap()
+{
+  jukebox.Stop(channel);
 }
 
 //-----------------------------------------------------------------------------
