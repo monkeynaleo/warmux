@@ -43,6 +43,7 @@
 #include "parachute.h"
 #include "polecat.h"
 #include "riot_bomb.h"
+#include "shotgun.h"
 #include "skip_turn.h"
 #include "snipe_rifle.h"
 #include "submachine_gun.h"
