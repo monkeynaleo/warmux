@@ -80,11 +80,11 @@ WeaponProjectile * BounceBallLauncher::GetProjectileInstance()
 
 bool BounceBallLauncher::p_Shoot ()
 {
-  ReloadLauncher();
   if (max_strength == 0)
     projectile->Shoot (10);
   else 
     projectile->Shoot (m_strength);
-  launcher_is_loaded = false;
+  projectile = NULL;
+  ReloadLauncher();
   return true;
 }

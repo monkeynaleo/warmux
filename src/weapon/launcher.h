@@ -107,9 +107,6 @@ class WeaponLauncher : public Weapon
     WeaponProjectile * projectile;
     uint nb_active_projectile;
     bool m_allow_change_timeout;
-    bool launcher_is_loaded;
-    typedef std::list<WeaponProjectile *> ProjectileList;
-    ProjectileList projectile_list;
   protected:
     virtual bool p_Shoot();
     virtual void p_Select();
@@ -133,7 +130,7 @@ class WeaponLauncher : public Weapon
   // Handle of projectile events
     virtual void SignalProjectileExplosion();
     virtual void SignalProjectileCollision();
-    virtual void SignalProjectileGhostState(WeaponProjectile * proj);
+    virtual void SignalProjectileGhostState();
     virtual void SignalProjectileTimeout();
 
     virtual Point2i GetGunHolePosition();

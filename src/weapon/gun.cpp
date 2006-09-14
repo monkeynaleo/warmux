@@ -68,10 +68,9 @@ bool Gun::p_Shoot()
     return false;  
 
   m_is_active = true;
-  ReloadLauncher();
   projectile->Shoot (GUN_BULLET_SPEED);
-  launcher_is_loaded = false;
-
+  projectile = NULL;
+  ReloadLauncher();
   return true;
 }
 

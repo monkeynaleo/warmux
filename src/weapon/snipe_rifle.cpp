@@ -73,7 +73,8 @@ bool SnipeRifle::p_Shoot()
 {
   ReloadLauncher();
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
-  launcher_is_loaded = false;
+  projectile = NULL;
+  ReloadLauncher();
   return true;
 }
 

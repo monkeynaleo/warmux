@@ -194,9 +194,6 @@ bool Mine::p_Shoot()
 
 void Mine::Add (int x, int y)
 {
-  ReloadLauncher();
-  launcher_is_loaded = false;
-
   projectile -> SetXY ( Point2i(x, y) );
   projectile -> SetOverlappingObject(&ActiveCharacter());
 
@@ -204,6 +201,8 @@ void Mine::Add (int x, int y)
   ActiveCharacter().GetSpeedXY(speed_vector);
   projectile -> SetSpeedXY (speed_vector);
   lst_objects.AddObject (projectile);
+  projectile = NULL;
+  ReloadLauncher();
 }
 
 MineConfig& Mine::cfg()
