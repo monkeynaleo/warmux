@@ -31,6 +31,12 @@
   <surface name="music_enable" file="menu/img/music_enable.png" />
   <surface name="sound_effects_enable" file="menu/img/sound_effects_enable.png" />
 
+  <surface name="display_energy" file="menu/img/display_energy.png" />
+  <surface name="display_name" file="menu/img/display_name.png" />
+  <surface name="display_wind_particles" file="menu/img/display_wind_particles.png" />
+  <surface name="fullscreen" file="menu/img/fullscreen.png" />
+
+
   <sprite name="valider">
     <image file="menu/img/validate.png">
       <grid pos="0,0" size="32,32" array="1,2" />
