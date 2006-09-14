@@ -71,6 +71,7 @@ void WeaponsList::Init()
   Bazooka* bazooka = new Bazooka;
   SubMachineGun* submachine_gun = new SubMachineGun;
   Gun* gun = new Gun;
+  Shotgun* shotgun = new Shotgun;
   SnipeRifle* snipe_rifle = new SnipeRifle;
   RiotBomb* riot_bomb = new RiotBomb;
   AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
@@ -101,6 +102,7 @@ void WeaponsList::Init()
   AddToList(submachine_gun, 1);
   AddToList(snipe_rifle, 1);
   AddToList(gun, 1);
+  AddToList(shotgun, 1);
   AddToList(riot_bomb, 1);
   AddToList(auto_bazooka, 1);
 

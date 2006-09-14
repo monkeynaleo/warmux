@@ -159,7 +159,16 @@
     <image file="weapon/gun/gun_bullet.png" />
   </sprite>	
 
-<!-- Holly Grenade ressources -->
+  <!-- Shotgun ressources -->
+
+  <surface name="shotgun_ico" file="weapon/shotgun/shotgun_ico.png" />
+  <surface name="shotgun_fire" file="weapon/gun/gun_fire.png" />
+  <sprite name="buckshot">
+    <image file="weapon/shotgun/buckshot.png" />
+  </sprite>
+  <surface name="shotgun" file="weapon/shotgun/shotgun.png" />
+
+  <!-- Holly Grenade ressources -->
   
   <surface name="holly_grenade_ico" file="weapon/holly_grenade/holly_grenade_ico.png" />
    <surface name="holly_grenade" file="weapon/holly_grenade/holly_grenade.png" />

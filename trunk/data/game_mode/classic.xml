@@ -194,6 +194,17 @@
       <blast_force>5</blast_force>
     </gun>
 
+    <shotgun> <!-- shotgun blues -->
+      <position origin="hand" x="-7" y="-3" />
+      <min_angle>-40</min_angle>
+      <max_angle>89</max_angle>
+      <nb_ammo>2</nb_ammo>
+      <unit_per_ammo>2</unit_per_ammo>
+      <damage>5</damage>
+      <explosion_range>1</explosion_range>
+      <particle_range>2</particle_range>
+    </shotgun>
+
     <jetpack>
       <position origin="hand" x="-5" y="-6" />
       <nb_ammo>3</nb_ammo>
