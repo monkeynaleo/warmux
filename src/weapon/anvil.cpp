@@ -60,6 +60,21 @@ AnvilLauncher::AnvilLauncher() :
   ReloadLauncher();
 }
 
+void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
+{
+  target = mouse_pos - (m_image->GetSize()/2);
+  ActiveTeam().GetWeapon().NewActionShoot();
+}
+
+bool AnvilLauncher::p_Shoot ()
+{
+  ReloadLauncher();
+  projectile->SetXY(target);
+  lst_objects.AddObject(projectile);
+  launcher_is_loaded = false;
+  return true;
+}
+
 WeaponProjectile * AnvilLauncher::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>

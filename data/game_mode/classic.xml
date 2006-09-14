@@ -36,12 +36,11 @@
     </air_attack>
     
     <anvil>
-      <position origin="over" x="0" y="-5" />
+      <position origin="hand" x="0" y="-5" />
       <nb_ammo>1</nb_ammo>
-      <nbr_obus>3</nbr_obus>
-      <damage>30</damage>
-      <mass>3</mass>
-      <speed>7</speed>
+      <damage>200</damage>
+      <mass>1000</mass>
+      <speed>0</speed>
     </anvil>
     
     <airhammer>
