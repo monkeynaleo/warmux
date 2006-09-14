@@ -74,6 +74,7 @@ protected:
   std::string m_name;
   bool m_is_active;
   Sprite *m_image;
+  Sprite *m_weapon_fire;
 
   struct s_position{
     int dx, dy;
@@ -88,6 +89,9 @@ protected:
 
   // time of beginning to load (for choosing the strength)
   uint m_first_time_loading;
+
+  // time of the last fire
+  uint m_last_fire_time;
 
   // change weapon after ? (for the ninja cord = true)
   bool m_can_change_weapon;
@@ -148,6 +152,7 @@ public:
 
   // Draw the weapon
   virtual void Draw();
+  virtual void DrawWeaponFire();
   void DrawWeaponBox();
 
   void DrawUnit(int unit);
@@ -165,7 +170,8 @@ public:
 
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
-  
+  virtual Point2i GetGunHolePosition();
+
   // Create a new action "shoot" in action handler
   void NewActionShoot() const;
 

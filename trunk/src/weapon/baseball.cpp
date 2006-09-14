@@ -24,10 +24,13 @@
 #include "../team/macro.h"
 #include "../tool/point.h"
 #include "../tool/i18n.h"
+#include "explosion.h"
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 {
   m_name = _("Baseball");
+  m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
+  m_weapon_fire->EnableRotationCache(32);
 }
 
 bool Baseball::p_Shoot (){

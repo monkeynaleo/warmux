@@ -67,8 +67,8 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   ignore_explosion_signal = true;
   ignore_ghost_state_signal = true;
 
-  weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
-  weapon_fire->EnableRotationCache(32);
+  m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
+  m_weapon_fire->EnableRotationCache(32);
 
   ReloadLauncher();
 }
@@ -86,7 +86,6 @@ bool SubMachineGun::p_Shoot ()
     return false;
   
   ReloadLauncher();
-  last_fire_time = Time::GetInstance()->Read();
   projectile->Shoot(SUBMACHINE_BULLET_SPEED);
   launcher_is_loaded = false;
   
@@ -100,13 +99,13 @@ void SubMachineGun::RepeatShoot()
   if ( m_is_active )
   {
     uint tmp = Time::GetInstance()->Read();
-    uint time = tmp - last_fire_time;
+    uint time = tmp - m_last_fire_time;
 
     if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
     {
       m_is_active = false;
       NewActionShoot();
-      last_fire_time = tmp;
+      m_last_fire_time = tmp;
     }
   }
 }

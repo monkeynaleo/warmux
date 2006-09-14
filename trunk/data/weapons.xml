@@ -70,6 +70,7 @@
 <!-- Baseball ressources -->
 
   <surface name="baseball_ico" file="weapon/baseball/baseball_ico.png" />
+  <surface name="baseball_fire" file="weapon/baseball/baseball_hit.png" />
   <surface name="baseball" file="weapon/baseball/baseball.png" />
 
 <!-- Bazooka ressources -->
@@ -92,7 +93,7 @@
 
   <!-- Anvil ressources -->
 
-  <surface name="anvil_launcher" file="weapon/anvil/anvil.png" />
+  <surface name="anvil_launcher" file="weapon/anvil/anvil_launcher.png" />
   <surface name="anvil_launcher_ico" file="weapon/anvil/anvil_ico.png" />
   <surface name="anvil" file="weapon/anvil/anvil.png" />
   <sprite name="anvil">
