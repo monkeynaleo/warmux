@@ -46,33 +46,45 @@ OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  Rectanglei stdRect (0, 0, 120, 30);
+  Rectanglei stdRect (0, 0, 130, 30);
 
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   /* Grapic options */
   Box * graphic_options = new HBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
+
   graphic_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,136), "menu/video_label"));
 
-  lbox_video_mode = new ListBox( Rectanglei(0, 0, 80, 80) );
-  graphic_options->AddWidget(lbox_video_mode);
+  Box * top_n_bottom_graphic_options = new VBox( Rectanglei(0, 0, GRAPHIC_W-40, GRAPHIC_H),false);
 
-  opt_max_fps = new SpinButton(_("Maximum number of FPS:"), stdRect,
+  Box * top_graphic_options = new HBox ( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H/2 - 20), false);
+  Box * bottom_graphic_options = new HBox ( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H/2 - 20), false);
+  top_graphic_options->SetMargin(25);
+  bottom_graphic_options->SetMargin(25);
+
+  lbox_video_mode = new ListBox( Rectanglei(0, 0, 80, 80) );
+  top_graphic_options->AddWidget(lbox_video_mode);
+
+  opt_max_fps = new SpinButton(_("Maximum number of FPS:"), Rectanglei(0,0,200,30),
 			       50, 5,
 			       20, 120);
-  graphic_options->AddWidget(opt_max_fps);
+  top_graphic_options->AddWidget(opt_max_fps);
 
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdRect);
-  graphic_options->AddWidget(full_screen);
+  top_graphic_options->AddWidget(full_screen);
 
   opt_display_wind_particles = new PictureTextCBox(_("Display wind particles?"), "menu/display_wind_particles", stdRect);
-  graphic_options->AddWidget(opt_display_wind_particles);
+  bottom_graphic_options->AddWidget(opt_display_wind_particles);
 
   opt_display_energy = new PictureTextCBox(_("Display player energy?"), "menu/display_energy", stdRect);
-  graphic_options->AddWidget(opt_display_energy);
+  bottom_graphic_options->AddWidget(opt_display_energy);
 
   opt_display_name = new PictureTextCBox(_("Display player's name?"), "menu/display_name", stdRect);
-  graphic_options->AddWidget(opt_display_name);
+  bottom_graphic_options->AddWidget(opt_display_name);
+
+  top_n_bottom_graphic_options->AddWidget(top_graphic_options);
+  top_n_bottom_graphic_options->AddWidget(bottom_graphic_options);
+  graphic_options->AddWidget(top_n_bottom_graphic_options);
 
   widgets.AddWidget(graphic_options);
 
