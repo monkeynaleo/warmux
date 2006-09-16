@@ -2,6 +2,7 @@
 <!DOCTYPE resources SYSTEM "../team.dtd" []>
 <resources>
   <name>Tux Team</name>
+  <sound_profile>flying</sound_profile>
   <surface name="flag" file="flag.png" />
   <team>
     <character name="Tux" body="tuxteam" />
