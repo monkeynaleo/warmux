@@ -565,63 +565,9 @@
 		<member type="body" angle="0" />
 	</frame>
 </movement>
-<!--   ###########################################
-       ##############               ##############
-       #############     WEAPONS     #############
-       ##############               ##############
-       ###########################################   -->
 
-<!-- ###### Ninja-rope ###### -->
-<movement name="ninja-rope" speed="100">
-	<collision_rect left="5" right="5" top="10" bottom="2" />
-	<frame number="0">
-		<member type="body" angle="-90" follow_speed="true" follow_direction="true"/>
-		<member type="arm-left" angle="-10"/>
-		<member type="arm-right" angle="-90"/>
-		<member type="foot-left" angle="-45"/>
-		<member type="foot-right" angle="-45"/>
-	</frame>
-</movement>
 
-<!-- ###### Parachute ###### -->
-<movement name="parachute" speed="100">
-	<collision_rect left="5" right="5" top="10" bottom="2" />
-	<frame number="0">
-		<member type="arm-left" angle="0"/>
-		<member type="arm-right" angle="180"/>
-		<member type="foot-left" angle="45"/>
-		<member type="foot-right" angle="45"/>
-	</frame>
-</movement>
 
-<!-- ###### Jetpack - no fire ###### -->
-<movement name="jetpack-nofire" speed="100"> <!-- When jetpack is used, but no key is pressed -->
-	<collision_rect left="5" right="5" top="10" bottom="2" />
-	<frame number="0">
-		<member type="arm-left" follow_speed="true" />
-		<member type="arm-right" follow_speed="true"/>
-		<member type="foot-left" follow_speed="true"/>
-		<member type="foot-right" follow_speed="true"/>
-		<member type="jetpack-fire" dy="-5" /> <!-- hide the fire under the jetpack -->
-	</frame>
-</movement>
-
-<!-- ###### Jetpack - fire ###### -->
-<movement name="jetpack-fire" speed="100"> <!-- When jetpack is used and a key is pressed -->
-	<collision_rect left="5" right="5" top="10" bottom="2" />
-	<frame number="0">
-		<member type="jetpack-fire-right" dy="0" />
-		<member type="jetpack-fire-left" dy="0" />
-		<member type="arm-left" angle="30" />
-		<member type="arm-right" angle="30" />
-	</frame>
-	<frame number="1">
-		<member type="jetpack-fire-right" dy="7" />
-		<member type="jetpack-fire-left" dy="7" />
-		<member type="arm-left" angle="30" />
-		<member type="arm-right" angle="30" />
-	</frame>
-</movement>
 
 <!--   ###########################################
        #############                ##############
@@ -730,6 +676,67 @@
 		<member type="foot-right" angle="0"/>
 	</frame>
 </movement>
+
+
+
+<!--   ###########################################
+       ##############               ##############
+       #############     WEAPONS     #############
+       ##############               ##############
+       ###########################################   -->
+
+<!-- ###### Ninja-rope ###### -->
+<movement name="ninja-rope" speed="100">
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame number="0">
+		<member type="body" angle="-90" follow_speed="true" follow_direction="true"/>
+		<member type="arm-left" angle="-10"/>
+		<member type="arm-right" angle="-90"/>
+		<member type="foot-left" angle="-45"/>
+		<member type="foot-right" angle="-45"/>
+	</frame>
+</movement>
+
+<!-- ###### Parachute ###### -->
+<movement name="parachute" speed="100">
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame number="0">
+		<member type="arm-left" angle="0"/>
+		<member type="arm-right" angle="180"/>
+		<member type="foot-left" angle="45"/>
+		<member type="foot-right" angle="45"/>
+	</frame>
+</movement>
+
+<!-- ###### Jetpack - no fire ###### -->
+<movement name="jetpack-nofire" speed="100"> <!-- When jetpack is used, but no key is pressed -->
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame number="0">
+		<member type="arm-left" follow_speed="true" />
+		<member type="arm-right" follow_speed="true"/>
+		<member type="foot-left" follow_speed="true"/>
+		<member type="foot-right" follow_speed="true"/>
+		<member type="jetpack-fire" dy="-5" /> <!-- hide the fire under the jetpack -->
+	</frame>
+</movement>
+
+<!-- ###### Jetpack - fire ###### -->
+<movement name="jetpack-fire" speed="100"> <!-- When jetpack is used and a key is pressed -->
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame number="0">
+		<member type="jetpack-fire-right" dy="0" />
+		<member type="jetpack-fire-left" dy="0" />
+		<member type="arm-left" angle="30" />
+		<member type="arm-right" angle="30" />
+	</frame>
+	<frame number="1">
+		<member type="jetpack-fire-right" dy="7" />
+		<member type="jetpack-fire-left" dy="7" />
+		<member type="arm-left" angle="30" />
+		<member type="arm-right" angle="30" />
+	</frame>
+</movement>
+
 
 <!-- ###### Grenade ###### -->
 <movement name="weapon-grenade-begin-shoot" speed="30">
