@@ -589,6 +589,11 @@ bool PhysicalObj::FootsOnFloor(int y) const
   return (y_max <= y);
 }
 
+bool PhysicalObj::IsOverlapping(PhysicalObj* obj)
+{
+  return m_overlapping_object == obj;
+}
+
 bool PhysicalObj::IsInVacuum(const Point2i &offset)
 {
   return IsInVacuumXY(GetPosition() + offset);
@@ -625,7 +630,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position)
   if (m_collides_with_objects)
     {
       FOR_EACH_OBJECT(object)
-	if (object -> ptr != this && object->ptr != m_overlapping_object)
+	if (object -> ptr != this && !IsOverlapping(object->ptr))
 	  {
 	    if ( object->ptr->GetTestRect().Intersect( rect ) ) 
 	      {

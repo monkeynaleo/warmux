@@ -32,7 +32,8 @@ class ShotgunBuckshot : public WeaponBullet
 {
   public:
     ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
-		    WeaponLauncher * p_launcher);
+                    WeaponLauncher * p_launcher);
+    bool IsOverlapping(PhysicalObj* obj);
   protected:
     void RandomizeShoot(double &angle,double &strength);
 };

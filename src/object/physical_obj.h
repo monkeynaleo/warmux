@@ -54,6 +54,7 @@ private:
   bool m_collides_with_characters;
   bool m_collides_with_objects;
   PhysicalObj* m_last_colliding_object;
+protected:
   PhysicalObj* m_overlapping_object;
 
   void CheckOverlapping();
@@ -123,6 +124,7 @@ public:
 			 bool collides_with_characters,
 			 bool collides_with_objects);
   void SetOverlappingObject(PhysicalObj* obj);
+  virtual bool IsOverlapping(PhysicalObj* obj);
 
   // Collision test for point (x,y) -- public only for Uzi...
   bool CollisionTest(const Point2i &position);
