@@ -37,7 +37,7 @@
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const uint    SUBMACHINE_EXPLOSION_RANGE    = 15;
 const double  SUBMACHINE_TIME_BETWEEN_SHOOT = 70;
-const double  SUBMACHINE_RANDOM_ANGLE       = 0.1;
+const double  SUBMACHINE_RANDOM_ANGLE       = 0.01;
 
 SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                                          WeaponLauncher * p_launcher) :
@@ -48,7 +48,7 @@ SubMachineGunBullet::SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
 
 void SubMachineGunBullet::RandomizeShoot(double &angle,double &strength)
 {
-  angle *= 1.0 + randomSync.GetDouble(-SUBMACHINE_RANDOM_ANGLE,SUBMACHINE_RANDOM_ANGLE);
+  angle += M_PI * randomSync.GetDouble(-SUBMACHINE_RANDOM_ANGLE,SUBMACHINE_RANDOM_ANGLE);
 }
 
 void SubMachineGunBullet::ShootSound()

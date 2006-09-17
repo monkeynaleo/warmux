@@ -30,9 +30,9 @@
 #include "explosion.h"
 #include "shotgun.h"
 
-const uint   SHOTGUN_BUCKSHOT_SPEED  = 20;
+const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;
 const uint   SHOTGUN_EXPLOSION_RANGE = 1;
-const double SHOTGUN_RANDOM_ANGLE    = 0.2;
+const double SHOTGUN_RANDOM_ANGLE    = 0.02;
 const double SHOTGUN_RANDOM_STRENGTH = 2.0;
 
 ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
@@ -44,7 +44,7 @@ ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
 
 void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
 {
-  angle *= 1.0 + randomSync.GetDouble(-SHOTGUN_RANDOM_ANGLE,SHOTGUN_RANDOM_ANGLE);
+  angle += M_PI * randomSync.GetDouble(-SHOTGUN_RANDOM_ANGLE,SHOTGUN_RANDOM_ANGLE);
   strength += randomSync.GetDouble(-SHOTGUN_RANDOM_STRENGTH,SHOTGUN_RANDOM_STRENGTH);
 }
 
