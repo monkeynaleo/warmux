@@ -48,6 +48,12 @@ void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
   strength += randomSync.GetDouble(-SHOTGUN_RANDOM_STRENGTH,SHOTGUN_RANDOM_STRENGTH);
 }
 
+bool ShotgunBuckshot::IsOverlapping(PhysicalObj* obj)
+{
+  if(typeid(*obj) == typeid(ShotgunBuckshot)) return true;
+  return m_overlapping_object == obj;
+}
+
 //-----------------------------------------------------------------------------
 
 Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeaponConfig())
