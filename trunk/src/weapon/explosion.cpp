@@ -143,10 +143,6 @@ void ApplyExplosion_common (const Point2i &pos,
       MSG_DEBUG("explosion", " -> too far");
 
     }
-
-    // Update the worm state.
-    ver -> Refresh();
-
   }
 
   // Apply the blast on physical objects.
