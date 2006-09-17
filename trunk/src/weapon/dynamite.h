@@ -46,6 +46,7 @@ protected:
   void ShootSound();
   void SignalExplosion();
   void SignalOutOfMap();
+  void SignalDrowning();
 };
 
 

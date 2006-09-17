@@ -79,6 +79,10 @@ void BatonDynamite::SignalOutOfMap()
   jukebox.Stop(channel);
 }
 
+void BatonDynamite::SignalDrowning()
+{
+  jukebox.Stop(channel);
+}
 //-----------------------------------------------------------------------------
 
 Dynamite::Dynamite() :
