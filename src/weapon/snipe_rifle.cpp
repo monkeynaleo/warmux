@@ -126,7 +126,7 @@ bool SnipeRifle::ComputeCrossPoint(bool force = false)
     if ( world.EstHorsMondeX(pos.x) || world.EstHorsMondeY(pos.y) ) break;
 
     // is there a collision ??
-    if ( distance > 30 && projectile->CollisionTest( pos )){
+    if ( distance > 30 && !projectile->IsInVacuumXY( pos )){
       targeting_something = true;
       break;
     }

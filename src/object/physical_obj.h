@@ -47,13 +47,10 @@ double MeterDistance (const Point2i &p1, const Point2i &p2);
 class PhysicalObj : public Physics
 {
 private:
-  int m_posx, m_posy;
-
   // collision management
   bool m_goes_through_wall;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
-  PhysicalObj* m_last_colliding_object;
 protected:
   PhysicalObj* m_overlapping_object;
 
@@ -124,17 +121,15 @@ public:
 			 bool collides_with_characters,
 			 bool collides_with_objects);
   void SetOverlappingObject(PhysicalObj* obj);
-  virtual bool IsOverlapping(PhysicalObj* obj);
+  virtual bool IsOverlapping(PhysicalObj* obj) const;
 
-  // Collision test for point (x,y) -- public only for Uzi...
-  bool CollisionTest(const Point2i &position);
+  bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
+  bool IsInVacuum(const Point2i &offset, bool check_objects = true) const; // Relative to current position
+  PhysicalObj* CollidedObjectXY(const Point2i & position) const;
+  PhysicalObj* CollidedObject(const Point2i & offset) const; // Relative to current position
+  bool FootsInVacuumXY(const Point2i & position) const;
+  bool FootsInVacuum() const;
 
-  PhysicalObj* GetLastCollidingObject() const;
-  bool IsInVacuumXY(const Point2i &position);
-  bool IsInVacuum(const Point2i &offset); // relative to current position
-  bool FootsInVacuumXY(const Point2i &position);
-  bool FootsInVacuum();
-  
   bool FootsOnFloor(int y) const;
 
   bool IsInWater() const;
