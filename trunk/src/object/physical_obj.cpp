@@ -681,7 +681,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
     rect.SetSizeY( ( b > 0 ) ? b - rect.GetPositionY() : 0 );
   }
 
-  if(CollidedObject( Point2i(0, 1)) != NULL )
+  if(CollidedObjectXY( position + Point2i(0, 1)) != NULL )
     return false;
 
   return world.RectEstDansVide (rect);
