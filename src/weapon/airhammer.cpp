@@ -60,7 +60,7 @@ void Airhammer::p_Deselect()
 
 bool Airhammer::p_Shoot()
 {
-  //jukebox.Play("weapon/airhammer");
+  jukebox.Play("share","weapon/airhammer");
 
   // initiate movement ;-)
   ActiveCharacter().SetRebounding(false);

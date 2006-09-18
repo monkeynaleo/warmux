@@ -20,6 +20,7 @@
   <sound sample="weapon/explosion" file="explosion.ogg" />
   <sound sample="weapon/m16" file="../../weapon/sound/m16.ogg" />
   <sound sample="weapon/alleluia" file="../../weapon/sound/alleluia.ogg" />
+  <sound sample="weapon/airhammer" file="../../weapon/sound/airhammer.ogg" />
 
 
   <sound sample="music/grenouilles" file="frog_music.ogg" />
