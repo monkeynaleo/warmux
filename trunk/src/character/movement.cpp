@@ -38,7 +38,7 @@ Movement::Movement(xmlpp::Element *xml)
   xmlpp::Element *collision_rect = LitDocXml::AccesBalise (xml, "collision_rect");
   if (collision_rect == NULL) return;
   LitDocXml::LitAttrUint (collision_rect, "left", test_left);
-  LitDocXml::LitAttrUint (collision_rect, "rigth", test_right);
+  LitDocXml::LitAttrUint (collision_rect, "right", test_right);
   LitDocXml::LitAttrUint (collision_rect, "top", test_top);
   LitDocXml::LitAttrUint (collision_rect, "bottom", test_bottom);
 
