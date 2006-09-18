@@ -53,7 +53,10 @@ Body::Body(xmlpp::Element* xml, Profile* res)
     LitDocXml::LitAttrString( elem, "name", name);
 
     Member* member = new Member(elem, res);
-    members_lst[name] = member;
+    if(members_lst.find(name) != members_lst.end())
+      std::cerr << "Warning !! The member \""<< name << "\" is defined twice in the xml file" << std::endl;
+    else
+      members_lst[name] = member;
 
     it++;
   }
@@ -73,7 +76,10 @@ Body::Body(xmlpp::Element* xml, Profile* res)
     LitDocXml::LitAttrString( elem, "name", name);
 
     Clothe* clothe = new Clothe(elem, members_lst);
-    clothes_lst[name] = clothe;
+    if (clothes_lst.find(name) != clothes_lst.end())
+      std::cerr << "Warning !! The clothe \""<< name << "\" is defined twice in the xml file" << std::endl;
+    else
+      clothes_lst[name] = clothe;
 
     it2++;
   }
@@ -105,7 +111,10 @@ Body::Body(xmlpp::Element* xml, Profile* res)
       animation_number++;
 
     Movement* mvt = new Movement(elem);
-    mvt_lst[name] = mvt;
+    if(mvt_lst.find(name) != mvt_lst.end())
+      std::cerr << "Warning !! The movement \""<< name << "\" is defined twice in the xml file" << std::endl;
+    else
+      mvt_lst[name] = mvt;
 
     for(std::map<std::string, std::string>::iterator it = mvt_alias.begin();
         it != mvt_alias.end();  ++it)
