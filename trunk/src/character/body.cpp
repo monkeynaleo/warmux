@@ -321,7 +321,7 @@ void Body::Build()
     current_frame %= current_mvt->frames.size();
   }
 
-  need_rebuild |= (last_frame == current_frame);
+  need_rebuild |= (last_frame != current_frame);
   need_rebuild |= current_mvt->always_moving;
 
   if(!need_rebuild)
@@ -426,6 +426,7 @@ void Body::BuildSqueleton()
 
 void Body::SetClothe(std::string name)
 {
+  MSG_DEBUG("body", " %s use clothe %s", owner->GetName().c_str(), name.c_str());
   if(current_clothe && current_clothe->name == name) return;
 
   if(clothes_lst.find(name) != clothes_lst.end())
@@ -446,6 +447,7 @@ void Body::SetClothe(std::string name)
 
 void Body::SetMovement(std::string name)
 {
+  MSG_DEBUG("body", " %s use movement %s", owner->GetName().c_str(), name.c_str());
   if(current_mvt && current_mvt->type == name) return;
 
   // Dirty trick to get the "black" movement to be played fully
@@ -477,6 +479,7 @@ void Body::PlayAnimation()
 
 void Body::SetClotheOnce(std::string name)
 {
+  MSG_DEBUG("body", " %s use clothe %s once", owner->GetName().c_str(), name.c_str());
   if(current_clothe && current_clothe->name == name) return;
 
   if(clothes_lst.find(name) != clothes_lst.end())
@@ -496,6 +499,7 @@ void Body::SetClotheOnce(std::string name)
 
 void Body::SetMovementOnce(std::string name)
 {
+  MSG_DEBUG("body", " %s use movement %s once", owner->GetName().c_str(), name.c_str());
   if(current_mvt && current_mvt->type == name) return;
 
   // Dirty trick to get the "black" movement to be played fully
@@ -604,6 +608,7 @@ void Body::MakeParticles(const Point2i& pos)
 
 void Body::SetRotation(int angle)
 {
+  MSG_DEBUG("body", "%s -> new angle: %i", owner->GetName().c_str(), angle);
   main_rotation = angle;
   need_rebuild = true;
 }
