@@ -84,6 +84,7 @@ Weapon::Weapon(Weapon_type type,
   m_strength = 0;
   m_first_time_loading = 0;
   m_last_fire_time = 0;
+  m_fire_remanence_time = 100;
   max_strength = min_angle = max_angle = 0;
   use_flipping = true;
 
@@ -411,7 +412,7 @@ void Weapon::Draw(){
      m_last_fire_time + 100 < Time::GetInstance()->Read())
     return;
 
-  if (m_last_fire_time + 100 > Time::GetInstance()->Read())
+  if (m_last_fire_time + m_fire_remanence_time > Time::GetInstance()->Read())
     DrawWeaponFire();
   weapon_strength_bar.visible = false;
 
