@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <author>
+    <name>Jeremie LEDENTU</name>
+    <country>France</country>
+    <email>jledn AT voila.fr</email>
+  </author>
+
+  <surface name="sky" file="sky.jpg" />
+  <surface name="map" file="map.png" />
+  <surface name="preview" file="preview.jpg" />
+
+  <name>Easter Island</name>
+  <water>0</water>
+  <nb_mine>5</nb_mine>
+  <is_open>1</is_open>
+
+  <sprite name="wind_particle">
+    <image file="minicheese.png">
+      <grid pos="0,0" size="63,63" array="1,1"/>
+    </image>
+  </sprite>
+  
+</resources>
