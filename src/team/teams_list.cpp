@@ -23,9 +23,6 @@
 //-----------------------------------------------------------------------------
 #include "../character/body_list.h"
 #include "../include/action_handler.h"
-#ifdef CL
-#include "../network/network.h"
-#endif
 #include "../game/config.h"
 #include "../tool/file_tools.h"
 #include "../tool/i18n.h"
@@ -56,10 +53,6 @@ void TeamsList::NextTeam (bool debut_jeu)
 {
   // Fin du tour pour l'�uipe active
   if (debut_jeu) return;
-#ifdef CL
-  if (network.is_client()) return;
-  ActiveTeam().FinTurn();
-#endif
    
   // Passe �l'�uipe suivante
   std::vector<Team*>::iterator it=m_equipe_active;
