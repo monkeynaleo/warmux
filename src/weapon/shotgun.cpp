@@ -76,7 +76,7 @@ WeaponProjectile * Shotgun::GetProjectileInstance()
 
 void Shotgun::ShootSound()
 {
-  jukebox.Play("share", "weapon/gun");
+  jukebox.Play("share", "weapon/shotgun");
 }
 
 bool Shotgun::p_Shoot ()
