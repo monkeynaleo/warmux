@@ -126,7 +126,10 @@ Weapon::~Weapon()
     delete extra_params;
 }
 
-void Weapon::p_Select () {}
+void Weapon::p_Select ()
+{
+  m_last_fire_time = 0;
+}
 void Weapon::p_Deselect () {}
 void Weapon::HandleKeyEvent(int key, int event_type) {}
 

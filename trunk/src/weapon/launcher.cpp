@@ -405,6 +405,7 @@ void WeaponLauncher::p_Select()
     force_override_keys = true; //Allow overriding key during movement.
     projectile->ResetTimeOut(); 
   }
+  Weapon::p_Select();
 }
 
 void WeaponLauncher::p_Deselect()
