@@ -121,7 +121,7 @@ public:
 			 bool collides_with_characters,
 			 bool collides_with_objects);
   void SetOverlappingObject(PhysicalObj* obj);
-  virtual bool IsOverlapping(PhysicalObj* obj) const;
+  virtual bool IsOverlapping(const PhysicalObj* obj) const;
 
   bool IsInVacuumXY(const Point2i &position, bool check_objects = true) const;
   bool IsInVacuum(const Point2i &offset, bool check_objects = true) const; // Relative to current position
