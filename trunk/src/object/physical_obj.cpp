@@ -370,10 +370,10 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     collided_obj->SetSpeed(collided_obj->GetMass()*norm/total_mass, angle);
     SetSpeed(GetMass()*norm/total_mass, angle);      
 
-    // Check if we should stop moving. Really really not sure it's good!!
-    if (norm < 0.5){
-      StopMoving();
-    }
+    // Rebound on the object
+    double contact_angle = - GetSpeedAngle();
+    Point2d contactPos = pos;
+    Rebound(contactPos, contact_angle);
   }
   SignalCollision();
   return;
