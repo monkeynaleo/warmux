@@ -95,10 +95,10 @@ public:
   void SetEnergyDelta (int delta, bool do_report=true);
   uint GetEnergy() const;
   void Die();
+  bool IsActiveCharacter() const;
 
   void Draw();
   void Refresh();
-
 
   void PrepareTurn ();
   void StartPlaying();

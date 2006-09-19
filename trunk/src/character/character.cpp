@@ -709,6 +709,12 @@ void Character::SignalExplosion()
     && body->GetMovement() != "black")
       std::cerr << "Error: the clothe \"black\" of the character " << GetName() << " is set, but the skin have no \"black\" movement !!!" << std::endl;
   }
+  // bug #7056 : When we are hit by an explosion while using ninja rope, we broke the rope.
+  if (IsActiveCharacter()) {
+    ActiveTeam().AccessWeapon().Deselect();
+    // Select the weapon back. If not, we cannot move the crosshair.
+    ActiveTeam().AccessWeapon().Select();
+  }
 }
 
 int Character::GetDirection() const 
@@ -736,6 +742,11 @@ uint Character::GetEnergy() const
 {
   assert (!IsDead());
   return energy; 
+}
+
+bool Character::IsActiveCharacter() const
+{
+  return this == &ActiveCharacter();
 }
 
 // Hand position
