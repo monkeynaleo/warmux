@@ -50,6 +50,7 @@ WeaponBullet::WeaponBullet(const std::string &name,
 void WeaponBullet::SignalGroundCollision()
 {
   GameMessages::GetInstance()->Add (_("Your shot has missed!"));
+  jukebox.Play("share", "weapon/ricoche1");
   WeaponProjectile::SignalGroundCollision();
 }
 
@@ -206,6 +207,7 @@ void WeaponProjectile::SignalGhostState(bool)
 
 void WeaponProjectile::SignalOutOfMap()
 {
+  lst_objects.RemoveObject(this);
 }
 
 // Implement it in subclass to randomize fire
