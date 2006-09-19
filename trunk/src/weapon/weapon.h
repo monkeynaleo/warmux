@@ -75,6 +75,7 @@ protected:
   bool m_is_active;
   Sprite *m_image;
   Sprite *m_weapon_fire;
+  uint m_fire_remanence_time;
 
   struct s_position{
     int dx, dy;
