@@ -589,7 +589,7 @@ bool PhysicalObj::FootsOnFloor(int y) const
   return (y_max <= y);
 }
 
-bool PhysicalObj::IsOverlapping(PhysicalObj* obj) const
+bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
 {
   return m_overlapping_object == obj;
 }
@@ -633,7 +633,8 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
     {
       FOR_ALL_LIVING_CHARACTERS(team,character)
       {
-        if (&(*character) != this && !IsOverlapping(&(*character))
+        // We check both objet if one overlapse the other
+        if (&(*character) != this && !IsOverlapping(&(*character)) && !character->IsOverlapping(this)
         && character->GetTestRect().Intersect( rect ))
           return (PhysicalObj*) &(*character);
       }
@@ -643,7 +644,8 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
     {
       FOR_EACH_OBJECT(object)
       {
-        if (object -> ptr != this && !IsOverlapping(object->ptr)
+        // We check both objet if one overlapse the other
+        if (object -> ptr != this && !IsOverlapping(object->ptr) && !object->ptr->IsOverlapping(this)
         && object->ptr->m_collides_with_objects
         && object->ptr->GetTestRect().Intersect( rect ) )
           return object->ptr;
