@@ -40,6 +40,7 @@ wormux_SOURCES = \
 	gui/check_box.cpp gui/check_box.h \
 	gui/label.cpp gui/label.h \
 	gui/list_box.cpp gui/list_box.h \
+	gui/list_box_w_label.cpp gui/list_box_w_label.h \
 	gui/msg_box.cpp gui/msg_box.h \
 	gui/spin_button.cpp gui/spin_button.h \
 	gui/spin_button_big.cpp gui/spin_button_big.h \

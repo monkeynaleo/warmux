@@ -40,7 +40,7 @@ class ListBox : public Widget
 public:
   bool always_one_selected;
   
-private:
+protected:
   // for the placement
   uint nb_visible_items, nb_visible_items_max;
   uint height_item;

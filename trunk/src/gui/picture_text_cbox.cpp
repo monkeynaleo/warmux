@@ -34,10 +34,10 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
   SetPosition( rect.GetPosition() );
   SetSize( rect.GetSize() );
 
-  SetSizeY( (*Font::GetInstance(Font::FONT_SMALL)).GetHeight() );
+  SetSizeY( (*Font::GetInstance(Font::FONT_NORMAL)).GetHeight() );
   m_value = value;
 
-  txt_label = new Text(label, white_color, Font::GetInstance(Font::FONT_SMALL));
+  txt_label = new Text(label, gray_color, Font::GetInstance(Font::FONT_NORMAL));
 }
 
 void PictureTextCBox::Draw(const Point2i &mousePosition, Surface& surf)

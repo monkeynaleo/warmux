@@ -79,7 +79,7 @@ OptionMenu::OptionMenu() :
 			       20, 120);
   bottom_graphic_options->AddWidget(opt_max_fps);
 
-  lbox_video_mode = new ListBox( Rectanglei(0, 0, 80, 80) );
+  lbox_video_mode = new ListBoxWithLabel( "Resolution", stdRect );
   bottom_graphic_options->AddWidget(lbox_video_mode);
 
   top_n_bottom_graphic_options->AddWidget(top_graphic_options);
@@ -101,7 +101,7 @@ OptionMenu::OptionMenu() :
   opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", stdRect);
   all_sound_options->AddWidget(opt_sound_effects);
 
-  lbox_sound_freq = new ListBox( Rectanglei(0, 0, 80, 80) );
+  lbox_sound_freq = new ListBoxWithLabel( "Sound frequency", stdRect );
   all_sound_options->AddWidget(lbox_sound_freq);
 
   sound_options->AddWidget(all_sound_options);
