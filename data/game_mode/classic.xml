@@ -10,6 +10,7 @@
   <duration_move_player>2</duration_move_player>
   <duration_exchange_player>1</duration_exchange_player>
   <duration_before_death_mode>600</duration_before_death_mode>
+  <damage_per_turn_during_death_mode>5</damage_per_turn_during_death_mode>
 
   <gravity>30</gravity>
   <safe_fall>20</safe_fall>
