@@ -57,7 +57,17 @@
       <grid pos="0,0" size="5,10" array="2,1" />
     </image>
   </sprite> 
+  <sprite name="big_plus">
+    <image file="menu/img/plus.png">
+      <grid pos="0,0" size="5,10" array="2,1" />
+    </image>
+  </sprite> 
   <sprite name="minus">
+    <image file="menu/img/minus.png">
+      <grid pos="0,0" size="5,10" array="2,1" />
+    </image>
+  </sprite> 
+  <sprite name="big_minus">
     <image file="menu/img/minus.png">
       <grid pos="0,0" size="5,10" array="2,1" />
     </image>
