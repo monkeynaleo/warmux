@@ -62,25 +62,25 @@ OptionMenu::OptionMenu() :
   top_graphic_options->SetMargin(25);
   bottom_graphic_options->SetMargin(25);
 
-  lbox_video_mode = new ListBox( Rectanglei(0, 0, 80, 80) );
-  top_graphic_options->AddWidget(lbox_video_mode);
+  opt_display_wind_particles = new PictureTextCBox(_("Wind particles?"), "menu/display_wind_particles", stdRect);
+  top_graphic_options->AddWidget(opt_display_wind_particles);
 
-  opt_max_fps = new SpinButton(_("Maximum number of FPS:"), Rectanglei(0,0,200,30),
-			       50, 5,
-			       20, 120);
-  top_graphic_options->AddWidget(opt_max_fps);
+  opt_display_energy = new PictureTextCBox(_("Player energy?"), "menu/display_energy", stdRect);
+  top_graphic_options->AddWidget(opt_display_energy);
+
+  opt_display_name = new PictureTextCBox(_("Player's name?"), "menu/display_name", stdRect);
+  top_graphic_options->AddWidget(opt_display_name);
 
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdRect);
-  top_graphic_options->AddWidget(full_screen);
+  bottom_graphic_options->AddWidget(full_screen);
 
-  opt_display_wind_particles = new PictureTextCBox(_("Display wind particles?"), "menu/display_wind_particles", stdRect);
-  bottom_graphic_options->AddWidget(opt_display_wind_particles);
+  opt_max_fps = new SpinButtonBig(_("Maximum number of FPS:"), stdRect,
+			       50, 5,
+			       20, 120);
+  bottom_graphic_options->AddWidget(opt_max_fps);
 
-  opt_display_energy = new PictureTextCBox(_("Display player energy?"), "menu/display_energy", stdRect);
-  bottom_graphic_options->AddWidget(opt_display_energy);
-
-  opt_display_name = new PictureTextCBox(_("Display player's name?"), "menu/display_name", stdRect);
-  bottom_graphic_options->AddWidget(opt_display_name);
+  lbox_video_mode = new ListBox( Rectanglei(0, 0, 80, 80) );
+  bottom_graphic_options->AddWidget(lbox_video_mode);
 
   top_n_bottom_graphic_options->AddWidget(top_graphic_options);
   top_n_bottom_graphic_options->AddWidget(bottom_graphic_options);
@@ -92,15 +92,19 @@ OptionMenu::OptionMenu() :
   Box * sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H));
   sound_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,138), "menu/audio_label"));
 
-  lbox_sound_freq = new ListBox( Rectanglei(0, 0, 80, 80) );
-  sound_options->AddWidget(lbox_sound_freq);
+  Box * all_sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H-20),false);
+  all_sound_options->SetMargin(25);
 
   opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", stdRect);
-  sound_options->AddWidget(opt_music);
+  all_sound_options->AddWidget(opt_music);
 
   opt_sound_effects = new PictureTextCBox(_("Sound effects?"), "menu/sound_effects_enable", stdRect);
-  sound_options->AddWidget(opt_sound_effects);
+  all_sound_options->AddWidget(opt_sound_effects);
 
+  lbox_sound_freq = new ListBox( Rectanglei(0, 0, 80, 80) );
+  all_sound_options->AddWidget(lbox_sound_freq);
+
+  sound_options->AddWidget(all_sound_options);
   widgets.AddWidget(sound_options);
 
   // Values initialization
