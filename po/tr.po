@@ -59,13 +59,13 @@ msgstr "%s suya daldı."
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
 
-#: src/object/bonus_box.cpp:159
+#: src/object/bonus_box.cpp:157
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s, %u enerji kaybetti."
 
-#: src/object/bonus_box.cpp:150
+#: src/object/bonus_box.cpp:148
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -86,31 +86,31 @@ msgstr "%s öldü, çünkü bir beceriksiz!"
 msgid "%s is next to a mine!"
 msgstr "%s bir mayının yanında!"
 
-#: src/object/bonus_box.cpp:177
+#: src/object/bonus_box.cpp:175
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "%s takımı %u otomatik bazuka kazandı!"
 
-#: src/object/bonus_box.cpp:186
+#: src/object/bonus_box.cpp:184
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "%s takımı %u otomatik bazuka kazandı!"
 
-#: src/object/bonus_box.cpp:196
+#: src/object/bonus_box.cpp:194
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "%s takımı %u dinamit lokumu kazandı!"
 
-#: src/object/bonus_box.cpp:141
+#: src/object/bonus_box.cpp:139
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "%s takımı %u ışınlanma kazandı."
 
-#: src/object/bonus_box.cpp:168
+#: src/object/bonus_box.cpp:166
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -130,7 +130,7 @@ msgstr ""
 "Düzgün çalışması için, <infinite_background> <is_open> olarak ayarlanması "
 "gerekli!!"
 
-#: src/object/bonus_box.cpp:172 src/weapon/air_attack.cpp:161
+#: src/object/bonus_box.cpp:170 src/weapon/air_attack.cpp:156
 msgid "Air attack"
 msgstr "Hava saldırısı"
 
@@ -138,15 +138,15 @@ msgstr "Hava saldırısı"
 msgid "Authors:"
 msgstr "Yazarlar:"
 
-#: src/object/bonus_box.cpp:181 src/weapon/auto_bazooka.cpp:115
+#: src/object/bonus_box.cpp:179 src/weapon/auto_bazooka.cpp:111
 msgid "Automatic bazooka"
 msgstr "Otomatik bazuka"
 
-#: src/weapon/baseball.cpp:30
+#: src/weapon/baseball.cpp:31
 msgid "Baseball"
 msgstr "Beyzbol"
 
-#: src/weapon/bazooka.cpp:65
+#: src/weapon/bazooka.cpp:62
 msgid "Bazooka"
 msgstr "Bazuka"
 
@@ -154,17 +154,17 @@ msgstr "Bazuka"
 msgid "C++ exception caught:"
 msgstr "C++ istisnası oluştu:"
 
-#: src/team/teams_list.cpp:450 src/team/teams_list.cpp:489
+#: src/team/teams_list.cpp:443 src/team/teams_list.cpp:482
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
 
-#: src/team/teams_list.cpp:123 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:116 src/team/teams_list.cpp:131
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:141
+#: src/weapon/cluster_bomb.cpp:135
 msgid "ClusterBomb"
 msgstr "Şarapnelli bomba"
 
@@ -176,31 +176,19 @@ msgstr "İntihar"
 msgid "Credits"
 msgstr "Hazırlayanlar"
 
-#: src/menu/options_menu.cpp:80
-msgid "Display player energy?"
-msgstr "Oyuncu enerjisini göster?"
-
-#: src/menu/options_menu.cpp:83
-msgid "Display player's name?"
-msgstr "Oyuncu isimlerini göster?"
-
-#: src/menu/options_menu.cpp:77
-msgid "Display wind particles?"
-msgstr "Rüzgar parçacıklarını göster?"
-
 #: src/game/game.cpp:152
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/game_menu.cpp:147
 msgid "Duration of a turn:"
 msgstr "Tur zamanı:"
 
-#: src/menu/options_menu.cpp:112
+#: src/menu/game_menu.cpp:152
 msgid "Duration of the end of a turn:"
 msgstr "Tur bitiş zamanı:"
 
-#: src/object/bonus_box.cpp:200 src/weapon/dynamite.cpp:92
+#: src/object/bonus_box.cpp:198 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamit"
 
@@ -234,7 +222,7 @@ msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 msgid "Error while loading configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
 
-#: src/game/game_mode.cpp:167
+#: src/game/game_mode.cpp:169
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "%s oyun modu yüklenirken hata (dosya %s):"
@@ -257,19 +245,15 @@ msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 msgid "Find a random position for characters"
 msgstr "Karakterler için rastgele yer bul"
 
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:73
 msgid "Fullscreen?"
 msgstr "Tam ekran?"
 
-#: src/menu/options_menu.cpp:105
+#: src/menu/game_menu.cpp:144
 msgid "Game options"
 msgstr "Oyun seçenekleri"
 
-#: src/menu/options_menu.cpp:64
-msgid "Graphic options"
-msgstr "Grafik seçenekleri"
-
-#: src/weapon/grenade.cpp:72
+#: src/weapon/grenade.cpp:69
 msgid "Grenade"
 msgstr "El bombası"
 
@@ -289,7 +273,7 @@ msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/options_menu.cpp:122
+#: src/menu/game_menu.cpp:162
 msgid "Initial energy:"
 msgstr "Başlangıç enerjisi:"
 
@@ -314,7 +298,7 @@ msgstr "Nesneler yükleniyor"
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
-#: src/object/bonus_box.cpp:246
+#: src/object/bonus_box.cpp:244
 msgid "Is it a gift?"
 msgstr "Bu bir hediye mi?"
 
@@ -322,7 +306,7 @@ msgstr "Bu bir hediye mi?"
 msgid "Load maps:"
 msgstr "Haritaları yükle:"
 
-#: src/team/teams_list.cpp:112
+#: src/team/teams_list.cpp:105
 msgid "Load teams:"
 msgstr "Takımları yükle:"
 
@@ -335,7 +319,7 @@ msgstr "%s haritasını yaratan:"
 msgid "Maps"
 msgstr ""
 
-#: src/menu/options_menu.cpp:69
+#: src/menu/options_menu.cpp:68
 msgid "Maximum number of FPS:"
 msgstr "En fazla FPS:"
 
@@ -343,7 +327,7 @@ msgstr "En fazla FPS:"
 msgid "Mine"
 msgstr "Mayın"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:100
 msgid "Music?"
 msgstr "Müzik?"
 
@@ -355,12 +339,12 @@ msgstr "Adı:"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/weapon/weapon.cpp:519
+#: src/weapon/weapon.cpp:544
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
 
-#: src/menu/options_menu.cpp:117
+#: src/menu/game_menu.cpp:157
 msgid "Number of players per team:"
 msgstr "Her takımdaki oyuncu sayısı:"
 
@@ -371,6 +355,16 @@ msgstr "Seçenekler"
 #: src/menu/main_menu.cpp:91
 msgid "Play"
 msgstr "Oyna"
+
+#: src/menu/options_menu.cpp:79
+#, fuzzy
+msgid "Player energy?"
+msgstr "Oyuncu enerjisini göster?"
+
+#: src/menu/options_menu.cpp:82
+#, fuzzy
+msgid "Player's name?"
+msgstr "Oyuncu isimlerini göster?"
 
 #: src/main.cpp:193
 msgid "Please tell us your opinion of Wormux via email:"
@@ -384,7 +378,7 @@ msgstr "Çıkış"
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/object/bonus_box.cpp:190
+#: src/object/bonus_box.cpp:188
 msgid "Riot bomb"
 msgstr "Otomatik bazuka"
 
@@ -392,21 +386,17 @@ msgstr "Otomatik bazuka"
 msgid "Run game"
 msgstr "Oyunu çalıştır"
 
-#: src/menu/game_menu.cpp:59
+#: src/menu/game_menu.cpp:75
 msgid "Select the teams:"
 msgstr "Takımları seç:"
 
-#: src/menu/game_menu.cpp:102
+#: src/menu/game_menu.cpp:118
 msgid "Select the world:"
 msgstr "Dünyayı seç:"
 
-#: src/menu/options_menu.cpp:98
+#: src/menu/options_menu.cpp:103
 msgid "Sound effects?"
 msgstr "Ses efektleri?"
-
-#: src/menu/options_menu.cpp:90
-msgid "Sound options"
-msgstr "Ses seçenekleri"
 
 #: src/game/game_loop.cpp:219
 #, fuzzy
@@ -425,19 +415,19 @@ msgstr "Stok:"
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:145 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Işınlanma"
 
-#: src/weapon/cluster_bomb.cpp:102
+#: src/weapon/cluster_bomb.cpp:97
 msgid "The Cluster Bomb left the battlefield before it could explode."
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:98
+#: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Otomatik roket savaş alanını terketti..."
 
-#: src/weapon/bazooka.cpp:55 src/weapon/cluster_bomb.cpp:61
+#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 msgid "The rocket left the battlefield..."
 msgstr "Roket savaş alanını terketti..."
 
@@ -477,6 +467,11 @@ msgstr "Web sitesi: "
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
 
+#: src/menu/options_menu.cpp:76
+#, fuzzy
+msgid "Wind particles?"
+msgstr "Rüzgar parçacıklarını göster?"
+
 #: src/main.cpp:162
 msgid "Wormux launching..."
 msgstr "Wormux çalıştırılıyor..."
@@ -500,7 +495,7 @@ msgstr ""
 "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden "
 "değiştirin !"
 
-#: src/team/teams_list.cpp:158
+#: src/team/teams_list.cpp:151
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
@@ -511,6 +506,12 @@ msgstr "Iskaladın!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
+
+#~ msgid "Graphic options"
+#~ msgstr "Grafik seçenekleri"
+
+#~ msgid "Sound options"
+#~ msgstr "Ses seçenekleri"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "%s teması yüklenirken hata:"

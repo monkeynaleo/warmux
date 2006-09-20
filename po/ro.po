@@ -60,7 +60,7 @@ msgstr "%s a căzut în apă."
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
 
-#: src/object/bonus_box.cpp:159
+#: src/object/bonus_box.cpp:157
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
@@ -68,7 +68,7 @@ msgstr[0] "%s a pierdut %u punct de energie."
 msgstr[1] "%s a pierdut %u puncte de energie."
 msgstr[2] "%s a pierdut %u de puncte de energie."
 
-#: src/object/bonus_box.cpp:150
+#: src/object/bonus_box.cpp:148
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -92,7 +92,7 @@ msgstr "%s decedat prin propria stângăcie!"
 msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
 
-#: src/object/bonus_box.cpp:177
+#: src/object/bonus_box.cpp:175
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -100,7 +100,7 @@ msgstr[0] "Echipa %s a câştigat %u rachetă automată!"
 msgstr[1] "Echipa %s a câştigat %u rachete automate!"
 msgstr[2] "Echipa %s a câştigat %u de rachete automate!"
 
-#: src/object/bonus_box.cpp:186
+#: src/object/bonus_box.cpp:184
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -108,7 +108,7 @@ msgstr[0] "Echipa %s a câştigat %u rachetă automată !"
 msgstr[1] "Echipa %s a câştigat %u rachete automate !"
 msgstr[2] "Echipa %s a câştigat %u de rachete automate !"
 
-#: src/object/bonus_box.cpp:196
+#: src/object/bonus_box.cpp:194
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
@@ -116,7 +116,7 @@ msgstr[0] "Echipa %s a câştigat %u baton de dinamită!"
 msgstr[1] "Echipa %s a câştigat %u batoane de dinamită!"
 msgstr[2] "Echipa %s a câştigat %u de batoane de dinamită!"
 
-#: src/object/bonus_box.cpp:141
+#: src/object/bonus_box.cpp:139
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -124,7 +124,7 @@ msgstr[0] "Echipa %s a câştigat %u teleportare."
 msgstr[1] "Echipa %s a câştigat %u teleportări."
 msgstr[2] "Echipa %s a câştigat %u de teleportări."
 
-#: src/object/bonus_box.cpp:168
+#: src/object/bonus_box.cpp:166
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -146,7 +146,7 @@ msgstr ""
 "<infinite_background> are nevoie ca <is_open> să fie activ pentru a "
 "funcţiona corect!!"
 
-#: src/object/bonus_box.cpp:172 src/weapon/air_attack.cpp:161
+#: src/object/bonus_box.cpp:170 src/weapon/air_attack.cpp:156
 msgid "Air attack"
 msgstr "Atac aerian"
 
@@ -154,15 +154,15 @@ msgstr "Atac aerian"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/object/bonus_box.cpp:181 src/weapon/auto_bazooka.cpp:115
+#: src/object/bonus_box.cpp:179 src/weapon/auto_bazooka.cpp:111
 msgid "Automatic bazooka"
 msgstr "Rachetă automată"
 
-#: src/weapon/baseball.cpp:30
+#: src/weapon/baseball.cpp:31
 msgid "Baseball"
 msgstr "Bâtă de basebal"
 
-#: src/weapon/bazooka.cpp:65
+#: src/weapon/bazooka.cpp:62
 msgid "Bazooka"
 msgstr "Proiectil reactiv"
 
@@ -170,17 +170,17 @@ msgstr "Proiectil reactiv"
 msgid "C++ exception caught:"
 msgstr "O excepţie C++ a fost captată:"
 
-#: src/team/teams_list.cpp:450 src/team/teams_list.cpp:489
+#: src/team/teams_list.cpp:443 src/team/teams_list.cpp:482
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
 
-#: src/team/teams_list.cpp:123 src/team/teams_list.cpp:138
+#: src/team/teams_list.cpp:116 src/team/teams_list.cpp:131
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:141
+#: src/weapon/cluster_bomb.cpp:135
 msgid "ClusterBomb"
 msgstr "Bombă cu schije"
 
@@ -192,31 +192,19 @@ msgstr "Suicid"
 msgid "Credits"
 msgstr "Merite"
 
-#: src/menu/options_menu.cpp:80
-msgid "Display player energy?"
-msgstr "Se afişează energia jucătorului?"
-
-#: src/menu/options_menu.cpp:83
-msgid "Display player's name?"
-msgstr "Se afişează numele jucătorului?"
-
-#: src/menu/options_menu.cpp:77
-msgid "Display wind particles?"
-msgstr "Se afişează particulele de vânt?"
-
 #: src/game/game.cpp:152
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
-#: src/menu/options_menu.cpp:107
+#: src/menu/game_menu.cpp:147
 msgid "Duration of a turn:"
 msgstr "Durata unei ture:"
 
-#: src/menu/options_menu.cpp:112
+#: src/menu/game_menu.cpp:152
 msgid "Duration of the end of a turn:"
 msgstr "Durata sfârşitului de tură:"
 
-#: src/object/bonus_box.cpp:200 src/weapon/dynamite.cpp:92
+#: src/object/bonus_box.cpp:198 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamită"
 
@@ -252,7 +240,7 @@ msgstr ""
 msgid "Error while loading configuration file: %s"
 msgstr "Eroare în timpul încărcări fişierul de configurare: %s"
 
-#: src/game/game_mode.cpp:167
+#: src/game/game_mode.cpp:169
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Eroare în timpul încărcări modului de joc %s (fişierul %s):"
@@ -275,19 +263,15 @@ msgstr "Eroare: aspectul „%s” pentru echipa „%s” nu poate fi găsit."
 msgid "Find a random position for characters"
 msgstr "Se caută o pozitie aleatoare pentru personaje"
 
-#: src/menu/options_menu.cpp:74
+#: src/menu/options_menu.cpp:73
 msgid "Fullscreen?"
 msgstr "Tot ecranul?"
 
-#: src/menu/options_menu.cpp:105
+#: src/menu/game_menu.cpp:144
 msgid "Game options"
 msgstr "Opţiuni ale jocului"
 
-#: src/menu/options_menu.cpp:64
-msgid "Graphic options"
-msgstr "Opţiuni grafice"
-
-#: src/weapon/grenade.cpp:72
+#: src/weapon/grenade.cpp:69
 msgid "Grenade"
 msgstr "Grenadă"
 
@@ -307,7 +291,7 @@ msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/options_menu.cpp:122
+#: src/menu/game_menu.cpp:162
 msgid "Initial energy:"
 msgstr "Energie iniţială:"
 
@@ -332,7 +316,7 @@ msgstr "Iniţializare obiecte"
 msgid "Initialise teams"
 msgstr "Iniţializare echipe"
 
-#: src/object/bonus_box.cpp:246
+#: src/object/bonus_box.cpp:244
 #, fuzzy
 msgid "Is it a gift?"
 msgstr "Oare e un cadou?"
@@ -341,7 +325,7 @@ msgstr "Oare e un cadou?"
 msgid "Load maps:"
 msgstr "Încărcare hărţi:"
 
-#: src/team/teams_list.cpp:112
+#: src/team/teams_list.cpp:105
 msgid "Load teams:"
 msgstr "Încărcare echipe:"
 
@@ -354,7 +338,7 @@ msgstr "Harta %s, o creaţie a lui :"
 msgid "Maps"
 msgstr ""
 
-#: src/menu/options_menu.cpp:69
+#: src/menu/options_menu.cpp:68
 msgid "Maximum number of FPS:"
 msgstr "Numărul maxim de C/S:"
 
@@ -362,7 +346,7 @@ msgstr "Numărul maxim de C/S:"
 msgid "Mine"
 msgstr "Mină"
 
-#: src/menu/options_menu.cpp:95
+#: src/menu/options_menu.cpp:100
 msgid "Music?"
 msgstr "Muzică?"
 
@@ -374,12 +358,12 @@ msgstr "Nume:"
 msgid "Network Game"
 msgstr "Joc în reţea"
 
-#: src/weapon/weapon.cpp:519
+#: src/weapon/weapon.cpp:544
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
 
-#: src/menu/options_menu.cpp:117
+#: src/menu/game_menu.cpp:157
 msgid "Number of players per team:"
 msgstr "Jucători per echipă:"
 
@@ -390,6 +374,16 @@ msgstr "Opţiuni"
 #: src/menu/main_menu.cpp:91
 msgid "Play"
 msgstr "Porneşte jocul"
+
+#: src/menu/options_menu.cpp:79
+#, fuzzy
+msgid "Player energy?"
+msgstr "Se afişează energia jucătorului?"
+
+#: src/menu/options_menu.cpp:82
+#, fuzzy
+msgid "Player's name?"
+msgstr "Se afişează numele jucătorului?"
 
 #: src/main.cpp:193
 msgid "Please tell us your opinion of Wormux via email:"
@@ -404,7 +398,7 @@ msgstr "Ieşire"
 msgid "Quit Wormux"
 msgstr "Ieşire din Wormux"
 
-#: src/object/bonus_box.cpp:190
+#: src/object/bonus_box.cpp:188
 msgid "Riot bomb"
 msgstr "Rachetă automată"
 
@@ -412,21 +406,17 @@ msgstr "Rachetă automată"
 msgid "Run game"
 msgstr "Rulează jocul"
 
-#: src/menu/game_menu.cpp:59
+#: src/menu/game_menu.cpp:75
 msgid "Select the teams:"
 msgstr "Selectaţi echipele:"
 
-#: src/menu/game_menu.cpp:102
+#: src/menu/game_menu.cpp:118
 msgid "Select the world:"
 msgstr "Selectaţi lumea:"
 
-#: src/menu/options_menu.cpp:98
+#: src/menu/options_menu.cpp:103
 msgid "Sound effects?"
 msgstr "Efecte sonore?"
-
-#: src/menu/options_menu.cpp:90
-msgid "Sound options"
-msgstr "Opţiuni sunet"
 
 #: src/game/game_loop.cpp:219
 #, fuzzy
@@ -445,19 +435,19 @@ msgstr "Stoc:"
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:145 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportare"
 
-#: src/weapon/cluster_bomb.cpp:102
+#: src/weapon/cluster_bomb.cpp:97
 msgid "The Cluster Bomb left the battlefield before it could explode."
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:98
+#: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Racheta automată a părăsit câmpul de luptă..."
 
-#: src/weapon/bazooka.cpp:55 src/weapon/cluster_bomb.cpp:61
+#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 msgid "The rocket left the battlefield..."
 msgstr "Racheta a părăsit câmpul de luptă..."
 
@@ -497,6 +487,11 @@ msgstr "Situl web: "
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
 
+#: src/menu/options_menu.cpp:76
+#, fuzzy
+msgid "Wind particles?"
+msgstr "Se afişează particulele de vânt?"
+
 #: src/main.cpp:162
 msgid "Wormux launching..."
 msgstr "Se lansează Wormux..."
@@ -520,7 +515,7 @@ msgstr ""
 "Aveţi nevoie de cel puţin două echipe ca să jucaţi: schimbaţi acest lucru în "
 "meniul 'Opţiuni' !"
 
-#: src/team/teams_list.cpp:158
+#: src/team/teams_list.cpp:151
 msgid "You need at least two valid teams !"
 msgstr "Aveţi nevoie de cel puţin două echipe valide !"
 
@@ -531,6 +526,12 @@ msgstr "Focul dvs. a fost tras în aer!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "finalizat"
+
+#~ msgid "Graphic options"
+#~ msgstr "Opţiuni grafice"
+
+#~ msgid "Sound options"
+#~ msgstr "Opţiuni sunet"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Eroare în timpul încărcării aspectului %s:"
