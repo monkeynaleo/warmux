@@ -42,6 +42,7 @@ wormux_SOURCES = \
 	gui/list_box.cpp gui/list_box.h \
 	gui/msg_box.cpp gui/msg_box.h \
 	gui/spin_button.cpp gui/spin_button.h \
+	gui/spin_button_big.cpp gui/spin_button_big.h \
 	gui/text_box.cpp gui/text_box.h \
 	gui/box.cpp gui/box.h \
 	gui/widget.cpp gui/widget.h \
