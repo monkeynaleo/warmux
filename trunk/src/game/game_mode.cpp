@@ -45,6 +45,7 @@ GameMode::GameMode()
   duration_turn = 60;
   duration_exchange_player = 2;
   duration_before_death_mode = 20 * 60;
+  damage_per_turn_during_death_mode = 5;
   gravity = 9.81;
   safe_fall = 10;
   damage_per_fall_unit = 7;
@@ -84,6 +85,7 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   LitDocXml::LitUint (xml, "duration_move_player", duration_move_player);
   LitDocXml::LitUint (xml, "duration_exchange_player", duration_exchange_player);
   LitDocXml::LitUint (xml, "duration_before_death_mode", duration_before_death_mode);
+  LitDocXml::LitUint (xml, "damage_per_turn_during_death_mode", damage_per_turn_during_death_mode);
   LitDocXml::LitUint (xml, "max_teams", max_teams);
   LitDocXml::LitUint (xml, "max_characters", max_characters);
   LitDocXml::LitDouble (xml, "gravity", gravity);

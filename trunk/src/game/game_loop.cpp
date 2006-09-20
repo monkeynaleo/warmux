@@ -701,7 +701,12 @@ void GameLoop::ApplyDeathMode ()
     GameMessages::GetInstance()->Add (_("Hurry up, you are too slow !!"));
     FOR_ALL_LIVING_CHARACTERS(team, character)
     {
-      character->SetEnergyDelta(-1);
+      // If the character energy is lower than damage
+      // per turn we reduce the character's health to 1
+      if (character->GetEnergy() > GameMode::GetInstance()->damage_per_turn_during_death_mode)
+        character->SetEnergyDelta(-GameMode::GetInstance()->damage_per_turn_during_death_mode);
+      else
+        character->SetEnergyDelta(-character->GetEnergy() + 1);
     }
   }
 }

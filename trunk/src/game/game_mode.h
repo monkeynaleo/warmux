@@ -36,6 +36,7 @@ public:
   uint duration_move_player;
   uint duration_exchange_player;
   uint duration_before_death_mode;
+  uint damage_per_turn_during_death_mode;
   double gravity;
   double safe_fall ;
   double damage_per_fall_unit ;
