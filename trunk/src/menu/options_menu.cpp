@@ -34,12 +34,12 @@
 
 const uint SOUND_X = 30;
 const uint SOUND_Y = 30;
-const uint SOUND_W = 530;
+const uint SOUND_W = 500;
 const uint SOUND_H = 170;
 
 const uint GRAPHIC_X = 30;
 const uint GRAPHIC_Y = SOUND_X + SOUND_H + 30;
-const uint GRAPHIC_W = 530;
+const uint GRAPHIC_W = 500;
 const uint GRAPHIC_H = 240;
 
 OptionMenu::OptionMenu() :
@@ -94,6 +94,7 @@ OptionMenu::OptionMenu() :
 
   Box * all_sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H-20),false);
   all_sound_options->SetMargin(25);
+  all_sound_options->SetBorder(Point2i(10,10));
 
   opt_music = new PictureTextCBox(_("Music?"), "menu/music_enable", stdRect);
   all_sound_options->AddWidget(opt_music);
@@ -107,11 +108,17 @@ OptionMenu::OptionMenu() :
   sound_options->AddWidget(all_sound_options);
   widgets.AddWidget(sound_options);
 
+  /* Center the widgets */
+  AppWormux * app = AppWormux::GetInstance();
+  uint center_x = app->video.window.GetWidth()/2;
+
+  graphic_options->SetXY(center_x - graphic_options->GetSizeX()/2, graphic_options->GetPositionY());
+  sound_options->SetXY(center_x - sound_options->GetSizeX()/2, sound_options->GetPositionY());
+  
   // Values initialization
 
   // Get available video resolution
-  AppWormux * app = AppWormux::GetInstance();
-  std::list<Point2i>& video_res = AppWormux::GetInstance()->video.GetAvailableConfigs();
+  std::list<Point2i>& video_res = app->video.GetAvailableConfigs();
 
   std::list<Point2i>::iterator it = video_res.begin(), end = video_res.end();
   for (; it != end ; ++it) {
