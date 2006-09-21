@@ -61,9 +61,8 @@ public:
   static void Enable (bool _enable);
   static bool NewBonusBox();
 
-  // Signale la fin d'une chute
+  // Signal Fall ending
   virtual void SignalCollision();
-  virtual void SignalObjectCollision(PhysicalObj * obj);
 
   void Draw();
   void Refresh();

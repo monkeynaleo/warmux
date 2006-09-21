@@ -120,13 +120,6 @@ void BonusBox::SignalCollision()
   anim->Start();
 }
 
-void BonusBox::SignalObjectCollision(PhysicalObj * obj)
-{
-  // here is the gift (truly a gift ?!? :)
-  ApplyBonus(ActiveTeam(),ActiveCharacter());
-  Ghost();
-}
-
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
