@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Liste des terrains.
+ * Maps List
  *****************************************************************************/
 
 #ifndef LST_TERRAINS_H
@@ -29,7 +29,7 @@
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
 
-class InfoTerrain{
+class InfoMap{
 public:
   std::string name;
   uint nb_mine;
@@ -55,40 +55,41 @@ private:
   bool TraiteXml (xmlpp::Element *xml);
 
 public:
-  InfoTerrain ();
-  Surface LitImgTerrain();
-  Surface LitImgCiel();
+  InfoMap ();
+  Surface ReadImgGround();
+  Surface ReadImgSky();
   bool Init(const std::string &nom, const std::string &repertoire);
   bool DonneesChargees() const;
   void FreeData();
 };
 
 
-class ListeTerrain
+class MapsList
 {
 public:
-  std::vector<InfoTerrain> liste;
-  typedef std::vector<InfoTerrain>::iterator iterator;
+  std::vector<InfoMap> lst;
+  typedef std::vector<InfoMap>::iterator iterator;
 
 private:
   int terrain_actif;
   bool m_init;
+  static MapsList * singleton;
+
   void LoadOneMap (const std::string &dir, const std::string &file);
+  MapsList();
 
 public:
-  ListeTerrain();
-  void Init();
+  static MapsList * GetInstance();
 
   // Return -1 if fails
   int FindMapById (const std::string &id);
-  void ChangeTerrainNom (const std::string &nom);
-  void ChangeTerrain (uint index);
-  InfoTerrain& TerrainActif();
+  void SelectMapByName (const std::string &nom);
+  void SelectMapByIndex (uint index);
+  InfoMap& ActiveMap();
 };
 
-InfoTerrain& TerrainActif();
-extern ListeTerrain lst_terrain;
+InfoMap& ActiveMap();
 
-bool compareMaps(const InfoTerrain& a, const InfoTerrain& b) ;
+bool compareMaps(const InfoMap& a, const InfoMap& b) ;
 
 #endif

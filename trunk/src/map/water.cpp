@@ -50,7 +50,7 @@ void Water::Init(){
 }
 
 void Water::Reset(){
-  actif = lst_terrain.TerrainActif().use_water;
+  actif = ActiveMap().use_water;
   if(!actif) return;
   Init();
   hauteur_eau = WATER_INITIAL_HEIGHT;

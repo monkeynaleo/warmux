@@ -34,7 +34,7 @@ Sky::Sky(){
 
 void Sky::Init(){
  	// That is temporary -> image will be loaded directly without alpha chanel
-	Surface tmp_image = lst_terrain.TerrainActif().LitImgCiel();
+	Surface tmp_image = ActiveMap().ReadImgSky();
 	tmp_image.SetAlpha( 0, 0);
 	image = tmp_image.DisplayFormat();
 

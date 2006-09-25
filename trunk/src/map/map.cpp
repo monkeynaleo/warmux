@@ -167,28 +167,28 @@ void Map::Draw()
 }
 
 bool Map::EstHorsMondeX(int x) const{
-  if( TerrainActif().infinite_bg )
+  if( ActiveMap().infinite_bg )
     return false;
 
   return (x < 0) || ((int)GetWidth() <= x);
 }
 
 bool Map::EstHorsMondeY(int y) const{
-  if( TerrainActif().infinite_bg )
+  if( ActiveMap().infinite_bg )
     return y < 0;
   
   return (y < 0) || ((int)GetHeight() <= y);
 }
 
 bool Map::EstHorsMondeXlarg(int x, uint larg) const{
-  if( TerrainActif().infinite_bg )
+  if( ActiveMap().infinite_bg )
   	return false;
 
   return (x + (int)larg - 1 < 0) || ((int)GetWidth() <= x);
 }
 
 bool Map::EstHorsMondeYhaut(int y, uint haut) const{ 
-  return ((y + (int)haut - 1 < 0  && !TerrainActif().infinite_bg) || ((int)GetHeight() <= y));
+  return ((y + (int)haut - 1 < 0  && !ActiveMap().infinite_bg) || ((int)GetHeight() <= y));
 }
 
 bool Map::EstHorsMondeXY(int x, int y) const{
@@ -323,9 +323,9 @@ void Map::DrawAuthorName()
   if (author_info1 == NULL) {
     std::string txt;
     txt  = Format(_("Map %s, a creation of :"),
-		  lst_terrain.TerrainActif().name.c_str());
+		  ActiveMap().name.c_str());
     author_info1 = new Text(txt, white_color, Font::GetInstance(Font::FONT_SMALL));
-    txt = lst_terrain.TerrainActif().author_info;
+    txt = ActiveMap().author_info;
     author_info2 = new Text(txt, white_color, Font::GetInstance(Font::FONT_SMALL));
   }
   

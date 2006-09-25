@@ -228,11 +228,10 @@ void Config::Apply()
     teams_list.InitList (tmp.teams);
 
   // Load maps
-  lst_terrain.Init();
   if (m_xml_charge && !tmp.map_name.empty())
-    lst_terrain.ChangeTerrainNom (tmp.map_name);
+    MapsList::GetInstance()->SelectMapByName (tmp.map_name);
   else
-    lst_terrain.ChangeTerrain (0);
+    MapsList::GetInstance()->SelectMapByIndex (0);
 }
 
 bool Config::Save()
@@ -268,10 +267,10 @@ bool Config::SauveXml()
   xmlpp::Element *racine = doc.racine();
   doc.EcritBalise (racine, "version", Constants::VERSION);
 
-  //=== Terrain ===
-  doc.EcritBalise (racine, "map", lst_terrain.TerrainActif().name);
+  //=== Map ===
+  doc.EcritBalise (racine, "map", MapsList::GetInstance()->ActiveMap().name);
 
-  //=== Equipes ===
+  //=== Teams ===
   xmlpp::Element *balise_equipes = racine -> add_child("teams");
   TeamsList::iterator
     it=teams_list.playing_list.begin(),

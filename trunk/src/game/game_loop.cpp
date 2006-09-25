@@ -158,7 +158,7 @@ void GameLoop::InitData_Local()
 {
   std::cout << "o " << _("Find a random position for characters") << std::endl;
   world.Reset();
-  lst_terrain.TerrainActif().FreeData();
+  MapsList::GetInstance()->ActiveMap().FreeData();
   lst_objects.PlaceBarrels();
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
 

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Liste des terrains.
+ * Maps list
  *****************************************************************************/
 
 #include "maps_list.h"
@@ -31,9 +31,7 @@
 #include <sys/stat.h>
 #endif
 
-ListeTerrain lst_terrain;
-
-InfoTerrain::InfoTerrain ()
+InfoMap::InfoMap ()
 { 
   m_donnees_chargees = false;
   nb_mine = 0;
@@ -43,7 +41,7 @@ InfoTerrain::InfoTerrain ()
   infinite_bg = false;
 }
 
-bool InfoTerrain::Init (const std::string &map_name, 
+bool InfoMap::Init (const std::string &map_name, 
 			            const std::string &directory)
 {
   std::string nomfich;
@@ -82,7 +80,7 @@ bool InfoTerrain::Init (const std::string &map_name,
   return true;
 }
 
-bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
+bool InfoMap::TraiteXml (xmlpp::Element *xml)
 {
   // Read author informations
   xmlpp::Element *author = LitDocXml::AccesBalise (xml, "author");
@@ -144,7 +142,7 @@ bool InfoTerrain::TraiteXml (xmlpp::Element *xml)
   return true;
 }
 
-void InfoTerrain::LoadData(){
+void InfoMap::LoadData(){
   if (m_donnees_chargees)
     return;
   m_donnees_chargees = true;
@@ -155,56 +153,41 @@ void InfoTerrain::LoadData(){
   img_ciel = resource_manager.LoadImage(res_profile,"sky");
 }
 
-void InfoTerrain::FreeData(){
+void InfoMap::FreeData(){
   img_ciel.Free();
   img_terrain.Free();
   m_donnees_chargees = false;
 }
 
-Surface InfoTerrain::LitImgTerrain(){ 
+Surface InfoMap::ReadImgGround(){ 
   LoadData(); 
   return img_terrain;
 }
 
-Surface InfoTerrain::LitImgCiel(){ 
+Surface InfoMap::ReadImgSky(){ 
   LoadData(); 
   return img_ciel;
 }
 
-bool InfoTerrain::DonneesChargees() const{ 
+bool InfoMap::DonneesChargees() const{ 
    return m_donnees_chargees; 
 }
 
-ListeTerrain::ListeTerrain(){
-  m_init = false;
-  terrain_actif = -1;
-}
 
-void ListeTerrain::LoadOneMap (const std::string &dir, const std::string &file){
-  std::string fullname = dir+file;
+MapsList* MapsList::singleton = NULL;
 
-#if !defined(WIN32) || defined(__MINGW32__)
-  struct stat stat_file;
-  if (file[0] == '.') return;
-  if (stat(fullname.c_str(), &stat_file) != 0) return;
-  if (!S_ISDIR(stat_file.st_mode)) return;
-#endif
-	
-  InfoTerrain nv_terrain;  
-  bool ok = nv_terrain.Init (file, fullname + PATH_SEPARATOR);
-  if (!ok) return;
-
-  std::cout << (liste.empty()?" ":", ") << file;
-  std::cout.flush();
-  liste.push_back(nv_terrain);
-}
-
-void ListeTerrain::Init()
+MapsList* MapsList::GetInstance()
 {
-  if (m_init) return;
-  
-  m_init = true;
-  liste.clear() ;
+  if (singleton == NULL) {
+    singleton = new MapsList();
+  }
+
+  return singleton;
+}
+
+MapsList::MapsList()
+{
+  lst.clear() ;
 
   std::cout << "o " << _("Load maps:");
 
@@ -253,52 +236,77 @@ void ListeTerrain::Init()
   std::cout << std::endl << std::endl;
 
   // On a au moins une carte ?
-  if (liste.size() < 1)
+  if (lst.size() < 1)
     Error(_("You need at least one valid map !"));
 
-  std::sort(lst_terrain.liste.begin(), lst_terrain.liste.end(), compareMaps);
+  std::sort(lst.begin(), lst.end(), compareMaps);
 }
 
-int ListeTerrain::FindMapById (const std::string &id)
+void MapsList::LoadOneMap (const std::string &dir, const std::string &file)
+{
+  std::string fullname = dir+file;
+
+#if !defined(WIN32) || defined(__MINGW32__)
+  struct stat stat_file;
+  if (file[0] == '.') return;
+  if (stat(fullname.c_str(), &stat_file) != 0) return;
+  if (!S_ISDIR(stat_file.st_mode)) return;
+#endif
+	
+  InfoMap nv_terrain;  
+  bool ok = nv_terrain.Init (file, fullname + PATH_SEPARATOR);
+  if (!ok) return;
+
+  std::cout << (lst.empty()?" ":", ") << file;
+  std::cout.flush();
+  lst.push_back(nv_terrain);
+}
+
+int MapsList::FindMapById (const std::string &id)
 {
   iterator
-    terrain=liste.begin(),
-    fin_terrain=liste.end();
+    terrain=lst.begin(),
+    fin_terrain=lst.end();
   uint i=0;
-  for (; i < liste.size(); ++i)
-    if (liste[i].name == id)
+  for (; i < lst.size(); ++i)
+    if (lst[i].name == id)
       return i;
   return -1;
 }
 
-void ListeTerrain::ChangeTerrainNom (const std::string &nom){
+void MapsList::SelectMapByName (const std::string &nom)
+{
   int index = FindMapById (nom);
 
   if (index == -1){
     index = 0;
     std::cout << Format(_("! Map %s not found :-("), nom.c_str()) << std::endl;
   }
-  ChangeTerrain (index);
+  SelectMapByIndex (index);
 }
 
-void ListeTerrain::ChangeTerrain (uint index){
-  assert (index < liste.size());
+void MapsList::SelectMapByIndex (uint index)
+{
+  assert (index < lst.size());
   if (terrain_actif == (int)index)
     return;
 
   terrain_actif = index;
 }
 
-InfoTerrain& ListeTerrain::TerrainActif(){
+InfoMap& MapsList::ActiveMap()
+{
   assert (0 <= terrain_actif);
-  return liste.at(terrain_actif);
+  return lst.at(terrain_actif);
 }
 
-InfoTerrain& TerrainActif(){
-  return lst_terrain.TerrainActif();
+InfoMap& ActiveMap()
+{
+  return MapsList::GetInstance()->ActiveMap();
 }
 
-bool compareMaps(const InfoTerrain& a, const InfoTerrain& b){  
+bool compareMaps(const InfoMap& a, const InfoMap& b)
+{  
   return a.name < b.name;
 }
 

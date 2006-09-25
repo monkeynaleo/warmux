@@ -66,7 +66,7 @@ Point2i Camera::NonFreeDegrees() const{
 void Camera::SetXYabs(int x, int y){ 
   AppWormux * app = AppWormux::GetInstance();
 
-  if( !TerrainActif().infinite_bg ){
+  if( !ActiveMap().infinite_bg ){
     if( !HasFixedX() )
       position.x = BorneLong(x, 0, world.GetWidth() - GetSizeX());
     else
@@ -132,7 +132,7 @@ void Camera::AutoRecadre(){
   Point2i pos = obj_suivi->GetPosition();
   Point2i size = obj_suivi->GetSize();
   
-  if( pos.y < 0 && !TerrainActif().infinite_bg )
+  if( pos.y < 0 && !ActiveMap().infinite_bg )
     pos.y = 0;
 
   Point2i dstMax = GetSize()/2 - marge;

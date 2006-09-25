@@ -42,8 +42,8 @@ void Ground::Init(){
   std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
   
-  // Charge les donn�s du terrain
-  Surface m_image = lst_terrain.TerrainActif().LitImgTerrain();
+  // Load ground data
+  Surface m_image = ActiveMap().ReadImgGround();
   LoadImage ( m_image );
 
   // V�ifie la taille du terrain
@@ -51,7 +51,7 @@ void Ground::Init(){
   assert(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
   
   // V�ifie si c'est un terrain ouvert ou ferm�
-  ouvert = lst_terrain.TerrainActif().is_opened;
+  ouvert = ActiveMap().is_opened;
 
   std::cout << _("done") << std::endl;
 }
@@ -64,7 +64,7 @@ void Ground::Reset(){
 // Lit la valeur alpha du pixel (x,y)
 bool Ground::IsEmpty(const Point2i &pos){ 
 	assert( !world.EstHorsMondeXY(pos.x, pos.y) );
-	if( TerrainActif().infinite_bg){
+	if( ActiveMap().infinite_bg){
 		if( !Contains(pos) )
 			return true;
 	}

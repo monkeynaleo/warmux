@@ -43,7 +43,7 @@ ObjectsList lst_objects;
 void ObjectsList::PlaceMines()
 {
   MSG_DEBUG("lst_objects","Placing mines");
-  for (uint i=0; i<lst_terrain.TerrainActif().nb_mine; ++i)
+  for (uint i=0; i<ActiveMap().nb_mine; ++i)
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
@@ -58,7 +58,7 @@ void ObjectsList::PlaceMines()
 void ObjectsList::PlaceBarrels()
 {
   MSG_DEBUG("lst_objects","Placing barrels");
-  for (uint i= 0; i<lst_terrain.TerrainActif().nb_barrel; ++i)
+  for (uint i= 0; i<ActiveMap().nb_barrel; ++i)
   {
     PetrolBarrel *obj = new PetrolBarrel();
 
@@ -112,6 +112,7 @@ void ObjectsList::Refresh()
       {
 #ifdef DEBUG
         std::cerr << "Warning, \"" << object->ptr->GetName() << "\" is ghost, and still in the the object list" << std::endl;
+	object = lst.erase(object);
 #endif
       }
       else

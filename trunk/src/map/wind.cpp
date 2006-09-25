@@ -45,7 +45,7 @@ WindParticle::WindParticle(std::string &xml_file) :
 {
   SetCollisionModel(true, false, false);
 
-  sprite = resource_manager.LoadSprite( TerrainActif().res_profile, "wind_particle");
+  sprite = resource_manager.LoadSprite( ActiveMap().res_profile, "wind_particle");
 //  if(sprite->GetFrameCount()==1)
 //    sprite->cache.EnableLastFrameCache();
   sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
@@ -77,7 +77,7 @@ void WindParticle::Refresh()
   UpdatePosition();
 
   // Flip the sprite if needed and if the direction of wind changed
-  if(TerrainActif().wind.need_flip)
+  if(ActiveMap().wind.need_flip)
   {
     Point2d speed;
     GetSpeedXY(speed);
@@ -152,11 +152,11 @@ void Wind::Reset(){
   if (!Config::GetInstance()->GetDisplayWindParticles())
     return ;
 
-  uint nb = TerrainActif().wind.nb_sprite;
+  uint nb = ActiveMap().wind.nb_sprite;
 
   if(!nb) return;
 
-  std::string config_file = TerrainActif().m_directory + PATH_SEPARATOR + "config.xml";
+  std::string config_file = ActiveMap().m_directory + PATH_SEPARATOR + "config.xml";
 
   for (uint i=0; i<nb; ++i){
     WindParticle tmp = WindParticle(config_file);
