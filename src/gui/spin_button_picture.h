@@ -16,55 +16,42 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game menu
+ * A big Spinbutton in 
  *****************************************************************************/
 
-#ifndef GAME_MENU_H
-#define GAME_MENU_H
+#ifndef SPIN_BUTTON_PICTURE_H
+#define SPIN_BUTTON_PICTURE_H
 
-#include "menu.h"
 #include "../include/base.h"
-#include "../graphic/font.h"
+#include "../graphic/text.h"
+#include "widget.h"
+#include "button.h"
+#include <string>
 
-class Team;
-
-class GameMenu : public Menu
+class SpinButtonWithPicture : public Widget
 {
-   /* Team controllers */
-   ListBox *lbox_all_teams;   
-   ListBox *lbox_selected_teams;
-   Button *bt_add_team;
-   Button *bt_remove_team;
-   PictureWidget *team_logo;
+ private:
+  Surface m_image;
 
-   Team * last_team;
+ protected:
+  Text *txt_label, *txt_value;
 
-   /* Map controllers */
-   ListBox *lbox_maps;
-   PictureWidget *map_preview;  
-   
-   /* Game options controllers */
-   Box * game_options;
-   SpinButtonWithPicture *opt_duration_turn;
-   SpinButtonWithPicture *opt_duration_end_turn;
-   SpinButtonBig *opt_nb_characters;
-   SpinButtonWithPicture *opt_energy_ini;
+  int m_value;
+  int m_min_value, m_max_value, m_step;
 
+ public:
+  SpinButtonWithPicture(const std::string &label, const std::string &resource_id,
+			const Rectanglei &rect,
+			int value=0, int step=1, int min_value=-1, int max_value=-1);
+  virtual ~SpinButtonWithPicture();
 
-   void ChangeMap();   
-   void SelectTeamLogo(Team *t);
-   void MoveTeams(ListBox * from, ListBox * to, bool sort);
+  void SetSizePosition(const Rectanglei &rect);
 
-   void SaveOptions();
-   void OnClic(const Point2i &mousePosition, int button);
-   void Draw(const Point2i &mousePosition);
-
-   void __sig_ok();
-   void __sig_cancel();
-
-public:
-   GameMenu(); 
-   ~GameMenu();
+  void Draw(const Point2i &mousePosition, Surface& surf);
+  Widget* Clic(const Point2i &mousePosition, uint button);
+  int GetValue() const;
+  void SetValue(int value);
 };
 
 #endif
+

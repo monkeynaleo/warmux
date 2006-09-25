@@ -29,6 +29,7 @@
 #include "../gui/check_box.h"
 #include "../gui/spin_button.h"
 #include "../gui/spin_button_big.h"
+#include "../gui/spin_button_picture.h"
 #include "../gui/box.h"
 #include "../gui/question.h"
 #include "../gui/label.h"
