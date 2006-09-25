@@ -183,7 +183,7 @@ void Action_SetCharacterDirection (Action *a)
 void Action_SetMap (Action *a)
 {
   if (!network.IsClient()) return;
-  lst_terrain.ChangeTerrainNom (a->PopString());
+  MapsList::GetInstance()->SelectMapByName(a->PopString());
   network.network_menu->ChangeMapCallback();
 }
 

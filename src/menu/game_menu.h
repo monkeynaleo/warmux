@@ -41,7 +41,7 @@ class GameMenu : public Menu
 
    /* Map controllers */
    ListBox *lbox_maps;
-   PictureWidget *map_preview;  
+   PictureWidget *map_preview_selected, *map_preview_before, *map_preview_after;  
    
    /* Game options controllers */
    Box * game_options;

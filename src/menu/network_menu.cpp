@@ -133,11 +133,11 @@ NetworkMenu::NetworkMenu() :
   // Values initialization
 
   // Load Maps' list
-  std::sort(lst_terrain.liste.begin(), lst_terrain.liste.end(), compareMaps);
+  std::sort(MapsList::GetInstance()->lst.begin(), MapsList::GetInstance()->lst.end(), compareMaps);
 
-  ListeTerrain::iterator
-    terrain=lst_terrain.liste.begin(),
-    fin_terrain=lst_terrain.liste.end();
+  MapsList::iterator
+    terrain=MapsList::GetInstance()->lst.begin(),
+    fin_terrain=MapsList::GetInstance()->lst.end();
   for (; terrain != fin_terrain; ++terrain)
     lbox_maps->AddItem (false, terrain -> name, terrain -> name);
   lbox_maps->Select(0);
@@ -173,7 +173,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == lbox_maps)
   {
     ChangeMap();
-    action_handler->NewAction (new Action(ACTION_SET_MAP, TerrainActif().name));
+    action_handler->NewAction (new Action(ACTION_SET_MAP, ActiveMap().name));
   }
 
   if (w == bt_add_team) {
@@ -280,10 +280,10 @@ void NetworkMenu::__sig_cancel()
 void NetworkMenu::ChangeMap()
 {
   std::string map_id = lbox_maps->ReadLabel();
-  uint map = lst_terrain.FindMapById(map_id);
-  lst_terrain.ChangeTerrainNom(map_id);
+  uint map_index = MapsList::GetInstance()->FindMapById(map_id);
+  MapsList::GetInstance()->SelectMapByIndex(map_index);
 
-  map_preview->SetSurface(lst_terrain.liste[map].preview, false);
+  map_preview->SetSurface(MapsList::GetInstance()->lst[map_index].preview, false);
 }
 
 void NetworkMenu::SelectTeamLogo(Team * t)
@@ -397,5 +397,5 @@ void NetworkMenu::AddTeamCallback(std::string team)
 void NetworkMenu::ChangeMapCallback()
 {
   // Called from the action handler
-  map_preview->SetSurface(TerrainActif().preview, false);
+  map_preview->SetSurface(ActiveMap().preview, false);
 }

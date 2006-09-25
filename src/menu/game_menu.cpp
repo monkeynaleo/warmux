@@ -116,10 +116,7 @@ GameMenu::GameMenu() :
   Box * tmp_map_box = new VBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE, 
 				       mainBoxWidth-60, mainBoxHeight), false);
 
-  Label * select_world_label = new Label(_("Select the world:"), rectZero, *normal_font);
-  tmp_map_box->AddWidget(select_world_label);
-
-  uint map_preview_height = mainBoxHeight - select_world_label->GetSizeY() -2*10;
+  uint map_preview_height = mainBoxHeight - /*select_world_label->GetSizeY()*/ -2*10 -40;
   
   tmp_box = new HBox( Rectanglei(0, 0, 1, map_preview_height+2*10 ), false);
   tmp_box->SetMargin(10);
@@ -128,8 +125,14 @@ GameMenu::GameMenu() :
   lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, map_preview_height ));
   tmp_box->AddWidget(lbox_maps);
 
-  map_preview = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3, map_preview_height));
-  tmp_box->AddWidget(map_preview);
+  map_preview_before = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
+  tmp_box->AddWidget(map_preview_before);
+
+  map_preview_selected = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3, map_preview_height));
+  tmp_box->AddWidget(map_preview_selected);
+
+  map_preview_after = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
+  tmp_box->AddWidget(map_preview_after);
 
   tmp_map_box->AddWidget(tmp_box);
   map_box->AddWidget(tmp_map_box);
@@ -180,14 +183,14 @@ GameMenu::GameMenu() :
   // Values initialization
 
   // Load Maps' list
-  std::sort(lst_terrain.liste.begin(), lst_terrain.liste.end(), compareMaps);
+  std::sort(MapsList::GetInstance()->lst.begin(), MapsList::GetInstance()->lst.end(), compareMaps);
 
-  ListeTerrain::iterator
-    terrain=lst_terrain.liste.begin(),
-    fin_terrain=lst_terrain.liste.end();
+  MapsList::iterator
+    terrain=MapsList::GetInstance()->lst.begin(),
+    fin_terrain=MapsList::GetInstance()->lst.end();
   for (; terrain != fin_terrain; ++terrain)
   {
-    bool choisi = terrain -> name == lst_terrain.TerrainActif().name;
+    bool choisi = terrain -> name == ActiveMap().name;
     lbox_maps->AddItem (choisi, terrain -> name, terrain -> name);
   }
 
@@ -248,7 +251,7 @@ void GameMenu::SaveOptions()
 {
   // Save values
   std::string map_id = lbox_maps->ReadLabel();
-  lst_terrain.ChangeTerrainNom (map_id);
+  MapsList::GetInstance()->SelectMapByName (map_id);
 
   // teams
   std::vector<list_box_item_t> *
@@ -297,9 +300,19 @@ void GameMenu::__sig_cancel()
 void GameMenu::ChangeMap()
 {
   std::string map_id = lbox_maps->ReadLabel();
-  uint map = lst_terrain.FindMapById(map_id);
+  uint map = MapsList::GetInstance()->FindMapById(map_id);
 
-  map_preview->SetSurface(lst_terrain.liste[map].preview, true);
+  map_preview_selected->SetSurface(MapsList::GetInstance()->lst[map].preview, true);
+  
+  if (map > 0)
+    map_preview_before->SetSurface(MapsList::GetInstance()->lst[map-1].preview, true);
+  else 
+    map_preview_before->SetNoSurface();
+
+  if (map+1 <= MapsList::GetInstance()->lst.size() )
+    map_preview_after->SetSurface(MapsList::GetInstance()->lst[map+1].preview, true);
+  else 
+    map_preview_after->SetNoSurface();
 }
 
 void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
