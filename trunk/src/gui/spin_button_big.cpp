@@ -62,6 +62,8 @@ SpinButtonBig::~SpinButtonBig ()
 {
   delete txt_label;
   delete txt_value;
+  delete m_plus;
+  delete m_minus;
 }
 
 void SpinButtonBig::SetSizePosition(const Rectanglei &rect)

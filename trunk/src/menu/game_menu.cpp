@@ -32,8 +32,8 @@
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
 
-const uint MARGIN_TOP    = 20;
-const uint MARGIN_SIDE   = 20;
+const uint MARGIN_TOP    = 10;
+const uint MARGIN_SIDE   = 5;
 const uint MARGIN_BOTTOM = 70;
 
 const uint TEAMS_W = 160;
@@ -56,6 +56,7 @@ GameMenu::GameMenu() :
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
+  Rectanglei stdRect (0, 0, 130, 30);
 
   Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
@@ -135,36 +136,33 @@ GameMenu::GameMenu() :
   widgets.AddWidget(map_box);
 
   /* Choose other game options */
-  Box * game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 
+  game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 
 					    mainBoxWidth/2, mainBoxHeight) );  
   game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
 
-  Box * tmp_game_options = new VBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE, 
-						mainBoxWidth/2-40, mainBoxHeight), false );
-  tmp_game_options->AddWidget(new Label(_("Game options"), rectZero, *normal_font));
-  
+  opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn:"), "menu/timing_turn",
+						stdRect,
+						TPS_TOUR_MIN, 5,
+						TPS_TOUR_MIN, TPS_TOUR_MAX);
+  game_options->AddWidget(opt_duration_turn);
 
-  opt_duration_turn = new SpinButton(_("Duration of a turn:"), rectZero,
-				     TPS_TOUR_MIN, 5,
-				     TPS_TOUR_MIN, TPS_TOUR_MAX);
-  tmp_game_options->AddWidget(opt_duration_turn);
+  opt_duration_end_turn = new SpinButtonWithPicture(_("Duration of the end of a turn:"), "menu/timing_end_of_turn",
+						    stdRect,
+						    TPS_FIN_TOUR_MIN, 1,
+						    TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
+  game_options->AddWidget(opt_duration_end_turn);
 
-  opt_duration_end_turn = new SpinButton(_("Duration of the end of a turn:"), rectZero,
-					 TPS_FIN_TOUR_MIN, 1,
-					 TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
-  tmp_game_options->AddWidget(opt_duration_end_turn);
+  opt_nb_characters = new SpinButtonBig(_("Number of players per team:"), stdRect,
+				     4, 1,
+				     NBR_VER_MIN, NBR_VER_MAX);
+  game_options->AddWidget(opt_nb_characters);
 
-  opt_nb_characters = new SpinButton(_("Number of players per team:"), rectZero,
-				 4, 1,
-				 NBR_VER_MIN, NBR_VER_MAX);
-  tmp_game_options->AddWidget(opt_nb_characters);
+  opt_energy_ini = new SpinButtonWithPicture(_("Initial energy:"), "menu/energy",
+					     stdRect,
+					     100, 5,
+					     50, 200);
 
-  opt_energy_ini = new SpinButton(_("Initial energy:"), rectZero,
-				      100, 5,
-				      50, 200);
-
-  tmp_game_options->AddWidget(opt_energy_ini);
-  game_options->AddWidget(tmp_game_options);
+  game_options->AddWidget(opt_energy_ini);
   widgets.AddWidget(game_options);
 
 
@@ -230,6 +228,8 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
   } else if ( bt_remove_team->Contains(mousePosition)) {
     MoveTeams(lbox_selected_teams, lbox_all_teams, true);
+  } else if ( game_options->Clic(mousePosition, button)) {
+
   }
 }
 
