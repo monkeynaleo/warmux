@@ -67,9 +67,12 @@ void FireParticle::Refresh()
   if(image->GetSize().x != 0 && image->GetSize().y != 0)
   {
     SetSize( image->GetSize() );
-  SetTestRect((image->GetWidth() / 2)-1, (image->GetWidth() / 2) - 1,
+    SetTestRect((image->GetWidth() / 2)-1, (image->GetWidth() / 2) - 1,
       (image->GetHeight()/2)-1,1);
   }
+  else
+    SetSize( Point2i(1,1) );
+
 
   if(on_ground || !FootsInVacuum())
   {
