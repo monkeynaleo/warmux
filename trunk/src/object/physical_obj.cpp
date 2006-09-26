@@ -349,6 +349,8 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     }
 
     SignalGroundCollision();
+    SignalCollision();
+
     // Make it rebound on the ground !!
     Rebound(contactPos, contact_angle);
 
@@ -366,6 +368,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     // m1V1 = m1V'1 + m2V'2
     // We set the speed proportionally to the mass
     double total_mass = GetMass() + collided_obj->GetMass();
+    SignalCollision();
 
     collided_obj->SetSpeed(collided_obj->GetMass()*norm/total_mass, angle);
     SetSpeed(GetMass()*norm/total_mass, angle);      
@@ -375,7 +378,6 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     Point2d contactPos = pos;
     Rebound(contactPos, contact_angle);
   }
-  SignalCollision();
   return;
 }
 

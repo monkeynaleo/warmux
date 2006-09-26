@@ -35,8 +35,8 @@
 
 // Physical constants
 const double STOP_REBOUND_LIMIT = 0.5 ;
-const double AIR_RESISTANCE_FACTOR = 14 ;
-const double PHYS_DELTA_T = 0.01 ;         // Physical simulation time step
+const double AIR_RESISTANCE_FACTOR = 40.0 ;
+const double PHYS_DELTA_T = 0.02 ;         // Physical simulation time step
 const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 
 Physics::Physics ()
@@ -375,21 +375,6 @@ bool Physics::IsFalling() const
 	   ( m_pos_y.x1 > 0.1) );
 }
 
-double Physics::GetContactSurface(double angle)
-{
-  double x_surface, y_surface ;
-
-  // Very approximative contact surface
-
-  x_surface = m_phys_width * sin(angle) ;
-  x_surface *= x_surface ;
-		  
-  y_surface = m_phys_height * cos(angle) ;
-  y_surface *= y_surface ;
-
-  return 0.5 * (x_surface + y_surface) ;
-}
-
 // Compute the next position of the object during a pendulum motion.
 void Physics::ComputePendulumNextXY (double delta_t)
 {
@@ -451,11 +436,11 @@ void Physics::ComputeFallNextXY (double delta_t)
 
   wind_force = wind.GetStrength() * m_wind_factor ;
 
-  // Air resistanceance factor = K * contact_surface
+  // Air resistanceance factor
 
   GetSpeed(speed_norm, speed_angle);
 
-  air_resistance_factor = AIR_RESISTANCE_FACTOR * GetContactSurface(speed_angle) * m_air_resist_factor ;
+  air_resistance_factor = AIR_RESISTANCE_FACTOR * m_air_resist_factor ;
 
   MSG_DEBUG( "physic.fall", "Fall %s; mass %5f, weight %5f, wind %5f, air %5f", typeid(*this).name(), m_mass, weight_force,wind_force, air_resistance_factor);
 

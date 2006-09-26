@@ -68,10 +68,7 @@ void ApplyExplosion_common (const Point2i &pos,
 		     ParticleEngine::ESmokeStyle smoke
 		     )
 {
-
-  bool cam_follow_character = false; //Set to true if an explosion is applied to a character. Then the camera shouldn't be following an object
-
-  MSG_DEBUG("explosion", "explosion range : %f\n", config.explosion_range);
+  MSG_DEBUG("explosion", "explosion range : %i\n", config.explosion_range);
 
 #ifdef HAVE_A_REALLY_BIG_CPU
   // Add particles based on the ground image
@@ -90,85 +87,85 @@ void ApplyExplosion_common (const Point2i &pos,
 
   // Make a hole in the ground
   world.Dig(pos, config.explosion_range);
-  float range = config.explosion_range / PIXEL_PER_METER;
-  range *= 1.5;
 
   // Play a sound
   jukebox.Play("share", son);
 
   // Apply damage on the worms.
   // Do not care about the death of the active worm.
+  double highest_force = 0.0;
+  Character* fastest_character = NULL;
   FOR_ALL_CHARACTERS(equipe,ver)
   {
-    double distance, angle;
-    distance = MeterDistance (pos, ver -> GetCenter());
-
-    MSG_DEBUG("explosion", "\n*Character %s : distance= %e", ver->GetName().c_str(), distance);
+    double distance = pos.Distance(ver -> GetCenter());
 
     // If the worm is in the explosion range, apply damage on it !
-    if (distance <= range)
+    if (distance <= config.explosion_range)
     {
-      uint hit_point_loss = (uint)(distance*config.damage/range);
-      hit_point_loss = config.damage-hit_point_loss;
-
-      //MSG_DEBUG("explosion", "hit_point_loss energy= %d", ver->m_name.c_str(), hit_point_loss);
-
-      ver -> SetEnergyDelta (-hit_point_loss);
+      MSG_DEBUG("explosion", "\n*Character %s : distance= %f", ver->GetName().c_str(), distance);
+      double dmg = cos(M_PI_2 * distance / config.explosion_range);
+      dmg *= config.damage;
+      MSG_DEBUG("explosion", "hit_point_loss energy= %i", ver->GetName().c_str(), dmg);
+      ver -> SetEnergyDelta (-(int)dmg);
     }
 
     // If the worm is in the blast range, apply the blast on it !
     if (distance <= config.blast_range)
     {
-      double force = distance;
+      double angle;
+      double force = cos(M_PI_2 * distance / config.blast_range);
+      force *= config.blast_force;
+
+      if ( force > highest_force )
+      {
+        fastest_character = &(*ver);
+        highest_force = force;
+      }
+
       if (!EgalZero(distance))
       {
-        force *= config.blast_force / config.blast_range;
-        force  = config.blast_force - force;
         angle  = pos.ComputeAngle(ver -> GetCenter());
+        if( angle > 0 )
+          angle  = - angle;
       }
       else
-      {
-        force = config.blast_force;
         angle = -M_PI/2;
-      }
-      
-      //MSG_DEBUG("explosion", "force = %e", force);
 
-//      camera.ChangeObjSuivi ((PhysicalObj*)&ver, true, true);
-      cam_follow_character = true;
-      ver -> AddSpeed (force, angle);
+
+      MSG_DEBUG("explosion", "force = %f", force);
+      ver->AddSpeed (force / ver->GetMass(), angle);
       ver->SignalExplosion();
-    } else {
-
-      MSG_DEBUG("explosion", " -> too far");
-
     }
   }
+
+  if(fastest_character != NULL)
+    camera.ChangeObjSuivi (fastest_character, true, true);
 
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(obj) if ( !(obj -> ptr -> GoesThroughWall()) )
   { 
-    double distance, angle;
-    distance = MeterDistance (pos, obj -> ptr -> GetCenter());
-    if (distance <= range)
+    double distance = pos.Distance(obj -> ptr -> GetCenter());
+    if (distance <= config.explosion_range)
     {
-      uint hit_point_loss = (uint)(distance*config.damage/range);
+      uint hit_point_loss = (uint)(distance*config.damage);
       hit_point_loss = config.damage-hit_point_loss;
       obj -> ptr -> AddDamage (hit_point_loss);
     }
+
     if (distance <= config.blast_range)
     {
-      if (!EgalZero(distance)) {
-	distance *= config.blast_force / config.blast_range;
-	distance  = config.blast_force - distance;
-	angle  = pos.ComputeAngle(obj -> ptr -> GetCenter());
-      } else {
-	distance = config.blast_force;
-	angle = -M_PI_2;
-      }
-      if(!cam_follow_character)
+      double angle;
+      double force = cos(M_PI_2 * distance / config.blast_range);
+      force *= config.blast_force;
+
+      if (!EgalZero(distance))
+        angle  = pos.ComputeAngle(obj->ptr->GetCenter());
+      else
+        angle = -M_PI_2;
+
+      if(fastest_character != NULL)
         camera.ChangeObjSuivi (obj->ptr, true, true);
-      obj -> ptr -> AddSpeed (distance, angle);
+      obj -> ptr -> AddSpeed (force / obj->ptr->GetMass(), angle);
     }
   }
 
