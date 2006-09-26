@@ -34,6 +34,10 @@
       <damage>30</damage>
       <mass>300</mass>
       <speed>10</speed>
+      <explosion_range>80</explosion_range>
+      <particle_range>80</particle_range>
+      <blast_range>75</blast_range>
+      <blast_force>2500</blast_force>
     </air_attack>
 
     <anvil>
