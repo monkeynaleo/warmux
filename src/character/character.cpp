@@ -255,6 +255,26 @@ void Character::SetEnergyDelta (int delta, bool do_report)
   if (energy == 0) Die();
 }
 
+void Character::SetEnergy(int new_energy)
+{
+  // Change energy
+  energy = BorneLong((int)new_energy, 0, GameMode::GetInstance()->character.max_energy);
+  energy_bar.Actu (energy);
+    
+  // Energy bar color
+  Color color;
+  if (70 < energy)
+	  color.SetColor(0, 255, 0, 255);
+  else if (50 < energy)
+	  color.SetColor(255, 255, 0, 255);
+  else if (20 < energy) 
+	  color.SetColor(255, 128, 0, 255);
+  else 
+	  color.SetColor(255, 0, 0, 255);
+
+  energy_bar.SetValueColor( color );
+}
+
 void Character::Die()
 {
   assert (m_alive == ALIVE || m_alive == DROWNED);

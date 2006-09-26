@@ -55,6 +55,41 @@ ActionHandler * ActionHandler::GetInstance()
   return singleton;
 }
 
+// Send information about energy and the position of every character
+void SyncCharacters()
+{
+  assert(network.IsServer());
+  ActionHandler* action_handler = ActionHandler::GetInstance();
+
+  Action a_begin_sync(ACTION_SYNC_BEGIN);
+  network.SendAction(&a_begin_sync);
+  TeamsList::iterator
+    it=teams_list.playing_list.begin(),
+    end=teams_list.playing_list.end();
+
+  for (int team_no = 0; it != end; ++it, ++team_no)
+  {
+    Team& team = **it;
+    Team::iterator
+        tit = team.begin(),
+        tend = team.end();
+
+    for (int char_no = 0; tit != tend; ++tit, ++char_no)
+    {
+      // cliens : Place characters
+      Action* a = BuildActionSendCharacterPhysics(team_no, char_no);
+      action_handler->NewAction(a);
+      a = new Action(ACTION_SET_CHARACTER_ENERGY);
+		a->Push(team_no);
+		a->Push(char_no);
+      a->Push((int)(*tit).GetEnergy());
+      action_handler->NewAction(a);
+    }
+  }
+  Action a_sync_end(ACTION_SYNC_END);
+  network.SendAction(&a_sync_end);
+}
+
 void Action_MoveRight (Action *a)
 {
   assert(false);
@@ -148,6 +183,15 @@ void Action_SetCharacterPhysics (Action *a)
   s_y = a->PopDouble();
   c->SetPhysXY(x, y);
   c->SetSpeedXY(Point2d(s_x, s_y));
+}
+
+void Action_SetCharacterEnergy(Action *a)
+{
+  int team_no, char_no;
+  team_no = a->PopInt();
+  char_no = a->PopInt();
+  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->SetEnergy( a->PopInt() );  
 }
 
 void Action_SetFrame (Action *a)
@@ -511,5 +555,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_CONSTRUCTION_UP, "construction_up", &Action_ConstructionUp);
   Register (ACTION_CONSTRUCTION_DOWN, "construction_down", &Action_ConstructionDown);
   Register (ACTION_WEAPON_STOP_USE, "weapon_stop_use", &Action_WeaponStopUse);
+  Register (ACTION_SET_CHARACTER_ENERGY, "set_character_energy", &Action_SetCharacterEnergy);
   SDL_UnlockMutex(mutex);
 }
