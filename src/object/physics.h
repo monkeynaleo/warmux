@@ -144,9 +144,6 @@ public:
   bool IsFalling() const;
 
 protected:
-  // Get Object / Air contact surface.
-  double GetContactSurface(double angle) ;
-
   // Compute current (x,y) position
   Point2d ComputeNextXY(double delta_t);
 

@@ -106,22 +106,16 @@ void ClusterBomb::Explosion()
     return;
   }
 
-  Point2d speed_vector;
-  int x, y;
-
-  GetSpeedXY(speed_vector);
-
   iterator it=tableau_cluster.begin(), end=tableau_cluster.end();
   for (; it != end; ++it)
   {
     Cluster &cluster = *it;
 
     double angle = randomSync.GetDouble(2.0 * M_PI);
-    x = GetX()+(int)(cos(angle) * (double)cfg.blast_range*5);
-    y = GetY()+(int)(sin(angle) * (double)cfg.blast_range*5);
+    int x = GetX()+(int)(cos(angle) * (double)cfg.blast_range * 0.9);
+    int y = GetY()+(int)(sin(angle) * (double)cfg.blast_range * 0.9);
 
     cluster.Shoot(x,y);
-    cluster.SetSpeedXY(speed_vector);
     lst_objects.AddObject((PhysicalObj*)&cluster);
   }
   WeaponProjectile::Explosion();

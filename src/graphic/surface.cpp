@@ -383,6 +383,10 @@ int Surface::AALineColor(const uint &x1, const uint &x2, const uint &y1, const u
   return aalineRGBA( surface, x1, y1, x2, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
+int Surface::CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color){
+    return circleRGBA( surface, x, y, rad, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+}
+
 /**
  *
  * @param color

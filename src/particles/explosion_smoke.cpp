@@ -39,7 +39,7 @@ ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   SetGravityFactor(randomObj.GetDouble(-1.0,-2.0));
 
   image->ScaleSize(m_initial_size, m_initial_size);
-  SetSize( Point2i(m_initial_size, m_initial_size) );
+  SetSize( Point2i(1, 1) );
   StartMoving();
 }
 

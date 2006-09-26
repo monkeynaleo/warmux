@@ -67,8 +67,8 @@ bool Baseball::p_Shoot (){
       if( ver->ObjTouche(Point2i(x, y)) )
       {
 	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-	(*ver).SetSpeed (cfg().strength, angle);
-	(*ver).SetMovement("fly");
+	ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
+	ver->SetMovement("fly");
 	return true;
       }
     }

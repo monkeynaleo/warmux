@@ -42,10 +42,10 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
 {
   timeout = 0; 
   allow_change_timeout = false;
-  explosion_range = 50 ;
+  explosion_range = 0 ;
   particle_range = explosion_range;
-  blast_range = 2.5 ;
-  blast_force = 2.5 ;
+  blast_range = 0 ;
+  blast_force = 0 ;
 }
 
 void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem) 
