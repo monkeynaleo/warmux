@@ -244,10 +244,14 @@ GameMenu::~GameMenu()
 
 void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  if (bt_map_minus->Contains(mousePosition)) {
+  if (map_preview_before2->Contains(mousePosition) ) {
+    ChangeMap(-2);
+  } else if (bt_map_minus->Contains(mousePosition) || map_preview_before->Contains(mousePosition) ) {
     ChangeMap(-1);
-  } else if (bt_map_plus->Contains(mousePosition)) {
+  } else if (bt_map_plus->Contains(mousePosition) || map_preview_after->Contains(mousePosition)) {
     ChangeMap(+1);
+  } else if (map_preview_after2->Contains(mousePosition) ) {
+    ChangeMap(+2);
   } else if (lbox_all_teams->Clic(mousePosition, button)) {
 
   } else if (lbox_selected_teams->Clic(mousePosition, button)) {
