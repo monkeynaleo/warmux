@@ -22,12 +22,14 @@
 #include "label.h"
 
 Label::Label (const std::string &label, const Rectanglei &rect, Font& _font,
-	      const Color& color) : font_color(color)
+	      const Color& color, bool _center) 
+  : font_color(color)
 {
   position = rect.GetPosition();
   size = rect.GetSize();
   size.y = _font.GetHeight();
   font = &_font;
+  center = _center;
   txt_label = new Text(label, font_color, &_font);
 }
 
@@ -38,7 +40,10 @@ Label::~Label()
 
 void Label::Draw(const Point2i &mousePosition, Surface& surf)
 {
-  txt_label->DrawTopLeft(position);
+  if (!center)
+    txt_label->DrawTopLeft(position);
+  else
+    txt_label->DrawCenterTop(position.x + size.x/2, position.y);
 }
 
 void Label::SetSizePosition(const Rectanglei &rect)
@@ -48,6 +53,7 @@ void Label::SetSizePosition(const Rectanglei &rect)
 
 void Label::SetText(std::string &new_txt)
 {
+  need_redrawing = true;
   delete txt_label;
   txt_label = new Text(new_txt, font_color, font);
 }

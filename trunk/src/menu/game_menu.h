@@ -40,8 +40,13 @@ class GameMenu : public Menu
    Team * last_team;
 
    /* Map controllers */
-   ListBox *lbox_maps;
-   PictureWidget *map_preview_selected, *map_preview_before, *map_preview_after;  
+   uint selected_map_index;
+   PictureWidget *map_preview_selected;
+   PictureWidget *map_preview_before, *map_preview_before2;
+   PictureWidget *map_preview_after, *map_preview_after2;  
+   Label *map_name_label;
+   Label *map_author_label;
+   Button *bt_map_plus, *bt_map_minus;
    
    /* Game options controllers */
    Box * game_options;
@@ -51,7 +56,7 @@ class GameMenu : public Menu
    SpinButtonWithPicture *opt_energy_ini;
 
 
-   void ChangeMap();   
+   void ChangeMap(int delta_index);   
    void SelectTeamLogo(Team *t);
    void MoveTeams(ListBox * from, ListBox * to, bool sort);
 
