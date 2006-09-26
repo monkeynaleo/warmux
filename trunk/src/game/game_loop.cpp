@@ -587,6 +587,8 @@ void GameLoop::SetState(int new_state, bool begin_game)
     pause_seconde = global_time->Read();
 
     interaction_enabled = false; // Be sure that we can NOT play !
+    if(network.IsServer())
+      SyncCharacters(); // Send information about energy and the position of every character
     break;
   }
 }

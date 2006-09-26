@@ -65,6 +65,7 @@ private:
 
 Action* BuildActionSendCharacterPhysics(int team_no, int char_no);
 void SendGameMode();
+void SyncCharacters();
 
 //-----------------------------------------------------------------------------
 #endif
