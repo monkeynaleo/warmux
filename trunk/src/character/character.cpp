@@ -760,7 +760,7 @@ void Character::StartPlaying()
 
 uint Character::GetEnergy() const 
 {
-  assert (!IsDead());
+//  assert (!IsDead());
   return energy; 
 }
 
