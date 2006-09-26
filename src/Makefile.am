@@ -111,6 +111,7 @@ wormux_SOURCES = \
 	particles/ground_particles.cpp particles/ground_particles.h \
 	particles/magic_star.cpp particles/magic_star.h \
 	particles/particle.cpp particles/particle.h \
+	particles/polecat_fart.cpp particles/polecat_fart.h \
 	particles/smoke.cpp particles/smoke.h \
 	particles/star.cpp particles/star.h \
 	team/macro.h \

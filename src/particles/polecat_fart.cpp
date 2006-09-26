@@ -16,49 +16,32 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Polecat : send a polecat to the enemy. Close character get sick with the mefitic odor.
+ * Particle Engine
  *****************************************************************************/
 
-#ifndef POLECAT_H
-#define POLECAT_H
+#include "polecat_fart.h"
+#include "particle.h"
+#include "../character/character.h"
+#include "../game/time.h"
 
-#include <SDL.h>
-#include "grenade.h"
-#include "weapon.h"
-#include "../graphic/sprite.h"
-#include "../gui/progress_bar.h"
-#include "../include/base.h"
-#include "../object/physical_obj.h"
-
-class PolecatFart : public WeaponProjectile
+PolecatFart::PolecatFart() :
+  Particle("polecat_fart_particle")
 {
-  public:
-    PolecatFart(ExplosiveWeaponConfig& cfg,
-                WeaponLauncher * p_launcher);
-};
+  m_initial_time_to_live = 10;
+  m_left_time_to_live = m_initial_time_to_live;
+  m_time_between_scale = 100;
+  SetCollisionModel(false, true, false);
+  is_active = true;
 
-class Polecat : public WeaponProjectile
+  image = ParticleEngine::GetSprite(POLECAT_FART_spr);
+  image->Scale(1.0,1.0);
+  SetSize( Point2i(10, 10) );
+}
+
+void PolecatFart::SignalObjectCollision(PhysicalObj * obj)
 {
- private:
-  int m_sens;
-  int save_x, save_y;
-  uint last_fart_time;
-  double angle;
- protected:
-  void SignalOutOfMap();
- public:
-  Polecat(ExplosiveWeaponConfig& cfg,
-      WeaponLauncher * p_launcher);
-  void Shoot(double strength);
-  void Refresh();
-};
-
-class PolecatLauncher : public WeaponLauncher
-{
-public:
-  PolecatLauncher();
-protected:
-  WeaponProjectile * GetProjectileInstance();
-};
-
-#endif /* POLECAT_H */
+  if (!is_active) return;
+  Character * tmp = (Character *)obj;
+  tmp->SetEnergyDelta(-10);
+  is_active = false;
+}

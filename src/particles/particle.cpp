@@ -39,6 +39,7 @@
 #include "fire.h"
 #include "ground_particles.h"
 #include "magic_star.h"
+#include "polecat_fart.h"
 #include "smoke.h"
 #include "star.h"
 
@@ -153,6 +154,8 @@ void ParticleEngine::Init()
   particle_sprite[MAGIC_STAR_B_spr]->EnableRotationCache(32);
   particle_sprite[BULLET_spr] = resource_manager.LoadSprite(res,"bullet_particle");
   particle_sprite[BULLET_spr]->EnableRotationCache(6);
+  particle_sprite[POLECAT_FART_spr] = resource_manager.LoadSprite(res,"polecat_fart");
+  particle_sprite[POLECAT_FART_spr]->EnableRotationCache(6);
   resource_manager.UnLoadXMLProfile(res);
 }
 
@@ -187,6 +190,8 @@ void ParticleEngine::AddNow(const Point2i &position,
       case particle_STAR : particle = new StarParticle();
                            break;
       case particle_BULLET : particle = new BulletParticle();
+                           break;
+      case particle_POLECAT_FART : particle = new PolecatFart();
                            break;
       case particle_GROUND : particle = new GroundParticle(Point2i(10,10), position);
                            break;
