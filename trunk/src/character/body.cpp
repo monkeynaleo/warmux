@@ -603,7 +603,7 @@ void Body::MakeParticles(const Point2i& pos)
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
   if(current_clothe->layers[layer]->type != "weapon")
     ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->layers[layer]->spr,
-                                                  current_clothe->layers[layer]->GetPos()));
+                                                  current_clothe->layers[layer]->GetPos()+pos));
 }
 
 void Body::SetRotation(int angle)

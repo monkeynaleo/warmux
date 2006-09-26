@@ -209,7 +209,7 @@ void ParticleEngine::AddNow(const Point2i &position,
 
     if (particle != NULL) {
       if( norme == -1 )
-		  tmp_norme = double(randomObj.GetLong(0, 5000))/1000;
+		  tmp_norme = double(randomObj.GetLong(0, 5000))/100;
       else
 		  tmp_norme = norme;
 
