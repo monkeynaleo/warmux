@@ -294,6 +294,11 @@ void MapsList::SelectMapByIndex (uint index)
   terrain_actif = index;
 }
 
+int MapsList::GetActiveMapIndex ()
+{
+  return terrain_actif;
+}
+
 InfoMap& MapsList::ActiveMap()
 {
   assert (0 <= terrain_actif);

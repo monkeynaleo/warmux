@@ -113,29 +113,51 @@ GameMenu::GameMenu() :
 				       mainBoxWidth, mainBoxHeight));
   map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
+  // Create the buttons
+  bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus");
+  bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus");
+
+  map_box->AddWidget(bt_map_minus);
+
   Box * tmp_map_box = new VBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE, 
-				       mainBoxWidth-60, mainBoxHeight), false);
-
-  uint map_preview_height = mainBoxHeight - /*select_world_label->GetSizeY()*/ -2*10 -40;
+					   mainBoxWidth-80, mainBoxHeight), false);
+  tmp_map_box->SetMargin(0);
+  tmp_map_box->SetBorder( Point2i(0,0) );
+  uint map_preview_height = mainBoxHeight -2*10 -40;
   
-  tmp_box = new HBox( Rectanglei(0, 0, 1, map_preview_height+2*10 ), false);
-  tmp_box->SetMargin(10);
-  tmp_box->SetBorder( Point2i(0,0) );
+  // Previews
+  Box* previews_box = new HBox( Rectanglei(0, 0, 1, map_preview_height+10 ), false);
+  previews_box->SetMargin(10);
+  previews_box->SetBorder( Point2i(0,0) );
 
-  lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, map_preview_height ));
-  tmp_box->AddWidget(lbox_maps);
-
+  map_preview_before2 = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
+  previews_box->AddWidget(map_preview_before2);
+  
   map_preview_before = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
-  tmp_box->AddWidget(map_preview_before);
+  previews_box->AddWidget(map_preview_before);
 
+  // Selected map...
   map_preview_selected = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3, map_preview_height));
-  tmp_box->AddWidget(map_preview_selected);
+  previews_box->AddWidget(map_preview_selected);
 
   map_preview_after = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
-  tmp_box->AddWidget(map_preview_after);
+  previews_box->AddWidget(map_preview_after);
 
-  tmp_map_box->AddWidget(tmp_box);
-  map_box->AddWidget(tmp_map_box);
+  map_preview_after2 = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
+  previews_box->AddWidget(map_preview_after2);
+
+  tmp_map_box->AddWidget(previews_box);
+
+  // Map information
+  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *normal_font, gray_color, true);  
+  tmp_map_box->AddWidget(map_name_label);
+
+  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), gray_color, true);  
+  tmp_map_box->AddWidget(map_author_label);
+  
+  map_box->AddWidget(tmp_map_box);  
+
+  map_box->AddWidget(bt_map_plus);
   widgets.AddWidget(map_box);
 
   /* Choose other game options */
@@ -184,17 +206,8 @@ GameMenu::GameMenu() :
 
   // Load Maps' list
   std::sort(MapsList::GetInstance()->lst.begin(), MapsList::GetInstance()->lst.end(), compareMaps);
-
-  MapsList::iterator
-    terrain=MapsList::GetInstance()->lst.begin(),
-    fin_terrain=MapsList::GetInstance()->lst.end();
-  for (; terrain != fin_terrain; ++terrain)
-  {
-    bool choisi = terrain -> name == ActiveMap().name;
-    lbox_maps->AddItem (choisi, terrain -> name, terrain -> name);
-  }
-
-  ChangeMap();
+  selected_map_index = MapsList::GetInstance()->GetActiveMapIndex();
+  ChangeMap(0);
 
   // Load Teams' list
   teams_list.full_list.sort(compareTeams);
@@ -231,8 +244,10 @@ GameMenu::~GameMenu()
 
 void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  if (lbox_maps->Clic(mousePosition, button)) {
-    ChangeMap();
+  if (bt_map_minus->Contains(mousePosition)) {
+    ChangeMap(-1);
+  } else if (bt_map_plus->Contains(mousePosition)) {
+    ChangeMap(+1);
   } else if (lbox_all_teams->Clic(mousePosition, button)) {
 
   } else if (lbox_selected_teams->Clic(mousePosition, button)) {
@@ -249,14 +264,12 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
 
 void GameMenu::SaveOptions()
 {
-  // Save values
-  std::string map_id = lbox_maps->ReadLabel();
-  MapsList::GetInstance()->SelectMapByName (map_id);
-
+  MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
+  
   // teams
   std::vector<list_box_item_t> *
     selected_teams = lbox_selected_teams->GetItemsList();
-
+  
   if (selected_teams->size() > 1) {
     std::list<uint> selection;
 
@@ -297,22 +310,36 @@ void GameMenu::__sig_cancel()
   // Nothing to do
 }
 
-void GameMenu::ChangeMap()
+void GameMenu::ChangeMap(int delta_index)
 {
-  std::string map_id = lbox_maps->ReadLabel();
-  uint map = MapsList::GetInstance()->FindMapById(map_id);
-
-  map_preview_selected->SetSurface(MapsList::GetInstance()->lst[map].preview, true);
+  int tmp = selected_map_index + delta_index;
+  if (tmp < 0 || tmp > int(MapsList::GetInstance()->lst.size())) return;
   
-  if (map > 0)
-    map_preview_before->SetSurface(MapsList::GetInstance()->lst[map-1].preview, true);
+  selected_map_index = tmp;
+
+  map_preview_selected->SetSurface(MapsList::GetInstance()->lst[selected_map_index].preview, true);
+  map_name_label->SetText(MapsList::GetInstance()->lst[selected_map_index].name);
+  map_author_label->SetText(MapsList::GetInstance()->lst[selected_map_index].author_info);
+
+  if (selected_map_index > 0)
+    map_preview_before->SetSurface(MapsList::GetInstance()->lst[selected_map_index-1].preview, true);
   else 
     map_preview_before->SetNoSurface();
 
-  if (map+1 <= MapsList::GetInstance()->lst.size() )
-    map_preview_after->SetSurface(MapsList::GetInstance()->lst[map+1].preview, true);
+  if (selected_map_index > 1)
+    map_preview_before2->SetSurface(MapsList::GetInstance()->lst[selected_map_index-2].preview, true);
   else 
-    map_preview_after->SetNoSurface();
+    map_preview_before2->SetNoSurface();
+
+  if (selected_map_index+1 < MapsList::GetInstance()->lst.size() )
+    map_preview_after->SetSurface(MapsList::GetInstance()->lst[selected_map_index+1].preview, true);
+  else 
+    map_preview_after->SetNoSurface();  
+
+  if (selected_map_index+2 < MapsList::GetInstance()->lst.size() )
+    map_preview_after2->SetSurface(MapsList::GetInstance()->lst[selected_map_index+2].preview, true);
+  else 
+    map_preview_after2->SetNoSurface();
 }
 
 void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)

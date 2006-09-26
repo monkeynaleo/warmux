@@ -85,6 +85,7 @@ public:
   int FindMapById (const std::string &id);
   void SelectMapByName (const std::string &nom);
   void SelectMapByIndex (uint index);
+  int GetActiveMapIndex ();
   InfoMap& ActiveMap();
 };
 
