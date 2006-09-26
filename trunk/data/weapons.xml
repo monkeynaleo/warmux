@@ -191,7 +191,9 @@
   
   <surface name="polecatlauncher_ico" file="weapon/polecat/polecat_ico.png" />
   <surface name="polecatlauncher" file="weapon/polecat/polecatlauncher.png" />
-  <surface name="polecatfart" file="weapon/polecat/polecat_fart.png" />
+  <sprite name="polecat_fart">
+    <image file="weapon/polecat/polecat_fart.png" />
+  </sprite>
   <sprite name="polecat">
     <image file="weapon/polecat/polecat.png">
       <grid pos="0,0" size="47,38" array="1,1" />

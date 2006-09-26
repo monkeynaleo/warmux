@@ -34,6 +34,8 @@
 #include "../tool/i18n.h"
 #include "../network/randomsync.h"
 
+const uint TIME_BETWEEN_FART = 500;
+
 PolecatFart::PolecatFart(ExplosiveWeaponConfig& cfg,
                  WeaponLauncher * p_launcher) :
   WeaponProjectile("polecat_fart", cfg, p_launcher)
@@ -46,11 +48,13 @@ Polecat::Polecat(ExplosiveWeaponConfig& cfg,
   WeaponProjectile("polecat", cfg, p_launcher)
 {
   explode_with_collision = false;
+  last_fart_time = 0;
 }
 
 void Polecat::Shoot (double strength)
 {
   WeaponProjectile::Shoot(strength);
+  last_fart_time = Time::GetInstance()->Read() + TIME_BETWEEN_FART;
 
   save_x=GetX();
   save_y=GetY();
@@ -80,11 +84,14 @@ void Polecat::Refresh()
     save_y = y;
 
     //Do the jump
-    norme = randomSync.GetDouble(1.0, 4.0);
+    norme = randomSync.GetDouble(1.0, 2.0);
     PutOutOfGround();
     SetSpeedXY(Point2d(m_sens * norme , - norme * 3.0));
   }
-
+  if (last_fart_time + TIME_BETWEEN_FART < Time::GetInstance()->Read()) {
+    ParticleEngine::AddNow(GetPosition(), 1, particle_POLECAT_FART, true);
+    last_fart_time = Time::GetInstance()->Read();
+  }
   //Due to a bug in the physic engine
   //sometimes, angle==infinite (according to gdb) ??
   GetSpeed(norme, angle);

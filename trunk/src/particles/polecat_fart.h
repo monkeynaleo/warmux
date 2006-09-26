@@ -16,49 +16,20 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Polecat : send a polecat to the enemy. Close character get sick with the mefitic odor.
+ * Polecat Fart.
  *****************************************************************************/
 
-#ifndef POLECAT_H
-#define POLECAT_H
+#ifndef POLECAT_FART_H
+#define POLECAT_FART_H
+#include "particle.h"
 
-#include <SDL.h>
-#include "grenade.h"
-#include "weapon.h"
-#include "../graphic/sprite.h"
-#include "../gui/progress_bar.h"
-#include "../include/base.h"
-#include "../object/physical_obj.h"
-
-class PolecatFart : public WeaponProjectile
+class PolecatFart : public Particle
 {
+  private:
+    bool is_active;
   public:
-    PolecatFart(ExplosiveWeaponConfig& cfg,
-                WeaponLauncher * p_launcher);
+    PolecatFart();
+    void SignalObjectCollision(PhysicalObj * obj);
 };
 
-class Polecat : public WeaponProjectile
-{
- private:
-  int m_sens;
-  int save_x, save_y;
-  uint last_fart_time;
-  double angle;
- protected:
-  void SignalOutOfMap();
- public:
-  Polecat(ExplosiveWeaponConfig& cfg,
-      WeaponLauncher * p_launcher);
-  void Shoot(double strength);
-  void Refresh();
-};
-
-class PolecatLauncher : public WeaponLauncher
-{
-public:
-  PolecatLauncher();
-protected:
-  WeaponProjectile * GetProjectileInstance();
-};
-
-#endif /* POLECAT_H */
+#endif /* POLECAT_FART_H */
