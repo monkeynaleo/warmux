@@ -74,6 +74,12 @@ void ObjectsList::PlaceBarrels()
 void ObjectsList::AddObject (PhysicalObj* obj)
 {
   MSG_DEBUG("lst_objects","Adding \"%s\"(%p) to the object list", obj->GetName().c_str(), obj);
+  FOR_ALL_OBJECTS(it) 
+    if ( it->ptr == obj) {
+      MSG_DEBUG("lst_objects","Warning ! Adding \"%s\"(%p) 2 times to the object list", obj->GetName().c_str(), obj);
+      assert(false);
+      return;
+    }
   lst.push_back (object_t(obj,false));
 }
 
