@@ -125,7 +125,7 @@ class WeaponLauncher : public Weapon
 
     void Refresh();
     virtual void Draw();
-    void HandleKeyEvent(int action, int event_type);
+    virtual void HandleKeyEvent(int action, int event_type);
 
   // Handle of projectile events
     virtual void SignalProjectileExplosion();
