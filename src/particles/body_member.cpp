@@ -21,6 +21,7 @@
 
 #include "body_member.h"
 #include "particle.h"
+#include "tool/random.h"
 
 BodyMemberParticle::BodyMemberParticle(Sprite* spr, const Point2i& position) :
   Particle("body_member_particle")
@@ -31,8 +32,11 @@ BodyMemberParticle::BodyMemberParticle(Sprite* spr, const Point2i& position) :
   image->EnableRotationCache(32);
   assert(image->GetWidth() != 0 && image->GetHeight()!=0);
   SetXY(position);
+
   SetSize(image->GetSize());
-  angle = 0;
+  SetOnTop(true);
+  SetSpeed( (double)randomObj.GetLong(10, 15),
+        - (double)randomObj.GetLong(0, 3000)/1000.0);
 }
 
 void BodyMemberParticle::Refresh()
