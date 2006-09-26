@@ -48,9 +48,9 @@ void ShotgunBuckshot::RandomizeShoot(double &angle,double &strength)
   strength += randomSync.GetDouble(-SHOTGUN_RANDOM_STRENGTH,SHOTGUN_RANDOM_STRENGTH);
 }
 
-bool ShotgunBuckshot::IsOverlapping(PhysicalObj* obj)
+bool ShotgunBuckshot::IsOverlapping(const PhysicalObj* obj) const
 {
-  if(typeid(*obj) == typeid(ShotgunBuckshot)) return true;
+  if(GetName() == obj->GetName()) return true;
   return m_overlapping_object == obj;
 }
 
@@ -83,13 +83,14 @@ bool Shotgun::p_Shoot ()
 {  
   if (m_is_active)
     return false;
-  
   for(int i = 0; i < 4 ; i++) {
     projectile->Shoot(SHOTGUN_BUCKSHOT_SPEED);
     projectile = NULL;
     ReloadLauncher();
   }
   ShootSound();
+  m_last_fire_time = Time::GetInstance()->Read();
   m_is_active = true;
   return true;
 }
+
