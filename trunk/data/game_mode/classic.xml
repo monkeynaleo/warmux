@@ -312,10 +312,10 @@
       <position origin="over" x="0" y="-5" />
       <nb_ammo>-1</nb_ammo>
       <damage>20</damage>
-      <explosion_range>65</explosion_range>
-      <particle_range>71</particle_range>
-      <blast_range>4</blast_range>
-      <blast_force>7</blast_force>
+      <explosion_range>100</explosion_range>
+      <particle_range>110</particle_range>
+      <blast_force>3000</blast_force>
+      <blast_range>100</blast_range>
     </suicide>
 
     <teleportation>
