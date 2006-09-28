@@ -63,12 +63,14 @@ protected:
 
 class TuxLauncher : public WeaponLauncher
 {
-
+ private:
+  SuperTux * current_tux;
  public:
   TuxLauncher();
   void HandleKeyEvent(int action, int event_type);
  protected:
   WeaponProjectile * GetProjectileInstance();
+  bool p_Shoot();
  private:
   SuperTuxWeaponConfig& cfg();
 };

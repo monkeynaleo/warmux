@@ -78,7 +78,6 @@ void SuperTux::Refresh()
   particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle, 0);
 }
 
-
 void SuperTux::turn_left()
 {  
   time_now = Time::GetInstance()->Read();
@@ -134,18 +133,24 @@ WeaponProjectile * TuxLauncher::GetProjectileInstance()
       (new SuperTux(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
+bool TuxLauncher::p_Shoot ()
+{
+  current_tux = static_cast<SuperTux *>(projectile);
+  return WeaponLauncher::p_Shoot();
+}
+
 void TuxLauncher::HandleKeyEvent(int action, int event_type)
 {
   switch (action)
   {
   case ACTION_MOVE_LEFT:
     if (event_type != KEY_RELEASED)
-      static_cast<SuperTux *>(projectile)->turn_left();
+      current_tux->turn_left();
     break ;
     
   case ACTION_MOVE_RIGHT:
     if (event_type != KEY_RELEASED)
-      static_cast<SuperTux *>(projectile)->turn_right();
+      current_tux->turn_right();
     break ;
     
   default:
