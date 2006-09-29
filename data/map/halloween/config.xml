@@ -19,15 +19,15 @@
 
     <sprite name="wind_particle">
       <image file="confetis.png">
-        <grid pos="0,0" size="48,36" array="48,1"/>
+        <grid pos="15,0" size="48,36" array="48,1"/>
       </image>
       <animation speed="100" />
     </sprite>
 
   <wind>
-    <nbr_sprite>30</nbr_sprite>
-    <mass>0.3</mass>
-    <wind_factor>4</wind_factor>
+    <nbr_sprite>15</nbr_sprite>
+    <mass>4.3</mass>
+    <wind_factor>3.3</wind_factor>
   </wind>
 
 </resources>
