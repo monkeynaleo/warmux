@@ -16,27 +16,27 @@ msgstr ""
 "X-Generator: KBabel 1.11.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/map/maps_list.cpp:279
+#: src/map/maps_list.cpp:283
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Banen %s ikke fundet :-("
 
-#: src/game/game_loop.cpp:676
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (fra holdet %s) blev dræbt."
 
-#: src/map/maps_list.cpp:105
+#: src/map/maps_list.cpp:103
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> også kendt som %s fra %s"
 
-#: src/map/maps_list.cpp:112
+#: src/map/maps_list.cpp:110
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
 
-#: src/game/game_loop.cpp:655
+#: src/game/game_loop.cpp:657
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begår selvmord !"
@@ -46,36 +46,36 @@ msgstr "%s begår selvmord !"
 msgid "%s fps"
 msgstr "%s FPS"
 
-#: src/game/game_loop.cpp:648
+#: src/game/game_loop.cpp:650
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s faldt i vandet."
 
-#: src/game/game_loop.cpp:659
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s faldt ud af banen!"
 
-#: src/object/bonus_box.cpp:157
+#: src/object/bonus_box.cpp:150
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s har mistet %u point energi."
 msgstr[1] "%s har mistet %u point energi."
 
-#: src/object/bonus_box.cpp:148
+#: src/object/bonus_box.cpp:141
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s har fået %u point energi!"
 msgstr[1] "%s har fået %u point energi!"
 
-#: src/game/game_loop.cpp:670
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s er en psychopat; han dræbte en fra holdet %s!"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:667
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s døde fordi han var klodset!"
@@ -85,35 +85,35 @@ msgstr "%s døde fordi han var klodset!"
 msgid "%s is next to a mine!"
 msgstr "%s er ved en mine!"
 
-#: src/object/bonus_box.cpp:175
+#: src/object/bonus_box.cpp:168
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "Holdet %s har vundet %u automatisk bazooka!"
 msgstr[1] "Holdet %s har vundet %u automatiske bazookaer!"
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:177
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "Holdet %s har vundet %u oprørsbombe!"
 msgstr[1] "Holdet %s har vundet %u oprørsbomber!"
 
-#: src/object/bonus_box.cpp:194
+#: src/object/bonus_box.cpp:187
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "Holdet %s har fået %u dynamitstang."
 msgstr[1] "Holdet %s har fået %u dynamitstænger."
 
-#: src/object/bonus_box.cpp:139
+#: src/object/bonus_box.cpp:132
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "Holdet %s har fået %u teleportation."
 msgstr[1] "Holdet %s har fået %u teleportationer."
 
-#: src/object/bonus_box.cpp:166
+#: src/object/bonus_box.cpp:159
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -128,11 +128,11 @@ msgstr "(død)"
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
-#: src/map/maps_list.cpp:127
+#: src/map/maps_list.cpp:125
 msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgstr "<infinite_background> kræver <is_open> for at virke ordentligt!!"
 
-#: src/object/bonus_box.cpp:170 src/weapon/air_attack.cpp:156
+#: src/object/bonus_box.cpp:163 src/weapon/air_attack.cpp:156
 msgid "Air attack"
 msgstr "Luftangreb"
 
@@ -140,7 +140,7 @@ msgstr "Luftangreb"
 msgid "Authors:"
 msgstr "Forfattere:"
 
-#: src/object/bonus_box.cpp:179 src/weapon/auto_bazooka.cpp:111
+#: src/object/bonus_box.cpp:172 src/weapon/auto_bazooka.cpp:111
 msgid "Automatic bazooka"
 msgstr "Automatisk bazooka"
 
@@ -166,7 +166,7 @@ msgstr "Kan ikke finde holdet %s!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan ikke åbne hold kataloget (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:135
+#: src/weapon/cluster_bomb.cpp:129
 msgid "ClusterBomb"
 msgstr "Klyngebombe"
 
@@ -182,15 +182,15 @@ msgstr "Udviklere"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Vil du virkelig afslutte? (Y/N)"
 
-#: src/menu/game_menu.cpp:147
+#: src/menu/game_menu.cpp:175
 msgid "Duration of a turn:"
 msgstr "Længden af en tur:"
 
-#: src/menu/game_menu.cpp:152
+#: src/menu/game_menu.cpp:181
 msgid "Duration of the end of a turn:"
 msgstr "Længde på slutningen af en tur:"
 
-#: src/object/bonus_box.cpp:198 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:191 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -213,7 +213,7 @@ msgstr "Fejl i indlæsning af hold %s:"
 msgid "Error loading team's data %s:"
 msgstr "Fejl i indlæsning af holds data %s:"
 
-#: src/game/config.cpp:250
+#: src/game/config.cpp:249
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -249,13 +249,9 @@ msgstr "Fejl: kan ikke kroppen \"%s\" for holdet \"%s\"."
 msgid "Find a random position for characters"
 msgstr "Finder en tilfældig position til krigerne"
 
-#: src/menu/options_menu.cpp:73
+#: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Fuld skærm?"
-
-#: src/menu/game_menu.cpp:144
-msgid "Game options"
-msgstr "Spilindstillinger"
 
 #: src/weapon/grenade.cpp:69
 msgid "Grenade"
@@ -273,11 +269,11 @@ msgstr "Skyder"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:703
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:162
+#: src/menu/game_menu.cpp:192
 msgid "Initial energy:"
 msgstr "Energi som udgangspunkt:"
 
@@ -302,11 +298,11 @@ msgstr "Klargører objekter"
 msgid "Initialise teams"
 msgstr "Klargører hold"
 
-#: src/object/bonus_box.cpp:244
+#: src/object/bonus_box.cpp:237
 msgid "Is it a gift?"
 msgstr "Er det en gave?"
 
-#: src/map/maps_list.cpp:209
+#: src/map/maps_list.cpp:192
 msgid "Load maps:"
 msgstr "Indlæser baner:"
 
@@ -323,7 +319,7 @@ msgstr "Banen %s, en kreation af:"
 msgid "Maps"
 msgstr "Baner"
 
-#: src/menu/options_menu.cpp:68
+#: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
 msgstr "Maksimum FPS:"
 
@@ -331,7 +327,7 @@ msgstr "Maksimum FPS:"
 msgid "Mine"
 msgstr "Mine"
 
-#: src/menu/options_menu.cpp:100
+#: src/menu/options_menu.cpp:99
 msgid "Music?"
 msgstr "Musik?"
 
@@ -348,7 +344,7 @@ msgstr "Netværksspil"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Intet <%s> element fundet i XML konfigurationsfilen!"
 
-#: src/menu/game_menu.cpp:157
+#: src/menu/game_menu.cpp:187
 msgid "Number of players per team:"
 msgstr "Antal krigere per hold:"
 
@@ -360,12 +356,12 @@ msgstr "Instillinger"
 msgid "Play"
 msgstr "Spil"
 
-#: src/menu/options_menu.cpp:79
+#: src/menu/options_menu.cpp:68
 #, fuzzy
 msgid "Player energy?"
 msgstr "Vis krigers energi?"
 
-#: src/menu/options_menu.cpp:82
+#: src/menu/options_menu.cpp:71
 #, fuzzy
 msgid "Player's name?"
 msgstr "Vis krigers navn?"
@@ -382,7 +378,7 @@ msgstr "Afslut"
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
-#: src/object/bonus_box.cpp:188
+#: src/object/bonus_box.cpp:181
 msgid "Riot bomb"
 msgstr "Oprørsbombe"
 
@@ -390,15 +386,11 @@ msgstr "Oprørsbombe"
 msgid "Run game"
 msgstr "Kør spil"
 
-#: src/menu/game_menu.cpp:75
+#: src/menu/game_menu.cpp:76
 msgid "Select the teams:"
 msgstr "Vælg holdene:"
 
-#: src/menu/game_menu.cpp:118
-msgid "Select the world:"
-msgstr "Vælg banen:"
-
-#: src/menu/options_menu.cpp:103
+#: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
 msgstr "Lydeffekter?"
 
@@ -418,7 +410,7 @@ msgstr "Lager:"
 msgid "Teams"
 msgstr "Hold"
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:136 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportation"
 
@@ -439,7 +431,7 @@ msgstr "Raketten har forladt slagmarken..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Ikke i stand til at klargøre SDL bibliotek: %s"
 
-#: src/map/maps_list.cpp:221 src/map/maps_list.cpp:237
+#: src/map/maps_list.cpp:204 src/map/maps_list.cpp:220
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
@@ -464,12 +456,12 @@ msgstr "Våben"
 msgid "Website: "
 msgstr "Hjemmeside: "
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hvilken skam for %s - han blev dræbt af en simpel skyder!"
 
-#: src/menu/options_menu.cpp:76
+#: src/menu/options_menu.cpp:65
 #, fuzzy
 msgid "Wind particles?"
 msgstr "Vis vindpartikler?"
@@ -482,12 +474,12 @@ msgstr "Wormux starter..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/map/maps_list.cpp:74
+#: src/map/maps_list.cpp:72
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "XML fejl under indlæsning af bane '%s' :"
 
-#: src/map/maps_list.cpp:257
+#: src/map/maps_list.cpp:240
 msgid "You need at least one valid map !"
 msgstr "Du har brug for mindst én gyldig bane !"
 
@@ -501,13 +493,19 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Du har brug for mindst to gyldige hold !"
 
-#: src/weapon/launcher.cpp:52
+#: src/weapon/launcher.cpp:57
 msgid "Your shot has missed!"
 msgstr "Dit skud missede!"
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "færdig"
+
+#~ msgid "Game options"
+#~ msgstr "Spilindstillinger"
+
+#~ msgid "Select the world:"
+#~ msgstr "Vælg banen:"
 
 #~ msgid "Graphic options"
 #~ msgstr "Grafiske instillinger"
