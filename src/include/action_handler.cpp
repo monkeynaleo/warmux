@@ -76,6 +76,9 @@ void SyncCharacters()
 
     for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
+      if((*tit).IsDead())
+        continue;
+
       // cliens : Place characters
       Action* a = BuildActionSendCharacterPhysics(team_no, char_no);
       action_handler->NewAction(a);
