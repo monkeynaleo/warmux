@@ -187,6 +187,7 @@ std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<Distant
   {
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections
+    printf("Allowing new connections\n");
     AcceptIncoming();
   }
 
@@ -229,7 +230,7 @@ void Network::ReceiveActions()
 
   while(m_is_connected && (cpu.size()==1 || m_is_server))
   {
-    while(SDLNet_CheckSockets(socket_set, 10) == 0 && m_is_connected) //Loop while nothing is received
+    while(SDLNet_CheckSockets(socket_set, 100) == 0 && m_is_connected) //Loop while nothing is received
     if(m_is_server && server_socket)
     {
       // Check for an incoming connection
@@ -237,7 +238,6 @@ void Network::ReceiveActions()
       incoming = SDLNet_TCP_Accept(server_socket);
       if(incoming)
       {
-        SDLNet_TCP_AddSocket(socket_set, incoming);
         cpu.push_back(new DistantComputer(incoming));
         connected_player++;
         printf("New client connected\n");
@@ -253,7 +253,7 @@ void Network::ReceiveActions()
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
         // Read the size of the packet
-	int packet_size = (*dst_cpu)->ReceiveDatas(packet);
+        int packet_size = (*dst_cpu)->ReceiveDatas(packet);
         if( packet_size <= 0)
         {
           dst_cpu = CloseConnection(dst_cpu);
@@ -266,13 +266,13 @@ void Network::ReceiveActions()
 
         if( a->GetType() == ACTION_NEW_TEAM
         &&  a->GetType() == ACTION_DEL_TEAM)
-	{
+        {
           (*dst_cpu)->ManageTeam(a);
-	  delete a;
+          delete a;
         }
-	else
-	if(a->GetType() == ACTION_CHAT_MESSAGE)
-	{
+        else
+        if(a->GetType() == ACTION_CHAT_MESSAGE)
+        {
           (*dst_cpu)->SendChatMessage(a);
           delete a;
         }
@@ -291,7 +291,7 @@ void Network::ReceiveActions()
         {
           (*client)->SendDatas(packet, packet_size);
         }
-	free(packet);
+        free(packet);
       }
       dst_cpu++;
     }
