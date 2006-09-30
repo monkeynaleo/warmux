@@ -24,6 +24,7 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <SDL_thread.h>
+#include <SDL_mutex.h>
 #include "../include/base.h" 
 #include <list>
 #include <string>
@@ -31,6 +32,7 @@
 //-----------------------------------------------------------------------------
 class DistantComputer
 {
+  SDL_mutex* sock_lock;
   TCPsocket sock;
   std::list<std::string> owned_teams;
 public:
