@@ -22,6 +22,8 @@
 #include <string>
 #include <string.h>
 #include <stdarg.h>
+#include <sys/types.h>
+#include <unistd.h>
 #include "../include/base.h"
 
 /**
@@ -52,8 +54,9 @@ void PrintDebug (const char *filename, const char *function, unsigned long line,
 				continue;
 	        
 			va_list argp;
-			
-			fprintf(stderr, "DEBUG (%s:%s:%ld) %s : ", filename, function, line, level);
+			int pid = (int)getpid();
+
+			fprintf(stderr, "%i|%s:%s:%ld| %s : ", pid, filename, function, line, level);
 	        va_start(argp, message);
 	        vfprintf(stderr, message, argp);
 	        va_end(argp);
