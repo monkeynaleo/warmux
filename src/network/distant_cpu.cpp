@@ -35,6 +35,8 @@
 DistantComputer::DistantComputer(TCPsocket new_sock)
   : sock(new_sock)
 {
+  sock_lock = SDL_CreateMutex();
+
   SDLNet_TCP_AddSocket(network.socket_set, sock);
 
   // If we are the server, we have to tell this new computer
@@ -85,6 +87,8 @@ DistantComputer::~DistantComputer()
     }
   }
   owned_teams.clear();
+
+  SDL_DestroyMutex(sock_lock);
 }
 
 bool DistantComputer::SocketReady()
@@ -94,6 +98,9 @@ bool DistantComputer::SocketReady()
 
 int DistantComputer::ReceiveDatas(char* & buf)
 {
+  SDL_LockMutex(sock_lock);
+MSG_DEBUG("network","locked");
+
   // Firstly, we read the size of the incoming packet
   Uint32 net_size;
   if(SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
@@ -109,8 +116,11 @@ int DistantComputer::ReceiveDatas(char* & buf)
   while(total_received != size)
   {
     int received = SDLNet_TCP_Recv(sock, buf + total_received, size - total_received);
-    if(received > 0)
+    if(received > 0)	
+    {
+      MSG_DEBUG("network", "%i received", received);
       total_received += received;
+    }
 
     if(received < 0)
     {
@@ -120,15 +130,23 @@ int DistantComputer::ReceiveDatas(char* & buf)
       break;
     }
   }
+  SDL_UnlockMutex(sock_lock);
+MSG_DEBUG("network","unlocked");
   return total_received;
 }
 
 void DistantComputer::SendDatas(char* packet, int size_tmp)
 {
+  SDL_LockMutex(sock_lock);
+MSG_DEBUG("network","locked");
   Uint32 size;
   SDLNet_Write32(size_tmp, &size);
   SDLNet_TCP_Send(sock,&size,4);
   SDLNet_TCP_Send(sock,packet, size_tmp);
+  MSG_DEBUG("network","%i sent", 4 + size_tmp);
+
+  SDL_UnlockMutex(sock_lock);
+MSG_DEBUG("network","unlocked");
 }
 
 std::string DistantComputer::GetAdress()
