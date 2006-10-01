@@ -87,7 +87,6 @@ Character::Character (Team& my_team, const std::string &name) :
   pause_bouge_dg = 0;
   previous_strength = 0;
   energy = 100;
-  lost_energy = 0;
   channel_step = -1;
   hidden = false;
   do_nothing_time = 0;
