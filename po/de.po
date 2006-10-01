@@ -220,7 +220,8 @@ msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
 
 #: src/game/config.cpp:249
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
@@ -271,7 +272,8 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr ""
+"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #: src/game/game_loop.cpp:703
 msgid "Hurry up, you are too slow !!"
@@ -420,7 +422,8 @@ msgstr "Teleportation"
 
 #: src/weapon/cluster_bomb.cpp:97
 msgid "The Cluster Bomb left the battlefield before it could explode."
-msgstr "Die Streubombe hat das Schlachtfeld verlassen bevor sie explodieren konnte."
+msgstr ""
+"Die Streubombe hat das Schlachtfeld verlassen bevor sie explodieren konnte."
 
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
@@ -648,4 +651,3 @@ msgstr "fertig"
 
 #~ msgid "parachute"
 #~ msgstr "Fallschirm"
-
