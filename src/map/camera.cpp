@@ -32,7 +32,7 @@
 #include "../tool/rectangle.h"
 #include "../tool/math_tools.h"
 
-// Marge de cadrage 
+// Marge de cadrage
 const int MARGE = 200;
 const double VITESSE_CAMERA = 20;
 const Point2i marge(200, 200);
@@ -63,15 +63,15 @@ Point2i Camera::NonFreeDegrees() const{
 	return Point2i(1, 1) - FreeDegrees();
 }
 
-void Camera::SetXYabs(int x, int y){ 
+void Camera::SetXYabs(int x, int y){
   AppWormux * app = AppWormux::GetInstance();
 
-  if( !ActiveMap().infinite_bg ){
+  if( !ActiveMap().HasInfiniteBackGround() ){
     if( !HasFixedX() )
       position.x = BorneLong(x, 0, world.GetWidth() - GetSizeX());
     else
       position.x = - (app->video.window.GetWidth() - world.GetWidth())/2;
-    
+
 	if( !HasFixedY() )
       position.y = BorneLong(y, 0, world.GetHeight()-GetSizeY());
     else
@@ -95,7 +95,7 @@ void Camera::SetXY(Point2i pos){
 	pos = pos * FreeDegrees();
 	if( pos.IsNull() )
 		return;
-	
+
 	SetXYabs(position + pos);
 }
 
@@ -121,7 +121,7 @@ void Camera::CenterOn(const PhysicalObj &obj){
 void Camera::AutoRecadre(){
   if( !obj_suivi || obj_suivi -> IsGhost() )
     return;
-  
+
   if( !IsVisible(*obj_suivi) )
   {
     MSG_DEBUG("camera.scroll", "The object is not visible.");
@@ -131,18 +131,18 @@ void Camera::AutoRecadre(){
 
   Point2i pos = obj_suivi->GetPosition();
   Point2i size = obj_suivi->GetSize();
-  
-  if( pos.y < 0 && !ActiveMap().infinite_bg )
+
+  if( pos.y < 0 && !ActiveMap().HasInfiniteBackGround() )
     pos.y = 0;
 
   Point2i dstMax = GetSize()/2 - marge;
   Point2i cameraBR = GetSize() + position;
   Point2i objectBRmargin = pos + size + marge;
   Point2i dst(0, 0);
- 
+
   dst += cameraBR.inf(objectBRmargin) * (objectBRmargin - cameraBR);
   dst += (pos - marge).inf(position) * (pos - marge - position);
-  
+
   SetXY( dst * vitesseCamera / dstMax );
 }
 
@@ -153,13 +153,13 @@ void Camera::Refresh(){
   Mouse::GetInstance()->TestCamera();
   if (lance) return;
 
-#ifdef TODO_KEYBOARD // ??? 
+#ifdef TODO_KEYBOARD // ???
   // Camera au clavier
   clavier.TestCamera();
   if (lance)
     return;
 #endif
-   
+
   if (autorecadre)
     AutoRecadre();
 }
@@ -168,7 +168,7 @@ void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
 			     bool force_recentrage){
   MSG_DEBUG( "camera.tracking", "Following object %s, recentre=%d, suit=%d", obj->GetName().c_str(), recentre, suit);
   if (recentre)
-  if ((obj_suivi != obj) || !IsVisible(*obj) || force_recentrage) 
+  if ((obj_suivi != obj) || !IsVisible(*obj) || force_recentrage)
   {
     bool visible = IsVisible(*obj);
     CenterOn(*obj);

@@ -43,7 +43,7 @@ ObjectsList lst_objects;
 void ObjectsList::PlaceMines()
 {
   MSG_DEBUG("lst_objects","Placing mines");
-  for (uint i=0; i<ActiveMap().nb_mine; ++i)
+  for (uint i=0; i<ActiveMap().GetNbMine(); ++i)
   {
     ObjMine *obj = new ObjMine(*MineConfig::GetInstance());
 
@@ -58,7 +58,7 @@ void ObjectsList::PlaceMines()
 void ObjectsList::PlaceBarrels()
 {
   MSG_DEBUG("lst_objects","Placing barrels");
-  for (uint i= 0; i<ActiveMap().nb_barrel; ++i)
+  for (uint i= 0; i<ActiveMap().GetNbBarrel(); ++i)
   {
     PetrolBarrel *obj = new PetrolBarrel();
 
@@ -74,7 +74,7 @@ void ObjectsList::PlaceBarrels()
 void ObjectsList::AddObject (PhysicalObj* obj)
 {
   MSG_DEBUG("lst_objects","Adding \"%s\"(%p) to the object list", obj->GetName().c_str(), obj);
-  FOR_ALL_OBJECTS(it) 
+  FOR_ALL_OBJECTS(it)
     if ( it->ptr == obj) {
       MSG_DEBUG("lst_objects","Warning ! Adding \"%s\"(%p) 2 times to the object list", obj->GetName().c_str(), obj);
       assert(false);
