@@ -108,7 +108,7 @@ void Action_MoveLeft (Action *a)
 void Action_Jump (Action *a)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
-  ActiveCharacter().Jump(); 
+  ActiveCharacter().Jump();
 }
 
 void Action_HighJump (Action *a)
@@ -194,7 +194,7 @@ void Action_SetCharacterEnergy(Action *a)
   team_no = a->PopInt();
   char_no = a->PopInt();
   Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->SetEnergy( a->PopInt() );  
+  c->SetEnergy( a->PopInt() );
 }
 
 void Action_SetFrame (Action *a)
@@ -494,7 +494,7 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   if (repeat_to_network) network.SendAction(a);
 }
 
-void ActionHandler::Register (Action_t action, 
+void ActionHandler::Register (Action_t action,
 		                      const std::string &name,callback_t fct)
 {
   handler[action] = fct;
@@ -559,5 +559,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_CONSTRUCTION_DOWN, "construction_down", &Action_ConstructionDown);
   Register (ACTION_WEAPON_STOP_USE, "weapon_stop_use", &Action_WeaponStopUse);
   Register (ACTION_SET_CHARACTER_ENERGY, "set_character_energy", &Action_SetCharacterEnergy);
+  Register (ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
   SDL_UnlockMutex(mutex);
 }
