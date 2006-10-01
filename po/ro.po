@@ -166,6 +166,10 @@ msgstr "Bâtă de basebal"
 msgid "Bazooka"
 msgstr "Proiectil reactiv"
 
+#: src/weapon/blowtorch.cpp:14
+msgid "Blowtorch"
+msgstr ""
+
 #: src/main.cpp:111
 msgid "C++ exception caught:"
 msgstr "O excepţie C++ a fost captată:"

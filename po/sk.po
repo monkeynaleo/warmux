@@ -154,6 +154,10 @@ msgstr "Basebal"
 msgid "Bazooka"
 msgstr "Raketomet"
 
+#: src/weapon/blowtorch.cpp:14
+msgid "Blowtorch"
+msgstr ""
+
 #: src/main.cpp:111
 msgid "C++ exception caught:"
 msgstr "Zachytená výnimka C++ :"
