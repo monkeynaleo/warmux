@@ -154,6 +154,10 @@ msgstr "Baseball"
 msgid "Bazooka"
 msgstr "Rakétavető"
 
+#: src/weapon/blowtorch.cpp:14
+msgid "Blowtorch"
+msgstr ""
+
 #: src/main.cpp:111
 msgid "C++ exception caught:"
 msgstr "Elfogtam egy C++ kivételt:"

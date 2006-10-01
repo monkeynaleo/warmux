@@ -64,6 +64,7 @@ POTFILES = \
 	src/weapon/auto_bazooka.cpp \
 	src/weapon/baseball.cpp \
 	src/weapon/bazooka.cpp \
+	src/weapon/blowtorch.cpp \
 	src/weapon/cluster_bomb.cpp \
 	src/weapon/crosshair.cpp \
 	src/weapon/dynamite.cpp \
