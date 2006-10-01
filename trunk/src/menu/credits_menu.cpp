@@ -38,7 +38,7 @@ public:
 
   bool Feed (const xmlpp::Node *node);
   std::string PrettyString(bool with_email);
-};    
+};
 
 //-----------------------------------------------------------------------------
 
@@ -76,12 +76,12 @@ std::string Author::PrettyString(bool with_email)
 
 CreditsMenu::CreditsMenu()  :
   Menu("menu/bg_network", vOk)
-{  
+{
   int title_height = AppWormux::GetInstance()->video.window.GetHeight() * 110 / 600;
-  ListBox * lbox_authors = new ListBox( Rectanglei( 30, title_height, 
-						    AppWormux::GetInstance()->video.window.GetWidth()-60,  
-						    AppWormux::GetInstance()->video.window.GetHeight()-60-title_height));
-  lbox_authors->always_one_selected = false;
+  ListBox * lbox_authors = new ListBox( Rectanglei( 30, title_height,
+						    AppWormux::GetInstance()->video.window.GetWidth()-60,
+						    AppWormux::GetInstance()->video.window.GetHeight()-60-title_height),
+                                        false);
 
   widgets.AddWidget(lbox_authors);
 
@@ -92,7 +92,7 @@ CreditsMenu::~CreditsMenu()
 {
 }
 
-void CreditsMenu::__sig_ok() 
+void CreditsMenu::__sig_ok()
 {
   // Nothing to do
 }
@@ -110,7 +110,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
   {
     // Error: do something ...
     return;
-  } 
+  }
 
   xmlpp::Node::NodeList sections = doc.racine() -> get_children("section");
   xmlpp::Node::NodeList::iterator
