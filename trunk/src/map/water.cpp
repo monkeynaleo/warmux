@@ -41,7 +41,7 @@ const float t = (GO_UP_OSCILLATION_TIME*1000.0);
 const float a = GO_UP_STEP/t;
 const float b = 1.0;
 
-void Water::Init(){ 
+void Water::Init(){
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
    surface = resource_manager.LoadImage(res, "gfx/water");
    surface.SetAlpha(0, 0);
@@ -50,7 +50,7 @@ void Water::Init(){
 }
 
 void Water::Reset(){
-  actif = ActiveMap().use_water;
+  actif = ActiveMap().UseWater();
   if(!actif) return;
   Init();
   hauteur_eau = WATER_INITIAL_HEIGHT;
@@ -107,11 +107,11 @@ void Water::Refresh(){
 
   double angle1 = 0;
   double angle2 = shift1;
-  do 
+  do
   {
     int offset=0;
     double y_pos = y + sin(angle1)*10 + sin(angle2)*10;
-	
+
     if (0<=x+offset)
 	 height.at(x+offset) = (int)y_pos;
 

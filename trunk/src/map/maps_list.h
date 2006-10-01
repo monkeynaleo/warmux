@@ -32,14 +32,8 @@
 class InfoMap{
 public:
   std::string name;
-  uint nb_mine;
-  uint nb_barrel;
-  bool use_water;
-  bool is_opened;
-  bool infinite_bg;
   Surface preview;
   Surface img_terrain, img_ciel;
-  Profile *res_profile;
   std::string author_info;
   std::string m_directory;
   struct s_wind
@@ -50,11 +44,26 @@ public:
   } wind;
 
 private:
+  uint nb_mine;
+  uint nb_barrel;
+
+  bool is_opened;
+  bool infinite_bg;
+  bool use_water;
   bool m_donnees_chargees;
-  void LoadData();
+
+  Profile *res_profile;
+
   bool TraiteXml (xmlpp::Element *xml);
+  void LoadData();
 
 public:
+  uint GetNbBarrel() const { return nb_barrel; }
+  uint GetNbMine() const { return nb_mine; }
+  const Profile * const ResProfile() const { return res_profile; }
+  bool IsOpened() const { return is_opened; }
+  bool HasInfiniteBackGround() const { return infinite_bg; }
+  bool UseWater() const { return use_water; }
   InfoMap ();
   Surface ReadImgGround();
   Surface ReadImgSky();

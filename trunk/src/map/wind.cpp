@@ -45,12 +45,12 @@ WindParticle::WindParticle(std::string &xml_file) :
 {
   SetCollisionModel(true, false, false);
 
-  sprite = resource_manager.LoadSprite( ActiveMap().res_profile, "wind_particle");
+  sprite = resource_manager.LoadSprite( ActiveMap().ResProfile(), "wind_particle");
 //  if(sprite->GetFrameCount()==1)
 //    sprite->cache.EnableLastFrameCache();
   sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
-   
-  double mass, wind_factor ; 
+
+  double mass, wind_factor ;
 
   //Mass = mass_mean + or - 25%
   mass = GetMass();
@@ -58,7 +58,7 @@ WindParticle::WindParticle(std::string &xml_file) :
   SetMass (mass);
   SetSize( sprite->GetSize() );
   wind_factor = GetWindFactor() ;
-  wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);  
+  wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
   SetWindFactor(wind_factor);
   StartMoving();
   SetAirResistFactor(GetAirResistFactor() * (1.0 + randomObj.GetLong(-100, 100)/400.0));
@@ -192,7 +192,7 @@ void Wind::Refresh(){
     if(m_val<m_nv_val)
       ++m_val;
     m_last_move = Time::GetInstance()->Read();
-    barre.Actu(m_val); 
+    barre.Actu(m_val);
   }
 
   iterator it=particles.begin(), end=particles.end();

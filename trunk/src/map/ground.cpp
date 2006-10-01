@@ -35,13 +35,13 @@
 #include "../tool/resource_manager.h"
 
 Ground::Ground()
-{ //FIXME (a effacer) 
+{ //FIXME (a effacer)
 }
 
 void Ground::Init(){
   std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
-  
+
   // Load ground data
   Surface m_image = ActiveMap().ReadImgGround();
   LoadImage ( m_image );
@@ -49,9 +49,9 @@ void Ground::Init(){
   // V�ifie la taille du terrain
   assert(Constants::MAP_MIN_SIZE <= GetSize());
   assert(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
-  
+
   // V�ifie si c'est un terrain ouvert ou ferm�
-  ouvert = ActiveMap().is_opened;
+  ouvert = ActiveMap().IsOpened();
 
   std::cout << _("done") << std::endl;
 }
@@ -62,9 +62,9 @@ void Ground::Reset(){
 }
 
 // Lit la valeur alpha du pixel (x,y)
-bool Ground::IsEmpty(const Point2i &pos){ 
+bool Ground::IsEmpty(const Point2i &pos){
 	assert( !world.EstHorsMondeXY(pos.x, pos.y) );
-	if( ActiveMap().infinite_bg){
+	if( ActiveMap().HasInfiniteBackGround()){
 		if( !Contains(pos) )
 			return true;
 	}
@@ -90,7 +90,7 @@ double Ground::Tangeante(int x,int y){
   Point2i p1,p2,p3,p4;
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
     return -1.0;
-  
+
   if(!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y))
   {
     p2.x = x;
@@ -114,7 +114,7 @@ double Ground::Tangeante(int x,int y){
     return M_PI;
 
   assert (p3.x != p4.x);
-  
+
   double tangeante = atan((double)(p4.y-p3.y)/(double)(p4.x-p3.x));
 
   while(tangeante <= 0.0)
@@ -136,7 +136,7 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   || world.EstHorsMonde(Point2i(x,y-1))
   || world.EstHorsMonde(Point2i(x,y+1)) )
     return false;
-   
+
   //regarde en haut �gauche
   if(x-1 != pas_bon_x
   || y-1 != pas_bon_y)
@@ -236,7 +236,7 @@ void Ground::Draw()
   Point2i cPos = camera.GetPosition();
   Point2i windowSize = app->video.window.GetSize();
   Point2i margin = (windowSize - GetSize())/2;
-  
+
   if( camera.HasFixedX() ){// ground is less wide than screen !
     app->video.window.BoxColor( Rectanglei(0, 0, margin.x, windowSize.y), black_color);
     app->video.window.BoxColor( Rectanglei(windowSize.x - margin.x, 0, margin.x, windowSize.y), black_color);

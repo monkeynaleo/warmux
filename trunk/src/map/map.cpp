@@ -45,14 +45,14 @@ Map::Map()
 {
   dst_min_entre_vers = DST_MIN_ENTRE_VERS;
 
-  to_redraw = new std::list<Rectanglei>;  
+  to_redraw = new std::list<Rectanglei>;
   to_redraw_now = new std::list<Rectanglei>;
-  to_redraw_particles = new std::list<Rectanglei>;  
+  to_redraw_particles = new std::list<Rectanglei>;
   to_redraw_particles_now = new std::list<Rectanglei>;
 }
 
 Map::~Map()
-{ 
+{
   delete to_redraw;
   delete to_redraw_now;
   delete to_redraw_particles;
@@ -86,10 +86,10 @@ void Map::Refresh()
   wind.Refresh();
 }
 
-void Map::FreeMem() 
-{ 
-  ground.Free(); 
-  sky.Free(); 
+void Map::FreeMem()
+{
+  ground.Free();
+  sky.Free();
   water.Free();
 
   to_redraw->clear();
@@ -145,50 +145,50 @@ void Map::PutSprite(const Point2i pos, Sprite* spr)
 }
 
 void Map::DrawSky()
-{ 
+{
   SwitchDrawingCache();
   SwitchDrawingCacheParticles();
-  sky.Draw(); 
+  sky.Draw();
 }
 
 void Map::DrawWater()
 { water.Draw(); }
 
 void Map::Draw()
-{ 
+{
   std::list<Rectanglei> *tmp = to_redraw;
   to_redraw_particles->clear();
   to_redraw = to_redraw_particles;
-  
+
   wind.DrawParticles();
   to_redraw = tmp;
 
-  ground.Draw(); 
+  ground.Draw();
 }
 
 bool Map::EstHorsMondeX(int x) const{
-  if( ActiveMap().infinite_bg )
+  if( ActiveMap().HasInfiniteBackGround())
     return false;
 
   return (x < 0) || ((int)GetWidth() <= x);
 }
 
 bool Map::EstHorsMondeY(int y) const{
-  if( ActiveMap().infinite_bg )
+  if( ActiveMap().HasInfiniteBackGround() )
     return y < 0;
-  
+
   return (y < 0) || ((int)GetHeight() <= y);
 }
 
 bool Map::EstHorsMondeXlarg(int x, uint larg) const{
-  if( ActiveMap().infinite_bg )
+  if( ActiveMap().HasInfiniteBackGround() )
   	return false;
 
   return (x + (int)larg - 1 < 0) || ((int)GetWidth() <= x);
 }
 
-bool Map::EstHorsMondeYhaut(int y, uint haut) const{ 
-  return ((y + (int)haut - 1 < 0  && !ActiveMap().infinite_bg) || ((int)GetHeight() <= y));
+bool Map::EstHorsMondeYhaut(int y, uint haut) const{
+  return ((y + (int)haut - 1 < 0  && !ActiveMap().HasInfiniteBackGround()) || ((int)GetHeight() <= y));
 }
 
 bool Map::EstHorsMondeXY(int x, int y) const{
@@ -204,18 +204,18 @@ bool Map::EstDansVide(int x, int y){
 }
 
 bool Map::LigneH_EstDansVide (int ox, int y, int width)
-{ 
+{
   // Traite une ligne
-  for (int i=0; i<width; i++) 
-	if (!EstDansVide(ox+i, (uint)y)) 
+  for (int i=0; i<width; i++)
+	if (!EstDansVide(ox+i, (uint)y))
 	  return false;
-   
+
    return true;
 }
 
 // TODO : for consistency, LigneV_EstDansVide should use a 'height' as LigneH does it ...
 bool Map::LigneV_EstDansVide (int x, int top, int bottom)
-{ 
+{
   assert (top <= bottom);
 
   // V�ifie qu'on reste dans le monde
@@ -225,7 +225,7 @@ bool Map::LigneV_EstDansVide (int x, int top, int bottom)
   if ((int)GetHeight() <= bottom) bottom = GetHeight()-1;
 
   // Traite une ligne
-  for (uint iy=(uint)top; iy<=(uint)bottom; iy++) 
+  for (uint iy=(uint)top; iy<=(uint)bottom; iy++)
   {
     if (!EstDansVide((uint)x, iy)) return false;
   }
@@ -328,7 +328,7 @@ void Map::DrawAuthorName()
     txt = ActiveMap().author_info;
     author_info2 = new Text(txt, white_color, Font::GetInstance(Font::FONT_SMALL));
   }
-  
+
   author_info1->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y);
   author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+(*Font::GetInstance(Font::FONT_SMALL)).GetHeight());
 }
