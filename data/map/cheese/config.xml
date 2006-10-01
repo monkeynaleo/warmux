@@ -26,10 +26,10 @@
     <nbr_sprite>6</nbr_sprite>
     <need_flip>1</need_flip>
 
-    <mass>6.0</mass>
-    <wind_factor>4.5</wind_factor>
-    <air_resist_factor>2.5</air_resist_factor>
-    <gravity_factor>1.0</gravity_factor>
+    <mass>5.0</mass>
+    <wind_factor>8.5</wind_factor>
+    <air_resist_factor>0.2</air_resist_factor>
+    <gravity_factor>0.2</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>3.3</rebound_factor>
   </wind>
