@@ -25,12 +25,12 @@
   <wind>
     <nbr_sprite>30</nbr_sprite>
 
-    <mass>1.0</mass>
-    <wind_factor>3.0</wind_factor>
-    <air_resist_factor>1.0</air_resist_factor>
-    <gravity_factor>1.5</gravity_factor>
-    <rebounding>false</rebounding>
-    <rebound_factor>1.0</rebound_factor>
+    <mass>2.2</mass>
+    <wind_factor>2.1</wind_factor>
+    <air_resist_factor>0.2</air_resist_factor>
+    <gravity_factor>0.5</gravity_factor>
+    <rebounding>true</rebounding>
+    <rebound_factor>2.0</rebound_factor>
   </wind>
 </resources>
 
