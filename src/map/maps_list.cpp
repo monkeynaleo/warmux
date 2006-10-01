@@ -32,7 +32,7 @@
 #endif
 
 InfoMap::InfoMap ()
-{ 
+{
   m_donnees_chargees = false;
   nb_mine = 0;
   nb_barrel = 0;
@@ -41,7 +41,7 @@ InfoMap::InfoMap ()
   infinite_bg = false;
 }
 
-bool InfoMap::Init (const std::string &map_name, 
+bool InfoMap::Init (const std::string &map_name,
 			            const std::string &directory)
 {
   std::string nomfich;
@@ -58,7 +58,7 @@ bool InfoMap::Init (const std::string &map_name,
     // Load resources
     if (!IsFileExist(nomfich))
       return false;
-    res_profile = resource_manager.LoadXMLProfile( nomfich, true), 
+    res_profile = resource_manager.LoadXMLProfile( nomfich, true),
     // Load preview
     preview = resource_manager.LoadImage( res_profile, "preview");
     // Load other informations
@@ -74,7 +74,7 @@ bool InfoMap::Init (const std::string &map_name,
               << e.what() << std::endl;
     return false;
   }
- 
+
   MSG_DEBUG("map.load", "Map loaded: %s", map_name.c_str());
 
   return true;
@@ -98,7 +98,7 @@ bool InfoMap::TraiteXml (xmlpp::Element *xml)
     if (!LitDocXml::LitString (author, "email", a_email))
       a_email = "?";
 
-    if (!a_nickname.empty()) 
+    if (!a_nickname.empty())
       author_info = Format
 	(_("%s <%s> aka %s from %s"),
 	 a_name.c_str(),
@@ -146,7 +146,7 @@ void InfoMap::LoadData(){
   if (m_donnees_chargees)
     return;
   m_donnees_chargees = true;
- 
+
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
   img_terrain = resource_manager.LoadImage(res_profile, "map");
@@ -159,18 +159,18 @@ void InfoMap::FreeData(){
   m_donnees_chargees = false;
 }
 
-Surface InfoMap::ReadImgGround(){ 
-  LoadData(); 
+Surface InfoMap::ReadImgGround(){
+  LoadData();
   return img_terrain;
 }
 
-Surface InfoMap::ReadImgSky(){ 
-  LoadData(); 
+Surface InfoMap::ReadImgSky(){
+  LoadData();
   return img_ciel;
 }
 
-bool InfoMap::DonneesChargees() const{ 
-   return m_donnees_chargees; 
+bool InfoMap::DonneesChargees() const{
+   return m_donnees_chargees;
 }
 
 
@@ -190,6 +190,7 @@ MapsList::MapsList()
   lst.clear() ;
 
   std::cout << "o " << _("Load maps:");
+  terrain_actif = -1;
 
   Config * config = Config::GetInstance();
   std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "map" + PATH_SEPARATOR;
@@ -228,7 +229,7 @@ MapsList::MapsList()
   dirname = config->GetPersonalDir() + PATH_SEPARATOR + "map";
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
-    while ((file = readdir(dir)) != NULL) 
+    while ((file = readdir(dir)) != NULL)
       LoadOneMap (dirname, file->d_name);
     closedir (dir);
   }
@@ -252,8 +253,8 @@ void MapsList::LoadOneMap (const std::string &dir, const std::string &file)
   if (stat(fullname.c_str(), &stat_file) != 0) return;
   if (!S_ISDIR(stat_file.st_mode)) return;
 #endif
-	
-  InfoMap nv_terrain;  
+
+  InfoMap nv_terrain;
   bool ok = nv_terrain.Init (file, fullname + PATH_SEPARATOR);
   if (!ok) return;
 
@@ -311,7 +312,7 @@ InfoMap& ActiveMap()
 }
 
 bool compareMaps(const InfoMap& a, const InfoMap& b)
-{  
+{
   return a.name < b.name;
 }
 
