@@ -131,11 +131,42 @@ Character::Character (Team& my_team, const std::string &name) :
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
 
+Character::Character (const Character& acharacter) : PhysicalObj(acharacter), m_team(acharacter.m_team)
+{
+  character_name       = acharacter.character_name;
+  step_sound_played    = acharacter.step_sound_played;
+  prepare_shoot        = acharacter.prepare_shoot;
+  back_jumping         = acharacter.back_jumping;
+  energy               = acharacter.energy;
+  damage_other_team    = acharacter.damage_other_team;
+  damage_own_team      = acharacter.damage_own_team;
+  max_damage           = acharacter.max_damage;
+  current_total_damage = acharacter.current_total_damage;
+  energy_bar           = acharacter.energy_bar;
+  survivals            = acharacter.survivals;
+  pause_bouge_dg       = acharacter.pause_bouge_dg;
+  do_nothing_time      = acharacter.do_nothing_time;
+  animation_time       = acharacter.animation_time;
+  lost_energy          = acharacter.lost_energy;
+  hidden               = acharacter.hidden;
+  channel_step         = acharacter.channel_step ;
+  previous_strength    = acharacter.previous_strength;
+
+  if (acharacter.body)
+    body = new Body(*acharacter.body);
+  if(acharacter.name_text)
+    name_text = new Text(*acharacter.name_text);
+}
+
 Character::~Character()
 {
   MSG_DEBUG("character", "Unload character %s", character_name.c_str());
   if(body)
     delete body;
+  if(name_text)
+    delete name_text;
+  body      = NULL;
+  name_text = NULL;
 }
 
 void Character::SetBody(Body* _body)
@@ -161,7 +192,7 @@ void Character::SignalDrowning()
 
 // Si un ver devient un fantome, il meurt ! Signale sa mort
 void Character::SignalGhostState (bool was_dead)
-{  
+{
   // Report to damage performer this character lost all of its energy
   ActiveCharacter().MadeDamage(energy, *this);
 
@@ -172,7 +203,7 @@ void Character::SignalGhostState (bool was_dead)
 }
 
 void Character::SetDirection (int nv_direction)
-{ 
+{
   body->SetDirection(nv_direction);
   uint l,r,t,b;
   body->GetTestRect(l,r,t,b);
@@ -184,7 +215,7 @@ void Character::DrawEnergyBar(int dy)
   if( IsDead() )
 	return;
 
-  energy_bar.DrawXY( Point2i( GetCenterX() - energy_bar.GetWidth() / 2, GetY() + dy)  
+  energy_bar.DrawXY( Point2i( GetCenterX() - energy_bar.GetWidth() / 2, GetY() + dy)
 		  - camera.GetPosition() );
 }
 
@@ -216,20 +247,20 @@ void Character::SetEnergyDelta (int delta, bool do_report)
   // Change energy
   energy = BorneLong((int)energy +delta, 0, GameMode::GetInstance()->character.max_energy);
   energy_bar.Actu (energy);
-    
+
   // Energy bar color
   if (70 < energy)
 	  color.SetColor(0, 255, 0, 255);
   else if (50 < energy)
 	  color.SetColor(255, 255, 0, 255);
-  else if (20 < energy) 
+  else if (20 < energy)
 	  color.SetColor(255, 128, 0, 255);
-  else 
+  else
 	  color.SetColor(255, 0, 0, 255);
 
   energy_bar.SetValueColor( color );
 
-   
+
   // Compute energy lost
   if (delta < 0)
   {
@@ -240,17 +271,17 @@ void Character::SetEnergyDelta (int delta, bool do_report)
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_light");
     else if ( lost_energy < 66 )
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_medium");
-    else 
+    else
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_high");
-    
+
   }
-  else 
+  else
     lost_energy = 0;
 
   // "Friendly fire !!"
   if ( (&ActiveCharacter() != this) && (&ActiveTeam() == &m_team) )
   jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
-   
+
   // Dead character ?
   if (energy == 0) Die();
 }
@@ -260,16 +291,16 @@ void Character::SetEnergy(int new_energy)
   // Change energy
   energy = BorneLong((int)new_energy, 0, GameMode::GetInstance()->character.max_energy);
   energy_bar.Actu (energy);
-    
+
   // Energy bar color
   Color color;
   if (70 < energy)
 	  color.SetColor(0, 255, 0, 255);
   else if (50 < energy)
 	  color.SetColor(255, 255, 0, 255);
-  else if (20 < energy) 
+  else if (20 < energy)
 	  color.SetColor(255, 128, 0, 255);
-  else 
+  else
 	  color.SetColor(255, 0, 0, 255);
 
   energy_bar.SetValueColor( color );
@@ -294,7 +325,7 @@ void Character::Die()
     ExplosiveWeaponConfig cfg;
     ApplyExplosion ( GetCenter(), cfg);
     assert (IsDead());
-  
+
     // Signal the death
     GameLoop::GetInstance()->SignalCharacterDeath (this);
   }
@@ -367,18 +398,18 @@ void Character::Draw()
   display_energy |= dessine_perte;
   display_energy &= !IsDead();
   if (display_energy)
-  { 
-    dy -= HAUT_ENERGIE; 
-    DrawEnergyBar (dy); 
-    dy -= ESPACE; 
+  {
+    dy -= HAUT_ENERGIE;
+    DrawEnergyBar (dy);
+    dy -= ESPACE;
   }
 
   // Draw name
-  if (config->GetDisplayNameCharacter() && !est_ver_actif) 
-  { 
+  if (config->GetDisplayNameCharacter() && !est_ver_actif)
+  {
     dy -= HAUT_FONT_MIX;
     DrawName (dy);
-    dy -= ESPACE; 
+    dy -= ESPACE;
   }
 
   // Draw lost energy
@@ -389,7 +420,7 @@ void Character::Draw()
     dy -= HAUT_FONT_MIX;
     (*Font::GetInstance(Font::FONT_SMALL)).WriteCenterTop (
 			GetPosition() - camera.GetPosition() + Point2i( GetWidth()/2, dy),
-		   	ss.str(), white_color);    
+		   	ss.str(), white_color);
   }
 
 }
@@ -645,12 +676,7 @@ void Character::PrepareTurn ()
   pause_bouge_dg = Time::GetInstance()->Read();
 }
 
-const Team& Character::GetTeam() const
-{
-  return m_team;
-}
-
-Team& Character::TeamAccess()
+const Team &Character::GetTeam() const
 {
   return m_team;
 }
@@ -737,8 +763,8 @@ void Character::SignalExplosion()
   }
 }
 
-int Character::GetDirection() const 
-{ 
+int Character::GetDirection() const
+{
   return body->GetDirection();
 }
 
@@ -758,10 +784,10 @@ void Character::StartPlaying()
   SetWeaponClothe();
 }
 
-uint Character::GetEnergy() const 
+uint Character::GetEnergy() const
 {
   assert (!IsDead());
-  return energy; 
+  return energy;
 }
 
 bool Character::IsActiveCharacter() const
@@ -775,7 +801,7 @@ Point2i Character::GetHandPosition() {
 }
 
 // Hand position
-void Character::GetHandPositionf (double &x, double &y) 
+void Character::GetHandPositionf (double &x, double &y)
 {
   x = (double) GetHandPosition().x;
   x = (double) GetHandPosition().y;
@@ -813,7 +839,7 @@ void Character::MadeDamage(const int Dmg, const Character &other)
 #endif
     damage_other_team += Dmg;
   }
-  
+
   current_total_damage += Dmg;
 }
 
@@ -868,8 +894,8 @@ uint Character::GetTeamIndex()
 uint Character::GetCharacterIndex()
 {
   uint index = 0;
-  for(Team::iterator it = TeamAccess().begin();
-                     it != TeamAccess().end() ; ++it, ++index )
+  for(Team::iterator it = m_team.begin();
+                     it != m_team.end() ; ++it, ++index )
   {
     if( &(*it) == this)
       return index;
