@@ -27,7 +27,7 @@
 #include "network.h"
 #include "../include/action_handler.h"
 
-const uint table_size = 40; //Number of pregerated numbers
+const uint table_size = 128; //Number of pregerated numbers
 
 RandomSync randomSync;
 
@@ -64,7 +64,9 @@ double RandomSync::GetRand()
 {
   if(network.IsServer() || network.IsLocal()) GenerateTable();
 
-  assert(rnd_table.size() != 0);
+  // If the table is empty freeze until the server have sent something
+  while(rnd_table.size() == 0);
+
   double nbr = rnd_table.front();
   rnd_table.pop_front();
   return nbr;
