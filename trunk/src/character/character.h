@@ -40,7 +40,7 @@ class Character : public PhysicalObj
 {
 private:
   std::string character_name;
-  Team& m_team;
+  Team &m_team;
   bool step_sound_played;
   bool prepare_shoot;
   bool back_jumping;
@@ -71,7 +71,7 @@ private:
 
 public:
 
-  // Previous strength 
+  // Previous strength
   double previous_strength;
 
   Body* body;
@@ -87,6 +87,7 @@ private:
 public:
 
   Character (Team& my_team, const std::string &name);
+  Character (const Character& acharacter);
   ~Character();
 
   void SignalExplosion();
@@ -135,7 +136,6 @@ public:
   int GetDirection() const;
 
   // Team owner
-  Team& TeamAccess();
   const Team& GetTeam() const;
   uint GetTeamIndex();
   uint GetCharacterIndex();

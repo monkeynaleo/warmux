@@ -74,15 +74,15 @@ Interface::Interface()
   game_menu = resource_manager.LoadImage( res, "interface/menu_jeu");
   bg_time = resource_manager.LoadImage( res, "interface/fond_compteur");
   weapon_box_button = resource_manager.LoadImage( res, "interface/weapon_box_button");
-   
+
   barre_energie.InitVal (0, 0, GameMode::GetInstance()->character.init_energy);
-  barre_energie.InitPos (ENERGY_BAR_POS.x, ENERGY_BAR_POS.y, 
+  barre_energie.InitPos (ENERGY_BAR_POS.x, ENERGY_BAR_POS.y,
 			 BARENERGIE_LARG, BARENERGIE_HAUT);
   barre_energie.border_color = white_color;
   barre_energie.value_color = lightgray_color;
-  barre_energie.background_color = gray_color;  
-   
-  // strength bar initialisation  
+  barre_energie.background_color = gray_color;
+
+  // strength bar initialisation
   weapon_strength_bar.InitPos (0, 0, 400, 10);
   weapon_strength_bar.InitVal (0, 0, 100);
 
@@ -144,9 +144,9 @@ void Interface::DisplayCharacterInfo ()
   std::string s(character_under_cursor->GetName()+" ("+character_under_cursor->GetTeam().GetName()+" )");
   t_character_name->Set(s);
 
-  t_character_name->DrawTopLeft(bottom_bar_pos + WORM_NAME_POS + 
+  t_character_name->DrawTopLeft(bottom_bar_pos + WORM_NAME_POS +
 		  Point2i(t_NAME->GetWidth()+MARGIN, 0));
-  
+
   // Display energy
   t_ENERGY->DrawTopLeft(bottom_bar_pos + WORM_ENERGY_POS);
 
@@ -163,12 +163,12 @@ void Interface::DisplayCharacterInfo ()
 
   t_character_energy->DrawTopLeft(
 		  bottom_bar_pos + WORM_ENERGY_POS + Point2i(t_ENERGY->GetWidth()+MARGIN, 0));
-   
+
   barre_energie.DrawXY(bottom_bar_pos + ENERGY_BAR_POS);
-   
+
   // Display team logo
   Point2i dst(pos + TEAM_ICON_POS);
-  app->video.window.Blit( character_under_cursor->TeamAccess().flag, dst);
+  app->video.window.Blit( character_under_cursor->GetTeam().flag, dst);
 }
 
 void Interface::DisplayWeaponInfo ()
@@ -195,13 +195,13 @@ void Interface::DisplayWeaponInfo ()
   t_weapon_name->Set( tmp );
 
   t_weapon_name->DrawTopLeft(bottom_bar_pos + WEAPON_NAME_POS + Point2i(t_WEAPON->GetWidth() + MARGIN, 0));
-  
+
   // Display number of ammo
   if (nbr_munition ==  INFINITE_AMMO)
     tmp = _("(unlimited)");
   else
     tmp = Format("%i", nbr_munition);
- 
+
   t_STOCK->DrawTopLeft(bottom_bar_pos + AMMOS_POS);
 
   t_weapon_stock->Set(tmp);
@@ -220,43 +220,43 @@ void Interface::DisplayWeaponInfo ()
 }
 
 void Interface::Draw ()
-{    
+{
   AppWormux * app = AppWormux::GetInstance();
 
   // display global timer
-  Rectanglei dest ( (app->video.window.GetWidth()/2)-40, 0, bg_time.GetWidth(), bg_time.GetHeight() );	
+  Rectanglei dest ( (app->video.window.GetWidth()/2)-40, 0, bg_time.GetWidth(), bg_time.GetHeight() );
   app->video.window.Blit( bg_time, dest.GetPosition() );
   std::string tmp(Time::GetInstance()->GetString());
   global_timer->Set(tmp);
-  global_timer->DrawCenterTop(app->video.window.GetWidth()/2, 10); 
-  
+  global_timer->DrawCenterTop(app->video.window.GetWidth()/2, 10);
+
   world.ToRedrawOnScreen(dest);
 
   if ( GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING && weapon_strength_bar.visible)
   {
     // Position on the screen
-	Point2i barPos = (app->video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1) 
+	Point2i barPos = (app->video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
 		- Point2i(0, GetHeight() + 10);
-     
+
     // Drawing on the screen
      weapon_strength_bar.DrawXY(barPos);
   }
-       
+
   weapons_menu.Draw();
-  
+
   if (!display) return;
 
   bottom_bar_pos = (app->video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
-   
+
   Rectanglei dr( bottom_bar_pos, game_menu.GetSize() );
   app->video.window.Blit( game_menu, bottom_bar_pos);
 
   world.ToRedrawOnScreen(dr);
-  
+
   // display time left in a turn ?
   if (timer != NULL && display_timer)
     timer->DrawCenter(bottom_bar_pos + GetSize()/2 + Point2i(0, 3));
-  
+
   // display character info
   DisplayCharacterInfo();
 
@@ -280,7 +280,7 @@ void Interface::UpdateTimer(uint utimer)
 {
   if (timer!= NULL)
     timer->Set( ulong2str(utimer) );
-  else 
+  else
     timer = new Text(ulong2str(utimer), white_color, Font::GetInstance(Font::FONT_BIG));
 }
 
@@ -289,14 +289,14 @@ void AbsoluteDraw(Surface &s, Point2i pos){
 
 	if( !rectSurface.Intersect(camera) )
 		return;
-	
+
 	world.ToRedrawOnMap(rectSurface);
 
 	rectSurface.Clip( camera );
 
 	Rectanglei rectSource(rectSurface.GetPosition() - pos, rectSurface.GetSize());
 	Point2i ptDest = rectSurface.GetPosition() - camera.GetPosition();
-	
+
 	AppWormux::GetInstance()->video.window.Blit(s, rectSource, ptDest);
 }
 
