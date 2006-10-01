@@ -42,7 +42,7 @@ const uint TEAM_LOGO_H = 48;
 
 const uint MAPS_X = 20;
 const uint MAPS_W = 160;
- 
+
 const uint MAP_PREVIEW_W = 300;
 
 #define WORMUX_NETWORK_PORT "9999"
@@ -52,7 +52,7 @@ NetworkMenu::NetworkMenu() :
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
-  
+
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
   // Game options widgets
@@ -86,15 +86,14 @@ NetworkMenu::NetworkMenu() :
   tmp_box->SetMargin(10);
   tmp_box->SetBorder( Point2i(0,0) );
 
-  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ));
-  lbox_all_teams->always_one_selected = false;
+  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ), false);
   tmp_box->AddWidget(lbox_all_teams);
 
   Box * buttons_tmp_box = new VBox(Rectanglei(0, 0, 68, 1), false);
 
   bt_add_team = new Button( Point2i(0, 0) ,res,"menu/arrow-right");
   buttons_tmp_box->AddWidget(bt_add_team);
-  
+
   bt_remove_team = new Button( Point2i( 0, 0),res,"menu/arrow-left");
   buttons_tmp_box->AddWidget(bt_remove_team);
 
@@ -102,9 +101,8 @@ NetworkMenu::NetworkMenu() :
   buttons_tmp_box->AddWidget(team_logo);
 
   tmp_box->AddWidget(buttons_tmp_box);
-  
-  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 )); 
-  lbox_selected_teams->always_one_selected = false;
+
+  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ), false);
   tmp_box->AddWidget(lbox_selected_teams);
 
   team_box->AddWidget(tmp_box);
@@ -123,7 +121,7 @@ NetworkMenu::NetworkMenu() :
 
   map_preview = new PictureWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
   tmp_box->AddWidget(map_preview);
-  
+
   map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
   map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
   map_box->AddWidget(tmp_box);
@@ -146,7 +144,7 @@ NetworkMenu::NetworkMenu() :
   teams_list.full_list.sort(compareTeams);
 
   TeamsList::full_iterator
-    it=teams_list.full_list.begin(), 
+    it=teams_list.full_list.begin(),
     end=teams_list.full_list.end();
 
   // No selected team by default
@@ -166,7 +164,7 @@ NetworkMenu::~NetworkMenu()
 }
 
 void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
-{     
+{
   ActionHandler * action_handler = ActionHandler::GetInstance();
   Widget* w = widgets.Clic(mousePosition, button);
 
@@ -228,14 +226,14 @@ void NetworkMenu::SaveOptions()
 {
   teams_list.Clear();
   // teams
-  std::vector<list_box_item_t> * 
+  std::vector<list_box_item_t> *
     selected_teams = lbox_selected_teams->GetItemsList();
 
   if (selected_teams->size() > 1) {
     std::list<uint> selection;
 
-    std::vector<list_box_item_t>::iterator 
-      it = selected_teams->begin(), 
+    std::vector<list_box_item_t>::iterator
+      it = selected_teams->begin(),
       end = selected_teams->end();
 
     int index = -1;
@@ -297,12 +295,12 @@ void NetworkMenu::SelectTeamLogo(Team * t)
 void NetworkMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 {
   if (from->GetSelectedItem() != -1) {
-    to->AddItem (false, 
+    to->AddItem (false,
 		 from->ReadLabel(),
 		 from->ReadValue());
     to->Deselect();
     if (sort) to->Sort();
-    
+
     from->RemoveSelected();
   }
 }
@@ -310,13 +308,13 @@ void NetworkMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 void NetworkMenu::MoveDisableTeams(ListBox * from, ListBox * to, bool sort)
 {
   if (from->GetSelectedItem() != -1) {
-    to->AddItem (false, 
+    to->AddItem (false,
 		 from->ReadLabel(),
 		 from->ReadValue(),
        false);
     to->Deselect();
     if (sort) to->Sort();
-    
+
     from->RemoveSelected();
   }
 }

@@ -36,25 +36,25 @@ typedef struct s_list_box_item_t{
 } list_box_item_t;
 
 class ListBox : public Widget
-{ 
-public:
+{
+private:
   bool always_one_selected;
-  
+
 protected:
   // for the placement
   uint nb_visible_items, nb_visible_items_max;
   uint height_item;
-  
+
   // what are the items ?
   uint first_visible_item;
-  int selected_item; 
+  int selected_item;
   std::vector<list_box_item_t> m_items;
 
   // Buttons
   Button *m_up, *m_down;
 
 public:
-  ListBox (const Rectanglei &rect);
+  ListBox (const Rectanglei &rect, bool always_one_selected_b = true);
   ~ListBox();
 
   void Draw(const Point2i &mousePosition, Surface& surf);

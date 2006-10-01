@@ -31,7 +31,7 @@ class Button : public Widget
 {
 protected:
   Sprite *image;
-   
+
 public:
   Button (const Rectanglei &rect,
 	  const Profile *res_profile, const std::string& resource_id);
@@ -41,7 +41,7 @@ public:
 
   virtual void Draw(const Point2i &mousePosition, Surface& surf);
   virtual void SetSizePosition(const Rectanglei &rect);
-  
+
   Sprite* GetSprite() { return image; };
 };
 
