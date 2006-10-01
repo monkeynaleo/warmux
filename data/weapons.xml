@@ -291,4 +291,10 @@
     <image file="weapon/gun/gun_bullet.png" />
   </sprite>     
 
+  <!-- Blowtorch rifle ressources -->
+
+  <surface name="blowtorch" file="weapon/blowtorch/blowtorch.png" />
+  <surface name="blowtorch_ico" file="weapon/blowtorch/blowtorch_ico.png" />
+  <surface name="blowtorch_fire" file="weapon/blowtorch/fire.png" />
+
 </resources>

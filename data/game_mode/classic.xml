@@ -337,6 +337,16 @@
       <timeout>20</timeout>
     </tux>
 
+    <blowtorch>
+      <position origin="hand" x="-5" y="-5" />
+      <nb_ammo>4</nb_ammo>
+      <damage>10</damage>
+      <min_angle>-45</min_angle>
+      <max_angle>45</max_angle>
+      <unit_per_ammo>20</unit_per_ammo>
+      <range>10</range>
+    </blowtorch>
+
   </weapons>
 
 </game_mode>
