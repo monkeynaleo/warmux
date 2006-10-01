@@ -28,6 +28,7 @@
 #include "auto_bazooka.h"
 #include "baseball.h"
 #include "bazooka.h"
+#include "blowtorch.h"
 #include "bounce_ball.h"
 #include "cluster_bomb.h"
 #include "construct.h"

@@ -153,7 +153,8 @@ wormux_SOURCES = \
 	weapon/teleportation.cpp weapon/teleportation.h \
 	weapon/snipe_rifle.cpp weapon/snipe_rifle.h \
 	weapon/submachine_gun.cpp weapon/submachine_gun.h \
-	weapon/polecat.cpp weapon/polecat.h
+	weapon/polecat.cpp weapon/polecat.h \
+	weapon/blowtorch.cpp weapon/blowtorch.h
 
 AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\" -DFONT_FILE=\"$(fontfile)\" -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" -Werror
 

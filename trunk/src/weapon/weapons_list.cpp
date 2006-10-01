@@ -96,6 +96,7 @@ void WeaponsList::Init()
   Construct* construct = new Construct;
   LowGrav* lowgrav = new LowGrav;
   NinjaRope* ninjarope = new NinjaRope;
+  Blowtorch* blowtorch = new Blowtorch;
 
   // Category 1
   AddToList(bazooka, 1);
@@ -133,6 +134,7 @@ void WeaponsList::Init()
   AddToList(skipturn,5);
   AddToList(airhammer,5);
   AddToList(construct,5);
+  AddToList(blowtorch,5);
   AddToList(suicide,5);
 }
 
