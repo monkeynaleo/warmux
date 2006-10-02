@@ -27,13 +27,12 @@
 
 class SkipTurn : public Weapon
 {
- private:
-  bool p_Shoot();
-
-public:
-  SkipTurn();
-  void Refresh();
+  public:
+    SkipTurn();
+  protected:
+    bool p_Shoot();
+    void Refresh();
 };
 
 //-----------------------------------------------------------------------------
-#endif
+#endif /* SKIP_TURN_H */

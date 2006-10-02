@@ -31,7 +31,7 @@ class SnipeBullet : public WeaponBullet
   public:
     SnipeBullet(ExplosiveWeaponConfig& cfg,
                 WeaponLauncher * p_launcher); 
-  private:
+  protected:
     void ShootSound();
 };
 
@@ -44,16 +44,15 @@ class SnipeRifle : public WeaponLauncher
     Point2i targeted_point;
     bool targeting_something;
     Sprite * m_laser_image;
-
-  private:
-    bool p_Shoot();
     bool ComputeCrossPoint(bool force);
+
   protected:
-    void SignalProjectileGhostState();
+    bool p_Shoot();
     void p_Deselect();
     WeaponProjectile * GetProjectileInstance();
   public:
     SnipeRifle();
+    void SignalProjectileGhostState();
     void DrawBeam();
     void Draw();  // In order to draw the laser beam / and the contact point.
 };
