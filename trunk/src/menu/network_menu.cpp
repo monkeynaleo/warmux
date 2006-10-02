@@ -302,6 +302,9 @@ void NetworkMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
     if (sort) to->Sort();
 
     from->RemoveSelected();
+
+    from->ForceRedraw();
+    to->ForceRedraw();
   }
 }
 
@@ -316,6 +319,9 @@ void NetworkMenu::MoveDisableTeams(ListBox * from, ListBox * to, bool sort)
     if (sort) to->Sort();
 
     from->RemoveSelected();
+
+    from->ForceRedraw();
+    to->ForceRedraw();
   }
 }
 
