@@ -16,7 +16,7 @@ msgstr ""
 "X-Poedit-Country: SLOVAKIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:283
+#: src/map/maps_list.cpp:284
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nebola nájdená :-("
@@ -188,11 +188,11 @@ msgstr "O programe"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Skutočne chceš skončiť(A/N) ?"
 
-#: src/menu/game_menu.cpp:175
+#: src/menu/game_menu.cpp:173
 msgid "Duration of a turn:"
 msgstr "Dľžka trvania ťahu:"
 
-#: src/menu/game_menu.cpp:181
+#: src/menu/game_menu.cpp:179
 msgid "Duration of the end of a turn:"
 msgstr "Trvanie konca ťahu:"
 
@@ -279,7 +279,7 @@ msgstr "Domovský priečinok (Prostredie premennej $HOME) sa nenašiel!"
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:192
+#: src/menu/game_menu.cpp:190
 msgid "Initial energy:"
 msgstr "Počiatočná energia"
 
@@ -351,7 +351,7 @@ msgstr "Sieťová hra"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenájdený element <%s> v xml konfiguračnom súbore!"
 
-#: src/menu/game_menu.cpp:187
+#: src/menu/game_menu.cpp:185
 msgid "Number of players per team:"
 msgstr "Počet hráčov v tíme:"
 
@@ -439,7 +439,7 @@ msgstr "Raketa opustila bojisko..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nedá sa inicializovať SDL knižnca: %s"
 
-#: src/map/maps_list.cpp:204 src/map/maps_list.cpp:220
+#: src/map/maps_list.cpp:205 src/map/maps_list.cpp:221
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
@@ -488,7 +488,7 @@ msgstr "Wormux verzia"
 msgid "XML error during loading map '%s' :"
 msgstr "XML chyba počas načítavania mapy '%s' :"
 
-#: src/map/maps_list.cpp:240
+#: src/map/maps_list.cpp:241
 msgid "You need at least one valid map !"
 msgstr "Potrebuješ najmenej jednu platnú mapu !"
 

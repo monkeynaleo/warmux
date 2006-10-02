@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: src/map/maps_list.cpp:283
+#: src/map/maps_list.cpp:284
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
@@ -187,11 +187,11 @@ msgstr "Abspann"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Wollen Sie das Programm wirklich beenden? (J/N)"
 
-#: src/menu/game_menu.cpp:175
+#: src/menu/game_menu.cpp:173
 msgid "Duration of a turn:"
 msgstr "Dauer einer Runde:"
 
-#: src/menu/game_menu.cpp:181
+#: src/menu/game_menu.cpp:179
 msgid "Duration of the end of a turn:"
 msgstr "Dauer des Endes einer Runde:"
 
@@ -279,7 +279,7 @@ msgstr ""
 msgid "Hurry up, you are too slow !!"
 msgstr "Beeile dich, du bist zu langsam !!"
 
-#: src/menu/game_menu.cpp:192
+#: src/menu/game_menu.cpp:190
 msgid "Initial energy:"
 msgstr "Startenergie:"
 
@@ -350,7 +350,7 @@ msgstr "Netzwerkspiel"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
 
-#: src/menu/game_menu.cpp:187
+#: src/menu/game_menu.cpp:185
 msgid "Number of players per team:"
 msgstr "Zahl der Spieler pro Mannschaft:"
 
@@ -438,7 +438,7 @@ msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Kann SDL Bibliothek nicht initialisieren: %s"
 
-#: src/map/maps_list.cpp:204 src/map/maps_list.cpp:220
+#: src/map/maps_list.cpp:205 src/map/maps_list.cpp:221
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
@@ -486,7 +486,7 @@ msgstr "Wormux Version "
 msgid "XML error during loading map '%s' :"
 msgstr "XML Fehler beim Laden der Karte %s :"
 
-#: src/map/maps_list.cpp:240
+#: src/map/maps_list.cpp:241
 msgid "You need at least one valid map !"
 msgstr "Du brauchst mindestens eine gültige Karte!"
 

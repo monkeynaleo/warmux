@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:283
+#: src/map/maps_list.cpp:284
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
@@ -200,11 +200,11 @@ msgstr "Merite"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
-#: src/menu/game_menu.cpp:175
+#: src/menu/game_menu.cpp:173
 msgid "Duration of a turn:"
 msgstr "Durata unei ture:"
 
-#: src/menu/game_menu.cpp:181
+#: src/menu/game_menu.cpp:179
 msgid "Duration of the end of a turn:"
 msgstr "Durata sfârşitului de tură:"
 
@@ -291,7 +291,7 @@ msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:192
+#: src/menu/game_menu.cpp:190
 msgid "Initial energy:"
 msgstr "Energie iniţială:"
 
@@ -363,7 +363,7 @@ msgstr "Joc în reţea"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
 
-#: src/menu/game_menu.cpp:187
+#: src/menu/game_menu.cpp:185
 msgid "Number of players per team:"
 msgstr "Jucători per echipă:"
 
@@ -452,7 +452,7 @@ msgstr "Racheta a părăsit câmpul de luptă..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
 
-#: src/map/maps_list.cpp:204 src/map/maps_list.cpp:220
+#: src/map/maps_list.cpp:205 src/map/maps_list.cpp:221
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
@@ -501,7 +501,7 @@ msgstr "Versiunea Wormux "
 msgid "XML error during loading map '%s' :"
 msgstr "Eroare XML în timpul încărcării hărţii '%s' :"
 
-#: src/map/maps_list.cpp:240
+#: src/map/maps_list.cpp:241
 msgid "You need at least one valid map !"
 msgstr "Aveţi nevoie de cel puţin o hartă validă !"
 

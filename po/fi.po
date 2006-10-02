@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/map/maps_list.cpp:283
+#: src/map/maps_list.cpp:284
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
@@ -190,11 +190,11 @@ msgstr "Kiitokset"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
-#: src/menu/game_menu.cpp:175
+#: src/menu/game_menu.cpp:173
 msgid "Duration of a turn:"
 msgstr "Vuoron kesto:"
 
-#: src/menu/game_menu.cpp:181
+#: src/menu/game_menu.cpp:179
 msgid "Duration of the end of a turn:"
 msgstr "Vuoron lopun kesto:"
 
@@ -279,7 +279,7 @@ msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:192
+#: src/menu/game_menu.cpp:190
 msgid "Initial energy:"
 msgstr "Aloitus voimat:"
 
@@ -351,7 +351,7 @@ msgstr "Nettipeli"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
 
-#: src/menu/game_menu.cpp:187
+#: src/menu/game_menu.cpp:185
 msgid "Number of players per team:"
 msgstr "Pelaajien määrä joukkueessa:"
 
@@ -439,7 +439,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "SDL kirjaston alustus epäonnistui:%s"
 
-#: src/map/maps_list.cpp:204 src/map/maps_list.cpp:220
+#: src/map/maps_list.cpp:205 src/map/maps_list.cpp:221
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
@@ -488,7 +488,7 @@ msgstr "Wormux versio"
 msgid "XML error during loading map '%s' :"
 msgstr "XML virhe ladattaessa karttaa '%s' :"
 
-#: src/map/maps_list.cpp:240
+#: src/map/maps_list.cpp:241
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 

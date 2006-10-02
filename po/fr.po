@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: KBabel 1.11\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:283
+#: src/map/maps_list.cpp:284
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Le terrain %s est introuvable :-("
@@ -191,11 +191,11 @@ msgstr "Crédits"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Voulez-vous vraiment quitter ? (O/N)"
 
-#: src/menu/game_menu.cpp:175
+#: src/menu/game_menu.cpp:173
 msgid "Duration of a turn:"
 msgstr "Durée d'un tour :"
 
-#: src/menu/game_menu.cpp:181
+#: src/menu/game_menu.cpp:179
 msgid "Duration of the end of a turn:"
 msgstr "Durée de la fin d'un tour :"
 
@@ -280,7 +280,7 @@ msgstr "Le répertoire HOME (variable d'environnement $HOME) introuvable !"
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:192
+#: src/menu/game_menu.cpp:190
 msgid "Initial energy:"
 msgstr "Énergie initiale :"
 
@@ -352,7 +352,7 @@ msgid "No element <%s> found in the xml config file!"
 msgstr ""
 "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
-#: src/menu/game_menu.cpp:187
+#: src/menu/game_menu.cpp:185
 msgid "Number of players per team:"
 msgstr "Nombre de joueurs par équipe :"
 
@@ -439,7 +439,7 @@ msgstr "La roquette est partie dans un autre monde ..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Échec de l'initialisation de la bibliothèque SDL : %s"
 
-#: src/map/maps_list.cpp:204 src/map/maps_list.cpp:220
+#: src/map/maps_list.cpp:205 src/map/maps_list.cpp:221
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des terrains (%s) !"
@@ -487,7 +487,7 @@ msgstr "Wormux version "
 msgid "XML error during loading map '%s' :"
 msgstr "Erreur XML durant le chargement du terrain '%s' :"
 
-#: src/map/maps_list.cpp:240
+#: src/map/maps_list.cpp:241
 msgid "You need at least one valid map !"
 msgstr "Il faut au minimum un terrain valide !"
 
