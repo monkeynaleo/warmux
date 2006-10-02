@@ -266,13 +266,14 @@ void Character::SetEnergyDelta (int delta, bool do_report)
 
     lost_energy += (int)energy - (int)sauve_energie;
 
-    if ( lost_energy < 33 )
+    if ( lost_energy > -33 )
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_light");
-    else if ( lost_energy < 66 )
+    else if ( lost_energy > -66 )
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_medium");
     else
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_high");
 
+  std::cout << "lost_energy: " << lost_energy << std::endl;
   }
   else
     lost_energy = 0;
@@ -303,6 +304,11 @@ void Character::SetEnergy(int new_energy)
 	  color.SetColor(255, 0, 0, 255);
 
   energy_bar.SetValueColor( color );
+}
+
+bool Character::GotInjured() const
+{
+	return lost_energy < 0;
 }
 
 void Character::Die()
