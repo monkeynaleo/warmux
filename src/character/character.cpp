@@ -273,7 +273,6 @@ void Character::SetEnergyDelta (int delta, bool do_report)
     else
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_high");
 
-  std::cout << "lost_energy: " << lost_energy << std::endl;
   }
   else
     lost_energy = 0;
