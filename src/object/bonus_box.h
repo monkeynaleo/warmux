@@ -30,47 +30,44 @@
 
 class BonusBox : public PhysicalObj
 {
-private:
-  static bool enable;
-  static uint time;
+  private:
+    static bool enable;
+    static uint time;
 
-  bool parachute; 
-  Sprite *anim;
+    bool parachute; 
+    Sprite *anim;
 
-  enum
-  {
-    // If you modify this enum, modify also nbr_bonus_diff
-    bonusDYNAMITE=1,
-    bonusTELEPORTATION,
-    bonusENERGY,
-    bonusTRAP,
-    bonusAIR_ATTACK,
-    bonusAUTO_BAZOOKA,
-    bonusRIOT_BOMB
-  } bonus_weapons;
-  static const uint nb_bonus = bonusAUTO_BAZOOKA;
+    enum
+    {
+      // If you modify this enum, modify also nbr_bonus_diff
+      bonusDYNAMITE=1,
+      bonusTELEPORTATION,
+      bonusENERGY,
+      bonusTRAP,
+      bonusAIR_ATTACK,
+      bonusAUTO_BAZOOKA,
+      bonusRIOT_BOMB
+    } bonus_weapons;
+    static const uint nb_bonus = bonusAUTO_BAZOOKA;
 
- private:
-  BonusBox();
-  static bool PlaceBonusBox (BonusBox& bonus_box);
+  private:
+    static bool PlaceBonusBox (BonusBox& bonus_box);
+    void ApplyBonus (Team &team, Character &character);
+  public:
+    BonusBox();
+    ~BonusBox();
 
-public:
-  ~BonusBox();
+    // Activate bonus box ?
+    static void Enable (bool _enable);
+    static bool NewBonusBox();
 
-  // Activate bonus box ?
-  static void Enable (bool _enable);
-  static bool NewBonusBox();
+    void Draw();
+    void Refresh();
 
-  // Signal Fall ending
-  virtual void SignalCollision();
-
-  void Draw();
-  void Refresh();
-
- private:
-  void ApplyBonus (Team &team, Character &character);
-
+  protected:
+    // Signal Fall ending
+    virtual void SignalCollision();
 };
 
 //-----------------------------------------------------------------------------
-#endif
+#endif /* BONUS_BOX_H */

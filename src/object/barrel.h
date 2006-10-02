@@ -29,13 +29,13 @@
 class PetrolBarrel : public PhysicalObj
 {
   Sprite* img;
-public:
-  PetrolBarrel();
-  ~PetrolBarrel();
-  void Draw();
-  void Refresh();
-
-  void SignalDeath();
+  public:
+    PetrolBarrel();
+    ~PetrolBarrel();
+    void Draw();
+    void Refresh();
+  protected:
+    void SignalDeath();
 };
 
-#endif
+#endif /* BARREL_H */
