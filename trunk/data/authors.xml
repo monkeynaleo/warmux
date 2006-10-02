@@ -497,6 +497,19 @@
     <description>Fedora Core 3 packager.</description>
   </author>
 
+  <author>
+    <name>Adnan Hodzic</name>
+    <email>AbsintheSyringe AT gmail.com</email>
+    <country>Bosnia and Herzegovina</country>
+    <description>Physics constant for wind particles</description>
+  </author>
+
+  <author>
+    <name>Reiner Herrmann</name>
+    <email>reiner AT reiner-h.de</email>
+    <country>Germany</country>
+    <description>Blowtorch weapon</description>
+  </author>
 </section>
 
 <section title="Thanks to">
