@@ -132,7 +132,6 @@ class WeaponLauncher : public Weapon
     virtual void SignalProjectileGhostState();
     virtual void SignalProjectileTimeout();
 
-    virtual Point2i GetGunHolePosition();
     void IncActiveProjectile();
     void DecActiveProjectile();
 

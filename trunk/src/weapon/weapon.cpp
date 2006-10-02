@@ -94,6 +94,7 @@ Weapon::Weapon(Weapon_type type,
   position.origin = weapon_origin_HAND;
   position.dx = 0;
   position.dy = 0;
+  position.hole_delta = Point2i(0,0);
 
   m_can_change_weapon = false;
 
@@ -301,6 +302,22 @@ void Weapon::RotationPointXY (int &x, int &y) const
   x = handPos.x;
   y = handPos.y;
 }
+
+const Point2i Weapon::GetGunHolePosition()
+{
+  int x,y;
+  RotationPointXY(x, y);
+
+  Point2f pos(x,y);
+  Point2f hole(x + position.hole_delta.x, y + position.hole_delta.y);
+  double dst = pos.Distance(hole);
+  double angle = pos.ComputeAngle(hole);
+  Point2f rotated_hole;
+  rotated_hole = pos + Point2f(dst * cos(angle + ActiveTeam().crosshair.GetAngleRad()),
+                               dst * sin(angle + ActiveTeam().crosshair.GetAngleRad()));
+  return Point2i((int)rotated_hole.x, (int)rotated_hole.y);
+}
+
 
 bool Weapon::EnoughAmmo() const
 {
@@ -518,11 +535,6 @@ void Weapon::DrawWeaponFire()
   m_weapon_fire->Draw( GetGunHolePosition() - size );
 }
 
-Point2i Weapon::GetGunHolePosition()
-{
-  return ActiveCharacter().GetHandPosition();
-}
-
 void Weapon::DrawUnit(int unit){
   Rectanglei rect;
 
@@ -558,6 +570,14 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
       position.origin = weapon_origin_OVER;
     else
       position.origin = weapon_origin_HAND;
+  }
+
+  pos_elem = LitDocXml::AccesBalise (elem, "hole");
+  if (pos_elem != NULL) {
+    // E.g. <hole dx="-1" dy="0" />
+    LitDocXml::LitAttrInt (pos_elem, "dx", position.hole_delta.x);
+    LitDocXml::LitAttrInt (pos_elem, "dy", position.hole_delta.y);
+		printf("%d %d --->ok\n", position.hole_delta.x, position.hole_delta.y);
   }
 
   LitDocXml::LitInt (elem, "nb_ammo", m_initial_nb_ammo);       
