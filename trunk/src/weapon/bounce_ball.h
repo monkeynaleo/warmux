@@ -32,22 +32,21 @@
 
 class BounceBall : public WeaponProjectile
 {
-public:
-  BounceBall(ExplosiveWeaponConfig& cfg,
-             WeaponLauncher * p_launcher);
-  void Refresh();
-protected:
-  void SignalOutOfMap();
+  public:
+    BounceBall(ExplosiveWeaponConfig& cfg,
+               WeaponLauncher * p_launcher);
+    void Refresh();
+  protected:
+    void SignalOutOfMap();
 };
 
 class BounceBallLauncher : public WeaponLauncher
 {
- private:
-  bool p_Shoot ();
- protected:
-  WeaponProjectile * GetProjectileInstance();
- public:
-  BounceBallLauncher();
+  protected:
+    bool p_Shoot ();
+    WeaponProjectile * GetProjectileInstance();
+  public:
+    BounceBallLauncher();
 };
 
-#endif
+#endif /* BOUNCE_BALL_H */
