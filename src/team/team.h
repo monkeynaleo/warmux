@@ -64,10 +64,10 @@ private:
   Weapon *active_weapon;
 
   Team (const std::string& _teams_dir,
-	const std::string& _id, 
-	const std::string& _name, 
+	const std::string& _id,
+	const std::string& _name,
 	const Surface &_flag,
-	const std::string& _sound_profile);  
+	const std::string& _sound_profile);
 
   bool LoadCharacters(uint howmany);
 public:
@@ -76,7 +76,7 @@ public:
   void LoadGamingData(uint how_many_characters);
   void UnloadGamingData();
 
-  bool IsSameAs(const Team& other);
+  bool IsSameAs(const Team& other) const;
 
   // Switch to next worm.
   void NextCharacter();
@@ -110,7 +110,7 @@ public:
 
   // Access to data.
   const std::string& GetName() const { return m_name; }
-  const std::string& GetId() const { return m_id; }  
+  const std::string& GetId() const { return m_id; }
   const std::string& GetSoundProfile() const { return m_sound_profile; }
   iterator begin();
   iterator end();

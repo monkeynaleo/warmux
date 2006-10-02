@@ -278,7 +278,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
     lost_energy = 0;
 
   // "Friendly fire !!"
-  if ( (&ActiveCharacter() != this) && (&ActiveTeam() == &m_team) )
+  if ( (&ActiveCharacter() != this) && ActiveTeam().IsSameAs(m_team) )
   jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
 
   // Dead character ?
