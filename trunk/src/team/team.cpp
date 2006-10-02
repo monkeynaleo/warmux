@@ -392,7 +392,7 @@ Weapon& Team::AccessWeapon() const { return *active_weapon; }
 const Weapon& Team::GetWeapon() const { return *active_weapon; }
 Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
 
-bool Team::IsSameAs(const Team& other)
+bool Team::IsSameAs(const Team& other) const
 {
   return (strcmp(m_id.c_str(), other.GetId().c_str()) == 0);
 }
