@@ -598,7 +598,7 @@ bool PhysicalObj::IsOverlapping(const PhysicalObj* obj) const
 
 bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_object) const
 {
-  return IsInVacuumXY(GetPosition() + offset);
+  return IsInVacuumXY(GetPosition() + offset, check_object);
 }
 
 bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
