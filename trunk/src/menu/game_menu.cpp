@@ -315,7 +315,7 @@ void GameMenu::__sig_cancel()
 void GameMenu::ChangeMap(int delta_index)
 {
   int tmp = selected_map_index + delta_index;
-  if (tmp < 0 || tmp > int(MapsList::GetInstance()->lst.size())) return;
+  if (tmp < 0 || tmp > int(MapsList::GetInstance()->lst.size() - 1)) return;
 
   selected_map_index = tmp;
 
