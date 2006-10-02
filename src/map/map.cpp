@@ -148,6 +148,9 @@ void Map::DrawSky()
 {
   SwitchDrawingCache();
   SwitchDrawingCacheParticles();
+  
+  OptimizeCache(*to_redraw_now);
+
   sky.Draw();
 }
 
@@ -162,6 +165,8 @@ void Map::Draw()
 
   wind.DrawParticles();
   to_redraw = tmp;
+
+  OptimizeCache(*to_redraw_now);
 
   ground.Draw();
 }
@@ -333,3 +338,50 @@ void Map::DrawAuthorName()
   author_info2->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y+(*Font::GetInstance(Font::FONT_SMALL)).GetHeight());
 }
 
+bool CompareRectangle(const Rectanglei& a, const Rectanglei& b)
+{
+  return ( a.GetTopLeftPoint() <= b.GetTopLeftPoint() );
+}
+
+void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache)
+{
+  rectangleCache.sort(CompareRectangle);
+	
+  std::list<Rectanglei>::iterator it = rectangleCache.begin(),
+    jt = rectangleCache.begin(),
+    end = rectangleCache.end(),
+    tmp;
+
+  if (jt != end) {
+    jt++;
+  }
+  std::cout << "Before: " <<  rectangleCache.size()  << std::endl;
+
+  while (it != end && jt != end) {
+    if ( (*it).Contains(*jt) ) {
+    //   std::cout << "X: " << (*jt).GetPositionX() << " ; " << (*jt).GetBottomRightPoint().GetX() << " - " ; 
+//       std::cout << "Y: " << (*jt).GetPositionY() << " ; " << (*jt).GetBottomRightPoint().GetY();
+//       std::cout << std::endl;
+      tmp = jt;
+      ++tmp;
+      rectangleCache.erase(jt);
+      jt = tmp;
+
+    } else if ( (*jt).Contains(*it) ) {
+//       std::cout << "X: " << (*it).GetPositionX() << " ; " << (*it).GetBottomRightPoint().GetX() << " - " ; 
+//       std::cout << "Y: " << (*it).GetPositionY() << " ; " << (*it).GetBottomRightPoint().GetY();
+//       std::cout << std::endl;
+      tmp = it;
+      --tmp;
+      rectangleCache.erase(it);      
+      it = tmp;
+
+    } else {
+      it++;
+      jt++;
+    }
+  }
+   std::cout << "After : " <<  rectangleCache.size()  << std::endl;
+
+//   std::cout << "//#############################" <<std::endl;
+}
