@@ -324,16 +324,6 @@ bool WeaponLauncher::ReloadLauncher()
   return true;
 }
 
-Point2i WeaponLauncher::GetGunHolePosition()
-{
-  int rayon = m_image->GetWidth() / 2;
-  double angleRAD = Deg2Rad(ActiveTeam().crosshair.GetAngleVal());
-  Point2i hole_position = Point2i(rayon, rayon) * Point2d(cos(angleRAD), sin(angleRAD));
-  hole_position.x += position.dx;
-  hole_position.y += position.dy;
-  return ActiveCharacter().GetHandPosition() + (hole_position * Point2i(ActiveCharacter().GetDirection(),1));
-}
-
 // Direct Explosion when pushing weapon to max power !
 void WeaponLauncher::DirectExplosion()
 {
@@ -384,18 +374,6 @@ void WeaponLauncher::Refresh()
 
 void WeaponLauncher::Draw()
 {
-#ifdef DEBUG_EXPLOSION_CONFIG
-  ExplosiveWeaponConfig* cfg = dynamic_cast<ExplosiveWeaponConfig*>(extra_params);
-  if( cfg != NULL )
-  {
-    Point2i p = ActiveCharacter().GetHandPosition() - camera.GetPosition();
-    // Red color for the blast range (should be superior to the explosion_range)
-    AppWormux::GetInstance()->video.window.CircleColor(p.x, p.y, (int)cfg->blast_range, c_red);
-    // Yellow color for the blast range (should be superior to the explosion_range)
-    AppWormux::GetInstance()->video.window.CircleColor(p.x, p.y, (int)cfg->explosion_range, c_black);
-  }
-#endif
-
   //Display timeout for projectil if can be changed.
   if (projectile->change_timeout_allowed())
   {
@@ -413,6 +391,19 @@ void WeaponLauncher::Draw()
   }
 
   Weapon::Draw();
+
+#ifdef DEBUG_EXPLOSION_CONFIG
+  ExplosiveWeaponConfig* cfg = dynamic_cast<ExplosiveWeaponConfig*>(extra_params);
+  if( cfg != NULL )
+  {
+    Point2i p = ActiveCharacter().GetHandPosition() - camera.GetPosition();
+    // Red color for the blast range (should be superior to the explosion_range)
+    AppWormux::GetInstance()->video.window.CircleColor(p.x, p.y, (int)cfg->blast_range, c_red);
+    // Yellow color for the blast range (should be superior to the explosion_range)
+    AppWormux::GetInstance()->video.window.CircleColor(p.x, p.y, (int)cfg->explosion_range, c_black);
+  }
+  AppWormux::GetInstance()->video.window.CircleColor(GetGunHolePosition().x-camera.GetPositionX(), GetGunHolePosition().y-camera.GetPositionY(), 5, c_black);
+#endif
 }
 
 void WeaponLauncher::p_Select()

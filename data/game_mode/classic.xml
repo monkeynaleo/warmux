@@ -188,6 +188,7 @@
 
     <gun>
       <position origin="hand" x="-8" y="-4" />
+      <hole dx="16" dy="1" />
       <min_angle>-40</min_angle>
       <max_angle>90</max_angle>
       <nb_ammo>-1</nb_ammo>

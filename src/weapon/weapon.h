@@ -79,6 +79,7 @@ protected:
 
   struct s_position{
     int dx, dy;
+    Point2i hole_delta; // Position of the hole of the weapon
     weapon_origin_t origin;
   } position;
 
@@ -171,7 +172,6 @@ public:
 
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
-  virtual Point2i GetGunHolePosition();
 
   // Create a new action "shoot" in action handler
   void NewActionShoot() const;
@@ -201,6 +201,7 @@ public:
   // Get the rotation point of the weapon
   // This is used for drawing the crosshair
   virtual void RotationPointXY (int &x, int &y) const;
+  const Point2i GetGunHolePosition();
 
   // Choose a target.
   // Return false if it not fire directly after
