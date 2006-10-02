@@ -782,7 +782,7 @@ bool PhysicalObj::ObjTouche(const Point2i &p) const
 bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characters)
 {
   uint bcl=0;
-  uint NB_MAX_TRY = 20;
+  uint NB_MAX_TRY = 60;
   bool ok;
   Point2i position;
 

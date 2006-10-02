@@ -45,7 +45,7 @@ const uint MAPS_X = 20;
 const uint MAPS_W = 160;
 
 const uint NBR_VER_MIN = 1;
-const uint NBR_VER_MAX = 6;
+const uint NBR_VER_MAX = 10;
 const uint TPS_TOUR_MIN = 10;
 const uint TPS_TOUR_MAX = 120;
 const uint TPS_FIN_TOUR_MIN = 1;

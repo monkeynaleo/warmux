@@ -149,7 +149,18 @@ bool Team::LoadCharacters(uint howmany)
 	characters.push_back(new_character);
 	active_character = characters.begin(); // we need active_character to be initialized here !!
 	characters.back().SetBody(body);
-	characters.back().PutRandomly(false, world.dst_min_entre_vers);
+	if (!characters.back().PutRandomly(false, world.dst_min_entre_vers))
+	{
+	  // We haven't found any place to put the characters!!
+	  if (!characters.back().PutRandomly(false, world.dst_min_entre_vers/2)) {
+	    std::cerr << std::endl;
+	    std::cerr << "Error: " << character_name.c_str() << " will be probably misplaced!" << std::endl;
+	    std::cerr << std::endl;
+	    
+	    // Put it with no space...
+	    characters.back().PutRandomly(false, 0);
+	  }
+	}
         characters.back().Init();
 
 	MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
