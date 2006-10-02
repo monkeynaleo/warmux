@@ -105,6 +105,7 @@ public:
  private:
   void SwitchDrawingCache();
   void SwitchDrawingCacheParticles();
+  void OptimizeCache(std::list<Rectanglei>& rectangleCache);
 };
 
 extern Map world;
