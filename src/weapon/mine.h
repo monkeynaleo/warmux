@@ -16,9 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Mine : Il s'agit de mines capables de detecter la presence d'un ver. Si 
- * c'est le cas, elle s'arme et l�.. faut pas y toucher ;) Apres un temps si
- * elle ne detecte personne elle se desarme.
+ * Mine : Detect if character is close and explode after a shot time.
+ * Sometime the mine didn't explode randomly.
  *****************************************************************************/
 #ifndef MINE_H
 #define MINE_H
@@ -36,60 +35,60 @@ class MineConfig;
 
 class ObjMine : public WeaponProjectile
 {
-private:
+  private:
   // channel used for sound
-  int channel;
+    int channel;
 
   // this is a fake mine ?
-  bool fake;
+    bool fake;
 
   // Is this mine active ?
-  bool is_active;
+    bool is_active;
 
   // Activation des mines ?
-  bool animation;
-  uint attente;
-  uint escape_time;
+    bool animation;
+    uint attente;
+    uint escape_time;
 
-protected:
-  void FakeExplosion();
-public:
-  ObjMine(MineConfig &cfg,
-          WeaponLauncher * p_launcher = NULL);
+  protected:
+    void FakeExplosion();
+  public:
+    ObjMine(MineConfig &cfg,
+            WeaponLauncher * p_launcher = NULL);
 
-  void StartTimeout();
-  void Detection();
+    void StartTimeout();
+    void Detection();
 
-  void Draw();
-  void Refresh();
+    void Draw();
+    void Refresh();
 };
 
 class MineConfig : public ExplosiveWeaponConfig
 { 
- private:
-  static MineConfig * singleton;
- public: 
-  uint escape_time;
-  double detection_range;
+  private:
+    static MineConfig * singleton;
+  public: 
+    uint escape_time;
+    double detection_range;
 
- private:
-  MineConfig();
-public:
-  static MineConfig * GetInstance();
-  virtual void LoadXml(xmlpp::Element *elem);
+  private:
+    MineConfig();
+  public:
+    static MineConfig * GetInstance();
+    virtual void LoadXml(xmlpp::Element *elem);
 };
 
 class Mine : public WeaponLauncher
 {
-private:
-  bool p_Shoot();
-  void Add (int x, int y);
-protected:
-  WeaponProjectile * GetProjectileInstance();
-public:
-  Mine();
-  MineConfig& cfg();
+  private:
+    void Add (int x, int y);
+  protected:
+    WeaponProjectile * GetProjectileInstance();
+    bool p_Shoot();
+  public:
+    Mine();
+    MineConfig& cfg();
   
 };
 
-#endif
+#endif /* MINE_H */

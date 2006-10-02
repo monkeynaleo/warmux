@@ -26,37 +26,36 @@
 
 class JetPack : public Weapon
 {
-private:
-  double m_x_force;
-  double m_y_force;
+  private:
+    double m_x_force;
+    double m_y_force;
 
-  int channel;
+    int channel;
 
   // Jetpack fuel.
-  uint m_last_fuel_down;
+    uint m_last_fuel_down;
 
-public:
-  JetPack();
-  void Reset();
-  void Refresh();
-  void p_Select();
-  void p_Deselect();
-  void HandleKeyEvent(int key, int event_type) ;
-  bool p_Shoot();
-  void SignalTurnEnd();
+  public:
+    JetPack();
+    void Reset();
+    void HandleKeyEvent(int key, int event_type) ;
+    void SignalTurnEnd();
+    void ActionStopUse();
 
-  void ActionStopUse();
+  protected:
+    void Refresh();
+    void p_Select();
+    void p_Deselect();
+    bool p_Shoot();
 
-protected:
-  void GoUp();
-  void GoLeft();
-  void GoRight();
-  void StopUp();
-  void StopLeft();
-  void StopRight();
-  void StartUse();
-  void StopUse();
-
+    void GoUp();
+    void GoLeft();
+    void GoRight();
+    void StopUp();
+    void StopLeft();
+    void StopRight();
+    void StartUse();
+    void StopUse();
 };
 
-#endif
+#endif /* JETPACK_H */

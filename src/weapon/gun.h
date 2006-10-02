@@ -34,7 +34,7 @@ class GunBullet : public WeaponBullet
   public:
     GunBullet(ExplosiveWeaponConfig& cfg,
               WeaponLauncher * p_launcher);
-  private:
+  protected:
     void ShootSound();
 };
 
@@ -42,9 +42,9 @@ class Gun : public WeaponLauncher
 {
   public:
     Gun();
-    bool p_Shoot();
   protected:
+    bool p_Shoot();
     WeaponProjectile * GetProjectileInstance();
 };
 
-#endif
+#endif /* GUN_H */

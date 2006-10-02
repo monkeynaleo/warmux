@@ -32,46 +32,43 @@ class AutomaticBazooka;
 class RoquetteTeteCherche : public WeaponProjectile
 {
   ParticleEngine smoke_engine;
-protected:
-  double angle_local;
-  Point2i m_cible;
-  bool m_attire;
-public:
-  RoquetteTeteCherche(ExplosiveWeaponConfig& cfg,
-                      WeaponLauncher * p_launcher);
-  void Refresh();
-  void Shoot(double strength);
-  void SetTarget (int x,int y);
- protected:
-  void SignalOutOfMap();
+  protected:
+    double angle_local;
+    Point2i m_cible;
+    bool m_attire;
+  public:
+    RoquetteTeteCherche(ExplosiveWeaponConfig& cfg,
+                        WeaponLauncher * p_launcher);
+    void Refresh();
+    void Shoot(double strength);
+    void SetTarget (int x,int y);
+  protected:
+    void SignalOutOfMap();
 };
 
 class AutomaticBazooka : public WeaponLauncher
 {
-private:
-  
-  struct s_cible
-  {
-    Point2i pos;
-    bool choisie;
-    Surface image;
-  } cible;
-  
-public:
+  private:
+    struct s_cible
+    {
+      Point2i pos;
+      bool choisie;
+      Surface image;
+    } cible;
+  public:
+    AutomaticBazooka();
+    void Draw ();
+    bool IsReady() const;
+    virtual void ChooseTarget(Point2i mouse_pos);
+  protected:
+    void Refresh();
+    void p_Select(); 
+    void p_Deselect();
 
-  AutomaticBazooka();
+    void DrawTarget();
 
-  void Draw ();
-  void Refresh();
-  void p_Select(); 
-  void p_Deselect();
-
-  bool IsReady() const;
-  virtual void ChooseTarget(Point2i mouse_pos);
-  void DrawTarget();
-
-protected:
-  WeaponProjectile * GetProjectileInstance();
+  protected:
+    WeaponProjectile * GetProjectileInstance();
 };
 
-#endif
+#endif /* AUTO_BAZOOKA_H */

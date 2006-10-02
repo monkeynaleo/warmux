@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * T��ortation : d�lacement d'un ver n'importe o sur le terrain.
+ * Teleportation.
  *****************************************************************************/
 
 #ifndef TELEPORTATION_H
@@ -27,19 +27,18 @@
 
 class Teleportation : public Weapon
 {
-private:
-  bool retour; // on est dans le retour ?
-  uint temps;
-  Point2i src, dst;
-
-  bool p_Shoot();
-
-public:
-  Teleportation();
-  void Refresh();
-  void Draw();
-  virtual void ChooseTarget(Point2i mouse_pos);
-  WeaponConfig& cfg();
+  private:
+    bool retour; // on est dans le retour ?
+    uint temps;
+    Point2i src, dst;
+  protected:
+    bool p_Shoot();
+    void Refresh();
+  public:
+    Teleportation();
+    void Draw();
+    virtual void ChooseTarget(Point2i mouse_pos);
+    WeaponConfig& cfg();
 };
 
-#endif
+#endif /* TELEPORTATION_H */

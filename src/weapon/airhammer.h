@@ -28,19 +28,19 @@
 
 class Airhammer : public Weapon
 {
- private:
-  uint m_last_jolt;
-  Surface impact;
+  private:
+    uint m_last_jolt;
+    Surface impact;
+    void RepeatShoot();
 
-  void p_Deselect();
-  bool p_Shoot();
-  void RepeatShoot();
+  protected:
+    void p_Deselect();
+    bool p_Shoot();
+    void Refresh();
 
- public:
-  Airhammer();
-  void Refresh();  
-
-  void HandleKeyEvent(int action, int event_type);
+  public:
+    Airhammer();
+    void HandleKeyEvent(int action, int event_type);
 };
 
-#endif
+#endif /* AIRHAMMER_H */

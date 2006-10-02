@@ -32,25 +32,25 @@ class HollyGrenadeLauncher;
 // The Holly Grenade
 class HollyGrenade : public WeaponProjectile
 {
-protected:
-  bool sing_alleluia;
+  protected:
+    bool sing_alleluia;
 
-  ParticleEngine smoke_engine;
-public:
-  HollyGrenade(ExplosiveWeaponConfig& cfg,
-               WeaponLauncher * p_launcher);
-  void Refresh();
-  void Explosion();
-protected:
-  void SignalOutOfMap();
+    ParticleEngine smoke_engine;
+  public:
+    HollyGrenade(ExplosiveWeaponConfig& cfg,
+                 WeaponLauncher * p_launcher);
+    void Refresh();
+  protected:
+    void Explosion();
+    void SignalOutOfMap();
 };
 
 class HollyGrenadeLauncher : public WeaponLauncher
 {
-public:
-  HollyGrenadeLauncher();
-protected:
-  WeaponProjectile * GetProjectileInstance();
+  public:
+    HollyGrenadeLauncher();
+  protected:
+    WeaponProjectile * GetProjectileInstance();
 };
 
-#endif
+#endif /* HOLLY_GRENADE_H */

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Jet Pack :-)
+ * Parachute
  *****************************************************************************/
 
 #ifndef PARACHUTE_H
@@ -26,34 +26,34 @@
 
 class ParachuteConfig : public WeaponConfig
 {
-public:
-  double wind_factor ;
-  double air_resist_factor ;
-  double open_speed_limit ;
-public:
-  ParachuteConfig();
-  void LoadXml(xmlpp::Element *elem);
+  public:
+    double wind_factor ;
+    double air_resist_factor ;
+    double open_speed_limit ;
+  public:
+    ParachuteConfig();
+    void LoadXml(xmlpp::Element *elem);
 };
 
 //-----------------------------------------------------------------------------
 
 class Parachute : public Weapon
 {
-private:
-  bool open ;
-  bool closing ;
-  Sprite* image;
+  private:
+    bool open ;
+    bool closing ;
+    Sprite* image;
+  protected:
+    void p_Select();
+    void p_Deselect();
+    void Refresh();
+    bool p_Shoot();
+  public:
+    Parachute();
+    void Draw() ;
+    void SignalTurnEnd();
 
-public:
-  Parachute();
-  void p_Select();
-  void p_Deselect();
-  void Refresh();
-  void Draw() ;
-  bool p_Shoot();
-  void SignalTurnEnd();
-
-  ParachuteConfig& cfg();
+    ParachuteConfig& cfg();
 };
 
-#endif
+#endif /* PARACHUTE_H */

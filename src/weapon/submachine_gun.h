@@ -18,8 +18,6 @@
  ******************************************************************************
  * Submachine gun. Don't fire bullet one by one but with burst fire (like
  * a submachine gun :)
- * The hack in order to firing multiple bullet at once consist in using a 
- * std::list of projectile and overide the Refresh & HandleKeyEvent methods.
  *****************************************************************************/
 
 #ifndef SUBMACHINE_GUN_H
@@ -36,9 +34,8 @@ class SubMachineGunBullet : public WeaponBullet
   public:
     SubMachineGunBullet(ExplosiveWeaponConfig& cfg,
                         WeaponLauncher * p_launcher);
-  private:
-    void ShootSound();
   protected:
+    void ShootSound();
     void RandomizeShoot(double &angle,double &strength);
 };
 
@@ -48,9 +45,9 @@ class SubMachineGun : public WeaponLauncher
     void RepeatShoot();
   protected:
     WeaponProjectile * GetProjectileInstance();
+    bool p_Shoot();
   public:
     SubMachineGun();
-    bool p_Shoot();
     void HandleKeyEvent(int action, int event_type);
 };
 

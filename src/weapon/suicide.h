@@ -27,17 +27,16 @@
 
 class Suicide : public Weapon
 {
-private:
-   int sound_channel;
-   bool is_dying;
-
-  bool p_Shoot();
-
-public:
-  Suicide();
-  void p_Select();
-  void Refresh();
-  ExplosiveWeaponConfig &cfg();
+  private:
+    int sound_channel;
+    bool is_dying;
+  protected:
+    bool p_Shoot();
+    void p_Select();
+    void Refresh();
+  public:
+    Suicide();
+    ExplosiveWeaponConfig &cfg();
 };
 
-#endif
+#endif /* SUICIDE_H */

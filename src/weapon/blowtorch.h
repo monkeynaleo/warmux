@@ -5,15 +5,16 @@
 
 class Blowtorch : public Weapon
 {
-	private:
-		bool p_Shoot();
-		void Refresh();
-		void EndTurn();
-		uint new_timer, old_timer;
-	public:
-		Blowtorch();
-		void DrawWeaponFire();
-		void HandleKeyEvent(int action, int event_type);
+  private:
+    uint new_timer, old_timer;
+  protected:
+    bool p_Shoot();
+    void Refresh();
+    void EndTurn();
+  public:
+    Blowtorch();
+    void DrawWeaponFire();
+    void HandleKeyEvent(int action, int event_type);
 };
 
-#endif	// __BLOWTORCH_H__
+#endif  // __BLOWTORCH_H__
