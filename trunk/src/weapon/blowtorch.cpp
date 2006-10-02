@@ -36,6 +36,17 @@ void Blowtorch::Refresh()
 
 }
 
+void Blowtorch::EndTurn()
+{
+	ActiveCharacter().body->ResetWalk();
+	ActiveCharacter().body->StopWalk();
+	ActiveTeam().AccessNbUnits() = 0;
+	m_is_active = false;
+
+	// XXX This doesn't seem to be the correct to end a turn, does it?
+	GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+}
+
 bool Blowtorch::p_Shoot()
 {
 	ActiveCharacter().SetRebounding(false);
@@ -64,20 +75,12 @@ void Blowtorch::HandleKeyEvent(int action, int event_type)
 	{
 		case ACTION_SHOOT:
 			if(event_type == KEY_RELEASED)
-			{
-				ActiveCharacter().body->ResetWalk();
-				ActiveCharacter().body->StopWalk();
-				m_is_active = false;
-				ActiveTeam().AccessNbUnits() = 0;
-				GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
-			}
+				EndTurn();
 			else if(event_type == KEY_REFRESH)
 			{
-				if(!EnoughAmmoUnit())
-				{
-					ActiveCharacter().body->ResetWalk();
-					ActiveCharacter().body->StopWalk();
-				}
+				if(!EnoughAmmoUnit() || ActiveCharacter().GotInjured())
+					EndTurn();
+
 				new_timer = Time::GetInstance()->Read();
 				if(new_timer - old_timer >= pause_time)
 				{

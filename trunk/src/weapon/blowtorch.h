@@ -7,11 +7,12 @@ class Blowtorch : public Weapon
 {
 	private:
 		bool p_Shoot();
+		void Refresh();
+		void EndTurn();
 		uint new_timer, old_timer;
 	public:
 		Blowtorch();
 		void DrawWeaponFire();
-		void Refresh();
 		void HandleKeyEvent(int action, int event_type);
 };
 
