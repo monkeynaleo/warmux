@@ -49,7 +49,7 @@ Team::Team(const std::string& _teams_dir,
   is_local = true;
   active_character = characters.end();
 
-  camera_est_sauve = false;
+  is_camera_saved = false;
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
 
   m_teams_dir = _teams_dir;
@@ -211,9 +211,9 @@ void Team::NextCharacter()
   } while (ActiveCharacter().IsDead());
   ActiveCharacter().StartPlaying();
 
-  if (camera_est_sauve) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
+  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
   camera.ChangeObjSuivi (&ActiveCharacter(),
-			 !camera_est_sauve, !camera_est_sauve,
+			 !is_camera_saved, !is_camera_saved,
 			 true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
 	    ActiveCharacter().GetName().c_str(),
@@ -238,13 +238,13 @@ void Team::PrepareTurn()
   // Choisi un ver vivant si possible
   if (ActiveCharacter().IsDead())
   {
-    camera_est_sauve = false;
+    is_camera_saved = false;
     NextCharacter();
   }
 
-  if (camera_est_sauve) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
+  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
   camera.ChangeObjSuivi (&ActiveCharacter(),
-			 !camera_est_sauve, !camera_est_sauve,
+			 !is_camera_saved, !is_camera_saved,
 			 true);
   CharacterCursor::GetInstance()->FollowActiveCharacter();
 
@@ -365,7 +365,7 @@ void Team::LoadGamingData(uint how_many_characters)
 
 
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
-  camera_est_sauve = false;
+  is_camera_saved = false;
 
   LoadCharacters(how_many_characters);
 
