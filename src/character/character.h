@@ -96,6 +96,7 @@ public:
   void SetEnergyDelta (int delta, bool do_report=true);
   void SetEnergy(int new_energy);
   uint GetEnergy() const;
+  bool GotInjured() const;
   void Die();
   bool IsActiveCharacter() const;
 
