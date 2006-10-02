@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * T��ortation : d�lacement d'un ver n'importe o sur le terrain.
+ * Ninja rope.
  *****************************************************************************/
 
 #ifndef NINJA_ROPE_H
@@ -30,59 +30,58 @@ const int node_max=200;
 
 class NinjaRope : public Weapon
 {
-private:
-  struct s_rope_node
-  {
-    int x,y;
-    double angle ;
-    int sense ;
-  };
+  private:
+    struct s_rope_node
+    {
+      int x,y;
+      double angle ;
+      int sense ;
+    };
 
-  uint last_mvt;
-  double last_broken_node_angle;
-  double last_broken_node_sense;
+    uint last_mvt;
+    double last_broken_node_angle;
+    double last_broken_node_sense;
 
   // Rope launching data.
-  bool m_attaching;
-  bool m_rope_attached;
-  double m_initial_angle;
-  int m_initial_direction;
-  uint m_launch_time;
-  uint m_hooked_time;
-  Sprite* m_hook_sprite;
-  Sprite* m_node_sprite;
+    bool m_attaching;
+    bool m_rope_attached;
+    double m_initial_angle;
+    int m_initial_direction;
+    uint m_launch_time;
+    uint m_hooked_time;
+    Sprite* m_hook_sprite;
+    Sprite* m_node_sprite;
 
-public:
-  s_rope_node rope_node[node_max];
-  int last_node;
-  int m_fixation_x, m_fixation_y;
-  bool go_left, go_right ;
-  double delta_len ;
+  public:
+    s_rope_node rope_node[node_max];
+    int last_node;
+    int m_fixation_x, m_fixation_y;
+    bool go_left, go_right ;
+    double delta_len ;
 
-  NinjaRope();
-  void Active();
-  void Refresh();
-  void p_Deselect();
-  void Draw();
-  void HandleKeyEvent(int key, int event_type) ;
-  void NotifyMove(bool collision);
-  bool p_Shoot();
-
-  EmptyWeaponConfig& cfg();
-protected:
-  void LoadExtraXml(xmlpp::Element *elem);
-  void GoUp();
-  void GoDown();
-  void GoLeft();
-  void GoRight();
-  void StopLeft();
-  void StopRight();
-  void TryAttachRope();
-  void UnattachRope();
-  bool TryAddNode(int CurrentSense) ;
-  bool TryBreakNode(int CurrentSense) ;
-  void SignalTurnEnd() ;
+    NinjaRope();
+    void Active();
+    void Draw();
+    void HandleKeyEvent(int key, int event_type) ;
+    void NotifyMove(bool collision);
+    void SignalTurnEnd();
+    EmptyWeaponConfig& cfg();
+  protected:
+    void Refresh();
+    void p_Deselect();
+    bool p_Shoot();
+    void LoadExtraXml(xmlpp::Element *elem);
+    void GoUp();
+    void GoDown();
+    void GoLeft();
+    void GoRight();
+    void StopLeft();
+    void StopRight();
+    void TryAttachRope();
+    void UnattachRope();
+    bool TryAddNode(int CurrentSense) ;
+    bool TryBreakNode(int CurrentSense) ;
 };
 
 //-----------------------------------------------------------------------------
-#endif
+#endif /* NINJA_ROPE_H */

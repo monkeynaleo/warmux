@@ -35,29 +35,29 @@ class BatonDynamite : public WeaponProjectile
 {
   int channel;
 
-public:
-  BatonDynamite(ExplosiveWeaponConfig& cfg,
-                WeaponLauncher * p_launcher);
+  public:
+    BatonDynamite(ExplosiveWeaponConfig& cfg,
+                  WeaponLauncher * p_launcher);
 
-  void Shoot(double strength);
-  void Refresh();
+    void Shoot(double strength);
+    void Refresh();
 
-protected:
-  void ShootSound();
-  void SignalExplosion();
-  void SignalOutOfMap();
-  void SignalDrowning();
+  protected:
+    void ShootSound();
+    void SignalExplosion();
+    void SignalOutOfMap();
+    void SignalDrowning();
 };
 
 
 // L'arme dynamite
 class Dynamite : public WeaponLauncher
 {
-private:
-  bool p_Shoot();
-protected:
-  WeaponProjectile * GetProjectileInstance();
-public:
-  Dynamite();
+  protected:
+    bool p_Shoot();
+  protected:
+    WeaponProjectile * GetProjectileInstance();
+  public:
+    Dynamite();
 };
-#endif
+#endif /* DYNAMITE_H */

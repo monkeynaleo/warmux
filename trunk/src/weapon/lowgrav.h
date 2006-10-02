@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Jet Pack :-)
+ * Low gravity
  *****************************************************************************/
 
 #ifndef LOWGRAV_H
@@ -25,17 +25,17 @@
 
 class LowGrav : public Weapon
 {
-public:
-  LowGrav();
-  void Reset();
-  void Refresh();
-  void p_Deselect();
-  void HandleKeyEvent(int action, int event_type);
-  bool p_Shoot();
-  void SignalTurnEnd();
-  void Draw();
-
-  void ActionStopUse();
+  public:
+    LowGrav();
+    void Reset();
+    void HandleKeyEvent(int action, int event_type);
+    void SignalTurnEnd();
+    void Draw();
+    void ActionStopUse();
+  protected:
+    void Refresh();
+    void p_Deselect();
+    bool p_Shoot();
 };
 
-#endif
+#endif /* LOWGRAV_H */

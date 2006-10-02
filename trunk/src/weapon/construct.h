@@ -32,13 +32,13 @@ class Construct : public Weapon
   int angle;
   Point2i dst;
 
-private:
+protected:
   bool p_Shoot();
+  void Refresh();
 
 public:
   Construct();
   ~Construct();
-  void Refresh();
   void Draw();
   void ChooseTarget(Point2i mouse_pos);
   void HandleKeyEvent(int key, int event_type);

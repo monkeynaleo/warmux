@@ -42,9 +42,9 @@ class Shotgun : public WeaponLauncher
 {
   protected:
     WeaponProjectile * GetProjectileInstance();
+    bool p_Shoot();
   public:
     Shotgun();
-    bool p_Shoot();
   private:
     void ShootSound();
 };

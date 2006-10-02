@@ -63,7 +63,7 @@ class WeaponProjectile : public PhysicalObj
     int GetTotalTimeout();
     void ResetTimeOut();
     bool change_timeout_allowed();
-  
+    void RemoveFromPhysicalEngine();
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
     virtual void SignalGroundCollision();
@@ -78,7 +78,6 @@ class WeaponProjectile : public PhysicalObj
     virtual void Explosion();
     virtual void RandomizeShoot(double &angle,double &strength);
     virtual void DoExplosion();
-    void RemoveFromPhysicalEngine();
 };
 
 class WeaponBullet : public WeaponProjectile
@@ -113,6 +112,7 @@ class WeaponLauncher : public Weapon
     virtual void p_Deselect();
     virtual WeaponProjectile * GetProjectileInstance() = 0;
     virtual bool ReloadLauncher();
+    void Refresh();
   private:
     void DirectExplosion();
   
@@ -123,7 +123,6 @@ class WeaponLauncher : public Weapon
                    weapon_visibility_t visibility = ALWAYS_VISIBLE);
     virtual ~WeaponLauncher();
 
-    void Refresh();
     virtual void Draw();
     virtual void HandleKeyEvent(int action, int event_type);
 
@@ -145,4 +144,4 @@ class WeaponLauncher : public Weapon
     ExplosiveWeaponConfig& cfg();
 };
 
-#endif
+#endif /* WEAPON_LAUNCHER_H */

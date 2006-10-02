@@ -30,57 +30,57 @@ class AirAttack;
 
 class AirAttackConfig : public ExplosiveWeaponConfig
 { 
-public:
-  double speed;
-  uint nbr_obus; 
-public:
-  AirAttackConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
+  public:
+    double speed;
+    uint nbr_obus; 
+  public:
+    AirAttackConfig();
+    virtual void LoadXml(xmlpp::Element *elem);
 };
 
 class Obus : public WeaponProjectile
 {
-public:
-  Obus(AirAttackConfig& cfg);
+  public:
+    Obus(AirAttackConfig& cfg);
 };
 
 class Plane : public PhysicalObj
 {
-private:
-  uint nb_dropped_bombs;
-  Obus * last_dropped_bomb;
+  private:
+    uint nb_dropped_bombs;
+    Obus * last_dropped_bomb;
 
-  int obus_dx, obus_dy;
-  Sprite *image;
+    int obus_dx, obus_dy;
+    Sprite *image;
 
-  int cible_x;
-  AirAttackConfig &cfg;
+    int cible_x;
+    AirAttackConfig &cfg;
 
-  bool OnTopOfTarget() const;
-  int GetDirection() const;
-  void DropBomb();
+    bool OnTopOfTarget() const;
+    int GetDirection() const;
+    void DropBomb();
 
-public:
-  Plane(AirAttackConfig& cfg);
-  void Shoot(double speed, Point2i& target);
-  void Draw();
-  void Refresh();
+  public:
+    Plane(AirAttackConfig& cfg);
+    void Shoot(double speed, Point2i& target);
+    void Draw();
+    void Refresh();
 };
 
 class AirAttack : public Weapon
 {
-private:
-  bool p_Shoot();
-  Point2i target;
-  Plane plane;
+  private:
+    Point2i target;
+    Plane plane;
+  protected:
+    bool p_Shoot();
+    void Refresh();
+  public:
+    AirAttack();
+    virtual void ChooseTarget (Point2i mouse_pos);
 
-public:
-  AirAttack();
-  void Refresh();
-  virtual void ChooseTarget (Point2i mouse_pos);
-
- private:
-  AirAttackConfig& cfg();
+  private:
+    AirAttackConfig& cfg();
 };
 
-#endif
+#endif /* AIR_ATTACK_H */

@@ -28,26 +28,26 @@
 
 class BaseballConfig : public WeaponConfig
 {
-public:
-  uint range;
-  uint strength;
-public:
-  BaseballConfig();
-  void LoadXml(xmlpp::Element *elem);
+  public:
+    uint range;
+    uint strength;
+  public:
+    BaseballConfig();
+    void LoadXml(xmlpp::Element *elem);
 };
 
 //-----------------------------------------------------------------------------
 
 class Baseball : public Weapon
 {
- private:
-  bool p_Shoot();
+  protected:
+    bool p_Shoot();
+    void Refresh();
 
- public:
-  Baseball();
-  void Refresh();
-  BaseballConfig &cfg();
+  public:
+    Baseball();
+    BaseballConfig &cfg();
 };
 
 //-----------------------------------------------------------------------------
-#endif
+#endif /* BASEBALL_H */
