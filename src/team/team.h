@@ -51,10 +51,10 @@ public:
   CrossHair crosshair;
   Surface flag;
   Point2i sauve_camera;
-  bool camera_est_sauve;
   TeamEnergy energy;
 
 private:
+  bool is_camera_saved;
   std::string m_teams_dir; // parent directory hosting the data
   std::string m_id;
   std::string m_name;
