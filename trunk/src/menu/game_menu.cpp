@@ -115,10 +115,8 @@ GameMenu::GameMenu() :
   bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus");
   bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus");
 
-  map_box->AddWidget(bt_map_minus);
-
   Box * tmp_map_box = new VBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-					   mainBoxWidth-80, mainBoxHeight), false);
+					   mainBoxWidth-130, mainBoxHeight), false);
   tmp_map_box->SetMargin(0);
   tmp_map_box->SetBorder( Point2i(0,0) );
   uint map_preview_height = mainBoxHeight -2*10 -40;
@@ -127,6 +125,8 @@ GameMenu::GameMenu() :
   Box* previews_box = new HBox( Rectanglei(0, 0, 1, map_preview_height+10 ), false);
   previews_box->SetMargin(10);
   previews_box->SetBorder( Point2i(0,0) );
+
+  previews_box->AddWidget(bt_map_minus);
 
   map_preview_before2 = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before2);
@@ -144,6 +144,8 @@ GameMenu::GameMenu() :
   map_preview_after2 = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_after2);
 
+  previews_box->AddWidget(bt_map_plus);
+
   tmp_map_box->AddWidget(previews_box);
 
   // Map information
@@ -155,7 +157,6 @@ GameMenu::GameMenu() :
 
   map_box->AddWidget(tmp_map_box);
 
-  map_box->AddWidget(bt_map_plus);
   widgets.AddWidget(map_box);
 
   /* Choose other game options */
