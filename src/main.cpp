@@ -115,7 +115,7 @@ int AppWormux::main (int argc, char **argv){
   }
   catch (...){
     std::cerr << std::endl
-	      << _("Unexcepted exception caught...") << std::endl
+	      << _("Unexpected exception caught...") << std::endl
 	      << std::endl;
     WakeUpDebugger();
   }
