@@ -167,16 +167,33 @@ void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
   int ending_x = position.x+spr.GetWidth() <= m_surface.GetWidth() ? position.x+spr.GetWidth() : m_surface.GetWidth();
   int ending_y = position.y+spr.GetHeight() <= m_surface.GetHeight() ? position.y+spr.GetHeight() : m_surface.GetHeight();
   unsigned char r,g,b;
+  unsigned char* spr_buf = spr.GetPixels();
+  unsigned char* tile_buf = m_surface.GetPixels();
+
+  // Really dirty hack: there is no obvious reason it should work, but with this it works (TM)
+  spr_buf++;
+
   for( int py = starting_y ; py < ending_y ; py++) {
     for( int px = starting_x ; px < ending_x ; px++) {
-      if ( spr.GetPixels()[(py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 3] != 255) {
-        r = spr.GetPixels()[(py-position.y)*spr.GetPitch() + (px-position.x) * 4];
-        g = spr.GetPixels()[(py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 1];
-        b = spr.GetPixels()[(py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 2];
-        m_surface.GetPixels()[py*m_surface.GetPitch() + (px * 4)] = b;       // Blue
-        m_surface.GetPixels()[py*m_surface.GetPitch() + (px * 4) + 1] = g;   // Green
-        m_surface.GetPixels()[py*m_surface.GetPitch() + (px * 4) + 2] = r;   // Red
-        m_surface.GetPixels()[py*m_surface.GetPitch() + (px * 4) + 3] = 255; // Alpha
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+      if ( *(spr_buf+((py-position.y)*spr.GetPitch()) + ((px-position.x) * 4 + 3)) == SDL_ALPHA_OPAQUE) {
+        r = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4);
+        g = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 1);
+        b = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 2);
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4)) = r;       // Blue
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + 1) = g;   // Green
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + 2) = b;   // Red
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + 3) = SDL_ALPHA_OPAQUE; // Alpha
+#else
+      if ( *(spr_buf+((py-position.y)*spr.GetPitch()) + ((px-position.x) * 4)) == SDL_ALPHA_OPAQUE) {
+        r = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 3);
+        g = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 2);
+        b = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 1);
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + 3) = r;       // Blue
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + 2) = g;   // Green
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + 1) = b;   // Red
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4)) = SDL_ALPHA_OPAQUE; // Alpha
+#endif
       }
     }
   }
