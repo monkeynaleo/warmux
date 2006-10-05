@@ -48,6 +48,8 @@ ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(r
   buttonRect.SetPosition(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7);
   m_down = new Button(buttonRect, res, "menu/down");
 
+  resource_manager.UnLoadXMLProfile( res);
+
   height_item = (*Font::GetInstance(Font::FONT_SMALL)).GetHeight();
   first_visible_item = 0;
   nb_visible_items_max = GetSizeY()/height_item;
