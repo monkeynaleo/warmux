@@ -30,6 +30,7 @@ PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   img= resource_manager.LoadSprite( res, "objet/barrel");
+  resource_manager.UnLoadXMLProfile(res);
 
   life_points = 100;
 
