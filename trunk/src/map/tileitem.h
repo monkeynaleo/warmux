@@ -38,6 +38,7 @@ public:
   virtual unsigned char GetAlpha(const Point2i &pos) = 0;
   virtual void Dig(const Point2i &position, const Surface& dig) = 0;
   virtual void Dig(const Point2i &center, const uint radius) = 0;
+  virtual void MergeSprite(const Point2i &position, Surface& spr) {};
   virtual Surface GetSurface() = 0;
   virtual void Draw(const Point2i &pos) = 0;
   virtual bool IsTotallyEmpty() const = 0;
@@ -74,8 +75,8 @@ TileItem_AlphaSoftware(const Point2i &size);
   unsigned char GetAlpha(const Point2i &pos);
   void Dig(const Point2i &position, const Surface& dig);
   void Dig(const Point2i &center, const uint radius);
+  void MergeSprite(const Point2i &position, Surface& spr);
   void Draw(const Point2i &pos);
-
 
   bool NeedDelete() const {return need_delete; };
   void CheckEmpty();

@@ -144,6 +144,13 @@ void Map::PutSprite(const Point2i pos, Sprite* spr)
    to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
 }
 
+void Map::MergeSprite(const Point2i pos, Sprite * spr)
+{
+  Surface tmp = spr->GetSurface();
+  ground.MergeSprite (pos, tmp);
+  to_redraw->push_back(Rectanglei(pos, spr->GetSizeMax()));
+}
+
 void Map::DrawSky()
 {
   SwitchDrawingCache();

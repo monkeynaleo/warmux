@@ -128,6 +128,25 @@ void Tile::PutSprite(const Point2i pos, Sprite* spr)
   s.SetAlpha(SDL_SRCALPHA, 0);
 }
 
+void Tile::MergeSprite(const Point2i &position, Surface& surf){
+  Rectanglei rect = Rectanglei(position, surf.GetSize());
+  Point2i firstCell = Clamp(position/CELL_SIZE);
+  Point2i lastCell = Clamp((position + surf.GetSize())/CELL_SIZE);
+  Point2i c;
+
+  for( c.y = firstCell.y; c.y <= lastCell.y; c.y++ )
+    for( c.x = firstCell.x; c.x <= lastCell.x; c.x++){
+      Point2i offset = position - c * CELL_SIZE;
+      if(item[c.y*nbCells.x + c.x]->IsTotallyEmpty()) {
+        delete item[c.y*nbCells.x + c.x];
+        item[c.y*nbCells.x + c.x] = new TileItem_AlphaSoftware(CELL_SIZE);
+        item[c.y*nbCells.x + c.x]->GetSurface().SetAlpha(0,0);
+        item[c.y*nbCells.x + c.x]->GetSurface().Fill(0x00000000);
+        item[c.y*nbCells.x + c.x]->GetSurface().SetAlpha(SDL_SRCALPHA,0);
+      }
+      item[c.y*nbCells.x + c.x]->MergeSprite(offset, surf);
+    }
+}
 void Tile::LoadImage (Surface& terrain){
     FreeMem();
 
