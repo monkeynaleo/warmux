@@ -57,6 +57,7 @@ CharacterCursor::CharacterCursor()
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   image = resource_manager.LoadSprite( res, "gfx/curseur");
+  resource_manager.UnLoadXMLProfile( res);
 }
 
 CharacterCursor::~CharacterCursor()
