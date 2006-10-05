@@ -80,6 +80,7 @@ Team * Team::CreateTeam (const std::string& teams_dir,
     // Load flag
     Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
     Surface flag = resource_manager.LoadImage(res, "flag");
+    resource_manager.UnLoadXMLProfile(res);
 
     // Get sound profile
     std::string sound_profile;

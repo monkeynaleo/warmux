@@ -69,6 +69,8 @@ BonusBox::BonusBox()
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
+  resource_manager.UnLoadXMLProfile(res);
+
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
