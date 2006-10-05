@@ -58,7 +58,7 @@ Mouse::Mouse(){
   pointer_select = resource_manager.LoadImage(res, "mouse/pointer_select");
   pointer_move = resource_manager.LoadImage(res, "mouse/pointer_move");
   pointer_aim = resource_manager.LoadImage(res, "mouse/pointer_aim");
-  resource_manager.UnLoadXMLProfile( res);
+  //resource_manager.UnLoadXMLProfile( res);
   current_pointer = POINTER_STANDARD;
   delete res;
 }
