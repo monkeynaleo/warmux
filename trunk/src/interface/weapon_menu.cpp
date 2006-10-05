@@ -218,6 +218,7 @@ WeaponsMenu::WeaponsMenu()
   my_button4->cache.EnableLastFrameCache();
   my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));  
   my_button5->cache.EnableLastFrameCache();
+  resource_manager.UnLoadXMLProfile( res);
 }
 
 // Add a new weapon to the weapon menu.
