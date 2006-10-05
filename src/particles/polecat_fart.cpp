@@ -43,5 +43,6 @@ void PolecatFart::SignalObjectCollision(PhysicalObj * obj)
   if (!is_active) return;
   Character * tmp = (Character *)obj;
   tmp->SetEnergyDelta(-10);
+  tmp->SetDiseaseDamage(5, 3);
   is_active = false;
 }

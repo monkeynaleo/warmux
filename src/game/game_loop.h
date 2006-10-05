@@ -82,6 +82,7 @@ private:
 
   PhysicalObj* GetMovingObject();
   bool IsAnythingMoving();
+  void ApplyDiseaseDamage();
   void ApplyDeathMode();
 };
 #endif

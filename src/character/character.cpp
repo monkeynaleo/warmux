@@ -101,6 +101,10 @@ Character::Character (Team& my_team, const std::string &name) :
   max_damage = 0;
   current_total_damage = 0;
 
+  // Disease damage
+  disease_damage_per_turn = 0;
+  disease_duration = 0;
+
   // Survivals
   survivals = 0;
 
@@ -150,6 +154,8 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter), m_
   hidden               = acharacter.hidden;
   channel_step         = acharacter.channel_step ;
   previous_strength    = acharacter.previous_strength;
+  disease_damage_per_turn = acharacter.disease_damage_per_turn;
+  disease_duration     = acharacter.disease_duration;
 
   if (acharacter.body)
     body = new Body(*acharacter.body);
@@ -333,6 +339,30 @@ void Character::Die()
     // Signal the death
     GameLoop::GetInstance()->SignalCharacterDeath (this);
   }
+}
+
+bool Character::IsDiseased() const
+{
+  return disease_duration > 0;
+}
+
+void Character::SetDiseaseDamage(const uint damage_per_turn, const uint duration)
+{
+  disease_damage_per_turn = damage_per_turn;
+  disease_duration = duration;
+}
+
+// Keep almost 1 in energy
+uint Character::GetDiseaseDamage() const
+{
+  if (disease_damage_per_turn < energy) return disease_damage_per_turn;
+  return energy - 1;
+}
+
+void Character::DecDiseaseDuration()
+{
+  if (disease_duration > 0) disease_duration--;
+  else disease_damage_per_turn = 0;
 }
 
 void Character::Draw()

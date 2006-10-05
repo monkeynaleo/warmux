@@ -47,6 +47,8 @@ private:
 
   // energy
   uint energy;
+  uint disease_damage_per_turn;
+  uint disease_duration;
   int  damage_other_team;
   int  damage_own_team;
   int  max_damage;
@@ -99,6 +101,11 @@ public:
   bool GotInjured() const;
   void Die();
   bool IsActiveCharacter() const;
+  // Disease handling
+  bool IsDiseased() const;
+  void SetDiseaseDamage(const uint damage_per_turn, const uint disease_duration);
+  uint GetDiseaseDamage() const;
+  void DecDiseaseDuration();
 
   void Draw();
   void Refresh();
