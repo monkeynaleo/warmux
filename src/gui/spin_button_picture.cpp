@@ -34,6 +34,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
   m_image = resource_manager.LoadImage(res, resource_id);
+  resource_manager.UnLoadXMLProfile( res); 
 
   txt_label = new Text(label, gray_color, Font::GetInstance(Font::FONT_NORMAL));
 

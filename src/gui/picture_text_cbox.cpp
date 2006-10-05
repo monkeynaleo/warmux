@@ -30,6 +30,7 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_image = resource_manager.LoadImage(res, resource_id);
+  resource_manager.UnLoadXMLProfile( res);
  
   SetPosition( rect.GetPosition() );
   SetSize( rect.GetSize() );

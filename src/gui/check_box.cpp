@@ -28,6 +28,8 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
   m_checked_image = resource_manager.LoadSprite( res, "menu/check");
+  resource_manager.UnLoadXMLProfile( res);
+  
   m_checked_image->cache.EnableLastFrameCache();
  
   SetPosition( rect.GetPosition() );
@@ -37,6 +39,7 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
   m_value = value;
 
   txt_label = new Text(label, white_color, Font::GetInstance(Font::FONT_SMALL));
+  
 }
 
 CheckBox::~CheckBox()
