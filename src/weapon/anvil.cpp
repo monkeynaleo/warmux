@@ -31,6 +31,7 @@
 #include "../interface/game_msg.h"
 #include "../tool/i18n.h"
 #include "../object/objects_list.h"
+#include "../map/map.h"
 //-----------------------------------------------------------------------------
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,
@@ -38,17 +39,20 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
   WeaponProjectile ("anvil", cfg, p_launcher)
 {
   explode_with_collision = false;
+  explode_colliding_character = false;
+  //SetTestRect(50,50,25,5);
 }
-
-//-----------------------------------------------------------------------------
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj)
 {
-  if (typeid(*obj) == typeid(Character))
-  {
-    Character * tmp = (Character *)(obj);
-    tmp -> SetEnergyDelta (-200);
-  }
+  Character * tmp = (Character *)(obj);
+  tmp -> SetEnergyDelta (-200);
+}
+
+void Anvil::SignalGroundCollision()
+{
+  world.MergeSprite(GetPosition(),image);
+  lst_objects.RemoveObject(this);
 }
 
 //-----------------------------------------------------------------------------
@@ -57,11 +61,13 @@ AnvilLauncher::AnvilLauncher() :
     WeaponLauncher(WEAPON_ANVIL, "anvil_launcher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Anvil");
+  can_be_used_on_closed_map = false;
   ReloadLauncher();
 }
 
 void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 {
+  mouse_pos.y = 0;
   target = mouse_pos - (m_image->GetSize()/2);
   ActiveTeam().GetWeapon().NewActionShoot();
 }
