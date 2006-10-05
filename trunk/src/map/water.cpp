@@ -47,6 +47,7 @@ void Water::Init(){
    surface.SetAlpha(0, 0);
    pattern.NewSurface( Point2i(180, surface.GetHeight() + 40), SDL_SWSURFACE|SDL_SRCALPHA, true);
    shift1 = 0;
+   resource_manager.UnLoadXMLProfile(res);
 }
 
 void Water::Reset(){
