@@ -28,14 +28,30 @@
 
 class Team;
 
+/* class TeamSelection */
+/* { */
+/*   Box * container; */
+/*   PictureWidget *team_logo; */
+/*   Label * team_name; */
+
+/*  protected: */
+/*   TeamSelection(); */
+/*   void SetTeam(Team& _team); */
+/* } */
+
 class GameMenu : public Menu
 {
    /* Team controllers */
-   ListBox *lbox_all_teams;   
-   ListBox *lbox_selected_teams;
-   Button *bt_add_team;
-   Button *bt_remove_team;
-   PictureWidget *team_logo;
+   PictureWidget* teams_logos[4];
+   Label* teams_names[4];
+   Team* teams[4];
+   SpinButtonBig *teams_nb;
+
+ /*   ListBox *lbox_all_teams;    */
+/*    ListBox *lbox_selected_teams; */
+/*    Button *bt_add_team; */
+/*    Button *bt_remove_team; */
+/*    PictureWidget *team_logo; */
 
    Team * last_team;
 
@@ -57,8 +73,9 @@ class GameMenu : public Menu
 
 
    void ChangeMap(int delta_index);   
-   void SelectTeamLogo(Team *t);
-   void MoveTeams(ListBox * from, ListBox * to, bool sort);
+
+   void SelectTeam(Team& t, int id);
+   void SetNbTeams(uint nb_teams);
 
    void SaveOptions();
    void OnClic(const Point2i &mousePosition, int button);
