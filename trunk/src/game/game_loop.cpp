@@ -563,6 +563,8 @@ void GameLoop::SetState(int new_state, bool begin_game)
     camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
     interaction_enabled = true; // Be sure that we can play !
 
+    // Applying Disease damage and Death mode.
+    ApplyDiseaseDamage();
     ApplyDeathMode();
 
     break;
@@ -693,6 +695,17 @@ void GameLoop::SignalCharacterDamageFalling (Character *character)
     {
       SetState (END_TURN);
     }
+}
+
+// Apply Disease damage
+void GameLoop::ApplyDiseaseDamage()
+{
+  FOR_ALL_LIVING_CHARACTERS(team, character) {
+    if (character->IsDiseased()) {
+      character->SetEnergyDelta(-character->GetDiseaseDamage());
+      character->DecDiseaseDuration();
+    }
+  }
 }
 
 // Reduce energy of each character if we are in death mode
