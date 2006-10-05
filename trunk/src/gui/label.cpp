@@ -51,7 +51,7 @@ void Label::SetSizePosition(const Rectanglei &rect)
   StdSetSizePosition(rect);
 }
 
-void Label::SetText(std::string &new_txt)
+void Label::SetText(const std::string &new_txt)
 {
   need_redrawing = true;
   delete txt_label;

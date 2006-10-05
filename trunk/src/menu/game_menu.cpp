@@ -71,47 +71,55 @@ GameMenu::GameMenu() :
 				       mainBoxWidth, mainBoxHeight));
   team_box->AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
 
-  Box * tmp_team_box = new VBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP,
-					   mainBoxWidth-60, mainBoxHeight), false);
-  Label * select_teams_label = new Label(_("Select the teams:"), rectZero, *normal_font);
+  // How many teams ?
+  teams_nb = new SpinButtonBig(_("Number of teams:"), stdRect,
+			       2, 1,
+			       2, 4);
+  team_box->AddWidget(teams_nb);
+  
+  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0, mainBoxWidth-150, mainBoxHeight),false);
+  Box * top_team_options = new HBox ( Rectanglei(0, 0, mainBoxWidth-150, mainBoxHeight/2 - 20), false);
+  Box * bottom_team_options = new HBox ( Rectanglei(0, 0, mainBoxWidth-150, mainBoxHeight/2 - 20), false);
+  top_team_options->SetMargin(25);
+  bottom_team_options->SetMargin(25);
+  
+  // Initialize teams
+  for (int i=0; i < 2; i++) {
+    Box * tmp_team_box = new HBox(Rectanglei(0, 0, 180, 80), false);
+    teams_logos[i] = new PictureWidget( Rectanglei(0,0,48,48) );
+    teams_names[i] = new Label(_(" "), Rectanglei(0,0,210,0), 
+			      *normal_font, gray_color);
+    tmp_team_box->AddWidget(teams_logos[i]);
+    tmp_team_box->AddWidget(teams_names[i]);
+    teams[i]=NULL;
+    top_team_options->AddWidget(tmp_team_box);
+  }
 
-  tmp_team_box->AddWidget(select_teams_label);
+  for (int i=2; i < 4; i++) {
+    Box * tmp_team_box = new HBox(Rectanglei(0, 0, 180, 80), false);
+    teams_logos[i] = new PictureWidget( Rectanglei(0,0,48,48) );
+    teams_names[i] = new Label(_(" "), Rectanglei(0,0,210,0), 
+			      *normal_font, gray_color);
+    tmp_team_box->AddWidget(teams_logos[i]);
+    tmp_team_box->AddWidget(teams_names[i]);
+    teams[i]=NULL;
+    bottom_team_options->AddWidget(tmp_team_box);
+  }
+  top_n_bottom_team_options->AddWidget(top_team_options);
+  top_n_bottom_team_options->AddWidget(bottom_team_options);
+  
+  team_box->AddWidget(top_n_bottom_team_options);
 
-  Box * tmp_box = new HBox( Rectanglei(0,0, mainBoxWidth,
-				       mainBoxHeight - select_teams_label->GetSizeY())
-			    , false);
-  tmp_box->SetMargin(10);
-  tmp_box->SetBorder( Point2i(0,0) );
-
-  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, tmp_box->GetSizeY() - 2*10 ), false);
-  tmp_box->AddWidget(lbox_all_teams);
-
-  Box * buttons_tmp_box = new VBox(Rectanglei(0, 0, 68, 1), false);
-
-  bt_add_team = new Button( Point2i(0, 0) ,res,"menu/arrow-right");
-  buttons_tmp_box->AddWidget(bt_add_team);
-
-  bt_remove_team = new Button( Point2i( 0, 0),res,"menu/arrow-left");
-  buttons_tmp_box->AddWidget(bt_remove_team);
-
-  team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
-  buttons_tmp_box->AddWidget(team_logo);
-  last_team = NULL;
-
-  tmp_box->AddWidget(buttons_tmp_box);
-  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, tmp_box->GetSizeY() - 2*10 ), false);
-  tmp_box->AddWidget(lbox_selected_teams);
-
-  tmp_team_box->AddWidget(tmp_box);
-  team_box->AddWidget(tmp_team_box);
   widgets.AddWidget(team_box);
 
-  /* Choose the map !! */
+  // ################################################
+  // ##  MAP SELECTION
+  // ################################################
   Box * map_box = new HBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
 				       mainBoxWidth, mainBoxHeight));
   map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
-  // Create the buttons
+  // PreviousMap/NextMap buttons
   bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus");
   bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus");
 
@@ -215,15 +223,22 @@ GameMenu::GameMenu() :
     it=teams_list.full_list.begin(),
     end=teams_list.full_list.end();
 
-  uint i=0;
+  uint i=0, j=0;
   for (; it != end; ++it)
   {
     bool choix = teams_list.IsSelected (i);
-    if (choix)
-      lbox_selected_teams->AddItem (false, (*it).GetName(), (*it).GetId());
-    else
-      lbox_all_teams->AddItem (false, (*it).GetName(), (*it).GetId());
+    if (choix) {
+      SelectTeam((*it), j);
+      j++;
+    }
     ++i;
+  }
+
+  if (j < 2) {
+    SetNbTeams(2);
+    teams_nb->SetValue(2);
+  } else {
+    teams_nb->SetValue(j);
   }
 
   // Load game options
@@ -251,16 +266,20 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
     ChangeMap(+1);
   } else if (map_preview_after2->Contains(mousePosition) ) {
     ChangeMap(+2);
-  } else if (lbox_all_teams->Clic(mousePosition, button)) {
+  } else if (teams_nb->Clic(mousePosition, button)){
+    SetNbTeams(teams_nb->GetValue());
+  } 
+  // else if (lbox_all_teams->Clic(mousePosition, button)) {
 
-  } else if (lbox_selected_teams->Clic(mousePosition, button)) {
+//   } else if (lbox_selected_teams->Clic(mousePosition, button)) {
 
-  } else if ( bt_add_team->Contains(mousePosition)) {
-    if (lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
-      MoveTeams(lbox_all_teams, lbox_selected_teams, false);
-  } else if ( bt_remove_team->Contains(mousePosition)) {
-    MoveTeams(lbox_selected_teams, lbox_all_teams, true);
-  } else if ( game_options->Clic(mousePosition, button)) {
+//   } else if ( bt_add_team->Contains(mousePosition)) {
+//     if (lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
+//       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
+//   } else if ( bt_remove_team->Contains(mousePosition)) {
+//     MoveTeams(lbox_selected_teams, lbox_all_teams, true);
+//   } 
+  else if ( game_options->Clic(mousePosition, button)) {
 
   }
 }
@@ -270,24 +289,27 @@ void GameMenu::SaveOptions()
   MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
 
   // teams
-  std::vector<list_box_item_t> *
-    selected_teams = lbox_selected_teams->GetItemsList();
+  std::list<uint> selection;
 
-  if (selected_teams->size() > 1) {
+  uint nb_teams=0;
+  for (int i=0; i<4; i++) {
+    if (teams[i]!=NULL)
+      nb_teams++;
+  }
+
+  if (nb_teams >= 2) {
     std::list<uint> selection;
-
-    std::vector<list_box_item_t>::iterator
-      it = selected_teams->begin(),
-      end = selected_teams->end();
-
-    int index = -1;
-    for (; it != end; ++it) {
-      teams_list.FindById(it->value, index);
-      if (index > -1)
-	selection.push_back(uint(index));
+    
+    for (int i=0; i<4; i++) {
+      if (teams[i] != NULL) {
+	int index = -1;
+	
+	teams_list.FindById(teams[i]->GetId(), index);
+	if (index > -1)
+	  selection.push_back(uint(index));
+      }
     }
     teams_list.ChangeSelection (selection);
-
   }
 
   //Save options in XML
@@ -345,41 +367,65 @@ void GameMenu::ChangeMap(int delta_index)
     map_preview_after2->SetNoSurface();
 }
 
-void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
-{
-  if (from->GetSelectedItem() != -1) {
-    to->AddItem (false,
-		 from->ReadLabel(),
-		 from->ReadValue());
-    to->Deselect();
-    if (sort) to->Sort();
+// void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
+// {
+//   if (from->GetSelectedItem() != -1) {
+//     to->AddItem (false,
+// 		 from->ReadLabel(),
+// 		 from->ReadValue());
+//     to->Deselect();
+//     if (sort) to->Sort();
 
-    from->RemoveSelected();
-  }
+//     from->RemoveSelected();
+//   }
+// }
+
+// void GameMenu::SelectTeamLogo(Team * t)
+// {
+//   if (last_team != t) {
+//     last_team = t;
+//     team_logo->SetSurface(last_team->flag);
+//   }
+// }
+
+void GameMenu::SelectTeam(Team& t, int id)
+{
+  teams_logos[id]->SetSurface(t.flag);
+  teams_names[id]->SetText(t.GetName());
+  teams[id]=&t;
 }
 
-void GameMenu::SelectTeamLogo(Team * t)
+void GameMenu::SetNbTeams(uint nb_teams)
 {
-  if (last_team != t) {
-    last_team = t;
-    team_logo->SetSurface(last_team->flag);
+  // we hide the useless teams selector
+  for (uint i=nb_teams; i<4; i++) {
+    teams_logos[i]->SetNoSurface();
+    teams_names[i]->SetText(" ");
+    teams[i] = NULL;
+  }
+
+  for (uint i=0; i<nb_teams;i++) {
+    if (teams[i] == NULL) {
+      // we should find an available team
+      SelectTeam(*(teams_list.FindByIndex(i)), i);
+    }
   }
 }
 
 void GameMenu::Draw(const Point2i &mousePosition)
 {
-  int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
-  if (t != -1) {
-    int index = -1;
-    Team * new_team = teams_list.FindById(lbox_all_teams->ReadValue(t), index);
-    SelectTeamLogo(new_team);
-  } else {
-    t = lbox_selected_teams->MouseIsOnWhichItem(mousePosition);
-    if (t != -1) {
-      int index = -1;
-      Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);
-      SelectTeamLogo(new_team);
-    }
-  }
+//   int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
+//   if (t != -1) {
+//     int index = -1;
+//     Team * new_team = teams_list.FindById(lbox_all_teams->ReadValue(t), index);
+//     SelectTeamLogo(new_team);
+//   } else {
+//     t = lbox_selected_teams->MouseIsOnWhichItem(mousePosition);
+//     if (t != -1) {
+//       int index = -1;
+//       Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);
+//       SelectTeamLogo(new_team);
+//     }
+//   }
 }
 
