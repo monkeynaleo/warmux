@@ -159,6 +159,29 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
   }
 }
 
+void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
+{
+  need_check_empty = true;
+  int starting_x = position.x >= 0 ? position.x : 0;
+  int starting_y = position.y >= 0 ? position.y : 0;
+  int ending_x = position.x+spr.GetWidth() <= m_surface.GetWidth() ? position.x+spr.GetWidth() : m_surface.GetWidth();
+  int ending_y = position.y+spr.GetHeight() <= m_surface.GetHeight() ? position.y+spr.GetHeight() : m_surface.GetHeight();
+  unsigned char r,g,b;
+  for( int py = starting_y ; py < ending_y ; py++) {
+    for( int px = starting_x ; px < ending_x ; px++) {
+      if ( spr.GetPixels()[(py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 3] != 255) {
+        r = spr.GetPixels()[(py-position.y)*spr.GetPitch() + (px-position.x) * 4];
+        g = spr.GetPixels()[(py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 1];
+        b = spr.GetPixels()[(py-position.y)*spr.GetPitch() + (px-position.x) * 4 + 2];
+        m_surface.GetPixels()[py*m_surface.GetPitch() + (px * 4)] = b;       // Blue
+        m_surface.GetPixels()[py*m_surface.GetPitch() + (px * 4) + 1] = g;   // Green
+        m_surface.GetPixels()[py*m_surface.GetPitch() + (px * 4) + 2] = r;   // Red
+        m_surface.GetPixels()[py*m_surface.GetPitch() + (px * 4) + 3] = 255; // Alpha
+      }
+    }
+  }
+}
+
 void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp)
 {
   if( start_x < CELL_SIZE.x && end_x >= 0)

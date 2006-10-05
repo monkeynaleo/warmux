@@ -42,6 +42,8 @@ public:
 
   // Insert a sprite into the ground
   void PutSprite(const Point2i pos, Sprite* spr);
+  // Merge a sprite into map (using alpha information)
+  void MergeSprite(const Point2i &position, Surface & provider);
 
   // Load an image
   void LoadImage (Surface& ground_surface);
