@@ -146,7 +146,9 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   team_box->AddWidget(bt_next_team);
 
   widgets.AddWidget(team_box);
-  
+
+  resource_manager.UnLoadXMLProfile(res);
+
   //Results
   most_violent = new ResultBox(Rectanglei(x, y+int(1.5*max_height), total_width, max_height),
                                true, _("Most violent"), *big_font,

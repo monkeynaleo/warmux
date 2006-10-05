@@ -94,6 +94,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   msg_box->NewMessage(""); // Skip a line
   msg_box->NewMessage("Have a good game!");
 
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 NetworkConnectionMenu::~NetworkConnectionMenu()
