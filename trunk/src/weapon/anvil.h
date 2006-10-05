@@ -35,6 +35,7 @@ class Anvil : public WeaponProjectile
           WeaponLauncher * p_launcher);
   protected:
     void SignalObjectCollision(PhysicalObj * obj);
+    void SignalGroundCollision();
 };
 
 class AnvilLauncher : public WeaponLauncher
