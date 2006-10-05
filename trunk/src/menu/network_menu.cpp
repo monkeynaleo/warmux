@@ -128,6 +128,8 @@ NetworkMenu::NetworkMenu() :
   //map_box->enabled = false;
   widgets.AddWidget(map_box);
 
+  resource_manager.UnLoadXMLProfile(res);
+
   // Values initialization
 
   // Load Maps' list
