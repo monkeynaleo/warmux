@@ -187,10 +187,20 @@ std::string Action::PopString()
     Uint32 tmp = var.front();  
     var.pop_front();
     char tmp_str[5] = {0, 0, 0, 0, 0};
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
     memcpy(tmp_str, &tmp, 4);
     str += tmp_str;
     lenght -= 4;
-  }
+#else
+    char* c_tmp_str = (char*)(&tmp_str) + 3;
+    char* c_tmp = (char*)&tmp;
+    for(int i=0; i < 4; i++)
+      *(c_tmp_str--) = *(c_tmp++);
+
+    str += tmp_str;
+    lenght -= 4;    
+#endif
+    }
   MSG_DEBUG( "action", " (%s) Poping string : %s",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), str.c_str());
   return str;
