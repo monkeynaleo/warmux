@@ -41,7 +41,9 @@ private:
   // The int is used to classify weapon by sort
   std::multimap<uint, Weapon*> m_weapons_map;
   typedef std::multimap<uint, Weapon*>::value_type keybind;
+  typedef std::multimap<uint, Weapon*>::iterator weapons_map_it;
   void AddToList(Weapon* arme, uint num_sort);
+  Weapon* GetNextWeapon(uint sort, uint index);
 
 public:
   WeaponsList();

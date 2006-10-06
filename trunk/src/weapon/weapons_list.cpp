@@ -30,6 +30,7 @@
 #include "../object/objects_list.h"
 #include "../map/camera.h"
 #include "../team/macro.h"
+#include "../map/maps_list.h"
 //-----------------------------------------------------------------------------
 WeaponsList weapons_list;
 //-----------------------------------------------------------------------------
@@ -154,32 +155,58 @@ WeaponsList::weapons_list_type& WeaponsList::GetList()
 
 //-----------------------------------------------------------------------------
 
+Weapon* WeaponsList::GetNextWeapon(uint sort, uint index)
+{
+	uint n = m_weapons_map.count(sort);
+	index = index % n;  // index can't be greater than number of weapons
+	weapons_map_it it = m_weapons_map.lower_bound(sort);
+
+	if(index + 1 < n)
+	{
+		for(uint i=0; i < index + 1; i++)
+			it++;
+	}
+
+	return it->second;
+}
+
+//-----------------------------------------------------------------------------
+
 bool WeaponsList::GetWeaponBySort(uint sort, Weapon_type &type)
 {
   uint nb_weapons = m_weapons_map.count(sort);
   if (nb_weapons == 0) return false;
 
   // One or many weapons on this key
-  std::pair<std::multimap<uint, Weapon*>::iterator,
-    std::multimap<uint, Weapon*>::iterator> p = m_weapons_map.equal_range(sort);
+  std::pair<weapons_map_it, weapons_map_it> p = m_weapons_map.equal_range(sort);
+  weapons_map_it it = p.first, end = p.second;
 
-  std::multimap<uint, Weapon*>::iterator
-	it = p.first,
-    end = p.second;
+  Weapon* next_weapon = it->second;
 
-  // we turn between the differents possibility
   if (nb_weapons > 1)
     {
-      while ( (*it).second != &(ActiveTeam().GetWeapon()) && it != end) it++ ;
+    	// Find index of current weapon
+    	uint current_weapon;
+    	for(current_weapon=0; current_weapon < nb_weapons-1; current_weapon++, it++)
+	{
+		if(it->second == &(ActiveTeam().GetWeapon()))
+			break;
+	}
 
-      // the previous selected weapon has been founded
-      if (it != end) it++;
+	// Get next weapon that has enough ammo and can be used on the map
+	uint i = 0;
+	do
+	{
+		next_weapon = GetNextWeapon(sort, current_weapon++);
+	} while(i++ < nb_weapons && (ActiveTeam().ReadNbAmmos(next_weapon->GetName()) == 0 || !(next_weapon->CanBeUsedOnClosedMap() || ActiveMap().IsOpened())));
+	// this corresponds to:  while (stop-condition && (not-enoughammo || not-usable-on-map))
 
-      if (it == end) it = p.first;
+	// no right weapon has been found
+	if(i > nb_weapons)
+		return false;
     }
 
-  // then we selected the "next" one
-  type = (*it).second -> GetType();
+  type = next_weapon->GetType();
   return true;
 }
 
