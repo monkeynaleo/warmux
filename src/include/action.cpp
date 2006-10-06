@@ -128,10 +128,20 @@ void Action::Push(std::string val)
   {
     Uint32 tmp = 0;
     // Fix-me : We are reading out of the c_str() buffer there :
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
     strncpy((char*)&tmp, ch, 4);
     var.push_back(tmp);
     ch += 4;
     count -= 4;
+#else
+    char* c_tmp = (char*)&tmp;
+    c_tmp +=3;
+    for(int i=0; i < 4; i++)
+      *(c_tmp--) = *(ch++);
+
+    var.push_back(tmp);
+    count -= 4;
+#endif
   }
   MSG_DEBUG( "action", " (%s) Pushing string : %s",
   ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val.c_str());
