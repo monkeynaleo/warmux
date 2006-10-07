@@ -118,6 +118,8 @@ void ObjectsList::Refresh()
       {
 #ifdef DEBUG
         std::cerr << "Warning, \"" << object->ptr->GetName() << "\" is ghost, and still in the the object list" << std::endl;
+	camera.StopFollowingObj(object->ptr);
+	delete object->ptr;
 	object = lst.erase(object);
 #endif
       }
@@ -128,6 +130,8 @@ void ObjectsList::Refresh()
       }
     } else {
       MSG_DEBUG("lst_objects","Erasing object \"%s\" from the object list", object->ptr->GetName().c_str());
+      camera.StopFollowingObj(object->ptr);
+      delete object->ptr;
       object = lst.erase(object);
     }
     object++;
