@@ -74,6 +74,8 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_test_top = 0;
   m_test_bottom = 0;
 
+  m_rebound_position = Point2i(-1, -1);
+
   m_cfg.LoadXml(m_name,xml_config);  // Load physics constants from the xml file
   ResetConstants();       // Set physics constants from the xml file
 }
@@ -353,7 +355,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     // Make it rebound on the ground !!
     Rebound(contactPos, contact_angle);
-
+    CheckRebound();
   } else if ( collision == COLLISION_ON_OBJECT ) {
     SignalObjectCollision(collided_obj);
     collided_obj->SignalObjectCollision(this);
@@ -377,6 +379,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     double contact_angle = - GetSpeedAngle();
     Point2d contactPos = pos;
     Rebound(contactPos, contact_angle);
+    CheckRebound();
   }
   return;
 }
@@ -560,6 +563,21 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
       assert(m_collides_with_objects == false);
     }
   }
+}
+
+void PhysicalObj::CheckRebound()
+{
+  // If we bounce twice in a row at the same place, stop bouncing
+  // cause it's almost sure this object is stuck bouncing indefinitely
+  if( m_rebound_position != Point2i( -1, -1) )
+  {
+    if ( m_rebound_position == GetPosition() )
+    {
+      MSG_DEBUG("physic.state", "%s seems to be stuck in ground. Stop moving!", m_name.c_str());
+      StopMoving();
+    }
+  }
+  m_rebound_position = GetPosition();
 }
 
 bool PhysicalObj::IsOutsideWorldXY(Point2i position) const{
