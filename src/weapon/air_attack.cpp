@@ -150,7 +150,7 @@ bool Plane::OnTopOfTarget() const
 //-----------------------------------------------------------------------------
 
 AirAttack::AirAttack() :
-  Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE)//, plane(cfg())
+  Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE), plane(cfg())
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
@@ -170,8 +170,7 @@ void AirAttack::ChooseTarget(Point2i mouse_pos)
 bool AirAttack::p_Shoot ()
 {
   target = Mouse::GetInstance()->GetWorldPosition();
-  Plane* plane = new Plane(cfg());
-  plane->Shoot (cfg().speed, target);
+  plane.Shoot (cfg().speed, target);
   return true;
 }
 
