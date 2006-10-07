@@ -13,7 +13,6 @@ class Blowtorch : public Weapon
     void EndTurn();
   public:
     Blowtorch();
-    void DrawWeaponFire();
     void HandleKeyEvent(int action, int event_type);
 };
 
