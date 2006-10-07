@@ -204,7 +204,6 @@ public:
   const Point2i GetGunHolePosition();
 
   // Choose a target.
-  // Return false if it not fire directly after
   virtual void ChooseTarget (Point2i mouse_pos);
 
   //Misc actions. 
