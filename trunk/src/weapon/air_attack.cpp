@@ -165,11 +165,12 @@ void AirAttack::Refresh()
 void AirAttack::ChooseTarget(Point2i mouse_pos)
 {
   target = mouse_pos;
-  ActiveTeam().GetWeapon().NewActionShoot();
+  NewActionShoot();
 }
 
 bool AirAttack::p_Shoot ()
 {
+  target = Mouse::GetInstance()->GetWorldPosition();
   plane.Shoot (cfg().speed, target);
   return true;
 }

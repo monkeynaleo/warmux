@@ -362,7 +362,7 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache)
   if (jt != end) {
     jt++;
   }
-  std::cout << "Before: " <<  rectangleCache.size()  << std::endl;
+//  std::cout << "Before: " <<  rectangleCache.size()  << std::endl;
 
   while (it != end && jt != end) {
     if ( (*it).Contains(*jt) ) {
@@ -388,7 +388,7 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache)
       jt++;
     }
   }
-   std::cout << "After : " <<  rectangleCache.size()  << std::endl;
+//   std::cout << "After : " <<  rectangleCache.size()  << std::endl;
 
 //   std::cout << "//#############################" <<std::endl;
 }
