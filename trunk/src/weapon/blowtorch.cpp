@@ -9,7 +9,7 @@
 
 static const uint pause_time = 200;	// milliseconds
 
-Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new WeaponConfig())
+Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
 	m_name = _("Blowtorch");
 	override_keys = true;
@@ -44,8 +44,9 @@ bool Blowtorch::p_Shoot()
 	Point2i hole = ActiveCharacter().GetCenter();
 
 	double angle = ActiveTeam().crosshair.GetAngleRad();
-	double dx = cos(angle) * 20.0;
-	double dy = sin(angle) * 20.0;
+	uint h = cfg().range;
+	double dx = cos(angle) * h;
+	double dy = sin(angle) * h;
 
 	Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
 	world.Dig(pos, ActiveCharacter().GetHeight()/2);
@@ -80,4 +81,22 @@ void Blowtorch::HandleKeyEvent(int action, int event_type)
 		default:
 			break;
 	}
+}
+
+//-------------------------------------------------------------------------------------
+
+BlowtorchConfig::BlowtorchConfig()
+{
+	range = 2;
+}
+
+BlowtorchConfig& Blowtorch::cfg()
+{
+	return static_cast<BlowtorchConfig&>(*extra_params);
+}
+
+void BlowtorchConfig::LoadXml(xmlpp::Element* elem)
+{
+	WeaponConfig::LoadXml(elem);
+	LitDocXml::LitUint(elem, "range", range);
 }

@@ -3,6 +3,15 @@
 
 #include "weapon.h"
 
+class BlowtorchConfig : public WeaponConfig
+{
+  public:
+    BlowtorchConfig();
+    virtual void LoadXml(xmlpp::Element* elem);
+
+    uint range;
+};
+
 class Blowtorch : public Weapon
 {
   private:
@@ -13,6 +22,7 @@ class Blowtorch : public Weapon
     void EndTurn();
   public:
     Blowtorch();
+    BlowtorchConfig& cfg();
     void HandleKeyEvent(int action, int event_type);
 };
 
