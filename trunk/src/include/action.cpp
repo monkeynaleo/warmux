@@ -114,8 +114,8 @@ void Action::Push(double val)
   var.push_back(tmp[0]);
   var.push_back(tmp[1]);
 #else
-  var.push_back(tmp[0]);
   var.push_back(tmp[1]);
+  var.push_back(tmp[0]);
 #endif
 
   MSG_DEBUG( "action", " (%s) Pushing double : %f",
