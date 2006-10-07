@@ -110,8 +110,14 @@ void Action::Push(double val)
 {
   Uint32 tmp[2];
   memcpy(&tmp, &val, 8);
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   var.push_back(tmp[0]);
   var.push_back(tmp[1]);
+#else
+  var.push_back(tmp[0]);
+  var.push_back(tmp[1]);
+#endif
+
   MSG_DEBUG( "action", " (%s) Pushing double : %f",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
 }
@@ -165,11 +171,20 @@ double Action::PopDouble()
   assert(var.size() > 0);
   double val;
   Uint32 tmp[2];
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
   tmp[0] = var.front();
   var.pop_front();
   tmp[1] = var.front();
   var.pop_front();
   memcpy(&val, &tmp, 8);
+#else
+  tmp[1] = var.front();
+  var.pop_front();
+  tmp[0] = var.front();
+  var.pop_front();
+  memcpy(&val, &tmp, 8);
+#endif
+
   MSG_DEBUG( "action", " (%s) Poping double : %f",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
   return val;
