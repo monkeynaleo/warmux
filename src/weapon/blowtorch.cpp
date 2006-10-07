@@ -20,17 +20,6 @@ Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new WeaponConfig(
 	m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile, "blowtorch_fire"));
 }
 
-void Blowtorch::DrawWeaponFire()
-{
-	//Point2i pos = ActiveCharacter().GetHandPosition();
-	double angle = ActiveTeam().crosshair.GetAngle();
-	Point2i size = m_weapon_fire->GetSize();
-	m_weapon_fire->SetRotation_deg(angle);
-	size.x = (ActiveCharacter().GetDirection() == 1 ? -20 : size.x + 20);
-	size.y /= 2;
-	m_weapon_fire->Draw(GetGunHolePosition() - size);
-}
-
 void Blowtorch::Refresh()
 {
 
@@ -52,15 +41,13 @@ bool Blowtorch::p_Shoot()
 	ActiveCharacter().SetRebounding(false);
 	ActiveCharacter().body->StartWalk();
 
-	//int direction = ActiveCharacter().GetDirection();	// -1 left & +1 right
-	uint posX = ActiveCharacter().GetX() + ActiveCharacter().GetWidth()/2;
-	uint posY = ActiveCharacter().GetY() + ActiveCharacter().GetHeight()/2;
+	Point2i hole = ActiveCharacter().GetCenter();
 
 	double angle = ActiveTeam().crosshair.GetAngleRad();
-	double dx = cos(angle) * 2.0;
-	double dy = sin(angle) * 2.0;
+	double dx = cos(angle) * 20.0;
+	double dy = sin(angle) * 20.0;
 
-	Point2i pos = Point2i(posX+(int)dx, posY+(int)dy);
+	Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
 	world.Dig(pos, ActiveCharacter().GetHeight()/2);
 
 	MoveCharacter(ActiveCharacter());
