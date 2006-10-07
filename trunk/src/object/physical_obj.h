@@ -51,6 +51,8 @@ private:
   bool m_goes_through_wall;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
+
+  Point2i m_rebound_position;  
 protected:
   PhysicalObj* m_overlapping_object;
 
@@ -183,6 +185,9 @@ private:
 
   // The object fall directly to the ground (or become a ghost)
   void DirectFall();
+
+  // Directly after a rebound, if we are stuck in a wall, we stop moving
+  void CheckRebound();
 };
 
 #endif
