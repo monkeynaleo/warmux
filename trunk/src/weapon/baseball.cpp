@@ -21,6 +21,7 @@
 
 #include "baseball.h"
 #include "../game/game_loop.h"
+#include "../map/camera.h"
 #include "../team/macro.h"
 #include "../tool/point.h"
 #include "../tool/i18n.h"
@@ -69,6 +70,7 @@ bool Baseball::p_Shoot (){
 	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
 	ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
 	ver->SetMovement("fly");
+	camera.ChangeObjSuivi (&(*ver), true, true);
 	return true;
       }
     }
