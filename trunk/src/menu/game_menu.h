@@ -28,32 +28,27 @@
 
 class Team;
 
-/* class TeamSelection */
-/* { */
-/*   Box * container; */
-/*   PictureWidget *team_logo; */
-/*   Label * team_name; */
+class TeamSelection : public HBox
+{
+ private:
+  Team * associated_team;
+  PictureWidget *team_logo;
+  Label * team_name;
+  Label * team_player;
+  //SpinButton * nb_characters;
 
-/*  protected: */
-/*   TeamSelection(); */
-/*   void SetTeam(Team& _team); */
-/* } */
+ public:
+  TeamSelection();
+  void SetTeam(Team& _team);
+  void ClearTeam();
+  Team* GetTeam() const;  
+};
 
 class GameMenu : public Menu
 {
    /* Team controllers */
-   PictureWidget* teams_logos[4];
-   Label* teams_names[4];
-   Team* teams[4];
+   TeamSelection* teams_selections[4];
    SpinButtonBig *teams_nb;
-
- /*   ListBox *lbox_all_teams;    */
-/*    ListBox *lbox_selected_teams; */
-/*    Button *bt_add_team; */
-/*    Button *bt_remove_team; */
-/*    PictureWidget *team_logo; */
-
-   Team * last_team;
 
    /* Map controllers */
    Box * map_box;
@@ -75,8 +70,8 @@ class GameMenu : public Menu
 
    void ChangeMap(int delta_index);   
 
-   void SelectTeam(Team& t, int id);
    void SetNbTeams(uint nb_teams);
+   void GameMenu::NextTeam(int i);
 
    void SaveOptions();
    void OnClic(const Point2i &mousePosition, int button);
