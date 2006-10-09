@@ -56,6 +56,7 @@ class GameMenu : public Menu
    Team * last_team;
 
    /* Map controllers */
+   Box * map_box;
    uint selected_map_index;
    PictureWidget *map_preview_selected;
    PictureWidget *map_preview_before, *map_preview_before2;

@@ -66,7 +66,9 @@ GameMenu::GameMenu() :
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
   uint mainBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)/3;
 
-  /* Choose the teams !! */
+  // ################################################
+  // ##  TEAM SELECTION
+  // ################################################
   Box * team_box = new HBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP,
 				       mainBoxWidth, mainBoxHeight));
   team_box->AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
@@ -115,7 +117,7 @@ GameMenu::GameMenu() :
   // ################################################
   // ##  MAP SELECTION
   // ################################################
-  Box * map_box = new HBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
+  map_box = new HBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
 				       mainBoxWidth, mainBoxHeight));
   map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
@@ -167,12 +169,14 @@ GameMenu::GameMenu() :
 
   widgets.AddWidget(map_box);
 
-  /* Choose other game options */
+  // ################################################
+  // ##  GAME OPTIONS
+  // ################################################
   game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
-					    mainBoxWidth/2, mainBoxHeight) );
+					    mainBoxWidth/2, mainBoxHeight), true);
   game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
 
-  Box * all_game_options = new VBox( Rectanglei(0, 0, mainBoxWidth/2-40, mainBoxHeight),false );
+  Box * all_game_options = new VBox( Rectanglei(0, 0, mainBoxWidth/2-40, mainBoxHeight), false);
 
   Box * top_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
   Box * bottom_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
@@ -258,30 +262,23 @@ GameMenu::~GameMenu()
 
 void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  if (map_preview_before2->Contains(mousePosition) ) {
+  if (teams_nb->Clic(mousePosition, button)){
+    SetNbTeams(teams_nb->GetValue());
+  } else if ( game_options->Clic(mousePosition, button)) {
+    
+  } else if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition) ) {
     ChangeMap(-2);
-  } else if (bt_map_minus->Contains(mousePosition) || map_preview_before->Contains(mousePosition) ) {
+  } else if (   (button == SDL_BUTTON_LEFT && bt_map_minus->Contains(mousePosition))
+	     || (button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition)) 
+	     || (button == SDL_BUTTON_WHEELUP && map_box->Contains(mousePosition))) {
     ChangeMap(-1);
-  } else if (bt_map_plus->Contains(mousePosition) || map_preview_after->Contains(mousePosition)) {
+  } else if (   (button == SDL_BUTTON_LEFT && bt_map_plus->Contains(mousePosition)) 
+	     || (button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition)) 
+	     || (button == SDL_BUTTON_WHEELDOWN && map_box->Contains(mousePosition))) {
     ChangeMap(+1);
   } else if (map_preview_after2->Contains(mousePosition) ) {
     ChangeMap(+2);
-  } else if (teams_nb->Clic(mousePosition, button)){
-    SetNbTeams(teams_nb->GetValue());
   } 
-  // else if (lbox_all_teams->Clic(mousePosition, button)) {
-
-//   } else if (lbox_selected_teams->Clic(mousePosition, button)) {
-
-//   } else if ( bt_add_team->Contains(mousePosition)) {
-//     if (lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
-//       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
-//   } else if ( bt_remove_team->Contains(mousePosition)) {
-//     MoveTeams(lbox_selected_teams, lbox_all_teams, true);
-//   } 
-  else if ( game_options->Clic(mousePosition, button)) {
-
-  }
 }
 
 void GameMenu::SaveOptions()
@@ -366,27 +363,6 @@ void GameMenu::ChangeMap(int delta_index)
   else
     map_preview_after2->SetNoSurface();
 }
-
-// void GameMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
-// {
-//   if (from->GetSelectedItem() != -1) {
-//     to->AddItem (false,
-// 		 from->ReadLabel(),
-// 		 from->ReadValue());
-//     to->Deselect();
-//     if (sort) to->Sort();
-
-//     from->RemoveSelected();
-//   }
-// }
-
-// void GameMenu::SelectTeamLogo(Team * t)
-// {
-//   if (last_team != t) {
-//     last_team = t;
-//     team_logo->SetSurface(last_team->flag);
-//   }
-// }
 
 void GameMenu::SelectTeam(Team& t, int id)
 {
