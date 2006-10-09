@@ -63,7 +63,7 @@
 	<attached member_type="jetpack-right" frame="*" dx="1" dy="23"/>
 	<attached member_type="jetpack-left" frame="*" dx="9" dy="23"/>
 	<attached member_type="tail" frame="*" dx="2" dy="28"/>
-	<attached member_type="construct" frame="*" dx="6" dy="7"/>
+	<attached member_type="construct" frame="*" dx="8" dy="7"/>
 </sprite>
 
 <!-- ###### Tail ###### -->
@@ -287,11 +287,9 @@
 	<member name="tail" layer="1"/>
 	<member name="arm-left" layer="2"/>
 	<member name="foot-left" layer="3"/>
-	<member name="ear-left" layer="4"/>
 	<member name="body-normal" layer="5"/>
 	<member name="head" layer="6"/>
-	<member name="ear-right" layer="7"/>
-	<member name="construct" layer="8"/>
+	<member name="construct" layer="7"/>
 	<member name="foot-right" layer="9"/>
 	<member name="arm-right" layer="10"/>
 	<member name="weapon" layer="11"/>
@@ -305,8 +303,8 @@
 	<member name="ear-left" layer="4"/>
 	<member name="body-normal" layer="5"/>
 	<member name="head" layer="6"/>
-	<member name="ear-right" layer="7"/>
-	<member name="construct" layer="8"/>
+	<member name="construct" layer="7"/>
+	<member name="ear-right" layer="8"/>
 	<member name="foot-right" layer="9"/>
 	<member name="arm-right" layer="10"/>
 	<member name="weapon" layer="11"/>
