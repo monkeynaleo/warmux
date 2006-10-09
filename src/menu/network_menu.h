@@ -67,6 +67,7 @@ class NetworkMenu : public Menu
    void OnClic(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
 
+   void sig_ok();
    void __sig_ok();
    void __sig_cancel();
 
