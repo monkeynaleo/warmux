@@ -272,6 +272,22 @@ void NetworkMenu::__sig_ok()
   Game::GetInstance()->Start();
 }
 
+void NetworkMenu::sig_ok()
+{
+  if(network.IsServer())
+  {
+    if(network.connected_player != network.client_inited)
+    {
+      char nbr[3];
+      sprintf(nbr,"%i",network.connected_player - network.client_inited);
+      std::string pl = _("Wait! ") + (std::string)nbr + _(" players are not yet ready!");
+      msg_box->NewMessage(pl);
+      return;
+    }
+  }
+  Menu::sig_ok();
+}
+
 void NetworkMenu::__sig_cancel()
 {
   network.Disconnect();

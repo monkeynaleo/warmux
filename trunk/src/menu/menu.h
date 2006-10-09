@@ -70,7 +70,7 @@ protected:
    Button *b_ok;
    bool close_menu;
 
-   void sig_ok();
+   virtual void sig_ok();
    void sig_cancel();
    virtual void DrawBackground(const Point2i &mousePosition);
 
