@@ -37,6 +37,7 @@
 #include "../gui/picture_widget.h"
 #include "../gui/picture_text_cbox.h"
 #include "../gui/container.h"
+#include "../gui/text_box.h"
 
 typedef enum {
   vOkCancel,

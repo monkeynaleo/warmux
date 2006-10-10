@@ -36,14 +36,18 @@ class TeamSelection : public HBox
   Team * associated_team;
   PictureWidget *team_logo;
   Label * team_name;
-  Label * team_player;
-  //SpinButton * nb_characters;
+  TextBox * player_name;
+  SpinButton * nb_characters;
 
  public:
   TeamSelection(uint width);
   void SetTeam(Team& _team);
   void ClearTeam();
   Team* GetTeam() const;  
+
+  void Update(const Point2i &mousePosition,
+	      const Point2i &lastMousePosition,
+	      Surface& surf);
 };
 
 class GameMenu : public Menu
