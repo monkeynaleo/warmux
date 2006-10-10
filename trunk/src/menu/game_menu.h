@@ -28,6 +28,8 @@
 
 class Team;
 
+const uint MAX_NB_TEAMS=4;
+
 class TeamSelection : public HBox
 {
  private:
@@ -47,7 +49,7 @@ class TeamSelection : public HBox
 class GameMenu : public Menu
 {
    /* Team controllers */
-   TeamSelection* teams_selections[4];
+   TeamSelection* teams_selections[MAX_NB_TEAMS];
    SpinButtonBig *teams_nb;
 
    /* Map controllers */

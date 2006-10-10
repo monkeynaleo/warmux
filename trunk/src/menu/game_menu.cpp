@@ -121,24 +121,24 @@ GameMenu::GameMenu() :
   // How many teams ?
   teams_nb = new SpinButtonBig(_("Number of teams:"), stdRect,
 			       2, 1,
-			       2, 4);
+			       2, MAX_NB_TEAMS);
   team_box->AddWidget(teams_nb);
   
-  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0, mainBoxWidth-250, mainBoxHeight),false);
-  Box * top_team_options = new HBox ( Rectanglei(0, 0, mainBoxWidth-250, mainBoxHeight/2 - 20), false);
-  Box * bottom_team_options = new HBox ( Rectanglei(0, 0, mainBoxWidth-250, mainBoxHeight/2 - 20), false);
+  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0, mainBoxWidth-255, 0),false);
+  Box * top_team_options = new HBox ( Rectanglei(0, 0, 0, mainBoxHeight/2 - 20), false);
+  Box * bottom_team_options = new HBox ( Rectanglei(0, 0, 0, mainBoxHeight/2 - 20), false);
   top_team_options->SetMargin(25);
   bottom_team_options->SetMargin(25);
   
   // Initialize teams
-  for (int i=0; i < 2; i++) {
+  for (uint i=0; i < MAX_NB_TEAMS; i++) {
     teams_selections[i] = new TeamSelection();
-    top_team_options->AddWidget(teams_selections[i]);
+    if ( i%2 == 0)
+      top_team_options->AddWidget(teams_selections[i]);
+    else
+      bottom_team_options->AddWidget(teams_selections[i]);
   }
-  for (int i=2; i < 4; i++) {
-    teams_selections[i] = new TeamSelection();
-    bottom_team_options->AddWidget(teams_selections[i]);
-  }
+
   top_n_bottom_team_options->AddWidget(top_team_options);
   top_n_bottom_team_options->AddWidget(bottom_team_options);
   
@@ -294,23 +294,8 @@ GameMenu::~GameMenu()
 
 void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  if (teams_nb->Clic(mousePosition, button)){
-    SetNbTeams(teams_nb->GetValue());
-
-  } else if ( teams_selections[0]->Contains(mousePosition)) {
-    NextTeam(0);
-
-  } else if ( teams_selections[1]->Contains(mousePosition)) {
-    NextTeam(1);
-
-  } else if ( teams_selections[2]->Contains(mousePosition)) {
-    NextTeam(2);
-
-  } else if ( teams_selections[3]->Contains(mousePosition)) {
-    NextTeam(3);
-
-  } else if ( game_options->Clic(mousePosition, button)) {
-    
+  if ( game_options->Clic(mousePosition, button)) {
+  
   } else if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition) ) {
     ChangeMap(-2);
   } else if (   (button == SDL_BUTTON_LEFT && bt_map_minus->Contains(mousePosition))
@@ -323,7 +308,18 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
     ChangeMap(+1);
   } else if (map_preview_after2->Contains(mousePosition) ) {
     ChangeMap(+2);
-  } 
+  } else  if (teams_nb->Clic(mousePosition, button)){
+    SetNbTeams(teams_nb->GetValue());
+
+  } else {
+    for (uint i=0; i<MAX_NB_TEAMS ; i++) {
+      if ( teams_selections[i]->Contains(mousePosition)) {
+	NextTeam(i);
+	break;
+      }
+    }
+  }
+
 }
 
 void GameMenu::NextTeam(int i)
@@ -349,7 +345,7 @@ void GameMenu::SaveOptions()
   std::list<uint> selection;
 
   uint nb_teams=0;
-  for (int i=0; i < 4; i++) {
+  for (uint i=0; i < MAX_NB_TEAMS; i++) {
     if (teams_selections[i]->GetTeam() != NULL)
       nb_teams++;
   }
@@ -357,7 +353,7 @@ void GameMenu::SaveOptions()
   if (nb_teams >= 2) {
     std::list<uint> selection;
     
-    for (int i=0; i < 4; i++) {
+    for (uint i=0; i < MAX_NB_TEAMS; i++) {
       if (teams_selections[i]->GetTeam() != NULL) {
 	int index = -1;
 	
@@ -427,7 +423,7 @@ void GameMenu::ChangeMap(int delta_index)
 void GameMenu::SetNbTeams(uint nb_teams)
 {
   // we hide the useless teams selector
-  for (uint i=nb_teams; i<4; i++) {
+  for (uint i=nb_teams; i<MAX_NB_TEAMS; i++) {
     teams_selections[i]->ClearTeam();
   }
 
