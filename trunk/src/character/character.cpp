@@ -158,7 +158,7 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter), m_
   disease_duration     = acharacter.disease_duration;
 
   if (acharacter.body)
-    body = new Body(*acharacter.body);
+    SetBody( new Body(*acharacter.body) );
   if(acharacter.name_text)
     name_text = new Text(*acharacter.name_text);
 }
@@ -182,7 +182,7 @@ void Character::SetBody(Body* _body)
   SetMovement("walk");
 
   SetDirection( randomSync.GetBool()?1:-1 );
-  body->SetFrame( randomSync.GetLong(0, body->GetFrameCount()-1) );
+  body->SetFrame( 0 );
   SetSize(body->GetSize());
 }
 
