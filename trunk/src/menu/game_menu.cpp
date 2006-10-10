@@ -52,17 +52,31 @@ TeamSelection::TeamSelection(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BO
 {
   associated_team=NULL;
 
+  SetMargin(2);
+
   team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
   AddWidget(team_logo);
   
   Box * tmp_box = new VBox(Rectanglei(0, 0, width-80, 80), false);
+  tmp_box->SetMargin(2);
+  tmp_box->SetBorder(Point2i(0,0));
   team_name = new Label(_(" "), Rectanglei(0,0,width-80,0), 
 			*Font::GetInstance(Font::FONT_NORMAL), gray_color);
-  team_player = new Label(_(" "), Rectanglei(0,0,width-80,0), 
-			*Font::GetInstance(Font::FONT_NORMAL), gray_color);
-  //nb_characters = NULL;
+
+  Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
+  tmp_player_box->SetMargin(0);
+  tmp_player_box->SetBorder(Point2i(0,0));
+  tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0), 
+				      *Font::GetInstance(Font::FONT_SMALL), gray_color));
+  player_name = new TextBox(_("Player X"), Rectanglei(0,0,100,0), 
+			    *Font::GetInstance(Font::FONT_SMALL));
+  tmp_player_box->AddWidget(player_name);
+
+  nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),6,1,2,10);;
+
   tmp_box->AddWidget(team_name);
-  tmp_box->AddWidget(team_player);
+  tmp_box->AddWidget(tmp_player_box);
+  tmp_box->AddWidget(nb_characters);
 
   AddWidget(tmp_box);
 }
@@ -73,21 +87,39 @@ void TeamSelection::SetTeam(Team& _team)
   
   team_logo->SetSurface(_team.flag);
   team_name->SetText(_team.GetName());
-  team_logo->SetSurface(_team.flag);
+  team_logo->SetSurface(_team.flag);  
+
+  ForceRedraw();
 }
 
 void TeamSelection::ClearTeam()
 {
   associated_team=NULL;
 
-  team_logo->SetNoSurface();
-  team_name->SetText(" ");
-  team_player->SetText(" ");
+  ForceRedraw();
 }
 
 Team* TeamSelection::GetTeam() const
 {
   return associated_team;
+}
+
+void TeamSelection::Update(const Point2i &mousePosition,
+			   const Point2i &lastMousePosition,
+			   Surface& surf)
+{
+  Box::Update(mousePosition, lastMousePosition, surf);
+  if (need_redrawing) {
+    Draw(mousePosition, surf);
+  }
+
+  if (associated_team != NULL){
+    WidgetList::Draw(mousePosition, surf);
+  } else {
+    Redraw(*this, surf);
+  }
+
+  need_redrawing = false;
 }
 
 // ################################################
@@ -123,10 +155,12 @@ GameMenu::GameMenu() :
   
   Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0, 
 							 mainBoxWidth - teams_nb->GetSizeX() - 60, 0),false);
+  top_n_bottom_team_options->SetBorder(Point2i(5,0));
+  top_n_bottom_team_options->SetMargin(10);
   Box * top_team_options = new HBox ( Rectanglei(0, 0, 0, TEAMS_BOX_H/2 - 20), false);
   Box * bottom_team_options = new HBox ( Rectanglei(0, 0, 0, TEAMS_BOX_H/2 - 20), false);
-  top_team_options->SetMargin(25);
-  bottom_team_options->SetMargin(25);
+  top_team_options->SetBorder(Point2i(0,0));
+  bottom_team_options->SetBorder(Point2i(0,0));
   
   // Initialize teams
   uint team_w_size= top_n_bottom_team_options->GetSizeX() * 2 / MAX_NB_TEAMS;
