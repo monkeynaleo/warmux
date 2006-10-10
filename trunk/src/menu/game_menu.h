@@ -71,7 +71,7 @@ class GameMenu : public Menu
    void ChangeMap(int delta_index);   
 
    void SetNbTeams(uint nb_teams);
-   void GameMenu::NextTeam(int i);
+   void NextTeam(int i);
 
    void SaveOptions();
    void OnClic(const Point2i &mousePosition, int button);
