@@ -508,7 +508,14 @@
     <name>Reiner Herrmann</name>
     <email>reiner AT reiner-h.de</email>
     <country>Germany</country>
-    <description>Blowtorch weapon</description>
+    <description>Blowtorch weapon, many bugfixes</description>
+  </author>
+
+  <author>
+    <name>Riccardo Traverso</name>
+    <email>gr3yfox.fw AT gmail.com</email>
+    <country>Italia</country>
+    <description>Syringe weapon, bugfixes</description>
   </author>
 </section>
 

@@ -98,6 +98,7 @@ void WeaponsList::Init()
   LowGrav* lowgrav = new LowGrav;
   NinjaRope* ninjarope = new NinjaRope;
   Blowtorch* blowtorch = new Blowtorch;
+  Syringe* syringe = new Syringe;
 
   // Category 1
   AddToList(bazooka, 1);
@@ -117,6 +118,7 @@ void WeaponsList::Init()
 
   // Category 3
   AddToList(baseball, 3);
+  AddToList(syringe,3);
   AddToList(tux,3);
   AddToList(gnu_launcher,3);
   AddToList(polecat_launcher,3);

@@ -16,41 +16,41 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Include file to include all weapons in one shot ;-)
+ * Weapon Syringe
  *****************************************************************************/
 
-#ifndef ALL_WEAPONS_H
-#define ALL_WEAPONS_H
+#ifndef SYRINGE_H
+#define SYRINGE_H
+//-----------------------------------------------------------------------------
+#include "../include/base.h"
+#include "weapon.h"
+//-----------------------------------------------------------------------------
 
-#include "airhammer.h"
-#include "air_attack.h"
-#include "anvil.h"
-#include "auto_bazooka.h"
-#include "baseball.h"
-#include "bazooka.h"
-#include "blowtorch.h"
-#include "bounce_ball.h"
-#include "cluster_bomb.h"
-#include "construct.h"
-#include "dynamite.h"
-#include "gnu.h"
-#include "grenade.h"
-#include "gun.h"
-#include "holly_grenade.h"
-#include "jetpack.h"
-#include "lowgrav.h"
-#include "mine.h"
-#include "ninja_rope.h"
-#include "parachute.h"
-#include "polecat.h"
-#include "riot_bomb.h"
-#include "shotgun.h"
-#include "skip_turn.h"
-#include "snipe_rifle.h"
-#include "submachine_gun.h"
-#include "suicide.h"
-#include "supertux.h"
-#include "teleportation.h"
-#include "syringe.h"
+class SyringeConfig : public WeaponConfig
+{
+  public:
+    uint range;
+    uint damage;
+    uint turns;
+  public:
+    SyringeConfig();
+    void LoadXml(xmlpp::Element *elem);
+};
 
-#endif
+//-----------------------------------------------------------------------------
+
+class Syringe : public Weapon
+{
+  protected:
+    bool p_Shoot();
+    void Refresh();
+
+    void Draw();
+
+  public:
+    Syringe();
+    SyringeConfig &cfg();
+};
+
+//-----------------------------------------------------------------------------
+#endif /* SYRINGE_H */
