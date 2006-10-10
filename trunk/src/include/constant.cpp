@@ -44,6 +44,7 @@ Constants * Constants::singleton = NULL;
 Constants::Constants()
 {
   AUTHORS.push_back ("Lawrence AZZOUG");
+  AUTHORS.push_back ("Anthony CARRE");
   AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
   AUTHORS.push_back ("Jean-Christophe DUBERGA");
   AUTHORS.push_back ("Matthieu FERTRE");
