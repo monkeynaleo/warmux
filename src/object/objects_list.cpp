@@ -118,11 +118,11 @@ void ObjectsList::Refresh()
       {
 #ifdef DEBUG
         std::cerr << "Warning, \"" << object->ptr->GetName() << "\" is ghost, and still in the the object list" << std::endl;
-	// the following commented code causes other segfaults
-	//camera.StopFollowingObj(object->ptr);
-	//delete object->ptr;
-	object = lst.erase(object);
 #endif
+	camera.StopFollowingObj(object->ptr);
+	delete object->ptr;
+	object->ptr = NULL;
+	object = lst.erase(object);
       }
       else
       {
@@ -134,6 +134,7 @@ void ObjectsList::Refresh()
       // the following commented code causes other segfaults
       //camera.StopFollowingObj(object->ptr);
       //delete object->ptr;
+      //object->ptr = NULL;
       object = lst.erase(object);
     }
     object++;
