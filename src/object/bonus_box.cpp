@@ -27,7 +27,6 @@
 #include "../game/time.h"
 #include "../graphic/sprite.h"
 #include "../include/app.h"
-#include "../include/constant.h" // NBR_BCL_MAX_EST_VIDE
 #include "../interface/game_msg.h"
 #include "../map/camera.h"
 #include "../map/map.h"
