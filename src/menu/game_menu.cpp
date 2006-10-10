@@ -36,10 +36,7 @@ const uint MARGIN_TOP    = 5;
 const uint MARGIN_SIDE   = 5;
 const uint MARGIN_BOTTOM = 70;
 
-const uint TEAMS_W = 160;
-const uint TEAMS_H = 160;
-const uint TEAM_LOGO_Y = 290;
-const uint TEAM_LOGO_H = 48;
+const uint TEAMS_BOX_H = 170;
 
 const uint MAPS_X = 20;
 const uint MAPS_W = 160;
@@ -51,17 +48,17 @@ const uint TPS_TOUR_MAX = 120;
 const uint TPS_FIN_TOUR_MIN = 1;
 const uint TPS_FIN_TOUR_MAX = 10;
 
-TeamSelection::TeamSelection() : HBox(Rectanglei(0, 0, 180, 80), false)
+TeamSelection::TeamSelection(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), false)
 {
   associated_team=NULL;
 
   team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
   AddWidget(team_logo);
   
-  Box * tmp_box = new VBox(Rectanglei(0, 0, 130, 80), false);
-  team_name = new Label(_(" "), Rectanglei(0,0,130,0), 
+  Box * tmp_box = new VBox(Rectanglei(0, 0, width-80, 80), false);
+  team_name = new Label(_(" "), Rectanglei(0,0,width-80,0), 
 			*Font::GetInstance(Font::FONT_NORMAL), gray_color);
-  team_player = new Label(_(" "), Rectanglei(0,0,130,0), 
+  team_player = new Label(_(" "), Rectanglei(0,0,width-80,0), 
 			*Font::GetInstance(Font::FONT_NORMAL), gray_color);
   //nb_characters = NULL;
   tmp_box->AddWidget(team_name);
@@ -115,7 +112,7 @@ GameMenu::GameMenu() :
   // ##  TEAM SELECTION
   // ################################################
   Box * team_box = new HBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP,
-				       mainBoxWidth, mainBoxHeight));
+				       0, TEAMS_BOX_H));
   team_box->AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
 
   // How many teams ?
@@ -124,15 +121,18 @@ GameMenu::GameMenu() :
 			       2, MAX_NB_TEAMS);
   team_box->AddWidget(teams_nb);
   
-  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0, mainBoxWidth-255, 0),false);
-  Box * top_team_options = new HBox ( Rectanglei(0, 0, 0, mainBoxHeight/2 - 20), false);
-  Box * bottom_team_options = new HBox ( Rectanglei(0, 0, 0, mainBoxHeight/2 - 20), false);
+  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0, 
+							 mainBoxWidth - teams_nb->GetSizeX() - 60, 0),false);
+  Box * top_team_options = new HBox ( Rectanglei(0, 0, 0, TEAMS_BOX_H/2 - 20), false);
+  Box * bottom_team_options = new HBox ( Rectanglei(0, 0, 0, TEAMS_BOX_H/2 - 20), false);
   top_team_options->SetMargin(25);
   bottom_team_options->SetMargin(25);
   
   // Initialize teams
+  uint team_w_size= top_n_bottom_team_options->GetSizeX() * 2 / MAX_NB_TEAMS;
+
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
-    teams_selections[i] = new TeamSelection();
+    teams_selections[i] = new TeamSelection(team_w_size);
     if ( i%2 == 0)
       top_team_options->AddWidget(teams_selections[i]);
     else
@@ -150,40 +150,55 @@ GameMenu::GameMenu() :
   // ##  MAP SELECTION
   // ################################################
   map_box = new HBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-				       mainBoxWidth, mainBoxHeight));
+				       0, mainBoxHeight));
   map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
   bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus");
   bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus");
 
-  Box * tmp_map_box = new VBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-					   mainBoxWidth-130, mainBoxHeight), false);
-  tmp_map_box->SetMargin(0);
+  Box * tmp_map_box = new VBox( Rectanglei(0, 0,
+					   mainBoxWidth-63, 0), false);
   tmp_map_box->SetBorder( Point2i(0,0) );
-  uint map_preview_height = mainBoxHeight -2*10 -40;
+  tmp_map_box->SetMargin(0);
 
+  // compute margin width between previews
+  uint map_preview_height = mainBoxHeight -2*10 -40;  
+  
   // Previews
-  Box* previews_box = new HBox( Rectanglei(0, 0, 1, map_preview_height+10 ), false);
-  previews_box->SetMargin(10);
-  previews_box->SetBorder( Point2i(0,0) );
+  Box* previews_box = new HBox( Rectanglei(0, 0, 0, map_preview_height+10 ), false);
+  previews_box->SetBorder( Point2i(10,0) );
 
+  // compute margin width between previews			  
+  uint map_preview_width = map_preview_height*4/3;
+  uint total_width_previews = map_preview_width + map_preview_width*3;
+  uint margin = (tmp_map_box->GetSizeX() - 20 -
+		 (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;  
+  
+  if (margin < 5) {
+    margin = 5;
+    uint total_size_wo_margin = tmp_map_box->GetSizeX() - 20 - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX();
+    map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
+    map_preview_height = 3/4 * map_preview_width;
+  }
+  
+  previews_box->SetMargin(margin);
   previews_box->AddWidget(bt_map_minus);
 
-  map_preview_before2 = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
+  map_preview_before2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before2);
 
-  map_preview_before = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
+  map_preview_before = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_before);
 
   // Selected map...
-  map_preview_selected = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3, map_preview_height));
+  map_preview_selected = new PictureWidget(Rectanglei(0, 0, map_preview_width, map_preview_height));
   previews_box->AddWidget(map_preview_selected);
 
-  map_preview_after = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
+  map_preview_after = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_after);
 
-  map_preview_after2 = new PictureWidget(Rectanglei(0, 0, map_preview_height*4/3 *3/4, map_preview_height*3/4));
+  map_preview_after2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
   previews_box->AddWidget(map_preview_after2);
 
   previews_box->AddWidget(bt_map_plus);
