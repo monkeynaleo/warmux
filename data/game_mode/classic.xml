@@ -354,6 +354,16 @@
       <speed>600</speed>
       <timeout>20</timeout>
     </tux>
+    
+    <syringe>
+      <position origin="hand" x="-1" y="-6" />
+      <min_angle>-50</min_angle>
+      <max_angle>85</max_angle>
+      <nb_ammo>-1</nb_ammo>
+      <damage>10</damage>
+      <turns>10</turns>
+      <range>45</range>
+    </syringe>
 
   </weapons>
 

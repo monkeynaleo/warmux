@@ -198,7 +198,7 @@ void ResultsMenu::SetResult(int i)
     team_logo->SetSurface( *(res->getTeamLogo()) );
   }
   printf("Now result %i/%i: team '%s'\n",
-         index, results->size(), name.c_str());
+         index, (int)results->size(), name.c_str());
   team_name->SetText(name);
   team_box->ForceRedraw();
 

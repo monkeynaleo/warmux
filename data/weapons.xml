@@ -273,7 +273,7 @@
   <surface name="teleportation" file="weapon/teleportation/teleportation.png" />
 
   <!-- M16 ressources -->
-  
+
   <surface name="m16_ico" file="weapon/m16/m16_ico.png" />
   <surface name="m16_fire" file="weapon/gun/gun_fire.png" />
   <sprite name="m16_bullet">
@@ -282,19 +282,24 @@
   <surface name="m16" file="weapon/m16/m16.png" />
 
   <!-- Snipe rifle ressources -->
-  
+
   <surface name="snipe_rifle" file="weapon/snipe_rifle/snipe_rifle.png" />
   <surface name="snipe_rifle_ico" file="weapon/snipe_rifle/snipe_rifle_ico.png" />
   <surface name="snipe_rifle_laser" file="weapon/snipe_rifle/snipe_rifle_laser.png" />
   <surface name="snipe_rifle_fire" file="weapon/gun/gun_fire.png" />
   <sprite name="snipe_rifle_bullet">
     <image file="weapon/gun/gun_bullet.png" />
-  </sprite>     
+  </sprite>
 
   <!-- Blowtorch rifle ressources -->
 
   <surface name="blowtorch" file="weapon/blowtorch/blowtorch.png" />
   <surface name="blowtorch_ico" file="weapon/blowtorch/blowtorch_ico.png" />
   <surface name="blowtorch_fire" file="weapon/blowtorch/fire.png" />
+
+  <!-- Syring resources -->
+
+  <surface name="syringe_ico" file="weapon/syringe/syringe_ico.png" />
+  <surface name="syringe" file="weapon/syringe/syringe.png" />
 
 </resources>
