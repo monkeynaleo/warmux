@@ -135,6 +135,7 @@ typedef enum
   ACTION_CENTER,
   ACTION_TOGGLE_WEAPONS_MENUS,
   ACTION_MAX,
+  ACTION_CHAT,
 } Action_t;
 
 //-----------------------------------------------------------------------------

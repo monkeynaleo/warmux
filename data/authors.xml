@@ -517,6 +517,13 @@
     <country>Italia</country>
     <description>Syringe weapon, bugfixes</description>
   </author>
+
+  <author>
+    <name>Jon de Andres</name>
+    <email>jtbanfrj AT bipt106.bi.ehu.es</email>
+    <country>Spain</country>
+    <description>Network chat</description>
+  </author>
 </section>
 
 <section title="Thanks to">

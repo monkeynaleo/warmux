@@ -25,6 +25,7 @@
 #include "../graphic/fps.h"
 #include "../include/base.h"
 #include "../character/character.h"
+#include "../network/chat.h"
 
 class GameLoop
 {
@@ -39,6 +40,7 @@ public:
   static const int END_TURN = 2;
 
   FramePerSecond fps;
+  Chat chatsession;
   
   static GameLoop * singleton;
 

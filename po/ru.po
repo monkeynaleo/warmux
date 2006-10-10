@@ -21,12 +21,16 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+msgid " "
+msgstr ""
+
 #: src/map/maps_list.cpp:284
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (команда %s) погибла."
@@ -41,7 +45,7 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:657
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -51,17 +55,17 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:650
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:661
+#: src/game/game_loop.cpp:669
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
 
-#: src/object/bonus_box.cpp:150
+#: src/object/bonus_box.cpp:151
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
@@ -69,7 +73,7 @@ msgstr[0] "%s потерял %u единицу энергии."
 msgstr[1] "%s потерял %u единицы энергии."
 msgstr[2] "%s потерял %u единиц энергии."
 
-#: src/object/bonus_box.cpp:141
+#: src/object/bonus_box.cpp:142
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -77,12 +81,12 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:680
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:667
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
@@ -92,7 +96,7 @@ msgstr "%s погиб, потому что он недотёпа!"
 msgid "%s is next to a mine!"
 msgstr "%s рядом с миной!"
 
-#: src/object/bonus_box.cpp:168
+#: src/object/bonus_box.cpp:169
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -100,7 +104,7 @@ msgstr[0] "Команда %s выиграла %u автоматическую б
 msgstr[1] "Команда %s выиграла %u автоматические базуки!"
 msgstr[2] "Команда %s выиграла %u автоматических базук!"
 
-#: src/object/bonus_box.cpp:177
+#: src/object/bonus_box.cpp:178
 #, fuzzy, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -108,7 +112,7 @@ msgstr[0] "Команда %s выиграла %u автоматическую б
 msgstr[1] "Команда %s выиграла %u автоматические базуки!"
 msgstr[2] "Команда %s выиграла %u автоматических базук!"
 
-#: src/object/bonus_box.cpp:187
+#: src/object/bonus_box.cpp:188
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
@@ -116,7 +120,7 @@ msgstr[0] "Команда %s выиграла %u динамитную шашку
 msgstr[1] "Команда %s выиграла %u динамитные шашки!"
 msgstr[2] "Команда %s выиграла %u динамитных шашек!"
 
-#: src/object/bonus_box.cpp:132
+#: src/object/bonus_box.cpp:133
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -124,7 +128,7 @@ msgstr[0] "Команда %s выиграла %u телепортацию"
 msgstr[1] "Команда %s выиграла %u телепортации"
 msgstr[2] "Команда %s выиграла %u телепортаций"
 
-#: src/object/bonus_box.cpp:159
+#: src/object/bonus_box.cpp:160
 #, fuzzy, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -132,11 +136,11 @@ msgstr[0] "'%s выиграл %u воздушную атаку"
 msgstr[1] "'%s выиграл %u воздушных атаки"
 msgstr[2] "'%s выиграл %u воздушных атак"
 
-#: src/interface/interface.cpp:159
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(мёртв)"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
@@ -146,7 +150,7 @@ msgstr ""
 "Для нормальной работы <infinite_background> нужно указать значение "
 "<is_open>!!"
 
-#: src/object/bonus_box.cpp:163 src/weapon/air_attack.cpp:156
+#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:155
 msgid "Air attack"
 msgstr "Воздушная атака"
 
@@ -154,11 +158,11 @@ msgstr "Воздушная атака"
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: src/object/bonus_box.cpp:172 src/weapon/auto_bazooka.cpp:111
+#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:111
 msgid "Automatic bazooka"
 msgstr "Автоматическая базука"
 
-#: src/weapon/baseball.cpp:31
+#: src/weapon/baseball.cpp:32
 msgid "Baseball"
 msgstr "Бейсбол"
 
@@ -200,19 +204,19 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
-#: src/menu/game_menu.cpp:173
+#: src/menu/game_menu.cpp:218
 msgid "Duration of a turn:"
 msgstr "Длительность шага:"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:224
 msgid "Duration of the end of a turn:"
 msgstr "Длительность завершения шага:"
 
-#: src/object/bonus_box.cpp:191 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:98
 msgid "Energy:"
 msgstr "Энергия:"
 
@@ -221,17 +225,17 @@ msgstr "Энергия:"
 msgid "Error in %s:%lu"
 msgstr "Ошибка в %s:%lu"
 
-#: src/team/team.cpp:94
+#: src/team/team.cpp:95
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/team/team.cpp:169
+#: src/team/team.cpp:181
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:251
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -256,7 +260,7 @@ msgstr ""
 "Ошибка:\n"
 "%s"
 
-#: src/team/team.cpp:140
+#: src/team/team.cpp:141
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
@@ -287,15 +291,15 @@ msgstr "Пистолет"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Домашний каталог (переменная окружения $HOME) не найден!"
 
-#: src/game/game_loop.cpp:703
+#: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:190
+#: src/menu/game_menu.cpp:235
 msgid "Initial energy:"
 msgstr "Энергии в начале:"
 
-#: src/game/game_loop.cpp:198
+#: src/game/game_loop.cpp:199
 msgid "Initialisation"
 msgstr "Инициализация"
 
@@ -317,7 +321,7 @@ msgstr "Инициализация команд"
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
-#: src/object/bonus_box.cpp:237
+#: src/object/bonus_box.cpp:238
 msgid "Is it a gift?"
 msgstr ""
 
@@ -329,12 +333,12 @@ msgstr "Загрузка карт:"
 msgid "Load teams:"
 msgstr "Загрузка команд:"
 
-#: src/map/map.cpp:325
+#: src/map/map.cpp:337
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Карту %s создал:"
 
-#: src/game/game_loop.cpp:201
+#: src/game/game_loop.cpp:202
 msgid "Maps"
 msgstr ""
 
@@ -350,7 +354,7 @@ msgstr "Мина"
 msgid "Music?"
 msgstr "Музыка?"
 
-#: src/interface/interface.cpp:96
+#: src/interface/interface.cpp:97
 msgid "Name:"
 msgstr "Имя:"
 
@@ -358,13 +362,18 @@ msgstr "Имя:"
 msgid "Network Game"
 msgstr "Игра по сети"
 
-#: src/weapon/weapon.cpp:544
+#: src/weapon/weapon.cpp:556
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
 
-#: src/menu/game_menu.cpp:185
+#: src/menu/game_menu.cpp:230
 msgid "Number of players per team:"
+msgstr "Игроков в каждой команде:"
+
+#: src/menu/game_menu.cpp:122
+#, fuzzy
+msgid "Number of teams:"
 msgstr "Игроков в каждой команде:"
 
 #: src/menu/main_menu.cpp:107
@@ -397,7 +406,7 @@ msgstr "Выйти"
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/object/bonus_box.cpp:181
+#: src/object/bonus_box.cpp:182
 msgid "Riot bomb"
 msgstr ""
 
@@ -405,15 +414,11 @@ msgstr ""
 msgid "Run game"
 msgstr "Начать игру"
 
-#: src/menu/game_menu.cpp:76
-msgid "Select the teams:"
-msgstr "Выберите команды:"
-
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
 msgstr "Звуковые эффекты?"
 
-#: src/game/game_loop.cpp:219
+#: src/game/game_loop.cpp:220
 #, fuzzy
 msgid "Sounds"
 msgstr "Настройки звука"
@@ -422,15 +427,15 @@ msgstr "Настройки звука"
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:100
 msgid "Stock:"
 msgstr "Боеприпасов:"
 
-#: src/game/game_loop.cpp:205
+#: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:136 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Телепортация"
 
@@ -457,18 +462,19 @@ msgid "Unable to open maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
 
 #: src/main.cpp:118
-msgid "Unexcepted exception caught..."
+#, fuzzy
+msgid "Unexpected exception caught..."
 msgstr "Неожиданная исключительная ситуация..."
 
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Версия"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:99
 msgid "Weapon:"
 msgstr "Оружие:"
 
-#: src/game/game_loop.cpp:214
+#: src/game/game_loop.cpp:215
 #, fuzzy
 msgid "Weapons"
 msgstr "Оружие:"
@@ -477,7 +483,7 @@ msgstr "Оружие:"
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -504,7 +510,7 @@ msgstr "Ошибка разбора XML при загрузке карты '%s' 
 msgid "You need at least one valid map !"
 msgstr "Вам нужна хотя бы одна карта!"
 
-#: src/game/game_loop.cpp:209
+#: src/game/game_loop.cpp:210
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Для игры нужно иметь хотя бы две команды: зайдите для этого в меню "
@@ -521,6 +527,9 @@ msgstr "Вы промазали!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#~ msgid "Select the teams:"
+#~ msgstr "Выберите команды:"
 
 #~ msgid "Game options"
 #~ msgstr "Настройки игры"
