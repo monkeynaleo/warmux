@@ -63,17 +63,21 @@ AnvilLauncher::AnvilLauncher() :
   m_name = _("Anvil");
   can_be_used_on_closed_map = false;
   ReloadLauncher();
+  target_chosen = false;
 }
 
 void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 {
   mouse_pos.y = 0;
   target = mouse_pos - (GetProjectileInstance()->GetSize() / 2);
+  target_chosen = true;
   ActiveTeam().GetWeapon().NewActionShoot();
 }
 
 bool AnvilLauncher::p_Shoot ()
 {
+  if(!target_chosen)
+	return false;
   projectile->SetXY(target);
   lst_objects.AddObject(projectile);
   projectile = NULL;
