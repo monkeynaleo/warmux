@@ -40,7 +40,7 @@ class TeamSelection : public HBox
   //SpinButton * nb_characters;
 
  public:
-  TeamSelection();
+  TeamSelection(uint width);
   void SetTeam(Team& _team);
   void ClearTeam();
   Team* GetTeam() const;  
