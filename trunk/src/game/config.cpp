@@ -206,6 +206,8 @@ void Config::SetKeyboardConfig()
   clavier->SetKeyAction(SDLK_9,         ACTION_WEAPON_9);
   clavier->SetKeyAction(SDLK_PAGEUP,    ACTION_WEAPON_MORE);
   clavier->SetKeyAction(SDLK_PAGEDOWN,  ACTION_WEAPON_LESS);
+  clavier->SetKeyAction(SDLK_s,         ACTION_CHAT);
+  
 }
 
 void Config::Apply()

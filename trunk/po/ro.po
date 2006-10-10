@@ -20,12 +20,16 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+msgid " "
+msgstr ""
+
 #: src/map/maps_list.cpp:284
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (echipa %s) a murit."
@@ -40,7 +44,7 @@ msgstr "%s <%s> cunoscut şi ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/game/game_loop.cpp:657
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -50,17 +54,17 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game_loop.cpp:650
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game_loop.cpp:661
+#: src/game/game_loop.cpp:669
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
 
-#: src/object/bonus_box.cpp:150
+#: src/object/bonus_box.cpp:151
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
@@ -68,7 +72,7 @@ msgstr[0] "%s a pierdut %u punct de energie."
 msgstr[1] "%s a pierdut %u puncte de energie."
 msgstr[2] "%s a pierdut %u de puncte de energie."
 
-#: src/object/bonus_box.cpp:141
+#: src/object/bonus_box.cpp:142
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -76,13 +80,13 @@ msgstr[0] "%s a câştigat %u punct de energie!"
 msgstr[1] "%s a câştigat %u puncte de energie!"
 msgstr[2] "%s a câştigat %u de puncte de energie!"
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:680
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "Psihopatia sălăşluieşte în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game_loop.cpp:667
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -92,7 +96,7 @@ msgstr "%s decedat prin propria stângăcie!"
 msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
 
-#: src/object/bonus_box.cpp:168
+#: src/object/bonus_box.cpp:169
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
@@ -100,7 +104,7 @@ msgstr[0] "Echipa %s a câştigat %u rachetă automată!"
 msgstr[1] "Echipa %s a câştigat %u rachete automate!"
 msgstr[2] "Echipa %s a câştigat %u de rachete automate!"
 
-#: src/object/bonus_box.cpp:177
+#: src/object/bonus_box.cpp:178
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
@@ -108,7 +112,7 @@ msgstr[0] "Echipa %s a câştigat %u rachetă automată !"
 msgstr[1] "Echipa %s a câştigat %u rachete automate !"
 msgstr[2] "Echipa %s a câştigat %u de rachete automate !"
 
-#: src/object/bonus_box.cpp:187
+#: src/object/bonus_box.cpp:188
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
@@ -116,7 +120,7 @@ msgstr[0] "Echipa %s a câştigat %u baton de dinamită!"
 msgstr[1] "Echipa %s a câştigat %u batoane de dinamită!"
 msgstr[2] "Echipa %s a câştigat %u de batoane de dinamită!"
 
-#: src/object/bonus_box.cpp:132
+#: src/object/bonus_box.cpp:133
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -124,7 +128,7 @@ msgstr[0] "Echipa %s a câştigat %u teleportare."
 msgstr[1] "Echipa %s a câştigat %u teleportări."
 msgstr[2] "Echipa %s a câştigat %u de teleportări."
 
-#: src/object/bonus_box.cpp:159
+#: src/object/bonus_box.cpp:160
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
@@ -132,11 +136,11 @@ msgstr[0] "'%s a câştigat %u atac aerian"
 msgstr[1] "'%s a câştigat %u atacuri aeriene"
 msgstr[2] "'%s a câştigat %u de atacuri aeriene"
 
-#: src/interface/interface.cpp:159
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(mort)"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(infinit)"
 
@@ -146,7 +150,7 @@ msgstr ""
 "<infinite_background> are nevoie ca <is_open> să fie activ pentru a "
 "funcţiona corect!!"
 
-#: src/object/bonus_box.cpp:163 src/weapon/air_attack.cpp:156
+#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:155
 msgid "Air attack"
 msgstr "Atac aerian"
 
@@ -154,11 +158,11 @@ msgstr "Atac aerian"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/object/bonus_box.cpp:172 src/weapon/auto_bazooka.cpp:111
+#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:111
 msgid "Automatic bazooka"
 msgstr "Rachetă automată"
 
-#: src/weapon/baseball.cpp:31
+#: src/weapon/baseball.cpp:32
 msgid "Baseball"
 msgstr "Bâtă de basebal"
 
@@ -200,19 +204,19 @@ msgstr "Merite"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
-#: src/menu/game_menu.cpp:173
+#: src/menu/game_menu.cpp:218
 msgid "Duration of a turn:"
 msgstr "Durata unei ture:"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:224
 msgid "Duration of the end of a turn:"
 msgstr "Durata sfârşitului de tură:"
 
-#: src/object/bonus_box.cpp:191 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamită"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:98
 msgid "Energy:"
 msgstr "Energie:"
 
@@ -221,17 +225,17 @@ msgstr "Energie:"
 msgid "Error in %s:%lu"
 msgstr "Eroare în %s:%lu"
 
-#: src/team/team.cpp:94
+#: src/team/team.cpp:95
 #, c-format
 msgid "Error loading team %s:"
 msgstr "Eroare la încărcarea echipei %s:"
 
-#: src/team/team.cpp:169
+#: src/team/team.cpp:181
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:251
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -258,7 +262,7 @@ msgstr ""
 "Eroare:\n"
 "%s"
 
-#: src/team/team.cpp:140
+#: src/team/team.cpp:141
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: aspectul „%s” pentru echipa „%s” nu poate fi găsit."
@@ -287,15 +291,15 @@ msgstr "Pistol"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 
-#: src/game/game_loop.cpp:703
+#: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:190
+#: src/menu/game_menu.cpp:235
 msgid "Initial energy:"
 msgstr "Energie iniţială:"
 
-#: src/game/game_loop.cpp:198
+#: src/game/game_loop.cpp:199
 msgid "Initialisation"
 msgstr "Iniţializare"
 
@@ -316,7 +320,7 @@ msgstr "Iniţializare obiecte"
 msgid "Initialise teams"
 msgstr "Iniţializare echipe"
 
-#: src/object/bonus_box.cpp:237
+#: src/object/bonus_box.cpp:238
 #, fuzzy
 msgid "Is it a gift?"
 msgstr "Oare e un cadou?"
@@ -329,12 +333,12 @@ msgstr "Încărcare hărţi:"
 msgid "Load teams:"
 msgstr "Încărcare echipe:"
 
-#: src/map/map.cpp:325
+#: src/map/map.cpp:337
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "Harta %s, o creaţie a lui :"
 
-#: src/game/game_loop.cpp:201
+#: src/game/game_loop.cpp:202
 msgid "Maps"
 msgstr ""
 
@@ -350,7 +354,7 @@ msgstr "Mină"
 msgid "Music?"
 msgstr "Muzică?"
 
-#: src/interface/interface.cpp:96
+#: src/interface/interface.cpp:97
 msgid "Name:"
 msgstr "Nume:"
 
@@ -358,13 +362,18 @@ msgstr "Nume:"
 msgid "Network Game"
 msgstr "Joc în reţea"
 
-#: src/weapon/weapon.cpp:544
+#: src/weapon/weapon.cpp:556
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
 
-#: src/menu/game_menu.cpp:185
+#: src/menu/game_menu.cpp:230
 msgid "Number of players per team:"
+msgstr "Jucători per echipă:"
+
+#: src/menu/game_menu.cpp:122
+#, fuzzy
+msgid "Number of teams:"
 msgstr "Jucători per echipă:"
 
 #: src/menu/main_menu.cpp:107
@@ -398,7 +407,7 @@ msgstr "Ieşire"
 msgid "Quit Wormux"
 msgstr "Ieşire din Wormux"
 
-#: src/object/bonus_box.cpp:181
+#: src/object/bonus_box.cpp:182
 msgid "Riot bomb"
 msgstr "Rachetă automată"
 
@@ -406,15 +415,11 @@ msgstr "Rachetă automată"
 msgid "Run game"
 msgstr "Rulează jocul"
 
-#: src/menu/game_menu.cpp:76
-msgid "Select the teams:"
-msgstr "Selectaţi echipele:"
-
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
 msgstr "Efecte sonore?"
 
-#: src/game/game_loop.cpp:219
+#: src/game/game_loop.cpp:220
 #, fuzzy
 msgid "Sounds"
 msgstr "Opţiuni sunet"
@@ -423,15 +428,15 @@ msgstr "Opţiuni sunet"
 msgid "Starting a new game"
 msgstr "Se începe un nou joc"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:100
 msgid "Stock:"
 msgstr "Stoc:"
 
-#: src/game/game_loop.cpp:205
+#: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:136 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportare"
 
@@ -458,18 +463,19 @@ msgid "Unable to open maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
 
 #: src/main.cpp:118
-msgid "Unexcepted exception caught..."
+#, fuzzy
+msgid "Unexpected exception caught..."
 msgstr "S-a captat o excepţie neaştepată..."
 
 #: src/main.cpp:147
 msgid "Version"
 msgstr "versiunea"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:99
 msgid "Weapon:"
 msgstr "Arma:"
 
-#: src/game/game_loop.cpp:214
+#: src/game/game_loop.cpp:215
 #, fuzzy
 msgid "Weapons"
 msgstr "Arma:"
@@ -478,7 +484,7 @@ msgstr "Arma:"
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -505,7 +511,7 @@ msgstr "Eroare XML în timpul încărcării hărţii '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Aveţi nevoie de cel puţin o hartă validă !"
 
-#: src/game/game_loop.cpp:209
+#: src/game/game_loop.cpp:210
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Aveţi nevoie de cel puţin două echipe ca să jucaţi: schimbaţi acest lucru în "
@@ -522,6 +528,9 @@ msgstr "Focul dvs. a fost tras în aer!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "finalizat"
+
+#~ msgid "Select the teams:"
+#~ msgstr "Selectaţi echipele:"
 
 #~ msgid "Game options"
 #~ msgstr "Opţiuni ale jocului"

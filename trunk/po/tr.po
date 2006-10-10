@@ -19,12 +19,16 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+msgid " "
+msgstr ""
+
 #: src/map/maps_list.cpp:284
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s takımı) öldü."
@@ -39,7 +43,7 @@ msgstr "%s'den %s <%s> aka %s"
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/game/game_loop.cpp:657
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -49,34 +53,34 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:650
+#: src/game/game_loop.cpp:658
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game_loop.cpp:661
+#: src/game/game_loop.cpp:669
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
 
-#: src/object/bonus_box.cpp:150
+#: src/object/bonus_box.cpp:151
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s, %u enerji kaybetti."
 
-#: src/object/bonus_box.cpp:141
+#: src/object/bonus_box.cpp:142
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s, %u enerji kazandı!"
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:680
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game_loop.cpp:667
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -86,41 +90,41 @@ msgstr "%s öldü, çünkü bir beceriksiz!"
 msgid "%s is next to a mine!"
 msgstr "%s bir mayının yanında!"
 
-#: src/object/bonus_box.cpp:168
+#: src/object/bonus_box.cpp:169
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
 msgid_plural "%s team has won %u automatic bazookas!"
 msgstr[0] "%s takımı %u otomatik bazuka kazandı!"
 
-#: src/object/bonus_box.cpp:177
+#: src/object/bonus_box.cpp:178
 #, c-format
 msgid "%s team has won %u riot bomb!"
 msgid_plural "%s team has won %u riot bombs!"
 msgstr[0] "%s takımı %u otomatik bazuka kazandı!"
 
-#: src/object/bonus_box.cpp:187
+#: src/object/bonus_box.cpp:188
 #, c-format
 msgid "%s team has won %u stick of dynamite!"
 msgid_plural "%s team has won %u sticks of dynamite!"
 msgstr[0] "%s takımı %u dinamit lokumu kazandı!"
 
-#: src/object/bonus_box.cpp:132
+#: src/object/bonus_box.cpp:133
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "%s takımı %u ışınlanma kazandı."
 
-#: src/object/bonus_box.cpp:159
+#: src/object/bonus_box.cpp:160
 #, c-format
 msgid "'%s has won %u air attack"
 msgid_plural "'%s has won %u air attacks"
 msgstr[0] "%s takımı %u hava saldırısı kazandı"
 
-#: src/interface/interface.cpp:159
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(ölü)"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
@@ -130,7 +134,7 @@ msgstr ""
 "Düzgün çalışması için, <infinite_background> <is_open> olarak ayarlanması "
 "gerekli!!"
 
-#: src/object/bonus_box.cpp:163 src/weapon/air_attack.cpp:156
+#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:155
 msgid "Air attack"
 msgstr "Hava saldırısı"
 
@@ -138,11 +142,11 @@ msgstr "Hava saldırısı"
 msgid "Authors:"
 msgstr "Yazarlar:"
 
-#: src/object/bonus_box.cpp:172 src/weapon/auto_bazooka.cpp:111
+#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:111
 msgid "Automatic bazooka"
 msgstr "Otomatik bazuka"
 
-#: src/weapon/baseball.cpp:31
+#: src/weapon/baseball.cpp:32
 msgid "Baseball"
 msgstr "Beyzbol"
 
@@ -184,19 +188,19 @@ msgstr "Hazırlayanlar"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"
 
-#: src/menu/game_menu.cpp:173
+#: src/menu/game_menu.cpp:218
 msgid "Duration of a turn:"
 msgstr "Tur zamanı:"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:224
 msgid "Duration of the end of a turn:"
 msgstr "Tur bitiş zamanı:"
 
-#: src/object/bonus_box.cpp:191 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:98
 msgid "Energy:"
 msgstr "Enerji:"
 
@@ -205,17 +209,17 @@ msgstr "Enerji:"
 msgid "Error in %s:%lu"
 msgstr "%s:%lu'da hata"
 
-#: src/team/team.cpp:94
+#: src/team/team.cpp:95
 #, c-format
 msgid "Error loading team %s:"
 msgstr "%s takımı yüklenirken hata:"
 
-#: src/team/team.cpp:169
+#: src/team/team.cpp:181
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
 
-#: src/game/config.cpp:249
+#: src/game/config.cpp:251
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -240,7 +244,7 @@ msgstr ""
 "Hata:\n"
 "%s"
 
-#: src/team/team.cpp:140
+#: src/team/team.cpp:141
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
@@ -269,15 +273,15 @@ msgstr "Tabanca"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 
-#: src/game/game_loop.cpp:703
+#: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:190
+#: src/menu/game_menu.cpp:235
 msgid "Initial energy:"
 msgstr "Başlangıç enerjisi:"
 
-#: src/game/game_loop.cpp:198
+#: src/game/game_loop.cpp:199
 msgid "Initialisation"
 msgstr "Ayarlama"
 
@@ -298,7 +302,7 @@ msgstr "Nesneler yükleniyor"
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
-#: src/object/bonus_box.cpp:237
+#: src/object/bonus_box.cpp:238
 msgid "Is it a gift?"
 msgstr "Bu bir hediye mi?"
 
@@ -310,12 +314,12 @@ msgstr "Haritaları yükle:"
 msgid "Load teams:"
 msgstr "Takımları yükle:"
 
-#: src/map/map.cpp:325
+#: src/map/map.cpp:337
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr "%s haritasını yaratan:"
 
-#: src/game/game_loop.cpp:201
+#: src/game/game_loop.cpp:202
 msgid "Maps"
 msgstr ""
 
@@ -331,7 +335,7 @@ msgstr "Mayın"
 msgid "Music?"
 msgstr "Müzik?"
 
-#: src/interface/interface.cpp:96
+#: src/interface/interface.cpp:97
 msgid "Name:"
 msgstr "Adı:"
 
@@ -339,13 +343,18 @@ msgstr "Adı:"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/weapon/weapon.cpp:544
+#: src/weapon/weapon.cpp:556
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
 
-#: src/menu/game_menu.cpp:185
+#: src/menu/game_menu.cpp:230
 msgid "Number of players per team:"
+msgstr "Her takımdaki oyuncu sayısı:"
+
+#: src/menu/game_menu.cpp:122
+#, fuzzy
+msgid "Number of teams:"
 msgstr "Her takımdaki oyuncu sayısı:"
 
 #: src/menu/main_menu.cpp:107
@@ -378,7 +387,7 @@ msgstr "Çıkış"
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/object/bonus_box.cpp:181
+#: src/object/bonus_box.cpp:182
 msgid "Riot bomb"
 msgstr "Otomatik bazuka"
 
@@ -386,15 +395,11 @@ msgstr "Otomatik bazuka"
 msgid "Run game"
 msgstr "Oyunu çalıştır"
 
-#: src/menu/game_menu.cpp:76
-msgid "Select the teams:"
-msgstr "Takımları seç:"
-
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
 msgstr "Ses efektleri?"
 
-#: src/game/game_loop.cpp:219
+#: src/game/game_loop.cpp:220
 #, fuzzy
 msgid "Sounds"
 msgstr "Ses seçenekleri"
@@ -403,15 +408,15 @@ msgstr "Ses seçenekleri"
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:100
 msgid "Stock:"
 msgstr "Stok:"
 
-#: src/game/game_loop.cpp:205
+#: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:136 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Işınlanma"
 
@@ -438,18 +443,19 @@ msgid "Unable to open maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
 
 #: src/main.cpp:118
-msgid "Unexcepted exception caught..."
+#, fuzzy
+msgid "Unexpected exception caught..."
 msgstr "Beklenmeyen istisna oluştu..."
 
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Sürüm"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:99
 msgid "Weapon:"
 msgstr "Silah:"
 
-#: src/game/game_loop.cpp:214
+#: src/game/game_loop.cpp:215
 #, fuzzy
 msgid "Weapons"
 msgstr "Silah:"
@@ -458,7 +464,7 @@ msgstr "Silah:"
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
@@ -485,7 +491,7 @@ msgstr "'%s' haritası yüklenirken XML hatası :"
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game_loop.cpp:209
+#: src/game/game_loop.cpp:210
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden "
@@ -502,6 +508,9 @@ msgstr "Iskaladın!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
+
+#~ msgid "Select the teams:"
+#~ msgstr "Takımları seç:"
 
 #~ msgid "Game options"
 #~ msgstr "Oyun seçenekleri"

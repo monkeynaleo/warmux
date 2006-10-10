@@ -28,6 +28,8 @@ wormux_SOURCES = \
 	graphic/effects.cpp graphic/effects.h \
 	graphic/font.cpp graphic/font.h \
 	graphic/fps.cpp graphic/fps.h \
+	network/chat.cpp network/chat.h \
+	graphic/text_list.cpp graphic/text_list.h \
 	graphic/surface.cpp graphic/surface.h \
 	graphic/spriteframe.cpp graphic/spriteframe.h \
 	graphic/spritecache.cpp graphic/spritecache.h \

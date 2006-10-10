@@ -73,6 +73,13 @@ void Clavier::SetKeyAction(int key, Action_t at)
 
 void Clavier::HandleKeyEvent( const SDL_Event *event)
 {
+  //Handle input text for Chat session in Network game
+  //While player writes, it cannot control the game.
+  if(GameLoop::GetInstance()->chatsession.CheckInput()){
+    GameLoop::GetInstance()->chatsession.HandleKey(event);
+    return;
+  }
+
   std::map<int, Action_t>::iterator it = layout.find(event->key.keysym.sym);
 
   if ( it == layout.end() )
@@ -220,8 +227,11 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       video.SetFullScreen( !video.IsFullScreen() );
 #endif
       return;
+  case ACTION_CHAT:
+    GameLoop::GetInstance()->chatsession.ShowInput();
+    return;
+  case ACTION_CENTER:
 
-    case ACTION_CENTER:
       CharacterCursor::GetInstance()->FollowActiveCharacter();
       camera.ChangeObjSuivi (&ActiveCharacter(), true, true, true);
       return;

@@ -23,6 +23,7 @@
 #include "action.h"
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
+#include "../game/game.h"
 #include "../include/constant.h"
 #include "../network/network.h"
 #include "../map/map.h"
@@ -352,7 +353,12 @@ void Action_DelTeam (Action *a)
 
 void Action_ChatMessage (Action *a)
 {
-  network.network_menu->msg_box->NewMessage(a->PopString());
+  if(Game::GetInstance()->IsGameLaunched())
+    //Add message to chat session in Game
+    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
+  else
+    //Network Menu
+    network.network_menu->msg_box->NewMessage(a->PopString());
 }
 
 void Action_ChangeTeam (Action *a)
