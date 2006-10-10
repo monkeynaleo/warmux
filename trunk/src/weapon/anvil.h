@@ -42,6 +42,7 @@ class AnvilLauncher : public WeaponLauncher
 {
   private:
     Point2i target;
+    bool target_chosen;
   public:
     AnvilLauncher();
     void ChooseTarget (Point2i mouse_pos);

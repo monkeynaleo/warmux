@@ -28,6 +28,8 @@
 
 class Construct : public Weapon
 {
+private:
+  bool target_chosen;
   Sprite* construct_spr;
   int angle;
   Point2i dst;

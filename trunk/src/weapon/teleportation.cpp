@@ -38,10 +38,14 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 					VISIBLE_ONLY_WHEN_INACTIVE)
 {  
   m_name = _("Teleportation");
+  target_chosen = false;
 }
 
 bool Teleportation::p_Shoot ()
 {
+  if(!target_chosen)
+	return false;
+
   // V�ifie qu'on se t��orte dans le vide !
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
 	 return false;
@@ -102,6 +106,7 @@ void Teleportation::Draw()
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)
 {
+  target_chosen = true;
   dst = mouse_pos - ActiveCharacter().GetSize()/2;
   ActiveTeam().GetWeapon().NewActionShoot();
 }

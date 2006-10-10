@@ -43,6 +43,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
   m_name = _("Construct");
   angle = 0;
   force_override_keys = true;
+  target_chosen = false;
 }
 
 Construct::~Construct()
@@ -52,6 +53,8 @@ Construct::~Construct()
 
 bool Construct::p_Shoot ()
 {
+  if(!target_chosen)
+	return false;
   jukebox.Play("share", "weapon/construct");
   world.PutSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
   GameLoop::GetInstance()->interaction_enabled = false;
@@ -84,6 +87,7 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   || ActiveCharacter().IsMoving())
     return;
 
+  target_chosen = true;
   ActiveTeam().GetWeapon().NewActionShoot();
 }
 

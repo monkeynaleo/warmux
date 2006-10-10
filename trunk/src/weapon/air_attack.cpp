@@ -154,6 +154,7 @@ AirAttack::AirAttack() :
 {  
   m_name = _("Air attack");
   can_be_used_on_closed_map = false;
+  target_chosen = false;
 }
 
 void AirAttack::Refresh()
@@ -164,12 +165,15 @@ void AirAttack::Refresh()
 void AirAttack::ChooseTarget(Point2i mouse_pos)
 {
   target = mouse_pos;
+  target_chosen = true;
   NewActionShoot();
 }
 
 bool AirAttack::p_Shoot ()
 {
-  target = Mouse::GetInstance()->GetWorldPosition();
+  if(!target_chosen)
+	return false;
+
   Plane* plane = new Plane(cfg());
   plane->Shoot (cfg().speed, target);
   return true;

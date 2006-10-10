@@ -71,6 +71,7 @@ class AirAttack : public Weapon
 {
   private:
     Point2i target;
+    bool target_chosen;
     //Plane plane;
   protected:
     bool p_Shoot();

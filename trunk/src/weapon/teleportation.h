@@ -29,6 +29,7 @@ class Teleportation : public Weapon
 {
   private:
     bool retour; // on est dans le retour ?
+    bool target_chosen;
     uint temps;
     Point2i src, dst;
   protected:
