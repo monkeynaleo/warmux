@@ -167,7 +167,7 @@ void AirAttack::ChooseTarget(Point2i mouse_pos)
 {
   target = mouse_pos;
   target_chosen = true;
-  NewActionShoot();
+  Shoot();
 }
 
 bool AirAttack::p_Shoot ()

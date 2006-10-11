@@ -210,6 +210,7 @@ bool Weapon::CanChangeWeapon() const
 
 void Weapon::NewActionShoot() const
 {
+  assert(ActiveTeam().is_local);
   Action a_begin_sync(ACTION_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
   SendCharacterPosition();

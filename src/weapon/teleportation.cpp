@@ -108,7 +108,7 @@ void Teleportation::ChooseTarget(Point2i mouse_pos)
 {
   target_chosen = true;
   dst = mouse_pos - ActiveCharacter().GetSize()/2;
-  ActiveTeam().GetWeapon().NewActionShoot();
+  Shoot();
 }
 
 WeaponConfig& Teleportation::cfg()

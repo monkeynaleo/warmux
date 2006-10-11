@@ -72,7 +72,7 @@ void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
   mouse_pos.y = 0;
   target = mouse_pos - (GetProjectileInstance()->GetSize() / 2);
   target_chosen = true;
-  ActiveTeam().GetWeapon().NewActionShoot();
+  Shoot();
 }
 
 bool AnvilLauncher::p_Shoot ()
