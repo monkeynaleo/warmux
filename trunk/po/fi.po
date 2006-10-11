@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+#: src/menu/game_menu.cpp:63
 msgid " "
 msgstr ""
 
@@ -194,11 +194,11 @@ msgstr "Kiitokset"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
-#: src/menu/game_menu.cpp:218
+#: src/menu/game_menu.cpp:267
 msgid "Duration of a turn:"
 msgstr "Vuoron kesto:"
 
-#: src/menu/game_menu.cpp:224
+#: src/menu/game_menu.cpp:273
 msgid "Duration of the end of a turn:"
 msgstr "Vuoron lopun kesto:"
 
@@ -279,11 +279,15 @@ msgstr "Pyssy"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 
+#: src/menu/game_menu.cpp:69
+msgid "Head commander"
+msgstr ""
+
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:235
+#: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Aloitus voimat:"
 
@@ -350,16 +354,21 @@ msgstr "Nimi:"
 msgid "Network Game"
 msgstr "Nettipeli"
 
-#: src/weapon/weapon.cpp:556
+#: src/weapon/weapon.cpp:569
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
 
-#: src/menu/game_menu.cpp:230
+#: src/menu/game_menu.cpp:75
+#, fuzzy
+msgid "Number of characters"
+msgstr "Pelaajien määrä joukkueessa:"
+
+#: src/menu/game_menu.cpp:279
 msgid "Number of players per team:"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/game_menu.cpp:122
+#: src/menu/game_menu.cpp:151
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Pelaajien määrä joukkueessa:"
@@ -370,6 +379,11 @@ msgstr "Asetukset"
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Pelaa"
+
+#: src/menu/game_menu.cpp:71
+#, fuzzy
+msgid "Player X"
 msgstr "Pelaa"
 
 #: src/menu/options_menu.cpp:68
@@ -421,6 +435,10 @@ msgstr "Varasto:"
 
 #: src/game/game_loop.cpp:206
 msgid "Teams"
+msgstr ""
+
+#: src/menu/options_menu.cpp:117
+msgid "Teams editor"
 msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40

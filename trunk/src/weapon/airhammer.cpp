@@ -29,6 +29,8 @@
 #include "../map/map.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
+#include "../team/macro.h" //New (by gr3yfox)
+//#include "../tool/point.h" //New (by gr3yfox)
 #include "../tool/i18n.h"
 #include "../interface/game_msg.h"
 #include "../weapon/explosion.h"
@@ -40,7 +42,7 @@ const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new WeaponConfig())
+Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())
 {
   m_name = _("Airhammer");
   override_keys = true ;
@@ -78,6 +80,38 @@ bool Airhammer::p_Shoot()
                          true, -M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
   world.Dig( pos, impact );
 
+  //New (by Gr3yfox)
+  uint range = 0;
+  int x,y; // Testing coordinates
+  bool end = false;
+  do
+  {
+    // Did we have finished the computation
+    range += 1;
+    if (range > cfg().range)
+    {
+      range = cfg().range;
+      end = true;
+    }
+
+    // Compute point coordinates
+    RotationPointXY (x, y);
+    y = y + range;
+
+    FOR_ALL_LIVING_CHARACTERS(team, character)
+    if (&(*character) != &ActiveCharacter())
+    {
+      // Did we touch somebody ?
+      if( character->ObjTouche(Point2i(x, y)) )
+      {
+	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
+	      character->SetEnergyDelta(-cfg().damage);
+	end = true;
+      }
+    }
+  } while (!end);
+  //End new
+
   return true;
 }
 
@@ -97,7 +131,7 @@ void Airhammer::RepeatShoot()
     NewActionShoot();
     ActionHandler::GetInstance()->NewAction(new Action(ACTION_SYNC_END));
     m_last_jolt = tmp;
-  }    
+  }
 
 }
 
@@ -111,10 +145,10 @@ void Airhammer::Refresh()
 
 void Airhammer::HandleKeyEvent(int action, int event_type)
 {
-  switch (action) {    
+  switch (action) {
 
   case ACTION_SHOOT:
-    
+
     if (event_type == KEY_RELEASED || ActiveCharacter().GotInjured()) {
       // stop when key is released or character got injured
       ActiveTeam().AccessNbUnits() = 0;
@@ -126,11 +160,29 @@ void Airhammer::HandleKeyEvent(int action, int event_type)
       RepeatShoot();
 
     break ;
-    
+
   default:
     break ;
   } ;
-      
+
 }
 //-----------------------------------------------------------------------------
 
+AirhammerConfig& Airhammer::cfg() {
+	return static_cast<AirhammerConfig&>(*extra_params);
+}
+
+//-----------------------------------------------------------------------------
+
+AirhammerConfig::AirhammerConfig(){ 
+	range =  30;
+	damage = 3;
+}
+
+//-----------------------------------------------------------------------------
+
+void AirhammerConfig::LoadXml(xmlpp::Element *elem){
+	WeaponConfig::LoadXml(elem);
+	LitDocXml::LitUint (elem, "range", range);
+	LitDocXml::LitUint (elem, "damage", damage);
+}

@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Language: Esperanto\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+#: src/menu/game_menu.cpp:63
 msgid " "
 msgstr ""
 
@@ -194,12 +194,12 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Cxu vi volas vere forlasi (J/N) ?"
 
-#: src/menu/game_menu.cpp:218
+#: src/menu/game_menu.cpp:267
 #, fuzzy
 msgid "Duration of a turn:"
 msgstr "Vicdauxro"
 
-#: src/menu/game_menu.cpp:224
+#: src/menu/game_menu.cpp:273
 #, fuzzy
 msgid "Duration of the end of a turn:"
 msgstr "Vicfindauxro"
@@ -297,11 +297,15 @@ msgstr "Pistolo"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 
+#: src/menu/game_menu.cpp:69
+msgid "Head commander"
+msgstr ""
+
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:235
+#: src/menu/game_menu.cpp:284
 #, fuzzy
 msgid "Initial energy:"
 msgstr "Komenca energio"
@@ -376,17 +380,22 @@ msgstr "Nomo"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:556
+#: src/weapon/weapon.cpp:569
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:230
+#: src/menu/game_menu.cpp:75
+#, fuzzy
+msgid "Number of characters"
+msgstr "Nombro da ludantoj per teamo"
+
+#: src/menu/game_menu.cpp:279
 #, fuzzy
 msgid "Number of players per team:"
 msgstr "Nombro da ludantoj per teamo"
 
-#: src/menu/game_menu.cpp:122
+#: src/menu/game_menu.cpp:151
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Nombro da ludantoj per teamo"
@@ -397,6 +406,11 @@ msgstr "Elektoj"
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Aktori"
+
+#: src/menu/game_menu.cpp:71
+#, fuzzy
+msgid "Player X"
 msgstr "Aktori"
 
 #: src/menu/options_menu.cpp:68
@@ -451,6 +465,10 @@ msgstr "Municioj"
 
 #: src/game/game_loop.cpp:206
 msgid "Teams"
+msgstr ""
+
+#: src/menu/options_menu.cpp:117
+msgid "Teams editor"
 msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
