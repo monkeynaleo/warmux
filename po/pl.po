@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-Country: POLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+#: src/menu/game_menu.cpp:63
 msgid " "
 msgstr ""
 
@@ -199,11 +199,11 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Naprawdę chcesz wyjść (T/N) ?"
 
-#: src/menu/game_menu.cpp:218
+#: src/menu/game_menu.cpp:267
 msgid "Duration of a turn:"
 msgstr "Czas kolejki:"
 
-#: src/menu/game_menu.cpp:224
+#: src/menu/game_menu.cpp:273
 msgid "Duration of the end of a turn:"
 msgstr "Czas do zakończenia rundy:"
 
@@ -287,11 +287,15 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 "Katalog domowy (zmienna środowiskowa $HOME) nie mógł zostać odnaleziony!"
 
+#: src/menu/game_menu.cpp:69
+msgid "Head commander"
+msgstr ""
+
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:235
+#: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Początkowa ilość energii:"
 
@@ -358,16 +362,21 @@ msgstr "Nazwa:"
 msgid "Network Game"
 msgstr "Gra sieciowa"
 
-#: src/weapon/weapon.cpp:556
+#: src/weapon/weapon.cpp:569
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Element <%s> nie został odnaleziony w pliku konfiguracyjnym xml!"
 
-#: src/menu/game_menu.cpp:230
+#: src/menu/game_menu.cpp:75
+#, fuzzy
+msgid "Number of characters"
+msgstr "Liczba graczy w drużynie:"
+
+#: src/menu/game_menu.cpp:279
 msgid "Number of players per team:"
 msgstr "Liczba graczy w drużynie:"
 
-#: src/menu/game_menu.cpp:122
+#: src/menu/game_menu.cpp:151
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Liczba graczy w drużynie:"
@@ -378,6 +387,11 @@ msgstr "Opcje"
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Graj"
+
+#: src/menu/game_menu.cpp:71
+#, fuzzy
+msgid "Player X"
 msgstr "Graj"
 
 #: src/menu/options_menu.cpp:68
@@ -429,6 +443,10 @@ msgstr "Stan:"
 
 #: src/game/game_loop.cpp:206
 msgid "Teams"
+msgstr ""
+
+#: src/menu/options_menu.cpp:117
+msgid "Teams editor"
 msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40

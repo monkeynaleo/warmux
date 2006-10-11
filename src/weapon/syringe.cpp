@@ -70,7 +70,6 @@ bool Syringe::p_Shoot (){
       {
 	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
 	character->SetDiseaseDamage(cfg().damage, cfg().turns);
-	//ver->SetMovement("fly");
 	end = true;
       }
     }
@@ -89,7 +88,7 @@ SyringeConfig& Syringe::cfg() {
 }
 
 SyringeConfig::SyringeConfig(){ 
-  range =  6000;
+  range =  45;
   turns = 10;
   damage = 10;
 }

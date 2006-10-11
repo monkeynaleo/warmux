@@ -21,10 +21,23 @@
 
 #ifndef AIRHAMMER_H
 #define AIRHAMMER_H
-
+//-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "../include/base.h"
 #include "weapon.h"
+//-----------------------------------------------------------------------------
+
+class AirhammerConfig : public WeaponConfig
+{
+  public:
+    uint range;
+    uint damage;
+  public:
+    AirhammerConfig();
+    void LoadXml(xmlpp::Element *elem);
+};
+
+//-----------------------------------------------------------------------------
 
 class Airhammer : public Weapon
 {
@@ -41,6 +54,8 @@ class Airhammer : public Weapon
   public:
     Airhammer();
     void HandleKeyEvent(int action, int event_type);
+    AirhammerConfig &cfg();
 };
 
+//-----------------------------------------------------------------------------
 #endif /* AIRHAMMER_H */

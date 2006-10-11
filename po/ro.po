@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+#: src/menu/game_menu.cpp:63
 msgid " "
 msgstr ""
 
@@ -204,11 +204,11 @@ msgstr "Merite"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
-#: src/menu/game_menu.cpp:218
+#: src/menu/game_menu.cpp:267
 msgid "Duration of a turn:"
 msgstr "Durata unei ture:"
 
-#: src/menu/game_menu.cpp:224
+#: src/menu/game_menu.cpp:273
 msgid "Duration of the end of a turn:"
 msgstr "Durata sfârşitului de tură:"
 
@@ -291,11 +291,15 @@ msgstr "Pistol"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 
+#: src/menu/game_menu.cpp:69
+msgid "Head commander"
+msgstr ""
+
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:235
+#: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Energie iniţială:"
 
@@ -362,16 +366,21 @@ msgstr "Nume:"
 msgid "Network Game"
 msgstr "Joc în reţea"
 
-#: src/weapon/weapon.cpp:556
+#: src/weapon/weapon.cpp:569
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
 
-#: src/menu/game_menu.cpp:230
+#: src/menu/game_menu.cpp:75
+#, fuzzy
+msgid "Number of characters"
+msgstr "Jucători per echipă:"
+
+#: src/menu/game_menu.cpp:279
 msgid "Number of players per team:"
 msgstr "Jucători per echipă:"
 
-#: src/menu/game_menu.cpp:122
+#: src/menu/game_menu.cpp:151
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Jucători per echipă:"
@@ -382,6 +391,11 @@ msgstr "Opţiuni"
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Porneşte jocul"
+
+#: src/menu/game_menu.cpp:71
+#, fuzzy
+msgid "Player X"
 msgstr "Porneşte jocul"
 
 #: src/menu/options_menu.cpp:68
@@ -434,6 +448,10 @@ msgstr "Stoc:"
 
 #: src/game/game_loop.cpp:206
 msgid "Teams"
+msgstr ""
+
+#: src/menu/options_menu.cpp:117
+msgid "Teams editor"
 msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40

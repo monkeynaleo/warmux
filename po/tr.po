@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+#: src/menu/game_menu.cpp:63
 msgid " "
 msgstr ""
 
@@ -188,11 +188,11 @@ msgstr "Hazırlayanlar"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"
 
-#: src/menu/game_menu.cpp:218
+#: src/menu/game_menu.cpp:267
 msgid "Duration of a turn:"
 msgstr "Tur zamanı:"
 
-#: src/menu/game_menu.cpp:224
+#: src/menu/game_menu.cpp:273
 msgid "Duration of the end of a turn:"
 msgstr "Tur bitiş zamanı:"
 
@@ -273,11 +273,15 @@ msgstr "Tabanca"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 
+#: src/menu/game_menu.cpp:69
+msgid "Head commander"
+msgstr ""
+
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:235
+#: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Başlangıç enerjisi:"
 
@@ -343,16 +347,21 @@ msgstr "Adı:"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/weapon/weapon.cpp:556
+#: src/weapon/weapon.cpp:569
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
 
-#: src/menu/game_menu.cpp:230
+#: src/menu/game_menu.cpp:75
+#, fuzzy
+msgid "Number of characters"
+msgstr "Her takımdaki oyuncu sayısı:"
+
+#: src/menu/game_menu.cpp:279
 msgid "Number of players per team:"
 msgstr "Her takımdaki oyuncu sayısı:"
 
-#: src/menu/game_menu.cpp:122
+#: src/menu/game_menu.cpp:151
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Her takımdaki oyuncu sayısı:"
@@ -363,6 +372,11 @@ msgstr "Seçenekler"
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Oyna"
+
+#: src/menu/game_menu.cpp:71
+#, fuzzy
+msgid "Player X"
 msgstr "Oyna"
 
 #: src/menu/options_menu.cpp:68
@@ -414,6 +428,10 @@ msgstr "Stok:"
 
 #: src/game/game_loop.cpp:206
 msgid "Teams"
+msgstr ""
+
+#: src/menu/options_menu.cpp:117
+msgid "Teams editor"
 msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40

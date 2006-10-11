@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: KBabel 1.11\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/menu/game_menu.cpp:62 src/menu/game_menu.cpp:64
+#: src/menu/game_menu.cpp:63
 msgid " "
 msgstr ""
 
@@ -195,11 +195,11 @@ msgstr "Crédits"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Voulez-vous vraiment quitter ? (O/N)"
 
-#: src/menu/game_menu.cpp:218
+#: src/menu/game_menu.cpp:267
 msgid "Duration of a turn:"
 msgstr "Durée d'un tour :"
 
-#: src/menu/game_menu.cpp:224
+#: src/menu/game_menu.cpp:273
 msgid "Duration of the end of a turn:"
 msgstr "Durée de la fin d'un tour :"
 
@@ -280,11 +280,15 @@ msgstr "Pistolet"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Le répertoire HOME (variable d'environnement $HOME) introuvable !"
 
+#: src/menu/game_menu.cpp:69
+msgid "Head commander"
+msgstr ""
+
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:235
+#: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Énergie initiale :"
 
@@ -350,17 +354,22 @@ msgstr "Nom :"
 msgid "Network Game"
 msgstr "Jeu en Réseau"
 
-#: src/weapon/weapon.cpp:556
+#: src/weapon/weapon.cpp:569
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr ""
 "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
-#: src/menu/game_menu.cpp:230
+#: src/menu/game_menu.cpp:75
+#, fuzzy
+msgid "Number of characters"
+msgstr "Nombre de joueurs par équipe :"
+
+#: src/menu/game_menu.cpp:279
 msgid "Number of players per team:"
 msgstr "Nombre de joueurs par équipe :"
 
-#: src/menu/game_menu.cpp:122
+#: src/menu/game_menu.cpp:151
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Nombre de joueurs par équipe :"
@@ -371,6 +380,11 @@ msgstr "Options"
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Jouer"
+
+#: src/menu/game_menu.cpp:71
+#, fuzzy
+msgid "Player X"
 msgstr "Jouer"
 
 #: src/menu/options_menu.cpp:68
@@ -422,6 +436,10 @@ msgstr "Munitions :"
 #: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr "Équipes"
+
+#: src/menu/options_menu.cpp:117
+msgid "Teams editor"
+msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
