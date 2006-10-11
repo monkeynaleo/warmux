@@ -437,13 +437,13 @@ msgstr "Iniciando um novo jogo"
 msgid "Stock:"
 msgstr "Munição:"
 
+#: src/weapon/syringe.cpp:31
+msgid "Syringe"
+msgstr ""
+
 #: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr "Equipas"
-
-#: src/menu/options_menu.cpp:117
-msgid "Teams editor"
-msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
 msgid "Teleportation"

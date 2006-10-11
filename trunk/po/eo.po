@@ -463,12 +463,12 @@ msgstr "Komencas novan partion"
 msgid "Stock:"
 msgstr "Municioj"
 
-#: src/game/game_loop.cpp:206
-msgid "Teams"
+#: src/weapon/syringe.cpp:31
+msgid "Syringe"
 msgstr ""
 
-#: src/menu/options_menu.cpp:117
-msgid "Teams editor"
+#: src/game/game_loop.cpp:206
+msgid "Teams"
 msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
