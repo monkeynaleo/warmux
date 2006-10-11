@@ -102,25 +102,25 @@ msgid "%s team has skipped its turn."
 msgstr "%s (команда %s) погибла."
 
 #: src/object/bonus_box.cpp:169
-#, c-format
-msgid "%s team has won %u automatic bazooka!"
-msgid_plural "%s team has won %u automatic bazookas!"
+#, fuzzy, c-format
+msgid "%s team has won %u Automatic Bazooka!"
+msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "Команда %s выиграла %u автоматическую базуку!"
 msgstr[1] "Команда %s выиграла %u автоматические базуки!"
 msgstr[2] "Команда %s выиграла %u автоматических базук!"
 
 #: src/object/bonus_box.cpp:178
 #, fuzzy, c-format
-msgid "%s team has won %u riot bomb!"
-msgid_plural "%s team has won %u riot bombs!"
+msgid "%s team has won %u Riot Bomb!"
+msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "Команда %s выиграла %u автоматическую базуку!"
 msgstr[1] "Команда %s выиграла %u автоматические базуки!"
 msgstr[2] "Команда %s выиграла %u автоматических базук!"
 
 #: src/object/bonus_box.cpp:188
-#, c-format
-msgid "%s team has won %u stick of dynamite!"
-msgid_plural "%s team has won %u sticks of dynamite!"
+#, fuzzy, c-format
+msgid "%s team has won %u stick of Dynamite!"
+msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "Команда %s выиграла %u динамитную шашку!"
 msgstr[1] "Команда %s выиграла %u динамитные шашки!"
 msgstr[2] "Команда %s выиграла %u динамитных шашек!"
@@ -135,8 +135,8 @@ msgstr[2] "Команда %s выиграла %u телепортаций"
 
 #: src/object/bonus_box.cpp:160
 #, fuzzy, c-format
-msgid "'%s has won %u air attack"
-msgid_plural "'%s has won %u air attacks"
+msgid "'%s has won %u Air Attack"
+msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "'%s выиграл %u воздушную атаку"
 msgstr[1] "'%s выиграл %u воздушных атаки"
 msgstr[2] "'%s выиграл %u воздушных атак"
@@ -155,7 +155,12 @@ msgstr ""
 "Для нормальной работы <infinite_background> нужно указать значение "
 "<is_open>!!"
 
-#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:155
+#: src/weapon/air_attack.cpp:155
+#, fuzzy
+msgid "Air Attack"
+msgstr "Воздушная атака"
+
+#: src/object/bonus_box.cpp:164
 msgid "Air attack"
 msgstr "Воздушная атака"
 
@@ -171,7 +176,12 @@ msgstr ""
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:111
+#, fuzzy
+msgid "Automatic Bazooka"
+msgstr "Автоматическая базука"
+
+#: src/object/bonus_box.cpp:173
 msgid "Automatic bazooka"
 msgstr "Автоматическая базука"
 
@@ -188,7 +198,7 @@ msgid "Blowtorch"
 msgstr ""
 
 #: src/weapon/bounce_ball.cpp:72
-msgid "BounceBall"
+msgid "Bounce Ball"
 msgstr ""
 
 #: src/weapon/supertux.cpp:103
@@ -210,11 +220,13 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "Не удаётся открыть каталог команд (%s)!"
 
 #: src/weapon/cluster_bomb.cpp:129
-msgid "ClusterBomb"
+#, fuzzy
+msgid "Cluster Bomb"
 msgstr "Кассетная бомба"
 
 #: src/weapon/suicide.cpp:34
-msgid "Commit suicide"
+#, fuzzy
+msgid "Commit Suicide"
 msgstr "Покончить жизнь самоубийством"
 
 #: src/weapon/construct.cpp:43
@@ -300,7 +312,7 @@ msgid "Fullscreen?"
 msgstr "На весь экран?"
 
 #: src/weapon/gnu.cpp:120
-msgid "GnuLauncher"
+msgid "Gnu Launcher"
 msgstr ""
 
 #: src/weapon/grenade.cpp:69
@@ -326,7 +338,7 @@ msgstr ""
 
 #: src/weapon/holly_grenade.cpp:105
 #, fuzzy
-msgid "HollyGrenade"
+msgid "Holy Grenade"
 msgstr "Граната"
 
 #: src/game/game_loop.cpp:722
@@ -364,7 +376,7 @@ msgid "Is it a gift?"
 msgstr ""
 
 #: src/weapon/jetpack.cpp:48
-msgid "JetPack"
+msgid "Jetpack"
 msgstr ""
 
 #: src/map/maps_list.cpp:192
@@ -409,10 +421,10 @@ msgid "Network Game"
 msgstr "Игра по сети"
 
 #: src/weapon/ninja_rope.cpp:83
-msgid "NinjaRope"
+msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:571
+#: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
@@ -467,7 +479,7 @@ msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Напишите нам по почте, что вы думаете о Wormux:"
 
 #: src/weapon/polecat.cpp:134
-msgid "PolecatLauncher"
+msgid "Polecat Launcher"
 msgstr ""
 
 #: src/menu/main_menu.cpp:119
@@ -478,7 +490,11 @@ msgstr "Выйти"
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/object/bonus_box.cpp:182 src/weapon/riot_bomb.cpp:66
+#: src/weapon/riot_bomb.cpp:66
+msgid "Riot Bomb"
+msgstr ""
+
+#: src/object/bonus_box.cpp:182
 msgid "Riot bomb"
 msgstr ""
 
@@ -496,7 +512,7 @@ msgid "Skip turn"
 msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
-msgid "Snipe Rifle"
+msgid "Sniper Rifle"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -537,7 +553,7 @@ msgid "Teleportation"
 msgstr "Телепортация"
 
 #: src/weapon/cluster_bomb.cpp:97
-msgid "The Cluster Bomb left the battlefield before it could explode."
+msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
 #: src/weapon/auto_bazooka.cpp:95
@@ -546,7 +562,8 @@ msgstr "Автоматическая ракета улетела за преде
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
-msgid "The rocket left the battlefield..."
+#, fuzzy
+msgid "The rocket has left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
 
 #: src/graphic/video.cpp:193
@@ -624,10 +641,6 @@ msgstr "Вы промазали!"
 
 #: src/map/ground.cpp:56
 msgid "done"
-msgstr ""
-
-#: src/weapon/jetpack.cpp:54
-msgid "jetpack"
 msgstr ""
 
 #~ msgid "Select the teams:"
