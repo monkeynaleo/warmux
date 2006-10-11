@@ -91,6 +91,11 @@ msgstr "¡ %s se ha muerto por ser un torpe!"
 msgid "%s is next to a mine!"
 msgstr "¡ %s esta cerca d'una mina!"
 
+#: src/weapon/skip_turn.cpp:46
+#, fuzzy, c-format
+msgid "%s team has skipped its turn."
+msgstr "%s (El equipo %s ) ha muerto."
+
 #: src/object/bonus_box.cpp:169
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
@@ -143,6 +148,14 @@ msgstr ""
 msgid "Air attack"
 msgstr "Ataque aereo"
 
+#: src/weapon/airhammer.cpp:46
+msgid "Airhammer"
+msgstr ""
+
+#: src/weapon/anvil.cpp:63
+msgid "Anvil"
+msgstr ""
+
 #: src/main.cpp:199
 msgid "Authors:"
 msgstr "Autores:"
@@ -161,6 +174,14 @@ msgstr "Bazooka"
 
 #: src/weapon/blowtorch.cpp:14
 msgid "Blowtorch"
+msgstr ""
+
+#: src/weapon/bounce_ball.cpp:72
+msgid "BounceBall"
+msgstr ""
+
+#: src/weapon/supertux.cpp:103
+msgid "Bye bye tux..."
 msgstr ""
 
 #: src/main.cpp:111
@@ -184,6 +205,10 @@ msgstr "Granada de fragmentacion"
 #: src/weapon/suicide.cpp:34
 msgid "Commit suicide"
 msgstr "Suicidio"
+
+#: src/weapon/construct.cpp:43
+msgid "Construct"
+msgstr ""
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
@@ -264,6 +289,10 @@ msgstr "Colocacion aleatoria de personajes"
 msgid "Fullscreen?"
 msgstr "¿Pantalla completa?"
 
+#: src/weapon/gnu.cpp:120
+msgid "GnuLauncher"
+msgstr ""
+
 #: src/weapon/grenade.cpp:69
 msgid "Grenade"
 msgstr "Granada"
@@ -283,6 +312,11 @@ msgstr "¡El directorio HOME (la variable de entorno $HOME) no se encuentra!"
 #: src/menu/game_menu.cpp:69
 msgid "Head commander"
 msgstr ""
+
+#: src/weapon/holly_grenade.cpp:105
+#, fuzzy
+msgid "HollyGrenade"
+msgstr "Granada"
 
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
@@ -317,6 +351,10 @@ msgstr "Inicialización de equipos"
 msgid "Is it a gift?"
 msgstr "¿Es un regalo?"
 
+#: src/weapon/jetpack.cpp:48
+msgid "JetPack"
+msgstr ""
+
 #: src/map/maps_list.cpp:192
 msgid "Load maps:"
 msgstr "Carga el mapa %s"
@@ -324,6 +362,10 @@ msgstr "Carga el mapa %s"
 #: src/team/teams_list.cpp:105
 msgid "Load teams:"
 msgstr "Carga los equipos %s ."
+
+#: src/weapon/lowgrav.cpp:41
+msgid "LowGrav"
+msgstr ""
 
 #: src/map/map.cpp:337
 #, c-format
@@ -354,7 +396,11 @@ msgstr "Nombre:"
 msgid "Network Game"
 msgstr "Juego en red"
 
-#: src/weapon/weapon.cpp:569
+#: src/weapon/ninja_rope.cpp:83
+msgid "NinjaRope"
+msgstr ""
+
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "¡Ningun elemento <%s> encontrado en el archivo de configuración xml!"
@@ -376,6 +422,14 @@ msgstr "Numero de jugadores por equipo:"
 #: src/menu/main_menu.cpp:107
 msgid "Options"
 msgstr "Opciones"
+
+#: src/weapon/parachute.cpp:35
+msgid "Parachute"
+msgstr ""
+
+#: src/weapon/parachute.cpp:58
+msgid "Parachute is activated automatically."
+msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
@@ -400,6 +454,10 @@ msgstr "¿Muestra el nombre del jugador?"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Por favor danos tu opinión de Wormux por correo electrónico:"
 
+#: src/weapon/polecat.cpp:134
+msgid "PolecatLauncher"
+msgstr ""
+
 #: src/menu/main_menu.cpp:119
 msgid "Quit"
 msgstr "Salir"
@@ -408,13 +466,26 @@ msgstr "Salir"
 msgid "Quit Wormux"
 msgstr "Salir de Wormux"
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:182 src/weapon/riot_bomb.cpp:66
 msgid "Riot bomb"
 msgstr "Bazooka automático"
 
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Empieza el juego"
+
+#: src/weapon/shotgun.cpp:61
+#, fuzzy
+msgid "Shotgun"
+msgstr "Opciones de sonido"
+
+#: src/weapon/skip_turn.cpp:37
+msgid "Skip turn"
+msgstr ""
+
+#: src/weapon/snipe_rifle.cpp:55
+msgid "Snipe Rifle"
+msgstr ""
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -431,6 +502,14 @@ msgstr "Empezando un nuevo juego"
 #: src/interface/interface.cpp:100
 msgid "Stock:"
 msgstr "Munición:"
+
+#: src/weapon/submachine_gun.cpp:63
+msgid "Submachine Gun"
+msgstr ""
+
+#: src/weapon/supertux.cpp:125
+msgid "SuperTux"
+msgstr ""
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
@@ -453,6 +532,7 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "El cohete automatico ha ido a otro mundo..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
+#: src/weapon/riot_bomb.cpp:52
 msgid "The rocket left the battlefield..."
 msgstr "El cohete ha ido a otro mundo..."
 
@@ -530,6 +610,10 @@ msgstr "¡Has fallado el tiro!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "Terminado"
+
+#: src/weapon/jetpack.cpp:54
+msgid "jetpack"
+msgstr ""
 
 #~ msgid "Select the teams:"
 #~ msgstr "Selecciona los equipos:"

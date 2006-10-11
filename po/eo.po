@@ -90,6 +90,11 @@ msgstr "%s estas mortinta pro lia mallerteco."
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino ..."
 
+#: src/weapon/skip_turn.cpp:46
+#, fuzzy, c-format
+msgid "%s team has skipped its turn."
+msgstr "La teamo '%s' malhavas lian vicon."
+
 #: src/object/bonus_box.cpp:169
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
@@ -141,6 +146,14 @@ msgstr ""
 msgid "Air attack"
 msgstr "Aeratako"
 
+#: src/weapon/airhammer.cpp:46
+msgid "Airhammer"
+msgstr ""
+
+#: src/weapon/anvil.cpp:63
+msgid "Anvil"
+msgstr ""
+
 #: src/main.cpp:199
 #, fuzzy
 msgid "Authors:"
@@ -160,6 +173,14 @@ msgstr "Bazuko"
 
 #: src/weapon/blowtorch.cpp:14
 msgid "Blowtorch"
+msgstr ""
+
+#: src/weapon/bounce_ball.cpp:72
+msgid "BounceBall"
+msgstr ""
+
+#: src/weapon/supertux.cpp:103
+msgid "Bye bye tux..."
 msgstr ""
 
 #: src/main.cpp:111
@@ -184,6 +205,10 @@ msgstr ""
 #: src/weapon/suicide.cpp:34
 msgid "Commit suicide"
 msgstr "Mortigis sin"
+
+#: src/weapon/construct.cpp:43
+msgid "Construct"
+msgstr ""
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
@@ -280,6 +305,10 @@ msgstr "Metas hazarde la vermojn"
 msgid "Fullscreen?"
 msgstr "Pleniga ekrano"
 
+#: src/weapon/gnu.cpp:120
+msgid "GnuLauncher"
+msgstr ""
+
 #: src/weapon/grenade.cpp:69
 msgid "Grenade"
 msgstr "Grenado"
@@ -300,6 +329,11 @@ msgstr ""
 #: src/menu/game_menu.cpp:69
 msgid "Head commander"
 msgstr ""
+
+#: src/weapon/holly_grenade.cpp:105
+#, fuzzy
+msgid "HollyGrenade"
+msgstr "Grenado"
 
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
@@ -338,6 +372,10 @@ msgstr "Preparanto"
 msgid "Is it a gift?"
 msgstr ""
 
+#: src/weapon/jetpack.cpp:48
+msgid "JetPack"
+msgstr ""
+
 #: src/map/maps_list.cpp:192
 #, fuzzy
 msgid "Load maps:"
@@ -347,6 +385,10 @@ msgstr "Muntas la terenon %s"
 #, fuzzy
 msgid "Load teams:"
 msgstr "Muntas la teamo %s"
+
+#: src/weapon/lowgrav.cpp:41
+msgid "LowGrav"
+msgstr ""
 
 #: src/map/map.cpp:337
 #, c-format
@@ -380,7 +422,11 @@ msgstr "Nomo"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:569
+#: src/weapon/ninja_rope.cpp:83
+msgid "NinjaRope"
+msgstr ""
+
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr ""
@@ -403,6 +449,14 @@ msgstr "Nombro da ludantoj per teamo"
 #: src/menu/main_menu.cpp:107
 msgid "Options"
 msgstr "Elektoj"
+
+#: src/weapon/parachute.cpp:35
+msgid "Parachute"
+msgstr ""
+
+#: src/weapon/parachute.cpp:58
+msgid "Parachute is activated automatically."
+msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
@@ -427,6 +481,10 @@ msgstr "Afisxas la nomo de la ludantoj"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr ""
 
+#: src/weapon/polecat.cpp:134
+msgid "PolecatLauncher"
+msgstr ""
+
 #: src/menu/main_menu.cpp:119
 msgid "Quit"
 msgstr "Forlasi"
@@ -435,13 +493,26 @@ msgstr "Forlasi"
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:182 src/weapon/riot_bomb.cpp:66
 msgid "Riot bomb"
 msgstr ""
 
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Komencas partion"
+
+#: src/weapon/shotgun.cpp:61
+#, fuzzy
+msgid "Shotgun"
+msgstr "Elektoj"
+
+#: src/weapon/skip_turn.cpp:37
+msgid "Skip turn"
+msgstr ""
+
+#: src/weapon/snipe_rifle.cpp:55
+msgid "Snipe Rifle"
+msgstr ""
 
 #: src/menu/options_menu.cpp:102
 #, fuzzy
@@ -462,6 +533,14 @@ msgstr "Komencas novan partion"
 #, fuzzy
 msgid "Stock:"
 msgstr "Municioj"
+
+#: src/weapon/submachine_gun.cpp:63
+msgid "Submachine Gun"
+msgstr ""
+
+#: src/weapon/supertux.cpp:125
+msgid "SuperTux"
+msgstr ""
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
@@ -485,6 +564,7 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "La memmova fuzilo estas malaperita en alian mondon ..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
+#: src/weapon/riot_bomb.cpp:52
 #, fuzzy
 msgid "The rocket left the battlefield..."
 msgstr "La fuzilo estas malaperita en alian mondon ..."
@@ -566,6 +646,10 @@ msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
+msgstr ""
+
+#: src/weapon/jetpack.cpp:54
+msgid "jetpack"
 msgstr ""
 
 #, fuzzy
@@ -657,9 +741,6 @@ msgstr ""
 
 #~ msgid "Change video mode : %ux%u in %s"
 #~ msgstr "Sxangxa la videoregximo : %ux%u per %s"
-
-#~ msgid "The team '%s' give its turn."
-#~ msgstr "La teamo '%s' malhavas lian vicon."
 
 #~ msgid "fullscreen"
 #~ msgstr "Pleniga ekrano"

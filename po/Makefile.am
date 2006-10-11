@@ -61,18 +61,35 @@ POTFILES = \
 	src/tool/string_tools.cpp \
 	src/tool/xml_document.cpp \
 	src/weapon/air_attack.cpp \
+	src/weapon/airhammer.cpp \
+	src/weapon/anvil.cpp \
 	src/weapon/auto_bazooka.cpp \
 	src/weapon/baseball.cpp \
 	src/weapon/bazooka.cpp \
 	src/weapon/blowtorch.cpp \
+	src/weapon/bounce_ball.cpp \
 	src/weapon/cluster_bomb.cpp \
+	src/weapon/construct.cpp \
 	src/weapon/crosshair.cpp \
 	src/weapon/dynamite.cpp \
+	src/weapon/gnu.cpp \
 	src/weapon/grenade.cpp \
 	src/weapon/gun.cpp \
+	src/weapon/holly_grenade.cpp \
+	src/weapon/jetpack.cpp \
 	src/weapon/launcher.cpp \
+	src/weapon/lowgrav.cpp \
 	src/weapon/mine.cpp \
+	src/weapon/ninja_rope.cpp \
+	src/weapon/parachute.cpp \
+	src/weapon/polecat.cpp \
+	src/weapon/riot_bomb.cpp \
+	src/weapon/shotgun.cpp \
+	src/weapon/skip_turn.cpp \
+	src/weapon/snipe_rifle.cpp \
+	src/weapon/submachine_gun.cpp \
 	src/weapon/suicide.cpp \
+	src/weapon/supertux.cpp \
 	src/weapon/syringe.cpp \
 	src/weapon/teleportation.cpp \
 	src/weapon/weapon.cpp \
