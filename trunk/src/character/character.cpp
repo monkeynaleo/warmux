@@ -513,17 +513,19 @@ void Character::PrepareShoot()
 
 void Character::DoShoot()
 {
-  ActiveTeam().AccessWeapon().StopLoading();
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
-  ActiveTeam().GetWeapon().NewActionShoot();
+  ActiveTeam().AccessWeapon().Shoot();
 }
 
 void Character::HandleShoot(int event_type)
 {
+  if(prepare_shoot)
+    return;
+
   switch (event_type) {
     case KEY_PRESSED:
       if (ActiveTeam().GetWeapon().max_strength == 0)
-        PrepareShoot();
+        ActiveTeam().GetWeapon().NewActionShoot();
       else
       if ( (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
          && ActiveTeam().GetWeapon().IsReady() )
@@ -532,7 +534,7 @@ void Character::HandleShoot(int event_type)
 
     case KEY_RELEASED:
       if (ActiveTeam().GetWeapon().IsLoading())
-	PrepareShoot();
+        ActiveTeam().GetWeapon().NewActionShoot();
       break ;
 
     case KEY_REFRESH:
@@ -541,7 +543,7 @@ void Character::HandleShoot(int event_type)
 	  // Strength == max strength -> Fire !!!
 	  if (ActiveTeam().GetWeapon().ReadStrength() >=
 	      ActiveTeam().GetWeapon().max_strength)
-	    PrepareShoot();
+            ActiveTeam().GetWeapon().NewActionShoot();
 	  else
 	    {
 	      // still pressing the Space key

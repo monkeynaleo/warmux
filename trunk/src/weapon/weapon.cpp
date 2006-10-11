@@ -213,13 +213,18 @@ void Weapon::NewActionShoot() const
 				       ActiveTeam().crosshair.GetAngleVal()));
 }
 
-bool Weapon::Shoot(double strength, int angle)
+void Weapon::PrepareShoot(double strength, int angle)
 {
   MSG_DEBUG("weapon_shoot", "Try to shoot");
 
   ActiveTeam().crosshair.ChangeAngleVal(angle);
   m_strength = strength;
+  StopLoading();
+  ActiveCharacter().PrepareShoot();
+}
 
+bool Weapon::Shoot()
+{
   MSG_DEBUG("weapon_shoot", "Enough ammo ? %d", EnoughAmmo() );
   MSG_DEBUG("weapon_shoot", "Enough ammo unit ? %d", EnoughAmmoUnit() );
   MSG_DEBUG("weapon_shoot", "Use unit on 1st shoot ? %d", use_unit_on_first_shoot );

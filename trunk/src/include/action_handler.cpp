@@ -148,7 +148,7 @@ void Action_Shoot (Action *a)
 {
   double strength = a->PopDouble();
   int angle = a->PopInt();
-  ActiveTeam().AccessWeapon().Shoot(strength, angle);
+  ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
 }
 
 void Action_Wind (Action *a)

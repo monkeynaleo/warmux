@@ -38,7 +38,7 @@
 #include "../character/character.h"
 class Character;
 
-// Constante munitions illimit�s
+// Infinite ammos constant
 extern const int INFINITE_AMMO;
 
 extern const uint BUTTON_ICO_WIDTH;
@@ -176,9 +176,13 @@ public:
   // Create a new action "shoot" in action handler
   void NewActionShoot() const;
 
-  // Tire avec l'arme
-  // Renvoie true si l'arme a pu �re enclanch�
-  bool Shoot(double strength, int angle);
+  // Prepare the shoot : set the angle and strenght of the weapon
+  // Begin the shooting animation of the character
+  void PrepareShoot(double strength, int angle);
+
+  // Shot with the weapon
+  // Return true if we have been able to trigger the weapon
+  bool Shoot();
 
   // L'arme est encore active (animation par ex.) ?
   bool IsActive() const;
