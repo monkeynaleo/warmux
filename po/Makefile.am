@@ -73,6 +73,7 @@ POTFILES = \
 	src/weapon/launcher.cpp \
 	src/weapon/mine.cpp \
 	src/weapon/suicide.cpp \
+	src/weapon/syringe.cpp \
 	src/weapon/teleportation.cpp \
 	src/weapon/weapon.cpp \
 	src/weapon/weapons_list.cpp

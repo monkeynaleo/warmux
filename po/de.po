@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-10-01 15:04+0200\n"
+"PO-Revision-Date: 2006-10-12 00:07+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/menu/game_menu.cpp:63
 msgid " "
-msgstr ""
+msgstr " "
 
 #: src/map/maps_list.cpp:284
 #, c-format
@@ -281,7 +281,7 @@ msgstr ""
 
 #: src/menu/game_menu.cpp:69
 msgid "Head commander"
-msgstr ""
+msgstr "Hauptkommandant"
 
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
@@ -359,18 +359,16 @@ msgid "No element <%s> found in the xml config file!"
 msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
 
 #: src/menu/game_menu.cpp:75
-#, fuzzy
 msgid "Number of characters"
-msgstr "Zahl der Spieler pro Mannschaft:"
+msgstr "Anzahl der Figuren"
 
 #: src/menu/game_menu.cpp:279
 msgid "Number of players per team:"
-msgstr "Zahl der Spieler pro Mannschaft:"
+msgstr "Anzahl der Spieler pro Mannschaft:"
 
 #: src/menu/game_menu.cpp:151
-#, fuzzy
 msgid "Number of teams:"
-msgstr "Zahl der Spieler pro Mannschaft:"
+msgstr "Anzahl der Mannschaften"
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -381,17 +379,14 @@ msgid "Play"
 msgstr "Spielen"
 
 #: src/menu/game_menu.cpp:71
-#, fuzzy
 msgid "Player X"
-msgstr "Spielen"
+msgstr "Spieler X"
 
 #: src/menu/options_menu.cpp:68
-#, fuzzy
 msgid "Player energy?"
 msgstr "Energie des Spielers anzeigen?"
 
 #: src/menu/options_menu.cpp:71
-#, fuzzy
 msgid "Player's name?"
 msgstr "Name des Spielers anzeigen?"
 
@@ -431,13 +426,13 @@ msgstr "Starte ein neues Spiel"
 msgid "Stock:"
 msgstr "Vorrat:"
 
+#: src/weapon/syringe.cpp:31
+msgid "Syringe"
+msgstr ""
+
 #: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr "Manschaften"
-
-#: src/menu/options_menu.cpp:117
-msgid "Teams editor"
-msgstr ""
 
 #: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
@@ -467,9 +462,8 @@ msgid "Unable to open maps directory (%s)!"
 msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
 
 #: src/main.cpp:118
-#, fuzzy
 msgid "Unexpected exception caught..."
-msgstr "Unerwarteter Ausnahmefehler abgefangen..."
+msgstr "Unerwarteter Ausnahmefehler aufgetreten..."
 
 #: src/main.cpp:147
 msgid "Version"
@@ -493,7 +487,6 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
 
 #: src/menu/options_menu.cpp:65
-#, fuzzy
 msgid "Wind particles?"
 msgstr "Windpartikel anzeigen?"
 
@@ -512,7 +505,7 @@ msgstr "XML Fehler beim Laden der Karte %s :"
 
 #: src/map/maps_list.cpp:241
 msgid "You need at least one valid map !"
-msgstr "Du brauchst mindestens eine gültige Karte!"
+msgstr "Du brauchst mindestens eine gültige Karte !"
 
 #: src/game/game_loop.cpp:210
 msgid "You need at least two teams to play: change this in 'Options menu' !"
@@ -531,6 +524,9 @@ msgstr "Dein Schuss ging daneben!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "fertig"
+
+#~ msgid "Teams editor"
+#~ msgstr "Mannschaften Editor"
 
 #~ msgid "Select the teams:"
 #~ msgstr "Mannschaften auswählen:"
