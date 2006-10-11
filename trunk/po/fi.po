@@ -92,6 +92,11 @@ msgstr "%s kuoli kömpelyyteensä!"
 msgid "%s is next to a mine!"
 msgstr "%s on aivan miinan vieressä!"
 
+#: src/weapon/skip_turn.cpp:46
+#, fuzzy, c-format
+msgid "%s team has skipped its turn."
+msgstr "%s (joukkue %s) kuoli."
+
 #: src/object/bonus_box.cpp:169
 #, c-format
 msgid "%s team has won %u automatic bazooka!"
@@ -144,6 +149,14 @@ msgstr ""
 msgid "Air attack"
 msgstr "Ilmaisku"
 
+#: src/weapon/airhammer.cpp:46
+msgid "Airhammer"
+msgstr ""
+
+#: src/weapon/anvil.cpp:63
+msgid "Anvil"
+msgstr ""
+
 #: src/main.cpp:199
 msgid "Authors:"
 msgstr "Tekijät:"
@@ -162,6 +175,14 @@ msgstr "Bazooka"
 
 #: src/weapon/blowtorch.cpp:14
 msgid "Blowtorch"
+msgstr ""
+
+#: src/weapon/bounce_ball.cpp:72
+msgid "BounceBall"
+msgstr ""
+
+#: src/weapon/supertux.cpp:103
+msgid "Bye bye tux..."
 msgstr ""
 
 #: src/main.cpp:111
@@ -185,6 +206,10 @@ msgstr "Klusteripommi"
 #: src/weapon/suicide.cpp:34
 msgid "Commit suicide"
 msgstr "Itsemurhaisku"
+
+#: src/weapon/construct.cpp:43
+msgid "Construct"
+msgstr ""
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
@@ -263,6 +288,10 @@ msgstr "Etsi satunnaiset sijainnit hahmoille"
 msgid "Fullscreen?"
 msgstr "Kokoruutu?"
 
+#: src/weapon/gnu.cpp:120
+msgid "GnuLauncher"
+msgstr ""
+
 #: src/weapon/grenade.cpp:69
 msgid "Grenade"
 msgstr "Kranaatti"
@@ -282,6 +311,11 @@ msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 #: src/menu/game_menu.cpp:69
 msgid "Head commander"
 msgstr ""
+
+#: src/weapon/holly_grenade.cpp:105
+#, fuzzy
+msgid "HollyGrenade"
+msgstr "Kranaatti"
 
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
@@ -317,6 +351,10 @@ msgstr "Alusta joukkueet"
 msgid "Is it a gift?"
 msgstr "Onko se lahja?"
 
+#: src/weapon/jetpack.cpp:48
+msgid "JetPack"
+msgstr ""
+
 #: src/map/maps_list.cpp:192
 msgid "Load maps:"
 msgstr "Lataa kartat:"
@@ -324,6 +362,10 @@ msgstr "Lataa kartat:"
 #: src/team/teams_list.cpp:105
 msgid "Load teams:"
 msgstr "Lataa joukkueet:"
+
+#: src/weapon/lowgrav.cpp:41
+msgid "LowGrav"
+msgstr ""
 
 #: src/map/map.cpp:337
 #, c-format
@@ -354,7 +396,11 @@ msgstr "Nimi:"
 msgid "Network Game"
 msgstr "Nettipeli"
 
-#: src/weapon/weapon.cpp:569
+#: src/weapon/ninja_rope.cpp:83
+msgid "NinjaRope"
+msgstr ""
+
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
@@ -376,6 +422,14 @@ msgstr "Pelaajien määrä joukkueessa:"
 #: src/menu/main_menu.cpp:107
 msgid "Options"
 msgstr "Asetukset"
+
+#: src/weapon/parachute.cpp:35
+msgid "Parachute"
+msgstr ""
+
+#: src/weapon/parachute.cpp:58
+msgid "Parachute is activated automatically."
+msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
@@ -400,6 +454,10 @@ msgstr "Näytä pelaajien nimet?"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Ole hyvä ja kerro mielipiteesi Wormuxista sähköpostilla:"
 
+#: src/weapon/polecat.cpp:134
+msgid "PolecatLauncher"
+msgstr ""
+
 #: src/menu/main_menu.cpp:119
 msgid "Quit"
 msgstr "Lopeta"
@@ -408,13 +466,26 @@ msgstr "Lopeta"
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:182 src/weapon/riot_bomb.cpp:66
 msgid "Riot bomb"
 msgstr "Automaattibazookan"
 
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Aloita peli"
+
+#: src/weapon/shotgun.cpp:61
+#, fuzzy
+msgid "Shotgun"
+msgstr "Ääni asetukset"
+
+#: src/weapon/skip_turn.cpp:37
+msgid "Skip turn"
+msgstr ""
+
+#: src/weapon/snipe_rifle.cpp:55
+msgid "Snipe Rifle"
+msgstr ""
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -432,6 +503,14 @@ msgstr "Aloitetaan uusi peli"
 #: src/interface/interface.cpp:100
 msgid "Stock:"
 msgstr "Varasto:"
+
+#: src/weapon/submachine_gun.cpp:63
+msgid "Submachine Gun"
+msgstr ""
+
+#: src/weapon/supertux.cpp:125
+msgid "SuperTux"
+msgstr ""
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
@@ -454,6 +533,7 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaattiohjus on poistunut taistelukentältä..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
+#: src/weapon/riot_bomb.cpp:52
 msgid "The rocket left the battlefield..."
 msgstr "Ohjus on poistunut taistelukentältä..."
 
@@ -533,6 +613,10 @@ msgstr "Ammuit ohi!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "valmis"
+
+#: src/weapon/jetpack.cpp:54
+msgid "jetpack"
+msgstr ""
 
 #~ msgid "Select the teams:"
 #~ msgstr "Valitse joukkueet:"

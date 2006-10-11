@@ -91,6 +91,11 @@ msgstr "%s kicsit ügyefogyott volt, így hát távozott az élő sorából!"
 msgid "%s is next to a mine!"
 msgstr "%s egy taposó akna mellett ténfereg!"
 
+#: src/weapon/skip_turn.cpp:46
+#, fuzzy, c-format
+msgid "%s team has skipped its turn."
+msgstr "%s (%s csapat) meghalt."
+
 #: src/object/bonus_box.cpp:169
 #, fuzzy, c-format
 msgid "%s team has won %u automatic bazooka!"
@@ -142,6 +147,14 @@ msgstr ""
 msgid "Air attack"
 msgstr "Légitámadás"
 
+#: src/weapon/airhammer.cpp:46
+msgid "Airhammer"
+msgstr ""
+
+#: src/weapon/anvil.cpp:63
+msgid "Anvil"
+msgstr ""
+
 #: src/main.cpp:199
 msgid "Authors:"
 msgstr "Szerzők:"
@@ -160,6 +173,14 @@ msgstr "Rakétavető"
 
 #: src/weapon/blowtorch.cpp:14
 msgid "Blowtorch"
+msgstr ""
+
+#: src/weapon/bounce_ball.cpp:72
+msgid "BounceBall"
+msgstr ""
+
+#: src/weapon/supertux.cpp:103
+msgid "Bye bye tux..."
 msgstr ""
 
 #: src/main.cpp:111
@@ -183,6 +204,10 @@ msgstr "Szőnyegbomba"
 #: src/weapon/suicide.cpp:34
 msgid "Commit suicide"
 msgstr "Öngyilkosság elkövetése"
+
+#: src/weapon/construct.cpp:43
+msgid "Construct"
+msgstr ""
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
@@ -262,6 +287,10 @@ msgstr "A kukacok véletlenszerű elhelyezése"
 msgid "Fullscreen?"
 msgstr "Teljesképernyős üzemmód"
 
+#: src/weapon/gnu.cpp:120
+msgid "GnuLauncher"
+msgstr ""
+
 #: src/weapon/grenade.cpp:69
 msgid "Grenade"
 msgstr "Gránát"
@@ -283,6 +312,11 @@ msgstr "Nem található a felhasználó könyvtára!"
 #: src/menu/game_menu.cpp:69
 msgid "Head commander"
 msgstr ""
+
+#: src/weapon/holly_grenade.cpp:105
+#, fuzzy
+msgid "HollyGrenade"
+msgstr "Gránát"
 
 #: src/game/game_loop.cpp:722
 msgid "Hurry up, you are too slow !!"
@@ -319,6 +353,10 @@ msgstr "Felkészülés"
 msgid "Is it a gift?"
 msgstr ""
 
+#: src/weapon/jetpack.cpp:48
+msgid "JetPack"
+msgstr ""
+
 #: src/map/maps_list.cpp:192
 #, fuzzy
 msgid "Load maps:"
@@ -328,6 +366,10 @@ msgstr "%s térkép betöltése"
 #, fuzzy
 msgid "Load teams:"
 msgstr "%s csapat betöltése."
+
+#: src/weapon/lowgrav.cpp:41
+msgid "LowGrav"
+msgstr ""
 
 #: src/map/map.cpp:337
 #, c-format
@@ -359,7 +401,11 @@ msgstr "Név"
 msgid "Network Game"
 msgstr ""
 
-#: src/weapon/weapon.cpp:569
+#: src/weapon/ninja_rope.cpp:83
+msgid "NinjaRope"
+msgstr ""
+
+#: src/weapon/weapon.cpp:571
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
@@ -381,6 +427,14 @@ msgstr "Játékosok száma csapatonként:"
 #: src/menu/main_menu.cpp:107
 msgid "Options"
 msgstr "Beállítások"
+
+#: src/weapon/parachute.cpp:35
+msgid "Parachute"
+msgstr ""
+
+#: src/weapon/parachute.cpp:58
+msgid "Parachute is activated automatically."
+msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
@@ -405,6 +459,10 @@ msgstr "A játékos nevének megjelenítése"
 msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Kérjük, mondd el a véleményed a Wormuxról: "
 
+#: src/weapon/polecat.cpp:134
+msgid "PolecatLauncher"
+msgstr ""
+
 #: src/menu/main_menu.cpp:119
 msgid "Quit"
 msgstr "Kilépés"
@@ -413,13 +471,26 @@ msgstr "Kilépés"
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:182 src/weapon/riot_bomb.cpp:66
 msgid "Riot bomb"
 msgstr ""
 
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Játék futtatása"
+
+#: src/weapon/shotgun.cpp:61
+#, fuzzy
+msgid "Shotgun"
+msgstr "Beállítások"
+
+#: src/weapon/skip_turn.cpp:37
+msgid "Skip turn"
+msgstr ""
+
+#: src/weapon/snipe_rifle.cpp:55
+msgid "Snipe Rifle"
+msgstr ""
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -438,6 +509,14 @@ msgstr "Új játék kezdése"
 #, fuzzy
 msgid "Stock:"
 msgstr "Raktár"
+
+#: src/weapon/submachine_gun.cpp:63
+msgid "Submachine Gun"
+msgstr ""
+
+#: src/weapon/supertux.cpp:125
+msgid "SuperTux"
+msgstr ""
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
@@ -460,6 +539,7 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr ""
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
+#: src/weapon/riot_bomb.cpp:52
 msgid "The rocket left the battlefield..."
 msgstr ""
 
@@ -538,6 +618,10 @@ msgstr "Ezt elnézted!"
 
 #: src/map/ground.cpp:56
 msgid "done"
+msgstr ""
+
+#: src/weapon/jetpack.cpp:54
+msgid "jetpack"
 msgstr ""
 
 #, fuzzy
