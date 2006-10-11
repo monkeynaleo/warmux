@@ -56,7 +56,7 @@ void Cluster::Refresh()
 
 void Cluster::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
+  GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 }
 
@@ -94,7 +94,7 @@ void ClusterBomb::Refresh()
 
 void ClusterBomb::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The Cluster Bomb left the battlefield before it could explode."));
+  GameMessages::GetInstance()->Add (_("The Cluster Bomb has left the battlefield before it could explode."));
   WeaponProjectile::SignalOutOfMap();
 }
 
@@ -126,7 +126,7 @@ void ClusterBomb::Explosion()
 ClusterLauncher::ClusterLauncher() : 
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
-  m_name = _("ClusterBomb");
+  m_name = _("Cluster Bomb");
   ignore_collision_signal = true;
   ReloadLauncher();
 }

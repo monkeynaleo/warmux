@@ -49,7 +49,7 @@ void RoquetteRiotBomb::Refresh()
 
 void RoquetteRiotBomb::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
+  GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 }
 
@@ -63,7 +63,7 @@ void RoquetteRiotBomb::DoExplosion()
 RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
 {  
-  m_name = _("Riot bomb");
+  m_name = _("Riot Bomb");
   ReloadLauncher();
 }
 

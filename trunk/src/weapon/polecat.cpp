@@ -131,7 +131,7 @@ void Polecat::SignalOutOfMap()
 PolecatLauncher::PolecatLauncher() :
   WeaponLauncher(WEAPON_POLECAT, "polecatlauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
-  m_name = _("PolecatLauncher");
+  m_name = _("Polecat Launcher");
   ReloadLauncher();
 }
 

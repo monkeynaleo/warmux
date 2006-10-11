@@ -157,8 +157,8 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
 
   case bonusAIR_ATTACK:
     txt << Format(ngettext(
-                "'%s has won %u air attack",
-                "'%s has won %u air attacks",
+                "'%s has won %u Air Attack",
+                "'%s has won %u Air Attacks",
                 BONUS_AIR_ATTACK),
             ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
     equipe.m_nb_ammos[ _("Air attack") ] += BONUS_AIR_ATTACK;
@@ -166,8 +166,8 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
 
   case bonusAUTO_BAZOOKA:
     txt << Format(ngettext(
-                "%s team has won %u automatic bazooka!",
-                "%s team has won %u automatic bazookas!",
+                "%s team has won %u Automatic Bazooka!",
+                "%s team has won %u Automatic Bazookas!",
                 BONUS_AUTO_BAZOOKA),
 		  ActiveTeam().GetName().c_str(), BONUS_AUTO_BAZOOKA);
     equipe.m_nb_ammos[ _("Automatic bazooka") ] += BONUS_AUTO_BAZOOKA;
@@ -175,8 +175,8 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
 
   case bonusRIOT_BOMB:
     txt << Format(ngettext(
-                "%s team has won %u riot bomb!",
-                "%s team has won %u riot bombs!",
+                "%s team has won %u Riot Bomb!",
+                "%s team has won %u Riot Bombs!",
                 BONUS_RIOT_BOMB),
 		  ActiveTeam().GetName().c_str(), BONUS_RIOT_BOMB);
     equipe.m_nb_ammos[ _("Riot bomb") ] += BONUS_RIOT_BOMB;
@@ -185,8 +185,8 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
   default: std::cout << bonus << std::endl; assert (false);
   case bonusDYNAMITE:
     txt << Format(ngettext(
-                "%s team has won %u stick of dynamite!",
-                "%s team has won %u sticks of dynamite!",
+                "%s team has won %u stick of Dynamite!",
+                "%s team has won %u sticks of Dynamite!",
                 BONUS_DYNAMITE),
             ActiveTeam().GetName().c_str(), BONUS_DYNAMITE);
     equipe.m_nb_ammos[ _("Dynamite") ] += BONUS_DYNAMITE;

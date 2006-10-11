@@ -52,7 +52,7 @@ void SnipeBullet::ShootSound()
 
 SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new ExplosiveWeaponConfig())
 {
-  m_name = _("Snipe Rifle");
+  m_name = _("Sniper Rifle");
 
   last_angle = 0.0;
   targeting_something = false;

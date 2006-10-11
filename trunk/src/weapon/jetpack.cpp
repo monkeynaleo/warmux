@@ -45,13 +45,12 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 			    new WeaponConfig(),
 			    NEVER_VISIBLE)
 {
-  m_name = _("JetPack");
+  m_name = _("Jetpack");
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
   override_keys = true ;
   use_unit_on_first_shoot = false;  
 
-  m_name = _("jetpack");
   m_x_force = 0.0;
   m_y_force = 0.0;
   channel = -1;

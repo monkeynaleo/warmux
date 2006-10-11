@@ -31,7 +31,7 @@ const uint ESPACE = 5;
 
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {  
-  m_name = _("Commit suicide");
+  m_name = _("Commit Suicide");
   sound_channel = -1;  
 }
 

@@ -93,7 +93,7 @@ void HollyGrenade::Refresh()
 
 void HollyGrenade::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add ("The grenade left the battlefield before exploding");
+  GameMessages::GetInstance()->Add ("The grenade has left the battlefield before exploding");
   WeaponProjectile::SignalOutOfMap();
 }
 
@@ -102,7 +102,7 @@ void HollyGrenade::SignalOutOfMap()
 HollyGrenadeLauncher::HollyGrenadeLauncher() : 
   WeaponLauncher(WEAPON_HOLLY_GRENADE, "holly_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {  
-  m_name = _("HollyGrenade");
+  m_name = _("Holy Grenade");
   m_allow_change_timeout = true;
   ignore_collision_signal = true;
   ReloadLauncher();
