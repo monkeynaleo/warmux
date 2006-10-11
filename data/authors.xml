@@ -246,6 +246,35 @@
 </section>
 
 <section title="Contributors">
+  
+	<author>
+		<name>Adnan Hodzic</name>
+		<email>AbsintheSyringe AT gmail.com</email>
+		<country>Bosnia and Herzegovina</country>
+		<description>Physics constant for wind particles</description>
+	</author>
+	
+	<author>
+		<name>Reiner Herrmann</name>
+		<email>reiner AT reiner-h.de</email>
+		<country>Germany</country>
+		<description>Blowtorch weapon, many bugfixes</description>
+	</author>
+	
+	<author>
+		<name>Riccardo Traverso</name>
+		<email>gr3yfox.fw AT gmail.com</email>
+		<country>Italia</country>
+		<description>Syringe weapon, bugfixes</description>
+	</author>
+	
+	<author>
+		<name>Jon de Andres</name>
+		<email>jtbanfrj AT bipt106.bi.ehu.es</email>
+		<country>Spain</country>
+		<description>Network chat</description>
+        </author>
+  
   <author>
     <name>Timo Horstschäfer</name>
     <email>mail AT timo-hortschaefer.de</email>
@@ -497,33 +526,6 @@
     <description>Fedora Core 3 packager.</description>
   </author>
 
-  <author>
-    <name>Adnan Hodzic</name>
-    <email>AbsintheSyringe AT gmail.com</email>
-    <country>Bosnia and Herzegovina</country>
-    <description>Physics constant for wind particles</description>
-  </author>
-
-  <author>
-    <name>Reiner Herrmann</name>
-    <email>reiner AT reiner-h.de</email>
-    <country>Germany</country>
-    <description>Blowtorch weapon, many bugfixes</description>
-  </author>
-
-  <author>
-    <name>Riccardo Traverso</name>
-    <email>gr3yfox.fw AT gmail.com</email>
-    <country>Italia</country>
-    <description>Syringe weapon, bugfixes</description>
-  </author>
-
-  <author>
-    <name>Jon de Andres</name>
-    <email>jtbanfrj AT bipt106.bi.ehu.es</email>
-    <country>Spain</country>
-    <description>Network chat</description>
-  </author>
 </section>
 
 <section title="Thanks to">
