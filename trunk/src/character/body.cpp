@@ -594,6 +594,7 @@ void Body::SetFrame(uint no)
 {
   assert(no < current_mvt->frames.size());
   current_frame = no;
+  need_rebuild = true;
 }
 
 void Body::MakeParticles(const Point2i& pos)
