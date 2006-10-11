@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-10-12 00:07+0200\n"
+"PO-Revision-Date: 2006-10-12 00:43+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -152,7 +152,7 @@ msgstr "Presslufthammer"
 
 #: src/weapon/anvil.cpp:63
 msgid "Anvil"
-msgstr ""
+msgstr "Amboss"
 
 #: src/main.cpp:199
 msgid "Authors:"
@@ -176,7 +176,7 @@ msgstr "Schneidbrenner"
 
 #: src/weapon/bounce_ball.cpp:72
 msgid "BounceBall"
-msgstr ""
+msgstr "Springball"
 
 #: src/weapon/supertux.cpp:103
 msgid "Bye bye tux..."
@@ -205,8 +205,9 @@ msgid "Commit suicide"
 msgstr "Selbstmord begehen"
 
 #: src/weapon/construct.cpp:43
+#, fuzzy
 msgid "Construct"
-msgstr ""
+msgstr "Konstruktion"
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
@@ -362,9 +363,8 @@ msgid "Load teams:"
 msgstr "Lade Mannschaft:"
 
 #: src/weapon/lowgrav.cpp:41
-#, fuzzy
 msgid "LowGrav"
-msgstr "kaumGrav"
+msgstr "Geringe Schwerkraft"
 
 #: src/map/map.cpp:337
 #, c-format
@@ -426,7 +426,7 @@ msgstr "Fallschirm"
 
 #: src/weapon/parachute.cpp:58
 msgid "Parachute is activated automatically."
-msgstr ""
+msgstr "Fallschirm wird automatisch aktiviert."
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
@@ -449,9 +449,8 @@ msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Sag uns deine Meinung über Wormux via E-Mail:"
 
 #: src/weapon/polecat.cpp:134
-#, fuzzy
 msgid "PolecatLauncher"
-msgstr "Gnu-Werfer"
+msgstr "Stinktier-Werfer"
 
 #: src/menu/main_menu.cpp:119
 msgid "Quit"
@@ -470,9 +469,8 @@ msgid "Run game"
 msgstr "Spiel starten"
 
 #: src/weapon/shotgun.cpp:61
-#, fuzzy
 msgid "Shotgun"
-msgstr "Geräusche"
+msgstr "Schrotflinte"
 
 #: src/weapon/skip_turn.cpp:37
 msgid "Skip turn"
@@ -480,7 +478,7 @@ msgstr "Runde überspringen"
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Snipe Rifle"
-msgstr ""
+msgstr "Scharfschützengewehr"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -500,7 +498,7 @@ msgstr "Vorrat:"
 
 #: src/weapon/submachine_gun.cpp:63
 msgid "Submachine Gun"
-msgstr ""
+msgstr "Maschinenpistole"
 
 #: src/weapon/supertux.cpp:125
 msgid "SuperTux"
@@ -508,7 +506,7 @@ msgstr "SuperTux"
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
-msgstr ""
+msgstr "Spritze"
 
 #: src/game/game_loop.cpp:206
 msgid "Teams"
