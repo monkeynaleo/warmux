@@ -172,8 +172,13 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 
   if (w == lbox_maps)
   {
-    ChangeMap();
-    action_handler->NewAction (new Action(ACTION_SET_MAP, ActiveMap().name));
+    if(network.IsServer())
+    {
+      ChangeMap();
+      action_handler->NewAction (new Action(ACTION_SET_MAP, ActiveMap().name));
+    }
+    else
+      msg_box->NewMessage(_("Only the server can set the map!"));
   }
 
   if (w == bt_add_team) {
