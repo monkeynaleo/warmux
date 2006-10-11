@@ -88,7 +88,7 @@ void Construct::ChooseTarget(Point2i mouse_pos)
     return;
 
   target_chosen = true;
-  ActiveTeam().GetWeapon().NewActionShoot();
+  Shoot();
 }
 
 void Construct::HandleKeyEvent(int action, int event_type)
@@ -102,13 +102,6 @@ void Construct::HandleKeyEvent(int action, int event_type)
       if (event_type == KEY_PRESSED)
         Down();
       break ;
-    case ACTION_SHOOT:
-      if(world.ParanoiacRectIsInVacuum( Rectanglei(dst - construct_spr->GetSizeMax()/2,
-                                           construct_spr->GetSizeMax() ))
-      && !ActiveCharacter().IsMoving())
-        ActiveTeam().GetWeapon().NewActionShoot();
-      break;
-
     default:
       ActiveCharacter().HandleKeyEvent( action, event_type);
       break ;
