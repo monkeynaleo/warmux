@@ -36,4 +36,5 @@ void MessageBox::NewMessage(const std::string &msg)
 {
   DelFirstWidget();
   AddWidget(new Label(msg, Rectanglei(0,0,0,0), *font));
+  ForceRedraw();
 }
