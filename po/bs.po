@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-10-12 00:24+0200\n"
+"PO-Revision-Date: 2006-10-12 00:49+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosanski <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
@@ -149,11 +149,11 @@ msgstr "Zračni napad"
 
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
-msgstr ""
+msgstr "Zračni čekić"
 
 #: src/weapon/anvil.cpp:63
 msgid "Anvil"
-msgstr ""
+msgstr "Nakovanj"
 
 #: src/main.cpp:199
 msgid "Authors:"
@@ -177,11 +177,11 @@ msgstr "Bacač plamena"
 
 #: src/weapon/bounce_ball.cpp:72
 msgid "BounceBall"
-msgstr ""
+msgstr "Odskočica"
 
 #: src/weapon/supertux.cpp:103
 msgid "Bye bye tux..."
-msgstr ""
+msgstr "Ćao ćao tux ..."
 
 #: src/main.cpp:111
 msgid "C++ exception caught:"
@@ -207,7 +207,7 @@ msgstr "Počini samoubistvo"
 
 #: src/weapon/construct.cpp:43
 msgid "Construct"
-msgstr ""
+msgstr "Izgradi"
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
@@ -250,8 +250,7 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -290,7 +289,7 @@ msgstr "Puni ekran?"
 
 #: src/weapon/gnu.cpp:120
 msgid "GnuLauncher"
-msgstr ""
+msgstr "Lansiraj GNU-a"
 
 #: src/weapon/grenade.cpp:69
 msgid "Grenade"
@@ -352,7 +351,7 @@ msgstr "Da li je to poklon ?"
 
 #: src/weapon/jetpack.cpp:48
 msgid "JetPack"
-msgstr ""
+msgstr "JetPack"
 
 #: src/map/maps_list.cpp:192
 msgid "Load maps:"
@@ -364,7 +363,7 @@ msgstr "Učitaj timove:"
 
 #: src/weapon/lowgrav.cpp:41
 msgid "LowGrav"
-msgstr ""
+msgstr "Smanji gravitaciju"
 
 #: src/map/map.cpp:337
 #, c-format
@@ -397,7 +396,7 @@ msgstr "Mrežna Igra"
 
 #: src/weapon/ninja_rope.cpp:83
 msgid "NinjaRope"
-msgstr ""
+msgstr "Špaga za nindže"
 
 #: src/weapon/weapon.cpp:571
 #, c-format
@@ -424,11 +423,11 @@ msgstr "Opcije"
 
 #: src/weapon/parachute.cpp:35
 msgid "Parachute"
-msgstr ""
+msgstr "Padobran"
 
 #: src/weapon/parachute.cpp:58
 msgid "Parachute is activated automatically."
-msgstr ""
+msgstr "Padobran se automatski aktivira."
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
@@ -453,7 +452,7 @@ msgstr "Molimo recite nam vaše mišljenje o Wormux-u putem email-a:"
 
 #: src/weapon/polecat.cpp:134
 msgid "PolecatLauncher"
-msgstr ""
+msgstr "Lansiraj tvora"
 
 #: src/menu/main_menu.cpp:119
 msgid "Quit"
@@ -478,11 +477,11 @@ msgstr "Zvučne opcije"
 
 #: src/weapon/skip_turn.cpp:37
 msgid "Skip turn"
-msgstr ""
+msgstr "Preskoči red"
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Snipe Rifle"
-msgstr ""
+msgstr "Snajper"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -502,11 +501,11 @@ msgstr "Zaliha:"
 
 #: src/weapon/submachine_gun.cpp:63
 msgid "Submachine Gun"
-msgstr ""
+msgstr "Mašinka"
 
 #: src/weapon/supertux.cpp:125
 msgid "SuperTux"
-msgstr ""
+msgstr "SuperTux"
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
@@ -609,3 +608,4 @@ msgstr "gotov"
 #: src/weapon/jetpack.cpp:54
 msgid "jetpack"
 msgstr ""
+
