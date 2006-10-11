@@ -152,7 +152,7 @@ bool Plane::OnTopOfTarget() const
 AirAttack::AirAttack() :
   Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE)//, plane(cfg())
 {  
-  m_name = _("Air attack");
+  m_name = _("Air Attack");
   MOUSE_CHARACTER_SELECTION = false;
   can_be_used_on_closed_map = false;
   target_chosen = false;

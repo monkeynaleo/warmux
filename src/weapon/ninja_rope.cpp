@@ -80,7 +80,7 @@ bool find_first_contact_point (int x1, int y1, double angle, int length,
 
 NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new WeaponConfig())
 {
-  m_name = _("NinjaRope");
+  m_name = _("Ninjarope");
   override_keys = true ;
   use_unit_on_first_shoot = false;
 

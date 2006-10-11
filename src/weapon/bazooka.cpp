@@ -50,7 +50,7 @@ void RoquetteBazooka::Refresh()
 
 void RoquetteBazooka::SignalOutOfMap()
 { 
-  GameMessages::GetInstance()->Add (_("The rocket left the battlefield..."));
+  GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 }
 
