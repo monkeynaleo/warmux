@@ -96,21 +96,21 @@ msgid "%s team has skipped its turn."
 msgstr "%s (%s takımı) öldü."
 
 #: src/object/bonus_box.cpp:169
-#, c-format
-msgid "%s team has won %u automatic bazooka!"
-msgid_plural "%s team has won %u automatic bazookas!"
+#, fuzzy, c-format
+msgid "%s team has won %u Automatic Bazooka!"
+msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "%s takımı %u otomatik bazuka kazandı!"
 
 #: src/object/bonus_box.cpp:178
-#, c-format
-msgid "%s team has won %u riot bomb!"
-msgid_plural "%s team has won %u riot bombs!"
+#, fuzzy, c-format
+msgid "%s team has won %u Riot Bomb!"
+msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "%s takımı %u otomatik bazuka kazandı!"
 
 #: src/object/bonus_box.cpp:188
-#, c-format
-msgid "%s team has won %u stick of dynamite!"
-msgid_plural "%s team has won %u sticks of dynamite!"
+#, fuzzy, c-format
+msgid "%s team has won %u stick of Dynamite!"
+msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "%s takımı %u dinamit lokumu kazandı!"
 
 #: src/object/bonus_box.cpp:133
@@ -120,9 +120,9 @@ msgid_plural "%s team has won %u teleportations."
 msgstr[0] "%s takımı %u ışınlanma kazandı."
 
 #: src/object/bonus_box.cpp:160
-#, c-format
-msgid "'%s has won %u air attack"
-msgid_plural "'%s has won %u air attacks"
+#, fuzzy, c-format
+msgid "'%s has won %u Air Attack"
+msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "%s takımı %u hava saldırısı kazandı"
 
 #: src/interface/interface.cpp:160
@@ -139,7 +139,12 @@ msgstr ""
 "Düzgün çalışması için, <infinite_background> <is_open> olarak ayarlanması "
 "gerekli!!"
 
-#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:155
+#: src/weapon/air_attack.cpp:155
+#, fuzzy
+msgid "Air Attack"
+msgstr "Hava saldırısı"
+
+#: src/object/bonus_box.cpp:164
 msgid "Air attack"
 msgstr "Hava saldırısı"
 
@@ -155,7 +160,12 @@ msgstr ""
 msgid "Authors:"
 msgstr "Yazarlar:"
 
-#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:111
+#, fuzzy
+msgid "Automatic Bazooka"
+msgstr "Otomatik bazuka"
+
+#: src/object/bonus_box.cpp:173
 msgid "Automatic bazooka"
 msgstr "Otomatik bazuka"
 
@@ -172,7 +182,7 @@ msgid "Blowtorch"
 msgstr ""
 
 #: src/weapon/bounce_ball.cpp:72
-msgid "BounceBall"
+msgid "Bounce Ball"
 msgstr ""
 
 #: src/weapon/supertux.cpp:103
@@ -194,11 +204,13 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
 #: src/weapon/cluster_bomb.cpp:129
-msgid "ClusterBomb"
+#, fuzzy
+msgid "Cluster Bomb"
 msgstr "Şarapnelli bomba"
 
 #: src/weapon/suicide.cpp:34
-msgid "Commit suicide"
+#, fuzzy
+msgid "Commit Suicide"
 msgstr "İntihar"
 
 #: src/weapon/construct.cpp:43
@@ -283,7 +295,7 @@ msgid "Fullscreen?"
 msgstr "Tam ekran?"
 
 #: src/weapon/gnu.cpp:120
-msgid "GnuLauncher"
+msgid "Gnu Launcher"
 msgstr ""
 
 #: src/weapon/grenade.cpp:69
@@ -308,7 +320,7 @@ msgstr ""
 
 #: src/weapon/holly_grenade.cpp:105
 #, fuzzy
-msgid "HollyGrenade"
+msgid "Holy Grenade"
 msgstr "El bombası"
 
 #: src/game/game_loop.cpp:722
@@ -345,7 +357,7 @@ msgid "Is it a gift?"
 msgstr "Bu bir hediye mi?"
 
 #: src/weapon/jetpack.cpp:48
-msgid "JetPack"
+msgid "Jetpack"
 msgstr ""
 
 #: src/map/maps_list.cpp:192
@@ -390,10 +402,10 @@ msgid "Network Game"
 msgstr "Ağ Oyunu"
 
 #: src/weapon/ninja_rope.cpp:83
-msgid "NinjaRope"
+msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:571
+#: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
@@ -448,7 +460,7 @@ msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Lütfen e-posta ile Wormux hakkındaki düşüncelerinizi bize iletin:"
 
 #: src/weapon/polecat.cpp:134
-msgid "PolecatLauncher"
+msgid "Polecat Launcher"
 msgstr ""
 
 #: src/menu/main_menu.cpp:119
@@ -459,7 +471,12 @@ msgstr "Çıkış"
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/object/bonus_box.cpp:182 src/weapon/riot_bomb.cpp:66
+#: src/weapon/riot_bomb.cpp:66
+#, fuzzy
+msgid "Riot Bomb"
+msgstr "Otomatik bazuka"
+
+#: src/object/bonus_box.cpp:182
 msgid "Riot bomb"
 msgstr "Otomatik bazuka"
 
@@ -477,7 +494,7 @@ msgid "Skip turn"
 msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
-msgid "Snipe Rifle"
+msgid "Sniper Rifle"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -518,7 +535,7 @@ msgid "Teleportation"
 msgstr "Işınlanma"
 
 #: src/weapon/cluster_bomb.cpp:97
-msgid "The Cluster Bomb left the battlefield before it could explode."
+msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
 #: src/weapon/auto_bazooka.cpp:95
@@ -527,7 +544,8 @@ msgstr "Otomatik roket savaş alanını terketti..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
-msgid "The rocket left the battlefield..."
+#, fuzzy
+msgid "The rocket has left the battlefield..."
 msgstr "Roket savaş alanını terketti..."
 
 #: src/graphic/video.cpp:193
@@ -606,10 +624,6 @@ msgstr "Iskaladın!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
-
-#: src/weapon/jetpack.cpp:54
-msgid "jetpack"
-msgstr ""
 
 #~ msgid "Select the teams:"
 #~ msgstr "Takımları seç:"

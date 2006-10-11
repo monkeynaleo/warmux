@@ -98,23 +98,23 @@ msgid "%s team has skipped its turn."
 msgstr "%s (équipe %s) est mort."
 
 #: src/object/bonus_box.cpp:169
-#, c-format
-msgid "%s team has won %u automatic bazooka!"
-msgid_plural "%s team has won %u automatic bazookas!"
+#, fuzzy, c-format
+msgid "%s team has won %u Automatic Bazooka!"
+msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "L'équipe %s a gagné %u bazooka automatique !"
 msgstr[1] "L'équipe %s a gagné %u bazookas automatiques !"
 
 #: src/object/bonus_box.cpp:178
-#, c-format
-msgid "%s team has won %u riot bomb!"
-msgid_plural "%s team has won %u riot bombs!"
+#, fuzzy, c-format
+msgid "%s team has won %u Riot Bomb!"
+msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "L'équipe %s a gagné %u bazooka automatique !"
 msgstr[1] "L'équipe %s a gagné %u bazookas automatiques !"
 
 #: src/object/bonus_box.cpp:188
-#, c-format
-msgid "%s team has won %u stick of dynamite!"
-msgid_plural "%s team has won %u sticks of dynamite!"
+#, fuzzy, c-format
+msgid "%s team has won %u stick of Dynamite!"
+msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "L'équipe %s a gagné %u baton de dynamite !"
 msgstr[1] "L'équipe %s a gagné %u batons de dynamite !"
 
@@ -126,9 +126,9 @@ msgstr[0] "L'équipe '%s' a gagné %u téléportation."
 msgstr[1] "L'équipe '%s' a gagné %u téléportations."
 
 #: src/object/bonus_box.cpp:160
-#, c-format
-msgid "'%s has won %u air attack"
-msgid_plural "'%s has won %u air attacks"
+#, fuzzy, c-format
+msgid "'%s has won %u Air Attack"
+msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "Le joueur %s a gagné %u attaque aérienne !"
 msgstr[1] "Le joueur %s a gagné %u attaques aériennes !"
 
@@ -146,7 +146,12 @@ msgstr ""
 "La balise <infinite_background> a besoin de la balise <is_open> pour "
 "fonctionner correctment."
 
-#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:155
+#: src/weapon/air_attack.cpp:155
+#, fuzzy
+msgid "Air Attack"
+msgstr "Attaque aérienne"
+
+#: src/object/bonus_box.cpp:164
 msgid "Air attack"
 msgstr "Attaque aérienne"
 
@@ -162,7 +167,12 @@ msgstr ""
 msgid "Authors:"
 msgstr "Auteurs :"
 
-#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:111
+#, fuzzy
+msgid "Automatic Bazooka"
+msgstr "Bazooka automatique"
+
+#: src/object/bonus_box.cpp:173
 msgid "Automatic bazooka"
 msgstr "Bazooka automatique"
 
@@ -179,7 +189,7 @@ msgid "Blowtorch"
 msgstr ""
 
 #: src/weapon/bounce_ball.cpp:72
-msgid "BounceBall"
+msgid "Bounce Ball"
 msgstr ""
 
 #: src/weapon/supertux.cpp:103
@@ -201,11 +211,13 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des équipes (%s) !"
 
 #: src/weapon/cluster_bomb.cpp:129
-msgid "ClusterBomb"
+#, fuzzy
+msgid "Cluster Bomb"
 msgstr "Grenade à fragmentation"
 
 #: src/weapon/suicide.cpp:34
-msgid "Commit suicide"
+#, fuzzy
+msgid "Commit Suicide"
 msgstr "Suicide"
 
 #: src/weapon/construct.cpp:43
@@ -290,7 +302,7 @@ msgid "Fullscreen?"
 msgstr "Plein écran ?"
 
 #: src/weapon/gnu.cpp:120
-msgid "GnuLauncher"
+msgid "Gnu Launcher"
 msgstr ""
 
 #: src/weapon/grenade.cpp:69
@@ -315,7 +327,7 @@ msgstr ""
 
 #: src/weapon/holly_grenade.cpp:105
 #, fuzzy
-msgid "HollyGrenade"
+msgid "Holy Grenade"
 msgstr "Grenade"
 
 #: src/game/game_loop.cpp:722
@@ -352,7 +364,7 @@ msgid "Is it a gift?"
 msgstr "Tiens, un cadeau !"
 
 #: src/weapon/jetpack.cpp:48
-msgid "JetPack"
+msgid "Jetpack"
 msgstr ""
 
 #: src/map/maps_list.cpp:192
@@ -397,10 +409,10 @@ msgid "Network Game"
 msgstr "Jeu en Réseau"
 
 #: src/weapon/ninja_rope.cpp:83
-msgid "NinjaRope"
+msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:571
+#: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr ""
@@ -456,7 +468,7 @@ msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Veuillez nous donner votre avis sur Wormux par courriel :"
 
 #: src/weapon/polecat.cpp:134
-msgid "PolecatLauncher"
+msgid "Polecat Launcher"
 msgstr ""
 
 #: src/menu/main_menu.cpp:119
@@ -467,7 +479,12 @@ msgstr "Quitter"
 msgid "Quit Wormux"
 msgstr "Quitte Wormux"
 
-#: src/object/bonus_box.cpp:182 src/weapon/riot_bomb.cpp:66
+#: src/weapon/riot_bomb.cpp:66
+#, fuzzy
+msgid "Riot Bomb"
+msgstr "Bazooka automatique"
+
+#: src/object/bonus_box.cpp:182
 msgid "Riot bomb"
 msgstr "Bazooka automatique"
 
@@ -485,7 +502,7 @@ msgid "Skip turn"
 msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
-msgid "Snipe Rifle"
+msgid "Sniper Rifle"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -525,7 +542,7 @@ msgid "Teleportation"
 msgstr "Téléportation"
 
 #: src/weapon/cluster_bomb.cpp:97
-msgid "The Cluster Bomb left the battlefield before it could explode."
+msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
 #: src/weapon/auto_bazooka.cpp:95
@@ -534,7 +551,8 @@ msgstr "La roquette automatique est partie dans un autre monde ..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
-msgid "The rocket left the battlefield..."
+#, fuzzy
+msgid "The rocket has left the battlefield..."
 msgstr "La roquette est partie dans un autre monde ..."
 
 #: src/graphic/video.cpp:193
@@ -612,10 +630,6 @@ msgstr "Tir dans le vide..."
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "terminé"
-
-#: src/weapon/jetpack.cpp:54
-msgid "jetpack"
-msgstr ""
 
 #~ msgid "Select the teams:"
 #~ msgstr "Choisissez les équipes :"

@@ -95,23 +95,23 @@ msgid "%s team has skipped its turn."
 msgstr "%s (%s tim) je mrtav."
 
 #: src/object/bonus_box.cpp:169
-#, c-format
-msgid "%s team has won %u automatic bazooka!"
-msgid_plural "%s team has won %u automatic bazookas!"
+#, fuzzy, c-format
+msgid "%s team has won %u Automatic Bazooka!"
+msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "%s tim je dobio %u automatske bazuke!"
 msgstr[1] "tim '%s' dobio je %u automatskih bazuka!"
 
 #: src/object/bonus_box.cpp:178
-#, c-format
-msgid "%s team has won %u riot bomb!"
-msgid_plural "%s team has won %u riot bombs!"
+#, fuzzy, c-format
+msgid "%s team has won %u Riot Bomb!"
+msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "%s tim je dobio %u džumbus bombu!"
 msgstr[1] "tim '%s' dobio je %u džumbus bombi!"
 
 #: src/object/bonus_box.cpp:188
-#, c-format
-msgid "%s team has won %u stick of dynamite!"
-msgid_plural "%s team has won %u sticks of dynamite!"
+#, fuzzy, c-format
+msgid "%s team has won %u stick of Dynamite!"
+msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "%s tim je dobio %u dinamita!"
 msgstr[1] "Tim '%s' dobio %u dinamita!"
 
@@ -123,9 +123,9 @@ msgstr[0] "%s tim je dobio %u teleporta."
 msgstr[1] "tim '%s' dobio %u teleportacije."
 
 #: src/object/bonus_box.cpp:160
-#, c-format
-msgid "'%s has won %u air attack"
-msgid_plural "'%s has won %u air attacks"
+#, fuzzy, c-format
+msgid "'%s has won %u Air Attack"
+msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "'%s je dobio %u zračni napad"
 msgstr[1] "'%s' je dobio %u zračnih napada!"
 
@@ -143,7 +143,12 @@ msgstr ""
 "<infinite_background> treba <is_open> biti postavljena da bi ispravno "
 "radila!!"
 
-#: src/object/bonus_box.cpp:164 src/weapon/air_attack.cpp:155
+#: src/weapon/air_attack.cpp:155
+#, fuzzy
+msgid "Air Attack"
+msgstr "Zračni napad"
+
+#: src/object/bonus_box.cpp:164
 msgid "Air attack"
 msgstr "Zračni napad"
 
@@ -159,7 +164,12 @@ msgstr "Nakovanj"
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/object/bonus_box.cpp:173 src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:111
+#, fuzzy
+msgid "Automatic Bazooka"
+msgstr "Automatska bazuka"
+
+#: src/object/bonus_box.cpp:173
 msgid "Automatic bazooka"
 msgstr "Automatska bazuka"
 
@@ -176,7 +186,8 @@ msgid "Blowtorch"
 msgstr "Bacač plamena"
 
 #: src/weapon/bounce_ball.cpp:72
-msgid "BounceBall"
+#, fuzzy
+msgid "Bounce Ball"
 msgstr "Odskočica"
 
 #: src/weapon/supertux.cpp:103
@@ -198,11 +209,13 @@ msgid "Cannot open teams directory (%s)!"
 msgstr "Ne mogu otvorit timov direktorij  (%s)!"
 
 #: src/weapon/cluster_bomb.cpp:129
-msgid "ClusterBomb"
+#, fuzzy
+msgid "Cluster Bomb"
 msgstr "Kasetna Bomba"
 
 #: src/weapon/suicide.cpp:34
-msgid "Commit suicide"
+#, fuzzy
+msgid "Commit Suicide"
 msgstr "Počini samoubistvo"
 
 #: src/weapon/construct.cpp:43
@@ -250,7 +263,8 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -288,7 +302,8 @@ msgid "Fullscreen?"
 msgstr "Puni ekran?"
 
 #: src/weapon/gnu.cpp:120
-msgid "GnuLauncher"
+#, fuzzy
+msgid "Gnu Launcher"
 msgstr "Lansiraj GNU-a"
 
 #: src/weapon/grenade.cpp:69
@@ -313,7 +328,7 @@ msgstr "Glavni upravljač"
 
 #: src/weapon/holly_grenade.cpp:105
 #, fuzzy
-msgid "HollyGrenade"
+msgid "Holy Grenade"
 msgstr "Granata"
 
 #: src/game/game_loop.cpp:722
@@ -350,7 +365,8 @@ msgid "Is it a gift?"
 msgstr "Da li je to poklon ?"
 
 #: src/weapon/jetpack.cpp:48
-msgid "JetPack"
+#, fuzzy
+msgid "Jetpack"
 msgstr "JetPack"
 
 #: src/map/maps_list.cpp:192
@@ -395,10 +411,11 @@ msgid "Network Game"
 msgstr "Mrežna Igra"
 
 #: src/weapon/ninja_rope.cpp:83
-msgid "NinjaRope"
+#, fuzzy
+msgid "Ninjarope"
 msgstr "Špaga za nindže"
 
-#: src/weapon/weapon.cpp:571
+#: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nijedan element  <%s> nije nađen u xml konfiguracionoj datoteci!"
@@ -451,7 +468,8 @@ msgid "Please tell us your opinion of Wormux via email:"
 msgstr "Molimo recite nam vaše mišljenje o Wormux-u putem email-a:"
 
 #: src/weapon/polecat.cpp:134
-msgid "PolecatLauncher"
+#, fuzzy
+msgid "Polecat Launcher"
 msgstr "Lansiraj tvora"
 
 #: src/menu/main_menu.cpp:119
@@ -462,7 +480,12 @@ msgstr "Odustani"
 msgid "Quit Wormux"
 msgstr "Izađi iz Wormux-a"
 
-#: src/object/bonus_box.cpp:182 src/weapon/riot_bomb.cpp:66
+#: src/weapon/riot_bomb.cpp:66
+#, fuzzy
+msgid "Riot Bomb"
+msgstr "Bomba nereda"
+
+#: src/object/bonus_box.cpp:182
 msgid "Riot bomb"
 msgstr "Bomba nereda"
 
@@ -480,7 +503,8 @@ msgid "Skip turn"
 msgstr "Preskoči red"
 
 #: src/weapon/snipe_rifle.cpp:55
-msgid "Snipe Rifle"
+#, fuzzy
+msgid "Sniper Rifle"
 msgstr "Snajper"
 
 #: src/menu/options_menu.cpp:102
@@ -520,7 +544,8 @@ msgid "Teleportation"
 msgstr "Teleport"
 
 #: src/weapon/cluster_bomb.cpp:97
-msgid "The Cluster Bomb left the battlefield before it could explode."
+#, fuzzy
+msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Kasetna bomba je napustila bojište prije nego je explodirala."
 
 #: src/weapon/auto_bazooka.cpp:95
@@ -529,7 +554,8 @@ msgstr "Automatksa rakete je napustila bojište..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
-msgid "The rocket left the battlefield..."
+#, fuzzy
+msgid "The rocket has left the battlefield..."
 msgstr "Raketa je napustila bojište..."
 
 #: src/graphic/video.cpp:193
@@ -604,8 +630,3 @@ msgstr "Vaš hitac je promašio!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "gotov"
-
-#: src/weapon/jetpack.cpp:54
-msgid "jetpack"
-msgstr ""
-
