@@ -157,6 +157,8 @@ void Action::Push(std::string val)
 int Action::PopInt()
 {
   assert(var.size() > 0);
+  if(var.size() <= 0)
+	return 0;
   int val;
   Uint32 tmp = var.front();
   memcpy(&val, &tmp, 4);
