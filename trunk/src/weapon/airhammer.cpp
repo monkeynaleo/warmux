@@ -29,8 +29,7 @@
 #include "../map/map.h"
 #include "../object/objects_list.h"
 #include "../team/teams_list.h"
-#include "../team/macro.h" //New (by gr3yfox)
-//#include "../tool/point.h" //New (by gr3yfox)
+#include "../team/macro.h"
 #include "../tool/i18n.h"
 #include "../interface/game_msg.h"
 #include "../weapon/explosion.h"
@@ -80,7 +79,6 @@ bool Airhammer::p_Shoot()
                          true, -M_PI_4, 5.0 + Time::GetInstance()->Read() % 5);
   world.Dig( pos, impact );
 
-  //New (by Gr3yfox)
   uint range = 0;
   int x,y; // Testing coordinates
   bool end = false;
@@ -110,7 +108,6 @@ bool Airhammer::p_Shoot()
       }
     }
   } while (!end);
-  //End new
 
   return true;
 }
