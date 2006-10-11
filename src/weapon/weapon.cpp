@@ -30,6 +30,7 @@
 #include <iostream>
 #include <sstream>
 #include "explosion.h"
+#include "../character/move.h"
 #include "../game/time.h"
 #include "../game/game_loop.h"
 #include "../graphic/video.h"
@@ -207,10 +208,17 @@ bool Weapon::CanChangeWeapon() const
 
 void Weapon::NewActionShoot() const
 {
+  Action a_begin_sync(ACTION_SYNC_BEGIN);
+  network.SendAction(&a_begin_sync);
+  SendCharacterPosition();
   ActionHandler::GetInstance()->NewAction (new Action(
 				       ACTION_SHOOT,
 				       m_strength,	
 				       ActiveTeam().crosshair.GetAngleVal()));
+
+  Action a_end_sync(ACTION_SYNC_END);
+  network.SendAction(&a_end_sync);
+
 }
 
 void Weapon::PrepareShoot(double strength, int angle)
