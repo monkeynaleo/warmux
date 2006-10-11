@@ -21,11 +21,11 @@ Wormux needs the SDL library version 1.2.
 
 It can be downloaded of their website: http://www.libsdl.org/
 
-* SDL mixer, SDL image, SDL ttf and SDL gfx
--------------------------------------------
+* SDL mixer, SDL image, SDL ttf and SDL gfx, SDL net
+----------------------------------------------------
 
 SDL is splitted is small modules. Wormux needs mixer (sound), image (load
-picture file), ttf (draw text) and gfx (graphical things).
+picture file), ttf (draw text), gfx (graphical things) and net (network).
 
 You may have trouble to install SDL gfx: Wormux *needs* version 2.0.13 or
 greater. Download it and compile it.
@@ -34,6 +34,7 @@ Here are their website:
  http://www.libsdl.org/projects/SDL_ttf/
  http://www.libsdl.org/projects/SDL_mixer/
  http://www.libsdl.org/projects/SDL_image/
+ http://www.libsdl.org/projects/SDL_net/
  http://www.ferzkopp.net/Software/SDL_gfx-2.0/
 
 * libxml++
