@@ -169,6 +169,8 @@ int Action::PopInt()
 double Action::PopDouble()
 {
   assert(var.size() > 0);
+  if(var.size() <= 0)
+    return 0.0;
   double val;
   Uint32 tmp[2];
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
@@ -193,10 +195,16 @@ double Action::PopDouble()
 std::string Action::PopString()
 {
   assert(var.size() > 1);
+  if(var.size() <= 1)
+    return "";
   int lenght = PopInt();
 
   std::string str="";
+
   assert((int)var.size() >= lenght/4);
+  if((int)var.size() < lenght/4)
+    return "";
+
   while(lenght > 0)
   {
     Uint32 tmp = var.front();  
