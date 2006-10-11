@@ -105,7 +105,9 @@ bool Mouse::ActionClicG()
     return true;
 
   // On peut changer de ver ?
-  if( GameMode::GetInstance()->AllowCharacterSelection() ){
+  //Change character by mouse click only if the choosen weapon allows it
+  if( GameMode::GetInstance()->AllowCharacterSelection() && ActiveTeam().GetWeapon().MOUSE_CHARACTER_SELECTION){
+    
     // S�ection d'un ver se son �uipe ?
     bool ver_choisi=false;
     Team::iterator it=ActiveTeam().begin(),
@@ -133,9 +135,9 @@ bool Mouse::ActionClicG()
     }
   }
 
-  // Action dans le menu des armes ?
+/*  // Action dans le menu des armes ?
   if( Interface::GetInstance()->weapons_menu.ActionClic(GetPosition()) )
-    return true;
+    return true; */
 
   // Choosing target for a weapon, many posibilities :
   // - Do nothing
