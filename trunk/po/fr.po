@@ -87,7 +87,7 @@ msgstr "%s est un psychopathe, il tue des membre de son équipe (%s) !"
 msgid "%s is dead because he is clumsy!"
 msgstr "%s est mort à cause de sa maladresse!"
 
-#: src/weapon/mine.cpp:114
+#: src/weapon/mine.cpp:113
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s est près d'une mine ..."
@@ -392,7 +392,7 @@ msgstr "Terrains"
 msgid "Maximum number of FPS:"
 msgstr "Nbr. max. d'images/sec :"
 
-#: src/weapon/mine.cpp:176
+#: src/weapon/mine.cpp:182
 msgid "Mine"
 msgstr "Mine"
 
@@ -479,6 +479,10 @@ msgstr "Quitter"
 msgid "Quit Wormux"
 msgstr "Quitte Wormux"
 
+#: src/menu/options_menu.cpp:82
+msgid "Resolution"
+msgstr ""
+
 #: src/weapon/riot_bomb.cpp:66
 #, fuzzy
 msgid "Riot Bomb"
@@ -507,6 +511,11 @@ msgstr ""
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
+msgstr "Effets sonores ?"
+
+#: src/menu/options_menu.cpp:105
+#, fuzzy
+msgid "Sound frequency"
 msgstr "Effets sonores ?"
 
 #: src/game/game_loop.cpp:220
