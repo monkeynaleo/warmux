@@ -72,7 +72,7 @@ protected:
    bool close_menu;
 
    virtual void sig_ok();
-   void sig_cancel();
+   virtual void sig_cancel();
    virtual void DrawBackground(const Point2i &mousePosition);
 
    virtual void key_ok() {};
