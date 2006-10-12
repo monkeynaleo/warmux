@@ -74,7 +74,6 @@ void ObjMine::FakeExplosion()
     animation = false;
     image->SetCurrentFrame(0);
   }
-  is_active = false;
   if (launcher != NULL) launcher->SignalProjectileTimeout();
 }
 
@@ -144,6 +143,7 @@ void ObjMine::Refresh()
     // the timeout is finished !!
     if (attente < Time::GetInstance()->ReadSec())
     {
+      is_active = false;
       jukebox.Stop(channel);
       channel = -1;
       if (!fake) Explosion();
@@ -151,6 +151,12 @@ void ObjMine::Refresh()
       if (launcher != NULL) launcher->SignalProjectileTimeout();
     }
   }
+}
+
+bool ObjMine::IsImmobile() const
+{
+  if (is_active && animation) return false;
+  return WeaponProjectile::IsImmobile();
 }
 
 void ObjMine::Draw()
