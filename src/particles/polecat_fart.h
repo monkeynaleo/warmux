@@ -29,6 +29,7 @@ class PolecatFart : public Particle
     bool is_active;
   public:
     PolecatFart();
+  protected:
     void SignalObjectCollision(PhysicalObj * obj);
 };
 
