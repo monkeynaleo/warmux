@@ -156,7 +156,7 @@ public:
   void GoOutOfWater(); // usefull for supertux.
   void RemoveFromPhysicalEngine();
 
-  bool IsImmobile() const;
+  virtual bool IsImmobile() const;
   bool IsDead() const;
   bool IsGhost() const;
   bool IsDrowned() const;
