@@ -201,6 +201,16 @@ void Main_Menu::key_cancel()
   close_menu = true;
 }
 
+void Main_Menu::__sig_cancel()
+{
+  key_cancel();
+}
+
+void Main_Menu::__sig_ok()
+{
+  key_ok();
+}
+
 void Main_Menu::DrawBackground(const Point2i &mousePosition)
 {
   Surface& window = AppWormux::GetInstance()->video.window;

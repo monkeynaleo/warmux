@@ -65,8 +65,8 @@ public:
   void Redraw(const Rectanglei& rect, Surface& surf);
 
 protected:
-   void __sig_ok() {};
-   void __sig_cancel() {};
+   void __sig_ok();
+   void __sig_cancel();
    void key_ok();
    void key_cancel();
 
