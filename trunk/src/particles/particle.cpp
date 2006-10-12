@@ -50,6 +50,7 @@ Particle::Particle(const std::string &name) :
 {
   SetCollisionModel(true, false, false);
   m_initial_time_to_live = 20;
+  m_check_move_on_end_turn = false;
   m_left_time_to_live = 0;
   m_last_refresh = Time::GetInstance()->Read();
 }
@@ -340,3 +341,12 @@ void ParticleEngine::Stop()
   }
 }
 
+PhysicalObj * ParticleEngine::IsSomethingMoving()
+{
+  std::list<Particle *>::iterator Particle_it;
+  // check if particle need to be check in end of turn
+  for (Particle_it=lst_particles.begin(); Particle_it!=lst_particles.end(); ++Particle_it)
+    if ((*Particle_it)->CheckOnEndTurn() && (*Particle_it)->StillUseful())
+      return *Particle_it;
+  return NULL;
+}

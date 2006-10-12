@@ -623,7 +623,7 @@ PhysicalObj* GameLoop::GetMovingObject()
     }
   }
 
-  return NULL;
+  return ParticleEngine::IsSomethingMoving();
 }
 
 bool GameLoop::IsAnythingMoving()
