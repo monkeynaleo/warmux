@@ -106,7 +106,7 @@ bool Mouse::ActionClicG()
 
   // On peut changer de ver ?
   //Change character by mouse click only if the choosen weapon allows it
-  if( GameMode::GetInstance()->AllowCharacterSelection() && ActiveTeam().GetWeapon().MOUSE_CHARACTER_SELECTION){
+  if( GameMode::GetInstance()->AllowCharacterSelection() && ActiveTeam().GetWeapon().mouse_character_selection){
     
     // S�ection d'un ver se son �uipe ?
     bool ver_choisi=false;

@@ -238,7 +238,7 @@ public:
   // Allows or not the character selection with mouse click (tab is allowed)
   // This is used in weapons like the automated bazooka, where it's required
   // a target. Default is true.
-  bool MOUSE_CHARACTER_SELECTION;
+  bool mouse_character_selection;
 };
 
 //-----------------------------------------------------------------------------

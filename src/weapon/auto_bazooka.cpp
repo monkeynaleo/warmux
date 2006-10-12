@@ -109,7 +109,7 @@ AutomaticBazooka::AutomaticBazooka() :
   WeaponLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new ExplosiveWeaponConfig() )
 {  
   m_name = _("Automatic Bazooka");
-  MOUSE_CHARACTER_SELECTION = false;
+  mouse_character_selection = false;
   cible.choisie = false;
   cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
   ReloadLauncher();
