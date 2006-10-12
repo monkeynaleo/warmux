@@ -29,10 +29,12 @@ class FireParticle : public Particle
   int creation_time;
   bool on_ground;
   int oscil_delta;
- public:
-  FireParticle();
-  void Refresh();
-  void Draw();
+  public:
+    FireParticle();
+    void Refresh();
+    void Draw();
+  protected:
+    void SignalDrowning();
 };
 
 #endif

@@ -35,6 +35,7 @@ FireParticle::FireParticle() :
 {
   SetCollisionModel(false, false, false);
   m_left_time_to_live = 100;
+  m_check_move_on_end_turn = true;
   fire_cfg.damage = 1;
   fire_cfg.explosion_range = 5;
   fire_cfg.blast_range = 0;
@@ -100,4 +101,10 @@ void FireParticle::Refresh()
 void FireParticle::Draw()
 {
   image->Draw(Point2i(GetX(),GetY()));
+}
+
+void FireParticle::SignalDrowning()
+{
+  m_left_time_to_live = 0;
+  // jukebox.Play("share","fire/pschiit");
 }

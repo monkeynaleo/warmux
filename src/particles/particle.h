@@ -60,7 +60,7 @@ class Particle : public PhysicalObj
   bool on_top; // if true displayed on top of characters and weapons
   uint m_initial_time_to_live;
   uint m_left_time_to_live;
-
+  bool m_check_move_on_end_turn;
   uint m_time_between_scale;
   uint m_last_refresh;
 
@@ -74,6 +74,7 @@ class Particle : public PhysicalObj
   void SetOnTop(bool b) { on_top = b; }
   bool IsOnTop() { return on_top; }
   bool StillUseful();
+  const bool CheckOnEndTurn() { return m_check_move_on_end_turn; }
 };
 
 class ParticleEngine
@@ -111,6 +112,7 @@ class ParticleEngine
   static void Refresh();
   static void Draw(bool upper);
   static void Stop();
+  static PhysicalObj * IsSomethingMoving();
 };
 
 #endif
