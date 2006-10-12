@@ -121,7 +121,7 @@ Weapon::Weapon(Weapon_type type,
      
   icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
 
-  MOUSE_CHARACTER_SELECTION = true;
+  mouse_character_selection = true;
 }
 
 Weapon::~Weapon()

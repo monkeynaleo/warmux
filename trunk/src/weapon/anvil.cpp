@@ -61,7 +61,7 @@ AnvilLauncher::AnvilLauncher() :
     WeaponLauncher(WEAPON_ANVIL, "anvil_launcher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Anvil");
-  MOUSE_CHARACTER_SELECTION = false;
+  mouse_character_selection = false;
   can_be_used_on_closed_map = false;
   ReloadLauncher();
   target_chosen = false;
