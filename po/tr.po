@@ -85,7 +85,7 @@ msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
 
-#: src/weapon/mine.cpp:114
+#: src/weapon/mine.cpp:113
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s bir mayının yanında!"
@@ -385,7 +385,7 @@ msgstr ""
 msgid "Maximum number of FPS:"
 msgstr "En fazla FPS:"
 
-#: src/weapon/mine.cpp:176
+#: src/weapon/mine.cpp:182
 msgid "Mine"
 msgstr "Mayın"
 
@@ -471,6 +471,10 @@ msgstr "Çıkış"
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
+#: src/menu/options_menu.cpp:82
+msgid "Resolution"
+msgstr ""
+
 #: src/weapon/riot_bomb.cpp:66
 #, fuzzy
 msgid "Riot Bomb"
@@ -499,6 +503,11 @@ msgstr ""
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
+msgstr "Ses efektleri?"
+
+#: src/menu/options_menu.cpp:105
+#, fuzzy
+msgid "Sound frequency"
 msgstr "Ses efektleri?"
 
 #: src/game/game_loop.cpp:220

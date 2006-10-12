@@ -85,7 +85,7 @@ msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
 
-#: src/weapon/mine.cpp:114
+#: src/weapon/mine.cpp:113
 #, fuzzy, c-format
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino ..."
@@ -414,7 +414,7 @@ msgstr ""
 msgid "Maximum number of FPS:"
 msgstr ""
 
-#: src/weapon/mine.cpp:176
+#: src/weapon/mine.cpp:182
 #, fuzzy
 msgid "Mine"
 msgstr "Mino"
@@ -504,6 +504,10 @@ msgstr "Forlasi"
 msgid "Quit Wormux"
 msgstr ""
 
+#: src/menu/options_menu.cpp:82
+msgid "Resolution"
+msgstr ""
+
 #: src/weapon/riot_bomb.cpp:66
 msgid "Riot Bomb"
 msgstr ""
@@ -532,6 +536,11 @@ msgstr ""
 #: src/menu/options_menu.cpp:102
 #, fuzzy
 msgid "Sound effects?"
+msgstr "Sonaji efektoj"
+
+#: src/menu/options_menu.cpp:105
+#, fuzzy
+msgid "Sound frequency"
 msgstr "Sonaji efektoj"
 
 #: src/game/game_loop.cpp:220

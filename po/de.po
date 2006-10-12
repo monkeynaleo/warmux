@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-10-12 01:12+0200\n"
+"PO-Revision-Date: 2006-10-13 01:31+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "%s ist ein Psychopath, er hat ein Mitglied von Mannschaft %s getötet!"
 msgid "%s is dead because he is clumsy!"
 msgstr "%s stirbt durch seine Tollpatschigkeit!"
 
-#: src/weapon/mine.cpp:114
+#: src/weapon/mine.cpp:113
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s ist neben einer Mine!"
@@ -231,7 +231,7 @@ msgstr "Dauer einer Runde:"
 
 #: src/menu/game_menu.cpp:273
 msgid "Duration of the end of a turn:"
-msgstr "Dauer des Endes einer Runde:"
+msgstr "Dauer des Rundenendes"
 
 #: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
@@ -258,7 +258,8 @@ msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
@@ -313,7 +314,8 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr ""
+"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #: src/menu/game_menu.cpp:69
 msgid "Head commander"
@@ -385,7 +387,7 @@ msgstr "Karten"
 msgid "Maximum number of FPS:"
 msgstr "Maximale Anzahl FPS:"
 
-#: src/weapon/mine.cpp:176
+#: src/weapon/mine.cpp:182
 msgid "Mine"
 msgstr "Mine"
 
@@ -466,6 +468,10 @@ msgstr "Verlassen"
 msgid "Quit Wormux"
 msgstr "Wormux verlassen"
 
+#: src/menu/options_menu.cpp:82
+msgid "Resolution"
+msgstr "Auflösung"
+
 #: src/weapon/riot_bomb.cpp:66
 msgid "Riot Bomb"
 msgstr "Lärmbombe"
@@ -493,6 +499,10 @@ msgstr "Scharfschützengewehr"
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
 msgstr "Soundeffekte?"
+
+#: src/menu/options_menu.cpp:105
+msgid "Sound frequency"
+msgstr "Tonfrequenz"
 
 #: src/game/game_loop.cpp:220
 msgid "Sounds"
@@ -528,7 +538,9 @@ msgstr "Teleportation"
 
 #: src/weapon/cluster_bomb.cpp:97
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr "Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
+msgstr ""
+"Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren "
+"konnte."
 
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
@@ -728,4 +740,3 @@ msgstr "fertig"
 
 #~ msgid "parachute"
 #~ msgstr "Fallschirm"
-
