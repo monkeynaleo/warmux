@@ -71,6 +71,10 @@ WeaponProjectile * SnipeRifle::GetProjectileInstance()
 
 bool SnipeRifle::p_Shoot()
 {
+  if(m_is_active)
+    return false;
+
+  m_is_active = true;
   ReloadLauncher();
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
   projectile = NULL;
@@ -81,6 +85,7 @@ bool SnipeRifle::p_Shoot()
 // When an explosion occurs, we compute a new targeted point
 void SnipeRifle::SignalProjectileGhostState()
 {
+  m_is_active = false;
   ReloadLauncher();
   ComputeCrossPoint(true);
 }
