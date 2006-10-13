@@ -45,6 +45,8 @@ class BonusBox : public PhysicalObj
       bonusENERGY,
       bonusTRAP,
       bonusAIR_ATTACK,
+      bonusBASEBALL,
+      bonusLOWGRAV,
       bonusAUTO_BAZOOKA,
       bonusRIOT_BOMB
     } bonus_weapons;
