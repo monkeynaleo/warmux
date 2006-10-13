@@ -63,14 +63,14 @@ msgstr "%s è caduto nell'acqua."
 msgid "%s has fallen off the map!"
 msgstr "%s è caduto fuori dalla mappa!"
 
-#: src/object/bonus_box.cpp:151
+#: src/object/bonus_box.cpp:153
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "Il giocatore '%s' ha perso %u punto di vita."
 msgstr[1] "Il giocatore '%s' ha perso %u punti di vita."
 
-#: src/object/bonus_box.cpp:142
+#: src/object/bonus_box.cpp:144
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -97,38 +97,52 @@ msgstr "%s è vicino a une mina!"
 msgid "%s team has skipped its turn."
 msgstr "%s (squadra %s) è morto."
 
-#: src/object/bonus_box.cpp:169
+#: src/object/bonus_box.cpp:189
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "La squadra %s vince %u bazooka automatico !"
 msgstr[1] "La squadra %s vince %u bazooka automatici !"
 
-#: src/object/bonus_box.cpp:178
+#: src/object/bonus_box.cpp:198
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "La squadra %s vince %u bazooka automatico !"
 msgstr[1] "La squadra %s vince %u bazooka automatici !"
 
-#: src/object/bonus_box.cpp:188
+#: src/object/bonus_box.cpp:208
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "La squadra %s vince %u candelotto di dinamite !"
 msgstr[1] "La squadra %s vince %u candelotti di dinamite !"
 
-#: src/object/bonus_box.cpp:133
+#: src/object/bonus_box.cpp:135
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "la squadra %s vince %u teletrasporto."
 msgstr[1] "la squadra %s vince %u teletrasporti."
 
-#: src/object/bonus_box.cpp:160
+#: src/object/bonus_box.cpp:162
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
+msgstr[0] "Il giocatore '%s vince %u attaccho aereo !"
+msgstr[1] "Il giocatore '%s vince %u attacchi aerei !"
+
+#: src/object/bonus_box.cpp:171
+#, fuzzy, c-format
+msgid "'%s has won %u Baseball bat"
+msgid_plural "'%s has won %u Baseball bats"
+msgstr[0] "Il giocatore '%s vince %u attaccho aereo !"
+msgstr[1] "Il giocatore '%s vince %u attacchi aerei !"
+
+#: src/object/bonus_box.cpp:180
+#, fuzzy, c-format
+msgid "'%s has won %u Low gravity"
+msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Il giocatore '%s vince %u attaccho aereo !"
 msgstr[1] "Il giocatore '%s vince %u attacchi aerei !"
 
@@ -149,7 +163,7 @@ msgstr "<infinite_background> needs <is_open> to be set to work correctly!!"
 msgid "Air Attack"
 msgstr "Attacco aereo"
 
-#: src/object/bonus_box.cpp:164
+#: src/object/bonus_box.cpp:166
 msgid "Air attack"
 msgstr "Attacco aereo"
 
@@ -170,12 +184,17 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatico"
 
-#: src/object/bonus_box.cpp:173
+#: src/object/bonus_box.cpp:193
 msgid "Automatic bazooka"
 msgstr "Bazooka automatico"
 
 #: src/weapon/baseball.cpp:32
 msgid "Baseball"
+msgstr "Baseball"
+
+#: src/object/bonus_box.cpp:175
+#, fuzzy
+msgid "Baseball bat"
 msgstr "Baseball"
 
 #: src/weapon/bazooka.cpp:62
@@ -238,7 +257,7 @@ msgstr "Durata del turno :"
 msgid "Duration of the end of a turn:"
 msgstr "Durata della fine del turno :"
 
-#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:212 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamite"
 
@@ -359,7 +378,7 @@ msgstr "Inizializzazione oggetti"
 msgid "Initialise teams"
 msgstr "Inizializzazione squadre"
 
-#: src/object/bonus_box.cpp:238
+#: src/object/bonus_box.cpp:258
 msgid "Is it a gift?"
 msgstr "È un regalo ?"
 
@@ -374,6 +393,10 @@ msgstr "Caricamento mappa :"
 #: src/team/teams_list.cpp:105
 msgid "Load teams:"
 msgstr "Caricamento squadre :"
+
+#: src/object/bonus_box.cpp:184
+msgid "Low gravity"
+msgstr ""
 
 #: src/weapon/lowgrav.cpp:41
 msgid "LowGrav"
@@ -487,7 +510,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Bazooka automatico"
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:202
 msgid "Riot bomb"
 msgstr "Bazooka automatico"
 
@@ -545,7 +568,7 @@ msgstr ""
 msgid "Teams"
 msgstr "Squadre"
 
-#: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teletrasporto"
 

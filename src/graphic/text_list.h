@@ -42,10 +42,11 @@ class TextList{
   ~TextList();
 
   // Manage items in list
-  void AddText(const std::string &txt);
+  void AddText(const std::string &txt, uint maxlines);
+  void DeleteLine();
   void Clear();
-  void Draw();
-  void DrawLine(Text* newline);
+  void Draw(int x, int y, int height);
+  void DrawLine(Text* newline, int x, int y, int height);
 
 };
 

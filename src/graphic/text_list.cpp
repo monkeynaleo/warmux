@@ -32,34 +32,39 @@ TextList::~TextList()
   list.clear();
 }
 
-void TextList::AddText(const std::string &txt){
+void TextList::AddText(const std::string &txt, uint maxlines){
   Text* new_txt = new Text(txt);
   list.push_back(new_txt);
   
-  if(list.size() >= MAXLINES)
+  if(list.size() >=maxlines)
     list.pop_front();
   //  DrawLine(new_txt); //Draw now the new message?
+}
+
+void TextList::DeleteLine(){
+  if(list.size())
+    list.pop_front();
+  
 }
 
 void TextList::Clear(){
   list.clear();
 }
 
-void TextList::Draw(){
-  int y = YPOS;
+void TextList::Draw(int x, int y, int height){
+  //int y = YPOS;
   iterator it = list.begin(), end = list.end();
 
   for(; it!=end; it++){
     //Draw each item in the list
-    (*it)->DrawTopLeft(XPOS, y);
-    y+=HEIGHT;
+    (*it)->DrawTopLeft(x, y);
+    y+=height;
   }
 }
 
-void TextList::DrawLine(Text* newline){
+void TextList::DrawLine(Text* newline, int x, int y, int height){
   int size = list.size();
-  int y;
 
-  y = YPOS + (size * HEIGHT);
-  newline->DrawTopLeft(XPOS, y);
+  y += (size * height);
+  newline->DrawTopLeft(x, y);
 }

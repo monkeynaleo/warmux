@@ -25,8 +25,8 @@
 #include <iomanip>
 #include <string>
 #include "../graphic/text.h"
-//#include "video.h"
 #include "../include/app.h"
+#include "../game/time.h"
 #include "../tool/i18n.h"
 #include <stdio.h>
 
@@ -47,7 +47,15 @@ void Chat::Reset(){
 }
 
 void Chat::Show(){
-  chat->Draw();
+  uint now = Time::GetInstance()->ReadSec();
+  
+  if((now - last_time) >= MAXSECONDS){
+    chat->DeleteLine();
+    last_time = now;
+  }
+
+  chat->Draw(XPOS, YPOS, HEIGHT);
+
   if(check_input)
     ShowInput();
 }
@@ -64,6 +72,10 @@ void Chat::ShowInput(){
 
 int Chat::CheckInput(){
   return check_input;
+}
+
+void Chat::NewMessage(const std::string &msg){
+  chat->AddText(msg, MAXLINES);
 }
 
 

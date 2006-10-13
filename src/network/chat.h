@@ -23,6 +23,11 @@
 #define CHAT_H
 
 #define SAY "Say: "
+#define HEIGHT 15
+#define XPOS 25
+#define YPOS 130
+#define MAXLINES 10 //Fidel's advise
+#define MAXSECONDS 10
 
 #include <SDL.h>
 #include "../graphic/text_list.h"
@@ -37,6 +42,7 @@ class Chat
 
  private:
   int check_input;
+  uint last_time;
 
  public:
   Chat();
@@ -45,6 +51,7 @@ class Chat
   void ShowInput();
   int CheckInput();
   void Reset();
+  void NewMessage(const std::string &msg);
   void HandleKey(const SDL_Event *event);
 };
 
