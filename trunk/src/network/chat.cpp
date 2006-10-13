@@ -75,6 +75,11 @@ int Chat::CheckInput(){
 }
 
 void Chat::NewMessage(const std::string &msg){
+  if(!(chat->Size())){
+    uint now = Time::GetInstance()->ReadSec();
+    last_time = now;
+  }
+
   chat->AddText(msg, MAXLINES);
 }
 
@@ -88,7 +93,6 @@ void Chat::HandleKey(const SDL_Event *event){
     
   case SDLK_RETURN:
     check_input = 0; //Hide input widget
-    //    chat->AddText(txt); //Add 'txt' string to text_list
     network.SendChatMessage(txt); //Send 'txt' to other players
     input->Set("");
     break;
@@ -105,8 +109,5 @@ void Chat::HandleKey(const SDL_Event *event){
 	txt = txt + (char)key.unicode;
       input->Set(txt);
     }
-
   }
-
-
 }
