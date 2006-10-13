@@ -355,7 +355,8 @@ void Action_ChatMessage (Action *a)
 {
   if(Game::GetInstance()->IsGameLaunched())
     //Add message to chat session in Game
-    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
+    //    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
+    GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
   else
     //Network Menu
     network.network_menu->msg_box->NewMessage(a->PopString());

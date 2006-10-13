@@ -66,14 +66,14 @@ msgstr "%s caiu na água."
 msgid "%s has fallen off the map!"
 msgstr "%s saiu do mapa!"
 
-#: src/object/bonus_box.cpp:151
+#: src/object/bonus_box.cpp:153
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s perdeu %u ponto de vida."
 msgstr[1] "%s perdeu %u pontos de vida."
 
-#: src/object/bonus_box.cpp:142
+#: src/object/bonus_box.cpp:144
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -100,38 +100,52 @@ msgstr "%s está perto de uma mina!"
 msgid "%s team has skipped its turn."
 msgstr "%s (equipa %s) morreu."
 
-#: src/object/bonus_box.cpp:169
+#: src/object/bonus_box.cpp:189
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "A equipa '%s' ganhou %u bazooka automática!"
 msgstr[1] "A equipa '%s' ganhou %u bazookas automáticas!"
 
-#: src/object/bonus_box.cpp:178
+#: src/object/bonus_box.cpp:198
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "A equipa '%s' ganhou %u bomba motim!"
 msgstr[1] "A equipa '%s' ganhou %u bombas motim!"
 
-#: src/object/bonus_box.cpp:188
+#: src/object/bonus_box.cpp:208
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "A equipa '%s' ganhou %u barra de dinamite!"
 msgstr[1] "A equipa '%s' ganhou %u barras de dinamite!"
 
-#: src/object/bonus_box.cpp:133
+#: src/object/bonus_box.cpp:135
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "A equipa '%s' ganhou %u teleportação."
 msgstr[1] "A equipa '%s' ganhou %u teleportações."
 
-#: src/object/bonus_box.cpp:160
+#: src/object/bonus_box.cpp:162
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
+msgstr[0] "%s ganhou %u ataque aéreo!"
+msgstr[1] "%s ganhou %u ataques aéreos!"
+
+#: src/object/bonus_box.cpp:171
+#, fuzzy, c-format
+msgid "'%s has won %u Baseball bat"
+msgid_plural "'%s has won %u Baseball bats"
+msgstr[0] "%s ganhou %u ataque aéreo!"
+msgstr[1] "%s ganhou %u ataques aéreos!"
+
+#: src/object/bonus_box.cpp:180
+#, fuzzy, c-format
+msgid "'%s has won %u Low gravity"
+msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s ganhou %u ataque aéreo!"
 msgstr[1] "%s ganhou %u ataques aéreos!"
 
@@ -154,7 +168,7 @@ msgstr ""
 msgid "Air Attack"
 msgstr " Ataque aéreo"
 
-#: src/object/bonus_box.cpp:164
+#: src/object/bonus_box.cpp:166
 msgid "Air attack"
 msgstr " Ataque aéreo"
 
@@ -175,12 +189,17 @@ msgstr "Autores:"
 msgid "Automatic Bazooka"
 msgstr "Bazooka automática"
 
-#: src/object/bonus_box.cpp:173
+#: src/object/bonus_box.cpp:193
 msgid "Automatic bazooka"
 msgstr "Bazooka automática"
 
 #: src/weapon/baseball.cpp:32
 msgid "Baseball"
+msgstr "Baseball"
+
+#: src/object/bonus_box.cpp:175
+#, fuzzy
+msgid "Baseball bat"
 msgstr "Baseball"
 
 #: src/weapon/bazooka.cpp:62
@@ -243,7 +262,7 @@ msgstr "Duração de um turno:"
 msgid "Duration of the end of a turn:"
 msgstr "Duração do fim de um turno:"
 
-#: src/object/bonus_box.cpp:192 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:212 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamite"
 
@@ -364,7 +383,7 @@ msgstr "Inicialização dos objectos"
 msgid "Initialise teams"
 msgstr "Inicialização das equipas"
 
-#: src/object/bonus_box.cpp:238
+#: src/object/bonus_box.cpp:258
 msgid "Is it a gift?"
 msgstr "É um presente?"
 
@@ -379,6 +398,10 @@ msgstr "Carregar mapas:"
 #: src/team/teams_list.cpp:105
 msgid "Load teams:"
 msgstr "Carregar equipas:"
+
+#: src/object/bonus_box.cpp:184
+msgid "Low gravity"
+msgstr ""
 
 #: src/weapon/lowgrav.cpp:41
 msgid "LowGrav"
@@ -492,7 +515,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Bomba Motim"
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:202
 msgid "Riot bomb"
 msgstr "Bomba Motim"
 
@@ -550,7 +573,7 @@ msgstr ""
 msgid "Teams"
 msgstr "Equipas"
 
-#: src/object/bonus_box.cpp:137 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportação"
 
