@@ -77,7 +77,7 @@
       <position origin="hand" x="0" y="-3" />
       <min_angle>-30</min_angle>
       <max_angle>75</max_angle>
-      <nb_ammo>-1</nb_ammo>
+      <nb_ammo>2</nb_ammo>
       <damage>25</damage>
       <strength>2500</strength>
       <range>45</range>
@@ -223,7 +223,7 @@
 
     <lowgrav>
       <position origin="hand" x="-24" y="-23" />
-      <nb_ammo>10</nb_ammo>
+      <nb_ammo>3</nb_ammo>
       <change_weapon>1</change_weapon>
     </lowgrav>
 

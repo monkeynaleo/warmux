@@ -56,6 +56,8 @@ const uint BONUS_ENERGY=100;
 const uint BONUS_TRAP=75;
 const uint BONUS_TELEPORTATION=5;
 const uint BONUS_DYNAMITE=10;
+const uint BONUS_BASEBALL=5;
+const uint BONUS_LOWGRAV=5;
 const uint BONUS_AIR_ATTACK=1;
 const uint BONUS_AUTO_BAZOOKA=5;
 const uint BONUS_RIOT_BOMB=5;
@@ -162,6 +164,24 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 BONUS_AIR_ATTACK),
             ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
     equipe.m_nb_ammos[ _("Air attack") ] += BONUS_AIR_ATTACK;
+    break;
+
+  case bonusBASEBALL:
+    txt << Format(ngettext(
+                "'%s has won %u Baseball bat",
+                "'%s has won %u Baseball bats",
+                BONUS_AIR_ATTACK),
+            ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
+    equipe.m_nb_ammos[ _("Baseball bat") ] += BONUS_AIR_ATTACK;
+    break;
+
+  case bonusLOWGRAV:
+    txt << Format(ngettext(
+                "'%s has won %u Low gravity",
+                "'%s has won %u Low gravity",
+                BONUS_AIR_ATTACK),
+            ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
+    equipe.m_nb_ammos[ _("Low gravity") ] += BONUS_AIR_ATTACK;
     break;
 
   case bonusAUTO_BAZOOKA:
