@@ -24,6 +24,7 @@
 #include "../game/time.h"
 #include "../network/randomsync.h"
 #include "../weapon/explosion.h"
+#include "../map/camera.h"
 
 const uint living_time = 5000;
 const uint dig_ground_time = 1000;
@@ -50,6 +51,11 @@ FireParticle::FireParticle() :
   SetSize( image->GetSize() );
   SetTestRect((image->GetWidth() / 2)-1, (image->GetWidth() / 2) - 1,
       (image->GetHeight()/2)-1,1);
+}
+
+FireParticle::~FireParticle()
+{
+  camera.StopFollowingObj(this);
 }
 
 void FireParticle::Refresh()
