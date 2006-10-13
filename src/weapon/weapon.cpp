@@ -593,7 +593,6 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
     // E.g. <hole dx="-1" dy="0" />
     LitDocXml::LitAttrInt (pos_elem, "dx", position.hole_delta.x);
     LitDocXml::LitAttrInt (pos_elem, "dy", position.hole_delta.y);
-		printf("%d %d --->ok\n", position.hole_delta.x, position.hole_delta.y);
   }
 
   LitDocXml::LitInt (elem, "nb_ammo", m_initial_nb_ammo);       
