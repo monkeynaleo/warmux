@@ -36,9 +36,12 @@ void TextList::AddText(const std::string &txt, uint maxlines){
   Text* new_txt = new Text(txt);
   list.push_back(new_txt);
   
-  if(list.size() >=maxlines)
+  if(list.size() >= maxlines)
     list.pop_front();
-  //  DrawLine(new_txt); //Draw now the new message?
+}
+
+int TextList::Size(){
+  return list.size();
 }
 
 void TextList::DeleteLine(){
@@ -52,7 +55,6 @@ void TextList::Clear(){
 }
 
 void TextList::Draw(int x, int y, int height){
-  //int y = YPOS;
   iterator it = list.begin(), end = list.end();
 
   for(; it!=end; it++){

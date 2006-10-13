@@ -17,16 +17,12 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
  * List of Text Clases. 
- * TextBox is not valid while playing game
+ * TextBox is not valid while playing game.
+ * Text does not allow \n and similar chars
  *****************************************************************************/
 
 #ifndef TEXT_LIST_H
 #define TEXT_LIST_H
-
-#define HEIGHT 15
-#define XPOS 25
-#define YPOS 130
-#define MAXLINES 10 //Fidel's advise
 
 #include "text.h"
 #include <list>
@@ -45,6 +41,7 @@ class TextList{
   void AddText(const std::string &txt, uint maxlines);
   void DeleteLine();
   void Clear();
+  int Size();
   void Draw(int x, int y, int height);
   void DrawLine(Text* newline, int x, int y, int height);
 
