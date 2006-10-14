@@ -283,7 +283,8 @@ void Network::ReceiveActions()
 
         // Repeat the packet to other clients:
         if(a->GetType() != ACTION_SEND_VERSION
-        && a->GetType() != ACTION_CHANGE_STATE)
+        && a->GetType() != ACTION_CHANGE_STATE
+        && a->GetType() != ACTION_CHAT_MESSAGE)
         for(std::list<DistantComputer*>::iterator client = cpu.begin();
             client != cpu.end();
             client++)
