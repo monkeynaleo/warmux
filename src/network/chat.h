@@ -22,7 +22,7 @@
 #ifndef CHAT_H
 #define CHAT_H
 
-#define SAY "Say: "
+#define SAY "Say: " //We should use Multilanguage functions
 #define HEIGHT 15
 #define XPOS 25
 #define YPOS 130
@@ -47,7 +47,7 @@ class Chat
  public:
   Chat();
   ~Chat();
-  void Show(); 
+  void Show();  
   void ShowInput();
   int CheckInput();
   void Reset();

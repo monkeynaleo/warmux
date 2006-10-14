@@ -42,6 +42,7 @@
 #include "../map/camera.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
+#include "../network/network.h"
 
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
@@ -228,7 +229,8 @@ void Clavier::HandleKeyReleased (const Action_t &action)
 #endif
       return;
   case ACTION_CHAT:
-    GameLoop::GetInstance()->chatsession.ShowInput();
+    if(network.IsConnected())
+      GameLoop::GetInstance()->chatsession.ShowInput();
     return;
   case ACTION_CENTER:
 

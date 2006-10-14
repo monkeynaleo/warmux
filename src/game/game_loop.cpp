@@ -182,7 +182,8 @@ void GameLoop::InitData()
   Clavier::GetInstance()->Reset();
 
   fps.Reset();
-  chatsession.Reset();
+  if(network.IsConnected())
+     chatsession.Reset();
   Interface::GetInstance()->Reset();
   GameMessages::GetInstance()->Reset();
   ParticleEngine::Init();
@@ -394,9 +395,11 @@ void GameLoop::Draw ()
   StatStop("GameDraw:wind_bar");
 
   // Draw MsgBox for chat network
-   StatStart("GameDraw:chatsession");
-   chatsession.Show();
-   StatStop("GameDraw:chatsession");
+  if(network.IsConnected()){
+    StatStart("GameDraw:chatsession");
+    chatsession.Show();
+    StatStop("GameDraw:chatsession");
+  }
 
   // Add one frame to the fps counter ;-)
   fps.AddOneFrame();
