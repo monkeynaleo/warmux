@@ -21,14 +21,9 @@
  *****************************************************************************/
 
 #include "chat.h"
-#include <sstream>
-#include <iomanip>
-#include <string>
 #include "../graphic/text.h"
-#include "../include/app.h"
 #include "../game/time.h"
-#include "../tool/i18n.h"
-#include <stdio.h>
+#include <string>
 
 Chat::~Chat(){
   delete chat;
