@@ -75,6 +75,8 @@ void ObjMine::FakeExplosion()
     image->SetCurrentFrame(0);
   }
   if (launcher != NULL) launcher->SignalProjectileTimeout();
+  // Mine fall into the ground after a fake explosion
+  SetCollisionModel(false, false, false);
 }
 
 void ObjMine::StartTimeout()
@@ -147,7 +149,7 @@ void ObjMine::Refresh()
       jukebox.Stop(channel);
       channel = -1;
       if (!fake) Explosion();
-      else  FakeExplosion();
+      else FakeExplosion();
       if (launcher != NULL) launcher->SignalProjectileTimeout();
     }
   }
