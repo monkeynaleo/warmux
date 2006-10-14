@@ -188,9 +188,9 @@ void AppWormux::End(){
 
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
-#endif  
+#endif
   std::cout << "o "
-            << _("Please tell us your opinion of Wormux via email:") << " " << Constants::EMAIL
+            << _("If you found a bug or have a feature request send us a email (in english, please):") << " " << Constants::EMAIL
             << std::endl;
 }
 
@@ -212,7 +212,7 @@ void AppWormux::DisplayWelcomeMessage(){
 
   // Affiche l'absence de garantie sur le jeu
   std::cout << "Wormux version " << Constants::VERSION
-	    << ", Copyright (C) 2001-2004 Lawrence Azzoug"
+	    << ", Copyright (C) 2001-2006 Wormux Team"
 	    << std::endl
 	    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
             << "This is free software, and you are welcome to redistribute it" << std::endl
