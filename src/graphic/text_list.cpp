@@ -47,7 +47,6 @@ int TextList::Size(){
 void TextList::DeleteLine(){
   if(list.size())
     list.pop_front();
-  
 }
 
 void TextList::Clear(){
