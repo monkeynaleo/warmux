@@ -93,7 +93,8 @@ void Chat::HandleKey(const SDL_Event *event){
     
   case SDLK_RETURN:
     check_input = 0; //Hide input widget
-    network.SendChatMessage(txt); //Send 'txt' to other players
+    if(txt != "" )
+      network.SendChatMessage(txt); //Send 'txt' to other players
     input->Set("");
     break;
 
