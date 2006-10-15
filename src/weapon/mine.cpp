@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Objet Mine: Si on active les mines, elles seront plac�s de maniere
- * aleatoire sur le terrain. Au contact d'un ver, ca fait BOOM!!! ;)
+ * Mine : Detect if character is close and explode after a shot time.
+ * Sometime the mine didn't explode randomly.
  *****************************************************************************/
 
 #include "mine.h"
@@ -67,7 +67,7 @@ void ObjMine::FakeExplosion()
   jukebox.Play("share", "weapon/mine_fake");
   ParticleEngine::AddNow(GetPosition(), 5, particle_SMOKE, true);
 
-  if ( animation )//&& !repos)
+  if ( animation )
   {
     MSG_DEBUG("mine", "Desactive detection..");
 
