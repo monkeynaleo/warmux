@@ -28,7 +28,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s takımı) öldü."
@@ -43,7 +43,7 @@ msgstr "%s'den %s <%s> aka %s"
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -53,12 +53,12 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
@@ -75,17 +75,17 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s, %u enerji kazandı!"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
 
-#: src/weapon/mine.cpp:113
+#: src/weapon/mine.cpp:115
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s bir mayının yanında!"
@@ -340,15 +340,21 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "El bombası"
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
+msgstr ""
+
+#: src/main.cpp:193
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
 msgstr ""
 
 #: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Başlangıç enerjisi:"
 
-#: src/game/game_loop.cpp:199
+#: src/game/game_loop.cpp:200
 msgid "Initialisation"
 msgstr "Ayarlama"
 
@@ -398,7 +404,7 @@ msgstr ""
 msgid "Map %s, a creation of :"
 msgstr "%s haritasını yaratan:"
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:203
 msgid "Maps"
 msgstr ""
 
@@ -406,7 +412,7 @@ msgstr ""
 msgid "Maximum number of FPS:"
 msgstr "En fazla FPS:"
 
-#: src/weapon/mine.cpp:182
+#: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mayın"
 
@@ -476,10 +482,6 @@ msgstr "Oyuncu enerjisini göster?"
 msgid "Player's name?"
 msgstr "Oyuncu isimlerini göster?"
 
-#: src/main.cpp:193
-msgid "Please tell us your opinion of Wormux via email:"
-msgstr "Lütfen e-posta ile Wormux hakkındaki düşüncelerinizi bize iletin:"
-
 #: src/weapon/polecat.cpp:134
 msgid "Polecat Launcher"
 msgstr ""
@@ -531,7 +533,7 @@ msgstr "Ses efektleri?"
 msgid "Sound frequency"
 msgstr "Ses efektleri?"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:221
 #, fuzzy
 msgid "Sounds"
 msgstr "Ses seçenekleri"
@@ -556,7 +558,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
 
@@ -601,7 +603,7 @@ msgstr "Sürüm"
 msgid "Weapon:"
 msgstr "Silah:"
 
-#: src/game/game_loop.cpp:215
+#: src/game/game_loop.cpp:216
 #, fuzzy
 msgid "Weapons"
 msgstr "Silah:"
@@ -610,7 +612,7 @@ msgstr "Silah:"
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
@@ -637,7 +639,7 @@ msgstr "'%s' haritası yüklenirken XML hatası :"
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game_loop.cpp:210
+#: src/game/game_loop.cpp:211
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden "
@@ -654,6 +656,9 @@ msgstr "Iskaladın!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
+
+#~ msgid "Please tell us your opinion of Wormux via email:"
+#~ msgstr "Lütfen e-posta ile Wormux hakkındaki düşüncelerinizi bize iletin:"
 
 #~ msgid "Select the teams:"
 #~ msgstr "Takımları seç:"

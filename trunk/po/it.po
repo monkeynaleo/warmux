@@ -28,7 +28,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! La mappa %s non è stata trovata :-("
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (squadra %s) è morto."
@@ -43,7 +43,7 @@ msgstr "%s <%s>  chiamato %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s si è suicidato!"
@@ -53,12 +53,12 @@ msgstr "%s si è suicidato!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s è caduto nell'acqua."
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s è caduto fuori dalla mappa!"
@@ -77,17 +77,17 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Il giocatore '%s' vince %u punto di vita !"
 msgstr[1] "Il giocatore '%s' vince %u punti di vita !"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s è uno psicopatico, ha ucciso un membro del suo team: %s !"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s è morto da maldestro!"
 
-#: src/weapon/mine.cpp:113
+#: src/weapon/mine.cpp:115
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s è vicino a une mina!"
@@ -349,15 +349,21 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Granata"
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
+msgstr ""
+
+#: src/main.cpp:193
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
 msgstr ""
 
 #: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Energia iniziale:"
 
-#: src/game/game_loop.cpp:199
+#: src/game/game_loop.cpp:200
 msgid "Initialisation"
 msgstr "Inizializzazione"
 
@@ -407,7 +413,7 @@ msgstr ""
 msgid "Map %s, a creation of :"
 msgstr "Mapa %s, creata da :"
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:203
 msgid "Maps"
 msgstr "Mappa"
 
@@ -415,7 +421,7 @@ msgstr "Mappa"
 msgid "Maximum number of FPS:"
 msgstr "Numero massimo di FPS:"
 
-#: src/weapon/mine.cpp:182
+#: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mina"
 
@@ -485,10 +491,6 @@ msgstr "Mostra l'energia del giocatore ?"
 msgid "Player's name?"
 msgstr "Mostra il nome del giocatore ?"
 
-#: src/main.cpp:193
-msgid "Please tell us your opinion of Wormux via email:"
-msgstr "Perpiacere dai la tua impressione di Wormux via email:"
-
 #: src/weapon/polecat.cpp:134
 msgid "Polecat Launcher"
 msgstr ""
@@ -540,7 +542,7 @@ msgstr "Effetti sonori ?"
 msgid "Sound frequency"
 msgstr "Effetti sonori ?"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:221
 msgid "Sounds"
 msgstr "Opzioni del suono"
 
@@ -564,7 +566,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr "Squadre"
 
@@ -609,7 +611,7 @@ msgstr "Versione"
 msgid "Weapon:"
 msgstr "Armi :"
 
-#: src/game/game_loop.cpp:215
+#: src/game/game_loop.cpp:216
 msgid "Weapons"
 msgstr "Armi"
 
@@ -617,7 +619,7 @@ msgstr "Armi"
 msgid "Website: "
 msgstr "Sito web: "
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Che vergogna per %s : E' stato ucciso da una semplice pistola !"
@@ -644,7 +646,7 @@ msgstr "Errore XML nell'avvio della mappa '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Hai bisogno di ammeno una valida mappa !"
 
-#: src/game/game_loop.cpp:210
+#: src/game/game_loop.cpp:211
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Hai bisogno di almeno due squadre : cambia le impostazione nel menu "
@@ -661,6 +663,9 @@ msgstr "Bersaglio mancato"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "completo"
+
+#~ msgid "Please tell us your opinion of Wormux via email:"
+#~ msgstr "Perpiacere dai la tua impressione di Wormux via email:"
 
 #~ msgid "Select the teams:"
 #~ msgstr "Seleziona la squadra:"

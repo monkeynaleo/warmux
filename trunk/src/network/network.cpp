@@ -44,6 +44,9 @@ Network::Network()
   inited = false;
   sync_lock = false;
   network_menu = NULL;
+
+  //Set nickname
+  nickname = getenv("USER");
 }
 
 //-----------------------------------------------------------------------------
@@ -140,6 +143,11 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
   socket_set = SDLNet_AllocSocketSet(1);
   connected_player = 1;
   cpu.push_back(new DistantComputer(socket));
+  //Send nickname to server
+  Action a(ACTION_NICKNAME, nickname);
+  network.SendAction(&a);
+
+  //Control to net_thread_func
   thread = SDL_CreateThread(net_thread_func,NULL);
 }
 
@@ -263,7 +271,16 @@ void Network::ReceiveActions()
         Action* a = new Action(packet);
         MSG_DEBUG("network.traffic","Received action %s",
                 ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
-
+	
+	//Add relation between nickname and socket
+	if( a->GetType() == ACTION_NICKNAME){
+	  std::string nickname = a->PopString();
+	  std::cout<<"New nickname: " + nickname<< std::endl;
+	  (*dst_cpu)->nickname = nickname;
+	  delete a;
+	  break;
+	}
+	
         if( a->GetType() == ACTION_NEW_TEAM
         &&  a->GetType() == ACTION_DEL_TEAM)
         {
@@ -331,7 +348,7 @@ void Network::SendChatMessage(std::string txt)
 {
   if(IsServer())
   {
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, std::string(_("Server")) + std::string(">") + txt));
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, nickname + std::string(">") + txt));
   }
   else
   {

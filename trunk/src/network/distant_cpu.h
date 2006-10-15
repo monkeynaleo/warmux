@@ -35,6 +35,7 @@ class DistantComputer
   SDL_mutex* sock_lock;
   TCPsocket sock;
   std::list<std::string> owned_teams;
+  
 public:
   DistantComputer(TCPsocket new_sock);
   ~DistantComputer();
@@ -44,6 +45,7 @@ public:
   void SendDatas(char* paket, int size);
 
   std::string GetAdress();
+  std::string nickname;
 
   void ManageTeam(Action* team);
   void SendChatMessage(Action* a);

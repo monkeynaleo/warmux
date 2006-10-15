@@ -25,7 +25,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s tim) je mrtav."
@@ -40,7 +40,7 @@ msgstr "%s <%s> aka %s iz %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> iz %s"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s izvršava samoubistvo !"
@@ -50,12 +50,12 @@ msgstr "%s izvršava samoubistvo !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s je pao u vodu."
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s je ispao sa mape!"
@@ -74,17 +74,17 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s je dobio %u poena energije!"
 msgstr[1] "Igrač '%s' je dobio %u peone energije!"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s je psihopata, ubio je člana %s tima!"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s je mrtav zato što je smotan!"
 
-#: src/weapon/mine.cpp:113
+#: src/weapon/mine.cpp:115
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s je pored mine!"
@@ -350,15 +350,21 @@ msgstr "Glavni upravljač"
 msgid "Holy Grenade"
 msgstr "Granata"
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
 msgstr "Požuri, previše si spor !!"
+
+#: src/main.cpp:193
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
+msgstr ""
 
 #: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Početna energija:"
 
-#: src/game/game_loop.cpp:199
+#: src/game/game_loop.cpp:200
 msgid "Initialisation"
 msgstr "Inicijalizacija"
 
@@ -410,7 +416,7 @@ msgstr "Smanji gravitaciju"
 msgid "Map %s, a creation of :"
 msgstr "Mapa %s, je kreacija:"
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:203
 msgid "Maps"
 msgstr "Mape"
 
@@ -418,7 +424,7 @@ msgstr "Mape"
 msgid "Maximum number of FPS:"
 msgstr "Maximalaan broj FPS:"
 
-#: src/weapon/mine.cpp:182
+#: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mina"
 
@@ -487,10 +493,6 @@ msgstr "Prikaži energiju igrača?"
 msgid "Player's name?"
 msgstr "Prikaži ime igrača?"
 
-#: src/main.cpp:193
-msgid "Please tell us your opinion of Wormux via email:"
-msgstr "Molimo recite nam vaše mišljenje o Wormux-u putem email-a:"
-
 #: src/weapon/polecat.cpp:134
 #, fuzzy
 msgid "Polecat Launcher"
@@ -544,7 +546,7 @@ msgstr "Zvučni efekti?"
 msgid "Sound frequency"
 msgstr "Zvučni efekti?"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:221
 msgid "Sounds"
 msgstr "Zvučne opcije"
 
@@ -568,7 +570,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Šprica"
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr "Timovi"
 
@@ -614,7 +616,7 @@ msgstr "Verzija"
 msgid "Weapon:"
 msgstr "Oružje:"
 
-#: src/game/game_loop.cpp:215
+#: src/game/game_loop.cpp:216
 msgid "Weapons"
 msgstr "Oružje:"
 
@@ -622,7 +624,7 @@ msgstr "Oružje:"
 msgid "Website: "
 msgstr "Web stranica:"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Koja sramota za %s - koji je ubijen najobičnijim pištoljem!"
@@ -648,7 +650,7 @@ msgstr "XML greška tokom lodiranja mape '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Trebate barem jednu važeće mapu!"
 
-#: src/game/game_loop.cpp:210
+#: src/game/game_loop.cpp:211
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Trebate barem dva tima da igraju: promijeni ovo u 'Menu za Opcije ' !"
 
@@ -663,3 +665,6 @@ msgstr "Vaš hitac je promašio!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "gotov"
+
+#~ msgid "Please tell us your opinion of Wormux via email:"
+#~ msgstr "Molimo recite nam vaše mišljenje o Wormux-u putem email-a:"

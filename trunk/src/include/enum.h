@@ -118,6 +118,7 @@ typedef enum
   ACTION_SEND_TEAM,
   ACTION_SEND_RANDOM,
   ACTION_CHAT_MESSAGE,
+  ACTION_NICKNAME,
 
   // Out of game actions (local only).
   ACTION_QUIT,
