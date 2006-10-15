@@ -60,14 +60,14 @@ msgstr "%s faldt i vandet."
 msgid "%s has fallen off the map!"
 msgstr "%s faldt ud af banen!"
 
-#: src/object/bonus_box.cpp:153
+#: src/object/bonus_box.cpp:155
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s har mistet %u point energi."
 msgstr[1] "%s har mistet %u point energi."
 
-#: src/object/bonus_box.cpp:144
+#: src/object/bonus_box.cpp:146
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -94,49 +94,63 @@ msgstr "%s er ved en mine!"
 msgid "%s team has skipped its turn."
 msgstr "%s (fra holdet %s) blev dræbt."
 
-#: src/object/bonus_box.cpp:189
+#: src/object/bonus_box.cpp:209
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "Holdet %s har vundet %u automatisk bazooka!"
 msgstr[1] "Holdet %s har vundet %u automatiske bazookaer!"
 
-#: src/object/bonus_box.cpp:198
+#: src/object/bonus_box.cpp:218
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "Holdet %s har vundet %u oprørsbombe!"
 msgstr[1] "Holdet %s har vundet %u oprørsbomber!"
 
-#: src/object/bonus_box.cpp:208
+#: src/object/bonus_box.cpp:228
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "Holdet %s har fået %u dynamitstang."
 msgstr[1] "Holdet %s har fået %u dynamitstænger."
 
-#: src/object/bonus_box.cpp:135
+#: src/object/bonus_box.cpp:137
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "Holdet %s har fået %u teleportation."
 msgstr[1] "Holdet %s har fået %u teleportationer."
 
-#: src/object/bonus_box.cpp:162
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "%s har fået %u luftangreb"
 msgstr[1] "%s har fået %u luftangreb"
 
-#: src/object/bonus_box.cpp:171
+#: src/object/bonus_box.cpp:191
+#, fuzzy, c-format
+msgid "'%s has won %u Anvil"
+msgid_plural "'%s has won %u Anvil"
+msgstr[0] "%s har fået %u luftangreb"
+msgstr[1] "%s har fået %u luftangreb"
+
+#: src/object/bonus_box.cpp:173
 #, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
 msgid_plural "'%s has won %u Baseball bats"
 msgstr[0] "%s har fået %u luftangreb"
 msgstr[1] "%s har fået %u luftangreb"
 
-#: src/object/bonus_box.cpp:180
+#: src/object/bonus_box.cpp:200
+#, fuzzy, c-format
+msgid "'%s has won %u Holy grenade"
+msgid_plural "'%s has won %u Holy grenades"
+msgstr[0] "%s har fået %u luftangreb"
+msgstr[1] "%s har fået %u luftangreb"
+
+#: src/object/bonus_box.cpp:182
 #, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
@@ -160,7 +174,7 @@ msgstr "<infinite_background> kræver <is_open> for at virke ordentligt!!"
 msgid "Air Attack"
 msgstr "Luftangreb"
 
-#: src/object/bonus_box.cpp:166
+#: src/object/bonus_box.cpp:168
 msgid "Air attack"
 msgstr "Luftangreb"
 
@@ -168,7 +182,7 @@ msgstr "Luftangreb"
 msgid "Airhammer"
 msgstr ""
 
-#: src/weapon/anvil.cpp:63
+#: src/object/bonus_box.cpp:195 src/weapon/anvil.cpp:63
 msgid "Anvil"
 msgstr ""
 
@@ -181,7 +195,7 @@ msgstr "Forfattere:"
 msgid "Automatic Bazooka"
 msgstr "Automatisk bazooka"
 
-#: src/object/bonus_box.cpp:193
+#: src/object/bonus_box.cpp:213
 msgid "Automatic bazooka"
 msgstr "Automatisk bazooka"
 
@@ -189,7 +203,7 @@ msgstr "Automatisk bazooka"
 msgid "Baseball"
 msgstr "Baseball"
 
-#: src/object/bonus_box.cpp:175
+#: src/object/bonus_box.cpp:177
 #, fuzzy
 msgid "Baseball bat"
 msgstr "Baseball"
@@ -254,7 +268,7 @@ msgstr "Længden af en tur:"
 msgid "Duration of the end of a turn:"
 msgstr "Længde på slutningen af en tur:"
 
-#: src/object/bonus_box.cpp:212 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:232 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dynamit"
 
@@ -341,7 +355,7 @@ msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 msgid "Head commander"
 msgstr ""
 
-#: src/weapon/holly_grenade.cpp:105
+#: src/object/bonus_box.cpp:204 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Granat"
@@ -381,7 +395,7 @@ msgstr "Klargører objekter"
 msgid "Initialise teams"
 msgstr "Klargører hold"
 
-#: src/object/bonus_box.cpp:258
+#: src/object/bonus_box.cpp:278
 msgid "Is it a gift?"
 msgstr "Er det en gave?"
 
@@ -397,7 +411,7 @@ msgstr "Indlæser baner:"
 msgid "Load teams:"
 msgstr "Indlæser hold:"
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:186
 msgid "Low gravity"
 msgstr ""
 
@@ -509,7 +523,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Oprørsbombe"
 
-#: src/object/bonus_box.cpp:202
+#: src/object/bonus_box.cpp:222
 msgid "Riot bomb"
 msgstr "Oprørsbombe"
 
@@ -567,7 +581,7 @@ msgstr ""
 msgid "Teams"
 msgstr "Hold"
 
-#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportation"
 

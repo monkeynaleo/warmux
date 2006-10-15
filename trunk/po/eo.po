@@ -61,14 +61,14 @@ msgstr ""
 msgid "%s has fallen off the map!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:153
+#: src/object/bonus_box.cpp:155
 #, fuzzy, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "Le ludanto '%s' perdis %u energiajn poentojn :-("
 msgstr[1] "Le ludanto '%s' perdis %u energiajn poentojn :-("
 
-#: src/object/bonus_box.cpp:144
+#: src/object/bonus_box.cpp:146
 #, fuzzy, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -95,49 +95,63 @@ msgstr "%s estas proksima al mino ..."
 msgid "%s team has skipped its turn."
 msgstr "La teamo '%s' malhavas lian vicon."
 
-#: src/object/bonus_box.cpp:189
+#: src/object/bonus_box.cpp:209
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 msgstr[1] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 
-#: src/object/bonus_box.cpp:198
+#: src/object/bonus_box.cpp:218
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 msgstr[1] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 
-#: src/object/bonus_box.cpp:208
+#: src/object/bonus_box.cpp:228
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "La teamo '%s' elpoentis %u dinamito(j)n !"
 msgstr[1] "La teamo '%s' elpoentis %u dinamito(j)n !"
 
-#: src/object/bonus_box.cpp:135
+#: src/object/bonus_box.cpp:137
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "La teamo '%s' elpoentis %u teleporto(j)n."
 msgstr[1] "La teamo '%s' elpoentis %u teleporto(j)n."
 
-#: src/object/bonus_box.cpp:162
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/object/bonus_box.cpp:171
+#: src/object/bonus_box.cpp:191
+#, fuzzy, c-format
+msgid "'%s has won %u Anvil"
+msgid_plural "'%s has won %u Anvil"
+msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
+msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
+
+#: src/object/bonus_box.cpp:173
 #, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
 msgid_plural "'%s has won %u Baseball bats"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/object/bonus_box.cpp:180
+#: src/object/bonus_box.cpp:200
+#, fuzzy, c-format
+msgid "'%s has won %u Holy grenade"
+msgid_plural "'%s has won %u Holy grenades"
+msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
+msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
+
+#: src/object/bonus_box.cpp:182
 #, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
@@ -161,7 +175,7 @@ msgstr ""
 msgid "Air Attack"
 msgstr "Aeratako"
 
-#: src/object/bonus_box.cpp:166
+#: src/object/bonus_box.cpp:168
 msgid "Air attack"
 msgstr "Aeratako"
 
@@ -169,7 +183,7 @@ msgstr "Aeratako"
 msgid "Airhammer"
 msgstr ""
 
-#: src/weapon/anvil.cpp:63
+#: src/object/bonus_box.cpp:195 src/weapon/anvil.cpp:63
 msgid "Anvil"
 msgstr ""
 
@@ -183,7 +197,7 @@ msgstr "Auxtoroj :"
 msgid "Automatic Bazooka"
 msgstr "Memmova bazuko"
 
-#: src/object/bonus_box.cpp:193
+#: src/object/bonus_box.cpp:213
 msgid "Automatic bazooka"
 msgstr "Memmova bazuko"
 
@@ -191,7 +205,7 @@ msgstr "Memmova bazuko"
 msgid "Baseball"
 msgstr "Bazopilkilo"
 
-#: src/object/bonus_box.cpp:175
+#: src/object/bonus_box.cpp:177
 #, fuzzy
 msgid "Baseball bat"
 msgstr "Bazopilkilo"
@@ -259,7 +273,7 @@ msgstr "Vicdauxro"
 msgid "Duration of the end of a turn:"
 msgstr "Vicfindauxro"
 
-#: src/object/bonus_box.cpp:212 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:232 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamito"
 
@@ -360,7 +374,7 @@ msgstr ""
 msgid "Head commander"
 msgstr ""
 
-#: src/weapon/holly_grenade.cpp:105
+#: src/object/bonus_box.cpp:204 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Grenado"
@@ -404,7 +418,7 @@ msgstr "Preparanto"
 msgid "Initialise teams"
 msgstr "Preparanto"
 
-#: src/object/bonus_box.cpp:258
+#: src/object/bonus_box.cpp:278
 msgid "Is it a gift?"
 msgstr ""
 
@@ -422,7 +436,7 @@ msgstr "Muntas la terenon %s"
 msgid "Load teams:"
 msgstr "Muntas la teamo %s"
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:186
 msgid "Low gravity"
 msgstr ""
 
@@ -537,7 +551,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/object/bonus_box.cpp:202
+#: src/object/bonus_box.cpp:222
 msgid "Riot bomb"
 msgstr ""
 
@@ -599,7 +613,7 @@ msgstr ""
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleporto"
 
