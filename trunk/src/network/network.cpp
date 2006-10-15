@@ -348,7 +348,7 @@ void Network::SendChatMessage(std::string txt)
 {
   if(IsServer())
   {
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, nickname + std::string(">") + txt));
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, nickname + std::string("> ") + txt));
   }
   else
   {
