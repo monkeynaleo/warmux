@@ -69,7 +69,6 @@ class WeaponProjectile : public PhysicalObj
     virtual void SignalGroundCollision();
     virtual void SignalCollision();
     virtual void SignalOutOfMap();
-
     virtual void SignalTimeout();
     virtual void SignalExplosion();
     void SignalGhostState (bool was_dead);
@@ -136,8 +135,8 @@ class WeaponLauncher : public Weapon
     void DecActiveProjectile();
 
   //Misc actions
-    void ActionUp ();//called by mousse.cpp when mousewhellup
-    void ActionDown ();//called by mousse.cpp when mousewhelldown
+    virtual void ActionUp ();    // called by mouse.cpp when mouse wheel up
+    virtual void ActionDown ();  // called by mouse.cpp when mouse wheel down
 
     WeaponProjectile* GetProjectile() { return projectile; };
     ExplosiveWeaponConfig& cfg();

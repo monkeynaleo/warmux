@@ -56,7 +56,7 @@ bool Construct::p_Shoot ()
   if(!target_chosen)
 	return false;
   jukebox.Play("share", "weapon/construct");
-  world.PutSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
+  world.MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
   GameLoop::GetInstance()->interaction_enabled = false;
   return true;
 }
@@ -68,8 +68,7 @@ void Construct::Refresh()
 
 void Construct::Draw()
 {
-  if (m_is_active) {
-  } else {
+  if (!m_is_active) {
     Weapon::Draw();
 
     dst = Mouse::GetInstance()->GetWorldPosition();
@@ -81,12 +80,6 @@ void Construct::Draw()
 void Construct::ChooseTarget(Point2i mouse_pos)
 {
   dst = mouse_pos;
-  if( !world.ParanoiacRectIsInVacuum(
-          Rectanglei(dst - construct_spr->GetSizeMax()/2,
-                     construct_spr->GetSizeMax() ))
-  || ActiveCharacter().IsMoving())
-    return;
-
   target_chosen = true;
   Shoot();
 }
@@ -106,6 +99,16 @@ void Construct::HandleKeyEvent(int action, int event_type)
       ActiveCharacter().HandleKeyEvent( action, event_type);
       break ;
   }
+}
+
+void Construct::ActionUp()
+{
+  Up();
+}
+
+void Construct::ActionDown()
+{
+  Down();
 }
 
 void Construct::Up()
