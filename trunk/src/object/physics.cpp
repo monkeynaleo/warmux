@@ -347,9 +347,7 @@ void Physics::StartMoving()
 
 void Physics::StopMoving()
 {
-  if (IsMoving())
-	  MSG_DEBUG ("physic.physic", "End of a mouvement...");
-
+  // Always called by PhysicalObj::StopMoving
   m_pos_x.x1 = 0 ;
   m_pos_x.x2 = 0 ;
   m_pos_y.x1 = 0 ;
