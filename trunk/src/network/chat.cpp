@@ -94,7 +94,7 @@ void Chat::HandleKey(const SDL_Event *event){
     break;
 
   case SDLK_BACKSPACE:
-    if(txt != "")
+    if(kbd_event.state == 1 && txt != "")
       txt = txt.substr(0, txt.size()-1);
     input->Set(txt);
     break;
