@@ -134,8 +134,8 @@ public:
   // Start moving
   void StartMoving();
 
-  // Stop moving : signal it if the object was falling
-  void StopMoving ();
+  // Stop moving
+  virtual void StopMoving();
 
   // The object is moving ?
   bool IsMoving() const;
