@@ -373,7 +373,7 @@ void Team::LoadGamingData(uint how_many_characters)
 
   // Disable ninja rope during network game
   if(network.IsConnected())
-    m_nb_ammos[ "NinjaRope" ] = 0;
+    m_nb_ammos[ weapons_list.GetWeapon(WEAPON_NINJA_ROPE)->GetName() ] = 0;
 
 
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
