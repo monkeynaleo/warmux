@@ -27,7 +27,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Kaart %s niet gevonden :-("
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (team %s) is overleden."
@@ -42,7 +42,7 @@ msgstr "%s <%s> aka %s van %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> van %s"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s pleegde zelfmoord !"
@@ -52,12 +52,12 @@ msgstr "%s pleegde zelfmoord !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s is in het water gevallen."
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s is van de kaart gevallen!"
@@ -76,17 +76,17 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s heeft %u punt energie gekregen!"
 msgstr[1] "%s heeft %u punten energie gekregen!"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van team %s!"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s is dood door zijn onhandigheid!"
 
-#: src/weapon/mine.cpp:113
+#: src/weapon/mine.cpp:115
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s staat naast een mijn!"
@@ -349,15 +349,21 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Granaat"
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
+msgstr ""
+
+#: src/main.cpp:193
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
 msgstr ""
 
 #: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Initiële energie:"
 
-#: src/game/game_loop.cpp:199
+#: src/game/game_loop.cpp:200
 msgid "Initialisation"
 msgstr "Initialisatie"
 
@@ -408,7 +414,7 @@ msgstr ""
 msgid "Map %s, a creation of :"
 msgstr "Kaart %s, gemaakt door :"
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:203
 msgid "Maps"
 msgstr ""
 
@@ -416,7 +422,7 @@ msgstr ""
 msgid "Maximum number of FPS:"
 msgstr "Maximum FPS:"
 
-#: src/weapon/mine.cpp:182
+#: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mijn"
 
@@ -486,10 +492,6 @@ msgstr "Toon energie van speler?"
 msgid "Player's name?"
 msgstr "Toon naam van speler?"
 
-#: src/main.cpp:193
-msgid "Please tell us your opinion of Wormux via email:"
-msgstr "Vertel ons a.u.b. uw mening over Wormux via e-mail:"
-
 #: src/weapon/polecat.cpp:134
 msgid "Polecat Launcher"
 msgstr ""
@@ -541,7 +543,7 @@ msgstr "Geluidseffecten?"
 msgid "Sound frequency"
 msgstr "Geluidseffecten?"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:221
 #, fuzzy
 msgid "Sounds"
 msgstr "Geluid opties"
@@ -566,7 +568,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
 
@@ -611,7 +613,7 @@ msgstr "Versie"
 msgid "Weapon:"
 msgstr "Wapen:"
 
-#: src/game/game_loop.cpp:215
+#: src/game/game_loop.cpp:216
 #, fuzzy
 msgid "Weapons"
 msgstr "Wapen:"
@@ -620,7 +622,7 @@ msgstr "Wapen:"
 msgid "Website: "
 msgstr "Website: "
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
@@ -647,7 +649,7 @@ msgstr "XML fout bij het laden van kaart '%s' :"
 msgid "You need at least one valid map !"
 msgstr "U heeft minimaal één geldige kaart nodig !"
 
-#: src/game/game_loop.cpp:210
+#: src/game/game_loop.cpp:211
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "U heeft minimaal twee teams nodig om te spelen: verander dit in 'Opties "
@@ -664,6 +666,9 @@ msgstr "U schoot mis!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "klaar"
+
+#~ msgid "Please tell us your opinion of Wormux via email:"
+#~ msgstr "Vertel ons a.u.b. uw mening over Wormux via e-mail:"
 
 #~ msgid "Select the teams:"
 #~ msgstr "Selecteer de teams:"

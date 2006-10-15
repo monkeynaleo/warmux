@@ -26,7 +26,7 @@ msgstr " "
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (Mannschaft %s) ist gestorben."
@@ -41,7 +41,7 @@ msgstr "%s <%s> aka %s aus %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> aus %s"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begeht Selbstmord!"
@@ -51,12 +51,12 @@ msgstr "%s begeht Selbstmord!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ist ins Wasser gefallen."
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ist von der Karte gefallen!"
@@ -75,17 +75,17 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied von Mannschaft %s getötet!"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s stirbt durch seine Tollpatschigkeit!"
 
-#: src/weapon/mine.cpp:113
+#: src/weapon/mine.cpp:115
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s ist neben einer Mine!"
@@ -344,15 +344,21 @@ msgstr "Hauptkommandant"
 msgid "Holy Grenade"
 msgstr "Heilige Granate"
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
 msgstr "Beeile dich, du bist zu langsam !!"
+
+#: src/main.cpp:193
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
+msgstr ""
 
 #: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Startenergie:"
 
-#: src/game/game_loop.cpp:199
+#: src/game/game_loop.cpp:200
 msgid "Initialisation"
 msgstr "Initialisierung"
 
@@ -403,7 +409,7 @@ msgstr "Geringe Schwerkraft"
 msgid "Map %s, a creation of :"
 msgstr "Karte %s, eine Kreation von: "
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:203
 msgid "Maps"
 msgstr "Karten"
 
@@ -411,7 +417,7 @@ msgstr "Karten"
 msgid "Maximum number of FPS:"
 msgstr "Maximale Anzahl FPS:"
 
-#: src/weapon/mine.cpp:182
+#: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mine"
 
@@ -476,10 +482,6 @@ msgstr "Energie des Spielers anzeigen?"
 msgid "Player's name?"
 msgstr "Name des Spielers anzeigen?"
 
-#: src/main.cpp:193
-msgid "Please tell us your opinion of Wormux via email:"
-msgstr "Sag uns deine Meinung über Wormux via E-Mail:"
-
 #: src/weapon/polecat.cpp:134
 msgid "Polecat Launcher"
 msgstr "Stinktier-Werfer"
@@ -528,7 +530,7 @@ msgstr "Soundeffekte?"
 msgid "Sound frequency"
 msgstr "Tonfrequenz"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:221
 msgid "Sounds"
 msgstr "Geräusche"
 
@@ -552,7 +554,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Spritze"
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr "Manschaften"
 
@@ -597,7 +599,7 @@ msgstr "Version"
 msgid "Weapon:"
 msgstr "Waffe:"
 
-#: src/game/game_loop.cpp:215
+#: src/game/game_loop.cpp:216
 msgid "Weapons"
 msgstr "Waffen"
 
@@ -605,7 +607,7 @@ msgstr "Waffen"
 msgid "Website: "
 msgstr "Webseite: "
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
@@ -631,7 +633,7 @@ msgstr "XML Fehler beim Laden der Karte %s :"
 msgid "You need at least one valid map !"
 msgstr "Du brauchst mindestens eine gültige Karte !"
 
-#: src/game/game_loop.cpp:210
+#: src/game/game_loop.cpp:211
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Du brauchst mindestens zwei Mannschaften, ändere die Anzahl der Mannschaften "
@@ -648,6 +650,9 @@ msgstr "Dein Schuss ging daneben!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "fertig"
+
+#~ msgid "Please tell us your opinion of Wormux via email:"
+#~ msgstr "Sag uns deine Meinung über Wormux via E-Mail:"
 
 #~ msgid "jetpack"
 #~ msgstr "Düsenrucksack"

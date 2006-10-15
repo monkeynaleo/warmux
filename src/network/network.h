@@ -66,6 +66,8 @@ public:
   uint connected_player;
   uint client_inited;
   bool sync_lock;
+  std::string nickname; //Clients: Send to Server at connect
+                        //Server: Send in chat messages
 
   Network();
   ~Network();

@@ -475,6 +475,11 @@ void Action_WeaponStopUse(Action *a)
   ActiveTeam().AccessWeapon().ActionStopUse();
 }
 
+void Action_Nickname(Action *a)
+{
+  
+}
+
 void ActionHandler::ExecActions()
 {
   assert(mutex!=NULL);
@@ -567,5 +572,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_WEAPON_STOP_USE, "weapon_stop_use", &Action_WeaponStopUse);
   Register (ACTION_SET_CHARACTER_ENERGY, "set_character_energy", &Action_SetCharacterEnergy);
   Register (ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
+  Register (ACTION_NICKNAME, "nickname", Action_Nickname);
   SDL_UnlockMutex(mutex);
 }

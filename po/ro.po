@@ -29,7 +29,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (echipa %s) a murit."
@@ -44,7 +44,7 @@ msgstr "%s <%s> cunoscut şi ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -54,12 +54,12 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
@@ -80,18 +80,18 @@ msgstr[0] "%s a câştigat %u punct de energie!"
 msgstr[1] "%s a câştigat %u puncte de energie!"
 msgstr[2] "%s a câştigat %u de puncte de energie!"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "Psihopatia sălăşluieşte în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
 
-#: src/weapon/mine.cpp:113
+#: src/weapon/mine.cpp:115
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
@@ -362,15 +362,21 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Grenadă"
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
+msgstr ""
+
+#: src/main.cpp:193
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
 msgstr ""
 
 #: src/menu/game_menu.cpp:284
 msgid "Initial energy:"
 msgstr "Energie iniţială:"
 
-#: src/game/game_loop.cpp:199
+#: src/game/game_loop.cpp:200
 msgid "Initialisation"
 msgstr "Iniţializare"
 
@@ -421,7 +427,7 @@ msgstr ""
 msgid "Map %s, a creation of :"
 msgstr "Harta %s, o creaţie a lui :"
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:203
 msgid "Maps"
 msgstr ""
 
@@ -429,7 +435,7 @@ msgstr ""
 msgid "Maximum number of FPS:"
 msgstr "Numărul maxim de C/S:"
 
-#: src/weapon/mine.cpp:182
+#: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mină"
 
@@ -499,11 +505,6 @@ msgstr "Se afişează energia jucătorului?"
 msgid "Player's name?"
 msgstr "Se afişează numele jucătorului?"
 
-#: src/main.cpp:193
-msgid "Please tell us your opinion of Wormux via email:"
-msgstr ""
-"Vă rugăm să ne spuneţi părerea dvs. despre Wormux prin poştă electronică:"
-
 #: src/weapon/polecat.cpp:134
 msgid "Polecat Launcher"
 msgstr ""
@@ -555,7 +556,7 @@ msgstr "Efecte sonore?"
 msgid "Sound frequency"
 msgstr "Efecte sonore?"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:221
 #, fuzzy
 msgid "Sounds"
 msgstr "Opţiuni sunet"
@@ -580,7 +581,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
 
@@ -625,7 +626,7 @@ msgstr "versiunea"
 msgid "Weapon:"
 msgstr "Arma:"
 
-#: src/game/game_loop.cpp:215
+#: src/game/game_loop.cpp:216
 #, fuzzy
 msgid "Weapons"
 msgstr "Arma:"
@@ -634,7 +635,7 @@ msgstr "Arma:"
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -661,7 +662,7 @@ msgstr "Eroare XML în timpul încărcării hărţii '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Aveţi nevoie de cel puţin o hartă validă !"
 
-#: src/game/game_loop.cpp:210
+#: src/game/game_loop.cpp:211
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Aveţi nevoie de cel puţin două echipe ca să jucaţi: schimbaţi acest lucru în "
@@ -678,6 +679,10 @@ msgstr "Focul dvs. a fost tras în aer!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "finalizat"
+
+#~ msgid "Please tell us your opinion of Wormux via email:"
+#~ msgstr ""
+#~ "Vă rugăm să ne spuneţi părerea dvs. despre Wormux prin poştă electronică:"
 
 #~ msgid "Select the teams:"
 #~ msgstr "Selectaţi echipele:"

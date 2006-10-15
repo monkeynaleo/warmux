@@ -26,7 +26,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr ""
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s (%s team) has died."
 msgstr ""
@@ -41,7 +41,7 @@ msgstr ""
 msgid "%s <%s> from %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:665
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -51,12 +51,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:658
+#: src/game/game_loop.cpp:661
 #, c-format
 msgid "%s has fallen in water."
 msgstr ""
 
-#: src/game/game_loop.cpp:669
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr ""
@@ -75,17 +75,17 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 msgstr[1] "Le ludanto '%s' elpoentis %u vivajn poentojn !"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:683
 #, fuzzy, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:678
 #, fuzzy, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
 
-#: src/weapon/mine.cpp:113
+#: src/weapon/mine.cpp:115
 #, fuzzy, c-format
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino ..."
@@ -365,8 +365,14 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Grenado"
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
+msgstr ""
+
+#: src/main.cpp:193
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
 msgstr ""
 
 #: src/menu/game_menu.cpp:284
@@ -374,7 +380,7 @@ msgstr ""
 msgid "Initial energy:"
 msgstr "Komenca energio"
 
-#: src/game/game_loop.cpp:199
+#: src/game/game_loop.cpp:200
 msgid "Initialisation"
 msgstr "Preparanto"
 
@@ -429,7 +435,7 @@ msgstr ""
 msgid "Map %s, a creation of :"
 msgstr ""
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:203
 msgid "Maps"
 msgstr ""
 
@@ -437,7 +443,7 @@ msgstr ""
 msgid "Maximum number of FPS:"
 msgstr ""
 
-#: src/weapon/mine.cpp:182
+#: src/weapon/mine.cpp:184
 #, fuzzy
 msgid "Mine"
 msgstr "Mino"
@@ -511,10 +517,6 @@ msgstr "Afisxas la energio de la ludantoj"
 msgid "Player's name?"
 msgstr "Afisxas la nomo de la ludantoj"
 
-#: src/main.cpp:193
-msgid "Please tell us your opinion of Wormux via email:"
-msgstr ""
-
 #: src/weapon/polecat.cpp:134
 msgid "Polecat Launcher"
 msgstr ""
@@ -566,7 +568,7 @@ msgstr "Sonaji efektoj"
 msgid "Sound frequency"
 msgstr "Sonaji efektoj"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:221
 #, fuzzy
 msgid "Sounds"
 msgstr "Elektoj"
@@ -593,7 +595,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
 
@@ -641,7 +643,7 @@ msgstr "Versio "
 msgid "Weapon:"
 msgstr "Armilo"
 
-#: src/game/game_loop.cpp:215
+#: src/game/game_loop.cpp:216
 #, fuzzy
 msgid "Weapons"
 msgstr "Armilo"
@@ -651,7 +653,7 @@ msgstr "Armilo"
 msgid "Website: "
 msgstr "TTT-ejo : "
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, fuzzy, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pistolo !"
@@ -678,7 +680,7 @@ msgstr ""
 msgid "You need at least one valid map !"
 msgstr ""
 
-#: src/game/game_loop.cpp:210
+#: src/game/game_loop.cpp:211
 #, fuzzy
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Vi necesas almenaux du teamojn, korektu cxi tion en la menuo Elektoj !"
