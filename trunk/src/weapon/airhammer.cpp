@@ -122,11 +122,7 @@ void Airhammer::RepeatShoot()
   if (time >= MIN_TIME_BETWEEN_JOLT) 
   {
     m_is_active = false;
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SYNC_BEGIN));
-    ActionHandler::GetInstance()->NewAction(
-      BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex()));
     NewActionShoot();
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_SYNC_END));
     m_last_jolt = tmp;
   }
 
