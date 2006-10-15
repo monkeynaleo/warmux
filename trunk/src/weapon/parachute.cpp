@@ -70,13 +70,14 @@ void Parachute::Draw()
 
 void Parachute::Refresh()
 {
-  Point2d speed;
+  double speed;
+  double angle;
 
-  ActiveCharacter().GetSpeedXY(speed);
+  ActiveCharacter().GetSpeed(speed, angle);
 
   if (ActiveCharacter().FootsInVacuum())
     {
-      if (!open && (speed.y > cfg().open_speed_limit))
+      if (!open && (speed > GameMode::GetInstance()->safe_fall))
 	{
 	  if (EnoughAmmo())
 	    {
@@ -86,6 +87,7 @@ void Parachute::Refresh()
 	      open = true ;
 	      image->animation.SetPlayBackward(false);
 	      image->Start();
+	      ActiveCharacter().SetSpeedXY(Point2d(0,0));
 	      ActiveCharacter().SetMovement("parachute");
 	    }
 	}
@@ -131,12 +133,10 @@ ParachuteConfig& Parachute::cfg() {
 ParachuteConfig::ParachuteConfig(){ 
   wind_factor = 10.0;
   air_resist_factor = 140.0 ;
-  open_speed_limit = 2.0 ;
 }
 
 void ParachuteConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
   LitDocXml::LitDouble (elem, "wind_factor", wind_factor);
   LitDocXml::LitDouble (elem, "air_resist_factor", air_resist_factor);
-  LitDocXml::LitDouble (elem, "open_speed_limit", open_speed_limit);
 }
