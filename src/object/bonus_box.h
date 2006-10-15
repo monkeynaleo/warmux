@@ -48,7 +48,9 @@ class BonusBox : public PhysicalObj
       bonusBASEBALL,
       bonusLOWGRAV,
       bonusAUTO_BAZOOKA,
-      bonusRIOT_BOMB
+      bonusRIOT_BOMB,
+      bonusANVIL,
+      bonusHOLLY_GRENADE
     } bonus_weapons;
     static const uint nb_bonus = bonusAUTO_BAZOOKA;
 

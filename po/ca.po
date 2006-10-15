@@ -62,14 +62,14 @@ msgstr "%s ha caigut del mapa."
 msgid "%s has fallen off the map!"
 msgstr "%s ha caigut del mapa!"
 
-#: src/object/bonus_box.cpp:153
+#: src/object/bonus_box.cpp:155
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "El jugador '%s' ha perdut %u punt de vida."
 msgstr[1] "El jugador '%s' ha perdut %u punts de vida."
 
-#: src/object/bonus_box.cpp:144
+#: src/object/bonus_box.cpp:146
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -96,49 +96,63 @@ msgstr "%s esta aprop d'una mina!"
 msgid "%s team has skipped its turn."
 msgstr "%s (L'equip %s ) ha mort."
 
-#: src/object/bonus_box.cpp:189
+#: src/object/bonus_box.cpp:209
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "L'equip '%s' ha conseguit %u bazooka automatic!"
 msgstr[1] "L'equip '%s' ha conseguit %u bazookas automatics!"
 
-#: src/object/bonus_box.cpp:198
+#: src/object/bonus_box.cpp:218
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "L'equip '%s' ha conseguit %u bazookas automatics!"
 msgstr[1] "L'equip '%s' ha conseguit %u bazooka(s) automatic(s)!"
 
-#: src/object/bonus_box.cpp:208
+#: src/object/bonus_box.cpp:228
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "L'equip '%s' ha conseguit %u dinamita!"
 msgstr[1] "L'equip '%s' ha conseguit %u dinamitaes!"
 
-#: src/object/bonus_box.cpp:135
+#: src/object/bonus_box.cpp:137
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "L'equip '%s' ha conseguit %u teletransportacion."
 msgstr[1] "L'equip '%s' ha conseguit %u teletransportacions."
 
-#: src/object/bonus_box.cpp:162
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "El jugador '%s' ha conseguit %u atac aeri !"
 msgstr[1] "El jugador '%s' ha conseguit %u atacs aeris !"
 
-#: src/object/bonus_box.cpp:171
+#: src/object/bonus_box.cpp:191
+#, fuzzy, c-format
+msgid "'%s has won %u Anvil"
+msgid_plural "'%s has won %u Anvil"
+msgstr[0] "El jugador '%s' ha conseguit %u atac aeri !"
+msgstr[1] "El jugador '%s' ha conseguit %u atacs aeris !"
+
+#: src/object/bonus_box.cpp:173
 #, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
 msgid_plural "'%s has won %u Baseball bats"
 msgstr[0] "El jugador '%s' ha conseguit %u atac aeri !"
 msgstr[1] "El jugador '%s' ha conseguit %u atacs aeris !"
 
-#: src/object/bonus_box.cpp:180
+#: src/object/bonus_box.cpp:200
+#, fuzzy, c-format
+msgid "'%s has won %u Holy grenade"
+msgid_plural "'%s has won %u Holy grenades"
+msgstr[0] "El jugador '%s' ha conseguit %u atac aeri !"
+msgstr[1] "El jugador '%s' ha conseguit %u atacs aeris !"
+
+#: src/object/bonus_box.cpp:182
 #, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
@@ -162,7 +176,7 @@ msgstr ""
 msgid "Air Attack"
 msgstr "Atac aeri"
 
-#: src/object/bonus_box.cpp:166
+#: src/object/bonus_box.cpp:168
 msgid "Air attack"
 msgstr "Atac aeri"
 
@@ -170,7 +184,7 @@ msgstr "Atac aeri"
 msgid "Airhammer"
 msgstr ""
 
-#: src/weapon/anvil.cpp:63
+#: src/object/bonus_box.cpp:195 src/weapon/anvil.cpp:63
 msgid "Anvil"
 msgstr ""
 
@@ -183,7 +197,7 @@ msgstr "Autors:"
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatic"
 
-#: src/object/bonus_box.cpp:193
+#: src/object/bonus_box.cpp:213
 msgid "Automatic bazooka"
 msgstr "Bazooka automatic"
 
@@ -191,7 +205,7 @@ msgstr "Bazooka automatic"
 msgid "Baseball"
 msgstr "Baseball"
 
-#: src/object/bonus_box.cpp:175
+#: src/object/bonus_box.cpp:177
 #, fuzzy
 msgid "Baseball bat"
 msgstr "Baseball"
@@ -256,7 +270,7 @@ msgstr "Duració del torn:"
 msgid "Duration of the end of a turn:"
 msgstr "Duracio del temps despres del torn:"
 
-#: src/object/bonus_box.cpp:212 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:232 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamita"
 
@@ -341,7 +355,7 @@ msgstr "El directori HOME (la variable de entorn $HOME) no pot ser trobat !"
 msgid "Head commander"
 msgstr ""
 
-#: src/weapon/holly_grenade.cpp:105
+#: src/object/bonus_box.cpp:204 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Granada"
@@ -381,7 +395,7 @@ msgstr "Inicialització de les dades"
 msgid "Initialise teams"
 msgstr "Inicialització de les dades"
 
-#: src/object/bonus_box.cpp:258
+#: src/object/bonus_box.cpp:278
 msgid "Is it a gift?"
 msgstr ""
 
@@ -397,7 +411,7 @@ msgstr "Carrega les mapas"
 msgid "Load teams:"
 msgstr ""
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:186
 msgid "Low gravity"
 msgstr ""
 
@@ -508,7 +522,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/object/bonus_box.cpp:202
+#: src/object/bonus_box.cpp:222
 msgid "Riot bomb"
 msgstr ""
 
@@ -567,7 +581,7 @@ msgstr ""
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teletransportació"
 

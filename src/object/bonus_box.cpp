@@ -54,13 +54,15 @@ const uint NB_MAX_TRY = 20;
 // Bonus offert par la caisse
 const uint BONUS_ENERGY=100;
 const uint BONUS_TRAP=75;
-const uint BONUS_TELEPORTATION=5;
-const uint BONUS_DYNAMITE=10;
-const uint BONUS_BASEBALL=5;
-const uint BONUS_LOWGRAV=5;
+const uint BONUS_TELEPORTATION=2;
+const uint BONUS_DYNAMITE=3;
+const uint BONUS_BASEBALL=3;
+const uint BONUS_LOWGRAV=2;
 const uint BONUS_AIR_ATTACK=1;
-const uint BONUS_AUTO_BAZOOKA=5;
-const uint BONUS_RIOT_BOMB=5;
+const uint BONUS_AUTO_BAZOOKA=3;
+const uint BONUS_RIOT_BOMB=2;
+const uint BONUS_ANVIL=1;
+const uint BONUS_HOLLY_GRENADE=1;
 
 BonusBox::BonusBox()
   : PhysicalObj("bonus_box"){
@@ -170,18 +172,36 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
     txt << Format(ngettext(
                 "'%s has won %u Baseball bat",
                 "'%s has won %u Baseball bats",
-                BONUS_AIR_ATTACK),
-            ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
-    equipe.m_nb_ammos[ _("Baseball bat") ] += BONUS_AIR_ATTACK;
+                BONUS_BASEBALL),
+            ActiveTeam().GetName().c_str(), BONUS_BASEBALL);
+    equipe.m_nb_ammos[ _("Baseball bat") ] += BONUS_BASEBALL;
     break;
 
   case bonusLOWGRAV:
     txt << Format(ngettext(
                 "'%s has won %u Low gravity",
                 "'%s has won %u Low gravity",
-                BONUS_AIR_ATTACK),
-            ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
-    equipe.m_nb_ammos[ _("Low gravity") ] += BONUS_AIR_ATTACK;
+                BONUS_LOWGRAV),
+            ActiveTeam().GetName().c_str(), BONUS_LOWGRAV);
+    equipe.m_nb_ammos[ _("Low gravity") ] += BONUS_LOWGRAV;
+    break;
+
+  case bonusANVIL:
+    txt << Format(ngettext(
+                "'%s has won %u Anvil",
+                "'%s has won %u Anvil",
+                BONUS_ANVIL),
+            ActiveTeam().GetName().c_str(), BONUS_ANVIL);
+    equipe.m_nb_ammos[ _("Anvil") ] += BONUS_ANVIL;
+    break;
+
+  case bonusHOLLY_GRENADE:
+    txt << Format(ngettext(
+                "'%s has won %u Holy grenade",
+                "'%s has won %u Holy grenades",
+                BONUS_HOLLY_GRENADE),
+            ActiveTeam().GetName().c_str(), BONUS_HOLLY_GRENADE);
+    equipe.m_nb_ammos[ _("Holy Grenade") ] += BONUS_HOLLY_GRENADE;
     break;
 
   case bonusAUTO_BAZOOKA:

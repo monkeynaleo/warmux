@@ -60,14 +60,14 @@ msgstr "%s je pao u vodu."
 msgid "%s has fallen off the map!"
 msgstr "%s je ispao sa mape!"
 
-#: src/object/bonus_box.cpp:153
+#: src/object/bonus_box.cpp:155
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s je izgubio %u peona energije."
 msgstr[1] "Igrač '%s' je izgubio %u peone energije."
 
-#: src/object/bonus_box.cpp:144
+#: src/object/bonus_box.cpp:146
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -94,49 +94,63 @@ msgstr "%s je pored mine!"
 msgid "%s team has skipped its turn."
 msgstr "%s (%s tim) je mrtav."
 
-#: src/object/bonus_box.cpp:189
+#: src/object/bonus_box.cpp:209
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "%s tim je dobio %u automatske bazuke!"
 msgstr[1] "tim '%s' dobio je %u automatskih bazuka!"
 
-#: src/object/bonus_box.cpp:198
+#: src/object/bonus_box.cpp:218
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "%s tim je dobio %u džumbus bombu!"
 msgstr[1] "tim '%s' dobio je %u džumbus bombi!"
 
-#: src/object/bonus_box.cpp:208
+#: src/object/bonus_box.cpp:228
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "%s tim je dobio %u dinamita!"
 msgstr[1] "Tim '%s' dobio %u dinamita!"
 
-#: src/object/bonus_box.cpp:135
+#: src/object/bonus_box.cpp:137
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "%s tim je dobio %u teleporta."
 msgstr[1] "tim '%s' dobio %u teleportacije."
 
-#: src/object/bonus_box.cpp:162
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "'%s je dobio %u zračni napad"
 msgstr[1] "'%s' je dobio %u zračnih napada!"
 
-#: src/object/bonus_box.cpp:171
+#: src/object/bonus_box.cpp:191
+#, fuzzy, c-format
+msgid "'%s has won %u Anvil"
+msgid_plural "'%s has won %u Anvil"
+msgstr[0] "'%s je dobio %u zračni napad"
+msgstr[1] "'%s' je dobio %u zračnih napada!"
+
+#: src/object/bonus_box.cpp:173
 #, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
 msgid_plural "'%s has won %u Baseball bats"
 msgstr[0] "'%s je dobio %u zračni napad"
 msgstr[1] "'%s' je dobio %u zračnih napada!"
 
-#: src/object/bonus_box.cpp:180
+#: src/object/bonus_box.cpp:200
+#, fuzzy, c-format
+msgid "'%s has won %u Holy grenade"
+msgid_plural "'%s has won %u Holy grenades"
+msgstr[0] "'%s je dobio %u zračni napad"
+msgstr[1] "'%s' je dobio %u zračnih napada!"
+
+#: src/object/bonus_box.cpp:182
 #, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
@@ -162,7 +176,7 @@ msgstr ""
 msgid "Air Attack"
 msgstr "Zračni napad"
 
-#: src/object/bonus_box.cpp:166
+#: src/object/bonus_box.cpp:168
 msgid "Air attack"
 msgstr "Zračni napad"
 
@@ -170,7 +184,7 @@ msgstr "Zračni napad"
 msgid "Airhammer"
 msgstr "Zračni čekić"
 
-#: src/weapon/anvil.cpp:63
+#: src/object/bonus_box.cpp:195 src/weapon/anvil.cpp:63
 msgid "Anvil"
 msgstr "Nakovanj"
 
@@ -183,7 +197,7 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Automatska bazuka"
 
-#: src/object/bonus_box.cpp:193
+#: src/object/bonus_box.cpp:213
 msgid "Automatic bazooka"
 msgstr "Automatska bazuka"
 
@@ -191,7 +205,7 @@ msgstr "Automatska bazuka"
 msgid "Baseball"
 msgstr "Palija"
 
-#: src/object/bonus_box.cpp:175
+#: src/object/bonus_box.cpp:177
 #, fuzzy
 msgid "Baseball bat"
 msgstr "Palija"
@@ -257,7 +271,7 @@ msgstr "Trajanje reda:"
 msgid "Duration of the end of a turn:"
 msgstr "Trajanje kraja reda:"
 
-#: src/object/bonus_box.cpp:212 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:232 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamit"
 
@@ -345,7 +359,7 @@ msgstr "HOME direktor (okolina promjenjiva $HOME) nije mogla biti pronađena!"
 msgid "Head commander"
 msgstr "Glavni upravljač"
 
-#: src/weapon/holly_grenade.cpp:105
+#: src/object/bonus_box.cpp:204 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Granata"
@@ -385,7 +399,7 @@ msgstr "Inicijaliziranje objekata"
 msgid "Initialise teams"
 msgstr "Inicijaliziranje timova"
 
-#: src/object/bonus_box.cpp:258
+#: src/object/bonus_box.cpp:278
 msgid "Is it a gift?"
 msgstr "Da li je to poklon ?"
 
@@ -402,7 +416,7 @@ msgstr "Učitaj mape:"
 msgid "Load teams:"
 msgstr "Učitaj timove:"
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:186
 #, fuzzy
 msgid "Low gravity"
 msgstr "Smanji gravitaciju"
@@ -515,7 +529,7 @@ msgstr "Rezolucija"
 msgid "Riot Bomb"
 msgstr "Bomba nereda"
 
-#: src/object/bonus_box.cpp:202
+#: src/object/bonus_box.cpp:222
 msgid "Riot bomb"
 msgstr "Bomba nereda"
 
@@ -574,7 +588,7 @@ msgstr "Šprica"
 msgid "Teams"
 msgstr "Timovi"
 
-#: src/object/bonus_box.cpp:139 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleport"
 
