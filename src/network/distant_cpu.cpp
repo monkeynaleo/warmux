@@ -186,7 +186,7 @@ void DistantComputer::SendChatMessage(Action* a)
   std::string txt = a->PopString();
   if(network.IsServer())
   {
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, nickname + ">"+txt));
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, nickname + "> "+txt));
   }
   else
   {
