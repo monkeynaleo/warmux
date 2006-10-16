@@ -99,12 +99,15 @@ bool DistantComputer::SocketReady()
 int DistantComputer::ReceiveDatas(char* & buf)
 {
   SDL_LockMutex(sock_lock);
-MSG_DEBUG("network","locked");
+  MSG_DEBUG("network","locked");
 
   // Firstly, we read the size of the incoming packet
   Uint32 net_size;
   if(SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
+  {
+    SDL_UnlockMutex(sock_lock);
     return -1;
+  }
 
   int size = (int)SDLNet_Read32(&net_size);
   assert(size > 0);
@@ -116,7 +119,7 @@ MSG_DEBUG("network","locked");
   while(total_received != size)
   {
     int received = SDLNet_TCP_Recv(sock, buf + total_received, size - total_received);
-    if(received > 0)	
+    if(received > 0)
     {
       MSG_DEBUG("network", "%i received", received);
       total_received += received;
