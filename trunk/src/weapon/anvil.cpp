@@ -40,7 +40,6 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
 {
   explode_with_collision = false;
   explode_colliding_character = false;
-  //SetTestRect(50,50,25,5);
 }
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj)
@@ -78,9 +77,10 @@ void AnvilLauncher::ChooseTarget(Point2i mouse_pos)
 bool AnvilLauncher::p_Shoot ()
 {
   if(!target_chosen)
-	return false;
+    return false;
   projectile->SetXY(target);
   lst_objects.AddObject(projectile);
+  camera.ChangeObjSuivi(projectile,true,true);
   projectile = NULL;
   ReloadLauncher();
   return true;
