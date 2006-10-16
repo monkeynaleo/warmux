@@ -768,7 +768,7 @@ void Character::SignalCollision()
     norme -= game_mode->safe_fall;
     degat = norme * game_mode->damage_per_fall_unit;
     SetEnergyDelta (-(int)degat);
-    GameLoop::GetInstance()->SignalCharacterDamageFalling(this);
+    GameLoop::GetInstance()->SignalCharacterDamage(this);
     SetMovement("walk");
     SetMovementOnce("hard-land");
   }
@@ -796,6 +796,8 @@ void Character::SignalExplosion()
     ActiveTeam().AccessWeapon().Deselect();
     // Select the weapon back. If not, we cannot move the crosshair.
     ActiveTeam().AccessWeapon().Select();
+    // End of turn
+    GameLoop::GetInstance()->SignalCharacterDamage(this);
   }
 }
 
