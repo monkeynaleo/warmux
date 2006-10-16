@@ -38,7 +38,6 @@ InfoMap::InfoMap ()
   nb_barrel = 0;
   wind.nb_sprite = 0;
   wind.need_flip = false;
-  infinite_bg = false;
 }
 
 bool InfoMap::Init (const std::string &map_name,
@@ -118,13 +117,6 @@ bool InfoMap::TraiteXml (xmlpp::Element *xml)
   LitDocXml::LitUint (xml, "nb_mine", nb_mine);
   LitDocXml::LitUint (xml, "nb_barrel", nb_barrel);
   LitDocXml::LitBool (xml, "is_open", is_opened);
-//  LitDocXml::LitBool (xml, "infinite_background", infinite_bg);
-
-  if(!is_opened && infinite_bg)
-  {
-    std::cout << _("<infinite_background> needs <is_open> to be set to work correctly!!") << std::endl;
-    infinite_bg = false;
-  }
 
   xmlpp::Element *xmlwind = LitDocXml::AccesBalise (xml, "wind");
   if (xmlwind != NULL)

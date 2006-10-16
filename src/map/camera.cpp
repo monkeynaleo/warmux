@@ -66,24 +66,16 @@ Point2i Camera::NonFreeDegrees() const{
 void Camera::SetXYabs(int x, int y){
   AppWormux * app = AppWormux::GetInstance();
 
-  if( !ActiveMap().HasInfiniteBackGround() ){
-    if( !HasFixedX() )
-      position.x = BorneLong(x, 0, world.GetWidth() - GetSizeX());
-    else
-      position.x = - (app->video.window.GetWidth() - world.GetWidth())/2;
+  if( !HasFixedX() )
+    position.x = BorneLong(x, 0, world.GetWidth() - GetSizeX());
+  else
+    position.x = - (app->video.window.GetWidth() - world.GetWidth())/2;
 
-	if( !HasFixedY() )
-      position.y = BorneLong(y, 0, world.GetHeight()-GetSizeY());
-    else
-      position.y = - (app->video.window.GetHeight() - world.GetHeight())/2;
-  }else{
-    position.x = x;
+  if( !HasFixedY() )
+    position.y = BorneLong(y, 0, world.GetHeight()-GetSizeY());
+  else
+    position.y = - (app->video.window.GetHeight() - world.GetHeight())/2;
 
-    if( y > (int)world.GetHeight() - GetSizeY() )
-      position.y = world.GetHeight() - GetSizeY();
-    else
-      position.y = y;
-  }
   lance = true;
 }
 
@@ -132,7 +124,7 @@ void Camera::AutoRecadre(){
   Point2i pos = obj_suivi->GetPosition();
   Point2i size = obj_suivi->GetSize();
 
-  if( pos.y < 0 && !ActiveMap().HasInfiniteBackGround() )
+  if( pos.y < 0 )
     pos.y = 0;
 
   Point2i dstMax = GetSize()/2 - marge;

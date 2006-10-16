@@ -179,28 +179,19 @@ void Map::Draw()
 }
 
 bool Map::EstHorsMondeX(int x) const{
-  if( ActiveMap().HasInfiniteBackGround())
-    return false;
-
   return (x < 0) || ((int)GetWidth() <= x);
 }
 
 bool Map::EstHorsMondeY(int y) const{
-  if( ActiveMap().HasInfiniteBackGround() )
-    return y < 0;
-
   return (y < 0) || ((int)GetHeight() <= y);
 }
 
 bool Map::EstHorsMondeXlarg(int x, uint larg) const{
-  if( ActiveMap().HasInfiniteBackGround() )
-  	return false;
-
   return (x + (int)larg - 1 < 0) || ((int)GetWidth() <= x);
 }
 
 bool Map::EstHorsMondeYhaut(int y, uint haut) const{
-  return ((y + (int)haut - 1 < 0  && !ActiveMap().HasInfiniteBackGround()) || ((int)GetHeight() <= y));
+  return ((y + (int)haut - 1 < 0) || ((int)GetHeight() <= y));
 }
 
 bool Map::EstHorsMondeXY(int x, int y) const{
