@@ -45,8 +45,8 @@ int Question::TreatsKey (SDL_Event &event){
   // Tests the key
   choice_iterator it=choices.begin(), end=choices.end();
   for (; it != end; ++it){
-    if (event.key.keysym.sym == it -> m_key)
-      return it -> m_val;
+    if (event.key.keysym.sym == it -> key())
+      return it -> val();
   }
 
   // No key corresponding to the correct choice, so we use default choice
@@ -81,7 +81,8 @@ int Question::AskQuestion (){
   do{
 
     while( SDL_PollEvent( &event) ){
-      if (( event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN ) && default_choice.active ){
+      if ( (event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN) &&
+          default_choice.active ){
 	answer = default_choice.value;
 	end_of_boucle = true;
       }

@@ -35,23 +35,22 @@ class Question
 {
   Sprite* background;
 
-public:
-  // Message to display
-  std::string message;
-
   // A choice = a key return a value
-  typedef struct choix_t
+  class choice_t
   {
-    int m_key;
-    int m_val;
-    choix_t (int key, int value) 
-    { m_key = key; m_val = value; }
-  } choice_t;
+    private:
+      int m_key;
+      int m_val;
+    public:
+      choice_t (int key, int value)
+      { m_key = key; m_val = value; };
+      inline const int & key() const { return m_key; };
+      inline const int & val() const { return m_val; };
+  };
 
   // Choices list
   std::list<choice_t> choices;
-  typedef std::list<choix_t>::iterator choice_iterator;
-
+  typedef std::list<choice_t>::iterator choice_iterator;
   // Default choice used when another key is pressed
   struct s_default_choice
   {
@@ -59,18 +58,25 @@ public:
     int value;
   } default_choice;
 
- private:
   int TreatsKey (SDL_Event &event);
   void Draw();
+  // Message to display
+  std::string message;
 
- public:
+public:
   Question();
   ~Question();
-  void Set(const std::string &message, 
-	   bool default_active, 
+
+  void Set(const std::string &message,
+	   bool default_active,
 	   int default_value,
       const std::string &bg_sprite="");
   int AskQuestion ();
+  inline void add_choice(int key, int value)
+  {
+    return this->choices.push_back(choice_t(key,value));
+  }
+
 };
 
 //-----------------------------------------------------------------------------

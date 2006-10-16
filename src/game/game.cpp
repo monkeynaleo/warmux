@@ -48,7 +48,7 @@
 
 Game * Game::singleton = NULL;
 
-Game * Game::GetInstance() 
+Game * Game::GetInstance()
 {
   if (singleton == NULL) {
     singleton = new Game();
@@ -70,12 +70,12 @@ bool Game::IsGameFinished()
 int Game::NbrRemainingTeams()
 {
   uint nbr = 0;
-  
+
   FOR_EACH_TEAM(team){
     if( (**team).NbAliveCharacter() > 0 )
       nbr++;
   }
- 
+
   return nbr;
 }
 
@@ -118,12 +118,12 @@ int Game::AskQuestion (bool draw)
   Time * global_time = Time::GetInstance();
   global_time->Pause();
 
-  if (draw) 
+  if (draw)
     GameLoop::GetInstance()->Draw ();
 
   int answer = question.AskQuestion ();
 
-  global_time->Continue(); 
+  global_time->Continue();
   return answer;
 }
 
@@ -141,17 +141,17 @@ void Game::Start()
     {
       isGameLaunched = true;
       GameLoop::GetInstance()->fps.Reset();
-      
+
       GameLoop::GetInstance()->Run();
-     
-      MSG_DEBUG( "game", "End of game_loop.Run()" ); 
+
+      MSG_DEBUG( "game", "End of game_loop.Run()" );
       isGameLaunched = false;
-      
-      if (!IsGameFinished()) 
+
+      if (!IsGameFinished())
       {
         const char *msg = _("Do you really want to quit? (Y/N)");
         question.Set (msg, true, 0, "interface/quit_screen");
-	
+
         {
           /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
           /* Let's find out what the user would like to press ... */
@@ -164,9 +164,9 @@ void Game::Start()
           if (!isalpha(key_x)) /* sanity check */
             abort();
 
-          question.choices.push_back ( Question::choix_t(SDLK_a + (int)key_x - 'a', 1) );
+          question.add_choice(SDLK_a + (int)key_x - 'a', 1);
         }
-	
+
         jukebox.Pause();
         end = (AskQuestion() == 1);
         jukebox.Resume();
@@ -184,7 +184,7 @@ void Game::Start()
   }
 
   if (!err)
-    if (IsGameFinished()) 
+    if (IsGameFinished())
       MessageEndOfGame();
 
   UnloadDatas();
