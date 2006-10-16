@@ -122,6 +122,16 @@ void TeamSelection::Update(const Point2i &mousePosition,
   need_redrawing = false;
 }
 
+Widget* TeamSelection::Clic (const Point2i &mousePosition, uint button)
+{
+  Widget* w = WidgetList::Clic(mousePosition, button);
+  
+  if ( w != nb_characters && w != player_name ) 
+    return NULL;
+
+  return w;
+}
+
 // ################################################
 // ##  GAME MENU CLASS
 // ################################################
@@ -362,7 +372,8 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
 
   } else {
     for (uint i=0; i<MAX_NB_TEAMS ; i++) {
-      if ( teams_selections[i]->Contains(mousePosition)) {
+      if ( teams_selections[i]->Contains(mousePosition) &&
+	   teams_selections[i]->Clic(mousePosition, button) == NULL ) {
 	NextTeam(i);
 	break;
       }
@@ -444,27 +455,27 @@ void GameMenu::ChangeMap(int delta_index)
 
   selected_map_index = tmp;
 
-  map_preview_selected->SetSurface(MapsList::GetInstance()->lst[selected_map_index].preview, true);
-  map_name_label->SetText(MapsList::GetInstance()->lst[selected_map_index].name);
-  map_author_label->SetText(MapsList::GetInstance()->lst[selected_map_index].author_info);
+  map_preview_selected->SetSurface(MapsList::GetInstance()->lst[selected_map_index].ReadPreview(), true);
+  map_name_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadName());
+  map_author_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadAuthorInfo());
 
   if (selected_map_index > 0)
-    map_preview_before->SetSurface(MapsList::GetInstance()->lst[selected_map_index-1].preview, true);
+    map_preview_before->SetSurface(MapsList::GetInstance()->lst[selected_map_index-1].ReadPreview(), true);
   else
     map_preview_before->SetNoSurface();
 
   if (selected_map_index > 1)
-    map_preview_before2->SetSurface(MapsList::GetInstance()->lst[selected_map_index-2].preview, true);
+    map_preview_before2->SetSurface(MapsList::GetInstance()->lst[selected_map_index-2].ReadPreview(), true);
   else
     map_preview_before2->SetNoSurface();
 
   if (selected_map_index+1 < MapsList::GetInstance()->lst.size() )
-    map_preview_after->SetSurface(MapsList::GetInstance()->lst[selected_map_index+1].preview, true);
+    map_preview_after->SetSurface(MapsList::GetInstance()->lst[selected_map_index+1].ReadPreview(), true);
   else
     map_preview_after->SetNoSurface();
 
   if (selected_map_index+2 < MapsList::GetInstance()->lst.size() )
-    map_preview_after2->SetSurface(MapsList::GetInstance()->lst[selected_map_index+2].preview, true);
+    map_preview_after2->SetSurface(MapsList::GetInstance()->lst[selected_map_index+2].ReadPreview(), true);
   else
     map_preview_after2->SetNoSurface();
 }
