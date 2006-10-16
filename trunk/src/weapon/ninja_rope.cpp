@@ -36,7 +36,7 @@
 
 const int DT_MVT  = 15 ; //delta_t bitween 2 up/down/left/right mvt
 const int DST_MIN = 6 ;  //dst_minimal bitween 2 nodes
-const uint MAX_ROPE_LEN = 700 ; // Max rope length in pixels
+const uint MAX_ROPE_LEN = 450 ; // Max rope length in pixels
 const uint ROPE_DRAW_SPEED = 12 ; // Pixel per 1/100 second.
 const int ROPE_PUSH_FORCE = 10;
 
