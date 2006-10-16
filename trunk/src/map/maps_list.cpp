@@ -33,7 +33,7 @@
 
 InfoMap::InfoMap ()
 {
-  m_donnees_chargees = false;
+  is_data_loaded = false;
   nb_mine = 0;
   nb_barrel = 0;
   wind.nb_sprite = 0;
@@ -41,14 +41,14 @@ InfoMap::InfoMap ()
 }
 
 bool InfoMap::Init (const std::string &map_name,
-			            const std::string &directory)
+		    const std::string &directory)
 {
   std::string nomfich;
 
   m_directory = directory;
 
   res_profile = NULL;
-  m_donnees_chargees = false;
+  is_data_loaded = false;
 
   try
   {
@@ -134,36 +134,37 @@ bool InfoMap::TraiteXml (xmlpp::Element *xml)
   return true;
 }
 
-void InfoMap::LoadData(){
-  if (m_donnees_chargees)
+void InfoMap::LoadData()
+{
+  if (is_data_loaded)
     return;
-  m_donnees_chargees = true;
+  is_data_loaded = true;
 
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
-  img_terrain = resource_manager.LoadImage(res_profile, "map");
-  img_ciel = resource_manager.LoadImage(res_profile,"sky");
+  img_ground = resource_manager.LoadImage(res_profile, "map");
+  img_sky = resource_manager.LoadImage(res_profile,"sky");
 }
 
-void InfoMap::FreeData(){
-  img_ciel.Free();
-  img_terrain.Free();
-  m_donnees_chargees = false;
+void InfoMap::FreeData()
+{
+  img_sky.Free();
+  img_ground.Free();
+  is_data_loaded = false;
 }
 
-Surface InfoMap::ReadImgGround(){
+Surface InfoMap::ReadImgGround()
+{
   LoadData();
-  return img_terrain;
+  return img_ground;
 }
 
-Surface InfoMap::ReadImgSky(){
+Surface InfoMap::ReadImgSky()
+{
   LoadData();
-  return img_ciel;
+  return img_sky;
 }
 
-bool InfoMap::DonneesChargees() const{
-   return m_donnees_chargees;
-}
 
 
 MapsList* MapsList::singleton = NULL;
@@ -262,7 +263,7 @@ int MapsList::FindMapById (const std::string &id)
     fin_terrain=lst.end();
   uint i=0;
   for (; i < lst.size(); ++i)
-    if (lst[i].name == id)
+    if (lst[i].ReadName() == id)
       return i;
   return -1;
 }
@@ -305,6 +306,6 @@ InfoMap& ActiveMap()
 
 bool compareMaps(const InfoMap& a, const InfoMap& b)
 {
-  return a.name < b.name;
+  return a.ReadName() < b.ReadName();
 }
 

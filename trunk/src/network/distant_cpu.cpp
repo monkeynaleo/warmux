@@ -43,7 +43,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
   // what teams / maps have alreayd been selected
   if( network.IsServer() )
   {
-    Action a(ACTION_SET_MAP, ActiveMap().name);
+    Action a(ACTION_SET_MAP, ActiveMap().ReadName());
     int size;
     char* pack;
     a.WritePacket(pack, size);

@@ -48,6 +48,7 @@ class TeamSelection : public HBox
   void Update(const Point2i &mousePosition,
 	      const Point2i &lastMousePosition,
 	      Surface& surf);
+  Widget* Clic(const Point2i &mousePosition, uint button);
 };
 
 class GameMenu : public Menu

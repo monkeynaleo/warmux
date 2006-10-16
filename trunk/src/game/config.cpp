@@ -270,7 +270,7 @@ bool Config::SauveXml()
   doc.EcritBalise (racine, "version", Constants::VERSION);
 
   //=== Map ===
-  doc.EcritBalise (racine, "map", MapsList::GetInstance()->ActiveMap().name);
+  doc.EcritBalise (racine, "map", MapsList::GetInstance()->ActiveMap().ReadName());
 
   //=== Teams ===
   xmlpp::Element *balise_equipes = racine -> add_child("teams");

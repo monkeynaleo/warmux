@@ -139,7 +139,7 @@ NetworkMenu::NetworkMenu() :
     terrain=MapsList::GetInstance()->lst.begin(),
     fin_terrain=MapsList::GetInstance()->lst.end();
   for (; terrain != fin_terrain; ++terrain)
-    lbox_maps->AddItem (false, terrain -> name, terrain -> name);
+    lbox_maps->AddItem (false, terrain -> ReadName(), terrain -> ReadName());
   lbox_maps->Select(0);
 
   // Load Teams' list
@@ -175,7 +175,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     if(network.IsServer())
     {
       ChangeMap();
-      action_handler->NewAction (new Action(ACTION_SET_MAP, ActiveMap().name));
+      action_handler->NewAction (new Action(ACTION_SET_MAP, ActiveMap().ReadName()));
     }
     else
       msg_box->NewMessage(_("Only the server can set the map!"));
@@ -304,7 +304,7 @@ void NetworkMenu::ChangeMap()
   uint map_index = MapsList::GetInstance()->FindMapById(map_id);
   MapsList::GetInstance()->SelectMapByIndex(map_index);
 
-  map_preview->SetSurface(MapsList::GetInstance()->lst[map_index].preview, false);
+  map_preview->SetSurface(MapsList::GetInstance()->lst[map_index].ReadPreview(), false);
 }
 
 void NetworkMenu::SelectTeamLogo(Team * t)
@@ -424,5 +424,5 @@ void NetworkMenu::AddTeamCallback(std::string team)
 void NetworkMenu::ChangeMapCallback()
 {
   // Called from the action handler
-  map_preview->SetSurface(ActiveMap().preview, false);
+  map_preview->SetSurface(ActiveMap().ReadPreview(), false);
 }

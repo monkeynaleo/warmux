@@ -30,11 +30,26 @@
 #include "../tool/xml_document.h"
 
 class InfoMap{
-public:
+
+private:
   std::string name;
-  Surface preview;
-  Surface img_terrain, img_ciel;
   std::string author_info;
+  Surface img_ground, img_sky;
+  Surface preview;
+
+  uint nb_mine;
+  uint nb_barrel;
+
+  bool is_opened;
+  bool use_water;
+  bool is_data_loaded;
+
+  Profile *res_profile;
+
+  bool TraiteXml (xmlpp::Element *xml);
+  void LoadData();
+
+public:
   std::string m_directory;
   struct s_wind
   {
@@ -43,31 +58,25 @@ public:
     bool need_flip; //do we need to flip the sprite when it changes direction?
   } wind;
 
-private:
-  uint nb_mine;
-  uint nb_barrel;
-
-  bool is_opened;
-  bool use_water;
-  bool m_donnees_chargees;
-
-  Profile *res_profile;
-
-  bool TraiteXml (xmlpp::Element *xml);
-  void LoadData();
-
 public:
+  InfoMap ();
+  bool Init(const std::string &nom, const std::string &repertoire);
+  void FreeData();
+
+  const std::string& ReadName() const { return name; }
+  const std::string& ReadAuthorInfo() const { return author_info; }
+
+  Surface ReadImgGround();
+  Surface ReadImgSky();
+  const Surface& ReadPreview() const { return preview; }
+
   uint GetNbBarrel() const { return nb_barrel; }
   uint GetNbMine() const { return nb_mine; }
   const Profile * const ResProfile() const { return res_profile; }
+
   bool IsOpened() const { return is_opened; }
   bool UseWater() const { return use_water; }
-  InfoMap ();
-  Surface ReadImgGround();
-  Surface ReadImgSky();
-  bool Init(const std::string &nom, const std::string &repertoire);
-  bool DonneesChargees() const;
-  void FreeData();
+
 };
 
 
