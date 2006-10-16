@@ -48,7 +48,6 @@ private:
   uint nb_barrel;
 
   bool is_opened;
-  bool infinite_bg;
   bool use_water;
   bool m_donnees_chargees;
 
@@ -62,7 +61,6 @@ public:
   uint GetNbMine() const { return nb_mine; }
   const Profile * const ResProfile() const { return res_profile; }
   bool IsOpened() const { return is_opened; }
-  bool HasInfiniteBackGround() const { return infinite_bg; }
   bool UseWater() const { return use_water; }
   InfoMap ();
   Surface ReadImgGround();

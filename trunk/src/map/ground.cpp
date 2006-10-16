@@ -64,10 +64,6 @@ void Ground::Reset(){
 // Lit la valeur alpha du pixel (x,y)
 bool Ground::IsEmpty(const Point2i &pos){
 	assert( !world.EstHorsMondeXY(pos.x, pos.y) );
-	if( ActiveMap().HasInfiniteBackGround()){
-		if( !Contains(pos) )
-			return true;
-	}
 
 	// Lit le monde
 	return GetAlpha( pos ) != 255; // IsTransparent
