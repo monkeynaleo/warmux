@@ -43,7 +43,7 @@
     <anvil>
       <position origin="hand" x="0" y="-5" />
       <hole dx="16" dy="1" />
-      <nb_ammo>1</nb_ammo>
+      <nb_ammo>0</nb_ammo>
       <damage>200</damage>
       <mass>1000</mass>
       <speed>0</speed>
