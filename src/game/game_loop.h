@@ -68,8 +68,8 @@ public:
   // Signal death of a player
   void SignalCharacterDeath (Character *character);
 
-  // Signal fall of a player
-  void SignalCharacterDamageFalling (Character *character);
+  // Signal character damage
+  void SignalCharacterDamage(Character *character);
 
 private:
   GameLoop();

@@ -697,10 +697,10 @@ void GameLoop::SignalCharacterDeath (Character *character)
   if (character == &ActiveCharacter()) SetState (END_TURN);
 }
 
-// Signal falling (with damage) of a character
-void GameLoop::SignalCharacterDamageFalling (Character *character)
+// Signal falling or any king of damage of a character
+void GameLoop::SignalCharacterDamage(Character *character)
 {
-  if (character == &ActiveCharacter())
+  if (character->IsActiveCharacter())
     {
       SetState (END_TURN);
     }
