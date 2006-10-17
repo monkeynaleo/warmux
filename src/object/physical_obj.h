@@ -113,9 +113,6 @@ public:
   // Update position (and state) with current time
   void UpdatePosition();
 
-  // Stop moving : signal it if the object was falling
-  void StopMoving ();
-
   // Move the character until he gets out of the ground
   bool PutOutOfGround();
   bool PutOutOfGround(double direction); //Where direction is the angle of the direction

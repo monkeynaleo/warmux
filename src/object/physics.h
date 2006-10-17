@@ -135,7 +135,7 @@ public:
   void StartMoving();
 
   // Stop moving
-  virtual void StopMoving();
+  void StopMoving();
 
   // The object is moving ?
   bool IsMoving() const;

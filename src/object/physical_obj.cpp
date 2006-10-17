@@ -416,13 +416,6 @@ void PhysicalObj::UpdatePosition ()
 
 }
 
-void PhysicalObj::StopMoving()
-{
-  if (FootsInVacuum()) return;
-  if (IsMoving()) MSG_DEBUG ("physic.physic", "End of a movement...");
-  Physics::StopMoving();
-}
-
 bool PhysicalObj::PutOutOfGround(double direction)
 {
   const int max_step = 30;
