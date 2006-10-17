@@ -40,14 +40,14 @@
       <blast_force>2500</blast_force>
     </air_attack>
 
-    <anvil>
+    <anvil_launcher>
       <position origin="hand" x="0" y="-5" />
       <hole dx="16" dy="1" />
-      <nb_ammo>0</nb_ammo>
+      <nb_ammo>1</nb_ammo>
       <damage>200</damage>
       <mass>1000</mass>
       <speed>0</speed>
-    </anvil>
+    </anvil_launcher>
     
     <airhammer>
       <position origin="hand" x="0" y="0" />
