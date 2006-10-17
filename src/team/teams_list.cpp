@@ -37,6 +37,7 @@
 //-----------------------------------------------------------------------------
 TeamsList teams_list;
 //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 TeamsList::TeamsList()
 {}
@@ -49,13 +50,13 @@ TeamsList::~TeamsList()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::NextTeam (bool debut_jeu)
+void TeamsList::NextTeam (bool begin_game)
 {
   // Fin du tour pour l'�uipe active
-  if (debut_jeu) return;
+  if (begin_game) return;
    
   // Passe �l'�uipe suivante
-  std::vector<Team*>::iterator it=m_equipe_active;
+  std::vector<Team*>::iterator it=active_team;
   do
     {
       ++it;
@@ -68,8 +69,8 @@ void TeamsList::NextTeam (bool debut_jeu)
 
 Team& TeamsList::ActiveTeam()
 {
-  assert (m_equipe_active != playing_list.end());
-  return **m_equipe_active;
+  assert (active_team != playing_list.end());
+  return **active_team;
 }
 
 //-----------------------------------------------------------------------------
@@ -146,11 +147,11 @@ void TeamsList::LoadList()
 
   teams_list.full_list.sort(compareTeams);
 
-  // On a au moins deux �uipes ?
+  // We need at least 2 teams
   if (full_list.size() < 2)
     Error(_("You need at least two valid teams !"));
 
-  // S�ection bidon
+  // Default selection
   std::list<uint> nv_selection;
   nv_selection.push_back (0);
   nv_selection.push_back (1);
@@ -163,7 +164,7 @@ void TeamsList::LoadList()
 
 void TeamsList::LoadGamingData(uint how_many_characters)
 {
-  m_equipe_active = playing_list.begin();
+  active_team = playing_list.begin();
 
   iterator it=playing_list.begin(), end=playing_list.end();
 
@@ -244,7 +245,7 @@ void TeamsList::InitList (const std::list<std::string> &liste_nom)
   Clear();
   std::list<std::string>::const_iterator it=liste_nom.begin(), fin=liste_nom.end();
   for (; it != fin; ++it) AddTeam (*it, false);
-  m_equipe_active = playing_list.begin();
+  active_team = playing_list.begin();
 }
 
 //-----------------------------------------------------------------------------
@@ -413,7 +414,7 @@ void TeamsList::ChangeSelection (const std::list<uint>& nv_selection)
   selection_iterator it=selection.begin(), fin=selection.end();
   playing_list.clear();
   for (; it != fin; ++it) playing_list.push_back (FindByIndex(*it));
-  m_equipe_active = playing_list.begin();
+  active_team = playing_list.begin();
 }
 
 //-----------------------------------------------------------------------------
@@ -434,19 +435,19 @@ void TeamsList::Clear()
 
 void TeamsList::AddTeam (const std::string &id, bool generate_error)
 {
-    int pos;
-    Team *equipe = FindById (id, pos);
-    if (equipe != NULL) {
-      selection.push_back (pos);
-      playing_list.push_back (equipe);
-    } else {
-		std::string msg = Format(_("Can't find team %s!"), id.c_str());
-		if (generate_error)
-		  Error (msg);
-		else
-		  std::cout << "! " << msg << std::endl;
-    }
-	m_equipe_active = playing_list.begin();
+  int pos;
+  Team *equipe = FindById (id, pos);
+  if (equipe != NULL) {
+    selection.push_back (pos);
+    playing_list.push_back (equipe);
+  } else {
+    std::string msg = Format(_("Can't find team %s!"), id.c_str());
+    if (generate_error)
+      Error (msg);
+    else
+      std::cout << "! " << msg << std::endl;
+  }
+  active_team = playing_list.begin();
 }
   
 //-----------------------------------------------------------------------------
@@ -460,7 +461,7 @@ void TeamsList::DelTeam (const std::string &id)
     selection.erase(find(selection.begin(),selection.end(),(uint)pos));
     playing_list.erase(find(playing_list.begin(),playing_list.end(),equipe));
 
-   m_equipe_active = playing_list.begin();
+   active_team = playing_list.begin();
 }
   
 //-----------------------------------------------------------------------------
@@ -475,7 +476,7 @@ void TeamsList::SetActive(const std::string &id)
 		Team &team = **it;
 		if (team.GetId() == id)
 		{
-			m_equipe_active = it;
+			active_team = it;
 			return;
 		}
 	}

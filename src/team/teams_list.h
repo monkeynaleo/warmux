@@ -19,8 +19,8 @@
  * Refresh des diff�entes �uipes.
  *****************************************************************************/
 
-#ifndef GESTION_EQUIPE_H
-#define GESTION_EQUIPE_H
+#ifndef TEAMS_LIST_H
+#define TEAMS_LIST_H
 //-----------------------------------------------------------------------------
 #include "team.h"
 #include <list>
@@ -37,14 +37,14 @@ public:
 private:
   typedef std::list<uint>::iterator selection_iterator;
   std::list<uint> selection;
-  std::vector<Team*>::iterator m_equipe_active;
+  std::vector<Team*>::iterator active_team;
   void LoadOneTeam (const std::string &dir, const std::string &file);
 
 public:
   TeamsList();
   ~TeamsList();
   void LoadList ();
-  void NextTeam (bool debut_jeu);
+  void NextTeam (bool begin_game);
   Team& ActiveTeam();
   void LoadGamingData(uint how_many_characters);
   void UnloadGamingData();

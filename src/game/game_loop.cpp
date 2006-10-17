@@ -160,7 +160,7 @@ void GameLoop::InitData_Local()
   world.Reset();
   MapsList::GetInstance()->ActiveMap().FreeData();
   lst_objects.PlaceBarrels();
-  teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
+  teams_list.LoadGamingData(0);
 
   std::cout << "o " << _("Initialise objects") << std::endl;
   lst_objects.PlaceMines();
