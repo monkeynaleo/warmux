@@ -75,7 +75,7 @@ void Parachute::Refresh()
 
   ActiveCharacter().GetSpeed(speed, angle);
 
-  if (ActiveCharacter().FootsInVacuum())
+  if (ActiveCharacter().FootsInVacuum() && speed != 0.0)
     {
       if (!open && (speed > GameMode::GetInstance()->safe_fall))
 	{
