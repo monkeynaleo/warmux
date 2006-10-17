@@ -30,7 +30,7 @@ class Team;
 
 const uint MAX_NB_TEAMS=4;
 
-class TeamSelection : public HBox
+class TeamBox : public HBox
 {
  private:
   Team * associated_team;
@@ -40,7 +40,7 @@ class TeamSelection : public HBox
   SpinButton * nb_characters;
 
  public:
-  TeamSelection(uint width);
+  TeamBox(uint width);
   void SetTeam(Team& _team);
   void ClearTeam();
   Team* GetTeam() const;  
@@ -54,7 +54,7 @@ class TeamSelection : public HBox
 class GameMenu : public Menu
 {
    /* Team controllers */
-   TeamSelection* teams_selections[MAX_NB_TEAMS];
+   TeamBox* teams_selections[MAX_NB_TEAMS];
    SpinButtonBig *teams_nb;
 
    /* Map controllers */

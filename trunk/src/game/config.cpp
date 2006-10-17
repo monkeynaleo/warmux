@@ -124,7 +124,7 @@ bool Config::ChargeVraiment()
   return true;
 }
 
-// Read data for a team
+// Read personal config file
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
   xmlpp::Element *elem;
@@ -132,7 +132,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   //=== Map ===
   LitDocXml::LitString  (xml, "map", tmp.map_name);
 
-  //=== Equipes ===
+  //=== Teams ===
   elem = LitDocXml::AccesBalise (xml, "teams");
   if (elem != NULL)
   {

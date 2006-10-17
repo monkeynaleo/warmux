@@ -58,10 +58,12 @@ private:
   std::string m_teams_dir; // parent directory hosting the data
   std::string m_id;
   std::string m_name;
+  std::string m_player_name;
   std::string m_sound_profile;
   std::list<Character> characters;
   iterator active_character;
   Weapon *active_weapon;
+  uint nb_characters;
 
   Team (const std::string& _teams_dir,
 	const std::string& _id,
@@ -73,10 +75,14 @@ private:
 public:
   static Team* CreateTeam (const std::string &teams_dir, const std::string &id);
 
-  void LoadGamingData(uint how_many_characters);
+  void LoadGamingData(uint howmany);
   void UnloadGamingData();
 
   bool IsSameAs(const Team& other) const;
+
+  // Manage number of characters
+  void SetNbCharacters(uint howmany);
+  uint GetNbCharacters() const { return nb_characters; }
 
   // Switch to next worm.
   void NextCharacter();
@@ -111,10 +117,13 @@ public:
   // Access to data.
   const std::string& GetName() const { return m_name; }
   const std::string& GetId() const { return m_id; }
+  const std::string& GetPlayerName() const { return m_player_name; }
   const std::string& GetSoundProfile() const { return m_sound_profile; }
   iterator begin();
   iterator end();
   Character* FindByIndex(uint index);
+
+  void SetPlayerName(const std::string& player_name);
 
   // Number of ammo for the current selected weapon.
   // (return INFINITE_AMMO is ammo are unlimited !)

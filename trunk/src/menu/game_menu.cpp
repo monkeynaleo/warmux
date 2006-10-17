@@ -48,7 +48,7 @@ const uint TPS_TOUR_MAX = 120;
 const uint TPS_FIN_TOUR_MIN = 1;
 const uint TPS_FIN_TOUR_MAX = 10;
 
-TeamSelection::TeamSelection(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), false)
+TeamBox::TeamBox(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), false)
 {
   associated_team=NULL;
 
@@ -81,7 +81,7 @@ TeamSelection::TeamSelection(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BO
   AddWidget(tmp_box);
 }
 
-void TeamSelection::SetTeam(Team& _team)
+void TeamBox::SetTeam(Team& _team)
 {
   associated_team=&_team;
   
@@ -92,19 +92,19 @@ void TeamSelection::SetTeam(Team& _team)
   ForceRedraw();
 }
 
-void TeamSelection::ClearTeam()
+void TeamBox::ClearTeam()
 {
   associated_team=NULL;
 
   ForceRedraw();
 }
 
-Team* TeamSelection::GetTeam() const
+Team* TeamBox::GetTeam() const
 {
   return associated_team;
 }
 
-void TeamSelection::Update(const Point2i &mousePosition,
+void TeamBox::Update(const Point2i &mousePosition,
 			   const Point2i &lastMousePosition,
 			   Surface& surf)
 {
@@ -122,14 +122,24 @@ void TeamSelection::Update(const Point2i &mousePosition,
   need_redrawing = false;
 }
 
-Widget* TeamSelection::Clic (const Point2i &mousePosition, uint button)
+Widget* TeamBox::Clic (const Point2i &mousePosition, uint button)
 {
-  Widget* w = WidgetList::Clic(mousePosition, button);
-  
-  if ( w != nb_characters && w != player_name ) 
-    return NULL;
+  if (associated_team != NULL) {
 
-  return w;
+    Widget* w = WidgetList::Clic(mousePosition, button);
+    
+    // Set the number of characters for the team :)
+    if ( w == nb_characters ) {
+      associated_team->SetNbCharacters(uint(nb_characters->GetValue()));
+    } else if  ( w == nb_characters ) {
+      // we should manage player name here
+    } else {
+      return NULL;
+    }
+
+    return w;
+  }
+  return NULL;
 }
 
 // ################################################
@@ -176,7 +186,7 @@ GameMenu::GameMenu() :
   uint team_w_size= top_n_bottom_team_options->GetSizeX() * 2 / MAX_NB_TEAMS;
 
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
-    teams_selections[i] = new TeamSelection(team_w_size);
+    teams_selections[i] = new TeamBox(team_w_size);
     if ( i%2 == 0)
       top_team_options->AddWidget(teams_selections[i]);
     else

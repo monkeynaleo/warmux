@@ -56,7 +56,10 @@ Team::Team(const std::string& _teams_dir,
   m_id = _id;
   m_name = _name;
   m_sound_profile = _sound_profile;
+  m_player_name = "";
 
+  nb_characters = GameMode::GetInstance()->max_characters;
+  
   flag = _flag;
 }
 
@@ -351,7 +354,7 @@ Character* Team::FindByIndex(uint index)
   return &(*it);
 }
 
-void Team::LoadGamingData(uint how_many_characters)
+void Team::LoadGamingData(uint howmany)
 {
   // Reset ammos
   m_nb_ammos.clear();
@@ -373,7 +376,10 @@ void Team::LoadGamingData(uint how_many_characters)
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
   is_camera_saved = false;
 
-  LoadCharacters(how_many_characters);
+  if (howmany == 0)
+    LoadCharacters(nb_characters);
+  else
+    LoadCharacters(howmany);
 
   crosshair.Reset();
 }
@@ -382,6 +388,17 @@ void Team::UnloadGamingData()
 {
   // Clear list of characters
   characters.clear();
+}
+
+void Team::SetNbCharacters(uint howmany)
+{
+  assert(howmany >= 2 && howmany <= 10);
+  nb_characters = howmany;
+}
+
+void Team::SetPlayerName(const std::string& _player_name)
+{
+  m_player_name = _player_name;
 }
 
 void Team::DrawEnergy()
