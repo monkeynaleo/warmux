@@ -284,22 +284,12 @@ void Team::SetWeapon (Weapon_type type)
 
 int Team::ReadNbAmmos() const
 {
-  // Read in the Map
-  // The same method as in AccesNbAmmos can't be use on const team !
-  std::map<std::string, int>::const_iterator it
-    = m_nb_ammos.find( active_weapon->GetName() ) ;
-
-  if (it != m_nb_ammos.end())  return ( it->second ) ;
-  return 0 ;
+  return ReadNbAmmos(active_weapon->GetName());
 }
 
 int Team::ReadNbUnits() const
 {
-  std::map<std::string, int>::const_iterator it
-    = m_nb_units.find( active_weapon->GetName() ) ;
-
-  if (it !=  m_nb_units.end())  return ( it->second ) ;
-  return 0 ;
+  return ReadNbUnits( active_weapon->GetName());
 }
 
 int Team::ReadNbAmmos(const std::string &weapon_name) const
@@ -307,21 +297,25 @@ int Team::ReadNbAmmos(const std::string &weapon_name) const
   // Read in the Map
   // The same method as in AccesNbAmmos can't be use on const team !
   std::map<std::string, int>::const_iterator it =
-    m_nb_ammos.find( weapon_name );
+      m_nb_ammos.find( weapon_name );
 
   if (it !=  m_nb_ammos.end()) return ( it->second ) ;
+  // We should not be here !
+  MSG_DEBUG("team", "%s : not found into the ammo map.", weapon_name.c_str());
+  assert(false);
   return 0 ;
-
 }
 
 int Team::ReadNbUnits(const std::string &weapon_name) const
 {
   std::map<std::string, int>::const_iterator it =
-    m_nb_units.find( weapon_name );
+      m_nb_units.find( weapon_name );
 
   if (it !=  m_nb_units.end()) return ( it->second ) ;
+  // We should not be here !
+  MSG_DEBUG("team", "%s : not found into the ammo map.", weapon_name.c_str());
+  assert(false);
   return 0 ;
-
 }
 
 int& Team::AccessNbAmmos()
