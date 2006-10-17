@@ -122,6 +122,7 @@ public:
   int ReadNbAmmos(const std::string &weapon_name) const;
   int& AccessNbAmmos();
 
+
   // Number of current unit per ammo for the selected weapon.
   int ReadNbUnits() const;
   int ReadNbUnits(const std::string &weapon_name) const;
