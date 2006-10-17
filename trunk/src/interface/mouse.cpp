@@ -35,11 +35,11 @@
 #include "../tool/point.h"
 #include "../weapon/weapon.h"
 
-// Vitesse du definalement �la souris
+// mouse scroll speed
 const uint SCROLL_MOUSE = 20;
 
-// Largeur de la zone de sensibilite au camera a la souris
-const uint SENSIT_SCROLL_MOUSE = 40; // pixels
+// size of the sensitive area use to scroll the map with mouse
+const uint SENSIT_SCROLL_MOUSE = 40;
 
 Mouse * Mouse::singleton = NULL;
 
@@ -187,20 +187,22 @@ void Mouse::ScrollCamera() {
   bool scroll = false;
 
   Point2i mousePos = GetPosition();
-  Point2i sensitZone(SENSIT_SCROLL_MOUSE, SENSIT_SCROLL_MOUSE);
   Point2i winSize = AppWormux::GetInstance()->video.window.GetSize();
   Point2i tstVector;
+  // If application is fullscreen, mouse is only sensitive when touching the border screen
+  int coef = (AppWormux::GetInstance()->video.IsFullScreen() ? 10 : 1);
+  Point2i sensitZone(SENSIT_SCROLL_MOUSE / coef, SENSIT_SCROLL_MOUSE / coef);
 
   tstVector = mousePos.inf(sensitZone);
   if( !tstVector.IsNull() ){
-    camera.SetXY( tstVector * (mousePos - sensitZone)/2 );
+    camera.SetXY( tstVector * (mousePos - (sensitZone * coef))/2 );
     camera.autorecadre = false;
     scroll = true;
   }
 
   tstVector = winSize.inf(mousePos + sensitZone);
   if( !tstVector.IsNull() ){
-    camera.SetXY( tstVector * (mousePos + sensitZone - winSize)/2 );
+    camera.SetXY( tstVector * (mousePos + (sensitZone * coef) - winSize)/2 );
     camera.autorecadre = false;
     scroll = true;
   }
@@ -209,19 +211,20 @@ void Mouse::ScrollCamera() {
 
 void Mouse::TestCamera(){
   Point2i mousePos = GetPosition();
-
-  //Move camera with mouse holding Ctrl key down
-  const bool demande_scroll = SDL_GetModState() & KMOD_CTRL;
+  int x,y;
+  //Move camera with mouse holding Ctrl key down or with middle button of mouse
+  const bool demande_scroll = SDL_GetModState() & KMOD_CTRL |
+                              SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE);
 
   if( demande_scroll ){
     if( scroll_actif ){
-	  Point2i offset = savedPos - mousePos;
+      Point2i offset = savedPos - mousePos;
       camera.SetXY(offset);
       camera.autorecadre = false;
     }else{
       scroll_actif = true;
     }
-	savedPos = mousePos;
+    savedPos = mousePos;
     return;
   }else{
     scroll_actif = false;
