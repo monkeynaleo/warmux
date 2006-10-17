@@ -14,7 +14,7 @@
 #define PACKAGE_TARNAME "wormux"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION ${VERSION}
+/*#define PACKAGE_VERSION ${VERSION}   -> already handled by -DPACKAGE_VERSION */
 
 /* Version number of package */
 #define VERSION ${VERSION}
