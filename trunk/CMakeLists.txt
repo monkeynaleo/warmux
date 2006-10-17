@@ -2,6 +2,16 @@
 PROJECT(Wormux)
 SET(VERSION "0.8.0")
 
+
+# Some aliases of cmake variables
+IF(BUILD)
+  SET(CMAKE_BUILD_TYPE ${BUILD})
+ENDIF(BUILD)
+IF(PREFIX)
+  SET(CMAKE_INSTALL_PREFIX ${PREFIX})
+ENDIF(PREFIX)
+
+
 # Set some global variables
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 SET(INSTALL_DATADIR ${CMAKE_INSTALL_PREFIX}/share/wormux)
