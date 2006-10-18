@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-10-18 01:43+0200\n"
 "PO-Revision-Date: 2006-06-19 09:27+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Turkish <tr@li.org>\n"
@@ -251,7 +252,7 @@ msgstr "Beyzbol"
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/weapon/blowtorch.cpp:14
+#: src/weapon/blowtorch.cpp:15
 msgid "Blowtorch"
 msgstr ""
 
@@ -282,7 +283,7 @@ msgstr "Takım dizini açılamadı (%s)!"
 msgid "Cluster Bomb"
 msgstr "Şarapnelli bomba"
 
-#: src/weapon/suicide.cpp:34
+#: src/weapon/suicide.cpp:35
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "İntihar"
@@ -707,7 +708,7 @@ msgstr "%s takımı sonuçları:\n"
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Işınlanma"
 
@@ -799,7 +800,7 @@ msgstr "Wormux çalıştırılıyor..."
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
-#: src/include/action_handler.cpp:384
+#: src/include/action_handler.cpp:385
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""

@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-10-18 01:43+0200\n"
 "PO-Revision-Date: 2006-06-16 11:41+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -275,7 +276,7 @@ msgstr "Bâtă de basebal"
 msgid "Bazooka"
 msgstr "Proiectil reactiv"
 
-#: src/weapon/blowtorch.cpp:14
+#: src/weapon/blowtorch.cpp:15
 msgid "Blowtorch"
 msgstr ""
 
@@ -306,7 +307,7 @@ msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
 msgid "Cluster Bomb"
 msgstr "Bombă cu schije"
 
-#: src/weapon/suicide.cpp:34
+#: src/weapon/suicide.cpp:35
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "Suicid"
@@ -734,7 +735,7 @@ msgstr "Rezultatele echipei %s:\n"
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Teleportare"
 
@@ -826,7 +827,7 @@ msgstr "Se lansează Wormux..."
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
-#: src/include/action_handler.cpp:384
+#: src/include/action_handler.cpp:385
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""

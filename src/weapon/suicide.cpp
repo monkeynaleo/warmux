@@ -22,6 +22,7 @@
 #include "suicide.h"
 #include <iostream>
 #include "explosion.h"
+#include "../character/body.h"
 #include "../game/game_loop.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"

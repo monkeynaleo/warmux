@@ -39,6 +39,7 @@
 #include "explosion_smoke.h"
 #include "fire.h"
 #include "ground_particles.h"
+#include "ill_bubble.h"
 #include "magic_star.h"
 #include "polecat_fart.h"
 #include "smoke.h"
@@ -144,6 +145,7 @@ void ParticleEngine::Init()
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
   particle_sprite[SMOKE_spr] = resource_manager.LoadSprite(res,"smoke");
   particle_sprite[EXPLOSION_SMOKE_spr] = resource_manager.LoadSprite(res,"smoke_explosion");
+  particle_sprite[ILL_BUBBLE_spr] = resource_manager.LoadSprite(res,"ill_bubble");
   particle_sprite[FIRE_spr]  = resource_manager.LoadSprite(res,"fire_particle");
   particle_sprite[FIRE_spr]->EnableRotationCache(32);
   particle_sprite[STAR_spr]  = resource_manager.LoadSprite(res,"star_particle");
@@ -184,6 +186,8 @@ void ParticleEngine::AddNow(const Point2i &position,
   for (uint i=0 ; i < nb_particles ; i++) {
     switch (type) {
       case particle_SMOKE : particle = new Smoke();
+                            break;
+      case particle_ILL_BUBBLE : particle = new IllBubble();
                             break;
       case particle_DARK_SMOKE : particle = new DarkSmoke();
                             break;

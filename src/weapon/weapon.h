@@ -35,7 +35,7 @@
 #include "../particles/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
-#include "../character/character.h"
+//#include "../character/character.h"
 class Character;
 
 // Infinite ammos constant
