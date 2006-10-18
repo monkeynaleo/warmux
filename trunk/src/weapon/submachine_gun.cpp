@@ -90,6 +90,12 @@ bool SubMachineGun::p_Shoot ()
   projectile = NULL;
   ReloadLauncher();
 
+  Point2i pos = ActiveCharacter().GetHandPosition();
+  double angle =  - M_PI_2 - ActiveCharacter().GetDirection()
+                * (float)(Time::GetInstance()->Read() % 100) * M_PI_4 / 100.0;
+  particle.AddNow(pos, 1, particle_BULLET, true, angle,
+  	                   5.0 + (Time::GetInstance()->Read() % 6));
+
   m_is_active = true;
   return true;
 }
