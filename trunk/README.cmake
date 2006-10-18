@@ -27,15 +27,32 @@ which defaults to /usr/local (see below how to change that).
 Further cmake options:
 ----------------------
 
-To specify another install prefix, just pass the following as a parameter for cmake:
-     -DCMAKE_INSTALL_PREFIX=/foo/bar
+To install wormux in another prefix, pass the following parameter to cmake:
+     -DPREFIX=/foo/bar
 (this corresponds to --prefix=/foo/bar with autotools-configure)
 
 To specify another build-type, pass the following parameter:
-     -DCMAKE_BUILD_TYPE=XXXXX
+     -DBUILD=XXXXX
 where XXXXX is one of the following:
-     None Debug Release RelWithDebInfo MinSizeRel
+     None (Default), Debug, Release, RelWithDebInfo, MinSizeRel
 
-To get a more verbose compile output, call make like this:
+To get a more verbose compilation output use:
      make VERBOSE=1
 
+
+Wormux development:
+-------------------
+
+If you add a new C++ sourcefile that needs to be compiled, you just have
+to add a line with the relative path in src/SourceFiles.cmake.
+If you create a new translation in the po subdirectory, you have to add
+it in po/CMakeLists.txt.
+
+
+Problems:
+---------
+
+On problems with CMake remove the CMakeCache.txt files and CMakeFiles/
+directories manually and call "cmake ." again.
+If there are still problems, contact the Wormux Development Team by
+email to <wormux-dev@gna.org> or via IRC at #wormux in Freenode.
