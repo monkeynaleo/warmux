@@ -33,6 +33,7 @@
 #include "../map/map.h"
 
 #include "body_member.h"
+#include "teleport_member.h"
 #include "bullet.h"
 #include "dark_smoke.h"
 #include "explosion_smoke.h"

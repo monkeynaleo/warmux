@@ -122,6 +122,7 @@ public:
   bool IsWalking() { return walk_events > 0 && current_mvt->type == "walk";};
 
   void MakeParticles(const Point2i& pos);
+  void MakeTeleportParticles(const Point2i& pos, const Point2i& dst);
 };
 
 #endif //BODY_H
