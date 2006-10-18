@@ -19,19 +19,17 @@
  * Particle Engine
  *****************************************************************************/
 
-#ifndef EXPLOSION_SMOKE_H
-#define EXPLOSION_SMOKE_H
-#include "particle.h"
+#ifndef ILL_BUBBLE_H
+#define ILL_BUBBLE_H
+#include "explosion_smoke.h"
 
-class ExplosionSmoke : public Particle
+class IllBubble : public ExplosionSmoke
 {
-  float mvt_freq;
- protected:
-  uint m_initial_size, dx;
+  // Dephasage of the vibration
+  uint vib_phi;
  public:
-  ExplosionSmoke(const uint size_init);
-  void Refresh();
-  virtual void Draw();
+  IllBubble();
+  void Draw();
 };
 
 #endif

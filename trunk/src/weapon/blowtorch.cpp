@@ -5,6 +5,7 @@
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../character/move.h"
+#include "../character/body.h"
 #include "explosion.h"
 
 static const uint pause_time = 200;	// milliseconds

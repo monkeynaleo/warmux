@@ -24,18 +24,19 @@
 
 #include <string>
 #include <SDL.h>
-#include "body.h"
-#include "../team/team.h"
+//#include "body.h"
+//#include "../team/team.h"
 #include "../gui/progress_bar.h"
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
 #include "../include/base.h"
 #include "../object/physical_obj.h"
+#include "../particles/particle.h"
 
 class Body;
 class Team;
+class ParticleEngine;
 
-// Un ver de terre :-)
 class Character : public PhysicalObj
 {
 private:
@@ -71,6 +72,8 @@ private:
   // Channel used for sound
   int channel_step;
 
+  // Generates green bubbles when the character is ill
+  ParticleEngine bubble_engine;
 public:
 
   // Previous strength

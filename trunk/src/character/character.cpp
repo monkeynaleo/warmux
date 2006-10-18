@@ -78,7 +78,7 @@ const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
 Character::Character (Team& my_team, const std::string &name) :
-  PhysicalObj("character"), m_team(my_team)
+  PhysicalObj("character"), m_team(my_team), bubble_engine(500)
 {
   SetCollisionModel(false, true, true);
 
@@ -134,7 +134,9 @@ Character::Character (Team& my_team, const std::string &name) :
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
 
-Character::Character (const Character& acharacter) : PhysicalObj(acharacter), m_team(acharacter.m_team)
+Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
+                                                     m_team(acharacter.m_team),
+                                                     bubble_engine(250)
 {
   character_name       = acharacter.character_name;
   step_sound_played    = acharacter.step_sound_played;
@@ -665,6 +667,15 @@ void Character::Refresh()
 
   UpdatePosition ();
   Time * global_time = Time::GetInstance();
+
+  if(IsDiseased())
+  {
+    Point2i bubble_pos = GetPosition();
+    if(GetDirection() == -1)
+      bubble_pos.x += GetWidth();
+    bubble_engine.AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
+                              - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
+  }
 
   if( &ActiveCharacter() == this && GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
   {

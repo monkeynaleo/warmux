@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-10-18 01:43+0200\n"
 "PO-Revision-Date: 2006-06-16 11:35+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: eo <victor.stinner@haypocalc.com>\n"
@@ -255,7 +256,7 @@ msgstr "Bazopilkilo"
 msgid "Bazooka"
 msgstr "Bazuko"
 
-#: src/weapon/blowtorch.cpp:14
+#: src/weapon/blowtorch.cpp:15
 msgid "Blowtorch"
 msgstr ""
 
@@ -286,7 +287,7 @@ msgstr ""
 msgid "Cluster Bomb"
 msgstr ""
 
-#: src/weapon/suicide.cpp:34
+#: src/weapon/suicide.cpp:35
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "Mortigis sin"
@@ -737,7 +738,7 @@ msgstr ""
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Teleporto"
 
@@ -830,7 +831,7 @@ msgstr "Wormux muntas."
 msgid "Wormux version "
 msgstr "Wormux versio "
 
-#: src/include/action_handler.cpp:384
+#: src/include/action_handler.cpp:385
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""

@@ -21,6 +21,8 @@
 
 #include "action_handler.h"
 #include "action.h"
+#include "../character/body.h"
+#include "../character/move.h"
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
 #include "../game/game.h"
@@ -33,7 +35,6 @@
 #include "../network/randomsync.h"
 #include "../network/network.h"
 #include "../team/macro.h"
-#include "../character/move.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/vector2.h"

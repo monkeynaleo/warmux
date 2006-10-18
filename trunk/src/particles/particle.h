@@ -30,6 +30,7 @@
 typedef enum {
   particle_DARK_SMOKE,
   particle_SMOKE,
+  particle_ILL_BUBBLE,
   particle_FIRE,
   particle_STAR,
   particle_BULLET,
@@ -45,6 +46,7 @@ enum particle_spr
 {
   SMOKE_spr,
   EXPLOSION_SMOKE_spr,
+  ILL_BUBBLE_spr,
   FIRE_spr, STAR_spr,
   MAGIC_STAR_R_spr,
   MAGIC_STAR_Y_spr,
@@ -53,7 +55,7 @@ enum particle_spr
   BULLET_spr,
   POLECAT_FART_spr
 };
-const int particle_spr_nbr = 10;
+const int particle_spr_nbr = POLECAT_FART_spr + 1;
 
 class Particle : public PhysicalObj
 {

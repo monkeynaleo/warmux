@@ -29,6 +29,7 @@
 #include "../object/physical_obj.h"
 #include "../particles/particle.h"
 #include "../tool/point.h"
+#include "../tool/resource_manager.h"
 
 void ApplyExplosion (const Point2i &pos,
 		     const ExplosiveWeaponConfig &config,

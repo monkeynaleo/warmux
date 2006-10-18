@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-10-18 01:43+0200\n"
 "PO-Revision-Date: 2006-10-13 04:58+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosanski <lokal@linux.org.ba>\n"
@@ -254,7 +255,7 @@ msgstr "Palija"
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/weapon/blowtorch.cpp:14
+#: src/weapon/blowtorch.cpp:15
 msgid "Blowtorch"
 msgstr "Bacač plamena"
 
@@ -286,7 +287,7 @@ msgstr "Ne mogu otvorit timov direktorij  (%s)!"
 msgid "Cluster Bomb"
 msgstr "Kasetna Bomba"
 
-#: src/weapon/suicide.cpp:34
+#: src/weapon/suicide.cpp:35
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "Počini samoubistvo"
@@ -711,7 +712,7 @@ msgstr ""
 msgid "Teams"
 msgstr "Timovi"
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Teleport"
 
@@ -799,7 +800,7 @@ msgstr "Wormux se učitava..."
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
-#: src/include/action_handler.cpp:384
+#: src/include/action_handler.cpp:385
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""

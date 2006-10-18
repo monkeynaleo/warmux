@@ -1,3 +1,4 @@
+
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
  *  Copyright (C) 2001-2004 Lawrence Azzoug.
@@ -19,19 +20,35 @@
  * Particle Engine
  *****************************************************************************/
 
-#ifndef EXPLOSION_SMOKE_H
-#define EXPLOSION_SMOKE_H
-#include "particle.h"
+#include "ill_bubble.h"
+#include "explosion_smoke.h"
+#include "../game/time.h"
+#include "../tool/random.h"
 
-class ExplosionSmoke : public Particle
+// Vibration period of the bubble
+const uint vib_period = 250;
+
+IllBubble::IllBubble() : ExplosionSmoke(20)
 {
-  float mvt_freq;
- protected:
-  uint m_initial_size, dx;
- public:
-  ExplosionSmoke(const uint size_init);
-  void Refresh();
-  virtual void Draw();
-};
+  image = ParticleEngine::GetSprite(ILL_BUBBLE_spr);
+  SetAirResistFactor( GetAirResistFactor() * 3.0 );
+  vib_phi = randomObj.GetLong(0, vib_period);
+}
 
-#endif
+void IllBubble::Draw()
+{
+  if (m_left_time_to_live > m_initial_time_to_live - 3)
+    image->SetAlpha( (float)(m_initial_time_to_live - m_left_time_to_live) / 3.0 );
+  else
+    image->SetAlpha(1.0);
+
+  uint time = (Time::GetInstance()->Read() + vib_phi) % vib_period;
+  float scale_x, scale_y;
+  image->GetScaleFactors(scale_x, scale_y);
+  scale_x *= 1.0 + 0.2 * sin(2.0 * M_PI * time / (float)vib_period);
+  scale_y *= 1.0 + 0.2 * cos(2.0 * M_PI * time / (float)vib_period);
+  image->Scale(scale_x, scale_y);
+
+  if (m_left_time_to_live > 0)
+    image->Draw(GetPosition()+Point2i(dx,0) - image->GetSize() / 2);
+}

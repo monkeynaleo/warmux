@@ -89,6 +89,7 @@ particles/dark_smoke.cpp
 particles/explosion_smoke.cpp
 particles/fire.cpp
 particles/ground_particles.cpp
+particles/ill_bubble.cpp
 particles/magic_star.cpp
 particles/particle.cpp
 particles/polecat_fart.cpp

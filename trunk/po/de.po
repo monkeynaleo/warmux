@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-10-18 01:26+0200\n"
 "PO-Revision-Date: 2006-10-17 03:03+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
@@ -252,7 +253,7 @@ msgstr "Baseballschläger"
 msgid "Bazooka"
 msgstr "Panzerfaust"
 
-#: src/weapon/blowtorch.cpp:14
+#: src/weapon/blowtorch.cpp:15
 msgid "Blowtorch"
 msgstr "Schneidbrenner"
 
@@ -282,7 +283,7 @@ msgstr "Kann das Mannschaftenverzeichnis (%s) nicht öfnen!"
 msgid "Cluster Bomb"
 msgstr "Splittergranate"
 
-#: src/weapon/suicide.cpp:34
+#: src/weapon/suicide.cpp:35
 msgid "Commit Suicide"
 msgstr "Selbstmord begehen"
 
@@ -697,7 +698,7 @@ msgstr ""
 msgid "Teams"
 msgstr "Manschaften"
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Teleportation"
 
@@ -784,7 +785,7 @@ msgstr "Wormux startet..."
 msgid "Wormux version "
 msgstr "Wormux Version "
 
-#: src/include/action_handler.cpp:384
+#: src/include/action_handler.cpp:385
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
