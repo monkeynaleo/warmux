@@ -71,6 +71,7 @@ class WeaponProjectile : public PhysicalObj
     virtual void SignalOutOfMap();
     virtual void SignalTimeout();
     virtual void SignalExplosion();
+    void SignalDrowning();
     void SignalGhostState (bool was_dead);
 
     virtual void ShootSound();
@@ -101,6 +102,7 @@ class WeaponLauncher : public Weapon
     bool ignore_collision_signal;
     bool ignore_explosion_signal;
     bool ignore_ghost_state_signal;
+    bool ignore_drowning_signal;
   protected:
     WeaponProjectile * projectile;
     uint nb_active_projectile;
@@ -128,6 +130,7 @@ class WeaponLauncher : public Weapon
   // Handle of projectile events
     virtual void SignalProjectileExplosion();
     virtual void SignalProjectileCollision();
+    virtual void SignalProjectileDrowning();
     virtual void SignalProjectileGhostState();
     virtual void SignalProjectileTimeout();
 

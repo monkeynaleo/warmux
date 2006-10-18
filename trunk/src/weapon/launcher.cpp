@@ -203,6 +203,13 @@ void WeaponProjectile::SignalCollision()
   if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
 }
 
+// Default behavior : signal to launcher projectile is drowning
+void WeaponProjectile::SignalDrowning()
+{
+  PhysicalObj::SignalDrowning();
+  if (launcher != NULL && !launcher->ignore_drowning_signal) launcher->SignalProjectileDrowning();
+}
+
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
@@ -296,6 +303,7 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
   ignore_collision_signal = false;
   ignore_explosion_signal = false;
   ignore_ghost_state_signal = false;
+  ignore_drowning_signal = false;
 }
 
 WeaponLauncher::~WeaponLauncher()
@@ -352,6 +360,12 @@ void WeaponLauncher::SignalProjectileGhostState()
 
 // Signal a projectile timeout (for exemple: grenade, holly grenade ... etc.)
 void WeaponLauncher::SignalProjectileTimeout()
+{
+  m_is_active = false;
+}
+
+// Signal a projectile is drowning
+void WeaponLauncher::SignalProjectileDrowning()
 {
   m_is_active = false;
 }
