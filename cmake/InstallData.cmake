@@ -442,6 +442,7 @@ object/bonus_box.png
 object/smoke.png
 object/dark_smoke.png
 object/blue_star.png
+object/ill_bubble.png
 object/smoke2.png
 object/smoke3.png
 object/yellow_star.png
