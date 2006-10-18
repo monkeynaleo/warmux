@@ -35,7 +35,7 @@ ENDFOREACH(_src ${WORMUX_SRCS})
 ADD_CUSTOM_COMMAND(
   OUTPUT ${POT_FILE}
   COMMAND ${XGETTEXT_EXECUTABLE}
-  ARGS -o ${POT_FILE} -k'_' -s --directory=${CMAKE_SOURCE_DIR} --msgid-bugs-address=${BUGS_ADDRESS} --copyright-holder=${COPYRIGHT_HOLDER} ${_SOURCE_FILES}
+  ARGS -o ${POT_FILE} -k'_' -s --directory=${CMAKE_SOURCE_DIR} --omit-header --msgid-bugs-address=${BUGS_ADDRESS} --copyright-holder=${COPYRIGHT_HOLDER} ${_SOURCE_FILES}
   DEPENDS ${_POT_DEPS}
 )
 
