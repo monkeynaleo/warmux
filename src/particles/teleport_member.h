@@ -16,29 +16,26 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Teleportation.
+ * Particle Engine
  *****************************************************************************/
 
-#ifndef TELEPORTATION_H
-#define TELEPORTATION_H
-#include "weapon.h"
-#include "../include/base.h"
-#include "../tool/point.h"
+#ifndef TELEPORT_MEMBER_H
+#define TELEPORT_MEMBER_H
+#include "particle.h"
 
-class Teleportation : public Weapon
+const int teleportation_anim_duration = 1000;
+
+class TeleportMemberParticle : public Particle
 {
-  private:
-    bool target_chosen;
-    uint time;
-    Point2i src, dst;
-  protected:
-    bool p_Shoot();
-    void Refresh();
-  public:
-    Teleportation();
-    void Draw();
-    void ChooseTarget(Point2i mouse_pos);
-    WeaponConfig& cfg();
+  uint time;
+  Point2i destination;
+  Point2i start;
+  float sin_x_max;
+  float sin_y_max;
+ public:
+  TeleportMemberParticle(Sprite* spr, const Point2i& position, const Point2i& dest, int direction);
+  ~TeleportMemberParticle();
+  void Refresh();
 };
 
-#endif /* TELEPORTATION_H */
+#endif

@@ -37,6 +37,7 @@ typedef enum {
   particle_AIR_HAMMER,
   particle_MAGIC_STAR,
   particle_BODY_MEMBER,
+  particle_TELEPORT_MEMBER,
   particle_POLECAT_FART
 } particle_t;
 

@@ -31,6 +31,7 @@
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
 #include "../particles/body_member.h"
+#include "../particles/teleport_member.h"
 
 Body::Body(xmlpp::Element* xml, Profile* res)
 {
@@ -605,6 +606,20 @@ void Body::MakeParticles(const Point2i& pos)
   if(current_clothe->layers[layer]->type != "weapon")
     ParticleEngine::AddNow(new BodyMemberParticle(current_clothe->layers[layer]->spr,
                                                   current_clothe->layers[layer]->GetPos()+pos));
+}
+
+void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
+{
+  Build();
+
+  for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
+  if(current_clothe->layers[layer]->type != "weapon")
+  {
+    ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->layers[layer]->spr,
+                                                  current_clothe->layers[layer]->GetPos()+pos,
+                                                  current_clothe->layers[layer]->GetPos()+dst,
+                                                  direction));
+  }
 }
 
 void Body::SetRotation(int angle)

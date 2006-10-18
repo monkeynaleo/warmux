@@ -83,6 +83,7 @@ object/objects_list.cpp
 object/physical_obj.cpp
 object/physics.cpp
 particles/body_member.cpp
+particles/teleport_member.cpp
 particles/bullet.cpp
 particles/dark_smoke.cpp
 particles/explosion_smoke.cpp
