@@ -42,7 +42,7 @@
 #include "../weapon/launcher.h"
 
 const int Y_OBJET_MIN = -10000;
-const int WATER_RESIST_FACTOR = 100;
+const int WATER_RESIST_FACTOR = 40;
 
 const double PIXEL_PER_METER = 40;
 
@@ -499,7 +499,7 @@ void PhysicalObj::Drown()
 
   // Set the air grab to water resist factor.
   SetAirResistFactor(WATER_RESIST_FACTOR * GetAirResistFactor());
-
+  StopMoving();
   StartMoving();
   SignalDrowning();
 }
