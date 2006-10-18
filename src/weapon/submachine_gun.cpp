@@ -66,6 +66,7 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   ignore_collision_signal = true;
   ignore_explosion_signal = true;
   ignore_ghost_state_signal = true;
+  ignore_drowning_signal = true;
 
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
