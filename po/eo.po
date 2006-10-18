@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2006-10-18 01:51+0200\n"
 "PO-Revision-Date: 2006-06-16 11:35+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: eo <victor.stinner@haypocalc.com>\n"
@@ -21,7 +22,43 @@ msgstr ""
 msgid " "
 msgstr ""
 
-#: src/map/maps_list.cpp:284
+#: src/team/results.cpp:214
+msgid "  Most sold-out  :  "
+msgstr ""
+
+#: src/team/results.cpp:212
+msgid "  Most usefull  :  "
+msgstr ""
+
+#: src/team/results.cpp:213
+msgid "  Most useless  :  "
+msgstr ""
+
+#: src/team/results.cpp:211
+msgid "  Most violent  :  "
+msgstr ""
+
+#: src/network/distant_cpu.cpp:68
+msgid " has joined the party"
+msgstr ""
+
+#: src/network/distant_cpu.cpp:75
+msgid " has left the party"
+msgstr ""
+
+#: src/menu/network_menu.cpp:288
+msgid " players are not yet ready!"
+msgstr ""
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:374
+msgid " players connected"
+msgstr ""
+
+#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:379
+msgid " players ready"
+msgstr ""
+
+#: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr ""
@@ -31,12 +68,12 @@ msgstr ""
 msgid "%s (%s team) has died."
 msgstr ""
 
-#: src/map/maps_list.cpp:103
+#: src/map/maps_list.cpp:102
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:110
+#: src/map/maps_list.cpp:109
 #, c-format
 msgid "%s <%s> from %s"
 msgstr ""
@@ -61,14 +98,14 @@ msgstr ""
 msgid "%s has fallen off the map!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:157
 #, fuzzy, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "Le ludanto '%s' perdis %u energiajn poentojn :-("
 msgstr[1] "Le ludanto '%s' perdis %u energiajn poentojn :-("
 
-#: src/object/bonus_box.cpp:146
+#: src/object/bonus_box.cpp:148
 #, fuzzy, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -95,63 +132,63 @@ msgstr "%s estas proksima al mino ..."
 msgid "%s team has skipped its turn."
 msgstr "La teamo '%s' malhavas lian vicon."
 
-#: src/object/bonus_box.cpp:209
+#: src/object/bonus_box.cpp:211
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 msgstr[1] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 
-#: src/object/bonus_box.cpp:218
+#: src/object/bonus_box.cpp:220
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 msgstr[1] "La teamo '%s' elpoentis %u memmova(j)n bazuko(j)n !"
 
-#: src/object/bonus_box.cpp:228
+#: src/object/bonus_box.cpp:230
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "La teamo '%s' elpoentis %u dinamito(j)n !"
 msgstr[1] "La teamo '%s' elpoentis %u dinamito(j)n !"
 
-#: src/object/bonus_box.cpp:137
+#: src/object/bonus_box.cpp:139
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "La teamo '%s' elpoentis %u teleporto(j)n."
 msgstr[1] "La teamo '%s' elpoentis %u teleporto(j)n."
 
-#: src/object/bonus_box.cpp:164
+#: src/object/bonus_box.cpp:166
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/object/bonus_box.cpp:191
+#: src/object/bonus_box.cpp:193
 #, fuzzy, c-format
 msgid "'%s has won %u Anvil"
 msgid_plural "'%s has won %u Anvil"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/object/bonus_box.cpp:173
+#: src/object/bonus_box.cpp:175
 #, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
 msgid_plural "'%s has won %u Baseball bats"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/object/bonus_box.cpp:200
+#: src/object/bonus_box.cpp:202
 #, fuzzy, c-format
 msgid "'%s has won %u Holy grenade"
 msgid_plural "'%s has won %u Holy grenades"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/object/bonus_box.cpp:182
+#: src/object/bonus_box.cpp:184
 #, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
@@ -166,16 +203,12 @@ msgstr "(mortinta)"
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
-#: src/map/maps_list.cpp:125
-msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-msgstr ""
-
 #: src/weapon/air_attack.cpp:155
 #, fuzzy
 msgid "Air Attack"
 msgstr "Aeratako"
 
-#: src/object/bonus_box.cpp:168
+#: src/object/bonus_box.cpp:170
 msgid "Air attack"
 msgstr "Aeratako"
 
@@ -183,7 +216,16 @@ msgstr "Aeratako"
 msgid "Airhammer"
 msgstr ""
 
-#: src/object/bonus_box.cpp:195 src/weapon/anvil.cpp:63
+#: src/menu/results_menu.cpp:194
+#, fuzzy
+msgid "All teams"
+msgstr "Venkinto : teamo %s"
+
+#: src/team/results.cpp:210
+msgid "All teams results:\n"
+msgstr ""
+
+#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:62
 msgid "Anvil"
 msgstr ""
 
@@ -197,7 +239,7 @@ msgstr "Auxtoroj :"
 msgid "Automatic Bazooka"
 msgstr "Memmova bazuko"
 
-#: src/object/bonus_box.cpp:213
+#: src/object/bonus_box.cpp:215
 msgid "Automatic bazooka"
 msgstr "Memmova bazuko"
 
@@ -205,7 +247,7 @@ msgstr "Memmova bazuko"
 msgid "Baseball"
 msgstr "Bazopilkilo"
 
-#: src/object/bonus_box.cpp:177
+#: src/object/bonus_box.cpp:179
 #, fuzzy
 msgid "Baseball bat"
 msgstr "Bazopilkilo"
@@ -231,12 +273,12 @@ msgstr ""
 msgid "C++ exception caught:"
 msgstr "Escepto C++ intercaptita :"
 
-#: src/team/teams_list.cpp:443 src/team/teams_list.cpp:482
+#: src/team/teams_list.cpp:444 src/team/teams_list.cpp:483
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
 
-#: src/team/teams_list.cpp:116 src/team/teams_list.cpp:131
+#: src/team/teams_list.cpp:117 src/team/teams_list.cpp:132
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr ""
@@ -249,6 +291,15 @@ msgstr ""
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "Mortigis sin"
+
+#: src/menu/network_connection_menu.cpp:67
+#, fuzzy
+msgid "Connect to game"
+msgstr "Partofino !"
+
+#: src/menu/network_connection_menu.cpp:114
+msgid "Connected to "
+msgstr ""
 
 #: src/weapon/construct.cpp:43
 msgid "Construct"
@@ -263,17 +314,17 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Cxu vi volas vere forlasi (J/N) ?"
 
-#: src/menu/game_menu.cpp:267
+#: src/menu/game_menu.cpp:287
 #, fuzzy
 msgid "Duration of a turn:"
 msgstr "Vicdauxro"
 
-#: src/menu/game_menu.cpp:273
+#: src/menu/game_menu.cpp:293
 #, fuzzy
 msgid "Duration of the end of a turn:"
 msgstr "Vicfindauxro"
 
-#: src/object/bonus_box.cpp:232 src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamito"
 
@@ -289,14 +340,14 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/team/team.cpp:95
+#: src/team/team.cpp:98
 #, fuzzy, c-format
 msgid "Error loading team %s:"
 msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/team/team.cpp:181
+#: src/team/team.cpp:184
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr ""
@@ -334,9 +385,13 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/team/team.cpp:141
+#: src/team/team.cpp:144
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
+msgstr ""
+
+#: src/network/network.cpp:65
+msgid "Failed to initialize network library!"
 msgstr ""
 
 #: src/game/game_loop.cpp:159
@@ -348,6 +403,11 @@ msgstr "Metas hazarde la vermojn"
 #, fuzzy
 msgid "Fullscreen?"
 msgstr "Pleniga ekrano"
+
+#: src/menu/network_menu.cpp:61
+#, fuzzy
+msgid "Game options:"
+msgstr "Elektoj"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -374,10 +434,14 @@ msgstr ""
 msgid "Head commander"
 msgstr ""
 
-#: src/object/bonus_box.cpp:204 src/weapon/holly_grenade.cpp:105
+#: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Grenado"
+
+#: src/menu/network_connection_menu.cpp:74
+msgid "Host a game"
+msgstr ""
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
@@ -389,7 +453,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:284
+#: src/menu/game_menu.cpp:304
 #, fuzzy
 msgid "Initial energy:"
 msgstr "Komenca energio"
@@ -418,7 +482,15 @@ msgstr "Preparanto"
 msgid "Initialise teams"
 msgstr "Preparanto"
 
-#: src/object/bonus_box.cpp:278
+#: src/network/network.cpp:171
+msgid "Invalid port!"
+msgstr ""
+
+#: src/network/network.cpp:121
+msgid "Invalid server adress!"
+msgstr ""
+
+#: src/object/bonus_box.cpp:280
 msgid "Is it a gift?"
 msgstr ""
 
@@ -426,17 +498,17 @@ msgstr ""
 msgid "Jetpack"
 msgstr ""
 
-#: src/map/maps_list.cpp:192
+#: src/map/maps_list.cpp:185
 #, fuzzy
 msgid "Load maps:"
 msgstr "Muntas la terenon %s"
 
-#: src/team/teams_list.cpp:105
+#: src/team/teams_list.cpp:106
 #, fuzzy
 msgid "Load teams:"
 msgstr "Muntas la teamo %s"
 
-#: src/object/bonus_box.cpp:186
+#: src/object/bonus_box.cpp:188
 msgid "Low gravity"
 msgstr ""
 
@@ -444,7 +516,7 @@ msgstr ""
 msgid "LowGrav"
 msgstr ""
 
-#: src/map/map.cpp:337
+#: src/map/map.cpp:328
 #, c-format
 msgid "Map %s, a creation of :"
 msgstr ""
@@ -452,6 +524,11 @@ msgstr ""
 #: src/game/game_loop.cpp:203
 msgid "Maps"
 msgstr ""
+
+#: src/menu/network_menu.cpp:59
+#, fuzzy
+msgid "Max number of players:"
+msgstr "Nombro da ludantoj per teamo"
 
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
@@ -461,6 +538,22 @@ msgstr ""
 #, fuzzy
 msgid "Mine"
 msgstr "Mino"
+
+#: src/menu/results_menu.cpp:169
+msgid "Most sold-out"
+msgstr ""
+
+#: src/menu/results_menu.cpp:159
+msgid "Most usefull"
+msgstr ""
+
+#: src/menu/results_menu.cpp:164
+msgid "Most useless"
+msgstr ""
+
+#: src/menu/results_menu.cpp:154
+msgid "Most violent"
+msgstr ""
 
 #: src/menu/options_menu.cpp:99
 #, fuzzy
@@ -485,20 +578,31 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr ""
 
+#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
+#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
+#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
+#: src/team/results.cpp:205
+msgid "Nobody!"
+msgstr ""
+
 #: src/menu/game_menu.cpp:75
 #, fuzzy
 msgid "Number of characters"
 msgstr "Nombro da ludantoj per teamo"
 
-#: src/menu/game_menu.cpp:279
+#: src/menu/game_menu.cpp:299
 #, fuzzy
 msgid "Number of players per team:"
 msgstr "Nombro da ludantoj per teamo"
 
-#: src/menu/game_menu.cpp:151
+#: src/menu/game_menu.cpp:171
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Nombro da ludantoj per teamo"
+
+#: src/menu/network_menu.cpp:181
+msgid "Only the server can set the map!"
+msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -551,13 +655,29 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/object/bonus_box.cpp:222
+#: src/object/bonus_box.cpp:224
 msgid "Riot bomb"
 msgstr ""
 
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Komencas partion"
+
+#: src/menu/network_menu.cpp:83
+msgid "Select the teams:"
+msgstr ""
+
+#: src/menu/network_menu.cpp:126
+msgid "Select the world:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:60
+msgid "Server adress:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:129
+msgid "Server started"
+msgstr ""
 
 #: src/weapon/shotgun.cpp:61
 #, fuzzy
@@ -609,11 +729,16 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
+#: src/team/results.cpp:208
+#, c-format
+msgid "Team %s results:\n"
+msgstr ""
+
 #: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:141 src/weapon/teleportation.cpp:40
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleporto"
 
@@ -632,14 +757,30 @@ msgstr "La memmova fuzilo estas malaperita en alian mondon ..."
 msgid "The rocket has left the battlefield..."
 msgstr "La fuzilo estas malaperita en alian mondon ..."
 
+#: src/menu/network_connection_menu.cpp:119
+msgid "Unable to connect"
+msgstr ""
+
+#: src/network/network.cpp:132
+msgid "Unable to contact server!"
+msgstr ""
+
 #: src/graphic/video.cpp:193
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/map/maps_list.cpp:205 src/map/maps_list.cpp:221
+#: src/network/network.cpp:215
+msgid "Unable to listen for client!"
+msgstr ""
+
+#: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:132
+msgid "Unable to start server"
 msgstr ""
 
 #: src/main.cpp:118
@@ -651,6 +792,11 @@ msgstr "Escepto nekonata intercaptita ..."
 #, fuzzy
 msgid "Version"
 msgstr "Versio "
+
+#: src/menu/network_menu.cpp:288
+#, fuzzy
+msgid "Wait! "
+msgstr "Venkinto : teamo %s"
 
 #: src/interface/interface.cpp:99
 #, fuzzy
@@ -685,12 +831,17 @@ msgstr "Wormux muntas."
 msgid "Wormux version "
 msgstr "Wormux versio "
 
-#: src/map/maps_list.cpp:72
+#: src/include/action_handler.cpp:384
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr ""
+
+#: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr ""
 
-#: src/map/maps_list.cpp:241
+#: src/map/maps_list.cpp:234
 msgid "You need at least one valid map !"
 msgstr ""
 
@@ -699,7 +850,7 @@ msgstr ""
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Vi necesas almenaux du teamojn, korektu cxi tion en la menuo Elektoj !"
 
-#: src/team/teams_list.cpp:151
+#: src/team/teams_list.cpp:152
 msgid "You need at least two valid teams !"
 msgstr ""
 
@@ -711,13 +862,38 @@ msgstr ""
 msgid "done"
 msgstr ""
 
-#, fuzzy
-#~ msgid "Game options"
-#~ msgstr "Elektoj"
+#~ msgid "%s is stupidly dead because he gone out of the map ..."
+#~ msgstr "%s estas mortinta stultege cxar li estas elirinta el la tereno ..."
 
 #, fuzzy
-#~ msgid "Sound options"
-#~ msgstr "Elektoj"
+#~ msgid "%s team has won.\n"
+#~ msgstr "La teamo '%s' elpoentis %u teleporto(j)n."
+
+#~ msgid "=== Loading ==="
+#~ msgstr "=== Muntante ==="
+
+#~ msgid "A blow in the vacuum ..."
+#~ msgstr "Pafo en la malpleneco ..."
+
+#, fuzzy
+#~ msgid "Authors"
+#~ msgstr "Auxtoroj :"
+
+#~ msgid "Change video mode : %ux%u in %s"
+#~ msgstr "Sxangxa la videoregximo : %ux%u per %s"
+
+#~ msgid "ClanLib error :"
+#~ msgstr "Eraro ClanLib :"
+
+#~ msgid "Dead of %s (%s)."
+#~ msgstr "Morto de %s (%s)."
+
+#~ msgid "Drawn game :-("
+#~ msgstr "Ludbatalo nula :-("
+
+#, fuzzy
+#~ msgid "End of the game!\n"
+#~ msgstr "Partifino !\n"
 
 #, fuzzy
 #~ msgid "Error during loading skin %s:"
@@ -726,80 +902,44 @@ msgstr ""
 #~ "%s"
 
 #, fuzzy
-#~ msgid "Load skins:"
-#~ msgstr "Muntas la avataron %s"
+#~ msgid "Info"
+#~ msgstr "Informoj"
+
+#~ msgid "Init data"
+#~ msgstr "Preparas la datenojn"
 
 #, fuzzy
-#~ msgid "%s team has won.\n"
-#~ msgstr "La teamo '%s' elpoentis %u teleporto(j)n."
-
-#, fuzzy
-#~ msgid "End of the game!\n"
-#~ msgstr "Partifino !\n"
+#~ msgid "Load game data..."
+#~ msgstr "Muntas la datenojn ..."
 
 #, fuzzy
 #~ msgid "Load map"
 #~ msgstr "Muntas la terenon %s"
 
 #, fuzzy
-#~ msgid "Wait teams"
-#~ msgstr "Venkinto : teamo %s"
-
-#~ msgid "End of game"
-#~ msgstr "Partofino !"
-
-#, fuzzy
-#~ msgid "Authors"
-#~ msgstr "Auxtoroj :"
-
-#, fuzzy
-#~ msgid "Info"
-#~ msgstr "Informoj"
-
-#, fuzzy
-#~ msgid "Load game data..."
-#~ msgstr "Muntas la datenojn ..."
-
-#~ msgid "ClanLib error :"
-#~ msgstr "Eraro ClanLib :"
-
-#~ msgid "Sound error :"
-#~ msgstr "Soneraro :"
-
-#, fuzzy
-#~ msgid "Use sound?"
-#~ msgstr "Uzas la sono"
+#~ msgid "Load skins:"
+#~ msgstr "Muntas la avataron %s"
 
 #, fuzzy
 #~ msgid "Load weapon %s"
 #~ msgstr "Muntas la terenon %s"
 
-#~ msgid "%s is stupidly dead because he gone out of the map ..."
-#~ msgstr "%s estas mortinta stultege cxar li estas elirinta el la tereno ..."
-
-#~ msgid "A blow in the vacuum ..."
-#~ msgstr "Pafo en la malpleneco ..."
-
-#~ msgid "Dead of %s (%s)."
-#~ msgstr "Morto de %s (%s)."
-
-#~ msgid "Drawn game :-("
-#~ msgstr "Ludbatalo nula :-("
-
-#~ msgid "Init data"
-#~ msgstr "Preparas la datenojn"
-
 #~ msgid "PAUSE"
 #~ msgstr "PAUxZO"
+
+#~ msgid "Sound error :"
+#~ msgstr "Soneraro :"
+
+#, fuzzy
+#~ msgid "Sound options"
+#~ msgstr "Elektoj"
 
 #~ msgid "Thank you to deliver your opinion by following email :"
 #~ msgstr "Dankon por doni vian opinion retposxte al la posta retadreso :"
 
-#~ msgid "=== Loading ==="
-#~ msgstr "=== Muntante ==="
-
-#~ msgid "Change video mode : %ux%u in %s"
-#~ msgstr "Sxangxa la videoregximo : %ux%u per %s"
+#, fuzzy
+#~ msgid "Use sound?"
+#~ msgstr "Uzas la sono"
 
 #~ msgid "fullscreen"
 #~ msgstr "Pleniga ekrano"
