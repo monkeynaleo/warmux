@@ -1,5 +1,14 @@
-Short cmake introduction
-========================
+
+Short CMake tutorial
+====================
+
+IMPORTANT NOTE:
+Using cmake with wormux is optional!
+It is still possible to use the old autotools system.
+
+
+Introduction:
+-------------
 
 cmake has to be called with the path to the source-dir as a parameter.
 e.g.:
@@ -40,6 +49,20 @@ To get a more verbose compilation output use:
      make VERBOSE=1
 
 
+Compilation outside of source-dir:
+----------------------------------
+
+     cd /path/to/wormux-src
+     mkdir ../wormux-build
+     cd ../wormux-build
+     cmake ../wormux-src
+     make
+     make install
+
+The Makefiles and CMake control files will be generated inside the new
+wormux-build dir, while the source-dir stays clean.
+
+
 Wormux development:
 -------------------
 
@@ -47,6 +70,20 @@ If you add a new C++ sourcefile that needs to be compiled, you just have
 to add a line with the relative path in src/SourceFiles.cmake.
 If you create a new translation in the po subdirectory, you have to add
 it in po/CMakeLists.txt.
+
+
+Package generation:
+-------------------
+
+With CMake it is possible to generate .tar.gz archives of Wormux.
+It is possible to generate ready-to-use binary archives (that only have to
+get extracted to play wormux) and source archives for compilation.
+To create binary archives issue the command:
+     make package
+Note that you should use build-type 'Release' with binary packages.
+To create source achives you need to have a clean source tree and build
+Wormux outside the source-dir (see above):
+     make package_source
 
 
 Problems:
