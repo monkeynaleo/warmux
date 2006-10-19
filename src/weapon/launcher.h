@@ -90,6 +90,7 @@ class WeaponBullet : public WeaponProjectile
     virtual void Refresh();
   protected:
     virtual void SignalGroundCollision();
+    virtual void SignalOutOfMap();
     virtual void SignalObjectCollision(PhysicalObj * obj);
     void DoExplosion();
 };
