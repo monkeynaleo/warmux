@@ -46,6 +46,7 @@ class SubMachineGun : public WeaponLauncher
     void RepeatShoot();
   protected:
     WeaponProjectile * GetProjectileInstance();
+    void IncMissedShots();
     bool p_Shoot();
   public:
     SubMachineGun();

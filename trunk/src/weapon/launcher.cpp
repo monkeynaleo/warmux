@@ -54,9 +54,9 @@ WeaponBullet::WeaponBullet(const std::string &name,
 // Signal that the bullet has hit the ground
 void WeaponBullet::SignalGroundCollision()
 {
-  GameMessages::GetInstance()->Add (_("Your shot has missed!"));
   jukebox.Play("share", "weapon/ricoche1");
   WeaponProjectile::SignalGroundCollision();
+  launcher->IncMissedShots();
 }
 
 void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
@@ -238,7 +238,8 @@ void WeaponProjectile::Explosion()
 
 void WeaponProjectile::SignalExplosion()
 {
-  if (launcher != NULL && !launcher->ignore_explosion_signal) launcher->SignalProjectileExplosion();
+  if (launcher != NULL && !launcher->ignore_explosion_signal)
+    launcher->SignalProjectileExplosion();
 }
 
 void WeaponProjectile::DoExplosion()
@@ -299,6 +300,8 @@ WeaponLauncher::WeaponLauncher(Weapon_type type,
 {
   projectile = NULL;
   nb_active_projectile = 0;
+  missed_shots = 0;
+  announce_missed_shots = true;
   ignore_timeout_signal = false;
   ignore_collision_signal = false;
   ignore_explosion_signal = false;
@@ -422,6 +425,7 @@ void WeaponLauncher::Draw()
 
 void WeaponLauncher::p_Select()
 {
+  missed_shots = 0;
   if (projectile->change_timeout_allowed())
   {
     force_override_keys = true; //Allow overriding key during movement.
@@ -436,6 +440,13 @@ void WeaponLauncher::p_Deselect()
   {
     force_override_keys = false;
   }
+}
+
+void WeaponLauncher::IncMissedShots()
+{
+  missed_shots++;
+  if(announce_missed_shots)
+    GameMessages::GetInstance()->Add (_("Your shot has missed!"));
 }
 
 void WeaponLauncher::HandleKeyEvent(int action, int event_type)

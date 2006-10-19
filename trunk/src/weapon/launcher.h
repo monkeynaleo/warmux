@@ -38,14 +38,14 @@ class WeaponProjectile : public PhysicalObj
     bool explode_with_timeout;
     bool explode_with_collision;
     double begin_time;
-  
+
     ExplosiveWeaponConfig& cfg;
 
   public:
     Character* dernier_ver_touche;
     PhysicalObj* dernier_obj_touche;
     WeaponLauncher * launcher;
-    int m_timeout_modifier ;
+    int m_timeout_modifier;
 
   public:
     WeaponProjectile(const std::string &nom, 
@@ -107,6 +107,8 @@ class WeaponLauncher : public Weapon
     WeaponProjectile * projectile;
     uint nb_active_projectile;
     bool m_allow_change_timeout;
+    int missed_shots;
+    bool announce_missed_shots;
   protected:
     virtual bool p_Shoot();
     virtual void p_Select();
@@ -136,6 +138,8 @@ class WeaponLauncher : public Weapon
 
     void IncActiveProjectile();
     void DecActiveProjectile();
+
+    virtual void IncMissedShots();
 
   //Misc actions
     virtual void ActionUp ();    // called by mouse.cpp when mouse wheel up
