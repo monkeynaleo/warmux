@@ -59,6 +59,12 @@ void WeaponBullet::SignalGroundCollision()
   launcher->IncMissedShots();
 }
 
+void WeaponBullet::SignalOutOfMap()
+{
+  WeaponProjectile::SignalOutOfMap();
+  launcher->IncMissedShots();
+}
+
 void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
 {
   if (typeid(*obj) != typeid(Character)) {
