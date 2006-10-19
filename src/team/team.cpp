@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Une �uipe de vers.
+ * A team
  *****************************************************************************/
 
 #include "team.h"
@@ -215,7 +215,6 @@ void Team::UpdateEnergyBar ()
 
 void Team::NextCharacter()
 {
-  // Passe au ver suivant
   assert (0 < NbAliveCharacter());
   ActiveCharacter().StopPlaying();
   do
@@ -247,10 +246,10 @@ int Team::NbAliveCharacter() const
   return nbr;
 }
 
-// Prepare le tour d'une equipe
+// Prepare a new team turn
 void Team::PrepareTurn()
 {
-  // Choisi un ver vivant si possible
+  // Get a living character if possible
   if (ActiveCharacter().IsDead())
   {
     is_camera_saved = false;
@@ -277,7 +276,6 @@ Character& Team::ActiveCharacter()
   return (*active_character);
 }
 
-// Change d'arme
 void Team::SetWeapon (Weapon_type type)
 {
   AccessWeapon().Deselect();
@@ -380,8 +378,6 @@ void Team::LoadGamingData(uint howmany)
     LoadCharacters(nb_characters);
   else
     LoadCharacters(howmany);
-
-  crosshair.Reset();
 }
 
 void Team::UnloadGamingData()
