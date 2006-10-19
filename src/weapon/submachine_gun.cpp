@@ -67,6 +67,7 @@ SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", ne
   ignore_explosion_signal = true;
   ignore_ghost_state_signal = true;
   ignore_drowning_signal = true;
+  announce_missed_shots = false;
 
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
@@ -79,6 +80,13 @@ WeaponProjectile * SubMachineGun::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>
       (new SubMachineGunBullet(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+}
+
+void SubMachineGun::IncMissedShots()
+{
+  if(missed_shots + 1 == ReadInitialNbUnit())
+    announce_missed_shots = true;
+  WeaponLauncher::IncMissedShots();
 }
 
 bool SubMachineGun::p_Shoot ()
@@ -97,6 +105,7 @@ bool SubMachineGun::p_Shoot ()
   	                   5.0 + (Time::GetInstance()->Read() % 6));
 
   m_is_active = true;
+  announce_missed_shots = false;
   return true;
 }
 

@@ -34,6 +34,7 @@ const uint   SHOTGUN_BUCKSHOT_SPEED  = 30;
 const uint   SHOTGUN_EXPLOSION_RANGE = 1;
 const double SHOTGUN_RANDOM_ANGLE    = 0.02;
 const double SHOTGUN_RANDOM_STRENGTH = 2.0;
+const int nb_bullets = 4;
 
 ShotgunBuckshot::ShotgunBuckshot(ExplosiveWeaponConfig& cfg,
                                  WeaponLauncher * p_launcher) :
@@ -61,6 +62,7 @@ Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeap
   m_name = _("Shotgun");
 
   override_keys = true ;
+  announce_missed_shots = false;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
 
@@ -79,11 +81,20 @@ void Shotgun::ShootSound()
   jukebox.Play("share", "weapon/shotgun");
 }
 
+void Shotgun::IncMissedShots()
+{
+  if(missed_shots + 1 == nb_bullets)
+    announce_missed_shots = true;
+  WeaponLauncher::IncMissedShots();
+}
+
 bool Shotgun::p_Shoot ()
 {  
+  missed_shots = 0;
+  announce_missed_shots = false;
   if (m_is_active)
     return false;
-  for(int i = 0; i < 4 ; i++) {
+  for(int i = 0; i < nb_bullets; i++) {
     projectile->Shoot(SHOTGUN_BUCKSHOT_SPEED);
     projectile = NULL;
     ReloadLauncher();

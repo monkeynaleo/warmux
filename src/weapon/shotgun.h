@@ -42,6 +42,7 @@ class Shotgun : public WeaponLauncher
 {
   protected:
     WeaponProjectile * GetProjectileInstance();
+    void IncMissedShots();
     bool p_Shoot();
   public:
     Shotgun();
