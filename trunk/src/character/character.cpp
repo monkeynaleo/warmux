@@ -94,6 +94,7 @@ Character::Character (Team& my_team, const std::string &name) :
   animation_time = Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   prepare_shoot = false;
   back_jumping = false;
+  crosshair_angle = 0;
 
   // Damage count
   damage_other_team = 0;
@@ -143,6 +144,7 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
   prepare_shoot        = acharacter.prepare_shoot;
   back_jumping         = acharacter.back_jumping;
   energy               = acharacter.energy;
+  crosshair_angle      = acharacter.crosshair_angle;
   damage_other_team    = acharacter.damage_other_team;
   damage_own_team      = acharacter.damage_own_team;
   max_damage           = acharacter.max_damage;
@@ -608,9 +610,10 @@ void Character::HandleKeyEvent(int action, int event_type)
                   do_nothing_time = Time::GetInstance()->Read();
                   CharacterCursor::GetInstance()->Hide();
                   action_handler->NewAction (new Action(ACTION_UP));
+                  crosshair_angle = ActiveTeam().crosshair.GetAngleVal();
                 }
               }
-	      break ;
+              break ;
 
             case ACTION_DOWN:
               if(ActiveCharacter().IsImmobile())
@@ -620,9 +623,10 @@ void Character::HandleKeyEvent(int action, int event_type)
                   do_nothing_time = Time::GetInstance()->Read();
                   CharacterCursor::GetInstance()->Hide();
                   action_handler->NewAction (new Action(ACTION_DOWN));
+                  crosshair_angle = ActiveTeam().crosshair.GetAngle();
                 }
               }
-	      break ;
+              break ;
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:
               InitMouvementDG(PAUSE_BOUGE);
@@ -677,7 +681,7 @@ void Character::Refresh()
                               - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
   }
 
-  if( &ActiveCharacter() == this && GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
+  if( IsActiveCharacter() && GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
   {
     if(do_nothing_time + do_nothing_timeout < global_time->Read())
       CharacterCursor::GetInstance()->FollowActiveCharacter();
@@ -831,6 +835,7 @@ void Character::StartPlaying()
 {
   assert (!IsGhost());
   SetWeaponClothe();
+  ActiveTeam().crosshair.ChangeAngleVal(crosshair_angle);
 }
 
 uint Character::GetEnergy() const

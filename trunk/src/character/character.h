@@ -55,6 +55,7 @@ private:
   int  max_damage;
   int  current_total_damage;
   BarreProg energy_bar;
+  int crosshair_angle;
 
   // survived games
   int survivals;
