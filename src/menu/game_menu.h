@@ -36,7 +36,7 @@ class TeamBox : public HBox
   Team * associated_team;
   PictureWidget *team_logo;
   Label * team_name;
-  TextBox * player_name;
+  //  TextBox * player_name;
   SpinButton * nb_characters;
 
  public:
@@ -70,8 +70,8 @@ class GameMenu : public Menu
    /* Game options controllers */
    Box * game_options;
    SpinButtonWithPicture *opt_duration_turn;
-   SpinButtonWithPicture *opt_duration_end_turn;
-   SpinButtonBig *opt_nb_characters;
+   //SpinButtonWithPicture *opt_duration_end_turn;
+   //SpinButtonBig *opt_nb_characters;
    SpinButtonWithPicture *opt_energy_ini;
 
 
