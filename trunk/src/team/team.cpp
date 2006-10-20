@@ -106,7 +106,8 @@ Team * Team::CreateTeam (const std::string& teams_dir,
 
 bool Team::LoadCharacters(uint howmany)
 {
-  assert(howmany <= GameMode::GetInstance()->max_characters);
+  //assert(howmany <= GameMode::GetInstance()->max_characters);
+  assert (howmany <= 10);
 
   std::string nomfich;
   try

@@ -32,6 +32,7 @@
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
 
+#include <iostream>
 const uint MARGIN_TOP    = 5;
 const uint MARGIN_SIDE   = 5;
 const uint MARGIN_BOTTOM = 70;
@@ -63,19 +64,19 @@ TeamBox::TeamBox(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), fals
   team_name = new Label(_(" "), Rectanglei(0,0,width-80,0), 
 			*Font::GetInstance(Font::FONT_NORMAL), gray_color);
 
-  Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
-  tmp_player_box->SetMargin(0);
-  tmp_player_box->SetBorder(Point2i(0,0));
-  tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0), 
-				      *Font::GetInstance(Font::FONT_SMALL), gray_color));
-  player_name = new TextBox(_("Player X"), Rectanglei(0,0,100,0), 
-			    *Font::GetInstance(Font::FONT_SMALL));
-  tmp_player_box->AddWidget(player_name);
+//   Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
+//   tmp_player_box->SetMargin(0);
+//   tmp_player_box->SetBorder(Point2i(0,0));
+//   tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0), 
+// 				      *Font::GetInstance(Font::FONT_SMALL), gray_color));
+//   player_name = new TextBox(_("Player X"), Rectanglei(0,0,100,0), 
+// 			    *Font::GetInstance(Font::FONT_SMALL));
+//   tmp_player_box->AddWidget(player_name);
 
   nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),6,1,2,10);;
 
   tmp_box->AddWidget(team_name);
-  tmp_box->AddWidget(tmp_player_box);
+//  tmp_box->AddWidget(tmp_player_box);
   tmp_box->AddWidget(nb_characters);
 
   AddWidget(tmp_box);
@@ -131,13 +132,16 @@ Widget* TeamBox::Clic (const Point2i &mousePosition, uint button)
     // Set the number of characters for the team :)
     if ( w == nb_characters ) {
       associated_team->SetNbCharacters(uint(nb_characters->GetValue()));
-    } else if  ( w == nb_characters ) {
-      // we should manage player name here
-    } else {
+      return w;
+    } 
+//     else if  ( w == player_name ) {
+//       std::cout << "Player name !!" << std::endl;
+//       // we should manage player name here
+//       return w;
+//     }
+    else {
       return NULL;
     }
-
-    return w;
   }
   return NULL;
 }
@@ -277,40 +281,45 @@ GameMenu::GameMenu() :
 					    mainBoxWidth/2, mainBoxHeight), true);
   game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
 
-  Box * all_game_options = new VBox( Rectanglei(0, 0, mainBoxWidth/2-40, mainBoxHeight), false);
+  //Box * all_game_options = new VBox( Rectanglei(0, 0, mainBoxWidth/2-40, mainBoxHeight), false);
 
-  Box * top_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
-  Box * bottom_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
-  top_game_options->SetMargin(25);
-  bottom_game_options->SetMargin(25);
+  //Box * top_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
+  //Box * bottom_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
+  //top_game_options->SetMargin(25);
+  //bottom_game_options->SetMargin(25);
+  
+  game_options->SetMargin(50);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn:"), "menu/timing_turn",
 						stdRect,
 						TPS_TOUR_MIN, 5,
 						TPS_TOUR_MIN, TPS_TOUR_MAX);
-  bottom_game_options->AddWidget(opt_duration_turn);
+  //bottom_game_options->AddWidget(opt_duration_turn);
+  game_options->AddWidget(opt_duration_turn);
 
-  opt_duration_end_turn = new SpinButtonWithPicture(_("Duration of the end of a turn:"), "menu/timing_end_of_turn",
-						    stdRect,
-						    TPS_FIN_TOUR_MIN, 1,
-						    TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
-  bottom_game_options->AddWidget(opt_duration_end_turn);
+//   opt_duration_end_turn = new SpinButtonWithPicture(_("Duration of the end of a turn:"), "menu/timing_end_of_turn",
+// 						    stdRect,
+// 						    TPS_FIN_TOUR_MIN, 1,
+// 						    TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
+//   bottom_game_options->AddWidget(opt_duration_end_turn);
 
-  opt_nb_characters = new SpinButtonBig(_("Number of players per team:"), stdRect,
-				     4, 1,
-				     NBR_VER_MIN, NBR_VER_MAX);
-  top_game_options->AddWidget(opt_nb_characters);
+//   opt_nb_characters = new SpinButtonBig(_("Number of players per team:"), stdRect,
+// 				     4, 1,
+// 				     NBR_VER_MIN, NBR_VER_MAX);
+//   top_game_options->AddWidget(opt_nb_characters);
 
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy:"), "menu/energy",
 					     stdRect,
 					     100, 5,
 					     50, 200);
+  //top_game_options->AddWidget(opt_energy_ini);
+  game_options->AddWidget(opt_energy_ini);
 
-  top_game_options->AddWidget(opt_energy_ini);
+  game_options->AddWidget(new NullWidget(Rectanglei(0,0,50,10)));
 
-  all_game_options->AddWidget(top_game_options);
-  all_game_options->AddWidget(bottom_game_options);
-  game_options->AddWidget(all_game_options);
+  //all_game_options->AddWidget(top_game_options);
+  //all_game_options->AddWidget(bottom_game_options);
+  //game_options->AddWidget(all_game_options);
   widgets.AddWidget(game_options);
 
 
@@ -349,8 +358,8 @@ GameMenu::GameMenu() :
   // Load game options
   GameMode * game_mode = GameMode::GetInstance();
   opt_duration_turn->SetValue(game_mode->duration_turn);
-  opt_duration_end_turn->SetValue(game_mode->duration_move_player);
-  opt_nb_characters->SetValue(game_mode->max_characters);
+  //  opt_duration_end_turn->SetValue(game_mode->duration_move_player);
+  //opt_nb_characters->SetValue(game_mode->max_characters);
   opt_energy_ini->SetValue(game_mode->character.init_energy);
 
 
@@ -440,8 +449,8 @@ void GameMenu::SaveOptions()
 
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->duration_turn = opt_duration_turn->GetValue() ;
-  game_mode->duration_move_player = opt_duration_end_turn->GetValue() ;
-  game_mode->max_characters = opt_nb_characters->GetValue() ;
+  //  game_mode->duration_move_player = opt_duration_end_turn->GetValue() ;
+  //  game_mode->max_characters = opt_nb_characters->GetValue() ;
 
   game_mode->character.init_energy = opt_energy_ini->GetValue() ;
 
@@ -507,18 +516,6 @@ void GameMenu::SetNbTeams(uint nb_teams)
 
 void GameMenu::Draw(const Point2i &mousePosition)
 {
-//   int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
-//   if (t != -1) {
-//     int index = -1;
-//     Team * new_team = teams_list.FindById(lbox_all_teams->ReadValue(t), index);
-//     SelectTeamLogo(new_team);
-//   } else {
-//     t = lbox_selected_teams->MouseIsOnWhichItem(mousePosition);
-//     if (t != -1) {
-//       int index = -1;
-//       Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);
-//       SelectTeamLogo(new_team);
-//     }
-//   }
+
 }
 
