@@ -156,8 +156,9 @@ std::string DistantComputer::GetAdress()
 {
   IPaddress* ip = SDLNet_TCP_GetPeerAddress(sock);
   std::string address;
-  if(SDLNet_ResolveIP(ip))
-    address = SDLNet_ResolveIP(ip);
+  const char* resolved_ip = SDLNet_ResolveIP(ip);
+  if(resolved_ip)
+    address = resolved_ip;
   else
     return "Unresolved address";
   return address;
