@@ -209,7 +209,7 @@ void TeamResults::RenderText(std::string& txt)
   else
     txt += _("All teams results:\n");
   txt += _("  Most violent  :  ") + mv.str();
-  txt += _("  Most usefull  :  ") + muf.str();
+  txt += _("  Most useful   :  ") + muf.str();
   txt += _("  Most useless  :  ") + mul.str();
   txt += _("  Most sold-out  :  ") + bt.str();
 }

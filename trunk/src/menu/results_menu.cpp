@@ -156,7 +156,7 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   widgets.AddWidget(most_violent);
 
   most_usefull = new ResultBox(Rectanglei(x, y+3*max_height, total_width, max_height),
-                               true, _("Most usefull"), *big_font,
+                               true, _("Most useful"), *big_font,
                                type_size, name_size, score_size);
   widgets.AddWidget(most_usefull);
 

@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:63
+#: src/menu/game_menu.cpp:64
 msgid " "
 msgstr ""
 
@@ -32,7 +32,7 @@ msgstr "  Cel mai mare trădător :  %s (%i).\n"
 
 #: src/team/results.cpp:212
 #, fuzzy
-msgid "  Most usefull  :  "
+msgid "  Most useful   :  "
 msgstr "  Cel mai folositor     :  %s (%i).\n"
 
 #: src/team/results.cpp:213
@@ -332,13 +332,9 @@ msgstr "Merite"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
-#: src/menu/game_menu.cpp:287
+#: src/menu/game_menu.cpp:293
 msgid "Duration of a turn:"
 msgstr "Durata unei ture:"
-
-#: src/menu/game_menu.cpp:293
-msgid "Duration of the end of a turn:"
-msgstr "Durata sfârşitului de tură:"
 
 #: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
@@ -358,7 +354,7 @@ msgstr "Eroare în %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Eroare la încărcarea echipei %s:"
 
-#: src/team/team.cpp:184
+#: src/team/team.cpp:185
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Eroare la încărcarea datelor pentru echipa %s:"
@@ -390,7 +386,7 @@ msgstr ""
 "Eroare:\n"
 "%s"
 
-#: src/team/team.cpp:144
+#: src/team/team.cpp:145
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: aspectul „%s” pentru echipa „%s” nu poate fi găsit."
@@ -433,10 +429,6 @@ msgstr "Pistol"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 
-#: src/menu/game_menu.cpp:69
-msgid "Head commander"
-msgstr ""
-
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
@@ -456,7 +448,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:304
+#: src/menu/game_menu.cpp:311
 msgid "Initial energy:"
 msgstr "Energie iniţială:"
 
@@ -543,7 +535,7 @@ msgstr "  Cel mai mare trădător :  %s (%i).\n"
 
 #: src/menu/results_menu.cpp:159
 #, fuzzy
-msgid "Most usefull"
+msgid "Most useful"
 msgstr "  Cel mai folositor     :  %s (%i).\n"
 
 #: src/menu/results_menu.cpp:164
@@ -585,16 +577,12 @@ msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
 msgid "Nobody!"
 msgstr "Nimeni"
 
-#: src/menu/game_menu.cpp:75
+#: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
 msgstr "Jucători per echipă:"
 
-#: src/menu/game_menu.cpp:299
-msgid "Number of players per team:"
-msgstr "Jucători per echipă:"
-
-#: src/menu/game_menu.cpp:171
+#: src/menu/game_menu.cpp:175
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Jucători per echipă:"
@@ -619,11 +607,6 @@ msgstr ""
 msgid "Play"
 msgstr "Porneşte jocul"
 
-#: src/menu/game_menu.cpp:71
-#, fuzzy
-msgid "Player X"
-msgstr "Porneşte jocul"
-
 #: src/menu/options_menu.cpp:68
 #, fuzzy
 msgid "Player energy?"
@@ -634,7 +617,7 @@ msgstr "Se afişează energia jucătorului?"
 msgid "Player's name?"
 msgstr "Se afişează numele jucătorului?"
 
-#: src/weapon/polecat.cpp:134
+#: src/weapon/polecat.cpp:136
 msgid "Polecat Launcher"
 msgstr ""
 
@@ -679,7 +662,7 @@ msgstr ""
 msgid "Server started"
 msgstr ""
 
-#: src/weapon/shotgun.cpp:61
+#: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
 msgstr "Opţiuni sunet"
@@ -851,7 +834,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Aveţi nevoie de cel puţin două echipe valide !"
 
-#: src/weapon/launcher.cpp:57
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
@@ -866,6 +849,9 @@ msgstr "finalizat"
 #~ msgstr ""
 #~ "<infinite_background> are nevoie ca <is_open> să fie activ pentru a "
 #~ "funcţiona corect!!"
+
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Durata sfârşitului de tură:"
 
 #~ msgid "End of the game!\n"
 #~ msgstr "Jocul s-a terminat!\n"
@@ -882,8 +868,15 @@ msgstr "finalizat"
 #~ msgid "Load skins:"
 #~ msgstr "Încărcare aspecte:"
 
+#~ msgid "Number of players per team:"
+#~ msgstr "Jucători per echipă:"
+
 #~ msgid "Pause"
 #~ msgstr "Pauză"
+
+#, fuzzy
+#~ msgid "Player X"
+#~ msgstr "Porneşte jocul"
 
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr ""
