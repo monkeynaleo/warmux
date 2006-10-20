@@ -623,7 +623,7 @@ msgstr "Sunucu adresi:"
 msgid "Server started"
 msgstr "Sunucu başlatıldı"
 
-#: src/weapon/shotgun.cpp:61
+#: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
 msgstr "Pompalı tüfek"
 
@@ -785,7 +785,7 @@ msgstr "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler men
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
-#: src/weapon/launcher.cpp:57
+#: src/weapon/launcher.cpp:448
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 

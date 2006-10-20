@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2006-10-18 01:26+0200\n"
-"PO-Revision-Date: 2006-10-17 03:03+0200\n"
+"PO-Revision-Date: 2006-10-20 21:40+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: src/menu/game_menu.cpp:63
+#: src/menu/game_menu.cpp:64
 msgid " "
 msgstr " "
 
@@ -27,37 +27,36 @@ msgid "  Most sold-out  :  "
 msgstr ""
 
 #: src/team/results.cpp:212
-msgid "  Most usefull  :  "
-msgstr ""
+msgid "  Most useful   :  "
+msgstr "  Am nützlichsten   :  "
 
 #: src/team/results.cpp:213
 msgid "  Most useless  :  "
-msgstr ""
+msgstr "  Am nutzlosesten  :  "
 
 #: src/team/results.cpp:211
 msgid "  Most violent  :  "
-msgstr ""
+msgstr "  Am gewalttätigsten  :  "
 
 #: src/network/distant_cpu.cpp:68
 msgid " has joined the party"
-msgstr ""
+msgstr " hat das Spiel betreten"
 
 #: src/network/distant_cpu.cpp:75
-#, fuzzy
 msgid " has left the party"
-msgstr "%s ist von der Karte gefallen!"
+msgstr " hat das Spiel verlassen"
 
 #: src/menu/network_menu.cpp:288
 msgid " players are not yet ready!"
-msgstr ""
+msgstr " Spieler sind noch nicht verbunden!"
 
 #: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:374
 msgid " players connected"
-msgstr ""
+msgstr " Spieler verbunden"
 
 #: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:379
 msgid " players ready"
-msgstr ""
+msgstr " Spieler bereit"
 
 #: src/map/maps_list.cpp:277
 #, c-format
@@ -217,13 +216,12 @@ msgid "Airhammer"
 msgstr "Presslufthammer"
 
 #: src/menu/results_menu.cpp:194
-#, fuzzy
 msgid "All teams"
-msgstr "Lade Mannschaft:"
+msgstr "Alle Mannschaften"
 
 #: src/team/results.cpp:210
 msgid "All teams results:\n"
-msgstr ""
+msgstr "Alle Mannschaftsergebnisse:\n"
 
 #: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:62
 msgid "Anvil"
@@ -289,11 +287,11 @@ msgstr "Selbstmord begehen"
 
 #: src/menu/network_connection_menu.cpp:67
 msgid "Connect to game"
-msgstr ""
+msgstr "Zum Spiel verbinden"
 
 #: src/menu/network_connection_menu.cpp:114
 msgid "Connected to "
-msgstr ""
+msgstr "Verbunden zu "
 
 #: src/weapon/construct.cpp:43
 #, fuzzy
@@ -308,13 +306,9 @@ msgstr "Abspann"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Wollen Sie das Programm wirklich beenden? (J/N)"
 
-#: src/menu/game_menu.cpp:287
+#: src/menu/game_menu.cpp:293
 msgid "Duration of a turn:"
 msgstr "Dauer einer Runde:"
-
-#: src/menu/game_menu.cpp:293
-msgid "Duration of the end of a turn:"
-msgstr "Dauer des Rundenendes"
 
 #: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
@@ -334,7 +328,7 @@ msgstr "Fehler in %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Fehler beim Laden von Mannschaft %s:"
 
-#: src/team/team.cpp:184
+#: src/team/team.cpp:185
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
@@ -366,15 +360,14 @@ msgstr ""
 "Fehler:\n"
 "%s"
 
-#: src/team/team.cpp:144
+#: src/team/team.cpp:145
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fehler: kann den Körper \"%s\" für Mannschaft \"%s\" nicht finden."
 
 #: src/network/network.cpp:65
-#, fuzzy
 msgid "Failed to initialize network library!"
-msgstr "Kann SDL Bibliothek nicht initialisieren: %s"
+msgstr "Kann Netzwerk-Bibliothek nicht initialisieren!"
 
 #: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
@@ -385,9 +378,8 @@ msgid "Fullscreen?"
 msgstr "Vollbild?"
 
 #: src/menu/network_menu.cpp:61
-#, fuzzy
 msgid "Game options:"
-msgstr "Einstellungen"
+msgstr "Spiel Einstellungen:"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -410,17 +402,13 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
-#: src/menu/game_menu.cpp:69
-msgid "Head commander"
-msgstr "Hauptkommandant"
-
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 msgid "Holy Grenade"
 msgstr "Heilige Granate"
 
 #: src/menu/network_connection_menu.cpp:74
 msgid "Host a game"
-msgstr ""
+msgstr "Spiel hosten"
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
@@ -434,7 +422,7 @@ msgstr ""
 "Falls du einen Fehler gefunden oder einen Featurewunsch hast, sende uns eine "
 "E-Mail (in English bitte):"
 
-#: src/menu/game_menu.cpp:304
+#: src/menu/game_menu.cpp:311
 msgid "Initial energy:"
 msgstr "Startenergie:"
 
@@ -461,11 +449,11 @@ msgstr "Initialisiere Mannschaft"
 
 #: src/network/network.cpp:171
 msgid "Invalid port!"
-msgstr ""
+msgstr "Ungültiger Port!"
 
 #: src/network/network.cpp:121
 msgid "Invalid server adress!"
-msgstr ""
+msgstr "Ungültige Serveradresse!"
 
 #: src/object/bonus_box.cpp:280
 msgid "Is it a gift?"
@@ -501,9 +489,8 @@ msgid "Maps"
 msgstr "Karten"
 
 #: src/menu/network_menu.cpp:59
-#, fuzzy
 msgid "Max number of players:"
-msgstr "Anzahl der Spieler pro Mannschaft:"
+msgstr "Maximale Anzahl an Spielern:"
 
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
@@ -518,16 +505,16 @@ msgid "Most sold-out"
 msgstr ""
 
 #: src/menu/results_menu.cpp:159
-msgid "Most usefull"
-msgstr ""
+msgid "Most useful"
+msgstr "Am nützlichsten"
 
 #: src/menu/results_menu.cpp:164
 msgid "Most useless"
-msgstr ""
+msgstr "Am nutzlosesten"
 
 #: src/menu/results_menu.cpp:154
 msgid "Most violent"
-msgstr ""
+msgstr "Am gewalttätigsten"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -555,23 +542,19 @@ msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
 #: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
 #: src/team/results.cpp:205
 msgid "Nobody!"
-msgstr ""
+msgstr "Niemand!"
 
-#: src/menu/game_menu.cpp:75
+#: src/menu/game_menu.cpp:76
 msgid "Number of characters"
 msgstr "Anzahl der Figuren"
 
-#: src/menu/game_menu.cpp:299
-msgid "Number of players per team:"
-msgstr "Anzahl der Spieler pro Mannschaft:"
-
-#: src/menu/game_menu.cpp:171
+#: src/menu/game_menu.cpp:175
 msgid "Number of teams:"
 msgstr "Anzahl der Mannschaften"
 
 #: src/menu/network_menu.cpp:181
 msgid "Only the server can set the map!"
-msgstr ""
+msgstr "Nur der Server kann die Karte setzen!"
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -589,10 +572,6 @@ msgstr "Fallschirm wird automatisch aktiviert."
 msgid "Play"
 msgstr "Spielen"
 
-#: src/menu/game_menu.cpp:71
-msgid "Player X"
-msgstr "Spieler X"
-
 #: src/menu/options_menu.cpp:68
 msgid "Player energy?"
 msgstr "Energie des Spielers anzeigen?"
@@ -601,7 +580,7 @@ msgstr "Energie des Spielers anzeigen?"
 msgid "Player's name?"
 msgstr "Name des Spielers anzeigen?"
 
-#: src/weapon/polecat.cpp:134
+#: src/weapon/polecat.cpp:136
 msgid "Polecat Launcher"
 msgstr "Stinktier-Werfer"
 
@@ -631,21 +610,21 @@ msgstr "Spiel starten"
 
 #: src/menu/network_menu.cpp:83
 msgid "Select the teams:"
-msgstr ""
+msgstr "Wähle die Mannschaften aus:"
 
 #: src/menu/network_menu.cpp:126
 msgid "Select the world:"
-msgstr ""
+msgstr "Wähle die Welt aus:"
 
 #: src/menu/network_connection_menu.cpp:60
 msgid "Server adress:"
-msgstr ""
+msgstr "Server Adresse:"
 
 #: src/menu/network_connection_menu.cpp:129
 msgid "Server started"
-msgstr ""
+msgstr "Server gestartet"
 
-#: src/weapon/shotgun.cpp:61
+#: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
 msgstr "Schrotflinte"
 
@@ -692,7 +671,7 @@ msgstr "Spritze"
 #: src/team/results.cpp:208
 #, c-format
 msgid "Team %s results:\n"
-msgstr ""
+msgstr "Ergebnisse Team %s:\n"
 
 #: src/game/game_loop.cpp:207
 msgid "Teams"
@@ -722,9 +701,8 @@ msgid "Unable to connect"
 msgstr ""
 
 #: src/network/network.cpp:132
-#, fuzzy
 msgid "Unable to contact server!"
-msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
+msgstr "Kann Server nicht kontaktieren!"
 
 #: src/graphic/video.cpp:193
 #, c-format
@@ -742,7 +720,7 @@ msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
 
 #: src/menu/network_connection_menu.cpp:132
 msgid "Unable to start server"
-msgstr ""
+msgstr "Kann Server nicht starten"
 
 #: src/main.cpp:118
 msgid "Unexpected exception caught..."
@@ -754,7 +732,7 @@ msgstr "Version"
 
 #: src/menu/network_menu.cpp:288
 msgid "Wait! "
-msgstr ""
+msgstr "Warte! "
 
 #: src/interface/interface.cpp:99
 msgid "Weapon:"
@@ -788,7 +766,7 @@ msgstr "Wormux Version "
 #: src/include/action_handler.cpp:385
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
+msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
 
 #: src/map/maps_list.cpp:71
 #, c-format
@@ -809,10 +787,22 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 
-#: src/weapon/launcher.cpp:57
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "fertig"
+
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Dauer des Rundenendes"
+
+#~ msgid "Head commander"
+#~ msgstr "Hauptkommandant"
+
+#~ msgid "Number of players per team:"
+#~ msgstr "Anzahl der Spieler pro Mannschaft:"
+
+#~ msgid "Player X"
+#~ msgstr "Spieler X"

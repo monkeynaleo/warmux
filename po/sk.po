@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-Country: SLOVAKIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:63
+#: src/menu/game_menu.cpp:64
 msgid " "
 msgstr ""
 
@@ -28,7 +28,7 @@ msgstr " Najvypredávanejší :  %s (%i).\n"
 
 #: src/team/results.cpp:212
 #, fuzzy
-msgid "  Most usefull  :  "
+msgid "  Most useful   :  "
 msgstr "  Najužitočnejší  :  %s (%i).\n"
 
 #: src/team/results.cpp:213
@@ -317,13 +317,9 @@ msgstr "O programe"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Skutočne chceš skončiť(A/N) ?"
 
-#: src/menu/game_menu.cpp:287
+#: src/menu/game_menu.cpp:293
 msgid "Duration of a turn:"
 msgstr "Dľžka trvania ťahu:"
-
-#: src/menu/game_menu.cpp:293
-msgid "Duration of the end of a turn:"
-msgstr "Trvanie konca ťahu:"
 
 #: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
@@ -343,7 +339,7 @@ msgstr "Chyba v %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Chyba počas načítavania tímu %s:"
 
-#: src/team/team.cpp:184
+#: src/team/team.cpp:185
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Chyba počas načítavania tímu %s:"
@@ -373,7 +369,7 @@ msgstr ""
 "Chyba:\n"
 "%s"
 
-#: src/team/team.cpp:144
+#: src/team/team.cpp:145
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Chyba : nemožem nájsť skin \"%s\" pre tím \"%s\"."
@@ -418,10 +414,6 @@ msgstr "Pištoľ"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Domovský priečinok (Prostredie premennej $HOME) sa nenašiel!"
 
-#: src/menu/game_menu.cpp:69
-msgid "Head commander"
-msgstr ""
-
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
@@ -441,7 +433,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:304
+#: src/menu/game_menu.cpp:311
 msgid "Initial energy:"
 msgstr "Počiatočná energia"
 
@@ -528,7 +520,7 @@ msgstr " Najvypredávanejší :  %s (%i).\n"
 
 #: src/menu/results_menu.cpp:159
 #, fuzzy
-msgid "Most usefull"
+msgid "Most useful"
 msgstr "  Najužitočnejší  :  %s (%i).\n"
 
 #: src/menu/results_menu.cpp:164
@@ -570,16 +562,12 @@ msgstr "Nenájdený element <%s> v xml konfiguračnom súbore!"
 msgid "Nobody!"
 msgstr "Nikto"
 
-#: src/menu/game_menu.cpp:75
+#: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
 msgstr "Počet hráčov v tíme:"
 
-#: src/menu/game_menu.cpp:299
-msgid "Number of players per team:"
-msgstr "Počet hráčov v tíme:"
-
-#: src/menu/game_menu.cpp:171
+#: src/menu/game_menu.cpp:175
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Počet hráčov v tíme:"
@@ -604,11 +592,6 @@ msgstr ""
 msgid "Play"
 msgstr "Hraj"
 
-#: src/menu/game_menu.cpp:71
-#, fuzzy
-msgid "Player X"
-msgstr "Hraj"
-
 #: src/menu/options_menu.cpp:68
 #, fuzzy
 msgid "Player energy?"
@@ -619,7 +602,7 @@ msgstr "Zobraziť hráčovu energiu?"
 msgid "Player's name?"
 msgstr "Zobraziť hráčovo meno?"
 
-#: src/weapon/polecat.cpp:134
+#: src/weapon/polecat.cpp:136
 msgid "Polecat Launcher"
 msgstr ""
 
@@ -663,7 +646,7 @@ msgstr ""
 msgid "Server started"
 msgstr ""
 
-#: src/weapon/shotgun.cpp:61
+#: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
 msgstr "Nastavenie zvuku"
@@ -833,7 +816,7 @@ msgstr "Potrebuješ najmenej dva tímy na hru: zmeň si to v menu 'Nastavenie' !
 msgid "You need at least two valid teams !"
 msgstr "Potrebuješ najmenej dva platné tímy !"
 
-#: src/weapon/launcher.cpp:57
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 
@@ -874,6 +857,9 @@ msgstr "koniec"
 #~ msgid "Drawn game :-("
 #~ msgstr "Vyrovnaná hra :-("
 
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Trvanie konca ťahu:"
+
 #, fuzzy
 #~ msgid "End of the game!\n"
 #~ msgstr "Koniec hry!\n"
@@ -903,6 +889,9 @@ msgstr "koniec"
 #~ msgid "Load skins:"
 #~ msgstr "Načítavam skiny:"
 
+#~ msgid "Number of players per team:"
+#~ msgstr "Počet hráčov v tíme:"
+
 #~ msgid "Ok"
 #~ msgstr "OK"
 
@@ -911,6 +900,10 @@ msgstr "koniec"
 
 #~ msgid "Pause"
 #~ msgstr "Pauza"
+
+#, fuzzy
+#~ msgid "Player X"
+#~ msgstr "Hraj"
 
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr "Prosím vyjadri nám svoj názor na Wormux cez email:"

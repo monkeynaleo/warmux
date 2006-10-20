@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:63
+#: src/menu/game_menu.cpp:64
 msgid " "
 msgstr ""
 
@@ -28,7 +28,7 @@ msgid "  Most sold-out  :  "
 msgstr ""
 
 #: src/team/results.cpp:212
-msgid "  Most usefull  :  "
+msgid "  Most useful   :  "
 msgstr ""
 
 #: src/team/results.cpp:213
@@ -314,12 +314,8 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Biztos, hogy ki szeretnél lépni? (Y/N) ?"
 
-#: src/menu/game_menu.cpp:287
-msgid "Duration of a turn:"
-msgstr "Egy forduló ideje:"
-
 #: src/menu/game_menu.cpp:293
-msgid "Duration of the end of a turn:"
+msgid "Duration of a turn:"
 msgstr "Egy forduló ideje:"
 
 #: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
@@ -340,7 +336,7 @@ msgstr "Hiba lépett fel (%s): %lu"
 msgid "Error loading team %s:"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/team/team.cpp:184
+#: src/team/team.cpp:185
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
@@ -370,7 +366,7 @@ msgstr ""
 "Hiba:\n"
 "%s"
 
-#: src/team/team.cpp:144
+#: src/team/team.cpp:145
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem található %s csapatának %s sminkje."
@@ -415,10 +411,6 @@ msgstr "Pisztoly"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nem található a felhasználó könyvtára!"
 
-#: src/menu/game_menu.cpp:69
-msgid "Head commander"
-msgstr ""
-
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
@@ -438,7 +430,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:304
+#: src/menu/game_menu.cpp:311
 msgid "Initial energy:"
 msgstr "Induló energiaszint:"
 
@@ -526,7 +518,7 @@ msgid "Most sold-out"
 msgstr ""
 
 #: src/menu/results_menu.cpp:159
-msgid "Most usefull"
+msgid "Most useful"
 msgstr ""
 
 #: src/menu/results_menu.cpp:164
@@ -566,16 +558,12 @@ msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
 msgid "Nobody!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:75
+#: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
 msgstr "Játékosok száma csapatonként:"
 
-#: src/menu/game_menu.cpp:299
-msgid "Number of players per team:"
-msgstr "Játékosok száma csapatonként:"
-
-#: src/menu/game_menu.cpp:171
+#: src/menu/game_menu.cpp:175
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Játékosok száma csapatonként:"
@@ -600,11 +588,6 @@ msgstr ""
 msgid "Play"
 msgstr "Irány a játék!"
 
-#: src/menu/game_menu.cpp:71
-#, fuzzy
-msgid "Player X"
-msgstr "Irány a játék!"
-
 #: src/menu/options_menu.cpp:68
 #, fuzzy
 msgid "Player energy?"
@@ -615,7 +598,7 @@ msgstr "A játékos energiájának megjelenítése"
 msgid "Player's name?"
 msgstr "A játékos nevének megjelenítése"
 
-#: src/weapon/polecat.cpp:134
+#: src/weapon/polecat.cpp:136
 msgid "Polecat Launcher"
 msgstr ""
 
@@ -659,7 +642,7 @@ msgstr ""
 msgid "Server started"
 msgstr ""
 
-#: src/weapon/shotgun.cpp:61
+#: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
 msgstr "Beállítások"
@@ -829,7 +812,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Legalább két csapatot kell verbuválnod!"
 
-#: src/weapon/launcher.cpp:57
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Ezt elnézted!"
 
@@ -850,6 +833,9 @@ msgstr ""
 
 #~ msgid "ClanLib error during loading map '%s' :"
 #~ msgstr "ClanLib hiba lépett fel a pálya (%s) betöltése közben:"
+
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Egy forduló ideje:"
 
 #, fuzzy
 #~ msgid "End of the game!\n"
@@ -879,8 +865,15 @@ msgstr ""
 #~ msgid "Load weapon %s"
 #~ msgstr "%s fegyver betöltése"
 
+#~ msgid "Number of players per team:"
+#~ msgstr "Játékosok száma csapatonként:"
+
 #~ msgid "Pause"
 #~ msgstr "Szünet"
+
+#, fuzzy
+#~ msgid "Player X"
+#~ msgstr "Irány a játék!"
 
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr "Kérjük, mondd el a véleményed a Wormuxról: "

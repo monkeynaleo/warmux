@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-Language: Esperanto\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:63
+#: src/menu/game_menu.cpp:64
 msgid " "
 msgstr ""
 
@@ -27,7 +27,7 @@ msgid "  Most sold-out  :  "
 msgstr ""
 
 #: src/team/results.cpp:212
-msgid "  Most usefull  :  "
+msgid "  Most useful   :  "
 msgstr ""
 
 #: src/team/results.cpp:213
@@ -314,15 +314,10 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Cxu vi volas vere forlasi (J/N) ?"
 
-#: src/menu/game_menu.cpp:287
+#: src/menu/game_menu.cpp:293
 #, fuzzy
 msgid "Duration of a turn:"
 msgstr "Vicdauxro"
-
-#: src/menu/game_menu.cpp:293
-#, fuzzy
-msgid "Duration of the end of a turn:"
-msgstr "Vicfindauxro"
 
 #: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
@@ -347,7 +342,7 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/team/team.cpp:184
+#: src/team/team.cpp:185
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr ""
@@ -385,7 +380,7 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/team/team.cpp:144
+#: src/team/team.cpp:145
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr ""
@@ -430,10 +425,6 @@ msgstr "Pistolo"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:69
-msgid "Head commander"
-msgstr ""
-
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
@@ -453,7 +444,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:304
+#: src/menu/game_menu.cpp:311
 #, fuzzy
 msgid "Initial energy:"
 msgstr "Komenca energio"
@@ -544,7 +535,7 @@ msgid "Most sold-out"
 msgstr ""
 
 #: src/menu/results_menu.cpp:159
-msgid "Most usefull"
+msgid "Most useful"
 msgstr ""
 
 #: src/menu/results_menu.cpp:164
@@ -585,17 +576,12 @@ msgstr ""
 msgid "Nobody!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:75
+#: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
 msgstr "Nombro da ludantoj per teamo"
 
-#: src/menu/game_menu.cpp:299
-#, fuzzy
-msgid "Number of players per team:"
-msgstr "Nombro da ludantoj per teamo"
-
-#: src/menu/game_menu.cpp:171
+#: src/menu/game_menu.cpp:175
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Nombro da ludantoj per teamo"
@@ -620,11 +606,6 @@ msgstr ""
 msgid "Play"
 msgstr "Aktori"
 
-#: src/menu/game_menu.cpp:71
-#, fuzzy
-msgid "Player X"
-msgstr "Aktori"
-
 #: src/menu/options_menu.cpp:68
 #, fuzzy
 msgid "Player energy?"
@@ -635,7 +616,7 @@ msgstr "Afisxas la energio de la ludantoj"
 msgid "Player's name?"
 msgstr "Afisxas la nomo de la ludantoj"
 
-#: src/weapon/polecat.cpp:134
+#: src/weapon/polecat.cpp:136
 msgid "Polecat Launcher"
 msgstr ""
 
@@ -679,7 +660,7 @@ msgstr ""
 msgid "Server started"
 msgstr ""
 
-#: src/weapon/shotgun.cpp:61
+#: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
 msgstr "Elektoj"
@@ -854,7 +835,7 @@ msgstr "Vi necesas almenaux du teamojn, korektu cxi tion en la menuo Elektoj !"
 msgid "You need at least two valid teams !"
 msgstr ""
 
-#: src/weapon/launcher.cpp:57
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr ""
 
@@ -892,6 +873,10 @@ msgstr ""
 #~ msgstr "Ludbatalo nula :-("
 
 #, fuzzy
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Vicfindauxro"
+
+#, fuzzy
 #~ msgid "End of the game!\n"
 #~ msgstr "Partifino !\n"
 
@@ -924,8 +909,16 @@ msgstr ""
 #~ msgid "Load weapon %s"
 #~ msgstr "Muntas la terenon %s"
 
+#, fuzzy
+#~ msgid "Number of players per team:"
+#~ msgstr "Nombro da ludantoj per teamo"
+
 #~ msgid "PAUSE"
 #~ msgstr "PAUxZO"
+
+#, fuzzy
+#~ msgid "Player X"
+#~ msgstr "Aktori"
 
 #~ msgid "Sound error :"
 #~ msgstr "Soneraro :"

@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:63
+#: src/menu/game_menu.cpp:64
 msgid " "
 msgstr ""
 
@@ -31,7 +31,7 @@ msgid "  Most sold-out  :  "
 msgstr ""
 
 #: src/team/results.cpp:212
-msgid "  Most usefull  :  "
+msgid "  Most useful   :  "
 msgstr ""
 
 #: src/team/results.cpp:213
@@ -328,13 +328,9 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
-#: src/menu/game_menu.cpp:287
+#: src/menu/game_menu.cpp:293
 msgid "Duration of a turn:"
 msgstr "Длительность шага:"
-
-#: src/menu/game_menu.cpp:293
-msgid "Duration of the end of a turn:"
-msgstr "Длительность завершения шага:"
 
 #: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
@@ -354,7 +350,7 @@ msgstr "Ошибка в %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/team/team.cpp:184
+#: src/team/team.cpp:185
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке команды %s:"
@@ -384,7 +380,7 @@ msgstr ""
 "Ошибка:\n"
 "%s"
 
-#: src/team/team.cpp:144
+#: src/team/team.cpp:145
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
@@ -428,10 +424,6 @@ msgstr "Пистолет"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Домашний каталог (переменная окружения $HOME) не найден!"
 
-#: src/menu/game_menu.cpp:69
-msgid "Head commander"
-msgstr ""
-
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
@@ -451,7 +443,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:304
+#: src/menu/game_menu.cpp:311
 msgid "Initial energy:"
 msgstr "Энергии в начале:"
 
@@ -536,7 +528,7 @@ msgid "Most sold-out"
 msgstr ""
 
 #: src/menu/results_menu.cpp:159
-msgid "Most usefull"
+msgid "Most useful"
 msgstr ""
 
 #: src/menu/results_menu.cpp:164
@@ -575,16 +567,12 @@ msgstr "Элемент <%s> не найден в файле с настройк�
 msgid "Nobody!"
 msgstr ""
 
-#: src/menu/game_menu.cpp:75
+#: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
 msgstr "Игроков в каждой команде:"
 
-#: src/menu/game_menu.cpp:299
-msgid "Number of players per team:"
-msgstr "Игроков в каждой команде:"
-
-#: src/menu/game_menu.cpp:171
+#: src/menu/game_menu.cpp:175
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Игроков в каждой команде:"
@@ -609,11 +597,6 @@ msgstr ""
 msgid "Play"
 msgstr "Играть"
 
-#: src/menu/game_menu.cpp:71
-#, fuzzy
-msgid "Player X"
-msgstr "Играть"
-
 #: src/menu/options_menu.cpp:68
 #, fuzzy
 msgid "Player energy?"
@@ -624,7 +607,7 @@ msgstr "Показать энергию игрока?"
 msgid "Player's name?"
 msgstr "Показать имя игрока?"
 
-#: src/weapon/polecat.cpp:134
+#: src/weapon/polecat.cpp:136
 msgid "Polecat Launcher"
 msgstr ""
 
@@ -668,7 +651,7 @@ msgstr ""
 msgid "Server started"
 msgstr ""
 
-#: src/weapon/shotgun.cpp:61
+#: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
 msgstr "Настройки звука"
@@ -840,7 +823,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 
-#: src/weapon/launcher.cpp:57
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 
@@ -859,6 +842,9 @@ msgstr ""
 
 #~ msgid "Authors"
 #~ msgstr "Авторы"
+
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Длительность завершения шага:"
 
 #, fuzzy
 #~ msgid "End of the game!\n"
@@ -879,11 +865,18 @@ msgstr ""
 #~ msgid "Load skins:"
 #~ msgstr "Загрузка тем:"
 
+#~ msgid "Number of players per team:"
+#~ msgstr "Игроков в каждой команде:"
+
 #~ msgid "Ok"
 #~ msgstr "ОК"
 
 #~ msgid "Pause"
 #~ msgstr "Пауза"
+
+#, fuzzy
+#~ msgid "Player X"
+#~ msgstr "Играть"
 
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr "Напишите нам по почте, что вы думаете о Wormux:"
