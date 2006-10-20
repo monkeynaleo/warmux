@@ -247,6 +247,8 @@ body/beastieteam/arm-left.png
 body/beastieteam/foot.png
 body/beastieteam/tail.png
 body/beastieteam/arm-right.png
+body/beastieteam/c1.png
+body/beastieteam/c2.png
 body/oooteam/black.png
 body/oooteam/body.png
 body/oooteam/dead.png
