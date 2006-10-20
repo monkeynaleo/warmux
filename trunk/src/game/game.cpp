@@ -210,6 +210,9 @@ void Game::UnloadDatas()
 
 void Game::Pause()
 {
+  if(!network.IsLocal())
+    return;
+
   jukebox.Pause();
 
   //Pause screen

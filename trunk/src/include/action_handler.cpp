@@ -481,6 +481,12 @@ void Action_Nickname(Action *a)
   
 }
 
+void Action_Pause(Action *a)
+{
+  // Toggle pause
+  Game::GetInstance()->Pause();
+}
+
 void ActionHandler::ExecActions()
 {
   assert(mutex!=NULL);
@@ -574,5 +580,6 @@ ActionHandler::ActionHandler()
   Register (ACTION_SET_CHARACTER_ENERGY, "set_character_energy", &Action_SetCharacterEnergy);
   Register (ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
   Register (ACTION_NICKNAME, "nickname", Action_Nickname);
+  Register (ACTION_PAUSE, "pause", Action_Pause);
   SDL_UnlockMutex(mutex);
 }
