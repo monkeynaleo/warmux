@@ -220,7 +220,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
 
     case ACTION_PAUSE:
-      Game::GetInstance()->Pause();
+      ActionHandler::GetInstance()->NewAction(new Action(ACTION_PAUSE));
       return;
 
     case ACTION_FULLSCREEN:
