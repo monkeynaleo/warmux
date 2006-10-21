@@ -557,8 +557,8 @@
 <movement name="animation0" speed="5400"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
 	<collision_rect left="5" right="5" top="10" bottom="2"/>
 	<frame number="0">
-		<member type="wingright" scale_x="-1.0" angle="90"/>
-		<member type="yoyo" angle="90"/>
+		<member type="wingright" scale_x="-1.0" dx="12" dy="1" angle="-90"/>
+		<member type="yoyo" angle="90" dx="-10" />
 	</frame>
 </movement>
 
