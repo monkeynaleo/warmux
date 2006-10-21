@@ -26,7 +26,7 @@
 #include "../game/time.h"
 #include "../graphic/text.h"
 
-const uint BARRE_LARG = 160;
+const uint BARRE_LARG = 200;
 const uint BARRE_HAUT = 13;
 const uint ESPACEMENT = 3;
 

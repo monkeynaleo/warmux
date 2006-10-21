@@ -28,7 +28,7 @@
 #include "macro.h"
 #include "../tool/i18n.h"
 
-TeamResults::TeamResults(const char* name,
+TeamResults::TeamResults(const std::string& name,
 			 const Surface* logo,
                          const Character* MV,
                          const Character* MUl,
@@ -87,7 +87,7 @@ TeamResults* TeamResults::createTeamResults(Team* team)
     }
   }
 
-  return new TeamResults(team->GetName().c_str(),
+  return new TeamResults(team->GetName()+" - "+team->GetPlayerName(),
 			 &team->flag,
                          MostViolent,
                          MostUsefull,
@@ -140,7 +140,7 @@ TeamResults* TeamResults::createGlobalResults(std::vector<TeamResults*>* list)
   }
 
   // We'll do as if NULL is for all teams
-  return new TeamResults(NULL,
+  return new TeamResults(_("All teams"),
 			 NULL,
                          MostViolent,
                          MostUsefull,
@@ -204,8 +204,8 @@ void TeamResults::RenderText(std::string& txt)
   else
     mv << _("Nobody!");
 
-  if (teamName)
-    txt += Format(_("Team %s results:\n"), teamName);
+  if (team_logo)
+    txt += Format(_("Team %s results:\n"), teamName.c_str());
   else
     txt += _("All teams results:\n");
   txt += _("  Most violent  :  ") + mv.str();
