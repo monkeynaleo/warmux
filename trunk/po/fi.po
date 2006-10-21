@@ -202,11 +202,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 msgstr[1] "Joukkue %s voitti %u ilmaiskua."
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(kuollut)"
 
-#: src/interface/interface.cpp:203
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
@@ -314,7 +314,7 @@ msgstr "Vuoron kesto:"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:97
 msgid "Energy:"
 msgstr "Voima:"
 
@@ -528,7 +528,7 @@ msgstr "  Väkivaltaisin  :  %s (%i)\n"
 msgid "Music?"
 msgstr "Musiikki?"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:96
 msgid "Name:"
 msgstr "Nimi:"
 
@@ -674,7 +674,7 @@ msgstr "Ääni asetukset"
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:99
 msgid "Stock:"
 msgstr "Varasto:"
 
@@ -765,7 +765,7 @@ msgstr ""
 msgid "Wait! "
 msgstr "Odota joukkueita"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:98
 msgid "Weapon:"
 msgstr "Ase:"
 

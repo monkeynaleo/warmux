@@ -195,11 +195,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "'%s je dobio %u zračni napad"
 msgstr[1] "'%s' je dobio %u zračnih napada!"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(mrtav)"
 
-#: src/interface/interface.cpp:203
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(neograničeno)"
 
@@ -308,7 +308,7 @@ msgstr "Trajanje reda:"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:97
 msgid "Energy:"
 msgstr "Energija"
 
@@ -521,7 +521,7 @@ msgstr ""
 msgid "Music?"
 msgstr "Muzika?"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:96
 msgid "Name:"
 msgstr "Ime:"
 
@@ -666,7 +666,7 @@ msgstr "Zvučne opcije"
 msgid "Starting a new game"
 msgstr "Pokreni novu igru"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:99
 msgid "Stock:"
 msgstr "Zaliha:"
 
@@ -756,7 +756,7 @@ msgstr ""
 msgid "Wait! "
 msgstr ""
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:98
 msgid "Weapon:"
 msgstr "Oružje:"
 

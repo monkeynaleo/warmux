@@ -201,11 +201,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "¡El jugador %s ha ganado %u ataque aereo!"
 msgstr[1] "¡El jugador %s ha ganado %u ataques aereos!"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(muerto)"
 
-#: src/interface/interface.cpp:203
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
@@ -315,7 +315,7 @@ msgstr "Duración del turno:"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:97
 msgid "Energy:"
 msgstr "Energia :"
 
@@ -531,7 +531,7 @@ msgstr " El más violento  :  %s (%i).\n"
 msgid "Music?"
 msgstr "¿Música?"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:96
 msgid "Name:"
 msgstr "Nombre:"
 
@@ -679,7 +679,7 @@ msgstr "Opciones de sonido"
 msgid "Starting a new game"
 msgstr "Empezando un nuevo juego"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:99
 msgid "Stock:"
 msgstr "Munición:"
 
@@ -768,7 +768,7 @@ msgstr ""
 msgid "Wait! "
 msgstr ""
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:98
 msgid "Weapon:"
 msgstr "Arma:"
 

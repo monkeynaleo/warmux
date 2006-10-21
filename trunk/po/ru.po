@@ -211,11 +211,11 @@ msgstr[0] "'%s выиграл %u воздушную атаку"
 msgstr[1] "'%s выиграл %u воздушных атаки"
 msgstr[2] "'%s выиграл %u воздушных атак"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(мёртв)"
 
-#: src/interface/interface.cpp:203
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
@@ -325,7 +325,7 @@ msgstr "Длительность шага:"
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:97
 msgid "Energy:"
 msgstr "Энергия:"
 
@@ -537,7 +537,7 @@ msgstr ""
 msgid "Music?"
 msgstr "Музыка?"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:96
 msgid "Name:"
 msgstr "Имя:"
 
@@ -681,7 +681,7 @@ msgstr "Настройки звука"
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:99
 msgid "Stock:"
 msgstr "Боеприпасов:"
 
@@ -772,7 +772,7 @@ msgstr ""
 msgid "Wait! "
 msgstr "Ожидание команд"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:98
 msgid "Weapon:"
 msgstr "Оружие:"
 

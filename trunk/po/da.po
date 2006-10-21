@@ -195,11 +195,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s har fået %u luftangreb"
 msgstr[1] "%s har fået %u luftangreb"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(død)"
 
-#: src/interface/interface.cpp:203
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
@@ -307,7 +307,7 @@ msgstr "Længden af en tur:"
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:97
 msgid "Energy:"
 msgstr "Energi:"
 
@@ -518,7 +518,7 @@ msgstr ""
 msgid "Music?"
 msgstr "Musik?"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:96
 msgid "Name:"
 msgstr "Navn:"
 
@@ -662,7 +662,7 @@ msgstr "Lyde"
 msgid "Starting a new game"
 msgstr "Starter et nyt spil"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:99
 msgid "Stock:"
 msgstr "Lager:"
 
@@ -751,7 +751,7 @@ msgstr ""
 msgid "Wait! "
 msgstr ""
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:98
 msgid "Weapon:"
 msgstr "Våben:"
 

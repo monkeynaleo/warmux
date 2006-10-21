@@ -194,11 +194,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(mortinta)"
 
-#: src/interface/interface.cpp:203
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
@@ -311,7 +311,7 @@ msgstr "Vicdauxro"
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:97
 #, fuzzy
 msgid "Energy:"
 msgstr "Energio"
@@ -544,7 +544,7 @@ msgstr ""
 msgid "Music?"
 msgstr "Muziko"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:96
 #, fuzzy
 msgid "Name:"
 msgstr "Nomo"
@@ -691,7 +691,7 @@ msgstr "Elektoj"
 msgid "Starting a new game"
 msgstr "Komencas novan partion"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:99
 #, fuzzy
 msgid "Stock:"
 msgstr "Municioj"
@@ -781,7 +781,7 @@ msgstr ""
 msgid "Wait! "
 msgstr "Venkinto : teamo %s"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:98
 #, fuzzy
 msgid "Weapon:"
 msgstr "Armilo"

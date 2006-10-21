@@ -197,11 +197,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "El jugador '%s' ha conseguit %u atac aeri !"
 msgstr[1] "El jugador '%s' ha conseguit %u atacs aeris !"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(mort)"
 
-#: src/interface/interface.cpp:203
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
@@ -309,7 +309,7 @@ msgstr "Duració del torn:"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:97
 msgid "Energy:"
 msgstr "Energia :"
 
@@ -518,7 +518,7 @@ msgstr ""
 msgid "Music?"
 msgstr "Música?"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:96
 msgid "Name:"
 msgstr "Nom :"
 
@@ -665,7 +665,7 @@ msgstr "Efectes sonors?"
 msgid "Starting a new game"
 msgstr "Començant un nou joc"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:99
 msgid "Stock:"
 msgstr "Stock :"
 
@@ -754,7 +754,7 @@ msgstr ""
 msgid "Wait! "
 msgstr ""
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:98
 msgid "Weapon:"
 msgstr "Arma :"
 

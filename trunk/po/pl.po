@@ -208,11 +208,11 @@ msgstr[0] "%s wygrał %u atak powietrzny"
 msgstr[1] "%s wygrał %u ataki powietrzne"
 msgstr[2] "%s wygrał %u ataków powietrznych"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:160
 msgid "(dead)"
 msgstr "(martwy)"
 
-#: src/interface/interface.cpp:203
+#: src/interface/interface.cpp:202
 msgid "(unlimited)"
 msgstr "(nieograniczony)"
 
@@ -322,7 +322,7 @@ msgstr "Czas kolejki:"
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:97
 msgid "Energy:"
 msgstr "Energia:"
 
@@ -535,7 +535,7 @@ msgstr ""
 msgid "Music?"
 msgstr "Muzyka?"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:96
 msgid "Name:"
 msgstr "Nazwa:"
 
@@ -679,7 +679,7 @@ msgstr "Opcje dźwiękowe"
 msgid "Starting a new game"
 msgstr "Uruchamianie nowej gry"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:99
 msgid "Stock:"
 msgstr "Stan:"
 
@@ -770,7 +770,7 @@ msgstr ""
 msgid "Wait! "
 msgstr "Drużyn oczekujące"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:98
 msgid "Weapon:"
 msgstr "Broń:"
 
