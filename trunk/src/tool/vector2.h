@@ -15,18 +15,18 @@ template<class T> class Vector2
 	public:
 		T x, y;
 
-		/** 
+		/**
 		 * Default constructor that will be a vector null (0, 0)
 		 */
 		inline Vector2(){
 			x = 0;
 			y = 0;
 		}
-		
+
 		/**
 		 * Constructor that build a new vector from two values, x and y.
 		 *
-		 * @param x 
+		 * @param x
 		 * @param y
 		 */
 		inline Vector2(T x, T y){
@@ -48,15 +48,15 @@ template<class T> class Vector2
 			return y;
 		}
 
-		// Comparators     
-		
+		// Comparators
+
 		/**
 		 *
 		 */
 		inline bool operator==(const Vector2<T> &p2) const{
 			return (x == p2.x) && (y == p2.y);
 		}
-		
+
 		/**
 		 *
 		 * @param p2
@@ -64,7 +64,7 @@ template<class T> class Vector2
 		inline bool operator!=(const Vector2<T> &p2) const{
 			return (x != p2.x) || (y != p2.y);
 		}
-		
+
 		/**
 		 *
 		 * @param p2
@@ -82,8 +82,8 @@ template<class T> class Vector2
 		}
 
 		// Vector/Vector operations
-		
-		/** 
+
+		/**
 		 *
 		 * @param p2
 		 */
@@ -99,6 +99,14 @@ template<class T> class Vector2
 			return Vector2<T>(x - p2.x, y - p2.y);
 		}
 
+                /**
+		 *
+		 * @returns the negative value of ourself
+		 */
+		inline Vector2<T> operator-() const{
+			return Vector2<T>(-x, -y);
+		}
+
 		/**
 		 *
 		 * @param p2
@@ -106,11 +114,11 @@ template<class T> class Vector2
 		inline Vector2<T> operator*(const Vector2<T> &p2) const{
 			return Vector2<T>(x * p2.x, y * p2.y);
 		}
-	
+
 		/**
 		 *
 		 * @param p2
-		 */	
+		 */
 		inline Vector2<T> operator/(const Vector2<T> &p2) const{
 			return Vector2<T>(x / p2.x, y / p2.y);
 		}
@@ -120,7 +128,7 @@ template<class T> class Vector2
 		}
 
 		// Vector/Scalar opertations
-		
+
 		/**
 		 *
 		 * @param val
@@ -128,7 +136,7 @@ template<class T> class Vector2
 		inline Vector2<T> operator+(const T val) const{
 			return Vector2<T>(x + val, y + val);
 		}
-		
+
 		/**
 		 *
 		 * @param val
@@ -172,7 +180,7 @@ template<class T> class Vector2
 			x -= val;
 			y += val;
 		}
-		
+
 		/**
 		 *
 		 */
@@ -182,7 +190,7 @@ template<class T> class Vector2
 		}
 
 		// Operators on itself with an other vector
-		
+
 		/**
 		 *
 		 * @param p2
@@ -201,7 +209,7 @@ template<class T> class Vector2
 		}
 
 		// Special operators
-		
+
 		/**
 		 *
 		 */
@@ -242,7 +250,7 @@ template<class T> class Vector2
 		 * @return
 		 */
 		inline Vector2<T> max(const Vector2<T> &p2) const{
-            return Vector2<T>( x > p2.x? x:p2.x,
+                        return Vector2<T>( x > p2.x? x:p2.x,
 				               y > p2.y? y:p2.y );
 		}
 
@@ -251,7 +259,7 @@ template<class T> class Vector2
 			r = r.max(min);
 			return r.min(max);
 		}
-		
+
 		/**
 		 *
 		 * @param p2
