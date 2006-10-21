@@ -211,7 +211,7 @@ uint Team::ReadEnergy ()
 
 void Team::UpdateEnergyBar ()
 {
-  energy.NouvelleValeur(ReadEnergy());
+  energy.SetValue(ReadEnergy());
 }
 
 void Team::NextCharacter()
@@ -401,6 +401,7 @@ void Team::SetNbCharacters(uint howmany)
 void Team::SetPlayerName(const std::string& _player_name)
 {
   m_player_name = _player_name;
+  energy.SetTeamName(m_player_name+" - "+m_name);
 }
 
 void Team::DrawEnergy()

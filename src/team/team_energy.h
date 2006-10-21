@@ -16,11 +16,11 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Barre d'énergie de chaque équipe
+ * Energy (progress) bar of a team
  *****************************************************************************/
 
-#ifndef ENERGIE_EQUIPE_H
-#define ENERGIE_EQUIPE_H
+#ifndef TEAM_ENERGY_H
+#define TEAM_ENERGY_H
 
 #include "../graphic/text.h"
 #include "../gui/progress_bar.h"
@@ -71,13 +71,15 @@ class TeamEnergy
     void Refresh();
     void Draw();
 
-    void NouvelleValeur(uint nv_energie); //(avec animation)
+    void SetValue(uint nv_energie); //(avec animation)
 
     void FixeClassement(uint classem); //(sans animation)
     void NouveauClassement(uint nv_classem); //(avec animation)
 
-    void Mouvement(); //Déplacement des jauges (changement dans le classement)
-    bool EstEnMouvement(); //Déplacement des jauges (changement dans le classement)
+    void Move(); //Déplacement des jauges (changement dans le classement)
+    bool IsMoving() const; //Déplacement des jauges (changement dans le classement)
+
+    void SetTeamName(const std::string& _team_name);
 };
 
-#endif //ENERGIE_EQUIPE_H
+#endif 
