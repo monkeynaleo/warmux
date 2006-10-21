@@ -856,7 +856,7 @@ bool Character::IsActiveCharacter() const
 }
 
 // Hand position
-Point2i Character::GetHandPosition() {
+const Point2i & Character::GetHandPosition() const {
   return body->GetHandPosition();
 }
 

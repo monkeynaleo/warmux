@@ -157,7 +157,7 @@ public:
   bool IsSameAs(const Character& other) { return (GetName() == other.GetName()); }
 
   // Hand position
-  Point2i GetHandPosition();
+  const Point2i & GetHandPosition() const;
   void GetHandPositionf (double &x, double &y);
 
   // Damage report
