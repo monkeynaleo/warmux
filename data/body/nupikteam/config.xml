@@ -131,7 +131,7 @@
 </sprite>
 
 <!-- ###### Yoyo ###### -->
-<sprite name="yoyo" type="yoyo">
+<sprite name="yoyo" type="yoyo" go_through_ground="true">
 	<image file="yoyo.png">
 		<grid pos="0,0" size="32,42" array="36,1" />
 	</image>
@@ -558,8 +558,8 @@
 <movement name="animation0" speed="5400"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
-		<member type="arm-right" angle="-70"/>
-		<member type="yoyo" angle="90" dx="10" />
+		<member type="arm-right" angle="-50"/>
+		<member type="yoyo" angle="45" dx="5" dy="25" />
 	</frame>
 </movement>
 
