@@ -30,6 +30,8 @@ const uint vib_period = 250;
 
 IllBubble::IllBubble() : ExplosionSmoke(20)
 {
+  // delete the sprite of the ExplosionSmoke
+  delete image;
   image = ParticleEngine::GetSprite(ILL_BUBBLE_spr);
   SetAirResistFactor( GetAirResistFactor() * 3.0 );
   vib_phi = randomObj.GetLong(0, vib_period);
