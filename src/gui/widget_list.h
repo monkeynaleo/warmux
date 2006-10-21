@@ -58,6 +58,9 @@ public:
   
   // set need_redrawing to true for all sub widgets;
   void ForceRedraw(); 
+
+  // set focus on a widget
+  void SetFocusOn(Widget*);
 };
 
 #endif // WIDGET_LIST_H

@@ -8,7 +8,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-10-18 01:43+0200\n"
 "PO-Revision-Date: 2006-06-16 11:42+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -24,43 +23,6 @@ msgstr ""
 
 #: src/menu/game_menu.cpp:64
 msgid " "
-msgstr ""
-
-#: src/team/results.cpp:214
-msgid "  Most sold-out  :  "
-msgstr ""
-
-#: src/team/results.cpp:212
-msgid "  Most useful   :  "
-msgstr ""
-
-#: src/team/results.cpp:213
-msgid "  Most useless  :  "
-msgstr ""
-
-#: src/team/results.cpp:211
-msgid "  Most violent  :  "
-msgstr ""
-
-#: src/network/distant_cpu.cpp:68
-msgid " has joined the party"
-msgstr ""
-
-#: src/network/distant_cpu.cpp:75
-#, fuzzy
-msgid " has left the party"
-msgstr "%s выпал с карты!"
-
-#: src/menu/network_menu.cpp:288
-msgid " players are not yet ready!"
-msgstr ""
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:374
-msgid " players connected"
-msgstr ""
-
-#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:379
-msgid " players ready"
 msgstr ""
 
 #: src/map/maps_list.cpp:277
@@ -232,16 +194,7 @@ msgstr "Воздушная атака"
 msgid "Airhammer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:194
-#, fuzzy
-msgid "All teams"
-msgstr "Ожидание команд"
-
-#: src/team/results.cpp:210
-msgid "All teams results:\n"
-msgstr ""
-
-#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:62
+#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
 msgid "Anvil"
 msgstr ""
 
@@ -306,15 +259,6 @@ msgstr "Кассетная бомба"
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "Покончить жизнь самоубийством"
-
-#: src/menu/network_connection_menu.cpp:67
-#, fuzzy
-msgid "Connect to game"
-msgstr "Конец игры"
-
-#: src/menu/network_connection_menu.cpp:114
-msgid "Connected to "
-msgstr ""
 
 #: src/weapon/construct.cpp:43
 msgid "Construct"
@@ -385,10 +329,6 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Ошибка: не удаётся найти тему \"%s\" для команды \"%s\"."
 
-#: src/network/network.cpp:65
-msgid "Failed to initialize network library!"
-msgstr ""
-
 #: src/game/game_loop.cpp:159
 #, fuzzy
 msgid "Find a random position for characters"
@@ -397,11 +337,6 @@ msgstr "Найти для червяков случайное местополо
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "На весь экран?"
-
-#: src/menu/network_menu.cpp:61
-#, fuzzy
-msgid "Game options:"
-msgstr "Настройки игры"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -428,10 +363,6 @@ msgstr "Домашний каталог (переменная окружения
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Граната"
-
-#: src/menu/network_connection_menu.cpp:74
-msgid "Host a game"
-msgstr ""
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
@@ -469,14 +400,6 @@ msgstr "Инициализация команд"
 msgid "Initialise teams"
 msgstr "Инициализация команд"
 
-#: src/network/network.cpp:171
-msgid "Invalid port!"
-msgstr ""
-
-#: src/network/network.cpp:121
-msgid "Invalid server adress!"
-msgstr ""
-
 #: src/object/bonus_box.cpp:280
 msgid "Is it a gift?"
 msgstr ""
@@ -510,11 +433,6 @@ msgstr "Карту %s создал:"
 msgid "Maps"
 msgstr ""
 
-#: src/menu/network_menu.cpp:59
-#, fuzzy
-msgid "Max number of players:"
-msgstr "Игроков в каждой команде:"
-
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
 msgstr ""
@@ -522,22 +440,6 @@ msgstr ""
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Мина"
-
-#: src/menu/results_menu.cpp:169
-msgid "Most sold-out"
-msgstr ""
-
-#: src/menu/results_menu.cpp:159
-msgid "Most useful"
-msgstr ""
-
-#: src/menu/results_menu.cpp:164
-msgid "Most useless"
-msgstr ""
-
-#: src/menu/results_menu.cpp:154
-msgid "Most violent"
-msgstr ""
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -560,13 +462,6 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
 
-#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
-#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
-#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
-#: src/team/results.cpp:205
-msgid "Nobody!"
-msgstr ""
-
 #: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
@@ -576,10 +471,6 @@ msgstr "Игроков в каждой команде:"
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Игроков в каждой команде:"
-
-#: src/menu/network_menu.cpp:181
-msgid "Only the server can set the map!"
-msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -635,22 +526,6 @@ msgstr ""
 msgid "Run game"
 msgstr "Начать игру"
 
-#: src/menu/network_menu.cpp:83
-msgid "Select the teams:"
-msgstr "Выберите команды:"
-
-#: src/menu/network_menu.cpp:126
-msgid "Select the world:"
-msgstr "Выберите мир:"
-
-#: src/menu/network_connection_menu.cpp:60
-msgid "Server adress:"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:129
-msgid "Server started"
-msgstr ""
-
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -698,11 +573,6 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/team/results.cpp:208
-#, c-format
-msgid "Team %s results:\n"
-msgstr ""
-
 #: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
@@ -725,34 +595,15 @@ msgstr "Автоматическая ракета улетела за преде
 msgid "The rocket has left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
 
-#: src/menu/network_connection_menu.cpp:119
-#, fuzzy
-msgid "Unable to connect"
-msgstr "Невозможно открыть каталог с темами (%s)!"
-
-#: src/network/network.cpp:132
-#, fuzzy
-msgid "Unable to contact server!"
-msgstr "Невозможно открыть каталог с картами (%s)!"
-
 #: src/graphic/video.cpp:193
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
-#: src/network/network.cpp:215
-#, fuzzy
-msgid "Unable to listen for client!"
-msgstr "Ожидание клиентов"
-
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
-
-#: src/menu/network_connection_menu.cpp:132
-msgid "Unable to start server"
-msgstr ""
 
 #: src/main.cpp:118
 #, fuzzy
@@ -762,11 +613,6 @@ msgstr "Неожиданная исключительная ситуация..."
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Версия"
-
-#: src/menu/network_menu.cpp:288
-#, fuzzy
-msgid "Wait! "
-msgstr "Ожидание команд"
 
 #: src/interface/interface.cpp:99
 msgid "Weapon:"
@@ -799,11 +645,6 @@ msgstr "Запуск Wormux..."
 msgid "Wormux version "
 msgstr "Wormux версии "
 
-#: src/include/action_handler.cpp:385
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
-
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -830,6 +671,48 @@ msgstr "Вы промазали!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
+
+#, fuzzy
+#~ msgid " has left the party"
+#~ msgstr "%s выпал с карты!"
+
+#, fuzzy
+#~ msgid "All teams"
+#~ msgstr "Ожидание команд"
+
+#, fuzzy
+#~ msgid "Connect to game"
+#~ msgstr "Конец игры"
+
+#, fuzzy
+#~ msgid "Game options:"
+#~ msgstr "Настройки игры"
+
+#, fuzzy
+#~ msgid "Max number of players:"
+#~ msgstr "Игроков в каждой команде:"
+
+#~ msgid "Select the teams:"
+#~ msgstr "Выберите команды:"
+
+#~ msgid "Select the world:"
+#~ msgstr "Выберите мир:"
+
+#, fuzzy
+#~ msgid "Unable to connect"
+#~ msgstr "Невозможно открыть каталог с темами (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to contact server!"
+#~ msgstr "Невозможно открыть каталог с картами (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to listen for client!"
+#~ msgstr "Ожидание клиентов"
+
+#, fuzzy
+#~ msgid "Wait! "
+#~ msgstr "Ожидание команд"
 
 #, fuzzy
 #~ msgid "%s team has won.\n"

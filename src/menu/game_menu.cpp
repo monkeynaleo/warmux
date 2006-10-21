@@ -64,19 +64,19 @@ TeamBox::TeamBox(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), fals
   team_name = new Label(_(" "), Rectanglei(0,0,width-80,0), 
 			*Font::GetInstance(Font::FONT_NORMAL), gray_color);
 
-//   Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
-//   tmp_player_box->SetMargin(0);
-//   tmp_player_box->SetBorder(Point2i(0,0));
-//   tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0), 
-// 				      *Font::GetInstance(Font::FONT_SMALL), gray_color));
-//   player_name = new TextBox(_("Player X"), Rectanglei(0,0,100,0), 
-// 			    *Font::GetInstance(Font::FONT_SMALL));
-//   tmp_player_box->AddWidget(player_name);
+  Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
+  tmp_player_box->SetMargin(0);
+  tmp_player_box->SetBorder(Point2i(0,0));
+  tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0), 
+				      *Font::GetInstance(Font::FONT_SMALL), gray_color));
+  player_name = new TextBox(_("Player X"), Rectanglei(0,0,100,0), 
+			    *Font::GetInstance(Font::FONT_SMALL));
+  tmp_player_box->AddWidget(player_name);
 
   nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),6,1,2,10);;
 
   tmp_box->AddWidget(team_name);
-//  tmp_box->AddWidget(tmp_player_box);
+  tmp_box->AddWidget(tmp_player_box);
   tmp_box->AddWidget(nb_characters);
 
   AddWidget(tmp_box);
@@ -129,21 +129,20 @@ Widget* TeamBox::Clic (const Point2i &mousePosition, uint button)
 
     Widget* w = WidgetList::Clic(mousePosition, button);
     
-    // Set the number of characters for the team :)
-    if ( w == nb_characters ) {
-      associated_team->SetNbCharacters(uint(nb_characters->GetValue()));
+    if ( w == nb_characters ||  w == player_name ) {
       return w;
-    } 
-//     else if  ( w == player_name ) {
-//       std::cout << "Player name !!" << std::endl;
-//       // we should manage player name here
-//       return w;
-//     }
-    else {
-      return NULL;
     }
   }
   return NULL;
+}
+
+void TeamBox::ValidOptions() const
+{
+  // set the number of characters
+  associated_team->SetNbCharacters(uint(nb_characters->GetValue()));
+
+  // set the player name
+  associated_team->SetPlayerName(player_name->GetText());
 }
 
 // ################################################
@@ -391,9 +390,15 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
 
   } else {
     for (uint i=0; i<MAX_NB_TEAMS ; i++) {
-      if ( teams_selections[i]->Contains(mousePosition) &&
-	   teams_selections[i]->Clic(mousePosition, button) == NULL ) {
-	NextTeam(i);
+
+      if ( teams_selections[i]->Contains(mousePosition) ) {
+
+	Widget * w = teams_selections[i]->Clic(mousePosition, button);
+
+	if ( w == NULL )
+	  NextTeam(i);
+	else
+	  widgets.SetFocusOn(w);
 	break;
       }
     }
@@ -435,7 +440,7 @@ void GameMenu::SaveOptions()
     for (uint i=0; i < MAX_NB_TEAMS; i++) {
       if (teams_selections[i]->GetTeam() != NULL) {
 	int index = -1;
-	
+	teams_selections[i]->ValidOptions();
 	teams_list.FindById(teams_selections[i]->GetTeam()->GetId(), index);
 	if (index > -1)
 	  selection.push_back(uint(index));
