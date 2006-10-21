@@ -57,6 +57,7 @@
 	<anchor dx="16" dy="17"/>
 	<attached member_type="head" frame="*" dx="12" dy="5"/>
 	<attached member_type="arm-right" frame="*" dx="3" dy="18"/>
+	<attached member_type="fixedarm" frame="*" dx="3" dy="18"/>
 	<attached member_type="arm-left" frame="*" dx="8" dy="17"/>
 	<attached member_type="foot-left" frame="*" dx="10" dy="29"/>
 	<attached member_type="foot-right" frame="*" dx="5" dy="30"/>
@@ -93,15 +94,23 @@
 
 <!-- ###### Arms ###### -->
 <sprite name="arm-left" type="arm-left">
-	<image file="arm.png"/>
+	<image file="arm1.png"/>
 	<anchor dx="3" dy="0"/>
 </sprite>
+
 <sprite name="arm-right" type="arm-right">
-	<image file="arm.png"/>
+	<image file="arm1.png"/>
 	<anchor dx="3" dy="0"/>
 	<attached member_type="weapon" frame="*" dx="7" dy="7"/>
-	<attached member_type="yoyo" frame="*" dx="-5" dy="15"/>
+
 </sprite>
+
+<sprite name="fixedarm" type="fixedarm">
+	<image file="arm2.png"/>
+	<anchor dx="0" dy="1"/>
+	<attached member_type="yoyo" frame="*" dx="16" dy="8"/>
+</sprite>
+
 
 <!-- ###### Legs ###### -->
 <sprite name="foot-left" type="foot-left">
@@ -225,10 +234,6 @@
 	<member name="arm-right" layer="10"/>
 </clothe>
 
-
-
-
-
 <!-- # Construct/Airhammer helmet # -->
 <clothe name="weapon-construct">
 	<member name="wing-left" layer="0"/>
@@ -262,9 +267,6 @@
 	<member name="weapon" layer="12"/>
 </clothe>
 
-
-
-
 <!-- ###### Helmet ###### -->
 <clothe name="helmet">
 	<member name="wing-left" layer="0"/>
@@ -293,7 +295,7 @@
 	<member name="head" layer="7"/>
 	<member name="nose" layer="8"/>
 	<member name="foot-right" layer="9"/>
-	<member name="arm-right" layer="10"/>
+	<member name="fixedarm" layer="10"/>
 	<member name="yoyo" layer="11"/>
 </clothe>
 
@@ -613,8 +615,8 @@
 <movement name="animation0" speed="5400"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
 	<collision_rect left="5" right="5" top="10" bottom="2"/>
 	<frame number="0">
-		<member type="arm-right" angle="-10" />
-		<member type="yoyo" angle="-1" />
+		<member type="fixedarm" angle="-10" />
+		<member type="yoyo" angle="10" />
 	</frame>
 </movement>
 
