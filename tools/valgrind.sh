@@ -1,5 +1,10 @@
 #!/bin/sh
-APP=wormux
+if [ "$1" = "" ]; then
+    echo "Usage: $0 /path/to/wormux"
+    exit
+fi
+
+APP=$1
 LOG=valgrind.log
 valgrind \
     --verbose \
