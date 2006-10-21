@@ -21,6 +21,42 @@ msgstr ""
 msgid " "
 msgstr ""
 
+#: src/team/results.cpp:214
+msgid "  Most sold-out  :  "
+msgstr ""
+
+#: src/team/results.cpp:212
+msgid "  Most useful   :  "
+msgstr ""
+
+#: src/team/results.cpp:213
+msgid "  Most useless  :  "
+msgstr ""
+
+#: src/team/results.cpp:211
+msgid "  Most violent  :  "
+msgstr ""
+
+#: src/network/distant_cpu.cpp:68
+msgid " has joined the party"
+msgstr ""
+
+#: src/network/distant_cpu.cpp:75
+msgid " has left the party"
+msgstr ""
+
+#: src/menu/network_menu.cpp:293
+msgid " players are not yet ready!"
+msgstr ""
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:379
+msgid " players connected"
+msgstr ""
+
+#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:384
+msgid " players ready"
+msgstr ""
+
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
@@ -158,11 +194,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 msgstr[1] "Le ludanto '%s' elpoentis %u aeratako(j)n !"
 
-#: src/interface/interface.cpp:160
+#: src/interface/interface.cpp:161
 msgid "(dead)"
 msgstr "(mortinta)"
 
-#: src/interface/interface.cpp:202
+#: src/interface/interface.cpp:203
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
@@ -178,6 +214,16 @@ msgstr "Aeratako"
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr ""
+
+#: src/menu/results_menu.cpp:194
+#, fuzzy
+msgid "All teams"
+msgstr "Venkinto : teamo %s"
+
+#: src/team/results.cpp:210
+#, fuzzy
+msgid "All teams results:\n"
+msgstr "Venkinto : teamo %s"
 
 #: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
 msgid "Anvil"
@@ -246,6 +292,16 @@ msgstr ""
 msgid "Commit Suicide"
 msgstr "Mortigis sin"
 
+#: src/menu/network_connection_menu.cpp:67
+#, fuzzy
+msgid "Connect to game"
+msgstr "Partofino !"
+
+#: src/menu/network_connection_menu.cpp:114
+#, fuzzy
+msgid "Connected to "
+msgstr "Partofino !"
+
 #: src/weapon/construct.cpp:43
 msgid "Construct"
 msgstr ""
@@ -254,12 +310,12 @@ msgstr ""
 msgid "Credits"
 msgstr ""
 
-#: src/game/game.cpp:152
+#: src/game/game.cpp:153
 #, fuzzy
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Cxu vi volas vere forlasi (J/N) ?"
 
-#: src/menu/game_menu.cpp:293
+#: src/menu/game_menu.cpp:292
 #, fuzzy
 msgid "Duration of a turn:"
 msgstr "Vicdauxro"
@@ -316,7 +372,7 @@ msgstr ""
 "Eraro :\n"
 "%s"
 
-#: src/game/game.cpp:195
+#: src/game/game.cpp:197
 #, fuzzy, c-format
 msgid ""
 "Error:\n"
@@ -330,6 +386,10 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr ""
 
+#: src/network/network.cpp:65
+msgid "Failed to initialize network library!"
+msgstr ""
+
 #: src/game/game_loop.cpp:159
 #, fuzzy
 msgid "Find a random position for characters"
@@ -339,6 +399,11 @@ msgstr "Metas hazarde la vermojn"
 #, fuzzy
 msgid "Fullscreen?"
 msgstr "Pleniga ekrano"
+
+#: src/menu/network_menu.cpp:61
+#, fuzzy
+msgid "Game options:"
+msgstr "Elektoj"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -361,10 +426,19 @@ msgstr "Pistolo"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 
+#: src/menu/game_menu.cpp:70
+msgid "Head commander"
+msgstr ""
+
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Grenado"
+
+#: src/menu/network_connection_menu.cpp:74
+#, fuzzy
+msgid "Host a game"
+msgstr "Partofino !"
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
@@ -376,7 +450,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:311
+#: src/menu/game_menu.cpp:310
 #, fuzzy
 msgid "Initial energy:"
 msgstr "Komenca energio"
@@ -405,12 +479,24 @@ msgstr "Preparanto"
 msgid "Initialise teams"
 msgstr "Preparanto"
 
+#: src/network/network.cpp:171
+msgid "Invalid port!"
+msgstr ""
+
+#: src/network/network.cpp:121
+msgid "Invalid server adress!"
+msgstr ""
+
 #: src/object/bonus_box.cpp:280
 msgid "Is it a gift?"
 msgstr ""
 
 #: src/weapon/jetpack.cpp:48
 msgid "Jetpack"
+msgstr ""
+
+#: src/menu/network_menu.cpp:72
+msgid "Join #wormux on irc.freenode.net to find"
 msgstr ""
 
 #: src/map/maps_list.cpp:185
@@ -440,6 +526,11 @@ msgstr ""
 msgid "Maps"
 msgstr ""
 
+#: src/menu/network_menu.cpp:59
+#, fuzzy
+msgid "Max number of players:"
+msgstr "Nombro da ludantoj per teamo"
+
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
 msgstr ""
@@ -448,6 +539,22 @@ msgstr ""
 #, fuzzy
 msgid "Mine"
 msgstr "Mino"
+
+#: src/menu/results_menu.cpp:169
+msgid "Most sold-out"
+msgstr ""
+
+#: src/menu/results_menu.cpp:159
+msgid "Most useful"
+msgstr ""
+
+#: src/menu/results_menu.cpp:164
+msgid "Most useless"
+msgstr ""
+
+#: src/menu/results_menu.cpp:154
+msgid "Most violent"
+msgstr ""
 
 #: src/menu/options_menu.cpp:99
 #, fuzzy
@@ -472,15 +579,26 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr ""
 
+#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
+#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
+#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
+#: src/team/results.cpp:205
+msgid "Nobody!"
+msgstr ""
+
 #: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
 msgstr "Nombro da ludantoj per teamo"
 
-#: src/menu/game_menu.cpp:175
+#: src/menu/game_menu.cpp:174
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Nombro da ludantoj per teamo"
+
+#: src/menu/network_menu.cpp:186
+msgid "Only the server can set the map!"
+msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -496,6 +614,11 @@ msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Aktori"
+
+#: src/menu/game_menu.cpp:72
+#, fuzzy
+msgid "Player X"
 msgstr "Aktori"
 
 #: src/menu/options_menu.cpp:68
@@ -536,6 +659,22 @@ msgstr ""
 msgid "Run game"
 msgstr "Komencas partion"
 
+#: src/menu/network_menu.cpp:88
+msgid "Select the teams:"
+msgstr ""
+
+#: src/menu/network_menu.cpp:131
+msgid "Select the world:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:60
+msgid "Server adress:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:129
+msgid "Server started"
+msgstr ""
+
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -547,6 +686,10 @@ msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
+msgstr ""
+
+#: src/menu/network_menu.cpp:75
+msgid "So you have to restart Wormux after each"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -586,6 +729,11 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
+#: src/team/results.cpp:208
+#, c-format
+msgid "Team %s results:\n"
+msgstr ""
+
 #: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
@@ -609,14 +757,30 @@ msgstr "La memmova fuzilo estas malaperita en alian mondon ..."
 msgid "The rocket has left the battlefield..."
 msgstr "La fuzilo estas malaperita en alian mondon ..."
 
+#: src/menu/network_connection_menu.cpp:119
+msgid "Unable to connect"
+msgstr ""
+
+#: src/network/network.cpp:132
+msgid "Unable to contact server!"
+msgstr ""
+
 #: src/graphic/video.cpp:193
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
+#: src/network/network.cpp:215
+msgid "Unable to listen for client!"
+msgstr ""
+
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:132
+msgid "Unable to start server"
 msgstr ""
 
 #: src/main.cpp:118
@@ -628,6 +792,15 @@ msgstr "Escepto nekonata intercaptita ..."
 #, fuzzy
 msgid "Version"
 msgstr "Versio "
+
+#: src/menu/network_menu.cpp:74
+msgid "WARNING! Disconnections are not yet handled."
+msgstr ""
+
+#: src/menu/network_menu.cpp:293
+#, fuzzy
+msgid "Wait! "
+msgstr "Venkinto : teamo %s"
 
 #: src/interface/interface.cpp:99
 #, fuzzy
@@ -662,6 +835,11 @@ msgstr "Wormux muntas."
 msgid "Wormux version "
 msgstr "Wormux versio "
 
+#: src/include/action_handler.cpp:385
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr ""
+
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -684,29 +862,17 @@ msgstr ""
 msgid "Your shot has missed!"
 msgstr ""
 
+#: src/menu/network_menu.cpp:76
+msgid "disconnection!"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
 
-#, fuzzy
-#~ msgid "All teams"
-#~ msgstr "Venkinto : teamo %s"
-
-#, fuzzy
-#~ msgid "Connect to game"
-#~ msgstr "Partofino !"
-
-#, fuzzy
-#~ msgid "Game options:"
-#~ msgstr "Elektoj"
-
-#, fuzzy
-#~ msgid "Max number of players:"
-#~ msgstr "Nombro da ludantoj per teamo"
-
-#, fuzzy
-#~ msgid "Wait! "
-#~ msgstr "Venkinto : teamo %s"
+#: src/menu/network_menu.cpp:73
+msgid "some opponents."
+msgstr ""
 
 #~ msgid "%s is stupidly dead because he gone out of the map ..."
 #~ msgstr "%s estas mortinta stultege cxar li estas elirinta el la tereno ..."
@@ -780,10 +946,6 @@ msgstr ""
 
 #~ msgid "PAUSE"
 #~ msgstr "PAUxZO"
-
-#, fuzzy
-#~ msgid "Player X"
-#~ msgstr "Aktori"
 
 #~ msgid "Sound error :"
 #~ msgstr "Soneraro :"

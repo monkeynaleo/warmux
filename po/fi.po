@@ -23,6 +23,48 @@ msgstr ""
 msgid " "
 msgstr ""
 
+#: src/team/results.cpp:214
+#, fuzzy
+msgid "  Most sold-out  :  "
+msgstr "  Eniten myyty :  %s (%i).\n"
+
+#: src/team/results.cpp:212
+#, fuzzy
+msgid "  Most useful   :  "
+msgstr "  Hyödyllisin  :  %s (%i).\n"
+
+#: src/team/results.cpp:213
+#, fuzzy
+msgid "  Most useless  :  "
+msgstr "  Hyödyttömin  :  %s (%i).\n"
+
+#: src/team/results.cpp:211
+#, fuzzy
+msgid "  Most violent  :  "
+msgstr "  Väkivaltaisin  :  %s (%i)\n"
+
+#: src/network/distant_cpu.cpp:68
+#, fuzzy
+msgid " has joined the party"
+msgstr "%s tipahti ulos kartalta!"
+
+#: src/network/distant_cpu.cpp:75
+#, fuzzy
+msgid " has left the party"
+msgstr "%s tipahti ulos kartalta!"
+
+#: src/menu/network_menu.cpp:293
+msgid " players are not yet ready!"
+msgstr ""
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:379
+msgid " players connected"
+msgstr ""
+
+#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:384
+msgid " players ready"
+msgstr ""
+
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
@@ -160,11 +202,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 msgstr[1] "Joukkue %s voitti %u ilmaiskua."
 
-#: src/interface/interface.cpp:160
+#: src/interface/interface.cpp:161
 msgid "(dead)"
 msgstr "(kuollut)"
 
-#: src/interface/interface.cpp:202
+#: src/interface/interface.cpp:203
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
@@ -180,6 +222,16 @@ msgstr "Ilmaisku"
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr ""
+
+#: src/menu/results_menu.cpp:194
+#, fuzzy
+msgid "All teams"
+msgstr "Odota joukkueita"
+
+#: src/team/results.cpp:210
+#, fuzzy
+msgid "All teams results:\n"
+msgstr "Joukkueesi tulokset:\n"
 
 #: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
 msgid "Anvil"
@@ -247,6 +299,14 @@ msgstr "Klusteripommi"
 msgid "Commit Suicide"
 msgstr "Itsemurhaisku"
 
+#: src/menu/network_connection_menu.cpp:67
+msgid "Connect to game"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:114
+msgid "Connected to "
+msgstr ""
+
 #: src/weapon/construct.cpp:43
 msgid "Construct"
 msgstr ""
@@ -255,11 +315,11 @@ msgstr ""
 msgid "Credits"
 msgstr "Kiitokset"
 
-#: src/game/game.cpp:152
+#: src/game/game.cpp:153
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
-#: src/menu/game_menu.cpp:293
+#: src/menu/game_menu.cpp:292
 msgid "Duration of a turn:"
 msgstr "Vuoron kesto:"
 
@@ -302,7 +362,7 @@ msgstr "Virhe luettaessa asetustiedostoa: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Virhe ladataessa pelityyppiä %s (tiedosto %s):"
 
-#: src/game/game.cpp:195
+#: src/game/game.cpp:197
 #, c-format
 msgid ""
 "Error:\n"
@@ -316,6 +376,11 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 
+#: src/network/network.cpp:65
+#, fuzzy
+msgid "Failed to initialize network library!"
+msgstr "SDL kirjaston alustus epäonnistui:%s"
+
 #: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
 msgstr "Etsi satunnaiset sijainnit hahmoille"
@@ -323,6 +388,11 @@ msgstr "Etsi satunnaiset sijainnit hahmoille"
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Kokoruutu?"
+
+#: src/menu/network_menu.cpp:61
+#, fuzzy
+msgid "Game options:"
+msgstr "Pelin asetukset"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -344,10 +414,18 @@ msgstr "Pyssy"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "kotihakemistoa (ympäristömuuttuja $HOME) ei löytynyt!"
 
+#: src/menu/game_menu.cpp:70
+msgid "Head commander"
+msgstr ""
+
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Kranaatti"
+
+#: src/menu/network_connection_menu.cpp:74
+msgid "Host a game"
+msgstr ""
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
@@ -359,7 +437,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:311
+#: src/menu/game_menu.cpp:310
 msgid "Initial energy:"
 msgstr "Aloitus voimat:"
 
@@ -384,6 +462,14 @@ msgstr "Alusta objektit"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
+#: src/network/network.cpp:171
+msgid "Invalid port!"
+msgstr ""
+
+#: src/network/network.cpp:121
+msgid "Invalid server adress!"
+msgstr ""
+
 #: src/object/bonus_box.cpp:280
 #, fuzzy
 msgid "Is it a gift?"
@@ -391,6 +477,10 @@ msgstr "Onko se lahja?"
 
 #: src/weapon/jetpack.cpp:48
 msgid "Jetpack"
+msgstr ""
+
+#: src/menu/network_menu.cpp:72
+msgid "Join #wormux on irc.freenode.net to find"
 msgstr ""
 
 #: src/map/maps_list.cpp:185
@@ -418,6 +508,11 @@ msgstr "Kartta %s, tehnyt :"
 msgid "Maps"
 msgstr ""
 
+#: src/menu/network_menu.cpp:59
+#, fuzzy
+msgid "Max number of players:"
+msgstr "Pelaajien määrä joukkueessa:"
+
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
 msgstr "Enimmäismäärä FPS:lle:"
@@ -425,6 +520,26 @@ msgstr "Enimmäismäärä FPS:lle:"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Miina"
+
+#: src/menu/results_menu.cpp:169
+#, fuzzy
+msgid "Most sold-out"
+msgstr "  Eniten myyty :  %s (%i).\n"
+
+#: src/menu/results_menu.cpp:159
+#, fuzzy
+msgid "Most useful"
+msgstr "  Hyödyllisin  :  %s (%i).\n"
+
+#: src/menu/results_menu.cpp:164
+#, fuzzy
+msgid "Most useless"
+msgstr "  Hyödyttömin  :  %s (%i).\n"
+
+#: src/menu/results_menu.cpp:154
+#, fuzzy
+msgid "Most violent"
+msgstr "  Väkivaltaisin  :  %s (%i)\n"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -447,15 +562,27 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
 
+#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
+#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
+#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
+#: src/team/results.cpp:205
+#, fuzzy
+msgid "Nobody!"
+msgstr "Ei kukaan"
+
 #: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
 msgstr "Pelaajien määrä joukkueessa:"
 
-#: src/menu/game_menu.cpp:175
+#: src/menu/game_menu.cpp:174
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Pelaajien määrä joukkueessa:"
+
+#: src/menu/network_menu.cpp:186
+msgid "Only the server can set the map!"
+msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -471,6 +598,11 @@ msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Pelaa"
+
+#: src/menu/game_menu.cpp:72
+#, fuzzy
+msgid "Player X"
 msgstr "Pelaa"
 
 #: src/menu/options_menu.cpp:68
@@ -512,6 +644,22 @@ msgstr "Automaattibazookan"
 msgid "Run game"
 msgstr "Aloita peli"
 
+#: src/menu/network_menu.cpp:88
+msgid "Select the teams:"
+msgstr "Valitse joukkueet:"
+
+#: src/menu/network_menu.cpp:131
+msgid "Select the world:"
+msgstr "Valitse maailma:"
+
+#: src/menu/network_connection_menu.cpp:60
+msgid "Server adress:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:129
+msgid "Server started"
+msgstr ""
+
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -523,6 +671,10 @@ msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
+msgstr ""
+
+#: src/menu/network_menu.cpp:75
+msgid "So you have to restart Wormux after each"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -559,6 +711,11 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
+#: src/team/results.cpp:208
+#, c-format
+msgid "Team %s results:\n"
+msgstr "Joukkueen %s tulokset:\n"
+
 #: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
@@ -581,14 +738,34 @@ msgstr "Automaattiohjus on poistunut taistelukentältä..."
 msgid "The rocket has left the battlefield..."
 msgstr "Ohjus on poistunut taistelukentältä..."
 
+#: src/menu/network_connection_menu.cpp:119
+#, fuzzy
+msgid "Unable to connect"
+msgstr "Ulkoasuhakemiston avaus epäonnistui (%s)!"
+
+#: src/network/network.cpp:132
+#, fuzzy
+msgid "Unable to contact server!"
+msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
+
 #: src/graphic/video.cpp:193
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "SDL kirjaston alustus epäonnistui:%s"
 
+#: src/network/network.cpp:215
+#, fuzzy
+msgid "Unable to listen for client!"
+msgstr "Odota asiakkaita"
+
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
+msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
+
+#: src/menu/network_connection_menu.cpp:132
+#, fuzzy
+msgid "Unable to start server"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
 #: src/main.cpp:118
@@ -599,6 +776,15 @@ msgstr "Odottamaton poikkeus saatiin kiinni..."
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Versio"
+
+#: src/menu/network_menu.cpp:74
+msgid "WARNING! Disconnections are not yet handled."
+msgstr ""
+
+#: src/menu/network_menu.cpp:293
+#, fuzzy
+msgid "Wait! "
+msgstr "Odota joukkueita"
 
 #: src/interface/interface.cpp:99
 msgid "Weapon:"
@@ -631,6 +817,11 @@ msgstr "Wormux käynnistyy..."
 msgid "Wormux version "
 msgstr "Wormux versio"
 
+#: src/include/action_handler.cpp:385
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr ""
+
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -654,94 +845,17 @@ msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
 
+#: src/menu/network_menu.cpp:76
+msgid "disconnection!"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "valmis"
 
-#, fuzzy
-#~ msgid "  Most sold-out  :  "
-#~ msgstr "  Eniten myyty :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most useful   :  "
-#~ msgstr "  Hyödyllisin  :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most useless  :  "
-#~ msgstr "  Hyödyttömin  :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most violent  :  "
-#~ msgstr "  Väkivaltaisin  :  %s (%i)\n"
-
-#, fuzzy
-#~ msgid " has left the party"
-#~ msgstr "%s tipahti ulos kartalta!"
-
-#, fuzzy
-#~ msgid "All teams"
-#~ msgstr "Odota joukkueita"
-
-#, fuzzy
-#~ msgid "All teams results:\n"
-#~ msgstr "Joukkueesi tulokset:\n"
-
-#, fuzzy
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "SDL kirjaston alustus epäonnistui:%s"
-
-#, fuzzy
-#~ msgid "Game options:"
-#~ msgstr "Pelin asetukset"
-
-#, fuzzy
-#~ msgid "Max number of players:"
-#~ msgstr "Pelaajien määrä joukkueessa:"
-
-#, fuzzy
-#~ msgid "Most sold-out"
-#~ msgstr "  Eniten myyty :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most useful"
-#~ msgstr "  Hyödyllisin  :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most useless"
-#~ msgstr "  Hyödyttömin  :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most violent"
-#~ msgstr "  Väkivaltaisin  :  %s (%i)\n"
-
-#, fuzzy
-#~ msgid "Nobody!"
-#~ msgstr "Ei kukaan"
-
-#~ msgid "Select the teams:"
-#~ msgstr "Valitse joukkueet:"
-
-#~ msgid "Select the world:"
-#~ msgstr "Valitse maailma:"
-
-#~ msgid "Team %s results:\n"
-#~ msgstr "Joukkueen %s tulokset:\n"
-
-#, fuzzy
-#~ msgid "Unable to connect"
-#~ msgstr "Ulkoasuhakemiston avaus epäonnistui (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to contact server!"
-#~ msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to listen for client!"
-#~ msgstr "Odota asiakkaita"
-
-#, fuzzy
-#~ msgid "Wait! "
-#~ msgstr "Odota joukkueita"
+#: src/menu/network_menu.cpp:73
+msgid "some opponents."
+msgstr ""
 
 #~ msgid "%s team has won.\n"
 #~ msgstr "Joukkue %s voitti.\n"
@@ -773,10 +887,6 @@ msgstr "valmis"
 
 #~ msgid "Pause"
 #~ msgstr "Tauko"
-
-#, fuzzy
-#~ msgid "Player X"
-#~ msgstr "Pelaa"
 
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr "Ole hyvä ja kerro mielipiteesi Wormuxista sähköpostilla:"

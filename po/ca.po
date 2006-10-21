@@ -22,6 +22,44 @@ msgstr ""
 msgid " "
 msgstr ""
 
+#: src/team/results.cpp:214
+msgid "  Most sold-out  :  "
+msgstr ""
+
+#: src/team/results.cpp:212
+msgid "  Most useful   :  "
+msgstr ""
+
+#: src/team/results.cpp:213
+msgid "  Most useless  :  "
+msgstr ""
+
+#: src/team/results.cpp:211
+msgid "  Most violent  :  "
+msgstr ""
+
+#: src/network/distant_cpu.cpp:68
+#, fuzzy
+msgid " has joined the party"
+msgstr "%s ha caigut del mapa!"
+
+#: src/network/distant_cpu.cpp:75
+#, fuzzy
+msgid " has left the party"
+msgstr "%s ha caigut del mapa!"
+
+#: src/menu/network_menu.cpp:293
+msgid " players are not yet ready!"
+msgstr ""
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:379
+msgid " players connected"
+msgstr ""
+
+#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:384
+msgid " players ready"
+msgstr ""
+
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
@@ -159,11 +197,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "El jugador '%s' ha conseguit %u atac aeri !"
 msgstr[1] "El jugador '%s' ha conseguit %u atacs aeris !"
 
-#: src/interface/interface.cpp:160
+#: src/interface/interface.cpp:161
 msgid "(dead)"
 msgstr "(mort)"
 
-#: src/interface/interface.cpp:202
+#: src/interface/interface.cpp:203
 msgid "(unlimited)"
 msgstr "(ilimitat)"
 
@@ -178,6 +216,14 @@ msgstr "Atac aeri"
 
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
+msgstr ""
+
+#: src/menu/results_menu.cpp:194
+msgid "All teams"
+msgstr ""
+
+#: src/team/results.cpp:210
+msgid "All teams results:\n"
 msgstr ""
 
 #: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
@@ -246,6 +292,16 @@ msgstr "ClusterBomb"
 msgid "Commit Suicide"
 msgstr "Suicidi"
 
+#: src/menu/network_connection_menu.cpp:67
+#, fuzzy
+msgid "Connect to game"
+msgstr "Final de la partida"
+
+#: src/menu/network_connection_menu.cpp:114
+#, fuzzy
+msgid "Connected to "
+msgstr "Final de la partida"
+
 #: src/weapon/construct.cpp:43
 msgid "Construct"
 msgstr ""
@@ -254,11 +310,11 @@ msgstr ""
 msgid "Credits"
 msgstr ""
 
-#: src/game/game.cpp:152
+#: src/game/game.cpp:153
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Estar segur que vol sortir? (Y/N)"
 
-#: src/menu/game_menu.cpp:293
+#: src/menu/game_menu.cpp:292
 msgid "Duration of a turn:"
 msgstr "Duració del torn:"
 
@@ -301,7 +357,7 @@ msgstr ""
 msgid "Error while loading game mode %s (file %s):"
 msgstr ""
 
-#: src/game/game.cpp:195
+#: src/game/game.cpp:197
 #, c-format
 msgid ""
 "Error:\n"
@@ -315,6 +371,10 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
 
+#: src/network/network.cpp:65
+msgid "Failed to initialize network library!"
+msgstr ""
+
 #: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
 msgstr "Colocacio aleatoria"
@@ -322,6 +382,11 @@ msgstr "Colocacio aleatoria"
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Pantalla completa?"
+
+#: src/menu/network_menu.cpp:61
+#, fuzzy
+msgid "Game options:"
+msgstr "Opcions"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -343,10 +408,19 @@ msgstr "Pistola"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "El directori HOME (la variable de entorn $HOME) no pot ser trobat !"
 
+#: src/menu/game_menu.cpp:70
+msgid "Head commander"
+msgstr ""
+
 #: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Granada"
+
+#: src/menu/network_connection_menu.cpp:74
+#, fuzzy
+msgid "Host a game"
+msgstr "Final de la partida"
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
@@ -358,7 +432,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:311
+#: src/menu/game_menu.cpp:310
 msgid "Initial energy:"
 msgstr "Energia inicial:"
 
@@ -383,12 +457,24 @@ msgstr "Inicialització de les dades"
 msgid "Initialise teams"
 msgstr "Inicialització de les dades"
 
+#: src/network/network.cpp:171
+msgid "Invalid port!"
+msgstr ""
+
+#: src/network/network.cpp:121
+msgid "Invalid server adress!"
+msgstr ""
+
 #: src/object/bonus_box.cpp:280
 msgid "Is it a gift?"
 msgstr ""
 
 #: src/weapon/jetpack.cpp:48
 msgid "Jetpack"
+msgstr ""
+
+#: src/menu/network_menu.cpp:72
+msgid "Join #wormux on irc.freenode.net to find"
 msgstr ""
 
 #: src/map/maps_list.cpp:185
@@ -416,6 +502,11 @@ msgstr "Mapa %s, fet per :"
 msgid "Maps"
 msgstr ""
 
+#: src/menu/network_menu.cpp:59
+#, fuzzy
+msgid "Max number of players:"
+msgstr "Nombre de jugadors per equip:"
+
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
 msgstr ""
@@ -423,6 +514,22 @@ msgstr ""
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mina"
+
+#: src/menu/results_menu.cpp:169
+msgid "Most sold-out"
+msgstr ""
+
+#: src/menu/results_menu.cpp:159
+msgid "Most useful"
+msgstr ""
+
+#: src/menu/results_menu.cpp:164
+msgid "Most useless"
+msgstr ""
+
+#: src/menu/results_menu.cpp:154
+msgid "Most violent"
+msgstr ""
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -445,15 +552,26 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Cap element <%s> trobat en el arxiu de configuració xml !"
 
+#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
+#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
+#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
+#: src/team/results.cpp:205
+msgid "Nobody!"
+msgstr ""
+
 #: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
 msgstr "Nombre de jugadors per equip:"
 
-#: src/menu/game_menu.cpp:175
+#: src/menu/game_menu.cpp:174
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Nombre de jugadors per equip:"
+
+#: src/menu/network_menu.cpp:186
+msgid "Only the server can set the map!"
+msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -469,6 +587,11 @@ msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Jugar"
+
+#: src/menu/game_menu.cpp:72
+#, fuzzy
+msgid "Player X"
 msgstr "Jugar"
 
 #: src/menu/options_menu.cpp:68
@@ -509,6 +632,22 @@ msgstr ""
 msgid "Run game"
 msgstr "Arrenca el joc"
 
+#: src/menu/network_menu.cpp:88
+msgid "Select the teams:"
+msgstr ""
+
+#: src/menu/network_menu.cpp:131
+msgid "Select the world:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:60
+msgid "Server adress:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:129
+msgid "Server started"
+msgstr ""
+
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -521,6 +660,13 @@ msgstr ""
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
 msgstr ""
+
+#: src/menu/network_menu.cpp:75
+#, fuzzy
+msgid "So you have to restart Wormux after each"
+msgstr ""
+"La opció SDL ha canviat:\n"
+"Ha de reiniciar de nou Wormux per aplicar els nous ajustos."
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -556,6 +702,11 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
+#: src/team/results.cpp:208
+#, c-format
+msgid "Team %s results:\n"
+msgstr ""
+
 #: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
@@ -578,14 +729,33 @@ msgstr "El cohet automatic ha anat a un altre món..."
 msgid "The rocket has left the battlefield..."
 msgstr "El cohet ha anat a un altre mon..."
 
+#: src/menu/network_connection_menu.cpp:119
+#, fuzzy
+msgid "Unable to connect"
+msgstr "Imposible obrir el directori dels skins (%s) !"
+
+#: src/network/network.cpp:132
+#, fuzzy
+msgid "Unable to contact server!"
+msgstr "Imposible obrir el directori dels mapas (%s) !"
+
 #: src/graphic/video.cpp:193
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
+#: src/network/network.cpp:215
+msgid "Unable to listen for client!"
+msgstr ""
+
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
+msgstr "Imposible obrir el directori dels mapas (%s) !"
+
+#: src/menu/network_connection_menu.cpp:132
+#, fuzzy
+msgid "Unable to start server"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
 #: src/main.cpp:118
@@ -596,6 +766,14 @@ msgstr "Excepció interceptada imprevista ..."
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Versió"
+
+#: src/menu/network_menu.cpp:74
+msgid "WARNING! Disconnections are not yet handled."
+msgstr ""
+
+#: src/menu/network_menu.cpp:293
+msgid "Wait! "
+msgstr ""
 
 #: src/interface/interface.cpp:99
 msgid "Weapon:"
@@ -627,6 +805,11 @@ msgstr "Arrencant Wormux..."
 msgid "Wormux version "
 msgstr "Versió Wormux"
 
+#: src/include/action_handler.cpp:385
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr ""
+
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -649,33 +832,17 @@ msgstr "Tu necesites almenys dos equips vàlids!"
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
 
+#: src/menu/network_menu.cpp:76
+msgid "disconnection!"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
 
-#, fuzzy
-#~ msgid " has left the party"
-#~ msgstr "%s ha caigut del mapa!"
-
-#, fuzzy
-#~ msgid "Connect to game"
-#~ msgstr "Final de la partida"
-
-#, fuzzy
-#~ msgid "Game options:"
-#~ msgstr "Opcions"
-
-#, fuzzy
-#~ msgid "Max number of players:"
-#~ msgstr "Nombre de jugadors per equip:"
-
-#, fuzzy
-#~ msgid "Unable to connect"
-#~ msgstr "Imposible obrir el directori dels skins (%s) !"
-
-#, fuzzy
-#~ msgid "Unable to contact server!"
-#~ msgstr "Imposible obrir el directori dels mapas (%s) !"
+#: src/menu/network_menu.cpp:73
+msgid "some opponents."
+msgstr ""
 
 #~ msgid "%s team has won.\n"
 #~ msgstr "L'equip %s ha guanyat.\n"
@@ -721,19 +888,8 @@ msgstr ""
 #~ msgid "Pause"
 #~ msgstr "Pausa"
 
-#, fuzzy
-#~ msgid "Player X"
-#~ msgstr "Jugar"
-
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr "Siusplau dona'ns la teva opinió de Wormux per correu electrónic:"
-
-#~ msgid ""
-#~ "SDL option changed:\n"
-#~ "You have to restart Wormux to apply the new settings."
-#~ msgstr ""
-#~ "La opció SDL ha canviat:\n"
-#~ "Ha de reiniciar de nou Wormux per aplicar els nous ajustos."
 
 #~ msgid "Sound error :"
 #~ msgstr "Error de so :"

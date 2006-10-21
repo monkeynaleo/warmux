@@ -2,65 +2,68 @@
 # Copyright (C) 2006 Wormux Development Team
 # This file is distributed under the same license as the wormux package.
 #
+# Furkan Duman <coderlord@gmail.com>, 2006.
 msgid ""
 msgstr ""
-# Furkan Duman <coderlord@gmail.com>, 2006.
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2006-10-18 01:43+0200\n"
-"PO-Revision-Date: 2006-10-20 13:40+0200\n"
-"Last-Translator: Furkan Duman <coderlord@gmail.com>\n"
+"PO-Revision-Date: 2006-06-19 09:27+0100\n"
+"Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: 0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: KBabel 1.11\n"
 "X-Poedit-Language: Turkish\n"
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:63
+#: src/menu/game_menu.cpp:64
 msgid " "
-msgstr " "
+msgstr ""
 
 #: src/team/results.cpp:214
+#, fuzzy
 msgid "  Most sold-out  :  "
-msgstr "  En fazla satılan :"
+msgstr "  En fazla tükenen : : %s (%i).\n"
 
 #: src/team/results.cpp:212
-msgid "  Most usefull  :  "
-msgstr "  En kullanışlı  :"
+#, fuzzy
+msgid "  Most useful   :  "
+msgstr "  En kullanışlı  :  %s (%i).\n"
 
 #: src/team/results.cpp:213
+#, fuzzy
 msgid "  Most useless  :  "
-msgstr "  En kullanışsız  :"
+msgstr "  En kullanışsız  :  %s (%i).\n"
 
 #: src/team/results.cpp:211
+#, fuzzy
 msgid "  Most violent  :  "
-msgstr "  En cabbar  :"
+msgstr "  En cabbar  :  %s (%i).\n"
 
 #: src/network/distant_cpu.cpp:68
 msgid " has joined the party"
-msgstr "partiye katıldı"
+msgstr ""
 
 #: src/network/distant_cpu.cpp:75
+#, fuzzy
 msgid " has left the party"
-msgstr "partiyi terketti"
+msgstr "%s harita dışına çıktı!"
 
-#: src/menu/network_menu.cpp:288
+#: src/menu/network_menu.cpp:293
 msgid " players are not yet ready!"
-msgstr "oyuncular henüz hazır değil!"
+msgstr ""
 
-#: src/menu/network_menu.cpp:63
-#: src/menu/network_menu.cpp:374
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:379
 msgid " players connected"
-msgstr "oyuncular bağlandı"
+msgstr ""
 
-#: src/menu/network_menu.cpp:64
-#: src/menu/network_menu.cpp:379
+#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:384
 msgid " players ready"
-msgstr "oyuncular hazır"
+msgstr ""
 
 #: src/map/maps_list.cpp:277
 #, c-format
@@ -105,12 +108,14 @@ msgstr "%s harita dışına çıktı!"
 #: src/object/bonus_box.cpp:157
 #, c-format
 msgid "%s has lost %u point of energy."
-msgstr "%s, %u enerji kaybetti."
+msgid_plural "%s has lost %u points of energy."
+msgstr[0] "%s, %u enerji kaybetti."
 
 #: src/object/bonus_box.cpp:148
 #, c-format
 msgid "%s has won %u point of energy!"
-msgstr "%s, %u enerji kazandı!"
+msgid_plural "%s has won %u points of energy!"
+msgstr[0] "%s, %u enerji kazandı!"
 
 #: src/game/game_loop.cpp:683
 #, c-format
@@ -128,66 +133,76 @@ msgid "%s is next to a mine!"
 msgstr "%s bir mayının yanında!"
 
 #: src/weapon/skip_turn.cpp:46
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has skipped its turn."
-msgstr "%s takımı sırasını atladı."
+msgstr "%s (%s takımı) öldü."
 
 #: src/object/bonus_box.cpp:211
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
-msgstr "%s takımı %u Otomatik Bazuka kazandı!"
+msgid_plural "%s team has won %u Automatic Bazookas!"
+msgstr[0] "%s takımı %u otomatik bazuka kazandı!"
 
 #: src/object/bonus_box.cpp:220
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
-msgstr "%s takımı %u Ses Bombası kazandı!"
+msgid_plural "%s team has won %u Riot Bombs!"
+msgstr[0] "%s takımı %u otomatik bazuka kazandı!"
 
 #: src/object/bonus_box.cpp:230
-#, c-format
+#, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
-msgstr "%s takımı %u Dinamit Lokumu kazandı!"
+msgid_plural "%s team has won %u sticks of Dynamite!"
+msgstr[0] "%s takımı %u dinamit lokumu kazandı!"
 
 #: src/object/bonus_box.cpp:139
 #, c-format
 msgid "%s team has won %u teleportation."
-msgstr "%s takımı %u ışınlanma kazandı."
+msgid_plural "%s team has won %u teleportations."
+msgstr[0] "%s takımı %u ışınlanma kazandı."
 
 #: src/object/bonus_box.cpp:166
-#, c-format
+#, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
-msgstr "%s takımı %u Hava Saldırısı kazandı"
+msgid_plural "'%s has won %u Air Attacks"
+msgstr[0] "%s takımı %u hava saldırısı kazandı"
 
 #: src/object/bonus_box.cpp:193
-#, c-format
+#, fuzzy, c-format
 msgid "'%s has won %u Anvil"
-msgstr "%s takımı %u Örs kazandı"
+msgid_plural "'%s has won %u Anvil"
+msgstr[0] "%s takımı %u hava saldırısı kazandı"
 
 #: src/object/bonus_box.cpp:175
-#, c-format
+#, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
-msgstr "%s takımı %u Beyzbol Sopası kazandı"
+msgid_plural "'%s has won %u Baseball bats"
+msgstr[0] "%s takımı %u hava saldırısı kazandı"
 
 #: src/object/bonus_box.cpp:202
-#, c-format
+#, fuzzy, c-format
 msgid "'%s has won %u Holy grenade"
-msgstr "%s takımı %u Kutsal El Bombası kazandı"
+msgid_plural "'%s has won %u Holy grenades"
+msgstr[0] "%s takımı %u hava saldırısı kazandı"
 
 #: src/object/bonus_box.cpp:184
-#, c-format
+#, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
-msgstr "%s takımı %u Düşük Yerçekimi kazandı"
+msgid_plural "'%s has won %u Low gravity"
+msgstr[0] "%s takımı %u hava saldırısı kazandı"
 
-#: src/interface/interface.cpp:160
+#: src/interface/interface.cpp:161
 msgid "(dead)"
 msgstr "(ölü)"
 
-#: src/interface/interface.cpp:202
+#: src/interface/interface.cpp:203
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
 #: src/weapon/air_attack.cpp:155
+#, fuzzy
 msgid "Air Attack"
-msgstr "Hava Saldırısı"
+msgstr "Hava saldırısı"
 
 #: src/object/bonus_box.cpp:170
 msgid "Air attack"
@@ -195,28 +210,30 @@ msgstr "Hava saldırısı"
 
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
-msgstr "Hava çekici"
+msgstr ""
 
 #: src/menu/results_menu.cpp:194
+#, fuzzy
 msgid "All teams"
-msgstr "Tüm takımlar"
+msgstr "Takımlar bekleniyor"
 
 #: src/team/results.cpp:210
+#, fuzzy
 msgid "All teams results:\n"
 msgstr "Bütün takımların sonuçları:\n"
 
-#: src/object/bonus_box.cpp:197
-#: src/weapon/anvil.cpp:62
+#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
 msgid "Anvil"
-msgstr "Örs"
+msgstr ""
 
 #: src/main.cpp:199
 msgid "Authors:"
 msgstr "Yazarlar:"
 
 #: src/weapon/auto_bazooka.cpp:111
+#, fuzzy
 msgid "Automatic Bazooka"
-msgstr "Otomatik Bazuka"
+msgstr "Otomatik bazuka"
 
 #: src/object/bonus_box.cpp:215
 msgid "Automatic bazooka"
@@ -227,8 +244,9 @@ msgid "Baseball"
 msgstr "Beyzbol"
 
 #: src/object/bonus_box.cpp:179
+#, fuzzy
 msgid "Baseball bat"
-msgstr "Beyzbol sopası"
+msgstr "Beyzbol"
 
 #: src/weapon/bazooka.cpp:62
 msgid "Bazooka"
@@ -236,70 +254,65 @@ msgstr "Bazuka"
 
 #: src/weapon/blowtorch.cpp:15
 msgid "Blowtorch"
-msgstr "Pürmüs"
+msgstr ""
 
 #: src/weapon/bounce_ball.cpp:72
 msgid "Bounce Ball"
-msgstr "Zıplayan Top"
+msgstr ""
 
 #: src/weapon/supertux.cpp:103
 msgid "Bye bye tux..."
-msgstr "Bay bay tux..."
+msgstr ""
 
 #: src/main.cpp:111
 msgid "C++ exception caught:"
 msgstr "C++ istisnası oluştu:"
 
-#: src/team/teams_list.cpp:444
-#: src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:444 src/team/teams_list.cpp:483
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
 
-#: src/team/teams_list.cpp:117
-#: src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:117 src/team/teams_list.cpp:132
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
 #: src/weapon/cluster_bomb.cpp:129
+#, fuzzy
 msgid "Cluster Bomb"
-msgstr "Şarapnelli Bomba"
+msgstr "Şarapnelli bomba"
 
 #: src/weapon/suicide.cpp:35
+#, fuzzy
 msgid "Commit Suicide"
 msgstr "İntihar"
 
 #: src/menu/network_connection_menu.cpp:67
 msgid "Connect to game"
-msgstr "Oyuna bağlan"
+msgstr ""
 
 #: src/menu/network_connection_menu.cpp:114
 msgid "Connected to "
-msgstr "Bağlanılan"
+msgstr ""
 
 #: src/weapon/construct.cpp:43
 msgid "Construct"
-msgstr "İnşa Et"
+msgstr ""
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
 msgstr "Hazırlayanlar"
 
-#: src/game/game.cpp:152
+#: src/game/game.cpp:153
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"
 
-#: src/menu/game_menu.cpp:287
+#: src/menu/game_menu.cpp:292
 msgid "Duration of a turn:"
 msgstr "Tur zamanı:"
 
-#: src/menu/game_menu.cpp:293
-msgid "Duration of the end of a turn:"
-msgstr "Tur bitiş zamanı:"
-
-#: src/object/bonus_box.cpp:234
-#: src/weapon/dynamite.cpp:91
+#: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamit"
 
@@ -317,14 +330,15 @@ msgstr "%s:%lu'da hata"
 msgid "Error loading team %s:"
 msgstr "%s takımı yüklenirken hata:"
 
-#: src/team/team.cpp:184
+#: src/team/team.cpp:185
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
 #: src/game/config.cpp:119
@@ -337,7 +351,7 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "%s oyun modu yüklenirken hata (dosya %s):"
 
-#: src/game/game.cpp:195
+#: src/game/game.cpp:197
 #, c-format
 msgid ""
 "Error:\n"
@@ -346,14 +360,15 @@ msgstr ""
 "Hata:\n"
 "%s"
 
-#: src/team/team.cpp:144
-#, c-format
+#: src/team/team.cpp:145
+#, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 
 #: src/network/network.cpp:65
+#, fuzzy
 msgid "Failed to initialize network library!"
-msgstr "Ağ kütüphanesi başlatılamadı!"
+msgstr "SDL kütüphanesi başlatılamadı: %s"
 
 #: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
@@ -364,12 +379,13 @@ msgid "Fullscreen?"
 msgstr "Tam ekran?"
 
 #: src/menu/network_menu.cpp:61
+#, fuzzy
 msgid "Game options:"
-msgstr "Oyun seçenekleri:"
+msgstr "Oyun seçenekleri"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
-msgstr "Gnu Mancınığı"
+msgstr ""
 
 #: src/weapon/grenade.cpp:69
 msgid "Grenade"
@@ -387,28 +403,30 @@ msgstr "Tabanca"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 
-#: src/menu/game_menu.cpp:69
+#: src/menu/game_menu.cpp:70
 msgid "Head commander"
-msgstr "Başkumandan"
+msgstr ""
 
-#: src/object/bonus_box.cpp:206
-#: src/weapon/holly_grenade.cpp:105
+#: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
+#, fuzzy
 msgid "Holy Grenade"
-msgstr "Kutsal El Bombası"
+msgstr "El bombası"
 
 #: src/menu/network_connection_menu.cpp:74
 msgid "Host a game"
-msgstr "Oyuna sunuculuk yap"
+msgstr ""
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
-msgstr "Çabuk ol, çok yavaşsın !!"
+msgstr ""
 
 #: src/main.cpp:193
-msgid "If you found a bug or have a feature request send us a email (in english, please):"
-msgstr "Bir hata bulursanız veya bir istekte bulunacaksanız bir e-posta gönderin (İngilizce olsun lütfen):"
+msgid ""
+"If you found a bug or have a feature request send us a email (in english, "
+"please):"
+msgstr ""
 
-#: src/menu/game_menu.cpp:304
+#: src/menu/game_menu.cpp:310
 msgid "Initial energy:"
 msgstr "Başlangıç enerjisi:"
 
@@ -429,18 +447,17 @@ msgstr "Veriler yükleniyor"
 msgid "Initialise objects"
 msgstr "Nesneler yükleniyor"
 
-#: src/game/game_loop.cpp:99
-#: src/game/game_loop.cpp:128
+#: src/game/game_loop.cpp:99 src/game/game_loop.cpp:128
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
 #: src/network/network.cpp:171
 msgid "Invalid port!"
-msgstr "Geçersiz port!"
+msgstr ""
 
 #: src/network/network.cpp:121
 msgid "Invalid server adress!"
-msgstr "Geçersiz sunucu adresi!"
+msgstr ""
 
 #: src/object/bonus_box.cpp:280
 msgid "Is it a gift?"
@@ -448,7 +465,11 @@ msgstr "Bu bir hediye mi?"
 
 #: src/weapon/jetpack.cpp:48
 msgid "Jetpack"
-msgstr "Jet çantası"
+msgstr ""
+
+#: src/menu/network_menu.cpp:72
+msgid "Join #wormux on irc.freenode.net to find"
+msgstr ""
 
 #: src/map/maps_list.cpp:185
 msgid "Load maps:"
@@ -460,11 +481,11 @@ msgstr "Takımları yükle:"
 
 #: src/object/bonus_box.cpp:188
 msgid "Low gravity"
-msgstr "Düşük yer çekimi"
+msgstr ""
 
 #: src/weapon/lowgrav.cpp:41
 msgid "LowGrav"
-msgstr "Düşük yer çekimi"
+msgstr ""
 
 #: src/map/map.cpp:328
 #, c-format
@@ -473,11 +494,12 @@ msgstr "%s haritasını yaratan:"
 
 #: src/game/game_loop.cpp:203
 msgid "Maps"
-msgstr "Haritalar"
+msgstr ""
 
 #: src/menu/network_menu.cpp:59
+#, fuzzy
 msgid "Max number of players:"
-msgstr "En fazla oyuncu sayısı:"
+msgstr "Her takımdaki oyuncu sayısı:"
 
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
@@ -488,20 +510,24 @@ msgid "Mine"
 msgstr "Mayın"
 
 #: src/menu/results_menu.cpp:169
+#, fuzzy
 msgid "Most sold-out"
-msgstr "  En fazla satılan"
+msgstr "  En fazla tükenen : : %s (%i).\n"
 
 #: src/menu/results_menu.cpp:159
-msgid "Most usefull"
-msgstr "  En kullanışlı"
+#, fuzzy
+msgid "Most useful"
+msgstr "  En kullanışlı  :  %s (%i).\n"
 
 #: src/menu/results_menu.cpp:164
+#, fuzzy
 msgid "Most useless"
-msgstr "  En kullanışsız"
+msgstr "  En kullanışsız  :  %s (%i).\n"
 
 #: src/menu/results_menu.cpp:154
+#, fuzzy
 msgid "Most violent"
-msgstr "  En cabbar"
+msgstr "  En cabbar  :  %s (%i).\n"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -517,39 +543,34 @@ msgstr "Ağ Oyunu"
 
 #: src/weapon/ninja_rope.cpp:83
 msgid "Ninjarope"
-msgstr "Ninja ipi"
+msgstr ""
 
 #: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
 
-#: src/menu/results_menu.cpp:210
-#: src/menu/results_menu.cpp:217
-#: src/menu/results_menu.cpp:224
-#: src/menu/results_menu.cpp:231
-#: src/team/results.cpp:190
-#: src/team/results.cpp:195
-#: src/team/results.cpp:200
+#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
+#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
+#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
 #: src/team/results.cpp:205
+#, fuzzy
 msgid "Nobody!"
-msgstr "Hiç kimse!"
+msgstr "Hiç kimse"
 
-#: src/menu/game_menu.cpp:75
+#: src/menu/game_menu.cpp:76
+#, fuzzy
 msgid "Number of characters"
-msgstr "Karakter sayısı"
-
-#: src/menu/game_menu.cpp:299
-msgid "Number of players per team:"
 msgstr "Her takımdaki oyuncu sayısı:"
 
-#: src/menu/game_menu.cpp:171
+#: src/menu/game_menu.cpp:174
+#, fuzzy
 msgid "Number of teams:"
-msgstr "Takım sayısı:"
+msgstr "Her takımdaki oyuncu sayısı:"
 
-#: src/menu/network_menu.cpp:181
+#: src/menu/network_menu.cpp:186
 msgid "Only the server can set the map!"
-msgstr "Haritayı sadece  sunucu ayarlayabilir!"
+msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -557,31 +578,34 @@ msgstr "Seçenekler"
 
 #: src/weapon/parachute.cpp:35
 msgid "Parachute"
-msgstr "Paraşüt"
+msgstr ""
 
 #: src/weapon/parachute.cpp:58
 msgid "Parachute is activated automatically."
-msgstr "Paraşüt otomatik olarak etkinleştirildi."
+msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
 msgstr "Oyna"
 
-#: src/menu/game_menu.cpp:71
+#: src/menu/game_menu.cpp:72
+#, fuzzy
 msgid "Player X"
-msgstr "Oyuncu X"
+msgstr "Oyna"
 
 #: src/menu/options_menu.cpp:68
+#, fuzzy
 msgid "Player energy?"
-msgstr "Oyuncu enerjisi?"
+msgstr "Oyuncu enerjisini göster?"
 
 #: src/menu/options_menu.cpp:71
+#, fuzzy
 msgid "Player's name?"
-msgstr "Oyuncu isimleri?"
+msgstr "Oyuncu isimlerini göster?"
 
-#: src/weapon/polecat.cpp:134
+#: src/weapon/polecat.cpp:136
 msgid "Polecat Launcher"
-msgstr "Kokarca Mancınığı"
+msgstr ""
 
 #: src/menu/main_menu.cpp:119
 msgid "Quit"
@@ -593,11 +617,12 @@ msgstr "Wormux'dan çıkılıyor"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
-msgstr "Çözünürlük"
+msgstr ""
 
 #: src/weapon/riot_bomb.cpp:66
+#, fuzzy
 msgid "Riot Bomb"
-msgstr "Ses Bombası"
+msgstr "Otomatik bazuka"
 
 #: src/object/bonus_box.cpp:224
 msgid "Riot bomb"
@@ -607,45 +632,52 @@ msgstr "Otomatik bazuka"
 msgid "Run game"
 msgstr "Oyunu çalıştır"
 
-#: src/menu/network_menu.cpp:83
+#: src/menu/network_menu.cpp:88
 msgid "Select the teams:"
 msgstr "Takımları seç:"
 
-#: src/menu/network_menu.cpp:126
+#: src/menu/network_menu.cpp:131
 msgid "Select the world:"
 msgstr "Dünyayı seç:"
 
 #: src/menu/network_connection_menu.cpp:60
 msgid "Server adress:"
-msgstr "Sunucu adresi:"
+msgstr ""
 
 #: src/menu/network_connection_menu.cpp:129
 msgid "Server started"
-msgstr "Sunucu başlatıldı"
+msgstr ""
 
 #: src/weapon/shotgun.cpp:62
+#, fuzzy
 msgid "Shotgun"
-msgstr "Pompalı tüfek"
+msgstr "Ses seçenekleri"
 
 #: src/weapon/skip_turn.cpp:37
 msgid "Skip turn"
-msgstr "Sırayı atla"
+msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
-msgstr "Suikast Tüfeği"
+msgstr ""
+
+#: src/menu/network_menu.cpp:75
+msgid "So you have to restart Wormux after each"
+msgstr ""
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
 msgstr "Ses efektleri?"
 
 #: src/menu/options_menu.cpp:105
+#, fuzzy
 msgid "Sound frequency"
-msgstr "Ses frekansı"
+msgstr "Ses efektleri?"
 
 #: src/game/game_loop.cpp:221
+#, fuzzy
 msgid "Sounds"
-msgstr "Sesler"
+msgstr "Ses seçenekleri"
 
 #: src/game/game.cpp:85
 msgid "Starting a new game"
@@ -657,15 +689,15 @@ msgstr "Stok:"
 
 #: src/weapon/submachine_gun.cpp:63
 msgid "Submachine Gun"
-msgstr "Makinalı Tüfek"
+msgstr ""
 
 #: src/weapon/supertux.cpp:125
 msgid "SuperTux"
-msgstr "SuperTux"
+msgstr ""
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
-msgstr "Şırınga"
+msgstr ""
 
 #: src/team/results.cpp:208
 #, c-format
@@ -674,34 +706,35 @@ msgstr "%s takımı sonuçları:\n"
 
 #: src/game/game_loop.cpp:207
 msgid "Teams"
-msgstr "Takımlar"
+msgstr ""
 
-#: src/object/bonus_box.cpp:143
-#: src/weapon/teleportation.cpp:39
+#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Işınlanma"
 
 #: src/weapon/cluster_bomb.cpp:97
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
+msgstr ""
 
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Otomatik roket savaş alanını terketti..."
 
-#: src/weapon/bazooka.cpp:53
-#: src/weapon/cluster_bomb.cpp:59
+#: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
+#, fuzzy
 msgid "The rocket has left the battlefield..."
 msgstr "Roket savaş alanını terketti..."
 
 #: src/menu/network_connection_menu.cpp:119
+#, fuzzy
 msgid "Unable to connect"
-msgstr "Bağlantı kurulamadı"
+msgstr "(%s) tema dizini açılamadı!"
 
 #: src/network/network.cpp:132
+#, fuzzy
 msgid "Unable to contact server!"
-msgstr "Sunucu ile iletişim sağlanamadı!"
+msgstr "(%s) harita dizini açılamadı!"
 
 #: src/graphic/video.cpp:193
 #, c-format
@@ -709,20 +742,21 @@ msgid "Unable to initialize SDL library: %s"
 msgstr "SDL kütüphanesi başlatılamadı: %s"
 
 #: src/network/network.cpp:215
+#, fuzzy
 msgid "Unable to listen for client!"
-msgstr "İstemciler beklenemedi!"
+msgstr "İstemciler bekleniyor"
 
-#: src/map/maps_list.cpp:198
-#: src/map/maps_list.cpp:214
+#: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
 
 #: src/menu/network_connection_menu.cpp:132
 msgid "Unable to start server"
-msgstr "Sunucu başlamadı"
+msgstr ""
 
 #: src/main.cpp:118
+#, fuzzy
 msgid "Unexpected exception caught..."
 msgstr "Beklenmeyen istisna oluştu..."
 
@@ -730,17 +764,23 @@ msgstr "Beklenmeyen istisna oluştu..."
 msgid "Version"
 msgstr "Sürüm"
 
-#: src/menu/network_menu.cpp:288
+#: src/menu/network_menu.cpp:74
+msgid "WARNING! Disconnections are not yet handled."
+msgstr ""
+
+#: src/menu/network_menu.cpp:293
+#, fuzzy
 msgid "Wait! "
-msgstr "Bekleyin!"
+msgstr "Takımlar bekleniyor"
 
 #: src/interface/interface.cpp:99
 msgid "Weapon:"
 msgstr "Silah:"
 
 #: src/game/game_loop.cpp:216
+#, fuzzy
 msgid "Weapons"
-msgstr "Silahlar"
+msgstr "Silah:"
 
 #: src/main.cpp:210
 msgid "Website: "
@@ -752,8 +792,9 @@ msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
 
 #: src/menu/options_menu.cpp:65
+#, fuzzy
 msgid "Wind particles?"
-msgstr "Rüzgar parçacıkları?"
+msgstr "Rüzgar parçacıklarını göster?"
 
 #: src/main.cpp:162
 msgid "Wormux launching..."
@@ -766,7 +807,7 @@ msgstr "Wormux sürüm "
 #: src/include/action_handler.cpp:385
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr "Wormux sürümleri farklı: istemci=%s, sunucu=%s."
+msgstr ""
 
 #: src/map/maps_list.cpp:71
 #, c-format
@@ -779,52 +820,82 @@ msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
 #: src/game/game_loop.cpp:211
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden değiştirin !"
+msgstr ""
+"Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden "
+"değiştirin !"
 
 #: src/team/teams_list.cpp:152
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
-#: src/weapon/launcher.cpp:448
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
+
+#: src/menu/network_menu.cpp:76
+msgid "disconnection!"
+msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
 
+#: src/menu/network_menu.cpp:73
+msgid "some opponents."
+msgstr ""
+
 #~ msgid "%s team has won.\n"
 #~ msgstr "%s takımı kazandı.\n"
+
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""
 #~ "Düzgün çalışması için, <infinite_background> <is_open> olarak ayarlanması "
 #~ "gerekli!!"
+
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Tur bitiş zamanı:"
+
 #~ msgid "End of the game!\n"
 #~ msgstr "Oyunun sonu!\n"
+
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "%s teması yüklenirken hata:"
+
 #~ msgid "Graphic options"
 #~ msgstr "Grafik seçenekleri"
+
 #~ msgid "Load map"
 #~ msgstr "Haritayı yükle"
+
 #~ msgid "Load skins:"
 #~ msgstr "Temaları yükle:"
+
+#~ msgid "Number of players per team:"
+#~ msgstr "Her takımdaki oyuncu sayısı:"
+
 #~ msgid "Pause"
 #~ msgstr "Durdur"
+
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr "Lütfen e-posta ile Wormux hakkındaki düşüncelerinizi bize iletin:"
+
 #~ msgid "Sound options"
 #~ msgstr "Ses seçenekleri"
+
 #~ msgid "The game has ended as a draw.\n"
 #~ msgstr "Oyun berabere bitti.\n"
+
 #~ msgid "Unknow action"
 #~ msgstr "Bilinmeyen eylem"
+
 #~ msgid "Wait for map"
 #~ msgstr "Harita bekleniyor"
+
 #~ msgid "Wait for server"
 #~ msgstr "Sunucu bekleniyor"
+
 #~ msgid "Wait for server informations"
 #~ msgstr "Sunucu bilgisi bekleniyor"
+
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr "Uyarı! Rüzgar parçacık yığını çok düşük! Öntanımlı 0,3'e ayarlayın"
-
