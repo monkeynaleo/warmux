@@ -469,7 +469,6 @@ void Character::Jump(double strength, int deg_angle)
 
   if (!CanJump() && ActiveTeam().is_local) return;
 
-  SetRebounding(false);
   SetMovement("jump");
 
   // Jump !
@@ -748,7 +747,6 @@ void Character::InitMouvementDG(uint pause)
   do_nothing_time = Time::GetInstance()->Read();
   CharacterCursor::GetInstance()->Hide();
   step_sound_played = true;
-  SetRebounding(false);
   pause_bouge_dg = Time::GetInstance()->Read()+pause;
 }
 
@@ -828,6 +826,7 @@ void Character::StopPlaying()
   SetClothe("normal");
   SetMovement("walk");
   body->ResetWalk();
+  SetRebounding(true);
 }
 
 // Begining of turn or changed to this character
@@ -835,6 +834,7 @@ void Character::StartPlaying()
 {
   assert (!IsGhost());
   SetWeaponClothe();
+  SetRebounding(false);
   ActiveTeam().crosshair.ChangeAngleVal(crosshair_angle);
 }
 
