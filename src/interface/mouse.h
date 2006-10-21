@@ -39,9 +39,11 @@ class Mouse
 {
 private:
   bool scroll_actif;
+  bool hide;
   pointer_t current_pointer;
 
   Point2i savedPos;
+  Point2i lastPos;
 
   static Mouse * singleton;
 
@@ -59,7 +61,6 @@ public:
 
   void Reset();
 
-  // Refresh de la souris à chaque boucle du jeu
   void Refresh();
   void TestCamera();
   bool ActionClicG();
@@ -68,7 +69,6 @@ public:
   bool ActionWhellUp();
   void ChoixVerPointe();
 
-  // Lit la position dans le monde
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
   bool ClicG() const;
@@ -79,6 +79,11 @@ public:
   // Choose the pointer
   void SetPointer(pointer_t pointer);
   void Draw();
+
+  // Hide/show mouse pointer
+  void Show();
+  void Hide();
+  bool IsVisible() const;
 
   // Center the pointer on the screen
   void CenterPointer();

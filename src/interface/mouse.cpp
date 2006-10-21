@@ -52,7 +52,7 @@ Mouse * Mouse::GetInstance() {
 
 Mouse::Mouse(){
   scroll_actif = false;
-
+  hide = false;
   // Load the different pointers
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   pointer_select = resource_manager.LoadImage(res, "mouse/pointer_select");
@@ -215,6 +215,12 @@ void Mouse::TestCamera(){
   //Move camera with mouse holding Ctrl key down or with middle button of mouse
   const bool demande_scroll = SDL_GetModState() & KMOD_CTRL |
                               SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE);
+  // Show cursor and information interface when moving mouse
+  if(lastPos != mousePos) {
+    Show();
+    Interface::GetInstance()->Show();
+    lastPos = mousePos;
+  }
 
   if( demande_scroll ){
     if( scroll_actif ){
@@ -288,6 +294,21 @@ void Mouse::SetPointer(pointer_t pointer)
   else SDL_ShowCursor(false);
 }
 
+void Mouse::Show()
+{
+  hide = false;
+}
+
+void Mouse::Hide()
+{
+  hide = true;
+}
+
+bool Mouse::IsVisible() const
+{
+  return !hide;
+}
+
 bool Mouse::ScrollPointer()
 {
 
@@ -331,7 +352,7 @@ bool Mouse::DrawMovePointer()
 
 void Mouse::Draw()
 {
-  if (current_pointer == POINTER_STANDARD)
+  if (current_pointer == POINTER_STANDARD || !IsVisible())
     return; // use standard SDL cursor
 
   if ( DrawMovePointer() )

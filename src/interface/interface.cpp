@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Interface affichant différentes informations sur la jeu.
+ * Graphical interface showing various information about the game.
  *****************************************************************************/
 
 #include "interface.h"
@@ -50,7 +50,6 @@ const Point2i WEAPON_ICON_POS(450, 20);
 
 const uint INFO_VER_X2 = 296;
 
-// Barre d'énergie
 const Point2i ENERGY_BAR_POS(170, WORM_ENERGY_POS.y + 2);
 const uint BARENERGIE_LARG = INFO_VER_X2 - ENERGY_BAR_POS.x;
 const uint BARENERGIE_HAUT = 15;
@@ -276,6 +275,21 @@ void Interface::EnableDisplay (bool _display)
 {
   display = _display;
   camera.CenterOnFollowedObject();
+}
+
+void Interface::Show()
+{
+  display = true;
+}
+
+void Interface::Hide()
+{
+  display = false;
+}
+
+bool Interface::IsVisible() const
+{
+  return display;
 }
 
 void Interface::UpdateTimer(uint utimer)
