@@ -236,7 +236,7 @@ msgstr "Atac aerian"
 msgid "Airhammer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:194
+#: src/team/results.cpp:143
 #, fuzzy
 msgid "All teams"
 msgstr "Se aşteaptă echipele"
@@ -577,8 +577,8 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
 
-#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
-#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
+#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
+#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
 #: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
 #: src/team/results.cpp:205
 #, fuzzy
