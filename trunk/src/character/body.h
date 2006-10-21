@@ -68,7 +68,7 @@ class Body
   uint last_refresh; // Time elapsed since last refresh
   uint current_frame;
   int walk_events;
-  
+
   int main_rotation;
 
   std::vector<junction> squel_lst; // Squeleton of the body:
@@ -111,7 +111,7 @@ public:
   const std::string& GetClothe();
   void GetTestRect(uint &l, uint &r, uint &t, uint &b);
   const int GetDirection();
-  const Point2i GetHandPosition();
+  const Point2i &GetHandPosition() const;
   uint GetMovementDuration();
   uint GetFrame() { return current_frame; };
   uint GetFrameCount();

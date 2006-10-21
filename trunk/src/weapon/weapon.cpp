@@ -66,7 +66,7 @@ const uint ANIM_DISPLAY_TIME = 400;
 extern WeaponStrengthBar weapon_strength_bar;
 
 
-Weapon::Weapon(Weapon_type type, 
+Weapon::Weapon(Weapon_type type,
 	       const std::string &id,
 	       EmptyWeaponConfig * params,
 	       weapon_visibility_t visibility)
@@ -92,16 +92,13 @@ Weapon::Weapon(Weapon_type type,
   override_keys = false ;
   force_override_keys = false;
 
-  position.origin = weapon_origin_HAND;
-  position.dx = 0;
-  position.dy = 0;
-  position.hole_delta = Point2i(0,0);
+  origin = weapon_origin_HAND;
 
   m_can_change_weapon = false;
 
   m_visibility = visibility;
   m_unit_visibility = ALWAYS_VISIBLE;
-   
+
   m_image = NULL;
   m_weapon_fire = NULL;
 
@@ -109,7 +106,7 @@ Weapon::Weapon(Weapon_type type,
 
   if (!use_flipping and (min_angle != max_angle))
     use_flipping = true;
-  
+
   extra_params = params;
 
   if (m_visibility != NEVER_VISIBLE)
@@ -118,7 +115,7 @@ Weapon::Weapon(Weapon_type type,
     if(min_angle != max_angle)
       m_image->cache.EnableLastFrameCache();
   }
-     
+
   icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
 
   mouse_character_selection = true;
@@ -137,10 +134,10 @@ void Weapon::p_Select ()
 void Weapon::p_Deselect () {}
 void Weapon::HandleKeyEvent(int key, int event_type) {}
 
-void Weapon::Select() 
-{  
+void Weapon::Select()
+{
   MSG_DEBUG("weapon", "Select %s", m_name.c_str());
-  
+
   m_time_anim_begin = Time::GetInstance()->Read();
   m_is_active = false;
   m_strength = 0;
@@ -149,13 +146,13 @@ void Weapon::Select()
   ActiveCharacter().SetWeaponClothe();
 
   // is there a crosshair ?
-  if (min_angle != max_angle) 
-    ActiveTeam().crosshair.enable = true; 
-     
+  if (min_angle != max_angle)
+    ActiveTeam().crosshair.enable = true;
+
   p_Select();
 
   if (max_strength == 0) return ;
-  
+
   // prepare the strength bar
   weapon_strength_bar.InitVal (0, 0, uint(max_strength*100));
 
@@ -216,7 +213,7 @@ void Weapon::NewActionShoot() const
   SendCharacterPosition();
   ActionHandler::GetInstance()->NewAction (new Action(
 				       ACTION_SHOOT,
-				       m_strength,	
+				       m_strength,
 				       ActiveTeam().crosshair.GetAngleVal()));
 
   Action a_end_sync(ACTION_SYNC_END);
@@ -243,8 +240,8 @@ bool Weapon::Shoot()
 
   {
     // WARNING: The following commented code is wrong! Please see explanation following
-    //   if (!EnoughAmmo() 
-    //       || (use_unit_on_first_shoot && !EnoughAmmoUnit())) 
+    //   if (!EnoughAmmo()
+    //       || (use_unit_on_first_shoot && !EnoughAmmoUnit()))
     //     return false;
 
 
@@ -254,15 +251,15 @@ bool Weapon::Shoot()
 
     if (use_unit_on_first_shoot && !EnoughAmmoUnit())
       return false;
-    
+
     if (!EnoughAmmo())
-      if ( ! (ActiveTeam().ReadNbAmmos() == 0 
+      if ( ! (ActiveTeam().ReadNbAmmos() == 0
 	      && use_unit_on_first_shoot && EnoughAmmoUnit()) )
 	return false;
   }
-	     
+
   MSG_DEBUG("weapon_shoot", "Enough ammo");
-  
+
   if (!p_Shoot()) return false;
   m_last_fire_time = Time::GetInstance()->Read();
 
@@ -289,23 +286,23 @@ bool Weapon::Shoot()
 // Calcule la position de l'image de l'arme
 void Weapon::PosXY (int &x, int &y) const
 {
-  if(position.origin == weapon_origin_HAND)
+  if(origin == weapon_origin_HAND)
   {
     Point2i handPos = ActiveCharacter().GetHandPosition();
-    y = handPos.y + position.dy;
+    y = handPos.y + position.y;
     if (ActiveCharacter().GetDirection() == 1)
-      x = handPos.x + position.dx;
+      x = handPos.x + position.x;
     else
-      x = handPos.x - position.dx;
+      x = handPos.x - position.x;
 
     if(ActiveCharacter().GetDirection()==-1)
       x -= m_image->GetWidth();
   }
   else
-  if(position.origin == weapon_origin_OVER)
+  if(origin == weapon_origin_OVER)
   {
-    x = ActiveCharacter().GetCenterX()-m_image->GetWidth()/2+position.dx;
-    y = ActiveCharacter().GetY()-m_image->GetHeight()+position.dy;
+    x = ActiveCharacter().GetCenterX() - m_image->GetWidth() / 2 + position.x;
+    y = ActiveCharacter().GetY()       - m_image->GetHeight()    + position.y;
   }
   else
     assert(false);
@@ -325,7 +322,7 @@ const Point2i Weapon::GetGunHolePosition()
   RotationPointXY(x, y);
 
   Point2f pos(x,y);
-  Point2f hole(x + position.hole_delta.x, y + position.hole_delta.y);
+  Point2f hole(x + hole_delta.x, y + hole_delta.y);
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
   Point2f rotated_hole;
@@ -377,24 +374,24 @@ bool Weapon::CanBeUsedOnClosedMap() const{
   return can_be_used_on_closed_map;
 }
 
-const std::string& Weapon::GetName() const { 
+const std::string& Weapon::GetName() const {
   assert (!m_name.empty());
   return m_name;
 }
 
-const std::string& Weapon::GetID() const { 
+const std::string& Weapon::GetID() const {
   assert (!m_name.empty());
   return m_id;
 }
 
-Weapon_type Weapon::GetType() const { 
+Weapon_type Weapon::GetType() const {
   return m_type;
 }
 
 void Weapon::UpdateStrength(){
   if( max_strength == 0 || m_first_time_loading == 0 )
     return ;
-  
+
   uint time = Time::GetInstance()->Read() - m_first_time_loading;
   double val = (max_strength * time) / MAX_TIME_LOADING;
 
@@ -413,9 +410,9 @@ void Weapon::InitLoading(){
     return ;
 
   channel_load = jukebox.Play("share","weapon/load");
-   
+
   m_first_time_loading = Time::GetInstance()->Read();
-  
+
   m_strength = 0;
 
   GameLoop::GetInstance()->character_already_chosen = true;
@@ -471,15 +468,15 @@ void Weapon::Draw(){
     {
       case ALWAYS_VISIBLE:
 	break ;
-	
+
       case NEVER_VISIBLE:
 	return ;
-	
+
       case VISIBLE_ONLY_WHEN_ACTIVE:
 	if (!m_is_active)
 	  return ;
 	break;
-	
+
       case VISIBLE_ONLY_WHEN_INACTIVE:
 	if (m_is_active)
 	  return ;
@@ -532,7 +529,7 @@ void Weapon::Draw(){
       float scale = sin( 1.5 * M_PI_2 * double(Time::GetInstance()->Read() - m_time_anim_begin) /(double) ANIM_DISPLAY_TIME) / sin(1.5 * M_PI_2);
       m_image->Scale(ActiveCharacter().GetDirection() * scale,scale);
 
-      if(position.origin == weapon_origin_OVER) PosXY(x,y); //Recompute position to get the icon centered over the skin
+      if(origin == weapon_origin_OVER) PosXY(x,y); //Recompute position to get the icon centered over the skin
     }
   }
 
@@ -557,14 +554,14 @@ void Weapon::DrawUnit(int unit){
   std::ostringstream ss;
 
   ss << unit;
- 
+
   DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
 		 Point2i( ActiveCharacter().GetCenterX(), ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
 		 - camera.GetPosition(),
 		 ss.str());
 }
 
-bool Weapon::LoadXml(xmlpp::Element * weapon) 
+bool Weapon::LoadXml(xmlpp::Element * weapon)
 {
   xmlpp::Element *elem = LitDocXml::AccesBalise (weapon, m_id);
   if (elem == NULL)
@@ -579,23 +576,23 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   if (pos_elem != NULL) {
     // E.g. <position origin="hand" x="-1" y="0" />
     std::string origin;
-    LitDocXml::LitAttrInt (pos_elem, "x", position.dx);
-    LitDocXml::LitAttrInt (pos_elem, "y", position.dy);
+    LitDocXml::LitAttrInt (pos_elem, "x", position.x);
+    LitDocXml::LitAttrInt (pos_elem, "y", position.y);
     LitDocXml::LitAttrString (pos_elem, "origin", origin);
     if (origin == "over")
-      position.origin = weapon_origin_OVER;
+      origin = weapon_origin_OVER;
     else
-      position.origin = weapon_origin_HAND;
+      origin = weapon_origin_HAND;
   }
 
   pos_elem = LitDocXml::AccesBalise (elem, "hole");
   if (pos_elem != NULL) {
     // E.g. <hole dx="-1" dy="0" />
-    LitDocXml::LitAttrInt (pos_elem, "dx", position.hole_delta.x);
-    LitDocXml::LitAttrInt (pos_elem, "dy", position.hole_delta.y);
+    LitDocXml::LitAttrInt (pos_elem, "dx", hole_delta.x);
+    LitDocXml::LitAttrInt (pos_elem, "dy", hole_delta.y);
   }
 
-  LitDocXml::LitInt (elem, "nb_ammo", m_initial_nb_ammo);       
+  LitDocXml::LitInt (elem, "nb_ammo", m_initial_nb_ammo);
   LitDocXml::LitInt (elem, "unit_per_ammo", m_initial_nb_unit_per_ammo);
 
   // max strength
@@ -604,7 +601,7 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
 
   // change weapon after ? (for the ninja cord = true)
   LitDocXml::LitBool (elem, "change_weapon", m_can_change_weapon);
-      
+
   // angle of weapon when drawing
   // if (min_angle == max_angle) no cross_hair !
   // between -90 to 90 degrees
@@ -614,8 +611,8 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   // Load extra parameters if existing
   if (extra_params != NULL) extra_params->LoadXml(elem);
 
-  if (m_visibility != NEVER_VISIBLE && position.origin == weapon_origin_HAND)
-    m_image->SetRotation_HotSpot(Point2i(-position.dx,-position.dy));
+  if (m_visibility != NEVER_VISIBLE && origin == weapon_origin_HAND)
+    m_image->SetRotation_HotSpot(Point2i(-position.x,-position.y));
 
   return true;
 }

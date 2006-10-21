@@ -552,7 +552,7 @@ const int Body::GetDirection()
   return direction;
 }
 
-const Point2i Body::GetHandPosition()
+const Point2i &Body::GetHandPosition() const
 {
   return weapon_pos;
 }

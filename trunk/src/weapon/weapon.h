@@ -62,13 +62,9 @@ class WeaponStrengthBar : public BarreProg
 
 //-----------------------------------------------------------------------------
 
-class Weapon 
+class Weapon
 {
 protected:
-  typedef enum {
-    weapon_origin_HAND,
-    weapon_origin_OVER
-  } weapon_origin_t;
   Weapon_type m_type;
   std::string m_id;
   std::string m_name;
@@ -77,11 +73,14 @@ protected:
   Sprite *m_weapon_fire;
   uint m_fire_remanence_time;
 
-  struct s_position{
-    int dx, dy;
-    Point2i hole_delta; // Position of the hole of the weapon
-    weapon_origin_t origin;
-  } position;
+  typedef enum {
+    weapon_origin_HAND,
+    weapon_origin_OVER
+  } weapon_origin_t;
+  weapon_origin_t origin;
+
+  Point2i hole_delta; // relative position of the hole of the weapon
+  Point2i position;   // Position of the weapon
 
   // Time when the weapon is selected for the animation
   uint m_time_anim_begin;
@@ -123,10 +122,10 @@ public:
 
   // True if the weapon uses keys when activated.
   bool override_keys ;
-  
-  //Force weapons to use keys when true 
+
+  //Force weapons to use keys when true
   bool force_override_keys ;
-   
+
   // Angle in degrees between -90 to 90
   int min_angle, max_angle;
   bool use_flipping;
@@ -138,15 +137,15 @@ protected:
   virtual bool p_Shoot() = 0;
 
 public:
-  Weapon(Weapon_type type, 
+  Weapon(Weapon_type type,
 	 const std::string &id,
 	 EmptyWeaponConfig * params,
 	 weapon_visibility_t visibility = ALWAYS_VISIBLE);
   virtual ~Weapon();
 
   // Select or deselect the weapon
-  void Select(); 
-  void Deselect(); 
+  void Select();
+  void Deselect();
 
   // Gestion de l'arme
   void Manage();
@@ -186,7 +185,7 @@ public:
 
   // L'arme est encore active (animation par ex.) ?
   bool IsActive() const;
-  
+
   // the weapon is ready to use ? (is there bullets left ?)
   virtual bool IsReady() const ;
 
@@ -210,10 +209,10 @@ public:
   // Choose a target.
   virtual void ChooseTarget (Point2i mouse_pos);
 
-  //Misc actions. 
+  //Misc actions.
   virtual void ActionUp ();//called by mousse.cpp when mousewhellup
   virtual void ActionDown ();//called by mousse.cpp when mousewhelldown
-  
+
   // Handle a keyboard event.
   virtual void HandleKeyEvent(int key, int event_type) ;
 
@@ -225,7 +224,7 @@ public:
 
   // Load parameters from the xml config file
   // Return true if xml has been succesfully load
-  bool LoadXml(xmlpp::Element * weapon);  
+  bool LoadXml(xmlpp::Element * weapon);
 
   // return the strength of the weapon
   const double ReadStrength() const;
