@@ -26,7 +26,7 @@
 #include "../game/time.h"
 #include "../graphic/text.h"
 
-const uint BARRE_LARG = 140;
+const uint BARRE_LARG = 160;
 const uint BARRE_HAUT = 13;
 const uint ESPACEMENT = 3;
 
@@ -96,12 +96,12 @@ void TeamEnergy :: Refresh ()
 
   //Le classement se modifie
   case EnergyStatusClassementChange:
-    Mouvement();
+    Move();
     break;
 
   //Aucun changement ne s'effectue en ce moment
   case EnergyStatusOK:
-    if( valeur != nv_valeur && !EstEnMouvement())
+    if( valeur != nv_valeur && !IsMoving())
       status = EnergyStatusValueChange;
     else
     if( classement != nv_classement )
@@ -151,7 +151,7 @@ void TeamEnergy :: Draw ()
   bar_text->DrawCenterTop(x,y);
 }
 
-void TeamEnergy::NouvelleValeur (uint nv_energie)
+void TeamEnergy::SetValue (uint nv_energie)
 { nv_valeur = nv_energie; }
 
 void TeamEnergy::FixeClassement (uint classem)
@@ -163,10 +163,10 @@ void TeamEnergy::FixeClassement (uint classem)
 void TeamEnergy::NouveauClassement (uint nv_classem)
 { nv_classement = nv_classem; }
 
-void TeamEnergy::Mouvement ()
+void TeamEnergy::Move ()
 {
   //Déplacement des jauges (changement dans le classement)
-  if( valeur != nv_valeur && !EstEnMouvement())
+  if( valeur != nv_valeur && !IsMoving())
   {
     //D'autres jauges sont en train de changer de classement
     //Celle-là ne doit pas changer de classement tant que sa
@@ -175,7 +175,7 @@ void TeamEnergy::Mouvement ()
     return;
   }
 
-  if( classement == nv_classement && !EstEnMouvement())
+  if( classement == nv_classement && !IsMoving())
   {
     //D'autres jauges sont en train de changer de classement
     status = EnergyStatusWait;
@@ -217,10 +217,14 @@ void TeamEnergy::Mouvement ()
   }
 }
 
-bool TeamEnergy::EstEnMouvement ()
+bool TeamEnergy::IsMoving () const
 {
   if( dx != 0 || dy != 0 )
     return true;
   return false;
 }
 
+void TeamEnergy::SetTeamName(const std::string& _team_name)
+{
+  team_name = _team_name;
+}

@@ -339,7 +339,7 @@ void TeamsList::RefreshEnergy ()
     //Une des jauges change de classement?
     for (it=playing_list.begin(); it != fin; ++it) {
       if( (**it).energy.status == EnergyStatusClassementChange
-      && ((**it).energy.EstEnMouvement() || status == EnergyStatusOK)) {
+      && ((**it).energy.IsMoving() || status == EnergyStatusOK)) {
         status = EnergyStatusClassementChange;
         break;
       }
