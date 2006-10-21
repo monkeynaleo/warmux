@@ -612,7 +612,7 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   if (extra_params != NULL) extra_params->LoadXml(elem);
 
   if (m_visibility != NEVER_VISIBLE && origin == weapon_origin_HAND)
-    m_image->SetRotation_HotSpot(Point2i(-position.x,-position.y));
+    m_image->SetRotation_HotSpot(-position);
 
   return true;
 }
