@@ -289,7 +289,7 @@ GameMenu::GameMenu() :
   
   game_options->SetMargin(50);
 
-  opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn:"), "menu/timing_turn",
+  opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
 						stdRect,
 						TPS_TOUR_MIN, 5,
 						TPS_TOUR_MIN, TPS_TOUR_MAX);
@@ -307,7 +307,7 @@ GameMenu::GameMenu() :
 // 				     NBR_VER_MIN, NBR_VER_MAX);
 //   top_game_options->AddWidget(opt_nb_characters);
 
-  opt_energy_ini = new SpinButtonWithPicture(_("Initial energy:"), "menu/energy",
+  opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
 					     stdRect,
 					     100, 5,
 					     50, 200);

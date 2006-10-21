@@ -74,7 +74,7 @@ OptionMenu::OptionMenu() :
   full_screen = new PictureTextCBox(_("Fullscreen?"), "menu/fullscreen", stdRect);
   bottom_graphic_options->AddWidget(full_screen);
 
-  opt_max_fps = new SpinButtonBig(_("Maximum number of FPS:"), stdRect,
+  opt_max_fps = new SpinButtonBig(_("Maximum FPS"), stdRect,
 			       50, 5,
 			       20, 120);
   bottom_graphic_options->AddWidget(opt_max_fps);
