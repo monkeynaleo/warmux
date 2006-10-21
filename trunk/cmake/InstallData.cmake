@@ -292,7 +292,8 @@ body/konqiteam/black.png
 body/konqiteam/body.png
 body/konqiteam/dead.png
 body/konqiteam/helmet.png
-body/konqiteam/arm.png
+body/konqiteam/arm1.png
+body/konqiteam/arm2.png
 body/konqiteam/foot-left.png
 body/konqiteam/yoyo.png
 body/konqiteam/config.xml
