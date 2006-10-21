@@ -40,6 +40,7 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
 {
   explode_with_collision = false;
   explode_colliding_character = false;
+  merge_time = 0;
 }
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj)
@@ -50,8 +51,17 @@ void Anvil::SignalObjectCollision(PhysicalObj * obj)
 
 void Anvil::SignalGroundCollision()
 {
-  world.MergeSprite(GetPosition(),image);
-  lst_objects.RemoveObject(this);
+  merge_time = Time::GetInstance()->Read() + 5000;
+}
+
+void Anvil::Refresh()
+{
+  if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
+    world.MergeSprite(GetPosition(),image);
+    lst_objects.RemoveObject(this);
+  } else {
+    WeaponProjectile::Refresh();
+  }
 }
 
 //-----------------------------------------------------------------------------
