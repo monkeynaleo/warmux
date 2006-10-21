@@ -86,10 +86,10 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 			   Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(msg_box);
 
-  msg_box->NewMessage("WARNING!! Network is still under heavy developement  and therefore a");
-  msg_box->NewMessage("little experimental.");
-  msg_box->NewMessage("Wait for everybody to be connected before selecting your options!");
-  msg_box->NewMessage("Some weapons don't work yet (supertux, teleportation, ninjarope,jetpack, airhammer)");
+  msg_box->NewMessage("WARNING!! Network is still under developement and therefore a little experimental.");
+  msg_box->NewMessage(""); // Skip a line
+  msg_box->NewMessage("Some weapons are disabled, because of known bugs");
+  msg_box->NewMessage("(ninjarope, airhammer, blowtorch, submachine gun)");
   msg_box->NewMessage("and surely many other things don't work either!");
   msg_box->NewMessage(""); // Skip a line
   msg_box->NewMessage("Have a good game!");
