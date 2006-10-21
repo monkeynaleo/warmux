@@ -236,7 +236,8 @@ msgid "Automatic Bazooka"
 msgstr "Memmova bazuko"
 
 #: src/weapon/baseball.cpp:32
-msgid "Baseball"
+#, fuzzy
+msgid "Baseball Bat"
 msgstr "Bazopilkilo"
 
 #: src/weapon/bazooka.cpp:62
@@ -304,7 +305,7 @@ msgstr "Cxu vi volas vere forlasi (J/N) ?"
 
 #: src/menu/game_menu.cpp:292
 #, fuzzy
-msgid "Duration of a turn:"
+msgid "Duration of a turn"
 msgstr "Vicdauxro"
 
 #: src/weapon/dynamite.cpp:91
@@ -439,7 +440,7 @@ msgstr ""
 
 #: src/menu/game_menu.cpp:310
 #, fuzzy
-msgid "Initial energy:"
+msgid "Initial energy"
 msgstr "Komenca energio"
 
 #: src/game/game_loop.cpp:200
@@ -502,7 +503,7 @@ msgstr ""
 
 #: src/map/map.cpp:328
 #, c-format
-msgid "Map %s, a creation of :"
+msgid "Map %s, a creation of: "
 msgstr ""
 
 #: src/game/game_loop.cpp:203
@@ -515,7 +516,7 @@ msgid "Max number of players:"
 msgstr "Nombro da ludantoj per teamo"
 
 #: src/menu/options_menu.cpp:77
-msgid "Maximum number of FPS:"
+msgid "Maximum FPS"
 msgstr ""
 
 #: src/weapon/mine.cpp:184
@@ -876,8 +877,7 @@ msgstr ""
 #~ msgid "Automatic bazooka"
 #~ msgstr "Memmova bazuko"
 
-#, fuzzy
-#~ msgid "Baseball bat"
+#~ msgid "Baseball"
 #~ msgstr "Bazopilkilo"
 
 #~ msgid "Change video mode : %ux%u in %s"

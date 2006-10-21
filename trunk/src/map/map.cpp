@@ -325,7 +325,7 @@ void Map::DrawAuthorName()
 
   if (author_info1 == NULL) {
     std::string txt;
-    txt  = Format(_("Map %s, a creation of :"),
+    txt  = Format(_("Map %s, a creation of: "),
 		  ActiveMap().ReadName().c_str());
     author_info1 = new Text(txt, white_color, Font::GetInstance(Font::FONT_SMALL));
     txt = ActiveMap().ReadAuthorInfo();
