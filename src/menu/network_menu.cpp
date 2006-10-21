@@ -70,10 +70,10 @@ NetworkMenu::NetworkMenu() :
   msg_box = new MessageBox(11, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(msg_box);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find"));
-  msg_box->NewMessage(_("some opponents"));
-  msg_box->NewMessage(_("WARNING! Disconnection are not yet handled."));
+  msg_box->NewMessage(_("some opponents."));
+  msg_box->NewMessage(_("WARNING! Disconnections are not yet handled."));
   msg_box->NewMessage(_("So you have to restart Wormux after each"));
-  msg_box->NewMessage(_("disconnections!"));
+  msg_box->NewMessage(_("disconnection!"));
 
   chat_box = new TextBox(std::string(""),Rectanglei(475 + 30 + 5, 600 - 100, 800 - 475 + 40, 25), *Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(chat_box);
