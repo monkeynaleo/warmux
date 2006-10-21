@@ -373,8 +373,8 @@ void Team::LoadGamingData(uint howmany)
     m_nb_ammos[ weapons_list.GetWeapon(WEAPON_NINJA_ROPE)->GetName() ] = 0;
     m_nb_ammos[ weapons_list.GetWeapon(WEAPON_SNIPE_RIFLE)->GetName() ] = 0;
     m_nb_ammos[ weapons_list.GetWeapon(WEAPON_AIR_HAMMER)->GetName() ] = 0;
-    m_nb_ammos[ weapons_list.GetWeapon(WEAPON_BLOWTORCH)->GetName() ] = 
-0;
+    m_nb_ammos[ weapons_list.GetWeapon(WEAPON_BLOWTORCH)->GetName() ] = 0;
+    m_nb_ammos[ weapons_list.GetWeapon(WEAPON_SUBMACHINE_GUN)->GetName() ] = 0;
   }    
 
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
