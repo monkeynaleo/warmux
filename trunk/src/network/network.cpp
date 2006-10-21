@@ -71,7 +71,7 @@ void Network::Init()
 
 //-----------------------------------------------------------------------------
 
-Network::~Network() 
+Network::~Network()
 {
   Disconnect();
   if(inited)
@@ -80,7 +80,7 @@ Network::~Network()
 
 //-----------------------------------------------------------------------------
 
-void Network::Disconnect() 
+void Network::Disconnect()
 {
   if(!m_is_connected) return;
 
@@ -107,7 +107,7 @@ void Network::Disconnect()
 //-----------------------------------------------------------------------------
 //----------------       Client specific methods   ----------------------------
 //-----------------------------------------------------------------------------
-void Network::ClientConnect(const std::string &host, const std::string& port) 
+void Network::ClientConnect(const std::string &host, const std::string& port)
 {
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
@@ -119,7 +119,7 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
   {
     Question question;
     question.Set(_("Invalid server adress!"),1,0);
-    question.AskQuestion();
+    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return;
   }
@@ -130,7 +130,7 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
   {
     Question question;
     question.Set(_("Unable to contact server!"),1,0);
-    question.AskQuestion();
+    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return;
   }
@@ -155,7 +155,7 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
 //----------------       Server specific methods   ----------------------------
 //-----------------------------------------------------------------------------
 
-void Network::ServerStart(const std::string &port) 
+void Network::ServerStart(const std::string &port)
 {
   // The server starts listening for clients
   MSG_DEBUG("network", "Start server on port %s", port.c_str());
@@ -169,7 +169,7 @@ void Network::ServerStart(const std::string &port)
   {
     Question question;
     question.Set(_("Invalid port!"),1,0);
-    question.AskQuestion();
+    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return;
   }
@@ -213,7 +213,7 @@ void Network::AcceptIncoming()
   {
     Question question;
     question.Set(_("Unable to listen for client!"),1,0);
-    question.AskQuestion();
+    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return;
   }
@@ -271,7 +271,7 @@ void Network::ReceiveActions()
         Action* a = new Action(packet);
         MSG_DEBUG("network.traffic","Received action %s",
                 ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
-	
+
 	//Add relation between nickname and socket
 	if( a->GetType() == ACTION_NICKNAME){
 	  std::string nickname = a->PopString();
@@ -280,7 +280,7 @@ void Network::ReceiveActions()
 	  delete a;
 	  break;
 	}
-	
+
         if( a->GetType() == ACTION_NEW_TEAM
         &&  a->GetType() == ACTION_DEL_TEAM)
         {
@@ -356,7 +356,7 @@ void Network::SendChatMessage(std::string txt)
     network.SendAction(&a);
   }
 }
-  
+
 //-----------------------------------------------------------------------------
 
 const bool Network::IsConnected() const { return m_is_connected; }

@@ -23,35 +23,34 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "../gui/question.h"
 #include "../include/base.h"
+#include "../gui/question.h"
 
 class Game
 {
 private:
   bool isGameLaunched;
   bool endOfGameStatus;
-  Question question;
 
   int NbrRemainingTeams();
 
   Game();
   static Game * singleton;
-  
+
 public:
   static Game * GetInstance();
 
   void Start();
   void UnloadDatas();
-  
+
   bool IsGameFinished();
   bool IsGameLaunched() const;
 
   void MessageLoading();
   void MessageEndOfGame();
 
-  int AskQuestion (bool draw=true);
-  
+  int AskQuestion (Question &question, bool draw=true);
+
   void Pause();
 
   bool GetEndOfGameStatus();

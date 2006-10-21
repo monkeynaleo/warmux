@@ -71,7 +71,7 @@ void Question::Draw(){
   }
 }
 
-int Question::AskQuestion (){
+int Question::Ask () {
   SDL_Event event;
 
   int answer = default_choice.value;

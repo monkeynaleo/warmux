@@ -113,7 +113,7 @@ void Game::MessageEndOfGame()
   TeamResults::deleteAllResults(results_list);
 }
 
-int Game::AskQuestion (bool draw)
+int Game::AskQuestion (Question &question, bool draw)
 {
   Time * global_time = Time::GetInstance();
   global_time->Pause();
@@ -121,7 +121,7 @@ int Game::AskQuestion (bool draw)
   if (draw)
     GameLoop::GetInstance()->Draw ();
 
-  int answer = question.AskQuestion ();
+  int answer = question.Ask ();
 
   global_time->Continue();
   return answer;
@@ -149,6 +149,7 @@ void Game::Start()
 
       if (!IsGameFinished())
       {
+        Question question;
         const char *msg = _("Do you really want to quit? (Y/N)");
         question.Set (msg, true, 0, "interface/quit_screen");
 
@@ -168,7 +169,7 @@ void Game::Start()
         }
 
         jukebox.Pause();
-        end = (AskQuestion() == 1);
+        end = (AskQuestion(question) == 1);
         jukebox.Resume();
         if(!end)
           world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
@@ -192,10 +193,11 @@ void Game::Start()
 
   if (err)
   {
+    Question question;
     std::string txt = Format(_("Error:\n%s"), err_msg.c_str());
     std::cout << std::endl << txt << std::endl;
     question.Set (txt, true, 0);
-    AskQuestion (false);
+    AskQuestion (question, false);
   }
 }
 
@@ -210,6 +212,7 @@ void Game::UnloadDatas()
 
 void Game::Pause()
 {
+  Question question;
   if(!network.IsLocal())
     return;
 
@@ -217,7 +220,7 @@ void Game::Pause()
 
   //Pause screen
   question.Set ("", true, 0, "interface/pause_screen");
-  AskQuestion(false);
+  AskQuestion(question, false);
   jukebox.Resume();
 }
 

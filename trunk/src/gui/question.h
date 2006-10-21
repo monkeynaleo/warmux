@@ -71,7 +71,7 @@ public:
 	   bool default_active,
 	   int default_value,
       const std::string &bg_sprite="");
-  int AskQuestion ();
+  int Ask();
   inline void add_choice(int key, int value)
   {
     return this->choices.push_back(choice_t(key,value));
