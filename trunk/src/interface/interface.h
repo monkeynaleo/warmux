@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Interface affichant différentes informations sur la jeu.
+ * Graphical interface showing various information about the game.
  *****************************************************************************/
 
 #ifndef INTERFACE_H
@@ -85,6 +85,9 @@ public:
    
    bool IsDisplayed () const { return display; };
    void EnableDisplay (bool _display);
+   void Show();
+   void Hide();
+   bool IsVisible() const;
    
    int GetWidth() const;
    int GetHeight() const;

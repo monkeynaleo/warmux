@@ -36,6 +36,8 @@
 #include "../include/action_handler.h"
 #include "../include/app.h"
 #include "../include/constant.h"
+#include "../interface/mouse.h"
+#include "../interface/interface.h"
 #include "../interface/cursor.h"
 #include "../map/camera.h"
 #include "../map/map.h"
@@ -584,6 +586,8 @@ void Character::HandleKeyEvent(int action, int event_type)
       switch (event_type)
       {
         case KEY_REFRESH:
+          Mouse::GetInstance()->Hide();
+          Interface::GetInstance()->Hide();
           switch (action) {
             case ACTION_MOVE_LEFT:
               if(ActiveCharacter().IsImmobile())
@@ -599,6 +603,8 @@ void Character::HandleKeyEvent(int action, int event_type)
           }
           //no break!! -> it's normal
         case KEY_PRESSED:
+          Mouse::GetInstance()->Hide();
+          Interface::GetInstance()->Hide();
           switch (action)
           {
             case ACTION_UP:
