@@ -107,7 +107,7 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   , results(v)
   , index(0)
   , max_height(DEF_SIZE+3*DEF_BORDER)
-  , team_size(200, 40)
+  , team_size(360, 40)
   , type_size(160, 40)
   , name_size(250, 40)
   , score_size(60, 40)
@@ -189,12 +189,11 @@ void ResultsMenu::SetResult(int i)
   res = (*results)[index];
   assert(res);
 
-  //Team name
-  if (res->getTeamName() == NULL) {
-    name = std::string(_("All teams"));
+  //Team header
+  name = res->getTeamName();
+  if (res->getTeamLogo() == NULL) {
     team_logo->SetNoSurface();
   }  else  {
-    name = res->getTeamName();
     team_logo->SetSurface( *(res->getTeamLogo()) );
   }
   printf("Now result %i/%i: team '%s'\n",

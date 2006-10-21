@@ -34,14 +34,14 @@ class TeamResults
 {
 private:
   //std::couple<const sting&, int> ?
-  const char* teamName;
+  const std::string teamName;
   const Surface* team_logo;
   const Character* mostViolent;
   const Character* mostUsefull;
   const Character* mostUseless;
   const Character* biggestTraitor;
 protected:
-  TeamResults(const char* name,
+  TeamResults(const std::string& name,
 	      const Surface* team_logo,
 	      const Character* MV,
 	      const Character* MUl,
@@ -55,7 +55,7 @@ public:
 
   void RenderText(std::string& str);
 
-  const char* getTeamName() const { return teamName; };
+  const std::string& getTeamName() const { return teamName; };
   const Surface* getTeamLogo() const {return team_logo;};
   const Character* getMostViolent() const { return mostViolent; };
   const Character* getMostUsefull() const { return mostUsefull; };
