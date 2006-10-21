@@ -32,7 +32,7 @@ PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
   img= resource_manager.LoadSprite( res, "objet/barrel");
   resource_manager.UnLoadXMLProfile(res);
 
-  life_points = 100;
+  life_points = 80;
 
   SetCollisionModel(false, true, true);
   SetSize(img->GetSize());
@@ -56,13 +56,14 @@ void PetrolBarrel::Refresh()
 
 void PetrolBarrel::SignalDeath()
 {
-  ParticleEngine::AddNow(GetCenter() , 50, particle_FIRE, true);
+  ParticleEngine::AddNow(GetCenter() , 20, particle_FIRE, true);
 
   ExplosiveWeaponConfig cfg;
   cfg.blast_range = 5;
   cfg.blast_force = 50;
   cfg.explosion_range = 5;
   cfg.particle_range = 50;
+  lst_objects.RemoveObject(this);
   ApplyExplosion(GetCenter(), cfg);
   Ghost();
 }

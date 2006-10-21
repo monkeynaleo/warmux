@@ -147,9 +147,9 @@ void ApplyExplosion_common (const Point2i &pos,
     double distance = pos.Distance(obj -> ptr -> GetCenter());
     if (distance <= config.explosion_range)
     {
-      uint hit_point_loss = (uint)(distance*config.damage);
-      hit_point_loss = config.damage-hit_point_loss;
-      obj -> ptr -> AddDamage (hit_point_loss);
+      double dmg = cos(M_PI_2 * distance / config.explosion_range);
+      dmg *= config.damage;
+      obj -> ptr -> AddDamage (config.damage);
     }
 
     if (distance <= config.blast_range)
