@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.5\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-10-18 01:43+0200\n"
 "PO-Revision-Date: 2006-06-20 11:32+0100\n"
 "Last-Translator: Frank van der Loo <frank_l@linuxmail.org>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -21,47 +20,6 @@ msgstr ""
 
 #: src/menu/game_menu.cpp:64
 msgid " "
-msgstr ""
-
-#: src/team/results.cpp:214
-#, fuzzy
-msgid "  Most sold-out  :  "
-msgstr "  Meest uitverkocht :  %s (%i).\n"
-
-#: src/team/results.cpp:212
-#, fuzzy
-msgid "  Most useful   :  "
-msgstr "  Meest zinvol  :  %s (%i).\n"
-
-#: src/team/results.cpp:213
-#, fuzzy
-msgid "  Most useless  :  "
-msgstr "  Meest zinloos  : %s (%i).\n"
-
-#: src/team/results.cpp:211
-#, fuzzy
-msgid "  Most violent  :  "
-msgstr "  Meest gewelddadig  : %s (%i).\n"
-
-#: src/network/distant_cpu.cpp:68
-msgid " has joined the party"
-msgstr ""
-
-#: src/network/distant_cpu.cpp:75
-#, fuzzy
-msgid " has left the party"
-msgstr "%s is van de kaart gevallen!"
-
-#: src/menu/network_menu.cpp:288
-msgid " players are not yet ready!"
-msgstr ""
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:374
-msgid " players connected"
-msgstr ""
-
-#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:379
-msgid " players ready"
 msgstr ""
 
 #: src/map/maps_list.cpp:277
@@ -222,17 +180,7 @@ msgstr "Luchtaanval"
 msgid "Airhammer"
 msgstr ""
 
-#: src/menu/results_menu.cpp:194
-#, fuzzy
-msgid "All teams"
-msgstr "Wacht teams"
-
-#: src/team/results.cpp:210
-#, fuzzy
-msgid "All teams results:\n"
-msgstr "Alle-Teams resultaten:\n"
-
-#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:62
+#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
 msgid "Anvil"
 msgstr ""
 
@@ -297,15 +245,6 @@ msgstr "ClusterBom"
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "Pleeg zelfmoord"
-
-#: src/menu/network_connection_menu.cpp:67
-#, fuzzy
-msgid "Connect to game"
-msgstr "Einde van het spel"
-
-#: src/menu/network_connection_menu.cpp:114
-msgid "Connected to "
-msgstr ""
 
 #: src/weapon/construct.cpp:43
 msgid "Construct"
@@ -378,11 +317,6 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fout: kan de skin \"%s\" voor het team \"%s\" niet vinden."
 
-#: src/network/network.cpp:65
-#, fuzzy
-msgid "Failed to initialize network library!"
-msgstr "Kon SDL bibliotheek niet initialiseren: %s"
-
 #: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
 msgstr "Zoek een willekeurige positie voor de spelers"
@@ -390,11 +324,6 @@ msgstr "Zoek een willekeurige positie voor de spelers"
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Volledig scherm?"
-
-#: src/menu/network_menu.cpp:61
-#, fuzzy
-msgid "Game options:"
-msgstr "Spel opties"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -420,10 +349,6 @@ msgstr "Kon HOME directory (omgevingsvariabele $HOME) niet vinden!"
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Granaat"
-
-#: src/menu/network_connection_menu.cpp:74
-msgid "Host a game"
-msgstr ""
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
@@ -460,14 +385,6 @@ msgstr "Initialiseer objecten"
 msgid "Initialise teams"
 msgstr "Initialiseer teams"
 
-#: src/network/network.cpp:171
-msgid "Invalid port!"
-msgstr ""
-
-#: src/network/network.cpp:121
-msgid "Invalid server adress!"
-msgstr ""
-
 #: src/object/bonus_box.cpp:280
 #, fuzzy
 msgid "Is it a gift?"
@@ -502,11 +419,6 @@ msgstr "Kaart %s, gemaakt door :"
 msgid "Maps"
 msgstr ""
 
-#: src/menu/network_menu.cpp:59
-#, fuzzy
-msgid "Max number of players:"
-msgstr "Aantal spelers per team:"
-
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
 msgstr "Maximum FPS:"
@@ -514,26 +426,6 @@ msgstr "Maximum FPS:"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mijn"
-
-#: src/menu/results_menu.cpp:169
-#, fuzzy
-msgid "Most sold-out"
-msgstr "  Meest uitverkocht :  %s (%i).\n"
-
-#: src/menu/results_menu.cpp:159
-#, fuzzy
-msgid "Most useful"
-msgstr "  Meest zinvol  :  %s (%i).\n"
-
-#: src/menu/results_menu.cpp:164
-#, fuzzy
-msgid "Most useless"
-msgstr "  Meest zinloos  : %s (%i).\n"
-
-#: src/menu/results_menu.cpp:154
-#, fuzzy
-msgid "Most violent"
-msgstr "  Meest gewelddadig  : %s (%i).\n"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -556,14 +448,6 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Element <%s> niet gevonden het xml config bestand!"
 
-#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
-#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
-#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
-#: src/team/results.cpp:205
-#, fuzzy
-msgid "Nobody!"
-msgstr "Niemand"
-
 #: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
@@ -573,10 +457,6 @@ msgstr "Aantal spelers per team:"
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Aantal spelers per team:"
-
-#: src/menu/network_menu.cpp:181
-msgid "Only the server can set the map!"
-msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -633,22 +513,6 @@ msgstr "Riot bomb"
 msgid "Run game"
 msgstr "Spel wordt gestart"
 
-#: src/menu/network_menu.cpp:83
-msgid "Select the teams:"
-msgstr "Selecteer de teams:"
-
-#: src/menu/network_menu.cpp:126
-msgid "Select the world:"
-msgstr "Selecteer de wereld:"
-
-#: src/menu/network_connection_menu.cpp:60
-msgid "Server adress:"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:129
-msgid "Server started"
-msgstr ""
-
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -696,11 +560,6 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/team/results.cpp:208
-#, c-format
-msgid "Team %s results:\n"
-msgstr "Resultaten team %s:\n"
-
 #: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr ""
@@ -723,34 +582,15 @@ msgstr "De automatische raket heeft het slagveld verlaten..."
 msgid "The rocket has left the battlefield..."
 msgstr "De raket heeft het slagveld verlaten..."
 
-#: src/menu/network_connection_menu.cpp:119
-#, fuzzy
-msgid "Unable to connect"
-msgstr "Kon skins directory niet openen (%s)!"
-
-#: src/network/network.cpp:132
-#, fuzzy
-msgid "Unable to contact server!"
-msgstr "Kon kaarten directory niet openen (%s)!"
-
 #: src/graphic/video.cpp:193
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Kon SDL bibliotheek niet initialiseren: %s"
 
-#: src/network/network.cpp:215
-#, fuzzy
-msgid "Unable to listen for client!"
-msgstr "Wacht op clients"
-
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kon kaarten directory niet openen (%s)!"
-
-#: src/menu/network_connection_menu.cpp:132
-msgid "Unable to start server"
-msgstr ""
 
 #: src/main.cpp:118
 #, fuzzy
@@ -760,11 +600,6 @@ msgstr "Onverwachte uitzondering gevangen..."
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Versie"
-
-#: src/menu/network_menu.cpp:288
-#, fuzzy
-msgid "Wait! "
-msgstr "Wacht teams"
 
 #: src/interface/interface.cpp:99
 msgid "Weapon:"
@@ -797,11 +632,6 @@ msgstr "Wormux wordt gestart..."
 msgid "Wormux version "
 msgstr "Wormux versie "
 
-#: src/include/action_handler.cpp:385
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
-
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -828,6 +658,95 @@ msgstr "U schoot mis!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "klaar"
+
+#, fuzzy
+#~ msgid "  Most sold-out  :  "
+#~ msgstr "  Meest uitverkocht :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "  Most useful   :  "
+#~ msgstr "  Meest zinvol  :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "  Most useless  :  "
+#~ msgstr "  Meest zinloos  : %s (%i).\n"
+
+#, fuzzy
+#~ msgid "  Most violent  :  "
+#~ msgstr "  Meest gewelddadig  : %s (%i).\n"
+
+#, fuzzy
+#~ msgid " has left the party"
+#~ msgstr "%s is van de kaart gevallen!"
+
+#, fuzzy
+#~ msgid "All teams"
+#~ msgstr "Wacht teams"
+
+#, fuzzy
+#~ msgid "All teams results:\n"
+#~ msgstr "Alle-Teams resultaten:\n"
+
+#, fuzzy
+#~ msgid "Connect to game"
+#~ msgstr "Einde van het spel"
+
+#, fuzzy
+#~ msgid "Failed to initialize network library!"
+#~ msgstr "Kon SDL bibliotheek niet initialiseren: %s"
+
+#, fuzzy
+#~ msgid "Game options:"
+#~ msgstr "Spel opties"
+
+#, fuzzy
+#~ msgid "Max number of players:"
+#~ msgstr "Aantal spelers per team:"
+
+#, fuzzy
+#~ msgid "Most sold-out"
+#~ msgstr "  Meest uitverkocht :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "Most useful"
+#~ msgstr "  Meest zinvol  :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "Most useless"
+#~ msgstr "  Meest zinloos  : %s (%i).\n"
+
+#, fuzzy
+#~ msgid "Most violent"
+#~ msgstr "  Meest gewelddadig  : %s (%i).\n"
+
+#, fuzzy
+#~ msgid "Nobody!"
+#~ msgstr "Niemand"
+
+#~ msgid "Select the teams:"
+#~ msgstr "Selecteer de teams:"
+
+#~ msgid "Select the world:"
+#~ msgstr "Selecteer de wereld:"
+
+#~ msgid "Team %s results:\n"
+#~ msgstr "Resultaten team %s:\n"
+
+#, fuzzy
+#~ msgid "Unable to connect"
+#~ msgstr "Kon skins directory niet openen (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to contact server!"
+#~ msgstr "Kon kaarten directory niet openen (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to listen for client!"
+#~ msgstr "Wacht op clients"
+
+#, fuzzy
+#~ msgid "Wait! "
+#~ msgstr "Wacht teams"
 
 #~ msgid "%s is stupidly dead because he gone out of the map ..."
 #~ msgstr "%s is stom dood gegaan, omdat hij van het terrein afging ..."

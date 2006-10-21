@@ -7,7 +7,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2006-10-18 01:43+0200\n"
 "PO-Revision-Date: 2006-10-13 04:58+0200\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosanski <lokal@linux.org.ba>\n"
@@ -19,43 +18,6 @@ msgstr ""
 
 #: src/menu/game_menu.cpp:64
 msgid " "
-msgstr ""
-
-#: src/team/results.cpp:214
-msgid "  Most sold-out  :  "
-msgstr ""
-
-#: src/team/results.cpp:212
-msgid "  Most useful   :  "
-msgstr ""
-
-#: src/team/results.cpp:213
-msgid "  Most useless  :  "
-msgstr ""
-
-#: src/team/results.cpp:211
-msgid "  Most violent  :  "
-msgstr ""
-
-#: src/network/distant_cpu.cpp:68
-msgid " has joined the party"
-msgstr ""
-
-#: src/network/distant_cpu.cpp:75
-#, fuzzy
-msgid " has left the party"
-msgstr "%s je ispao sa mape!"
-
-#: src/menu/network_menu.cpp:288
-msgid " players are not yet ready!"
-msgstr ""
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:374
-msgid " players connected"
-msgstr ""
-
-#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:379
-msgid " players ready"
 msgstr ""
 
 #: src/map/maps_list.cpp:277
@@ -216,16 +178,7 @@ msgstr "Zračni napad"
 msgid "Airhammer"
 msgstr "Zračni čekić"
 
-#: src/menu/results_menu.cpp:194
-#, fuzzy
-msgid "All teams"
-msgstr "Učitaj timove:"
-
-#: src/team/results.cpp:210
-msgid "All teams results:\n"
-msgstr ""
-
-#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:62
+#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
 msgid "Anvil"
 msgstr "Nakovanj"
 
@@ -291,14 +244,6 @@ msgstr "Kasetna Bomba"
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "Počini samoubistvo"
-
-#: src/menu/network_connection_menu.cpp:67
-msgid "Connect to game"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:114
-msgid "Connected to "
-msgstr ""
 
 #: src/weapon/construct.cpp:43
 msgid "Construct"
@@ -371,11 +316,6 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
 
-#: src/network/network.cpp:65
-#, fuzzy
-msgid "Failed to initialize network library!"
-msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
-
 #: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
 msgstr "Pronađi pozicije za likove nasumice"
@@ -383,11 +323,6 @@ msgstr "Pronađi pozicije za likove nasumice"
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Puni ekran?"
-
-#: src/menu/network_menu.cpp:61
-#, fuzzy
-msgid "Game options:"
-msgstr "Opcije"
 
 #: src/weapon/gnu.cpp:120
 #, fuzzy
@@ -414,10 +349,6 @@ msgstr "HOME direktor (okolina promjenjiva $HOME) nije mogla biti pronađena!"
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Granata"
-
-#: src/menu/network_connection_menu.cpp:74
-msgid "Host a game"
-msgstr ""
 
 #: src/game/game_loop.cpp:725
 msgid "Hurry up, you are too slow !!"
@@ -454,14 +385,6 @@ msgstr "Inicijaliziranje objekata"
 msgid "Initialise teams"
 msgstr "Inicijaliziranje timova"
 
-#: src/network/network.cpp:171
-msgid "Invalid port!"
-msgstr ""
-
-#: src/network/network.cpp:121
-msgid "Invalid server adress!"
-msgstr ""
-
 #: src/object/bonus_box.cpp:280
 msgid "Is it a gift?"
 msgstr "Da li je to poklon ?"
@@ -497,11 +420,6 @@ msgstr "Mapa %s, je kreacija:"
 msgid "Maps"
 msgstr "Mape"
 
-#: src/menu/network_menu.cpp:59
-#, fuzzy
-msgid "Max number of players:"
-msgstr "Broj igrača po timu:"
-
 #: src/menu/options_menu.cpp:77
 msgid "Maximum number of FPS:"
 msgstr "Maximalaan broj FPS:"
@@ -509,22 +427,6 @@ msgstr "Maximalaan broj FPS:"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mina"
-
-#: src/menu/results_menu.cpp:169
-msgid "Most sold-out"
-msgstr ""
-
-#: src/menu/results_menu.cpp:159
-msgid "Most useful"
-msgstr ""
-
-#: src/menu/results_menu.cpp:164
-msgid "Most useless"
-msgstr ""
-
-#: src/menu/results_menu.cpp:154
-msgid "Most violent"
-msgstr ""
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -548,13 +450,6 @@ msgstr "Špaga za nindže"
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nijedan element  <%s> nije nađen u xml konfiguracionoj datoteci!"
 
-#: src/menu/results_menu.cpp:210 src/menu/results_menu.cpp:217
-#: src/menu/results_menu.cpp:224 src/menu/results_menu.cpp:231
-#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
-#: src/team/results.cpp:205
-msgid "Nobody!"
-msgstr ""
-
 #: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
@@ -564,10 +459,6 @@ msgstr "Broj igrača po timu:"
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Broj igrača po timu:"
-
-#: src/menu/network_menu.cpp:181
-msgid "Only the server can set the map!"
-msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -623,22 +514,6 @@ msgstr "Bomba nereda"
 msgid "Run game"
 msgstr "Pokreni igru"
 
-#: src/menu/network_menu.cpp:83
-msgid "Select the teams:"
-msgstr ""
-
-#: src/menu/network_menu.cpp:126
-msgid "Select the world:"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:60
-msgid "Server adress:"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:129
-msgid "Server started"
-msgstr ""
-
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -686,11 +561,6 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Šprica"
 
-#: src/team/results.cpp:208
-#, c-format
-msgid "Team %s results:\n"
-msgstr ""
-
 #: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr "Timovi"
@@ -714,32 +584,15 @@ msgstr "Automatksa rakete je napustila bojište..."
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je napustila bojište..."
 
-#: src/menu/network_connection_menu.cpp:119
-msgid "Unable to connect"
-msgstr ""
-
-#: src/network/network.cpp:132
-#, fuzzy
-msgid "Unable to contact server!"
-msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
 #: src/graphic/video.cpp:193
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
 
-#: src/network/network.cpp:215
-msgid "Unable to listen for client!"
-msgstr ""
-
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#: src/menu/network_connection_menu.cpp:132
-msgid "Unable to start server"
-msgstr ""
 
 #: src/main.cpp:118
 #, fuzzy
@@ -749,10 +602,6 @@ msgstr "Neočekivani izuzetak uhvaćen..."
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Verzija"
-
-#: src/menu/network_menu.cpp:288
-msgid "Wait! "
-msgstr ""
 
 #: src/interface/interface.cpp:99
 msgid "Weapon:"
@@ -783,11 +632,6 @@ msgstr "Wormux se učitava..."
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
-#: src/include/action_handler.cpp:385
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
-
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -812,6 +656,30 @@ msgstr "Vaš hitac je promašio!"
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "gotov"
+
+#, fuzzy
+#~ msgid " has left the party"
+#~ msgstr "%s je ispao sa mape!"
+
+#, fuzzy
+#~ msgid "All teams"
+#~ msgstr "Učitaj timove:"
+
+#, fuzzy
+#~ msgid "Failed to initialize network library!"
+#~ msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
+
+#, fuzzy
+#~ msgid "Game options:"
+#~ msgstr "Opcije"
+
+#, fuzzy
+#~ msgid "Max number of players:"
+#~ msgstr "Broj igrača po timu:"
+
+#, fuzzy
+#~ msgid "Unable to contact server!"
+#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""

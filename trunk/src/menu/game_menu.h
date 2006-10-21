@@ -36,14 +36,16 @@ class TeamBox : public HBox
   Team * associated_team;
   PictureWidget *team_logo;
   Label * team_name;
-  //  TextBox * player_name;
+  TextBox * player_name;
   SpinButton * nb_characters;
 
  public:
   TeamBox(uint width);
+
   void SetTeam(Team& _team);
   void ClearTeam();
   Team* GetTeam() const;  
+  void ValidOptions() const;
 
   void Update(const Point2i &mousePosition,
 	      const Point2i &lastMousePosition,

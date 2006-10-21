@@ -97,9 +97,7 @@ Widget* WidgetList::Clic(const Point2i &mousePosition, uint button)
       Widget* child = (*w)->Clic(mousePosition,button);
       if(child != NULL)
       {
-        if(last_clicked != NULL) last_clicked->have_focus = false;
-        last_clicked = child;
-        last_clicked->have_focus = true;
+	SetFocusOn(child);
         return child;
       }
     }
@@ -116,5 +114,19 @@ void WidgetList::ForceRedraw()
       w++)
   {
     (*w)->ForceRedraw();
+  }
+}
+
+void WidgetList::SetFocusOn(Widget* w)
+{
+  if(last_clicked != NULL) {
+    last_clicked->have_focus = false;
+    last_clicked->ForceRedraw();
+  }
+
+  if (w != NULL) {
+    last_clicked = w ;
+    last_clicked->have_focus = true;
+    last_clicked->ForceRedraw();
   }
 }
