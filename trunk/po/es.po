@@ -104,14 +104,14 @@ msgstr "%s se ha caido al agua."
 msgid "%s has fallen off the map!"
 msgstr "%s se ha salido del mapa!"
 
-#: src/object/bonus_box.cpp:157
+#: src/object/bonus_box.cpp:158
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "El jugador %s ha perdido %u punto de vida."
 msgstr[1] "El jugador %s ha perdido %u puntos de vida."
 
-#: src/object/bonus_box.cpp:148
+#: src/object/bonus_box.cpp:149
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -138,63 +138,63 @@ msgstr "¡ %s esta cerca d'una mina!"
 msgid "%s team has skipped its turn."
 msgstr "%s (El equipo %s ) ha muerto."
 
-#: src/object/bonus_box.cpp:211
+#: src/object/bonus_box.cpp:212
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "¡El equipo %s ha ganado %u bazooka automáticos!"
 msgstr[1] "¡El equipo %s ha ganado %u bazookas automáticos!"
 
-#: src/object/bonus_box.cpp:220
+#: src/object/bonus_box.cpp:221
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "¡El equipo %s ha ganado %u bazooka automáticos!"
 msgstr[1] "¡El equipo %s ha ganado %u bazookas automáticos!"
 
-#: src/object/bonus_box.cpp:230
+#: src/object/bonus_box.cpp:231
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "¡El equipo %s ha ganado %u dinamita!"
 msgstr[1] "¡El equipo %s ha ganado %u dinamitas!"
 
-#: src/object/bonus_box.cpp:139
+#: src/object/bonus_box.cpp:140
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "El equipo %s ha ganado %u teletransportación."
 msgstr[1] "El equipo %s ha ganado %u teletransportaciones."
 
-#: src/object/bonus_box.cpp:166
+#: src/object/bonus_box.cpp:167
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "¡El jugador %s ha ganado %u ataque aereo!"
 msgstr[1] "¡El jugador %s ha ganado %u ataques aereos!"
 
-#: src/object/bonus_box.cpp:193
+#: src/object/bonus_box.cpp:194
 #, fuzzy, c-format
 msgid "'%s has won %u Anvil"
 msgid_plural "'%s has won %u Anvil"
 msgstr[0] "¡El jugador %s ha ganado %u ataque aereo!"
 msgstr[1] "¡El jugador %s ha ganado %u ataques aereos!"
 
-#: src/object/bonus_box.cpp:175
+#: src/object/bonus_box.cpp:176
 #, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
 msgid_plural "'%s has won %u Baseball bats"
 msgstr[0] "¡El jugador %s ha ganado %u ataque aereo!"
 msgstr[1] "¡El jugador %s ha ganado %u ataques aereos!"
 
-#: src/object/bonus_box.cpp:202
+#: src/object/bonus_box.cpp:203
 #, fuzzy, c-format
 msgid "'%s has won %u Holy grenade"
 msgid_plural "'%s has won %u Holy grenades"
 msgstr[0] "¡El jugador %s ha ganado %u ataque aereo!"
 msgstr[1] "¡El jugador %s ha ganado %u ataques aereos!"
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:185
 #, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
@@ -214,10 +214,6 @@ msgstr "(ilimitado)"
 msgid "Air Attack"
 msgstr "Ataque aereo"
 
-#: src/object/bonus_box.cpp:170
-msgid "Air attack"
-msgstr "Ataque aereo"
-
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr ""
@@ -232,7 +228,7 @@ msgstr "Carga los equipos %s ."
 msgid "All teams results:\n"
 msgstr "Estadisticas de todos los equipos:\n"
 
-#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
+#: src/weapon/anvil.cpp:72
 msgid "Anvil"
 msgstr ""
 
@@ -245,17 +241,8 @@ msgstr "Autores:"
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatico"
 
-#: src/object/bonus_box.cpp:215
-msgid "Automatic bazooka"
-msgstr "Bazooka automatico"
-
 #: src/weapon/baseball.cpp:32
 msgid "Baseball"
-msgstr "Bate de Baseball"
-
-#: src/object/bonus_box.cpp:179
-#, fuzzy
-msgid "Baseball bat"
 msgstr "Bate de Baseball"
 
 #: src/weapon/bazooka.cpp:62
@@ -324,7 +311,7 @@ msgstr "¿Esta seguro que quiere salir? (S/N)"
 msgid "Duration of a turn:"
 msgstr "Duración del turno:"
 
-#: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
+#: src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamita"
 
@@ -421,7 +408,7 @@ msgstr "¡El directorio HOME (la variable de entorno $HOME) no se encuentra!"
 msgid "Head commander"
 msgstr ""
 
-#: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
+#: src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Granada"
@@ -474,7 +461,7 @@ msgstr ""
 msgid "Invalid server adress!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:280
+#: src/object/bonus_box.cpp:281
 msgid "Is it a gift?"
 msgstr "¿Es un regalo?"
 
@@ -493,10 +480,6 @@ msgstr "Carga el mapa %s"
 #: src/team/teams_list.cpp:106
 msgid "Load teams:"
 msgstr "Carga los equipos %s ."
-
-#: src/object/bonus_box.cpp:188
-msgid "Low gravity"
-msgstr ""
 
 #: src/weapon/lowgrav.cpp:41
 msgid "LowGrav"
@@ -639,10 +622,6 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Bazooka automático"
 
-#: src/object/bonus_box.cpp:224
-msgid "Riot bomb"
-msgstr "Bazooka automático"
-
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Empieza el juego"
@@ -725,7 +704,7 @@ msgstr "Estadisticas del equipo %s:\n"
 msgid "Teams"
 msgstr "Equipos"
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
+#: src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Teletransportación"
 
@@ -865,9 +844,19 @@ msgstr ""
 #~ msgstr ""
 #~ "<infinite_background> necesita <is_open> para funcionar correctamente!!"
 
+#~ msgid "Air attack"
+#~ msgstr "Ataque aereo"
+
 #, fuzzy
 #~ msgid "Authors"
 #~ msgstr "Autores:"
+
+#~ msgid "Automatic bazooka"
+#~ msgstr "Bazooka automatico"
+
+#, fuzzy
+#~ msgid "Baseball bat"
+#~ msgstr "Bate de Baseball"
 
 #~ msgid "ClanLib error :"
 #~ msgstr "Error ClanLib :"
@@ -914,6 +903,9 @@ msgstr ""
 
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr "Por favor danos tu opinión de Wormux por correo electrónico:"
+
+#~ msgid "Riot bomb"
+#~ msgstr "Bazooka automático"
 
 #~ msgid "Sound error :"
 #~ msgstr "Error de sonido :"

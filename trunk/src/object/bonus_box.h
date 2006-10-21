@@ -52,7 +52,7 @@ class BonusBox : public PhysicalObj
       bonusANVIL,
       bonusHOLLY_GRENADE
     } bonus_weapons;
-    static const uint nb_bonus = bonusAUTO_BAZOOKA;
+    static const uint nb_bonus = bonusHOLLY_GRENADE;
 
   private:
     static bool PlaceBonusBox (BonusBox& bonus_box);

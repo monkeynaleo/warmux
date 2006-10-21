@@ -106,7 +106,7 @@ msgstr "%s a căzut în apă."
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
 
-#: src/object/bonus_box.cpp:157
+#: src/object/bonus_box.cpp:158
 #, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
@@ -114,7 +114,7 @@ msgstr[0] "%s a pierdut %u punct de energie."
 msgstr[1] "%s a pierdut %u puncte de energie."
 msgstr[2] "%s a pierdut %u de puncte de energie."
 
-#: src/object/bonus_box.cpp:148
+#: src/object/bonus_box.cpp:149
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -143,7 +143,7 @@ msgstr "%s e lângă o mină!"
 msgid "%s team has skipped its turn."
 msgstr "%s (echipa %s) a murit."
 
-#: src/object/bonus_box.cpp:211
+#: src/object/bonus_box.cpp:212
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
@@ -151,7 +151,7 @@ msgstr[0] "Echipa %s a câştigat %u rachetă automată!"
 msgstr[1] "Echipa %s a câştigat %u rachete automate!"
 msgstr[2] "Echipa %s a câştigat %u de rachete automate!"
 
-#: src/object/bonus_box.cpp:220
+#: src/object/bonus_box.cpp:221
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
@@ -159,7 +159,7 @@ msgstr[0] "Echipa %s a câştigat %u rachetă automată !"
 msgstr[1] "Echipa %s a câştigat %u rachete automate !"
 msgstr[2] "Echipa %s a câştigat %u de rachete automate !"
 
-#: src/object/bonus_box.cpp:230
+#: src/object/bonus_box.cpp:231
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
@@ -167,7 +167,7 @@ msgstr[0] "Echipa %s a câştigat %u baton de dinamită!"
 msgstr[1] "Echipa %s a câştigat %u batoane de dinamită!"
 msgstr[2] "Echipa %s a câştigat %u de batoane de dinamită!"
 
-#: src/object/bonus_box.cpp:139
+#: src/object/bonus_box.cpp:140
 #, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
@@ -175,7 +175,7 @@ msgstr[0] "Echipa %s a câştigat %u teleportare."
 msgstr[1] "Echipa %s a câştigat %u teleportări."
 msgstr[2] "Echipa %s a câştigat %u de teleportări."
 
-#: src/object/bonus_box.cpp:166
+#: src/object/bonus_box.cpp:167
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
@@ -183,7 +183,7 @@ msgstr[0] "'%s a câştigat %u atac aerian"
 msgstr[1] "'%s a câştigat %u atacuri aeriene"
 msgstr[2] "'%s a câştigat %u de atacuri aeriene"
 
-#: src/object/bonus_box.cpp:193
+#: src/object/bonus_box.cpp:194
 #, fuzzy, c-format
 msgid "'%s has won %u Anvil"
 msgid_plural "'%s has won %u Anvil"
@@ -191,7 +191,7 @@ msgstr[0] "'%s a câştigat %u atac aerian"
 msgstr[1] "'%s a câştigat %u atacuri aeriene"
 msgstr[2] "'%s a câştigat %u de atacuri aeriene"
 
-#: src/object/bonus_box.cpp:175
+#: src/object/bonus_box.cpp:176
 #, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
 msgid_plural "'%s has won %u Baseball bats"
@@ -199,7 +199,7 @@ msgstr[0] "'%s a câştigat %u atac aerian"
 msgstr[1] "'%s a câştigat %u atacuri aeriene"
 msgstr[2] "'%s a câştigat %u de atacuri aeriene"
 
-#: src/object/bonus_box.cpp:202
+#: src/object/bonus_box.cpp:203
 #, fuzzy, c-format
 msgid "'%s has won %u Holy grenade"
 msgid_plural "'%s has won %u Holy grenades"
@@ -207,7 +207,7 @@ msgstr[0] "'%s a câştigat %u atac aerian"
 msgstr[1] "'%s a câştigat %u atacuri aeriene"
 msgstr[2] "'%s a câştigat %u de atacuri aeriene"
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:185
 #, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
@@ -228,10 +228,6 @@ msgstr "(infinit)"
 msgid "Air Attack"
 msgstr "Atac aerian"
 
-#: src/object/bonus_box.cpp:170
-msgid "Air attack"
-msgstr "Atac aerian"
-
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr ""
@@ -246,7 +242,7 @@ msgstr "Se aşteaptă echipele"
 msgid "All teams results:\n"
 msgstr "Rezultate generale:\n"
 
-#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
+#: src/weapon/anvil.cpp:72
 msgid "Anvil"
 msgstr ""
 
@@ -259,17 +255,8 @@ msgstr "Autori:"
 msgid "Automatic Bazooka"
 msgstr "Rachetă automată"
 
-#: src/object/bonus_box.cpp:215
-msgid "Automatic bazooka"
-msgstr "Rachetă automată"
-
 #: src/weapon/baseball.cpp:32
 msgid "Baseball"
-msgstr "Bâtă de basebal"
-
-#: src/object/bonus_box.cpp:179
-#, fuzzy
-msgid "Baseball bat"
 msgstr "Bâtă de basebal"
 
 #: src/weapon/bazooka.cpp:62
@@ -336,7 +323,7 @@ msgstr "Chiar doriţi să abandonaţi? (D/N)"
 msgid "Duration of a turn:"
 msgstr "Durata unei ture:"
 
-#: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
+#: src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamită"
 
@@ -433,7 +420,7 @@ msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 msgid "Head commander"
 msgstr ""
 
-#: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
+#: src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Grenadă"
@@ -485,7 +472,7 @@ msgstr ""
 msgid "Invalid server adress!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:280
+#: src/object/bonus_box.cpp:281
 #, fuzzy
 msgid "Is it a gift?"
 msgstr "Oare e un cadou?"
@@ -505,10 +492,6 @@ msgstr "Încărcare hărţi:"
 #: src/team/teams_list.cpp:106
 msgid "Load teams:"
 msgstr "Încărcare echipe:"
-
-#: src/object/bonus_box.cpp:188
-msgid "Low gravity"
-msgstr ""
 
 #: src/weapon/lowgrav.cpp:41
 msgid "LowGrav"
@@ -651,10 +634,6 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Rachetă automată"
 
-#: src/object/bonus_box.cpp:224
-msgid "Riot bomb"
-msgstr "Rachetă automată"
-
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Rulează jocul"
@@ -735,7 +714,7 @@ msgstr "Rezultatele echipei %s:\n"
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
+#: src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Teleportare"
 
@@ -880,6 +859,16 @@ msgstr ""
 #~ "<infinite_background> are nevoie ca <is_open> să fie activ pentru a "
 #~ "funcţiona corect!!"
 
+#~ msgid "Air attack"
+#~ msgstr "Atac aerian"
+
+#~ msgid "Automatic bazooka"
+#~ msgstr "Rachetă automată"
+
+#, fuzzy
+#~ msgid "Baseball bat"
+#~ msgstr "Bâtă de basebal"
+
 #~ msgid "Duration of the end of a turn:"
 #~ msgstr "Durata sfârşitului de tură:"
 
@@ -907,6 +896,9 @@ msgstr ""
 #~ msgid "Please tell us your opinion of Wormux via email:"
 #~ msgstr ""
 #~ "Vă rugăm să ne spuneţi părerea dvs. despre Wormux prin poştă electronică:"
+
+#~ msgid "Riot bomb"
+#~ msgstr "Rachetă automată"
 
 #~ msgid "Sound options"
 #~ msgstr "Opţiuni sunet"

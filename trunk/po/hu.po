@@ -100,14 +100,14 @@ msgstr "%s kiesett a pályáról!"
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
 
-#: src/object/bonus_box.cpp:157
+#: src/object/bonus_box.cpp:158
 #, fuzzy, c-format
 msgid "%s has lost %u point of energy."
 msgid_plural "%s has lost %u points of energy."
 msgstr[0] "%s energiaszintje %u egységgel csökkent."
 msgstr[1] "%s energiaszintje %u egységgel csökkent."
 
-#: src/object/bonus_box.cpp:148
+#: src/object/bonus_box.cpp:149
 #, fuzzy, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
@@ -134,63 +134,63 @@ msgstr "%s egy taposó akna mellett ténfereg!"
 msgid "%s team has skipped its turn."
 msgstr "%s (%s csapat) meghalt."
 
-#: src/object/bonus_box.cpp:211
+#: src/object/bonus_box.cpp:212
 #, fuzzy, c-format
 msgid "%s team has won %u Automatic Bazooka!"
 msgid_plural "%s team has won %u Automatic Bazookas!"
 msgstr[0] "%s csapata %u automatikus tűzelésű rakétevetőt kapott!"
 msgstr[1] "%s csapata %u automatikus tűzelésű rakétevetőt kapott!"
 
-#: src/object/bonus_box.cpp:220
+#: src/object/bonus_box.cpp:221
 #, fuzzy, c-format
 msgid "%s team has won %u Riot Bomb!"
 msgid_plural "%s team has won %u Riot Bombs!"
 msgstr[0] "%s csapata %u automatikus tűzelésű rakétevetőt kapott!"
 msgstr[1] "%s csapata %u automatikus tűzelésű rakétevetőt kapott!"
 
-#: src/object/bonus_box.cpp:230
+#: src/object/bonus_box.cpp:231
 #, fuzzy, c-format
 msgid "%s team has won %u stick of Dynamite!"
 msgid_plural "%s team has won %u sticks of Dynamite!"
 msgstr[0] "%s csapata %u dinamitot nyert!"
 msgstr[1] "%s csapata %u dinamitot nyert!"
 
-#: src/object/bonus_box.cpp:139
+#: src/object/bonus_box.cpp:140
 #, fuzzy, c-format
 msgid "%s team has won %u teleportation."
 msgid_plural "%s team has won %u teleportations."
 msgstr[0] "%s csapata plusz %u teleportot kapott!"
 msgstr[1] "%s csapata plusz %u teleportot kapott!"
 
-#: src/object/bonus_box.cpp:166
+#: src/object/bonus_box.cpp:167
 #, fuzzy, c-format
 msgid "'%s has won %u Air Attack"
 msgid_plural "'%s has won %u Air Attacks"
 msgstr[0] "%s %u ráadás légitámadás nyert!"
 msgstr[1] "%s %u ráadás légitámadás nyert!"
 
-#: src/object/bonus_box.cpp:193
+#: src/object/bonus_box.cpp:194
 #, fuzzy, c-format
 msgid "'%s has won %u Anvil"
 msgid_plural "'%s has won %u Anvil"
 msgstr[0] "%s %u ráadás légitámadás nyert!"
 msgstr[1] "%s %u ráadás légitámadás nyert!"
 
-#: src/object/bonus_box.cpp:175
+#: src/object/bonus_box.cpp:176
 #, fuzzy, c-format
 msgid "'%s has won %u Baseball bat"
 msgid_plural "'%s has won %u Baseball bats"
 msgstr[0] "%s %u ráadás légitámadás nyert!"
 msgstr[1] "%s %u ráadás légitámadás nyert!"
 
-#: src/object/bonus_box.cpp:202
+#: src/object/bonus_box.cpp:203
 #, fuzzy, c-format
 msgid "'%s has won %u Holy grenade"
 msgid_plural "'%s has won %u Holy grenades"
 msgstr[0] "%s %u ráadás légitámadás nyert!"
 msgstr[1] "%s %u ráadás légitámadás nyert!"
 
-#: src/object/bonus_box.cpp:184
+#: src/object/bonus_box.cpp:185
 #, fuzzy, c-format
 msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
@@ -210,10 +210,6 @@ msgstr "(korlátlan)"
 msgid "Air Attack"
 msgstr "Légitámadás"
 
-#: src/object/bonus_box.cpp:170
-msgid "Air attack"
-msgstr "Légitámadás"
-
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr ""
@@ -228,7 +224,7 @@ msgstr "%s csapat betöltése."
 msgid "All teams results:\n"
 msgstr "%s csapat betöltése."
 
-#: src/object/bonus_box.cpp:197 src/weapon/anvil.cpp:72
+#: src/weapon/anvil.cpp:72
 msgid "Anvil"
 msgstr ""
 
@@ -241,17 +237,8 @@ msgstr "Szerzők:"
 msgid "Automatic Bazooka"
 msgstr "Automatikus tűzelésű rakétavető"
 
-#: src/object/bonus_box.cpp:215
-msgid "Automatic bazooka"
-msgstr "Automatikus tűzelésű rakétavető"
-
 #: src/weapon/baseball.cpp:32
 msgid "Baseball"
-msgstr "Baseball"
-
-#: src/object/bonus_box.cpp:179
-#, fuzzy
-msgid "Baseball bat"
 msgstr "Baseball"
 
 #: src/weapon/bazooka.cpp:62
@@ -320,7 +307,7 @@ msgstr "Biztos, hogy ki szeretnél lépni? (Y/N) ?"
 msgid "Duration of a turn:"
 msgstr "Egy forduló ideje:"
 
-#: src/object/bonus_box.cpp:234 src/weapon/dynamite.cpp:91
+#: src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dinamit"
 
@@ -417,7 +404,7 @@ msgstr "Nem található a felhasználó könyvtára!"
 msgid "Head commander"
 msgstr ""
 
-#: src/object/bonus_box.cpp:206 src/weapon/holly_grenade.cpp:105
+#: src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Gránát"
@@ -472,7 +459,7 @@ msgstr ""
 msgid "Invalid server adress!"
 msgstr ""
 
-#: src/object/bonus_box.cpp:280
+#: src/object/bonus_box.cpp:281
 msgid "Is it a gift?"
 msgstr ""
 
@@ -493,10 +480,6 @@ msgstr "%s térkép betöltése"
 #, fuzzy
 msgid "Load teams:"
 msgstr "%s csapat betöltése."
-
-#: src/object/bonus_box.cpp:188
-msgid "Low gravity"
-msgstr ""
 
 #: src/weapon/lowgrav.cpp:41
 msgid "LowGrav"
@@ -634,10 +617,6 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/object/bonus_box.cpp:224
-msgid "Riot bomb"
-msgstr ""
-
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Játék futtatása"
@@ -722,7 +701,7 @@ msgstr ""
 msgid "Teams"
 msgstr ""
 
-#: src/object/bonus_box.cpp:143 src/weapon/teleportation.cpp:39
+#: src/weapon/teleportation.cpp:39
 msgid "Teleportation"
 msgstr "Teleport"
 
@@ -860,9 +839,19 @@ msgstr ""
 #~ msgid "%s team has won.\n"
 #~ msgstr "%s csapata nyert."
 
+#~ msgid "Air attack"
+#~ msgstr "Légitámadás"
+
 #, fuzzy
 #~ msgid "Authors"
 #~ msgstr "Szerzők:"
+
+#~ msgid "Automatic bazooka"
+#~ msgstr "Automatikus tűzelésű rakétavető"
+
+#, fuzzy
+#~ msgid "Baseball bat"
+#~ msgstr "Baseball"
 
 #~ msgid "ClanLib error :"
 #~ msgstr "ClanLib hiba:"
