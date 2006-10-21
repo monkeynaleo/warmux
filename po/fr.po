@@ -233,7 +233,8 @@ msgid "Automatic Bazooka"
 msgstr "Bazooka automatique"
 
 #: src/weapon/baseball.cpp:32
-msgid "Baseball"
+#, fuzzy
+msgid "Baseball Bat"
 msgstr "Base-ball"
 
 #: src/weapon/bazooka.cpp:62
@@ -295,7 +296,8 @@ msgid "Do you really want to quit? (Y/N)"
 msgstr "Voulez-vous vraiment quitter ? (O/N)"
 
 #: src/menu/game_menu.cpp:292
-msgid "Duration of a turn:"
+#, fuzzy
+msgid "Duration of a turn"
 msgstr "Durée d'un tour :"
 
 #: src/weapon/dynamite.cpp:91
@@ -412,7 +414,8 @@ msgstr ""
 "envoyez un mail 'en anglais, svp):"
 
 #: src/menu/game_menu.cpp:310
-msgid "Initial energy:"
+#, fuzzy
+msgid "Initial energy"
 msgstr "Énergie initiale :"
 
 #: src/game/game_loop.cpp:200
@@ -469,8 +472,8 @@ msgid "LowGrav"
 msgstr "Anti-gravité"
 
 #: src/map/map.cpp:328
-#, c-format
-msgid "Map %s, a creation of :"
+#, fuzzy, c-format
+msgid "Map %s, a creation of: "
 msgstr "Terrain %s, une création de :"
 
 #: src/game/game_loop.cpp:203
@@ -482,7 +485,8 @@ msgid "Max number of players:"
 msgstr "Nombre de joueurs maximum:"
 
 #: src/menu/options_menu.cpp:77
-msgid "Maximum number of FPS:"
+#, fuzzy
+msgid "Maximum FPS"
 msgstr "Nbr. max. d'images/sec :"
 
 #: src/weapon/mine.cpp:184
@@ -677,7 +681,8 @@ msgstr "Téléportation"
 
 #: src/weapon/cluster_bomb.cpp:97
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr "La grenade à fragmentation a quitté le champs de bataille avant d'exploser."
+msgstr ""
+"La grenade à fragmentation a quitté le champs de bataille avant d'exploser."
 
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
@@ -798,4 +803,3 @@ msgstr "terminé"
 #: src/menu/network_menu.cpp:73
 msgid "some opponents."
 msgstr "pour trouver des adversaires"
-

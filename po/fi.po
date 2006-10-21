@@ -243,7 +243,8 @@ msgid "Automatic Bazooka"
 msgstr "Automaattibazooka"
 
 #: src/weapon/baseball.cpp:32
-msgid "Baseball"
+#, fuzzy
+msgid "Baseball Bat"
 msgstr "Pesäpallomaila"
 
 #: src/weapon/bazooka.cpp:62
@@ -307,7 +308,8 @@ msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
 #: src/menu/game_menu.cpp:292
-msgid "Duration of a turn:"
+#, fuzzy
+msgid "Duration of a turn"
 msgstr "Vuoron kesto:"
 
 #: src/weapon/dynamite.cpp:91
@@ -425,7 +427,8 @@ msgid ""
 msgstr ""
 
 #: src/menu/game_menu.cpp:310
-msgid "Initial energy:"
+#, fuzzy
+msgid "Initial energy"
 msgstr "Aloitus voimat:"
 
 #: src/game/game_loop.cpp:200
@@ -483,8 +486,8 @@ msgid "LowGrav"
 msgstr ""
 
 #: src/map/map.cpp:328
-#, c-format
-msgid "Map %s, a creation of :"
+#, fuzzy, c-format
+msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
 
 #: src/game/game_loop.cpp:203
@@ -497,7 +500,8 @@ msgid "Max number of players:"
 msgstr "Pelaajien määrä joukkueessa:"
 
 #: src/menu/options_menu.cpp:77
-msgid "Maximum number of FPS:"
+#, fuzzy
+msgid "Maximum FPS"
 msgstr "Enimmäismäärä FPS:lle:"
 
 #: src/weapon/mine.cpp:184
@@ -849,8 +853,7 @@ msgstr ""
 #~ msgid "Automatic bazooka"
 #~ msgstr "Automaattibazooka"
 
-#, fuzzy
-#~ msgid "Baseball bat"
+#~ msgid "Baseball"
 #~ msgstr "Pesäpallomaila"
 
 #~ msgid "Duration of the end of a turn:"

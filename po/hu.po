@@ -238,7 +238,8 @@ msgid "Automatic Bazooka"
 msgstr "Automatikus tűzelésű rakétavető"
 
 #: src/weapon/baseball.cpp:32
-msgid "Baseball"
+#, fuzzy
+msgid "Baseball Bat"
 msgstr "Baseball"
 
 #: src/weapon/bazooka.cpp:62
@@ -304,7 +305,8 @@ msgid "Do you really want to quit? (Y/N)"
 msgstr "Biztos, hogy ki szeretnél lépni? (Y/N) ?"
 
 #: src/menu/game_menu.cpp:292
-msgid "Duration of a turn:"
+#, fuzzy
+msgid "Duration of a turn"
 msgstr "Egy forduló ideje:"
 
 #: src/weapon/dynamite.cpp:91
@@ -425,7 +427,8 @@ msgid ""
 msgstr ""
 
 #: src/menu/game_menu.cpp:310
-msgid "Initial energy:"
+#, fuzzy
+msgid "Initial energy"
 msgstr "Induló energiaszint:"
 
 #: src/game/game_loop.cpp:200
@@ -486,8 +489,8 @@ msgid "LowGrav"
 msgstr ""
 
 #: src/map/map.cpp:328
-#, c-format
-msgid "Map %s, a creation of :"
+#, fuzzy, c-format
+msgid "Map %s, a creation of: "
 msgstr "%s térkép szerzője:"
 
 #: src/game/game_loop.cpp:203
@@ -500,7 +503,7 @@ msgid "Max number of players:"
 msgstr "Játékosok száma csapatonként:"
 
 #: src/menu/options_menu.cpp:77
-msgid "Maximum number of FPS:"
+msgid "Maximum FPS"
 msgstr ""
 
 #: src/weapon/mine.cpp:184
@@ -849,8 +852,7 @@ msgstr ""
 #~ msgid "Automatic bazooka"
 #~ msgstr "Automatikus tűzelésű rakétavető"
 
-#, fuzzy
-#~ msgid "Baseball bat"
+#~ msgid "Baseball"
 #~ msgstr "Baseball"
 
 #~ msgid "ClanLib error :"

@@ -242,7 +242,8 @@ msgid "Automatic Bazooka"
 msgstr "Bazooka automática"
 
 #: src/weapon/baseball.cpp:32
-msgid "Baseball"
+#, fuzzy
+msgid "Baseball Bat"
 msgstr "Baseball"
 
 #: src/weapon/bazooka.cpp:62
@@ -306,7 +307,8 @@ msgid "Do you really want to quit? (Y/N)"
 msgstr "Você quer mesmo sair ?(Y/N)"
 
 #: src/menu/game_menu.cpp:292
-msgid "Duration of a turn:"
+#, fuzzy
+msgid "Duration of a turn"
 msgstr "Duração de um turno:"
 
 #: src/weapon/dynamite.cpp:91
@@ -426,7 +428,8 @@ msgid ""
 msgstr ""
 
 #: src/menu/game_menu.cpp:310
-msgid "Initial energy:"
+#, fuzzy
+msgid "Initial energy"
 msgstr "Energia inicial:"
 
 #: src/game/game_loop.cpp:200
@@ -483,8 +486,8 @@ msgid "LowGrav"
 msgstr ""
 
 #: src/map/map.cpp:328
-#, c-format
-msgid "Map %s, a creation of :"
+#, fuzzy, c-format
+msgid "Map %s, a creation of: "
 msgstr "Mapa %s, uma criação de :"
 
 #: src/game/game_loop.cpp:203
@@ -497,7 +500,8 @@ msgid "Max number of players:"
 msgstr "Número de jogadores por equipa:"
 
 #: src/menu/options_menu.cpp:77
-msgid "Maximum number of FPS:"
+#, fuzzy
+msgid "Maximum FPS"
 msgstr "Número máximo de FPS:"
 
 #: src/weapon/mine.cpp:184
@@ -838,8 +842,7 @@ msgstr ""
 #~ msgid "Automatic bazooka"
 #~ msgstr "Bazooka automática"
 
-#, fuzzy
-#~ msgid "Baseball bat"
+#~ msgid "Baseball"
 #~ msgstr "Baseball"
 
 #~ msgid "Duration of the end of a turn:"

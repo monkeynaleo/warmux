@@ -236,7 +236,8 @@ msgid "Automatic Bazooka"
 msgstr "Automatska bazuka"
 
 #: src/weapon/baseball.cpp:32
-msgid "Baseball"
+#, fuzzy
+msgid "Baseball Bat"
 msgstr "Palija"
 
 #: src/weapon/bazooka.cpp:62
@@ -301,7 +302,8 @@ msgid "Do you really want to quit? (Y/N)"
 msgstr "Da li želite da izađete? (Y/N)"
 
 #: src/menu/game_menu.cpp:292
-msgid "Duration of a turn:"
+#, fuzzy
+msgid "Duration of a turn"
 msgstr "Trajanje reda:"
 
 #: src/weapon/dynamite.cpp:91
@@ -422,7 +424,8 @@ msgid ""
 msgstr ""
 
 #: src/menu/game_menu.cpp:310
-msgid "Initial energy:"
+#, fuzzy
+msgid "Initial energy"
 msgstr "Početna energija:"
 
 #: src/game/game_loop.cpp:200
@@ -480,8 +483,8 @@ msgid "LowGrav"
 msgstr "Smanji gravitaciju"
 
 #: src/map/map.cpp:328
-#, c-format
-msgid "Map %s, a creation of :"
+#, fuzzy, c-format
+msgid "Map %s, a creation of: "
 msgstr "Mapa %s, je kreacija:"
 
 #: src/game/game_loop.cpp:203
@@ -494,7 +497,8 @@ msgid "Max number of players:"
 msgstr "Broj igrača po timu:"
 
 #: src/menu/options_menu.cpp:77
-msgid "Maximum number of FPS:"
+#, fuzzy
+msgid "Maximum FPS"
 msgstr "Maximalaan broj FPS:"
 
 #: src/weapon/mine.cpp:184
@@ -834,8 +838,7 @@ msgstr ""
 #~ msgid "Automatic bazooka"
 #~ msgstr "Automatska bazuka"
 
-#, fuzzy
-#~ msgid "Baseball bat"
+#~ msgid "Baseball"
 #~ msgstr "Palija"
 
 #~ msgid "Duration of the end of a turn:"

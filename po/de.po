@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-10-20 21:40+0200\n"
+"PO-Revision-Date: 2006-10-21 19:06+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr " "
 #: src/team/results.cpp:214
 #, fuzzy
 msgid "  Most sold-out  :  "
-msgstr "  Am gewalttätigsten  :  "
+msgstr "  Am verräterischsten  :  "
 
 #: src/team/results.cpp:212
 msgid "  Most useful   :  "
@@ -232,8 +232,8 @@ msgid "Automatic Bazooka"
 msgstr "Lenkrakete"
 
 #: src/weapon/baseball.cpp:32
-msgid "Baseball"
-msgstr "Baseball"
+msgid "Baseball Bat"
+msgstr "Baseballschläger"
 
 #: src/weapon/bazooka.cpp:62
 msgid "Bazooka"
@@ -295,8 +295,8 @@ msgid "Do you really want to quit? (Y/N)"
 msgstr "Wollen Sie das Programm wirklich beenden? (J/N)"
 
 #: src/menu/game_menu.cpp:292
-msgid "Duration of a turn:"
-msgstr "Dauer einer Runde:"
+msgid "Duration of a turn"
+msgstr "Dauer einer Runde"
 
 #: src/weapon/dynamite.cpp:91
 msgid "Dynamite"
@@ -323,8 +323,7 @@ msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
@@ -387,8 +386,7 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr ""
-"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #: src/menu/game_menu.cpp:70
 msgid "Head commander"
@@ -415,8 +413,8 @@ msgstr ""
 "E-Mail (in English bitte):"
 
 #: src/menu/game_menu.cpp:310
-msgid "Initial energy:"
-msgstr "Startenergie:"
+msgid "Initial energy"
+msgstr "Startenergie"
 
 #: src/game/game_loop.cpp:200
 msgid "Initialisation"
@@ -457,7 +455,7 @@ msgstr "Düsenrucksack"
 
 #: src/menu/network_menu.cpp:72
 msgid "Join #wormux on irc.freenode.net to find"
-msgstr ""
+msgstr "Komm nach #wurmux auf irc.freenode.net"
 
 #: src/map/maps_list.cpp:185
 msgid "Load maps:"
@@ -472,8 +470,8 @@ msgid "LowGrav"
 msgstr "Geringe Schwerkraft"
 
 #: src/map/map.cpp:328
-#, c-format
-msgid "Map %s, a creation of :"
+#, fuzzy, c-format
+msgid "Map %s, a creation of: "
 msgstr "Karte %s, eine Kreation von: "
 
 #: src/game/game_loop.cpp:203
@@ -485,8 +483,8 @@ msgid "Max number of players:"
 msgstr "Maximale Anzahl an Spielern:"
 
 #: src/menu/options_menu.cpp:77
-msgid "Maximum number of FPS:"
-msgstr "Maximale Anzahl FPS:"
+msgid "Maximum FPS"
+msgstr "Maximale FPS"
 
 #: src/weapon/mine.cpp:184
 msgid "Mine"
@@ -495,7 +493,7 @@ msgstr "Mine"
 #: src/menu/results_menu.cpp:169
 #, fuzzy
 msgid "Most sold-out"
-msgstr "Am gewalttätigsten"
+msgstr "Am verräterischsten"
 
 #: src/menu/results_menu.cpp:159
 msgid "Most useful"
@@ -631,7 +629,7 @@ msgstr "Scharfschützengewehr"
 
 #: src/menu/network_menu.cpp:75
 msgid "So you have to restart Wormux after each"
-msgstr ""
+msgstr "Deshalb musst du Wormux nach jedem"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -696,7 +694,7 @@ msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 #: src/menu/network_connection_menu.cpp:119
 #, fuzzy
 msgid "Unable to connect"
-msgstr "Kann Server nicht kontaktieren!"
+msgstr "Kann nicht verbinden"
 
 #: src/network/network.cpp:132
 msgid "Unable to contact server!"
@@ -710,7 +708,7 @@ msgstr "Kann SDL Bibliothek nicht initialisieren: %s"
 #: src/network/network.cpp:215
 #, fuzzy
 msgid "Unable to listen for client!"
-msgstr "Kann Server nicht starten"
+msgstr "Kann Server nicht starten!"
 
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
@@ -731,7 +729,7 @@ msgstr "Version"
 
 #: src/menu/network_menu.cpp:74
 msgid "WARNING! Disconnections are not yet handled."
-msgstr ""
+msgstr "WARNUNG! Verbindungstrennungen werden noch nicht behandelt."
 
 #: src/menu/network_menu.cpp:293
 msgid "Wait! "
@@ -796,7 +794,7 @@ msgstr "Dein Schuss ging daneben!"
 
 #: src/menu/network_menu.cpp:76
 msgid "disconnection!"
-msgstr ""
+msgstr "Verbindungsabbau beenden!"
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -804,25 +802,5 @@ msgstr "fertig"
 
 #: src/menu/network_menu.cpp:73
 msgid "some opponents."
-msgstr ""
+msgstr "um Gegner zu finden."
 
-#~ msgid "Air attack"
-#~ msgstr "Luftangriff"
-
-#~ msgid "Automatic bazooka"
-#~ msgstr "Lenkrakete"
-
-#~ msgid "Baseball bat"
-#~ msgstr "Baseballschläger"
-
-#~ msgid "Duration of the end of a turn:"
-#~ msgstr "Dauer des Rundenendes"
-
-#~ msgid "Low gravity"
-#~ msgstr "Geringe Schwerkraft"
-
-#~ msgid "Number of players per team:"
-#~ msgstr "Anzahl der Spieler pro Mannschaft:"
-
-#~ msgid "Riot bomb"
-#~ msgstr "Lärmbombe"
