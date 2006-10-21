@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-10-21 19:06+0200\n"
+"PO-Revision-Date: 2006-10-21 19:10+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -569,11 +569,11 @@ msgstr "Spieler X"
 
 #: src/menu/options_menu.cpp:68
 msgid "Player energy?"
-msgstr "Energie des Spielers anzeigen?"
+msgstr "Spielerenergie?"
 
 #: src/menu/options_menu.cpp:71
 msgid "Player's name?"
-msgstr "Name des Spielers anzeigen?"
+msgstr "Spielername?"
 
 #: src/weapon/polecat.cpp:136
 msgid "Polecat Launcher"
@@ -754,7 +754,7 @@ msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
 
 #: src/menu/options_menu.cpp:65
 msgid "Wind particles?"
-msgstr "Windpartikel anzeigen?"
+msgstr "Windpartikel?"
 
 #: src/main.cpp:162
 msgid "Wormux launching..."
