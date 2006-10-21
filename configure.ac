@@ -1,5 +1,5 @@
 dnl ========================================================================
-dnl =                   W O R M U X  -  confiure.ac                        =
+dnl =                   W O R M U X  -  configure.ac                       =
 dnl =                                                                      =
 dnl = Process this file with autoconf to produce a configure script.       =
 dnl ========================================================================
@@ -48,8 +48,8 @@ AX_CFLAGS_WARN_ALL([CXXFLAGS])
 
 AC_ARG_ENABLE([debug],
 	      [  --enable-debug          Enable debug in Wormux],
-          debug=$enableval,
-          debug="")
+	      debug=$enableval,
+	      debug="")
 
 AC_ARG_ENABLE([profile],
 	      [  --enable-profile        Enable profiling],
@@ -141,18 +141,23 @@ if test "x$GCC" = "xyes"; then
     fi
 
     dnl Skip 'unused parameter' warning
+    dnl This is needed for virtual function that do not use all parameters
     GCC_FLAGS="$GCC_FLAGS -Wno-unused-parameter"
 
-    if test "${debug}" = "yes"; then
+    if test "x${debug}" = "xyes"; then
         GCC_FLAGS="$GCC_FLAGS -O0 -g -DDEBUG"
     else
         GCC_FLAGS="$GCC_FLAGS -O2"
     fi
 
-    CFLAGS="$CFLAGS $GCC_FLAGS"
-    CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
+    dnl Ignore default options set by autoconf
+    dnl CFLAGS="$CFLAGS $GCC_FLAGS"
+    CFLAGS="$GCC_FLAGS"
+    dnl CXXFLAGS="$CXXFLAGS $GCC_FLAGS"
+    CXXFLAGS="$GCC_FLAGS"
+
 else
-    if test "${debug}" = "yes"; then
+    if test "x${debug}" = "xyes"; then
         CFLAGS="$CFLAGS -DDEBUG"
         CXXFLAGS="$CXXFLAGS -DDEBUG"
     fi
@@ -210,34 +215,12 @@ AC_CHECK_HEADERS(SDL_rotozoom.h,,
     AC_MSG_ERROR([SDL_gfx library headers are missing]))
 LIBS="$LIBS -lSDL_gfx"
 
-
-#dnl === Check for paragui-config  ==========================================
-
-#AC_PATH_PROGS([PGUI_CONFIG], [paragui-config], [none])
-#if test "x$PGUI_CONFIG" = "xnone"; then
-#	AC_MSG_ERROR([*** paragui-config has not been found.])
-#fi
-#AC_MSG_CHECKING(for Paragui)
-#if $PGUI_CONFIG --libs > /dev/null 2>&1; then
-#	AC_MSG_RESULT(yes)
-#else
-#	AC_MSG_RESULT(no)
-#	AC_MSG_ERROR([*** Paragui not found!])
-#fi
-#PARAGUI_CFLAGS=`$PGUI_CONFIG --cflags`
-#PARAGUI_LIBS=`$PGUI_CONFIG --libs`
-#CFLAGS="$CFLAGS $PARAGUI_CFLAGS"
-#CXXFLAGS="$CXXFLAGS $PARAGUI_CFLAGS"
-#LIBS="$LIBS $PARAGUI_LIBS"
-
-
 dnl === Check for libxml++ 2.6 =============================================
 
 dnl Check first for pkg-config
 
 AC_PATH_PROGS([PACKAGE_CONFIG], [pkg-config], [none])
 if test "x$PACKAGE_CONFIG" = "xnone"; then
-
 	AC_MSG_ERROR([*** pkg-config, needed to check for libxml++ existence
 has not been found.])
 fi
