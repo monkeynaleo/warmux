@@ -299,6 +299,17 @@ void Character::SetEnergyDelta (int delta, bool do_report)
 
 void Character::SetEnergy(int new_energy)
 {
+  if(! network.IsLocal() )
+  {
+    if( m_alive == DEAD && new_energy > 0)
+    {
+      printf("%s have been resurrected\n", GetName().c_str());
+      m_alive = ALIVE;
+    }
+  }
+
+  assert( m_alive != DEAD );
+
   // Change energy
   energy = BorneLong((int)new_energy, 0, GameMode::GetInstance()->character.max_energy);
   energy_bar.Actu (energy);
@@ -846,7 +857,7 @@ void Character::StartPlaying()
 
 uint Character::GetEnergy() const
 {
-  assert (!IsDead());
+//  assert (!IsDead());
   return energy;
 }
 

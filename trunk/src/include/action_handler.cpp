@@ -78,16 +78,14 @@ void SyncCharacters()
 
     for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
-      if((*tit).IsDead())
-        continue;
-
-      // cliens : Place characters
-      Action* a = BuildActionSendCharacterPhysics(team_no, char_no);
-      action_handler->NewAction(a);
-      a = new Action(ACTION_SET_CHARACTER_ENERGY);
+      // Sync the character's energy
+      Action* a = new Action(ACTION_SET_CHARACTER_ENERGY);
 		a->Push(team_no);
 		a->Push(char_no);
       a->Push((int)(*tit).GetEnergy());
+      action_handler->NewAction(a);
+      // Sync the character's position
+      a = BuildActionSendCharacterPhysics(team_no, char_no);
       action_handler->NewAction(a);
     }
   }
