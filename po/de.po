@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-10-21 19:10+0200\n"
+"PO-Revision-Date: 2006-10-22 19:32+0200\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -455,7 +455,7 @@ msgstr "Düsenrucksack"
 
 #: src/menu/network_menu.cpp:72
 msgid "Join #wormux on irc.freenode.net to find"
-msgstr "Komm nach #wurmux auf irc.freenode.net"
+msgstr "Komm nach #wormux auf irc.freenode.net"
 
 #: src/map/maps_list.cpp:185
 msgid "Load maps:"
@@ -523,7 +523,7 @@ msgstr "Netzwerkspiel"
 msgid "Ninjarope"
 msgstr "Ninjaseil"
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:556
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
@@ -764,7 +764,7 @@ msgstr "Wormux startet..."
 msgid "Wormux version "
 msgstr "Wormux Version "
 
-#: src/include/action_handler.cpp:385
+#: src/include/action_handler.cpp:383
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."

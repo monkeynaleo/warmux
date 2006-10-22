@@ -546,7 +546,7 @@ msgstr "Sieťová hra"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:556
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenájdený element <%s> v xml konfiguračnom súbore!"
@@ -801,7 +801,7 @@ msgstr "Wormux sa spúšťa..."
 msgid "Wormux version "
 msgstr "Wormux verzia"
 
-#: src/include/action_handler.cpp:385
+#: src/include/action_handler.cpp:383
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
