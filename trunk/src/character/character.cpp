@@ -122,18 +122,15 @@ Character::Character (Team& my_team, const std::string &name) :
     name_text = NULL;
 
   // Energy
-  {
-    energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.max_energy);
-    energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
+  energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.max_energy);
+  energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
 
-    energy_bar.SetBorderColor( black_color );
-    energy_bar.SetBackgroundColor( gray_color );
+  energy_bar.SetBorderColor( black_color );
+  energy_bar.SetBackgroundColor( gray_color );
 
-    energy = GameMode::GetInstance()->character.init_energy-1;
-    energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.init_energy);
-    SetEnergyDelta (1, false);
-    lost_energy = 0;
-  }
+  energy = GameMode::GetInstance()->character.init_energy-1;
+  energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.init_energy);
+  lost_energy = 0;
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
 
