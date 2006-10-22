@@ -373,7 +373,7 @@ msgstr "Incapaz de inicializar a libraria SDL: %s"
 
 #: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
-msgstr "Encontre uma posição aleatória para os worms"
+msgstr "Encontre uma posição aleatória para os caráteres"
 
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
