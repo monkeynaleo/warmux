@@ -138,9 +138,19 @@ void Action_ChangeWeapon (Action *a)
   ActiveTeam().SetWeapon((Weapon_type)a->PopInt());
 }
 
-void Action_ChangeCharacter (Action *a)
+void Action_NextCharacter (Action *a)
 {
   ActiveTeam().NextCharacter();
+}
+
+void Action_ChangeCharacter (Action *a)
+{
+  int char_index = a->PopInt();
+  while( (int)ActiveCharacter().GetCharacterIndex() != char_index )
+    ActiveTeam().NextCharacter();
+
+  // Ok, this code is dirty, if you write a cleaner way
+  // Use it in mouse.cpp as well ;)
 }
 
 void Action_Shoot (Action *a)
@@ -550,6 +560,7 @@ ActionHandler::ActionHandler()
   Register (ACTION_SHOOT, "shoot", &Action_Shoot);
   Register (ACTION_CHANGE_WEAPON, "change_weapon", &Action_ChangeWeapon);
   Register (ACTION_WIND, "wind", &Action_Wind);
+  Register (ACTION_NEXT_CHARACTER, "next_character", &Action_NextCharacter);
   Register (ACTION_CHANGE_CHARACTER, "change_character", &Action_ChangeCharacter);
   Register (ACTION_SET_GAME_MODE, "set_game_mode", &Action_SetGameMode);
   Register (ACTION_SET_MAP, "set_map", &Action_SetMap);

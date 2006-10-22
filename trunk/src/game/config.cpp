@@ -181,7 +181,7 @@ void Config::SetKeyboardConfig()
   clavier->SetKeyAction(SDLK_BACKSPACE, ACTION_HIGH_JUMP);
   clavier->SetKeyAction(SDLK_b,         ACTION_BACK_JUMP);
   clavier->SetKeyAction(SDLK_SPACE,     ACTION_SHOOT);
-  clavier->SetKeyAction(SDLK_TAB,       ACTION_CHANGE_CHARACTER);
+  clavier->SetKeyAction(SDLK_TAB,       ACTION_NEXT_CHARACTER);
   clavier->SetKeyAction(SDLK_ESCAPE,    ACTION_QUIT);
   clavier->SetKeyAction(SDLK_p,         ACTION_PAUSE);
   clavier->SetKeyAction(SDLK_F10,       ACTION_FULLSCREEN);

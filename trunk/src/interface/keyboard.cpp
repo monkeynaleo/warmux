@@ -92,7 +92,7 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
   if(ActiveTeam().is_local)
   {
 
-    if(action <= ACTION_CHANGE_CHARACTER)
+    if(action <= ACTION_NEXT_CHARACTER)
       {
         switch (action) {
 //           case ACTION_ADD:
@@ -185,7 +185,7 @@ void Clavier::HandleKeyPressed (const Action_t &action)
 	  weapon_sort = 8;
 	  break;
 
-        case ACTION_CHANGE_CHARACTER:
+        case ACTION_NEXT_CHARACTER:
 	  if (GameMode::GetInstance()->AllowCharacterSelection())
 	    ActionHandler::GetInstance()->NewAction(new Action(action));
 	  return ;
