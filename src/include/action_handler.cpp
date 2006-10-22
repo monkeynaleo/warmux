@@ -149,6 +149,12 @@ void Action_ChangeCharacter (Action *a)
   while( (int)ActiveCharacter().GetCharacterIndex() != char_index )
     ActiveTeam().NextCharacter();
 
+  printf("Action_NextCharacter:\n");
+  printf("char_index = %i\n",char_index);
+  printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
+  printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
+  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
+
   // Ok, this code is dirty, if you write a cleaner way
   // Use it in mouse.cpp as well ;)
 }

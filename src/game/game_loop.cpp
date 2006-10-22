@@ -571,6 +571,13 @@ void GameLoop::SetState(int new_state, bool begin_game)
         // Tell to clients which character in the team is now playing
         Action playing_char(ACTION_CHANGE_CHARACTER, (int)ActiveCharacter().GetCharacterIndex());
         network.SendAction(&playing_char);
+
+        printf("Action_NextCharacter:\n");
+        printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());
+        printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
+        printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
+        printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
+
       }
     }
 
