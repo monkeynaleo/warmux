@@ -559,10 +559,18 @@ void GameLoop::SetState(int new_state, bool begin_game)
         action_handler->ExecActions();
       } while (ActiveTeam().NbAliveCharacter() == 0);
 
+
       if( game_mode->allow_character_selection==GameMode::CHANGE_ON_END_TURN
        || game_mode->allow_character_selection==GameMode::BEFORE_FIRST_ACTION_AND_END_TURN)
       {
-	action_handler->NewAction(new Action(ACTION_CHANGE_CHARACTER));
+        ActiveTeam().NextCharacter();
+      }
+
+      if( network.IsServer() )
+      {
+        // Tell to clients which character in the team is now playing
+        Action playing_char(ACTION_CHANGE_CHARACTER, (int)ActiveCharacter().GetCharacterIndex());
+        network.SendAction(&playing_char);
       }
     }
 

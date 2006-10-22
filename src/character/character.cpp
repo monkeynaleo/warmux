@@ -591,7 +591,7 @@ void Character::HandleKeyEvent(int action, int event_type)
 
   ActionHandler * action_handler = ActionHandler::GetInstance();
 
-  if(action <= ACTION_CHANGE_CHARACTER)
+  if(action <= ACTION_NEXT_CHARACTER)
     {
       switch (event_type)
       {
