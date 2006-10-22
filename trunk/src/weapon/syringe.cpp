@@ -37,13 +37,9 @@ void Syringe::Draw() {
 
 bool Syringe::p_Shoot (){
   double angle = ActiveTeam().crosshair.GetAngleRad();
-  int char_x, char_y;
-  int x,y;
-  double dx,dy;
   double radius = 0.0;
   bool end = false;
 
-  RotationPointXY (char_x, char_y);
   jukebox.Play ("share","weapon/syringe");
 
   do
@@ -57,16 +53,14 @@ bool Syringe::p_Shoot (){
     }
 
     // Compute point coordinates
-    dx = (int)(radius*cos( angle ));
-    dy = (int)(radius*sin( angle ));
-    x = char_x +(int)dx;
-    y = char_y +(int)dy;
-
+    Point2i relative_pos(static_cast<int>(radius * cos(angle)),
+                         static_cast<int>(radius * sin(angle)) );
+    Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
     FOR_ALL_LIVING_CHARACTERS(team, character)
     if (&(*character) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( character->ObjTouche(Point2i(x, y)) )
+      if( character->ObjTouche(pos_to_check) )
       {
 	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
 	character->SetDiseaseDamage(cfg().damage, cfg().turns);
@@ -87,7 +81,7 @@ SyringeConfig& Syringe::cfg() {
   return static_cast<SyringeConfig&>(*extra_params);
 }
 
-SyringeConfig::SyringeConfig(){ 
+SyringeConfig::SyringeConfig(){
   range =  45;
   turns = 10;
   damage = 10;

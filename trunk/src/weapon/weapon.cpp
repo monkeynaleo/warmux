@@ -308,27 +308,14 @@ void Weapon::PosXY (int &x, int &y) const
     assert(false);
 }
 
-// Return the absolute rotation point of the weapon
-void Weapon::RotationPointXY (int &x, int &y) const
-{
-  Point2i handPos = ActiveCharacter().GetHandPosition();
-  x = handPos.x;
-  y = handPos.y;
-}
-
 const Point2i Weapon::GetGunHolePosition()
 {
-  int x,y;
-  RotationPointXY(x, y);
-
-  Point2f pos(x,y);
-  Point2f hole(x + hole_delta.x, y + hole_delta.y);
+  const Point2i &pos = ActiveCharacter().GetHandPosition();
+  Point2i hole(pos +  hole_delta);
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
-  Point2f rotated_hole;
-  rotated_hole = pos + Point2f(dst * cos(angle + ActiveTeam().crosshair.GetAngleRad()),
-                               dst * sin(angle + ActiveTeam().crosshair.GetAngleRad()));
-  return Point2i((int)rotated_hole.x, (int)rotated_hole.y);
+  return pos + Point2i(static_cast<int>(dst * cos(angle + ActiveTeam().crosshair.GetAngleRad())),
+                       static_cast<int>(dst * sin(angle + ActiveTeam().crosshair.GetAngleRad())));
 }
 
 
@@ -433,10 +420,10 @@ void Weapon::DrawWeaponBox(){
 
   AppWormux * app = AppWormux::GetInstance();
 
-  Point2i dest( (int)(c_x - 0.5 * BUTTON_ICO_WIDTH), (int)(c_y - 0.5 * BUTTON_ICO_HEIGHT));
-  app->video.window.Blit( Interface::GetInstance()->weapon_box_button, dest);
-
+  Point2i dest( (int)(WEAPON_BOX_BUTTON_DX), (int)(WEAPON_BOX_BUTTON_DY));
   Point2i  dr2( (int)(c_x - 0.5 * WEAPON_ICO_WIDTH), (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT));
+
+  app->video.window.Blit( Interface::GetInstance()->weapon_box_button, dest);
   app->video.window.Blit( icone, dr2);
 }
 
