@@ -99,7 +99,7 @@ void ApplyExplosion_common (const Point2i &pos,
   {
     double distance = pos.Distance(ver -> GetCenter());
 
-    // If the worm is in the explosion range, apply damage on it !
+    // If the character is in the explosion range, apply damage on it !
     if (distance <= config.explosion_range)
     {
       MSG_DEBUG("explosion", "\n*Character %s : distance= %f", ver->GetName().c_str(), distance);
@@ -109,7 +109,7 @@ void ApplyExplosion_common (const Point2i &pos,
       ver -> SetEnergyDelta (-(int)dmg);
     }
 
-    // If the worm is in the blast range, apply the blast on it !
+    // If the character is in the blast range, apply the blast on it !
     if (distance <= config.blast_range)
     {
       double angle;
@@ -210,7 +210,7 @@ void ApplyExplosion_server (const Point2i &pos,
       double distance;
       distance = MeterDistance (pos, character.GetCenter());
 
-      // If the worm is in the explosion range, apply damage on it !
+      // If the character is in the explosion range, apply damage on it !
       if (distance <= range || distance < config.blast_range)
       {
         // cliens : Place characters
