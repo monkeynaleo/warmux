@@ -35,14 +35,11 @@ Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 }
 
 bool Baseball::p_Shoot (){
+
   double angle = ActiveTeam().crosshair.GetAngleRad();
-  int ver_x, ver_y;
-  int x,y;
-  double dx,dy;
   double rayon = 0.0;
   bool fin = false;
 
-  RotationPointXY (ver_x, ver_y);
   jukebox.Play ("share","weapon/baseball");
 
   do
@@ -56,16 +53,15 @@ bool Baseball::p_Shoot (){
     }
 
     // Compute point coordinates
-    dx = (int)(rayon*cos( angle ));
-    dy = (int)(rayon*sin( angle ));
-    x = ver_x +(int)dx;
-    y = ver_y +(int)dy;
+    Point2i relative_pos(static_cast<int>(rayon * cos(angle)),
+                         static_cast<int>(rayon * sin(angle)) );
+    Point2i pos_to_check = ActiveCharacter().GetHandPosition() + relative_pos;
 
     FOR_ALL_LIVING_CHARACTERS(equipe,ver)
     if (&(*ver) != &ActiveCharacter())
     {
       // Did we touch somebody ?
-      if( ver->ObjTouche(Point2i(x, y)) )
+      if( ver->ObjTouche(pos_to_check) )
       {
 	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
 	ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
@@ -88,7 +84,7 @@ BaseballConfig& Baseball::cfg() {
   return static_cast<BaseballConfig&>(*extra_params);
 }
 
-BaseballConfig::BaseballConfig(){ 
+BaseballConfig::BaseballConfig(){
   range =  70;
   strength = 250;
 }

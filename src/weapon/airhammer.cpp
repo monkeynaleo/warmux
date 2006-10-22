@@ -93,8 +93,7 @@ bool Airhammer::p_Shoot()
     }
 
     // Compute point coordinates
-    RotationPointXY (x, y);
-    y = y + range;
+    y = ActiveCharacter().GetHandPosition().y + range;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
     if (&(*character) != &ActiveCharacter())
@@ -115,11 +114,11 @@ bool Airhammer::p_Shoot()
 //-----------------------------------------------------------------------------
 
 void Airhammer::RepeatShoot()
-{  
-  uint time = Time::GetInstance()->Read() - m_last_jolt; 
+{
+  uint time = Time::GetInstance()->Read() - m_last_jolt;
   uint tmp = Time::GetInstance()->Read();
 
-  if (time >= MIN_TIME_BETWEEN_JOLT) 
+  if (time >= MIN_TIME_BETWEEN_JOLT)
   {
     m_is_active = false;
     NewActionShoot();
@@ -167,7 +166,7 @@ AirhammerConfig& Airhammer::cfg() {
 
 //-----------------------------------------------------------------------------
 
-AirhammerConfig::AirhammerConfig(){ 
+AirhammerConfig::AirhammerConfig(){
 	range =  30;
 	damage = 3;
 }

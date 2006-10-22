@@ -47,13 +47,6 @@ extern const uint BUTTON_ICO_HEIGHT;
 extern const uint WEAPON_ICO_WIDTH;
 extern const uint WEAPON_ICO_HEIGHT;
 
-typedef enum weapon_visibility {
-  ALWAYS_VISIBLE,
-  NEVER_VISIBLE,
-  VISIBLE_ONLY_WHEN_ACTIVE,
-  VISIBLE_ONLY_WHEN_INACTIVE
-} weapon_visibility_t;
-
 class WeaponStrengthBar : public BarreProg
 {
  public:
@@ -100,7 +93,14 @@ protected:
   // Extra parameters
   EmptyWeaponConfig *extra_params;
 
-  // Visibility
+  typedef enum weapon_visibility {
+    ALWAYS_VISIBLE,
+    NEVER_VISIBLE,
+    VISIBLE_ONLY_WHEN_ACTIVE,
+    VISIBLE_ONLY_WHEN_INACTIVE
+  } weapon_visibility_t;
+
+ // Visibility
   weapon_visibility_t m_visibility;
   weapon_visibility_t m_unit_visibility;
 
@@ -201,9 +201,6 @@ public:
   // update strength (so the strength bar can be updated)
   virtual void UpdateStrength();
 
-  // Get the rotation point of the weapon
-  // This is used for drawing the crosshair
-  virtual void RotationPointXY (int &x, int &y) const;
   const Point2i GetGunHolePosition();
 
   // Choose a target.
