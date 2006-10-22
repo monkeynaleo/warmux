@@ -173,31 +173,13 @@ CFLAGS="$CFLAGS $SDL_CFLAGS"
 CPPFLAGS="$CPPFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
 
-dnl === Check for SDL_image ================================================
+dnl === Check for pkg-config ===============================================
 
-AC_CHECK_LIB(SDL_image, IMG_Load,,
-	AC_MSG_ERROR([SDL_image library required]))
-LIBS="$LIBS -lSDL_image"
-
-
-dnl === Check for SDL_mixer ================================================
-
-AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,
-	AC_MSG_ERROR([SDL_mixer library required]))
-LIBS="$LIBS -lSDL_mixer"
-
-
-dnl === Check for SDL_ttf ==================================================
-
-AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,
-        AC_MSG_ERROR([SDL_ttf library is required]))
-LIBS="$LIBS -lSDL_ttf"
-
-dnl === Check for SDL_net ==================================================
-
-AC_CHECK_LIB([SDL_net], [SDLNet_Init],,
-        AC_MSG_ERROR([SDL_net library is required]))
-LIBS="$LIBS -lSDL_net"
+AC_PATH_PROGS([PACKAGE_CONFIG], [pkg-config], [none])
+if test "x$PACKAGE_CONFIG" = "xnone"; then
+	AC_MSG_ERROR([*** pkg-config, needed to check for libxml++ existence
+has not been found.])
+fi
 
 dnl === Check for SDL_gfx ==================================================
 
@@ -209,21 +191,16 @@ if test "x$SDL_GFX_PREFIX" != "x"; then
   CPPFLAGS="$CPPFLAGS -I$SDL_GFX_PREFIX/include/SDL"
   CXXFLAGS="$CXXFLAGS -I$SDL_GFX_PREFIX/include/SDL"
 fi
-AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,
-	AC_MSG_ERROR([SDL_gfx library >= 2.0.13 required]))
-AC_CHECK_HEADERS(SDL_rotozoom.h,,
-    AC_MSG_ERROR([SDL_gfx library headers are missing]))
-LIBS="$LIBS -lSDL_gfx"
+AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
+AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
 
-dnl === Check for libxml++ 2.6 =============================================
+dnl === Check for SDL image, mixer, etc. and libxml++ =======================
 
-dnl Check first for pkg-config
-
-AC_PATH_PROGS([PACKAGE_CONFIG], [pkg-config], [none])
-if test "x$PACKAGE_CONFIG" = "xnone"; then
-	AC_MSG_ERROR([*** pkg-config, needed to check for libxml++ existence
-has not been found.])
-fi
+AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
+AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
+AC_CHECK_LIB([SDL_ttf], [TTF_OpenFont],,check_sdl_ttf="no")
+AC_CHECK_LIB([SDL_net], [SDLNet_Init],,check_sdl_net="no")
+LIBS="$LIBS -lSDL_image -lSDL_mixer -lSDL_ttf -lSDL_net -lSDL_gfx"
 
 AC_MSG_CHECKING(for libxml++)
 
@@ -231,8 +208,44 @@ if $PACKAGE_CONFIG libxml++-2.6 --libs > /dev/null 2>&1; then
 	AC_MSG_RESULT(yes)
 else
 	AC_MSG_RESULT(no)
-	AC_MSG_ERROR([*** libxml++ version 2.6 not found!])
+	check_libxmlpp="no"
 fi
+
+
+dnl === Display error if SDL image, mixer, etc. is missing ==================
+
+if test \
+	   x${check_sdl_image} = xno \
+	-o x${check_sdl_mixer} = xno \
+	-o x${check_sdl_ttf} = xno \
+	-o x${check_sdl_gfx} = xno \
+	-o x${check_sdl_net} = xno \
+	-o x${check_libxmlpp} = xno \
+; then
+	AC_MSG_RESULT([])
+	if test x${check_sdl_image} = xno; then
+		AC_MSG_RESULT([ERROR: SDL_image library required])
+	fi
+	if test x${check_sdl_mixer} = xno; then
+		AC_MSG_RESULT([ERROR: SDL_mixer library required])
+	fi
+	if test x${check_sdl_ttf} = xno; then
+		AC_MSG_RESULT([ERROR: SDL_ttf library required])
+	fi
+	if test x${check_sdl_gfx} = xno; then
+		AC_MSG_RESULT([ERROR: SDL_gfx library version >= 2.0.13 required])
+	fi
+	if test x${check_sdl_net} = xno; then
+		AC_MSG_RESULT([ERROR: SDL_net library required])
+	fi
+	if test x${check_libxmlpp} = xno; then
+		AC_MSG_RESULT([ERROR: libxml++ version 2.6 not found!])
+	fi
+	exit 1
+fi
+
+dnl === Add libxml++ flags =================================================
+
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
 CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS"
