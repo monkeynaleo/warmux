@@ -94,6 +94,7 @@ bool Airhammer::p_Shoot()
 
     // Compute point coordinates
     y = ActiveCharacter().GetHandPosition().y + range;
+    x = ActiveCharacter().GetHandPosition().x;
 
     FOR_ALL_LIVING_CHARACTERS(team, character)
     if (&(*character) != &ActiveCharacter())
