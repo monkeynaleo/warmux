@@ -648,7 +648,7 @@ void Character::HandleKeyEvent(int action, int event_type)
               InitMouvementDG(PAUSE_BOUGE);
               body->StartWalk();
               break;
-            // WARNING!! ALL JUMP KEYS NEEDS TO BE PROCESSED BEFORE AFTER ANY MOVEMENT KEYS
+            // WARNING!! ALL JUMP KEYS NEEDS TO BE PROCESSED AFTER ANY MOVEMENT KEYS
             // OTHERWISE, THE JUMP ACTION WILL BYPASSED ON DISTANT COMPUTERS BYE THE REFRESH
             // OF THE WALK
             case ACTION_JUMP:
