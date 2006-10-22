@@ -91,7 +91,7 @@ void ApplyExplosion_common (const Point2i &pos,
   // Play a sound
   jukebox.Play("share", son);
 
-  // Apply damage on the worms.
+  // Apply damage on the character.
   // Do not care about the death of the active worm.
   double highest_force = 0.0;
   Character* fastest_character = NULL;
