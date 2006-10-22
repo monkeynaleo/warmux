@@ -128,7 +128,7 @@ Character::Character (Team& my_team, const std::string &name) :
   energy_bar.SetBorderColor( black_color );
   energy_bar.SetBackgroundColor( gray_color );
 
-  energy = GameMode::GetInstance()->character.init_energy-1;
+  energy = GameMode::GetInstance()->character.init_energy;
   energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.init_energy);
   lost_energy = 0;
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
