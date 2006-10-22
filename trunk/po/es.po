@@ -547,7 +547,7 @@ msgstr "Juego en red"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:556
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "¡Ningun elemento <%s> encontrado en el archivo de configuración xml!"
@@ -802,7 +802,7 @@ msgstr "Arrancando Wormux..."
 msgid "Wormux version "
 msgstr "Versión Wormux"
 
-#: src/include/action_handler.cpp:385
+#: src/include/action_handler.cpp:383
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
