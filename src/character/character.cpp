@@ -779,7 +779,7 @@ bool Character::CanStillMoveDG(uint pause)
 // Signal the end of a fall
 void Character::SignalCollision()
 {
-  // Do not manage dead worms.
+  // Do not manage dead characters.
   if (IsDead()) return;
 
   pause_bouge_dg = Time::GetInstance()->Read();
