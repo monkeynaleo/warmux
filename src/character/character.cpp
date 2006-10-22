@@ -305,7 +305,8 @@ void Character::SetEnergy(int new_energy)
     }
   }
 
-  assert( m_alive != DEAD );
+  //assert( m_alive != DEAD );
+  if(IsDead()) return;
 
   // Change energy
   energy = BorneLong((int)new_energy, 0, GameMode::GetInstance()->character.max_energy);
