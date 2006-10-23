@@ -303,6 +303,8 @@ void Character::SetEnergy(int new_energy)
     {
       printf("%s have been resurrected\n", GetName().c_str());
       m_alive = ALIVE;
+      SetClothe("normal");
+      SetMovement("walk");
     }
   }
 
