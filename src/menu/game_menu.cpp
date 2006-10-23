@@ -57,19 +57,19 @@ TeamBox::TeamBox(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), fals
 
   team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
   AddWidget(team_logo);
-  
+
   Box * tmp_box = new VBox(Rectanglei(0, 0, width-80, 80), false);
   tmp_box->SetMargin(2);
   tmp_box->SetBorder(Point2i(0,0));
-  team_name = new Label(_(" "), Rectanglei(0,0,width-80,0), 
+  team_name = new Label(" ", Rectanglei(0,0,width-80,0),
 			*Font::GetInstance(Font::FONT_NORMAL), gray_color);
 
   Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetBorder(Point2i(0,0));
-  tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0), 
+  tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0),
 				      *Font::GetInstance(Font::FONT_SMALL), gray_color));
-  player_name = new TextBox(_("Player X"), Rectanglei(0,0,100,0), 
+  player_name = new TextBox(_("Player X"), Rectanglei(0,0,100,0),
 			    *Font::GetInstance(Font::FONT_SMALL));
   tmp_player_box->AddWidget(player_name);
 
@@ -85,10 +85,10 @@ TeamBox::TeamBox(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), fals
 void TeamBox::SetTeam(Team& _team)
 {
   associated_team=&_team;
-  
+
   team_logo->SetSurface(_team.flag);
   team_name->SetText(_team.GetName());
-  team_logo->SetSurface(_team.flag);  
+  team_logo->SetSurface(_team.flag);
 
   ForceRedraw();
 }
@@ -128,7 +128,7 @@ Widget* TeamBox::Clic (const Point2i &mousePosition, uint button)
   if (associated_team != NULL) {
 
     Widget* w = WidgetList::Clic(mousePosition, button);
-    
+
     if ( w == nb_characters ||  w == player_name ) {
       return w;
     }
@@ -175,8 +175,8 @@ GameMenu::GameMenu() :
 			       2, 1,
 			       2, MAX_NB_TEAMS);
   team_box->AddWidget(teams_nb);
-  
-  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0, 
+
+  Box * top_n_bottom_team_options = new VBox( Rectanglei(0, 0,
 							 mainBoxWidth - teams_nb->GetSizeX() - 60, 0),false);
   top_n_bottom_team_options->SetBorder(Point2i(5,0));
   top_n_bottom_team_options->SetMargin(10);
@@ -184,7 +184,7 @@ GameMenu::GameMenu() :
   Box * bottom_team_options = new HBox ( Rectanglei(0, 0, 0, TEAMS_BOX_H/2 - 20), false);
   top_team_options->SetBorder(Point2i(0,0));
   bottom_team_options->SetBorder(Point2i(0,0));
-  
+
   // Initialize teams
   uint team_w_size= top_n_bottom_team_options->GetSizeX() * 2 / MAX_NB_TEAMS;
 
@@ -198,7 +198,7 @@ GameMenu::GameMenu() :
 
   top_n_bottom_team_options->AddWidget(top_team_options);
   top_n_bottom_team_options->AddWidget(bottom_team_options);
-  
+
   team_box->AddWidget(top_n_bottom_team_options);
 
   widgets.AddWidget(team_box);
@@ -220,25 +220,25 @@ GameMenu::GameMenu() :
   tmp_map_box->SetMargin(0);
 
   // compute margin width between previews
-  uint map_preview_height = mainBoxHeight -2*10 -40;  
-  
+  uint map_preview_height = mainBoxHeight -2*10 -40;
+
   // Previews
   Box* previews_box = new HBox( Rectanglei(0, 0, 0, map_preview_height+10 ), false);
   previews_box->SetBorder( Point2i(10,0) );
 
-  // compute margin width between previews			  
+  // compute margin width between previews
   uint map_preview_width = map_preview_height*4/3;
   uint total_width_previews = map_preview_width + map_preview_width*3;
   uint margin = (tmp_map_box->GetSizeX() - 20 -
-		 (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;  
-  
+		 (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
+
   if (margin < 5) {
     margin = 5;
     uint total_size_wo_margin = tmp_map_box->GetSizeX() - 20 - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX();
     map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
     map_preview_height = 3/4 * map_preview_width;
   }
-  
+
   previews_box->SetMargin(margin);
   previews_box->AddWidget(bt_map_minus);
 
@@ -286,7 +286,7 @@ GameMenu::GameMenu() :
   //Box * bottom_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
   //top_game_options->SetMargin(25);
   //bottom_game_options->SetMargin(25);
-  
+
   game_options->SetMargin(50);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
@@ -372,15 +372,15 @@ GameMenu::~GameMenu()
 void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {
   if ( game_options->Clic(mousePosition, button)) {
-  
+
   } else if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition) ) {
     ChangeMap(-2);
   } else if (   (button == SDL_BUTTON_LEFT && bt_map_minus->Contains(mousePosition))
-	     || (button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition)) 
+	     || (button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition))
 	     || (button == SDL_BUTTON_WHEELUP && map_box->Contains(mousePosition))) {
     ChangeMap(-1);
-  } else if (   (button == SDL_BUTTON_LEFT && bt_map_plus->Contains(mousePosition)) 
-	     || (button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition)) 
+  } else if (   (button == SDL_BUTTON_LEFT && bt_map_plus->Contains(mousePosition))
+	     || (button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
 	     || (button == SDL_BUTTON_WHEELDOWN && map_box->Contains(mousePosition))) {
     ChangeMap(+1);
   } else if (map_preview_after2->Contains(mousePosition) ) {
@@ -416,7 +416,7 @@ void GameMenu::NextTeam(int i)
       teams_selections[i]->SetTeam(*(teams_list.FindByIndex(index)));
     else index = -1;
   }
-  
+
   if (index == -1)
     teams_selections[i]->SetTeam(*(teams_list.FindByIndex(0)));
 }
@@ -436,7 +436,7 @@ void GameMenu::SaveOptions()
 
   if (nb_teams >= 2) {
     std::list<uint> selection;
-    
+
     for (uint i=0; i < MAX_NB_TEAMS; i++) {
       if (teams_selections[i]->GetTeam() != NULL) {
 	int index = -1;
