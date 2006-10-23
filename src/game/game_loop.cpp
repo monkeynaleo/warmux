@@ -28,6 +28,7 @@
 #include "game.h"
 #include "game_mode.h"
 #include "time.h"
+#include "../ai/ai_engine.h"
 #include "../graphic/fps.h"
 #include "../graphic/video.h"
 #include "../include/action_handler.h"
@@ -289,6 +290,8 @@ void GameLoop::Refresh()
     {
       Mouse::GetInstance()->Refresh();
       Clavier::GetInstance()->Refresh();
+
+      AIengine::GetInstance()->Refresh();
     }
 
     do
