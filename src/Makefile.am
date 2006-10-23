@@ -81,6 +81,7 @@ wormux_SOURCES = \
 	menu/results_menu.cpp menu/results_menu.h \
 	game/time.cpp game/time.h \
 	gui/progress_bar.cpp gui/progress_bar.h \
+	gui/EnergyBar.cpp gui/EnergyBar.h \
 	gui/question.cpp gui/question.h \
 	interface/interface.cpp interface/interface.h \
 	interface/cursor.cpp interface/cursor.h \

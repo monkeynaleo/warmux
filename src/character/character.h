@@ -26,7 +26,7 @@
 #include <SDL.h>
 //#include "body.h"
 //#include "../team/team.h"
-#include "../gui/progress_bar.h"
+#include "../gui/EnergyBar.h"
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
 #include "../include/base.h"
@@ -46,15 +46,16 @@ private:
   bool prepare_shoot;
   bool back_jumping;
 
-  // energy
+  // energy Use accessor GetEnergy & SetEnergy to R/W
   uint energy;
+
   uint disease_damage_per_turn;
   uint disease_duration;
   int  damage_other_team;
   int  damage_own_team;
   int  max_damage;
   int  current_total_damage;
-  BarreProg energy_bar;
+  EnergyBar energy_bar;
   int crosshair_angle;
 
   // survived games
@@ -101,7 +102,8 @@ public:
   // Energy related
   void SetEnergyDelta (int delta, bool do_report=true);
   void SetEnergy(int new_energy);
-  uint GetEnergy() const;
+  inline const uint & GetEnergy() const { return energy;};
+
   bool GotInjured() const;
   void Die();
   bool IsActiveCharacter() const;

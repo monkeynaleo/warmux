@@ -82,4 +82,4 @@ class TeamEnergy
     void SetTeamName(const std::string& _team_name);
 };
 
-#endif 
+#endif

@@ -79,6 +79,9 @@ public:
   // Change les coordonnées, puis dessine la barre de progression
   void DrawXY(const Point2i &pos);
 
+  inline const long & GetMaxVal() const { return max; }
+  inline const long & GetVal() const { return val; }
+
   // Lit sa taille
   int GetWidth() const { return larg; }
   int GetHeight() const { return haut; }
