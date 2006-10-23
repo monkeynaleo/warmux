@@ -32,7 +32,6 @@
 
 class ClusterBombConfig;
 
-// Les fragments
 class Cluster : public WeaponProjectile
 {
 public:
@@ -45,18 +44,14 @@ protected:
   void DoExplosion();
 };
 
-// La ClusterBomb
 class ClusterBomb : public WeaponProjectile
 {
 public:
-  std::list<Cluster> tableau_cluster;
-  typedef std::list<Cluster>::iterator iterator;
-
   ClusterBomb(ClusterBombConfig& cfg,
               WeaponLauncher * p_launcher);
   void Refresh();
 protected:
-  void Explosion();
+  void DoExplosion();
   void SignalOutOfMap();
 };
 
