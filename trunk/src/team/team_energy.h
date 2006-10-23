@@ -23,7 +23,7 @@
 #define TEAM_ENERGY_H
 
 #include "../graphic/text.h"
-#include "../gui/progress_bar.h"
+#include "../gui/EnergyBar.h"
 #include "../object/physical_obj.h"
 
 typedef enum {
@@ -43,7 +43,7 @@ typedef enum {
 class TeamEnergy
 {
   private :
-    BarreProg barre_energie;
+    EnergyBar barre_energie;
     Text* bar_text;
     uint valeur; //Valeur affichée
     uint nv_valeur; //Vrai valeur

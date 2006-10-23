@@ -33,18 +33,6 @@ const uint ESPACEMENT = 3;
 const uchar ALPHA = 127;
 const uchar ALPHA_FOND = 0;
 
-const uchar R_INIT = 0; //Couleur R à 100%
-const uchar V_INIT = 255; //Couleur V à 100%
-const uchar B_INIT = 0; //Couleur B à 100%
-
-const uchar R_INTER = 255; //Couleur R à 50%
-const uchar V_INTER = 255; //Couleur V à 50%
-const uchar B_INTER = 0; //Couleur B à 50%
-
-const uchar R_FINAL = 255; //Couleur R à 0%
-const uchar V_FINAL = 0; //Couleur V à 0%
-const uchar B_FINAL = 0; //Couleur B à 0%
-
 const float DUREE_MVT = 750.0;
 
 TeamEnergy :: TeamEnergy(const std::string &_team_name)
@@ -56,7 +44,10 @@ TeamEnergy :: TeamEnergy(const std::string &_team_name)
   status = EnergyStatusOK;
   barre_energie.InitPos (0,0, BARRE_LARG, BARRE_HAUT);
 
-  barre_energie.SetValueColor( Color(R_INIT, V_INIT, B_INIT, ALPHA) );
+  barre_energie.SetInitColor( Color(R_INIT, G_INIT, B_INIT, ALPHA) );
+  barre_energie.SetInterColor( Color(R_INTER, G_INTER, B_INTER, ALPHA) );
+  barre_energie.SetFinalColor( Color(R_FINAL, G_FINAL, B_FINAL, ALPHA) );
+
   barre_energie.SetBorderColor( Color(255, 255, 255, ALPHA) );
   barre_energie.SetBackgroundColor( Color(255*6/10, 255*6/10, 255*6/10, ALPHA_FOND) );
 
@@ -118,26 +109,6 @@ void TeamEnergy :: Refresh ()
 void TeamEnergy :: Draw ()
 {
   barre_energie.Actu(valeur);
-
-  float r,v,b;
-
-  if( valeur < (valeur_max / 2) )
-  {
-    r = ( 2.0 * ((R_FINAL * ((valeur_max / 2) - valeur)) + (valeur * R_INTER))) / valeur_max;
-    v = ( 2.0 * ((V_FINAL * ((valeur_max / 2) - valeur)) + (valeur * V_INTER))) / valeur_max;
-    b = ( 2.0 * ((B_FINAL * ((valeur_max / 2) - valeur)) + (valeur * B_INTER))) / valeur_max;
-  }
-  else
-  {
-    r = ( 2.0 * ((R_INIT * (valeur - (valeur_max / 2))) + (R_INTER * (valeur_max - valeur)))) / valeur_max;
-    v = ( 2.0 * ((V_INIT * (valeur - (valeur_max / 2))) + (V_INTER * (valeur_max - valeur)))) / valeur_max;
-    b = ( 2.0 * ((B_INIT * (valeur - (valeur_max / 2))) + (B_INTER * (valeur_max - valeur)))) / valeur_max;
-  }
-
-  Color color( (unsigned char)r, (unsigned char)v, (unsigned char)b, ALPHA);
-
-  barre_energie.SetValueColor( color );
-
   int x,y;
   x = camera.GetSizeX() - (BARRE_LARG + 10) + dx;
   y = BARRE_HAUT +(classement * (BARRE_HAUT + ESPACEMENT)) +dy;
