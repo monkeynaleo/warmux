@@ -562,11 +562,11 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   xmlpp::Element *pos_elem = LitDocXml::AccesBalise (elem, "position");
   if (pos_elem != NULL) {
     // E.g. <position origin="hand" x="-1" y="0" />
-    std::string origin;
+    std::string origin_xml;
     LitDocXml::LitAttrInt (pos_elem, "x", position.x);
     LitDocXml::LitAttrInt (pos_elem, "y", position.y);
-    LitDocXml::LitAttrString (pos_elem, "origin", origin);
-    if (origin == "over")
+    LitDocXml::LitAttrString (pos_elem, "origin", origin_xml);
+    if (origin_xml == "over")
       origin = weapon_origin_OVER;
     else
       origin = weapon_origin_HAND;
