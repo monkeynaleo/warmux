@@ -188,10 +188,6 @@ void ApplyExplosion_server (const Point2i &pos,
   Action a_begin_sync(ACTION_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
 
-//  world.Dig(pos, config.explosion_range);
-  float range = config.explosion_range / PIXEL_PER_METER;
-  range *= 1.5;
-
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
     end=teams_list.playing_list.end();
@@ -207,11 +203,10 @@ void ApplyExplosion_server (const Point2i &pos,
     {
       Character &character = *tit;
 
-      double distance;
-      distance = MeterDistance (pos, character.GetCenter());
+      double distance = pos.Distance( character.GetCenter());
 
       // If the character is in the explosion range, apply damage on it !
-      if (distance <= range || distance < config.blast_range)
+      if (distance <= config.explosion_range || distance < config.blast_range)
       {
         // cliens : Place characters
         Action* a = BuildActionSendCharacterPhysics(team_no, char_no);
