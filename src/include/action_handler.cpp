@@ -183,8 +183,7 @@ Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
   c->GetSpeedXY(speed);
   a->Push(speed.x);
   a->Push(speed.y);
-//  printf("Sending physics of %s (%i, %i / %f, %f)\n",c->GetName().c_str(), c->GetX(), 
-c->GetY(), speed.x, speed.y);
+//  printf("Sending physics of %s (%i, %i / %f, %f)\n",c->GetName().c_str(), c->GetX(), c->GetY(), speed.x, speed.y);
   return a;
 }
 
