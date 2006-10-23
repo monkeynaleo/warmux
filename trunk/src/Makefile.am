@@ -7,6 +7,8 @@ localedir=@LOCALEDIR@
 fontfile=@FONTFILE@
 
 wormux_SOURCES = \
+	ai/ai_engine.cpp ai/ai_engine.h \
+	ai/ai_engine_stupid.cpp ai/ai_engine_stupid.h \
 	character/body.cpp character/body.h \
 	character/body_list.cpp character/body_list.h \
 	character/character.cpp character/character.h \
