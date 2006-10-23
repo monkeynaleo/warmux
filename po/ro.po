@@ -20,10 +20,6 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:64
-msgid " "
-msgstr ""
-
 #: src/team/results.cpp:214
 #, fuzzy
 msgid "  Most sold-out  :  "
@@ -71,7 +67,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/game/game_loop.cpp:689
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (echipa %s) a murit."
@@ -86,7 +82,7 @@ msgstr "%s <%s> cunoscut şi ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -96,12 +92,12 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game_loop.cpp:661
+#: src/game/game_loop.cpp:676
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:687
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
@@ -122,13 +118,13 @@ msgstr[0] "%s a câştigat %u punct de energie!"
 msgstr[1] "%s a câştigat %u puncte de energie!"
 msgstr[2] "%s a câştigat %u de puncte de energie!"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:698
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "Psihopatia sălăşluieşte în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -264,7 +260,7 @@ msgstr "Bâtă de basebal"
 msgid "Bazooka"
 msgstr "Proiectil reactiv"
 
-#: src/weapon/blowtorch.cpp:15
+#: src/weapon/blowtorch.cpp:36
 msgid "Blowtorch"
 msgstr ""
 
@@ -431,7 +427,7 @@ msgstr "Grenadă"
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:725
+#: src/game/game_loop.cpp:740
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -797,7 +793,7 @@ msgstr "Arma:"
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -815,7 +811,7 @@ msgstr "Se lansează Wormux..."
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
-#: src/include/action_handler.cpp:383
+#: src/include/action_handler.cpp:406
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""

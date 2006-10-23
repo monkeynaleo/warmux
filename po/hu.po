@@ -18,10 +18,6 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:64
-msgid " "
-msgstr ""
-
 #: src/team/results.cpp:214
 msgid "  Most sold-out  :  "
 msgstr ""
@@ -65,7 +61,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Nem található %s térkép :-("
 
-#: src/game/game_loop.cpp:689
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -80,7 +76,7 @@ msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> %s csapatától"
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
@@ -90,12 +86,12 @@ msgstr "%s öngyilkos lett!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:661
+#: src/game/game_loop.cpp:676
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:687
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
@@ -114,12 +110,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiaszintje %u egységgel nőtt!"
 msgstr[1] "%s energiaszintje %u egységgel nőtt!"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:698
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
 
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kicsit ügyefogyott volt, így hát távozott az élő sorából!"
@@ -246,7 +242,7 @@ msgstr "Baseball"
 msgid "Bazooka"
 msgstr "Rakétavető"
 
-#: src/weapon/blowtorch.cpp:15
+#: src/weapon/blowtorch.cpp:36
 msgid "Blowtorch"
 msgstr ""
 
@@ -416,7 +412,7 @@ msgstr "Gránát"
 msgid "Host a game"
 msgstr "Vége!"
 
-#: src/game/game_loop.cpp:725
+#: src/game/game_loop.cpp:740
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -781,7 +777,7 @@ msgstr "Fegyver"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"
@@ -798,7 +794,7 @@ msgstr "Töltődik a Wormux..."
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
-#: src/include/action_handler.cpp:383
+#: src/include/action_handler.cpp:406
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""

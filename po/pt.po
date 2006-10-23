@@ -22,10 +22,6 @@ msgstr ""
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/menu/game_menu.cpp:64
-msgid " "
-msgstr ""
-
 #: src/team/results.cpp:214
 msgid "  Most sold-out  :  "
 msgstr ""
@@ -69,7 +65,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
 
-#: src/game/game_loop.cpp:689
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (equipa %s) morreu."
@@ -84,7 +80,7 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suicidou se !"
@@ -94,12 +90,12 @@ msgstr "%s suicidou se !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:661
+#: src/game/game_loop.cpp:676
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s caiu na água."
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:687
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s saiu do mapa!"
@@ -118,12 +114,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s ganhou %u ponto de vida !"
 msgstr[1] "%s ganhou %u pontos de vida !"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:698
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s é um psicopata, matou um membro da equipa %s !"
 
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s morreu por causa da sua trapalhice."
@@ -250,7 +246,7 @@ msgstr "Baseball"
 msgid "Bazooka"
 msgstr "Bazooka"
 
-#: src/weapon/blowtorch.cpp:15
+#: src/weapon/blowtorch.cpp:36
 msgid "Blowtorch"
 msgstr ""
 
@@ -417,7 +413,7 @@ msgstr "Granada"
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:725
+#: src/game/game_loop.cpp:740
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -773,7 +769,7 @@ msgstr "Armas:"
 msgid "Website: "
 msgstr "Página Internet: "
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Que vergonha para o %s : foi morto por uma simples pistola!"
@@ -791,7 +787,7 @@ msgstr "A iniciar wormux..."
 msgid "Wormux version "
 msgstr "Wormux versão "
 
-#: src/include/action_handler.cpp:383
+#: src/include/action_handler.cpp:406
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
