@@ -12,7 +12,7 @@ dnl ========================================================================
 dnl = Require at least automake 2.52
 AC_PREREQ(2.52)
 
-AC_INIT([Wormux], [0.8beta1], [wormux-dev@gna.org], [wormux])
+AC_INIT([Wormux], [0.8alpha1], [wormux-dev@gna.org], [wormux])
 AC_CONFIG_SRCDIR([src/main.cpp])
 
 dnl Detect the canonical host and target build environment
@@ -279,7 +279,6 @@ AC_CONFIG_FILES([Makefile
 		 src/Makefile
 		 doc/Makefile
 		 po/Makefile
-		 tools/map-generator/Makefile
 		 ], [AM_POSTPROCESS_PO_MAKEFILE])
 
 AM_CONFIG_HEADER(src/config.h)
