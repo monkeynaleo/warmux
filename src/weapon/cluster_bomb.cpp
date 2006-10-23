@@ -73,21 +73,11 @@ ClusterBomb::ClusterBomb(ClusterBombConfig& cfg,
 {
   m_rebound_sound = "weapon/grenade_bounce";
   explode_with_collision = false;
-
-  tableau_cluster.clear();
-  const uint nb = cfg.nb_fragments;
-
-  for (uint i=0; i<nb; ++i)
-  {
-    Cluster cluster(cfg, launcher);
-    tableau_cluster.push_back( cluster );
-  }
 }
 
 void ClusterBomb::Refresh()
 {
   WeaponProjectile::Refresh();
-  
   double angle = GetSpeedAngle() * 180/M_PI ;
   image->SetRotation_deg( angle);
 }
@@ -98,27 +88,19 @@ void ClusterBomb::SignalOutOfMap()
   WeaponProjectile::SignalOutOfMap();
 }
 
-void ClusterBomb::Explosion()
+void ClusterBomb::DoExplosion()
 {
-  if (IsGhost())
-  {
-    WeaponProjectile::Explosion();
-    return;
-  }
-
-  iterator it=tableau_cluster.begin(), end=tableau_cluster.end();
-  for (; it != end; ++it)
-  {
-    Cluster &cluster = *it;
-
+  const uint nb = static_cast<ClusterBombConfig &>(cfg).nb_fragments;
+  Cluster * cluster;
+  for (uint i=0; i<nb; ++i) {
     double angle = randomSync.GetDouble(2.0 * M_PI);
     int x = GetX()+(int)(cos(angle) * (double)cfg.blast_range * 0.9);
     int y = GetY()+(int)(sin(angle) * (double)cfg.blast_range * 0.9);
-
-    cluster.Shoot(x,y);
-    lst_objects.AddObject((PhysicalObj*)&cluster);
+    cluster = new Cluster(static_cast<ClusterBombConfig &>(cfg), launcher);
+    cluster->Shoot(x,y);
+    lst_objects.AddObject(cluster);
   }
-  WeaponProjectile::Explosion();
+  WeaponProjectile::DoExplosion();
 }
 
 //-----------------------------------------------------------------------------
@@ -137,8 +119,10 @@ WeaponProjectile * ClusterLauncher::GetProjectileInstance()
       (new ClusterBomb(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
-ClusterBombConfig& ClusterLauncher::cfg() 
-{ return static_cast<ClusterBombConfig&>(*extra_params); }
+ClusterBombConfig& ClusterLauncher::cfg()
+{
+  return static_cast<ClusterBombConfig&>(*extra_params);
+}
 
 //-----------------------------------------------------------------------------
 
