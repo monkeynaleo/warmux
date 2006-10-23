@@ -26,8 +26,8 @@
 const double EPS_ZERO = 0.05;
 
 // Conversion degré en radian
-double Deg2Rad (int degre){ 
-  return ((double)degre)*M_PI/180; 
+double Deg2Rad (int degre){
+  return ((double)degre)*M_PI/180;
 }
 
 // Modèle pour borner une valeur entre min et max
@@ -45,7 +45,7 @@ long BorneLong (const long &valeur, const long &min, const long &max){
 	return BorneTpl (valeur, min, max);
 }
 
-double BorneDouble (const double &valeur, const double &min, const double &max){ 
+double BorneDouble (const double &valeur, const double &min, const double &max){
 	return BorneTpl (valeur, min, max);
 }
 

@@ -120,6 +120,7 @@ void TeamEnergy :: Draw ()
   barre_energie.Actu(valeur);
 
   float r,v,b;
+
   if( valeur < (valeur_max / 2) )
   {
     r = ( 2.0 * ((R_FINAL * ((valeur_max / 2) - valeur)) + (valeur * R_INTER))) / valeur_max;

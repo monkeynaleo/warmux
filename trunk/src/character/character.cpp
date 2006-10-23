@@ -251,24 +251,9 @@ void Character::SetEnergyDelta (int delta, bool do_report)
     ActiveCharacter().MadeDamage(-delta, *this);
 
   uint sauve_energie = energy;
-  Color color;
 
-  // Change energy
-  energy = BorneLong((int)energy +delta, 0, GameMode::GetInstance()->character.max_energy);
-  energy_bar.Actu (energy);
-
-  // Energy bar color
-  if (70 < energy)
-	  color.SetColor(0, 255, 0, 255);
-  else if (50 < energy)
-	  color.SetColor(255, 255, 0, 255);
-  else if (20 < energy)
-	  color.SetColor(255, 128, 0, 255);
-  else
-	  color.SetColor(255, 0, 0, 255);
-
-  energy_bar.SetValueColor( color );
-
+  // Update energy
+  SetEnergy(GetEnergy() + delta);
 
   // Compute energy lost
   if (delta < 0)
@@ -289,10 +274,10 @@ void Character::SetEnergyDelta (int delta, bool do_report)
 
   // "Friendly fire !!"
   if ( (&ActiveCharacter() != this) && ActiveTeam().IsSameAs(m_team) )
-  jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
+    jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
 
   // Dead character ?
-  if (energy == 0) Die();
+  if (energy <= 0) Die();
 }
 
 void Character::SetEnergy(int new_energy)
@@ -314,19 +299,6 @@ void Character::SetEnergy(int new_energy)
   // Change energy
   energy = BorneLong((int)new_energy, 0, GameMode::GetInstance()->character.max_energy);
   energy_bar.Actu (energy);
-
-  // Energy bar color
-  Color color;
-  if (70 < energy)
-	  color.SetColor(0, 255, 0, 255);
-  else if (50 < energy)
-	  color.SetColor(255, 255, 0, 255);
-  else if (20 < energy)
-	  color.SetColor(255, 128, 0, 255);
-  else
-	  color.SetColor(255, 0, 0, 255);
-
-  energy_bar.SetValueColor( color );
 }
 
 bool Character::GotInjured() const
@@ -854,12 +826,6 @@ void Character::StartPlaying()
   SetWeaponClothe();
   SetRebounding(false);
   ActiveTeam().crosshair.ChangeAngleVal(crosshair_angle);
-}
-
-uint Character::GetEnergy() const
-{
-//  assert (!IsDead());
-  return energy;
 }
 
 bool Character::IsActiveCharacter() const
