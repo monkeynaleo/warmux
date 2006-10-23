@@ -22,7 +22,7 @@
 #include "fire.h"
 #include "particle.h"
 #include "../game/time.h"
-#include "../network/randomsync.h"
+#include "../tool/random.h"
 #include "../weapon/explosion.h"
 #include "../map/camera.h"
 
@@ -42,8 +42,10 @@ FireParticle::FireParticle() :
   fire_cfg.blast_range = 0;
   fire_cfg.blast_force = 0;
   fire_cfg.particle_range = 6;
-  direction = randomSync.GetBool() ? -1 : 1;
-  oscil_delta = randomSync.GetLong(0, dig_ground_time);
+//  direction = randomSync.GetBool() ? -1 : 1;
+//  oscil_delta = randomSync.GetLong(0, dig_ground_time);
+  direction = randomObj.GetBool() ? -1 : 1;
+  oscil_delta = randomObj.GetLong(0, dig_ground_time);
   on_ground = false;
   image = ParticleEngine::GetSprite(FIRE_spr);
   image->SetRotation_HotSpot(Point2i(image->GetWidth()/2,image->GetHeight()));
