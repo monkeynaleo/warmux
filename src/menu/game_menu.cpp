@@ -408,17 +408,37 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
 
 void GameMenu::NextTeam(int i)
 {
-  int index = -1;
-  teams_list.FindById(teams_selections[i]->GetTeam()->GetId(), index);
-  if (index > -1) {
-    index++;
-    if (index < int(teams_list.full_list.size()))
-      teams_selections[i]->SetTeam(*(teams_list.FindByIndex(index)));
-    else index = -1;
-  }
+  bool to_continue;
+  Team* tmp;
+  int previous_index = -1, index;
+  teams_list.FindById(teams_selections[i]->GetTeam()->GetId(), previous_index);
 
-  if (index == -1)
-    teams_selections[i]->SetTeam(*(teams_list.FindByIndex(0)));
+  index = previous_index+1;
+
+  do 
+    {
+      to_continue = false;
+
+      // select the first team if we are outside list
+      if ( index >= int(teams_list.full_list.size()) )
+	index = 0;
+
+      // Get the team at current index
+      tmp = teams_list.FindByIndex(index);
+      
+      // Check if that team is already selected
+      for (int j = 0; j < teams_nb->GetValue(); j++) {
+	if (j!= i && tmp == teams_selections[j]->GetTeam()) {
+	  index++;
+	  to_continue = true;
+	  break;
+	}
+      }
+      
+      // We have found a team which is not selected
+      if (tmp != NULL && !to_continue)
+	teams_selections[i]->SetTeam(*tmp);
+    } while ( index != previous_index && to_continue);
 }
 
 void GameMenu::SaveOptions()
