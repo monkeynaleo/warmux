@@ -21,49 +21,12 @@ msgstr ""
 msgid " "
 msgstr " "
 
-#: src/team/results.cpp:214
-#, fuzzy
-msgid "  Most sold-out  :  "
-msgstr "  Am verräterischsten  :  "
-
-#: src/team/results.cpp:212
-msgid "  Most useful   :  "
-msgstr "  Am nützlichsten   :  "
-
-#: src/team/results.cpp:213
-msgid "  Most useless  :  "
-msgstr "  Am nutzlosesten  :  "
-
-#: src/team/results.cpp:211
-msgid "  Most violent  :  "
-msgstr "  Am gewalttätigsten  :  "
-
-#: src/network/distant_cpu.cpp:68
-msgid " has joined the party"
-msgstr " hat das Spiel betreten"
-
-#: src/network/distant_cpu.cpp:75
-msgid " has left the party"
-msgstr " hat das Spiel verlassen"
-
-#: src/menu/network_menu.cpp:293
-msgid " players are not yet ready!"
-msgstr " Spieler sind noch nicht verbunden!"
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:379
-msgid " players connected"
-msgstr " Spieler verbunden"
-
-#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:384
-msgid " players ready"
-msgstr " Spieler bereit"
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
 
-#: src/game/game_loop.cpp:689
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (Mannschaft %s) ist gestorben."
@@ -78,7 +41,7 @@ msgstr "%s <%s> aka %s aus %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> aus %s"
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begeht Selbstmord!"
@@ -88,12 +51,12 @@ msgstr "%s begeht Selbstmord!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:661
+#: src/game/game_loop.cpp:676
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ist ins Wasser gefallen."
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:687
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ist von der Karte gefallen!"
@@ -112,12 +75,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:698
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied von Mannschaft %s getötet!"
 
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s stirbt durch seine Tollpatschigkeit!"
@@ -126,11 +89,6 @@ msgstr "%s stirbt durch seine Tollpatschigkeit!"
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s ist neben einer Mine!"
-
-#: src/weapon/skip_turn.cpp:46
-#, c-format
-msgid "%s team has skipped its turn."
-msgstr "Team %s hat seine Runde übersprungen."
 
 #: src/object/bonus_box.cpp:212
 #, c-format
@@ -207,22 +165,6 @@ msgstr "(unbegrenzt)"
 msgid "Air Attack"
 msgstr "Luftangriff"
 
-#: src/weapon/airhammer.cpp:46
-msgid "Airhammer"
-msgstr "Presslufthammer"
-
-#: src/team/results.cpp:143
-msgid "All teams"
-msgstr "Alle Mannschaften"
-
-#: src/team/results.cpp:210
-msgid "All teams results:\n"
-msgstr "Alle Mannschaftsergebnisse:\n"
-
-#: src/weapon/anvil.cpp:72
-msgid "Anvil"
-msgstr "Amboss"
-
 #: src/main.cpp:199
 msgid "Authors:"
 msgstr "Autoren:"
@@ -239,17 +181,9 @@ msgstr "Baseballschläger"
 msgid "Bazooka"
 msgstr "Panzerfaust"
 
-#: src/weapon/blowtorch.cpp:15
+#: src/weapon/blowtorch.cpp:36
 msgid "Blowtorch"
 msgstr "Schneidbrenner"
-
-#: src/weapon/bounce_ball.cpp:72
-msgid "Bounce Ball"
-msgstr "Springball"
-
-#: src/weapon/supertux.cpp:103
-msgid "Bye bye tux..."
-msgstr "Und tschüss Tux..."
 
 #: src/main.cpp:111
 msgid "C++ exception caught:"
@@ -272,19 +206,6 @@ msgstr "Splittergranate"
 #: src/weapon/suicide.cpp:35
 msgid "Commit Suicide"
 msgstr "Selbstmord begehen"
-
-#: src/menu/network_connection_menu.cpp:67
-msgid "Connect to game"
-msgstr "Zum Spiel verbinden"
-
-#: src/menu/network_connection_menu.cpp:114
-msgid "Connected to "
-msgstr "Verbunden zu "
-
-#: src/weapon/construct.cpp:43
-#, fuzzy
-msgid "Construct"
-msgstr "Konstruktion"
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
@@ -323,7 +244,8 @@ msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
 
 #: src/game/config.cpp:251
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
@@ -352,10 +274,6 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fehler: kann den Körper \"%s\" für Mannschaft \"%s\" nicht finden."
 
-#: src/network/network.cpp:65
-msgid "Failed to initialize network library!"
-msgstr "Kann Netzwerk-Bibliothek nicht initialisieren!"
-
 #: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
 msgstr "Zufällige Platzierung der Figuren"
@@ -363,14 +281,6 @@ msgstr "Zufällige Platzierung der Figuren"
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Vollbild?"
-
-#: src/menu/network_menu.cpp:61
-msgid "Game options:"
-msgstr "Spiel Einstellungen:"
-
-#: src/weapon/gnu.cpp:120
-msgid "Gnu Launcher"
-msgstr "Gnu-Werfer"
 
 #: src/weapon/grenade.cpp:69
 msgid "Grenade"
@@ -386,21 +296,14 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr ""
+"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #: src/menu/game_menu.cpp:70
 msgid "Head commander"
 msgstr "Hauptkommandant"
 
-#: src/weapon/holly_grenade.cpp:105
-msgid "Holy Grenade"
-msgstr "Heilige Granate"
-
-#: src/menu/network_connection_menu.cpp:74
-msgid "Host a game"
-msgstr "Spiel hosten"
-
-#: src/game/game_loop.cpp:725
+#: src/game/game_loop.cpp:740
 msgid "Hurry up, you are too slow !!"
 msgstr "Beeile dich, du bist zu langsam !!"
 
@@ -437,25 +340,9 @@ msgstr "Initialisiere Objekte"
 msgid "Initialise teams"
 msgstr "Initialisiere Mannschaft"
 
-#: src/network/network.cpp:171
-msgid "Invalid port!"
-msgstr "Ungültiger Port!"
-
-#: src/network/network.cpp:121
-msgid "Invalid server adress!"
-msgstr "Ungültige Serveradresse!"
-
 #: src/object/bonus_box.cpp:281
 msgid "Is it a gift?"
 msgstr "Ist es ein Geschenk?"
-
-#: src/weapon/jetpack.cpp:48
-msgid "Jetpack"
-msgstr "Düsenrucksack"
-
-#: src/menu/network_menu.cpp:72
-msgid "Join #wormux on irc.freenode.net to find"
-msgstr "Komm nach #wormux auf irc.freenode.net"
 
 #: src/map/maps_list.cpp:185
 msgid "Load maps:"
@@ -464,10 +351,6 @@ msgstr "Lade Karten:"
 #: src/team/teams_list.cpp:106
 msgid "Load teams:"
 msgstr "Lade Mannschaft:"
-
-#: src/weapon/lowgrav.cpp:41
-msgid "LowGrav"
-msgstr "Geringe Schwerkraft"
 
 #: src/map/map.cpp:328
 #, fuzzy, c-format
@@ -478,10 +361,6 @@ msgstr "Karte %s, eine Kreation von: "
 msgid "Maps"
 msgstr "Karten"
 
-#: src/menu/network_menu.cpp:59
-msgid "Max number of players:"
-msgstr "Maximale Anzahl an Spielern:"
-
 #: src/menu/options_menu.cpp:77
 msgid "Maximum FPS"
 msgstr "Maximale FPS"
@@ -489,23 +368,6 @@ msgstr "Maximale FPS"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mine"
-
-#: src/menu/results_menu.cpp:169
-#, fuzzy
-msgid "Most sold-out"
-msgstr "Am verräterischsten"
-
-#: src/menu/results_menu.cpp:159
-msgid "Most useful"
-msgstr "Am nützlichsten"
-
-#: src/menu/results_menu.cpp:164
-msgid "Most useless"
-msgstr "Am nutzlosesten"
-
-#: src/menu/results_menu.cpp:154
-msgid "Most violent"
-msgstr "Am gewalttätigsten"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -519,21 +381,10 @@ msgstr "Name:"
 msgid "Network Game"
 msgstr "Netzwerkspiel"
 
-#: src/weapon/ninja_rope.cpp:83
-msgid "Ninjarope"
-msgstr "Ninjaseil"
-
 #: src/weapon/weapon.cpp:556
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
-
-#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
-#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
-#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
-#: src/team/results.cpp:205
-msgid "Nobody!"
-msgstr "Niemand!"
 
 #: src/menu/game_menu.cpp:76
 msgid "Number of characters"
@@ -543,21 +394,9 @@ msgstr "Anzahl der Figuren"
 msgid "Number of teams:"
 msgstr "Anzahl der Mannschaften"
 
-#: src/menu/network_menu.cpp:186
-msgid "Only the server can set the map!"
-msgstr "Nur der Server kann die Karte setzen!"
-
 #: src/menu/main_menu.cpp:107
 msgid "Options"
 msgstr "Einstellungen"
-
-#: src/weapon/parachute.cpp:35
-msgid "Parachute"
-msgstr "Fallschirm"
-
-#: src/weapon/parachute.cpp:58
-msgid "Parachute is activated automatically."
-msgstr "Fallschirm wird automatisch aktiviert."
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
@@ -575,10 +414,6 @@ msgstr "Spielerenergie?"
 msgid "Player's name?"
 msgstr "Spielername?"
 
-#: src/weapon/polecat.cpp:136
-msgid "Polecat Launcher"
-msgstr "Stinktier-Werfer"
-
 #: src/menu/main_menu.cpp:119
 msgid "Quit"
 msgstr "Verlassen"
@@ -591,45 +426,9 @@ msgstr "Wormux verlassen"
 msgid "Resolution"
 msgstr "Auflösung"
 
-#: src/weapon/riot_bomb.cpp:66
-msgid "Riot Bomb"
-msgstr "Lärmbombe"
-
 #: src/main.cpp:229
 msgid "Run game"
 msgstr "Spiel starten"
-
-#: src/menu/network_menu.cpp:88
-msgid "Select the teams:"
-msgstr "Wähle die Mannschaften aus:"
-
-#: src/menu/network_menu.cpp:131
-msgid "Select the world:"
-msgstr "Wähle die Welt aus:"
-
-#: src/menu/network_connection_menu.cpp:60
-msgid "Server adress:"
-msgstr "Server Adresse:"
-
-#: src/menu/network_connection_menu.cpp:129
-msgid "Server started"
-msgstr "Server gestartet"
-
-#: src/weapon/shotgun.cpp:62
-msgid "Shotgun"
-msgstr "Schrotflinte"
-
-#: src/weapon/skip_turn.cpp:37
-msgid "Skip turn"
-msgstr "Runde überspringen"
-
-#: src/weapon/snipe_rifle.cpp:55
-msgid "Sniper Rifle"
-msgstr "Scharfschützengewehr"
-
-#: src/menu/network_menu.cpp:75
-msgid "So you have to restart Wormux after each"
-msgstr "Deshalb musst du Wormux nach jedem"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -651,23 +450,6 @@ msgstr "Starte ein neues Spiel"
 msgid "Stock:"
 msgstr "Vorrat:"
 
-#: src/weapon/submachine_gun.cpp:63
-msgid "Submachine Gun"
-msgstr "Maschinenpistole"
-
-#: src/weapon/supertux.cpp:125
-msgid "SuperTux"
-msgstr "SuperTux"
-
-#: src/weapon/syringe.cpp:31
-msgid "Syringe"
-msgstr "Spritze"
-
-#: src/team/results.cpp:208
-#, c-format
-msgid "Team %s results:\n"
-msgstr "Ergebnisse Team %s:\n"
-
 #: src/game/game_loop.cpp:207
 msgid "Teams"
 msgstr "Manschaften"
@@ -687,37 +469,18 @@ msgid "The automatic rocket has left the battlefield..."
 msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
-#: src/weapon/riot_bomb.cpp:52
 msgid "The rocket has left the battlefield..."
 msgstr "Die Rakete hat das Schlachtfeld verlassen..."
-
-#: src/menu/network_connection_menu.cpp:119
-#, fuzzy
-msgid "Unable to connect"
-msgstr "Kann nicht verbinden"
-
-#: src/network/network.cpp:132
-msgid "Unable to contact server!"
-msgstr "Kann Server nicht kontaktieren!"
 
 #: src/graphic/video.cpp:193
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Kann SDL Bibliothek nicht initialisieren: %s"
 
-#: src/network/network.cpp:215
-#, fuzzy
-msgid "Unable to listen for client!"
-msgstr "Kann Server nicht starten!"
-
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
-
-#: src/menu/network_connection_menu.cpp:132
-msgid "Unable to start server"
-msgstr "Kann Server nicht starten"
 
 #: src/main.cpp:118
 msgid "Unexpected exception caught..."
@@ -726,14 +489,6 @@ msgstr "Unerwarteter Ausnahmefehler aufgetreten..."
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Version"
-
-#: src/menu/network_menu.cpp:74
-msgid "WARNING! Disconnections are not yet handled."
-msgstr "WARNUNG! Verbindungstrennungen werden noch nicht behandelt."
-
-#: src/menu/network_menu.cpp:293
-msgid "Wait! "
-msgstr "Warte! "
 
 #: src/interface/interface.cpp:98
 msgid "Weapon:"
@@ -747,7 +502,7 @@ msgstr "Waffen"
 msgid "Website: "
 msgstr "Webseite: "
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
@@ -763,11 +518,6 @@ msgstr "Wormux startet..."
 #: src/main.cpp:198
 msgid "Wormux version "
 msgstr "Wormux Version "
-
-#: src/include/action_handler.cpp:383
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
 
 #: src/map/maps_list.cpp:71
 #, c-format
@@ -792,15 +542,197 @@ msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 
-#: src/menu/network_menu.cpp:76
-msgid "disconnection!"
-msgstr "Verbindungsabbau beenden!"
-
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "fertig"
 
-#: src/menu/network_menu.cpp:73
-msgid "some opponents."
-msgstr "um Gegner zu finden."
+#, fuzzy
+#~ msgid "  Most sold-out  :  "
+#~ msgstr "  Am verräterischsten  :  "
 
+#~ msgid "  Most useful   :  "
+#~ msgstr "  Am nützlichsten   :  "
+
+#~ msgid "  Most useless  :  "
+#~ msgstr "  Am nutzlosesten  :  "
+
+#~ msgid "  Most violent  :  "
+#~ msgstr "  Am gewalttätigsten  :  "
+
+#~ msgid " has joined the party"
+#~ msgstr " hat das Spiel betreten"
+
+#~ msgid " has left the party"
+#~ msgstr " hat das Spiel verlassen"
+
+#~ msgid " players are not yet ready!"
+#~ msgstr " Spieler sind noch nicht verbunden!"
+
+#~ msgid " players connected"
+#~ msgstr " Spieler verbunden"
+
+#~ msgid " players ready"
+#~ msgstr " Spieler bereit"
+
+#~ msgid "%s team has skipped its turn."
+#~ msgstr "Team %s hat seine Runde übersprungen."
+
+#~ msgid "Airhammer"
+#~ msgstr "Presslufthammer"
+
+#~ msgid "All teams"
+#~ msgstr "Alle Mannschaften"
+
+#~ msgid "All teams results:\n"
+#~ msgstr "Alle Mannschaftsergebnisse:\n"
+
+#~ msgid "Anvil"
+#~ msgstr "Amboss"
+
+#~ msgid "Bounce Ball"
+#~ msgstr "Springball"
+
+#~ msgid "Bye bye tux..."
+#~ msgstr "Und tschüss Tux..."
+
+#~ msgid "Connect to game"
+#~ msgstr "Zum Spiel verbinden"
+
+#~ msgid "Connected to "
+#~ msgstr "Verbunden zu "
+
+#, fuzzy
+#~ msgid "Construct"
+#~ msgstr "Konstruktion"
+
+#~ msgid "Failed to initialize network library!"
+#~ msgstr "Kann Netzwerk-Bibliothek nicht initialisieren!"
+
+#~ msgid "Game options:"
+#~ msgstr "Spiel Einstellungen:"
+
+#~ msgid "Gnu Launcher"
+#~ msgstr "Gnu-Werfer"
+
+#~ msgid "Holy Grenade"
+#~ msgstr "Heilige Granate"
+
+#~ msgid "Host a game"
+#~ msgstr "Spiel hosten"
+
+#~ msgid "Invalid port!"
+#~ msgstr "Ungültiger Port!"
+
+#~ msgid "Invalid server adress!"
+#~ msgstr "Ungültige Serveradresse!"
+
+#~ msgid "Jetpack"
+#~ msgstr "Düsenrucksack"
+
+#~ msgid "Join #wormux on irc.freenode.net to find"
+#~ msgstr "Komm nach #wormux auf irc.freenode.net"
+
+#~ msgid "LowGrav"
+#~ msgstr "Geringe Schwerkraft"
+
+#~ msgid "Max number of players:"
+#~ msgstr "Maximale Anzahl an Spielern:"
+
+#, fuzzy
+#~ msgid "Most sold-out"
+#~ msgstr "Am verräterischsten"
+
+#~ msgid "Most useful"
+#~ msgstr "Am nützlichsten"
+
+#~ msgid "Most useless"
+#~ msgstr "Am nutzlosesten"
+
+#~ msgid "Most violent"
+#~ msgstr "Am gewalttätigsten"
+
+#~ msgid "Ninjarope"
+#~ msgstr "Ninjaseil"
+
+#~ msgid "Nobody!"
+#~ msgstr "Niemand!"
+
+#~ msgid "Only the server can set the map!"
+#~ msgstr "Nur der Server kann die Karte setzen!"
+
+#~ msgid "Parachute"
+#~ msgstr "Fallschirm"
+
+#~ msgid "Parachute is activated automatically."
+#~ msgstr "Fallschirm wird automatisch aktiviert."
+
+#~ msgid "Polecat Launcher"
+#~ msgstr "Stinktier-Werfer"
+
+#~ msgid "Riot Bomb"
+#~ msgstr "Lärmbombe"
+
+#~ msgid "Select the teams:"
+#~ msgstr "Wähle die Mannschaften aus:"
+
+#~ msgid "Select the world:"
+#~ msgstr "Wähle die Welt aus:"
+
+#~ msgid "Server adress:"
+#~ msgstr "Server Adresse:"
+
+#~ msgid "Server started"
+#~ msgstr "Server gestartet"
+
+#~ msgid "Shotgun"
+#~ msgstr "Schrotflinte"
+
+#~ msgid "Skip turn"
+#~ msgstr "Runde überspringen"
+
+#~ msgid "Sniper Rifle"
+#~ msgstr "Scharfschützengewehr"
+
+#~ msgid "So you have to restart Wormux after each"
+#~ msgstr "Deshalb musst du Wormux nach jedem"
+
+#~ msgid "Submachine Gun"
+#~ msgstr "Maschinenpistole"
+
+#~ msgid "SuperTux"
+#~ msgstr "SuperTux"
+
+#~ msgid "Syringe"
+#~ msgstr "Spritze"
+
+#~ msgid "Team %s results:\n"
+#~ msgstr "Ergebnisse Team %s:\n"
+
+#, fuzzy
+#~ msgid "Unable to connect"
+#~ msgstr "Kann nicht verbinden"
+
+#~ msgid "Unable to contact server!"
+#~ msgstr "Kann Server nicht kontaktieren!"
+
+#, fuzzy
+#~ msgid "Unable to listen for client!"
+#~ msgstr "Kann Server nicht starten!"
+
+#~ msgid "Unable to start server"
+#~ msgstr "Kann Server nicht starten"
+
+#~ msgid "WARNING! Disconnections are not yet handled."
+#~ msgstr "WARNUNG! Verbindungstrennungen werden noch nicht behandelt."
+
+#~ msgid "Wait! "
+#~ msgstr "Warte! "
+
+#~ msgid "Wormux versions are differents : client=%s, server=%s."
+#~ msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
+
+#~ msgid "disconnection!"
+#~ msgstr "Verbindungsabbau beenden!"
+
+#~ msgid "some opponents."
+#~ msgstr "um Gegner zu finden."
