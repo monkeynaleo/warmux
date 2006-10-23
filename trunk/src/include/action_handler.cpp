@@ -177,31 +177,38 @@ Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
   Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   a->Push(team_no);
   a->Push(char_no);
-  a->Push(c->GetPhysX());
-  a->Push(c->GetPhysY());
+  a->Push(c->GetX());
+  a->Push(c->GetY());
   Point2d speed;
   c->GetSpeedXY(speed);
   a->Push(speed.x);
   a->Push(speed.y);
+//  printf("Sending physics of %s (%i, %i / %f, %f)\n",c->GetName().c_str(), c->GetX(), 
+c->GetY(), speed.x, speed.y);
   return a;
 }
 
 void Action_SetCharacterPhysics (Action *a)
 {
   int team_no, char_no;
-  double x, y, s_x, s_y;
+  double s_x, s_y;
+  int x, y;
 
   team_no = a->PopInt();
   char_no = a->PopInt();
   Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   assert(c != NULL);
 
-  x = a->PopDouble();
-  y = a->PopDouble();
+  x = a->PopInt();
+  y = a->PopInt();
   s_x = a->PopDouble();
   s_y = a->PopDouble();
-  c->SetPhysXY(x, y);
+  c->SetXY(Point2i(x, y));
   c->SetSpeedXY(Point2d(s_x, s_y));
+
+  Point2d speed;
+  c->GetSpeedXY(speed);
+  printf("Setting physics of %s (%i, %i / %f, %f)\n",c->GetName().c_str(), c->GetX(), c->GetY(), speed.x, speed.y);
 }
 
 void Action_SetCharacterEnergy(Action *a)
