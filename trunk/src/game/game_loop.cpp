@@ -745,10 +745,11 @@ void GameLoop::ApplyDeathMode ()
     {
       // If the character energy is lower than damage
       // per turn we reduce the character's health to 1
-      if (character->GetEnergy() > GameMode::GetInstance()->damage_per_turn_during_death_mode)
+      if (static_cast<uint>(character->GetEnergy()) >
+          GameMode::GetInstance()->damage_per_turn_during_death_mode)
         character->SetEnergyDelta(-GameMode::GetInstance()->damage_per_turn_during_death_mode);
       else
-        character->SetEnergyDelta(-character->GetEnergy() + 1);
+        character->SetEnergy(1);
     }
   }
 }

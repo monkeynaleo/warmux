@@ -51,8 +51,8 @@ GameMode::GameMode()
   damage_per_fall_unit = 7;
   duration_move_player = 3;
   allow_character_selection = BEFORE_FIRST_ACTION_AND_END_TURN;
-  character.init_energy = 100;
-  character.max_energy = 200;
+  character.init_energy = 100; /* overvriten whenreading XML */
+  character.max_energy = 100; /* overvriten whenreading XML */
   character.mass = 100;
   character.air_resist_factor = 1.0;
   character.jump_strength = 8;
@@ -67,17 +67,17 @@ GameMode::GameMode()
 bool GameMode::LoadXml(xmlpp::Element *xml)
 {
   std::string txt;
-  if (LitDocXml::LitString (xml, "allow_character_selection", txt)) 
-  {	  
-    if (txt == "always") 
+  if (LitDocXml::LitString (xml, "allow_character_selection", txt))
+  {
+    if (txt == "always")
       allow_character_selection = ALWAYS;
-    else if (txt == "never") 
+    else if (txt == "never")
       allow_character_selection = NEVER;
-    else if (txt == "change_on_end_turn") 
+    else if (txt == "change_on_end_turn")
       allow_character_selection = CHANGE_ON_END_TURN;
-    else if (txt == "before_first_action_and_end_turn") 
+    else if (txt == "before_first_action_and_end_turn")
       allow_character_selection = BEFORE_FIRST_ACTION_AND_END_TURN;
-    else if (txt == "before_first_action") 
+    else if (txt == "before_first_action")
       allow_character_selection = BEFORE_FIRST_ACTION;
   }
 
@@ -128,8 +128,8 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   if (armes != NULL)
   {
     std::list<Weapon*> l_weapons_list = weapons_list.GetList() ;
-    std::list<Weapon*>::iterator 
-      itw = l_weapons_list.begin(), 
+    std::list<Weapon*>::iterator
+      itw = l_weapons_list.begin(),
       end = l_weapons_list.end();
 
     for (; itw != end ; ++itw) (*itw)->LoadXml(armes);
@@ -147,11 +147,11 @@ bool GameMode::Load(const std::string &mode)
   try
   {
     LitDocXml doc;
-    std::string filename = 
+    std::string filename =
       PATH_SEPARATOR
-      + std::string("game_mode") 
+      + std::string("game_mode")
       + std::string(PATH_SEPARATOR)
-      + mode 
+      + mode
       + std::string(".xml");
 
     Config * config = Config::GetInstance();
@@ -166,7 +166,7 @@ bool GameMode::Load(const std::string &mode)
   }
   catch (const xmlpp::exception &e)
   {
-    std::cerr << Format(_("Error while loading game mode %s (file %s):"), 
+    std::cerr << Format(_("Error while loading game mode %s (file %s):"),
                         mode.c_str(), fullname.c_str())
 			  << std::endl << e.what() << std::endl;
     return false;
