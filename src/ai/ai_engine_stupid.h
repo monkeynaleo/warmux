@@ -34,9 +34,14 @@ class AIStupidEngine
   Character* m_last_char;
   uint m_begin_turn_time;
   uint m_step;
+  bool m_goes_right;
+  bool m_is_walking;
 
  private:
   void BeginTurn();
+  void ChooseDirection();
+  void Walk();
+  void StopWalk();
 
  public:
   static AIStupidEngine* GetInstance();
