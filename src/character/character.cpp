@@ -87,7 +87,6 @@ Character::Character (Team& my_team, const std::string &name) :
   step_sound_played = true;
   pause_bouge_dg = 0;
   previous_strength = 0;
-  energy = 100;
   channel_step = -1;
   hidden = false;
   do_nothing_time = 0;
@@ -121,16 +120,15 @@ Character::Character (Team& my_team, const std::string &name) :
     name_text = NULL;
 
   // Energy
-  energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.max_energy);
+  energy_bar.InitVal (GameMode::GetInstance()->character.init_energy,
+                      0,
+                      GameMode::GetInstance()->character.max_energy);
   energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
-
   energy_bar.SetBorderColor( black_color );
   energy_bar.SetBackgroundColor( gray_color );
 
-  energy = GameMode::GetInstance()->character.init_energy;
-  energy_bar.InitVal (energy, 0, GameMode::GetInstance()->character.init_energy);
+  SetEnergy(GameMode::GetInstance()->character.init_energy);
   lost_energy = 0;
-  SetEnergyDelta(0, false); // This is needed to setup the colors of the energy-bar
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
 
@@ -142,7 +140,6 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
   step_sound_played    = acharacter.step_sound_played;
   prepare_shoot        = acharacter.prepare_shoot;
   back_jumping         = acharacter.back_jumping;
-  energy               = acharacter.energy;
   crosshair_angle      = acharacter.crosshair_angle;
   damage_other_team    = acharacter.damage_other_team;
   damage_own_team      = acharacter.damage_own_team;
@@ -191,7 +188,7 @@ void Character::SetBody(Body* _body)
 
 void Character::SignalDrowning()
 {
-  energy = 0;
+  SetEnergy(0);
   SetMovement("drowned");
 
   jukebox.Play (GetTeam().GetSoundProfile(),"sink");
@@ -202,7 +199,7 @@ void Character::SignalDrowning()
 void Character::SignalGhostState (bool was_dead)
 {
   // Report to damage performer this character lost all of its energy
-  ActiveCharacter().MadeDamage(energy, *this);
+  ActiveCharacter().MadeDamage(GetEnergy(), *this);
 
   MSG_DEBUG("character", "ghost");
 
@@ -249,7 +246,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
   if (do_report)
     ActiveCharacter().MadeDamage(-delta, *this);
 
-  uint sauve_energie = energy;
+  uint sauve_energie = GetEnergy();
 
   // Update energy
   SetEnergy(GetEnergy() + delta);
@@ -258,7 +255,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
   if (delta < 0)
   {
 
-    lost_energy += (int)energy - (int)sauve_energie;
+    lost_energy += (int)GetEnergy() - (int)sauve_energie;
 
     if ( lost_energy > -33 )
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_light");
@@ -276,10 +273,10 @@ void Character::SetEnergyDelta (int delta, bool do_report)
     jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
 
   // Dead character ?
-  if (energy <= 0) Die();
+  if (GetEnergy() <= 0) Die();
 }
 
-void Character::SetEnergy(int new_energy)
+void Character::SetEnergy(long new_energy)
 {
   if(! network.IsLocal() )
   {
@@ -296,7 +293,8 @@ void Character::SetEnergy(int new_energy)
   if(IsDead()) return;
 
   // Change energy
-  energy = BorneLong((int)new_energy, 0, GameMode::GetInstance()->character.max_energy);
+  long energy = BorneLong((int)new_energy, 0,
+                          GameMode::GetInstance()->character.max_energy);
   energy_bar.Actu (energy);
 }
 
@@ -315,7 +313,7 @@ void Character::Die()
   {
     m_alive = DEAD;
 
-    energy = 0;
+    SetEnergy(0);
 
     jukebox.Play(GetTeam().GetSoundProfile(),"death");
     SetClothe("dead");
@@ -344,8 +342,9 @@ void Character::SetDiseaseDamage(const uint damage_per_turn, const uint duration
 // Keep almost 1 in energy
 uint Character::GetDiseaseDamage() const
 {
-  if (disease_damage_per_turn < energy) return disease_damage_per_turn;
-  return energy - 1;
+  if (disease_damage_per_turn < static_cast<uint>(GetEnergy()))
+    return disease_damage_per_turn;
+  return GetEnergy() - 1;
 }
 
 void Character::DecDiseaseDuration()

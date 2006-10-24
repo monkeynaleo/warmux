@@ -46,9 +46,6 @@ private:
   bool prepare_shoot;
   bool back_jumping;
 
-  // energy Use accessor GetEnergy & SetEnergy to R/W
-  uint energy;
-
   uint disease_damage_per_turn;
   uint disease_duration;
   int  damage_other_team;
@@ -101,8 +98,8 @@ public:
 
   // Energy related
   void SetEnergyDelta (int delta, bool do_report=true);
-  void SetEnergy(int new_energy);
-  inline const uint & GetEnergy() const { return energy;};
+  void SetEnergy(long new_energy);
+  inline const long & GetEnergy() const { return energy_bar.GetVal();};
 
   bool GotInjured() const;
   void Die();
