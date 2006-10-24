@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Interface affichant différentes informations sur la jeu.
+ * Interface showing various informations about the game.
  *****************************************************************************/
 
 #include "weapon_menu.h"
@@ -115,10 +115,10 @@ void WeaponMenuItem::ComputeScale()
   else
     if(dezoom)
       {
-		scale = MAX_ICON_SCALE - scale_range ;
+        scale = MAX_ICON_SCALE - scale_range ;
 
-		if(time_range == 1)
-			  dezoom = false;
+        if(time_range == 1)
+          dezoom = false;
       }
 }
 
@@ -134,7 +134,7 @@ bool WeaponMenuItem::MouseOn(const Point2i &mousePos)
   else
     {
       if(scale > DEFAULT_ICON_SCALE && !dezoom)
-			dezoom = true;
+        dezoom = true;
       return false;
     }
 }
@@ -152,7 +152,7 @@ void WeaponMenuItem::Draw()
   int nb_bullets;
 
   Sprite *button;
-   
+
   switch(weapon_type){
     case 1:
       button = interface->weapons_menu.my_button1;
@@ -182,11 +182,11 @@ void WeaponMenuItem::Draw()
   // Button display  
   button->Scale(scale, scale);
   button->Blit(AppWormux::GetInstance()->video.window, buttonCenter - buttonSize/2);
-   
+
   // Weapon display
   weapon_icon->Scale(scale, scale);
   weapon_icon->Blit(AppWormux::GetInstance()->video.window, buttonCenter - iconSize/2);
-   
+
   // Amunitions display
   nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetName());
   txt.str ("");
@@ -240,6 +240,7 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
 // Weapon menu display (init of the animation)
 void WeaponsMenu::Show()
 {
+  ShowGameInterface();
   Time * global_time = Time::GetInstance();
   if(display && hide)
     motion_start_time = global_time->Read() - (ICONS_DRAW_TIME - (global_time->Read()-motion_start_time));
@@ -295,28 +296,33 @@ void WeaponsMenu::SwitchDisplay()
     Show();
 }
 
-int WeaponsMenu::GetX() const{
+int WeaponsMenu::GetX() const
+{
   return AppWormux::GetInstance()->video.window.GetWidth()-GetWidth();
 }
 
-int WeaponsMenu::GetY() const{
-   return AppWormux::GetInstance()->video.window.GetHeight() - GetHeight() - ( Interface::GetInstance()->IsDisplayed() ? Interface::GetInstance()->GetHeight() : 0 );
+int WeaponsMenu::GetY() const
+{
+  return AppWormux::GetInstance()->video.window.GetHeight() - GetHeight() - Interface::GetInstance()->GetHeight();
 }
 
 Point2i WeaponsMenu::GetPosition() const{
-	return AppWormux::GetInstance()->video.window.GetSize() - GetSize() - Point2i(0, Interface::GetInstance()->IsDisplayed() ? Interface::GetInstance()->GetHeight() : 0);
+  return AppWormux::GetInstance()->video.window.GetSize() - GetSize() - Point2i(0, Interface::GetInstance()->GetHeight());
 }
 
-int WeaponsMenu::GetWidth() const{
+int WeaponsMenu::GetWidth() const
+{
   return BUTTON_ICO_GAP + ((nbr_weapon_type +1) * BUTTON_WIDTH) ;
 }
 
-int WeaponsMenu::GetHeight() const{
+int WeaponsMenu::GetHeight() const
+{
   return BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon;
 }
 
-Point2i WeaponsMenu::GetSize() const{
-	return Point2i( BUTTON_ICO_GAP + ((nbr_weapon_type +1) * BUTTON_WIDTH), BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon);
+Point2i WeaponsMenu::GetSize() const
+{
+  return Point2i( BUTTON_ICO_GAP + ((nbr_weapon_type +1) * BUTTON_WIDTH), BUTTON_ICO_GAP + BUTTON_HEIGHT * max_weapon);
 }
 
 bool WeaponsMenu::IsDisplayed() const
@@ -325,7 +331,7 @@ bool WeaponsMenu::IsDisplayed() const
 }
 
 void WeaponsMenu::Reset()
-{    
+{
   display = false;
   show = false;
   hide = false;
@@ -341,20 +347,20 @@ void WeaponsMenu::ShowMotion(int nr_buttons,int button_no,iterator it,int column
      && (global_time->Read() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(button_no))))
     {
       double delta_sin = -(asin((column+1.0)/(column+2.0)) - (M_PI/2));
-      
+
       uint tps = global_time->Read() - (motion_start_time + delta_t*button_no);
-      
+
       double tps_sin = ((double)tps * ((M_PI/2) + delta_sin)/(ICONS_DRAW_TIME/2));
-      
+
       it->position.x -= (int)(sin(tps_sin) * BUTTON_WIDTH * (column+2.0));
       it->position.x += (BUTTON_WIDTH * (column+1));
     }
   else
     if(global_time->Read() < motion_start_time + (delta_t*button_no))
       {
-		it->position.x += (BUTTON_WIDTH * (column+1));
+        it->position.x += (BUTTON_WIDTH * (column+1));
       }
-  
+
   if(global_time->Read() > motion_start_time + ICONS_DRAW_TIME)
     {
       show = false;
@@ -370,21 +376,21 @@ bool WeaponsMenu::HideMotion(int nr_buttons,int button_no,iterator it,int column
      && (global_time->Read() < motion_start_time + (ICONS_DRAW_TIME/2)+(delta_t*(nr_buttons-button_no))))
     {
       double delta_sin = -(asin((column+1.0)/(column+2.0)) - (M_PI/2));
-      
+
       uint tps = global_time->Read() - (motion_start_time + delta_t*(nr_buttons-button_no));
       double tps_sin = ((double)tps * ((M_PI/2) + delta_sin)/(ICONS_DRAW_TIME/2));
       tps_sin = ((M_PI/2) + delta_sin) - tps_sin;
-      
+
       it->position.x -= (int)(sin(tps_sin) * BUTTON_WIDTH * (column+2.0));
       it->position.x += BUTTON_WIDTH * (column+1);
     }
   else
     if(global_time->Read() > motion_start_time + (delta_t*(nr_buttons-button_no)))
       {
-	it->position.x += BUTTON_WIDTH * (column+1);
-	it->Reset();
+        it->position.x += BUTTON_WIDTH * (column+1);
+        it->Reset();
       }
-  
+
   if(global_time->Read() > motion_start_time + ICONS_DRAW_TIME)
     {
       hide = false;
@@ -402,7 +408,7 @@ void WeaponsMenu::Draw()
 
   MouseOver(Mouse::GetInstance()->GetWorldPosition() - camera.GetPosition());
   ComputeSize();
-   
+
   uint nr_buttons = max_weapon * nbr_weapon_type;
   uint button_no = 0;
   uint current_type = 0;
@@ -429,7 +435,7 @@ void WeaponsMenu::Draw()
 
     it->position.x = GetWidth() - (int)(BUTTON_WIDTH * (column+0.5));
     it->position.y = BUTTON_ICO_GAP + (row * BUTTON_HEIGHT);     
-     
+
     if(show)
       ShowMotion(nr_buttons,(column * max_weapon) + row,it,column);
     else
@@ -444,9 +450,9 @@ void WeaponsMenu::Draw()
 
 void WeaponsMenu::MouseOver(const Point2i &mousePos)
 {
-  static int bouton_sous_souris = -1; //bouton survolé par la souris
- 
-  //Bouton en cour d'analyse:
+  static int bouton_sous_souris = -1; // button under mouse cursor
+
+  // analized button
   int button_no=0;
   int nv_bouton_sous_souris=-1;
   iterator it=boutons.begin(), fin=boutons.end();
@@ -454,19 +460,19 @@ void WeaponsMenu::MouseOver(const Point2i &mousePos)
   for (; it != fin; ++it)
     {
       if(it->MouseOn(mousePos))
-	{
-          Interface::GetInstance()->weapon_under_cursor = it->weapon;
-	  nv_bouton_sous_souris = button_no;
-	  if(button_no != bouton_sous_souris)
-	    {//Le curseur arrive sur un nouveau bouton
-	      it->ChangeZoom();
-	    }
-	}
+      {
+        Interface::GetInstance()->weapon_under_cursor = it->weapon;
+        nv_bouton_sous_souris = button_no;
+        if(button_no != bouton_sous_souris)
+        { // mouse cursor is on a new button
+          it->ChangeZoom();
+        }
+      }
       else
-	if(button_no == bouton_sous_souris)
-	  {
-	    it->ChangeZoom();
-	  }
+        if(button_no == bouton_sous_souris)
+      {
+        it->ChangeZoom();
+      }
       button_no++;
     }
   bouton_sous_souris = nv_bouton_sous_souris;
@@ -481,12 +487,11 @@ bool WeaponsMenu::ActionClic(const Point2i &mousePos)
   {
     if( it->MouseOn(mousePos) )
     {
-	  ActionHandler::GetInstance()->NewAction (new Action(ACTION_CHANGE_WEAPON, 
-		it -> weapon -> GetType()));
+      ActionHandler::GetInstance()->NewAction (new Action(ACTION_CHANGE_WEAPON, 
+      it -> weapon -> GetType()));
       SwitchDisplay();
       return true;
     }
   }
   return false;
 }
-
