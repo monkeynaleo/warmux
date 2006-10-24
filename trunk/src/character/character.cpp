@@ -78,12 +78,26 @@ const double MIN_SPEED_TO_FLY = 15.0;
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
-Character::Character (Team& my_team, const std::string &name) :
+void Character::SetBody(Body* char_body)
+{
+  body = char_body;
+  body->owner = this;
+  SetClothe("normal");
+  SetMovement("walk");
+
+  SetDirection( randomSync.GetBool()?1:-1 );
+  body->SetFrame( 0 );
+  SetSize(body->GetSize());
+}
+
+Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   PhysicalObj("character"), m_team(my_team), bubble_engine(500)
 {
   SetCollisionModel(false, true, true);
+  /* body stuff */
+  assert(char_body);
+  SetBody(char_body);
 
-  body = NULL;
   step_sound_played = true;
   pause_bouge_dg = 0;
   previous_strength = 0;
@@ -158,7 +172,7 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
   disease_duration     = acharacter.disease_duration;
 
   if (acharacter.body)
-    SetBody( new Body(*acharacter.body) );
+    SetBody(new Body(acharacter.body));
   if(acharacter.name_text)
     name_text = new Text(*acharacter.name_text);
 }
@@ -174,17 +188,6 @@ Character::~Character()
   name_text = NULL;
 }
 
-void Character::SetBody(Body* _body)
-{
-  body = _body;
-  body->owner = this;
-  SetClothe("normal");
-  SetMovement("walk");
-
-  SetDirection( randomSync.GetBool()?1:-1 );
-  body->SetFrame( 0 );
-  SetSize(body->GetSize());
-}
 
 void Character::SignalDrowning()
 {

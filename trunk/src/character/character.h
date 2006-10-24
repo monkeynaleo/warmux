@@ -87,10 +87,11 @@ private:
   void SignalDrowning();
   void SignalGhostState (bool was_dead);
   void SignalCollision();
+  void SetBody(Body* char_body);
 
 public:
 
-  Character (Team& my_team, const std::string &name);
+  Character (Team& my_team, const std::string &name, Body *char_body);
   Character (const Character& acharacter);
   ~Character();
 
@@ -167,7 +168,6 @@ public:
   int  GetOtherDamage() const { return damage_other_team; }
 
   // Body handling
-  void SetBody(Body* _body);
   void SetWeaponClothe();
   void SetClothe(std::string name);
   void SetMovement(std::string name);

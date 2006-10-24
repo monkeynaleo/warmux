@@ -59,7 +59,7 @@ Team::Team(const std::string& _teams_dir,
   m_player_name = "";
 
   nb_characters = GameMode::GetInstance()->max_characters;
-  
+
   flag = _flag;
 }
 
@@ -150,10 +150,9 @@ bool Team::LoadCharacters(uint howmany)
 	}
 
 	// Initialise les variables du ver, puis l'ajoute �la liste
-	Character new_character(*this, character_name);
+	Character new_character(*this, character_name, body);
 	characters.push_back(new_character);
 	active_character = characters.begin(); // we need active_character to be initialized here !!
-	characters.back().SetBody(body);
 	if (!characters.back().PutRandomly(false, world.dst_min_entre_vers))
 	{
 	  // We haven't found any place to put the characters!!
@@ -161,7 +160,7 @@ bool Team::LoadCharacters(uint howmany)
 	    std::cerr << std::endl;
 	    std::cerr << "Error: " << character_name.c_str() << " will be probably misplaced!" << std::endl;
 	    std::cerr << std::endl;
-	    
+
 	    // Put it with no space...
 	    characters.back().PutRandomly(false, 0);
 	  }
@@ -374,7 +373,7 @@ void Team::LoadGamingData(uint howmany)
     m_nb_ammos[ weapons_list.GetWeapon(WEAPON_AIR_HAMMER)->GetName() ] = 0;
     m_nb_ammos[ weapons_list.GetWeapon(WEAPON_BLOWTORCH)->GetName() ] = 0;
     m_nb_ammos[ weapons_list.GetWeapon(WEAPON_SUBMACHINE_GUN)->GetName() ] = 0;
-  }    
+  }
 
   active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
   is_camera_saved = false;
