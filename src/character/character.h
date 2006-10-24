@@ -99,8 +99,8 @@ public:
 
   // Energy related
   void SetEnergyDelta (int delta, bool do_report=true);
-  void SetEnergy(long new_energy);
-  inline const long & GetEnergy() const { return energy_bar.GetVal();};
+  void SetEnergy(int new_energy);
+  inline const int & GetEnergy() const { return life_points;}
 
   bool GotInjured() const;
   void Die();
