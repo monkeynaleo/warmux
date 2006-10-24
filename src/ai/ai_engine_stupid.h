@@ -40,6 +40,8 @@ class AIStupidEngine
  private:
   void BeginTurn();
   void ChooseDirection();
+  void ChooseWeapon();
+
   void Walk();
   void StopWalk();
 

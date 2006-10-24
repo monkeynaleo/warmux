@@ -25,6 +25,7 @@
 #include "../character/move.h"
 #include "../network/randomsync.h"
 #include "../team/teams_list.h"
+#include "../tool/error.h"
 
 #include <iostream>
 
@@ -52,6 +53,8 @@ void AIStupidEngine::BeginTurn()
   m_is_walking = false;
 
   ChooseDirection();
+
+  ChooseWeapon();
 }
 
 void AIStupidEngine::ChooseDirection()
@@ -84,6 +87,30 @@ void AIStupidEngine::StopWalk()
   ActiveCharacter().body->StopWalk();
 }
 
+void AIStupidEngine::ChooseWeapon()
+{
+  // we choose between dynamite, mine, polecart and gnu
+  uint selected = uint(randomSync.GetDouble(0.0, 3.5));
+  
+  switch (selected) {
+  case 0: 
+    ActiveTeam().SetWeapon(WEAPON_DYNAMITE);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+
+  case 1:
+    ActiveTeam().SetWeapon(WEAPON_GNU);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+
+  case 2:
+    ActiveTeam().SetWeapon(WEAPON_POLECAT);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+
+  case 3:
+  default:
+    ActiveTeam().SetWeapon(WEAPON_MINE);
+    assert( ActiveTeam().GetWeapon().EnoughAmmo());
+  }
+}
 
 void AIStupidEngine::Refresh()
 {
