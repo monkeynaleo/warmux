@@ -71,8 +71,9 @@ Interface::Interface()
   display = true;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  game_menu = resource_manager.LoadImage( res, "interface/menu_jeu");
-  bg_time = resource_manager.LoadImage( res, "interface/fond_compteur");
+  game_menu = resource_manager.LoadImage( res, "interface/game_menu");
+  bg_time = resource_manager.LoadImage( res, "interface/timer_background");
+  bg_turn_time = resource_manager.LoadImage( res, "interface/turn_time_background");
   weapon_box_button = resource_manager.LoadImage( res, "interface/weapon_box_button");
   resource_manager.UnLoadXMLProfile( res);
 
@@ -221,11 +222,10 @@ void Interface::DisplayWeaponInfo ()
   if (weapon != NULL) weapon->DrawWeaponBox();
 }
 
-void Interface::Draw ()
+// display global timer
+void Interface::DisplayGlobalTimer()
 {
   AppWormux * app = AppWormux::GetInstance();
-
-  // display global timer
   Rectanglei dest ( (app->video.window.GetWidth()/2)-40, 0, bg_time.GetWidth(), bg_time.GetHeight() );
   app->video.window.Blit( bg_time, dest.GetPosition() );
   std::string tmp(Time::GetInstance()->GetString());
@@ -233,6 +233,27 @@ void Interface::Draw ()
   global_timer->DrawCenterTop(app->video.window.GetWidth()/2, 10);
 
   world.ToRedrawOnScreen(dest);
+}
+
+// display time left in a turn
+void Interface::DisplayTurnTime()
+{
+  AppWormux * app = AppWormux::GetInstance();
+  Point2i turn_time_pos = (app->video.window.GetSize() - bg_turn_time.GetSize()) * Point2d(0.5, 1) + Point2i(0, - GetHeight() / 2 + bg_turn_time.GetHeight() / 2);
+  Rectanglei dr(turn_time_pos, bg_turn_time.GetSize());
+  app->video.window.Blit( bg_turn_time, turn_time_pos);
+
+  if (timer != NULL && display_timer)
+    timer->DrawCenter(bottom_bar_pos + GetSize()/2 + Point2i(0, 3));
+  world.ToRedrawOnScreen(dr);
+}
+
+void Interface::Draw ()
+{
+  AppWormux * app = AppWormux::GetInstance();
+  bottom_bar_pos = (app->video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
+
+  DisplayGlobalTimer();
 
   if ( GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING && weapon_strength_bar.visible)
   {
@@ -246,18 +267,15 @@ void Interface::Draw ()
 
   weapons_menu.Draw();
 
+  DisplayTurnTime();
+
   if (!display) return;
 
-  bottom_bar_pos = (app->video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
-
-  Rectanglei dr( bottom_bar_pos, game_menu.GetSize() );
+  // Display the background of both Character info and weapon info
+  Rectanglei dr(bottom_bar_pos, game_menu.GetSize());
   app->video.window.Blit( game_menu, bottom_bar_pos);
 
   world.ToRedrawOnScreen(dr);
-
-  // display time left in a turn ?
-  if (timer != NULL && display_timer)
-    timer->DrawCenter(bottom_bar_pos + GetSize()/2 + Point2i(0, 3));
 
   // display character info
   DisplayCharacterInfo();
@@ -266,11 +284,19 @@ void Interface::Draw ()
   DisplayWeaponInfo();
 }
 
-int Interface::GetWidth() const { return 800; }
-int Interface::GetHeight() const { return 70; }
+int Interface::GetWidth() const
+{
+  return game_menu.GetWidth();
+}
+
+int Interface::GetHeight() const
+{
+  return game_menu.GetHeight();
+}
+
 Point2i Interface::GetSize() const
 {
-  return Point2i( GetWidth(), GetHeight() );
+  return game_menu.GetSize();
 }
 
 void Interface::EnableDisplay (bool _display)

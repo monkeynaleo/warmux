@@ -16,7 +16,7 @@
   </sprite>
 </section>
 
-<section name="menu">  
+<section name="menu">
 
   <surface name="bg_option" file="menu/img/background_options.png" />
   <surface name="bg_play" file="menu/img/background_play.png" />
@@ -112,15 +112,16 @@
 </section>
 
 <section name="interface">
-  <surface name="menu_jeu" file="interface/game_menu.png" />
-  <surface name="menu_arme" file="interface/weapons_menu.png" />
+  <surface name="game_menu" file="interface/game_menu.png" />
+  <surface name="weapon_menu" file="interface/weapons_menu.png" />
   <surface name="button1_icon" file="interface/button1.png"/>
   <surface name="button2_icon" file="interface/button2.png"/>
   <surface name="button3_icon" file="interface/button3.png"/>
   <surface name="button4_icon" file="interface/button4.png"/>
   <surface name="button5_icon" file="interface/button5.png"/>
   <surface name="weapon_box_button" file="interface/Grey-Button.png"/>
-  <surface name="fond_compteur" file="interface/compteur.png"/>
+  <surface name="timer_background" file="interface/timer_background.png"/>
+  <surface name="turn_time_background" file="interface/turn_time_background.png"/>
   <surface name="pause_screen" file="interface/pause.png"/>
   <surface name="quit_screen" file="interface/quit.png"/>
 </section>

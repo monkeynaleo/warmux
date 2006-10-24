@@ -47,52 +47,55 @@ public:
    // Timers
    Text * global_timer;
    Text * timer;
-   
+
    // Character information
    Text * t_NAME;
    Text * t_character_name;
-   
+
    Text * t_ENERGY;
    Text * t_character_energy;
-   
+
    // Weapon information
    Text * t_WEAPON;
    Text * t_weapon_name;
    Text * t_STOCK;
    Text * t_weapon_stock;
-   
+
    bool display;
    bool display_timer;
    void DisplayCharacterInfo ();
    void DisplayWeaponInfo ();
+   void DisplayGlobalTimer();
+   void DisplayTurnTime();
    BarreProg barre_energie;
 
    Surface game_menu;
    Surface bg_time;
+   Surface bg_turn_time;
    Point2i bottom_bar_pos;
 
    static Interface * singleton;
 
  private:
    Interface();
-   ~Interface();   
-   
+   ~Interface();
+
  public:
    static Interface * GetInstance();
 
    void Reset();
    void Draw();
-   
+
    bool IsDisplayed () const { return display; };
    void EnableDisplay (bool _display);
    void Show();
    void Hide();
    bool IsVisible() const;
-   
+
    int GetWidth() const;
    int GetHeight() const;
    Point2i GetSize() const;
-   
+
    void UpdateTimer(uint utimer);
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
 };
