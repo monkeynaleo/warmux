@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "interface.h"
+#include "mouse.h"
 #include <iostream>
 #include <SDL.h>
 #include <sstream>
@@ -77,7 +78,7 @@ Interface::Interface()
 
   barre_energie.InitVal (0, 0, GameMode::GetInstance()->character.init_energy);
   barre_energie.InitPos (ENERGY_BAR_POS.x, ENERGY_BAR_POS.y,
-			 BARENERGIE_LARG, BARENERGIE_HAUT);
+                         BARENERGIE_LARG, BARENERGIE_HAUT);
   barre_energie.border_color = white_color;
   barre_energie.value_color = lightgray_color;
   barre_energie.background_color = gray_color;
@@ -142,11 +143,11 @@ void Interface::DisplayCharacterInfo ()
   t_NAME->DrawTopLeft(bottom_bar_pos + WORM_NAME_POS);
 
   std::string s(character_under_cursor->GetName()
-		+" ("+character_under_cursor->GetTeam().GetPlayerName()+" - "+character_under_cursor->GetTeam().GetName()+" )");
+                +" ("+character_under_cursor->GetTeam().GetPlayerName()+" - "+character_under_cursor->GetTeam().GetName()+" )");
   t_character_name->Set(s);
 
   t_character_name->DrawTopLeft(bottom_bar_pos + WORM_NAME_POS +
-		  Point2i(t_NAME->GetWidth()+MARGIN, 0));
+                  Point2i(t_NAME->GetWidth()+MARGIN, 0));
 
   // Display energy
   t_ENERGY->DrawTopLeft(bottom_bar_pos + WORM_ENERGY_POS);
@@ -163,7 +164,7 @@ void Interface::DisplayCharacterInfo ()
   }
 
   t_character_energy->DrawTopLeft(
-		  bottom_bar_pos + WORM_ENERGY_POS + Point2i(t_ENERGY->GetWidth()+MARGIN, 0));
+      bottom_bar_pos + WORM_ENERGY_POS + Point2i(t_ENERGY->GetWidth()+MARGIN, 0));
 
   barre_energie.DrawXY(bottom_bar_pos + ENERGY_BAR_POS);
 
@@ -207,7 +208,7 @@ void Interface::DisplayWeaponInfo ()
 
   t_weapon_stock->Set(tmp);
   t_weapon_stock->DrawTopLeft(
-		  bottom_bar_pos + AMMOS_POS + Point2i(t_STOCK->GetWidth()+MARGIN, 0) );
+      bottom_bar_pos + AMMOS_POS + Point2i(t_STOCK->GetWidth()+MARGIN, 0) );
 
   // Display weapon icon
   if( !weapon->icone.IsNull() )
@@ -236,8 +237,8 @@ void Interface::Draw ()
   if ( GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING && weapon_strength_bar.visible)
   {
     // Position on the screen
-	Point2i barPos = (app->video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
-		- Point2i(0, GetHeight() + 10);
+    Point2i barPos = (app->video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
+                     - Point2i(0, GetHeight() + 10);
 
     // Drawing on the screen
      weapon_strength_bar.DrawXY(barPos);
@@ -267,8 +268,9 @@ void Interface::Draw ()
 
 int Interface::GetWidth() const { return 800; }
 int Interface::GetHeight() const { return 70; }
-Point2i Interface::GetSize() const{
-	return Point2i( GetWidth(), GetHeight() );
+Point2i Interface::GetSize() const
+{
+  return Point2i( GetWidth(), GetHeight() );
 }
 
 void Interface::EnableDisplay (bool _display)
@@ -300,19 +302,31 @@ void Interface::UpdateTimer(uint utimer)
     timer = new Text(ulong2str(utimer), white_color, Font::GetInstance(Font::FONT_BIG));
 }
 
-void AbsoluteDraw(Surface &s, Point2i pos){
-	Rectanglei rectSurface(pos, s.GetSize());
+void AbsoluteDraw(Surface &s, Point2i pos)
+{
+  Rectanglei rectSurface(pos, s.GetSize());
 
-	if( !rectSurface.Intersect(camera) )
-		return;
+  if( !rectSurface.Intersect(camera) )
+    return;
 
-	world.ToRedrawOnMap(rectSurface);
+  world.ToRedrawOnMap(rectSurface);
 
-	rectSurface.Clip( camera );
+  rectSurface.Clip( camera );
 
-	Rectanglei rectSource(rectSurface.GetPosition() - pos, rectSurface.GetSize());
-	Point2i ptDest = rectSurface.GetPosition() - camera.GetPosition();
+  Rectanglei rectSource(rectSurface.GetPosition() - pos, rectSurface.GetSize());
+  Point2i ptDest = rectSurface.GetPosition() - camera.GetPosition();
 
-	AppWormux::GetInstance()->video.window.Blit(s, rectSource, ptDest);
+  AppWormux::GetInstance()->video.window.Blit(s, rectSource, ptDest);
 }
 
+void HideGameInterface()
+{
+  Mouse::GetInstance()->Hide();
+  Interface::GetInstance()->Hide();
+}
+
+void ShowGameInterface()
+{
+  Mouse::GetInstance()->Show();
+  Interface::GetInstance()->Show();
+}

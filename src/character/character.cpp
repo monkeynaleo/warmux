@@ -36,7 +36,6 @@
 #include "../include/action_handler.h"
 #include "../include/app.h"
 #include "../include/constant.h"
-#include "../interface/mouse.h"
 #include "../interface/interface.h"
 #include "../interface/cursor.h"
 #include "../map/camera.h"
@@ -570,28 +569,26 @@ void Character::HandleKeyEvent(int action, int event_type)
       switch (event_type)
       {
         case KEY_REFRESH:
-          Mouse::GetInstance()->Hide();
-          Interface::GetInstance()->Hide();
           switch (action) {
             case ACTION_MOVE_LEFT:
               if(ActiveCharacter().IsImmobile())
                 MoveCharacterLeft(ActiveCharacter());
+              HideGameInterface();
               return;
             case ACTION_MOVE_RIGHT:
               if(ActiveCharacter().IsImmobile())
                 MoveCharacterRight(ActiveCharacter());
+              HideGameInterface();
               return;
-
             default:
-	      break ;
+              break ;
           }
           //no break!! -> it's normal
         case KEY_PRESSED:
-          Mouse::GetInstance()->Hide();
-          Interface::GetInstance()->Hide();
           switch (action)
           {
             case ACTION_UP:
+              HideGameInterface();
               if(ActiveCharacter().IsImmobile())
               {
                 if (ActiveTeam().crosshair.enable)
@@ -605,6 +602,7 @@ void Character::HandleKeyEvent(int action, int event_type)
               break ;
 
             case ACTION_DOWN:
+              HideGameInterface();
               if(ActiveCharacter().IsImmobile())
               {
                 if (ActiveTeam().crosshair.enable)
@@ -618,6 +616,7 @@ void Character::HandleKeyEvent(int action, int event_type)
               break ;
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:
+              HideGameInterface();
               InitMouvementDG(PAUSE_BOUGE);
               body->StartWalk();
               break;
@@ -625,19 +624,22 @@ void Character::HandleKeyEvent(int action, int event_type)
             // OTHERWISE, THE JUMP ACTION WILL BYPASSED ON DISTANT COMPUTERS BYE THE REFRESH
             // OF THE WALK
             case ACTION_JUMP:
+              HideGameInterface();
               if(ActiveCharacter().IsImmobile())
                 action_handler->NewAction (new Action(ACTION_JUMP));
-	            return ;
+              return ;
             case ACTION_HIGH_JUMP:
+              HideGameInterface();
               if(ActiveCharacter().IsImmobile())
                 action_handler->NewAction (new Action(ACTION_HIGH_JUMP));
               return ;
             case ACTION_BACK_JUMP:
+              HideGameInterface();
               if(ActiveCharacter().IsImmobile())
                 action_handler->NewAction (new Action(ACTION_BACK_JUMP));
               return ;
             default:
-      	      break;
+              break;
           }
           break;
 
@@ -825,7 +827,9 @@ void Character::StartPlaying()
   assert (!IsGhost());
   SetWeaponClothe();
   SetRebounding(false);
+  ActiveTeam().crosshair.Reset();
   ActiveTeam().crosshair.ChangeAngleVal(crosshair_angle);
+  ShowGameInterface();
 }
 
 bool Character::IsActiveCharacter() const
