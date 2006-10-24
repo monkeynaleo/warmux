@@ -98,5 +98,7 @@ public:
 };
 
 void AbsoluteDraw(Surface& s, Point2i pos);
+void HideGameInterface();
+void ShowGameInterface();
 
 #endif
