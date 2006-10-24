@@ -347,6 +347,7 @@ void AbsoluteDraw(Surface &s, Point2i pos)
 
 void HideGameInterface()
 {
+  if(Interface::GetInstance()->GetWeaponsMenu().IsDisplayed()) return;
   Mouse::GetInstance()->Hide();
   Interface::GetInstance()->Hide();
 }

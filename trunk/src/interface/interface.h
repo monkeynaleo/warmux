@@ -82,6 +82,7 @@ public:
 
  public:
    static Interface * GetInstance();
+   WeaponsMenu & GetWeaponsMenu() { return weapons_menu; };
 
    void Reset();
    void Draw();
