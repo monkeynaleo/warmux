@@ -134,9 +134,10 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
     name_text = NULL;
 
   // Energy
+  life_points = GameMode::GetInstance()->character.init_energy;
   energy_bar.InitVal (GameMode::GetInstance()->character.init_energy,
                       0,
-                      GameMode::GetInstance()->character.max_energy);
+                      GameMode::GetInstance()->character.init_energy);
   energy_bar.InitPos (0,0, LARG_ENERGIE, HAUT_ENERGIE);
   energy_bar.SetBorderColor( black_color );
   energy_bar.SetBackgroundColor( gray_color );
@@ -249,7 +250,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
   if (do_report)
     ActiveCharacter().MadeDamage(-delta, *this);
 
-  uint sauve_energie = GetEnergy();
+  uint saved_life_points = GetEnergy();
 
   // Update energy
   SetEnergy(GetEnergy() + delta);
@@ -258,7 +259,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
   if (delta < 0)
   {
 
-    lost_energy += (int)GetEnergy() - (int)sauve_energie;
+    lost_energy += (int)GetEnergy() - (int)saved_life_points;
 
     if ( lost_energy > -33 )
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_light");
@@ -272,14 +273,14 @@ void Character::SetEnergyDelta (int delta, bool do_report)
     lost_energy = 0;
 
   // "Friendly fire !!"
-  if ( (&ActiveCharacter() != this) && ActiveTeam().IsSameAs(m_team) )
+  if ( !IsActiveCharacter() && ActiveTeam().IsSameAs(m_team) )
     jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
 
   // Dead character ?
   if (GetEnergy() <= 0) Die();
 }
 
-void Character::SetEnergy(long new_energy)
+void Character::SetEnergy(int new_energy)
 {
   if(! network.IsLocal() )
   {
@@ -298,6 +299,7 @@ void Character::SetEnergy(long new_energy)
   // Change energy
   long energy = BorneLong((int)new_energy, 0,
                           GameMode::GetInstance()->character.max_energy);
+  life_points = energy;
   energy_bar.Actu (energy);
 }
 
