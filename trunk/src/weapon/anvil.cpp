@@ -45,8 +45,10 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj)
 {
-  Character * tmp = (Character *)(obj);
-  tmp -> SetEnergyDelta (-200);
+  if(typeid(*obj) == typeid(Character)) {
+    Character * tmp = (Character *)(obj);
+    tmp -> SetEnergyDelta (-200);
+  }
 }
 
 void Anvil::SignalGroundCollision()
