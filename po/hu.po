@@ -61,7 +61,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Nem található %s térkép :-("
 
-#: src/game/game_loop.cpp:704
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -76,7 +76,7 @@ msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> %s csapatától"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
@@ -86,12 +86,12 @@ msgstr "%s öngyilkos lett!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:676
+#: src/game/game_loop.cpp:679
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:687
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
@@ -110,12 +110,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiaszintje %u egységgel nőtt!"
 msgstr[1] "%s energiaszintje %u egységgel nőtt!"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
 
-#: src/game/game_loop.cpp:693
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kicsit ügyefogyott volt, így hát távozott az élő sorából!"
@@ -193,11 +193,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s %u ráadás légitámadás nyert!"
 msgstr[1] "%s %u ráadás légitámadás nyert!"
 
-#: src/interface/interface.cpp:160
+#: src/interface/interface.cpp:162
 msgid "(dead)"
 msgstr "(kipurcant)"
 
-#: src/interface/interface.cpp:202
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
@@ -220,7 +220,7 @@ msgstr "%s csapat betöltése."
 msgid "All teams results:\n"
 msgstr "%s csapat betöltése."
 
-#: src/weapon/anvil.cpp:72
+#: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr ""
 
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Cannot open teams directory (%s)!"
 msgstr "Nem tudom megnyitni a csapatok könyvtárát (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:129
+#: src/weapon/cluster_bomb.cpp:111
 #, fuzzy
 msgid "Cluster Bomb"
 msgstr "Szőnyegbomba"
@@ -309,7 +309,7 @@ msgstr "Egy forduló ideje:"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:99
 msgid "Energy:"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr "Hiba lépett fel (%s): %lu"
 msgid "Error loading team %s:"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/team/team.cpp:185
+#: src/team/team.cpp:184
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
@@ -362,7 +362,7 @@ msgstr "Hiba: nem található %s csapatának %s sminkje."
 msgid "Failed to initialize network library!"
 msgstr ""
 
-#: src/game/game_loop.cpp:159
+#: src/game/game_loop.cpp:160
 #, fuzzy
 msgid "Find a random position for characters"
 msgstr "A kukacok véletlenszerű elhelyezése"
@@ -412,7 +412,7 @@ msgstr "Gránát"
 msgid "Host a game"
 msgstr "Vége!"
 
-#: src/game/game_loop.cpp:740
+#: src/game/game_loop.cpp:743
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -427,7 +427,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Induló energiaszint:"
 
-#: src/game/game_loop.cpp:200
+#: src/game/game_loop.cpp:201
 msgid "Initialisation"
 msgstr "Felkészülés"
 
@@ -436,16 +436,16 @@ msgstr "Felkészülés"
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
 
-#: src/game/game_loop.cpp:103
+#: src/game/game_loop.cpp:104
 msgid "Initialise data"
 msgstr "Felkészülés"
 
-#: src/game/game_loop.cpp:165
+#: src/game/game_loop.cpp:166
 #, fuzzy
 msgid "Initialise objects"
 msgstr "Felkészülés"
 
-#: src/game/game_loop.cpp:99 src/game/game_loop.cpp:128
+#: src/game/game_loop.cpp:100 src/game/game_loop.cpp:129
 #, fuzzy
 msgid "Initialise teams"
 msgstr "Felkészülés"
@@ -489,7 +489,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "%s térkép szerzője:"
 
-#: src/game/game_loop.cpp:203
+#: src/game/game_loop.cpp:204
 msgid "Maps"
 msgstr ""
 
@@ -526,7 +526,7 @@ msgstr ""
 msgid "Music?"
 msgstr "Zene"
 
-#: src/interface/interface.cpp:96
+#: src/interface/interface.cpp:98
 #, fuzzy
 msgid "Name:"
 msgstr "Név"
@@ -665,7 +665,7 @@ msgstr "Hanghatások"
 msgid "Sound frequency"
 msgstr "Hanghatások"
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:222
 #, fuzzy
 msgid "Sounds"
 msgstr "Beállítások"
@@ -674,7 +674,7 @@ msgstr "Beállítások"
 msgid "Starting a new game"
 msgstr "Új játék kezdése"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:101
 #, fuzzy
 msgid "Stock:"
 msgstr "Raktár"
@@ -696,7 +696,7 @@ msgstr ""
 msgid "Team %s results:\n"
 msgstr ""
 
-#: src/game/game_loop.cpp:207
+#: src/game/game_loop.cpp:208
 msgid "Teams"
 msgstr ""
 
@@ -704,7 +704,7 @@ msgstr ""
 msgid "Teleportation"
 msgstr "Teleport"
 
-#: src/weapon/cluster_bomb.cpp:97
+#: src/weapon/cluster_bomb.cpp:87
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
@@ -763,12 +763,12 @@ msgstr ""
 msgid "Wait! "
 msgstr ""
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:100
 #, fuzzy
 msgid "Weapon:"
 msgstr "Fegyver"
 
-#: src/game/game_loop.cpp:216
+#: src/game/game_loop.cpp:217
 #, fuzzy
 msgid "Weapons"
 msgstr "Fegyver"
@@ -777,7 +777,7 @@ msgstr "Fegyver"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"
@@ -794,7 +794,7 @@ msgstr "Töltődik a Wormux..."
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
-#: src/include/action_handler.cpp:406
+#: src/include/action_handler.cpp:405
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -808,7 +808,7 @@ msgstr "XML hiba a térkép (%s) betöltése közben:"
 msgid "You need at least one valid map !"
 msgstr "Legalább egy térképpel rendelkezned kell!"
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Legalalább két csapatot kell verbuválnod a játékhoz! Ezt a Beállítások "

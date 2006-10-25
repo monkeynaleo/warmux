@@ -66,7 +66,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
-#: src/game/game_loop.cpp:704
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s takımı) öldü."
@@ -81,7 +81,7 @@ msgstr "%s'den %s <%s> aka %s"
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -91,12 +91,12 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:676
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game_loop.cpp:687
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
@@ -113,12 +113,12 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s, %u enerji kazandı!"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game_loop.cpp:693
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -187,11 +187,11 @@ msgid "'%s has won %u Low gravity"
 msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s takımı %u hava saldırısı kazandı"
 
-#: src/interface/interface.cpp:160
+#: src/interface/interface.cpp:162
 msgid "(dead)"
 msgstr "(ölü)"
 
-#: src/interface/interface.cpp:202
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
@@ -214,7 +214,7 @@ msgstr "Takımlar bekleniyor"
 msgid "All teams results:\n"
 msgstr "Bütün takımların sonuçları:\n"
 
-#: src/weapon/anvil.cpp:72
+#: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr ""
 
@@ -262,7 +262,7 @@ msgstr "%s takımı bulunamadı!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:129
+#: src/weapon/cluster_bomb.cpp:111
 #, fuzzy
 msgid "Cluster Bomb"
 msgstr "Şarapnelli bomba"
@@ -301,7 +301,7 @@ msgstr "Tur zamanı:"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:99
 msgid "Energy:"
 msgstr "Enerji:"
 
@@ -315,7 +315,7 @@ msgstr "%s:%lu'da hata"
 msgid "Error loading team %s:"
 msgstr "%s takımı yüklenirken hata:"
 
-#: src/team/team.cpp:185
+#: src/team/team.cpp:184
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
@@ -355,7 +355,7 @@ msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 msgid "Failed to initialize network library!"
 msgstr "SDL kütüphanesi başlatılamadı: %s"
 
-#: src/game/game_loop.cpp:159
+#: src/game/game_loop.cpp:160
 msgid "Find a random position for characters"
 msgstr "Karakterler için rastgele yer bul"
 
@@ -401,7 +401,7 @@ msgstr "El bombası"
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:740
+#: src/game/game_loop.cpp:743
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -416,7 +416,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Başlangıç enerjisi:"
 
-#: src/game/game_loop.cpp:200
+#: src/game/game_loop.cpp:201
 msgid "Initialisation"
 msgstr "Ayarlama"
 
@@ -425,15 +425,15 @@ msgstr "Ayarlama"
 msgid "Initialisation of TTF library failed: %s"
 msgstr "TTF kütüphanesi başlatılmasında hata: %s"
 
-#: src/game/game_loop.cpp:103
+#: src/game/game_loop.cpp:104
 msgid "Initialise data"
 msgstr "Veriler yükleniyor"
 
-#: src/game/game_loop.cpp:165
+#: src/game/game_loop.cpp:166
 msgid "Initialise objects"
 msgstr "Nesneler yükleniyor"
 
-#: src/game/game_loop.cpp:99 src/game/game_loop.cpp:128
+#: src/game/game_loop.cpp:100 src/game/game_loop.cpp:129
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
@@ -474,7 +474,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "%s haritasını yaratan:"
 
-#: src/game/game_loop.cpp:203
+#: src/game/game_loop.cpp:204
 msgid "Maps"
 msgstr ""
 
@@ -516,7 +516,7 @@ msgstr "  En cabbar  :  %s (%i).\n"
 msgid "Music?"
 msgstr "Müzik?"
 
-#: src/interface/interface.cpp:96
+#: src/interface/interface.cpp:98
 msgid "Name:"
 msgstr "Adı:"
 
@@ -653,7 +653,7 @@ msgstr "Ses efektleri?"
 msgid "Sound frequency"
 msgstr "Ses efektleri?"
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:222
 #, fuzzy
 msgid "Sounds"
 msgstr "Ses seçenekleri"
@@ -662,7 +662,7 @@ msgstr "Ses seçenekleri"
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:101
 msgid "Stock:"
 msgstr "Stok:"
 
@@ -683,7 +683,7 @@ msgstr ""
 msgid "Team %s results:\n"
 msgstr "%s takımı sonuçları:\n"
 
-#: src/game/game_loop.cpp:207
+#: src/game/game_loop.cpp:208
 msgid "Teams"
 msgstr ""
 
@@ -691,7 +691,7 @@ msgstr ""
 msgid "Teleportation"
 msgstr "Işınlanma"
 
-#: src/weapon/cluster_bomb.cpp:97
+#: src/weapon/cluster_bomb.cpp:87
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
@@ -752,11 +752,11 @@ msgstr ""
 msgid "Wait! "
 msgstr "Takımlar bekleniyor"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:100
 msgid "Weapon:"
 msgstr "Silah:"
 
-#: src/game/game_loop.cpp:216
+#: src/game/game_loop.cpp:217
 #, fuzzy
 msgid "Weapons"
 msgstr "Silah:"
@@ -765,7 +765,7 @@ msgstr "Silah:"
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
@@ -783,7 +783,7 @@ msgstr "Wormux çalıştırılıyor..."
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
-#: src/include/action_handler.cpp:406
+#: src/include/action_handler.cpp:405
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -797,7 +797,7 @@ msgstr "'%s' haritası yüklenirken XML hatası :"
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden "

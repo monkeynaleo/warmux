@@ -2,6 +2,10 @@
 
 SET(WORMUX_SRCS
 main.cpp
+ai/ai_engine.cpp
+ai/ai_engine.h
+ai/ai_engine_stupid.cpp
+ai/ai_engine_stupid.h
 character/body.cpp
 character/body_list.cpp
 character/character.cpp
@@ -30,6 +34,8 @@ gui/box.cpp
 gui/button.cpp
 gui/button_text.cpp
 gui/check_box.cpp
+gui/EnergyBar.h
+gui/EnergyBar.cpp
 gui/label.cpp
 gui/list_box.cpp
 gui/list_box_w_label.cpp
