@@ -35,9 +35,16 @@ class WindParticle : public PhysicalObj
 {
 public:
   Sprite *sprite;
-     
+
 public:
   WindParticle(std::string& xml_file);
+  inline WindParticle(const WindParticle & aparticle):
+    PhysicalObj(aparticle)
+    {
+      assert(aparticle.sprite);
+      sprite = new Sprite(*aparticle.sprite);
+    };
+  ~WindParticle() { delete sprite; };
   void Resize(double size);
   void Draw();
   void Refresh();
