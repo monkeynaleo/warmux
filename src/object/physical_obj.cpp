@@ -293,7 +293,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
       SetXY( tmpPos );
       return;
     }
- 
+
     // Test if we collide...
     collided_obj = CollidedObjectXY(tmpPos);
     if( collided_obj != NULL)
@@ -330,7 +330,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
   }
 
   if ( collision == NO_COLLISION ) // Nothing more to do!
-    return; 
+    return;
   if ( collision == COLLISION_ON_GROUND ) {
       // Find the contact point and collision angle.
 //       // !!! ContactPoint(...) _can_ return false when CollisionTest(...) is true !!!
@@ -340,7 +340,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     int cx, cy;
     Point2d contactPos;
     double contact_angle=0;
-  
+
     if (ContactPoint(cx, cy)) {
       contact_angle = world.ground.Tangeante(cx, cy);
       contactPos.x = (double)cx / PIXEL_PER_METER;
@@ -373,7 +373,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     SignalCollision();
 
     collided_obj->SetSpeed(collided_obj->GetMass()*norm/total_mass, angle);
-    SetSpeed(GetMass()*norm/total_mass, angle);      
+    SetSpeed(GetMass()*norm/total_mass, angle);
 
     // Rebound on the object
     double contact_angle = - GetSpeedAngle();
@@ -467,6 +467,7 @@ void PhysicalObj::Init()
   if (m_alive != ALIVE)
     MSG_DEBUG( "physic.state", "%s - Init.", m_name.c_str());
   m_alive = ALIVE;
+  m_overlapping_object = NULL;
   StopMoving();
 }
 
@@ -557,7 +558,7 @@ void PhysicalObj::SetCollisionModel(bool goes_through_wall,
   {
     if (m_collides_with_characters || m_collides_with_objects)
       assert(m_goes_through_wall == false);
-    
+
     if (m_goes_through_wall) {
       assert(m_collides_with_characters == false);
       assert(m_collides_with_objects == false);
