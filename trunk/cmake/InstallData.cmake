@@ -395,7 +395,6 @@ interface/button2.png
 interface/game_menu.png
 interface/pause.png
 interface/button3.png
-interface/compteur.png
 interface/Grey-Button.png
 interface/button4.png
 interface/pointer_select.png
@@ -404,6 +403,8 @@ interface/weapons_menu.png
 interface/quit.png
 interface/pointer_aim.png
 interface/pointer_move.png
+interface/timer_background.png
+interface/turn_time_background.png
 menu/img/display_wind_particles.png
 menu/img/sound_effects_enable.png
 menu/img/timing_turn.png
@@ -579,13 +580,17 @@ game_mode/classic.xml
 game_mode/objects.dtd
 game_mode/game_mode.dtd
 game_mode/objects.xml
+wormux_32x32.xpm
+wormux_32x32.png
 wormux_128x128.xpm
+wormux_128x128.png
+wormux_256x256.png
 graphism.dtd
 authors.xml
 weapons.dtd
 authors.dtd
-wormux_32x32.xpm
 graphism.xml
 wormux.desktop
+wormux.svg
 weapons.xml
 )

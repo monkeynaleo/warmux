@@ -61,7 +61,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas :-("
 
-#: src/game/game_loop.cpp:704
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s teamo) mortis."
@@ -76,7 +76,7 @@ msgstr "%s <%s> kiel %s el %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> el %s"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -86,12 +86,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr "%s bildo po sekundo (fps)"
 
-#: src/game/game_loop.cpp:676
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s droniĝis"
 
-#: src/game/game_loop.cpp:687
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s falis el la mapo"
@@ -110,12 +110,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:693
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -193,11 +193,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s teamo gajnis %u aer-atakon!"
 msgstr[1] "%s teamo gajnis %u aer-atakojn!"
 
-#: src/interface/interface.cpp:160
+#: src/interface/interface.cpp:162
 msgid "(dead)"
 msgstr "(mortinta)"
 
-#: src/interface/interface.cpp:202
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
@@ -220,7 +220,7 @@ msgstr "Atendas teamojn"
 msgid "All teams results:\n"
 msgstr "Ĉiuj teamaj rezultoj:\n"
 
-#: src/weapon/anvil.cpp:72
+#: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr ""
 
@@ -268,7 +268,7 @@ msgstr "Ne povas trovi teamon %s!"
 msgid "Cannot open teams directory (%s)!"
 msgstr " Ne eblas malfermi teaman dosierujon (%s)"
 
-#: src/weapon/cluster_bomb.cpp:129
+#: src/weapon/cluster_bomb.cpp:111
 #, fuzzy
 msgid "Cluster Bomb"
 msgstr " Disgrenado"
@@ -308,7 +308,7 @@ msgstr "Vicdaŭro"
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:99
 msgid "Energy:"
 msgstr "Energio"
 
@@ -322,7 +322,7 @@ msgstr "Eraro en %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Eraro muntante teamon %s:"
 
-#: src/team/team.cpp:185
+#: src/team/team.cpp:184
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Eraro muntante teamon %s:"
@@ -362,7 +362,7 @@ msgstr " Eraro: Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
 msgid "Failed to initialize network library!"
 msgstr " Ne eblas prepari SDL bibliotekon: %s"
 
-#: src/game/game_loop.cpp:159
+#: src/game/game_loop.cpp:160
 msgid "Find a random position for characters"
 msgstr "Dismetu hazarde la vermojn"
 
@@ -408,7 +408,7 @@ msgstr "Grenado"
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:740
+#: src/game/game_loop.cpp:743
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Komenca energio"
 
-#: src/game/game_loop.cpp:200
+#: src/game/game_loop.cpp:201
 msgid "Initialisation"
 msgstr "Preparanto"
 
@@ -432,15 +432,15 @@ msgstr "Preparanto"
 msgid "Initialisation of TTF library failed: %s"
 msgstr " Preparado de TTF biblioteko fuŝiĝis: %s"
 
-#: src/game/game_loop.cpp:103
+#: src/game/game_loop.cpp:104
 msgid "Initialise data"
 msgstr "Preparante datumojn"
 
-#: src/game/game_loop.cpp:165
+#: src/game/game_loop.cpp:166
 msgid "Initialise objects"
 msgstr "Preparante objektojn"
 
-#: src/game/game_loop.cpp:99 src/game/game_loop.cpp:128
+#: src/game/game_loop.cpp:100 src/game/game_loop.cpp:129
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
@@ -482,7 +482,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Mapo %s, far :"
 
-#: src/game/game_loop.cpp:203
+#: src/game/game_loop.cpp:204
 msgid "Maps"
 msgstr ""
 
@@ -523,7 +523,7 @@ msgstr " La plej perforta : %s (%i).\n"
 msgid "Music?"
 msgstr "Muziko?"
 
-#: src/interface/interface.cpp:96
+#: src/interface/interface.cpp:98
 msgid "Name:"
 msgstr "Nomo:"
 
@@ -658,7 +658,7 @@ msgstr "Sonaj efektoj"
 msgid "Sound frequency"
 msgstr "Sonaj efektoj"
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:222
 #, fuzzy
 msgid "Sounds"
 msgstr "Sonaj agordoj"
@@ -667,7 +667,7 @@ msgstr "Sonaj agordoj"
 msgid "Starting a new game"
 msgstr "Komencas novan ludon"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:101
 msgid "Stock:"
 msgstr "Municioj:"
 
@@ -688,7 +688,7 @@ msgstr ""
 msgid "Team %s results:\n"
 msgstr " Teamo %s rezultoj:\n"
 
-#: src/game/game_loop.cpp:207
+#: src/game/game_loop.cpp:208
 msgid "Teams"
 msgstr ""
 
@@ -696,7 +696,7 @@ msgstr ""
 msgid "Teleportation"
 msgstr "Teleporto"
 
-#: src/weapon/cluster_bomb.cpp:97
+#: src/weapon/cluster_bomb.cpp:87
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
@@ -757,11 +757,11 @@ msgstr ""
 msgid "Wait! "
 msgstr "Atendas teamojn"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:100
 msgid "Weapon:"
 msgstr "Armilo:"
 
-#: src/game/game_loop.cpp:216
+#: src/game/game_loop.cpp:217
 #, fuzzy
 msgid "Weapons"
 msgstr "Armilo:"
@@ -770,7 +770,7 @@ msgstr "Armilo:"
 msgid "Website: "
 msgstr "TTT-ejo: "
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo!"
@@ -788,7 +788,7 @@ msgstr "Wormux muntas..."
 msgid "Wormux version "
 msgstr "Wormux versio "
 
-#: src/include/action_handler.cpp:406
+#: src/include/action_handler.cpp:405
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -802,7 +802,7 @@ msgstr "XML-a eraro dum la mapa muntado '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Vi bezonas almenaŭ unu taŭgan mapon!"
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr "Vi necesas almenaŭ du teamojn, korektu ĉi tion en la menuo Elektoj !"
 

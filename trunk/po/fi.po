@@ -66,7 +66,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/game/game_loop.cpp:704
+#: src/game/game_loop.cpp:707
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (joukkue %s) kuoli."
@@ -81,7 +81,7 @@ msgstr "%s < %s > aka %s %s:stä"
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suoritti itsemurhan !"
@@ -91,12 +91,12 @@ msgstr "%s suoritti itsemurhan !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:676
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s sukelsi syvyyksiin."
 
-#: src/game/game_loop.cpp:687
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
@@ -115,12 +115,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/game/game_loop.cpp:693
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kuoli kömpelyyteensä!"
@@ -198,11 +198,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 msgstr[1] "Joukkue %s voitti %u ilmaiskua."
 
-#: src/interface/interface.cpp:160
+#: src/interface/interface.cpp:162
 msgid "(dead)"
 msgstr "(kuollut)"
 
-#: src/interface/interface.cpp:202
+#: src/interface/interface.cpp:204
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
@@ -225,7 +225,7 @@ msgstr "Odota joukkueita"
 msgid "All teams results:\n"
 msgstr "Joukkueesi tulokset:\n"
 
-#: src/weapon/anvil.cpp:72
+#: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr ""
 
@@ -273,7 +273,7 @@ msgstr "Ei löydy joukkuetta %s!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ei voida avata joukkue hakemistoa (%s)!"
 
-#: src/weapon/cluster_bomb.cpp:129
+#: src/weapon/cluster_bomb.cpp:111
 #, fuzzy
 msgid "Cluster Bomb"
 msgstr "Klusteripommi"
@@ -312,7 +312,7 @@ msgstr "Vuoron kesto:"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/interface/interface.cpp:97
+#: src/interface/interface.cpp:99
 msgid "Energy:"
 msgstr "Voima:"
 
@@ -326,7 +326,7 @@ msgstr "Virhe kohdassa %s:%lu"
 msgid "Error loading team %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
 
-#: src/team/team.cpp:185
+#: src/team/team.cpp:184
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Virhe ladattessa joukkuetta %s:"
@@ -366,7 +366,7 @@ msgstr "Virhe: ei voida ladata ulkoasua \"%s\" joukkueelle \"%s\"."
 msgid "Failed to initialize network library!"
 msgstr "SDL kirjaston alustus epäonnistui:%s"
 
-#: src/game/game_loop.cpp:159
+#: src/game/game_loop.cpp:160
 msgid "Find a random position for characters"
 msgstr "Etsi satunnaiset sijainnit hahmoille"
 
@@ -412,7 +412,7 @@ msgstr "Kranaatti"
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:740
+#: src/game/game_loop.cpp:743
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -427,7 +427,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Aloitus voimat:"
 
-#: src/game/game_loop.cpp:200
+#: src/game/game_loop.cpp:201
 msgid "Initialisation"
 msgstr "Alustus"
 
@@ -436,15 +436,15 @@ msgstr "Alustus"
 msgid "Initialisation of TTF library failed: %s"
 msgstr "TTF kirjaston alustus epäonnistui: %s"
 
-#: src/game/game_loop.cpp:103
+#: src/game/game_loop.cpp:104
 msgid "Initialise data"
 msgstr "Alusta tiedot"
 
-#: src/game/game_loop.cpp:165
+#: src/game/game_loop.cpp:166
 msgid "Initialise objects"
 msgstr "Alusta objektit"
 
-#: src/game/game_loop.cpp:99 src/game/game_loop.cpp:128
+#: src/game/game_loop.cpp:100 src/game/game_loop.cpp:129
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
@@ -486,7 +486,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Kartta %s, tehnyt :"
 
-#: src/game/game_loop.cpp:203
+#: src/game/game_loop.cpp:204
 msgid "Maps"
 msgstr ""
 
@@ -528,7 +528,7 @@ msgstr "  Väkivaltaisin  :  %s (%i)\n"
 msgid "Music?"
 msgstr "Musiikki?"
 
-#: src/interface/interface.cpp:96
+#: src/interface/interface.cpp:98
 msgid "Name:"
 msgstr "Nimi:"
 
@@ -665,7 +665,7 @@ msgstr "Ääniefektit?"
 msgid "Sound frequency"
 msgstr "Ääniefektit?"
 
-#: src/game/game_loop.cpp:221
+#: src/game/game_loop.cpp:222
 #, fuzzy
 msgid "Sounds"
 msgstr "Ääni asetukset"
@@ -674,7 +674,7 @@ msgstr "Ääni asetukset"
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:101
 msgid "Stock:"
 msgstr "Varasto:"
 
@@ -695,7 +695,7 @@ msgstr ""
 msgid "Team %s results:\n"
 msgstr "Joukkueen %s tulokset:\n"
 
-#: src/game/game_loop.cpp:207
+#: src/game/game_loop.cpp:208
 msgid "Teams"
 msgstr ""
 
@@ -703,7 +703,7 @@ msgstr ""
 msgid "Teleportation"
 msgstr "Teleportaatio"
 
-#: src/weapon/cluster_bomb.cpp:97
+#: src/weapon/cluster_bomb.cpp:87
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
@@ -765,11 +765,11 @@ msgstr ""
 msgid "Wait! "
 msgstr "Odota joukkueita"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:100
 msgid "Weapon:"
 msgstr "Ase:"
 
-#: src/game/game_loop.cpp:216
+#: src/game/game_loop.cpp:217
 #, fuzzy
 msgid "Weapons"
 msgstr "Ase:"
@@ -778,7 +778,7 @@ msgstr "Ase:"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:704
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -796,7 +796,7 @@ msgstr "Wormux käynnistyy..."
 msgid "Wormux version "
 msgstr "Wormux versio"
 
-#: src/include/action_handler.cpp:406
+#: src/include/action_handler.cpp:405
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -810,7 +810,7 @@ msgstr "XML virhe ladattaessa karttaa '%s' :"
 msgid "You need at least one valid map !"
 msgstr "Tarvitset ainakin yhden toimivan kartan !"
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:212
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Tarvitset ainakin kaksi joukkuetta pelataksesi: vaihda tätä 'Asetukset "
