@@ -32,24 +32,6 @@ public:
   // Version number of Wormux
   static const std::string VERSION;
   
-  /*
-   * Data path: 
-   * INSTALL_DATADIR set by configure script to 
-   * "/usr/share/wormux" by default
-   * Override with --with-datadir-name
-   */
-  static const std::string DEFAULT_DATADIR;
-  
-  /*
-   * Locales path: 
-   * INSTALL_LOCALEDIR set by configure script to 
-   * "/usr/share/locale" by default
-   * Override with --with-localedir-name
-   */
-  static const std::string DEFAULT_LOCALEDIR;
-  
-  static const std::string DEFAULT_FONT_PATH;
-
   // Env variables name to override previous values
   static const std::string ENV_DATADIR;
   static const std::string ENV_LOCALEDIR;

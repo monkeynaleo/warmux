@@ -23,6 +23,8 @@
 
 #include "config.h"
 
+#define USE_AUTOPACKAGE 
+
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -45,6 +47,9 @@
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
 #include "../weapon/weapons_list.h"
+#ifdef USE_AUTOPACKAGE
+#  include "../include/binreloc.h"
+#endif
 
 const std::string NOMFICH="config.xml";
 Config * Config::singleton = NULL;
@@ -58,6 +63,17 @@ Config * Config::GetInstance() {
 
 Config::Config()
 {
+#ifdef USE_AUTOPACKAGE
+  BrInitError error;
+  std::string filename;
+
+  if (br_init (&error) == 0 && error != BR_INIT_ERROR_DISABLED) {
+	  std::cout << "Warning: BinReloc failed to initialize (error code " 
+		    << error << ")" << std::endl;
+	  std::cout << "Will fallback to hardcoded default path." << std::endl;
+  }
+#endif
+
   // Default values
   exterieur_monde_vide = true;
   m_game_mode = "classic";
@@ -78,9 +94,16 @@ Config::Config()
   Constants::GetInstance();
 
   // directories
-  data_dir = GetEnv(Constants::ENV_DATADIR, Constants::DEFAULT_DATADIR);
-  locale_dir = GetEnv(Constants::ENV_LOCALEDIR, Constants::DEFAULT_LOCALEDIR);
-  ttf_filename = GetEnv(Constants::ENV_FONT_PATH, Constants::DEFAULT_FONT_PATH);
+#ifdef USE_AUTOPACKAGE
+  data_dir = GetEnv(Constants::ENV_DATADIR, br_find_data_dir(INSTALL_DATADIR));
+  locale_dir = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
+  filename = data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf";
+  ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
+#else
+  data_dir = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
+  locale_dir = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
+  ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
+#endif  
 
 #ifndef WIN32
   personal_dir = GetHome()+"/.wormux/";

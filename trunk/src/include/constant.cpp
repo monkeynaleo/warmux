@@ -23,9 +23,6 @@
 
 const std::string Constants::VERSION = PACKAGE_VERSION;
 
-const std::string Constants::DEFAULT_DATADIR = INSTALL_DATADIR;
-const std::string Constants::DEFAULT_LOCALEDIR = INSTALL_LOCALEDIR;
-const std::string Constants::DEFAULT_FONT_PATH = FONT_FILE;
 const std::string Constants::ENV_DATADIR = "WORMUX_DATADIR";
 const std::string Constants::ENV_LOCALEDIR = "WORMUX_LOCALEDIR";
 const std::string Constants::ENV_FONT_PATH = "WORMUX_FONT_PATH";

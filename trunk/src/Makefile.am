@@ -16,6 +16,7 @@ wormux_SOURCES = \
 	character/member.cpp character/member.h \
 	character/move.cpp character/move.h \
 	character/movement.cpp character/movement.h \
+	include/binreloc.h include/binreloc.c \
 	include/base.h include/enum.h \
 	include/constant.cpp include/constant.h \
 	include/action.cpp include/action.h \
