@@ -69,6 +69,7 @@ Interface * Interface::GetInstance() {
 Interface::Interface()
 {
   display = true;
+  start_hide_display = 0;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   game_menu = resource_manager.LoadImage( res, "interface/game_menu");
@@ -106,7 +107,7 @@ Interface::Interface()
   t_character_name = new Text("None", white_color, normal_font);
   t_character_energy = new Text("Dead", white_color, normal_font);
   t_weapon_name = new Text("None", white_color, normal_font);
-  t_weapon_stock = new Text("0", white_color, normal_font);;
+  t_weapon_stock = new Text("0", white_color, normal_font);
 }
 
 Interface::~Interface()
@@ -238,14 +239,16 @@ void Interface::DisplayGlobalTimer()
 // display time left in a turn
 void Interface::DisplayTurnTime()
 {
-  AppWormux * app = AppWormux::GetInstance();
-  Point2i turn_time_pos = (app->video.window.GetSize() - bg_turn_time.GetSize()) * Point2d(0.5, 1) + Point2i(0, - GetHeight() / 2 + bg_turn_time.GetHeight() / 2);
-  Rectanglei dr(turn_time_pos, bg_turn_time.GetSize());
-  app->video.window.Blit( bg_turn_time, turn_time_pos);
-
-  if (timer != NULL && display_timer)
-    timer->DrawCenter(bottom_bar_pos + GetSize()/2 + Point2i(0, 3));
-  world.ToRedrawOnScreen(dr);
+  if (timer != NULL && display_timer) {
+    AppWormux * app = AppWormux::GetInstance();
+    Point2i turn_time_pos = (app->video.window.GetSize() - bg_turn_time.GetSize()) * Point2d(0.5, 1) + 
+                            Point2i(0, - game_menu.GetHeight() / 2 + bg_turn_time.GetHeight() / 2);
+    Rectanglei dr(turn_time_pos, bg_turn_time.GetSize());
+    app->video.window.Blit( bg_turn_time, turn_time_pos);
+    Point2i size(GetWidth(),game_menu.GetHeight());
+    timer->DrawCenter(turn_time_pos + bg_turn_time.GetSize() / 2);
+    world.ToRedrawOnScreen(dr);
+  }
 }
 
 void Interface::Draw ()
@@ -269,8 +272,6 @@ void Interface::Draw ()
 
   DisplayTurnTime();
 
-  if (!display) return;
-
   // Display the background of both Character info and weapon info
   Rectanglei dr(bottom_bar_pos, game_menu.GetSize());
   app->video.window.Blit( game_menu, bottom_bar_pos);
@@ -291,12 +292,16 @@ int Interface::GetWidth() const
 
 int Interface::GetHeight() const
 {
+  if(!display) {
+    int height = game_menu.GetHeight() - (Time::GetInstance()->Read() - start_hide_display)/3;
+    return (height > 0 ? height : 0);
+  }
   return game_menu.GetHeight();
 }
 
 Point2i Interface::GetSize() const
 {
-  return game_menu.GetSize();
+  return Point2i(GetWidth(), GetHeight());
 }
 
 void Interface::EnableDisplay (bool _display)
@@ -307,12 +312,15 @@ void Interface::EnableDisplay (bool _display)
 
 void Interface::Show()
 {
+  if(display) return;
   display = true;
 }
 
 void Interface::Hide()
 {
+  if(!display) return;
   display = false;
+  start_hide_display = Time::GetInstance()->Read();
 }
 
 bool Interface::IsVisible() const
