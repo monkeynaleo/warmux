@@ -62,6 +62,7 @@ public:
    Text * t_weapon_stock;
 
    bool display;
+   int start_hide_display;
    bool display_timer;
    void DisplayCharacterInfo ();
    void DisplayWeaponInfo ();
