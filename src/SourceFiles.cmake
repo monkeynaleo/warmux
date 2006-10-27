@@ -53,6 +53,7 @@ gui/widget.cpp
 gui/widget_list.cpp
 include/action.cpp
 include/action_handler.cpp
+include/binreloc.c
 include/constant.cpp
 interface/cursor.cpp
 interface/game_msg.cpp

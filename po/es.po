@@ -332,7 +332,7 @@ msgstr "Error cargando el equipo %s :"
 msgid "Error loading team's data %s:"
 msgstr "Error cargando datos del equipo %s :"
 
-#: src/game/config.cpp:251
+#: src/game/config.cpp:274
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -340,7 +340,7 @@ msgstr ""
 "Error mientras se creaba el directorio \"%s\" : no se puede guardar el "
 "fichero de configuración."
 
-#: src/game/config.cpp:119
+#: src/game/config.cpp:142
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Error cargando el fichero de configuración %s :"

@@ -12,6 +12,7 @@ it.po
 nl.po
 pl.po
 pt.po
+pt-BR.po
 ro.po
 ru.po
 sk.po
