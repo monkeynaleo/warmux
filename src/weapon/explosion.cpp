@@ -98,6 +98,8 @@ void ApplyExplosion_common (const Point2i &pos,
   FOR_ALL_CHARACTERS(equipe,ver)
   {
     double distance = pos.Distance(ver -> GetCenter());
+    if(distance < 1.0)
+      distance = 1.0;
 
     // If the character is in the explosion range, apply damage on it !
     if (distance <= config.explosion_range)
@@ -145,6 +147,9 @@ void ApplyExplosion_common (const Point2i &pos,
   FOR_EACH_OBJECT(obj) if ( !(obj -> ptr -> GoesThroughWall()) )
   { 
     double distance = pos.Distance(obj -> ptr -> GetCenter());
+    if(distance < 1.0)
+      distance = 1.0;
+
     if (distance <= config.explosion_range)
     {
       double dmg = cos(M_PI_2 * distance / config.explosion_range);
