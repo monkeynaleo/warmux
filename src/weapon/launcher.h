@@ -56,11 +56,12 @@ class WeaponProjectile : public PhysicalObj
     virtual void Draw();
     virtual void Refresh();
     virtual void Shoot(double strength);
+    virtual bool IsImmobile() const;
 
     void IncrementTimeOut();
     void DecrementTimeOut();
     void SetTimeOut(int timeout);
-    int GetTotalTimeout();
+    int GetTotalTimeout() const;
     void ResetTimeOut();
     bool change_timeout_allowed();
     void RemoveFromPhysicalEngine();

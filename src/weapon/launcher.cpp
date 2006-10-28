@@ -187,6 +187,13 @@ void WeaponProjectile::Draw()
   }
 }
 
+bool WeaponProjectile::IsImmobile() const
+{
+  if(explode_with_timeout && begin_time + GetTotalTimeout() * 1000 > Time::GetInstance()->Read())
+    return false;
+  return PhysicalObj::IsImmobile();
+}
+
 // projectile explode and signal to the launcher the collision
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {  
@@ -278,7 +285,7 @@ void WeaponProjectile::ResetTimeOut()
   m_timeout_modifier = 0 ;
 }
 
-int WeaponProjectile::GetTotalTimeout()
+int WeaponProjectile::GetTotalTimeout() const
 {
   return (int)(cfg.timeout)+m_timeout_modifier;
 }

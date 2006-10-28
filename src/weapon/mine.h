@@ -58,7 +58,7 @@ class ObjMine : public WeaponProjectile
 
     void StartTimeout();
     void Detection();
-    bool IsImmobile() const;
+    virtual bool IsImmobile() const;
 
     void Draw();
     void Refresh();
