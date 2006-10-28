@@ -158,7 +158,6 @@ public:
 
   // Hand position
   const Point2i & GetHandPosition() const;
-  void GetHandPositionf (double &x, double &y);
 
   // Damage report
   void HandleMostDamage();

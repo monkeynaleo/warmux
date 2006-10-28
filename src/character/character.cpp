@@ -846,13 +846,6 @@ const Point2i & Character::GetHandPosition() const {
   return body->GetHandPosition();
 }
 
-// Hand position
-void Character::GetHandPositionf (double &x, double &y)
-{
-  x = (double) GetHandPosition().x;
-  x = (double) GetHandPosition().y;
-}
-
 void Character::HandleMostDamage()
 {
   if (current_total_damage > max_damage)
