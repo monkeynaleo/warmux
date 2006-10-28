@@ -59,7 +59,6 @@ public:
   ~Font();
 
   bool Load (const std::string& filename, int size);
-  TTF_Font& GetTTF();
 
   void WriteLeft(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteLeftBottom(const Point2i &pos, const std::string &txt, const Color &color);

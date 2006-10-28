@@ -104,7 +104,6 @@ public:
 private:
   void ComputeSize();
   void Show();
-  void DrawBouton(iterator bouton);
   void ShowMotion(int nr_bottons, int button_no, iterator it, int column);
   bool HideMotion(int nr_buttons, int button_no, iterator it, int column);
 };

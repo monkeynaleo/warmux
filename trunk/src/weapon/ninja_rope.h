@@ -70,7 +70,6 @@ class NinjaRope : public Weapon
     void Refresh();
     void p_Deselect();
     bool p_Shoot();
-    void LoadExtraXml(xmlpp::Element *elem);
     void GoUp();
     void GoDown();
     void GoLeft();

@@ -41,7 +41,6 @@ private:
 
 private:
   void Init(int, char**);
-  void InitScreen();
   void InitWindow();
   void DisplayLoadingPicture();
   void InitFonts();
