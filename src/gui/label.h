@@ -43,8 +43,6 @@ class Label : public Widget{
   void SetSizePosition(const Rectanglei &rect);
   void SetText(const std::string &new_txt);
   std::string &GetText();
-
-  void SetFontColor(const Color& color);
 };
 
 #endif
