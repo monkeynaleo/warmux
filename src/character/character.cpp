@@ -335,7 +335,7 @@ void Character::Die()
 
 bool Character::IsDiseased() const
 {
-  return disease_duration > 0;
+  return disease_duration > 0 && !IsDead();
 }
 
 void Character::SetDiseaseDamage(const uint damage_per_turn, const uint duration)
