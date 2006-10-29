@@ -177,39 +177,3 @@ void TeamResults::deleteAllResults(std::vector<TeamResults*>* results_list)
   // Add overall results to list
   delete results_list;
 }
-
-void TeamResults::RenderText(std::string& txt)
-{
-  std::ostringstream mv;
-  std::ostringstream muf;
-  std::ostringstream mul;
-  std::ostringstream bt;
-  if(mostViolent)
-    mv << mostViolent->GetName() << " (" << mostViolent->GetMostDamage() << ").\n";
-  else
-    mv << _("Nobody!");
-
-  if(mostUsefull)
-    mv << mostUsefull->GetName() << " (" << mostUsefull->GetMostDamage() << ").\n";
-  else
-    mv << _("Nobody!");
-
-  if(mostUseless)
-    mv << mostUseless->GetName() << " (" << mostUseless->GetMostDamage() << ").\n";
-  else
-    mv << _("Nobody!");
-
-  if(biggestTraitor)
-    mv << biggestTraitor->GetName() << " (" << biggestTraitor->GetMostDamage() << ").\n";
-  else
-    mv << _("Nobody!");
-
-  if (team_logo)
-    txt += Format(_("Team %s results:\n"), teamName.c_str());
-  else
-    txt += _("All teams results:\n");
-  txt += _("  Most violent  :  ") + mv.str();
-  txt += _("  Most useful   :  ") + muf.str();
-  txt += _("  Most useless  :  ") + mul.str();
-  txt += _("  Most sold-out  :  ") + bt.str();
-}

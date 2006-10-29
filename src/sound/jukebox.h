@@ -73,7 +73,7 @@ public:
   void ActiveEffects (bool on) {m_config.effects = on;};
 
   void SetFrequency (int frequency);
-  void SetNumbersOfChannel(int channels);
+  void SetNumbersOfChannel(int channels); // Not used
 
   void LoadXML(const std::string& profile);
 
