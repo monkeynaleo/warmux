@@ -48,13 +48,21 @@ template<class T> class Vector2
 			return y;
 		}
 
+		/**
+		 *
+		 */
+		inline bool IsZero(T val) const{
+			return (val == 0 || val <= VECTOR2_EPS_ZERO) &&
+                               (-val <= VECTOR2_EPS_ZERO);
+		}
+
 		// Comparators
 
 		/**
 		 *
 		 */
 		inline bool operator==(const Vector2<T> &p2) const{
-			return (x == p2.x) && (y == p2.y);
+			return IsZero(x - p2.x) && IsZero(y - p2.y);
 		}
 
 		/**
@@ -298,13 +306,6 @@ template<class T> class Vector2
 		void SetValues( Vector2<T> v2){
 			x = v2.x;
 			y = v2.y;
-		}
-
-		/**
-		 *
-		 */
-		inline bool IsZero(T val) const{
-			return (val <= VECTOR2_EPS_ZERO) && (-val <= VECTOR2_EPS_ZERO);
 		}
 
 		/**
