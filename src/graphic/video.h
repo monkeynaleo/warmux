@@ -50,10 +50,11 @@ public:
   Video();
   ~Video();
 
-  bool IsFullScreen(void) const;
+  bool IsFullScreen() const;
 
   std::list<Point2i>& GetAvailableConfigs();
   bool SetConfig(int width, int height, bool fullscreen);
+  void ToggleFullscreen();
 
   void InitWindow(void);
 

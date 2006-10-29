@@ -30,34 +30,34 @@
 #include "../map/camera.h"
 
 Video::Video(){
-	SetMaxFps (50);
-	fullscreen = false;
-	SDLReady = false;
+  SetMaxFps (50);
+  fullscreen = false;
+  SDLReady = false;
 }
 
 Video::~Video(){
-	if( SDLReady )
-		SDL_Quit();
+  if( SDLReady )
+    SDL_Quit();
 }
 
 void Video::SetMaxFps(uint max_fps){
-	m_max_fps = max_fps;
-	if (0 < m_max_fps)
-		m_sleep_max_fps = 1000/m_max_fps;
-	else
-		m_sleep_max_fps = 0;
+  m_max_fps = max_fps;
+  if (0 < m_max_fps)
+    m_sleep_max_fps = 1000/m_max_fps;
+  else
+    m_sleep_max_fps = 0;
 }
 
 uint Video::GetMaxFps(){
-	return m_max_fps;
+  return m_max_fps;
 }
 
 uint Video::GetSleepMaxFps(){
-	return m_sleep_max_fps;
+  return m_sleep_max_fps;
 }
 
-bool Video::IsFullScreen(void) const{
-	return fullscreen;
+bool Video::IsFullScreen() const{
+  return fullscreen;
 }
 
 bool CompareConfigs(const Point2i& a, const Point2i& b)
@@ -69,7 +69,7 @@ void Video::ComputeAvailableConfigs()
 { 
   // Add the current resolution
   available_configs.push_back(Point2i(AppWormux::GetInstance()->video.window.GetWidth(),
-					  AppWormux::GetInstance()->video.window.GetHeight()));
+                                      AppWormux::GetInstance()->video.window.GetHeight()));
 
   //Generate video mode list
   SDL_Rect **modes;
@@ -85,7 +85,7 @@ void Video::ComputeAvailableConfigs()
       if (modes[i]->w < 800 || modes[i]->h < 600) break; 
       available_configs.push_back(Point2i(modes[i]->w, modes[i]->h));
     }
-  }    
+  }
 
   // Sort the list
   available_configs.sort(CompareConfigs);
@@ -116,11 +116,9 @@ void Video::ComputeAvailableConfigs()
   for (++it; it != end ; ++it) {
     if ((*prev)==(*it)) // the two items are equals
       prev = available_configs.erase(prev);
-    else 
+    else
       prev++;
   }
-
-
 }
 
 std::list<Point2i>& Video::GetAvailableConfigs()
@@ -129,74 +127,80 @@ std::list<Point2i>& Video::GetAvailableConfigs()
 }
 
 bool Video::SetConfig(int width, int height, bool _fullscreen){
-	// initialize the main window
-	if( window.IsNull() || 
-			(width != window.GetWidth() || 
-			 height != window.GetHeight() ) ){
+  // initialize the main window
+  if( window.IsNull() ||
+     (width != window.GetWidth() || 
+      height != window.GetHeight() ) ){
 
-		window.SetSurface( SDL_SetVideoMode(width, height, 32, 
-				SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF ), false );
+    window.SetSurface( SDL_SetVideoMode(width, height, 32, 
+                       SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF ), false );
 
-		if( window.IsNull() ) {
-			window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE) );
-			std::cerr << "WARNING: Video not using hardware acceleration!" << std::endl;
-		}
+    if( window.IsNull() ) {
+      window.SetSurface( SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE) );
+      std::cerr << "WARNING: Video not using hardware acceleration!" << std::endl;
+    }
 
-		if( window.IsNull() )
-			return false;
-		fullscreen = false;
-	}
+    if( window.IsNull() )
+      return false;
+    fullscreen = false;
+  }
 
-	if(fullscreen != _fullscreen ){
-		SDL_WM_ToggleFullScreen( window.GetSurface() );
-		fullscreen = _fullscreen;
-	}
+  if(fullscreen != _fullscreen) {
+    SDL_WM_ToggleFullScreen( window.GetSurface() );
+    fullscreen = !fullscreen;
+  }
 
-	camera.SetSize(width, height);
+  camera.SetSize(width, height);
 
-	return true;
+  return true;
+}
+
+void Video::ToggleFullscreen()
+{
+  SDL_WM_ToggleFullScreen( window.GetSurface() );
+  fullscreen = !fullscreen;
 }
 
 void Video::InitWindow(){
-	InitSDL();
+  InitSDL();
 
-	window.SetSurface( NULL , false );
-	window.SetAutoFree( false );
+  window.SetSurface( NULL , false );
+  window.SetAutoFree( false );
 
-	Config * config = Config::GetInstance();
-	SetConfig(config->tmp.video.width,
-			config->tmp.video.height,
-			config->tmp.video.fullscreen);
+  Config * config = Config::GetInstance();
+  SetConfig(config->tmp.video.width,
+            config->tmp.video.height,
+            config->tmp.video.fullscreen);
 
-	if( window.IsNull() )
-		Error( "Unable to initialize SDL window.");
+  if( window.IsNull() )
+    Error( "Unable to initialize SDL window.");
 
-	SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
-	SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux-32.xpm" );
+  SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
+  SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux-32.xpm" );
 
-	ComputeAvailableConfigs();
+  ComputeAvailableConfigs();
 }
 
 void Video::SetWindowCaption(std::string caption){
-	SDL_WM_SetCaption( caption.c_str(), NULL );
+  SDL_WM_SetCaption( caption.c_str(), NULL );
 }
 
 void Video::SetWindowIcon(std::string filename){
-	SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
+  SDL_WM_SetIcon( IMG_Load(filename.c_str()), NULL );
 }
 
 void Video::InitSDL(){
-	if( SDLReady )
-		return;
+  if( SDLReady )
+    return;
 
-	if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
-		Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
+  if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
+    Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
 
-   SDL_EnableUNICODE(1);
-	SDLReady = true;
+  SDL_EnableUNICODE(1);
+  SDLReady = true;
 }
 
 void Video::Flip(){
-	window.Flip();
+  window.Flip();
 }
 
