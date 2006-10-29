@@ -25,6 +25,7 @@
 #include "cursor.h"
 #include "game_msg.h"
 #include "interface.h"
+#include "../include/app.h"
 #include "../game/config.h"
 #include "../game/game.h"
 #include "../game/game_loop.h"
@@ -224,9 +225,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
 
     case ACTION_FULLSCREEN:
-#ifdef TODO 
-      video.SetFullScreen( !video.IsFullScreen() );
-#endif
+      AppWormux::GetInstance()->video.ToggleFullscreen();
       return;
   case ACTION_CHAT:
     if(network.IsConnected())

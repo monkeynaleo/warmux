@@ -43,7 +43,8 @@ You may not break your brain to understand how to play with Wormux.
 * Key 'b' : ("Backwards") jump
 * Key enter: ("Horizontal") jump
 * Key backspace: ("Vertical") jump
-* Mouse move next to screen borders: Move the map 
+* Mouse move next to screen borders: Move the map
+* Key F10 : Toggle Fullscreen
 
 2.2/ Additional help
 ====================
