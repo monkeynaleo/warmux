@@ -115,6 +115,8 @@ void JukeBox::SetFrequency (int frequency)
   Init();
 }
 
+// Code not used
+#if 0
 void JukeBox::SetNumbersOfChannel(int channels)
 {
   if (m_config.channels == channels) return;
@@ -125,6 +127,7 @@ void JukeBox::SetNumbersOfChannel(int channels)
   End();
   Init();
 }
+#endif
 
 void JukeBox::LoadXML(const std::string& profile)
 {

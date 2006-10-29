@@ -487,11 +487,6 @@ void PhysicalObj::Ghost ()
   SignalGhostState(was_dead);
 }
 
-void PhysicalObj::RemoveFromPhysicalEngine()
-{
-  lst_objects.RemoveObject(this);
-}
-
 void PhysicalObj::Drown()
 {
   assert (m_alive != DROWNED);

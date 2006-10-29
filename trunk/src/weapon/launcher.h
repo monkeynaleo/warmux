@@ -64,7 +64,6 @@ class WeaponProjectile : public PhysicalObj
     int GetTotalTimeout() const;
     void ResetTimeOut();
     bool change_timeout_allowed();
-    void RemoveFromPhysicalEngine();
   protected:
     virtual void SignalObjectCollision(PhysicalObj * obj);
     virtual void SignalGroundCollision();

@@ -53,8 +53,6 @@ public:
   static std::vector<TeamResults*>* createAllResults(void);
   static void deleteAllResults(std::vector<TeamResults*>* results_list);
 
-  void RenderText(std::string& str);
-
   const std::string& getTeamName() const { return teamName; };
   const Surface* getTeamLogo() const {return team_logo;};
   const Character* getMostViolent() const { return mostViolent; };
