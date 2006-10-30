@@ -153,11 +153,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "'%s je dobio %u zračni napad"
 msgstr[1] "'%s' je dobio %u zračnih napada!"
 
-#: src/interface/interface.cpp:162
+#: src/interface/interface.cpp:163
 msgid "(dead)"
 msgstr "(mrtav)"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:205
 msgid "(unlimited)"
 msgstr "(neograničeno)"
 
@@ -250,7 +250,7 @@ msgstr "Trajanje reda:"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:100
 msgid "Energy:"
 msgstr "Energija"
 
@@ -339,15 +339,7 @@ msgstr "Glavni upravljač"
 msgid "Holy Grenade"
 msgstr "Granata"
 
-<<<<<<< .mine
-#: src/game/game_loop.cpp:740
-=======
-#: src/menu/network_connection_menu.cpp:74
-msgid "Host a game"
-msgstr "Hostaj igru"
-
 #: src/game/game_loop.cpp:743
->>>>>>> .r1563
 msgid "Hurry up, you are too slow !!"
 msgstr "Požuri, previše si spor !!"
 
@@ -355,7 +347,7 @@ msgstr "Požuri, previše si spor !!"
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
-msgstr "Ako ste pronašli bug ili imate prijedlog molimo posaljite nam mail (na engleskom)"
+msgstr ""
 
 #: src/menu/game_menu.cpp:310
 #, fuzzy
@@ -426,7 +418,7 @@ msgstr "Mina"
 msgid "Music?"
 msgstr "Muzika?"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:99
 msgid "Name:"
 msgstr "Ime:"
 
@@ -540,7 +532,7 @@ msgstr "Zvučne opcije"
 msgid "Starting a new game"
 msgstr "Pokreni novu igru"
 
-#: src/interface/interface.cpp:101
+#: src/interface/interface.cpp:102
 msgid "Stock:"
 msgstr "Zaliha:"
 
@@ -556,19 +548,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Šprica"
 
-<<<<<<< .mine
-=======
-#: src/team/results.cpp:208
-#, fuzzy, c-format
-msgid "Team %s results:\n"
-msgstr "Učitaj timove:"
-
-<<<<<<< .mine
->>>>>>> .r1563
-#: src/game/game_loop.cpp:207
-=======
 #: src/game/game_loop.cpp:208
->>>>>>> .r1577
 msgid "Teams"
 msgstr "Timovi"
 
@@ -591,19 +571,11 @@ msgstr "Automatksa rakete je napustila bojište..."
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je napustila bojište..."
 
-#: src/graphic/video.cpp:193
+#: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
 
-<<<<<<< .mine
-=======
-#: src/network/network.cpp:215
-#, fuzzy
-msgid "Unable to listen for client!"
-msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
->>>>>>> .r1563
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
@@ -618,7 +590,7 @@ msgstr "Neočekivani izuzetak uhvaćen..."
 msgid "Version"
 msgstr "Verzija"
 
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:101
 msgid "Weapon:"
 msgstr "Oružje:"
 
@@ -647,18 +619,6 @@ msgstr "Wormux se učitava..."
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
-<<<<<<< .mine
-<<<<<<< .mine
-=======
-#: src/include/action_handler.cpp:406
-=======
-#: src/include/action_handler.cpp:405
->>>>>>> .r1577
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr "Verzije wormuxa su drugacije: klijent=%s, server=%s"
-
->>>>>>> .r1563
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -676,7 +636,7 @@ msgstr "Trebate barem dva tima da igraju: promijeni ovo u 'Menu za Opcije ' !"
 msgid "You need at least two valid teams !"
 msgstr "Trebate barem dva važeća tima !"
 
-#: src/weapon/launcher.cpp:455
+#: src/weapon/launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 
@@ -686,19 +646,19 @@ msgstr "gotov"
 
 #, fuzzy
 #~ msgid " has joined the party"
-#~ msgstr "%s se pridružio u partiji"
+#~ msgstr "%s je ispao sa mape!"
 
 #, fuzzy
 #~ msgid " has left the party"
-#~ msgstr "%s je napustio partiju"
+#~ msgstr "%s je ispao sa mape!"
 
 #, fuzzy
 #~ msgid "All teams"
-#~ msgstr "Učitaj sve timove:"
+#~ msgstr "Učitaj timove:"
 
 #, fuzzy
 #~ msgid "All teams results:\n"
-#~ msgstr "Rezultati svih timova:\n"
+#~ msgstr "Učitaj timove:"
 
 #, fuzzy
 #~ msgid "Failed to initialize network library!"
@@ -713,16 +673,24 @@ msgstr "gotov"
 #~ msgstr "Broj igrača po timu:"
 
 #, fuzzy
+#~ msgid "Team %s results:\n"
+#~ msgstr "Učitaj timove:"
+
+#, fuzzy
 #~ msgid "Unable to connect"
-#~ msgstr "Nemoguće konektovati"
+#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
 #, fuzzy
 #~ msgid "Unable to contact server!"
-#~ msgstr "Nije u stanju kontaktirati server!"
+#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to listen for client!"
+#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
 #, fuzzy
 #~ msgid "Unable to start server"
-#~ msgstr "Nemoguće startati server"
+#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""
