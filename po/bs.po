@@ -1,4 +1,4 @@
-# translation of bs.po to Bosanski
+# translation of bs.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-10-13 04:58+0200\n"
-"Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
-"Language-Team: Bosanski <lokal@linux.org.ba>\n"
+"PO-Revision-Date: 2006-10-30 21:59+0100\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -271,8 +271,7 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:274
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -347,7 +346,7 @@ msgstr "Požuri, previše si spor !!"
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
-msgstr ""
+msgstr "Ako si ponašao bug ili imaš prijedlog pošalji nam email (na engleskom)"
 
 #: src/menu/game_menu.cpp:310
 #, fuzzy
@@ -644,80 +643,3 @@ msgstr "Vaš hitac je promašio!"
 msgid "done"
 msgstr "gotov"
 
-#, fuzzy
-#~ msgid " has joined the party"
-#~ msgstr "%s je ispao sa mape!"
-
-#, fuzzy
-#~ msgid " has left the party"
-#~ msgstr "%s je ispao sa mape!"
-
-#, fuzzy
-#~ msgid "All teams"
-#~ msgstr "Učitaj timove:"
-
-#, fuzzy
-#~ msgid "All teams results:\n"
-#~ msgstr "Učitaj timove:"
-
-#, fuzzy
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
-
-#, fuzzy
-#~ msgid "Game options:"
-#~ msgstr "Opcije"
-
-#, fuzzy
-#~ msgid "Max number of players:"
-#~ msgstr "Broj igrača po timu:"
-
-#, fuzzy
-#~ msgid "Team %s results:\n"
-#~ msgstr "Učitaj timove:"
-
-#, fuzzy
-#~ msgid "Unable to connect"
-#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to contact server!"
-#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to listen for client!"
-#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to start server"
-#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-#~ msgstr ""
-#~ "<infinite_background> treba <is_open> biti postavljena da bi ispravno "
-#~ "radila!!"
-
-#~ msgid "Air attack"
-#~ msgstr "Zračni napad"
-
-#~ msgid "Automatic bazooka"
-#~ msgstr "Automatska bazuka"
-
-#~ msgid "Baseball"
-#~ msgstr "Palija"
-
-#~ msgid "Duration of the end of a turn:"
-#~ msgstr "Trajanje kraja reda:"
-
-#, fuzzy
-#~ msgid "Low gravity"
-#~ msgstr "Smanji gravitaciju"
-
-#~ msgid "Number of players per team:"
-#~ msgstr "Broj igrača po timu:"
-
-#~ msgid "Please tell us your opinion of Wormux via email:"
-#~ msgstr "Molimo recite nam vaše mišljenje o Wormux-u putem email-a:"
-
-#~ msgid "Riot bomb"
-#~ msgstr "Bomba nereda"
