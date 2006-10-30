@@ -190,7 +190,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     if (lbox_all_teams->GetSelectedItem() != -1 && lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
     {
       int index = -1;
-      teams_list.FindById(lbox_all_teams->ReadValue(),index)->is_local = true;
+      teams_list.FindById(lbox_all_teams->ReadValue(),index)->SetLocal();
       std::string team_id = teams_list.FindById(lbox_all_teams->ReadValue(),index)->GetId();
       action_handler->NewAction (new Action(ACTION_NEW_TEAM, team_id));
       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
@@ -198,7 +198,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   }
   if (w == bt_remove_team) {
     int index = -1;
-    if(lbox_selected_teams->GetSelectedItem() != -1 && teams_list.FindById(lbox_selected_teams->ReadValue(),index)->is_local)
+    if(lbox_selected_teams->GetSelectedItem() != -1 && teams_list.FindById(lbox_selected_teams->ReadValue(),index)->IsLocal())
     {
       std::string team_id = teams_list.FindById(lbox_selected_teams->ReadValue(),index)->GetId();
       action_handler->NewAction (new Action(ACTION_DEL_TEAM, team_id));
@@ -416,7 +416,7 @@ void NetworkMenu::AddTeamCallback(std::string team)
     if(lst_it->value == team)
     {
       int index;
-      teams_list.FindById(team, index)->is_local = false;
+      teams_list.FindById(team, index)->SetRemote();
 
       lbox_all_teams->Select(lst_it->label);
       msg_box->NewMessage(lst_it->label + " selected");

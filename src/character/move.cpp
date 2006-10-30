@@ -128,7 +128,7 @@ void MoveCharacterLeft(Character &character){
   }
 
   //Refresh skin position across network
-  if( !network.IsLocal() && ActiveTeam().is_local)
+  if( !network.IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
     SendCharacterPosition();
 }
 
@@ -150,13 +150,13 @@ void MoveCharacterRight (Character &character){
 
 
   //Refresh skin position across network
-  if( !network.IsLocal() && ActiveTeam().is_local)
+  if( !network.IsLocal() && ActiveTeam().IsLocal())
     SendCharacterPosition();
 }
 
 void SendCharacterPosition()
 {
-  assert(ActiveTeam().is_local);
+  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
   Action a_set_clothe(ACTION_SET_CLOTHE,ActiveCharacter().body->GetClothe());
   Action a_set_movement(ACTION_SET_MOVEMENT,ActiveCharacter().body->GetMovement());

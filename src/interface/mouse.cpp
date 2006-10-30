@@ -95,7 +95,7 @@ bool Mouse::ActionWhellDown(){
 
 bool Mouse::ActionClicG()
 {
-  if(!ActiveTeam().is_local)
+  if(!ActiveTeam().IsLocal())
     return false;
 
   const Point2i pos_monde = GetWorldPosition();
@@ -369,7 +369,7 @@ void Mouse::Draw()
       world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_move.GetWidth(), pointer_move.GetHeight()));
       break;
     case POINTER_AIM:
-      if(ActiveTeam().is_local) {
+      if(ActiveTeam().IsLocal()) {
 	AppWormux::GetInstance()->video.window.Blit( pointer_aim, Point2i(GetPosition().x-7, GetPosition().y-10 ));
 	world.ToRedrawOnScreen(Rectanglei(GetPosition().x-7, GetPosition().y-10, pointer_aim.GetWidth(), pointer_aim.GetHeight()));
       } else {

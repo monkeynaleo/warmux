@@ -114,7 +114,7 @@ void Construct::ActionDown()
 void Construct::Up()
 {
   Action a(ACTION_CONSTRUCTION_UP);
-  if(ActiveTeam().is_local)
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     network.SendAction(&a);
   angle += angle_step;
 }
@@ -122,7 +122,7 @@ void Construct::Up()
 void Construct::Down()
 {
   Action a(ACTION_CONSTRUCTION_DOWN);
-  if(ActiveTeam().is_local)
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     network.SendAction(&a);
   angle -= angle_step;
 }

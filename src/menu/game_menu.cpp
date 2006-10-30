@@ -143,6 +143,9 @@ void TeamBox::ValidOptions() const
 
   // set the player name
   associated_team->SetPlayerName(player_name->GetText());
+
+  if (player_name->GetText() == "AI-stupid")
+    associated_team->SetLocalAI();
 }
 
 // ################################################
