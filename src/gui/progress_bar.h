@@ -33,12 +33,18 @@ class BarreProg
 public:
   Color border_color, value_color, background_color;
   Surface image; // in order to pemit alpha blended progressbar
+  enum orientation {
+    PROG_BAR_VERTICAL,
+    PROG_BAR_HORIZONTAL
+  };
+
 private:
   uint x, y, larg, haut; // Position
   long val, min, max; // Valeur
   bool m_use_ref_val; // Valeur de référence
   long m_ref_val; // Valeur de référence
   uint val_barre; // Valeur dans la barre
+  enum orientation orientation;
 
   uint CalculeVal (long val) const;
   uint CalculeValBarre (long val) const;
@@ -67,7 +73,7 @@ public:
   void InitPos (uint x, uint y, uint larg, uint haut);
 
   // Initialise les valeurs
-  void InitVal (long val, long min, long max);
+  void InitVal (long val, long min, long max, enum orientation orientation = PROG_BAR_HORIZONTAL);
 
   // Set reference value
   // Use it after InitVal !
