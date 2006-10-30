@@ -18,44 +18,6 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/team/results.cpp:214
-msgid "  Most sold-out  :  "
-msgstr ""
-
-#: src/team/results.cpp:212
-msgid "  Most useful   :  "
-msgstr ""
-
-#: src/team/results.cpp:213
-msgid "  Most useless  :  "
-msgstr ""
-
-#: src/team/results.cpp:211
-msgid "  Most violent  :  "
-msgstr ""
-
-#: src/network/distant_cpu.cpp:68
-#, fuzzy
-msgid " has joined the party"
-msgstr "%s kiesett a pályáról!"
-
-#: src/network/distant_cpu.cpp:75
-#, fuzzy
-msgid " has left the party"
-msgstr "%s kiesett a pályáról!"
-
-#: src/menu/network_menu.cpp:293
-msgid " players are not yet ready!"
-msgstr ""
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:379
-msgid " players connected"
-msgstr ""
-
-#: src/menu/network_menu.cpp:64 src/menu/network_menu.cpp:384
-msgid " players ready"
-msgstr ""
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
@@ -193,11 +155,11 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s %u ráadás légitámadás nyert!"
 msgstr[1] "%s %u ráadás légitámadás nyert!"
 
-#: src/interface/interface.cpp:162
+#: src/interface/interface.cpp:163
 msgid "(dead)"
 msgstr "(kipurcant)"
 
-#: src/interface/interface.cpp:204
+#: src/interface/interface.cpp:205
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
@@ -209,16 +171,6 @@ msgstr "Légitámadás"
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr ""
-
-#: src/team/results.cpp:143
-#, fuzzy
-msgid "All teams"
-msgstr "%s csapat betöltése."
-
-#: src/team/results.cpp:210
-#, fuzzy
-msgid "All teams results:\n"
-msgstr "%s csapat betöltése."
 
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
@@ -278,16 +230,6 @@ msgstr "Szőnyegbomba"
 msgid "Commit Suicide"
 msgstr "Öngyilkosság elkövetése"
 
-#: src/menu/network_connection_menu.cpp:67
-#, fuzzy
-msgid "Connect to game"
-msgstr "Vége!"
-
-#: src/menu/network_connection_menu.cpp:114
-#, fuzzy
-msgid "Connected to "
-msgstr "Vége!"
-
 #: src/weapon/construct.cpp:43
 msgid "Construct"
 msgstr ""
@@ -309,7 +251,7 @@ msgstr "Egy forduló ideje:"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/interface/interface.cpp:99
+#: src/interface/interface.cpp:100
 msgid "Energy:"
 msgstr ""
 
@@ -358,10 +300,6 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hiba: nem található %s csapatának %s sminkje."
 
-#: src/network/network.cpp:65
-msgid "Failed to initialize network library!"
-msgstr ""
-
 #: src/game/game_loop.cpp:160
 #, fuzzy
 msgid "Find a random position for characters"
@@ -370,11 +308,6 @@ msgstr "A kukacok véletlenszerű elhelyezése"
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Teljesképernyős üzemmód"
-
-#: src/menu/network_menu.cpp:61
-#, fuzzy
-msgid "Game options:"
-msgstr "Beállítások"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -406,11 +339,6 @@ msgstr ""
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Gránát"
-
-#: src/menu/network_connection_menu.cpp:74
-#, fuzzy
-msgid "Host a game"
-msgstr "Vége!"
 
 #: src/game/game_loop.cpp:743
 msgid "Hurry up, you are too slow !!"
@@ -450,24 +378,12 @@ msgstr "Felkészülés"
 msgid "Initialise teams"
 msgstr "Felkészülés"
 
-#: src/network/network.cpp:171
-msgid "Invalid port!"
-msgstr ""
-
-#: src/network/network.cpp:121
-msgid "Invalid server adress!"
-msgstr ""
-
 #: src/object/bonus_box.cpp:281
 msgid "Is it a gift?"
 msgstr ""
 
 #: src/weapon/jetpack.cpp:48
 msgid "Jetpack"
-msgstr ""
-
-#: src/menu/network_menu.cpp:72
-msgid "Join #wormux on irc.freenode.net to find"
 msgstr ""
 
 #: src/map/maps_list.cpp:185
@@ -493,11 +409,6 @@ msgstr "%s térkép szerzője:"
 msgid "Maps"
 msgstr ""
 
-#: src/menu/network_menu.cpp:59
-#, fuzzy
-msgid "Max number of players:"
-msgstr "Játékosok száma csapatonként:"
-
 #: src/menu/options_menu.cpp:77
 msgid "Maximum FPS"
 msgstr ""
@@ -506,27 +417,11 @@ msgstr ""
 msgid "Mine"
 msgstr "Taposó akna"
 
-#: src/menu/results_menu.cpp:169
-msgid "Most sold-out"
-msgstr ""
-
-#: src/menu/results_menu.cpp:159
-msgid "Most useful"
-msgstr ""
-
-#: src/menu/results_menu.cpp:164
-msgid "Most useless"
-msgstr ""
-
-#: src/menu/results_menu.cpp:154
-msgid "Most violent"
-msgstr ""
-
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
 msgstr "Zene"
 
-#: src/interface/interface.cpp:98
+#: src/interface/interface.cpp:99
 #, fuzzy
 msgid "Name:"
 msgstr "Név"
@@ -544,13 +439,6 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
 
-#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
-#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
-#: src/team/results.cpp:190 src/team/results.cpp:195 src/team/results.cpp:200
-#: src/team/results.cpp:205
-msgid "Nobody!"
-msgstr ""
-
 #: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
@@ -560,10 +448,6 @@ msgstr "Játékosok száma csapatonként:"
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Játékosok száma csapatonként:"
-
-#: src/menu/network_menu.cpp:186
-msgid "Only the server can set the map!"
-msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -620,22 +504,6 @@ msgstr ""
 msgid "Run game"
 msgstr "Játék futtatása"
 
-#: src/menu/network_menu.cpp:88
-msgid "Select the teams:"
-msgstr ""
-
-#: src/menu/network_menu.cpp:131
-msgid "Select the world:"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:60
-msgid "Server adress:"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:129
-msgid "Server started"
-msgstr ""
-
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -648,13 +516,6 @@ msgstr ""
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
 msgstr ""
-
-#: src/menu/network_menu.cpp:75
-#, fuzzy
-msgid "So you have to restart Wormux after each"
-msgstr ""
-"Megváltoztak az SDL beállítások:\n"
-"Újra kell indítanod a Wormuxot a beállítások érvényesítéséhez!"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -674,7 +535,7 @@ msgstr "Beállítások"
 msgid "Starting a new game"
 msgstr "Új játék kezdése"
 
-#: src/interface/interface.cpp:101
+#: src/interface/interface.cpp:102
 #, fuzzy
 msgid "Stock:"
 msgstr "Raktár"
@@ -689,11 +550,6 @@ msgstr ""
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
-msgstr ""
-
-#: src/team/results.cpp:208
-#, c-format
-msgid "Team %s results:\n"
 msgstr ""
 
 #: src/game/game_loop.cpp:208
@@ -717,33 +573,14 @@ msgstr ""
 msgid "The rocket has left the battlefield..."
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:119
-#, fuzzy
-msgid "Unable to connect"
-msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
-
-#: src/network/network.cpp:132
-#, fuzzy
-msgid "Unable to contact server!"
-msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
-
-#: src/graphic/video.cpp:193
+#: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
-msgstr ""
-
-#: src/network/network.cpp:215
-msgid "Unable to listen for client!"
 msgstr ""
 
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, fuzzy, c-format
 msgid "Unable to open maps directory (%s)!"
-msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
-
-#: src/menu/network_connection_menu.cpp:132
-#, fuzzy
-msgid "Unable to start server"
 msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
 
 #: src/main.cpp:118
@@ -755,15 +592,7 @@ msgstr "Elkaptam egy váratlanul fellépett kivételt..."
 msgid "Version"
 msgstr "Verzió"
 
-#: src/menu/network_menu.cpp:74
-msgid "WARNING! Disconnections are not yet handled."
-msgstr ""
-
-#: src/menu/network_menu.cpp:293
-msgid "Wait! "
-msgstr ""
-
-#: src/interface/interface.cpp:100
+#: src/interface/interface.cpp:101
 #, fuzzy
 msgid "Weapon:"
 msgstr "Fegyver"
@@ -794,11 +623,6 @@ msgstr "Töltődik a Wormux..."
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
-#: src/include/action_handler.cpp:405
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
-
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -818,21 +642,67 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Legalább két csapatot kell verbuválnod!"
 
-#: src/weapon/launcher.cpp:455
+#: src/weapon/launcher.cpp:462
 msgid "Your shot has missed!"
 msgstr "Ezt elnézted!"
-
-#: src/menu/network_menu.cpp:76
-msgid "disconnection!"
-msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
 
-#: src/menu/network_menu.cpp:73
-msgid "some opponents."
-msgstr ""
+#, fuzzy
+#~ msgid " has joined the party"
+#~ msgstr "%s kiesett a pályáról!"
+
+#, fuzzy
+#~ msgid " has left the party"
+#~ msgstr "%s kiesett a pályáról!"
+
+#, fuzzy
+#~ msgid "All teams"
+#~ msgstr "%s csapat betöltése."
+
+#, fuzzy
+#~ msgid "All teams results:\n"
+#~ msgstr "%s csapat betöltése."
+
+#, fuzzy
+#~ msgid "Connect to game"
+#~ msgstr "Vége!"
+
+#, fuzzy
+#~ msgid "Connected to "
+#~ msgstr "Vége!"
+
+#, fuzzy
+#~ msgid "Game options:"
+#~ msgstr "Beállítások"
+
+#, fuzzy
+#~ msgid "Host a game"
+#~ msgstr "Vége!"
+
+#, fuzzy
+#~ msgid "Max number of players:"
+#~ msgstr "Játékosok száma csapatonként:"
+
+#, fuzzy
+#~ msgid "So you have to restart Wormux after each"
+#~ msgstr ""
+#~ "Megváltoztak az SDL beállítások:\n"
+#~ "Újra kell indítanod a Wormuxot a beállítások érvényesítéséhez!"
+
+#, fuzzy
+#~ msgid "Unable to connect"
+#~ msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to contact server!"
+#~ msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to start server"
+#~ msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
 
 #, fuzzy
 #~ msgid "%s team has won.\n"
