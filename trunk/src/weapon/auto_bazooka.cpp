@@ -166,7 +166,7 @@ void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
   cible.pos = mouse_pos;
   cible.choisie = true;
 
-  if(!ActiveTeam().is_local)
+  if(!ActiveTeam().IsLocal())
     camera.SetXYabs(mouse_pos - camera.GetSize()/2);
   DrawTarget();
   static_cast<RoquetteTeteCherche *>(projectile)->SetTarget(cible.pos.x, cible.pos.y);

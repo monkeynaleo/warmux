@@ -43,8 +43,8 @@ AIengine* AIengine::GetInstance()
 
 void AIengine::Refresh()
 {
-  if (ActiveCharacter().GetTeam().GetPlayerName() == "AI-stupid") {
-    
+  if (ActiveCharacter().GetTeam().GetPlayerName() == "AI-stupid" 
+      && ActiveCharacter().GetTeam().IsLocalAI()) {
     AIStupidEngine::GetInstance()->Refresh();
   }
   

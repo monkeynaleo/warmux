@@ -195,7 +195,7 @@ void Weapon::Manage()
 
 bool Weapon::CanChangeWeapon() const
 {
-  if ( !ActiveTeam().is_local )
+  if ( !ActiveTeam().IsLocal() )
     return false;
 
   if ( (ActiveTeam().ReadNbUnits() != m_initial_nb_unit_per_ammo) &&
@@ -207,7 +207,7 @@ bool Weapon::CanChangeWeapon() const
 
 void Weapon::NewActionShoot() const
 {
-  assert(ActiveTeam().is_local);
+  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action a_begin_sync(ACTION_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
   SendCharacterPosition();

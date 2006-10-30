@@ -456,7 +456,7 @@ void Character::Jump(double strength, int deg_angle)
 {
   do_nothing_time = Time::GetInstance()->Read();
 
-  if (!CanJump() && ActiveTeam().is_local) return;
+  if (!CanJump() && ActiveTeam().IsLocal()) return;
 
   SetMovement("jump");
 

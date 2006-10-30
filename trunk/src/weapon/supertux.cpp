@@ -66,7 +66,7 @@ void SuperTux::Refresh()
       last_move = Time::GetInstance()->Read();
   }
 
-  if(ActiveTeam().is_local)
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
   {
     Action a(ACTION_SUPERTUX_STATE);
     a.Push(angle);

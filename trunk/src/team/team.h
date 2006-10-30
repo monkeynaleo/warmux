@@ -38,6 +38,12 @@
 class Character;
 class Weapon;
 
+typedef enum {
+  TEAM_human_local,
+  TEAM_ai_local,
+  TEAM_remote
+} team_player_type_t;
+
 class Team
 {
 public:
@@ -64,6 +70,8 @@ private:
   iterator active_character;
   Weapon *active_weapon;
   uint nb_characters;
+
+  team_player_type_t type_of_player; 
 
   Team (const std::string& _teams_dir,
 	const std::string& _id,
@@ -140,8 +148,16 @@ public:
 
   // Only for network:
   // true if the team belong to a local player
-  // false if the team belong to a player on the network
-  bool is_local;
+  // false if the team belong to a player on the network or on the AI
+  bool IsLocal() const;
+
+  // true if the team belong to a local AI
+  bool IsLocalAI() const;
+
+  void SetLocal();
+  void SetLocalAI();
+  void SetRemote();
+  
 };
 
 #endif // TEAM_H

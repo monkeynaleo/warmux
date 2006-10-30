@@ -90,7 +90,7 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
   Action_t action = it->second;
 
   //We can perform the next actions, only if the player is played localy:
-  if(ActiveTeam().is_local)
+  if(ActiveTeam().IsLocal())
   {
 
     if(action <= ACTION_NEXT_CHARACTER)
@@ -242,7 +242,7 @@ void Clavier::HandleKeyReleased (const Action_t &action)
       return;
   }
 
-  if( ! ActiveTeam().is_local)
+  if( ! ActiveTeam().IsLocal())
     return;
 
   switch(action) {

@@ -46,7 +46,6 @@ Team::Team(const std::string& _teams_dir,
 	   const std::string& _sound_profile) :
   energy(_name)
 {
-  is_local = true;
   active_character = characters.end();
 
   is_camera_saved = false;
@@ -61,6 +60,8 @@ Team::Team(const std::string& _teams_dir,
   nb_characters = GameMode::GetInstance()->max_characters;
 
   flag = _flag;
+
+  type_of_player = TEAM_human_local;
 }
 
 Team * Team::CreateTeam (const std::string& teams_dir,
@@ -420,3 +421,35 @@ bool Team::IsSameAs(const Team& other) const
 {
   return (strcmp(m_id.c_str(), other.GetId().c_str()) == 0);
 }
+
+bool Team::IsLocal() const 
+{
+  if (type_of_player == TEAM_human_local)
+    return true;
+
+  return false;
+}
+
+bool Team::IsLocalAI() const 
+{
+  if (type_of_player == TEAM_ai_local)
+    return true;
+
+  return false;
+}
+
+void Team::SetLocal()
+{
+  type_of_player = TEAM_human_local;
+}
+
+void Team::SetLocalAI()
+{
+  type_of_player = TEAM_ai_local;
+}
+
+void Team::SetRemote()
+{
+  type_of_player = TEAM_remote;
+}
+  

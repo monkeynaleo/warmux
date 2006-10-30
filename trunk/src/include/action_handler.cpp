@@ -222,7 +222,7 @@ void Action_SetCharacterEnergy(Action *a)
 void Action_SetFrame (Action *a)
 {
   //Set the frame of the walking skin, to get the position of the hand synced
-  if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
+  if (!ActiveTeam().IsLocal() || network.state != Network::NETWORK_PLAYING)
   {
     ActiveTeam().ActiveCharacter().body->SetFrame((uint)a->PopInt());
   }
@@ -230,7 +230,7 @@ void Action_SetFrame (Action *a)
 
 void Action_SetClothe (Action *a)
 {
-  if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
+  if (!ActiveTeam().IsLocal() || network.state != Network::NETWORK_PLAYING)
   {
     ActiveTeam().ActiveCharacter().SetClothe(a->PopString());
   }
@@ -238,7 +238,7 @@ void Action_SetClothe (Action *a)
 
 void Action_SetMovement (Action *a)
 {
-  if (!ActiveTeam().is_local || network.state != Network::NETWORK_PLAYING)
+  if (!ActiveTeam().IsLocal() || network.state != Network::NETWORK_PLAYING)
   {
     ActiveTeam().ActiveCharacter().SetMovement(a->PopString());
   }

@@ -58,7 +58,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
 void JetPack::Refresh()
 {
-  if(!ActiveTeam().is_local)
+  if(!ActiveTeam().IsLocal())
     return;
 
   Point2d F;
