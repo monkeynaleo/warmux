@@ -124,7 +124,7 @@ void BarreProg::DrawXY(const Point2i &pos){
   if(orientation == PROG_BAR_HORIZONTAL)
     r_value = Rectanglei(begin, 1, end - begin, haut - 2);
   else
-    r_value = Rectanglei(1, begin, larg - 2, end - begin);
+    r_value = Rectanglei(1, haut - end + begin - 1, larg - 2, end -1 );
 
   image.FillRect(r_value, value_color);
 
