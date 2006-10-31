@@ -232,8 +232,13 @@ GameMenu::GameMenu() :
   // compute margin width between previews
   uint map_preview_width = map_preview_height*4/3;
   uint total_width_previews = map_preview_width + map_preview_width*3;
-  uint margin = (tmp_map_box->GetSizeX() - 20 -
-		 (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
+
+  uint margin = 0;
+
+  if ( uint(tmp_map_box->GetSizeX() - 20) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX())) {
+    margin = (tmp_map_box->GetSizeX() - 20 -
+	      (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
+  }
 
   if (margin < 5) {
     margin = 5;
