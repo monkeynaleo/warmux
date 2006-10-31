@@ -29,17 +29,17 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 
-// Distance entre le pointeur et le ver
+// Distance between crosshair and character
 #define RAYON 40 // pixels
 
 CrossHair::CrossHair()
 {
   enable = false;
-  angle = 0;  
+  angle = 0;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   image = resource_manager.LoadImage(res, "gfx/pointeur1");
-  resource_manager.UnLoadXMLProfile( res); 
+  resource_manager.UnLoadXMLProfile( res);
 }
 
 void CrossHair::Reset()
@@ -55,37 +55,37 @@ void CrossHair::ChangeAngle (int delta)
 void CrossHair::ChangeAngleVal (int val)
 {
   angle = BorneLong(val, - (ActiveTeam().GetWeapon().max_angle),
-		    - (ActiveTeam().GetWeapon().min_angle) );
-  
+                    - (ActiveTeam().GetWeapon().min_angle) );
+
   const double angleRAD = Deg2Rad(angle);
 
-  // Calcul des coordonnées du point
+  // Compute crosshair position
   calcul_d = Point2i(RAYON, RAYON) * Point2d(cos(angleRAD), sin(angleRAD));
 }
 
 void CrossHair::Draw()
 {
   if( !enable )
-	return;
+    return;
   if( ActiveCharacter().IsDead() )
-	return;
+    return;
   if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING )
-	return;
+    return;
 
   Point2i pos = ActiveCharacter().GetHandPosition();
   pos += calcul_d * Point2i(ActiveCharacter().GetDirection(), 1);
   pos -= image.GetSize()/2;
-  
+
   AppWormux::GetInstance()->video.window.Blit(image, pos - camera.GetPosition());
   world.ToRedrawOnMap(Rectanglei(pos, image.GetSize()));
 }
 
 int CrossHair::GetAngle() const
-{ 
-	if (ActiveCharacter().GetDirection() == -1) 
-		return int( InverseAngleDeg (angle) );
-	else
-		return angle; 
+{
+  if (ActiveCharacter().GetDirection() == -1) 
+    return int( InverseAngleDeg (angle) );
+  else
+    return angle;
 }
 
 int CrossHair::GetAngleVal() const
@@ -96,6 +96,6 @@ double CrossHair::GetAngleRad() const
   double angleR = Deg2Rad(angle);
 
   if (ActiveCharacter().GetDirection() == -1)
-	  angleR = InverseAngle (angleR);
+    angleR = InverseAngle (angleR);
   return angleR;
 }

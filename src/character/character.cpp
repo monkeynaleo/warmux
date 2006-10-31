@@ -600,7 +600,6 @@ void Character::HandleKeyEvent(int action, int event_type)
                   do_nothing_time = Time::GetInstance()->Read();
                   CharacterCursor::GetInstance()->Hide();
                   action_handler->NewAction (new Action(ACTION_UP));
-                  crosshair_angle = ActiveTeam().crosshair.GetAngleVal();
                 }
               }
               break ;
@@ -614,7 +613,6 @@ void Character::HandleKeyEvent(int action, int event_type)
                   do_nothing_time = Time::GetInstance()->Read();
                   CharacterCursor::GetInstance()->Hide();
                   action_handler->NewAction (new Action(ACTION_DOWN));
-                  crosshair_angle = ActiveTeam().crosshair.GetAngle();
                 }
               }
               break ;
@@ -658,6 +656,11 @@ void Character::HandleKeyEvent(int action, int event_type)
         default: break;
       }
     }
+}
+
+void Character::SaveCrosshairAngle()
+{
+  crosshair_angle = ActiveTeam().crosshair.GetAngleVal();
 }
 
 void Character::Refresh()
