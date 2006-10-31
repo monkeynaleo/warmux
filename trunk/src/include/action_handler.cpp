@@ -123,14 +123,22 @@ void Action_BackJump (Action *a)
   ActiveCharacter().BackJump();
 }
 
+void Action_SynchronizeCrosshair(Action *a)
+{
+  int angle = a->PopInt();
+  ActiveTeam().crosshair.ChangeAngleVal(angle);
+}
+
 void Action_Up (Action *a)
 {
   ActiveTeam().crosshair.ChangeAngle (-DELTA_CROSSHAIR);
+  ActiveTeam().ActiveCharacter().SaveCrosshairAngle();
 }
 
 void Action_Down (Action *a)
 {
   ActiveTeam().crosshair.ChangeAngle (DELTA_CROSSHAIR);
+  ActiveTeam().ActiveCharacter().SaveCrosshairAngle();
 }
 
 void Action_ChangeWeapon (Action *a)

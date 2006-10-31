@@ -24,8 +24,6 @@
 
 #include <string>
 #include <SDL.h>
-//#include "body.h"
-//#include "../team/team.h"
 #include "../gui/EnergyBar.h"
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
@@ -81,11 +79,11 @@ public:
   Body* body;
 
 private:
-  void DrawEnergyBar (int dy);
-  void DrawName (int dy) const;
+  void DrawEnergyBar(int dy);
+  void DrawName(int dy) const;
 
   void SignalDrowning();
-  void SignalGhostState (bool was_dead);
+  void SignalGhostState(bool was_dead);
   void SignalCollision();
   void SetBody(Body* char_body);
 
@@ -114,15 +112,16 @@ public:
   void Draw();
   void Refresh();
 
-  void PrepareTurn ();
+  void PrepareTurn();
   void StartPlaying();
   void StopPlaying();
 
-// Handle a key event on the character.
-  void HandleKeyEvent(int key, int event_type) ;
+  // Handle a key event on the character
+  void HandleKeyEvent(int key, int event_type);
   void PrepareShoot();
   void DoShoot();
-  void HandleShoot(int event_type) ;
+  void HandleShoot(int event_type);
+  void SaveCrosshairAngle();
 
   // Show hide the Character
   void Hide();
@@ -144,7 +143,7 @@ public:
   bool CanStillMoveDG (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
-  void SetDirection (int direction);
+  void SetDirection(int direction);
   int GetDirection() const;
 
   // Team owner
