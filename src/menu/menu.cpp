@@ -129,17 +129,20 @@ void Menu::Run ()
       else if( event.type == SDL_KEYDOWN )
         switch( event.key.keysym.sym)
         {
-        case SDLK_ESCAPE: 
+        case SDLK_ESCAPE:
           if(b_cancel != NULL)
             sig_cancel();
           else
             key_cancel();
           break;
-        case SDLK_RETURN: 
+        case SDLK_RETURN:
           if(b_ok != NULL)
             sig_ok();
           else
             key_ok();
+          break;
+        case SDLK_F10:
+          AppWormux::GetInstance()->video.ToggleFullscreen();
           break;
         default:
           widgets.SendKey(event.key.keysym);
