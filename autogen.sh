@@ -1,11 +1,11 @@
-#! /bin/sh
+#!/bin/bash
 
 # Clean up
 ./clean.sh
 
 #-----------------------------------------------------------------------------
 
-function find_tool_version
+find_tool_version()
 {
     TOOL=$1
     for i in 1.9 1.8 1.7 1.6 1.5; do
