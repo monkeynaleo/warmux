@@ -71,20 +71,21 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
 
 DistantComputer::~DistantComputer()
 {
-  // Display a message in the network menu
-  network.network_menu->msg_box->NewMessage( GetAdress() + _(" has left the party"));
+  if(network.network_menu != NULL)
+  {
+    // Display a message in the network menu
+    network.network_menu->msg_box->NewMessage( GetAdress() + _(" has left the party"));
+  }
 
   SDLNet_TCP_DelSocket(network.socket_set, sock);
   SDLNet_TCP_Close(sock);
 
-  if(network.IsServer())
-  {
-    for(std::list<std::string>::iterator team = owned_teams.begin();
+  if(network.IsConnected())
+  for(std::list<std::string>::iterator team = owned_teams.begin();
       team != owned_teams.end();
       ++team)
-    {
-      ActionHandler::GetInstance()->NewAction(new Action(ACTION_DEL_TEAM, *team));
-    }
+  {
+    ActionHandler::GetInstance()->NewAction(new Action(ACTION_DEL_TEAM, *team));
   }
   owned_teams.clear();
 

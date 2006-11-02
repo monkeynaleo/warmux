@@ -138,6 +138,7 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
     NetworkMenu nm;
     network.network_menu = &nm;
     nm.Run();
+    network.network_menu = NULL;
 
     // for the moment, it's just for test...
     close_menu = true;

@@ -219,12 +219,6 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 
 void NetworkMenu::Reset()
 {
-  //If we are a client and the server disconnected:
-//   map_box->enabled = false;
-//   team_box->enabled = false;
-//   connection_box->enabled = true;
-//   lbox_maps->enabled = true;
-
   // Remove selected teams from the list
   while(lbox_selected_teams->GetItemsList()->size()!=0)
   {
@@ -269,9 +263,6 @@ void NetworkMenu::__sig_ok()
     // Wait for the server, and stay in the menu map / team can still be changed
     Action a(ACTION_CHANGE_STATE);
     network.SendAction(&a);
-//     b_ok->enabled = false;
-//     b_cancel->enabled = false;
-//     team_box->enabled = false;
     while(network.state != Network::NETWORK_INIT_GAME)
     {
       Display(Point2i(-1,-1));
@@ -280,6 +271,7 @@ void NetworkMenu::__sig_ok()
 
   SaveOptions();
   Game::GetInstance()->Start();
+  network.network_menu = NULL;
 }
 
 void NetworkMenu::sig_ok()
@@ -384,13 +376,17 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     pl = (std::string)nbr + _(" players ready");
     if(inited_players->GetText() != pl)
       inited_players->SetText(pl);
-    }
-    ActionHandler * action_handler = ActionHandler::GetInstance();
-    action_handler->ExecActions();
+  }
+  else
+    close_menu = true;
+  ActionHandler * action_handler = ActionHandler::GetInstance();
+  action_handler->ExecActions();
 }
 
 void NetworkMenu::DelTeamCallback(std::string team)
 {
+  if( close_menu )
+    return;
   // Called from the action handler
   for(std::vector<list_box_item_t>::iterator lst_it = lbox_selected_teams->GetItemsList()->begin();
       lst_it != lbox_selected_teams->GetItemsList()->end();
@@ -408,6 +404,7 @@ void NetworkMenu::DelTeamCallback(std::string team)
 
 void NetworkMenu::AddTeamCallback(std::string team)
 {
+  assert( !close_menu );
   // Called from the action handler
   for(std::vector<list_box_item_t>::iterator lst_it = lbox_all_teams->GetItemsList()->begin();
       lst_it != lbox_all_teams->GetItemsList()->end();
@@ -428,6 +425,7 @@ void NetworkMenu::AddTeamCallback(std::string team)
 
 void NetworkMenu::ChangeMapCallback()
 {
+  assert( !close_menu );
   // Called from the action handler
   map_preview->SetSurface(ActiveMap().ReadPreview(), false);
 }
