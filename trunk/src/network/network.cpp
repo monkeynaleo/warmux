@@ -29,6 +29,12 @@
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "distant_cpu.h"
+
+#ifdef DEBUG
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#endif
 //-----------------------------------------------------------------------------
 Network network;
 
@@ -67,6 +73,11 @@ void Network::Init()
   inited = true;
   max_player_number = GameMode::GetInstance()->max_teams;
   connected_player = 0;
+
+#ifdef DEBUG
+  fin = open("./network.in", O_RDWR | O_CREAT | O_SYNC, S_IRWXU | S_IRWXG);
+  fout = open("./network.out", O_RDWR | O_CREAT | O_SYNC, S_IRWXU | S_IRWXG);
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -75,7 +86,13 @@ Network::~Network()
 {
   Disconnect();
   if(inited)
+  {
     SDLNet_Quit();
+#ifdef DEBUG
+    close(fin);
+    close(fout);
+#endif
+  }
 }
 
 //-----------------------------------------------------------------------------
@@ -268,6 +285,13 @@ void Network::ReceiveActions()
           continue;
         }
 
+#ifdef DEBUG
+	int tmp = 0xFFFFFFFF;
+	write(fin, &packet_size, 4);
+	write(fin, packet, packet_size);
+	write(fin, &tmp, 4);
+#endif
+
         Action* a = new Action(packet);
         MSG_DEBUG("network.traffic","Received action %s",
                 ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
@@ -336,6 +360,12 @@ void Network::SendAction(Action* a)
 
 void Network::SendPacket(char* packet, int size)
 {
+#ifdef DEBUG
+	int tmp = 0xFFFFFFFF;
+	write(fout, &size, 4);
+	write(fout, packet, size);
+	write(fout, &tmp, 4);
+#endif
   for(std::list<DistantComputer*>::iterator client = cpu.begin();
       client != cpu.end();
       client++)

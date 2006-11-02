@@ -36,7 +36,12 @@ class Network
   friend class DistantComputer;
 
   bool inited;
-		
+
+#ifdef DEBUG
+  int fout;
+  int fin;	
+#endif
+
 protected:
   bool m_is_connected;
   bool m_is_server;
