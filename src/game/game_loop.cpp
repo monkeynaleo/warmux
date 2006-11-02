@@ -85,6 +85,8 @@ void GameLoop::InitGameData_NetServer()
 
   ActionHandler * action_handler = ActionHandler::GetInstance();
 
+  network.RejectIncoming();
+
   Action a_change_state(ACTION_CHANGE_STATE);
   network.SendAction ( &a_change_state );
   network.state = Network::NETWORK_INIT_GAME;

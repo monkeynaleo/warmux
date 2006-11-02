@@ -24,6 +24,7 @@
 #include <SDL_net.h>
 #include <SDL_thread.h>
 #include "../game/game_mode.h"
+#include "../game/game.h"
 #include "../gui/question.h"
 #include "../include/action_handler.h"
 #include "../tool/debug.h"
@@ -59,6 +60,7 @@ Network::Network()
 int net_thread_func(void* no_param)
 {
   network.ReceiveActions();
+  network.Disconnect();
   return 1;
 }
 
@@ -196,10 +198,10 @@ void Network::ServerStart(const std::string &port)
   m_is_connected = true;
 
   // Open the port to listen to
+  state = NETWORK_OPTION_SCREEN;
   AcceptIncoming();
   connected_player = 1;
   printf("\nConnected\n");
-  state = NETWORK_OPTION_SCREEN;
   socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
   thread = SDL_CreateThread(net_thread_func,NULL);
 }
@@ -223,7 +225,7 @@ std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<Distant
 void Network::AcceptIncoming()
 {
   assert(m_is_server);
-  if(state == NETWORK_PLAYING) return;
+  if(state != NETWORK_OPTION_SCREEN) return;
 
   server_socket = SDLNet_TCP_Open(&ip);
   if(!server_socket)
@@ -255,6 +257,12 @@ void Network::ReceiveActions()
 
   while(m_is_connected && (cpu.size()==1 || m_is_server))
   {
+    if(state == NETWORK_PLAYING && cpu.size() == 0)
+    {
+      // If while playing everybody disconnected, just quit
+      break;
+    }
+
     while(SDLNet_CheckSockets(socket_set, 100) == 0 && m_is_connected) //Loop while nothing is received
     if(m_is_server && server_socket)
     {
@@ -306,7 +314,7 @@ void Network::ReceiveActions()
 	}
 
         if( a->GetType() == ACTION_NEW_TEAM
-        &&  a->GetType() == ACTION_DEL_TEAM)
+        ||  a->GetType() == ACTION_DEL_TEAM)
         {
           (*dst_cpu)->ManageTeam(a);
           delete a;
@@ -338,6 +346,7 @@ void Network::ReceiveActions()
       dst_cpu++;
     }
   }
+  Game::GetInstance()->SetEndOfGameStatus( true );
 }
 
 // Send Messages
