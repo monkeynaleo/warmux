@@ -60,10 +60,10 @@ const double DEFAULT_ICON_SCALE = 0.7;
 const double MAX_ICON_SCALE = 1.1;
 
 const uint BUTTON_WIDTH = (int)(BUTTON_ICO_GAP + BUTTON_ICO_WIDTH  *
-				(DEFAULT_ICON_SCALE+MAX_ICON_SCALE)/2);
+                               (DEFAULT_ICON_SCALE+MAX_ICON_SCALE)/2);
 
 const uint BUTTON_HEIGHT = (int)(BUTTON_ICO_GAP + BUTTON_ICO_HEIGHT  *
-				 (DEFAULT_ICON_SCALE+MAX_ICON_SCALE)/2);
+                                (DEFAULT_ICON_SCALE+MAX_ICON_SCALE)/2);
 
 WeaponMenuItem::WeaponMenuItem(uint num_sort)
 {
@@ -228,7 +228,7 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
   item.position.Clear();
   item.weapon = new_item;
 
-  item.weapon_icon = new Sprite( new_item->icone);
+  item.weapon_icon = new Sprite( new_item->icon);
   item.weapon_icon->cache.EnableLastFrameCache();
 
   boutons.push_back (item);

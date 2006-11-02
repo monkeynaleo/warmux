@@ -31,6 +31,7 @@
 #include "../tool/random.h"
 #include "../tool/resource_manager.h"
 #include "../tool/xml_document.h"
+#include "../interface/interface.h"
 
 const uint MAX_WIND_OBJECTS = 200;
 const uint BARRE_LARG = 80;
@@ -193,6 +194,7 @@ void Wind::Refresh(){
       ++m_val;
     m_last_move = Time::GetInstance()->Read();
     barre.Actu(m_val);
+    Interface::GetInstance()->UpdateWindIndicator(m_val);
   }
 
   iterator it=particles.begin(), end=particles.end();

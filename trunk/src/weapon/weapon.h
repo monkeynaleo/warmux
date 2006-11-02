@@ -16,11 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classes virtuelles permettant de d�inir une arme et un projectile. Les
- * armes ont un nom, une image, un �at actif/inactif et une ic�e (affich�
- * dans l'interface). Les projectiles sont des objets physiques qui ont un
- * comportement sp�ial lorsqu'ils entrent en collision ou qu'ils sortent du
- * terrain.
+ * Virtual class to handle weapon in wormux.
+ * Weapon projectile are handled in WeaponLauncher (see launcher.cpp and launcher.h).
  *****************************************************************************/
 
 #ifndef WEAPON_H
@@ -114,8 +111,8 @@ protected:
   int channel_load;
 
 public:
-  // Icone de l'arme dans l'interface
-  Surface icone;
+  // weapon's icon
+  Surface icon;
 
   // if max_strength != 0, display the strength bar
   double max_strength;

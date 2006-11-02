@@ -49,30 +49,27 @@ public:
    Text * timer;
 
    // Character information
-   Text * t_NAME;
    Text * t_character_name;
+   Text * t_team_name;
+   Text * t_player_name;
 
-   Text * t_ENERGY;
    Text * t_character_energy;
 
    // Weapon information
-   Text * t_WEAPON;
    Text * t_weapon_name;
-   Text * t_STOCK;
    Text * t_weapon_stock;
 
    bool display;
    int start_hide_display;
    bool display_timer;
-   void DisplayCharacterInfo ();
-   void DisplayWeaponInfo ();
-   void DisplayGlobalTimer();
-   void DisplayTurnTime();
-   BarreProg barre_energie;
+   EnergyBar energy_bar;
+   BarreProg wind_bar;
 
    Surface game_menu;
-   Surface bg_time;
-   Surface bg_turn_time;
+   Surface clock_background;
+   Surface clock;
+   Surface wind;
+   Surface wind_indicator;
    Point2i bottom_bar_pos;
 
    static Interface * singleton;
@@ -88,8 +85,13 @@ public:
    void Reset();
    void Draw();
 
+   void DrawCharacterInfo();
+   void DrawWeaponInfo();
+   void DrawWindInfo();
+   void DrawClock();
+
    bool IsDisplayed () const { return display; };
-   void EnableDisplay (bool _display);
+   void EnableDisplay(bool _display);
    void Show();
    void Hide();
    bool IsVisible() const;
@@ -99,6 +101,7 @@ public:
    Point2i GetSize() const;
 
    void UpdateTimer(uint utimer);
+   void UpdateWindIndicator(int wind_value);
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
 };
 
