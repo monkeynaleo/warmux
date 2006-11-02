@@ -151,12 +151,6 @@ void Action_ChangeCharacter (Action *a)
   while( (int)ActiveCharacter().GetCharacterIndex() != char_index )
     ActiveTeam().NextCharacter();
 
-  printf("Action_NextCharacter:\n");
-  printf("char_index = %i\n",char_index);
-  printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
-  printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());
-  printf("Alive characters: %i / %i\n\n",ActiveTeam().NbAliveCharacter(),ActiveTeam().GetNbCharacters());
-
   // Ok, this code is dirty, if you write a cleaner way
   // Use it in mouse.cpp as well ;)
 }
@@ -185,7 +179,6 @@ Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
   c->GetSpeedXY(speed);
   a->Push(speed.x);
   a->Push(speed.y);
-//  printf("Sending physics of %s (%i, %i / %f, %f)\n",c->GetName().c_str(), c->GetX(), c->GetY(), speed.x, speed.y);
   return a;
 }
 
@@ -209,7 +202,6 @@ void Action_SetCharacterPhysics (Action *a)
 
   Point2d speed;
   c->GetSpeedXY(speed);
-  printf("Setting physics of %s (%i, %i / %f, %f)\n",c->GetName().c_str(), c->GetX(), c->GetY(), speed.x, speed.y);
 }
 
 void Action_SetCharacterEnergy(Action *a)
