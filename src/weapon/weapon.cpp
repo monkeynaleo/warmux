@@ -16,11 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classes virtuelles permettant de d�inir une arme et un projectile. Les
- * armes ont un nom, une image, un �at actif/inactif et une ic�e (affich�
- * dans l'interface). Les projectiles sont des objets physiques qui ont un
- * comportement sp�ial lorsqu'ils entrent en collision ou qu'ils sortent du
- * terrain.
+ * Virtual class to handle weapon in wormux.
+ * Weapon projectile are handled in WeaponLauncher (see launcher.cpp and launcher.h).
  *****************************************************************************/
 
 #include "weapon.h"
@@ -116,7 +113,7 @@ Weapon::Weapon(Weapon_type type,
       m_image->cache.EnableLastFrameCache();
   }
 
-  icone = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
+  icon = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
 
   mouse_character_selection = true;
 }
@@ -423,8 +420,8 @@ void Weapon::DrawWeaponBox(){
   Point2i dest( (int)(WEAPON_BOX_BUTTON_DX), (int)(WEAPON_BOX_BUTTON_DY));
   Point2i  dr2( (int)(c_x - 0.5 * WEAPON_ICO_WIDTH), (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT));
 
-  app->video.window.Blit( Interface::GetInstance()->weapon_box_button, dest);
-  app->video.window.Blit( icone, dr2);
+  app->video.window.Blit(Interface::GetInstance()->weapon_box_button, dest);
+  app->video.window.Blit(icon, dr2);
 }
 
 void Weapon::Draw(){

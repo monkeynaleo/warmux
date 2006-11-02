@@ -112,7 +112,7 @@
 </section>
 
 <section name="interface">
-  <surface name="game_menu" file="interface/game_menu.png" />
+  <surface name="background_interface" file="interface/background_interface.png" />
   <surface name="weapon_menu" file="interface/weapons_menu.png" />
   <surface name="button1_icon" file="interface/button1.png"/>
   <surface name="button2_icon" file="interface/button2.png"/>
@@ -120,8 +120,10 @@
   <surface name="button4_icon" file="interface/button4.png"/>
   <surface name="button5_icon" file="interface/button5.png"/>
   <surface name="weapon_box_button" file="interface/Grey-Button.png"/>
-  <surface name="timer_background" file="interface/timer_background.png"/>
-  <surface name="turn_time_background" file="interface/turn_time_background.png"/>
+  <surface name="clock_background" file="interface/clock_background.png"/>
+  <surface name="clock" file="interface/clock.png"/>
+  <surface name="wind" file="interface/wind.png"/>
+  <surface name="wind_indicator" file="interface/wind_indicator.png"/>
   <surface name="pause_screen" file="interface/pause.png"/>
   <surface name="quit_screen" file="interface/quit.png"/>
 </section>
