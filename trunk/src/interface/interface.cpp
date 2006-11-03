@@ -232,14 +232,14 @@ void Interface::DrawClock()
 void Interface::DrawWindInfo()
 {
   AppWormux * app = AppWormux::GetInstance();
-  Point2i wind_pos = app->video.window.GetSize() * Point2d(0.5, 1) + Point2i(clock_background.GetWidth() / 2 + MARGIN, -game_menu.GetHeight() + wind.GetHeight() / 2);
-  Rectanglei dr(wind_pos, wind.GetSize());
+  Point2i wind_pos_offset = Point2i(game_menu.GetWidth() / 2 + clock_background.GetWidth() / 2 + MARGIN, game_menu.GetHeight() / 2 - wind.GetHeight() / 2);
+  Rectanglei dr(bottom_bar_pos + wind_pos_offset, wind.GetSize());
   // draw wind icon
-  app->video.window.Blit(wind, wind_pos);
+  app->video.window.Blit(wind, bottom_bar_pos + wind_pos_offset);
   // draw wind indicator
-  Point2i wind_bar_offset = Point2i(0, wind.GetHeight() - wind_indicator.GetHeight());
-  wind_bar.DrawXY(wind_pos + wind_bar_offset + Point2i(2,2));
-  app->video.window.Blit(wind_indicator, wind_pos + wind_bar_offset);
+  Point2i wind_bar_offset = wind_pos_offset + Point2i(0, wind.GetHeight() - wind_indicator.GetHeight());
+  wind_bar.DrawXY(bottom_bar_pos + wind_bar_offset + Point2i(2, 2));
+  app->video.window.Blit(wind_indicator, bottom_bar_pos + wind_bar_offset);
   world.ToRedrawOnScreen(dr);
 }
 
