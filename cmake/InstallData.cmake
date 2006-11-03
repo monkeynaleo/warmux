@@ -390,9 +390,13 @@ body/phpteam/foot-right.png
 body/phpteam/ear-right.png
 body/phpteam/tail.png
 body/body.dtd
+interface/wind_indicator.png
+interface/background_interface.png
+interface/wind.png
+interface/clock_background.png
+interface/clock.png
 interface/button1.png
 interface/button2.png
-interface/game_menu.png
 interface/pause.png
 interface/button3.png
 interface/Grey-Button.png
@@ -403,8 +407,6 @@ interface/weapons_menu.png
 interface/quit.png
 interface/pointer_aim.png
 interface/pointer_move.png
-interface/timer_background.png
-interface/turn_time_background.png
 menu/img/display_wind_particles.png
 menu/img/sound_effects_enable.png
 menu/img/timing_turn.png
