@@ -132,6 +132,10 @@ void GameLoop::InitGameData_NetClient()
 
   world.Reset();
 
+  lst_objects.PlaceBarrels();
+  teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
+  lst_objects.PlaceMines();
+
   Action a_change_state(ACTION_CHANGE_STATE);
 
   network.SendAction (&a_change_state);
@@ -142,10 +146,6 @@ void GameLoop::InitGameData_NetClient()
     action_handler->ExecActions();
     SDL_Delay(100);
   }
-
-  lst_objects.PlaceBarrels();
-  teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
-  lst_objects.PlaceMines();
 
   std::cout << network.state << " : Waiting for people over the network" << std::endl;
   while (network.state != Network::NETWORK_PLAYING)

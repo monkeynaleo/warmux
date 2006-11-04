@@ -65,7 +65,11 @@ double RandomSync::GetRand()
   if(network.IsServer() || network.IsLocal()) GenerateTable();
 
   // If the table is empty freeze until the server have sent something
-  while(rnd_table.size() == 0);
+  while(rnd_table.size() == 0)
+  {
+    SDL_Delay(100);
+    ActionHandler::GetInstance()->ExecActions();
+  }
 
   double nbr = rnd_table.front();
   rnd_table.pop_front();
