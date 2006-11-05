@@ -24,18 +24,28 @@
 #include "../graphic/sprite.h"
 #include "../include/app.h"
 
-Button::Button (const Rectanglei &rect, const Profile *res_profile, const std::string& resource_id) : Widget(rect)
+Button::Button (const Rectanglei &rect, const Profile *res_profile,
+		const std::string& resource_id, bool _img_scale) : Widget(rect)
 {
   image = resource_manager.LoadSprite(res_profile,resource_id);
   image->cache.EnableLastFrameCache();
-  image->ScaleSize(rect.GetSize());
+
+  // image scalling or not
+  img_scale = _img_scale;
+  
+  if (img_scale)
+    image->ScaleSize(rect.GetSize());
 }
 
-Button::Button (const Point2i &m_position, const Profile *res_profile, const std::string& resource_id)
+Button::Button (const Point2i &m_position, const Profile *res_profile, 
+		const std::string& resource_id, bool _img_scale)
 {
   image = resource_manager.LoadSprite(res_profile, resource_id);
   position = m_position;
   size = image->GetSize();
+
+  // image scalling on resize
+  img_scale = _img_scale;
 }
 
 Button::~Button()
@@ -48,11 +58,25 @@ void Button::Draw(const Point2i &mousePosition, Surface& surf)
   uint frame = Contains(mousePosition)?1:0;
 
   image->SetCurrentFrame(frame);
-  image->Blit(surf, position);
+
+  if (img_scale) {
+    // image scalling : easy to place image
+    image->Blit(surf, position);
+  } else {
+    // centering image
+    Point2i pos = position;
+
+    pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
+    pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
+
+    image->Blit(surf, pos);
+  }
 }
 
 void Button::SetSizePosition(const Rectanglei &rect)
 {
   StdSetSizePosition(rect);
-  image->ScaleSize(size);
+
+  if (img_scale)
+    image->ScaleSize(size);
 }
