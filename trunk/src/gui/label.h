@@ -34,10 +34,11 @@ class Label : public Widget{
   Font *font;
   const Color& font_color;
   bool center;
+  bool shadowed;
 
  public:
   Label(const std::string &label, const Rectanglei &rect, Font& font,
-	const Color& color = white_color, bool center = false);
+	const Color& color = white_color, bool center = false, bool shadowed = true);
   ~Label();
   void Draw (const Point2i &mousePosition, Surface& surf);
   void SetSizePosition(const Rectanglei &rect);

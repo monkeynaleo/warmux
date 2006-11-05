@@ -22,7 +22,7 @@
 #include "label.h"
 
 Label::Label (const std::string &label, const Rectanglei &rect, Font& _font,
-	      const Color& color, bool _center) 
+	      const Color& color, bool _center, bool _shadowed) 
   : font_color(color)
 {
   position = rect.GetPosition();
@@ -30,7 +30,8 @@ Label::Label (const std::string &label, const Rectanglei &rect, Font& _font,
   size.y = _font.GetHeight();
   font = &_font;
   center = _center;
-  txt_label = new Text(label, font_color, &_font);
+  shadowed = _shadowed;
+  txt_label = new Text(label, font_color, &_font, shadowed);
 }
 
 Label::~Label()
@@ -55,7 +56,7 @@ void Label::SetText(const std::string &new_txt)
 {
   need_redrawing = true;
   delete txt_label;
-  txt_label = new Text(new_txt, font_color, font);
+  txt_label = new Text(new_txt, font_color, font, shadowed);
 }
 
 std::string& Label::GetText()
