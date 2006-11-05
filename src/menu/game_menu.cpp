@@ -62,18 +62,20 @@ TeamBox::TeamBox(std::string _player_name, uint width) : HBox(Rectanglei(0, 0, w
   tmp_box->SetMargin(2);
   tmp_box->SetBorder(Point2i(0,0));
   team_name = new Label(" ", Rectanglei(0,0,width-80,0),
-			*Font::GetInstance(Font::FONT_NORMAL), gray_color);
+			*Font::GetInstance(Font::FONT_NORMAL), gray_color, false, true);
 
   Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetBorder(Point2i(0,0));
   tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0),
-				      *Font::GetInstance(Font::FONT_SMALL), gray_color));
+				      *Font::GetInstance(Font::FONT_SMALL), gray_color, false, false));
   player_name = new TextBox(_player_name, Rectanglei(0,0,100,0),
 			    *Font::GetInstance(Font::FONT_SMALL));
   tmp_player_box->AddWidget(player_name);
 
-  nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),6,1,2,10);;
+  nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),
+				 6,1,2,10,
+				 gray_color, false);
 
   tmp_box->AddWidget(team_name);
   tmp_box->AddWidget(tmp_player_box);
@@ -275,10 +277,10 @@ GameMenu::GameMenu() :
   tmp_map_box->AddWidget(previews_box);
 
   // Map information
-  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *normal_font, gray_color, true);
+  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *normal_font, gray_color, true, true);
   tmp_map_box->AddWidget(map_name_label);
 
-  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), gray_color, true);
+  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), gray_color, true, false);
   tmp_map_box->AddWidget(map_author_label);
 
   map_box->AddWidget(tmp_map_box);
