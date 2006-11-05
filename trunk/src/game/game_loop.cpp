@@ -234,7 +234,6 @@ void GameLoop::Init ()
 
   Game::GetInstance()->SetEndOfGameStatus( false );
 
-  Mouse::GetInstance()->CenterPointer();
   Mouse::GetInstance()->SetPointer(POINTER_SELECT);
 
   // First "selection" of a weapon -> fix bug 6576
@@ -539,6 +538,9 @@ void GameLoop::SetState(int new_state, bool begin_game)
   // Begining of a new turn:
   case PLAYING:
     MSG_DEBUG("game.statechange", "Playing" );
+    // Center the cursor
+    Mouse::GetInstance()->CenterPointer();
+
     // Init. le compteur
     duration = game_mode->duration_turn;
     Interface::GetInstance()->UpdateTimer(duration);
