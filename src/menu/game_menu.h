@@ -40,7 +40,7 @@ class TeamBox : public HBox
   SpinButton * nb_characters;
 
  public:
-  TeamBox(uint width);
+  TeamBox(std::string player_name, uint width);
 
   void SetTeam(Team& _team);
   void ClearTeam();
