@@ -49,7 +49,7 @@ const uint TPS_TOUR_MAX = 120;
 const uint TPS_FIN_TOUR_MIN = 1;
 const uint TPS_FIN_TOUR_MAX = 10;
 
-TeamBox::TeamBox(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), false)
+TeamBox::TeamBox(std::string _player_name, uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), false)
 {
   associated_team=NULL;
 
@@ -69,7 +69,7 @@ TeamBox::TeamBox(uint width) : HBox(Rectanglei(0, 0, width, TEAMS_BOX_H/2), fals
   tmp_player_box->SetBorder(Point2i(0,0));
   tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0),
 				      *Font::GetInstance(Font::FONT_SMALL), gray_color));
-  player_name = new TextBox(_("Player X"), Rectanglei(0,0,100,0),
+  player_name = new TextBox(_player_name, Rectanglei(0,0,100,0),
 			    *Font::GetInstance(Font::FONT_SMALL));
   tmp_player_box->AddWidget(player_name);
 
@@ -192,7 +192,11 @@ GameMenu::GameMenu() :
   uint team_w_size= top_n_bottom_team_options->GetSizeX() * 2 / MAX_NB_TEAMS;
 
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
-    teams_selections[i] = new TeamBox(team_w_size);
+    std::string player_name = _("Player") ;
+    char num_player[4];
+    sprintf(num_player, " %d", i+1);
+    player_name += num_player;
+    teams_selections[i] = new TeamBox(player_name, team_w_size);
     if ( i%2 == 0)
       top_team_options->AddWidget(teams_selections[i]);
     else
@@ -214,8 +218,8 @@ GameMenu::GameMenu() :
   map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
-  bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus");
-  bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus");
+  bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus", false);
+  bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus", false);
 
   Box * tmp_map_box = new VBox( Rectanglei(0, 0,
 					   mainBoxWidth-63, 0), false);
