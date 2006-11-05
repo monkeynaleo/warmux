@@ -84,15 +84,14 @@ NetworkMenu::NetworkMenu() :
   uint x = 30;
 
   /* Choose the teams !! */
-  team_box = new VBox(Rectanglei( x, TEAMS_Y, 475, 1));
-  team_box->AddWidget(new Label(_("Select the teams:"), rectZero, *normal_font));
+  team_box = new HBox(Rectanglei( x, TEAMS_Y, 475, TEAMS_H));
+  team_box->AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
 
-  Box * tmp_box = new HBox( Rectanglei(0,0, 1, TEAMS_H), false);
-  tmp_box->SetMargin(10);
-  tmp_box->SetBorder( Point2i(0,0) );
+  //tmp_box->SetMargin(10);
+  //tmp_box->SetBorder( Point2i(0,0) );
 
   lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ), false);
-  tmp_box->AddWidget(lbox_all_teams);
+  team_box->AddWidget(lbox_all_teams);
 
   Box * buttons_tmp_box = new VBox(Rectanglei(0, 0, 68, 1), false);
 
@@ -105,31 +104,28 @@ NetworkMenu::NetworkMenu() :
   team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
   buttons_tmp_box->AddWidget(team_logo);
 
-  tmp_box->AddWidget(buttons_tmp_box);
+  team_box->AddWidget(buttons_tmp_box);
 
   lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ), false);
-  tmp_box->AddWidget(lbox_selected_teams);
+  team_box->AddWidget(lbox_selected_teams);
 
-  team_box->AddWidget(tmp_box);
   //team_box->enabled = false;
   widgets.AddWidget(team_box);
 
   last_team = NULL;
 
   /* Choose the map !! */
-  tmp_box = new HBox( Rectanglei(0, 0, 1, MAP_PREVIEW_W - 25 ), false);
-  tmp_box->SetMargin(2);
-  tmp_box->SetBorder( Point2i(0,0) );
+  map_box = new HBox( Rectanglei(x, TEAMS_Y+TEAMS_H+20, 1, MAP_PREVIEW_W - 25 ));
+  map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
+  //map_box->SetMargin(2);
+  //map_box->SetBorder( Point2i(0,0) );
 
   lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, MAP_PREVIEW_W-25 ));
-  tmp_box->AddWidget(lbox_maps);
+  map_box->AddWidget(lbox_maps);
 
   map_preview = new PictureWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
-  tmp_box->AddWidget(map_preview);
+  map_box->AddWidget(map_preview);
 
-  map_box = new VBox( Rectanglei(x, team_box->GetPositionY()+team_box->GetSizeY()+20, 475, 1) );
-  map_box->AddWidget(new Label(_("Select the world:"), rectZero, *normal_font));
-  map_box->AddWidget(tmp_box);
   //map_box->enabled = false;
   widgets.AddWidget(map_box);
 
@@ -190,9 +186,15 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     if (lbox_all_teams->GetSelectedItem() != -1 && lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
     {
       int index = -1;
-      teams_list.FindById(lbox_all_teams->ReadValue(),index)->SetLocal();
-      std::string team_id = teams_list.FindById(lbox_all_teams->ReadValue(),index)->GetId();
-      action_handler->NewAction (new Action(ACTION_NEW_TEAM, team_id));
+      Team* team = teams_list.FindById(lbox_all_teams->ReadValue(),index);
+      team->SetLocal();
+      team->SetPlayerName(getenv("USER"));
+      std::string team_id = team->GetId();
+
+      Action* a = new Action(ACTION_NEW_TEAM, team_id);
+      a->Push(6);
+      a->Push(getenv("USER"));
+      action_handler->NewAction (a);
       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
     }
   }
@@ -315,9 +317,20 @@ void NetworkMenu::SelectTeamLogo(Team * t)
 void NetworkMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 {
   if (from->GetSelectedItem() != -1) {
-    to->AddItem (false,
-		 from->ReadLabel(),
-		 from->ReadValue());
+
+    if (from == lbox_all_teams && to == lbox_selected_teams) {
+      int index = -1;
+      Team * team = teams_list.FindById(from->ReadValue(), index);
+      to->AddItem (false,
+		   from->ReadLabel() + " ("+team->GetPlayerName()+")",
+		   from->ReadValue());
+    } else {
+      int index = -1;
+      Team * team = teams_list.FindById(from->ReadValue(), index);
+      to->AddItem (false,
+		   team->GetName(),
+		   from->ReadValue());
+    }
     to->Deselect();
     if (sort) to->Sort();
 
@@ -330,11 +343,23 @@ void NetworkMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 
 void NetworkMenu::MoveDisableTeams(ListBox * from, ListBox * to, bool sort)
 {
-  if (from->GetSelectedItem() != -1) {
-    to->AddItem (false,
-		 from->ReadLabel(),
-		 from->ReadValue(),
-       false);
+  if (from->GetSelectedItem() != -1) {    
+
+    if (from == lbox_all_teams && to == lbox_selected_teams) {
+      int index = -1;
+      Team * team = teams_list.FindById(from->ReadValue(), index);
+      to->AddItem (false,
+		   from->ReadLabel() + " ("+team->GetPlayerName()+")",
+		   from->ReadValue(),
+		   false);
+    } else {
+      int index = -1;
+      Team * team = teams_list.FindById(from->ReadValue(), index);
+      to->AddItem (false,
+		   team->GetName(),
+		   from->ReadValue(),
+		   false);
+    }
     to->Deselect();
     if (sort) to->Sort();
 
@@ -383,7 +408,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
   action_handler->ExecActions();
 }
 
-void NetworkMenu::DelTeamCallback(std::string team)
+void NetworkMenu::DelTeamCallback(std::string team_id)
 {
   if( close_menu )
     return;
@@ -392,7 +417,7 @@ void NetworkMenu::DelTeamCallback(std::string team)
       lst_it != lbox_selected_teams->GetItemsList()->end();
       lst_it++)
   {
-    if(lst_it->value == team)
+    if(lst_it->value == team_id)
     {
       lbox_selected_teams->Select(lst_it->label);
       msg_box->NewMessage(lst_it->label + " unselected");
@@ -402,7 +427,7 @@ void NetworkMenu::DelTeamCallback(std::string team)
   }
 }
 
-void NetworkMenu::AddTeamCallback(std::string team)
+void NetworkMenu::AddTeamCallback(std::string team_id)
 {
   assert( !close_menu );
   // Called from the action handler
@@ -410,10 +435,10 @@ void NetworkMenu::AddTeamCallback(std::string team)
       lst_it != lbox_all_teams->GetItemsList()->end();
       lst_it++)
   {
-    if(lst_it->value == team)
+    if(lst_it->value == team_id)
     {
       int index;
-      teams_list.FindById(team, index)->SetRemote();
+      teams_list.FindById(team_id, index)->SetRemote();
 
       lbox_all_teams->Select(lst_it->label);
       msg_box->NewMessage(lst_it->label + " selected");
