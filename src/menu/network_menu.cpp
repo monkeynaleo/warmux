@@ -36,8 +36,7 @@
 
 const uint TEAMS_Y = 20;
 const uint TEAMS_W = 160;
-const uint TEAMS_H = 160;
-const uint TEAM_LOGO_Y = 290;
+const uint TEAMS_H = 180;
 const uint TEAM_LOGO_H = 48;
 
 const uint MAPS_X = 20;
@@ -57,7 +56,7 @@ NetworkMenu::NetworkMenu() :
 
   // Game options widgets
   player_number = new SpinButton(_("Max number of players:"), rectZero, GameMode::GetInstance()->max_teams, 1, 2, GameMode::GetInstance()->max_teams);
-  options_box = new VBox(Rectanglei( 475 + 30 + 5, TEAMS_Y + 2 * TEAMS_Y, 800-475-40, 1));
+  options_box = new VBox(Rectanglei( 475 + 30 + 5, TEAMS_Y, 800-475-40, 1));
   options_box->AddWidget(new Label(_("Game options:"),rectZero, *normal_font));
   options_box->AddWidget(player_number);
   connected_players = new Label((std::string)"0" + _(" players connected"), rectZero, *normal_font);
@@ -81,7 +80,7 @@ NetworkMenu::NetworkMenu() :
   widgets.AddWidget(send_txt);
 
   // Center the boxes!
-  uint x = 30;
+  uint x = 5;
 
   /* Choose the teams !! */
   team_box = new HBox(Rectanglei( x, TEAMS_Y, 475, TEAMS_H));
