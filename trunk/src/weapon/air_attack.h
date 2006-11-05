@@ -54,6 +54,7 @@ class Plane : public PhysicalObj
     Sprite *image;
 
     int cible_x;
+    int distance_to_release;
     AirAttackConfig &cfg;
 
     bool OnTopOfTarget() const;

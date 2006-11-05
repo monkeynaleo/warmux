@@ -33,8 +33,8 @@
 #include "../tool/i18n.h"
 #include "../weapon/explosion.h"
 
-const uint FORCE_X_MIN = 10;
-const uint FORCE_X_MAX = 120;
+const int FORCE_X_MIN = -50;
+const uint FORCE_X_MAX = 0;
 const uint FORCE_Y_MIN = 1;
 const uint FORCE_Y_MAX = 40;
 
@@ -54,10 +54,10 @@ Plane::Plane(AirAttackConfig &p_cfg) :
 {
   SetCollisionModel(true, false, false);
 
-  image = resource_manager.LoadSprite( weapons_res_profile, "air_attack_plane");
+  image = resource_manager.LoadSprite(weapons_res_profile, "air_attack_plane");
   SetSize(image->GetSize());
   obus_dx = 100;
-  obus_dy = GetY()+GetHeight();
+  obus_dy = GetY() + GetHeight();
 }
 
 void Plane::Shoot(double speed, Point2i& target)
@@ -68,24 +68,24 @@ void Plane::Shoot(double speed, Point2i& target)
   Point2d speed_vector ;
   int dir = ActiveCharacter().GetDirection();
   cible_x = target.x;
-  SetY (0);
+  SetY(0);
+  distance_to_release =(int)(speed * sqrt(2 * (GetY() + target.y)));
 
   image->Scale(dir, 1);
 
-  if (dir == 1)
-    {
-      speed_vector.SetValues( speed, 0);
-      SetX (-image->GetWidth()+1);
-    }
-  else
-    {
-      speed_vector.SetValues( -speed, 0) ;
-      SetX (world.GetWidth()-1);
-    }
+  if (dir == 1) {
+    speed_vector.SetValues(speed, 0);
+    SetX(-image->GetWidth() + 1);
+    distance_to_release -= obus_dx;
+  } else {
+    speed_vector.SetValues(-speed, 0) ;
+    SetX(world.GetWidth() - 1);
+    distance_to_release += obus_dx;
+  }
 
   SetSpeedXY (speed_vector);
 
-  camera.ChangeObjSuivi (this, true, true);
+  camera.ChangeObjSuivi(this, true, true);
 
   lst_objects.AddObject(this);
 }
@@ -93,21 +93,22 @@ void Plane::Shoot(double speed, Point2i& target)
 void Plane::DropBomb()
 {
   Obus * instance = new Obus(cfg);
-  instance->SetXY( Point2i(GetX(), obus_dy) );
-  
+  instance->SetXY(Point2i(GetX(), obus_dy) );
+
   Point2d speed_vector;
-  
-  int fx = randomSync.GetLong (FORCE_X_MIN, FORCE_X_MAX);
+  GetSpeedXY(speed_vector);
+
+  int fx = randomSync.GetLong(FORCE_X_MIN, FORCE_X_MAX);
   fx *= GetDirection();
-  int fy = randomSync.GetLong (FORCE_Y_MIN, FORCE_Y_MAX);
-  
-  speed_vector.SetValues( fx/30.0, fy/30.0);
-  instance->SetSpeedXY (speed_vector);
-  
+  int fy = randomSync.GetLong(FORCE_Y_MIN, FORCE_Y_MAX);
+
+  speed_vector.SetValues(speed_vector.x + fx/30.0, speed_vector.y + fy/30.0);
+  instance->SetSpeedXY(speed_vector);
+
   lst_objects.AddObject(instance);
-  
-  camera.ChangeObjSuivi (instance, true, true);
-  
+
+  camera.ChangeObjSuivi(instance, true, true);
+
   last_dropped_bomb = instance;
   nb_dropped_bombs++;
 }
@@ -117,9 +118,10 @@ void Plane::Refresh()
   UpdatePosition();
   image->Update();
   // First shoot !!
-  if ( OnTopOfTarget() && nb_dropped_bombs == 0)
+  if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
+    camera.StopFollowingObj(this);
     DropBomb();
-  else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
+  } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
     if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+10 )
       DropBomb();
@@ -142,9 +144,9 @@ void Plane::Draw()
 bool Plane::OnTopOfTarget() const
 {
   if (GetDirection() == 1) 
-    return (cible_x <= GetX()+obus_dx);
+    return (cible_x <= GetX() + obus_dx + distance_to_release);
   else
-    return (GetX()+(int)image->GetWidth()-obus_dx <= cible_x);
+    return (GetX() + (int)image->GetWidth() - obus_dx - distance_to_release <= cible_x);
 }
 
 //-----------------------------------------------------------------------------
@@ -173,10 +175,10 @@ void AirAttack::ChooseTarget(Point2i mouse_pos)
 bool AirAttack::p_Shoot ()
 {
   if(!target_chosen)
-	return false;
+    return false;
 
   Plane* plane = new Plane(cfg());
-  plane->Shoot (cfg().speed, target);
+  plane->Shoot(cfg().speed, target);
   return true;
 }
 
@@ -196,6 +198,6 @@ AirAttackConfig::AirAttackConfig()
 void AirAttackConfig::LoadXml(xmlpp::Element *elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
-  LitDocXml::LitUint (elem, "nbr_obus", nbr_obus);
-  LitDocXml::LitDouble (elem, "speed", speed);
+  LitDocXml::LitUint(elem, "nbr_obus", nbr_obus);
+  LitDocXml::LitDouble(elem, "speed", speed);
 }
