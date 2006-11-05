@@ -38,7 +38,7 @@ class NetworkMenu : public Menu
 
    /* Options controllers */
    SpinButton* player_number;
-   VBox* options_box;
+   Box* options_box;
    Label* connected_players;
    Label* inited_players;
    TextBox* chat_box;
@@ -50,13 +50,13 @@ class NetworkMenu : public Menu
    Button *bt_add_team;
    Button *bt_remove_team;
    PictureWidget *team_logo;
-   VBox *team_box;
+   Box *team_box;
    Team * last_team;
 
    /* Map controllers */
    ListBox *lbox_maps;
    PictureWidget *map_preview;  
-   VBox *map_box;
+   Box *map_box;
 
    void ChangeMap(); 
    void SelectTeamLogo(Team *t);  
@@ -76,8 +76,8 @@ public:
    NetworkMenu(); 
    ~NetworkMenu();
 
-   void AddTeamCallback(std::string team);
-   void DelTeamCallback(std::string team);
+   void AddTeamCallback(std::string team_id);
+   void DelTeamCallback(std::string team_id);
    void ChangeMapCallback();
 
    MessageBox *msg_box;

@@ -354,9 +354,21 @@ void SendGameMode()
 
 void Action_NewTeam (Action *a)
 {
-  std::string team = a->PopString();
-  teams_list.AddTeam (team);
-  network.network_menu->AddTeamCallback(team);
+  std::string team_id = a->PopString();
+  teams_list.AddTeam (team_id);
+
+  uint index;
+  Team* team = teams_list.FindPlayingById(team_id,index);
+
+  // set the number of characters
+  uint nb_characters = uint(a->PopInt());
+  team->SetNbCharacters(nb_characters);
+
+  // set the player name
+  std::string player_name = a->PopString();
+  team->SetPlayerName(player_name);
+
+  network.network_menu->AddTeamCallback(team_id);
 }
 
 void Action_DelTeam (Action *a)
@@ -520,7 +532,7 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   assert(mutex!=NULL);
   SDL_LockMutex(mutex);
   //  MSG_DEBUG("action.handler","New action : %s",a.out());
-  //  std::cout << "New action " << a ;
+  //  std::cout << "New action " << a->GetType() << std::endl ;
   queue.push_back(a);
   //  std::cout << "  queue_size " << queue.size() << std::endl;
   SDL_UnlockMutex(mutex);
