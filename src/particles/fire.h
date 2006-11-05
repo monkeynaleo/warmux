@@ -36,6 +36,7 @@ class FireParticle : public Particle
     void Draw();
   protected:
     void SignalDrowning();
+    void SignalOutOfMap();
 };
 
 #endif
