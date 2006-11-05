@@ -10,7 +10,7 @@
 template<class T> class Vector2
 {
 	private:
-		const static double EPS_ZERO = 0.05;
+		static const double EPS_ZERO = 0.05;
 
 	public:
 		T x, y;
