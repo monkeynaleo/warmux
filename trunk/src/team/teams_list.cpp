@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh des diff�entes �uipes.
+ * Team handling
  *****************************************************************************/
 
 #include "teams_list.h"
@@ -52,16 +52,16 @@ TeamsList::~TeamsList()
 
 void TeamsList::NextTeam (bool begin_game)
 {
-  // Fin du tour pour l'�uipe active
+  // End of turn for active team
   if (begin_game) return;
-   
-  // Passe �l'�uipe suivante
+
+  // Next team
   std::vector<Team*>::iterator it=active_team;
   do
-    {
-      ++it;
-      if (it == playing_list.end()) it = playing_list.begin();
-    } while ((**it).NbAliveCharacter() == 0);
+  {
+    ++it;
+    if (it == playing_list.end()) it = playing_list.begin();
+  } while ((**it).NbAliveCharacter() == 0);
   ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHANGE_TEAM, (**it).GetId()));
 }
 
@@ -87,7 +87,7 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
   if (stat(filename.c_str(), &stat_file) != 0) return;
   if (!S_ISDIR(stat_file.st_mode)) return;
 #endif
-	
+        
   // Add the team
   Team * tmp = Team::CreateTeam (dir, team);
   if (tmp != NULL) {
@@ -114,7 +114,7 @@ void TeamsList::LoadList()
     while ((file = readdir(dir)) != NULL)  LoadOneTeam (dirname, file->d_name);
     closedir (dir);
   } else {
-	Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
+    Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
   }
 #else
   std::string pattern = dirname + "*.*";
@@ -124,12 +124,12 @@ void TeamsList::LoadList()
   if(file_search != INVALID_HANDLE_VALUE)
   {
     while (FindNextFile(file_search,&file))
-	{
-	  if(file.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY)
-	    LoadOneTeam(dirname,file.cFileName);
-	}
+    {
+      if(file.dwFileAttributes == FILE_ATTRIBUTE_DIRECTORY)
+        LoadOneTeam(dirname,file.cFileName);
+    }
   } else {
-	Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
+    Error (Format(_("Cannot open teams directory (%s)!"), dirname.c_str()));
   }
   FindClose(file_search);
 #endif
@@ -250,10 +250,10 @@ void TeamsList::InitList (const std::list<std::string> &liste_nom)
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::InitEnergy ()
+void TeamsList::InitEnergy()
 {
-  //On cherche l'�uipe avec le plus d'�ergie pour fixer le niveau max
-  //(arrive dans le cas d'�uipe n'ayant pas le m�e nombre de vers)
+  // Looking at team with the greatest energy
+  // (in case teams does not have same amount of character)
   iterator it=playing_list.begin(), fin=playing_list.end();
   uint max = 0;
   for (; it != fin; ++it)
@@ -262,7 +262,7 @@ void TeamsList::InitEnergy ()
       max = (**it).ReadEnergy();
   }
 
-  //Initialisation de la barre d'�ergie de chaque �uipe
+  // Init each team's energy bar
   it=playing_list.begin();
   uint i = 0;
   for (; it != fin; ++it)
@@ -271,89 +271,86 @@ void TeamsList::InitEnergy ()
     ++i;
   }
 
-  //Calcul du classement initial
+  // Initial ranking
   it=playing_list.begin();
   for (; it != fin; ++it)
   {
-    uint classement = 0;
+    uint rank = 0;
     iterator it2=playing_list.begin();
     for (; it2 != fin; ++it2)
     {
       if((it != it2)
-      && (**it2).ReadEnergy() > (**it).ReadEnergy() )
-        ++classement;
+          && (**it2).ReadEnergy() > (**it).ReadEnergy() )
+        ++rank;
     }
-    (**it).energy.classement_tmp = classement;
+    (**it).energy.rank_tmp = rank;
   }
   it=playing_list.begin();
   for (; it != fin; ++it)
   {
-    uint classement = (**it).energy.classement_tmp;
+    uint rank = (**it).energy.rank_tmp;
     iterator it2=playing_list.begin();
     for (it2 = it; it2 != fin; ++it2)
     {
       if((it != it2)
-      && (**it2).ReadEnergy() == (**it).ReadEnergy() )
-        ++classement;
+          && (**it2).ReadEnergy() == (**it).ReadEnergy() )
+        ++rank;
     }
-    (**it).energy.FixeClassement(classement);
+    (**it).energy.SetRanking(rank);
   }
 }
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::RefreshEnergy ()
+void TeamsList::RefreshEnergy()
 {
-  //Dans l'ordre des priorit� :
-  // - Terminer l'op�ation en cours
-  // - On change la valeur de l'�ergie
-  // - On change le classement
-  // - On pr�are les jauges �l'�enement suivant
-  
+  // In the order of the priorit :
+  // - finish current action
+  // - change a teams energy
+  // - change ranking
+  // - prepare energy bar for next event
+
   iterator it=playing_list.begin(), fin=playing_list.end();
   energy_t status;
 
-  bool en_attente = true; // Toute les jauges sont en attente
+  bool waiting = true; // every energy bar are waiting
 
   for (; it != fin; ++it) {
-    if( (**it).energy.status != EnergyStatusWait)
-    {
-      en_attente = false;
+    if( (**it).energy.status != EnergyStatusWait) {
+      waiting = false;
       break;
     }
   }
 
-  //Une des jauge ��ute un ordre?
-  if(!en_attente)
-  {
+  // one of the energy bar is changing ?
+  if(!waiting) {
     status = EnergyStatusOK;
 
-    //Une des jauges change de valeur?
+    // change an energy bar value ?
     for (it=playing_list.begin(); it != fin; ++it) {
       if( (**it).energy.status == EnergyStatusValueChange) {
         status = EnergyStatusValueChange;
         break;
       }
     }
-  
-    //Une des jauges change de classement?
+
+    // change a ranking ?
     for (it=playing_list.begin(); it != fin; ++it) {
-      if( (**it).energy.status == EnergyStatusClassementChange
-      && ((**it).energy.IsMoving() || status == EnergyStatusOK)) {
-        status = EnergyStatusClassementChange;
+      if( (**it).energy.status == EnergyStatusRankChange
+             && ((**it).energy.IsMoving() || status == EnergyStatusOK)) {
+        status = EnergyStatusRankChange;
         break;
       }
     }
   }
   else {
-    //Les jauges sont toutes en attente
-    //->on les met OK pour un nouvel ordre
+    // every energy bar are waiting
+    // -> set state ready for a new event
     status = EnergyStatusOK;
   }
 
-  // On recopie l'ordre a donner aux jauges
-  if(status != EnergyStatusOK || en_attente)
-  {
+  // Setting event to process in every energy bar
+  if(status != EnergyStatusOK || waiting) {
     it=playing_list.begin();
     for (; it != fin; ++it) {
       (**it).energy.status = status;
@@ -361,8 +358,7 @@ void TeamsList::RefreshEnergy ()
   }
 
   // Actualisation des valeurs (pas d'actualisation de l'affichage)
-  for (it=playing_list.begin(); it != fin; ++it)
-  {
+  for (it=playing_list.begin(); it != fin; ++it) {
     (**it).UpdateEnergyBar();
     RefreshSort();
   }
@@ -372,36 +368,36 @@ void TeamsList::RefreshEnergy ()
 void TeamsList::RefreshSort ()
 {
   iterator it=playing_list.begin(), fin=playing_list.end();
-  uint classement;
-  
-  //Cherche le classement sans tenir comte des �alit�
+  uint rank;
+
+  // Find a ranking without taking acount of the equalities
   it=playing_list.begin();
   for (; it != fin; ++it)
   {
-    classement = 0;
+    rank = 0;
     iterator it2=playing_list.begin();
     for (; it2 != fin; ++it2)
     {
       if((it != it2)
-      && (**it2).ReadEnergy() > (**it).ReadEnergy() )
-        ++classement;
+          && (**it2).ReadEnergy() > (**it).ReadEnergy() )
+        ++rank;
     }
-    (**it).energy.classement_tmp = classement;
+    (**it).energy.rank_tmp = rank;
   }
 
-  //R�lage des �alit�
+  // Fix equalities
   it=playing_list.begin();
   for (; it != fin; ++it)
   {
-    classement = (**it).energy.classement_tmp;
+    rank = (**it).energy.rank_tmp;
     iterator it2=playing_list.begin();
     for (it2 = it; it2 != fin; ++it2)
     {
       if((it != it2)
-      && (**it2).ReadEnergy() == (**it).ReadEnergy() )
-        ++classement;
+          && (**it2).ReadEnergy() == (**it).ReadEnergy() )
+        ++rank;
     }
-    (**it).energy.NouveauClassement(classement);
+    (**it).energy.NewRanking(rank);
   }
 }
 
@@ -430,7 +426,7 @@ void TeamsList::Clear()
   selection.clear();
   playing_list.clear();
 }
-  
+
 //-----------------------------------------------------------------------------
 
 void TeamsList::AddTeam (const std::string &id, bool generate_error)
@@ -449,49 +445,53 @@ void TeamsList::AddTeam (const std::string &id, bool generate_error)
   }
   active_team = playing_list.begin();
 }
-  
+
 //-----------------------------------------------------------------------------
 
 void TeamsList::DelTeam (const std::string &id)
 {
-    int pos;
-    Team *equipe = FindById (id, pos);
-    assert(equipe != NULL);
-    
-    selection.erase(find(selection.begin(),selection.end(),(uint)pos));
-    playing_list.erase(find(playing_list.begin(),playing_list.end(),equipe));
+  int pos;
+  Team *equipe = FindById (id, pos);
+  assert(equipe != NULL);
 
-   active_team = playing_list.begin();
+  selection.erase(find(selection.begin(),selection.end(),(uint)pos));
+  playing_list.erase(find(playing_list.begin(),playing_list.end(),equipe));
+
+  active_team = playing_list.begin();
 }
-  
+
 //-----------------------------------------------------------------------------
 
 void TeamsList::SetActive(const std::string &id)
 {
-	iterator
-		it = playing_list.begin(),
-		end = playing_list.end();
-	for (; it != end; ++it)
-	{
-		Team &team = **it;
-		if (team.GetId() == id)
-		{
-			active_team = it;
-			return;
-		}
-	}
-	Error (Format(_("Can't find team %s!"), id.c_str()));
+  iterator
+      it = playing_list.begin(),
+  end = playing_list.end();
+  for (; it != end; ++it)
+  {
+    Team &team = **it;
+    if (team.GetId() == id)
+    {
+      active_team = it;
+      return;
+    }
+  }
+  Error (Format(_("Can't find team %s!"), id.c_str()));
 }
-  
+
 //-----------------------------------------------------------------------------
 
 Team& ActiveTeam()
-{ return teams_list.ActiveTeam(); }
+{
+  return teams_list.ActiveTeam();
+}
 
 //-----------------------------------------------------------------------------
 
 Character& ActiveCharacter()
-{ return ActiveTeam().ActiveCharacter(); }
+{
+  return ActiveTeam().ActiveCharacter();
+}
 
 //-----------------------------------------------------------------------------
 

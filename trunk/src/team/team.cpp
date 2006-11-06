@@ -40,11 +40,11 @@
 #include <iostream>
 
 Team::Team(const std::string& _teams_dir,
-	   const std::string& _id,
-	   const std::string& _name,
-	   const Surface& _flag,
-	   const std::string& _sound_profile) :
-  energy(_name)
+           const std::string& _id,
+           const std::string& _name,
+           const Surface& _flag,
+           const std::string& _sound_profile)
+  : energy(this)
 {
   active_character = characters.end();
 
@@ -65,7 +65,7 @@ Team::Team(const std::string& _teams_dir,
 }
 
 Team * Team::CreateTeam (const std::string& teams_dir,
-			 const std::string& id)
+                         const std::string& id)
 {
   std::string nomfich;
   try
@@ -96,8 +96,8 @@ Team * Team::CreateTeam (const std::string& teams_dir,
   catch (const xmlpp::exception &e)
   {
     std::cerr << std::endl
-              << Format(_("Error loading team %s:"), id.c_str())
-              << std::endl << e.what() << std::endl;
+        << Format(_("Error loading team %s:"), id.c_str())
+        << std::endl << e.what() << std::endl;
     return NULL;
   }
 
@@ -125,67 +125,67 @@ bool Team::LoadCharacters(uint howmany)
 
     xmlpp::Node::NodeList nodes = xml -> get_children("character");
     xmlpp::Node::NodeList::iterator
-      it=nodes.begin(),
-      fin=nodes.end();
+        it=nodes.begin(),
+    fin=nodes.end();
 
     characters.clear();
     bool fin_bcl;
     active_character = characters.end();
     do
+    {
+      xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
+      Body* body;
+      std::string character_name="Soldat Inconnu";
+      std::string body_name="";
+      LitDocXml::LitAttrString(elem, "name", character_name);
+      LitDocXml::LitAttrString(elem, "body", body_name);
+
+      if (!(body = body_list.GetBody(body_name)) )
       {
-	xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-	Body* body;
-	std::string character_name="Soldat Inconnu";
-	std::string body_name="";
-	LitDocXml::LitAttrString(elem, "name", character_name);
-	LitDocXml::LitAttrString(elem, "body", body_name);
+        std::cerr
+            << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
+                      body_name.c_str(),
+                      m_name.c_str())
+            << std::endl;
+        return false;
+      }
 
-	if (!(body = body_list.GetBody(body_name)) )
-	{
-	  std::cerr
-	    << Format(_("Error: can't find the body \"%s\" for the team \"%s\"."),
-		      body_name.c_str(),
-		      m_name.c_str())
-	    << std::endl;
-	  return false;
-	}
+        // Initialise les variables du ver, puis l'ajoute �la liste
+      Character new_character(*this, character_name, body);
+      characters.push_back(new_character);
+      active_character = characters.begin(); // we need active_character to be initialized here !!
+      if (!characters.back().PutRandomly(false, world.dst_min_entre_vers))
+      {
+          // We haven't found any place to put the characters!!
+        if (!characters.back().PutRandomly(false, world.dst_min_entre_vers/2)) {
+          std::cerr << std::endl;
+          std::cerr << "Error: " << character_name.c_str() << " will be probably misplaced!" << std::endl;
+          std::cerr << std::endl;
 
-	// Initialise les variables du ver, puis l'ajoute �la liste
-	Character new_character(*this, character_name, body);
-	characters.push_back(new_character);
-	active_character = characters.begin(); // we need active_character to be initialized here !!
-	if (!characters.back().PutRandomly(false, world.dst_min_entre_vers))
-	{
-	  // We haven't found any place to put the characters!!
-	  if (!characters.back().PutRandomly(false, world.dst_min_entre_vers/2)) {
-	    std::cerr << std::endl;
-	    std::cerr << "Error: " << character_name.c_str() << " will be probably misplaced!" << std::endl;
-	    std::cerr << std::endl;
+            // Put it with no space...
+          characters.back().PutRandomly(false, 0);
+        }
+      }
+      characters.back().Init();
 
-	    // Put it with no space...
-	    characters.back().PutRandomly(false, 0);
-	  }
-	}
-        characters.back().Init();
+      MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
 
-	MSG_DEBUG("team", "Add %s in team %s", character_name.c_str(), m_name.c_str());
-
-	// C'est la fin ?
-	++it;
-	fin_bcl = (it == fin);
-	fin_bcl |= (howmany <= characters.size());
-      } while (!fin_bcl);
+        // C'est la fin ?
+      ++it;
+      fin_bcl = (it == fin);
+      fin_bcl |= (howmany <= characters.size());
+    } while (!fin_bcl);
 
     active_character = characters.begin();
 
   }
   catch (const xmlpp::exception &e)
-    {
-      std::cerr << std::endl
-		<< Format(_("Error loading team's data %s:"), m_id.c_str())
-		<< std::endl << e.what() << std::endl;
-      return false;
-    }
+  {
+    std::cerr << std::endl
+        << Format(_("Error loading team's data %s:"), m_id.c_str())
+        << std::endl << e.what() << std::endl;
+    return false;
+  }
 
   return (characters.size() == howmany);
 }
@@ -228,12 +228,12 @@ void Team::NextCharacter()
 
   if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
   camera.ChangeObjSuivi (&ActiveCharacter(),
-			 !is_camera_saved, !is_camera_saved,
-			 true);
+                          !is_camera_saved, !is_camera_saved,
+                          true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
-	    ActiveCharacter().GetName().c_str(),
-	    ActiveCharacter().GetX(),
-	    ActiveCharacter().GetY());
+            ActiveCharacter().GetName().c_str(),
+            ActiveCharacter().GetX(),
+            ActiveCharacter().GetY());
 }
 
 int Team::NbAliveCharacter() const
@@ -259,8 +259,8 @@ void Team::PrepareTurn()
 
   if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
   camera.ChangeObjSuivi (&ActiveCharacter(),
-			 !is_camera_saved, !is_camera_saved,
-			 true);
+                          !is_camera_saved, !is_camera_saved,
+                          true);
   CharacterCursor::GetInstance()->FollowActiveCharacter();
 
   // Active last weapon use if EnoughAmmo
@@ -360,7 +360,7 @@ void Team::LoadGamingData(uint howmany)
   m_nb_units.clear();
   std::list<Weapon *> l_weapons_list = weapons_list.GetList() ;
   std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
-    end = l_weapons_list.end();
+  end = l_weapons_list.end();
 
   for (; itw != end ; ++itw) {
     m_nb_ammos[ (*itw)->GetName() ] = (*itw)->ReadInitialNbAmmo();
@@ -400,12 +400,12 @@ void Team::SetNbCharacters(uint howmany)
 void Team::SetPlayerName(const std::string& _player_name)
 {
   m_player_name = _player_name;
-  energy.SetTeamName(m_player_name+" - "+m_name);
+  // energy.SetTeamName(m_player_name+" - "+m_name);
 }
 
-void Team::DrawEnergy()
+void Team::DrawEnergy(const Point2i& pos)
 {
-  energy.Draw ();
+  energy.Draw(pos);
 }
 
 void Team::Refresh()
@@ -452,4 +452,3 @@ void Team::SetRemote()
 {
   type_of_player = TEAM_remote;
 }
-  

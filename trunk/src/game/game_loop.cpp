@@ -369,12 +369,6 @@ void GameLoop::Draw ()
   world.DrawWater();
   StatStop("GameDraw:water");
 
-  // Draw teams energy
-  StatStart("GameDraw::team_energy");
-  FOR_EACH_TEAM(team)
-    (**team).DrawEnergy();
-  StatStop("GameDraw::team_energy");
-
   // Draw game messages
   StatStart("GameDraw::game_messages");
   GameMessages::GetInstance()->Draw();
