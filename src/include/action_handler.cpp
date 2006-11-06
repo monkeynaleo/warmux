@@ -352,6 +352,7 @@ void SendGameMode()
   network.SendAction(&a);
 }
 
+// TODO: Move this into network/distant_cpu.cpp
 void Action_NewTeam (Action *a)
 {
   std::string team_id = a->PopString();
@@ -371,6 +372,7 @@ void Action_NewTeam (Action *a)
   network.network_menu->AddTeamCallback(team_id);
 }
 
+// TODO: Move this into network/distant_cpu.cpp
 void Action_DelTeam (Action *a)
 {
   std::string team = a->PopString();
@@ -378,6 +380,7 @@ void Action_DelTeam (Action *a)
   network.network_menu->DelTeamCallback(team);
 }
 
+// TODO: Move this into network/distant_cpu.cpp
 void Action_ChatMessage (Action *a)
 {
   if(Game::GetInstance()->IsGameLaunched())

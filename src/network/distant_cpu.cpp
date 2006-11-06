@@ -171,6 +171,10 @@ void DistantComputer::ManageTeam(Action* team)
   if(team->GetType() == ACTION_NEW_TEAM)
   {
     owned_teams.push_back(name);
+    Action* copy = new Action(ACTION_NEW_TEAM, name);
+    copy->Push( team->PopInt() );
+    copy->Push( team->PopString() );
+    ActionHandler::GetInstance()->NewAction(copy, false);
   }
   else
   if(team->GetType() == ACTION_DEL_TEAM)
@@ -179,11 +183,10 @@ void DistantComputer::ManageTeam(Action* team)
     it = find(owned_teams.begin(), owned_teams.end(), name);
     assert(it != owned_teams.end());
     owned_teams.erase(it);
+    ActionHandler::GetInstance()->NewAction(new Action(team->GetType(), name), false);
   }
   else
     assert(false);
-
-  ActionHandler::GetInstance()->NewAction(new Action(team->GetType(), name), false);
 }
 
 void DistantComputer::SendChatMessage(Action* a)
