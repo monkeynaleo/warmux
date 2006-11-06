@@ -62,7 +62,7 @@ Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeap
   m_name = _("Shotgun");
 
   override_keys = true ;
-  announce_missed_shots = true;
+  announce_missed_shots = false;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
 
