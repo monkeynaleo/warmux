@@ -34,6 +34,7 @@
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
+#include "../team/macro.h"
 #include "../tool/debug.h"
 #include "../tool/string_tools.h"
 #include "../tool/i18n.h"
@@ -243,6 +244,14 @@ void Interface::DrawWindInfo()
   world.ToRedrawOnScreen(dr);
 }
 
+// draw team energy
+void Interface::DrawTeamEnergy()
+{
+  Point2i team_bar_offset = Point2i(game_menu.GetWidth() / 2 + clock_background.GetWidth() / 2 + wind.GetWidth() + MARGIN, MARGIN);
+  FOR_EACH_TEAM(tmp_team)
+      (**tmp_team).DrawEnergy(bottom_bar_pos + team_bar_offset);
+}
+
 void Interface::Draw()
 {
   AppWormux * app = AppWormux::GetInstance();
@@ -271,6 +280,7 @@ void Interface::Draw()
   // display wind, character and weapon info
   DrawWindInfo();
   DrawCharacterInfo();
+  DrawTeamEnergy();
   DrawWeaponInfo();
 }
 

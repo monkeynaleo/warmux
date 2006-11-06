@@ -42,6 +42,7 @@ public:
   Weapon* weapon_under_cursor;
   WeaponsMenu weapons_menu;
   Surface weapon_box_button;
+  Team * tmp_team;
 
  private:
    // Timers
@@ -86,6 +87,7 @@ public:
    void Draw();
 
    void DrawCharacterInfo();
+   void DrawTeamEnergy();
    void DrawWeaponInfo();
    void DrawWindInfo();
    void DrawClock();
