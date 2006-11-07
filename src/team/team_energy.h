@@ -63,7 +63,7 @@ class TeamEnergy
 
     std::string team_name;
 
-    uint tps_debut_mvt;
+    uint move_start_time;
 
   public :
     uint rank_tmp;

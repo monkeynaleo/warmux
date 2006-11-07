@@ -112,7 +112,7 @@ Interface::Interface()
   t_character_name = new Text("None", black_color, small_font, false);
   t_team_name = new Text("None", black_color, small_font, false);
   t_player_name = new Text("None", black_color, small_font, false);
-  t_character_energy = new Text("Dead", white_color, small_font, false);
+  t_character_energy = new Text("Dead", white_color, small_font);
   t_weapon_name = new Text("None", black_color, small_font, false);
   t_weapon_stock = new Text("0", black_color, small_font, false);
 }
