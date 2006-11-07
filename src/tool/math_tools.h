@@ -36,6 +36,7 @@ double InverseAngleDeg (const double &angle);
 
 // Conversion degré en radian
 double Deg2Rad (int degre);
+int Rad2Deg(double rad);
 
 // Valeur absolue
 double AbsReel (const double x);

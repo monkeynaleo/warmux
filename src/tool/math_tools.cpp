@@ -30,6 +30,10 @@ double Deg2Rad (int degre){
   return ((double)degre)*M_PI/180;
 }
 
+int Rad2Deg(double rad) {
+  return int(rad*180/M_PI);
+}
+
 // Modèle pour borner une valeur entre min et max
 template <class T>
 T BorneTpl (const T &valeur, const T &min, const T &max){
