@@ -148,6 +148,8 @@ void TeamBox::ValidOptions() const
 
   if (player_name->GetText() == "AI-stupid")
     associated_team->SetLocalAI();
+  else 
+    associated_team->SetLocal();
 }
 
 // ################################################
