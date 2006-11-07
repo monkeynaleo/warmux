@@ -306,8 +306,6 @@
       <unit_per_ammo>2</unit_per_ammo>
       <damage>5</damage>
       <max_strength>25</max_strength>
-      <explosion_range>0</explosion_range>
-      <particle_range>15</particle_range>
     </shotgun>
 
     <snipe_rifle>
