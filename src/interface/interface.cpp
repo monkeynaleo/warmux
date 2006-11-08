@@ -201,9 +201,6 @@ void Interface::DrawWeaponInfo()
   t_weapon_stock->Set(_("Stock:") + (nbr_munition ==  INFINITE_AMMO ? _("(unlimited)") : Format("%i", nbr_munition)));
   Point2i weapon_stock_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2 - t_weapon_stock->GetWidth() - MARGIN, t_weapon_name->GetHeight());
   t_weapon_stock->DrawTopLeft(bottom_bar_pos + weapon_stock_offset);
-  // Display CURRENT weapon icon on top
-  weapon = &ActiveTeam().AccessWeapon();
-  if (weapon != NULL) weapon->DrawWeaponBox();
 }
 
 // display time left in a turn

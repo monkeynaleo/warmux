@@ -408,22 +408,6 @@ void Weapon::StopLoading(){
   jukebox.Stop(channel_load);
 }
 
-void Weapon::DrawWeaponBox(){
-  int c_x;
-  int c_y;
-
-  c_x =  + BUTTON_ICO_WIDTH / 2 + WEAPON_BOX_BUTTON_DX;
-  c_y =  + BUTTON_ICO_HEIGHT / 2 + WEAPON_BOX_BUTTON_DY;
-
-  AppWormux * app = AppWormux::GetInstance();
-
-  Point2i dest( (int)(WEAPON_BOX_BUTTON_DX), (int)(WEAPON_BOX_BUTTON_DY));
-  Point2i  dr2( (int)(c_x - 0.5 * WEAPON_ICO_WIDTH), (int)(c_y - 0.5 * WEAPON_ICO_HEIGHT));
-
-  app->video.window.Blit(Interface::GetInstance()->weapon_box_button, dest);
-  app->video.window.Blit(icon, dr2);
-}
-
 void Weapon::Draw(){
   if(GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING &&
      m_last_fire_time + 100 < Time::GetInstance()->Read())
