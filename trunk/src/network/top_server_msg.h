@@ -19,38 +19,16 @@
  * Notify a top server of an opened wormux server
  * Obtain information about running games from a top server
  *****************************************************************************/
- 
-#ifndef TOP_SERVER_H
-#define TOP_SERVER_H
-//-----------------------------------------------------------------------------
-#include <SDL_net.h>
-#include <string>
 
-class TopServer
+#ifndef TOP_SERVER_MSG_H
+#define TOP_SERVER_MSG_H
+
+enum TopServerMsg
 {
-  TCPsocket socket;
-  IPaddress ip;
-
-  // If the server is visible on internet
-  bool hidden_server;
-
-  bool connected;
-
-  void Send(const int &nbr);
-  void Send(const std::string &str);
-  int ReceiveInt();
-  std::string ReceiveStr();
-
-  bool HandShake();
-public:
-  TopServer();
-  ~TopServer();
-
-  bool Connect();
-  void SetHiddenServer() { hidden_server = true; };
-  void Disconnect();
+  TS_NO_MSG,
+  TS_MSG_VERSION,
+  TS_LAST_MSG
 };
 
-extern TopServer top_server;
-
 #endif
+

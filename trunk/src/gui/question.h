@@ -59,7 +59,6 @@ class Question
   } default_choice;
 
   int TreatsKey (SDL_Event &event);
-  void Draw();
   // Message to display
   std::string message;
 
@@ -72,6 +71,8 @@ public:
 	   int default_value,
       const std::string &bg_sprite="");
   int Ask();
+  void Draw();
+
   inline void add_choice(int key, int value)
   {
     return this->choices.push_back(choice_t(key,value));
