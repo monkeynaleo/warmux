@@ -31,7 +31,6 @@ wormux_SOURCES = \
 	graphic/effects.cpp graphic/effects.h \
 	graphic/font.cpp graphic/font.h \
 	graphic/fps.cpp graphic/fps.h \
-	network/chat.cpp network/chat.h \
 	graphic/text_list.cpp graphic/text_list.h \
 	graphic/surface.cpp graphic/surface.h \
 	graphic/spriteframe.cpp graphic/spriteframe.h \
@@ -106,9 +105,11 @@ wormux_SOURCES = \
 	map/tileitem.cpp map/tileitem.h \
 	map/water.cpp map/water.h \
 	map/wind.cpp map/wind.h \
+	network/chat.cpp network/chat.h \
 	network/distant_cpu.cpp network/distant_cpu.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
+	network/top_server.cpp network/top_server.h \
 	particles/body_member.cpp particles/body_member.h \
 	particles/bullet.cpp particles/bullet.h \
 	particles/dark_smoke.cpp particles/dark_smoke.h \

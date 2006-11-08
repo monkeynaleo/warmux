@@ -83,6 +83,7 @@ network/chat.cpp
 network/distant_cpu.cpp
 network/network.cpp
 network/randomsync.cpp
+network/top_server.cpp
 object/barrel.cpp
 object/bonus_box.cpp
 object/object_cfg.cpp
