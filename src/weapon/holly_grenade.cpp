@@ -93,7 +93,7 @@ void HollyGrenade::Refresh()
 
 void HollyGrenade::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add ("The grenade has left the battlefield before exploding");
+  GameMessages::GetInstance()->Add (_("The grenade has left the battlefield before exploding"));
   WeaponProjectile::SignalOutOfMap();
 }
 

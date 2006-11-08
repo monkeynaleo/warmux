@@ -125,7 +125,7 @@ void Polecat::Refresh()
 
 void Polecat::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add ("The Polecat left the battlefield before exploding");
+  GameMessages::GetInstance()->Add (_("The Polecat left the battlefield before exploding"));
   WeaponProjectile::SignalOutOfMap();
 }
 //-----------------------------------------------------------------------------
