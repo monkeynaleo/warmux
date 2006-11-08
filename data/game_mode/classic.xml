@@ -305,7 +305,7 @@
       <nb_ammo>2</nb_ammo>
       <unit_per_ammo>2</unit_per_ammo>
       <damage>5</damage>
-      <max_strength>25</max_strength>
+      <max_strength>5</max_strength>
     </shotgun>
 
     <snipe_rifle>
