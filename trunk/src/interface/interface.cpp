@@ -76,7 +76,6 @@ Interface::Interface()
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   game_menu = resource_manager.LoadImage( res, "interface/background_interface");
   clock_background = resource_manager.LoadImage( res, "interface/clock_background");
-  weapon_box_button = resource_manager.LoadImage( res, "interface/weapon_box_button");
   clock = resource_manager.LoadImage( res, "interface/clock");
   wind = resource_manager.LoadImage( res, "interface/wind");
   wind_indicator = resource_manager.LoadImage( res, "interface/wind_indicator");

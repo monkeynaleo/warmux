@@ -119,7 +119,6 @@
   <surface name="button3_icon" file="interface/button3.png"/>
   <surface name="button4_icon" file="interface/button4.png"/>
   <surface name="button5_icon" file="interface/button5.png"/>
-  <surface name="weapon_box_button" file="interface/Grey-Button.png"/>
   <surface name="clock_background" file="interface/clock_background.png"/>
   <surface name="clock" file="interface/clock.png"/>
   <surface name="wind" file="interface/wind.png"/>
