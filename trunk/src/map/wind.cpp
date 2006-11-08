@@ -36,8 +36,8 @@
 const uint MAX_WIND_OBJECTS = 200;
 const uint BARRE_LARG = 80;
 const uint BARRE_HAUT = 10;
-const double force = 5; // Force maximale du vent en m/(sec*sec)
-const uint barre_speed = 20;
+const double force = 5; // Max wind strength in m/(sec*sec)
+const uint bar_speed = 20;
 
 Wind wind;
 
@@ -133,20 +133,13 @@ void WindParticle::Resize(double size)
 
 Wind::Wind(){
   m_val = m_nv_val = 0;
-  barre.InitPos (10, 10, BARRE_LARG, BARRE_HAUT);
-  barre.InitVal (0, -100, 100);
-  barre.border_color = c_white;
-  barre.background_color = c_black;
-  barre.value_color = c_red;
-  barre.AjouteMarqueur (100, c_white);
-  barre.SetReferenceValue (true, 0);
 }
 
 void Wind::Reset(){
   m_last_move = 0;
   m_last_part_mvt = 0;
   m_val = m_nv_val = 0;
-  barre.Actu (m_val);
+  Interface::GetInstance()->UpdateWindIndicator(m_val);
 
   particles.clear();
 
@@ -186,23 +179,18 @@ void Wind::DrawParticles(){
 }
 
 void Wind::Refresh(){
-  if(m_last_move + barre_speed < Time::GetInstance()->Read()){
+  if(m_last_move + bar_speed < Time::GetInstance()->Read()){
     if(m_val>m_nv_val)
       --m_val;
     else
     if(m_val<m_nv_val)
       ++m_val;
     m_last_move = Time::GetInstance()->Read();
-    barre.Actu(m_val);
     Interface::GetInstance()->UpdateWindIndicator(m_val);
   }
 
   iterator it=particles.begin(), end=particles.end();
   for (; it != end; ++it) it -> Refresh();
-}
-
-void Wind::Draw(){
-  barre.Draw();
 }
 
 void Wind::RandomizeParticlesPos()

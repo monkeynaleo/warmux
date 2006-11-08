@@ -52,7 +52,6 @@ public:
 
 class Wind
 {
-  BarreProg barre;
   long m_val, m_nv_val;
   uint m_last_move;
   uint m_last_part_mvt;
@@ -68,7 +67,6 @@ public:
   void SetVal (long val);
   void Refresh();
   void Reset();
-  void Draw();
   void DrawParticles();
   void RandomizeParticlesPos(); // Put particles randomly on the screen
 };

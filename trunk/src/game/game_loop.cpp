@@ -387,11 +387,6 @@ void GameLoop::Draw ()
   Interface::GetInstance()->Draw ();
   StatStop("GameDraw:interface");
 
-  // Display wind bar
-  StatStart("GameDraw:wind_bar");
-  wind.Draw();
-  StatStop("GameDraw:wind_bar");
-
   // Draw MsgBox for chat network
   if(network.IsConnected()){
     StatStart("GameDraw:chatsession");
