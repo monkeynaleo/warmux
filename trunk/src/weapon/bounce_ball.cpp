@@ -60,7 +60,7 @@ void BounceBall::Refresh()
 
 void BounceBall::SignalOutOfMap()
 {   
-  GameMessages::GetInstance()->Add ("The ball left the battlefield before exploding");
+  GameMessages::GetInstance()->Add (_("The ball left the battlefield before exploding"));
   WeaponProjectile::SignalOutOfMap();
 }
 
