@@ -1,5 +1,5 @@
 CXX=g++
-CXXFLAGS=-g -DDEBUG
+CXXFLAGS=-g -DDEBUG -Wall -Werror
 
 wormux_server: main.o server.o client.o
 	$(CXX) -o wormux_server *.o

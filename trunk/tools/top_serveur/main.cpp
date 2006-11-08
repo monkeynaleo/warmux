@@ -26,7 +26,6 @@ int main(int argc, void** argv)
 
 	while(1)
 	{
-		int received;
 		DPRINT("Waiting for incoming connections...");
 
 		acting_sock_set = listen_sock.GetSockSet();
