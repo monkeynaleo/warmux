@@ -73,7 +73,6 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
     Character * tmp = (Character*)(obj);
     tmp -> SetEnergyDelta (-cfg.damage);
     tmp -> AddSpeed (2, GetSpeedAngle());
-    tmp -> UpdatePosition();
     Ghost();
   }
 }
