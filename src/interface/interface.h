@@ -41,7 +41,6 @@ public:
   Character *character_under_cursor;
   Weapon* weapon_under_cursor;
   WeaponsMenu weapons_menu;
-  Surface weapon_box_button;
   Team * tmp_team;
 
  private:
