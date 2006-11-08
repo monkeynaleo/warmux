@@ -31,6 +31,7 @@
 #include "../graphic/font.h"
 #include "../map/maps_list.h"
 #include "../network/network.h"
+#include "../network/top_server.h"
 #include "../include/app.h"
 #include "../include/action_handler.h"
 #include "../team/teams_list.h"
@@ -48,14 +49,13 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
   big_font = Font::GetInstance(Font::FONT_BIG);
 
-  uint button_height = 64;
-  uint button_width = 300;
+  Rectanglei stdRect(0, 0, 300, 64);
 
-  uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - button_width/2;
+  uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
   uint y_box = AppWormux::GetInstance()->video.window.GetHeight()/2 - 200;
 
   // Connection related widgets
-  connection_box = new VBox(Rectanglei( x_button, y_box, button_width, 1), false);
+  connection_box = new VBox(Rectanglei( x_button, y_box, stdRect.GetSizeX(), 1), false);
   connection_box->SetBorder(Point2i(0,0));
   connection_box->AddWidget(new Label(_("Server adress:"), rectZero, *normal_font));
 
@@ -66,15 +66,21 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 				 res, "main_menu/button",
 				 _("Connect to game"),
 				 big_font);
-  start_client->SetSizePosition(Rectanglei(0,0, button_width, button_height));
+  start_client->SetSizePosition( stdRect );
   connection_box->AddWidget(start_client);
 
   start_server = new ButtonText( Point2i(0,0),
 				 res, "main_menu/button",
 				 _("Host a game"),
 				 big_font);
-  start_server->SetSizePosition(Rectanglei(0,0, button_width, button_height));
+  start_server->SetSizePosition( stdRect );
   connection_box->AddWidget(start_server);
+
+  internet_server = new PictureTextCBox(_("Server available on Internet"),
+				"menu/fullscreen",
+				stdRect);
+  internet_server->SetValue( false );
+  connection_box->AddWidget(internet_server);
 
   widgets.AddWidget(connection_box);
 
@@ -121,8 +127,15 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
 
   if (w == start_server)
   {
+    if( !internet_server->GetValue() )
+      top_server.SetHiddenServer();
+
+    if( !top_server.Connect() )
+      return;
+
     network.Init();
     network.ServerStart(WORMUX_NETWORK_PORT);
+
     if(network.IsConnected())
     {
       network.client_inited = 1;
@@ -139,6 +152,7 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
     network.network_menu = &nm;
     nm.Run();
     network.network_menu = NULL;
+    top_server.Disconnect();
 
     // for the moment, it's just for test...
     close_menu = true;
