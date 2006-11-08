@@ -151,7 +151,6 @@ public:
   // Draw the weapon
   virtual void Draw();
   virtual void DrawWeaponFire();
-  void DrawWeaponBox();
 
   void DrawUnit(int unit);
 
