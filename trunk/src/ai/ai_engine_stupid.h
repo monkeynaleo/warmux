@@ -32,15 +32,28 @@ class AIStupidEngine
   AIStupidEngine();
 
   Character* m_last_char;
+  Character* m_nearest_enemy;
+  int m_angle;
+
   uint m_begin_turn_time;
+  uint m_last_shoot_time;
   uint m_step;
+
   bool m_goes_right;
   bool m_is_walking;
 
+  Point2i m_last_position;
+  uint m_time_at_last_position;
+
+  uint m_current_time;
+
  private:
-  void BeginTurn();
+  void BeginTurn(); 
   void ChooseDirection();
   void ChooseWeapon();
+
+  bool IsDirectlyShootable(Character& character);
+  void Shoot();
 
   void Walk();
   void StopWalk();
