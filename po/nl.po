@@ -23,7 +23,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Kaart %s niet gevonden :-("
 
-#: src/game/game_loop.cpp:711
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (team %s) is overleden."
@@ -38,7 +38,7 @@ msgstr "%s <%s> aka %s van %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> van %s"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s pleegde zelfmoord !"
@@ -48,12 +48,12 @@ msgstr "%s pleegde zelfmoord !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s is in het water gevallen."
 
-#: src/game/game_loop.cpp:694
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s is van de kaart gevallen!"
@@ -72,12 +72,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s heeft %u punt energie gekregen!"
 msgstr[1] "%s heeft %u punten energie gekregen!"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:694
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van team %s!"
 
-#: src/game/game_loop.cpp:700
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s is dood door zijn onhandigheid!"
@@ -210,7 +210,7 @@ msgstr ""
 msgid "C++ exception caught:"
 msgstr "C++ uitzondering gevangen:"
 
-#: src/team/teams_list.cpp:444 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:440 src/team/teams_list.cpp:479
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan team %s niet vinden!"
@@ -242,7 +242,7 @@ msgstr "Credits"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Wilt u echt afsluiten? (Y/N)"
 
-#: src/menu/game_menu.cpp:306
+#: src/menu/game_menu.cpp:308
 #, fuzzy
 msgid "Duration of a turn"
 msgstr "Duur van een beurt:"
@@ -335,7 +335,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Granaat"
 
-#: src/game/game_loop.cpp:747
+#: src/game/game_loop.cpp:736
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -345,7 +345,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:324
+#: src/menu/game_menu.cpp:326
 #, fuzzy
 msgid "Initial energy"
 msgstr "Initiële energie:"
@@ -422,7 +422,7 @@ msgstr "Netwerk Spel"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:553
+#: src/weapon/weapon.cpp:537
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Element <%s> niet gevonden het xml config bestand!"
@@ -432,7 +432,7 @@ msgstr "Element <%s> niet gevonden het xml config bestand!"
 msgid "Number of characters"
 msgstr "Aantal spelers per team:"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:181
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Aantal spelers per team:"
@@ -453,7 +453,7 @@ msgstr ""
 msgid "Play"
 msgstr "Spelen"
 
-#: src/menu/game_menu.cpp:197
+#: src/menu/game_menu.cpp:199
 #, fuzzy
 msgid "Player"
 msgstr "Spelen"
@@ -552,9 +552,34 @@ msgstr "Teleportatie"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
+#: src/weapon/gnu.cpp:112
+#, fuzzy
+msgid "The Gnu left the battlefield before exploding"
+msgstr "De raket heeft het slagveld verlaten..."
+
+#: src/weapon/polecat.cpp:128
+#, fuzzy
+msgid "The Polecat left the battlefield before exploding"
+msgstr "De raket heeft het slagveld verlaten..."
+
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
 msgstr "De automatische raket heeft het slagveld verlaten..."
+
+#: src/weapon/bounce_ball.cpp:63
+#, fuzzy
+msgid "The ball left the battlefield before exploding"
+msgstr "De raket heeft het slagveld verlaten..."
+
+#: src/weapon/holly_grenade.cpp:96
+#, fuzzy
+msgid "The grenade has left the battlefield before exploding"
+msgstr "De raket heeft het slagveld verlaten..."
+
+#: src/weapon/grenade.cpp:59
+#, fuzzy
+msgid "The grenade left the battlefield before exploding"
+msgstr "De raket heeft het slagveld verlaten..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
@@ -590,7 +615,7 @@ msgstr "Wapen:"
 msgid "Website: "
 msgstr "Website: "
 
-#: src/game/game_loop.cpp:708
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
@@ -627,7 +652,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "U heeft minimaal twee geldige teams nodig !"
 
-#: src/weapon/launcher.cpp:462
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 

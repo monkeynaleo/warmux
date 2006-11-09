@@ -22,7 +22,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
 
-#: src/game/game_loop.cpp:711
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (Mannschaft %s) ist gestorben."
@@ -37,7 +37,7 @@ msgstr "%s <%s> aka %s aus %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> aus %s"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begeht Selbstmord!"
@@ -47,12 +47,12 @@ msgstr "%s begeht Selbstmord!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ist ins Wasser gefallen."
 
-#: src/game/game_loop.cpp:694
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ist von der Karte gefallen!"
@@ -71,12 +71,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:694
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied von Mannschaft %s getötet!"
 
-#: src/game/game_loop.cpp:700
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s stirbt durch seine Tollpatschigkeit!"
@@ -206,7 +206,7 @@ msgstr "Und tschüss Tux..."
 msgid "C++ exception caught:"
 msgstr "C++ Ausnahmefehler abgefangen:"
 
-#: src/team/teams_list.cpp:444 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:440 src/team/teams_list.cpp:479
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kann Mannschaft %s nicht finden!"
@@ -237,7 +237,7 @@ msgstr "Abspann"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Wollen Sie das Programm wirklich beenden? (J/N)"
 
-#: src/menu/game_menu.cpp:306
+#: src/menu/game_menu.cpp:308
 msgid "Duration of a turn"
 msgstr "Dauer einer Runde"
 
@@ -329,7 +329,7 @@ msgstr "Hauptkommandant"
 msgid "Holy Grenade"
 msgstr "Heilige Granate"
 
-#: src/game/game_loop.cpp:747
+#: src/game/game_loop.cpp:736
 msgid "Hurry up, you are too slow !!"
 msgstr "Beeile dich, du bist zu langsam !!"
 
@@ -341,7 +341,7 @@ msgstr ""
 "Falls du einen Fehler gefunden oder einen Featurewunsch hast, sende uns eine "
 "E-Mail (in English bitte):"
 
-#: src/menu/game_menu.cpp:324
+#: src/menu/game_menu.cpp:326
 msgid "Initial energy"
 msgstr "Startenergie"
 
@@ -415,7 +415,7 @@ msgstr "Netzwerkspiel"
 msgid "Ninjarope"
 msgstr "Ninjaseil"
 
-#: src/weapon/weapon.cpp:553
+#: src/weapon/weapon.cpp:537
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
@@ -424,7 +424,7 @@ msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
 msgid "Number of characters"
 msgstr "Anzahl der Figuren"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:181
 msgid "Number of teams:"
 msgstr "Anzahl der Mannschaften"
 
@@ -444,7 +444,7 @@ msgstr "Fallschirm wird automatisch aktiviert."
 msgid "Play"
 msgstr "Spielen"
 
-#: src/menu/game_menu.cpp:197
+#: src/menu/game_menu.cpp:199
 #, fuzzy
 msgid "Player"
 msgstr "Spieler X"
@@ -539,9 +539,44 @@ msgstr ""
 "Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren "
 "konnte."
 
+#: src/weapon/gnu.cpp:112
+#, fuzzy
+msgid "The Gnu left the battlefield before exploding"
+msgstr ""
+"Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren "
+"konnte."
+
+#: src/weapon/polecat.cpp:128
+#, fuzzy
+msgid "The Polecat left the battlefield before exploding"
+msgstr ""
+"Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren "
+"konnte."
+
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
+
+#: src/weapon/bounce_ball.cpp:63
+#, fuzzy
+msgid "The ball left the battlefield before exploding"
+msgstr ""
+"Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren "
+"konnte."
+
+#: src/weapon/holly_grenade.cpp:96
+#, fuzzy
+msgid "The grenade has left the battlefield before exploding"
+msgstr ""
+"Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren "
+"konnte."
+
+#: src/weapon/grenade.cpp:59
+#, fuzzy
+msgid "The grenade left the battlefield before exploding"
+msgstr ""
+"Die Splittergranate hat das Schlachtfeld verlassen bevor sie explodieren "
+"konnte."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
@@ -574,7 +609,7 @@ msgstr "Waffen"
 msgid "Website: "
 msgstr "Webseite: "
 
-#: src/game/game_loop.cpp:708
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
@@ -610,7 +645,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 
-#: src/weapon/launcher.cpp:462
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 

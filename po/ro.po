@@ -25,7 +25,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/game/game_loop.cpp:711
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (echipa %s) a murit."
@@ -40,7 +40,7 @@ msgstr "%s <%s> cunoscut şi ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -50,12 +50,12 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game_loop.cpp:694
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
@@ -76,13 +76,13 @@ msgstr[0] "%s a câştigat %u punct de energie!"
 msgstr[1] "%s a câştigat %u puncte de energie!"
 msgstr[2] "%s a câştigat %u de puncte de energie!"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:694
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "Psihopatia sălăşluieşte în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game_loop.cpp:700
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -224,7 +224,7 @@ msgstr ""
 msgid "C++ exception caught:"
 msgstr "O excepţie C++ a fost captată:"
 
-#: src/team/teams_list.cpp:444 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:440 src/team/teams_list.cpp:479
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
@@ -256,7 +256,7 @@ msgstr "Merite"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
-#: src/menu/game_menu.cpp:306
+#: src/menu/game_menu.cpp:308
 #, fuzzy
 msgid "Duration of a turn"
 msgstr "Durata unei ture:"
@@ -349,7 +349,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Grenadă"
 
-#: src/game/game_loop.cpp:747
+#: src/game/game_loop.cpp:736
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -359,7 +359,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:324
+#: src/menu/game_menu.cpp:326
 #, fuzzy
 msgid "Initial energy"
 msgstr "Energie iniţială:"
@@ -436,7 +436,7 @@ msgstr "Joc în reţea"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:553
+#: src/weapon/weapon.cpp:537
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
@@ -446,7 +446,7 @@ msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
 msgid "Number of characters"
 msgstr "Jucători per echipă:"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:181
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Jucători per echipă:"
@@ -467,7 +467,7 @@ msgstr ""
 msgid "Play"
 msgstr "Porneşte jocul"
 
-#: src/menu/game_menu.cpp:197
+#: src/menu/game_menu.cpp:199
 #, fuzzy
 msgid "Player"
 msgstr "Porneşte jocul"
@@ -566,9 +566,34 @@ msgstr "Teleportare"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
+#: src/weapon/gnu.cpp:112
+#, fuzzy
+msgid "The Gnu left the battlefield before exploding"
+msgstr "Racheta a părăsit câmpul de luptă..."
+
+#: src/weapon/polecat.cpp:128
+#, fuzzy
+msgid "The Polecat left the battlefield before exploding"
+msgstr "Racheta a părăsit câmpul de luptă..."
+
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Racheta automată a părăsit câmpul de luptă..."
+
+#: src/weapon/bounce_ball.cpp:63
+#, fuzzy
+msgid "The ball left the battlefield before exploding"
+msgstr "Racheta a părăsit câmpul de luptă..."
+
+#: src/weapon/holly_grenade.cpp:96
+#, fuzzy
+msgid "The grenade has left the battlefield before exploding"
+msgstr "Racheta a părăsit câmpul de luptă..."
+
+#: src/weapon/grenade.cpp:59
+#, fuzzy
+msgid "The grenade left the battlefield before exploding"
+msgstr "Racheta a părăsit câmpul de luptă..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
@@ -604,7 +629,7 @@ msgstr "Arma:"
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game_loop.cpp:708
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -641,7 +666,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Aveţi nevoie de cel puţin două echipe valide !"
 
-#: src/weapon/launcher.cpp:462
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 

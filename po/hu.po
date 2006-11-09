@@ -23,7 +23,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Nem található %s térkép :-("
 
-#: src/game/game_loop.cpp:711
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -38,7 +38,7 @@ msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> %s csapatától"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
@@ -48,12 +48,12 @@ msgstr "%s öngyilkos lett!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:672
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:694
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
@@ -72,12 +72,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiaszintje %u egységgel nőtt!"
 msgstr[1] "%s energiaszintje %u egységgel nőtt!"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:694
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
 
-#: src/game/game_loop.cpp:700
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kicsit ügyefogyott volt, így hát távozott az élő sorából!"
@@ -210,7 +210,7 @@ msgstr ""
 msgid "C++ exception caught:"
 msgstr "Elfogtam egy C++ kivételt:"
 
-#: src/team/teams_list.cpp:444 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:440 src/team/teams_list.cpp:479
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
@@ -242,7 +242,7 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Biztos, hogy ki szeretnél lépni? (Y/N) ?"
 
-#: src/menu/game_menu.cpp:306
+#: src/menu/game_menu.cpp:308
 #, fuzzy
 msgid "Duration of a turn"
 msgstr "Egy forduló ideje:"
@@ -336,7 +336,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Gránát"
 
-#: src/game/game_loop.cpp:747
+#: src/game/game_loop.cpp:736
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -346,7 +346,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:324
+#: src/menu/game_menu.cpp:326
 #, fuzzy
 msgid "Initial energy"
 msgstr "Induló energiaszint:"
@@ -425,7 +425,7 @@ msgstr ""
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:553
+#: src/weapon/weapon.cpp:537
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
@@ -435,7 +435,7 @@ msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
 msgid "Number of characters"
 msgstr "Játékosok száma csapatonként:"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:181
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Játékosok száma csapatonként:"
@@ -456,7 +456,7 @@ msgstr ""
 msgid "Play"
 msgstr "Irány a játék!"
 
-#: src/menu/game_menu.cpp:197
+#: src/menu/game_menu.cpp:199
 #, fuzzy
 msgid "Player"
 msgstr "Irány a játék!"
@@ -555,8 +555,28 @@ msgstr "Teleport"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
+#: src/weapon/gnu.cpp:112
+msgid "The Gnu left the battlefield before exploding"
+msgstr ""
+
+#: src/weapon/polecat.cpp:128
+msgid "The Polecat left the battlefield before exploding"
+msgstr ""
+
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
+msgstr ""
+
+#: src/weapon/bounce_ball.cpp:63
+msgid "The ball left the battlefield before exploding"
+msgstr ""
+
+#: src/weapon/holly_grenade.cpp:96
+msgid "The grenade has left the battlefield before exploding"
+msgstr ""
+
+#: src/weapon/grenade.cpp:59
+msgid "The grenade left the battlefield before exploding"
 msgstr ""
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
@@ -592,7 +612,7 @@ msgstr "Fegyver"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game_loop.cpp:708
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"
@@ -628,7 +648,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Legalább két csapatot kell verbuválnod!"
 
-#: src/weapon/launcher.cpp:462
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "Ezt elnézted!"
 
