@@ -30,7 +30,7 @@ const std::string Constants::ENV_FONT_PATH = "WORMUX_FONT_PATH";
 std::vector<std::string> Constants::AUTHORS;
 
 const std::string Constants::WEB_SITE = "http://www.wormux.org";
-const std::string Constants::EMAIL = "wormux-dev@gna.org";
+const std::string Constants::EMAIL = "wormux-dev .AT. gna .DOT. org";
 
 // Size min/max of the map (pixels)
 const Point2i Constants::MAP_MIN_SIZE = Point2i(100, 200);
