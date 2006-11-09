@@ -19,7 +19,7 @@
  * Notify a top server of an opened wormux server
  * Obtain information about running games from a top server
  *****************************************************************************/
- 
+
 #include <SDL_net.h>
 #include "top_server.h"
 #include "top_server_msg.h"
@@ -118,7 +118,7 @@ void TopServer::Send(const int& nbr)
 void TopServer::Send(const std::string &str)
 {
   Send(str.size());
-  SDLNet_TCP_Send(socket, str.c_str(), str.size());  
+  SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
 }
 
 int TopServer::ReceiveInt()
