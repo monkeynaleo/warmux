@@ -70,6 +70,8 @@ If you add a new C++ sourcefile that needs to be compiled, you just have
 to add a line with the relative path in src/SourceFiles.cmake.
 If you create a new translation in the po subdirectory, you have to add
 it in po/CMakeLists.txt.
+After adding new data or source files you can also run the script SearchFiles.sh
+in the cmake/ subdir.
 
 
 Package generation:
