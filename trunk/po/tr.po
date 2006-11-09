@@ -24,7 +24,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
-#: src/game/game_loop.cpp:711
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (%s takımı) öldü."
@@ -39,7 +39,7 @@ msgstr "%s'den %s <%s> aka %s"
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -49,12 +49,12 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game_loop.cpp:694
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
@@ -71,12 +71,12 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s, %u enerji kazandı!"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:694
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game_loop.cpp:700
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -198,7 +198,7 @@ msgstr "Bay bay tux..."
 msgid "C++ exception caught:"
 msgstr "C++ istisnası oluştu:"
 
-#: src/team/teams_list.cpp:444 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:440 src/team/teams_list.cpp:479
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
@@ -228,7 +228,7 @@ msgstr "Hazırlayanlar"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"
 
-#: src/menu/game_menu.cpp:306
+#: src/menu/game_menu.cpp:308
 #, fuzzy
 msgid "Duration of a turn"
 msgstr "Tur zamanı:"
@@ -318,7 +318,7 @@ msgstr "Başkumandan"
 msgid "Holy Grenade"
 msgstr "Kutsal El Bombası"
 
-#: src/game/game_loop.cpp:747
+#: src/game/game_loop.cpp:736
 msgid "Hurry up, you are too slow !!"
 msgstr "Çabuk ol, çok yavaşsın !!"
 
@@ -330,7 +330,7 @@ msgstr ""
 "Bir hata bulursanız veya bir istekte bulunacaksanız bir e-posta gönderin "
 "(İngilizce olsun lütfen):"
 
-#: src/menu/game_menu.cpp:324
+#: src/menu/game_menu.cpp:326
 #, fuzzy
 msgid "Initial energy"
 msgstr "Başlangıç enerjisi:"
@@ -406,7 +406,7 @@ msgstr "Ağ Oyunu"
 msgid "Ninjarope"
 msgstr "Ninja ipi"
 
-#: src/weapon/weapon.cpp:553
+#: src/weapon/weapon.cpp:537
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
@@ -415,7 +415,7 @@ msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
 msgid "Number of characters"
 msgstr "Karakter sayısı"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:181
 msgid "Number of teams:"
 msgstr "Takım sayısı:"
 
@@ -435,7 +435,7 @@ msgstr "Paraşüt otomatik olarak etkinleştirildi."
 msgid "Play"
 msgstr "Oyna"
 
-#: src/menu/game_menu.cpp:197
+#: src/menu/game_menu.cpp:199
 #, fuzzy
 msgid "Player"
 msgstr "Oyuncu X"
@@ -528,9 +528,34 @@ msgstr "Işınlanma"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
 
+#: src/weapon/gnu.cpp:112
+#, fuzzy
+msgid "The Gnu left the battlefield before exploding"
+msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
+
+#: src/weapon/polecat.cpp:128
+#, fuzzy
+msgid "The Polecat left the battlefield before exploding"
+msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
+
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Otomatik roket savaş alanını terketti..."
+
+#: src/weapon/bounce_ball.cpp:63
+#, fuzzy
+msgid "The ball left the battlefield before exploding"
+msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
+
+#: src/weapon/holly_grenade.cpp:96
+#, fuzzy
+msgid "The grenade has left the battlefield before exploding"
+msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
+
+#: src/weapon/grenade.cpp:59
+#, fuzzy
+msgid "The grenade left the battlefield before exploding"
+msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
@@ -563,7 +588,7 @@ msgstr "Silahlar"
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game_loop.cpp:708
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
@@ -599,7 +624,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
-#: src/weapon/launcher.cpp:462
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 

@@ -26,7 +26,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/game/game_loop.cpp:711
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s (%s team) has died."
 msgstr "%s (команда %s) погибла."
@@ -41,7 +41,7 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -51,12 +51,12 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:694
+#: src/game/game_loop.cpp:683
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -77,12 +77,12 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:694
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:700
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
@@ -224,7 +224,7 @@ msgstr ""
 msgid "C++ exception caught:"
 msgstr "Исключительная ситуация C++:"
 
-#: src/team/teams_list.cpp:444 src/team/teams_list.cpp:483
+#: src/team/teams_list.cpp:440 src/team/teams_list.cpp:479
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не удаётся найти команду %s!"
@@ -256,7 +256,7 @@ msgstr ""
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
-#: src/menu/game_menu.cpp:306
+#: src/menu/game_menu.cpp:308
 #, fuzzy
 msgid "Duration of a turn"
 msgstr "Длительность шага:"
@@ -349,7 +349,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Граната"
 
-#: src/game/game_loop.cpp:747
+#: src/game/game_loop.cpp:736
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -359,7 +359,7 @@ msgid ""
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:324
+#: src/menu/game_menu.cpp:326
 #, fuzzy
 msgid "Initial energy"
 msgstr "Энергии в начале:"
@@ -435,7 +435,7 @@ msgstr "Игра по сети"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:553
+#: src/weapon/weapon.cpp:537
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
@@ -445,7 +445,7 @@ msgstr "Элемент <%s> не найден в файле с настройк�
 msgid "Number of characters"
 msgstr "Игроков в каждой команде:"
 
-#: src/menu/game_menu.cpp:179
+#: src/menu/game_menu.cpp:181
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Игроков в каждой команде:"
@@ -466,7 +466,7 @@ msgstr ""
 msgid "Play"
 msgstr "Играть"
 
-#: src/menu/game_menu.cpp:197
+#: src/menu/game_menu.cpp:199
 #, fuzzy
 msgid "Player"
 msgstr "Играть"
@@ -564,9 +564,34 @@ msgstr "Телепортация"
 msgid "The Cluster Bomb has left the battlefield before it could explode."
 msgstr ""
 
+#: src/weapon/gnu.cpp:112
+#, fuzzy
+msgid "The Gnu left the battlefield before exploding"
+msgstr "Ракета улетела за пределы поля битвы..."
+
+#: src/weapon/polecat.cpp:128
+#, fuzzy
+msgid "The Polecat left the battlefield before exploding"
+msgstr "Ракета улетела за пределы поля битвы..."
+
 #: src/weapon/auto_bazooka.cpp:95
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Автоматическая ракета улетела за пределы поля битвы..."
+
+#: src/weapon/bounce_ball.cpp:63
+#, fuzzy
+msgid "The ball left the battlefield before exploding"
+msgstr "Ракета улетела за пределы поля битвы..."
+
+#: src/weapon/holly_grenade.cpp:96
+#, fuzzy
+msgid "The grenade has left the battlefield before exploding"
+msgstr "Ракета улетела за пределы поля битвы..."
+
+#: src/weapon/grenade.cpp:59
+#, fuzzy
+msgid "The grenade left the battlefield before exploding"
+msgstr "Ракета улетела за пределы поля битвы..."
 
 #: src/weapon/bazooka.cpp:53 src/weapon/cluster_bomb.cpp:59
 #: src/weapon/riot_bomb.cpp:52
@@ -602,7 +627,7 @@ msgstr "Оружие:"
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:708
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -639,7 +664,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 
-#: src/weapon/launcher.cpp:462
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 
