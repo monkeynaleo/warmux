@@ -1,11 +1,7 @@
-# Add new source files here
 
 SET(WORMUX_SRCS
-main.cpp
 ai/ai_engine.cpp
-ai/ai_engine.h
 ai/ai_engine_stupid.cpp
-ai/ai_engine_stupid.h
 character/body.cpp
 character/body_list.cpp
 character/character.cpp
@@ -34,7 +30,6 @@ gui/box.cpp
 gui/button.cpp
 gui/button_text.cpp
 gui/check_box.cpp
-gui/EnergyBar.h
 gui/EnergyBar.cpp
 gui/label.cpp
 gui/list_box.cpp
@@ -62,6 +57,7 @@ interface/keyboard.cpp
 interface/loading_screen.cpp
 interface/mouse.cpp
 interface/weapon_menu.cpp
+main.cpp
 map/camera.cpp
 map/ground.cpp
 map/map.cpp
@@ -91,7 +87,6 @@ object/objects_list.cpp
 object/physical_obj.cpp
 object/physics.cpp
 particles/body_member.cpp
-particles/teleport_member.cpp
 particles/bullet.cpp
 particles/dark_smoke.cpp
 particles/explosion_smoke.cpp
@@ -103,6 +98,7 @@ particles/particle.cpp
 particles/polecat_fart.cpp
 particles/smoke.cpp
 particles/star.cpp
+particles/teleport_member.cpp
 sound/jukebox.cpp
 team/results.cpp
 team/team.cpp
