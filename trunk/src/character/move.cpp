@@ -158,12 +158,11 @@ void SendCharacterPosition()
 {
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-  Action a_set_clothe(ACTION_SET_CLOTHE,ActiveCharacter().body->GetClothe());
-  Action a_set_movement(ACTION_SET_MOVEMENT,ActiveCharacter().body->GetMovement());
-  Action a_set_frame(ACTION_SET_FRAME,(int)ActiveCharacter().body->GetFrame());
   network.SendAction(a);
   delete a;
-  network.SendAction(&a_set_clothe);
-  network.SendAction(&a_set_movement);
-  network.SendAction(&a_set_frame);
+
+  Action a_set_skin(ACTION_SET_SKIN,ActiveCharacter().body->GetClothe());
+  a_set_skin.Push(ActiveCharacter().body->GetMovement());
+  a_set_skin.Push((int)ActiveCharacter().body->GetFrame());
+  network.SendAction(&a_set_skin);
 }

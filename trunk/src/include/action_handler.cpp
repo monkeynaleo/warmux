@@ -213,28 +213,14 @@ void Action_SetCharacterEnergy(Action *a)
   c->SetEnergy( a->PopInt() );
 }
 
-void Action_SetFrame (Action *a)
+void Action_SetSkin (Action *a)
 {
   //Set the frame of the walking skin, to get the position of the hand synced
   if (!ActiveTeam().IsLocal() || network.state != Network::NETWORK_PLAYING)
   {
-    ActiveTeam().ActiveCharacter().body->SetFrame((uint)a->PopInt());
-  }
-}
-
-void Action_SetClothe (Action *a)
-{
-  if (!ActiveTeam().IsLocal() || network.state != Network::NETWORK_PLAYING)
-  {
     ActiveTeam().ActiveCharacter().SetClothe(a->PopString());
-  }
-}
-
-void Action_SetMovement (Action *a)
-{
-  if (!ActiveTeam().IsLocal() || network.state != Network::NETWORK_PLAYING)
-  {
     ActiveTeam().ActiveCharacter().SetMovement(a->PopString());
+    ActiveTeam().ActiveCharacter().body->SetFrame((uint)a->PopInt());
   }
 }
 
@@ -590,9 +576,7 @@ ActionHandler::ActionHandler()
   Register (ACTION_DEL_TEAM, "del_team", &Action_DelTeam);
   Register (ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
   Register (ACTION_SET_CHARACTER_PHYSICS, "set_character_physics", &Action_SetCharacterPhysics);
-  Register (ACTION_SET_MOVEMENT, "set_movement", &Action_SetMovement);
-  Register (ACTION_SET_CLOTHE, "set_clothe", &Action_SetClothe);
-  Register (ACTION_SET_FRAME, "set_frame", &Action_SetFrame);
+  Register (ACTION_SET_SKIN, "set_skin", &Action_SetSkin);
   Register (ACTION_SET_CHARACTER_DIRECTION, "set_character_direction", &Action_SetCharacterDirection);
   Register (ACTION_CHANGE_STATE, "change_state", &Action_ChangeState);
   Register (ACTION_ASK_VERSION, "ask_version", &Action_AskVersion);
@@ -613,3 +597,4 @@ ActionHandler::ActionHandler()
   Register (ACTION_PAUSE, "pause", Action_Pause);
   SDL_UnlockMutex(mutex);
 }
+
