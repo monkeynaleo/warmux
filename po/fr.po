@@ -27,22 +27,24 @@ msgstr " a rejoint la partie"
 msgid " has left the party"
 msgstr " a quitté la partie"
 
-#: src/menu/network_menu.cpp:286
-msgid " players are not yet ready!"
-msgstr " joueurs ne sont pas prêts!"
-
-#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:395
-msgid " players connected"
-msgstr " joueurs connectés"
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:400
-msgid " players ready"
-msgstr " joueurs prêts"
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Le terrain %s est introuvable :-("
+
+#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:393
+#, fuzzy, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] " joueurs connectés"
+msgstr[1] " joueurs connectés"
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:398
+#, fuzzy, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] " joueurs prêts"
+msgstr[1] " joueurs prêts"
 
 #: src/game/game_loop.cpp:700
 #, c-format
@@ -441,6 +443,7 @@ msgid "Jetpack"
 msgstr "Jetpack"
 
 #: src/menu/network_menu.cpp:71
+#, fuzzy
 msgid "Join #wormux on irc.freenode.net to find"
 msgstr "Venez sur #wormux-fr à irc.freenode.net"
 
@@ -737,9 +740,12 @@ msgstr "Version"
 msgid "WARNING! Disconnections are not yet handled."
 msgstr "ATTENTION! Les déconnctions ne sont pas gérées."
 
-#: src/menu/network_menu.cpp:286
-msgid "Wait! "
-msgstr "Attendez! "
+#: src/menu/network_menu.cpp:285
+#, fuzzy, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] " joueurs ne sont pas prêts!"
+msgstr[1] " joueurs ne sont pas prêts!"
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
@@ -807,6 +813,7 @@ msgid "general: "
 msgstr ""
 
 #: src/menu/network_menu.cpp:72
+#, fuzzy
 msgid "some opponents."
 msgstr "pour trouver des adversaires"
 
@@ -842,6 +849,9 @@ msgstr "pour trouver des adversaires"
 
 #~ msgid "Team %s results:\n"
 #~ msgstr "Statistiques de l'équipe %s:\n"
+
+#~ msgid "Wait! "
+#~ msgstr "Attendez! "
 
 #~ msgid "Weapon:"
 #~ msgstr "Arme :"
