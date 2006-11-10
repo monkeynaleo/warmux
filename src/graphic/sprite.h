@@ -113,13 +113,14 @@ public:
   // Show flag
   void Show();
   void Hide();
-     
+
   // Draw
   void Blit(Surface &dest, uint pox_x, uint pos_y);
   void Blit(Surface &dest, const Point2i &pos);
   void Blit(Surface &dest, const Rectanglei &srcRect, const Point2i &destPos);
   void Blit(Surface &dest, int pox_x, int pos_y, int src_x, int src_y, uint w, uint h);
   void Draw(const Point2i &pos);
+  void DrawXY(const Point2i &pos);
 
    void RefreshSurface();
 

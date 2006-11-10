@@ -23,6 +23,7 @@
 #define TEAM_ENERGY_H
 
 #include "../graphic/text.h"
+#include "../graphic/sprite.h"
 #include "../gui/EnergyBar.h"
 #include "../object/physical_obj.h"
 
@@ -54,6 +55,7 @@ class TeamEnergy
     uint max_value;
 
     Team *team;
+    Sprite *icon;
 
     int dx;
     int dy;
@@ -70,6 +72,7 @@ class TeamEnergy
     energy_t status;
 
     TeamEnergy(Team * _team);
+    ~TeamEnergy();
     void Config(uint _current_energy,
                 uint _max_energy);
 

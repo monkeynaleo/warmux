@@ -102,8 +102,8 @@ Interface::Interface()
   weapon_strength_bar.SetBackgroundColor(WeaponStrengthBarBackground);
 
   // constant text initialisation
-  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
-  Font * small_font = Font::GetInstance(Font::FONT_SMALL);
+  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL,Font::BOLD);
+  Font * small_font = Font::GetInstance(Font::FONT_SMALL,Font::BOLD);
 
   global_timer = new Text(ulong2str(0), black_color, normal_font, false);
   timer = new Text(ulong2str(0), black_color, normal_font, false);
