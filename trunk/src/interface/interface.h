@@ -99,6 +99,7 @@ public:
 
    int GetWidth() const;
    int GetHeight() const;
+   int GetMenuHeight() const;
    Point2i GetSize() const;
 
    void UpdateTimer(uint utimer);
