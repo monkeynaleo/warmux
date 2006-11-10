@@ -202,7 +202,7 @@ msgstr "Amboss"
 msgid "Authors:"
 msgstr "Autoren:"
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:127
 msgid "Automatic Bazooka"
 msgstr "Lenkrakete"
 
@@ -662,7 +662,7 @@ msgid "The Polecat left the battlefield before exploding"
 msgstr ""
 "Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
-#: src/weapon/auto_bazooka.cpp:95
+#: src/weapon/auto_bazooka.cpp:111
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Die Lenkrakete hat das Schlachtfeld verlassen..."
 
@@ -759,7 +759,7 @@ msgstr "Wormux startet..."
 msgid "Wormux version "
 msgstr "Wormux Version "
 
-#: src/include/action_handler.cpp:414
+#: src/include/action_handler.cpp:400
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
