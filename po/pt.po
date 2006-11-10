@@ -22,6 +22,28 @@ msgstr ""
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/network/distant_cpu.cpp:68
+#, fuzzy
+msgid " has joined the party"
+msgstr "%s saiu do mapa!"
+
+#: src/network/distant_cpu.cpp:77
+#, fuzzy
+msgid " has left the party"
+msgstr "%s saiu do mapa!"
+
+#: src/menu/network_menu.cpp:286
+msgid " players are not yet ready!"
+msgstr ""
+
+#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:395
+msgid " players connected"
+msgstr ""
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:400
+msgid " players ready"
+msgstr ""
+
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
@@ -176,6 +198,11 @@ msgstr " Ataque aéreo"
 msgid "Airhammer"
 msgstr ""
 
+#: src/team/results.cpp:143
+#, fuzzy
+msgid "All teams"
+msgstr "Carregar equipas:"
+
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr ""
@@ -184,7 +211,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:127
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Bazooka automática"
@@ -234,8 +261,20 @@ msgstr "ClusterBomb"
 msgid "Commit Suicide"
 msgstr "Suicídio"
 
+#: src/menu/network_connection_menu.cpp:67
+msgid "Connect to game"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:120
+msgid "Connected to "
+msgstr ""
+
 #: src/weapon/construct.cpp:43
 msgid "Construct"
+msgstr ""
+
+#: src/network/top_server.cpp:58
+msgid "Contacting main server..."
 msgstr ""
 
 #: src/menu/main_menu.cpp:113
@@ -302,6 +341,11 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erro: não consegui encontrar o skin \"%s\" para a equipa \"%s\"."
 
+#: src/network/network.cpp:73
+#, fuzzy
+msgid "Failed to initialize network library!"
+msgstr "Incapaz de inicializar a libraria SDL: %s"
+
 #: src/game/game_loop.cpp:162
 msgid "Find a random position for characters"
 msgstr "Encontre uma posição aleatória para os caráteres"
@@ -309,6 +353,11 @@ msgstr "Encontre uma posição aleatória para os caráteres"
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Ecrã inteiro?"
+
+#: src/menu/network_menu.cpp:60
+#, fuzzy
+msgid "Game options:"
+msgstr "Opções do jogo"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -338,6 +387,10 @@ msgstr ""
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Granada"
+
+#: src/menu/network_connection_menu.cpp:74
+msgid "Host a game"
+msgstr ""
 
 #: src/game/game_loop.cpp:736
 msgid "Hurry up, you are too slow !!"
@@ -375,12 +428,32 @@ msgstr "Inicialização dos objectos"
 msgid "Initialise teams"
 msgstr "Inicialização das equipas"
 
+#: src/network/network.cpp:190
+msgid "Invalid port!"
+msgstr ""
+
+#: src/network/network.cpp:140
+msgid "Invalid server adress!"
+msgstr ""
+
+#: src/network/top_server.cpp:68
+msgid "Invalid top server adress!"
+msgstr ""
+
 #: src/object/bonus_box.cpp:281
 msgid "Is it a gift?"
 msgstr "É um presente?"
 
+#: src/network/top_server.cpp:170
+msgid "It doesn't seem to be a valid Wormux server..."
+msgstr ""
+
 #: src/weapon/jetpack.cpp:48
 msgid "Jetpack"
+msgstr ""
+
+#: src/menu/network_menu.cpp:71
+msgid "Join #wormux on irc.freenode.net to find"
 msgstr ""
 
 #: src/map/maps_list.cpp:185
@@ -404,6 +477,11 @@ msgstr "Mapa %s, uma criação de :"
 msgid "Maps"
 msgstr "Mapas"
 
+#: src/menu/network_menu.cpp:58
+#, fuzzy
+msgid "Max number of players:"
+msgstr "Número de jogadores por equipa:"
+
 #: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Maximum FPS"
@@ -412,6 +490,22 @@ msgstr "Número máximo de FPS:"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mina"
+
+#: src/menu/results_menu.cpp:169
+msgid "Most sold-out"
+msgstr ""
+
+#: src/menu/results_menu.cpp:159
+msgid "Most useful"
+msgstr ""
+
+#: src/menu/results_menu.cpp:164
+msgid "Most useless"
+msgstr ""
+
+#: src/menu/results_menu.cpp:154
+msgid "Most violent"
+msgstr ""
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -430,6 +524,11 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenhum elemento <%s> encontrado no ficheiro de configuração xml!"
 
+#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
+#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
+msgid "Nobody!"
+msgstr ""
+
 #: src/menu/game_menu.cpp:76
 #, fuzzy
 msgid "Number of characters"
@@ -439,6 +538,10 @@ msgstr "Número de jogadores por equipa:"
 #, fuzzy
 msgid "Number of teams:"
 msgstr "Número de jogadores por equipa:"
+
+#: src/menu/network_menu.cpp:181
+msgid "Only the server can set the map!"
+msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -496,6 +599,18 @@ msgstr "Bomba Motim"
 msgid "Run game"
 msgstr "Iniciar jogo"
 
+#: src/menu/network_connection_menu.cpp:60
+msgid "Server adress:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:79
+msgid "Server available on Internet"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:142
+msgid "Server started"
+msgstr ""
+
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -507,6 +622,10 @@ msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
+msgstr ""
+
+#: src/menu/network_menu.cpp:74
+msgid "So you have to restart Wormux after each"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -564,7 +683,7 @@ msgstr "O rocket saiu do campo de batalha ..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "O rocket saiu do campo de batalha ..."
 
-#: src/weapon/auto_bazooka.cpp:95
+#: src/weapon/auto_bazooka.cpp:111
 msgid "The automatic rocket has left the battlefield..."
 msgstr "O rocket automático saiu do campo de batalha..."
 
@@ -589,14 +708,39 @@ msgstr "O rocket saiu do campo de batalha ..."
 msgid "The rocket has left the battlefield..."
 msgstr "O rocket saiu do campo de batalha ..."
 
+#: src/menu/network_connection_menu.cpp:125
+#, fuzzy
+msgid "Unable to connect"
+msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
+
+#: src/network/network.cpp:151
+#, fuzzy
+msgid "Unable to contact server!"
+msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
+
+#: src/network/top_server.cpp:78
+#, fuzzy
+msgid "Unable to contact top server!"
+msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
+
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Incapaz de inicializar a libraria SDL: %s"
 
+#: src/network/network.cpp:234
+#, fuzzy
+msgid "Unable to listen for client!"
+msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
+
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
+msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
+
+#: src/menu/network_connection_menu.cpp:145
+#, fuzzy
+msgid "Unable to start server"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 
 #: src/main.cpp:118
@@ -607,6 +751,14 @@ msgstr "Excepção desconhecida apanhada..."
 #: src/main.cpp:147
 msgid "Version"
 msgstr "Versão"
+
+#: src/menu/network_menu.cpp:73
+msgid "WARNING! Disconnections are not yet handled."
+msgstr ""
+
+#: src/menu/network_menu.cpp:286
+msgid "Wait! "
+msgstr ""
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
@@ -634,6 +786,11 @@ msgstr "A iniciar wormux..."
 msgid "Wormux version "
 msgstr "Wormux versão "
 
+#: src/include/action_handler.cpp:400
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr ""
+
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -657,6 +814,10 @@ msgstr "Você precisa de pelo menos duas equipas válidas!"
 msgid "Your shot has missed!"
 msgstr "O seu tiro falhou!"
 
+#: src/menu/network_menu.cpp:75
+msgid "disconnection!"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "feito"
@@ -665,45 +826,9 @@ msgstr "feito"
 msgid "general: "
 msgstr ""
 
-#, fuzzy
-#~ msgid " has joined the party"
-#~ msgstr "%s saiu do mapa!"
-
-#, fuzzy
-#~ msgid " has left the party"
-#~ msgstr "%s saiu do mapa!"
-
-#, fuzzy
-#~ msgid "All teams"
-#~ msgstr "Carregar equipas:"
-
-#, fuzzy
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Incapaz de inicializar a libraria SDL: %s"
-
-#, fuzzy
-#~ msgid "Game options:"
-#~ msgstr "Opções do jogo"
-
-#, fuzzy
-#~ msgid "Max number of players:"
-#~ msgstr "Número de jogadores por equipa:"
-
-#, fuzzy
-#~ msgid "Unable to connect"
-#~ msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to contact server!"
-#~ msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to listen for client!"
-#~ msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to start server"
-#~ msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
+#: src/menu/network_menu.cpp:72
+msgid "some opponents."
+msgstr ""
 
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""
