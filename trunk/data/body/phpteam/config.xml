@@ -54,7 +54,7 @@
 <sprite name="body-normal" type="body">
 	<image file="body.png"/>
 	<anchor dx="16" dy="17"/>
-	<attached member_type="head" frame="*" dx="18" dy="15"/>
+	<attached member_type="head" frame="*" dx="7" dy="12"/>
 	<attached member_type="arm-right" frame="*" dx="5" dy="21"/>
 	<attached member_type="arm-left" frame="*" dx="6" dy="20"/>
 	<attached member_type="foot-left" frame="*" dx="15" dy="34"/>
@@ -75,7 +75,7 @@
 <!-- ###### Head ###### -->
 <sprite name="head" type="head">
 	<image file="head.png"/>
-	<anchor dx="11" dy="12"/>
+	<anchor dx="-1" dy="10"/>
 	<attached member_type="ear-left" frame="*" dx="8" dy="-1"/>
 	<attached member_type="ear-right" frame="*" dx="-3" dy="-1"/>
 	<attached member_type="helmet" frame="*" dx="8" dy="11"/>
