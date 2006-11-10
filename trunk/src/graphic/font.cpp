@@ -31,10 +31,13 @@
 #include "../tool/file_tools.h"
 
 Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};
+Font* Font::FONT_ARRAY_BOLD[] = {NULL, NULL, NULL, NULL, NULL, NULL};
+Font* Font::FONT_ARRAY_ITALIC[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 
 /*
  * Constants
  */
+// Size
 const int Font::FONT_SIZE[] = {40, 32, 24, 16, 12, 8};
 const int Font::FONT_HUGE   = 0;
 const int Font::FONT_LARGE  = 1;
@@ -43,11 +46,33 @@ const int Font::FONT_NORMAL = 3;
 const int Font::FONT_SMALL  = 4;
 const int Font::FONT_TINY   = 5;
 
-Font* Font::GetInstance(int type) {
+// Style
+const int Font::NORMAL = 0;
+const int Font::BOLD   = 1;
+const int Font::ITALIC = 2;
+
+Font* Font::GetInstance(int type, int font_style) {
+  Font * font;
   if (FONT_ARRAY[type] == NULL) {
-    FONT_ARRAY[type] = new Font(FONT_SIZE[type]);
+    switch(font_style) {
+      case BOLD:
+        font = FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
+        font->SetBold();
+        break;
+      case ITALIC:
+        font = FONT_ARRAY_ITALIC[type] = new Font(FONT_SIZE[type]);
+        font->SetItalic();
+        break;
+      default:     font = FONT_ARRAY[type] = new Font(FONT_SIZE[type]); break;
+    }
+  } else {
+    switch(font_style) {
+      case BOLD:   font = FONT_ARRAY_BOLD[type]; break;
+      case ITALIC: font = FONT_ARRAY_ITALIC[type]; break;
+      default  :   font = FONT_ARRAY[type]; break;
+    }
   }
-  return FONT_ARRAY[type];
+  return font;
 }
 
 Font::Font(int size){
@@ -90,6 +115,16 @@ bool Font::Load (const std::string& filename, int size) {
   TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
 
   return true;
+}
+
+void Font::SetBold()
+{
+  TTF_SetFontStyle(m_font, TTF_STYLE_BOLD);
+}
+
+void Font::SetItalic()
+{
+  TTF_SetFontStyle(m_font, TTF_STYLE_ITALIC);
 }
 
 void Font::Write(const Point2i &pos, Surface &surface){

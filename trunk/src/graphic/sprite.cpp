@@ -368,19 +368,23 @@ void Sprite::Finish(){
 
 void Sprite::Update(){
   animation.Update();
-}    
+}
 
 void Sprite::Draw(const Point2i &pos){
-	if( !show )
-		return;
+  DrawXY(pos - camera.GetPosition());
+}
 
-	Blit(AppWormux::GetInstance()->video.window, pos - camera.GetPosition() );	
+void Sprite::DrawXY(const Point2i &pos){
+  if( !show )
+    return;
+
+  Blit(AppWormux::GetInstance()->video.window, pos);
 }
 
 void Sprite::Show() { show = true; }
 void Sprite::Hide() { show = false; }
 bool Sprite::IsFinished() const { return animation.IsFinished(); }
-  
+
 void Sprite::EnableRotationCache(unsigned int cache_size) {
   cache.EnableRotationCache(frames, cache_size);
 }

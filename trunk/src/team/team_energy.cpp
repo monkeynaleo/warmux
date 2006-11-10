@@ -27,6 +27,7 @@
 #include "../game/time.h"
 #include "../graphic/text.h"
 #include "team.h"
+#include "teams_list.h"
 #include "../include/app.h"
 
 const uint BAR_WIDTH = 13;
@@ -56,6 +57,12 @@ TeamEnergy::TeamEnergy(Team * _team)
   energy_bar.SetBackgroundColor(Color(255*6/10, 255*6/10, 255*6/10, BACK_ALPHA));
 
   team = _team;
+  icon = NULL;
+}
+
+TeamEnergy::~TeamEnergy()
+{
+  if(icon) delete icon;
 }
 
 void TeamEnergy::Config(uint _current_energy,
@@ -67,6 +74,8 @@ void TeamEnergy::Config(uint _current_energy,
   new_value = _current_energy;
   assert(max_value != 0)
       energy_bar.InitVal(value, 0, max_value, BarreProg::PROG_BAR_VERTICAL);
+  icon = new Sprite(team->flag);
+  icon->Scale(0.8,0.8);
 }
 
 void TeamEnergy::Refresh()
@@ -106,10 +115,9 @@ void TeamEnergy::Refresh()
 void TeamEnergy::Draw(const Point2i& pos)
 {
   energy_bar.Actu(value);
-  Point2i tmp = pos + Point2i(BAR_SPACING / 2 + rank * (BAR_WIDTH + BAR_SPACING) + dx, SPACING + dy);
+  Point2i tmp = pos + Point2i(BAR_SPACING / 2 + rank * (BAR_WIDTH + BAR_SPACING) + dx, dy);
   energy_bar.DrawXY(tmp);
-  AppWormux::GetInstance()->video.window.Blit(team->flag, tmp);
-  world.ToRedrawOnScreen(Rectanglei(tmp,team->flag.GetSize()));
+  icon->DrawXY(tmp + Point2i(energy_bar.GetWidth() / 2, 0));
 }
 
 void TeamEnergy::SetValue(uint new_energy)
