@@ -207,7 +207,7 @@ void Interface::DrawClock()
 {
   AppWormux * app = AppWormux::GetInstance();
   Point2i turn_time_pos = (app->video.window.GetSize() - clock_background.GetSize()) * Point2d(0.5, 1) + 
-      Point2i(0, - game_menu.GetHeight() / 2 + clock_background.GetHeight() / 2);
+      Point2i(0, - GetMenuHeight() + clock_background.GetHeight());
   Rectanglei dr(turn_time_pos, clock_background.GetSize());
   // Draw background interface
   app->video.window.Blit(clock_background, turn_time_pos);
@@ -257,7 +257,7 @@ void Interface::Draw()
   {
     // Position on the screen
     Point2i barPos = (app->video.window.GetSize() - weapon_strength_bar.GetSize()) * Point2d(0.5, 1)
-                     - Point2i(0, game_menu.GetHeight() + 10);
+        - Point2i(0, game_menu.GetHeight() + MARGIN);
 
     // Drawing on the screen
      weapon_strength_bar.DrawXY(barPos);
@@ -288,10 +288,15 @@ int Interface::GetWidth() const
 int Interface::GetHeight() const
 {
   if(!display) {
-    int height = game_menu.GetHeight() - (Time::GetInstance()->Read() - start_hide_display)/3;
+    int height = GetMenuHeight() - (Time::GetInstance()->Read() - start_hide_display)/3;
     return (height > 0 ? height : 0);
   }
-  return game_menu.GetHeight();
+  return GetMenuHeight();
+}
+
+int Interface::GetMenuHeight() const
+{
+  return game_menu.GetHeight() + MARGIN;
 }
 
 Point2i Interface::GetSize() const
