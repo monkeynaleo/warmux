@@ -37,11 +37,11 @@
 #undef LoadImage
 #endif
 
-
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
   public:
     uint seek_time;
     double uncontrolled_turn_speed;
+    double max_controlled_turn_speed;
     double fuel_time;
     double rocket_force;
     AutomaticBazookaConfig();
@@ -56,7 +56,7 @@ RPG::RPG(AutomaticBazookaConfig& cfg,
   explode_colliding_character = true;
 }
 
-void RPG::Shoot (double strength) 
+void RPG::Shoot (double strength)
 {
   WeaponProjectile::Shoot(strength);
   angle_local=ActiveTeam().crosshair.GetAngleRad();
@@ -83,6 +83,8 @@ void RPG::Refresh()
       angle_local = GetPosition().ComputeAngle( m_target );
       m_force = acfg.rocket_force;
       SetExternForce(m_force, angle_local);
+      SetGravityFactor(0);
+      SetWindFactor(0);
     }
   }
   else
@@ -92,9 +94,24 @@ void RPG::Refresh()
     if(flying_time - acfg.seek_time < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                        GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
-      angle_local = GetPosition().ComputeAngle( m_target );
+      float wish_angle = GetPosition().ComputeAngle( m_target );
+      float max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
+      float diff = fmod(wish_angle-angle_local, M_PI*2);
+      if(diff < -M_PI) diff += M_PI*2;
+      if(diff > M_PI) diff -= M_PI*2;
+      //diff should now be between -M_PI and M_PI...
+      if(diff > max_rotation) {
+        angle_local += max_rotation;
+      } else if (diff < -max_rotation) {
+        angle_local -= max_rotation;
+      } else {
+        angle_local = wish_angle;
+      }
       m_force = acfg.rocket_force * ((acfg.fuel_time*1300. - flying_time + acfg.seek_time)/acfg.fuel_time/1300.);
+      SetGravityFactor((flying_time - acfg.seek_time)/acfg.fuel_time/1000.); // slowly increase gravity
+      SetWindFactor((flying_time - acfg.seek_time)/acfg.fuel_time/1000.); // slowly increase wind
     } else {
+      SetGravityFactor(1);
       m_force = 0; //if there's no fuel left just let it crash into the ground somewhere
       angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
       if(angle_local > M_PI) angle_local = - M_PI;
@@ -207,6 +224,7 @@ AutomaticBazookaConfig &AutomaticBazooka::cfg() {
 AutomaticBazookaConfig::AutomaticBazookaConfig() {
     seek_time = 1;
     uncontrolled_turn_speed = M_PI*8;
+    max_controlled_turn_speed = M_PI*4;
     fuel_time = 10;
     rocket_force = 2500;
 }
@@ -215,6 +233,7 @@ void AutomaticBazookaConfig::LoadXml(xmlpp::Element *elem) {
     ExplosiveWeaponConfig::LoadXml(elem);
     LitDocXml::LitUint (elem, "seek_time", seek_time);
     LitDocXml::LitDouble (elem, "uncontrolled_turn_speed", uncontrolled_turn_speed);
+    LitDocXml::LitDouble (elem, "max_controlled_turn_speed", max_controlled_turn_speed);
     LitDocXml::LitDouble (elem, "fuel_time", fuel_time);
     LitDocXml::LitDouble (elem, "rocket_force", rocket_force);
 }

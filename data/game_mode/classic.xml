@@ -73,6 +73,7 @@
       <blast_force>2500</blast_force>
       <seek_time>1</seek_time>
       <uncontrolled_turn_speed>25</uncontrolled_turn_speed>
+      <max_controlled_turn_speed>10</max_controlled_turn_speed>
       <fuel_time>10</fuel_time>
       <rocket_force>2500</rocket_force>
     </automatic_bazooka>
