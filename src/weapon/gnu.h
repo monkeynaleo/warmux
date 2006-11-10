@@ -38,7 +38,6 @@ class Gnu : public WeaponProjectile
  private:
   int m_sens;
   int save_x, save_y;
-  double angle;
  protected:
   void SignalOutOfMap();
 public:
