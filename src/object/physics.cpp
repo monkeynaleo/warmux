@@ -194,6 +194,7 @@ void Physics::GetSpeed(double &norm, double &angle)
     case NoMotion:
       norm = 0.0;
       angle = 0.0;
+      break;
 
     default:
       assert(false);
