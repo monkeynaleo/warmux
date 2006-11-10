@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-11-09 19:33+0100\n"
+"PO-Revision-Date: 2006-11-10 13:10+0100\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -25,22 +25,24 @@ msgstr " hat das Spiel betreten"
 msgid " has left the party"
 msgstr " hat das Spiel verlassen"
 
-#: src/menu/network_menu.cpp:286
-msgid " players are not yet ready!"
-msgstr " Spieler sind noch nicht verbunden!"
-
-#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:395
-msgid " players connected"
-msgstr " Spieler verbunden"
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:400
-msgid " players ready"
-msgstr " Spieler bereit"
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
+
+#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:393
+#, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] "%i Spieler verbunden"
+msgstr[1] "%i Spieler verbunden"
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:398
+#, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] "%i Spieler bereit"
+msgstr[1] "%i Spieler bereit"
 
 #: src/game/game_loop.cpp:700
 #, c-format
@@ -440,6 +442,7 @@ msgid "Jetpack"
 msgstr "Düsenrucksack"
 
 #: src/menu/network_menu.cpp:71
+#, fuzzy
 msgid "Join #wormux on irc.freenode.net to find"
 msgstr "Komm nach #wormux auf irc.freenode.net"
 
@@ -730,9 +733,12 @@ msgstr "Version"
 msgid "WARNING! Disconnections are not yet handled."
 msgstr "WARNUNG! Verbindungstrennungen werden noch nicht behandelt."
 
-#: src/menu/network_menu.cpp:286
-msgid "Wait! "
-msgstr "Warte! "
+#: src/menu/network_menu.cpp:285
+#, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] "Warte! %i Spieler sind noch nicht bereit!"
+msgstr[1] " Spieler sind noch nicht verbunden!"
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
@@ -800,6 +806,7 @@ msgid "general: "
 msgstr "General: "
 
 #: src/menu/network_menu.cpp:72
+#, fuzzy
 msgid "some opponents."
 msgstr "um Gegner zu finden."
 
@@ -836,6 +843,9 @@ msgstr "um Gegner zu finden."
 
 #~ msgid "Team %s results:\n"
 #~ msgstr "Ergebnisse Team %s:\n"
+
+#~ msgid "Wait! "
+#~ msgstr "Warte! "
 
 #~ msgid "Weapon:"
 #~ msgstr "Waffe:"

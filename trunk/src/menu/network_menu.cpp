@@ -59,8 +59,8 @@ NetworkMenu::NetworkMenu() :
   options_box = new VBox(Rectanglei( 475 + 30 + 5, TEAMS_Y, 800-475-40, 1));
   options_box->AddWidget(new Label(_("Game options:"),rectZero, *normal_font));
   options_box->AddWidget(player_number);
-  connected_players = new Label((std::string)"0" + _(" players connected"), rectZero, *normal_font);
-  inited_players = new Label((std::string)"0" + _(" players ready"), rectZero, *normal_font);
+  connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0), rectZero, *normal_font);
+  inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0), rectZero, *normal_font);
   options_box->AddWidget(connected_players);
   options_box->AddWidget(inited_players);
   //options_box->enabled = false;
@@ -281,9 +281,8 @@ void NetworkMenu::sig_ok()
   {
     if(network.connected_player != network.client_inited)
     {
-      char nbr[3];
-      sprintf(nbr,"%i",network.connected_player - network.client_inited);
-      std::string pl = _("Wait! ") + (std::string)nbr + _(" players are not yet ready!");
+      int nbr = network.connected_player - network.client_inited;
+      std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl);
       return;
     }
@@ -390,14 +389,13 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     //map_box->Draw(mousePosition);
 
     //Refresh the number of connected players:
-    char nbr[3];
-    sprintf(nbr,"%i",network.connected_player);
-    std::string pl = (std::string)nbr + _(" players connected");
+    int nbr = network.connected_player;
+    std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
     if(connected_players->GetText() != pl)
       connected_players->SetText(pl);
     //Refresh the number of players ready:
-    sprintf(nbr,"%i",network.client_inited);
-    pl = (std::string)nbr + _(" players ready");
+    nbr = network.client_inited;
+    pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
     if(inited_players->GetText() != pl)
       inited_players->SetText(pl);
   }

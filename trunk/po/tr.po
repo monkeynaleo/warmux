@@ -27,22 +27,22 @@ msgstr "partiye katıldı"
 msgid " has left the party"
 msgstr "partiyi terketti"
 
-#: src/menu/network_menu.cpp:286
-msgid " players are not yet ready!"
-msgstr "oyuncular henüz hazır değil!"
-
-#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:395
-msgid " players connected"
-msgstr "oyuncular bağlandı"
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:400
-msgid " players ready"
-msgstr "oyuncular hazır"
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
+
+#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:393
+#, fuzzy, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] "oyuncular bağlandı"
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:398
+#, fuzzy, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] "oyuncular hazır"
 
 #: src/game/game_loop.cpp:700
 #, c-format
@@ -720,9 +720,11 @@ msgstr "Sürüm"
 msgid "WARNING! Disconnections are not yet handled."
 msgstr ""
 
-#: src/menu/network_menu.cpp:286
-msgid "Wait! "
-msgstr "Bekleyin! "
+#: src/menu/network_menu.cpp:285
+#, fuzzy, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] "oyuncular henüz hazır değil!"
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
@@ -843,6 +845,9 @@ msgstr ""
 
 #~ msgid "Team %s results:\n"
 #~ msgstr "%s takımı sonuçları:\n"
+
+#~ msgid "Wait! "
+#~ msgstr "Bekleyin! "
 
 #~ msgid "Weapon:"
 #~ msgstr "Silah:"

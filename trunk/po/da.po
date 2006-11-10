@@ -26,22 +26,24 @@ msgstr "%s faldt ud af banen!"
 msgid " has left the party"
 msgstr "%s faldt ud af banen!"
 
-#: src/menu/network_menu.cpp:286
-msgid " players are not yet ready!"
-msgstr ""
-
-#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:395
-msgid " players connected"
-msgstr ""
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:400
-msgid " players ready"
-msgstr ""
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Banen %s ikke fundet :-("
+
+#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:393
+#, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:398
+#, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
 #, c-format
@@ -750,9 +752,12 @@ msgstr "Version"
 msgid "WARNING! Disconnections are not yet handled."
 msgstr ""
 
-#: src/menu/network_menu.cpp:286
-msgid "Wait! "
-msgstr ""
+#: src/menu/network_menu.cpp:285
+#, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"

@@ -29,22 +29,24 @@ msgstr "%s tipahti ulos kartalta!"
 msgid " has left the party"
 msgstr "%s tipahti ulos kartalta!"
 
-#: src/menu/network_menu.cpp:286
-msgid " players are not yet ready!"
-msgstr ""
-
-#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:395
-msgid " players connected"
-msgstr ""
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:400
-msgid " players ready"
-msgstr ""
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
+
+#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:393
+#, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:398
+#, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
 #, c-format
@@ -758,10 +760,12 @@ msgstr "Versio"
 msgid "WARNING! Disconnections are not yet handled."
 msgstr ""
 
-#: src/menu/network_menu.cpp:286
-#, fuzzy
-msgid "Wait! "
-msgstr "Odota joukkueita"
+#: src/menu/network_menu.cpp:285
+#, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/game/game_loop.cpp:219
 #, fuzzy
@@ -932,6 +936,10 @@ msgstr ""
 
 #~ msgid "Wait for server informations"
 #~ msgstr "Odota palvelimen tietoja"
+
+#, fuzzy
+#~ msgid "Wait! "
+#~ msgstr "Odota joukkueita"
 
 #~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
 #~ msgstr ""

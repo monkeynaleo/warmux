@@ -24,22 +24,24 @@ msgstr " chegou pra festa"
 msgid " has left the party"
 msgstr " foi embora!"
 
-#: src/menu/network_menu.cpp:286
-msgid " players are not yet ready!"
-msgstr " os jogadores ainda não estão prontos!"
-
-#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:395
-msgid " players connected"
-msgstr " jogadores conectados"
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:400
-msgid " players ready"
-msgstr " jogadores prontos"
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
+
+#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:393
+#, fuzzy, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] " jogadores conectados"
+msgstr[1] " jogadores conectados"
+
+#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:398
+#, fuzzy, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] " jogadores prontos"
+msgstr[1] " jogadores prontos"
 
 #: src/game/game_loop.cpp:700
 #, c-format
@@ -438,6 +440,7 @@ msgid "Jetpack"
 msgstr "Jetpack"
 
 #: src/menu/network_menu.cpp:71
+#, fuzzy
 msgid "Join #wormux on irc.freenode.net to find"
 msgstr "Visite #wormux em irc.freenode.net para saber mais"
 
@@ -727,9 +730,12 @@ msgstr "Versão"
 msgid "WARNING! Disconnections are not yet handled."
 msgstr "AVISO! Desconexões ainda não suportadas."
 
-#: src/menu/network_menu.cpp:286
-msgid "Wait! "
-msgstr "Espere! "
+#: src/menu/network_menu.cpp:285
+#, fuzzy, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] " os jogadores ainda não estão prontos!"
+msgstr[1] " os jogadores ainda não estão prontos!"
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
@@ -797,6 +803,7 @@ msgid "general: "
 msgstr ""
 
 #: src/menu/network_menu.cpp:72
+#, fuzzy
 msgid "some opponents."
 msgstr "alguns oponentes"
 
@@ -861,6 +868,9 @@ msgstr "alguns oponentes"
 
 #~ msgid "Team %s results:\n"
 #~ msgstr "Resultados da equipe %s:\n"
+
+#~ msgid "Wait! "
+#~ msgstr "Espere! "
 
 #~ msgid "Weapon:"
 #~ msgstr "Arma:"
