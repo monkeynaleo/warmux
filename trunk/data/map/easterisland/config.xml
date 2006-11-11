@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE resources SYSTEM "../map.dtd" []>
 <resources>
   <author>
     <name>Jeremie LEDENTU</name>
-    <country>France</country>
+    <nickname>JLedN</nickname>
     <email>jledn AT voila.fr</email>
+    <country>France</country>
   </author>
 
   <surface name="sky" file="sky.jpg" />
