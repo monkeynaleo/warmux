@@ -5,18 +5,18 @@
   <surface name="flag" file="flag.png" />
   <team>
     <character name="Konqui" body="konqiteam" />
-    <character name="Quest" body="konqiteam" />
-    <character name="Sheron" body="konqiteam" />
-    <character name="Double" body="konqiteam" />
-    <character name="32/64" body="konqiteam" />
-    <character name="Ramoth" body="konqiteam" />
-    <character name="US M47" body="konqiteam" />
-    <character name="Hapan Battle" body="konqiteam" />
-    <character name="HMS" body="konqiteam" />
-    <character name="Timaeus" body="konqiteam" />
-    <character name="Idris" body="konqiteam" />
-    <character name="Man" body="konqiteam" />
-    <character name="Tales" body="konqiteam" />
-    <character name="Swamp" body="konqiteam" />
+    <character name="Kopete" body="konqiteam" />
+    <character name="kdevelop" body="konqiteam" />
+    <character name="kmail" body="konqiteam" />
+    <character name="kate" body="konqiteam" />
+    <character name="k3b" body="konqiteam" />
+    <character name="kformula" body="konqiteam" />
+    <character name="koffice" body="konqiteam" />
+    <character name="kontact" body="konqiteam" />
+    <character name="krita" body="konqiteam" />
+    <character name="digiKam" body="konqiteam" />
+    <character name="kicker" body="konqiteam" />
+    <character name="okular" body="konqiteam" />
+    <character name="kpdf" body="konqiteam" />
   </team>
 </resources>
