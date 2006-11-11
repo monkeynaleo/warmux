@@ -49,10 +49,6 @@ TeamEnergy::TeamEnergy(Team * _team)
   status = EnergyStatusOK;
   energy_bar.InitPos(0, 0, BAR_WIDTH, BAR_HEIGHT);
 
-  energy_bar.SetInitColor(Color(R_INIT, G_INIT, B_INIT, ALPHA));
-  energy_bar.SetInterColor(Color(R_INTER, G_INTER, B_INTER, ALPHA));
-  energy_bar.SetFinalColor(Color(R_FINAL, G_FINAL, B_FINAL, ALPHA));
-
   energy_bar.SetBorderColor(Color(255, 255, 255, ALPHA));
   energy_bar.SetBackgroundColor(Color(255*6/10, 255*6/10, 255*6/10, BACK_ALPHA));
 

@@ -40,10 +40,10 @@ public:
 
 private:
   uint x, y, larg, haut; // Position
-  long val, min, max; // Valeur
-  bool m_use_ref_val; // Valeur de référence
-  long m_ref_val; // Valeur de référence
-  uint val_barre; // Valeur dans la barre
+  long val, min, max; // current, min and max values
+  bool m_use_ref_val; // use reference value ?
+  long m_ref_val; // reference value
+  uint val_barre; // current value in the progress bar
   enum orientation orientation;
 
   uint CalculeVal (long val) const;
@@ -82,18 +82,17 @@ public:
   // Draw la barre de progresssion
   void Draw();
 
-  // Change les coordonnées, puis dessine la barre de progression
+  // Draw the progress bar
   void DrawXY(const Point2i &pos);
 
   inline const long & GetMaxVal() const { return max; }
   inline const long & GetVal() const { return val; }
 
-  // Lit sa taille
   int GetWidth() const { return larg; }
   int GetHeight() const { return haut; }
   Point2i GetSize() const { return Point2i(larg, haut); }
 
-  // Ajoute/supprime un marqueur
+  // add/remove value tag
   marqueur_it AjouteMarqueur (long val, const Color& coul);
   void SupprimeMarqueur (marqueur_it it);
   void Reset_Marqueur();
