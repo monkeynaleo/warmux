@@ -102,18 +102,19 @@ Interface::Interface()
   weapon_strength_bar.SetBackgroundColor(WeaponStrengthBarBackground);
 
   // constant text initialisation
-  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL,Font::BOLD);
-  Font * small_font = Font::GetInstance(Font::FONT_SMALL,Font::BOLD);
+  Font * big_font = Font::GetInstance(Font::FONT_BIG,Font::NORMAL);
+  Font * normal_font_bold = Font::GetInstance(Font::FONT_NORMAL,Font::BOLD);
+  Font * small_font_bold = Font::GetInstance(Font::FONT_SMALL,Font::BOLD);
 
-  global_timer = new Text(ulong2str(0), black_color, normal_font, false);
-  timer = new Text(ulong2str(0), black_color, normal_font, false);
+  global_timer = new Text(ulong2str(0), gray_color, big_font, false);
+  timer = new Text(ulong2str(0), black_color, normal_font_bold, false);
 
-  t_character_name = new Text("None", black_color, small_font, false);
-  t_team_name = new Text("None", black_color, small_font, false);
-  t_player_name = new Text("None", black_color, small_font, false);
-  t_character_energy = new Text("Dead", white_color, small_font);
-  t_weapon_name = new Text("None", black_color, small_font, false);
-  t_weapon_stock = new Text("0", black_color, small_font, false);
+  t_character_name = new Text("None", black_color, small_font_bold, false);
+  t_team_name = new Text("None", black_color, small_font_bold, false);
+  t_player_name = new Text("None", black_color, small_font_bold, false);
+  t_character_energy = new Text("Dead", white_color, small_font_bold);
+  t_weapon_name = new Text("None", black_color, small_font_bold, false);
+  t_weapon_stock = new Text("0", black_color, small_font_bold, false);
 }
 
 Interface::~Interface()

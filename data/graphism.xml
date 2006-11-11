@@ -140,6 +140,14 @@
   <surface name="pointer_aim" file="interface/pointer_aim.png"/>
 </section>
 
+<section name="energy_bar">
+  <color name="energy_color_16_percent" r="164" g="0" b="0" a="255" />
+  <color name="energy_color_33_percent" r="196" g="80" b="0" a="255" />
+  <color name="energy_color_50_percent" r="228" g="166" b="0" a="255" />
+  <color name="energy_color_67_percent" r="104" g="170" b="0" a="255" />
+  <color name="energy_color_84_percent" r="42" g="128" b="21" a="255" />
+  <color name="energy_color_100_percent" r="21" g="100" b="136" a="255" />
+</section>
 
 <section name="gfx">
   <surface name="pointeur1" file="gfx/pointer.png" />
