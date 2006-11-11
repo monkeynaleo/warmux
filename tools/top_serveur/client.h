@@ -10,11 +10,14 @@ class Client
 	int received;
 	struct sockaddr_in address;
 	bool handshake_done;
+	bool is_hosting;
 
 	char* str;
 	unsigned int str_size;
 
 	enum TopServerMsg msg_id;
+
+	int GetIp();
 
 	// Return false if the client closed the connection
 	bool ReceiveStr(std::string & full_str);
@@ -23,6 +26,7 @@ class Client
 	void SendInt(const int & nbr);
 	void SendStr(const std::string & full_str);
 	void SendSignature();
+	void SendList();
 public:
 	Client(int client_fd,struct sockaddr_in client_address);
 	~Client();

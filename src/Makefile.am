@@ -73,6 +73,7 @@ wormux_SOURCES = \
 	sound/jukebox.cpp sound/jukebox.h \
 	interface/weapon_menu.cpp interface/weapon_menu.h \
 	interface/loading_screen.cpp interface/loading_screen.h \
+	menu/internet_menu.cpp menu/internet_menu.h \
 	menu/main_menu.cpp menu/main_menu.h \
 	menu/menu.cpp menu/menu.h \
 	menu/network_connection_menu.cpp menu/network_connection_menu.h \

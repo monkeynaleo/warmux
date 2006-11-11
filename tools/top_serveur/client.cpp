@@ -2,13 +2,21 @@
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <list>
 #include "client.h"
 #include "debug.h"
 #include "../../src/network/top_server_msg.h"
 
+// map < socket_fd, client >
+extern std::list<Client*> clients;
+
+// number of server currently logged
+unsigned int nb_server = 0;
 
 Client::Client(int client_fd, struct sockaddr_in client_address)
 {
@@ -17,16 +25,28 @@ Client::Client(int client_fd, struct sockaddr_in client_address)
 	msg_id = TS_NO_MSG;
 	handshake_done = false;
 	str_size = 0;
+	is_hosting = false;
 }
 
 Client::~Client()
 {
 	close(fd);
+	if( is_hosting )
+		nb_server--;
 }
 
 int & Client::GetFD()
 {
 	return fd;
+}
+
+int Client::GetIp()
+{
+	struct hostent *info;
+	info = gethostbyaddr((void*)&address.sin_addr, sizeof(address.sin_addr), AF_INET);
+	return int(*(int*)*info->h_addr_list);
+
+//	return std::string(inet_ntoa(*(struct in_addr*)*info->h_addr_list));
 }
 
 bool Client::ReceiveInt(int & nbr)
@@ -124,9 +144,12 @@ bool Client::Receive()
 	if( ioctl(fd, FIONREAD, &received) == -1 )
 		TELL_ERROR;
 
+	// received < 1 when the client disconnect
 	if(received < 1)
 		return false;
 
+	// Get the ID of the message
+	// if we don't already know it
 	if(msg_id == TS_NO_MSG)
 	{
 		int id;
@@ -135,23 +158,27 @@ bool Client::Receive()
 		msg_id = (TopServerMsg)id;
 	}
 
+	std::string full_str = "";
+	// If a string is embedded in the msg, get it
 	if( msg_id == TS_MSG_VERSION )
 	{
-		std::string version;
-		if( ! ReceiveStr(version) )
+		if( ! ReceiveStr(full_str) )
 			return false;
 
-		if(version == "")
-		{
-			// version not finnished to receive
+		// If we didn't received the full string yet,
+		// just go back
+		if( full_str == "" )
 			return true;
-		}
+	}
 
-		if(version == "0.8beta1")
+	if( msg_id == TS_MSG_VERSION )
+	{
+		if(full_str == "0.8beta1")
 		{
 			DPRINT("Version checked successfully");
 			msg_id = TS_NO_MSG;
-			SendSignature();
+			handshake_done = true;
+			SendSignature();		
 		}
 		return true;
 	}
@@ -161,10 +188,25 @@ bool Client::Receive()
 
 	switch(msg_id)
 	{
+	case TS_MSG_HOSTING:
+		DPRINT("This is a server");
+		is_hosting = true;
+		nb_server++;
+		// TODO: try opening a connection to see if it's 
+		// firewalled or not
+		break;
+	case TS_MSG_GET_LIST:
+		if( is_hosting )
+			return false;
+		SendList();
+		break;
 	default:
 		DPRINT("Wrong message");
 		return false;
 	}
+
+	// We are ready to read a new message
+	msg_id = TS_NO_MSG;
 	return true;
 }
 
@@ -172,5 +214,18 @@ void Client::SendSignature()
 {
 	DPRINT("Sending signature");
 	SendStr("MassMurder!");
+}
+
+void Client::SendList()
+{
+	DPRINT("Sending list..");
+	SendInt(nb_server);
+	for(std::list<Client*>::iterator client = clients.begin();
+		client != clients.end();
+		++client)
+	{
+		if( (*client)->is_hosting )
+			SendInt((*client)->GetIp());
+	}
 }
 

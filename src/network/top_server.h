@@ -24,6 +24,7 @@
 #define TOP_SERVER_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
+#include <list>
 #include <string>
 
 class TopServer
@@ -48,7 +49,9 @@ public:
 
   bool Connect();
   void SetHiddenServer() { hidden_server = true; };
+  void SendServerStatus();
   void Disconnect();
+  std::list<std::string> GetServerList();
 };
 
 extern TopServer top_server;

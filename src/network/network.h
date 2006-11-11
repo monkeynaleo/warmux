@@ -31,6 +31,9 @@
 #include "../include/base.h" 
 #include "../menu/network_menu.h"
 //-----------------------------------------------------------------------------
+const std::string WORMUX_NETWORK_PORT = "9999";
+const uint WORMUX_NETWORK_PORT_INT = 9999;
+
 class Network
 {
   friend class DistantComputer;
