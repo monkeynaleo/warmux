@@ -24,6 +24,7 @@ SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
 
 # Optional package CPack
 INCLUDE(CPackConfig OPTIONAL)
+INCLUDE(XmlValidityTest OPTIONAL)
 
 
 # Required libraries
