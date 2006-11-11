@@ -19,39 +19,41 @@
  *Energy bar.
  *****************************************************************************/
 
+#include <iostream>
+#include <sstream>
 #include "EnergyBar.h"
+#include "../tool/resource_manager.h"
+
+static const int energy_step[EnergyBar::NB_OF_ENERGY_COLOR] = { 16, 33, 50, 67, 84, 100 };
+
+EnergyBar::EnergyBar() : BarreProg()
+{
+  Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
+  for(int i = 0; i < NB_OF_ENERGY_COLOR ;i++) {
+    std::ostringstream color_name;
+    color_name << "energy_bar/energy_color_" << energy_step[i] << "_percent";
+    colors_value[i] = resource_manager.LoadColor(res, color_name.str());
+  }
+}
+
+Color EnergyBar::GetColorValue(long app_energy)
+{
+  for(int i = 0; i < NB_OF_ENERGY_COLOR - 1; ++i) {
+    if(energy_step[i] > ((float)app_energy / GetMaxVal()) * 100)
+      return colors_value[i];
+  }
+  return colors_value[NB_OF_ENERGY_COLOR - 1];
+}
 
 void EnergyBar::Actu (long real_energy){
-  Color color;
-  double r, g, b, a;
   long app_energy;
 
   /* update progress bar position*/
   BarreProg::Actu(real_energy);
-  long max = GetMaxVal();
 
   /* get the real applied enargie value. It may be different from the
    * real_energy in case of under/over flow*/
   app_energy = BarreProg::GetVal();
 
-  //Energy bar color
-  if( app_energy < (max / 2) )
-    {
-      r = ( 2.0 * ((final_color.GetRed()   * ((max / 2) - app_energy)) + (app_energy * inter_color.GetRed()))) / max;
-      g = ( 2.0 * ((final_color.GetGreen() * ((max / 2) - app_energy)) + (app_energy * inter_color.GetGreen()))) / max;
-      b = ( 2.0 * ((final_color.GetBlue()  * ((max / 2) - app_energy)) + (app_energy * inter_color.GetBlue()))) / max;
-      a = ( 2.0 * ((final_color.GetAlpha() * ((max / 2) - app_energy)) + (app_energy * inter_color.GetAlpha()))) / max;
-    }
-  else
-    {
-      r = ( 2.0 * ((init_color.GetRed() * (app_energy - (max / 2))) + (inter_color.GetRed() * (max - app_energy)))) / max;
-      g = ( 2.0 * ((init_color.GetGreen() * (app_energy - (max / 2))) + (inter_color.GetGreen() * (max - app_energy)))) / max;
-      b = ( 2.0 * ((init_color.GetBlue() * (app_energy - (max / 2))) + (inter_color.GetBlue() * (max - app_energy)))) / max;
-      a = ( 2.0 * ((init_color.GetAlpha() * (app_energy - (max / 2))) + (inter_color.GetAlpha() * (max - app_energy)))) / max;
-    }
-  color.SetColor((uint)(r),
-                 (uint)(g),
-                 (uint)(b),
-                 (uint)(a));
-  SetValueColor(color);
+  SetValueColor(GetColorValue(app_energy));
 }
