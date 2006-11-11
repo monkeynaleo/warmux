@@ -6,17 +6,17 @@
   <team>
     <character name="Konqui" body="konqiteam" />
     <character name="Kopete" body="konqiteam" />
-    <character name="kdevelop" body="konqiteam" />
-    <character name="kmail" body="konqiteam" />
-    <character name="kate" body="konqiteam" />
-    <character name="k3b" body="konqiteam" />
-    <character name="kformula" body="konqiteam" />
-    <character name="koffice" body="konqiteam" />
-    <character name="kontact" body="konqiteam" />
-    <character name="krita" body="konqiteam" />
+    <character name="KDevelop" body="konqiteam" />
+    <character name="KMail" body="konqiteam" />
+    <character name="Kate" body="konqiteam" />
+    <character name="K3B" body="konqiteam" />
+    <character name="KFormula" body="konqiteam" />
+    <character name="KOffice" body="konqiteam" />
+    <character name="Kontact" body="konqiteam" />
+    <character name="Krita" body="konqiteam" />
     <character name="digiKam" body="konqiteam" />
-    <character name="kicker" body="konqiteam" />
+    <character name="Kicker" body="konqiteam" />
     <character name="okular" body="konqiteam" />
-    <character name="kpdf" body="konqiteam" />
+    <character name="KPDF" body="konqiteam" />
   </team>
 </resources>
