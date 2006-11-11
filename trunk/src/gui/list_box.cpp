@@ -29,11 +29,42 @@
 
 //#define SCROLLBAR
 
+ListBoxItem::ListBoxItem(std::string& _label, std::string& _value,
+			 bool _enabled)
+{
+  label = _label;
+  value = _value;
+  enabled = _enabled;
+}
+
+ListBoxItem::ListBoxItem(std::string _label, std::string _value,
+			 bool _enabled)
+{
+  label = _label;
+  value = _value;
+  enabled = _enabled;
+}
+
+const std::string& ListBoxItem::GetLabel() const
+{
+  return label;
+}
+
+const std::string& ListBoxItem::GetValue() const
+{
+  return value;
+}
+
+const bool ListBoxItem::IsEnabled() const
+{
+  return enabled;
+}
+
 struct CompareItems
 {
-     bool operator()(const list_box_item_t& a, const list_box_item_t& b)
+     bool operator()(const ListBoxItem& a, const ListBoxItem& b)
      {
-       return a.label < b.label;
+       return a.GetLabel() < b.GetLabel();
      }
 };
 
@@ -138,9 +169,9 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf)
 
      (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft(
 			  GetPosition() + Point2i(5, i*height_item),
-			  m_items[i + first_visible_item].label,
+			  m_items[i + first_visible_item].GetLabel(),
 			  white_color);
-     if(!m_items[i].enabled)
+     if(!m_items[i].IsEnabled())
        surf.BoxColor(rect, defaultDisabledColorBox);
   }
 
@@ -174,15 +205,12 @@ void ListBox::SetSizePosition(const Rectanglei &rect)
 void ListBox::AddItem (bool selected,
 		       const std::string &label,
 		       const std::string &value,
-             bool enabled)
+		       bool enabled)
 {
   uint pos = m_items.size();
 
   // Push item
-  list_box_item_t item;
-  item.label = label;
-  item.value = value;
-  item.enabled = enabled;
+  ListBoxItem item(label, value, enabled);
   m_items.push_back (item);
 
   // Select it if selected
@@ -222,11 +250,11 @@ void ListBox::Select (uint index)
 void ListBox::Select(const std::string& val)
 {
   uint index = 0;
-  for(std::vector<list_box_item_t>::iterator it=m_items.begin();
+  for(std::vector<ListBoxItem>::iterator it=m_items.begin();
       it != m_items.end();
       it++,index++)
   {
-    if(it->label == val)
+    if(it->GetLabel() == val)
     {
       Select(index);
       return;
@@ -248,22 +276,22 @@ int ListBox::GetSelectedItem ()
 const std::string& ListBox::ReadLabel () const
 {
   assert (selected_item != -1);
-  return m_items.at(selected_item).label;
+  return m_items.at(selected_item).GetLabel();
 }
 
 const std::string& ListBox::ReadValue () const
 {
   assert (selected_item != -1);
-  return m_items.at(selected_item).value;
+  return m_items.at(selected_item).GetValue();
 }
 
 const std::string& ListBox::ReadValue (int index) const
 {
   assert (index != -1 && index < (int)m_items.size());
-  return m_items.at(index).value;
+  return m_items.at(index).GetValue();
 }
 
-std::vector<list_box_item_t> * ListBox::GetItemsList()
+std::vector<ListBoxItem> * ListBox::GetItemsList()
 {
   return &m_items;
 }
