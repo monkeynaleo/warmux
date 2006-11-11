@@ -40,6 +40,7 @@ class NetworkConnectionMenu : public Menu
    TextBox* server_adress;
    ButtonText* start_client;
    ButtonText* start_server;
+   ButtonText* internet_client;
    CheckBox* internet_server;
    VBox* connection_box;
 

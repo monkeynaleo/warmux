@@ -14,12 +14,12 @@
 #include "client.h"
 #include "debug.h"
 
+// map < socket_fd, client >
+std::list<Client*> clients;
+
 int main(int argc, void** argv)
 {
-	Server listen_sock(1234);
-
-	// map < socket_fd, client >
-	std::list<Client*> clients;
+	Server listen_sock(9997);
 
 	// Set of socket where an activity have been detected
 	fd_set acting_sock_set;

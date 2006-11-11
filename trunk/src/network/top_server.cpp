@@ -63,7 +63,7 @@ bool TopServer::Connect()
 
   MSG_DEBUG("top_server", "Opening connection");
 
-  if( SDLNet_ResolveHost(&ip, "localhost" , 1234) == -1 )
+  if( SDLNet_ResolveHost(&ip, "defert.dyndns.org" , 9997) == -1 )
   {
     question.Set(_("Invalid top server adress!"),1,0);
     question.Ask();
@@ -175,3 +175,27 @@ bool TopServer::HandShake()
   return true;
 }
 
+void TopServer::SendServerStatus()
+{
+  assert(network.IsServer());
+
+  if(hidden_server)
+    return;
+  Send(TS_MSG_HOSTING);
+}
+
+std::list<std::string> TopServer::GetServerList()
+{
+  Send(TS_MSG_GET_LIST);
+  int lst_size = ReceiveInt();
+  std::list<std::string> lst;
+  while(lst_size--)
+  {
+    IPaddress ip;
+    ip.host = ReceiveInt();
+    ip.port = 0;
+    const char* addr = SDLNet_ResolveIP(&ip);
+    lst.push_back( std::string(addr) );
+  }
+  return lst;
+}

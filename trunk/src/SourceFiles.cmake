@@ -68,6 +68,7 @@ map/tileitem.cpp
 map/water.cpp
 map/wind.cpp
 menu/credits_menu.cpp
+menu/internet_menu.cpp
 menu/game_menu.cpp
 menu/main_menu.cpp
 menu/menu.cpp

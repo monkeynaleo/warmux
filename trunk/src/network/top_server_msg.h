@@ -25,9 +25,11 @@
 
 enum TopServerMsg
 {
-  TS_NO_MSG,
-  TS_MSG_VERSION,
-  TS_LAST_MSG
+  TS_NO_MSG, // Don't send this
+  TS_MSG_VERSION, // Send this to identify the server
+  TS_MSG_HOSTING, // Send this if we are hosting a game
+  TS_MSG_GET_LIST, // Send this to obtain the list of the current hosting games
+  TS_LAST_MSG // Don't send this
 };
 
 #endif

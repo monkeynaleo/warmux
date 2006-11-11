@@ -23,6 +23,7 @@
 
 #include "network_connection_menu.h"
 #include "network_menu.h"
+#include "internet_menu.h"
 
 #include "../game/game.h"
 #include "../game/config.h"
@@ -37,8 +38,6 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
-
-#define WORMUX_NETWORK_PORT "9999"
 
 NetworkConnectionMenu::NetworkConnectionMenu() :
   Menu("menu/bg_network", vCancel)
@@ -82,6 +81,13 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   internet_server->SetValue( false );
   connection_box->AddWidget(internet_server);
 
+  internet_client = new ButtonText( Point2i(0,0),
+				 res, "main_menu/button",
+				 _("Connect to an internet game"),
+				 big_font);
+  internet_client->SetSizePosition( stdRect );
+  connection_box->AddWidget(internet_client);
+
   widgets.AddWidget(connection_box);
 
   // Warning about experimental networking
@@ -108,8 +114,8 @@ NetworkConnectionMenu::~NetworkConnectionMenu()
 }
 
 void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
-{     
-  Widget* w = widgets.Clic(mousePosition, button);  
+{
+  Widget* w = widgets.Clic(mousePosition, button);
   
   if (w == start_client)
   {
@@ -136,6 +142,8 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
     network.Init();
     network.ServerStart(WORMUX_NETWORK_PORT);
 
+    top_server.SendServerStatus();
+
     if(network.IsConnected())
     {
       network.client_inited = 1;
@@ -145,6 +153,16 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
       msg_box->NewMessage(_("Unable to start server"));
   }
 
+  if (w == internet_client)
+  {
+    if( !top_server.Connect() )
+      return;
+
+    InternetMenu im;
+    im.Run();
+
+    top_server.Disconnect();
+  }
 
   if (network.IsConnected()) {
     // run the network menu ! :-)
