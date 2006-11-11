@@ -56,6 +56,8 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
       ++team)
     {
       Action b(ACTION_NEW_TEAM, (*team)->GetId());
+      b.Push( (int) (*team)->GetNbCharacters() );
+      b.Push( (*team)->GetPlayerName() );
       b.WritePacket(pack, size);
       SendDatas(pack, size);
       free(pack);
@@ -135,7 +137,7 @@ int DistantComputer::ReceiveDatas(char* & buf)
     }
   }
   SDL_UnlockMutex(sock_lock);
-MSG_DEBUG("network","unlocked");
+  MSG_DEBUG("network","unlocked");
   return total_received;
 }
 
