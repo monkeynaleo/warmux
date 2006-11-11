@@ -697,7 +697,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
     txt = Format(_("What a shame for %s - he was killed by a simple gun!"),
                  character -> GetName().c_str());
   } else {
-    txt = Format(_("%s (%s team) has died."),
+    txt = Format(_("%s (%s) has died."),
                  character -> GetName().c_str(),
                  character -> GetTeam().GetName().c_str());
   }
