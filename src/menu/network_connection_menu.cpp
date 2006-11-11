@@ -78,7 +78,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   internet_server = new PictureTextCBox(_("Server available on Internet"),
 				"menu/fullscreen",
 				stdRect);
-  internet_server->SetValue( false );
+  internet_server->SetValue( true );
   connection_box->AddWidget(internet_server);
 
   internet_client = new ButtonText( Point2i(0,0),
