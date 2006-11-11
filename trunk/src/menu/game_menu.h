@@ -80,6 +80,7 @@ class GameMenu : public Menu
    void ChangeMap(int delta_index);   
 
    void SetNbTeams(uint nb_teams);
+   void PrevTeam(int i);
    void NextTeam(int i);
 
    void SaveOptions();
