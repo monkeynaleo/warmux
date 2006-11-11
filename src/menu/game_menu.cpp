@@ -411,15 +411,55 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
 
 	Widget * w = teams_selections[i]->Clic(mousePosition, button);
 
-	if ( w == NULL )
-	  NextTeam(i);
-	else
+	if ( w == NULL ) {
+	  if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
+	    NextTeam(i);
+	  } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
+	    PrevTeam(i);
+	  }
+	} else {
 	  widgets.SetFocusOn(w);
+	}
 	break;
       }
     }
   }
 
+}
+
+void GameMenu::PrevTeam(int i)
+{
+  bool to_continue;
+  Team* tmp;
+  int previous_index = -1, index;
+  teams_list.FindById(teams_selections[i]->GetTeam()->GetId(), previous_index);
+
+  index = previous_index-1;
+
+  do 
+    {
+      to_continue = false;
+
+      // select the last team if we are outside list
+      if ( index < 0 )
+	index = int(teams_list.full_list.size())-1;
+
+      // Get the team at current index
+      tmp = teams_list.FindByIndex(index);
+      
+      // Check if that team is already selected
+      for (int j = 0; j < teams_nb->GetValue(); j++) {
+	if (j!= i && tmp == teams_selections[j]->GetTeam()) {
+	  index--;
+	  to_continue = true;
+	  break;
+	}
+      }
+      
+      // We have found a team which is not selected
+      if (tmp != NULL && !to_continue)
+	teams_selections[i]->SetTeam(*tmp);
+    } while ( index != previous_index && to_continue);
 }
 
 void GameMenu::NextTeam(int i)
