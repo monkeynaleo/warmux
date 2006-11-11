@@ -18,14 +18,14 @@ extern std::list<Client*> clients;
 // number of server currently logged
 unsigned int nb_server = 0;
 
-Client::Client(int client_fd, struct sockaddr_in client_address)
+Client::Client(int client_fd, unsigned int & ip)
 {
-	address = client_address;
 	fd = client_fd;
 	msg_id = TS_NO_MSG;
 	handshake_done = false;
 	str_size = 0;
 	is_hosting = false;
+	ip_address = *(int*)&ip;
 }
 
 Client::~Client()
@@ -40,12 +40,9 @@ int & Client::GetFD()
 	return fd;
 }
 
-int Client::GetIp()
+int & Client::GetIp()
 {
-	struct hostent *info;
-	info = gethostbyaddr((void*)&address.sin_addr, sizeof(address.sin_addr), AF_INET);
-	return int(*(int*)*info->h_addr_list);
-
+	return ip_address;
 //	return std::string(inet_ntoa(*(struct in_addr*)*info->h_addr_list));
 }
 

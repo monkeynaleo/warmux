@@ -195,7 +195,19 @@ std::list<std::string> TopServer::GetServerList()
     ip.host = ReceiveInt();
     ip.port = 0;
     const char* addr = SDLNet_ResolveIP(&ip);
-    lst.push_back( std::string(addr) );
+    if(addr != NULL)
+      lst.push_back( std::string(addr) );
+    else
+    {
+      // We can't resolve the hostname, so just show the ip address
+      unsigned char* str_ip = (unsigned char*)&ip.host;
+      char formated_ip[16];
+      snprintf(formated_ip, 16, "%i.%i.%i.%i", (int)str_ip[0],
+                                           (int)str_ip[1],
+                                           (int)str_ip[2],
+                                           (int)str_ip[3]);
+      lst.push_back( std::string(formated_ip) );
+    }
   }
   return lst;
 }

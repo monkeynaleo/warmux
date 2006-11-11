@@ -1,7 +1,8 @@
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <stdio.h>
 #include <netinet/in.h>
+#include <netdb.h>
+#include <stdio.h>
 #include <unistd.h>
 #include "server.h"
 #include "client.h"
@@ -55,9 +56,14 @@ Client* Server::NewConnection()
 		TELL_ERROR;
 
 	FD_SET(client_fd, &sock_set);
-	DPRINT("New connection opened.");
 
-	return new Client(client_fd, client_address);
+//       struct hostent *info;
+//	info = gethostbyaddr( &client_address.sin_addr, sizeof(client_address.sin_addr), AF_INET);
+	unsigned int ip = client_address.sin_addr.s_addr;
+
+	Client* client = new Client(client_fd, ip);
+	DPRINT("New connection opened by %i", ip);
+	return client;
 }
 
 void Server::CloseConnection(int client_fd)
