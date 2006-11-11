@@ -29,11 +29,22 @@
 #include "button.h"
 #include "../include/base.h"
 
-typedef struct s_list_box_item_t{
-    std::string label;
-    std::string value;
-    bool enabled;
-} list_box_item_t;
+class ListBoxItem
+{
+private:
+  std::string label;
+  std::string value;
+  bool enabled;
+public:
+  ListBoxItem(std::string& _label, std::string& value,
+	      bool enabled);
+  ListBoxItem(std::string _label, std::string value,
+	      bool enabled);
+
+  const std::string& GetLabel() const;
+  const std::string& GetValue() const;
+  const bool IsEnabled() const;
+};
 
 class ListBox : public Widget
 {
@@ -48,7 +59,7 @@ protected:
   // what are the items ?
   uint first_visible_item;
   int selected_item;
-  std::vector<list_box_item_t> m_items;
+  std::vector<ListBoxItem> m_items;
 
   // Buttons
   Button *m_up, *m_down;
@@ -76,7 +87,7 @@ public:
   const std::string& ReadValue() const;
   const std::string& ReadValue(int index) const;
 
-  std::vector<list_box_item_t> *GetItemsList();
+  std::vector<ListBoxItem> *GetItemsList();
 };
 
 #endif
