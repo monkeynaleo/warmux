@@ -756,8 +756,8 @@ msgstr "WARNUNG! Verbindungstrennungen werden noch nicht behandelt."
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] "Warte! %i Spieler sind noch nicht bereit!"
-msgstr[1] " Spieler sind noch nicht verbunden!"
+msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
+msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
