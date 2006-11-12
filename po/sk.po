@@ -16,12 +16,12 @@ msgstr ""
 "X-Poedit-Country: SLOVAKIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s vypadol z mapy!"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s vypadol z mapy!"
@@ -46,8 +46,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (%s tím) zomrel."
 
 #: src/map/maps_list.cpp:102
@@ -177,15 +177,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Hráč '%s' zvíťazil %u leteckým útokom!"
 msgstr[1] "Hráč '%s' zvíťazil %u leteckými útokmi!"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(mŕtvy)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 #, fuzzy
 msgid "Air Attack"
 msgstr "Letecký útok"
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autory:"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Navádzaná strela"
@@ -257,12 +257,22 @@ msgstr "ŠrapnelováBomba"
 msgid "Commit Suicide"
 msgstr "Samovražda"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Koniec hry !"
+
+#: src/menu/network_connection_menu.cpp:86
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Koniec hry !"
+
+#: src/menu/network_connection_menu.cpp:66
 #, fuzzy
 msgid "Connect to game"
 msgstr "Koniec hry !"
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 #, fuzzy
 msgid "Connected to "
 msgstr "Koniec hry !"
@@ -386,7 +396,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Granát"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 #, fuzzy
 msgid "Host a game"
 msgstr "Koniec hry !"
@@ -591,6 +601,10 @@ msgstr "Koniec"
 msgid "Quit Wormux"
 msgstr "Ukončiť Wormuxa"
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -603,15 +617,15 @@ msgstr ""
 msgid "Run game"
 msgstr "Spusti hru"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr ""
 
@@ -650,7 +664,7 @@ msgstr "Nastavenie zvuku"
 msgid "Starting a new game"
 msgstr "Beh novej hry "
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Munícia:"
 
@@ -688,7 +702,7 @@ msgstr "Raketa opustila bojisko..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Raketa opustila bojisko..."
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automatická raketa opustila bojisko ..."
 
@@ -713,7 +727,7 @@ msgstr "Raketa opustila bojisko..."
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa opustila bojisko..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 #, fuzzy
 msgid "Unable to connect"
 msgstr "Nedá sa otvoriť adresár skinov (%s)!"
@@ -733,6 +747,11 @@ msgstr "Nedá sa otvoriť adresár máp (%s)!"
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nedá sa inicializovať SDL knižnca: %s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Vcucnutie do vákua ..."
+
 #: src/network/network.cpp:234
 #, fuzzy
 msgid "Unable to listen for client!"
@@ -743,7 +762,7 @@ msgstr "Čakám na klientov"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 #, fuzzy
 msgid "Unable to start server"
 msgstr "Nedá sa otvoriť adresár máp (%s)!"
@@ -829,7 +848,7 @@ msgstr ""
 msgid "done"
 msgstr "koniec"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 
@@ -866,9 +885,6 @@ msgstr ""
 
 #~ msgid "=== Loading ==="
 #~ msgstr "=== Načítavam ==="
-
-#~ msgid "A blow in the vacuum ..."
-#~ msgstr "Vcucnutie do vákua ..."
 
 #~ msgid "Air attack"
 #~ msgstr "Letecký útok"

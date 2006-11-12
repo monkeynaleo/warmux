@@ -21,12 +21,12 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s выпал с карты!"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s выпал с карты!"
@@ -53,8 +53,8 @@ msgstr[1] ""
 msgstr[2] ""
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (команда %s) погибла."
 
 #: src/map/maps_list.cpp:102
@@ -195,15 +195,15 @@ msgstr[0] "'%s выиграл %u воздушную атаку"
 msgstr[1] "'%s выиграл %u воздушных атаки"
 msgstr[2] "'%s выиграл %u воздушных атак"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(мёртв)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 #, fuzzy
 msgid "Air Attack"
 msgstr "Воздушная атака"
@@ -225,7 +225,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Авторы:"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Автоматическая базука"
@@ -275,12 +275,22 @@ msgstr "Кассетная бомба"
 msgid "Commit Suicide"
 msgstr "Покончить жизнь самоубийством"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Конец игры"
+
+#: src/menu/network_connection_menu.cpp:86
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Конец игры"
+
+#: src/menu/network_connection_menu.cpp:66
 #, fuzzy
 msgid "Connect to game"
 msgstr "Конец игры"
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 #, fuzzy
 msgid "Connected to "
 msgstr "Конец игры"
@@ -403,7 +413,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Граната"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 #, fuzzy
 msgid "Host a game"
 msgstr "Конец игры"
@@ -602,6 +612,10 @@ msgstr "Выйти"
 msgid "Quit Wormux"
 msgstr ""
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -614,15 +628,15 @@ msgstr ""
 msgid "Run game"
 msgstr "Начать игру"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr ""
 
@@ -661,7 +675,7 @@ msgstr "Настройки звука"
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Боеприпасов:"
 
@@ -699,7 +713,7 @@ msgstr "Ракета улетела за пределы поля битвы..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Ракета улетела за пределы поля битвы..."
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Автоматическая ракета улетела за пределы поля битвы..."
 
@@ -724,7 +738,7 @@ msgstr "Ракета улетела за пределы поля битвы..."
 msgid "The rocket has left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 #, fuzzy
 msgid "Unable to connect"
 msgstr "Невозможно открыть каталог с темами (%s)!"
@@ -744,6 +758,11 @@ msgstr "Невозможно открыть каталог с картами (%s
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Невозможно открыть каталог с темами (%s)!"
+
 #: src/network/network.cpp:234
 #, fuzzy
 msgid "Unable to listen for client!"
@@ -754,7 +773,7 @@ msgstr "Ожидание клиентов"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Невозможно открыть каталог с картами (%s)!"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 #, fuzzy
 msgid "Unable to start server"
 msgstr "Невозможно открыть каталог с картами (%s)!"
@@ -843,7 +862,7 @@ msgstr ""
 msgid "done"
 msgstr ""
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 

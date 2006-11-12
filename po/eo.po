@@ -15,12 +15,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s falis el la mapo"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s falis el la mapo"
@@ -45,8 +45,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (%s teamo) mortis."
 
 #: src/map/maps_list.cpp:102
@@ -176,15 +176,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s teamo gajnis %u aer-atakon!"
 msgstr[1] "%s teamo gajnis %u aer-atakojn!"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(mortinta)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(senlimaj)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 #, fuzzy
 msgid "Air Attack"
 msgstr "Aeratako"
@@ -206,7 +206,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Aŭtoroj :"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Memmova bazuko"
@@ -256,12 +256,22 @@ msgstr " Disgrenado"
 msgid "Commit Suicide"
 msgstr "Mortigis sin"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Partofino !"
+
+#: src/menu/network_connection_menu.cpp:86
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Partofino !"
+
+#: src/menu/network_connection_menu.cpp:66
 #, fuzzy
 msgid "Connect to game"
 msgstr "Partofino !"
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 #, fuzzy
 msgid "Connected to "
 msgstr "Partofino !"
@@ -383,7 +393,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Grenado"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 #, fuzzy
 msgid "Host a game"
 msgstr "Partofino !"
@@ -587,6 +597,10 @@ msgstr "Forlasi"
 msgid "Quit Wormux"
 msgstr "Forigu el Wormux"
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -599,15 +613,15 @@ msgstr ""
 msgid "Run game"
 msgstr "Komencas partion"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr ""
 
@@ -646,7 +660,7 @@ msgstr "Sonaj agordoj"
 msgid "Starting a new game"
 msgstr "Komencas novan ludon"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Municioj:"
 
@@ -684,7 +698,7 @@ msgstr "La fuzilo foriris en alian mondon ..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "La fuzilo foriris en alian mondon ..."
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La memmova fuzilo foriris en alian mondon ..."
 
@@ -709,7 +723,7 @@ msgstr "La fuzilo foriris en alian mondon ..."
 msgid "The rocket has left the battlefield..."
 msgstr "La fuzilo foriris en alian mondon ..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 #, fuzzy
 msgid "Unable to connect"
 msgstr "Ne eblas malfermi aspektan dosierujon (%s)"
@@ -729,6 +743,11 @@ msgstr " Ne eblas malfermi mapan dosierujon (%s)"
 msgid "Unable to initialize SDL library: %s"
 msgstr " Ne eblas prepari SDL bibliotekon: %s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Pafo en la malpleneco ..."
+
 #: src/network/network.cpp:234
 #, fuzzy
 msgid "Unable to listen for client!"
@@ -739,7 +758,7 @@ msgstr "Atendas klienton"
 msgid "Unable to open maps directory (%s)!"
 msgstr " Ne eblas malfermi mapan dosierujon (%s)"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 #, fuzzy
 msgid "Unable to start server"
 msgstr " Ne eblas malfermi mapan dosierujon (%s)"
@@ -825,7 +844,7 @@ msgstr ""
 msgid "done"
 msgstr "Farita"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 
@@ -860,9 +879,6 @@ msgstr ""
 
 #~ msgid "=== Loading ==="
 #~ msgstr "=== Muntante ==="
-
-#~ msgid "A blow in the vacuum ..."
-#~ msgstr "Pafo en la malpleneco ..."
 
 #, fuzzy
 #~ msgid "All teams results:\n"

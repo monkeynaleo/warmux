@@ -16,12 +16,12 @@ msgstr ""
 "X-Generator: KBabel 1.11.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s faldt ud af banen!"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s faldt ud af banen!"
@@ -46,8 +46,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (fra holdet %s) blev dræbt."
 
 #: src/map/maps_list.cpp:102
@@ -177,15 +177,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s har fået %u luftangreb"
 msgstr[1] "%s har fået %u luftangreb"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(død)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 #, fuzzy
 msgid "Air Attack"
 msgstr "Luftangreb"
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Forfattere:"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Automatisk bazooka"
@@ -257,11 +257,19 @@ msgstr "Klyngebombe"
 msgid "Commit Suicide"
 msgstr "Begå selvmord"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+msgid "Connect !"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:86
+msgid "Connect to an internet game"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:66
 msgid "Connect to game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 msgid "Connected to "
 msgstr ""
 
@@ -384,7 +392,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Granat"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 msgid "Host a game"
 msgstr ""
 
@@ -582,6 +590,10 @@ msgstr "Afslut"
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -595,15 +607,15 @@ msgstr "Oprørsbombe"
 msgid "Run game"
 msgstr "Kør spil"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr ""
 
@@ -641,7 +653,7 @@ msgstr "Lyde"
 msgid "Starting a new game"
 msgstr "Starter et nyt spil"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Lager:"
 
@@ -679,7 +691,7 @@ msgstr "Raketten har forladt slagmarken..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Raketten har forladt slagmarken..."
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Den automatiske raket har forladt slagmarken..."
 
@@ -704,7 +716,7 @@ msgstr "Raketten har forladt slagmarken..."
 msgid "The rocket has left the battlefield..."
 msgstr "Raketten har forladt slagmarken..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 #, fuzzy
 msgid "Unable to connect"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
@@ -724,6 +736,11 @@ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
 msgid "Unable to initialize SDL library: %s"
 msgstr "Ikke i stand til at klargøre SDL bibliotek: %s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
+
 #: src/network/network.cpp:234
 #, fuzzy
 msgid "Unable to listen for client!"
@@ -734,7 +751,7 @@ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 #, fuzzy
 msgid "Unable to start server"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
@@ -821,7 +838,7 @@ msgstr ""
 msgid "done"
 msgstr "færdig"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 

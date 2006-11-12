@@ -19,11 +19,11 @@ msgstr ""
 "X-Generator: KBabel 1.11\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
 msgstr " a rejoint la partie"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 msgid " has left the party"
 msgstr " a quitté la partie"
 
@@ -47,8 +47,8 @@ msgstr[0] " joueurs prêts"
 msgstr[1] " joueurs prêts"
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (équipe %s) est mort."
 
 #: src/map/maps_list.cpp:102
@@ -178,15 +178,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Le joueur %s a gagné %u anti-gravité !"
 msgstr[1] "Le joueur %s a gagné %u anti-gravité !"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(mort)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(illimitées)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 msgid "Air Attack"
 msgstr "Attaque aérienne"
 
@@ -206,7 +206,7 @@ msgstr "Enclume"
 msgid "Authors:"
 msgstr "Auteurs :"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatique"
 
@@ -253,11 +253,21 @@ msgstr "Grenade à fragmentation"
 msgid "Commit Suicide"
 msgstr "Suicide"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Connecté à "
+
+#: src/menu/network_connection_menu.cpp:86
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Se connecter"
+
+#: src/menu/network_connection_menu.cpp:66
 msgid "Connect to game"
 msgstr "Se connecter"
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 msgid "Connected to "
 msgstr "Connecté à "
 
@@ -375,7 +385,7 @@ msgstr "Commandant en chef"
 msgid "Holy Grenade"
 msgstr "Sainte grenade"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 msgid "Host a game"
 msgstr "Créer une partie"
 
@@ -573,6 +583,10 @@ msgstr "Quitter"
 msgid "Quit Wormux"
 msgstr "Quitte Wormux"
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr "Résolution"
@@ -585,15 +599,15 @@ msgstr "Bombe anti-émeute"
 msgid "Run game"
 msgstr "Lancement du jeu"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr "Adresse du serveur"
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr "Serveur lancé"
 
@@ -629,7 +643,7 @@ msgstr "Options sonores"
 msgid "Starting a new game"
 msgstr "Lancement d'une nouvelle partie"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Munitions :"
 
@@ -670,7 +684,7 @@ msgid "The Polecat left the battlefield before exploding"
 msgstr ""
 "La grenade à fragmentation a quitté le champs de bataille avant d'exploser."
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La roquette automatique est partie dans un autre monde ..."
 
@@ -697,7 +711,7 @@ msgstr ""
 msgid "The rocket has left the battlefield..."
 msgstr "La roquette est partie dans un autre monde ..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 msgid "Unable to connect"
 msgstr "Impossible de se connecter"
 
@@ -715,6 +729,11 @@ msgstr "Impossible de contacter le serveur!"
 msgid "Unable to initialize SDL library: %s"
 msgstr "Échec de l'initialisation de la bibliothèque SDL : %s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Impossible de se connecter"
+
 #: src/network/network.cpp:234
 msgid "Unable to listen for client!"
 msgstr "Impossible d'attendre les clients! "
@@ -724,7 +743,7 @@ msgstr "Impossible d'attendre les clients! "
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossible d'ouvrir le répertoire des terrains (%s) !"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 msgid "Unable to start server"
 msgstr "Impossible de démarrer le serveur"
 
@@ -808,7 +827,7 @@ msgstr "déconnection!"
 msgid "done"
 msgstr "terminé"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 
