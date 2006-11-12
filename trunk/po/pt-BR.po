@@ -16,11 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
 msgstr " chegou pra festa"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 msgid " has left the party"
 msgstr " foi embora!"
 
@@ -44,8 +44,8 @@ msgstr[0] " jogadores prontos"
 msgstr[1] " jogadores prontos"
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (equipa %s) bateu as botas."
 
 #: src/map/maps_list.cpp:102
@@ -175,15 +175,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s ganhou %u Baixa gravidade!"
 msgstr[1] "%s ganhou %u Baixa gravidade!"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(morto)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(ilimitadas)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 msgid "Air Attack"
 msgstr " Ataque aéreo"
 
@@ -203,7 +203,7 @@ msgstr "Bigorna"
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 msgid "Automatic Bazooka"
 msgstr "Bazooka automática"
 
@@ -250,11 +250,21 @@ msgstr "Bomba de agrupamentos"
 msgid "Commit Suicide"
 msgstr "Cometer suicídio"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Conectado a "
+
+#: src/menu/network_connection_menu.cpp:86
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Conectar ao jogo"
+
+#: src/menu/network_connection_menu.cpp:66
 msgid "Connect to game"
 msgstr "Conectar ao jogo"
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 msgid "Connected to "
 msgstr "Conectado a "
 
@@ -373,7 +383,7 @@ msgstr "Comandante"
 msgid "Holy Grenade"
 msgstr "Granada santa"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 msgid "Host a game"
 msgstr "Criar um jogo"
 
@@ -568,6 +578,10 @@ msgstr "Sair"
 msgid "Quit Wormux"
 msgstr "Sair do Wormux"
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr "Resolução"
@@ -581,15 +595,15 @@ msgstr "Bomba Motim"
 msgid "Run game"
 msgstr "Iniciar jogo"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr "Endereço do servidor:"
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr "Servidor iniciado"
 
@@ -625,7 +639,7 @@ msgstr "Sons"
 msgid "Starting a new game"
 msgstr "Iniciando um novo jogo"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Munição:"
 
@@ -663,7 +677,7 @@ msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
 msgid "The Polecat left the battlefield before exploding"
 msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "O míssil automático deixou o campo de batalha..."
 
@@ -687,7 +701,7 @@ msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
 msgid "The rocket has left the battlefield..."
 msgstr "O míssil deixou o campo de batalha ..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 msgid "Unable to connect"
 msgstr "Não foi possível conectar"
 
@@ -705,6 +719,11 @@ msgstr "Não foi possível fazer contato com o servidor!"
 msgid "Unable to initialize SDL library: %s"
 msgstr "Não foi possível inicializar a biblioteca SDL: %s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Não foi possível conectar"
+
 #: src/network/network.cpp:234
 msgid "Unable to listen for client!"
 msgstr "Não foi possível abrir conexão de escuta para o cliente!"
@@ -714,7 +733,7 @@ msgstr "Não foi possível abrir conexão de escuta para o cliente!"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Não foi possível abrir diretório (%s) dos mapas!"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 msgid "Unable to start server"
 msgstr "Não foi possível iniciar o servidor"
 
@@ -798,7 +817,7 @@ msgstr "desconexão"
 msgid "done"
 msgstr "pronto"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 

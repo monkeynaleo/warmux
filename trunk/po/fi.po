@@ -19,12 +19,12 @@ msgstr ""
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s tipahti ulos kartalta!"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s tipahti ulos kartalta!"
@@ -49,8 +49,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (joukkue %s) kuoli."
 
 #: src/map/maps_list.cpp:102
@@ -180,15 +180,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 msgstr[1] "Joukkue %s voitti %u ilmaiskua."
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(kuollut)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(rajaton)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 #, fuzzy
 msgid "Air Attack"
 msgstr "Ilmaisku"
@@ -210,7 +210,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Tekijät:"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Automaattibazooka"
@@ -260,11 +260,19 @@ msgstr "Klusteripommi"
 msgid "Commit Suicide"
 msgstr "Itsemurhaisku"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+msgid "Connect !"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:86
+msgid "Connect to an internet game"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:66
 msgid "Connect to game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 msgid "Connected to "
 msgstr ""
 
@@ -385,7 +393,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Kranaatti"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 msgid "Host a game"
 msgstr ""
 
@@ -589,6 +597,10 @@ msgstr "Lopeta"
 msgid "Quit Wormux"
 msgstr "Lopeta Wormux"
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -602,15 +614,15 @@ msgstr "Automaattibazookan"
 msgid "Run game"
 msgstr "Aloita peli"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr ""
 
@@ -649,7 +661,7 @@ msgstr "Ääni asetukset"
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Varasto:"
 
@@ -687,7 +699,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Ohjus on poistunut taistelukentältä..."
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaattiohjus on poistunut taistelukentältä..."
 
@@ -712,7 +724,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "The rocket has left the battlefield..."
 msgstr "Ohjus on poistunut taistelukentältä..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 #, fuzzy
 msgid "Unable to connect"
 msgstr "Ulkoasuhakemiston avaus epäonnistui (%s)!"
@@ -732,6 +744,11 @@ msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 msgid "Unable to initialize SDL library: %s"
 msgstr "SDL kirjaston alustus epäonnistui:%s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Ulkoasuhakemiston avaus epäonnistui (%s)!"
+
 #: src/network/network.cpp:234
 #, fuzzy
 msgid "Unable to listen for client!"
@@ -742,7 +759,7 @@ msgstr "Odota asiakkaita"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 #, fuzzy
 msgid "Unable to start server"
 msgstr "Karttahakemiston avaaminen epäonnistui (%s)!"
@@ -830,7 +847,7 @@ msgstr ""
 msgid "done"
 msgstr "valmis"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 

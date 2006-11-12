@@ -22,12 +22,12 @@ msgstr ""
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s saiu do mapa!"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s saiu do mapa!"
@@ -52,8 +52,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (equipa %s) morreu."
 
 #: src/map/maps_list.cpp:102
@@ -183,15 +183,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s ganhou %u ataque aéreo!"
 msgstr[1] "%s ganhou %u ataques aéreos!"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(morto)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(ilimitadas)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 #, fuzzy
 msgid "Air Attack"
 msgstr " Ataque aéreo"
@@ -213,7 +213,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autores:"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Bazooka automática"
@@ -263,11 +263,19 @@ msgstr "ClusterBomb"
 msgid "Commit Suicide"
 msgstr "Suicídio"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+msgid "Connect !"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:86
+msgid "Connect to an internet game"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:66
 msgid "Connect to game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 msgid "Connected to "
 msgstr ""
 
@@ -390,7 +398,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Granada"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 msgid "Host a game"
 msgstr ""
 
@@ -588,6 +596,10 @@ msgstr "Sair"
 msgid "Quit Wormux"
 msgstr "Sair Wormux"
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -601,15 +613,15 @@ msgstr "Bomba Motim"
 msgid "Run game"
 msgstr "Iniciar jogo"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr ""
 
@@ -647,7 +659,7 @@ msgstr "Sons"
 msgid "Starting a new game"
 msgstr "Iniciando um novo jogo"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Munição:"
 
@@ -685,7 +697,7 @@ msgstr "O rocket saiu do campo de batalha ..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "O rocket saiu do campo de batalha ..."
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "O rocket automático saiu do campo de batalha..."
 
@@ -710,7 +722,7 @@ msgstr "O rocket saiu do campo de batalha ..."
 msgid "The rocket has left the battlefield..."
 msgstr "O rocket saiu do campo de batalha ..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 #, fuzzy
 msgid "Unable to connect"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
@@ -730,6 +742,11 @@ msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 msgid "Unable to initialize SDL library: %s"
 msgstr "Incapaz de inicializar a libraria SDL: %s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
+
 #: src/network/network.cpp:234
 #, fuzzy
 msgid "Unable to listen for client!"
@@ -740,7 +757,7 @@ msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 #, fuzzy
 msgid "Unable to start server"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
@@ -827,7 +844,7 @@ msgstr ""
 msgid "done"
 msgstr "feito"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 

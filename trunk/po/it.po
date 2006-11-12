@@ -19,12 +19,12 @@ msgstr ""
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s è caduto fuori dalla mappa!"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s è caduto fuori dalla mappa!"
@@ -49,8 +49,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (squadra %s) è morto."
 
 #: src/map/maps_list.cpp:102
@@ -180,15 +180,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "Il giocatore '%s vince %u attaccho aereo !"
 msgstr[1] "Il giocatore '%s vince %u attacchi aerei !"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(morto)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(illimitato)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 #, fuzzy
 msgid "Air Attack"
 msgstr "Attacco aereo"
@@ -210,7 +210,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Autori:"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatico"
@@ -260,12 +260,22 @@ msgstr "ClusterBomb"
 msgid "Commit Suicide"
 msgstr "Suicidato"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Fine della partita"
+
+#: src/menu/network_connection_menu.cpp:86
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Fine della partita"
+
+#: src/menu/network_connection_menu.cpp:66
 #, fuzzy
 msgid "Connect to game"
 msgstr "Fine della partita"
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 #, fuzzy
 msgid "Connected to "
 msgstr "Fine della partita"
@@ -389,7 +399,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Granata"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 #, fuzzy
 msgid "Host a game"
 msgstr "Fine della partita"
@@ -593,6 +603,10 @@ msgstr "Esci"
 msgid "Quit Wormux"
 msgstr "Esci da Wormux"
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -606,15 +620,15 @@ msgstr "Bazooka automatico"
 msgid "Run game"
 msgstr "Avvia il gioco"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr ""
 
@@ -652,7 +666,7 @@ msgstr "Opzioni del suono"
 msgid "Starting a new game"
 msgstr "Avvia una nuova partita"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "Stock:"
 msgstr "Munizioni :"
 
@@ -690,7 +704,7 @@ msgstr "Il razzo è passato in un altro mondo..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Il razzo è passato in un altro mondo..."
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Il razzo automatico è passato in un altro mondo..."
 
@@ -715,7 +729,7 @@ msgstr "Il razzo è passato in un altro mondo..."
 msgid "The rocket has left the battlefield..."
 msgstr "Il razzo è passato in un altro mondo..."
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 #, fuzzy
 msgid "Unable to connect"
 msgstr "Impossibile aprire la directory delle skin (%s)!"
@@ -735,6 +749,11 @@ msgstr "Impossibile aprire la directory delle mappe (%s)!"
 msgid "Unable to initialize SDL library: %s"
 msgstr "Impossibile avviare le librerie SDL: %s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Impossibile aprire la directory delle skin (%s)!"
+
 #: src/network/network.cpp:234
 #, fuzzy
 msgid "Unable to listen for client!"
@@ -745,7 +764,7 @@ msgstr "Aspetto i giocatori"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Impossibile aprire la directory delle mappe (%s)!"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 #, fuzzy
 msgid "Unable to start server"
 msgstr "Impossibile aprire la directory delle mappe (%s)!"
@@ -832,7 +851,7 @@ msgstr ""
 msgid "done"
 msgstr "completo"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 

@@ -18,12 +18,12 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/network/distant_cpu.cpp:68
+#: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s kiesett a pályáról!"
 
-#: src/network/distant_cpu.cpp:77
+#: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s kiesett a pályáról!"
@@ -48,8 +48,8 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
-#, c-format
-msgid "%s (%s team) has died."
+#, fuzzy, c-format
+msgid "%s (%s) has died."
 msgstr "%s (%s csapat) meghalt."
 
 #: src/map/maps_list.cpp:102
@@ -179,15 +179,15 @@ msgid_plural "'%s has won %u Low gravity"
 msgstr[0] "%s %u ráadás légitámadás nyert!"
 msgstr[1] "%s %u ráadás légitámadás nyert!"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:170
 msgid "(dead)"
 msgstr "(kipurcant)"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 msgid "(unlimited)"
 msgstr "(korlátlan)"
 
-#: src/weapon/air_attack.cpp:157
+#: src/weapon/air_attack.cpp:159
 #, fuzzy
 msgid "Air Attack"
 msgstr "Légitámadás"
@@ -209,7 +209,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Szerzők:"
 
-#: src/weapon/auto_bazooka.cpp:127
+#: src/weapon/auto_bazooka.cpp:144
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Automatikus tűzelésű rakétavető"
@@ -259,12 +259,22 @@ msgstr "Szőnyegbomba"
 msgid "Commit Suicide"
 msgstr "Öngyilkosság elkövetése"
 
-#: src/menu/network_connection_menu.cpp:67
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Vége!"
+
+#: src/menu/network_connection_menu.cpp:86
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Vége!"
+
+#: src/menu/network_connection_menu.cpp:66
 #, fuzzy
 msgid "Connect to game"
 msgstr "Vége!"
 
-#: src/menu/network_connection_menu.cpp:120
+#: src/menu/network_connection_menu.cpp:126
 #, fuzzy
 msgid "Connected to "
 msgstr "Vége!"
@@ -388,7 +398,7 @@ msgstr ""
 msgid "Holy Grenade"
 msgstr "Gránát"
 
-#: src/menu/network_connection_menu.cpp:74
+#: src/menu/network_connection_menu.cpp:73
 #, fuzzy
 msgid "Host a game"
 msgstr "Vége!"
@@ -590,6 +600,10 @@ msgstr "Kilépés"
 msgid "Quit Wormux"
 msgstr ""
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -602,15 +616,15 @@ msgstr ""
 msgid "Run game"
 msgstr "Játék futtatása"
 
-#: src/menu/network_connection_menu.cpp:60
+#: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:79
+#: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:142
+#: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
 msgstr ""
 
@@ -652,7 +666,7 @@ msgstr "Beállítások"
 msgid "Starting a new game"
 msgstr "Új játék kezdése"
 
-#: src/interface/interface.cpp:200
+#: src/interface/interface.cpp:201
 #, fuzzy
 msgid "Stock:"
 msgstr "Raktár"
@@ -689,7 +703,7 @@ msgstr ""
 msgid "The Polecat left the battlefield before exploding"
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:111
+#: src/weapon/auto_bazooka.cpp:128
 msgid "The automatic rocket has left the battlefield..."
 msgstr ""
 
@@ -710,7 +724,7 @@ msgstr ""
 msgid "The rocket has left the battlefield..."
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:125
+#: src/menu/network_connection_menu.cpp:131
 #, fuzzy
 msgid "Unable to connect"
 msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
@@ -730,6 +744,11 @@ msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
 msgid "Unable to initialize SDL library: %s"
 msgstr ""
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Nem sikerült megnyitni a sminkek könytárát (%s)!"
+
 #: src/network/network.cpp:234
 #, fuzzy
 msgid "Unable to listen for client!"
@@ -740,7 +759,7 @@ msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
 
-#: src/menu/network_connection_menu.cpp:145
+#: src/menu/network_connection_menu.cpp:153
 #, fuzzy
 msgid "Unable to start server"
 msgstr "Nem sikerült megnyitni a térképek könyvtárát (%s)!"
@@ -827,7 +846,7 @@ msgstr ""
 msgid "done"
 msgstr ""
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:162
 msgid "general: "
 msgstr ""
 
