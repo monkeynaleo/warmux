@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-11-09 15:50+0100\n"
+"PO-Revision-Date: 2006-11-12 17:47+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnaski <local@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 
 #: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
-msgstr ""
+msgstr "se pridružio igri"
 
 #: src/network/distant_cpu.cpp:79
 #, fuzzy
@@ -35,14 +35,14 @@ msgstr "! Mapa %s nije pronađena :-("
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
-msgstr[0] ""
+msgstr[0] "%i igrač konektovan"
 msgstr[1] ""
 
 #: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:398
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
-msgstr[0] ""
+msgstr[0] "%i igrač spreman"
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:700
@@ -254,19 +254,19 @@ msgstr "Ubij se"
 
 #: src/menu/internet_menu.cpp:62
 msgid "Connect !"
-msgstr ""
+msgstr "Konektuj se!"
 
 #: src/menu/network_connection_menu.cpp:86
 msgid "Connect to an internet game"
-msgstr ""
+msgstr "Konektuj se na internet igru"
 
 #: src/menu/network_connection_menu.cpp:66
 msgid "Connect to game"
-msgstr ""
+msgstr "Konektuj se na igru"
 
 #: src/menu/network_connection_menu.cpp:126
 msgid "Connected to "
-msgstr ""
+msgstr "Konektovan na"
 
 #: src/weapon/construct.cpp:43
 msgid "Construct"
@@ -274,7 +274,7 @@ msgstr "Izgradi"
 
 #: src/network/top_server.cpp:58
 msgid "Contacting main server..."
-msgstr ""
+msgstr "Kontatiram glavni server ..."
 
 #: src/menu/main_menu.cpp:113
 msgid "Credits"
@@ -309,8 +309,7 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:274
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -387,7 +386,7 @@ msgstr "Sveta granata"
 
 #: src/menu/network_connection_menu.cpp:73
 msgid "Host a game"
-msgstr ""
+msgstr "Hostaj igru"
 
 #: src/game/game_loop.cpp:736
 msgid "Hurry up, you are too slow !!"
@@ -426,15 +425,15 @@ msgstr "Inicijaliziranje timova"
 
 #: src/network/network.cpp:190
 msgid "Invalid port!"
-msgstr ""
+msgstr "Pogrešan port!"
 
 #: src/network/network.cpp:140
 msgid "Invalid server adress!"
-msgstr ""
+msgstr "Pogrešna adresa servera!"
 
 #: src/network/top_server.cpp:68
 msgid "Invalid top server adress!"
-msgstr ""
+msgstr "Pogrešna adresa glavnog servera"
 
 #: src/object/bonus_box.cpp:281
 msgid "Is it a gift?"
@@ -442,7 +441,7 @@ msgstr "Da li je to poklon ?"
 
 #: src/network/top_server.cpp:170
 msgid "It doesn't seem to be a valid Wormux server..."
-msgstr ""
+msgstr "Ne čini se kao ispravan Wormux server ..."
 
 #: src/weapon/jetpack.cpp:48
 msgid "Jetpack"
@@ -450,7 +449,7 @@ msgstr "Jetpack"
 
 #: src/menu/network_menu.cpp:71
 msgid "Join #wormux on irc.freenode.net to find"
-msgstr ""
+msgstr "Pridruži se #wormux na irc.freenode.net da nađeš"
 
 #: src/map/maps_list.cpp:185
 msgid "Load maps:"
@@ -488,19 +487,19 @@ msgstr "Mina"
 
 #: src/menu/results_menu.cpp:169
 msgid "Most sold-out"
-msgstr ""
+msgstr "Najprodaniji"
 
 #: src/menu/results_menu.cpp:159
 msgid "Most useful"
-msgstr ""
+msgstr "Najkorisniji"
 
 #: src/menu/results_menu.cpp:164
 msgid "Most useless"
-msgstr ""
+msgstr "Najbeskorsniji"
 
 #: src/menu/results_menu.cpp:154
 msgid "Most violent"
-msgstr ""
+msgstr "Najagresivniji"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -522,7 +521,7 @@ msgstr "Nijedan element  <%s> nije nađen u xml konfiguracionoj datoteci!"
 #: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
 #: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
 msgid "Nobody!"
-msgstr ""
+msgstr "Niko!"
 
 #: src/menu/game_menu.cpp:76
 msgid "Number of characters"
@@ -534,7 +533,7 @@ msgstr "Broj timova:"
 
 #: src/menu/network_menu.cpp:181
 msgid "Only the server can set the map!"
-msgstr ""
+msgstr "Samo server može postaviti mapu!"
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -578,7 +577,7 @@ msgstr "Izađi iz Wormux-a"
 
 #: src/menu/internet_menu.cpp:55
 msgid "Refresh"
-msgstr ""
+msgstr "Osvježi"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
@@ -594,15 +593,15 @@ msgstr "Pokreni igru"
 
 #: src/menu/network_connection_menu.cpp:59
 msgid "Server adress:"
-msgstr ""
+msgstr "Adresa servera:"
 
 #: src/menu/network_connection_menu.cpp:78
 msgid "Server available on Internet"
-msgstr ""
+msgstr "Serveri dostupni na internetu"
 
 #: src/menu/network_connection_menu.cpp:150
 msgid "Server started"
-msgstr ""
+msgstr "Server pokrenut"
 
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
@@ -618,7 +617,7 @@ msgstr "Snajper"
 
 #: src/menu/network_menu.cpp:74
 msgid "So you have to restart Wormux after each"
-msgstr ""
+msgstr "Morate resetovati Wormux poslije svake"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -695,7 +694,7 @@ msgstr "Raketa je napustila bojište..."
 
 #: src/menu/network_connection_menu.cpp:131
 msgid "Unable to connect"
-msgstr ""
+msgstr "Nije se u stanju se konektovati"
 
 #: src/network/network.cpp:151
 #, fuzzy
@@ -704,7 +703,7 @@ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
 #: src/network/top_server.cpp:78
 msgid "Unable to contact top server!"
-msgstr ""
+msgstr "Nije u mogućnosti konektovat se na glavni server"
 
 #: src/graphic/video.cpp:197
 #, c-format
@@ -713,11 +712,11 @@ msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
 
 #: src/menu/internet_menu.cpp:96
 msgid "Unable to join the game..."
-msgstr ""
+msgstr "Nije u mogućnosti da se pridruži igri ..."
 
 #: src/network/network.cpp:234
 msgid "Unable to listen for client!"
-msgstr ""
+msgstr "Nije u mogućnosti da sluša klijenta!"
 
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
@@ -726,7 +725,7 @@ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
 
 #: src/menu/network_connection_menu.cpp:153
 msgid "Unable to start server"
-msgstr ""
+msgstr "Nije u mogućnosti da starta server"
 
 #: src/main.cpp:118
 msgid "Unexpected exception caught..."
@@ -738,13 +737,13 @@ msgstr "Verzija"
 
 #: src/menu/network_menu.cpp:73
 msgid "WARNING! Disconnections are not yet handled."
-msgstr ""
+msgstr "UPOZORENJE! Diskonektovanje nije jos riješeno."
 
 #: src/menu/network_menu.cpp:285
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] ""
+msgstr[0] "Čekaj! %i igrač nije još spreman!"
 msgstr[1] ""
 
 #: src/game/game_loop.cpp:219
@@ -775,7 +774,7 @@ msgstr "Wormux verzija "
 #: src/include/action_handler.cpp:400
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
+msgstr "Verzije Wormux-a su drugačije: klijent=%s, server=%s."
 
 #: src/map/maps_list.cpp:71
 #, c-format
@@ -800,7 +799,7 @@ msgstr "Vaš hitac je promašio!"
 
 #: src/menu/network_menu.cpp:75
 msgid "disconnection!"
-msgstr ""
+msgstr "Diskonektovanje!"
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -812,4 +811,5 @@ msgstr "general:"
 
 #: src/menu/network_menu.cpp:72
 msgid "some opponents."
-msgstr ""
+msgstr "neki od oponenata."
+
