@@ -36,6 +36,7 @@ private:
   std::list<Uint32> var;
 protected:
   Action_t m_type;
+  uint m_timestamp;
 public:
   // Action without parameter
   Action (Action_t type);
@@ -59,6 +60,10 @@ public:
   int PopInt();
   double PopDouble();
   std::string PopString();
+
+  // Timestamp handling
+  void SetTimestamp(uint timestamp);
+  uint GetTimestamp();
 
   void WritePacket(char* & packet, int & size);
   Action_t GetType() const;

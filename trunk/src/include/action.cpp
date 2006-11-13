@@ -24,6 +24,7 @@
 #include <SDL_net.h>
 #include "action_handler.h"
 #include "../tool/debug.h"
+#include "../game/time.h"
 
 //-----------------------------------------------------------------------------
 // Action without parameter
@@ -31,26 +32,46 @@ Action::Action (Action_t type)
 {
   var.clear();
   m_type = type; 
+  m_timestamp = Time::GetInstance()->Read();
 }
 
 // Action with various parameters
 Action::Action (Action_t type, int value) : m_type(type)
-{  var.clear();  Push(value);  }
+{
+  var.clear();
+  Push(value);
+  m_timestamp = Time::GetInstance()->Read();
+}
 
 Action::Action (Action_t type, double value) : m_type(type)
-{  var.clear();  Push(value);  }
+{
+  var.clear();
+  Push(value);
+  m_timestamp = Time::GetInstance()->Read();
+}
 
 Action::Action (Action_t type, const std::string& value) : m_type(type)
-{  var.clear();  Push(value);  }
+{
+  var.clear();
+  Push(value);
+  m_timestamp = Time::GetInstance()->Read();
+}
 
 Action::Action (Action_t type, double value1, int value2) : m_type(type)
-{  var.clear();  Push(value1); Push(value2);  }
+{
+  var.clear();
+  Push(value1);
+  Push(value2);
+  m_timestamp = Time::GetInstance()->Read();
+}
 
 // Build an action from a network packet
 Action::Action (const char *is)
 {
   var.clear();
   m_type = (Action_t)SDLNet_Read32(is);
+  is += 4;
+  m_timestamp = (Action_t)SDLNet_Read32(is);
   is += 4;
   int m_lenght = SDLNet_Read32(is);
   is += 4;
@@ -72,10 +93,21 @@ Action_t Action::GetType() const
   return m_type; 
 }
 
+void Action::SetTimestamp(uint timestamp)
+{
+  m_timestamp = timestamp;
+}
+
+uint Action::GetTimestamp()
+{
+  return m_timestamp;
+}
+
 // Convert the action to a packet
 void Action::WritePacket(char* &packet, int & size)
 {
-  size = 4 //Size of the type;
+  size = 4  //Size of the type;
+        + 4 //Size of the timestamp
         + 4 //Size of the number of variable
         + int(var.size()) * 4;
 
@@ -83,6 +115,8 @@ void Action::WritePacket(char* &packet, int & size)
   char* os = packet;
 
   SDLNet_Write32(m_type, os);
+  os += 4;
+  SDLNet_Write32(m_timestamp, os);
   os += 4;
   Uint32 param_size = (Uint32)var.size();
   SDLNet_Write32(param_size, os);
