@@ -272,8 +272,6 @@ DATA_FILES=`echo $DATA_FILES`
 AC_SUBST([DATA_FILES])
 AC_SUBST([BUILD_ENV])
 
-AM_PO_SUBDIRS
-
 AC_CONFIG_FILES([Makefile
 		 data/Makefile
 		 src/Makefile
