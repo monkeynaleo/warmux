@@ -125,15 +125,10 @@ OptionMenu::OptionMenu() :
   ss2 << "Current ("<< app->video.window.GetWidth() << "x" << app->video.window.GetHeight() << ")";
   lbox_video_mode->AddItem(true, ss2.str(), ss.str());
 
-  if (app->video.window.GetWidth() != 800 || app->video.window.GetHeight() != 600)
-  {
-      lbox_video_mode->AddItem(false, "Minimum (800x600)", "800x600");
-  }
   for(mode=video_res.begin(); mode!=video_res.end(); ++mode) {
       if (app->video.window.GetWidth() == mode->GetX() && app->video.window.GetHeight() == mode->GetY())
           continue;
       ss.str("");
-      if (mode->GetX() < 800 || mode->GetY() < 600) continue;
       ss << mode->GetX() << "x" << mode->GetY() ;
       lbox_video_mode->AddItem(false, ss.str(), ss.str());
   }
