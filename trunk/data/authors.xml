@@ -262,6 +262,13 @@
 <section title="Contributors">
 
   <author>
+    <name>Hanna Ollila</name>
+    <email>hamaolli AT cc.jyu.fi</email>
+    <country>Finland</country>
+    <description>Fix old bug option menu (crash because of video mode)</description>
+  </author>
+
+  <author>
     <name>Kyle Sabo</name>
     <email>robo210 AT gmail.com</email>
     <country>United States</country>
