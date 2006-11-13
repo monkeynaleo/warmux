@@ -511,8 +511,10 @@ void ActionHandler::ExecActions()
     SDL_LockMutex(mutex);
     Action *action = queue.front();
     // If action is in the future, wait for next refresh
-    if(action->GetTimestamp() > Time::GetInstance()->Read())
+    if(action->GetTimestamp() > Time::GetInstance()->Read()) {
+      SDL_UnlockMutex(mutex);
       return;
+    }
     queue.pop_front();
     SDL_UnlockMutex(mutex);
     Exec (action);
