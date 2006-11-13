@@ -28,14 +28,13 @@
 class Time
 {
 private:
-  uint pause_start;
-  uint pause_offset;// Offset between get_time() and LitTemps()
+  uint current_time;
+  uint delta_t;
   bool is_game_paused;
   static Time * singleton;
 
 private:
   Time();
-   
 public:
   static Time * GetInstance();
 
@@ -46,6 +45,8 @@ public:
   uint Read() const;
   uint ReadSec() const;
   uint ReadMin() const;
+  void Refresh();
+  uint GetDelta() const;
 
   // Read the clock time
   uint ClockSec();  // ReadSec() % 60

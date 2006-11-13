@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh du temps qui passe. Le temps du jeu peut être mise en pause.
+ *  Handle the game time. The game can be paused.
  *****************************************************************************/
 
 #include "time.h"
@@ -27,6 +27,7 @@
 #include "../graphic/video.h"
 #include "../interface/game_msg.h"
 #include "../tool/math_tools.h"
+#include "../include/app.h"
 
 Time * Time::singleton = NULL;
 
@@ -42,17 +43,21 @@ bool Time::IsGamePaused() const {
 }
 
 Time::Time(){
-  pause_offset = 0;
   is_game_paused = false;
+  delta_t = 20;
 }
 
 void Time::Reset(){
-  pause_offset = SDL_GetTicks();
+  current_time = 0;
   is_game_paused = false;
 }
 
 uint Time::Read() const{
-  return SDL_GetTicks() - pause_offset;
+  return current_time;
+}
+
+void Time::Refresh(){
+  current_time += delta_t;
 }
 
 uint Time::ReadSec() const{
@@ -63,16 +68,18 @@ uint Time::ReadMin() const{
   return ReadSec() / 60;
 }
 
+uint Time::GetDelta() const{
+  return delta_t;
+}
+
 void Time::Pause(){
   if (is_game_paused)
     return;
-  pause_start = SDL_GetTicks();
   is_game_paused = true;
 }
 
 void Time::Continue(){
   assert (is_game_paused);
-  pause_offset += SDL_GetTicks() - pause_start;
   is_game_paused = false;
 }
 
@@ -86,7 +93,7 @@ uint Time::ClockMin(){
 
 std::string Time::GetString(){
   std::ostringstream ss;
-  
+
   ss << ClockMin() << ":" << std::setfill('0') << std::setw(2) << ClockSec();
   return ss.str();
 }

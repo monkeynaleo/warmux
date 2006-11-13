@@ -278,9 +278,6 @@ void GameLoop::Refresh()
           }
      }
 
-  // How many frame by seconds ?
-  fps.Refresh();
-
   if (!Time::GetInstance()->IsGamePaused())
   {
     // Keyboard and mouse refresh
@@ -413,39 +410,31 @@ void GameLoop::CallDraw()
 
 void GameLoop::Run()
 {
-#ifdef ENABLE_LIMIT_FPS
-  uint sleep_fps=0;
-  uint delay=0;
-#endif
+  int delay = 0;
+  uint time_of_next_frame = SDL_GetTicks();
 
   // loop until game is finished
   do
   {
-#ifdef ENABLE_LIMIT_FPS
-    unsigned int start = SDL_GetTicks();
-#endif
-
     Game::GetInstance()->SetEndOfGameStatus( false );
 
     // one loop
     StatStart("GameLoop:Refresh()");
     Refresh();
     StatStop("GameLoop:Refresh()");
-    StatStart("GameLoop:Draw()");
-    CallDraw ();
-    StatStop("GameLoop:Draw()");
 
     // try to adjust to max Frame by seconds
-#ifdef ENABLE_LIMIT_FPS
-    delay = SDL_GetTicks()-start;
-
-    if (delay < AppWormux::GetInstance()->video.GetSleepMaxFps())
-      sleep_fps = AppWormux::GetInstance()->video.GetSleepMaxFps() - delay;
-    else
-      sleep_fps = 0;
-    if(sleep_fps >= SDL_TIMESLICE)
-      SDL_Delay(sleep_fps);
-#endif
+    time_of_next_frame += Time::GetInstance()->GetDelta();
+    if (time_of_next_frame > SDL_GetTicks()) {
+      StatStart("GameLoop:Draw()");
+      CallDraw ();
+      // How many frame by seconds ?
+      fps.Refresh();
+      StatStop("GameLoop:Draw()");
+    }
+    delay = time_of_next_frame - SDL_GetTicks();
+    if (delay >= SDL_TIMESLICE)
+      SDL_Delay(delay);
   } while( !Game::GetInstance()->GetEndOfGameStatus() );
 }
 
@@ -453,6 +442,7 @@ void GameLoop::RefreshClock()
 {
   Time * global_time = Time::GetInstance();
   if (global_time->IsGamePaused()) return;
+  global_time->Refresh();
 
   if (1000 < global_time->Read() - pause_seconde)
     {

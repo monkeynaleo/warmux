@@ -26,6 +26,7 @@
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
 #include "../game/game.h"
+#include "../game/time.h"
 #include "../include/constant.h"
 #include "../network/network.h"
 #include "../map/map.h"
@@ -509,6 +510,9 @@ void ActionHandler::ExecActions()
   {
     SDL_LockMutex(mutex);
     Action *action = queue.front();
+    // If action is in the future, wait for next refresh
+    if(action->GetTimestamp() > Time::GetInstance()->Read())
+      return;
     queue.pop_front();
     SDL_UnlockMutex(mutex);
     Exec (action);
