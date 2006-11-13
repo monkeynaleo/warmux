@@ -66,7 +66,7 @@ bool CompareConfigs(const Point2i& a, const Point2i& b)
 }
 
 void Video::ComputeAvailableConfigs()
-{ 
+{
   // Add the current resolution
   available_configs.push_back(Point2i(AppWormux::GetInstance()->video.window.GetWidth(),
                                       AppWormux::GetInstance()->video.window.GetHeight()));
@@ -77,12 +77,12 @@ void Video::ComputeAvailableConfigs()
   // Get available fullscreen/hardware modes
   modes=SDL_ListModes(NULL, SDL_FULLSCREEN|SDL_HWSURFACE);
 
-  // Check is there are any modes available 
-  if(modes != (SDL_Rect **)0){
+  // Check is there are any modes available
+  if(modes != NULL){
     // We also had the current window resolution if it is not already in the list!
     for(int i=0;modes[i];++i) {
       // We accept only modes that are bigger than 800x600
-      if (modes[i]->w < 800 || modes[i]->h < 600) break; 
+      if (modes[i]->w < 800 || modes[i]->h < 600) break;
       available_configs.push_back(Point2i(modes[i]->w, modes[i]->h));
     }
   }
@@ -90,7 +90,7 @@ void Video::ComputeAvailableConfigs()
   // Sort the list
   available_configs.sort(CompareConfigs);
 
-  // If biggest resolution is big enough, we propose standard resolution such as 
+  // If biggest resolution is big enough, we propose standard resolution such as
   // 800x600, 1024x768, 1280x1024, 1600x1200
   Point2i a(800, 600);
   if ( CompareConfigs((*available_configs.begin()), a))
@@ -110,7 +110,7 @@ void Video::ComputeAvailableConfigs()
 
   // Remove double items
   std::list<Point2i>::iterator prev = available_configs.begin(),
-    it = available_configs.begin() , 
+    it = available_configs.begin() ,
     end = available_configs.end();
 
   for (++it; it != end ; ++it) {
@@ -129,10 +129,10 @@ std::list<Point2i>& Video::GetAvailableConfigs()
 bool Video::SetConfig(int width, int height, bool _fullscreen){
   // initialize the main window
   if( window.IsNull() ||
-     (width != window.GetWidth() || 
+     (width != window.GetWidth() ||
       height != window.GetHeight() ) ){
 
-    window.SetSurface( SDL_SetVideoMode(width, height, 32, 
+    window.SetSurface( SDL_SetVideoMode(width, height, 32,
                        SDL_HWSURFACE | SDL_HWACCEL | SDL_DOUBLEBUF ), false );
 
     if( window.IsNull() ) {
@@ -194,7 +194,7 @@ void Video::InitSDL(){
     return;
 
   if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
-    Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) ); 
+    Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) );
 
   SDL_EnableUNICODE(1);
   SDLReady = true;
