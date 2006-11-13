@@ -35,8 +35,6 @@
 #include "../character/move.h"
 #include "../include/action_handler.h"
 
-// Espace entre l'espace en l'image
-const uint ESPACE = 5;
 const double JETPACK_FORCE = 2000.0;
 
 const uint DELTA_FUEL_DOWN = 200 ;  // Delta time between 2 fuel unit consumption.
@@ -49,7 +47,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
   override_keys = true ;
-  use_unit_on_first_shoot = false;  
+  use_unit_on_first_shoot = false;
 
   m_x_force = 0.0;
   m_y_force = 0.0;
@@ -123,7 +121,7 @@ void JetPack::StartUse()
       m_last_fuel_down = Time::GetInstance()->Read();
       channel = jukebox.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
-      camera.ChangeObjSuivi (&ActiveCharacter(),true, true, true); 
+      camera.ChangeObjSuivi (&ActiveCharacter(),true, true, true);
 // 			     bool suit, bool recentre,
 // 			     bool force_recentrage=false);
     }
