@@ -88,7 +88,7 @@ OptionMenu::OptionMenu() :
 
   widgets.AddWidget(graphic_options);
 
-  /* Sound options */  
+  /* Sound options */
   Box * sound_options = new HBox( Rectanglei(SOUND_X, SOUND_Y, SOUND_W, SOUND_H));
   sound_options->AddWidget(new PictureWidget(Rectanglei(0,0,40,138), "menu/audio_label"));
 
@@ -114,19 +114,27 @@ OptionMenu::OptionMenu() :
 
   graphic_options->SetXY(center_x - graphic_options->GetSizeX()/2, graphic_options->GetPositionY());
   sound_options->SetXY(center_x - sound_options->GetSizeX()/2, sound_options->GetPositionY());
-  
+
   // Values initialization
 
   // Get available video resolution
   std::list<Point2i>& video_res = app->video.GetAvailableConfigs();
+  std::list<Point2i>::iterator mode;
+  std::ostringstream ss, ss2;
+  ss << app->video.window.GetWidth() << "x" << app->video.window.GetHeight();
+  ss2 << "Current ("<< app->video.window.GetWidth() << "x" << app->video.window.GetHeight() << ")";
+  lbox_video_mode->AddItem(true, ss2.str(), ss.str());
 
-  std::list<Point2i>::iterator it = video_res.begin(), end = video_res.end();
-  for (; it != end ; ++it) {
-    std::ostringstream ss;
-    ss << (*it).x << "x" << (*it).y ;
-    if ((*it).x == app->video.window.GetWidth() && (*it).y == app->video.window.GetHeight())
-      lbox_video_mode->AddItem(true, ss.str(), ss.str());
-    else
+  if (app->video.window.GetWidth() != 800 || app->video.window.GetHeight() != 600)
+  {
+      lbox_video_mode->AddItem(false, "Minimum (800x600)", "800x600");
+  }
+  for(mode=video_res.begin(); mode!=video_res.end(); ++mode) {
+      if (app->video.window.GetWidth() == mode->GetX() && app->video.window.GetHeight() == mode->GetY())
+          continue;
+      ss.str("");
+      if (mode->GetX() < 800 || mode->GetY() < 600) continue;
+      ss << mode->GetX() << "x" << mode->GetY() ;
       lbox_video_mode->AddItem(false, ss.str(), ss.str());
   }
 
