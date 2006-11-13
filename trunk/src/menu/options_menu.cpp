@@ -120,17 +120,21 @@ OptionMenu::OptionMenu() :
   // Get available video resolution
   std::list<Point2i>& video_res = app->video.GetAvailableConfigs();
   std::list<Point2i>::iterator mode;
-  std::ostringstream ss, ss2;
-  ss << app->video.window.GetWidth() << "x" << app->video.window.GetHeight();
-  ss2 << "Current ("<< app->video.window.GetWidth() << "x" << app->video.window.GetHeight() << ")";
-  lbox_video_mode->AddItem(true, ss2.str(), ss.str());
 
   for(mode=video_res.begin(); mode!=video_res.end(); ++mode) {
-      if (app->video.window.GetWidth() == mode->GetX() && app->video.window.GetHeight() == mode->GetY())
-          continue;
-      ss.str("");
+      std::ostringstream ss;
+      bool is_current;
+      std::string text;
       ss << mode->GetX() << "x" << mode->GetY() ;
-      lbox_video_mode->AddItem(false, ss.str(), ss.str());
+      text = ss.str();
+      if (app->video.window.GetWidth() == mode->GetX() && app->video.window.GetHeight() == mode->GetY())
+      {
+          ss << " " << _("(current)");
+          is_current = true;
+      } else {
+          is_current = false;
+      }
+      lbox_video_mode->AddItem(is_current, ss.str(), text);
   }
 
   // Generate sound mode list
