@@ -1,0 +1,12 @@
+CXX=g++
+CXXFLAGS:=-g -DDEBUG -Wall -Werror $(CXXFLAGS)
+
+OBJ=main.o server.o client.o config.o
+
+wormux_server: $(OBJ)
+	$(CXX) $(LDFLAGS) -o wormux_server *.o
+
+main.o: main.cpp server.h client.h debug.h config.h
+server.o: server.cpp server.h client.h debug.h
+client.o: client.cpp client.h debug.h
+config.o: config.cpp config.h

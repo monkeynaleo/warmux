@@ -18,23 +18,42 @@
 // map < socket_fd, client >
 std::list<Client*> clients;
 
-int main(int argc, void** argv)
+#ifdef STATIC
+void SetChroot()
 {
-/*	if(chroot("./") == -1)
+	if(chroot("./") == -1)
 		TELL_ERROR;
 	if(chdir("/") == -1)
 		TELL_ERROR;
-	if(setgid(500) == -1)
-		TELL_ERROR;
-	if(setuid(500) == -1)
-		TELL_ERROR;
 
-	char* path = getenv("PWD");
-	printf("Working folder: %s\n", path);
+	int uid, gid;
+	config.Get("chroot_uid", uid);
+	config.Get("chroot_gid", gid);
 
-	if (fopen("/stats","w") == NULL)
-		exit(0);
-*/
+	if(setgid(gid) == -1)
+		TELL_ERROR;
+	if(setuid(uid) == -1)
+		TELL_ERROR;
+}
+#endif
+
+int main(int argc, void** argv)
+{
+	bool chroot_opt;
+	config.Get("chroot", chroot_opt);
+#ifdef STATIC
+	if (chroot_opt)
+		SetChroot();
+#else
+	if (chroot_opt)
+		DPRINT("Wasn't statically linked... chroot option unavailable");
+#endif
+	if(getuid() == 0)
+	{
+		DPRINT("Don't start me as root user!!");
+		exit(EXIT_FAILURE);
+	}
+
 	int port = 0;
 	config.Get("port", port);
 

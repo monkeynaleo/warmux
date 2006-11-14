@@ -7,6 +7,9 @@ Config::Config()
 {
 	Load();
 	SetDefault("port", 9997);
+	SetDefault("chroot", true);
+	SetDefault("chroot_gid", 500);
+	SetDefault("chroot_uid", 500);
 	Display();
 }
 
