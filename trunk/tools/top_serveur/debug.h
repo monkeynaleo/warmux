@@ -6,21 +6,31 @@
 #include <unistd.h>
 #include <errno.h>
 
+#define	ALL		0
+#define TRAFFIC		1
+#define	MSG		2
+#define	CONN		3
+#define INFO		4
+
+#define LOG_LEVEL	INFO
+
 #ifdef DEBUG
-#define DPRINT(ARGS...) \
+#define DPRINT(LEVEL, ARGS...) \
 { \
-	printf("%10s,%3i : ",__FILE__,__LINE__); \
-	printf(ARGS); \
-	printf("\n"); \
+	if((LEVEL) >= LOG_LEVEL ) \
+	{ \
+		printf("%10s,%3i : ",__FILE__,__LINE__); \
+		printf(ARGS); \
+		printf("\n"); \
+	} \
 }
 #else
-#define DPRINT(ARGS...)
+#define DPRINT(LEVEL, ARGS...)
 #endif
 
 #define TELL_ERROR \
 { \
-	fprintf(stderr, "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
-	fprintf(stderr, "\n"); \
+	DPRINT(INFO , "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
 	exit(1); \
 }
 

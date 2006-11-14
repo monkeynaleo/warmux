@@ -46,11 +46,11 @@ int main(int argc, void** argv)
 		SetChroot();
 #else
 	if (chroot_opt)
-		DPRINT("Wasn't statically linked... chroot option unavailable");
+		DPRINT(INFO, "Wasn't statically linked... chroot option unavailable");
 #endif
 	if(getuid() == 0)
 	{
-		DPRINT("Don't start me as root user!!");
+		DPRINT(INFO, "Don't start me as root user!!");
 		exit(EXIT_FAILURE);
 	}
 
@@ -64,7 +64,7 @@ int main(int argc, void** argv)
 
 	while(1)
 	{
-		DPRINT("Waiting for incoming connections...");
+		DPRINT(CONN, "Waiting for incoming connections...");
 
 		acting_sock_set = listen_sock.GetSockSet();
 		// Lock the process until activity is detected
@@ -86,7 +86,7 @@ int main(int argc, void** argv)
 					listen_sock.CloseConnection( (*client)->GetFD() );
 					delete *client;
 					clients.erase(client);
-					DPRINT("%i connections up!", clients.size());
+					DPRINT(CONN, "%i connections up!", clients.size());
 					break;
 				}
 			}
@@ -95,7 +95,7 @@ int main(int argc, void** argv)
 		if( FD_ISSET(listen_sock.GetFD(), &acting_sock_set) )
 		{
 			clients.push_back( listen_sock.NewConnection() );
-			DPRINT("%i connections up!", clients.size());
+			DPRINT(CONN, "%i connections up!", clients.size());
 		}
 	}
 }

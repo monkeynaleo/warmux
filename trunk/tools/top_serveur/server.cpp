@@ -10,7 +10,7 @@
 
 Server::Server(int port)
 {
-	DPRINT("Starting server... listening on port %i",port);
+	DPRINT(INFO, "Starting server... listening on port %i",port);
 	// Init the listening socket
 	fd = socket(AF_INET, SOCK_STREAM, 0);
 	address.sin_family = AF_INET;
@@ -62,13 +62,13 @@ Client* Server::NewConnection()
 	unsigned int ip = client_address.sin_addr.s_addr;
 
 	Client* client = new Client(client_fd, ip);
-	DPRINT("New connection opened by %i", ip);
+	DPRINT(CONN, "New connection opened by %i", ip);
 	return client;
 }
 
 void Server::CloseConnection(int client_fd)
 {
 	FD_CLR(client_fd, &sock_set);
-	DPRINT("Connection closed.");
+	DPRINT(CONN, "Connection closed.");
 }
 
