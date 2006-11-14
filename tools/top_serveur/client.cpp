@@ -54,7 +54,7 @@ bool Client::ReceiveInt(int & nbr)
 
 	unsigned int u_nbr = ntohl(packet);
 	nbr = *((int*)&u_nbr);
-	DPRINT("Received int: %i", nbr);
+	DPRINT(TRAFFIC, "Received int: %i", nbr);
 	received -= 4;
 	return true;
 }
@@ -102,7 +102,7 @@ bool Client::ReceiveStr(std::string & full_str)
 		return false;
 
 	received -= str_received;
-	DPRINT("Received string: %s", str);
+	DPRINT(TRAFFIC, "Received string: %s", str);
 
 	if(strlen(str) == str_size)
 	{
@@ -122,7 +122,7 @@ void Client::SendInt(const int &nbr)
 
 	if( write(fd, &packet, sizeof(packet)) == -1 )
 		TELL_ERROR;
-	DPRINT("Sent int: %i", nbr);
+	DPRINT(TRAFFIC, "Sent int: %i", nbr);
 }
 
 void Client::SendStr(const std::string &full_str)
@@ -132,7 +132,7 @@ void Client::SendStr(const std::string &full_str)
 	if( write(fd, full_str.c_str(), full_str.size()) == -1 )
 		TELL_ERROR;
 
-	DPRINT("Sent string: %s", full_str.c_str());
+	DPRINT(TRAFFIC, "Sent string: %s", full_str.c_str());
 }
 
 
@@ -172,7 +172,7 @@ bool Client::Receive()
 	{
 		if(full_str == "0.8beta1")
 		{
-			DPRINT("Version checked successfully");
+			DPRINT(MSG, "Version checked successfully");
 			msg_id = TS_NO_MSG;
 			handshake_done = true;
 			SendSignature();		
@@ -186,7 +186,7 @@ bool Client::Receive()
 	switch(msg_id)
 	{
 	case TS_MSG_HOSTING:
-		DPRINT("This is a server");
+		DPRINT(MSG, "This is a server");
 		is_hosting = true;
 		nb_server++;
 		// TODO: try opening a connection to see if it's 
@@ -198,7 +198,7 @@ bool Client::Receive()
 		SendList();
 		break;
 	default:
-		DPRINT("Wrong message");
+		DPRINT(MSG, "Wrong message");
 		return false;
 	}
 
@@ -209,13 +209,13 @@ bool Client::Receive()
 
 void Client::SendSignature()
 {
-	DPRINT("Sending signature");
+	DPRINT(MSG, "Sending signature");
 	SendStr("MassMurder!");
 }
 
 void Client::SendList()
 {
-	DPRINT("Sending list..");
+	DPRINT(MSG, "Sending list..");
 	SendInt(nb_server);
 	for(std::list<Client*>::iterator client = clients.begin();
 		client != clients.end();
