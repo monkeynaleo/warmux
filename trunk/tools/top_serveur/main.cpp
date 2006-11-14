@@ -12,6 +12,7 @@
 
 #include "server.h"
 #include "client.h"
+#include "config.h"
 #include "debug.h"
 
 // map < socket_fd, client >
@@ -19,7 +20,25 @@ std::list<Client*> clients;
 
 int main(int argc, void** argv)
 {
-	Server listen_sock(9997);
+/*	if(chroot("./") == -1)
+		TELL_ERROR;
+	if(chdir("/") == -1)
+		TELL_ERROR;
+	if(setgid(500) == -1)
+		TELL_ERROR;
+	if(setuid(500) == -1)
+		TELL_ERROR;
+
+	char* path = getenv("PWD");
+	printf("Working folder: %s\n", path);
+
+	if (fopen("/stats","w") == NULL)
+		exit(0);
+*/
+	int port = 0;
+	config.Get("port", port);
+
+	Server listen_sock(port);
 
 	// Set of socket where an activity have been detected
 	fd_set acting_sock_set;
