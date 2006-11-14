@@ -33,7 +33,7 @@ Server::Server(int port)
 
 Server::~Server()
 {
-
+	close(fd);
 }
 
 int & Server::GetFD()
