@@ -81,6 +81,7 @@ Config::Config()
   display_name_character = true;
   display_wind_particles = true;
   default_mouse_cursor = false;
+  scroll_on_border = false;
   transparency = ALPHA;
 
   // video
@@ -174,7 +175,8 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);
     LitDocXml::LitBool (elem, "display_energy_character", display_energy_character);
     LitDocXml::LitBool (elem, "display_name_character", display_name_character);
-    LitDocXml::LitBool (elem, "default_mouse_cursor", default_mouse_cursor);
+    LitDocXml::LitBool (elem, "default_mouse_cursor", default_mouse_cursor); 
+    LitDocXml::LitBool (elem, "scroll_on_border", scroll_on_border);
     LitDocXml::LitInt (elem, "width", tmp.video.width);
     LitDocXml::LitInt (elem, "height", tmp.video.height);
     LitDocXml::LitBool (elem, "full_screen", tmp.video.fullscreen);
@@ -315,6 +317,7 @@ bool Config::SauveXml()
   doc.EcritBalise (noeud_video, "display_energy_character", ulong2str(display_energy_character));
   doc.EcritBalise (noeud_video, "display_name_character", ulong2str(display_name_character));
   doc.EcritBalise (noeud_video, "default_mouse_cursor", ulong2str(default_mouse_cursor));
+  doc.EcritBalise (noeud_video, "scroll_on_border", ulong2str(scroll_on_border));
   doc.EcritBalise (noeud_video, "width", ulong2str(app->video.window.GetWidth()));
   doc.EcritBalise (noeud_video, "height", ulong2str(app->video.window.GetHeight()));
   doc.EcritBalise (noeud_video, "full_screen",
@@ -394,6 +397,11 @@ bool Config::GetDefaultMouseCursor() const
   return default_mouse_cursor;
 }
 
+bool Config::GetScrollOnBorder() const
+{
+  return scroll_on_border;
+}
+
 std::string Config::GetTtfFilename() const
 {
   return ttf_filename;
@@ -417,6 +425,11 @@ void Config::SetDisplayWindParticles(bool dwp)
 void Config::SetDefaultMouseCursor(bool dmc)
 {
   default_mouse_cursor = dmc;
+}
+
+void Config::SetScrollOnBorder(bool sob)
+{
+  scroll_on_border = sob;
 }
 
 void Config::SetExterieurMondeVide(bool emv)
