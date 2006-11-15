@@ -62,6 +62,9 @@ public:
   bool GetDefaultMouseCursor() const;
   void SetDefaultMouseCursor(bool dmc);
 
+  bool GetScrollOnBorder() const;
+  void SetScrollOnBorder(bool sob);
+
   int GetTransparency() const;
 
   std::string GetTtfFilename() const;
@@ -108,6 +111,7 @@ protected:
   bool display_name_character;
   bool display_wind_particles;
   bool default_mouse_cursor;
+  bool scroll_on_border;
   std::string ttf_filename;
 
   int transparency;
