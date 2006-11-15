@@ -215,6 +215,7 @@ void Mouse::TestCamera(){
   //Move camera with mouse holding Ctrl key down or with middle button of mouse
   const bool demande_scroll = SDL_GetModState() & KMOD_CTRL |
                               SDL_GetMouseState(&x, &y) & SDL_BUTTON(SDL_BUTTON_MIDDLE);
+
   // Show cursor and information interface when moving mouse
   if(lastPos != mousePos) {
     Show();
@@ -229,14 +230,17 @@ void Mouse::TestCamera(){
       camera.autorecadre = false;
     }else{
       scroll_actif = true;
+      SetPointer(POINTER_MOVE);
     }
     savedPos = mousePos;
     return;
   }else{
     scroll_actif = false;
+    SetPointer(POINTER_SELECT);
   }
 
-  if(!Interface::GetInstance()->weapons_menu.IsDisplayed())
+  if(!Interface::GetInstance()->weapons_menu.IsDisplayed() && 
+     Config::GetInstance()->GetScrollOnBorder())
     ScrollCamera();
 }
 
