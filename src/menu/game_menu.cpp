@@ -429,9 +429,12 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
 
 void GameMenu::PrevTeam(int i)
 {
+  if (teams_selections[i]->GetTeam() == NULL) return;
+
   bool to_continue;
   Team* tmp;
-  int previous_index = -1, index;
+  int previous_index = -1, index;  
+
   teams_list.FindById(teams_selections[i]->GetTeam()->GetId(), previous_index);
 
   index = previous_index-1;
@@ -464,9 +467,12 @@ void GameMenu::PrevTeam(int i)
 
 void GameMenu::NextTeam(int i)
 {
+  if (teams_selections[i]->GetTeam() == NULL) return;
+
   bool to_continue;
   Team* tmp;
   int previous_index = -1, index;
+
   teams_list.FindById(teams_selections[i]->GetTeam()->GetId(), previous_index);
 
   index = previous_index+1;
