@@ -54,11 +54,13 @@ TeamEnergy::TeamEnergy(Team * _team)
 
   team = _team;
   icon = NULL;
+  t_team_energy = new Text("None", black_color, Font::GetInstance(Font::FONT_SMALL), false);
 }
 
 TeamEnergy::~TeamEnergy()
 {
   if(icon) delete icon;
+  if(t_team_energy) delete t_team_energy;
 }
 
 void TeamEnergy::Config(uint _current_energy,

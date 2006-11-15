@@ -113,15 +113,15 @@ Weapon::Weapon(Weapon_type type,
       m_image->cache.EnableLastFrameCache();
   }
 
-  icon = resource_manager.LoadImage(weapons_res_profile,m_id+"_ico");
+  icon = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_ico"));
 
   mouse_character_selection = true;
 }
 
 Weapon::~Weapon()
 {
-  if (extra_params)
-    delete extra_params;
+  if(extra_params) delete extra_params;
+  if(icon) delete icon;
 }
 
 void Weapon::p_Select ()
@@ -527,6 +527,11 @@ void Weapon::DrawUnit(int unit){
 		 Point2i( ActiveCharacter().GetCenterX(), ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
 		 - camera.GetPosition(),
 		 ss.str());
+}
+
+Sprite & Weapon::GetIcon() const
+{
+  return *icon;
 }
 
 bool Weapon::LoadXml(xmlpp::Element * weapon)

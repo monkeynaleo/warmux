@@ -61,14 +61,16 @@ public:
 
    bool display;
    int start_hide_display;
+   int start_show_display;
    bool display_timer;
    EnergyBar energy_bar;
    BarreProg wind_bar;
 
    Surface game_menu;
    Surface clock_background;
+   Surface small_background_interface;
    Surface clock;
-   Surface wind;
+   Surface wind_icon;
    Surface wind_indicator;
    Point2i bottom_bar_pos;
 
@@ -88,8 +90,11 @@ public:
    void DrawCharacterInfo();
    void DrawTeamEnergy();
    void DrawWeaponInfo();
+   void DrawWindIndicator(const Point2i &wind_bar_pos);
    void DrawWindInfo();
-   void DrawClock();
+   void DrawClock(const Point2i &time_pos);
+   void DrawTimeInfo();
+   void DrawSmallInterface();
 
    bool IsDisplayed () const { return display; };
    void EnableDisplay(bool _display);

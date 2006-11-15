@@ -112,7 +112,7 @@ protected:
 
 public:
   // weapon's icon
-  Surface icon;
+  Sprite * icon;
 
   // if max_strength != 0, display the strength bar
   double max_strength;
@@ -154,6 +154,7 @@ public:
 
   void DrawUnit(int unit);
 
+  Sprite & GetIcon() const;
   // Manage the numbers of ammunitions
   bool EnoughAmmo() const;
   void UseAmmo();

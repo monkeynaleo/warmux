@@ -228,7 +228,7 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
   item.position.Clear();
   item.weapon = new_item;
 
-  item.weapon_icon = new Sprite( new_item->icon);
+  item.weapon_icon = new Sprite(new_item->GetIcon());
   item.weapon_icon->cache.EnableLastFrameCache();
 
   boutons.push_back (item);
