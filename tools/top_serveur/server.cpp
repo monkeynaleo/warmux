@@ -53,7 +53,11 @@ Client* Server::NewConnection()
 	socklen_t addr_size = sizeof(client_address);
 
 	if( (client_fd = accept(fd, (struct sockaddr*)&client_address, &addr_size)) == -1 )
-		TELL_ERROR;
+	{
+		PRINT_ERROR;
+		DPRINT(INFO, "Client rejected..");
+		return NULL;
+	}
 
 	FD_SET(client_fd, &sock_set);
 

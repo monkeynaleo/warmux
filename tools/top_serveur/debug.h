@@ -30,8 +30,13 @@
 
 #define TELL_ERROR \
 { \
-	DPRINT(INFO , "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
+	PRINT_ERROR; \
 	exit(1); \
+}
+
+#define PRINT_ERROR \
+{ \
+	DPRINT(INFO , "%10s,%3i : ERROR! %s",__FILE__,__LINE__, strerror(errno)); \
 }
 
 
