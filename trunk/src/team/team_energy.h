@@ -56,6 +56,7 @@ class TeamEnergy
 
     Team *team;
     Sprite *icon;
+    Text * t_team_energy;
 
     int dx;
     int dy;

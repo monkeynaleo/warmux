@@ -113,6 +113,7 @@
 
 <section name="interface">
   <surface name="background_interface" file="interface/background_interface.png" />
+  <surface name="small_background_interface" file="interface/small_background_interface.png" />
   <surface name="weapon_menu" file="interface/weapons_menu.png" />
   <surface name="button1_icon" file="interface/button1.png"/>
   <surface name="button2_icon" file="interface/button2.png"/>
