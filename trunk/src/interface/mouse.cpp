@@ -286,6 +286,8 @@ void Mouse::TraiteClic (const SDL_Event *event){
 
 void Mouse::SetPointer(pointer_t pointer)
 {
+  if (Config::GetInstance()->GetDefaultMouseCursor()) return;
+
   if (current_pointer == pointer) return;
 
   current_pointer = pointer;

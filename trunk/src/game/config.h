@@ -59,6 +59,9 @@ public:
   bool GetDisplayWindParticles() const;
   void SetDisplayWindParticles(bool dwp);
 
+  bool GetDefaultMouseCursor() const;
+  void SetDefaultMouseCursor(bool dmc);
+
   int GetTransparency() const;
 
   std::string GetTtfFilename() const;
@@ -104,6 +107,7 @@ protected:
   bool display_energy_character;
   bool display_name_character;
   bool display_wind_particles;
+  bool default_mouse_cursor;
   std::string ttf_filename;
 
   int transparency;
