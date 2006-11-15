@@ -43,17 +43,14 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 bool Teleportation::p_Shoot ()
 {
   if(!target_chosen)
-	return false;
+    return false;
 
   // Check we are not going outside of the world !
   if( ActiveCharacter().IsOutsideWorldXY(dst) )
-	 return false;
+    return false;
 
   Rectanglei rect = ActiveCharacter().GetTestRect();
   rect.SetPosition(dst); 
-
-  if(!world.ParanoiacRectIsInVacuum(rect))
-	 return false; 
 
   GameLoop::GetInstance()->interaction_enabled = false;
 
@@ -87,16 +84,17 @@ void Teleportation::Refresh()
 
 void Teleportation::Draw()
 {
-  if (m_is_active) {
-  } else {
+  if (!m_is_active)
     Weapon::Draw();
-  }
 }
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)
 {
-  target_chosen = true;
   dst = mouse_pos - ActiveCharacter().GetSize()/2;
+  if(!world.ParanoiacRectIsInVacuum(Rectanglei(dst,ActiveCharacter().GetSize())) ||
+     !ActiveCharacter().IsInVacuumXY(dst))
+    return;
+  target_chosen = true;
   Shoot();
 }
 
