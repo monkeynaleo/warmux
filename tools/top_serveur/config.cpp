@@ -15,12 +15,12 @@ Config::Config()
 
 void Config::Load()
 {
-	DPRINT("Loading config file");
+	DPRINT(INFO, "Loading config file");
 	FILE* cfg = fopen("wormux_server.conf", "r");
 
 	if(cfg == NULL)
 	{
-		DPRINT("Unable to open config file");
+		DPRINT(INFO, "Unable to open config file");
 		return;
 	}
 
@@ -41,7 +41,7 @@ void Config::Load()
 
 		if(*ptr != '=')
 		{
-			DPRINT("Wrong format on line %i",line_nbr);
+			DPRINT(INFO, "Wrong format on line %i",line_nbr);
 			continue;
 		}
 		*ptr = '\0';
@@ -75,31 +75,31 @@ void Config::Load()
 	if (line)
 		free(line); 
 
-	DPRINT("Config loaded");
+	DPRINT(INFO, "Config loaded");
 }
 
 void Config::Display()
 {
-	DPRINT("Current config:");
+	DPRINT(INFO, "Current config:");
 	for(std::map<std::string, bool>::iterator cfg = bool_value.begin();
 		cfg != bool_value.end();
 		++cfg)
 	{
-		DPRINT("(bool) %s = %s", cfg->first.c_str(), cfg->second?"true":"false");
+		DPRINT(INFO, "(bool) %s = %s", cfg->first.c_str(), cfg->second?"true":"false");
 	}
 
 	for(std::map<std::string, int>::iterator cfg = int_value.begin();
 		cfg != int_value.end();
 		++cfg)
 	{
-		DPRINT("(int) %s = %i", cfg->first.c_str(), cfg->second);
+		DPRINT(INFO, "(int) %s = %i", cfg->first.c_str(), cfg->second);
 	}
 
 	for(std::map<std::string, std::string>::iterator cfg = str_value.begin();
 		cfg != str_value.end();
 		++cfg)
 	{
-		DPRINT("(str) %s = %s", cfg->first.c_str(), cfg->second.c_str());
+		DPRINT(INFO, "(str) %s = %s", cfg->first.c_str(), cfg->second.c_str());
 	}
 }
 
@@ -107,7 +107,7 @@ bool Config::Get(const std::string & name, bool & value)
 {
 	if( bool_value.find(name) == bool_value.end() )
 	{
-		DPRINT("Configuration option not found: %s", name.c_str());
+		DPRINT(INFO, "Configuration option not found: %s", name.c_str());
 		return false;
 	}
 
@@ -119,7 +119,7 @@ bool Config::Get(const std::string & name, int & value)
 {
 	if( int_value.find(name) == int_value.end() )
 	{
-		DPRINT("Unknown config option: %s", name.c_str());
+		DPRINT(INFO, "Unknown config option: %s", name.c_str());
 		return false;
 	}
 
@@ -131,7 +131,7 @@ bool Config::Get(const std::string & name, std::string & value)
 {
 	if( str_value.find(name) == str_value.end() )
 	{
-		DPRINT("Unknown config option: %s", name.c_str());
+		DPRINT(INFO, "Unknown config option: %s", name.c_str());
 		return false;
 	}
 
@@ -144,7 +144,7 @@ void Config::SetDefault(const std::string & name, const bool & value)
 	bool val;
 	if( ! Get(name, val) )
 	{
-		DPRINT("Setting to default value : %s", name.c_str());
+		DPRINT(INFO, "Setting to default value : %s", name.c_str());
 		bool_value[ name ] = value;
 	}
 }
@@ -154,7 +154,7 @@ void Config::SetDefault(const std::string & name, const int & value)
 	int val;
 	if( ! Get(name, val) )
 	{
-		DPRINT("Setting to default value : %s", name.c_str());
+		DPRINT(INFO, "Setting to default value : %s", name.c_str());
 		int_value[ name ] = value;
 	}
 }
@@ -164,7 +164,7 @@ void Config::SetDefault(const std::string & name, const std::string & value)
 	bool val;
 	if( ! Get(name, val) )
 	{
-		DPRINT("Setting to default value : %s", name.c_str());
+		DPRINT(INFO, "Setting to default value : %s", name.c_str());
 		str_value[ name ] = value;
 	}
 }
