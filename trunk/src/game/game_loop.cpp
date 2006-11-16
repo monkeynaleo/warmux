@@ -433,7 +433,7 @@ void GameLoop::Run()
       StatStop("GameLoop:Draw()");
     }
     delay = time_of_next_frame - SDL_GetTicks();
-    if (delay >= SDL_TIMESLICE)
+    if (delay >= 0)
       SDL_Delay(delay);
   } while( !Game::GetInstance()->GetEndOfGameStatus() );
 }

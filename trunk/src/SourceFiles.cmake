@@ -78,6 +78,7 @@ menu/options_menu.cpp
 menu/results_menu.cpp
 network/chat.cpp
 network/distant_cpu.cpp
+network/download.cpp
 network/network.cpp
 network/randomsync.cpp
 network/top_server.cpp

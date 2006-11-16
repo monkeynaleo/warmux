@@ -194,7 +194,7 @@ fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
 AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
 
-dnl === Check for SDL image, mixer, etc. and libxml++ =======================
+dnl === Check for SDL image, mixer, etc., libxml++ and libcurl ==============
 
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
 AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
@@ -211,6 +211,14 @@ else
 	check_libxmlpp="no"
 fi
 
+AC_MSG_CHECKING(for libcurl)
+
+if $PACKAGE_CONFIG libcurl --libs > /dev/null 2>&1; then
+	AC_MSG_RESULT(yes)
+else
+	AC_MSG_RESULT(no)
+	check_libcurl="no"
+fi
 
 dnl === Display error if SDL image, mixer, etc. is missing ==================
 
@@ -241,16 +249,23 @@ if test \
 	if test x${check_libxmlpp} = xno; then
 		AC_MSG_RESULT([ERROR: libxml++ version 2.6 not found!])
 	fi
+	if test x${check_libcurl} = xno; then
+		AC_MSG_RESULT([ERROR: libcurl not found!])
+	fi
 	exit 1
 fi
 
-dnl === Add libxml++ flags =================================================
+dnl === Add libxml++ and libcurl flags =================================================
 
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
-CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS"
-CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS"
-LIBS="$LIBS $LIBXMLPP_LIBS"
+
+LIBCURL_CFLAGS=`$PACKAGE_CONFIG libcurl --cflags`
+LIBCURL_LIBS=`$PACKAGE_CONFIG libcurl --libs`
+
+CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGGS"
+CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGS"
+LIBS="$LIBS $LIBXMLPP_LIBS $LIBCURL_LIBS"
 
 dnl ========================================================================
 dnl == Check for header files                                              =

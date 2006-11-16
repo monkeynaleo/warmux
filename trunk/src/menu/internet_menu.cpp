@@ -111,7 +111,7 @@ void InternetMenu::RefreshList()
     connect_lst->RemoveSelected();
   }
 
-  std::list<std::string> lst = top_server.GetServerList();
+  std::list<std::string> lst = top_server.GetHostList();
 
   for(std::list<std::string>::iterator addr = lst.begin();
       addr != lst.end();

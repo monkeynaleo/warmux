@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #include <SDL_net.h>
+#include "download.h"
 #include "top_server.h"
 #include "top_server_msg.h"
 #include "network.h"
@@ -29,19 +30,22 @@
 #include "include/constant.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
-
+#include "tool/random.h"
 
 TopServer top_server;
-
 
 TopServer::TopServer()
 {
   hidden_server = false;
   connected = false;
+  server_lst.clear();
+  first_server = server_lst.end();
+  current_server = server_lst.end();
 }
 
 TopServer::~TopServer()
 {
+  server_lst.clear();
   if(connected)
     Disconnect();
 }
@@ -49,21 +53,47 @@ TopServer::~TopServer()
 /*************  Connection  /  Disconnection  ******************/
 bool TopServer::Connect()
 {
+  MSG_DEBUG("top_server", "Connecting..");
   assert(!connected);
 
   if( hidden_server )
     return true;
 
+  if( !GetServerList() )
+    return false;
+
+  std::string addr;
+  int port;
+
+  // Cycle through the list of server
+  // Until we find one running
+  while( GetServerAddress( addr, port) )
+  {
+    if( ConnectTo( addr, port) )
+      return true;
+  }
+
+  Question question;
+  question.Set(_("Unable to contact a top server!"),1,0);
+  question.Ask();
+
+  return false;
+}
+
+bool TopServer::ConnectTo(const std::string & address, const int & port)
+{
+  MSG_DEBUG("top_server", "Connecting to %s %i", address.c_str(), port);
   Question question;
   question.Set(_("Contacting main server..."),1,0);
   question.Draw();
   AppWormux::GetInstance()->video.Flip();
 
-  network.Init();
+  network.Init(); // To get SDL_net initialized
 
   MSG_DEBUG("top_server", "Opening connection");
 
-  if( SDLNet_ResolveHost(&ip, "defert.dyndns.org" , 9997) == -1 )
+//  if( SDLNet_ResolveHost(&ip, "localhost" , port) == -1 )
+  if( SDLNet_ResolveHost(&ip, address.c_str() , port) == -1 )
   {
     question.Set(_("Invalid top server adress!"),1,0);
     question.Ask();
@@ -75,8 +105,6 @@ bool TopServer::Connect()
 
   if(!socket)
   {
-    question.Set(_("Unable to contact top server!"),1,0);
-    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return false;
   }
@@ -85,7 +113,6 @@ bool TopServer::Connect()
 
   return HandShake();
 }
-
 
 void TopServer::Disconnect()
 {
@@ -99,9 +126,105 @@ void TopServer::Disconnect()
     return;
 
   MSG_DEBUG("top_server", "Closing connection");
+  first_server = server_lst.end();
+  current_server = server_lst.end();
 
   SDLNet_TCP_Close(socket);
   connected = false;
+}
+
+bool TopServer::GetServerList()
+{
+  MSG_DEBUG("top_server", "Retrieving server list");
+  // If we already have it, no need to redownload it
+  if(server_lst.size() != 0)
+    return true;
+
+  // Download the list of user
+  const std::string server_list_url = "http://www.wormux.org/server_list";
+  const std::string server_file = Config::GetInstance()->GetPersonalDir() + "server_list";
+
+  if( !downloader.Get(server_list_url.c_str(), server_file.c_str()) )
+    return false;
+
+  // Parse the file
+  FILE* lst = fopen(server_file.c_str(), "r");
+  if( lst == NULL )
+    return false;
+
+  char * line = NULL;
+  size_t len = 0;
+  ssize_t read;
+  while ((read = getline(&line, &len, lst)) != -1)
+  {
+    // Parse the line
+    char* str = line;
+
+    if(*str == '#' || *str == '\n' || *str == '\0')
+      continue;
+
+    // find the port delimiter ':'
+    int str_size = 0;
+    while( *str != ':' && *str != '\n' && *str != '\0' )
+    {
+      str_size++;
+      str++;
+    }
+
+    if( *str != ':' )
+      continue;
+
+    *str = '\0';
+
+    str++;
+    int port = 0;
+    sscanf(str, "%i", &port);
+
+    server_lst[ std::string(line) ] = port;
+  }
+  if (line)
+    free(line);
+
+  fclose(lst);
+
+  first_server = server_lst.end();
+  current_server = server_lst.end();
+  MSG_DEBUG("top_server", "Server list retrieved. %i servers are running", server_lst.size());
+
+  return (server_lst.size() != 0);
+}
+
+bool TopServer::GetServerAddress( std::string & address, int & port)
+{
+  MSG_DEBUG("top_server", "Trying a new server");
+  // Cycle through the server list to find the first one
+  // accepting connection
+  if( first_server == server_lst.end() )
+  {
+    // First try :
+    // Randomly select a server in the list
+    int nbr = randomObj.GetLong( 0, server_lst.size()-1 );
+    first_server = server_lst.begin();
+    while(nbr--)
+      ++first_server;
+
+    assert(first_server != server_lst.end());
+
+    current_server = first_server;
+
+    address = current_server->first;
+    port = current_server->second;
+    return true;
+  }
+
+  ++current_server;
+  if( current_server == server_lst.end() )
+    current_server = server_lst.begin();
+
+  address = current_server->first;
+  port = current_server->second;
+
+  return (current_server != first_server);
 }
 
 /*************  Basic transmissions  ******************/
@@ -184,7 +307,7 @@ void TopServer::SendServerStatus()
   Send(TS_MSG_HOSTING);
 }
 
-std::list<std::string> TopServer::GetServerList()
+std::list<std::string> TopServer::GetHostList()
 {
   Send(TS_MSG_GET_LIST);
   int lst_size = ReceiveInt();
