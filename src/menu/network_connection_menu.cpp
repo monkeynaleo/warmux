@@ -32,7 +32,7 @@
 #include "../graphic/font.h"
 #include "../map/maps_list.h"
 #include "../network/network.h"
-#include "../network/top_server.h"
+#include "../network/index_server.h"
 #include "../include/app.h"
 #include "../include/action_handler.h"
 #include "../team/teams_list.h"
@@ -134,15 +134,15 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == start_server)
   {
     if( !internet_server->GetValue() )
-      top_server.SetHiddenServer();
+      index_server.SetHiddenServer();
 
-    if( !top_server.Connect() )
+    if( !index_server.Connect() )
       return;
 
     network.Init();
     network.ServerStart(WORMUX_NETWORK_PORT);
 
-    top_server.SendServerStatus();
+    index_server.SendServerStatus();
 
     if(network.IsConnected())
     {
@@ -155,13 +155,13 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
 
   if (w == internet_client)
   {
-    if( !top_server.Connect() )
+    if( !index_server.Connect() )
       return;
 
     InternetMenu im;
     im.Run();
 
-    top_server.Disconnect();
+    index_server.Disconnect();
   }
 
   if (network.IsConnected()) {
@@ -170,7 +170,7 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
     network.network_menu = &nm;
     nm.Run();
     network.network_menu = NULL;
-    top_server.Disconnect();
+    index_server.Disconnect();
 
     // for the moment, it's just for test...
     close_menu = true;

@@ -27,7 +27,7 @@
 #include "include/app.h"
 #include "gui/button_text.h"
 #include "network/network.h"
-#include "network/top_server.h"
+#include "network/index_server.h"
 #include "tool/i18n.h"
 
 InternetMenu::InternetMenu() :
@@ -111,7 +111,7 @@ void InternetMenu::RefreshList()
     connect_lst->RemoveSelected();
   }
 
-  std::list<std::string> lst = top_server.GetHostList();
+  std::list<std::string> lst = index_server.GetHostList();
 
   for(std::list<std::string>::iterator addr = lst.begin();
       addr != lst.end();

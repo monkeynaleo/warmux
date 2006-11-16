@@ -16,19 +16,19 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Notify a top server of an opened wormux server
- * Obtain information about running games from a top server
+ * Notify an index server of an opened wormux server
+ * Obtain information about running games from an index server
  *****************************************************************************/
  
-#ifndef TOP_SERVER_H
-#define TOP_SERVER_H
+#ifndef INDEX_SERVER_H
+#define INDEX_SERVER_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <map>
 #include <list>
 #include <string>
 
-class TopServer
+class IndexServer
 {
   // Connection to the server
   TCPsocket socket;
@@ -63,8 +63,8 @@ class TopServer
   // Perform a handshake with the server
   bool HandShake();
 public:
-  TopServer();
-  ~TopServer();
+  IndexServer();
+  ~IndexServer();
 
   // Connect to a server
   bool Connect();
@@ -78,6 +78,6 @@ public:
   std::list<std::string> GetHostList();
 };
 
-extern TopServer top_server;
+extern IndexServer index_server;
 
 #endif

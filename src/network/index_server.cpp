@@ -16,14 +16,14 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Notify a top server of an opened wormux server
- * Obtain information about running games from a top server
+ * Notify an index server of an opened wormux server
+ * Obtain information about running games from an index server
  *****************************************************************************/
 
 #include <SDL_net.h>
 #include "download.h"
-#include "top_server.h"
-#include "top_server_msg.h"
+#include "index_server.h"
+#include "index_svr_msg.h"
 #include "network.h"
 #include "gui/question.h"
 #include "include/app.h"
@@ -32,9 +32,9 @@
 #include "tool/i18n.h"
 #include "tool/random.h"
 
-TopServer top_server;
+IndexServer index_server;
 
-TopServer::TopServer()
+IndexServer::IndexServer()
 {
   hidden_server = false;
   connected = false;
@@ -43,7 +43,7 @@ TopServer::TopServer()
   current_server = server_lst.end();
 }
 
-TopServer::~TopServer()
+IndexServer::~IndexServer()
 {
   server_lst.clear();
   if(connected)
@@ -51,9 +51,9 @@ TopServer::~TopServer()
 }
 
 /*************  Connection  /  Disconnection  ******************/
-bool TopServer::Connect()
+bool IndexServer::Connect()
 {
-  MSG_DEBUG("top_server", "Connecting..");
+  MSG_DEBUG("index_server", "Connecting..");
   assert(!connected);
 
   if( hidden_server )
@@ -74,15 +74,15 @@ bool TopServer::Connect()
   }
 
   Question question;
-  question.Set(_("Unable to contact a top server!"),1,0);
+  question.Set(_("Unable to contact an index server!"),1,0);
   question.Ask();
 
   return false;
 }
 
-bool TopServer::ConnectTo(const std::string & address, const int & port)
+bool IndexServer::ConnectTo(const std::string & address, const int & port)
 {
-  MSG_DEBUG("top_server", "Connecting to %s %i", address.c_str(), port);
+  MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
   Question question;
   question.Set(_("Contacting main server..."),1,0);
   question.Draw();
@@ -90,12 +90,12 @@ bool TopServer::ConnectTo(const std::string & address, const int & port)
 
   network.Init(); // To get SDL_net initialized
 
-  MSG_DEBUG("top_server", "Opening connection");
+  MSG_DEBUG("index_server", "Opening connection");
 
 //  if( SDLNet_ResolveHost(&ip, "localhost" , port) == -1 )
   if( SDLNet_ResolveHost(&ip, address.c_str() , port) == -1 )
   {
-    question.Set(_("Invalid top server adress!"),1,0);
+    question.Set(_("Invalid index server adress!"),1,0);
     question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return false;
@@ -114,7 +114,7 @@ bool TopServer::ConnectTo(const std::string & address, const int & port)
   return HandShake();
 }
 
-void TopServer::Disconnect()
+void IndexServer::Disconnect()
 {
   if( hidden_server )
   {
@@ -125,7 +125,7 @@ void TopServer::Disconnect()
   if( !connected )
     return;
 
-  MSG_DEBUG("top_server", "Closing connection");
+  MSG_DEBUG("index_server", "Closing connection");
   first_server = server_lst.end();
   current_server = server_lst.end();
 
@@ -133,9 +133,9 @@ void TopServer::Disconnect()
   connected = false;
 }
 
-bool TopServer::GetServerList()
+bool IndexServer::GetServerList()
 {
-  MSG_DEBUG("top_server", "Retrieving server list");
+  MSG_DEBUG("index_server", "Retrieving server list");
   // If we already have it, no need to redownload it
   if(server_lst.size() != 0)
     return true;
@@ -189,14 +189,14 @@ bool TopServer::GetServerList()
 
   first_server = server_lst.end();
   current_server = server_lst.end();
-  MSG_DEBUG("top_server", "Server list retrieved. %i servers are running", server_lst.size());
+  MSG_DEBUG("index_server", "Server list retrieved. %i servers are running", server_lst.size());
 
   return (server_lst.size() != 0);
 }
 
-bool TopServer::GetServerAddress( std::string & address, int & port)
+bool IndexServer::GetServerAddress( std::string & address, int & port)
 {
-  MSG_DEBUG("top_server", "Trying a new server");
+  MSG_DEBUG("index_server", "Trying a new server");
   // Cycle through the server list to find the first one
   // accepting connection
   if( first_server == server_lst.end() )
@@ -228,7 +228,7 @@ bool TopServer::GetServerAddress( std::string & address, int & port)
 }
 
 /*************  Basic transmissions  ******************/
-void TopServer::Send(const int& nbr)
+void IndexServer::Send(const int& nbr)
 {
   char packet[4];
   // this is not cute, but we don't want an int -> uint conversion here
@@ -238,13 +238,13 @@ void TopServer::Send(const int& nbr)
   SDLNet_TCP_Send(socket, packet, sizeof(packet));
 }
 
-void TopServer::Send(const std::string &str)
+void IndexServer::Send(const std::string &str)
 {
   Send(str.size());
   SDLNet_TCP_Send(socket, (void*)str.c_str(), str.size());
 }
 
-int TopServer::ReceiveInt()
+int IndexServer::ReceiveInt()
 {
   char packet[4];
   if( SDLNet_TCP_Recv(socket, packet, sizeof(packet)) < 1 )
@@ -258,7 +258,7 @@ int TopServer::ReceiveInt()
   return nbr;
 }
 
-std::string TopServer::ReceiveStr()
+std::string IndexServer::ReceiveStr()
 {
   int size = ReceiveInt();
 
@@ -281,7 +281,7 @@ std::string TopServer::ReceiveStr()
   return st;
 }
 
-bool TopServer::HandShake()
+bool IndexServer::HandShake()
 {
   Send(TS_MSG_VERSION);
   Send(Constants::VERSION);
@@ -298,7 +298,7 @@ bool TopServer::HandShake()
   return true;
 }
 
-void TopServer::SendServerStatus()
+void IndexServer::SendServerStatus()
 {
   assert(network.IsServer());
 
@@ -307,7 +307,7 @@ void TopServer::SendServerStatus()
   Send(TS_MSG_HOSTING);
 }
 
-std::list<std::string> TopServer::GetHostList()
+std::list<std::string> IndexServer::GetHostList()
 {
   Send(TS_MSG_GET_LIST);
   int lst_size = ReceiveInt();
