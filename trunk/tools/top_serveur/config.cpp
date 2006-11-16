@@ -10,6 +10,7 @@ Config::Config()
 	SetDefault("chroot", true);
 	SetDefault("chroot_gid", 500);
 	SetDefault("chroot_uid", 500);
+	SetDefault("connexion_max", -2);
 	Display();
 }
 
@@ -47,7 +48,8 @@ void Config::Load()
 		*ptr = '\0';
 
 		ptr++;
-		if( *ptr >= '0' && *ptr <= '9' )
+		if( (*ptr >= '0' && *ptr <= '9')
+		||   *ptr == '-' )
 		{
 			int nbr = 0;
 			if( sscanf(ptr, "%i\n", &nbr) <= 0)

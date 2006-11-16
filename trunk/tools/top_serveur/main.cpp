@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
+#include <sys/time.h>
 #include <sys/socket.h>
+#include <sys/resource.h>
 #include <unistd.h>
 #include <netinet/in.h>
 #include <sys/time.h>
@@ -38,6 +40,43 @@ void SetChroot()
 }
 #endif
 
+int SetMaxConnection()
+{
+	// Set the maximum number of file descriptor allowed
+	int max_conn;
+	config.Get("connexion_max", max_conn);
+
+	struct rlimit limit;
+
+	if( getrlimit(RLIMIT_NOFILE, &limit) == -1 )
+		TELL_ERROR;
+
+	// Keep the system default
+	if(max_conn == -2)
+	{
+		DPRINT(INFO, "Number of connexions allowed : system default");
+		return limit.rlim_cur;
+	}
+
+
+	// Use the max allowed
+	if(max_conn == -1)
+	{
+		DPRINT(INFO, "Number of connexions allowed : maximum allowed");
+		limit.rlim_cur = limit.rlim_max;
+	}
+	else
+	{
+		DPRINT(INFO, "Number of connexions allowed : user defined");
+		limit.rlim_cur = max_conn;
+		limit.rlim_max = max_conn;
+	}
+
+	if( setrlimit(RLIMIT_NOFILE, &limit) == -1 )
+		TELL_ERROR;
+	return limit.rlim_cur;
+}
+
 int main(int argc, void** argv)
 {
 	bool chroot_opt;
@@ -59,6 +98,10 @@ int main(int argc, void** argv)
 	// as soon as we are trying to write on client that closed)
 	if( signal(SIGPIPE, SIG_IGN) == SIG_ERR )
 		TELL_ERROR;
+
+	// Set the maximum number of connection
+	int max_conn = SetMaxConnection();
+	DPRINT(INFO, "Number of connexions allowed : %i", max_conn);
 
 	int port = 0;
 	config.Get("port", port);
