@@ -23,7 +23,7 @@
 #ifndef TOP_SERVER_MSG_H
 #define TOP_SERVER_MSG_H
 
-enum TopServerMsg
+enum IndexServerMsg
 {
   TS_NO_MSG, // Don't send this
   TS_MSG_VERSION, // Send this to identify the server
