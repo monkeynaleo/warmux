@@ -2,7 +2,7 @@
 #define CLIENT_H
 #include <netinet/in.h>
 #include <string>
-#include "../../src/network/top_server_msg.h"
+#include "../../src/network/index_svr_msg.h"
 #include "net_data.h"
 
 class Client : public NetData
@@ -17,7 +17,8 @@ public:
 	~Client();
 
 	// Return false if the client closed the connection
-	bool HandleMsg(const TopServerMsg & msg_id, const std::string & str);
+	bool HandleMsg(const IndexServerMsg & msg_id, const std::string 
+& str);
 };
 
 #endif

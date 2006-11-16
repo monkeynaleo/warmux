@@ -11,7 +11,7 @@
 #include "client.h"
 #include "net_data.h"
 #include "debug.h"
-#include "../../src/network/top_server_msg.h"
+#include "../../src/network/index_svr_msg.h"
 
 // map < socket_fd, client >
 extern std::list<Client*> clients;
@@ -32,7 +32,7 @@ Client::~Client()
 		nb_server--;
 }
 
-bool Client::HandleMsg(const TopServerMsg & msg_id, const std::string & str)
+bool Client::HandleMsg(const IndexServerMsg & msg_id, const std::string & str)
 {
 	if( msg_id == TS_MSG_VERSION )
 	{

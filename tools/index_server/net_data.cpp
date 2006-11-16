@@ -182,7 +182,7 @@ bool NetData::Receive()
 		int id;
 		if( !ReceiveInt(id) )
 			return false;
-		msg_id = (TopServerMsg)id;
+		msg_id = (IndexServerMsg)id;
 	}
 
 	std::string full_str = "";
