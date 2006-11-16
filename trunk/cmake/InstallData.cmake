@@ -401,6 +401,7 @@ interface/background_interface.png
 interface/wind.png
 interface/clock_background.png
 interface/clock.png
+interface/small_background_interface.png
 menu/img/display_wind_particles.png
 menu/img/sound_effects_enable.png
 menu/img/big_right.png
