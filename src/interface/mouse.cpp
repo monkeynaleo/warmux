@@ -230,13 +230,11 @@ void Mouse::TestCamera(){
       camera.autorecadre = false;
     }else{
       scroll_actif = true;
-      SetPointer(POINTER_MOVE);
     }
     savedPos = mousePos;
     return;
   }else{
     scroll_actif = false;
-    SetPointer(POINTER_SELECT);
   }
 
   if(!Interface::GetInstance()->weapons_menu.IsDisplayed() && 
@@ -349,7 +347,7 @@ bool Mouse::ScrollPointer()
 
 bool Mouse::DrawMovePointer()
 {
-  if (ScrollPointer() ) {
+  if (ScrollPointer() || scroll_actif) {
     AppWormux::GetInstance()->video.window.Blit( pointer_move, GetPosition() );
     world.ToRedrawOnScreen(Rectanglei(GetPosition().x, GetPosition().y , pointer_move.GetWidth(), pointer_move.GetHeight()));
     return true;
