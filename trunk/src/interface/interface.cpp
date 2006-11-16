@@ -70,7 +70,6 @@ Interface::Interface()
   clock = resource_manager.LoadImage( res, "interface/clock");
   wind_icon = resource_manager.LoadImage( res, "interface/wind");
   wind_indicator = resource_manager.LoadImage( res, "interface/wind_indicator");
-  resource_manager.UnLoadXMLProfile( res);
 
   // energy bar
   energy_bar.InitVal(0, 0, GameMode::GetInstance()->character.init_energy);
@@ -88,24 +87,31 @@ Interface::Interface()
   weapon_strength_bar.InitPos (0, 0, 400, 20);
   weapon_strength_bar.InitVal (0, 0, 100);
 
-  weapon_strength_bar.SetValueColor(WeaponStrengthBarValue);
-  weapon_strength_bar.SetBorderColor(WeaponStrengthBarBorder);
-  weapon_strength_bar.SetBackgroundColor(WeaponStrengthBarBackground);
+  weapon_strength_bar.SetValueColor(resource_manager.LoadColor(res, "interface/weapon_strength_bar_value"));
+  weapon_strength_bar.SetBorderColor(resource_manager.LoadColor(res, "interface/weapon_strength_bar_border"));
+  weapon_strength_bar.SetBackgroundColor(resource_manager.LoadColor(res, "interface/weapon_strength_bar_background"));
 
   // constant text initialisation
   Font * big_font = Font::GetInstance(Font::FONT_BIG,Font::NORMAL);
   Font * normal_font_bold = Font::GetInstance(Font::FONT_NORMAL,Font::BOLD);
   Font * small_font_bold = Font::GetInstance(Font::FONT_SMALL,Font::BOLD);
 
+  Color text_color = resource_manager.LoadColor(res, "interface/text_color");
+  Color energy_text_color = resource_manager.LoadColor(res, "interface/energy_text_color");
+  Color turn_timer_text_color = resource_manager.LoadColor(res, "interface/turn_timer_text_color");
+  Color global_clock_text_color = resource_manager.LoadColor(res, "interface/global_clock_text_color");
+
   global_timer = new Text(ulong2str(0), gray_color, big_font, false);
   timer = new Text(ulong2str(0), black_color, normal_font_bold, false);
 
-  t_character_name = new Text("None", black_color, small_font_bold, false);
-  t_team_name = new Text("None", black_color, small_font_bold, false);
-  t_player_name = new Text("None", black_color, small_font_bold, false);
-  t_character_energy = new Text("Dead", white_color, small_font_bold);
-  t_weapon_name = new Text("None", black_color, small_font_bold, false);
-  t_weapon_stock = new Text("0", black_color, small_font_bold, false);
+  t_character_name = new Text("None", text_color, small_font_bold, false);
+  t_team_name = new Text("None", text_color, small_font_bold, false);
+  t_player_name = new Text("None", text_color, small_font_bold, false);
+  t_weapon_name = new Text("None", text_color, small_font_bold, false);
+  t_weapon_stock = new Text("0", text_color, small_font_bold, false);
+  t_character_energy = new Text("Dead", energy_text_color, small_font_bold);
+
+  resource_manager.UnLoadXMLProfile( res);
 }
 
 Interface::~Interface()
