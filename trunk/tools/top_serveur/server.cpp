@@ -52,7 +52,8 @@ Client* Server::NewConnection()
 	struct sockaddr_in client_address;
 	socklen_t addr_size = sizeof(client_address);
 
-	if( (client_fd = accept(fd, (struct sockaddr*)&client_address, &addr_size)) == -1 )
+	client_fd = accept(fd, (struct sockaddr*)&client_address, &addr_size);
+	if( client_fd == -1 )
 	{
 		PRINT_ERROR;
 		DPRINT(INFO, "Client rejected..");
@@ -61,8 +62,6 @@ Client* Server::NewConnection()
 
 	FD_SET(client_fd, &sock_set);
 
-//       struct hostent *info;
-//	info = gethostbyaddr( &client_address.sin_addr, sizeof(client_address.sin_addr), AF_INET);
 	unsigned int ip = client_address.sin_addr.s_addr;
 
 	Client* client = new Client(client_fd, ip);

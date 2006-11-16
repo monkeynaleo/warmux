@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <sys/time.h>
 #include <sys/ioctl.h>
+#include <signal.h>
 #include <errno.h>
 #include <string.h>
 #include <list>
@@ -54,6 +55,11 @@ int main(int argc, void** argv)
 		exit(EXIT_FAILURE);
 	}
 
+	// Ignore broken pipe signal (elsewise we would break,
+	// as soon as we are trying to write on client that closed)
+	if( signal(SIGPIPE, SIG_IGN) == SIG_ERR )
+		TELL_ERROR;
+
 	int port = 0;
 	config.Get("port", port);
 
@@ -96,6 +102,7 @@ int main(int argc, void** argv)
 			Client* client = listen_sock.NewConnection();
 			if(client != NULL)
 				clients.push_back( client );
+
 			DPRINT(CONN, "%i connections up!", clients.size());
 		}
 	}
