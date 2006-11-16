@@ -2,14 +2,14 @@
 #define NET_DATA_H
 #include <netinet/in.h>
 #include <string>
-#include "../../src/network/top_server_msg.h"
+#include "../../src/network/index_svr_msg.h"
 
 
 class NetData
 {
 	char* str;
 	unsigned int str_size;
-	enum TopServerMsg msg_id;
+	enum IndexServerMsg msg_id;
 
 	int fd;
 	int ip_address;
@@ -34,7 +34,7 @@ public:
 	void Host( const int & client_fd, const unsigned int & ip );
 	void ConnectTo( const std::string & address, const int & port);
 	bool Receive();
-	virtual bool HandleMsg(const TopServerMsg & msg_id, const std::string & full_str) = 0;
+	virtual bool HandleMsg(const IndexServerMsg & msg_id, const std::string & full_str) = 0;
 };
 
 #endif
