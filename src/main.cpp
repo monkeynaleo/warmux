@@ -46,6 +46,8 @@
 #include "tool/random.h"
 #include "tool/stats.h"
 
+#include "network/download.h"
+
 AppWormux * AppWormux::singleton = NULL;
 
 AppWormux * AppWormux::GetInstance() {

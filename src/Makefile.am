@@ -107,6 +107,7 @@ wormux_SOURCES = \
 	map/water.cpp map/water.h \
 	map/wind.cpp map/wind.h \
 	network/chat.cpp network/chat.h \
+	network/download.cpp network/download.h \
 	network/distant_cpu.cpp network/distant_cpu.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \

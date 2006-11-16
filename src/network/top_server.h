@@ -24,34 +24,58 @@
 #define TOP_SERVER_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
+#include <map>
 #include <list>
 #include <string>
 
 class TopServer
 {
+  // Connection to the server
   TCPsocket socket;
   IPaddress ip;
 
-  // If the server is visible on internet
+  // Stores the hostname / port of all online servers
+  std::map<std::string, int> server_lst;
+  // First server we tried to connect to
+  std::map<std::string, int>::iterator first_server;
+  // The current server we are trying to connect to
+  std::map<std::string, int>::iterator current_server;
+
+  // If we are a server, tell if we are visible on internet
   bool hidden_server;
 
   bool connected;
 
+  // Transfer functions
   void Send(const int &nbr);
   void Send(const std::string &str);
   int ReceiveInt();
   std::string ReceiveStr();
 
+  // Download the list of online servers on www.wormux.org
+  bool GetServerList();
+
+  // Gives the address of a server in the list
+  bool GetServerAddress(std::string & address, int & port);
+  // Connect to a server
+  bool ConnectTo(const std::string & address, const int & port);
+
+  // Perform a handshake with the server
   bool HandShake();
 public:
   TopServer();
   ~TopServer();
 
+  // Connect to a server
   bool Connect();
+
+  // We want to host a game hidden on internet
   void SetHiddenServer() { hidden_server = true; };
+
+  // Notify the top server we are hosting a game
   void SendServerStatus();
   void Disconnect();
-  std::list<std::string> GetServerList();
+  std::list<std::string> GetHostList();
 };
 
 extern TopServer top_server;
