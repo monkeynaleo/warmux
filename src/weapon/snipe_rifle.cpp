@@ -59,6 +59,7 @@ SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new 
   m_laser_image = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_laser"));
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
+  laser_beam_color = resource_manager.LoadColor(weapons_res_profile,m_id+"_laser_color");
 
   ReloadLauncher();
 }
@@ -152,7 +153,7 @@ void SnipeRifle::DrawBeam()
 {
   Point2i pos1 = laser_beam_start - camera.GetPosition();
   Point2i pos2 = targeted_point - camera.GetPosition();
-  AppWormux::GetInstance()->video.window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, Color(255, 0, 0, 100));
+  AppWormux::GetInstance()->video.window.AALineColor(pos1.x, pos2.x, pos1.y, pos2.y, laser_beam_color);
 
   // Set area of the screen to be redrawn:
   // Splited into little rectangles to avoid too large area of redraw

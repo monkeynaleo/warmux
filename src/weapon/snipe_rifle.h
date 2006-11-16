@@ -44,6 +44,7 @@ class SnipeRifle : public WeaponLauncher
     Point2i targeted_point;
     bool targeting_something;
     Sprite * m_laser_image;
+    Color laser_beam_color;
     bool ComputeCrossPoint(bool force);
 
   protected:
