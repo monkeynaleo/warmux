@@ -79,9 +79,9 @@ menu/results_menu.cpp
 network/chat.cpp
 network/distant_cpu.cpp
 network/download.cpp
+network/index_server.cpp
 network/network.cpp
 network/randomsync.cpp
-network/top_server.cpp
 object/barrel.cpp
 object/bonus_box.cpp
 object/object_cfg.cpp

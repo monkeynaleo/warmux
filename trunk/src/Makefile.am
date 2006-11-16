@@ -109,9 +109,9 @@ wormux_SOURCES = \
 	network/chat.cpp network/chat.h \
 	network/download.cpp network/download.h \
 	network/distant_cpu.cpp network/distant_cpu.h \
+	network/index_server.cpp network/index_server.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
-	network/top_server.cpp network/top_server.h \
 	particles/body_member.cpp particles/body_member.h \
 	particles/bullet.cpp particles/bullet.h \
 	particles/dark_smoke.cpp particles/dark_smoke.h \
