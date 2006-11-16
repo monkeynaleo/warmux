@@ -218,6 +218,8 @@ if $PACKAGE_CONFIG libcurl --libs > /dev/null 2>&1; then
 else
 	AC_MSG_RESULT(no)
 	check_libcurl="no"
+        AC_MSG_ERROR([*** No libCurl found. Please install a valid libcurl ***])
+        exit -1
 fi
 
 dnl === Display error if SDL image, mixer, etc. is missing ==================
