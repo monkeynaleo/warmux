@@ -38,9 +38,7 @@ const uint MARGIN_SIDE   = 5;
 const uint MARGIN_BOTTOM = 70;
 
 const uint TEAMS_BOX_H = 170;
-
-const uint MAPS_X = 20;
-const uint MAPS_W = 160;
+const uint OPTIONS_BOX_H = 150;
 
 const uint NBR_VER_MIN = 1;
 const uint NBR_VER_MAX = 10;
@@ -62,20 +60,20 @@ TeamBox::TeamBox(std::string _player_name, uint width) : HBox(Rectanglei(0, 0, w
   tmp_box->SetMargin(2);
   tmp_box->SetBorder(Point2i(0,0));
   team_name = new Label(" ", Rectanglei(0,0,width-80,0),
-			*Font::GetInstance(Font::FONT_NORMAL), gray_color, false, true);
+			*Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), dark_gray_color, false, false);
 
   Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetBorder(Point2i(0,0));
   tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(width-80)-100,0),
-				      *Font::GetInstance(Font::FONT_SMALL), gray_color, false, false));
+				      *Font::GetInstance(Font::FONT_SMALL), dark_gray_color, false, false));
   player_name = new TextBox(_player_name, Rectanglei(0,0,100,0),
 			    *Font::GetInstance(Font::FONT_SMALL));
   tmp_player_box->AddWidget(player_name);
 
   nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),
 				 6,1,2,10,
-				 gray_color, false);
+				 dark_gray_color, false);
 
   tmp_box->AddWidget(team_name);
   tmp_box->AddWidget(tmp_player_box);
@@ -162,13 +160,12 @@ GameMenu::GameMenu() :
   Rectanglei rectZero(0, 0, 0, 0);
   Rectanglei stdRect (0, 0, 130, 30);
 
-  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
-
   Surface window = AppWormux::GetInstance()->video.window;
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
-  uint mainBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)/3;
+  uint mapBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE) 
+    - TEAMS_BOX_H - OPTIONS_BOX_H;
 
   // ################################################
   // ##  TEAM SELECTION
@@ -218,7 +215,7 @@ GameMenu::GameMenu() :
   // ##  MAP SELECTION
   // ################################################
   map_box = new HBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-				       0, mainBoxHeight));
+				       0, mapBoxHeight));
   map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
@@ -231,7 +228,7 @@ GameMenu::GameMenu() :
   tmp_map_box->SetMargin(0);
 
   // compute margin width between previews
-  uint map_preview_height = mainBoxHeight -2*10 -40;
+  uint map_preview_height = mapBoxHeight -2*10 -40;
 
   // Previews
   Box* previews_box = new HBox( Rectanglei(0, 0, 0, map_preview_height+10 ), false);
@@ -279,10 +276,10 @@ GameMenu::GameMenu() :
   tmp_map_box->AddWidget(previews_box);
 
   // Map information
-  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *normal_font, gray_color, true, true);
+  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL, Font::BOLD), dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_name_label);
 
-  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), gray_color, true, false);
+  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_author_label);
 
   map_box->AddWidget(tmp_map_box);
@@ -293,7 +290,7 @@ GameMenu::GameMenu() :
   // ##  GAME OPTIONS
   // ################################################
   game_options = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
-					    mainBoxWidth/2, mainBoxHeight), true);
+					    mainBoxWidth/2, OPTIONS_BOX_H), true);
   game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
 
   //Box * all_game_options = new VBox( Rectanglei(0, 0, mainBoxWidth/2-40, mainBoxHeight), false);

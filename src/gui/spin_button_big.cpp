@@ -33,7 +33,7 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Rectanglei &rect,
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
-  txt_label = new Text(label, gray_color, Font::GetInstance(Font::FONT_NORMAL));
+  txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
 
   if ( min_value != -1 && min_value <= value)
     m_min_value = min_value;
@@ -43,7 +43,7 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Rectanglei &rect,
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", gray_color, Font::GetInstance(Font::FONT_HUGE));
+  txt_value = new Text("", dark_gray_color, Font::GetInstance(Font::FONT_HUGE), false);
   SetValue(value);
 
   std::ostringstream max_value_s;
@@ -97,7 +97,8 @@ void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf)
 
   txt_value->DrawCenterTop(center_x, center_y - value_h/2);
 
-  txt_label->DrawTopLeft( GetPositionX(), GetPositionY() + GetSizeY() - txt_label->GetHeight() );
+  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2, 
+			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 }
 
 Widget* SpinButtonBig::Clic(const Point2i &mousePosition, uint button)

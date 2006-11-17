@@ -31,7 +31,7 @@
 
 ListBoxWithLabel::ListBoxWithLabel (const std::string &label, const Rectanglei &rect) : ListBox(rect)
 {  
-  txt_label = new Text(label, gray_color, Font::GetInstance(Font::FONT_NORMAL));
+  txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
   SetSizePosition(rect);
 }
 
@@ -44,7 +44,7 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf)
 {
   int item = MouseIsOnWhichItem(mousePosition);
   Rectanglei rect (GetPositionX(),GetPositionY(),GetSizeX(),
-		   GetSizeY()- 2 - Font::GetInstance(Font::FONT_NORMAL)->GetHeight());
+		   GetSizeY()- 2 - Font::GetInstance(Font::FONT_NORMAL, Font::BOLD)->GetHeight());
 
   surf.BoxColor(rect, defaultListColor1);
   surf.RectangleColor(rect, white_color);
@@ -95,7 +95,7 @@ void ListBoxWithLabel::SetSizePosition(const Rectanglei &rect)
 				    m_up->GetSizeX(), m_up->GetSizeY()) );
   m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_down->GetSizeX() - 2, 
 				      GetPositionY() + GetSizeY() - m_down->GetSizeY() - 2 -
-				           Font::GetInstance(Font::FONT_NORMAL)->GetHeight() - 2, 
+				           Font::GetInstance(Font::FONT_NORMAL, Font::BOLD)->GetHeight() - 2, 
 				      m_down->GetSizeX(), m_down->GetSizeY()) );  
 
   nb_visible_items_max = GetSizeY()/height_item;
