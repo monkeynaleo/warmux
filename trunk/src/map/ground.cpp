@@ -69,21 +69,23 @@ bool Ground::IsEmpty(const Point2i &pos){
 	return GetAlpha( pos ) != 255; // IsTransparent
 }
 
-//Renvoie l'angle entre la tangeante au terrain en (x,y) et l'horizontale.
-//l'angle est toujours > 0.
-//Renvoie -1.0 s'il n'y a pas de tangeante (si le pixel(x,y) ne touche
-//aucun autre morceau de terrain)
+/*
+ * Returns the angle between the tangent at point (x,y) of the ground and
+ * horizontal
+ * the angle is always > 0.
+ * returns -1.0 if no tangent was found (pixel (x,y) does not touch any
+ * other piece of ground
+ */
 double Ground::Tangeante(int x,int y){
-  //Approxiamtion:on renvoie la corde de la courbe form�
+  //Approxiamtion : on renvoie la corde de la courbe form�
   //par le terrain...
 
-  //On cherche deux points du terrain autour de (x,y), �la limite entre le terrain
-  //et le vide:
-  //(p1 = 1er point �gauche
-  // p2 = 1er point �droite
-  // p3 = 2em point �gauche
-  // p4 = 2em point �droite)
-  Point2i p1,p2,p3,p4;
+  /* We try to find 2 points on the ground on each side of (x,y)
+   * the points should be at the limit between land and vaccum
+   * (p1 =  point on the left
+   * p2 =  point on the right
+   */
+  Point2i p1,p2;
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
     return -1.0;
 
@@ -93,29 +95,18 @@ double Ground::Tangeante(int x,int y){
     p2.y = y;
   }
 
-  if(!PointContigu(p1.x,p1.y, p3.x,p3.y, x,y))
-  {
-    p3.x = p1.x;
-    p3.y = p1.y;
-  }
-  if(!PointContigu(p2.x,p2.y, p4.x,p4.y, x,y))
-  {
-    p4.x = p2.x;
-    p4.y = p2.y;
-  }
-
-  if(p3.x == p4.x)
+  if(p1.x == p2.x)
     return M_PI / 2.0;
-  if(p3.y == p4.y)
+  if(p1.y == p2.y)
     return M_PI;
 
-  assert (p3.x != p4.x);
+  assert (p1.x != p2.x);
 
-  double tangeante = atan((double)(p4.y-p3.y)/(double)(p4.x-p3.x));
+  double tangeante = atan((double)(p2.y-p1.y)/(double)(p2.x-p1.x));
 
   while(tangeante <= 0.0)
     tangeante += M_PI;
-  while(tangeante > M_PI)
+  while(tangeante > 2 * M_PI)
     tangeante -= M_PI;
 
   return tangeante;
