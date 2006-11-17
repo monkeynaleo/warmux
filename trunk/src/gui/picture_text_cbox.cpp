@@ -35,10 +35,10 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
   SetPosition( rect.GetPosition() );
   SetSize( rect.GetSize() );
 
-  SetSizeY( m_image.GetHeight() + (*Font::GetInstance(Font::FONT_NORMAL)).GetHeight() );
+  SetSizeY( m_image.GetHeight() + (*Font::GetInstance(Font::FONT_NORMAL, Font::BOLD)).GetHeight() );
   m_value = value;
 
-  txt_label = new Text(label, gray_color, Font::GetInstance(Font::FONT_NORMAL));
+  txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
 }
 
 void PictureTextCBox::Draw(const Point2i &mousePosition, Surface& surf)
@@ -49,7 +49,8 @@ void PictureTextCBox::Draw(const Point2i &mousePosition, Surface& surf)
 
   AppWormux::GetInstance()->video.window.Blit(m_image, Point2i(tmp_x, tmp_y));
 
-  txt_label->DrawTopLeft( GetPositionX(), GetPositionY() + GetSizeY() - txt_label->GetHeight() );
+  txt_label->DrawCenterTop( GetPositionX() + GetSizeX()/2, 
+			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
   
   if (m_value)
     m_checked_image->SetCurrentFrame(0);

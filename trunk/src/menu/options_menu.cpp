@@ -34,19 +34,19 @@
 
 const uint SOUND_X = 30;
 const uint SOUND_Y = 30;
-const uint SOUND_W = 500;
+const uint SOUND_W = 530;
 const uint SOUND_H = 170;
 
 const uint GRAPHIC_X = 30;
-const uint GRAPHIC_Y = SOUND_X + SOUND_H + 30;
-const uint GRAPHIC_W = 500;
+const uint GRAPHIC_Y = SOUND_Y + SOUND_H + 30;
+const uint GRAPHIC_W = 530;
 const uint GRAPHIC_H = 240;
 
 OptionMenu::OptionMenu() :
   Menu("menu/bg_option")
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  Rectanglei stdRect (0, 0, 130, 30);
+  Rectanglei stdRect (0, 0, 140, 30);
 
   normal_font = Font::GetInstance(Font::FONT_NORMAL);
 
