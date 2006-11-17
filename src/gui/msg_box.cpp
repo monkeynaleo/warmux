@@ -24,7 +24,7 @@
 #include "label.h"
 #include "msg_box.h"
 
-MessageBox::MessageBox(int message_nbr, const Rectanglei& rect, Font* _font) :
+MsgBox::MsgBox(int message_nbr, const Rectanglei& rect, Font* _font) :
    VBox(rect)
 {
   font = _font;
@@ -32,7 +32,7 @@ MessageBox::MessageBox(int message_nbr, const Rectanglei& rect, Font* _font) :
     AddWidget(new Label("", Rectanglei(0,0,0,0), *font));
 }
 
-void MessageBox::NewMessage(const std::string &msg)
+void MsgBox::NewMessage(const std::string &msg)
 {
   DelFirstWidget();
   AddWidget(new Label(msg, Rectanglei(0,0,0,0), *font));

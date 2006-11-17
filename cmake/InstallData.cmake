@@ -408,6 +408,7 @@ menu/img/big_right.png
 menu/img/timing_turn.png
 menu/img/audio_label.png
 menu/img/skin01.png
+menu/img/arrow-right.png
 menu/img/display_name.png
 menu/img/video_label.png
 menu/img/skin02.png
@@ -431,6 +432,7 @@ menu/img/loading.png
 menu/img/display_energy.png
 menu/img/background.png
 menu/img/title.png
+menu/img/arrow-left.png
 menu/img/mode_label.png
 menu/img/up.png
 menu/img/timing_end_turn.png

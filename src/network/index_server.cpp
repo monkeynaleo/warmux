@@ -21,6 +21,7 @@
  *****************************************************************************/
 
 #include <SDL_net.h>
+#include <fstream>
 #include "download.h"
 #include "index_server.h"
 #include "index_svr_msg.h"
@@ -133,6 +134,12 @@ void IndexServer::Disconnect()
   connected = false;
 }
 
+static ssize_t getline(std::string& line, std::ifstream& file)
+{
+	std::getline(file, line);
+	return file.gcount();
+}
+
 bool IndexServer::GetServerList()
 {
   MSG_DEBUG("index_server", "Retrieving server list");
@@ -148,17 +155,21 @@ bool IndexServer::GetServerList()
     return false;
 
   // Parse the file
-  FILE* lst = fopen(server_file.c_str(), "r");
-  if( lst == NULL )
-    return false;
+  std::ifstream fin;
+  fin.open(server_file.c_str(), std::ios::in);
+  if(!fin)
+  	return false;
 
-  char * line = NULL;
-  size_t len = 0;
+  /*char * line = NULL;
+  size_t len = 0;*/
   ssize_t read;
-  while ((read = getline(&line, &len, lst)) != -1)
+  std::string line;
+  
+  while ((read = getline(line, fin)) > 0)
   {
     // Parse the line
-    char* str = line;
+    char* str = (char*) malloc(line.size() + 1);
+    str = (char*) memcpy(str, line.c_str(), line.size());
 
     if(*str == '#' || *str == '\n' || *str == '\0')
       continue;
@@ -180,12 +191,10 @@ bool IndexServer::GetServerList()
     int port = 0;
     sscanf(str, "%i", &port);
 
-    server_lst[ std::string(line) ] = port;
+    server_lst[ line ] = port;
   }
-  if (line)
-    free(line);
 
-  fclose(lst);
+  fin.close();
 
   first_server = server_lst.end();
   current_server = server_lst.end();

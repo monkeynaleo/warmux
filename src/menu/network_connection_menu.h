@@ -44,7 +44,7 @@ class NetworkConnectionMenu : public Menu
    CheckBox* internet_server;
    VBox* connection_box;
 
-   MessageBox *msg_box;
+   MsgBox *msg_box;
 
    void OnClic(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);

@@ -80,7 +80,7 @@ public:
    void DelTeamCallback(std::string team_id);
    void ChangeMapCallback();
 
-   MessageBox *msg_box;
+   MsgBox *msg_box;
 
 };
 

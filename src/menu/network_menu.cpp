@@ -66,7 +66,7 @@ NetworkMenu::NetworkMenu() :
   //options_box->enabled = false;
   widgets.AddWidget(options_box);
 
-  msg_box = new MessageBox(11, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), Font::GetInstance(Font::FONT_SMALL));
+  msg_box = new MsgBox(11, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(msg_box);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find"));
   msg_box->NewMessage(_("some opponents."));
