@@ -136,8 +136,9 @@ void IndexServer::Disconnect()
 
 static ssize_t getline(std::string& line, std::ifstream& file)
 {
+	line.clear();
 	std::getline(file, line);
-	return file.gcount();
+	return line.size();
 }
 
 bool IndexServer::GetServerList()
@@ -168,38 +169,18 @@ bool IndexServer::GetServerList()
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
   while ((read = getline(line, fin)) > 0)
   {
-    // Parse the line
-    char* str = (char*) malloc(line.size() + 1);
-    str = (char*) memcpy(str, line.c_str(), line.size());
-
-    if(*str == '#' || *str == '\n' || *str == '\0')
-    {
-      free(str);
+    if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
       continue;
-    }
 
-    // find the port delimiter ':'
-    int str_size = 0;
-    while( *str != ':' && *str != '\n' && *str != '\0' )
-    {
-      str_size++;
-      str++;
-    }
-
-    if( *str != ':' )
-    {
-      free(str);
+    std::string::size_type port_pos = line.find(':', 0);
+    if(port_pos == std::string::npos)
       continue;
-    }
 
-    *str = '\0';
+    std::string hostname = line.substr(0, port_pos);
+    std::string portstr = line.substr(port_pos+1);
+    int port = atoi(portstr.c_str());
 
-    str++;
-    int port = 0;
-    sscanf(str, "%i", &port);
-
-    server_lst[ line ] = port;
-    free(str);
+    server_lst[ hostname ] = port;
   }
 
   fin.close();
