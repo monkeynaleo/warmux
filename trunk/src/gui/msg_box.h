@@ -26,13 +26,13 @@
 #include "../graphic/font.h"
 #include "box.h"
 
-class MessageBox : public VBox
+class MsgBox : public VBox
 {
   Font* font;
  protected:
  public:
 
-  MessageBox(int message_nbr, const Rectanglei& rect, Font* _font);
+  MsgBox(int message_nbr, const Rectanglei& rect, Font* _font);
 
   void NewMessage(const std::string& msg);
 };

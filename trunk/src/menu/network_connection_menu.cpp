@@ -91,7 +91,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   widgets.AddWidget(connection_box);
 
   // Warning about experimental networking
-  msg_box = new MessageBox(7, 
+  msg_box = new MsgBox(7, 
 			   Rectanglei( AppWormux::GetInstance()->video.window.GetWidth()/2 - 300,
 				       y_box+connection_box->GetSizeY() + 30, 
 				       600, 1), 
