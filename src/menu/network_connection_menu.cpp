@@ -162,6 +162,10 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
     im.Run();
 
     index_server.Disconnect();
+
+    // back to main menu
+    close_menu = true;
+    sig_ok();
   }
 
   if (network.IsConnected()) {
@@ -172,7 +176,7 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
     network.network_menu = NULL;
     index_server.Disconnect();
 
-    // for the moment, it's just for test...
+    // back to main menu after playing
     close_menu = true;
     sig_ok();
   }
