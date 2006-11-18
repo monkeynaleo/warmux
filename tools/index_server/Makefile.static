@@ -1,5 +1,10 @@
 include Makefile.common
-CXXFLAGS:=$(CXXFLAGS) -DSTATIC
-LDFLAGS:=$(LDFLAGS) -static -static-libgcc
+include Makefile.curl
+CXXFLAGS:=$(CXXFLAGS) -DCURL_STATICLIB
+LDFLAGS=-static -gcc-static
+CURL_PATH=/home/lds/Développement/curl-7.16.0/build/lib/
+
+
+OBJ:=$(OBJ) $(CURL_PATH)libcurl.a
 
 bin: wormux_server
