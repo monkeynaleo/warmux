@@ -207,7 +207,6 @@ Body::~Body()
 void Body::ResetMovement()
 {
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-  if(current_clothe->layers[layer]->name != "weapon")
     current_clothe->layers[layer]->ResetMovement();
 }
 
