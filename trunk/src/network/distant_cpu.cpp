@@ -174,8 +174,8 @@ void DistantComputer::ManageTeam(Action* team)
   {
     owned_teams.push_back(name);
     Action* copy = new Action(ACTION_NEW_TEAM, name);
-    copy->Push( team->PopInt() );
     copy->Push( team->PopString() );
+    copy->Push( team->PopInt() );
     ActionHandler::GetInstance()->NewAction(copy, false);
   }
   else
