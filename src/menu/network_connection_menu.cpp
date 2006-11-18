@@ -163,9 +163,11 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
 
     index_server.Disconnect();
 
-    // back to main menu
-    close_menu = true;
-    sig_ok();
+    // we don't go back into the main menu!
+    // -> im.Run() may have connected to a host so the 
+    // if(network.IsConnected()) just below will be catched and close the menu
+    // close_menu = true;
+    // sig_ok();
   }
 
   if (network.IsConnected()) {
