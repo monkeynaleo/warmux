@@ -107,6 +107,7 @@ Member::Member(xmlpp::Element *xml, Profile* res)
       (attached_members.find(att_type)->second)[frame] = d;
     }
   }
+  ResetMovement();
 }
 
 Member::Member(Member* m)
@@ -126,6 +127,7 @@ Member::Member(Member* m)
   {
     attached_members[it->first] = it->second;
   }
+  ResetMovement();
 }
 
 Member::~Member()
