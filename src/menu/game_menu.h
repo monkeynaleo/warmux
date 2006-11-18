@@ -42,7 +42,7 @@ class TeamBox : public HBox
  public:
   TeamBox(std::string player_name, uint width);
 
-  void SetTeam(Team& _team);
+  void SetTeam(Team& _team, bool read_team_values=false);
   void ClearTeam();
   Team* GetTeam() const;  
   void ValidOptions() const;

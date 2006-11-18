@@ -82,13 +82,18 @@ TeamBox::TeamBox(std::string _player_name, uint width) : HBox(Rectanglei(0, 0, w
   AddWidget(tmp_box);
 }
 
-void TeamBox::SetTeam(Team& _team)
+void TeamBox::SetTeam(Team& _team, bool read_team_values)
 {
   associated_team=&_team;
 
   team_logo->SetSurface(_team.flag);
   team_name->SetText(_team.GetName());
   team_logo->SetSurface(_team.flag);
+
+  if (read_team_values) {
+    player_name->SetText(_team.GetPlayerName());
+    nb_characters->SetValue(_team.GetNbCharacters());
+  }
 
   ForceRedraw();
 }
@@ -345,19 +350,14 @@ GameMenu::GameMenu() :
   // Load Teams' list
   teams_list.full_list.sort(compareTeams);
 
-  TeamsList::full_iterator
-    it=teams_list.full_list.begin(),
-    end=teams_list.full_list.end();
+  TeamsList::iterator
+    it=teams_list.playing_list.begin(),
+    end=teams_list.playing_list.end();
 
-  uint i=0, j=0;
-  for (; it != end; ++it)
+  uint j=0;
+  for (; it != end; ++it, j++)
   {
-    bool choix = teams_list.IsSelected (i);
-    if (choix) {
-      teams_selections[j]->SetTeam(*it);
-      j++;
-    }
-    ++i;
+    teams_selections[j]->SetTeam((**it), true);
   }
 
   if (j < 2) {

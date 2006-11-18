@@ -240,11 +240,13 @@ Team* TeamsList::FindPlayingById(const std::string &id, uint &index)
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::InitList (const std::list<std::string> &liste_nom)
+void TeamsList::InitList (const std::list<ConfigTeam> &lst)
 {
   Clear();
-  std::list<std::string>::const_iterator it=liste_nom.begin(), fin=liste_nom.end();
-  for (; it != fin; ++it) AddTeam (*it, false);
+  std::list<ConfigTeam>::const_iterator it=lst.begin(), end=lst.end();
+  for (; it != end; ++it) {
+    AddTeam (*it, false);
+  }
   active_team = playing_list.begin();
 }
 
@@ -429,15 +431,21 @@ void TeamsList::Clear()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::AddTeam (const std::string &id, bool generate_error)
+void TeamsList::AddTeam (const ConfigTeam &the_team_cfg, bool generate_error)
 {
   int pos;
-  Team *equipe = FindById (id, pos);
-  if (equipe != NULL) {
+  Team *the_team = FindById (the_team_cfg.id, pos);
+  if (the_team != NULL) {
+
+    // set the player name and number of characters
+    the_team->SetPlayerName(the_team_cfg.player_name);
+    the_team->SetNbCharacters(the_team_cfg.nb_characters);
+
     selection.push_back (pos);
-    playing_list.push_back (equipe);
+    playing_list.push_back (the_team);
+
   } else {
-    std::string msg = Format(_("Can't find team %s!"), id.c_str());
+    std::string msg = Format(_("Can't find team %s!"), the_team_cfg.id.c_str());
     if (generate_error)
       Error (msg);
     else

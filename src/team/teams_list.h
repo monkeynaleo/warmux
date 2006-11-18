@@ -23,6 +23,7 @@
 #define TEAMS_LIST_H
 //-----------------------------------------------------------------------------
 #include "team.h"
+#include "team_config.h"
 #include <list>
 //-----------------------------------------------------------------------------
 
@@ -52,10 +53,10 @@ public:
 
 
   // Add a new team to playing, and change active team
-  void AddTeam (const std::string &id, bool generate_error=true);
+  void AddTeam (const ConfigTeam& the_team_cfg, bool generate_error=true);
   void DelTeam (const std::string &id);
   void SetActive(const std::string &id);
-  void InitList (const std::list<std::string> &liste_nom);
+  void InitList (const std::list<ConfigTeam> &lst);
   void InitEnergy ();
   void RefreshEnergy (); //Actualise les jauges d'�ergie
   void RefreshSort (); //Actualise le classement des jauges

@@ -152,6 +152,8 @@ bool Config::ChargeVraiment()
 // Read personal config file
 bool Config::ChargeXml(xmlpp::Element *xml)
 {
+  std::cout << "o " << _("Reading personal config file") << std::endl;
+
   xmlpp::Element *elem;
 
   //=== Map ===
@@ -159,9 +161,25 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 
   //=== Teams ===
   elem = LitDocXml::AccesBalise (xml, "teams");
-  if (elem != NULL)
+  int i = 0;
+
+  xmlpp::Element *team = LitDocXml::AccesBalise (elem, "team_" + ulong2str(i));
+  
+  while (team != NULL)
   {
-    LitDocXml::LitListeString (elem, "team", tmp.teams);
+    ConfigTeam one_team;
+    LitDocXml::LitString  (team, "id", one_team.id);
+    LitDocXml::LitString  (team, "player_name", one_team.player_name);
+
+    int tmp_nb_characters;
+    LitDocXml::LitInt (team, "nb_characters", tmp_nb_characters);
+    one_team.nb_characters = (uint)tmp_nb_characters;
+
+    tmp.teams.push_back(one_team);
+
+    // get next team
+    i++;
+    team = LitDocXml::AccesBalise (elem, "team_"+ulong2str(i));
   }
 
   //=== Video ===
@@ -292,7 +310,7 @@ bool Config::SauveXml()
 {
   EcritDocXml doc;
 
-  doc.Cree (m_nomfich, "config", "1.0", "iso-8859-1");
+  doc.Cree (m_nomfich, "config", "1.0", "utf-8");
   xmlpp::Element *racine = doc.racine();
   doc.EcritBalise (racine, "version", Constants::VERSION);
 
@@ -301,12 +319,16 @@ bool Config::SauveXml()
 
   //=== Teams ===
   xmlpp::Element *balise_equipes = racine -> add_child("teams");
+
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
     fin=teams_list.playing_list.end();
-  for (; it != fin; ++it)
+  for (int i=0; it != fin; ++it, i++)
   {
-    doc.EcritBalise (balise_equipes, "team", (**it).GetId());
+    xmlpp::Element *une_equipe = balise_equipes -> add_child("team_"+ulong2str(i));
+    doc.EcritBalise (une_equipe, "id", (**it).GetId());
+    doc.EcritBalise (une_equipe, "player_name", (**it).GetPlayerName());
+    doc.EcritBalise (une_equipe, "nb_characters", ulong2str((**it).GetNbCharacters()));
   }
 
   //=== Video ===

@@ -191,8 +191,8 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
       std::string team_id = team->GetId();
 
       Action* a = new Action(ACTION_NEW_TEAM, team_id);
-      a->Push(6);
       a->Push(getenv("USER"));
+      a->Push(6);
       action_handler->NewAction (a);
       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
     }
