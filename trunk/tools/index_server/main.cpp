@@ -21,7 +21,6 @@
 // map < socket_fd, client >
 std::list<Client*> clients;
 
-#ifdef STATIC
 void SetChroot()
 {
 	if(chroot("./") == -1)
@@ -38,7 +37,6 @@ void SetChroot()
 	if(setuid(uid) == -1)
 		TELL_ERROR;
 }
-#endif
 
 int SetMaxConnection()
 {
@@ -81,13 +79,10 @@ int main(int argc, void** argv)
 {
 	bool chroot_opt;
 	config.Get("chroot", chroot_opt);
-#ifdef STATIC
+
 	if (chroot_opt)
 		SetChroot();
-#else
-	if (chroot_opt)
-		DPRINT(INFO, "Wasn't statically linked... chroot option unavailable");
-#endif
+
 	if(getuid() == 0)
 	{
 		DPRINT(INFO, "Don't start me as root user!!");
