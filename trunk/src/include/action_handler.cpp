@@ -342,21 +342,15 @@ void SendGameMode()
 // TODO: Move this into network/distant_cpu.cpp
 void Action_NewTeam (Action *a)
 {
-  std::string team_id = a->PopString();
-  teams_list.AddTeam (team_id);
+  ConfigTeam the_team;
 
-  uint index;
-  Team* team = teams_list.FindPlayingById(team_id,index);
+  the_team.id = a->PopString();
+  the_team.player_name = a->PopString();
+  the_team.nb_characters = uint(a->PopInt());
 
-  // set the number of characters
-  uint nb_characters = uint(a->PopInt());
-  team->SetNbCharacters(nb_characters);
+  teams_list.AddTeam (the_team);
 
-  // set the player name
-  std::string player_name = a->PopString();
-  team->SetPlayerName(player_name);
-
-  network.network_menu->AddTeamCallback(team_id);
+  network.network_menu->AddTeamCallback(the_team.id);
 }
 
 // TODO: Move this into network/distant_cpu.cpp

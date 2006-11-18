@@ -27,6 +27,7 @@
 #include <list>
 #include <string>
 #include "../include/base.h"
+#include "../team/team_config.h"
 #include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)
@@ -84,7 +85,7 @@ public:
       bool effects;
       uint frequency;
     } sound;
-    std::list<std::string> teams;
+    std::list<struct ConfigTeam> teams;
     std::string map_name;
   } tmp;
 
