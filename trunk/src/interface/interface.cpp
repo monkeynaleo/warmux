@@ -219,6 +219,9 @@ void Interface::DrawTimeInfo()
 // display time left in a turn
 void Interface::DrawClock(const Point2i &time_pos)
 {
+  // Draw turn time
+  if (display_timer)
+    timer->DrawCenter(time_pos - Point2i(0, clock_background.GetHeight()/3));
   // Draw clock
   float scale;
   if(remaining_turn_time < 10)  // Hurry up !
@@ -232,20 +235,23 @@ void Interface::DrawClock(const Point2i &time_pos)
   std::string tmp(Time::GetInstance()->GetString());
   global_timer->Set(tmp);
   global_timer->DrawCenter(time_pos + Point2i(0, clock_background.GetHeight()/3));
-  // Draw turn time
-  if (display_timer)
-    timer->DrawCenter(time_pos - Point2i(0, clock_background.GetHeight()/3));
 }
 
 // draw wind indicator
-void Interface::DrawWindIndicator(const Point2i &wind_bar_pos)
+void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon)
 {
   AppWormux * app = AppWormux::GetInstance();
+  int height;
   // draw wind icon
-  app->video.window.Blit(wind_icon, wind_bar_pos);
-  world.ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_icon.GetSize()));
+  if(draw_icon) {
+    app->video.window.Blit(wind_icon, wind_bar_pos);
+    world.ToRedrawOnScreen(Rectanglei(wind_bar_pos, wind_icon.GetSize()));
+    height = wind_icon.GetHeight() - wind_indicator.GetHeight();
+  } else {
+    height = MARGIN;
+  }
   // draw wind indicator
-  Point2i wind_bar_offset = Point2i(0, wind_icon.GetHeight() - wind_indicator.GetHeight());
+  Point2i wind_bar_offset = Point2i(0, height);
   Point2i tmp = wind_bar_pos + wind_bar_offset + Point2i(2, 2);
   app->video.window.Blit(wind_indicator, wind_bar_pos + wind_bar_offset);
   wind_bar.DrawXY(tmp);
@@ -256,7 +262,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos)
 void Interface::DrawWindInfo()
 {
   Point2i wind_pos_offset = Point2i(game_menu.GetWidth() / 2 + clock_background.GetWidth() / 2 + MARGIN, game_menu.GetHeight() / 2 - wind_icon.GetHeight() / 2);
-  DrawWindIndicator(bottom_bar_pos + wind_pos_offset);
+  DrawWindIndicator(bottom_bar_pos + wind_pos_offset, true);
 }
 
 // draw mini info when hidding interface
@@ -264,13 +270,16 @@ void Interface::DrawSmallInterface()
 {
   if(display) return;
   AppWormux * app = AppWormux::GetInstance();
-  int width;
-  width = ((int)Time::GetInstance()->Read() - start_hide_display - 1000)/3 - 100;
-  width = (width < 0 ? width : 0);
-  Point2i small_interface_position = Point2i(width,app->video.window.GetHeight() / 2);
+  int height;
+  height = ((int)Time::GetInstance()->Read() - start_hide_display - 1000) / 3 - 30;
+  height = (height > 0 ? height : 0);
+  height = (height < small_background_interface.GetHeight() ? height : small_background_interface.GetHeight());
+  Point2i small_interface_position = Point2i(app->video.window.GetWidth() / 2 - small_background_interface.GetWidth() / 2, app->video.window.GetHeight() - height);
   app->video.window.Blit(small_background_interface,small_interface_position);
   world.ToRedrawOnScreen(Rectanglei(small_interface_position,small_background_interface.GetSize()));
-  DrawWindIndicator(small_interface_position + Point2i(MARGIN,MARGIN));
+  DrawWindIndicator(small_interface_position + Point2i(MARGIN, 0), false);
+  if (display_timer)
+    timer->DrawTopLeft(small_interface_position + Point2i(MARGIN * 2 + wind_bar.GetWidth(), MARGIN));
 }
 
 // draw team energy
@@ -298,10 +307,9 @@ void Interface::Draw()
 
   weapons_menu.Draw();
 
-
   // Display the background of both Character info and weapon info
   Rectanglei dr(bottom_bar_pos, game_menu.GetSize());
-  app->video.window.Blit( game_menu, bottom_bar_pos);
+  app->video.window.Blit(game_menu, bottom_bar_pos);
 
   world.ToRedrawOnScreen(dr);
 
@@ -324,6 +332,10 @@ int Interface::GetHeight() const
   if(!display) {
     int height = GetMenuHeight() - ((int)Time::GetInstance()->Read() - start_hide_display)/3;
     height = (height > 0 ? height : 0);
+    return (height < GetMenuHeight() ? height : GetMenuHeight());
+  } else if(start_show_display != 0) {
+    int height = ((int)Time::GetInstance()->Read() - start_show_display)/3;
+    height = (height < GetMenuHeight() ? height : GetMenuHeight());
     return (height < GetMenuHeight() ? height : GetMenuHeight());
   }
   return GetMenuHeight();
