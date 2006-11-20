@@ -225,6 +225,7 @@ void Weapon::PrepareShoot(double strength, int angle)
   ActiveTeam().crosshair.ChangeAngleVal(angle);
   m_strength = strength;
   StopLoading();
+
   ActiveCharacter().PrepareShoot();
 }
 

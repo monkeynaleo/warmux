@@ -39,7 +39,6 @@ class AIStupidEngine
   uint m_last_shoot_time;
   uint m_step;
 
-  bool m_goes_right;
   bool m_is_walking;
 
   Point2i m_last_position;

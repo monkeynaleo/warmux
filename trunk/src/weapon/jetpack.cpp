@@ -148,16 +148,16 @@ void JetPack::GoLeft()
 {
   StartUse();
   m_x_force = - JETPACK_FORCE ;
-  if(ActiveCharacter().GetDirection() == 1)
-    ActiveCharacter().SetDirection(-1);
+  if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
+    ActiveCharacter().SetDirection(DIRECTION_LEFT);
 }
 
 void JetPack::GoRight()
 {
   StartUse();
   m_x_force = JETPACK_FORCE ;
-  if(ActiveCharacter().GetDirection() == -1)
-    ActiveCharacter().SetDirection(1);
+  if(ActiveCharacter().GetDirection() == DIRECTION_LEFT)
+    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
 }
 
 void JetPack::StopUp()

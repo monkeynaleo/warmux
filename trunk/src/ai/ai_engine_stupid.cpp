@@ -23,6 +23,7 @@
 #include "../include/action_handler.h"
 #include "../character/body.h"
 #include "../character/move.h"
+#include "../interface/game_msg.h"
 #include "../map/map.h"
 #include "../network/randomsync.h"
 #include "../team/macro.h"
@@ -92,16 +93,15 @@ void AIStupidEngine::ChooseDirection()
   if ( m_nearest_enemy ) {
 
     if ( ActiveCharacter().GetCenterX() < m_nearest_enemy->GetCenterX())
-      m_goes_right = true;
+      ActiveCharacter().SetDirection(DIRECTION_RIGHT);
     else
-      m_goes_right = false;
+      ActiveCharacter().SetDirection(DIRECTION_LEFT);
 
   } else {
     // we do not have found anybody to shoot
-    m_goes_right = randomSync.GetBool();
+    ActiveCharacter().SetDirection( randomSync.GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
   }
 
-  ActiveCharacter().SetDirection(m_goes_right);
 }
 
 void AIStupidEngine::Walk()
@@ -114,7 +114,7 @@ void AIStupidEngine::Walk()
   m_is_walking = true;
 
   if(ActiveCharacter().IsImmobile()) {
-    if (m_goes_right)
+    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
       MoveCharacterRight(ActiveCharacter());
     else
       MoveCharacterLeft(ActiveCharacter());
@@ -203,8 +203,6 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
   Point2i departure = pos;
   Point2i delta_pos;
 
-  // std::cout << "Departure: " << pos.x << " "<< pos.y << std::endl;
-//   std::cout << "Arrival: " << arrival.x << " "<< arrival.y << std::endl;
   double original_angle = pos.ComputeAngle(arrival);
 
   // compute to see if there any part of ground between the 2 characters
@@ -244,24 +242,36 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
 
   m_angle = Rad2Deg(original_angle);
 
-  // Set direction
-  if (departure.x > arrival.x) {
-    m_goes_right = false;
-    std::cout << " -> Try to inverse direction" << std::endl;
-    ActiveCharacter().SetDirection(m_goes_right);
-
-    if (m_angle < -90) {
-      m_angle = -180 + m_angle; 
-    } else if (m_angle > 90) {
-      m_angle = 180 - m_angle;
-    }
-    
-  }
-
   std::cout << "(" << departure.x <<","<< departure.y << ")";
   std::cout << ":(" << arrival.x <<","<< arrival.y << ")" << std::endl;
   std::cout << "Angle Radian " << original_angle << std::endl;
   std::cout << "Angle Degree " << m_angle << std::endl;
+
+  
+  // Set direction
+  if (departure.x > arrival.x) {
+    std::cout << " -> Try to inverse direction" << std::endl;
+    ActiveCharacter().SetDirection(DIRECTION_LEFT);
+
+    m_angle = int(InverseAngleDeg(double(m_angle)));
+//     if (m_angle < -90) {
+//       m_angle = -180 - m_angle; 
+//     } else if (m_angle > 90) {
+//       m_angle = 180 - m_angle;
+//     } 
+  } else {
+    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+  }
+  //  std::cout << "Angle Degree " << m_angle << std::endl;
+
+  std::string s = "Try to shoot "+character.GetName();
+  char buff[3];
+  sprintf(buff, "%d", m_angle); // to manage angle equals to 0
+  s += " with angle ";
+  s += buff;
+  GameMessages::GetInstance()->Add(s); 
+
+ //  std::cout << "Angle Degree " << m_angle << std::endl;
 
   return true;
 }

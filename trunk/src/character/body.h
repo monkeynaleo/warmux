@@ -22,7 +22,7 @@
 #ifndef BODY_H
 #define BODY_H
 #include <map>
-//#include "character.h"
+#include "../include/enum.h"
 #include "body_list.h"
 #include "clothe.h"
 #include "member.h"
@@ -75,7 +75,7 @@ class Body
                                         // Order to use to build the body
                                         // First element: member to build
                                         // Secnd element: parent member
-  int direction;
+  Direction_t direction;
 
   int animation_number;
   bool need_rebuild;
@@ -103,14 +103,14 @@ public:
   void SetMovementOnce(std::string name); //play the movement only once
   void SetRotation(int angle);
   void SetFrame(uint no);
-  void SetDirection(int dir);
+  void SetDirection(Direction_t dir);
   void PlayAnimation();
   void Build();
 
   const std::string& GetMovement();
   const std::string& GetClothe();
   void GetTestRect(uint &l, uint &r, uint &t, uint &b);
-  const int GetDirection();
+  const Direction_t GetDirection();
   const Point2i &GetHandPosition() const;
   uint GetMovementDuration();
   uint GetFrame() { return current_frame; };
