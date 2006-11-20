@@ -91,7 +91,7 @@ public:
    void DrawCharacterInfo();
    void DrawTeamEnergy();
    void DrawWeaponInfo();
-   void DrawWindIndicator(const Point2i &wind_bar_pos);
+   void DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon);
    void DrawWindInfo();
    void DrawClock(const Point2i &time_pos);
    void DrawTimeInfo();

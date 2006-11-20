@@ -31,7 +31,7 @@
 #include "../include/app.h"
 
 const uint BAR_WIDTH = 13;
-const uint BAR_SPACING = 50;
+const uint BAR_SPACING = 30;
 const uint BAR_HEIGHT = 50;
 const uint SPACING = 3;
 
