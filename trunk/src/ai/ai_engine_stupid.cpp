@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "ai_engine_stupid.h"
+#include "ai_shoot.h"
 #include "../include/action_handler.h"
 #include "../character/body.h"
 #include "../character/move.h"
@@ -202,7 +203,7 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
   Point2i arrival = character.GetCenter();
   Point2i departure = pos;
   Point2i delta_pos;
-
+  
   double original_angle = pos.ComputeAngle(arrival);
 
   // compute to see if there any part of ground between the 2 characters
@@ -219,6 +220,18 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
       break;
     }
 
+    // is there a collision with another character ?
+    FOR_ALL_CHARACTERS(team, other_character) {
+      if ( &(*other_character) != &ActiveCharacter() 
+	   && &(*other_character) != &character ) {
+
+	if ( other_character->GetTestRect().Contains(pos) )
+	  return false;
+
+      }
+    }
+
+    // next step
     int diff_x = pos.x - arrival.x;
     int diff_y = pos.y - arrival.y;
 
@@ -240,30 +253,18 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
     pos += delta_pos;
   }
 
+  // Convert radian angle into degree
   m_angle = Rad2Deg(original_angle);
 
-  std::cout << "(" << departure.x <<","<< departure.y << ")";
-  std::cout << ":(" << arrival.x <<","<< arrival.y << ")" << std::endl;
-  std::cout << "Angle Radian " << original_angle << std::endl;
-  std::cout << "Angle Degree " << m_angle << std::endl;
-
-  
   // Set direction
   if (departure.x > arrival.x) {
-    std::cout << " -> Try to inverse direction" << std::endl;
     ActiveCharacter().SetDirection(DIRECTION_LEFT);
-
     m_angle = int(InverseAngleDeg(double(m_angle)));
-//     if (m_angle < -90) {
-//       m_angle = -180 - m_angle; 
-//     } else if (m_angle > 90) {
-//       m_angle = 180 - m_angle;
-//     } 
   } else {
     ActiveCharacter().SetDirection(DIRECTION_RIGHT);
   }
-  //  std::cout << "Angle Degree " << m_angle << std::endl;
 
+  // Prepare game message
   std::string s = "Try to shoot "+character.GetName();
   char buff[3];
   sprintf(buff, "%d", m_angle); // to manage angle equals to 0
@@ -271,9 +272,8 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
   s += buff;
   GameMessages::GetInstance()->Add(s); 
 
- //  std::cout << "Angle Degree " << m_angle << std::endl;
-
   return true;
+
 }
 
 void AIStupidEngine::Shoot()
