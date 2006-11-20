@@ -40,7 +40,7 @@ Body::Body(xmlpp::Element* xml, Profile* res)
   current_mvt = NULL;
   walk_events = 0;
   animation_number = 0;
-  direction = 1;
+  direction = DIRECTION_RIGHT;
   main_rotation = 0;
 
   // Load members
@@ -136,7 +136,7 @@ Body::Body(Body *_body)
   current_mvt = NULL;
   walk_events = 0;
   animation_number = _body->animation_number;
-  direction = 1;
+  direction = DIRECTION_RIGHT;
   main_rotation = 0;
 
   // Add a special weapon member to the body
@@ -230,7 +230,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
         int angle = ActiveTeam().crosshair.GetAngle(); // returns -180 < angle < 180
         if(angle < 0)
           angle += 360; // so now 0 < angle < 360;
-        if(ActiveCharacter().GetDirection() == -1)
+        if(ActiveCharacter().GetDirection() == DIRECTION_LEFT)
           angle = 180 - angle;
 
         mb_mvt.angle += angle ;
@@ -240,7 +240,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
       {
         // Use the movement of the crosshair
         int angle = ActiveTeam().crosshair.GetAngle(); // returns -180 < angle < 180
-        if(ActiveCharacter().GetDirection() == 1)
+        if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
           angle /= 2; // -90 < angle < 90
         else
         if(angle > 90)
@@ -262,7 +262,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
         int angle = (int)(owner->GetSpeedAngle()/M_PI*180.0);
         if(angle < 0)
           angle += 360; // so now 0 < angle < 360;
-        if(owner->GetDirection() == -1)
+        if(owner->GetDirection() == DIRECTION_LEFT)
           angle = 180 - angle;
 
         mb_mvt.angle += angle;
@@ -271,7 +271,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
       if(mb_mvt.follow_direction)
       {
         // Use the direction of the character
-        if(owner->GetDirection() == -1)
+        if(owner->GetDirection() == DIRECTION_LEFT)
           mb_mvt.angle += 180;
       }
 
@@ -361,7 +361,7 @@ void Body::Draw(const Point2i& _pos)
   Build();
 
   // update the weapon position
-  if(direction == 1)
+  if(direction == DIRECTION_RIGHT)
     weapon_pos = Point2i((int)weapon_member->pos.x,(int)weapon_member->pos.y);
   else
     weapon_pos = Point2i(GetSize().x - (int)weapon_member->pos.x,(int)weapon_member->pos.y);
@@ -369,7 +369,7 @@ void Body::Draw(const Point2i& _pos)
 
   // Finally draw each layer one by one
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
-    current_clothe->layers[layer]->Draw(_pos, _pos.x + GetSize().x/2, direction);
+    current_clothe->layers[layer]->Draw(_pos, _pos.x + GetSize().x/2, int(direction));
 }
 
 void Body::AddChildMembers(Member* parent)
@@ -527,7 +527,7 @@ void Body::SetMovementOnce(std::string name)
 
 void Body::GetTestRect(uint &l, uint&r, uint &t, uint &b)
 {
-  if(direction == 1)
+  if(direction == DIRECTION_RIGHT)
   {
     l = current_mvt->test_left;
     r = current_mvt->test_right;
@@ -541,12 +541,12 @@ void Body::GetTestRect(uint &l, uint&r, uint &t, uint &b)
   b = current_mvt->test_bottom;
 }
 
-void Body::SetDirection(int dir)
+void Body::SetDirection(Direction_t dir)
 {
   direction=dir;
 }
 
-const int Body::GetDirection()
+const Direction_t Body::GetDirection()
 {
   return direction;
 }
@@ -615,9 +615,9 @@ void Body::MakeTeleportParticles(const Point2i& pos, const Point2i& dst)
   if(current_clothe->layers[layer]->type != "weapon")
   {
     ParticleEngine::AddNow(new TeleportMemberParticle(current_clothe->layers[layer]->spr,
-                                                  current_clothe->layers[layer]->GetPos()+pos,
-                                                  current_clothe->layers[layer]->GetPos()+dst,
-                                                  direction));
+						      current_clothe->layers[layer]->GetPos()+pos,
+						      current_clothe->layers[layer]->GetPos()+dst,
+						      int(direction)));
   }
 }
 

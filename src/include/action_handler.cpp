@@ -227,7 +227,7 @@ void Action_SetSkin (Action *a)
 
 void Action_SetCharacterDirection (Action *a)
 {
-  ActiveCharacter().SetDirection (a->PopInt());
+  ActiveCharacter().SetDirection (Direction_t(a->PopInt()));
 }
 
 void Action_SetMap (Action *a)

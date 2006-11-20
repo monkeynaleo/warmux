@@ -28,6 +28,7 @@
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
 #include "../include/base.h"
+#include "../include/enum.h"
 #include "../object/physical_obj.h"
 #include "../particles/particle.h"
 
@@ -143,8 +144,8 @@ public:
   bool CanStillMoveDG (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
-  void SetDirection(int direction);
-  int GetDirection() const;
+  void SetDirection(Direction_t direction);
+  Direction_t GetDirection() const;
 
   // Team owner
   const Team& GetTeam() const;

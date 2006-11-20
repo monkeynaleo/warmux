@@ -374,7 +374,7 @@ void NinjaRope::GoRight()
 {
   go_right = true ;
   ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
-  ActiveCharacter().SetDirection(1);
+  ActiveCharacter().SetDirection(DIRECTION_RIGHT);
 }
 
 void NinjaRope::StopRight()
@@ -391,7 +391,7 @@ void NinjaRope::GoLeft()
 {
   go_left = true ;
   ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
-  ActiveCharacter().SetDirection(-1);
+  ActiveCharacter().SetDirection(DIRECTION_LEFT);
 }
 
 void NinjaRope::StopLeft()
