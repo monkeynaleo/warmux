@@ -315,7 +315,9 @@ bool Mouse::IsVisible() const
 
 bool Mouse::ScrollPointer()
 {
-  if (!Config::GetInstance()->GetScrollOnBorder()) return false;
+  if (!Config::GetInstance()->GetScrollOnBorder() || 
+      Interface::GetInstance()->weapons_menu.IsDisplayed()) 
+    return false;
 
   Point2i mousePos = GetPosition();
   Point2i winSize = AppWormux::GetInstance()->video.window.GetSize();
