@@ -47,6 +47,7 @@ public:
    // Timers
    Text * global_timer;
    Text * timer;
+   uint remaining_turn_time;
 
    // Character information
    Text * t_character_name;

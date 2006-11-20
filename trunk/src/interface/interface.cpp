@@ -177,6 +177,7 @@ void Interface::DrawWeaponInfo()
 {
   Weapon* weapon;
   int nbr_munition;
+  float icon_scale_factor = 0.75;
 
   // Get the weapon
   if(weapon_under_cursor==NULL) {
@@ -185,6 +186,7 @@ void Interface::DrawWeaponInfo()
   } else {
     weapon = weapon_under_cursor;
     nbr_munition = ActiveTeam().ReadNbAmmos(weapon_under_cursor->GetName());
+    icon_scale_factor = cos((float)Time::GetInstance()->Read() / 1000 * M_PI) * 0.9;
   }
 
   std::string tmp;
@@ -197,8 +199,7 @@ void Interface::DrawWeaponInfo()
   Point2i weapon_stock_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2 - t_weapon_stock->GetWidth() - MARGIN, t_weapon_name->GetHeight());
   t_weapon_stock->DrawTopLeft(bottom_bar_pos + weapon_stock_offset);
   // Draw weapon icon
-  float scale = cos((float)Time::GetInstance()->Read() / 1000 * M_PI) * 0.9;
-  weapon->GetIcon().Scale(scale, 0.75);
+  weapon->GetIcon().Scale(icon_scale_factor, 0.75);
   Point2i weapon_icon_offset = game_menu.GetSize() / 2 - weapon->GetIcon().GetSize() / 2 + Point2i(- clock_background.GetWidth(), MARGIN);
   weapon->GetIcon().DrawXY(bottom_bar_pos + weapon_icon_offset);
 }
@@ -219,8 +220,11 @@ void Interface::DrawTimeInfo()
 void Interface::DrawClock(const Point2i &time_pos)
 {
   // Draw clock
-  float scale = 0.9 + cos((float)Time::GetInstance()->Read() / 250 * M_PI) * 0.1;
-  //float scale_y = 0.9 + sin((float)Time::GetInstance()->Read() / 500 * M_PI) * 0.1;
+  float scale;
+  if(remaining_turn_time < 10)  // Hurry up !
+    scale = 0.9 + cos((float)Time::GetInstance()->Read() / 250 * M_PI) * 0.1;
+  else
+    scale = 1.0;
   clock->Scale(1.0, scale);
   Point2i tmp_point = time_pos - clock->GetSize() / 2;
   clock->DrawXY(tmp_point);
@@ -363,6 +367,7 @@ bool Interface::IsVisible() const
 void Interface::UpdateTimer(uint utimer)
 {
   timer->Set(ulong2str(utimer));
+  remaining_turn_time = utimer;
 }
 
 void Interface::UpdateWindIndicator(int wind_value)
