@@ -21,7 +21,6 @@
 #ifndef AI_STUPID_ENGINE
 #define AI_STUPID_ENGINE
 
-#include "ai_engine.h"
 #include "../character/character.h"
 #include "../game/time.h"
 
@@ -49,8 +48,8 @@ class AIStupidEngine
  private:
   void BeginTurn(); 
   void ChooseDirection();
-  void ChooseWeapon();
 
+  void ChooseWeapon();
   bool IsDirectlyShootable(Character& character);
   void Shoot();
 
