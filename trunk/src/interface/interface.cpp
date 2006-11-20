@@ -67,7 +67,7 @@ Interface::Interface()
   game_menu = resource_manager.LoadImage( res, "interface/background_interface");
   small_background_interface = resource_manager.LoadImage( res, "interface/small_background_interface");
   clock_background = resource_manager.LoadImage( res, "interface/clock_background");
-  clock = resource_manager.LoadImage( res, "interface/clock");
+  clock = new Sprite(resource_manager.LoadImage( res, "interface/clock"));
   wind_icon = resource_manager.LoadImage( res, "interface/wind");
   wind_indicator = resource_manager.LoadImage( res, "interface/wind_indicator");
 
@@ -188,10 +188,6 @@ void Interface::DrawWeaponInfo()
   }
 
   std::string tmp;
-  // Draw weapon icon
-  weapon->GetIcon().Scale(0.5,0.5);
-  Point2i weapon_icon_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth(),game_menu.GetHeight() - weapon->GetIcon().GetHeight());
-  weapon->GetIcon().DrawXY(bottom_bar_pos + weapon_icon_offset);
   // Draw weapon name
   t_weapon_name->Set(weapon->GetName());
   Point2i weapon_name_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2 - t_weapon_name->GetWidth() - MARGIN, 0);
@@ -200,6 +196,11 @@ void Interface::DrawWeaponInfo()
   t_weapon_stock->Set((nbr_munition ==  INFINITE_AMMO ? _("(unlimited)") : _("Stock:") + Format("%i", nbr_munition)));
   Point2i weapon_stock_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2 - t_weapon_stock->GetWidth() - MARGIN, t_weapon_name->GetHeight());
   t_weapon_stock->DrawTopLeft(bottom_bar_pos + weapon_stock_offset);
+  // Draw weapon icon
+  float scale = cos((float)Time::GetInstance()->Read() / 1000 * M_PI) * 0.9;
+  weapon->GetIcon().Scale(scale, 0.75);
+  Point2i weapon_icon_offset = game_menu.GetSize() / 2 - weapon->GetIcon().GetSize() / 2 + Point2i(- clock_background.GetWidth(), MARGIN);
+  weapon->GetIcon().DrawXY(bottom_bar_pos + weapon_icon_offset);
 }
 
 void Interface::DrawTimeInfo()
@@ -217,11 +218,12 @@ void Interface::DrawTimeInfo()
 // display time left in a turn
 void Interface::DrawClock(const Point2i &time_pos)
 {
-  AppWormux * app = AppWormux::GetInstance();
   // Draw clock
-  Point2i tmp_point = time_pos - clock.GetSize() / 2;
-  app->video.window.Blit(clock, tmp_point);
-  world.ToRedrawOnScreen(Rectanglei(tmp_point,clock.GetSize()));
+  float scale = 0.9 + cos((float)Time::GetInstance()->Read() / 250 * M_PI) * 0.1;
+  //float scale_y = 0.9 + sin((float)Time::GetInstance()->Read() / 500 * M_PI) * 0.1;
+  clock->Scale(1.0, scale);
+  Point2i tmp_point = time_pos - clock->GetSize() / 2;
+  clock->DrawXY(tmp_point);
   // Draw global timer
   std::string tmp(Time::GetInstance()->GetString());
   global_timer->Set(tmp);
@@ -241,8 +243,8 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos)
   // draw wind indicator
   Point2i wind_bar_offset = Point2i(0, wind_icon.GetHeight() - wind_indicator.GetHeight());
   Point2i tmp = wind_bar_pos + wind_bar_offset + Point2i(2, 2);
-  wind_bar.DrawXY(tmp);
   app->video.window.Blit(wind_indicator, wind_bar_pos + wind_bar_offset);
+  wind_bar.DrawXY(tmp);
   world.ToRedrawOnScreen(Rectanglei(wind_bar_pos + wind_bar_offset, wind_indicator.GetSize()));
 }
 
@@ -259,7 +261,7 @@ void Interface::DrawSmallInterface()
   if(display) return;
   AppWormux * app = AppWormux::GetInstance();
   int width;
-  width = (Time::GetInstance()->Read() - start_hide_display)/3 - 100;
+  width = ((int)Time::GetInstance()->Read() - start_hide_display - 1000)/3 - 100;
   width = (width < 0 ? width : 0);
   Point2i small_interface_position = Point2i(width,app->video.window.GetHeight() / 2);
   app->video.window.Blit(small_background_interface,small_interface_position);
@@ -316,8 +318,9 @@ int Interface::GetWidth() const
 int Interface::GetHeight() const
 {
   if(!display) {
-    int height = GetMenuHeight() - (Time::GetInstance()->Read() - start_hide_display)/3;
-    return (height > 0 ? height : 0);
+    int height = GetMenuHeight() - ((int)Time::GetInstance()->Read() - start_hide_display)/3;
+    height = (height > 0 ? height : 0);
+    return (height < GetMenuHeight() ? height : GetMenuHeight());
   }
   return GetMenuHeight();
 }
@@ -349,7 +352,7 @@ void Interface::Hide()
 {
   if(!display) return;
   display = false;
-  start_hide_display = Time::GetInstance()->Read();
+  start_hide_display = Time::GetInstance()->Read() + 1000;
 }
 
 bool Interface::IsVisible() const

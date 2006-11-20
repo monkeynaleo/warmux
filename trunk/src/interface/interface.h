@@ -69,7 +69,7 @@ public:
    Surface game_menu;
    Surface clock_background;
    Surface small_background_interface;
-   Surface clock;
+   Sprite * clock;
    Surface wind_icon;
    Surface wind_indicator;
    Point2i bottom_bar_pos;
