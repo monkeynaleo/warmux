@@ -155,6 +155,149 @@ void TeamBox::ValidOptions() const
     associated_team->SetLocal();
 }
 
+
+// ################################################
+// ##  MAP BOX CLASS
+// ################################################
+MapBox::MapBox(const Rectanglei &rect) : HBox(rect, true)
+{
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
+  
+  AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
+
+  // PreviousMap/NextMap buttons
+  bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus", false);
+  bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus", false);
+
+  resource_manager.UnLoadXMLProfile(res);
+
+  Box * tmp_map_box = new VBox( Rectanglei(0, 0,
+					   rect.GetSizeX()-63, 0), false);
+  tmp_map_box->SetBorder( Point2i(0,0) );
+  tmp_map_box->SetMargin(0);
+
+  // compute margin width between previews
+  uint map_preview_height = rect.GetSizeY() -2*10 -40;
+
+  // Previews
+  Box* previews_box = new HBox( Rectanglei(0, 0, 0, map_preview_height+10 ), false);
+  previews_box->SetBorder( Point2i(10,0) );
+
+   // compute margin width between previews
+  uint map_preview_width = map_preview_height*4/3;
+  uint total_width_previews = map_preview_width + map_preview_width*3;
+
+  uint margin = 0;
+
+  if ( uint(tmp_map_box->GetSizeX() - 20) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX())) {
+    margin = (tmp_map_box->GetSizeX() - 20 -
+	      (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
+  }
+
+  if (margin < 5) {
+    margin = 5;
+    uint total_size_wo_margin = tmp_map_box->GetSizeX() - 20 - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX();
+    map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
+    map_preview_height = 3/4 * map_preview_width;
+  }
+
+  previews_box->SetMargin(margin);
+  previews_box->AddWidget(bt_map_minus);
+
+  map_preview_before2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
+  previews_box->AddWidget(map_preview_before2);
+
+  map_preview_before = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
+  previews_box->AddWidget(map_preview_before);
+
+  // Selected map...
+  map_preview_selected = new PictureWidget(Rectanglei(0, 0, map_preview_width, map_preview_height));
+  previews_box->AddWidget(map_preview_selected);
+
+  map_preview_after = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
+  previews_box->AddWidget(map_preview_after);
+
+  map_preview_after2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
+  previews_box->AddWidget(map_preview_after2);
+
+  previews_box->AddWidget(bt_map_plus);
+
+  tmp_map_box->AddWidget(previews_box);
+
+  // Map information
+  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL, Font::BOLD), dark_gray_color, true, false);
+  tmp_map_box->AddWidget(map_name_label);
+
+  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), dark_gray_color, true, false);
+  tmp_map_box->AddWidget(map_author_label);
+
+  AddWidget(tmp_map_box);
+
+  // Load Maps' list
+  std::sort(MapsList::GetInstance()->lst.begin(), MapsList::GetInstance()->lst.end(), compareMaps);
+  selected_map_index = MapsList::GetInstance()->GetActiveMapIndex();
+  ChangeMap(0);
+}
+
+void MapBox::ChangeMap(int delta_index)
+{
+  int tmp = selected_map_index + delta_index;
+  if (tmp < 0 || tmp > int(MapsList::GetInstance()->lst.size() - 1)) return;
+
+  selected_map_index = tmp;
+
+  map_preview_selected->SetSurface(MapsList::GetInstance()->lst[selected_map_index].ReadPreview(), true);
+  map_name_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadName());
+  map_author_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadAuthorInfo());
+
+  if (selected_map_index > 0)
+    map_preview_before->SetSurface(MapsList::GetInstance()->lst[selected_map_index-1].ReadPreview(), true);
+  else
+    map_preview_before->SetNoSurface();
+
+  if (selected_map_index > 1)
+    map_preview_before2->SetSurface(MapsList::GetInstance()->lst[selected_map_index-2].ReadPreview(), true);
+  else
+    map_preview_before2->SetNoSurface();
+
+  if (selected_map_index+1 < MapsList::GetInstance()->lst.size() )
+    map_preview_after->SetSurface(MapsList::GetInstance()->lst[selected_map_index+1].ReadPreview(), true);
+  else
+    map_preview_after->SetNoSurface();
+
+  if (selected_map_index+2 < MapsList::GetInstance()->lst.size() )
+    map_preview_after2->SetSurface(MapsList::GetInstance()->lst[selected_map_index+2].ReadPreview(), true);
+  else
+    map_preview_after2->SetNoSurface();
+}
+
+Widget* MapBox::Clic (const Point2i &mousePosition, uint button)
+{
+  if (!Contains(mousePosition)) return NULL;
+
+  if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition) ) {
+    ChangeMap(-2);
+  } else if (   (button == SDL_BUTTON_LEFT && bt_map_minus->Contains(mousePosition))
+	     || (button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition))
+	     || (button == SDL_BUTTON_WHEELUP )) {
+    ChangeMap(-1);
+  } else if (   (button == SDL_BUTTON_LEFT && bt_map_plus->Contains(mousePosition))
+	     || (button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
+	     || (button == SDL_BUTTON_WHEELDOWN)) {
+    ChangeMap(+1);
+  } else if (map_preview_after2->Contains(mousePosition) ) {
+    ChangeMap(+2);
+  }
+
+  return this;
+}  
+
+void MapBox::ValidMapSelection()
+{
+  MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
+}
+
+
 // ################################################
 // ##  GAME MENU CLASS
 // ################################################
@@ -219,75 +362,8 @@ GameMenu::GameMenu() :
   // ################################################
   // ##  MAP SELECTION
   // ################################################
-  map_box = new HBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-				       0, mapBoxHeight));
-  map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
-
-  // PreviousMap/NextMap buttons
-  bt_map_plus = new Button(Point2i(0, 0), res, "menu/big_plus", false);
-  bt_map_minus = new Button(Point2i(0, 0), res, "menu/big_minus", false);
-
-  Box * tmp_map_box = new VBox( Rectanglei(0, 0,
-					   mainBoxWidth-63, 0), false);
-  tmp_map_box->SetBorder( Point2i(0,0) );
-  tmp_map_box->SetMargin(0);
-
-  // compute margin width between previews
-  uint map_preview_height = mapBoxHeight -2*10 -40;
-
-  // Previews
-  Box* previews_box = new HBox( Rectanglei(0, 0, 0, map_preview_height+10 ), false);
-  previews_box->SetBorder( Point2i(10,0) );
-
-  // compute margin width between previews
-  uint map_preview_width = map_preview_height*4/3;
-  uint total_width_previews = map_preview_width + map_preview_width*3;
-
-  uint margin = 0;
-
-  if ( uint(tmp_map_box->GetSizeX() - 20) > uint(total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX())) {
-    margin = (tmp_map_box->GetSizeX() - 20 -
-	      (total_width_previews + bt_map_plus->GetSizeX() + bt_map_minus->GetSizeX()) ) / 6;
-  }
-
-  if (margin < 5) {
-    margin = 5;
-    uint total_size_wo_margin = tmp_map_box->GetSizeX() - 20 - 6*margin - bt_map_plus->GetSizeX() - bt_map_minus->GetSizeX();
-    map_preview_width = (total_size_wo_margin)/4; // <= total = w + 4*(3/4)w
-    map_preview_height = 3/4 * map_preview_width;
-  }
-
-  previews_box->SetMargin(margin);
-  previews_box->AddWidget(bt_map_minus);
-
-  map_preview_before2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
-  previews_box->AddWidget(map_preview_before2);
-
-  map_preview_before = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
-  previews_box->AddWidget(map_preview_before);
-
-  // Selected map...
-  map_preview_selected = new PictureWidget(Rectanglei(0, 0, map_preview_width, map_preview_height));
-  previews_box->AddWidget(map_preview_selected);
-
-  map_preview_after = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
-  previews_box->AddWidget(map_preview_after);
-
-  map_preview_after2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
-  previews_box->AddWidget(map_preview_after2);
-
-  previews_box->AddWidget(bt_map_plus);
-
-  tmp_map_box->AddWidget(previews_box);
-
-  // Map information
-  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL, Font::BOLD), dark_gray_color, true, false);
-  tmp_map_box->AddWidget(map_name_label);
-
-  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), dark_gray_color, true, false);
-  tmp_map_box->AddWidget(map_author_label);
-
-  map_box->AddWidget(tmp_map_box);
+  map_box = new MapBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
+				       mainBoxWidth, mapBoxHeight));
 
   widgets.AddWidget(map_box);
 
@@ -342,10 +418,7 @@ GameMenu::GameMenu() :
 
   // Values initialization
 
-  // Load Maps' list
-  std::sort(MapsList::GetInstance()->lst.begin(), MapsList::GetInstance()->lst.end(), compareMaps);
-  selected_map_index = MapsList::GetInstance()->GetActiveMapIndex();
-  ChangeMap(0);
+
 
   // Load Teams' list
   teams_list.full_list.sort(compareTeams);
@@ -386,18 +459,8 @@ void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {
   if ( game_options->Clic(mousePosition, button)) {
 
-  } else if (button == SDL_BUTTON_LEFT && map_preview_before2->Contains(mousePosition) ) {
-    ChangeMap(-2);
-  } else if (   (button == SDL_BUTTON_LEFT && bt_map_minus->Contains(mousePosition))
-	     || (button == SDL_BUTTON_LEFT && map_preview_before->Contains(mousePosition))
-	     || (button == SDL_BUTTON_WHEELUP && map_box->Contains(mousePosition))) {
-    ChangeMap(-1);
-  } else if (   (button == SDL_BUTTON_LEFT && bt_map_plus->Contains(mousePosition))
-	     || (button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
-	     || (button == SDL_BUTTON_WHEELDOWN && map_box->Contains(mousePosition))) {
-    ChangeMap(+1);
-  } else if (map_preview_after2->Contains(mousePosition) ) {
-    ChangeMap(+2);
+  } else if ( map_box->Clic(mousePosition, button)) {
+
   } else  if (teams_nb->Clic(mousePosition, button)){
     SetNbTeams(teams_nb->GetValue());
 
@@ -502,7 +565,8 @@ void GameMenu::NextTeam(int i)
 
 void GameMenu::SaveOptions()
 {
-  MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
+  // Map
+  map_box->ValidMapSelection();
 
   // teams
   std::list<uint> selection;
@@ -551,38 +615,6 @@ void GameMenu::__sig_cancel()
   // Nothing to do
 }
 
-void GameMenu::ChangeMap(int delta_index)
-{
-  int tmp = selected_map_index + delta_index;
-  if (tmp < 0 || tmp > int(MapsList::GetInstance()->lst.size() - 1)) return;
-
-  selected_map_index = tmp;
-
-  map_preview_selected->SetSurface(MapsList::GetInstance()->lst[selected_map_index].ReadPreview(), true);
-  map_name_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadName());
-  map_author_label->SetText(MapsList::GetInstance()->lst[selected_map_index].ReadAuthorInfo());
-
-  if (selected_map_index > 0)
-    map_preview_before->SetSurface(MapsList::GetInstance()->lst[selected_map_index-1].ReadPreview(), true);
-  else
-    map_preview_before->SetNoSurface();
-
-  if (selected_map_index > 1)
-    map_preview_before2->SetSurface(MapsList::GetInstance()->lst[selected_map_index-2].ReadPreview(), true);
-  else
-    map_preview_before2->SetNoSurface();
-
-  if (selected_map_index+1 < MapsList::GetInstance()->lst.size() )
-    map_preview_after->SetSurface(MapsList::GetInstance()->lst[selected_map_index+1].ReadPreview(), true);
-  else
-    map_preview_after->SetNoSurface();
-
-  if (selected_map_index+2 < MapsList::GetInstance()->lst.size() )
-    map_preview_after2->SetSurface(MapsList::GetInstance()->lst[selected_map_index+2].ReadPreview(), true);
-  else
-    map_preview_after2->SetNoSurface();
-}
-
 void GameMenu::SetNbTeams(uint nb_teams)
 {
   // we hide the useless teams selector
@@ -594,6 +626,7 @@ void GameMenu::SetNbTeams(uint nb_teams)
     if (teams_selections[i]->GetTeam() == NULL) {
       // we should find an available team
       teams_selections[i]->SetTeam(*(teams_list.FindByIndex(i)));
+      NextTeam(i);
     }
   }
 }

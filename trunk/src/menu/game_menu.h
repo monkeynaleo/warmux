@@ -53,6 +53,27 @@ class TeamBox : public HBox
   Widget* Clic(const Point2i &mousePosition, uint button);
 };
 
+class MapBox : public HBox
+{ 
+ private:  
+  uint selected_map_index;
+   
+  PictureWidget *map_preview_selected;
+  PictureWidget *map_preview_before, *map_preview_before2;
+  PictureWidget *map_preview_after, *map_preview_after2;  
+     
+  Label *map_name_label;
+  Label *map_author_label;
+  Button *bt_map_plus, *bt_map_minus;
+
+ public:
+  MapBox(const Rectanglei &rect);
+
+  void ChangeMap(int delta_index);   
+  void ValidMapSelection();
+  Widget* Clic(const Point2i &mousePosition, uint button);
+};
+
 class GameMenu : public Menu
 {
    /* Team controllers */
@@ -60,24 +81,14 @@ class GameMenu : public Menu
    SpinButtonBig *teams_nb;
 
    /* Map controllers */
-   Box * map_box;
-   uint selected_map_index;
-   PictureWidget *map_preview_selected;
-   PictureWidget *map_preview_before, *map_preview_before2;
-   PictureWidget *map_preview_after, *map_preview_after2;  
-   Label *map_name_label;
-   Label *map_author_label;
-   Button *bt_map_plus, *bt_map_minus;
-   
+   MapBox * map_box;
+
    /* Game options controllers */
    Box * game_options;
    SpinButtonWithPicture *opt_duration_turn;
    //SpinButtonWithPicture *opt_duration_end_turn;
    //SpinButtonBig *opt_nb_characters;
    SpinButtonWithPicture *opt_energy_ini;
-
-
-   void ChangeMap(int delta_index);   
 
    void SetNbTeams(uint nb_teams);
    void PrevTeam(int i);
