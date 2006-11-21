@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "ai_engine_stupid.h"
-#include "ai_shoot.h"
 #include "../include/action_handler.h"
 #include "../character/body.h"
 #include "../character/move.h"
