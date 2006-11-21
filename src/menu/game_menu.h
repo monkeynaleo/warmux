@@ -23,6 +23,7 @@
 #define GAME_MENU_H
 
 #include "menu.h"
+#include "map_selection_box.h"
 #include "../include/base.h"
 #include "../graphic/font.h"
 
@@ -53,27 +54,6 @@ class TeamBox : public HBox
   Widget* Clic(const Point2i &mousePosition, uint button);
 };
 
-class MapBox : public HBox
-{ 
- private:  
-  uint selected_map_index;
-   
-  PictureWidget *map_preview_selected;
-  PictureWidget *map_preview_before, *map_preview_before2;
-  PictureWidget *map_preview_after, *map_preview_after2;  
-     
-  Label *map_name_label;
-  Label *map_author_label;
-  Button *bt_map_plus, *bt_map_minus;
-
- public:
-  MapBox(const Rectanglei &rect);
-
-  void ChangeMap(int delta_index);   
-  void ValidMapSelection();
-  Widget* Clic(const Point2i &mousePosition, uint button);
-};
-
 class GameMenu : public Menu
 {
    /* Team controllers */
@@ -81,7 +61,7 @@ class GameMenu : public Menu
    SpinButtonBig *teams_nb;
 
    /* Map controllers */
-   MapBox * map_box;
+   MapSelectionBox * map_box;
 
    /* Game options controllers */
    Box * game_options;
