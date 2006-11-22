@@ -20,38 +20,12 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/network/distant_cpu.cpp:70
-#, fuzzy
-msgid " has joined the party"
-msgstr "%s a căzut în afara hărţii!"
-
-#: src/network/distant_cpu.cpp:79
-#, fuzzy
-msgid " has left the party"
-msgstr "%s a căzut în afara hărţii!"
-
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/menu/network_menu.cpp:62 src/menu/network_menu.cpp:393
-#, c-format
-msgid "%i player connected"
-msgid_plural "%i players connected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: src/menu/network_menu.cpp:63 src/menu/network_menu.cpp:398
-#, c-format
-msgid "%i player ready"
-msgid_plural "%i players ready"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: src/game/game_loop.cpp:700
+#: src/game/game_loop.cpp:690
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (echipa %s) a murit."
@@ -66,7 +40,7 @@ msgstr "%s <%s> cunoscut şi ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/game/game_loop.cpp:679
+#: src/game/game_loop.cpp:669
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -76,12 +50,12 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game_loop.cpp:672
+#: src/game/game_loop.cpp:662
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game_loop.cpp:683
+#: src/game/game_loop.cpp:673
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
@@ -102,13 +76,13 @@ msgstr[0] "%s a câştigat %u punct de energie!"
 msgstr[1] "%s a câştigat %u puncte de energie!"
 msgstr[2] "%s a câştigat %u de puncte de energie!"
 
-#: src/game/game_loop.cpp:694
+#: src/game/game_loop.cpp:684
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "Psihopatia sălăşluieşte în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game_loop.cpp:689
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -118,7 +92,7 @@ msgstr "%s decedat prin propria stângăcie!"
 msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
 
-#: src/weapon/skip_turn.cpp:46
+#: src/weapon/skip_turn.cpp:41
 #, fuzzy, c-format
 msgid "%s team has skipped its turn."
 msgstr "%s (echipa %s) a murit."
@@ -195,11 +169,15 @@ msgstr[0] "'%s a câştigat %u atac aerian"
 msgstr[1] "'%s a câştigat %u atacuri aeriene"
 msgstr[2] "'%s a câştigat %u de atacuri aeriene"
 
-#: src/interface/interface.cpp:170
+#: src/menu/options_menu.cpp:132
+msgid "(current)"
+msgstr ""
+
+#: src/interface/interface.cpp:169
 msgid "(dead)"
 msgstr "(mort)"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:198
 msgid "(unlimited)"
 msgstr "(infinit)"
 
@@ -212,16 +190,11 @@ msgstr "Atac aerian"
 msgid "Airhammer"
 msgstr ""
 
-#: src/team/results.cpp:143
-#, fuzzy
-msgid "All teams"
-msgstr "Se aşteaptă echipele"
-
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr ""
 
-#: src/main.cpp:199
+#: src/main.cpp:201
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -251,11 +224,11 @@ msgstr ""
 msgid "Bye bye tux..."
 msgstr ""
 
-#: src/main.cpp:111
+#: src/main.cpp:113
 msgid "C++ exception caught:"
 msgstr "O excepţie C++ a fost captată:"
 
-#: src/team/teams_list.cpp:440 src/team/teams_list.cpp:479
+#: src/team/teams_list.cpp:448 src/team/teams_list.cpp:487
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
@@ -270,33 +243,13 @@ msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
 msgid "Cluster Bomb"
 msgstr "Bombă cu schije"
 
-#: src/weapon/suicide.cpp:35
+#: src/weapon/suicide.cpp:32
 #, fuzzy
 msgid "Commit Suicide"
 msgstr "Suicid"
 
-#: src/menu/internet_menu.cpp:62
-msgid "Connect !"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:86
-msgid "Connect to an internet game"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:66
-msgid "Connect to game"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:126
-msgid "Connected to "
-msgstr ""
-
 #: src/weapon/construct.cpp:43
 msgid "Construct"
-msgstr ""
-
-#: src/network/top_server.cpp:58
-msgid "Contacting main server..."
 msgstr ""
 
 #: src/menu/main_menu.cpp:113
@@ -307,7 +260,7 @@ msgstr "Merite"
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
-#: src/menu/game_menu.cpp:308
+#: src/menu/game_menu.cpp:101
 #, fuzzy
 msgid "Duration of a turn"
 msgstr "Durata unei ture:"
@@ -331,7 +284,7 @@ msgstr "Eroare la încărcarea echipei %s:"
 msgid "Error loading team's data %s:"
 msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
-#: src/game/config.cpp:274
+#: src/game/config.cpp:296
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -339,7 +292,7 @@ msgstr ""
 "Eroare în timpul creări directorului „%s”: fişierul de configurare nu poate "
 "fi stocat."
 
-#: src/game/config.cpp:142
+#: src/game/config.cpp:144
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eroare în timpul încărcări fişierul de configurare: %s"
@@ -363,11 +316,6 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: aspectul „%s” pentru echipa „%s” nu poate fi găsit."
 
-#: src/network/network.cpp:73
-#, fuzzy
-msgid "Failed to initialize network library!"
-msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
-
 #: src/game/game_loop.cpp:162
 msgid "Find a random position for characters"
 msgstr "Se caută o pozitie aleatoare pentru personaje"
@@ -375,11 +323,6 @@ msgstr "Se caută o pozitie aleatoare pentru personaje"
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
 msgstr "Tot ecranul?"
-
-#: src/menu/network_menu.cpp:60
-#, fuzzy
-msgid "Game options:"
-msgstr "Opţiuni ale jocului"
 
 #: src/weapon/gnu.cpp:120
 msgid "Gnu Launcher"
@@ -401,30 +344,22 @@ msgstr "Pistol"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 
-#: src/menu/game_menu.cpp:70
-msgid "Head commander"
-msgstr ""
-
 #: src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Grenadă"
 
-#: src/menu/network_connection_menu.cpp:73
-msgid "Host a game"
-msgstr ""
-
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:726
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:193
+#: src/main.cpp:195
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
 msgstr ""
 
-#: src/menu/game_menu.cpp:326
+#: src/menu/game_menu.cpp:119
 #, fuzzy
 msgid "Initial energy"
 msgstr "Energie iniţială:"
@@ -433,7 +368,7 @@ msgstr "Energie iniţială:"
 msgid "Initialisation"
 msgstr "Iniţializare"
 
-#: src/main.cpp:175
+#: src/main.cpp:177
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Iniţializarea bibiliotecii TTF a eşuat: %s"
@@ -450,33 +385,13 @@ msgstr "Iniţializare obiecte"
 msgid "Initialise teams"
 msgstr "Iniţializare echipe"
 
-#: src/network/network.cpp:190
-msgid "Invalid port!"
-msgstr ""
-
-#: src/network/network.cpp:140
-msgid "Invalid server adress!"
-msgstr ""
-
-#: src/network/top_server.cpp:68
-msgid "Invalid top server adress!"
-msgstr ""
-
 #: src/object/bonus_box.cpp:281
 #, fuzzy
 msgid "Is it a gift?"
 msgstr "Oare e un cadou?"
 
-#: src/network/top_server.cpp:170
-msgid "It doesn't seem to be a valid Wormux server..."
-msgstr ""
-
-#: src/weapon/jetpack.cpp:48
+#: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
-msgstr ""
-
-#: src/menu/network_menu.cpp:71
-msgid "Join #wormux on irc.freenode.net to find"
 msgstr ""
 
 #: src/map/maps_list.cpp:185
@@ -487,7 +402,7 @@ msgstr "Încărcare hărţi:"
 msgid "Load teams:"
 msgstr "Încărcare echipe:"
 
-#: src/weapon/lowgrav.cpp:41
+#: src/weapon/lowgrav.cpp:38
 msgid "LowGrav"
 msgstr ""
 
@@ -500,11 +415,6 @@ msgstr "Harta %s, o creaţie a lui :"
 msgid "Maps"
 msgstr ""
 
-#: src/menu/network_menu.cpp:58
-#, fuzzy
-msgid "Max number of players:"
-msgstr "Jucători per echipă:"
-
 #: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Maximum FPS"
@@ -513,26 +423,6 @@ msgstr "Numărul maxim de C/S:"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mină"
-
-#: src/menu/results_menu.cpp:169
-#, fuzzy
-msgid "Most sold-out"
-msgstr "  Cel mai mare trădător :  %s (%i).\n"
-
-#: src/menu/results_menu.cpp:159
-#, fuzzy
-msgid "Most useful"
-msgstr "  Cel mai folositor     :  %s (%i).\n"
-
-#: src/menu/results_menu.cpp:164
-#, fuzzy
-msgid "Most useless"
-msgstr "  Cel mai inutil        :  %s (%i).\n"
-
-#: src/menu/results_menu.cpp:154
-#, fuzzy
-msgid "Most violent"
-msgstr "  Cel mai violent       :  %s (%i).\n"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -546,30 +436,10 @@ msgstr "Joc în reţea"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:537
+#: src/weapon/weapon.cpp:543
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
-
-#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
-#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
-#, fuzzy
-msgid "Nobody!"
-msgstr "Nimeni"
-
-#: src/menu/game_menu.cpp:76
-#, fuzzy
-msgid "Number of characters"
-msgstr "Jucători per echipă:"
-
-#: src/menu/game_menu.cpp:181
-#, fuzzy
-msgid "Number of teams:"
-msgstr "Jucători per echipă:"
-
-#: src/menu/network_menu.cpp:181
-msgid "Only the server can set the map!"
-msgstr ""
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -585,11 +455,6 @@ msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
-msgstr "Porneşte jocul"
-
-#: src/menu/game_menu.cpp:199
-#, fuzzy
-msgid "Player"
 msgstr "Porneşte jocul"
 
 #: src/menu/options_menu.cpp:68
@@ -610,12 +475,12 @@ msgstr ""
 msgid "Quit"
 msgstr "Ieşire"
 
-#: src/main.cpp:180
+#: src/main.cpp:182
 msgid "Quit Wormux"
 msgstr "Ieşire din Wormux"
 
-#: src/menu/internet_menu.cpp:55
-msgid "Refresh"
+#: src/game/config.cpp:155
+msgid "Reading personal config file"
 msgstr ""
 
 #: src/menu/options_menu.cpp:82
@@ -627,37 +492,21 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr "Rachetă automată"
 
-#: src/main.cpp:229
+#: src/main.cpp:231
 msgid "Run game"
 msgstr "Rulează jocul"
-
-#: src/menu/network_connection_menu.cpp:59
-msgid "Server adress:"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:78
-msgid "Server available on Internet"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:150
-msgid "Server started"
-msgstr ""
 
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
 msgstr "Opţiuni sunet"
 
-#: src/weapon/skip_turn.cpp:37
+#: src/weapon/skip_turn.cpp:32
 msgid "Skip turn"
 msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
-msgstr ""
-
-#: src/menu/network_menu.cpp:74
-msgid "So you have to restart Wormux after each"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -678,7 +527,7 @@ msgstr "Opţiuni sunet"
 msgid "Starting a new game"
 msgstr "Se începe un nou joc"
 
-#: src/interface/interface.cpp:201
+#: src/interface/interface.cpp:198
 msgid "Stock:"
 msgstr "Stoc:"
 
@@ -741,77 +590,35 @@ msgstr "Racheta a părăsit câmpul de luptă..."
 msgid "The rocket has left the battlefield..."
 msgstr "Racheta a părăsit câmpul de luptă..."
 
-#: src/menu/network_connection_menu.cpp:131
-#, fuzzy
-msgid "Unable to connect"
-msgstr "Nu a fost posibilă deschiderea directorului cu aspecte (%s)!"
-
-#: src/network/network.cpp:151
-#, fuzzy
-msgid "Unable to contact server!"
-msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
-
-#: src/network/top_server.cpp:78
-#, fuzzy
-msgid "Unable to contact top server!"
-msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
-
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
-
-#: src/menu/internet_menu.cpp:96
-#, fuzzy
-msgid "Unable to join the game..."
-msgstr "Nu a fost posibilă deschiderea directorului cu aspecte (%s)!"
-
-#: src/network/network.cpp:234
-#, fuzzy
-msgid "Unable to listen for client!"
-msgstr "Se aşteaptă clienţii"
 
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
 
-#: src/menu/network_connection_menu.cpp:153
-#, fuzzy
-msgid "Unable to start server"
-msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
-
-#: src/main.cpp:118
+#: src/main.cpp:120
 #, fuzzy
 msgid "Unexpected exception caught..."
 msgstr "S-a captat o excepţie neaştepată..."
 
-#: src/main.cpp:147
+#: src/main.cpp:149
 msgid "Version"
 msgstr "versiunea"
-
-#: src/menu/network_menu.cpp:73
-msgid "WARNING! Disconnections are not yet handled."
-msgstr ""
-
-#: src/menu/network_menu.cpp:285
-#, c-format
-msgid "Wait! %i player is not ready yet!"
-msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
 
 #: src/game/game_loop.cpp:219
 #, fuzzy
 msgid "Weapons"
 msgstr "Arma:"
 
-#: src/main.cpp:210
+#: src/main.cpp:212
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game_loop.cpp:697
+#: src/game/game_loop.cpp:687
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -821,18 +628,13 @@ msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
 msgid "Wind particles?"
 msgstr "Se afişează particulele de vânt?"
 
-#: src/main.cpp:162
+#: src/main.cpp:164
 msgid "Wormux launching..."
 msgstr "Se lansează Wormux..."
 
-#: src/main.cpp:198
+#: src/main.cpp:200
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
-
-#: src/include/action_handler.cpp:400
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
 
 #: src/map/maps_list.cpp:71
 #, c-format
@@ -857,21 +659,93 @@ msgstr "Aveţi nevoie de cel puţin două echipe valide !"
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
-#: src/menu/network_menu.cpp:75
-msgid "disconnection!"
-msgstr ""
-
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "finalizat"
 
-#: src/interface/interface.cpp:162
+#: src/interface/interface.cpp:161
 msgid "general: "
 msgstr ""
 
-#: src/menu/network_menu.cpp:72
-msgid "some opponents."
-msgstr ""
+#, fuzzy
+#~ msgid " has joined the party"
+#~ msgstr "%s a căzut în afara hărţii!"
+
+#, fuzzy
+#~ msgid " has left the party"
+#~ msgstr "%s a căzut în afara hărţii!"
+
+#, fuzzy
+#~ msgid "All teams"
+#~ msgstr "Se aşteaptă echipele"
+
+#, fuzzy
+#~ msgid "Failed to initialize network library!"
+#~ msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
+
+#, fuzzy
+#~ msgid "Game options:"
+#~ msgstr "Opţiuni ale jocului"
+
+#, fuzzy
+#~ msgid "Max number of players:"
+#~ msgstr "Jucători per echipă:"
+
+#, fuzzy
+#~ msgid "Most sold-out"
+#~ msgstr "  Cel mai mare trădător :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "Most useful"
+#~ msgstr "  Cel mai folositor     :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "Most useless"
+#~ msgstr "  Cel mai inutil        :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "Most violent"
+#~ msgstr "  Cel mai violent       :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "Nobody!"
+#~ msgstr "Nimeni"
+
+#, fuzzy
+#~ msgid "Number of characters"
+#~ msgstr "Jucători per echipă:"
+
+#, fuzzy
+#~ msgid "Number of teams:"
+#~ msgstr "Jucători per echipă:"
+
+#, fuzzy
+#~ msgid "Player"
+#~ msgstr "Porneşte jocul"
+
+#, fuzzy
+#~ msgid "Unable to connect"
+#~ msgstr "Nu a fost posibilă deschiderea directorului cu aspecte (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to contact server!"
+#~ msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to contact top server!"
+#~ msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to join the game..."
+#~ msgstr "Nu a fost posibilă deschiderea directorului cu aspecte (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to listen for client!"
+#~ msgstr "Se aşteaptă clienţii"
+
+#, fuzzy
+#~ msgid "Unable to start server"
+#~ msgstr "Nu a fost posibilă deschiderea directorului cu hărţi (%s)!"
 
 #, fuzzy
 #~ msgid "  Most sold-out  :  "
