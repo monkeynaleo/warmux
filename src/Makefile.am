@@ -75,6 +75,7 @@ wormux_SOURCES = \
 	interface/loading_screen.cpp interface/loading_screen.h \
 	menu/internet_menu.cpp menu/internet_menu.h \
 	menu/main_menu.cpp menu/main_menu.h \
+	menu/map_selection_box.cpp menu/map_selection_box.h \
 	menu/menu.cpp menu/menu.h \
 	menu/network_connection_menu.cpp menu/network_connection_menu.h \
 	menu/network_menu.cpp menu/network_menu.h \
@@ -82,6 +83,7 @@ wormux_SOURCES = \
 	menu/options_menu.cpp menu/options_menu.h \
 	menu/game_menu.cpp menu/game_menu.h \
 	menu/results_menu.cpp menu/results_menu.h \
+	menu/teams_selection_box.cpp menu/teams_selection_box.h \
 	game/time.cpp game/time.h \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/EnergyBar.cpp gui/EnergyBar.h \
