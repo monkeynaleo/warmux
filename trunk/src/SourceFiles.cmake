@@ -71,11 +71,13 @@ menu/credits_menu.cpp
 menu/game_menu.cpp
 menu/internet_menu.cpp
 menu/main_menu.cpp
+menu/map_selection_box.cpp
 menu/menu.cpp
 menu/network_connection_menu.cpp
 menu/network_menu.cpp
 menu/options_menu.cpp
 menu/results_menu.cpp
+menu/teams_selection_box.cpp
 network/chat.cpp
 network/distant_cpu.cpp
 network/download.cpp
