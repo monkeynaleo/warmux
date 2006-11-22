@@ -16,38 +16,63 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Map selection box
+ *  Teams selection box
  *****************************************************************************/
 
-#ifndef MAP_SELECTION_BOX_H
-#define MAP_SELECTION_BOX_H
+#ifndef TEAMS_SELECTION_BOX_H
+#define TEAMS_SELECTION_BOX_H
 
 #include "../gui/box.h"
-#include "../gui/button.h"
 #include "../gui/label.h"
 #include "../gui/picture_widget.h"
+#include "../gui/spin_button.h"
+#include "../gui/spin_button_big.h"
+#include "../gui/text_box.h"
 
-class MapSelectionBox : public HBox
-{ 
- private:  
-  uint selected_map_index;
-   
-  PictureWidget *map_preview_selected;
-  PictureWidget *map_preview_before, *map_preview_before2;
-  PictureWidget *map_preview_after, *map_preview_after2;  
-     
-  Label *map_name_label;
-  Label *map_author_label;
-  Button *bt_map_plus, *bt_map_minus;
+class Team;
 
-  void ChangeMap(int delta_index);   
+const uint MAX_NB_TEAMS=4;
+
+class TeamBox : public HBox
+{
+ private:
+  Team * associated_team;
+  PictureWidget *team_logo;
+  Label * team_name;
+  TextBox * player_name;
+  SpinButton * nb_characters;
 
  public:
-  MapSelectionBox(const Rectanglei &rect);
+  TeamBox(std::string player_name, const Rectanglei &rect);
 
-  void ValidMapSelection();
+  void SetTeam(Team& _team, bool read_team_values=false);
+  void ClearTeam();
+  Team* GetTeam() const;  
+  void ValidOptions() const;
+
+  void Update(const Point2i &mousePosition,
+	      const Point2i &lastMousePosition,
+	      Surface& surf);
   Widget* Clic(const Point2i &mousePosition, uint button);
 };
 
+// -----------------------------------------------
+// -----------------------------------------------
+
+class TeamsSelectionBox : public HBox
+{ 
+ private:  
+  SpinButtonBig *teams_nb;
+  TeamBox* teams_selections[MAX_NB_TEAMS];
+
+  void SetNbTeams(uint nb_teams);
+  void PrevTeam(int i);
+  void NextTeam(int i);
+ public:
+  TeamsSelectionBox(const Rectanglei &rect);
+
+  void ValidTeamsSelection();
+  Widget* Clic(const Point2i &mousePosition, uint button);
+};
 
 #endif

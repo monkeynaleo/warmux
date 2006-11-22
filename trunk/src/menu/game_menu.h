@@ -24,41 +24,14 @@
 
 #include "menu.h"
 #include "map_selection_box.h"
+#include "teams_selection_box.h"
 #include "../include/base.h"
 #include "../graphic/font.h"
-
-class Team;
-
-const uint MAX_NB_TEAMS=4;
-
-class TeamBox : public HBox
-{
- private:
-  Team * associated_team;
-  PictureWidget *team_logo;
-  Label * team_name;
-  TextBox * player_name;
-  SpinButton * nb_characters;
-
- public:
-  TeamBox(std::string player_name, uint width);
-
-  void SetTeam(Team& _team, bool read_team_values=false);
-  void ClearTeam();
-  Team* GetTeam() const;  
-  void ValidOptions() const;
-
-  void Update(const Point2i &mousePosition,
-	      const Point2i &lastMousePosition,
-	      Surface& surf);
-  Widget* Clic(const Point2i &mousePosition, uint button);
-};
 
 class GameMenu : public Menu
 {
    /* Team controllers */
-   TeamBox* teams_selections[MAX_NB_TEAMS];
-   SpinButtonBig *teams_nb;
+   TeamsSelectionBox * team_box;
 
    /* Map controllers */
    MapSelectionBox * map_box;
@@ -69,10 +42,6 @@ class GameMenu : public Menu
    //SpinButtonWithPicture *opt_duration_end_turn;
    //SpinButtonBig *opt_nb_characters;
    SpinButtonWithPicture *opt_energy_ini;
-
-   void SetNbTeams(uint nb_teams);
-   void PrevTeam(int i);
-   void NextTeam(int i);
 
    void SaveOptions();
    void OnClic(const Point2i &mousePosition, int button);
