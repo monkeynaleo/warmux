@@ -56,8 +56,8 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
       ++team)
     {
       Action b(ACTION_NEW_TEAM, (*team)->GetId());
-      b.Push( (int) (*team)->GetNbCharacters() );
-      b.Push( (*team)->GetPlayerName() );
+      b.Push((*team)->GetPlayerName());
+      b.Push((int)(*team)->GetNbCharacters());
       b.WritePacket(pack, size);
       SendDatas(pack, size);
       free(pack);
