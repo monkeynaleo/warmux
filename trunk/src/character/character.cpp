@@ -255,10 +255,10 @@ void Character::SetEnergyDelta (int delta, bool do_report)
   // Update energy
   SetEnergy(GetEnergy() + delta);
 
-  // Compute energy lost
-  if (delta < 0)
-  {
+  if(IsDead()) return;
 
+  // Compute energy lost
+  if (delta < 0) {
     lost_energy += (int)GetEnergy() - (int)saved_life_points;
 
     if ( lost_energy > -33 )
@@ -267,22 +267,17 @@ void Character::SetEnergyDelta (int delta, bool do_report)
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_medium");
     else
       jukebox.Play (GetTeam().GetSoundProfile(), "injured_high");
-
-  }
-  else
+  } else
     lost_energy = 0;
 
   // "Friendly fire !!"
   if ( !IsActiveCharacter() && ActiveTeam().IsSameAs(m_team) )
     jukebox.Play (GetTeam().GetSoundProfile(), "friendly_fire");
-
-  // Dead character ?
-  if (GetEnergy() <= 0) Die();
 }
 
 void Character::SetEnergy(int new_energy)
 {
-  if(! network.IsLocal() )
+  if(!network.IsLocal())
   {
     if( m_alive == DEAD && new_energy > 0)
     {
@@ -301,11 +296,14 @@ void Character::SetEnergy(int new_energy)
                           GameMode::GetInstance()->character.max_energy);
   life_points = energy;
   energy_bar.Actu (energy);
+
+  // Dead character ?
+  if (GetEnergy() <= 0) Die();
 }
 
 bool Character::GotInjured() const
 {
-	return lost_energy < 0;
+  return lost_energy < 0;
 }
 
 void Character::Die()

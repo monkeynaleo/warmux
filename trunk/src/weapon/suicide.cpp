@@ -26,6 +26,7 @@
 #include "../game/game_loop.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
+#include "../include/action_handler.h"
 
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {
@@ -54,11 +55,14 @@ void Suicide::Refresh()
 
   m_is_active = sound_channel != -1 && Mix_Playing(sound_channel);
 
-  if( !m_is_active )
-  if( !ActiveCharacter().IsDead() )
+  if(!m_is_active && !ActiveCharacter().IsDead())
   {
     ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
-    ActiveCharacter().Die();
+    Action* a = new Action(ACTION_SET_CHARACTER_ENERGY);
+    a->Push((int)ActiveCharacter().GetTeamIndex());
+    a->Push((int)ActiveCharacter().GetCharacterIndex());
+    a->Push(0); // Set energy to 0 => death
+    ActionHandler::GetInstance()->NewAction(a);
   }
 }
 
