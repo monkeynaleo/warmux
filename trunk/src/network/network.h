@@ -40,7 +40,7 @@ class Network
 
   bool inited;
 
-#ifdef DEBUG
+#if defined(DEBUG) && not defined(WIN32)
   int fout;
   int fin;	
 #endif
