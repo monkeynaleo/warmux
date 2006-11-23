@@ -88,8 +88,8 @@ Team* TeamBox::GetTeam() const
 }
 
 void TeamBox::Update(const Point2i &mousePosition,
-			   const Point2i &lastMousePosition,
-			   Surface& surf)
+		     const Point2i &lastMousePosition,
+		     Surface& surf)
 {
   Box::Update(mousePosition, lastMousePosition, surf);
   if (need_redrawing) {
@@ -202,7 +202,7 @@ Widget* TeamsSelectionBox::Clic (const Point2i &mousePosition, uint button)
 
   if (teams_nb->Clic(mousePosition, button)){
     SetNbTeams(teams_nb->GetValue());
-    
+
   } else {
     for (uint i=0; i<MAX_NB_TEAMS ; i++) {
 
@@ -224,7 +224,7 @@ Widget* TeamsSelectionBox::Clic (const Point2i &mousePosition, uint button)
     }
   }
 
-  return this;
+  return NULL;
 }
 
 void TeamsSelectionBox::PrevTeam(int i)
