@@ -152,7 +152,7 @@ Widget* MapSelectionBox::Clic (const Point2i &mousePosition, uint button)
     ChangeMap(+2);
   }
 
-  return this;
+  return NULL;
 }  
 
 void MapSelectionBox::ValidMapSelection()
