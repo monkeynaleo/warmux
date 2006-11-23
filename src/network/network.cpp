@@ -31,7 +31,7 @@
 #include "../tool/i18n.h"
 #include "distant_cpu.h"
 
-#ifdef DEBUG
+#if defined(DEBUG) && not defined(WIN32)
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -53,7 +53,11 @@ Network::Network()
   network_menu = NULL;
 
   //Set nickname
+#ifdef WIN32
+  nickname = getenv("USERNAME");
+#else
   nickname = getenv("USER");
+#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -76,7 +80,7 @@ void Network::Init()
   max_player_number = GameMode::GetInstance()->max_teams;
   connected_player = 0;
 
-#ifdef DEBUG
+#if defined(DEBUG) && not defined(WIN32)
   fin = open("./network.in", O_RDWR | O_CREAT | O_SYNC, S_IRWXU | S_IRWXG);
   fout = open("./network.out", O_RDWR | O_CREAT | O_SYNC, S_IRWXU | S_IRWXG);
 #endif
@@ -90,7 +94,7 @@ Network::~Network()
   if(inited)
   {
     SDLNet_Quit();
-#ifdef DEBUG
+#if defined(DEBUG) && not defined(WIN32)
     close(fin);
     close(fout);
 #endif
@@ -293,7 +297,7 @@ void Network::ReceiveActions()
           continue;
         }
 
-#ifdef DEBUG
+#if defined(DEBUG) && not defined(WIN32)
 	int tmp = 0xFFFFFFFF;
 	write(fin, &packet_size, 4);
 	write(fin, packet, packet_size);
@@ -369,7 +373,7 @@ void Network::SendAction(Action* a)
 
 void Network::SendPacket(char* packet, int size)
 {
-#ifdef DEBUG
+#if defined(DEBUG) && not defined(WIN32)
 	int tmp = 0xFFFFFFFF;
 	write(fout, &size, 4);
 	write(fout, packet, size);

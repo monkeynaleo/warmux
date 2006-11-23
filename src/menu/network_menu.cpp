@@ -187,11 +187,19 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
       int index = -1;
       Team* team = teams_list.FindById(lbox_all_teams->ReadValue(),index);
       team->SetLocal();
+#ifdef WIN32
+      team->SetPlayerName(getenv("USERNAME"));
+#else
       team->SetPlayerName(getenv("USER"));
+#endif
       std::string team_id = team->GetId();
 
       Action* a = new Action(ACTION_NEW_TEAM, team_id);
+#ifdef WIN32
+      a->Push(getenv("USERNAME"));
+#else
       a->Push(getenv("USER"));
+#endif
       a->Push(6);
       action_handler->NewAction (a);
       MoveTeams(lbox_all_teams, lbox_selected_teams, false);
