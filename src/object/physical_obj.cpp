@@ -270,14 +270,14 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
   if (m_goes_through_wall || IsInWater())
   {
-    Point2i tmpPos( (int)round(newPos.x), (int)round(newPos.y) );
+    Point2i tmpPos( lround(newPos.x), lround(newPos.y) );
     SetXY(tmpPos);
     return;
   }
 
   do
   {
-    Point2i tmpPos( (int)round(pos.x), (int)round(pos.y) );
+    Point2i tmpPos( lround(pos.x), lround(pos.y) );
 
     // Check if we exit the world. If so, we stop moving and return.
     if( IsOutsideWorldXY(tmpPos) ){
@@ -311,7 +311,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
           collision == COLLISION_ON_GROUND ? "on ground" : "on an object");
 
       // Set the object position to the current position.
-      SetXY( Point2i( (int)round(pos.x - offset.x), (int)round(pos.y - offset.y)) );
+      SetXY( Point2i( lround(pos.x - offset.x), lround(pos.y - offset.y)) );
       break;
     }
 
@@ -352,7 +352,6 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     SignalGroundCollision();
     SignalCollision();
-
     // Make it rebound on the ground !!
     Rebound(contactPos, contact_angle);
     CheckRebound();
@@ -361,19 +360,22 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     collided_obj->SignalObjectCollision(this);
 
     // Get the current speed
-    double norm, angle;
-    GetSpeed(norm, angle);
+    double v1, v2, mass1, angle1, angle2, mass2;
+    collided_obj->GetSpeed(v1, angle1);
+    GetSpeed(v2, angle2);
+    mass1 = GetMass();
+    mass2 = collided_obj->GetMass();
 
     // Give speed to the other object
-    // m1V1 + m2V2 = m1V'1 + m2V'2
-    // Since V2 is equal to (0;0)
-    // m1V1 = m1V'1 + m2V'2
-    // We set the speed proportionally to the mass
-    double total_mass = GetMass() + collided_obj->GetMass();
+    // thanks to physic and calculations about chocs, we know that :
+    //
+    // v'1 =  ((m1 - m2) * v1 + 2m1 *v2) / (m1 + m2)
+    // v'2 =  ((m2 - m1) * v2 + 2m1 *v1) / (m1 + m2)
     SignalCollision();
 
-    collided_obj->SetSpeed(collided_obj->GetMass()*norm/total_mass, angle);
-    SetSpeed(GetMass()*norm/total_mass, angle);
+    collided_obj->SetSpeed(((mass1 - mass2) * v1 + 2 * mass1 *v2 * m_cfg.m_rebound_factor) / (mass1 + mass2),
+                           angle1);
+    SetSpeed(((mass2 - mass1) * v2 + 2 * mass1 *v1 * m_cfg.m_rebound_factor) / (mass1 + mass2), angle2);
 
     // Rebound on the object
     double contact_angle = - GetSpeedAngle();
@@ -481,7 +483,6 @@ void PhysicalObj::Ghost ()
   MSG_DEBUG("physic.state", "%s - Ghost, was_dead = %d", m_name.c_str(), was_dead);
 
   // The object became a gost
-  m_pos_y.x1 = 0.0 ;
   StopMoving();
 
   SignalGhostState(was_dead);
