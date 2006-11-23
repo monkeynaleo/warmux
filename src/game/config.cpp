@@ -81,7 +81,7 @@ Config::Config()
   display_name_character = true;
   display_wind_particles = true;
   default_mouse_cursor = false;
-  scroll_on_border = false;
+  scroll_on_border = true;
   transparency = ALPHA;
 
   // video
