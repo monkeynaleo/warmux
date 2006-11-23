@@ -81,8 +81,8 @@ void SyncCharacters()
     {
       // Sync the character's energy
       Action* a = new Action(ACTION_SET_CHARACTER_ENERGY);
-		a->Push(team_no);
-		a->Push(char_no);
+      a->Push(team_no);
+      a->Push(char_no);
       a->Push((int)(*tit).GetEnergy());
       action_handler->NewAction(a);
       // Sync the character's position
