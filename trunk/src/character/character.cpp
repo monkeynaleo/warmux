@@ -322,9 +322,8 @@ void Character::Die()
     SetClothe("dead");
     SetMovement("dead");
 
-    ExplosiveWeaponConfig cfg;
-    ApplyExplosion ( GetCenter(), cfg);
-    assert (IsDead());
+    ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_cfg);
+    assert(IsDead());
 
     // Signal the death
     GameLoop::GetInstance()->SignalCharacterDeath (this);

@@ -20,12 +20,13 @@
  * per team, etc.
  *****************************************************************************/
 
-#ifndef MODE_JEU_H
-#define MODE_JEU_H
+#ifndef GAME_MODE_H
+#define GAME_MODE_H
 
 #include <string>
 #include "../include/base.h"
 #include "../tool/xml_document.h"
+#include "../weapon/weapon_cfg.h"
 
 class GameMode 
 {
@@ -40,6 +41,8 @@ public:
   double gravity;
   double safe_fall ;
   double damage_per_fall_unit ;
+  ExplosiveWeaponConfig death_cfg;
+  ExplosiveWeaponConfig suicide_cfg;
 
   struct s_character
   {
@@ -80,4 +83,4 @@ protected:
   bool LoadXml (xmlpp::Element *xml);
 };
 
-#endif
+#endif /* GAME_MODE_H */

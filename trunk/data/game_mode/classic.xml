@@ -24,6 +24,22 @@
     <jump strength="8" angle="-60" />
     <super_jump strength="11" angle="-80" />
     <back_jump strength="9" angle="-100" />
+    <explosion>
+      <death>
+        <damage>10</damage>
+        <explosion_range>50</explosion_range>
+        <particle_range>55</particle_range>
+        <blast_force>1500</blast_force>
+        <blast_range>50</blast_range>
+      </death>
+      <suicide>
+        <damage>20</damage>
+        <explosion_range>100</explosion_range>
+        <particle_range>110</particle_range>
+        <blast_force>3000</blast_force>
+        <blast_range>100</blast_range>
+      </suicide>
+    </explosion>
   </character>
 
   <weapons>

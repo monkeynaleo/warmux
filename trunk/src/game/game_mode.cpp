@@ -93,33 +93,42 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   LitDocXml::LitDouble (xml, "damage_per_fall_unit", damage_per_fall_unit);
 
   // Character options
-  xmlpp::Element *xmlver = LitDocXml::AccesBalise (xml, "character");
-  if (xmlver != NULL)
+  xmlpp::Element *character_xml = LitDocXml::AccesBalise (xml, "character");
+  if (character_xml != NULL)
   {
-    xmlpp::Element *item = LitDocXml::AccesBalise (xmlver, "energy");
+    xmlpp::Element *item = LitDocXml::AccesBalise (character_xml, "energy");
     if (item != NULL) {
       LitDocXml::LitAttrUint (item, "initial", character.init_energy);
       LitDocXml::LitAttrUint (item, "maximum", character.max_energy);
       if (character.init_energy==0) character.init_energy = 1;
       if (character.max_energy==0) character.max_energy = 1;
     }
-    LitDocXml::LitUint (xmlver, "mass", character.mass);
-    LitDocXml::LitDouble (xmlver, "air_resist_factor", character.air_resist_factor);
-    item = LitDocXml::AccesBalise (xmlver, "jump");
+    LitDocXml::LitUint (character_xml, "mass", character.mass);
+    LitDocXml::LitDouble (character_xml, "air_resist_factor", character.air_resist_factor);
+    item = LitDocXml::AccesBalise (character_xml, "jump");
     if (item != NULL) {
       LitDocXml::LitAttrUint (item, "strength", character.jump_strength);
       LitDocXml::LitAttrInt  (item, "angle", character.jump_angle);
     }
 
-    item = LitDocXml::AccesBalise (xmlver, "super_jump");
+    item = LitDocXml::AccesBalise (character_xml, "super_jump");
     if (item != NULL) {
       LitDocXml::LitAttrUint (item, "strength", character.super_jump_strength);
       LitDocXml::LitAttrInt  (item, "angle", character.super_jump_angle);
     }
-    item = LitDocXml::AccesBalise (xmlver, "back_jump");
+    item = LitDocXml::AccesBalise (character_xml, "back_jump");
     if (item != NULL) {
       LitDocXml::LitAttrUint (item, "strength", character.back_jump_strength);
       LitDocXml::LitAttrInt  (item, "angle", character.back_jump_angle);
+    }
+    xmlpp::Element *explosion = LitDocXml::AccesBalise (character_xml, "explosion");
+    if (explosion != NULL) {
+      item = LitDocXml::AccesBalise (explosion, "death");
+      if (item != NULL)
+        death_cfg.LoadXml(item);
+      item = LitDocXml::AccesBalise (explosion, "suicide");
+      if (item != NULL)
+        suicide_cfg.LoadXml(item);
     }
   }
 
