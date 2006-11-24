@@ -1,3 +1,5 @@
+#include <string>
+#include <fstream>
 #include "config.h"
 #include "debug.h"
 
@@ -14,68 +16,70 @@ Config::Config()
 	Display();
 }
 
+static ssize_t getline(std::string& line, std::ifstream& file)
+{
+        line.clear();
+        std::getline(file, line);
+        return line.size();
+}
+
 void Config::Load()
 {
 	DPRINT(INFO, "Loading config file");
-	FILE* cfg = fopen("wormux_server.conf", "r");
 
-	if(cfg == NULL)
+	int line_nbr = 0;
+
+	// Parse the file
+	std::ifstream fin;
+	fin.open("wormux_server.conf", std::ios::in);
+	if(!fin)
 	{
 		DPRINT(INFO, "Unable to open config file");
 		return;
 	}
 
-	int line_nbr = 0;
-	char * line = NULL;
-	size_t len = 0;
 	ssize_t read;
+	std::string line;
 
-	while ((read = getline(&line, &len, cfg)) != -1)
+	while ((read = getline(line, fin)) > 0)
 	{
 		line_nbr++;
-		char* ptr = line;
-		if(*ptr == '#' || *ptr == '\n' || *ptr == '\0')
+		if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
 			continue;
 
-		while(*ptr != '=' && *ptr != '\n' && *ptr != '\0' && (unsigned int)(ptr - line)<len)
-			ptr++;
-
-		if(*ptr != '=')
+		std::string::size_type equ_pos = line.find('=',0);
+		if(equ_pos == std::string::npos)
 		{
 			DPRINT(INFO, "Wrong format on line %i",line_nbr);
 			continue;
 		}
-		*ptr = '\0';
 
-		ptr++;
-		if( (*ptr >= '0' && *ptr <= '9')
-		||   *ptr == '-' )
+		std::string opt = line.substr(0, equ_pos);
+		std::string val = line.substr(equ_pos+1);
+
+		if( (val.at(0) >= '0' && val.at(0) <= '9')
+		||   val.at(0) == '-' )
 		{
-			int nbr = 0;
-			if( sscanf(ptr, "%i\n", &nbr) <= 0)
-				continue;
-			int_value[ std::string(line) ] = nbr;
+			int nbr = atoi(val.c_str());
+			int_value[ opt ] = nbr;
 		}
 		else
 		{
-			std::string val(ptr);
 			if(val == "true\n")
-				bool_value[ std::string(line) ] = true;
+				bool_value[ opt ] = true;
 			else
 			if(val == "false\n")
-				bool_value[ std::string(line) ] = false;
+				bool_value[ opt ] = false;
 			else
 			{
 				// We have a string. But first, we need to erase the '\n' at the end of the line
 				unsigned int off = val.find('\n');
 				if(off != val.size())
 					val.erase(off);
-				str_value[ std::string(line) ] = val;
+				str_value[ opt ] = val;
 			}
 		}
 	}
-	if (line)
-		free(line); 
 
 	DPRINT(INFO, "Config loaded");
 }
