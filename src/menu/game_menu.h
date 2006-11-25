@@ -39,9 +39,8 @@ class GameMenu : public Menu
    /* Game options controllers */
    Box * game_options;
    SpinButtonWithPicture *opt_duration_turn;
-   //SpinButtonWithPicture *opt_duration_end_turn;
-   //SpinButtonBig *opt_nb_characters;
    SpinButtonWithPicture *opt_energy_ini;
+   CheckBox *opt_scroll_on_border;
 
    void SaveOptions();
    void OnClic(const Point2i &mousePosition, int button);
