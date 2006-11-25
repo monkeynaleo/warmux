@@ -27,18 +27,16 @@
 #include <SDL.h>
 #include "widget.h"
 #include "button.h"
+#include "label.h"
 #include "../include/base.h"
 
-class ListBoxItem
+class ListBoxItem : public Label
 {
 private:
-  std::string label;
   std::string value;
   bool enabled;
 public:
-  ListBoxItem(std::string& _label, std::string& value,
-	      bool enabled);
-  ListBoxItem(std::string _label, std::string value,
+  ListBoxItem(const std::string& _label, Font& _font, const std::string& value,
 	      bool enabled);
 
   const std::string& GetLabel() const;
@@ -59,7 +57,7 @@ protected:
   // what are the items ?
   uint first_visible_item;
   int selected_item;
-  std::vector<ListBoxItem> m_items;
+  std::vector<ListBoxItem*> m_items;
 
   // Buttons
   Button *m_up, *m_down;
@@ -87,7 +85,7 @@ public:
   const std::string& ReadValue() const;
   const std::string& ReadValue(int index) const;
 
-  std::vector<ListBoxItem> *GetItemsList();
+  std::vector<ListBoxItem*> *GetItemsList();
 };
 
 #endif

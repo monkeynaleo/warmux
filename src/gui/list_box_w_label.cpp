@@ -60,9 +60,9 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf)
      
      (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft( 
 			  GetPosition() + Point2i(5, i*height_item),
-			  m_items[i + first_visible_item].GetLabel(),
+			  m_items[i + first_visible_item]->GetLabel(),
 			  white_color);
-     if(!m_items[i].IsEnabled())
+     if(!m_items[i]->IsEnabled())
        surf.BoxColor(rect, defaultDisabledColorBox);
   }  
 
