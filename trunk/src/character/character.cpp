@@ -109,6 +109,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   prepare_shoot = false;
   back_jumping = false;
   crosshair_angle = 0;
+  death_explosion = true;
 
   // Damage count
   damage_other_team = 0;
@@ -159,6 +160,7 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
   damage_other_team    = acharacter.damage_other_team;
   damage_own_team      = acharacter.damage_own_team;
   max_damage           = acharacter.max_damage;
+  death_explosion      = acharacter.death_explosion;
   current_total_damage = acharacter.current_total_damage;
   energy_bar           = acharacter.energy_bar;
   survivals            = acharacter.survivals;
@@ -188,7 +190,6 @@ Character::~Character()
   body      = NULL;
   name_text = NULL;
 }
-
 
 void Character::SignalDrowning()
 {
@@ -306,6 +307,11 @@ bool Character::GotInjured() const
   return lost_energy < 0;
 }
 
+void Character::DisableDeathExplosion()
+{
+  death_explosion = false;
+}
+
 void Character::Die()
 {
   assert (m_alive == ALIVE || m_alive == DROWNED);
@@ -322,7 +328,8 @@ void Character::Die()
     SetClothe("dead");
     SetMovement("dead");
 
-    ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_cfg);
+    if(death_explosion)
+      ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_cfg);
     assert(IsDead());
 
     // Signal the death

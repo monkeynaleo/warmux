@@ -42,7 +42,6 @@ public:
   double safe_fall ;
   double damage_per_fall_unit ;
   ExplosiveWeaponConfig death_cfg;
-  ExplosiveWeaponConfig suicide_cfg;
 
   struct s_character
   {

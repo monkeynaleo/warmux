@@ -121,15 +121,9 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
       LitDocXml::LitAttrUint (item, "strength", character.back_jump_strength);
       LitDocXml::LitAttrInt  (item, "angle", character.back_jump_angle);
     }
-    xmlpp::Element *explosion = LitDocXml::AccesBalise (character_xml, "explosion");
-    if (explosion != NULL) {
-      item = LitDocXml::AccesBalise (explosion, "death");
-      if (item != NULL)
-        death_cfg.LoadXml(item);
-      item = LitDocXml::AccesBalise (explosion, "suicide");
-      if (item != NULL)
-        suicide_cfg.LoadXml(item);
-    }
+    xmlpp::Element *explosion = LitDocXml::AccesBalise (character_xml, "death_explosion");
+    if (explosion != NULL)
+      death_cfg.LoadXml(explosion);
   }
 
   //=== Weapons ===
