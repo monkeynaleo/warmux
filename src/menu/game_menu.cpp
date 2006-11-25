@@ -151,15 +151,6 @@ GameMenu::~GameMenu()
 void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {
   widgets.Clic(mousePosition, button);
-
-//   if ( game_options->Clic(mousePosition, button)) {
-
-//   } else if ( map_box->Clic(mousePosition, button)) {
-
-//   } else if ( (Widget *w = team_box->Clic(mousePosition, button))) {
-//     widgets.SetFocusOn(w);
-//   }
-
 }
 
 void GameMenu::SaveOptions()
