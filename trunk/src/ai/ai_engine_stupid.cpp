@@ -30,6 +30,7 @@
 #include "../team/teams_list.h"
 #include "../tool/error.h"
 #include "../tool/math_tools.h"
+#include "../tool/string_tools.h"
 
 #include <iostream>
 
@@ -53,10 +54,11 @@ void AIStupidEngine::BeginTurn()
   m_last_char = &ActiveCharacter();
   m_nearest_enemy = NULL;
 
-  m_begin_turn_time = Time::GetInstance()->ReadSec();
+  m_begin_turn_time = 0;
   m_last_shoot_time = 0;
   m_step = 0;
-  m_is_walking = false;
+  m_mouvement.is_walking = false;
+  m_mouvement.is_jumping = false;
 
   // find the nearest enemy
 //   FOR_ALL_LIVING_ENEMIES(team, character) {
@@ -84,8 +86,6 @@ void AIStupidEngine::BeginTurn()
   ChooseDirection();
 
   ChooseWeapon();
-
-  m_current_time = Time::GetInstance()->ReadSec();
 }
 
 void AIStupidEngine::ChooseDirection()
@@ -106,13 +106,14 @@ void AIStupidEngine::ChooseDirection()
 
 void AIStupidEngine::Walk()
 {
-  if (!m_is_walking) { 
+  if (!m_mouvement.is_walking) { 
     ActiveCharacter().InitMouvementDG(100);
     ActiveCharacter().body->StartWalk();
+
+    m_mouvement.is_walking = true;
   }
 
-  m_is_walking = true;
-
+  // prepare to walk
   if(ActiveCharacter().IsImmobile()) {
     if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
       MoveCharacterRight(ActiveCharacter());
@@ -120,25 +121,59 @@ void AIStupidEngine::Walk()
       MoveCharacterLeft(ActiveCharacter());
   }
 
-  if (Time::GetInstance()->ReadSec() > m_time_at_last_position +2) {
 
-    if (m_last_position == ActiveCharacter().GetPosition()) {
-      // we are probably blocked
-      // try to jump
-      StopWalk();
-      m_step++;
-      //ActionHandler::GetInstance()->NewAction (new Action(ACTION_HIGH_JUMP));
+//   if ( m_current_time > m_mouvement.time_at_last_position +1 ) {
+
+    // We are on the ground, nothing to do for the moment
+    if ( ActiveCharacter().FootsInVacuum() ) {
+      return;
     }
- 
-    m_last_position = ActiveCharacter().GetPosition();
-    m_time_at_last_position = Time::GetInstance()->ReadSec();
-  }
+
+    // Debug message  
+    if ( m_current_time > m_mouvement.time_at_last_position +1 ) {
+
+      std::string s = "(" + ulong2str(m_mouvement.time_at_last_position) + "/";
+      s += ulong2str(m_current_time) + ") ";
+      s += " Current position : " + ulong2str(ActiveCharacter().GetPosition().GetX());
+      s += "," + ulong2str(ActiveCharacter().GetPosition().GetY());
+      GameMessages::GetInstance()->Add(s);
+    }
+
+
+    // We have finished to jump
+    if ( m_mouvement.is_jumping ) {
+      GameMessages::GetInstance()->Add("finished to jump");
+
+      m_mouvement.is_jumping = false;
+
+      // we have not moved since last mouvement
+      if ( m_mouvement.last_position == ActiveCharacter().GetPosition() ) {
+	GameMessages::GetInstance()->Add("stop moving");
+
+	StopWalk();
+	m_step++;
+      }
+      
+    } else {
+      // we are blocked, try to jump!
+      if ( m_mouvement.last_position == ActiveCharacter().GetPosition() ) {
+	GameMessages::GetInstance()->Add("try to jump!");
+	m_mouvement.is_jumping = true;
+	ActionHandler::GetInstance()->NewAction (new Action(ACTION_HIGH_JUMP));
+	return; // do not update position
+      }
+    }
+    
+    // Update position if we are not jumping
+    m_mouvement.last_position = ActiveCharacter().GetPosition();
+    m_mouvement.time_at_last_position = m_current_time;
+    //  }
 
 }
 
 void AIStupidEngine::StopWalk()
 {
-  m_is_walking = false;
+  m_mouvement.is_walking = false;
   ActiveCharacter().body->StopWalk();
 }
 
@@ -196,6 +231,9 @@ void AIStupidEngine::ChooseWeapon()
 
 }
 
+// This method is not perfect
+// It tests from the Center of the current Character controlled by the AI
+// and not from the gun hole
 bool AIStupidEngine::IsDirectlyShootable(Character& character)
 {
   Point2i pos = ActiveCharacter().GetCenter();
@@ -272,15 +310,14 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
   GameMessages::GetInstance()->Add(s); 
 
   return true;
-
 }
 
 void AIStupidEngine::Shoot()
 {
-  if (Time::GetInstance()->ReadSec() > m_last_shoot_time + 1 || 
+  if (m_current_time > m_last_shoot_time + 1 || 
       m_last_shoot_time == 0) {
     ActiveTeam().GetWeapon().NewActionShoot();
-    m_last_shoot_time = Time::GetInstance()->ReadSec();
+    m_last_shoot_time = m_current_time;
   }
   
   if (!(ActiveTeam().GetWeapon().EnoughAmmoUnit())) {
@@ -345,6 +382,8 @@ void AIStupidEngine::Refresh()
       break;
     case 6:
       Walk();
+      break;
+    case 7:
       break;
     default:
       assert(false);

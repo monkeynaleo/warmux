@@ -38,10 +38,12 @@ class AIStupidEngine
   uint m_last_shoot_time;
   uint m_step;
 
-  bool m_is_walking;
-
-  Point2i m_last_position;
-  uint m_time_at_last_position;
+  struct mouvement_t {
+    Point2i last_position;
+    uint time_at_last_position;    
+    bool is_walking;
+    bool is_jumping;
+  } m_mouvement;
 
   uint m_current_time;
 
