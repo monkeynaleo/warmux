@@ -35,6 +35,7 @@
   <surface name="display_name" file="menu/img/display_name.png" />
   <surface name="display_wind_particles" file="menu/img/display_wind_particles.png" />
   <surface name="fullscreen" file="menu/img/fullscreen.png" />
+  <surface name="scroll_on_border" file="menu/img/scroll_on_border.png" />  
 
   <surface name="timing_turn" file="menu/img/timing_turn.png" />
   <surface name="timing_end_of_turn" file="menu/img/timing_end_turn.png" />
