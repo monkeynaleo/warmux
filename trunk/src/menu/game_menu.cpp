@@ -89,45 +89,25 @@ GameMenu::GameMenu() :
 					    mainBoxWidth/2, OPTIONS_BOX_H), true);
   game_options->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
 
-  //Box * all_game_options = new VBox( Rectanglei(0, 0, mainBoxWidth/2-40, mainBoxHeight), false);
-
-  //Box * top_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
-  //Box * bottom_game_options = new HBox ( Rectanglei(0, 0, mainBoxWidth/2, mainBoxHeight/2), false);
-  //top_game_options->SetMargin(25);
-  //bottom_game_options->SetMargin(25);
-
   game_options->SetMargin(50);
 
   opt_duration_turn = new SpinButtonWithPicture(_("Duration of a turn"), "menu/timing_turn",
 						stdRect,
 						TPS_TOUR_MIN, 5,
 						TPS_TOUR_MIN, TPS_TOUR_MAX);
-  //bottom_game_options->AddWidget(opt_duration_turn);
   game_options->AddWidget(opt_duration_turn);
-
-//   opt_duration_end_turn = new SpinButtonWithPicture(_("Duration of the end of a turn:"), "menu/timing_end_of_turn",
-// 						    stdRect,
-// 						    TPS_FIN_TOUR_MIN, 1,
-// 						    TPS_FIN_TOUR_MIN, TPS_FIN_TOUR_MAX);
-//   bottom_game_options->AddWidget(opt_duration_end_turn);
-
-//   opt_nb_characters = new SpinButtonBig(_("Number of players per team:"), stdRect,
-// 				     4, 1,
-// 				     NBR_VER_MIN, NBR_VER_MAX);
-//   top_game_options->AddWidget(opt_nb_characters);
 
   opt_energy_ini = new SpinButtonWithPicture(_("Initial energy"), "menu/energy",
 					     stdRect,
 					     100, 5,
 					     50, 200);
-  //top_game_options->AddWidget(opt_energy_ini);
   game_options->AddWidget(opt_energy_ini);
+
+  opt_scroll_on_border = new PictureTextCBox(_("Scroll on border"), "menu/scroll_on_border", stdRect);
+  game_options->AddWidget(opt_scroll_on_border);
 
   game_options->AddWidget(new NullWidget(Rectanglei(0,0,50,10)));
 
-  //all_game_options->AddWidget(top_game_options);
-  //all_game_options->AddWidget(bottom_game_options);
-  //game_options->AddWidget(all_game_options);
   widgets.AddWidget(game_options);
 
 
@@ -136,10 +116,8 @@ GameMenu::GameMenu() :
   // Load game options
   GameMode * game_mode = GameMode::GetInstance();
   opt_duration_turn->SetValue(game_mode->duration_turn);
-  //  opt_duration_end_turn->SetValue(game_mode->duration_move_player);
-  //opt_nb_characters->SetValue(game_mode->max_characters);
   opt_energy_ini->SetValue(game_mode->character.init_energy);
-
+  opt_scroll_on_border->SetValue(Config::GetInstance()->GetScrollOnBorder());
 
   resource_manager.UnLoadXMLProfile(res);
 }
@@ -162,13 +140,11 @@ void GameMenu::SaveOptions()
   team_box->ValidTeamsSelection();
 
   //Save options in XML
+  Config::GetInstance()->SetScrollOnBorder(opt_scroll_on_border->GetValue());
   Config::GetInstance()->Save();
 
   GameMode * game_mode = GameMode::GetInstance();
   game_mode->duration_turn = opt_duration_turn->GetValue() ;
-  //  game_mode->duration_move_player = opt_duration_end_turn->GetValue() ;
-  //  game_mode->max_characters = opt_nb_characters->GetValue() ;
-
   game_mode->character.init_energy = opt_energy_ini->GetValue() ;
 
 }
