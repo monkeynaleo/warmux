@@ -29,25 +29,32 @@
 
 //#define SCROLLBAR
 
-ListBoxItem::ListBoxItem(std::string& _label, std::string& _value,
-			 bool _enabled)
+ListBoxItem::ListBoxItem(const std::string& _label, 
+			 Font& _font,
+			 const std::string& _value,
+			 bool _enabled) : 
+  Label(_label, Rectanglei(0,0,0,0), _font)
 {
-  label = _label;
+  //label = _label;
   value = _value;
   enabled = _enabled;
 }
 
-ListBoxItem::ListBoxItem(std::string _label, std::string _value,
-			 bool _enabled)
-{
-  label = _label;
-  value = _value;
-  enabled = _enabled;
-}
+// ListBoxItem::ListBoxItem(std::string _label, 
+// 			 Font& _font,
+// 			 std::string _value,
+// 			 bool _enabled) :
+//   Label(_label, Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL),
+//   	white_color, false, false)
+// {
+//   //label = _label;
+//   value = _value;
+//   enabled = _enabled;
+// }
 
 const std::string& ListBoxItem::GetLabel() const
 {
-  return label;
+  return txt_label->GetText();
 }
 
 const std::string& ListBoxItem::GetValue() const
@@ -60,13 +67,13 @@ const bool ListBoxItem::IsEnabled() const
   return enabled;
 }
 
-struct CompareItems
-{
-     bool operator()(const ListBoxItem& a, const ListBoxItem& b)
-     {
-       return a.GetLabel() < b.GetLabel();
-     }
-};
+// struct CompareItems
+// {
+//      bool operator()(const ListBoxItem& a, const ListBoxItem& b)
+//      {
+//        return a.GetLabel() < b.GetLabel();
+//      }
+// };
 
 ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(rect)
 {
@@ -155,24 +162,35 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf)
   int item = MouseIsOnWhichItem(mousePosition);
   Rectanglei rect (*this);
 
+  // Draw border and bg color
   surf.BoxColor(rect, defaultListColor1);
   surf.RectangleColor(rect, white_color);
 
+  // Draw items
   for(uint i=0; i < nb_visible_items; i++){
-	 Rectanglei rect(GetPositionX() + 1, GetPositionY() + i * height_item + 1, GetSizeX() - 2, height_item - 2);
+    Rectanglei rect(GetPositionX() + 1, 
+		    GetPositionY() + i * height_item + 1, 
+		    GetSizeX() - 2, 
+		    height_item - 2);
+    
+    // item is selected or mouse-overed
+    if( int(i + first_visible_item) == selected_item) {
+      surf.BoxColor(rect, defaultListColor2);
+    } else if( i + first_visible_item == uint(item) ) {
+      surf.BoxColor(rect, defaultListColor3);
+    }
 
-     if( int(i + first_visible_item) == selected_item)
-       surf.BoxColor(rect, defaultListColor2);
-     else
-       if( i + first_visible_item == uint(item) )
-         surf.BoxColor(rect, defaultListColor3);
-
-     (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft(
-			  GetPosition() + Point2i(5, i*height_item),
-			  m_items[i + first_visible_item].GetLabel(),
-			  white_color);
-     if(!m_items[i].IsEnabled())
-       surf.BoxColor(rect, defaultDisabledColorBox);
+    // Really draw items
+    Point2i pos = GetPosition() + Point2i(5, i*height_item);
+    Rectanglei rect2(pos.x, pos.y, GetSizeX()-2, height_item-2);
+    m_items[i + first_visible_item]->SetSizePosition(rect2);
+    //    m_items[i + first_visible_item].Draw(GetPosition() + Point2i(5, i*height_item),
+    //				 mousePosition, surf);
+    m_items[i + first_visible_item]->Draw(mousePosition, surf);
+    
+    // item is disabled
+    if(!m_items[i]->IsEnabled())
+      surf.BoxColor(rect, defaultDisabledColorBox);
   }
 
   // buttons for listbox with more items than visible
@@ -210,7 +228,7 @@ void ListBox::AddItem (bool selected,
   uint pos = m_items.size();
 
   // Push item
-  ListBoxItem item(label, value, enabled);
+  ListBoxItem * item = new ListBoxItem(label, *Font::GetInstance(Font::FONT_SMALL), value, enabled);
   m_items.push_back (item);
 
   // Select it if selected
@@ -224,7 +242,7 @@ void ListBox::AddItem (bool selected,
 
 void ListBox::Sort()
 {
-  std::sort( m_items.begin(), m_items.end(), CompareItems() );
+  //std::sort( m_items.begin(), m_items.end(), CompareItems() );
 }
 
 void ListBox::RemoveSelected()
@@ -250,11 +268,11 @@ void ListBox::Select (uint index)
 void ListBox::Select(const std::string& val)
 {
   uint index = 0;
-  for(std::vector<ListBoxItem>::iterator it=m_items.begin();
+  for(std::vector<ListBoxItem*>::iterator it=m_items.begin();
       it != m_items.end();
       it++,index++)
   {
-    if(it->GetLabel() == val)
+    if((*it)->GetLabel() == val)
     {
       Select(index);
       return;
@@ -276,22 +294,22 @@ int ListBox::GetSelectedItem ()
 const std::string& ListBox::ReadLabel () const
 {
   assert (selected_item != -1);
-  return m_items.at(selected_item).GetLabel();
+  return m_items.at(selected_item)->GetLabel();
 }
 
 const std::string& ListBox::ReadValue () const
 {
   assert (selected_item != -1);
-  return m_items.at(selected_item).GetValue();
+  return m_items.at(selected_item)->GetValue();
 }
 
 const std::string& ListBox::ReadValue (int index) const
 {
   assert (index != -1 && index < (int)m_items.size());
-  return m_items.at(index).GetValue();
+  return m_items.at(index)->GetValue();
 }
 
-std::vector<ListBoxItem> * ListBox::GetItemsList()
+std::vector<ListBoxItem*> * ListBox::GetItemsList()
 {
   return &m_items;
 }

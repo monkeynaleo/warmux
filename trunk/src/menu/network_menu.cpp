@@ -241,19 +241,19 @@ void NetworkMenu::SaveOptions()
 {
   teams_list.Clear();
   // teams
-  std::vector<ListBoxItem> *
+  std::vector<ListBoxItem*> *
     selected_teams = lbox_selected_teams->GetItemsList();
 
   if (selected_teams->size() > 1) {
     std::list<uint> selection;
 
-    std::vector<ListBoxItem>::iterator
+    std::vector<ListBoxItem*>::iterator
       it = selected_teams->begin(),
       end = selected_teams->end();
 
     int index = -1;
     for (; it != end; ++it) {
-      teams_list.FindById(it->GetValue(), index);
+      teams_list.FindById((*it)->GetValue(), index);
       if (index > -1)
 	selection.push_back(uint(index));
     }
@@ -419,14 +419,14 @@ void NetworkMenu::DelTeamCallback(std::string team_id)
   if( close_menu )
     return;
   // Called from the action handler
-  for(std::vector<ListBoxItem>::iterator lst_it = lbox_selected_teams->GetItemsList()->begin();
+  for(std::vector<ListBoxItem*>::iterator lst_it = lbox_selected_teams->GetItemsList()->begin();
       lst_it != lbox_selected_teams->GetItemsList()->end();
       lst_it++)
   {
-    if(lst_it->GetValue() == team_id)
+    if((*lst_it)->GetValue() == team_id)
     {
-      lbox_selected_teams->Select(lst_it->GetLabel());
-      msg_box->NewMessage(lst_it->GetLabel() + " unselected");
+      lbox_selected_teams->Select((*lst_it)->GetLabel());
+      msg_box->NewMessage((*lst_it)->GetLabel() + " unselected");
       MoveTeams(lbox_selected_teams, lbox_all_teams, true);
       return;
     }
@@ -437,17 +437,17 @@ void NetworkMenu::AddTeamCallback(std::string team_id)
 {
   assert( !close_menu );
   // Called from the action handler
-  for(std::vector<ListBoxItem>::iterator lst_it = lbox_all_teams->GetItemsList()->begin();
+  for(std::vector<ListBoxItem*>::iterator lst_it = lbox_all_teams->GetItemsList()->begin();
       lst_it != lbox_all_teams->GetItemsList()->end();
       lst_it++)
   {
-    if(lst_it->GetValue() == team_id)
+    if((*lst_it)->GetValue() == team_id)
     {
       int index;
       teams_list.FindById(team_id, index)->SetRemote();
 
-      lbox_all_teams->Select(lst_it->GetLabel());
-      msg_box->NewMessage(lst_it->GetLabel() + " selected");
+      lbox_all_teams->Select((*lst_it)->GetLabel());
+      msg_box->NewMessage((*lst_it)->GetLabel() + " selected");
       MoveDisableTeams(lbox_all_teams, lbox_selected_teams, false);
       return;
     }
