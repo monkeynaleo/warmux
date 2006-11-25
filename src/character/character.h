@@ -44,6 +44,7 @@ private:
   bool step_sound_played;
   bool prepare_shoot;
   bool back_jumping;
+  bool death_explosion;
 
   uint disease_damage_per_turn;
   uint disease_duration;
@@ -103,6 +104,7 @@ public:
 
   bool GotInjured() const;
   void Die();
+  void DisableDeathExplosion();
   bool IsActiveCharacter() const;
   // Disease handling
   bool IsDiseased() const;
