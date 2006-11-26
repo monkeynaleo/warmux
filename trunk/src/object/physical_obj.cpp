@@ -339,21 +339,21 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 //       if( ContactPoint(cx, cy) ){
     int cx, cy;
     Point2d contactPos;
-    double contact_angle=0;
+    double ground_angle;
 
     if (ContactPoint(cx, cy)) {
-      contact_angle = world.ground.Tangeante(cx, cy);
+      ground_angle = world.ground.Tangeante(cx, cy);
       contactPos.x = (double)cx / PIXEL_PER_METER;
       contactPos.y = (double)cy / PIXEL_PER_METER;
     } else {
-      contact_angle = - GetSpeedAngle();
+      ground_angle = - GetSpeedAngle();
       contactPos = pos;
     }
 
     SignalGroundCollision();
     SignalCollision();
     // Make it rebound on the ground !!
-    Rebound(contactPos, contact_angle);
+    Rebound(contactPos, ground_angle);
     CheckRebound();
   } else if ( collision == COLLISION_ON_OBJECT ) {
     SignalObjectCollision(collided_obj);
