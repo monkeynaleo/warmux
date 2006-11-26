@@ -26,6 +26,7 @@
 
 #include "../object/physics.h"
 #include <stdlib.h>
+#include <iostream>
 #include "../game/config.h"
 #include "../game/game_mode.h"
 #include "../game/time.h"
@@ -542,7 +543,7 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
       SignalRebound();
     }
     else{
-      cout << " " << m_rebounding<< endl;
+      std::cout << " " << m_rebounding << std::endl;
       StopMoving();
     }
     break;
@@ -572,7 +573,7 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
     break ;
 
   default:
-    std::cout<< "ha"<<endl;
+    std::cout << "ha" << std::endl;
     break ;
   }
 
