@@ -59,7 +59,10 @@ public:
   void Run();
 
   // Refresh all objects (position, state ...)
-  void Refresh();
+  void RefreshObject();
+  void RefreshInput();
+  void RefreshClock();
+  void PingClient();
 
   // Read/Set State
   int ReadState() const { return state; }
@@ -78,8 +81,7 @@ private:
   void InitGameData_NetClient();
   void InitData_Local();
   void InitData();
-    
-  void RefreshClock();
+
   void CallDraw();
 
   PhysicalObj* GetMovingObject();

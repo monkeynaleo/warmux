@@ -93,7 +93,6 @@ public:
   void SendAction(Action* action);
   void SendPacket(char* packet, int size);
   void ReceiveActions();
-
   // Client specific
   void ClientConnect(const std::string &host, const std::string &port);
 

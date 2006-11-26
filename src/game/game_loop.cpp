@@ -242,79 +242,65 @@ void GameLoop::Init ()
   SetState (PLAYING, true);
 }
 
-void GameLoop::Refresh()
+void GameLoop::RefreshInput()
 {
-  RefreshClock();
-  GameMessages::GetInstance()->Refresh();
-  camera.Refresh();
-
   // Poll and treat keyboard and mouse events
   SDL_Event event;
 
-   while( SDL_PollEvent( &event) )
-     {
-        if ( event.type == SDL_QUIT)
-          {
-             std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
-             Game::GetInstance()->SetEndOfGameStatus( true );
-             std::cout << "FIN PARTIE" << std::endl;
-             return;
-          }
-        if ( event.type == SDL_MOUSEBUTTONDOWN )
-          {
-             Mouse::GetInstance()->TraiteClic( &event);
-          }
-        if ( event.type == SDL_KEYDOWN
-        ||   event.type == SDL_KEYUP)
-          {
-             if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE)
-             {
-                  Game::GetInstance()->SetEndOfGameStatus( true );
-                  std::cout << "FIN PARTIE" << std::endl;
-                  return;
-             }
+  while(SDL_PollEvent(&event)) {
+    if ( event.type == SDL_QUIT) {
+      std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
+      Game::GetInstance()->SetEndOfGameStatus( true );
+      std::cout << "FIN PARTIE" << std::endl;
+      return;
+    }
+    if ( event.type == SDL_MOUSEBUTTONDOWN ) {
+      Mouse::GetInstance()->TraiteClic( &event);
+    }
+    if ( event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
+      if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE) {
+        Game::GetInstance()->SetEndOfGameStatus( true );
+        std::cout << "FIN PARTIE" << std::endl;
+        return;
+      }
+      Clavier::GetInstance()->HandleKeyEvent( &event);
+    }
+  }
 
-             Clavier::GetInstance()->HandleKeyEvent( &event);
-          }
-     }
-
-  if (!Time::GetInstance()->IsGamePaused())
-  {
+  if (!Time::GetInstance()->IsGamePaused()) {
     // Keyboard and mouse refresh
-    if (
-        (interaction_enabled && state != END_TURN)
-        || (ActiveTeam().GetWeapon().IsActive() && ActiveTeam().GetWeapon().override_keys) // for driving supertux for example
-        )
-    {
+    if ((interaction_enabled && state != END_TURN) ||
+        (ActiveTeam().GetWeapon().IsActive() && 
+         ActiveTeam().GetWeapon().override_keys)) { // for driving supertux for example
       Mouse::GetInstance()->Refresh();
       Clavier::GetInstance()->Refresh();
-
       AIengine::GetInstance()->Refresh();
     }
-
-    do
-    {
+    // Execute action
+    do {
       ActionHandler::GetInstance()->ExecActions();
       if(network.sync_lock) SDL_Delay(SDL_TIMESLICE);
-    }
-    while(network.sync_lock);
+    } while(network.sync_lock);
+  }
+  GameMessages::GetInstance()->Refresh();
+  camera.Refresh();
+}
 
-    FOR_ALL_CHARACTERS(equipe,ver) ver -> Refresh();
-
+void GameLoop::RefreshObject()
+{
+  if (!Time::GetInstance()->IsGamePaused()) {
+    FOR_ALL_CHARACTERS(team,character)
+        character->Refresh();
     // Recompute energy of each team
     FOR_EACH_TEAM(team)
-      (**team).Refresh();
+        (**team).Refresh();
     teams_list.RefreshEnergy();
 
     ActiveTeam().AccessWeapon().Manage();
     lst_objects.Refresh();
     ParticleEngine::Refresh();
     CharacterCursor::GetInstance()->Refresh();
-
   }
-
-  // Refresh the map
-  world.Refresh();
 }
 
 void GameLoop::Draw ()
@@ -331,11 +317,9 @@ void GameLoop::Draw ()
 
   // Draw the characters
   StatStart("GameDraw:characters");
-  FOR_ALL_CHARACTERS(equipe,ver) {
-    if (&(*ver) != &ActiveCharacter()) {
-      ver -> Draw();
-    }
-  }
+  FOR_ALL_CHARACTERS(team,character)
+    if (!character->IsActiveCharacter())
+      character->Draw();
 
   StatStart("GameDraw:particles_behind_active_character");
   ParticleEngine::Draw(false);
@@ -408,26 +392,44 @@ void GameLoop::CallDraw()
   StatStop("GameDraw:flip()");
 }
 
+void GameLoop::PingClient()
+{
+  Action * a = new Action(ACTION_PING);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
 void GameLoop::Run()
 {
   int delay = 0;
   uint time_of_next_frame = SDL_GetTicks();
+  uint previous_time_frame = 0;
 
   // loop until game is finished
   do
   {
     Game::GetInstance()->SetEndOfGameStatus( false );
 
-    // one loop
-    StatStart("GameLoop:Refresh()");
-    Refresh();
-    StatStop("GameLoop:Refresh()");
-
+    // Refresh clock value
+    RefreshClock();
+    if(Time::GetInstance()->Read() % 100 == 20)
+      PingClient();
+    StatStart("GameLoop:RefreshInput()");
+    RefreshInput();
+    StatStop("GameLoop:RefreshInput()");
+    if(previous_time_frame < Time::GetInstance()->Read()) {
+      StatStart("GameLoop:RefreshObject()");
+      RefreshObject();
+      StatStop("GameLoop:RefreshObject()");
+    } else {
+      previous_time_frame = Time::GetInstance()->Read();
+    }
+    // Refresh the map
+    world.Refresh();
     // try to adjust to max Frame by seconds
     time_of_next_frame += Time::GetInstance()->GetDelta();
     if (time_of_next_frame > SDL_GetTicks()) {
       StatStart("GameLoop:Draw()");
-      CallDraw ();
+      CallDraw();
       // How many frame by seconds ?
       fps.Refresh();
       StatStop("GameLoop:Draw()");
@@ -532,7 +534,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
      character_already_chosen = false;
 
     // Prepare each character for a new turn
-    FOR_ALL_LIVING_CHARACTERS(equipe,ver) ver -> PrepareTurn();
+    FOR_ALL_LIVING_CHARACTERS(team,character) character->PrepareTurn();
 
     // Select the next team
     assert (!Game::GetInstance()->IsGameFinished());
@@ -609,12 +611,12 @@ PhysicalObj* GameLoop::GetMovingObject()
 {
   if (!ActiveCharacter().IsImmobile()) return &ActiveCharacter();
 
-  FOR_ALL_CHARACTERS(equipe,ver)
+  FOR_ALL_CHARACTERS(team,character)
   {
-    if (!ver -> IsImmobile() && !ver -> IsGhost())
+    if (!character->IsImmobile() && !character->IsGhost())
     {
-      MSG_DEBUG("game.endofturn", "%s is not ready", (*ver).GetName().c_str())
-      return &(*ver);
+      MSG_DEBUG("game.endofturn", "%s is not ready", character->GetName().c_str())
+      return &(*character);
     }
   }
 
