@@ -838,7 +838,7 @@ void Character::StartPlaying()
   assert (!IsGhost());
   SetWeaponClothe();
   ActiveTeam().crosshair.Reset();
-  SetRebounding(false);
+ // SetRebounding(false);
   ActiveTeam().crosshair.ChangeAngleVal(crosshair_angle);
   ShowGameInterface();
 }
