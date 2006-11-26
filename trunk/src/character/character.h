@@ -31,6 +31,7 @@
 #include "../include/enum.h"
 #include "../object/physical_obj.h"
 #include "../particles/particle.h"
+#include "../interface/keyboard.h"
 
 class Body;
 class Team;
@@ -120,10 +121,10 @@ public:
   void StopPlaying();
 
   // Handle a key event on the character
-  void HandleKeyEvent(int key, int event_type);
+  void HandleKeyEvent(int action, Clavier::Key_Event_t event_type);
   void PrepareShoot();
   void DoShoot();
-  void HandleShoot(int event_type);
+  void HandleShoot(Clavier::Key_Event_t event_type);
   void SaveCrosshairAngle();
 
   // Show hide the Character

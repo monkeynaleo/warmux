@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Wormux enums ... 
+ * Wormux enums ...
  *****************************************************************************/
 
 #ifndef WORMUX_ENUM_H
@@ -138,15 +138,6 @@ typedef enum
   ACTION_MAX,
   ACTION_CHAT,
 } Action_t;
-
-//-----------------------------------------------------------------------------
-
-typedef enum
-{
-  KEY_PRESSED,
-  KEY_RELEASED,
-  KEY_REFRESH
-} Key_Event_t ;
 
 //-----------------------------------------------------------------------------
 

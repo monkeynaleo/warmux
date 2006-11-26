@@ -67,7 +67,7 @@ class TuxLauncher : public WeaponLauncher
   SuperTux * current_tux;
  public:
   TuxLauncher();
-  void HandleKeyEvent(int action, int event_type);
+  void HandleKeyEvent(int action, Clavier::Key_Event_t event_type);
  protected:
   WeaponProjectile * GetProjectileInstance();
   bool p_Shoot();

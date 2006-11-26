@@ -100,7 +100,7 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
 //   	  if (lance_grenade.time < 15)
 //   	    lance_grenade.time ++;
 //   	    break ;
-	  
+
 //           case ACTION_SUBSTRACT:
 //      if (lance_grenade.time > 1)
 //   	    lance_grenade.time --;
@@ -110,35 +110,35 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
         }
       }
 
-     int event_type=0;
+     Key_Event_t event_type;
      switch( event->type)
        {
         case SDL_KEYDOWN: event_type = KEY_PRESSED;break;
         case SDL_KEYUP: event_type = KEY_RELEASED;break;
        }
-    if(event_type==KEY_PRESSED)
+    if(event_type == KEY_PRESSED)
       HandleKeyPressed(action);
-    if(event_type==KEY_RELEASED)
+    if(event_type == KEY_RELEASED)
       HandleKeyReleased(action);
 
     if ((ActiveTeam().GetWeapon().override_keys &&
         ActiveTeam().GetWeapon().IsActive()) || ActiveTeam().GetWeapon().force_override_keys)
       {
-        ActiveTeam().AccessWeapon().HandleKeyEvent((int)action, event_type);
+        ActiveTeam().AccessWeapon().HandleKeyEvent(action, event_type);
         return ;
       }
     ActiveCharacter().HandleKeyEvent( action, event_type);
   }
   else
   {
-    int event_type=0;
+    Key_Event_t event_type;
     switch( event->type)
     {
       case SDL_KEYDOWN: event_type = KEY_PRESSED;break;
       case SDL_KEYUP: event_type = KEY_RELEASED;break;
     }
     //Current player is on the network
-    if(event_type==KEY_RELEASED)
+    if(event_type == KEY_RELEASED)
       HandleKeyReleased(action);
   }
 }

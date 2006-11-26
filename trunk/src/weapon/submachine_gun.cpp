@@ -18,7 +18,7 @@
  ******************************************************************************
  * Submachine gun. Don't fire bullet one by one but with burst fire (like
  * a submachine gun :)
- * The hack in order to firing multiple bullet at once consist in using a 
+ * The hack in order to firing multiple bullet at once consist in using a
  * std::list of projectile and overide the Refresh & HandleKeyEvent methods.
  *****************************************************************************/
 
@@ -90,7 +90,7 @@ void SubMachineGun::IncMissedShots()
 }
 
 bool SubMachineGun::p_Shoot ()
-{  
+{
   if (m_is_active)
     return false;
 
@@ -127,13 +127,13 @@ void SubMachineGun::RepeatShoot()
 }
 
 // Special handle to allow multiple shoot at a time
-void SubMachineGun::HandleKeyEvent(int action, int event_type)
+void SubMachineGun::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 {
   switch (action) {
     case ACTION_SHOOT:
-      if (event_type == KEY_REFRESH)
+      if (event_type == Clavier::KEY_REFRESH)
         m_is_active = true;
-      if (event_type == KEY_RELEASED)
+      if (event_type ==  Clavier::KEY_RELEASED)
         m_is_active = false;
       if (m_is_active) RepeatShoot();
       break;

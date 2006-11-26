@@ -46,7 +46,7 @@ WeaponBullet::WeaponBullet(const std::string &name,
                            ExplosiveWeaponConfig& cfg,
                            WeaponLauncher * p_launcher) :
   WeaponProjectile(name, cfg, p_launcher)
-{ 
+{
   explode_colliding_character = true;
   ResetTimeOut();
 }
@@ -93,7 +93,7 @@ void WeaponBullet::DoExplosion()
 //-----------------------------------------------------------------------------
 
 
-WeaponProjectile::WeaponProjectile (const std::string &name, 
+WeaponProjectile::WeaponProjectile (const std::string &name,
                                     ExplosiveWeaponConfig& p_cfg,
                                     WeaponLauncher * p_launcher)
   : PhysicalObj (name), cfg(p_cfg)
@@ -114,7 +114,7 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   int dx = image->GetWidth()/2-1;
   int dy = image->GetHeight()/2-1;
   SetTestRect (dx, dx, dy, dy);
-  
+
   ResetTimeOut();
 }
 
@@ -161,18 +161,18 @@ void WeaponProjectile::Refresh()
 {
   // Explose after timeout
   double tmp = Time::GetInstance()->Read() - begin_time;
-   
+
   if(cfg.timeout && tmp > 1000 * (GetTotalTimeout())) SignalTimeout();
 }
 
 void WeaponProjectile::Draw()
 {
   image->Draw(GetPosition());
-  
+
   int tmp = GetTotalTimeout();
 
-  if (cfg.timeout && tmp != 0) 
-  { 
+  if (cfg.timeout && tmp != 0)
+  {
     tmp -= (int)((Time::GetInstance()->Read() - begin_time) / 1000);
     if (tmp >= 0)
     {
@@ -195,7 +195,7 @@ bool WeaponProjectile::IsImmobile() const
 
 // projectile explode and signal to the launcher the collision
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
-{  
+{
   assert (obj != NULL);
 
   if (explode_colliding_character)
@@ -262,14 +262,14 @@ void WeaponProjectile::DoExplosion()
 
 void WeaponProjectile::IncrementTimeOut()
 {
-  if (cfg.allow_change_timeout && GetTotalTimeout()<(int)cfg.timeout*2) 
+  if (cfg.allow_change_timeout && GetTotalTimeout()<(int)cfg.timeout*2)
     m_timeout_modifier += 1 ;
 }
 
 void WeaponProjectile::DecrementTimeOut()
 {
   // -1s for grenade timout. 1 is min.
-  if (cfg.allow_change_timeout && GetTotalTimeout()>1) 
+  if (cfg.allow_change_timeout && GetTotalTimeout()>1)
     m_timeout_modifier -= 1 ;
 }
 
@@ -304,7 +304,7 @@ bool WeaponProjectile::change_timeout_allowed()
 
 //-----------------------------------------------------------------------------
 
-WeaponLauncher::WeaponLauncher(Weapon_type type, 
+WeaponLauncher::WeaponLauncher(Weapon_type type,
                                const std::string &id,
                                EmptyWeaponConfig * params,
                                weapon_visibility_t visibility) :
@@ -441,7 +441,7 @@ void WeaponLauncher::p_Select()
   if (projectile->change_timeout_allowed())
   {
     force_override_keys = true; //Allow overriding key during movement.
-    projectile->ResetTimeOut(); 
+    projectile->ResetTimeOut();
   }
   Weapon::p_Select();
 }
@@ -461,9 +461,9 @@ void WeaponLauncher::IncMissedShots()
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
 }
 
-void WeaponLauncher::HandleKeyEvent(int action, int event_type)
+void WeaponLauncher::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 {
-  if (event_type == KEY_RELEASED)
+  if (event_type == Clavier::KEY_RELEASED)
     switch (action) {
       case ACTION_WEAPON_1:
         projectile->SetTimeOut(1);
@@ -493,16 +493,16 @@ void WeaponLauncher::HandleKeyEvent(int action, int event_type)
         projectile->SetTimeOut(9);
         break;
 
-      case ACTION_WEAPON_MORE:  
+      case ACTION_WEAPON_MORE:
         projectile->IncrementTimeOut();
         break ;
 
-      case ACTION_WEAPON_LESS:  
+      case ACTION_WEAPON_LESS:
         projectile->DecrementTimeOut();
         break   ;
 
       default:
-        break ;     
+        break ;
 
     };
 
@@ -513,7 +513,7 @@ void WeaponLauncher::HandleKeyEvent(int action, int event_type)
     ActiveCharacter().HandleKeyEvent(action, event_type);
 }
 
-// called by mousse.cpp when mousewhellup 
+// called by mousse.cpp when mousewhellup
 void WeaponLauncher::ActionUp()
 {
   projectile->IncrementTimeOut();

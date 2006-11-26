@@ -136,20 +136,20 @@ void Airhammer::Refresh()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::HandleKeyEvent(int action, int event_type)
+void Airhammer::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 {
   switch (action) {
 
   case ACTION_SHOOT:
 
-    if (event_type == KEY_RELEASED || ActiveCharacter().GotInjured()) {
+    if (event_type == Clavier::KEY_RELEASED || ActiveCharacter().GotInjured()) {
       // stop when key is released or character got injured
       ActiveTeam().AccessNbUnits() = 0;
       m_is_active = false;
       GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
     }
 
-    if (event_type == KEY_REFRESH)
+    if (event_type == Clavier::KEY_REFRESH)
       RepeatShoot();
 
     break ;

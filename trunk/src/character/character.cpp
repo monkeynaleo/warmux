@@ -513,13 +513,13 @@ void Character::DoShoot()
   ActiveTeam().AccessWeapon().Shoot();
 }
 
-void Character::HandleShoot(int event_type)
+void Character::HandleShoot(Clavier::Key_Event_t event_type)
 {
   if(prepare_shoot)
     return;
 
   switch (event_type) {
-    case KEY_PRESSED:
+    case Clavier::KEY_PRESSED:
       if (ActiveTeam().GetWeapon().max_strength == 0)
         ActiveTeam().GetWeapon().NewActionShoot();
       else
@@ -528,12 +528,12 @@ void Character::HandleShoot(int event_type)
         ActiveTeam().AccessWeapon().InitLoading();
       break ;
 
-    case KEY_RELEASED:
+    case Clavier::KEY_RELEASED:
       if (ActiveTeam().GetWeapon().IsLoading())
         ActiveTeam().GetWeapon().NewActionShoot();
       break ;
 
-    case KEY_REFRESH:
+    case Clavier::KEY_REFRESH:
       if ( ActiveTeam().GetWeapon().IsLoading() )
 	{
 	  // Strength == max strength -> Fire !!!
@@ -553,7 +553,7 @@ void Character::HandleShoot(int event_type)
   }
 }
 
-void Character::HandleKeyEvent(int action, int event_type)
+void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 {
   // The character cannot move anymove if the turn is over...
   if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
@@ -576,7 +576,7 @@ void Character::HandleKeyEvent(int action, int event_type)
     {
       switch (event_type)
       {
-        case KEY_REFRESH:
+        case Clavier::KEY_REFRESH:
           switch (action) {
             case ACTION_MOVE_LEFT:
               if(ActiveCharacter().IsImmobile())
@@ -592,7 +592,7 @@ void Character::HandleKeyEvent(int action, int event_type)
               break ;
           }
           //no break!! -> it's normal
-        case KEY_PRESSED:
+        case Clavier::KEY_PRESSED:
           switch (action)
           {
             case ACTION_UP:
@@ -649,7 +649,7 @@ void Character::HandleKeyEvent(int action, int event_type)
           }
           break;
 
-        case KEY_RELEASED:
+        case Clavier::KEY_RELEASED:
           switch (action) {
             case ACTION_MOVE_LEFT:
             case ACTION_MOVE_RIGHT:

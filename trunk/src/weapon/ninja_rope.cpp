@@ -45,7 +45,7 @@ bool find_first_contact_point (int x1, int y1, double angle, int length,
 {
   double x, y, x_step, y_step ;
   int x2, y2 ;
-  
+
   x_step = cos(angle) ;
   y_step = sin(angle) ;
 
@@ -104,7 +104,7 @@ bool NinjaRope::p_Shoot()
   m_attaching = true;
   m_launch_time = Time::GetInstance()->Read() ;
   m_initial_angle = ActiveTeam().crosshair.GetAngleRad();
-  m_initial_direction = ActiveCharacter().GetDirection(); 
+  m_initial_direction = ActiveCharacter().GetDirection();
   last_mvt=Time::GetInstance()->Read();
   return true ;
 }
@@ -122,7 +122,7 @@ void NinjaRope::TryAttachRope()
   Point2i handPos = ActiveCharacter().GetHandPosition();
   x = handPos.x;
   y = handPos.y;
-    
+
   length = ROPE_DRAW_SPEED * delta_time / 10;
   if (length > MAX_ROPE_LEN)
     {
@@ -131,36 +131,36 @@ void NinjaRope::TryAttachRope()
       m_is_active = false;
       return ;
     }
-  
+
   angle = m_initial_angle;
-  
+
   if (find_first_contact_point(x, y, angle, length, 4,
 			       m_fixation_x, m_fixation_y))
     {
       m_attaching = false;
-      
+
       int dx, dy;
-      
+
       // The rope reaches the fixation point. Let's fix it !
-      
+
       dx = x - ActiveCharacter().GetX() ;
       dy = y - ActiveCharacter().GetY() ;
-      
+
       ActiveCharacter().SetPhysFixationPointXY(
 					       m_fixation_x / PIXEL_PER_METER,
 					       m_fixation_y / PIXEL_PER_METER,
 					       (double)dx / PIXEL_PER_METER,
 					       (double)dy / PIXEL_PER_METER);
-      
+
       rope_node[0].x = m_fixation_x ;
       rope_node[0].y = m_fixation_y ;
-      
+
       ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
       m_hooked_time = Time::GetInstance()->Read();
       ActiveCharacter().SetMovement("ninja-rope");
 
      ActiveTeam().crosshair.ChangeAngleVal(-60);
-	
+
     }
   else
     {
@@ -199,7 +199,7 @@ bool NinjaRope::TryAddNode(int CurrentSense)
   if (find_first_contact_point(m_fixation_x, m_fixation_y, angle, lg, 4,cx,cy))
     {
       rope_angle = ActiveCharacter().GetRopeAngle() ;
-      
+
       if ( (last_broken_node_sense * CurrentSense > 0) &&
 	   (fabs(last_broken_node_angle - rope_angle) < 0.1))
 	return false ;
@@ -258,7 +258,7 @@ bool NinjaRope::TryBreakNode(int CurrentSense)
 	   (CurrentAngle < NodeAngle))
 	BreakNode = true ;
 
-      if ( (CurrentAngle < 0) && 
+      if ( (CurrentAngle < 0) &&
 	   (AngularSpeed > 0) &&
 	   (CurrentAngle > NodeAngle))
 	BreakNode = true ;
@@ -352,7 +352,7 @@ void NinjaRope::GoUp()
   delta_len = -0.1 ;
   ActiveCharacter().ChangePhysRopeSize (delta_len);
   ActiveCharacter().UpdatePosition();
-  delta_len = 0 ;  
+  delta_len = 0 ;
 }
 
 void NinjaRope::GoDown()
@@ -367,7 +367,7 @@ void NinjaRope::GoDown()
   delta_len = 0.1 ;
   ActiveCharacter().ChangePhysRopeSize (delta_len) ;
   ActiveCharacter().UpdatePosition() ;
-  delta_len = 0 ;  
+  delta_len = 0 ;
 }
 
 void NinjaRope::GoRight()
@@ -449,7 +449,7 @@ void NinjaRope::Draw()
       quad.y3 = (int)round((double)rope_node[i].y - 2 * sin(angle));
       quad.x4 = (int)round((double)rope_node[i].x - 2 * cos(angle));
       quad.y4 = (int)round((double)rope_node[i].y + 2 * sin(angle));
-      
+
       float dx = sin(angle) * (float)m_node_sprite->GetHeight();
       float dy = cos(angle) * (float)m_node_sprite->GetHeight();
       int step = 0;
@@ -491,37 +491,37 @@ void NinjaRope::p_Deselect()
   ActiveCharacter().UnsetPhysFixationPoint() ;
 }
 
-void NinjaRope::HandleKeyEvent(int action, int event_type)
+void NinjaRope::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 {
   switch (action) {
     case ACTION_UP:
-      if (event_type != KEY_RELEASED)
+      if (event_type != Clavier::KEY_RELEASED)
 	GoUp();
       break ;
 
     case ACTION_DOWN:
-      if (event_type != KEY_RELEASED)
+      if (event_type != Clavier::KEY_RELEASED)
 	GoDown();
       break ;
 
     case ACTION_MOVE_LEFT:
-      if (event_type == KEY_PRESSED)
+      if (event_type == Clavier::KEY_PRESSED)
 	GoLeft();
       else
-	if (event_type == KEY_RELEASED)
+	if (event_type == Clavier::KEY_RELEASED)
 	  StopLeft();
       break ;
 
     case ACTION_MOVE_RIGHT:
-      if (event_type == KEY_PRESSED)
+      if (event_type == Clavier::KEY_PRESSED)
 	GoRight();
       else
-	if (event_type == KEY_RELEASED)
+	if (event_type == Clavier::KEY_RELEASED)
 	  StopRight();
       break ;
 
     case ACTION_SHOOT:
-      if (event_type == KEY_PRESSED)
+      if (event_type == Clavier::KEY_PRESSED)
 	UseAmmoUnit();
       break ;
 

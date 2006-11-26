@@ -42,7 +42,14 @@ private:
   void HandleKeyReleased (const Action_t &action);
   Clavier();
 
- public:
+public:
+  typedef enum
+  {
+    KEY_PRESSED,
+    KEY_RELEASED,
+    KEY_REFRESH
+  } Key_Event_t ;
+
   static Clavier * GetInstance();
 
   void HandleKeyEvent( const SDL_Event *event) ;
@@ -53,7 +60,7 @@ private:
 
   // Refresh des touches du clavier
   void Refresh();
-  
+
   // Associe une touche à une action.
   void SetKeyAction(int key, Action_t at);
 

@@ -33,6 +33,8 @@
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
 //#include "../character/character.h"
+#include "../interface/keyboard.h"
+
 class Character;
 
 // Infinite ammos constant
@@ -208,7 +210,7 @@ public:
   virtual void ActionDown ();//called by mousse.cpp when mousewhelldown
 
   // Handle a keyboard event.
-  virtual void HandleKeyEvent(int key, int event_type) ;
+  virtual void HandleKeyEvent(int key, Clavier::Key_Event_t event_type) ;
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd();
