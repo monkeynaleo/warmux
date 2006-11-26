@@ -28,6 +28,9 @@
 #include "../interface/game_msg.h"
 #include "../tool/math_tools.h"
 #include "../include/app.h"
+#include "../network/network.h"
+#include "../team/teams_list.h"
+#include "../game/game_loop.h"
 
 Time * Time::singleton = NULL;
 
@@ -57,7 +60,24 @@ uint Time::Read() const{
 }
 
 void Time::Refresh(){
+  /*
+  TODO : Activate this condition later.
+  Refresh time condition :
+  - active team is Local 
+  - current node is server and game loop is not in Playing state
+  - game don't use network
+  if((ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()) ||
+     (network.IsServer() && GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) ||
+     (!network.IsServer() && !network.IsClient()) ||
+     current_time < max_time)
+  */
   current_time += delta_t;
+  RefreshMaxTime(current_time);
+}
+
+void Time::RefreshMaxTime(uint updated_max_time){
+  if(updated_max_time > max_time)
+    max_time = updated_max_time;
 }
 
 uint Time::ReadSec() const{
