@@ -86,9 +86,9 @@ class Body
 
   void BuildSqueleton();
   void AddChildMembers(Member* parent);
+  const Character* owner;
 
 public:
-  Character* owner;
 
   Body(xmlpp::Element *xml, Profile* res);
   Body(Body *_body);
@@ -104,13 +104,14 @@ public:
   void SetRotation(int angle);
   void SetFrame(uint no);
   void SetDirection(Direction_t dir);
+  inline void SetOwner(const Character* belonger) { owner = belonger; };
   void PlayAnimation();
   void Build();
 
   const std::string& GetMovement();
   const std::string& GetClothe();
   void GetTestRect(uint &l, uint &r, uint &t, uint &b);
-  const Direction_t GetDirection();
+  const Direction_t &GetDirection() const;
   const Point2i &GetHandPosition() const;
   uint GetMovementDuration();
   uint GetFrame() { return current_frame; };

@@ -81,7 +81,7 @@ const uint HAUT_ENERGIE = 6;
 void Character::SetBody(Body* char_body)
 {
   body = char_body;
-  body->owner = this;
+  body->SetOwner(this);
   SetClothe("normal");
   SetMovement("walk");
 
@@ -837,8 +837,8 @@ void Character::StartPlaying()
 {
   assert (!IsGhost());
   SetWeaponClothe();
-  SetRebounding(false);
   ActiveTeam().crosshair.Reset();
+  SetRebounding(false);
   ActiveTeam().crosshair.ChangeAngleVal(crosshair_angle);
   ShowGameInterface();
 }

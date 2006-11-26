@@ -546,7 +546,7 @@ void Body::SetDirection(Direction_t dir)
   direction=dir;
 }
 
-const Direction_t Body::GetDirection()
+const Direction_t &Body::GetDirection() const
 {
   return direction;
 }
