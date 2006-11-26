@@ -103,6 +103,7 @@ typedef enum
   ACTION_WEAPON_STOP_USE,
 
   // Game initialisation
+  ACTION_PING,
   ACTION_SET_GAME_MODE,
   ACTION_SET_MAP,
   ACTION_CLEAR_TEAMS,

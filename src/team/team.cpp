@@ -214,6 +214,15 @@ void Team::UpdateEnergyBar ()
   energy.SetValue(ReadEnergy());
 }
 
+void Team::SelectCharacter(uint index)
+{
+  assert((int)index <= NbAliveCharacter());
+  ActiveCharacter().StopPlaying();
+  active_character = characters.begin();
+  for(uint i = 0; i < index; ++i)
+    ++active_character;
+}
+
 void Team::NextCharacter()
 {
   assert (0 < NbAliveCharacter());
