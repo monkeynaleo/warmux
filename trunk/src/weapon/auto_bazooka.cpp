@@ -124,7 +124,7 @@ void RPG::Refresh()
 }
 
 void RPG::SignalOutOfMap()
-{ 
+{
   GameMessages::GetInstance()->Add (_("The automatic rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 }
@@ -138,9 +138,9 @@ void RPG::SetTarget (int x, int y)
 
 //-----------------------------------------------------------------------------
 
-AutomaticBazooka::AutomaticBazooka() : 
+AutomaticBazooka::AutomaticBazooka() :
   WeaponLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new AutomaticBazookaConfig() )
-{  
+{
   m_name = _("Automatic Bazooka");
   mouse_character_selection = false;
   cible.choisie = false;
@@ -169,8 +169,8 @@ void AutomaticBazooka::Refresh()
 void AutomaticBazooka::p_Select()
 {
   cible.choisie = false;
-  
-  Mouse::GetInstance()->SetPointer(POINTER_AIM);
+
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
 }
 
 void AutomaticBazooka::p_Deselect()
@@ -183,7 +183,7 @@ void AutomaticBazooka::p_Deselect()
                         cible.image.GetHeight()));
   }
 
-  Mouse::GetInstance()->SetPointer(POINTER_SELECT);
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 }
 
 void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
@@ -214,7 +214,7 @@ void AutomaticBazooka::DrawTarget()
 
 bool AutomaticBazooka::IsReady() const
 {
-  return (EnoughAmmo() && cible.choisie);  
+  return (EnoughAmmo() && cible.choisie);
 }
 
 AutomaticBazookaConfig &AutomaticBazooka::cfg() {
