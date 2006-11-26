@@ -439,6 +439,7 @@ menu/img/timing_end_turn.png
 menu/img/music_enable.png
 menu/img/background_network.png
 menu/img/validate.png
+menu/img/scroll_on_border.png
 object/bonus_box.png
 object/smoke.png
 object/dark_smoke.png
