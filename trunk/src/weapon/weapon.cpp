@@ -208,11 +208,14 @@ void Weapon::NewActionShoot() const
   Action a_begin_sync(ACTION_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
   SendCharacterPosition();
-  ActionHandler::GetInstance()->NewAction (new Action(
-				       ACTION_SHOOT,
-				       m_strength,
-				       ActiveTeam().crosshair.GetAngleVal()));
-
+  Action * shoot = new Action(ACTION_SHOOT,
+                              m_strength,
+                              ActiveTeam().crosshair.GetAngleVal());
+  shoot->Push((int)ActiveCharacter().GetCharacterIndex());
+  shoot->Push((int)ActiveCharacter().GetDirection());
+  shoot->Push(ActiveCharacter().GetX());
+  shoot->Push(ActiveCharacter().GetY());
+  ActionHandler::GetInstance()->NewAction(shoot);
   Action a_end_sync(ACTION_SYNC_END);
   network.SendAction(&a_end_sync);
 

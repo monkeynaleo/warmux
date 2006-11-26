@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh des diff�entes �uipes.
+ * Handle team list
  *****************************************************************************/
 
 #ifndef TEAMS_LIST_H
@@ -58,8 +58,8 @@ public:
   void SetActive(const std::string &id);
   void InitList (const std::list<ConfigTeam> &lst);
   void InitEnergy ();
-  void RefreshEnergy (); //Actualise les jauges d'�ergie
-  void RefreshSort (); //Actualise le classement des jauges
+  void RefreshEnergy (); //Refresh energy bar
+  void RefreshSort (); //Refresh energy bar position
   void ChangeSelection (const std::list<uint>& liste);
   bool IsSelected (uint index);
 
@@ -74,10 +74,10 @@ public:
 extern TeamsList teams_list;
 //-----------------------------------------------------------------------------
 
-// Team active
+// current active team
 Team& ActiveTeam();
 
-// Ver actif
+// current active character
 Character& ActiveCharacter();
 
 //-----------------------------------------------------------------------------

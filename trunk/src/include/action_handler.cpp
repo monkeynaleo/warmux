@@ -148,18 +148,17 @@ void Action_NextCharacter (Action *a)
 
 void Action_ChangeCharacter (Action *a)
 {
-  int char_index = a->PopInt();
-  while( (int)ActiveCharacter().GetCharacterIndex() != char_index )
-    ActiveTeam().NextCharacter();
-
-  // Ok, this code is dirty, if you write a cleaner way
-  // Use it in mouse.cpp as well ;)
+  ActiveTeam().SelectCharacter(a->PopInt());
 }
 
 void Action_Shoot (Action *a)
 {
   double strength = a->PopDouble();
   int angle = a->PopInt();
+  ActiveTeam().SelectCharacter(a->PopInt());
+  ActiveCharacter().SetDirection((Direction_t)a->PopInt());
+  ActiveCharacter().SetX(a->PopInt());
+  ActiveCharacter().SetY(a->PopInt());
   ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
 }
 
@@ -430,6 +429,11 @@ void Action_SyncEnd (Action *a)
   network.sync_lock = false;
 }
 
+// Nothing to do here. Just for time synchronisation
+void Action_Ping(Action *a)
+{
+}
+
 void Action_Explosion (Action *a)
 {
   Point2i pos;
@@ -582,6 +586,7 @@ ActionHandler::ActionHandler()
   Register (ACTION_ASK_VERSION, "ask_version", &Action_AskVersion);
   Register (ACTION_SEND_VERSION, "send_version", &Action_SendVersion);
   Register (ACTION_SEND_RANDOM, "send_random", &Action_SendRandom);
+  Register (ACTION_PING, "ping", &Action_Ping);
   Register (ACTION_SYNC_BEGIN, "sync_begin", &Action_SyncBegin);
   Register (ACTION_SYNC_END, "sync_end", &Action_SyncEnd);
   Register (ACTION_EXPLOSION, "explosion", &Action_Explosion);

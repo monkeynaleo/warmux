@@ -94,6 +94,7 @@ class Team
 
   // Switch to next worm.
     void NextCharacter();
+    void SelectCharacter(uint index);
 
   // Prepare turn.
     void PrepareTurn();
