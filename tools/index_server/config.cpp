@@ -20,6 +20,8 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 {
         line.clear();
         std::getline(file, line);
+	if(file.eof())
+		return -1;
         return line.size();
 }
 
@@ -41,10 +43,10 @@ void Config::Load()
 	ssize_t read;
 	std::string line;
 
-	while ((read = getline(line, fin)) > 0)
+	while ((read = getline(line, fin)) >= 0)
 	{
 		line_nbr++;
-		if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
+		if(line.size() == 0 || line.at(0) == '#' )
 			continue;
 
 		std::string::size_type equ_pos = line.find('=',0);
@@ -65,19 +67,13 @@ void Config::Load()
 		}
 		else
 		{
-			if(val == "true\n")
+			if(val == "true")
 				bool_value[ opt ] = true;
 			else
-			if(val == "false\n")
+			if(val == "false")
 				bool_value[ opt ] = false;
 			else
-			{
-				// We have a string. But first, we need to erase the '\n' at the end of the line
-				unsigned int off = val.find('\n');
-				if(off != val.size())
-					val.erase(off);
 				str_value[ opt ] = val;
-			}
 		}
 	}
 

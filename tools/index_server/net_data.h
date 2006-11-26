@@ -4,7 +4,6 @@
 #include <string>
 #include "../../src/network/index_svr_msg.h"
 
-
 class NetData
 {
 	char* str;

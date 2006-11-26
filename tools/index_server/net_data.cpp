@@ -34,6 +34,12 @@ void NetData::Host(const int & client_fd, const unsigned int & ip)
 
 void NetData::ConnectTo(const std::string & address, const int & port)
 {
+	// Resolve the name of the host:
+	struct hostent* hostinfo;
+	hostinfo = gethostbyname(address.c_str());
+	if(!hostinfo)
+		TELL_ERROR;
+
 	fd = socket(AF_INET, SOCK_STREAM, 0);
 
 	if(fd == -1)
@@ -45,7 +51,7 @@ void NetData::ConnectTo(const std::string & address, const int & port)
 
 	struct sockaddr_in addr;
 	addr.sin_family = AF_INET;
-	addr.sin_addr.s_addr = inet_addr( address.c_str() );
+	addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
 	addr.sin_port = htons(port);
 
 	if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
@@ -160,8 +166,6 @@ bool NetData::SendStr(const std::string &full_str)
 	DPRINT(TRAFFIC, "Sent string: %s", full_str.c_str());
 	return true;
 }
-
-
 
 bool NetData::Receive()
 {
