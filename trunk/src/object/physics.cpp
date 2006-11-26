@@ -542,10 +542,8 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
       }
       SignalRebound();
     }
-    else{
-      std::cout << " " << m_rebounding << std::endl;
+    else
       StopMoving();
-    }
     break;
 
   case Pendulum:
@@ -573,7 +571,6 @@ void Physics::Rebound(Point2d contactPos, double contact_angle)
     break ;
 
   default:
-    std::cout << "ha" << std::endl;
     break ;
   }
 
