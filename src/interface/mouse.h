@@ -28,15 +28,16 @@
 #include "../include/base.h"
 #include "../tool/point.h"
 
-typedef enum {
-  POINTER_STANDARD,
-  POINTER_SELECT,
-  POINTER_MOVE,
-  POINTER_AIM
-} pointer_t;
-
 class Mouse
 {
+public:
+  typedef enum {
+    POINTER_STANDARD,
+    POINTER_SELECT,
+    POINTER_MOVE,
+    POINTER_AIM
+  } pointer_t;
+
 private:
   bool scroll_actif;
   bool hide;
@@ -52,12 +53,12 @@ private:
   Mouse();
   bool ScrollPointer();
   bool DrawMovePointer();
-  
+
 public:
-  
+
   static Mouse * GetInstance();
 
-  void TraiteClic (const SDL_Event *event); 
+  void TraiteClic (const SDL_Event *event);
 
   void Reset();
 

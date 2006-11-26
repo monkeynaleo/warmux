@@ -234,7 +234,7 @@ void GameLoop::Init ()
 
   Game::GetInstance()->SetEndOfGameStatus( false );
 
-  Mouse::GetInstance()->SetPointer(POINTER_SELECT);
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
   // First "selection" of a weapon -> fix bug 6576
   ActiveTeam().AccessWeapon().Select();

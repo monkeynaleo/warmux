@@ -106,7 +106,7 @@ void Game::MessageEndOfGame()
 
   //question.Set (txt, true, 0);
   //AskQuestion();
-  Mouse::GetInstance()->SetPointer(POINTER_STANDARD);
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
   ResultsMenu menu(results_list, winner_name);
   menu.Run();
 
@@ -189,7 +189,7 @@ void Game::Start()
       MessageEndOfGame();
 
   UnloadDatas();
-  Mouse::GetInstance()->SetPointer(POINTER_STANDARD);
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
 
   if (err)
   {
