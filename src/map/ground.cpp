@@ -87,7 +87,7 @@ double Ground::Tangeante(int x,int y){
    */
   Point2i p1,p2;
   if(!PointContigu(x,y, p1.x,p1.y, -1,-1))
-    return -1.0;
+    return NAN;
 
   if(!PointContigu(x,y, p2.x,p2.y, p1.x,p1.y))
   {

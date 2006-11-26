@@ -45,10 +45,10 @@ class Physics : private ObjectConfig
 {
 private:
   MotionType_t m_motion_type ;
-
-protected:
   EulerVector m_pos_x;          // x0 = pos, x1 = speed, x2 = acc on the X axys
   EulerVector m_pos_y;          // x0 = pos, x1 = speed, x2 = acc on the Y axys
+
+protected:
   Point2d m_extern_force;  // External strength applyed to the object
   uint m_last_move;             // Time since last move
   double m_phys_width, m_phys_height;
@@ -106,12 +106,12 @@ public:
   // Add a initial speed to the current speed.
   void AddSpeed (double norme, double angle);
   void AddSpeedXY (Point2d vector);
- 
+
   // Get current object speed
-  void GetSpeed (double &norm, double &angle);
-  void GetSpeedXY (Point2d &vector);
-  double GetAngularSpeed();
-  double GetSpeedAngle();
+  void GetSpeed (double &norm, double &angle) const;
+  void GetSpeedXY (Point2d &vector) const;
+  double GetAngularSpeed() const;
+  double GetSpeedAngle() const;
 
   // Add new strength
   void SetExternForce (double length, double angle);
