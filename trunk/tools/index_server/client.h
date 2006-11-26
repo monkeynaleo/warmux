@@ -7,11 +7,14 @@
 
 class Client : public NetData
 {
+	std::string version;
 	bool handshake_done;
 	bool is_hosting;
 
 	bool SendSignature();
 	bool SendList();
+
+	void SetVersion(const std::string & ver);
 public:
 	Client(int client_fd,unsigned int & ip);
 	~Client();

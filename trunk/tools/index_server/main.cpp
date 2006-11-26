@@ -12,14 +12,16 @@
 #include <errno.h>
 #include <string.h>
 #include <list>
+#include <map>
 
 #include "server.h"
 #include "client.h"
 #include "config.h"
 #include "debug.h"
+#include "sync_slave.h"
 
-// map < socket_fd, client >
-std::list<Client*> clients;
+// map < version, client >
+std::multimap<std::string, Client*> clients;
 
 void SetChroot()
 {
@@ -94,6 +96,9 @@ int main(int argc, void** argv)
 	if( signal(SIGPIPE, SIG_IGN) == SIG_ERR )
 		TELL_ERROR;
 
+	// Contact other index servers:
+	sync_slave.Start();
+	
 	// Set the maximum number of connection
 	int max_conn = SetMaxConnection();
 	DPRINT(INFO, "Number of connexions allowed : %i", max_conn);
@@ -108,30 +113,41 @@ int main(int argc, void** argv)
 
 	while(1)
 	{
-		DPRINT(CONN, "Waiting for incoming connections...");
+		DPRINT(TRAFFIC, "Waiting for incoming connections...");
+		sync_slave.CheckGames();
+
+		struct timeval timeout;
+		timeout.tv_sec = 1;
+		timeout.tv_usec = 0;
 
 		acting_sock_set = listen_sock.GetSockSet();
 		// Lock the process until activity is detected
-		if ( select(FD_SETSIZE, &acting_sock_set, NULL, NULL, NULL) < 1 )
+		if ( select(FD_SETSIZE, &acting_sock_set, NULL, NULL, &timeout) < 1 )
+		{
+			// Timeout to check for other games on other servers
+			if(timeout.tv_sec == 0 && timeout.tv_usec == 0)
+				continue;
 			TELL_ERROR;
-
+		}
+		
 		// Find the socket where activity have been detected:
 		// First check for already established connections
-		for(std::list<Client*>::iterator client = clients.begin();
+		for(std::multimap<std::string,Client*>::iterator client = clients.begin();
 			client != clients.end();
 			++client)
 		{
-			if( FD_ISSET( (*client)->GetFD(), &acting_sock_set) )
+			if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
 			{
-				if( !(*client)->Receive() )
+				if( ! client->second->Receive() )
 				{
 					// Connection closed
-					listen_sock.CloseConnection( (*client)->GetFD() );
-					delete *client;
+					listen_sock.CloseConnection( client->second->GetFD() );
+					delete client->second;
 					clients.erase(client);
 					DPRINT(CONN, "%i connections up!", clients.size());
-					break;
 				}
+				// Exit as soon as, we have read a socket as the 'clients' list may have changed
+				break;
 			}
 		}
 		// First check if there is any new incoming connection
@@ -139,8 +155,7 @@ int main(int argc, void** argv)
 		{
 			Client* client = listen_sock.NewConnection();
 			if(client != NULL)
-				clients.push_back( client );
-
+				clients.insert(std::make_pair("unknown", client ));
 			DPRINT(CONN, "%i connections up!", clients.size());
 		}
 	}

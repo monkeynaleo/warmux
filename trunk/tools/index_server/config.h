@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 
+const int VERSION = 1;
+
 class Config
 {
 	std::map<std::string, std::string> str_value;

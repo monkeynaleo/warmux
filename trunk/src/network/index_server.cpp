@@ -149,7 +149,6 @@ bool IndexServer::GetServerList()
     return true;
 
   // Download the list of user
-  const std::string server_list_url = "http://www.wormux.org/server_list";
   const std::string server_file = Config::GetInstance()->GetPersonalDir() + "server_list";
 
   if( !downloader.Get(server_list_url.c_str(), server_file.c_str()) )
@@ -284,8 +283,13 @@ bool IndexServer::HandShake()
   Send(TS_MSG_VERSION);
   Send(Constants::VERSION);
 
-  std::string sign = ReceiveStr();
-  if(sign != "MassMurder!")
+  int msg = ReceiveInt();
+  std::string sign;
+
+  if(msg == TS_MSG_VERSION)
+    sign = ReceiveStr();
+
+  if(msg != TS_MSG_VERSION || sign != "MassMurder!")
   {
     Question question;
     question.Set(_("It doesn't seem to be a valid Wormux server..."),1,0);

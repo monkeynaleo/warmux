@@ -26,11 +26,20 @@
 enum IndexServerMsg
 {
   TS_NO_MSG, // Don't send this
-  TS_MSG_VERSION, // Send this to identify the server
-  TS_MSG_HOSTING, // Send this if we are hosting a game
+
+  //********  Messages shared by wormux clients, womux servers, and index servers ********
+  TS_MSG_VERSION,  // Send this to identify the server
+  TS_MSG_HOSTING,  // Send this if we are hosting a game
   TS_MSG_GET_LIST, // Send this to obtain the list of the current hosting games
+
+  //********  index servers to index servers messages  ***********************************
+  TS_MSG_WIS_VERSION,     // Send the server version
+  TS_MSG_JOIN_LEAVE,     // Send this when a wormux server joined or left the index server
+
   TS_LAST_MSG // Don't send this
 };
+
+const std::string server_list_url = "http://www.wormux.org/server_list";
 
 #endif
 
