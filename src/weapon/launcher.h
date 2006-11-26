@@ -48,7 +48,7 @@ class WeaponProjectile : public PhysicalObj
     int m_timeout_modifier;
 
   public:
-    WeaponProjectile(const std::string &nom, 
+    WeaponProjectile(const std::string &nom,
                      ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher);
     virtual ~WeaponProjectile();
@@ -119,16 +119,16 @@ class WeaponLauncher : public Weapon
     void Refresh();
   private:
     void DirectExplosion();
-  
+
   public:
-    WeaponLauncher(Weapon_type type, 
+    WeaponLauncher(Weapon_type type,
                    const std::string &id,
                    EmptyWeaponConfig * params,
                    weapon_visibility_t visibility = ALWAYS_VISIBLE);
     virtual ~WeaponLauncher();
 
     virtual void Draw();
-    virtual void HandleKeyEvent(int action, int event_type);
+    virtual void HandleKeyEvent(int action, Clavier::Key_Event_t event_type);
 
   // Handle of projectile events
     virtual void SignalProjectileExplosion();

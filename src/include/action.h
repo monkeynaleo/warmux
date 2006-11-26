@@ -34,6 +34,7 @@ class Action
 {
 private:
   std::list<Uint32> var;
+  Action ( const Action& an_action);
 protected:
   Action_t m_type;
   uint m_timestamp;

@@ -84,15 +84,15 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-void Construct::HandleKeyEvent(int action, int event_type)
+void Construct::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 {
   switch (action) {
     case ACTION_UP:
-      if (event_type == KEY_PRESSED)
+      if (event_type == Clavier::KEY_PRESSED)
         Up();
       break ;
     case ACTION_DOWN:
-      if (event_type == KEY_PRESSED)
+      if (event_type == Clavier::KEY_PRESSED)
         Down();
       break ;
     default:

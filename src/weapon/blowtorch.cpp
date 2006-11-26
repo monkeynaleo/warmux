@@ -79,14 +79,14 @@ bool Blowtorch::p_Shoot()
 	return true;
 }
 
-void Blowtorch::HandleKeyEvent(int action, int event_type)
+void Blowtorch::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 {
 	switch(action)
 	{
 		case ACTION_SHOOT:
-			if(event_type == KEY_RELEASED)
+			if(event_type ==  Clavier:: Clavier::KEY_RELEASED)
 				EndTurn();
-			else if(event_type == KEY_REFRESH)
+			else if(event_type == Clavier::KEY_REFRESH)
 			{
 				if(!EnoughAmmoUnit() || ActiveCharacter().GotInjured())
 					EndTurn();

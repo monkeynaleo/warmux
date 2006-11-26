@@ -50,7 +50,7 @@ class SubMachineGun : public WeaponLauncher
     bool p_Shoot();
   public:
     SubMachineGun();
-    void HandleKeyEvent(int action, int event_type);
+    void HandleKeyEvent(int action, Clavier::Key_Event_t event_type);
 };
 
 #endif /* SUBMACHINE_GUN_H */
