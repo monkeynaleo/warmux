@@ -31,7 +31,8 @@ class MapSelectionBox : public HBox
 { 
  private:  
   uint selected_map_index;
-   
+  bool display_only;
+
   PictureWidget *map_preview_selected;
   PictureWidget *map_preview_before, *map_preview_before2;
   PictureWidget *map_preview_after, *map_preview_after2;  
@@ -40,12 +41,14 @@ class MapSelectionBox : public HBox
   Label *map_author_label;
   Button *bt_map_plus, *bt_map_minus;
 
-  void ChangeMap(int delta_index);   
+  void ChangeMapDelta(int delta_index);   
+  void ChangeMap(int index);
 
  public:
-  MapSelectionBox(const Rectanglei &rect);
+  MapSelectionBox(const Rectanglei &rect, bool _display_only);
 
   void ValidMapSelection();
+  void ChangeMapCallback();
   Widget* Clic(const Point2i &mousePosition, uint button);
 };
 

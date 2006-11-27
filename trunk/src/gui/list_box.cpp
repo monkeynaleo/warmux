@@ -35,22 +35,9 @@ ListBoxItem::ListBoxItem(const std::string& _label,
 			 bool _enabled) : 
   Label(_label, Rectanglei(0,0,0,0), _font)
 {
-  //label = _label;
   value = _value;
   enabled = _enabled;
 }
-
-// ListBoxItem::ListBoxItem(std::string _label, 
-// 			 Font& _font,
-// 			 std::string _value,
-// 			 bool _enabled) :
-//   Label(_label, Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL),
-//   	white_color, false, false)
-// {
-//   //label = _label;
-//   value = _value;
-//   enabled = _enabled;
-// }
 
 const std::string& ListBoxItem::GetLabel() const
 {
