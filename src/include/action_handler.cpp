@@ -138,7 +138,7 @@ void Action_Down (Action *a)
 
 void Action_ChangeWeapon (Action *a)
 {
-  ActiveTeam().SetWeapon((Weapon_type)a->PopInt());
+  ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
 }
 
 void Action_NextCharacter (Action *a)
@@ -404,7 +404,7 @@ void Action_SendRandom (Action *a)
 
 void Action_SupertuxState (Action *a)
 {
-  assert(ActiveTeam().GetWeaponType() == WEAPON_SUPERTUX);
+  assert(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX);
   WeaponLauncher* launcher = static_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
   SuperTux* tux = static_cast<SuperTux*>(launcher->GetProjectile());
 

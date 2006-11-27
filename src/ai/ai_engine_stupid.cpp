@@ -185,17 +185,17 @@ void AIStupidEngine::ChooseWeapon()
     uint selected = uint(randomSync.GetDouble(0.0, 3.5));
     switch (selected) {
     case 0:
-      ActiveTeam().SetWeapon(WEAPON_SHOTGUN);
+      ActiveTeam().SetWeapon(Weapon::WEAPON_SHOTGUN);
       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
     case 1:
-      ActiveTeam().SetWeapon(WEAPON_SNIPE_RIFLE);
+      ActiveTeam().SetWeapon(Weapon::WEAPON_SNIPE_RIFLE);
       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
     case 2:
       //ActiveTeam().SetWeapon(WEAPON_SUBMACHINE_GUN);
       //if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
     case 3:
     default:
-      ActiveTeam().SetWeapon(WEAPON_GUN);
+      ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
     }
     ActiveTeam().crosshair.ChangeAngleVal(m_angle);
     std::cout << "2-Angle Radian: " << ActiveTeam().crosshair.GetAngleRad() << std::endl;
@@ -207,26 +207,26 @@ void AIStupidEngine::ChooseWeapon()
 
     switch (selected) {
     case 0:
-      ActiveTeam().SetWeapon(WEAPON_DYNAMITE);
+      ActiveTeam().SetWeapon(Weapon::WEAPON_DYNAMITE);
       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
 
     case 1:
-      ActiveTeam().SetWeapon(WEAPON_GNU);
+      ActiveTeam().SetWeapon(Weapon::WEAPON_GNU);
       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
 
     case 2:
-      ActiveTeam().SetWeapon(WEAPON_POLECAT);
+      ActiveTeam().SetWeapon(Weapon::WEAPON_POLECAT);
       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
 
     case 3:
     default:
-      ActiveTeam().SetWeapon(WEAPON_MINE);
+      ActiveTeam().SetWeapon(Weapon::WEAPON_MINE);
     }
   }
 
   // not enough ammo !!
   if ( ! ActiveTeam().GetWeapon().EnoughAmmo() ) {
-    ActiveTeam().SetWeapon(WEAPON_SKIP_TURN);
+    ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
   }
 
 }

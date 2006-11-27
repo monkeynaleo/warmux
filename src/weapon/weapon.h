@@ -56,8 +56,25 @@ class WeaponStrengthBar : public BarreProg
 
 class Weapon
 {
+public:
+  typedef enum
+  {
+    WEAPON_BAZOOKA,        WEAPON_AUTOMATIC_BAZOOKA, WEAPON_RIOT_BOMB, WEAPON_GRENADE,
+    WEAPON_HOLLY_GRENADE,  WEAPON_CLUSTER_BOMB,      WEAPON_GUN,       WEAPON_SHOTGUN,
+    WEAPON_SUBMACHINE_GUN, WEAPON_BASEBALL,
+
+    WEAPON_DYNAMITE,      WEAPON_MINE,
+
+    WEAPON_SUPERTUX,      WEAPON_AIR_ATTACK,  WEAPON_ANVIL, WEAPON_GNU,
+    WEAPON_POLECAT,       WEAPON_BOUNCE_BALL,
+
+    WEAPON_TELEPORTATION, WEAPON_NINJA_ROPE,  WEAPON_LOWGRAV,   WEAPON_SUICIDE,
+    WEAPON_SKIP_TURN,     WEAPON_JETPACK,     WEAPON_PARACHUTE, WEAPON_AIR_HAMMER,
+    WEAPON_CONSTRUCT,     WEAPON_SNIPE_RIFLE, WEAPON_BLOWTORCH, WEAPON_SYRINGE
+  } Weapon_type;
+
 protected:
-  Weapon_type m_type;
+  Weapon::Weapon_type m_type;
   std::string m_id;
   std::string m_name;
   bool m_is_active;

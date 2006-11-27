@@ -667,7 +667,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
     CharacterCursor::GetInstance()->Hide();
 
     // Is this a suicide ?
-    if (ActiveTeam().GetWeaponType() == WEAPON_SUICIDE) {
+    if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUICIDE) {
       txt = Format(_("%s commits suicide !"), character -> GetName().c_str());
 
       // Dead in moving ?
@@ -685,7 +685,7 @@ void GameLoop::SignalCharacterDeath (Character *character)
              && character->GetTeam().IsSameAs(ActiveTeam()) ) {
     txt = Format(_("%s is a psychopath, he has killed a member of %s team!"),
                  ActiveCharacter().GetName().c_str(), character -> GetName().c_str());
-  } else if (ActiveTeam().GetWeaponType() == WEAPON_GUN) {
+  } else if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_GUN) {
     txt = Format(_("What a shame for %s - he was killed by a simple gun!"),
                  character -> GetName().c_str());
   } else {
