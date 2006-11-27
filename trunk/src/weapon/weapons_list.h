@@ -34,10 +34,10 @@ class WeaponsList
 public:
   typedef std::list<Weapon*> weapons_list_type;
   typedef std::list<Weapon*>::iterator weapons_list_it;
-  
+
 private:
   weapons_list_type m_weapons_list;
- 
+
   // The int is used to classify weapon by sort
   std::multimap<uint, Weapon*> m_weapons_map;
   typedef std::multimap<uint, Weapon*>::value_type keybind;
@@ -56,8 +56,8 @@ public:
 
   // Return a list of  weapons
   weapons_list_type& GetList();
-  Weapon* GetWeapon(Weapon_type type);
-  bool GetWeaponBySort(uint num_sort, Weapon_type &type);
+  Weapon* GetWeapon(Weapon::Weapon_type type);
+  bool GetWeaponBySort(uint num_sort, Weapon::Weapon_type &type);
 };
 
 extern WeaponsList weapons_list;

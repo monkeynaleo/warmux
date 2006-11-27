@@ -141,7 +141,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "%s team has won %u teleportations.",
                 BONUS_TELEPORTATION),
             ActiveTeam().GetName().c_str(), BONUS_TELEPORTATION);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_TELEPORTATION)->GetName() ] += BONUS_TELEPORTATION;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_TELEPORTATION)->GetName() ] += BONUS_TELEPORTATION;
     break;
 
   case bonusENERGY:
@@ -168,7 +168,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "'%s has won %u Air Attacks",
                 BONUS_AIR_ATTACK),
             ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_AIR_ATTACK)->GetName() ] += BONUS_AIR_ATTACK;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_AIR_ATTACK)->GetName() ] += BONUS_AIR_ATTACK;
     break;
 
   case bonusBASEBALL:
@@ -177,7 +177,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "'%s has won %u Baseball bats",
                 BONUS_BASEBALL),
             ActiveTeam().GetName().c_str(), BONUS_BASEBALL);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_BASEBALL)->GetName() ] += BONUS_BASEBALL;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_BASEBALL)->GetName() ] += BONUS_BASEBALL;
     break;
 
   case bonusLOWGRAV:
@@ -186,7 +186,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "'%s has won %u Low gravity",
                 BONUS_LOWGRAV),
             ActiveTeam().GetName().c_str(), BONUS_LOWGRAV);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_LOWGRAV)->GetName() ] += BONUS_LOWGRAV;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_LOWGRAV)->GetName() ] += BONUS_LOWGRAV;
     break;
 
   case bonusANVIL:
@@ -195,7 +195,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "'%s has won %u Anvil",
                 BONUS_ANVIL),
             ActiveTeam().GetName().c_str(), BONUS_ANVIL);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_ANVIL)->GetName() ] += BONUS_ANVIL;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_ANVIL)->GetName() ] += BONUS_ANVIL;
     break;
 
   case bonusHOLLY_GRENADE:
@@ -204,7 +204,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "'%s has won %u Holy grenades",
                 BONUS_HOLLY_GRENADE),
             ActiveTeam().GetName().c_str(), BONUS_HOLLY_GRENADE);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_HOLLY_GRENADE)->GetName() ] += BONUS_HOLLY_GRENADE;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_HOLLY_GRENADE)->GetName() ] += BONUS_HOLLY_GRENADE;
     break;
 
   case bonusAUTO_BAZOOKA:
@@ -213,7 +213,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "%s team has won %u Automatic Bazookas!",
                 BONUS_AUTO_BAZOOKA),
 		  ActiveTeam().GetName().c_str(), BONUS_AUTO_BAZOOKA);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_AUTOMATIC_BAZOOKA)->GetName() ] += BONUS_AUTO_BAZOOKA;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_AUTOMATIC_BAZOOKA)->GetName() ] += BONUS_AUTO_BAZOOKA;
     break;
 
   case bonusRIOT_BOMB:
@@ -222,7 +222,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "%s team has won %u Riot Bombs!",
                 BONUS_RIOT_BOMB),
 		  ActiveTeam().GetName().c_str(), BONUS_RIOT_BOMB);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_RIOT_BOMB)->GetName() ] += BONUS_RIOT_BOMB;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_RIOT_BOMB)->GetName() ] += BONUS_RIOT_BOMB;
     break;
 
   default: std::cout << bonus << std::endl; assert (false);
@@ -232,7 +232,7 @@ void BonusBox::ApplyBonus (Team &equipe, Character &ver){
                 "%s team has won %u sticks of Dynamite!",
                 BONUS_DYNAMITE),
             ActiveTeam().GetName().c_str(), BONUS_DYNAMITE);
-    equipe.m_nb_ammos[ weapons_list.GetWeapon(WEAPON_DYNAMITE)->GetName() ] += BONUS_DYNAMITE;
+    equipe.m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_DYNAMITE)->GetName() ] += BONUS_DYNAMITE;
     break;
   }
 

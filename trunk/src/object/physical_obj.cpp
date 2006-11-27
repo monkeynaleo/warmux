@@ -322,7 +322,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
 
   // Only for ninja rope... TO REMOVE!!
-  if (ActiveTeam().GetWeaponType() == WEAPON_NINJA_ROPE &&
+  if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_NINJA_ROPE &&
       ActiveTeam().GetWeapon().IsActive()) {
     Weapon& tmp = ActiveTeam().AccessWeapon();
     NinjaRope * ninjarope = (NinjaRope *)(&tmp);

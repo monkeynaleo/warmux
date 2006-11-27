@@ -174,7 +174,7 @@ Weapon* WeaponsList::GetNextWeapon(uint sort, uint index)
 
 //-----------------------------------------------------------------------------
 
-bool WeaponsList::GetWeaponBySort(uint sort, Weapon_type &type)
+bool WeaponsList::GetWeaponBySort(uint sort, Weapon::Weapon_type &type)
 {
   uint nb_weapons = m_weapons_map.count(sort);
   if (nb_weapons == 0) return false;
@@ -216,13 +216,13 @@ bool WeaponsList::GetWeaponBySort(uint sort, Weapon_type &type)
 
 class test_weapon_type {
   private:
-	Weapon_type m_type;
+    Weapon::Weapon_type m_type;
   public:
-    test_weapon_type(Weapon_type type) { m_type = type; }
+    test_weapon_type(Weapon::Weapon_type type) { m_type = type; }
 	bool operator() (const Weapon* w) const { return w->GetType()==m_type; }
 };
 
-Weapon* WeaponsList::GetWeapon (Weapon_type type)
+Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)
 {
   weapons_list_it it;
   it = std::find_if(m_weapons_list.begin(), m_weapons_list.end(), test_weapon_type(type));

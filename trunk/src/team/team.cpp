@@ -49,7 +49,7 @@ Team::Team(const std::string& _teams_dir,
   active_character = characters.end();
 
   is_camera_saved = false;
-  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
+  active_weapon = weapons_list.GetWeapon(Weapon::WEAPON_DYNAMITE);
 
   m_teams_dir = _teams_dir;
   m_id = _id;
@@ -276,7 +276,7 @@ void Team::PrepareTurn()
   if (AccessWeapon().EnoughAmmo())
     AccessWeapon().Select();
   else { // try to find another weapon !!
-    active_weapon = weapons_list.GetWeapon(WEAPON_BAZOOKA);
+    active_weapon = weapons_list.GetWeapon(Weapon::WEAPON_BAZOOKA);
     AccessWeapon().Select();
   }
 }
@@ -286,7 +286,7 @@ Character& Team::ActiveCharacter()
   return (*active_character);
 }
 
-void Team::SetWeapon (Weapon_type type)
+void Team::SetWeapon (Weapon::Weapon_type type)
 {
   AccessWeapon().Deselect();
   active_weapon = weapons_list.GetWeapon(type);
@@ -379,13 +379,13 @@ void Team::LoadGamingData(uint howmany)
   // Disable non-working weapons in network games
   if(network.IsConnected())
   {
-    m_nb_ammos[ weapons_list.GetWeapon(WEAPON_NINJA_ROPE)->GetName() ] = 0;
-    m_nb_ammos[ weapons_list.GetWeapon(WEAPON_AIR_HAMMER)->GetName() ] = 0;
-    m_nb_ammos[ weapons_list.GetWeapon(WEAPON_BLOWTORCH)->GetName() ] = 0;
-    m_nb_ammos[ weapons_list.GetWeapon(WEAPON_SUBMACHINE_GUN)->GetName() ] = 0;
+    m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
+    m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_AIR_HAMMER)->GetName() ] = 0;
+    m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_BLOWTORCH)->GetName() ] = 0;
+    m_nb_ammos[ weapons_list.GetWeapon(Weapon::WEAPON_SUBMACHINE_GUN)->GetName() ] = 0;
   }
 
-  active_weapon = weapons_list.GetWeapon(WEAPON_DYNAMITE);
+  active_weapon = weapons_list.GetWeapon(Weapon::WEAPON_DYNAMITE);
   is_camera_saved = false;
 
   if (howmany == 0)
@@ -424,14 +424,14 @@ void Team::Refresh()
 
 Weapon& Team::AccessWeapon() const { return *active_weapon; }
 const Weapon& Team::GetWeapon() const { return *active_weapon; }
-Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
+Weapon::Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); }
 
 bool Team::IsSameAs(const Team& other) const
 {
   return (strcmp(m_id.c_str(), other.GetId().c_str()) == 0);
 }
 
-bool Team::IsLocal() const 
+bool Team::IsLocal() const
 {
   if (type_of_player == TEAM_human_local)
     return true;
@@ -439,7 +439,7 @@ bool Team::IsLocal() const
   return false;
 }
 
-bool Team::IsLocalAI() const 
+bool Team::IsLocalAI() const
 {
   if (type_of_player == TEAM_ai_local)
     return true;

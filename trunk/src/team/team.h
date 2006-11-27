@@ -71,7 +71,7 @@ class Team
     Weapon *active_weapon;
     uint nb_characters;
 
-    team_player_type_t type_of_player; 
+    team_player_type_t type_of_player;
 
     Team (const std::string& _teams_dir,
           const std::string& _id,
@@ -106,13 +106,13 @@ class Team
     void Refresh();
 
   // Change the weapon.
-    void SetWeapon (Weapon_type nv_arme);
+    void SetWeapon (Weapon::Weapon_type nv_arme);
     int NbAliveCharacter() const;
 
   // Access to the active weapon.
     Weapon& AccessWeapon() const;
     const Weapon& GetWeapon() const;
-    Weapon_type GetWeaponType() const;
+    Weapon::Weapon_type GetWeaponType() const;
 
   // Init the energy bar of the team.
     void InitEnergy (uint max);

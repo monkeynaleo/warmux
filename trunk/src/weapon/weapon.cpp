@@ -372,7 +372,7 @@ const std::string& Weapon::GetID() const {
   return m_id;
 }
 
-Weapon_type Weapon::GetType() const {
+Weapon::Weapon_type Weapon::GetType() const {
   return m_type;
 }
 
