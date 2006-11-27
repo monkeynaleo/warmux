@@ -78,7 +78,8 @@ GameMenu::GameMenu() :
   // ##  MAP SELECTION
   // ################################################
   map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-				       mainBoxWidth, mapBoxHeight));
+					    mainBoxWidth, mapBoxHeight),
+				 false);
 
   widgets.AddWidget(map_box);
 

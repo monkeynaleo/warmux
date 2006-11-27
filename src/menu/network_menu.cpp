@@ -34,15 +34,14 @@
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
 
-const uint TEAMS_Y = 20;
+const uint MARGIN_TOP    = 5;
+const uint MARGIN_SIDE   = 5;
+const uint MARGIN_BOTTOM = 70;
+
 const uint TEAMS_W = 160;
-const uint TEAMS_H = 180;
+const uint TEAMS_BOX_H = 180;
 const uint TEAM_LOGO_H = 48;
-
-const uint MAPS_X = 20;
-const uint MAPS_W = 160;
-
-const uint MAP_PREVIEW_W = 300;
+const uint OPTIONS_BOX_H = 150;
 
 #define WORMUX_NETWORK_PORT "9999"
 
@@ -51,45 +50,25 @@ NetworkMenu::NetworkMenu() :
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
+  Rectanglei stdRect (0, 0, 130, 30);
 
-  normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  Surface window = AppWormux::GetInstance()->video.window;
 
-  // Game options widgets
-  player_number = new SpinButton(_("Max number of players:"), rectZero, GameMode::GetInstance()->max_teams, 1, 2, GameMode::GetInstance()->max_teams);
-  options_box = new VBox(Rectanglei( 475 + 30 + 5, TEAMS_Y, 800-475-40, 1));
-  options_box->AddWidget(new Label(_("Game options:"),rectZero, *normal_font));
-  options_box->AddWidget(player_number);
-  connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0), rectZero, *normal_font);
-  inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0), rectZero, *normal_font);
-  options_box->AddWidget(connected_players);
-  options_box->AddWidget(inited_players);
-  //options_box->enabled = false;
-  widgets.AddWidget(options_box);
+  // Calculate main box size
+  uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
+  uint mapBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE) 
+    - TEAMS_BOX_H - OPTIONS_BOX_H;
 
-  msg_box = new MsgBox(11, Rectanglei( 475 + 30 + 5, options_box->GetPositionY() + options_box->GetSizeY() + TEAMS_Y, 800-475-40, 1), Font::GetInstance(Font::FONT_SMALL));
-  widgets.AddWidget(msg_box);
-  msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find"));
-  msg_box->NewMessage(_("some opponents."));
-  msg_box->NewMessage(_("WARNING! Disconnections are not yet handled."));
-  msg_box->NewMessage(_("So you have to restart Wormux after each"));
-  msg_box->NewMessage(_("disconnection!"));
-
-  chat_box = new TextBox(std::string(""),Rectanglei(475 + 30 + 5, 600 - 100, 800 - 475 + 40, 25), *Font::GetInstance(Font::FONT_SMALL));
-  widgets.AddWidget(chat_box);
-  send_txt = new ButtonText(Point2i(475 + 30 + 5, 600 - 75), res, "main_menu/button", "Send text !",normal_font);
-  widgets.AddWidget(send_txt);
-
-  // Center the boxes!
-  uint x = 5;
-
-  /* Choose the teams !! */
-  team_box = new HBox(Rectanglei( x, TEAMS_Y, 475, TEAMS_H));
+  // ################################################
+  // ##  TEAM SELECTION
+  // ################################################
+  team_box = new HBox(Rectanglei( MARGIN_SIDE, MARGIN_TOP, 475, TEAMS_BOX_H));
   team_box->AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
 
   //tmp_box->SetMargin(10);
   //tmp_box->SetBorder( Point2i(0,0) );
 
-  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ), false);
+  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, TEAMS_BOX_H - TEAM_LOGO_H - 5 ), false);
   team_box->AddWidget(lbox_all_teams);
 
   Box * buttons_tmp_box = new VBox(Rectanglei(0, 0, 68, 1), false);
@@ -105,42 +84,70 @@ NetworkMenu::NetworkMenu() :
 
   team_box->AddWidget(buttons_tmp_box);
 
-  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_H - TEAM_LOGO_H - 5 ), false);
+  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_BOX_H - TEAM_LOGO_H - 5 ), false);
   team_box->AddWidget(lbox_selected_teams);
 
   //team_box->enabled = false;
   widgets.AddWidget(team_box);
 
-  last_team = NULL;
+  last_team = NULL;  
 
-  /* Choose the map !! */
-  map_box = new HBox( Rectanglei(x, TEAMS_Y+TEAMS_H+20, 1, MAP_PREVIEW_W - 25 ));
-  map_box->AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
-  //map_box->SetMargin(2);
-  //map_box->SetBorder( Point2i(0,0) );
-
-  lbox_maps = new ListBox( Rectanglei(0, 0, MAPS_W, MAP_PREVIEW_W-25 ));
-  map_box->AddWidget(lbox_maps);
-
-  map_preview = new PictureWidget( Rectanglei(0, 0, MAP_PREVIEW_W+5, MAP_PREVIEW_W));
-  map_box->AddWidget(map_preview);
-
-  //map_box->enabled = false;
+  // ################################################
+  // ##  MAP SELECTION
+  // ################################################
+  if(network.IsServer()) {
+    map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
+					      mainBoxWidth, mapBoxHeight),
+				   false);
+  } else {
+    map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
+					      mainBoxWidth, mapBoxHeight),
+				   true);
+  }
   widgets.AddWidget(map_box);
 
+  // ################################################
+  // ##  GAME OPTIONS
+  // ################################################
+
+  options_box = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
+				     mainBoxWidth, OPTIONS_BOX_H), true);
+  options_box->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
+  
+  Box* tmp_box = new VBox( Rectanglei(0,0, 200,0), false);
+  player_number = new SpinButton(_("Max number of players:"), rectZero, 
+				 GameMode::GetInstance()->max_teams, 1, 2, 
+				 GameMode::GetInstance()->max_teams);
+  
+  tmp_box->AddWidget(player_number);
+
+  connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0), 
+				rectZero, *Font::GetInstance(Font::FONT_SMALL));
+  tmp_box->AddWidget(connected_players);
+
+  inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0), 
+			     rectZero, *Font::GetInstance(Font::FONT_SMALL));
+  tmp_box->AddWidget(inited_players);
+
+  chat_box = new TextBox(std::string(""),Rectanglei(0, 0, 0, 25), *Font::GetInstance(Font::FONT_SMALL));
+  tmp_box->AddWidget(chat_box);
+
+  send_txt = new ButtonText(Point2i(150, 30), res, "main_menu/button", "Send text !",Font::GetInstance(Font::FONT_SMALL));
+  tmp_box->AddWidget(send_txt);
+
+  options_box->AddWidget(tmp_box);
+    
+  msg_box = new MsgBox(6, Rectanglei( 0, 0, 400, 1), Font::GetInstance(Font::FONT_SMALL));  
+  msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find"));
+  msg_box->NewMessage(_("some opponents."));
+  msg_box->NewMessage(_("WARNING! Disconnections are not yet handled."));
+  msg_box->NewMessage(_("So you have to restart Wormux after each"));
+  msg_box->NewMessage(_("disconnection!"));
+
+  options_box->AddWidget(msg_box);
+  widgets.AddWidget(options_box);
+
   resource_manager.UnLoadXMLProfile(res);
-
-  // Values initialization
-
-  // Load Maps' list
-  std::sort(MapsList::GetInstance()->lst.begin(), MapsList::GetInstance()->lst.end(), compareMaps);
-
-  MapsList::iterator
-    terrain=MapsList::GetInstance()->lst.begin(),
-    fin_terrain=MapsList::GetInstance()->lst.end();
-  for (; terrain != fin_terrain; ++terrain)
-    lbox_maps->AddItem (false, terrain -> ReadName(), terrain -> ReadName());
-  lbox_maps->Select(0);
 
   // Load Teams' list
   teams_list.full_list.sort(compareTeams);
@@ -158,7 +165,7 @@ NetworkMenu::NetworkMenu() :
   teams_list.Clear();
   Reset();
 
-  ChangeMap();
+  //  ChangeMap();
 }
 
 NetworkMenu::~NetworkMenu()
@@ -169,17 +176,6 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 {
   ActionHandler * action_handler = ActionHandler::GetInstance();
   Widget* w = widgets.Clic(mousePosition, button);
-
-  if (w == lbox_maps)
-  {
-    if(network.IsServer())
-    {
-      ChangeMap();
-      action_handler->NewAction (new Action(Action::ACTION_SET_MAP, ActiveMap().ReadName()));
-    }
-    else
-      msg_box->NewMessage(_("Only the server can set the map!"));
-  }
 
   if (w == bt_add_team) {
     if (lbox_all_teams->GetSelectedItem() != -1 && lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
@@ -303,14 +299,14 @@ void NetworkMenu::__sig_cancel()
   network.Disconnect();
 }
 
-void NetworkMenu::ChangeMap()
-{
-  std::string map_id = lbox_maps->ReadLabel();
-  uint map_index = MapsList::GetInstance()->FindMapById(map_id);
-  MapsList::GetInstance()->SelectMapByIndex(map_index);
+// void NetworkMenu::ChangeMap()
+// {
+//   std::string map_id = lbox_maps->ReadLabel();
+//   uint map_index = MapsList::GetInstance()->FindMapById(map_id);
+//   MapsList::GetInstance()->SelectMapByIndex(map_index);
 
-  map_preview->SetSurface(MapsList::GetInstance()->lst[map_index].ReadPreview(), false);
-}
+//   map_preview->SetSurface(MapsList::GetInstance()->lst[map_index].ReadPreview(), false);
+// }
 
 void NetworkMenu::SelectTeamLogo(Team * t)
 {
@@ -458,5 +454,6 @@ void NetworkMenu::ChangeMapCallback()
 {
   assert( !close_menu );
   // Called from the action handler
-  map_preview->SetSurface(ActiveMap().ReadPreview(), false);
+
+  map_box->ChangeMapCallback();
 }

@@ -24,6 +24,7 @@
 
 #include <list>
 #include "menu.h"
+#include "map_selection_box.h"
 #include "../include/base.h"
 #include "../graphic/font.h"
 #include "../gui/button_text.h"
@@ -34,8 +35,6 @@ class Team;
 
 class NetworkMenu : public Menu
 {
-   Font * normal_font;
-
    /* Options controllers */
    SpinButton* player_number;
    Box* options_box;
@@ -54,11 +53,9 @@ class NetworkMenu : public Menu
    Team * last_team;
 
    /* Map controllers */
-   ListBox *lbox_maps;
-   PictureWidget *map_preview;  
-   Box *map_box;
+   MapSelectionBox *map_box;
 
-   void ChangeMap(); 
+   //void ChangeMap(); 
    void SelectTeamLogo(Team *t);  
    void MoveTeams(ListBox * from, ListBox * to, bool sort);
    void MoveDisableTeams(ListBox * from, ListBox * to, bool sort);
