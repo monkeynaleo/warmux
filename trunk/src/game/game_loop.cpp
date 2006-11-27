@@ -87,7 +87,7 @@ void GameLoop::InitGameData_NetServer()
 
   network.RejectIncoming();
 
-  Action a_change_state(ACTION_CHANGE_STATE);
+  Action a_change_state(Action::ACTION_CHANGE_STATE);
   network.SendAction ( &a_change_state );
   network.state = Network::NETWORK_INIT_GAME;
 
@@ -136,7 +136,7 @@ void GameLoop::InitGameData_NetClient()
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
   lst_objects.PlaceMines();
 
-  Action a_change_state(ACTION_CHANGE_STATE);
+  Action a_change_state(Action::ACTION_CHANGE_STATE);
 
   network.SendAction (&a_change_state);
   while (network.state != Network::NETWORK_READY_TO_PLAY)
@@ -270,7 +270,7 @@ void GameLoop::RefreshInput()
   if (!Time::GetInstance()->IsGamePaused()) {
     // Keyboard and mouse refresh
     if ((interaction_enabled && state != END_TURN) ||
-        (ActiveTeam().GetWeapon().IsActive() && 
+        (ActiveTeam().GetWeapon().IsActive() &&
          ActiveTeam().GetWeapon().override_keys)) { // for driving supertux for example
       Mouse::GetInstance()->Refresh();
       Clavier::GetInstance()->Refresh();
@@ -394,7 +394,7 @@ void GameLoop::CallDraw()
 
 void GameLoop::PingClient()
 {
-  Action * a = new Action(ACTION_PING);
+  Action * a = new Action(Action::ACTION_PING);
   ActionHandler::GetInstance()->NewAction(a);
 }
 
@@ -557,7 +557,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
       if( network.IsServer() )
       {
         // Tell to clients which character in the team is now playing
-        Action playing_char(ACTION_CHANGE_CHARACTER, (int)ActiveCharacter().GetCharacterIndex());
+        Action playing_char(Action::ACTION_CHANGE_CHARACTER, (int)ActiveCharacter().GetCharacterIndex());
         network.SendAction(&playing_char);
 
         printf("Action_NextCharacter:\n");

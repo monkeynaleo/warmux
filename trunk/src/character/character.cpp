@@ -553,7 +553,7 @@ void Character::HandleShoot(Clavier::Key_Event_t event_type)
   }
 }
 
-void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
+void Character::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
 {
   // The character cannot move anymove if the turn is over...
   if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
@@ -562,7 +562,7 @@ void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
   if (ActiveCharacter().IsDead())
     return;
 
-  if (action == ACTION_SHOOT)
+  if (action == Action::ACTION_SHOOT)
     {
       HandleShoot(event_type);
       do_nothing_time = Time::GetInstance()->Read();
@@ -572,18 +572,18 @@ void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 
   ActionHandler * action_handler = ActionHandler::GetInstance();
 
-  if(action <= ACTION_NEXT_CHARACTER)
+  if(action <= Action::ACTION_NEXT_CHARACTER)
     {
       switch (event_type)
       {
         case Clavier::KEY_REFRESH:
           switch (action) {
-            case ACTION_MOVE_LEFT:
+            case Action::ACTION_MOVE_LEFT:
               if(ActiveCharacter().IsImmobile())
                 MoveCharacterLeft(ActiveCharacter());
               HideGameInterface();
               return;
-            case ACTION_MOVE_RIGHT:
+            case Action::ACTION_MOVE_RIGHT:
               if(ActiveCharacter().IsImmobile())
                 MoveCharacterRight(ActiveCharacter());
               HideGameInterface();
@@ -595,7 +595,7 @@ void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
         case Clavier::KEY_PRESSED:
           switch (action)
           {
-            case ACTION_UP:
+            case Action::ACTION_UP:
               HideGameInterface();
               if(ActiveCharacter().IsImmobile())
               {
@@ -603,12 +603,12 @@ void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
                 {
                   do_nothing_time = Time::GetInstance()->Read();
                   CharacterCursor::GetInstance()->Hide();
-                  action_handler->NewAction (new Action(ACTION_UP));
+                  action_handler->NewAction (new Action(Action::ACTION_UP));
                 }
               }
               break ;
 
-            case ACTION_DOWN:
+            case Action::ACTION_DOWN:
               HideGameInterface();
               if(ActiveCharacter().IsImmobile())
               {
@@ -616,12 +616,12 @@ void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
                 {
                   do_nothing_time = Time::GetInstance()->Read();
                   CharacterCursor::GetInstance()->Hide();
-                  action_handler->NewAction (new Action(ACTION_DOWN));
+                  action_handler->NewAction (new Action(Action::ACTION_DOWN));
                 }
               }
               break ;
-            case ACTION_MOVE_LEFT:
-            case ACTION_MOVE_RIGHT:
+            case Action::ACTION_MOVE_LEFT:
+            case Action::ACTION_MOVE_RIGHT:
               HideGameInterface();
               InitMouvementDG(PAUSE_BOUGE);
               body->StartWalk();
@@ -629,20 +629,20 @@ void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
             // WARNING!! ALL JUMP KEYS NEEDS TO BE PROCESSED AFTER ANY MOVEMENT KEYS
             // OTHERWISE, THE JUMP ACTION WILL BYPASSED ON DISTANT COMPUTERS BYE THE REFRESH
             // OF THE WALK
-            case ACTION_JUMP:
+            case Action::ACTION_JUMP:
               HideGameInterface();
               if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(ACTION_JUMP));
+                action_handler->NewAction (new Action(Action::ACTION_JUMP));
               return ;
-            case ACTION_HIGH_JUMP:
+            case Action::ACTION_HIGH_JUMP:
               HideGameInterface();
               if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(ACTION_HIGH_JUMP));
+                action_handler->NewAction (new Action(Action::ACTION_HIGH_JUMP));
               return ;
-            case ACTION_BACK_JUMP:
+            case Action::ACTION_BACK_JUMP:
               HideGameInterface();
               if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(ACTION_BACK_JUMP));
+                action_handler->NewAction (new Action(Action::ACTION_BACK_JUMP));
               return ;
             default:
               break;
@@ -651,10 +651,12 @@ void Character::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 
         case Clavier::KEY_RELEASED:
           switch (action) {
-            case ACTION_MOVE_LEFT:
-            case ACTION_MOVE_RIGHT:
+            case Action::ACTION_MOVE_LEFT:
+            case Action::ACTION_MOVE_RIGHT:
                body->StopWalk();
                SendCharacterPosition();
+               break;
+            default:
                break;
             }
         default: break;

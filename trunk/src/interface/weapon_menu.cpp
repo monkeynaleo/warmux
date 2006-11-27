@@ -51,7 +51,7 @@ const uint WEAPON_ICO_WIDTH = 48;   // Width of the weapon icon
 const uint WEAPON_ICO_HEIGHT = 48;  // Height of the button icon
 
 const uint BUTTON_ICO_GAP = 8; // Gap between buttons when a button is zoomed
-                                   
+
 
 const uint ICONS_DRAW_TIME = 600; // Time to display all icons (in ms)
 const uint ICON_ZOOM_TIME = 150; // Time to zomm one icon.
@@ -179,7 +179,7 @@ void WeaponMenuItem::Draw()
       break ;
   }
 
-  // Button display  
+  // Button display
   button->Scale(scale, scale);
   button->Blit(AppWormux::GetInstance()->video.window, buttonCenter - buttonSize/2);
 
@@ -216,7 +216,7 @@ WeaponsMenu::WeaponsMenu()
   my_button3->cache.EnableLastFrameCache();
   my_button4 = new Sprite( resource_manager.LoadImage(res,"interface/button4_icon"));
   my_button4->cache.EnableLastFrameCache();
-  my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));  
+  my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));
   my_button5->cache.EnableLastFrameCache();
   resource_manager.UnLoadXMLProfile( res);
 }
@@ -416,7 +416,7 @@ void WeaponsMenu::Draw()
   iterator it=boutons.begin(), fin=boutons.end();
   for (it=boutons.begin(); it != fin; ++it)
   {
-    if(!it->weapon->CanBeUsedOnClosedMap() 
+    if(!it->weapon->CanBeUsedOnClosedMap()
        && !world.EstOuvert())
       continue;
 
@@ -434,7 +434,7 @@ void WeaponsMenu::Draw()
     int row = button_no;
 
     it->position.x = GetWidth() - (int)(BUTTON_WIDTH * (column+0.5));
-    it->position.y = BUTTON_ICO_GAP + (row * BUTTON_HEIGHT);     
+    it->position.y = BUTTON_ICO_GAP + (row * BUTTON_HEIGHT);
 
     if(show)
       ShowMotion(nr_buttons,(column * max_weapon) + row,it,column);
@@ -487,7 +487,7 @@ bool WeaponsMenu::ActionClic(const Point2i &mousePos)
   {
     if( it->MouseOn(mousePos) )
     {
-      ActionHandler::GetInstance()->NewAction (new Action(ACTION_CHANGE_WEAPON, 
+      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_CHANGE_WEAPON,
       it -> weapon -> GetType()));
       SwitchDisplay();
       return true;

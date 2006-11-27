@@ -63,7 +63,7 @@ class NinjaRope : public Weapon
     NinjaRope();
     void Active();
     void Draw();
-    void HandleKeyEvent(int key, Clavier::Key_Event_t event_type) ;
+    void HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type) ;
     void NotifyMove(bool collision);
     void SignalTurnEnd();
     EmptyWeaponConfig& cfg();

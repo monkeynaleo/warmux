@@ -167,7 +167,7 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
   connected_player = 1;
   cpu.push_back(new DistantComputer(socket));
   //Send nickname to server
-  Action a(ACTION_NICKNAME, nickname);
+  Action a(Action::ACTION_NICKNAME, nickname);
   network.SendAction(&a);
 
   //Control to net_thread_func
@@ -280,7 +280,7 @@ void Network::ReceiveActions()
         printf("New client connected\n");
         if(connected_player >= max_player_number)
           RejectIncoming();
-        ActionHandler::GetInstance()->NewAction(new Action(ACTION_ASK_VERSION));
+        ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_ASK_VERSION));
       }
     }
 
@@ -309,7 +309,7 @@ void Network::ReceiveActions()
                 ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 
 	//Add relation between nickname and socket
-	if( a->GetType() == ACTION_NICKNAME){
+	if( a->GetType() == Action::ACTION_NICKNAME){
 	  std::string nickname = a->PopString();
 	  std::cout<<"New nickname: " + nickname<< std::endl;
 	  (*dst_cpu)->nickname = nickname;
@@ -317,14 +317,14 @@ void Network::ReceiveActions()
 	  break;
 	}
 
-        if( a->GetType() == ACTION_NEW_TEAM
-        ||  a->GetType() == ACTION_DEL_TEAM)
+        if( a->GetType() == Action::ACTION_NEW_TEAM
+        ||  a->GetType() == Action::ACTION_DEL_TEAM)
         {
           (*dst_cpu)->ManageTeam(a);
           delete a;
         }
         else
-        if(a->GetType() == ACTION_CHAT_MESSAGE)
+        if(a->GetType() == Action::ACTION_CHAT_MESSAGE)
         {
           (*dst_cpu)->SendChatMessage(a);
           delete a;
@@ -335,9 +335,9 @@ void Network::ReceiveActions()
         }
 
         // Repeat the packet to other clients:
-        if(a->GetType() != ACTION_SEND_VERSION
-        && a->GetType() != ACTION_CHANGE_STATE
-        && a->GetType() != ACTION_CHAT_MESSAGE)
+        if(a->GetType() != Action::ACTION_SEND_VERSION
+        && a->GetType() != Action::ACTION_CHANGE_STATE
+        && a->GetType() != Action::ACTION_CHAT_MESSAGE)
         for(std::list<DistantComputer*>::iterator client = cpu.begin();
             client != cpu.end();
             client++)
@@ -391,11 +391,11 @@ void Network::SendChatMessage(std::string txt)
 {
   if(IsServer())
   {
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, nickname + std::string("> ") + txt));
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + std::string("> ") + txt));
   }
   else
   {
-    Action a(ACTION_CHAT_MESSAGE, txt);
+    Action a(Action::ACTION_CHAT_MESSAGE, txt);
     network.SendAction(&a);
   }
 }

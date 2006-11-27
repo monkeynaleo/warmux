@@ -62,7 +62,7 @@ void TeamsList::NextTeam (bool begin_game)
     ++it;
     if (it == playing_list.end()) it = playing_list.begin();
   } while ((**it).NbAliveCharacter() == 0);
-  ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHANGE_TEAM, (**it).GetId()));
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHANGE_TEAM, (**it).GetId()));
 }
 
 //-----------------------------------------------------------------------------
@@ -79,7 +79,7 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
 {
   // Skip '.', '..' and hidden files
   if (team[0] == '.') return;
-  
+
 #if !defined(WIN32) || defined(__MINGW32__)
   // Is it a directory ?
   struct stat stat_file;
@@ -87,7 +87,7 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
   if (stat(filename.c_str(), &stat_file) != 0) return;
   if (!S_ISDIR(stat_file.st_mode)) return;
 #endif
-        
+
   // Add the team
   Team * tmp = Team::CreateTeam (dir, team);
   if (tmp != NULL) {
@@ -100,11 +100,11 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
 //-----------------------------------------------------------------------------
 
 void TeamsList::LoadList()
-{  
+{
   playing_list.clear() ;
-   
+
   std::cout << "o " << _("Load teams:");
-  
+
   // Load Wormux teams
   std::string dirname = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "team" + PATH_SEPARATOR;
 #if !defined(WIN32) || defined(__MINGW32__)
@@ -136,7 +136,7 @@ void TeamsList::LoadList()
 
   // Load personal teams
 #if !defined(WIN32) || defined(__MINGW32__)
-  dirname = Config::GetInstance()->GetPersonalDir() + PATH_SEPARATOR 
+  dirname = Config::GetInstance()->GetPersonalDir() + PATH_SEPARATOR
     + "team" + PATH_SEPARATOR;
   dir = opendir(dirname.c_str());
   if (dir != NULL) {
@@ -175,7 +175,7 @@ void TeamsList::LoadGamingData(uint how_many_characters)
 //-----------------------------------------------------------------------------
 
 void TeamsList::UnloadGamingData()
-{ 
+{
   body_list.FreeMem();
   iterator it=playing_list.begin(), end=playing_list.end();
 
@@ -189,9 +189,9 @@ Team *TeamsList::FindById (const std::string &id, int &pos)
 {
   full_iterator it=full_list.begin(), fin=full_list.end();
   int i=0;
-  for (; it != fin; ++it, ++i) 
+  for (; it != fin; ++it, ++i)
   {
-    if (it -> GetId() == id) 
+    if (it -> GetId() == id)
     {
       pos = i;
       return &(*it);
@@ -207,7 +207,7 @@ Team *TeamsList::FindByIndex (uint index)
 {
   full_iterator it=full_list.begin(), fin=full_list.end();
   uint i=0;
-  for (; it != fin; ++it, ++i) 
+  for (; it != fin; ++it, ++i)
   {
     if (i == index) return &(*it);
   }
@@ -229,9 +229,9 @@ Team* TeamsList::FindPlayingById(const std::string &id, uint &index)
 {
   iterator it = playing_list.begin(), end = playing_list.end();
   index=0;
-  for (; it != end; ++it, ++index) 
+  for (; it != end; ++it, ++index)
   {
-    if ((*it) -> GetId() == id) 
+    if ((*it) -> GetId() == id)
       return *it;
   }
   assert(false);

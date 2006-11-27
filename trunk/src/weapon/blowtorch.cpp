@@ -79,30 +79,30 @@ bool Blowtorch::p_Shoot()
 	return true;
 }
 
-void Blowtorch::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
+void Blowtorch::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
 {
-	switch(action)
-	{
-		case ACTION_SHOOT:
-			if(event_type ==  Clavier:: Clavier::KEY_RELEASED)
-				EndTurn();
-			else if(event_type == Clavier::KEY_REFRESH)
-			{
-				if(!EnoughAmmoUnit() || ActiveCharacter().GotInjured())
-					EndTurn();
+  switch(action)
+  {
+    case Action::ACTION_SHOOT:
+      if(event_type ==  Clavier:: Clavier::KEY_RELEASED)
+        EndTurn();
+      else if(event_type == Clavier::KEY_REFRESH)
+      {
+        if(!EnoughAmmoUnit() || ActiveCharacter().GotInjured())
+          EndTurn();
 
-				new_timer = Time::GetInstance()->Read();
-				if(new_timer - old_timer >= pause_time)
-				{
-					NewActionShoot();
-					old_timer = new_timer;
-				}
-			}
+        new_timer = Time::GetInstance()->Read();
+        if(new_timer - old_timer >= pause_time)
+        {
+          NewActionShoot();
+          old_timer = new_timer;
+        }
+      }
 
-			break;
-		default:
-			break;
-	}
+      break;
+    default:
+      break;
+  }
 }
 
 //-------------------------------------------------------------------------------------

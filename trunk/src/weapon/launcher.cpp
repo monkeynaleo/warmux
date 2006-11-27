@@ -461,43 +461,43 @@ void WeaponLauncher::IncMissedShots()
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
 }
 
-void WeaponLauncher::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
+void WeaponLauncher::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
 {
   if (event_type == Clavier::KEY_RELEASED)
     switch (action) {
-      case ACTION_WEAPON_1:
+      case Action::ACTION_WEAPON_1:
         projectile->SetTimeOut(1);
         break;
-      case ACTION_WEAPON_2:
+      case Action::ACTION_WEAPON_2:
         projectile->SetTimeOut(2);
         break;
-      case ACTION_WEAPON_3:
+      case Action::ACTION_WEAPON_3:
         projectile->SetTimeOut(3);
         break;
-      case ACTION_WEAPON_4:
+      case Action::ACTION_WEAPON_4:
         projectile->SetTimeOut(4);
         break;
-      case ACTION_WEAPON_5:
+      case Action::ACTION_WEAPON_5:
         projectile->SetTimeOut(5);
         break;
-      case ACTION_WEAPON_6:
+      case Action::ACTION_WEAPON_6:
         projectile->SetTimeOut(6);
         break;
-      case ACTION_WEAPON_7:
+      case Action::ACTION_WEAPON_7:
         projectile->SetTimeOut(7);
         break;
-      case ACTION_WEAPON_8:
+      case Action::ACTION_WEAPON_8:
         projectile->SetTimeOut(8);
         break;
-      case ACTION_WEAPON_9:
+      case Action::ACTION_WEAPON_9:
         projectile->SetTimeOut(9);
         break;
 
-      case ACTION_WEAPON_MORE:
+      case Action::ACTION_WEAPON_MORE:
         projectile->IncrementTimeOut();
         break ;
 
-      case ACTION_WEAPON_LESS:
+      case Action::ACTION_WEAPON_LESS:
         projectile->DecrementTimeOut();
         break   ;
 
@@ -506,9 +506,9 @@ void WeaponLauncher::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 
     };
 
-    if((action >= ACTION_WEAPON_1 && action <= ACTION_WEAPON_9)
-        || action == ACTION_WEAPON_MORE || action == ACTION_WEAPON_LESS)
-      ActionHandler::GetInstance()->NewAction(new Action(ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
+    if((action >= Action::ACTION_WEAPON_1 && action <= Action::ACTION_WEAPON_9)
+        || action == Action::ACTION_WEAPON_MORE || action == Action::ACTION_WEAPON_LESS)
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
 
     ActiveCharacter().HandleKeyEvent(action, event_type);
 }
