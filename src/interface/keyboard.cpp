@@ -115,6 +115,7 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
        {
         case SDL_KEYDOWN: event_type = KEY_PRESSED;break;
         case SDL_KEYUP: event_type = KEY_RELEASED;break;
+        default: return;
        }
     if(event_type == KEY_PRESSED)
       HandleKeyPressed(action);
@@ -136,6 +137,7 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
     {
       case SDL_KEYDOWN: event_type = KEY_PRESSED;break;
       case SDL_KEYUP: event_type = KEY_RELEASED;break;
+      default: return;
     }
     //Current player is on the network
     if(event_type == KEY_RELEASED)
