@@ -17,6 +17,7 @@ ro.po
 ru.po
 sk.po
 tr.po
+se.po
 )
 
 SET(COPYRIGHT_HOLDER "Wormux Development Team")

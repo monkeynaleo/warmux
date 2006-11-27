@@ -257,6 +257,13 @@
     <country>Brazil</country>
     <description>Translate Wormux in Brazilian Portuguese.</description>
   </author>
+  
+  <author>
+	  <name>Daniel Nylander </name>
+	  <email>po AT danielnylander.se</email>
+	  <country>Sweden</country>
+	  <description>Translate Wormux 0.8 in Swedish</description>
+  </author>
 </section>
 
 <section title="Contributors">
