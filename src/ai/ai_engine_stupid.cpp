@@ -35,7 +35,7 @@
 #include <iostream>
 
 AIStupidEngine * AIStupidEngine::singleton = NULL;
-  
+
 AIStupidEngine::AIStupidEngine()
 {
   std::cout << "o Artificial Stupid engine Initialization" << std::endl;
@@ -62,8 +62,8 @@ void AIStupidEngine::BeginTurn()
 
   // find the nearest enemy
 //   FOR_ALL_LIVING_ENEMIES(team, character) {
-//     if (m_nearest_enemy == NULL 
-// 	|| ( character->GetCenter().Distance( ActiveCharacter().GetCenter()) < 
+//     if (m_nearest_enemy == NULL
+// 	|| ( character->GetCenter().Distance( ActiveCharacter().GetCenter()) <
 // 	     m_nearest_enemy->GetCenter().Distance( ActiveCharacter().GetCenter()))
 // 	)
 //       m_nearest_enemy = &(*character);
@@ -80,7 +80,7 @@ void AIStupidEngine::BeginTurn()
       std::cout << (*character).GetName() << "is not directly shootable" << std::endl;
     }
   }
-  
+
   std::cout <<std::endl;
  end_boucle:
   ChooseDirection();
@@ -106,7 +106,7 @@ void AIStupidEngine::ChooseDirection()
 
 void AIStupidEngine::Walk()
 {
-  if (!m_mouvement.is_walking) { 
+  if (!m_mouvement.is_walking) {
     ActiveCharacter().InitMouvementDG(100);
     ActiveCharacter().body->StartWalk();
 
@@ -129,7 +129,7 @@ void AIStupidEngine::Walk()
       return;
     }
 
-    // Debug message  
+    // Debug message
     if ( m_current_time > m_mouvement.time_at_last_position +1 ) {
 
       std::string s = "(" + ulong2str(m_mouvement.time_at_last_position) + "/";
@@ -153,17 +153,17 @@ void AIStupidEngine::Walk()
 	StopWalk();
 	m_step++;
       }
-      
+
     } else {
       // we are blocked, try to jump!
       if ( m_mouvement.last_position == ActiveCharacter().GetPosition() ) {
 	GameMessages::GetInstance()->Add("try to jump!");
 	m_mouvement.is_jumping = true;
-	ActionHandler::GetInstance()->NewAction (new Action(ACTION_HIGH_JUMP));
+	ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_HIGH_JUMP));
 	return; // do not update position
       }
     }
-    
+
     // Update position if we are not jumping
     m_mouvement.last_position = ActiveCharacter().GetPosition();
     m_mouvement.time_at_last_position = m_current_time;
@@ -200,24 +200,24 @@ void AIStupidEngine::ChooseWeapon()
     ActiveTeam().crosshair.ChangeAngleVal(m_angle);
     std::cout << "2-Angle Radian: " << ActiveTeam().crosshair.GetAngleRad() << std::endl;
     std::cout << "2-Angle Degree: " << ActiveTeam().crosshair.GetAngle() << std::endl;
-    
+
   } else {
     // we choose between dynamite, mine, polecart and gnu
     uint selected = uint(randomSync.GetDouble(0.0, 3.5));
-    
+
     switch (selected) {
-    case 0: 
+    case 0:
       ActiveTeam().SetWeapon(WEAPON_DYNAMITE);
       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-      
+
     case 1:
       ActiveTeam().SetWeapon(WEAPON_GNU);
       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-      
+
     case 2:
       ActiveTeam().SetWeapon(WEAPON_POLECAT);
       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-      
+
     case 3:
     default:
       ActiveTeam().SetWeapon(WEAPON_MINE);
@@ -240,7 +240,7 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
   Point2i arrival = character.GetCenter();
   Point2i departure = pos;
   Point2i delta_pos;
-  
+
   double original_angle = pos.ComputeAngle(arrival);
 
   // compute to see if there any part of ground between the 2 characters
@@ -259,7 +259,7 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
 
     // is there a collision with another character ?
     FOR_ALL_CHARACTERS(team, other_character) {
-      if ( &(*other_character) != &ActiveCharacter() 
+      if ( &(*other_character) != &ActiveCharacter()
 	   && &(*other_character) != &character ) {
 
 	if ( other_character->GetTestRect().Contains(pos) )
@@ -278,12 +278,12 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
     if (abs(diff_x) > abs(diff_y)) {
       if (pos.x < arrival.x)
 	delta_pos.x = 1;   //Increment x
-      else 
+      else
 	delta_pos.x = -1;
     } else {
       if (pos.y < arrival.y)
 	delta_pos.y = 1;
-      else 
+      else
 	delta_pos.y = -1;
     }
 
@@ -307,19 +307,19 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
   sprintf(buff, "%d", m_angle); // to manage angle equals to 0
   s += " with angle ";
   s += buff;
-  GameMessages::GetInstance()->Add(s); 
+  GameMessages::GetInstance()->Add(s);
 
   return true;
 }
 
 void AIStupidEngine::Shoot()
 {
-  if (m_current_time > m_last_shoot_time + 1 || 
+  if (m_current_time > m_last_shoot_time + 1 ||
       m_last_shoot_time == 0) {
     ActiveTeam().GetWeapon().NewActionShoot();
     m_last_shoot_time = m_current_time;
   }
-  
+
   if (!(ActiveTeam().GetWeapon().EnoughAmmoUnit())) {
     m_step++;
   }
@@ -328,13 +328,13 @@ void AIStupidEngine::Shoot()
 void AIStupidEngine::Refresh()
 {
   // new character to control
-  if (&ActiveCharacter() != m_last_char) 
+  if (&ActiveCharacter() != m_last_char)
     BeginTurn();
 
   // Get time
-  uint local_time = Time::GetInstance()->ReadSec(); 
+  uint local_time = Time::GetInstance()->ReadSec();
   if (local_time != m_current_time) {
-    //printf("TIME: %2d - begin:%2d - last shoot:%2d - Step: %d\n", 
+    //printf("TIME: %2d - begin:%2d - last shoot:%2d - Step: %d\n",
     //	   local_time, m_begin_turn_time, m_last_shoot_time, m_step);
     m_current_time = local_time;
   }
@@ -343,7 +343,7 @@ void AIStupidEngine::Refresh()
   if (m_current_time < m_begin_turn_time + 3)
     return;
 
-  switch (m_step) 
+  switch (m_step)
     {
     case 0:
       if (m_nearest_enemy) {
@@ -352,7 +352,7 @@ void AIStupidEngine::Refresh()
       } else {
 	// walk
 	Walk();
-     
+
 	if (m_current_time > m_begin_turn_time + 5)
 	  m_step++;
       }
@@ -360,7 +360,7 @@ void AIStupidEngine::Refresh()
     case 1:
       // Jump
       StopWalk();
-      ActionHandler::GetInstance()->NewAction (new Action(ACTION_JUMP));
+      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_JUMP));
       m_step++;
       break;
     case 2:
@@ -377,7 +377,7 @@ void AIStupidEngine::Refresh()
       m_step++;
       break;
     case 5:
-      //ActionHandler::GetInstance()->NewAction (new Action(ACTION_HIGH_JUMP));
+      //ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_HIGH_JUMP));
       m_step++;
       break;
     case 6:

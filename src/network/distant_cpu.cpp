@@ -43,7 +43,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
   // what teams / maps have alreayd been selected
   if( network.IsServer() )
   {
-    Action a(ACTION_SET_MAP, ActiveMap().ReadName());
+    Action a(Action::ACTION_SET_MAP, ActiveMap().ReadName());
     int size;
     char* pack;
     a.WritePacket(pack, size);
@@ -55,7 +55,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
       team != teams_list.playing_list.end();
       ++team)
     {
-      Action b(ACTION_NEW_TEAM, (*team)->GetId());
+      Action b(Action::ACTION_NEW_TEAM, (*team)->GetId());
       b.Push((*team)->GetPlayerName());
       b.Push((int)(*team)->GetNbCharacters());
       b.WritePacket(pack, size);
@@ -87,7 +87,7 @@ DistantComputer::~DistantComputer()
       team != owned_teams.end();
       ++team)
   {
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_DEL_TEAM, *team));
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_DEL_TEAM, *team));
   }
   owned_teams.clear();
 
@@ -170,16 +170,16 @@ std::string DistantComputer::GetAdress()
 void DistantComputer::ManageTeam(Action* team)
 {
   std::string name = team->PopString();
-  if(team->GetType() == ACTION_NEW_TEAM)
+  if(team->GetType() == Action::ACTION_NEW_TEAM)
   {
     owned_teams.push_back(name);
-    Action* copy = new Action(ACTION_NEW_TEAM, name);
+    Action* copy = new Action(Action::ACTION_NEW_TEAM, name);
     copy->Push( team->PopString() );
     copy->Push( team->PopInt() );
     ActionHandler::GetInstance()->NewAction(copy, false);
   }
   else
-  if(team->GetType() == ACTION_DEL_TEAM)
+  if(team->GetType() == Action::ACTION_DEL_TEAM)
   {
     std::list<std::string>::iterator it;
     it = find(owned_teams.begin(), owned_teams.end(), name);
@@ -196,10 +196,10 @@ void DistantComputer::SendChatMessage(Action* a)
   std::string txt = a->PopString();
   if(network.IsServer())
   {
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, nickname + "> "+txt));
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + "> "+txt));
   }
   else
   {
-    ActionHandler::GetInstance()->NewAction(new Action(ACTION_CHAT_MESSAGE, txt), false);
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, txt), false);
   }
 }

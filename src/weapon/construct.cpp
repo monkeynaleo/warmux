@@ -84,14 +84,14 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-void Construct::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
+void Construct::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
 {
   switch (action) {
-    case ACTION_UP:
+    case Action::ACTION_UP:
       if (event_type == Clavier::KEY_PRESSED)
         Up();
       break ;
-    case ACTION_DOWN:
+    case Action::ACTION_DOWN:
       if (event_type == Clavier::KEY_PRESSED)
         Down();
       break ;
@@ -113,7 +113,7 @@ void Construct::ActionDown()
 
 void Construct::Up()
 {
-  Action a(ACTION_CONSTRUCTION_UP);
+  Action a(Action::ACTION_CONSTRUCTION_UP);
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     network.SendAction(&a);
   angle += angle_step;
@@ -121,7 +121,7 @@ void Construct::Up()
 
 void Construct::Down()
 {
-  Action a(ACTION_CONSTRUCTION_DOWN);
+  Action a(Action::ACTION_CONSTRUCTION_DOWN);
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     network.SendAction(&a);
   angle -= angle_step;

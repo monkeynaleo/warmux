@@ -66,7 +66,7 @@ Mouse::Mouse(){
 void Mouse::Reset(){
 }
 
-bool Mouse::ActionClicD(){ 
+bool Mouse::ActionClicD(){
   if( ActiveTeam().GetWeapon().CanChangeWeapon() )
     Interface::GetInstance()->weapons_menu.SwitchDisplay();
 
@@ -76,10 +76,10 @@ bool Mouse::ActionClicD(){
 //WORKING=============================================
 bool Mouse::ActionWhellUp(){
   if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    ActiveTeam().AccessWeapon().ActionUp(); 
+    ActiveTeam().AccessWeapon().ActionUp();
     return true ;
     }
-    
+
   return true;
 }
 
@@ -88,7 +88,7 @@ bool Mouse::ActionWhellDown(){
     ActiveTeam().AccessWeapon().ActionDown();
     return true ;
     }
-    
+
   return true;
 }
 //==========================================================
@@ -107,7 +107,7 @@ bool Mouse::ActionClicG()
   // On peut changer de ver ?
   //Change character by mouse click only if the choosen weapon allows it
   if( GameMode::GetInstance()->AllowCharacterSelection() && ActiveTeam().GetWeapon().mouse_character_selection){
-    
+
     // S�ection d'un ver se son �uipe ?
     bool ver_choisi=false;
     Team::iterator it=ActiveTeam().begin(),
@@ -117,7 +117,7 @@ bool Mouse::ActionClicG()
       if( &(*it) != &ActiveCharacter()
         && !it -> IsDead()
         && it->GetRect().Contains( pos_monde ) ){
-	
+
 	ver_choisi = true;
         break;
       }
@@ -144,7 +144,7 @@ bool Mouse::ActionClicG()
   // - Choose a target but don't fire
   // - Choose a target and fire it !
   if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    Action* a = new Action(ACTION_SET_TARGET);
+    Action* a = new Action(Action::ACTION_SET_TARGET);
     a->Push(GetWorldPosition().x);
     a->Push(GetWorldPosition().y);
     ActionHandler::GetInstance()->NewAction (a);
@@ -237,7 +237,7 @@ void Mouse::TestCamera(){
     scroll_actif = false;
   }
 
-  if(!Interface::GetInstance()->weapons_menu.IsDisplayed() && 
+  if(!Interface::GetInstance()->weapons_menu.IsDisplayed() &&
      Config::GetInstance()->GetScrollOnBorder())
     ScrollCamera();
 }
@@ -260,7 +260,7 @@ Point2i Mouse::GetWorldPosition() const{
 
 void Mouse::TraiteClic (const SDL_Event *event){
   if( event->type == SDL_MOUSEBUTTONDOWN ){
-  
+
     if( event->button.button == SDL_BUTTON_RIGHT ){
       ActionClicD();
       return;
@@ -271,18 +271,18 @@ void Mouse::TraiteClic (const SDL_Event *event){
       ActionClicG();
       return;
     }
-    
+
 
     if (event->button.button == SDL_BUTTON_WHEELDOWN){
-      ActionWhellDown(); 
+      ActionWhellDown();
       return;
     }
-       
+
     if (event->button.button == SDL_BUTTON_WHEELUP){
-      ActionWhellUp(); 
+      ActionWhellUp();
       return;
     }
-    
+
   }
 }
 
@@ -315,8 +315,8 @@ bool Mouse::IsVisible() const
 
 bool Mouse::ScrollPointer()
 {
-  if (!Config::GetInstance()->GetScrollOnBorder() || 
-      Interface::GetInstance()->weapons_menu.IsDisplayed()) 
+  if (!Config::GetInstance()->GetScrollOnBorder() ||
+      Interface::GetInstance()->weapons_menu.IsDisplayed())
     return false;
 
   Point2i mousePos = GetPosition();
@@ -388,7 +388,7 @@ void Mouse::Draw()
       break;
     };
 }
-  
+
 
 // Center the pointer on the screen
 void Mouse::CenterPointer()

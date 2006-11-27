@@ -491,20 +491,20 @@ void NinjaRope::p_Deselect()
   ActiveCharacter().UnsetPhysFixationPoint() ;
 }
 
-void NinjaRope::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
+void NinjaRope::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
 {
   switch (action) {
-    case ACTION_UP:
+    case Action::ACTION_UP:
       if (event_type != Clavier::KEY_RELEASED)
 	GoUp();
       break ;
 
-    case ACTION_DOWN:
+    case Action::ACTION_DOWN:
       if (event_type != Clavier::KEY_RELEASED)
 	GoDown();
       break ;
 
-    case ACTION_MOVE_LEFT:
+    case Action::ACTION_MOVE_LEFT:
       if (event_type == Clavier::KEY_PRESSED)
 	GoLeft();
       else
@@ -512,7 +512,7 @@ void NinjaRope::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 	  StopLeft();
       break ;
 
-    case ACTION_MOVE_RIGHT:
+    case Action::ACTION_MOVE_RIGHT:
       if (event_type == Clavier::KEY_PRESSED)
 	GoRight();
       else
@@ -520,7 +520,7 @@ void NinjaRope::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 	  StopRight();
       break ;
 
-    case ACTION_SHOOT:
+    case Action::ACTION_SHOOT:
       if (event_type == Clavier::KEY_PRESSED)
 	UseAmmoUnit();
       break ;

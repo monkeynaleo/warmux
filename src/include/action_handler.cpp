@@ -64,7 +64,7 @@ void SyncCharacters()
   assert(network.IsServer());
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
-  Action a_begin_sync(ACTION_SYNC_BEGIN);
+  Action a_begin_sync(Action::ACTION_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
@@ -80,7 +80,7 @@ void SyncCharacters()
     for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
       // Sync the character's energy
-      Action* a = new Action(ACTION_SET_CHARACTER_ENERGY);
+      Action* a = new Action(Action::ACTION_SET_CHARACTER_ENERGY);
       a->Push(team_no);
       a->Push(char_no);
       a->Push((int)(*tit).GetEnergy());
@@ -90,7 +90,7 @@ void SyncCharacters()
       action_handler->NewAction(a);
     }
   }
-  Action a_sync_end(ACTION_SYNC_END);
+  Action a_sync_end(Action::ACTION_SYNC_END);
   network.SendAction(&a_sync_end);
 }
 
@@ -169,7 +169,7 @@ void Action_Wind (Action *a)
 
 Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
 {
-  Action* a = new Action(ACTION_SET_CHARACTER_PHYSICS);
+  Action* a = new Action(Action::ACTION_SET_CHARACTER_PHYSICS);
   Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   a->Push(team_no);
   a->Push(char_no);
@@ -314,7 +314,7 @@ void Action_SetGameMode (Action *a)
 void SendGameMode()
 {
   assert(network.IsServer());
-  Action a(ACTION_SET_GAME_MODE);
+  Action a(Action::ACTION_SET_GAME_MODE);
   a.Push((int)GameMode::GetInstance()->max_characters);
   a.Push((int)GameMode::GetInstance()->max_teams);
   a.Push((int)GameMode::GetInstance()->duration_turn);
@@ -382,7 +382,7 @@ void Action_ChangeTeam (Action *a)
 void Action_AskVersion (Action *a)
 {
   if (!network.IsClient()) return;
-  ActionHandler::GetInstance()->NewAction(new Action(ACTION_SEND_VERSION, Constants::VERSION));
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SEND_VERSION, Constants::VERSION));
 }
 
 void Action_SendVersion (Action *a)
@@ -492,7 +492,7 @@ void Action_WeaponStopUse(Action *a)
 
 void Action_Nickname(Action *a)
 {
-  
+
 }
 
 void Action_Pause(Action *a)
@@ -533,7 +533,7 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   if (repeat_to_network) network.SendAction(a);
 }
 
-void ActionHandler::Register (Action_t action,
+void ActionHandler::Register (Action::Action_t action,
 		                      const std::string &name,callback_t fct)
 {
   handler[action] = fct;
@@ -548,7 +548,7 @@ void ActionHandler::Exec(Action *a)
   (*it->second) (a);
 }
 
-std::string ActionHandler::GetActionName (Action_t action)
+std::string ActionHandler::GetActionName (Action::Action_t action)
 {
   assert(mutex!=NULL);
   SDL_LockMutex(mutex);
@@ -562,45 +562,45 @@ ActionHandler::ActionHandler()
 {
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
-  Register (ACTION_MOVE_LEFT, "move_left", &Action_MoveLeft);
-  Register (ACTION_MOVE_RIGHT, "move_right", &Action_MoveRight);
-  Register (ACTION_UP, "up", &Action_Up);
-  Register (ACTION_DOWN, "down", &Action_Down);
-  Register (ACTION_JUMP, "jump", &Action_Jump);
-  Register (ACTION_HIGH_JUMP, "super_jump", &Action_HighJump);
-  Register (ACTION_BACK_JUMP, "back_jump", &Action_BackJump);
-  Register (ACTION_SHOOT, "shoot", &Action_Shoot);
-  Register (ACTION_CHANGE_WEAPON, "change_weapon", &Action_ChangeWeapon);
-  Register (ACTION_WIND, "wind", &Action_Wind);
-  Register (ACTION_NEXT_CHARACTER, "next_character", &Action_NextCharacter);
-  Register (ACTION_CHANGE_CHARACTER, "change_character", &Action_ChangeCharacter);
-  Register (ACTION_SET_GAME_MODE, "set_game_mode", &Action_SetGameMode);
-  Register (ACTION_SET_MAP, "set_map", &Action_SetMap);
-  Register (ACTION_CLEAR_TEAMS, "clear_teams", &Action_ClearTeams);
-  Register (ACTION_NEW_TEAM, "new_team", &Action_NewTeam);
-  Register (ACTION_DEL_TEAM, "del_team", &Action_DelTeam);
-  Register (ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
-  Register (ACTION_SET_CHARACTER_PHYSICS, "set_character_physics", &Action_SetCharacterPhysics);
-  Register (ACTION_SET_SKIN, "set_skin", &Action_SetSkin);
-  Register (ACTION_SET_CHARACTER_DIRECTION, "set_character_direction", &Action_SetCharacterDirection);
-  Register (ACTION_CHANGE_STATE, "change_state", &Action_ChangeState);
-  Register (ACTION_ASK_VERSION, "ask_version", &Action_AskVersion);
-  Register (ACTION_SEND_VERSION, "send_version", &Action_SendVersion);
-  Register (ACTION_SEND_RANDOM, "send_random", &Action_SendRandom);
-  Register (ACTION_PING, "ping", &Action_Ping);
-  Register (ACTION_SYNC_BEGIN, "sync_begin", &Action_SyncBegin);
-  Register (ACTION_SYNC_END, "sync_end", &Action_SyncEnd);
-  Register (ACTION_EXPLOSION, "explosion", &Action_Explosion);
-  Register (ACTION_SET_TARGET, "set_target", &Action_SetTarget);
-  Register (ACTION_SUPERTUX_STATE, "supertux_state", &Action_SupertuxState);
-  Register (ACTION_SET_TIMEOUT, "set_timeout", &Action_SetTimeout);
-  Register (ACTION_CONSTRUCTION_UP, "construction_up", &Action_ConstructionUp);
-  Register (ACTION_CONSTRUCTION_DOWN, "construction_down", &Action_ConstructionDown);
-  Register (ACTION_WEAPON_STOP_USE, "weapon_stop_use", &Action_WeaponStopUse);
-  Register (ACTION_SET_CHARACTER_ENERGY, "set_character_energy", &Action_SetCharacterEnergy);
-  Register (ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
-  Register (ACTION_NICKNAME, "nickname", Action_Nickname);
-  Register (ACTION_PAUSE, "pause", Action_Pause);
+  Register (Action::ACTION_MOVE_LEFT, "move_left", &Action_MoveLeft);
+  Register (Action::ACTION_MOVE_RIGHT, "move_right", &Action_MoveRight);
+  Register (Action::ACTION_UP, "up", &Action_Up);
+  Register (Action::ACTION_DOWN, "down", &Action_Down);
+  Register (Action::ACTION_JUMP, "jump", &Action_Jump);
+  Register (Action::ACTION_HIGH_JUMP, "super_jump", &Action_HighJump);
+  Register (Action::ACTION_BACK_JUMP, "back_jump", &Action_BackJump);
+  Register (Action::ACTION_SHOOT, "shoot", &Action_Shoot);
+  Register (Action::ACTION_CHANGE_WEAPON, "change_weapon", &Action_ChangeWeapon);
+  Register (Action::ACTION_WIND, "wind", &Action_Wind);
+  Register (Action::ACTION_NEXT_CHARACTER, "next_character", &Action_NextCharacter);
+  Register (Action::ACTION_CHANGE_CHARACTER, "change_character", &Action_ChangeCharacter);
+  Register (Action::ACTION_SET_GAME_MODE, "set_game_mode", &Action_SetGameMode);
+  Register (Action::ACTION_SET_MAP, "set_map", &Action_SetMap);
+  Register (Action::ACTION_CLEAR_TEAMS, "clear_teams", &Action_ClearTeams);
+  Register (Action::ACTION_NEW_TEAM, "new_team", &Action_NewTeam);
+  Register (Action::ACTION_DEL_TEAM, "del_team", &Action_DelTeam);
+  Register (Action::ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
+  Register (Action::ACTION_SET_CHARACTER_PHYSICS, "set_character_physics", &Action_SetCharacterPhysics);
+  Register (Action::ACTION_SET_SKIN, "set_skin", &Action_SetSkin);
+  Register (Action::ACTION_SET_CHARACTER_DIRECTION, "set_character_direction", &Action_SetCharacterDirection);
+  Register (Action::ACTION_CHANGE_STATE, "change_state", &Action_ChangeState);
+  Register (Action::ACTION_ASK_VERSION, "ask_version", &Action_AskVersion);
+  Register (Action::ACTION_SEND_VERSION, "send_version", &Action_SendVersion);
+  Register (Action::ACTION_SEND_RANDOM, "send_random", &Action_SendRandom);
+  Register (Action::ACTION_PING, "ping", &Action_Ping);
+  Register (Action::ACTION_SYNC_BEGIN, "sync_begin", &Action_SyncBegin);
+  Register (Action::ACTION_SYNC_END, "sync_end", &Action_SyncEnd);
+  Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
+  Register (Action::ACTION_SET_TARGET, "set_target", &Action_SetTarget);
+  Register (Action::ACTION_SUPERTUX_STATE, "supertux_state", &Action_SupertuxState);
+  Register (Action::ACTION_SET_TIMEOUT, "set_timeout", &Action_SetTimeout);
+  Register (Action::ACTION_CONSTRUCTION_UP, "construction_up", &Action_ConstructionUp);
+  Register (Action::ACTION_CONSTRUCTION_DOWN, "construction_down", &Action_ConstructionDown);
+  Register (Action::ACTION_WEAPON_STOP_USE, "weapon_stop_use", &Action_WeaponStopUse);
+  Register (Action::ACTION_SET_CHARACTER_ENERGY, "set_character_energy", &Action_SetCharacterEnergy);
+  Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
+  Register (Action::ACTION_NICKNAME, "nickname", Action_Nickname);
+  Register (Action::ACTION_PAUSE, "pause", Action_Pause);
   SDL_UnlockMutex(mutex);
 }
 

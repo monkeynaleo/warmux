@@ -31,15 +31,15 @@
 class Clavier
 {
 private:
-  std::map<int, Action_t> layout;
-  bool PressedKeys[ACTION_MAX];
+  std::map<int, Action::Action_t> layout;
+  bool PressedKeys[Action::ACTION_LAST];
 
   static Clavier * singleton;
 
 private:
   // Traite une touche relachée
-  void HandleKeyPressed (const Action_t &action);
-  void HandleKeyReleased (const Action_t &action);
+  void HandleKeyPressed (const Action::Action_t &action);
+  void HandleKeyReleased (const Action::Action_t &action);
   Clavier();
 
 public:
@@ -62,7 +62,7 @@ public:
   void Refresh();
 
   // Associe une touche à une action.
-  void SetKeyAction(int key, Action_t at);
+  void SetKeyAction(int key, Action::Action_t at);
 
 };
 

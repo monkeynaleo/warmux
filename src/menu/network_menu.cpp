@@ -175,7 +175,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     if(network.IsServer())
     {
       ChangeMap();
-      action_handler->NewAction (new Action(ACTION_SET_MAP, ActiveMap().ReadName()));
+      action_handler->NewAction (new Action(Action::ACTION_SET_MAP, ActiveMap().ReadName()));
     }
     else
       msg_box->NewMessage(_("Only the server can set the map!"));
@@ -194,7 +194,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 #endif
       std::string team_id = team->GetId();
 
-      Action* a = new Action(ACTION_NEW_TEAM, team_id);
+      Action* a = new Action(Action::ACTION_NEW_TEAM, team_id);
 #ifdef WIN32
       a->Push(getenv("USERNAME"));
 #else
@@ -210,7 +210,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     if(lbox_selected_teams->GetSelectedItem() != -1 && teams_list.FindById(lbox_selected_teams->ReadValue(),index)->IsLocal())
     {
       std::string team_id = teams_list.FindById(lbox_selected_teams->ReadValue(),index)->GetId();
-      action_handler->NewAction (new Action(ACTION_DEL_TEAM, team_id));
+      action_handler->NewAction (new Action(Action::ACTION_DEL_TEAM, team_id));
       MoveTeams(lbox_selected_teams, lbox_all_teams, true);
     }
   }
@@ -270,7 +270,7 @@ void NetworkMenu::__sig_ok()
   if(network.IsClient())
   {
     // Wait for the server, and stay in the menu map / team can still be changed
-    Action a(ACTION_CHANGE_STATE);
+    Action a(Action::ACTION_CHANGE_STATE);
     network.SendAction(&a);
     while(network.state != Network::NETWORK_INIT_GAME)
     {
@@ -349,7 +349,7 @@ void NetworkMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
 
 void NetworkMenu::MoveDisableTeams(ListBox * from, ListBox * to, bool sort)
 {
-  if (from->GetSelectedItem() != -1) {    
+  if (from->GetSelectedItem() != -1) {
 
     if (from == lbox_all_teams && to == lbox_selected_teams) {
       int index = -1;

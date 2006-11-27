@@ -31,7 +31,7 @@
 Action::Action (Action_t type)
 {
   var.clear();
-  m_type = type; 
+  m_type = type;
   m_timestamp = Time::GetInstance()->Read();
 }
 
@@ -88,9 +88,9 @@ Action::~Action ()
 {
 }
 
-Action_t Action::GetType() const 
-{ 
-  return m_type; 
+Action::Action_t Action::GetType() const
+{
+  return m_type;
 }
 
 void Action::SetTimestamp(uint timestamp)
@@ -243,7 +243,7 @@ std::string Action::PopString()
 
   while(lenght > 0)
   {
-    Uint32 tmp = var.front();  
+    Uint32 tmp = var.front();
     var.pop_front();
     char tmp_str[5] = {0, 0, 0, 0, 0};
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
@@ -257,7 +257,7 @@ std::string Action::PopString()
       *(c_tmp_str--) = *(c_tmp++);
 
     str += tmp_str;
-    lenght -= 4;    
+    lenght -= 4;
 #endif
     }
   MSG_DEBUG( "action", " (%s) Poping string : %s",

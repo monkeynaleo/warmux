@@ -52,7 +52,7 @@ void RandomSync::GenerateTable()
   //Add a random number to the table, send it over network if needed
   double nbr = rand();
   AddToTable(nbr);
-  if(network.IsServer()) ActionHandler::GetInstance()->NewAction(new Action(ACTION_SEND_RANDOM,nbr));
+  if(network.IsServer()) ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SEND_RANDOM,nbr));
 }
 
 void RandomSync::AddToTable(double nbr)
@@ -98,7 +98,7 @@ double RandomSync::GetDouble(double max){
 
 /**
  * Get a random number between 0.0 and 1.0
- * 
+ *
  * @return A number between 0.0 and 1.0
  */
 double RandomSync::GetDouble(){
@@ -114,8 +114,8 @@ double RandomSync::GetDouble(){
 Point2i RandomSync::GetPoint(const Rectanglei &rect){
 	Point2i topPoint = rect.GetPosition();
 	Point2i bottomPoint = rect.GetBottomRightPoint();
-	
-	return Point2i( GetLong(topPoint.x, bottomPoint.x), 
+
+	return Point2i( GetLong(topPoint.x, bottomPoint.x),
 			GetLong(topPoint.y, bottomPoint.y) );
 }
 

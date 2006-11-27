@@ -129,7 +129,7 @@ void Weapon::p_Select ()
   m_last_fire_time = 0;
 }
 void Weapon::p_Deselect () {}
-void Weapon::HandleKeyEvent(int key, Clavier::Key_Event_t event_type) {}
+void Weapon::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type) {}
 
 void Weapon::Select()
 {
@@ -205,10 +205,10 @@ bool Weapon::CanChangeWeapon() const
 void Weapon::NewActionShoot() const
 {
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  Action a_begin_sync(ACTION_SYNC_BEGIN);
+  Action a_begin_sync(Action::ACTION_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
   SendCharacterPosition();
-  Action * shoot = new Action(ACTION_SHOOT,
+  Action * shoot = new Action(Action::ACTION_SHOOT,
                               m_strength,
                               ActiveTeam().crosshair.GetAngleVal());
   shoot->Push((int)ActiveCharacter().GetCharacterIndex());
@@ -216,7 +216,7 @@ void Weapon::NewActionShoot() const
   shoot->Push(ActiveCharacter().GetX());
   shoot->Push(ActiveCharacter().GetY());
   ActionHandler::GetInstance()->NewAction(shoot);
-  Action a_end_sync(ACTION_SYNC_END);
+  Action a_end_sync(Action::ACTION_SYNC_END);
   network.SendAction(&a_end_sync);
 
 }

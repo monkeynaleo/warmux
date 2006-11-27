@@ -145,7 +145,7 @@ void ApplyExplosion_common (const Point2i &pos,
 
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(obj) if ( !(obj -> ptr -> GoesThroughWall()) )
-  { 
+  {
     double distance = pos.Distance(obj -> ptr -> GetCenter());
     if(distance < 1.0)
       distance = 1.0;
@@ -190,7 +190,7 @@ void ApplyExplosion_server (const Point2i &pos,
 {
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
-  Action a_begin_sync(ACTION_SYNC_BEGIN);
+  Action a_begin_sync(Action::ACTION_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
 
   TeamsList::iterator
@@ -220,7 +220,7 @@ void ApplyExplosion_server (const Point2i &pos,
     }
   }
 
-  Action* a = new Action(ACTION_EXPLOSION);
+  Action* a = new Action(Action::ACTION_EXPLOSION);
   a->Push(pos.x);
   a->Push(pos.y);
   a->Push((int)config.explosion_range);
@@ -234,6 +234,6 @@ void ApplyExplosion_server (const Point2i &pos,
 
   action_handler->NewAction(a);
 //  network.SendAction(&a);
-  Action a_sync_end(ACTION_SYNC_END);
+  Action a_sync_end(Action::ACTION_SYNC_END);
   network.SendAction(&a_sync_end);
 }

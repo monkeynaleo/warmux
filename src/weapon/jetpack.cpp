@@ -69,7 +69,7 @@ void JetPack::Refresh()
       ActiveCharacter().SetExternForceXY(F);
       ActiveCharacter().UpdatePosition();
       SendCharacterPosition();
-      Action a(ACTION_SET_CHARACTER_DIRECTION, ActiveCharacter().GetDirection());
+      Action a(Action::ACTION_SET_CHARACTER_DIRECTION, ActiveCharacter().GetDirection());
       network.SendAction(&a);
 
       if( !F.IsNull() )
@@ -178,10 +178,10 @@ void JetPack::StopRight()
   StopUse();
 }
 
-void JetPack::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
+void JetPack::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
 {
   switch (action) {
-    case ACTION_UP:
+    case Action::ACTION_UP:
       if (event_type == Clavier::KEY_PRESSED)
 	GoUp();
       else
@@ -189,7 +189,7 @@ void JetPack::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 	  StopUp();
       break ;
 
-    case ACTION_MOVE_LEFT:
+    case Action::ACTION_MOVE_LEFT:
       if (event_type == Clavier::KEY_PRESSED)
 	GoLeft();
       else
@@ -197,7 +197,7 @@ void JetPack::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 	  StopLeft();
       break ;
 
-    case ACTION_MOVE_RIGHT:
+    case Action::ACTION_MOVE_RIGHT:
       if (event_type == Clavier::KEY_PRESSED)
 	GoRight();
       else
@@ -205,9 +205,9 @@ void JetPack::HandleKeyEvent(int action, Clavier::Key_Event_t event_type)
 	  StopRight();
       break ;
 
-    case ACTION_SHOOT:
+    case Action::ACTION_SHOOT:
       if (event_type == Clavier::KEY_PRESSED)
-        ActionHandler::GetInstance()->NewAction(new Action(ACTION_WEAPON_STOP_USE));
+        ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
       break ;
 
     default:

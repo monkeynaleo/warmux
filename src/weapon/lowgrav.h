@@ -28,7 +28,7 @@ class LowGrav : public Weapon
   public:
     LowGrav();
     void Reset();
-    void HandleKeyEvent(int action, Clavier::Key_Event_t event_type);
+    void HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type);
     void SignalTurnEnd();
     void Draw();
     void ActionStopUse();

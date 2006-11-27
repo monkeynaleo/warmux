@@ -121,7 +121,7 @@ public:
   void StopPlaying();
 
   // Handle a key event on the character
-  void HandleKeyEvent(int action, Clavier::Key_Event_t event_type);
+  void HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type);
   void PrepareShoot();
   void DoShoot();
   void HandleShoot(Clavier::Key_Event_t event_type);

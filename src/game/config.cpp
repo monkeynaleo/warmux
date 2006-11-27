@@ -23,7 +23,7 @@
 
 #include "config.h"
 
-#define USE_AUTOPACKAGE 
+#define USE_AUTOPACKAGE
 
 #include <sstream>
 #include <string>
@@ -68,7 +68,7 @@ Config::Config()
   std::string filename;
 
   if (br_init (&error) == 0 && error != BR_INIT_ERROR_DISABLED) {
-	  std::cout << "Warning: BinReloc failed to initialize (error code " 
+	  std::cout << "Warning: BinReloc failed to initialize (error code "
 		    << error << ")" << std::endl;
 	  std::cout << "Will fallback to hardcoded default path." << std::endl;
   }
@@ -105,7 +105,7 @@ Config::Config()
   data_dir = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
   locale_dir = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
-#endif  
+#endif
 
 #ifndef WIN32
   personal_dir = GetHome()+"/.wormux/";
@@ -164,7 +164,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
   int i = 0;
 
   xmlpp::Element *team = LitDocXml::AccesBalise (elem, "team_" + ulong2str(i));
-  
+
   while (team != NULL)
   {
     ConfigTeam one_team;
@@ -193,7 +193,7 @@ bool Config::ChargeXml(xmlpp::Element *xml)
     LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);
     LitDocXml::LitBool (elem, "display_energy_character", display_energy_character);
     LitDocXml::LitBool (elem, "display_name_character", display_name_character);
-    LitDocXml::LitBool (elem, "default_mouse_cursor", default_mouse_cursor); 
+    LitDocXml::LitBool (elem, "default_mouse_cursor", default_mouse_cursor);
     LitDocXml::LitBool (elem, "scroll_on_border", scroll_on_border);
     LitDocXml::LitInt (elem, "width", tmp.video.width);
     LitDocXml::LitInt (elem, "height", tmp.video.height);
@@ -218,41 +218,41 @@ void Config::SetKeyboardConfig()
 {
   Clavier * clavier = Clavier::GetInstance();
 
-  clavier->SetKeyAction(SDLK_LEFT,      ACTION_MOVE_LEFT);
-  clavier->SetKeyAction(SDLK_RIGHT,     ACTION_MOVE_RIGHT);
-  clavier->SetKeyAction(SDLK_UP,        ACTION_UP);
-  clavier->SetKeyAction(SDLK_DOWN,      ACTION_DOWN);
-  clavier->SetKeyAction(SDLK_RETURN,    ACTION_JUMP);
-  clavier->SetKeyAction(SDLK_BACKSPACE, ACTION_HIGH_JUMP);
-  clavier->SetKeyAction(SDLK_b,         ACTION_BACK_JUMP);
-  clavier->SetKeyAction(SDLK_SPACE,     ACTION_SHOOT);
-  clavier->SetKeyAction(SDLK_TAB,       ACTION_NEXT_CHARACTER);
-  clavier->SetKeyAction(SDLK_ESCAPE,    ACTION_QUIT);
-  clavier->SetKeyAction(SDLK_p,         ACTION_PAUSE);
-  clavier->SetKeyAction(SDLK_F10,       ACTION_FULLSCREEN);
-  clavier->SetKeyAction(SDLK_F9,        ACTION_TOGGLE_INTERFACE);
-  clavier->SetKeyAction(SDLK_F1,        ACTION_WEAPONS1);
-  clavier->SetKeyAction(SDLK_F2,        ACTION_WEAPONS2);
-  clavier->SetKeyAction(SDLK_F3,        ACTION_WEAPONS3);
-  clavier->SetKeyAction(SDLK_F4,        ACTION_WEAPONS4);
-  clavier->SetKeyAction(SDLK_F5,        ACTION_WEAPONS5);
-  clavier->SetKeyAction(SDLK_F6,        ACTION_WEAPONS6);
-  clavier->SetKeyAction(SDLK_F7,        ACTION_WEAPONS7);
-  clavier->SetKeyAction(SDLK_F8,        ACTION_WEAPONS8);
-  clavier->SetKeyAction(SDLK_c,         ACTION_CENTER);
-  clavier->SetKeyAction(SDLK_1,         ACTION_WEAPON_1);
-  clavier->SetKeyAction(SDLK_2,         ACTION_WEAPON_2);
-  clavier->SetKeyAction(SDLK_3,         ACTION_WEAPON_3);
-  clavier->SetKeyAction(SDLK_4,         ACTION_WEAPON_4);
-  clavier->SetKeyAction(SDLK_5,         ACTION_WEAPON_5);
-  clavier->SetKeyAction(SDLK_6,         ACTION_WEAPON_6);
-  clavier->SetKeyAction(SDLK_7,         ACTION_WEAPON_7);
-  clavier->SetKeyAction(SDLK_8,         ACTION_WEAPON_8);
-  clavier->SetKeyAction(SDLK_9,         ACTION_WEAPON_9);
-  clavier->SetKeyAction(SDLK_PAGEUP,    ACTION_WEAPON_MORE);
-  clavier->SetKeyAction(SDLK_PAGEDOWN,  ACTION_WEAPON_LESS);
-  clavier->SetKeyAction(SDLK_s,         ACTION_CHAT);
-  
+  clavier->SetKeyAction(SDLK_LEFT,      Action::ACTION_MOVE_LEFT);
+  clavier->SetKeyAction(SDLK_RIGHT,     Action::ACTION_MOVE_RIGHT);
+  clavier->SetKeyAction(SDLK_UP,        Action::ACTION_UP);
+  clavier->SetKeyAction(SDLK_DOWN,      Action::ACTION_DOWN);
+  clavier->SetKeyAction(SDLK_RETURN,    Action::ACTION_JUMP);
+  clavier->SetKeyAction(SDLK_BACKSPACE, Action::ACTION_HIGH_JUMP);
+  clavier->SetKeyAction(SDLK_b,         Action::ACTION_BACK_JUMP);
+  clavier->SetKeyAction(SDLK_SPACE,     Action::ACTION_SHOOT);
+  clavier->SetKeyAction(SDLK_TAB,       Action::ACTION_NEXT_CHARACTER);
+  clavier->SetKeyAction(SDLK_ESCAPE,    Action::ACTION_QUIT);
+  clavier->SetKeyAction(SDLK_p,         Action::ACTION_PAUSE);
+  clavier->SetKeyAction(SDLK_F10,       Action::ACTION_FULLSCREEN);
+  clavier->SetKeyAction(SDLK_F9,        Action::ACTION_TOGGLE_INTERFACE);
+  clavier->SetKeyAction(SDLK_F1,        Action::ACTION_WEAPONS1);
+  clavier->SetKeyAction(SDLK_F2,        Action::ACTION_WEAPONS2);
+  clavier->SetKeyAction(SDLK_F3,        Action::ACTION_WEAPONS3);
+  clavier->SetKeyAction(SDLK_F4,        Action::ACTION_WEAPONS4);
+  clavier->SetKeyAction(SDLK_F5,        Action::ACTION_WEAPONS5);
+  clavier->SetKeyAction(SDLK_F6,        Action::ACTION_WEAPONS6);
+  clavier->SetKeyAction(SDLK_F7,        Action::ACTION_WEAPONS7);
+  clavier->SetKeyAction(SDLK_F8,        Action::ACTION_WEAPONS8);
+  clavier->SetKeyAction(SDLK_c,         Action::ACTION_CENTER);
+  clavier->SetKeyAction(SDLK_1,         Action::ACTION_WEAPON_1);
+  clavier->SetKeyAction(SDLK_2,         Action::ACTION_WEAPON_2);
+  clavier->SetKeyAction(SDLK_3,         Action::ACTION_WEAPON_3);
+  clavier->SetKeyAction(SDLK_4,         Action::ACTION_WEAPON_4);
+  clavier->SetKeyAction(SDLK_5,         Action::ACTION_WEAPON_5);
+  clavier->SetKeyAction(SDLK_6,         Action::ACTION_WEAPON_6);
+  clavier->SetKeyAction(SDLK_7,         Action::ACTION_WEAPON_7);
+  clavier->SetKeyAction(SDLK_8,         Action::ACTION_WEAPON_8);
+  clavier->SetKeyAction(SDLK_9,         Action::ACTION_WEAPON_9);
+  clavier->SetKeyAction(SDLK_PAGEUP,    Action::ACTION_WEAPON_MORE);
+  clavier->SetKeyAction(SDLK_PAGEDOWN,  Action::ACTION_WEAPON_LESS);
+  clavier->SetKeyAction(SDLK_s,         Action::ACTION_CHAT);
+
 }
 
 void Config::Apply()
