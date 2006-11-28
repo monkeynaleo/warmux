@@ -27,7 +27,6 @@
 #include <iostream>
 #include <list>
 #include "base.h"
-#include "enum.h"
 //-----------------------------------------------------------------------------
 
 class Action

@@ -93,13 +93,13 @@ void AIStupidEngine::ChooseDirection()
   if ( m_nearest_enemy ) {
 
     if ( ActiveCharacter().GetCenterX() < m_nearest_enemy->GetCenterX())
-      ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+      ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
     else
-      ActiveCharacter().SetDirection(DIRECTION_LEFT);
+      ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
 
   } else {
     // we do not have found anybody to shoot
-    ActiveCharacter().SetDirection( randomSync.GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
+    ActiveCharacter().SetDirection( randomSync.GetBool()?Body::DIRECTION_LEFT:Body::DIRECTION_RIGHT );
   }
 
 }
@@ -115,7 +115,7 @@ void AIStupidEngine::Walk()
 
   // prepare to walk
   if(ActiveCharacter().IsImmobile()) {
-    if (ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
+    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT)
       MoveCharacterRight(ActiveCharacter());
     else
       MoveCharacterLeft(ActiveCharacter());
@@ -295,10 +295,10 @@ bool AIStupidEngine::IsDirectlyShootable(Character& character)
 
   // Set direction
   if (departure.x > arrival.x) {
-    ActiveCharacter().SetDirection(DIRECTION_LEFT);
+    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
     m_angle = int(InverseAngleDeg(double(m_angle)));
   } else {
-    ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
   }
 
   // Prepare game message

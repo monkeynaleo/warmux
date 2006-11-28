@@ -104,7 +104,6 @@ bool NinjaRope::p_Shoot()
   m_attaching = true;
   m_launch_time = Time::GetInstance()->Read() ;
   m_initial_angle = ActiveTeam().crosshair.GetAngleRad();
-  m_initial_direction = ActiveCharacter().GetDirection();
   last_mvt=Time::GetInstance()->Read();
   return true ;
 }
@@ -374,7 +373,7 @@ void NinjaRope::GoRight()
 {
   go_right = true ;
   ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
-  ActiveCharacter().SetDirection(DIRECTION_RIGHT);
+  ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
 }
 
 void NinjaRope::StopRight()
@@ -391,7 +390,7 @@ void NinjaRope::GoLeft()
 {
   go_left = true ;
   ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
-  ActiveCharacter().SetDirection(DIRECTION_LEFT);
+  ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
 }
 
 void NinjaRope::StopLeft()

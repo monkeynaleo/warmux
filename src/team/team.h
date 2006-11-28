@@ -28,7 +28,6 @@
 #include "team_energy.h"
 #include "../character/character.h"
 #include "../graphic/surface.h"
-#include "../include/enum.h"
 #include "../include/base.h"
 #include "../weapon/crosshair.h"
 #include "../weapon/weapon.h"
