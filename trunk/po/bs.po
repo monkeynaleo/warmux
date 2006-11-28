@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-11-22 04:29+0100\n"
+"PO-Revision-Date: 2006-11-28 12:37+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
-"Language-Team: Bosanski <local@linux.org.ba>\n"
+"Language-Team: Bosanski <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -265,8 +265,7 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:296
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -470,7 +469,7 @@ msgstr "Pokreni igru"
 
 #: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
-msgstr ""
+msgstr "Klizi na ivici"
 
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
@@ -629,14 +628,3 @@ msgstr "gotov"
 msgid "general: "
 msgstr "general:"
 
-#~ msgid "Head commander"
-#~ msgstr "Glavni upravljač"
-
-#~ msgid "Number of characters"
-#~ msgstr "Broj igrača po timu"
-
-#~ msgid "Number of teams:"
-#~ msgstr "Broj timova:"
-
-#~ msgid "Player"
-#~ msgstr "Igrač"
