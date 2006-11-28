@@ -28,12 +28,11 @@
 #include "../graphic/sprite.h"
 #include "../graphic/text.h"
 #include "../include/base.h"
-#include "../include/enum.h"
 #include "../object/physical_obj.h"
 #include "../particles/particle.h"
 #include "../interface/keyboard.h"
+#include "body.h"
 
-class Body;
 class Team;
 class ParticleEngine;
 
@@ -147,8 +146,8 @@ public:
   bool CanStillMoveDG (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
-  void SetDirection(Direction_t direction);
-  Direction_t GetDirection() const;
+  void SetDirection(Body::Direction_t direction);
+  Body::Direction_t GetDirection() const;
 
   // Team owner
   const Team& GetTeam() const;

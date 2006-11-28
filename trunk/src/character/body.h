@@ -22,7 +22,6 @@
 #ifndef BODY_H
 #define BODY_H
 #include <map>
-#include "../include/enum.h"
 #include "body_list.h"
 #include "clothe.h"
 #include "member.h"
@@ -30,7 +29,6 @@
 #include "../tool/resource_manager.h"
 #include "../tool/point.h"
 #include "../tool/xml_document.h"
-
 class Character;
 class BodyList;
 class Member;
@@ -48,6 +46,13 @@ typedef class c_junction junction;
 
 class Body
 {
+public:
+  typedef enum
+  {
+    DIRECTION_LEFT = -1,
+    DIRECTION_RIGHT = 1
+  } Direction_t;
+private:
   friend class BodyList;
   std::map<std::string, Member*> members_lst;
   std::map<std::string, Clothe*> clothes_lst;
@@ -75,7 +80,7 @@ class Body
                                         // Order to use to build the body
                                         // First element: member to build
                                         // Secnd element: parent member
-  Direction_t direction;
+  Body::Direction_t direction;
 
   int animation_number;
   bool need_rebuild;
@@ -103,7 +108,7 @@ public:
   void SetMovementOnce(std::string name); //play the movement only once
   void SetRotation(int angle);
   void SetFrame(uint no);
-  void SetDirection(Direction_t dir);
+  void SetDirection(Body::Direction_t dir);
   inline void SetOwner(const Character* belonger) { owner = belonger; };
   void PlayAnimation();
   void Build();

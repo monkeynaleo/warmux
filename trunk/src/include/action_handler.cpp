@@ -156,7 +156,7 @@ void Action_Shoot (Action *a)
   double strength = a->PopDouble();
   int angle = a->PopInt();
   ActiveTeam().SelectCharacter(a->PopInt());
-  ActiveCharacter().SetDirection((Direction_t)a->PopInt());
+  ActiveCharacter().SetDirection((Body::Direction_t)a->PopInt());
   ActiveCharacter().SetX(a->PopInt());
   ActiveCharacter().SetY(a->PopInt());
   ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
@@ -226,7 +226,7 @@ void Action_SetSkin (Action *a)
 
 void Action_SetCharacterDirection (Action *a)
 {
-  ActiveCharacter().SetDirection (Direction_t(a->PopInt()));
+  ActiveCharacter().SetDirection (Body::Direction_t(a->PopInt()));
 }
 
 void Action_SetMap (Action *a)

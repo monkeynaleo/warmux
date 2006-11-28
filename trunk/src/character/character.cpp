@@ -85,7 +85,7 @@ void Character::SetBody(Body* char_body)
   SetClothe("normal");
   SetMovement("walk");
 
-  SetDirection( randomSync.GetBool()?DIRECTION_LEFT:DIRECTION_RIGHT );
+  SetDirection( randomSync.GetBool()?Body::DIRECTION_LEFT:Body::DIRECTION_RIGHT );
   body->SetFrame( 0 );
   SetSize(body->GetSize());
 }
@@ -212,7 +212,7 @@ void Character::SignalGhostState (bool was_dead)
   if (!was_dead) GameLoop::GetInstance()->SignalCharacterDeath (this);
 }
 
-void Character::SetDirection (Direction_t nv_direction)
+void Character::SetDirection (Body::Direction_t nv_direction)
 {
   body->SetDirection(nv_direction);
   uint l,r,t,b;
@@ -466,7 +466,7 @@ void Character::Jump(double strength, int deg_angle)
 
   // Jump !
   double angle = Deg2Rad(deg_angle);
-  if (GetDirection() == DIRECTION_LEFT) angle = InverseAngle(angle);
+  if (GetDirection() == Body::DIRECTION_LEFT) angle = InverseAngle(angle);
   SetSpeed (strength, angle);
 }
 
@@ -679,7 +679,7 @@ void Character::Refresh()
   if(IsDiseased())
   {
     Point2i bubble_pos = GetPosition();
-    if(GetDirection() == DIRECTION_LEFT)
+    if(GetDirection() == Body::DIRECTION_LEFT)
       bubble_pos.x += GetWidth();
     bubble_engine.AddPeriodic(bubble_pos, particle_ILL_BUBBLE, false,
                               - M_PI_2 - (float)GetDirection() * M_PI_4, 20.0);
@@ -819,7 +819,7 @@ void Character::SignalExplosion()
   }
 }
 
-Direction_t Character::GetDirection() const
+Body::Direction_t Character::GetDirection() const
 {
   return body->GetDirection();
 }

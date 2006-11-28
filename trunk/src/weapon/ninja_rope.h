@@ -24,7 +24,6 @@
 //-----------------------------------------------------------------------------
 #include "weapon.h"
 #include "../include/base.h"
-#include "../include/enum.h"
 //-----------------------------------------------------------------------------
 
 const int node_max=200;
@@ -47,7 +46,6 @@ class NinjaRope : public Weapon
     bool m_attaching;
     bool m_rope_attached;
     double m_initial_angle;
-    Direction_t m_initial_direction;
     uint m_launch_time;
     uint m_hooked_time;
     Sprite* m_hook_sprite;

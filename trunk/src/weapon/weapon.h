@@ -28,11 +28,9 @@
 #include "../graphic/sprite.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
-#include "../include/enum.h"
 #include "../particles/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
-//#include "../character/character.h"
 #include "../interface/keyboard.h"
 
 class Character;
