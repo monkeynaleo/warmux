@@ -257,7 +257,7 @@
     <country>Brazil</country>
     <description>Translated Wormux to Brazilian/Portuguese.</description>
   </author>
-  
+
   <author>
 	  <name>Daniel Nylander </name>
 	  <email>po AT danielnylander.se</email>
@@ -344,7 +344,7 @@
     <nickname>OznOg</nickname>
     <email>oznog AT zarb.org</email>
     <country>France</country>
-    <description>Fix some memory leaks.</description>
+    <description>Fixed memory leaks, try to make some clean up</description>
   </author>
 
   <author>
