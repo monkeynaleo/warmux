@@ -161,44 +161,49 @@ void Clavier::HandleKeyPressed (const Action::Action_t &action)
 
       switch(action) {
         case Action::ACTION_WEAPONS1:
-	  weapon_sort = 1;
-	  break;
+          weapon_sort = 1;
+          break;
 
         case Action::ACTION_WEAPONS2:
-	  weapon_sort = 2;
-	  break;
+          weapon_sort = 2;
+          break;
 
         case Action::ACTION_WEAPONS3:
-	  weapon_sort = 3;
-	  break;
+          weapon_sort = 3;
+          break;
 
         case Action::ACTION_WEAPONS4:
-	  weapon_sort = 4;
-	  break;
+          weapon_sort = 4;
+          break;
 
         case Action::ACTION_WEAPONS5:
-	  weapon_sort = 5;
-	  break;
+          weapon_sort = 5;
+          break;
 
         case Action::ACTION_WEAPONS6:
-	  weapon_sort = 6;
-	  break;
+          weapon_sort = 6;
+          break;
 
         case Action::ACTION_WEAPONS7:
-	  weapon_sort = 7;
-	  break;
+          weapon_sort = 7;
+          break;
 
         case Action::ACTION_WEAPONS8:
-	  weapon_sort = 8;
-	  break;
+          weapon_sort = 8;
+          break;
 
         case Action::ACTION_NEXT_CHARACTER:
-	  if (GameMode::GetInstance()->AllowCharacterSelection())
-	    ActionHandler::GetInstance()->NewAction(new Action(action));
-	  return ;
+          if (GameMode::GetInstance()->AllowCharacterSelection()) {
+            Action * next_character = new Action(Action::ACTION_NEXT_CHARACTER);
+            next_character->StoreActiveCharacter();
+            ActiveTeam().NextCharacter();
+            next_character->StoreActiveCharacter();
+            ActionHandler::GetInstance()->NewAction(next_character);
+          }
+          return ;
 
         default:
-	  break ;
+          break ;
       }
 
       if ( weapon_sort > 0 )

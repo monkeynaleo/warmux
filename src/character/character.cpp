@@ -669,6 +669,16 @@ void Character::SaveCrosshairAngle()
   crosshair_angle = ActiveTeam().crosshair.GetAngleVal();
 }
 
+int Character::GetCrosshairAngle() const
+{
+  return crosshair_angle;
+}
+
+void Character::SetCrosshairAngle(int angle)
+{
+  crosshair_angle = angle;
+}
+
 void Character::Refresh()
 {
   if (IsGhost()) return;

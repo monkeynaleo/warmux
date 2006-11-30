@@ -125,6 +125,8 @@ public:
   void DoShoot();
   void HandleShoot(Clavier::Key_Event_t event_type);
   void SaveCrosshairAngle();
+  int GetCrosshairAngle() const;
+  void SetCrosshairAngle(int angle);
 
   // Show hide the Character
   void Hide();

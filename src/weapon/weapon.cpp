@@ -211,10 +211,7 @@ void Weapon::NewActionShoot() const
   Action * shoot = new Action(Action::ACTION_SHOOT,
                               m_strength,
                               ActiveTeam().crosshair.GetAngleVal());
-  shoot->Push((int)ActiveCharacter().GetCharacterIndex());
-  shoot->Push((int)ActiveCharacter().GetDirection());
-  shoot->Push(ActiveCharacter().GetX());
-  shoot->Push(ActiveCharacter().GetY());
+  shoot->StoreActiveCharacter();
   ActionHandler::GetInstance()->NewAction(shoot);
   Action a_end_sync(Action::ACTION_SYNC_END);
   network.SendAction(&a_end_sync);
