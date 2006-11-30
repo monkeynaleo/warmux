@@ -94,6 +94,11 @@ public:
   double PopDouble();
   std::string PopString();
 
+  // Store character's information
+  void StoreCharacter(uint team_no, uint char_no);
+  void StoreActiveCharacter();
+  void RetrieveCharacter();
+
   // Timestamp handling
   void SetTimestamp(uint timestamp);
   uint GetTimestamp();

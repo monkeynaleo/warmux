@@ -25,6 +25,8 @@
 #include "action_handler.h"
 #include "../tool/debug.h"
 #include "../game/time.h"
+#include "../character/character.h"
+#include "../team/teams_list.h"
 
 //-----------------------------------------------------------------------------
 // Action without parameter
@@ -264,5 +266,42 @@ std::string Action::PopString()
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), str.c_str());
   return str;
 }
+
+void Action::StoreActiveCharacter()
+{
+  StoreCharacter(ActiveCharacter().GetTeamIndex() ,ActiveCharacter().GetCharacterIndex());
+}
+
+void Action::StoreCharacter(uint team_no, uint char_no)
+{
+  Push((int)team_no);
+  Push((int)char_no);
+  Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  Push(c->GetX());
+  Push(c->GetY());
+  Push((int)c->GetDirection());
+  Push(c->GetCrosshairAngle());
+  Point2d speed;
+  c->GetSpeedXY(speed);
+  Push(speed.x);
+  Push(speed.y);
+  Push((int)c->IsActiveCharacter());
+}
+
+void Action::RetrieveCharacter()
+{
+  int team_no = PopInt();
+  int char_no = PopInt();
+  Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->SetX(PopInt());
+  c->SetY(PopInt());
+  c->SetDirection((Body::Direction_t)PopInt());
+  c->SetCrosshairAngle(PopInt());
+  Point2d speed(PopDouble(), PopDouble());
+  c->SetSpeedXY(speed);
+  if(PopInt())
+    ActiveTeam().SelectCharacter(char_no);
+}
+
 
 //-----------------------------------------------------------------------------

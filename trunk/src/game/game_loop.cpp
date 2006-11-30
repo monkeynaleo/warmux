@@ -411,7 +411,7 @@ void GameLoop::Run()
 
     // Refresh clock value
     RefreshClock();
-    if(Time::GetInstance()->Read() % 100 == 20)
+    if(Time::GetInstance()->Read() % 1000 == 20 && network.IsServer())
       PingClient();
     StatStart("GameLoop:RefreshInput()");
     RefreshInput();
@@ -557,10 +557,11 @@ void GameLoop::SetState(int new_state, bool begin_game)
       if( network.IsServer() )
       {
         // Tell to clients which character in the team is now playing
-        Action playing_char(Action::ACTION_CHANGE_CHARACTER, (int)ActiveCharacter().GetCharacterIndex());
+        Action playing_char(Action::ACTION_CHANGE_CHARACTER);
+        playing_char.StoreActiveCharacter();
         network.SendAction(&playing_char);
 
-        printf("Action_NextCharacter:\n");
+        printf("Action_ChangeCharacter:\n");
         printf("char_index = %i\n",ActiveCharacter().GetCharacterIndex());
         printf("Playing character : %i %s\n", ActiveCharacter().GetCharacterIndex(), ActiveCharacter().GetName().c_str());
         printf("Playing team : %i %s\n", ActiveCharacter().GetTeamIndex(), ActiveTeam().GetName().c_str());

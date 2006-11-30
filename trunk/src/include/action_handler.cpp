@@ -29,6 +29,7 @@
 #include "../game/time.h"
 #include "../include/constant.h"
 #include "../network/network.h"
+#include "../map/camera.h"
 #include "../map/map.h"
 #include "../map/maps_list.h"
 #include "../map/wind.h"
@@ -143,22 +144,22 @@ void Action_ChangeWeapon (Action *a)
 
 void Action_NextCharacter (Action *a)
 {
-  ActiveTeam().NextCharacter();
+  a->RetrieveCharacter();       // Retrieve current character's informations
+  a->RetrieveCharacter();       // Retrieve next character information
+  camera.ChangeObjSuivi(&ActiveCharacter(), true, true);
 }
 
 void Action_ChangeCharacter (Action *a)
 {
-  ActiveTeam().SelectCharacter(a->PopInt());
+  a->RetrieveCharacter();
+  camera.ChangeObjSuivi(&ActiveCharacter(), true, true);
 }
 
 void Action_Shoot (Action *a)
 {
   double strength = a->PopDouble();
   int angle = a->PopInt();
-  ActiveTeam().SelectCharacter(a->PopInt());
-  ActiveCharacter().SetDirection((Body::Direction_t)a->PopInt());
-  ActiveCharacter().SetX(a->PopInt());
-  ActiveCharacter().SetY(a->PopInt());
+  a->RetrieveCharacter();
   ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
 }
 
@@ -170,38 +171,13 @@ void Action_Wind (Action *a)
 Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
 {
   Action* a = new Action(Action::ACTION_SET_CHARACTER_PHYSICS);
-  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  a->Push(team_no);
-  a->Push(char_no);
-  a->Push(c->GetX());
-  a->Push(c->GetY());
-  Point2d speed;
-  c->GetSpeedXY(speed);
-  a->Push(speed.x);
-  a->Push(speed.y);
+  a->StoreCharacter(team_no, char_no);
   return a;
 }
 
 void Action_SetCharacterPhysics (Action *a)
 {
-  int team_no, char_no;
-  double s_x, s_y;
-  int x, y;
-
-  team_no = a->PopInt();
-  char_no = a->PopInt();
-  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  assert(c != NULL);
-
-  x = a->PopInt();
-  y = a->PopInt();
-  s_x = a->PopDouble();
-  s_y = a->PopDouble();
-  c->SetXY(Point2i(x, y));
-  c->SetSpeedXY(Point2d(s_x, s_y));
-
-  Point2d speed;
-  c->GetSpeedXY(speed);
+  a->RetrieveCharacter();
 }
 
 void Action_SetCharacterEnergy(Action *a)
