@@ -45,6 +45,8 @@ Constants::Constants()
   AUTHORS.push_back ("Laurent DEFERT SIMONNEAU");
   AUTHORS.push_back ("Jean-Christophe DUBERGA");
   AUTHORS.push_back ("Matthieu FERTRE");
+  AUTHORS.push_back ("Sebastien GONZALVE");
+  AUTHORS.push_back ("Reiner HERRMANN");
   AUTHORS.push_back ("Renaud LOTTIAUX");
   AUTHORS.push_back ("Yannig PERRE");
   AUTHORS.push_back ("Olivie SERRES");
