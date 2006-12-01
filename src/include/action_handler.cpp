@@ -479,8 +479,10 @@ void Action_Pause(Action *a)
 
 void ActionHandler::ExecActions()
 {
-  assert(mutex!=NULL);
+  Action * a;
+  std::list<Action*> to_remove;
   std::list<Action*>::iterator it;
+  assert(mutex!=NULL);
   for(it = queue.begin(); it != queue.end() ; ++it)
   {
     SDL_LockMutex(mutex);
@@ -491,11 +493,15 @@ void ActionHandler::ExecActions()
       continue;
     }
     SDL_UnlockMutex(mutex);
-    Exec((*it));
-    queue.remove((*it));
-    delete(*it);
-    // Rewind action queue for next loop
-    it = queue.begin();
+    Exec ((*it));
+    to_remove.push_back((*it));
+  }
+  while(to_remove.size() != 0)
+  {
+    a = to_remove.front();
+    to_remove.pop_front();
+    queue.remove(a);
+    delete(a);
   }
 }
 
