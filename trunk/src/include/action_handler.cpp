@@ -480,20 +480,22 @@ void Action_Pause(Action *a)
 void ActionHandler::ExecActions()
 {
   assert(mutex!=NULL);
-  while (queue.size() != 0)
+  std::list<Action*>::iterator it;
+  for(it = queue.begin(); it != queue.end() ; ++it)
   {
     SDL_LockMutex(mutex);
-    Action *action = queue.front();
-    Time::GetInstance()->RefreshMaxTime(action->GetTimestamp());
+    Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
     // If action is in the future, wait for next refresh
-    if(action->GetTimestamp() > Time::GetInstance()->Read()) {
+    if((*it)->GetTimestamp() > Time::GetInstance()->Read()) {
       SDL_UnlockMutex(mutex);
-      return;
+      continue;
     }
-    queue.pop_front();
     SDL_UnlockMutex(mutex);
-    Exec (action);
-    delete action;
+    Exec((*it));
+    queue.remove((*it));
+    delete(*it);
+    // Rewind action queue for next loop
+    it = queue.begin();
   }
 }
 
