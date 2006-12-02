@@ -18,7 +18,7 @@
  ******************************************************************************
  * Sprite:     Simple sprite management
  ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
  *             Initial version
  *****************************************************************************/
 
@@ -77,7 +77,7 @@ void Sprite::Constructor() {
   frame_width_pix = frame_height_pix = 0;
   alpha = 1.0f;
   scale_x = scale_y = 1.0f;
-  rotation_deg = 0.0f;   
+  rotation_deg = 0.0f;
   SetRotation_HotSpot(center);
 }
 
@@ -88,12 +88,12 @@ void Sprite::Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, i
    this->frame_height_pix = frameSize.y;
 
    surface.SetAlpha( 0, 0);
-   
+
    for( f.y = 0; f.y < nb_frames_y; f.y++)
      for( f.x = 0; f.x < nb_frames_x; f.x++){
        Surface new_surf = Surface(frameSize, SDL_SWSURFACE|SDL_SRCALPHA, true);
        Rectanglei sr(f * frameSize, frameSize);
-	  
+
        new_surf.Blit( surface, sr, Point2i(0, 0));
        frames.push_back( SpriteFrame(new_surf));
      }
@@ -114,7 +114,7 @@ void Sprite::SetSize(const Point2i &size){
 }
 
 unsigned int Sprite::GetWidth() const{
-   return (uint)((float)frame_width_pix * (scale_x>0?scale_x:-scale_x));
+   return static_cast<uint>(frame_width_pix * (scale_x>0?scale_x:-scale_x));
 }
 
 unsigned int Sprite::GetWidthMax() const{
@@ -125,7 +125,7 @@ unsigned int Sprite::GetWidthMax() const{
 }
 
 unsigned int Sprite::GetHeight() const{
-   return (uint)((float)frame_height_pix * (scale_y>0?scale_y:-scale_y));
+   return static_cast<uint>(frame_height_pix * (scale_y>0?scale_y:-scale_y));
 }
 
 unsigned int Sprite::GetHeightMax() const{
@@ -233,8 +233,8 @@ void Sprite::SetRotation_HotSpot( const Point2i new_hotspot)
   rot_hotspot = user_defined;
   rhs_pos = new_hotspot;
 
-  if((uint) rhs_pos.x == GetWidth() / 2
-  && (uint) rhs_pos.y == GetHeight() / 2)
+  if( rhs_pos.x * 2 == static_cast<int>(GetWidth()) &&
+      rhs_pos.y * 2 == static_cast<int>(GetHeight())  )
     rot_hotspot = center; // avoid using Calculate_Rotation_Offset, thus avoiding a division by zero
 }
 
@@ -242,7 +242,7 @@ void Sprite::Calculate_Rotation_Offset(Surface& tmp_surface){
   const SpriteFrame& frame = GetCurrentFrameObject();
   const Surface &surface = frame.surface;
   // Calculate offset of the depending on hotspot rotation position :
-  
+
   int surfaceHeight = surface.GetHeight();
   int surfaceWidth = surface.GetWidth();
 
@@ -272,14 +272,14 @@ void Sprite::Calculate_Rotation_Offset(Surface& tmp_surface){
   }
 
   Point2i rhs_pos_tmp;
-  rhs_pos_tmp.x = int((float)rhs_pos.x * scale_x);
-  rhs_pos_tmp.y = int((float)rhs_pos.y * scale_y);
-  surfaceWidth  = int((float)surfaceWidth  * scale_x);
-  surfaceHeight = int((float)surfaceHeight * scale_y);
+  rhs_pos_tmp.x = static_cast<uint>(rhs_pos.x * scale_x);
+  rhs_pos_tmp.y = static_cast<uint>(rhs_pos.y * scale_y);
+  surfaceWidth  = static_cast<uint>(surfaceWidth  * scale_x);
+  surfaceHeight = static_cast<uint>(surfaceHeight * scale_y);
 
   //Calculate the position of the hotspot after a rotation around the center of the surface:
   float rhs_dst; //Distance between center of the sprite and the hotspot
-  float rhs_angle; //Angle of the hotspot _before_ the rotation  
+  float rhs_angle; //Angle of the hotspot _before_ the rotation
 
   rhs_dst = sqrt(float((surfaceWidth /2 - rhs_pos_tmp.x)*(surfaceWidth /2 - rhs_pos_tmp.x)
                      + (surfaceHeight/2 - rhs_pos_tmp.y)*(surfaceHeight/2 - rhs_pos_tmp.y)));
@@ -294,8 +294,8 @@ void Sprite::Calculate_Rotation_Offset(Surface& tmp_surface){
 
   rhs_angle += angle_rad;
 
-  Point2i rhs_new_pos =  Point2i(surfaceWidth /2 + int(cos(rhs_angle) * rhs_dst),
-                                 surfaceHeight/2 + int(sin(rhs_angle) * rhs_dst));
+  Point2i rhs_new_pos =  Point2i(surfaceWidth /2 + static_cast<uint>(cos(rhs_angle) * rhs_dst),
+                                 surfaceHeight/2 + static_cast<uint>(sin(rhs_angle) * rhs_dst));
 
   rotation_point.x -= rhs_new_pos.x;
   rotation_point.y -= rhs_new_pos.y;
@@ -330,7 +330,7 @@ void Sprite::Blit( Surface &dest, int pos_x, int pos_y, int src_x, int src_y, ui
 
   Rectanglei srcRect (src_x, src_y, w, h);
   Rectanglei dstRect (pos_x + rotation_point.x, pos_y + rotation_point.y, w, h);
-  
+
   if(alpha == 1.0)
     dest.Blit(current_surface, srcRect, dstRect.GetPosition());
   else
@@ -354,14 +354,14 @@ void Sprite::Finish(){
   {
   case SpriteAnimation::show_first_frame:
     current_frame = 0;
-    break;      
+    break;
   case SpriteAnimation::show_blank:
     show = false;
-    break;      
+    break;
   default:
   case SpriteAnimation::show_last_frame:
     current_frame = frames.size()-1;
-    break;      
+    break;
   }
   cache.InvalidLastFrame();
 }
