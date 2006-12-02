@@ -32,14 +32,6 @@
 #include "../team/macro.h"
 #include "../map/maps_list.h"
 //-----------------------------------------------------------------------------
-WeaponsList weapons_list;
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-
-WeaponsList::WeaponsList()
-{
-}
 
 //-----------------------------------------------------------------------------
 
@@ -66,7 +58,7 @@ void WeaponsList::AddToList(Weapon* arme, uint num_sort)
 
 //-----------------------------------------------------------------------------
 
-void WeaponsList::Init()
+WeaponsList::WeaponsList()
 {
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
   Bazooka* bazooka = new Bazooka;
@@ -218,8 +210,8 @@ class test_weapon_type {
   private:
     Weapon::Weapon_type m_type;
   public:
-    test_weapon_type(Weapon::Weapon_type type) { m_type = type; }
-	bool operator() (const Weapon* w) const { return w->GetType()==m_type; }
+    test_weapon_type(Weapon::Weapon_type &type) { m_type = type; }
+	bool operator() ( Weapon* w) { return w->GetType()==m_type; }
 };
 
 Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)

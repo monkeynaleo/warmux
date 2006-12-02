@@ -60,7 +60,5 @@ public:
   bool GetWeaponBySort(uint num_sort, Weapon::Weapon_type &type);
 };
 
-extern WeaponsList weapons_list;
-
 //-----------------------------------------------------------------------------
 #endif

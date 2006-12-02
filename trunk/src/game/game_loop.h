@@ -41,14 +41,15 @@ public:
 
   FramePerSecond fps;
   Chat chatsession;
-  
+
   static GameLoop * singleton;
+  GameLoop();
 
 public:
   static GameLoop * GetInstance();
 
   void Init();
-  
+
   bool character_already_chosen;
   bool interaction_enabled;
 
@@ -75,7 +76,6 @@ public:
   void SignalCharacterDamage(Character *character);
 
 private:
-  GameLoop();
 
   void InitGameData_NetServer();
   void InitGameData_NetClient();

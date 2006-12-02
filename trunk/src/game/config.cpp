@@ -51,6 +51,7 @@
 #  include "../include/binreloc.h"
 #endif
 
+
 const std::string NOMFICH="config.xml";
 Config * Config::singleton = NULL;
 
@@ -63,6 +64,7 @@ Config * Config::GetInstance() {
 
 Config::Config()
 {
+
 #ifdef USE_AUTOPACKAGE
   BrInitError error;
   std::string filename;
@@ -97,36 +99,33 @@ Config::Config()
 
   // directories
 #ifdef USE_AUTOPACKAGE
-  data_dir = GetEnv(Constants::ENV_DATADIR, br_find_data_dir(INSTALL_DATADIR));
-  locale_dir = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
-  filename = data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf";
+  data_dir     = GetEnv(Constants::ENV_DATADIR, br_find_data_dir(INSTALL_DATADIR));
+  locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, br_find_locale_dir(INSTALL_LOCALEDIR));
+  filename     = data_dir + PATH_SEPARATOR + "font" + PATH_SEPARATOR + "DejaVuSans.ttf";
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, br_find_locale_dir(filename.c_str()));
 #else
-  data_dir = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
-  locale_dir = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
+  data_dir     = GetEnv(Constants::ENV_DATADIR, INSTALL_DATADIR);
+  locale_dir   = GetEnv(Constants::ENV_LOCALEDIR, INSTALL_LOCALEDIR);
   ttf_filename = GetEnv(Constants::ENV_FONT_PATH, FONT_FILE);
 #endif
 
 #ifndef WIN32
-  personal_dir = GetHome()+"/.wormux/";
+  personal_dir = GetHome() + "/.wormux/";
 #else
-  personal_dir = GetHome()+"\\Wormux\\";
+  personal_dir = GetHome() + "\\Wormux\\";
 #endif
-}
+  InitI18N(locale_dir.c_str());
 
-bool Config::Load()
-{
-  bool result = ChargeVraiment();
-  std::string dir;
-  dir = TranslateDirectory(locale_dir);
+  ChargeVraiment();
+  std::string dir = TranslateDirectory(locale_dir);
   I18N_SetDir (dir + PATH_SEPARATOR);
 
   dir = TranslateDirectory(data_dir);
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
-  return result;
 }
 
-bool Config::ChargeVraiment()
+
+bool Config::ChargeVraiment(void)
 {
   m_xml_charge=false;
   try
@@ -134,8 +133,10 @@ bool Config::ChargeVraiment()
     // Charge la configuration XML
     LitDocXml doc;
     m_nomfich = personal_dir+NOMFICH;
-    if (!doc.Charge (m_nomfich)) return false;
-    if (!ChargeXml (doc.racine())) return false;
+    if (!doc.Charge (m_nomfich))
+      return false;
+    if (!ChargeXml (doc.racine()))
+      return false;
     m_xml_charge = true;
   }
   catch (const xmlpp::exception &e)
@@ -145,7 +146,6 @@ bool Config::ChargeVraiment()
         << e.what() << std::endl;
     return false;
   }
-
   return true;
 }
 
@@ -216,42 +216,42 @@ bool Config::ChargeXml(xmlpp::Element *xml)
 
 void Config::SetKeyboardConfig()
 {
-  Clavier * clavier = Clavier::GetInstance();
+  my_keyboard = new Clavier();
 
-  clavier->SetKeyAction(SDLK_LEFT,      Action::ACTION_MOVE_LEFT);
-  clavier->SetKeyAction(SDLK_RIGHT,     Action::ACTION_MOVE_RIGHT);
-  clavier->SetKeyAction(SDLK_UP,        Action::ACTION_UP);
-  clavier->SetKeyAction(SDLK_DOWN,      Action::ACTION_DOWN);
-  clavier->SetKeyAction(SDLK_RETURN,    Action::ACTION_JUMP);
-  clavier->SetKeyAction(SDLK_BACKSPACE, Action::ACTION_HIGH_JUMP);
-  clavier->SetKeyAction(SDLK_b,         Action::ACTION_BACK_JUMP);
-  clavier->SetKeyAction(SDLK_SPACE,     Action::ACTION_SHOOT);
-  clavier->SetKeyAction(SDLK_TAB,       Action::ACTION_NEXT_CHARACTER);
-  clavier->SetKeyAction(SDLK_ESCAPE,    Action::ACTION_QUIT);
-  clavier->SetKeyAction(SDLK_p,         Action::ACTION_PAUSE);
-  clavier->SetKeyAction(SDLK_F10,       Action::ACTION_FULLSCREEN);
-  clavier->SetKeyAction(SDLK_F9,        Action::ACTION_TOGGLE_INTERFACE);
-  clavier->SetKeyAction(SDLK_F1,        Action::ACTION_WEAPONS1);
-  clavier->SetKeyAction(SDLK_F2,        Action::ACTION_WEAPONS2);
-  clavier->SetKeyAction(SDLK_F3,        Action::ACTION_WEAPONS3);
-  clavier->SetKeyAction(SDLK_F4,        Action::ACTION_WEAPONS4);
-  clavier->SetKeyAction(SDLK_F5,        Action::ACTION_WEAPONS5);
-  clavier->SetKeyAction(SDLK_F6,        Action::ACTION_WEAPONS6);
-  clavier->SetKeyAction(SDLK_F7,        Action::ACTION_WEAPONS7);
-  clavier->SetKeyAction(SDLK_F8,        Action::ACTION_WEAPONS8);
-  clavier->SetKeyAction(SDLK_c,         Action::ACTION_CENTER);
-  clavier->SetKeyAction(SDLK_1,         Action::ACTION_WEAPON_1);
-  clavier->SetKeyAction(SDLK_2,         Action::ACTION_WEAPON_2);
-  clavier->SetKeyAction(SDLK_3,         Action::ACTION_WEAPON_3);
-  clavier->SetKeyAction(SDLK_4,         Action::ACTION_WEAPON_4);
-  clavier->SetKeyAction(SDLK_5,         Action::ACTION_WEAPON_5);
-  clavier->SetKeyAction(SDLK_6,         Action::ACTION_WEAPON_6);
-  clavier->SetKeyAction(SDLK_7,         Action::ACTION_WEAPON_7);
-  clavier->SetKeyAction(SDLK_8,         Action::ACTION_WEAPON_8);
-  clavier->SetKeyAction(SDLK_9,         Action::ACTION_WEAPON_9);
-  clavier->SetKeyAction(SDLK_PAGEUP,    Action::ACTION_WEAPON_MORE);
-  clavier->SetKeyAction(SDLK_PAGEDOWN,  Action::ACTION_WEAPON_LESS);
-  clavier->SetKeyAction(SDLK_s,         Action::ACTION_CHAT);
+  my_keyboard->SetKeyAction(SDLK_LEFT,      Action::ACTION_MOVE_LEFT);
+  my_keyboard->SetKeyAction(SDLK_RIGHT,     Action::ACTION_MOVE_RIGHT);
+  my_keyboard->SetKeyAction(SDLK_UP,        Action::ACTION_UP);
+  my_keyboard->SetKeyAction(SDLK_DOWN,      Action::ACTION_DOWN);
+  my_keyboard->SetKeyAction(SDLK_RETURN,    Action::ACTION_JUMP);
+  my_keyboard->SetKeyAction(SDLK_BACKSPACE, Action::ACTION_HIGH_JUMP);
+  my_keyboard->SetKeyAction(SDLK_b,         Action::ACTION_BACK_JUMP);
+  my_keyboard->SetKeyAction(SDLK_SPACE,     Action::ACTION_SHOOT);
+  my_keyboard->SetKeyAction(SDLK_TAB,       Action::ACTION_NEXT_CHARACTER);
+  my_keyboard->SetKeyAction(SDLK_ESCAPE,    Action::ACTION_QUIT);
+  my_keyboard->SetKeyAction(SDLK_p,         Action::ACTION_PAUSE);
+  my_keyboard->SetKeyAction(SDLK_F10,       Action::ACTION_FULLSCREEN);
+  my_keyboard->SetKeyAction(SDLK_F9,        Action::ACTION_TOGGLE_INTERFACE);
+  my_keyboard->SetKeyAction(SDLK_F1,        Action::ACTION_WEAPONS1);
+  my_keyboard->SetKeyAction(SDLK_F2,        Action::ACTION_WEAPONS2);
+  my_keyboard->SetKeyAction(SDLK_F3,        Action::ACTION_WEAPONS3);
+  my_keyboard->SetKeyAction(SDLK_F4,        Action::ACTION_WEAPONS4);
+  my_keyboard->SetKeyAction(SDLK_F5,        Action::ACTION_WEAPONS5);
+  my_keyboard->SetKeyAction(SDLK_F6,        Action::ACTION_WEAPONS6);
+  my_keyboard->SetKeyAction(SDLK_F7,        Action::ACTION_WEAPONS7);
+  my_keyboard->SetKeyAction(SDLK_F8,        Action::ACTION_WEAPONS8);
+  my_keyboard->SetKeyAction(SDLK_c,         Action::ACTION_CENTER);
+  my_keyboard->SetKeyAction(SDLK_1,         Action::ACTION_WEAPON_1);
+  my_keyboard->SetKeyAction(SDLK_2,         Action::ACTION_WEAPON_2);
+  my_keyboard->SetKeyAction(SDLK_3,         Action::ACTION_WEAPON_3);
+  my_keyboard->SetKeyAction(SDLK_4,         Action::ACTION_WEAPON_4);
+  my_keyboard->SetKeyAction(SDLK_5,         Action::ACTION_WEAPON_5);
+  my_keyboard->SetKeyAction(SDLK_6,         Action::ACTION_WEAPON_6);
+  my_keyboard->SetKeyAction(SDLK_7,         Action::ACTION_WEAPON_7);
+  my_keyboard->SetKeyAction(SDLK_8,         Action::ACTION_WEAPON_8);
+  my_keyboard->SetKeyAction(SDLK_9,         Action::ACTION_WEAPON_9);
+  my_keyboard->SetKeyAction(SDLK_PAGEUP,    Action::ACTION_WEAPON_MORE);
+  my_keyboard->SetKeyAction(SDLK_PAGEDOWN,  Action::ACTION_WEAPON_LESS);
+  my_keyboard->SetKeyAction(SDLK_s,         Action::ACTION_CHAT);
 
 }
 
@@ -260,7 +260,7 @@ void Config::Apply()
   SetKeyboardConfig();
 
   // Charge le mode jeu
-  weapons_list.Init();
+  my_weapons_list = new WeaponsList();
 
   GameMode::GetInstance()->Load(m_game_mode);
 
