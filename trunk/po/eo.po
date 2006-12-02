@@ -15,12 +15,36 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: src/network/distant_cpu.cpp:70
+#, fuzzy
+msgid " has joined the party"
+msgstr "%s falis el la mapo"
+
+#: src/network/distant_cpu.cpp:79
+#, fuzzy
+msgid " has left the party"
+msgstr "%s falis el la mapo"
+
 #: src/map/maps_list.cpp:277
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas :-("
 
-#: src/game/game_loop.cpp:692
+#: src/menu/network_menu.cpp:124 src/menu/network_menu.cpp:397
+#, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/menu/network_menu.cpp:128 src/menu/network_menu.cpp:402
+#, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/game/game_loop.cpp:693
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s teamo) mortis."
@@ -35,7 +59,7 @@ msgstr "%s <%s> kiel %s el %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> el %s"
 
-#: src/game/game_loop.cpp:671
+#: src/game/game_loop.cpp:672
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -45,12 +69,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr "%s bildo po sekundo (fps)"
 
-#: src/game/game_loop.cpp:664
+#: src/game/game_loop.cpp:665
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s droniĝis"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:676
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s falis el la mapo"
@@ -69,12 +93,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game_loop.cpp:686
+#: src/game/game_loop.cpp:687
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:681
+#: src/game/game_loop.cpp:682
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -173,6 +197,11 @@ msgstr "Aeratako"
 msgid "Airhammer"
 msgstr ""
 
+#: src/team/results.cpp:143
+#, fuzzy
+msgid "All teams"
+msgstr "Atendas teamojn"
+
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr ""
@@ -231,8 +260,32 @@ msgstr " Disgrenado"
 msgid "Commit Suicide"
 msgstr "Mortigis sin"
 
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Partofino !"
+
+#: src/menu/network_connection_menu.cpp:86
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Partofino !"
+
+#: src/menu/network_connection_menu.cpp:66
+#, fuzzy
+msgid "Connect to game"
+msgstr "Partofino !"
+
+#: src/menu/network_connection_menu.cpp:126
+#, fuzzy
+msgid "Connected to "
+msgstr "Partofino !"
+
 #: src/weapon/construct.cpp:43
 msgid "Construct"
+msgstr ""
+
+#: src/network/index_server.cpp:88
+msgid "Contacting main server..."
 msgstr ""
 
 #: src/menu/main_menu.cpp:113
@@ -297,6 +350,11 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr " Eraro: Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
 
+#: src/network/network.cpp:77
+#, fuzzy
+msgid "Failed to initialize network library!"
+msgstr " Ne eblas prepari SDL bibliotekon: %s"
+
 #: src/game/game_loop.cpp:162
 msgid "Find a random position for characters"
 msgstr "Dismetu hazarde la vermojn"
@@ -325,12 +383,21 @@ msgstr "Pistolo"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME dosiero ne troveblas!"
 
+#: src/menu/teams_selection_box.cpp:45
+msgid "Head commander"
+msgstr ""
+
 #: src/weapon/holly_grenade.cpp:105
 #, fuzzy
 msgid "Holy Grenade"
 msgstr "Grenado"
 
-#: src/game/game_loop.cpp:728
+#: src/menu/network_connection_menu.cpp:73
+#, fuzzy
+msgid "Host a game"
+msgstr "Partofino !"
+
+#: src/game/game_loop.cpp:729
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -366,13 +433,33 @@ msgstr "Preparante objektojn"
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
+#: src/network/index_server.cpp:99
+msgid "Invalid index server adress!"
+msgstr ""
+
+#: src/network/network.cpp:194
+msgid "Invalid port!"
+msgstr ""
+
+#: src/network/network.cpp:144
+msgid "Invalid server adress!"
+msgstr ""
+
 #: src/object/bonus_box.cpp:281
 #, fuzzy
 msgid "Is it a gift?"
 msgstr "Ĉu estas donaco?"
 
+#: src/network/index_server.cpp:295
+msgid "It doesn't seem to be a valid Wormux server..."
+msgstr ""
+
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
+msgstr ""
+
+#: src/menu/network_menu.cpp:141
+msgid "Join #wormux on irc.freenode.net to find"
 msgstr ""
 
 #: src/map/maps_list.cpp:185
@@ -396,6 +483,11 @@ msgstr "Mapo %s, far :"
 msgid "Maps"
 msgstr ""
 
+#: src/menu/network_menu.cpp:118
+#, fuzzy
+msgid "Max number of players:"
+msgstr "Nombro da ludantoj en teamo"
+
 #: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Maximum FPS"
@@ -404,6 +496,26 @@ msgstr "Maksimumaj bildoj po sukundo (fps):"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mino"
+
+#: src/menu/results_menu.cpp:169
+#, fuzzy
+msgid "Most sold-out"
+msgstr " La plej perfida : %s (%i).\n"
+
+#: src/menu/results_menu.cpp:159
+#, fuzzy
+msgid "Most useful"
+msgstr " La plej malutila : %s (%i).\n"
+
+#: src/menu/results_menu.cpp:164
+#, fuzzy
+msgid "Most useless"
+msgstr " La plej malutila : %s (%i).\n"
+
+#: src/menu/results_menu.cpp:154
+#, fuzzy
+msgid "Most violent"
+msgstr " La plej perforta : %s (%i).\n"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -417,10 +529,26 @@ msgstr "Reta ludo"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:546
+#: src/weapon/weapon.cpp:543
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Neniu elemento <%s> trovita en la XML agorda dosiero!"
+
+#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
+#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
+#, fuzzy
+msgid "Nobody!"
+msgstr "Neniu"
+
+#: src/menu/teams_selection_box.cpp:51
+#, fuzzy
+msgid "Number of characters"
+msgstr "Nombro da ludantoj en teamo"
+
+#: src/menu/teams_selection_box.cpp:143
+#, fuzzy
+msgid "Number of teams:"
+msgstr "Nombro da ludantoj en teamo"
 
 #: src/menu/main_menu.cpp:107
 msgid "Options"
@@ -436,6 +564,11 @@ msgstr ""
 
 #: src/menu/main_menu.cpp:91
 msgid "Play"
+msgstr "Aktori"
+
+#: src/menu/teams_selection_box.cpp:162
+#, fuzzy
+msgid "Player"
 msgstr "Aktori"
 
 #: src/menu/options_menu.cpp:68
@@ -464,6 +597,10 @@ msgstr "Forigu el Wormux"
 msgid "Reading personal config file"
 msgstr ""
 
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
 msgstr ""
@@ -480,6 +617,18 @@ msgstr "Komencas partion"
 msgid "Scroll on border"
 msgstr ""
 
+#: src/menu/network_connection_menu.cpp:59
+msgid "Server adress:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:78
+msgid "Server available on Internet"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:150
+msgid "Server started"
+msgstr ""
+
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -491,6 +640,10 @@ msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
+msgstr ""
+
+#: src/menu/network_menu.cpp:144
+msgid "So you have to restart Wormux after each"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -574,14 +727,44 @@ msgstr "La fuzilo foriris en alian mondon ..."
 msgid "The rocket has left the battlefield..."
 msgstr "La fuzilo foriris en alian mondon ..."
 
+#: src/menu/network_connection_menu.cpp:131
+#, fuzzy
+msgid "Unable to connect"
+msgstr "Ne eblas malfermi aspektan dosierujon (%s)"
+
+#: src/network/index_server.cpp:78
+#, fuzzy
+msgid "Unable to contact an index server!"
+msgstr " Ne eblas malfermi mapan dosierujon (%s)"
+
+#: src/network/network.cpp:155
+#, fuzzy
+msgid "Unable to contact server!"
+msgstr " Ne eblas malfermi mapan dosierujon (%s)"
+
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr " Ne eblas prepari SDL bibliotekon: %s"
 
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Pafo en la malpleneco ..."
+
+#: src/network/network.cpp:238
+#, fuzzy
+msgid "Unable to listen for client!"
+msgstr "Atendas klienton"
+
 #: src/map/maps_list.cpp:198 src/map/maps_list.cpp:214
 #, c-format
 msgid "Unable to open maps directory (%s)!"
+msgstr " Ne eblas malfermi mapan dosierujon (%s)"
+
+#: src/menu/network_connection_menu.cpp:153
+#, fuzzy
+msgid "Unable to start server"
 msgstr " Ne eblas malfermi mapan dosierujon (%s)"
 
 #: src/main.cpp:120
@@ -593,6 +776,17 @@ msgstr "Escepto nekonata intercaptita ..."
 msgid "Version"
 msgstr "Versio "
 
+#: src/menu/network_menu.cpp:143
+msgid "WARNING! Disconnections are not yet handled."
+msgstr ""
+
+#: src/menu/network_menu.cpp:289
+#, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/game/game_loop.cpp:219
 #, fuzzy
 msgid "Weapons"
@@ -602,7 +796,7 @@ msgstr "Armilo:"
 msgid "Website: "
 msgstr "TTT-ejo: "
 
-#: src/game/game_loop.cpp:689
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo!"
@@ -619,6 +813,11 @@ msgstr "Wormux muntas..."
 #: src/main.cpp:200
 msgid "Wormux version "
 msgstr "Wormux versio "
+
+#: src/include/action_handler.cpp:370
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr ""
 
 #: src/map/maps_list.cpp:71
 #, c-format
@@ -641,6 +840,11 @@ msgstr "Vi bezonas almenaŭ du teamojn!"
 msgid "Your shot has missed!"
 msgstr "Vi mispafis!"
 
+#: src/menu/network_menu.cpp:145
+#, fuzzy
+msgid "disconnection!"
+msgstr "Partofino !"
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "Farita"
@@ -649,101 +853,9 @@ msgstr "Farita"
 msgid "general: "
 msgstr ""
 
-#, fuzzy
-#~ msgid " has joined the party"
-#~ msgstr "%s falis el la mapo"
-
-#, fuzzy
-#~ msgid " has left the party"
-#~ msgstr "%s falis el la mapo"
-
-#, fuzzy
-#~ msgid "All teams"
-#~ msgstr "Atendas teamojn"
-
-#, fuzzy
-#~ msgid "Connect !"
-#~ msgstr "Partofino !"
-
-#, fuzzy
-#~ msgid "Connect to an internet game"
-#~ msgstr "Partofino !"
-
-#, fuzzy
-#~ msgid "Connect to game"
-#~ msgstr "Partofino !"
-
-#, fuzzy
-#~ msgid "Connected to "
-#~ msgstr "Partofino !"
-
-#, fuzzy
-#~ msgid "Failed to initialize network library!"
-#~ msgstr " Ne eblas prepari SDL bibliotekon: %s"
-
-#, fuzzy
-#~ msgid "Game options:"
-#~ msgstr "Ludaj opcioj"
-
-#, fuzzy
-#~ msgid "Host a game"
-#~ msgstr "Partofino !"
-
-#, fuzzy
-#~ msgid "Max number of players:"
-#~ msgstr "Nombro da ludantoj en teamo"
-
-#, fuzzy
-#~ msgid "Most sold-out"
-#~ msgstr " La plej perfida : %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most useful"
-#~ msgstr " La plej malutila : %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most useless"
-#~ msgstr " La plej malutila : %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most violent"
-#~ msgstr " La plej perforta : %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Nobody!"
-#~ msgstr "Neniu"
-
-#, fuzzy
-#~ msgid "Number of teams:"
-#~ msgstr "Nombro da ludantoj en teamo"
-
-#, fuzzy
-#~ msgid "Player"
-#~ msgstr "Aktori"
-
-#, fuzzy
-#~ msgid "Unable to connect"
-#~ msgstr "Ne eblas malfermi aspektan dosierujon (%s)"
-
-#, fuzzy
-#~ msgid "Unable to contact server!"
-#~ msgstr " Ne eblas malfermi mapan dosierujon (%s)"
-
-#, fuzzy
-#~ msgid "Unable to contact top server!"
-#~ msgstr " Ne eblas malfermi mapan dosierujon (%s)"
-
-#, fuzzy
-#~ msgid "Unable to join the game..."
-#~ msgstr "Pafo en la malpleneco ..."
-
-#, fuzzy
-#~ msgid "Unable to listen for client!"
-#~ msgstr "Atendas klienton"
-
-#, fuzzy
-#~ msgid "Unable to start server"
-#~ msgstr " Ne eblas malfermi mapan dosierujon (%s)"
+#: src/menu/network_menu.cpp:142
+msgid "some opponents."
+msgstr ""
 
 #, fuzzy
 #~ msgid "  Most sold-out  :  "
@@ -805,6 +917,10 @@ msgstr ""
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Eraro muntante la aspektojn %s"
 
+#, fuzzy
+#~ msgid "Game options:"
+#~ msgstr "Ludaj opcioj"
+
 #~ msgid "Graphic options"
 #~ msgstr "Grafikaj opcioj"
 
@@ -858,6 +974,10 @@ msgstr ""
 
 #~ msgid "The game has ended as a draw.\n"
 #~ msgstr " La ludo finiĝis per egalvenko.\n"
+
+#, fuzzy
+#~ msgid "Unable to contact top server!"
+#~ msgstr " Ne eblas malfermi mapan dosierujon (%s)"
 
 #~ msgid "Unknow action"
 #~ msgstr "Nekonata agado"
