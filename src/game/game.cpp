@@ -56,6 +56,7 @@ Game * Game::GetInstance()
   return singleton;
 }
 
+
 Game::Game()
 {
   isGameLaunched = false;

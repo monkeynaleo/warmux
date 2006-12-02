@@ -40,21 +40,21 @@ std::string Format(const char *format, ...){
 	char buffer[bufferSize];
 	va_list argp;
 	std::string result;
-	
+
 	va_start(argp, format);
-	
+
 	int size = vsnprintf(buffer, bufferSize, format, argp);
-	
+
 	if( size < 0 )
 		Error( "Error formating string...");
-	
+
 	if( size < bufferSize)
 		result = std::string(buffer);
 	else{
 		char *bigBuffer = (char *)malloc( (size + 1) * sizeof(char) );
 		if( bigBuffer == NULL)
 			Error( "Out of memory !");
-		
+
 		size = vsnprintf(bigBuffer, size + 1, format, argp);
 		if( size < 0 )
 			Error( "Error formating string...");
@@ -64,7 +64,7 @@ std::string Format(const char *format, ...){
 	}
 
 	va_end(argp);
-	
+
 	return result;
 }
 
@@ -73,9 +73,9 @@ void I18N_SetDir(const std::string &dir){
   bind_textdomain_codeset (GETTEXT_DOMAIN, "UTF-8");
 }
 
-void InitI18N(){
+void InitI18N(const std::string &dir){
   setlocale (LC_ALL, "");
-  I18N_SetDir (Config::GetInstance()->GetLocaleDir().c_str());
+  I18N_SetDir (dir);
   textdomain(GETTEXT_DOMAIN);
 }
 

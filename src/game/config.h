@@ -29,6 +29,8 @@
 #include "../include/base.h"
 #include "../team/team_config.h"
 #include "../tool/xml_document.h"
+#include "../interface/keyboard.h"
+#include "../weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)
 #define PATH_SEPARATOR "\\"
@@ -68,6 +70,9 @@ public:
 
   int GetTransparency() const;
 
+  inline Clavier * GetKeyboard() { return my_keyboard; }
+  inline WeaponsList * GetWeaponsList() { return my_weapons_list; }
+
   std::string GetTtfFilename() const;
 
   std::string GetDataDir() const;
@@ -90,12 +95,11 @@ public:
   } tmp;
 
   static Config * GetInstance();
-  bool Load();
+// bool Load();
   void Apply();
   bool Save();
 
 protected:
-  bool ChargeVraiment();
   bool ChargeXml (xmlpp::Element *xml);
   void SetKeyboardConfig();
   bool SauveXml();
@@ -119,6 +123,9 @@ protected:
 
 private:
   Config();
+  Clavier * my_keyboard;
+  WeaponsList * my_weapons_list;
   static Config * singleton;
+  bool ChargeVraiment(void);
 };
 #endif

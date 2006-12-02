@@ -49,22 +49,14 @@
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
 
-Clavier * Clavier::singleton = NULL;
-
-Clavier * Clavier::GetInstance() {
-  if (singleton == NULL) {
-    singleton = new Clavier();
-  }
-  return singleton;
-}
-
 Clavier::Clavier()
-{}
-
-void Clavier::Reset()
 {
   //Disable repeated events when a key is kept down
   SDL_EnableKeyRepeat(0,0);
+}
+
+void Clavier::Reset()
+{
   for (int i = Action::ACTION_FIRST; i != Action::ACTION_LAST; i++)
     PressedKeys[i] = false ;
 }
@@ -209,7 +201,7 @@ void Clavier::HandleKeyPressed (const Action::Action_t &action)
       if ( weapon_sort > 0 )
         {
           Weapon::Weapon_type weapon;
-          if (weapons_list.GetWeaponBySort(weapon_sort, weapon))
+          if (Config::GetInstance()->GetWeaponsList()->GetWeaponBySort(weapon_sort, weapon))
             ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHANGE_WEAPON, weapon));
 
           return;

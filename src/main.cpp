@@ -100,7 +100,7 @@ int AppWormux::main (int argc, char **argv){
 	    break;
 	  }
         case menuQUIT:
-          quit = true; 
+          quit = true;
         default:
           break;
         }
@@ -128,11 +128,8 @@ int AppWormux::main (int argc, char **argv){
 void AppWormux::Init(int argc, char **argv){
   Config * config = Config::GetInstance();
 
-  InitI18N();
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
-
-  config->Load();
 
   video.InitWindow();
   InitFonts();
@@ -147,7 +144,7 @@ void AppWormux::DisplayLoadingPicture(){
   Config * config = Config::GetInstance();
 
   std::string txt_version = _("Version") + std::string(" ") + Constants::VERSION;
-  std::string filename = config->GetDataDir() 
+  std::string filename = config->GetDataDir()
     + PATH_SEPARATOR + "menu"
     + PATH_SEPARATOR + "img"
     + PATH_SEPARATOR + "loading.png";
@@ -161,11 +158,11 @@ void AppWormux::DisplayLoadingPicture(){
 
   Time::GetInstance()->Reset();
 
-  Text text1(_("Wormux launching..."), white_color, Font::GetInstance(Font::FONT_HUGE), true); 
-  Text text2(txt_version, white_color, Font::GetInstance(Font::FONT_HUGE), true); 
-  
+  Text text1(_("Wormux launching..."), white_color, Font::GetInstance(Font::FONT_HUGE), true);
+  Text text2(txt_version, white_color, Font::GetInstance(Font::FONT_HUGE), true);
+
   Point2i windowCenter = video.window.GetSize() / 2;
-  
+
   text1.DrawCenter( windowCenter );
   text2.DrawCenter( windowCenter + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE)).GetHeight() + 20 ));
 

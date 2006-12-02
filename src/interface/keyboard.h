@@ -40,17 +40,16 @@ private:
   // Traite une touche relachée
   void HandleKeyPressed (const Action::Action_t &action);
   void HandleKeyReleased (const Action::Action_t &action);
-  Clavier();
+
 
 public:
+  Clavier();
   typedef enum
   {
     KEY_PRESSED,
     KEY_RELEASED,
     KEY_REFRESH
   } Key_Event_t ;
-
-  static Clavier * GetInstance();
 
   void HandleKeyEvent( const SDL_Event *event) ;
   void Reset();

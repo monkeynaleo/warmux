@@ -182,7 +182,7 @@ void GameLoop::InitData()
 
   CharacterCursor::GetInstance()->Reset();
   Mouse::GetInstance()->Reset();
-  Clavier::GetInstance()->Reset();
+  Config::GetInstance()->GetKeyboard()->Reset();
 
   fps.Reset();
   if(network.IsConnected())
@@ -263,7 +263,7 @@ void GameLoop::RefreshInput()
         std::cout << "FIN PARTIE" << std::endl;
         return;
       }
-      Clavier::GetInstance()->HandleKeyEvent( &event);
+      Config::GetInstance()->GetKeyboard()->HandleKeyEvent( &event);
     }
   }
 
@@ -273,7 +273,7 @@ void GameLoop::RefreshInput()
         (ActiveTeam().GetWeapon().IsActive() &&
          ActiveTeam().GetWeapon().override_keys)) { // for driving supertux for example
       Mouse::GetInstance()->Refresh();
-      Clavier::GetInstance()->Refresh();
+      Config::GetInstance()->GetKeyboard()->Refresh();
       AIengine::GetInstance()->Refresh();
     }
     // Execute action

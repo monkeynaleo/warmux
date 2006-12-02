@@ -130,7 +130,7 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   xmlpp::Element *armes = LitDocXml::AccesBalise (xml, "weapons");
   if (armes != NULL)
   {
-    std::list<Weapon*> l_weapons_list = weapons_list.GetList() ;
+    std::list<Weapon*> l_weapons_list = Config::GetInstance()->GetWeaponsList()->GetList() ;
     std::list<Weapon*>::iterator
       itw = l_weapons_list.begin(),
       end = l_weapons_list.end();
