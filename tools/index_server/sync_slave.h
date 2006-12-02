@@ -6,6 +6,8 @@
 
 class IndexServerConn;
 
+const std::string sync_serv_version = "WIS";
+
 // List that contains informations about wormux client/server connected
 // on other index servers
 class SyncSlave : public std::list<IndexServerConn*>
@@ -28,7 +30,7 @@ class IndexServerConn : public NetData
 public:
 	IndexServerConn(const std::string &addr, int port);
 	~IndexServerConn();
-	bool HandleMsg(const IndexServerMsg & msg_id, const std::string & full_str);
+	bool HandleMsg(const std::string & full_str);
 };
 
 #endif

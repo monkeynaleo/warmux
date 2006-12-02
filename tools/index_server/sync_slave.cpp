@@ -5,12 +5,16 @@
 #include <sys/ioctl.h>
 #include "sync_slave.h"
 #include "config.h"
+#include "client.h"
 #include "net_data.h"
 #include "download.h"
 #include "debug.h"
 #include "../../src/network/index_svr_msg.h"
 
 SyncSlave sync_slave;
+
+// map < version, ip >
+std::multimap<std::string, FakeClient> fake_clients;
 
 SyncSlave::SyncSlave()
 {
@@ -114,9 +118,10 @@ IndexServerConn::~IndexServerConn()
 {
 }
 
-bool IndexServerConn::HandleMsg(const IndexServerMsg & msg_id, const std::string & full_str)
+bool IndexServerConn::HandleMsg(const std::string & full_str)
 {
 	int nbr;
+	int nbr2;
 	switch(msg_id)
 	{
 	case TS_MSG_VERSION:
@@ -125,10 +130,12 @@ bool IndexServerConn::HandleMsg(const IndexServerMsg & msg_id, const std::string
 			DPRINT(INFO,"Doesn't seem do be a valid server ..");
 			return false;
 		}
-		return true;
+		DPRINT(INFO,"Server identified..");
 		break;
 	case TS_MSG_WIS_VERSION:
-		if(!ReceiveInt(nbr))
+		if( received < 4 ) // The message is not completely received
+			return true;
+		if(!ReceiveInt(nbr)) // Receive the version number of the server index
 			return false;
 		if(nbr > VERSION)
 		{
@@ -141,14 +148,41 @@ bool IndexServerConn::HandleMsg(const IndexServerMsg & msg_id, const std::string
 			DPRINT(INFO,"This server is running an old version (v%i) !",nbr);
 			return false;
 		}
-		return true;
+		DPRINT(INFO,"We are running the same verion..");
 		break;
 	case TS_MSG_JOIN_LEAVE:
-		return true;
+		if( received < 8 ) // The message is not completely received
+			return true;
+		if(!ReceiveInt(nbr)) // Receive the IP of the wormux server
+			return false;
+		if(!ReceiveInt(nbr2)) // Receive the port of the wormux server
+			return false;
+		if(nbr2 < 0) // means it disconnected
+		{
+			std::multimap<std::string, FakeClient>::iterator serv = fake_clients.find( full_str );
+			if( serv != fake_clients.end() )
+			{
+				do
+				{
+					if( serv->second.ip == nbr 
+					&&  serv->second.port == - nbr2 ) 
+					{
+						fake_clients.erase( serv );
+						DPRINT(MSG, "A fake server disconnected");
+						break;
+					}
+				} while (serv != fake_clients.upper_bound(full_str));
+			}
+		}
+		else
+		{
+			fake_clients.insert( std::make_pair(full_str, FakeClient(nbr, nbr2)));
+		}
 		break;
 	default:
 		DPRINT(INFO,"Bad message!");
 		return false;
 	}
-	return false;
+	msg_id = TS_NO_MSG;
+	return true;
 }

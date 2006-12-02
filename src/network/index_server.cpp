@@ -307,6 +307,7 @@ void IndexServer::SendServerStatus()
   if(hidden_server)
     return;
   Send(TS_MSG_HOSTING);
+  Send(WORMUX_NETWORK_PORT_INT);
 }
 
 std::list<std::string> IndexServer::GetHostList()
@@ -318,7 +319,7 @@ std::list<std::string> IndexServer::GetHostList()
   {
     IPaddress ip;
     ip.host = ReceiveInt();
-    ip.port = 0;
+    ip.port = ReceiveInt();
     const char* addr = SDLNet_ResolveIP(&ip);
     if(addr != NULL)
       lst.push_back( std::string(addr) );

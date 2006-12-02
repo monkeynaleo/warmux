@@ -10,6 +10,7 @@ class Client : public NetData
 	std::string version;
 	bool handshake_done;
 	bool is_hosting;
+	int port; // port number where a game is hosted
 
 	bool SendSignature();
 	bool SendList();
@@ -20,8 +21,22 @@ public:
 	~Client();
 
 	// Return false if the client closed the connection
-	bool HandleMsg(const IndexServerMsg & msg_id, const std::string 
-& str);
+	bool HandleMsg(const std::string & str);
+
+	// Tell other index server that a new wormux server just registered
+	void NotifyServers(bool joining);
 };
 
+class FakeClient
+{
+public:
+	FakeClient(const int & _ip, const int & _port) 
+	{
+		ip = _ip;
+		port = _port;
+	}
+	int ip;
+	int port;
+};
+	
 #endif

@@ -8,7 +8,6 @@ class NetData
 {
 	char* str;
 	unsigned int str_size;
-	enum IndexServerMsg msg_id;
 
 	int fd;
 	int ip_address;
@@ -16,6 +15,7 @@ class NetData
 	bool connected;
 protected:
 	int received;
+	enum IndexServerMsg msg_id;
 
 	// Return false if the client closed the connection
 	bool ReceiveStr(std::string & full_str);
@@ -33,7 +33,7 @@ public:
 	void Host( const int & client_fd, const unsigned int & ip );
 	void ConnectTo( const std::string & address, const int & port);
 	bool Receive();
-	virtual bool HandleMsg(const IndexServerMsg & msg_id, const std::string & full_str) = 0;
+	virtual bool HandleMsg(const std::string & full_str) = 0;
 };
 
 #endif
