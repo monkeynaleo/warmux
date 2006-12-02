@@ -190,8 +190,9 @@ bool NetData::Receive()
 	}
 
 	std::string full_str = "";
-	// If a string is embedded in the msg, get it
-	if( msg_id == TS_MSG_VERSION )
+	// If a string is embedded in the msg, get it	{
+	if( msg_id == TS_MSG_VERSION
+	||  msg_id == TS_MSG_JOIN_LEAVE )
 	{
 		if( ! ReceiveStr(full_str) )
 			return false;
@@ -202,9 +203,7 @@ bool NetData::Receive()
 			return true;
 	}
 
-	bool result = HandleMsg( msg_id, full_str );
+	bool result = HandleMsg( full_str );
 
-	// We are ready to read a new message
-	msg_id = TS_NO_MSG;
 	return result;
 }
