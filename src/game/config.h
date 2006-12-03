@@ -16,9 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Configuration de Wormux : toutes les variables qui sont intéressantes à
- * modifier se retrouvent ici. Les variables ont une valeur par défaut qui
- * peut être modifiée avec le fichier de configuration.
+ * Configuration of Wormux : store game config of every tunable variable of Wormux.
+ * Vars have a default value and can be change with the file configuration.
  *****************************************************************************/
 
 #ifndef CONFIG_H
@@ -100,14 +99,14 @@ public:
   bool Save();
 
 protected:
-  bool ChargeXml (xmlpp::Element *xml);
+  bool LoadXml(xmlpp::Element *xml);
   void SetKeyboardConfig();
-  bool SauveXml();
+  bool SaveXml();
   std::string GetEnv(const std::string & name, const std::string &default_value);
 
   std::string m_game_mode;
-  bool m_xml_charge;
-  std::string m_nomfich;
+  bool m_xml_loaded;
+  std::string m_filename;
 
   std::string data_dir, locale_dir, personal_dir;
 
@@ -123,9 +122,10 @@ protected:
 
 private:
   Config();
+  // In french Clavier = keyboard
   Clavier * my_keyboard;
   WeaponsList * my_weapons_list;
   static Config * singleton;
-  bool ChargeVraiment(void);
+  bool DoLoading(void);
 };
 #endif

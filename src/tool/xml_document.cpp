@@ -231,67 +231,61 @@ xmlpp::Element* LitDocXml::racine() const
 
 //-----------------------------------------------------------------------------
 
-EcritDocXml::EcritDocXml()
+XmlWriter::XmlWriter()
 {
   m_doc = NULL;
-  m_racine = NULL;
-  m_sauve = false;
+  m_root = NULL;
+  m_save = false;
 }
 
-EcritDocXml::~EcritDocXml()
+XmlWriter::~XmlWriter()
 {
-  Sauve();
+  Save();
   delete m_doc;
 }
 
-bool EcritDocXml::EstOk() const
+bool XmlWriter::IsOk() const
 {
-  return (m_doc != NULL) && (m_racine != NULL);
+  return (m_doc != NULL) && (m_root != NULL);
 }
 
-void EcritDocXml::EcritBalise (xmlpp::Element *x, 
-			       const std::string &nom,
-			       const std::string &valeur)
+void XmlWriter::WriteElement(xmlpp::Element *x,
+                             const std::string &name,
+                             const std::string &value)
 {
-  xmlpp::Element *elem = x -> add_child(nom);
-  elem -> add_child_text (valeur);
-  m_sauve = false;
+  xmlpp::Element *elem = x->add_child(name);
+  elem->add_child_text(value);
+  m_save = false;
 }
 
-bool EcritDocXml::Cree (const std::string &nomfich, 
-			const std::string &racine,
-			const std::string &version, 
-			const std::string &encodage)
+bool XmlWriter::Create(const std::string &filename,const std::string &root,
+                       const std::string &version,const std::string &encoding)
 {
   delete m_doc;
-  delete m_racine;
-  m_sauve = false;
-  m_nomfich = nomfich;
-  m_encodage = encodage;
+  delete m_root;
+  m_save = false;
+  m_filename = filename;
+  m_encoding = encoding;
   m_doc = new xmlpp::Document(version);
-  m_racine = m_doc -> create_root_node (racine);
-  assert (m_racine != NULL);
+  m_root = m_doc->create_root_node(root);
+  assert(m_root != NULL);
   return true;
 }
 
-xmlpp::Element* EcritDocXml::racine()
+xmlpp::Element* XmlWriter::GetRoot()
 {
-  assert (m_racine != NULL);
-  return m_racine;
+  assert (m_root != NULL);
+  return m_root;
 }
 
-bool EcritDocXml::Sauve()
+bool XmlWriter::Save()
 {
-  if (m_sauve) return true;
-  m_sauve = true;
-  try
-  {
-    m_doc -> write_to_file_formatted(m_nomfich, m_encodage);
-  }
-  catch (const xmlpp::exception &err)
-  {
+  if (m_save) return true;
+  m_save = true;
+  try {
+    m_doc->write_to_file_formatted(m_filename, m_encoding);
+  } catch (const xmlpp::exception &err) {
     return false;
   }
   return true;
 }
-

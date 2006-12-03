@@ -52,7 +52,7 @@
 #endif
 
 
-const std::string NOMFICH="config.xml";
+const std::string FILENAME="config.xml";
 Config * Config::singleton = NULL;
 
 Config * Config::GetInstance() {
@@ -116,7 +116,7 @@ Config::Config()
 #endif
   InitI18N(locale_dir.c_str());
 
-  ChargeVraiment();
+  DoLoading();
   std::string dir = TranslateDirectory(locale_dir);
   I18N_SetDir (dir + PATH_SEPARATOR);
 
@@ -125,19 +125,19 @@ Config::Config()
 }
 
 
-bool Config::ChargeVraiment(void)
+bool Config::DoLoading(void)
 {
-  m_xml_charge=false;
+  m_xml_loaded = false;
   try
   {
     // Charge la configuration XML
     LitDocXml doc;
-    m_nomfich = personal_dir+NOMFICH;
-    if (!doc.Charge (m_nomfich))
+    m_filename = personal_dir + FILENAME;
+    if (!doc.Charge (m_filename))
       return false;
-    if (!ChargeXml (doc.racine()))
+    if (!LoadXml(doc.racine()))
       return false;
-    m_xml_charge = true;
+    m_xml_loaded = true;
   }
   catch (const xmlpp::exception &e)
   {
@@ -150,7 +150,7 @@ bool Config::ChargeVraiment(void)
 }
 
 // Read personal config file
-bool Config::ChargeXml(xmlpp::Element *xml)
+bool Config::LoadXml(xmlpp::Element *xml)
 {
   std::cout << "o " << _("Reading personal config file") << std::endl;
 
@@ -271,11 +271,11 @@ void Config::Apply()
 
   // load the teams
   teams_list.LoadList();
-  if (m_xml_charge)
+  if (m_xml_loaded)
     teams_list.InitList (tmp.teams);
 
   // Load maps
-  if (m_xml_charge && !tmp.map_name.empty())
+  if (m_xml_loaded && !tmp.map_name.empty())
     MapsList::GetInstance()->SelectMapByName (tmp.map_name);
   else
     MapsList::GetInstance()->SelectMapByIndex (0);
@@ -299,70 +299,64 @@ bool Config::Save()
     return false;
   }
 
-  if (!SauveXml())
-  {
-    return false;
-  }
-  return true;
+  return SaveXml();
 }
 
-bool Config::SauveXml()
+bool Config::SaveXml()
 {
-  EcritDocXml doc;
+  XmlWriter doc;
 
-  doc.Cree (m_nomfich, "config", "1.0", "utf-8");
-  xmlpp::Element *racine = doc.racine();
-  doc.EcritBalise (racine, "version", Constants::VERSION);
+  doc.Create(m_filename, "config", "1.0", "utf-8");
+  xmlpp::Element *root = doc.GetRoot();
+  doc.WriteElement(root, "version", Constants::VERSION);
 
   //=== Map ===
-  doc.EcritBalise (racine, "map", MapsList::GetInstance()->ActiveMap().ReadName());
+  doc.WriteElement(root, "map", MapsList::GetInstance()->ActiveMap().ReadName());
 
   //=== Teams ===
-  xmlpp::Element *balise_equipes = racine -> add_child("teams");
+  xmlpp::Element *team_elements = root->add_child("teams");
 
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
     fin=teams_list.playing_list.end();
   for (int i=0; it != fin; ++it, i++)
   {
-    xmlpp::Element *une_equipe = balise_equipes -> add_child("team_"+ulong2str(i));
-    doc.EcritBalise (une_equipe, "id", (**it).GetId());
-    doc.EcritBalise (une_equipe, "player_name", (**it).GetPlayerName());
-    doc.EcritBalise (une_equipe, "nb_characters", ulong2str((**it).GetNbCharacters()));
+    xmlpp::Element *a_team = team_elements->add_child("team_"+ulong2str(i));
+    doc.WriteElement(a_team, "id", (**it).GetId());
+    doc.WriteElement(a_team, "player_name", (**it).GetPlayerName());
+    doc.WriteElement(a_team, "nb_characters", ulong2str((**it).GetNbCharacters()));
   }
 
   //=== Video ===
   AppWormux * app = AppWormux::GetInstance();
 
-  xmlpp::Element *noeud_video = racine -> add_child("video");
-  doc.EcritBalise (noeud_video, "display_wind_particles", ulong2str(display_wind_particles));
-  doc.EcritBalise (noeud_video, "display_energy_character", ulong2str(display_energy_character));
-  doc.EcritBalise (noeud_video, "display_name_character", ulong2str(display_name_character));
-  doc.EcritBalise (noeud_video, "default_mouse_cursor", ulong2str(default_mouse_cursor));
-  doc.EcritBalise (noeud_video, "scroll_on_border", ulong2str(scroll_on_border));
-  doc.EcritBalise (noeud_video, "width", ulong2str(app->video.window.GetWidth()));
-  doc.EcritBalise (noeud_video, "height", ulong2str(app->video.window.GetHeight()));
-  doc.EcritBalise (noeud_video, "full_screen",
-		   ulong2str(static_cast<uint>(app->video.IsFullScreen())) );
-  doc.EcritBalise (noeud_video, "max_fps",
-          long2str(static_cast<int>(app->video.GetMaxFps())));
+  xmlpp::Element *video_node = root->add_child("video");
+  doc.WriteElement(video_node, "display_wind_particles", ulong2str(display_wind_particles));
+  doc.WriteElement(video_node, "display_energy_character", ulong2str(display_energy_character));
+  doc.WriteElement(video_node, "display_name_character", ulong2str(display_name_character));
+  doc.WriteElement(video_node, "default_mouse_cursor", ulong2str(default_mouse_cursor));
+  doc.WriteElement(video_node, "scroll_on_border", ulong2str(scroll_on_border));
+  doc.WriteElement(video_node, "width", ulong2str(app->video.window.GetWidth()));
+  doc.WriteElement(video_node, "height", ulong2str(app->video.window.GetHeight()));
+  doc.WriteElement(video_node, "full_screen",
+                   ulong2str(static_cast<uint>(app->video.IsFullScreen())) );
+  doc.WriteElement(video_node, "max_fps",
+                   long2str(static_cast<int>(app->video.GetMaxFps())));
 
-  if ( transparency == ALPHA )
-    doc.EcritBalise (noeud_video, "transparency", "alpha");
-  else if ( transparency == COLORKEY )
-    doc.EcritBalise (noeud_video, "transparency", "colorkey");
+  if (transparency == ALPHA)
+    doc.WriteElement(video_node, "transparency", "alpha");
+  else if (transparency == COLORKEY)
+    doc.WriteElement(video_node, "transparency", "colorkey");
 
   //=== Son ===
-  xmlpp::Element *noeud_son = racine -> add_child("sound");
-  doc.EcritBalise (noeud_son, "music", ulong2str(jukebox.UseMusic()));
-  doc.EcritBalise (noeud_son, "effects",
-		   ulong2str(jukebox.UseEffects()));
-  doc.EcritBalise (noeud_son, "frequency",
-		   ulong2str(jukebox.GetFrequency()));
+  xmlpp::Element *sound_node = root->add_child("sound");
+  doc.WriteElement(sound_node, "music",  ulong2str(jukebox.UseMusic()));
+  doc.WriteElement(sound_node, "effects", ulong2str(jukebox.UseEffects()));
+  doc.WriteElement(sound_node, "frequency", ulong2str(jukebox.GetFrequency()));
 
   //=== Mode de jeu ===
-  doc.EcritBalise (racine, "game_mode", m_game_mode);
-  return doc.Sauve();
+  doc.WriteElement(root, "game_mode", m_game_mode);
+  return doc.Save();
 }
 
 /*
