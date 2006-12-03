@@ -110,6 +110,7 @@ public:
   // Get current object speed
   void GetSpeed (double &norm, double &angle) const;
   void GetSpeedXY (Point2d &vector) const;
+  Point2d GetSpeed() const;
   double GetAngularSpeed() const;
   double GetSpeedAngle() const;
 
