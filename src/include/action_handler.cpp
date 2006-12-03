@@ -177,7 +177,8 @@ Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
 
 void Action_SetCharacterPhysics (Action *a)
 {
-  a->RetrieveCharacter();
+  while(!a->IsEmpty())
+    a->RetrieveCharacter();
 }
 
 void Action_SetCharacterEnergy(Action *a)
@@ -486,6 +487,7 @@ void ActionHandler::ExecActions()
   for(it = queue.begin(); it != queue.end() ; ++it)
   {
     SDL_LockMutex(mutex);
+    a = (*it);
     Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
     // If action is in the future, wait for next refresh
     if((*it)->GetTimestamp() > Time::GetInstance()->Read()) {

@@ -213,6 +213,13 @@ void Physics::GetSpeedXY(Point2d &vector) const
   vector.SetValues(m_pos_x.x1, m_pos_y.x1);
 }
 
+Point2d Physics::GetSpeed() const
+{
+  Point2d tmp;
+  GetSpeedXY(tmp);
+  return tmp;
+}
+
 double Physics::GetAngularSpeed() const
 {
   return m_rope_angle.x1 ;

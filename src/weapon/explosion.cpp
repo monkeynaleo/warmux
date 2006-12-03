@@ -197,6 +197,8 @@ void ApplyExplosion_server (const Point2i &pos,
     it=teams_list.playing_list.begin(),
     end=teams_list.playing_list.end();
 
+  Action* send_char = new Action(Action::ACTION_SET_CHARACTER_PHYSICS);
+
   for (int team_no = 0; it != end; ++it, ++team_no)
   {
     Team& team = **it;
@@ -214,11 +216,11 @@ void ApplyExplosion_server (const Point2i &pos,
       if (distance <= config.explosion_range || distance < config.blast_range)
       {
         // cliens : Place characters
-        Action* a = BuildActionSendCharacterPhysics(team_no, char_no);
-        action_handler->NewAction(a);
+        send_char->StoreCharacter(team_no, char_no);
       }
     }
   }
+  action_handler->NewAction(send_char);
 
   Action* a = new Action(Action::ACTION_EXPLOSION);
   a->Push(pos.x);
@@ -233,7 +235,6 @@ void ApplyExplosion_server (const Point2i &pos,
   a->Push(smoke);
 
   action_handler->NewAction(a);
-//  network.SendAction(&a);
   Action a_sync_end(Action::ACTION_SYNC_END);
   network.SendAction(&a_sync_end);
 }

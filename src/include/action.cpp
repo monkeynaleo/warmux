@@ -95,6 +95,11 @@ Action::Action_t Action::GetType() const
   return m_type;
 }
 
+bool Action::IsEmpty() const
+{
+  return var.empty();
+}
+
 void Action::SetTimestamp(uint timestamp)
 {
   m_timestamp = timestamp;
@@ -156,6 +161,18 @@ void Action::Push(double val)
 
   MSG_DEBUG( "action", " (%s) Pushing double : %f",
         ActionHandler::GetInstance()->GetActionName(m_type).c_str(), val);
+}
+
+void Action::Push(const Point2i& val)
+{
+  Push(val.x);
+  Push(val.y);
+}
+
+void Action::Push(const Point2d& val)
+{
+  Push(val.x);
+  Push(val.y);
 }
 
 void Action::Push(std::string val)
@@ -267,6 +284,23 @@ std::string Action::PopString()
   return str;
 }
 
+Point2i Action::PopPoint2i()
+{
+  int x, y;
+  x = PopInt();
+  y = PopInt();
+  return Point2i(x, y);
+}
+
+Point2d Action::PopPoint2d()
+{
+  double x, y;
+  x = PopDouble();
+  y = PopDouble();
+  return Point2d(x, y);
+}
+
+
 void Action::StoreActiveCharacter()
 {
   StoreCharacter(ActiveCharacter().GetTeamIndex() ,ActiveCharacter().GetCharacterIndex());
@@ -277,14 +311,10 @@ void Action::StoreCharacter(uint team_no, uint char_no)
   Push((int)team_no);
   Push((int)char_no);
   Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  Push(c->GetX());
-  Push(c->GetY());
+  Push(c->GetPosition());
   Push((int)c->GetDirection());
   Push(c->GetCrosshairAngle());
-  Point2d speed;
-  c->GetSpeedXY(speed);
-  Push(speed.x);
-  Push(speed.y);
+  Push(c->GetSpeed());
   Push((int)c->IsActiveCharacter());
 }
 
@@ -293,12 +323,10 @@ void Action::RetrieveCharacter()
   int team_no = PopInt();
   int char_no = PopInt();
   Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->SetX(PopInt());
-  c->SetY(PopInt());
+  c->SetXY(PopPoint2i());
   c->SetDirection((Body::Direction_t)PopInt());
   c->SetCrosshairAngle(PopInt());
-  Point2d speed(PopDouble(), PopDouble());
-  c->SetSpeedXY(speed);
+  c->SetSpeedXY(PopPoint2d());
   if(PopInt())
     ActiveTeam().SelectCharacter(char_no);
 }

@@ -239,7 +239,7 @@ void GameLoop::Init ()
   // First "selection" of a weapon -> fix bug 6576
   ActiveTeam().AccessWeapon().Select();
 
-  SetState (PLAYING, true);
+  SetState(PLAYING, true);
 }
 
 void GameLoop::RefreshInput()
@@ -455,7 +455,7 @@ void GameLoop::RefreshClock()
       case PLAYING:
         if (duration <= 1) {
            jukebox.Play("share", "end_turn");
-           SetState (END_TURN);
+           SetState(END_TURN);
         } else {
           duration--;
           Interface::GetInstance()->UpdateTimer(duration);
@@ -507,7 +507,8 @@ void GameLoop::SetState(int new_state, bool begin_game)
 
   state = new_state;
 
-  action_handler->ExecActions();
+  if(begin_game)
+    action_handler->ExecActions();
 
   Interface::GetInstance()->weapons_menu.Hide();
 
@@ -534,7 +535,8 @@ void GameLoop::SetState(int new_state, bool begin_game)
      character_already_chosen = false;
 
     // Prepare each character for a new turn
-    FOR_ALL_LIVING_CHARACTERS(team,character) character->PrepareTurn();
+    FOR_ALL_LIVING_CHARACTERS(team,character)
+        character->PrepareTurn();
 
     // Select the next team
     assert (!Game::GetInstance()->IsGameFinished());
@@ -698,16 +700,15 @@ void GameLoop::SignalCharacterDeath (Character *character)
   GameMessages::GetInstance()->Add (txt);
 
   // Turn end if the playing character is dead
-  if (character == &ActiveCharacter()) SetState (END_TURN);
+  if (character->IsActiveCharacter())
+    SetState(END_TURN);
 }
 
-// Signal falling or any king of damage of a character
+// Signal falling or any kind of damage of a character
 void GameLoop::SignalCharacterDamage(Character *character)
 {
   if (character->IsActiveCharacter())
-    {
-      SetState (END_TURN);
-    }
+    SetState(END_TURN);
 }
 
 // Apply Disease damage

@@ -27,6 +27,8 @@
 #include <iostream>
 #include <list>
 #include "base.h"
+#include "../tool/point.h"
+
 //-----------------------------------------------------------------------------
 
 class Action
@@ -90,9 +92,14 @@ public:
   void Push(int val);
   void Push(double val);
   void Push(std::string val);
+  void Push(const Point2i& val);
+  void Push(const Point2d& val);
   int PopInt();
   double PopDouble();
   std::string PopString();
+  Point2i PopPoint2i();
+  Point2d PopPoint2d();
+  bool IsEmpty() const;
 
   // Store character's information
   void StoreCharacter(uint team_no, uint char_no);
