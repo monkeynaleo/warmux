@@ -79,35 +79,31 @@ public:
 
 //-----------------------------------------------------------------------------
 
-class EcritDocXml
+class XmlWriter
 {
 protected:
   xmlpp::Document *m_doc;
-  xmlpp::Element *m_racine;
-  std::string m_nomfich;
-  bool m_sauve;
-  std::string m_encodage;
+  xmlpp::Element *m_root;
+  std::string m_filename;
+  bool m_save;
+  std::string m_encoding;
 
 public:
-  EcritDocXml();
-  ~EcritDocXml();
+  XmlWriter();
+  ~XmlWriter();
 
-  // Charge un document XML
-  bool Cree(const std::string &nomfich, const std::string &racine,
-	    const std::string &version, const std::string &encodage);
+  bool Create(const std::string &filename, const std::string &root,
+              const std::string &version, const std::string &encoding);
 
-  // Le document a ��correctement charg�?
-  bool EstOk() const;
+  bool IsOk() const;
 
-  // Lit la racine
-  xmlpp::Element* racine();
+  xmlpp::Element* GetRoot();
 
-  void EcritBalise (xmlpp::Element *x, 
-		    const std::string &nom,
-		    const std::string &valeur);
+  void WriteElement(xmlpp::Element *x,
+                    const std::string &name,
+                    const std::string &value);
 
-  // Sauve le document dans le fichier
-  bool Sauve();
+  bool Save();
 };
 
-#endif
+#endif /* XML_DOCUMENT_H */
