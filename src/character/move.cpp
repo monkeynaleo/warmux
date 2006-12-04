@@ -32,47 +32,51 @@
 #include "../sound/jukebox.h"
 #include "../tool/debug.h"
 
-// Hauteur qu'un character peut grimper au maximum
-#define HAUTEUR_GRIMPE_MAX 30
+// Max climbing height walking
+const int MAX_CLIMBING_HEIGHT=30;
 
-// Hauteur qu'un character peut chute (sans appeler la fonction Gravite)
-#define HAUTEUR_CHUTE_MAX 20
+// Max height for which we do not need to call the Physical Engine with gravity features
+const int MAX_FALLING_HEIGHT=20;
 
-// Pause entre deux deplacement
-#define PAUSE_CHG_SENS 80 // ms
+// Pause between changing direction
+const uint PAUSE_CHG_DIRECTION=80; // ms
 
-// Calcule la hauteur a chuter ou grimper lors d'un d�lacement horizontal
-// Renvoie true si le mouvement est possible
-bool CalculeHauteurBouge (Character &character, int &hauteur){
+// Compute the height to fall or to walk on when moving horizontally
+// Return a boolean which says if movement is possible
+bool ComputeHeightMovement(Character &character, int &height, 
+			   bool falling)
+{
   int y_floor=character.GetY();
 
   if( character.IsInVacuum( Point2i(character.GetDirection(), 0))
   && !character.IsInVacuum( Point2i(character.GetDirection(), +1)) ){
     //Land is flat, we can move!
-    hauteur = 0;
+    height = 0;
     return true;
   }
 
   //Compute height of the step:
   if( character.IsInVacuum( Point2i(character.GetDirection(), 0)) ){
     //Try to go down:
-    for(hauteur = 2; hauteur <= HAUTEUR_CHUTE_MAX ; hauteur++){
-      if( !character.IsInVacuum(Point2i(character.GetDirection(), hauteur))
-      ||  character.FootsOnFloor(y_floor+hauteur)){
-        hauteur--;
+    for(height = 2; height <= MAX_FALLING_HEIGHT ; height++){
+      if( !character.IsInVacuum(Point2i(character.GetDirection(), height))
+      ||  character.FootsOnFloor(y_floor+height)){
+        height--;
         return true;
       }
     }
     //We can go down, but the step is to big -> the character will fall.
-    character.SetX (character.GetX() +character.GetDirection());
-    character.UpdatePosition();
-    character.SetMovement("fall");
+    if (falling) {
+      character.SetX (character.GetX() +character.GetDirection());
+      character.UpdatePosition();
+      character.SetMovement("fall");
+    }
     return false;
   }
   else{
     //Try to go up:
-    for(hauteur = -1; hauteur >= -HAUTEUR_GRIMPE_MAX ; hauteur--)
-      if( character.IsInVacuum( Point2i(character.GetDirection(), hauteur) ) )
+    for(height = -1; height >= -MAX_CLIMBING_HEIGHT ; height--)
+      if( character.IsInVacuum( Point2i(character.GetDirection(), height) ) )
         return true;
   }
   //We can't move!
@@ -80,8 +84,9 @@ bool CalculeHauteurBouge (Character &character, int &hauteur){
 }
 
 // Bouge un character characters la droite ou la gauche (selon le signe de direction)
-void MoveCharacter(Character &character){
-  int hauteur;
+void MoveCharacter(Character &character)
+{
+  int height;
   bool fantome;
 
   // On est bien dans le monde ? (sinon, pas besoin de tester !)
@@ -96,7 +101,7 @@ void MoveCharacter(Character &character){
   }
 
   // Calcule la hauteur a descendre
-  if (!CalculeHauteurBouge (character, hauteur)) return;
+  if (!ComputeHeightMovement (character, height, true)) return;
 
   do
   {
@@ -105,12 +110,12 @@ void MoveCharacter(Character &character){
     // Deplace enfin le character
 
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),
-                             character.GetY() +hauteur) );
+                             character.GetY() +height) );
 
     // Gravite (s'il n'y a pas eu de collision
     character.UpdatePosition();
 
-  }while(character.CanStillMoveDG(PAUSE_BOUGE) && CalculeHauteurBouge (character, hauteur));
+  }while(character.CanStillMoveDG(PAUSE_MOVEMENT) && ComputeHeightMovement (character, height, true));
 }
 // Move a character to the left
 void MoveCharacterLeft(Character &character){
@@ -124,7 +129,7 @@ void MoveCharacterLeft(Character &character){
   }
   else{
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_CHARACTER_DIRECTION,-1));
-    character.InitMouvementDG (PAUSE_CHG_SENS);
+    character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
   //Refresh skin position across network
@@ -133,7 +138,8 @@ void MoveCharacterLeft(Character &character){
 }
 
 // Move a character to the right
-void MoveCharacterRight (Character &character){
+void MoveCharacterRight (Character &character)
+{
   // Le character est pret a bouger ?
   if (!character.MouvementDG_Autorise()) return;
 
@@ -145,7 +151,7 @@ void MoveCharacterRight (Character &character){
   else
   {
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_CHARACTER_DIRECTION,1));
-    character.InitMouvementDG (PAUSE_CHG_SENS);
+    character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
 
