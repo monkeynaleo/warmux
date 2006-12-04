@@ -29,6 +29,7 @@
 class PictureWidget : public Widget
 {
  private:
+  bool disabled;
   Sprite * spr;
 
  public:
@@ -39,6 +40,9 @@ class PictureWidget : public Widget
   void SetNoSurface();
   void Draw(const Point2i &mousePosition, Surface& surf);
   void SetSizePosition(const Rectanglei &rect);
+
+  // Apply a transparency color mask
+  void Disable();
 };
 
 #endif

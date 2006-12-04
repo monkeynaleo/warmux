@@ -73,6 +73,8 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   if (!display_only) {
     previews_box->AddWidget(bt_map_minus);
+  } else {
+    previews_box->AddWidget(new NullWidget(*bt_map_minus));
   }
 
   map_preview_before2 = new PictureWidget(Rectanglei(0, 0, map_preview_width *3/4, map_preview_height*3/4));
@@ -93,9 +95,20 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
   if (!display_only) {
     previews_box->AddWidget(bt_map_plus);
+  }else {
+    previews_box->AddWidget(new NullWidget(*bt_map_plus));
   }
 
   tmp_map_box->AddWidget(previews_box);
+  
+  if (display_only) {
+    map_preview_before2->Disable();
+    map_preview_before->Disable();
+    map_preview_selected->Disable();
+    map_preview_after->Disable();
+    map_preview_after2->Disable();
+  }
+
 
   // Map information
   map_name_label = new Label("Map", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL, Font::BOLD), dark_gray_color, true, false);
