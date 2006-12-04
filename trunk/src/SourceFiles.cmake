@@ -2,6 +2,8 @@
 SET(WORMUX_SRCS
 ai/ai_engine.cpp
 ai/ai_engine_stupid.cpp
+ai/ai_shoot_module.cpp
+ai/ai_movement_module.cpp
 character/body.cpp
 character/body_list.cpp
 character/character.cpp
