@@ -16,36 +16,54 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Artificial intelligence engine
+ * Artificial intelligence Movement module
  *****************************************************************************/
+#ifndef AI_MOVEMENT_MODULE
+#define AI_MOVEMENT_MODULE
 
-#include "ai_engine.h"
-#include <string>
-#include <iostream>
-#include "../ai/ai_engine_stupid.h"
-#include "../team/teams_list.h"
+#include "../tool/point.h"
 
-
-AIengine * AIengine::singleton = NULL;
-  
-AIengine::AIengine()
+class AIMovementModule
 {
-  std::cout << "o Artificial Intelligence engine initialization" << std::endl;
-}
+ private:
+  typedef enum {
+    NO_MOVEMENT,
+    WALKING,
+    BACK_TO_JUMP,
+    JUMPING,
+    FLYING,
+    ROPING,
+  } movement_type_t;
 
-AIengine* AIengine::GetInstance()
-{
-  if (singleton == NULL)
-    singleton = new AIengine();
+  uint m_current_time;
 
-  return singleton;
-}
+  Point2i last_position;
+  uint time_at_last_position; 
+  Point2i last_blocked_position;
+  movement_type_t current_movement;
 
-void AIengine::Refresh()
-{
-  if (ActiveCharacter().GetTeam().GetPlayerName() == "AI-stupid" 
-      && ActiveCharacter().GetTeam().IsLocalAI()) {
-    AIStupidEngine::GetInstance()->Refresh();
-  }
-  
-}
+  void InverseDirection();
+
+  void MakeStep();
+
+  void Walk();
+  void StopWalking();
+
+  void PrepareJump();
+  void GoBackToJump();
+  void Jump();
+  void EndOfJump();
+
+  bool ObstacleHeight(int& height);
+  bool RiskGoingOutOfMap();
+
+ public:
+  AIMovementModule();
+  void BeginTurn();
+
+  void Move(uint current_time);
+  void StopMoving();
+
+};
+
+#endif

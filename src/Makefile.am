@@ -9,6 +9,8 @@ fontfile=@FONTFILE@
 wormux_SOURCES = \
 	ai/ai_engine.cpp ai/ai_engine.h \
 	ai/ai_engine_stupid.cpp ai/ai_engine_stupid.h \
+	ai/ai_movement_module.cpp ai/ai_movement_module.h \
+	ai/ai_shoot_module.cpp ai/ai_shoot_module.h \
 	character/body.cpp character/body.h \
 	character/body_list.cpp character/body_list.h \
 	character/character.cpp character/character.h \
