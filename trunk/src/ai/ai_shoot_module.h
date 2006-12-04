@@ -16,36 +16,50 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Artificial intelligence engine
+ * Artificial intelligence Shoot module
  *****************************************************************************/
 
-#include "ai_engine.h"
-#include <string>
-#include <iostream>
-#include "../ai/ai_engine_stupid.h"
-#include "../team/teams_list.h"
+#ifndef AI_SHOOT_MODULE_H
+#define AI_SHOOT_MODULE_H
 
+#include "../character/character.h"
 
-AIengine * AIengine::singleton = NULL;
+class AIShootModule
+{
+ private:
+  typedef enum {
+    NO_STRATEGY,
+    NEAR_FROM_ENEMY,
+    SHOOT_FROM_POINT
+  } strategy_t; 
+
+  uint m_current_time;
   
-AIengine::AIengine()
-{
-  std::cout << "o Artificial Intelligence engine initialization" << std::endl;
-}
+  Character* m_enemy;
+  strategy_t m_current_strategy;
+  bool m_has_finished;
 
-AIengine* AIengine::GetInstance()
-{
-  if (singleton == NULL)
-    singleton = new AIengine();
+  int m_angle;
+  uint m_last_shoot_time;
 
-  return singleton;
-}
+  // for shooting weapons like gun, shotgun, sniper rifle, m16, ...
+  bool IsDirectlyShootable(Character& character);
+  bool FindShootableEnemy();
 
-void AIengine::Refresh()
-{
-  if (ActiveCharacter().GetTeam().GetPlayerName() == "AI-stupid" 
-      && ActiveCharacter().GetTeam().IsLocalAI()) {
-    AIStupidEngine::GetInstance()->Refresh();
-  }
-  
-}
+  // for proximity weapons like dynamite, mine, ...
+  bool IsNear(Character& character);
+  bool FindProximityEnemy();
+
+  // Watch the choosen enemy
+  void ChooseDirection();
+  Character* FindEnemy();
+
+  void Shoot();
+ public:
+  AIShootModule();
+  void BeginTurn();
+
+  bool Refresh(uint current_time);
+};
+
+#endif

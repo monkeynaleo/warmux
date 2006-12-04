@@ -23,40 +23,31 @@
 
 #include "../character/character.h"
 #include "../game/time.h"
+#include "ai_movement_module.h"
+#include "ai_shoot_module.h"
 
 class AIStupidEngine
 {
  private:
+
   static AIStupidEngine * singleton;
   AIStupidEngine();
 
+  AIMovementModule m_movement;
+  AIShootModule m_shoot;
+
   Character* m_last_char;
-  Character* m_nearest_enemy;
-  int m_angle;
+  Character* m_enemy;
 
   uint m_begin_turn_time;
-  uint m_last_shoot_time;
   uint m_step;
-
-  struct mouvement_t {
-    Point2i last_position;
-    uint time_at_last_position;    
-    bool is_walking;
-    bool is_jumping;
-  } m_mouvement;
 
   uint m_current_time;
 
  private:
   void BeginTurn(); 
+
   void ChooseDirection();
-
-  void ChooseWeapon();
-  bool IsDirectlyShootable(Character& character);
-  void Shoot();
-
-  void Walk();
-  void StopWalk();
 
  public:
   static AIStupidEngine* GetInstance();

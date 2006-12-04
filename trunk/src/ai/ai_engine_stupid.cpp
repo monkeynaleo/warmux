@@ -38,7 +38,7 @@ AIStupidEngine * AIStupidEngine::singleton = NULL;
 
 AIStupidEngine::AIStupidEngine()
 {
-  std::cout << "o Artificial Stupid engine Initialization" << std::endl;
+  std::cout << "o Artificial Intelligence Stupid engine initialization" << std::endl;
 }
 
 AIStupidEngine* AIStupidEngine::GetInstance()
@@ -49,293 +49,33 @@ AIStupidEngine* AIStupidEngine::GetInstance()
   return singleton;
 }
 
+// --------------------------------------------------
+
 void AIStupidEngine::BeginTurn()
 {
   m_last_char = &ActiveCharacter();
-  m_nearest_enemy = NULL;
+  m_enemy = NULL;
 
   m_begin_turn_time = 0;
-  m_last_shoot_time = 0;
   m_step = 0;
-  m_mouvement.is_walking = false;
-  m_mouvement.is_jumping = false;
 
-  // find the nearest enemy
-//   FOR_ALL_LIVING_ENEMIES(team, character) {
-//     if (m_nearest_enemy == NULL
-// 	|| ( character->GetCenter().Distance( ActiveCharacter().GetCenter()) <
-// 	     m_nearest_enemy->GetCenter().Distance( ActiveCharacter().GetCenter()))
-// 	)
-//       m_nearest_enemy = &(*character);
-//   }
-//   assert(m_nearest_enemy != NULL);
-
-  FOR_ALL_LIVING_ENEMIES(team, character) {
-    if ( IsDirectlyShootable(*character) ) {
-      m_nearest_enemy = &(*character);
-      std::cout << "Try to shoot " << (*character).GetName() << std::endl;
-
-      goto end_boucle;
-    } else {
-      std::cout << (*character).GetName() << "is not directly shootable" << std::endl;
-    }
-  }
-
-  std::cout <<std::endl;
- end_boucle:
-  ChooseDirection();
-
-  ChooseWeapon();
-}
-
-void AIStupidEngine::ChooseDirection()
-{
-  if ( m_nearest_enemy ) {
-
-    if ( ActiveCharacter().GetCenterX() < m_nearest_enemy->GetCenterX())
-      ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-    else
-      ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-
-  } else {
-    // we do not have found anybody to shoot
-    ActiveCharacter().SetDirection( randomSync.GetBool()?Body::DIRECTION_LEFT:Body::DIRECTION_RIGHT );
-  }
-
-}
-
-void AIStupidEngine::Walk()
-{
-  if (!m_mouvement.is_walking) {
-    ActiveCharacter().InitMouvementDG(100);
-    ActiveCharacter().body->StartWalk();
-
-    m_mouvement.is_walking = true;
-  }
-
-  // prepare to walk
-  if(ActiveCharacter().IsImmobile()) {
-    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT)
-      MoveCharacterRight(ActiveCharacter());
-    else
-      MoveCharacterLeft(ActiveCharacter());
-  }
-
-
-//   if ( m_current_time > m_mouvement.time_at_last_position +1 ) {
-
-    // We are on the ground, nothing to do for the moment
-    if ( ActiveCharacter().FootsInVacuum() ) {
-      return;
-    }
-
-    // Debug message
-    if ( m_current_time > m_mouvement.time_at_last_position +1 ) {
-
-      std::string s = "(" + ulong2str(m_mouvement.time_at_last_position) + "/";
-      s += ulong2str(m_current_time) + ") ";
-      s += " Current position : " + ulong2str(ActiveCharacter().GetPosition().GetX());
-      s += "," + ulong2str(ActiveCharacter().GetPosition().GetY());
-      GameMessages::GetInstance()->Add(s);
-    }
-
-
-    // We have finished to jump
-    if ( m_mouvement.is_jumping ) {
-      GameMessages::GetInstance()->Add("finished to jump");
-
-      m_mouvement.is_jumping = false;
-
-      // we have not moved since last mouvement
-      if ( m_mouvement.last_position == ActiveCharacter().GetPosition() ) {
-	GameMessages::GetInstance()->Add("stop moving");
-
-	StopWalk();
-	m_step++;
-      }
-
-    } else {
-      // we are blocked, try to jump!
-      if ( m_mouvement.last_position == ActiveCharacter().GetPosition() ) {
-	GameMessages::GetInstance()->Add("try to jump!");
-	m_mouvement.is_jumping = true;
-	ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_HIGH_JUMP));
-	return; // do not update position
-      }
-    }
-
-    // Update position if we are not jumping
-    m_mouvement.last_position = ActiveCharacter().GetPosition();
-    m_mouvement.time_at_last_position = m_current_time;
-    //  }
-
-}
-
-void AIStupidEngine::StopWalk()
-{
-  m_mouvement.is_walking = false;
-  ActiveCharacter().body->StopWalk();
-}
-
-void AIStupidEngine::ChooseWeapon()
-{
-
-  if ( m_nearest_enemy ) {
-    // we choose between gun, sniper_rifle, shotgun and submachine gun
-    uint selected = uint(randomSync.GetDouble(0.0, 3.5));
-    switch (selected) {
-    case 0:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_SHOTGUN);
-      if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-    case 1:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_SNIPE_RIFLE);
-      if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-    case 2:
-      //ActiveTeam().SetWeapon(WEAPON_SUBMACHINE_GUN);
-      //if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-    case 3:
-    default:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
-    }
-    ActiveTeam().crosshair.ChangeAngleVal(m_angle);
-    std::cout << "2-Angle Radian: " << ActiveTeam().crosshair.GetAngleRad() << std::endl;
-    std::cout << "2-Angle Degree: " << ActiveTeam().crosshair.GetAngle() << std::endl;
-
-  } else {
-    // we choose between dynamite, mine, polecart and gnu
-    uint selected = uint(randomSync.GetDouble(0.0, 3.5));
-
-    switch (selected) {
-    case 0:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_DYNAMITE);
-      if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-
-    case 1:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_GNU);
-      if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-
-    case 2:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_POLECAT);
-      if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-
-    case 3:
-    default:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_MINE);
-    }
-  }
-
-  // not enough ammo !!
-  if ( ! ActiveTeam().GetWeapon().EnoughAmmo() ) {
-    ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
-  }
-
-}
-
-// This method is not perfect
-// It tests from the Center of the current Character controlled by the AI
-// and not from the gun hole
-bool AIStupidEngine::IsDirectlyShootable(Character& character)
-{
-  Point2i pos = ActiveCharacter().GetCenter();
-  Point2i arrival = character.GetCenter();
-  Point2i departure = pos;
-  Point2i delta_pos;
-
-  double original_angle = pos.ComputeAngle(arrival);
-
-  // compute to see if there any part of ground between the 2 characters
-  // While test is not finished
-  while (pos != arrival) {
-
-    // is there a collision on the ground ??
-    if ( !world.EstDansVide(pos.x, pos.y)) {
-      return false;
-    }
-
-    // the point is outside the map
-    if ( world.EstHorsMondeX(pos.x) || world.EstHorsMondeY(pos.y) ) {
-      break;
-    }
-
-    // is there a collision with another character ?
-    FOR_ALL_CHARACTERS(team, other_character) {
-      if ( &(*other_character) != &ActiveCharacter()
-	   && &(*other_character) != &character ) {
-
-	if ( other_character->GetTestRect().Contains(pos) )
-	  return false;
-
-      }
-    }
-
-    // next step
-    int diff_x = pos.x - arrival.x;
-    int diff_y = pos.y - arrival.y;
-
-    delta_pos.x = 0;
-    delta_pos.y = 0;
-
-    if (abs(diff_x) > abs(diff_y)) {
-      if (pos.x < arrival.x)
-	delta_pos.x = 1;   //Increment x
-      else
-	delta_pos.x = -1;
-    } else {
-      if (pos.y < arrival.y)
-	delta_pos.y = 1;
-      else
-	delta_pos.y = -1;
-    }
-
-    pos += delta_pos;
-  }
-
-  // Convert radian angle into degree
-  m_angle = Rad2Deg(original_angle);
-
-  // Set direction
-  if (departure.x > arrival.x) {
-    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-    m_angle = int(InverseAngleDeg(double(m_angle)));
-  } else {
-    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-  }
-
-  // Prepare game message
-  std::string s = "Try to shoot "+character.GetName();
-  char buff[3];
-  sprintf(buff, "%d", m_angle); // to manage angle equals to 0
-  s += " with angle ";
-  s += buff;
-  GameMessages::GetInstance()->Add(s);
-
-  return true;
-}
-
-void AIStupidEngine::Shoot()
-{
-  if (m_current_time > m_last_shoot_time + 1 ||
-      m_last_shoot_time == 0) {
-    ActiveTeam().GetWeapon().NewActionShoot();
-    m_last_shoot_time = m_current_time;
-  }
-
-  if (!(ActiveTeam().GetWeapon().EnoughAmmoUnit())) {
-    m_step++;
-  }
+  m_movement.BeginTurn();
+  m_shoot.BeginTurn();
 }
 
 void AIStupidEngine::Refresh()
 {
+  if (ActiveCharacter().IsDead())
+    return;
+
   // new character to control
-  if (&ActiveCharacter() != m_last_char)
+  if (&ActiveCharacter() != m_last_char) {
     BeginTurn();
+  }
 
   // Get time
   uint local_time = Time::GetInstance()->ReadSec();
   if (local_time != m_current_time) {
-    //printf("TIME: %2d - begin:%2d - last shoot:%2d - Step: %d\n",
-    //	   local_time, m_begin_turn_time, m_last_shoot_time, m_step);
     m_current_time = local_time;
   }
 
@@ -343,51 +83,38 @@ void AIStupidEngine::Refresh()
   if (m_current_time < m_begin_turn_time + 3)
     return;
 
-  switch (m_step)
-    {
-    case 0:
-      if (m_nearest_enemy) {
-	// we already knows who to shoot
-	m_step = 3;
-      } else {
-	// walk
-	Walk();
-
-	if (m_current_time > m_begin_turn_time + 5)
-	  m_step++;
-      }
-      break;
-    case 1:
-      // Jump
-      StopWalk();
-      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_JUMP));
-      m_step++;
-      break;
-    case 2:
-      // used in the future
-      m_step++;
-      break;
-    case 3:
-      // shoot !!
-      Shoot();
-      break;
-    case 4:
-      // go go go !!
-      ChooseDirection();
-      m_step++;
-      break;
-    case 5:
-      //ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_HIGH_JUMP));
-      m_step++;
-      break;
-    case 6:
-      Walk();
-      break;
-    case 7:
-      break;
-    default:
-      assert(false);
-    }
+  if (m_shoot.Refresh(m_current_time)) {
+    m_movement.Move(m_current_time);
+  }
+  
+//   switch (m_step)
+//     {
+//     case 0:
+//       if (m_nearest_enemy) {
+// 	// we already knows who to shoot
+// 	m_step = 1;
+//       } else {
+// 	m_movement.Move(m_current_time);
+//       }
+//       break;
+//     case 1:
+//       // shoot !!
+//       m_shoot.Shoot(m_current_time);
+//       break;
+//     case 2:
+//       // go go go !!
+//       ChooseDirection();
+//       m_step++;
+//       break;
+//     case 3:
+//       m_movement.Move(m_current_time);
+//       break;
+//     case 4:
+//       // Wait for end of turn
+//       break;
+//     default:
+//       assert(false);
+//     }
 
 }
 
