@@ -623,7 +623,7 @@ void Character::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t eve
             case Action::ACTION_MOVE_LEFT:
             case Action::ACTION_MOVE_RIGHT:
               HideGameInterface();
-              InitMouvementDG(PAUSE_BOUGE);
+              InitMouvementDG(PAUSE_MOVEMENT);
               body->StartWalk();
               break;
             // WARNING!! ALL JUMP KEYS NEEDS TO BE PROCESSED AFTER ANY MOVEMENT KEYS
