@@ -257,6 +257,9 @@ void NetworkMenu::SaveOptions()
 
   }
 
+  // map
+  map_box->ValidMapSelection();
+
   //Save options in XML
 //  Config::GetInstance()->Save();
 }
