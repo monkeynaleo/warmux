@@ -101,7 +101,7 @@ Weapon::Weapon(Weapon_type type,
 
   channel_load = -1;
 
-  if (!use_flipping and (min_angle != max_angle))
+  if (!use_flipping and !EgalZero(min_angle - max_angle))
     use_flipping = true;
 
   extra_params = params;
@@ -109,7 +109,7 @@ Weapon::Weapon(Weapon_type type,
   if (m_visibility != NEVER_VISIBLE)
   {
     m_image = new Sprite( resource_manager.LoadImage(weapons_res_profile, m_id));
-    if(min_angle != max_angle)
+    if(!EgalZero(min_angle - max_angle))
       m_image->cache.EnableLastFrameCache();
   }
 
@@ -143,7 +143,7 @@ void Weapon::Select()
   ActiveCharacter().SetWeaponClothe();
 
   // is there a crosshair ?
-  if (min_angle != max_angle)
+  if (!EgalZero(min_angle - max_angle))
     ActiveTeam().crosshair.enable = true;
 
   p_Select();
@@ -218,10 +218,9 @@ void Weapon::NewActionShoot() const
 
 }
 
-void Weapon::PrepareShoot(double strength, int angle)
+void Weapon::PrepareShoot(double strength, double angle)
 {
   MSG_DEBUG("weapon_shoot", "Try to shoot");
-
   ActiveTeam().crosshair.ChangeAngleVal(angle);
   m_strength = strength;
   StopLoading();
@@ -315,7 +314,6 @@ const Point2i Weapon::GetGunHolePosition()
   return pos + Point2i(static_cast<int>(dst * cos(angle + ActiveTeam().crosshair.GetAngleRad())),
                        static_cast<int>(dst * sin(angle + ActiveTeam().crosshair.GetAngleRad())));
 }
-
 
 bool Weapon::EnoughAmmo() const
 {
@@ -462,16 +460,16 @@ void Weapon::Draw(){
     return;
 
   // Reset the Sprite:
-  m_image->SetRotation_deg(0.0);
+  m_image->SetRotation_rad(0.0);
   m_image->Scale(1.0,1.0);
 
   // rotate weapon if needed
-  if (min_angle != max_angle)
+  if (!EgalZero(min_angle - max_angle))
   {
     if(ActiveCharacter().GetDirection() == 1)
-      m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
+      m_image->SetRotation_rad (ActiveTeam().crosshair.GetAngleRad());
     else
-      m_image->SetRotation_deg (ActiveTeam().crosshair.GetAngle() - 180.0);
+      m_image->SetRotation_rad (ActiveTeam().crosshair.GetAngleRad() - M_PI);
   }
 
   // flip image if needed
@@ -487,11 +485,11 @@ void Weapon::Draw(){
   // Animate the display of the weapon:
   if( m_time_anim_begin + ANIM_DISPLAY_TIME > Time::GetInstance()->Read())
   {
-    if (min_angle != max_angle)
+    if (!EgalZero(min_angle - max_angle))
     {
-      float angle = m_image->GetRotation_deg();
-      angle += sin( M_PI_2 * double(Time::GetInstance()->Read() - m_time_anim_begin) /(double) ANIM_DISPLAY_TIME) * 360.0;
-      m_image->SetRotation_deg (angle);
+      double angle = m_image->GetRotation_rad();
+      angle += sin( M_PI_2 * double(Time::GetInstance()->Read() - m_time_anim_begin) /(double) ANIM_DISPLAY_TIME) * 2 * M_PI;
+      m_image->SetRotation_rad (angle);
     }
     else
     {
@@ -513,7 +511,7 @@ void Weapon::DrawWeaponFire()
   Point2i size = m_weapon_fire->GetSize();
   size.x = (ActiveCharacter().GetDirection() == 1 ? 0 : size.x);
   size.y /= 2;
-  m_weapon_fire->SetRotation_deg (ActiveTeam().crosshair.GetAngle());
+  m_weapon_fire->SetRotation_rad (ActiveTeam().crosshair.GetAngleRad());
   m_weapon_fire->Draw( GetGunHolePosition() - size );
 }
 
@@ -579,8 +577,11 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   // angle of weapon when drawing
   // if (min_angle == max_angle) no cross_hair !
   // between -90 to 90 degrees
-  LitDocXml::LitInt (elem, "min_angle", min_angle);
-  LitDocXml::LitInt (elem, "max_angle", max_angle);
+  int min_angle_deg = 0, max_angle_deg = 0;
+  LitDocXml::LitInt (elem, "min_angle", min_angle_deg);
+  LitDocXml::LitInt (elem, "max_angle", max_angle_deg);
+  min_angle = static_cast<double>(min_angle_deg) * M_PI / 180.0;
+  max_angle = static_cast<double>(max_angle_deg) * M_PI / 180.0;
 
   // Load extra parameters if existing
   if (extra_params != NULL) extra_params->LoadXml(elem);

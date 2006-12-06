@@ -36,6 +36,7 @@ class c_junction; //defined in body.h
 class Member
 {
   Member* parent;
+  double angle_rad;
 protected:
   Point2f anchor;
 
@@ -48,7 +49,6 @@ public:
   Point2f pos;
   Point2f scale;
   float alpha;
-  int angle;
   std::string type;
   bool go_through_ground;
 
@@ -61,6 +61,7 @@ public:
   void ApplySqueleton(Member* parent_member);
   void ApplyMovement(member_mvt& mvt, std::vector<class c_junction>& squel_lst);
   const Point2i GetPos();
+  inline void SetAngle(const double &angle) { angle_rad = angle; };
 };
 
 class WeaponMember : public Member

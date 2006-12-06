@@ -18,7 +18,7 @@
  ******************************************************************************
  * Sprite:     Simple sprite management
  ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
  *             Initial version
  *****************************************************************************/
 
@@ -33,9 +33,9 @@
 #include "include/base.h"
 
 typedef enum {
-  top_left, 
-  top_center, 
-  top_right, 
+  top_left,
+  top_center,
+  top_right,
   left_center,
   center,
   right_center,
@@ -50,7 +50,7 @@ class Sprite
 public:
   SpriteCache cache;
   SpriteAnimation animation;
-	
+
 public:
   explicit Sprite();
   explicit Sprite( Surface surface);
@@ -58,10 +58,10 @@ public:
 
   void Init(Surface& surface, const Point2i &frameSize, int nb_frames_x, int nb_frames_y);
   Surface GetSurface();
-   
+
   // Frame number
   unsigned int GetCurrentFrame() const;
-  void SetCurrentFrame( unsigned int frame_no);    
+  void SetCurrentFrame( unsigned int frame_no);
   unsigned int GetFrameCount();
 
   // Size
@@ -82,12 +82,12 @@ public:
   void ScaleSize(Point2i size);
 
   // Rotation
-  void SetRotation_deg( float angle_deg);
-  float GetRotation_deg();
+  void SetRotation_rad( double angle_rad);
+  const double &GetRotation_rad();
   void SetRotation_HotSpot( const Point2i new_hotspot);
   void SetRotation_HotSpot( const Rotation_HotSpot rhs) { rot_hotspot = rhs; };
   const Point2i& GetRotationPoint() { return rotation_point; };
-  
+
   SpriteFrame& operator[] (unsigned int frame_no);
   const SpriteFrame& operator[] (unsigned int frame_no) const;
   const SpriteFrame& GetCurrentFrameObject() const;
@@ -127,16 +127,15 @@ public:
 private:
    Surface current_surface;
    bool show;
-
    // Frames
    unsigned int current_frame;
    int frame_width_pix,frame_height_pix;
    std::vector<SpriteFrame> frames;
-   
+
    // Gfx
    float alpha;
    float scale_x,scale_y;
-   float rotation_deg;
+   double rotation_rad;
    Point2i rhs_pos;
    Rotation_HotSpot rot_hotspot;
    Point2i rotation_point;

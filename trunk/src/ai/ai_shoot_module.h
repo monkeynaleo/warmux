@@ -31,15 +31,15 @@ class AIShootModule
     NO_STRATEGY,
     NEAR_FROM_ENEMY,
     SHOOT_FROM_POINT
-  } strategy_t; 
+  } strategy_t;
 
   uint m_current_time;
-  
+
   Character* m_enemy;
   strategy_t m_current_strategy;
   bool m_has_finished;
 
-  int m_angle;
+  double m_angle;
   uint m_last_shoot_time;
 
   // for shooting weapons like gun, shotgun, sniper rifle, m16, ...

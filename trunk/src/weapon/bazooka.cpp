@@ -41,15 +41,13 @@ RoquetteBazooka::RoquetteBazooka(ExplosiveWeaponConfig& cfg,
 void RoquetteBazooka::Refresh()
 {
   WeaponProjectile::Refresh();
-
-  double angle = GetSpeedAngle() *180/M_PI;
-  image->SetRotation_deg( angle);
+  image->SetRotation_rad(GetSpeedAngle());
   smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                    GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
 }
 
 void RoquetteBazooka::SignalOutOfMap()
-{ 
+{
   GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 }
@@ -58,7 +56,7 @@ void RoquetteBazooka::SignalOutOfMap()
 
 Bazooka::Bazooka() :
   WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
-{  
+{
   m_name = _("Bazooka");
   ReloadLauncher();
 }

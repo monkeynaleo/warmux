@@ -59,6 +59,14 @@ Action::Action (Action_t type, const std::string& value) : m_type(type)
   m_timestamp = Time::GetInstance()->Read();
 }
 
+Action::Action (Action_t type, double value1, double value2) : m_type(type)
+{
+  var.clear();
+  Push(value1);
+  Push(value2);
+  m_timestamp = Time::GetInstance()->Read();
+}
+
 Action::Action (Action_t type, double value1, int value2) : m_type(type)
 {
   var.clear();
@@ -325,7 +333,7 @@ void Action::RetrieveCharacter()
   Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   c->SetXY(PopPoint2i());
   c->SetDirection((Body::Direction_t)PopInt());
-  c->SetCrosshairAngle(PopInt());
+  c->SetCrosshairAngle(PopDouble());
   c->SetSpeedXY(PopPoint2d());
   if(PopInt())
     ActiveTeam().SelectCharacter(char_no);

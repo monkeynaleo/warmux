@@ -79,6 +79,7 @@ public:
   Action (Action_t type, int value);
   Action (Action_t type, double value);
   Action (Action_t type, double value1, int value2);
+  Action (Action_t type, double value1, double value2);
   Action (Action_t type, const std::string& value);
 
   // Build an action from a network packet

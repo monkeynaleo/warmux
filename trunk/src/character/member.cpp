@@ -138,7 +138,7 @@ Member::~Member()
 
 void Member::RotateSprite()
 {
-  spr->SetRotation_deg(angle);
+  spr->SetRotation_rad(angle_rad);
   spr->Scale(scale.x, scale.y);
   spr->RefreshSurface();
 }
@@ -152,13 +152,13 @@ void Member::Draw(const Point2i & _pos, int flip_center, int direction)
 
   if(direction == 1)
   {
-    spr->SetRotation_deg(angle);
+    spr->SetRotation_rad(angle_rad);
     spr->Scale(scale.x,scale.y);
   }
   else
   {
     spr->Scale(-scale.x,scale.y);
-    spr->SetRotation_deg(-angle);
+    spr->SetRotation_rad(-angle_rad);
     posi.x = 2 * flip_center - posi.x - spr->GetWidth();
   }
 
@@ -177,7 +177,7 @@ void Member::ResetMovement()
 {
   pos.x = 0;
   pos.y = 0;
-  angle = 0;
+  angle_rad = 0;
   alpha = 1.0;
   scale.x = 1.0;
   scale.y = 1.0;
@@ -228,15 +228,13 @@ void Member::ApplyMovement(member_mvt &mvt, std::vector<junction>& squel_lst)
       {
         // Calculate the movement to apply to the child
         member_mvt child_mvt;
-        child_mvt.angle = mvt.angle;
+        child_mvt.SetAngle(mvt.GetAngle());
         child_mvt.pos = mvt.pos;
         float radius = anchor.Distance(child->second[frame]);
 
         if(radius != 0.0)
         {
           float angle_init;
-          float angle_r = angle * M_PI / 180.0;
-          float mvt_angle_r = mvt.angle * M_PI / 180.0;
 
           if(child->second[frame].x > anchor.x)
           {
@@ -253,8 +251,8 @@ void Member::ApplyMovement(member_mvt &mvt, std::vector<junction>& squel_lst)
               angle_init = M_PI + acos( -(child->second[frame].x - anchor.x) / radius );
           }
 
-          child_mvt.pos.x += radius * (cos(angle_init + angle_r + mvt_angle_r) - cos(angle_init + angle_r));
-          child_mvt.pos.y += radius * (sin(angle_init + angle_r + mvt_angle_r) - sin(angle_init + angle_r));
+          child_mvt.pos.x += radius * (cos(angle_init + angle_rad + mvt.GetAngle()) - cos(angle_init + angle_rad));
+          child_mvt.pos.y += radius * (sin(angle_init + angle_rad + mvt.GetAngle()) - sin(angle_init + angle_rad));
         }
         // Apply recursively to childrens:
         member->member->ApplyMovement(child_mvt, squel_lst);
@@ -263,7 +261,7 @@ void Member::ApplyMovement(member_mvt &mvt, std::vector<junction>& squel_lst)
   }
 
   // Apply the movement to the current member
-  angle += mvt.angle;
+  SetAngle(angle_rad + mvt.GetAngle());
   pos += mvt.pos;
   alpha *= mvt.alpha;
   scale = scale * mvt.scale;

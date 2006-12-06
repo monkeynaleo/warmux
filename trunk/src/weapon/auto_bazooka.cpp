@@ -73,7 +73,7 @@ void RPG::Refresh()
   {
     // rocket is turning around herself
     angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
-    if(angle_local > M_PI) angle_local = - M_PI;
+    if(angle_local > M_PI) angle_local = -M_PI;
 
     // TPS_AV_ATTIRANCE msec later being launched, the rocket is homing to the target
     if(flying_time>1000 * acfg.seek_time)
@@ -94,9 +94,9 @@ void RPG::Refresh()
     if(flying_time - acfg.seek_time < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                        GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
-      float wish_angle = GetPosition().ComputeAngle( m_target );
-      float max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
-      float diff = fmod(wish_angle-angle_local, M_PI*2);
+      double wish_angle = GetPosition().ComputeAngle( m_target );
+      double max_rotation = fabs(acfg.max_controlled_turn_speed * timestep / 1000.);
+      double diff = fmod(wish_angle-angle_local, M_PI*2);
       if(diff < -M_PI) diff += M_PI*2;
       if(diff > M_PI) diff -= M_PI*2;
       //diff should now be between -M_PI and M_PI...
@@ -120,7 +120,7 @@ void RPG::Refresh()
     SetExternForce(m_force, angle_local);
 
   }
-  image->SetRotation_deg(angle_local *180/M_PI);
+  image->SetRotation_rad(angle_local);
 }
 
 void RPG::SignalOutOfMap()

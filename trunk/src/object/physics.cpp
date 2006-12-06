@@ -286,7 +286,7 @@ void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
       // Compute the initial angle
       V.x = fix_point_x - g_x ;
       V.y = fix_point_y - g_y ;
-      m_rope_angle.x0 = M_PI/2 - V.ComputeAngle() ;
+      m_rope_angle.x0 = M_PI_2 - V.ComputeAngle() ;
 
       // Convert the linear speed to angular speed.
       m_rope_angle.x1 = (m_pos_x.x1 * cos(m_rope_angle.x0) +
@@ -464,6 +464,7 @@ void Physics::ComputeFallNextXY (double delta_t)
   // Equation on Y axys : m.y'' + k.y' = m.g
   m_pos_y.ComputeOneEulerStep(m_mass, air_resistance_factor, 0,
 		      weight_force + m_extern_force.y, delta_t);
+
 
     // printf ("F : Pd(%5f) EF(%5f)\n", weight_force, m_extern_force.y);
 

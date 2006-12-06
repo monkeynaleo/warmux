@@ -50,8 +50,7 @@ void Cluster::Shoot (int x, int y)
 
 void Cluster::Refresh()
 {
-  double angle = GetSpeedAngle() * 180/M_PI ;
-  image->SetRotation_deg( angle );
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 void Cluster::SignalOutOfMap()
@@ -78,8 +77,7 @@ ClusterBomb::ClusterBomb(ClusterBombConfig& cfg,
 void ClusterBomb::Refresh()
 {
   WeaponProjectile::Refresh();
-  double angle = GetSpeedAngle() * 180/M_PI ;
-  image->SetRotation_deg( angle);
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 void ClusterBomb::SignalOutOfMap()
@@ -105,9 +103,9 @@ void ClusterBomb::DoExplosion()
 
 //-----------------------------------------------------------------------------
 
-ClusterLauncher::ClusterLauncher() : 
+ClusterLauncher::ClusterLauncher() :
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
-{  
+{
   m_name = _("Cluster Bomb");
   ignore_collision_signal = true;
   ReloadLauncher();

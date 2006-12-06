@@ -22,7 +22,7 @@
 
 class EulerVector{
 	public:
-		double x0, x1, x2; 
+		double x0, x1, x2;
 
 		EulerVector() { Clear(); };
 		void Clear();

@@ -45,7 +45,7 @@ class AIStupidEngine
   uint m_current_time;
 
  private:
-  void BeginTurn(); 
+  void BeginTurn();
 
   void ChooseDirection();
 

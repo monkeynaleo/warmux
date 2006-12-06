@@ -35,16 +35,14 @@
 RoquetteRiotBomb::RoquetteRiotBomb(ExplosiveWeaponConfig& cfg,
                                    WeaponLauncher * p_launcher) :
   WeaponProjectile ("riot_rocket", cfg, p_launcher)
-{  
+{
   explode_colliding_character = true;
 }
 
 void RoquetteRiotBomb::Refresh()
 {
   WeaponProjectile::Refresh();
-
-  double angle = GetSpeedAngle() *180/M_PI;
-  image->SetRotation_deg( angle);
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 void RoquetteRiotBomb::SignalOutOfMap()
@@ -62,7 +60,7 @@ void RoquetteRiotBomb::DoExplosion()
 
 RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
-{  
+{
   m_name = _("Riot Bomb");
   ReloadLauncher();
 }

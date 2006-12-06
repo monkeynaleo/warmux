@@ -107,19 +107,25 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
     LitDocXml::LitDouble (character_xml, "air_resist_factor", character.air_resist_factor);
     item = LitDocXml::AccesBalise (character_xml, "jump");
     if (item != NULL) {
+      int angle_deg;
       LitDocXml::LitAttrUint (item, "strength", character.jump_strength);
-      LitDocXml::LitAttrInt  (item, "angle", character.jump_angle);
+      LitDocXml::LitAttrInt  (item, "angle", angle_deg);
+      character.jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
 
     item = LitDocXml::AccesBalise (character_xml, "super_jump");
     if (item != NULL) {
+      int angle_deg;
       LitDocXml::LitAttrUint (item, "strength", character.super_jump_strength);
-      LitDocXml::LitAttrInt  (item, "angle", character.super_jump_angle);
+      LitDocXml::LitAttrInt  (item, "angle", angle_deg);
+      character.super_jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
     item = LitDocXml::AccesBalise (character_xml, "back_jump");
     if (item != NULL) {
+      int angle_deg;
       LitDocXml::LitAttrUint (item, "strength", character.back_jump_strength);
-      LitDocXml::LitAttrInt  (item, "angle", character.back_jump_angle);
+      LitDocXml::LitAttrInt  (item, "angle", angle_deg);
+      character.back_jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
     xmlpp::Element *explosion = LitDocXml::AccesBalise (character_xml, "death_explosion");
     if (explosion != NULL)

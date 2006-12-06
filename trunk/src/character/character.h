@@ -53,7 +53,6 @@ private:
   int  max_damage;
   int  current_total_damage;
   EnergyBar energy_bar;
-  int crosshair_angle;
 
   // survived games
   int survivals;
@@ -89,6 +88,7 @@ private:
   void SignalCollision();
   void SetBody(Body* char_body);
 
+  double crosshair_angle;
 public:
 
   Character (Team& my_team, const std::string &name, Body *char_body);
@@ -125,8 +125,8 @@ public:
   void DoShoot();
   void HandleShoot(Clavier::Key_Event_t event_type);
   void SaveCrosshairAngle();
-  int GetCrosshairAngle() const;
-  void SetCrosshairAngle(int angle);
+  double GetCrosshairAngle() const;
+  void SetCrosshairAngle(double angle);
 
   // Show hide the Character
   void Hide();
@@ -138,7 +138,7 @@ public:
   bool CanJump() const;
 
   // Jumps
-  void Jump(double strength, int angle);
+  void Jump(double strength, double angle);
   void Jump();
   void HighJump();
   void BackJump();

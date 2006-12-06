@@ -140,8 +140,6 @@ public:
   //Force weapons to use keys when true
   bool force_override_keys ;
 
-  // Angle in degrees between -90 to 90
-  int min_angle, max_angle;
   bool use_flipping;
 
 protected:
@@ -191,7 +189,7 @@ public:
 
   // Prepare the shoot : set the angle and strenght of the weapon
   // Begin the shooting animation of the character
-  void PrepareShoot(double strength, int angle);
+  void PrepareShoot(double strength, double angle);
 
   // Shot with the weapon
   // Return true if we have been able to trigger the weapon
@@ -249,6 +247,14 @@ public:
   // This is used in weapons like the automated bazooka, where it's required
   // a target. Default is true.
   bool mouse_character_selection;
+
+  inline void SetMinAngle(double min) {min_angle = min;}
+  inline const double &GetMinAngle() const {return min_angle;}
+  inline void SetMaxAngle(double max) {max_angle = max;}
+  inline const double &GetMaxAngle() const {return max_angle;}
+private:
+  // Angle in radian between -PI to PI
+  double min_angle, max_angle;
 };
 
 //-----------------------------------------------------------------------------

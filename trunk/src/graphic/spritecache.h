@@ -18,7 +18,7 @@
  ******************************************************************************
  * Sprite cache.
  ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
  *             Initial version
  *****************************************************************************/
 
@@ -34,11 +34,13 @@ class Sprite;
 class SpriteFrameCache
 {
   bool use_rotation;
-  
-public:
-  Surface flipped_surface;
   std::vector<Surface> rotated_surface;
   std::vector<Surface> rotated_flipped_surface;
+
+public:
+  Surface flipped_surface;
+  Surface GetFlippedSurfaceForAngle(double angle) const;
+  Surface GetSurfaceForAngle(double angle) const;
 
   SpriteFrameCache();
   void CreateRotationCache(Surface &surface, unsigned int cache_size);
@@ -48,9 +50,9 @@ public:
 class SpriteCache
 {
   Sprite &sprite;
-   
+
 // TODO: Remove "public:" :-)
-public:    
+public:
   bool have_rotation_cache;
   unsigned int rotation_cache_size;
   bool have_flipping_cache;
@@ -58,14 +60,14 @@ public:
   Surface last_frame;
   std::vector<SpriteFrameCache> frames;
 
-public:  
+public:
   explicit SpriteCache(Sprite &sprite);
-  
+
   void EnableRotationCache(std::vector<SpriteFrame> &frames, unsigned int cache_size);
   void EnableFlippingCache(std::vector<SpriteFrame> &frames);
   void EnableLastFrameCache();
   void DisableLastFrameCache();
   void InvalidLastFrame();
-};   
+};
 
 #endif /* _SPRITE_CACHE_H */

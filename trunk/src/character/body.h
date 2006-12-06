@@ -74,7 +74,7 @@ private:
   uint current_frame;
   int walk_events;
 
-  int main_rotation;
+  double main_rotation_rad;
 
   std::vector<junction> squel_lst; // Squeleton of the body:
                                         // Order to use to build the body
@@ -106,7 +106,7 @@ public:
   void SetMovement(std::string name);
   void SetClotheOnce(std::string name); //use this only during one movement
   void SetMovementOnce(std::string name); //play the movement only once
-  void SetRotation(int angle);
+  void SetRotation(double angle);
   void SetFrame(uint no);
   void SetDirection(Body::Direction_t dir);
   inline void SetOwner(const Character* belonger) { owner = belonger; };

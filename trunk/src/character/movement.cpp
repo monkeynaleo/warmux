@@ -67,6 +67,7 @@ Movement::Movement(xmlpp::Element *xml)
 
       member_mvt mvt;
       int dx, dy;
+      int angle_deg = 0;
       dx = dy = 0;
       double scale_x, scale_y, tmp_alpha;
       scale_x = scale_y = tmp_alpha = 1.0;
@@ -75,12 +76,13 @@ Movement::Movement(xmlpp::Element *xml)
       LitDocXml::LitAttrDouble(elem2, "scale_x", scale_x);
       LitDocXml::LitAttrDouble(elem2, "scale_y", scale_y);
       LitDocXml::LitAttrDouble(elem2, "alpha", tmp_alpha);
-      LitDocXml::LitAttrInt(elem2, "angle", mvt.angle);
+      LitDocXml::LitAttrInt(elem2, "angle", angle_deg);
       LitDocXml::LitAttrBool(elem2, "follow_crosshair", mvt.follow_crosshair);
       LitDocXml::LitAttrBool(elem2, "follow_half_crosshair", mvt.follow_half_crosshair);
       LitDocXml::LitAttrBool(elem2, "follow_speed", mvt.follow_speed);
       LitDocXml::LitAttrBool(elem2, "follow_direction", mvt.follow_direction);
       if(tmp_alpha < 0.0 || tmp_alpha > 1.0) tmp_alpha = 1.0;
+      mvt.SetAngle(angle_deg * M_PI / 180);
       mvt.pos.x = dx;
       mvt.pos.y = dy;
       mvt.alpha = tmp_alpha;

@@ -56,7 +56,7 @@ Surface::Surface(SDL_Surface *sdl_surface){
  * @param size
  * @param flags
  * @param useAlpha
- * @see NewSurface 
+ * @see NewSurface
  */
 Surface::Surface(const Point2i &size, Uint32 flags, bool useAlpha){
 	surface = NULL;
@@ -76,7 +76,7 @@ Surface::Surface(const std::string &filename){
 		Error( Format("Unable to open image file : %s", filename.c_str() ) );
 }
 
-/** 
+/**
  * Copy constructor: build a surface from an other surface.
  *
  * The two surfaces share the same graphic data.
@@ -123,7 +123,7 @@ void Surface::AutoFree(){
 		Free();
 }
 
-/** 
+/**
  * Set the auto free status of a surface.
  *
  * In general it should always be true for non-system surface.
@@ -238,7 +238,7 @@ int Surface::Blit(const Surface& src){
  */
 int Surface::Blit(const Surface& src, const Point2i &dst){
 	SDL_Rect dstRect = GetSDLRect( dst );;
-	
+
 	return Blit(src, NULL, &dstRect);
 }
 
@@ -289,7 +289,7 @@ void Surface::GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a){
 	SDL_GetRGBA(color, surface->format, &r, &g, &b, &a);
 }
 
-/** 
+/**
  * @param r
  * @param g
  * @param b
@@ -317,7 +317,7 @@ Uint32 Surface::MapColor(Color color){
 	return MapRGBA(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
-/** 
+/**
  * @param rect
  */
 void Surface::SetClipRect(const Rectanglei &rect){
@@ -342,30 +342,30 @@ int Surface::RectangleColor(const Rectanglei &rect, const Color &color, const ui
 {
   if( rect.IsSizeZero() )
     return 0;
-  
+
   Point2i ptBR = rect.GetBottomRightPoint();
-  
+
   if (border_size == 1)
     return rectangleRGBA( surface, rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), ptBR.GetY(), color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 
   // top border
-  boxRGBA (surface, 
-	   rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), rect.GetPositionY()+border_size, 
+  boxRGBA (surface,
+	   rect.GetPositionX(), rect.GetPositionY(), ptBR.GetX(), rect.GetPositionY()+border_size,
 	   color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
-  
+
   // bottom border
-  boxRGBA (surface, 
-	   rect.GetPositionX(), ptBR.GetY() - border_size, ptBR.GetX(), ptBR.GetY(), 
+  boxRGBA (surface,
+	   rect.GetPositionX(), ptBR.GetY() - border_size, ptBR.GetX(), ptBR.GetY(),
 	   color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 
   // left border
-  boxRGBA (surface, 
-	   rect.GetPositionX(), rect.GetPositionY() + border_size, rect.GetPositionX()+border_size, ptBR.GetY()-border_size, 
+  boxRGBA (surface,
+	   rect.GetPositionX(), rect.GetPositionY() + border_size, rect.GetPositionX()+border_size, ptBR.GetY()-border_size,
 	   color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 
   // right border
-  boxRGBA (surface, 
-	   ptBR.GetX() - border_size, rect.GetPositionY() + border_size, ptBR.GetX(), ptBR.GetY()-border_size, 
+  boxRGBA (surface,
+	   ptBR.GetX() - border_size, rect.GetPositionY() + border_size, ptBR.GetX(), ptBR.GetY()-border_size,
 	   color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 
   return 1;
@@ -399,7 +399,7 @@ int Surface::Fill(const Color &color){
 	return Fill( MapColor(color) );
 }
 
-/** 
+/**
  *
  * @param dstRect
  * @param color
@@ -416,7 +416,7 @@ int Surface::FillRect(const Rectanglei &dstRect, Uint32 color){
  * @param color
  */
 int Surface::FillRect(const Rectanglei &dstRect, const Color &color){
-	
+
 	return FillRect( dstRect, MapColor(color) );
 }
 
@@ -433,20 +433,23 @@ int Surface::ImgLoad(std::string filename){
 
 /**
  *
- * @param angle
+ * @param angle in radian
  * @param zoomx
  * @param zoomy
  * @param smooth
- */
+* Warning rotozoomSurfaceXY uses degrees so the rotation of image use degrees here,
+* but when accessing thanks to GetSurfaceForAngle the index is using radian
+* (because we juste need an index in array, not an angle) */
+static const double ratio_deg_to_rad = 180 / M_PI;
 Surface Surface::RotoZoom(double angle, double zoomx, double zoomy, int smooth){
 	Surface newSurf;
 
-	newSurf.SetSurface( rotozoomSurfaceXY(surface, angle, zoomx, zoomy, smooth) );
+	newSurf.SetSurface( rotozoomSurfaceXY(surface, angle * ratio_deg_to_rad , zoomx, zoomy, smooth) );
 
 	if( newSurf.IsNull() )
 		Error( "Unable to make a rotozoom on the surface !" );
 
-	return newSurf;	
+	return newSurf;
 }
 
 /**
@@ -558,7 +561,7 @@ SDL_Rect Surface::GetSDLRect(const Rectanglei &r){
     sdlRect.w = r.GetSizeX();
     sdlRect.h = r.GetSizeY();
 
-	return sdlRect;	
+	return sdlRect;
 }
 
 SDL_Rect Surface::GetSDLRect(const Point2i &pt){

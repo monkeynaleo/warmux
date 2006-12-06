@@ -98,22 +98,21 @@ void Polecat::Refresh()
   //sometimes, angle==infinite (according to gdb) ??
   GetSpeed(norme, angle);
 
-  while(angle < -M_PI) angle += M_PI;
-  while(angle > M_PI) angle -= M_PI;
+  while(angle < -M_PI)
+    angle += M_PI;
+  while(angle > M_PI)
+    angle -= M_PI;
 
-  angle *= 180.0 / M_PI;
   angle /= 2.0;
   if(m_sens == -1)
   {
     if(angle > 0)
-      angle -= 90.0;
+      angle -= M_PI_2;
     else
-      angle += 90.0;
+      angle += M_PI_2;
   }
 
-  if(angle > 720) angle = 0;
-
-  image->SetRotation_deg(angle);
+  image->SetRotation_rad(angle);
   image->Scale((double)m_sens,1.0);
   image->Update();
   // Set the test area ?

@@ -42,9 +42,9 @@ class SuperTux : public WeaponProjectile
 {
  private:
   ParticleEngine particle_engine;
+  double angle_rad;
 
 public:
-  double angle;
   uint speed;
   uint time_now;
   uint time_next_action;
@@ -54,6 +54,7 @@ public:
            WeaponLauncher * p_launcher);
   void Refresh();
 
+  inline void SetAngle(double angle) {angle_rad = angle;}
   void turn_left();
   void turn_right();
   void Shoot(double strength);
