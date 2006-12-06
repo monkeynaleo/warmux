@@ -108,7 +108,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   animation_time = Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   prepare_shoot = false;
   back_jumping = false;
-  crosshair_angle = 0;
   death_explosion = true;
 
   // Damage count
@@ -156,7 +155,6 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
   step_sound_played    = acharacter.step_sound_played;
   prepare_shoot        = acharacter.prepare_shoot;
   back_jumping         = acharacter.back_jumping;
-  crosshair_angle      = acharacter.crosshair_angle;
   damage_other_team    = acharacter.damage_other_team;
   damage_own_team      = acharacter.damage_own_team;
   max_damage           = acharacter.max_damage;
@@ -663,19 +661,14 @@ void Character::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t eve
     }
 }
 
-void Character::SaveCrosshairAngle()
-{
-  crosshair_angle = ActiveTeam().crosshair.GetAngleVal();
-}
-
 double Character::GetCrosshairAngle() const
 {
-  return crosshair_angle;
+  return ActiveTeam().crosshair.GetAngleVal();
 }
 
 void Character::SetCrosshairAngle(double angle)
 {
-  crosshair_angle = angle;
+   ActiveTeam().crosshair.ChangeAngleVal(angle);
 }
 
 void Character::Refresh()
@@ -848,9 +841,8 @@ void Character::StartPlaying()
 {
   assert (!IsGhost());
   SetWeaponClothe();
-  ActiveTeam().crosshair.Reset();
+  ActiveTeam().crosshair.Draw();
  // SetRebounding(false);
-  ActiveTeam().crosshair.ChangeAngleVal(crosshair_angle);
   ShowGameInterface();
 }
 

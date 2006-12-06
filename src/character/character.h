@@ -88,7 +88,6 @@ private:
   void SignalCollision();
   void SetBody(Body* char_body);
 
-  double crosshair_angle;
 public:
 
   Character (Team& my_team, const std::string &name, Body *char_body);
@@ -124,7 +123,6 @@ public:
   void PrepareShoot();
   void DoShoot();
   void HandleShoot(Clavier::Key_Event_t event_type);
-  void SaveCrosshairAngle();
   double GetCrosshairAngle() const;
   void SetCrosshairAngle(double angle);
 

@@ -62,19 +62,19 @@ void CrossHair::ChangeAngleVal (double val)
   angle_rad = BorneDouble(val, -(ActiveTeam().GetWeapon().GetMaxAngle()),
                     -(ActiveTeam().GetWeapon().GetMinAngle()) );
 
-  // Compute crosshair position
-  calcul_d = Point2i(RAYON, RAYON) * Point2d(cos(angle_rad), sin(angle_rad));
 }
 
 void CrossHair::Draw()
 {
+  Point2i calcul_d;
   if( !enable )
     return;
   if( ActiveCharacter().IsDead() )
     return;
   if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING )
     return;
-
+  // Compute crosshair position
+  calcul_d = Point2i(RAYON, RAYON) * Point2d(cos(angle_rad), sin(angle_rad));
   Point2i pos = ActiveCharacter().GetHandPosition();
   pos += calcul_d * Point2i(ActiveCharacter().GetDirection(), 1);
   pos -= image.GetSize()/2;
