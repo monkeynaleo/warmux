@@ -33,7 +33,6 @@ public:
 
 private:
   Surface image;
-  Point2i calcul_d;
   double angle_rad;
 
 public:

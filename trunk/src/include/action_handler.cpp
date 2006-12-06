@@ -128,13 +128,11 @@ void Action_BackJump (Action *a)
 void Action_Up (Action *a)
 {
   ActiveTeam().crosshair.ChangeAngle (-DELTA_CROSSHAIR);
-  ActiveTeam().ActiveCharacter().SaveCrosshairAngle();
 }
 
 void Action_Down (Action *a)
 {
   ActiveTeam().crosshair.ChangeAngle (DELTA_CROSSHAIR);
-  ActiveTeam().ActiveCharacter().SaveCrosshairAngle();
 }
 
 void Action_ChangeWeapon (Action *a)
