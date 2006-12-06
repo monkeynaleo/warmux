@@ -27,12 +27,13 @@ extern const double EPS_ZERO;
 
 // Borne une valeur dans l'intervale [min;max]
 long BorneLong (const long &valeur, const long &min, const long &max);
-double BorneDouble (const double &valeur, const double &min, 
+double BorneDouble (const double &valeur, const double &min,
 		    const double &max);
 
 // Inverse un angle par rapport à l'axe vertical
 double InverseAngle (const double &angle);
 double InverseAngleDeg (const double &angle);
+double InverseAngleRad (const double &angle);
 
 // Conversion degré en radian
 double Deg2Rad (int degre);

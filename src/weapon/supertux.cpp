@@ -46,7 +46,7 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 void SuperTux::Shoot(double strength)
 {
   WeaponProjectile::Shoot(strength);
-  angle = ActiveTeam().crosshair.GetAngleRad();
+  angle_rad = ActiveTeam().crosshair.GetAngleRad();
 
   Time * global_time = Time::GetInstance();
   time_next_action = global_time->Read();
@@ -58,10 +58,10 @@ void SuperTux::Refresh()
 {
   WeaponProjectile::Refresh();
 
-  image->SetRotation_deg((angle+M_PI_2)*180.0/M_PI);
+  image->SetRotation_rad(angle_rad + M_PI_2);
   if ((last_move+animation_deltat)<Time::GetInstance()->Read())
     {
-      SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle);
+      SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
       image->Update();
       last_move = Time::GetInstance()->Read();
   }
@@ -69,13 +69,13 @@ void SuperTux::Refresh()
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
   {
     Action a(Action::ACTION_SUPERTUX_STATE);
-    a.Push(angle);
+    a.Push(angle_rad);
     a.Push(GetPhysX());
     a.Push(GetPhysY());
     Point2d speed;
     network.SendAction(&a);
   }
-  particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle, 0);
+  particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
 }
 
 void SuperTux::turn_left()
@@ -84,7 +84,7 @@ void SuperTux::turn_left()
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
-      angle = angle - 15.0/180.0*M_PI;
+      angle_rad = angle_rad - M_PI / 12;
     }
 }
 
@@ -94,7 +94,7 @@ void SuperTux::turn_right()
   if (time_next_action<time_now)
     {
       time_next_action=time_now + time_delta;
-      angle = angle + 15.0/180.0*M_PI;
+      angle_rad = angle_rad + M_PI / 12;
     }
 }
 

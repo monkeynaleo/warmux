@@ -28,17 +28,28 @@
 
 class member_mvt
 {  // Position of a member relative to its superior one
+  double angle_rad; // angle in radian
 public:
   Point2f pos;
   Point2f scale;
+  /* SetAngle take radian values */
+  inline void SetAngle(double angle)
+  {
+    while(angle_rad > 2*M_PI)
+      angle_rad -= 2 * M_PI;
+    while(angle_rad <= -2*M_PI)
+      angle_rad += 2 * M_PI;
+    angle_rad = angle;
+  }
+  /* GetAngle returns radian values */
+  inline const double &GetAngle() { return angle_rad; }
   float alpha;
-  int angle; // angle in degrees
   bool follow_crosshair;
   bool follow_half_crosshair;
   bool follow_speed;
   bool follow_direction;
-  member_mvt() { pos.x = pos.y = angle = follow_crosshair = follow_half_crosshair
-                       = follow_speed = follow_direction = 0; 
+  member_mvt() { pos.x = pos.y = angle_rad = follow_crosshair = follow_half_crosshair
+                       = follow_speed = follow_direction = 0;
                  alpha = scale.x = scale.y = 1.0;};
 };
 

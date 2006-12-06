@@ -456,7 +456,7 @@ void Character::Draw()
 
 }
 
-void Character::Jump(double strength, int deg_angle)
+void Character::Jump(double strength, double angle /*in radian */)
 {
   do_nothing_time = Time::GetInstance()->Read();
 
@@ -465,7 +465,6 @@ void Character::Jump(double strength, int deg_angle)
   SetMovement("jump");
 
   // Jump !
-  double angle = Deg2Rad(deg_angle);
   if (GetDirection() == Body::DIRECTION_LEFT) angle = InverseAngle(angle);
   SetSpeed (strength, angle);
 }
@@ -669,12 +668,12 @@ void Character::SaveCrosshairAngle()
   crosshair_angle = ActiveTeam().crosshair.GetAngleVal();
 }
 
-int Character::GetCrosshairAngle() const
+double Character::GetCrosshairAngle() const
 {
   return crosshair_angle;
 }
 
-void Character::SetCrosshairAngle(int angle)
+void Character::SetCrosshairAngle(double angle)
 {
   crosshair_angle = angle;
 }
@@ -722,13 +721,13 @@ void Character::Refresh()
   if(back_jumping)
   {
     assert(&ActiveCharacter() == this);
-    int rotation;
+    double rotation;
     static double speed_init = GameMode::GetInstance()->character.back_jump_strength *
        sin(GameMode::GetInstance()->character.back_jump_angle);
 
     Point2d speed;
     GetSpeedXY(speed);
-    rotation = - (int)(180.0 * speed.y / speed_init);
+    rotation = -M_PI * speed.y / speed_init;
     body->SetRotation(rotation);
   }
 }

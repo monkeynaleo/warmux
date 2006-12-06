@@ -339,32 +339,32 @@ template<class T> class Vector2
 		 * - M=(10,-10) -> -PI/4 (-0.78)
 		 * - M=O -> 0
 		 */
-		double ComputeAngle() const{
-			double angle;
+                double ComputeAngle() const{
+                  double angle;
 
-			if( !IsZero( x ) )
-				if( !IsZero( y ) ){
-				  angle = atan(double(y)/double(x));
-					if( x < 0 )
-						if( y > 0 )
-							angle += M_PI;
-						else
-							angle -= M_PI;
-				}
-				else
-					if( x > 0)
-						angle = 0;
-					else
-						angle = M_PI;
-			else
-				if( y > 0 )
-					angle = M_PI_2;
-				else if(y < 0)
-					angle = -M_PI_2;
-				else
-					angle = 0;
+                  if( !IsZero( x ) )
+                    if( !IsZero( y ) ){
+                      angle = atan(double(y)/double(x));
+                      if( x < 0 )
+                        if( y > 0 )
+                          angle += M_PI;
+                        else
+                          angle -= M_PI;
+                    }
+                    else
+                      if( x > 0)
+                        angle = 0;
+                      else
+                        angle = M_PI;
+                  else
+                    if( y > 0 )
+                      angle = M_PI_2;
+                    else if(y < 0)
+                      angle = -M_PI_2;
+                    else
+                      angle = 0;
 
-			return angle;
+                  return angle;
 		}
 
 		/**

@@ -158,7 +158,7 @@ void NinjaRope::TryAttachRope()
       m_hooked_time = Time::GetInstance()->Read();
       ActiveCharacter().SetMovement("ninja-rope");
 
-     ActiveTeam().crosshair.ChangeAngleVal(-60);
+     ActiveTeam().crosshair.ChangeAngleVal(-M_PI / 3);
 
     }
   else
@@ -477,7 +477,7 @@ void NinjaRope::Draw()
 
     }
 
-  m_hook_sprite->SetRotation_deg(-prev_angle * 180.0 / M_PI);
+  m_hook_sprite->SetRotation_rad(-prev_angle);
   m_hook_sprite->Draw( Point2i(rope_node[0].x, rope_node[0].y)
 		  - m_hook_sprite->GetSize()/2);
 }

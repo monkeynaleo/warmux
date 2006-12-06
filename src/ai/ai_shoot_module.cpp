@@ -31,7 +31,7 @@
 
 #include <iostream>
 // =================================================
-// Try to find an enemy which is shootable by 
+// Try to find an enemy which is shootable by
 // weapons like gun, shotgun, m16
 // =================================================
 bool AIShootModule::FindShootableEnemy()
@@ -48,7 +48,7 @@ bool AIShootModule::FindShootableEnemy()
 
 // =================================================
 // Return true if there is a straight line with no
-// collision between the active character and a 
+// collision between the active character and a
 // potential enemy
 // =================================================
 // This method is not perfect
@@ -111,13 +111,12 @@ bool AIShootModule::IsDirectlyShootable(Character& character)
     pos += delta_pos;
   }
 
-  // Convert radian angle into degree
-  m_angle = Rad2Deg(original_angle);
+  m_angle = original_angle;
 
   // Set direction
   if (departure.x > arrival.x) {
     ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-    m_angle = int(InverseAngleDeg(double(m_angle)));
+    m_angle = InverseAngleRad(m_angle);
   } else {
     ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
   }
@@ -125,7 +124,7 @@ bool AIShootModule::IsDirectlyShootable(Character& character)
   // Prepare game message
   std::string s = "Try to shoot "+character.GetName();
   char buff[3];
-  sprintf(buff, "%d", m_angle); // to manage angle equals to 0
+  sprintf(buff, "%f", m_angle); // to manage angle equals to 0
   s += " with angle ";
   s += buff;
   GameMessages::GetInstance()->Add(s);
@@ -134,18 +133,18 @@ bool AIShootModule::IsDirectlyShootable(Character& character)
 }
 
 // =================================================
-// Try to find an enemy which is shootable by 
+// Try to find an enemy which is shootable by
 // weapons like dynamite, mine, ...
 // =================================================
 bool AIShootModule::FindProximityEnemy()
 {
-  FOR_ALL_LIVING_ENEMIES(team, character) {    
+  FOR_ALL_LIVING_ENEMIES(team, character) {
     if ( IsNear(*character) ) {
       m_enemy = &(*character);
       return true;
     }
   }
-  
+
   return false;
   //     if (m_nearest_enemy == NULL
   // 	|| ( character->GetCenter().Distance( ActiveCharacter().GetCenter()) <
@@ -157,7 +156,7 @@ bool AIShootModule::FindProximityEnemy()
 }
 
 // =================================================
-// Return true if character seems to be accessible 
+// Return true if character seems to be accessible
 // =================================================
 // This method is not perfect!!
 // =================================================
@@ -168,10 +167,10 @@ bool AIShootModule::IsNear(Character& character)
 
   if (delta_x > 300)
     return false;
-  
+
   if (delta_y > 100)
     return false;
-  
+
   return true;
 }
 
@@ -235,7 +234,7 @@ Character* AIShootModule::FindEnemy()
     ActiveTeam().crosshair.ChangeAngleVal(m_angle);
   }
   else if (FindShootableEnemy()) {
-    
+
     m_current_strategy = SHOOT_FROM_POINT;
     GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" will shoot "
 				     + m_enemy->GetName());
@@ -257,14 +256,14 @@ Character* AIShootModule::FindEnemy()
       ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
     }
 
-    int angle = BorneLong(m_angle, - (ActiveTeam().GetWeapon().max_angle),
-			  - (ActiveTeam().GetWeapon().min_angle) );
-    
-    if (abs(angle-m_angle) < 5) {
+    double angle = BorneDouble(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
+			       - (ActiveTeam().GetWeapon().GetMinAngle()) );
+
+    if (AbsReel(angle-m_angle) < 0.08726/* 5 degree */) {
       ActiveTeam().crosshair.ChangeAngleVal(m_angle);
     } else {
       GameMessages::GetInstance()->Add("Angle is too wide!");
-				     
+
       m_current_strategy = NO_STRATEGY;
       m_angle = 0;
       m_enemy = NULL;
@@ -314,10 +313,10 @@ bool AIShootModule::Refresh(uint current_time)
 
   case NEAR_FROM_ENEMY:
     // We are near enough of an enemy (perhaps not the first one we have choosen)
-    FOR_ALL_LIVING_ENEMIES(team, character) {    
+    FOR_ALL_LIVING_ENEMIES(team, character) {
       if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
 	   abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
-      //if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 50) { 
+      //if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 50) {
 	if (&(*character) != m_enemy) {
 	  GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" changes target : "
 					   + (*character).GetName());
@@ -327,7 +326,7 @@ bool AIShootModule::Refresh(uint current_time)
       }
     }
     break;
-  
+
   case SHOOT_FROM_POINT:
     Shoot();
     return false;
@@ -338,7 +337,7 @@ bool AIShootModule::Refresh(uint current_time)
 }
 
 // =================================================
-// Initialize Shoot module when changing 
+// Initialize Shoot module when changing
 // character to control
 // =================================================
 void AIShootModule::BeginTurn()

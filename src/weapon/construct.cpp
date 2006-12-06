@@ -31,7 +31,7 @@
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-const int angle_step = 30; // should be a multiple of 360
+const double angle_step = M_PI / 6.0; // should be a multiple
 
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
@@ -39,7 +39,7 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
 					NEVER_VISIBLE)
 {
   construct_spr = resource_manager.LoadSprite( weapons_res_profile, "construct_spr");
-  construct_spr->EnableRotationCache(360 / angle_step);
+  construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / angle_step));
   m_name = _("Construct");
   angle = 0;
   force_override_keys = true;
@@ -72,7 +72,7 @@ void Construct::Draw()
     Weapon::Draw();
 
     dst = Mouse::GetInstance()->GetWorldPosition();
-    construct_spr->SetRotation_deg(angle);
+    construct_spr->SetRotation_rad(angle);
     construct_spr->Draw(dst - construct_spr->GetSize()/2);
   }
 }

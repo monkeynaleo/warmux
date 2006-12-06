@@ -28,7 +28,7 @@
 #include "../tool/xml_document.h"
 #include "../weapon/weapon_cfg.h"
 
-class GameMode 
+class GameMode
 {
 public:
   uint max_characters;
@@ -50,11 +50,11 @@ public:
     uint mass;
     double air_resist_factor;
     uint jump_strength;
-    int jump_angle;
+    double jump_angle;
     uint super_jump_strength;
-    int super_jump_angle;
+    double super_jump_angle;
     uint back_jump_strength;
-    int back_jump_angle;
+    double back_jump_angle;
   } character;
 
   int allow_character_selection;
@@ -64,11 +64,11 @@ public:
   static const int BEFORE_FIRST_ACTION_AND_END_TURN = 2;
   static const int CHANGE_ON_END_TURN = 3;
   static const int NEVER = 4;
- 
+
 private:
   std::string m_current;
   static GameMode * singleton;
-    
+
 public:
   static GameMode * GetInstance();
 
@@ -76,7 +76,7 @@ public:
   bool AllowCharacterSelection() const;
 
 private:
-  GameMode();  
+  GameMode();
 
 protected:
   bool LoadXml (xmlpp::Element *xml);

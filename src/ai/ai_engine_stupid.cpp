@@ -86,7 +86,7 @@ void AIStupidEngine::Refresh()
   if (m_shoot.Refresh(m_current_time)) {
     m_movement.Move(m_current_time);
   }
-  
+
 //   switch (m_step)
 //     {
 //     case 0:

@@ -62,6 +62,14 @@ double InverseAngle (const double &angle){
 }
 
 // Inverse un angle par rapport à l'axe vertical
+double InverseAngleRad (const double &angle){
+  if (angle < 0)
+    return -M_PI - angle;
+  else
+    return M_PI - angle;
+}
+
+// Inverse un angle par rapport à l'axe vertical
 double InverseAngleDeg (const double &angle){
   if (angle < 0)
     return -180 - angle;

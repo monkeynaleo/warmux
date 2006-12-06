@@ -85,10 +85,9 @@ void HollyGrenade::Refresh()
     jukebox.Play("share","weapon/alleluia") ;
     sing_alleluia = true;
   }
-  
+
   // rotation de l'image de la grenade...
-  double angle = GetSpeedAngle() * 180.0/M_PI ;
-  image->SetRotation_deg(angle);
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 void HollyGrenade::SignalOutOfMap()
@@ -99,9 +98,9 @@ void HollyGrenade::SignalOutOfMap()
 
 //-----------------------------------------------------------------------------
 
-HollyGrenadeLauncher::HollyGrenadeLauncher() : 
+HollyGrenadeLauncher::HollyGrenadeLauncher() :
   WeaponLauncher(WEAPON_HOLLY_GRENADE, "holly_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
-{  
+{
   m_name = _("Holy Grenade");
   m_allow_change_timeout = true;
   ignore_collision_signal = true;

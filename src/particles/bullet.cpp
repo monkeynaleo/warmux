@@ -38,7 +38,7 @@ BulletParticle::BulletParticle() :
 void BulletParticle::Refresh()
 {
   UpdatePosition();
-  image->SetRotation_deg((Time::GetInstance()->Read()/4) % 360);
+  image->SetRotation_rad((Time::GetInstance()->Read()/4) % 3 /* 3 is arbitrary */ ); // FIXME this is ugly hack
   image->Update();
   if(IsOutsideWorldXY(GetPosition()))
   {

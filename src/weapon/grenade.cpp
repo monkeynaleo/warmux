@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme grenade : 
+ * Arme grenade :
  * Explose au bout de quelques secondes
  *****************************************************************************/
 
@@ -47,9 +47,7 @@ Grenade::Grenade(ExplosiveWeaponConfig& cfg,
 void Grenade::Refresh()
 {
   WeaponProjectile::Refresh();
-
-  double angle = GetSpeedAngle() * 180/M_PI ;
-  image->SetRotation_deg( angle);
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 //-----------------------------------------------------------------------------
@@ -62,9 +60,9 @@ void Grenade::SignalOutOfMap()
 
 //-----------------------------------------------------------------------------
 
-GrenadeLauncher::GrenadeLauncher() : 
+GrenadeLauncher::GrenadeLauncher() :
   WeaponLauncher(WEAPON_GRENADE, "grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
-{  
+{
 
   m_name = _("Grenade");
   m_allow_change_timeout = true;

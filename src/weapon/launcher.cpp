@@ -80,9 +80,7 @@ void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
 void WeaponBullet::Refresh()
 {
   WeaponProjectile::Refresh();
-
-  double angle = GetSpeedAngle() *180/M_PI;
-  image->SetRotation_deg(angle);
+  image->SetRotation_rad(GetSpeedAngle());
 }
 
 void WeaponBullet::DoExplosion()

@@ -18,7 +18,7 @@
  ******************************************************************************
  * Sprite cache.
  ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
  *             Initial version
  *****************************************************************************/
 
@@ -30,22 +30,45 @@
 SpriteFrameCache::SpriteFrameCache() {
   use_rotation = false;
 }
-
+#include <iostream>
 void SpriteFrameCache::CreateRotationCache(Surface &surface, unsigned int cache_size){
   assert (use_rotation == false);
   use_rotation = true;
 
   rotated_surface.push_back( surface );
   for(unsigned int i=1 ; i< cache_size ; i++){
-    float angle = -360.0 * (float) i / (float) cache_size;
+    double angle = 2* M_PI * (1 /* to inverte rotation angle */ - static_cast<double>(i) / static_cast<double>(cache_size));
     rotated_surface.push_back( surface.RotoZoom(angle, 1.0, 1.0, SMOOTHING_ON) );
   }
 }
-  
+
+Surface SpriteFrameCache::GetFlippedSurfaceForAngle(double angle) const
+{
+  double angle_tmp = angle;
+  while(angle_tmp >= 2 * M_PI)
+    angle_tmp -= 2 * M_PI;
+  while(angle_tmp < 0.0)
+    angle_tmp += 2 * M_PI;
+  int index = static_cast<uint>(angle_tmp*static_cast<double>(rotated_flipped_surface.size()) / (2*M_PI));
+  return rotated_flipped_surface[index];
+}
+
+Surface SpriteFrameCache::GetSurfaceForAngle(double angle) const
+{
+  double angle_tmp = angle;
+  while(angle_tmp >= 2 * M_PI)
+    angle_tmp -= 2 * M_PI;
+  while(angle_tmp < 0.0)
+    angle_tmp += 2 * M_PI;
+
+  int index = static_cast<uint>(angle_tmp*static_cast<double>(rotated_surface.size()) / (2*M_PI));
+  return rotated_surface[index];
+}
+
 void SpriteFrameCache::CreateFlippingCache(Surface &surface)
 {
   assert (flipped_surface.IsNull());
-  flipped_surface = surface.RotoZoom( 0.0, -1.0, 1.0, SMOOTHING_OFF);	  
+  flipped_surface = surface.RotoZoom( 0.0, -1.0, 1.0, SMOOTHING_OFF);
   if (use_rotation)
   {
     assert (rotated_surface.size() != 0);
@@ -54,7 +77,7 @@ void SpriteFrameCache::CreateFlippingCache(Surface &surface)
     const unsigned int n = rotated_surface.size();
     for(unsigned int i=1 ; i<n; i++)
     {
-      float angle = -360.0 * (float) i / (float) n;
+      double angle = 2 * M_PI * (1 - (float) i / (float) n);
       rotated_flipped_surface.push_back( surface.RotoZoom(angle, -1.0, 1.0, SMOOTHING_ON) );
     }
   }
@@ -72,11 +95,11 @@ SpriteCache::SpriteCache(Sprite &p_sprite) :
   rotation_cache_size = 0;
 }
 
-#if 0  
+#if 0
 SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
   sprite(p_sprite),
   frames(other.frames)
-{    
+{
   have_rotation_cache = false;
   have_flipping_cache = false;
   have_lastframe_cache = false;
@@ -89,11 +112,11 @@ SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
 	// Disable per pixel alpha on the source surface
     // in order to properly copy the alpha chanel to the destination suface
 	// see the SDL_SetAlpha man page for more infos (RGBA->RGBA without SDL_SRCALPHA)
-	other.frames[f].surface.SetAlpha( 0, 0); 
+	other.frames[f].surface.SetAlpha( 0, 0);
 	new_surf.Blit( other.frames[f].surface, NULL, NULL);
 
-	// re-enable the per pixel alpha in the 
-	other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0); 
+	// re-enable the per pixel alpha in the
+	other.frames[f].surface.SetAlpha( SDL_SRCALPHA, 0);
     frames.push_back( SpriteFrame(new_surf,other.frames[f].delay));
   }
 
@@ -104,7 +127,7 @@ SpriteCache::SpriteCache(Sprite &p_sprite, const SpriteCache &other)  :
   if(other.have_lastframe_cache)
     EnableLastFrameCache();
 }
-#endif  
+#endif
 
 void SpriteCache::EnableRotationCache(std::vector<SpriteFrame> &sprite_frames, unsigned int cache_size){
   //For each frame, we pre-render 'cache_size' rotated surface
@@ -115,7 +138,7 @@ void SpriteCache::EnableRotationCache(std::vector<SpriteFrame> &sprite_frames, u
   assert(!have_rotation_cache);
   have_rotation_cache = true;
 
-  if (frames.empty()) 
+  if (frames.empty())
     frames.resize( sprite_frames.size() );
   assert( frames.size() == sprite_frames.size() );
   rotation_cache_size = cache_size;
@@ -131,7 +154,7 @@ void SpriteCache::EnableFlippingCache(std::vector<SpriteFrame> &sprite_frames){
   assert(!have_flipping_cache);
   assert(!have_lastframe_cache);
 
-  if (frames.empty()) 
+  if (frames.empty())
     frames.resize( sprite_frames.size() );
   assert( frames.size() == sprite_frames.size() );
 
@@ -160,7 +183,7 @@ void SpriteCache::DisableLastFrameCache(){
 void SpriteCache::InvalidLastFrame(){
   //Free lastframe_cache if the next frame to be displayed
   //is not the same as the last one.
-  if(!have_lastframe_cache) 
+  if(!have_lastframe_cache)
     return;
   last_frame.Free();
 }

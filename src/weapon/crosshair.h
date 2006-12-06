@@ -34,23 +34,22 @@ public:
 private:
   Surface image;
   Point2i calcul_d;
-  int angle;
+  double angle_rad;
 
 public:
   CrossHair();
 
   void Reset();
 
-  // Change angle 
-  void ChangeAngle (int delta);
-  void ChangeAngleVal (int angle);
+  // Change angle
+  void ChangeAngle (double delta);
+  void ChangeAngleVal (double angle);
 
   // Draw crosshair
   void Draw();
 
-  // Get angle 
-  int GetAngleVal() const;
-  int GetAngle() const;
+  // Get angle
+  double GetAngleVal() const;
   double GetAngleRad() const;
 };
 

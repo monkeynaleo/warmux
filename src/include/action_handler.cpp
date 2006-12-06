@@ -48,7 +48,7 @@
 #include "../weapon/explosion.h"
 
 // Delta angle used to move the crosshair
-#define DELTA_CROSSHAIR 2
+#define DELTA_CROSSHAIR 0.035 /* ~1 degree */
 
 ActionHandler * ActionHandler::singleton = NULL;
 
@@ -158,7 +158,7 @@ void Action_ChangeCharacter (Action *a)
 void Action_Shoot (Action *a)
 {
   double strength = a->PopDouble();
-  int angle = a->PopInt();
+  double angle = a->PopDouble();
   a->RetrieveCharacter();
   ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
 }
@@ -281,11 +281,11 @@ void Action_SetGameMode (Action *a)
   GameMode::GetInstance()->character.mass = a->PopInt();
   GameMode::GetInstance()->character.air_resist_factor = a->PopDouble();
   GameMode::GetInstance()->character.jump_strength = a->PopInt();
-  GameMode::GetInstance()->character.jump_angle = a->PopInt();
+  GameMode::GetInstance()->character.jump_angle = a->PopDouble();
   GameMode::GetInstance()->character.super_jump_strength = a->PopInt();
-  GameMode::GetInstance()->character.super_jump_angle = a->PopInt();
+  GameMode::GetInstance()->character.super_jump_angle = a->PopDouble();
   GameMode::GetInstance()->character.back_jump_strength = a->PopInt();
-  GameMode::GetInstance()->character.back_jump_angle = a->PopInt();
+  GameMode::GetInstance()->character.back_jump_angle = a->PopDouble();
 }
 
 void SendGameMode()
@@ -387,7 +387,7 @@ void Action_SupertuxState (Action *a)
 
   double x, y;
 
-  tux->angle = a->PopDouble();
+  tux->SetAngle(a->PopDouble());
   x = a->PopDouble();
   y = a->PopDouble();
   tux->SetPhysXY(x, y);
