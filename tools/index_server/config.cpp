@@ -59,8 +59,11 @@ void Config::Load()
 		std::string opt = line.substr(0, equ_pos);
 		std::string val = line.substr(equ_pos+1);
 
-		if( (val.at(0) >= '0' && val.at(0) <= '9')
-		||   val.at(0) == '-' )
+		// val is considered to be an int if it doesn't contain
+		// a '.' (ip address have to be handled as string...
+		if(val.find('.',0) == std::string::npos
+		&& ((val.at(0) >= '0' && val.at(0) <= '9')
+		||   val.at(0) == '-' ))
 		{
 			int nbr = atoi(val.c_str());
 			int_value[ opt ] = nbr;
