@@ -154,6 +154,8 @@ class Team
   // true if the team belong to a local AI
     bool IsLocalAI() const;
 
+    bool IsActiveTeam() const;
+
     void SetLocal();
     void SetLocalAI();
     void SetRemote();

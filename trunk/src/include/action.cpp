@@ -323,7 +323,14 @@ void Action::StoreCharacter(uint team_no, uint char_no)
   Push((int)c->GetDirection());
   Push(c->GetCrosshairAngle());
   Push(c->GetSpeed());
-  Push((int)c->IsActiveCharacter());
+  if(c->IsActiveCharacter()) { // If active character, store step animation
+    Push((int)true);
+    Push(ActiveTeam().ActiveCharacter().GetBody()->GetClothe());
+    Push(ActiveTeam().ActiveCharacter().GetBody()->GetMovement());
+    Push((int)ActiveTeam().ActiveCharacter().GetBody()->GetFrame());
+  } else {
+    Push((int)false);
+  }
 }
 
 void Action::RetrieveCharacter()
@@ -335,8 +342,13 @@ void Action::RetrieveCharacter()
   c->SetDirection((Body::Direction_t)PopInt());
   c->SetCrosshairAngle(PopDouble());
   c->SetSpeedXY(PopPoint2d());
-  if(PopInt())
-    ActiveTeam().SelectCharacter(char_no);
+  if((bool)PopInt()) { // If active characters, retrieve stored animation
+    if(c->GetTeam().IsActiveTeam())
+      ActiveTeam().SelectCharacter(char_no);
+    c->SetClothe(PopString());
+    c->SetMovement(PopString());
+    c->GetBody()->SetFrame((uint)PopInt());
+  }
 }
 
 

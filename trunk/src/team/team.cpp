@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "team.h"
+#include "teams_list.h"
 #include "../character/body_list.h"
 #include "../game/game.h"
 #include "../game/game_mode.h"
@@ -216,7 +217,7 @@ void Team::UpdateEnergyBar ()
 
 void Team::SelectCharacter(uint index)
 {
-  assert((int)index <= NbAliveCharacter());
+  assert(index <= characters.size());
   ActiveCharacter().StopPlaying();
   active_character = characters.begin();
   for(uint i = 0; i < index; ++i)
@@ -429,6 +430,11 @@ Weapon::Weapon_type Team::GetWeaponType() const { return GetWeapon().GetType(); 
 bool Team::IsSameAs(const Team& other) const
 {
   return (strcmp(m_id.c_str(), other.GetId().c_str()) == 0);
+}
+
+bool Team::IsActiveTeam() const
+{
+  return this == &ActiveTeam();
 }
 
 bool Team::IsLocal() const
