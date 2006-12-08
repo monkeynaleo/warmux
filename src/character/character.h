@@ -169,6 +169,7 @@ public:
   int  GetOtherDamage() const { return damage_other_team; }
 
   // Body handling
+  Body * GetBody() const;
   void SetWeaponClothe();
   void SetClothe(std::string name);
   void SetMovement(std::string name);

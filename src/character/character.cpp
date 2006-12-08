@@ -78,6 +78,11 @@ const double MIN_SPEED_TO_FLY = 15.0;
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
+Body * Character::GetBody() const
+{
+  return body;
+}
+
 void Character::SetBody(Body* char_body)
 {
   body = char_body;
