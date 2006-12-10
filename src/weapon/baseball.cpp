@@ -36,7 +36,7 @@ Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())
 
 bool Baseball::p_Shoot (){
 
-  double angle = ActiveTeam().crosshair.GetAngleRad();
+  double angle = ActiveCharacter().GetFiringAngle();
   double rayon = 0.0;
   bool fin = false;
 

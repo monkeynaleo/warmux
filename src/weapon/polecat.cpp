@@ -59,7 +59,7 @@ void Polecat::Shoot (double strength)
   save_x=GetX();
   save_y=GetY();
 
-  double angle = ActiveTeam().crosshair.GetAngleRad();
+  double angle = ActiveCharacter().GetFiringAngle();
 
   if(angle<M_PI/2 && angle>-M_PI/2)
     m_sens = 1;

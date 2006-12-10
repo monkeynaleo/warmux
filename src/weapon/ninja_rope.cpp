@@ -103,7 +103,7 @@ bool NinjaRope::p_Shoot()
   last_node = 0 ;
   m_attaching = true;
   m_launch_time = Time::GetInstance()->Read() ;
-  m_initial_angle = ActiveTeam().crosshair.GetAngleRad();
+  m_initial_angle = ActiveCharacter().GetFiringAngle();
   last_mvt=Time::GetInstance()->Read();
   return true ;
 }
@@ -158,7 +158,7 @@ void NinjaRope::TryAttachRope()
       m_hooked_time = Time::GetInstance()->Read();
       ActiveCharacter().SetMovement("ninja-rope");
 
-     ActiveTeam().crosshair.ChangeAngleVal(-M_PI / 3);
+     ActiveCharacter().SetFiringAngle(-M_PI / 3);
 
     }
   else

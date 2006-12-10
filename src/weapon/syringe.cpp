@@ -36,7 +36,7 @@ void Syringe::Draw() {
 }
 
 bool Syringe::p_Shoot (){
-  double angle = ActiveTeam().crosshair.GetAngleRad();
+  double angle = ActiveCharacter().GetFiringAngle();
   double radius = 0.0;
   bool end = false;
 

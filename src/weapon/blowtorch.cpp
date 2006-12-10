@@ -65,7 +65,7 @@ bool Blowtorch::p_Shoot()
 
 	Point2i hole = ActiveCharacter().GetCenter();
 
-	double angle = ActiveTeam().crosshair.GetAngleRad();
+        double angle = ActiveCharacter().GetFiringAngle();
 	uint h = cfg().range;
 	double dx = cos(angle) * h;
 	double dy = sin(angle) * h;

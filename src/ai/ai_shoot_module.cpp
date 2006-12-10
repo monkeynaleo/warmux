@@ -231,7 +231,7 @@ Character* AIShootModule::FindEnemy()
       ActiveTeam().SetWeapon(Weapon::WEAPON_MINE);
     }
     m_angle = 0;
-    ActiveTeam().crosshair.ChangeAngleVal(m_angle);
+    ActiveCharacter().SetFiringAngle(m_angle);
   }
   else if (FindShootableEnemy()) {
 
@@ -257,10 +257,10 @@ Character* AIShootModule::FindEnemy()
     }
 
     double angle = BorneDouble(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
-			       - (ActiveTeam().GetWeapon().GetMinAngle()) );
+                               - (ActiveTeam().GetWeapon().GetMinAngle()) );
 
     if (AbsReel(angle-m_angle) < 0.08726/* 5 degree */) {
-      ActiveTeam().crosshair.ChangeAngleVal(m_angle);
+      ActiveCharacter().SetFiringAngle(m_angle);
     } else {
       GameMessages::GetInstance()->Add("Angle is too wide!");
 

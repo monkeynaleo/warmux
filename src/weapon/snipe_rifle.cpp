@@ -76,7 +76,6 @@ bool SnipeRifle::p_Shoot()
     return false;
 
   m_is_active = true;
-  ReloadLauncher();
   projectile->Shoot (SNIPE_RIFLE_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
@@ -95,7 +94,7 @@ bool SnipeRifle::ComputeCrossPoint(bool force = false)
 {
   // Did the current character is moving ?
   Point2i pos = GetGunHolePosition();
-  double angle = ActiveTeam().crosshair.GetAngleRad();
+  double angle = ActiveCharacter().GetFiringAngle();
   if ( !force && last_rifle_pos == pos && last_angle == angle ) return targeting_something;
   else {
     last_rifle_pos=pos;
@@ -146,7 +145,7 @@ bool SnipeRifle::ComputeCrossPoint(bool force = false)
 // Reset crosshair when switching from a weapon to another to avoid misused
 void SnipeRifle::p_Deselect()
 {
-  ActiveTeam().crosshair.ChangeAngleVal(0);
+  ActiveCharacter().SetFiringAngle(0.);
 }
 
 void SnipeRifle::DrawBeam()

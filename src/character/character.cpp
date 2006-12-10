@@ -90,8 +90,8 @@ void Character::SetBody(Body* char_body)
   SetClothe("normal");
   SetMovement("walk");
 
-  SetDirection( randomSync.GetBool()?Body::DIRECTION_LEFT:Body::DIRECTION_RIGHT );
-  body->SetFrame( 0 );
+  SetDirection(randomSync.GetBool() ? Body::DIRECTION_LEFT : Body::DIRECTION_RIGHT);
+  body->SetFrame(0);
   SetSize(body->GetSize());
 }
 
@@ -114,6 +114,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   prepare_shoot = false;
   back_jumping = false;
   death_explosion = true;
+  firing_angle = 0.;
 
   // Damage count
   damage_other_team = 0;
@@ -221,6 +222,7 @@ void Character::SetDirection (Body::Direction_t nv_direction)
   uint l,r,t,b;
   body->GetTestRect(l,r,t,b);
   SetTestRect(l,r,t,b);
+  m_team.crosshair.Refresh(GetFiringAngle());
 }
 
 void Character::DrawEnergyBar(int dy)
@@ -666,16 +668,6 @@ void Character::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t eve
     }
 }
 
-double Character::GetCrosshairAngle() const
-{
-  return ActiveTeam().crosshair.GetAngleVal();
-}
-
-void Character::SetCrosshairAngle(double angle)
-{
-   ActiveTeam().crosshair.ChangeAngleVal(angle);
-}
-
 void Character::Refresh()
 {
   if (IsGhost()) return;
@@ -731,7 +723,7 @@ void Character::Refresh()
 }
 
 // Prepare a new turn
-void Character::PrepareTurn ()
+void Character::PrepareTurn()
 {
   HandleMostDamage();
   lost_energy = 0;
@@ -849,6 +841,7 @@ void Character::StartPlaying()
   ActiveTeam().crosshair.Draw();
  // SetRebounding(false);
   ShowGameInterface();
+  m_team.crosshair.Refresh(GetFiringAngle());
 }
 
 bool Character::IsActiveCharacter() const
@@ -859,6 +852,31 @@ bool Character::IsActiveCharacter() const
 // Hand position
 const Point2i & Character::GetHandPosition() const {
   return body->GetHandPosition();
+}
+
+double Character::GetFiringAngle() const {
+  if (GetDirection() == Body::DIRECTION_LEFT)
+    return InverseAngleRad(firing_angle);
+  return firing_angle;
+}
+
+double Character::GetAbsFiringAngle() const {
+  return firing_angle;
+}
+
+void Character::SetFiringAngle(double angle) {
+  /*while(angle > 2 * M_PI)
+    angle -= 2 * M_PI;
+  while(angle <= -2 * M_PI)
+    angle += 2 * M_PI;*/
+  angle = BorneDouble(angle, -(ActiveTeam().GetWeapon().GetMaxAngle()),
+                             -(ActiveTeam().GetWeapon().GetMinAngle()));
+  firing_angle = angle;
+  m_team.crosshair.Refresh(GetFiringAngle());
+}
+
+void Character::AddFiringAngle(double angle) {
+  SetFiringAngle(firing_angle + angle);
 }
 
 void Character::HandleMostDamage()
