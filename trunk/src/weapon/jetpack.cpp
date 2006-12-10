@@ -69,7 +69,8 @@ void JetPack::Refresh()
       ActiveCharacter().SetExternForceXY(F);
       ActiveCharacter().UpdatePosition();
       SendCharacterPosition();
-      Action a(Action::ACTION_SET_CHARACTER_DIRECTION, ActiveCharacter().GetDirection());
+      Action a(Action::ACTION_SET_CHARACTER_PHYSICS);
+      a.StoreActiveCharacter();
       network.SendAction(&a);
 
       if( !F.IsNull() )

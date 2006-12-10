@@ -46,7 +46,7 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
 void SuperTux::Shoot(double strength)
 {
   WeaponProjectile::Shoot(strength);
-  angle_rad = ActiveTeam().crosshair.GetAngleRad();
+  angle_rad = ActiveCharacter().GetFiringAngle();
 
   Time * global_time = Time::GetInstance();
   time_next_action = global_time->Read();

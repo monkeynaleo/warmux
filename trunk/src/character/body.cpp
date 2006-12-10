@@ -227,7 +227,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
       if(mb_mvt.follow_crosshair && ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
       {
         // Use the movement of the crosshair
-        double angle = ActiveTeam().crosshair.GetAngleRad(); /* Get -2 * M_PI < angle =< 2 * M_PI*/
+        double angle = owner->GetFiringAngle(); /* Get -2 * M_PI < angle =< 2 * M_PI*/
         if(angle < 0)
           angle += 2 * M_PI; // so now 0 < angle < 2 * M_PI;
         if(ActiveCharacter().GetDirection() == DIRECTION_LEFT)
@@ -239,7 +239,7 @@ void Body::ApplyMovement(Movement* mvt, uint frame)
       if(mb_mvt.follow_half_crosshair && ActiveCharacter().body == this && ActiveTeam().AccessWeapon().UseCrossHair())
       {
         // Use the movement of the crosshair
-        double angle_rad = ActiveTeam().crosshair.GetAngleRad(); // returns -180 < angle < 180
+        double angle_rad = owner->GetFiringAngle(); // returns -180 < angle < 180
         if(ActiveCharacter().GetDirection() == DIRECTION_RIGHT)
           angle_rad /= 2; // -90 < angle < 90
         else

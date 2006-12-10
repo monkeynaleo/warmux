@@ -133,11 +133,11 @@ void WeaponProjectile::Shoot(double strength)
   ResetConstants();
 
   // Set the initial position.
-  SetXY( launcher->GetGunHolePosition() );
+  SetXY(launcher->GetGunHolePosition());
   SetOverlappingObject(&ActiveCharacter());
 
   // Set the initial speed.
-  double angle = ActiveTeam().crosshair.GetAngleRad();
+  double angle = ActiveCharacter().GetFiringAngle();
   RandomizeShoot(angle,strength);
   SetSpeed (strength, angle);
   PutOutOfGround(angle);

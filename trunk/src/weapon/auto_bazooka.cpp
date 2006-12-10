@@ -59,7 +59,7 @@ RPG::RPG(AutomaticBazookaConfig& cfg,
 void RPG::Shoot (double strength)
 {
   WeaponProjectile::Shoot(strength);
-  angle_local=ActiveTeam().crosshair.GetAngleRad();
+  angle_local=ActiveCharacter().GetFiringAngle();
 }
 
 void RPG::Refresh()

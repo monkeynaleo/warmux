@@ -210,7 +210,7 @@ void Weapon::NewActionShoot() const
   SendCharacterPosition();
   Action * shoot = new Action(Action::ACTION_SHOOT,
                               m_strength,
-                              ActiveTeam().crosshair.GetAngleVal());
+                              ActiveCharacter().GetAbsFiringAngle());
   shoot->StoreActiveCharacter();
   ActionHandler::GetInstance()->NewAction(shoot);
   Action a_end_sync(Action::ACTION_SYNC_END);
@@ -221,7 +221,7 @@ void Weapon::NewActionShoot() const
 void Weapon::PrepareShoot(double strength, double angle)
 {
   MSG_DEBUG("weapon_shoot", "Try to shoot");
-  ActiveTeam().crosshair.ChangeAngleVal(angle);
+  ActiveCharacter().SetFiringAngle(angle);
   m_strength = strength;
   StopLoading();
 
@@ -311,8 +311,8 @@ const Point2i Weapon::GetGunHolePosition()
   Point2i hole(pos +  hole_delta);
   double dst = pos.Distance(hole);
   double angle = pos.ComputeAngle(hole);
-  return pos + Point2i(static_cast<int>(dst * cos(angle + ActiveTeam().crosshair.GetAngleRad())),
-                       static_cast<int>(dst * sin(angle + ActiveTeam().crosshair.GetAngleRad())));
+  return pos + Point2i(static_cast<int>(dst * cos(angle + ActiveCharacter().GetFiringAngle())),
+                       static_cast<int>(dst * sin(angle + ActiveCharacter().GetFiringAngle())));
 }
 
 bool Weapon::EnoughAmmo() const
@@ -467,9 +467,9 @@ void Weapon::Draw(){
   if (!EgalZero(min_angle - max_angle))
   {
     if(ActiveCharacter().GetDirection() == 1)
-      m_image->SetRotation_rad (ActiveTeam().crosshair.GetAngleRad());
+      m_image->SetRotation_rad (ActiveCharacter().GetFiringAngle());
     else
-      m_image->SetRotation_rad (ActiveTeam().crosshair.GetAngleRad() - M_PI);
+      m_image->SetRotation_rad (ActiveCharacter().GetFiringAngle() - M_PI);
   }
 
   // flip image if needed
@@ -509,9 +509,9 @@ void Weapon::DrawWeaponFire()
 {
   if (m_weapon_fire == NULL) return;
   Point2i size = m_weapon_fire->GetSize();
-  size.x = (ActiveCharacter().GetDirection() == 1 ? 0 : size.x);
+  size.x = (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT ? 0 : size.x);
   size.y /= 2;
-  m_weapon_fire->SetRotation_rad (ActiveTeam().crosshair.GetAngleRad());
+  m_weapon_fire->SetRotation_rad (ActiveCharacter().GetFiringAngle());
   m_weapon_fire->Draw( GetGunHolePosition() - size );
 }
 

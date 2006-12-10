@@ -45,6 +45,7 @@ private:
   bool prepare_shoot;
   bool back_jumping;
   bool death_explosion;
+  double firing_angle;
 
   uint disease_damage_per_turn;
   uint disease_duration;
@@ -123,8 +124,10 @@ public:
   void PrepareShoot();
   void DoShoot();
   void HandleShoot(Clavier::Key_Event_t event_type);
-  double GetCrosshairAngle() const;
-  void SetCrosshairAngle(double angle);
+  double GetFiringAngle() const;
+  double GetAbsFiringAngle() const;
+  void SetFiringAngle(double angle);
+  void AddFiringAngle(double angle);
 
   // Show hide the Character
   void Hide();
