@@ -127,12 +127,12 @@ void Action_BackJump (Action *a)
 
 void Action_Up (Action *a)
 {
-  ActiveTeam().crosshair.ChangeAngle (-DELTA_CROSSHAIR);
+  ActiveCharacter().AddFiringAngle(-DELTA_CROSSHAIR);
 }
 
 void Action_Down (Action *a)
 {
-  ActiveTeam().crosshair.ChangeAngle (DELTA_CROSSHAIR);
+  ActiveCharacter().AddFiringAngle(DELTA_CROSSHAIR);
 }
 
 void Action_ChangeWeapon (Action *a)
@@ -324,7 +324,7 @@ void Action_NewTeam (Action *a)
 
   teams_list.AddTeam (the_team);
 
-  network.network_menu->AddTeamCallback(the_team.id);
+  //network.network_menu->AddTeamCallback(the_team.id);
 }
 
 // TODO: Move this into network/distant_cpu.cpp
@@ -332,7 +332,7 @@ void Action_DelTeam (Action *a)
 {
   std::string team = a->PopString();
   teams_list.DelTeam (team);
-  network.network_menu->DelTeamCallback(team);
+  //network.network_menu->DelTeamCallback(team);
 }
 
 // TODO: Move this into network/distant_cpu.cpp
