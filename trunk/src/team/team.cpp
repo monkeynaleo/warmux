@@ -125,12 +125,9 @@ bool Team::LoadCharacters(uint howmany)
     xmlpp::Element *xml = LitDocXml::AccesBalise (doc.racine(), "team");
 
     xmlpp::Node::NodeList nodes = xml -> get_children("character");
-    xmlpp::Node::NodeList::iterator
-        it=nodes.begin(),
-    fin=nodes.end();
+    xmlpp::Node::NodeList::iterator it=nodes.begin();
 
     characters.clear();
-    bool fin_bcl;
     active_character = characters.end();
     do
     {
@@ -173,9 +170,7 @@ bool Team::LoadCharacters(uint howmany)
 
         // C'est la fin ?
       ++it;
-      fin_bcl = (it == fin);
-      fin_bcl |= (howmany <= characters.size());
-    } while (!fin_bcl);
+    } while (it!=nodes.end() && characters.size() < howmany );
 
     active_character = characters.begin();
 
