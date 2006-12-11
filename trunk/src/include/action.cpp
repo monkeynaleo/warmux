@@ -321,7 +321,7 @@ void Action::StoreCharacter(uint team_no, uint char_no)
   Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   Push(c->GetPosition());
   Push((int)c->GetDirection());
-  Push(c->GetCrosshairAngle());
+  Push(c->GetFiringAngle());
   Push(c->GetSpeed());
   if(c->IsActiveCharacter()) { // If active character, store step animation
     Push((int)true);
@@ -340,7 +340,7 @@ void Action::RetrieveCharacter()
   Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   c->SetXY(PopPoint2i());
   c->SetDirection((Body::Direction_t)PopInt());
-  c->SetCrosshairAngle(PopDouble());
+  c->SetFiringAngle(PopDouble());
   c->SetSpeedXY(PopPoint2d());
   if((bool)PopInt()) { // If active characters, retrieve stored animation
     if(c->GetTeam().IsActiveTeam())
