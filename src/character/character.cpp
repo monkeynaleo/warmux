@@ -165,6 +165,7 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
   damage_own_team      = acharacter.damage_own_team;
   max_damage           = acharacter.max_damage;
   death_explosion      = acharacter.death_explosion;
+  firing_angle         = acharacter.firing_angle;
   current_total_damage = acharacter.current_total_damage;
   energy_bar           = acharacter.energy_bar;
   survivals            = acharacter.survivals;
