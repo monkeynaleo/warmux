@@ -42,31 +42,13 @@ CrossHair::CrossHair()
 
 void CrossHair::Reset()
 {
-  ActiveCharacter().SetFiringAngle(0);
+  ActiveCharacter().SetFiringAngle(0.0);
 }
-
-/*void CrossHair::ChangeAngle(double delta)
-{
-  ActiveCharacter().AddFiringAngle(delta);
-}*/
-
-/*void CrossHair::SetFiringAngle(double val)
-{
-  ActiveCharacter().SetFiringAngle(val);
-  val = ActiveCharacter().GetFiringAngle();
-
-  // Compute crosshair position
-  Point2i calcul_d = Point2i(RAY, RAY) * Point2d(cos(val), sin(val));
-  Point2i crosshair_position = ActiveCharacter().GetHandPosition();
-  crosshair_position += calcul_d * Point2i(ActiveCharacter().GetDirection(), 1);
-  crosshair_position -= image.GetSize()/2;
-}*/
 
 // Compute crosshair position
 void CrossHair::Refresh(double angle)
 {
   crosshair_position = Point2i(RAY, RAY) * Point2d(cos(angle), sin(angle)) - image.GetSize() / 2;
-  printf("%d %d\n", crosshair_position.x, crosshair_position.y);
 }
 
 void CrossHair::Draw()
@@ -81,16 +63,3 @@ void CrossHair::Draw()
   AppWormux::GetInstance()->video.window.Blit(image, tmp - camera.GetPosition());
   world.ToRedrawOnMap(Rectanglei(tmp, image.GetSize()));
 }
-
-/*double CrossHair::GetAngleVal() const
-{
-  return angle_rad;
-}
-
-double CrossHair::GetAngleRad() const
-{
-  if (ActiveCharacter().GetDirection() == -1)
-    return InverseAngle (angle_rad);
-  return angle_rad;
-}
-*/
