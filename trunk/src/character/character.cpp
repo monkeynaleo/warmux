@@ -361,6 +361,11 @@ uint Character::GetDiseaseDamage() const
   return GetEnergy() - 1;
 }
 
+uint Character::GetDiseaseDuration() const
+{
+  return disease_duration;
+}
+
 void Character::DecDiseaseDuration()
 {
   if (disease_duration > 0) disease_duration--;

@@ -322,6 +322,9 @@ void Action::StoreCharacter(uint team_no, uint char_no)
   Push(c->GetPosition());
   Push((int)c->GetDirection());
   Push(c->GetAbsFiringAngle());
+  Push(c->GetEnergy());
+  Push((int)c->GetDiseaseDamage());
+  Push((int)c->GetDiseaseDuration());
   Push(c->GetSpeed());
   if(c->IsActiveCharacter()) { // If active character, store step animation
     Push((int)true);
@@ -341,6 +344,10 @@ void Action::RetrieveCharacter()
   c->SetXY(PopPoint2i());
   c->SetDirection((Body::Direction_t)PopInt());
   c->SetFiringAngle(PopDouble());
+  c->SetEnergy(PopInt());
+  int disease_damage_per_turn = PopInt();
+  int disease_duration = PopInt();
+  c->SetDiseaseDamage(disease_damage_per_turn, disease_duration);
   c->SetSpeedXY(PopPoint2d());
   if((bool)PopInt()) { // If active characters, retrieve stored animation
     if(c->GetTeam().IsActiveTeam())
