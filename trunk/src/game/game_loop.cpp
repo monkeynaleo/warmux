@@ -625,10 +625,10 @@ PhysicalObj* GameLoop::GetMovingObject()
 
   FOR_EACH_OBJECT(object)
   {
-    if (!object -> ptr ->IsImmobile())
+    if (!(*object)->IsImmobile())
     {
-      MSG_DEBUG("game.endofturn", "%s is moving", object-> ptr ->GetName().c_str())
-      return object->ptr;
+      MSG_DEBUG("game.endofturn", "%s is moving", (*object)->GetName().c_str())
+      return (*object);
     }
   }
 

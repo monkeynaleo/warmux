@@ -63,7 +63,7 @@ void PetrolBarrel::SignalDeath()
   cfg.blast_force = 50;
   cfg.explosion_range = 5;
   cfg.particle_range = 50;
-  lst_objects.RemoveObject(this);
+  //lst_objects.RemoveObject(this);
   ApplyExplosion(GetCenter(), cfg);
   Ghost();
 }
