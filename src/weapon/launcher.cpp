@@ -217,19 +217,19 @@ void WeaponProjectile::SignalCollision()
 void WeaponProjectile::SignalDrowning()
 {
   PhysicalObj::SignalDrowning();
-  if (launcher != NULL && !launcher->ignore_drowning_signal) launcher->SignalProjectileDrowning();
+  if (launcher != NULL && !launcher->ignore_drowning_signal)
+    launcher->SignalProjectileDrowning();
 }
 
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
-  if (launcher != NULL && !launcher->ignore_ghost_state_signal) launcher->SignalProjectileGhostState();
-  lst_objects.RemoveObject(this);
+  if (launcher != NULL && !launcher->ignore_ghost_state_signal)
+    launcher->SignalProjectileGhostState();
 }
 
 void WeaponProjectile::SignalOutOfMap()
 {
-  lst_objects.RemoveObject(this);
 }
 
 // Implement it in subclass to randomize fire

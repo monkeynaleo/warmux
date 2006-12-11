@@ -144,35 +144,39 @@ void ApplyExplosion_common (const Point2i &pos,
     camera.ChangeObjSuivi (fastest_character, true, true);
 
   // Apply the blast on physical objects.
-  FOR_EACH_OBJECT(obj) if ( !(obj -> ptr -> GoesThroughWall()) )
-  {
-    double distance = pos.Distance(obj -> ptr -> GetCenter());
-    if(distance < 1.0)
-      distance = 1.0;
+  FOR_EACH_OBJECT(it)
+   {
+     PhysicalObj *obj = *it;
+     if ( !(obj->GoesThroughWall()) )
+     {
+       double distance = pos.Distance(obj->GetCenter());
+       if(distance < 1.0)
+         distance = 1.0;
 
-    if (distance <= config.explosion_range)
-    {
-      double dmg = cos(M_PI_2 * distance / config.explosion_range);
-      dmg *= config.damage;
-      obj -> ptr -> AddDamage (config.damage);
-    }
+       if (distance <= config.explosion_range)
+       {
+         double dmg = cos(M_PI_2 * distance / config.explosion_range);
+         dmg *= config.damage;
+         obj->AddDamage (config.damage);
+       }
 
-    if (distance <= config.blast_range)
-    {
-      double angle;
-      double force = cos(M_PI_2 * distance / config.blast_range);
-      force *= config.blast_force;
+       if (distance <= config.blast_range)
+       {
+         double angle;
+         double force = cos(M_PI_2 * distance / config.blast_range);
+         force *= config.blast_force;
 
-      if (!EgalZero(distance))
-        angle  = pos.ComputeAngle(obj->ptr->GetCenter());
-      else
-        angle = -M_PI_2;
+         if (!EgalZero(distance))
+           angle  = pos.ComputeAngle(obj->GetCenter());
+         else
+           angle = -M_PI_2;
 
-      if(fastest_character != NULL)
-        camera.ChangeObjSuivi (obj->ptr, true, true);
-      obj -> ptr -> AddSpeed (force / obj->ptr->GetMass(), angle);
-    }
-  }
+         if(fastest_character != NULL)
+           camera.ChangeObjSuivi (obj, true, true);
+         obj->AddSpeed (force / obj->GetMass(), angle);
+       }
+     }
+   }
 
   ParticleEngine::AddExplosionSmoke(pos, config.particle_range, smoke);
 

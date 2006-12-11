@@ -659,13 +659,14 @@ PhysicalObj* PhysicalObj::CollidedObjectXY(const Point2i & position) const
 
   if (m_collides_with_objects)
     {
-      FOR_EACH_OBJECT(object)
+      FOR_EACH_OBJECT(it)
       {
+        PhysicalObj * object=*it;
         // We check both objet if one overlapse the other
-        if (object -> ptr != this && !IsOverlapping(object->ptr) && !object->ptr->IsOverlapping(this)
-        && object->ptr->m_collides_with_objects
-        && object->ptr->GetTestRect().Intersect( rect ) )
-          return object->ptr;
+        if (object != this && !IsOverlapping(object) && !object->IsOverlapping(this)
+            && object->m_collides_with_objects
+            && object->GetTestRect().Intersect(rect) )
+          return object;
       }
     }
   return NULL;
