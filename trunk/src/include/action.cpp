@@ -321,7 +321,7 @@ void Action::StoreCharacter(uint team_no, uint char_no)
   Character * c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
   Push(c->GetPosition());
   Push((int)c->GetDirection());
-  Push(c->GetFiringAngle());
+  Push(c->GetAbsFiringAngle());
   Push(c->GetSpeed());
   if(c->IsActiveCharacter()) { // If active character, store step animation
     Push((int)true);
