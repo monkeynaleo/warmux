@@ -110,6 +110,7 @@ public:
   bool IsDiseased() const;
   void SetDiseaseDamage(const uint damage_per_turn, const uint disease_duration);
   uint GetDiseaseDamage() const;
+  uint GetDiseaseDuration() const;
   void DecDiseaseDuration();
 
   void Draw();
