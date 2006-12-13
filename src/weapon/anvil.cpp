@@ -60,6 +60,7 @@ void Anvil::Refresh()
 {
   if(merge_time != 0 && merge_time < Time::GetInstance()->Read()) {
     world.MergeSprite(GetPosition(),image);
+    Ghost();
   } else {
     WeaponProjectile::Refresh();
   }
