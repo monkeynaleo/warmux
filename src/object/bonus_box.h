@@ -26,6 +26,7 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../team/team.h"
+#include "../weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 
 class BonusBox : public PhysicalObj
@@ -33,30 +34,17 @@ class BonusBox : public PhysicalObj
   private:
     static bool enable;
     static uint time;
+    int nb_ammo;
 
     bool parachute; 
     Sprite *anim;
 
-    enum
-    {
-      // If you modify this enum, modify also nbr_bonus_diff
-      bonusDYNAMITE=1,
-      bonusTELEPORTATION,
-      bonusENERGY,
-      bonusTRAP,
-      bonusAIR_ATTACK,
-      bonusBASEBALL,
-      bonusLOWGRAV,
-      bonusAUTO_BAZOOKA,
-      bonusRIOT_BOMB,
-      bonusANVIL,
-      bonusHOLLY_GRENADE
-    } bonus_weapons;
-    static const uint nb_bonus = bonusHOLLY_GRENADE;
+    Weapon::Weapon_type contents;
 
   private:
     static bool PlaceBonusBox (BonusBox& bonus_box);
     void ApplyBonus (Team &team, Character &character);
+    void PickRandomWeapon();
   public:
     BonusBox();
     ~BonusBox();
@@ -64,6 +52,7 @@ class BonusBox : public PhysicalObj
     // Activate bonus box ?
     static void Enable (bool _enable);
     static bool NewBonusBox();
+    //bool LoadXml(xmlpp::Element * object); //the next update will include this
 
     void Draw();
     void Refresh();
@@ -71,6 +60,7 @@ class BonusBox : public PhysicalObj
   protected:
     // Signal Fall ending
     virtual void SignalCollision();
+    void SignalDeath();
 };
 
 //-----------------------------------------------------------------------------
