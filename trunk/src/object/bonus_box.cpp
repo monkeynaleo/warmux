@@ -36,6 +36,7 @@
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/resource_manager.h"
+#include "../weapon/explosion.h"
 #include "../weapon/weapons_list.h"
 
 //#define FAST
@@ -83,7 +84,12 @@ BonusBox::BonusBox()
 
   parachute = true;
 
+  //these values will get read from XML soon
+  life_points = 41;
+  nb_ammo = 3;
+
   SetSpeed (SPEED, M_PI_2);
+  PickRandomWeapon();
 }
 
 BonusBox::~BonusBox(){
@@ -128,116 +134,57 @@ void BonusBox::SignalCollision()
   anim->Start();
 }
 
-//-----------------------------------------------------------------------------
-//-----------------------------------------------------------------------------
+//Boxes can explode too...
+void BonusBox::SignalDeath()
+{
+  ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
 
-void BonusBox::ApplyBonus (Team &equipe, Character &ver){
-  std::ostringstream txt;
-  uint bonus = randomSync.GetLong (1, nb_bonus);
-  switch (bonus){
-  case bonusTELEPORTATION:
-    txt << Format(ngettext(
-                "%s team has won %u teleportation.",
-                "%s team has won %u teleportations.",
-                BONUS_TELEPORTATION),
-            ActiveTeam().GetName().c_str(), BONUS_TELEPORTATION);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_TELEPORTATION)->GetName() ] += BONUS_TELEPORTATION;
-    break;
+  ExplosiveWeaponConfig cfg;
+  cfg.blast_range = 3;
+  cfg.blast_force = 25;
+  cfg.explosion_range = 3;
+  cfg.particle_range = 25;
+  lst_objects.RemoveObject(this);
+  ApplyExplosion(GetCenter(), cfg);
+  Ghost();
+}
 
-  case bonusENERGY:
-    txt << Format(ngettext(
-                "%s has won %u point of energy!",
-                "%s has won %u points of energy!",
-                BONUS_ENERGY),
-            ver.GetName().c_str(), BONUS_ENERGY);
-    ver.SetEnergyDelta (BONUS_ENERGY);
-    break;
+void BonusBox::PickRandomWeapon() {
 
-  case bonusTRAP:
-    txt << Format(ngettext(
-                "%s has lost %u point of energy.",
-                "%s has lost %u points of energy.",
-                BONUS_TRAP),
-            ver.GetName().c_str(), BONUS_TRAP);
-    ver.SetEnergyDelta (-BONUS_TRAP);
-    break;
-
-  case bonusAIR_ATTACK:
-    txt << Format(ngettext(
-                "'%s has won %u Air Attack",
-                "'%s has won %u Air Attacks",
-                BONUS_AIR_ATTACK),
-            ActiveTeam().GetName().c_str(), BONUS_AIR_ATTACK);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_AIR_ATTACK)->GetName() ] += BONUS_AIR_ATTACK;
-    break;
-
-  case bonusBASEBALL:
-    txt << Format(ngettext(
-                "'%s has won %u Baseball bat",
-                "'%s has won %u Baseball bats",
-                BONUS_BASEBALL),
-            ActiveTeam().GetName().c_str(), BONUS_BASEBALL);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_BASEBALL)->GetName() ] += BONUS_BASEBALL;
-    break;
-
-  case bonusLOWGRAV:
-    txt << Format(ngettext(
-                "'%s has won %u Low gravity",
-                "'%s has won %u Low gravity",
-                BONUS_LOWGRAV),
-            ActiveTeam().GetName().c_str(), BONUS_LOWGRAV);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_LOWGRAV)->GetName() ] += BONUS_LOWGRAV;
-    break;
-
-  case bonusANVIL:
-    txt << Format(ngettext(
-                "'%s has won %u Anvil",
-                "'%s has won %u Anvil",
-                BONUS_ANVIL),
-            ActiveTeam().GetName().c_str(), BONUS_ANVIL);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_ANVIL)->GetName() ] += BONUS_ANVIL;
-    break;
-
-  case bonusHOLLY_GRENADE:
-    txt << Format(ngettext(
-                "'%s has won %u Holy grenade",
-                "'%s has won %u Holy grenades",
-                BONUS_HOLLY_GRENADE),
-            ActiveTeam().GetName().c_str(), BONUS_HOLLY_GRENADE);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_HOLLY_GRENADE)->GetName() ] += BONUS_HOLLY_GRENADE;
-    break;
-
-  case bonusAUTO_BAZOOKA:
-    txt << Format(ngettext(
-                "%s team has won %u Automatic Bazooka!",
-                "%s team has won %u Automatic Bazookas!",
-                BONUS_AUTO_BAZOOKA),
-		  ActiveTeam().GetName().c_str(), BONUS_AUTO_BAZOOKA);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_AUTOMATIC_BAZOOKA)->GetName() ] += BONUS_AUTO_BAZOOKA;
-    break;
-
-  case bonusRIOT_BOMB:
-    txt << Format(ngettext(
-                "%s team has won %u Riot Bomb!",
-                "%s team has won %u Riot Bombs!",
-                BONUS_RIOT_BOMB),
-		  ActiveTeam().GetName().c_str(), BONUS_RIOT_BOMB);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_RIOT_BOMB)->GetName() ] += BONUS_RIOT_BOMB;
-    break;
-
-  default: std::cout << bonus << std::endl; assert (false);
-  case bonusDYNAMITE:
-    txt << Format(ngettext(
-                "%s team has won %u stick of Dynamite!",
-                "%s team has won %u sticks of Dynamite!",
-                BONUS_DYNAMITE),
-            ActiveTeam().GetName().c_str(), BONUS_DYNAMITE);
-    equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_DYNAMITE)->GetName() ] += BONUS_DYNAMITE;
-    break;
+  int weapon_count = 0;
+  int weapon_num = 0;
+  WeaponsList::weapons_list_it it;
+  for(it = Config::GetInstance()->GetWeaponsList()->GetList().begin(); it != Config::GetInstance()->GetWeaponsList()->GetList().end(); it++) {
+    weapon_count++;
   }
+  weapon_num = (int)randomSync.GetDouble(1,weapon_count);
+  it = Config::GetInstance()->GetWeaponsList()->GetList().begin();
+  int a=0;
+  while(a < weapon_num && it != Config::GetInstance()->GetWeaponsList()->GetList().end()) {
+    it++;
+    a++;
+  }
+  contents = (*it)->GetType();
+  std::cout<<"Out of "<<weapon_count<<" weapons, weapon "<<weapon_num<<" was selected."<<std::endl;
+}
 
+void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
+  std::ostringstream txt;
+    if(ActiveTeam().ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())!=INFINITE_AMMO) {
+        equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName() ] += nb_ammo;
+        txt << Format(ngettext(
+                "%s team has won %u %s!",
+                "%s team has won %u %ss!",
+                2),
+            ActiveTeam().GetName().c_str(), nb_ammo, Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
+    }
+    else {
+        txt << Format(gettext("%s team already has infinite ammo for the %s!"),
+            ActiveTeam().GetName().c_str(), Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
+    }
   GameMessages::GetInstance()->Add (txt.str());
 }
+
 
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
