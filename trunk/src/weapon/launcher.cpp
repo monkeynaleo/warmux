@@ -371,7 +371,7 @@ void WeaponLauncher::SignalProjectileGhostState()
   m_is_active = false;
 }
 
-// Signal a projectile timeout (for exemple: grenade, holly grenade ... etc.)
+// Signal a projectile timeout (for exemple: grenade, disco grenade ... etc.)
 void WeaponLauncher::SignalProjectileTimeout()
 {
   m_is_active = false;

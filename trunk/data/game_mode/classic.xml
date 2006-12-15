@@ -218,7 +218,7 @@
       <change_weapon>1</change_weapon>
     </jetpack>
 
-    <holly_grenade>
+    <disco_grenade>
       <position origin="hand" x="-10" y="-6" />
       <max_strength>40</max_strength>
       <nb_ammo>1</nb_ammo>
@@ -231,7 +231,7 @@
       <blast_force>1500</blast_force>
       <timeout>5</timeout>
       <allow_change_timeout>1</allow_change_timeout>
-    </holly_grenade>
+    </disco_grenade>
 
     <lowgrav>
       <position origin="hand" x="-24" y="-23" />

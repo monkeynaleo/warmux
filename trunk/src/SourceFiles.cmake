@@ -137,7 +137,7 @@ weapon/explosion.cpp
 weapon/gnu.cpp
 weapon/grenade.cpp
 weapon/gun.cpp
-weapon/holly_grenade.cpp
+weapon/disco_grenade.cpp
 weapon/jetpack.cpp
 weapon/launcher.cpp
 weapon/lowgrav.cpp

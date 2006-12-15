@@ -59,7 +59,7 @@ const uint BONUS_TRAP=75;
 const uint BONUS_DYNAMITE=3;
 const uint BONUS_ANVIL=1;
 const uint BONUS_BASEBALL=3;
-const uint BONUS_HOLLY_GRENADE=1;
+const uint BONUS_DISCO_GRENADE=1;
 const uint BONUS_LOWGRAV=2;
 const uint BONUS_AIR_ATTACK=1;
 const uint BONUS_TELEPORTATION=2;
@@ -104,12 +104,12 @@ void BonusBox::Draw()
 void BonusBox::Refresh()
 {
   // If we touch a character, we remove the bonus box
-  FOR_ALL_LIVING_CHARACTERS(equipe, ver)
+  FOR_ALL_LIVING_CHARACTERS(team, character)
   {
-    if( ObjTouche(*ver) )
+    if( ObjTouche(*character) )
     {
       // here is the gift (truly a gift ?!? :)
-      ApplyBonus (**equipe, *ver);
+      ApplyBonus (**team, *character);
       Ghost();
       return;
     }

@@ -16,28 +16,28 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Holly Grenade
+ * Disco Grenade
  *****************************************************************************/
 
-#ifndef HOLLY_GRENADE_H
-#define HOLLY_GRENADE_H
+#ifndef DISCO_GRENADE_H
+#define DISCO_GRENADE_H
 
 #include "launcher.h"
 #include "../graphic/surface.h"
 #include "../gui/progress_bar.h"
 #include "../include/base.h"
 
-class HollyGrenadeLauncher;
+class DiscoGrenadeLauncher;
 
-// The Holly Grenade
-class HollyGrenade : public WeaponProjectile
+// The Disco Grenade
+class DiscoGrenade : public WeaponProjectile
 {
   protected:
     bool sing_alleluia;
 
     ParticleEngine smoke_engine;
   public:
-    HollyGrenade(ExplosiveWeaponConfig& cfg,
+    DiscoGrenade(ExplosiveWeaponConfig& cfg,
                  WeaponLauncher * p_launcher);
     void Refresh();
   protected:
@@ -45,12 +45,12 @@ class HollyGrenade : public WeaponProjectile
     void SignalOutOfMap();
 };
 
-class HollyGrenadeLauncher : public WeaponLauncher
+class DiscoGrenadeLauncher : public WeaponLauncher
 {
   public:
-    HollyGrenadeLauncher();
+    DiscoGrenadeLauncher();
   protected:
     WeaponProjectile * GetProjectileInstance();
 };
 
-#endif /* HOLLY_GRENADE_H */
+#endif /* DISCO_GRENADE_H */
