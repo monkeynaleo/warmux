@@ -144,7 +144,7 @@ void BonusBox::SignalDeath()
   cfg.blast_force = 25;
   cfg.explosion_range = 3;
   cfg.particle_range = 25;
-  lst_objects.RemoveObject(this);
+  //lst_objects.RemoveObject(this);
   ApplyExplosion(GetCenter(), cfg);
   Ghost();
 }
