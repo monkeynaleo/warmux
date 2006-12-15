@@ -156,7 +156,7 @@ wormux_SOURCES = \
 	weapon/grenade.cpp weapon/grenade.h \
 	weapon/gun.cpp weapon/gun.h \
 	weapon/shotgun.cpp weapon/shotgun.h \
-	weapon/holly_grenade.cpp weapon/holly_grenade.h \
+	weapon/disco_grenade.cpp weapon/disco_grenade.h \
 	weapon/jetpack.cpp weapon/jetpack.h\
 	weapon/lowgrav.cpp weapon/lowgrav.h \
 	weapon/mine.cpp weapon/mine.h \

@@ -174,10 +174,10 @@
 
   <!-- Holly Grenade ressources -->
   
-  <surface name="holly_grenade_ico" file="weapon/holly_grenade/holly_grenade_ico.png" />
-   <surface name="holly_grenade" file="weapon/holly_grenade/holly_grenade.png" />
-  <sprite name="holly_grenade">
-    <image file="weapon/holly_grenade/holly_grenade.png" />
+  <surface name="disco_grenade_ico" file="weapon/disco_grenade/disco_grenade_ico.png" />
+   <surface name="disco_grenade" file="weapon/disco_grenade/disco_grenade.png" />
+  <sprite name="disco_grenade">
+    <image file="weapon/disco_grenade/disco_grenade.png" />
   </sprite>
 
   <!-- Gnu ressources -->

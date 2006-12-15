@@ -106,7 +106,7 @@
     <rebound_factor>0.01</rebound_factor>
   </star_particle>
 
-  <magic_star_particle> <!-- Particle for the holly grenade -->
+  <magic_star_particle> <!-- Particle for the disco grenade -->
     <mass>0.5</mass>
     <wind_factor>0.2</wind_factor>
     <air_resist_factor>0.2</air_resist_factor>
@@ -218,14 +218,14 @@
     <rebound_factor>0.7</rebound_factor>
   </grenade>
 
-  <holly_grenade>
+  <disco_grenade>
     <mass>2.0</mass>
     <wind_factor>1.0</wind_factor>
     <air_resist_factor>0.0</air_resist_factor>
     <gravity_factor>1.0</gravity_factor>
     <rebounding>true</rebounding>
     <rebound_factor>0.4</rebound_factor>
-  </holly_grenade>
+  </disco_grenade>
 
   <cluster_bomb>
     <mass>30.0</mass>

@@ -36,7 +36,7 @@
 
 <!ELEMENT weapons (air_attack,airhammer,automatic_bazooka,baseball,bazooka,
                     bounce_ball,cluster_bomb,construct,dynamite,gnulauncher,
-                    grenade,gun,jetpack,holly_grenade,lowgrav,m16,minelauncher,
+                    grenade,gun,jetpack,disco_grenade,lowgrav,m16,minelauncher,
                     ninjarope,parachute,riot_bomb,skip_turn,snipe_rifle,suicide,
                     teleportation,tux
                     )>
@@ -92,7 +92,7 @@
                             
 <!ELEMENT jetpack (position,nb_ammo,unit_per_ammo?,change_weapon?)>
                             
-<!ELEMENT holly_grenade (position,max_strength,(min_angle,max_angle)?,
+<!ELEMENT disco_grenade (position,max_strength,(min_angle,max_angle)?,
                             nb_ammo,unit_per_ammo?,change_weapon?,damage,
                             explosion_range,particle_range,blast_range,blast_force,
                             timeout?,allow_change_timeout?)>

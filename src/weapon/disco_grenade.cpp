@@ -16,10 +16,10 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Holly Grenade
+ * Disco Grenade
  *****************************************************************************/
 
-#include "holly_grenade.h"
+#include "disco_grenade.h"
 #include <sstream>
 #include "explosion.h"
 #include "../game/time.h"
@@ -31,17 +31,17 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-HollyGrenade::HollyGrenade(ExplosiveWeaponConfig& cfg,
+DiscoGrenade::DiscoGrenade(ExplosiveWeaponConfig& cfg,
                            WeaponLauncher * p_launcher) :
-  WeaponProjectile ("holly_grenade", cfg, p_launcher),
+  WeaponProjectile ("disco_grenade", cfg, p_launcher),
   smoke_engine(40)
 {
-  m_rebound_sound = "weapon/holly_grenade_bounce";
+  m_rebound_sound = "weapon/disco_grenade_bounce";
   sing_alleluia = false;
   explode_with_collision = false;
 }
 
-void HollyGrenade::Explosion()
+void DiscoGrenade::Explosion()
 {
   const uint star_nbr = 9;
   const float cos_angle[] = {1.000000, 0.766044, 0.173648, -0.500000, -0.939693, -0.939693, -0.500000, 0.173648, 0.766044};
@@ -59,7 +59,7 @@ void HollyGrenade::Explosion()
   WeaponProjectile::Explosion();
 }
 
-void HollyGrenade::Refresh()
+void DiscoGrenade::Refresh()
 {
   WeaponProjectile::Refresh();
 
@@ -90,7 +90,7 @@ void HollyGrenade::Refresh()
   image->SetRotation_rad(GetSpeedAngle());
 }
 
-void HollyGrenade::SignalOutOfMap()
+void DiscoGrenade::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The grenade has left the battlefield before exploding"));
   WeaponProjectile::SignalOutOfMap();
@@ -98,8 +98,8 @@ void HollyGrenade::SignalOutOfMap()
 
 //-----------------------------------------------------------------------------
 
-HollyGrenadeLauncher::HollyGrenadeLauncher() :
-  WeaponLauncher(WEAPON_HOLLY_GRENADE, "holly_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
+DiscoGrenadeLauncher::DiscoGrenadeLauncher() :
+  WeaponLauncher(WEAPON_DISCO_GRENADE, "disco_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Holy Grenade");
   m_allow_change_timeout = true;
@@ -107,8 +107,8 @@ HollyGrenadeLauncher::HollyGrenadeLauncher() :
   ReloadLauncher();
 }
 
-WeaponProjectile * HollyGrenadeLauncher::GetProjectileInstance()
+WeaponProjectile * DiscoGrenadeLauncher::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>
-      (new HollyGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+      (new DiscoGrenade(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }

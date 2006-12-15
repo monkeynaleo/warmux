@@ -70,7 +70,7 @@ WeaponsList::WeaponsList()
   AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
   Dynamite* dynamite = new Dynamite;
   GrenadeLauncher* grenade_launcher = new GrenadeLauncher;
-  HollyGrenadeLauncher* holly_grenade_launcher = new HollyGrenadeLauncher;
+  DiscoGrenadeLauncher* disco_grenade_launcher = new DiscoGrenadeLauncher;
   ClusterLauncher* cluster_launcher = new ClusterLauncher;
   Baseball* baseball = new Baseball;
   Mine* mine = new Mine;
@@ -105,7 +105,7 @@ WeaponsList::WeaponsList()
   AddToList(dynamite,2);
   AddToList(grenade_launcher, 2);
   AddToList(cluster_launcher, 2);
-  AddToList(holly_grenade_launcher, 2);
+  AddToList(disco_grenade_launcher, 2);
   AddToList(mine,2);
 
   // Category 3
