@@ -37,7 +37,7 @@ DiscoGrenade::DiscoGrenade(ExplosiveWeaponConfig& cfg,
   smoke_engine(40)
 {
   m_rebound_sound = "weapon/disco_grenade_bounce";
-  sing_alleluia = false;
+  have_played_music = false;
   explode_with_collision = false;
 }
 
@@ -80,19 +80,17 @@ void DiscoGrenade::Refresh()
 #endif //HAVE_A_REALLY_BIG_CPU
 
   double tmp = Time::GetInstance()->Read() - begin_time;
-  // Sing Alleluia ;-)
-  if (tmp > (1000 * cfg.timeout - 2000) && !sing_alleluia) {
+  // Ah ! Ah ! Ah ! Staying Alive, staying alive ...
+  if (tmp > (1000 * cfg.timeout - 2000) && !have_played_music) {
     jukebox.Play("share","weapon/alleluia") ;
-    sing_alleluia = true;
+    have_played_music = true;
   }
-
-  // rotation de l'image de la grenade...
   image->SetRotation_rad(GetSpeedAngle());
 }
 
 void DiscoGrenade::SignalOutOfMap()
 {
-  GameMessages::GetInstance()->Add (_("The grenade has left the battlefield before exploding"));
+  GameMessages::GetInstance()->Add (_("The disco grenade has left the dance floor before exploding"));
   WeaponProjectile::SignalOutOfMap();
 }
 
