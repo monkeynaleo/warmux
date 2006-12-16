@@ -33,7 +33,7 @@ class DiscoGrenadeLauncher;
 class DiscoGrenade : public WeaponProjectile
 {
   protected:
-    bool sing_alleluia;
+    bool have_played_music;
 
     ParticleEngine smoke_engine;
   public:
