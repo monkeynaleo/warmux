@@ -138,6 +138,8 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 {
 	line.clear();
 	std::getline(file, line);
+	if(file.eof())
+		return -1;
 	return line.size();
 }
 
@@ -166,7 +168,7 @@ bool IndexServer::GetServerList()
   std::string line;
  
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
-  while ((read = getline(line, fin)) > 0)
+  while ((read = getline(line, fin)) >= 0)
   {
     if(line.at(0) == '#' || line.at(0) == '\n' || line.at(0) == '\0')
       continue;
