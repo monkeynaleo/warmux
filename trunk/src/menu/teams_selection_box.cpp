@@ -321,8 +321,6 @@ void TeamsSelectionBox::SetNbTeams(uint nb_teams)
 
 void TeamsSelectionBox::ValidTeamsSelection()
 {
-  std::list<uint> selection;
-
   uint nb_teams=0;
   for (uint i=0; i < MAX_NB_TEAMS; i++) {
     if (teams_selections[i]->GetTeam() != NULL)
@@ -343,6 +341,4 @@ void TeamsSelectionBox::ValidTeamsSelection()
     }
     teams_list.ChangeSelection (selection);
   }
-
-
 }
