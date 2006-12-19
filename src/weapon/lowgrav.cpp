@@ -64,12 +64,12 @@ void LowGrav::Draw()
 {
 }
 
-void LowGrav::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
+void LowGrav::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
   switch (action)
     {
       case Action::ACTION_SHOOT:
-        if (event_type == Clavier::KEY_PRESSED)
+        if (event_type == Keyboard::KEY_PRESSED)
           ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
 	break ;
 

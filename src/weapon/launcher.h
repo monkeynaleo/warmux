@@ -128,7 +128,7 @@ class WeaponLauncher : public Weapon
     virtual ~WeaponLauncher();
 
     virtual void Draw();
-    virtual void HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type);
+    virtual void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
 
   // Handle of projectile events
     virtual void SignalProjectileExplosion();

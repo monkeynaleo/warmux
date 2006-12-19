@@ -69,7 +69,7 @@ public:
 
   int GetTransparency() const;
 
-  inline Clavier * GetKeyboard() { return my_keyboard; }
+  inline Keyboard * GetKeyboard() { return my_keyboard; }
   inline WeaponsList * GetWeaponsList() { return my_weapons_list; }
 
   std::string GetTtfFilename() const;
@@ -123,7 +123,7 @@ protected:
 private:
   Config();
   // In french Clavier = keyboard
-  Clavier * my_keyboard;
+  Keyboard * my_keyboard;
   WeaponsList * my_weapons_list;
   static Config * singleton;
   bool DoLoading(void);

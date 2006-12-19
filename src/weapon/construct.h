@@ -44,7 +44,7 @@ public:
   void Draw();
   void ChooseTarget(Point2i mouse_pos);
 
-  void HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type);
+  void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
   void ActionUp ();    // Mouse wheel up
   void ActionDown ();  // Mouse wheel down
   void Up();

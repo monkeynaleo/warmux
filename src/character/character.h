@@ -121,10 +121,10 @@ public:
   void StopPlaying();
 
   // Handle a key event on the character
-  void HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type);
+  void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
   void PrepareShoot();
   void DoShoot();
-  void HandleShoot(Clavier::Key_Event_t event_type);
+  void HandleShoot(Keyboard::Key_Event_t event_type);
   double GetFiringAngle() const;
   double GetAbsFiringAngle() const;
   void SetFiringAngle(double angle);

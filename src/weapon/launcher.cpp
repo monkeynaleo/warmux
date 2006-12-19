@@ -459,9 +459,9 @@ void WeaponLauncher::IncMissedShots()
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
 }
 
-void WeaponLauncher::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
+void WeaponLauncher::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
-  if (event_type == Clavier::KEY_RELEASED)
+  if (event_type == Keyboard::KEY_RELEASED)
     switch (action) {
       case Action::ACTION_WEAPON_1:
         projectile->SetTimeOut(1);
