@@ -35,7 +35,7 @@
 #undef LoadImage
 #endif
 
-BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
+DynamiteStick::DynamiteStick(ExplosiveWeaponConfig& cfg,
                              WeaponLauncher * p_launcher) :
   WeaponProjectile("dynamite_bullet", cfg, p_launcher)
 {
@@ -47,7 +47,7 @@ BatonDynamite::BatonDynamite(ExplosiveWeaponConfig& cfg,
   SetTestRect (0, 0, 2, 3);
 }
 
-void BatonDynamite::Shoot(double strength)
+void DynamiteStick::Shoot(double strength)
 {
   unsigned int delay = (1000 * WeaponProjectile::GetTotalTimeout())/image->GetFrameCount();
   image->SetFrameSpeed(delay);
@@ -58,28 +58,28 @@ void BatonDynamite::Shoot(double strength)
   WeaponProjectile::Shoot(strength);
 }
 
-void BatonDynamite::Refresh()
+void DynamiteStick::Refresh()
 {
   image->Update();
   if (image->IsFinished()) Explosion();
 }
 
-void BatonDynamite::ShootSound()
+void DynamiteStick::ShootSound()
 {
   channel = jukebox.Play("share","weapon/dynamite_fuze", -1);
 }
 
-void BatonDynamite::SignalExplosion()
+void DynamiteStick::SignalExplosion()
 {
   jukebox.Stop(channel);
 }
 
-void BatonDynamite::SignalOutOfMap()
+void DynamiteStick::SignalOutOfMap()
 {
   jukebox.Stop(channel);
 }
 
-void BatonDynamite::SignalDrowning()
+void DynamiteStick::SignalDrowning()
 {
   jukebox.Stop(channel);
 }
@@ -95,7 +95,7 @@ Dynamite::Dynamite() :
 WeaponProjectile * Dynamite::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>
-      (new BatonDynamite(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+      (new DynamiteStick(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }
 
 // drop a dynamite
