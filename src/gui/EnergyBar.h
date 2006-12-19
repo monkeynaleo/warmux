@@ -24,7 +24,7 @@
 
 #include "../gui/progress_bar.h"
 
-class EnergyBar : public BarreProg {
+class EnergyBar : public ProgressBar {
   public:
     static const int NB_OF_ENERGY_COLOR = 6;
     Color colors_value[NB_OF_ENERGY_COLOR];

@@ -384,7 +384,7 @@ void Interface::UpdateTimer(uint utimer)
 
 void Interface::UpdateWindIndicator(int wind_value)
 {
-  wind_bar.Actu(wind_value);
+  wind_bar.UpdateValue(wind_value);
 }
 
 void AbsoluteDraw(Surface &s, Point2i pos)

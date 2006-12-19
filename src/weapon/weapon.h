@@ -44,7 +44,7 @@ extern const uint BUTTON_ICO_HEIGHT;
 extern const uint WEAPON_ICO_WIDTH;
 extern const uint WEAPON_ICO_HEIGHT;
 
-class WeaponStrengthBar : public BarreProg
+class WeaponStrengthBar : public ProgressBar
 {
  public:
   bool visible ;

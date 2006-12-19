@@ -155,9 +155,9 @@ void Weapon::Select()
 
   // init stamp on the stength_bar
   double val = ActiveCharacter().previous_strength;
-  weapon_strength_bar.Reset_Marqueur();
+  weapon_strength_bar.ResetTag();
   if (0 < val && val < max_strength)
-  weapon_strength_bar.AjouteMarqueur (uint(val*100), primary_red_color);
+  weapon_strength_bar.AddTag (uint(val*100), primary_red_color);
 }
 
 void Weapon::Deselect()
@@ -380,7 +380,7 @@ void Weapon::UpdateStrength(){
 
   m_strength = BorneDouble (val, 0.0, max_strength);
 
-  weapon_strength_bar.Actu ((int)(m_strength*100));
+  weapon_strength_bar.UpdateValue ((int)(m_strength*100));
 }
 
 bool Weapon::IsReady() const{
