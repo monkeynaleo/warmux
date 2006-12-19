@@ -31,14 +31,14 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-RoquetteBazooka::RoquetteBazooka(ExplosiveWeaponConfig& cfg,
+BazookaRocket::BazookaRocket(ExplosiveWeaponConfig& cfg,
                                  WeaponLauncher * p_launcher) :
   WeaponProjectile ("rocket", cfg,p_launcher), smoke_engine(20)
 {
   explode_colliding_character = true;
 }
 
-void RoquetteBazooka::Refresh()
+void BazookaRocket::Refresh()
 {
   WeaponProjectile::Refresh();
   image->SetRotation_rad(GetSpeedAngle());
@@ -46,7 +46,7 @@ void RoquetteBazooka::Refresh()
                                    GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
 }
 
-void RoquetteBazooka::SignalOutOfMap()
+void BazookaRocket::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
@@ -64,5 +64,5 @@ Bazooka::Bazooka() :
 WeaponProjectile * Bazooka::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>
-      (new RoquetteBazooka(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+      (new BazookaRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }

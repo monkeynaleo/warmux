@@ -32,26 +32,26 @@
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
 
-RoquetteRiotBomb::RoquetteRiotBomb(ExplosiveWeaponConfig& cfg,
+RiotBombRocket::RiotBombRocket(ExplosiveWeaponConfig& cfg,
                                    WeaponLauncher * p_launcher) :
   WeaponProjectile ("riot_rocket", cfg, p_launcher)
 {
   explode_colliding_character = true;
 }
 
-void RoquetteRiotBomb::Refresh()
+void RiotBombRocket::Refresh()
 {
   WeaponProjectile::Refresh();
   image->SetRotation_rad(GetSpeedAngle());
 }
 
-void RoquetteRiotBomb::SignalOutOfMap()
+void RiotBombRocket::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
 }
 
-void RoquetteRiotBomb::DoExplosion()
+void RiotBombRocket::DoExplosion()
 {
   Point2i pos = GetCenter();
   ApplyExplosion (pos, cfg, "weapon/explosion", false, ParticleEngine::LittleESmoke);
@@ -68,5 +68,5 @@ RiotBomb::RiotBomb() :
 WeaponProjectile * RiotBomb::GetProjectileInstance()
 {
   return dynamic_cast<WeaponProjectile *>
-      (new RoquetteRiotBomb(cfg(),dynamic_cast<WeaponLauncher *>(this)));
+      (new RiotBombRocket(cfg(),dynamic_cast<WeaponLauncher *>(this)));
 }

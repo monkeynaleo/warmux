@@ -24,10 +24,10 @@
 #include "launcher.h"
 
 // Roquette du bazooka
-class RoquetteRiotBomb : public WeaponProjectile
+class RiotBombRocket : public WeaponProjectile
 {
 public:
-  RoquetteRiotBomb(ExplosiveWeaponConfig& cfg,
+  RiotBombRocket(ExplosiveWeaponConfig& cfg,
                    WeaponLauncher * p_launcher);
   void Refresh();
 protected:
