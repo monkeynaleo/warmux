@@ -75,7 +75,7 @@ POTFILES = \
 	src/weapon/gnu.cpp \
 	src/weapon/grenade.cpp \
 	src/weapon/gun.cpp \
-	src/weapon/holly_grenade.cpp \
+	src/weapon/disco_grenade.cpp \
 	src/weapon/jetpack.cpp \
 	src/weapon/launcher.cpp \
 	src/weapon/lowgrav.cpp \
