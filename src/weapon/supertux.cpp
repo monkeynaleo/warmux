@@ -114,7 +114,7 @@ SuperTuxWeaponConfig::SuperTuxWeaponConfig()
 void SuperTuxWeaponConfig::LoadXml(xmlpp::Element *elem)
 {
   ExplosiveWeaponConfig::LoadXml (elem);
-  LitDocXml::LitUint (elem, "speed", speed);
+  XmlReader::ReadUint(elem, "speed", speed);
 }
 
 //-----------------------------------------------------------------------------

@@ -535,7 +535,7 @@ Sprite & Weapon::GetIcon() const
 
 bool Weapon::LoadXml(xmlpp::Element * weapon)
 {
-  xmlpp::Element *elem = LitDocXml::AccesBalise (weapon, m_id);
+  xmlpp::Element *elem = XmlReader::GetMarker(weapon, m_id);
   if (elem == NULL)
   {
       std::cout << Format(_("No element <%s> found in the xml config file!"),
@@ -544,42 +544,42 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
     return false;
   }
 
-  xmlpp::Element *pos_elem = LitDocXml::AccesBalise (elem, "position");
+  xmlpp::Element *pos_elem = XmlReader::GetMarker(elem, "position");
   if (pos_elem != NULL) {
     // E.g. <position origin="hand" x="-1" y="0" />
     std::string origin_xml;
-    LitDocXml::LitAttrInt (pos_elem, "x", position.x);
-    LitDocXml::LitAttrInt (pos_elem, "y", position.y);
-    LitDocXml::LitAttrString (pos_elem, "origin", origin_xml);
+    XmlReader::ReadIntAttr (pos_elem, "x", position.x);
+    XmlReader::ReadIntAttr (pos_elem, "y", position.y);
+    XmlReader::ReadStringAttr (pos_elem, "origin", origin_xml);
     if (origin_xml == "over")
       origin = weapon_origin_OVER;
     else
       origin = weapon_origin_HAND;
   }
 
-  pos_elem = LitDocXml::AccesBalise (elem, "hole");
+  pos_elem = XmlReader::GetMarker(elem, "hole");
   if (pos_elem != NULL) {
     // E.g. <hole dx="-1" dy="0" />
-    LitDocXml::LitAttrInt (pos_elem, "dx", hole_delta.x);
-    LitDocXml::LitAttrInt (pos_elem, "dy", hole_delta.y);
+    XmlReader::ReadIntAttr(pos_elem, "dx", hole_delta.x);
+    XmlReader::ReadIntAttr(pos_elem, "dy", hole_delta.y);
   }
 
-  LitDocXml::LitInt (elem, "nb_ammo", m_initial_nb_ammo);
-  LitDocXml::LitInt (elem, "unit_per_ammo", m_initial_nb_unit_per_ammo);
+  XmlReader::ReadInt(elem, "nb_ammo", m_initial_nb_ammo);
+  XmlReader::ReadInt(elem, "unit_per_ammo", m_initial_nb_unit_per_ammo);
 
   // max strength
   // if max_strength = 0, no strength_bar !
-  LitDocXml::LitDouble (elem, "max_strength", max_strength);
+  XmlReader::ReadDouble(elem, "max_strength", max_strength);
 
   // change weapon after ? (for the ninja cord = true)
-  LitDocXml::LitBool (elem, "change_weapon", m_can_change_weapon);
+  XmlReader::ReadBool(elem, "change_weapon", m_can_change_weapon);
 
   // angle of weapon when drawing
   // if (min_angle == max_angle) no cross_hair !
   // between -90 to 90 degrees
   int min_angle_deg = 0, max_angle_deg = 0;
-  LitDocXml::LitInt (elem, "min_angle", min_angle_deg);
-  LitDocXml::LitInt (elem, "max_angle", max_angle_deg);
+  XmlReader::ReadInt(elem, "min_angle", min_angle_deg);
+  XmlReader::ReadInt(elem, "max_angle", max_angle_deg);
   min_angle = static_cast<double>(min_angle_deg) * M_PI / 180.0;
   max_angle = static_cast<double>(max_angle_deg) * M_PI / 180.0;
 

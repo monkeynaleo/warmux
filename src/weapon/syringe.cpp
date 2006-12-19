@@ -62,9 +62,9 @@ bool Syringe::p_Shoot (){
       // Did we touch somebody ?
       if( character->ObjTouche(pos_to_check) )
       {
-	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-	character->SetDiseaseDamage(cfg().damage, cfg().turns);
-	end = true;
+        // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
+        character->SetDiseaseDamage(cfg().damage, cfg().turns);
+        end = true;
       }
     }
   } while (!end);
@@ -89,7 +89,7 @@ SyringeConfig::SyringeConfig(){
 
 void SyringeConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
-  LitDocXml::LitUint (elem, "range", range);
-  LitDocXml::LitUint (elem, "turns", turns);
-  LitDocXml::LitUint (elem, "damage", damage);
+  XmlReader::ReadUint(elem, "range", range);
+  XmlReader::ReadUint(elem, "turns", turns);
+  XmlReader::ReadUint(elem, "damage", damage);
 }

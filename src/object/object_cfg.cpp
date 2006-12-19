@@ -50,16 +50,16 @@ void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &confi
   else
     file = config_file;
 
-  // Charge la configuration XML
-  LitDocXml doc;
-  assert(doc.Charge (file));
-  xmlpp::Element* elem = LitDocXml::AccesBalise(doc.racine(), obj_name);
+  // Load Xml configuration
+  XmlReader doc;
+  assert(doc.Load(file));
+  xmlpp::Element* elem = XmlReader::GetMarker(doc.GetRoot(), obj_name);
 
   assert(elem != NULL);
-  LitDocXml::LitDouble (elem, "mass", m_mass);
-  LitDocXml::LitDouble (elem, "wind_factor", m_wind_factor);
-  LitDocXml::LitDouble (elem, "air_resist_factor", m_air_resist_factor);
-  LitDocXml::LitDouble (elem, "gravity_factor", m_gravity_factor);
-  LitDocXml::LitDouble (elem, "rebound_factor", m_rebound_factor);
-  LitDocXml::LitBool (elem, "rebounding", m_rebounding);
+  XmlReader::ReadDouble(elem, "mass", m_mass);
+  XmlReader::ReadDouble(elem, "wind_factor", m_wind_factor);
+  XmlReader::ReadDouble(elem, "air_resist_factor", m_air_resist_factor);
+  XmlReader::ReadDouble(elem, "gravity_factor", m_gravity_factor);
+  XmlReader::ReadDouble(elem, "rebound_factor", m_rebound_factor);
+  XmlReader::ReadBool(elem, "rebounding", m_rebounding);
 }

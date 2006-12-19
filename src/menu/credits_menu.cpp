@@ -44,8 +44,8 @@ public:
 
 bool Author::Feed (const xmlpp::Node *node)
 {
-   if (!LitDocXml::LitString(node, "name", name)) return false;
-   if (!LitDocXml::LitString(node, "description", description)) return false;
+   if (!XmlReader::ReadString(node, "name", name)) return false;
+   if (!XmlReader::ReadString(node, "description", description)) return false;
    return true;
 }
 
@@ -105,14 +105,14 @@ void CreditsMenu::__sig_cancel()
 void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
 {
   std::string filename = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "authors.xml";
-  LitDocXml doc;
-  if (!doc.Charge (filename))
+  XmlReader doc;
+  if(!doc.Load(filename))
   {
     // Error: do something ...
     return;
   }
 
-  xmlpp::Node::NodeList sections = doc.racine() -> get_children("section");
+  xmlpp::Node::NodeList sections = doc.GetRoot()->get_children("section");
   xmlpp::Node::NodeList::iterator
     section=sections.begin(),
     end_section=sections.end();
@@ -130,7 +130,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
         std::cerr << "cast error" << std::endl;
         continue;
     }
-    if (!LitDocXml::LitAttrString(elem, "title", title)) continue;
+    if (!XmlReader::ReadStringAttr(elem, "title", title)) continue;
 
     std::cout << "=== " << title << " ===" << std::endl;
 
@@ -142,7 +142,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
         if (author.Feed(*node))
         {
           std::cout << author.PrettyString(false) << std::endl;
-	  lbox_authors->AddItem (false, author.PrettyString(false), author.name);
+          lbox_authors->AddItem (false, author.PrettyString(false), author.name);
         }
     }
     std::cout << std::endl;

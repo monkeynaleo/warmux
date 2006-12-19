@@ -27,7 +27,7 @@
 
 Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
 {
-  LitDocXml::LitAttrString( xml, "name", name);
+  XmlReader::ReadStringAttr( xml, "name", name);
 
   xmlpp::Node::NodeList nodes = xml -> get_children("member");
   xmlpp::Node::NodeList::iterator
@@ -39,7 +39,7 @@ Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     assert (elem != NULL);
     std::string att;
-    if (!LitDocXml::LitAttrString(elem, "name", att))
+    if (!XmlReader::ReadStringAttr(elem, "name", att))
     {
       std::cerr << "Malformed attached member definition" << std::endl;
       continue;
@@ -56,7 +56,7 @@ Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
     }
 
     int lay=0;
-    if(LitDocXml::LitAttrInt(elem, "layer", lay))
+    if(XmlReader::ReadIntAttr(elem, "layer", lay))
     {
       if((uint)lay >= layers.size())
         layers.resize( lay+1, (Member*)NULL);

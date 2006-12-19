@@ -35,7 +35,7 @@
 class Profile 
 { 
  public:
-  LitDocXml *doc;
+  XmlReader *doc;
   std::string filename;
   std::string relative_path;
 

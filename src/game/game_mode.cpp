@@ -67,7 +67,7 @@ GameMode::GameMode()
 bool GameMode::LoadXml(xmlpp::Element *xml)
 {
   std::string txt;
-  if (LitDocXml::LitString (xml, "allow_character_selection", txt))
+  if (XmlReader::ReadString(xml, "allow_character_selection", txt))
   {
     if (txt == "always")
       allow_character_selection = ALWAYS;
@@ -81,59 +81,59 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
       allow_character_selection = BEFORE_FIRST_ACTION;
   }
 
-  LitDocXml::LitUint (xml, "duration_turn", duration_turn);
-  LitDocXml::LitUint (xml, "duration_move_player", duration_move_player);
-  LitDocXml::LitUint (xml, "duration_exchange_player", duration_exchange_player);
-  LitDocXml::LitUint (xml, "duration_before_death_mode", duration_before_death_mode);
-  LitDocXml::LitUint (xml, "damage_per_turn_during_death_mode", damage_per_turn_during_death_mode);
-  LitDocXml::LitUint (xml, "max_teams", max_teams);
-  LitDocXml::LitUint (xml, "max_characters", max_characters);
-  LitDocXml::LitDouble (xml, "gravity", gravity);
-  LitDocXml::LitDouble (xml, "safe_fall", safe_fall);
-  LitDocXml::LitDouble (xml, "damage_per_fall_unit", damage_per_fall_unit);
+  XmlReader::ReadUint(xml, "duration_turn", duration_turn);
+  XmlReader::ReadUint(xml, "duration_move_player", duration_move_player);
+  XmlReader::ReadUint(xml, "duration_exchange_player", duration_exchange_player);
+  XmlReader::ReadUint(xml, "duration_before_death_mode", duration_before_death_mode);
+  XmlReader::ReadUint(xml, "damage_per_turn_during_death_mode", damage_per_turn_during_death_mode);
+  XmlReader::ReadUint(xml, "max_teams", max_teams);
+  XmlReader::ReadUint(xml, "max_characters", max_characters);
+  XmlReader::ReadDouble(xml, "gravity", gravity);
+  XmlReader::ReadDouble(xml, "safe_fall", safe_fall);
+  XmlReader::ReadDouble(xml, "damage_per_fall_unit", damage_per_fall_unit);
 
   // Character options
-  xmlpp::Element *character_xml = LitDocXml::AccesBalise (xml, "character");
+  xmlpp::Element *character_xml = XmlReader::GetMarker(xml, "character");
   if (character_xml != NULL)
   {
-    xmlpp::Element *item = LitDocXml::AccesBalise (character_xml, "energy");
+    xmlpp::Element *item = XmlReader::GetMarker(character_xml, "energy");
     if (item != NULL) {
-      LitDocXml::LitAttrUint (item, "initial", character.init_energy);
-      LitDocXml::LitAttrUint (item, "maximum", character.max_energy);
+      XmlReader::ReadUintAttr(item, "initial", character.init_energy);
+      XmlReader::ReadUintAttr(item, "maximum", character.max_energy);
       if (character.init_energy==0) character.init_energy = 1;
       if (character.max_energy==0) character.max_energy = 1;
     }
-    LitDocXml::LitUint (character_xml, "mass", character.mass);
-    LitDocXml::LitDouble (character_xml, "air_resist_factor", character.air_resist_factor);
-    item = LitDocXml::AccesBalise (character_xml, "jump");
+    XmlReader::ReadUint(character_xml, "mass", character.mass);
+    XmlReader::ReadDouble(character_xml, "air_resist_factor", character.air_resist_factor);
+    item = XmlReader::GetMarker(character_xml, "jump");
     if (item != NULL) {
       int angle_deg;
-      LitDocXml::LitAttrUint (item, "strength", character.jump_strength);
-      LitDocXml::LitAttrInt  (item, "angle", angle_deg);
+      XmlReader::ReadUintAttr(item, "strength", character.jump_strength);
+      XmlReader::ReadIntAttr(item, "angle", angle_deg);
       character.jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
 
-    item = LitDocXml::AccesBalise (character_xml, "super_jump");
+    item = XmlReader::GetMarker(character_xml, "super_jump");
     if (item != NULL) {
       int angle_deg;
-      LitDocXml::LitAttrUint (item, "strength", character.super_jump_strength);
-      LitDocXml::LitAttrInt  (item, "angle", angle_deg);
+      XmlReader::ReadUintAttr(item, "strength", character.super_jump_strength);
+      XmlReader::ReadIntAttr(item, "angle", angle_deg);
       character.super_jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
-    item = LitDocXml::AccesBalise (character_xml, "back_jump");
+    item = XmlReader::GetMarker(character_xml, "back_jump");
     if (item != NULL) {
       int angle_deg;
-      LitDocXml::LitAttrUint (item, "strength", character.back_jump_strength);
-      LitDocXml::LitAttrInt  (item, "angle", angle_deg);
+      XmlReader::ReadUintAttr(item, "strength", character.back_jump_strength);
+      XmlReader::ReadIntAttr(item, "angle", angle_deg);
       character.back_jump_angle = static_cast<double>(angle_deg) * M_PI / 180;
     }
-    xmlpp::Element *explosion = LitDocXml::AccesBalise (character_xml, "death_explosion");
+    xmlpp::Element *explosion = XmlReader::GetMarker(character_xml, "death_explosion");
     if (explosion != NULL)
       death_cfg.LoadXml(explosion);
   }
 
   //=== Weapons ===
-  xmlpp::Element *armes = LitDocXml::AccesBalise (xml, "weapons");
+  xmlpp::Element *armes = XmlReader::GetMarker(xml, "weapons");
   if (armes != NULL)
   {
     std::list<Weapon*> l_weapons_list = Config::GetInstance()->GetWeaponsList()->GetList() ;
@@ -155,7 +155,7 @@ bool GameMode::Load(const std::string &mode)
   std::string fullname;
   try
   {
-    LitDocXml doc;
+    XmlReader doc;
     std::string filename =
       PATH_SEPARATOR
       + std::string("game_mode")
@@ -166,11 +166,11 @@ bool GameMode::Load(const std::string &mode)
     Config * config = Config::GetInstance();
     fullname = config->GetPersonalDir() + filename;
 
-    if( !IsFileExist(fullname) )
+    if(!IsFileExist(fullname))
       fullname = config->GetDataDir() + filename;
-    if( !doc.Charge(fullname) )
+    if(!doc.Load(fullname))
       return false;
-    if( !LoadXml (doc.racine()) )
+    if(!LoadXml(doc.GetRoot()))
       return false;
   }
   catch (const xmlpp::exception &e)

@@ -34,8 +34,8 @@ Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConf
 {
   m_name = _("Parachute");
   m_initial_nb_ammo = 2 ;
-  use_unit_on_first_shoot = false;    
-  
+  use_unit_on_first_shoot = false;
+
   image = resource_manager.LoadSprite(weapons_res_profile,"parachute_sprite");
 }
 
@@ -78,46 +78,46 @@ void Parachute::Refresh()
   if (ActiveCharacter().FootsInVacuum() && speed != 0.0)
     {
       if (!open && (speed > GameMode::GetInstance()->safe_fall))
-	{
-	  if (EnoughAmmo())
-	    {
-	      UseAmmo();
-	      ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
-	      ActiveCharacter().SetWindFactor(cfg().wind_factor);
-	      open = true ;
-	      image->animation.SetPlayBackward(false);
-	      image->Start();
-	      ActiveCharacter().SetSpeedXY(Point2d(0,0));
-	      ActiveCharacter().SetMovement("parachute");
-	    }
-	}
+      {
+        if (EnoughAmmo())
+        {
+          UseAmmo();
+          ActiveCharacter().SetAirResistFactor(cfg().air_resist_factor);
+          ActiveCharacter().SetWindFactor(cfg().wind_factor);
+          open = true ;
+          image->animation.SetPlayBackward(false);
+          image->Start();
+          ActiveCharacter().SetSpeedXY(Point2d(0,0));
+          ActiveCharacter().SetMovement("parachute");
+        }
+      }
     }
   else
     {
       /* We are on the ground */
       if (open)
-	{
-	  /* The parachute is opened */
-	  if (!closing)
-	    {
-	      /* We have just hit the ground. Start closing animation */
-	      image->animation.SetPlayBackward(true);
-	      image->animation.SetShowOnFinish(SpriteAnimation::show_blank);
-	      image->Start();
-	      closing = true ;
-	    }
-	  else
-	    {/* The parachute is closing */
-	      if (image->IsFinished())
-		{
-		  /* The animation is finished...
-		     We are done with the parachute */
-		  open = false ;
-		  closing = false ;
-		  UseAmmoUnit();
-		}
-	    }
-	}
+      {
+        /* The parachute is opened */
+        if (!closing)
+        {
+          /* We have just hit the ground. Start closing animation */
+          image->animation.SetPlayBackward(true);
+          image->animation.SetShowOnFinish(SpriteAnimation::show_blank);
+          image->Start();
+          closing = true ;
+        }
+        else
+        {/* The parachute is closing */
+          if (image->IsFinished())
+          {
+                  /* The animation is finished...
+            We are done with the parachute */
+            open = false ;
+            closing = false ;
+            UseAmmoUnit();
+          }
+        }
+      }
     }
 }
 
@@ -137,6 +137,6 @@ ParachuteConfig::ParachuteConfig(){
 
 void ParachuteConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
-  LitDocXml::LitDouble (elem, "wind_factor", wind_factor);
-  LitDocXml::LitDouble (elem, "air_resist_factor", air_resist_factor);
+  XmlReader::ReadDouble(elem, "wind_factor", wind_factor);
+  XmlReader::ReadDouble(elem, "air_resist_factor", air_resist_factor);
 }

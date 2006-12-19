@@ -200,6 +200,6 @@ AirAttackConfig::AirAttackConfig()
 void AirAttackConfig::LoadXml(xmlpp::Element *elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
-  LitDocXml::LitUint(elem, "nbr_obus", nbr_obus);
-  LitDocXml::LitDouble(elem, "speed", speed);
+  XmlReader::ReadUint(elem, "nbr_obus", nbr_obus);
+  XmlReader::ReadDouble(elem, "speed", speed);
 }

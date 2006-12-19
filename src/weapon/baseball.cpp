@@ -91,6 +91,6 @@ BaseballConfig::BaseballConfig(){
 
 void BaseballConfig::LoadXml(xmlpp::Element *elem){
   WeaponConfig::LoadXml(elem);
-  LitDocXml::LitUint (elem, "range", range);
-  LitDocXml::LitUint (elem, "strength", strength);
+  XmlReader::ReadUint(elem, "range", range);
+  XmlReader::ReadUint(elem, "strength", strength);
 }

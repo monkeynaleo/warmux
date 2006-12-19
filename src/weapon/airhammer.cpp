@@ -102,9 +102,9 @@ bool Airhammer::p_Shoot()
       // Did we touch somebody ?
       if( character->ObjTouche(Point2i(x, y)) )
       {
-	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
-	      character->SetEnergyDelta(-cfg().damage);
-	end = true;
+        // Apply damage (*ver).SetEnergyDelta (-cfg().damage);
+        character->SetEnergyDelta(-cfg().damage);
+        end = true;
       }
     }
   } while (!end);
@@ -162,20 +162,20 @@ void Airhammer::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t ev
 //-----------------------------------------------------------------------------
 
 AirhammerConfig& Airhammer::cfg() {
-	return static_cast<AirhammerConfig&>(*extra_params);
+  return static_cast<AirhammerConfig&>(*extra_params);
 }
 
 //-----------------------------------------------------------------------------
 
 AirhammerConfig::AirhammerConfig(){
-	range =  30;
-	damage = 3;
+  range =  30;
+  damage = 3;
 }
 
 //-----------------------------------------------------------------------------
 
 void AirhammerConfig::LoadXml(xmlpp::Element *elem){
-	WeaponConfig::LoadXml(elem);
-	LitDocXml::LitUint (elem, "range", range);
-	LitDocXml::LitUint (elem, "damage", damage);
+  WeaponConfig::LoadXml(elem);
+  XmlReader::ReadUint(elem, "range", range);
+  XmlReader::ReadUint(elem, "damage", damage);
 }

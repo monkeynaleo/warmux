@@ -51,7 +51,7 @@ Body::Body(xmlpp::Element* xml, Profile* res)
    {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     std::string name;
-    LitDocXml::LitAttrString( elem, "name", name);
+    XmlReader::ReadStringAttr( elem, "name", name);
 
     Member* member = new Member(elem, res);
     if(members_lst.find(name) != members_lst.end())
@@ -74,7 +74,7 @@ Body::Body(xmlpp::Element* xml, Profile* res)
   {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it2);
     std::string name;
-    LitDocXml::LitAttrString( elem, "name", name);
+    XmlReader::ReadStringAttr( elem, "name", name);
 
     Clothe* clothe = new Clothe(elem, members_lst);
     if (clothes_lst.find(name) != clothes_lst.end())
@@ -93,8 +93,8 @@ Body::Body(xmlpp::Element* xml, Profile* res)
    {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it4);
     std::string mvt, corresp;
-    LitDocXml::LitAttrString( elem, "movement", mvt);
-    LitDocXml::LitAttrString( elem, "correspond_to", corresp);
+    XmlReader::ReadStringAttr( elem, "movement", mvt);
+    XmlReader::ReadStringAttr( elem, "correspond_to", corresp);
     mvt_alias.insert(std::make_pair(mvt,corresp));
     it4++;
   }
@@ -107,7 +107,7 @@ Body::Body(xmlpp::Element* xml, Profile* res)
   {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it3);
     std::string name;
-    LitDocXml::LitAttrString( elem, "name", name);
+    XmlReader::ReadStringAttr( elem, "name", name);
     if(strncmp(name.c_str(),"animation", 9)==0)
       animation_number++;
 

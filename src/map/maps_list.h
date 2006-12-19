@@ -46,7 +46,7 @@ private:
 
   Profile *res_profile;
 
-  bool TraiteXml (xmlpp::Element *xml);
+  bool ProcessXmlData(xmlpp::Element *xml);
   void LoadData();
 
 public:
