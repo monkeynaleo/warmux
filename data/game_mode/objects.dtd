@@ -5,7 +5,7 @@
           wind_particle,smoke_particle,polecat_fart_particle,fire_particle,explosion_smoke_particle,
           dark_smoke,star_particle,magic_star_particle,bullet_particle, ground_particle,
           body_member_particle,teleport_member_particle,
-          gun_bullet,buckshot,m16_bullet,snipe_rifle_bullet,rocket,riot_rocket,grenade,holly_grenade,
+          gun_bullet,buckshot,m16_bullet,snipe_rifle_bullet,rocket,riot_rocket,grenade,disco_grenade,
           cluster_bomb,cluster,dynamite_bullet,air_attack_plane,air_attack_projectile,supertux,
           gnu,polecat,bounce_ball,mine
   )>
@@ -38,7 +38,7 @@
 <!ELEMENT rocket (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 <!ELEMENT riot_rocket (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 <!ELEMENT grenade (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
-<!ELEMENT holly_grenade (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
+<!ELEMENT disco_grenade (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 <!ELEMENT cluster_bomb (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 <!ELEMENT cluster (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
 <!ELEMENT dynamite_bullet (mass,wind_factor, air_resist_factor,gravity_factor,rebounding,rebound_factor)>
