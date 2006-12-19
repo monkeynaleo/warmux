@@ -43,7 +43,7 @@ Cluster::Cluster(ClusterBombConfig& cfg,
 
 void Cluster::Shoot (int x, int y)
 {
-  camera.ChangeObjSuivi(this, true, false);
+  camera.FollowObject(this, true, false);
   ResetConstants();
   SetXY( Point2i(x, y) );
 }

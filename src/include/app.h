@@ -35,7 +35,7 @@ public:
 
 private:
   int x, y;
-  std::string titre_fenetre;
+  std::string windows_title;
 
   static AppWormux * singleton;
 

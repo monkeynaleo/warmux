@@ -92,7 +92,7 @@ bool AnvilLauncher::p_Shoot ()
     return false;
   projectile->SetXY(target);
   lst_objects.AddObject(projectile);
-  camera.ChangeObjSuivi(projectile,true,true);
+  camera.FollowObject(projectile,true,true);
   projectile = NULL;
   ReloadLauncher();
   return true;

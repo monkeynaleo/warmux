@@ -144,13 +144,13 @@ void Action_NextCharacter (Action *a)
 {
   a->RetrieveCharacter();       // Retrieve current character's informations
   a->RetrieveCharacter();       // Retrieve next character information
-  camera.ChangeObjSuivi(&ActiveCharacter(), true, true);
+  camera.FollowObject(&ActiveCharacter(), true, true);
 }
 
 void Action_ChangeCharacter (Action *a)
 {
   a->RetrieveCharacter();
-  camera.ChangeObjSuivi(&ActiveCharacter(), true, true);
+  camera.FollowObject(&ActiveCharacter(), true, true);
 }
 
 void Action_Shoot (Action *a)

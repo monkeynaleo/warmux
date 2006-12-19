@@ -575,7 +575,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
     action_handler->ExecActions();
 
 //    assert (!ActiveCharacter().IsDead());
-    camera.ChangeObjSuivi (&ActiveCharacter(), true, true);
+    camera.FollowObject (&ActiveCharacter(), true, true);
     interaction_enabled = true; // Be sure that we can play !
 
     // Applying Disease damage and Death mode.
@@ -647,7 +647,7 @@ bool GameLoop::IsAnythingMoving()
     PhysicalObj *obj = GetMovingObject();
     if (obj != NULL)
     {
-      camera.ChangeObjSuivi (obj, true, true);
+      camera.FollowObject (obj, true, true);
       object_still_moving = true;
     }
   }

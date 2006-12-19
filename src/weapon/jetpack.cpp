@@ -122,7 +122,7 @@ void JetPack::StartUse()
       m_last_fuel_down = Time::GetInstance()->Read();
       channel = jukebox.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
-      camera.ChangeObjSuivi (&ActiveCharacter(),true, true, true);
+      camera.FollowObject (&ActiveCharacter(),true, true, true);
 // 			     bool suit, bool recentre,
 // 			     bool force_recentrage=false);
     }

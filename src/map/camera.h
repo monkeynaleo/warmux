@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Caméra : gêre la position à l'intérieur du terrain. On peut "suivre" un
- * objet et se centrer sur un objet. Lors d'un déplacement manuel (au clavier
- * ou à la souris), le mode "suiveur" est désactivé.
+ * Camï¿½ra : gï¿½re la position ï¿½ l'intï¿½rieur du terrain. On peut "suivre" un
+ * objet et se centrer sur un objet. Lors d'un dï¿½placement manuel (au clavier
+ * ou ï¿½ la souris), le mode "suiveur" est dï¿½sactivï¿½.
  *****************************************************************************/
 
 #ifndef SCROLLING_H
@@ -46,7 +46,7 @@ public:
   void SetXYabs(const Point2i &pos);
 
   // Recadrage automatique sur l'objet suivi
-  void ChangeObjSuivi (PhysicalObj *obj, 
+  void FollowObject (PhysicalObj *obj, 
 		       bool suit, bool recentre,
 		       bool force_recentrage=false);
   void StopFollowingObj (PhysicalObj* obj);
@@ -62,7 +62,7 @@ public:
 
   void CenterOn(const PhysicalObj &obj);
   void CenterOnFollowedObject();
-  void AutoRecadre();
+  void AutoCrop();
 };
 
 extern Camera camera;

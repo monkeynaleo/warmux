@@ -66,7 +66,7 @@ bool Baseball::p_Shoot (){
 	// Apply damage (*ver).SetEnergyDelta (-cfg().damage);
 	ver->SetSpeed (cfg().strength / ver->GetMass(), angle);
 	ver->SetMovement("fly");
-	camera.ChangeObjSuivi (&(*ver), true, true);
+	camera.FollowObject (&(*ver), true, true);
 	return true;
       }
     }
