@@ -32,7 +32,7 @@ Member::Member(xmlpp::Element *xml, Profile* res)
   parent = NULL;
   if(xml == NULL) return;
   name="";
-  LitDocXml::LitAttrString( xml, "name", name);
+  XmlReader::ReadStringAttr( xml, "name", name);
   assert(name!="");
 
   // Load the sprite
@@ -43,22 +43,22 @@ Member::Member(xmlpp::Element *xml, Profile* res)
 
   // Get the various option
   type="";
-  LitDocXml::LitAttrString( xml, "type", type);
+  XmlReader::ReadStringAttr( xml, "type", type);
   assert(type!="");
 
-  xmlpp::Element *el = LitDocXml::AccesBalise (xml, "anchor");
+  xmlpp::Element *el = XmlReader::GetMarker(xml, "anchor");
   if(el != 0)
   {
     int dx,dy;
     dx = dy = 0;
-    LitDocXml::LitAttrInt( el, "dx", dx);
-    LitDocXml::LitAttrInt( el, "dy", dy);
+    XmlReader::ReadIntAttr(el, "dx", dx);
+    XmlReader::ReadIntAttr(el, "dy", dy);
     anchor = Point2f((float)dx,(float)dy);
     spr->SetRotation_HotSpot(Point2i(dx,dy));
   }
 
   go_through_ground = false;
-  LitDocXml::LitAttrBool(xml, "go_through_ground", go_through_ground);
+  XmlReader::ReadBoolAttr(xml, "go_through_ground", go_through_ground);
 
   xmlpp::Node::NodeList nodes = xml -> get_children("attached");
   xmlpp::Node::NodeList::iterator
@@ -70,7 +70,7 @@ Member::Member(xmlpp::Element *xml, Profile* res)
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     assert (elem != NULL);
     std::string att_type;
-    if (!LitDocXml::LitAttrString(elem, "member_type", att_type))
+    if (!XmlReader::ReadStringAttr(elem, "member_type", att_type))
     {
       std::cerr << "Malformed attached member definition" << std::endl;
       continue;
@@ -78,12 +78,12 @@ Member::Member(xmlpp::Element *xml, Profile* res)
 
     int dx,dy;
     dx = dy = 0;
-    LitDocXml::LitAttrInt(elem, "dx", dx);
-    LitDocXml::LitAttrInt(elem, "dy", dy);
+    XmlReader::ReadIntAttr(elem, "dx", dx);
+    XmlReader::ReadIntAttr(elem, "dy", dy);
     Point2f d((float)dx, (float)dy);
 
     std::string frame_str;
-    LitDocXml::LitAttrString(elem, "frame", frame_str);
+    XmlReader::ReadStringAttr(elem, "frame", frame_str);
     if (frame_str == "*")
     {
       v_attached rot_spot;

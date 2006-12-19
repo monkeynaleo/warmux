@@ -228,6 +228,6 @@ MineConfig::MineConfig()
 void MineConfig::LoadXml(xmlpp::Element *elem) 
 {
   ExplosiveWeaponConfig::LoadXml (elem);
-  LitDocXml::LitUint (elem, "escape_time", escape_time);
-  LitDocXml::LitDouble (elem, "detection_range", detection_range);
+  XmlReader::ReadUint(elem, "escape_time", escape_time);
+  XmlReader::ReadDouble(elem, "detection_range", detection_range);
 }

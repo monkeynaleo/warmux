@@ -27,20 +27,20 @@
 Movement::Movement(xmlpp::Element *xml)
 {
   always_moving = false;
-  LitDocXml::LitAttrString( xml, "name", type);
+  XmlReader::ReadStringAttr( xml, "name", type);
   assert(type!="");
 
   speed = 15;
-  LitDocXml::LitAttrInt(xml, "speed", speed);
+  XmlReader::ReadIntAttr(xml, "speed", speed);
 
   // Load the test rectangle
   test_left = test_right = test_top = test_bottom = 0;
-  xmlpp::Element *collision_rect = LitDocXml::AccesBalise (xml, "collision_rect");
+  xmlpp::Element *collision_rect = XmlReader::GetMarker(xml, "collision_rect");
   if (collision_rect == NULL) return;
-  LitDocXml::LitAttrUint (collision_rect, "left", test_left);
-  LitDocXml::LitAttrUint (collision_rect, "right", test_right);
-  LitDocXml::LitAttrUint (collision_rect, "top", test_top);
-  LitDocXml::LitAttrUint (collision_rect, "bottom", test_bottom);
+  XmlReader::ReadUintAttr(collision_rect, "left", test_left);
+  XmlReader::ReadUintAttr(collision_rect, "right", test_right);
+  XmlReader::ReadUintAttr(collision_rect, "top", test_top);
+  XmlReader::ReadUintAttr(collision_rect, "bottom", test_bottom);
 
   xmlpp::Node::NodeList nodes = xml -> get_children("frame");
   xmlpp::Node::NodeList::iterator
@@ -52,7 +52,7 @@ Movement::Movement(xmlpp::Element *xml)
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     assert (elem != NULL);
     int frame_number;
-    LitDocXml::LitAttrInt(elem, "number", frame_number);
+    XmlReader::ReadIntAttr(elem, "number", frame_number);
 
     xmlpp::Node::NodeList nodes2 = elem -> get_children("member");
     xmlpp::Node::NodeList::iterator
@@ -63,7 +63,7 @@ Movement::Movement(xmlpp::Element *xml)
     {
       xmlpp::Element *elem2 = dynamic_cast<xmlpp::Element*> (*it2);
       std::string member_type;
-      LitDocXml::LitAttrString(elem2, "type", member_type);
+      XmlReader::ReadStringAttr(elem2, "type", member_type);
 
       member_mvt mvt;
       int dx, dy;
@@ -71,16 +71,16 @@ Movement::Movement(xmlpp::Element *xml)
       dx = dy = 0;
       double scale_x, scale_y, tmp_alpha;
       scale_x = scale_y = tmp_alpha = 1.0;
-      LitDocXml::LitAttrInt(elem2, "dx", dx);
-      LitDocXml::LitAttrInt(elem2, "dy", dy);
-      LitDocXml::LitAttrDouble(elem2, "scale_x", scale_x);
-      LitDocXml::LitAttrDouble(elem2, "scale_y", scale_y);
-      LitDocXml::LitAttrDouble(elem2, "alpha", tmp_alpha);
-      LitDocXml::LitAttrInt(elem2, "angle", angle_deg);
-      LitDocXml::LitAttrBool(elem2, "follow_crosshair", mvt.follow_crosshair);
-      LitDocXml::LitAttrBool(elem2, "follow_half_crosshair", mvt.follow_half_crosshair);
-      LitDocXml::LitAttrBool(elem2, "follow_speed", mvt.follow_speed);
-      LitDocXml::LitAttrBool(elem2, "follow_direction", mvt.follow_direction);
+      XmlReader::ReadIntAttr(elem2, "dx", dx);
+      XmlReader::ReadIntAttr(elem2, "dy", dy);
+      XmlReader::ReadDoubleAttr(elem2, "scale_x", scale_x);
+      XmlReader::ReadDoubleAttr(elem2, "scale_y", scale_y);
+      XmlReader::ReadDoubleAttr(elem2, "alpha", tmp_alpha);
+      XmlReader::ReadIntAttr(elem2, "angle", angle_deg);
+      XmlReader::ReadBoolAttr(elem2, "follow_crosshair", mvt.follow_crosshair);
+      XmlReader::ReadBoolAttr(elem2, "follow_half_crosshair", mvt.follow_half_crosshair);
+      XmlReader::ReadBoolAttr(elem2, "follow_speed", mvt.follow_speed);
+      XmlReader::ReadBoolAttr(elem2, "follow_direction", mvt.follow_direction);
       if(tmp_alpha < 0.0 || tmp_alpha > 1.0) tmp_alpha = 1.0;
       mvt.SetAngle(angle_deg * M_PI / 180);
       mvt.pos.x = dx;

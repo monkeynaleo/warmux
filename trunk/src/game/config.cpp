@@ -130,12 +130,12 @@ bool Config::DoLoading(void)
   m_xml_loaded = false;
   try
   {
-    // Charge la configuration XML
-    LitDocXml doc;
+    // Load XML conf
+    XmlReader doc;
     m_filename = personal_dir + FILENAME;
-    if (!doc.Charge (m_filename))
+    if (!doc.Load(m_filename))
       return false;
-    if (!LoadXml(doc.racine()))
+    if (!LoadXml(doc.GetRoot()))
       return false;
     m_xml_loaded = true;
   }
@@ -157,60 +157,60 @@ bool Config::LoadXml(xmlpp::Element *xml)
   xmlpp::Element *elem;
 
   //=== Map ===
-  LitDocXml::LitString  (xml, "map", tmp.map_name);
+  XmlReader::ReadString(xml, "map", tmp.map_name);
 
   //=== Teams ===
-  elem = LitDocXml::AccesBalise (xml, "teams");
+  elem = XmlReader::GetMarker(xml, "teams");
   int i = 0;
 
-  xmlpp::Element *team = LitDocXml::AccesBalise (elem, "team_" + ulong2str(i));
+  xmlpp::Element *team = XmlReader::GetMarker(elem, "team_" + ulong2str(i));
 
   while (team != NULL)
   {
     ConfigTeam one_team;
-    LitDocXml::LitString  (team, "id", one_team.id);
-    LitDocXml::LitString  (team, "player_name", one_team.player_name);
+    XmlReader::ReadString(team, "id", one_team.id);
+    XmlReader::ReadString(team, "player_name", one_team.player_name);
 
     int tmp_nb_characters;
-    LitDocXml::LitInt (team, "nb_characters", tmp_nb_characters);
+    XmlReader::ReadInt(team, "nb_characters", tmp_nb_characters);
     one_team.nb_characters = (uint)tmp_nb_characters;
 
     tmp.teams.push_back(one_team);
 
     // get next team
     i++;
-    team = LitDocXml::AccesBalise (elem, "team_"+ulong2str(i));
+    team = XmlReader::GetMarker(elem, "team_"+ulong2str(i));
   }
 
   //=== Video ===
-  elem = LitDocXml::AccesBalise (xml, "video");
+  elem = XmlReader::GetMarker(xml, "video");
   if (elem != NULL)
   {
     uint max_fps;
-    if (LitDocXml::LitUint (elem, "max_fps", max_fps))
+    if (XmlReader::ReadUint(elem, "max_fps", max_fps))
       AppWormux::GetInstance()->video.SetMaxFps(max_fps);
 
-    LitDocXml::LitBool (elem, "display_wind_particles", display_wind_particles);
-    LitDocXml::LitBool (elem, "display_energy_character", display_energy_character);
-    LitDocXml::LitBool (elem, "display_name_character", display_name_character);
-    LitDocXml::LitBool (elem, "default_mouse_cursor", default_mouse_cursor);
-    LitDocXml::LitBool (elem, "scroll_on_border", scroll_on_border);
-    LitDocXml::LitInt (elem, "width", tmp.video.width);
-    LitDocXml::LitInt (elem, "height", tmp.video.height);
-    LitDocXml::LitBool (elem, "full_screen", tmp.video.fullscreen);
+    XmlReader::ReadBool(elem, "display_wind_particles", display_wind_particles);
+    XmlReader::ReadBool(elem, "display_energy_character", display_energy_character);
+    XmlReader::ReadBool(elem, "display_name_character", display_name_character);
+    XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
+    XmlReader::ReadBool(elem, "scroll_on_border", scroll_on_border);
+    XmlReader::ReadInt(elem, "width", tmp.video.width);
+    XmlReader::ReadInt(elem, "height", tmp.video.height);
+    XmlReader::ReadBool(elem, "full_screen", tmp.video.fullscreen);
   }
 
-  //=== Son ===
-  elem = LitDocXml::AccesBalise (xml, "sound");
+  //=== Sound ===
+  elem = XmlReader::GetMarker(xml, "sound");
   if (elem != NULL)
   {
-    LitDocXml::LitBool (elem, "music", tmp.sound.music);
-    LitDocXml::LitBool (elem, "effects", tmp.sound.effects);
-    LitDocXml::LitUint (elem, "frequency", tmp.sound.frequency);
+    XmlReader::ReadBool(elem, "music", tmp.sound.music);
+    XmlReader::ReadBool(elem, "effects", tmp.sound.effects);
+    XmlReader::ReadUint(elem, "frequency", tmp.sound.frequency);
   }
 
-  //=== Mode de jeu ===
-  LitDocXml::LitString (xml, "game_mode", m_game_mode);
+  //=== game mode ===
+  XmlReader::ReadString(xml, "game_mode", m_game_mode);
   return true;
 }
 

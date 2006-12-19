@@ -61,9 +61,9 @@ bool InfoMap::Init (const std::string &map_name,
     // Load preview
     preview = resource_manager.LoadImage( res_profile, "preview");
     // Load other informations
-    LitDocXml doc;
-    if (!doc.Charge (nomfich)) return false;
-    if (!TraiteXml (doc.racine())) return false;
+    XmlReader doc;
+    if (!doc.Load(nomfich)) return false;
+    if (!ProcessXmlData(doc.GetRoot())) return false;
   }
   catch (const xmlpp::exception &e)
   {
@@ -79,10 +79,10 @@ bool InfoMap::Init (const std::string &map_name,
   return true;
 }
 
-bool InfoMap::TraiteXml (xmlpp::Element *xml)
+bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
 {
   // Read author informations
-  xmlpp::Element *author = LitDocXml::AccesBalise (xml, "author");
+  xmlpp::Element *author = XmlReader::GetMarker(xml, "author");
   if (author != NULL) {
     std::string
       a_name,
@@ -90,39 +90,39 @@ bool InfoMap::TraiteXml (xmlpp::Element *xml)
       a_country,
       a_email;
 
-    LitDocXml::LitString (author, "name", a_name);
-    LitDocXml::LitString (author, "nickname", a_nickname);
-    if (!LitDocXml::LitString (author, "country", a_country))
+    XmlReader::ReadString(author, "name", a_name);
+    XmlReader::ReadString(author, "nickname", a_nickname);
+    if (!XmlReader::ReadString(author, "country", a_country))
       a_country = "?";
-    if (!LitDocXml::LitString (author, "email", a_email))
+    if (!XmlReader::ReadString(author, "email", a_email))
       a_email = "?";
 
     if (!a_nickname.empty())
       author_info = Format
-	(_("%s <%s> aka %s from %s"),
-	 a_name.c_str(),
-	 a_email.c_str(),
-	 a_nickname.c_str(),
-	 a_country.c_str());
+          (_("%s <%s> aka %s from %s"),
+           a_name.c_str(),
+           a_email.c_str(),
+           a_nickname.c_str(),
+           a_country.c_str());
     else
       author_info = Format
-	(_("%s <%s> from %s"),
-	 a_name.c_str(),
-	 a_email.c_str(),
-	 a_country.c_str());
+          (_("%s <%s> from %s"),
+           a_name.c_str(),
+           a_email.c_str(),
+           a_country.c_str());
   }
 
-  LitDocXml::LitString (xml, "name", name);
-  LitDocXml::LitBool (xml, "water", use_water);
-  LitDocXml::LitUint (xml, "nb_mine", nb_mine);
-  LitDocXml::LitUint (xml, "nb_barrel", nb_barrel);
-  LitDocXml::LitBool (xml, "is_open", is_opened);
+  XmlReader::ReadString(xml, "name", name);
+  XmlReader::ReadBool(xml, "water", use_water);
+  XmlReader::ReadUint(xml, "nb_mine", nb_mine);
+  XmlReader::ReadUint(xml, "nb_barrel", nb_barrel);
+  XmlReader::ReadBool(xml, "is_open", is_opened);
 
-  xmlpp::Element *xmlwind = LitDocXml::AccesBalise (xml, "wind");
+  xmlpp::Element *xmlwind = XmlReader::GetMarker(xml, "wind");
   if (xmlwind != NULL)
   {
-    LitDocXml::LitUint (xmlwind, "nbr_sprite", wind.nb_sprite);
-    LitDocXml::LitBool (xmlwind, "need_flip", wind.need_flip);
+    XmlReader::ReadUint(xmlwind, "nbr_sprite", wind.nb_sprite);
+    XmlReader::ReadBool(xmlwind, "need_flip", wind.need_flip);
 
     if (wind.nb_sprite > MAX_WIND_OBJECTS)
       wind.nb_sprite = MAX_WIND_OBJECTS ;
@@ -164,8 +164,6 @@ Surface InfoMap::ReadImgSky()
   LoadData();
   return img_sky;
 }
-
-
 
 MapsList* MapsList::singleton = NULL;
 

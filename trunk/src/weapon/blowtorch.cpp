@@ -33,13 +33,13 @@ static const uint pause_time = 200;	// milliseconds
 
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
-	m_name = _("Blowtorch");
-	override_keys = true;
+  m_name = _("Blowtorch");
+  override_keys = true;
 
-	new_timer = 0;
-	old_timer = 0;
+  new_timer = 0;
+  old_timer = 0;
 
-	m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile, "blowtorch_fire"));
+  m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile, "blowtorch_fire"));
 }
 
 void Blowtorch::Refresh()
@@ -49,34 +49,34 @@ void Blowtorch::Refresh()
 
 void Blowtorch::EndTurn()
 {
-	ActiveCharacter().body->ResetWalk();
-	ActiveCharacter().body->StopWalk();
-	ActiveTeam().AccessNbUnits() = 0;
-	m_is_active = false;
+  ActiveCharacter().body->ResetWalk();
+  ActiveCharacter().body->StopWalk();
+  ActiveTeam().AccessNbUnits() = 0;
+  m_is_active = false;
 
-	// XXX This doesn't seem to be the correct to end a turn, does it?
-	GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+        // XXX This doesn't seem to be the correct to end a turn, does it?
+  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
 bool Blowtorch::p_Shoot()
 {
-	ActiveCharacter().SetRebounding(false);
-	ActiveCharacter().body->StartWalk();
+  ActiveCharacter().SetRebounding(false);
+  ActiveCharacter().body->StartWalk();
 
-	Point2i hole = ActiveCharacter().GetCenter();
+  Point2i hole = ActiveCharacter().GetCenter();
 
-        double angle = ActiveCharacter().GetFiringAngle();
-	uint h = cfg().range;
-	double dx = cos(angle) * h;
-	double dy = sin(angle) * h;
+  double angle = ActiveCharacter().GetFiringAngle();
+  uint h = cfg().range;
+  double dx = cos(angle) * h;
+  double dy = sin(angle) * h;
 
-	Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
-	world.Dig(pos, ActiveCharacter().GetHeight()/2);
+  Point2i pos = Point2i(hole.x+(int)dx, hole.y+(int)dy);
+  world.Dig(pos, ActiveCharacter().GetHeight()/2);
 
-	MoveCharacter(ActiveCharacter());
-	ActiveCharacter().SetXY(ActiveCharacter().GetPosition());
+  MoveCharacter(ActiveCharacter());
+  ActiveCharacter().SetXY(ActiveCharacter().GetPosition());
 
-	return true;
+  return true;
 }
 
 void Blowtorch::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
@@ -109,16 +109,16 @@ void Blowtorch::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t ev
 
 BlowtorchConfig::BlowtorchConfig()
 {
-	range = 2;
+  range = 2;
 }
 
 BlowtorchConfig& Blowtorch::cfg()
 {
-	return static_cast<BlowtorchConfig&>(*extra_params);
+  return static_cast<BlowtorchConfig&>(*extra_params);
 }
 
 void BlowtorchConfig::LoadXml(xmlpp::Element* elem)
 {
-	WeaponConfig::LoadXml(elem);
-	LitDocXml::LitUint(elem, "range", range);
+  WeaponConfig::LoadXml(elem);
+  XmlReader::ReadUint(elem, "range", range);
 }

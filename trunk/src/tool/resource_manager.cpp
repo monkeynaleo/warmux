@@ -44,7 +44,6 @@ Profile::~Profile()
   if (doc != NULL) delete doc;
 }
 
-
 ResourceManager::ResourceManager()
 {
 }
@@ -55,7 +54,7 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::AddDataPath( std::string base_path)
 {
-   this->base_path = base_path;
+  this->base_path = base_path;
 }
 
 Color ResourceManager::LoadColor(const Profile *profile, const std::string resource_name)
@@ -67,7 +66,7 @@ Color ResourceManager::LoadColor(const Profile *profile, const std::string resou
   uint chanel_color[4];
   char * tmp[4] = { "r", "g", "b", "a" };
   for(int i = 0; i < 4; i++) {
-    if (!profile->doc->LitAttrUint( elem, tmp[i], chanel_color[i]))
+    if (!profile->doc->ReadUintAttr( elem, tmp[i], chanel_color[i]))
       Error("ResourceManager: color resource \""+resource_name+"\" has no "+tmp[i]+" field in profile "+profile->filename);
   }
   return Color(chanel_color[0], chanel_color[1], chanel_color[2], chanel_color[3]);
@@ -78,21 +77,21 @@ Surface ResourceManager::LoadImage( const std::string filename,
 {
   Surface pre_surface = Surface( filename.c_str() );
   Surface end_surface;
-  
-  if( set_colorkey ) 
+
+  if(set_colorkey)
     end_surface.SetColorKey( SDL_SRCCOLORKEY, colorkey);
 
   if( !alpha )
     end_surface = pre_surface.DisplayFormat();
   else
     end_surface = pre_surface.DisplayFormatAlpha();
-   
+
   return end_surface;
 }
 
 Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename, bool relative_path)
 {
-   LitDocXml *doc = new LitDocXml;
+   XmlReader *doc = new XmlReader;
    std::string filename, path;
    if (!relative_path) {
        path = base_path;
@@ -102,15 +101,15 @@ Profile *ResourceManager::LoadXMLProfile( const std::string xml_filename, bool r
        path = xml_filename.substr(0, xml_filename.rfind(PATH_SEPARATOR)+1);
        filename = xml_filename;
    }
-   
+
    // Load the XML
-   if ( !doc->Charge(filename) )
-     {
-	// TODO raise an "can't load file" exception
-	Error("ResourceManager: can't load profile "+filename);
-	return NULL;
-     }
-  
+   if(!doc->Load(filename))
+   {
+     // TODO raise an "can't load file" exception
+     Error("ResourceManager: can't load profile "+filename);
+     return NULL;
+   }
+
    Profile *profile = new Profile; 
    profile->doc = doc;
    profile->filename = xml_filename;
@@ -125,133 +124,128 @@ void ResourceManager::UnLoadXMLProfile( Profile *profile)
 
 xmlpp::Element * ResourceManager::GetElement( const Profile *profile, const std::string resource_type, const std::string resource_name)
 {
-   xmlpp::Element *elem = profile->doc->Access ( profile->doc->racine(),
-						 resource_type,
-						 resource_name);
+  xmlpp::Element *elem = profile->doc->Access(profile->doc->GetRoot(), resource_type, resource_name);
 
-   if ( elem == NULL )
-     {
-	std::string r_name = resource_name;
-	xmlpp::Element *cur_elem = profile->doc->racine();
+ if(elem == NULL)
+ {
+   std::string r_name = resource_name;
+   xmlpp::Element *cur_elem = profile->doc->GetRoot();
 
-	while ( ( r_name.find("/") != r_name.npos ) && (cur_elem != NULL)) 
-	  {
-	     cur_elem = profile->doc->Access ( cur_elem, "section", r_name.substr(0, r_name.find("/")));
-	     r_name = r_name.substr( r_name.find("/")+1, r_name.length());
-	  }
-	
-	if ( cur_elem)
-	     elem = profile->doc->Access ( cur_elem, resource_type, r_name);
-	
-     }
-   
-   return elem;   
+   while ((r_name.find("/") != r_name.npos) && (cur_elem != NULL))
+   {
+     cur_elem = profile->doc->Access(cur_elem, "section", r_name.substr(0, r_name.find("/")));
+     r_name = r_name.substr( r_name.find("/") + 1, r_name.length());
+   }
+   if(cur_elem)
+     elem = profile->doc->Access(cur_elem, resource_type, r_name);
+  }
+  return elem;
 }
 
 Surface ResourceManager::LoadImage( const Profile *profile, const std::string resource_name)
-{     
+{
   xmlpp::Element *elem = GetElement ( profile, "surface", resource_name);
-  if ( elem == NULL)
-	Error("ResourceManager: can't find image resource \""+resource_name+"\" in profile "+profile->filename);
-  
+  if(elem == NULL)
+    Error("ResourceManager: can't find image resource \""+resource_name+"\" in profile "+profile->filename);
+
   std::string filename; 
-  if ( ! profile->doc->LitAttrString( elem, "file", filename) )
-	Error("ResourceManager: image resource \""+resource_name+"\" has no file field in profile "+profile->filename);
-   
- // TODO load more properties in xml : alpha, colorkey....
- //      By now force alpha and no colorkey
-   
- bool alpha = true;
-   
- return LoadImage( profile->relative_path+filename, alpha);
+  if (!profile->doc->ReadStringAttr(elem, "file", filename))
+    Error("ResourceManager: image resource \""+resource_name+"\" has no file field in profile "+profile->filename);
+
+  // TODO load more properties in xml : alpha, colorkey....
+  //      By now force alpha and no colorkey
+
+  bool alpha = true;
+
+  return LoadImage(profile->relative_path+filename, alpha);
 }
 
 Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string resource_name)
 {
-  xmlpp::Element *elem_sprite = GetElement( profile, "sprite", resource_name);
-  if ( elem_sprite == NULL)
+  xmlpp::Element *elem_sprite = GetElement(profile, "sprite", resource_name);
+  if(elem_sprite == NULL)
     Error("ResourceManager: can't find sprite resource \""+resource_name+"\" in profile "+profile->filename);;
 
-  xmlpp::Element *elem_image = profile->doc->AccesBalise ( elem_sprite, "image");
+  xmlpp::Element *elem_image = profile->doc->GetMarker(elem_sprite, "image");
 
-  if ( elem_image == NULL )
-    Error("ResourceManager: can't load (sprite) resource "+resource_name);
+  if(elem_image == NULL)
+    Error("ResourceManager: can't load (sprite) resource " + resource_name);
 
   std::string image_filename; 
-  if ( ! profile->doc->LitAttrString( elem_image, "file", image_filename) )
-    Error("ResourceManager: can't load (sprite) resource "+resource_name);
+  if (!profile->doc->ReadStringAttr(elem_image, "file", image_filename) )
+    Error("ResourceManager: can't load (sprite) resource " + resource_name);
 
   // TODO load more properties in xml : alpha, colorkey....
   //      By now force alpha and no colorkey
 
   bool alpha = true;
   Sprite *sprite = NULL;
-   
-  xmlpp::Element *elem_grid = profile->doc->AccesBalise ( elem_image, "grid");
+
+  xmlpp::Element *elem_grid = profile->doc->GetMarker(elem_image, "grid");
 
   if ( elem_grid == NULL )
   {
     // No grid element, Load the Sprite like a normal image
-    Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
+    Surface surface = LoadImage(profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
     sprite->Init(surface, surface.GetSize(), 1, 1);
   }
   else
-  {	
-	Point2i frameSize;
+  {
+    Point2i frameSize;
     int nb_frames_x = 0;
     int nb_frames_y = 0;
     std::string size;
 
-    if ( ! profile->doc->LitAttrString( elem_grid, "size", size) )
+    if ( ! profile->doc->ReadStringAttr(elem_grid, "size", size) )
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute size");
-    
-	if ( size.find(",") != size.npos)
+
+    if ( size.find(",") != size.npos)
     {
-      frameSize.x = atoi( (size.substr(0,size.find(","))).c_str());
-      frameSize.y = atoi( (size.substr(size.find(",")+1,size.length())).c_str());
+      frameSize.x = atoi((size.substr(0, size.find(","))).c_str());
+      frameSize.y = atoi((size.substr(size.find(",") + 1, size.length())).c_str());
     }
     else
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has malformed size attribute");
-	
+
     std::string array;
-    if ( ! profile->doc->LitAttrString( elem_grid, "array", array) )
+    if ( ! profile->doc->ReadStringAttr( elem_grid, "array", array) )
       Error("ResourceManager: can't load sprite resource \""+resource_name+"\" has no attribute array");
-	
-	if ( array.find(",") != array.npos)
+
+    if ( array.find(",") != array.npos)
     {
-      nb_frames_x = atoi( (array.substr(0,array.find(","))).c_str());
-      if ( nb_frames_x <= 0 )
-      nb_frames_x = 1;
-	    nb_frames_y = atoi( (array.substr(array.find(",")+1,array.length()-array.find(",")-1)).c_str());;
-      if ( nb_frames_y <= 0 )
-      nb_frames_y = 1;
+      nb_frames_x = atoi((array.substr(0, array.find(","))).c_str());
+      if(nb_frames_x <= 0)
+        nb_frames_x = 1;
+      nb_frames_y = atoi((array.substr(array.find(",") + 1, array.length() - array.find(",") - 1)).c_str());
+      if(nb_frames_y <= 0)
+        nb_frames_y = 1;
     }
     else
       Error("ResourceManager: can't load (sprite) resource "+resource_name);
 
-	Surface surface = LoadImage( profile->relative_path+image_filename, alpha);
+    Surface surface = LoadImage(profile->relative_path+image_filename, alpha);
     sprite = new Sprite();
-    sprite->Init( surface, frameSize, nb_frames_x, nb_frames_y);
+    sprite->Init(surface, frameSize, nb_frames_x, nb_frames_y);
   }
 
-  assert(sprite!=NULL);
+  assert(sprite != NULL);
 
-  xmlpp::Element *elem = profile->doc->AccesBalise ( elem_sprite, "animation");
+  xmlpp::Element *elem = profile->doc->GetMarker(elem_sprite, "animation");
   if ( elem != NULL )
   {
     std::string str;
     // Set the frame speed
-    if ( profile->doc->LitAttrString( elem, "speed", str) )
-      sprite->SetFrameSpeed( atoi(str.c_str()) );
+    if ( profile->doc->ReadStringAttr(elem, "speed", str) )
+      sprite->SetFrameSpeed(atoi(str.c_str()));
 
-    if ( profile->doc->LitAttrString( elem, "loop_mode", str) )
+    if ( profile->doc->ReadStringAttr(elem, "loop_mode", str) )
     {
       bool loop_value;
-      if(str2bool(str,loop_value))
+      if(str2bool(str, loop_value))
         sprite->animation.SetLoopMode(loop_value);
       else
-      if(str=="pingpong")
+      if(str == "pingpong")
         sprite->animation.SetPingPongMode(true);
       else
         std::cerr << "Unrecognized xml option loop_mode=\"" << str << "\" in resource " << resource_name;

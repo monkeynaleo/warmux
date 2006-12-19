@@ -142,7 +142,7 @@ void JukeBox::LoadXML(const std::string& profile)
   } 
   std::cout << "o Loading sound profile " << profile << std::endl;
 
-  LitDocXml doc;
+  XmlReader doc;
 
   // Load the XML
   std::string folder = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "sound"+ PATH_SEPARATOR + profile + PATH_SEPARATOR;
@@ -151,10 +151,10 @@ void JukeBox::LoadXML(const std::string& profile)
     std::cerr << "[Sound] Error : file " << xml_filename << " not found" << std::endl;
     return;
   }
-  if( !doc.Charge (xml_filename) )
+  if(!doc.Load(xml_filename))
     return;
 
-  xmlpp::Node::NodeList nodes = doc.racine() -> get_children("sound");
+  xmlpp::Node::NodeList nodes = doc.GetRoot()->get_children("sound");
   xmlpp::Node::NodeList::iterator 
     it=nodes.begin(),
     fin=nodes.end();
@@ -165,8 +165,8 @@ void JukeBox::LoadXML(const std::string& profile)
       xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
       std::string sample="no_sample";
       std::string file="no_file";
-      LitDocXml::LitAttrString(elem, "sample", sample);
-      LitDocXml::LitAttrString(elem, "file", file);
+      XmlReader::ReadStringAttr(elem, "sample", sample);
+      XmlReader::ReadStringAttr(elem, "file", file);
 
 	  MSG_DEBUG("jukebox", "Load sound sample %s/%s: %s", profile.c_str(), sample.c_str(), file.c_str());
 

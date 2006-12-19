@@ -71,16 +71,16 @@ Team * Team::CreateTeam (const std::string& teams_dir,
   std::string nomfich;
   try
   {
-    LitDocXml doc;
+    XmlReader doc;
 
     // Load XML
     nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
     if (!IsFileExist(nomfich)) return false;
-    if (!doc.Charge (nomfich)) return false;
+    if (!doc.Load(nomfich)) return false;
 
     // Load name
     std::string name;
-    if (!LitDocXml::LitString(doc.racine(), "name", name)) return NULL;
+    if (!XmlReader::ReadString(doc.GetRoot(), "name", name)) return NULL;
 
     // Load flag
     Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
@@ -89,7 +89,7 @@ Team * Team::CreateTeam (const std::string& teams_dir,
 
     // Get sound profile
     std::string sound_profile;
-    if (!LitDocXml::LitString(doc.racine(), "sound_profile", sound_profile))
+    if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", sound_profile))
       sound_profile = "default";
 
     return new Team(teams_dir, id, name, flag, sound_profile) ;
@@ -114,17 +114,17 @@ bool Team::LoadCharacters(uint howmany)
   std::string nomfich;
   try
   {
-    LitDocXml doc;
+    XmlReader doc;
 
     // Load XML
     nomfich = m_teams_dir+m_id+PATH_SEPARATOR+ "team.xml";
     if (!IsFileExist(nomfich)) return false;
-    if (!doc.Charge (nomfich)) return false;
+    if (!doc.Load(nomfich)) return false;
 
     // Create the characters
-    xmlpp::Element *xml = LitDocXml::AccesBalise (doc.racine(), "team");
+    xmlpp::Element *xml = XmlReader::GetMarker(doc.GetRoot(), "team");
 
-    xmlpp::Node::NodeList nodes = xml -> get_children("character");
+    xmlpp::Node::NodeList nodes = xml->get_children("character");
     xmlpp::Node::NodeList::iterator it=nodes.begin();
 
     characters.clear();
@@ -135,8 +135,8 @@ bool Team::LoadCharacters(uint howmany)
       Body* body;
       std::string character_name="Soldat Inconnu";
       std::string body_name="";
-      LitDocXml::LitAttrString(elem, "name", character_name);
-      LitDocXml::LitAttrString(elem, "body", body_name);
+      XmlReader::ReadStringAttr(elem, "name", character_name);
+      XmlReader::ReadStringAttr(elem, "body", body_name);
 
       if (!(body = body_list.GetBody(body_name)) )
       {
@@ -148,13 +148,13 @@ bool Team::LoadCharacters(uint howmany)
         return false;
       }
 
-        // Initialise les variables du ver, puis l'ajoute �la liste
+      // Create a new character and add him to the team
       Character new_character(*this, character_name, body);
       characters.push_back(new_character);
       active_character = characters.begin(); // we need active_character to be initialized here !!
       if (!characters.back().PutRandomly(false, world.dst_min_entre_vers))
       {
-          // We haven't found any place to put the characters!!
+        // We haven't found any place to put the characters!!
         if (!characters.back().PutRandomly(false, world.dst_min_entre_vers/2)) {
           std::cerr << std::endl;
           std::cerr << "Error: " << character_name.c_str() << " will be probably misplaced!" << std::endl;

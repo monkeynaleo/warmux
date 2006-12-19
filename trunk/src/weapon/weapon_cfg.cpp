@@ -33,7 +33,7 @@ WeaponConfig::WeaponConfig()
 
 void WeaponConfig::LoadXml(xmlpp::Element *elem) 
 {
-  LitDocXml::LitUint (elem, "damage", damage);  
+  XmlReader::ReadUint(elem, "damage", damage);  
 }
 
 //-----------------------------------------------------------------------------
@@ -51,12 +51,12 @@ ExplosiveWeaponConfig::ExplosiveWeaponConfig()
 void ExplosiveWeaponConfig::LoadXml(xmlpp::Element *elem) 
 {
   WeaponConfig::LoadXml (elem);
-  LitDocXml::LitUint (elem, "timeout", timeout);
-  LitDocXml::LitBool (elem, "allow_change_timeout", allow_change_timeout);
-  LitDocXml::LitUint (elem, "explosion_range", explosion_range);
-  LitDocXml::LitUint (elem, "particle_range", particle_range);
-  LitDocXml::LitDouble (elem, "blast_range", blast_range);
-  LitDocXml::LitDouble (elem, "blast_force", blast_force);
+  XmlReader::ReadUint(elem, "timeout", timeout);
+  XmlReader::ReadBool(elem, "allow_change_timeout", allow_change_timeout);
+  XmlReader::ReadUint(elem, "explosion_range", explosion_range);
+  XmlReader::ReadUint(elem, "particle_range", particle_range);
+  XmlReader::ReadDouble(elem, "blast_range", blast_range);
+  XmlReader::ReadDouble(elem, "blast_force", blast_force);
 }
 
 //-----------------------------------------------------------------------------

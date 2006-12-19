@@ -231,9 +231,9 @@ AutomaticBazookaConfig::AutomaticBazookaConfig() {
 
 void AutomaticBazookaConfig::LoadXml(xmlpp::Element *elem) {
     ExplosiveWeaponConfig::LoadXml(elem);
-    LitDocXml::LitUint (elem, "seek_time", seek_time);
-    LitDocXml::LitDouble (elem, "uncontrolled_turn_speed", uncontrolled_turn_speed);
-    LitDocXml::LitDouble (elem, "max_controlled_turn_speed", max_controlled_turn_speed);
-    LitDocXml::LitDouble (elem, "fuel_time", fuel_time);
-    LitDocXml::LitDouble (elem, "rocket_force", rocket_force);
+    XmlReader::ReadUint(elem, "seek_time", seek_time);
+    XmlReader::ReadDouble(elem, "uncontrolled_turn_speed", uncontrolled_turn_speed);
+    XmlReader::ReadDouble(elem, "max_controlled_turn_speed", max_controlled_turn_speed);
+    XmlReader::ReadDouble(elem, "fuel_time", fuel_time);
+    XmlReader::ReadDouble(elem, "rocket_force", rocket_force);
 }

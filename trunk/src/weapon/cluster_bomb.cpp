@@ -133,5 +133,5 @@ ClusterBombConfig::ClusterBombConfig() :
 void ClusterBombConfig::LoadXml(xmlpp::Element *elem)
 {
   ExplosiveWeaponConfig::LoadXml(elem);
-  LitDocXml::LitUint (elem, "nb_fragments", nb_fragments);
+  XmlReader::ReadUint(elem, "nb_fragments", nb_fragments);
 }

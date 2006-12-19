@@ -9,72 +9,71 @@
 #include <string>
 #include <libxml++/libxml++.h>
 
-class LitDocXml
+class XmlReader
 {
 public:
   xmlpp::DomParser parser;
 
 public:
-  // Charge un document XML
-  bool Charge(const std::string &nomfich);
+  // Load an XML document
+  bool Load(const std::string &nomfich);
 
-  // Le document a ��correctement charg�?
-  bool EstOk() const;
+  bool IsOk() const;
 
-  // Lit la racine
-  xmlpp::Element* racine() const;
+  // Get da root man
+  xmlpp::Element* GetRoot() const;
 
-  // Lit la valeur d'une balise
-  static bool LitString (const xmlpp::Node *pere,
-			 const std::string &nom,
-			 std::string &sortie);
-  static bool LitDouble (const xmlpp::Node *pere,
-		      const std::string &nom,
-		      double &sortie);
-  static bool LitInt (const xmlpp::Node *pere,
-		      const std::string &nom,
-		      int &sortie);
-  static bool LitUint (const xmlpp::Node *pere,
-		      const std::string &nom,
-		      unsigned int &sortie);
-  static bool LitBool (const xmlpp::Node *pere,
-		       const std::string &nom,
-		       bool &sortie);
+  // get a attribute marker
+  static bool ReadString(const xmlpp::Node *father,
+                         const std::string &name,
+                         std::string &output);
+  static bool ReadDouble(const xmlpp::Node *father,
+                         const std::string &name,
+                         double &output);
+  static bool ReadInt(const xmlpp::Node *father,
+                      const std::string &name,
+                      int &output);
+  static bool ReadUint(const xmlpp::Node *father,
+                       const std::string &name,
+                       unsigned int &output);
+  static bool ReadBool(const xmlpp::Node *father,
+                       const std::string &name,
+                       bool &output);
 
-  // Lit les diff�entes valeurs d'une balise
-  static bool LitListeString (const xmlpp::Node *x, 
-					 const std::string &nom,
-					 std::list<std::string> &sortie);
+  // Get attributes of a marker
+  static bool ReadStringList(const xmlpp::Node *x, 
+                             const std::string &name,
+                             std::list<std::string> &output);
 
-  // Lit la valeur d'une balise
-  static bool LitValeurBalise (const xmlpp::Node *balise,
-			       std::string &sortie);
+  // Read marker value
+  static bool ReadMarkerValue(const xmlpp::Node *marker,
+                               std::string &output);
 
-  // Acc� �une balise
-  static xmlpp::Element* AccesBalise (const xmlpp::Node *x,
-				      const std::string &nom);
+  // get an XML element
+  static xmlpp::Element* GetMarker(const xmlpp::Node *x,
+                                   const std::string &name);
 
   // Access to the 'anchor' <[name] name="[attr_name]"> : have to be uniq !
-  static xmlpp::Element* Access (const xmlpp::Node *x,
-				 const std::string &name,
-				 const std::string &attr_name);
+  static xmlpp::Element* Access(const xmlpp::Node *x,
+                                const std::string &name,
+                                const std::string &attr_name);
 
   // Lit un attribut d'un noeud
-  static bool LitAttrString (const xmlpp::Element *x, 
-			     const std::string &nom, 
-			     std::string &sortie);
-  static bool LitAttrDouble (const xmlpp::Element *x, 
-			  const std::string &nom, 
-			  double &sortie);
-  static bool LitAttrInt (const xmlpp::Element *x, 
-			  const std::string &nom, 
-			  int &sortie);
-  static bool LitAttrUint (const xmlpp::Element *x, 
-			  const std::string &nom, 
-			  unsigned int &sortie);
-  static bool LitAttrBool (const xmlpp::Element *x,
-			  const std::string &nom,
-			  bool &sortie);
+  static bool ReadStringAttr(const xmlpp::Element *x,
+                             const std::string &name,
+                             std::string &output);
+  static bool ReadDoubleAttr(const xmlpp::Element *x,
+                             const std::string &name,
+                             double &output);
+  static bool ReadIntAttr(const xmlpp::Element *x,
+                          const std::string &name,
+                          int &output);
+  static bool ReadUintAttr(const xmlpp::Element *x,
+                           const std::string &name,
+                           unsigned int &output);
+  static bool ReadBoolAttr(const xmlpp::Element *x,
+                           const std::string &name,
+                           bool &output);
 };
 
 //-----------------------------------------------------------------------------
