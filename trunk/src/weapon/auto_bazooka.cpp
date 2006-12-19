@@ -143,8 +143,8 @@ AutomaticBazooka::AutomaticBazooka() :
 {
   m_name = _("Automatic Bazooka");
   mouse_character_selection = false;
-  cible.choisie = false;
-  cible.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
+  m_target.selected = false;
+  m_target.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
   ReloadLauncher();
 }
 
@@ -168,19 +168,19 @@ void AutomaticBazooka::Refresh()
 
 void AutomaticBazooka::p_Select()
 {
-  cible.choisie = false;
+  m_target.selected = false;
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
 }
 
 void AutomaticBazooka::p_Deselect()
 {
-  if (cible.choisie) {
+  if (m_target.selected) {
     // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image.GetWidth()/2,
-                        cible.pos.y-cible.image.GetHeight()/2,
-                        cible.image.GetWidth(),
-                        cible.image.GetHeight()));
+    world.ToRedrawOnMap(Rectanglei(m_target.pos.x-m_target.image.GetWidth()/2,
+                        m_target.pos.y-m_target.image.GetHeight()/2,
+                        m_target.image.GetWidth(),
+                        m_target.image.GetHeight()));
   }
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
@@ -188,33 +188,33 @@ void AutomaticBazooka::p_Deselect()
 
 void AutomaticBazooka::ChooseTarget(Point2i mouse_pos)
 {
-  if (cible.choisie) {
+  if (m_target.selected) {
     // need to clear the old target
-    world.ToRedrawOnMap(Rectanglei(cible.pos.x-cible.image.GetWidth()/2,
-                        cible.pos.y-cible.image.GetHeight()/2,
-                        cible.image.GetWidth(),
-                        cible.image.GetHeight()));
+    world.ToRedrawOnMap(Rectanglei(m_target.pos.x-m_target.image.GetWidth()/2,
+                        m_target.pos.y-m_target.image.GetHeight()/2,
+                        m_target.image.GetWidth(),
+                        m_target.image.GetHeight()));
   }
 
-  cible.pos = mouse_pos;
-  cible.choisie = true;
+  m_target.pos = mouse_pos;
+  m_target.selected = true;
 
   if(!ActiveTeam().IsLocal())
     camera.SetXYabs(mouse_pos - camera.GetSize()/2);
   DrawTarget();
-  static_cast<RPG *>(projectile)->SetTarget(cible.pos.x, cible.pos.y);
+  static_cast<RPG *>(projectile)->SetTarget(m_target.pos.x, m_target.pos.y);
 }
 
 void AutomaticBazooka::DrawTarget()
 {
-  if( !cible.choisie ) return;
+  if( !m_target.selected ) return;
 
-  AppWormux::GetInstance()->video.window.Blit(cible.image, cible.pos - cible.image.GetSize()/2 - camera.GetPosition());
+  AppWormux::GetInstance()->video.window.Blit(m_target.image, m_target.pos - m_target.image.GetSize()/2 - camera.GetPosition());
 }
 
 bool AutomaticBazooka::IsReady() const
 {
-  return (EnoughAmmo() && cible.choisie);
+  return (EnoughAmmo() && m_target.selected);
 }
 
 AutomaticBazookaConfig &AutomaticBazooka::cfg() {

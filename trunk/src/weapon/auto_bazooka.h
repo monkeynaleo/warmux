@@ -53,12 +53,12 @@ class RPG : public WeaponProjectile
 class AutomaticBazooka : public WeaponLauncher
 {
   private:
-    struct s_cible
+    struct target_t
     {
       Point2i pos;
-      bool choisie;
+      bool selected;
       Surface image;
-    } cible;
+    } m_target;
   public:
     AutomaticBazooka();
     void Draw ();
