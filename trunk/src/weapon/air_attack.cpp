@@ -87,7 +87,7 @@ void Plane::Shoot(double speed, Point2i& target)
 
   SetSpeedXY (speed_vector);
 
-  camera.ChangeObjSuivi(this, true, true);
+  camera.FollowObject(this, true, true);
 
   lst_objects.AddObject(this);
 }
@@ -109,7 +109,7 @@ void Plane::DropBomb()
 
   lst_objects.AddObject(instance);
 
-  camera.ChangeObjSuivi(instance, true, true);
+  camera.FollowObject(instance, true, true);
 
   last_dropped_bomb = instance;
   nb_dropped_bombs++;

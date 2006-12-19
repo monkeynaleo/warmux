@@ -141,7 +141,7 @@ void ApplyExplosion_common (const Point2i &pos,
   }
 
   if(fastest_character != NULL)
-    camera.ChangeObjSuivi (fastest_character, true, true);
+    camera.FollowObject (fastest_character, true, true);
 
   // Apply the blast on physical objects.
   FOR_EACH_OBJECT(it)
@@ -172,7 +172,7 @@ void ApplyExplosion_common (const Point2i &pos,
            angle = -M_PI_2;
 
          if(fastest_character != NULL)
-           camera.ChangeObjSuivi (obj, true, true);
+           camera.FollowObject (obj, true, true);
          obj->AddSpeed (force / obj->GetMass(), angle);
        }
      }

@@ -237,7 +237,7 @@ void Keyboard::HandleKeyReleased (const Action::Action_t &action)
     case Action::ACTION_CENTER:
 
       CharacterCursor::GetInstance()->FollowActiveCharacter();
-      camera.ChangeObjSuivi (&ActiveCharacter(), true, true, true);
+      camera.FollowObject (&ActiveCharacter(), true, true, true);
       return;
 
     case Action::ACTION_TOGGLE_INTERFACE:

@@ -224,7 +224,7 @@ bool BonusBox::NewBonusBox()
     delete box;
   } else {
     lst_objects.AddObject(box);
-    camera.ChangeObjSuivi(box, true, true);
+    camera.FollowObject(box, true, true);
     GameMessages::GetInstance()->Add (_("Is it a gift?"));
     return true;
   }

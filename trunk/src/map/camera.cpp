@@ -107,7 +107,7 @@ void Camera::CenterOn(const PhysicalObj &obj){
   SetXYabs( pos );
 }
 
-void Camera::AutoRecadre(){
+void Camera::AutoCrop(){
   if( !obj_suivi || obj_suivi -> IsGhost() )
     return;
 
@@ -150,10 +150,10 @@ void Camera::Refresh(){
 #endif
 
   if (autorecadre)
-    AutoRecadre();
+    AutoCrop();
 }
 
-void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
+void Camera::FollowObject (PhysicalObj *obj, bool suit, bool recentre,
 			     bool force_recentrage){
   MSG_DEBUG( "camera.tracking", "Following object %s, recentre=%d, suit=%d", obj->GetName().c_str(), recentre, suit);
   if (recentre)
@@ -170,7 +170,7 @@ void Camera::ChangeObjSuivi (PhysicalObj *obj, bool suit, bool recentre,
 
 void Camera::StopFollowingObj (PhysicalObj* obj){
   if( obj_suivi == obj )
-    ChangeObjSuivi((PhysicalObj*)&ActiveCharacter(), true, true, true);
+    FollowObject((PhysicalObj*)&ActiveCharacter(), true, true, true);
 }
 
 bool Camera::IsVisible(const PhysicalObj &obj){

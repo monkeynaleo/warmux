@@ -232,7 +232,7 @@ void Team::NextCharacter()
   ActiveCharacter().StartPlaying();
 
   if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
-  camera.ChangeObjSuivi (&ActiveCharacter(),
+  camera.FollowObject (&ActiveCharacter(),
                           !is_camera_saved, !is_camera_saved,
                           true);
   MSG_DEBUG("team", "%s (%d, %d)is now the active character",
@@ -263,7 +263,7 @@ void Team::PrepareTurn()
   }
 
   if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
-  camera.ChangeObjSuivi (&ActiveCharacter(),
+  camera.FollowObject (&ActiveCharacter(),
                           !is_camera_saved, !is_camera_saved,
                           true);
   CharacterCursor::GetInstance()->FollowActiveCharacter();
