@@ -16,9 +16,9 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Caméra : gêre la position à l'intérieur du terrain. On peut "suivre" un
- * objet et se centrer sur un objet. Lors d'un déplacement manuel (au clavier
- * ou à la souris), le mode "suiveur" est désactivé.
+ * Camï¿½ra : gï¿½re la position ï¿½ l'intï¿½rieur du terrain. On peut "suivre" un
+ * objet et se centrer sur un objet. Lors d'un dï¿½placement manuel (au clavier
+ * ou ï¿½ la souris), le mode "suiveur" est dï¿½sactivï¿½.
  *****************************************************************************/
 
 #include "camera.h"
@@ -32,11 +32,8 @@
 #include "../tool/rectangle.h"
 #include "../tool/math_tools.h"
 
-// Marge de cadrage
-const int MARGE = 200;
-const double VITESSE_CAMERA = 20;
-const Point2i marge(200, 200);
-const Point2i vitesseCamera(20, 20);
+const Point2i CAMERA_MARGIN(200, 200);
+const Point2i CAMERA_SPEED(20, 20);
 
 Camera camera;
 
@@ -95,7 +92,7 @@ void Camera::CenterOnFollowedObject(){
   CenterOn(*obj_suivi);
 }
 
-// Centrage immédiat sur un objet
+// Centrage immï¿½diat sur un objet
 void Camera::CenterOn(const PhysicalObj &obj){
   if (obj.IsGhost())
     return;
@@ -127,21 +124,21 @@ void Camera::AutoRecadre(){
   if( pos.y < 0 )
     pos.y = 0;
 
-  Point2i dstMax = GetSize()/2 - marge;
+  Point2i dstMax = GetSize()/2 - CAMERA_MARGIN;
   Point2i cameraBR = GetSize() + position;
-  Point2i objectBRmargin = pos + size + marge;
+  Point2i objectBRmargin = pos + size + CAMERA_MARGIN;
   Point2i dst(0, 0);
 
   dst += cameraBR.inf(objectBRmargin) * (objectBRmargin - cameraBR);
-  dst += (pos - marge).inf(position) * (pos - marge - position);
+  dst += (pos - CAMERA_MARGIN).inf(position) * (pos - CAMERA_MARGIN - position);
 
-  SetXY( dst * vitesseCamera / dstMax );
+  SetXY( dst * CAMERA_SPEED / dstMax );
 }
 
 void Camera::Refresh(){
   lance = false;
 
-  // Camera à la souris
+  // Camera ï¿½ la souris
   Mouse::GetInstance()->TestCamera();
   if (lance) return;
 
