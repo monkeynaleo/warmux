@@ -49,24 +49,24 @@
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
 
-Clavier::Clavier()
+Keyboard::Keyboard()
 {
   //Disable repeated events when a key is kept down
   SDL_EnableKeyRepeat(0,0);
 }
 
-void Clavier::Reset()
+void Keyboard::Reset()
 {
   for (int i = Action::ACTION_FIRST; i != Action::ACTION_LAST; i++)
     PressedKeys[i] = false ;
 }
 
-void Clavier::SetKeyAction(int key, Action::Action_t at)
+void Keyboard::SetKeyAction(int key, Action::Action_t at)
 {
   layout[key] = at;
 }
 
-void Clavier::HandleKeyEvent( const SDL_Event *event)
+void Keyboard::HandleKeyEvent( const SDL_Event *event)
 {
   //Handle input text for Chat session in Network game
   //While player writes, it cannot control the game.
@@ -142,7 +142,7 @@ void Clavier::HandleKeyEvent( const SDL_Event *event)
 }
 
 // Handle a pressed key
-void Clavier::HandleKeyPressed (const Action::Action_t &action)
+void Keyboard::HandleKeyPressed (const Action::Action_t &action)
 {
   PressedKeys[action] = true ;
 
@@ -210,7 +210,7 @@ void Clavier::HandleKeyPressed (const Action::Action_t &action)
 }
 
 // Handle a released key
-void Clavier::HandleKeyReleased (const Action::Action_t &action)
+void Keyboard::HandleKeyReleased (const Action::Action_t &action)
 {
   PressedKeys[action] = false ;
 
@@ -261,7 +261,7 @@ void Clavier::HandleKeyReleased (const Action::Action_t &action)
 }
 
 // Refresh keys which are still pressed.
-void Clavier::Refresh()
+void Keyboard::Refresh()
 {
   //Treat KEY_REFRESH events:
   for (int i = Action::ACTION_FIRST; i < Action::ACTION_LAST; i++)
@@ -279,7 +279,7 @@ void Clavier::Refresh()
       }
 }
 
-void Clavier::TestCamera()
+void Keyboard::TestCamera()
 {
 }
 

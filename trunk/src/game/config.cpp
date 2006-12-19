@@ -216,7 +216,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
 
 void Config::SetKeyboardConfig()
 {
-  my_keyboard = new Clavier();
+  my_keyboard = new Keyboard();
 
   my_keyboard->SetKeyAction(SDLK_LEFT,      Action::ACTION_MOVE_LEFT);
   my_keyboard->SetKeyAction(SDLK_RIGHT,     Action::ACTION_MOVE_RIGHT);

@@ -129,7 +129,7 @@ void Weapon::p_Select ()
   m_last_fire_time = 0;
 }
 void Weapon::p_Deselect () {}
-void Weapon::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type) {}
+void Weapon::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) {}
 
 void Weapon::Select()
 {

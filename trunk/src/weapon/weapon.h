@@ -223,7 +223,7 @@ public:
   virtual void ActionDown ();//called by mousse.cpp when mousewhelldown
 
   // Handle a keyboard event.
-  virtual void HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type) ;
+  virtual void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) ;
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd();

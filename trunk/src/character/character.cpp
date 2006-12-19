@@ -523,13 +523,13 @@ void Character::DoShoot()
   ActiveTeam().AccessWeapon().Shoot();
 }
 
-void Character::HandleShoot(Clavier::Key_Event_t event_type)
+void Character::HandleShoot(Keyboard::Key_Event_t event_type)
 {
   if(prepare_shoot)
     return;
 
   switch (event_type) {
-    case Clavier::KEY_PRESSED:
+    case Keyboard::KEY_PRESSED:
       if (ActiveTeam().GetWeapon().max_strength == 0)
         ActiveTeam().GetWeapon().NewActionShoot();
       else
@@ -538,12 +538,12 @@ void Character::HandleShoot(Clavier::Key_Event_t event_type)
         ActiveTeam().AccessWeapon().InitLoading();
       break ;
 
-    case Clavier::KEY_RELEASED:
+    case Keyboard::KEY_RELEASED:
       if (ActiveTeam().GetWeapon().IsLoading())
         ActiveTeam().GetWeapon().NewActionShoot();
       break ;
 
-    case Clavier::KEY_REFRESH:
+    case Keyboard::KEY_REFRESH:
       if ( ActiveTeam().GetWeapon().IsLoading() )
 	{
 	  // Strength == max strength -> Fire !!!
@@ -563,7 +563,7 @@ void Character::HandleShoot(Clavier::Key_Event_t event_type)
   }
 }
 
-void Character::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t event_type)
+void Character::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
   // The character cannot move anymove if the turn is over...
   if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
@@ -586,7 +586,7 @@ void Character::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t eve
     {
       switch (event_type)
       {
-        case Clavier::KEY_REFRESH:
+        case Keyboard::KEY_REFRESH:
           switch (action) {
             case Action::ACTION_MOVE_LEFT:
               if(ActiveCharacter().IsImmobile())
@@ -602,7 +602,7 @@ void Character::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t eve
               break ;
           }
           //no break!! -> it's normal
-        case Clavier::KEY_PRESSED:
+        case Keyboard::KEY_PRESSED:
           switch (action)
           {
             case Action::ACTION_UP:
@@ -659,7 +659,7 @@ void Character::HandleKeyEvent(Action::Action_t action, Clavier::Key_Event_t eve
           }
           break;
 
-        case Clavier::KEY_RELEASED:
+        case Keyboard::KEY_RELEASED:
           switch (action) {
             case Action::ACTION_MOVE_LEFT:
             case Action::ACTION_MOVE_RIGHT:

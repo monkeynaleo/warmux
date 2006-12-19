@@ -28,22 +28,22 @@
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
-class Clavier
+class Keyboard
 {
 private:
   std::map<int, Action::Action_t> layout;
   bool PressedKeys[Action::ACTION_LAST];
 
-  static Clavier * singleton;
+  static Keyboard * singleton;
 
 private:
-  // Traite une touche relachée
+  // Traite une touche relachï¿½e
   void HandleKeyPressed (const Action::Action_t &action);
   void HandleKeyReleased (const Action::Action_t &action);
 
 
 public:
-  Clavier();
+  Keyboard();
   typedef enum
   {
     KEY_PRESSED,
@@ -54,13 +54,13 @@ public:
   void HandleKeyEvent( const SDL_Event *event) ;
   void Reset();
 
-  // On veut bouger la caméra au clavier ?
+  // On veut bouger la camï¿½ra au clavier ?
   void TestCamera();
 
   // Refresh des touches du clavier
   void Refresh();
 
-  // Associe une touche à une action.
+  // Associe une touche ï¿½ une action.
   void SetKeyAction(int key, Action::Action_t at);
 
 };
