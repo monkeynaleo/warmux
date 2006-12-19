@@ -25,7 +25,7 @@
 #include "../map/map.h"
 #include "../tool/math_tools.h"
 
-BarreProg::BarreProg(){
+ProgressBar::ProgressBar(){
    border_color.SetColor(0, 0, 0, 255);
    value_color.SetColor(255, 255, 255, 255);
    background_color.SetColor(100, 100 ,100, 255);
@@ -34,19 +34,19 @@ BarreProg::BarreProg(){
    m_use_ref_val = false;
 }
 
-void BarreProg::SetBorderColor(Color color){
+void ProgressBar::SetBorderColor(Color color){
    border_color = color;
 }
 
-void BarreProg::SetBackgroundColor(Color color){
+void ProgressBar::SetBackgroundColor(Color color){
    background_color = color;
 }
 
-void BarreProg::SetValueColor(Color color){
+void ProgressBar::SetValueColor(Color color){
    value_color = color;
 }
 
-void BarreProg::InitPos (uint px, uint py, uint plarg, uint phaut){
+void ProgressBar::InitPos (uint px, uint py, uint plarg, uint phaut){
   assert (3 <= plarg);
   assert (3 <= phaut);
   x = px;
@@ -59,11 +59,11 @@ void BarreProg::InitPos (uint px, uint py, uint plarg, uint phaut){
 
 /*
  * intitialize the progress bar
- * orientation is set with BarreProg::PROG_BAR_VERTICAL or
- *                         BarreProg::PROG_BAR_HORIZONTAL
- * default orientation is BarreProg::PROG_BAR_HORIZONTAL
+ * orientation is set with ProgressBar::PROG_BAR_VERTICAL or
+ *                         ProgressBar::PROG_BAR_HORIZONTAL
+ * default orientation is ProgressBar::PROG_BAR_HORIZONTAL
  */
-void BarreProg::InitVal (long pval, long pmin, long pmax,
+void ProgressBar::InitVal (long pval, long pmin, long pmax,
     enum orientation porientation){
   assert (pmin != pmax);
   assert (pmin < pmax);
@@ -74,28 +74,28 @@ void BarreProg::InitVal (long pval, long pmin, long pmax,
   val_barre = CalculeValBarre(val);
 }
 
-void BarreProg::Actu (long pval){
+void ProgressBar::UpdateValue (long pval){
   val = CalculeVal(pval);
   val_barre = CalculeValBarre(val);
 }
 
-uint BarreProg::CalculeVal (long val) const{
+uint ProgressBar::CalculeVal (long val) const{
   return BorneLong(val, min, max);
 }
 
-uint BarreProg::CalculeValBarre (long val) const{
+uint ProgressBar::CalculeValBarre (long val) const{
   if(orientation == PROG_BAR_HORIZONTAL)
     return ( CalculeVal(val) -min)*(larg-2)/(max-min);
   else
     return ( CalculeVal(val) -min)*(haut-2)/(max-min);
 }
 
-void BarreProg::Draw(){
+void ProgressBar::Draw(){
   DrawXY( Point2i(x, y) );
 }
 
 // TODO pass a Surface as parameter
-void BarreProg::DrawXY(const Point2i &pos){
+void ProgressBar::DrawXY(const Point2i &pos){
   int begin, end;
 
   // Bordure
@@ -156,7 +156,7 @@ void BarreProg::DrawXY(const Point2i &pos){
 }
 
 // Ajoute/supprime un marqueur
-BarreProg::marqueur_it BarreProg::AjouteMarqueur (long val, const Color& color){
+ProgressBar::marqueur_it ProgressBar::AddTag (long val, const Color& color){
   marqueur_t m;
 
   m.val = CalculeValBarre (val);
@@ -166,15 +166,11 @@ BarreProg::marqueur_it BarreProg::AjouteMarqueur (long val, const Color& color){
   return --marqueur.end();
 }
 
-void BarreProg::SupprimeMarqueur (marqueur_it it){
-  marqueur.erase (it);
-}
-
-void BarreProg::Reset_Marqueur(){
+void ProgressBar::ResetTag(){
   marqueur.clear();
 }
 
-void BarreProg::SetReferenceValue (bool use, long value){
+void ProgressBar::SetReferenceValue (bool use, long value){
   m_use_ref_val = use;
   m_ref_val = CalculeVal(value);
 }

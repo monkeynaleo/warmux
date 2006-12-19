@@ -26,7 +26,7 @@
 
 static const int energy_step[EnergyBar::NB_OF_ENERGY_COLOR] = { 16, 33, 50, 67, 84, 100 };
 
-EnergyBar::EnergyBar() : BarreProg()
+EnergyBar::EnergyBar() : ProgressBar()
 {
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   for(int i = 0; i < NB_OF_ENERGY_COLOR ;i++) {
@@ -49,11 +49,11 @@ void EnergyBar::Actu (long real_energy){
   long app_energy;
 
   /* update progress bar position*/
-  BarreProg::Actu(real_energy);
+  ProgressBar::UpdateValue(real_energy);
 
   /* get the real applied enargie value. It may be different from the
    * real_energy in case of under/over flow*/
-  app_energy = BarreProg::GetVal();
+  app_energy = ProgressBar::GetVal();
 
   SetValueColor(GetColorValue(app_energy));
 }

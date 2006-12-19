@@ -28,7 +28,7 @@
 #include "../graphic/color.h"
 #include "../graphic/surface.h"
 
-class BarreProg
+class ProgressBar
 {
 public:
   Color border_color, value_color, background_color;
@@ -64,10 +64,10 @@ private:
   std::list<marqueur_t> marqueur;
 
 public:
-  BarreProg();
+  ProgressBar();
 
   // Actualisation de la valeur
-  void Actu (long val);
+  void UpdateValue (long val);
 
   // Initialise la position
   void InitPos (uint x, uint y, uint larg, uint haut);
@@ -93,9 +93,8 @@ public:
   Point2i GetSize() const { return Point2i(larg, haut); }
 
   // add/remove value tag
-  marqueur_it AjouteMarqueur (long val, const Color& coul);
-  void SupprimeMarqueur (marqueur_it it);
-  void Reset_Marqueur();
+  marqueur_it AddTag (long val, const Color& coul);
+  void ResetTag();
 };
 
 #endif

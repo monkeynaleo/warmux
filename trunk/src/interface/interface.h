@@ -65,7 +65,7 @@ public:
    int start_show_display;
    bool display_timer;
    EnergyBar energy_bar;
-   BarreProg wind_bar;
+   ProgressBar wind_bar;
 
    Surface game_menu;
    Surface clock_background;
