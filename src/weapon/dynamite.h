@@ -31,12 +31,12 @@
 
 class Dynamite;
 
-class BatonDynamite : public WeaponProjectile
+class DynamiteStick : public WeaponProjectile
 {
   int channel;
 
   public:
-    BatonDynamite(ExplosiveWeaponConfig& cfg,
+    DynamiteStick(ExplosiveWeaponConfig& cfg,
                   WeaponLauncher * p_launcher);
 
     void Shoot(double strength);
