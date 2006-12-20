@@ -67,6 +67,8 @@ public:
   bool GetScrollOnBorder() const;
   void SetScrollOnBorder(bool sob);
 
+  bool IsNetworkActivated() const;
+
   int GetTransparency() const;
 
   inline Keyboard * GetKeyboard() { return my_keyboard; }
@@ -80,6 +82,9 @@ public:
 
   // Tempory values (loaded from XML, but may change during running)
   struct tmp_xml_config{
+    struct tmp_xml_net{
+      bool enable_network;
+    } network;
     struct tmp_xml_screen{
       int width,height;
       bool fullscreen;

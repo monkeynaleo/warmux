@@ -70,9 +70,9 @@ Config::Config()
   std::string filename;
 
   if (br_init (&error) == 0 && error != BR_INIT_ERROR_DISABLED) {
-	  std::cout << "Warning: BinReloc failed to initialize (error code "
-		    << error << ")" << std::endl;
-	  std::cout << "Will fallback to hardcoded default path." << std::endl;
+    std::cout << "Warning: BinReloc failed to initialize (error code "
+              << error << ")" << std::endl;
+    std::cout << "Will fallback to hardcoded default path." << std::endl;
   }
 #endif
 
@@ -91,9 +91,13 @@ Config::Config()
   tmp.video.height = 600;
   tmp.video.fullscreen = false;
 
+  // sound
   tmp.sound.music = true;
   tmp.sound.effects = true;
   tmp.sound.frequency = 44100;
+
+  // network
+  tmp.network.enable_network = false;
 
   Constants::GetInstance();
 
@@ -123,7 +127,6 @@ Config::Config()
   dir = TranslateDirectory(data_dir);
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
-
 
 bool Config::DoLoading(void)
 {
@@ -207,6 +210,13 @@ bool Config::LoadXml(xmlpp::Element *xml)
     XmlReader::ReadBool(elem, "music", tmp.sound.music);
     XmlReader::ReadBool(elem, "effects", tmp.sound.effects);
     XmlReader::ReadUint(elem, "frequency", tmp.sound.frequency);
+  }
+
+  //=== network ===
+  elem = XmlReader::GetMarker(xml, "network");
+  if (elem != NULL)
+  {
+    XmlReader::ReadBool(elem, "enable_network", tmp.network.enable_network);
   }
 
   //=== game mode ===
@@ -348,13 +358,17 @@ bool Config::SaveXml()
   else if (transparency == COLORKEY)
     doc.WriteElement(video_node, "transparency", "colorkey");
 
-  //=== Son ===
+  //=== Sound ===
   xmlpp::Element *sound_node = root->add_child("sound");
   doc.WriteElement(sound_node, "music",  ulong2str(jukebox.UseMusic()));
   doc.WriteElement(sound_node, "effects", ulong2str(jukebox.UseEffects()));
   doc.WriteElement(sound_node, "frequency", ulong2str(jukebox.GetFrequency()));
 
-  //=== Mode de jeu ===
+  //=== Network ===
+  xmlpp::Element *net_node = root->add_child("network");
+  doc.WriteElement(net_node, "enable_network",  ulong2str(IsNetworkActivated()));
+
+  //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);
   return doc.Save();
 }
@@ -421,6 +435,11 @@ bool Config::GetScrollOnBorder() const
 std::string Config::GetTtfFilename() const
 {
   return ttf_filename;
+}
+
+bool Config::IsNetworkActivated() const
+{
+  return tmp.network.enable_network;
 }
 
 void Config::SetDisplayEnergyCharacter(bool dec)

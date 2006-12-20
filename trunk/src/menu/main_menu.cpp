@@ -34,8 +34,6 @@
 #include "../tool/file_tools.h"
 #include "../tool/resource_manager.h"
 
-#define NETWORK_BUTTON 
-
 #ifndef WIN32
 #include <dirent.h>
 #endif
@@ -80,49 +78,47 @@ Main_Menu::Main_Menu() :
 
   int y = int(290 * y_scale) ;
   const int y2 = AppWormux::GetInstance()->video.window.GetHeight() + VERSION_DY -20 - button_height;
-#ifdef NETWORK_BUTTON  
-  int dy = std::max((y2-y)/4, button_height);
-#else  
-  int dy = std::max(((y2-y)/3, button_height);
-#endif  
 
-  play = new ButtonText( Point2i(x_button, y),
-			res, "main_menu/button",
-			_("Play"),
-			large_font);
+  int dy = std::max((y2-y)/3, button_height);
+  if(Config::GetInstance()->IsNetworkActivated())
+    dy = std::max((y2-y)/4, button_height);
+
+  play = new ButtonText(Point2i(x_button, y),
+                        res, "main_menu/button",
+                        _("Play"),
+                        large_font);
   y += dy;
 
-#ifdef NETWORK_BUTTON  
-  network = new ButtonText( Point2i(x_button, y),
-			   res, "main_menu/button",
-			   _("Network Game"),
-			   large_font );
-  y += dy;
-#else
-  network = NULL;
-#endif
-  
-  options = new ButtonText( Point2i(x_button, y),
-			   res, "main_menu/button",
-			   _("Options"),
-			   large_font);  
+  if(Config::GetInstance()->IsNetworkActivated()) {
+    network = new ButtonText( Point2i(x_button, y),
+                              res, "main_menu/button",
+                              _("Network Game"),
+                              large_font );
+    y += dy;
+  } else {
+    network = NULL;
+  }
+
+  options = new ButtonText(Point2i(x_button, y),
+                           res, "main_menu/button",
+                           _("Options"),
+                           large_font);
   y += dy;
 
-  infos =  new ButtonText( Point2i(x_button, y),
-			  res, "main_menu/button",
-			  _("Credits"),
-			  large_font);  
+  infos =  new ButtonText(Point2i(x_button, y),
+                          res, "main_menu/button",
+                          _("Credits"),
+                          large_font);
   y += dy;
 
-  quit =  new ButtonText( Point2i(x_button, y),
-			 res, "main_menu/button",
-			 _("Quit"),
-			 large_font);  
+  quit =  new ButtonText(Point2i(x_button, y),
+                         res, "main_menu/button",
+                         _("Quit"),
+                         large_font);  
 
   widgets.AddWidget(play);
-#ifdef NETWORK_BUTTON 
-  widgets.AddWidget(network);
-#endif
+  if(Config::GetInstance()->IsNetworkActivated())
+    widgets.AddWidget(network);
   widgets.AddWidget(options);
   widgets.AddWidget(infos);
   widgets.AddWidget(quit);
@@ -151,14 +147,12 @@ void Main_Menu::OnClic(const Point2i &mousePosition, int button)
     close_menu = true;
     button_clic();
   }
-#ifdef NETWORK_BUTTON  
   else if(b == network)
   {
     choice = menuNETWORK;
     close_menu = true;
     button_clic();
   }
-#endif  
   else if(b == options)
   {
     choice = menuOPTIONS;
