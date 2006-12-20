@@ -60,6 +60,7 @@ bool Teleportation::p_Shoot ()
   ActiveCharacter().Hide();
   ActiveCharacter().body->MakeTeleportParticles(ActiveCharacter().GetPosition(), dst);
 
+  target_chosen = false; // ensure next teleportation cannot be done pressing key space
   return true;
 }
 
