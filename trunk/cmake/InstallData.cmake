@@ -174,8 +174,8 @@ weapon/dynamite/dynamite_ani.png
 weapon/dynamite/dynamite_ico.png
 weapon/dynamite/hole.png
 weapon/dynamite/dynamite.png
-weapon/holly_grenade/holly_grenade.png
-weapon/holly_grenade/holly_grenade_ico.png
+weapon/disco_grenade/disco_grenade.png
+weapon/disco_grenade/disco_grenade_ico.png
 weapon/parachute/parachute.png
 weapon/parachute/parachute_ico.png
 weapon/riot_bomb/missile.png
