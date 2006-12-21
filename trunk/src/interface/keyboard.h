@@ -63,6 +63,9 @@ public:
   // Associe une touche � une action.
   void SetKeyAction(int key, Action::Action_t at);
 
+  // Get the key associated to an action.
+  int GetKeyAssociatedToAction(Action::Action_t at);
+
 };
 
 //-----------------------------------------------------------------------------

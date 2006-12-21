@@ -66,6 +66,19 @@ void Keyboard::SetKeyAction(int key, Action::Action_t at)
   layout[key] = at;
 }
 
+// Get the key associated to an action.
+int Keyboard::GetKeyAssociatedToAction(Action::Action_t at)
+{
+  std::map<int, Action::Action_t>::iterator it;
+  for (it= layout.begin(); it != layout.end(); it++) {
+    if (it->second == at) {
+      return it->first;
+    }
+  }
+  return 0;
+}
+
+
 void Keyboard::HandleKeyEvent( const SDL_Event *event)
 {
   //Handle input text for Chat session in Network game
