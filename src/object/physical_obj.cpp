@@ -216,10 +216,10 @@ const Rectanglei PhysicalObj::GetRect() const
 
 const Rectanglei PhysicalObj::GetTestRect() const
 {
-  return Rectanglei( GetX()+m_test_left,
-		     GetY()+m_test_top,
-		     m_width-m_test_right-m_test_left,
-		     m_height-m_test_bottom-m_test_top);
+  return Rectanglei(GetX()+m_test_left,
+                    GetY()+m_test_top,
+                    m_width-m_test_right-m_test_left,
+                    m_height-m_test_bottom-m_test_top);
 }
 
 void PhysicalObj::AddDamage(uint damage_points)
@@ -227,9 +227,9 @@ void PhysicalObj::AddDamage(uint damage_points)
   if(life_points == -1)
     return;
   life_points -= damage_points;
-  if(life_points <= 0)
+  if(life_points <= 0 && !IsGhost())
   {
-    SignalDeath();
+    Ghost();
     life_points = -1;
   }
 }
@@ -430,7 +430,7 @@ bool PhysicalObj::PutOutOfGround(double direction)
 
   int step=1;
   while(step<max_step && !IsInVacuum(
-			  Point2i((int)(dx * (double)step),(int)(dy * (double)step)), false ))
+                          Point2i((int)(dx * (double)step),(int)(dy * (double)step)), false ))
     step++;
 
   if(step<max_step)
@@ -476,7 +476,7 @@ void PhysicalObj::Init()
 void PhysicalObj::Ghost ()
 {
   if (m_alive == GHOST)
-	return;
+    return;
 
   bool was_dead = IsDead();
   m_alive = GHOST;
