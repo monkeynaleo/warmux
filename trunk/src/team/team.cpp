@@ -210,6 +210,11 @@ void Team::UpdateEnergyBar ()
   energy.SetValue(ReadEnergy());
 }
 
+TeamEnergy & Team::GetEnergyBar()
+{
+  return energy;
+}
+
 void Team::SelectCharacter(uint index)
 {
   assert(index <= characters.size());

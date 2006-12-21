@@ -118,6 +118,7 @@ class Team
 
   // Update the energy bar values of the team.
     void UpdateEnergyBar();
+    TeamEnergy & GetEnergyBar();
 
   // Read the total energy of the team.
     uint ReadEnergy();
