@@ -335,7 +335,7 @@ void Character::Die()
     SetMovement("dead");
 
     if(death_explosion)
-      ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_cfg);
+      ApplyExplosion(GetCenter(), GameMode::GetInstance()->death_explosion_cfg);
     assert(IsDead());
 
     // Signal the death

@@ -129,7 +129,23 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
     }
     xmlpp::Element *explosion = XmlReader::GetMarker(character_xml, "death_explosion");
     if (explosion != NULL)
-      death_cfg.LoadXml(explosion);
+      death_explosion_cfg.LoadXml(explosion);
+  }
+
+  // Barrel explosion
+  xmlpp::Element *barrel_xml = XmlReader::GetMarker(xml, "barrel");
+  if(barrel_xml != NULL) {
+    xmlpp::Element *barrel_explosion = XmlReader::GetMarker(barrel_xml, "explosion");
+    if (barrel_explosion != NULL)
+      barrel_explosion_cfg.LoadXml(barrel_explosion);
+  }
+
+  // Bonus box explosion
+  xmlpp::Element *bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
+  if(bonus_box_xml != NULL) {
+    xmlpp::Element *bonus_box_explosion = XmlReader::GetMarker(bonus_box_xml, "explosion");
+    if (bonus_box_explosion != NULL)
+      bonus_box_explosion_cfg.LoadXml(bonus_box_explosion);
   }
 
   //=== Weapons ===

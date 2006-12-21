@@ -22,6 +22,7 @@
 #include "barrel.h"
 #include "objects_list.h"
 #include "physical_obj.h"
+#include "../game/game_mode.h"
 #include "../particles/particle.h"
 #include "../tool/resource_manager.h"
 #include "../weapon/explosion.h"
@@ -32,7 +33,7 @@ PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
   img= resource_manager.LoadSprite( res, "objet/barrel");
   resource_manager.UnLoadXMLProfile(res);
 
-  life_points = 80;
+  life_points = 40;
 
   SetCollisionModel(false, true, true);
   SetSize(img->GetSize());
@@ -57,11 +58,5 @@ void PetrolBarrel::Refresh()
 void PetrolBarrel::SignalGhostState(bool was_already_dead)
 {
   ParticleEngine::AddNow(GetCenter() , 20, particle_FIRE, true);
-
-  ExplosiveWeaponConfig cfg;
-  cfg.blast_range = 5;
-  cfg.blast_force = 50;
-  cfg.explosion_range = 5;
-  cfg.particle_range = 50;
-  ApplyExplosion(GetCenter(), cfg);
+  ApplyExplosion(GetCenter(), GameMode::GetInstance()->barrel_explosion_cfg);
 }

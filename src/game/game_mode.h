@@ -41,7 +41,9 @@ public:
   double gravity;
   double safe_fall ;
   double damage_per_fall_unit ;
-  ExplosiveWeaponConfig death_cfg;
+  ExplosiveWeaponConfig death_explosion_cfg;
+  ExplosiveWeaponConfig barrel_explosion_cfg;
+  ExplosiveWeaponConfig bonus_box_explosion_cfg;
 
   struct s_character
   {
