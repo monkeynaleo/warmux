@@ -22,6 +22,7 @@
 #include "bullet.h"
 #include "particle.h"
 #include "../game/time.h"
+const int BULLET_PARTICLE_FADE_TIME = 2000;
 
 BulletParticle::BulletParticle() :
   Particle("bullet_particle")
@@ -29,25 +30,36 @@ BulletParticle::BulletParticle() :
   SetCollisionModel(false, false, false);
   m_rebound_sound = "weapon/grenade_bounce";
   m_left_time_to_live = 1;
+  start_to_fade = 0;
 
   image = ParticleEngine::GetSprite(BULLET_spr);
   image->Scale(1.0,1.0);
-  SetSize( Point2i(1, 1) );
+  SetSize(Point2i(1, 1));
 }
 
 void BulletParticle::Refresh()
 {
-  UpdatePosition();
-  image->SetRotation_rad((Time::GetInstance()->Read()/4) % 3 /* 3 is arbitrary */ ); // FIXME this is ugly hack
-  image->Update();
-  if(IsOutsideWorldXY(GetPosition()))
-  {
+  if(IsOutsideWorldXY(GetPosition())) {
     m_left_time_to_live = 0;
+    return;
+  }
+  int current_time = Time::GetInstance()->Read();
+  UpdatePosition();
+  image->Update();
+  if(start_to_fade > 0) {
+    m_left_time_to_live = start_to_fade + BULLET_PARTICLE_FADE_TIME - current_time;
+    m_left_time_to_live = (m_left_time_to_live > 0 ? m_left_time_to_live : 0);
+    image->SetAlpha(1.0 - ((float)(current_time - start_to_fade)) / BULLET_PARTICLE_FADE_TIME);
+  } else {
+    // FIXME this is still a ugly hack
+    image->SetRotation_rad((Time::GetInstance()->Read()/4) % 3 /* 3 is arbitrary */ );
   }
 }
 
 void BulletParticle::SignalRebound()
 {
   PhysicalObj::SignalRebound();
-  SetCollisionModel(true, false, false);
+  //SetCollisionModel(true, false, false);
+  StopMoving();
+  start_to_fade = Time::GetInstance()->Read();
 }
