@@ -302,8 +302,8 @@
     </parachute>
 
     <polecatlauncher>
-      <position origin="hand" x="-8" y="-3" />
-      <hole dx="47" dy="14" />
+      <position origin="hand" x="-20" y="-20" />
+      <hole dx="47" dy="25" />
       <max_strength>25</max_strength>
       <nb_ammo>2</nb_ammo>
       <damage>80</damage>
