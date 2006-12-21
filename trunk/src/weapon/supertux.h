@@ -32,48 +32,48 @@ class TuxLauncher;
 
 class SuperTuxWeaponConfig : public ExplosiveWeaponConfig
 {
-public:
-  uint speed;
-  SuperTuxWeaponConfig();
-  virtual void LoadXml(xmlpp::Element *elem);
+  public:
+    uint speed;
+    SuperTuxWeaponConfig();
+    virtual void LoadXml(xmlpp::Element *elem);
 };
 
 class SuperTux : public WeaponProjectile
 {
- private:
-  ParticleEngine particle_engine;
-  double angle_rad;
+  private:
+    ParticleEngine particle_engine;
+    double angle_rad;
 
-public:
-  uint speed;
-  uint time_now;
-  uint time_next_action;
-  uint last_move;
+  public:
+    uint speed;
+    uint time_now;
+    uint time_next_action;
+    uint last_move;
 
-  SuperTux(SuperTuxWeaponConfig& cfg,
-           WeaponLauncher * p_launcher);
-  void Refresh();
+    SuperTux(SuperTuxWeaponConfig& cfg,
+             WeaponLauncher * p_launcher);
+    void Refresh();
 
-  inline void SetAngle(double angle) {angle_rad = angle;}
-  void turn_left();
-  void turn_right();
-  void Shoot(double strength);
-protected:
-  void SignalOutOfMap();
+    inline void SetAngle(double angle) {angle_rad = angle;}
+    void turn_left();
+    void turn_right();
+    void Shoot(double strength);
+  protected:
+    void SignalOutOfMap();
 };
 
 class TuxLauncher : public WeaponLauncher
 {
- private:
-  SuperTux * current_tux;
- public:
-  TuxLauncher();
-  void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
- protected:
-  WeaponProjectile * GetProjectileInstance();
-  bool p_Shoot();
- private:
-  SuperTuxWeaponConfig& cfg();
+  private:
+    SuperTux * current_tux;
+  public:
+    TuxLauncher();
+    void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
+  protected:
+    WeaponProjectile * GetProjectileInstance();
+    bool p_Shoot();
+  private:
+    SuperTuxWeaponConfig& cfg();
 };
 
 #endif

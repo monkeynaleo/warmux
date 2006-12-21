@@ -33,6 +33,26 @@
     </death_explosion>
   </character>
 
+  <barrel>
+    <explosion>
+      <damage>50</damage>
+      <explosion_range>100</explosion_range>
+      <particle_range>105</particle_range>
+      <blast_force>1500</blast_force>
+      <blast_range>100</blast_range>
+    </explosion>
+  </barrel>
+
+  <bonus_box>
+    <explosion>
+      <damage>50</damage>
+      <explosion_range>50</explosion_range>
+      <particle_range>50</particle_range>
+      <blast_force>500</blast_force>
+      <blast_range>50</blast_range>
+    </explosion>
+  </bonus_box>
+
   <weapons>
     <air_attack>
       <position origin="over" x="0" y="-5" />
@@ -55,7 +75,7 @@
       <mass>1000</mass>
       <speed>0</speed>
     </anvil_launcher>
-    
+
     <airhammer>
       <position origin="hand" x="0" y="0" />
       <min_angle>0</min_angle>
@@ -168,7 +188,8 @@
     </dynamite>
 
     <gnulauncher>
-      <position origin="hand" x="-8" y="-3" />
+      <position origin="hand" x="-20" y="-20" />
+      <hole dx="47" dy="25" />
       <max_strength>25</max_strength>
       <nb_ammo>2</nb_ammo>
       <damage>80</damage>
@@ -282,6 +303,7 @@
 
     <polecatlauncher>
       <position origin="hand" x="-8" y="-3" />
+      <hole dx="47" dy="14" />
       <max_strength>25</max_strength>
       <nb_ammo>2</nb_ammo>
       <damage>80</damage>
@@ -352,7 +374,8 @@
     </teleportation>
 
     <tux>
-      <position origin="hand" x="-6" y="-15" />
+      <position origin="hand" x="-6" y="-23" />
+      <hole dx="16" dy="23" />
       <nb_ammo>1</nb_ammo>
       <damage>50</damage>
       <min_angle>-89</min_angle>

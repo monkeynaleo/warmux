@@ -23,6 +23,7 @@
 #include "bonus_box.h"
 #include <sstream>
 #include <iostream>
+#include "../game/game_mode.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/sprite.h"
@@ -119,18 +120,12 @@ void BonusBox::SignalCollision()
   anim->Start();
 }
 
-//Boxes can explode too...
+// Boxes can explode too ...
 void BonusBox::SignalGhostState(bool was_already_dead)
 {
   if(life_points > 0) return;
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
-
-  ExplosiveWeaponConfig cfg;
-  cfg.blast_range = 3;
-  cfg.blast_force = 25;
-  cfg.explosion_range = 3;
-  cfg.particle_range = 25;
-  ApplyExplosion(GetCenter(), cfg);
+  ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg);
 }
 
 void BonusBox::PickRandomWeapon() {

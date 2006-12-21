@@ -68,6 +68,7 @@ void WeaponBullet::SignalOutOfMap()
 void WeaponBullet::SignalObjectCollision(PhysicalObj * obj)
 {
   if (typeid(*obj) != typeid(Character)) {
+    obj->AddDamage(cfg.damage);
     Explosion();
   } else {
     Character * tmp = (Character*)(obj);
