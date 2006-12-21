@@ -41,6 +41,8 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
   particle_engine(40)
 {
   explode_colliding_character = true;
+  SetSize(image->GetSize());
+  SetTestRect(1, 1, 2, 2);
 }
 
 void SuperTux::Shoot(double strength)
@@ -60,10 +62,10 @@ void SuperTux::Refresh()
 
   image->SetRotation_rad(angle_rad + M_PI_2);
   if ((last_move+animation_deltat)<Time::GetInstance()->Read())
-    {
-      SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
-      image->Update();
-      last_move = Time::GetInstance()->Read();
+  {
+    SetExternForce(static_cast<SuperTuxWeaponConfig&>(cfg).speed, angle_rad);
+    image->Update();
+    last_move = Time::GetInstance()->Read();
   }
 
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
