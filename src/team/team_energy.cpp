@@ -168,19 +168,23 @@ void TeamEnergy::Move()
     }
     // End of movement ?
     if( (global_time->Read() - move_start_time) > MOVE_DURATION)
-    {
-      dy = 0;
-      dx = 0;
-      rank = new_rank;
-      move_start_time = 0;
-      status = EnergyStatusWait;
-      return;
-    }
+      FinalizeMove();
   } else {
     // While moving, it came back to previous place in ranking
     dy = (int)((float)dy - ((global_time->Read() - move_start_time) / MOVE_DURATION) * dy);
     dx = (int)((float)dx - ((global_time->Read() - move_start_time) / MOVE_DURATION) * dx);
   }
+}
+
+// Move energy bar immediatly to there final destination
+void TeamEnergy::FinalizeMove()
+{
+  dy = 0;
+  dx = 0;
+  rank = new_rank;
+  move_start_time = 0;
+  status = EnergyStatusWait;
+  return;
 }
 
 bool TeamEnergy::IsMoving () const

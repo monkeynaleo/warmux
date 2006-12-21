@@ -286,8 +286,11 @@ void Interface::DrawSmallInterface()
 void Interface::DrawTeamEnergy()
 {
   Point2i team_bar_offset = Point2i(game_menu.GetWidth() / 2 + clock_background.GetWidth() / 2 + wind_icon.GetWidth() + MARGIN, MARGIN);
-  FOR_EACH_TEAM(tmp_team)
-      (**tmp_team).DrawEnergy(bottom_bar_pos + team_bar_offset);
+  FOR_EACH_TEAM(tmp_team) {
+    if(!display) // Fix bug #7753 (Team energy bar visible when the interface is hidden)
+      (**tmp_team).GetEnergyBar().FinalizeMove();
+    (**tmp_team).DrawEnergy(bottom_bar_pos + team_bar_offset);
+  }
 }
 
 void Interface::Draw()

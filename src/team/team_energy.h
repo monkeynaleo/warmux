@@ -87,6 +87,8 @@ class TeamEnergy
     // Move energy bar (change ranking)
     void Move();
     bool IsMoving() const;
+    // Move energy bar immediatly to there destination
+    void FinalizeMove();
 };
 
 #endif /* TEAM_ENERGY_H */
