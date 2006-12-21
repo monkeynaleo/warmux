@@ -147,7 +147,7 @@ void ApplyExplosion_common (const Point2i &pos,
   FOR_EACH_OBJECT(it)
    {
      PhysicalObj *obj = *it;
-     if ( !(obj->GoesThroughWall()) )
+     if (!obj->GoesThroughWall() && !obj->IsGhost())
      {
        double distance = pos.Distance(obj->GetCenter());
        if(distance < 1.0)

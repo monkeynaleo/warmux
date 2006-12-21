@@ -60,7 +60,7 @@ class BonusBox : public PhysicalObj
   protected:
     // Signal Fall ending
     virtual void SignalCollision();
-    void SignalDeath();
+    void SignalGhostState(bool was_already_dead);
 };
 
 //-----------------------------------------------------------------------------

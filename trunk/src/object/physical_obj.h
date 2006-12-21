@@ -56,7 +56,7 @@ private:
 protected:
   PhysicalObj* m_overlapping_object;
 
-  void CheckOverlapping();
+  virtual void CheckOverlapping();
 
 protected:
   std::string m_name;

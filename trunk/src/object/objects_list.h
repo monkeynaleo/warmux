@@ -45,27 +45,27 @@
 
 class ObjectsList : public std::list<PhysicalObj*>
 {
-  inline void RemoveObject(PhysicalObj * obj) { remove(obj);};
-public:
-  typedef std::list<PhysicalObj*>::iterator iterator;
+  public:
+    inline void RemoveObject(PhysicalObj * obj) { remove(obj);};
+    typedef std::list<PhysicalObj*>::iterator iterator;
 
-public:
-  ~ObjectsList();
-  inline void AddObject(PhysicalObj * obj) { push_back(obj);};
+  public:
+    ~ObjectsList();
+    inline void AddObject(PhysicalObj * obj) { push_back(obj);};
 
   // Call the Refresh method of all the objects
-  void Refresh();
+    void Refresh();
   // Call the Draw method of all the objects
-  void Draw();
+    void Draw();
 
-  bool AllReady();
+    bool AllReady();
 
   // Place mines randomly on the map
-  void PlaceMines();
+    void PlaceMines();
   // Place barrels randomly on the map
-  void PlaceBarrels();
+    void PlaceBarrels();
 
-  void FreeMem();
+    void FreeMem();
 };
 
 extern ObjectsList lst_objects;

@@ -50,23 +50,8 @@
 #endif
 
 const uint SPEED = 5; // meter / seconde
-const uint SPEED_PARACHUTE = 170; // ms par image
+const uint SPEED_PARACHUTE = 170; // ms per frame
 const uint NB_MAX_TRY = 20;
-
-// Bonus offert par la caisse
-const uint BONUS_ENERGY=100;
-const uint BONUS_TRAP=75;
-const uint BONUS_DYNAMITE=3;
-const uint BONUS_ANVIL=1;
-const uint BONUS_BASEBALL=3;
-const uint BONUS_DISCO_GRENADE=1;
-const uint BONUS_LOWGRAV=2;
-const uint BONUS_AIR_ATTACK=1;
-const uint BONUS_TELEPORTATION=2;
-const uint BONUS_AUTO_BAZOOKA=3;
-const uint BONUS_RIOT_BOMB=2;
-
-
 
 BonusBox::BonusBox()
   : PhysicalObj("bonus_box"){
@@ -119,7 +104,7 @@ void BonusBox::Refresh()
   if (!anim->IsFinished() && !parachute) anim->Update();
 }
 
-// Signale la fin d'une chute
+// Say hello to the ground
 void BonusBox::SignalCollision()
 {
   SetAirResistFactor(1.0);
@@ -135,7 +120,7 @@ void BonusBox::SignalCollision()
 }
 
 //Boxes can explode too...
-void BonusBox::SignalDeath()
+void BonusBox::SignalGhostState(bool was_already_dead)
 {
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
 
@@ -144,9 +129,7 @@ void BonusBox::SignalDeath()
   cfg.blast_force = 25;
   cfg.explosion_range = 3;
   cfg.particle_range = 25;
-  //lst_objects.RemoveObject(this);
   ApplyExplosion(GetCenter(), cfg);
-  Ghost();
 }
 
 void BonusBox::PickRandomWeapon() {
@@ -204,7 +187,7 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
   if (!bonus_box.PutRandomly(true, 0)) return false;
 
   time = randomSync.GetLong(MIN_TIME_BETWEEN_CREATION,
-			   MAX_TIME_BETWEEN_CREATION-MIN_TIME_BETWEEN_CREATION);
+                            MAX_TIME_BETWEEN_CREATION - MIN_TIME_BETWEEN_CREATION);
   time *= 1000;
   time += Time::GetInstance()->Read();
 
