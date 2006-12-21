@@ -39,7 +39,7 @@
 #include "../weapon/explosion.h"
 #include "../weapon/weapons_list.h"
 
-//#define FAST
+#define FAST
 
 #ifdef FAST
   const uint MIN_TIME_BETWEEN_CREATION = 1; // seconds
@@ -122,6 +122,7 @@ void BonusBox::SignalCollision()
 //Boxes can explode too...
 void BonusBox::SignalGhostState(bool was_already_dead)
 {
+  if(life_points > 0) return;
   ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
 
   ExplosiveWeaponConfig cfg;
