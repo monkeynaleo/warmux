@@ -39,7 +39,7 @@
 #include "../weapon/explosion.h"
 #include "../weapon/weapons_list.h"
 
-#define FAST
+//#define FAST
 
 #ifdef FAST
   const uint MIN_TIME_BETWEEN_CREATION = 1; // seconds
