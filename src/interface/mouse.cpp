@@ -286,16 +286,20 @@ void Mouse::TraiteClic (const SDL_Event *event){
   }
 }
 
-void Mouse::SetPointer(pointer_t pointer)
+// set the new pointer type and return the previous one
+Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
 {
-  if (Config::GetInstance()->GetDefaultMouseCursor()) return;
+  if (Config::GetInstance()->GetDefaultMouseCursor()) return current_pointer;
 
-  if (current_pointer == pointer) return;
-
-  current_pointer = pointer;
+  if (current_pointer == pointer) return current_pointer;
 
   if (pointer == POINTER_STANDARD) SDL_ShowCursor(true);
   else SDL_ShowCursor(false);
+
+  pointer_t old_pointer = current_pointer;  
+  current_pointer = pointer;
+  
+  return old_pointer;
 }
 
 void Mouse::Show()

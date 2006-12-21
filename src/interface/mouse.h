@@ -78,7 +78,7 @@ public:
   void ScrollCamera();
 
   // Choose the pointer
-  void SetPointer(pointer_t pointer);
+  pointer_t SetPointer(pointer_t pointer);
   void Draw();
 
   // Hide/show mouse pointer

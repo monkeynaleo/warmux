@@ -26,6 +26,7 @@
 #include "../graphic/video.h"
 #include "../include/app.h"
 #include "../interface/interface.h"
+#include "../interface/mouse.h"
 #include "../map/map.h"
 #include "../tool/resource_manager.h"
 
@@ -45,13 +46,15 @@ int Question::TreatsKey (SDL_Event &event){
   // Tests the key
   choice_iterator it=choices.begin(), end=choices.end();
   for (; it != end; ++it){
-    if (event.key.keysym.sym == it -> key())
+    if (event.key.keysym.sym == it -> key()) {
       return it -> val();
+    }
   }
 
   // No key corresponding to the correct choice, so we use default choice
-  if (default_choice.active)
+  if (default_choice.active) {
     return default_choice.value;
+  }
 
   return -1;
 }
@@ -78,8 +81,8 @@ int Question::Ask () {
   bool end_of_boucle = false;
 
   Draw();
+  Mouse::pointer_t prev_pointer = Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
   do{
-
     while( SDL_PollEvent( &event) ){
       if ( (event.type == SDL_QUIT || event.type == SDL_MOUSEBUTTONDOWN) &&
           default_choice.active ){
@@ -89,13 +92,15 @@ int Question::Ask () {
 
       if (event.type == SDL_KEYUP) {
 	answer = TreatsKey(event);
-	if (answer != -1)
+	if (answer != -1) 
 	  end_of_boucle = true;
       }
     } // SDL_PollEvent
 
     AppWormux::GetInstance()->video.Flip();
   } while (!end_of_boucle);
+
+  Mouse::GetInstance()->SetPointer(prev_pointer);
 
   return answer;
 }
