@@ -220,7 +220,10 @@ void Game::Pause()
   jukebox.Pause();
 
   //Pause screen
-  question.Set ("", true, 0, "interface/pause_screen");
+  question.Set ("", false, 0, "interface/pause_screen");
+  question.add_choice(Config::GetInstance()->GetKeyboard()->GetKeyAssociatedToAction(Action::ACTION_PAUSE),
+		      1
+		      );
   AskQuestion(question, false);
   jukebox.Resume();
 }
