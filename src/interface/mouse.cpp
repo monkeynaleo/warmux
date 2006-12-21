@@ -196,14 +196,14 @@ void Mouse::ScrollCamera() {
   tstVector = mousePos.inf(sensitZone);
   if( !tstVector.IsNull() ){
     camera.SetXY( tstVector * (mousePos - (sensitZone * coef))/2 );
-    camera.autorecadre = false;
+    camera.SetAutoCrop(false);
     scroll = true;
   }
 
   tstVector = winSize.inf(mousePos + sensitZone);
   if( !tstVector.IsNull() ){
     camera.SetXY( tstVector * (mousePos + (sensitZone * coef) - winSize)/2 );
-    camera.autorecadre = false;
+    camera.SetAutoCrop(false);
     scroll = true;
   }
 
@@ -227,7 +227,7 @@ void Mouse::TestCamera(){
     if( scroll_actif ){
       Point2i offset = savedPos - mousePos;
       camera.SetXY(offset);
-      camera.autorecadre = false;
+      camera.SetAutoCrop(false);
     }else{
       scroll_actif = true;
     }
