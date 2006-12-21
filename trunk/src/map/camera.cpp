@@ -16,9 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Cam�ra : g�re la position � l'int�rieur du terrain. On peut "suivre" un
- * objet et se centrer sur un objet. Lors d'un d�placement manuel (au clavier
- * ou � la souris), le mode "suiveur" est d�sactiv�.
+ * Camera : follow an object, center on it or follow mouse interaction.
  *****************************************************************************/
 
 #include "camera.h"
@@ -38,9 +36,9 @@ const Point2i CAMERA_SPEED(20, 20);
 Camera camera;
 
 Camera::Camera(){
-  lance = false;
-  autorecadre = true;
-  obj_suivi = NULL;
+  throw_camera = false;
+  auto_crop = true;
+  followed_object = NULL;
 }
 
 bool Camera::HasFixedX() const{
@@ -52,12 +50,12 @@ bool Camera::HasFixedY() const{
 }
 
 Point2i Camera::FreeDegrees() const{
-	return Point2i( HasFixedX()? 0:1,
-			HasFixedY()? 0:1 );
+  return Point2i(HasFixedX()? 0 : 1,
+                 HasFixedY()? 0 : 1);
 }
 
 Point2i Camera::NonFreeDegrees() const{
-	return Point2i(1, 1) - FreeDegrees();
+  return Point2i(1, 1) - FreeDegrees();
 }
 
 void Camera::SetXYabs(int x, int y){
@@ -73,26 +71,26 @@ void Camera::SetXYabs(int x, int y){
   else
     position.y = - (app->video.window.GetHeight() - world.GetHeight())/2;
 
-  lance = true;
+  throw_camera = true;
 }
 
 void Camera::SetXYabs(const Point2i &pos){
-	SetXYabs(pos.x, pos.y);
+  SetXYabs(pos.x, pos.y);
 }
 
 void Camera::SetXY(Point2i pos){
-	pos = pos * FreeDegrees();
-	if( pos.IsNull() )
-		return;
+  pos = pos * FreeDegrees();
+  if( pos.IsNull() )
+    return;
 
-	SetXYabs(position + pos);
+  SetXYabs(position + pos);
 }
 
 void Camera::CenterOnFollowedObject(){
-  CenterOn(*obj_suivi);
+  CenterOn(*followed_object);
 }
 
-// Centrage imm�diat sur un objet
+// Center on a object
 void Camera::CenterOn(const PhysicalObj &obj){
   if (obj.IsGhost())
     return;
@@ -108,18 +106,23 @@ void Camera::CenterOn(const PhysicalObj &obj){
 }
 
 void Camera::AutoCrop(){
-  if( !obj_suivi || obj_suivi -> IsGhost() )
+  if( !followed_object || followed_object->IsGhost() )
     return;
 
-  if( !IsVisible(*obj_suivi) )
+  if( !IsVisible(*followed_object) )
   {
     MSG_DEBUG("camera.scroll", "The object is not visible.");
     CenterOnFollowedObject();
     return;
   }
 
-  Point2i pos = obj_suivi->GetPosition();
-  Point2i size = obj_suivi->GetSize();
+  if(follow_closely)
+  {
+    CenterOn(*followed_object);
+    return;
+  }
+  Point2i pos = followed_object->GetPosition();
+  Point2i size = followed_object->GetSize();
 
   if( pos.y < 0 )
     pos.y = 0;
@@ -135,41 +138,54 @@ void Camera::AutoCrop(){
   SetXY( dst * CAMERA_SPEED / dstMax );
 }
 
-void Camera::Refresh(){
-  lance = false;
+void Camera::SetAutoCrop(bool crop)
+{
+  auto_crop = crop;
+}
 
-  // Camera � la souris
+bool Camera::IsAutoCrop() const
+{
+  return auto_crop;
+}
+
+void Camera::SetCloseFollowing(bool close)
+{
+  follow_closely = close;
+}
+
+void Camera::Refresh(){
+  throw_camera = false;
+
+  // mouse mouvement
   Mouse::GetInstance()->TestCamera();
-  if (lance) return;
+  if (throw_camera) return;
 
 #ifdef TODO_KEYBOARD // ???
-  // Camera au clavier
+  // keyboard movement
   clavier.TestCamera();
-  if (lance)
+  if (throw_camera)
     return;
 #endif
 
-  if (autorecadre)
+  if (auto_crop)
     AutoCrop();
 }
 
-void Camera::FollowObject (PhysicalObj *obj, bool suit, bool recentre,
-			     bool force_recentrage){
-  MSG_DEBUG( "camera.tracking", "Following object %s, recentre=%d, suit=%d", obj->GetName().c_str(), recentre, suit);
-  if (recentre)
-  if ((obj_suivi != obj) || !IsVisible(*obj) || force_recentrage)
+void Camera::FollowObject(PhysicalObj *obj, bool follow, bool center_on, bool force_center_on_object){
+  MSG_DEBUG( "camera.tracking", "Following object %s, center_on=%d, follow=%d", obj->GetName().c_str(), center_on, follow);
+  if ((center_on) && ((followed_object != obj) || !IsVisible(*obj) || force_center_on_object))
   {
     bool visible = IsVisible(*obj);
     CenterOn(*obj);
-    autorecadre = suit;
+    auto_crop = follow;
     if(!visible)
       wind.RandomizeParticlesPos();
   }
-  obj_suivi = obj;
+  followed_object = obj;
 }
 
-void Camera::StopFollowingObj (PhysicalObj* obj){
-  if( obj_suivi == obj )
+void Camera::StopFollowingObj(PhysicalObj* obj){
+  if(followed_object == obj)
     FollowObject((PhysicalObj*)&ActiveCharacter(), true, true, true);
 }
 

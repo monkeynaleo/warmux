@@ -40,8 +40,8 @@ const double JETPACK_FORCE = 2000.0;
 const uint DELTA_FUEL_DOWN = 200 ;  // Delta time between 2 fuel unit consumption.
 
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
-			    new WeaponConfig(),
-			    NEVER_VISIBLE)
+                            new WeaponConfig(),
+                            NEVER_VISIBLE)
 {
   m_name = _("Jetpack");
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
@@ -62,40 +62,39 @@ void JetPack::Refresh()
   Point2d F;
 
   if (m_is_active)
+  {
+    F.x = m_x_force ;
+    F.y = m_y_force ;
+
+    ActiveCharacter().SetExternForceXY(F);
+    ActiveCharacter().UpdatePosition();
+    SendCharacterPosition();
+    Action a(Action::ACTION_SET_CHARACTER_PHYSICS);
+    a.StoreActiveCharacter();
+    network.SendAction(&a);
+
+    if( !F.IsNull() )
     {
-      F.x = m_x_force ;
-      F.y = m_y_force ;
+      // We are using fuel !!!
+      uint current = Time::GetInstance()->Read() ;
+      double delta = (double)(current - m_last_fuel_down);
 
-      ActiveCharacter().SetExternForceXY(F);
-      ActiveCharacter().UpdatePosition();
-      SendCharacterPosition();
-      Action a(Action::ACTION_SET_CHARACTER_PHYSICS);
-      a.StoreActiveCharacter();
-      network.SendAction(&a);
-
-      if( !F.IsNull() )
-	{
-	  // We are using fuel !!!
-
-	  uint current = Time::GetInstance()->Read() ;
-	  double delta = (double)(current - m_last_fuel_down);
-
-	  while (delta >= DELTA_FUEL_DOWN)
-	    {
-	      if (EnoughAmmoUnit())
-		{
-		  UseAmmoUnit();
-		  m_last_fuel_down += DELTA_FUEL_DOWN ;
-		  delta -= DELTA_FUEL_DOWN ;
-		}
-	      else
-		{
-		  p_Deselect();
-		  break;
-		}
-	    }
-	}
+      while (delta >= DELTA_FUEL_DOWN)
+      {
+        if (EnoughAmmoUnit())
+        {
+          UseAmmoUnit();
+          m_last_fuel_down += DELTA_FUEL_DOWN ;
+          delta -= DELTA_FUEL_DOWN ;
+        }
+        else
+        {
+          p_Deselect();
+          break;
+        }
+      }
     }
+  }
 }
 
 void JetPack::p_Select()
@@ -110,6 +109,7 @@ void JetPack::p_Deselect()
   m_y_force = 0;
   ActiveCharacter().SetExternForce(0,0);
   StopUse();
+  camera.SetCloseFollowing(false);
   ActiveCharacter().SetClothe("normal");
   ActiveCharacter().SetMovement("walk");
 }
@@ -123,8 +123,9 @@ void JetPack::StartUse()
       channel = jukebox.Play(ActiveTeam().GetSoundProfile(),"weapon/jetpack", -1);
 
       camera.FollowObject (&ActiveCharacter(),true, true, true);
-// 			     bool suit, bool recentre,
-// 			     bool force_recentrage=false);
+      camera.SetCloseFollowing(true);
+//                           bool suit, bool recentre,
+//                           bool force_recentrage=false);
     }
 }
 
@@ -184,26 +185,23 @@ void JetPack::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t even
   switch (action) {
     case Action::ACTION_UP:
       if (event_type == Keyboard::KEY_PRESSED)
-	GoUp();
-      else
-	if (event_type == Keyboard::KEY_RELEASED)
-	  StopUp();
+        GoUp();
+      else if (event_type == Keyboard::KEY_RELEASED)
+        StopUp();
       break ;
 
     case Action::ACTION_MOVE_LEFT:
       if (event_type == Keyboard::KEY_PRESSED)
-	GoLeft();
-      else
-	if (event_type == Keyboard::KEY_RELEASED)
-	  StopLeft();
+        GoLeft();
+      else if (event_type == Keyboard::KEY_RELEASED)
+        StopLeft();
       break ;
 
     case Action::ACTION_MOVE_RIGHT:
       if (event_type == Keyboard::KEY_PRESSED)
-	GoRight();
-      else
-	if (event_type == Keyboard::KEY_RELEASED)
-	  StopRight();
+        GoRight();
+      else if (event_type == Keyboard::KEY_RELEASED)
+        StopRight();
       break ;
 
     case Action::ACTION_SHOOT:

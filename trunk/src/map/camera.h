@@ -16,9 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Cam�ra : g�re la position � l'int�rieur du terrain. On peut "suivre" un
- * objet et se centrer sur un objet. Lors d'un d�placement manuel (au clavier
- * ou � la souris), le mode "suiveur" est d�sactiv�.
+ * Camera : follow an object, center on it or follow mouse interaction.
  *****************************************************************************/
 
 #ifndef SCROLLING_H
@@ -31,24 +29,25 @@
 
 class Camera : public Rectanglei{
 public:
-  bool autorecadre;
+  bool auto_crop;
 
 private:
-  PhysicalObj* obj_suivi;
-  bool lance;
+  PhysicalObj* followed_object;
+  bool throw_camera;
+  bool follow_closely;
 
 public:
   Camera();
 
-  // Scrolle le fond en X ou Y
+  // set camera to position
   void SetXY(Point2i pos);
   void SetXYabs(int x, int y);
   void SetXYabs(const Point2i &pos);
 
-  // Recadrage automatique sur l'objet suivi
-  void FollowObject (PhysicalObj *obj, 
-		       bool suit, bool recentre,
-		       bool force_recentrage=false);
+  // Auto crop on an object
+  void FollowObject (PhysicalObj *obj,
+                     bool follow, bool center_on,
+                     bool force_center_on_object=false);
   void StopFollowingObj (PhysicalObj* obj);
 
   bool IsVisible(const PhysicalObj &obj);
@@ -63,6 +62,9 @@ public:
   void CenterOn(const PhysicalObj &obj);
   void CenterOnFollowedObject();
   void AutoCrop();
+  void SetAutoCrop(bool crop);
+  bool IsAutoCrop() const;
+  void SetCloseFollowing(bool close);
 };
 
 extern Camera camera;
