@@ -121,6 +121,7 @@ weapon/sound/load.ogg
 weapon/sound/jetpack.ogg
 weapon/sound/mine_beep.ogg
 weapon/sound/dynamite_exp.ogg
+weapon/sound/riot_bomb_exp.ogg
 weapon/sound/shotgun.ogg
 weapon/sound/alleluia.ogg
 weapon/sound/gun.ogg
