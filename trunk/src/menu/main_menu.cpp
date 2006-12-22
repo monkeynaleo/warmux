@@ -147,7 +147,7 @@ void Main_Menu::OnClic(const Point2i &mousePosition, int button)
     close_menu = true;
     button_clic();
   }
-  else if(b == network)
+  else if(b == network && Config::GetInstance()->IsNetworkActivated())
   {
     choice = menuNETWORK;
     close_menu = true;
