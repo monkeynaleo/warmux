@@ -38,6 +38,7 @@ class NetworkConnectionMenu : public Menu
 
    /* Connection controllers */
    TextBox* server_adress;
+   TextBox* port_number;
    ButtonText* start_client;
    ButtonText* start_server;
    ButtonText* internet_client;
