@@ -56,11 +56,16 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   // Connection related widgets
   connection_box = new VBox(Rectanglei( x_button, y_box, stdRect.GetSizeX(), 1), false);
   connection_box->SetBorder(Point2i(0,0));
-  connection_box->AddWidget(new Label(_("Server adress:"), rectZero, *normal_font));
+  connection_box->AddWidget(new Label(_("Server address:"), rectZero, *normal_font));
 
   server_adress = new TextBox("localhost", rectZero, *normal_font);
   connection_box->AddWidget(server_adress);
 
+  connection_box->AddWidget(new Label(_("Port:"), rectZero, *normal_font));
+  
+  port_number = new TextBox(WORMUX_NETWORK_PORT, rectZero, *normal_font);
+  connection_box->AddWidget(port_number);
+  
   start_client = new ButtonText( Point2i(0,0),
 				 res, "main_menu/button",
 				 _("Connect to game"),
@@ -120,7 +125,7 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == start_client)
   {
     network.Init();
-    network.ClientConnect(server_adress->GetText(),WORMUX_NETWORK_PORT);
+    network.ClientConnect(server_adress->GetText(), port_number->GetText());
     if(network.IsConnected())
     {
       msg_box->NewMessage(_("Connected to ") + server_adress->GetText());
@@ -140,7 +145,7 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
       return;
 
     network.Init();
-    network.ServerStart(WORMUX_NETWORK_PORT);
+    network.ServerStart(port_number->GetText());
 
     index_server.SendServerStatus();
 

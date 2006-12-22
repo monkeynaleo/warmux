@@ -43,8 +43,6 @@ const uint TEAMS_BOX_H = 180;
 const uint TEAM_LOGO_H = 48;
 const uint OPTIONS_BOX_H = 150;
 
-#define WORMUX_NETWORK_PORT "9999"
-
 NetworkMenu::NetworkMenu() :
   Menu("menu/bg_network")
 {

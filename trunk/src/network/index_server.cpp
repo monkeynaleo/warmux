@@ -309,7 +309,7 @@ void IndexServer::SendServerStatus()
   if(hidden_server)
     return;
   Send(TS_MSG_HOSTING);
-  Send(WORMUX_NETWORK_PORT_INT);
+  Send(network.GetPort());
 }
 
 std::list<std::string> IndexServer::GetHostList()
