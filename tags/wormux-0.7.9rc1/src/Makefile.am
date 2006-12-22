@@ -113,6 +113,7 @@ wormux_SOURCES = \
 	network/chat.cpp network/chat.h \
 	network/download.cpp network/download.h \
 	network/distant_cpu.cpp network/distant_cpu.h \
+	network/index_svr_msg.h \
 	network/index_server.cpp network/index_server.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
