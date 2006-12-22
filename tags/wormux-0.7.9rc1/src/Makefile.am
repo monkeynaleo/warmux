@@ -131,6 +131,7 @@ wormux_SOURCES = \
 	particles/star.cpp particles/star.h \
 	team/macro.h \
 	team/team.cpp team/team.h \
+	team/team_config.h \
 	team/team_energy.cpp team/team_energy.h \
 	team/teams_list.cpp team/teams_list.h \
 	team/results.cpp team/results.h \
