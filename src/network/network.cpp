@@ -411,6 +411,6 @@ const bool Network::IsConnected() const { return m_is_connected; }
 const bool Network::IsLocal() const { return !m_is_server && !m_is_client; }
 const bool Network::IsServer() const { return m_is_server; }
 const bool Network::IsClient() const { return m_is_client; }
-const uint Network::GetPort() const { return ip.port; }
+const uint Network::GetPort() const { return ntohs(ip.port); }
 
 //-----------------------------------------------------------------------------
