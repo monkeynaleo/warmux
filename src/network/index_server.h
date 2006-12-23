@@ -27,6 +27,9 @@
 #include <map>
 #include <list>
 #include <string>
+#include <utility>
+
+typedef std::pair<std::string, std::string> address_pair;
 
 class IndexServer
 {
@@ -75,7 +78,8 @@ public:
   // Notify the top server we are hosting a game
   void SendServerStatus();
   void Disconnect();
-  std::list<std::string> GetHostList();
+  // returns a list with string pairs: first element = hostname/ip, second element = port
+  std::list<address_pair> GetHostList();
 };
 
 extern IndexServer index_server;

@@ -312,20 +312,23 @@ void IndexServer::SendServerStatus()
   Send(network.GetPort());
 }
 
-std::list<std::string> IndexServer::GetHostList()
+std::list<address_pair> IndexServer::GetHostList()
 {
   Send(TS_MSG_GET_LIST);
   int lst_size = ReceiveInt();
-  std::list<std::string> lst;
+  std::list<address_pair> lst;
   while(lst_size--)
   {
     IPaddress ip;
     ip.host = ReceiveInt();
     ip.port = ReceiveInt();
     const char* addr = SDLNet_ResolveIP(&ip);
-    if(addr != NULL)
-      lst.push_back( std::string(addr) );
-    else
+    char port[10];
+    sprintf(port, "%d", ip.port);
+
+    address_pair addr_pair;
+    addr_pair.second = std::string(port);
+    if(addr == NULL)
     {
       // We can't resolve the hostname, so just show the ip address
       unsigned char* str_ip = (unsigned char*)&ip.host;
@@ -334,8 +337,9 @@ std::list<std::string> IndexServer::GetHostList()
                                            (int)str_ip[1],
                                            (int)str_ip[2],
                                            (int)str_ip[3]);
-      lst.push_back( std::string(formated_ip) );
+      addr_pair.first = std::string(formated_ip);
     }
+    lst.push_back(addr_pair);
   }
   return lst;
 }

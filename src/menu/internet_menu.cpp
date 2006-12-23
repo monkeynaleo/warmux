@@ -84,7 +84,7 @@ void InternetMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == connect && connect_lst->GetSelectedItem() != -1)
   {
     network.Init();
-    network.ClientConnect(connect_lst->ReadValue(), WORMUX_NETWORK_PORT);
+    network.ClientConnect(connect_lst->ReadValue(), connect_lst->ReadLabel());
     if( network.IsConnected() )
     {
       close_menu = true;
@@ -111,12 +111,12 @@ void InternetMenu::RefreshList()
     connect_lst->RemoveSelected();
   }
 
-  std::list<std::string> lst = index_server.GetHostList();
+  std::list<address_pair> lst = index_server.GetHostList();
 
-  for(std::list<std::string>::iterator addr = lst.begin();
-      addr != lst.end();
-      ++addr)
-    connect_lst->AddItem( false, *addr, *addr );
+  for(std::list<address_pair>::iterator pair_it = lst.begin();
+      pair_it != lst.end();
+      ++pair_it)
+    connect_lst->AddItem( false, pair_it->first, pair_it->second );
 
   if(current != -1)
     connect_lst->Select( current );
