@@ -51,7 +51,8 @@ bool Client::HandleMsg(const std::string & str)
 		if( handshake_done )
 			return false;
 		version = str;
-		if(str == "0.8beta1")
+		if(str == "0.8beta1"
+		|| str == "0.7.9rc1")
 		{
 			DPRINT(MSG, "Version checked successfully");
 			handshake_done = true;
@@ -104,7 +105,7 @@ bool Client::HandleMsg(const std::string & str)
 		break;
 	default:
 		DPRINT(MSG, "Wrong message");
-		if(str == "0.8beta1")
+//		if(str == "0.8beta1")
 			return false;
 	}
 	// We are ready to read a new message
