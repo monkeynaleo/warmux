@@ -196,6 +196,7 @@ void Network::ServerStart(const std::string &port)
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return;
   }
+  ip.port = prt;
 
   m_is_server = true;
   m_is_client = false;
