@@ -23,6 +23,7 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <SDL_thread.h>
+#include <netinet/in.h>
 #include "../game/game_mode.h"
 #include "../game/game.h"
 #include "../gui/question.h"
@@ -136,6 +137,7 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
 
   int prt=0;
   sscanf(port.c_str(),"%i",&prt);
+  prt = htons(prt);
 
   if(SDLNet_ResolveHost(&ip,host.c_str(),prt)==-1)
   {
@@ -188,6 +190,7 @@ void Network::ServerStart(const std::string &port)
   // Convert port number (std::string port) into SDL port number format:
   int prt;
   sscanf(port.c_str(),"%i",&prt);
+  prt = htons(prt);
 
   if(SDLNet_ResolveHost(&ip,NULL,prt)==-1)
   {
