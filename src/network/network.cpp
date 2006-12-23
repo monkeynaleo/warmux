@@ -135,7 +135,6 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
   int prt=0;
-  IPaddress ip;
   sscanf(port.c_str(),"%i",&prt);
 
   if(SDLNet_ResolveHost(&ip,host.c_str(),prt)==-1)
@@ -146,6 +145,8 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return;
   }
+
+  ip.port = prt;
 
   TCPsocket socket = SDLNet_TCP_Open(&ip);
 
