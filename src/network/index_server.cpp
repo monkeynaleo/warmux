@@ -328,7 +328,8 @@ std::list<address_pair> IndexServer::GetHostList()
 
     address_pair addr_pair;
     addr_pair.second = std::string(port);
-    if(addr == NULL || addr[0]=='\0')
+
+    if(addr == NULL)
     {
       // We can't resolve the hostname, so just show the ip address
       unsigned char* str_ip = (unsigned char*)&ip.host;
@@ -339,6 +340,8 @@ std::list<address_pair> IndexServer::GetHostList()
                                            (int)str_ip[3]);
       addr_pair.first = std::string(formated_ip);
     }
+    else
+      addr_pair.first = std::string(addr);
     lst.push_back(addr_pair);
   }
   return lst;
