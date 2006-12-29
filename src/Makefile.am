@@ -85,7 +85,9 @@ wormux_SOURCES = \
 	menu/options_menu.cpp menu/options_menu.h \
 	menu/game_menu.cpp menu/game_menu.h \
 	menu/results_menu.cpp menu/results_menu.h \
+	menu/team_box.cpp menu/team_box.h \
 	menu/teams_selection_box.cpp menu/teams_selection_box.h \
+	menu/network_teams_selection_box.cpp menu/network_teams_selection_box.h \
 	game/time.cpp game/time.h \
 	gui/progress_bar.cpp gui/progress_bar.h \
 	gui/EnergyBar.cpp gui/EnergyBar.h \
