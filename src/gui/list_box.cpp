@@ -92,10 +92,10 @@ ListBox::~ListBox()
    m_items.clear();
 }
 
-int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition)
+int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
 {
   if( !Contains(mousePosition) )
-	  return -1;
+    return -1;
 
   int index = (mousePosition.y - position.y) / height_item;
   return BorneLong(index + first_visible_item, 0, m_items.size() - 1);
@@ -144,7 +144,7 @@ Widget* ListBox::Clic(const Point2i &mousePosition, uint button)
   }
 }
 
-void ListBox::Draw(const Point2i &mousePosition, Surface& surf)
+void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   int item = MouseIsOnWhichItem(mousePosition);
   Rectanglei rect (*this);
@@ -273,7 +273,7 @@ void ListBox::Deselect ()
   selected_item = -1;
 }
 
-int ListBox::GetSelectedItem ()
+int ListBox::GetSelectedItem () const
 {
   return selected_item;
 }
@@ -296,7 +296,7 @@ const std::string& ListBox::ReadValue (int index) const
   return m_items.at(index)->GetValue();
 }
 
-std::vector<ListBoxItem*> * ListBox::GetItemsList()
+uint ListBox::Size() const
 {
-  return &m_items;
+  return m_items.size();
 }

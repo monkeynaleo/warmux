@@ -74,7 +74,7 @@ void PictureWidget::SetNoSurface()
 }
 
 void PictureWidget::Draw(const Point2i &mousePosition,
-			 Surface& surf)
+			 Surface& surf) const
 {
   if (spr != NULL) {
     int x = GetPositionX() + ( GetSizeX()/2 ) - (spr->GetWidth()/2);
@@ -95,7 +95,7 @@ void PictureWidget::SetSizePosition(const Rectanglei &rect)
   StdSetSizePosition(rect);
 }
 
- void PictureWidget::Disable()
- {
-   disabled = true;
- }
+void PictureWidget::Disable()
+{
+  disabled = true;
+}

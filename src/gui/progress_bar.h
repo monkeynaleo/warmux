@@ -80,10 +80,10 @@ public:
   void SetReferenceValue (bool use, long value=0);
 
   // Draw la barre de progresssion
-  void Draw();
+  void Draw() const;
 
   // Draw the progress bar
-  void DrawXY(const Point2i &pos);
+  void DrawXY(const Point2i &pos) const;
 
   inline const long & GetMaxVal() const { return max; }
   inline const long & GetVal() const { return val; }

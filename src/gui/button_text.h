@@ -36,7 +36,7 @@ public:
 	      const std::string &new_text, Font *font);
   ~ButtonText();
 
-  void Draw(const Point2i &mousePosition, Surface& surf); 
+  void Draw(const Point2i &mousePosition, Surface& surf) const; 
 };
 
 #endif

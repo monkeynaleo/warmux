@@ -38,7 +38,7 @@ class PictureWidget : public Widget
   ~PictureWidget();
   void SetSurface(const Surface& s, bool enable_scaling=false);
   void SetNoSurface();
-  void Draw(const Point2i &mousePosition, Surface& surf);
+  void Draw(const Point2i &mousePosition, Surface& surf) const;
   void SetSizePosition(const Rectanglei &rect);
 
   // Apply a transparency color mask

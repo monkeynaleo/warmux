@@ -83,7 +83,7 @@ void SpinButton::SetSizePosition(const Rectanglei &rect)
   m_minus->SetSizePosition( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10) );
 }
 
-void SpinButton::Draw(const Point2i &mousePosition, Surface& surf)
+void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   txt_label->DrawTopLeft(position);
    

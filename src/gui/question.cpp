@@ -59,7 +59,7 @@ int Question::TreatsKey (SDL_Event &event){
   return -1;
 }
 
-void Question::Draw(){
+void Question::Draw() const{
   AppWormux * app = AppWormux::GetInstance();
 
   if(background != NULL)

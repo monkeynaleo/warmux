@@ -58,7 +58,7 @@ void WidgetList::AddWidget(Widget* w)
   w->SetContainer(this);
 }
 
-void WidgetList::Draw(const Point2i &mousePosition, Surface& surf)
+void WidgetList::Update(const Point2i &mousePosition, Surface& surf)
 {
   for(std::list<Widget*>::iterator w=widget_list.begin();
       w != widget_list.end();
@@ -71,6 +71,9 @@ void WidgetList::Draw(const Point2i &mousePosition, Surface& surf)
   lastMousePosition = mousePosition;
 }
 
+void WidgetList::Draw(const Point2i &mousePosition, Surface& surf) const
+{
+}
 
 void WidgetList::Redraw(const Rectanglei& rect, Surface& surf)
 {

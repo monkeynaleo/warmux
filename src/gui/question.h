@@ -71,7 +71,7 @@ public:
 	   int default_value,
       const std::string &bg_sprite="");
   int Ask();
-  void Draw();
+  void Draw() const;
 
   inline void add_choice(int key, int value)
   {

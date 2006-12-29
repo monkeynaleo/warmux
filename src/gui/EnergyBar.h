@@ -32,7 +32,7 @@ class EnergyBar : public ProgressBar {
   public:
     EnergyBar();
     void Actu(long val);
-    Color GetColorValue(long app_energy);
+    Color GetColorValue(long app_energy) const;
 };
 
 #endif
