@@ -140,6 +140,7 @@ void Interface::DrawCharacterInfo()
 {
   AppWormux * app = AppWormux::GetInstance();
   Point2i pos = (app->video.window.GetSize() - GetSize()) * Point2d(0.5, 1);
+
   // Get the character
   if (character_under_cursor == NULL) character_under_cursor = &ActiveCharacter();
 
@@ -147,20 +148,25 @@ void Interface::DrawCharacterInfo()
   Point2i energy_bar_offset = BORDER_POSITION + Point2i(MARGIN + character_under_cursor->GetTeam().flag.GetWidth(),
                                                         character_under_cursor->GetTeam().flag.GetHeight() / 2);
   energy_bar.DrawXY(bottom_bar_pos + energy_bar_offset);
+
   // Display team logo
   app->video.window.Blit(character_under_cursor->GetTeam().flag, bottom_bar_pos + BORDER_POSITION);
+
   // Display team name
   t_team_name->Set(character_under_cursor->GetTeam().GetName());
   Point2i team_name_offset = energy_bar_offset + Point2i(energy_bar.GetWidth() / 2, energy_bar.GetHeight() + t_team_name->GetHeight() / 2);
   t_team_name->DrawCenter(bottom_bar_pos + team_name_offset);
+
   // Display character's name
   t_character_name->Set(character_under_cursor->GetName());
   Point2i character_name_offset = energy_bar_offset + Point2i((energy_bar.GetWidth() > t_character_name->GetWidth() ? energy_bar.GetWidth() : t_character_name->GetWidth()) / 2, -t_character_name->GetHeight() / 2);
   t_character_name->DrawCenter(bottom_bar_pos + character_name_offset);
+
   // Display player's name
   t_player_name->Set(_("general: ") + character_under_cursor->GetTeam().GetPlayerName());
   Point2i player_name_offset = energy_bar_offset + Point2i(energy_bar.GetWidth() / 2, t_team_name->GetHeight() + t_player_name->GetHeight() + MARGIN);
   t_player_name->DrawCenter(bottom_bar_pos + player_name_offset);
+
   // Display energy
   if (!character_under_cursor->IsDead()) {
     t_character_energy->Set(ulong2str(character_under_cursor->GetEnergy())+"%");
@@ -173,7 +179,7 @@ void Interface::DrawCharacterInfo()
   t_character_energy->DrawCenter(bottom_bar_pos + energy_bar_offset + energy_bar.GetSize()/2);
 }
 
-void Interface::DrawWeaponInfo()
+void Interface::DrawWeaponInfo() const
 {
   Weapon* weapon;
   int nbr_munition;
@@ -190,26 +196,30 @@ void Interface::DrawWeaponInfo()
   }
 
   std::string tmp;
+
   // Draw weapon name
   t_weapon_name->Set(weapon->GetName());
   Point2i weapon_name_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2 - t_weapon_name->GetWidth() - MARGIN, 0);
   t_weapon_name->DrawTopLeft(bottom_bar_pos + weapon_name_offset);
+
   // Display number of ammo
   t_weapon_stock->Set((nbr_munition ==  INFINITE_AMMO ? _("(unlimited)") : _("Stock:") + Format("%i", nbr_munition)));
   Point2i weapon_stock_offset = Point2i(game_menu.GetWidth() / 2 - clock_background.GetWidth() / 2 - t_weapon_stock->GetWidth() - MARGIN, t_weapon_name->GetHeight());
   t_weapon_stock->DrawTopLeft(bottom_bar_pos + weapon_stock_offset);
+
   // Draw weapon icon
   weapon->GetIcon().Scale(icon_scale_factor, 0.75);
   Point2i weapon_icon_offset = game_menu.GetSize() / 2 - weapon->GetIcon().GetSize() / 2 + Point2i(- clock_background.GetWidth(), MARGIN);
   weapon->GetIcon().DrawXY(bottom_bar_pos + weapon_icon_offset);
 }
 
-void Interface::DrawTimeInfo()
+void Interface::DrawTimeInfo() const
 {
   AppWormux * app = AppWormux::GetInstance();
   Point2i turn_time_pos = (app->video.window.GetSize() - clock_background.GetSize()) * Point2d(0.5, 1) + 
       Point2i(0, - GetHeight() + clock_background.GetHeight());
   Rectanglei dr(turn_time_pos, clock_background.GetSize());
+
   // Draw background interface
   app->video.window.Blit(clock_background, turn_time_pos);
   world.ToRedrawOnScreen(dr);
@@ -217,11 +227,12 @@ void Interface::DrawTimeInfo()
 }
 
 // display time left in a turn
-void Interface::DrawClock(const Point2i &time_pos)
+void Interface::DrawClock(const Point2i &time_pos) const
 {
   // Draw turn time
   if (display_timer)
     timer->DrawCenter(time_pos - Point2i(0, clock_background.GetHeight()/3));
+
   // Draw clock
   float scale;
   if(remaining_turn_time < 10)  // Hurry up !
@@ -231,6 +242,7 @@ void Interface::DrawClock(const Point2i &time_pos)
   clock->Scale(1.0, scale);
   Point2i tmp_point = time_pos - clock->GetSize() / 2;
   clock->DrawXY(tmp_point);
+
   // Draw global timer
   std::string tmp(Time::GetInstance()->GetString());
   global_timer->Set(tmp);
@@ -238,10 +250,11 @@ void Interface::DrawClock(const Point2i &time_pos)
 }
 
 // draw wind indicator
-void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon)
+void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon) const
 {
   AppWormux * app = AppWormux::GetInstance();
   int height;
+
   // draw wind icon
   if(draw_icon) {
     app->video.window.Blit(wind_icon, wind_bar_pos);
@@ -250,6 +263,7 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
   } else {
     height = MARGIN;
   }
+
   // draw wind indicator
   Point2i wind_bar_offset = Point2i(0, height);
   Point2i tmp = wind_bar_pos + wind_bar_offset + Point2i(2, 2);
@@ -259,14 +273,14 @@ void Interface::DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_i
 }
 
 // display wind info
-void Interface::DrawWindInfo()
+void Interface::DrawWindInfo() const
 {
   Point2i wind_pos_offset = Point2i(game_menu.GetWidth() / 2 + clock_background.GetWidth() / 2 + MARGIN, game_menu.GetHeight() / 2 - wind_icon.GetHeight() / 2);
   DrawWindIndicator(bottom_bar_pos + wind_pos_offset, true);
 }
 
 // draw mini info when hidding interface
-void Interface::DrawSmallInterface()
+void Interface::DrawSmallInterface() const
 {
   if(display) return;
   AppWormux * app = AppWormux::GetInstance();
@@ -283,7 +297,7 @@ void Interface::DrawSmallInterface()
 }
 
 // draw team energy
-void Interface::DrawTeamEnergy()
+void Interface::DrawTeamEnergy() const
 {
   Point2i team_bar_offset = Point2i(game_menu.GetWidth() / 2 + clock_background.GetWidth() / 2 + wind_icon.GetWidth() + MARGIN, MARGIN);
   FOR_EACH_TEAM(tmp_team) {
@@ -390,7 +404,7 @@ void Interface::UpdateWindIndicator(int wind_value)
   wind_bar.UpdateValue(wind_value);
 }
 
-void AbsoluteDraw(Surface &s, Point2i pos)
+void AbsoluteDraw(const Surface &s, Point2i pos)
 {
   Rectanglei rectSurface(pos, s.GetSize());
 

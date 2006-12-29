@@ -89,13 +89,13 @@ public:
    void Draw();
 
    void DrawCharacterInfo();
-   void DrawTeamEnergy();
-   void DrawWeaponInfo();
-   void DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon);
-   void DrawWindInfo();
-   void DrawClock(const Point2i &time_pos);
-   void DrawTimeInfo();
-   void DrawSmallInterface();
+   void DrawTeamEnergy() const;
+   void DrawWeaponInfo() const;
+   void DrawWindIndicator(const Point2i &wind_bar_pos, const bool draw_icon) const;
+   void DrawWindInfo() const;
+   void DrawClock(const Point2i &time_pos) const;
+   void DrawTimeInfo() const;
+   void DrawSmallInterface() const;
 
    bool IsDisplayed () const { return display; };
    void EnableDisplay(bool _display);
@@ -113,7 +113,7 @@ public:
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
 };
 
-void AbsoluteDraw(Surface& s, Point2i pos);
+void AbsoluteDraw(const Surface& s, Point2i pos);
 void HideGameInterface();
 void ShowGameInterface();
 
