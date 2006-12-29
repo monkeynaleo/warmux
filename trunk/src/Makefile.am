@@ -113,6 +113,7 @@ wormux_SOURCES = \
 	network/chat.cpp network/chat.h \
 	network/download.cpp network/download.h \
 	network/distant_cpu.cpp network/distant_cpu.h \
+	network/index_svr_msg.h \
 	network/index_server.cpp network/index_server.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
@@ -131,6 +132,7 @@ wormux_SOURCES = \
 	particles/star.cpp particles/star.h \
 	team/macro.h \
 	team/team.cpp team/team.h \
+	team/team_config.h \
 	team/team_energy.cpp team/team_energy.h \
 	team/teams_list.cpp team/teams_list.h \
 	team/results.cpp team/results.h \
