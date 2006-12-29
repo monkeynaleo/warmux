@@ -31,109 +31,110 @@
 
 class Surface
 {
-	private:
-		SDL_Surface* surface;
-		bool autoFree;
-		int Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect);
-		SDL_Rect GetSDLRect(const Rectanglei &r);
-		SDL_Rect GetSDLRect(const Point2i &r);
+private:
+  SDL_Surface* surface;
+  bool autoFree;
+  int Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect);
+  SDL_Rect GetSDLRect(const Rectanglei &r) const;
+  SDL_Rect GetSDLRect(const Point2i &r) const;
+  
+public:
+  explicit Surface();
+  explicit Surface(SDL_Surface *sdl_surface);
+  explicit Surface(const Point2i &size, Uint32 flags, bool useAlpha = true);
+  explicit Surface(const std::string &filename);
+  Surface(const Surface &src);
+  ~Surface();
 
-	public:
-			explicit Surface();
-			explicit Surface(SDL_Surface *sdl_surface);
-			explicit Surface(const Point2i &size, Uint32 flags, bool useAlpha = true);
-			explicit Surface(const std::string &filename);
-			Surface(const Surface &src);
-			~Surface();
-			Surface &operator=(const Surface &src);
+  Surface &operator=(const Surface &src);
+  
+  void Free();
+  void AutoFree();
+  void SetAutoFree(bool newAutoFree);
+  
+  void SetSurface(SDL_Surface *newSurface, bool freePrevious = true);
+  void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
+  
+  SDL_Surface *GetSurface();
+  
+  int SetAlpha(Uint32 flags, Uint8 alpha);
+  
+  int Lock();
+  void Unlock();
 
-			void Free();
-			void AutoFree();
-			void SetAutoFree(bool newAutoFree);
+  int Blit(const Surface& src); 
+  int Blit(const Surface& src, const Point2i& dst);
+  int Blit(const Surface& src, const Rectanglei& srcRect, const Point2i &dstPoint);
+  
+  int SetColorKey(Uint32 flag, Uint32 key);
+  int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+  
+  void GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a) const;
+  Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const;
+  Color GetColor(Uint32 color) const;
+  Uint32 MapColor(Color color) const;
 
-			void SetSurface(SDL_Surface *newSurface, bool freePrevious = true);
-			void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
+  void SetClipRect(const Rectanglei &rect);
+  void Flip();
 
-			SDL_Surface *GetSurface();
+  int BoxColor(const Rectanglei &rect, const Color &color);
+  int RectangleColor(const Rectanglei &rect, const Color &color, const uint &border_size = 1);
+  int VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color);
+  int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
+  int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
+  int CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
 
-			int SetAlpha(Uint32 flags, Uint8 alpha);
-
-			int Lock();
-			void Unlock();
-
-			int Blit(const Surface& src); 
-			int Blit(const Surface& src, const Point2i& dst);
-			int Blit(const Surface& src, const Rectanglei& srcRect, const Point2i &dstPoint);
-
-			int SetColorKey(Uint32 flag, Uint32 key);
-			int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-
-			void GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a);
-			Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-			Color GetColor(Uint32 color);
-			Uint32 MapColor(Color color);
-
-			void SetClipRect(const Rectanglei &rect);
-			void Flip();
-
-			int BoxColor(const Rectanglei &rect, const Color &color);
-			int RectangleColor(const Rectanglei &rect, const Color &color, const uint &border_size = 1);
-			int VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color);
-                        int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
-                        int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
-			int CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
-
-			int Fill(Uint32 color);
-			int Fill(const Color &color);
-			int FillRect(const Rectanglei &dstRect, Uint32 color);
-			int FillRect(const Rectanglei &dstRect, const Color &color);
-			
-			int ImgLoad(std::string filename);
-			Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
-			Surface DisplayFormatAlpha();
-			Surface DisplayFormat();
-			Uint32 GetPixel(int x, int y);
-			void PutPixel(int x, int y, Uint32 pixel);
-
-			inline bool IsNull() const{
-				return surface == NULL;
-			}
-
-			/** 
-			 * Return the size of a surface.
-			 */
-			inline Point2i GetSize() const{
-				return Point2i( GetWidth(), GetHeight() );
-			}
-
-			/// Return the width of a surface.
-			inline int GetWidth() const{
-				return surface->w;
-			}
-
-			/// Return the height of a surface.
-			inline int GetHeight() const{
-				return surface->h;
-			}
-
-			inline Uint32 GetFlags() const{
-				return surface->flags;
-			}
-
-			/// Return the length of a surface scanline in bytes.
-			inline Uint16 GetPitch() const{
-				return surface->pitch;
-			}
-
-			/// Return the number of bytes used to represent each pixel in a surface. Usually one to four.
-			inline Uint8 GetBytesPerPixel() const{
-				return surface->format->BytesPerPixel;
-			}
-
-			/// Return a pointer on the pixels data.
-			inline unsigned char *GetPixels() const{
-				return (unsigned char *) surface->pixels;
-			}
+  int Fill(Uint32 color) const;
+  int Fill(const Color &color) const;
+  int FillRect(const Rectanglei &dstRect, Uint32 color) const;
+  int FillRect(const Rectanglei &dstRect, const Color &color) const;
+  
+  int ImgLoad(std::string filename);
+  Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
+  Surface DisplayFormatAlpha();
+  Surface DisplayFormat();
+  Uint32 GetPixel(int x, int y);
+  void PutPixel(int x, int y, Uint32 pixel);
+  
+  inline bool IsNull() const{
+    return surface == NULL;
+  }
+  
+  /** 
+   * Return the size of a surface.
+   */
+  inline Point2i GetSize() const{
+    return Point2i( GetWidth(), GetHeight() );
+  }
+  
+  /// Return the width of a surface.
+  inline int GetWidth() const{
+    return surface->w;
+  }
+  
+  /// Return the height of a surface.
+  inline int GetHeight() const{
+    return surface->h;
+  }
+  
+  inline Uint32 GetFlags() const{
+    return surface->flags;
+  }
+  
+  /// Return the length of a surface scanline in bytes.
+  inline Uint16 GetPitch() const{
+    return surface->pitch;
+  }
+  
+  /// Return the number of bytes used to represent each pixel in a surface. Usually one to four.
+  inline Uint8 GetBytesPerPixel() const{
+    return surface->format->BytesPerPixel;
+  }
+  
+  /// Return a pointer on the pixels data.
+  inline unsigned char *GetPixels() const{
+    return (unsigned char *) surface->pixels;
+  }
 
 };
 
