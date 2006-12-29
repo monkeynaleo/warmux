@@ -22,39 +22,17 @@
 #ifndef TEAMS_SELECTION_BOX_H
 #define TEAMS_SELECTION_BOX_H
 
+#include <vector>
+
 #include "../gui/box.h"
 #include "../gui/label.h"
 #include "../gui/picture_widget.h"
 #include "../gui/spin_button.h"
 #include "../gui/spin_button_big.h"
 #include "../gui/text_box.h"
-
-class Team;
+#include "team_box.h"
 
 const uint MAX_NB_TEAMS=4;
-
-class TeamBox : public HBox
-{
- private:
-  Team * associated_team;
-  PictureWidget *team_logo;
-  Label * team_name;
-  TextBox * player_name;
-  SpinButton * nb_characters;
-
- public:
-  TeamBox(std::string player_name, const Rectanglei &rect);
-
-  void SetTeam(Team& _team, bool read_team_values=false);
-  void ClearTeam();
-  Team* GetTeam() const;  
-  void ValidOptions() const;
-
-  void Update(const Point2i &mousePosition,
-	      const Point2i &lastMousePosition,
-	      Surface& surf);
-  Widget* Clic(const Point2i &mousePosition, uint button);
-};
 
 // -----------------------------------------------
 // -----------------------------------------------
@@ -63,7 +41,7 @@ class TeamsSelectionBox : public HBox
 { 
  private:  
   SpinButtonBig *teams_nb;
-  TeamBox* teams_selections[MAX_NB_TEAMS];
+  std::vector<TeamBox*> teams_selections;
 
   void SetNbTeams(uint nb_teams);
   void PrevTeam(int i);

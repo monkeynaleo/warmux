@@ -104,7 +104,6 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   if (display_only) {
     map_preview_before2->Disable();
     map_preview_before->Disable();
-    map_preview_selected->Disable();
     map_preview_after->Disable();
     map_preview_after2->Disable();
   }
