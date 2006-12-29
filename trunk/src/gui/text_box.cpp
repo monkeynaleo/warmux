@@ -50,15 +50,18 @@ void TextBox::SendKey(SDL_keysym key)
   SetText(new_txt);
 }
 
-void TextBox::Draw(const Point2i &mousePosition, Surface& surf)
+void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  if(have_focus)
-    surf.BoxColor(*this, highlightOptionColorBox);
-
-  surf.RectangleColor(*this, defaultOptionColorRect);
-
-  Label::Draw(mousePosition, surf);
-  surf.VlineColor(GetPositionX()+txt_label->GetWidth(), 
-		  GetPositionY()+2, 
-		  GetPositionY()+GetSizeY()-4, c_white);
+  if (!hidden) 
+    {
+      if(have_focus)
+	surf.BoxColor(*this, highlightOptionColorBox);
+      
+      surf.RectangleColor(*this, defaultOptionColorRect);
+      
+      Label::Draw(mousePosition, surf);
+      surf.VlineColor(GetPositionX()+txt_label->GetWidth(), 
+		      GetPositionY()+2, 
+		      GetPositionY()+GetSizeY()-4, c_white);
+    }
 }

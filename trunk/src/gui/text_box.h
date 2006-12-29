@@ -32,7 +32,7 @@ public:
   ~TextBox();
 
   void SendKey(SDL_keysym key);
-  void Draw(const Point2i &mousePosition, Surface& surf);
+  void Draw(const Point2i &mousePosition, Surface& surf) const;
 };
 
 #endif
