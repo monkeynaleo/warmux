@@ -34,6 +34,7 @@ SpinButtonBig::SpinButtonBig (const std::string &label, const Rectanglei &rect,
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
   txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
+  txt_label->SetMaxWidth(GetSizeX());
 
   if ( min_value != -1 && min_value <= value)
     m_min_value = min_value;
@@ -70,6 +71,9 @@ void SpinButtonBig::SetSizePosition(const Rectanglei &rect)
 {
   StdSetSizePosition(rect);
 
+  // label can be multiline
+  txt_label->SetMaxWidth(GetSizeX());
+
   std::ostringstream max_value_s;
   max_value_s << m_max_value ;
   uint max_value_w = Font::GetInstance(Font::FONT_HUGE)->GetWidth(max_value_s.str());
@@ -86,7 +90,7 @@ void SpinButtonBig::SetSizePosition(const Rectanglei &rect)
 				       m_plus->GetSizeX(), m_plus->GetSizeY()) );
 }
 
-void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf)
+void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   m_minus->Draw(mousePosition, surf);
   m_plus->Draw(mousePosition, surf);

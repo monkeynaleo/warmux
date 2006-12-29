@@ -33,6 +33,7 @@ ListBoxWithLabel::ListBoxWithLabel (const std::string &label, const Rectanglei &
 {  
   txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
   SetSizePosition(rect);
+  txt_label->SetMaxWidth(GetSizeX());
 }
 
 ListBoxWithLabel::~ListBoxWithLabel()
@@ -40,30 +41,35 @@ ListBoxWithLabel::~ListBoxWithLabel()
    delete txt_label;
 }
 
-void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf)
+void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   int item = MouseIsOnWhichItem(mousePosition);
+
   Rectanglei rect (GetPositionX(),GetPositionY(),GetSizeX(),
-		   GetSizeY()- 2 - Font::GetInstance(Font::FONT_NORMAL, Font::BOLD)->GetHeight());
+		   GetSizeY()- 2 - txt_label->GetHeight());
 
   surf.BoxColor(rect, defaultListColor1);
   surf.RectangleColor(rect, white_color);
 
   for(uint i=0; i < nb_visible_items; i++){
-	 Rectanglei rect(GetPositionX() + 1, GetPositionY() + i * height_item + 1, GetSizeX() - 2, height_item - 2);
-	 
-     if( int(i + first_visible_item) == selected_item)
+    Rectanglei rect(GetPositionX() + 1, 
+		    GetPositionY() + i * height_item + 1, 
+		    GetSizeX() - 2, 
+		    height_item - 2);
+    
+    if( int(i + first_visible_item) == selected_item) {
        surf.BoxColor(rect, defaultListColor2);
-     else
-       if( i + first_visible_item == uint(item) )
-         surf.BoxColor(rect, defaultListColor3);
+    }
+    else if( i + first_visible_item == uint(item) ) {
+      surf.BoxColor(rect, defaultListColor3);
+    }
      
-     (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft( 
-			  GetPosition() + Point2i(5, i*height_item),
-			  m_items[i + first_visible_item]->GetLabel(),
-			  white_color);
-     if(!m_items[i]->IsEnabled())
-       surf.BoxColor(rect, defaultDisabledColorBox);
+    (*Font::GetInstance(Font::FONT_SMALL)).WriteLeft( 
+						     GetPosition() + Point2i(5, i*height_item),
+						     m_items[i + first_visible_item]->GetLabel(),
+						     white_color);
+    if(!m_items[i]->IsEnabled())
+      surf.BoxColor(rect, defaultDisabledColorBox);
   }  
 
   // Draw the label
@@ -90,13 +96,17 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf)
 void ListBoxWithLabel::SetSizePosition(const Rectanglei &rect)
 {
   StdSetSizePosition(rect);
+  txt_label->SetMaxWidth(GetSizeX());
+
   m_up->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_up->GetSizeX() - 2, 
 				    GetPositionY()+2, 
 				    m_up->GetSizeX(), m_up->GetSizeY()) );
+
   m_down->SetSizePosition( Rectanglei(GetPositionX() + GetSizeX() - m_down->GetSizeX() - 2, 
 				      GetPositionY() + GetSizeY() - m_down->GetSizeY() - 2 -
-				           Font::GetInstance(Font::FONT_NORMAL, Font::BOLD)->GetHeight() - 2, 
-				      m_down->GetSizeX(), m_down->GetSizeY()) );  
+				      txt_label->GetHeight() - 2,
+				      m_down->GetSizeX(), 
+				      m_down->GetSizeY()) );  
 
   nb_visible_items_max = GetSizeY()/height_item;
 }

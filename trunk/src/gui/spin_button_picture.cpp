@@ -37,6 +37,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
   resource_manager.UnLoadXMLProfile( res); 
 
   txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
+  txt_label->SetMaxWidth(GetSizeX());
 
   if ( min_value != -1 && min_value <= value)
     m_min_value = min_value;
@@ -61,9 +62,10 @@ SpinButtonWithPicture::~SpinButtonWithPicture ()
 void SpinButtonWithPicture::SetSizePosition(const Rectanglei &rect)
 {
   StdSetSizePosition(rect);
+  txt_label->SetMaxWidth(GetSizeX());
 }
 
-void SpinButtonWithPicture::Draw(const Point2i &mousePosition, Surface& surf)
+void SpinButtonWithPicture::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   // center the image on the first half
   uint tmp_x = GetPositionX() + (GetSizeX() - m_image.GetWidth())/4 ;

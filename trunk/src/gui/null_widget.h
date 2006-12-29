@@ -29,7 +29,7 @@ class NullWidget : public Widget
  public:
   NullWidget(const Rectanglei &rect);
   ~NullWidget();
-  void Draw(const Point2i &mousePosition, Surface& surf);
+  void Draw(const Point2i &mousePosition, Surface& surf) const;
   void SetSizePosition(const Rectanglei &rect);
 };
 

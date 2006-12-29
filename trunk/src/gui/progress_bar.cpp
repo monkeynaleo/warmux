@@ -90,12 +90,12 @@ uint ProgressBar::CalculeValBarre (long val) const{
     return ( CalculeVal(val) -min)*(haut-2)/(max-min);
 }
 
-void ProgressBar::Draw(){
+void ProgressBar::Draw() const{
   DrawXY( Point2i(x, y) );
 }
 
 // TODO pass a Surface as parameter
-void ProgressBar::DrawXY(const Point2i &pos){
+void ProgressBar::DrawXY(const Point2i &pos) const{
   int begin, end;
 
   // Bordure

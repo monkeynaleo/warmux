@@ -53,7 +53,7 @@ Button::~Button()
   delete image;
 }
 
-void Button::Draw(const Point2i &mousePosition, Surface& surf)
+void Button::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   uint frame = Contains(mousePosition)?1:0;
 

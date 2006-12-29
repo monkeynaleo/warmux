@@ -34,7 +34,7 @@ ButtonText::ButtonText(Point2i position,
   text = new Text(new_text, white_color, font);
 }
 
-void ButtonText::Draw(const Point2i &mousePosition, Surface& surf)
+void ButtonText::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   Point2i textPosition = position + size/2;
 	

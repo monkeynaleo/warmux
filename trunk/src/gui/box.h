@@ -41,7 +41,7 @@ class Box : public WidgetList
 	      const Point2i &lastMousePosition,
 	      Surface& surf);
   void Draw(const Point2i &mousePosition,
-	    Surface& surf);
+	    Surface& surf) const;
   void Redraw(const Rectanglei& rect,
 	      Surface& surf);
   Widget* Clic(const Point2i &mousePosition, uint button);

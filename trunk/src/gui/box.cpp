@@ -55,12 +55,12 @@ void Box::Update(const Point2i &mousePosition,
     Draw(mousePosition, surf);
   }
 
-  WidgetList::Draw(mousePosition, surf);
+  WidgetList::Update(mousePosition, surf);
   need_redrawing = false;
 }
 
 void Box::Draw(const Point2i &mousePosition,
-	       Surface& surf)
+	       Surface& surf) const
 {
   Rectanglei rect(position, size);
 	

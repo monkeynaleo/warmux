@@ -66,7 +66,7 @@ public:
   ListBox (const Rectanglei &rect, bool always_one_selected_b = true);
   ~ListBox();
 
-  void Draw(const Point2i &mousePosition, Surface& surf);
+  void Draw(const Point2i &mousePosition, Surface& surf) const;
   Widget* Clic(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
@@ -74,18 +74,18 @@ public:
 		const std::string &value, bool enabled = true);
   void Sort();
 
-  int MouseIsOnWhichItem(const Point2i &mousePosition);
+  int MouseIsOnWhichItem(const Point2i &mousePosition) const;
 
   void Select(uint index);
   void Select(const std::string& val);
-  int GetSelectedItem();
+  int GetSelectedItem() const;
   void Deselect();
   void RemoveSelected();
   const std::string& ReadLabel() const;
   const std::string& ReadValue() const;
   const std::string& ReadValue(int index) const;
 
-  std::vector<ListBoxItem*> *GetItemsList();
+  uint Size() const;
 };
 
 #endif
