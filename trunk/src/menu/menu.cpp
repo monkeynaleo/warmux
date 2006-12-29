@@ -172,7 +172,7 @@ void Menu::Display(const Point2i& mousePosition)
   uint delay = 0;
   uint start = SDL_GetTicks();
 
-  widgets.Draw(mousePosition, AppWormux::GetInstance()->video.window);
+  widgets.Update(mousePosition, AppWormux::GetInstance()->video.window);
   Draw(mousePosition);
   AppWormux::GetInstance()->video.Flip();
 
