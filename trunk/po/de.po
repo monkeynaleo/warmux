@@ -17,32 +17,10 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: src/network/distant_cpu.cpp:70
-msgid " has joined the party"
-msgstr " hat das Spiel betreten"
-
-#: src/network/distant_cpu.cpp:79
-msgid " has left the party"
-msgstr " hat das Spiel verlassen"
-
 #: src/map/maps_list.cpp:275
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
-
-#: src/menu/network_menu.cpp:122 src/menu/network_menu.cpp:398
-#, c-format
-msgid "%i player connected"
-msgid_plural "%i players connected"
-msgstr[0] "%i Spieler verbunden"
-msgstr[1] "%i Spieler verbunden"
-
-#: src/menu/network_menu.cpp:126 src/menu/network_menu.cpp:403
-#, c-format
-msgid "%i player ready"
-msgid_plural "%i players ready"
-msgstr[0] "%i Spieler bereit"
-msgstr[1] "%i Spieler bereit"
 
 #: src/game/game_loop.cpp:695
 #, c-format
@@ -115,11 +93,11 @@ msgstr[1] "Mannschaft %s hat %u %sen gewonnen!"
 msgid "(current)"
 msgstr "(aktuell)"
 
-#: src/interface/interface.cpp:169
+#: src/interface/interface.cpp:175
 msgid "(dead)"
 msgstr "(tot)"
 
-#: src/interface/interface.cpp:198
+#: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(unbegrenzt)"
 
@@ -130,10 +108,6 @@ msgstr "Luftangriff"
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr "Presslufthammer"
-
-#: src/team/results.cpp:143
-msgid "All teams"
-msgstr "Alle Mannschaften"
 
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
@@ -171,7 +145,8 @@ msgstr "Und tschüss Tux..."
 msgid "C++ exception caught:"
 msgstr "C++ Ausnahmefehler abgefangen:"
 
-#: src/team/teams_list.cpp:448 src/team/teams_list.cpp:487
+#: src/team/teams_list.cpp:448 src/team/teams_list.cpp:470
+#: src/team/teams_list.cpp:508
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kann Mannschaft %s nicht finden!"
@@ -189,30 +164,10 @@ msgstr "Splittergranate"
 msgid "Commit Suicide"
 msgstr "Selbstmord begehen"
 
-#: src/menu/internet_menu.cpp:62
-msgid "Connect !"
-msgstr "Verbinden !"
-
-#: src/menu/network_connection_menu.cpp:91
-msgid "Connect to an internet game"
-msgstr "Zu einem Internet Spiel verbinden"
-
-#: src/menu/network_connection_menu.cpp:71
-msgid "Connect to game"
-msgstr "Zum Spiel verbinden"
-
-#: src/menu/network_connection_menu.cpp:131
-msgid "Connected to "
-msgstr "Verbunden zu "
-
 #: src/weapon/construct.cpp:43
 #, fuzzy
 msgid "Construct"
 msgstr "Konstruktion"
-
-#: src/network/index_server.cpp:88
-msgid "Contacting main server..."
-msgstr "Kontaktiere Hauptserver..."
 
 #: src/menu/main_menu.cpp:110
 msgid "Credits"
@@ -281,10 +236,6 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fehler: kann den Körper \"%s\" für Mannschaft \"%s\" nicht finden."
 
-#: src/network/network.cpp:77
-msgid "Failed to initialize network library!"
-msgstr "Kann Netzwerk-Bibliothek nicht initialisieren!"
-
 #: src/game/game_loop.cpp:162
 msgid "Find a random position for characters"
 msgstr "Zufällige Platzierung der Figuren"
@@ -313,14 +264,6 @@ msgstr "Pistole"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr ""
 "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
-
-#: src/menu/teams_selection_box.cpp:45
-msgid "Head commander"
-msgstr "Hauptkommandant"
-
-#: src/menu/network_connection_menu.cpp:78
-msgid "Host a game"
-msgstr "Spiel hosten"
 
 #: src/game/game_loop.cpp:730
 msgid "Hurry up, you are too slow !!"
@@ -359,34 +302,13 @@ msgstr "Initialisiere Objekte"
 msgid "Initialise teams"
 msgstr "Initialisiere Mannschaft"
 
-#: src/network/index_server.cpp:99
-msgid "Invalid index server adress!"
-msgstr "Ungültige Indexserveradresse!"
-
-#: src/network/network.cpp:194
-msgid "Invalid port!"
-msgstr "Ungültiger Port!"
-
-#: src/network/network.cpp:144
-msgid "Invalid server adress!"
-msgstr "Ungültige Serveradresse!"
-
 #: src/object/bonus_box.cpp:207
 msgid "Is it a gift?"
 msgstr "Ist es ein Geschenk?"
 
-#: src/network/index_server.cpp:297
-msgid "It doesn't seem to be a valid Wormux server..."
-msgstr "Das scheint kein gültiger Wormux server zu sein..."
-
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
 msgstr "Düsenrucksack"
-
-#: src/menu/network_menu.cpp:139
-#, fuzzy
-msgid "Join #wormux on irc.freenode.net to find"
-msgstr "Komm nach #wormux auf irc.freenode.net"
 
 #: src/map/maps_list.cpp:183
 msgid "Load maps:"
@@ -409,10 +331,6 @@ msgstr "Karte %s, eine Kreation von: "
 msgid "Maps"
 msgstr "Karten"
 
-#: src/menu/network_menu.cpp:116
-msgid "Max number of players:"
-msgstr "Maximale Anzahl an Spielern:"
-
 #: src/menu/options_menu.cpp:77
 msgid "Maximum FPS"
 msgstr "Maximale FPS"
@@ -420,23 +338,6 @@ msgstr "Maximale FPS"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mine"
-
-#: src/menu/results_menu.cpp:169
-#, fuzzy
-msgid "Most sold-out"
-msgstr "Am verräterischsten"
-
-#: src/menu/results_menu.cpp:159
-msgid "Most useful"
-msgstr "Am nützlichsten"
-
-#: src/menu/results_menu.cpp:164
-msgid "Most useless"
-msgstr "Am nutzlosesten"
-
-#: src/menu/results_menu.cpp:154
-msgid "Most violent"
-msgstr "Am gewalttätigsten"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -450,23 +351,10 @@ msgstr "Netzwerkspiel"
 msgid "Ninjarope"
 msgstr "Ninjaseil"
 
-#: src/weapon/weapon.cpp:541
+#: src/weapon/weapon.cpp:543
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
-
-#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
-#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
-msgid "Nobody!"
-msgstr "Niemand!"
-
-#: src/menu/teams_selection_box.cpp:51
-msgid "Number of characters"
-msgstr "Anzahl der Figuren"
-
-#: src/menu/teams_selection_box.cpp:143
-msgid "Number of teams:"
-msgstr "Anzahl der Mannschaften"
 
 #: src/menu/main_menu.cpp:104
 msgid "Options"
@@ -484,10 +372,6 @@ msgstr "Fallschirm wird automatisch aktiviert."
 msgid "Play"
 msgstr "Spielen"
 
-#: src/menu/teams_selection_box.cpp:162
-msgid "Player"
-msgstr "Spieler"
-
 #: src/menu/options_menu.cpp:68
 msgid "Player energy?"
 msgstr "Spielerenergie?"
@@ -500,10 +384,6 @@ msgstr "Spielername?"
 msgid "Polecat Launcher"
 msgstr "Stinktier-Werfer"
 
-#: src/menu/network_connection_menu.cpp:64
-msgid "Port:"
-msgstr ""
-
 #: src/menu/main_menu.cpp:116
 msgid "Quit"
 msgstr "Verlassen"
@@ -515,10 +395,6 @@ msgstr "Wormux verlassen"
 #: src/game/config.cpp:158
 msgid "Reading personal config file"
 msgstr ""
-
-#: src/menu/internet_menu.cpp:55
-msgid "Refresh"
-msgstr "Aktualisieren"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
@@ -536,18 +412,6 @@ msgstr "Spiel starten"
 msgid "Scroll on border"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:59
-msgid "Server address:"
-msgstr "Server Adresse:"
-
-#: src/menu/network_connection_menu.cpp:83
-msgid "Server available on Internet"
-msgstr "Im Internert verfügbare Server"
-
-#: src/menu/network_connection_menu.cpp:155
-msgid "Server started"
-msgstr "Server gestartet"
-
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
 msgstr "Schrotflinte"
@@ -559,10 +423,6 @@ msgstr "Runde überspringen"
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
 msgstr "Scharfschützengewehr"
-
-#: src/menu/network_menu.cpp:142
-msgid "So you have to restart Wormux after each"
-msgstr "Deshalb musst du Wormux nach jedem"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -580,7 +440,7 @@ msgstr "Geräusche"
 msgid "Starting a new game"
 msgstr "Starte ein neues Spiel"
 
-#: src/interface/interface.cpp:198
+#: src/interface/interface.cpp:206
 msgid "Stock:"
 msgstr "Vorrat:"
 
@@ -642,41 +502,15 @@ msgstr ""
 msgid "The rocket has left the battlefield..."
 msgstr "Die Rakete hat das Schlachtfeld verlassen..."
 
-#: src/menu/network_connection_menu.cpp:136
-#, fuzzy
-msgid "Unable to connect"
-msgstr "Kann nicht verbinden"
-
-#: src/network/index_server.cpp:78
-msgid "Unable to contact an index server!"
-msgstr "Kann Indexserver nicht kontaktieren!"
-
-#: src/network/network.cpp:155
-msgid "Unable to contact server!"
-msgstr "Kann Server nicht kontaktieren!"
-
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Kann SDL Bibliothek nicht initialisieren: %s"
 
-#: src/menu/internet_menu.cpp:96
-msgid "Unable to join the game..."
-msgstr "Kann das Spiel nicht betreten..."
-
-#: src/network/network.cpp:238
-#, fuzzy
-msgid "Unable to listen for client!"
-msgstr "Kann Server nicht starten!"
-
 #: src/map/maps_list.cpp:196 src/map/maps_list.cpp:212
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kann das Karten-Verzeichnis (%s) nicht öffnen!"
-
-#: src/menu/network_connection_menu.cpp:158
-msgid "Unable to start server"
-msgstr "Kann Server nicht starten"
 
 #: src/main.cpp:120
 msgid "Unexpected exception caught..."
@@ -685,17 +519,6 @@ msgstr "Unerwarteter Ausnahmefehler aufgetreten..."
 #: src/main.cpp:146
 msgid "Version"
 msgstr "Version"
-
-#: src/menu/network_menu.cpp:141
-msgid "WARNING! Disconnections are not yet handled."
-msgstr "WARNUNG! Verbindungstrennungen werden noch nicht behandelt."
-
-#: src/menu/network_menu.cpp:290
-#, c-format
-msgid "Wait! %i player is not ready yet!"
-msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
-msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
@@ -722,11 +545,6 @@ msgstr "Wormux startet..."
 msgid "Wormux version "
 msgstr "Wormux Version "
 
-#: src/include/action_handler.cpp:369
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
-
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
@@ -750,22 +568,153 @@ msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 
-#: src/menu/network_menu.cpp:143
-msgid "disconnection!"
-msgstr "Verbindungsabbau beenden!"
-
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "fertig"
 
-#: src/interface/interface.cpp:161
+#: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "General: "
 
-#: src/menu/network_menu.cpp:140
+#~ msgid " has joined the party"
+#~ msgstr " hat das Spiel betreten"
+
+#~ msgid " has left the party"
+#~ msgstr " hat das Spiel verlassen"
+
+#~ msgid "%i player connected"
+#~ msgid_plural "%i players connected"
+#~ msgstr[0] "%i Spieler verbunden"
+#~ msgstr[1] "%i Spieler verbunden"
+
+#~ msgid "%i player ready"
+#~ msgid_plural "%i players ready"
+#~ msgstr[0] "%i Spieler bereit"
+#~ msgstr[1] "%i Spieler bereit"
+
+#~ msgid "All teams"
+#~ msgstr "Alle Mannschaften"
+
+#~ msgid "Connect !"
+#~ msgstr "Verbinden !"
+
+#~ msgid "Connect to an internet game"
+#~ msgstr "Zu einem Internet Spiel verbinden"
+
+#~ msgid "Connect to game"
+#~ msgstr "Zum Spiel verbinden"
+
+#~ msgid "Connected to "
+#~ msgstr "Verbunden zu "
+
+#~ msgid "Contacting main server..."
+#~ msgstr "Kontaktiere Hauptserver..."
+
+#~ msgid "Failed to initialize network library!"
+#~ msgstr "Kann Netzwerk-Bibliothek nicht initialisieren!"
+
+#~ msgid "Head commander"
+#~ msgstr "Hauptkommandant"
+
+#~ msgid "Host a game"
+#~ msgstr "Spiel hosten"
+
+#~ msgid "Invalid index server adress!"
+#~ msgstr "Ungültige Indexserveradresse!"
+
+#~ msgid "Invalid port!"
+#~ msgstr "Ungültiger Port!"
+
+#~ msgid "Invalid server adress!"
+#~ msgstr "Ungültige Serveradresse!"
+
+#~ msgid "It doesn't seem to be a valid Wormux server..."
+#~ msgstr "Das scheint kein gültiger Wormux server zu sein..."
+
 #, fuzzy
-msgid "some opponents."
-msgstr "um Gegner zu finden."
+#~ msgid "Join #wormux on irc.freenode.net to find"
+#~ msgstr "Komm nach #wormux auf irc.freenode.net"
+
+#~ msgid "Max number of players:"
+#~ msgstr "Maximale Anzahl an Spielern:"
+
+#, fuzzy
+#~ msgid "Most sold-out"
+#~ msgstr "Am verräterischsten"
+
+#~ msgid "Most useful"
+#~ msgstr "Am nützlichsten"
+
+#~ msgid "Most useless"
+#~ msgstr "Am nutzlosesten"
+
+#~ msgid "Most violent"
+#~ msgstr "Am gewalttätigsten"
+
+#~ msgid "Nobody!"
+#~ msgstr "Niemand!"
+
+#~ msgid "Number of characters"
+#~ msgstr "Anzahl der Figuren"
+
+#~ msgid "Number of teams:"
+#~ msgstr "Anzahl der Mannschaften"
+
+#~ msgid "Player"
+#~ msgstr "Spieler"
+
+#~ msgid "Refresh"
+#~ msgstr "Aktualisieren"
+
+#~ msgid "Server address:"
+#~ msgstr "Server Adresse:"
+
+#~ msgid "Server available on Internet"
+#~ msgstr "Im Internert verfügbare Server"
+
+#~ msgid "Server started"
+#~ msgstr "Server gestartet"
+
+#~ msgid "So you have to restart Wormux after each"
+#~ msgstr "Deshalb musst du Wormux nach jedem"
+
+#, fuzzy
+#~ msgid "Unable to connect"
+#~ msgstr "Kann nicht verbinden"
+
+#~ msgid "Unable to contact an index server!"
+#~ msgstr "Kann Indexserver nicht kontaktieren!"
+
+#~ msgid "Unable to contact server!"
+#~ msgstr "Kann Server nicht kontaktieren!"
+
+#~ msgid "Unable to join the game..."
+#~ msgstr "Kann das Spiel nicht betreten..."
+
+#, fuzzy
+#~ msgid "Unable to listen for client!"
+#~ msgstr "Kann Server nicht starten!"
+
+#~ msgid "Unable to start server"
+#~ msgstr "Kann Server nicht starten"
+
+#~ msgid "WARNING! Disconnections are not yet handled."
+#~ msgstr "WARNUNG! Verbindungstrennungen werden noch nicht behandelt."
+
+#~ msgid "Wait! %i player is not ready yet!"
+#~ msgid_plural "Wait! %i players are not ready yet!"
+#~ msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
+#~ msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
+
+#~ msgid "Wormux versions are differents : client=%s, server=%s."
+#~ msgstr "Wormux Versionen sind verschieden : Client=%s, Server=%s."
+
+#~ msgid "disconnection!"
+#~ msgstr "Verbindungsabbau beenden!"
+
+#, fuzzy
+#~ msgid "some opponents."
+#~ msgstr "um Gegner zu finden."
 
 #~ msgid " "
 #~ msgstr " "
