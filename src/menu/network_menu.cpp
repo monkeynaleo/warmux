@@ -60,35 +60,9 @@ NetworkMenu::NetworkMenu() :
   // ################################################
   // ##  TEAM SELECTION
   // ################################################
-  team_box = new HBox(Rectanglei( MARGIN_SIDE, MARGIN_TOP, 475, TEAMS_BOX_H));
-  team_box->AddWidget(new PictureWidget(Rectanglei(0,0,38,150), "menu/teams_label"));
-
-  //tmp_box->SetMargin(10);
-  //tmp_box->SetBorder( Point2i(0,0) );
-
-  lbox_all_teams = new ListBox( Rectanglei( 0, 0, TEAMS_W, TEAMS_BOX_H - TEAM_LOGO_H - 5 ), false);
-  team_box->AddWidget(lbox_all_teams);
-
-  Box * buttons_tmp_box = new VBox(Rectanglei(0, 0, 68, 1), false);
-
-  bt_add_team = new Button( Point2i(0, 0) ,res,"menu/arrow-right");
-  buttons_tmp_box->AddWidget(bt_add_team);
-
-  bt_remove_team = new Button( Point2i( 0, 0),res,"menu/arrow-left");
-  buttons_tmp_box->AddWidget(bt_remove_team);
-
-  team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
-  buttons_tmp_box->AddWidget(team_logo);
-
-  team_box->AddWidget(buttons_tmp_box);
-
-  lbox_selected_teams = new ListBox( Rectanglei(0, 0, TEAMS_W, TEAMS_BOX_H - TEAM_LOGO_H - 5 ), false);
-  team_box->AddWidget(lbox_selected_teams);
-
-  //team_box->enabled = false;
+  team_box = new NetworkTeamsSelectionBox(Rectanglei(MARGIN_SIDE, MARGIN_TOP,
+					      mainBoxWidth, TEAMS_BOX_H));
   widgets.AddWidget(team_box);
-
-  last_team = NULL;  
 
   // ################################################
   // ##  MAP SELECTION
@@ -135,35 +109,14 @@ NetworkMenu::NetworkMenu() :
 
   options_box->AddWidget(tmp_box);
     
-  msg_box = new MsgBox(6, Rectanglei( 0, 0, 400, 1), Font::GetInstance(Font::FONT_SMALL));  
-  msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find"));
-  msg_box->NewMessage(_("some opponents."));
-  msg_box->NewMessage(_("WARNING! Disconnections are not yet handled."));
-  msg_box->NewMessage(_("So you have to restart Wormux after each"));
-  msg_box->NewMessage(_("disconnection!"));
+  msg_box = new MsgBox(Rectanglei( 0, 0, 400, 150), Font::GetInstance(Font::FONT_SMALL));  
+  msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
+  msg_box->NewMessage(_("WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"));
 
   options_box->AddWidget(msg_box);
   widgets.AddWidget(options_box);
 
   resource_manager.UnLoadXMLProfile(res);
-
-  // Load Teams' list
-  teams_list.full_list.sort(compareTeams);
-
-  TeamsList::full_iterator
-    it=teams_list.full_list.begin(),
-    end=teams_list.full_list.end();
-
-  // No selected team by default
-  for (; it != end; ++it)
-    lbox_all_teams->AddItem (false, (*it).GetName(), (*it).GetId());
-
-  //b_ok->enabled = false;
-
-  teams_list.Clear();
-  Reset();
-
-  //  ChangeMap();
 }
 
 NetworkMenu::~NetworkMenu()
@@ -172,46 +125,13 @@ NetworkMenu::~NetworkMenu()
 
 void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  ActionHandler * action_handler = ActionHandler::GetInstance();
   Widget* w = widgets.Clic(mousePosition, button);
 
-  if (w == bt_add_team) {
-    if (lbox_all_teams->GetSelectedItem() != -1 && lbox_selected_teams->GetItemsList()->size() < GameMode::GetInstance()->max_teams)
-    {
-      int index = -1;
-      Team* team = teams_list.FindById(lbox_all_teams->ReadValue(),index);
-      team->SetLocal();
-#ifdef WIN32
-      team->SetPlayerName(getenv("USERNAME"));
-#else
-      team->SetPlayerName(getenv("USER"));
-#endif
-      std::string team_id = team->GetId();
-
-      Action* a = new Action(Action::ACTION_NEW_TEAM, team_id);
-#ifdef WIN32
-      a->Push(getenv("USERNAME"));
-#else
-      a->Push(getenv("USER"));
-#endif
-      a->Push(6);
-      action_handler->NewAction (a);
-      MoveTeams(lbox_all_teams, lbox_selected_teams, false);
-    }
-  }
-  if (w == bt_remove_team) {
-    int index = -1;
-    if(lbox_selected_teams->GetSelectedItem() != -1 && teams_list.FindById(lbox_selected_teams->ReadValue(),index)->IsLocal())
-    {
-      std::string team_id = teams_list.FindById(lbox_selected_teams->ReadValue(),index)->GetId();
-      action_handler->NewAction (new Action(Action::ACTION_DEL_TEAM, team_id));
-      MoveTeams(lbox_selected_teams, lbox_all_teams, true);
-    }
-  }
   if(w == player_number)
   {
     network.max_player_number = player_number->GetValue();
   }
+
   if(w == send_txt)
   {
     std::string empty = "";
@@ -220,43 +140,13 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
   }
 }
 
-void NetworkMenu::Reset()
-{
-  // Remove selected teams from the list
-  while(lbox_selected_teams->GetItemsList()->size()!=0)
-  {
-    lbox_selected_teams->Select(0);
-    MoveTeams(lbox_selected_teams, lbox_all_teams,true);
-  }
-  teams_list.Clear();
-}
-
 void NetworkMenu::SaveOptions()
 {
-  teams_list.Clear();
-  // teams
-  std::vector<ListBoxItem*> *
-    selected_teams = lbox_selected_teams->GetItemsList();
-
-  if (selected_teams->size() > 1) {
-    std::list<uint> selection;
-
-    std::vector<ListBoxItem*>::iterator
-      it = selected_teams->begin(),
-      end = selected_teams->end();
-
-    int index = -1;
-    for (; it != end; ++it) {
-      teams_list.FindById((*it)->GetValue(), index);
-      if (index > -1)
-	selection.push_back(uint(index));
-    }
-    teams_list.ChangeSelection (selection);
-
-  }
-
   // map
   map_box->ValidMapSelection();
+
+  // team
+  team_box->ValidTeamsSelection();
 
   //Save options in XML
 //  Config::GetInstance()->Save();
@@ -300,109 +190,23 @@ void NetworkMenu::__sig_cancel()
   network.Disconnect();
 }
 
-// void NetworkMenu::ChangeMap()
-// {
-//   std::string map_id = lbox_maps->ReadLabel();
-//   uint map_index = MapsList::GetInstance()->FindMapById(map_id);
-//   MapsList::GetInstance()->SelectMapByIndex(map_index);
-
-//   map_preview->SetSurface(MapsList::GetInstance()->lst[map_index].ReadPreview(), false);
-// }
-
-void NetworkMenu::SelectTeamLogo(Team * t)
-{
-  if (last_team != t) {
-    last_team = t;
-    team_logo->SetSurface(last_team->flag);
-  }
-}
-
-void NetworkMenu::MoveTeams(ListBox * from, ListBox * to, bool sort)
-{
-  if (from->GetSelectedItem() != -1) {
-
-    if (from == lbox_all_teams && to == lbox_selected_teams) {
-      int index = -1;
-      Team * team = teams_list.FindById(from->ReadValue(), index);
-      to->AddItem (false,
-		   from->ReadLabel() + " ("+team->GetPlayerName()+")",
-		   from->ReadValue());
-    } else {
-      int index = -1;
-      Team * team = teams_list.FindById(from->ReadValue(), index);
-      to->AddItem (false,
-		   team->GetName(),
-		   from->ReadValue());
-    }
-    to->Deselect();
-    if (sort) to->Sort();
-
-    from->RemoveSelected();
-
-    from->ForceRedraw();
-    to->ForceRedraw();
-  }
-}
-
-void NetworkMenu::MoveDisableTeams(ListBox * from, ListBox * to, bool sort)
-{
-  if (from->GetSelectedItem() != -1) {
-
-    if (from == lbox_all_teams && to == lbox_selected_teams) {
-      int index = -1;
-      Team * team = teams_list.FindById(from->ReadValue(), index);
-      to->AddItem (false,
-		   from->ReadLabel() + " ("+team->GetPlayerName()+")",
-		   from->ReadValue(),
-		   false);
-    } else {
-      int index = -1;
-      Team * team = teams_list.FindById(from->ReadValue(), index);
-      to->AddItem (false,
-		   team->GetName(),
-		   from->ReadValue(),
-		   false);
-    }
-    to->Deselect();
-    if (sort) to->Sort();
-
-    from->RemoveSelected();
-
-    from->ForceRedraw();
-    to->ForceRedraw();
-  }
-}
-
 void NetworkMenu::Draw(const Point2i &mousePosition)
 {
   if(network.IsConnected())
   {
-    int t = lbox_all_teams->MouseIsOnWhichItem(mousePosition);
-    if (t != -1) {
-      int index = -1;
-      Team * new_team = teams_list.FindById(lbox_all_teams->ReadValue(t), index);
-      SelectTeamLogo(new_team);
-    } else {
-      t = lbox_selected_teams->MouseIsOnWhichItem(mousePosition);
-      if (t != -1) {
-	int index = -1;
-	Team * new_team = teams_list.FindById(lbox_selected_teams->ReadValue(t), index);
-	SelectTeamLogo(new_team);
-      }
-    }
-
+ 
     //map_box->Draw(mousePosition);
 
     //Refresh the number of connected players:
-    int nbr = network.connected_player;
-    std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
-    if(connected_players->GetText() != pl)
-      connected_players->SetText(pl);
-    //Refresh the number of players ready:
-    nbr = network.client_inited;
-    pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
-    if(inited_players->GetText() != pl)
-      inited_players->SetText(pl);
+ //    int nbr = network.connected_player;
+//     std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
+//     if(connected_players->GetText() != pl)
+//       connected_players->SetText(pl);
+//     //Refresh the number of players ready:
+//     nbr = network.client_inited;
+//     pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
+//     if(inited_players->GetText() != pl)
+//       inited_players->SetText(pl);
   }
   else {
     close_menu = true;
@@ -415,40 +219,27 @@ void NetworkMenu::DelTeamCallback(std::string team_id)
 {
   if( close_menu )
     return;
+
   // Called from the action handler
-  for(std::vector<ListBoxItem*>::iterator lst_it = lbox_selected_teams->GetItemsList()->begin();
-      lst_it != lbox_selected_teams->GetItemsList()->end();
-      lst_it++)
-  {
-    if((*lst_it)->GetValue() == team_id)
-    {
-      lbox_selected_teams->Select((*lst_it)->GetLabel());
-      msg_box->NewMessage((*lst_it)->GetLabel() + " unselected");
-      MoveTeams(lbox_selected_teams, lbox_all_teams, true);
-      return;
-    }
-  }
+  team_box->DelTeamCallback(team_id);
 }
 
 void NetworkMenu::AddTeamCallback(std::string team_id)
 {
-  assert( !close_menu );
-  // Called from the action handler
-  for(std::vector<ListBoxItem*>::iterator lst_it = lbox_all_teams->GetItemsList()->begin();
-      lst_it != lbox_all_teams->GetItemsList()->end();
-      lst_it++)
-  {
-    if((*lst_it)->GetValue() == team_id)
-    {
-      int index;
-      teams_list.FindById(team_id, index)->SetRemote();
+  if ( close_menu )
+    return;
 
-      lbox_all_teams->Select((*lst_it)->GetLabel());
-      msg_box->NewMessage((*lst_it)->GetLabel() + " selected");
-      MoveDisableTeams(lbox_all_teams, lbox_selected_teams, false);
-      return;
-    }
-  }
+  team_box->AddTeamCallback(team_id);
+  msg_box->NewMessage(team_id + " selected");
+}
+
+void NetworkMenu::UpdateTeamCallback(std::string team_id)
+{
+  if ( close_menu )
+    return;
+
+  team_box->UpdateTeamCallback(team_id);
+  msg_box->NewMessage(team_id + " updated");
 }
 
 void NetworkMenu::ChangeMapCallback()

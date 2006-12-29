@@ -16,59 +16,45 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game menu
+ *  Team box
  *****************************************************************************/
 
-#ifndef NETWORK_MENU_H
-#define NETWORK_MENU_H
+#ifndef TEAM_BOX_H
+#define TEAM_BOX_H
 
-#include <list>
-#include "menu.h"
-#include "network_teams_selection_box.h"
-#include "map_selection_box.h"
-#include "../include/base.h"
-#include "../graphic/font.h"
-#include "../gui/button_text.h"
-#include "../gui/msg_box.h"
+#include "../gui/box.h"
+#include "../gui/label.h"
+#include "../gui/picture_widget.h"
+#include "../gui/spin_button.h"
 #include "../gui/text_box.h"
 
 class Team;
 
-class NetworkMenu : public Menu
+class TeamBox : public HBox
 {
-   /* Options controllers */
-   SpinButton* player_number;
-   Box* options_box;
-   Label* connected_players;
-   Label* inited_players;
-   TextBox* chat_box;
-   ButtonText* send_txt;
+ private:
+  bool is_local; // local/remote team
 
-   /* Team controllers */
-   NetworkTeamsSelectionBox *team_box;
+  Team * associated_team;
+  PictureWidget *team_logo;
+  Label * team_name;
+  TextBox * player_name;
+  SpinButton * nb_characters;
 
-   /* Map controllers */
-   MapSelectionBox *map_box;
+ public:
+  TeamBox(std::string player_name, const Rectanglei &rect);
 
-   void SaveOptions();
-   void OnClic(const Point2i &mousePosition, int button);
-   void Draw(const Point2i &mousePosition);
+  void SetTeam(Team& _team, bool read_team_values=false);
+  void ClearTeam();
+  Team* GetTeam() const;  
+  void ValidOptions() const;
 
-   void sig_ok();
-   void __sig_ok();
-   void __sig_cancel();
+  bool IsLocal() const;
 
-public:
-   NetworkMenu(); 
-   ~NetworkMenu();
-
-   void AddTeamCallback(std::string team_id);
-   void UpdateTeamCallback(std::string team_id);
-   void DelTeamCallback(std::string team_id);
-   void ChangeMapCallback();
-
-   MsgBox *msg_box;
-
+  void Update(const Point2i &mousePosition,
+	      const Point2i &lastMousePosition,
+	      Surface& surf);
+  Widget* Clic(const Point2i &mousePosition, uint button);
 };
 
 #endif

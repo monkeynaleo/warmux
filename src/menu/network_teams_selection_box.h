@@ -16,59 +16,45 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game menu
+ *  Network teams selection box
  *****************************************************************************/
 
-#ifndef NETWORK_MENU_H
-#define NETWORK_MENU_H
+#ifndef NETWORK_TEAMS_SELECTION_BOX_H
+#define NETWORK_TEAMS_SELECTION_BOX_H
 
-#include <list>
-#include "menu.h"
-#include "network_teams_selection_box.h"
-#include "map_selection_box.h"
-#include "../include/base.h"
-#include "../graphic/font.h"
-#include "../gui/button_text.h"
-#include "../gui/msg_box.h"
+#include "../gui/box.h"
+#include "../gui/label.h"
+#include "../gui/picture_widget.h"
+#include "../gui/spin_button.h"
+#include "../gui/spin_button_big.h"
 #include "../gui/text_box.h"
+#include "team_box.h"
 
-class Team;
+#include <vector>
 
-class NetworkMenu : public Menu
-{
-   /* Options controllers */
-   SpinButton* player_number;
-   Box* options_box;
-   Label* connected_players;
-   Label* inited_players;
-   TextBox* chat_box;
-   ButtonText* send_txt;
+const uint NMAX_NB_TEAMS=4;
 
-   /* Team controllers */
-   NetworkTeamsSelectionBox *team_box;
+class NetworkTeamsSelectionBox : public HBox
+{ 
+ private:  
+  SpinButtonBig *local_teams_nb;
+  std::vector<TeamBox*> teams_selections;
 
-   /* Map controllers */
-   MapSelectionBox *map_box;
+  void SetNbLocalTeams(uint nb_teams, uint previous_nb);
+  void AddLocalTeam(uint i);
+  void RemoveLocalTeam(uint i);
+  void SetLocalTeam(uint i, Team& team, bool remove_previous_team);
+  void PrevTeam(uint i);
+  void NextTeam(uint i, bool check_null_prev_team = true);
 
-   void SaveOptions();
-   void OnClic(const Point2i &mousePosition, int button);
-   void Draw(const Point2i &mousePosition);
+ public:
+  NetworkTeamsSelectionBox(const Rectanglei &rect);
 
-   void sig_ok();
-   void __sig_ok();
-   void __sig_cancel();
+  void ValidTeamsSelection();
+  Widget* Clic(const Point2i &mousePosition, uint button);
 
-public:
-   NetworkMenu(); 
-   ~NetworkMenu();
-
-   void AddTeamCallback(std::string team_id);
-   void UpdateTeamCallback(std::string team_id);
-   void DelTeamCallback(std::string team_id);
-   void ChangeMapCallback();
-
-   MsgBox *msg_box;
-
+  void AddTeamCallback(std::string team_id);
+  void UpdateTeamCallback(std::string team_id);
+  void DelTeamCallback(std::string team_id);
 };
-
 #endif
