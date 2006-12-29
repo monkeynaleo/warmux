@@ -105,7 +105,7 @@ void InternetMenu::RefreshList()
   int current = connect_lst->GetSelectedItem();
 
   // Empty the list:
-  while( connect_lst->GetItemsList()->size() != 0 )
+  while( connect_lst->Size() != 0 )
   {
     connect_lst->Select(0);
     connect_lst->RemoveSelected();
