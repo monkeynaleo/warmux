@@ -54,6 +54,7 @@ public:
 
   // Add a new team to playing, and change active team
   void AddTeam (const ConfigTeam& the_team_cfg, bool generate_error=true);
+  void UpdateTeam (const ConfigTeam& the_team_cfg, bool generate_error=true);
   void DelTeam (const std::string &id);
   void SetActive(const std::string &id);
   void InitList (const std::list<ConfigTeam> &lst);

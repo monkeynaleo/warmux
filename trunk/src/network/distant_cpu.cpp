@@ -40,7 +40,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
   SDLNet_TCP_AddSocket(network.socket_set, sock);
 
   // If we are the server, we have to tell this new computer
-  // what teams / maps have alreayd been selected
+  // what teams / maps have already been selected
   if( network.IsServer() )
   {
     Action a(Action::ACTION_SET_MAP, ActiveMap().ReadName());
@@ -173,6 +173,11 @@ void DistantComputer::ManageTeam(Action* team)
   if(team->GetType() == Action::ACTION_NEW_TEAM)
   {
     owned_teams.push_back(name);
+
+    int index = 0;
+    Team * tmp = teams_list.FindById(name, index);
+    tmp->SetRemote();
+    
     Action* copy = new Action(Action::ACTION_NEW_TEAM, name);
     copy->Push( team->PopString() );
     copy->Push( team->PopInt() );
@@ -183,9 +188,10 @@ void DistantComputer::ManageTeam(Action* team)
   {
     std::list<std::string>::iterator it;
     it = find(owned_teams.begin(), owned_teams.end(), name);
+    std::cout << "ManageTeam : erase " << name << std::endl;
     assert(it != owned_teams.end());
     owned_teams.erase(it);
-    ActionHandler::GetInstance()->NewAction(new Action(team->GetType(), name), false);
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_DEL_TEAM, name), false);
   }
   else
     assert(false);

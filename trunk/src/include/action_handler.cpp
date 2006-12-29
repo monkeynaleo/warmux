@@ -211,13 +211,6 @@ void Action_SetMap (Action *a)
   network.network_menu->ChangeMapCallback();
 }
 
-void Action_ClearTeams (Action *a)
-{
-  MSG_DEBUG("action.handler", "ClearTeams");
-  if (!network.IsClient()) return;
-  teams_list.Clear();
-}
-
 void Action_ChangeState (Action *a)
 {
   MSG_DEBUG("action.handler", "ChangeState");
@@ -325,6 +318,19 @@ void Action_NewTeam (Action *a)
   teams_list.AddTeam (the_team);
 
   network.network_menu->AddTeamCallback(the_team.id);
+}
+
+void Action_UpdateTeam (Action *a)
+{
+  ConfigTeam the_team;
+
+  the_team.id = a->PopString();
+  the_team.player_name = a->PopString();
+  the_team.nb_characters = uint(a->PopInt());
+
+  teams_list.UpdateTeam (the_team);
+
+  network.network_menu->UpdateTeamCallback(the_team.id);
 }
 
 // TODO: Move this into network/distant_cpu.cpp
@@ -560,7 +566,7 @@ ActionHandler::ActionHandler()
   Register (Action::ACTION_CHANGE_CHARACTER, "change_character", &Action_ChangeCharacter);
   Register (Action::ACTION_SET_GAME_MODE, "set_game_mode", &Action_SetGameMode);
   Register (Action::ACTION_SET_MAP, "set_map", &Action_SetMap);
-  Register (Action::ACTION_CLEAR_TEAMS, "clear_teams", &Action_ClearTeams);
+  Register (Action::ACTION_UPDATE_TEAM, "update_team", &Action_UpdateTeam);
   Register (Action::ACTION_NEW_TEAM, "new_team", &Action_NewTeam);
   Register (Action::ACTION_DEL_TEAM, "del_team", &Action_DelTeam);
   Register (Action::ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);

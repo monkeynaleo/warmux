@@ -456,6 +456,27 @@ void TeamsList::AddTeam (const ConfigTeam &the_team_cfg, bool generate_error)
 
 //-----------------------------------------------------------------------------
 
+void TeamsList::UpdateTeam (const ConfigTeam &the_team_cfg, bool generate_error)
+{
+  int pos;
+  Team *the_team = FindById (the_team_cfg.id, pos);
+  if (the_team != NULL) {
+
+    // set the player name and number of characters
+    the_team->SetPlayerName(the_team_cfg.player_name);
+    the_team->SetNbCharacters(the_team_cfg.nb_characters);
+
+  } else {
+    std::string msg = Format(_("Can't find team %s!"), the_team_cfg.id.c_str());
+    if (generate_error)
+      Error (msg);
+    else
+      std::cout << "! " << msg << std::endl;
+  }
+}
+
+//-----------------------------------------------------------------------------
+
 void TeamsList::DelTeam (const std::string &id)
 {
   int pos;
