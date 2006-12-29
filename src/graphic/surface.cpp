@@ -285,8 +285,9 @@ int Surface::SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a){
  * @param b
  * @param a
  */
-void Surface::GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a){
-	SDL_GetRGBA(color, surface->format, &r, &g, &b, &a);
+void Surface::GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a) const
+{
+  SDL_GetRGBA(color, surface->format, &r, &g, &b, &a);
 }
 
 /**
@@ -295,26 +296,29 @@ void Surface::GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a){
  * @param b
  * @param a
  */
-Uint32 Surface::MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a){
-    return SDL_MapRGBA(surface->format, r, g, b, a);
+Uint32 Surface::MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const
+{
+  return SDL_MapRGBA(surface->format, r, g, b, a);
 }
 
 /**
  *
  * @param color
  */
-Color Surface::GetColor(Uint32 color){
-	Uint8 r, g, b, a;
-	GetRGBA(color, r, g, b, a);
-	return Color(r, g, b, a);
+Color Surface::GetColor(Uint32 color) const
+{
+  Uint8 r, g, b, a;
+  GetRGBA(color, r, g, b, a);
+  return Color(r, g, b, a);
 }
 
 /**
  *
  * @param color
  */
-Uint32 Surface::MapColor(Color color){
-	return MapRGBA(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+Uint32 Surface::MapColor(Color color) const
+{
+  return MapRGBA(color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
 /**
@@ -391,11 +395,11 @@ int Surface::CircleColor(const uint &x, const uint &y, const uint &rad, const Co
  *
  * @param color
  */
-int Surface::Fill(Uint32 color){
+int Surface::Fill(Uint32 color) const {
     return SDL_FillRect( surface, NULL, color);
 }
 
-int Surface::Fill(const Color &color){
+int Surface::Fill(const Color &color) const{
 	return Fill( MapColor(color) );
 }
 
@@ -404,7 +408,7 @@ int Surface::Fill(const Color &color){
  * @param dstRect
  * @param color
  */
-int Surface::FillRect(const Rectanglei &dstRect, Uint32 color){
+int Surface::FillRect(const Rectanglei &dstRect, Uint32 color) const{
 	SDL_Rect sdlDstRect = GetSDLRect( dstRect );
 
 	return SDL_FillRect( surface, &sdlDstRect, color);
@@ -415,7 +419,7 @@ int Surface::FillRect(const Rectanglei &dstRect, Uint32 color){
  * @param dstRect
  * @param color
  */
-int Surface::FillRect(const Rectanglei &dstRect, const Color &color){
+int Surface::FillRect(const Rectanglei &dstRect, const Color &color) const{
 
 	return FillRect( dstRect, MapColor(color) );
 }
@@ -553,24 +557,26 @@ void Surface::PutPixel(int x, int y, Uint32 pixel){
     }
 }
 
-SDL_Rect Surface::GetSDLRect(const Rectanglei &r){
-	SDL_Rect sdlRect;
-
-    sdlRect.x = r.GetPositionX();
-    sdlRect.y = r.GetPositionY();
-    sdlRect.w = r.GetSizeX();
-    sdlRect.h = r.GetSizeY();
-
-	return sdlRect;
+SDL_Rect Surface::GetSDLRect(const Rectanglei &r) const
+{
+  SDL_Rect sdlRect;
+  
+  sdlRect.x = r.GetPositionX();
+  sdlRect.y = r.GetPositionY();
+  sdlRect.w = r.GetSizeX();
+  sdlRect.h = r.GetSizeY();
+  
+  return sdlRect;
 }
 
-SDL_Rect Surface::GetSDLRect(const Point2i &pt){
-	SDL_Rect sdlRect;
-
-	sdlRect.x = pt.GetX();
-	sdlRect.y = pt.GetY();
-	sdlRect.w = 0;
-	sdlRect.h = 0;
-
-	return sdlRect;
+SDL_Rect Surface::GetSDLRect(const Point2i &pt) const
+{
+  SDL_Rect sdlRect;
+  
+  sdlRect.x = pt.GetX();
+  sdlRect.y = pt.GetY();
+  sdlRect.w = 0;
+  sdlRect.h = 0;
+  
+  return sdlRect;
 }
