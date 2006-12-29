@@ -33,15 +33,24 @@
 
 class NetworkConnectionMenu : public Menu
 {
-   Font * normal_font;
-   Font * big_font;
+  typedef enum {
+    NET_HOST,
+    NET_CONNECT_LOCAL,
+    NET_BROWSE_INTERNET
+  } network_menu_action_t;
 
    /* Connection controllers */
-   TextBox* server_adress;
+   Button *previous_action_bt, *next_action_bt;
+   
+   Label* action_label;
+   network_menu_action_t current_action;
+   
+   Label* server_address_label;
+   TextBox* server_address;
+   
+   Label* port_number_label;
    TextBox* port_number;
-   ButtonText* start_client;
-   ButtonText* start_server;
-   ButtonText* internet_client;
+
    CheckBox* internet_server;
    VBox* connection_box;
 
@@ -50,6 +59,9 @@ class NetworkConnectionMenu : public Menu
    void OnClic(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
 
+   void SetAction(network_menu_action_t action);
+
+   void sig_ok();
    void __sig_ok();
    void __sig_cancel();
 
