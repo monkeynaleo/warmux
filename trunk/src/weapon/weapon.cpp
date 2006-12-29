@@ -515,7 +515,8 @@ void Weapon::DrawWeaponFire()
   m_weapon_fire->Draw( GetGunHolePosition() - size );
 }
 
-void Weapon::DrawUnit(int unit){
+void Weapon::DrawUnit(int unit) const
+{
   Rectanglei rect;
 
   std::ostringstream ss;
@@ -523,7 +524,8 @@ void Weapon::DrawUnit(int unit){
   ss << unit;
 
   DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
-		 Point2i( ActiveCharacter().GetCenterX(), ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
+		 Point2i( ActiveCharacter().GetCenterX(), 
+			  ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
 		 - camera.GetPosition(),
 		 ss.str());
 }

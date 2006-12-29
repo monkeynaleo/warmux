@@ -167,7 +167,7 @@ public:
   virtual void Draw();
   virtual void DrawWeaponFire();
 
-  void DrawUnit(int unit);
+  void DrawUnit(int unit) const;
 
   Sprite & GetIcon() const;
   // Manage the numbers of ammunitions
