@@ -77,8 +77,10 @@ menu/map_selection_box.cpp
 menu/menu.cpp
 menu/network_connection_menu.cpp
 menu/network_menu.cpp
+menu/network_teams_selection_box.cpp
 menu/options_menu.cpp
 menu/results_menu.cpp
+menu/team_box.cpp
 menu/teams_selection_box.cpp
 network/chat.cpp
 network/distant_cpu.cpp
