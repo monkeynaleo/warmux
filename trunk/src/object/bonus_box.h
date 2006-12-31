@@ -33,8 +33,7 @@ class BonusBox : public PhysicalObj
 {
   private:
     static bool enable;
-    static uint time;
-    int nb_ammo;
+    uint nbr_ammo;
 
     bool parachute; 
     Sprite *anim;
@@ -51,6 +50,7 @@ class BonusBox : public PhysicalObj
 
     // Activate bonus box ?
     static void Enable (bool _enable);
+    static uint CountTeams();
     static bool NewBonusBox();
     //bool LoadXml(xmlpp::Element * object); //the next update will include this
 
