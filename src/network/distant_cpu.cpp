@@ -67,7 +67,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
   if(network.network_menu != NULL)
   {
     // Display a message in the network menu
-    network.network_menu->msg_box->NewMessage( GetAdress() + _(" has joined the party"));
+    network.network_menu->ReceiveMsgCallback(GetAdress() + _(" has joined the party"));
   }
 }
 
@@ -76,7 +76,7 @@ DistantComputer::~DistantComputer()
   if(network.network_menu != NULL)
   {
     // Display a message in the network menu
-    network.network_menu->msg_box->NewMessage( GetAdress() + _(" has left the party"));
+    network.network_menu->ReceiveMsgCallback( GetAdress() + _(" has left the party"));
   }
 
   SDLNet_TCP_DelSocket(network.socket_set, sock);
