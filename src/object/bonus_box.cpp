@@ -23,6 +23,7 @@
 #include "bonus_box.h"
 #include <sstream>
 #include <iostream>
+#include <math.h>
 #include "../game/game_mode.h"
 #include "../game/game_loop.h"
 #include "../game/time.h"
@@ -39,16 +40,6 @@
 #include "../tool/resource_manager.h"
 #include "../weapon/explosion.h"
 #include "../weapon/weapons_list.h"
-
-//#define FAST
-
-#ifdef FAST
-  const uint MIN_TIME_BETWEEN_CREATION = 1; // seconds
-  const uint MAX_TIME_BETWEEN_CREATION = 3; // seconds
-#else
-  const uint MIN_TIME_BETWEEN_CREATION = 10; // seconds
-  const uint MAX_TIME_BETWEEN_CREATION = 5*60; // seconds
-#endif
 
 const uint SPEED = 5; // meter / seconde
 const uint SPEED_PARACHUTE = 170; // ms per frame
@@ -72,7 +63,7 @@ BonusBox::BonusBox()
 
   //these values will get read from XML soon
   life_points = 41;
-  nb_ammo = 3;
+  nbr_ammo = 3;
 
   SetSpeed (SPEED, M_PI_2);
   PickRandomWeapon();
@@ -150,12 +141,12 @@ void BonusBox::PickRandomWeapon() {
 void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
   std::ostringstream txt;
     if(ActiveTeam().ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())!=INFINITE_AMMO) {
-        equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName() ] += nb_ammo;
+        equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName() ] += nbr_ammo;
         txt << Format(ngettext(
                 "%s team has won %u %s!",
                 "%s team has won %u %ss!",
                 2),
-            ActiveTeam().GetName().c_str(), nb_ammo, Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
+            ActiveTeam().GetName().c_str(), nbr_ammo, Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
     }
     else {
         txt << Format(gettext("%s team already has infinite ammo for the %s!"),
@@ -169,7 +160,6 @@ void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
 //-----------------------------------------------------------------------------
 // Static methods
 bool BonusBox::enable = false;
-uint BonusBox::time = 0;
 
 // Active les caisses ?
 void BonusBox::Enable (bool _enable)
@@ -178,23 +168,36 @@ void BonusBox::Enable (bool _enable)
   enable = _enable;
 }
 
+uint BonusBox::CountTeams() {
+  uint nbr_teams=0;
+  FOR_EACH_TEAM(team) { 
+    nbr_teams++;
+  }
+  return nbr_teams;
+}
+
 bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
 {
   if (!bonus_box.PutRandomly(true, 0)) return false;
-
-  time = randomSync.GetLong(MIN_TIME_BETWEEN_CREATION,
-                            MAX_TIME_BETWEEN_CREATION - MIN_TIME_BETWEEN_CREATION);
-  time *= 1000;
-  time += Time::GetInstance()->Read();
-
   return true;
 }
 
 bool BonusBox::NewBonusBox()
 {
 
-  if (!enable || (Time::GetInstance()->Read() < time)) {
+  if (!enable) {
+     enable=true;
     return false;
+  }
+  uint nbr_teams=CountTeams();
+  if(nbr_teams<=1) {
+	MSG_DEBUG("bonus", "There is less than 2 teams in the game");
+    return false;
+  }
+  // .7 is a magic number to get the probability of boxes falling once every round close to .333
+  double randValue = randomSync.GetDouble();
+  if(randValue > (1-pow(.7,1.0/nbr_teams))) {
+       return false;
   }
 
   BonusBox * box = new BonusBox();
