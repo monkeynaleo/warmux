@@ -41,6 +41,12 @@
   <surface name="timing_end_of_turn" file="menu/img/timing_end_turn.png" />
   <surface name="energy" file="menu/img/display_energy.png" />
 
+  <sprite name="send_txt">
+    <image file="menu/img/send_txt.png">
+      <grid pos="0,0" size="16,16" array="2,1" />
+    </image>
+  </sprite>
+
   <sprite name="valider">
     <image file="menu/img/validate.png">
       <grid pos="0,0" size="32,32" array="1,2" />

@@ -101,20 +101,38 @@ NetworkMenu::NetworkMenu() :
 			     rectZero, *Font::GetInstance(Font::FONT_SMALL));
   tmp_box->AddWidget(inited_players);
 
-  chat_box = new TextBox(std::string(""),Rectanglei(0, 0, 0, 25), *Font::GetInstance(Font::FONT_SMALL));
-  tmp_box->AddWidget(chat_box);
-
-  send_txt = new ButtonText(Point2i(150, 30), res, "main_menu/button", "Send text !",Font::GetInstance(Font::FONT_SMALL));
-  tmp_box->AddWidget(send_txt);
-
   options_box->AddWidget(tmp_box);
-    
-  msg_box = new MsgBox(Rectanglei( 0, 0, 400, 150), Font::GetInstance(Font::FONT_SMALL));  
+  widgets.AddWidget(options_box);
+
+  // ################################################
+  // ##  CHAT BOX
+  // ################################################
+  VBox* chat_box = new VBox(Rectanglei(options_box->GetPositionX() + options_box->GetSizeX() + MARGIN_SIDE,
+				       options_box->GetPositionY(),
+				       mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE,
+				       OPTIONS_BOX_H), false);
+  chat_box->SetBorder(Point2i(0,0));
+  
+  msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::GetInstance(Font::FONT_SMALL));  
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
   msg_box->NewMessage(_("WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"));
 
-  options_box->AddWidget(msg_box);
-  widgets.AddWidget(options_box);
+  chat_box->AddWidget(msg_box);
+
+  HBox* tmp2_box = new HBox(Rectanglei(0,0,chat_box->GetSizeX(),16), false);
+  tmp2_box->SetMargin(4);
+  tmp2_box->SetBorder(Point2i(0,0));
+  line_to_send_tbox = new TextBox(" ",
+				  Rectanglei(0, 0, chat_box->GetSizeX()-20, 0), 
+				  *Font::GetInstance(Font::FONT_SMALL));
+  tmp2_box->AddWidget(line_to_send_tbox);
+  
+  send_txt_bt = new Button(Point2i(0,0), res, "menu/send_txt", true);
+  tmp2_box->AddWidget(send_txt_bt);
+
+  chat_box->AddWidget(tmp2_box);
+
+  widgets.AddWidget(chat_box);
 
   resource_manager.UnLoadXMLProfile(res);
 }
@@ -132,11 +150,11 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
     network.max_player_number = player_number->GetValue();
   }
 
-  if(w == send_txt)
+  if(w == send_txt_bt)
   {
     std::string empty = "";
-    network.SendChatMessage(chat_box->GetText());
-    chat_box->SetText(empty);
+    network.SendChatMessage(line_to_send_tbox->GetText());
+    line_to_send_tbox->SetText(empty);
   }
 }
 
@@ -194,19 +212,16 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
 {
   if(network.IsConnected())
   {
- 
-    //map_box->Draw(mousePosition);
-
     //Refresh the number of connected players:
- //    int nbr = network.connected_player;
-//     std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
-//     if(connected_players->GetText() != pl)
-//       connected_players->SetText(pl);
-//     //Refresh the number of players ready:
-//     nbr = network.client_inited;
-//     pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
-//     if(inited_players->GetText() != pl)
-//       inited_players->SetText(pl);
+    int nbr = network.connected_player;
+    std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
+    if(connected_players->GetText() != pl)
+      connected_players->SetText(pl);
+    //Refresh the number of players ready:
+    nbr = network.client_inited;
+    pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
+    if(inited_players->GetText() != pl)
+      inited_players->SetText(pl);
   }
   else {
     close_menu = true;
@@ -248,4 +263,9 @@ void NetworkMenu::ChangeMapCallback()
   // Called from the action handler
 
   map_box->ChangeMapCallback();
+}
+
+void NetworkMenu::ReceiveMsgCallback(std::string msg)
+{
+  msg_box->NewMessage(msg);
 }

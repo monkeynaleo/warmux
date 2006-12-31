@@ -350,7 +350,7 @@ void Action_ChatMessage (Action *a)
     GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
   else
     //Network Menu
-    network.network_menu->msg_box->NewMessage(a->PopString());
+    network.network_menu->ReceiveMsgCallback(a->PopString());
 }
 
 void Action_ChangeTeam (Action *a)
