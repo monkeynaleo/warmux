@@ -168,14 +168,6 @@ void BonusBox::Enable (bool _enable)
   enable = _enable;
 }
 
-uint BonusBox::CountTeams() {
-  uint nbr_teams=0;
-  FOR_EACH_TEAM(team) { 
-    nbr_teams++;
-  }
-  return nbr_teams;
-}
-
 bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
 {
   if (!bonus_box.PutRandomly(true, 0)) return false;
@@ -189,9 +181,9 @@ bool BonusBox::NewBonusBox()
      enable=true;
     return false;
   }
-  uint nbr_teams=CountTeams();
+  uint nbr_teams=teams_list.playing_list.size();
   if(nbr_teams<=1) {
-	MSG_DEBUG("bonus", "There is less than 2 teams in the game");
+    MSG_DEBUG("bonus", "There is less than 2 teams in the game");
     return false;
   }
   // .7 is a magic number to get the probability of boxes falling once every round close to .333

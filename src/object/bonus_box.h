@@ -50,7 +50,6 @@ class BonusBox : public PhysicalObj
 
     // Activate bonus box ?
     static void Enable (bool _enable);
-    static uint CountTeams();
     static bool NewBonusBox();
     //bool LoadXml(xmlpp::Element * object); //the next update will include this
 
