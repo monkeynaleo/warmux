@@ -25,6 +25,11 @@ SET(FONT_FILE ${INSTALL_DATADIR}/font/DejaVuSans.ttf)
 INCLUDE(CPackConfig OPTIONAL)
 INCLUDE(XmlValidityTest OPTIONAL)
 
+# Use "make run" and "make debug" to run/debug wormux
+ADD_CUSTOM_TARGET(run WORMUX_DATADIR=data WORUMX_FONT_PATH=data/font/DejaVuSans.ttf src/wormux)
+ADD_CUSTOM_TARGET(debug WORMUX_DATADIR=data
+WORUMX_FONT_PATH=data/font/DejaVuSans.ttf gdb src/wormux)
+
 
 # Required libraries
 FIND_PACKAGE(Gettext REQUIRED)
