@@ -81,7 +81,7 @@ void DiscoGrenade::Refresh()
 
   double tmp = Time::GetInstance()->Read() - begin_time;
   // Ah ! Ah ! Ah ! Staying Alive, staying alive ...
-  if (tmp > (1000 * cfg.timeout - 2000) && !have_played_music) {
+  if (GetTotalTimeout() >= 2 && tmp > (1000 * GetTotalTimeout() - 2000) && !have_played_music) {
     jukebox.Play("share","weapon/alleluia") ;
     have_played_music = true;
   }
