@@ -39,7 +39,6 @@
 
 class AutomaticBazookaConfig : public ExplosiveWeaponConfig {
   public:
-    uint seek_time;
     double uncontrolled_turn_speed;
     double max_controlled_turn_speed;
     double fuel_time;
@@ -76,7 +75,7 @@ void RPG::Refresh()
     if(angle_local > M_PI) angle_local = -M_PI;
 
     // TPS_AV_ATTIRANCE msec later being launched, the rocket is homing to the target
-    if(flying_time>1000 * acfg.seek_time)
+    if(flying_time>1000 * GetTotalTimeout())
     {
       m_targeted = true;
       SetSpeed(0,0);
@@ -91,7 +90,7 @@ void RPG::Refresh()
   {
     SetExternForce(m_force, angle_local+M_PI_2); // reverse the force applyed on the last Refresh()
 
-    if(flying_time - acfg.seek_time < acfg.fuel_time*1000.) {
+    if(flying_time - GetTotalTimeout() < acfg.fuel_time*1000.) {
       smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
                                        GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
       double wish_angle = GetPosition().ComputeAngle( m_target );
@@ -107,20 +106,30 @@ void RPG::Refresh()
       } else {
         angle_local = wish_angle;
       }
-      m_force = acfg.rocket_force * ((acfg.fuel_time*1300. - flying_time + acfg.seek_time)/acfg.fuel_time/1300.);
-      SetGravityFactor((flying_time - acfg.seek_time)/acfg.fuel_time/1000.); // slowly increase gravity
-      SetWindFactor((flying_time - acfg.seek_time)/acfg.fuel_time/1000.); // slowly increase wind
+      m_force = acfg.rocket_force * ((acfg.fuel_time*1300. - flying_time + GetTotalTimeout())/acfg.fuel_time/1300.);
+      SetGravityFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/1000.); // slowly increase gravity
+      SetWindFactor((flying_time - GetTotalTimeout())/acfg.fuel_time/1000.); // slowly increase wind
     } else {
       SetGravityFactor(1);
       m_force = 0; //if there's no fuel left just let it crash into the ground somewhere
-      angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
-      if(angle_local > M_PI) angle_local = - M_PI;
+      if(!IsDrowned()) {
+        angle_local += acfg.uncontrolled_turn_speed * timestep / 1000.;
+        if(angle_local > M_PI) angle_local = - M_PI;
+      } else {
+        angle_local = M_PI_2;
+      }
     }
 
     SetExternForce(m_force, angle_local);
 
   }
   image->SetRotation_rad(angle_local);
+}
+
+void RPG::SignalDrowning()
+{
+  smoke_engine.Stop();
+  WeaponProjectile::SignalDrowning();
 }
 
 void RPG::SignalOutOfMap()
@@ -143,6 +152,7 @@ AutomaticBazooka::AutomaticBazooka() :
 {
   m_name = _("Automatic Bazooka");
   mouse_character_selection = false;
+  m_allow_change_timeout = true;
   m_target.selected = false;
   m_target.image = resource_manager.LoadImage( weapons_res_profile, "baz_cible");
   ReloadLauncher();
@@ -156,7 +166,7 @@ WeaponProjectile * AutomaticBazooka::GetProjectileInstance()
 
 void AutomaticBazooka::Draw()
 {
-  Weapon::Draw();
+  WeaponLauncher::Draw();
   DrawTarget();
 }
 
@@ -168,6 +178,7 @@ void AutomaticBazooka::Refresh()
 
 void AutomaticBazooka::p_Select()
 {
+  WeaponLauncher::p_Select();
   m_target.selected = false;
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_AIM);
@@ -175,6 +186,7 @@ void AutomaticBazooka::p_Select()
 
 void AutomaticBazooka::p_Deselect()
 {
+  WeaponLauncher::p_Deselect();
   if (m_target.selected) {
     // need to clear the old target
     world.ToRedrawOnMap(Rectanglei(m_target.pos.x-m_target.image.GetWidth()/2,
@@ -222,7 +234,6 @@ AutomaticBazookaConfig &AutomaticBazooka::cfg() {
 }
 
 AutomaticBazookaConfig::AutomaticBazookaConfig() {
-    seek_time = 1;
     uncontrolled_turn_speed = M_PI*8;
     max_controlled_turn_speed = M_PI*4;
     fuel_time = 10;
@@ -231,7 +242,6 @@ AutomaticBazookaConfig::AutomaticBazookaConfig() {
 
 void AutomaticBazookaConfig::LoadXml(xmlpp::Element *elem) {
     ExplosiveWeaponConfig::LoadXml(elem);
-    XmlReader::ReadUint(elem, "seek_time", seek_time);
     XmlReader::ReadDouble(elem, "uncontrolled_turn_speed", uncontrolled_turn_speed);
     XmlReader::ReadDouble(elem, "max_controlled_turn_speed", max_controlled_turn_speed);
     XmlReader::ReadDouble(elem, "fuel_time", fuel_time);

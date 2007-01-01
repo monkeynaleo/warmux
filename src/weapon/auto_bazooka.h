@@ -48,6 +48,7 @@ class RPG : public WeaponProjectile
 
   protected:
     void SignalOutOfMap();
+    void SignalDrowning();
 };
 
 class AutomaticBazooka : public WeaponLauncher

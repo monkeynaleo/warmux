@@ -31,6 +31,7 @@ public:
   void Refresh();
 protected:
   void SignalOutOfMap();
+  void SignalDrowning();
 };
 
 class Bazooka : public WeaponLauncher
