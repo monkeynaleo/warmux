@@ -24,8 +24,27 @@
 #include "label.h"
 
 TextBox::TextBox (const std::string &label, const Rectanglei &rect, Font& _font) :
-  Label(label, rect, _font)
+  Label(label, rect, _font),
+  cursor_pos(label.size())
 {
+}
+
+void TextBox::SetText(std::string const &new_txt)
+{
+  Label::SetText(new_txt);
+  cursor_pos = new_txt.size();
+}
+
+void TextBox::SetCursor(std::string::size_type pos)
+{
+  if(pos > GetText().size())
+  {
+    cursor_pos = GetText().size();
+  }
+  else
+  {
+    cursor_pos = pos;
+  }
 }
 
 TextBox::~TextBox(){
@@ -36,18 +55,54 @@ void TextBox::SendKey(SDL_keysym key)
   need_redrawing = true;
 
   std::string new_txt = GetText();
+
   if (strcmp(SDL_GetKeyName(key.sym),"backspace")==0)
   {
-    if(new_txt != "")
-      new_txt = new_txt.substr(0, new_txt.size()-1);
+    if(cursor_pos != 0)
+    {
+      while((new_txt[--cursor_pos] & 0xc0) == 0x80)
+      {
+        new_txt.erase(cursor_pos, 1);
+      }
+      new_txt.erase(cursor_pos, 1);
+      Label::SetText(new_txt);
+    }
+  }
+  else if(strcmp(SDL_GetKeyName(key.sym),"left")==0)
+  {
+    if(cursor_pos != 0)
+    {
+      while((new_txt[--cursor_pos] & 0xc0) == 0x80);
+    }
+  }
+  else if(strcmp(SDL_GetKeyName(key.sym),"right")==0)
+  {
+    if(cursor_pos < new_txt.size())
+    {
+      while((new_txt[++cursor_pos] & 0xc0) == 0x80);
+    }
   }
   else
   {
-    if(key.unicode < 0x80 && key.unicode > 0)
-      new_txt = new_txt + (char)key.unicode;
+    if(key.unicode > 0)
+    {
+      if(key.unicode < 0x80) { // 1 byte char
+          new_txt.insert(cursor_pos++, 1, (char)key.unicode);
+      }
+      else if (key.unicode < 0x800) // 2 byte char
+      {
+        new_txt.insert(cursor_pos++, 1, (char)(((key.unicode & 0x7c0) >> 6) | 0xc0));
+        new_txt.insert(cursor_pos++, 1, (char)((key.unicode & 0x3f) | 0x80));
+      }
+      else // if (key.unicode < 0x10000) // 3 byte char
+      {
+        new_txt.insert(cursor_pos++, 1, (char)(((key.unicode & 0xf000) >> 12) | 0xe0));
+        new_txt.insert(cursor_pos++, 1, (char)(((key.unicode & 0xfc0) >> 6) | 0x80));
+        new_txt.insert(cursor_pos++, 1, (char)((key.unicode & 0x3f) | 0x80));
+      }
+    }
+    Label::SetText(new_txt);
   }
-
-  SetText(new_txt);
 }
 
 void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
@@ -55,13 +110,18 @@ void TextBox::Draw(const Point2i &mousePosition, Surface& surf) const
   if (!hidden) 
     {
       if(have_focus)
-	surf.BoxColor(*this, highlightOptionColorBox);
-      
+        surf.BoxColor(*this, highlightOptionColorBox);
+
       surf.RectangleColor(*this, defaultOptionColorRect);
-      
+
       Label::Draw(mousePosition, surf);
-      surf.VlineColor(GetPositionX()+txt_label->GetWidth(), 
-		      GetPositionY()+2, 
-		      GetPositionY()+GetSizeY()-4, c_white);
+
+      //sort of a hacky way to get the cursor pos, but I couldn't find anything better...
+      Text txt_before_cursor(*txt_label);
+      txt_before_cursor.Set(GetText().substr(0, cursor_pos));
+
+      surf.VlineColor(GetPositionX()+txt_before_cursor.GetWidth(),
+              GetPositionY()+2,
+              GetPositionY()+GetSizeY()-4, c_white);
     }
 }

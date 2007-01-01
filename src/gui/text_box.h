@@ -27,12 +27,16 @@
 
 class TextBox : public Label
 {
+protected:
+  std::string::size_type cursor_pos;
 public:
   TextBox(const std::string &label, const Rectanglei &rect, Font& _font);
   ~TextBox();
 
   void SendKey(SDL_keysym key);
   void Draw(const Point2i &mousePosition, Surface& surf) const;
+  void SetText(std::string const &new_txt);
+  void SetCursor(std::string::size_type pos);
 };
 
 #endif
