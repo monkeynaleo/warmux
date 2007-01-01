@@ -41,15 +41,28 @@ BazookaRocket::BazookaRocket(ExplosiveWeaponConfig& cfg,
 void BazookaRocket::Refresh()
 {
   WeaponProjectile::Refresh();
-  image->SetRotation_rad(GetSpeedAngle());
-  smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
-                                   GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+  if(!IsDrowned())
+  {
+    image->SetRotation_rad(GetSpeedAngle());
+    smoke_engine.AddPeriodic(Point2i(GetX() + GetWidth() / 2,
+                                     GetY() + GetHeight()/ 2), particle_DARK_SMOKE, false, -1, 2.0);
+  }
+  else
+  {
+    image->SetRotation_rad(M_PI_2);
+  }
 }
 
 void BazookaRocket::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("The rocket has left the battlefield..."));
   WeaponProjectile::SignalOutOfMap();
+}
+
+void BazookaRocket::SignalDrowning()
+{
+  smoke_engine.Stop();
+  WeaponProjectile::SignalDrowning();
 }
 
 //-----------------------------------------------------------------------------
