@@ -74,7 +74,7 @@ msgstr "%s kuoli kömpelyyteensä!"
 msgid "%s is next to a mine!"
 msgstr "%s on aivan miinan vieressä!"
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:152
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -84,7 +84,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s (joukkue %s) kuoli."
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:146
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -120,7 +120,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Tekijät:"
 
-#: src/weapon/auto_bazooka.cpp:144
+#: src/weapon/auto_bazooka.cpp:153
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Automaattibazooka"
@@ -130,7 +130,7 @@ msgstr "Automaattibazooka"
 msgid "Baseball Bat"
 msgstr "Pesäpallomaila"
 
-#: src/weapon/bazooka.cpp:60
+#: src/weapon/bazooka.cpp:73
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -306,7 +306,7 @@ msgstr "Alusta objektit"
 msgid "Initialise teams"
 msgstr "Alusta joukkueet"
 
-#: src/object/bonus_box.cpp:207
+#: src/object/bonus_box.cpp:202
 #, fuzzy
 msgid "Is it a gift?"
 msgstr "Onko se lahja?"
@@ -490,7 +490,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Ohjus on poistunut taistelukentältä..."
 
-#: src/weapon/auto_bazooka.cpp:128
+#: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Automaattiohjus on poistunut taistelukentältä..."
 
@@ -509,7 +509,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Ohjus on poistunut taistelukentältä..."
 
-#: src/weapon/bazooka.cpp:51 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
 #, fuzzy
 msgid "The rocket has left the battlefield..."

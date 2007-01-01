@@ -74,7 +74,7 @@ msgstr "%s öldü, çünkü bir beceriksiz!"
 msgid "%s is next to a mine!"
 msgstr "%s bir mayının yanında!"
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:152
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -84,7 +84,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s takımı sırasını atladı."
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:146
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -118,7 +118,7 @@ msgstr "Örs"
 msgid "Authors:"
 msgstr "Yazarlar:"
 
-#: src/weapon/auto_bazooka.cpp:144
+#: src/weapon/auto_bazooka.cpp:153
 msgid "Automatic Bazooka"
 msgstr "Otomatik Bazuka"
 
@@ -127,7 +127,7 @@ msgstr "Otomatik Bazuka"
 msgid "Baseball Bat"
 msgstr "Beyzbol sopası"
 
-#: src/weapon/bazooka.cpp:60
+#: src/weapon/bazooka.cpp:73
 msgid "Bazooka"
 msgstr "Bazuka"
 
@@ -303,7 +303,7 @@ msgstr "Nesneler yükleniyor"
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
-#: src/object/bonus_box.cpp:207
+#: src/object/bonus_box.cpp:202
 msgid "Is it a gift?"
 msgstr "Bu bir hediye mi?"
 
@@ -480,7 +480,7 @@ msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
 msgid "The Polecat left the battlefield before exploding"
 msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
 
-#: src/weapon/auto_bazooka.cpp:128
+#: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
 msgstr "Otomatik roket savaş alanını terketti..."
 
@@ -499,7 +499,7 @@ msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
 
-#: src/weapon/bazooka.cpp:51 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Roket savaş alanını terketti..."

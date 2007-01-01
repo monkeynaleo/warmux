@@ -73,7 +73,7 @@ msgstr "%s kicsit ügyefogyott volt, így hát távozott az élő sorából!"
 msgid "%s is next to a mine!"
 msgstr "%s egy taposó akna mellett ténfereg!"
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:152
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -83,7 +83,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s (%s csapat) meghalt."
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:146
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Authors:"
 msgstr "Szerzők:"
 
-#: src/weapon/auto_bazooka.cpp:144
+#: src/weapon/auto_bazooka.cpp:153
 #, fuzzy
 msgid "Automatic Bazooka"
 msgstr "Automatikus tűzelésű rakétavető"
@@ -129,7 +129,7 @@ msgstr "Automatikus tűzelésű rakétavető"
 msgid "Baseball Bat"
 msgstr "Baseball"
 
-#: src/weapon/bazooka.cpp:60
+#: src/weapon/bazooka.cpp:73
 msgid "Bazooka"
 msgstr "Rakétavető"
 
@@ -310,7 +310,7 @@ msgstr "Felkészülés"
 msgid "Initialise teams"
 msgstr "Felkészülés"
 
-#: src/object/bonus_box.cpp:207
+#: src/object/bonus_box.cpp:202
 msgid "Is it a gift?"
 msgstr ""
 
@@ -492,7 +492,7 @@ msgstr ""
 msgid "The Polecat left the battlefield before exploding"
 msgstr ""
 
-#: src/weapon/auto_bazooka.cpp:128
+#: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
 msgstr ""
 
@@ -508,7 +508,7 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr ""
 
-#: src/weapon/bazooka.cpp:51 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr ""
