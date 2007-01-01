@@ -74,7 +74,7 @@ msgstr "%s est mort à cause de sa maladresse!"
 msgid "%s is next to a mine!"
 msgstr "%s est près d'une mine ..."
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:152
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -84,7 +84,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s a sauté son tour."
 
-#: src/object/bonus_box.cpp:155
+#: src/object/bonus_box.cpp:146
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -119,7 +119,7 @@ msgstr "Enclume"
 msgid "Authors:"
 msgstr "Auteurs :"
 
-#: src/weapon/auto_bazooka.cpp:144
+#: src/weapon/auto_bazooka.cpp:153
 msgid "Automatic Bazooka"
 msgstr "Bazooka automatique"
 
@@ -128,7 +128,7 @@ msgstr "Bazooka automatique"
 msgid "Baseball Bat"
 msgstr "Base-ball"
 
-#: src/weapon/bazooka.cpp:60
+#: src/weapon/bazooka.cpp:73
 msgid "Bazooka"
 msgstr "Bazooka"
 
@@ -304,7 +304,7 @@ msgstr "Initialisation des objets"
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
-#: src/object/bonus_box.cpp:207
+#: src/object/bonus_box.cpp:202
 msgid "Is it a gift?"
 msgstr "Tiens, un cadeau !"
 
@@ -485,7 +485,7 @@ msgid "The Polecat left the battlefield before exploding"
 msgstr ""
 "La grenade à fragmentation a quitté le champs de bataille avant d'exploser."
 
-#: src/weapon/auto_bazooka.cpp:128
+#: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
 msgstr "La roquette automatique est partie dans un autre monde ..."
 
@@ -507,7 +507,7 @@ msgid "The grenade left the battlefield before exploding"
 msgstr ""
 "La grenade à fragmentation a quitté le champs de bataille avant d'exploser."
 
-#: src/weapon/bazooka.cpp:51 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "La roquette est partie dans un autre monde ..."
