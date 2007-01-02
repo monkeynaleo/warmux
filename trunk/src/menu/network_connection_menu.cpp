@@ -120,35 +120,39 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
 {
   Widget* w = widgets.Clic(mousePosition, button);
 
-  if (w == next_action_bt) {
-    switch (current_action) {
-    case NET_HOST:
-      SetAction(NET_CONNECT_LOCAL);
-      break;
-    case NET_CONNECT_LOCAL:
-      SetAction(NET_BROWSE_INTERNET);
-      break;
-    case NET_BROWSE_INTERNET:
-      SetAction(NET_HOST);
-      break;
-    }
-    return;
-  } 
+  if ((w == next_action_bt) ||
+      (w == action_label && (button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN)))
+    {
+      switch (current_action) {
+      case NET_HOST:
+	SetAction(NET_CONNECT_LOCAL);
+	break;
+      case NET_CONNECT_LOCAL:
+	SetAction(NET_BROWSE_INTERNET);
+	break;
+      case NET_BROWSE_INTERNET:
+	SetAction(NET_HOST);
+	break;
+      }
+      return;
+    } 
 
-  if (w == previous_action_bt) {
-    switch (current_action) {
-    case NET_HOST:
-      SetAction(NET_BROWSE_INTERNET);
-      break;
-    case NET_CONNECT_LOCAL:
-      SetAction(NET_HOST);
-      break;
-    case NET_BROWSE_INTERNET:
-      SetAction(NET_CONNECT_LOCAL);
-      break;
+  if ((w == previous_action_bt) ||
+      (w == action_label && (button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP)))
+    {
+      switch (current_action) {
+      case NET_HOST:
+	SetAction(NET_BROWSE_INTERNET);
+	break;
+      case NET_CONNECT_LOCAL:
+	SetAction(NET_HOST);
+	break;
+      case NET_BROWSE_INTERNET:
+	SetAction(NET_CONNECT_LOCAL);
+	break;
+      }
+      return;
     }
-    return;
-  }
 }
 
 void NetworkConnectionMenu::SetAction(network_menu_action_t action)
