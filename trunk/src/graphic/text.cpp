@@ -107,6 +107,8 @@ void Text::RenderMultiLines()
   std::vector<std::string> lines;
   uint index_lines = 0;
   uint index_word = 0;
+  uint line_width = 0;
+  uint max_line_width = 0;
 
   while (index_word < tokens.size()) 
     {
@@ -114,15 +116,28 @@ void Text::RenderMultiLines()
 	// first word of a line
 	lines.push_back(tokens.at(index_word));
 
-      } else {
+	// compute current line size
+	line_width = font->GetWidth(tokens.at(index_word));
+	if (line_width > max_line_width) {
+	    max_line_width = line_width;
+	}
 
-	if ( font->GetWidth(lines.at(index_lines)+" "+tokens.at(index_word)) > int(max_width) ) {
+      } else {
+	line_width = font->GetWidth(lines.at(index_lines)+" "+tokens.at(index_word));
+
+	if ( line_width > max_width ) {
 	  
 	  // line will be too long : prepare next line!
 	  index_lines++;
 	  index_word--;
+
 	} else {
 	  lines.at(index_lines) += " " + tokens.at(index_word);
+
+	  // this is the longest line
+	  if (line_width > max_line_width) {
+	    max_line_width = line_width;
+	  }
 	}
 	
       }
@@ -133,11 +148,14 @@ void Text::RenderMultiLines()
   // really Render !
 
   // First, creating a destination surface
-  Point2i size(max_width, (font->GetHeight()+2) * lines.size());
+  if (max_line_width == 0) {
+    max_line_width = max_width;
+  }
+  Point2i size(max_line_width, (font->GetHeight()+2) * lines.size());
   surf.NewSurface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   surf = surf.DisplayFormatAlpha();
 
-  // Puting pixels of each image in destination surface
+  // Putting pixels of each image in destination surface
   surf.Lock();
 
   // for each lines
@@ -164,7 +182,7 @@ void Text::RenderMultiLines()
   background.NewSurface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   background = background.DisplayFormatAlpha();
 
-  // Puting pixels of each image in destination surface
+  // Putting pixels of each image in destination surface
   background.Lock();
 
   // for each lines
