@@ -23,6 +23,9 @@
 #include "widget.h"
 #include "msg_box.h"
 
+const uint vmargin = 5;
+const uint hmargin = 5;
+
 MsgBox::MsgBox(const Rectanglei& rect, Font* _font) :
    Widget(rect)
 {
@@ -33,14 +36,14 @@ void MsgBox::Flush()
 {
   std::list<Text *>::iterator it ;
 
-  uint y = 5;
+  uint y = vmargin;
   for (it = messages.begin(); it != messages.end(); it++) 
     {
-      y += (*it)->GetHeight() + 5;
+      y += (*it)->GetHeight() + vmargin;
 
       while (int(y) > GetSizeY() && !messages.empty()) {
 	Text* tmp = messages.front();
-	y -= tmp->GetHeight() - 5; 
+	y -= tmp->GetHeight() - vmargin; 
 	delete tmp;
 	messages.pop_front();
       }
@@ -50,7 +53,7 @@ void MsgBox::Flush()
 void MsgBox::NewMessage(const std::string &msg)
 {
   messages.push_back(new Text(msg));
-  messages.back()->SetMaxWidth(GetSizeX());
+  messages.back()->SetMaxWidth(GetSizeX() - (2*hmargin));
 
   // Remove old messages if needed
   Flush();
@@ -66,11 +69,11 @@ void MsgBox::Draw(const Point2i &mousePosition, Surface& surf) const
 
   // Draw the messages
   std::list<Text*>::const_iterator it;
-  int x = GetPositionX()+5;
-  int y = GetPositionY()+5;
+  int x = GetPositionX()+hmargin;
+  int y = GetPositionY()+vmargin;
   for (it = messages.begin(); it != messages.end(); it++) {
     (*it)->DrawTopLeft(Point2i(x,y));
-    y += (*it)->GetHeight() + 5;
+    y += (*it)->GetHeight() + vmargin;
   }
 }
 
@@ -81,7 +84,7 @@ void MsgBox::SetSizePosition(const Rectanglei &rect)
   // render the messages with the correct width
   std::list<Text*>::iterator it;
   for (it = messages.begin(); it != messages.end(); it++) {
-    (*it)->SetMaxWidth(GetSizeX());
+    (*it)->SetMaxWidth(GetSizeX() - (2*hmargin));
   }
   
   // Remove old messages if needed
