@@ -150,9 +150,19 @@
 </section>
 
 <section name ="mouse">
-  <surface name="pointer_select" file="interface/pointer_select.png"/>
-  <surface name="pointer_move" file="interface/pointer_move.png"/>
-  <surface name="pointer_aim" file="interface/pointer_aim.png"/>
+  <surface name="pointer_select" file="interface/cursors/hand-cursor.png"/>
+  <surface name="pointer_move" file="interface/cursors/hand-move.png"/>
+  <surface name="pointer_aim" file="interface/cursors/hand-fire.png"/>
+  <surface name="pointer_fire_right" file="interface/cursors/hand-fire.right.png"/>
+  <surface name="pointer_fire_left" file="interface/cursors/hand-fire.left.png"/>
+  <surface name="pointer_arrow_top" file="interface/cursors/arrow-top.png"/>
+  <surface name="pointer_arrow_right" file="interface/cursors/arrow-right.png"/>
+  <surface name="pointer_arrow_left" file="interface/cursors/arrow-left.png"/>  
+  <surface name="pointer_arrow_down" file="interface/cursors/arrow-left.png"/>
+  <surface name="pointer_arrow_top_right" file="interface/cursors/arrow-top.right.png"/>
+  <surface name="pointer_arrow_top_left" file="interface/cursors/arrow-top.left.png"/>
+  <surface name="pointer_arrow_down_right" file="interface/cursors/arrow-down.right.png"/>
+  <surface name="pointer_arrow_down_left" file="interface/cursors/arrow-down.left.png"/>
 </section>
 
 <section name="energy_bar">
