@@ -63,7 +63,8 @@ int Question::TreatsKey (SDL_Event &event){
   return -1;
 }
 
-void Question::Draw() const{
+void Question::Draw() const
+{
   AppWormux * app = AppWormux::GetInstance();
 
   if(background != NULL)
@@ -92,7 +93,8 @@ void Question::Draw() const{
   }
 }
 
-int Question::Ask () {
+int Question::Ask () 
+{
   SDL_Event event;
 
   int answer = default_choice.value;
@@ -114,6 +116,11 @@ int Question::Ask () {
 	  end_of_boucle = true;
       }
     } // SDL_PollEvent
+
+    // To not use all CPU
+    if (!end_of_boucle) {
+      SDL_Delay(50);
+    }
 
     AppWormux::GetInstance()->video.Flip();
   } while (!end_of_boucle);
