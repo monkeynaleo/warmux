@@ -33,12 +33,16 @@
 Question::Question()
 {
   background = NULL;
+  text = NULL;
 }
 
 Question::~Question()
 {
-  if(background != NULL)
+  if (background != NULL)
     delete background;
+
+  if (text != NULL)
+    delete text;
 }
 
 int Question::TreatsKey (SDL_Event &event){
@@ -66,11 +70,25 @@ void Question::Draw() const{
   {
     background->Blit(app->video.window,  app->video.window.GetSize() / 2 - background->GetSize() / 2);
   }
-  if(message != "")
+  else if (text->GetText() != "")
   {
-    DrawTmpBoxTextWithReturns (*Font::GetInstance(Font::FONT_BIG),
-                               app->video.window.GetSize() / 2,
-                               message, 10);
+    uint x = app->video.window.GetWidth()/2 - text->GetWidth()/2 - 10;
+    uint y = app->video.window.GetHeight()/2 - text->GetHeight()/2 - 10;
+
+    Rectanglei rect(x, y, 
+		    text->GetWidth() + 20, 
+		    text->GetHeight() + 20);
+  
+    AppWormux * app = AppWormux::GetInstance();
+    
+    app->video.window.BoxColor(rect, defaultColorBox);
+    app->video.window.RectangleColor(rect, defaultColorRect);
+  }
+
+  if(text->GetText() != "")
+  {
+    text->DrawCenterTop(app->video.window.GetWidth()/2, 
+			app->video.window.GetHeight()/2);
   }
 }
 
@@ -106,8 +124,10 @@ int Question::Ask () {
 }
 
 void Question::Set (const std::string &pmessage,
-		    bool default_active, int default_value,const std::string& bg_sprite){
-  message = pmessage;
+		    bool default_active, int default_value,const std::string& bg_sprite)
+{
+  text = new Text(pmessage, white_color, Font::GetInstance(Font::FONT_BIG));
+
   default_choice.active = default_active;
   default_choice.value = default_value;
 
@@ -124,5 +144,9 @@ void Question::Set (const std::string &pmessage,
     background->cache.EnableLastFrameCache();
     background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
     resource_manager.UnLoadXMLProfile( res);
+  }
+  else
+  {
+    text->SetMaxWidth(AppWormux::GetInstance()->video.window.GetWidth()/2);
   }
 }
