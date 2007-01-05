@@ -90,6 +90,7 @@ void Plane::Shoot(double speed, Point2i& target)
   camera.FollowObject(this, true, true);
 
   lst_objects.AddObject(this);
+  camera.SetCloseFollowing(true);
 }
 
 void Plane::DropBomb()
