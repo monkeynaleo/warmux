@@ -25,6 +25,7 @@
 //-----------------------------------------------------------------------------
 #include "../include/base.h"
 #include "../graphic/sprite.h"
+#include "../graphic/text.h"
 #include <string>
 #include <list>
 #include <SDL_events.h>
@@ -59,8 +60,9 @@ class Question
   } default_choice;
 
   int TreatsKey (SDL_Event &event);
+
   // Message to display
-  std::string message;
+  Text * text;
 
 public:
   Question();
