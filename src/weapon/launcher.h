@@ -33,7 +33,7 @@ class WeaponProjectile : public PhysicalObj
 {
   protected:
     Sprite *image;
-
+    bool camera_follow_closely;
     bool explode_colliding_character; // before timeout.
     bool explode_with_timeout;
     bool explode_with_collision;

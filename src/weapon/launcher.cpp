@@ -108,6 +108,7 @@ WeaponProjectile::WeaponProjectile (const std::string &name,
   image = resource_manager.LoadSprite( weapons_res_profile, name);
   image->EnableRotationCache(32);
   SetSize(image->GetSize());
+  camera_follow_closely = true;
 
   // Set rectangle test
   int dx = image->GetWidth()/2-1;
@@ -149,6 +150,8 @@ void WeaponProjectile::Shoot(double strength)
 
   lst_objects.AddObject (this);
   camera.FollowObject(this, true, true, true);
+  if (camera_follow_closely)
+    camera.SetCloseFollowing(true);
 }
 
 void WeaponProjectile::ShootSound()
@@ -227,6 +230,7 @@ void WeaponProjectile::SignalGhostState(bool)
 {
   if (launcher != NULL && !launcher->ignore_ghost_state_signal)
     launcher->SignalProjectileGhostState();
+  camera.SetCloseFollowing(false);
 }
 
 void WeaponProjectile::SignalOutOfMap()
