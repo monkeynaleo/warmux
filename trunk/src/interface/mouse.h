@@ -35,6 +35,14 @@ public:
     POINTER_STANDARD,
     POINTER_SELECT,
     POINTER_MOVE,
+    POINTER_ARROW_UP,
+    POINTER_ARROW_UP_RIGHT,
+    POINTER_ARROW_UP_LEFT,
+    POINTER_ARROW_DOWN,
+    POINTER_ARROW_DOWN_RIGHT,
+    POINTER_ARROW_DOWN_LEFT,
+    POINTER_ARROW_RIGHT,
+    POINTER_ARROW_LEFT,
     POINTER_AIM
   } pointer_t;
 
@@ -48,12 +56,24 @@ private:
 
   static Mouse * singleton;
 
-  Surface pointer_select, pointer_move, pointer_aim;
+  Surface pointer_select, 
+    pointer_move, 
+    pointer_arrow_up,
+    pointer_arrow_up_right,
+    pointer_arrow_up_left,
+    pointer_arrow_down,
+    pointer_arrow_down_right,
+    pointer_arrow_down_left,
+    pointer_arrow_right,
+    pointer_arrow_left,
+    pointer_aim;
 
   Mouse();
-  bool ScrollPointer();
+  pointer_t ScrollPointer() const;
   bool DrawMovePointer();
+  void ScrollCamera() const;
 
+  const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 public:
 
   static Mouse * GetInstance();
@@ -75,7 +95,6 @@ public:
   bool ClicG() const;
   bool ClicD() const;
   bool ClicM() const;
-  void ScrollCamera();
 
   // Choose the pointer
   pointer_t SetPointer(pointer_t pointer);

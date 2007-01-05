@@ -155,12 +155,12 @@
   <surface name="pointer_aim" file="interface/cursors/hand-fire.png"/>
   <surface name="pointer_fire_right" file="interface/cursors/hand-fire.right.png"/>
   <surface name="pointer_fire_left" file="interface/cursors/hand-fire.left.png"/>
-  <surface name="pointer_arrow_top" file="interface/cursors/arrow-top.png"/>
+  <surface name="pointer_arrow_up" file="interface/cursors/arrow-top.png"/>
   <surface name="pointer_arrow_right" file="interface/cursors/arrow-right.png"/>
   <surface name="pointer_arrow_left" file="interface/cursors/arrow-left.png"/>  
-  <surface name="pointer_arrow_down" file="interface/cursors/arrow-left.png"/>
-  <surface name="pointer_arrow_top_right" file="interface/cursors/arrow-top.right.png"/>
-  <surface name="pointer_arrow_top_left" file="interface/cursors/arrow-top.left.png"/>
+  <surface name="pointer_arrow_down" file="interface/cursors/arrow-down.png"/>
+  <surface name="pointer_arrow_up_right" file="interface/cursors/arrow-top.right.png"/>
+  <surface name="pointer_arrow_up_left" file="interface/cursors/arrow-top.left.png"/>
   <surface name="pointer_arrow_down_right" file="interface/cursors/arrow-down.right.png"/>
   <surface name="pointer_arrow_down_left" file="interface/cursors/arrow-down.left.png"/>
 </section>
