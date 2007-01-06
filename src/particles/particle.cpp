@@ -64,8 +64,9 @@ Particle::~Particle()
 
 void Particle::Draw()
 {
-  if (m_left_time_to_live > 0)
+  if (m_left_time_to_live > 0) {
     image->Draw(GetPosition());
+  }
 }
 
 void Particle::Refresh()
@@ -185,44 +186,45 @@ void ParticleEngine::AddNow(const Point2i &position,
 
   for (uint i=0 ; i < nb_particles ; i++) {
     switch (type) {
-      case particle_SMOKE : particle = new Smoke();
-                            break;
-      case particle_ILL_BUBBLE : particle = new IllBubble();
-                            break;
-      case particle_DARK_SMOKE : particle = new DarkSmoke();
-                            break;
-      case particle_FIRE : particle = new FireParticle();
-                           break;
-      case particle_STAR : particle = new StarParticle();
-                           break;
-      case particle_BULLET : particle = new BulletParticle();
-                           break;
-      case particle_POLECAT_FART : particle = new PolecatFart();
-                           break;
-      case particle_GROUND : particle = new GroundParticle(Point2i(10,10), position);
-                           break;
-      case particle_AIR_HAMMER : particle = new GroundParticle(Point2i(21,18), position); 
-	// Half the size of the airhammer impact
-	// Dirty, but we have no way to read the
-	// impact size from here ...
-                           break;
-      case particle_MAGIC_STAR : particle = new MagicStarParticle();
-                                 break;
-      default : particle = NULL;
-                assert(0);
-                break;
+    case particle_SMOKE : particle = new Smoke();
+      break;
+    case particle_ILL_BUBBLE : particle = new IllBubble();
+      break;
+    case particle_DARK_SMOKE : particle = new DarkSmoke();
+      break;
+    case particle_FIRE : particle = new FireParticle();
+      break;
+    case particle_STAR : particle = new StarParticle();
+      break;
+    case particle_BULLET : particle = new BulletParticle();
+      break;
+    case particle_POLECAT_FART : particle = new PolecatFart();
+      break;
+    case particle_GROUND : particle = new GroundParticle(Point2i(10,10), position);
+      break;
+    case particle_AIR_HAMMER : particle = new GroundParticle(Point2i(21,18), position); 
+      // Half the size of the airhammer impact
+      // Dirty, but we have no way to read the
+      // impact size from here ...
+      break;
+    case particle_MAGIC_STAR : particle = new MagicStarParticle();
+      break;
+    default : particle = NULL;
+      assert(0);
+      break;
     }
 
     if (particle != NULL) {
+      
       if( norme == -1 )
-		  tmp_norme = double(randomObj.GetLong(0, 5000))/100;
+	tmp_norme = double(randomObj.GetLong(0, 5000))/100;
       else
-		  tmp_norme = norme;
+	tmp_norme = norme;
 
       if( angle == -1 )
-		  tmp_angle = - double(randomObj.GetLong(0, 3000))/1000;
+	tmp_angle = - double(randomObj.GetLong(0, 3000))/1000;
       else
-		  tmp_angle = angle;
+	tmp_angle = angle;
 
       particle->SetXY(position);
       particle->SetOnTop(upper);
