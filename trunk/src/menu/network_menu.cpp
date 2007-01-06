@@ -192,6 +192,16 @@ void NetworkMenu::sig_ok()
 {
   if(network.IsServer())
   {
+    if(teams_list.playing_list.size() <= 1)
+    {
+      msg_box->NewMessage(Format(ngettext("There is only %i team.", "There are only %i teams.", teams_list.playing_list.size()), teams_list.playing_list.size()));
+      return;
+    }
+    if(network.connected_player <= 1)
+    {
+      msg_box->NewMessage(_("You are alone..."));
+      return;
+    }
     if(network.connected_player != network.client_inited)
     {
       int nbr = network.connected_player - network.client_inited;
