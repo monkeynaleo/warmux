@@ -147,7 +147,7 @@ public:
   virtual void Draw() = 0;
 
   // Damage handling
-  void AddDamage(uint damage_points);
+  virtual void AddDamage(uint damage_points);
 
   //-------- state ----
   void Init();

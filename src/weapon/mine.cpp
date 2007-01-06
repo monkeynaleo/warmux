@@ -107,18 +107,40 @@ void ObjMine::Detection()
 
   MSG_DEBUG("mine", "Escape_time is finished : %d", current_time);
 
-  FOR_ALL_LIVING_CHARACTERS(equipe, ver)
-  { 
-    if (MeterDistance (GetCenter(), ver->GetCenter()) < static_cast<MineConfig&>(cfg).detection_range
-        && !animation)
-    {
+  double detection_range = static_cast<MineConfig&>(cfg).detection_range;
+
+  FOR_ALL_LIVING_CHARACTERS(team, character) {
+    if (MeterDistance(GetCenter(), character->GetCenter()) < detection_range &&
+        !animation) {
       std::string txt = Format(_("%s is next to a mine!"),
-                                  ver -> GetName().c_str());
-      GameMessages::GetInstance()->Add (txt);
+                               character->GetName().c_str());
+      GameMessages::GetInstance()->Add(txt);
       StartTimeout();
       return;
     }
   }
+  double speed_detection = static_cast<MineConfig&>(cfg).speed_detection;
+  double norm, angle;
+  FOR_EACH_OBJECT(obj) {
+    if ((*obj) != this && !animation && GetName() != (*obj)->GetName() &&
+        MeterDistance(GetCenter(), (*obj)->GetCenter()) < detection_range) {
+      (*obj)->GetSpeed(norm, angle);
+      if(norm < speed_detection) {
+        std::string txt = Format(_("%s is next to a mine!"),
+                                 (*obj)->GetName().c_str());
+        GameMessages::GetInstance()->Add(txt);
+        StartTimeout();
+        return;
+      }
+    }
+  }
+}
+
+void ObjMine::AddDamage(uint damage_points)
+{
+  // Don't call Explosion here, we're already in an explosion
+  attente = 0;
+  animation=true;
 }
 
 void ObjMine::Refresh()
@@ -220,7 +242,8 @@ MineConfig& Mine::cfg()
 
 MineConfig::MineConfig()
 {
-  detection_range= 1;
+  detection_range = 1;
+  speed_detection = 2;
   timeout = 3;
   escape_time = 2;
 }
@@ -230,4 +253,5 @@ void MineConfig::LoadXml(xmlpp::Element *elem)
   ExplosiveWeaponConfig::LoadXml (elem);
   XmlReader::ReadUint(elem, "escape_time", escape_time);
   XmlReader::ReadDouble(elem, "detection_range", detection_range);
+  XmlReader::ReadDouble(elem, "speed_detection", speed_detection);
 }
