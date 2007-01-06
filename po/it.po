@@ -19,10 +19,34 @@ msgstr ""
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/network/distant_cpu.cpp:70
+#, fuzzy
+msgid " has joined the party"
+msgstr "%s è caduto fuori dalla mappa!"
+
+#: src/network/distant_cpu.cpp:79
+#, fuzzy
+msgid " has left the party"
+msgstr "%s è caduto fuori dalla mappa!"
+
 #: src/map/maps_list.cpp:275
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! La mappa %s non è stata trovata :-("
+
+#: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:227
+#, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:232
+#, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/game/game_loop.cpp:695
 #, fuzzy, c-format
@@ -103,7 +127,7 @@ msgstr "(morto)"
 msgid "(unlimited)"
 msgstr "(illimitato)"
 
-#: src/weapon/air_attack.cpp:159
+#: src/weapon/air_attack.cpp:160
 #, fuzzy
 msgid "Air Attack"
 msgstr "Attacco aereo"
@@ -111,6 +135,11 @@ msgstr "Attacco aereo"
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr ""
+
+#: src/team/results.cpp:143
+#, fuzzy
+msgid "All teams"
+msgstr "Aspetto le squadre"
 
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
@@ -171,8 +200,28 @@ msgstr "ClusterBomb"
 msgid "Commit Suicide"
 msgstr "Suicidato"
 
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Fine della partita"
+
+#: src/menu/network_connection_menu.cpp:65
+#: src/menu/network_connection_menu.cpp:180
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Fine della partita"
+
+#: src/menu/network_connection_menu.cpp:172
+#, fuzzy
+msgid "Connect to game"
+msgstr "Fine della partita"
+
 #: src/weapon/construct.cpp:43
 msgid "Construct"
+msgstr ""
+
+#: src/network/index_server.cpp:88
+msgid "Contacting main server..."
 msgstr ""
 
 #: src/menu/main_menu.cpp:110
@@ -239,10 +288,35 @@ msgstr ""
 "Errore :\n"
 "%s"
 
+#: src/menu/network_connection_menu.cpp:222
+#, fuzzy, c-format
+msgid "Error: Unable to connect to %s:%s"
+msgstr "Impossibile aprire la directory delle skin (%s)!"
+
+#: src/menu/network_connection_menu.cpp:200
+#, fuzzy
+msgid "Error: Unable to contact index server to host a game"
+msgstr "Impossibile aprire la directory delle mappe (%s)!"
+
+#: src/menu/network_connection_menu.cpp:230
+#, fuzzy
+msgid "Error: Unable to contact index server to search an internet game"
+msgstr "Impossibile aprire la directory delle mappe (%s)!"
+
+#: src/menu/network_connection_menu.cpp:212
+#, fuzzy
+msgid "Error: Unable to start server"
+msgstr "Impossibile aprire la directory delle mappe (%s)!"
+
 #: src/team/team.cpp:144
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Errore: impossibile trovare la skin \"%s\" per la squadra \"%s\"."
+
+#: src/network/network.cpp:78
+#, fuzzy
+msgid "Failed to initialize network library!"
+msgstr "Impossibile avviare le librerie SDL: %s"
 
 #: src/game/game_loop.cpp:162
 msgid "Find a random position for characters"
@@ -271,6 +345,19 @@ msgstr "Pistola"
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directory HOME (environment variable $HOME) non esiste!"
+
+#: src/menu/network_connection_menu.cpp:109
+msgid "Have a good game!"
+msgstr ""
+
+#: src/menu/team_box.cpp:47
+msgid "Head commander"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:164
+#, fuzzy
+msgid "Host a game"
+msgstr "Fine della partita"
 
 #: src/game/game_loop.cpp:730
 msgid "Hurry up, you are too slow !!"
@@ -308,12 +395,32 @@ msgstr "Inizializzazione oggetti"
 msgid "Initialise teams"
 msgstr "Inizializzazione squadre"
 
+#: src/network/index_server.cpp:99
+msgid "Invalid index server adress!"
+msgstr ""
+
+#: src/network/network.cpp:198
+msgid "Invalid port!"
+msgstr ""
+
+#: src/network/network.cpp:145
+msgid "Invalid server adress!"
+msgstr ""
+
 #: src/object/bonus_box.cpp:202
 msgid "Is it a gift?"
 msgstr "È un regalo ?"
 
+#: src/network/index_server.cpp:297
+msgid "It doesn't seem to be a valid Wormux server..."
+msgstr ""
+
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:117
+msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
 #: src/map/maps_list.cpp:183
@@ -322,6 +429,11 @@ msgstr "Caricamento mappa :"
 
 #: src/team/teams_list.cpp:106
 msgid "Load teams:"
+msgstr "Caricamento squadre :"
+
+#: src/menu/network_teams_selection_box.cpp:33
+#, fuzzy
+msgid "Local teams:"
 msgstr "Caricamento squadre :"
 
 #: src/weapon/lowgrav.cpp:38
@@ -337,6 +449,11 @@ msgstr "Mapa %s, creata da :"
 msgid "Maps"
 msgstr "Mappa"
 
+#: src/menu/network_menu.cpp:90
+#, fuzzy
+msgid "Max number of players:"
+msgstr "Numero di giocatori per squadra :"
+
 #: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Maximum FPS"
@@ -345,6 +462,26 @@ msgstr "Numero massimo di FPS:"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mina"
+
+#: src/menu/results_menu.cpp:169
+#, fuzzy
+msgid "Most sold-out"
+msgstr "  Most sold-out :  %s (%i).\n"
+
+#: src/menu/results_menu.cpp:159
+#, fuzzy
+msgid "Most useful"
+msgstr "  Il più utile :  %s (%i).\n"
+
+#: src/menu/results_menu.cpp:164
+#, fuzzy
+msgid "Most useless"
+msgstr "  Il meno utile  :  %s (%i).\n"
+
+#: src/menu/results_menu.cpp:154
+#, fuzzy
+msgid "Most violent"
+msgstr "  Il più violento  :  %s (%i).\n"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -363,6 +500,22 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nessun elemento <%s> trovato nel file di conf. xml!"
 
+#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
+#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
+#, fuzzy
+msgid "Nobody!"
+msgstr "Nessuno"
+
+#: src/menu/team_box.cpp:53
+#, fuzzy
+msgid "Number of characters"
+msgstr "Numero di giocatori per squadra :"
+
+#: src/menu/teams_selection_box.cpp:31
+#, fuzzy
+msgid "Number of teams:"
+msgstr "Numero di giocatori per squadra :"
+
 #: src/menu/main_menu.cpp:104
 msgid "Options"
 msgstr "Opzioni"
@@ -379,6 +532,12 @@ msgstr ""
 msgid "Play"
 msgstr "Gioca"
 
+#: src/menu/network_teams_selection_box.cpp:52
+#: src/menu/teams_selection_box.cpp:50
+#, fuzzy
+msgid "Player"
+msgstr "Gioca"
+
 #: src/menu/options_menu.cpp:68
 #, fuzzy
 msgid "Player energy?"
@@ -393,6 +552,10 @@ msgstr "Mostra il nome del giocatore ?"
 msgid "Polecat Launcher"
 msgstr ""
 
+#: src/menu/network_connection_menu.cpp:81
+msgid "Port:"
+msgstr ""
+
 #: src/menu/main_menu.cpp:116
 msgid "Quit"
 msgstr "Esci"
@@ -403,6 +566,14 @@ msgstr "Esci da Wormux"
 
 #: src/game/config.cpp:158
 msgid "Reading personal config file"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
+#: src/menu/team_box.cpp:70
+msgid "Remote"
 msgstr ""
 
 #: src/menu/options_menu.cpp:82
@@ -422,6 +593,14 @@ msgstr "Avvia il gioco"
 msgid "Scroll on border"
 msgstr ""
 
+#: src/menu/network_connection_menu.cpp:75
+msgid "Server address:"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:87
+msgid "Server available on Internet"
+msgstr ""
+
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -433,6 +612,12 @@ msgstr ""
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:105
+msgid ""
+"Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
+"blowtorch, submachine gun) and surely many other things don't work either!"
 msgstr ""
 
 #: src/menu/options_menu.cpp:102
@@ -456,7 +641,7 @@ msgstr "Avvia una nuova partita"
 msgid "Stock:"
 msgstr "Munizioni :"
 
-#: src/weapon/submachine_gun.cpp:61
+#: src/weapon/submachine_gun.cpp:62
 msgid "Submachine Gun"
 msgstr ""
 
@@ -515,10 +700,37 @@ msgstr "Il razzo è passato in un altro mondo..."
 msgid "The rocket has left the battlefield..."
 msgstr "Il razzo è passato in un altro mondo..."
 
+#: src/menu/network_menu.cpp:197
+#, c-format
+msgid "There is only %i team."
+msgid_plural "There are only %i teams."
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/network/index_server.cpp:78
+#, fuzzy
+msgid "Unable to contact an index server!"
+msgstr "Impossibile aprire la directory delle mappe (%s)!"
+
+#: src/network/network.cpp:158
+#, fuzzy
+msgid "Unable to contact server!"
+msgstr "Impossibile aprire la directory delle mappe (%s)!"
+
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Impossibile avviare le librerie SDL: %s"
+
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Impossibile aprire la directory delle skin (%s)!"
+
+#: src/network/network.cpp:243
+#, fuzzy
+msgid "Unable to listen for client!"
+msgstr "Aspetto i giocatori"
 
 #: src/map/maps_list.cpp:196 src/map/maps_list.cpp:212
 #, c-format
@@ -533,6 +745,25 @@ msgstr "Ricevuta eccezione inaspettata..."
 #: src/main.cpp:146
 msgid "Version"
 msgstr "Versione"
+
+#: src/menu/network_menu.cpp:118
+msgid ""
+"WARNING! Disconnections are not yet handled. So you have to restart Wormux "
+"after each disconnection!"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:103
+msgid ""
+"WARNING!! Network is still under developement and therefore a little "
+"experimental."
+msgstr ""
+
+#: src/menu/network_menu.cpp:208
+#, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
@@ -560,10 +791,19 @@ msgstr "Avvio in corso..."
 msgid "Wormux version "
 msgstr "Wormux Versione"
 
+#: src/include/action_handler.cpp:375
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr ""
+
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "Errore XML nell'avvio della mappa '%s' :"
+
+#: src/menu/network_menu.cpp:202
+msgid "You are alone..."
+msgstr ""
 
 #: src/map/maps_list.cpp:232
 msgid "You need at least one valid map !"
@@ -579,7 +819,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Hai bisogno di almeno due squadre valide !"
 
-#: src/weapon/launcher.cpp:460
+#: src/weapon/launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "Bersaglio mancato"
 
@@ -592,12 +832,20 @@ msgid "general: "
 msgstr ""
 
 #, fuzzy
-#~ msgid " has joined the party"
-#~ msgstr "%s è caduto fuori dalla mappa!"
+#~ msgid "  Most sold-out  :  "
+#~ msgstr "  Most sold-out :  %s (%i).\n"
 
 #, fuzzy
-#~ msgid " has left the party"
-#~ msgstr "%s è caduto fuori dalla mappa!"
+#~ msgid "  Most useful   :  "
+#~ msgstr "  Il più utile :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "  Most useless  :  "
+#~ msgstr "  Il meno utile  :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "  Most violent  :  "
+#~ msgstr "  Il più violento  :  %s (%i).\n"
 
 #~ msgid "%s has lost %u point of energy."
 #~ msgid_plural "%s has lost %u points of energy."
@@ -625,6 +873,9 @@ msgstr ""
 #~ msgid_plural "%s team has won %u teleportations."
 #~ msgstr[0] "la squadra %s vince %u teletrasporto."
 #~ msgstr[1] "la squadra %s vince %u teletrasporti."
+
+#~ msgid "%s team has won.\n"
+#~ msgstr "La squadra %s vince.\n"
 
 #, fuzzy
 #~ msgid "'%s has won %u Air Attack"
@@ -656,117 +907,6 @@ msgstr ""
 #~ msgstr[0] "Il giocatore '%s vince %u attaccho aereo !"
 #~ msgstr[1] "Il giocatore '%s vince %u attacchi aerei !"
 
-#, fuzzy
-#~ msgid "All teams"
-#~ msgstr "Aspetto le squadre"
-
-#, fuzzy
-#~ msgid "Connect !"
-#~ msgstr "Fine della partita"
-
-#, fuzzy
-#~ msgid "Connect to an internet game"
-#~ msgstr "Fine della partita"
-
-#, fuzzy
-#~ msgid "Connect to game"
-#~ msgstr "Fine della partita"
-
-#, fuzzy
-#~ msgid "Connected to "
-#~ msgstr "Fine della partita"
-
-#, fuzzy
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Impossibile avviare le librerie SDL: %s"
-
-#, fuzzy
-#~ msgid "Host a game"
-#~ msgstr "Fine della partita"
-
-#, fuzzy
-#~ msgid "Max number of players:"
-#~ msgstr "Numero di giocatori per squadra :"
-
-#, fuzzy
-#~ msgid "Most sold-out"
-#~ msgstr "  Most sold-out :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most useful"
-#~ msgstr "  Il più utile :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most useless"
-#~ msgstr "  Il meno utile  :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Most violent"
-#~ msgstr "  Il più violento  :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "Nobody!"
-#~ msgstr "Nessuno"
-
-#, fuzzy
-#~ msgid "Number of characters"
-#~ msgstr "Numero di giocatori per squadra :"
-
-#, fuzzy
-#~ msgid "Number of teams:"
-#~ msgstr "Numero di giocatori per squadra :"
-
-#, fuzzy
-#~ msgid "Player"
-#~ msgstr "Gioca"
-
-#, fuzzy
-#~ msgid "Unable to connect"
-#~ msgstr "Impossibile aprire la directory delle skin (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to contact an index server!"
-#~ msgstr "Impossibile aprire la directory delle mappe (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to contact server!"
-#~ msgstr "Impossibile aprire la directory delle mappe (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to join the game..."
-#~ msgstr "Impossibile aprire la directory delle skin (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to listen for client!"
-#~ msgstr "Aspetto i giocatori"
-
-#, fuzzy
-#~ msgid "Unable to start server"
-#~ msgstr "Impossibile aprire la directory delle mappe (%s)!"
-
-#, fuzzy
-#~ msgid "disconnection!"
-#~ msgstr "Fine della partita"
-
-#, fuzzy
-#~ msgid "  Most sold-out  :  "
-#~ msgstr "  Most sold-out :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most useful   :  "
-#~ msgstr "  Il più utile :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most useless  :  "
-#~ msgstr "  Il meno utile  :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most violent  :  "
-#~ msgstr "  Il più violento  :  %s (%i).\n"
-
-#~ msgid "%s team has won.\n"
-#~ msgstr "La squadra %s vince.\n"
-
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr "<infinite_background> needs <is_open> to be set to work correctly!!"
 
@@ -789,6 +929,10 @@ msgstr ""
 
 #~ msgid "ClanLib error :"
 #~ msgstr "Errore ClanLib :"
+
+#, fuzzy
+#~ msgid "Connected to "
+#~ msgstr "Fine della partita"
 
 #~ msgid "Duration of the end of a turn:"
 #~ msgstr "Durata della fine del turno :"
@@ -889,3 +1033,7 @@ msgstr ""
 
 #~ msgid "Weapon:"
 #~ msgstr "Armi :"
+
+#, fuzzy
+#~ msgid "disconnection!"
+#~ msgstr "Fine della partita"

@@ -19,10 +19,30 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/network/distant_cpu.cpp:70
+msgid " has joined the party"
+msgstr "partiye katıldı"
+
+#: src/network/distant_cpu.cpp:79
+msgid " has left the party"
+msgstr "partiyi terketti"
+
 #: src/map/maps_list.cpp:275
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
+
+#: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:227
+#, fuzzy, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] "oyuncular bağlandı"
+
+#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:232
+#, fuzzy, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] "oyuncular hazır"
 
 #: src/game/game_loop.cpp:695
 #, fuzzy, c-format
@@ -102,13 +122,17 @@ msgstr "(ölü)"
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
-#: src/weapon/air_attack.cpp:159
+#: src/weapon/air_attack.cpp:160
 msgid "Air Attack"
 msgstr "Hava Saldırısı"
 
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr "Hava çekici"
+
+#: src/team/results.cpp:143
+msgid "All teams"
+msgstr "Tüm takımlar"
 
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
@@ -166,9 +190,28 @@ msgstr "Şarapnelli Bomba"
 msgid "Commit Suicide"
 msgstr "İntihar"
 
+#: src/menu/internet_menu.cpp:62
+#, fuzzy
+msgid "Connect !"
+msgstr "Bağlanılan"
+
+#: src/menu/network_connection_menu.cpp:65
+#: src/menu/network_connection_menu.cpp:180
+#, fuzzy
+msgid "Connect to an internet game"
+msgstr "Oyuna bağlan"
+
+#: src/menu/network_connection_menu.cpp:172
+msgid "Connect to game"
+msgstr "Oyuna bağlan"
+
 #: src/weapon/construct.cpp:43
 msgid "Construct"
 msgstr "İnşa Et"
+
+#: src/network/index_server.cpp:88
+msgid "Contacting main server..."
+msgstr ""
 
 #: src/menu/main_menu.cpp:110
 msgid "Credits"
@@ -232,10 +275,34 @@ msgstr ""
 "Hata:\n"
 "%s"
 
+#: src/menu/network_connection_menu.cpp:222
+#, fuzzy, c-format
+msgid "Error: Unable to connect to %s:%s"
+msgstr "Bağlantı kurulamadı"
+
+#: src/menu/network_connection_menu.cpp:200
+#, fuzzy
+msgid "Error: Unable to contact index server to host a game"
+msgstr "Sunucu ile iletişim sağlanamadı!"
+
+#: src/menu/network_connection_menu.cpp:230
+#, fuzzy
+msgid "Error: Unable to contact index server to search an internet game"
+msgstr "Sunucu ile iletişim sağlanamadı!"
+
+#: src/menu/network_connection_menu.cpp:212
+#, fuzzy
+msgid "Error: Unable to start server"
+msgstr "Sunucu başlamadı"
+
 #: src/team/team.cpp:144
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
+
+#: src/network/network.cpp:78
+msgid "Failed to initialize network library!"
+msgstr "Ağ kütüphanesi başlatılamadı!"
 
 #: src/game/game_loop.cpp:162
 msgid "Find a random position for characters"
@@ -264,6 +331,18 @@ msgstr "Tabanca"
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
+
+#: src/menu/network_connection_menu.cpp:109
+msgid "Have a good game!"
+msgstr ""
+
+#: src/menu/team_box.cpp:47
+msgid "Head commander"
+msgstr "Başkumandan"
+
+#: src/menu/network_connection_menu.cpp:164
+msgid "Host a game"
+msgstr "Oyuna sunuculuk yap"
 
 #: src/game/game_loop.cpp:730
 msgid "Hurry up, you are too slow !!"
@@ -303,13 +382,34 @@ msgstr "Nesneler yükleniyor"
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
+#: src/network/index_server.cpp:99
+#, fuzzy
+msgid "Invalid index server adress!"
+msgstr "Geçersiz sunucu adresi!"
+
+#: src/network/network.cpp:198
+msgid "Invalid port!"
+msgstr "Geçersiz port!"
+
+#: src/network/network.cpp:145
+msgid "Invalid server adress!"
+msgstr "Geçersiz sunucu adresi!"
+
 #: src/object/bonus_box.cpp:202
 msgid "Is it a gift?"
 msgstr "Bu bir hediye mi?"
 
+#: src/network/index_server.cpp:297
+msgid "It doesn't seem to be a valid Wormux server..."
+msgstr ""
+
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
 msgstr "Jet çantası"
+
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:117
+msgid "Join #wormux on irc.freenode.net to find some opponents."
+msgstr ""
 
 #: src/map/maps_list.cpp:183
 msgid "Load maps:"
@@ -317,6 +417,11 @@ msgstr "Haritaları yükle:"
 
 #: src/team/teams_list.cpp:106
 msgid "Load teams:"
+msgstr "Takımları yükle:"
+
+#: src/menu/network_teams_selection_box.cpp:33
+#, fuzzy
+msgid "Local teams:"
 msgstr "Takımları yükle:"
 
 #: src/weapon/lowgrav.cpp:38
@@ -332,6 +437,10 @@ msgstr "%s haritasını yaratan:"
 msgid "Maps"
 msgstr "Haritalar"
 
+#: src/menu/network_menu.cpp:90
+msgid "Max number of players:"
+msgstr "En fazla oyuncu sayısı:"
+
 #: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Maximum FPS"
@@ -340,6 +449,23 @@ msgstr "En fazla FPS:"
 #: src/weapon/mine.cpp:184
 msgid "Mine"
 msgstr "Mayın"
+
+#: src/menu/results_menu.cpp:169
+msgid "Most sold-out"
+msgstr "  En fazla satılan"
+
+#: src/menu/results_menu.cpp:159
+#, fuzzy
+msgid "Most useful"
+msgstr "  En kullanışlı"
+
+#: src/menu/results_menu.cpp:164
+msgid "Most useless"
+msgstr "  En kullanışsız"
+
+#: src/menu/results_menu.cpp:154
+msgid "Most violent"
+msgstr "  En cabbar"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -358,6 +484,19 @@ msgstr "Ninja ipi"
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
 
+#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
+#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
+msgid "Nobody!"
+msgstr "Hiç kimse!"
+
+#: src/menu/team_box.cpp:53
+msgid "Number of characters"
+msgstr "Karakter sayısı"
+
+#: src/menu/teams_selection_box.cpp:31
+msgid "Number of teams:"
+msgstr "Takım sayısı:"
+
 #: src/menu/main_menu.cpp:104
 msgid "Options"
 msgstr "Seçenekler"
@@ -374,6 +513,12 @@ msgstr "Paraşüt otomatik olarak etkinleştirildi."
 msgid "Play"
 msgstr "Oyna"
 
+#: src/menu/network_teams_selection_box.cpp:52
+#: src/menu/teams_selection_box.cpp:50
+#, fuzzy
+msgid "Player"
+msgstr "Oyuncu X"
+
 #: src/menu/options_menu.cpp:68
 msgid "Player energy?"
 msgstr "Oyuncu enerjisi?"
@@ -386,6 +531,10 @@ msgstr "Oyuncu isimleri?"
 msgid "Polecat Launcher"
 msgstr "Kokarca Mancınığı"
 
+#: src/menu/network_connection_menu.cpp:81
+msgid "Port:"
+msgstr ""
+
 #: src/menu/main_menu.cpp:116
 msgid "Quit"
 msgstr "Çıkış"
@@ -396,6 +545,14 @@ msgstr "Wormux'dan çıkılıyor"
 
 #: src/game/config.cpp:158
 msgid "Reading personal config file"
+msgstr ""
+
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr ""
+
+#: src/menu/team_box.cpp:70
+msgid "Remote"
 msgstr ""
 
 #: src/menu/options_menu.cpp:82
@@ -414,6 +571,15 @@ msgstr "Oyunu çalıştır"
 msgid "Scroll on border"
 msgstr ""
 
+#: src/menu/network_connection_menu.cpp:75
+#, fuzzy
+msgid "Server address:"
+msgstr "Sunucu adresi:"
+
+#: src/menu/network_connection_menu.cpp:87
+msgid "Server available on Internet"
+msgstr ""
+
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
 msgstr "Pompalı tüfek"
@@ -425,6 +591,12 @@ msgstr "Sırayı atla"
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
 msgstr "Suikast Tüfeği"
+
+#: src/menu/network_connection_menu.cpp:105
+msgid ""
+"Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
+"blowtorch, submachine gun) and surely many other things don't work either!"
+msgstr ""
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -446,7 +618,7 @@ msgstr "Yeni oyun başlatılıyor"
 msgid "Stock:"
 msgstr "Stok:"
 
-#: src/weapon/submachine_gun.cpp:61
+#: src/weapon/submachine_gun.cpp:62
 msgid "Submachine Gun"
 msgstr "Makinalı Tüfek"
 
@@ -504,10 +676,34 @@ msgstr "Şarapnel Bombası patlamadan, savaş alanını terketti."
 msgid "The rocket has left the battlefield..."
 msgstr "Roket savaş alanını terketti..."
 
+#: src/menu/network_menu.cpp:197
+#, c-format
+msgid "There is only %i team."
+msgid_plural "There are only %i teams."
+msgstr[0] ""
+
+#: src/network/index_server.cpp:78
+#, fuzzy
+msgid "Unable to contact an index server!"
+msgstr "Sunucu ile iletişim sağlanamadı!"
+
+#: src/network/network.cpp:158
+msgid "Unable to contact server!"
+msgstr "Sunucu ile iletişim sağlanamadı!"
+
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "SDL kütüphanesi başlatılamadı: %s"
+
+#: src/menu/internet_menu.cpp:96
+#, fuzzy
+msgid "Unable to join the game..."
+msgstr "Bağlantı kurulamadı"
+
+#: src/network/network.cpp:243
+msgid "Unable to listen for client!"
+msgstr "İstemciler beklenemedi!"
 
 #: src/map/maps_list.cpp:196 src/map/maps_list.cpp:212
 #, c-format
@@ -521,6 +717,24 @@ msgstr "Beklenmeyen istisna oluştu..."
 #: src/main.cpp:146
 msgid "Version"
 msgstr "Sürüm"
+
+#: src/menu/network_menu.cpp:118
+msgid ""
+"WARNING! Disconnections are not yet handled. So you have to restart Wormux "
+"after each disconnection!"
+msgstr ""
+
+#: src/menu/network_connection_menu.cpp:103
+msgid ""
+"WARNING!! Network is still under developement and therefore a little "
+"experimental."
+msgstr ""
+
+#: src/menu/network_menu.cpp:208
+#, fuzzy, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] "oyuncular henüz hazır değil!"
 
 #: src/game/game_loop.cpp:219
 msgid "Weapons"
@@ -547,10 +761,19 @@ msgstr "Wormux çalıştırılıyor..."
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
+#: src/include/action_handler.cpp:375
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr "Wormux sürümleri farklı: istemci=%s, sunucu=%s."
+
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "'%s' haritası yüklenirken XML hatası :"
+
+#: src/menu/network_menu.cpp:202
+msgid "You are alone..."
+msgstr ""
 
 #: src/map/maps_list.cpp:232
 msgid "You need at least one valid map !"
@@ -566,7 +789,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
-#: src/weapon/launcher.cpp:460
+#: src/weapon/launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 
@@ -578,21 +801,17 @@ msgstr "tamam"
 msgid "general: "
 msgstr ""
 
-#~ msgid " has joined the party"
-#~ msgstr "partiye katıldı"
+#~ msgid "  Most sold-out  :  "
+#~ msgstr "  En fazla satılan  :  "
 
-#~ msgid " has left the party"
-#~ msgstr "partiyi terketti"
+#~ msgid "  Most usefull  :  "
+#~ msgstr "  En kullanışlı  :  "
 
-#, fuzzy
-#~ msgid "%i player connected"
-#~ msgid_plural "%i players connected"
-#~ msgstr[0] "oyuncular bağlandı"
+#~ msgid "  Most useless  :  "
+#~ msgstr "  En kullanışsız  :  "
 
-#, fuzzy
-#~ msgid "%i player ready"
-#~ msgid_plural "%i players ready"
-#~ msgstr[0] "oyuncular hazır"
+#~ msgid "  Most violent  :  "
+#~ msgstr "  En cabbar  :  "
 
 #, fuzzy
 #~ msgid "%s has lost %u point of energy."
@@ -644,121 +863,6 @@ msgstr ""
 #~ msgid_plural "'%s has won %u Low gravity"
 #~ msgstr[0] "%s takımı %u Düşük Yerçekimi kazandı"
 
-#~ msgid "All teams"
-#~ msgstr "Tüm takımlar"
-
-#, fuzzy
-#~ msgid "Connect !"
-#~ msgstr "Bağlanılan"
-
-#, fuzzy
-#~ msgid "Connect to an internet game"
-#~ msgstr "Oyuna bağlan"
-
-#~ msgid "Connect to game"
-#~ msgstr "Oyuna bağlan"
-
-#~ msgid "Connected to "
-#~ msgstr "Bağlanılan"
-
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Ağ kütüphanesi başlatılamadı!"
-
-#~ msgid "Head commander"
-#~ msgstr "Başkumandan"
-
-#~ msgid "Host a game"
-#~ msgstr "Oyuna sunuculuk yap"
-
-#, fuzzy
-#~ msgid "Invalid index server adress!"
-#~ msgstr "Geçersiz sunucu adresi!"
-
-#~ msgid "Invalid port!"
-#~ msgstr "Geçersiz port!"
-
-#~ msgid "Invalid server adress!"
-#~ msgstr "Geçersiz sunucu adresi!"
-
-#~ msgid "Max number of players:"
-#~ msgstr "En fazla oyuncu sayısı:"
-
-#~ msgid "Most sold-out"
-#~ msgstr "  En fazla satılan"
-
-#, fuzzy
-#~ msgid "Most useful"
-#~ msgstr "  En kullanışlı"
-
-#~ msgid "Most useless"
-#~ msgstr "  En kullanışsız"
-
-#~ msgid "Most violent"
-#~ msgstr "  En cabbar"
-
-#~ msgid "Nobody!"
-#~ msgstr "Hiç kimse!"
-
-#~ msgid "Number of characters"
-#~ msgstr "Karakter sayısı"
-
-#~ msgid "Number of teams:"
-#~ msgstr "Takım sayısı:"
-
-#, fuzzy
-#~ msgid "Player"
-#~ msgstr "Oyuncu X"
-
-#~ msgid "Server adress:"
-#~ msgstr "Sunucu adresi:"
-
-#~ msgid "Server started"
-#~ msgstr "Sunucu başlatıldı"
-
-#~ msgid "Unable to connect"
-#~ msgstr "Bağlantı kurulamadı"
-
-#, fuzzy
-#~ msgid "Unable to contact an index server!"
-#~ msgstr "Sunucu ile iletişim sağlanamadı!"
-
-#~ msgid "Unable to contact server!"
-#~ msgstr "Sunucu ile iletişim sağlanamadı!"
-
-#, fuzzy
-#~ msgid "Unable to join the game..."
-#~ msgstr "Bağlantı kurulamadı"
-
-#~ msgid "Unable to listen for client!"
-#~ msgstr "İstemciler beklenemedi!"
-
-#~ msgid "Unable to start server"
-#~ msgstr "Sunucu başlamadı"
-
-#, fuzzy
-#~ msgid "Wait! %i player is not ready yet!"
-#~ msgid_plural "Wait! %i players are not ready yet!"
-#~ msgstr[0] "oyuncular henüz hazır değil!"
-
-#~ msgid "Wormux versions are differents : client=%s, server=%s."
-#~ msgstr "Wormux sürümleri farklı: istemci=%s, sunucu=%s."
-
-#, fuzzy
-#~ msgid "disconnection!"
-#~ msgstr "Bağlanılan"
-
-#~ msgid "  Most sold-out  :  "
-#~ msgstr "  En fazla satılan  :  "
-
-#~ msgid "  Most usefull  :  "
-#~ msgstr "  En kullanışlı  :  "
-
-#~ msgid "  Most useless  :  "
-#~ msgstr "  En kullanışsız  :  "
-
-#~ msgid "  Most violent  :  "
-#~ msgstr "  En cabbar  :  "
-
 #~ msgid "Air attack"
 #~ msgstr "Hava saldırısı"
 
@@ -770,6 +874,9 @@ msgstr ""
 
 #~ msgid "Baseball"
 #~ msgstr "Beyzbol"
+
+#~ msgid "Connected to "
+#~ msgstr "Bağlanılan"
 
 #~ msgid "Duration of the end of a turn:"
 #~ msgstr "Tur bitiş zamanı:"
@@ -805,6 +912,9 @@ msgstr ""
 #~ msgid "Select the world:"
 #~ msgstr "Dünyayı seç:"
 
+#~ msgid "Server started"
+#~ msgstr "Sunucu başlatıldı"
+
 #~ msgid "Team %s results:\n"
 #~ msgstr "%s takımı sonuçları:\n"
 
@@ -817,3 +927,7 @@ msgstr ""
 
 #~ msgid "Weapon:"
 #~ msgstr "Silah:"
+
+#, fuzzy
+#~ msgid "disconnection!"
+#~ msgstr "Bağlanılan"
