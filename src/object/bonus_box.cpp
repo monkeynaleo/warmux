@@ -111,6 +111,11 @@ void BonusBox::SignalCollision()
   anim->Start();
 }
 
+void BonusBox::SignalDrowning()
+{
+  SignalCollision();
+}
+
 // Boxes can explode too ...
 void BonusBox::SignalGhostState(bool was_already_dead)
 {
