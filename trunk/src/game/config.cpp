@@ -77,7 +77,6 @@ Config::Config()
 #endif
 
   // Default values
-  exterieur_monde_vide = true;
   m_game_mode = "classic";
   display_energy_character = true;
   display_name_character = true;
@@ -339,7 +338,6 @@ bool Config::SaveXml()
 
   //=== Video ===
   AppWormux * app = AppWormux::GetInstance();
-
   xmlpp::Element *video_node = root->add_child("video");
   doc.WriteElement(video_node, "display_wind_particles", ulong2str(display_wind_particles));
   doc.WriteElement(video_node, "display_energy_character", ulong2str(display_energy_character));
@@ -402,11 +400,6 @@ std::string Config::GetPersonalDir() const
   return personal_dir;
 }
 
-bool Config::GetExterieurMondeVide() const
-{
-  return exterieur_monde_vide;
-}
-
 bool Config::GetDisplayEnergyCharacter() const
 {
   return display_energy_character;
@@ -465,11 +458,6 @@ void Config::SetDefaultMouseCursor(bool dmc)
 void Config::SetScrollOnBorder(bool sob)
 {
   scroll_on_border = sob;
-}
-
-void Config::SetExterieurMondeVide(bool emv)
-{
-  exterieur_monde_vide = emv;
 }
 
 int Config::GetTransparency() const
