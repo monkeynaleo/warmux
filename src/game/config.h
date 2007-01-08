@@ -48,10 +48,6 @@ public:
   static const int ALPHA = 0;
   static const int COLORKEY = 1;
 
-  // Divers
-  bool GetExterieurMondeVide() const;
-  void SetExterieurMondeVide(bool emv);
-
   bool GetDisplayEnergyCharacter() const;
   void SetDisplayEnergyCharacter(bool dec);
 
@@ -115,7 +111,6 @@ protected:
 
   std::string data_dir, locale_dir, personal_dir;
 
-  bool exterieur_monde_vide;
   bool display_energy_character;
   bool display_name_character;
   bool display_wind_particles;
