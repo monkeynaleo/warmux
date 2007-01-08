@@ -31,7 +31,7 @@
 #include "../interface/interface.h"
 #include "../map/map.h"
 
-Text::Text(const std::string &new_txt, Color new_color,
+Text::Text(const std::string &new_txt, const Color& new_color,
            Font* new_font, bool shadowed)
 {
 				
@@ -317,9 +317,9 @@ int Text::GetHeight() const
   return surf.GetHeight();
 }
 
-void DrawTmpBoxText(Font &font, Point2i pos, 
-		    const std::string &txt, uint space,
-                    Color boxColor, Color rectColor)
+void DrawTmpBoxText(Font& font, Point2i pos, 
+		    const std::string& txt, uint space,
+                    const Color& boxColor, const Color& rectColor)
 {
   Point2i size = font.GetSize(txt) + Point2i(space, space)*2;
   
@@ -336,69 +336,69 @@ void DrawTmpBoxText(Font &font, Point2i pos,
   font.WriteCenterTop( pos, txt, white_color);
 }
 
-void DrawTmpBoxTextWithReturns(Font &font, const Point2i &position, 
-                               const std::string &txt, uint space,
-                               Color boxColor,
-                               Color rectColor)
-{
-  size_t pos          = 0;
-  size_t last_pos     = 0;
-  size_t max_width    = 0;
-  size_t total_height = 0;
-  int    x, y;
-  char  *lines        = strdup(txt.c_str());
+// void DrawTmpBoxTextWithReturns(Font &font, const Point2i &position, 
+//                                const std::string &txt, uint space,
+//                                Color boxColor,
+//                                Color rectColor)
+// {
+//   size_t pos          = 0;
+//   size_t last_pos     = 0;
+//   size_t max_width    = 0;
+//   size_t total_height = 0;
+//   int    x, y;
+//   char  *lines        = strdup(txt.c_str());
 
-  std::vector< size_t > offsets;
+//   std::vector< size_t > offsets;
 
-  // Store offsets
-  offsets.push_back(0);
-  while (lines[pos] != '\0')
-  {
-    if (lines[pos] == '\n')
-    {
-      lines[pos] = 0;
-      if (!lines[pos+1]) break;
+//   // Store offsets
+//   offsets.push_back(0);
+//   while (lines[pos] != '\0')
+//   {
+//     if (lines[pos] == '\n')
+//     {
+//       lines[pos] = 0;
+//       if (!lines[pos+1]) break;
 
-      offsets.push_back(pos+1);
-      int w = font.GetWidth(lines+last_pos) + space*2;
-      if ((int)max_width < w) max_width = w;
-      total_height += font.GetHeight(lines+last_pos);
-#if DEBUG
-      if (last_pos)
-      {
-        std::cerr << "(" << pos << "," << pos-last_pos
-                  << ") >>> " << lines+last_pos << " <<<\n";
-      }
-#endif
-      last_pos = pos+1;
-    }
-    pos++;
-  }
-  if (max_width == 0) {
-    max_width = font.GetWidth(lines) + space*2;
-  }
+//       offsets.push_back(pos+1);
+//       int w = font.GetWidth(lines+last_pos) + space*2;
+//       if ((int)max_width < w) max_width = w;
+//       total_height += font.GetHeight(lines+last_pos);
+// #if DEBUG
+//       if (last_pos)
+//       {
+//         std::cerr << "(" << pos << "," << pos-last_pos
+//                   << ") >>> " << lines+last_pos << " <<<\n";
+//       }
+// #endif
+//       last_pos = pos+1;
+//     }
+//     pos++;
+//   }
+//   if (max_width == 0) {
+//     max_width = font.GetWidth(lines) + space*2;
+//   }
 
-  // Initial position
-  total_height += 5*space;
-  x = position.x - max_width / 2;
-  y = position.y - total_height / 2;
+//   // Initial position
+//   total_height += 5*space;
+//   x = position.x - max_width / 2;
+//   y = position.y - total_height / 2;
 
-  Rectanglei rect(x, y, max_width, total_height);
+//   Rectanglei rect(x, y, max_width, total_height);
   
-  AppWormux * app = AppWormux::GetInstance();
+//   AppWormux * app = AppWormux::GetInstance();
 
-  app->video.window.BoxColor(rect, boxColor);
-  app->video.window.RectangleColor(rect, rectColor);
+//   app->video.window.BoxColor(rect, boxColor);
+//   app->video.window.RectangleColor(rect, rectColor);
 
-  world.ToRedrawOnScreen(rect);
+//   world.ToRedrawOnScreen(rect);
 
-  for( std::vector<size_t>::iterator it=offsets.begin();
-       it != offsets.end();
-       ++it)
-  {
-    font.WriteLeft( Point2i(x+space, y+space), lines+(*it), white_color);
-    y += font.GetHeight(lines+(*it));
-  }
-  offsets.clear();
-  free(lines);
-}
+//   for( std::vector<size_t>::iterator it=offsets.begin();
+//        it != offsets.end();
+//        ++it)
+//   {
+//     font.WriteLeft( Point2i(x+space, y+space), lines+(*it), white_color);
+//     y += font.GetHeight(lines+(*it));
+//   }
+//   offsets.clear();
+//   free(lines);
+// }
