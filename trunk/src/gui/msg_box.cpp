@@ -50,9 +50,9 @@ void MsgBox::Flush()
     }
 }
 
-void MsgBox::NewMessage(const std::string &msg)
+void MsgBox::NewMessage(const std::string &msg, const Color& color)
 {
-  messages.push_back(new Text(msg));
+  messages.push_back(new Text(msg, color));
   messages.back()->SetMaxWidth(GetSizeX() - (2*hmargin));
 
   // Remove old messages if needed
