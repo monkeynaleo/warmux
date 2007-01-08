@@ -87,8 +87,8 @@ public:
   bool EstHorsMondeXY (int x, int y) const;
   bool EstHorsMonde (const Point2i &pos) const;
 
-  // C'est un terrain ouvert ?
-  bool EstOuvert() const { return ground.EstOuvert(); }
+  // Is it an open or closed world ?
+  bool IsOpen() const { return ground.EstOuvert(); }
 
   // Dig the map using a picture
   void Dig(const Point2i position, const Surface& alpha_sur);
