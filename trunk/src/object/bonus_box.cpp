@@ -181,11 +181,10 @@ bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
 
 bool BonusBox::NewBonusBox()
 {
-
-  if (!enable) {
-     enable=true;
+  if (!enable) { // Bonus boxes are disabled on closed map
     return false;
   }
+
   uint nbr_teams=teams_list.playing_list.size();
   if(nbr_teams<=1) {
     MSG_DEBUG("bonus", "There is less than 2 teams in the game");
