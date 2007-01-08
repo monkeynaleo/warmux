@@ -417,7 +417,7 @@ void WeaponsMenu::Draw()
   for (it=boutons.begin(); it != fin; ++it)
   {
     if(!it->weapon->CanBeUsedOnClosedMap()
-       && !world.EstOuvert())
+       && !world.IsOpen())
       continue;
 
     if(ActiveTeam().ReadNbAmmos(it->weapon->GetName())<=0

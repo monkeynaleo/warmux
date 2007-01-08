@@ -28,7 +28,6 @@
 #include "physical_obj.h"
 #include "physics.h"
 #include "objects_list.h"
-#include "../game/config.h"
 #include "../game/time.h"
 #include "../map/map.h"
 #include "../network/randomsync.h"
@@ -282,7 +281,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     // Check if we exit the world. If so, we stop moving and return.
     if( IsOutsideWorldXY(tmpPos) ){
 
-      if( !Config::GetInstance()->GetExterieurMondeVide() ){
+      if( !world.IsOpen() ){
         tmpPos.x = BorneLong(tmpPos.x, 0, world.GetWidth() - GetWidth() - 1);
         tmpPos.y = BorneLong(tmpPos.y, 0, world.GetHeight() - GetHeight() - 1);
         MSG_DEBUG( "physic.state", "%s - DeplaceTestCollision touche un bord : %d, %d",  m_name.c_str(), tmpPos.x, tmpPos.y );
@@ -606,7 +605,7 @@ bool PhysicalObj::IsOutsideWorld(const Point2i &offset) const
 bool PhysicalObj::FootsOnFloor(int y) const
 {
   // If outside is empty, the object can't hit the ground !
-  if ( Config::GetInstance()->GetExterieurMondeVide() ) return false;
+  if ( world.IsOpen() ) return false;
 
   const int y_max = world.GetHeight()-m_height +m_test_bottom;
   return (y_max <= y);
@@ -625,7 +624,7 @@ bool PhysicalObj::IsInVacuum(const Point2i &offset, bool check_object) const
 bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
 {
   if( IsOutsideWorldXY(position) )
-    return Config::GetInstance()->GetExterieurMondeVide();
+    return world.IsOpen();
 
   if( FootsOnFloor(position.y - 1) )
     return false;
@@ -687,7 +686,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
 {
   if( IsOutsideWorldXY(position) ){
     MSG_DEBUG("physical", "%s - physobj is outside the world", m_name.c_str());
-    return Config::GetInstance()->GetExterieurMondeVide();
+    return world.IsOpen();
   }
 
   if( FootsOnFloor(position.y) ){
