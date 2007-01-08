@@ -258,6 +258,13 @@ void XmlWriter::WriteElement(xmlpp::Element *x,
   m_save = false;
 }
 
+void XmlWriter::WriteComment(xmlpp::Element *x,
+			     const std::string& comment)
+{
+  x->add_child_comment(comment);
+  m_save = false;
+}
+
 bool XmlWriter::Create(const std::string &filename,const std::string &root,
                        const std::string &version,const std::string &encoding)
 {

@@ -102,6 +102,9 @@ public:
                     const std::string &name,
                     const std::string &value);
 
+  void WriteComment(xmlpp::Element *x,
+		    const std::string& comment);
+
   bool Save();
 };
 
