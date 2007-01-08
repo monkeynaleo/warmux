@@ -115,7 +115,7 @@ NetworkMenu::NetworkMenu() :
   
   msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::GetInstance(Font::FONT_SMALL));  
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
-  msg_box->NewMessage(_("WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"));
+  msg_box->NewMessage(_("WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"), c_red);
 
   chat_box->AddWidget(msg_box);
 
@@ -194,19 +194,19 @@ void NetworkMenu::sig_ok()
   {
     if(teams_list.playing_list.size() <= 1)
     {
-      msg_box->NewMessage(Format(ngettext("There is only %i team.", "There are only %i teams.", teams_list.playing_list.size()), teams_list.playing_list.size()));
+      msg_box->NewMessage(Format(ngettext("There is only %i team.", "There are only %i teams.", teams_list.playing_list.size()), teams_list.playing_list.size()), c_red);
       return;
     }
     if(network.connected_player <= 1)
     {
-      msg_box->NewMessage(_("You are alone..."));
+      msg_box->NewMessage(_("You are alone..."), c_red);
       return;
     }
     if(network.connected_player != network.client_inited)
     {
       int nbr = network.connected_player - network.client_inited;
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
-      msg_box->NewMessage(pl);
+      msg_box->NewMessage(pl, c_red);
       return;
     }
   }

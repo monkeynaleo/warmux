@@ -100,7 +100,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
 		       Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(msg_box);
 
-  msg_box->NewMessage(_("WARNING!! Network is still under developement and therefore a little experimental."));
+  msg_box->NewMessage(_("WARNING!! Network is still under developement and therefore a little experimental."), c_red);
   msg_box->NewMessage(""); // Skip a line
   msg_box->NewMessage(_("Some weapons are disabled, because of known bugs (ninjarope, airhammer, blowtorch, submachine gun) and surely many other things don't work either!"));
   msg_box->NewMessage(""); // Skip a line
@@ -197,7 +197,7 @@ void NetworkConnectionMenu::sig_ok()
       index_server.SetHiddenServer();
 
     if( !index_server.Connect() ) {
-      msg_box->NewMessage(_("Error: Unable to contact index server to host a game"));
+      msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
       return;
     }
 
@@ -209,7 +209,7 @@ void NetworkConnectionMenu::sig_ok()
     if(network.IsConnected()) {
       network.client_inited = 1;
     } else {
-      msg_box->NewMessage(_("Error: Unable to start server"));
+      msg_box->NewMessage(_("Error: Unable to start server"), c_red);
       return;
     }
     break;
@@ -220,14 +220,15 @@ void NetworkConnectionMenu::sig_ok()
     network.ClientConnect(server_address->GetText(), port_number->GetText());
     if (!network.IsConnected()) {
       msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
-				 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()));
+				 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
+			  c_red);
       return;
     }
     break;
 
   case NET_BROWSE_INTERNET: // Search an internet game!
     if( !index_server.Connect() ) {
-      msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"));
+      msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
       return;
     }
 
