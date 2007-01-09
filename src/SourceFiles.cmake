@@ -82,7 +82,6 @@ menu/options_menu.cpp
 menu/results_menu.cpp
 menu/team_box.cpp
 menu/teams_selection_box.cpp
-menu/tutorial_menu.cpp
 network/chat.cpp
 network/distant_cpu.cpp
 network/download.cpp
@@ -124,7 +123,6 @@ tool/resource_manager.cpp
 tool/stats.cpp
 tool/string_tools.cpp
 tool/xml_document.cpp
-tutorial/tutorial.cpp
 weapon/air_attack.cpp
 weapon/airhammer.cpp
 weapon/anvil.cpp
