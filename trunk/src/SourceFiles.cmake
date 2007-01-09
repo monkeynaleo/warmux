@@ -2,8 +2,8 @@
 SET(WORMUX_SRCS
 ai/ai_engine.cpp
 ai/ai_engine_stupid.cpp
-ai/ai_shoot_module.cpp
 ai/ai_movement_module.cpp
+ai/ai_shoot_module.cpp
 character/body.cpp
 character/body_list.cpp
 character/character.cpp
@@ -82,6 +82,7 @@ menu/options_menu.cpp
 menu/results_menu.cpp
 menu/team_box.cpp
 menu/teams_selection_box.cpp
+menu/tutorial_menu.cpp
 network/chat.cpp
 network/distant_cpu.cpp
 network/download.cpp
@@ -123,6 +124,7 @@ tool/resource_manager.cpp
 tool/stats.cpp
 tool/string_tools.cpp
 tool/xml_document.cpp
+tutorial/tutorial.cpp
 weapon/air_attack.cpp
 weapon/airhammer.cpp
 weapon/anvil.cpp
@@ -134,12 +136,12 @@ weapon/bounce_ball.cpp
 weapon/cluster_bomb.cpp
 weapon/construct.cpp
 weapon/crosshair.cpp
+weapon/disco_grenade.cpp
 weapon/dynamite.cpp
 weapon/explosion.cpp
 weapon/gnu.cpp
 weapon/grenade.cpp
 weapon/gun.cpp
-weapon/disco_grenade.cpp
 weapon/jetpack.cpp
 weapon/launcher.cpp
 weapon/lowgrav.cpp
