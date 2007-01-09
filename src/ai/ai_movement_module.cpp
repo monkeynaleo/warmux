@@ -301,4 +301,66 @@ AIMovementModule::AIMovementModule()
   std::cout << "o Artificial Intelligence Movement module initialization" << std::endl;
 }
 
+// ====================== Points to avoid
+// private:
+//  std::set<Point2i> points_to_avoid;
 
+void AIMovementModule::UpdateListOfPointsToAvoid()
+{
+  // TODO : Refresh position of mines
+}
+
+void AIMovementModule::AddPointToAvoid(Point2i dangerous_point)
+{
+  points_to_avoid.insert(dangerous_point);
+}
+
+// ======================================
+
+// ==================== Destination point
+// private:
+//  uint min_reachable_x, max_reachable_x;
+//  Point2i destination_point;
+
+void AIMovementModule::SetDestinationPoint(Point2i _destination_point)
+{
+  destination_point = _destination_point;
+}
+
+// =================================================
+// STATIC METHOD
+// =================================================
+// Return true if character seems to be accessible
+// =================================================
+// This method is not perfect!!
+// =================================================
+bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
+					  const Character& enemy) // replace method IsNear()
+{
+  uint delta_x = abs(shooter.GetX() - enemy.GetX());
+  uint delta_y = abs(shooter.GetY() - enemy.GetY());
+
+  if (delta_x > 300)
+    return false;
+
+  if (delta_y > 100)
+    return false;
+
+  // TODO : check the min_reachable_x an max_reachable_x
+
+  return true;
+}
+
+bool AIMovementModule::IsProgressing()
+{
+  // TODO
+  return true;
+}
+
+
+bool AIMovementModule::IsArrived()
+{
+  return (ActiveCharacter().GetPosition() == destination_point);
+}
+
+// ======================================

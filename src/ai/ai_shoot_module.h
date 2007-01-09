@@ -23,6 +23,7 @@
 #define AI_SHOOT_MODULE_H
 
 #include "../character/character.h"
+#include "ai_movement_module.h"
 
 class AIShootModule
 {
@@ -33,26 +34,35 @@ class AIShootModule
     SHOOT_FROM_POINT
   } strategy_t;
 
+  strategy_t m_current_strategy;
+  
   uint m_current_time;
 
-  Character* m_enemy;
-  strategy_t m_current_strategy;
+  const Character* m_enemy;
   bool m_has_finished;
 
   double m_angle;
   uint m_last_shoot_time;
 
   // for shooting weapons like gun, shotgun, sniper rifle, m16, ...
-  bool IsDirectlyShootable(Character& character);
-  bool FindShootableEnemy();
+  static bool IsDirectlyShootable(const Character& shooter, 
+				  const Character& enemy,
+				  double& shoot_angle);
+
+  static const Character* FindShootableEnemy(Character& shooter,
+					     double& shoot_angle);
+
+  bool SelectFiringWeapon(double shoot_angle) const;
 
   // for proximity weapons like dynamite, mine, ...
-  bool IsNear(Character& character);
-  bool FindProximityEnemy();
+  // TODO -> Go in ai_movment_module
+  static const Character* FindProximityEnemy(const Character& shooter);
+
+  bool SelectProximityWeapon(const Character& enemy) const;
 
   // Watch the choosen enemy
   void ChooseDirection();
-  Character* FindEnemy();
+  const Character* FindEnemy();
 
   void Shoot();
  public:

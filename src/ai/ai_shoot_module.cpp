@@ -30,35 +30,44 @@
 #include "../tool/string_tools.h"
 
 #include <iostream>
+
+
+// =================================================
+// Static method
 // =================================================
 // Try to find an enemy which is shootable by
 // weapons like gun, shotgun, m16
 // =================================================
-bool AIShootModule::FindShootableEnemy()
+const Character* AIShootModule::FindShootableEnemy(Character& shooter,
+						   double& shoot_angle)
 {
-  FOR_ALL_LIVING_ENEMIES(team, character) {
-    if ( IsDirectlyShootable(*character) ) {
-      m_enemy = &(*character);
-      return true;
+  FOR_ALL_LIVING_ENEMIES(shooter, team, character) 
+  {
+    if ( IsDirectlyShootable(shooter, *character, shoot_angle) ) {
+      return &(*character);
     }
   }
-
-  return false;
+  return NULL;
 }
 
 // =================================================
+// Static method
+// =================================================
 // Return true if there is a straight line with no
-// collision between the active character and a
+// collision between the shooter and a
 // potential enemy
+// Update the shoot_angle if it is ok
 // =================================================
 // This method is not perfect
-// It tests from the Center of the current Character controlled by the AI
+// It tests from the Center of the shooter
 // and not from the gun hole
 // =================================================
-bool AIShootModule::IsDirectlyShootable(Character& character)
+bool AIShootModule::IsDirectlyShootable(const Character& shooter,
+					const Character& enemy, 
+					double& shoot_angle)
 {
-  Point2i pos = ActiveCharacter().GetCenter();
-  Point2i arrival = character.GetCenter();
+  Point2i pos = shooter.GetCenter();
+  Point2i arrival = enemy.GetCenter();
   Point2i departure = pos;
   Point2i delta_pos;
 
@@ -69,7 +78,7 @@ bool AIShootModule::IsDirectlyShootable(Character& character)
   while (pos != arrival) {
 
     // is there a collision on the ground ??
-    if ( !world.EstDansVide(pos.x, pos.y)) {
+    if ( !world.EstDansVide(pos.x, pos.y) ) {
       return false;
     }
 
@@ -80,8 +89,8 @@ bool AIShootModule::IsDirectlyShootable(Character& character)
 
     // is there a collision with another character ?
     FOR_ALL_CHARACTERS(team, other_character) {
-      if ( &(*other_character) != &ActiveCharacter()
-	   && &(*other_character) != &character ) {
+      if ( &(*other_character) != &shooter
+	   && &(*other_character) != &enemy ) {
 
 	if ( other_character->GetTestRect().Contains(pos) )
 	  return false;
@@ -111,23 +120,48 @@ bool AIShootModule::IsDirectlyShootable(Character& character)
     pos += delta_pos;
   }
 
-  m_angle = original_angle;
-
-  // Set direction
+  // set the angle
   if (departure.x > arrival.x) {
-    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-    m_angle = InverseAngleRad(m_angle);
+    shoot_angle = InverseAngleRad(original_angle);
   } else {
-    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
+    shoot_angle = original_angle;
   }
 
-  // Prepare game message
-  std::string s = "Try to shoot "+character.GetName();
-  char buff[3];
-  sprintf(buff, "%f", m_angle); // to manage angle equals to 0
-  s += " with angle ";
-  s += buff;
-  GameMessages::GetInstance()->Add(s);
+  return true;
+}
+
+bool AIShootModule::SelectFiringWeapon(double shoot_angle) const
+{
+  // we choose between gun, sniper_rifle, shotgun and submachine gun
+  uint selected = uint(randomSync.GetDouble(0.0, 3.5));
+  switch (selected) {
+  case 0:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_SHOTGUN);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+  case 1:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_SNIPE_RIFLE);
+    if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+    //     case 2:
+    //       ActiveTeam().SetWeapon(Weapon::WEAPON_SUBMACHINE_GUN);
+    //       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
+  case 3:
+  default:
+    ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
+  }
+
+  // Check the angle
+  double angle = BorneDouble(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
+			     - (ActiveTeam().GetWeapon().GetMinAngle()) );
+
+  if (AbsReel(angle-m_angle) > 0.08726/* 5 degree */) {
+    // angle is too wide for the weapon
+    return false;
+  }
+
+  // Check number of ammo
+  if ( ! ActiveTeam().GetWeapon().EnoughAmmo() ) {
+    return false;
+  }
 
   return true;
 }
@@ -136,16 +170,14 @@ bool AIShootModule::IsDirectlyShootable(Character& character)
 // Try to find an enemy which is shootable by
 // weapons like dynamite, mine, ...
 // =================================================
-bool AIShootModule::FindProximityEnemy()
+const Character* AIShootModule::FindProximityEnemy(const Character& shooter)
 {
-  FOR_ALL_LIVING_ENEMIES(team, character) {
-    if ( IsNear(*character) ) {
-      m_enemy = &(*character);
-      return true;
+  FOR_ALL_LIVING_ENEMIES(shooter, team, character) {
+    if ( AIMovementModule::SeemsToBeReachable(shooter, *character) ) {
+      return &(*character);
     }
   }
-
-  return false;
+  return NULL;
   //     if (m_nearest_enemy == NULL
   // 	|| ( character->GetCenter().Distance( ActiveCharacter().GetCenter()) <
   // 	     m_nearest_enemy->GetCenter().Distance( ActiveCharacter().GetCenter()))
@@ -155,23 +187,33 @@ bool AIShootModule::FindProximityEnemy()
   //   assert(m_nearest_enemy != NULL);
 }
 
-// =================================================
-// Return true if character seems to be accessible
-// =================================================
-// This method is not perfect!!
-// =================================================
-bool AIShootModule::IsNear(Character& character)
+bool AIShootModule::SelectProximityWeapon(const Character& enemy) const
 {
-  uint delta_x = abs(character.GetX() - ActiveCharacter().GetX());
-  uint delta_y = abs(character.GetY() - ActiveCharacter().GetY());
+  // selecting between dynamite, mine taking care of enemy life points
+  uint life_points = enemy.GetEnergy();
 
-  if (delta_x > 300)
-    return false;
+//  TODO : baseball:
+//   if (IsNearWater(ActivePlayer(), enemy)) {
+//     ActiveTeam().SetWeapon(Weapon::BASEBALL);
+//     if (ActiveTeam().GetWeapon().EnoughAmmo())
+//       return true;
+//   }
 
-  if (delta_y > 100)
-    return false;
+  // Dynamite
+  if (life_points > 50) {
+    ActiveTeam().SetWeapon(Weapon::WEAPON_DYNAMITE);
+    if (ActiveTeam().GetWeapon().EnoughAmmo())
+      return true;
+  }
 
-  return true;
+  // Mine
+  ActiveTeam().SetWeapon(Weapon::WEAPON_MINE);
+  if (ActiveTeam().GetWeapon().EnoughAmmo())
+    return true;
+
+  
+  // No proximity weapons found !
+  return false;
 }
 
 // =================================================
@@ -179,9 +221,10 @@ bool AIShootModule::IsNear(Character& character)
 // =================================================
 void AIShootModule::Shoot()
 {
-  if (m_current_time > m_last_shoot_time + 1 ||
+  if (m_current_time > m_last_shoot_time + 2 ||
       m_last_shoot_time == 0) {
     ActiveTeam().GetWeapon().NewActionShoot();
+    std::cout << "Shoot ! (" << m_current_time << ")" << std::endl;
     m_last_shoot_time = m_current_time;
   }
 
@@ -191,7 +234,7 @@ void AIShootModule::Shoot()
   }
 }
 
-Character* AIShootModule::FindEnemy()
+const Character* AIShootModule::FindEnemy()
 {
   if (m_has_finished) {
     return NULL;
@@ -203,81 +246,41 @@ Character* AIShootModule::FindEnemy()
 
   m_current_strategy = NO_STRATEGY;
 
-  if (FindProximityEnemy()) {
-    GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injured "
-				     + m_enemy->GetName());
+  // Proximity enemy ?
+  m_enemy = FindProximityEnemy(ActiveCharacter());
+  if ( m_enemy != NULL ) {
 
     m_current_strategy = NEAR_FROM_ENEMY;
 
-    // we choose between dynamite, mine, polecart and gnu
-    uint selected = uint(randomSync.GetDouble(0.0, 3.5));
+    GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" has decided to injured "
+				     + m_enemy->GetName());
 
-    switch (selected) {
-    case 0:
-    case 1:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_DYNAMITE);
-      if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-
-//     case 1:
-//       ActiveTeam().SetWeapon(Weapon::WEAPON_GNU);
-//       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-
-//     case 2:
-//       ActiveTeam().SetWeapon(Weapon::WEAPON_POLECAT);
-//       if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-
-    case 3:
-    default:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_MINE);
+    if ( SelectProximityWeapon(*m_enemy) ) {
+      m_angle = 0;
+      ActiveCharacter().SetFiringAngle(m_angle);
+      return m_enemy;
     }
-    m_angle = 0;
-    ActiveCharacter().SetFiringAngle(m_angle);
   }
-  else if (FindShootableEnemy()) {
+  
+  // "Gun-able" enemy ?
+  m_enemy = FindShootableEnemy(ActiveCharacter(), m_angle);
+  if ( m_enemy != NULL ) {
 
     m_current_strategy = SHOOT_FROM_POINT;
+
     GameMessages::GetInstance()->Add(ActiveCharacter().GetName()+" will shoot "
 				     + m_enemy->GetName());
 
     // we choose between gun, sniper_rifle, shotgun and submachine gun
-    uint selected = uint(randomSync.GetDouble(0.0, 3.5));
-    switch (selected) {
-    case 0:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_SHOTGUN);
-      if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-    case 1:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_SNIPE_RIFLE);
-      if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-    case 2:
-      //ActiveTeam().SetWeapon(WEAPON_SUBMACHINE_GUN);
-      //if (ActiveTeam().GetWeapon().EnoughAmmo()) break;
-    case 3:
-    default:
-      ActiveTeam().SetWeapon(Weapon::WEAPON_GUN);
-    }
-
-    double angle = BorneDouble(m_angle, - (ActiveTeam().GetWeapon().GetMaxAngle()),
-                               - (ActiveTeam().GetWeapon().GetMinAngle()) );
-
-    if (AbsReel(angle-m_angle) < 0.08726/* 5 degree */) {
+    if ( SelectFiringWeapon(m_angle) ) {
       ActiveCharacter().SetFiringAngle(m_angle);
-    } else {
-      GameMessages::GetInstance()->Add("Angle is too wide!");
-
-      m_current_strategy = NO_STRATEGY;
-      m_angle = 0;
-      m_enemy = NULL;
-
       return m_enemy;
     }
   }
 
-  // not enough ammo !!
-  if ( ! ActiveTeam().GetWeapon().EnoughAmmo() ) {
-    ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
-  }
-
-  ChooseDirection();
+  m_current_strategy = NO_STRATEGY;
+  m_angle = 0;
+  m_enemy = NULL;
 
   return m_enemy;
 }
@@ -303,6 +306,7 @@ bool AIShootModule::Refresh(uint current_time)
   m_current_time = current_time;
 
   FindEnemy();
+  ChooseDirection();
 
   switch (m_current_strategy) {
 
@@ -313,7 +317,7 @@ bool AIShootModule::Refresh(uint current_time)
 
   case NEAR_FROM_ENEMY:
     // We are near enough of an enemy (perhaps not the first one we have choosen)
-    FOR_ALL_LIVING_ENEMIES(team, character) {
+    FOR_ALL_LIVING_ENEMIES(ActiveCharacter(), team, character) {
       if ( abs((*character).GetX() - ActiveCharacter().GetX()) <= 10 &&
 	   abs ((*character).GetY() - ActiveCharacter().GetY()) < 60 ) {
       //if ( (*character).GetCenter().Distance( ActiveCharacter().GetCenter()) < 50) {

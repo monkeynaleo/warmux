@@ -22,10 +22,34 @@
 #define AI_MOVEMENT_MODULE
 
 #include "../tool/point.h"
+#include <set>
 
 class AIMovementModule
 {
+  uint m_current_time;
+
+  // ====================== Points to avoid
  private:
+  std::set<Point2i> points_to_avoid;
+  void UpdateListOfPointsToAvoid();
+ public:
+  void AddPointToAvoid(Point2i dangerous_point);
+  // ======================================
+
+  // ==================== Destination point
+ private:
+  uint min_reachable_x, max_reachable_x;
+  Point2i destination_point;
+ public:
+  void SetDestinationPoint(Point2i destination_point);
+  static bool SeemsToBeReachable(const Character& shooter,
+				 const Character& enemy); // replace method IsNear()
+  bool IsProgressing();
+  bool IsArrived();
+  // ======================================
+  
+  // ====================== Manage movement
+ private:  
   typedef enum {
     NO_MOVEMENT,
     WALKING,
@@ -35,13 +59,12 @@ class AIMovementModule
     ROPING,
   } movement_type_t;
 
-  uint m_current_time;
+  movement_type_t current_movement;
 
   Point2i last_position;
   uint time_at_last_position; 
   Point2i last_blocked_position;
-  movement_type_t current_movement;
-
+  
   void InverseDirection();
 
   void MakeStep();
@@ -56,6 +79,7 @@ class AIMovementModule
 
   bool ObstacleHeight(int& height);
   bool RiskGoingOutOfMap();
+  // ======================================
 
  public:
   AIMovementModule();
