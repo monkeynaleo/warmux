@@ -75,6 +75,7 @@ GameLoop::GameLoop()
 {
   state = PLAYING;
   interaction_enabled = true;
+  current_bonus_box = NULL;
 }
 
 void GameLoop::InitGameData_NetServer()
@@ -496,6 +497,16 @@ void GameLoop::RefreshClock()
         break;
       } // switch
     }// if
+}
+
+void GameLoop::SetCurrentBonusBox(BonusBox * current_box)
+{
+  current_bonus_box = current_box;
+}
+
+BonusBox * GameLoop::GetCurrentBonusBox() const
+{
+  return current_bonus_box;
 }
 
 void GameLoop::SetState(int new_state, bool begin_game)

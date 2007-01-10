@@ -51,10 +51,10 @@ private:
   bool m_goes_through_wall;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
-
   Point2i m_rebound_position;  
 protected:
   PhysicalObj* m_overlapping_object;
+  bool m_ignore_movements;
 
   virtual void CheckOverlapping();
 
