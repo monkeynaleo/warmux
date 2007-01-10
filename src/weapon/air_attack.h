@@ -66,6 +66,7 @@ class Plane : public PhysicalObj
     void Shoot(double speed, Point2i& target);
     void Draw();
     void Refresh();
+    bool IsImmobile() const;
 };
 
 class AirAttack : public Weapon
