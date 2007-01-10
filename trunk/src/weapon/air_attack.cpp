@@ -124,18 +124,12 @@ void Plane::Refresh()
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
     camera.StopFollowingObj(this);
     DropBomb();
+    m_ignore_movements = true;
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
     // Get the last rocket and check the position to be sure to not collide with it
     if ( last_dropped_bomb->GetY() > GetY()+GetHeight()+10 )
       DropBomb();
   }
-}
-
-// The camera does not follow anymore the plane after it released its bombs (see task #4133)
-bool Plane::IsImmobile() const
-{
-  if(nb_dropped_bombs == cfg.nbr_obus) return true;
-  return PhysicalObj::IsImmobile();
 }
 
 int Plane::GetDirection() const 

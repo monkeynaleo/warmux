@@ -51,6 +51,7 @@ class BonusBox : public PhysicalObj
     // Activate bonus box ?
     static void Enable (bool _enable);
     static bool NewBonusBox();
+    void DropBonusBox();
     //bool LoadXml(xmlpp::Element * object); //the next update will include this
 
     void Draw();

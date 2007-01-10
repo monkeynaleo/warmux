@@ -71,6 +71,7 @@ BonusBox::BonusBox()
 
 BonusBox::~BonusBox(){
   delete anim;
+  GameLoop::GetInstance()->SetCurrentBonusBox(NULL);
 }
 
 void BonusBox::Draw()
@@ -109,11 +110,20 @@ void BonusBox::SignalCollision()
 
   anim->SetCurrentFrame(0);
   anim->Start();
+  GameLoop::GetInstance()->SetCurrentBonusBox(NULL);
 }
 
 void BonusBox::SignalDrowning()
 {
   SignalCollision();
+}
+
+void BonusBox::DropBonusBox()
+{
+  SetAirResistFactor(1.0);
+  parachute = false;
+  m_ignore_movements = true;
+  anim->SetCurrentFrame(anim->GetFrameCount() - 1);
 }
 
 // Boxes can explode too ...
@@ -204,6 +214,7 @@ bool BonusBox::NewBonusBox()
     lst_objects.AddObject(box);
     camera.FollowObject(box, true, true);
     GameMessages::GetInstance()->Add (_("Is it a gift?"));
+    GameLoop::GetInstance()->SetCurrentBonusBox(box);
     return true;
   }
 

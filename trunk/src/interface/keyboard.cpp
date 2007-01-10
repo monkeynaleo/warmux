@@ -229,30 +229,32 @@ void Keyboard::HandleKeyReleased (const Action::Action_t &action)
 
   // We manage here only actions which are active on KEY_RELEASED event.
   Interface * interface = Interface::GetInstance();
+  BonusBox * current_box;
 
   switch(action) // Convert to int to avoid a warning
   {
     case Action::ACTION_QUIT:
       Game::GetInstance()->SetEndOfGameStatus( true );
       return;
-
     case Action::ACTION_PAUSE:
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PAUSE));
       return;
-
+    case Action::ACTION_SHOOT:
+      current_box = GameLoop::GetInstance()->GetCurrentBonusBox();
+      if(current_box != NULL)
+        current_box->DropBonusBox();
+      return;
     case Action::ACTION_FULLSCREEN:
       AppWormux::GetInstance()->video.ToggleFullscreen();
       return;
     case Action::ACTION_CHAT:
-    if(network.IsConnected())
-      GameLoop::GetInstance()->chatsession.ShowInput();
-    return;
+      if(network.IsConnected())
+        GameLoop::GetInstance()->chatsession.ShowInput();
+      return;
     case Action::ACTION_CENTER:
-
       CharacterCursor::GetInstance()->FollowActiveCharacter();
       camera.FollowObject (&ActiveCharacter(), true, true, true);
       return;
-
     case Action::ACTION_TOGGLE_INTERFACE:
       interface->EnableDisplay (!interface->IsDisplayed());
       return;

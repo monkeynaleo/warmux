@@ -26,6 +26,7 @@
 #include "../include/base.h"
 #include "../character/character.h"
 #include "../network/chat.h"
+#include "../object/bonus_box.h"
 
 class GameLoop
 {
@@ -33,6 +34,7 @@ private:
   int state;
   uint pause_seconde;
   uint duration;
+  BonusBox * current_bonus_box;
 
 public:
   static const int PLAYING = 0;
@@ -74,6 +76,9 @@ public:
 
   // Signal character damage
   void SignalCharacterDamage(Character *character);
+
+  void SetCurrentBonusBox(BonusBox * current_box);
+  BonusBox * GetCurrentBonusBox() const;
 
 private:
 

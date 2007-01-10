@@ -60,6 +60,8 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   m_collides_with_characters = false;
   m_collides_with_objects = false;
 
+  m_ignore_movements = false;
+
   // No collision with this object until we have gone out of his collision rectangle
   m_overlapping_object = NULL;
 
@@ -520,7 +522,7 @@ void PhysicalObj::GoOutOfWater()
 
 bool PhysicalObj::IsImmobile() const
 {
-  return (!IsMoving() && !FootsInVacuum())||(m_alive == GHOST);
+  return m_ignore_movements ||(!IsMoving() && !FootsInVacuum())||(m_alive == GHOST);
 }
 
 bool PhysicalObj::IsDead () const
