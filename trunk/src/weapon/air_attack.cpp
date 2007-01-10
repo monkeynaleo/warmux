@@ -131,6 +131,13 @@ void Plane::Refresh()
   }
 }
 
+// The camera does not follow anymore the plane after it released its bombs (see task #4133)
+bool Plane::IsImmobile() const
+{
+  if(nb_dropped_bombs == cfg.nbr_obus) return true;
+  return PhysicalObj::IsImmobile();
+}
+
 int Plane::GetDirection() const 
 { 
   float x,y;
