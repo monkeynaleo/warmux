@@ -85,7 +85,7 @@ public:
   const bool IsLocal() const;
   const bool IsServer() const;
   const bool IsClient() const;
-  const uint GetPort() const;
+  const uint GetPort();
   
   // Network functions common to client and server
   void Disconnect();
