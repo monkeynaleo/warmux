@@ -76,6 +76,8 @@ class AirAttack : public Weapon
     //Plane plane;
   protected:
     bool p_Shoot();
+    void p_Select();
+    void p_Deselect();
     void Refresh();
   public:
     AirAttack();
