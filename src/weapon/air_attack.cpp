@@ -167,6 +167,13 @@ AirAttack::AirAttack() :
 void AirAttack::Refresh()
 {
   m_is_active = false;
+
+  // DOES NOT WORK
+  // Change direction of the cursor care about Active player direction
+  // if (ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT)
+//     Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_RIGHT);
+//   else 
+//     Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
 }
 
 void AirAttack::ChooseTarget(Point2i mouse_pos)
@@ -181,9 +188,23 @@ bool AirAttack::p_Shoot ()
   if(!target_chosen)
     return false;
 
+  // Go back to default cursor
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+
   Plane* plane = new Plane(cfg());
   plane->Shoot(cfg().speed, target);
   return true;
+}
+
+void AirAttack::p_Select()
+{
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_RIGHT);
+}
+
+void AirAttack::p_Deselect()
+{
+  // Go back to default cursor
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 }
 
 AirAttackConfig& AirAttack::cfg() 
