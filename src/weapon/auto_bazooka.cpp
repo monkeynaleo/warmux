@@ -222,6 +222,12 @@ void AutomaticBazooka::DrawTarget()
   if( !m_target.selected ) return;
 
   AppWormux::GetInstance()->video.window.Blit(m_target.image, m_target.pos - m_target.image.GetSize()/2 - camera.GetPosition());
+
+  world.ToRedrawOnMap(Rectanglei(m_target.pos.x-m_target.image.GetWidth()/2,
+				 m_target.pos.y-m_target.image.GetHeight()/2,
+				 m_target.image.GetWidth(),
+				 m_target.image.GetHeight()));
+
 }
 
 bool AutomaticBazooka::IsReady() const
