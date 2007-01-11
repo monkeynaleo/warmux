@@ -23,7 +23,6 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include <SDL_thread.h>
-#include <netinet/in.h>
 #include "../game/game_mode.h"
 #include "../game/game.h"
 #include "../gui/question.h"
@@ -137,9 +136,12 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
 
   int prt=0;
   sscanf(port.c_str(),"%i",&prt);
-  prt = htons(prt);
 
-  if(SDLNet_ResolveHost(&ip,host.c_str(),prt)==-1)
+  // Use network endianess
+  int net_prt;
+  SDLNet_Write32(prt, &net_prt);
+
+  if(SDLNet_ResolveHost(&ip,host.c_str(),net_prt)==-1)
   {
     Question question;
     question.Set(_("Invalid server adress!"),1,0);
@@ -148,7 +150,7 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
     return;
   }
 
-  ip.port = prt;
+  ip.port = net_prt;
 
   TCPsocket socket = SDLNet_TCP_Open(&ip);
 
@@ -190,9 +192,12 @@ void Network::ServerStart(const std::string &port)
   // Convert port number (std::string port) into SDL port number format:
   int prt;
   sscanf(port.c_str(),"%i",&prt);
-  prt = htons(prt);
 
-  if(SDLNet_ResolveHost(&ip,NULL,prt)==-1)
+  // Use network endianess
+  int net_prt;
+  SDLNet_Write32(prt, &net_prt);
+
+  if(SDLNet_ResolveHost(&ip,NULL,net_prt)==-1)
   {
     Question question;
     question.Set(_("Invalid port!"),1,0);
@@ -411,6 +416,12 @@ const bool Network::IsConnected() const { return m_is_connected; }
 const bool Network::IsLocal() const { return !m_is_server && !m_is_client; }
 const bool Network::IsServer() const { return m_is_server; }
 const bool Network::IsClient() const { return m_is_client; }
-const uint Network::GetPort() const { return ntohs(ip.port); }
+
+const uint Network::GetPort()
+{
+  int prt;
+  prt = SDLNet_Read32(&ip.port);
+  return prt;
+}
 
 //-----------------------------------------------------------------------------
