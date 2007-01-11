@@ -43,7 +43,9 @@ public:
     POINTER_ARROW_DOWN_LEFT,
     POINTER_ARROW_RIGHT,
     POINTER_ARROW_LEFT,
-    POINTER_AIM
+    POINTER_AIM,
+    POINTER_FIRE_LEFT,
+    POINTER_FIRE_RIGHT
   } pointer_t;
 
 private:
@@ -66,12 +68,15 @@ private:
     pointer_arrow_down_left,
     pointer_arrow_right,
     pointer_arrow_left,
+    pointer_fire_left,
+    pointer_fire_right,
     pointer_aim;
 
   Mouse();
   pointer_t ScrollPointer() const;
   bool DrawMovePointer();
   void ScrollCamera() const;
+  void DrawSelectPointer();
 
   const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
 public:

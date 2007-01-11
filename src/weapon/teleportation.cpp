@@ -26,6 +26,7 @@
 #include "../game/time.h"
 #include "../graphic/effects.h"
 #include "../include/action_handler.h"
+#include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../particles/teleport_member.h"
@@ -52,6 +53,9 @@ bool Teleportation::p_Shoot ()
   Rectanglei rect = ActiveCharacter().GetTestRect();
   rect.SetPosition(dst); 
 
+  // Go back to default cursor
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  
   GameLoop::GetInstance()->interaction_enabled = false;
 
   jukebox.Play("share", "weapon/teleport_start");
@@ -87,6 +91,17 @@ void Teleportation::Draw()
 {
   if (!m_is_active)
     Weapon::Draw();
+}
+
+void Teleportation::p_Select()
+{
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_RIGHT);
+}
+
+void Teleportation::p_Deselect()
+{
+  // Go back to default cursor
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 }
 
 void Teleportation::ChooseTarget(Point2i mouse_pos)
