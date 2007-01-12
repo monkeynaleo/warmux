@@ -16,36 +16,12 @@ msgstr ""
 "X-Generator: KBabel 1.11.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/network/distant_cpu.cpp:70
-#, fuzzy
-msgid " has joined the party"
-msgstr "%s faldt ud af banen!"
-
-#: src/network/distant_cpu.cpp:79
-#, fuzzy
-msgid " has left the party"
-msgstr "%s faldt ud af banen!"
-
 #: src/map/maps_list.cpp:275
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Banen %s ikke fundet :-("
 
-#: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:227
-#, c-format
-msgid "%i player connected"
-msgid_plural "%i players connected"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:232
-#, c-format
-msgid "%i player ready"
-msgid_plural "%i players ready"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:706
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (fra holdet %s) blev dræbt."
@@ -60,7 +36,7 @@ msgstr "%s <%s> også kendt som %s fra %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> fra %s"
 
-#: src/game/game_loop.cpp:674
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begår selvmord !"
@@ -70,32 +46,32 @@ msgstr "%s begår selvmord !"
 msgid "%s fps"
 msgstr "%s FPS"
 
-#: src/game/game_loop.cpp:667
+#: src/game/game_loop.cpp:678
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s faldt i vandet."
 
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s faldt ud af banen!"
 
-#: src/game/game_loop.cpp:689
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s er en psychopat; han dræbte en fra holdet %s!"
 
-#: src/game/game_loop.cpp:684
+#: src/game/game_loop.cpp:695
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s døde fordi han var klodset!"
 
-#: src/weapon/mine.cpp:115
+#: src/weapon/mine.cpp:115 src/weapon/mine.cpp:129
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s er ved en mine!"
 
-#: src/object/bonus_box.cpp:152
+#: src/object/bonus_box.cpp:167
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -105,7 +81,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s (fra holdet %s) blev dræbt."
 
-#: src/object/bonus_box.cpp:146
+#: src/object/bonus_box.cpp:161
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -124,7 +100,7 @@ msgstr "(død)"
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
 
-#: src/weapon/air_attack.cpp:160
+#: src/weapon/air_attack.cpp:161
 #, fuzzy
 msgid "Air Attack"
 msgstr "Luftangreb"
@@ -132,11 +108,6 @@ msgstr "Luftangreb"
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
 msgstr ""
-
-#: src/team/results.cpp:143
-#, fuzzy
-msgid "All teams"
-msgstr "Indlæser hold:"
 
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
@@ -197,25 +168,8 @@ msgstr "Klyngebombe"
 msgid "Commit Suicide"
 msgstr "Begå selvmord"
 
-#: src/menu/internet_menu.cpp:62
-msgid "Connect !"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:65
-#: src/menu/network_connection_menu.cpp:180
-msgid "Connect to an internet game"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:172
-msgid "Connect to game"
-msgstr ""
-
 #: src/weapon/construct.cpp:43
 msgid "Construct"
-msgstr ""
-
-#: src/network/index_server.cpp:88
-msgid "Contacting main server..."
 msgstr ""
 
 #: src/menu/main_menu.cpp:110
@@ -227,7 +181,7 @@ msgstr "Udviklere"
 msgid "Disco Grenade"
 msgstr "Granat"
 
-#: src/game/game.cpp:154
+#: src/game/game.cpp:156
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Vil du virkelig afslutte? (Y/N)"
 
@@ -255,7 +209,7 @@ msgstr "Fejl i indlæsning af hold %s:"
 msgid "Error loading team's data %s:"
 msgstr "Fejl i indlæsning af holds data %s:"
 
-#: src/game/config.cpp:306
+#: src/game/config.cpp:301
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -263,7 +217,7 @@ msgstr ""
 "Fejl under skabelse af katalog \"%s\": ikke i stand til at gemme "
 "konfigurationsfil."
 
-#: src/game/config.cpp:148
+#: src/game/config.cpp:147
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fejl under indlæsning af konfigurationsfil: %s"
@@ -273,7 +227,7 @@ msgstr "Fejl under indlæsning af konfigurationsfil: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Fejl under indlæsning af spilmodus %s (file %s):"
 
-#: src/game/game.cpp:198
+#: src/game/game.cpp:201
 #, c-format
 msgid ""
 "Error:\n"
@@ -282,37 +236,12 @@ msgstr ""
 "Fejl:\n"
 "%s"
 
-#: src/menu/network_connection_menu.cpp:222
-#, fuzzy, c-format
-msgid "Error: Unable to connect to %s:%s"
-msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
-
-#: src/menu/network_connection_menu.cpp:200
-#, fuzzy
-msgid "Error: Unable to contact index server to host a game"
-msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
-
-#: src/menu/network_connection_menu.cpp:230
-#, fuzzy
-msgid "Error: Unable to contact index server to search an internet game"
-msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
-
-#: src/menu/network_connection_menu.cpp:212
-#, fuzzy
-msgid "Error: Unable to start server"
-msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
-
 #: src/team/team.cpp:144
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fejl: kan ikke kroppen \"%s\" for holdet \"%s\"."
 
-#: src/network/network.cpp:78
-#, fuzzy
-msgid "Failed to initialize network library!"
-msgstr "Ikke i stand til at klargøre SDL bibliotek: %s"
-
-#: src/game/game_loop.cpp:162
+#: src/game/game_loop.cpp:163
 msgid "Find a random position for characters"
 msgstr "Finder en tilfældig position til krigerne"
 
@@ -340,19 +269,7 @@ msgstr "Skyder"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 
-#: src/menu/network_connection_menu.cpp:109
-msgid "Have a good game!"
-msgstr ""
-
-#: src/menu/team_box.cpp:47
-msgid "Head commander"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:164
-msgid "Host a game"
-msgstr ""
-
-#: src/game/game_loop.cpp:730
+#: src/game/game_loop.cpp:741
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -367,7 +284,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energi som udgangspunkt:"
 
-#: src/game/game_loop.cpp:203
+#: src/game/game_loop.cpp:204
 msgid "Initialisation"
 msgstr "Klargører"
 
@@ -376,44 +293,24 @@ msgstr "Klargører"
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Klargørelse af TTF bibliotek fejlede: %s"
 
-#: src/game/game_loop.cpp:106
+#: src/game/game_loop.cpp:107
 msgid "Initialise data"
 msgstr "Klargører data"
 
-#: src/game/game_loop.cpp:168
+#: src/game/game_loop.cpp:169
 msgid "Initialise objects"
 msgstr "Klargører objekter"
 
-#: src/game/game_loop.cpp:102 src/game/game_loop.cpp:131
+#: src/game/game_loop.cpp:103 src/game/game_loop.cpp:132
 msgid "Initialise teams"
 msgstr "Klargører hold"
 
-#: src/network/index_server.cpp:99
-msgid "Invalid index server adress!"
-msgstr ""
-
-#: src/network/network.cpp:198
-msgid "Invalid port!"
-msgstr ""
-
-#: src/network/network.cpp:145
-msgid "Invalid server adress!"
-msgstr ""
-
-#: src/object/bonus_box.cpp:202
+#: src/object/bonus_box.cpp:216
 msgid "Is it a gift?"
 msgstr "Er det en gave?"
 
-#: src/network/index_server.cpp:297
-msgid "It doesn't seem to be a valid Wormux server..."
-msgstr ""
-
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:117
-msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
 #: src/map/maps_list.cpp:183
@@ -424,53 +321,27 @@ msgstr "Indlæser baner:"
 msgid "Load teams:"
 msgstr "Indlæser hold:"
 
-#: src/menu/network_teams_selection_box.cpp:33
-#, fuzzy
-msgid "Local teams:"
-msgstr "Indlæser hold:"
-
 #: src/weapon/lowgrav.cpp:38
 msgid "LowGrav"
 msgstr ""
 
-#: src/map/map.cpp:328
+#: src/map/map.cpp:327
 #, fuzzy, c-format
 msgid "Map %s, a creation of: "
 msgstr "Banen %s, en kreation af:"
 
-#: src/game/game_loop.cpp:206
+#: src/game/game_loop.cpp:207
 msgid "Maps"
 msgstr "Baner"
-
-#: src/menu/network_menu.cpp:90
-#, fuzzy
-msgid "Max number of players:"
-msgstr "Antal krigere per hold:"
 
 #: src/menu/options_menu.cpp:77
 #, fuzzy
 msgid "Maximum FPS"
 msgstr "Maksimum FPS:"
 
-#: src/weapon/mine.cpp:184
+#: src/weapon/mine.cpp:206
 msgid "Mine"
 msgstr "Mine"
-
-#: src/menu/results_menu.cpp:169
-msgid "Most sold-out"
-msgstr ""
-
-#: src/menu/results_menu.cpp:159
-msgid "Most useful"
-msgstr ""
-
-#: src/menu/results_menu.cpp:164
-msgid "Most useless"
-msgstr ""
-
-#: src/menu/results_menu.cpp:154
-msgid "Most violent"
-msgstr ""
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -489,21 +360,6 @@ msgstr ""
 msgid "No element <%s> found in the xml config file!"
 msgstr "Intet <%s> element fundet i XML konfigurationsfilen!"
 
-#: src/menu/results_menu.cpp:209 src/menu/results_menu.cpp:216
-#: src/menu/results_menu.cpp:223 src/menu/results_menu.cpp:230
-msgid "Nobody!"
-msgstr ""
-
-#: src/menu/team_box.cpp:53
-#, fuzzy
-msgid "Number of characters"
-msgstr "Antal krigere per hold:"
-
-#: src/menu/teams_selection_box.cpp:31
-#, fuzzy
-msgid "Number of teams:"
-msgstr "Antal krigere per hold:"
-
 #: src/menu/main_menu.cpp:104
 msgid "Options"
 msgstr "Instillinger"
@@ -520,12 +376,6 @@ msgstr ""
 msgid "Play"
 msgstr "Spil"
 
-#: src/menu/network_teams_selection_box.cpp:52
-#: src/menu/teams_selection_box.cpp:50
-#, fuzzy
-msgid "Player"
-msgstr "Spil"
-
 #: src/menu/options_menu.cpp:68
 #, fuzzy
 msgid "Player energy?"
@@ -540,10 +390,6 @@ msgstr "Vis krigers navn?"
 msgid "Polecat Launcher"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:81
-msgid "Port:"
-msgstr ""
-
 #: src/menu/main_menu.cpp:116
 msgid "Quit"
 msgstr "Afslut"
@@ -552,16 +398,8 @@ msgstr "Afslut"
 msgid "Quit Wormux"
 msgstr "Afslut Wormux"
 
-#: src/game/config.cpp:158
+#: src/game/config.cpp:157
 msgid "Reading personal config file"
-msgstr ""
-
-#: src/menu/internet_menu.cpp:55
-msgid "Refresh"
-msgstr ""
-
-#: src/menu/team_box.cpp:70
-msgid "Remote"
 msgstr ""
 
 #: src/menu/options_menu.cpp:82
@@ -581,14 +419,6 @@ msgstr "Kør spil"
 msgid "Scroll on border"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:75
-msgid "Server address:"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:87
-msgid "Server available on Internet"
-msgstr ""
-
 #: src/weapon/shotgun.cpp:62
 #, fuzzy
 msgid "Shotgun"
@@ -602,12 +432,6 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:105
-msgid ""
-"Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
-"blowtorch, submachine gun) and surely many other things don't work either!"
-msgstr ""
-
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
 msgstr "Lydeffekter?"
@@ -617,7 +441,7 @@ msgstr "Lydeffekter?"
 msgid "Sound frequency"
 msgstr "Lydeffekter?"
 
-#: src/game/game_loop.cpp:224
+#: src/game/game_loop.cpp:225
 msgid "Sounds"
 msgstr "Lyde"
 
@@ -641,11 +465,11 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_loop.cpp:210
+#: src/game/game_loop.cpp:211
 msgid "Teams"
 msgstr "Hold"
 
-#: src/weapon/teleportation.cpp:39
+#: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
 msgstr "Teleportation"
 
@@ -688,37 +512,10 @@ msgstr "Raketten har forladt slagmarken..."
 msgid "The rocket has left the battlefield..."
 msgstr "Raketten har forladt slagmarken..."
 
-#: src/menu/network_menu.cpp:197
-#, c-format
-msgid "There is only %i team."
-msgid_plural "There are only %i teams."
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/network/index_server.cpp:78
-#, fuzzy
-msgid "Unable to contact an index server!"
-msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
-
-#: src/network/network.cpp:158
-#, fuzzy
-msgid "Unable to contact server!"
-msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
-
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Ikke i stand til at klargøre SDL bibliotek: %s"
-
-#: src/menu/internet_menu.cpp:96
-#, fuzzy
-msgid "Unable to join the game..."
-msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
-
-#: src/network/network.cpp:243
-#, fuzzy
-msgid "Unable to listen for client!"
-msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
 
 #: src/map/maps_list.cpp:196 src/map/maps_list.cpp:212
 #, c-format
@@ -734,26 +531,7 @@ msgstr "Uventet undtagelse fanget..."
 msgid "Version"
 msgstr "Version"
 
-#: src/menu/network_menu.cpp:118
-msgid ""
-"WARNING! Disconnections are not yet handled. So you have to restart Wormux "
-"after each disconnection!"
-msgstr ""
-
-#: src/menu/network_connection_menu.cpp:103
-msgid ""
-"WARNING!! Network is still under developement and therefore a little "
-"experimental."
-msgstr ""
-
-#: src/menu/network_menu.cpp:208
-#, c-format
-msgid "Wait! %i player is not ready yet!"
-msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/game/game_loop.cpp:219
+#: src/game/game_loop.cpp:220
 msgid "Weapons"
 msgstr "Våben"
 
@@ -761,7 +539,7 @@ msgstr "Våben"
 msgid "Website: "
 msgstr "Hjemmeside: "
 
-#: src/game/game_loop.cpp:692
+#: src/game/game_loop.cpp:703
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Hvilken skam for %s - han blev dræbt af en simpel skyder!"
@@ -779,25 +557,16 @@ msgstr "Wormux starter..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/include/action_handler.cpp:375
-#, c-format
-msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
-
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "XML fejl under indlæsning af bane '%s' :"
 
-#: src/menu/network_menu.cpp:202
-msgid "You are alone..."
-msgstr ""
-
 #: src/map/maps_list.cpp:232
 msgid "You need at least one valid map !"
 msgstr "Du har brug for mindst én gyldig bane !"
 
-#: src/game/game_loop.cpp:214
+#: src/game/game_loop.cpp:215
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Du har brug for mindst to hold at spille; ændr det i 'Indstillinger' "
@@ -818,6 +587,74 @@ msgstr "færdig"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr ""
+
+#, fuzzy
+#~ msgid " has joined the party"
+#~ msgstr "%s faldt ud af banen!"
+
+#, fuzzy
+#~ msgid " has left the party"
+#~ msgstr "%s faldt ud af banen!"
+
+#, fuzzy
+#~ msgid "All teams"
+#~ msgstr "Indlæser hold:"
+
+#, fuzzy
+#~ msgid "Error: Unable to connect to %s:%s"
+#~ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
+
+#, fuzzy
+#~ msgid "Error: Unable to contact index server to host a game"
+#~ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
+
+#, fuzzy
+#~ msgid "Error: Unable to contact index server to search an internet game"
+#~ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
+
+#, fuzzy
+#~ msgid "Error: Unable to start server"
+#~ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
+
+#, fuzzy
+#~ msgid "Failed to initialize network library!"
+#~ msgstr "Ikke i stand til at klargøre SDL bibliotek: %s"
+
+#, fuzzy
+#~ msgid "Local teams:"
+#~ msgstr "Indlæser hold:"
+
+#, fuzzy
+#~ msgid "Max number of players:"
+#~ msgstr "Antal krigere per hold:"
+
+#, fuzzy
+#~ msgid "Number of characters"
+#~ msgstr "Antal krigere per hold:"
+
+#, fuzzy
+#~ msgid "Number of teams:"
+#~ msgstr "Antal krigere per hold:"
+
+#, fuzzy
+#~ msgid "Player"
+#~ msgstr "Spil"
+
+#, fuzzy
+#~ msgid "Unable to contact an index server!"
+#~ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to contact server!"
+#~ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to join the game..."
+#~ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
+
+#, fuzzy
+#~ msgid "Unable to listen for client!"
+#~ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
 
 #~ msgid "%s has lost %u point of energy."
 #~ msgid_plural "%s has lost %u points of energy."

@@ -114,7 +114,7 @@ Main_Menu::Main_Menu() :
   quit =  new ButtonText(Point2i(x_button, y),
                          res, "main_menu/button",
                          _("Quit"),
-                         large_font);  
+                         large_font);
 
   widgets.AddWidget(play);
   if(Config::GetInstance()->IsNetworkActivated())
@@ -131,6 +131,9 @@ Main_Menu::Main_Menu() :
 
   std::string s2(Constants::WEB_SITE);
   website_text = new Text(s2, green_color, normal_font, false);
+
+  if(!jukebox.IsPlayingMusic())
+     jukebox.PlayMusic("menu");
 }
 
 void Main_Menu::button_clic()
@@ -213,7 +216,7 @@ void Main_Menu::DrawBackground(const Point2i &mousePosition)
   skin_left->Blit(window, 0, window.GetHeight() - skin_left->GetHeight());
   skin_right->Blit(window, window.GetWidth()  - skin_right->GetWidth(),
 		   window.GetHeight() - skin_right->GetHeight());
-  
+
   version_text->DrawCenter( window.GetWidth()/2,
                             window.GetHeight() + VERSION_DY);
   website_text->DrawCenter( window.GetWidth()/2,
@@ -232,8 +235,8 @@ void Main_Menu::Redraw(const Rectanglei& rect, Surface &window)
 		  skin_left->GetWidth(), skin_left->GetHeight());
   dest.Clip(rect);
 
-  Rectanglei src(rect.GetPositionX() - 0, 
-		 rect.GetPositionY() - (window.GetHeight() - skin_left->GetHeight()), 
+  Rectanglei src(rect.GetPositionX() - 0,
+		 rect.GetPositionY() - (window.GetHeight() - skin_left->GetHeight()),
 		 dest.GetSizeX(), dest.GetSizeY());
 
   skin_left->Blit(window, src, dest.GetPosition());
@@ -242,9 +245,9 @@ void Main_Menu::Redraw(const Rectanglei& rect, Surface &window)
 		   window.GetHeight() - skin_right->GetHeight(),
 		   skin_right->GetWidth(), skin_right->GetHeight());
   dest2.Clip(rect);
-	 
-  Rectanglei src2(dest2.GetPositionX() - (window.GetWidth()  - skin_right->GetWidth()), 
-		  dest2.GetPositionY() - (window.GetHeight() - skin_right->GetHeight()), 
+
+  Rectanglei src2(dest2.GetPositionX() - (window.GetWidth()  - skin_right->GetWidth()),
+		  dest2.GetPositionY() - (window.GetHeight() - skin_right->GetHeight()),
 		  dest2.GetSizeX(), dest2.GetSizeY());
 
   skin_right->Blit(window, src2, dest2.GetPosition());
