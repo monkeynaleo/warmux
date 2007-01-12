@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <profile>
   <music type="menu" playlist="menu/menu.m3u" />
   <music type="ingame" playlist="ingame/ingame.m3u" />
