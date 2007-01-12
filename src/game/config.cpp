@@ -165,9 +165,9 @@ bool Config::LoadXml(xmlpp::Element *xml)
   elem = XmlReader::GetMarker(xml, "teams");
   int i = 0;
 
-  xmlpp::Element *team = XmlReader::GetMarker(elem, "team_" + ulong2str(i));
+  xmlpp::Element *team;
 
-  while (team != NULL)
+  while ((team = XmlReader::GetMarker(elem, "team_" + ulong2str(i))) != NULL)
   {
     ConfigTeam one_team;
     XmlReader::ReadString(team, "id", one_team.id);
@@ -181,12 +181,10 @@ bool Config::LoadXml(xmlpp::Element *xml)
 
     // get next team
     i++;
-    team = XmlReader::GetMarker(elem, "team_"+ulong2str(i));
   }
 
   //=== Video ===
-  elem = XmlReader::GetMarker(xml, "video");
-  if (elem != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "video")) != NULL)
   {
     uint max_fps;
     if (XmlReader::ReadUint(elem, "max_fps", max_fps))
@@ -203,8 +201,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
   }
 
   //=== Sound ===
-  elem = XmlReader::GetMarker(xml, "sound");
-  if (elem != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "sound")) != NULL)
   {
     XmlReader::ReadBool(elem, "music", tmp.sound.music);
     XmlReader::ReadBool(elem, "effects", tmp.sound.effects);
@@ -212,8 +209,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
   }
 
   //=== network ===
-  elem = XmlReader::GetMarker(xml, "network");
-  if (elem != NULL)
+  if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
   {
     XmlReader::ReadBool(elem, "enable_network", tmp.network.enable_network);
   }

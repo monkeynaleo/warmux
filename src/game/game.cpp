@@ -136,6 +136,8 @@ void Game::Start()
 
   try
   {
+
+    jukebox.PlayMusic("ingame");
     GameLoop::GetInstance()->Init ();
 
     do
@@ -191,6 +193,7 @@ void Game::Start()
 
   UnloadDatas();
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
+  jukebox.PlayMusic("menu");
 
   if (err)
   {

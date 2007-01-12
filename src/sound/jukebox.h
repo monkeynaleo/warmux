@@ -25,24 +25,57 @@
 #include <SDL.h>
 #include <SDL_mixer.h>
 
+#include <vector>
 #include <map>
 #include <set>
 #include <utility>
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
-class JukeBox 
+/* Informations about music...
+ *
+ * Now, there is a playlist in JukeBox class.
+ * A profil is openned in $DATA$/music/profile.xml, where there is a list of "music" sections like this :
+ *   <music type="menu" playlist="menu/menu.m3u" />
+ *
+ * Your must create a m3u file, where there are listed (one per line) all music files with a relative or an absolute path.
+ * A comment is a line begined with a '#' char.
+ *
+ * When wormux is launched, there is a menu playlist and a ingame playlist.
+ * At startup of a playlist, a random music is selected, after that, at the end of the current music, we play
+ * the next music in list. If this is the last music, we go back to the first music...
+ *
+ * Music is a separate section of JukeBox class, with his own members functions and variables.
+ *
+ * Call LoadMusicXML() will load profile and playlists.
+ * Next, a call to PlayMusic(profile_name) will stop any playing playlist, and will play request playlist.
+ * You can use NextMusic() and StopMusic().
+ *
+ * There isn't any PauseMusic() and ResumeMusic(), but if it is necessary it can easily be done.
+ * Note that Pause() and Resume() are used for CHUNK SOUNDS ONLY.
+ *
+ * -Progs
+ */
+
+class JukeBox
 {
 private:
 
-  typedef std::multimap<std::string, std::string>::value_type 
+  typedef std::multimap<std::string, std::string>::value_type
     sound_sample;
-  typedef std::multimap<std::string, std::string>::iterator 
+  typedef std::multimap<std::string, std::string>::iterator
     sample_iterator;
 
   std::multimap<std::string, std::string> m_soundsamples;
 
   std::map<int, Mix_Chunk*> chunks;
+  Mix_Music* music;
+
+  typedef std::map<std::string, std::vector<std::string> > PlayListMap;
+  PlayListMap playlist;
+
+  PlayListMap::const_iterator playing_pl;
+  std::vector<std::string>::const_iterator playing_music;
 
   struct s_m_config{
     bool music;
@@ -56,20 +89,23 @@ private:
   std::set<std::string> m_profiles_loaded;
 
   static void EndChunk(int channel);
+  static void EndMusic();
+
+  bool PlayMusicSample(std::vector<std::string>::const_iterator file);
 
 public:
   JukeBox();
   void Init();
-  void End(); 
-  
+  void End();
+
   bool UseMusic() const {return m_config.music;};
   bool UseEffects() const {return m_config.effects;};
   int GetFrequency() const {return m_config.frequency;};
   int HowManyChannels() const {return m_config.channels;};
   void Pause();
   void Resume();
-  
-  void ActiveMusic (bool on) {m_config.music = on ;};
+
+  void ActiveMusic (bool on);
   void ActiveEffects (bool on) {m_config.effects = on;};
 
   void SetFrequency (int frequency);
@@ -77,26 +113,35 @@ public:
 
   void LoadXML(const std::string& profile);
 
-  /** 
+  void LoadMusicXML();
+
+  bool PlayMusic(const std::string& type);
+  void StopMusic();
+  void NextMusic();
+
+  bool IsPlayingMusic() const { return (!playlist.empty() && playing_pl != playlist.end()); }
+  bool IsPlayingMusicSample() const { return (IsPlayingMusic() && playing_music != playing_pl->second.end()); }
+
+  /**
    * Playing a sound effect
    * @return the channel used to play the sample
    * <i>loop</i>: -1 for loop forever, else number of times to play
    */
-  int Play(const std::string& category, 
-	   const std::string& sample, 
+  int Play(const std::string& category,
+	   const std::string& sample,
 	   const int loop = 1);
-  
+
   int Stop(int channel);
 
   int StopAll();
 
 private:
-  /** 
+  /**
    * Playing a sound effect
    * @return the channel used to play the sample
    * <i>loop</i>: -1 for loop forever, else number of times -1 to play
    */
-  int PlaySample (Mix_Chunk * sample, int loop=0); 
+  int PlaySample (Mix_Chunk * sample, int loop=0);
 };
 
 extern JukeBox jukebox;
