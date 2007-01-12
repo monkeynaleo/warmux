@@ -111,41 +111,62 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
     // Error: do something ...
     return;
   }
+  // Use an array for this is the best solution I think, but there is perhaps a better code...
+  static char *teams[] = { "team", "contributors", "thanks" };
 
-  xmlpp::Node::NodeList sections = doc.GetRoot()->get_children("section");
-  xmlpp::Node::NodeList::iterator
-    section=sections.begin(),
-    end_section=sections.end();
-
-  for (; section != end_section; ++section)
+  for(uint i = 0; i < (sizeof teams / sizeof* teams); ++i)
   {
-    xmlpp::Node::NodeList authors = (**section).get_children("author");
+
+    xmlpp::Node::NodeList team = doc.GetRoot()->get_children(teams[i]);
+
+    if(team.empty()) continue;
+
+    std::string team_title = teams[i];
+    std::transform( team_title.begin(), team_title.end(), team_title.begin(), static_cast<int (*)(int)>(toupper) );
+
+    // I think this is ugly, but someone can use a better presentation
+    std::cout << "       ===[ " << team_title << " ]===" << std::endl << std::endl;
+
+    lbox_authors->AddItem (false, "       ===[ " + team_title + " ]===", teams[i]);
+    lbox_authors->AddItem (false, "", "");
+
+    // We think there is ONLY ONE occurence of team section, so we use the first
+    xmlpp::Node::NodeList sections = team.front()->get_children("section");
     xmlpp::Node::NodeList::iterator
-      node=authors.begin(),
-      end=authors.end();
-    std::string title;
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*section);
-    if (!elem)
+      section=sections.begin(),
+      end_section=sections.end();
+
+    for (; section != end_section; ++section)
     {
-        std::cerr << "cast error" << std::endl;
-        continue;
+      xmlpp::Node::NodeList authors = (**section).get_children("author");
+      xmlpp::Node::NodeList::iterator
+        node=authors.begin(),
+        end=authors.end();
+      std::string title;
+      xmlpp::Element *elem = dynamic_cast<xmlpp::Element*>(*section);
+      if (!elem)
+      {
+          std::cerr << "cast error" << std::endl;
+          continue;
+      }
+      if (!XmlReader::ReadStringAttr(elem, "title", title)) continue;
+
+      std::cout << "== " << title << " ==" << std::endl;
+
+      lbox_authors->AddItem (false, "== "+title+" ==", title);
+
+      for (; node != end; ++node)
+      {
+          Author author;
+          if (author.Feed(*node))
+          {
+            std::cout << author.PrettyString(false) << std::endl;
+            lbox_authors->AddItem (false, author.PrettyString(false), author.name);
+          }
+      }
+      std::cout << std::endl;
+      lbox_authors->AddItem (false, "", "");
     }
-    if (!XmlReader::ReadStringAttr(elem, "title", title)) continue;
-
-    std::cout << "=== " << title << " ===" << std::endl;
-
-    lbox_authors->AddItem (false, "=== "+title+" ===", title);
-
-    for (; node != end; ++node)
-    {
-        Author author;
-        if (author.Feed(*node))
-        {
-          std::cout << author.PrettyString(false) << std::endl;
-          lbox_authors->AddItem (false, author.PrettyString(false), author.name);
-        }
-    }
-    std::cout << std::endl;
   }
 
 }
