@@ -120,10 +120,13 @@ void BonusBox::SignalDrowning()
 
 void BonusBox::DropBonusBox()
 {
-  SetAirResistFactor(1.0);
-  parachute = false;
-  m_ignore_movements = true;
-  anim->SetCurrentFrame(anim->GetFrameCount() - 1);
+  if(parachute) {
+    SetAirResistFactor(1.0);
+    parachute = false;
+    anim->SetCurrentFrame(anim->GetFrameCount() - 1);
+  } else {
+    m_ignore_movements = true;
+  }
 }
 
 // Boxes can explode too ...
