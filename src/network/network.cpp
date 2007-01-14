@@ -137,11 +137,7 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
   int prt=0;
   sscanf(port.c_str(),"%i",&prt);
 
-  // Use network endianess
-  int net_prt;
-  SDLNet_Write32(prt, &net_prt);
-
-  if(SDLNet_ResolveHost(&ip,host.c_str(),net_prt)==-1)
+  if(SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt)==-1)
   {
     Question question;
     question.Set(_("Invalid server adress!"),1,0);
@@ -149,8 +145,6 @@ void Network::ClientConnect(const std::string &host, const std::string& port)
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return;
   }
-
-  ip.port = net_prt;
 
   TCPsocket socket = SDLNet_TCP_Open(&ip);
 
@@ -193,11 +187,7 @@ void Network::ServerStart(const std::string &port)
   int prt;
   sscanf(port.c_str(),"%i",&prt);
 
-  // Use network endianess
-  int net_prt;
-  SDLNet_Write32(prt, &net_prt);
-
-  if(SDLNet_ResolveHost(&ip,NULL,net_prt)==-1)
+  if(SDLNet_ResolveHost(&ip,NULL,(Uint16)prt)!=0)
   {
     Question question;
     question.Set(_("Invalid port!"),1,0);
@@ -205,7 +195,6 @@ void Network::ServerStart(const std::string &port)
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return;
   }
-  ip.port = prt;
 
   m_is_server = true;
   m_is_client = false;
@@ -247,7 +236,7 @@ void Network::AcceptIncoming()
     Question question;
     question.Set(_("Unable to listen for client!"),1,0);
     question.Ask();
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
+    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
     return;
   }
   printf("\nStart listening");
