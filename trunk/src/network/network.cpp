@@ -408,9 +408,9 @@ const bool Network::IsClient() const { return m_is_client; }
 
 const uint Network::GetPort()
 {
-  int prt;
-  prt = SDLNet_Read32(&ip.port);
-  return prt;
+  Uint16 prt;
+  prt = SDLNet_Read16(&ip.port);
+  return (uint)prt;
 }
 
 //-----------------------------------------------------------------------------
