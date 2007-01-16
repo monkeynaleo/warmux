@@ -135,7 +135,7 @@ if test "x$GCC" = "xyes"; then
     dnl Enable *more* warnings
     if test "$gccvernum" -ge "400"; then
                 dnl gcc 4.0 or later
-        GCC_FLAGS="$GCC_FLAGS -Wextra"
+        GCC_FLAGS="$GCC_FLAGS -Wextra -fno-strict-aliasing"
     else
         GCC_FLAGS="$GCC_FLAGS -W"
     fi
