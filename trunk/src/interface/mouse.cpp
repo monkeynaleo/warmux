@@ -463,6 +463,11 @@ void Mouse::Draw()
   if ( DrawMovePointer() )
     return;
 
+  if (Interface::GetInstance()->weapons_menu.IsDisplayed()) {
+    DrawSelectPointer();
+    return;
+  }
+
   switch (current_pointer)
     {
       // The standard beautiful hand
