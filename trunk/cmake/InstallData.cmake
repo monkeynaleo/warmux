@@ -2,7 +2,6 @@
 SET(DATA_FILES
 gfx/pointer.png
 gfx/water.png
-gfx/rectangle.png
 gfx/water_bottom.png
 gfx/arrow.png
 team/gnuteam/team.xml
@@ -173,7 +172,6 @@ weapon/anvil/anvil.png
 weapon/anvil/anvil_launcher.png
 weapon/dynamite/dynamite_ani.png
 weapon/dynamite/dynamite_ico.png
-weapon/dynamite/hole.png
 weapon/dynamite/dynamite.png
 weapon/parachute/parachute.png
 weapon/parachute/parachute_ico.png
@@ -181,7 +179,6 @@ weapon/riot_bomb/missile.png
 weapon/riot_bomb/riot_ico.png
 weapon/skip_turn/skipturn.png
 weapon/skip_turn/skipturn_ico.png
-weapon/push_ico.png
 weapon/disco_grenade/disco_grenade_ico.png
 weapon/disco_grenade/disco_grenade.png
 body/gnuteam/black.png
@@ -392,7 +389,6 @@ interface/pause.png
 interface/button3.png
 interface/button4.png
 interface/button5.png
-interface/weapons_menu.png
 interface/quit.png
 interface/wind_indicator.png
 interface/background_interface.png
