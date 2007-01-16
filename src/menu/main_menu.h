@@ -71,7 +71,7 @@ protected:
    void key_cancel();
 
 private:
-   virtual void DrawBackground(const Point2i &mousePosition);
+   virtual void DrawBackground();
    void OnClic(const Point2i &mousePosition, int button);
 
   // Main drawing function: refresh parts of screen 

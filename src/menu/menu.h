@@ -73,7 +73,7 @@ protected:
 
    virtual void sig_ok();
    virtual void sig_cancel();
-   virtual void DrawBackground(const Point2i &mousePosition);
+   virtual void DrawBackground();
 
    virtual void key_ok() {};
    virtual void key_cancel() {};

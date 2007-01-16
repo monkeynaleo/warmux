@@ -182,7 +182,9 @@ void ResultsMenu::SetResult(int i)
   const Character* player = NULL;
   const TeamResults* res = NULL;
   std::string name;
-  
+
+  DrawBackground();
+  b_ok->ForceRedraw();
   index = i;
   if (index < 0) index = results->size()-1;
   else if (index>(int)results->size()-1) index = 0;
