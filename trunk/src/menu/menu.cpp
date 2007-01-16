@@ -95,7 +95,7 @@ bool Menu::BasicOnClic(const Point2i &mousePosition)
   return true;
 }
 
-void Menu::DrawBackground(const Point2i &mousePosition)
+void Menu::DrawBackground()
 {
   background->ScaleSize(AppWormux::GetInstance()->video.window.GetSize());
   background->Blit(AppWormux::GetInstance()->video.window, 0, 0);
@@ -113,7 +113,7 @@ void Menu::Run ()
   close_menu = false;
 
   // Display the background
-  DrawBackground(Point2i(0,0));
+  DrawBackground();
 
   do
   {

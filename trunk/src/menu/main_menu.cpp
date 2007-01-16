@@ -208,11 +208,11 @@ void Main_Menu::__sig_ok()
   key_ok();
 }
 
-void Main_Menu::DrawBackground(const Point2i &mousePosition)
+void Main_Menu::DrawBackground()
 {
   Surface& window = AppWormux::GetInstance()->video.window;
 
-  Menu::DrawBackground(mousePosition);
+  Menu::DrawBackground();
   // skin_left->Blit(window, 0, window.GetHeight() - skin_left->GetHeight());
   // skin_right->Blit(window, window.GetWidth()  - skin_right->GetWidth(),
   // 		   window.GetHeight() - skin_right->GetHeight());
