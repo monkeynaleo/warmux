@@ -79,6 +79,11 @@ sound/francais/fire_02.ogg
 sound/francais/crazy.ogg
 sound/flying/profile.xml
 sound/flying/flying.ogg
+music/profile.xml
+music/ingame/ingame.m3u
+music/menu/menu.m3u
+music/menu/Olivier_Militon.-.Le_Calumet_F.ogg
+music/menu/Olivier_Militon.-.Le_Calumet.ogg
 weapon/jet_pack/jet_pack_ico.png
 weapon/cluster_bomb/cluster.png
 weapon/cluster_bomb/clusterbomb.png
