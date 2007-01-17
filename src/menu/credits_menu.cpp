@@ -77,10 +77,9 @@ std::string Author::PrettyString(bool with_email)
 CreditsMenu::CreditsMenu()  :
   Menu("menu/bg_network", vOk)
 {
-  int title_height = AppWormux::GetInstance()->video.window.GetHeight() * 110 / 600;
-  ListBox * lbox_authors = new ListBox( Rectanglei( 30, title_height,
+  ListBox * lbox_authors = new ListBox( Rectanglei( 30, 30,
 						    AppWormux::GetInstance()->video.window.GetWidth()-60,
-						    AppWormux::GetInstance()->video.window.GetHeight()-60-title_height),
+						    AppWormux::GetInstance()->video.window.GetHeight()-60-30),
                                         false);
 
   widgets.AddWidget(lbox_authors);
@@ -127,8 +126,10 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
     // I think this is ugly, but someone can use a better presentation
     std::cout << "       ===[ " << team_title << " ]===" << std::endl << std::endl;
 
-    lbox_authors->AddItem (false, "       ===[ " + team_title + " ]===", teams[i], c_red);
-    lbox_authors->AddItem (false, "", "");
+    lbox_authors->AddItem (false, " ", "", 
+			   *Font::GetInstance(Font::FONT_BIG));
+    lbox_authors->AddItem (false, team_title, teams[i], 
+			   *Font::GetInstance(Font::FONT_BIG), c_red);
 
     // We think there is ONLY ONE occurence of team section, so we use the first
     xmlpp::Node::NodeList sections = team.front()->get_children("section");
@@ -153,7 +154,9 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
 
       std::cout << "== " << title << " ==" << std::endl;
 
-      lbox_authors->AddItem (false, "== "+title+" ==", title, c_yellow);
+      lbox_authors->AddItem (false, " ", "");
+      lbox_authors->AddItem (false, "   "+title, title,
+			     *Font::GetInstance(Font::FONT_NORMAL), c_yellow);
 
       for (; node != end; ++node)
       {
