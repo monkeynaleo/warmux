@@ -49,10 +49,6 @@ private:
   bool always_one_selected;
 
 protected:
-  // for the placement
-  uint nb_visible_items, nb_visible_items_max;
-  uint height_item;
-
   // what are the items ?
   uint first_visible_item;
   int selected_item;
@@ -70,7 +66,9 @@ public:
   void SetSizePosition(const Rectanglei &rect);
 
   void AddItem(bool selected, const std::string &label,
-	       const std::string &value, const Color& color = white_color);
+	       const std::string &value,
+	       Font& font = *Font::GetInstance(Font::FONT_SMALL),
+	       const Color& color = white_color);
   void Sort();
 
   int MouseIsOnWhichItem(const Point2i &mousePosition) const;
