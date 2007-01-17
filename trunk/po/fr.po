@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-01-17 22:09+0100\n"
 "PO-Revision-Date: 2006-07-06 17:39+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team:  <fr@li.org>\n"
@@ -19,10 +20,32 @@ msgstr ""
 "X-Generator: KBabel 1.11\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: src/network/distant_cpu.cpp:70
+msgid " has joined the party"
+msgstr " a rejoint la partie"
+
+#: src/network/distant_cpu.cpp:79
+msgid " has left the party"
+msgstr " a quitté la partie"
+
 #: src/map/maps_list.cpp:275
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Le terrain %s est introuvable :-("
+
+#: src/menu/network_menu.cpp:96 src/menu/network_menu.cpp:227
+#, c-format
+msgid "%i player connected"
+msgid_plural "%i players connected"
+msgstr[0] " joueur connecté"
+msgstr[1] " joueurs connectés"
+
+#: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:232
+#, c-format
+msgid "%i player ready"
+msgid_plural "%i players ready"
+msgstr[0] " %i joueur prêt"
+msgstr[1] " %i joueurs prêts"
 
 #: src/game/game_loop.cpp:706
 #, c-format
@@ -111,6 +134,10 @@ msgstr "Attaque aérienne"
 msgid "Airhammer"
 msgstr "Marteau piqueur"
 
+#: src/team/results.cpp:143
+msgid "All teams"
+msgstr "Toute les équipes"
+
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr "Enclume"
@@ -166,9 +193,26 @@ msgstr "Grenade à fragmentation"
 msgid "Commit Suicide"
 msgstr "Suicide"
 
+#: src/menu/internet_menu.cpp:62
+msgid "Connect !"
+msgstr "Connecté !"
+
+#: src/menu/network_connection_menu.cpp:65
+#: src/menu/network_connection_menu.cpp:180
+msgid "Connect to an internet game"
+msgstr "Connecter une partie internet"
+
+#: src/menu/network_connection_menu.cpp:172
+msgid "Connect to game"
+msgstr "Se connecter"
+
 #: src/weapon/construct.cpp:43
 msgid "Construct"
 msgstr "Construction"
+
+#: src/network/index_server.cpp:88
+msgid "Contacting main server..."
+msgstr "Contact du serveur principal ..."
 
 #: src/menu/main_menu.cpp:110
 msgid "Credits"
@@ -232,10 +276,34 @@ msgstr ""
 "Erreur :\n"
 "%s"
 
+#: src/menu/network_connection_menu.cpp:222
+#, c-format
+msgid "Error: Unable to connect to %s:%s"
+msgstr "Impossible de se connecter à %s : %s"
+
+#: src/menu/network_connection_menu.cpp:200
+msgid "Error: Unable to contact index server to host a game"
+msgstr ""
+"Impossible de contacter le serveur d'index pour la création d'une partie"
+
+#: src/menu/network_connection_menu.cpp:231
+msgid "Error: Unable to contact index server to search an internet game"
+msgstr ""
+"Impossible de contacter le serveur d'index pour rechercher une partie sur "
+"internet"
+
+#: src/menu/network_connection_menu.cpp:212
+msgid "Error: Unable to start server"
+msgstr "Impossible de démarrer le serveur"
+
 #: src/team/team.cpp:144
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erreur : impossible de trouver le skin \"%s\" pour l'équipe \"%s\"."
+
+#: src/network/network.cpp:77
+msgid "Failed to initialize network library!"
+msgstr "Échec de l'initialisation de la bibliothèque SDL_net : %s"
 
 #: src/game/game_loop.cpp:163
 msgid "Find a random position for characters"
@@ -264,6 +332,18 @@ msgstr "Pistolet"
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Le répertoire HOME (variable d'environnement $HOME) introuvable !"
+
+#: src/menu/network_connection_menu.cpp:109
+msgid "Have a good game!"
+msgstr "Bonne partie !"
+
+#: src/menu/team_box.cpp:47
+msgid "Head commander"
+msgstr "Commandant"
+
+#: src/menu/network_connection_menu.cpp:164
+msgid "Host a game"
+msgstr "Créer une partie"
 
 #: src/game/game_loop.cpp:741
 msgid "Hurry up, you are too slow !!"
@@ -302,13 +382,33 @@ msgstr "Initialisation des objets"
 msgid "Initialise teams"
 msgstr "Initialisation des équipes"
 
+#: src/network/index_server.cpp:99
+msgid "Invalid index server adress!"
+msgstr "Adresse du serveur d'index invalide !"
+
+#: src/network/network.cpp:193
+msgid "Invalid port!"
+msgstr "Port invalide!"
+
+#: src/network/network.cpp:143
+msgid "Invalid server adress!"
+msgstr "Adresse du serveur invalide !"
+
 #: src/object/bonus_box.cpp:219
 msgid "Is it a gift?"
 msgstr "Tiens, un cadeau !"
 
+#: src/network/index_server.cpp:297
+msgid "It doesn't seem to be a valid Wormux server..."
+msgstr "Il semble que ce serveur Wormux ne soit valide ..."
+
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
 msgstr "Jetpack"
+
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:117
+msgid "Join #wormux on irc.freenode.net to find some opponents."
+msgstr "Venez sur #wormux-fr à irc.freenode.net pour trouver des adversaires."
 
 #: src/map/maps_list.cpp:183
 msgid "Load maps:"
@@ -317,6 +417,10 @@ msgstr "Chargement des terrains :"
 #: src/team/teams_list.cpp:106
 msgid "Load teams:"
 msgstr "Chargement des équipes :"
+
+#: src/menu/network_teams_selection_box.cpp:33
+msgid "Local teams:"
+msgstr "Equipes local :"
 
 #: src/weapon/lowgrav.cpp:38
 msgid "LowGrav"
@@ -331,6 +435,10 @@ msgstr "Terrain %s, une création de :"
 msgid "Maps"
 msgstr "Terrains"
 
+#: src/menu/network_menu.cpp:90
+msgid "Max number of players:"
+msgstr "Nombre de joueurs maximum :"
+
 #: src/menu/options_menu.cpp:77
 msgid "Maximum FPS"
 msgstr "Nbr. max. d'images/sec"
@@ -338,6 +446,22 @@ msgstr "Nbr. max. d'images/sec"
 #: src/weapon/mine.cpp:206
 msgid "Mine"
 msgstr "Mine"
+
+#: src/menu/results_menu.cpp:169
+msgid "Most sold-out"
+msgstr "Le plus traitre"
+
+#: src/menu/results_menu.cpp:159
+msgid "Most useful"
+msgstr "Le plus utile"
+
+#: src/menu/results_menu.cpp:164
+msgid "Most useless"
+msgstr "Le plus inutile"
+
+#: src/menu/results_menu.cpp:154
+msgid "Most violent"
+msgstr "Le plus violent"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -357,6 +481,19 @@ msgid "No element <%s> found in the xml config file!"
 msgstr ""
 "Aucun élément <%s> n'a été trouvé dans le fichier de configuration XML !"
 
+#: src/menu/results_menu.cpp:211 src/menu/results_menu.cpp:218
+#: src/menu/results_menu.cpp:225 src/menu/results_menu.cpp:232
+msgid "Nobody!"
+msgstr "Personne!"
+
+#: src/menu/team_box.cpp:53
+msgid "Number of characters"
+msgstr "Nombre de joueurs par équipe"
+
+#: src/menu/teams_selection_box.cpp:31
+msgid "Number of teams:"
+msgstr "Nombre d'équipe :"
+
 #: src/menu/main_menu.cpp:104
 msgid "Options"
 msgstr "Options"
@@ -373,6 +510,11 @@ msgstr "Le parachute est activé automatiquement."
 msgid "Play"
 msgstr "Jouer"
 
+#: src/menu/network_teams_selection_box.cpp:52
+#: src/menu/teams_selection_box.cpp:50
+msgid "Player"
+msgstr "Joueur"
+
 #: src/menu/options_menu.cpp:68
 msgid "Player energy?"
 msgstr "Affiche l'énergie des joueurs ?"
@@ -385,6 +527,10 @@ msgstr "Affiche le nom des joueurs ?"
 msgid "Polecat Launcher"
 msgstr "Lance putois"
 
+#: src/menu/network_connection_menu.cpp:81
+msgid "Port:"
+msgstr "Port :"
+
 #: src/menu/main_menu.cpp:116
 msgid "Quit"
 msgstr "Quitter"
@@ -396,6 +542,14 @@ msgstr "Quitte Wormux"
 #: src/game/config.cpp:157
 msgid "Reading personal config file"
 msgstr "Lecture du fichier de configuration personnelle"
+
+#: src/menu/internet_menu.cpp:55
+msgid "Refresh"
+msgstr "Rafraîchir"
+
+#: src/menu/team_box.cpp:70
+msgid "Remote"
+msgstr "Distant"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
@@ -413,6 +567,14 @@ msgstr "Lancement du jeu"
 msgid "Scroll on border"
 msgstr "Scrolling actif sur les bords"
 
+#: src/menu/network_connection_menu.cpp:75
+msgid "Server address:"
+msgstr "Adresse du serveur :"
+
+#: src/menu/network_connection_menu.cpp:87
+msgid "Server available on Internet"
+msgstr "Serveur disponible sur Internet"
+
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
 msgstr "Fusil à pompe"
@@ -424,6 +586,15 @@ msgstr "Passer son tour"
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
 msgstr "Fusil sniper"
+
+#: src/menu/network_connection_menu.cpp:105
+msgid ""
+"Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
+"blowtorch, submachine gun) and surely many other things don't work either!"
+msgstr ""
+"Certaines armes sont désactivées car elles sont à l'origine de bugs connus "
+"(corde ninja, attaque aérienne, mitrailleuse) mais il y'en a sûrement "
+"d'autre !"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -500,10 +671,33 @@ msgstr "La grenade a quitté le champs de bataille avant d'exploser."
 msgid "The rocket has left the battlefield..."
 msgstr "La roquette est partie dans un autre monde ..."
 
+#: src/menu/network_menu.cpp:197
+#, c-format
+msgid "There is only %i team."
+msgid_plural "There are only %i teams."
+msgstr[0] "Il y a que %i équipe."
+msgstr[1] "Il y a que %i équipes."
+
+#: src/network/index_server.cpp:78
+msgid "Unable to contact an index server!"
+msgstr "Impossible de contacter un serveur d'indexation !"
+
+#: src/network/network.cpp:154
+msgid "Unable to contact server!"
+msgstr "Impossible de contacter le serveur !"
+
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
 msgstr "Échec de l'initialisation de la bibliothèque SDL : %s"
+
+#: src/menu/internet_menu.cpp:96
+msgid "Unable to join the game..."
+msgstr "Impossible de rejoindre la partie ..."
+
+#: src/network/network.cpp:237
+msgid "Unable to listen for client!"
+msgstr "Impossible d'héberger une partie en réseau !"
 
 #: src/map/maps_list.cpp:196 src/map/maps_list.cpp:212
 #, c-format
@@ -517,6 +711,29 @@ msgstr "Exception inattendue interceptée ..."
 #: src/main.cpp:146
 msgid "Version"
 msgstr "Version"
+
+#: src/menu/network_menu.cpp:118
+msgid ""
+"WARNING! Disconnections are not yet handled. So you have to restart Wormux "
+"after each disconnection!"
+msgstr ""
+"ATTENTION! Les déconnections ne sont pas gérées. Vous devez donc redémarrer "
+"Wormux après chaque déconnexion !"
+
+#: src/menu/network_connection_menu.cpp:103
+msgid ""
+"WARNING!! Network is still under developement and therefore a little "
+"experimental."
+msgstr ""
+"Attention !! Le jeu en réseau est encore en développement et est de se fait "
+"très expérimental."
+
+#: src/menu/network_menu.cpp:208
+#, c-format
+msgid "Wait! %i player is not ready yet!"
+msgid_plural "Wait! %i players are not ready yet!"
+msgstr[0] "Attendez ! %i joueur n'est pas encore prêt !"
+msgstr[1] "Attendez ! %i joueurs ne sont pas encore prêt !"
 
 #: src/game/game_loop.cpp:220
 msgid "Weapons"
@@ -543,10 +760,19 @@ msgstr "Lancement de Wormux ..."
 msgid "Wormux version "
 msgstr "Wormux version "
 
+#: src/include/action_handler.cpp:375
+#, c-format
+msgid "Wormux versions are differents : client=%s, server=%s."
+msgstr "Les versions de Wormux sont différentes : client=%s, serveur=%s"
+
 #: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "Erreur XML durant le chargement du terrain '%s' :"
+
+#: src/menu/network_menu.cpp:202
+msgid "You are alone..."
+msgstr "Vous voulez vraiment jouer tout seul ?!"
 
 #: src/map/maps_list.cpp:232
 msgid "You need at least one valid map !"
@@ -573,175 +799,6 @@ msgstr "terminé"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "commandant :"
-
-#~ msgid " has joined the party"
-#~ msgstr " a rejoint la partie"
-
-#~ msgid " has left the party"
-#~ msgstr " a quitté la partie"
-
-#~ msgid "%i player connected"
-#~ msgid_plural "%i players connected"
-#~ msgstr[0] " joueur connecté"
-#~ msgstr[1] " joueurs connectés"
-
-#~ msgid "%i player ready"
-#~ msgid_plural "%i players ready"
-#~ msgstr[0] " %i joueur prêt"
-#~ msgstr[1] " %i joueurs prêts"
-
-#~ msgid "All teams"
-#~ msgstr "Toute les équipes"
-
-#~ msgid "Connect !"
-#~ msgstr "Connecté !"
-
-#~ msgid "Connect to an internet game"
-#~ msgstr "Connecter une partie internet"
-
-#~ msgid "Connect to game"
-#~ msgstr "Se connecter"
-
-#~ msgid "Contacting main server..."
-#~ msgstr "Contact du serveur principal ..."
-
-#~ msgid "Error: Unable to connect to %s:%s"
-#~ msgstr "Impossible de se connecter à %s : %s"
-
-#~ msgid "Error: Unable to contact index server to host a game"
-#~ msgstr ""
-#~ "Impossible de contacter le serveur d'index pour la création d'une partie"
-
-#~ msgid "Error: Unable to contact index server to search an internet game"
-#~ msgstr ""
-#~ "Impossible de contacter le serveur d'index pour rechercher une partie sur "
-#~ "internet"
-
-#~ msgid "Error: Unable to start server"
-#~ msgstr "Impossible de démarrer le serveur"
-
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Échec de l'initialisation de la bibliothèque SDL_net : %s"
-
-#~ msgid "Have a good game!"
-#~ msgstr "Bonne partie !"
-
-#~ msgid "Head commander"
-#~ msgstr "Commandant"
-
-#~ msgid "Host a game"
-#~ msgstr "Créer une partie"
-
-#~ msgid "Invalid index server adress!"
-#~ msgstr "Adresse du serveur d'index invalide !"
-
-#~ msgid "Invalid port!"
-#~ msgstr "Port invalide!"
-
-#~ msgid "Invalid server adress!"
-#~ msgstr "Adresse du serveur invalide !"
-
-#~ msgid "It doesn't seem to be a valid Wormux server..."
-#~ msgstr "Il semble que ce serveur Wormux ne soit valide ..."
-
-#~ msgid "Join #wormux on irc.freenode.net to find some opponents."
-#~ msgstr ""
-#~ "Venez sur #wormux-fr à irc.freenode.net pour trouver des adversaires."
-
-#~ msgid "Local teams:"
-#~ msgstr "Equipes local :"
-
-#~ msgid "Max number of players:"
-#~ msgstr "Nombre de joueurs maximum :"
-
-#~ msgid "Most sold-out"
-#~ msgstr "Le plus traitre"
-
-#~ msgid "Most useful"
-#~ msgstr "Le plus utile"
-
-#~ msgid "Most useless"
-#~ msgstr "Le plus inutile"
-
-#~ msgid "Most violent"
-#~ msgstr "Le plus violent"
-
-#~ msgid "Nobody!"
-#~ msgstr "Personne!"
-
-#~ msgid "Number of characters"
-#~ msgstr "Nombre de joueurs par équipe"
-
-#~ msgid "Number of teams:"
-#~ msgstr "Nombre d'équipe :"
-
-#~ msgid "Player"
-#~ msgstr "Joueur"
-
-#~ msgid "Port:"
-#~ msgstr "Port :"
-
-#~ msgid "Refresh"
-#~ msgstr "Rafraîchir"
-
-#~ msgid "Remote"
-#~ msgstr "Distant"
-
-#~ msgid "Server address:"
-#~ msgstr "Adresse du serveur :"
-
-#~ msgid "Server available on Internet"
-#~ msgstr "Serveur disponible sur Internet"
-
-#~ msgid ""
-#~ "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
-#~ "blowtorch, submachine gun) and surely many other things don't work either!"
-#~ msgstr ""
-#~ "Certaines armes sont désactivées car elles sont à l'origine de bugs "
-#~ "connus (corde ninja, attaque aérienne, mitrailleuse) mais il y'en a "
-#~ "sûrement d'autre !"
-
-#~ msgid "There is only %i team."
-#~ msgid_plural "There are only %i teams."
-#~ msgstr[0] "Il y a que %i équipe."
-#~ msgstr[1] "Il y a que %i équipes."
-
-#~ msgid "Unable to contact an index server!"
-#~ msgstr "Impossible de contacter un serveur d'indexation !"
-
-#~ msgid "Unable to contact server!"
-#~ msgstr "Impossible de contacter le serveur !"
-
-#~ msgid "Unable to join the game..."
-#~ msgstr "Impossible de rejoindre la partie ..."
-
-#~ msgid "Unable to listen for client!"
-#~ msgstr "Impossible d'héberger une partie en réseau !"
-
-#~ msgid ""
-#~ "WARNING! Disconnections are not yet handled. So you have to restart "
-#~ "Wormux after each disconnection!"
-#~ msgstr ""
-#~ "ATTENTION! Les déconnections ne sont pas gérées. Vous devez donc "
-#~ "redémarrer Wormux après chaque déconnexion !"
-
-#~ msgid ""
-#~ "WARNING!! Network is still under developement and therefore a little "
-#~ "experimental."
-#~ msgstr ""
-#~ "Attention !! Le jeu en réseau est encore en développement et est de se "
-#~ "fait très expérimental."
-
-#~ msgid "Wait! %i player is not ready yet!"
-#~ msgid_plural "Wait! %i players are not ready yet!"
-#~ msgstr[0] "Attendez ! %i joueur n'est pas encore prêt !"
-#~ msgstr[1] "Attendez ! %i joueurs ne sont pas encore prêt !"
-
-#~ msgid "Wormux versions are differents : client=%s, server=%s."
-#~ msgstr "Les versions de Wormux sont différentes : client=%s, serveur=%s"
-
-#~ msgid "You are alone..."
-#~ msgstr "Vous voulez vraiment jouer tout seul ?!"
 
 #~ msgid " "
 #~ msgstr " "
