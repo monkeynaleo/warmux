@@ -32,11 +32,10 @@
 ListBoxItem::ListBoxItem(const std::string& _label, 
 			 Font& _font,
 			 const std::string& _value,
-			 bool _enabled) : 
-  Label(_label, Rectanglei(0,0,0,0), _font)
+			 const Color& color) :
+  Label(_label, Rectanglei(0,0,0,0), _font, color)
 {
   value = _value;
-  enabled = _enabled;
 }
 
 const std::string& ListBoxItem::GetLabel() const
@@ -47,11 +46,6 @@ const std::string& ListBoxItem::GetLabel() const
 const std::string& ListBoxItem::GetValue() const
 {
   return value;
-}
-
-const bool ListBoxItem::IsEnabled() const
-{
-  return enabled;
 }
 
 // struct CompareItems
@@ -174,10 +168,6 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
     //    m_items[i + first_visible_item].Draw(GetPosition() + Point2i(5, i*height_item),
     //				 mousePosition, surf);
     m_items[i + first_visible_item]->Draw(mousePosition, surf);
-    
-    // item is disabled
-    if(!m_items[i]->IsEnabled())
-      surf.BoxColor(rect, defaultDisabledColorBox);
   }
 
   // buttons for listbox with more items than visible
@@ -210,12 +200,12 @@ void ListBox::SetSizePosition(const Rectanglei &rect)
 void ListBox::AddItem (bool selected,
 		       const std::string &label,
 		       const std::string &value,
-		       bool enabled)
+		       const Color& color)
 {
   uint pos = m_items.size();
 
   // Push item
-  ListBoxItem * item = new ListBoxItem(label, *Font::GetInstance(Font::FONT_SMALL), value, enabled);
+  ListBoxItem * item = new ListBoxItem(label, *Font::GetInstance(Font::FONT_SMALL), value, color);
   m_items.push_back (item);
 
   // Select it if selected

@@ -127,7 +127,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
     // I think this is ugly, but someone can use a better presentation
     std::cout << "       ===[ " << team_title << " ]===" << std::endl << std::endl;
 
-    lbox_authors->AddItem (false, "       ===[ " + team_title + " ]===", teams[i]);
+    lbox_authors->AddItem (false, "       ===[ " + team_title + " ]===", teams[i], c_red);
     lbox_authors->AddItem (false, "", "");
 
     // We think there is ONLY ONE occurence of team section, so we use the first
@@ -153,7 +153,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
 
       std::cout << "== " << title << " ==" << std::endl;
 
-      lbox_authors->AddItem (false, "== "+title+" ==", title);
+      lbox_authors->AddItem (false, "== "+title+" ==", title, c_yellow);
 
       for (; node != end; ++node)
       {
