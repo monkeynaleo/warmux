@@ -53,7 +53,8 @@ bool Client::HandleMsg(const std::string & str)
 		version = str;
 		if(str == "0.8beta1"
 		|| str == "0.7.9rc1"
-		|| str == "0.7.9rc2")
+		|| str == "0.7.9rc2"
+                || str == "0.7.9")
 		{
 			DPRINT(MSG, "Version checked successfully");
 			handshake_done = true;
