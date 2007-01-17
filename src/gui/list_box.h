@@ -34,14 +34,13 @@ class ListBoxItem : public Label
 {
 private:
   std::string value;
-  bool enabled;
+
 public:
   ListBoxItem(const std::string& _label, Font& _font, const std::string& value,
-	      bool enabled);
+	      const Color& color = white_color);
 
   const std::string& GetLabel() const;
   const std::string& GetValue() const;
-  const bool IsEnabled() const;
 };
 
 class ListBox : public Widget
@@ -71,7 +70,7 @@ public:
   void SetSizePosition(const Rectanglei &rect);
 
   void AddItem(bool selected, const std::string &label,
-		const std::string &value, bool enabled = true);
+	       const std::string &value, const Color& color = white_color);
   void Sort();
 
   int MouseIsOnWhichItem(const Point2i &mousePosition) const;
