@@ -108,7 +108,7 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   , index(0)
   , max_height(DEF_SIZE+3*DEF_BORDER)
   , team_size(360, 40)
-  , type_size(160, 40)
+  , type_size(260, 40)
   , name_size(250, 40)
   , score_size(60, 40)
 {
