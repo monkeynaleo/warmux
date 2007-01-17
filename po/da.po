@@ -71,7 +71,7 @@ msgstr "%s døde fordi han var klodset!"
 msgid "%s is next to a mine!"
 msgstr "%s er ved en mine!"
 
-#: src/object/bonus_box.cpp:167
+#: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -81,7 +81,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s (fra holdet %s) blev dræbt."
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -305,7 +305,7 @@ msgstr "Klargører objekter"
 msgid "Initialise teams"
 msgstr "Klargører hold"
 
-#: src/object/bonus_box.cpp:216
+#: src/object/bonus_box.cpp:219
 msgid "Is it a gift?"
 msgstr "Er det en gave?"
 

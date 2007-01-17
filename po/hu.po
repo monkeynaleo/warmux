@@ -73,7 +73,7 @@ msgstr "%s kicsit ügyefogyott volt, így hát távozott az élő sorából!"
 msgid "%s is next to a mine!"
 msgstr "%s egy taposó akna mellett ténfereg!"
 
-#: src/object/bonus_box.cpp:167
+#: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -83,7 +83,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s (%s csapat) meghalt."
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -310,7 +310,7 @@ msgstr "Felkészülés"
 msgid "Initialise teams"
 msgstr "Felkészülés"
 
-#: src/object/bonus_box.cpp:216
+#: src/object/bonus_box.cpp:219
 msgid "Is it a gift?"
 msgstr ""
 

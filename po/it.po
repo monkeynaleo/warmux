@@ -74,7 +74,7 @@ msgstr "%s è morto da maldestro!"
 msgid "%s is next to a mine!"
 msgstr "%s è vicino a une mina!"
 
-#: src/object/bonus_box.cpp:167
+#: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -84,7 +84,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s (squadra %s) è morto."
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -308,7 +308,7 @@ msgstr "Inizializzazione oggetti"
 msgid "Initialise teams"
 msgstr "Inizializzazione squadre"
 
-#: src/object/bonus_box.cpp:216
+#: src/object/bonus_box.cpp:219
 msgid "Is it a gift?"
 msgstr "È un regalo ?"
 
