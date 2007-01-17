@@ -70,7 +70,7 @@ msgstr "%s estas mortinta pro lia mallerteco."
 msgid "%s is next to a mine!"
 msgstr "%s estas proksima al mino ..."
 
-#: src/object/bonus_box.cpp:167
+#: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -80,7 +80,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "La teamo '%s' malhavas lian vicon."
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -302,7 +302,7 @@ msgstr "Preparante objektojn"
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
-#: src/object/bonus_box.cpp:216
+#: src/object/bonus_box.cpp:219
 #, fuzzy
 msgid "Is it a gift?"
 msgstr "Ĉu estas donaco?"

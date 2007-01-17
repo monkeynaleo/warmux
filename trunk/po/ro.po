@@ -77,7 +77,7 @@ msgstr "%s decedat prin propria stângăcie!"
 msgid "%s is next to a mine!"
 msgstr "%s e lângă o mină!"
 
-#: src/object/bonus_box.cpp:167
+#: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -87,7 +87,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "Echipa %s a sărit peste tură."
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -307,7 +307,7 @@ msgstr "Iniţializare obiecte"
 msgid "Initialise teams"
 msgstr "Iniţializare echipe"
 
-#: src/object/bonus_box.cpp:216
+#: src/object/bonus_box.cpp:219
 msgid "Is it a gift?"
 msgstr "Oare e un cadou?"
 

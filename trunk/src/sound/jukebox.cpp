@@ -141,8 +141,6 @@ void JukeBox::ActiveMusic (bool on)
 
 void JukeBox::LoadMusicXML()
 {
-  if (!UseMusic()) return;
-
   // is xml_file already loaded ?
   std::set<std::string>::iterator it_profile = m_profiles_loaded.find("music") ;
   if (it_profile !=  m_profiles_loaded.end()) {
@@ -255,7 +253,7 @@ void JukeBox::NextMusic()
 
 bool JukeBox::PlayMusic(const std::string& type)
 {
-  if(m_init == false) return false;
+  if(m_init == false || !UseMusic()) return false;
 
   PlayListMap::iterator it = playlist.find(type);
 
@@ -312,9 +310,6 @@ bool JukeBox::PlayMusicSample(std::vector<std::string>::const_iterator file_it)
 
 void JukeBox::LoadXML(const std::string& profile)
 {
-
-  if (!UseEffects()) return;
-
   // is xml_file already loaded ?
   std::set<std::string>::iterator it_profile = m_profiles_loaded.find(profile) ;
   if (it_profile !=  m_profiles_loaded.end()) {

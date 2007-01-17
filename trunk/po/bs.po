@@ -72,7 +72,7 @@ msgstr "%s je mrtav zato što je smotan!"
 msgid "%s is next to a mine!"
 msgstr "%s je pored mine!"
 
-#: src/object/bonus_box.cpp:167
+#: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -82,7 +82,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "%s timj preskočio svoj red."
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -299,7 +299,7 @@ msgstr "Inicijaliziranje objekata"
 msgid "Initialise teams"
 msgstr "Inicijaliziranje timova"
 
-#: src/object/bonus_box.cpp:216
+#: src/object/bonus_box.cpp:219
 msgid "Is it a gift?"
 msgstr "Da li je to poklon ?"
 

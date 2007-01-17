@@ -71,7 +71,7 @@ msgstr "%s je mŕtvy, pretože bol nemotorný!"
 msgid "%s is next to a mine!"
 msgstr "%s je veľmi blízko míny!"
 
-#: src/object/bonus_box.cpp:167
+#: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
@@ -81,7 +81,7 @@ msgstr ""
 msgid "%s team has skipped its turn."
 msgstr "Tím '%s' obetoval svoj ťah."
 
-#: src/object/bonus_box.cpp:161
+#: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -305,7 +305,7 @@ msgstr "Inicializácia tímov"
 msgid "Initialise teams"
 msgstr "Inicializácia tímov"
 
-#: src/object/bonus_box.cpp:216
+#: src/object/bonus_box.cpp:219
 #, fuzzy
 msgid "Is it a gift?"
 msgstr "Je to dar ?"
