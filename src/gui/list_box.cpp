@@ -87,7 +87,7 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
   if( !Contains(mousePosition) )
     return -1;
 
-  for (uint i=0; i < m_items.size(); i++) {
+  for (uint i=first_visible_item; i < m_items.size(); i++) {
     if ( m_items[i]->GetPositionY() <= mousePosition.y
 	 && m_items[i]->GetPositionY() + m_items[i]->GetSizeY() >= mousePosition.y)
       return i;
