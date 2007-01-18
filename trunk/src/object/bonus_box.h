@@ -34,25 +34,28 @@ class BonusBox : public PhysicalObj
   private:
     static bool enable;
     uint nbr_ammo;
+    static int start_life_points;
 
     bool parachute; 
     Sprite *anim;
 
     Weapon::Weapon_type contents;
+    static uint weapon_count;
+    static std::map<int,std::pair<Weapon*,int> > weapon_map;
+    static std::map<int,std::pair<Weapon*,int> > weapon_map_no_infinite;
 
   private:
-    static bool PlaceBonusBox (BonusBox& bonus_box);
     void ApplyBonus (Team &team, Character &character);
     void PickRandomWeapon();
   public:
     BonusBox();
     ~BonusBox();
 
-    // Activate bonus box ?
     static void Enable (bool _enable);
     static bool NewBonusBox();
     void DropBonusBox();
-    //bool LoadXml(xmlpp::Element * object); //the next update will include this
+    static void RemoveInfiniteWeapons();
+    static void LoadXml(xmlpp::Element * object);
 
     void Draw();
     void Refresh();

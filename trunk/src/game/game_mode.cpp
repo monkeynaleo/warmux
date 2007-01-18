@@ -140,14 +140,6 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
       barrel_explosion_cfg.LoadXml(barrel_explosion);
   }
 
-  // Bonus box explosion
-  xmlpp::Element *bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
-  if(bonus_box_xml != NULL) {
-    xmlpp::Element *bonus_box_explosion = XmlReader::GetMarker(bonus_box_xml, "explosion");
-    if (bonus_box_explosion != NULL)
-      bonus_box_explosion_cfg.LoadXml(bonus_box_explosion);
-  }
-
   //=== Weapons ===
   xmlpp::Element *armes = XmlReader::GetMarker(xml, "weapons");
   if (armes != NULL)
@@ -158,6 +150,15 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
       end = l_weapons_list.end();
 
     for (; itw != end ; ++itw) (*itw)->LoadXml(armes);
+  }
+
+  // Bonus box explosion - must be loaded after the weapons.
+  xmlpp::Element *bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
+  if(bonus_box_xml != NULL) {
+    xmlpp::Element *bonus_box_explosion = XmlReader::GetMarker(bonus_box_xml, "explosion");
+    if (bonus_box_explosion != NULL)
+      bonus_box_explosion_cfg.LoadXml(bonus_box_explosion);
+    BonusBox::LoadXml(bonus_box_xml);
   }
 
   return true;
