@@ -24,7 +24,7 @@ msgstr "! Mapa %s não encontrado :-("
 #: src/game/game_loop.cpp:706
 #, fuzzy, c-format
 msgid "%s (%s) has died."
-msgstr "%s (equipa %s) bateu as botas."
+msgstr "%s (equipe %s) bateu as botas."
 
 #: src/map/maps_list.cpp:102
 #, c-format
@@ -54,7 +54,7 @@ msgstr "%s caiu na água."
 #: src/game/game_loop.cpp:689
 #, c-format
 msgid "%s has fallen off the map!"
-msgstr "%s saiu para fora do mapa!"
+msgstr "%s saiu pra fora do mapa!"
 
 #: src/game/game_loop.cpp:700
 #, c-format
@@ -64,7 +64,7 @@ msgstr "%s é um psicopata, ele assassinou um membro da equipe %s !"
 #: src/game/game_loop.cpp:695
 #, c-format
 msgid "%s is dead because he is clumsy!"
-msgstr "%s está morto porque é desajeitado!"
+msgstr "%s morreu porque é um desajeitado!"
 
 #: src/weapon/mine.cpp:115 src/weapon/mine.cpp:129
 #, c-format
@@ -74,23 +74,23 @@ msgstr "%s está perto de uma mina!"
 #: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
-msgstr ""
+msgstr "A equipe %s já possui munição infinita para %s!"
 
 #: src/weapon/skip_turn.cpp:41
 #, c-format
 msgid "%s team has skipped its turn."
-msgstr "a equipe %s pulou sua vez."
+msgstr "a equipe %s pulou a vez."
 
 #: src/object/bonus_box.cpp:164
 #, fuzzy, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
-msgstr[0] "A equipe '%s' ganhou %u Bomba motim!"
-msgstr[1] "A equipe '%s' ganhou %u Bombas motim!"
+msgstr[0] "A equipe '%s' ganhou %u %s!"
+msgstr[1] "A equipe '%s' ganhou %u %ss!"
 
 #: src/menu/options_menu.cpp:132
 msgid "(current)"
-msgstr ""
+msgstr "(atual)"
 
 #: src/interface/interface.cpp:175
 msgid "(dead)"
@@ -98,11 +98,11 @@ msgstr "(morto)"
 
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
-msgstr "(ilimitadas)"
+msgstr "(ilimitado)"
 
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
-msgstr " Ataque aéreo"
+msgstr "Ataque aéreo"
 
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
@@ -175,7 +175,7 @@ msgstr "Créditos"
 #: src/weapon/disco_grenade.cpp:102
 #, fuzzy
 msgid "Disco Grenade"
-msgstr "Granada santa"
+msgstr "Granada Boate"
 
 #: src/game/game.cpp:156
 msgid "Do you really want to quit? (Y/N)"
@@ -262,11 +262,11 @@ msgstr "Pistola"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "Directório HOME (variável de ambiente $HOME) não pode ser encontrada!"
+msgstr "Directório HOME (variável de ambiente $HOME) não pode ser encontrado!"
 
 #: src/game/game_loop.cpp:741
 msgid "Hurry up, you are too slow !!"
-msgstr "Corra, você está muito lento !!"
+msgstr "Corra, você está muito devagar!!"
 
 #: src/main.cpp:192
 msgid ""
@@ -303,7 +303,7 @@ msgstr "Inicializar equipes"
 
 #: src/object/bonus_box.cpp:219
 msgid "Is it a gift?"
-msgstr "Isso é um presente?"
+msgstr "Será que é um presente?"
 
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
@@ -393,7 +393,7 @@ msgstr "Sair do Wormux"
 
 #: src/game/config.cpp:157
 msgid "Reading personal config file"
-msgstr ""
+msgstr "Lendo arquivo de configuração pessoal"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
@@ -410,7 +410,7 @@ msgstr "Iniciar jogo"
 
 #: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
-msgstr ""
+msgstr "Mover a tela na borda"
 
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
@@ -462,7 +462,7 @@ msgstr "Equipes"
 
 #: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
-msgstr "Teleportação"
+msgstr "Teleporte"
 
 #: src/weapon/cluster_bomb.cpp:85
 msgid "The Cluster Bomb has left the battlefield before it could explode."
@@ -471,12 +471,12 @@ msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
 #: src/weapon/gnu.cpp:114
 #, fuzzy
 msgid "The Gnu left the battlefield before exploding"
-msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
+msgstr "O Gnu deixou o cenário antes que explodisse"
 
 #: src/weapon/polecat.cpp:127
 #, fuzzy
 msgid "The Polecat left the battlefield before exploding"
-msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
+msgstr "A doninha deixou o cenário antes que explodisse"
 
 #: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
@@ -485,17 +485,17 @@ msgstr "O míssil automático deixou o campo de batalha..."
 #: src/weapon/bounce_ball.cpp:61
 #, fuzzy
 msgid "The ball left the battlefield before exploding"
-msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
+msgstr "A bola pula pula deixou o cenário antes que explodisse"
 
 #: src/weapon/disco_grenade.cpp:93
 #, fuzzy
 msgid "The disco grenade has left the dance floor before exploding"
-msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
+msgstr "A granada boate deixou o cenário antes que explodisse"
 
 #: src/weapon/grenade.cpp:57
 #, fuzzy
 msgid "The grenade left the battlefield before exploding"
-msgstr "A bomba de agrupamentos deixou o cenário antes que explodisse"
+msgstr "A granada deixou o cenário antes que explodisse"
 
 #: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
@@ -526,12 +526,12 @@ msgstr "Armas:"
 
 #: src/main.cpp:209
 msgid "Website: "
-msgstr "Página na internet: "
+msgstr "Site: "
 
 #: src/game/game_loop.cpp:703
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
-msgstr "Que vergonha para o %s - ele foi morto por uma simples pistola!"
+msgstr "Que vergonha para o %s - ele foi morto por uma simples arma!"
 
 #: src/menu/options_menu.cpp:65
 msgid "Wind particles?"
@@ -552,13 +552,13 @@ msgstr "Erro XML durante o carregamento do mapa '%s' :"
 
 #: src/map/maps_list.cpp:232
 msgid "You need at least one valid map !"
-msgstr "Você precisa no mínimo de um mapa válido!"
+msgstr "Você precisa de pelo menos um mapa válido!"
 
 #: src/game/game_loop.cpp:215
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Você precisa de pelo menos duas equipes para jogar: corrija isto no 'menu "
-"Opções' !"
+" de opções' !"
 
 #: src/team/teams_list.cpp:152
 msgid "You need at least two valid teams !"
@@ -574,7 +574,7 @@ msgstr "pronto"
 
 #: src/interface/interface.cpp:166
 msgid "general: "
-msgstr ""
+msgstr "geral: "
 
 #~ msgid " has joined the party"
 #~ msgstr " chegou pra festa"
