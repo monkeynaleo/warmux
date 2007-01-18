@@ -37,8 +37,8 @@ msgstr "! Le terrain %s est introuvable :-("
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
-msgstr[0] " joueur connecté"
-msgstr[1] " joueurs connectés"
+msgstr[0] "%i joueur connecté"
+msgstr[1] "%i joueurs connectés"
 
 #: src/menu/network_menu.cpp:100 src/menu/network_menu.cpp:232
 #, c-format
