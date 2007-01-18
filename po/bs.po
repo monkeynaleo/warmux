@@ -1,16 +1,16 @@
-# translation of bs.po to Bosanski
+# translation of bs.po to Bosnian
 # translation of bs.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Adnan Hodzic <AbsintheSyringe@gmail.com>, 2006.
+# Adnan Hodzic <AbsintheSyringe@gmail.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-11-28 12:37+0100\n"
+"PO-Revision-Date: 2007-01-18 15:32+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
-"Language-Team: Bosanski <lokal@linux.org.ba>\n"
+"Language-Team: Bosnian <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,9 +23,9 @@ msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
 
 #: src/game/game_loop.cpp:706
-#, fuzzy, c-format
+#, c-format
 msgid "%s (%s) has died."
-msgstr "%s (%s tim) je mrtav."
+msgstr "%s (%s tim) je umro."
 
 #: src/map/maps_list.cpp:102
 #, c-format
@@ -75,7 +75,7 @@ msgstr "%s je pored mine!"
 #: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
-msgstr ""
+msgstr "%s tim već ima neograničenu municiju za %s!"
 
 #: src/weapon/skip_turn.cpp:41
 #, c-format
@@ -83,10 +83,10 @@ msgid "%s team has skipped its turn."
 msgstr "%s timj preskočio svoj red."
 
 #: src/object/bonus_box.cpp:164
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
-msgstr[0] "%s tim je dobio %u džumbus bombi!"
+msgstr[0] "%s tim je dobio %u %s!"
 msgstr[1] "tim '%s' dobio je %u džumbus bombi!"
 
 #: src/menu/options_menu.cpp:132
@@ -173,9 +173,8 @@ msgid "Credits"
 msgstr "Krediti"
 
 #: src/weapon/disco_grenade.cpp:102
-#, fuzzy
 msgid "Disco Grenade"
-msgstr "Sveta granata"
+msgstr "Disko granata"
 
 #: src/game/game.cpp:156
 msgid "Do you really want to quit? (Y/N)"
@@ -206,8 +205,7 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:301
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -482,9 +480,8 @@ msgid "The ball left the battlefield before exploding"
 msgstr "Odskočica je napustila bojište prije nego je explodirala"
 
 #: src/weapon/disco_grenade.cpp:93
-#, fuzzy
 msgid "The disco grenade has left the dance floor before exploding"
-msgstr "Granata je napustila bojište prije nego je explodirala"
+msgstr "Disko granata je napustila bojište prije nego je explodirala"
 
 #: src/weapon/grenade.cpp:57
 msgid "The grenade left the battlefield before exploding"
@@ -567,92 +564,3 @@ msgstr "gotov"
 msgid "general: "
 msgstr "general:"
 
-#, fuzzy
-#~ msgid " has joined the party"
-#~ msgstr "%s je ispao sa mape!"
-
-#, fuzzy
-#~ msgid " has left the party"
-#~ msgstr "%s je ispao sa mape!"
-
-#, fuzzy
-#~ msgid "All teams"
-#~ msgstr "Učitaj timove:"
-
-#, fuzzy
-#~ msgid "Error: Unable to contact index server to host a game"
-#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#, fuzzy
-#~ msgid "Error: Unable to start server"
-#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#, fuzzy
-#~ msgid "Failed to initialize network library!"
-#~ msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
-
-#, fuzzy
-#~ msgid "Local teams:"
-#~ msgstr "Učitaj timove:"
-
-#, fuzzy
-#~ msgid "Player"
-#~ msgstr "Igraj"
-
-#, fuzzy
-#~ msgid "Unable to contact an index server!"
-#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#, fuzzy
-#~ msgid "Unable to contact server!"
-#~ msgstr "Nije u stanju da otvori direktorij sa mapama (%s)!"
-
-#~ msgid "%s has lost %u point of energy."
-#~ msgid_plural "%s has lost %u points of energy."
-#~ msgstr[0] "%s je izgubio %u peona energije."
-#~ msgstr[1] "Igrač '%s' je izgubio %u peone energije."
-
-#~ msgid "%s has won %u point of energy!"
-#~ msgid_plural "%s has won %u points of energy!"
-#~ msgstr[0] "%s je dobio %u poena energije!"
-#~ msgstr[1] "Igrač '%s' je dobio %u peone energije!"
-
-#~ msgid "%s team has won %u Automatic Bazooka!"
-#~ msgid_plural "%s team has won %u Automatic Bazookas!"
-#~ msgstr[0] "%s tim je dobio %u automatskih bazuka!"
-#~ msgstr[1] "tim '%s' dobio je %u automatskih bazuka!"
-
-#~ msgid "%s team has won %u stick of Dynamite!"
-#~ msgid_plural "%s team has won %u sticks of Dynamite!"
-#~ msgstr[0] "%s tim je dobio %u štapova dinamita!"
-#~ msgstr[1] "Tim '%s' dobio %u dinamita!"
-
-#~ msgid "%s team has won %u teleportation."
-#~ msgid_plural "%s team has won %u teleportations."
-#~ msgstr[0] "%s tim je dobio %u teleporta."
-#~ msgstr[1] "tim '%s' dobio %u teleportacije."
-
-#~ msgid "'%s has won %u Air Attack"
-#~ msgid_plural "'%s has won %u Air Attacks"
-#~ msgstr[0] "'%s je dobio %u zračnih napada"
-#~ msgstr[1] "'%s' je dobio %u zračnih napada!"
-
-#~ msgid "'%s has won %u Anvil"
-#~ msgid_plural "'%s has won %u Anvil"
-#~ msgstr[0] "'%s je dobio %u nakovanj"
-#~ msgstr[1] "'%s' je dobio %u zračnih napada!"
-
-#~ msgid "'%s has won %u Baseball bat"
-#~ msgid_plural "'%s has won %u Baseball bats"
-#~ msgstr[0] "'%s je dobio %u baseball palica"
-#~ msgstr[1] "'%s' je dobio %u zračnih napada!"
-
-#~ msgid "'%s has won %u Holy grenade"
-#~ msgid_plural "'%s has won %u Holy grenades"
-#~ msgstr[0] "'%s je dobio %u svetu granatu"
-#~ msgstr[1] "'%s' je dobio %u zračnih napada!"
-
-#~ msgid "'%s has won %u Low gravity"
-#~ msgid_plural "'%s has won %u Low gravity"
-#~ msgstr[0] "'%s je dobio %u slabe gravitacije"
-#~ msgstr[1] "'%s' je dobio %u zračnih napada!"
