@@ -87,7 +87,7 @@ msgstr "%s timj preskočio svoj red."
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
 msgstr[0] "%s tim je dobio %u %s!"
-msgstr[1] "tim '%s' dobio je %u džumbus bombi!"
+msgstr[1] "tim '%s' dobio je %u %s!"
 
 #: src/menu/options_menu.cpp:132
 msgid "(current)"
@@ -205,7 +205,8 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:301
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -563,4 +564,3 @@ msgstr "gotov"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "general:"
-
