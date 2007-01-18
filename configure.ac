@@ -12,7 +12,7 @@ dnl ========================================================================
 dnl = Require at least automake 2.52
 AC_PREREQ(2.52)
 
-AC_INIT([Wormux], [0.7.9rc2], [wormux-dev@gna.org], [wormux])
+AC_INIT([Wormux], [0.7.9], [wormux-dev@gna.org], [wormux])
 AC_CONFIG_SRCDIR([src/main.cpp])
 
 dnl Detect the canonical host and target build environment
@@ -135,7 +135,7 @@ if test "x$GCC" = "xyes"; then
     dnl Enable *more* warnings
     if test "$gccvernum" -ge "400"; then
                 dnl gcc 4.0 or later
-        GCC_FLAGS="$GCC_FLAGS -Wextra -fno-strict-aliasing"
+        GCC_FLAGS="$GCC_FLAGS -Wextra"
     else
         GCC_FLAGS="$GCC_FLAGS -W"
     fi
