@@ -3,12 +3,12 @@
 # Copyright (C) 2001-2004 Lawrence Azzoug
 #
 # Michael Prager <X_X_L@gmx.net>, 2004, 2006.
-# Reiner Herrmann <reiner@reiner-h.de>, 2006.
+# Reiner Herrmann <reiner@reiner-h.de>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-12-23 01:56+0100\n"
+"PO-Revision-Date: 2007-01-18 10:26+0100\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +75,7 @@ msgstr "%s ist neben einer Mine!"
 #: src/object/bonus_box.cpp:170
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
-msgstr ""
+msgstr "Team %s hat bereits unendlich Munition für %s!"
 
 #: src/weapon/skip_turn.cpp:41
 #, c-format
@@ -206,8 +206,7 @@ msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
 
 #: src/game/config.cpp:301
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
@@ -262,8 +261,7 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr ""
-"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #: src/game/game_loop.cpp:741
 msgid "Hurry up, you are too slow !!"
@@ -394,7 +392,7 @@ msgstr "Wormux verlassen"
 
 #: src/game/config.cpp:157
 msgid "Reading personal config file"
-msgstr ""
+msgstr "Lese persönliche Konfigurationsdatei"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
@@ -410,7 +408,7 @@ msgstr "Spiel starten"
 
 #: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
-msgstr ""
+msgstr "Am Rand scrollen"
 
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
@@ -476,8 +474,7 @@ msgstr "Das Gnu hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/polecat.cpp:127
 msgid "The Polecat left the battlefield before exploding"
-msgstr ""
-"Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
+msgstr "Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
@@ -489,13 +486,11 @@ msgstr "Der Ball hat das Schlachtfeld verlassen bevor er explodieren konnte."
 
 #: src/weapon/disco_grenade.cpp:93
 msgid "The disco grenade has left the dance floor before exploding"
-msgstr ""
-"Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
+msgstr "Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
 
 #: src/weapon/grenade.cpp:57
 msgid "The grenade left the battlefield before exploding"
-msgstr ""
-"Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
+msgstr "Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
 
 #: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
@@ -831,3 +826,4 @@ msgstr "General: "
 #, fuzzy
 #~ msgid "some opponents."
 #~ msgstr "um Gegner zu finden."
+
