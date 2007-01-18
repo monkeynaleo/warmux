@@ -51,6 +51,39 @@
       <blast_force>500</blast_force>
       <blast_range>50</blast_range>
     </explosion>
+    <probability>
+      <air_attack ammo="1">1</air_attack>
+      <anvil_launcher ammo="1">1</anvil_launcher>
+      <airhammer ammo="2">1</airhammer>
+      <automatic_bazooka ammo="2">1</automatic_bazooka>
+      <baseball ammo="2">1</baseball>
+      <bazooka ammo="3">1</bazooka>
+      <blowtorch ammo="2">1</blowtorch>
+      <bounce_ball ammo="1">1</bounce_ball>
+      <construct ammo="3">1</construct>
+      <cluster_bomb ammo="1">1</cluster_bomb>
+      <dynamite ammo="2">1</dynamite>
+      <gnulauncher ammo="1">1</gnulauncher>
+      <grenade ammo="3">1</grenade>
+      <gun ammo="2">1</gun>
+      <jetpack ammo="1">1</jetpack>
+      <disco_grenade ammo="1">1</disco_grenade>
+      <lowgrav ammo="1">1</lowgrav>
+      <m16 ammo="1">1</m16>
+      <minelauncher ammo="2">1</minelauncher>
+      <ninjarope ammo="2">1</ninjarope>
+      <parachute ammo="2">1</parachute>
+      <polecatlauncher ammo="1">1</polecatlauncher>
+      <riot_bomb ammo="1">1</riot_bomb>
+      <shotgun ammo="1">1</shotgun>
+      <snipe_rifle ammo="1">1</snipe_rifle>
+      <skip_turn ammo="3">1</skip_turn>
+      <teleportation ammo="2">1</teleportation>
+      <tux ammo="1">1</tux>
+      <syringe ammo="2">1</syringe>
+      <suicide ammo="1">1</suicide>
+    </probability>
+    <life_points>40</life_points>
   </bonus_box>
 
   <weapons>

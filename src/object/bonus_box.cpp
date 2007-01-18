@@ -17,7 +17,7 @@
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
  * Bonus box : fall from the sky at random time.
- * The box can contain bonus or mallus (dynamite, Guns, loss of energy etc).
+ * The box can contain any weapon in the game.
  *****************************************************************************/
 
 #include "bonus_box.h"
@@ -49,7 +49,7 @@ BonusBox::BonusBox()
   : PhysicalObj("bonus_box"){
   SetTestRect (29, 29, 63, 6);
   m_allow_negative_y = true;
-  enable = false;
+  //enable = false; //this disables bonus boxes after the first one has been constructed, and is thus wrong.
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "objet/caisse");
@@ -61,9 +61,8 @@ BonusBox::BonusBox()
 
   parachute = true;
 
-  //these values will get read from XML soon
-  life_points = 41;
-  nbr_ammo = 3;
+  life_points = start_life_points;
+  nbr_ammo = 2;
 
   SetSpeed (SPEED, M_PI_2);
   PickRandomWeapon();
@@ -86,7 +85,7 @@ void BonusBox::Refresh()
   {
     if( ObjTouche(*character) )
     {
-      // here is the gift (truly a gift ?!? :)
+      // here is the gift
       ApplyBonus (**team, *character);
       Ghost();
       return;
@@ -138,37 +137,37 @@ void BonusBox::SignalGhostState(bool was_already_dead)
 }
 
 void BonusBox::PickRandomWeapon() {
-
-  int weapon_count = 0;
-  int weapon_num = 0;
-  WeaponsList::weapons_list_it it;
-  for(it = Config::GetInstance()->GetWeaponsList()->GetList().begin(); it != Config::GetInstance()->GetWeaponsList()->GetList().end(); it++) {
-    weapon_count++;
+  uint weapon_num = 0;
+  if(weapon_count == 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode
+    life_points = 0;
+    return;
   }
   weapon_num = (int)randomSync.GetDouble(1,weapon_count);
-  it = Config::GetInstance()->GetWeaponsList()->GetList().begin();
-  int a=0;
-  while(a < weapon_num && it != Config::GetInstance()->GetWeaponsList()->GetList().end()) {
-    it++;
-    a++;
+  contents = (weapon_map[weapon_num].first)->GetType();
+  if(ActiveTeam().ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())==INFINITE_AMMO) {
+    life_points = 0;
+    nbr_ammo = 0;
   }
-  contents = (*it)->GetType();
-  std::cout<<"Out of "<<weapon_count<<" weapons, weapon "<<weapon_num<<" was selected."<<std::endl;
+  else 
+    nbr_ammo = weapon_map[weapon_num].second;
 }
 
 void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
+  if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
-    if(ActiveTeam().ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())!=INFINITE_AMMO) {
+    /*this next 'if' should never be true, but I am loath to remove it just in case.
+    */
+    if(equipe.ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())!=INFINITE_AMMO) {
         equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName() ] += nbr_ammo;
         txt << Format(ngettext(
                 "%s team has won %u %s!",
                 "%s team has won %u %ss!",
                 2),
-            ActiveTeam().GetName().c_str(), nbr_ammo, Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
+            equipe.GetName().c_str(), nbr_ammo, Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
     }
     else {
-        txt << Format(gettext("%s team already has infinite ammo for the %s!"),
-            ActiveTeam().GetName().c_str(), Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
+        txt << Format(gettext("%s team already has infinite ammo for the %s!"), //this should never appear
+            equipe.GetName().c_str(), Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
     }
   GameMessages::GetInstance()->Add (txt.str());
 }
@@ -178,18 +177,15 @@ void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
 //-----------------------------------------------------------------------------
 // Static methods
 bool BonusBox::enable = false;
+uint BonusBox::weapon_count = 0;
+int BonusBox::start_life_points = 41;
+std::map<int,std::pair<Weapon*,int> > BonusBox::weapon_map;
 
-// Active les caisses ?
+// Activate the bonus box?
 void BonusBox::Enable (bool _enable)
 {
   MSG_DEBUG("bonus", "Enable ? %d", _enable);
   enable = _enable;
-}
-
-bool BonusBox::PlaceBonusBox (BonusBox& bonus_box)
-{
-  if (!bonus_box.PutRandomly(true, 0)) return false;
-  return true;
 }
 
 bool BonusBox::NewBonusBox()
@@ -210,7 +206,7 @@ bool BonusBox::NewBonusBox()
   }
 
   BonusBox * box = new BonusBox();
-  if (!PlaceBonusBox(*box)) {
+  if(!box->PutRandomly(true,0)) {
     MSG_DEBUG("bonus", "Missed to put the bonus box");
     delete box;
   } else {
@@ -222,4 +218,35 @@ bool BonusBox::NewBonusBox()
   }
 
   return false;
+}
+
+/* Weapon probabilities could possibily be stored in the weapon section of classic.xml
+  and retrieved by weapon.GetBonusProbability() and weapon.GetBonusAmmo()
+  however, this is not the way that was chosen.
+*/
+void BonusBox::LoadXml(xmlpp::Element * object)
+{
+  XmlReader::ReadInt(object,"life_points",start_life_points);
+  object = XmlReader::GetMarker(object, "probability");
+  std::list<Weapon*> l_weapons_list = Config::GetInstance()->GetWeaponsList()->GetList();
+  std::list<Weapon*>::iterator
+      itw = l_weapons_list.begin(),
+      end = l_weapons_list.end();
+  xmlpp::Element *elem;
+  uint a = 0;
+  int prob = 0;
+  int ammo = 0;
+  for(; itw != end; ++itw) {
+    XmlReader::ReadInt(object, (*itw)->GetID().c_str(), prob);
+    elem = XmlReader::GetMarker(object, (*itw)->GetID());
+    if(elem != NULL)
+      XmlReader::ReadIntAttr (elem, "ammo", ammo);
+    if((*itw)->ReadInitialNbAmmo() == INFINITE_AMMO) {
+      prob = 0;
+    }
+    for(a = weapon_count; a < weapon_count+prob; ++a) {
+      weapon_map[a]=std::make_pair<Weapon*,int>(*itw,ammo);
+    }
+    weapon_count+=prob;
+  }
 }
