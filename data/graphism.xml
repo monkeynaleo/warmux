@@ -104,6 +104,10 @@
   </sprite> 
 </section>
 
+<section name="credit">
+  <surface name="background" file="menu/img/background_credits.png" />
+</section>
+
 <section name="objet">
   <sprite name="caisse">
     <image file="object/bonus_box.png">

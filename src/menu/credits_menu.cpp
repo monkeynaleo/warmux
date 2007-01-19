@@ -75,7 +75,7 @@ std::string Author::PrettyString(bool with_email)
 //-----------------------------------------------------------------------------
 
 CreditsMenu::CreditsMenu()  :
-  Menu("menu/bg_network", vOk)
+  Menu("credit/background", vOk)
 {
   ListBox * lbox_authors = new ListBox( Rectanglei( 30, 30,
 						    AppWormux::GetInstance()->video.window.GetWidth()-60,
