@@ -7,10 +7,10 @@ SET(VERSION "${WORMUX_MAJOR}.${WORMUX_MINOR}.${WORMUX_PATCH}")
 
 # Some aliases of cmake variables
 IF(BUILD)
-  SET(CMAKE_BUILD_TYPE ${BUILD})
+  SET(CMAKE_BUILD_TYPE ${BUILD} CACHE STRING "The build type to be used." FORCE)
 ENDIF(BUILD)
 IF(PREFIX)
-  SET(CMAKE_INSTALL_PREFIX ${PREFIX})
+  SET(CMAKE_INSTALL_PREFIX ${PREFIX} CACHE PATH "Install path prefix, prepended onto install directories." FORCE)
 ENDIF(PREFIX)
 
 
