@@ -2,7 +2,7 @@
 Version=1.0
 Encoding=UTF-8
 Type=Application
-Icon=wormux_128x128.xpm
+Icon=wormux_128x128.png
 Exec=wormux
 Terminal=false
 StartupNotify=false
