@@ -103,13 +103,8 @@ void GameLoop::InitGameData_NetServer()
   std::cout << "o " << _("Initialise teams") << std::endl;
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
 
-  lst_objects.PlaceMines();
   std::cout << "o " << _("Initialise data") << std::endl;
-  CharacterCursor::GetInstance()->Reset();
-  Mouse::GetInstance()->Reset();
-  fps.Reset();
-  Interface::GetInstance()->Reset();
-  GameMessages::GetInstance()->Reset();
+  lst_objects.PlaceMines();
 
   // Tells all clients that the server is ready to play
   network.SendAction ( &a_change_state );
@@ -182,7 +177,6 @@ void GameLoop::InitData()
     InitData_Local();
 
   CharacterCursor::GetInstance()->Reset();
-  Mouse::GetInstance()->Reset();
   Config::GetInstance()->GetKeyboard()->Reset();
 
   fps.Reset();
@@ -252,20 +246,22 @@ void GameLoop::RefreshInput()
     if ( event.type == SDL_QUIT) {
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
       Game::GetInstance()->SetEndOfGameStatus( true );
-      std::cout << "FIN PARTIE" << std::endl;
+      std::cout << _("END OF GAME") << std::endl;
       return;
     }
-    if ( event.type == SDL_MOUSEBUTTONDOWN ) {
-      Mouse::GetInstance()->TraiteClic( &event);
+
+    if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE) {
+      Game::GetInstance()->SetEndOfGameStatus( true );
+      std::cout << _("END OF GAME") << std::endl;
+      return;
     }
-    if ( event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
-      if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE) {
-        Game::GetInstance()->SetEndOfGameStatus( true );
-        std::cout << "FIN PARTIE" << std::endl;
-        return;
-      }
-      Config::GetInstance()->GetKeyboard()->HandleKeyEvent( &event);
-    }
+
+    // Mouse event
+    if (Mouse::GetInstance()->HandleClic(event))
+      continue;
+
+    // Keyboard event
+    Config::GetInstance()->GetKeyboard()->HandleKeyEvent(event);
   }
 
   // Keyboard and mouse refresh
