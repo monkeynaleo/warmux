@@ -45,7 +45,9 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   int item = MouseIsOnWhichItem(mousePosition);
 
-  Rectanglei rect (GetPositionX(),GetPositionY(),GetSizeX(),
+  Rectanglei rect (GetPositionX(),
+		   GetPositionY(),
+		   GetSizeX(),
 		   GetSizeY()- 2 - txt_label->GetHeight());
 
   surf.BoxColor(rect, defaultListColor1);
@@ -59,12 +61,12 @@ void ListBoxWithLabel::Draw(const Point2i &mousePosition, Surface& surf) const
   for(uint i=first_visible_item; i < m_items.size(); i++){
 
     Rectanglei rect2(GetPositionX() + 1, 
-		    pos.GetY() + 1, 
-		    GetSizeX() - 2, 
-		    m_items[i]->GetSizeY() - 2);
+		     pos.GetY() + 1, 
+		     GetSizeX() - 2, 
+		     m_items[i]->GetSizeY() - 2);
 
     // no more place to add item
-    if (draw_it && rect.GetPositionY()+rect2.GetSizeY() < GetPositionY()+ rect.GetSizeY()) {
+    if (draw_it && rect2.GetPositionY()+rect2.GetSizeY() > GetPositionY()+ rect.GetSizeY()) {
       local_max_visible_items = i - first_visible_item;
       draw_it = false;
     }
