@@ -5,6 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
+#include "clock.h"
 
 #define	ALL		0
 #define TRAFFIC		1
@@ -14,12 +15,13 @@
 
 #define LOG_LEVEL	INFO
 
+
 #ifdef DEBUG
 #define DPRINT(LEVEL, ARGS...) \
 { \
 	if((LEVEL) >= LOG_LEVEL ) \
 	{ \
-		printf("%10s,%3i : ",__FILE__,__LINE__); \
+		printf("%s| %10s,%3i : ", wx_clock.TimeStr(),__FILE__,__LINE__); \
 		printf(ARGS); \
 		printf("\n"); \
 	} \
