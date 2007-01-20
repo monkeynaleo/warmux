@@ -160,13 +160,6 @@ void Camera::Refresh(){
   Mouse::GetInstance()->TestCamera();
   if (throw_camera) return;
 
-#ifdef TODO_KEYBOARD // ???
-  // keyboard movement
-  clavier.TestCamera();
-  if (throw_camera)
-    return;
-#endif
-
   if (auto_crop)
     AutoCrop();
 }
