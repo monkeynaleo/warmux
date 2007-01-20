@@ -13,7 +13,7 @@ main.o: main.cpp server.h client.h debug.h config.h
 net_data.o: net_data.cpp net_data.h debug.h
 server.o: server.cpp server.h client.h debug.h
 sync_slave.o: sync_slave.h sync_slave.cpp config.h debug.h
-clock.o: clock.h clock.cpp
+clock.o: clock.h clock.cpp debug.h sync_slave.o
 
 
 debug.h: clock.h

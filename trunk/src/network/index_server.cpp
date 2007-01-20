@@ -103,12 +103,14 @@ bool IndexServer::ConnectTo(const std::string & address, const int & port)
   }
 
   socket = SDLNet_TCP_Open(&ip);
-
   if(!socket)
   {
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return false;
   }
+
+  sock_set = SDLNet_AllocSocketSet(1);
+  SDLNet_TCP_AddSocket(sock_set, socket);
 
   connected = true;
 
@@ -130,8 +132,10 @@ void IndexServer::Disconnect()
   first_server = server_lst.end();
   current_server = server_lst.end();
 
+  SDLNet_TCP_DelSocket(sock_set, socket);
   SDLNet_TCP_Close(socket);
   connected = false;
+  SDLNet_FreeSocketSet(sock_set);
 }
 
 static ssize_t getline(std::string& line, std::ifstream& file)
@@ -246,6 +250,12 @@ void IndexServer::Send(const std::string &str)
 int IndexServer::ReceiveInt()
 {
   char packet[4];
+  if(SDLNet_CheckSockets(sock_set, 5000) == 0)
+    return -1;
+
+  if(!SDLNet_SocketReady(socket))
+    return -1;
+
   if( SDLNet_TCP_Recv(socket, packet, sizeof(packet)) < 1 )
   {
     Disconnect();
@@ -264,8 +274,16 @@ std::string IndexServer::ReceiveStr()
   if(!connected)
     return "";
 
-  assert(size > 0);
+  if(size <= 0)
+    return "";
+
   char* str = new char[size+1];
+
+  if(SDLNet_CheckSockets(sock_set, 5000) == 0)
+    return "";
+
+  if(!SDLNet_SocketReady(socket))
+    return "";
 
   if( SDLNet_TCP_Recv(socket, str, size) < 1 )
   {
@@ -345,4 +363,22 @@ std::list<address_pair> IndexServer::GetHostList()
     lst.push_back(addr_pair);
   }
   return lst;
+}
+
+void IndexServer::Refresh()
+{
+  if(!connected)
+    return;
+
+  if(SDLNet_CheckSockets(sock_set, 100) == 0)
+    return;
+
+  if(!SDLNet_SocketReady(socket))
+    return;
+
+  int msg_id = ReceiveInt();
+  if( msg_id == TS_MSG_PING )
+    Send(TS_MSG_PONG);
+  else
+    Disconnect();
 }

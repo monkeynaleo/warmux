@@ -281,6 +281,7 @@ void Network::ReceiveActions()
           RejectIncoming();
         ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_ASK_VERSION));
       }
+      SDL_Delay(100);
     }
 
     std::list<DistantComputer*>::iterator dst_cpu = cpu.begin();

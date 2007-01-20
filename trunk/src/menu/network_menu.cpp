@@ -27,6 +27,7 @@
 #include "../graphic/video.h"
 #include "../graphic/font.h"
 #include "../map/maps_list.h"
+#include "../network/index_server.h"
 #include "../network/network.h"
 #include "../include/app.h"
 #include "../include/action_handler.h"
@@ -232,6 +233,8 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
     if(inited_players->GetText() != pl)
       inited_players->SetText(pl);
+
+    index_server.Refresh();
   }
   else {
     close_menu = true;
