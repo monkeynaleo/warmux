@@ -129,9 +129,8 @@ int main(int argc, void** argv)
 		if ( select(FD_SETSIZE, &acting_sock_set, NULL, NULL, &timeout) < 1 )
 		{
 			// Timeout to check for other games on other servers
-			if(timeout.tv_sec == 0 && timeout.tv_usec == 0)
-				continue;
-			TELL_ERROR;
+			if(timeout.tv_sec != 0 && timeout.tv_usec != 0)
+				TELL_ERROR;
 		}
 		
 		// Find the socket where activity have been detected:
@@ -140,27 +139,35 @@ int main(int argc, void** argv)
 			client != clients.end();
 			++client)
 		{
-			if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
+			client->second->CheckState();
+
+			if( ! client->second->connected )
+			{
+				// Connection closed
+				listen_sock.CloseConnection( client->second->GetFD() );
+				delete client->second;
+				clients.erase(client);
+				DPRINT(CONN, "%i connections up!", (int)clients.size());
+				break;
+			}
+				if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
 			{
 				if( ! client->second->Receive() )
-				{
-					// Connection closed
-					listen_sock.CloseConnection( client->second->GetFD() );
-					delete client->second;
-					clients.erase(client);
-					DPRINT(CONN, "%i connections up!", (int)clients.size());
-				}
-				// Exit as soon as, we have read a socket as the 'clients' list may have changed
+					client->second->connected = false;
+				// Exit as the clients list may have changed
 				break;
 			}
 		}
-		// First check if there is any new incoming connection
+
+		// Then check if there is any new incoming connection
 		if( FD_ISSET(listen_sock.GetFD(), &acting_sock_set) )
 		{
 			Client* client = listen_sock.NewConnection();
 			if(client != NULL)
 				clients.insert(std::make_pair("unknown", client ));
 			DPRINT(CONN, "%i connections up!", (int)clients.size());
+
+			// Exit as the 'clients' list may have changed
 		}
 	}
 }

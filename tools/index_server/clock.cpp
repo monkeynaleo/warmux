@@ -9,10 +9,14 @@ Clock wx_clock;
 Clock::Clock()
 {
 	start_time = time(NULL);
+	last_refresh = time(NULL);
 }
 
 void Clock::HandleJobs()
 {
+	if(time(NULL) == last_refresh)
+		return;
+
 	// Refresh servers list every hours
 	if(time(NULL) % (60 * 60) == 0)
 	{
@@ -22,8 +26,9 @@ void Clock::HandleJobs()
 	if(time(NULL) % (60 * 60 * 24) == 0)
 	{
 		ShowUpTime();
-		DPRINT("Day changed to : %s", DateStr());
+		DPRINT(INFO, "Day changed to : %s", DateStr());
 	}
+	last_refresh = time(NULL);
 }
 
 const char* Clock::TimeStr()

@@ -5,6 +5,7 @@
 class Clock
 {
 	time_t start_time;
+	time_t last_refresh;
 
 	char time_str[1024];
 	char date_str[1024];

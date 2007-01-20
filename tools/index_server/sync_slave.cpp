@@ -104,14 +104,18 @@ void SyncSlave::CheckGames()
 		if( received == 0 || it->second->Receive() )
 			result = true;
 
-		if(!result)
+		if(!result || ! it->second->connected)
 		{
 			DPRINT(INFO, "Index server at %s disconnected", it->first.c_str());
 			delete it->second;
+			erase(it);
 			it = begin();
 		}
 		else
+		{
+			it->second->CheckState();
 			++it;
+		}
 	}
 }
 

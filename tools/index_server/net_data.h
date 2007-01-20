@@ -2,6 +2,7 @@
 #define NET_DATA_H
 #include <netinet/in.h>
 #include <string>
+#include <time.h>
 #include "../../src/network/index_svr_msg.h"
 
 class NetData
@@ -11,6 +12,10 @@ class NetData
 
 	int fd;
 	int ip_address;
+	time_t ping_time;
+	bool ping_sent;
+
+	void UpdatePing();
 protected:
 	int received;
 	enum IndexServerMsg msg_id;
@@ -34,6 +39,7 @@ public:
 	bool ConnectTo( const std::string & address, const int & port);
 	bool Receive();
 	virtual bool HandleMsg(const std::string & full_str) = 0;
+	void CheckState();
 };
 
 #endif

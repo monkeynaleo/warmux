@@ -122,7 +122,10 @@ void InternetMenu::RefreshList()
     connect_lst->Select( current );
 }
 
-void InternetMenu::Draw(const Point2i &mousePosition){}
+void InternetMenu::Draw(const Point2i &mousePosition)
+{
+  index_server.Refresh();
+}
 
 void InternetMenu::__sig_ok()
 {

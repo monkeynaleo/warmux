@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <list>
+#include <time.h>
 #include "net_data.h"
 #include "debug.h"
 
@@ -15,6 +16,7 @@ NetData::NetData()
 {
 	str_size = 0;
 	connected = false;
+	ping_sent = false;
 	msg_id = TS_NO_MSG;
 }
 
@@ -65,6 +67,7 @@ bool NetData::ConnectTo(const std::string & address, const int & port)
 
 	connected = true;
 	DPRINT(CONN, "Connected.");
+	UpdatePing();
 	return true;
 }
 
@@ -81,6 +84,7 @@ bool NetData::ReceiveInt(int & nbr)
 	nbr = *((int*)&u_nbr);
 	DPRINT(TRAFFIC, "Received int: %i", nbr);
 	received -= 4;
+	UpdatePing();
 	return true;
 }
 
@@ -139,6 +143,7 @@ bool NetData::ReceiveStr(std::string & full_str)
 		delete []str;
 		str_size = 0;
 	}
+	UpdatePing();
 	return true;
 }
 
@@ -156,6 +161,7 @@ bool NetData::SendInt(const int &nbr)
 	}
 
 	DPRINT(TRAFFIC, "Sent int: %i", nbr);
+	UpdatePing();
 	return true;
 }
 
@@ -171,6 +177,7 @@ bool NetData::SendStr(const std::string &full_str)
 	}
 
 	DPRINT(TRAFFIC, "Sent string: %s", full_str.c_str());
+	UpdatePing();
 	return true;
 }
 
@@ -196,6 +203,20 @@ bool NetData::Receive()
 		msg_id = (IndexServerMsg)id;
 	}
 
+	if(msg_id == TS_MSG_PING)
+	{
+		SendInt(TS_MSG_PONG);
+		msg_id = TS_NO_MSG;
+		return true;
+	}
+
+	if(msg_id == TS_MSG_PONG)
+	{
+		ping_sent = false;
+		msg_id = TS_NO_MSG;
+		return true;
+	}
+
 	std::string full_str = "";
 	// If a string is embedded in the msg, get it	{
 	if( msg_id == TS_MSG_VERSION
@@ -214,3 +235,25 @@ bool NetData::Receive()
 
 	return result;
 }
+
+void NetData::CheckState()
+{
+	if(difftime(time(NULL), ping_time) < 60.0)
+		return;
+
+	if(ping_sent)
+	{
+		DPRINT(CONN, "Connection to %i timed out", GetIP());
+		connected = false;
+		return;
+	}
+
+	SendInt(TS_MSG_PING);
+	ping_sent = true;
+}
+
+void NetData::UpdatePing()
+{
+	ping_time = time(NULL);
+}
+
