@@ -61,14 +61,15 @@ Game::Game()
 {
   isGameLaunched = false;
   endOfGameStatus = false;
+  isGamePaused = true;
 }
 
-bool Game::IsGameFinished()
+bool Game::IsGameFinished() const
 {
   return (NbrRemainingTeams() <= 1);
 }
 
-int Game::NbrRemainingTeams()
+int Game::NbrRemainingTeams() const
 {
   uint nbr = 0;
 
@@ -80,13 +81,13 @@ int Game::NbrRemainingTeams()
   return nbr;
 }
 
-void Game::MessageLoading()
+void Game::MessageLoading() const
 {
   std::cout << std::endl;
   std::cout << "[ " << _("Starting a new game") << " ]" << std::endl;
 }
 
-void Game::MessageEndOfGame()
+void Game::MessageEndOfGame() const
 {
   std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
   const char *winner_name = NULL;
@@ -105,8 +106,6 @@ void Game::MessageEndOfGame()
   if (winner_name)
     jukebox.Play("share","victory");
 
-  //question.Set (txt, true, 0);
-  //AskQuestion();
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
   ResultsMenu menu(results_list, winner_name);
   menu.Run();
@@ -152,33 +151,16 @@ void Game::Start()
 
       if (!IsGameFinished())
       {
-        Question question;
-        const char *msg = _("Do you really want to quit? (Y/N)");
-        question.Set (msg, true, 0, "interface/quit_screen");
-
-        {
-          /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
-          /* Let's find out what the user would like to press ... */
-          char *key_x_ptr = strchr (msg, '/');
-          char key_x;
-          if (key_x_ptr && key_x_ptr > msg) /* it's there and it's not the first char */
-            key_x = tolower(key_x_ptr[-1]);
-          else
-            abort();
-          if (!isalpha(key_x)) /* sanity check */
-            abort();
-
-          question.add_choice(SDLK_a + (int)key_x - 'a', 1);
-        }
-
-        jukebox.Pause();
-        end = (AskQuestion(question) == 1);
-        jukebox.Resume();
-        if(!end)
-          world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
-      } else {
-        end = true;
+	if (isGamePaused){
+	  DisplayPause();
+	} else {
+	  end = DisplayQuit();
+	}
       }
+      
+      if (!end)
+	world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
+
     } while (!end);
     err = false;
   }
@@ -216,6 +198,11 @@ void Game::UnloadDatas()
 
 void Game::Pause()
 {
+  isGamePaused = true;
+}
+
+void Game::DisplayPause()
+{
   Question question;
   if(!network.IsLocal())
     return;
@@ -229,13 +216,46 @@ void Game::Pause()
 		      );
   AskQuestion(question, false);
   jukebox.Resume();
+  isGamePaused = false;
+}
+
+bool Game::DisplayQuit()
+{
+  Question question;
+  const char *msg = _("Do you really want to quit? (Y/N)");
+  question.Set (msg, true, 0, "interface/quit_screen");
+
+  {
+    /* Tiny fix by Zygmunt Krynicki <zyga@zyga.dyndns.org> */
+    /* Let's find out what the user would like to press ... */
+    char *key_x_ptr = strchr (msg, '/');
+    char key_x;
+    if (key_x_ptr && key_x_ptr > msg) /* it's there and it's not the first char */
+      key_x = tolower(key_x_ptr[-1]);
+    else
+      abort();
+    if (!isalpha(key_x)) /* sanity check */
+      abort();
+    
+    question.add_choice(SDLK_a + (int)key_x - 'a', 1);
+  }
+  
+  jukebox.Pause();
+  bool exit = (AskQuestion(question) == 1);
+  jukebox.Resume();
+
+  return exit;
+}
+
+bool Game::IsGamePaused() const{
+  return isGamePaused;
 }
 
 bool Game::IsGameLaunched() const{
   return isGameLaunched;
 }
 
-bool Game::GetEndOfGameStatus(){
+bool Game::GetEndOfGameStatus() const{
   return endOfGameStatus;
 }
 

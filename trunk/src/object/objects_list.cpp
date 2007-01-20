@@ -99,10 +99,7 @@ void ObjectsList::Draw()
        ++it)
   {
     assert((*it) != NULL);
-    if(Time::GetInstance()->IsGamePaused())
-    {
-      MSG_DEBUG("lst_objects","Displaying %s",(*it)->GetName().c_str());
-    }
+
     if (!(*it)->IsGhost())
       (*it)->Draw();
   }

@@ -268,40 +268,38 @@ void GameLoop::RefreshInput()
     }
   }
 
-  if (!Time::GetInstance()->IsGamePaused()) {
-    // Keyboard and mouse refresh
-    if ((interaction_enabled && state != END_TURN) ||
-        (ActiveTeam().GetWeapon().IsActive() &&
-         ActiveTeam().GetWeapon().override_keys)) { // for driving supertux for example
-      Mouse::GetInstance()->Refresh();
-      Config::GetInstance()->GetKeyboard()->Refresh();
-      AIengine::GetInstance()->Refresh();
-    }
-    // Execute action
-    do {
-      ActionHandler::GetInstance()->ExecActions();
-      if(network.sync_lock) SDL_Delay(SDL_TIMESLICE);
-    } while(network.sync_lock);
+  // Keyboard and mouse refresh
+  if ((interaction_enabled && state != END_TURN) ||
+      (ActiveTeam().GetWeapon().IsActive() &&
+       ActiveTeam().GetWeapon().override_keys)) { // for driving supertux for example
+    Mouse::GetInstance()->Refresh();
+    Config::GetInstance()->GetKeyboard()->Refresh();
+    AIengine::GetInstance()->Refresh();
   }
+  
+  // Execute action
+  do {
+    ActionHandler::GetInstance()->ExecActions();
+    if(network.sync_lock) SDL_Delay(SDL_TIMESLICE);
+  } while(network.sync_lock);
+
   GameMessages::GetInstance()->Refresh();
   camera.Refresh();
 }
 
 void GameLoop::RefreshObject()
 {
-  if (!Time::GetInstance()->IsGamePaused()) {
-    FOR_ALL_CHARACTERS(team,character)
-        character->Refresh();
-    // Recompute energy of each team
-    FOR_EACH_TEAM(team)
-        (**team).Refresh();
-    teams_list.RefreshEnergy();
-
-    ActiveTeam().AccessWeapon().Manage();
-    lst_objects.Refresh();
-    ParticleEngine::Refresh();
-    CharacterCursor::GetInstance()->Refresh();
-  }
+  FOR_ALL_CHARACTERS(team,character)
+    character->Refresh();
+  // Recompute energy of each team
+  FOR_EACH_TEAM(team)
+    (**team).Refresh();
+  teams_list.RefreshEnergy();
+  
+  ActiveTeam().AccessWeapon().Manage();
+  lst_objects.Refresh();
+  ParticleEngine::Refresh();
+  CharacterCursor::GetInstance()->Refresh();
 }
 
 void GameLoop::Draw ()
@@ -438,7 +436,8 @@ void GameLoop::Run()
     delay = time_of_next_frame - SDL_GetTicks();
     if (delay >= 0)
       SDL_Delay(delay);
-  } while( !Game::GetInstance()->GetEndOfGameStatus() );
+  } while( !Game::GetInstance()->GetEndOfGameStatus() 
+	   && !Game::GetInstance()->IsGamePaused());
 }
 
 void GameLoop::RefreshClock()
