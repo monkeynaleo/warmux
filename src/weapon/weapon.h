@@ -218,12 +218,31 @@ public:
   // Choose a target.
   virtual void ChooseTarget (Point2i mouse_pos);
 
-  //Misc actions.
-  virtual void ActionUp ();//called by mousse.cpp when mousewhellup
-  virtual void ActionDown ();//called by mousse.cpp when mousewhelldown
-
   // Handle a keyboard event.
-  virtual void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) ;
+  virtual void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
+/*   virtual void HandleKeyUpPressed(); */
+/*   virtual void HandleKeyUpRefreshed(); */
+/*   virtual void HandleKeyUpReleased(); */
+/*   virtual void HandleKeyDownPressed(); */
+/*   virtual void HandleKeyDownRefreshed(); */
+/*   virtual void HandleKeyDownReleased(); */
+/*   virtual void HandleKeyLeftPressed(); */
+/*   virtual void HandleKeyLeftRefreshed(); */
+/*   virtual void HandleKeyLeftReleased(); */
+/*   virtual void HandleKeyRightPressed(); */
+/*   virtual void HandleKeyRightRefreshed(); */
+/*   virtual void HandleKeyRightReleased(); */
+
+  // Handle a mouse event
+  virtual void HandleMouseLeftClicReleased(){};
+  virtual void HandleMouseWheelUp(){};
+  virtual void HandleMouseWheelDown(){};
+
+
+  /* void HandleMouseEvent(Action::Action_t action, Mouse::Mouse_Event_t event_type); */
+/*   virtual void HandleMouseLeftClicPressed(); */
+/*   virtual void HandleMouseLeftClicRefreshed(); */
+/*   virtual void HandleMouseLeftClicReleased(); */
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd();

@@ -40,7 +40,7 @@ class Chat
   Text* input;
   Text* msg;
 
-  int check_input;
+  bool check_input;
   uint last_time;
 
  public:
@@ -48,10 +48,10 @@ class Chat
   ~Chat();
   void Show();
   void ShowInput();
-  int CheckInput();
+  bool CheckInput();
   void Reset();
-  void NewMessage(const std::string &msg);
-  void HandleKey(const SDL_Event *event);
+  void NewMessage(const std::string& msg);
+  void HandleKey(const SDL_Event& event);
 };
 
 #endif

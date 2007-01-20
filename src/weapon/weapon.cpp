@@ -129,7 +129,11 @@ void Weapon::p_Select ()
   m_last_fire_time = 0;
 }
 void Weapon::p_Deselect () {}
-void Weapon::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) {}
+
+void Weapon::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) 
+{
+
+}
 
 void Weapon::Select()
 {
@@ -610,13 +614,6 @@ void Weapon::ChooseTarget(Point2i mouse_pos){
 }
 
 void Weapon::SignalTurnEnd(){
-}
-
-void Weapon::ActionUp(){ //called by mousse.cpp when mousewhellup
-}
-
-
-void Weapon::ActionDown(){//called by mousse.cpp when mousewhelldown
 }
 
 void Weapon::ActionStopUse()
