@@ -61,7 +61,7 @@ Game::Game()
 {
   isGameLaunched = false;
   endOfGameStatus = false;
-  isGamePaused = true;
+  isGamePaused = false;
 }
 
 bool Game::IsGameFinished() const
