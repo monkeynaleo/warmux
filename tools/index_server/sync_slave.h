@@ -1,6 +1,6 @@
 #ifndef SYNC_SLAVE_H
 #define SYNC_SLAVE_H
-#include <list>
+#include <map>
 #include <string>
 #include "net_data.h"
 
@@ -10,7 +10,7 @@ const std::string sync_serv_version = "WIS";
 
 // List that contains informations about wormux client/server connected
 // on other index servers
-class SyncSlave : public std::list<IndexServerConn*>
+class SyncSlave : public std::map<std::string, IndexServerConn*>
 {
 public:
 	SyncSlave();

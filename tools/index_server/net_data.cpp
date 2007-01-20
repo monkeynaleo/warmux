@@ -32,13 +32,16 @@ void NetData::Host(const int & client_fd, const unsigned int & ip)
 	connected = true;
 }
 
-void NetData::ConnectTo(const std::string & address, const int & port)
+bool NetData::ConnectTo(const std::string & address, const int & port)
 {
 	// Resolve the name of the host:
 	struct hostent* hostinfo;
 	hostinfo = gethostbyname(address.c_str());
 	if(!hostinfo)
-		TELL_ERROR;
+	{
+		PRINT_ERROR;
+		return false;
+	}
 
 	fd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -46,7 +49,7 @@ void NetData::ConnectTo(const std::string & address, const int & port)
 	{
 		PRINT_ERROR;
 		DPRINT(INFO, "Rejected");
-		return;
+		return false;
 	}
 
 	struct sockaddr_in addr;
@@ -55,10 +58,14 @@ void NetData::ConnectTo(const std::string & address, const int & port)
 	addr.sin_port = htons(port);
 
 	if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
-		TELL_ERROR;
+	{
+		PRINT_ERROR;
+		return false;
+	}
 
 	connected = true;
 	DPRINT(CONN, "Connected.");
+	return true;
 }
 
 bool NetData::ReceiveInt(int & nbr)

@@ -19,6 +19,7 @@
 #include "config.h"
 #include "debug.h"
 #include "sync_slave.h"
+#include "clock.h"
 
 // map < version, client >
 std::multimap<std::string, Client*> clients;
@@ -79,6 +80,9 @@ int SetMaxConnection()
 
 int main(int argc, void** argv)
 {
+	DPRINT(INFO, "Wormux index server version %i", VERSION);
+	DPRINT(INFO, "%s", wx_clock.DateStr());
+
 	bool chroot_opt;
 	config.Get("chroot", chroot_opt);
 
@@ -91,14 +95,12 @@ int main(int argc, void** argv)
 		exit(EXIT_FAILURE);
 	}
 
+
 	// Ignore broken pipe signal (elsewise we would break,
 	// as soon as we are trying to write on client that closed)
 	if( signal(SIGPIPE, SIG_IGN) == SIG_ERR )
 		TELL_ERROR;
 
-	// Contact other index servers:
-	sync_slave.Start();
-	
 	// Set the maximum number of connection
 	int max_conn = SetMaxConnection();
 	DPRINT(INFO, "Number of connexions allowed : %i", max_conn);
@@ -111,9 +113,11 @@ int main(int argc, void** argv)
 	// Set of socket where an activity have been detected
 	fd_set acting_sock_set;
 
+	sync_slave.Start();
+
 	while(1)
 	{
-		DPRINT(TRAFFIC, "Waiting for incoming connections...");
+		wx_clock.HandleJobs();
 		sync_slave.CheckGames();
 
 		struct timeval timeout;
@@ -144,7 +148,7 @@ int main(int argc, void** argv)
 					listen_sock.CloseConnection( client->second->GetFD() );
 					delete client->second;
 					clients.erase(client);
-					DPRINT(CONN, "%i connections up!", clients.size());
+					DPRINT(CONN, "%i connections up!", (int)clients.size());
 				}
 				// Exit as soon as, we have read a socket as the 'clients' list may have changed
 				break;
@@ -156,7 +160,7 @@ int main(int argc, void** argv)
 			Client* client = listen_sock.NewConnection();
 			if(client != NULL)
 				clients.insert(std::make_pair("unknown", client ));
-			DPRINT(CONN, "%i connections up!", clients.size());
+			DPRINT(CONN, "%i connections up!", (int)clients.size());
 		}
 	}
 }

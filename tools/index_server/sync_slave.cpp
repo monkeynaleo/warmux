@@ -26,7 +26,7 @@ SyncSlave::~SyncSlave()
 		it != end();
 		++it)
 	{
-		delete (*it);
+		delete (it->second);
 	}
 }
 
@@ -42,9 +42,13 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 
 bool SyncSlave::Start()
 {
+	// Download the server list from wormux.org
+	// and contact every server
 	const std::string server_fn = "./server_list";
+	DPRINT(CONN, "Downloading the server list from wormux.org");
 	downloader.Get( server_list_url.c_str(), server_fn.c_str() );
 
+	DPRINT(CONN, "Contacting other servers ...");
 	std::ifstream fin;
 	fin.open(server_fn.c_str(), std::ios::in);
 	if(!fin)
@@ -70,9 +74,14 @@ bool SyncSlave::Start()
 		std::string portstr = line.substr(port_pos+1);
 		int port = atoi(portstr.c_str());
 
-		if( hostname != my_hostname )
-			push_back( new IndexServerConn( hostname, port ) );
-//  		push_back( new IndexServerConn( "localhost", 9997 ) );
+		if( hostname != my_hostname && find(hostname) == end())
+		{
+			IndexServerConn* c = new IndexServerConn(hostname, port);
+			if( c->connected )
+				insert(make_pair( hostname, c));
+			else
+				delete c;
+		}
 	}
 	fin.close();
 	return true;
@@ -86,19 +95,20 @@ void SyncSlave::CheckGames()
 		int received;
 		bool result = false;
 				
-		if( ioctl( (*it)->GetFD(), FIONREAD, &received) == -1 )
+		if( ioctl( it->second->GetFD(), FIONREAD, &received) == -1 )
 		{
 			PRINT_ERROR;
 			result = false;
 		}
 
-		if( received == 0 || (*it)->Receive() )
+		if( received == 0 || it->second->Receive() )
 			result = true;
 
 		if(!result)
 		{
-			delete (*it);
-			it = erase(it);
+			DPRINT(INFO, "Index server at %s disconnected", it->first.c_str());
+			delete it->second;
+			it = begin();
 		}
 		else
 			++it;
@@ -109,7 +119,8 @@ void SyncSlave::CheckGames()
 IndexServerConn::IndexServerConn(const std::string &addr, int port)
 {
 	DPRINT(INFO, "Contacting index server at %s ...",addr.c_str());
-    	ConnectTo( addr, port);
+	if(!ConnectTo( addr, port))
+		return;
 	SendInt((int)TS_MSG_VERSION);
 	SendStr("WIS");
 }
@@ -139,7 +150,7 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
 			return false;
 		if(nbr > VERSION)
 		{
-			DPRINT(INFO,"This server have a version %i, while we are only running a %i version",nbr, VERSION);
+			DPRINT(INFO,"The server at %i have a version %i, while we are only running a %i version",GetIP(), nbr, VERSION);
 			exit(EXIT_FAILURE);
 		}
 		else

@@ -11,8 +11,6 @@ class NetData
 
 	int fd;
 	int ip_address;
-
-	bool connected;
 protected:
 	int received;
 	enum IndexServerMsg msg_id;
@@ -24,6 +22,8 @@ protected:
 	bool SendInt(const int & nbr);
 	bool SendStr(const std::string & full_str);
 public:
+	bool connected;
+
 	NetData();
 	virtual ~NetData();
 
@@ -31,7 +31,7 @@ public:
 	const int & GetIP() { return ip_address; };
 
 	void Host( const int & client_fd, const unsigned int & ip );
-	void ConnectTo( const std::string & address, const int & port);
+	bool ConnectTo( const std::string & address, const int & port);
 	bool Receive();
 	virtual bool HandleMsg(const std::string & full_str) = 0;
 };
