@@ -72,53 +72,20 @@ Mouse::Mouse(){
   delete res;
 }
 
-void Mouse::Reset(){
-}
-
-bool Mouse::ActionClicD(){
-  if( ActiveTeam().GetWeapon().CanChangeWeapon() )
-    Interface::GetInstance()->weapons_menu.SwitchDisplay();
-
-  return true;
-}
-
-//WORKING=============================================
-bool Mouse::ActionWhellUp(){
-  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    ActiveTeam().AccessWeapon().ActionUp();
-    return true ;
-    }
-
-  return true;
-}
-
-bool Mouse::ActionWhellDown(){
-  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    ActiveTeam().AccessWeapon().ActionDown();
-    return true ;
-    }
-
-  return true;
-}
-//==========================================================
-
-bool Mouse::ActionClicG()
+void Mouse::ActionLeftClic()
 {
-  if(!ActiveTeam().IsLocal())
-    return false;
-
   const Point2i pos_monde = GetWorldPosition();
-
+  
   // Action dans le menu des armes ?
   if( Interface::GetInstance()->weapons_menu.ActionClic( GetPosition() ) )
-    return true;
+    return;
 
-  // On peut changer de ver ?
   //Change character by mouse click only if the choosen weapon allows it
-  if( GameMode::GetInstance()->AllowCharacterSelection() && ActiveTeam().GetWeapon().mouse_character_selection){
+  if( GameMode::GetInstance()->AllowCharacterSelection() && 
+      ActiveTeam().GetWeapon().mouse_character_selection) {
 
-    // S�ection d'un ver se son �uipe ?
-    bool ver_choisi=false;
+    // Choose a character of our own team
+    bool character_found=false;
     Team::iterator it=ActiveTeam().begin(),
 	                 fin=ActiveTeam().end();
 
@@ -127,43 +94,85 @@ bool Mouse::ActionClicG()
         && !it -> IsDead()
         && it->GetRect().Contains( pos_monde ) ){
 
-	ver_choisi = true;
+	character_found = true;
         break;
       }
     }
 
-    if( ver_choisi ){
+    if( character_found ){
       while ( &(*it) != &ActiveCharacter() )
 	ActiveTeam().NextCharacter ();
-      return true;
+      return;
     }
 
     if( ActiveCharacter().GetRect().Contains( pos_monde ) ){
       CharacterCursor::GetInstance()->FollowActiveCharacter();
-      return true;
+      return;
     }
   }
-
-/*  // Action dans le menu des armes ?
-  if( Interface::GetInstance()->weapons_menu.ActionClic(GetPosition()) )
-    return true; */
 
   // Choosing target for a weapon, many posibilities :
   // - Do nothing
   // - Choose a target but don't fire
   // - Choose a target and fire it !
-  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    Action* a = new Action(Action::ACTION_SET_TARGET);
-    a->Push(GetWorldPosition().x);
-    a->Push(GetWorldPosition().y);
-    ActionHandler::GetInstance()->NewAction (a);
-    return true ;
-  }
-
-  return false;
+  Action* a = new Action(Action::ACTION_SET_TARGET);
+  a->Push(GetWorldPosition().x);
+  a->Push(GetWorldPosition().y);
+  ActionHandler::GetInstance()->NewAction (a);
 }
 
-void Mouse::ChoixVerPointe(){
+
+void Mouse::ActionRightClic()
+{
+  Interface::GetInstance()->weapons_menu.SwitchDisplay();
+}
+
+void Mouse::ActionWheelUp()
+{
+  ActiveTeam().AccessWeapon().HandleMouseWheelUp();
+}
+
+void Mouse::ActionWheelDown()
+{
+  ActiveTeam().AccessWeapon().HandleMouseWheelDown();
+}
+
+bool Mouse::HandleClic (const SDL_Event& event)
+{
+  if ( event.type != SDL_MOUSEBUTTONDOWN &&
+       event.type != SDL_MOUSEBUTTONUP ) {
+    return false ;
+  }
+
+  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) 
+    return true;
+
+  if(!ActiveTeam().IsLocal())
+    return true;
+
+  if( event.type == SDL_MOUSEBUTTONDOWN ){    
+    switch (event.button.button) {
+    case SDL_BUTTON_RIGHT:
+      ActionRightClic();
+      break;
+    case SDL_BUTTON_LEFT:
+      ActionLeftClic();
+      break;
+    case SDL_BUTTON_WHEELDOWN:
+      ActionWheelDown();
+      break;
+    case SDL_BUTTON_WHEELUP:
+      ActionWheelUp();
+      break;
+    default:
+      break;
+    }
+  }
+  return true;
+}
+
+void Mouse::ChoixVerPointe()
+{
   if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
     return;
 
@@ -253,48 +262,23 @@ void Mouse::TestCamera()
     ScrollCamera();
 }
 
-void Mouse::Refresh(){
+void Mouse::Refresh()
+{
   if (!scroll_actif)
     ChoixVerPointe();
 }
 
-Point2i Mouse::GetPosition() const{
-	int x, y;
-
-	SDL_GetMouseState( &x, &y);
-	return Point2i(x, y);
+Point2i Mouse::GetPosition() const
+{
+  int x, y;
+  
+  SDL_GetMouseState( &x, &y);
+  return Point2i(x, y);
 }
 
-Point2i Mouse::GetWorldPosition() const{
-   return GetPosition() + camera.GetPosition();
-}
-
-void Mouse::TraiteClic (const SDL_Event *event){
-  if( event->type == SDL_MOUSEBUTTONDOWN ){
-
-    if( event->button.button == SDL_BUTTON_RIGHT ){
-      ActionClicD();
-      return;
-    }
-
-    // Clic gauche de la souris ?
-    if( event->button.button == SDL_BUTTON_LEFT ){
-      ActionClicG();
-      return;
-    }
-
-
-    if (event->button.button == SDL_BUTTON_WHEELDOWN){
-      ActionWhellDown();
-      return;
-    }
-
-    if (event->button.button == SDL_BUTTON_WHEELUP){
-      ActionWhellUp();
-      return;
-    }
-
-  }
+Point2i Mouse::GetWorldPosition() const
+{
+  return GetPosition() + camera.GetPosition();
 }
 
 // set the new pointer type and return the previous one

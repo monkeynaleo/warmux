@@ -142,9 +142,9 @@ class WeaponLauncher : public Weapon
 
     virtual void IncMissedShots();
 
-  //Misc actions
-    virtual void ActionUp ();    // called by mouse.cpp when mouse wheel up
-    virtual void ActionDown ();  // called by mouse.cpp when mouse wheel down
+    // Handle mouse events
+    virtual void HandleMouseWheelUp();
+    virtual void HandleMouseWheelDown();
 
     WeaponProjectile* GetProjectile() { return projectile; };
     ExplosiveWeaponConfig& cfg();

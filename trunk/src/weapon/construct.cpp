@@ -101,12 +101,12 @@ void Construct::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t ev
   }
 }
 
-void Construct::ActionUp()
+void Construct::HandleMouseWheelUp()
 {
   Up();
 }
 
-void Construct::ActionDown()
+void Construct::HandleMouseWheelDown()
 {
   Down();
 }

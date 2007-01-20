@@ -37,10 +37,8 @@ private:
   static Keyboard * singleton;
 
 private:
-  // Traite une touche relach�e
-  void HandleKeyPressed (const Action::Action_t &action);
-  void HandleKeyReleased (const Action::Action_t &action);
-
+  bool HandleKeyPressed (const Action::Action_t &action);
+  bool HandleKeyReleased (const Action::Action_t &action);
 
 public:
   Keyboard();
@@ -51,11 +49,8 @@ public:
     KEY_REFRESH
   } Key_Event_t ;
 
-  void HandleKeyEvent( const SDL_Event *event) ;
+  void HandleKeyEvent(const SDL_Event& event) ;
   void Reset();
-
-  // On veut bouger la cam�ra au clavier ?
-  void TestCamera();
 
   // Refresh des touches du clavier
   void Refresh();

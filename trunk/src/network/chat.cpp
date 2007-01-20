@@ -25,23 +25,27 @@
 #include "../game/time.h"
 #include <string>
 
-Chat::~Chat(){
+Chat::~Chat()
+{
   delete chat;
 }
 
-Chat::Chat(){
+Chat::Chat()
+{
   chat = NULL;
   input = NULL;
   msg = NULL;
-  check_input = 0;
+  check_input = false;
 }
 
-void Chat::Reset(){
+void Chat::Reset()
+{
   if(chat == NULL)
     chat = new TextList();
 }
 
-void Chat::Show(){
+void Chat::Show()
+{
   uint now = Time::GetInstance()->ReadSec();
   
   if((now - last_time) >= MAXSECONDS){
@@ -55,9 +59,10 @@ void Chat::Show(){
     ShowInput();
 }
 
-void Chat::ShowInput(){
-  check_input = 1;
-  if(input == NULL){
+void Chat::ShowInput()
+{
+  check_input = true;
+  if (input == NULL){
     input = new Text("", c_white);
     msg = new Text(SAY, c_red);
   }
@@ -65,12 +70,13 @@ void Chat::ShowInput(){
   msg->DrawTopLeft(25,500);
 }
 
-int Chat::CheckInput(){
+bool Chat::CheckInput(){
   return check_input;
 }
 
-void Chat::NewMessage(const std::string &msg){
-  if(!(chat->Size())){
+void Chat::NewMessage(const std::string &msg)
+{
+  if (!chat->Size()){
     uint now = Time::GetInstance()->ReadSec();
     last_time = now;
   }
@@ -79,29 +85,30 @@ void Chat::NewMessage(const std::string &msg){
 }
 
 
-void Chat::HandleKey(const SDL_Event *event){
-  SDL_KeyboardEvent kbd_event = event->key;
+void Chat::HandleKey(const SDL_Event& event)
+{
+  SDL_KeyboardEvent kbd_event = event.key;
   SDL_keysym key = kbd_event.keysym;
   std::string txt = input->GetText();
 
-  switch(key.sym){
+  switch (key.sym){
     
   case SDLK_RETURN:
-    check_input = 0; //Hide input widget
-    if(txt != "" )
+    check_input = false; //Hide input widget
+    if (txt != "" )
       network.SendChatMessage(txt); //Send 'txt' to other players
     input->Set("");
     break;
 
   case SDLK_BACKSPACE:
-    if(kbd_event.state == 1 && txt != "")
+    if (kbd_event.state == 1 && txt != "")
       txt = txt.substr(0, txt.size()-1);
     input->Set(txt);
     break;
 
   default:
-    if(kbd_event.state == 1){
-      if(key.unicode < 0x80 && key.unicode > 0)
+    if (kbd_event.state == 1){
+      if (key.unicode < 0x80 && key.unicode > 0)
 	txt = txt + (char)key.unicode;
       input->Set(txt);
     }

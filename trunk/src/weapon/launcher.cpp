@@ -516,14 +516,12 @@ void WeaponLauncher::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event
     ActiveCharacter().HandleKeyEvent(action, event_type);
 }
 
-// called by mousse.cpp when mousewhellup
-void WeaponLauncher::ActionUp()
+void WeaponLauncher::HandleMouseWheelUp()
 {
   projectile->IncrementTimeOut();
 }
 
-// called by mousse.cpp when mousewhelldown
-void WeaponLauncher::ActionDown()
+void WeaponLauncher::HandleMouseWheelDown()
 {
   projectile->DecrementTimeOut();
 }
