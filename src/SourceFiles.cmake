@@ -90,6 +90,7 @@ network/network.cpp
 network/randomsync.cpp
 object/barrel.cpp
 object/bonus_box.cpp
+object/medkit.cpp
 object/object_cfg.cpp
 object/objects_list.cpp
 object/physical_obj.cpp

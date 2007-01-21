@@ -28,6 +28,7 @@
 #include "../tool/i18n.h"
 #include "../weapon/all.h"
 #include "../weapon/weapons_list.h"
+#include "../object/medkit.h"
 
 GameMode * GameMode::singleton = NULL;
 
@@ -159,6 +160,12 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
     if (bonus_box_explosion != NULL)
       bonus_box_explosion_cfg.LoadXml(bonus_box_explosion);
     BonusBox::LoadXml(bonus_box_xml);
+  }
+
+  // Medkit - reuses the bonus_box explosion.
+  xmlpp::Element *medkit_xml = XmlReader::GetMarker(xml, "medkit");
+  if(medkit_xml != NULL) {
+    Medkit::LoadXml(medkit_xml);
   }
 
   return true;

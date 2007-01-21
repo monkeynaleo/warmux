@@ -54,7 +54,6 @@ class BonusBox : public PhysicalObj
     static void Enable (bool _enable);
     static bool NewBonusBox();
     void DropBonusBox();
-    static void RemoveInfiniteWeapons();
     static void LoadXml(xmlpp::Element * object);
 
     void Draw();
