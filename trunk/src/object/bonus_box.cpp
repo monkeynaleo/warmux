@@ -46,13 +46,13 @@ const uint SPEED_PARACHUTE = 170; // ms per frame
 const uint NB_MAX_TRY = 20;
 
 BonusBox::BonusBox()
-  : PhysicalObj("bonus_box"){
+  : PhysicalObj("bonus_box") {
   SetTestRect (29, 29, 63, 6);
   m_allow_negative_y = true;
   //enable = false; //this disables bonus boxes after the first one has been constructed, and is thus wrong.
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  anim = resource_manager.LoadSprite( res, "objet/caisse");
+  anim = resource_manager.LoadSprite( res, "object/bonus_box");
   resource_manager.UnLoadXMLProfile(res);
 
   SetSize(anim->GetSize());
@@ -100,7 +100,7 @@ void BonusBox::Refresh()
 void BonusBox::SignalCollision()
 {
   SetAirResistFactor(1.0);
-
+  GameLoop::GetInstance()->SetCurrentBonusBox(NULL);
   MSG_DEBUG("bonus", "End of the fall: parachute=%d", parachute);
   if (!parachute) return;
 
@@ -109,7 +109,6 @@ void BonusBox::SignalCollision()
 
   anim->SetCurrentFrame(0);
   anim->Start();
-  GameLoop::GetInstance()->SetCurrentBonusBox(NULL);
 }
 
 void BonusBox::SignalDrowning()
@@ -138,8 +137,9 @@ void BonusBox::SignalGhostState(bool was_already_dead)
 
 void BonusBox::PickRandomWeapon() {
   uint weapon_num = 0;
-  if(weapon_count == 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode
+  if(weapon_count <= 0) { //there was an error in the LoadXml function, or it wasn't called, so have it explode
     life_points = 0;
+    MSG_DEBUG("bonus","Weapon count is zero");
     return;
   }
   weapon_num = (int)randomSync.GetDouble(1,weapon_count);
@@ -147,6 +147,7 @@ void BonusBox::PickRandomWeapon() {
   if(ActiveTeam().ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())==INFINITE_AMMO) {
     life_points = 0;
     nbr_ammo = 0;
+    MSG_DEBUG("bonus","Weapon %s already has infinite ammo",Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
   }
   else 
     nbr_ammo = weapon_map[weapon_num].second;
@@ -155,8 +156,7 @@ void BonusBox::PickRandomWeapon() {
 void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
   if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
-    /*this next 'if' should never be true, but I am loath to remove it just in case.
-    */
+    /*this next 'if' should never be true, but I am loath to remove it just in case. */
     if(equipe.ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())!=INFINITE_AMMO) {
         equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName() ] += nbr_ammo;
         txt << Format(ngettext(

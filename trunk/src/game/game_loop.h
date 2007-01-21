@@ -27,6 +27,7 @@
 #include "../character/character.h"
 #include "../network/chat.h"
 #include "../object/bonus_box.h"
+#include "../object/medkit.h"
 
 class GameLoop
 {
@@ -35,6 +36,7 @@ private:
   uint pause_seconde;
   uint duration;
   BonusBox * current_bonus_box;
+  Medkit * current_medkit;
 
 public:
   static const int PLAYING = 0;
@@ -79,6 +81,8 @@ public:
 
   void SetCurrentBonusBox(BonusBox * current_box);
   BonusBox * GetCurrentBonusBox() const;
+  void SetCurrentMedkit(Medkit * current_box);
+  Medkit * GetCurrentMedkit() const;
 
 private:
 

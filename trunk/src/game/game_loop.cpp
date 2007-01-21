@@ -47,6 +47,7 @@
 #include "../network/network.h"
 #include "../network/randomsync.h"
 #include "../object/bonus_box.h"
+#include "../object/medkit.h"
 #include "../object/objects_list.h"
 #include "../particles/particle.h"
 #include "../sound/jukebox.h"
@@ -76,6 +77,7 @@ GameLoop::GameLoop()
   state = PLAYING;
   interaction_enabled = true;
   current_bonus_box = NULL;
+  current_medkit = NULL;
 }
 
 void GameLoop::InitGameData_NetServer()
@@ -479,7 +481,7 @@ void GameLoop::RefreshClock()
 
           if (Game::GetInstance()->IsGameFinished())
             Game::GetInstance()->SetEndOfGameStatus( true );
-          else if (BonusBox::NewBonusBox())
+          else if (BonusBox::NewBonusBox() || Medkit::NewMedkit())
 	    break;
 	  else {
 	    ActiveTeam().AccessWeapon().Deselect();
@@ -502,6 +504,16 @@ void GameLoop::SetCurrentBonusBox(BonusBox * current_box)
 BonusBox * GameLoop::GetCurrentBonusBox() const
 {
   return current_bonus_box;
+}
+
+void GameLoop::SetCurrentMedkit(Medkit * current_box)
+{
+  current_medkit = current_box;
+}
+
+Medkit * GameLoop::GetCurrentMedkit() const
+{
+  return current_medkit;
 }
 
 void GameLoop::SetState(int new_state, bool begin_game)

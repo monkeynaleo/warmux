@@ -86,6 +86,11 @@
     <life_points>40</life_points>
   </bonus_box>
 
+  <medkit>
+    <life_points>40</life_points>
+    <energy_boost>25</energy_boost>
+  </medkit>
+
   <weapons>
     <air_attack>
       <position origin="over" x="0" y="-5" />

@@ -449,6 +449,7 @@ menu/img/validate.png
 menu/img/scroll_on_border.png
 menu/img/send_txt.png
 object/bonus_box.png
+object/medkit.png
 object/smoke.png
 object/dark_smoke.png
 object/blue_star.png
