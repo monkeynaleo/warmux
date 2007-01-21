@@ -157,7 +157,9 @@ void Game::Start()
 	  end = DisplayQuit();
 	}
       }
-      
+      else
+        end = true;
+
       if (!end)
 	world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
 
@@ -211,7 +213,7 @@ void Game::DisplayPause()
 
   //Pause screen
   question.Set ("", false, 0, "interface/pause_screen");
-  question.add_choice(Config::GetInstance()->GetKeyboard()->GetKeyAssociatedToAction(Action::ACTION_PAUSE),
+  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(Action::ACTION_PAUSE),
 		      1
 		      );
   AskQuestion(question, false);
@@ -236,10 +238,10 @@ bool Game::DisplayQuit()
       abort();
     if (!isalpha(key_x)) /* sanity check */
       abort();
-    
+
     question.add_choice(SDLK_a + (int)key_x - 'a', 1);
   }
-  
+
   jukebox.Pause();
   bool exit = (AskQuestion(question) == 1);
   jukebox.Resume();
