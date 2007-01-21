@@ -97,6 +97,6 @@ void DownloadServerList()
 		// Wait 1 day
 		sleep(60 * 60 * 24);
 	}
-	while(child == 2);
+	while(child == 0);
 }
  
