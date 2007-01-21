@@ -84,6 +84,13 @@ int main(int argc, void** argv)
 	DPRINT(INFO, "Wormux index server version %i", VERSION);
 	DPRINT(INFO, "%s", wx_clock.DateStr());
 
+	std::string working_dir;
+	config.Get("working_dir", working_dir);
+
+	DPRINT(INFO, "Entering folder %s", working_dir.c_str());
+	if(chdir(working_dir.c_str()) == -1)
+		TELL_ERROR;
+
 	DownloadServerList();
 
 	bool chroot_opt;
