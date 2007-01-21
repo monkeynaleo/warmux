@@ -170,7 +170,7 @@ void Config::SetDefault(const std::string & name, const std::string & value)
 	bool val;
 	if( ! Get(name, val) )
 	{
-		DPRINT(INFO, "Setting to default value : %s", name.c_str());
+		DPRINT(INFO, "Setting to default value : %s", value.c_str());
 		str_value[ name ] = value;
 	}
 }
