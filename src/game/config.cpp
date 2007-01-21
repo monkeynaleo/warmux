@@ -85,19 +85,6 @@ Config::Config()
   scroll_on_border = true;
   transparency = ALPHA;
 
-  // video
-  tmp.video.width = 800;
-  tmp.video.height = 600;
-  tmp.video.fullscreen = false;
-
-  // sound
-  tmp.sound.music = true;
-  tmp.sound.effects = true;
-  tmp.sound.frequency = 44100;
-
-  // network
-  tmp.network.enable_network = false;
-
   Constants::GetInstance();
 
   // directories
