@@ -3,6 +3,7 @@
 #include "clock.h"
 #include "sync_slave.h"
 #include "debug.h"
+#include "stat.h"
 
 Clock wx_clock;
 
@@ -17,17 +18,28 @@ void Clock::HandleJobs()
 	if(time(NULL) == last_refresh)
 		return;
 
+
+	// Every day
+	if(time(NULL) % (60 * 60 * 24) == 0)
+	{
+		ShowUpTime();
+		DPRINT(INFO, "Day changed to : %s", DateStr());
+		stats.hourly.Rotate();
+		stats.daily.Write();
+	}
+	else
+	// Every hour
+	if(time(NULL) % (60 * 60) == 0)
+	{
+		stats.hourly.Write();
+	}
+	else
 	// Refresh connections to the servers every minutes
 	if(time(NULL) % 60 == 0)
 	{
 		sync_slave.Start();
 	}
-
-	if(time(NULL) % (60 * 60 * 24) == 0)
-	{
-		ShowUpTime();
-		DPRINT(INFO, "Day changed to : %s", DateStr());
-	}
+	
 	last_refresh = time(NULL);
 }
 

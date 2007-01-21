@@ -9,6 +9,7 @@
 #include "net_data.h"
 #include "download.h"
 #include "debug.h"
+#include "stat.h"
 #include "../../src/network/index_svr_msg.h"
 
 SyncSlave sync_slave;
@@ -187,6 +188,7 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
 		else
 		{
 			fake_clients.insert( std::make_pair(full_str, FakeClient(nbr, nbr2)));
+			stats.NewFakeServer();
 		}
 		break;
 	default:

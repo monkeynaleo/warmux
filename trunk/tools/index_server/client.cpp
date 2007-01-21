@@ -14,6 +14,7 @@
 #include "net_data.h"
 #include "debug.h"
 #include "sync_slave.h"
+#include "stat.h"
 #include "../../src/network/index_svr_msg.h"
 
 // map < version, client >
@@ -60,6 +61,7 @@ bool Client::HandleMsg(const std::string & str)
 			handshake_done = true;
 			SetVersion( str );
 			msg_id = TS_NO_MSG;
+			stats.NewClient();
 			return SendSignature();		
 		}
 		else
@@ -95,6 +97,7 @@ bool Client::HandleMsg(const std::string & str)
 		if(! ReceiveInt(port) )
 			return false;
 		NotifyServers( true );
+		stats.NewServer();
 
 		// TODO: try opening a connection to see if it's 
 		// firewalled or not
