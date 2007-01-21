@@ -63,7 +63,7 @@ void ConnectionStats::Write()
 	struct tm* t;
 	time_t now = time(NULL);
 	t = localtime(&now);
-	fprintf(fd, "%4i-%02i-%02i %i:%2i:%2i %lu %lu %lu\n", 1900 + t->tm_year,t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec, fake_servers, servers, clients);
+	fprintf(fd, "%4i-%02i-%02i %i:%O2i:%O2i %lu %lu %lu\n", 1900 + t->tm_year,t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec, fake_servers, servers, clients);
 
 	fflush(fd);
 	Reset();
