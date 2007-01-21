@@ -44,7 +44,7 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 bool SyncSlave::Start()
 {
 	const std::string server_fn = "./server_list";
-	DPRINT(CONN, "Contacting other servers ...");
+	DPRINT(TRAFFIC, "Contacting other servers ...");
 	std::ifstream fin;
 	fin.open(server_fn.c_str(), std::ios::in);
 	if(!fin)
