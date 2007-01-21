@@ -49,10 +49,54 @@
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
 
+Keyboard * Keyboard::singleton = NULL;
+
+Keyboard * Keyboard::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new Keyboard();
+  }
+  return singleton;
+}
+
 Keyboard::Keyboard()
 {
   //Disable repeated events when a key is kept down
   SDL_EnableKeyRepeat(0,0);
+
+  SetKeyAction(SDLK_LEFT,      Action::ACTION_MOVE_LEFT);
+  SetKeyAction(SDLK_RIGHT,     Action::ACTION_MOVE_RIGHT);
+  SetKeyAction(SDLK_UP,        Action::ACTION_UP);
+  SetKeyAction(SDLK_DOWN,      Action::ACTION_DOWN);
+  SetKeyAction(SDLK_RETURN,    Action::ACTION_JUMP);
+  SetKeyAction(SDLK_BACKSPACE, Action::ACTION_HIGH_JUMP);
+  SetKeyAction(SDLK_b,         Action::ACTION_BACK_JUMP);
+  SetKeyAction(SDLK_SPACE,     Action::ACTION_SHOOT);
+  SetKeyAction(SDLK_TAB,       Action::ACTION_NEXT_CHARACTER);
+  SetKeyAction(SDLK_ESCAPE,    Action::ACTION_QUIT);
+  SetKeyAction(SDLK_p,         Action::ACTION_PAUSE);
+  SetKeyAction(SDLK_F10,       Action::ACTION_FULLSCREEN);
+  SetKeyAction(SDLK_F9,        Action::ACTION_TOGGLE_INTERFACE);
+  SetKeyAction(SDLK_F1,        Action::ACTION_WEAPONS1);
+  SetKeyAction(SDLK_F2,        Action::ACTION_WEAPONS2);
+  SetKeyAction(SDLK_F3,        Action::ACTION_WEAPONS3);
+  SetKeyAction(SDLK_F4,        Action::ACTION_WEAPONS4);
+  SetKeyAction(SDLK_F5,        Action::ACTION_WEAPONS5);
+  SetKeyAction(SDLK_F6,        Action::ACTION_WEAPONS6);
+  SetKeyAction(SDLK_F7,        Action::ACTION_WEAPONS7);
+  SetKeyAction(SDLK_F8,        Action::ACTION_WEAPONS8);
+  SetKeyAction(SDLK_c,         Action::ACTION_CENTER);
+  SetKeyAction(SDLK_1,         Action::ACTION_WEAPON_1);
+  SetKeyAction(SDLK_2,         Action::ACTION_WEAPON_2);
+  SetKeyAction(SDLK_3,         Action::ACTION_WEAPON_3);
+  SetKeyAction(SDLK_4,         Action::ACTION_WEAPON_4);
+  SetKeyAction(SDLK_5,         Action::ACTION_WEAPON_5);
+  SetKeyAction(SDLK_6,         Action::ACTION_WEAPON_6);
+  SetKeyAction(SDLK_7,         Action::ACTION_WEAPON_7);
+  SetKeyAction(SDLK_8,         Action::ACTION_WEAPON_8);
+  SetKeyAction(SDLK_9,         Action::ACTION_WEAPON_9);
+  SetKeyAction(SDLK_PAGEUP,    Action::ACTION_WEAPON_MORE);
+  SetKeyAction(SDLK_PAGEDOWN,  Action::ACTION_WEAPON_LESS);
+  SetKeyAction(SDLK_s,         Action::ACTION_CHAT);
 }
 
 void Keyboard::Reset()
@@ -80,10 +124,10 @@ int Keyboard::GetKeyAssociatedToAction(Action::Action_t at)
 
 
 void Keyboard::HandleKeyEvent(const SDL_Event& event)
-{ 
+{
   // Not a keyboard event
   if ( event.type != SDL_KEYDOWN && event.type != SDL_KEYUP) {
-    return; 
+    return;
   }
 
   //Handle input text for Chat session in Network game
@@ -198,7 +242,7 @@ bool Keyboard::HandleKeyPressed (const Action::Action_t &action)
       if ( weapon_sort > 0 )
         {
           Weapon::Weapon_type weapon;
-          if (Config::GetInstance()->GetWeaponsList()->GetWeaponBySort(weapon_sort, weapon))
+          if (WeaponsList::GetInstance()->GetWeaponBySort(weapon_sort, weapon))
             ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHANGE_WEAPON, weapon));
 
           return true;

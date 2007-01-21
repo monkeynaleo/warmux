@@ -144,12 +144,12 @@ void BonusBox::PickRandomWeapon() {
   }
   weapon_num = (int)randomSync.GetDouble(1,weapon_count);
   contents = (weapon_map[weapon_num].first)->GetType();
-  if(ActiveTeam().ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())==INFINITE_AMMO) {
+  if(ActiveTeam().ReadNbAmmos(WeaponsList::GetInstance()->GetWeapon(contents)->GetName())==INFINITE_AMMO) {
     life_points = 0;
     nbr_ammo = 0;
-    MSG_DEBUG("bonus","Weapon %s already has infinite ammo",Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
+    MSG_DEBUG("bonus","Weapon %s already has infinite ammo",WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
   }
-  else 
+  else
     nbr_ammo = weapon_map[weapon_num].second;
 }
 
@@ -157,17 +157,17 @@ void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
   if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
     /*this next 'if' should never be true, but I am loath to remove it just in case. */
-    if(equipe.ReadNbAmmos(Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName())!=INFINITE_AMMO) {
-        equipe.m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName() ] += nbr_ammo;
+    if(equipe.ReadNbAmmos(WeaponsList::GetInstance()->GetWeapon(contents)->GetName())!=INFINITE_AMMO) {
+        equipe.m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(contents)->GetName() ] += nbr_ammo;
         txt << Format(ngettext(
                 "%s team has won %u %s!",
                 "%s team has won %u %ss!",
                 2),
-            equipe.GetName().c_str(), nbr_ammo, Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
+            equipe.GetName().c_str(), nbr_ammo, WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
     }
     else {
         txt << Format(gettext("%s team already has infinite ammo for the %s!"), //this should never appear
-            equipe.GetName().c_str(), Config::GetInstance()->GetWeaponsList()->GetWeapon(contents)->GetName().c_str());
+            equipe.GetName().c_str(), WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
     }
   GameMessages::GetInstance()->Add (txt.str());
 }
@@ -228,7 +228,7 @@ void BonusBox::LoadXml(xmlpp::Element * object)
 {
   XmlReader::ReadInt(object,"life_points",start_life_points);
   object = XmlReader::GetMarker(object, "probability");
-  std::list<Weapon*> l_weapons_list = Config::GetInstance()->GetWeaponsList()->GetList();
+  std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList();
   std::list<Weapon*>::iterator
       itw = l_weapons_list.begin(),
       end = l_weapons_list.end();

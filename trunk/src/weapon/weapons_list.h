@@ -36,6 +36,11 @@ public:
   typedef std::list<Weapon*>::iterator weapons_list_it;
 
 private:
+  static WeaponsList * weapons_list; /* list by itself */
+  /* reference counter on the list WARNING not thread safe */
+  int ref_counter;
+
+  WeaponsList();
   weapons_list_type m_weapons_list;
 
   // The int is used to classify weapon by sort
@@ -45,10 +50,14 @@ private:
   void AddToList(Weapon* arme, uint num_sort);
   Weapon* GetNextWeapon(uint sort, uint index);
 
+  /* if you need to use this, implement it */
+  WeaponsList(const WeaponsList &a_list) {};
+
+
 public:
-  WeaponsList();
   ~WeaponsList();
   void Init();
+  static WeaponsList * GetInstance();
 
   // Refresh des armes
   // Retourne true si c'est la fin d'un tour

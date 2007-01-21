@@ -35,13 +35,30 @@
 
 //-----------------------------------------------------------------------------
 
+WeaponsList * weapon_list = NULL;
+
+WeaponsList * WeaponsList::GetInstance()
+{
+  if (weapon_list == NULL) {
+    weapon_list = new WeaponsList();
+  }
+  weapon_list->ref_counter++;
+  return weapon_list;
+}
+
 WeaponsList::~WeaponsList()
 {
-  weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
-  for (; it != end; ++it)
-  {
-    delete *it;
-  }
+  ref_counter--;
+  /* we can delete the list iif nobody has an instance somewhere */
+  if (ref_counter == 0)
+    {
+      weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
+      for (; it != end; ++it)
+        {
+          delete *it;
+        }
+      weapon_list = NULL;
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -131,6 +148,8 @@ WeaponsList::WeaponsList()
   AddToList(construct,5);
   AddToList(blowtorch,5);
   AddToList(suicide,5);
+
+  ref_counter = 0;
 }
 
 //-----------------------------------------------------------------------------

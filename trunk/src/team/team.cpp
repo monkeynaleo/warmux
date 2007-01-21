@@ -50,7 +50,7 @@ Team::Team(const std::string& _teams_dir,
   active_character = characters.end();
 
   is_camera_saved = false;
-  active_weapon = Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_DYNAMITE);
+  active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
 
   m_teams_dir = _teams_dir;
   m_id = _id;
@@ -277,7 +277,7 @@ void Team::PrepareTurn()
   if (AccessWeapon().EnoughAmmo())
     AccessWeapon().Select();
   else { // try to find another weapon !!
-    active_weapon = Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_BAZOOKA);
+    active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_BAZOOKA);
     AccessWeapon().Select();
   }
 }
@@ -290,7 +290,7 @@ Character& Team::ActiveCharacter()
 void Team::SetWeapon (Weapon::Weapon_type type)
 {
   AccessWeapon().Deselect();
-  active_weapon = Config::GetInstance()->GetWeaponsList()->GetWeapon(type);
+  active_weapon = WeaponsList::GetInstance()->GetWeapon(type);
   AccessWeapon().Select();
 }
 
@@ -368,7 +368,7 @@ void Team::LoadGamingData(uint howmany)
   // Reset ammos
   m_nb_ammos.clear();
   m_nb_units.clear();
-  std::list<Weapon *> l_weapons_list = Config::GetInstance()->GetWeaponsList()->GetList() ;
+  std::list<Weapon *> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
   std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
   end = l_weapons_list.end();
 
@@ -380,13 +380,13 @@ void Team::LoadGamingData(uint howmany)
   // Disable non-working weapons in network games
   if(network.IsConnected())
   {
-    m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
-    m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_AIR_HAMMER)->GetName() ] = 0;
-    m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_BLOWTORCH)->GetName() ] = 0;
-    m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_SUBMACHINE_GUN)->GetName() ] = 0;
+    m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
+    m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_AIR_HAMMER)->GetName() ] = 0;
+    m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_BLOWTORCH)->GetName() ] = 0;
+    m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_SUBMACHINE_GUN)->GetName() ] = 0;
   }
 
-  active_weapon = Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_DYNAMITE);
+  active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
   is_camera_saved = false;
 
   if (howmany == 0)

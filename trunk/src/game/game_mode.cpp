@@ -145,7 +145,7 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   xmlpp::Element *armes = XmlReader::GetMarker(xml, "weapons");
   if (armes != NULL)
   {
-    std::list<Weapon*> l_weapons_list = Config::GetInstance()->GetWeaponsList()->GetList() ;
+    std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
     std::list<Weapon*>::iterator
       itw = l_weapons_list.begin(),
       end = l_weapons_list.end();
@@ -171,12 +171,11 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   return true;
 }
 
-bool GameMode::Load(const std::string &mode)
+bool GameMode::Load(void)
 {
-  if (mode == m_current) return true;
-  m_current = mode;
-
   std::string fullname;
+  Config * config = Config::GetInstance();
+  m_current = config->GetGameMode();
   try
   {
     XmlReader doc;
@@ -184,10 +183,9 @@ bool GameMode::Load(const std::string &mode)
       PATH_SEPARATOR
       + std::string("game_mode")
       + std::string(PATH_SEPARATOR)
-      + mode
+      + m_current
       + std::string(".xml");
 
-    Config * config = Config::GetInstance();
     fullname = config->GetPersonalDir() + filename;
 
     if(!IsFileExist(fullname))
@@ -200,7 +198,7 @@ bool GameMode::Load(const std::string &mode)
   catch (const xmlpp::exception &e)
   {
     std::cerr << Format(_("Error while loading game mode %s (file %s):"),
-                        mode.c_str(), fullname.c_str())
+                        m_current.c_str(), fullname.c_str())
 			  << std::endl << e.what() << std::endl;
     return false;
   }

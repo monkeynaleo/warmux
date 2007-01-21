@@ -31,6 +31,7 @@
 class Keyboard
 {
 private:
+  Keyboard();
   std::map<int, Action::Action_t> layout;
   bool PressedKeys[Action::ACTION_LAST];
 
@@ -41,7 +42,7 @@ private:
   bool HandleKeyReleased (const Action::Action_t &action);
 
 public:
-  Keyboard();
+  static Keyboard * GetInstance();
   typedef enum
   {
     KEY_PRESSED,

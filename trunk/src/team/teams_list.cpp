@@ -158,6 +158,7 @@ void TeamsList::LoadList()
   ChangeSelection (nv_selection);
 
   std::cout << std::endl;
+  InitList(Config::GetInstance()->tmp.teams);
 }
 
 //-----------------------------------------------------------------------------
