@@ -21,6 +21,7 @@
 #include "sync_slave.h"
 #include "clock.h"
 #include "download.h"
+#include "stat.h"
 
 // map < version, client >
 std::multimap<std::string, Client*> clients;
@@ -115,9 +116,10 @@ int main(int argc, void** argv)
 	int max_conn = SetMaxConnection();
 	DPRINT(INFO, "Number of connexions allowed : %i", max_conn);
 
+	stats.Init();
+
 	int port = 0;
 	config.Get("port", port);
-
 	Server listen_sock(port);
 
 	// Set of socket where an activity have been detected
