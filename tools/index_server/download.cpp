@@ -91,12 +91,12 @@ void DownloadServerList()
 			if( child == -1)
 				TELL_ERROR
 			else
-			if(child != 0)
+			if(child == 0)
 				break;
 		}
 		// Wait 1 day
 		sleep(60 * 60 * 24);
 	}
-	while(child == 0);
+	while(child != 0);
 }
  
