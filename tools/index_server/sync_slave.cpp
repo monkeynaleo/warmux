@@ -42,12 +42,7 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 
 bool SyncSlave::Start()
 {
-	// Download the server list from wormux.org
-	// and contact every server
 	const std::string server_fn = "./server_list";
-	DPRINT(CONN, "Downloading the server list from wormux.org");
-	downloader.Get( server_list_url.c_str(), server_fn.c_str() );
-
 	DPRINT(CONN, "Contacting other servers ...");
 	std::ifstream fin;
 	fin.open(server_fn.c_str(), std::ios::in);

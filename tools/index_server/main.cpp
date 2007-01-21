@@ -20,6 +20,7 @@
 #include "debug.h"
 #include "sync_slave.h"
 #include "clock.h"
+#include "download.h"
 
 // map < version, client >
 std::multimap<std::string, Client*> clients;
@@ -82,6 +83,8 @@ int main(int argc, void** argv)
 {
 	DPRINT(INFO, "Wormux index server version %i", VERSION);
 	DPRINT(INFO, "%s", wx_clock.DateStr());
+
+	DownloadServerList();
 
 	bool chroot_opt;
 	config.Get("chroot", chroot_opt);

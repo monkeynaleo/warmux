@@ -17,8 +17,8 @@ void Clock::HandleJobs()
 	if(time(NULL) == last_refresh)
 		return;
 
-	// Refresh servers list every hours
-	if(time(NULL) % (60 * 60) == 0)
+	// Refresh connections to the servers every minutes
+	if(time(NULL) % 60 == 0)
 	{
 		sync_slave.Start();
 	}
