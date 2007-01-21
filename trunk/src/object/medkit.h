@@ -24,31 +24,31 @@
 //-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "../include/base.h"
+#include "objbox.h"
 #include "../object/physical_obj.h"
 #include "../team/team.h"
-#include "../weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 
-class Medkit : public PhysicalObj
+class Medkit : public ObjBox//public PhysicalObj
 {
   private:
-    static bool enable;
+    //static bool enable;
     static int nbr_health;
-    static int start_life_points;
+    //static int start_life_points;
 
-    bool parachute; 
-    Sprite *anim;
+    //bool parachute; 
+    //Sprite *anim;
 
   private:
     void ApplyMedkit (Team &team, Character &character);
   public:
     Medkit();
-    ~Medkit();
+    //~Medkit();
 
     // Activate medkit ?
-    static void Enable (bool _enable);
-    static bool NewMedkit();
-    void DropMedkit();
+    //static void Enable (bool _enable);
+    //static bool NewMedkit();
+    //void DropMedkit();
     static void LoadXml(xmlpp::Element * object);
 
     void Draw();
@@ -56,9 +56,9 @@ class Medkit : public PhysicalObj
 
   protected:
     // Signal Fall ending
-    virtual void SignalCollision();
-    virtual void SignalDrowning();
-    void SignalGhostState(bool was_already_dead);
+    //void SignalCollision();
+    //void SignalDrowning();
+    //void SignalGhostState(bool was_already_dead);
 };
 
 //-----------------------------------------------------------------------------

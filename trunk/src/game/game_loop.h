@@ -35,8 +35,7 @@ private:
   int state;
   uint pause_seconde;
   uint duration;
-  BonusBox * current_bonus_box;
-  Medkit * current_medkit;
+  ObjBox * current_ObjBox;
 
 public:
   static const int PLAYING = 0;
@@ -79,10 +78,8 @@ public:
   // Signal character damage
   void SignalCharacterDamage(Character *character);
 
-  void SetCurrentBonusBox(BonusBox * current_box);
-  BonusBox * GetCurrentBonusBox() const;
-  void SetCurrentMedkit(Medkit * current_box);
-  Medkit * GetCurrentMedkit() const;
+  void SetCurrentBox(ObjBox * current_box);
+  ObjBox * GetCurrentBox() const;
 
 private:
 
