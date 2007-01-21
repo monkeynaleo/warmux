@@ -29,9 +29,11 @@
 #include <iostream>
 #include <SDL.h>
 #include "game/config.h"
+#include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
+#include "map/maps_list.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
 #include "menu/main_menu.h"
@@ -41,6 +43,7 @@
 #include "include/action_handler.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
+#include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
@@ -126,16 +129,21 @@ int AppWormux::main (int argc, char **argv){
 }
 
 void AppWormux::Init(int argc, char **argv){
-  Config * config = Config::GetInstance();
 
+  InitFonts();
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
 
   video.InitWindow();
-  InitFonts();
+
+  teams_list.LoadList();
+
+  GameMode::GetInstance()->Load();
+
+  // Load maps
+  MapsList::GetInstance()->SelectMapByName(Config::GetInstance()->tmp.map_name);
 
   DisplayLoadingPicture();
-  config->Apply();
 
   jukebox.Init();
 }

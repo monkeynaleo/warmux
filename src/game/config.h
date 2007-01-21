@@ -18,6 +18,13 @@
  ******************************************************************************
  * Configuration of Wormux : store game config of every tunable variable of Wormux.
  * Vars have a default value and can be change with the file configuration.
+ * This object aims to become the only place where the XML is read and/or
+ * written. It is handled as a singleton pattern whereas one doesn't really
+ * care when the XML config file is loaded, but when it was actually read, this
+ * is useless to load it again.
+ * On the other hand, this objet is not designed to handle any other
+ * information whereas it is nothing but a shell around the XML config file
+ * created to be able to handle config data easily.
  *****************************************************************************/
 
 #ifndef CONFIG_H
@@ -28,8 +35,6 @@
 #include "../include/base.h"
 #include "../team/team_config.h"
 #include "../tool/xml_document.h"
-#include "../interface/keyboard.h"
-#include "../weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)
 #define PATH_SEPARATOR "\\"
@@ -67,9 +72,6 @@ public:
 
   int GetTransparency() const;
 
-  inline Keyboard * GetKeyboard() { return my_keyboard; }
-  inline WeaponsList * GetWeaponsList() { return my_weapons_list; }
-
   std::string GetTtfFilename() const;
 
   std::string GetDataDir() const;
@@ -96,12 +98,11 @@ public:
 
   static Config * GetInstance();
 // bool Load();
-  void Apply();
   bool Save();
+  const inline std::string &GetGameMode() const { return m_game_mode; };
 
 protected:
   bool LoadXml(xmlpp::Element *xml);
-  void SetKeyboardConfig();
   bool SaveXml();
   std::string GetEnv(const std::string & name, const std::string &default_value);
 
@@ -122,9 +123,6 @@ protected:
 
 private:
   Config();
-  // In french Clavier = keyboard
-  Keyboard * my_keyboard;
-  WeaponsList * my_weapons_list;
   static Config * singleton;
   bool DoLoading(void);
 };

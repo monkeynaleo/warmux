@@ -74,14 +74,13 @@ private:
 public:
   static GameMode * GetInstance();
 
-  bool Load(const std::string &mode);
+  bool Load(void);
   bool AllowCharacterSelection() const;
 
 private:
   GameMode();
-
-protected:
   bool LoadXml (xmlpp::Element *xml);
+
 };
 
 #endif /* GAME_MODE_H */

@@ -52,6 +52,10 @@ void JukeBox::Resume()
 
 void JukeBox::Init()
 {
+  jukebox.ActiveMusic(Config::GetInstance()->tmp.sound.music);
+  jukebox.ActiveEffects(Config::GetInstance()->tmp.sound.effects);
+  jukebox.SetFrequency(Config::GetInstance()->tmp.sound.frequency);
+
   if (!m_config.music && !m_config.effects) {
     End();
     return;

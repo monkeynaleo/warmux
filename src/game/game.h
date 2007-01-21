@@ -25,6 +25,7 @@
 
 #include "../include/base.h"
 #include "../gui/question.h"
+#include "../weapon/weapons_list.h"
 
 class Game
 {
@@ -37,7 +38,7 @@ private:
 
   Game();
   static Game * singleton;
-  
+
   int AskQuestion (Question &question, bool draw=true);
   void DisplayPause();
   bool DisplayQuit();

@@ -179,7 +179,7 @@ void GameLoop::InitData()
     InitData_Local();
 
   CharacterCursor::GetInstance()->Reset();
-  Config::GetInstance()->GetKeyboard()->Reset();
+  Keyboard::GetInstance()->Reset();
 
   fps.Reset();
   if(network.IsConnected())
@@ -263,7 +263,7 @@ void GameLoop::RefreshInput()
       continue;
 
     // Keyboard event
-    Config::GetInstance()->GetKeyboard()->HandleKeyEvent(event);
+    Keyboard::GetInstance()->HandleKeyEvent(event);
   }
 
   // Keyboard and mouse refresh
@@ -271,10 +271,10 @@ void GameLoop::RefreshInput()
       (ActiveTeam().GetWeapon().IsActive() &&
        ActiveTeam().GetWeapon().override_keys)) { // for driving supertux for example
     Mouse::GetInstance()->Refresh();
-    Config::GetInstance()->GetKeyboard()->Refresh();
+    Keyboard::GetInstance()->Refresh();
     AIengine::GetInstance()->Refresh();
   }
-  
+
   // Execute action
   do {
     ActionHandler::GetInstance()->ExecActions();
@@ -293,7 +293,7 @@ void GameLoop::RefreshObject()
   FOR_EACH_TEAM(team)
     (**team).Refresh();
   teams_list.RefreshEnergy();
-  
+
   ActiveTeam().AccessWeapon().Manage();
   lst_objects.Refresh();
   ParticleEngine::Refresh();
@@ -401,11 +401,11 @@ void GameLoop::Run()
   uint time_of_next_frame = SDL_GetTicks();
   uint previous_time_frame = 0;
 
+  Game::GetInstance()->SetEndOfGameStatus( false );
+
   // loop until game is finished
   do
   {
-    Game::GetInstance()->SetEndOfGameStatus( false );
-
     // Refresh clock value
     RefreshClock();
     if(Time::GetInstance()->Read() % 1000 == 20 && network.IsServer())
@@ -434,7 +434,7 @@ void GameLoop::Run()
     delay = time_of_next_frame - SDL_GetTicks();
     if (delay >= 0)
       SDL_Delay(delay);
-  } while( !Game::GetInstance()->GetEndOfGameStatus() 
+  } while( !Game::GetInstance()->GetEndOfGameStatus()
 	   && !Game::GetInstance()->IsGamePaused());
 }
 
