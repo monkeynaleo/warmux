@@ -76,8 +76,7 @@ GameLoop::GameLoop()
 {
   state = PLAYING;
   interaction_enabled = true;
-  current_bonus_box = NULL;
-  current_medkit = NULL;
+  current_ObjBox = NULL;
 }
 
 void GameLoop::InitGameData_NetServer()
@@ -481,7 +480,7 @@ void GameLoop::RefreshClock()
 
           if (Game::GetInstance()->IsGameFinished())
             Game::GetInstance()->SetEndOfGameStatus( true );
-          else if (BonusBox::NewBonusBox() || Medkit::NewMedkit())
+          else if (ObjBox::NewBox())
 	    break;
 	  else {
 	    ActiveTeam().AccessWeapon().Deselect();
@@ -496,24 +495,14 @@ void GameLoop::RefreshClock()
     }// if
 }
 
-void GameLoop::SetCurrentBonusBox(BonusBox * current_box)
+void GameLoop::SetCurrentBox(ObjBox * current_box)
 {
-  current_bonus_box = current_box;
+  current_ObjBox = current_box;
 }
 
-BonusBox * GameLoop::GetCurrentBonusBox() const
+ObjBox * GameLoop::GetCurrentBox() const
 {
-  return current_bonus_box;
-}
-
-void GameLoop::SetCurrentMedkit(Medkit * current_box)
-{
-  current_medkit = current_box;
-}
-
-Medkit * GameLoop::GetCurrentMedkit() const
-{
-  return current_medkit;
+  return current_ObjBox;
 }
 
 void GameLoop::SetState(int new_state, bool begin_game)

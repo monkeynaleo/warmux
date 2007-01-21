@@ -70,7 +70,7 @@ protected:
   std::string m_rebound_sound;
 
   alive_t m_alive;
-  int life_points; // Only used by petrol barrel and bonus box (character use their own damage system for now..)
+  int life_points; // Only used by petrol barrel and boxes (character use their own damage system for now..)
 
   bool m_allow_negative_y;
 

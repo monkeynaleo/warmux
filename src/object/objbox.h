@@ -16,40 +16,46 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Bonus Box
+ * Generic Box
  *****************************************************************************/
 
-#ifndef BONUS_BOX_H
-#define BONUS_BOX_H
+#ifndef OBJBOX_H
+#define OBJBOX_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "../include/base.h"
-#include "objbox.h"
-#include "../object/physical_obj.h"
 #include "../team/team.h"
-#include "../weapon/weapons_list.h"
-//-----------------------------------------------------------------------------
+#include "../object/physical_obj.h"
 
-class BonusBox : public ObjBox
+class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
-  private:
-    uint nbr_ammo;
+  private:    
+    virtual void ApplyBox (Team &team, Character &character){}
 
-    Weapon::Weapon_type contents;
-    static uint weapon_count;
-    static std::map<int,std::pair<Weapon*,int> > weapon_map;
-    static std::map<int,std::pair<Weapon*,int> > weapon_map_no_infinite;
-
-  private:
-    void ApplyBonus (Team &team, Character &character);
-    void PickRandomWeapon();
   public:
-    BonusBox();
-    static void LoadXml(xmlpp::Element * object);
+    ObjBox(const std::string &name);
+    ~ObjBox();
 
-    void Draw();
-    void Refresh();
+    // Activate box ?
+    static void Enable (bool _enable);
+    static bool NewBox();
+    void DropBox();
+    static void LoadXml(xmlpp::Element * object){}
+
+    virtual void Draw(){}
+    virtual void Refresh(){}
+
+  protected:
+    bool parachute;
+    Sprite *anim;
+    static bool enable;
+    static int start_life_points;
+    // Signal Fall ending
+    void SignalCollision();
+    void SignalDrowning();
+    void SignalGhostState(bool was_already_dead);
 };
 
 //-----------------------------------------------------------------------------
-#endif /* BONUS_BOX_H */
+#endif /* OBJBOX_H */
+

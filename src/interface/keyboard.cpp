@@ -258,8 +258,9 @@ bool Keyboard::HandleKeyReleased (const Action::Action_t &action)
 
   // We manage here only actions which are active on KEY_RELEASED event.
   Interface * interface = Interface::GetInstance();
-  BonusBox * current_bbox;
-  Medkit * current_mbox;
+  //BonusBox * current_bbox;
+  //Medkit * current_mbox;
+  ObjBox * current_ObjBox;
 
   switch(action) // Convert to int to avoid a warning
   {
@@ -270,17 +271,10 @@ bool Keyboard::HandleKeyReleased (const Action::Action_t &action)
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PAUSE));
       return true;
     case Action::ACTION_SHOOT:
-      current_bbox = GameLoop::GetInstance()->GetCurrentBonusBox();
-      current_mbox = GameLoop::GetInstance()->GetCurrentMedkit();
-      if (current_bbox != NULL) {
-        current_bbox->DropBonusBox();
-	std::cout << "MFE Drop Bonus Box !" << std::endl;
-	return true;
-      }
-      if (current_mbox != NULL) {
-        current_mbox->DropMedkit();
-	std::cout << "MFE Drop Medkit !" << std::endl;
-	return true;
+      current_ObjBox = GameLoop::GetInstance()->GetCurrentBox();
+      if (current_ObjBox != NULL) {
+        current_ObjBox->DropBox();
+        return true;
       }
       break;
     case Action::ACTION_FULLSCREEN:

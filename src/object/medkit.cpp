@@ -44,10 +44,8 @@ const uint SPEED_PARACHUTE = 170; // ms par image
 const uint NB_MAX_TRY = 20;
 
 Medkit::Medkit()
-  : PhysicalObj("medkit"){
+  : ObjBox("medkit") {
   SetTestRect (29, 29, 63, 6);
-  m_allow_negative_y = true;
-  //enable = false; //see bonus_box for why this is wrong
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   anim = resource_manager.LoadSprite( res, "object/medkit");
@@ -56,17 +54,7 @@ Medkit::Medkit()
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
-
-  parachute = true;
-
-  life_points = start_life_points;
-
-  SetSpeed (SPEED, M_PI_2);
-}
-
-Medkit::~Medkit(){
-  delete anim;
-  GameLoop::GetInstance()->SetCurrentMedkit(NULL);
+  std::cout<<"anim set"<<std::endl;
 }
 
 void Medkit::Draw()
@@ -92,45 +80,6 @@ void Medkit::Refresh()
   if (!anim->IsFinished() && !parachute) anim->Update();
 }
 
-// Say hello to the ground
-void Medkit::SignalCollision()
-{
-  SetAirResistFactor(1.0);
-  GameLoop::GetInstance()->SetCurrentMedkit(NULL);
-  MSG_DEBUG("medkit", "End of the fall: parachute=%d", parachute);
-  if (!parachute) return;
-
-  MSG_DEBUG("medkit", "Start of the animation 'fold of the parachute'.");
-  parachute = false;
-
-  anim->SetCurrentFrame(0);
-  anim->Start();
-}
-
-void Medkit::SignalDrowning()
-{
-  SignalCollision();
-}
-
-void Medkit::DropMedkit()
-{
-  if(parachute) {
-    SetAirResistFactor(1.0);
-    parachute = false;
-    anim->SetCurrentFrame(anim->GetFrameCount() - 1);
-  } else {
-    m_ignore_movements = true;
-  }
-}
-
-//Medkits can explode too...
-void Medkit::SignalGhostState(bool was_already_dead)
-{
-  if(life_points > 0) return;
-  ParticleEngine::AddNow(GetCenter() , 10, particle_FIRE, true);
-  ApplyExplosion(GetCenter(), GameMode::GetInstance()->bonus_box_explosion_cfg); //reuse the bonus_box explosion
-}
-
 void Medkit::ApplyMedkit(Team &equipe, Character &ver) {
   std::ostringstream txt;
  txt << Format(ngettext(
@@ -145,48 +94,7 @@ void Medkit::ApplyMedkit(Team &equipe, Character &ver) {
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // Static methods
-bool Medkit::enable = true;
-int Medkit::start_life_points = 41;
 int Medkit::nbr_health = 24;
-
-// Make the medkit active?
-void Medkit::Enable (bool _enable)
-{
-  MSG_DEBUG("medkit", "Enable ? %d", _enable);
-  enable = _enable;
-}
-
-bool Medkit::NewMedkit()
-{
-  if (!enable) { // Medkits are disabled on closed map
-    return false;
-  }
-
-  uint nbr_teams=teams_list.playing_list.size();
-  if(nbr_teams<=1) {
-    MSG_DEBUG("medkit", "There is less than 2 teams in the game");
-    return false;
-  }
-  // .7 is a magic number to get the probability of boxes falling once every round close to .333
-  double randValue = randomSync.GetDouble();
-  if(randValue > (1-pow(.5,1.0/nbr_teams))) {
-       return false;
-  }
-
-  Medkit * box = new Medkit();
-  if(!box->PutRandomly(true,0)) {
-    MSG_DEBUG("medkit", "Missed to put the medkit");
-    delete box;
-  } else {
-    lst_objects.AddObject(box);
-    camera.FollowObject(box, true, true);
-    GameMessages::GetInstance()->Add (_("Healing from above."));
-    GameLoop::GetInstance()->SetCurrentMedkit(box);
-    return true;
-  }
-
-  return false;
-}
 
 void Medkit::LoadXml(xmlpp::Element * object)
 {
