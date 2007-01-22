@@ -61,7 +61,7 @@ class NinjaRope : public Weapon
     NinjaRope();
     void Active();
     void Draw();
-    void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) ;
+    void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type) ;
     void NotifyMove(bool collision);
     void SignalTurnEnd();
     EmptyWeaponConfig& cfg();
@@ -75,7 +75,7 @@ class NinjaRope : public Weapon
     void GoRight();
     void StopLeft();
     void StopRight();
-    void TryAttachRope();
+    bool TryAttachRope();
     void UnattachRope();
     bool TryAddNode(int CurrentSense) ;
     bool TryBreakNode(int CurrentSense) ;

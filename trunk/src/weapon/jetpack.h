@@ -38,7 +38,7 @@ class JetPack : public Weapon
   public:
     JetPack();
     void Reset();
-    void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) ;
+    void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type) ;
     void SignalTurnEnd();
     void ActionStopUse();
 

@@ -136,11 +136,11 @@ void Airhammer::Refresh()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
+void Airhammer::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
 {
-  switch (action) {
+  switch (key) {
 
-    case Action::ACTION_SHOOT:
+    case Keyboard::KEY_SHOOT:
 
       if (event_type == Keyboard::KEY_RELEASED || ActiveCharacter().GotInjured()) {
         // stop when key is released or character got injured

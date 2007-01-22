@@ -105,10 +105,13 @@ bool NinjaRope::p_Shoot()
   m_launch_time = Time::GetInstance()->Read() ;
   m_initial_angle = ActiveCharacter().GetFiringAngle();
   last_mvt=Time::GetInstance()->Read();
-  return true ;
+
+  bool r = TryAttachRope();
+  std::cout << "TryAttachRope " << r << std::endl;
+  return r;
 }
 
-void NinjaRope::TryAttachRope()
+bool NinjaRope::TryAttachRope()
 {
   int x, y;
   uint length;
@@ -128,7 +131,7 @@ void NinjaRope::TryAttachRope()
       // Hum the roe is too short !
       m_attaching = false;
       m_is_active = false;
-      return ;
+      return false;
     }
 
   angle = m_initial_angle;
@@ -160,12 +163,12 @@ void NinjaRope::TryAttachRope()
 
      ActiveCharacter().SetFiringAngle(-M_PI / 3);
 
+     return true;
     }
-  else
-    {
-      rope_node[0].x = x + (int)(length * cos(angle));
-      rope_node[0].y = y + (int)(length * sin(angle));
-    }
+
+  rope_node[0].x = x + (int)(length * cos(angle));
+  rope_node[0].y = y + (int)(length * sin(angle));
+  return false;
 }
 
 void NinjaRope::UnattachRope()
@@ -410,15 +413,15 @@ void NinjaRope::Draw()
 
   struct CL_Quad {Sint16 x1,x2,x3,x4,y1,y2,y3,y4;} quad;
 
+  Weapon::Draw();
+  
   if (!m_is_active)
   {
-    Weapon::Draw();
     return ;
   }
 
   if (m_attaching)
     {
-      TryAttachRope();
       if (!m_is_active)
 	      return ;
       if(m_attaching)
@@ -490,20 +493,20 @@ void NinjaRope::p_Deselect()
   ActiveCharacter().UnsetPhysFixationPoint() ;
 }
 
-void NinjaRope::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
+void NinjaRope::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
 {
-  switch (action) {
-    case Action::ACTION_UP:
+  switch (key) {
+    case Keyboard::KEY_UP:
       if (event_type != Keyboard::KEY_RELEASED)
 	GoUp();
       break ;
 
-    case Action::ACTION_DOWN:
+    case Keyboard::KEY_DOWN:
       if (event_type != Keyboard::KEY_RELEASED)
 	GoDown();
       break ;
 
-    case Action::ACTION_MOVE_LEFT:
+    case Keyboard::KEY_MOVE_LEFT:
       if (event_type == Keyboard::KEY_PRESSED)
 	GoLeft();
       else
@@ -511,7 +514,7 @@ void NinjaRope::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t ev
 	  StopLeft();
       break ;
 
-    case Action::ACTION_MOVE_RIGHT:
+    case Keyboard::KEY_MOVE_RIGHT:
       if (event_type == Keyboard::KEY_PRESSED)
 	GoRight();
       else
@@ -519,9 +522,10 @@ void NinjaRope::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t ev
 	  StopRight();
       break ;
 
-    case Action::ACTION_SHOOT:
-      if (event_type == Keyboard::KEY_PRESSED)
-	UseAmmoUnit();
+    case Keyboard::KEY_SHOOT:
+      if (event_type == Keyboard::KEY_PRESSED && m_rope_attached)
+	UnattachRope();
+	//UseAmmoUnit();
       break ;
 
     default:

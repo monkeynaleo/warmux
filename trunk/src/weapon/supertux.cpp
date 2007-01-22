@@ -141,16 +141,16 @@ bool TuxLauncher::p_Shoot ()
   return WeaponLauncher::p_Shoot();
 }
 
-void TuxLauncher::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
+void TuxLauncher::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
 {
-  switch (action)
+  switch (key)
   {
-    case Action::ACTION_MOVE_LEFT:
+    case Keyboard::KEY_MOVE_LEFT:
     if (event_type !=  Keyboard:: Keyboard::KEY_RELEASED)
       current_tux->turn_left();
     break ;
 
-    case Action::ACTION_MOVE_RIGHT:
+    case Keyboard::KEY_MOVE_RIGHT:
     if (event_type !=  Keyboard:: Keyboard::KEY_RELEASED)
       current_tux->turn_right();
     break ;

@@ -130,11 +130,6 @@ void Weapon::p_Select ()
 }
 void Weapon::p_Deselect () {}
 
-void Weapon::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) 
-{
-
-}
-
 void Weapon::Select()
 {
   MSG_DEBUG("weapon", "Select %s", m_name.c_str());

@@ -126,10 +126,10 @@ void SubMachineGun::RepeatShoot()
 }
 
 // Special handle to allow multiple shoot at a time
-void SubMachineGun::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
+void SubMachineGun::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
 {
-  switch (action) {
-    case Action::ACTION_SHOOT:
+  switch (key) {
+    case Keyboard::KEY_SHOOT:
       if (event_type == Keyboard::KEY_REFRESH)
         m_is_active = true;
       if (event_type ==  Keyboard::KEY_RELEASED)

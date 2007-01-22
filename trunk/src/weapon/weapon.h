@@ -219,7 +219,7 @@ public:
   virtual void ChooseTarget (Point2i mouse_pos);
 
   // Handle a keyboard event.
-  virtual void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
+  virtual void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type){};
 /*   virtual void HandleKeyUpPressed(); */
 /*   virtual void HandleKeyUpRefreshed(); */
 /*   virtual void HandleKeyUpReleased(); */
