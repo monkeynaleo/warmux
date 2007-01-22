@@ -30,7 +30,6 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../particles/particle.h"
-#include "../interface/keyboard.h"
 #include "body.h"
 
 class Team;
@@ -120,11 +119,8 @@ public:
   void StartPlaying();
   void StopPlaying();
 
-  // Handle a key event on the character
-  void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
   void PrepareShoot();
   void DoShoot();
-  void HandleShoot(Keyboard::Key_Event_t event_type);
   double GetFiringAngle() const;
   double GetAbsFiringAngle() const;
   void SetFiringAngle(double angle);
@@ -179,6 +175,39 @@ public:
   void SetMovement(std::string name);
   void SetClotheOnce(std::string name);
   void SetMovementOnce(std::string name);
+
+  // Keyboard handling
+  void HandleKeyPressed_MoveRight();
+  void HandleKeyRefreshed_MoveRight();
+  void HandleKeyReleased_MoveRight();
+
+  void HandleKeyPressed_MoveLeft();
+  void HandleKeyRefreshed_MoveLeft();
+  void HandleKeyReleased_MoveLeft();
+
+  void HandleKeyPressed_Up();
+  void HandleKeyRefreshed_Up();
+  void HandleKeyReleased_Up();
+
+  void HandleKeyPressed_Down();
+  void HandleKeyRefreshed_Down();
+  void HandleKeyReleased_Down();
+
+  void HandleKeyPressed_Jump();
+  void HandleKeyRefreshed_Jump();
+  void HandleKeyReleased_Jump();
+
+  void HandleKeyPressed_HighJump();
+  void HandleKeyRefreshed_HighJump();
+  void HandleKeyReleased_HighJump();
+
+  void HandleKeyPressed_BackJump();
+  void HandleKeyRefreshed_BackJump();
+  void HandleKeyReleased_BackJump();
+
+  void HandleKeyPressed_Shoot();
+  void HandleKeyRefreshed_Shoot();
+  void HandleKeyReleased_Shoot();
 };
 
 #endif

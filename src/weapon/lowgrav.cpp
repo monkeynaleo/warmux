@@ -64,17 +64,17 @@ void LowGrav::Draw()
 {
 }
 
-void LowGrav::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
+void LowGrav::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
 {
-  switch (action)
+  switch (key)
     {
-      case Action::ACTION_SHOOT:
+      case Keyboard::KEY_SHOOT:
         if (event_type == Keyboard::KEY_PRESSED)
           ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
 	break ;
 
       default:
-	ActiveCharacter().HandleKeyEvent(action, event_type);
+	//ActiveCharacter().HandleKeyEvent(key, event_type);
 	break ;
     }
 }

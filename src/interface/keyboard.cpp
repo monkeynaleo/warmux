@@ -63,57 +63,57 @@ Keyboard::Keyboard()
   //Disable repeated events when a key is kept down
   SDL_EnableKeyRepeat(0,0);
 
-  SetKeyAction(SDLK_LEFT,      Action::ACTION_MOVE_LEFT);
-  SetKeyAction(SDLK_RIGHT,     Action::ACTION_MOVE_RIGHT);
-  SetKeyAction(SDLK_UP,        Action::ACTION_UP);
-  SetKeyAction(SDLK_DOWN,      Action::ACTION_DOWN);
-  SetKeyAction(SDLK_RETURN,    Action::ACTION_JUMP);
-  SetKeyAction(SDLK_BACKSPACE, Action::ACTION_HIGH_JUMP);
-  SetKeyAction(SDLK_b,         Action::ACTION_BACK_JUMP);
-  SetKeyAction(SDLK_SPACE,     Action::ACTION_SHOOT);
-  SetKeyAction(SDLK_TAB,       Action::ACTION_NEXT_CHARACTER);
-  SetKeyAction(SDLK_ESCAPE,    Action::ACTION_QUIT);
-  SetKeyAction(SDLK_p,         Action::ACTION_PAUSE);
-  SetKeyAction(SDLK_F10,       Action::ACTION_FULLSCREEN);
-  SetKeyAction(SDLK_F9,        Action::ACTION_TOGGLE_INTERFACE);
-  SetKeyAction(SDLK_F1,        Action::ACTION_WEAPONS1);
-  SetKeyAction(SDLK_F2,        Action::ACTION_WEAPONS2);
-  SetKeyAction(SDLK_F3,        Action::ACTION_WEAPONS3);
-  SetKeyAction(SDLK_F4,        Action::ACTION_WEAPONS4);
-  SetKeyAction(SDLK_F5,        Action::ACTION_WEAPONS5);
-  SetKeyAction(SDLK_F6,        Action::ACTION_WEAPONS6);
-  SetKeyAction(SDLK_F7,        Action::ACTION_WEAPONS7);
-  SetKeyAction(SDLK_F8,        Action::ACTION_WEAPONS8);
-  SetKeyAction(SDLK_c,         Action::ACTION_CENTER);
-  SetKeyAction(SDLK_1,         Action::ACTION_WEAPON_1);
-  SetKeyAction(SDLK_2,         Action::ACTION_WEAPON_2);
-  SetKeyAction(SDLK_3,         Action::ACTION_WEAPON_3);
-  SetKeyAction(SDLK_4,         Action::ACTION_WEAPON_4);
-  SetKeyAction(SDLK_5,         Action::ACTION_WEAPON_5);
-  SetKeyAction(SDLK_6,         Action::ACTION_WEAPON_6);
-  SetKeyAction(SDLK_7,         Action::ACTION_WEAPON_7);
-  SetKeyAction(SDLK_8,         Action::ACTION_WEAPON_8);
-  SetKeyAction(SDLK_9,         Action::ACTION_WEAPON_9);
-  SetKeyAction(SDLK_PAGEUP,    Action::ACTION_WEAPON_MORE);
-  SetKeyAction(SDLK_PAGEDOWN,  Action::ACTION_WEAPON_LESS);
-  SetKeyAction(SDLK_s,         Action::ACTION_CHAT);
+  SetKeyAction(SDLK_LEFT,      Keyboard::KEY_MOVE_LEFT);
+  SetKeyAction(SDLK_RIGHT,     Keyboard::KEY_MOVE_RIGHT);
+  SetKeyAction(SDLK_UP,        Keyboard::KEY_UP);
+  SetKeyAction(SDLK_DOWN,      Keyboard::KEY_DOWN);
+  SetKeyAction(SDLK_RETURN,    Keyboard::KEY_JUMP);
+  SetKeyAction(SDLK_BACKSPACE, Keyboard::KEY_HIGH_JUMP);
+  SetKeyAction(SDLK_b,         Keyboard::KEY_BACK_JUMP);
+  SetKeyAction(SDLK_SPACE,     Keyboard::KEY_SHOOT);
+  SetKeyAction(SDLK_TAB,       Keyboard::KEY_NEXT_CHARACTER);
+  SetKeyAction(SDLK_ESCAPE,    Keyboard::KEY_QUIT);
+  SetKeyAction(SDLK_p,         Keyboard::KEY_PAUSE);
+  SetKeyAction(SDLK_F10,       Keyboard::KEY_FULLSCREEN);
+  SetKeyAction(SDLK_F9,        Keyboard::KEY_TOGGLE_INTERFACE);
+  SetKeyAction(SDLK_F1,        Keyboard::KEY_WEAPONS1);
+  SetKeyAction(SDLK_F2,        Keyboard::KEY_WEAPONS2);
+  SetKeyAction(SDLK_F3,        Keyboard::KEY_WEAPONS3);
+  SetKeyAction(SDLK_F4,        Keyboard::KEY_WEAPONS4);
+  SetKeyAction(SDLK_F5,        Keyboard::KEY_WEAPONS5);
+  SetKeyAction(SDLK_F6,        Keyboard::KEY_WEAPONS6);
+  SetKeyAction(SDLK_F7,        Keyboard::KEY_WEAPONS7);
+  SetKeyAction(SDLK_F8,        Keyboard::KEY_WEAPONS8);
+  SetKeyAction(SDLK_c,         Keyboard::KEY_CENTER);
+  SetKeyAction(SDLK_1,         Keyboard::KEY_WEAPON_1);
+  SetKeyAction(SDLK_2,         Keyboard::KEY_WEAPON_2);
+  SetKeyAction(SDLK_3,         Keyboard::KEY_WEAPON_3);
+  SetKeyAction(SDLK_4,         Keyboard::KEY_WEAPON_4);
+  SetKeyAction(SDLK_5,         Keyboard::KEY_WEAPON_5);
+  SetKeyAction(SDLK_6,         Keyboard::KEY_WEAPON_6);
+  SetKeyAction(SDLK_7,         Keyboard::KEY_WEAPON_7);
+  SetKeyAction(SDLK_8,         Keyboard::KEY_WEAPON_8);
+  SetKeyAction(SDLK_9,         Keyboard::KEY_WEAPON_9);
+  SetKeyAction(SDLK_PAGEUP,    Keyboard::KEY_WEAPON_MORE);
+  SetKeyAction(SDLK_PAGEDOWN,  Keyboard::KEY_WEAPON_LESS);
+  SetKeyAction(SDLK_s,         Keyboard::KEY_CHAT);
 }
 
 void Keyboard::Reset()
 {
-  for (int i = Action::ACTION_FIRST; i != Action::ACTION_LAST; i++)
+  for (int i = 0; i != 256; i++)
     PressedKeys[i] = false ;
 }
 
-void Keyboard::SetKeyAction(int key, Action::Action_t at)
+void Keyboard::SetKeyAction(int key, Key_t at)
 {
   layout[key] = at;
 }
 
 // Get the key associated to an action.
-int Keyboard::GetKeyAssociatedToAction(Action::Action_t at)
+int Keyboard::GetKeyAssociatedToAction(Key_t at)
 {
-  std::map<int, Action::Action_t>::iterator it;
+  std::map<int, Key_t>::iterator it;
   for (it= layout.begin(); it != layout.end(); it++) {
     if (it->second == at) {
       return it->first;
@@ -150,168 +150,254 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
       return;
     }
 
-  std::map<int, Action::Action_t>::iterator it = layout.find(event.key.keysym.sym);
+  std::map<int, Key_t>::iterator it = layout.find(event.key.keysym.sym);
 
   if ( it == layout.end() )
     return;
 
-  Action::Action_t action = it->second;
+  Key_t key = it->second;
 
-  //We can perform the next actions, only if the player is played localy:
-  if(ActiveTeam().IsLocal())
-  {
-    if(event_type == KEY_PRESSED && HandleKeyPressed(action))
-      return;
-
-    if(event_type == KEY_RELEASED && HandleKeyReleased(action))
-      return;
-
-    if ((ActiveTeam().GetWeapon().override_keys &&
-        ActiveTeam().GetWeapon().IsActive()) || ActiveTeam().GetWeapon().force_override_keys)
-      {
-        ActiveTeam().AccessWeapon().HandleKeyEvent(action, event_type);
-        return ;
-      }
-    ActiveCharacter().HandleKeyEvent(action, event_type);
+  if(event_type == KEY_PRESSED) {
+    HandleKeyPressed(key);
+    return;
   }
-  else
-  {
-    //Current player is on the network
-    if(event_type == KEY_RELEASED)
-      HandleKeyReleased(action);
+  
+  if(event_type == KEY_RELEASED) {
+    HandleKeyReleased(key);
+    return;
   }
 }
 
 // Handle a pressed key
-bool Keyboard::HandleKeyPressed (const Action::Action_t &action)
+void Keyboard::HandleKeyPressed (const Key_t &key)
 {
-  PressedKeys[action] = true ;
+  // Managing keys related to character moves
+  // Available only when local
+  if (!ActiveTeam().IsLocal()) return;
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
 
-  if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
-      ActiveTeam().GetWeapon().CanChangeWeapon())
-    {
-      int weapon_sort = -1;
+  switch (key) {
 
-      switch(action) {
-        case Action::ACTION_WEAPONS1:
-          weapon_sort = 1;
-          break;
+  case KEY_MOVE_RIGHT:
+    ActiveCharacter().HandleKeyPressed_MoveRight();
+    goto pressed_accepted;
+  case KEY_MOVE_LEFT:
+    ActiveCharacter().HandleKeyPressed_MoveLeft();
+    goto pressed_accepted;	
+  case KEY_UP:
+    ActiveCharacter().HandleKeyPressed_Up();
+    goto pressed_accepted;
+  case KEY_DOWN:
+    ActiveCharacter().HandleKeyPressed_Down();
+    goto pressed_accepted;
+  case KEY_JUMP:
+    ActiveCharacter().HandleKeyPressed_Jump();
+    goto pressed_accepted;
+  case KEY_HIGH_JUMP:
+    ActiveCharacter().HandleKeyPressed_HighJump();
+    goto pressed_accepted;
+  case KEY_BACK_JUMP:
+    ActiveCharacter().HandleKeyPressed_BackJump();
+    goto pressed_accepted;
+  default:
+    break;
+  }
 
-        case Action::ACTION_WEAPONS2:
-          weapon_sort = 2;
-          break;
+  if (key == KEY_SHOOT) {
+    if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
+      ActiveCharacter().HandleKeyPressed_Shoot();
+    goto pressed_accepted;
+  }
 
-        case Action::ACTION_WEAPONS3:
-          weapon_sort = 3;
-          break;
+  return;
 
-        case Action::ACTION_WEAPONS4:
-          weapon_sort = 4;
-          break;
-
-        case Action::ACTION_WEAPONS5:
-          weapon_sort = 5;
-          break;
-
-        case Action::ACTION_WEAPONS6:
-          weapon_sort = 6;
-          break;
-
-        case Action::ACTION_WEAPONS7:
-          weapon_sort = 7;
-          break;
-
-        case Action::ACTION_WEAPONS8:
-          weapon_sort = 8;
-          break;
-
-        case Action::ACTION_NEXT_CHARACTER:
-          if (GameMode::GetInstance()->AllowCharacterSelection()) {
-            Action * next_character = new Action(Action::ACTION_NEXT_CHARACTER);
-            next_character->StoreActiveCharacter();
-            ActiveTeam().NextCharacter();
-            next_character->StoreActiveCharacter();
-            ActionHandler::GetInstance()->NewAction(next_character);
-          }
-          return true;
-
-        default:
-          break ;
-      }
-
-      if ( weapon_sort > 0 )
-        {
-          Weapon::Weapon_type weapon;
-          if (WeaponsList::GetInstance()->GetWeaponBySort(weapon_sort, weapon))
-            ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHANGE_WEAPON, weapon));
-
-          return true;
-        }
-    }
-  return false;
+ pressed_accepted:
+  PressedKeys[key] = true ;
 }
 
 // Handle a released key
-bool Keyboard::HandleKeyReleased (const Action::Action_t &action)
+void Keyboard::HandleKeyReleased (const Key_t &key)
 {
-  PressedKeys[action] = false ;
+  PressedKeys[key] = false ;
 
   // We manage here only actions which are active on KEY_RELEASED event.
   Interface * interface = Interface::GetInstance();
-  //BonusBox * current_bbox;
-  //Medkit * current_mbox;
-  ObjBox * current_ObjBox;
-
-  switch(action) // Convert to int to avoid a warning
-  {
-    case Action::ACTION_QUIT:
+  
+  { // Managing keys related to interface (no game interaction)
+    // Always available
+    switch(key){
+      // Managing interface
+    case KEY_QUIT:
       Game::GetInstance()->SetEndOfGameStatus( true );
-      return true;
-    case Action::ACTION_PAUSE:
+      return;
+    case KEY_PAUSE:
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PAUSE));
-      return true;
-    case Action::ACTION_SHOOT:
-      current_ObjBox = GameLoop::GetInstance()->GetCurrentBox();
-      if (current_ObjBox != NULL) {
-        current_ObjBox->DropBox();
-        return true;
-      }
-      break;
-    case Action::ACTION_FULLSCREEN:
+      return;
+    case KEY_FULLSCREEN:
       AppWormux::GetInstance()->video.ToggleFullscreen();
-      return true;
-    case Action::ACTION_CHAT:
+      return;
+    case KEY_CHAT:
       if(network.IsConnected())
-        GameLoop::GetInstance()->chatsession.ShowInput();
-      return true;
-    case Action::ACTION_CENTER:
+	GameLoop::GetInstance()->chatsession.ShowInput();
+      return;
+    case KEY_CENTER:
       CharacterCursor::GetInstance()->FollowActiveCharacter();
       camera.FollowObject (&ActiveCharacter(), true, true, true);
-      return true;
-    case Action::ACTION_TOGGLE_INTERFACE:
+      return;
+    case KEY_TOGGLE_INTERFACE:
       interface->EnableDisplay (!interface->IsDisplayed());
-      return true;
+      return;
     default:
       break;
+    }
   }
-  return false;
+
+  // Managing shoot key
+  // Drop bonus box or medkit when outside a turn
+  // Shoot when in turn
+  if (key == KEY_SHOOT) {
+    
+    if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) {
+      ObjBox* current_box = GameLoop::GetInstance()->GetCurrentBox();
+      if (current_box != NULL) {
+	current_box->DropBox();
+      }
+    } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
+	       ActiveTeam().IsLocal()) {
+      ActiveCharacter().HandleKeyReleased_Shoot();
+    }
+    return;
+  }
+
+  { // Managing keys related to character moves
+    // Available only when local
+    if (!ActiveTeam().IsLocal()) return;
+
+    if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING &&
+	GameLoop::GetInstance()->ReadState() != GameLoop::HAS_PLAYED)
+      return;
+
+    switch (key) {
+    case KEY_MOVE_RIGHT:
+      ActiveCharacter().HandleKeyReleased_MoveRight();
+      return;
+    case KEY_MOVE_LEFT:
+      ActiveCharacter().HandleKeyReleased_MoveLeft();
+      return;
+    case KEY_UP:
+      ActiveCharacter().HandleKeyReleased_Up();
+      return;
+    case KEY_DOWN:
+      ActiveCharacter().HandleKeyReleased_Down();
+      return;
+    case KEY_JUMP:
+      ActiveCharacter().HandleKeyReleased_Jump();
+      return;
+    case KEY_HIGH_JUMP:
+      ActiveCharacter().HandleKeyReleased_HighJump();
+      return;
+    case KEY_BACK_JUMP:
+      ActiveCharacter().HandleKeyReleased_BackJump();
+      return;
+    default:
+      break;
+	
+    }
+  }
+
+  { // Managing keys related to change of character or weapon
+
+    if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING ||
+	!ActiveTeam().GetWeapon().CanChangeWeapon())
+      return;
+      
+    int weapon_sort = -1;
+    
+    switch(key) {
+
+    case KEY_NEXT_CHARACTER:
+      if (GameMode::GetInstance()->AllowCharacterSelection()) {
+	Action * next_character = new Action(Action::ACTION_NEXT_CHARACTER);
+	next_character->StoreActiveCharacter();
+	ActiveTeam().NextCharacter();
+	next_character->StoreActiveCharacter();
+	ActionHandler::GetInstance()->NewAction(next_character);
+      }
+      return;
+
+    case KEY_WEAPONS1:
+      weapon_sort = 1;
+      break;
+    case KEY_WEAPONS2:
+      weapon_sort = 2;
+      break;
+    case KEY_WEAPONS3:
+      weapon_sort = 3;
+      break;
+    case KEY_WEAPONS4:
+      weapon_sort = 4;
+      break;
+    case KEY_WEAPONS5:
+      weapon_sort = 5;
+      break;
+    case KEY_WEAPONS6:
+      weapon_sort = 6;
+      break;
+    case KEY_WEAPONS7:
+      weapon_sort = 7;
+      break;
+    case KEY_WEAPONS8:
+      weapon_sort = 8;
+      break;
+    default:
+      break ;
+    }
+    
+    if ( weapon_sort != -1 ) {
+      Weapon::Weapon_type weapon;
+      if (WeaponsList::GetInstance()->GetWeaponBySort(weapon_sort, weapon))
+	ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHANGE_WEAPON, weapon));
+      
+      return;
+    }
+  }
 }
 
 // Refresh keys which are still pressed.
 void Keyboard::Refresh()
 {
   //Treat KEY_REFRESH events:
-  for (int i = Action::ACTION_FIRST; i < Action::ACTION_LAST; i++)
-    if(PressedKeys[i])
-      {
-        if (ActiveTeam().GetWeapon().override_keys &&
-            ActiveTeam().GetWeapon().IsActive())
-          {
-            ActiveTeam().AccessWeapon().HandleKeyEvent(static_cast<Action::Action_t>(i), KEY_REFRESH);
-          }
-        else
-          {
-            ActiveCharacter().HandleKeyEvent(static_cast<Action::Action_t>(i),KEY_REFRESH);
-          }
+  for (int i = 0; i < 256; i++)
+    if(PressedKeys[i]) {
+      Key_t key = static_cast<Key_t>(i);
+      
+      switch(key){
+      case KEY_MOVE_RIGHT:
+	ActiveCharacter().HandleKeyRefreshed_MoveRight();
+	break;
+      case KEY_MOVE_LEFT:
+	ActiveCharacter().HandleKeyRefreshed_MoveLeft();
+	break;
+      case KEY_UP:
+	ActiveCharacter().HandleKeyRefreshed_Up();
+	break;
+      case KEY_DOWN:
+	ActiveCharacter().HandleKeyRefreshed_Down();
+	break;  
+      case KEY_JUMP:
+	ActiveCharacter().HandleKeyRefreshed_Jump();
+	break;
+      case KEY_HIGH_JUMP:
+	ActiveCharacter().HandleKeyRefreshed_HighJump();
+	break;
+      case KEY_BACK_JUMP:
+	ActiveCharacter().HandleKeyRefreshed_BackJump();
+	break;
+      case KEY_SHOOT:
+	ActiveCharacter().HandleKeyRefreshed_Shoot();
+	break;
+      default:
+	break;
       }
+    }
 }

@@ -523,157 +523,6 @@ void Character::DoShoot()
   ActiveTeam().AccessWeapon().Shoot();
 }
 
-void Character::HandleShoot(Keyboard::Key_Event_t event_type)
-{
-  if(prepare_shoot)
-    return;
-
-  switch (event_type) {
-    case Keyboard::KEY_PRESSED:
-      if (ActiveTeam().GetWeapon().max_strength == 0)
-        ActiveTeam().GetWeapon().NewActionShoot();
-      else
-      if ( (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
-         && ActiveTeam().GetWeapon().IsReady() )
-        ActiveTeam().AccessWeapon().InitLoading();
-      break ;
-
-    case Keyboard::KEY_RELEASED:
-      if (ActiveTeam().GetWeapon().IsLoading())
-        ActiveTeam().GetWeapon().NewActionShoot();
-      break ;
-
-    case Keyboard::KEY_REFRESH:
-      if ( ActiveTeam().GetWeapon().IsLoading() )
-	{
-	  // Strength == max strength -> Fire !!!
-	  if (ActiveTeam().GetWeapon().ReadStrength() >=
-	      ActiveTeam().GetWeapon().max_strength)
-            ActiveTeam().GetWeapon().NewActionShoot();
-	  else
-	    {
-	      // still pressing the Space key
-	      ActiveTeam().AccessWeapon().UpdateStrength();
-	    }
-	}
-      break ;
-
-    default:
-      break ;
-  }
-}
-
-void Character::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
-{
-  // The character cannot move anymove if the turn is over...
-  if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
-    return ;
-
-  if (ActiveCharacter().IsDead())
-    return;
-
-  if (action == Action::ACTION_SHOOT)
-    {
-      HandleShoot(event_type);
-      do_nothing_time = Time::GetInstance()->Read();
-      CharacterCursor::GetInstance()->Hide();
-      return;
-    }
-
-  ActionHandler * action_handler = ActionHandler::GetInstance();
-
-  if(action <= Action::ACTION_NEXT_CHARACTER)
-    {
-      switch (event_type)
-      {
-        case Keyboard::KEY_REFRESH:
-          switch (action) {
-            case Action::ACTION_MOVE_LEFT:
-              if(ActiveCharacter().IsImmobile())
-                MoveCharacterLeft(ActiveCharacter());
-              HideGameInterface();
-              return;
-            case Action::ACTION_MOVE_RIGHT:
-              if(ActiveCharacter().IsImmobile())
-                MoveCharacterRight(ActiveCharacter());
-              HideGameInterface();
-              return;
-            default:
-              break ;
-          }
-          //no break!! -> it's normal
-        case Keyboard::KEY_PRESSED:
-          switch (action)
-          {
-            case Action::ACTION_UP:
-              HideGameInterface();
-              if(ActiveCharacter().IsImmobile())
-              {
-                if (ActiveTeam().crosshair.enable)
-                {
-                  do_nothing_time = Time::GetInstance()->Read();
-                  CharacterCursor::GetInstance()->Hide();
-                  action_handler->NewAction (new Action(Action::ACTION_UP));
-                }
-              }
-              break ;
-
-            case Action::ACTION_DOWN:
-              HideGameInterface();
-              if(ActiveCharacter().IsImmobile())
-              {
-                if (ActiveTeam().crosshair.enable)
-                {
-                  do_nothing_time = Time::GetInstance()->Read();
-                  CharacterCursor::GetInstance()->Hide();
-                  action_handler->NewAction (new Action(Action::ACTION_DOWN));
-                }
-              }
-              break ;
-            case Action::ACTION_MOVE_LEFT:
-            case Action::ACTION_MOVE_RIGHT:
-              HideGameInterface();
-              InitMouvementDG(PAUSE_MOVEMENT);
-              body->StartWalk();
-              break;
-            // WARNING!! ALL JUMP KEYS NEEDS TO BE PROCESSED AFTER ANY MOVEMENT KEYS
-            // OTHERWISE, THE JUMP ACTION WILL BYPASSED ON DISTANT COMPUTERS BYE THE REFRESH
-            // OF THE WALK
-            case Action::ACTION_JUMP:
-              HideGameInterface();
-              if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(Action::ACTION_JUMP));
-              return ;
-            case Action::ACTION_HIGH_JUMP:
-              HideGameInterface();
-              if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(Action::ACTION_HIGH_JUMP));
-              return ;
-            case Action::ACTION_BACK_JUMP:
-              HideGameInterface();
-              if(ActiveCharacter().IsImmobile())
-                action_handler->NewAction (new Action(Action::ACTION_BACK_JUMP));
-              return ;
-            default:
-              break;
-          }
-          break;
-
-        case Keyboard::KEY_RELEASED:
-          switch (action) {
-            case Action::ACTION_MOVE_LEFT:
-            case Action::ACTION_MOVE_RIGHT:
-               body->StopWalk();
-               SendCharacterPosition();
-               break;
-            default:
-               break;
-            }
-        default: break;
-      }
-    }
-}
-
 void Character::Refresh()
 {
   if (IsGhost()) return;
@@ -981,3 +830,182 @@ uint Character::GetCharacterIndex()
   assert(false);
   return 0;
 }
+
+// ###################################################################
+// ###################################################################
+// ###################################################################
+
+// #################### MOVE_RIGHT
+void Character::HandleKeyPressed_MoveRight()
+{
+  InitMouvementDG(PAUSE_MOVEMENT);
+  body->StartWalk();
+
+  HandleKeyRefreshed_MoveRight();
+}
+
+void Character::HandleKeyRefreshed_MoveRight()
+{
+  HideGameInterface();
+
+  if(ActiveCharacter().IsImmobile())
+    MoveCharacterRight(ActiveCharacter());
+}
+
+void Character::HandleKeyReleased_MoveRight()
+{
+  body->StopWalk();
+  SendCharacterPosition();
+}
+
+// #################### MOVE_LEFT
+void Character::HandleKeyPressed_MoveLeft()
+{
+  InitMouvementDG(PAUSE_MOVEMENT);
+  body->StartWalk();
+
+  HandleKeyRefreshed_MoveLeft();
+}
+
+void Character::HandleKeyRefreshed_MoveLeft()
+{
+  HideGameInterface();
+
+  if(ActiveCharacter().IsImmobile())
+    MoveCharacterLeft(ActiveCharacter());
+}
+
+void Character::HandleKeyReleased_MoveLeft()
+{
+  body->StopWalk();
+  SendCharacterPosition();
+}
+
+// #################### UP
+void Character::HandleKeyPressed_Up()
+{
+  HandleKeyRefreshed_Up();
+}
+
+void Character::HandleKeyRefreshed_Up()
+{
+  HideGameInterface();
+  if(ActiveCharacter().IsImmobile())
+    {
+      if (ActiveTeam().crosshair.enable)
+	{
+	  do_nothing_time = Time::GetInstance()->Read();
+	  CharacterCursor::GetInstance()->Hide();
+	  ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_UP));
+	}
+    }
+}
+
+void Character::HandleKeyReleased_Up(){}
+
+// #################### DOWN
+void Character::HandleKeyPressed_Down()
+{
+  HandleKeyRefreshed_Up();
+}
+
+void Character::HandleKeyRefreshed_Down()
+{
+  HideGameInterface();
+  if(ActiveCharacter().IsImmobile())
+    {
+      if (ActiveTeam().crosshair.enable)
+	{
+	  do_nothing_time = Time::GetInstance()->Read();
+	  CharacterCursor::GetInstance()->Hide();
+	  ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_DOWN));
+	}
+    }
+}
+
+void Character::HandleKeyReleased_Down(){}
+
+// #################### JUMP
+void Character::HandleKeyPressed_Jump()
+{
+  HideGameInterface();
+  if(ActiveCharacter().IsImmobile())
+    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_JUMP));
+}
+
+void Character::HandleKeyRefreshed_Jump(){}
+
+void Character::HandleKeyReleased_Jump(){}
+
+// #################### HIGH JUMP
+void Character::HandleKeyPressed_HighJump()
+{
+  HideGameInterface();
+  if(ActiveCharacter().IsImmobile())
+    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_HIGH_JUMP));
+}
+
+void Character::HandleKeyRefreshed_HighJump(){}
+void Character::HandleKeyReleased_HighJump(){}
+
+// #################### BACK JUMP
+void Character::HandleKeyPressed_BackJump()
+{
+  HideGameInterface();
+  if(ActiveCharacter().IsImmobile())
+    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_BACK_JUMP));
+}
+
+void Character::HandleKeyRefreshed_BackJump(){}
+void Character::HandleKeyReleased_BackJump(){}
+
+// #################### SHOOT
+void Character::HandleKeyPressed_Shoot()
+{  
+  if(prepare_shoot)
+    return;
+
+  if (ActiveTeam().GetWeapon().max_strength == 0)
+    ActiveTeam().GetWeapon().NewActionShoot();
+  else if (ActiveTeam().GetWeapon().IsReady() )
+    ActiveTeam().AccessWeapon().InitLoading();
+}
+
+void Character::HandleKeyRefreshed_Shoot()
+{  
+  if(prepare_shoot)
+    return;
+  if ( !ActiveTeam().GetWeapon().IsLoading() ) 
+    return;
+
+  // Strength == max strength -> Fire !!!
+  if (ActiveTeam().GetWeapon().ReadStrength() >=
+      ActiveTeam().GetWeapon().max_strength) {
+    ActiveTeam().GetWeapon().NewActionShoot();
+  } else {
+    // still pressing the Space key
+    ActiveTeam().AccessWeapon().UpdateStrength();
+  }
+}
+
+void Character::HandleKeyReleased_Shoot()
+{  
+  if(prepare_shoot)
+    return;
+  if ( !ActiveTeam().GetWeapon().IsLoading()) 
+    return;
+
+  ActiveTeam().GetWeapon().NewActionShoot();
+}
+
+
+// void Character::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
+// {
+//   // The character cannot move anymove if the turn is over...
+//   if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
+//     return ;
+
+//   if (ActiveCharacter().IsDead())
+//     return;
+// }
+
