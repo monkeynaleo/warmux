@@ -47,15 +47,17 @@ void Blowtorch::Refresh()
 
 }
 
+void Blowtorch::p_Deselect()
+{
+  m_is_active = false;
+}
+
 void Blowtorch::EndTurn()
 {
   ActiveCharacter().body->ResetWalk();
   ActiveCharacter().body->StopWalk();
   ActiveTeam().AccessNbUnits() = 0;
   m_is_active = false;
-
-        // XXX This doesn't seem to be the correct to end a turn, does it?
-  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
 bool Blowtorch::p_Shoot()
@@ -79,30 +81,41 @@ bool Blowtorch::p_Shoot()
   return true;
 }
 
-void Blowtorch::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
+void Blowtorch::RepeatShoot()
 {
-  switch(key)
+  if (m_is_active) 
   {
-    case Keyboard::KEY_SHOOT:
-      if(event_type ==  Keyboard:: Keyboard::KEY_RELEASED)
-        EndTurn();
-      else if(event_type == Keyboard::KEY_REFRESH)
-      {
-        if(!EnoughAmmoUnit() || ActiveCharacter().GotInjured())
-          EndTurn();
-
-        new_timer = Time::GetInstance()->Read();
-        if(new_timer - old_timer >= pause_time)
-        {
-          NewActionShoot();
-          old_timer = new_timer;
-        }
-      }
-
-      break;
-    default:
-      break;
+    uint time = Time::GetInstance()->Read() - old_timer;
+    uint tmp = Time::GetInstance()->Read();
+    
+    if (time >= pause_time)
+    {
+      m_is_active = false;
+      NewActionShoot();
+      old_timer = tmp;
+    }
   }
+}
+
+void Blowtorch::HandleKeyPressed_Shoot()
+{  
+  HandleKeyRefreshed_Shoot();
+}
+
+void Blowtorch::HandleKeyRefreshed_Shoot()
+{
+  if (EnoughAmmoUnit()) {
+    m_is_active = true;
+    RepeatShoot();
+  } else {
+    // no more ammo unit -> end of turn
+    EndTurn();
+  }
+}
+
+void Blowtorch::HandleKeyReleased_Shoot()
+{
+  EndTurn();
 }
 
 //-------------------------------------------------------------------------------------
