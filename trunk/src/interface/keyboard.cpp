@@ -205,8 +205,9 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
   }
 
   if (key == KEY_SHOOT) {
-    if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
-      ActiveCharacter().HandleKeyPressed_Shoot();
+    if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
+      ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot();
+    }
     goto pressed_accepted;
   }
 
@@ -266,7 +267,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
     } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
 	       ActiveTeam().IsLocal() && 
 	       !ActiveCharacter().IsDead()) {
-      ActiveCharacter().HandleKeyReleased_Shoot();
+      ActiveTeam().AccessWeapon().HandleKeyReleased_Shoot();
     }
     return;
   }
@@ -398,7 +399,7 @@ void Keyboard::Refresh()
 	ActiveCharacter().HandleKeyRefreshed_BackJump();
 	break;
       case KEY_SHOOT:
-	ActiveCharacter().HandleKeyRefreshed_Shoot();
+	ActiveTeam().AccessWeapon().HandleKeyRefreshed_Shoot();
 	break;
       default:
 	break;

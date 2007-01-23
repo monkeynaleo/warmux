@@ -517,6 +517,11 @@ void Character::PrepareShoot()
     prepare_shoot = true;
 }
 
+bool Character::IsPreparingShoot()
+{
+  return prepare_shoot;
+}
+
 void Character::DoShoot()
 {
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
@@ -958,45 +963,6 @@ void Character::HandleKeyPressed_BackJump()
 
 void Character::HandleKeyRefreshed_BackJump(){}
 void Character::HandleKeyReleased_BackJump(){}
-
-// #################### SHOOT
-void Character::HandleKeyPressed_Shoot()
-{  
-  if(prepare_shoot)
-    return;
-
-  if (ActiveTeam().GetWeapon().max_strength == 0)
-    ActiveTeam().GetWeapon().NewActionShoot();
-  else if (ActiveTeam().GetWeapon().IsReady() )
-    ActiveTeam().AccessWeapon().InitLoading();
-}
-
-void Character::HandleKeyRefreshed_Shoot()
-{  
-  if(prepare_shoot)
-    return;
-  if ( !ActiveTeam().GetWeapon().IsLoading() ) 
-    return;
-
-  // Strength == max strength -> Fire !!!
-  if (ActiveTeam().GetWeapon().ReadStrength() >=
-      ActiveTeam().GetWeapon().max_strength) {
-    ActiveTeam().GetWeapon().NewActionShoot();
-  } else {
-    // still pressing the Space key
-    ActiveTeam().AccessWeapon().UpdateStrength();
-  }
-}
-
-void Character::HandleKeyReleased_Shoot()
-{  
-  if(prepare_shoot)
-    return;
-  if ( !ActiveTeam().GetWeapon().IsLoading()) 
-    return;
-
-  ActiveTeam().GetWeapon().NewActionShoot();
-}
 
 
 // void Character::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)

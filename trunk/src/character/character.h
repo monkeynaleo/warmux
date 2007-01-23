@@ -120,6 +120,7 @@ public:
   void StopPlaying();
 
   void PrepareShoot();
+  bool IsPreparingShoot();
   void DoShoot();
   double GetFiringAngle() const;
   double GetAbsFiringAngle() const;
@@ -205,9 +206,6 @@ public:
   void HandleKeyRefreshed_BackJump();
   void HandleKeyReleased_BackJump();
 
-  void HandleKeyPressed_Shoot();
-  void HandleKeyRefreshed_Shoot();
-  void HandleKeyReleased_Shoot();
 };
 
 #endif
