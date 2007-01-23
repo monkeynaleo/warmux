@@ -37,7 +37,6 @@ LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",
 {
   m_name = _("LowGrav");
 
-  override_keys = true ;
   use_unit_on_first_shoot = false;
 }
 
@@ -64,19 +63,12 @@ void LowGrav::Draw()
 {
 }
 
-void LowGrav::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
-{
-  switch (key)
-    {
-      case Keyboard::KEY_SHOOT:
-        if (event_type == Keyboard::KEY_PRESSED)
-          ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
-	break ;
-
-      default:
-	//ActiveCharacter().HandleKeyEvent(key, event_type);
-	break ;
-    }
+void LowGrav::HandleKeyPressed_Shoot()
+{  
+  if (!m_is_active) 
+    NewActionShoot();
+  else 
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
 }
 
 void LowGrav::SignalTurnEnd()
