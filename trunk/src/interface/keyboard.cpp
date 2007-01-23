@@ -175,6 +175,7 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
   // Available only when local
   if (!ActiveTeam().IsLocal()) return;
   if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
+  if (ActiveCharacter().IsDead()) return;
 
   switch (key) {
 
@@ -263,7 +264,8 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
 	current_box->DropBox();
       }
     } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
-	       ActiveTeam().IsLocal()) {
+	       ActiveTeam().IsLocal() && 
+	       !ActiveCharacter().IsDead()) {
       ActiveCharacter().HandleKeyReleased_Shoot();
     }
     return;
@@ -272,6 +274,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
   { // Managing keys related to character moves
     // Available only when local
     if (!ActiveTeam().IsLocal()) return;
+    if (ActiveCharacter().IsDead()) return;
 
     if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING &&
 	GameLoop::GetInstance()->ReadState() != GameLoop::HAS_PLAYED)
@@ -370,7 +373,8 @@ void Keyboard::Refresh()
   for (int i = 0; i < 256; i++)
     if(PressedKeys[i]) {
       Key_t key = static_cast<Key_t>(i);
-      
+      if (ActiveCharacter().IsDead()) return;
+
       switch(key){
       case KEY_MOVE_RIGHT:
 	ActiveCharacter().HandleKeyRefreshed_MoveRight();
