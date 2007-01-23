@@ -125,18 +125,24 @@ void SubMachineGun::RepeatShoot()
   }
 }
 
-// Special handle to allow multiple shoot at a time
-void SubMachineGun::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
-{
-  switch (key) {
-    case Keyboard::KEY_SHOOT:
-      if (event_type == Keyboard::KEY_REFRESH)
-        m_is_active = true;
-      if (event_type ==  Keyboard::KEY_RELEASED)
-        m_is_active = false;
-      if (m_is_active) RepeatShoot();
-      break;
-    default:
-      break;
-  };
+void SubMachineGun::HandleKeyPressed_Shoot()
+{  
+  HandleKeyRefreshed_Shoot();
 }
+
+void SubMachineGun::HandleKeyRefreshed_Shoot()
+{
+  if (EnoughAmmoUnit()) {
+    m_is_active = true;
+    RepeatShoot();
+  } else {
+    // no more ammo unit -> end of turn
+    m_is_active = false; 
+  }
+}
+
+void SubMachineGun::HandleKeyReleased_Shoot()
+{
+  m_is_active = false;
+}
+
