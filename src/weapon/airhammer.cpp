@@ -116,16 +116,18 @@ bool Airhammer::p_Shoot()
 
 void Airhammer::RepeatShoot()
 {
-  uint time = Time::GetInstance()->Read() - m_last_jolt;
-  uint tmp = Time::GetInstance()->Read();
-
-  if (time >= MIN_TIME_BETWEEN_JOLT)
+  if (m_is_active) 
   {
-    m_is_active = false;
-    NewActionShoot();
-    m_last_jolt = tmp;
+    uint time = Time::GetInstance()->Read() - m_last_jolt;
+    uint tmp = Time::GetInstance()->Read();
+    
+    if (time >= MIN_TIME_BETWEEN_JOLT)
+    {
+      m_is_active = false;
+      NewActionShoot();
+      m_last_jolt = tmp;
+    }
   }
-
 }
 
 //-----------------------------------------------------------------------------
@@ -136,29 +138,28 @@ void Airhammer::Refresh()
 
 //-----------------------------------------------------------------------------
 
-void Airhammer::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
-{
-  switch (key) {
-
-    case Keyboard::KEY_SHOOT:
-
-      if (event_type == Keyboard::KEY_RELEASED || ActiveCharacter().GotInjured()) {
-        // stop when key is released or character got injured
-        ActiveTeam().AccessNbUnits() = 0;
-        m_is_active = false;
-        GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
-      }
-
-      if (event_type == Keyboard::KEY_REFRESH)
-        RepeatShoot();
-
-      break ;
-
-    default:
-      break ;
-  }
-
+void Airhammer::HandleKeyPressed_Shoot()
+{  
+  HandleKeyRefreshed_Shoot();
 }
+
+void Airhammer::HandleKeyRefreshed_Shoot()
+{
+  if (EnoughAmmoUnit()) {
+    m_is_active = true;
+    RepeatShoot();
+  } else {
+    // no more ammo unit -> end of turn
+    m_is_active = false; 
+  }
+}
+
+void Airhammer::HandleKeyReleased_Shoot()
+{
+  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
+  m_is_active = false;
+}
+
 //-----------------------------------------------------------------------------
 
 AirhammerConfig& Airhammer::cfg() {

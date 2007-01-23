@@ -53,8 +53,11 @@ class Airhammer : public Weapon
 
   public:
     Airhammer();
-    void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type);
     AirhammerConfig &cfg();
+
+    virtual void HandleKeyPressed_Shoot();
+    virtual void HandleKeyRefreshed_Shoot();
+    virtual void HandleKeyReleased_Shoot();
 };
 
 //-----------------------------------------------------------------------------
