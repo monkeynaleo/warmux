@@ -58,18 +58,11 @@ public:
     ACTION_ASK_VERSION, ACTION_ASK_TEAM,                ACTION_SEND_VERSION,
     ACTION_SEND_TEAM,   ACTION_SEND_RANDOM,             ACTION_CHAT_MESSAGE,
     ACTION_NICKNAME,    ACTION_SET_CHARACTER_PHYSICS,   ACTION_SET_CHARACTER_DIRECTION,
-    ACTION_CHANGE_STATE,
-
-    // Out of game actions (local only).
-    ACTION_QUIT,        ACTION_WEAPONS1,                ACTION_WEAPONS2,
-    ACTION_WEAPONS3,    ACTION_WEAPONS4,                ACTION_WEAPONS5,
-    ACTION_WEAPONS6,    ACTION_WEAPONS7,                ACTION_WEAPONS8,
-    ACTION_PAUSE,       ACTION_FULLSCREEN,              ACTION_TOGGLE_INTERFACE,
-    ACTION_CENTER,      ACTION_TOGGLE_WEAPONS_MENUS,    ACTION_CHAT,
+    ACTION_PAUSE,       ACTION_CHANGE_STATE
   } Action_t;
 
   static const Action_t ACTION_FIRST = ACTION_MOVE_LEFT; /* keep this as the first name in enum */
-  static const Action_t ACTION_LAST  = ACTION_CHAT; /* keep this as the last name in enum */
+  static const Action_t ACTION_LAST  = ACTION_CHANGE_STATE; /* keep this as the last name in enum */
 
   //inline Action_t &operator++() { ;}
 
