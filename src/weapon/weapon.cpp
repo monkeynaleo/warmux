@@ -615,3 +615,44 @@ void Weapon::ActionStopUse()
 {
   assert(false);
 }
+  
+// Handle keyboard events
+
+// #################### SHOOT
+void Weapon::HandleKeyPressed_Shoot()
+{  
+  if(ActiveCharacter().IsPreparingShoot())
+    return;
+
+  if (max_strength == 0)
+    NewActionShoot();
+  else if ( IsReady() )
+    InitLoading();
+}
+
+void Weapon::HandleKeyRefreshed_Shoot()
+{  
+  if(ActiveCharacter().IsPreparingShoot())
+    return;
+  if ( !IsLoading() ) 
+    return;
+
+  // Strength == max strength -> Fire !!!
+  if (ReadStrength() >= max_strength) {
+    NewActionShoot();
+  } else {
+    // still pressing the Space key
+    UpdateStrength();
+  }
+}
+
+void Weapon::HandleKeyReleased_Shoot()
+{  
+  if(ActiveCharacter().IsPreparingShoot())
+    return;
+  if ( !IsLoading()) 
+    return;
+
+  NewActionShoot();
+}
+

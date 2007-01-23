@@ -219,19 +219,9 @@ public:
   virtual void ChooseTarget (Point2i mouse_pos);
 
   // Handle a keyboard event.
-  virtual void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type){};
-/*   virtual void HandleKeyUpPressed(); */
-/*   virtual void HandleKeyUpRefreshed(); */
-/*   virtual void HandleKeyUpReleased(); */
-/*   virtual void HandleKeyDownPressed(); */
-/*   virtual void HandleKeyDownRefreshed(); */
-/*   virtual void HandleKeyDownReleased(); */
-/*   virtual void HandleKeyLeftPressed(); */
-/*   virtual void HandleKeyLeftRefreshed(); */
-/*   virtual void HandleKeyLeftReleased(); */
-/*   virtual void HandleKeyRightPressed(); */
-/*   virtual void HandleKeyRightRefreshed(); */
-/*   virtual void HandleKeyRightReleased(); */
+  virtual void HandleKeyPressed_Shoot();
+  virtual void HandleKeyRefreshed_Shoot();
+  virtual void HandleKeyReleased_Shoot();
 
   // Handle a mouse event
   virtual void HandleMouseLeftClicReleased(){};
