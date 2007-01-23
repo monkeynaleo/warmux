@@ -27,11 +27,10 @@ class LowGrav : public Weapon
 {
   public:
     LowGrav();
-    void Reset();
-    void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type);
     void SignalTurnEnd();
     void Draw();
     void ActionStopUse();
+    void HandleKeyPressed_Shoot();
   protected:
     void Refresh();
     void p_Deselect();
