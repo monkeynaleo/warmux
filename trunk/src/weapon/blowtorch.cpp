@@ -34,7 +34,6 @@ static const uint pause_time = 200;	// milliseconds
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
   m_name = _("Blowtorch");
-  override_keys = true;
 
   new_timer = 0;
   old_timer = 0;
