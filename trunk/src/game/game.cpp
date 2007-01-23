@@ -16,8 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classe principale qui gêre le jeu : initialisation, dessin, gestion
- * des différents composants, et boucle de jeu.
+ * Init the game, handle drawing and states of the game.
  *****************************************************************************/
 
 #include "game.h"
@@ -213,7 +212,7 @@ void Game::DisplayPause()
 
   //Pause screen
   question.Set ("", false, 0, "interface/pause_screen");
-  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(Action::ACTION_PAUSE),
+  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(Keyboard::KEY_PAUSE),
 		      1
 		      );
   AskQuestion(question, false);
