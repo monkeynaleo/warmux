@@ -57,7 +57,18 @@ protected:
   // Buttons
   Button *m_up, *m_down;
 
+  // Colors
+  Color border_color;
+  Color background_color;
+  Color selected_item_color;
+  Color default_item_color;
+
 public:
+  void SetBorderColor(const Color & border);
+  void SetBackgroundColor(const Color & background);
+  void SetSelectedItemColor(const Color & selected_item);
+  void SetDefaultItemColor(const Color & default_item);
+
   ListBox (const Rectanglei &rect, bool always_one_selected_b = true);
   ~ListBox();
 

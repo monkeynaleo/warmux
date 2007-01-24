@@ -81,7 +81,7 @@ CreditsMenu::CreditsMenu()  :
 						    AppWormux::GetInstance()->video.window.GetWidth()-60,
 						    AppWormux::GetInstance()->video.window.GetHeight()-60-30),
                                         false);
-
+  lbox_authors->SetBackgroundColor(Color(0,0,0,200));
   widgets.AddWidget(lbox_authors);
 
   PrepareAuthorsList(lbox_authors);
