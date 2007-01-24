@@ -316,6 +316,13 @@ const std::string& ListBox::ReadValue () const
   return m_items.at(selected_item)->GetValue();
 }
 
+const int ListBox::ReadIntValue() const
+{
+  int tmp = 0;
+  sscanf(ReadValue().c_str(),"%d", &tmp);
+  return tmp;
+}
+
 const std::string& ListBox::ReadValue (int index) const
 {
   assert (index != -1 && index < (int)m_items.size());

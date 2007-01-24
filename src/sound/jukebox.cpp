@@ -52,9 +52,9 @@ void JukeBox::Resume()
 
 void JukeBox::Init()
 {
-  jukebox.ActiveMusic(Config::GetInstance()->tmp.sound.music);
-  jukebox.ActiveEffects(Config::GetInstance()->tmp.sound.effects);
-  jukebox.SetFrequency(Config::GetInstance()->tmp.sound.frequency);
+  jukebox.ActiveMusic(Config::GetInstance()->GetSoundMusic());
+  jukebox.ActiveEffects(Config::GetInstance()->GetSoundEffects());
+  jukebox.SetFrequency(Config::GetInstance()->GetSoundFrequency());
 
   if (!m_config.music && !m_config.effects) {
     End();
@@ -80,7 +80,7 @@ void JukeBox::Init()
   } else {
     Mix_QuerySpec(&m_config.frequency, &audio_format, &m_config.channels);
     std::cout << "o Opened audio at " << m_config.frequency <<" Hz "<< (audio_format&0xFF)
-	      <<" bit " << std::endl;
+              <<" bit " << std::endl;
   }
   Mix_ChannelFinished(JukeBox::EndChunk);
   Mix_HookMusicFinished(JukeBox::EndMusic);
@@ -172,7 +172,7 @@ void JukeBox::LoadMusicXML()
 
   for (; it != fin; ++it)
     {
-      // lit le XML
+      // loading XML ...
       xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
       std::string sample="no_sample";
       std::string file="no_file";
@@ -181,7 +181,7 @@ void JukeBox::LoadMusicXML()
 
       MSG_DEBUG("jukebox", "Load music sample %s", sample.c_str());
 
-      // Charge le son
+      // Load sound
       std::string filename = folder + file;
       if( !IsFileExist(filename) ){
         std::cerr << "Music error: File " << filename.c_str()
@@ -252,7 +252,7 @@ void JukeBox::NextMusic()
    else if(!IsPlayingMusicSample())
       PlayMusic(playing_pl->first);
    else
-      EndMusic(); // On passe à la musique suivante par l'arrêt de celle-ci
+      EndMusic(); // next music but before, we stop the current one.
 }
 
 bool JukeBox::PlayMusic(const std::string& type)
@@ -350,7 +350,7 @@ void JukeBox::LoadXML(const std::string& profile)
 
 	  MSG_DEBUG("jukebox", "Load sound sample %s/%s: %s", profile.c_str(), sample.c_str(), file.c_str());
 
-      // Charge le son
+      // Load sound
       std::string sample_filename = folder + file;
       if( !IsFileExist(sample_filename) ){
 	std::cerr << "Sound error: File " << sample_filename.c_str()

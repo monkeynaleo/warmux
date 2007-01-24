@@ -85,6 +85,17 @@ Config::Config()
   scroll_on_border = true;
   transparency = ALPHA;
 
+  // Video settings
+  video_width = 800;
+  video_height = 600;
+  video_fullscreen = false;
+  // Sound settings
+  sound_music = true;
+  sound_effects = true;
+  sound_frequency = 44100;
+  // network
+  enable_network = false;
+
   Constants::GetInstance();
 
   // directories
@@ -146,7 +157,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
   xmlpp::Element *elem;
 
   //=== Map ===
-  XmlReader::ReadString(xml, "map", tmp.map_name);
+  XmlReader::ReadString(xml, "map", map_name);
 
   //=== Teams ===
   elem = XmlReader::GetMarker(xml, "teams");
@@ -164,7 +175,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
     XmlReader::ReadInt(team, "nb_characters", tmp_nb_characters);
     one_team.nb_characters = (uint)tmp_nb_characters;
 
-    tmp.teams.push_back(one_team);
+    teams.push_back(one_team);
 
     // get next team
     i++;
@@ -182,23 +193,23 @@ bool Config::LoadXml(xmlpp::Element *xml)
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);
     XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
     XmlReader::ReadBool(elem, "scroll_on_border", scroll_on_border);
-    XmlReader::ReadInt(elem, "width", tmp.video.width);
-    XmlReader::ReadInt(elem, "height", tmp.video.height);
-    XmlReader::ReadBool(elem, "full_screen", tmp.video.fullscreen);
+    XmlReader::ReadUint(elem, "width", video_width);
+    XmlReader::ReadUint(elem, "height", video_height);
+    XmlReader::ReadBool(elem, "full_screen", video_fullscreen);
   }
 
   //=== Sound ===
   if ((elem = XmlReader::GetMarker(xml, "sound")) != NULL)
   {
-    XmlReader::ReadBool(elem, "music", tmp.sound.music);
-    XmlReader::ReadBool(elem, "effects", tmp.sound.effects);
-    XmlReader::ReadUint(elem, "frequency", tmp.sound.frequency);
+    XmlReader::ReadBool(elem, "music", sound_music);
+    XmlReader::ReadBool(elem, "effects", sound_effects);
+    XmlReader::ReadUint(elem, "frequency", sound_frequency);
   }
 
   //=== network ===
   if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
   {
-    XmlReader::ReadBool(elem, "enable_network", tmp.network.enable_network);
+    XmlReader::ReadBool(elem, "enable_network", enable_network);
   }
 
   //=== game mode ===
@@ -316,6 +327,21 @@ std::string Config::GetPersonalDir() const
   return personal_dir;
 }
 
+std::list<struct ConfigTeam> & Config::AccessTeamList()
+{
+  return teams;
+}
+
+const std::string & Config::GetMapName() const
+{
+  return map_name;
+}
+
+std::string & Config::AccessMapName()
+{
+  return map_name;
+}
+
 bool Config::GetDisplayEnergyCharacter() const
 {
   return display_energy_character;
@@ -348,30 +374,95 @@ std::string Config::GetTtfFilename() const
 
 bool Config::IsNetworkActivated() const
 {
-  return tmp.network.enable_network;
+  return enable_network;
 }
 
-void Config::SetDisplayEnergyCharacter(bool dec)
+bool Config::IsVideoFullScreen() const
+{
+  return video_fullscreen;
+}
+
+void Config::SetNetworkActivated(const bool set_net)
+{
+  enable_network = set_net;
+}
+
+void Config::SetVideoFullScreen(const bool set_fullscreen)
+{
+  video_fullscreen = set_fullscreen;
+}
+
+uint Config::GetVideoWidth() const
+{
+  return video_width;
+}
+
+void Config::SetVideoWidth(const uint width)
+{
+  video_width = width;
+}
+
+uint Config::GetVideoHeight() const
+{
+  return video_height;
+}
+
+void Config::SetVideoHeight(const uint height)
+{
+  video_height = height;
+}
+
+bool Config::GetSoundMusic() const
+{
+  return sound_music;
+}
+
+void Config::SetSoundMusic(const bool music)
+{
+  sound_music = music;
+}
+
+bool Config::GetSoundEffects() const
+{
+  return sound_effects;
+}
+
+void Config::SetSoundEffects(const bool effects)
+{
+  sound_effects = effects;
+}
+
+uint Config::GetSoundFrequency() const
+{
+  return sound_frequency;
+}
+
+void Config::SetSoundFrequency(const uint freq)
+{
+  sound_frequency = freq;
+}
+
+void Config::SetDisplayEnergyCharacter(const bool dec)
 {
   display_energy_character = dec;
 }
 
-void Config::SetDisplayNameCharacter(bool dnc)
+void Config::SetDisplayNameCharacter(const bool dnc)
 {
   display_name_character = dnc;
 }
 
-void Config::SetDisplayWindParticles(bool dwp)
+void Config::SetDisplayWindParticles(const bool dwp)
 {
   display_wind_particles = dwp;
 }
 
-void Config::SetDefaultMouseCursor(bool dmc)
+void Config::SetDefaultMouseCursor(const bool dmc)
 {
   default_mouse_cursor = dmc;
 }
 
-void Config::SetScrollOnBorder(bool sob)
+void Config::SetScrollOnBorder(const bool sob)
 {
   scroll_on_border = sob;
 }

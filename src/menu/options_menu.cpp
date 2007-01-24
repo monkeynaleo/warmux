@@ -175,6 +175,11 @@ void OptionMenu::SaveOptions()
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
 
+  // Sound settings
+  config->SetSoundEffects(opt_sound_effects->GetValue());
+  config->SetSoundMusic(opt_music->GetValue());
+  config->SetSoundFrequency(lbox_sound_freq->ReadIntValue());
+
   AppWormux * app = AppWormux::GetInstance();
   app->video.SetMaxFps(opt_max_fps->GetValue());
   // Video mode
