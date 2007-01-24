@@ -72,6 +72,10 @@ ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(r
   first_visible_item = 0;
   selected_item = -1;
   always_one_selected = always_one_selected_b;
+  border_color = white_color;
+  background_color = defaultListColor1;
+  selected_item_color = defaultListColor2;
+  default_item_color = defaultListColor3;
 }
 
 ListBox::~ListBox()
@@ -143,14 +147,34 @@ Widget* ListBox::Clic(const Point2i &mousePosition, uint button)
   }
 }
 
+void ListBox::SetBorderColor(const Color & border)
+{
+  border_color = border;
+}
+
+void ListBox::SetBackgroundColor(const Color & background)
+{
+  background_color = background;
+}
+
+void ListBox::SetSelectedItemColor(const Color & selected_item)
+{
+  selected_item_color = selected_item;
+}
+
+void ListBox::SetDefaultItemColor(const Color & default_item)
+{
+  default_item_color = default_item;
+}
+
 void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   int item = MouseIsOnWhichItem(mousePosition);
   Rectanglei rect (*this);
 
   // Draw border and bg color
-  surf.BoxColor(rect, defaultListColor1);
-  surf.RectangleColor(rect, white_color);
+  surf.BoxColor(rect, background_color);
+  surf.RectangleColor(rect, border_color);
 
   // Draw items
   Point2i pos = GetPosition() + Point2i(5, 0);
@@ -173,9 +197,9 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
     // item is selected or mouse-overed
     if (draw_it) {
       if( int(i) == selected_item) {
-	surf.BoxColor(rect, defaultListColor2);
+        surf.BoxColor(rect, selected_item_color);
       } else if( i == uint(item) ) {
-	surf.BoxColor(rect, defaultListColor3);
+	surf.BoxColor(rect, default_item_color);
       }
     }
 
