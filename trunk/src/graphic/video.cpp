@@ -126,7 +126,7 @@ std::list<Point2i>& Video::GetAvailableConfigs()
   return available_configs;
 }
 
-bool Video::SetConfig(int width, int height, bool _fullscreen){
+bool Video::SetConfig(const int width, const int height, const bool _fullscreen){
   // initialize the main window
   if( window.IsNull() ||
      (width != window.GetWidth() ||
@@ -168,9 +168,9 @@ void Video::InitWindow(){
   window.SetAutoFree( false );
 
   Config * config = Config::GetInstance();
-  SetConfig(config->tmp.video.width,
-            config->tmp.video.height,
-            config->tmp.video.fullscreen);
+  SetConfig((int)(config->GetVideoWidth()),
+            (int)(config->GetVideoHeight()),
+            config->IsVideoFullScreen());
 
   if( window.IsNull() )
     Error( "Unable to initialize SDL window.");

@@ -141,7 +141,7 @@ void AppWormux::Init(int argc, char **argv){
   GameMode::GetInstance()->Load();
 
   // Load maps
-  MapsList::GetInstance()->SelectMapByName(Config::GetInstance()->tmp.map_name);
+  MapsList::GetInstance()->SelectMapByName(Config::GetInstance()->GetMapName());
 
   DisplayLoadingPicture();
 

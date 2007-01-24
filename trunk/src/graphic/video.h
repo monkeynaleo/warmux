@@ -53,10 +53,10 @@ public:
   bool IsFullScreen() const;
 
   std::list<Point2i>& GetAvailableConfigs();
-  bool SetConfig(int width, int height, bool fullscreen);
+  bool SetConfig(const int width, const int height, const bool fullscreen);
   void ToggleFullscreen();
 
-  void InitWindow(void);
+  void InitWindow();
 
   void Flip(void);
 }; 

@@ -91,6 +91,7 @@ public:
   void RemoveSelected();
   const std::string& ReadLabel() const;
   const std::string& ReadValue() const;
+  const int ReadIntValue() const;
   const std::string& ReadValue(int index) const;
 
   uint Size() const;
