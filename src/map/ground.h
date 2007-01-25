@@ -41,7 +41,7 @@ public:
   void Free() { FreeMem(); }
 
   // Le point (x,y) est dans le vide ?
-  bool IsEmpty(const Point2i &pos);
+  bool IsEmpty(const Point2i &pos) const;
 
   // C'est un terrain ouvert ?
   bool EstOuvert() const { return ouvert; }

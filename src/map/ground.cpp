@@ -62,7 +62,7 @@ void Ground::Reset(){
 }
 
 // Lit la valeur alpha du pixel (x,y)
-bool Ground::IsEmpty(const Point2i &pos){
+bool Ground::IsEmpty(const Point2i &pos) const{
 	assert( !world.EstHorsMondeXY(pos.x, pos.y) );
 
 	// Lit le monde
