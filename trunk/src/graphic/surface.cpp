@@ -376,7 +376,7 @@ int Surface::RectangleColor(const Rectanglei &rect, const Color &color, const ui
 }
 
 int Surface::VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color){
-	return vlineRGBA( surface, x1, y1, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+  return vlineRGBA( surface, x1, y1, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
 int Surface::LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color){
@@ -388,7 +388,20 @@ int Surface::AALineColor(const uint &x1, const uint &x2, const uint &y1, const u
 }
 
 int Surface::CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color){
-    return circleRGBA( surface, x, y, rad, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+  return circleRGBA( surface, x, y, rad, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+}
+
+int Surface::AAPolygonColor(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color){
+  return aapolygonRGBA(surface, vx, vy, n, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+}
+
+int Surface::FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color) {
+  return filledPolygonRGBA(surface, vx, vy, n, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
+}
+
+int Surface::TexturedPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Surface *texture, const int texture_dx, const int texture_dy){
+  // return texturedPolygon(surface, vx, vy, n, texture->surface, texture_dx, texture_dy);
+  return filledPolygonRGBA(surface, vx, vy, n, 0, 0, 0, 255);
 }
 
 /**
