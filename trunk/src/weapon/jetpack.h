@@ -41,7 +41,15 @@ class JetPack : public Weapon
     void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type) ;
     void SignalTurnEnd();
     void ActionStopUse();
-
+    
+    virtual void HandleKeyPressed_Up();
+    virtual void HandleKeyReleased_Up();
+    virtual void HandleKeyPressed_MoveLeft();
+    virtual void HandleKeyReleased_MoveLeft();
+    virtual void HandleKeyPressed_MoveRight();
+    virtual void HandleKeyReleased_MoveRight();
+    virtual void HandleKeyPressed_Shoot();
+    
   protected:
     void Refresh();
     void p_Select();

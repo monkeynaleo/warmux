@@ -656,3 +656,107 @@ void Weapon::HandleKeyReleased_Shoot()
   NewActionShoot();
 }
 
+void Weapon::HandleKeyPressed_MoveRight()
+{
+  ActiveCharacter().HandleKeyPressed_MoveRight();
+}
+
+void Weapon::HandleKeyRefreshed_MoveRight()
+{
+  ActiveCharacter().HandleKeyRefreshed_MoveRight();
+}
+
+void Weapon::HandleKeyReleased_MoveRight()
+{
+  ActiveCharacter().HandleKeyReleased_MoveRight();
+}
+
+void Weapon::HandleKeyPressed_MoveLeft()
+{
+  ActiveCharacter().HandleKeyPressed_MoveLeft();
+}
+
+void Weapon::HandleKeyRefreshed_MoveLeft()
+{
+  ActiveCharacter().HandleKeyRefreshed_MoveLeft();
+}
+
+void Weapon::HandleKeyReleased_MoveLeft()
+{
+  ActiveCharacter().HandleKeyReleased_MoveLeft();
+}
+
+void Weapon::HandleKeyPressed_Up()
+{
+  ActiveCharacter().HandleKeyPressed_Up();
+}
+
+void Weapon::HandleKeyRefreshed_Up()
+{
+  ActiveCharacter().HandleKeyRefreshed_Up();
+}
+
+void Weapon::HandleKeyReleased_Up()
+{
+  ActiveCharacter().HandleKeyReleased_Up();
+}
+
+void Weapon::HandleKeyPressed_Down()
+{
+  ActiveCharacter().HandleKeyPressed_Down();
+}
+
+void Weapon::HandleKeyRefreshed_Down()
+{
+  ActiveCharacter().HandleKeyRefreshed_Down();
+}
+
+void Weapon::HandleKeyReleased_Down()
+{
+  ActiveCharacter().HandleKeyReleased_Down();
+}
+
+void Weapon::HandleKeyPressed_Jump()
+{
+  ActiveCharacter().HandleKeyPressed_Jump();
+}
+
+void Weapon::HandleKeyRefreshed_Jump()
+{
+  ActiveCharacter().HandleKeyRefreshed_Jump();
+}
+
+void Weapon::HandleKeyReleased_Jump()
+{
+  ActiveCharacter().HandleKeyReleased_Jump();
+}
+
+void Weapon::HandleKeyPressed_HighJump()
+{
+  ActiveCharacter().HandleKeyPressed_HighJump();
+}
+
+void Weapon::HandleKeyRefreshed_HighJump()
+{
+  ActiveCharacter().HandleKeyRefreshed_HighJump();
+}
+
+void Weapon::HandleKeyReleased_HighJump()
+{
+  ActiveCharacter().HandleKeyReleased_HighJump();
+}
+
+void Weapon::HandleKeyPressed_BackJump()
+{
+  ActiveCharacter().HandleKeyPressed_BackJump();
+}
+
+void Weapon::HandleKeyRefreshed_BackJump()
+{
+  ActiveCharacter().HandleKeyRefreshed_BackJump();
+}
+
+void Weapon::HandleKeyReleased_BackJump()
+{
+  ActiveCharacter().HandleKeyReleased_BackJump();
+}

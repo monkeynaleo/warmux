@@ -180,38 +180,42 @@ void JetPack::StopRight()
   StopUse();
 }
 
-void JetPack::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
+void JetPack::HandleKeyPressed_Up()
 {
-  switch (key) {
-    case Keyboard::KEY_UP:
-      if (event_type == Keyboard::KEY_PRESSED)
-        GoUp();
-      else if (event_type == Keyboard::KEY_RELEASED)
-        StopUp();
-      break ;
+  GoUp();
+}
 
-    case Keyboard::KEY_MOVE_LEFT:
-      if (event_type == Keyboard::KEY_PRESSED)
-        GoLeft();
-      else if (event_type == Keyboard::KEY_RELEASED)
-        StopLeft();
-      break ;
+void JetPack::HandleKeyReleased_Up()
+{
+  StopUp();
+}
 
-    case Keyboard::KEY_MOVE_RIGHT:
-      if (event_type == Keyboard::KEY_PRESSED)
-        GoRight();
-      else if (event_type == Keyboard::KEY_RELEASED)
-        StopRight();
-      break ;
+void JetPack::HandleKeyPressed_MoveLeft()
+{
+  GoLeft();
+}
 
-    case Keyboard::KEY_SHOOT:
-      if (event_type == Keyboard::KEY_PRESSED)
-        ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
-      break ;
+void JetPack::HandleKeyReleased_MoveLeft()
+{
+  StopLeft();
+}
 
-    default:
-      break ;
-  } ;
+void JetPack::HandleKeyPressed_MoveRight()
+{
+  GoRight();
+}
+
+void JetPack::HandleKeyReleased_MoveRight()
+{
+  StopRight();
+}
+
+void JetPack::HandleKeyPressed_Shoot()
+{
+  if (!m_is_active)
+    NewActionShoot();
+  else 
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
 }
 
 bool JetPack::p_Shoot()
