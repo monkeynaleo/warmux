@@ -223,6 +223,35 @@ public:
   virtual void HandleKeyRefreshed_Shoot();
   virtual void HandleKeyReleased_Shoot();
 
+  // To override standard moves of character
+  virtual void HandleKeyPressed_MoveRight();
+  virtual void HandleKeyRefreshed_MoveRight();
+  virtual void HandleKeyReleased_MoveRight();
+
+  virtual void HandleKeyPressed_MoveLeft();
+  virtual void HandleKeyRefreshed_MoveLeft();
+  virtual void HandleKeyReleased_MoveLeft();
+
+  virtual void HandleKeyPressed_Up();
+  virtual void HandleKeyRefreshed_Up();
+  virtual void HandleKeyReleased_Up();
+
+  virtual void HandleKeyPressed_Down();
+  virtual void HandleKeyRefreshed_Down();
+  virtual void HandleKeyReleased_Down();
+
+  virtual void HandleKeyPressed_Jump();
+  virtual void HandleKeyRefreshed_Jump();
+  virtual void HandleKeyReleased_Jump();
+
+  virtual void HandleKeyPressed_HighJump();
+  virtual void HandleKeyRefreshed_HighJump();
+  virtual void HandleKeyReleased_HighJump();
+
+  virtual void HandleKeyPressed_BackJump();
+  virtual void HandleKeyRefreshed_BackJump();
+  virtual void HandleKeyReleased_BackJump();
+
   // Handle a mouse event
   virtual void HandleMouseLeftClicReleased(){};
   virtual void HandleMouseWheelUp(){};

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme Supertux : Look ! it's the famous flying magic pinguin !
+ * Weapon Supertux : Look ! it's the famous flying magic pinguin !
  *****************************************************************************/
 
 #include "supertux.h"
@@ -125,7 +125,6 @@ TuxLauncher::TuxLauncher() :
   WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("SuperTux");
-  override_keys = true ;
   ReloadLauncher();
 }
 
@@ -141,23 +140,48 @@ bool TuxLauncher::p_Shoot ()
   return WeaponLauncher::p_Shoot();
 }
 
-void TuxLauncher::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
+void TuxLauncher::HandleKeyPressed_MoveRight()
 {
-  switch (key)
-  {
-    case Keyboard::KEY_MOVE_LEFT:
-    if (event_type !=  Keyboard:: Keyboard::KEY_RELEASED)
-      current_tux->turn_left();
-    break ;
+  if (m_is_active)
+    current_tux->turn_right();
+  else 
+    ActiveCharacter().HandleKeyPressed_MoveRight();
+}
 
-    case Keyboard::KEY_MOVE_RIGHT:
-    if (event_type !=  Keyboard:: Keyboard::KEY_RELEASED)
-      current_tux->turn_right();
-    break ;
+void TuxLauncher::HandleKeyRefreshed_MoveRight()
+{
+  if (m_is_active)
+    current_tux->turn_right();
+  else
+    ActiveCharacter().HandleKeyRefreshed_MoveRight();
+}
 
-  default:
-    break ;
-  } ;
+void TuxLauncher::HandleKeyReleased_MoveRight()
+{
+  if (!m_is_active)
+    ActiveCharacter().HandleKeyReleased_MoveRight();
+}
+
+void TuxLauncher::HandleKeyPressed_MoveLeft()
+{
+  if (m_is_active)
+    current_tux->turn_left();
+  else 
+    ActiveCharacter().HandleKeyPressed_MoveLeft();
+}
+
+void TuxLauncher::HandleKeyRefreshed_MoveLeft()
+{
+  if (m_is_active)
+    current_tux->turn_left();
+  else
+    ActiveCharacter().HandleKeyRefreshed_MoveLeft();
+}
+
+void TuxLauncher::HandleKeyReleased_MoveLeft()
+{
+  if (!m_is_active)
+    ActiveCharacter().HandleKeyReleased_MoveLeft();
 }
 
 SuperTuxWeaponConfig& TuxLauncher::cfg()

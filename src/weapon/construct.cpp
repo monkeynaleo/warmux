@@ -42,7 +42,6 @@ Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
   construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / angle_step));
   m_name = _("Construct");
   angle = 0;
-  force_override_keys = true;
   target_chosen = false;
 }
 
@@ -54,7 +53,7 @@ Construct::~Construct()
 bool Construct::p_Shoot ()
 {
   if(!target_chosen)
-	return false;
+    return false;
   jukebox.Play("share", "weapon/construct");
   world.MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
   GameLoop::GetInstance()->interaction_enabled = false;
@@ -84,21 +83,14 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-void Construct::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
+void Construct::HandleKeyPressed_Up()
 {
-  switch (key) {
-    case Keyboard::KEY_UP:
-      if (event_type == Keyboard::KEY_PRESSED)
-        Up();
-      break ;
-    case Keyboard::KEY_DOWN:
-      if (event_type == Keyboard::KEY_PRESSED)
-        Down();
-      break ;
-    default:
-      //ActiveCharacter().HandleKeyEvent(key, event_type);
-      break ;
-  }
+  Up();
+}
+
+void Construct::HandleKeyPressed_Down()
+{
+  Down();
 }
 
 void Construct::HandleMouseWheelUp()

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Arme Supertux : Look ! it's the famous flying magic pinguin !
+ * Weapon Supertux : Look ! it's the famous flying magic pinguin !
  *****************************************************************************/
 
 #ifndef SUPERTUX_H
@@ -67,8 +67,16 @@ class TuxLauncher : public WeaponLauncher
   private:
     SuperTux * current_tux;
   public:
-    TuxLauncher();
-    void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type);
+    TuxLauncher();  
+
+    virtual void HandleKeyPressed_MoveRight();
+    virtual void HandleKeyRefreshed_MoveRight();
+    virtual void HandleKeyReleased_MoveRight();
+    
+    virtual void HandleKeyPressed_MoveLeft();
+    virtual void HandleKeyRefreshed_MoveLeft();
+    virtual void HandleKeyReleased_MoveLeft();
+
   protected:
     WeaponProjectile * GetProjectileInstance();
     bool p_Shoot();

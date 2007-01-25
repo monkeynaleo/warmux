@@ -26,25 +26,22 @@
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
-const int node_max=200;
-
 class NinjaRope : public Weapon
 {
   private:
-    struct s_rope_node
+    typedef struct 
     {
-      int x,y;
-      double angle ;
-      int sense ;
-    };
+      Point2i pos;
+      double angle;
+      int sense;
+    } rope_node_t;
 
     uint last_mvt;
     double last_broken_node_angle;
     double last_broken_node_sense;
 
-  // Rope launching data.
+    // Rope launching data.
     bool m_attaching;
-    bool m_rope_attached;
     double m_initial_angle;
     uint m_launch_time;
     uint m_hooked_time;
@@ -52,19 +49,37 @@ class NinjaRope : public Weapon
     Sprite* m_node_sprite;
 
   public:
-    s_rope_node rope_node[node_max];
-    int last_node;
-    int m_fixation_x, m_fixation_y;
-    bool go_left, go_right ;
+    std::list<rope_node_t> rope_nodes;
+    Point2i fixation_point;
+    bool go_left, go_right;
     double delta_len ;
 
     NinjaRope();
     void Active();
     void Draw();
-    void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type) ;
     void NotifyMove(bool collision);
     void SignalTurnEnd();
     EmptyWeaponConfig& cfg();
+
+    virtual void HandleKeyPressed_Up();
+    virtual void HandleKeyRefreshed_Up();
+    virtual void HandleKeyReleased_Up();
+    
+    virtual void HandleKeyPressed_Down();
+    virtual void HandleKeyRefreshed_Down();
+    virtual void HandleKeyReleased_Down();
+
+    virtual void HandleKeyPressed_MoveRight();
+    virtual void HandleKeyRefreshed_MoveRight();
+    virtual void HandleKeyReleased_MoveRight();
+    
+    virtual void HandleKeyPressed_MoveLeft();
+    virtual void HandleKeyRefreshed_MoveLeft();
+    virtual void HandleKeyReleased_MoveLeft();
+
+    virtual void HandleKeyPressed_Shoot();
+    virtual void HandleKeyRefreshed_Shoot();
+    virtual void HandleKeyReleased_Shoot();
   protected:
     void Refresh();
     void p_Deselect();
