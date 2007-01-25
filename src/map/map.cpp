@@ -196,15 +196,19 @@ bool Map::EstHorsMondeXY(int x, int y) const{
   return EstHorsMondeX(x) || EstHorsMondeY(y);
 }
 
-bool Map::EstHorsMonde (const Point2i &pos) const{
+bool Map::EstHorsMonde(const Point2i &pos) const{
   return EstHorsMondeXY(pos.x, pos.y);
 }
 
-bool Map::EstDansVide(int x, int y){
+bool Map::EstDansVide(int x, int y) const{
   return ground.IsEmpty(Point2i(x, y));
 }
 
-bool Map::LigneH_EstDansVide (int ox, int y, int width)
+bool Map::EstDansVide(const Point2i& pos) const{
+  return ground.IsEmpty(pos);
+}
+
+bool Map::LigneH_EstDansVide(int ox, int y, int width) const
 {
   // Traite une ligne
   for (int i=0; i<width; i++)
@@ -215,7 +219,7 @@ bool Map::LigneH_EstDansVide (int ox, int y, int width)
 }
 
 // TODO : for consistency, LigneV_EstDansVide should use a 'height' as LigneH does it ...
-bool Map::LigneV_EstDansVide (int x, int top, int bottom)
+bool Map::LigneV_EstDansVide(int x, int top, int bottom) const
 {
   assert (top <= bottom);
 
@@ -234,7 +238,7 @@ bool Map::LigneV_EstDansVide (int x, int top, int bottom)
   return true;
 }
 
-bool Map::RectEstDansVide (const Rectanglei &prect)
+bool Map::RectEstDansVide(const Rectanglei &prect) const
 {
    // only check whether the border touch the ground
 
@@ -265,7 +269,7 @@ bool Map::RectEstDansVide (const Rectanglei &prect)
    return true;
 }
 
-bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect)
+bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect) const
 {
    // only check whether the rectangle touch the ground pixel by pixel
    // Prefere using the method above, as performing a pixel by pixel test is quite slow!
@@ -283,28 +287,28 @@ bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect)
    return true;
 }
 
-bool Map::EstDansVide_haut (const PhysicalObj &obj, int dx, int dy)
+bool Map::EstDansVide_haut(const PhysicalObj &obj, int dx, int dy) const
 {
   return LigneH_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
 			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy,
 			     obj.GetTestRect().GetSizeX());
 }
 
-bool Map::EstDansVide_bas (const PhysicalObj &obj, int dx, int dy)
+bool Map::EstDansVide_bas(const PhysicalObj &obj, int dx, int dy) const
 {
   return LigneH_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
 			     obj.GetTestRect().GetPositionY() + dy,
 			     obj.GetTestRect().GetSizeX());
 }
 
-bool Map::IsInVacuum_left (const PhysicalObj &obj, int dx, int dy)
+bool Map::IsInVacuum_left(const PhysicalObj &obj, int dx, int dy) const
 {
   return LigneV_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
 			     obj.GetTestRect().GetPositionY() + dy,
 			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }
 
-bool Map::IsInVacuum_right (const PhysicalObj &obj, int dx, int dy)
+bool Map::IsInVacuum_right(const PhysicalObj &obj, int dx, int dy) const
 {
   return LigneV_EstDansVide (obj.GetTestRect().GetPositionX() + obj.GetTestRect().GetSizeX() + dx,
 			     obj.GetTestRect().GetPositionY() + dy,

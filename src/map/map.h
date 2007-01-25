@@ -66,18 +66,19 @@ public:
   void ToRedrawOnScreen(Rectanglei r);
 
   // Est-on dans le monde ou dans le vide ?
-  bool EstDansVide (int x, int y);
-  bool LigneH_EstDansVide (int left, int y,  int right);
-  bool LigneV_EstDansVide (int x,  int top, int bottom);
-  bool RectEstDansVide (const Rectanglei &rect);
-  bool ParanoiacRectIsInVacuum (const Rectanglei &rect);
+  bool EstDansVide(const Point2i &pos) const;
+  bool EstDansVide (int x, int y) const;
+  bool LigneH_EstDansVide (int left, int y,  int right) const;
+  bool LigneV_EstDansVide (int x,  int top, int bottom) const;
+  bool RectEstDansVide (const Rectanglei &rect) const;
+  bool ParanoiacRectIsInVacuum (const Rectanglei &rect) const;
 
   // La ligne du haut/bas d'un objet physique est dans le vide ?
   // Le test se fait sur le rectangle de test d�al�de dx et dy.
-  bool EstDansVide_haut (const PhysicalObj &obj, int dx, int dy);
-  bool EstDansVide_bas (const PhysicalObj &obj, int dx, int dy);
-  bool IsInVacuum_left (const PhysicalObj &obj, int dx, int dy);
-  bool IsInVacuum_right (const PhysicalObj &obj, int dx, int dy);
+  bool EstDansVide_haut (const PhysicalObj &obj, int dx, int dy) const;
+  bool EstDansVide_bas (const PhysicalObj &obj, int dx, int dy) const;
+  bool IsInVacuum_left (const PhysicalObj &obj, int dx, int dy) const;
+  bool IsInVacuum_right (const PhysicalObj &obj, int dx, int dy) const;
 
   // Est en dehors du monde ?
   bool EstHorsMondeX (int x) const;
