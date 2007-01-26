@@ -88,6 +88,17 @@ Wormux outside the source-dir (see above):
      make package_source
 
 
+Win32 compilation:
+------------------
+
+I assume that Mingw is installed in /mingw.
+Export the following variables so that CMake can find the rigth paths:
+	export CMAKE_INCLUDE_PATH=/mingw/include
+	export CMAKE_LIBRARY_PATH=/mingw/lib
+Then run CMake:
+	cmake ../wormux-src -G "MSYS Makefiles"
+
+
 Problems:
 ---------
 
