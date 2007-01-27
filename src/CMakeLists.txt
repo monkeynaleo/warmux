@@ -42,7 +42,7 @@ IF(WIN32)
     intl.dll
     jpeg.dll
     libcurl-4.dll
-    libfreetpe-6.dll
+    libfreetype-6.dll
     libglib-2.0-0.dll
     libglibmm-2.4-1.dll
     libgmodule-2.0-0.dll
@@ -58,7 +58,6 @@ IF(WIN32)
     SDL_net.dll
     SDL_ttf.dll
     zlib1.dll
-    RUNTIME
     DESTINATION ${BIN_DESTINATION}
   )
 ENDIF(WIN32)
