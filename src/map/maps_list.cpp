@@ -38,10 +38,11 @@ InfoMap::InfoMap ()
   nb_barrel = 0;
   wind.nb_sprite = 0;
   wind.need_flip = false;
+  random = false;
 }
 
 bool InfoMap::Init (const std::string &map_name,
-		    const std::string &directory)
+                    const std::string &directory)
 {
   std::string nomfich;
 
@@ -81,6 +82,7 @@ bool InfoMap::Init (const std::string &map_name,
 
 bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
 {
+  XmlReader::ReadBool(xml, "random", random);
   // Read author informations
   xmlpp::Element *author = XmlReader::GetMarker(xml, "author");
   if (author != NULL) {
@@ -142,8 +144,13 @@ void InfoMap::LoadData()
 
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
-  img_ground = resource_manager.LoadImage(res_profile, "map");
   img_sky = resource_manager.LoadImage(res_profile,"sky");
+  if(!random) {
+    img_ground = resource_manager.LoadImage(res_profile, "map");
+  } else {
+    img_ground = resource_manager.GenerateMap(res_profile, img_sky.GetWidth(), img_sky.GetHeight());
+    img_ground.ImgSave("/tmp/generate_" + name + ".png");
+  }
 }
 
 void InfoMap::FreeData()

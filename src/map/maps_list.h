@@ -43,6 +43,7 @@ private:
   bool is_opened;
   bool use_water;
   bool is_data_loaded;
+  bool random;
 
   Profile *res_profile;
 

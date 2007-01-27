@@ -56,8 +56,9 @@ class ResourceManager
    void UnLoadXMLProfile( Profile *profile);
 
    Color LoadColor( const Profile *profile, const std::string resource_name);
-   Surface LoadImage( const Profile *profile, const std::string resource_name); 
-   Sprite *LoadSprite( const Profile *profile, const std::string resource_name); 
+   Surface LoadImage( const Profile *profile, const std::string resource_name);
+   Sprite *LoadSprite(const Profile *profile, const std::string resource_name);
+   Surface GenerateMap(const Profile *profile, const int width, const int height);
 
  private:
    std::string base_path;
