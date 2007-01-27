@@ -91,8 +91,9 @@ public:
   int Fill(const Color &color) const;
   int FillRect(const Rectanglei &dstRect, Uint32 color) const;
   int FillRect(const Rectanglei &dstRect, const Color &color) const;
-  
+
   int ImgLoad(std::string filename);
+  int ImgSave(std::string filename);
   Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
