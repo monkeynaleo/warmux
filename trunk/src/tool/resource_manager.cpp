@@ -85,7 +85,6 @@ Surface ResourceManager::LoadImage( const std::string filename,
     end_surface = pre_surface.DisplayFormat();
   else
     end_surface = pre_surface.DisplayFormatAlpha();
-
   return end_surface;
 }
 
@@ -254,6 +253,27 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
   return sprite;
 }
 
+Surface ResourceManager::GenerateMap(const Profile *profile, const int width, const int height)
+{
+  Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
+  tmp.Fill(0);
+  Surface texture = LoadImage(profile, "texture");
+  Surface tree = LoadImage(profile, "element");
+  int n = 500;
+  Sint16 vx[n + 2];
+  Sint16 vy[n + 2];
+  for(int i = 0; i < n; i++) {
+    vx[i] = (int)(i * width / n);
+    vy[i] = (int)(height - 200. + (cos(i / 20.) * 70.) - sin(i / 50.) * 300.0);
+  }
+  vx[n] = width - 1;
+  vy[n] = height - 1;
+  vx[n + 1] = 0;
+  vy[n + 1] = height - 1;
+  tmp.FilledPolygon(vx, vy, n + 2, Color(200, 200, 0, 255));
+  tmp.TexturedPolygon(vx, vy, n + 2, &texture, 0, 0);
+  return tmp;
+}
 
 ResourceManager resource_manager;
 
