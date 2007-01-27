@@ -181,6 +181,18 @@ if test "x$PACKAGE_CONFIG" = "xnone"; then
 has not been found.])
 fi
 
+dnl === Check for PNG ==================================================
+
+AC_MSG_CHECKING(for libpng)
+if $PACKAGE_CONFIG --cflags libpng > /dev/null 2>&1 ; then
+  LIBPNG_CFLAGS=`$PACKAGE_CONFIG --cflags libpng`
+  LIBPNG_LIB=`$PACKAGE_CONFIG --libs libpng`
+  CFLAGS="$CFLAGS $LIBPNG_CFLAGS"
+  LIBS="$LIBS $LIBPNG_LIB"
+else
+  AC_MSG_ERROR([*** libpng not found])
+fi
+
 dnl === Check for SDL_gfx ==================================================
 
 AC_ARG_WITH(sdl-gfx-prefix,
