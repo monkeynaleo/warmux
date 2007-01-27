@@ -25,6 +25,7 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
+#include <png.h>
 #include "../tool/debug.h"
 #include "../tool/error.h"
 #include "../tool/i18n.h"
@@ -395,7 +396,7 @@ int Surface::AAPolygonColor(const Sint16 * vx, const Sint16 * vy, const int n, c
   return aapolygonRGBA(surface, vx, vy, n, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }
 
-int Surface::FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color) {
+int Surface::FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color){
   return filledPolygonRGBA(surface, vx, vy, n, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
 }
 
@@ -442,10 +443,57 @@ int Surface::FillRect(const Rectanglei &dstRect, const Color &color) const{
  * @param filename
  */
 int Surface::ImgLoad(std::string filename){
-	AutoFree();
-	surface = IMG_Load( filename.c_str() );
+  AutoFree();
+  surface = IMG_Load( filename.c_str() );
 
-	return !IsNull();
+  return !IsNull();
+}
+
+/**
+ *
+ * @param filename
+ */
+int Surface::ImgSave(std::string filename){
+  FILE *f             = NULL;
+  png_structp png_ptr = NULL;
+  png_infop info_ptr  = NULL;
+  Uint8 *ptr          = (Uint8 *)(surface->pixels);
+  int height          = surface->h;
+
+  // Creating a png ...
+  png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
+  if(png_ptr == NULL) // Structure and ...
+    goto error_while_creating_png;
+  info_ptr = png_create_info_struct(png_ptr);
+  if(info_ptr == NULL) // Information.
+    goto error_while_creating_png;
+
+  // Opening a new file
+  f = fopen(filename.c_str(), "wb");
+  if(f == NULL)
+    goto error_while_creating_png;
+  png_init_io(png_ptr, f); // Associate png struture with a file
+  png_set_IHDR(png_ptr, info_ptr, surface->w, surface->h, 8,
+               PNG_COLOR_TYPE_RGB_ALPHA,      PNG_INTERLACE_NONE,
+               PNG_COMPRESSION_TYPE_DEFAULT,  PNG_FILTER_TYPE_DEFAULT);
+  png_set_compression_level(png_ptr, Z_BEST_COMPRESSION);
+
+  // Creating the png file
+  png_write_info(png_ptr, info_ptr);
+  png_set_bgr(png_ptr); // Set byte order to blue green red.
+  while(height > 0) {
+    png_write_row(png_ptr, ptr);
+    ptr += surface->pitch;
+    height--;
+  }
+  png_write_flush(png_ptr);
+  png_write_end(png_ptr, info_ptr);
+  fclose(f);
+  return 0;
+ error_while_creating_png:
+  if (png_ptr) png_destroy_write_struct(&png_ptr, NULL);
+  if (f) fclose(f);
+  return 1;
 }
 
 /**
