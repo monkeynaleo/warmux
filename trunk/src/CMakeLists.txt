@@ -37,7 +37,7 @@ ENDIF(CMAKE_MAJOR_VERSION MATCHES "2" AND CMAKE_MINOR_VERSION MATCHES "2")
 
 IF(WIN32)
   # These .dll files have to be copied to src/ directory
-  INSTALL(TARGETS RUNTIME
+  INSTALL(TARGETS
     iconv.dll
     intl.dll
     jpeg.dll
@@ -58,6 +58,7 @@ IF(WIN32)
     SDL_net.dll
     SDL_ttf.dll
     zlib1.dll
+    RUNTIME
     DESTINATION ${BIN_DESTINATION}
   )
 ENDIF(WIN32)
