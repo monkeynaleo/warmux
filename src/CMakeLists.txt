@@ -37,7 +37,7 @@ ENDIF(CMAKE_MAJOR_VERSION MATCHES "2" AND CMAKE_MINOR_VERSION MATCHES "2")
 
 IF(WIN32)
   # These .dll files have to be copied to src/ directory
-  INSTALL(TARGETS
+  INSTALL(FILES
     iconv.dll
     intl.dll
     jpeg.dll
