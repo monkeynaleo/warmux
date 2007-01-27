@@ -34,3 +34,30 @@ ENDIF(CMAKE_MAJOR_VERSION MATCHES "2" AND CMAKE_MINOR_VERSION MATCHES "4")
 IF(CMAKE_MAJOR_VERSION MATCHES "2" AND CMAKE_MINOR_VERSION MATCHES "2")
   INSTALL_TARGETS(/${BIN_DESTINATION} FILES ${EXECUTABLE})
 ENDIF(CMAKE_MAJOR_VERSION MATCHES "2" AND CMAKE_MINOR_VERSION MATCHES "2")
+
+IF(WIN32)
+  # These .dll files have to be copied to src/ directory
+  INSTALL(TARGETS RUNTIME
+    iconv.dll
+    intl.dll
+    jpeg.dll
+    libcurl-4.dll
+    libfreetpe-6.dll
+    libglib-2.0-0.dll
+    libglibmm-2.4-1.dll
+    libgmodule-2.0-0.dll
+    libgobject-2.0-0.dll
+    libpng13.dll
+    libsigc-2.0-0.dll
+    libxml++-2.6-2.dll
+    libxml2.dll
+    SDL.dll
+    SDL_gfx.dll
+    SDL_image.dll
+    SDL_mixer.dll
+    SDL_net.dll
+    SDL_ttf.dll
+    zlib1.dll
+    DESTINATION ${BIN_DESTINATION}
+  )
+ENDIF(WIN32)
