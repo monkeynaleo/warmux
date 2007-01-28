@@ -129,7 +129,7 @@ int Game::AskQuestion (Question &question, bool draw)
 void Game::Start()
 {
   bool err = true;
-  bool end = false;
+  bool end = true;
   std::string err_msg;
 
   try
@@ -150,17 +150,17 @@ void Game::Start()
 
       if (!IsGameFinished())
       {
-	if (isGamePaused){
-	  DisplayPause();
-	} else {
-	  end = DisplayQuit();
-	}
+        if (isGamePaused){
+          DisplayPause();
+        } else {
+          end = DisplayQuit();
+        }
       }
       else
         end = true;
 
       if (!end)
-	world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
+        world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
 
     } while (!end);
     err = false;
