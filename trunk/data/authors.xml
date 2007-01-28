@@ -49,6 +49,7 @@
 		<author><nickname>Stefan</nickname><name>Stefan MARTENS</name><description>German translation</description><email>info_AT_stefan1200_DOT_de</email><country>Germany</country></author>
 		<author><nickname>templer</nickname><name>Eduard BERMEJO</name><description>Add Spain AND Catalan translation in Wormux</description><email>templer_AT_iespana_DOT_es</email><country>Spain</country></author>
 		<author><nickname>willy</nickname><name>Paolo NICORELLI</name><description>First Italian version of Wormux</description><email>p.nicorelli_AT_fastwebnet_DOT_it</email><country>Italy</country></author>
+		<author><nickname>AbsintheSyringe</nickname><name>Adnan HODZIC</name><description>First Bosnian version of Wormux</description><email>AbsintheSyringe@gmail.com</email><country>Bosnia</country></author>
 	</section>
 		<section title="Package maintainers">
 		<author><nickname>artefact</nickname><name>Jean PARPAILLON</name><description>Debian GNU/Linux and Ubuntu packages of Wormux 0.7. Also: Some scripts</description><website>http://transsib.free.fr/</website><email>jean.parpaillon_AT_free_DOT_fr</email><country>France</country></author>
@@ -61,7 +62,7 @@
 		<author><nickname>Serge</nickname><name>Serge CLAUS</name><description>Wormux 0.7.4 package for Ubuntu Dapper</description><website>http://serge.claus.free.fr/</website><email>serge.claus_AT_free_DOT_fr</email><country>France</country></author>
 	</section>
 	<section title="Patches / Code">
-		<author><nickname>Absinthe</nickname><name>Adnan HODZIC</name><description>Physics constant for wind particles. Also translate Wormux into Bosnian</description><email>AbsintheSyringe_AT_gmail_DOT_com</email><country>Bosnia-Herzegovina</country></author>
+		<author><nickname>Absinthe</nickname><name>Adnan HODZIC</name><description>Physics constant for wind particles, Bug fixes, shotgun bug, blowthorch bug, ninja rope bug. Ex bonus box fixes, and weapon balance.</description><email>AbsintheSyringe_AT_gmail_DOT_com</email><country>Bosnia-Herzegovina</country></author> 
 		<author><nickname>Eric</nickname><name>Eric HOFFMANN</name><description>Wrote CPU limiter patch with Olivier SERRES</description><email>eric.hoffmann_AT_utbm_DOT_fr</email><country>France</country></author>
 		<author><nickname>François</nickname><name>François BLEIBEL</name><description>Write first network patch with Jerome Glatigny</description><email>francois.bleibel_AT_utbm_DOT_fr</email><country>France</country></author>
 		<author><nickname>Hanna</nickname><name>Hanna OLLILA</name><description>Fix old bug in option menu (crash because of video mode)</description><email>hamaolli_AT_cc.jyu_DOT_fi</email><country>Finland</country></author>
