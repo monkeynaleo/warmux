@@ -206,8 +206,9 @@ fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
 AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")
 
-dnl === Check for SDL image, mixer, etc., libxml++ and libcurl ==============
+dnl === Check for SDL image, mixer, etc., libxml++, libcurl and libpng ==============
 
+AC_CHECK_LIB(png, png_error,,,)
 AC_CHECK_LIB(curl, curl_easy_init,check_curl="yes",check_curl="no")
 AC_CHECK_LIB(SDL_image, IMG_Load,,check_sdl_image="no")
 AC_CHECK_LIB(SDL_mixer, Mix_OpenAudio,,check_sdl_mixer="no")
@@ -266,16 +267,19 @@ if test \
 	exit 1
 fi
 
-dnl === Add libxml++ and libcurl flags =================================================
+dnl === Add libxml++, libcurl flags and libpng =================================================
 LIBCURL_CFLAGS=`curl-config --cflags`
 LIBCURL_LIBS=`curl-config --libs`
 
 LIBXMLPP_CFLAGS=`$PACKAGE_CONFIG libxml++-2.6 --cflags`
 LIBXMLPP_LIBS=`$PACKAGE_CONFIG libxml++-2.6 --libs`
 
-CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGGS"
-CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGS"
-LIBS="$LIBS $LIBXMLPP_LIBS $LIBCURL_LIBS"
+LIBPNG_CFLAGS=`$PACKAGE_CONFIG libpng --cflags`
+LIBPNG_LIBS=`$PACKAGE_CONFIG libpng --libs`
+
+CFLAGS="$CFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGGS $LIBPNG_CFLAGS"
+CXXFLAGS="$CXXFLAGS $LIBXMLPP_CFLAGS $LIBCURL_CFLAGS $LIBPNG_CFLAGS"
+LIBS="$LIBS $LIBXMLPP_LIBS $LIBCURL_LIBS $LIBPNG_LIBS"
 
 dnl ========================================================================
 dnl == Check for header files                                              =
