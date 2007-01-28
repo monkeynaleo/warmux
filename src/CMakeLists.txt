@@ -51,6 +51,9 @@ IF(WIN32)
     libsigc-2.0-0.dll
     libxml++-2.6-2.dll
     libxml2.dll
+    ogg.dll
+    vorbis.dll
+    vorbisfile.dll
     SDL.dll
     SDL_gfx.dll
     SDL_image.dll
