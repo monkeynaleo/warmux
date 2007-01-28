@@ -130,7 +130,7 @@ int Game::AskQuestion (Question &question, bool draw)
 void Game::Start()
 {
   bool err=true;
-  bool end=false;
+  bool end=true;
   std::string err_msg;
 
   try
