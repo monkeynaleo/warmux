@@ -24,6 +24,7 @@
 
 #include <SDL.h>
 #include <string>
+#include <list>
 #include "color.h"
 #include "../include/base.h"
 #include "../tool/point.h"
@@ -84,8 +85,11 @@ public:
   int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
   int AAPolygonColor(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color);
+  int AAPolygonColor(std::list<Point2i> polygon, const Color & color);
   int FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color);
+  int FilledPolygon(std::list<Point2i> polygon, const Color & color);
   int TexturedPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Surface *texture, const int texture_dx, const int texture_dy);
+  int TexturedPolygon(std::list<Point2i> polygon, const Surface *texture);
 
   int Fill(Uint32 color) const;
   int Fill(const Color &color) const;
