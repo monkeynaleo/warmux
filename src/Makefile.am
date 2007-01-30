@@ -33,6 +33,7 @@ wormux_SOURCES = \
 	graphic/effects.cpp graphic/effects.h \
 	graphic/font.cpp graphic/font.h \
 	graphic/fps.cpp graphic/fps.h \
+	graphic/polygon.cpp graphic/polygon.h \
 	graphic/text_list.cpp graphic/text_list.h \
 	graphic/surface.cpp graphic/surface.h \
 	graphic/spriteframe.cpp graphic/spriteframe.h \
@@ -59,6 +60,7 @@ wormux_SOURCES = \
 	gui/picture_text_cbox.cpp gui/picture_text_cbox.h \
 	gui/picture_widget.cpp gui/picture_widget.h \
 	gui/container.h \
+	tool/affine_transform.cpp tool/affine_transform.h \
 	tool/string_tools.cpp tool/string_tools.h \
 	tool/xml_document.cpp tool/xml_document.h \
 	tool/i18n.cpp tool/i18n.h \
