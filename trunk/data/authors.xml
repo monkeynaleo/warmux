@@ -73,7 +73,7 @@
 		<author><nickname>Larry</nickname><name>Larry COW</name><description>Patch for Linux</description><email>larry_AT_doubidou_DOT_net</email></author>
 		<author><nickname>Mathias</nickname><name>Mathias PLICHTA</name><description>Automatic bazooka constant refresh</description><email>wrtlprnft_AT_wrtlprnft_DOT_de</email><country>Germany</country></author>
 		<author><nickname>Pascal</nickname><name>Pascal GIARD</name><description>Wrote a patch to stop configure if clanlib and/or libxml++ is missing</description><email>evilynux_AT_gmail_DOT_com</email></author>
-		<author><nickname>phh</nickname><name>Pierre-Hugues HUSSON</name><description>Give us the trick to prepare a static binary. Prepare also a static binary of Wormux 0.4</description><email>phh_AT_sidenux.ath_DOT_cx</email></author>
+		<author><nickname>phh</nickname><name>Pierre-Hugues HUSSON</name><description>Ugly live cd. Made static binary</description><email>phhusson_AT_free_DOT_fr</email></author>
 		<author><nickname>Progs</nickname><name>Romain BIGNON</name><description>Developer</description><email>progs_AT_headfucking.net<website>http://coderz.info</website></email><country>France</country></author>
 		<author><nickname>Riccardo</nickname><name>Riccardo TRAVERSO</name><description>Syringe weapon, bugfixes</description><email>gr3yfox.fw_AT_gmail_DOT_com</email><country>Italy</country></author>
 		<author><nickname>Rich</nickname><name>R. VIGNIEL</name><description>Progressive camera scrolling with mouse patch</description><email>rvigniel_AT_free.fr</email><country>France</country></author>
@@ -97,6 +97,7 @@
 		<author><nickname>Glenn</nickname><name>Glenn ROLLAND</name><description>Draw the map Battle Night</description><email>glenux_AT_gmail_DOT_com</email><country>France</country></author>
 		<author><nickname>JLedN</nickname><name>Jeremie LEDENTU</name><description>Draw the map EasterIsland</description><email>jledn_AT_voila_DOT_fr</email><country>France</country></author>
 		<author><nickname>Michael</nickname><name>Michael PRAGER</name><description>Map pirates. Also: Gentoo package maintainer (prepare ebuilds), German translation of Wormux</description><email>X_X_L_AT_gmx_DOT_net</email><country>Germany</country></author>
+		<author><nickname>Papa.Coen</nickname><name>C. Schalkwijk</name><description>Draw Crystal map</description><email>Papa.Coen_AT_gmail_DOT_com</email><country>The Netherlands</country></author>
 		<author><nickname>Piotr</nickname><name>Piotr POKOJOWCZYK</name><description>Draw the map Dinos and the skin Dude</description><email>rashid_AT_vp_DOT_pl</email><country>Poland</country></author>
 		<author><nickname>Toon</nickname><name>Toon VERSTRAELEN</name><description>Map 'Leafs'</description><email>Toon.Verstraelen_AT_ugent_DOT_be</email><country>Belgium</country></author>
 		<author><nickname>Yann</nickname><name>Yann BARB</name><description>SuperTux weapon</description><email>yann.barb_AT_utbm_DOT_fr</email><country>France</country></author>
