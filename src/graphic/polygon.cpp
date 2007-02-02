@@ -23,18 +23,17 @@
 
 PolygonBuffer::PolygonBuffer()
 {
-  vx = NULL;
-  vy = NULL;
+  // Start with at least 32 points buffer
+  array_size = 32;
+  vx =  new Sint16[array_size];
+  vy =  new Sint16[array_size];
   buffer_size = 0;
-  array_size = 0;
 }
 
 PolygonBuffer::~PolygonBuffer()
 {
-  if(vx != NULL) {
-    delete vx;
-    delete vy;
-  }
+  delete vx;
+  delete vy;
 }
 
 int PolygonBuffer::GetSize() const
@@ -47,17 +46,50 @@ void PolygonBuffer::SetSize(const int size)
   if(array_size > size) {
     buffer_size = size;
   } else {
-    if(vx != NULL) {
-      delete vx;
-      delete vy;
+    Sint16 * tmp_vx = vx;
+    Sint16 * tmp_vy = vy;
+    // double the buffer size (64, 128, 256, 512)
+    // to avoid call of delete/new at each new point
+    array_size = (array_size * 2 > size ? array_size * 2 : size);
+    vx = new Sint16[array_size];
+    vy = new Sint16[array_size];
+    for(int i = 0; i < buffer_size; i++) {
+      vx[i] = tmp_vx[i];
+      vy[i] = tmp_vy[i];
     }
-    vx = new Sint16[size];
-    vy = new Sint16[size];
-    array_size = buffer_size = size;
+    buffer_size = size;
+    delete tmp_vx;
+    delete tmp_vy;
   }
 }
 
 Polygon::Polygon()
+{
+  Init();
+}
+
+Polygon::Polygon(const std::list<Point2d> shape)
+{
+  Init();
+  original_shape = shape;
+  shape_buffer->SetSize(original_shape.size());
+}
+
+Polygon::Polygon(const Polygon & poly)
+{
+  Init();
+  texture = poly.texture;
+  if(poly.IsPlaneColor()) {
+    plane_color = new Color(poly.GetPlaneColor());
+  }
+  if(poly.IsBordered()) {
+    border_color = new Color(poly.GetBorderColor());
+  }
+  original_shape = poly.original_shape;
+  shape_buffer->SetSize(original_shape.size());
+}
+
+void Polygon::Init()
 {
   texture = NULL;
   plane_color = NULL;
@@ -66,48 +98,65 @@ Polygon::Polygon()
   shape_buffer = new PolygonBuffer();
 }
 
-Polygon::Polygon(const std::list<Point2i> shape)
-{
-  texture = NULL;
-  plane_color = NULL;
-  border_color = NULL;
-  original_shape = shape;
-  shape_buffer = new PolygonBuffer();
-  shape_buffer->SetSize(original_shape.size());
-}
-
-Polygon::Polygon(const Polygon & poly)
-{
-  texture = poly.texture;
-  plane_color = NULL;
-  border_color = NULL;
-  if(poly.IsPlaneColor()) {
-    plane_color = new Color(poly.GetPlaneColor());
-  }
-  if(poly.IsBordered()) {
-    border_color = new Color(poly.GetBorderColor());
-  }
-  original_shape = poly.original_shape;
-  shape_buffer = new PolygonBuffer();
-  shape_buffer->SetSize(original_shape.size());
-}
-
 void Polygon::ApplyTransformation(AffineTransform2D & trans)
 {
-  Point2i tmp;
+  Point2d tmp;
   int i = 0;
-  for(std::list<Point2i>::iterator point = original_shape.begin();
+  for(std::list<Point2d>::iterator point = original_shape.begin();
       point != original_shape.end(); point++, i++) {
     tmp = trans * (*point);
-    shape_buffer->vx[i] = tmp.x;
-    shape_buffer->vy[i] = tmp.y;
+    shape_buffer->vx[i] = (int)tmp.x;
+    shape_buffer->vy[i] = (int)tmp.y;
   }
 }
 
-void Polygon::AddPoint(const Point2i & p)
+void Polygon::AddPoint(const Point2d & p)
 {
   original_shape.push_back(p);
   shape_buffer->SetSize(original_shape.size());
+  shape_buffer->vx[original_shape.size() - 1] = (int)p.x;
+  shape_buffer->vy[original_shape.size() - 1] = (int)p.y;
+}
+
+PolygonBuffer * Polygon::GetPolygonBuffer() const
+{
+  return shape_buffer;
+}
+
+// expand the polygon (to draw a little border for example)
+void Polygon::Expand(const int expand_value)
+{
+  if(original_shape.size() < 2) return;
+  std::list<Point2d> tmp_shape;
+  std::list<Point2d>::iterator point = original_shape.begin();
+  AffineTransform2D trans;
+  trans.SetRotation(-M_PI_2);
+  Point2d previous_point, tmp_point;
+  tmp_shape.clear();
+  previous_point = *point;
+  point ++;
+  int i = 0;
+  for(i=0; point != original_shape.end(); point++, i++) {
+    tmp_point = previous_point - *point;
+    tmp_point = trans * tmp_point; // Rotate of -90°
+    //Normalize(tmp_point);
+    tmp_point *= expand_value; // set length
+    tmp_point += previous_point;
+    tmp_shape.push_back(tmp_point);
+    shape_buffer->vx[i] = (int)tmp_point.x;
+    shape_buffer->vy[i] = (int)tmp_point.y;
+  }
+  // loop back the last and first point
+  tmp_point = *(original_shape.end()) - *(original_shape.begin());
+  tmp_point = trans * tmp_point; // Rotate of -90°
+  //Normalize(tmp_point);
+  tmp_point *= expand_value; // set length
+  tmp_point += previous_point;
+  tmp_shape.push_back(tmp_point);
+  shape_buffer->vx[original_shape.size() - 1] = (int)tmp_point.x;
+  shape_buffer->vy[original_shape.size() - 1] = (int)tmp_point.y;
+  original_shape.clear();
+  original_shape = tmp_shape;
 }
 
 // Get information about Polygon
@@ -132,9 +181,9 @@ Surface * Polygon::GetTexture() const
   return texture;
 }
 
-void Polygon::SetTexture(const Surface * texture)
+void Polygon::SetTexture(Surface * texture_surface)
 {
-  texture = texture;
+  texture = texture_surface;
 }
 
 // Color handling

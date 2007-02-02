@@ -27,8 +27,8 @@
 
 #include "vector2.h"
 
-typedef Vector2<int>    Point2i;   
-typedef Vector2<float>  Point2f;   
-typedef Vector2<double> Point2d;   
+typedef Vector2<int>    Point2i;
+typedef Vector2<float>  Point2f;
+typedef Vector2<double> Point2d;
 
 #endif // _POINT_H
