@@ -26,6 +26,8 @@
 #include "../tool/affine_transform.h"
 #include "surface.h"
 
+class Surface;
+
 /** Use to draw the polygon */
 class PolygonBuffer {
  public:
@@ -46,24 +48,27 @@ class Polygon {
   Color * plane_color;
   Color * border_color;
   // Original shape
-  std::list<Point2i> original_shape;
+  std::list<Point2d> original_shape;
   // Shape position after an affine transformation
   PolygonBuffer * shape_buffer;
 
  public:
   Polygon();
-  Polygon(const std::list<Point2i> shape);
+  Polygon(const std::list<Point2d> shape);
   Polygon(const Polygon & poly);
+  void Init();
   // Point handling
-  void AddPoint(const Point2i & p);
+  void AddPoint(const Point2d & p);
   void ApplyTransformation(AffineTransform2D & trans);
+  void Expand(const int expand_value);
+  PolygonBuffer * GetPolygonBuffer() const;
   // Type of the polygon
   bool IsTextured() const;
   bool IsPlaneColor() const;
   bool IsBordered() const;
   // Texture handling
   Surface * GetTexture() const;
-  void SetTexture(const Surface * texture);
+  void SetTexture(Surface * texture_surface);
   // Color handling
   void SetBorderColor(const Color & color);
   void SetPlaneColor(const Color & color);

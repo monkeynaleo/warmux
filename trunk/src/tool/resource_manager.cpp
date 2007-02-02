@@ -257,19 +257,22 @@ Surface ResourceManager::GenerateMap(const Profile *profile, const int width, co
 {
   Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
   tmp.Fill(0);
-  std::list<Point2i> poly;
-  poly.clear();
+  Polygon shape = Polygon();
   Surface texture = LoadImage(profile, "texture");
-  Surface tree = LoadImage(profile, "element");
+  shape.SetTexture(&texture);
   int n = 500;
   for(int i = 0; i < n; i++) {
-    Point2i p = Point2i((int)(i * width / n), (int)(height - 200. + (cos(i / 20.) * 70.) - sin(i / 50.) * 300.0));
-    poly.push_back(p);
+    Point2d p = Point2d((i * width / n), (height - 200. + (cos(i / 20.) * 70.) - sin(i / 50.) * 300.0));
+    shape.AddPoint(p);
   }
-  poly.push_back(Point2i(width - 1, height - 1));
-  poly.push_back(Point2i(0, height - 1));
-  tmp.FilledPolygon(poly, Color(200, 200, 0, 255));
-  tmp.TexturedPolygon(poly, &texture);
+  shape.AddPoint(Point2d(width - 1, height - 1));
+  shape.AddPoint(Point2d(0, height - 1));
+  Polygon border = Polygon(shape);
+  border.SetTexture(NULL);
+  border.SetPlaneColor(Color(255,0,0,255));
+  border.Expand(5);
+  //tmp.DrawPolygon(border);
+  tmp.DrawPolygon(shape);
   return tmp;
 }
 
