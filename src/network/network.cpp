@@ -25,7 +25,6 @@
 #include <SDL_thread.h>
 #include "../game/game_mode.h"
 #include "../game/game.h"
-#include "../gui/question.h"
 #include "../include/action_handler.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
@@ -224,9 +223,6 @@ ConnectionState Network::ClientConnect(const std::string &host, const std::strin
 
   if(SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt)==-1)
   {
-    Question question;
-    question.Set(_("Invalid server adress!"),1,0);
-    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return CONN_BAD_HOST;
   }
@@ -235,11 +231,8 @@ ConnectionState Network::ClientConnect(const std::string &host, const std::strin
 
   if(!socket)
   {
-    Question question;
-    question.Set(_("Unable to contact server!"),1,0);
-    question.Ask();
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return CONN_BAD_SOCKET;
+    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    return CONN_REJECTED;
   }
 
   m_is_client = true;
@@ -263,7 +256,7 @@ ConnectionState Network::ClientConnect(const std::string &host, const std::strin
 //----------------       Server specific methods   ----------------------------
 //-----------------------------------------------------------------------------
 
-void Network::ServerStart(const std::string &port)
+ConnectionState Network::ServerStart(const std::string &port)
 {
   // The server starts listening for clients
   MSG_DEBUG("network", "Start server on port %s", port.c_str());
@@ -275,11 +268,8 @@ void Network::ServerStart(const std::string &port)
 
   if(SDLNet_ResolveHost(&ip,NULL,(Uint16)prt)!=0)
   {
-    Question question;
-    question.Set(_("Invalid port!"),1,0);
-    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return;
+    return CONN_BAD_PORT;
   }
 
   m_is_server = true;
@@ -293,6 +283,7 @@ void Network::ServerStart(const std::string &port)
   printf("\nConnected\n");
   socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
   thread = SDL_CreateThread(net_thread_func,NULL);
+  return CONNECTED;
 }
 
 std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<DistantComputer*>::iterator closed)
@@ -319,9 +310,6 @@ void Network::AcceptIncoming()
   server_socket = SDLNet_TCP_Open(&ip);
   if(!server_socket)
   {
-    Question question;
-    question.Set(_("Unable to listen for client!"),1,0);
-    question.Ask();
     printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
     return;
   }

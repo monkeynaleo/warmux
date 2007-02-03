@@ -27,6 +27,7 @@
 #include "include/app.h"
 #include "gui/button_text.h"
 #include "network/network.h"
+#include "network/net_error_msg.h"
 #include "network/index_server.h"
 #include "tool/i18n.h"
 
@@ -84,17 +85,15 @@ void InternetMenu::OnClic(const Point2i &mousePosition, int button)
   if (w == connect && connect_lst->GetSelectedItem() != -1)
   {
     network.Init();
-    network.ClientConnect(connect_lst->ReadLabel(), connect_lst->ReadValue());
-    if( network.IsConnected() )
+    ConnectionState conn = network.ClientConnect(connect_lst->ReadLabel(), connect_lst->ReadValue());
+    if( network.IsConnected() && conn == CONNECTED )
     {
       close_menu = true;
       sig_ok();
     }
     else
     {
-      Question question;
-      question.Set(_("Unable to join the game..."),1,0);
-      question.Draw();
+      DispNetworkError(conn);
     }
   }
 }

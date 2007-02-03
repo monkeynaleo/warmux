@@ -121,6 +121,7 @@ wormux_SOURCES = \
 	network/distant_cpu.cpp network/distant_cpu.h \
 	network/index_svr_msg.h \
 	network/index_server.cpp network/index_server.h \
+	network/net_error_msg.cpp network/net_error_msg.h \
 	network/network.cpp network/network.h \
 	network/randomsync.cpp network/randomsync.h \
 	particles/body_member.cpp particles/body_member.h \

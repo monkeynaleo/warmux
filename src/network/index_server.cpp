@@ -26,7 +26,6 @@
 #include "index_server.h"
 #include "index_svr_msg.h"
 #include "network.h"
-#include "gui/question.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "tool/debug.h"
@@ -52,16 +51,16 @@ IndexServer::~IndexServer()
 }
 
 /*************  Connection  /  Disconnection  ******************/
-bool IndexServer::Connect()
+ConnectionState IndexServer::Connect()
 {
   MSG_DEBUG("index_server", "Connecting..");
   assert(!connected);
 
   if( hidden_server )
-    return true;
+    return CONNECTED;
 
   if( !GetServerList() )
-    return false;
+    return CONN_REJECTED;
 
   std::string addr;
   int port;
@@ -70,34 +69,24 @@ bool IndexServer::Connect()
   // Until we find one running
   while( GetServerAddress( addr, port) )
   {
-    if( ConnectTo( addr, port) )
-      return true;
+    if( ConnectTo( addr, port) == CONNECTED )
+      return CONNECTED;
   }
 
-  Question question;
-  question.Set(_("Unable to contact an index server!"),1,0);
-  question.Ask();
-
-  return false;
+  return CONN_REJECTED;
 }
 
 bool IndexServer::ConnectTo(const std::string & address, const int & port)
 {
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
-  Question question;
-  question.Set(_("Contacting main server..."),1,0);
-  question.Draw();
   AppWormux::GetInstance()->video.Flip();
 
   network.Init(); // To get SDL_net initialized
 
   MSG_DEBUG("index_server", "Opening connection");
 
-//  if( SDLNet_ResolveHost(&ip, "localhost" , port) == -1 )
   if( SDLNet_ResolveHost(&ip, address.c_str() , port) == -1 )
   {
-    question.Set(_("Invalid index server adress!"),1,0);
-    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return false;
   }
@@ -311,9 +300,6 @@ bool IndexServer::HandShake()
 
   if(msg != TS_MSG_VERSION || sign != "MassMurder!")
   {
-    Question question;
-    question.Set(_("It doesn't seem to be a valid Wormux server..."),1,0);
-    question.Ask();
     Disconnect();
     return false;
   }

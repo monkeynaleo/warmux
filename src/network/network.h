@@ -109,7 +109,7 @@ public:
   ConnectionState ClientConnect(const std::string &host, const std::string &port);
 
   // Serveur specific methods
-  void ServerStart(const std::string &port);
+  ConnectionState ServerStart(const std::string &port);
   void AcceptIncoming();
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);

@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <utility>
+#include "network.h"
 
 typedef std::pair<std::string, std::string> address_pair;
 
@@ -71,7 +72,7 @@ public:
   ~IndexServer();
 
   // Connect/disconnect to a server
-  bool Connect();
+  ConnectionState Connect();
   void Disconnect();
 
   // Answers to pings from the server / close connection if distantly closed

@@ -16,27 +16,27 @@ msgstr ""
 "Plural-Forms: nplurals=2;plural=n != 1;\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: src/map/maps_list.cpp:275
+#: src/map/maps_list.cpp:282
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Kartan %s hittades inte :-("
 
-#: src/game/game_loop.cpp:706
+#: src/game/game_loop.cpp:702
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) har dött."
 
-#: src/map/maps_list.cpp:102
+#: src/map/maps_list.cpp:104
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s <%s> även känd som %s från %s"
 
-#: src/map/maps_list.cpp:109
+#: src/map/maps_list.cpp:111
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s <%s> från %s"
 
-#: src/game/game_loop.cpp:685
+#: src/game/game_loop.cpp:681
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begår självmord!"
@@ -46,23 +46,23 @@ msgstr "%s begår självmord!"
 msgid "%s fps"
 msgstr "%s bilder/s"
 
-#: src/game/game_loop.cpp:678
+#: src/game/game_loop.cpp:674
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ramlade i vattnet."
 
-#: src/game/game_loop.cpp:689
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ramlade ut från kartan!"
 
-#: src/game/game_loop.cpp:700
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s är en psykopat, han har dödat en medlem av %s!"
 
 # what about female names?
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:691
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s dog för att han var klumpig!"
@@ -72,7 +72,7 @@ msgstr "%s dog för att han var klumpig!"
 msgid "%s is next to a mine!"
 msgstr "%s står bredvid en mina!"
 
-#: src/object/bonus_box.cpp:170
+#: src/object/bonus_box.cpp:119
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "Laget %s har oändligt med ammunition för %s!"
@@ -82,7 +82,7 @@ msgstr "Laget %s har oändligt med ammunition för %s!"
 msgid "%s team has skipped its turn."
 msgstr "Laget %s har hoppat över sin tur."
 
-#: src/object/bonus_box.cpp:164
+#: src/object/bonus_box.cpp:113
 #, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
@@ -113,7 +113,7 @@ msgstr "Lufthammare"
 msgid "Anvil"
 msgstr "Städ"
 
-#: src/main.cpp:198
+#: src/main.cpp:224
 msgid "Authors:"
 msgstr "Upphovsmän:"
 
@@ -141,12 +141,12 @@ msgstr "Studsboll"
 msgid "Bye bye tux..."
 msgstr "Hej då Tux..."
 
-#: src/main.cpp:113
+#: src/main.cpp:126
 msgid "C++ exception caught:"
 msgstr "C++-undantag fångades:"
 
-#: src/team/teams_list.cpp:448 src/team/teams_list.cpp:470
-#: src/team/teams_list.cpp:508
+#: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
+#: src/team/teams_list.cpp:509
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan inte hitta laget %s!"
@@ -176,7 +176,7 @@ msgstr "Tack till"
 msgid "Disco Grenade"
 msgstr "Discogranat"
 
-#: src/game/game.cpp:156
+#: src/game/game.cpp:226
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Vill du verkligen avsluta spelet? (J/N)"
 
@@ -187,6 +187,10 @@ msgstr "Turlängd"
 #: src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dynamit"
+
+#: src/game/game_loop.cpp:250 src/game/game_loop.cpp:256
+msgid "END OF GAME"
+msgstr ""
 
 #: src/tool/error.cpp:81
 #, c-format
@@ -203,24 +207,24 @@ msgstr "Fel vid inläsning av laget %s:"
 msgid "Error loading team's data %s:"
 msgstr "Fel vid inläsning av lagets data %s:"
 
-#: src/game/config.cpp:301
+#: src/game/config.cpp:232
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fel vid skapandet av katalogen \"%s\": kunde inte lagra konfigurationsfilen."
 
-#: src/game/config.cpp:147
+#: src/game/config.cpp:145
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fel vid inläsning av konfigurationsfil: %s"
 
-#: src/game/game_mode.cpp:194
+#: src/game/game_mode.cpp:200
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Fel vid inläsning av spelläget %s (filen %s):"
 
-#: src/game/game.cpp:201
+#: src/game/game.cpp:184
 #, c-format
 msgid ""
 "Error:\n"
@@ -234,7 +238,7 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fel: kan inte hitta kroppen \"%s\" för laget \"%s\"."
 
-#: src/game/game_loop.cpp:163
+#: src/game/game_loop.cpp:159
 msgid "Find a random position for characters"
 msgstr "Hitta en slumpad position för karaktärer"
 
@@ -262,11 +266,11 @@ msgstr "Pistol"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Hemkatalog (miljövariabeln $HOME) kunde inte hittas!"
 
-#: src/game/game_loop.cpp:741
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Skynda dig, du är för långsam!!"
 
-#: src/main.cpp:192
+#: src/main.cpp:216
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -278,11 +282,11 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Initial energi"
 
-#: src/game/game_loop.cpp:204
+#: src/game/game_loop.cpp:199
 msgid "Initialisation"
 msgstr "Initiering"
 
-#: src/main.cpp:174
+#: src/main.cpp:199
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Initiering av TTF-biblioteket misslyckades: %s"
@@ -291,23 +295,19 @@ msgstr "Initiering av TTF-biblioteket misslyckades: %s"
 msgid "Initialise data"
 msgstr "Initiera data"
 
-#: src/game/game_loop.cpp:169
+#: src/game/game_loop.cpp:165
 msgid "Initialise objects"
 msgstr "Initiera objekt"
 
-#: src/game/game_loop.cpp:103 src/game/game_loop.cpp:132
+#: src/game/game_loop.cpp:104 src/game/game_loop.cpp:128
 msgid "Initialise teams"
 msgstr "Initera lag"
-
-#: src/object/bonus_box.cpp:219
-msgid "Is it a gift?"
-msgstr "Är det en present?"
 
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: src/map/maps_list.cpp:183
+#: src/map/maps_list.cpp:190
 msgid "Load maps:"
 msgstr "Läs in kartor:"
 
@@ -319,12 +319,12 @@ msgstr "Läs in lag:"
 msgid "LowGrav"
 msgstr "Låg gravitet"
 
-#: src/map/map.cpp:327
+#: src/map/map.cpp:331
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "Kartan %s, skapad av: "
 
-#: src/game/game_loop.cpp:207
+#: src/game/game_loop.cpp:202
 msgid "Maps"
 msgstr "Kartor"
 
@@ -344,11 +344,11 @@ msgstr "Musik?"
 msgid "Network Game"
 msgstr "Nätverksspel"
 
-#: src/weapon/ninja_rope.cpp:83
+#: src/weapon/ninja_rope.cpp:84
 msgid "Ninjarope"
 msgstr "Ninjarep"
 
-#: src/weapon/weapon.cpp:543
+#: src/weapon/weapon.cpp:542
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Inget <%s>-element hittades i xml-konfigurationsfilen!"
@@ -385,11 +385,11 @@ msgstr "Släpp loss illern"
 msgid "Quit"
 msgstr "Avsluta"
 
-#: src/main.cpp:179
+#: src/main.cpp:204
 msgid "Quit Wormux"
 msgstr "Avsluta Wormux"
 
-#: src/game/config.cpp:157
+#: src/game/config.cpp:155
 msgid "Reading personal config file"
 msgstr "Läser in personlig konfigurationsfil"
 
@@ -401,7 +401,7 @@ msgstr "Upplösning"
 msgid "Riot Bomb"
 msgstr "Massbomb"
 
-#: src/main.cpp:228
+#: src/main.cpp:249
 msgid "Run game"
 msgstr "Kör spel"
 
@@ -429,7 +429,7 @@ msgstr "Ljudeffekter?"
 msgid "Sound frequency"
 msgstr "Ljudfrekvens"
 
-#: src/game/game_loop.cpp:225
+#: src/game/game_loop.cpp:220
 msgid "Sounds"
 msgstr "Ljud"
 
@@ -453,7 +453,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Spruta"
 
-#: src/game/game_loop.cpp:211
+#: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr "Lag"
 
@@ -499,28 +499,28 @@ msgstr "Raketen har lämnat slagfältet..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Kunde inte initiera SDL-bibliotek: %s"
 
-#: src/map/maps_list.cpp:196 src/map/maps_list.cpp:212
+#: src/map/maps_list.cpp:203 src/map/maps_list.cpp:219
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kunde inte öppna kartkatalogen (%s)!"
 
-#: src/main.cpp:120
+#: src/main.cpp:133
 msgid "Unexpected exception caught..."
 msgstr "Oväntat undantag fångades..."
 
-#: src/main.cpp:146
+#: src/main.cpp:166
 msgid "Version"
 msgstr "Version"
 
-#: src/game/game_loop.cpp:220
+#: src/game/game_loop.cpp:215
 msgid "Weapons"
 msgstr "Vapen"
 
-#: src/main.cpp:209
+#: src/main.cpp:233
 msgid "Website: "
 msgstr "Webbplats: "
 
-#: src/game/game_loop.cpp:703
+#: src/game/game_loop.cpp:699
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Vad sorgligt för %s - han dödades av en enda pistol!"
@@ -529,24 +529,24 @@ msgstr "Vad sorgligt för %s - han dödades av en enda pistol!"
 msgid "Wind particles?"
 msgstr "Vindpartiklar?"
 
-#: src/main.cpp:161
+#: src/main.cpp:180
 msgid "Wormux launching..."
 msgstr "Wormux startar..."
 
-#: src/main.cpp:197
+#: src/main.cpp:223
 msgid "Wormux version "
 msgstr "Wormux version "
 
-#: src/map/maps_list.cpp:71
+#: src/map/maps_list.cpp:72
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "XML-fel vid inläsning av kartan \"%s\" :"
 
-#: src/map/maps_list.cpp:232
+#: src/map/maps_list.cpp:239
 msgid "You need at least one valid map !"
 msgstr "Du behöver åtminstone en giltig karta!"
 
-#: src/game/game_loop.cpp:215
+#: src/game/game_loop.cpp:210
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Du behöver åtminstone två lag för att spela: ändra det här i \"Alternativ\"-"
@@ -567,6 +567,9 @@ msgstr "klar"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "allmänt: "
+
+#~ msgid "Is it a gift?"
+#~ msgstr "Är det en present?"
 
 #~ msgid " has joined the party"
 #~ msgstr " har gått med i spelet"
