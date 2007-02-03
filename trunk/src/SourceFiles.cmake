@@ -86,6 +86,7 @@ network/chat.cpp
 network/distant_cpu.cpp
 network/download.cpp
 network/index_server.cpp
+network/net_error_msg.cpp
 network/network.cpp
 network/randomsync.cpp
 object/barrel.cpp

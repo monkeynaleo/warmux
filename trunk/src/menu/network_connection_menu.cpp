@@ -31,6 +31,7 @@
 #include "../graphic/video.h"
 #include "../graphic/font.h"
 #include "../map/maps_list.h"
+#include "../network/net_error_msg.h"
 #include "../network/network.h"
 #include "../network/index_server.h"
 #include "../include/app.h"
@@ -191,18 +192,27 @@ void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
 
 void NetworkConnectionMenu::sig_ok()
 {
+  ConnectionState conn;
   switch (current_action) {
   case NET_HOST: // Hosting your own server
     if( !internet_server->GetValue() )
       index_server.SetHiddenServer();
 
-    if( !index_server.Connect() ) {
+    conn = index_server.Connect();
+    if(conn != CONNECTED)
+    {
+      DispNetworkError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
       return;
     }
 
     network.Init();
-    network.ServerStart(port_number->GetText());
+    conn = network.ServerStart(port_number->GetText());
+    if( conn != CONNECTED)
+    {
+      DispNetworkError(conn);
+      return;
+    }
 
     index_server.SendServerStatus();
 
@@ -214,20 +224,22 @@ void NetworkConnectionMenu::sig_ok()
     }
     break;
 
-
   case NET_CONNECT_LOCAL: // Direct connexion to a server
     network.Init();
-    network.ClientConnect(server_address->GetText(), port_number->GetText());
-    if (!network.IsConnected()) {
+    conn = network.ClientConnect(server_address->GetText(), port_number->GetText());
+    if (!network.IsConnected() || conn != CONNECTED) {
+      DispNetworkError(conn);
       msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
 				 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
-			  c_red);
+				  c_red);
       return;
     }
     break;
 
   case NET_BROWSE_INTERNET: // Search an internet game!
-    if( !index_server.Connect() ) {
+    conn = index_server.Connect();
+    if (conn != CONNECTED) {
+      DispNetworkError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
       return;
     }
