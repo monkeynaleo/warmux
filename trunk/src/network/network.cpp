@@ -150,23 +150,41 @@ ConnectionState Network::CheckHost(const std::string &host, const std::string& p
   hostinfo = gethostbyname(host.c_str());
   if( ! hostinfo )
     return CONN_BAD_HOST;
-  
-  int fd = socket(AF_INET, SOCK_STREAM, 0);
+
+#ifndef WIN32
+  int fd = socket(AF_INET, SOCK_STREAM, 0); 
   if( fd == -1 )
     return CONN_BAD_SOCKET;
+
+#else
+  SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
+  if( fd == INVALID_SOCKET )
+    return CONN_BAD_SOCKET;
+#endif
 
   // Set the timeout
   struct timeval timeout;
   memset(&timeout, 0, sizeof(timeout));
   timeout.tv_sec = 5; // 5seconds timeout
-  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, &timeout, sizeof(timeout));
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, &timeout, sizeof(timeout));
+#ifndef WIN32
+  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (void*)&timeout, sizeof(timeout));
+  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (void*)&timeout, sizeof(timeout));
+#else
+  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
+  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeout, sizeof(timeout));
+#endif
 
   struct sockaddr_in addr;
   addr.sin_family = AF_INET;
+#ifndef WIN32
   addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
+#else
+  addr.sin_addr.s_addr = inet_addr(*hostinfo->h_addr_list);
+#endif
+
   addr.sin_port = htons(prt);
 
+#ifndef WIN32
   if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == -1 )
   {
     switch(errno)
@@ -177,10 +195,19 @@ ConnectionState Network::CheckHost(const std::string &host, const std::string& p
     default: return CONN_BAD_SOCKET;
     }
   }
-#ifndef WIN32
   close(fd);
 #else
-  close_socket(fd);
+  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
+  {
+    switch(WSAGetLastError())
+    {
+    case WSAECONNREFUSED: return CONN_REJECTED;
+    case WSAEINPROGRESS:
+    case WSAETIMEDOUT: return CONN_TIMEOUT;
+    default: return CONN_BAD_SOCKET;
+    }
+  }
+  closesocket(fd);
 #endif
   return CONNECTED;
 }
