@@ -34,6 +34,16 @@
 const std::string WORMUX_NETWORK_PORT = "9999";
 const uint WORMUX_NETWORK_PORT_INT = 9999;
 
+typedef enum _ConnectionState
+{
+  CONNECTED,
+  CONN_BAD_HOST,
+  CONN_BAD_PORT,
+  CONN_BAD_SOCKET,
+  CONN_REJECTED,
+  CONN_TIMEOUT
+} ConnectionState;
+
 class Network
 {
   friend class DistantComputer;
@@ -56,6 +66,7 @@ protected:
   IPaddress ip; // for server : store listening port
                 // for client : store server address/port
 
+  ConnectionState CheckHost(const std::string &host, const std::string &port);
 public:
   NetworkMenu* network_menu;
 
@@ -95,7 +106,7 @@ public:
   void SendPacket(char* packet, int size);
   void ReceiveActions();
   // Client specific
-  void ClientConnect(const std::string &host, const std::string &port);
+  ConnectionState ClientConnect(const std::string &host, const std::string &port);
 
   // Serveur specific methods
   void ServerStart(const std::string &port);
