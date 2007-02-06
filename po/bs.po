@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-01-18 15:32+0100\n"
+"PO-Revision-Date: 2007-02-06 17:26+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
@@ -190,7 +190,7 @@ msgstr "Dinamit"
 
 #: src/game/game_loop.cpp:250 src/game/game_loop.cpp:256
 msgid "END OF GAME"
-msgstr ""
+msgstr "KRAJ IGRE"
 
 #: src/tool/error.cpp:81
 #, c-format
@@ -209,8 +209,7 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:232
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -565,5 +564,3 @@ msgstr "gotov"
 msgid "general: "
 msgstr "general:"
 
-#~ msgid "Is it a gift?"
-#~ msgstr "Da li je to poklon ?"
