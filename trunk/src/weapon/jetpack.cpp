@@ -35,9 +35,9 @@
 #include "../character/move.h"
 #include "../include/action_handler.h"
 
-const double JETPACK_FORCE = 2000.0;
+const double JETPACK_FORCE = 8500.0;
 
-const uint DELTA_FUEL_DOWN = 200 ;  // Delta time between 2 fuel unit consumption.
+const uint DELTA_FUEL_DOWN = 50 ;  // Delta time between 2 fuel unit consumption.
 
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
@@ -52,6 +52,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   m_x_force = 0.0;
   m_y_force = 0.0;
   channel = -1;
+
 }
 
 void JetPack::Refresh()
@@ -104,7 +105,7 @@ void JetPack::p_Select()
 
 void JetPack::p_Deselect()
 {
-  m_is_active = false;
+  m_is_active = true;
   m_x_force = 0;
   m_y_force = 0;
   ActiveCharacter().SetExternForce(0,0);
@@ -143,7 +144,7 @@ void JetPack::StopUse()
 void JetPack::GoUp()
 {
   StartUse();
-  m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE) ;
+  m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
 }
 
 void JetPack::GoLeft()
