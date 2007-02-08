@@ -41,8 +41,9 @@ NetData::NetData()
 
 NetData::~NetData()
 {
-	if(connected)
-		close(fd);
+// The socket is closed from server.cpp instead
+//	if(connected)
+//		close(fd);
 	DPRINT(CONN, "Disconnected.");
 }
 

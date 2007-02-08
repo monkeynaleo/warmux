@@ -90,6 +90,7 @@ Client* Server::NewConnection()
 
 void Server::CloseConnection(int client_fd)
 {
+	close(client_fd);
 	FD_CLR(client_fd, &sock_set);
 	DPRINT(CONN, "Connection closed.");
 }
