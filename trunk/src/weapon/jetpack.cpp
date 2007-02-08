@@ -37,7 +37,7 @@
 
 const double JETPACK_FORCE = 8500.0;
 
-const uint DELTA_FUEL_DOWN = 50 ;  // Delta time between 2 fuel unit consumption.
+const uint DELTA_FUEL_DOWN = 75 ;  // Delta time between 2 fuel unit consumption.
 
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
