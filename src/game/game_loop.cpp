@@ -77,6 +77,7 @@ GameLoop::GameLoop()
   state = PLAYING;
   interaction_enabled = true;
   current_ObjBox = NULL;
+  give_objbox = true;
 }
 
 void GameLoop::InitGameData_NetServer()
@@ -480,8 +481,10 @@ void GameLoop::RefreshClock()
 
           if (Game::GetInstance()->IsGameFinished())
             Game::GetInstance()->SetEndOfGameStatus( true );
-          else if (ObjBox::NewBox())
+          else if (give_objbox && ObjBox::NewBox()) {
+            give_objbox = false;
 	    break;
+          }
 	  else {
 	    ActiveTeam().AccessWeapon().Deselect();
 	    SetState(PLAYING);
@@ -584,6 +587,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
 //    assert (!ActiveCharacter().IsDead());
     camera.FollowObject (&ActiveCharacter(), true, true);
     interaction_enabled = true; // Be sure that we can play !
+    give_objbox = true; //hack make it so no more than one objbox per turn
 
     // Applying Disease damage and Death mode.
     ApplyDiseaseDamage();
