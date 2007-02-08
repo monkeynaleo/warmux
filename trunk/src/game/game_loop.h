@@ -36,6 +36,7 @@ private:
   uint pause_seconde;
   uint duration;
   ObjBox * current_ObjBox;
+  bool give_objbox;
 
 public:
   static const int PLAYING = 0;
