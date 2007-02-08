@@ -33,6 +33,8 @@ private:
                     int pas_bon_x,int pas_bon_y);
   Point2i lastPos;
 
+  static float table[5][5];
+
 public:
   Ground();
   void Init();
