@@ -479,7 +479,7 @@ void Action_Nickname(Action *a)
 void Action_Pause(Action *a)
 {
   // Toggle pause
-  Game::GetInstance()->Pause();
+  Game::GetInstance()->TogglePause();
 }
 
 void ActionHandler::ExecActions()

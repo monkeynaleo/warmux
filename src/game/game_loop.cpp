@@ -434,7 +434,7 @@ void GameLoop::Run()
     if (delay >= 0)
       SDL_Delay(delay);
   } while( !Game::GetInstance()->GetEndOfGameStatus()
-	   && !Game::GetInstance()->IsGamePaused());
+	   && !Time::GetInstance()->IsGamePaused());
 }
 
 void GameLoop::RefreshClock()

@@ -20,6 +20,7 @@ graphic/color.cpp
 graphic/effects.cpp
 graphic/font.cpp
 graphic/fps.cpp
+graphic/polygon.cpp
 graphic/spriteanimation.cpp
 graphic/spritecache.cpp
 graphic/sprite.cpp
@@ -115,6 +116,7 @@ team/results.cpp
 team/team.cpp
 team/team_energy.cpp
 team/teams_list.cpp
+tool/affine_transform.cpp
 tool/debug.cpp
 tool/error.cpp
 tool/euler_vector.cpp
