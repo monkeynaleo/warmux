@@ -181,7 +181,7 @@ int main(int argc, void** argv)
 				DPRINT(CONN, "%i connections up!", (int)clients.size());
 				break;
 			}
-				if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
+			if( FD_ISSET( client->second->GetFD(), &acting_sock_set) )
 			{
 				if( ! client->second->Receive() )
 					client->second->connected = false;

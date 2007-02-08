@@ -146,6 +146,7 @@ IndexServerConn::IndexServerConn(const std::string &addr, int port)
 
 IndexServerConn::~IndexServerConn()
 {
+	close(GetFD());
 }
 
 bool IndexServerConn::HandleMsg(const std::string & full_str)
