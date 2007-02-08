@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-01-18 10:26+0100\n"
+"PO-Revision-Date: 2007-02-08 16:46+0100\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
 "MIME-Version: 1.0\n"
@@ -165,7 +165,6 @@ msgid "Commit Suicide"
 msgstr "Selbstmord begehen"
 
 #: src/weapon/construct.cpp:43
-#, fuzzy
 msgid "Construct"
 msgstr "Konstruktion"
 
@@ -191,7 +190,7 @@ msgstr "Dynamit"
 
 #: src/game/game_loop.cpp:250 src/game/game_loop.cpp:256
 msgid "END OF GAME"
-msgstr ""
+msgstr "ENDE DES SPIELS"
 
 #: src/tool/error.cpp:81
 #, c-format
@@ -210,8 +209,7 @@ msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
 
 #: src/game/config.cpp:232
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
@@ -266,8 +264,7 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr ""
-"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
 #: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
@@ -476,8 +473,7 @@ msgstr "Das Gnu hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/polecat.cpp:127
 msgid "The Polecat left the battlefield before exploding"
-msgstr ""
-"Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
+msgstr "Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
@@ -489,13 +485,11 @@ msgstr "Der Ball hat das Schlachtfeld verlassen bevor er explodieren konnte."
 
 #: src/weapon/disco_grenade.cpp:93
 msgid "The disco grenade has left the dance floor before exploding"
-msgstr ""
-"Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
+msgstr "Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
 
 #: src/weapon/grenade.cpp:57
 msgid "The grenade left the battlefield before exploding"
-msgstr ""
-"Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
+msgstr "Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
 
 #: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
@@ -834,3 +828,4 @@ msgstr "General: "
 #, fuzzy
 #~ msgid "some opponents."
 #~ msgstr "um Gegner zu finden."
+
