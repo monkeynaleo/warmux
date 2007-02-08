@@ -75,7 +75,6 @@ GameLoop * GameLoop::GetInstance()
 GameLoop::GameLoop()
 {
   state = PLAYING;
-  interaction_enabled = true;
   current_ObjBox = NULL;
   give_objbox = true;
 }
@@ -267,13 +266,9 @@ void GameLoop::RefreshInput()
   }
 
   // Keyboard and mouse refresh
-  if ((interaction_enabled && state != END_TURN) ||
-      (ActiveTeam().GetWeapon().IsActive() &&
-       ActiveTeam().GetWeapon().override_keys)) { // for driving supertux for example
-    Mouse::GetInstance()->Refresh();
-    Keyboard::GetInstance()->Refresh();
-    AIengine::GetInstance()->Refresh();
-  }
+  Mouse::GetInstance()->Refresh();
+  Keyboard::GetInstance()->Refresh();
+  AIengine::GetInstance()->Refresh();
 
   // Execute action
   do {
@@ -586,7 +581,6 @@ void GameLoop::SetState(int new_state, bool begin_game)
 
 //    assert (!ActiveCharacter().IsDead());
     camera.FollowObject (&ActiveCharacter(), true, true);
-    interaction_enabled = true; // Be sure that we can play !
     give_objbox = true; //hack make it so no more than one objbox per turn
 
     // Applying Disease damage and Death mode.
@@ -614,7 +608,6 @@ void GameLoop::SetState(int new_state, bool begin_game)
     Interface::GetInstance()->EnableDisplayTimer(false);
     pause_seconde = global_time->Read();
 
-    interaction_enabled = false; // Be sure that we can NOT play !
     if(network.IsServer())
       SyncCharacters(); // Send information about energy and the position of every character
     break;
@@ -651,7 +644,11 @@ bool GameLoop::IsAnythingMoving()
   // Is the weapon still active or an object still moving ??
   bool object_still_moving = false;
 
-  if (ActiveTeam().GetWeapon().IsActive()) object_still_moving = true;
+  if (ActiveTeam().GetWeapon().IsActive()) 
+  {
+    MSG_DEBUG("game.endofturn", "Weapon %s is still active", ActiveTeam().GetWeapon().GetName().c_str());
+    object_still_moving = true;
+  }
 
   if (!object_still_moving)
   {

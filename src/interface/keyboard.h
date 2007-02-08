@@ -30,7 +30,7 @@
 
 class Keyboard
 {
-public:
+public:  
   typedef enum
   {
     KEY_QUIT,        KEY_WEAPONS1,                KEY_WEAPONS2,
@@ -46,41 +46,38 @@ public:
     KEY_WEAPON_7,    KEY_WEAPON_8,                KEY_WEAPON_9,
     KEY_WEAPON_LESS, KEY_WEAPON_MORE
   } Key_t;
- 
 
 private:
-  Keyboard();
 
-  std::map<int, Key_t> layout;
-  bool PressedKeys[256]; // stupid default value
-
-  static Keyboard * singleton;
-
-private:
-  void HandleKeyPressed (const Key_t &action_key);
-  void HandleKeyReleased (const Key_t &action_key);
-
-public:
-  static Keyboard * GetInstance();
   typedef enum
   {
     KEY_PRESSED,
     KEY_RELEASED,
     KEY_REFRESH
-  } Key_Event_t ;
+  } Key_Event_t ; 
+
+  Keyboard();
+  static Keyboard * singleton;
+
+  std::map<int, Key_t> layout;
+  bool PressedKeys[256]; // stupid default value
+
+  void HandleKeyPressed (const Key_t &action_key);
+  void HandleKeyReleased (const Key_t &action_key);
+
+  void SetKeyAction(int key, Key_t at);
+
+public:
+  static Keyboard * GetInstance();
 
   void HandleKeyEvent(const SDL_Event& event) ;
   void Reset();
 
-  // Refresh des touches du clavier
+  // Refresh keys 
   void Refresh();
-
-  // Associe une touche � une action.
-  void SetKeyAction(int key, Key_t at);
 
   // Get the key associated to an action.
   int GetKeyAssociatedToAction(Key_t at);
-
 };
 
 //-----------------------------------------------------------------------------

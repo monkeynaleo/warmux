@@ -963,15 +963,3 @@ void Character::HandleKeyPressed_BackJump()
 
 void Character::HandleKeyRefreshed_BackJump(){}
 void Character::HandleKeyReleased_BackJump(){}
-
-
-// void Character::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
-// {
-//   // The character cannot move anymove if the turn is over...
-//   if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
-//     return ;
-
-//   if (ActiveCharacter().IsDead())
-//     return;
-// }
-

@@ -46,7 +46,6 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   m_name = _("Jetpack");
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
-  override_keys = true ;
   use_unit_on_first_shoot = false;
 
   m_x_force = 0.0;

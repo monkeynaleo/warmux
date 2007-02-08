@@ -31,7 +31,6 @@
 #include "../particles/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
-#include "../interface/keyboard.h"
 
 class Character;
 
@@ -219,6 +218,8 @@ public:
   virtual void ChooseTarget (Point2i mouse_pos);
 
   // Handle a keyboard event.
+
+  // Key Shoot management
   virtual void HandleKeyPressed_Shoot();
   virtual void HandleKeyRefreshed_Shoot();
   virtual void HandleKeyReleased_Shoot();
@@ -251,6 +252,19 @@ public:
   virtual void HandleKeyPressed_BackJump();
   virtual void HandleKeyRefreshed_BackJump();
   virtual void HandleKeyReleased_BackJump();
+  
+  // Other keys
+  virtual void HandleKeyReleased_Num1(){};
+  virtual void HandleKeyReleased_Num2(){};
+  virtual void HandleKeyReleased_Num3(){};
+  virtual void HandleKeyReleased_Num4(){};
+  virtual void HandleKeyReleased_Num5(){};
+  virtual void HandleKeyReleased_Num6(){};
+  virtual void HandleKeyReleased_Num7(){};
+  virtual void HandleKeyReleased_Num8(){};
+  virtual void HandleKeyReleased_Num9(){};
+  virtual void HandleKeyReleased_Less(){};
+  virtual void HandleKeyReleased_More(){};
 
   // Handle a mouse event
   virtual void HandleMouseLeftClicReleased(){};
@@ -276,7 +290,7 @@ public:
   // return the strength of the weapon
   const double ReadStrength() const;
 
-  // Acc� aux donn�s
+  // Data access
   const std::string& GetName() const;
   const std::string& GetID() const;
   Weapon_type GetType() const;

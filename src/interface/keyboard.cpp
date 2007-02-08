@@ -208,7 +208,7 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
       break;
     } 
   } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-
+    
     // Movements are managed by weapons because sometimes it overrides the keys
     switch (key) {
       
@@ -234,8 +234,10 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
       ActiveTeam().AccessWeapon().HandleKeyPressed_BackJump();
       goto pressed_accepted;
     case KEY_SHOOT:
-      ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot();
-      goto pressed_accepted;
+      if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
+	ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot();
+	goto pressed_accepted;
+      }
     default:
       break;
     } 
@@ -366,8 +368,45 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       case KEY_BACK_JUMP:
 	ActiveTeam().AccessWeapon().HandleKeyReleased_BackJump();
 	return;
+
+	// Shoot key
       case KEY_SHOOT:
 	ActiveTeam().AccessWeapon().HandleKeyReleased_Shoot();
+	return;
+
+	// Other keys usefull for weapons
+      case KEY_WEAPON_1:  
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num1();
+	return;
+      case KEY_WEAPON_2:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num2();                
+	return;
+      case KEY_WEAPON_3: 
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num3();               
+	return;
+      case KEY_WEAPON_4:  
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num4();               
+	return; 
+      case KEY_WEAPON_5:  
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num5();              
+	return;
+      case KEY_WEAPON_6:  
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num6();               
+	return;             
+      case KEY_WEAPON_7: 
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num7();               
+	return;
+      case KEY_WEAPON_8: 
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num8();               
+	return;
+      case KEY_WEAPON_9: 
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num9();               
+	return;
+      case KEY_WEAPON_LESS:  
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Less();              
+	return;
+      case KEY_WEAPON_MORE: 
+	ActiveTeam().AccessWeapon().HandleKeyReleased_More();               
 	return;
       default:
 	break;
@@ -447,70 +486,37 @@ void Keyboard::Refresh()
       if (ActiveCharacter().IsDead()) return;
       if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
       
-
-      if (GameLoop::GetInstance()->ReadState() == GameLoop::HAS_PLAYED) {
+      // Movements are managed by weapons because sometimes it overrides the keys
+      switch (key) {
 	
-	switch (key) {
-	case KEY_MOVE_RIGHT:
-	  ActiveCharacter().HandleKeyRefreshed_MoveRight();
-	  return;
-	case KEY_MOVE_LEFT:
-	  ActiveCharacter().HandleKeyRefreshed_MoveLeft();
-	  return;
-	case KEY_UP:
-	  ActiveCharacter().HandleKeyRefreshed_Up();
-	  return;
-	case KEY_DOWN:
-	  ActiveCharacter().HandleKeyRefreshed_Down();
-	  return;
-	case KEY_JUMP:
-	  ActiveCharacter().HandleKeyRefreshed_Jump();
-	  return;
-	case KEY_HIGH_JUMP:
-	  ActiveCharacter().HandleKeyRefreshed_HighJump();
-	  return;
-	case KEY_BACK_JUMP:
-	  ActiveCharacter().HandleKeyRefreshed_BackJump();
-	  return;
-	case KEY_SHOOT:
-	  // Shoot key is not accepted in HAS_PLAYED state
-	  return;
-	default:
-	  break;
-	  
-	}
-      } else if  (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-      
-	// Movements are managed by weapons because sometimes it overrides the keys
-	switch (key) {
-	  
-	case KEY_MOVE_RIGHT:
-	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight();
-	  return;
-	case KEY_MOVE_LEFT:
-	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft();
-	  return;	
-	case KEY_UP:
-	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up();
-	  return;
-	case KEY_DOWN:
-	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_Down();
-	  return;
-	case KEY_JUMP:
-	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_Jump();
-	  return;
-	case KEY_HIGH_JUMP:
-	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_HighJump();
-	  return;
-	case KEY_BACK_JUMP:
-	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_BackJump();
-	  return;
-	case KEY_SHOOT:
+      case KEY_MOVE_RIGHT:
+	ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight();
+	return;
+      case KEY_MOVE_LEFT:
+	ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft();
+	return;	
+      case KEY_UP:
+	ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up();
+	return;
+      case KEY_DOWN:
+	ActiveTeam().AccessWeapon().HandleKeyRefreshed_Down();
+	return;
+      case KEY_JUMP:
+	ActiveTeam().AccessWeapon().HandleKeyRefreshed_Jump();
+	return;
+      case KEY_HIGH_JUMP:
+	ActiveTeam().AccessWeapon().HandleKeyRefreshed_HighJump();
+	return;
+      case KEY_BACK_JUMP:
+	ActiveTeam().AccessWeapon().HandleKeyRefreshed_BackJump();
+	return;
+      case KEY_SHOOT:
+	if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
 	  ActiveTeam().AccessWeapon().HandleKeyRefreshed_Shoot();
-	  return;
-	default:
-	  break;
-	} 
-      }
+	}
+	return;
+      default:
+	break;
+      } 
     }
 }

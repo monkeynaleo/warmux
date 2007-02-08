@@ -157,6 +157,7 @@ void Airhammer::HandleKeyReleased_Shoot()
 {
   ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
   m_is_active = false;
+  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
 //-----------------------------------------------------------------------------

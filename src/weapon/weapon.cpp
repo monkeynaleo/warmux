@@ -86,9 +86,6 @@ Weapon::Weapon(Weapon_type type,
   max_strength = min_angle = max_angle = 0;
   use_flipping = true;
 
-  override_keys = false ;
-  force_override_keys = false;
-
   origin = weapon_origin_HAND;
 
   m_can_change_weapon = false;
