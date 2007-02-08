@@ -38,6 +38,14 @@ Ground::Ground()
 { //FIXME (a effacer)
 }
 
+//calculated with a good old TI-83... more or less precision might be wanted...
+float Ground::table[5][5] = {
+    {.78539,  .46364,M_PI,  -.46364+M_PI,  -.78539+M_PI},
+    {1.1071,  .78539,M_PI,  -.78539+M_PI,  -1.1071+M_PI},
+    {M_PI / 2.0,M_PI / 2.0,M_PI / 2.0,M_PI / 2.0,M_PI / 2.0},
+    {-1.1071+M_PI,  -.78539+M_PI,  M_PI,  78539,  1.1071},
+    {-.78539+M_PI,  -.46364+M_PI,  M_PI,  .46364,  .78539}};
+
 void Ground::Init(){
   std::cout << "o " << _("Ground initialization...") << ' ';
   std::cout.flush();
@@ -94,22 +102,23 @@ double Ground::Tangeante(int x,int y){
     p2.x = x;
     p2.y = y;
   }
-
+/*
   if(p1.x == p2.x)
     return M_PI / 2.0;
   if(p1.y == p2.y)
     return M_PI;
+*/
+  //assert (p1.x != p2.x);
 
-  assert (p1.x != p2.x);
-
-  double tangeante = atan((double)(p2.y-p1.y)/(double)(p2.x-p1.x));
+  /* double tangeante = atan((double)(p2.y-p1.y)/(double)(p2.x-p1.x));
 
   while(tangeante <= 0.0)
     tangeante += M_PI;
   while(tangeante > 2 * M_PI)
     tangeante -= M_PI;
 
-  return tangeante;
+  return tangeante; */
+  return table[p2.y-p1.y][p2.x-p1.x];
 }
 
 bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
