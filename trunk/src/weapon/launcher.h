@@ -113,13 +113,12 @@ class WeaponLauncher : public Weapon
   protected:
     virtual bool p_Shoot();
     virtual void p_Select();
-    virtual void p_Deselect();
     virtual WeaponProjectile * GetProjectileInstance() = 0;
     virtual bool ReloadLauncher();
     void Refresh();
   private:
     void DirectExplosion();
-
+    void NetworkSetTimeoutProjectile();
   public:
     WeaponLauncher(Weapon_type type,
                    const std::string &id,
@@ -128,9 +127,8 @@ class WeaponLauncher : public Weapon
     virtual ~WeaponLauncher();
 
     virtual void Draw();
-    virtual void HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type);
 
-  // Handle of projectile events
+    // Handle of projectile events
     virtual void SignalProjectileExplosion();
     virtual void SignalProjectileCollision();
     virtual void SignalProjectileDrowning();
@@ -146,6 +144,19 @@ class WeaponLauncher : public Weapon
     virtual void HandleMouseWheelUp();
     virtual void HandleMouseWheelDown();
 
+    // Handle special keys
+    virtual void HandleKeyReleased_Num1();
+    virtual void HandleKeyReleased_Num2();
+    virtual void HandleKeyReleased_Num3();
+    virtual void HandleKeyReleased_Num4();
+    virtual void HandleKeyReleased_Num5();
+    virtual void HandleKeyReleased_Num6();
+    virtual void HandleKeyReleased_Num7();
+    virtual void HandleKeyReleased_Num8();
+    virtual void HandleKeyReleased_Num9();
+    virtual void HandleKeyReleased_Less();
+    virtual void HandleKeyReleased_More();
+  
     WeaponProjectile* GetProjectile() { return projectile; };
     ExplosiveWeaponConfig& cfg();
 };

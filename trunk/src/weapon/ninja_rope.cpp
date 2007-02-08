@@ -82,7 +82,6 @@ bool find_first_contact_point (Point2i from, double angle, int length,
 NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new WeaponConfig())
 {
   m_name = _("Ninjarope");
-  override_keys = true ;
   use_unit_on_first_shoot = false;
 
   m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");

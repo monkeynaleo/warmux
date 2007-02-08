@@ -443,18 +443,9 @@ void WeaponLauncher::p_Select()
   missed_shots = 0;
   if (projectile->change_timeout_allowed())
   {
-    force_override_keys = true; //Allow overriding key during movement.
     projectile->ResetTimeOut();
   }
   Weapon::p_Select();
-}
-
-void WeaponLauncher::p_Deselect()
-{
-  if (projectile->change_timeout_allowed())
-  {
-    force_override_keys = false;
-  }
 }
 
 void WeaponLauncher::IncMissedShots()
@@ -464,66 +455,88 @@ void WeaponLauncher::IncMissedShots()
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
 }
 
-void WeaponLauncher::HandleKeyEvent(Keyboard::Key_t key, Keyboard::Key_Event_t event_type)
+void WeaponLauncher::HandleKeyReleased_Num1()
 {
-  if (event_type == Keyboard::KEY_RELEASED)
-    switch (key) {
-      case Keyboard::KEY_WEAPON_1:
-        projectile->SetTimeOut(1);
-        break;
-      case Keyboard::KEY_WEAPON_2:
-        projectile->SetTimeOut(2);
-        break;
-      case Keyboard::KEY_WEAPON_3:
-        projectile->SetTimeOut(3);
-        break;
-      case Keyboard::KEY_WEAPON_4:
-        projectile->SetTimeOut(4);
-        break;
-      case Keyboard::KEY_WEAPON_5:
-        projectile->SetTimeOut(5);
-        break;
-      case Keyboard::KEY_WEAPON_6:
-        projectile->SetTimeOut(6);
-        break;
-      case Keyboard::KEY_WEAPON_7:
-        projectile->SetTimeOut(7);
-        break;
-      case Keyboard::KEY_WEAPON_8:
-        projectile->SetTimeOut(8);
-        break;
-      case Keyboard::KEY_WEAPON_9:
-        projectile->SetTimeOut(9);
-        break;
+  projectile->SetTimeOut(1);
+  NetworkSetTimeoutProjectile();
+}
 
-      case Keyboard::KEY_WEAPON_MORE:
-        projectile->IncrementTimeOut();
-        break ;
+void WeaponLauncher::HandleKeyReleased_Num2()
+{
+  projectile->SetTimeOut(2);
+  NetworkSetTimeoutProjectile();
+}
 
-      case Keyboard::KEY_WEAPON_LESS:
-        projectile->DecrementTimeOut();
-        break   ;
+void WeaponLauncher::HandleKeyReleased_Num3()
+{
+  projectile->SetTimeOut(3);
+  NetworkSetTimeoutProjectile();
+}
 
-      default:
-        break ;
+void WeaponLauncher::HandleKeyReleased_Num4()
+{
+  projectile->SetTimeOut(4);
+  NetworkSetTimeoutProjectile();
+}
 
-    };
+void WeaponLauncher::HandleKeyReleased_Num5()
+{
+  projectile->SetTimeOut(5);
+  NetworkSetTimeoutProjectile();
+}
 
-    if((key >= Keyboard::KEY_WEAPON_1 && key <= Keyboard::KEY_WEAPON_9)
-        || key == Keyboard::KEY_WEAPON_MORE || key == Keyboard::KEY_WEAPON_LESS)
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
+void WeaponLauncher::HandleKeyReleased_Num6()
+{
+  projectile->SetTimeOut(6);
+  NetworkSetTimeoutProjectile();
+}
 
-    //ActiveCharacter().HandleKeyEvent(key, event_type);
+void WeaponLauncher::HandleKeyReleased_Num7()
+{
+  projectile->SetTimeOut(7);
+  NetworkSetTimeoutProjectile();
+}
+
+void WeaponLauncher::HandleKeyReleased_Num8()
+{
+  projectile->SetTimeOut(8);
+  NetworkSetTimeoutProjectile();
+}
+
+void WeaponLauncher::HandleKeyReleased_Num9()
+{
+  projectile->SetTimeOut(9);
+  NetworkSetTimeoutProjectile();
+}
+
+void WeaponLauncher::HandleKeyReleased_Less()
+{
+  projectile->IncrementTimeOut();
+  NetworkSetTimeoutProjectile();
+}
+
+void WeaponLauncher::HandleKeyReleased_More()
+{
+  projectile->DecrementTimeOut();
+  NetworkSetTimeoutProjectile();
+}
+
+void WeaponLauncher::NetworkSetTimeoutProjectile()
+{
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_TIMEOUT, 
+						     projectile->m_timeout_modifier));
 }
 
 void WeaponLauncher::HandleMouseWheelUp()
 {
   projectile->IncrementTimeOut();
+  NetworkSetTimeoutProjectile();
 }
 
 void WeaponLauncher::HandleMouseWheelDown()
 {
   projectile->DecrementTimeOut();
+  NetworkSetTimeoutProjectile();
 }
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg()
