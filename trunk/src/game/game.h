@@ -32,7 +32,7 @@ class Game
 private:
   bool isGameLaunched;
   bool endOfGameStatus;
-  bool isGamePaused;
+  //bool isGamePaused;
 
   int NbrRemainingTeams() const;
 
@@ -56,7 +56,7 @@ public:
   void MessageLoading() const;
   void MessageEndOfGame() const;
 
-  void Pause();
+  void TogglePause();
 
   bool GetEndOfGameStatus() const;
   void SetEndOfGameStatus(bool status);

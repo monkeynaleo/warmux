@@ -60,7 +60,7 @@ Game::Game()
 {
   isGameLaunched = false;
   endOfGameStatus = false;
-  isGamePaused = false;
+  //isGamePaused = false;
 }
 
 bool Game::IsGameFinished() const
@@ -114,22 +114,21 @@ void Game::MessageEndOfGame() const
 
 int Game::AskQuestion (Question &question, bool draw)
 {
-  Time * global_time = Time::GetInstance();
-  global_time->Pause();
+  Time::GetInstance()->Pause();
 
   if (draw)
     GameLoop::GetInstance()->Draw ();
 
   int answer = question.Ask ();
 
-  global_time->Continue();
+  Time::GetInstance()->Continue();
   return answer;
 }
 
 void Game::Start()
 {
   bool err = true;
-  bool end = true;
+  bool end = false;
   std::string err_msg;
 
   try
@@ -150,7 +149,7 @@ void Game::Start()
 
       if (!IsGameFinished())
       {
-        if (isGamePaused){
+        if (Time::GetInstance()->IsGamePaused()){
           DisplayPause();
         } else {
           end = DisplayQuit();
@@ -197,9 +196,12 @@ void Game::UnloadDatas()
   jukebox.StopAll();
 }
 
-void Game::Pause()
+void Game::TogglePause()
 {
-  isGamePaused = true;
+  if(Time::GetInstance()->IsGamePaused())
+    Time::GetInstance()->Continue();
+  else 
+    Time::GetInstance()->Pause();
 }
 
 void Game::DisplayPause()
@@ -217,7 +219,6 @@ void Game::DisplayPause()
 		      );
   AskQuestion(question, false);
   jukebox.Resume();
-  isGamePaused = false;
 }
 
 bool Game::DisplayQuit()
@@ -249,7 +250,7 @@ bool Game::DisplayQuit()
 }
 
 bool Game::IsGamePaused() const{
-  return isGamePaused;
+  return Time::GetInstance()->IsGamePaused();
 }
 
 bool Game::IsGameLaunched() const{

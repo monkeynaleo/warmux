@@ -67,7 +67,7 @@ void Map::Reset()
 
   // Configure game about open or closed world
   bool open = ground.EstOuvert();
-  BonusBox::Enable(open);
+  ObjBox::Enable(open);
 
   delete author_info1; author_info1 = NULL;
   delete author_info2; author_info2 = NULL;
