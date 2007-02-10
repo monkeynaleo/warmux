@@ -202,6 +202,7 @@ AC_SUBST(SDL_GFX_PREFIX)
 if test "x$SDL_GFX_PREFIX" != "x"; then
   CPPFLAGS="$CPPFLAGS -I$SDL_GFX_PREFIX/include/SDL"
   CXXFLAGS="$CXXFLAGS -I$SDL_GFX_PREFIX/include/SDL"
+  LIBS="-L$SDL_GFX_PREFIX/lib $LIBS"
 fi
 AC_CHECK_LIB(SDL_gfx, rotozoomSurfaceXY,,check_sdl_gfx="no")
 AC_CHECK_HEADERS(SDL_rotozoom.h,,check_sdl_gfx="no")

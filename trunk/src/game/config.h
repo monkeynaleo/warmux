@@ -104,7 +104,7 @@ public:
   static Config * GetInstance();
 
   bool Save();
-  const inline std::string &GetGameMode() const { return m_game_mode; };
+  inline const std::string &GetGameMode() const { return m_game_mode; };
 
 protected:
   bool LoadXml(xmlpp::Element *xml);
