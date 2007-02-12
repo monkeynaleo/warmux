@@ -2,10 +2,6 @@ SUBDIRS = .
 
 bin_PROGRAMS = wormux
 
-pkgdatadir=@DATADIR@
-localedir=@LOCALEDIR@
-fontfile=@FONTFILE@
-
 wormux_SOURCES = \
 	ai/ai_engine.cpp ai/ai_engine.h \
 	ai/ai_engine_stupid.cpp ai/ai_engine_stupid.h \
@@ -181,7 +177,11 @@ wormux_SOURCES = \
 	weapon/blowtorch.cpp weapon/blowtorch.h \
 	weapon/syringe.cpp weapon/syringe.h
 
-AM_CXXFLAGS = -DINSTALL_DATADIR=\"$(pkgdatadir)\" -DINSTALL_LOCALEDIR=\"$(localedir)\" -DFONT_FILE=\"$(fontfile)\" -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" -Werror
+if AUTOPACKAGE
+DEFINE_AUTOPACKAGE=-DUSE_AUTOPACKAGE
+endif
+
+AM_CXXFLAGS = -DINSTALL_DATADIR=\"@DATADIR\" -DINSTALL_LOCALEDIR=\"@LOCALEDIR\" -DFONT_FILE=\"@FONTFILE@\" -DPACKAGE_VERSION=\"$(PACKAGE_VERSION)\" $(DEFINE_AUTOPACKAGE) -Werror
 
 
 if WIN32
