@@ -23,8 +23,6 @@
 
 #include "config.h"
 
-#define USE_AUTOPACKAGE
-
 #include <sstream>
 #include <string>
 #include <iostream>

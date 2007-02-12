@@ -88,24 +88,34 @@ AM_CONDITIONAL([WIN32], test "$WIN32" = "yes")
 
 if test "${WIN32}" = "yes"; then DATADIR="data"
 else DATADIR="${prefix}/share/wormux"; fi
-AC_ARG_WITH(datadir-name,
-    [  --with-datadir-name=DIR       specify where datas are installed (default: ${prefix}/share/wormux)],
+AC_ARG_WITH([datadir-name],
+    [AS_HELP_STRING([--with-datadir-name=DIR],
+		    [specify where datas are installed (default: ${prefix}/share/wormux)])],
     [DATADIR="$withval"])
 AC_SUBST([DATADIR])
 
 
 if test "${WIN32}" = "yes"; then LOCALEDIR="locale"
 else LOCALEDIR="${prefix}/share/locale"; fi
-AC_ARG_WITH(localedir-name,
-    [  --with-localedir-name=DIR       specify where locales are installed (default: ${prefix}/share/locale)],
+AC_ARG_WITH([localedir-name],
+    [AS_HELP_STRING([--with-localedir-name=DIR],
+		    [specify where locales are installed (default: ${prefix}/share/locale)])],
     [LOCALEDIR="$withval"])
 AC_SUBST([LOCALEDIR])
 
 FONTFILE="\${DATADIR}/font/DejaVuSans.ttf"
-AC_ARG_WITH(font-path,
-    [  --with-font-path=FILE       specify the font file (default: ${datadir}/font/DejaVuSans.ttf)],
+AC_ARG_WITH([font-path],
+    [AS_HELP_STRING([--with-font-path=FILE],
+		    [specify the font file (default: ${datadir}/font/DejaVuSans.ttf)])],
     [FONTFILE="$withval"])
 AC_SUBST([FONTFILE])
+
+AC_ARG_ENABLE([autopackage],
+	[AS_HELP_STRING([--enable-autopackage],
+			[Enable autopackage @<:@default=disable@:>@])],
+	[],
+	[enable_autopackage=no])
+AM_CONDITIONAL([AUTOPACKAGE], [test "$enable_autopackage" = "yes"])
 
 AM_CONDITIONAL([STATIC], [test x$static = xyes])
 AM_CONDITIONAL([GCC], [test x$GXX = xyes])
@@ -315,14 +325,15 @@ AC_OUTPUT
 
 if test "${WIN32}" = "yes"; then INSTALL_OP="build NSIS installer..."
 else INSTALL_OP="install..."; fi
-AC_MSG_RESULT([
 
-Configuration complete
-
-* Game data will be installed into $DATADIR
-* Game locale will be installed into $LOCALEDIR
-* Font file will be $FONTFILE
-
-Execute make to compile then execute make install to $INSTALL_OP
-
-])
+   echo "Configuration complete"
+   echo ""
+if test "$enable_autopackage" = "yes"; then
+   echo "Use autopackage for file locations"
+else
+   echo "* Game data will be installed into $DATADIR"
+   echo "* Game locale will be installed into $LOCALEDIR"
+   echo "* Font file will be $FONTFILE"
+fi
+echo ""
+echo "Execute make to compile then execute make install to $INSTALL_OP"
