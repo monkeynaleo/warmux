@@ -1,22 +1,22 @@
+# translation of ro.po to Romanian
 # Romanian translation of the Wormux messages.
 # Copyright (C) YEAR Wormux Development Team
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Eddy Petrişor <eddy.petrisor@gmail.com>, 2006.
-# Eddy Petrișor <eddy.petrisor@gmail.com>, 2006.
+# Eddy Petrișor <eddy.petrisor@gmail.com>, 2006, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
 "POT-Creation-Date: 2007-02-15 22:34+0200\n"
-"PO-Revision-Date: 2006-11-21 17:22+0200\n"
+"PO-Revision-Date: 2007-02-16 01:26+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1))\n"
+"Plural-Forms:  nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
 "X-Generator: KBabel 1.11.4\n"
 "X-Poedit-Language: Romanian\n"
 "X-Poedit-Country: ROMANIA\n"
@@ -80,8 +80,9 @@ msgstr "%s e lângă o mină!"
 
 #: src/object/bonus_box.cpp:119
 #, c-format
+# XXX: having "the" there is not that smart, translations might not make sense.
 msgid "%s team already has infinite ammo for the %s!"
-msgstr ""
+msgstr "Echipa %s are deja muniţie infinită pentru %s!"
 
 #: src/weapon/skip_turn.cpp:41
 #, c-format
@@ -90,15 +91,23 @@ msgstr "Echipa %s a sărit peste tură."
 
 #: src/object/bonus_box.cpp:113
 #, fuzzy, c-format
+# XXX: the topic of the phrase might change for feminine, neutral or masculine in some languages
+# XXX: example: "cocktail Molotov" "cocktail-uri Molotov" "de cocktail-uri Molotov" for Romanian.
+# XXX: example: "lansator de grenade" "lansatoare de grenade" "de lasatoare de grenade"
+# XXX: example: "mină" "mine" "de mine"
+# XXX: Also, I can't insert the plural termination in there which can be different depending on gender and word.
+#
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
-msgstr[0] "Echipa %s a câştigat %u cocktail Molotov!"
-msgstr[1] "Echipa %s a câştigat %u cocktail-uri Molotov!"
-msgstr[2] "Echipa %s a câştigat %u de cocktail-uri Molotov"
+msgstr[0] "Echipa %s a câştigat %u %s!"
+msgstr[1] "Echipa %s a câştigat %u %s!"
+msgstr[2] "Echipa %s a câştigat %u de %s!"
 
 #: src/menu/options_menu.cpp:132
+# XXX: I guess this could have been marked with a simple * to avoid confusions
+# I personally know the context, but some might not
 msgid "(current)"
-msgstr ""
+msgstr "(actual)"
 
 #: src/interface/interface.cpp:175
 msgid "(dead)"
@@ -180,9 +189,8 @@ msgid "Credits"
 msgstr "Merite"
 
 #: src/weapon/disco_grenade.cpp:102
-#, fuzzy
 msgid "Disco Grenade"
-msgstr "Grenadă sfântă"
+msgstr "Grenadă disco"
 
 #: src/game/game.cpp:227
 msgid "Do you really want to quit? (Y/N)"
@@ -198,7 +206,7 @@ msgstr "Dinamită"
 
 #: src/game/game_loop.cpp:250 src/game/game_loop.cpp:256
 msgid "END OF GAME"
-msgstr ""
+msgstr "SFÂRŞITUL JOCULUI"
 
 #: src/tool/error.cpp:81
 #, c-format
@@ -217,8 +225,7 @@ msgstr "Eroare la încărcarea datelor pentru echipa %s:"
 
 #: src/game/config.cpp:230
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Eroare în timpul creări directorului „%s”: fişierul de configurare nu poate "
 "fi stocat."
@@ -388,7 +395,7 @@ msgstr "Numele jucătorului?"
 
 #: src/weapon/polecat.cpp:135
 msgid "Polecat Launcher"
-msgstr "Lansator de nevăstuici"
+msgstr "Lansator de sconcşi"
 
 #: src/menu/main_menu.cpp:116
 msgid "Quit"
@@ -400,7 +407,7 @@ msgstr "Ieşire din Wormux"
 
 #: src/game/config.cpp:153
 msgid "Reading personal config file"
-msgstr ""
+msgstr "Se citeşte fişierul personal de configurare"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
@@ -416,7 +423,7 @@ msgstr "Rulează jocul"
 
 #: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
-msgstr ""
+msgstr "Bară de derulare la margine"
 
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
@@ -480,7 +487,7 @@ msgstr "Antilopa gnu a părăsit câmpul de luptă înainte de a exploda"
 
 #: src/weapon/polecat.cpp:127
 msgid "The Polecat left the battlefield before exploding"
-msgstr "Nevăstuica a părăsit câmpul de luptă înainte de a exploda"
+msgstr "Sconcsul a părăsit câmpul de luptă înainte de a exploda"
 
 #: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
@@ -491,9 +498,8 @@ msgid "The ball left the battlefield before exploding"
 msgstr "Mingea a părăsit câmpul de luptă înainte de a exploda"
 
 #: src/weapon/disco_grenade.cpp:93
-#, fuzzy
 msgid "The disco grenade has left the dance floor before exploding"
-msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda"
+msgstr "Grenada disco a părăsit ringul de dans înainte de a exploda"
 
 #: src/weapon/grenade.cpp:57
 msgid "The grenade left the battlefield before exploding"
@@ -929,3 +935,4 @@ msgstr "general: "
 # URM0-2: string begins at URM0-1
 #~ msgid "some opponents."
 #~ msgstr "pentru a găsi adversari."
+
