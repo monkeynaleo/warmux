@@ -380,6 +380,10 @@ void Character::Draw()
   // Gone in another world ?
   if (IsGhost()) return;
 
+  // Character is visible on carema? If not, just leave the function
+  Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
+  if (!rect.Intersect(camera)) return;
+
   bool dessine_perte = (lost_energy != 0);
   if ((&ActiveCharacter() == this
     && GameLoop::GetInstance()->ReadState() != GameLoop::END_TURN)
