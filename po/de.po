@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-02-15 22:34+0200\n"
 "PO-Revision-Date: 2007-02-08 16:46+0100\n"
 "Last-Translator: Reiner Herrmann <reiner@reiner-h.de>\n"
 "Language-Team: German <wormux-dev@gna.org>\n"
@@ -22,7 +23,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Karte %s nicht gefunden :-("
 
-#: src/game/game_loop.cpp:702
+#: src/game/game_loop.cpp:703
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) ist gestorben."
@@ -37,7 +38,7 @@ msgstr "%s <%s> aka %s aus %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> aus %s"
 
-#: src/game/game_loop.cpp:681
+#: src/game/game_loop.cpp:682
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s begeht Selbstmord!"
@@ -47,22 +48,22 @@ msgstr "%s begeht Selbstmord!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:674
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ist ins Wasser gefallen."
 
-#: src/game/game_loop.cpp:685
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ist von der Karte gefallen!"
 
-#: src/game/game_loop.cpp:696
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s ist ein Psychopath, er hat ein Mitglied von Mannschaft %s getötet!"
 
-#: src/game/game_loop.cpp:691
+#: src/game/game_loop.cpp:692
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s stirbt durch seine Tollpatschigkeit!"
@@ -176,7 +177,7 @@ msgstr "Abspann"
 msgid "Disco Grenade"
 msgstr "Diskogranate"
 
-#: src/game/game.cpp:226
+#: src/game/game.cpp:227
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Wollen Sie das Programm wirklich beenden? (J/N)"
 
@@ -207,14 +208,15 @@ msgstr "Fehler beim Laden von Mannschaft %s:"
 msgid "Error loading team's data %s:"
 msgstr "Fehler beim Laden der Daten der Mannschaft %s:"
 
-#: src/game/config.cpp:232
+#: src/game/config.cpp:230
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Fehler beim Erstellen des Verzeichnisses  \"%s\": kann Konfigurationsdatei "
 "nicht speichern."
 
-#: src/game/config.cpp:145
+#: src/game/config.cpp:143
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Fehler beim Laden der Konfigurationsdatei: %s"
@@ -224,7 +226,7 @@ msgstr "Fehler beim Laden der Konfigurationsdatei: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Fehler beim Laden des Spielmodus %s (Datei %s):"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:183
 #, c-format
 msgid ""
 "Error:\n"
@@ -264,9 +266,10 @@ msgstr "Pistole"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
+msgstr ""
+"HOME Verzeichnis (Umgebungsvariable $HOME) konnte nicht gefunden werden!"
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:738
 msgid "Hurry up, you are too slow !!"
 msgstr "Beeile dich, du bist zu langsam !!"
 
@@ -348,7 +351,7 @@ msgstr "Netzwerkspiel"
 msgid "Ninjarope"
 msgstr "Ninjaseil"
 
-#: src/weapon/weapon.cpp:542
+#: src/weapon/weapon.cpp:539
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Kein Element <%s> in der XML-Config-Datei gefunden!"
@@ -389,7 +392,7 @@ msgstr "Verlassen"
 msgid "Quit Wormux"
 msgstr "Wormux verlassen"
 
-#: src/game/config.cpp:155
+#: src/game/config.cpp:153
 msgid "Reading personal config file"
 msgstr "Lese persönliche Konfigurationsdatei"
 
@@ -473,7 +476,8 @@ msgstr "Das Gnu hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/polecat.cpp:127
 msgid "The Polecat left the battlefield before exploding"
-msgstr "Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
+msgstr ""
+"Die Stinktier hat das Schlachtfeld verlassen bevor es explodieren konnte."
 
 #: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
@@ -485,11 +489,13 @@ msgstr "Der Ball hat das Schlachtfeld verlassen bevor er explodieren konnte."
 
 #: src/weapon/disco_grenade.cpp:93
 msgid "The disco grenade has left the dance floor before exploding"
-msgstr "Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
+msgstr ""
+"Die Diskogranate hat die Tanzfläche verlassen bevor sie explodieren konnte."
 
 #: src/weapon/grenade.cpp:57
 msgid "The grenade left the battlefield before exploding"
-msgstr "Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
+msgstr ""
+"Die Granate hat das Schlachtfeld verlassen bevor sie explodieren konnte."
 
 #: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
@@ -522,7 +528,7 @@ msgstr "Waffen"
 msgid "Website: "
 msgstr "Webseite: "
 
-#: src/game/game_loop.cpp:699
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wie peinlich für %s - er wurde mit einer einfachen Pistole getötet!"
@@ -558,7 +564,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Du brauchst mindestens zwei gültige Mannschaften!"
 
-#: src/weapon/launcher.cpp:464
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Dein Schuss ging daneben!"
 
@@ -828,4 +834,3 @@ msgstr "General: "
 #, fuzzy
 #~ msgid "some opponents."
 #~ msgstr "um Gegner zu finden."
-

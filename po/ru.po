@@ -8,6 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-02-15 22:34+0200\n"
 "PO-Revision-Date: 2006-06-16 11:42+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -26,7 +27,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/game/game_loop.cpp:702
+#: src/game/game_loop.cpp:703
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (команда %s) погибла."
@@ -41,7 +42,7 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:681
+#: src/game/game_loop.cpp:682
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -51,22 +52,22 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:674
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:685
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
 
-#: src/game/game_loop.cpp:696
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:691
+#: src/game/game_loop.cpp:692
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
@@ -187,7 +188,7 @@ msgstr ""
 msgid "Disco Grenade"
 msgstr "Граната"
 
-#: src/game/game.cpp:226
+#: src/game/game.cpp:227
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
@@ -219,13 +220,13 @@ msgstr "Ошибка при загрузке команды %s:"
 msgid "Error loading team's data %s:"
 msgstr "Ошибка при загрузке команды %s:"
 
-#: src/game/config.cpp:232
+#: src/game/config.cpp:230
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/config.cpp:145
+#: src/game/config.cpp:143
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
@@ -235,7 +236,7 @@ msgstr "Ошибка при загрузке режима игры %s (файл 
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:183
 #, c-format
 msgid ""
 "Error:\n"
@@ -279,7 +280,7 @@ msgstr "Пистолет"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Домашний каталог (переменная окружения $HOME) не найден!"
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:738
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -361,7 +362,7 @@ msgstr "Игра по сети"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:542
+#: src/weapon/weapon.cpp:539
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
@@ -404,7 +405,7 @@ msgstr "Выйти"
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/game/config.cpp:155
+#: src/game/config.cpp:153
 msgid "Reading personal config file"
 msgstr ""
 
@@ -546,7 +547,7 @@ msgstr "Оружие:"
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:699
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -583,7 +584,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 
-#: src/weapon/launcher.cpp:464
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 

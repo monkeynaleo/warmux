@@ -7,6 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
+"POT-Creation-Date: 2007-02-15 22:34+0200\n"
 "PO-Revision-Date: 2006-06-16 11:37+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: hu <gabo@lxp.hu>\n"
@@ -23,7 +24,7 @@ msgstr ""
 msgid "! Map %s not found :-("
 msgstr "Nem található %s térkép :-("
 
-#: src/game/game_loop.cpp:702
+#: src/game/game_loop.cpp:703
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -38,7 +39,7 @@ msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> %s csapatától"
 
-#: src/game/game_loop.cpp:681
+#: src/game/game_loop.cpp:682
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
@@ -48,22 +49,22 @@ msgstr "%s öngyilkos lett!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:674
+#: src/game/game_loop.cpp:675
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:685
+#: src/game/game_loop.cpp:686
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:696
+#: src/game/game_loop.cpp:697
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
 
-#: src/game/game_loop.cpp:691
+#: src/game/game_loop.cpp:692
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kicsit ügyefogyott volt, így hát távozott az élő sorából!"
@@ -183,7 +184,7 @@ msgstr ""
 msgid "Disco Grenade"
 msgstr "Gránát"
 
-#: src/game/game.cpp:226
+#: src/game/game.cpp:227
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Biztos, hogy ki szeretnél lépni? (Y/N) ?"
 
@@ -215,13 +216,13 @@ msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 msgid "Error loading team's data %s:"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/game/config.cpp:232
+#: src/game/config.cpp:230
 #, fuzzy, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/game/config.cpp:145
+#: src/game/config.cpp:143
 #, fuzzy, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
@@ -231,7 +232,7 @@ msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/game/game.cpp:184
+#: src/game/game.cpp:183
 #, c-format
 msgid ""
 "Error:\n"
@@ -276,7 +277,7 @@ msgstr "Pisztoly"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Nem található a felhasználó könyvtára!"
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:738
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -361,7 +362,7 @@ msgstr ""
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:542
+#: src/weapon/weapon.cpp:539
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
@@ -404,7 +405,7 @@ msgstr "Kilépés"
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/game/config.cpp:155
+#: src/game/config.cpp:153
 msgid "Reading personal config file"
 msgstr ""
 
@@ -541,7 +542,7 @@ msgstr "Fegyver"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game_loop.cpp:699
+#: src/game/game_loop.cpp:700
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"
@@ -577,7 +578,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Legalább két csapatot kell verbuválnod!"
 
-#: src/weapon/launcher.cpp:464
+#: src/weapon/launcher.cpp:455
 msgid "Your shot has missed!"
 msgstr "Ezt elnézted!"
 
