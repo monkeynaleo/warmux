@@ -15,6 +15,7 @@ msgstr ""
 "X-Poedit-Language: Slovak\n"
 "X-Poedit-Country: SLOVAKIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms:  nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: src/map/maps_list.cpp:282
 #, c-format
@@ -87,6 +88,7 @@ msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
 msgstr[0] "%s tím vyhral %u %s!"
 msgstr[1] "%s tími vyhrali %u %s!"
+msgstr[2] "%s tími vyhrali %u %s!"
 
 #: src/menu/options_menu.cpp:132
 msgid "(current)"
