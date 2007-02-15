@@ -23,6 +23,7 @@
 
 <contributors>
 	<section title="Translations">
+		<author><nickname>pepp</nickname><name>Pierre-eric Pelloux Prayer</name><description>Write small hack to optimize character drawing</description><email>pepp@neuf.fr</email><country>France</country></author>
 		<author><nickname>Alexandre</nickname><name>Alexandre PROKOUDINE</name><description>Translate Wormux into Russian</description><email>alexandre.prokoudine_AT_gmail_DOT_com</email><country>Russia</country></author>
 		<author><nickname>Axel</nickname><name>Axel ROUSSEAU</name><description>Translate Wormux 0.8 in Esperanto</description><email>axel584_AT_axel584_DOT_org</email><country>France</country></author>
 		<author><nickname>basse</nickname><name>Bastian SALMELA</name><description>Translate Wormux 0.7 in Finnish</description><email>asse_AT_kulma_DOT_org</email><country>Finland</country></author>
@@ -62,7 +63,7 @@
 		<author><nickname>Serge</nickname><name>Serge CLAUS</name><description>Wormux 0.7.4 package for Ubuntu Dapper</description><website>http://serge.claus.free.fr/</website><email>serge.claus_AT_free_DOT_fr</email><country>France</country></author>
 	</section>
 	<section title="Patches / Code">
-		<author><nickname>AbsintheSyringe</nickname><name>Adnan HODZIC</name><description>Physics constant for wind particles, Bug fixes, shotgun bug, blowthorch bug, ninja rope bug. Ex bonus box fixes, and weapon balance. Also write first Bosnian version of Wormux.</description><email>AbsintheSyringe_AT_gmail_DOT_com</email><country>Bosnia-Herzegovina</country></author> 
+		<author><nickname>AbsintheSyringe</nickname><name>Adnan HODZIC</name><description>Physics constant for wind particles, Bug fixes, shotgun bug, blowthorch bug, ninja rope bug. Ex bonus box fixes, and weapon balance. Also write first Bosnian version of Wormux.</description><email>AbsintheSyringe_AT_gmail_DOT_com</email><country>Bosnia-Herzegovina</country></author>
 		<author><nickname>Eric</nickname><name>Eric HOFFMANN</name><description>Wrote CPU limiter patch with Olivier SERRES</description><email>eric.hoffmann_AT_utbm_DOT_fr</email><country>France</country></author>
 		<author><nickname>François</nickname><name>François BLEIBEL</name><description>Write first network patch with Jerome Glatigny</description><email>francois.bleibel_AT_utbm_DOT_fr</email><country>France</country></author>
 		<author><nickname>Hanna</nickname><name>Hanna OLLILA</name><description>Fix old bug in option menu (crash because of video mode)</description><email>hamaolli_AT_cc.jyu_DOT_fi</email><country>Finland</country></author>
