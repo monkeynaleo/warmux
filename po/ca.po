@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-02-16 08:53+0200\n"
+"POT-Creation-Date: 2007-02-16 13:35+0200\n"
 "PO-Revision-Date: 2006-06-16 11:31+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: TeMpLeR <LL@li.org>\n"
@@ -19,11 +19,13 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s ha caigut del mapa!"
 
+#. Display a message in the network menu
 #: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
@@ -110,6 +112,7 @@ msgstr "%s esta aprop d'una mina!"
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
 
+#. Show message
 #: src/weapon/skip_turn.cpp:41
 #, fuzzy, c-format
 msgid "%s team has skipped its turn."
@@ -130,6 +133,7 @@ msgstr ""
 msgid "(dead)"
 msgstr "(mort)"
 
+#. Display number of ammo
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(ilimitat)"
@@ -143,6 +147,7 @@ msgstr "Atac aeri"
 msgid "Airhammer"
 msgstr ""
 
+#. We'll do as if NULL is for all teams
 #: src/team/results.cpp:143
 #, fuzzy
 msgid "All teams"
@@ -302,7 +307,8 @@ msgstr ""
 "Error :\n"
 "%s"
 
-#: src/menu/network_connection_menu.cpp:232
+#. translators: %s:%s will expand to something like "example.org:9999"
+#: src/menu/network_connection_menu.cpp:233
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Imposible obrir el directori dels skins (%s) !"
@@ -312,7 +318,7 @@ msgstr "Imposible obrir el directori dels skins (%s) !"
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
-#: src/menu/network_connection_menu.cpp:243
+#: src/menu/network_connection_menu.cpp:244
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
@@ -359,6 +365,7 @@ msgstr "Pistola"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "El directori HOME (la variable de entorn $HOME) no pot ser trobat !"
 
+#. Skip a line
 #: src/menu/network_connection_menu.cpp:110
 msgid "Have a good game!"
 msgstr ""
@@ -387,6 +394,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energia inicial:"
 
+#. Init all needed data
 #: src/game/game_loop.cpp:199
 msgid "Initialisation"
 msgstr "Inicialització"
@@ -409,13 +417,14 @@ msgid "Initialise teams"
 msgstr "Inicialització de les dades"
 
 #: src/object/objbox.cpp:141
-msgid "Its a present!"
+msgid "It's a present!"
 msgstr ""
 
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
 msgstr ""
 
+#. Skip a line
 #: src/menu/network_connection_menu.cpp:108 src/menu/network_menu.cpp:118
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
@@ -428,6 +437,7 @@ msgstr "Carrega les mapas"
 msgid "Load teams:"
 msgstr ""
 
+#. How many teams ?
 #: src/menu/network_teams_selection_box.cpp:33
 #, fuzzy
 msgid "Local teams:"
@@ -442,6 +452,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, fet per :"
 
+#. Load the map
 #: src/game/game_loop.cpp:202
 msgid "Maps"
 msgstr ""
@@ -502,6 +513,7 @@ msgstr ""
 msgid "Number of characters"
 msgstr "Nombre de jugadors per equip:"
 
+#. How many teams ?
 #: src/menu/teams_selection_box.cpp:31
 #, fuzzy
 msgid "Number of teams:"
@@ -543,6 +555,7 @@ msgstr "Mostra el nom del jugador?"
 msgid "Polecat Launcher"
 msgstr ""
 
+#. Server port
 #: src/menu/network_connection_menu.cpp:82
 msgid "Port:"
 msgstr ""
@@ -563,7 +576,8 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/menu/team_box.cpp:70
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:71
 msgid "Remote"
 msgstr ""
 
@@ -583,10 +597,12 @@ msgstr "Arrenca el joc"
 msgid "Scroll on border"
 msgstr ""
 
+#. Server address
 #: src/menu/network_connection_menu.cpp:76
 msgid "Server address:"
 msgstr ""
 
+#. Available on internet ?
 #: src/menu/network_connection_menu.cpp:88
 msgid "Server available on Internet"
 msgstr ""
@@ -604,6 +620,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr ""
 
+#. Skip a line
 #: src/menu/network_connection_menu.cpp:106
 msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
@@ -619,6 +636,7 @@ msgstr "Efectes sonors?"
 msgid "Sound frequency"
 msgstr "Efectes sonors?"
 
+#. Load teams' sound profiles
 #: src/game/game_loop.cpp:220
 #, fuzzy
 msgid "Sounds"
@@ -644,6 +662,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
+#. Init teams
 #: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr ""
@@ -754,6 +773,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 msgstr[1] ""
 
+#. Initialization of teams' energy
 #: src/game/game_loop.cpp:215
 #, fuzzy
 msgid "Weapons"
@@ -815,6 +835,7 @@ msgstr "Has fallat el tir!"
 msgid "done"
 msgstr ""
 
+#. Display player's name
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr ""
