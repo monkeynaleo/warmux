@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-02-16 13:35+0200\n"
+"POT-Creation-Date: 2007-02-16 15:04+0100\n"
 "PO-Revision-Date: 2007-02-16 09:59+0200\n"
 "Last-Translator: Eddy Petrișor <eddy.petrisor@gmail.com>\n"
 "Language-Team: Romanian <debian-l10n-romanian@lists.debian.org>\n"
@@ -709,8 +709,8 @@ msgstr "Grenada disco a părăsit ringul de dans înainte de a exploda"
 msgid "The grenade left the battlefield before exploding"
 msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Racheta a părăsit câmpul de luptă..."
 
@@ -850,6 +850,22 @@ msgstr "general: "
 #~ msgstr "Conectat!"
 
 #, fuzzy
+#~ msgid "  Most sold-out  :  "
+#~ msgstr "  Cel mai mare trădător :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "  Most useful   :  "
+#~ msgstr "  Cel mai folositor     :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "  Most useless  :  "
+#~ msgstr "  Cel mai inutil        :  %s (%i).\n"
+
+#, fuzzy
+#~ msgid "  Most violent  :  "
+#~ msgstr "  Cel mai violent       :  %s (%i).\n"
+
+#, fuzzy
 #~ msgid " - Server mode"
 #~ msgstr "Adresa serverului:"
 
@@ -874,6 +890,12 @@ msgstr "general: "
 #~ msgid "%i players ready"
 #~ msgstr "%i jucător e gata"
 
+#~ msgid "%s has lost %u point of energy."
+#~ msgid_plural "%s has lost %u points of energy."
+#~ msgstr[0] "%s a pierdut %u punct de energie."
+#~ msgstr[1] "%s a pierdut %u puncte de energie."
+#~ msgstr[2] "%s a pierdut %u de puncte de energie."
+
 #, fuzzy
 #~ msgid "%s has won %u points of energy!"
 #~ msgstr "%s a câştigat %u punct de energie!"
@@ -892,9 +914,65 @@ msgstr "general: "
 #~ msgid "%s team has won %u %ss!"
 #~ msgstr "Echipa %s a câştigat %u %s!"
 
+#~ msgid "%s team has won %u Automatic Bazooka!"
+#~ msgid_plural "%s team has won %u Automatic Bazookas!"
+#~ msgstr[0] "Echipa %s a câştigat %u rachetă automată!"
+#~ msgstr[1] "Echipa %s a câştigat %u rachete automate!"
+#~ msgstr[2] "Echipa %s a câştigat %u de rachete automate!"
+
+#~ msgid "%s team has won %u stick of Dynamite!"
+#~ msgid_plural "%s team has won %u sticks of Dynamite!"
+#~ msgstr[0] "Echipa %s a câştigat %u baton de dinamită!"
+#~ msgstr[1] "Echipa %s a câştigat %u batoane de dinamită!"
+#~ msgstr[2] "Echipa %s a câştigat %u de batoane de dinamită!"
+
+#~ msgid "%s team has won %u teleportation."
+#~ msgid_plural "%s team has won %u teleportations."
+#~ msgstr[0] "Echipa %s a câştigat %u teleportare."
+#~ msgstr[1] "Echipa %s a câştigat %u teleportări."
+#~ msgstr[2] "Echipa %s a câştigat %u de teleportări."
+
+#~ msgid "%s team has won.\n"
+#~ msgstr "Echipa %s a câştigat.\n"
+
+#~ msgid "'%s has won %u Air Attack"
+#~ msgid_plural "'%s has won %u Air Attacks"
+#~ msgstr[0] "'%s a câştigat %u atac aerian"
+#~ msgstr[1] "'%s a câştigat %u atacuri aeriene"
+#~ msgstr[2] "'%s a câştigat %u de atacuri aeriene"
+
+#~ msgid "'%s has won %u Anvil"
+#~ msgid_plural "'%s has won %u Anvil"
+#~ msgstr[0] "'%s a câştigat %u nicovală"
+#~ msgstr[1] "'%s a câştigat %u nicovale"
+#~ msgstr[2] "'%s a câştigat %u de nicovale"
+
+#~ msgid "'%s has won %u Baseball bat"
+#~ msgid_plural "'%s has won %u Baseball bats"
+#~ msgstr[0] "'%s a câştigat %u bâtă de basebal"
+#~ msgstr[1] "'%s a câştigat %u bâte de basebal"
+#~ msgstr[2] "'%s a câştigat %u de bâte de basebal"
+
+#~ msgid "'%s has won %u Holy grenade"
+#~ msgid_plural "'%s has won %u Holy grenades"
+#~ msgstr[0] "'%s a câştigat %u grenadă sfântă"
+#~ msgstr[1] "'%s a câştigat %u grenade sfinte"
+#~ msgstr[2] "'%s a câştigat %u de grenade sfinte"
+
+#~ msgid "'%s has won %u Low gravity"
+#~ msgid_plural "'%s has won %u Low gravity"
+#~ msgstr[0] "'%s a câştigat %u gravitaţie scăzută"
+#~ msgstr[1] "'%s a câştigat %u gravitaţii scăzute"
+#~ msgstr[2] "'%s a câştigat %u de gravitaţii scăzute"
+
 #, fuzzy
 #~ msgid "* Couldn't initialize SDL: "
 #~ msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
+
+#~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
+#~ msgstr ""
+#~ "<infinite_background> are nevoie ca <is_open> să fie activ pentru a "
+#~ "funcţiona corect!!"
 
 #, fuzzy
 #~ msgid "A fake server disconnected"
@@ -903,6 +981,10 @@ msgstr "general: "
 #, fuzzy
 #~ msgid "Add %s in team %s"
 #~ msgstr "Echipa %s nu poate fi găsită!"
+
+#, fuzzy
+#~ msgid "All teams results:\n"
+#~ msgstr "Rezultate generale:\n"
 
 #, fuzzy
 #~ msgid "Author"
@@ -961,19 +1043,31 @@ msgstr "general: "
 #~ msgid "Doesn't seem do be a valid server .."
 #~ msgstr "Nu pare a fi un server valid de Wormux..."
 
+#~ msgid "Duration of the end of a turn:"
+#~ msgstr "Durata sfârşitului de tură:"
+
 #, fuzzy
 #~ msgid "Dying"
 #~ msgstr "Seringă"
 
+#~ msgid "End of the game!\n"
+#~ msgstr "Jocul s-a terminat!\n"
+
 #, fuzzy
 #~ msgid "End of turn"
 #~ msgstr "Durata unei ture"
+
+#~ msgid "Error during loading skin %s:"
+#~ msgstr "Eroare în timpul încărcării aspectului %s:"
 
 #, fuzzy
 #~ msgid "Error: "
 #~ msgstr ""
 #~ "Eroare:\n"
 #~ "%s"
+
+#~ msgid "Game options:"
+#~ msgstr "Opţiuni ale jocului:"
 
 #, fuzzy
 #~ msgid "GameDraw:characters"
@@ -984,12 +1078,34 @@ msgstr "general: "
 #~ msgstr "Iniţializare echipe"
 
 #, fuzzy
+#~ msgid "Invalid index server adress!"
+#~ msgstr "Adresă de server nevalidă!"
+
+#~ msgid "Invalid port!"
+#~ msgstr "Port nevalid!"
+
+#~ msgid "Invalid server adress!"
+#~ msgstr "Adresă de server nevalidă!"
+
+#~ msgid "Invalid top server adress!"
+#~ msgstr "Adresă de server de navigare nevalidă!"
+
+#~ msgid "Is it a gift?"
+#~ msgstr "Oare e un cadou?"
+
+#, fuzzy
 #~ msgid "Load character %s"
 #~ msgstr "Numărul de personaje"
+
+#~ msgid "Load map"
+#~ msgstr "Încărcare hartă"
 
 #, fuzzy
 #~ msgid "Load music sample %s"
 #~ msgstr "Încărcare hărţi:"
+
+#~ msgid "Load skins:"
+#~ msgstr "Încărcare aspecte:"
 
 #, fuzzy
 #~ msgid "Loading config file"
@@ -1015,6 +1131,12 @@ msgstr "general: "
 #~ msgid "None"
 #~ msgstr "finalizat"
 
+#~ msgid "Number of players per team:"
+#~ msgstr "Jucători per echipă:"
+
+#~ msgid "Only the server can set the map!"
+#~ msgstr "Numai serverul poate configura harta!"
+
 # URM1-2
 #, fuzzy
 #~ msgid "Opening connection"
@@ -1028,9 +1150,16 @@ msgstr "general: "
 #~ msgid "Playing team : %i %s\n"
 #~ msgstr "Eroare la încărcarea echipei %s:"
 
+#~ msgid "Please tell us your opinion of Wormux via email:"
+#~ msgstr ""
+#~ "Vă rugăm să ne spuneţi părerea dvs. despre Wormux prin poştă electronică:"
+
 #, fuzzy
 #~ msgid "Select %s"
 #~ msgstr "Selectaţi echipele:"
+
+#~ msgid "Select the world:"
+#~ msgstr "Selectaţi lumea:"
 
 #, fuzzy
 #~ msgid "Send action %s"
@@ -1040,6 +1169,18 @@ msgstr "general: "
 #~ msgid "Server identified.."
 #~ msgstr "Serverul a fost pornit"
 
+# URM1-1: this translation is intentionally incomplete
+# URM1-1: follow-up is at the string commented
+# URM1-1: with "URM1"
+#~ msgid "So you have to restart Wormux after each"
+#~ msgstr "Deci va trebui să reporniţi Wormux după"
+
+#~ msgid "Team %s results:\n"
+#~ msgstr "Rezultatele echipei %s:\n"
+
+#~ msgid "The game has ended as a draw.\n"
+#~ msgstr "Jocul s-a terminat cu scor egal.\n"
+
 #, fuzzy
 #~ msgid "There are only %i teams."
 #~ msgstr "Există doar o echipă."
@@ -1047,6 +1188,13 @@ msgstr "general: "
 #, fuzzy
 #~ msgid "Trying a new server"
 #~ msgstr "Se începe un nou joc"
+
+#, fuzzy
+#~ msgid "Unable to contact an index server!"
+#~ msgstr "Nu a fost posibilă contactarea serverului"
+
+#~ msgid "Unable to contact top server!"
+#~ msgstr "Nu a fost posibilă conectarea la server-ul de navigare!"
 
 #, fuzzy
 #~ msgid "Unable to find file "
@@ -1084,14 +1232,34 @@ msgstr "general: "
 #~ msgid "Version "
 #~ msgstr "versiunea"
 
+#~ msgid "Wait for map"
+#~ msgstr "Se aşteaptă harta"
+
+#~ msgid "Wait for server"
+#~ msgstr "Se aşteaptă serverul"
+
+#~ msgid "Wait for server informations"
+#~ msgstr "Se aşteaptă informaţiile serverului"
+
+#, fuzzy
+#~ msgid "Wait! "
+#~ msgstr "Se aşteaptă echipele"
+
 #, fuzzy
 #~ msgid "Wait! %i players are not ready yet!"
 #~ msgstr "Aşteaptă! %i jucător nu e gata încă!"
+
+#~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
+#~ msgstr ""
+#~ "Atenţie! particulele de vânt au masa prea mică! Implicit ajustată la 0.3"
 
 # XXX: having "the" there is not that smart, translations might not make sense.
 #, fuzzy
 #~ msgid "Weapon %s already has infinite ammo"
 #~ msgstr "Echipa %s are deja muniţie infinită pentru %s!"
+
+#~ msgid "Weapon:"
+#~ msgstr "Arma:"
 
 #, fuzzy
 #~ msgid "Wormux"
@@ -1470,6 +1638,10 @@ msgstr "general: "
 #~ msgid "snipe_rifle_bullet"
 #~ msgstr "Puşcă cu lunetă"
 
+# URM0-2: string begins at URM0-1
+#~ msgid "some opponents."
+#~ msgstr "pentru a găsi adversari."
+
 #, fuzzy
 #~ msgid "sound"
 #~ msgstr "Sunete"
@@ -1549,175 +1721,3 @@ msgstr "general: "
 #, fuzzy
 #~ msgid "wormux_server.conf"
 #~ msgstr "Versiunea Wormux "
-
-#, fuzzy
-#~ msgid "  Most sold-out  :  "
-#~ msgstr "  Cel mai mare trădător :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most useful   :  "
-#~ msgstr "  Cel mai folositor     :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most useless  :  "
-#~ msgstr "  Cel mai inutil        :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid "  Most violent  :  "
-#~ msgstr "  Cel mai violent       :  %s (%i).\n"
-
-#~ msgid "%s has lost %u point of energy."
-#~ msgid_plural "%s has lost %u points of energy."
-#~ msgstr[0] "%s a pierdut %u punct de energie."
-#~ msgstr[1] "%s a pierdut %u puncte de energie."
-#~ msgstr[2] "%s a pierdut %u de puncte de energie."
-
-#~ msgid "%s team has won %u Automatic Bazooka!"
-#~ msgid_plural "%s team has won %u Automatic Bazookas!"
-#~ msgstr[0] "Echipa %s a câştigat %u rachetă automată!"
-#~ msgstr[1] "Echipa %s a câştigat %u rachete automate!"
-#~ msgstr[2] "Echipa %s a câştigat %u de rachete automate!"
-
-#~ msgid "%s team has won %u stick of Dynamite!"
-#~ msgid_plural "%s team has won %u sticks of Dynamite!"
-#~ msgstr[0] "Echipa %s a câştigat %u baton de dinamită!"
-#~ msgstr[1] "Echipa %s a câştigat %u batoane de dinamită!"
-#~ msgstr[2] "Echipa %s a câştigat %u de batoane de dinamită!"
-
-#~ msgid "%s team has won %u teleportation."
-#~ msgid_plural "%s team has won %u teleportations."
-#~ msgstr[0] "Echipa %s a câştigat %u teleportare."
-#~ msgstr[1] "Echipa %s a câştigat %u teleportări."
-#~ msgstr[2] "Echipa %s a câştigat %u de teleportări."
-
-#~ msgid "%s team has won.\n"
-#~ msgstr "Echipa %s a câştigat.\n"
-
-#~ msgid "'%s has won %u Air Attack"
-#~ msgid_plural "'%s has won %u Air Attacks"
-#~ msgstr[0] "'%s a câştigat %u atac aerian"
-#~ msgstr[1] "'%s a câştigat %u atacuri aeriene"
-#~ msgstr[2] "'%s a câştigat %u de atacuri aeriene"
-
-#~ msgid "'%s has won %u Anvil"
-#~ msgid_plural "'%s has won %u Anvil"
-#~ msgstr[0] "'%s a câştigat %u nicovală"
-#~ msgstr[1] "'%s a câştigat %u nicovale"
-#~ msgstr[2] "'%s a câştigat %u de nicovale"
-
-#~ msgid "'%s has won %u Baseball bat"
-#~ msgid_plural "'%s has won %u Baseball bats"
-#~ msgstr[0] "'%s a câştigat %u bâtă de basebal"
-#~ msgstr[1] "'%s a câştigat %u bâte de basebal"
-#~ msgstr[2] "'%s a câştigat %u de bâte de basebal"
-
-#~ msgid "'%s has won %u Holy grenade"
-#~ msgid_plural "'%s has won %u Holy grenades"
-#~ msgstr[0] "'%s a câştigat %u grenadă sfântă"
-#~ msgstr[1] "'%s a câştigat %u grenade sfinte"
-#~ msgstr[2] "'%s a câştigat %u de grenade sfinte"
-
-#~ msgid "'%s has won %u Low gravity"
-#~ msgid_plural "'%s has won %u Low gravity"
-#~ msgstr[0] "'%s a câştigat %u gravitaţie scăzută"
-#~ msgstr[1] "'%s a câştigat %u gravitaţii scăzute"
-#~ msgstr[2] "'%s a câştigat %u de gravitaţii scăzute"
-
-#~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-#~ msgstr ""
-#~ "<infinite_background> are nevoie ca <is_open> să fie activ pentru a "
-#~ "funcţiona corect!!"
-
-#, fuzzy
-#~ msgid "All teams results:\n"
-#~ msgstr "Rezultate generale:\n"
-
-#~ msgid "Duration of the end of a turn:"
-#~ msgstr "Durata sfârşitului de tură:"
-
-#~ msgid "End of the game!\n"
-#~ msgstr "Jocul s-a terminat!\n"
-
-#~ msgid "Error during loading skin %s:"
-#~ msgstr "Eroare în timpul încărcării aspectului %s:"
-
-#~ msgid "Game options:"
-#~ msgstr "Opţiuni ale jocului:"
-
-#, fuzzy
-#~ msgid "Invalid index server adress!"
-#~ msgstr "Adresă de server nevalidă!"
-
-#~ msgid "Invalid port!"
-#~ msgstr "Port nevalid!"
-
-#~ msgid "Invalid server adress!"
-#~ msgstr "Adresă de server nevalidă!"
-
-#~ msgid "Invalid top server adress!"
-#~ msgstr "Adresă de server de navigare nevalidă!"
-
-#~ msgid "Is it a gift?"
-#~ msgstr "Oare e un cadou?"
-
-#~ msgid "Load map"
-#~ msgstr "Încărcare hartă"
-
-#~ msgid "Load skins:"
-#~ msgstr "Încărcare aspecte:"
-
-#~ msgid "Number of players per team:"
-#~ msgstr "Jucători per echipă:"
-
-#~ msgid "Only the server can set the map!"
-#~ msgstr "Numai serverul poate configura harta!"
-
-#~ msgid "Please tell us your opinion of Wormux via email:"
-#~ msgstr ""
-#~ "Vă rugăm să ne spuneţi părerea dvs. despre Wormux prin poştă electronică:"
-
-#~ msgid "Select the world:"
-#~ msgstr "Selectaţi lumea:"
-
-# URM1-1: this translation is intentionally incomplete
-# URM1-1: follow-up is at the string commented
-# URM1-1: with "URM1"
-#~ msgid "So you have to restart Wormux after each"
-#~ msgstr "Deci va trebui să reporniţi Wormux după"
-
-#~ msgid "Team %s results:\n"
-#~ msgstr "Rezultatele echipei %s:\n"
-
-#~ msgid "The game has ended as a draw.\n"
-#~ msgstr "Jocul s-a terminat cu scor egal.\n"
-
-#, fuzzy
-#~ msgid "Unable to contact an index server!"
-#~ msgstr "Nu a fost posibilă contactarea serverului"
-
-#~ msgid "Unable to contact top server!"
-#~ msgstr "Nu a fost posibilă conectarea la server-ul de navigare!"
-
-#~ msgid "Wait for map"
-#~ msgstr "Se aşteaptă harta"
-
-#~ msgid "Wait for server"
-#~ msgstr "Se aşteaptă serverul"
-
-#~ msgid "Wait for server informations"
-#~ msgstr "Se aşteaptă informaţiile serverului"
-
-#, fuzzy
-#~ msgid "Wait! "
-#~ msgstr "Se aşteaptă echipele"
-
-#~ msgid "Warning! Winds particles mass is too low! Set by default to 0.3"
-#~ msgstr ""
-#~ "Atenţie! particulele de vânt au masa prea mică! Implicit ajustată la 0.3"
-
-#~ msgid "Weapon:"
-#~ msgstr "Arma:"
-
-# URM0-2: string begins at URM0-1
-#~ msgid "some opponents."
-#~ msgstr "pentru a găsi adversari."

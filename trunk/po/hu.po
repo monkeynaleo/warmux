@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-02-16 13:35+0200\n"
+"POT-Creation-Date: 2007-02-16 15:04+0100\n"
 "PO-Revision-Date: 2006-06-16 11:37+0100\n"
 "Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: hu <gabo@lxp.hu>\n"
@@ -711,8 +711,8 @@ msgstr ""
 msgid "The grenade left the battlefield before exploding"
 msgstr ""
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr ""
 

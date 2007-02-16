@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-02-16 13:35+0200\n"
+"POT-Creation-Date: 2007-02-16 15:04+0100\n"
 "PO-Revision-Date: 2006-07-06 17:14+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
@@ -705,8 +705,8 @@ msgstr "Raketten har forladt slagmarken..."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Raketten har forladt slagmarken..."
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 #, fuzzy
 msgid "The rocket has left the battlefield..."
 msgstr "Raketten har forladt slagmarken..."

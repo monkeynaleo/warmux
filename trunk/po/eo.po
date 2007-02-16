@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Wormux 0.8b1\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-02-16 13:35+0200\n"
+"POT-Creation-Date: 2007-02-16 15:04+0100\n"
 "PO-Revision-Date: 2006-06-20 11:35+0100\n"
 "Last-Translator: Axel Rousseau <axel584 AT axel584.org>\n"
 "Language-Team: eo <victor.stinner AT haypocalc.com>\n"
@@ -712,8 +712,8 @@ msgstr "La fuzilo foriris en alian mondon ..."
 msgid "The grenade left the battlefield before exploding"
 msgstr "La fuzilo foriris en alian mondon ..."
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 #, fuzzy
 msgid "The rocket has left the battlefield..."
 msgstr "La fuzilo foriris en alian mondon ..."
