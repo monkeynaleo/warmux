@@ -112,7 +112,7 @@ void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
         txt << Format(ngettext(
                 "%s team has won %u %s!",
                 "%s team has won %u %ss!",
-                2),
+                nbr_ammo),
             equipe.GetName().c_str(), nbr_ammo, WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
     }
     else {
