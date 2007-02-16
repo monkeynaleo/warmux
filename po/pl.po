@@ -688,8 +688,8 @@ msgstr "Granat Disco opuścił pole bitwy zanim wybuchł"
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granat opuścił pole bitwy zanim wybuchł"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Rakieta opuściła pole bitwy..."
 
