@@ -67,6 +67,7 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
 
   team_logo->SetSurface(_team.flag);
   if (!_team.IsLocal() && !_team.IsLocalAI()) {
+    // translators: this is the team listing and will expand in a context like "OOo team - Remote"
     team_name->SetText(_team.GetName() + " - " + _("Remote"));
   } else {
     team_name->SetText(_team.GetName());

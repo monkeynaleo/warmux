@@ -85,7 +85,7 @@ void Medkit::ApplyMedkit(Team &equipe, Character &ver) {
  txt << Format(ngettext(
                 "%s has won %u point of energy!",
                 "%s has won %u points of energy!",
-                100),
+                nbr_health),
             ver.GetName().c_str(), nbr_health);
   ver.SetEnergyDelta (nbr_health);
   GameMessages::GetInstance()->Add (txt.str());
