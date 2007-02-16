@@ -375,12 +375,15 @@ MSGID_BUGS_ADDRESS = wormux-dev@gna.org
 
 localedir=@LOCALEDIR@
 
-XGETTEXT = xgettext
-MSGMERGE = msgmerge
+XGETTEXT = @XGETTEXT@ 
+# add as automated comments all strings preceeding the gettexized line
+# since it seems that in most cases the comments are useful
+XGETTEXT_OPTIONS = -c --keyword=_ --keyword=N_ -k='XCOMMENT'
+MSGMERGE = @MSGMERGE@
 MSGMERGE_UPDATE = @MSGMERGE@ --quiet --update
-MSGINIT = msginit
-MSGCONV = msgconv
-MSGFILTER = msgfilter
+MSGINIT = @MSGINIT@
+MSGCONV = @MSGCONV@
+MSGFILTER = @MSGFILTER@
 
 # This is computed as $(foreach file, $(POTFILES), $(top_srcdir)/$(file))
 POTFILES_DEPS = @POTFILES_DEPS@
@@ -442,7 +445,7 @@ $(DOMAIN).pot-update: $(POTFILES_DEPS)
 	@$(XGETTEXT) \
 	  -o $(DOMAIN).pot -k'_' -s --from-code iso-8859-1 \
 	  --default-domain=$(DOMAIN) --directory=$(top_srcdir) \
-	  --add-comments=TRANSLATORS: $(XGETTEXT_OPTIONS) \
+	  $(XGETTEXT_OPTIONS) \
 	  --copyright-holder='$(COPYRIGHT_HOLDER)' \
 	  --msgid-bugs-address='$(MSGID_BUGS_ADDRESS)' \
 	  $(POTFILES)
