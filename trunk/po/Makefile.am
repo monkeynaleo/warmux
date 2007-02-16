@@ -378,7 +378,7 @@ localedir=@LOCALEDIR@
 XGETTEXT = @XGETTEXT@ 
 # add as automated comments all strings preceeding the gettexized line
 # since it seems that in most cases the comments are useful
-XGETTEXT_OPTIONS = -c --keyword=_ --keyword=N_ -k='XCOMMENT'
+XGETTEXT_OPTIONS = -c --keyword=_ --keyword=N_
 MSGMERGE = @MSGMERGE@
 MSGMERGE_UPDATE = @MSGMERGE@ --quiet --update
 MSGINIT = @MSGINIT@
