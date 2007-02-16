@@ -229,9 +229,10 @@ void NetworkConnectionMenu::sig_ok()
     conn = network.ClientConnect(server_address->GetText(), port_number->GetText());
     if (!network.IsConnected() || conn != CONNECTED) {
       DispNetworkError(conn);
+      // translators: %s:%s will expand to something like "example.org:9999"
       msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
-				 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
-				  c_red);
+         (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
+         c_red);
       return;
     }
     break;
