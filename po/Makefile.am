@@ -443,7 +443,7 @@ stamp-po: $(srcdir)/$(DOMAIN).pot
 $(DOMAIN).pot-update: $(POTFILES_DEPS)
 	@echo "Create $(DOMAIN).pot"
 	@$(XGETTEXT) \
-	  -o $(DOMAIN).pot -k'_' -s --from-code iso-8859-1 \
+	  -o $(DOMAIN).pot -s --from-code iso-8859-1 \
 	  --default-domain=$(DOMAIN) --directory=$(top_srcdir) \
 	  $(XGETTEXT_OPTIONS) \
 	  --copyright-holder='$(COPYRIGHT_HOLDER)' \
