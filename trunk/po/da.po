@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: 2007-02-16 08:53+0200\n"
+"POT-Creation-Date: 2007-02-16 13:35+0200\n"
 "PO-Revision-Date: 2006-07-06 17:14+0200\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
@@ -17,11 +17,13 @@ msgstr ""
 "X-Generator: KBabel 1.11.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 #, fuzzy
 msgid " has joined the party"
 msgstr "%s faldt ud af banen!"
 
+#. Display a message in the network menu
 #: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
@@ -108,6 +110,7 @@ msgstr "%s er ved en mine!"
 msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
 
+#. Show message
 #: src/weapon/skip_turn.cpp:41
 #, fuzzy, c-format
 msgid "%s team has skipped its turn."
@@ -128,6 +131,7 @@ msgstr ""
 msgid "(dead)"
 msgstr "(død)"
 
+#. Display number of ammo
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(ubegrænset)"
@@ -141,6 +145,7 @@ msgstr "Luftangreb"
 msgid "Airhammer"
 msgstr ""
 
+#. We'll do as if NULL is for all teams
 #: src/team/results.cpp:143
 #, fuzzy
 msgid "All teams"
@@ -298,7 +303,8 @@ msgstr ""
 "Fejl:\n"
 "%s"
 
-#: src/menu/network_connection_menu.cpp:232
+#. translators: %s:%s will expand to something like "example.org:9999"
+#: src/menu/network_connection_menu.cpp:233
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
@@ -308,7 +314,7 @@ msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
 
-#: src/menu/network_connection_menu.cpp:243
+#: src/menu/network_connection_menu.cpp:244
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Ikke i stand til at åbne bane kataloget (%s)!"
@@ -356,6 +362,7 @@ msgstr "Skyder"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 
+#. Skip a line
 #: src/menu/network_connection_menu.cpp:110
 msgid "Have a good game!"
 msgstr ""
@@ -383,6 +390,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energi som udgangspunkt:"
 
+#. Init all needed data
 #: src/game/game_loop.cpp:199
 msgid "Initialisation"
 msgstr "Klargører"
@@ -405,13 +413,14 @@ msgid "Initialise teams"
 msgstr "Klargører hold"
 
 #: src/object/objbox.cpp:141
-msgid "Its a present!"
+msgid "It's a present!"
 msgstr ""
 
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
 msgstr ""
 
+#. Skip a line
 #: src/menu/network_connection_menu.cpp:108 src/menu/network_menu.cpp:118
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
@@ -424,6 +433,7 @@ msgstr "Indlæser baner:"
 msgid "Load teams:"
 msgstr "Indlæser hold:"
 
+#. How many teams ?
 #: src/menu/network_teams_selection_box.cpp:33
 #, fuzzy
 msgid "Local teams:"
@@ -438,6 +448,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Banen %s, en kreation af:"
 
+#. Load the map
 #: src/game/game_loop.cpp:202
 msgid "Maps"
 msgstr "Baner"
@@ -499,6 +510,7 @@ msgstr ""
 msgid "Number of characters"
 msgstr "Antal krigere per hold:"
 
+#. How many teams ?
 #: src/menu/teams_selection_box.cpp:31
 #, fuzzy
 msgid "Number of teams:"
@@ -540,6 +552,7 @@ msgstr "Vis krigers navn?"
 msgid "Polecat Launcher"
 msgstr ""
 
+#. Server port
 #: src/menu/network_connection_menu.cpp:82
 msgid "Port:"
 msgstr ""
@@ -560,7 +573,8 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/menu/team_box.cpp:70
+#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
+#: src/menu/team_box.cpp:71
 msgid "Remote"
 msgstr ""
 
@@ -581,10 +595,12 @@ msgstr "Kør spil"
 msgid "Scroll on border"
 msgstr ""
 
+#. Server address
 #: src/menu/network_connection_menu.cpp:76
 msgid "Server address:"
 msgstr ""
 
+#. Available on internet ?
 #: src/menu/network_connection_menu.cpp:88
 msgid "Server available on Internet"
 msgstr ""
@@ -602,6 +618,7 @@ msgstr ""
 msgid "Sniper Rifle"
 msgstr ""
 
+#. Skip a line
 #: src/menu/network_connection_menu.cpp:106
 msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
@@ -617,6 +634,7 @@ msgstr "Lydeffekter?"
 msgid "Sound frequency"
 msgstr "Lydeffekter?"
 
+#. Load teams' sound profiles
 #: src/game/game_loop.cpp:220
 msgid "Sounds"
 msgstr "Lyde"
@@ -641,6 +659,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
+#. Init teams
 #: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr "Hold"
@@ -751,6 +770,7 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 msgstr[1] ""
 
+#. Initialization of teams' energy
 #: src/game/game_loop.cpp:215
 msgid "Weapons"
 msgstr "Våben"
@@ -813,6 +833,7 @@ msgstr "Dit skud missede!"
 msgid "done"
 msgstr "færdig"
 
+#. Display player's name
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr ""
