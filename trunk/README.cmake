@@ -48,6 +48,9 @@ where XXXXX is one of the following:
 To get a more verbose compilation output use:
      make VERBOSE=1
 
+To enable profiling support (e.g. for gprof) add the option:
+    -DPROFILE=1
+
 
 Compilation outside of source-dir:
 ----------------------------------
