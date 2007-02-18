@@ -75,6 +75,10 @@ public:
   static GameMode * GetInstance();
 
   bool Load(void);
+
+  bool LoadFromString(const std::string& contents);
+  bool ExportToString(std::string& contents);
+
   bool AllowCharacterSelection() const;
 
 private:

@@ -52,8 +52,8 @@ GameMode::GameMode()
   damage_per_fall_unit = 7;
   duration_move_player = 3;
   allow_character_selection = BEFORE_FIRST_ACTION_AND_END_TURN;
-  character.init_energy = 100; /* overvriten whenreading XML */
-  character.max_energy = 100; /* overvriten whenreading XML */
+  character.init_energy = 100; /* overwritten when reading XML */
+  character.max_energy = 100; /* overwritten when reading XML */
   character.mass = 100;
   character.air_resist_factor = 1.0;
   character.jump_strength = 8;
@@ -200,6 +200,66 @@ bool GameMode::Load(void)
     std::cerr << Format(_("Error while loading game mode %s (file %s):"),
                         m_current.c_str(), fullname.c_str())
 			  << std::endl << e.what() << std::endl;
+    return false;
+  }
+  return true;
+}
+
+// Load the game mode from a string (probably from network)
+bool GameMode::LoadFromString(const std::string& contents)
+{
+  Config * config = Config::GetInstance();
+  m_current = config->GetGameMode();
+  try
+  {
+    XmlReader doc;
+    if(!doc.LoadFromString(contents))
+      return false;
+    if(!LoadXml(doc.GetRoot()))
+      return false;
+  }
+  catch (const xmlpp::exception &e)
+  {
+    std::cerr << Format(_("Error while loading game mode %s from memory:"),
+                        m_current.c_str())
+	      << std::endl << e.what() << std::endl;
+    return false;
+  }
+  return true;
+}
+
+bool GameMode::ExportToString(std::string& contents)
+{
+  std::string fullname;
+  Config * config = Config::GetInstance();
+  std::string game_mode_name = config->GetGameMode();
+
+  contents = "";
+
+  try
+  {
+    XmlReader doc;
+    std::string filename =
+      PATH_SEPARATOR
+      + std::string("game_mode")
+      + std::string(PATH_SEPARATOR)
+      + game_mode_name
+      + std::string(".xml");
+
+    fullname = config->GetPersonalDir() + filename;
+
+    if(!IsFileExist(fullname))
+      fullname = config->GetDataDir() + filename;
+    if(!doc.Load(fullname))
+      return false;
+
+    contents = doc.ExportToString();
+  }
+  catch (const xmlpp::exception &e)
+  {
+    std::cerr << Format(_("Error while exporting game mode %s (file %s):"),
+                        m_current.c_str(), fullname.c_str())
+	      << std::endl << e.what() << std::endl;
     return false;
   }
   return true;
