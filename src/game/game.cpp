@@ -140,8 +140,6 @@ void Game::Start()
     do
     {
       isGameLaunched = true;
-      GameLoop::GetInstance()->fps.Reset();
-
       GameLoop::GetInstance()->Run();
 
       MSG_DEBUG( "game", "End of game_loop.Run()" );
