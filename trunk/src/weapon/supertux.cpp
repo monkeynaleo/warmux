@@ -22,6 +22,7 @@
 #include "supertux.h"
 #include "explosion.h"
 #include "../game/config.h"
+#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../include/action_handler.h"
@@ -32,6 +33,7 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
+
 const uint time_delta = 40;
 const uint animation_deltat = 50;
 
@@ -70,7 +72,7 @@ void SuperTux::Refresh()
 
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
   {
-    Action a(Action::ACTION_SUPERTUX_STATE);
+    Action a(Action::ACTION_WEAPON_SUPERTUX_STATE);
     a.Push(angle_rad);
     a.Push(GetPhysX());
     a.Push(GetPhysY());
@@ -104,6 +106,17 @@ void SuperTux::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("Bye bye tux..."));
   WeaponProjectile::SignalOutOfMap();
+
+  // To go further in the game loop
+  static_cast<TuxLauncher *>(launcher)->EndOfTurn();
+}
+
+void SuperTux::Explosion()
+{
+  WeaponProjectile::Explosion();
+  
+  // To go further in the game loop
+  static_cast<TuxLauncher *>(launcher)->EndOfTurn();
 }
 
 //-----------------------------------------------------------------------------
@@ -126,6 +139,9 @@ TuxLauncher::TuxLauncher() :
 {
   m_name = _("SuperTux");
   ReloadLauncher();
+
+  // unit will be used when the supertux disappears
+  use_unit_on_first_shoot = false;
 }
 
 WeaponProjectile * TuxLauncher::GetProjectileInstance()
@@ -137,7 +153,17 @@ WeaponProjectile * TuxLauncher::GetProjectileInstance()
 bool TuxLauncher::p_Shoot ()
 {
   current_tux = static_cast<SuperTux *>(projectile);
-  return WeaponLauncher::p_Shoot();
+  bool r = WeaponLauncher::p_Shoot();
+
+  if (r) m_is_active = true;
+  return r;
+}
+
+void TuxLauncher::EndOfTurn()
+{
+  // To go further in the game loop
+  m_is_active = false;
+  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
 void TuxLauncher::HandleKeyPressed_MoveRight()
