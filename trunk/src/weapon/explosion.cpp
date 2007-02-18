@@ -194,14 +194,14 @@ void ApplyExplosion_server (const Point2i &pos,
 {
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
-  Action a_begin_sync(Action::ACTION_SYNC_BEGIN);
+  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
 
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
     end=teams_list.playing_list.end();
 
-  Action* send_char = new Action(Action::ACTION_SET_CHARACTER_PHYSICS);
+  Action* send_char = new Action(Action::ACTION_CHARACTER_SET_PHYSICS);
 
   for (int team_no = 0; it != end; ++it, ++team_no)
   {
@@ -239,6 +239,6 @@ void ApplyExplosion_server (const Point2i &pos,
   a->Push(smoke);
 
   action_handler->NewAction(a);
-  Action a_sync_end(Action::ACTION_SYNC_END);
+  Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
   network.SendAction(&a_sync_end);
 }

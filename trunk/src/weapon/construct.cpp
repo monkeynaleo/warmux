@@ -56,7 +56,6 @@ bool Construct::p_Shoot ()
     return false;
   jukebox.Play("share", "weapon/construct");
   world.MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
-  GameLoop::GetInstance()->interaction_enabled = false;
   return true;
 }
 
@@ -105,7 +104,7 @@ void Construct::HandleMouseWheelDown()
 
 void Construct::Up()
 {
-  Action a(Action::ACTION_CONSTRUCTION_UP);
+  Action a(Action::ACTION_WEAPON_CONSTRUCTION_UP);
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     network.SendAction(&a);
   angle += angle_step;
@@ -113,7 +112,7 @@ void Construct::Up()
 
 void Construct::Down()
 {
-  Action a(Action::ACTION_CONSTRUCTION_DOWN);
+  Action a(Action::ACTION_WEAPON_CONSTRUCTION_DOWN);
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     network.SendAction(&a);
   angle -= angle_step;

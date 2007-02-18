@@ -201,15 +201,15 @@ bool Weapon::CanChangeWeapon() const
 void Weapon::NewActionShoot() const
 {
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  Action a_begin_sync(Action::ACTION_SYNC_BEGIN);
+  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
   SendCharacterPosition();
-  Action * shoot = new Action(Action::ACTION_SHOOT,
+  Action * shoot = new Action(Action::ACTION_WEAPON_SHOOT,
                               m_strength,
                               ActiveCharacter().GetAbsFiringAngle());
   shoot->StoreActiveCharacter();
   ActionHandler::GetInstance()->NewAction(shoot);
-  Action a_end_sync(Action::ACTION_SYNC_END);
+  Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
   network.SendAction(&a_end_sync);
 
 }

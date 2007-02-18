@@ -150,7 +150,7 @@ void TeamBox::ValidOptions() const
 
     // send team configuration to the remote clients
     if (network.IsConnected()) {
-      Action* a = new Action(Action::ACTION_UPDATE_TEAM, associated_team->GetId());
+      Action* a = new Action(Action::ACTION_MENU_UPDATE_TEAM, associated_team->GetId());
       a->Push(associated_team->GetPlayerName());
       a->Push(int(associated_team->GetNbCharacters()));
       ActionHandler::GetInstance()->NewAction (a);

@@ -128,7 +128,7 @@ void MoveCharacterLeft(Character &character){
     MoveCharacter(character);
   }
   else{
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_CHARACTER_DIRECTION,-1));
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHARACTER_SET_DIRECTION,-1));
     character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
@@ -150,7 +150,7 @@ void MoveCharacterRight (Character &character)
   }
   else
   {
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_CHARACTER_DIRECTION,1));
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHARACTER_SET_DIRECTION,1));
     character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
@@ -167,7 +167,7 @@ void SendCharacterPosition()
   network.SendAction(a);
   delete a;
 
-  Action a_set_skin(Action::ACTION_SET_SKIN,ActiveCharacter().body->GetClothe());
+  Action a_set_skin(Action::ACTION_CHARACTER_SET_SKIN,ActiveCharacter().body->GetClothe());
   a_set_skin.Push(ActiveCharacter().body->GetMovement());
   a_set_skin.Push((int)ActiveCharacter().body->GetFrame());
   network.SendAction(&a_set_skin);

@@ -56,7 +56,7 @@ bool Teleportation::p_Shoot ()
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   
-  GameLoop::GetInstance()->interaction_enabled = false;
+  //  GameLoop::GetInstance()->interaction_enabled = false;
 
   jukebox.Play("share", "weapon/teleport_start");
 
@@ -82,7 +82,7 @@ void Teleportation::Refresh()
     ActiveCharacter().SetSpeed(0.0,0.0);
     ActiveCharacter().Show();
     jukebox.Play("share","weapon/teleport_end");
-    GameLoop::GetInstance()->interaction_enabled = true;
+    //    GameLoop::GetInstance()->interaction_enabled = true;
     return;
   }
 }
