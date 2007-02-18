@@ -42,11 +42,13 @@ class Blowtorch : public Weapon
     void p_Deselect();
     void Refresh();
 
-    void EndTurn();
     void RepeatShoot();
   public:
     Blowtorch();
     BlowtorchConfig& cfg();
+
+    virtual void SignalTurnEnd();
+    virtual void ActionStopUse();
 
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();

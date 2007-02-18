@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "../weapon/blowtorch.h"
+#include "../include/action_handler.h"
 #include "../tool/i18n.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
@@ -51,12 +52,18 @@ void Blowtorch::p_Deselect()
   m_is_active = false;
 }
 
-void Blowtorch::EndTurn()
+void Blowtorch::SignalTurnEnd()
 {
   ActiveCharacter().body->ResetWalk();
   ActiveCharacter().body->StopWalk();
   ActiveTeam().AccessNbUnits() = 0;
   m_is_active = false;
+}
+
+void Blowtorch::ActionStopUse()
+{
+  SignalTurnEnd();
+  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
 bool Blowtorch::p_Shoot()
@@ -82,18 +89,14 @@ bool Blowtorch::p_Shoot()
 
 void Blowtorch::RepeatShoot()
 {
-  if (m_is_active) 
-  {
-    uint time = Time::GetInstance()->Read() - old_timer;
-    uint tmp = Time::GetInstance()->Read();
-    
-    if (time >= pause_time)
+  uint time = Time::GetInstance()->Read() - old_timer;
+  uint tmp = Time::GetInstance()->Read();
+  
+  if (time >= pause_time)
     {
-      m_is_active = false;
       NewActionShoot();
       old_timer = tmp;
     }
-  }
 }
 
 void Blowtorch::HandleKeyPressed_Shoot()
@@ -104,17 +107,13 @@ void Blowtorch::HandleKeyPressed_Shoot()
 void Blowtorch::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
-    m_is_active = true;
     RepeatShoot();
-  } else {
-    // no more ammo unit -> end of turn
-    EndTurn();
   }
 }
 
 void Blowtorch::HandleKeyReleased_Shoot()
 {
-  EndTurn();
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
 }
 
 //-------------------------------------------------------------------------------------
