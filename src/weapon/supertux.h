@@ -58,6 +58,7 @@ class SuperTux : public WeaponProjectile
     void turn_left();
     void turn_right();
     void Shoot(double strength);
+    virtual void Explosion();
   protected:
     void SignalOutOfMap();
 };
@@ -67,7 +68,8 @@ class TuxLauncher : public WeaponLauncher
   private:
     SuperTux * current_tux;
   public:
-    TuxLauncher();  
+    TuxLauncher(); 
+    void EndOfTurn(); // should be called only by SuperTux
 
     virtual void HandleKeyPressed_MoveRight();
     virtual void HandleKeyRefreshed_MoveRight();
