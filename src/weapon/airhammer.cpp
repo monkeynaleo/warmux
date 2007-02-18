@@ -115,18 +115,14 @@ bool Airhammer::p_Shoot()
 
 void Airhammer::RepeatShoot()
 {
-  if (m_is_active) 
-  {
-    uint time = Time::GetInstance()->Read() - m_last_jolt;
-    uint tmp = Time::GetInstance()->Read();
-    
-    if (time >= MIN_TIME_BETWEEN_JOLT)
+  uint time = Time::GetInstance()->Read() - m_last_jolt;
+  uint tmp = Time::GetInstance()->Read();
+  
+  if (time >= MIN_TIME_BETWEEN_JOLT)
     {
-      m_is_active = false;
       NewActionShoot();
       m_last_jolt = tmp;
     }
-  }
 }
 
 //-----------------------------------------------------------------------------
@@ -134,6 +130,20 @@ void Airhammer::RepeatShoot()
 void Airhammer::Refresh()
 {
 }
+
+void Airhammer::SignalTurnEnd()
+{
+  // It's too late !
+  m_is_active = false;
+}
+
+void Airhammer::ActionStopUse()
+{
+  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
+  m_is_active = false;
+  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+}
+
 
 //-----------------------------------------------------------------------------
 
@@ -145,19 +155,13 @@ void Airhammer::HandleKeyPressed_Shoot()
 void Airhammer::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
-    m_is_active = true;
     RepeatShoot();
-  } else {
-    // no more ammo unit -> end of turn
-    m_is_active = false; 
   }
 }
 
 void Airhammer::HandleKeyReleased_Shoot()
 {
-  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
-  m_is_active = false;
-  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
 }
 
 //-----------------------------------------------------------------------------

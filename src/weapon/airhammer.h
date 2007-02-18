@@ -54,6 +54,9 @@ class Airhammer : public Weapon
   public:
     Airhammer();
     AirhammerConfig &cfg();
+    
+    virtual void SignalTurnEnd();
+    virtual void ActionStopUse();
 
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();
