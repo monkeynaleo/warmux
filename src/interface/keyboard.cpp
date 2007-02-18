@@ -182,30 +182,31 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
       
     case KEY_MOVE_RIGHT:
       ActiveCharacter().HandleKeyPressed_MoveRight();
-      goto pressed_accepted;
+      break;
     case KEY_MOVE_LEFT:
       ActiveCharacter().HandleKeyPressed_MoveLeft();
-      goto pressed_accepted;	
+      break;	
     case KEY_UP:
       ActiveCharacter().HandleKeyPressed_Up();
-      goto pressed_accepted;
+      break;
     case KEY_DOWN:
       ActiveCharacter().HandleKeyPressed_Down();
-      goto pressed_accepted;
+      break;
     case KEY_JUMP:
       ActiveCharacter().HandleKeyPressed_Jump();
-      goto pressed_accepted;
+      break;
     case KEY_HIGH_JUMP:
       ActiveCharacter().HandleKeyPressed_HighJump();
-      goto pressed_accepted;
+      break;
     case KEY_BACK_JUMP:
       ActiveCharacter().HandleKeyPressed_BackJump();
-      goto pressed_accepted;
+      break;
     case KEY_SHOOT:
       // Shoot key is not accepted in HAS_PLAYED state
       return;
     default:
-      break;
+      // key not supported
+      return;
     } 
   } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
     
@@ -214,38 +215,36 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
       
     case KEY_MOVE_RIGHT:
       ActiveTeam().AccessWeapon().HandleKeyPressed_MoveRight();
-      goto pressed_accepted;
+      break;
     case KEY_MOVE_LEFT:
       ActiveTeam().AccessWeapon().HandleKeyPressed_MoveLeft();
-      goto pressed_accepted;	
+      break;	
     case KEY_UP:
       ActiveTeam().AccessWeapon().HandleKeyPressed_Up();
-      goto pressed_accepted;
+      break;
     case KEY_DOWN:
       ActiveTeam().AccessWeapon().HandleKeyPressed_Down();
-      goto pressed_accepted;
+      break;
     case KEY_JUMP:
       ActiveTeam().AccessWeapon().HandleKeyPressed_Jump();
-      goto pressed_accepted;
+      break;
     case KEY_HIGH_JUMP:
       ActiveTeam().AccessWeapon().HandleKeyPressed_HighJump();
-      goto pressed_accepted;
+      break;
     case KEY_BACK_JUMP:
       ActiveTeam().AccessWeapon().HandleKeyPressed_BackJump();
-      goto pressed_accepted;
+      break;
     case KEY_SHOOT:
       if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
 	ActiveTeam().AccessWeapon().HandleKeyPressed_Shoot();
-	goto pressed_accepted;
+	break;
       }
     default:
-      break;
+      // key not supported
+      return;
     } 
   }
 
-  return;
-
- pressed_accepted:
   PressedKeys[key] = true ;
 }
 
@@ -265,7 +264,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       Game::GetInstance()->SetEndOfGameStatus( true );
       return;
     case KEY_PAUSE:
-      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PAUSE));
+      Game::GetInstance()->TogglePause();
       return;
     case KEY_FULLSCREEN:
       AppWormux::GetInstance()->video.ToggleFullscreen();
@@ -310,7 +309,6 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
     if (ActiveCharacter().IsDead()) return;
     if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
 
-
     if (GameLoop::GetInstance()->ReadState() == GameLoop::HAS_PLAYED) {
 
       switch (key) {
@@ -338,9 +336,9 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       case KEY_SHOOT:
       // Shoot key is not accepted in HAS_PLAYED state
 	return;
-      default:
-	break;
-	
+      default: 
+	// Key not supported
+	return; 
       }
     } else if  (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
       
@@ -426,7 +424,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
 
     case KEY_NEXT_CHARACTER:
       if (GameMode::GetInstance()->AllowCharacterSelection()) {
-	Action * next_character = new Action(Action::ACTION_NEXT_CHARACTER);
+	Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
 	next_character->StoreActiveCharacter();
 	ActiveTeam().NextCharacter();
 	next_character->StoreActiveCharacter();
@@ -459,15 +457,14 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       weapon_sort = 8;
       break;
     default:
-      break ;
+      // Key not supported
+      return;
     }
     
     if ( weapon_sort != -1 ) {
       Weapon::Weapon_type weapon;
       if (WeaponsList::GetInstance()->GetWeaponBySort(weapon_sort, weapon))
-	ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHANGE_WEAPON, weapon));
-      
-      return;
+	ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, weapon));
     }
   }
 }

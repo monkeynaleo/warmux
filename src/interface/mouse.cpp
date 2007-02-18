@@ -115,7 +115,7 @@ void Mouse::ActionLeftClic()
   // - Do nothing
   // - Choose a target but don't fire
   // - Choose a target and fire it !
-  Action* a = new Action(Action::ACTION_SET_TARGET);
+  Action* a = new Action(Action::ACTION_WEAPON_SET_TARGET);
   a->Push(GetWorldPosition().x);
   a->Push(GetWorldPosition().y);
   ActionHandler::GetInstance()->NewAction (a);
