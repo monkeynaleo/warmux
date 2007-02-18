@@ -31,20 +31,21 @@
 
 class GameLoop
 {
+public:
+  typedef enum {
+    PLAYING = 0,
+    HAS_PLAYED = 1,
+    END_TURN = 2
+  } game_loop_state_t;
+
 private:
-  int state;
+  game_loop_state_t state;
   uint pause_seconde;
   uint duration;
   ObjBox * current_ObjBox;
   bool give_objbox;
 
-public:
-  static const int PLAYING = 0;
-  static const int HAS_PLAYED = 1;
-  static const int END_TURN = 2;
-
   FramePerSecond fps;
-  Chat chatsession;
 
   static GameLoop * singleton;
   GameLoop();
@@ -55,7 +56,7 @@ public:
   void Init();
 
   bool character_already_chosen;
-  bool interaction_enabled;
+  Chat chatsession;
 
   // Draw to screen
   void Draw();
@@ -70,8 +71,8 @@ public:
   void PingClient();
 
   // Read/Set State
-  int ReadState() const { return state; }
-  void SetState(int new_state, bool begin_game=false);
+  game_loop_state_t ReadState() const { return state; }
+  void SetState(game_loop_state_t new_state, bool begin_game=false);
 
   // Signal death of a player
   void SignalCharacterDeath (Character *character);

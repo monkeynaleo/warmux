@@ -60,8 +60,6 @@
 
 #define ENABLE_LIMIT_FPS
 
-bool game_fin_partie;
-
 GameLoop * GameLoop::singleton = NULL;
 
 GameLoop * GameLoop::GetInstance()
@@ -89,7 +87,7 @@ void GameLoop::InitGameData_NetServer()
 
   network.RejectIncoming();
 
-  Action a_change_state(Action::ACTION_CHANGE_STATE);
+  Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
   network.SendAction ( &a_change_state );
   network.state = Network::NETWORK_INIT_GAME;
 
@@ -133,7 +131,7 @@ void GameLoop::InitGameData_NetClient()
   teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
   lst_objects.PlaceMines();
 
-  Action a_change_state(Action::ACTION_CHANGE_STATE);
+  Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
 
   network.SendAction (&a_change_state);
   while (network.state != Network::NETWORK_READY_TO_PLAY)
@@ -386,7 +384,7 @@ void GameLoop::CallDraw()
 
 void GameLoop::PingClient()
 {
-  Action * a = new Action(Action::ACTION_PING);
+  Action * a = new Action(Action::ACTION_NETWORK_PING);
   ActionHandler::GetInstance()->NewAction(a);
 }
 
@@ -503,7 +501,7 @@ ObjBox * GameLoop::GetCurrentBox() const
   return current_ObjBox;
 }
 
-void GameLoop::SetState(int new_state, bool begin_game)
+void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
 {
   ActionHandler * action_handler = ActionHandler::GetInstance();
 
@@ -564,7 +562,7 @@ void GameLoop::SetState(int new_state, bool begin_game)
       if( network.IsServer() )
       {
         // Tell to clients which character in the team is now playing
-        Action playing_char(Action::ACTION_CHANGE_CHARACTER);
+        Action playing_char(Action::ACTION_GAMELOOP_CHANGE_CHARACTER);
         playing_char.StoreActiveCharacter();
         network.SendAction(&playing_char);
 
