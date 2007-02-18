@@ -89,9 +89,6 @@ void SubMachineGun::IncMissedShots()
 
 bool SubMachineGun::p_Shoot()
 {
-  if (m_is_active)
-    return false;
-
   projectile->Shoot(SUBMACHINE_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
@@ -102,7 +99,6 @@ bool SubMachineGun::p_Shoot()
   particle.AddNow(pos, 1, particle_BULLET, true, angle,
   	                   5.0 + (Time::GetInstance()->Read() % 6));
 
-  m_is_active = true;
   announce_missed_shots = false;
   return true;
 }
@@ -115,18 +111,20 @@ void SubMachineGun::p_Deselect()
 // Overide regular Refresh method
 void SubMachineGun::RepeatShoot()
 {
-  if ( m_is_active )
-  {
-    uint tmp = Time::GetInstance()->Read();
-    uint time = tmp - m_last_fire_time;
-
-    if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
+  uint tmp = Time::GetInstance()->Read();
+  uint time = tmp - m_last_fire_time;
+  
+  if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
     {
-      m_is_active = false;
       NewActionShoot();
       m_last_fire_time = tmp;
     }
-  }
+}
+
+void SubMachineGun::SignalTurnEnd()
+{
+  // It's too late !
+  m_is_active = false;
 }
 
 void SubMachineGun::HandleKeyPressed_Shoot()
@@ -137,12 +135,8 @@ void SubMachineGun::HandleKeyPressed_Shoot()
 void SubMachineGun::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
-    m_is_active = true;
     RepeatShoot();
-  } else {
-    // no more ammo unit -> end of turn
-    m_is_active = false; 
-  }
+  } 
 }
 
 void SubMachineGun::HandleKeyReleased_Shoot()
