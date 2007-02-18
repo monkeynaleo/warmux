@@ -523,7 +523,7 @@ void WeaponLauncher::HandleKeyReleased_More()
 
 void WeaponLauncher::NetworkSetTimeoutProjectile()
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_TIMEOUT, 
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_SET_TIMEOUT, 
 						     projectile->m_timeout_modifier));
 }
 

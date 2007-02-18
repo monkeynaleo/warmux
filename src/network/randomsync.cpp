@@ -52,7 +52,7 @@ void RandomSync::GenerateTable()
   //Add a random number to the table, send it over network if needed
   double nbr = rand();
   AddToTable(nbr);
-  if(network.IsServer()) ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SEND_RANDOM,nbr));
+  if(network.IsServer()) ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_SEND_RANDOM,nbr));
 }
 
 void RandomSync::AddToTable(double nbr)

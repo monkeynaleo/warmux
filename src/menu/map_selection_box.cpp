@@ -141,7 +141,7 @@ void MapSelectionBox::ChangeMap(int index)
   // Callback other network players
   if(network.IsServer())
     {
-      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_SET_MAP, 
+      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP, 
 					    MapsList::GetInstance()->lst[selected_map_index].ReadName()));
     }
 

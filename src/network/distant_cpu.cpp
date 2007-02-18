@@ -43,7 +43,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
   // what teams / maps have already been selected
   if( network.IsServer() )
   {
-    Action a(Action::ACTION_SET_MAP, ActiveMap().ReadName());
+    Action a(Action::ACTION_MENU_SET_MAP, ActiveMap().ReadName());
     int size;
     char* pack;
     a.WritePacket(pack, size);
@@ -55,7 +55,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
       team != teams_list.playing_list.end();
       ++team)
     {
-      Action b(Action::ACTION_NEW_TEAM, (*team)->GetId());
+      Action b(Action::ACTION_MENU_ADD_TEAM, (*team)->GetId());
       b.Push((*team)->GetPlayerName());
       b.Push((int)(*team)->GetNbCharacters());
       b.WritePacket(pack, size);
@@ -87,7 +87,7 @@ DistantComputer::~DistantComputer()
       team != owned_teams.end();
       ++team)
   {
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_DEL_TEAM, *team));
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, *team));
   }
   owned_teams.clear();
 
@@ -144,7 +144,7 @@ int DistantComputer::ReceiveDatas(char* & buf)
 void DistantComputer::SendDatas(char* packet, int size_tmp)
 {
   SDL_LockMutex(sock_lock);
-MSG_DEBUG("network","locked");
+  MSG_DEBUG("network","locked");
   Uint32 size;
   SDLNet_Write32(size_tmp, &size);
   SDLNet_TCP_Send(sock,&size,4);
@@ -152,7 +152,7 @@ MSG_DEBUG("network","locked");
   MSG_DEBUG("network","%i sent", 4 + size_tmp);
 
   SDL_UnlockMutex(sock_lock);
-MSG_DEBUG("network","unlocked");
+  MSG_DEBUG("network","unlocked");
 }
 
 std::string DistantComputer::GetAdress()
@@ -170,7 +170,7 @@ std::string DistantComputer::GetAdress()
 void DistantComputer::ManageTeam(Action* team)
 {
   std::string name = team->PopString();
-  if(team->GetType() == Action::ACTION_NEW_TEAM)
+  if(team->GetType() == Action::ACTION_MENU_ADD_TEAM)
   {
     owned_teams.push_back(name);
 
@@ -178,20 +178,18 @@ void DistantComputer::ManageTeam(Action* team)
     Team * tmp = teams_list.FindById(name, index);
     tmp->SetRemote();
     
-    Action* copy = new Action(Action::ACTION_NEW_TEAM, name);
+    Action* copy = new Action(Action::ACTION_MENU_ADD_TEAM, name);
     copy->Push( team->PopString() );
     copy->Push( team->PopInt() );
     ActionHandler::GetInstance()->NewAction(copy, false);
   }
-  else
-  if(team->GetType() == Action::ACTION_DEL_TEAM)
+  else if(team->GetType() == Action::ACTION_MENU_DEL_TEAM)
   {
     std::list<std::string>::iterator it;
     it = find(owned_teams.begin(), owned_teams.end(), name);
-    std::cout << "ManageTeam : erase " << name << std::endl;
     assert(it != owned_teams.end());
     owned_teams.erase(it);
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_DEL_TEAM, name), false);
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, name), false);
   }
   else
     assert(false);

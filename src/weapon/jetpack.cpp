@@ -69,7 +69,7 @@ void JetPack::Refresh()
     ActiveCharacter().SetExternForceXY(F);
     ActiveCharacter().UpdatePosition();
     SendCharacterPosition();
-    Action a(Action::ACTION_SET_CHARACTER_PHYSICS);
+    Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
     a.StoreActiveCharacter();
     network.SendAction(&a);
 

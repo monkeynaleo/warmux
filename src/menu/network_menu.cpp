@@ -176,7 +176,7 @@ void NetworkMenu::__sig_ok()
   if(network.IsClient())
   {
     // Wait for the server, and stay in the menu map / team can still be changed
-    Action a(Action::ACTION_CHANGE_STATE);
+    Action a(Action::ACTION_NETWORK_CHANGE_STATE);
     network.SendAction(&a);
     while(network.state != Network::NETWORK_INIT_GAME)
     {

@@ -353,7 +353,7 @@ void Network::ReceiveActions()
         printf("New client connected\n");
         if(connected_player >= max_player_number)
           RejectIncoming();
-        ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_ASK_VERSION));
+        ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_ASK_VERSION));
       }
       SDL_Delay(100);
     }
@@ -391,8 +391,8 @@ void Network::ReceiveActions()
 	  break;
 	}
 
-        if( a->GetType() == Action::ACTION_NEW_TEAM
-        ||  a->GetType() == Action::ACTION_DEL_TEAM)
+        if( a->GetType() == Action::ACTION_MENU_ADD_TEAM
+        ||  a->GetType() == Action::ACTION_MENU_DEL_TEAM)
         {
           (*dst_cpu)->ManageTeam(a);
           delete a;
@@ -409,8 +409,8 @@ void Network::ReceiveActions()
         }
 
         // Repeat the packet to other clients:
-        if(a->GetType() != Action::ACTION_SEND_VERSION
-        && a->GetType() != Action::ACTION_CHANGE_STATE
+        if(a->GetType() != Action::ACTION_RULES_SEND_VERSION
+        && a->GetType() != Action::ACTION_NETWORK_CHANGE_STATE
         && a->GetType() != Action::ACTION_CHAT_MESSAGE)
         for(std::list<DistantComputer*>::iterator client = cpu.begin();
             client != cpu.end();
