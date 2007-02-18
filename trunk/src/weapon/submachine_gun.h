@@ -51,6 +51,7 @@ class SubMachineGun : public WeaponLauncher
     void p_Deselect();
   public:
     SubMachineGun();
+    virtual void SignalTurnEnd();
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();
     virtual void HandleKeyReleased_Shoot();
