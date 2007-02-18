@@ -381,9 +381,6 @@ void Team::LoadGamingData(uint howmany)
   if(network.IsConnected())
   {
     m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
-    m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_AIR_HAMMER)->GetName() ] = 0;
-    m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_BLOWTORCH)->GetName() ] = 0;
-    m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_SUBMACHINE_GUN)->GetName() ] = 0;
   }
 
   active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
