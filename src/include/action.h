@@ -39,30 +39,68 @@ private:
 public:
   typedef enum
   {
-    // Game action.
-    ACTION_MOVE_LEFT,   ACTION_MOVE_RIGHT, ACTION_UP,   ACTION_DOWN, ACTION_JUMP,
-    ACTION_HIGH_JUMP,   ACTION_BACK_JUMP, ACTION_SHOOT, ACTION_CHANGE_WEAPON,
-    ACTION_WIND,        ACTION_NEXT_CHARACTER,          ACTION_CHANGE_CHARACTER,
-    ACTION_CHANGE_TEAM, ACTION_SET_SKIN,                ACTION_SYNC_BEGIN,
-    ACTION_SYNC_END,    ACTION_EXPLOSION,               ACTION_SUPERTUX_STATE,
-    ACTION_WEAPON_1,    ACTION_WEAPON_2,                ACTION_WEAPON_3,
-    ACTION_WEAPON_4,    ACTION_WEAPON_5,                ACTION_WEAPON_6,
-    ACTION_WEAPON_7,    ACTION_WEAPON_8,                ACTION_WEAPON_9,
-    ACTION_WEAPON_MORE, ACTION_WEAPON_LESS,             ACTION_SET_TARGET,
-    ACTION_SET_TIMEOUT, ACTION_CONSTRUCTION_UP,         ACTION_CONSTRUCTION_DOWN,
-    ACTION_SET_CHARACTER_ENERGY, ACTION_WEAPON_STOP_USE,
+    ACTION_NICKNAME,       
+    ACTION_NETWORK_CHANGE_STATE,
 
-    // Game initialisation
-    ACTION_PING,        ACTION_SET_GAME_MODE,           ACTION_SET_MAP,
-    ACTION_UPDATE_TEAM, ACTION_NEW_TEAM,                ACTION_DEL_TEAM,
-    ACTION_ASK_VERSION, ACTION_ASK_TEAM,                ACTION_SEND_VERSION,
-    ACTION_SEND_TEAM,   ACTION_SEND_RANDOM,             ACTION_CHAT_MESSAGE,
-    ACTION_NICKNAME,    ACTION_SET_CHARACTER_PHYSICS,   ACTION_SET_CHARACTER_DIRECTION,
-    ACTION_PAUSE,       ACTION_CHANGE_STATE
+    // ########################################################
+    ACTION_PLAYER_CHANGE_WEAPON,
+    ACTION_PLAYER_NEXT_CHARACTER,
+    ACTION_GAMELOOP_CHANGE_CHARACTER,
+    ACTION_GAMELOOP_NEXT_TEAM,
+
+    // ########################################################
+    // To be sure that rules will be the same on each computer
+    ACTION_RULES_ASK_VERSION,
+    ACTION_RULES_SEND_VERSION,
+    ACTION_RULES_SET_GAME_MODE,
+
+    // ########################################################
+    // Chat message
+    ACTION_CHAT_MESSAGE,
+
+    // Map selection in network menu
+    ACTION_MENU_SET_MAP,
+
+    // Teams selection in network menu
+    ACTION_MENU_ADD_TEAM, 
+    ACTION_MENU_DEL_TEAM, 
+    ACTION_MENU_UPDATE_TEAM,
+
+    // ########################################################
+    // Character's move
+    ACTION_CHARACTER_MOVE_LEFT,   ACTION_CHARACTER_MOVE_RIGHT,
+    ACTION_CHARACTER_UP,          ACTION_CHARACTER_DOWN,
+    ACTION_CHARACTER_JUMP,        ACTION_CHARACTER_HIGH_JUMP,   ACTION_CHARACTER_BACK_JUMP,
+    
+    ACTION_CHARACTER_SET_ENERGY,
+    ACTION_CHARACTER_SET_PHYSICS,
+    ACTION_CHARACTER_SET_DIRECTION,
+    ACTION_CHARACTER_SET_SKIN,
+
+    // ########################################################
+    // Using Weapon
+    ACTION_WEAPON_SHOOT,
+    ACTION_WEAPON_STOP_USE,
+
+    // Quite standard weapon options
+    ACTION_WEAPON_SET_TIMEOUT, 
+    ACTION_WEAPON_SET_TARGET,
+
+    // Special weapon options
+    ACTION_WEAPON_SUPERTUX_STATE,
+    ACTION_WEAPON_CONSTRUCTION_UP,
+    ACTION_WEAPON_CONSTRUCTION_DOWN,
+
+    // ########################################################
+    ACTION_NETWORK_SYNC_BEGIN,
+    ACTION_NETWORK_SYNC_END,    
+    ACTION_EXPLOSION,  
+    ACTION_WIND,   
+    ACTION_NETWORK_PING,
+    ACTION_NETWORK_SEND_RANDOM,
+
+    // ########################################################
   } Action_t;
-
-  static const Action_t ACTION_FIRST = ACTION_MOVE_LEFT; /* keep this as the first name in enum */
-  static const Action_t ACTION_LAST  = ACTION_CHANGE_STATE; /* keep this as the last name in enum */
 
   //inline Action_t &operator++() { ;}
 
