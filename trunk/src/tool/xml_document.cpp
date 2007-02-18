@@ -38,6 +38,21 @@ bool XmlReader::Load(const std::string &filename)
   return IsOk();
 }
 
+bool XmlReader::LoadFromString(const std::string &contents)
+{
+  // Activate DTD validation parser
+  //  parser.set_validate (true);
+
+  // Read string in memory
+  parser.parse_memory(contents);
+  return IsOk();
+}
+
+std::string XmlReader::ExportToString()
+{
+  return parser.get_document()->write_to_string();
+}
+
 xmlpp::Element* XmlReader::GetMarker(const xmlpp::Node *x, 
                                      const std::string &name)
 {
@@ -295,4 +310,9 @@ bool XmlWriter::Save()
     return false;
   }
   return true;
+}
+
+std::string XmlWriter::SaveToString()
+{
+  return m_doc->write_to_string(m_encoding);
 }

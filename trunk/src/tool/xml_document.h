@@ -15,8 +15,12 @@ public:
   xmlpp::DomParser parser;
 
 public:
-  // Load an XML document
+  // Load an XML document from a file
   bool Load(const std::string &nomfich);
+
+  // Load an XML document from a string in memory
+  bool LoadFromString(const std::string &contents);
+  std::string ExportToString();
 
   bool IsOk() const;
 
@@ -106,6 +110,8 @@ public:
 		    const std::string& comment);
 
   bool Save();
+
+  std::string SaveToString();
 };
 
 #endif /* XML_DOCUMENT_H */
