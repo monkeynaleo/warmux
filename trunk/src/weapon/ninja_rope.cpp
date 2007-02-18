@@ -249,7 +249,7 @@ bool NinjaRope::TryBreakNode(int currentSense)
   angularSpeed = ActiveCharacter().GetAngularSpeed();
   currentAngle = ActiveCharacter().GetRopeAngle();
 
-  if ( (rope_nodes.size() == 1) &&              // We cannot break the initial node.
+  if ( (rope_nodes.size() != 1) &&              // We cannot break the initial node.
        (nodeSense * currentSense < 0) ) // Cannot break a node if we are in the
                                         // same sense of the node.
     {
