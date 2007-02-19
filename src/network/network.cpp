@@ -438,8 +438,8 @@ void Network::SendAction(Action* a)
   int size;
   char* packet;
   a->WritePacket(packet, size);
-
-  assert(*((int*)packet) != 0 );
+  
+  assert(packet != NULL);
   SendPacket(packet, size);
 
   free(packet);
