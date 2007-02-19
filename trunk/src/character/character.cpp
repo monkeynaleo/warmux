@@ -909,9 +909,8 @@ void Character::HandleKeyRefreshed_Up()
 	  do_nothing_time = Time::GetInstance()->Read();
 	  CharacterCursor::GetInstance()->Hide();
 	  AddFiringAngle(-DELTA_CROSSHAIR);
-	  Action* a = BuildActionSendCharacterPhysics((int)GetTeamIndex(),
-						      (int)GetCharacterIndex());
-	  ActionHandler::GetInstance()->NewAction(a);
+	  SendCharacterInfos((int)GetTeamIndex(),
+			     (int)GetCharacterIndex());
 	}
     }
 }
@@ -934,9 +933,8 @@ void Character::HandleKeyRefreshed_Down()
 	  do_nothing_time = Time::GetInstance()->Read();
 	  CharacterCursor::GetInstance()->Hide();
 	  AddFiringAngle(DELTA_CROSSHAIR);
-	  Action* a = BuildActionSendCharacterPhysics((int)GetTeamIndex(),
-						      (int)GetCharacterIndex());
-	  ActionHandler::GetInstance()->NewAction(a);
+	  SendCharacterInfos((int)GetTeamIndex(),
+			     (int)GetCharacterIndex());
 	}
     }
 }

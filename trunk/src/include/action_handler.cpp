@@ -274,7 +274,6 @@ void Action_Menu_DelTeam (Action *a)
 void SyncCharacters()
 {
   assert(network.IsServer());
-  ActionHandler* action_handler = ActionHandler::GetInstance();
 
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
@@ -292,8 +291,7 @@ void SyncCharacters()
     for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
       // Sync the character's position, energy, ...
-      Action * a = BuildActionSendCharacterPhysics(team_no, char_no);
-      action_handler->NewAction(a);
+      SendCharacterInfos(team_no, char_no);
     }
   }
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
@@ -335,11 +333,15 @@ void Action_Character_SetSkin (Action *a)
   }
 }
 
-Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
+// Send character infos on network (it's totally stupid to send it locally ;-)
+void SendCharacterInfos(int team_no, int char_no)
 {
+  assert(ActiveTeam().IsLocal());
+
   Action* a = new Action(Action::ACTION_CHARACTER_SET_PHYSICS);
   a->StoreCharacter(team_no, char_no);
-  return a;
+  network.SendAction(a);
+  delete a;
 }
 
 // ########################################################
