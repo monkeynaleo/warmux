@@ -300,18 +300,6 @@ void SyncCharacters()
   network.SendAction(&a_sync_end);
 }
 
-void Action_Character_MoveRight (Action *a)
-{
-  assert(false);
-  MoveCharacterRight (ActiveCharacter());
-}
-
-void Action_Character_MoveLeft (Action *a)
-{
-  assert(false);
-  MoveCharacterLeft (ActiveCharacter());
-}
-
 void Action_Character_Jump (Action *a)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
@@ -570,8 +558,6 @@ ActionHandler::ActionHandler()
 
   // ########################################################
   // Character's move
-  Register (Action::ACTION_CHARACTER_MOVE_LEFT, "CHARACTER_move_left", &Action_Character_MoveLeft);
-  Register (Action::ACTION_CHARACTER_MOVE_RIGHT, "CHARACTER_move_right", &Action_Character_MoveRight);
   Register (Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
   Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
   Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
