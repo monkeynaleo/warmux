@@ -59,10 +59,9 @@ void Suicide::Refresh()
   {
     ActiveCharacter().DisableDeathExplosion();
     ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
-    Action* a = new Action(Action::ACTION_CHARACTER_SET_ENERGY);
-    a->Push((int)ActiveCharacter().GetTeamIndex());
-    a->Push((int)ActiveCharacter().GetCharacterIndex());
-    a->Push(0); // Set energy to 0 => death
+    ActiveCharacter().SetEnergy(0); // Die!
+    Action* a = BuildActionSendCharacterPhysics((int)ActiveCharacter().GetTeamIndex(),
+						(int)ActiveCharacter().GetCharacterIndex());
     ActionHandler::GetInstance()->NewAction(a);
     ApplyExplosion(ActiveCharacter().GetCenter(),cfg());
   }

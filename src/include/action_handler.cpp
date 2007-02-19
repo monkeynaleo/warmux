@@ -294,14 +294,8 @@ void SyncCharacters()
 
     for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
-      // Sync the character's energy
-      Action* a = new Action(Action::ACTION_CHARACTER_SET_ENERGY);
-      a->Push(team_no);
-      a->Push(char_no);
-      a->Push((int)(*tit).GetEnergy());
-      action_handler->NewAction(a);
-      // Sync the character's position
-      a = BuildActionSendCharacterPhysics(team_no, char_no);
+      // Sync the character's position, energy, ...
+      Action * a = BuildActionSendCharacterPhysics(team_no, char_no);
       action_handler->NewAction(a);
     }
   }
@@ -355,15 +349,6 @@ void Action_Character_SetPhysics (Action *a)
     a->RetrieveCharacter();
 }
 
-void Action_Character_SetEnergy(Action *a)
-{
-  int team_no, char_no;
-  team_no = a->PopInt();
-  char_no = a->PopInt();
-  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
-  c->SetEnergy( a->PopInt() );
-}
-
 void Action_Character_SetSkin (Action *a)
 {
   //Set the frame of the walking skin, to get the position of the hand synced
@@ -373,11 +358,6 @@ void Action_Character_SetSkin (Action *a)
     ActiveTeam().ActiveCharacter().SetMovement(a->PopString());
     ActiveTeam().ActiveCharacter().body->SetFrame((uint)a->PopInt());
   }
-}
-
-void Action_Character_SetDirection (Action *a)
-{
-  ActiveCharacter().SetDirection (Body::Direction_t(a->PopInt()));
 }
 
 Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
@@ -611,9 +591,7 @@ ActionHandler::ActionHandler()
   Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
   Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
 
-  Register (Action::ACTION_CHARACTER_SET_ENERGY, "CHARACTER_set_energy", &Action_Character_SetEnergy);
   Register (Action::ACTION_CHARACTER_SET_PHYSICS, "CHARACTER_set_physics", &Action_Character_SetPhysics);
-  Register (Action::ACTION_CHARACTER_SET_DIRECTION, "CHARACTER_set_direction", &Action_Character_SetDirection);
   Register (Action::ACTION_CHARACTER_SET_SKIN, "CHARACTER_set_skin", &Action_Character_SetSkin);
 
   // ########################################################
