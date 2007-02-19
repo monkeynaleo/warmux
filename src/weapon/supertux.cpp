@@ -72,7 +72,7 @@ void SuperTux::Refresh()
 
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
   {
-    Action a(Action::ACTION_WEAPON_SUPERTUX_STATE);
+    Action a(Action::ACTION_WEAPON_SUPERTUX);
     a.Push(angle_rad);
     a.Push(GetPhysX());
     a.Push(GetPhysY());

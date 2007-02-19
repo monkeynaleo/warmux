@@ -375,7 +375,7 @@ void Action_Weapon_SetTimeout (Action *a)
   launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
 }
 
-void Action_Weapon_SupertuxState (Action *a)
+void Action_Weapon_Supertux (Action *a)
 {
   assert(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX);
   WeaponLauncher* launcher = static_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
@@ -390,18 +390,11 @@ void Action_Weapon_SupertuxState (Action *a)
   tux->SetSpeedXY(Point2d(0,0));
 }
 
-void Action_Weapon_ConstructionUp (Action *a)
+void Action_Weapon_Construction (Action *a)
 {
-  Construct* launcher = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
-  assert(launcher != NULL);
-  launcher->Up();
-}
-
-void Action_Weapon_ConstructionDown (Action *a)
-{
-  Construct* launcher = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
-  assert(launcher != NULL);
-  launcher->Down();
+  Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
+  assert(construct_weapon != NULL);
+  construct_weapon->SetAngle(a->PopDouble());
 }
 
 // ########################################################
@@ -575,9 +568,8 @@ ActionHandler::ActionHandler()
   Register (Action::ACTION_WEAPON_SET_TARGET, "WEAPON_set_target", &Action_Weapon_SetTarget);
 
   // Special weapon options
-  Register (Action::ACTION_WEAPON_SUPERTUX_STATE, "WEAPON_supertux_state", &Action_Weapon_SupertuxState);
-  Register (Action::ACTION_WEAPON_CONSTRUCTION_UP, "WEAPON_construction_up", &Action_Weapon_ConstructionUp);
-  Register (Action::ACTION_WEAPON_CONSTRUCTION_DOWN, "WEAPON_construction_down", &Action_Weapon_ConstructionDown);
+  Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
+  Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
  
   // ########################################################
   Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
