@@ -461,7 +461,7 @@ void Network::SendPacket(char* packet, int size)
   }
 }
 
-void Network::SendChatMessage(std::string txt)
+void Network::SendChatMessage(const std::string& txt)
 {
   if(IsServer())
   {
