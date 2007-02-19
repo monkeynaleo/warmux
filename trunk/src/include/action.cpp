@@ -308,6 +308,7 @@ Point2d Action::PopPoint2d()
   return Point2d(x, y);
 }
 
+//-------------  Send/Retrieve datas about Character
 
 void Action::StoreActiveCharacter()
 {

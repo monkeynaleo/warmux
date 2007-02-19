@@ -69,7 +69,6 @@ public:
     // ########################################################
     // Character's move
     ACTION_CHARACTER_MOVE_LEFT,   ACTION_CHARACTER_MOVE_RIGHT,
-    ACTION_CHARACTER_UP,          ACTION_CHARACTER_DOWN,
     ACTION_CHARACTER_JUMP,        ACTION_CHARACTER_HIGH_JUMP,   ACTION_CHARACTER_BACK_JUMP,
     
     ACTION_CHARACTER_SET_PHYSICS,
@@ -117,6 +116,7 @@ public:
   ~Action();
 
   std::ostream& out(std::ostream &os) const;
+
   // Push / Back functions to add / retreive datas
   // Work as a FIFO container, inspiteof the name of methods !
   void Push(int val);
@@ -124,11 +124,13 @@ public:
   void Push(std::string val);
   void Push(const Point2i& val);
   void Push(const Point2d& val);
+
   int PopInt();
   double PopDouble();
   std::string PopString();
   Point2i PopPoint2i();
   Point2d PopPoint2d();
+
   bool IsEmpty() const;
 
   // Store character's information

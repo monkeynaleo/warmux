@@ -47,9 +47,6 @@
 #include "../weapon/weapons_list.h"
 #include "../weapon/explosion.h"
 
-// Delta angle used to move the crosshair
-#define DELTA_CROSSHAIR 0.035 /* ~1 degree */
-
 ActionHandler * ActionHandler::singleton = NULL;
 
 ActionHandler * ActionHandler::GetInstance()
@@ -315,16 +312,6 @@ void Action_Character_MoveLeft (Action *a)
   MoveCharacterLeft (ActiveCharacter());
 }
 
-void Action_Character_Up (Action *a)
-{
-  ActiveCharacter().AddFiringAngle(-DELTA_CROSSHAIR);
-}
-
-void Action_Character_Down (Action *a)
-{
-  ActiveCharacter().AddFiringAngle(DELTA_CROSSHAIR);
-}
-
 void Action_Character_Jump (Action *a)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
@@ -585,8 +572,6 @@ ActionHandler::ActionHandler()
   // Character's move
   Register (Action::ACTION_CHARACTER_MOVE_LEFT, "CHARACTER_move_left", &Action_Character_MoveLeft);
   Register (Action::ACTION_CHARACTER_MOVE_RIGHT, "CHARACTER_move_right", &Action_Character_MoveRight);
-  Register (Action::ACTION_CHARACTER_UP, "CHARACTER_up", &Action_Character_Up);
-  Register (Action::ACTION_CHARACTER_DOWN, "CHARACTER_down", &Action_Character_Down);
   Register (Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
   Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
   Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
