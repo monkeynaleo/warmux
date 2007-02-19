@@ -163,9 +163,7 @@ void MoveCharacterRight (Character &character)
 void SendCharacterPosition()
 {
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-  network.SendAction(a);
-  delete a;
+  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 
   Action a_set_skin(Action::ACTION_CHARACTER_SET_SKIN,ActiveCharacter().body->GetClothe());
   a_set_skin.Push(ActiveCharacter().body->GetMovement());
