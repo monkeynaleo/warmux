@@ -122,13 +122,16 @@ void MoveCharacterLeft(Character &character){
   // Le character est pret a bouger ?
   if (!character.MouvementDG_Autorise()) return;
 
-  bool bouge = (character.GetDirection() == -1);
+  bool bouge = (character.GetDirection() == Body::DIRECTION_LEFT);
   if (bouge)
   {
     MoveCharacter(character);
   }
   else{
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHARACTER_SET_DIRECTION,-1));
+    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
+    Action* a = BuildActionSendCharacterPhysics((int)ActiveCharacter().GetTeamIndex(),
+						(int)ActiveCharacter().GetCharacterIndex());
+    ActionHandler::GetInstance()->NewAction(a);
     character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
@@ -143,14 +146,17 @@ void MoveCharacterRight (Character &character)
   // Le character est pret a bouger ?
   if (!character.MouvementDG_Autorise()) return;
 
-  bool bouge = (character.GetDirection() == 1);
+  bool bouge = (character.GetDirection() == Body::DIRECTION_RIGHT);
   if (bouge)
   {
     MoveCharacter(character);
   }
   else
-  {
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHARACTER_SET_DIRECTION,1));
+  {    
+    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
+    Action* a = BuildActionSendCharacterPhysics((int)ActiveCharacter().GetTeamIndex(),
+						(int)ActiveCharacter().GetCharacterIndex());
+    ActionHandler::GetInstance()->NewAction(a);
     character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
