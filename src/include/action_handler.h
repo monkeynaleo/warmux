@@ -63,9 +63,13 @@ private:
   void Register (Action::Action_t action, const std::string &name, callback_t fct);
 };
 
+// TODO: Move it in an object !
+
 Action* BuildActionSendCharacterPhysics(int team_no, int char_no);
 void SendGameMode();
 void SyncCharacters();
+
+
 
 //-----------------------------------------------------------------------------
 #endif

@@ -78,6 +78,9 @@ const double MIN_SPEED_TO_FLY = 15.0;
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
+// Delta angle used to move the crosshair
+const double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
+
 Body * Character::GetBody() const
 {
   return body;
@@ -905,7 +908,10 @@ void Character::HandleKeyRefreshed_Up()
 	{
 	  do_nothing_time = Time::GetInstance()->Read();
 	  CharacterCursor::GetInstance()->Hide();
-	  ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_CHARACTER_UP));
+	  AddFiringAngle(-DELTA_CROSSHAIR);
+	  Action* a = BuildActionSendCharacterPhysics((int)GetTeamIndex(),
+						      (int)GetCharacterIndex());
+	  ActionHandler::GetInstance()->NewAction(a);
 	}
     }
 }
@@ -927,7 +933,10 @@ void Character::HandleKeyRefreshed_Down()
 	{
 	  do_nothing_time = Time::GetInstance()->Read();
 	  CharacterCursor::GetInstance()->Hide();
-	  ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_CHARACTER_DOWN));
+	  AddFiringAngle(DELTA_CROSSHAIR);
+	  Action* a = BuildActionSendCharacterPhysics((int)GetTeamIndex(),
+						      (int)GetCharacterIndex());
+	  ActionHandler::GetInstance()->NewAction(a);
 	}
     }
 }

@@ -129,9 +129,6 @@ void MoveCharacterLeft(Character &character){
   }
   else{
     ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-    Action* a = BuildActionSendCharacterPhysics((int)ActiveCharacter().GetTeamIndex(),
-						(int)ActiveCharacter().GetCharacterIndex());
-    ActionHandler::GetInstance()->NewAction(a);
     character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
@@ -154,9 +151,6 @@ void MoveCharacterRight (Character &character)
   else
   {    
     ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-    Action* a = BuildActionSendCharacterPhysics((int)ActiveCharacter().GetTeamIndex(),
-						(int)ActiveCharacter().GetCharacterIndex());
-    ActionHandler::GetInstance()->NewAction(a);
     character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 

@@ -88,6 +88,8 @@ private:
   void SignalCollision();
   void SetBody(Body* char_body);
 
+  void AddFiringAngle(double angle);
+
 public:
 
   Character (Team& my_team, const std::string &name, Body *char_body);
@@ -125,7 +127,6 @@ public:
   double GetFiringAngle() const;
   double GetAbsFiringAngle() const;
   void SetFiringAngle(double angle);
-  void AddFiringAngle(double angle);
 
   // Show hide the Character
   void Hide();
