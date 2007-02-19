@@ -27,19 +27,18 @@
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
-#include "../network/network.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-const double angle_step = M_PI / 6.0; // should be a multiple
+const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
 
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
-					new WeaponConfig(),
-					NEVER_VISIBLE)
+				new WeaponConfig(),
+				NEVER_VISIBLE)
 {
   construct_spr = resource_manager.LoadSprite( weapons_res_profile, "construct_spr");
-  construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / angle_step));
+  construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / DELTA_ANGLE));
   m_name = _("Construct");
   angle = 0;
   target_chosen = false;
@@ -104,18 +103,23 @@ void Construct::HandleMouseWheelDown()
 
 void Construct::Up()
 {
-  Action a(Action::ACTION_WEAPON_CONSTRUCTION_UP);
-  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-    network.SendAction(&a);
-  angle += angle_step;
+  double new_angle = angle + DELTA_ANGLE;
+
+  Action* a = new Action(Action::ACTION_WEAPON_CONSTRUCTION, new_angle);
+  ActionHandler::GetInstance()->NewAction(a);
 }
 
 void Construct::Down()
 {
-  Action a(Action::ACTION_WEAPON_CONSTRUCTION_DOWN);
-  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-    network.SendAction(&a);
-  angle -= angle_step;
+  double new_angle = angle - DELTA_ANGLE;
+
+  Action* a = new Action(Action::ACTION_WEAPON_CONSTRUCTION, new_angle);
+  ActionHandler::GetInstance()->NewAction(a);
+}
+
+void Construct::SetAngle(double _angle)
+{
+  angle = _angle;
 }
 
 WeaponConfig& Construct::cfg()

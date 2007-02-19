@@ -85,9 +85,8 @@ public:
     ACTION_WEAPON_SET_TARGET,
 
     // Special weapon options
-    ACTION_WEAPON_SUPERTUX_STATE,
-    ACTION_WEAPON_CONSTRUCTION_UP,
-    ACTION_WEAPON_CONSTRUCTION_DOWN,
+    ACTION_WEAPON_SUPERTUX,
+    ACTION_WEAPON_CONSTRUCTION,
 
     // ########################################################
     ACTION_NETWORK_SYNC_BEGIN,
