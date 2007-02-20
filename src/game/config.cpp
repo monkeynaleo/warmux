@@ -92,7 +92,7 @@ Config::Config()
   sound_effects = true;
   sound_frequency = 44100;
   // network
-  enable_network = false;
+  enable_network = true;
 
   Constants::GetInstance();
 
@@ -205,10 +205,10 @@ bool Config::LoadXml(xmlpp::Element *xml)
   }
 
   //=== network ===
-  if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
-  {
-    XmlReader::ReadBool(elem, "enable_network", enable_network);
-  }
+  //if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
+  //{
+  //  XmlReader::ReadBool(elem, "enable_network", enable_network);
+  //}
 
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
@@ -288,8 +288,8 @@ bool Config::SaveXml()
   doc.WriteElement(sound_node, "frequency", ulong2str(jukebox.GetFrequency()));
 
   //=== Network ===
-  xmlpp::Element *net_node = root->add_child("network");
-  doc.WriteElement(net_node, "enable_network",  ulong2str(IsNetworkActivated()));
+  //xmlpp::Element *net_node = root->add_child("network");
+  //doc.WriteElement(net_node, "enable_network",  ulong2str(IsNetworkActivated()));
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);
