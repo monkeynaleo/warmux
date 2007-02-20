@@ -361,11 +361,7 @@ void Action_Weapon_SetTarget (Action *a)
 {
   MSG_DEBUG("action.handler", "Set target by clicking");
 
-  Point2i target;
-  target.x = a->PopInt();
-  target.y = a->PopInt();
-
-  ActiveTeam().AccessWeapon().ChooseTarget (target);
+  ActiveTeam().AccessWeapon().ChooseTarget (a->PopPoint2i());
 }
 
 void Action_Weapon_SetTimeout (Action *a)
