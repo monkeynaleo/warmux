@@ -30,6 +30,7 @@
 #include "../gui/button_text.h"
 #include "../gui/msg_box.h"
 #include "../gui/text_box.h"
+#include "../network/network.h"
 
 class NetworkConnectionMenu : public Menu
 {
@@ -60,6 +61,8 @@ class NetworkConnectionMenu : public Menu
    void Draw(const Point2i &mousePosition);
 
    void SetAction(network_menu_action_t action);
+
+   void DisplayError(ConnectionState conn);
 
    void sig_ok();
    void __sig_ok();
