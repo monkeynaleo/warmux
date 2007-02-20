@@ -176,55 +176,55 @@ void Map::Draw()
   ground.Draw();
 }
 
-bool Map::EstHorsMondeX(int x) const{
+bool Map::IsOutsideWorldX(int x) const{
   return (x < 0) || ((int)GetWidth() <= x);
 }
 
-bool Map::EstHorsMondeY(int y) const{
+bool Map::IsOutsideWorldY(int y) const{
   return (y < 0) || ((int)GetHeight() <= y);
 }
 
-bool Map::EstHorsMondeXlarg(int x, uint larg) const{
+bool Map::IsOutsideWorldXwidth(int x, uint larg) const{
   return (x + (int)larg - 1 < 0) || ((int)GetWidth() <= x);
 }
 
-bool Map::EstHorsMondeYhaut(int y, uint haut) const{
+bool Map::IsOutsideWorldYheight(int y, uint haut) const{
   return ((y + (int)haut - 1 < 0) || ((int)GetHeight() <= y));
 }
 
-bool Map::EstHorsMondeXY(int x, int y) const{
-  return EstHorsMondeX(x) || EstHorsMondeY(y);
+bool Map::IsOutsideWorldXY(int x, int y) const{
+  return IsOutsideWorldX(x) || IsOutsideWorldY(y);
 }
 
-bool Map::EstHorsMonde(const Point2i &pos) const{
-  return EstHorsMondeXY(pos.x, pos.y);
+bool Map::IsOutsideWorld(const Point2i &pos) const{
+  return IsOutsideWorldXY(pos.x, pos.y);
 }
 
-bool Map::EstDansVide(int x, int y) const{
+bool Map::IsInVacuum(int x, int y) const{
   return ground.IsEmpty(Point2i(x, y));
 }
 
-bool Map::EstDansVide(const Point2i& pos) const{
+bool Map::IsInVacuum(const Point2i& pos) const{
   return ground.IsEmpty(pos);
 }
 
-bool Map::LigneH_EstDansVide(int ox, int y, int width) const
+bool Map::HorizontalLine_IsInVacuum(int ox, int y, int width) const
 {
   // Traite une ligne
   for (int i=0; i<width; i++)
-	if (!EstDansVide(ox+i, (uint)y))
+	if (!IsInVacuum(ox+i, (uint)y))
 	  return false;
 
    return true;
 }
 
-// TODO : for consistency, LigneV_EstDansVide should use a 'height' as LigneH does it ...
-bool Map::LigneV_EstDansVide(int x, int top, int bottom) const
+// TODO : for consistency, VerticalLine_IsInVacuum should use a 'height' as LigneH does it ...
+bool Map::VerticalLine_IsInVacuum(int x, int top, int bottom) const
 {
   assert (top <= bottom);
 
   // V�ifie qu'on reste dans le monde
-  if (EstHorsMondeX(x) || EstHorsMondeYhaut(top, bottom-top+1))
+  if (IsOutsideWorldX(x) || IsOutsideWorldYheight(top, bottom-top+1))
     return IsOpen();
 
   if (top < 0) top = 0;
@@ -233,12 +233,12 @@ bool Map::LigneV_EstDansVide(int x, int top, int bottom) const
   // Traite une ligne
   for (uint iy=(uint)top; iy<=(uint)bottom; iy++)
   {
-    if (!EstDansVide((uint)x, iy)) return false;
+    if (!IsInVacuum((uint)x, iy)) return false;
   }
   return true;
 }
 
-bool Map::RectEstDansVide(const Rectanglei &prect) const
+bool Map::RectIsInVacuum(const Rectanglei &prect) const
 {
    // only check whether the border touch the ground
 
@@ -251,18 +251,18 @@ bool Map::RectEstDansVide(const Rectanglei &prect) const
    if(rect.GetSizeX()==0 || rect.GetSizeY()==0)
      return true;
 
-   if(!LigneH_EstDansVide (rect.GetPositionX(), rect.GetPositionY(), rect.GetSizeX()))
+   if(!HorizontalLine_IsInVacuum (rect.GetPositionX(), rect.GetPositionY(), rect.GetSizeX()))
      return false;
 
    if(rect.GetSizeY() > 1)
    {
-     if(!LigneH_EstDansVide (rect.GetPositionX(), rect.GetPositionY() + rect.GetSizeY() - 1, rect.GetSizeX()))
+     if(!HorizontalLine_IsInVacuum (rect.GetPositionX(), rect.GetPositionY() + rect.GetSizeY() - 1, rect.GetSizeX()))
        return false;
-     if(!LigneV_EstDansVide (rect.GetPositionX(), rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
+     if(!VerticalLine_IsInVacuum (rect.GetPositionX(), rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
        return false;
 
      if(rect.GetSizeX() > 1)
-     if(!LigneV_EstDansVide (rect.GetPositionX()+rect.GetSizeX()-1, rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
+     if(!VerticalLine_IsInVacuum (rect.GetPositionX()+rect.GetSizeX()-1, rect.GetPositionY(), rect.GetPositionY() + rect.GetSizeY() -1))
        return false;
    }
 
@@ -281,36 +281,36 @@ bool Map::ParanoiacRectIsInVacuum(const Rectanglei &prect) const
 
    // Check line by line
    for( int i = rect.GetPositionY(); i < rect.GetPositionY() + rect.GetSizeY(); i++ )
-     if( !LigneH_EstDansVide (rect.GetPositionX(), i, rect.GetSizeX()) )
+     if( !HorizontalLine_IsInVacuum (rect.GetPositionX(), i, rect.GetSizeX()) )
        return false;
 
    return true;
 }
 
-bool Map::EstDansVide_haut(const PhysicalObj &obj, int dx, int dy) const
+bool Map::IsInVacuum_top(const PhysicalObj &obj, int dx, int dy) const
 {
-  return LigneH_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
+  return HorizontalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
 			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy,
 			     obj.GetTestRect().GetSizeX());
 }
 
-bool Map::EstDansVide_bas(const PhysicalObj &obj, int dx, int dy) const
+bool Map::IsInVacuum_bottom(const PhysicalObj &obj, int dx, int dy) const
 {
-  return LigneH_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
+  return HorizontalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
 			     obj.GetTestRect().GetPositionY() + dy,
 			     obj.GetTestRect().GetSizeX());
 }
 
 bool Map::IsInVacuum_left(const PhysicalObj &obj, int dx, int dy) const
 {
-  return LigneV_EstDansVide (obj.GetTestRect().GetPositionX() + dx,
+  return VerticalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + dx,
 			     obj.GetTestRect().GetPositionY() + dy,
 			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }
 
 bool Map::IsInVacuum_right(const PhysicalObj &obj, int dx, int dy) const
 {
-  return LigneV_EstDansVide (obj.GetTestRect().GetPositionX() + obj.GetTestRect().GetSizeX() + dx,
+  return VerticalLine_IsInVacuum (obj.GetTestRect().GetPositionX() + obj.GetTestRect().GetSizeX() + dx,
 			     obj.GetTestRect().GetPositionY() + dy,
 			     obj.GetTestRect().GetPositionY() + obj.GetTestRect().GetSizeY() + dy);
 }

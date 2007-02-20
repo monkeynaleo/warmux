@@ -128,7 +128,7 @@ bool SnipeRifle::ComputeCrossPoint(bool force = false)
     if ( distance < SNIPE_RIFLE_BEAM_START ) laser_beam_start = pos;
 
     // the point is outside the map
-    if ( world.EstHorsMondeX(pos.x) || world.EstHorsMondeY(pos.y) ) break;
+    if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) break;
 
     // is there a collision ??
     if ( distance > 30 && !projectile->IsInVacuumXY( pos )){
