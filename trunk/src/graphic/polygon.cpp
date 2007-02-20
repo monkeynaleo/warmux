@@ -118,6 +118,21 @@ void Polygon::AddPoint(const Point2d & p)
   shape_buffer->vy[original_shape.size() - 1] = (int)p.y;
 }
 
+// And the famous Bezier curve. And this algorithme is that simple ? I'm so disappointed !
+// But now you can say to the world wormux is using Bezier curve.
+void Polygon::AddBezierCurve(Point2d anchor1, Point2d control1, Point2d control2, Point2d anchor2, int num_steps)
+{
+  Point2d tmp1 = anchor1 + control1;
+  Point2d tmp2 = anchor2 + control2;
+  double a, b;
+  for(int step = 0; step < num_steps; step++) {
+    a = ((float)step / (float)num_steps) * 1.0;
+    b = 1 - a;
+    AddPoint(anchor1 * b * b * b + tmp1 * 3.0 * b * b * a + tmp2 * 3.0 * b * a * a + anchor2 * a * a * a);
+  }
+}
+
+
 PolygonBuffer * Polygon::GetPolygonBuffer() const
 {
   return shape_buffer;
