@@ -336,8 +336,6 @@ void Action_Character_SetSkin (Action *a)
 // Send character infos on network (it's totally stupid to send it locally ;-)
 void SendCharacterInfos(int team_no, int char_no)
 {
-  assert(ActiveTeam().IsLocal());
-
   Action* a = new Action(Action::ACTION_CHARACTER_SET_PHYSICS);
   a->StoreCharacter(team_no, char_no);
   network.SendAction(a);
@@ -431,11 +429,9 @@ void Action_Network_Ping(Action *a)
 
 void Action_Explosion (Action *a)
 {
-  Point2i pos;
   ExplosiveWeaponConfig config;
 
-  pos.x = a->PopInt();
-  pos.y = a->PopInt();
+  Point2i pos = a->PopPoint2i();
   config.explosion_range = a->PopInt();
   config.particle_range = a->PopInt();
   config.damage = a->PopInt();
