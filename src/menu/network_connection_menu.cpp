@@ -32,7 +32,6 @@
 #include "../graphic/font.h"
 #include "../map/maps_list.h"
 #include "../network/net_error_msg.h"
-#include "../network/network.h"
 #include "../network/index_server.h"
 #include "../include/app.h"
 #include "../include/action_handler.h"
@@ -190,6 +189,16 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
 
 void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
 
+void NetworkConnectionMenu::DisplayError(ConnectionState conn)
+{
+  DispNetworkError(conn);
+  Redraw(Rectanglei(0, 0, 
+		    AppWormux::GetInstance()->video.window.GetWidth(),
+		    AppWormux::GetInstance()->video.window.GetHeight()), 
+	 AppWormux::GetInstance()->video.window);
+  widgets.ForceRedraw();
+}
+
 void NetworkConnectionMenu::sig_ok()
 {
   ConnectionState conn;
@@ -200,8 +209,8 @@ void NetworkConnectionMenu::sig_ok()
 
     conn = index_server.Connect();
     if(conn != CONNECTED)
-    {
-      DispNetworkError(conn);
+    {     
+      DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
       return;
     }
@@ -209,8 +218,8 @@ void NetworkConnectionMenu::sig_ok()
     network.Init();
     conn = network.ServerStart(port_number->GetText());
     if( conn != CONNECTED)
-    {
-      DispNetworkError(conn);
+    {      
+      DisplayError(conn);
       return;
     }
 
@@ -228,11 +237,12 @@ void NetworkConnectionMenu::sig_ok()
     network.Init();
     conn = network.ClientConnect(server_address->GetText(), port_number->GetText());
     if (!network.IsConnected() || conn != CONNECTED) {
-      DispNetworkError(conn);
+      DisplayError(conn);
+
       // translators: %s:%s will expand to something like "example.org:9999"
       msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
-         (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
-         c_red);
+				 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
+			  c_red);
       return;
     }
     break;
@@ -240,7 +250,7 @@ void NetworkConnectionMenu::sig_ok()
   case NET_BROWSE_INTERNET: // Search an internet game!
     conn = index_server.Connect();
     if (conn != CONNECTED) {
-      DispNetworkError(conn);
+      DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
       return;
     }
