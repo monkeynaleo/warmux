@@ -186,11 +186,11 @@ void ApplyExplosion_common (const Point2i &pos,
 }
 
 void ApplyExplosion_server (const Point2i &pos,
-		     const ExplosiveWeaponConfig &config,
-		     const std::string& son,
-		     bool fire_particle,
-		     ParticleEngine::ESmokeStyle smoke
-		     )
+			    const ExplosiveWeaponConfig &config,
+			    const std::string& son,
+			    bool fire_particle,
+			    ParticleEngine::ESmokeStyle smoke
+			    )
 {
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
@@ -227,8 +227,7 @@ void ApplyExplosion_server (const Point2i &pos,
   action_handler->NewAction(send_char);
 
   Action* a = new Action(Action::ACTION_EXPLOSION);
-  a->Push(pos.x);
-  a->Push(pos.y);
+  a->Push(pos);
   a->Push((int)config.explosion_range);
   a->Push((int)config.particle_range);
   a->Push((int)config.damage);
