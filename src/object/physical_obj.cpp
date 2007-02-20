@@ -456,8 +456,8 @@ bool PhysicalObj::PutOutOfGround()
   bool left,right,top,bottom;
   left   = world.IsInVacuum_left(*this, 0, 0);
   right  = world.IsInVacuum_right(*this, 0, 0);
-  top    = world.EstDansVide_haut(*this, 0, 0);
-  bottom = world.EstDansVide_bas(*this, 0, 0);
+  top    = world.IsInVacuum_top(*this, 0, 0);
+  bottom = world.IsInVacuum_bottom(*this, 0, 0);
 
   int dx = (int)GetTestRect().GetSizeX() * (right-left);
   int dy = (int)GetTestRect().GetSizeY() * (top-bottom);
@@ -588,9 +588,9 @@ bool PhysicalObj::IsOutsideWorldXY(Point2i position) const{
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
-  if( world.EstHorsMondeXlarg(x, GetTestWidth()) )
+  if( world.IsOutsideWorldXwidth(x, GetTestWidth()) )
 	  return true;
-  if( world.EstHorsMondeYhaut(y, GetTestHeight()) ){
+  if( world.IsOutsideWorldYheight(y, GetTestHeight()) ){
     if( m_allow_negative_y )
       if( (Y_OBJET_MIN <= y) && (y + GetTestHeight() - 1 < 0) )
 		  return false;
@@ -637,7 +637,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
 		  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
-  return world.RectEstDansVide (rect);
+  return world.RectIsInVacuum (rect);
 }
 
 PhysicalObj* PhysicalObj::CollidedObject(const Point2i &offset) const
@@ -711,7 +711,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
   if(CollidedObjectXY( position + Point2i(0, 1)) != NULL )
     return false;
 
-  return world.RectEstDansVide (rect);
+  return world.RectIsInVacuum (rect);
 }
 
 bool PhysicalObj::IsInWater () const
@@ -737,7 +737,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   y2 = y1-1;
   for (uint x=GetX()+ m_test_left; x<=(GetX()+m_width)-m_test_right; x++)
   {
-    if(!world.EstHorsMonde(Point2i(x,y1)) && !world.EstHorsMonde(Point2i(x,y2))
+    if(!world.IsOutsideWorld(Point2i(x,y1)) && !world.IsOutsideWorld(Point2i(x,y2))
     && world.ground.IsEmpty(Point2i(x,y2)) && !world.ground.IsEmpty(Point2i(x,y1)))
     {
       contact_x = x;
@@ -751,7 +751,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   x2 = x1+1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-    if(!world.EstHorsMonde(Point2i(x1,y)) && !world.EstHorsMonde(Point2i(x2,y))
+    if(!world.IsOutsideWorld(Point2i(x1,y)) && !world.IsOutsideWorld(Point2i(x2,y))
     && !world.ground.IsEmpty(Point2i(x1,y)) &&  world.ground.IsEmpty(Point2i(x2,y)))
     {
       contact_x = GetX() +m_test_left;
@@ -765,7 +765,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   x2 = x1-1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-    if(!world.EstHorsMonde(Point2i(x1, y)) && !world.EstHorsMonde(Point2i(x2, y))
+    if(!world.IsOutsideWorld(Point2i(x1, y)) && !world.IsOutsideWorld(Point2i(x2, y))
        && !world.ground.IsEmpty(Point2i(x1, y)) && world.ground.IsEmpty(Point2i(x2, y)))
     {
       contact_x = GetX() + m_width - m_test_right;
@@ -779,7 +779,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   y2 = y1 - 1;
   for(uint x=GetX()+m_test_left;x<=GetX()+m_width-m_test_right;x++)
   {
-    if(!world.EstHorsMonde(Point2i(x,y1)) && !world.EstHorsMonde(Point2i(x,y2))
+    if(!world.IsOutsideWorld(Point2i(x,y1)) && !world.IsOutsideWorld(Point2i(x,y2))
     && !world.ground.IsEmpty(Point2i(x, y1)) && world.ground.IsEmpty(Point2i(x, y2)))
     {
       contact_x =x;

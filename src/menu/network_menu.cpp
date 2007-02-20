@@ -88,6 +88,16 @@ NetworkMenu::NetworkMenu() :
   options_box->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
   
   Box* tmp_box = new VBox( Rectanglei(0,0, 200,0), false);
+
+  mode = new Label("", rectZero, *Font::GetInstance(Font::FONT_NORMAL));
+  
+  if (network.IsClient()) {
+    mode->SetText(_("Client mode"));
+  } else {
+    mode->SetText(_("Server mode"));
+  } 
+  tmp_box->AddWidget(mode);
+  
   player_number = new SpinButton(_("Max number of players:"), rectZero, 
 				 GameMode::GetInstance()->max_teams, 1, 2, 
 				 GameMode::GetInstance()->max_teams);
@@ -228,6 +238,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
     std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
     if(connected_players->GetText() != pl)
       connected_players->SetText(pl);
+
     //Refresh the number of players ready:
     nbr = network.client_inited;
     pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);

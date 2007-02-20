@@ -63,10 +63,10 @@ bool find_first_contact_point (Point2i from, double angle, int length,
   pos2.x = from.x + (int)(length * cos(angle));
   pos2.y = from.y + (int)(length * sin(angle));
 
-  while(!world.EstHorsMonde(contact_point) &&
+  while(!world.IsOutsideWorld(contact_point) &&
 	(length > 0))
     {
-      if (!world.EstDansVide(contact_point))
+      if (!world.IsInVacuum(contact_point))
 	return true ;
 
       posd.x += x_step ;

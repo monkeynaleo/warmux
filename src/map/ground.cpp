@@ -63,7 +63,7 @@ void Ground::Reset(){
 
 // Read the alpha channel of the pixel
 bool Ground::IsEmpty(const Point2i &pos) const{
-	assert( !world.EstHorsMondeXY(pos.x, pos.y) );
+	assert( !world.IsOutsideWorldXY(pos.x, pos.y) );
 
 	return GetAlpha( pos ) != 255; // IsTransparent
 }
@@ -129,10 +129,10 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
   //Look for a pixel around (x,y) that is at the edge of the ground
   //and vaccum
   //return true (and set p_x and p_y) if this point have been found
-  if(world.EstHorsMonde(Point2i(x-1,y))
-  || world.EstHorsMonde(Point2i(x+1,y))
-  || world.EstHorsMonde(Point2i(x,y-1))
-  || world.EstHorsMonde(Point2i(x,y+1)) )
+  if(world.IsOutsideWorld(Point2i(x-1,y))
+  || world.IsOutsideWorld(Point2i(x+1,y))
+  || world.IsOutsideWorld(Point2i(x,y-1))
+  || world.IsOutsideWorld(Point2i(x,y+1)) )
     return false;
 
   // check adjacents pixels one by one:
