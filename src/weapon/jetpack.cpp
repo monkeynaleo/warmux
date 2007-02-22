@@ -35,9 +35,9 @@
 #include "../character/move.h"
 #include "../include/action_handler.h"
 
-const double JETPACK_FORCE = 5000.0;
+const double JETPACK_FORCE = 2500.0;
 
-const uint DELTA_FUEL_DOWN = 60 ;  // Delta time between 2 fuel unit consumption.
+const uint DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumption.
 
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
