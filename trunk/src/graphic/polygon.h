@@ -22,7 +22,7 @@
 #ifndef POLYGON_H
 #define POLYGON_H
 
-#include <list>
+#include <vector>
 #include "../tool/affine_transform.h"
 #include "surface.h"
 
@@ -48,19 +48,20 @@ class Polygon {
   Color * plane_color;
   Color * border_color;
   // Original shape
-  std::list<Point2d> original_shape;
+  std::vector<Point2d> original_shape;
   // Shape position after an affine transformation
   PolygonBuffer * shape_buffer;
 
  public:
   Polygon();
-  Polygon(const std::list<Point2d> shape);
+  Polygon(const std::vector<Point2d> shape);
   Polygon(const Polygon & poly);
   void Init();
   // Point handling
   void AddPoint(const Point2d & p);
   void ApplyTransformation(AffineTransform2D & trans);
   void AddBezierCurve(Point2d anchor1, Point2d control1, Point2d control2, Point2d anchor2, int num_steps = 20);
+  Polygon * GetBezierInterpolation(double smooth_value = 0.0);
   void Expand(const int expand_value);
   PolygonBuffer * GetPolygonBuffer() const;
   // Type of the polygon
