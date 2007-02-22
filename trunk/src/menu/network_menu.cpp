@@ -188,12 +188,20 @@ void NetworkMenu::__sig_ok()
     // Wait for the server, and stay in the menu map / team can still be changed
     Action a(Action::ACTION_NETWORK_CHANGE_STATE);
     network.SendAction(&a);
-    while(network.state != Network::NETWORK_INIT_GAME)
+    while(network.state != Network::NETWORK_INIT_GAME && network.IsConnected())
     {
       Display(Point2i(-1,-1));
     }
   }
 
+  // Disconnection :-/
+  if (!network.IsConnected()) {
+    close_menu = true;
+    network.network_menu = NULL;
+    return;
+  }
+
+  // Starting the game :-)
   SaveOptions();
   Game::GetInstance()->Start();
   network.network_menu = NULL;
