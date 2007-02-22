@@ -21,6 +21,7 @@ graphic/effects.cpp
 graphic/font.cpp
 graphic/fps.cpp
 graphic/polygon.cpp
+graphic/polygon_generator.cpp
 graphic/spriteanimation.cpp
 graphic/spritecache.cpp
 graphic/sprite.cpp
