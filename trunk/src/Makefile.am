@@ -30,6 +30,7 @@ wormux_SOURCES = \
 	graphic/font.cpp graphic/font.h \
 	graphic/fps.cpp graphic/fps.h \
 	graphic/polygon.cpp graphic/polygon.h \
+	graphic/polygon_generator.cpp graphic/polygon_generator.h \
 	graphic/text_list.cpp graphic/text_list.h \
 	graphic/surface.cpp graphic/surface.h \
 	graphic/spriteframe.cpp graphic/spriteframe.h \

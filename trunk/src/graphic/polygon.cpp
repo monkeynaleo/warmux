@@ -132,7 +132,6 @@ void Polygon::AddBezierCurve(Point2d anchor1, Point2d control1, Point2d control2
   }
 }
 
-
 PolygonBuffer * Polygon::GetPolygonBuffer() const
 {
   return shape_buffer;
@@ -160,6 +159,7 @@ void Polygon::Expand(const int expand_value)
     tmp_shape.push_back(tmp_point);
     shape_buffer->vx[i] = (int)tmp_point.x;
     shape_buffer->vy[i] = (int)tmp_point.y;
+    previous_point = *point;
   }
   // loop back the last and first point
   tmp_point = *(original_shape.end()) - *(original_shape.begin());

@@ -33,6 +33,7 @@
 #include "string_tools.h"
 #include "../game/config.h"
 #include "../graphic/sprite.h"
+#include "../graphic/polygon_generator.h"
 
 Profile::Profile()
 {
@@ -256,6 +257,19 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 Surface ResourceManager::GenerateMap(const Profile *profile, const int width, const int height)
 {
   Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
+  Polygon * random_shape = PolygonGenerator::GenerateRandomShape();
+  //Polygon * bezier_shape = random_shape->GetBezierInterpolation();
+  tmp.Fill(0);
+  Surface texture = LoadImage(profile, "texture");
+  //Bezier_shape->SetTexture(&texture);
+  //tmp.DrawPolygon(bezier_shape);
+  random_shape->SetTexture(&texture);
+  tmp.DrawPolygon(*random_shape);
+
+  delete random_shape;
+  //delete bezier_shape;
+  return tmp;
+/*  Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
   tmp.Fill(0);
   Polygon shape = Polygon();
   Surface texture = LoadImage(profile, "texture");
@@ -271,9 +285,10 @@ Surface ResourceManager::GenerateMap(const Profile *profile, const int width, co
   border.SetTexture(NULL);
   border.SetPlaneColor(Color(255,0,0,255));
   border.Expand(5);
-  //tmp.DrawPolygon(border);
+  tmp.DrawPolygon(border);
+  shape.AddBezierCurve(Point2d(200, 600),Point2d(0, -400), Point2d(0, -200), Point2d(width - 200, 600), 400);
   tmp.DrawPolygon(shape);
-  return tmp;
+  return tmp;*/
 }
 
 ResourceManager resource_manager;
