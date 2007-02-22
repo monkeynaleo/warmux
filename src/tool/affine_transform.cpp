@@ -17,6 +17,8 @@
 *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
 ******************************************************************************
 * 2D Affine Transformation
+* Note, You need to do every transformation in this order :
+* rotation * shrink * translation;
 *****************************************************************************/
 
 #include "affine_transform.h"

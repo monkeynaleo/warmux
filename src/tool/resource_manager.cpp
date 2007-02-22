@@ -257,38 +257,35 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 Surface ResourceManager::GenerateMap(const Profile *profile, const int width, const int height)
 {
   Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
-  Polygon * random_shape = PolygonGenerator::GenerateRandomShape();
-  //Polygon * bezier_shape = random_shape->GetBezierInterpolation();
+  AffineTransform2D translation = AffineTransform2D();
+  AffineTransform2D scale = AffineTransform2D();
+  AffineTransform2D rotation = AffineTransform2D();
+  translation.SetTranslation(200.0,600.0);
+  scale.SetShrink(3.0, 1.0);
+  rotation.SetRotation(0.4);
+  AffineTransform2D transformation = translation;
+  Polygon * random_shape = PolygonGenerator::GenerateCircle(200, 8); //GenerateRandomShape();
+  Polygon * rectangle = PolygonGenerator::GenerateRectangle(1500, 50);
+  Polygon * bezier_shape = random_shape->GetBezierInterpolation();
+  bezier_shape->ApplyTransformation(transformation);
+  random_shape->ApplyTransformation(transformation);
+  translation.SetTranslation(400.0,800.0);
+  rectangle->ApplyTransformation(translation);
   tmp.Fill(0);
   Surface texture = LoadImage(profile, "texture");
-  //Bezier_shape->SetTexture(&texture);
-  //tmp.DrawPolygon(bezier_shape);
-  random_shape->SetTexture(&texture);
+  bezier_shape->SetTexture(&texture);
+  rectangle->SetPlaneColor(Color(200, 150, 175, 255));
+  random_shape->SetBorderColor(Color(150, 200, 100, 255));
+  tmp.DrawPolygon(*bezier_shape);
   tmp.DrawPolygon(*random_shape);
+  tmp.DrawPolygon(*rectangle);
+  /*random_shape->SetTexture(&texture);
+  tmp.DrawPolygon(*random_shape);*/
 
   delete random_shape;
-  //delete bezier_shape;
+  delete bezier_shape;
+  delete rectangle;
   return tmp;
-/*  Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
-  tmp.Fill(0);
-  Polygon shape = Polygon();
-  Surface texture = LoadImage(profile, "texture");
-  shape.SetTexture(&texture);
-  int n = 500;
-  for(int i = 0; i < n; i++) {
-    Point2d p = Point2d((i * width / n), (height - 200. + (cos(i / 20.) * 70.) - sin(i / 50.) * 300.0));
-    shape.AddPoint(p);
-  }
-  shape.AddPoint(Point2d(width - 1, height - 1));
-  shape.AddPoint(Point2d(0, height - 1));
-  Polygon border = Polygon(shape);
-  border.SetTexture(NULL);
-  border.SetPlaneColor(Color(255,0,0,255));
-  border.Expand(5);
-  tmp.DrawPolygon(border);
-  shape.AddBezierCurve(Point2d(200, 600),Point2d(0, -400), Point2d(0, -200), Point2d(width - 200, 600), 400);
-  tmp.DrawPolygon(shape);
-  return tmp;*/
 }
 
 ResourceManager resource_manager;

@@ -25,8 +25,8 @@ PolygonBuffer::PolygonBuffer()
 {
   // Start with at least 32 points buffer
   array_size = 32;
-  vx =  new Sint16[array_size];
-  vy =  new Sint16[array_size];
+  vx = new Sint16[array_size];
+  vy = new Sint16[array_size];
   buffer_size = 0;
 }
 
@@ -68,7 +68,7 @@ Polygon::Polygon()
   Init();
 }
 
-Polygon::Polygon(const std::list<Point2d> shape)
+Polygon::Polygon(const std::vector<Point2d> shape)
 {
   Init();
   original_shape = shape;
@@ -102,7 +102,7 @@ void Polygon::ApplyTransformation(AffineTransform2D & trans)
 {
   Point2d tmp;
   int i = 0;
-  for(std::list<Point2d>::iterator point = original_shape.begin();
+  for(std::vector<Point2d>::iterator point = original_shape.begin();
       point != original_shape.end(); point++, i++) {
     tmp = trans * (*point);
     shape_buffer->vx[i] = (int)tmp.x;
@@ -132,6 +132,40 @@ void Polygon::AddBezierCurve(Point2d anchor1, Point2d control1, Point2d control2
   }
 }
 
+// Generate a new polygon with Bezier interpolation
+Polygon * Polygon::GetBezierInterpolation(double smooth_value)
+{
+  int previous, index_p1, index_p2, next;
+  Polygon * tmp = new Polygon();
+  for(index_p1 = 0; index_p1 < (int)original_shape.size(); index_p1++) {
+    previous = index_p1 - 1;
+    previous = (previous > 0 ? previous : original_shape.size() - 1);
+    index_p2 = (index_p1 + 1) % original_shape.size();
+    next = (index_p1 + 2) % original_shape.size();
+
+    Point2d p0 = original_shape[previous];
+    Point2d p1 = original_shape[index_p1];
+    Point2d p2 = original_shape[index_p2];
+    Point2d p3 = original_shape[next];
+
+    Point2d c1 = (p0 + p1) / 2.0;
+    Point2d c2 = (p1 + p2) / 2.0;
+    Point2d c3 = (p2 + p3) / 2.0;
+
+    double len1 = sqrt((p1.x - p0.x) * (p1.x - p0.x) + (p1.y - p0.y) * (p1.y - p0.y));
+    double len2 = sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
+    double len3 = sqrt((p3.x - p2.x) * (p3.x - p2.x) + (p3.y - p2.y) * (p3.y - p2.y));
+
+    Point2d m1 = c1 + (c2 - c1) * (len1 / (len1 + len2));
+    Point2d m2 = c2 + (c3 - c2) * (len2 / (len2 + len3));
+
+    Point2d ctrl1 = m1 + (c2 - m1) * smooth_value + p1 - m1;
+    Point2d ctrl2 = m2 + (c2 - m2) * smooth_value + p2 - m2;
+    tmp->AddBezierCurve(p1, ctrl1, ctrl2, p2);
+  }
+  return tmp;
+}
+
 PolygonBuffer * Polygon::GetPolygonBuffer() const
 {
   return shape_buffer;
@@ -141,8 +175,8 @@ PolygonBuffer * Polygon::GetPolygonBuffer() const
 void Polygon::Expand(const int expand_value)
 {
   if(original_shape.size() < 2) return;
-  std::list<Point2d> tmp_shape;
-  std::list<Point2d>::iterator point = original_shape.begin();
+  std::vector<Point2d> tmp_shape;
+  std::vector<Point2d>::iterator point = original_shape.begin();
   AffineTransform2D trans;
   trans.SetRotation(-M_PI_2);
   Point2d previous_point, tmp_point;

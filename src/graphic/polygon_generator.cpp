@@ -26,10 +26,10 @@ Polygon * PolygonGenerator::GenerateCircle(double diameter, int nb_point)
 {
   Polygon * tmp = new Polygon();
   AffineTransform2D trans = AffineTransform2D();
-  Point2d top = Point2d(0, diameter);
+  Point2d top = Point2d(0.0, diameter / 2.0);
   tmp->AddPoint(top);
   for(int i = 1; i < nb_point; i++) {
-    trans.SetRotation((2.0 * M_PI * i) / (nb_point - 1));
+    trans.SetRotation((2.0 * M_PI * i) / nb_point);
     tmp->AddPoint(trans * top);
   }
   return tmp;
@@ -38,10 +38,10 @@ Polygon * PolygonGenerator::GenerateCircle(double diameter, int nb_point)
 Polygon * PolygonGenerator::GenerateRectangle(double width, double height)
 {
   Polygon * tmp = new Polygon();
-  tmp->AddPoint(Point2d(0,     0));
-  tmp->AddPoint(Point2d(width, 0));
-  tmp->AddPoint(Point2d(width, height));
-  tmp->AddPoint(Point2d(0,     height));
+  tmp->AddPoint(Point2d(-width / 2.0, -height / 2.0));
+  tmp->AddPoint(Point2d( width / 2.0, -height / 2.0));
+  tmp->AddPoint(Point2d( width / 2.0,  height / 2.0));
+  tmp->AddPoint(Point2d(-width / 2.0,  height / 2.0));
   return tmp;
 }
 
