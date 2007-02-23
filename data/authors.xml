@@ -23,7 +23,7 @@
 
 <contributors>
 	<section title="Translations">
-		<author><nickname>pepp</nickname><name>Pierre-eric Pelloux Prayer</name><description>Write small hack to optimize character drawing</description><email>pepp@neuf.fr</email><country>France</country></author>
+		<author><nickname>pepp</nickname><name>Pierre-eric Pelloux Prayer</name><description>Write small hack to optimize character drawing</description><email>pepp_AT_neuf_DOT_fr</email><country>France</country></author>
 		<author><nickname>Alexandre</nickname><name>Alexandre PROKOUDINE</name><description>Translate Wormux into Russian</description><email>alexandre.prokoudine_AT_gmail_DOT_com</email><country>Russia</country></author>
 		<author><nickname>Axel</nickname><name>Axel ROUSSEAU</name><description>Translate Wormux 0.8 in Esperanto</description><email>axel584_AT_axel584_DOT_org</email><country>France</country></author>
 		<author><nickname>basse</nickname><name>Bastian SALMELA</name><description>Translate Wormux 0.7 in Finnish</description><email>asse_AT_kulma_DOT_org</email><country>Finland</country></author>
@@ -52,7 +52,7 @@
 		<author><nickname>willy</nickname><name>Paolo NICORELLI</name><description>First Italian version of Wormux</description><email>p.nicorelli_AT_fastwebnet_DOT_it</email><country>Italy</country></author>
 	</section>
 		<section title="Package maintainers">
-		<author><nickname>artefact</nickname><name>Jean PARPAILLON</name><description>Debian GNU/Linux and Ubuntu packages of Wormux 0.7. Also: Some scripts</description><website>http://transsib.free.fr/</website><email>jean.parpaillon_AT_free_DOT_fr</email><country>France</country></author>
+		<author><nickname>artefact</nickname><name>Jean PARPAILLON</name><description>Debian GNU/Linux and Ubuntu packages of Wormux 0.7. Also: Some scripts</description><website>http://jeanparpaillon.info/</website><email>jean.parpaillon_AT_free_DOT_fr</email><country>France</country></author>
 		<author><nickname>che</nickname><name>Rudolf KASTL</name><description>Prepare RPM packages for Fedora Core 3</description><email>che666_AT_uni_DOT_de</email><country>Germany</country></author>
 		<author><nickname>daja77</nickname><name>Daniel JAHRE</name><description>Package Wormux for RockLinux</description><email>daja_AT_rocklinux_DOT_org</email><country>Germany</country></author>
 		<author><nickname>Emily</nickname><name>Emily BRANTLEY</name><description>Wormux 0.7beta2 package for Fedora Core 4</description><email>koneko.em_AT_gmail_DOT_com</email><country>United States</country></author>
