@@ -465,7 +465,7 @@ int Surface::DrawPolygon(const Polygon &poly)
   int result = 0;
   tmp = poly.GetPolygonBuffer();
   if(poly.IsTextured()) {
-    result |= filledPolygonRGBA(surface, tmp->vx, tmp->vy, tmp->GetSize(), 0, 0, 0, 255);
+    //result |= filledPolygonRGBA(surface, tmp->vx, tmp->vy, tmp->GetSize(), 0, 0, 0, 255);
     result |= texturedPolygon(surface, tmp->vx, tmp->vy, tmp->GetSize(), poly.GetTexture()->surface, 0, 0);
   } else if(poly.IsPlaneColor()) {
     Color plane_color = poly.GetPlaneColor();
