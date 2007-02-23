@@ -45,6 +45,29 @@ Polygon * PolygonGenerator::GenerateRectangle(double width, double height)
   return tmp;
 }
 
+Polygon * PolygonGenerator::GenerateRoundedRectangle(double width, double height, double edge)
+{
+  Polygon * tmp = new Polygon();
+  double edge_vector = edge / 2.0;
+  tmp->AddBezierCurve(Point2d(-width / 2 + edge, -height / 2),
+                      Point2d(-edge_vector, 0),
+                      Point2d(0, -edge_vector),
+                      Point2d(-width / 2, -height / 2 + edge));
+  tmp->AddBezierCurve(Point2d(-width / 2, height / 2 - edge),
+                      Point2d(0, edge_vector),
+                      Point2d(-edge_vector, 0),
+                      Point2d(-width / 2 + edge, height / 2));
+  tmp->AddBezierCurve(Point2d(width / 2 - edge, height / 2),
+                      Point2d(edge_vector, 0),
+                      Point2d(0, edge_vector),
+                      Point2d(width / 2, height / 2 - edge));
+  tmp->AddBezierCurve(Point2d(width / 2, -height / 2 + edge),
+                      Point2d(0, -edge_vector),
+                      Point2d(edge_vector, 0),
+                      Point2d(width / 2 - edge, -height / 2));
+  return tmp;
+}
+
 double PolygonGenerator::Random(double min, double max)
 {
   if(max < min) {
@@ -69,15 +92,15 @@ Polygon * PolygonGenerator::GenerateRandomShape()
   // First we generate bottom element from left to right
   for(int i = 0; i < number_of_bottom_point; i++) {
     x = (width / (double)number_of_bottom_point) * i;
-    bottom_range = Random(-50.0, 300.0);
-    offset_range = Random(-50.0, 50.0);
+    bottom_range = Random(-10.0, 10.0);
+    offset_range = Random(-5.0, 5.0);
     tmp->AddPoint(Point2d(x + offset_range, height + bottom_range));
   }
   // Then we generate upper element from right to left
   for(int i = 0; i < number_of_upper_point; i++) {
     x = (width / number_of_upper_point) * (number_of_upper_point - i);
-    bottom_range = Random(-50.0, Random(300.0, height));
-    offset_range = Random(-50.0, 50.0);
+    bottom_range = Random(-10.0, 10.0);
+    offset_range = Random(-5.0, 5.0);
     tmp->AddPoint(Point2d(x + offset_range, bottom_range));
   }
   return tmp;
