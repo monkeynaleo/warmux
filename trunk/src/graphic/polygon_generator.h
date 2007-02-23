@@ -28,6 +28,7 @@ class PolygonGenerator {
  public:
    static Polygon * GenerateCircle(double diameter, int nb_point);
    static Polygon * GenerateRectangle(double width, double height);
+   static Polygon * GenerateRoundedRectangle(double width, double height, double edge);
    static double Random(double min, double max);
    static Polygon * GenerateRandomShape();
 };
