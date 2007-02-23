@@ -45,6 +45,11 @@ class AffineTransform2D {
   Point2i operator*(Point2i p) const;
   Point2d operator*(Point2d p) const;
   void DisplayMatrix();
+  // Creation of instance
+  static AffineTransform2D Rotate(double rad_angle);
+  static AffineTransform2D Translate(double trans_x, double trans_y);
+  static AffineTransform2D Shrink(double shrink_x, double shrink_y);
+  static AffineTransform2D Shear(double shear_x, double shear_y);
 };
 
 #endif /* AFFINE_TRANSFORM_2D */

@@ -77,6 +77,34 @@ void AffineTransform2D::SetShear(double shear_x, double shear_y)
   y1 = shear_y;
 }
 
+AffineTransform2D AffineTransform2D::Rotate(double rad_angle)
+{
+  AffineTransform2D tmp;
+  tmp.SetRotation(rad_angle);
+  return tmp;
+}
+
+AffineTransform2D AffineTransform2D::Translate(double trans_x, double trans_y)
+{
+  AffineTransform2D tmp;
+  tmp.SetTranslation(trans_x, trans_y);
+  return tmp;
+}
+
+AffineTransform2D AffineTransform2D::Shrink(double shrink_x, double shrink_y)
+{
+  AffineTransform2D tmp;
+  tmp.SetShrink(shrink_x, shrink_y);
+  return tmp;
+}
+
+AffineTransform2D AffineTransform2D::Shear(double shear_x, double shear_y)
+{
+  AffineTransform2D tmp;
+  tmp.SetShear(shear_x, shear_y);
+  return tmp;
+}
+
 /* Matrix multiplication */
 AffineTransform2D AffineTransform2D::operator*(const AffineTransform2D &mat) const
 {
