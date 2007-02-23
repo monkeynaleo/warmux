@@ -257,34 +257,47 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 Surface ResourceManager::GenerateMap(const Profile *profile, const int width, const int height)
 {
   Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
-  AffineTransform2D translation = AffineTransform2D();
-  AffineTransform2D scale = AffineTransform2D();
-  AffineTransform2D rotation = AffineTransform2D();
-  translation.SetTranslation(200.0,600.0);
-  scale.SetShrink(3.0, 1.0);
-  rotation.SetRotation(0.4);
-  AffineTransform2D transformation = translation;
-  Polygon * random_shape = PolygonGenerator::GenerateCircle(200, 8); //GenerateRandomShape();
-  Polygon * rectangle = PolygonGenerator::GenerateRectangle(1500, 50);
-  Polygon * bezier_shape = random_shape->GetBezierInterpolation();
-  bezier_shape->ApplyTransformation(transformation);
-  random_shape->ApplyTransformation(transformation);
-  translation.SetTranslation(400.0,800.0);
-  rectangle->ApplyTransformation(translation);
+  AffineTransform2D translation = AffineTransform2D::Translate(200.0, 600.0);
+
+  // Generate a random shape
+  Polygon * random_shape = PolygonGenerator::GenerateRandomShape();
+  Polygon * circle = PolygonGenerator::GenerateCircle(200.0, 4);
+  Polygon * rounded_rectangle = PolygonGenerator::GenerateRoundedRectangle(400.0, 400.0, 10.0);
+  Polygon * exp_rounded_rectangle = new Polygon(*rounded_rectangle);
+  // Then we apply a bezier interpolation
+  Polygon * bezier_shape = random_shape->GetBezierInterpolation(1.0);
+  Polygon * bezier_circle = circle->GetBezierInterpolation(1.0);
+
+  exp_rounded_rectangle->Expand(5);
+
+  // Translate both shape
+  bezier_shape->ApplyTransformation(translation);
+  circle->ApplyTransformation(AffineTransform2D::Translate(200.0, 300.0));
+  bezier_circle->ApplyTransformation(AffineTransform2D::Translate(200.0, 300.0));
+  rounded_rectangle->ApplyTransformation(AffineTransform2D::Translate(500.0, 300.0));
+  exp_rounded_rectangle->ApplyTransformation(AffineTransform2D::Translate(497.5, 297.5));
+
+  // Init Surface
   tmp.Fill(0);
+  // Setting texture
   Surface texture = LoadImage(profile, "texture");
   bezier_shape->SetTexture(&texture);
-  rectangle->SetPlaneColor(Color(200, 150, 175, 255));
-  random_shape->SetBorderColor(Color(150, 200, 100, 255));
+  circle->SetPlaneColor(Color(200, 100, 250, 255));
+  rounded_rectangle->SetBorderColor(Color(200, 200, 250, 255));
+  exp_rounded_rectangle->SetPlaneColor(Color(0, 0, 0, 255));
+  bezier_circle->SetTexture(&texture);
+
+  // Then draw it
   tmp.DrawPolygon(*bezier_shape);
-  tmp.DrawPolygon(*random_shape);
-  tmp.DrawPolygon(*rectangle);
-  /*random_shape->SetTexture(&texture);
-  tmp.DrawPolygon(*random_shape);*/
+  tmp.DrawPolygon(*bezier_circle);
+  tmp.DrawPolygon(*circle);
+  tmp.DrawPolygon(*exp_rounded_rectangle);
+  tmp.DrawPolygon(*rounded_rectangle);
 
   delete random_shape;
   delete bezier_shape;
-  delete rectangle;
+  delete circle;
+  delete rounded_rectangle;
   return tmp;
 }
 

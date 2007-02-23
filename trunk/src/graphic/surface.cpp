@@ -474,7 +474,7 @@ int Surface::DrawPolygon(const Polygon &poly)
   }
   if(poly.IsBordered()) {
     Color border_color = poly.GetBorderColor();
-    result |= filledPolygonRGBA(surface, tmp->vx, tmp->vy, tmp->GetSize(), border_color.GetRed(),
+    result |= aapolygonRGBA(surface, tmp->vx, tmp->vy, tmp->GetSize(), border_color.GetRed(),
                                 border_color.GetGreen(), border_color.GetBlue(), border_color.GetAlpha());
   }
   return result;

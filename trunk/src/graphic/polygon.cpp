@@ -98,7 +98,7 @@ void Polygon::Init()
   shape_buffer = new PolygonBuffer();
 }
 
-void Polygon::ApplyTransformation(AffineTransform2D & trans)
+void Polygon::ApplyTransformation(const AffineTransform2D & trans)
 {
   Point2d tmp;
   int i = 0;
@@ -120,50 +120,54 @@ void Polygon::AddPoint(const Point2d & p)
 
 // And the famous Bezier curve. And this algorithme is that simple ? I'm so disappointed !
 // But now you can say to the world wormux is using Bezier curve.
-void Polygon::AddBezierCurve(Point2d anchor1, Point2d control1, Point2d control2, Point2d anchor2, int num_steps)
+void Polygon::AddBezierCurve(const Point2d anchor1, const Point2d control1,
+                             const Point2d control2, const Point2d anchor2, const int num_steps)
 {
   Point2d tmp1 = anchor1 + control1;
   Point2d tmp2 = anchor2 + control2;
   double a, b;
-  for(int step = 0; step < num_steps; step++) {
+  AddPoint(anchor1);
+  for(int step = 1; step < num_steps - 1; step++) {
     a = ((float)step / (float)num_steps) * 1.0;
     b = 1 - a;
     AddPoint(anchor1 * b * b * b + tmp1 * 3.0 * b * b * a + tmp2 * 3.0 * b * a * a + anchor2 * a * a * a);
   }
+  AddPoint(anchor2);
 }
 
 // Generate a new polygon with Bezier interpolation
 Polygon * Polygon::GetBezierInterpolation(double smooth_value)
 {
-  int previous, index_p1, index_p2, next;
-  Polygon * tmp = new Polygon();
-  for(index_p1 = 0; index_p1 < (int)original_shape.size(); index_p1++) {
-    previous = index_p1 - 1;
-    previous = (previous > 0 ? previous : original_shape.size() - 1);
-    index_p2 = (index_p1 + 1) % original_shape.size();
-    next = (index_p1 + 2) % original_shape.size();
+  Point2d p0, p1, p2, p3, c0, c1, c2, v1, v2;
+  Polygon * shape = new Polygon();
+  int tmp;
+  double l1, l2, l3;
+  for(int index_p1 = 0; index_p1 < (int)original_shape.size(); index_p1++) {
+    tmp = index_p1 - 1;
+    tmp = (tmp > 0 ? tmp : original_shape.size() - 1);
 
-    Point2d p0 = original_shape[previous];
-    Point2d p1 = original_shape[index_p1];
-    Point2d p2 = original_shape[index_p2];
-    Point2d p3 = original_shape[next];
+    p0 = original_shape[tmp];
+    p1 = original_shape[index_p1];
+    p2 = original_shape[(index_p1 + 1) % original_shape.size()];
+    p3 = original_shape[(index_p1 + 2) % original_shape.size()];
 
-    Point2d c1 = (p0 + p1) / 2.0;
-    Point2d c2 = (p1 + p2) / 2.0;
-    Point2d c3 = (p2 + p3) / 2.0;
+    // compute center of [p0,p1], [p1,p2] and [p2,p3]
+    c0 = p0 + ((p1 - p0) / 2.0);
+    c1 = p1 + ((p2 - p1) / 2.0);
+    c2 = p2 + ((p3 - p2) / 2.0);
 
-    double len1 = sqrt((p1.x - p0.x) * (p1.x - p0.x) + (p1.y - p0.y) * (p1.y - p0.y));
-    double len2 = sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
-    double len3 = sqrt((p3.x - p2.x) * (p3.x - p2.x) + (p3.y - p2.y) * (p3.y - p2.y));
+    // Distance
+    l1 = p0.Distance(p1);
+    l2 = p1.Distance(p2);
+    l3 = p2.Distance(p3);
 
-    Point2d m1 = c1 + (c2 - c1) * (len1 / (len1 + len2));
-    Point2d m2 = c2 + (c3 - c2) * (len2 / (len2 + len3));
+    // Point control
+    v1 = (c1 - c0) * (l2 / (l1 + l2)) * smooth_value;
+    v2 = (c1 - c2) * (l2 / (l2 + l3)) * smooth_value;
 
-    Point2d ctrl1 = m1 + (c2 - m1) * smooth_value + p1 - m1;
-    Point2d ctrl2 = m2 + (c2 - m2) * smooth_value + p2 - m2;
-    tmp->AddBezierCurve(p1, ctrl1, ctrl2, p2);
+    shape->AddBezierCurve(p1, v1, v2, p2);
   }
-  return tmp;
+  return shape;
 }
 
 PolygonBuffer * Polygon::GetPolygonBuffer() const
@@ -187,8 +191,7 @@ void Polygon::Expand(const int expand_value)
   for(i=0; point != original_shape.end(); point++, i++) {
     tmp_point = previous_point - *point;
     tmp_point = trans * tmp_point; // Rotate of -90°
-    //Normalize(tmp_point);
-    tmp_point *= expand_value; // set length
+    tmp_point = (tmp_point / tmp_point.Norm()) * expand_value; // Normalize and length
     tmp_point += previous_point;
     tmp_shape.push_back(tmp_point);
     shape_buffer->vx[i] = (int)tmp_point.x;
@@ -198,8 +201,7 @@ void Polygon::Expand(const int expand_value)
   // loop back the last and first point
   tmp_point = *(original_shape.end()) - *(original_shape.begin());
   tmp_point = trans * tmp_point; // Rotate of -90°
-  //Normalize(tmp_point);
-  tmp_point *= expand_value; // set length
+  tmp_point = (tmp_point / tmp_point.Norm()) * expand_value; // Normalize and length
   tmp_point += previous_point;
   tmp_shape.push_back(tmp_point);
   shape_buffer->vx[original_shape.size() - 1] = (int)tmp_point.x;
