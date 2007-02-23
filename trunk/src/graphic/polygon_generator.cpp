@@ -84,7 +84,7 @@ Polygon * PolygonGenerator::GenerateRandomShape()
   srand(time(NULL));
   int number_of_bottom_point = (int)Random(10.0, 20.0);
   int number_of_upper_point  = (int)Random(10.0, 15.0);
-  double height = Random(400.0, 1500.0);
+  double height = Random(400.0, 600.0);
   double width  = Random(400.0, 2000.0);
   double bottom_range;
   double offset_range;

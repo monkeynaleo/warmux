@@ -140,13 +140,9 @@ Polygon * Polygon::GetBezierInterpolation(double smooth_value)
 {
   Point2d p0, p1, p2, p3, c0, c1, c2, v1, v2;
   Polygon * shape = new Polygon();
-  int tmp;
   double l1, l2, l3;
   for(int index_p1 = 0; index_p1 < (int)original_shape.size(); index_p1++) {
-    tmp = index_p1 - 1;
-    tmp = (tmp > 0 ? tmp : original_shape.size() - 1);
-
-    p0 = original_shape[tmp];
+    p0 = original_shape[(index_p1 == 0 ? original_shape.size() : index_p1) - 1];
     p1 = original_shape[index_p1];
     p2 = original_shape[(index_p1 + 1) % original_shape.size()];
     p3 = original_shape[(index_p1 + 2) % original_shape.size()];
