@@ -176,36 +176,32 @@ PolygonBuffer * Polygon::GetPolygonBuffer() const
 }
 
 // expand the polygon (to draw a little border for example)
-void Polygon::Expand(const int expand_value)
+void Polygon::Expand(const double expand_value)
 {
   if(original_shape.size() < 2) return;
   std::vector<Point2d> tmp_shape;
-  std::vector<Point2d>::iterator point = original_shape.begin();
-  AffineTransform2D trans;
-  trans.SetRotation(-M_PI_2);
-  Point2d previous_point, tmp_point;
-  tmp_shape.clear();
-  previous_point = *point;
-  point ++;
-  int i = 0;
-  for(i=0; point != original_shape.end(); point++, i++) {
-    tmp_point = previous_point - *point;
-    tmp_point = trans * tmp_point; // Rotate of -90°
-    tmp_point = (tmp_point / tmp_point.Norm()) * expand_value; // Normalize and length
-    tmp_point += previous_point;
-    tmp_shape.push_back(tmp_point);
-    shape_buffer->vx[i] = (int)tmp_point.x;
-    shape_buffer->vy[i] = (int)tmp_point.y;
-    previous_point = *point;
+  AffineTransform2D trans = AffineTransform2D::Rotate(M_PI_2);
+  Point2d current, next, vector, expand;
+  int i, j, k;
+  for(i = 0; i < (int)original_shape.size(); i++) {
+    j = (i + 1) % original_shape.size();
+    current = original_shape[i];
+    next    = original_shape[j];
+    // If the next point is to close to current point skip next point
+    // Avoid visual artefact
+    k = 0;
+    while(k < 10 && next.Distance(current) < 0.1) {
+      j = (j + 1) % original_shape.size();
+      next    = original_shape[j];
+      k++;
+    }
+    vector = trans * (next - current);
+    vector = (vector / vector.Norm()) * expand_value; // Normalize and length
+    expand = current + vector;
+    tmp_shape.push_back(expand);
+    shape_buffer->vx[i] = (int)expand.x;
+    shape_buffer->vy[i] = (int)expand.y;
   }
-  // loop back the last and first point
-  tmp_point = *(original_shape.end()) - *(original_shape.begin());
-  tmp_point = trans * tmp_point; // Rotate of -90°
-  tmp_point = (tmp_point / tmp_point.Norm()) * expand_value; // Normalize and length
-  tmp_point += previous_point;
-  tmp_shape.push_back(tmp_point);
-  shape_buffer->vx[original_shape.size() - 1] = (int)tmp_point.x;
-  shape_buffer->vy[original_shape.size() - 1] = (int)tmp_point.y;
   original_shape.clear();
   original_shape = tmp_shape;
 }

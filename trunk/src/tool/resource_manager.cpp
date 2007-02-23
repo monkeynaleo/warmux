@@ -257,47 +257,33 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 Surface ResourceManager::GenerateMap(const Profile *profile, const int width, const int height)
 {
   Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
-  AffineTransform2D translation = AffineTransform2D::Translate(200.0, 600.0);
 
   // Generate a random shape
   Polygon * random_shape = PolygonGenerator::GenerateRandomShape();
-  Polygon * circle = PolygonGenerator::GenerateCircle(200.0, 4);
-  Polygon * rounded_rectangle = PolygonGenerator::GenerateRoundedRectangle(400.0, 400.0, 10.0);
-  Polygon * exp_rounded_rectangle = new Polygon(*rounded_rectangle);
   // Then we apply a bezier interpolation
   Polygon * bezier_shape = random_shape->GetBezierInterpolation(1.0);
-  Polygon * bezier_circle = circle->GetBezierInterpolation(1.0);
-
-  exp_rounded_rectangle->Expand(5);
+  Polygon * expanded_bezier_shape = new Polygon(*bezier_shape);
+  // Expand the random, bezier shape !
+  expanded_bezier_shape->Expand(16.0);
 
   // Translate both shape
-  bezier_shape->ApplyTransformation(translation);
-  circle->ApplyTransformation(AffineTransform2D::Translate(200.0, 300.0));
-  bezier_circle->ApplyTransformation(AffineTransform2D::Translate(200.0, 300.0));
-  rounded_rectangle->ApplyTransformation(AffineTransform2D::Translate(500.0, 300.0));
-  exp_rounded_rectangle->ApplyTransformation(AffineTransform2D::Translate(497.5, 297.5));
+  bezier_shape->ApplyTransformation(AffineTransform2D::Translate(200.0, 600.0));
+  expanded_bezier_shape->ApplyTransformation(AffineTransform2D::Translate(200.0, 600.0));
 
   // Init Surface
   tmp.Fill(0);
   // Setting texture
   Surface texture = LoadImage(profile, "texture");
   bezier_shape->SetTexture(&texture);
-  circle->SetPlaneColor(Color(200, 100, 250, 255));
-  rounded_rectangle->SetBorderColor(Color(200, 200, 250, 255));
-  exp_rounded_rectangle->SetPlaneColor(Color(0, 0, 0, 255));
-  bezier_circle->SetTexture(&texture);
+  expanded_bezier_shape->SetPlaneColor(Color(234, 219, 106, 255));
 
   // Then draw it
+  tmp.DrawPolygon(*expanded_bezier_shape);
   tmp.DrawPolygon(*bezier_shape);
-  tmp.DrawPolygon(*bezier_circle);
-  tmp.DrawPolygon(*circle);
-  tmp.DrawPolygon(*exp_rounded_rectangle);
-  tmp.DrawPolygon(*rounded_rectangle);
 
   delete random_shape;
   delete bezier_shape;
-  delete circle;
-  delete rounded_rectangle;
+  delete expanded_bezier_shape;
   return tmp;
 }
 

@@ -63,7 +63,7 @@ class Polygon {
   void AddBezierCurve(const Point2d anchor1, const Point2d control1,
                       const Point2d control2, const Point2d anchor2, const int num_steps = 20);
   Polygon * GetBezierInterpolation(double smooth_value = 0.0);
-  void Expand(const int expand_value);
+  void Expand(const double expand_value);
   PolygonBuffer * GetPolygonBuffer() const;
   // Type of the polygon
   bool IsTextured() const;
