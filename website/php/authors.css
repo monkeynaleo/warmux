@@ -1,0 +1,75 @@
+a img
+{
+  border: none
+  }
+
+.section {  }
+
+ul.author
+{
+  padding: 0;
+  }
+
+ul.author li
+{
+  width: 80%;
+  padding: .5em;
+  position: relative;
+  list-style-type: none;
+  }
+
+li.odd { background-color: #eee; }
+li.even { background-color: #ddd; }
+
+.authors {  }
+
+.nickname 
+{  
+  font-weight: bold
+  }
+
+.authorname 
+{  
+  font-style: italic
+  }
+
+.authordescription 
+{  
+  display: block;
+  margin-top: .5em;
+  padding-left: 2em;
+  }
+
+.authorlinks
+{
+  float: none;
+  margin: 0 0 0 0;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  }
+
+.authorwebsite 
+{  
+  position: absolute;
+  top: .4em;
+  right: 5.5em;
+  margin: 0;
+  }
+
+.authormail 
+{  
+  position: absolute;
+  top: .4em;
+  right: 3em;
+  margin: 0;
+  }
+
+.flag 
+{  
+  position: absolute;
+  top: .4em;
+  right: .5em;
+  margin: 0;
+  }
