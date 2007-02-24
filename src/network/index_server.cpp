@@ -99,6 +99,11 @@ bool IndexServer::ConnectTo(const std::string & address, const int & port)
   }
 
   sock_set = SDLNet_AllocSocketSet(1);
+  if(!sock_set)
+  {
+    printf("SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
+    return false;
+  }
   SDLNet_TCP_AddSocket(sock_set, socket);
 
   connected = true;
@@ -239,6 +244,9 @@ void IndexServer::Send(const std::string &str)
 int IndexServer::ReceiveInt()
 {
   char packet[4];
+  //somehow we can get here while being disconnected... this should not be
+  if(!connected)
+    return -1;
   if(SDLNet_CheckSockets(sock_set, 5000) == 0)
     return -1;
 
@@ -258,11 +266,10 @@ int IndexServer::ReceiveInt()
 
 std::string IndexServer::ReceiveStr()
 {
-  int size = ReceiveInt();
-
   if(!connected)
     return "";
 
+  int size = ReceiveInt();
   if(size <= 0)
     return "";
 
@@ -293,6 +300,8 @@ bool IndexServer::HandShake()
   Send(Constants::VERSION);
 
   int msg = ReceiveInt();
+  if(msg == -1)
+    return false;
   std::string sign;
 
   if(msg == TS_MSG_VERSION)
@@ -321,6 +330,8 @@ std::list<address_pair> IndexServer::GetHostList()
   Send(TS_MSG_GET_LIST);
   int lst_size = ReceiveInt();
   std::list<address_pair> lst;
+  if(lst_size == -1)
+    return lst;
   while(lst_size--)
   {
     IPaddress ip;
@@ -363,6 +374,9 @@ void IndexServer::Refresh()
     return;
 
   int msg_id = ReceiveInt();
+  if(msg_id == -1)
+    return;
+
   if( msg_id == TS_MSG_PING )
     Send(TS_MSG_PONG);
   else
