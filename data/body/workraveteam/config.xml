@@ -27,6 +27,7 @@
 
 <alias movement="weapon-riot_bomb-begin-shoot" correspond_to="weapon-bazooka-begin-shoot" />
 <alias movement="weapon-riot_bomb-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
+<alias movement="weapon-bazooka-select" correspond_to="weapon-bazooka-begin-shoot" />
 <alias movement="weapon-automatic_bazooka-begin-shoot" correspond_to="weapon-bazooka-begin-shoot" />
 <alias movement="weapon-automatic_bazooka-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
 <alias movement="weapon-cluster_bomb-begin-shoot" correspond_to="weapon-grenade-begin-shoot" />
@@ -963,7 +964,7 @@
 </movement>
 
 <!-- ###### Bazooka ###### -->
-<movement name="weapon-bazooka-begin-shoot" speed="50">
+<movement name="weapon-bazooka-begin-shoot" speed="50" play_mode="play_once">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="foot-left" dy="0"/>

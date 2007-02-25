@@ -112,6 +112,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   channel_step = -1;
   hidden = false;
   do_nothing_time = 0;
+  walking_time = 0;
   m_allow_negative_y = true;
   animation_time = Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   prepare_shoot = false;
@@ -174,6 +175,7 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
   survivals            = acharacter.survivals;
   pause_bouge_dg       = acharacter.pause_bouge_dg;
   do_nothing_time      = acharacter.do_nothing_time;
+  walking_time         = acharacter.walking_time;
   animation_time       = acharacter.animation_time;
   lost_energy          = acharacter.lost_energy;
   hidden               = acharacter.hidden;
@@ -477,6 +479,7 @@ void Character::Draw()
 void Character::Jump(double strength, double angle /*in radian */)
 {
   do_nothing_time = Time::GetInstance()->Read();
+  walking_time = Time::GetInstance()->Read();
 
   if (!CanJump() && ActiveTeam().IsLocal()) return;
 
@@ -555,6 +558,11 @@ void Character::Refresh()
   {
     if(do_nothing_time + do_nothing_timeout < global_time->Read())
       CharacterCursor::GetInstance()->FollowActiveCharacter();
+
+    
+    if(walking_time + 1000 < global_time->Read())
+    if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
+      body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");
   }
 
   if(body->IsWalking())
@@ -615,7 +623,9 @@ bool Character::CanJump() const
 
 void Character::InitMouvementDG(uint pause)
 {
+  walking_time = Time::GetInstance()->Read();
   do_nothing_time = Time::GetInstance()->Read();
+  SetMovement("walk");
   CharacterCursor::GetInstance()->Hide();
   step_sound_played = true;
   pause_bouge_dg = Time::GetInstance()->Read()+pause;
@@ -625,6 +635,7 @@ bool Character::CanStillMoveDG(uint pause)
 {
   if(pause_bouge_dg+pause<Time::GetInstance()->Read())
   {
+    walking_time = Time::GetInstance()->Read();
     pause_bouge_dg += pause;
     return true;
   }
@@ -787,6 +798,7 @@ void Character::SetWeaponClothe()
   SetClothe("weapon-" + m_team.GetWeapon().GetID());
   if(body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID())
     SetClothe("normal");
+  SetMovement("walk");
 }
 
 void Character::SetMovement(std::string name)
