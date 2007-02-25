@@ -139,8 +139,6 @@ bool NinjaRope::TryAttachRope()
   if (find_first_contact_point(pos, angle, length, 4, contact_point))
     {
       // The rope reaches the fixation point. Let's fix it !
-      //      AttachRope(m_fixation_point, 
-      
       Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
       a->Push(ATTACH_ROPE);
       a->Push(contact_point);
@@ -190,14 +188,16 @@ bool NinjaRope::TryAddNode(int CurrentSense)
 
       // The rope has collided something...
       // Add a node on the rope and change the fixation point
-      // AttachNode(contact_point, rope_angle, CurrentSense);
-      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
-      a->Push(ATTACH_NODE);
-      a->Push(contact_point);
-      a->Push(rope_angle);
-      a->Push(CurrentSense);
-      ActionHandler::GetInstance()->NewAction(a);
-      ActionHandler::GetInstance()->ExecActions();
+      AttachNode(contact_point, rope_angle, CurrentSense);
+      
+      // Send node addition over the network
+      Action a(Action::ACTION_WEAPON_NINJAROPE);
+      a.Push(ATTACH_NODE);
+      a.Push(contact_point);
+      a.Push(rope_angle);
+      a.Push(CurrentSense);
+      network.SendAction(&a);
+
       return true;
     }
 
@@ -252,12 +252,12 @@ bool NinjaRope::TryBreakNode(int currentSense)
       last_broken_node_sense = currentSense ;
 
       // remove last node
-      //DetachNode();      
-      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
-      a->Push(DETACH_NODE);
-      ActionHandler::GetInstance()->NewAction(a);
-      ActionHandler::GetInstance()->ExecActions();
-      MSG_DEBUG("ninja_rope", "- last node");
+      DetachNode();
+
+      // Send node suppression over the network
+      Action a(Action::ACTION_WEAPON_NINJAROPE);
+      a.Push(DETACH_NODE);
+      network.SendAction(&a);
     }
 
   return breakNode ;
@@ -272,8 +272,10 @@ void NinjaRope::NotifyMove(bool collision)
   if (!m_is_active)
     return;
 
-  // Check if the character collide something.
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+    return;
 
+  // Check if the character collide something.
   if (collision)
     {
       // Yes there has been a collision.
@@ -290,20 +292,17 @@ void NinjaRope::NotifyMove(bool collision)
   angularSpeed = ActiveCharacter().GetAngularSpeed() ;
   currentSense = (int)(angularSpeed / fabs(angularSpeed)) ;
 
-  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-    {
-      // While there is nodes to add, we add !
-      while (TryAddNode(currentSense))
-	addNode = true;
-      
-      // If we have created nodes, we exit to avoid breaking what we
-      // have just done !
-      if (addNode)
-	return;
-      
-      // While there is nodes to break, we break !
-      while (TryBreakNode(currentSense));
-    }
+  // While there is nodes to add, we add !
+  while (TryAddNode(currentSense))
+    addNode = true;
+  
+  // If we have created nodes, we exit to avoid breaking what we
+  // have just done !
+  if (addNode)
+    return;
+  
+  // While there is nodes to break, we break !
+  while (TryBreakNode(currentSense));
 }
 
 void NinjaRope::Refresh()
@@ -311,7 +310,7 @@ void NinjaRope::Refresh()
   if (!m_is_active)
     return ;
 
-  ActiveCharacter().UpdatePosition();
+  ActiveCharacter().UpdatePosition();  
 }
 
 void NinjaRope::Draw()
@@ -471,7 +470,15 @@ void NinjaRope::AttachNode(Point2i contact_point,
 }
 
 void NinjaRope::DetachNode()
-{
+{      
+  assert(rope_nodes.size() >= 1); 
+
+  { // for debugging only
+    rope_node_t node;
+    node = rope_nodes.back();
+    MSG_DEBUG("ninja_rope", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+  }
+  
   // remove last node
   rope_nodes.pop_back();
   
@@ -508,11 +515,10 @@ void NinjaRope::GoUp()
 
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     {
-      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
-      a->Push(SET_ROPE_SIZE);
-      a->Push(ActiveCharacter().GetRopeLength());
-      ActionHandler::GetInstance()->NewAction(a);
-      ActionHandler::GetInstance()->ExecActions();
+      Action a(Action::ACTION_WEAPON_NINJAROPE);
+      a.Push(SET_ROPE_SIZE);
+      a.Push(ActiveCharacter().GetRopeLength());
+      network.SendAction(&a);
     }
 }
 
@@ -532,11 +538,10 @@ void NinjaRope::GoDown()
 
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
     {
-      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
-      a->Push(SET_ROPE_SIZE);
-      a->Push(ActiveCharacter().GetRopeLength());
-      ActionHandler::GetInstance()->NewAction(a);
-      ActionHandler::GetInstance()->ExecActions();
+      Action a(Action::ACTION_WEAPON_NINJAROPE);
+      a.Push(SET_ROPE_SIZE);
+      a.Push(ActiveCharacter().GetRopeLength());
+      network.SendAction(&a);
     }
 }
 
