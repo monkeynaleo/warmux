@@ -42,6 +42,7 @@
 #include "../tool/vector2.h"
 #include "../weapon/construct.h"
 #include "../weapon/launcher.h"
+#include "../weapon/ninja_rope.h"
 #include "../weapon/supertux.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
@@ -242,6 +243,8 @@ void Action_Menu_AddTeam (Action *a)
   the_team.player_name = a->PopString();
   the_team.nb_characters = uint(a->PopInt());
 
+  MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
+
   teams_list.AddTeam (the_team);
 
   network.network_menu->AddTeamCallback(the_team.id);
@@ -264,6 +267,9 @@ void Action_Menu_UpdateTeam (Action *a)
 void Action_Menu_DelTeam (Action *a)
 {
   std::string team = a->PopString();
+
+  MSG_DEBUG("action_handler.menu", "- %s", team.c_str());
+  
   teams_list.DelTeam (team);
   network.network_menu->DelTeamCallback(team);
 }
@@ -391,6 +397,42 @@ void Action_Weapon_Construction (Action *a)
   Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
   assert(construct_weapon != NULL);
   construct_weapon->SetAngle(a->PopDouble());
+}
+
+void Action_Weapon_Ninjarope (Action *a)
+{
+  NinjaRope* ninjarope = dynamic_cast<NinjaRope*>(&(ActiveTeam().AccessWeapon()));
+  assert(ninjarope != NULL);
+
+  int subaction = a->PopInt();
+  switch(subaction) {
+  case NinjaRope::ATTACH_ROPE: 
+    {// attach rope
+      Point2i contact_point = a->PopPoint2i();
+      ninjarope->AttachRope(contact_point);
+    }
+    break;
+
+  case NinjaRope::ATTACH_NODE: // attach node
+    {
+      Point2i contact_point = a->PopPoint2i();
+      double angle = a->PopDouble();
+      int sense = a->PopInt();
+      ninjarope->AttachNode(contact_point, angle, sense);
+    }
+    break;
+
+  case NinjaRope::DETACH_NODE: // detach last node
+    ninjarope->DetachNode();
+    break;
+
+  case NinjaRope::SET_ROPE_SIZE: // update rope size
+    ninjarope->SetRopeSize(a->PopDouble());
+    break;
+
+  default:
+    assert(false);
+  }
 }
 
 // ########################################################
@@ -564,6 +606,7 @@ ActionHandler::ActionHandler()
   // Special weapon options
   Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
   Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
+  Register (Action::ACTION_WEAPON_NINJAROPE, "WEAPON_ninjarope", &Action_Weapon_Ninjarope);
  
   // ########################################################
   Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);

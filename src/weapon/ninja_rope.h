@@ -48,19 +48,57 @@ class NinjaRope : public Weapon
     Sprite* m_hook_sprite;
     Sprite* m_node_sprite;
 
+  protected:
+    void Refresh();
+    void p_Deselect();
+    bool p_Shoot();
+
+    void GoUp();
+    void GoDown();
+    void GoLeft();
+    void GoRight();
+    void StopLeft();
+    void StopRight();
+
+    bool TryAttachRope();
+    bool TryAddNode(int CurrentSense) ;
+    bool TryBreakNode(int CurrentSense) ;
+
   public:
+    enum {
+      ATTACH_ROPE,
+      ATTACH_NODE,
+      DETACH_NODE,
+      SET_ROPE_SIZE,
+      UPDATE_PLAYER_POSITION
+    } ninja_rope_movement_t;
+
     std::list<rope_node_t> rope_nodes;
-    Point2i fixation_point;
+    Point2i m_fixation_point;
     bool go_left, go_right;
     double delta_len ;
 
     NinjaRope();
-    void Active();
     void Draw();
     void NotifyMove(bool collision);
-    void SignalTurnEnd();
+    
+    virtual void ActionStopUse();
+    virtual void SignalTurnEnd();
+    
     EmptyWeaponConfig& cfg();
 
+    // Attaching and dettaching nodes rope
+    // This is public because of network
+    void AttachRope(Point2i contact_point);
+    void DetachRope();
+
+    void AttachNode(Point2i contact_point, 
+		    double angle, 
+		    int sense);
+    void DetachNode();
+    void SetRopeSize(double length);
+
+    // Keys management
     virtual void HandleKeyPressed_Up();
     virtual void HandleKeyRefreshed_Up();
     virtual void HandleKeyReleased_Up();
@@ -80,20 +118,6 @@ class NinjaRope : public Weapon
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();
     virtual void HandleKeyReleased_Shoot();
-  protected:
-    void Refresh();
-    void p_Deselect();
-    bool p_Shoot();
-    void GoUp();
-    void GoDown();
-    void GoLeft();
-    void GoRight();
-    void StopLeft();
-    void StopRight();
-    bool TryAttachRope();
-    void UnattachRope();
-    bool TryAddNode(int CurrentSense) ;
-    bool TryBreakNode(int CurrentSense) ;
 };
 
 //-----------------------------------------------------------------------------

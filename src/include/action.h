@@ -87,6 +87,7 @@ public:
     // Special weapon options
     ACTION_WEAPON_SUPERTUX,
     ACTION_WEAPON_CONSTRUCTION,
+    ACTION_WEAPON_NINJAROPE,
 
     // ########################################################
     ACTION_NETWORK_SYNC_BEGIN,
