@@ -76,7 +76,6 @@ void SuperTux::Refresh()
     a.Push(angle_rad);
     a.Push(GetPhysX());
     a.Push(GetPhysY());
-    Point2d speed;
     network.SendAction(&a);
   }
   particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
