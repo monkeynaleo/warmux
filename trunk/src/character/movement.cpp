@@ -26,6 +26,7 @@
 
 Movement::Movement(xmlpp::Element *xml)
 {
+  play_mode = LOOP;
   always_moving = false;
   XmlReader::ReadStringAttr( xml, "name", type);
   assert(type!="");
@@ -33,7 +34,12 @@ Movement::Movement(xmlpp::Element *xml)
   speed = 15;
   XmlReader::ReadIntAttr(xml, "speed", speed);
 
-  // Load the test rectangle
+  std::string pm;
+  if( XmlReader::ReadStringAttr(xml, "play_mode", pm))
+  if( pm == "play_once" )
+    play_mode = PLAY_ONCE;
+
+   // Load the test rectangle
   test_left = test_right = test_top = test_bottom = 0;
   xmlpp::Element *collision_rect = XmlReader::GetMarker(xml, "collision_rect");
   if (collision_rect == NULL) return;

@@ -63,6 +63,7 @@ private:
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
   uint do_nothing_time;
+  uint walking_time;
   uint animation_time;
   int lost_energy;
   bool hidden; //The character is hidden (needed by teleportation)

@@ -62,6 +62,11 @@ public:
   bool always_moving;
   int speed;
   uint test_left, test_right, test_top, test_bottom;
+  enum
+  {
+    LOOP,
+    PLAY_ONCE
+  } play_mode;
 
   std::string type;
 
