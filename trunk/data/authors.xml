@@ -30,6 +30,13 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>lodesi</nickname>
+	<name>Laurent DEFERT SIMONNEAU</name>
+	<description>Programmer and graphic artist</description>
+	<email>lodesi2_AT_yahoo_DOT_fr</email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>OznOg</nickname>
 	<name>Sébastien GONZALVE</name>
 	<description>Programmer</description>
@@ -68,13 +75,6 @@
 	<description>Initial programmer and graphic artist of the game</description>
 	<website>http://perso.wanadoo.fr/lami/</website>
 	<email>lami_AT_wormux_DOT_org</email>
-	<country>France</country>
-      </author>
-      <author>
-	<nickname>lodesi</nickname>
-	<name>Laurent DEFERT SIMONNEAU</name>
-	<description>Programmer and graphic artist</description>
-	<email>lodesi2_AT_yahoo_DOT_fr</email>
 	<country>France</country>
       </author>
       <author>
