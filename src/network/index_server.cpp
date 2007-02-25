@@ -69,7 +69,7 @@ ConnectionState IndexServer::Connect()
   // Until we find one running
   while( GetServerAddress( addr, port) )
   {
-    if( ConnectTo( addr, port) == CONNECTED )
+    if( ConnectTo( addr, port) )
       return CONNECTED;
   }
 
@@ -94,7 +94,7 @@ bool IndexServer::ConnectTo(const std::string & address, const int & port)
   socket = SDLNet_TCP_Open(&ip);
   if(!socket)
   {
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
+    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
     return false;
   }
 
