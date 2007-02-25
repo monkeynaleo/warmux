@@ -380,7 +380,7 @@ void Team::LoadGamingData(uint howmany)
   // Disable non-working weapons in network games
   if(network.IsConnected())
   {
-    m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
+    //m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
   }
 
   active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);

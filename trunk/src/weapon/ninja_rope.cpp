@@ -27,6 +27,7 @@
 #include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../include/app.h"
+#include "../include/action_handler.h"
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../sound/jukebox.h"
@@ -134,34 +135,16 @@ bool NinjaRope::TryAttachRope()
 
   rope_nodes.clear();
 
-  if (find_first_contact_point(pos, angle, length, 4, fixation_point))
+  Point2i contact_point;
+  if (find_first_contact_point(pos, angle, length, 4, contact_point))
     {
-      m_attaching = false;
-
-      Point2i pos2;
-
       // The rope reaches the fixation point. Let's fix it !
-
-      pos2.x = pos.x - ActiveCharacter().GetX() ;
-      pos2.y = pos.y - ActiveCharacter().GetY() ;
-
-      ActiveCharacter().SetPhysFixationPointXY(
-					       fixation_point.x / PIXEL_PER_METER,
-					       fixation_point.y / PIXEL_PER_METER,
-					       (double)pos2.x / PIXEL_PER_METER,
-					       (double)pos2.y / PIXEL_PER_METER);
-
-      rope_node_t root_node;
-      root_node.pos = fixation_point;
-      root_node.angle = 0;
-      root_node.sense = 0;
-      rope_nodes.push_back(root_node);
-
-      ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
-      m_hooked_time = Time::GetInstance()->Read();
-      ActiveCharacter().SetMovement("ninja-rope");
-
-      ActiveCharacter().SetFiringAngle(-M_PI / 3);
+      //      AttachRope(m_fixation_point, 
+      
+      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
+      a->Push(ATTACH_ROPE);
+      a->Push(contact_point);
+      ActionHandler::GetInstance()->NewAction(a);
 
       return true;
     }
@@ -176,13 +159,6 @@ bool NinjaRope::TryAttachRope()
   return false;
 }
 
-void NinjaRope::UnattachRope()
-{
-  ActiveCharacter().UnsetPhysFixationPoint() ;
-  rope_nodes.clear();
-  m_is_active = false;
-}
-
 bool NinjaRope::TryAddNode(int CurrentSense)
 {
   int lg;
@@ -194,8 +170,8 @@ bool NinjaRope::TryAddNode(int CurrentSense)
 
   // Compute distance between hands and rope fixation point.
 
-  V.x = handPos.x - fixation_point.x;
-  V.y = handPos.y - fixation_point.y;
+  V.x = handPos.x - m_fixation_point.x;
+  V.y = handPos.y - m_fixation_point.y;
   angle = V.ComputeAngle();
   lg = (int)V.Norm();
 
@@ -204,7 +180,7 @@ bool NinjaRope::TryAddNode(int CurrentSense)
 
   // Check if the rope collide something
 
-  if (find_first_contact_point(fixation_point, angle, lg, 4, contact_point))
+  if (find_first_contact_point(m_fixation_point, angle, lg, 2, contact_point))
     {
       rope_angle = ActiveCharacter().GetRopeAngle() ;
 
@@ -213,21 +189,15 @@ bool NinjaRope::TryAddNode(int CurrentSense)
 	return false ;
 
       // The rope has collided something...
-      // Add a node on the rope and change the fixation point.
-      Point2i pos(handPos.x - ActiveCharacter().GetX(),
-		  handPos.y - ActiveCharacter().GetY());
-
-      ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
-					       contact_point.y / PIXEL_PER_METER,
-					       (double)pos.x / PIXEL_PER_METER,
-					       (double)pos.y / PIXEL_PER_METER);
-
-      fixation_point = contact_point;
-      rope_node_t node;
-      node.pos = fixation_point;
-      node.angle = rope_angle;
-      node.sense = CurrentSense;
-      rope_nodes.push_back(node);
+      // Add a node on the rope and change the fixation point
+      // AttachNode(contact_point, rope_angle, CurrentSense);
+      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
+      a->Push(ATTACH_NODE);
+      a->Push(contact_point);
+      a->Push(rope_angle);
+      a->Push(CurrentSense);
+      ActionHandler::GetInstance()->NewAction(a);
+      ActionHandler::GetInstance()->ExecActions();
       return true;
     }
 
@@ -240,7 +210,7 @@ bool NinjaRope::TryBreakNode(int currentSense)
   int nodeSense;
   double angularSpeed;
   bool breakNode = false;
-  int dx, dy;
+//   int dx, dy;
 
   // Check if we can break a node.
 
@@ -282,19 +252,12 @@ bool NinjaRope::TryBreakNode(int currentSense)
       last_broken_node_sense = currentSense ;
 
       // remove last node
-      rope_nodes.pop_back();
-
-      fixation_point = rope_nodes.back().pos ;
-
-      Point2i handPos = ActiveCharacter().GetHandPosition();
-      dx = handPos.x - ActiveCharacter().GetX();
-      dy = handPos.y - ActiveCharacter().GetY();
-
-      ActiveCharacter().SetPhysFixationPointXY(fixation_point.x / PIXEL_PER_METER,
-					       fixation_point.y / PIXEL_PER_METER,
-					       (double)dx / PIXEL_PER_METER,
-					       (double)dy / PIXEL_PER_METER);
-
+      //DetachNode();      
+      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
+      a->Push(DETACH_NODE);
+      ActionHandler::GetInstance()->NewAction(a);
+      ActionHandler::GetInstance()->ExecActions();
+      MSG_DEBUG("ninja_rope", "- last node");
     }
 
   return breakNode ;
@@ -327,17 +290,20 @@ void NinjaRope::NotifyMove(bool collision)
   angularSpeed = ActiveCharacter().GetAngularSpeed() ;
   currentSense = (int)(angularSpeed / fabs(angularSpeed)) ;
 
-  // While there is nodes to add, we add !
-  while (TryAddNode(currentSense))
-    addNode = true;
-
-  // If we have created nodes, we exit to avoid breaking what we
-  // have just done !
-  if (addNode)
-    return;
-
-  // While there is nodes to break, we break !
-  while (TryBreakNode(currentSense));
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+    {
+      // While there is nodes to add, we add !
+      while (TryAddNode(currentSense))
+	addNode = true;
+      
+      // If we have created nodes, we exit to avoid breaking what we
+      // have just done !
+      if (addNode)
+	return;
+      
+      // While there is nodes to break, we break !
+      while (TryBreakNode(currentSense));
+    }
 }
 
 void NinjaRope::Refresh()
@@ -346,67 +312,6 @@ void NinjaRope::Refresh()
     return ;
 
   ActiveCharacter().UpdatePosition();
-}
-
-void NinjaRope::GoUp()
-{
-  if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
-    return;
-  last_mvt = Time::GetInstance()->Read();
-
-  delta_len = -0.1 ;
-  ActiveCharacter().ChangePhysRopeSize (delta_len);
-  ActiveCharacter().UpdatePosition();
-  delta_len = 0 ;
-}
-
-void NinjaRope::GoDown()
-{
-  if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
-    return;
-  last_mvt = Time::GetInstance()->Read();
-
-  if (ActiveCharacter().GetRopeLength() >= MAX_ROPE_LEN / PIXEL_PER_METER)
-    return;
-
-  delta_len = 0.1 ;
-  ActiveCharacter().ChangePhysRopeSize (delta_len) ;
-  ActiveCharacter().UpdatePosition() ;
-  delta_len = 0 ;
-}
-
-void NinjaRope::GoRight()
-{
-  go_right = true ;
-  ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
-  ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-}
-
-void NinjaRope::StopRight()
-{
-  go_right = false ;
-
-  if (go_left || go_right)
-    return ;
-
-  ActiveCharacter().SetExternForce(0,0);
-}
-
-void NinjaRope::GoLeft()
-{
-  go_left = true ;
-  ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
-  ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-}
-
-void NinjaRope::StopLeft()
-{
-  go_left = false ;
-
-  if (go_left || go_right)
-    return ;
-
-  ActiveCharacter().SetExternForce(0,0);
 }
 
 void NinjaRope::Draw()
@@ -487,11 +392,197 @@ void NinjaRope::Draw()
 
 void NinjaRope::p_Deselect()
 {
-  m_is_active = false;
-  ActiveCharacter().Show();
-  ActiveCharacter().SetExternForce(0,0);
-  ActiveCharacter().UnsetPhysFixationPoint() ;
+  DetachRope();
 }
+    
+// force detaching rope if time is out
+void NinjaRope::SignalTurnEnd()
+{
+  p_Deselect();
+}
+
+void NinjaRope::ActionStopUse()
+{
+  DetachRope();
+}
+
+
+void NinjaRope::AttachRope(Point2i contact_point)
+{
+  m_attaching = false;
+
+  // The rope reaches the fixation point. Let's fix it !
+  Point2i handPos = ActiveCharacter().GetHandPosition();
+  Point2i pos(handPos.x - ActiveCharacter().GetX(),
+	      handPos.y - ActiveCharacter().GetY());
+
+  ActiveCharacter().SetPhysFixationPointXY(
+					   contact_point.x / PIXEL_PER_METER,
+					   contact_point.y / PIXEL_PER_METER,
+					   (double)pos.x / PIXEL_PER_METER,
+					   (double)pos.y / PIXEL_PER_METER);
+
+  m_fixation_point = contact_point;
+
+  rope_node_t root_node;
+  root_node.pos = m_fixation_point;
+  root_node.angle = 0;
+  root_node.sense = 0;
+  rope_nodes.push_back(root_node);
+
+  ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
+  m_hooked_time = Time::GetInstance()->Read();
+  ActiveCharacter().SetMovement("ninja-rope");
+  
+  ActiveCharacter().SetFiringAngle(-M_PI / 3);
+}
+
+void NinjaRope::DetachRope()
+{
+  ActiveCharacter().UnsetPhysFixationPoint() ;
+  rope_nodes.clear();
+  m_is_active = false;
+}
+
+void NinjaRope::AttachNode(Point2i contact_point,
+			   double angle,
+			   int sense)
+{  
+  Point2i handPos = ActiveCharacter().GetHandPosition();
+
+  // The rope has collided something...
+  // Add a node on the rope and change the fixation point.
+  Point2i pos(handPos.x - ActiveCharacter().GetX(),
+	      handPos.y - ActiveCharacter().GetY());
+  
+  ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
+					   contact_point.y / PIXEL_PER_METER,
+					   (double)pos.x / PIXEL_PER_METER,
+					   (double)pos.y / PIXEL_PER_METER);
+  
+  m_fixation_point = contact_point;
+  rope_node_t node;
+  node.pos = m_fixation_point;
+  node.angle = angle;
+  node.sense = sense;
+  rope_nodes.push_back(node);
+
+  MSG_DEBUG("ninja_rope", "+ %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+}
+
+void NinjaRope::DetachNode()
+{
+  // remove last node
+  rope_nodes.pop_back();
+  
+  m_fixation_point = rope_nodes.back().pos ;
+  
+  Point2i handPos = ActiveCharacter().GetHandPosition();
+  int dx = handPos.x - ActiveCharacter().GetX();
+  int dy = handPos.y - ActiveCharacter().GetY();
+  
+  ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
+					   m_fixation_point.y / PIXEL_PER_METER,
+					   (double)dx / PIXEL_PER_METER,
+					   (double)dy / PIXEL_PER_METER);
+}
+
+// =========================== Moves management
+
+void NinjaRope::SetRopeSize(double length)
+{
+  double delta = length - ActiveCharacter().GetRopeLength();
+  ActiveCharacter().ChangePhysRopeSize (delta);  
+}
+
+void NinjaRope::GoUp()
+{
+  if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
+    return;
+  last_mvt = Time::GetInstance()->Read();
+
+  delta_len = -0.1 ;
+  ActiveCharacter().ChangePhysRopeSize (delta_len);
+  ActiveCharacter().UpdatePosition();
+  delta_len = 0 ;  
+
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+    {
+      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
+      a->Push(SET_ROPE_SIZE);
+      a->Push(ActiveCharacter().GetRopeLength());
+      ActionHandler::GetInstance()->NewAction(a);
+      ActionHandler::GetInstance()->ExecActions();
+    }
+}
+
+void NinjaRope::GoDown()
+{
+  if(Time::GetInstance()->Read()<last_mvt+DT_MVT)
+    return;
+  last_mvt = Time::GetInstance()->Read();
+
+  if (ActiveCharacter().GetRopeLength() >= MAX_ROPE_LEN / PIXEL_PER_METER)
+    return;
+
+  delta_len = 0.1 ;
+  ActiveCharacter().ChangePhysRopeSize (delta_len) ;
+  ActiveCharacter().UpdatePosition() ;
+  delta_len = 0 ;
+
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+    {
+      Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
+      a->Push(SET_ROPE_SIZE);
+      a->Push(ActiveCharacter().GetRopeLength());
+      ActionHandler::GetInstance()->NewAction(a);
+      ActionHandler::GetInstance()->ExecActions();
+    }
+}
+
+void NinjaRope::GoRight()
+{
+  go_right = true ;
+  ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
+  ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
+
+  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+}
+
+void NinjaRope::StopRight()
+{
+  go_right = false ;
+
+  if (go_left || go_right)
+    return ;
+
+  ActiveCharacter().SetExternForce(0,0);
+
+  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+}
+
+void NinjaRope::GoLeft()
+{
+  go_left = true ;
+  ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
+  ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
+
+  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+}
+
+void NinjaRope::StopLeft()
+{
+  go_left = false ;
+
+  if (go_left || go_right)
+    return ;
+
+  ActiveCharacter().SetExternForce(0,0);
+
+  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+}
+
+// =========================== Keys management
 
 void NinjaRope::HandleKeyPressed_Up()
 {
@@ -583,20 +674,16 @@ void NinjaRope::HandleKeyReleased_MoveRight()
 
 void NinjaRope::HandleKeyPressed_Shoot()
 {
-  if (m_is_active)
-    UnattachRope(); 
-  else
+  if (m_is_active) {
+    //DetachRope(); 
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
+  } else
     NewActionShoot();
 }
 
 void NinjaRope::HandleKeyRefreshed_Shoot(){}
 
 void NinjaRope::HandleKeyReleased_Shoot(){}
-
-void NinjaRope::SignalTurnEnd()
-{
-  p_Deselect();
-}
 
 EmptyWeaponConfig& NinjaRope::cfg()
 {

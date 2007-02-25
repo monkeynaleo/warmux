@@ -484,8 +484,17 @@ void TeamsList::DelTeam (const std::string &id)
   Team *equipe = FindById (id, pos);
   assert(equipe != NULL);
 
-  selection.erase(find(selection.begin(),selection.end(),(uint)pos));
-  playing_list.erase(find(playing_list.begin(),playing_list.end(),equipe));
+  selection_iterator it = find(selection.begin(),selection.end(),(uint)pos);
+
+  if (it != selection.end()) {
+    selection.erase(it);
+  }
+  
+  iterator playing_it = find(playing_list.begin(),playing_list.end(),equipe);
+  
+  if (playing_it != playing_list.end()) {
+    playing_list.erase(playing_it);
+  }
 
   active_team = playing_list.begin();
 }

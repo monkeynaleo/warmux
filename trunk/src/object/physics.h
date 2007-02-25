@@ -117,6 +117,7 @@ public:
   // Add new strength
   void SetExternForce (double length, double angle);
   void SetExternForceXY (Point2d vector);
+  Point2d GetExternForce() const;
 
   // Add / Remove a fixation point.
   void SetPhysFixationPointXY(double g_x, double g_y,

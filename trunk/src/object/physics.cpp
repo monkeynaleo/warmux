@@ -253,6 +253,11 @@ void Physics::SetExternForceXY (Point2d vector)
     StartMoving();
 }
 
+Point2d Physics::GetExternForce() const
+{
+  return m_extern_force;
+}
+
 // Set fixation point positions
 void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
 				     double dy)
