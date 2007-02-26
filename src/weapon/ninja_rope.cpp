@@ -210,10 +210,8 @@ bool NinjaRope::TryBreakNode(int currentSense)
   int nodeSense;
   double angularSpeed;
   bool breakNode = false;
-//   int dx, dy;
 
   // Check if we can break a node.
-
   nodeSense = rope_nodes.back().sense;
   nodeAngle = rope_nodes.back().angle;
   angularSpeed = ActiveCharacter().GetAngularSpeed();
@@ -346,7 +344,6 @@ void NinjaRope::Draw()
   prev_angle = angle;
 
   // Draw the rope.
-
   Point2i handPos = ActiveCharacter().GetHandPosition();
   x = handPos.x;
   y = handPos.y;
@@ -470,7 +467,7 @@ void NinjaRope::AttachNode(Point2i contact_point,
   node.sense = sense;
   rope_nodes.push_back(node);
 
-  MSG_DEBUG("ninja_rope", "+ %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+  MSG_DEBUG("ninja_rope.node", "+ %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
 }
 
 void NinjaRope::DetachNode()
@@ -480,7 +477,7 @@ void NinjaRope::DetachNode()
   { // for debugging only
     rope_node_t node;
     node = rope_nodes.back();
-    MSG_DEBUG("ninja_rope", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
+    MSG_DEBUG("ninja_rope.node", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
   }
   
   // remove last node
@@ -516,14 +513,6 @@ void NinjaRope::GoUp()
   ActiveCharacter().ChangePhysRopeSize (delta_len);
   ActiveCharacter().UpdatePosition();
   delta_len = 0 ;  
-
-  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-    {
-      Action a(Action::ACTION_WEAPON_NINJAROPE);
-      a.Push(SET_ROPE_SIZE);
-      a.Push(ActiveCharacter().GetRopeLength());
-      network.SendAction(&a);
-    }
 }
 
 void NinjaRope::GoDown()
@@ -539,14 +528,6 @@ void NinjaRope::GoDown()
   ActiveCharacter().ChangePhysRopeSize (delta_len) ;
   ActiveCharacter().UpdatePosition() ;
   delta_len = 0 ;
-
-  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
-    {
-      Action a(Action::ACTION_WEAPON_NINJAROPE);
-      a.Push(SET_ROPE_SIZE);
-      a.Push(ActiveCharacter().GetRopeLength());
-      network.SendAction(&a);
-    }
 }
 
 void NinjaRope::GoRight()
@@ -554,8 +535,6 @@ void NinjaRope::GoRight()
   go_right = true ;
   ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
   ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-
-  //SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 void NinjaRope::StopRight()
@@ -566,8 +545,6 @@ void NinjaRope::StopRight()
     return ;
 
   ActiveCharacter().SetExternForce(0,0);
-
-  //SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 void NinjaRope::GoLeft()
@@ -575,8 +552,6 @@ void NinjaRope::GoLeft()
   go_left = true ;
   ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
   ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-
-  //SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 void NinjaRope::StopLeft()
@@ -587,8 +562,6 @@ void NinjaRope::StopLeft()
     return ;
 
   ActiveCharacter().SetExternForce(0,0);
-
-  //SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 // =========================== Keys management

@@ -340,15 +340,26 @@ void Physics::ChangePhysRopeSize(double dl)
   if (!was_moving && IsMoving()) StartMoving();
 }
 
-double Physics::GetRopeAngle()
+double Physics::GetRopeAngle() const
 {
   return m_rope_angle.x0 ;
 }
 
-double Physics::GetRopeLength()
+void Physics::SetRopeAngle(double angle)
+{
+  m_rope_angle.x0 = angle;
+}
+
+double Physics::GetRopeLength() const
 {
   return m_rope_length.x0;
 }
+
+void Physics::SetRopeLength(double length)
+{
+  m_rope_length.x0 = length;
+}
+
 
 //---------------------------------------------------------------------------//
 //--                            Physical Simulation                        --//

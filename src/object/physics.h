@@ -123,9 +123,13 @@ public:
   void SetPhysFixationPointXY(double g_x, double g_y,
 			      double dx, double dy) ;
   void UnsetPhysFixationPoint() ;
-  void ChangePhysRopeSize(double dl) ;
-  double GetRopeAngle() ;
-  double GetRopeLength();
+  void ChangePhysRopeSize(double delta) ;
+
+  double GetRopeAngle() const;
+  void SetRopeAngle(double angle);
+
+  double GetRopeLength() const;
+  void SetRopeLength(double length);
 
   // Physical engine : update position (and state) with current time
   void RunPhysicalEngine();
