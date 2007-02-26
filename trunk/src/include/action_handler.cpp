@@ -342,10 +342,9 @@ void Action_Character_SetSkin (Action *a)
 // Send character infos on network (it's totally stupid to send it locally ;-)
 void SendCharacterInfos(int team_no, int char_no)
 {
-  Action* a = new Action(Action::ACTION_CHARACTER_SET_PHYSICS);
-  a->StoreCharacter(team_no, char_no);
-  network.SendAction(a);
-  delete a;
+  Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
+  a.StoreCharacter(team_no, char_no);
+  network.SendAction(&a);
 }
 
 // ########################################################
@@ -526,6 +525,7 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   SDL_UnlockMutex(mutex);
   if (repeat_to_network) network.SendAction(a);
 }
+
 
 void ActionHandler::Register (Action::Action_t action,
 		                      const std::string &name,callback_t fct)
