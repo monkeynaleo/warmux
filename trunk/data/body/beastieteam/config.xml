@@ -27,6 +27,7 @@
 
 <alias movement="weapon-riot_bomb-begin-shoot" correspond_to="weapon-bazooka-begin-shoot" />
 <alias movement="weapon-riot_bomb-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
+<alias movement="weapon-bazooka-select" correspond_to="weapon-bazooka-begin-shoot" />
 <alias movement="weapon-automatic_bazooka-begin-shoot" correspond_to="weapon-bazooka-begin-shoot" />
 <alias movement="weapon-automatic_bazooka-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
 <alias movement="weapon-cluster_bomb-begin-shoot" correspond_to="weapon-grenade-begin-shoot" />
@@ -1004,7 +1005,7 @@
 </movement>
 
 <!-- ###### Bazooka ###### -->
-<movement name="weapon-bazooka-begin-shoot" speed="50">
+<movement name="weapon-bazooka-begin-shoot" speed="50" play_mode="play_once">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame number="0">
 		<member type="foot-left" dy="0"/>
@@ -1028,61 +1029,61 @@
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="45" dy="-1" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-90"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-80"/>
 	</frame>
 	<frame number="4">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="60" dy="-1" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-120"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-80"/>
 	</frame>
 	<frame number="5">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="90" dy="-2" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-90"/>
 	</frame>
 	<frame number="6">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="90" dy="-2" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-90"/>
 	</frame>
 	<frame number="7">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="90" dy="-2" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-100"/>
 	</frame>
 	<frame number="8">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="90" dy="-2" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-100"/>
 	</frame>
 	<frame number="9">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="90" dy="-2" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-110"/>
 	</frame>
 	<frame number="10">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="90" dy="-2" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-110"/>
 	</frame>
 	<frame number="11">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="90" dy="-2" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-120"/>
 	</frame>
 	<frame number="12">
 		<member type="foot-left" dy="-2"/>
 		<member type="foot-right" angle="90" dy="-2" dx="4"/>
 		<member type="head" follow_half_crosshair="true"/>
-		<member type="arm-right" follow_half_crosshair="true" angle="-180"/>
+		<member type="arm-right" follow_half_crosshair="true" angle="-120"/>
 	</frame>
 </movement>
 
