@@ -34,7 +34,7 @@
 const std::string WORMUX_NETWORK_PORT = "9999";
 const uint WORMUX_NETWORK_PORT_INT = 9999;
 
-typedef enum _ConnectionState
+typedef enum
 {
   CONNECTED,
   CONN_BAD_HOST,
@@ -56,9 +56,13 @@ class Network
 #endif
 
 protected:
-  bool m_is_connected;
-  bool m_is_server;
-  bool m_is_client;
+  typedef enum {
+    NETWORK_SERVER,
+    NETWORK_CLIENT,
+    LOCAL_ONLY
+  } connection_side_t;
+
+  connection_side_t m_connection;
 
   TCPsocket server_socket; // Wait for incoming connections on this socket
   SDL_Thread* thread; // network thread, where we receive data from network

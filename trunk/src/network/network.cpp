@@ -43,9 +43,8 @@ Network network;
 Network::Network()
 {
   max_player_number = 0;
-  m_is_connected = false;
-  m_is_server = false;
-  m_is_client = false;
+
+  m_connection = LOCAL_ONLY;
   state = NETWORK_NOT_CONNECTED;
   inited = false;
   sync_lock = false;
@@ -104,9 +103,10 @@ Network::~Network()
 
 void Network::Disconnect()
 {
-  if(!m_is_connected) return;
+  if(!IsConnected()) return;
 
-  m_is_connected = false; // To make the threads terminate
+  connection_side_t old_connection = m_connection;
+  m_connection = LOCAL_ONLY; // To make the threads terminate
 
   SDL_WaitThread(thread,NULL);
   printf("Network thread finished\n");
@@ -119,11 +119,8 @@ void Network::Disconnect()
   cpu.clear();
   SDLNet_FreeSocketSet(socket_set);
 
-  if(m_is_server)
+  if(old_connection == NETWORK_SERVER)
     SDLNet_TCP_Close(server_socket);
-
-  m_is_server = false;
-  m_is_client = false;
 }
 
 //-----------------------------------------------------------------------------
@@ -235,10 +232,8 @@ ConnectionState Network::ClientConnect(const std::string &host, const std::strin
     return CONN_REJECTED;
   }
 
-  m_is_client = true;
-  m_is_server = false;
+  m_connection = NETWORK_CLIENT;
   state = NETWORK_OPTION_SCREEN;
-  m_is_connected = true;
 
   socket_set = SDLNet_AllocSocketSet(1);
   connected_player = 1;
@@ -272,9 +267,7 @@ ConnectionState Network::ServerStart(const std::string &port)
     return CONN_BAD_PORT;
   }
 
-  m_is_server = true;
-  m_is_client = false;
-  m_is_connected = true;
+  m_connection = NETWORK_SERVER;
 
   // Open the port to listen to
   state = NETWORK_OPTION_SCREEN;
@@ -290,7 +283,7 @@ std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<Distant
 {
   printf("Client disconnected\n");
   delete *closed;
-  if(m_is_server && connected_player == max_player_number)
+  if(IsServer() && connected_player == max_player_number)
   {
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections
@@ -304,7 +297,7 @@ std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<Distant
 
 void Network::AcceptIncoming()
 {
-  assert(m_is_server);
+  assert(IsServer());
   if(state != NETWORK_OPTION_SCREEN) return;
 
   server_socket = SDLNet_TCP_Open(&ip);
@@ -318,7 +311,7 @@ void Network::AcceptIncoming()
 
 void Network::RejectIncoming()
 {
-  assert(m_is_server);
+  assert(IsServer());
   if(!server_socket) return;
   SDLNet_TCP_Close(server_socket);
   server_socket = NULL;
@@ -332,26 +325,26 @@ void Network::ReceiveActions()
 {
   char* packet;
 
-  while(m_is_connected && (cpu.size()==1 || m_is_server))
+  while (IsConnected() && (cpu.size()==1 || IsServer()))
   {
-    if(state == NETWORK_PLAYING && cpu.size() == 0)
+    if (state == NETWORK_PLAYING && cpu.size() == 0)
     {
       // If while playing everybody disconnected, just quit
       break;
     }
 
-    while(SDLNet_CheckSockets(socket_set, 100) == 0 && m_is_connected) //Loop while nothing is received
-    if(m_is_server && server_socket)
+    while (SDLNet_CheckSockets(socket_set, 100) == 0 && IsConnected()) //Loop while nothing is received
+      if (IsServer() && server_socket)
     {
       // Check for an incoming connection
       TCPsocket incoming;
       incoming = SDLNet_TCP_Accept(server_socket);
-      if(incoming)
+      if (incoming)
       {
         cpu.push_back(new DistantComputer(incoming));
         connected_player++;
         printf("New client connected\n");
-        if(connected_player >= max_player_number)
+        if (connected_player >= max_player_number)
           RejectIncoming();
         ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_ASK_VERSION));
       }
@@ -359,7 +352,7 @@ void Network::ReceiveActions()
     }
 
     std::list<DistantComputer*>::iterator dst_cpu = cpu.begin();
-    while(dst_cpu != cpu.end() && m_is_connected)
+    while(dst_cpu != cpu.end() && IsConnected())
     {
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
@@ -430,7 +423,7 @@ void Network::ReceiveActions()
 // Send Messages
 void Network::SendAction(Action* a)
 {
-  if (!m_is_connected) return;
+  if (!IsConnected()) return;
 
   MSG_DEBUG("network.traffic","Send action %s",
         ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
@@ -476,10 +469,10 @@ void Network::SendChatMessage(const std::string& txt)
 
 //-----------------------------------------------------------------------------
 
-const bool Network::IsConnected() const { return m_is_connected; }
-const bool Network::IsLocal() const { return !m_is_server && !m_is_client; }
-const bool Network::IsServer() const { return m_is_server; }
-const bool Network::IsClient() const { return m_is_client; }
+const bool Network::IsConnected() const { return (m_connection != LOCAL_ONLY); }
+const bool Network::IsLocal() const { return (m_connection == LOCAL_ONLY); }
+const bool Network::IsServer() const { return (m_connection == NETWORK_SERVER); }
+const bool Network::IsClient() const { return (m_connection == NETWORK_CLIENT); }
 
 const uint Network::GetPort()
 {
