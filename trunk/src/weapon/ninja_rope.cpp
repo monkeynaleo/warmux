@@ -272,7 +272,7 @@ void NinjaRope::NotifyMove(bool collision)
   if (!m_is_active)
     return;
 
-  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+  if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
     return;
 
   // Check if the character collide something.
@@ -310,7 +310,11 @@ void NinjaRope::Refresh()
   if (!m_is_active)
     return ;
 
+  if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
+    return;
+
   ActiveCharacter().UpdatePosition();  
+  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 void NinjaRope::Draw()
@@ -340,7 +344,6 @@ void NinjaRope::Draw()
   else
     angle = ActiveCharacter().GetRopeAngle();
   prev_angle = angle;
-
 
   // Draw the rope.
 
@@ -409,6 +412,7 @@ void NinjaRope::ActionStopUse()
 void NinjaRope::AttachRope(Point2i contact_point)
 {
   m_attaching = false;
+  m_is_active = true;
 
   // The rope reaches the fixation point. Let's fix it !
   Point2i handPos = ActiveCharacter().GetHandPosition();
@@ -551,7 +555,7 @@ void NinjaRope::GoRight()
   ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
   ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
 
-  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  //SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 void NinjaRope::StopRight()
@@ -563,7 +567,7 @@ void NinjaRope::StopRight()
 
   ActiveCharacter().SetExternForce(0,0);
 
-  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  //SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 void NinjaRope::GoLeft()
@@ -572,7 +576,7 @@ void NinjaRope::GoLeft()
   ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
   ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
 
-  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  //SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 void NinjaRope::StopLeft()
@@ -584,7 +588,7 @@ void NinjaRope::StopLeft()
 
   ActiveCharacter().SetExternForce(0,0);
 
-  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  //SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 // =========================== Keys management
