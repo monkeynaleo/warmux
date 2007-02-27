@@ -107,10 +107,20 @@ void Chat::HandleKey(const SDL_Event& event)
     break;
 
   default:
-    if (kbd_event.state == 1){
-      if (key.unicode < 0x80 && key.unicode > 0)
+    if (kbd_event.state == 1 && key.unicode > 0){
+      if(key.unicode < 0x80) { // 1 byte char
 	txt = txt + (char)key.unicode;
-      input->Set(txt);
+      }
+      else if (key.unicode < 0x800) {// 2 byte char
+        txt = txt + (char)(((key.unicode & 0x7c0) >> 6) | 0xc0);
+        txt = txt + (char)((key.unicode & 0x3f) | 0x80);
+      }
+      else {// if (key.unicode < 0x10000) // 3 byte char
+        txt = txt + (char)(((key.unicode & 0xf000) >> 12) | 0xe0);
+        txt = txt + (char)(((key.unicode & 0xfc0) >> 6) | 0x80);
+        txt = txt + (char)((key.unicode & 0x3f) | 0x80);
+      }
+      input->Set(txt);  
     }
   }
 }
