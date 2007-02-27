@@ -116,6 +116,9 @@ bool NinjaRope::TryAttachRope()
   uint delta_time = Time::GetInstance()->Read() - m_launch_time;
   double angle ;
 
+  // Remove the root node
+  rope_nodes.clear();
+
   // The rope is being launching. Increase the rope length and check
   // collisions.
 
@@ -132,8 +135,6 @@ bool NinjaRope::TryAttachRope()
     }
 
   angle = m_initial_angle;
-
-  rope_nodes.clear();
 
   Point2i contact_point;
   if (find_first_contact_point(pos, angle, length, 4, contact_point))
@@ -267,7 +268,7 @@ void NinjaRope::NotifyMove(bool collision)
   double angularSpeed;
   int currentSense;
 
-  if (!m_is_active)
+  if (!m_is_active || m_attaching)
     return;
 
   if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
@@ -408,6 +409,8 @@ void NinjaRope::ActionStopUse()
 
 void NinjaRope::AttachRope(Point2i contact_point)
 {
+  MSG_DEBUG("ninja_rope.hook", "** AttachRope %d,%d", contact_point.x, contact_point.y);
+ 
   m_attaching = false;
   m_is_active = true;
 
