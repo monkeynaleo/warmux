@@ -145,8 +145,11 @@ void Weapon::Select()
   // is there a crosshair ?
   if (!EgalZero(min_angle - max_angle))
     ActiveTeam().crosshair.enable = true;
-
+  
   p_Select();
+
+  // be sure that angle is correct
+  ActiveCharacter().SetFiringAngle(ActiveCharacter().GetAbsFiringAngle());
 
   if (max_strength == 0) return ;
 
