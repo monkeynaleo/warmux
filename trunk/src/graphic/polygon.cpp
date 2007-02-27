@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "polygon.h"
+#include "../tool/random.h"
 
 PolygonBuffer::PolygonBuffer()
 {
@@ -121,22 +122,44 @@ void Polygon::AddPoint(const Point2d & p)
 // And the famous Bezier curve. And this algorithme is that simple ? I'm so disappointed !
 // But now you can say to the world wormux is using Bezier curve.
 void Polygon::AddBezierCurve(const Point2d anchor1, const Point2d control1,
-                             const Point2d control2, const Point2d anchor2, const int num_steps)
+                             const Point2d control2, const Point2d anchor2,
+                             const int num_steps, const bool add_first_point,
+                             const bool add_last_point)
 {
   Point2d tmp1 = anchor1 + control1;
   Point2d tmp2 = anchor2 + control2;
   double a, b;
-  AddPoint(anchor1);
+  if(add_first_point)
+    AddPoint(anchor1);
   for(int step = 1; step < num_steps - 1; step++) {
     a = ((float)step / (float)num_steps) * 1.0;
     b = 1 - a;
     AddPoint(anchor1 * b * b * b + tmp1 * 3.0 * b * b * a + tmp2 * 3.0 * b * a * a + anchor2 * a * a * a);
   }
-  AddPoint(anchor2);
+  if(add_last_point)
+    AddPoint(anchor2);
+}
+
+// Generate random point between 2 points
+void Polygon::AddRandomCurve(const Point2d start, const Point2d end,
+                             const double x_random_offset, const double y_random_offset,
+                             const int num_steps, const bool add_first_point,
+                             const bool add_last_point)
+{
+  Point2d step = (end - start) / num_steps;
+  Point2d tmp;
+  if(add_first_point)
+    AddPoint(start);
+  for (int i = 1; i < num_steps - 1; i++) {
+    AddPoint(start + (step * i) + Point2d(Random::GetDouble(-x_random_offset, x_random_offset),
+                                          Random::GetDouble(-y_random_offset, y_random_offset)));
+  }
+  if(add_last_point)
+    AddPoint(end);
 }
 
 // Generate a new polygon with Bezier interpolation
-Polygon * Polygon::GetBezierInterpolation(double smooth_value)
+Polygon * Polygon::GetBezierInterpolation(double smooth_value, const int num_steps)
 {
   Point2d p0, p1, p2, p3, c0, c1, c2, v1, v2;
   Polygon * shape = new Polygon();
@@ -161,7 +184,7 @@ Polygon * Polygon::GetBezierInterpolation(double smooth_value)
     v1 = (c1 - c0) * (l2 / (l1 + l2)) * smooth_value;
     v2 = (c1 - c2) * (l2 / (l2 + l3)) * smooth_value;
 
-    shape->AddBezierCurve(p1, v1, v2, p2);
+    shape->AddBezierCurve(p1, v1, v2, p2, num_steps, false);
   }
   return shape;
 }

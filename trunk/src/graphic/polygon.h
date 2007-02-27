@@ -61,8 +61,14 @@ class Polygon {
   void AddPoint(const Point2d & p);
   void ApplyTransformation(const AffineTransform2D & trans);
   void AddBezierCurve(const Point2d anchor1, const Point2d control1,
-                      const Point2d control2, const Point2d anchor2, const int num_steps = 20);
-  Polygon * GetBezierInterpolation(double smooth_value = 0.0);
+                             const Point2d control2, const Point2d anchor2,
+                             const int num_steps = 20, const bool add_first_point = true,
+                             const bool add_last_point = true);
+  void AddRandomCurve(const Point2d start, const Point2d end,
+                      const double x_random_offset, const double y_random_offset,
+                      const int num_steps, const bool add_first_point = true,
+                      const bool add_last_point = true);
+  Polygon * GetBezierInterpolation(const double smooth_value = 0.0, const int num_steps = 20);
   void Expand(const double expand_value);
   PolygonBuffer * GetPolygonBuffer() const;
   // Type of the polygon

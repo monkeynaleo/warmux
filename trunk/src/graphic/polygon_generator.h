@@ -26,11 +26,14 @@
 
 class PolygonGenerator {
  public:
+   static const int MIN_SPACE_BETWEEN_POINT;
    static Polygon * GenerateCircle(double diameter, int nb_point);
    static Polygon * GenerateRectangle(double width, double height);
    static Polygon * GenerateRoundedRectangle(double width, double height, double edge);
-   static double Random(double min, double max);
    static Polygon * GenerateRandomShape();
+   static Polygon * GenerateRandomTrapeze(const double width, const double height,
+                                          const double x_rand_offset, const double y_rand_offset,
+                                          const double coef);
 };
 
 #endif /* POLYGON_GENERATOR_H */
