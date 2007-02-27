@@ -21,6 +21,9 @@
 
 #include <stdlib.h>
 #include "polygon_generator.h"
+#include "../tool/random.h"
+
+const int PolygonGenerator::MIN_SPACE_BETWEEN_POINT = 50;
 
 Polygon * PolygonGenerator::GenerateCircle(double diameter, int nb_point)
 {
@@ -68,40 +71,46 @@ Polygon * PolygonGenerator::GenerateRoundedRectangle(double width, double height
   return tmp;
 }
 
-double PolygonGenerator::Random(double min, double max)
-{
-  if(max < min) {
-    double tmp = min;
-    min = max;
-    max = tmp;
-  }
-  return min + ((double)rand() / (double)RAND_MAX) * (max - min);
-}
-
 Polygon * PolygonGenerator::GenerateRandomShape()
 {
-  Polygon * tmp = new Polygon();
   srand(time(NULL));
-  int number_of_bottom_point = (int)Random(10.0, 20.0);
-  int number_of_upper_point  = (int)Random(10.0, 15.0);
-  double height = Random(400.0, 600.0);
-  double width  = Random(400.0, 2000.0);
-  double bottom_range;
-  double offset_range;
-  double x;
-  // First we generate bottom element from left to right
-  for(int i = 0; i < number_of_bottom_point; i++) {
-    x = (width / (double)number_of_bottom_point) * i;
-    bottom_range = Random(-10.0, 10.0);
-    offset_range = Random(-5.0, 5.0);
-    tmp->AddPoint(Point2d(x + offset_range, height + bottom_range));
+  double height = Random::GetDouble(400.0, 600.0);
+  double width  = Random::GetDouble(400.0, 2000.0);
+  return GenerateRandomTrapeze(width, height, Random::GetDouble(10.0, 15.0), Random::GetDouble(10.0, 15.0),
+                               Random::GetSign() * Random::GetDouble(0.5, 1.0));
+}
+
+Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const double height,
+                                                  const double x_rand_offset, const double y_rand_offset,
+                                                  const double coef)
+{
+  double upper_width, lower_width, upper_offset, lower_offset;
+  int number_of_bottom_point, number_of_upper_point, number_of_side_point;
+  Polygon * tmp = new Polygon();
+  number_of_side_point = (int)Random::GetDouble((height * 0.25) / MIN_SPACE_BETWEEN_POINT,
+                                     height / MIN_SPACE_BETWEEN_POINT);
+  if(coef > 0.0) {
+    upper_width = width;
+    lower_width = width * coef;
+    upper_offset = Random::GetDouble(0.0, width - lower_width);
+    lower_offset = 0.0;
+  } else {
+    upper_width = - width * coef;
+    lower_width = width;
+    upper_offset = 0.0;
+    lower_offset = Random::GetDouble(0.0, width - upper_width);
   }
-  // Then we generate upper element from right to left
-  for(int i = 0; i < number_of_upper_point; i++) {
-    x = (width / number_of_upper_point) * (number_of_upper_point - i);
-    bottom_range = Random(-10.0, 10.0);
-    offset_range = Random(-5.0, 5.0);
-    tmp->AddPoint(Point2d(x + offset_range, bottom_range));
-  }
+  number_of_upper_point = Random::GetInt((int)((upper_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
+                                         (int)(upper_width / MIN_SPACE_BETWEEN_POINT));
+  number_of_bottom_point = Random::GetInt((int)((lower_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
+                                          (int)((coef * lower_width) / MIN_SPACE_BETWEEN_POINT));
+  tmp->AddRandomCurve(Point2d(upper_offset, 0.0), Point2d(lower_offset, height),
+                      x_rand_offset, y_rand_offset, number_of_side_point, false, false);
+  tmp->AddRandomCurve(Point2d(lower_offset, height), Point2d(lower_offset + lower_width, height),
+                      x_rand_offset, y_rand_offset, number_of_bottom_point, false, false);
+  tmp->AddRandomCurve(Point2d(lower_offset + lower_width, height), Point2d(upper_offset + upper_width, 0.0),
+                      x_rand_offset, y_rand_offset, number_of_side_point, false, false);
+  tmp->AddRandomCurve(Point2d(upper_offset + upper_width, 0.0), Point2d(upper_offset, 0.0),
+                      x_rand_offset, y_rand_offset, number_of_side_point, false, false);
   return tmp;
 }
