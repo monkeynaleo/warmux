@@ -26,6 +26,20 @@
 #include "../include/base.h"
 //-----------------------------------------------------------------------------
 
+class NinjaRopeConfig : public EmptyWeaponConfig
+{
+ public:
+  uint max_rope_length; // Max rope length in pixels
+  uint automatic_growing_speed; // Pixel per 1/100 second.
+  int push_force;
+
+ public:
+  NinjaRopeConfig();
+  void LoadXml(xmlpp::Element *elem);
+};
+
+//-----------------------------------------------------------------------------
+
 class NinjaRope : public Weapon
 {
   private:
@@ -60,6 +74,7 @@ class NinjaRope : public Weapon
     void StopLeft();
     void StopRight();
 
+    bool WillBeAttached();
     bool TryAttachRope();
     bool TryAddNode(int CurrentSense) ;
     bool TryBreakNode(int CurrentSense) ;
@@ -85,7 +100,7 @@ class NinjaRope : public Weapon
     virtual void ActionStopUse();
     virtual void SignalTurnEnd();
     
-    EmptyWeaponConfig& cfg();
+    NinjaRopeConfig& cfg();
 
     // Attaching and dettaching nodes rope
     // This is public because of network

@@ -331,6 +331,9 @@
       <change_weapon>1</change_weapon>
       <min_angle>0</min_angle>
       <max_angle>89</max_angle>
+      <max_rope_length>500</max_rope_length>
+      <automatic_growing_speed>12</automatic_growing_speed>
+      <push_force>15</push_force>
     </ninjarope>
 
     <parachute>

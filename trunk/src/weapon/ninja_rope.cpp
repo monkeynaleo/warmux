@@ -37,9 +37,6 @@
 
 const int DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
 const int DST_MIN = 1 ;  //dst_minimal between 2 nodes
-const uint MAX_ROPE_LEN = 450 ; // Max rope length in pixels
-const uint ROPE_DRAW_SPEED = 12 ; // Pixel per 1/100 second.
-const int ROPE_PUSH_FORCE = 10;
 
 bool find_first_contact_point (Point2i from, double angle, int length,
 			       int skip, Point2i &contact_point)
@@ -80,7 +77,7 @@ bool find_first_contact_point (Point2i from, double angle, int length,
   return false ;
 }
 
-NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new WeaponConfig())
+NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new NinjaRopeConfig())
 {
   m_name = _("Ninjarope");
   use_unit_on_first_shoot = false;
@@ -125,8 +122,8 @@ bool NinjaRope::TryAttachRope()
   Point2i handPos = ActiveCharacter().GetHandPosition();
   pos = handPos;
 
-  length = ROPE_DRAW_SPEED * delta_time / 10;
-  if (length > MAX_ROPE_LEN)
+  length = cfg().automatic_growing_speed * delta_time / 10;
+  if (length > cfg().max_rope_length)
     {
       // Hum the roe is too short !
       m_attaching = false;
@@ -529,7 +526,7 @@ void NinjaRope::GoDown()
     return;
   last_mvt = Time::GetInstance()->Read();
 
-  if (ActiveCharacter().GetRopeLength() >= MAX_ROPE_LEN / PIXEL_PER_METER)
+  if (ActiveCharacter().GetRopeLength() >= cfg().max_rope_length / PIXEL_PER_METER)
     return;
 
   delta_len = 0.1 ;
@@ -541,7 +538,7 @@ void NinjaRope::GoDown()
 void NinjaRope::GoRight()
 {
   go_right = true ;
-  ActiveCharacter().SetExternForce(ROPE_PUSH_FORCE,0);
+  ActiveCharacter().SetExternForce(cfg().push_force,0);
   ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
 }
 
@@ -558,7 +555,7 @@ void NinjaRope::StopRight()
 void NinjaRope::GoLeft()
 {
   go_left = true ;
-  ActiveCharacter().SetExternForce(-ROPE_PUSH_FORCE,0);
+  ActiveCharacter().SetExternForce(-cfg().push_force,0);
   ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
 }
 
@@ -675,7 +672,26 @@ void NinjaRope::HandleKeyRefreshed_Shoot(){}
 
 void NinjaRope::HandleKeyReleased_Shoot(){}
 
-EmptyWeaponConfig& NinjaRope::cfg()
+
+//-----------------------------------------------------------------------------
+
+NinjaRopeConfig& NinjaRope::cfg()
 {
-  return static_cast<EmptyWeaponConfig&>(*extra_params);
+  return static_cast<NinjaRopeConfig&>(*extra_params);
+}
+//-----------------------------------------------------------------------------
+
+NinjaRopeConfig::NinjaRopeConfig()
+{ 
+  max_rope_length = 450;
+  automatic_growing_speed = 12;
+  push_force = 10;
+}
+
+void NinjaRopeConfig::LoadXml(xmlpp::Element *elem)
+{
+  EmptyWeaponConfig::LoadXml(elem);
+  XmlReader::ReadUint(elem, "max_rope_length", max_rope_length);
+  XmlReader::ReadUint(elem, "automatic_growing_speed", automatic_growing_speed);
+  XmlReader::ReadInt(elem, "push_force", push_force);
 }
