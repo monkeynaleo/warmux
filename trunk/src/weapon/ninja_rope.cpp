@@ -438,6 +438,10 @@ void NinjaRope::AttachRope(Point2i contact_point)
   ActiveCharacter().SetMovement("ninja-rope");
   
   ActiveCharacter().SetFiringAngle(-M_PI / 3);
+
+  // Camera should focus on it!
+  camera.FollowObject (&ActiveCharacter(),true, true, true);
+  camera.SetCloseFollowing(true);
 }
 
 void NinjaRope::DetachRope()
@@ -445,6 +449,7 @@ void NinjaRope::DetachRope()
   ActiveCharacter().UnsetPhysFixationPoint() ;
   rope_nodes.clear();
   m_is_active = false;
+  camera.SetCloseFollowing(false);
 }
 
 void NinjaRope::AttachNode(Point2i contact_point,
