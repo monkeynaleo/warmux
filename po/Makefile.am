@@ -181,6 +181,8 @@ POTFILES = \
         tools/index_server/stat.cpp \
         tools/index_server/sync_slave.cpp \
         tools/index_server/clock.cpp \
+        src/graphic/polygon_generator.cpp \
+        src/graphic/polygon_generator.h \
         src/config.h \
         src/object/barrel.h \
         src/object/objbox.h \
