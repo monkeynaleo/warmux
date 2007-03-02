@@ -106,6 +106,12 @@ void Menu::Redraw(const Rectanglei& rect, Surface& surf)
   background->Blit(surf, rect, rect.GetPosition());
 }
 
+void Menu::RedrawMenu()
+{
+  DrawBackground();
+  widgets.ForceRedraw();
+}
+
 void Menu::Run ()
 { 
   int x=0, y=0;

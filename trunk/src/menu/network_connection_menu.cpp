@@ -277,6 +277,8 @@ void NetworkConnectionMenu::sig_ok()
     // back to main menu after playing
     Menu::sig_ok();
   } else {
+    // if InternetMenu was closed without making a connection menu has to be redrawn
+    Menu::RedrawMenu();
     // TODO : add error sound and dialog
   }
 }
