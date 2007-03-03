@@ -113,6 +113,36 @@ Weapon::Weapon(Weapon_type type,
   icon = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_ico"));
 
   mouse_character_selection = true;
+
+  xmlpp::Element *elem = resource_manager.GetElement(weapons_res_profile, "position", m_id);
+  if (elem != NULL) {
+    // E.g. <position name="my_weapon_id" origin="hand" x="-1" y="0" />
+    std::string origin_xml;
+    XmlReader::ReadIntAttr (elem, "x", position.x);
+    XmlReader::ReadIntAttr (elem, "y", position.y);
+    if(!XmlReader::ReadStringAttr (elem, "origin", origin_xml))
+    {
+      std::cerr << "No \"origin\" flag found for weapon %s" << m_id <<std::endl;
+      assert(false);
+    }
+    if (origin_xml == "over")
+      origin = weapon_origin_OVER;
+    else
+      origin = weapon_origin_HAND;
+  }
+  else
+  {
+    std::cerr << "No \"position\" flag found for weapon %s" << m_id <<std::endl;
+    assert(false);
+  }
+
+  elem = resource_manager.GetElement(weapons_res_profile, "hole", m_id);
+  if (elem != NULL) {
+    // E.g. <hole name="my_weapon_id" dx="-1" dy="0" />
+    XmlReader::ReadIntAttr(elem, "dx", hole_delta.x);
+    XmlReader::ReadIntAttr(elem, "dy", hole_delta.y);
+  }
+
 }
 
 Weapon::~Weapon()
@@ -543,26 +573,6 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
                           m_id.c_str())
                 << std::endl;
     return false;
-  }
-
-  xmlpp::Element *pos_elem = XmlReader::GetMarker(elem, "position");
-  if (pos_elem != NULL) {
-    // E.g. <position origin="hand" x="-1" y="0" />
-    std::string origin_xml;
-    XmlReader::ReadIntAttr (pos_elem, "x", position.x);
-    XmlReader::ReadIntAttr (pos_elem, "y", position.y);
-    XmlReader::ReadStringAttr (pos_elem, "origin", origin_xml);
-    if (origin_xml == "over")
-      origin = weapon_origin_OVER;
-    else
-      origin = weapon_origin_HAND;
-  }
-
-  pos_elem = XmlReader::GetMarker(elem, "hole");
-  if (pos_elem != NULL) {
-    // E.g. <hole dx="-1" dy="0" />
-    XmlReader::ReadIntAttr(pos_elem, "dx", hole_delta.x);
-    XmlReader::ReadIntAttr(pos_elem, "dy", hole_delta.y);
   }
 
   XmlReader::ReadInt(elem, "nb_ammo", m_initial_nb_ammo);
