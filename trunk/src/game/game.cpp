@@ -157,7 +157,11 @@ void Game::Start()
         end = true;
 
       if (!end)
+      {
         world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
+	Keyboard::GetInstance()->Reset();
+	ActiveCharacter().StopPlaying();
+      }
 
     } while (!end);
     err = false;
