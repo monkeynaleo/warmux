@@ -34,14 +34,14 @@ msgstr "%s je ispao sa mape!"
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s nije pronađena :-("
 
-#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:228
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/menu/network_menu.cpp:101 src/menu/network_menu.cpp:233
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -182,7 +182,7 @@ msgstr "Bacač plamena"
 msgid "Bounce Ball"
 msgstr "Bomba odskočica"
 
-#: src/weapon/supertux.cpp:107
+#: src/weapon/supertux.cpp:106
 msgid "Bye bye tux..."
 msgstr "Ćao ćao tux ..."
 
@@ -191,7 +191,7 @@ msgid "C++ exception caught:"
 msgstr "C++ izuzetak nađen:"
 
 #: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
-#: src/team/teams_list.cpp:509
+#: src/team/teams_list.cpp:518
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ne može naći timove %s!"
@@ -200,6 +200,10 @@ msgstr "Ne može naći timove %s!"
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Ne mogu otvorit timov direktorij  (%s)!"
+
+#: src/menu/network_menu.cpp:95
+msgid "Client mode"
+msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:109
 msgid "Cluster Bomb"
@@ -213,12 +217,12 @@ msgstr "Ubij se"
 msgid "Connect !"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:66
-#: src/menu/network_connection_menu.cpp:181
+#: src/menu/network_connection_menu.cpp:65
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:173
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr ""
 
@@ -238,7 +242,7 @@ msgstr "Krediti"
 msgid "Disco Grenade"
 msgstr "Disko granata"
 
-#: src/game/game.cpp:225
+#: src/game/game.cpp:229
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Da li želite da izađete? (Y/N)"
 
@@ -297,7 +301,7 @@ msgstr "Greška tokom učitavanja moda igre  %s (file %s):"
 msgid "Error while loading game mode %s from memory:"
 msgstr "Greška tokom učitavanja moda igre  %s (file %s):"
 
-#: src/game/game.cpp:181
+#: src/game/game.cpp:185
 #, c-format
 msgid ""
 "Error:\n"
@@ -307,20 +311,20 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:233
+#: src/menu/network_connection_menu.cpp:243
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:205
+#: src/menu/network_connection_menu.cpp:214
 msgid "Error: Unable to contact index server to host a game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:244
+#: src/menu/network_connection_menu.cpp:254
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:222
+#: src/menu/network_connection_menu.cpp:231
 msgid "Error: Unable to start server"
 msgstr ""
 
@@ -329,7 +333,7 @@ msgstr ""
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
 
-#: src/network/network.cpp:76
+#: src/network/network.cpp:75
 #, fuzzy
 msgid "Failed to initialize network library!"
 msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
@@ -363,7 +367,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "HOME direktor (okolina promjenjiva $HOME) nije mogla biti pronađena!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:110
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr ""
 
@@ -371,7 +375,7 @@ msgstr ""
 msgid "Head commander"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:165
+#: src/menu/network_connection_menu.cpp:164
 msgid "Host a game"
 msgstr ""
 
@@ -420,7 +424,7 @@ msgid "Jetpack"
 msgstr "Jetpack"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:108 src/menu/network_menu.cpp:118
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:128
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
@@ -452,7 +456,7 @@ msgstr "Mapu %s, napravio je:"
 msgid "Maps"
 msgstr "Mape"
 
-#: src/menu/network_menu.cpp:91
+#: src/menu/network_menu.cpp:101
 msgid "Max number of players:"
 msgstr ""
 
@@ -488,11 +492,11 @@ msgstr "Muzika?"
 msgid "Network Game"
 msgstr "Mrežna Igra"
 
-#: src/weapon/ninja_rope.cpp:84
+#: src/weapon/ninja_rope.cpp:82
 msgid "Ninjarope"
 msgstr "Nindža uže"
 
-#: src/weapon/weapon.cpp:539
+#: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nijedan element  <%s> nije nađen u xml konfiguracionoj datoteci!"
@@ -546,7 +550,7 @@ msgid "Polecat Launcher"
 msgstr "Lansiraj tvora"
 
 #. Server port
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:81
 msgid "Port:"
 msgstr ""
 
@@ -588,13 +592,17 @@ msgid "Scroll on border"
 msgstr "Klizi na ivici"
 
 #. Server address
-#: src/menu/network_connection_menu.cpp:76
+#: src/menu/network_connection_menu.cpp:75
 msgid "Server address:"
 msgstr ""
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:88
+#: src/menu/network_connection_menu.cpp:87
 msgid "Server available on Internet"
+msgstr ""
+
+#: src/menu/network_menu.cpp:97
+msgid "Server mode"
 msgstr ""
 
 #: src/weapon/shotgun.cpp:62
@@ -610,7 +618,7 @@ msgid "Sniper Rifle"
 msgstr "Snajper"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:106
+#: src/menu/network_connection_menu.cpp:105
 msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
@@ -641,7 +649,7 @@ msgstr "Zaliha:"
 msgid "Submachine Gun"
 msgstr "Mašinka"
 
-#: src/weapon/supertux.cpp:140
+#: src/weapon/supertux.cpp:139
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -699,7 +707,7 @@ msgstr "Raketa je napustila bojište..."
 msgid "The server rejected the conection."
 msgstr ""
 
-#: src/menu/network_menu.cpp:198
+#: src/menu/network_menu.cpp:216
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -732,19 +740,19 @@ msgstr "Neočekivani izuzetak pronađen..."
 msgid "Version"
 msgstr "Verzija"
 
-#: src/menu/network_menu.cpp:119
+#: src/menu/network_menu.cpp:129
 msgid ""
 "WARNING! Disconnections are not yet handled. So you have to restart Wormux "
 "after each disconnection!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:104
+#: src/menu/network_connection_menu.cpp:103
 msgid ""
 "WARNING!! Network is still under developement and therefore a little "
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:209
+#: src/menu/network_menu.cpp:227
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -777,7 +785,7 @@ msgstr "Wormux se učitava..."
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:211
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -787,7 +795,7 @@ msgstr ""
 msgid "XML error during loading map '%s' :"
 msgstr "XML greška tokom lodiranja mape '%s' :"
 
-#: src/menu/network_menu.cpp:203
+#: src/menu/network_menu.cpp:221
 msgid "You are alone..."
 msgstr ""
 
@@ -803,7 +811,7 @@ msgstr "Trebate barem dva tima da igraju: promijeni ovo u 'Menu za Opcije ' !"
 msgid "You need at least two valid teams !"
 msgstr "Trebate barem dva važeća tima !"
 
-#: src/weapon/launcher.cpp:455
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 
