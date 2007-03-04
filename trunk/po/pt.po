@@ -39,14 +39,14 @@ msgstr "%s saiu do mapa!"
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
 
-#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:228
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/menu/network_menu.cpp:101 src/menu/network_menu.cpp:233
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -190,7 +190,7 @@ msgstr ""
 msgid "Bounce Ball"
 msgstr ""
 
-#: src/weapon/supertux.cpp:107
+#: src/weapon/supertux.cpp:106
 msgid "Bye bye tux..."
 msgstr ""
 
@@ -199,7 +199,7 @@ msgid "C++ exception caught:"
 msgstr "Excepção C++ apanhada:"
 
 #: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
-#: src/team/teams_list.cpp:509
+#: src/team/teams_list.cpp:518
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Não consigo encontrar a equipa %s!"
@@ -208,6 +208,10 @@ msgstr "Não consigo encontrar a equipa %s!"
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Não consigo abrir o diretório da equipa (%s)"
+
+#: src/menu/network_menu.cpp:95
+msgid "Client mode"
+msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:109
 #, fuzzy
@@ -223,12 +227,12 @@ msgstr "Suicídio"
 msgid "Connect !"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:66
-#: src/menu/network_connection_menu.cpp:181
+#: src/menu/network_connection_menu.cpp:65
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:173
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr ""
 
@@ -249,7 +253,7 @@ msgstr "Créditos"
 msgid "Disco Grenade"
 msgstr "Granada"
 
-#: src/game/game.cpp:225
+#: src/game/game.cpp:229
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Você quer mesmo sair ?(Y/N)"
 
@@ -309,7 +313,7 @@ msgstr "Erro ao carregar o modo de jogo %s (ficheiro %s):"
 msgid "Error while loading game mode %s from memory:"
 msgstr "Erro ao carregar o modo de jogo %s (ficheiro %s):"
 
-#: src/game/game.cpp:181
+#: src/game/game.cpp:185
 #, c-format
 msgid ""
 "Error:\n"
@@ -319,22 +323,22 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:233
+#: src/menu/network_connection_menu.cpp:243
 #, fuzzy, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 
-#: src/menu/network_connection_menu.cpp:205
+#: src/menu/network_connection_menu.cpp:214
 #, fuzzy
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 
-#: src/menu/network_connection_menu.cpp:244
+#: src/menu/network_connection_menu.cpp:254
 #, fuzzy
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 
-#: src/menu/network_connection_menu.cpp:222
+#: src/menu/network_connection_menu.cpp:231
 #, fuzzy
 msgid "Error: Unable to start server"
 msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
@@ -344,7 +348,7 @@ msgstr "Incapaz de abrir o diretório dos mapas (%s)!"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erro: não consegui encontrar o skin \"%s\" para a equipa \"%s\"."
 
-#: src/network/network.cpp:76
+#: src/network/network.cpp:75
 #, fuzzy
 msgid "Failed to initialize network library!"
 msgstr "Incapaz de inicializar a libraria SDL: %s"
@@ -378,7 +382,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directório HOME (variável de ambiente $HOME) não pode ser encontrada!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:110
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr ""
 
@@ -386,7 +390,7 @@ msgstr ""
 msgid "Head commander"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:165
+#: src/menu/network_connection_menu.cpp:164
 msgid "Host a game"
 msgstr ""
 
@@ -436,7 +440,7 @@ msgid "Jetpack"
 msgstr ""
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:108 src/menu/network_menu.cpp:118
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:128
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
@@ -468,7 +472,7 @@ msgstr "Mapa %s, uma criação de :"
 msgid "Maps"
 msgstr "Mapas"
 
-#: src/menu/network_menu.cpp:91
+#: src/menu/network_menu.cpp:101
 #, fuzzy
 msgid "Max number of players:"
 msgstr "Número de jogadores por equipa:"
@@ -506,11 +510,11 @@ msgstr "Música?"
 msgid "Network Game"
 msgstr "Jogo em Rede"
 
-#: src/weapon/ninja_rope.cpp:84
+#: src/weapon/ninja_rope.cpp:82
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:539
+#: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nenhum elemento <%s> encontrado no ficheiro de configuração xml!"
@@ -568,7 +572,7 @@ msgid "Polecat Launcher"
 msgstr ""
 
 #. Server port
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:81
 msgid "Port:"
 msgstr ""
 
@@ -611,13 +615,17 @@ msgid "Scroll on border"
 msgstr ""
 
 #. Server address
-#: src/menu/network_connection_menu.cpp:76
+#: src/menu/network_connection_menu.cpp:75
 msgid "Server address:"
 msgstr ""
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:88
+#: src/menu/network_connection_menu.cpp:87
 msgid "Server available on Internet"
+msgstr ""
+
+#: src/menu/network_menu.cpp:97
+msgid "Server mode"
 msgstr ""
 
 #: src/weapon/shotgun.cpp:62
@@ -634,7 +642,7 @@ msgid "Sniper Rifle"
 msgstr ""
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:106
+#: src/menu/network_connection_menu.cpp:105
 msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
@@ -666,7 +674,7 @@ msgstr "Munição:"
 msgid "Submachine Gun"
 msgstr ""
 
-#: src/weapon/supertux.cpp:140
+#: src/weapon/supertux.cpp:139
 msgid "SuperTux"
 msgstr ""
 
@@ -730,7 +738,7 @@ msgstr "O rocket saiu do campo de batalha ..."
 msgid "The server rejected the conection."
 msgstr ""
 
-#: src/menu/network_menu.cpp:198
+#: src/menu/network_menu.cpp:216
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -766,19 +774,19 @@ msgstr "Excepção desconhecida apanhada..."
 msgid "Version"
 msgstr "Versão"
 
-#: src/menu/network_menu.cpp:119
+#: src/menu/network_menu.cpp:129
 msgid ""
 "WARNING! Disconnections are not yet handled. So you have to restart Wormux "
 "after each disconnection!"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:104
+#: src/menu/network_connection_menu.cpp:103
 msgid ""
 "WARNING!! Network is still under developement and therefore a little "
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:209
+#: src/menu/network_menu.cpp:227
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -812,7 +820,7 @@ msgstr "A iniciar wormux..."
 msgid "Wormux version "
 msgstr "Wormux versão "
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:211
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -822,7 +830,7 @@ msgstr ""
 msgid "XML error during loading map '%s' :"
 msgstr "Erro XML durante o carregamento do mapa '%s' :"
 
-#: src/menu/network_menu.cpp:203
+#: src/menu/network_menu.cpp:221
 msgid "You are alone..."
 msgstr ""
 
@@ -840,7 +848,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Você precisa de pelo menos duas equipas válidas!"
 
-#: src/weapon/launcher.cpp:455
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "O seu tiro falhou!"
 

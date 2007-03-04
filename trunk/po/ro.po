@@ -37,7 +37,7 @@ msgstr " a ieşit din partidă"
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:228
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -45,7 +45,7 @@ msgstr[0] "un jucător conectat"
 msgstr[1] "%i jucători conectaţi"
 msgstr[2] "%i de jucători conectaţi"
 
-#: src/menu/network_menu.cpp:101 src/menu/network_menu.cpp:233
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -199,7 +199,7 @@ msgstr "Lampă de sudură"
 msgid "Bounce Ball"
 msgstr "Minge săltăreaţă"
 
-#: src/weapon/supertux.cpp:107
+#: src/weapon/supertux.cpp:106
 msgid "Bye bye tux..."
 msgstr "Pa pa tux..."
 
@@ -208,7 +208,7 @@ msgid "C++ exception caught:"
 msgstr "O excepţie C++ a fost captată:"
 
 #: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
-#: src/team/teams_list.cpp:509
+#: src/team/teams_list.cpp:518
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Echipa %s nu poate fi găsită!"
@@ -217,6 +217,10 @@ msgstr "Echipa %s nu poate fi găsită!"
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Directorul cu echipe nu poate fi deschis (%s)!"
+
+#: src/menu/network_menu.cpp:95
+msgid "Client mode"
+msgstr ""
 
 #: src/weapon/cluster_bomb.cpp:109
 msgid "Cluster Bomb"
@@ -230,12 +234,12 @@ msgstr "Comite suicid"
 msgid "Connect !"
 msgstr "Conectat!"
 
-#: src/menu/network_connection_menu.cpp:66
-#: src/menu/network_connection_menu.cpp:181
+#: src/menu/network_connection_menu.cpp:65
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr "Conectare la un joc pe internet"
 
-#: src/menu/network_connection_menu.cpp:173
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr "Conectare la joc"
 
@@ -255,7 +259,7 @@ msgstr "Merite"
 msgid "Disco Grenade"
 msgstr "Grenadă disco"
 
-#: src/game/game.cpp:225
+#: src/game/game.cpp:229
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
@@ -314,7 +318,7 @@ msgstr "Eroare în timpul încărcării modului de joc %s (fişierul %s):"
 msgid "Error while loading game mode %s from memory:"
 msgstr "Eroare în timpul încărcării modului de joc %s din memorie:"
 
-#: src/game/game.cpp:181
+#: src/game/game.cpp:185
 #, c-format
 msgid ""
 "Error:\n"
@@ -324,24 +328,24 @@ msgstr ""
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:233
+#: src/menu/network_connection_menu.cpp:243
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Nu a fost posibilă conectarea la %s:%s"
 
-#: src/menu/network_connection_menu.cpp:205
+#: src/menu/network_connection_menu.cpp:214
 msgid "Error: Unable to contact index server to host a game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a găzdui un "
 "joc"
 
-#: src/menu/network_connection_menu.cpp:244
+#: src/menu/network_connection_menu.cpp:254
 msgid "Error: Unable to contact index server to search an internet game"
 msgstr ""
 "Eroare: Nu a fost posibilă contactarea la serverul index pentru a căuta un "
 "joc pe internet"
 
-#: src/menu/network_connection_menu.cpp:222
+#: src/menu/network_connection_menu.cpp:231
 msgid "Error: Unable to start server"
 msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
@@ -350,7 +354,7 @@ msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Eroare: corpul „%s” pentru echipa „%s” nu poate fi găsit."
 
-#: src/network/network.cpp:76
+#: src/network/network.cpp:75
 msgid "Failed to initialize network library!"
 msgstr "Nu a fost posibilă iniţializarea bibliotecii de reţea!"
 
@@ -383,7 +387,7 @@ msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Directorul personal (variabila de mediu $HOME) nu a putut fi găsit!"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:110
+#: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr "Distracţie plăcută!"
 
@@ -391,7 +395,7 @@ msgstr "Distracţie plăcută!"
 msgid "Head commander"
 msgstr "Comandant şef"
 
-#: src/menu/network_connection_menu.cpp:165
+#: src/menu/network_connection_menu.cpp:164
 msgid "Host a game"
 msgstr "Găzduieşte un joc"
 
@@ -443,7 +447,7 @@ msgstr "Propulsor personal"
 
 # URM0-1: search URM0-2 for next line
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:108 src/menu/network_menu.cpp:118
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:128
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 "Intraţi pe #wormux în reţeaua irc.freenode.net pentru a găsi parteneri de "
@@ -476,7 +480,7 @@ msgstr "Harta %s, o creaţie a lui: "
 msgid "Maps"
 msgstr "Hărţi"
 
-#: src/menu/network_menu.cpp:91
+#: src/menu/network_menu.cpp:101
 msgid "Max number of players:"
 msgstr "Număr maxim de jucători:"
 
@@ -512,11 +516,11 @@ msgstr "Muzică?"
 msgid "Network Game"
 msgstr "Joc în reţea"
 
-#: src/weapon/ninja_rope.cpp:84
+#: src/weapon/ninja_rope.cpp:82
 msgid "Ninjarope"
 msgstr "Funie ninja"
 
-#: src/weapon/weapon.cpp:539
+#: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
@@ -569,7 +573,7 @@ msgid "Polecat Launcher"
 msgstr "Lansator de sconcşi"
 
 #. Server port
-#: src/menu/network_connection_menu.cpp:82
+#: src/menu/network_connection_menu.cpp:81
 msgid "Port:"
 msgstr "Port:"
 
@@ -611,14 +615,19 @@ msgid "Scroll on border"
 msgstr "Bară de derulare la margine"
 
 #. Server address
-#: src/menu/network_connection_menu.cpp:76
+#: src/menu/network_connection_menu.cpp:75
 msgid "Server address:"
 msgstr "Adresa serverului:"
 
 #. Available on internet ?
-#: src/menu/network_connection_menu.cpp:88
+#: src/menu/network_connection_menu.cpp:87
 msgid "Server available on Internet"
 msgstr "Server disponibil în internet"
+
+#: src/menu/network_menu.cpp:97
+#, fuzzy
+msgid "Server mode"
+msgstr "Adresa serverului:"
 
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
@@ -633,7 +642,7 @@ msgid "Sniper Rifle"
 msgstr "Puşcă cu lunetă"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:106
+#: src/menu/network_connection_menu.cpp:105
 msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
@@ -667,7 +676,7 @@ msgstr "Stoc:"
 msgid "Submachine Gun"
 msgstr "Mitralieră semiautomată"
 
-#: src/weapon/supertux.cpp:140
+#: src/weapon/supertux.cpp:139
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -727,7 +736,7 @@ msgstr "Racheta a părăsit câmpul de luptă..."
 msgid "The server rejected the conection."
 msgstr "Serverul a refuzat conexiunea."
 
-#: src/menu/network_menu.cpp:198
+#: src/menu/network_menu.cpp:216
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -761,7 +770,7 @@ msgstr "S-a captat o excepţie neaştepată..."
 msgid "Version"
 msgstr "versiunea"
 
-#: src/menu/network_menu.cpp:119
+#: src/menu/network_menu.cpp:129
 msgid ""
 "WARNING! Disconnections are not yet handled. So you have to restart Wormux "
 "after each disconnection!"
@@ -769,7 +778,7 @@ msgstr ""
 "AVERTISMENT! Deconectările nu sunt tratate încă. Va trebui să reporniţi "
 "Wormux după fiecare deconectare!"
 
-#: src/menu/network_connection_menu.cpp:104
+#: src/menu/network_connection_menu.cpp:103
 msgid ""
 "WARNING!! Network is still under developement and therefore a little "
 "experimental."
@@ -777,7 +786,7 @@ msgstr ""
 "AVERTISMENT!! Codul pentru reţea este încă în dezvoltare şi, de aceea, puţin "
 "experimental."
 
-#: src/menu/network_menu.cpp:209
+#: src/menu/network_menu.cpp:227
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -811,7 +820,7 @@ msgstr "Se lansează Wormux..."
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
-#: src/include/action_handler.cpp:210
+#: src/include/action_handler.cpp:211
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr "Versiunile Wormux sunt diferite: client=%s, server=%s."
@@ -821,7 +830,7 @@ msgstr "Versiunile Wormux sunt diferite: client=%s, server=%s."
 msgid "XML error during loading map '%s' :"
 msgstr "Eroare XML în timpul încărcării hărţii '%s' :"
 
-#: src/menu/network_menu.cpp:203
+#: src/menu/network_menu.cpp:221
 msgid "You are alone..."
 msgstr "Nu mai e nimeni altcineva..."
 
@@ -839,7 +848,7 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Aveţi nevoie de cel puţin două echipe valide !"
 
-#: src/weapon/launcher.cpp:455
+#: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
@@ -873,10 +882,6 @@ msgstr "general: "
 #, fuzzy
 #~ msgid "  Most violent  :  "
 #~ msgstr "  Cel mai violent       :  %s (%i).\n"
-
-#, fuzzy
-#~ msgid " - Server mode"
-#~ msgstr "Adresa serverului:"
 
 #, fuzzy
 #~ msgid " : Run game !"
