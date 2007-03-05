@@ -603,7 +603,7 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   return true;
 }
 
-bool Weapon::IsActive() const{
+bool Weapon::IsInUse() const{
   return m_is_active;
 }
 

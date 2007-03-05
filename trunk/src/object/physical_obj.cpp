@@ -321,14 +321,9 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     lg -= 1.0 ;
   } while (0 < lg);
 
-
-  // Only for ninja rope... TO REMOVE!!
-  if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_NINJA_ROPE &&
-      ActiveTeam().GetWeapon().IsActive()) {
-    Weapon& tmp = ActiveTeam().AccessWeapon();
-    NinjaRope * ninjarope = (NinjaRope *)(&tmp);
-    ninjarope->NotifyMove(collision) ;
-  }
+  // Notify the weapon that there is a movement
+  // Useful for ninja for example
+  ActiveTeam().AccessWeapon().NotifyMove(collision);
 
   if ( collision == NO_COLLISION ) // Nothing more to do!
     return;

@@ -195,8 +195,8 @@ public:
   // Return true if we have been able to trigger the weapon
   bool Shoot();
 
-  // L'arme est encore active (animation par ex.) ?
-  bool IsActive() const;
+  // The weapon is still in use (animation for instance) ?
+  bool IsInUse() const;
 
   // the weapon is ready to use ? (is there bullets left ?)
   virtual bool IsReady() const ;
@@ -217,6 +217,10 @@ public:
 
   // Choose a target.
   virtual void ChooseTarget (Point2i mouse_pos);
+
+  // Notify a move. It is usefull only for weapon which have strong
+  // interactions with the physical engine such as ninja rope
+  virtual void NotifyMove(bool collision){};
 
   // Handle a keyboard event.
 
@@ -271,12 +275,6 @@ public:
   virtual void HandleMouseLeftClicReleased(){};
   virtual void HandleMouseWheelUp(){};
   virtual void HandleMouseWheelDown(){};
-
-
-  /* void HandleMouseEvent(Action::Action_t action, Mouse::Mouse_Event_t event_type); */
-/*   virtual void HandleMouseLeftClicPressed(); */
-/*   virtual void HandleMouseLeftClicRefreshed(); */
-/*   virtual void HandleMouseLeftClicReleased(); */
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd();

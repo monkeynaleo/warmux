@@ -642,7 +642,7 @@ bool GameLoop::IsAnythingMoving()
   // Is the weapon still active or an object still moving ??
   bool object_still_moving = false;
 
-  if (ActiveTeam().GetWeapon().IsActive()) 
+  if (ActiveTeam().GetWeapon().IsInUse()) 
   {
     MSG_DEBUG("game.endofturn", "Weapon %s is still active", ActiveTeam().GetWeapon().GetName().c_str());
     object_still_moving = true;
