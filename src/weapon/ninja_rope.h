@@ -95,7 +95,7 @@ class NinjaRope : public Weapon
 
     NinjaRope();
     void Draw();
-    void NotifyMove(bool collision);
+    virtual void NotifyMove(bool collision);
     
     virtual void ActionStopUse();
     virtual void SignalTurnEnd();

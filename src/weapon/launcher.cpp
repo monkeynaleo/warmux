@@ -415,7 +415,7 @@ void WeaponLauncher::Draw()
   //Display timeout for projectil if can be changed.
   if (projectile->change_timeout_allowed())
   {
-    if( IsActive() ) //Do not display after launching.
+    if( IsInUse() ) //Do not display after launching.
       return;
 
     int tmp = projectile->GetTotalTimeout();

@@ -197,7 +197,7 @@ void SnipeRifle::DrawBeam()
 void SnipeRifle::Draw()
 {
   WeaponLauncher::Draw();
-  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsActive() ) return;
+  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsInUse() ) return;
   ComputeCrossPoint();
   DrawBeam();
   // Draw the laser impact
