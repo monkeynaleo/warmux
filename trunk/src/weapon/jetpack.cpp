@@ -229,6 +229,7 @@ bool JetPack::p_Shoot()
 void JetPack::SignalTurnEnd()
 {
   p_Deselect();
+  m_is_active= false;
 }
 
 void JetPack::ActionStopUse()
