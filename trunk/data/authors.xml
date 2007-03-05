@@ -346,10 +346,11 @@
       </author>
       <author>
 	<nickname>Miwi</nickname>
-	<name>Martin Wilke</name>
+	<name>Martin WILKE</name>
 	<description>Made FreeBSD package</description>
 	<website>http://unixfreunde.de/</website>
 	<email>miwi_AT_FreeBSD_DOT_org</email>
+	<country>Germany</country>
       </author>
       <author>
 	<nickname>Serge</nickname>
