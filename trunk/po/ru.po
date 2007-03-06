@@ -21,6 +21,14 @@ msgstr ""
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr ""
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr ""
+
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 #, fuzzy
@@ -144,6 +152,14 @@ msgstr "(мёртв)"
 msgid "(unlimited)"
 msgstr "(бесконечно)"
 
+#: src/sound/jukebox.cpp:70
+msgid "* Couldn't initialize SDL: "
+msgstr ""
+
+#: src/sound/jukebox.cpp:78
+msgid "* Couldn't open audio: "
+msgstr ""
+
 #: src/weapon/air_attack.cpp:161
 #, fuzzy
 msgid "Air Attack"
@@ -163,7 +179,7 @@ msgstr "Ожидание команд"
 msgid "Anvil"
 msgstr ""
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
 msgstr "Авторы:"
 
@@ -401,11 +417,11 @@ msgstr ""
 msgid "Host a game"
 msgstr "Конец игры"
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:216
+#: src/main.cpp:217
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -421,7 +437,7 @@ msgstr "Энергии в начале:"
 msgid "Initialisation"
 msgstr "Инициализация"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr ""
@@ -587,7 +603,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Выйти"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr ""
 
@@ -612,7 +628,7 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
 msgstr "Начать игру"
 
@@ -735,8 +751,8 @@ msgstr "Ракета улетела за пределы поля битвы..."
 msgid "The grenade left the battlefield before exploding"
 msgstr "Ракета улетела за пределы поля битвы..."
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 #, fuzzy
 msgid "The rocket has left the battlefield..."
 msgstr "Ракета улетела за пределы поля битвы..."
@@ -778,7 +794,7 @@ msgstr "Ожидание клиентов"
 msgid "Unexpected exception caught..."
 msgstr "Неожиданная исключительная ситуация..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "Версия"
 
@@ -808,7 +824,7 @@ msgstr[2] ""
 msgid "Weapons"
 msgstr "Оружие:"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
 msgstr "Веб-сайт"
 
@@ -822,11 +838,11 @@ msgstr "Какой позор для %s - его убили из простог�
 msgid "Wind particles?"
 msgstr "Показать "
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
 msgstr "Запуск Wormux..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
 msgstr "Wormux версии "
 
@@ -862,6 +878,41 @@ msgstr "Вам нужны хотя бы две команды!"
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
 
+#: src/sound/jukebox.cpp:304
+#, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:186
+#, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr ""
+
+#: src/sound/jukebox.cpp:161
+#, c-format
+msgid "[Music] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:202
+#, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:264
+#, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:354
+#, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr ""
@@ -869,6 +920,20 @@ msgstr ""
 #. Display player's name
 #: src/interface/interface.cpp:166
 msgid "general: "
+msgstr ""
+
+#: src/sound/jukebox.cpp:153
+msgid "o Loading music"
+msgstr ""
+
+#: src/sound/jukebox.cpp:321
+#, fuzzy, c-format
+msgid "o Loading sound profile: %s"
+msgstr "Ошибка при загрузке режима игры %s (файл %s):"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
 
 #~ msgid "%s has lost %u point of energy."

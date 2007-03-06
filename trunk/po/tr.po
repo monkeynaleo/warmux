@@ -19,6 +19,14 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr ""
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr ""
+
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 #, fuzzy
@@ -134,6 +142,15 @@ msgstr "(ölü)"
 msgid "(unlimited)"
 msgstr "(sınırsız)"
 
+#: src/sound/jukebox.cpp:70
+#, fuzzy
+msgid "* Couldn't initialize SDL: "
+msgstr "SDL kütüphanesi başlatılamadı: %s"
+
+#: src/sound/jukebox.cpp:78
+msgid "* Couldn't open audio: "
+msgstr ""
+
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
 msgstr "Hava Saldırısı"
@@ -152,7 +169,7 @@ msgstr "Takımları yükle:"
 msgid "Anvil"
 msgstr "Örs"
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
 msgstr "Yazarlar:"
 
@@ -378,11 +395,11 @@ msgstr ""
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Çabuk ol, çok yavaşsın !!"
 
-#: src/main.cpp:216
+#: src/main.cpp:217
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -399,7 +416,7 @@ msgstr "Başlangıç enerjisi"
 msgid "Initialisation"
 msgstr "Ayarlama"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "TTF kütüphanesi başlatılmasında hata: %s"
@@ -559,7 +576,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Çıkış"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
@@ -584,7 +601,7 @@ msgstr "Çözünürlük"
 msgid "Riot Bomb"
 msgstr "Ses Bombası"
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
 msgstr "Oyunu çalıştır"
 
@@ -699,8 +716,8 @@ msgstr "Disko el bombası, patlamadan dans pistini terketti"
 msgid "The grenade left the battlefield before exploding"
 msgstr "El bombası, patlamadan savaş alanını terketti"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Roket savaş alanını terketti..."
 
@@ -737,7 +754,7 @@ msgstr ""
 msgid "Unexpected exception caught..."
 msgstr "Beklenmeyen istisna oluştu..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "Sürüm"
 
@@ -764,7 +781,7 @@ msgstr[0] ""
 msgid "Weapons"
 msgstr "Silahlar"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
 msgstr "Web sitesi: "
 
@@ -777,11 +794,11 @@ msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
 msgid "Wind particles?"
 msgstr "Rüzgar parçacıkları?"
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
 msgstr "Wormux çalıştırılıyor..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
@@ -817,6 +834,41 @@ msgstr "En az iki geçerli takıma ihtiyacınız var !"
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
 
+#: src/sound/jukebox.cpp:304
+#, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:186
+#, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr ""
+
+#: src/sound/jukebox.cpp:161
+#, c-format
+msgid "[Music] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:202
+#, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:264
+#, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:354
+#, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
@@ -825,6 +877,20 @@ msgstr "tamam"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "genel: "
+
+#: src/sound/jukebox.cpp:153
+msgid "o Loading music"
+msgstr ""
+
+#: src/sound/jukebox.cpp:321
+#, fuzzy, c-format
+msgid "o Loading sound profile: %s"
+msgstr "Ayar dosyası yüklenirken hata: %s"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
+msgstr ""
 
 #~ msgid "Is it a gift?"
 #~ msgstr "Bu bir hediye mi?"

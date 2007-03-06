@@ -139,6 +139,7 @@ int AppWormux::main(int argc, char **argv)
 
 void AppWormux::Init(int argc, char **argv)
 {
+  Config::GetInstance();  // init config first, because it initializes i18n
 
   InitFonts();
   DisplayWelcomeMessage();

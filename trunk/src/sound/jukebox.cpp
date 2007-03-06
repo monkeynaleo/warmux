@@ -67,7 +67,7 @@ void JukeBox::Init()
 
   /* Initialize the SDL library */
   if ( SDL_Init(SDL_INIT_AUDIO) < 0 ) {
-    std::cerr << "* Couldn't initialize SDL: "<< SDL_GetError() << std::endl;
+    std::cerr << _("* Couldn't initialize SDL: ") << SDL_GetError() << std::endl;
     return;
   }
 
@@ -75,12 +75,11 @@ void JukeBox::Init()
 
   /* Open the audio device */
   if (Mix_OpenAudio(m_config.frequency, audio_format, m_config.channels, audio_buffer) < 0) {
-    std::cerr << "* Couldn't open audio: " <<  SDL_GetError() << std::endl;
+    std::cerr << _("* Couldn't open audio: ") <<  SDL_GetError() << std::endl;
     return;
   } else {
     Mix_QuerySpec(&m_config.frequency, &audio_format, &m_config.channels);
-    std::cout << "o Opened audio at " << m_config.frequency <<" Hz "<< (audio_format&0xFF)
-              <<" bit " << std::endl;
+    std::cout << Format(_("o Opened audio at %d Hz %d bit"), m_config.frequency, (audio_format&0xFF)) << std::endl;
   }
   Mix_ChannelFinished(JukeBox::EndChunk);
   Mix_HookMusicFinished(JukeBox::EndMusic);
@@ -151,7 +150,7 @@ void JukeBox::LoadMusicXML()
 	  MSG_DEBUG("jukebox", "Music is already loaded !");
       return;
   }
-  std::cout << "o Loading music" << std::endl;
+  std::cout << _("o Loading music") << std::endl;
 
   XmlReader doc;
 
@@ -159,7 +158,7 @@ void JukeBox::LoadMusicXML()
   std::string folder = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "music" + PATH_SEPARATOR;
   std::string xml_filename = folder + "profile.xml";
   if( !IsFileExist(xml_filename) ){
-    std::cerr << "[Music] Error : file " << xml_filename << " not found" << std::endl;
+    std::cerr << Format(_("[Music] Error : file %s not found"), xml_filename.c_str()) << std::endl;
     return;
   }
   if(!doc.Load(xml_filename))
@@ -184,8 +183,7 @@ void JukeBox::LoadMusicXML()
       // Load sound
       std::string filename = folder + file;
       if( !IsFileExist(filename) ){
-        std::cerr << "Music error: File " << filename.c_str()
-                  << " does not exist !" << std::endl;
+        std::cerr << Format(_("[Music] Error : file %s does not exist"), filename.c_str()) << std::endl;
 	continue;
       }
 
@@ -201,7 +199,7 @@ void JukeBox::LoadMusicXML()
             line = filename.substr(0, filename.find_last_of(PATH_SEPARATOR)) + PATH_SEPARATOR + line;
             if(!IsFileExist(line))
             {
-              std::cerr << "[Music] Unable to find " << line << " music file." << std::endl;
+              std::cerr << Format(_("[Music] Unable to find music file: %s"), line.c_str()) << std::endl;
               continue;
             }
          }
@@ -263,7 +261,7 @@ bool JukeBox::PlayMusic(const std::string& type)
 
   if(it == playlist.end())
   {
-     std::cerr << "[Music] Unable to find " << type << " profile" << std::endl;
+     std::cerr << Format(_("[Music] Unable to find profile: %s"), type.c_str()) << std::endl;
      return false;
   }
 
@@ -303,7 +301,7 @@ bool JukeBox::PlayMusicSample(std::vector<std::string>::const_iterator file_it)
 
    if(!music || Mix_PlayMusic(music, 0) < 0)
    {
-      std::cerr << "[Music] Error : Unable to load music " << file << std::endl;
+      std::cerr << Format(_("[Music] Error : Unable to load music file: %s"), file.c_str()) << std::endl;
       playing_music = playing_pl->second.end();
       return false;
    }
@@ -320,7 +318,7 @@ void JukeBox::LoadXML(const std::string& profile)
 	  MSG_DEBUG("jukebox", "Profile %s is already loaded !", profile.c_str());
       return;
   }
-  std::cout << "o Loading sound profile " << profile << std::endl;
+  std::cout << Format(_("o Loading sound profile: %s"), profile.c_str()) << std::endl;
 
   XmlReader doc;
 
@@ -328,7 +326,7 @@ void JukeBox::LoadXML(const std::string& profile)
   std::string folder = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "sound"+ PATH_SEPARATOR + profile + PATH_SEPARATOR;
   std::string xml_filename = folder + "profile.xml";
   if( !IsFileExist(xml_filename) ){
-    std::cerr << "[Sound] Error : file " << xml_filename << " not found" << std::endl;
+    std::cerr << Format(_("[Sound] Error : file %s not found"), xml_filename.c_str()) << std::endl;
     return;
   }
   if(!doc.Load(xml_filename))
@@ -353,8 +351,7 @@ void JukeBox::LoadXML(const std::string& profile)
       // Load sound
       std::string sample_filename = folder + file;
       if( !IsFileExist(sample_filename) ){
-	std::cerr << "Sound error: File " << sample_filename.c_str()
-		  << " does not exist !" << std::endl;
+	std::cerr << Format(_("[Sound] Error: File %s does not exist"), sample_filename.c_str()) << std::endl;
 	continue;
       }
 

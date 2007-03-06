@@ -17,6 +17,14 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr ""
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr ""
+
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
@@ -134,6 +142,15 @@ msgstr "(mrtav)"
 msgid "(unlimited)"
 msgstr "(neograničeno)"
 
+#: src/sound/jukebox.cpp:70
+#, fuzzy
+msgid "* Couldn't initialize SDL: "
+msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
+
+#: src/sound/jukebox.cpp:78
+msgid "* Couldn't open audio: "
+msgstr ""
+
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
 msgstr "Zračni napad"
@@ -151,7 +168,7 @@ msgstr "Svi timovi"
 msgid "Anvil"
 msgstr "Nakovanj"
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -272,7 +289,8 @@ msgstr "Greška kod očitavanja timova %s :"
 
 #: src/game/config.cpp:230
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Greška tokom pravljenja direktorija \"%s\": nije u mogućnosti da spremi "
 "konfiguracionu datoteku."
@@ -314,11 +332,14 @@ msgstr "Greška: Nemoguće konektovat se na %s:%s"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Error: Unable to contact index server to host a game"
-msgstr "Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
+msgstr ""
+"Greška: Nije u mogućnosti kontaktirati index server da bi se hostala igra"
 
 #: src/menu/network_connection_menu.cpp:254
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr "Greška: Nije u mogućnosti kontaktirati index server da se potrazi internet igra"
+msgstr ""
+"Greška: Nije u mogućnosti kontaktirati index server da se potrazi internet "
+"igra"
 
 #: src/menu/network_connection_menu.cpp:231
 msgid "Error: Unable to start server"
@@ -374,11 +395,11 @@ msgstr "Vojskovođa"
 msgid "Host a game"
 msgstr "Hostaj igru"
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Požuri, previše si spor !!"
 
-#: src/main.cpp:216
+#: src/main.cpp:217
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -393,7 +414,7 @@ msgstr "Početna energija"
 msgid "Initialisation"
 msgstr "Inicijalizacija"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Inicijalizacija TTF biblioteke nije uspjelo: %s"
@@ -551,7 +572,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Odustani"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr "Izađi iz Wormux-a"
 
@@ -576,7 +597,7 @@ msgstr "Rezolucija"
 msgid "Riot Bomb"
 msgstr "Džumbus bomba"
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
 msgstr "Pokreni igru"
 
@@ -615,7 +636,9 @@ msgstr "Snajper"
 msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
-msgstr "Neka oružja su isključena, radi poznatih bug-ova (nindža uže, zračni čekić, bacač plamena, mašinka) i mnoga druge stvari takođe neće raditi!"
+msgstr ""
+"Neka oružja su isključena, radi poznatih bug-ova (nindža uže, zračni čekić, "
+"bacač plamena, mašinka) i mnoga druge stvari takođe neće raditi!"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -691,8 +714,8 @@ msgstr "Disko granata je napustila bojište prije nego je explodirala"
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granata napušta bojište prije explozije"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa je napustila bojište..."
 
@@ -729,7 +752,7 @@ msgstr "Nije u mogućnosti koristit ovaj port!"
 msgid "Unexpected exception caught..."
 msgstr "Neočekivani izuzetak pronađen..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "Verzija"
 
@@ -737,13 +760,16 @@ msgstr "Verzija"
 msgid ""
 "WARNING! Disconnections are not yet handled. So you have to restart Wormux "
 "after each disconnection!"
-msgstr "UPOZORENJE! Diskonektovanje još nije riješeno. Tako da morate resetovati Wormux nakon svakog diskonektovanja!"
+msgstr ""
+"UPOZORENJE! Diskonektovanje još nije riješeno. Tako da morate resetovati "
+"Wormux nakon svakog diskonektovanja!"
 
 #: src/menu/network_connection_menu.cpp:103
 msgid ""
 "WARNING!! Network is still under developement and therefore a little "
 "experimental."
-msgstr "UPOYORENJE! Mreža se i dalje razvija i tako da je poprilično experimentalna."
+msgstr ""
+"UPOYORENJE! Mreža se i dalje razvija i tako da je poprilično experimentalna."
 
 #: src/menu/network_menu.cpp:227
 #, c-format
@@ -757,7 +783,7 @@ msgstr[1] ""
 msgid "Weapons"
 msgstr "Oružje:"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
 msgstr "Web stranica:"
 
@@ -770,11 +796,11 @@ msgstr "Koja sramota za %s - koji je ubijen najobičnijim pištoljem!"
 msgid "Wind particles?"
 msgstr "Prikazuj trunke vjetra?"
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
 msgstr "Wormux se učitava..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
 msgstr "Wormux verzija "
 
@@ -808,6 +834,41 @@ msgstr "Trebate barem dva važeća tima !"
 msgid "Your shot has missed!"
 msgstr "Vaš hitac je promašio!"
 
+#: src/sound/jukebox.cpp:304
+#, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:186
+#, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr ""
+
+#: src/sound/jukebox.cpp:161
+#, c-format
+msgid "[Music] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:202
+#, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:264
+#, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:354
+#, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "gotov"
@@ -817,3 +878,16 @@ msgstr "gotov"
 msgid "general: "
 msgstr "general:"
 
+#: src/sound/jukebox.cpp:153
+msgid "o Loading music"
+msgstr ""
+
+#: src/sound/jukebox.cpp:321
+#, fuzzy, c-format
+msgid "o Loading sound profile: %s"
+msgstr "Greška tokom učitavanja konfiguracione datoteke: %s"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
+msgstr ""
