@@ -17,6 +17,14 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr ""
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr ""
+
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
@@ -138,6 +146,15 @@ msgstr "(mŕtvy)"
 msgid "(unlimited)"
 msgstr "(neobmedzene)"
 
+#: src/sound/jukebox.cpp:70
+#, fuzzy
+msgid "* Couldn't initialize SDL: "
+msgstr "Nedá sa inicializovať SDL knižnca: %s"
+
+#: src/sound/jukebox.cpp:78
+msgid "* Couldn't open audio: "
+msgstr ""
+
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
 msgstr "Letecký  útok"
@@ -155,7 +172,7 @@ msgstr "Všetky tímy"
 msgid "Anvil"
 msgstr "Kovadlina"
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
 msgstr "Autory:"
 
@@ -379,11 +396,11 @@ msgstr "Hlavný veliteľ"
 msgid "Host a game"
 msgstr "Hosťuj hru"
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Ponáhľaj sa, si príliš pomalý  !!"
 
-#: src/main.cpp:216
+#: src/main.cpp:217
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -400,7 +417,7 @@ msgstr "Základná energia"
 msgid "Initialisation"
 msgstr "Inicializácia"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Inicializácia TTF knižnice zlyhala: %s"
@@ -558,7 +575,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Koniec"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr "Ukončiť Wormuxa"
 
@@ -583,7 +600,7 @@ msgstr "Rozlíšenie"
 msgid "Riot Bomb"
 msgstr "Riot Bomba"
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
 msgstr "Spusti hru"
 
@@ -701,8 +718,8 @@ msgstr "Disco granát opustil parket pred výbuchom"
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granát opustil bojisko pred výbuchom"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Raketa opustila bojisko.."
 
@@ -740,7 +757,7 @@ msgstr "Nedá sa použiť tento port!"
 msgid "Unexpected exception caught..."
 msgstr "Zachytená neočakávaná výnimka..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "Verzia"
 
@@ -771,7 +788,7 @@ msgstr[2] ""
 msgid "Weapons"
 msgstr "Zbraňe"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
 msgstr "Web stránka: "
 
@@ -784,11 +801,11 @@ msgstr "Hanba ti %s - Zabitý obyčajnou píštoľou!"
 msgid "Wind particles?"
 msgstr "Častice vetra?"
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
 msgstr "Wormux sa spúšťa..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
 msgstr "Wormux verzia"
 
@@ -822,6 +839,41 @@ msgstr "Potrebuješ najmenej dva platné tímy !"
 msgid "Your shot has missed!"
 msgstr "Tvoja strela minula!"
 
+#: src/sound/jukebox.cpp:304
+#, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:186
+#, fuzzy, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr "Súbor \"%s\" neexistuje !"
+
+#: src/sound/jukebox.cpp:161
+#, c-format
+msgid "[Music] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:202
+#, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:264
+#, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:354
+#, fuzzy, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr "Súbor \"%s\" neexistuje !"
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "koniec"
@@ -830,6 +882,21 @@ msgstr "koniec"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "hlavné:"
+
+#: src/sound/jukebox.cpp:153
+#, fuzzy
+msgid "o Loading music"
+msgstr "=== Načítavam ==="
+
+#: src/sound/jukebox.cpp:321
+#, fuzzy, c-format
+msgid "o Loading sound profile: %s"
+msgstr "Chyba počas načítavania konfiguračného súboru: %s"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
+msgstr ""
 
 #, fuzzy
 #~ msgid "  Most sold-out  :  "
@@ -912,9 +979,6 @@ msgstr "hlavné:"
 #~ "<infinite_background> potrebuje <is_open> byť nastavené aby pracovalo "
 #~ "správne!!"
 
-#~ msgid "=== Loading ==="
-#~ msgstr "=== Načítavam ==="
-
 #~ msgid "Air attack"
 #~ msgstr "Letecký útok"
 
@@ -960,9 +1024,6 @@ msgstr "hlavné:"
 
 #~ msgid "Error during loading skin %s:"
 #~ msgstr "Chyba počas načítavania skinu %s:"
-
-#~ msgid "File \"%s\" does not exist !"
-#~ msgstr "Súbor \"%s\" neexistuje !"
 
 #, fuzzy
 #~ msgid "Game options:"

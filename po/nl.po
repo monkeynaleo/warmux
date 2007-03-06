@@ -18,6 +18,14 @@ msgstr ""
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr ""
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr ""
+
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 #, fuzzy
@@ -137,6 +145,15 @@ msgstr "(dood)"
 msgid "(unlimited)"
 msgstr "(onbegrensd)"
 
+#: src/sound/jukebox.cpp:70
+#, fuzzy
+msgid "* Couldn't initialize SDL: "
+msgstr "Kon SDL bibliotheek niet initialiseren: %s"
+
+#: src/sound/jukebox.cpp:78
+msgid "* Couldn't open audio: "
+msgstr ""
+
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
 msgstr "Luchtaanval"
@@ -155,7 +172,7 @@ msgstr "Wacht teams"
 msgid "Anvil"
 msgstr "Aambeeld"
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
 msgstr "Auteurs:"
 
@@ -388,11 +405,11 @@ msgstr ""
 msgid "Host a game"
 msgstr "Einde van het spel"
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
-#: src/main.cpp:216
+#: src/main.cpp:217
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -409,7 +426,7 @@ msgstr "Initiële energie"
 msgid "Initialisation"
 msgstr "Initialisatie"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Kon TTF bibliotheek niet initialiseren: %s"
@@ -577,7 +594,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Afsluiten"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr "Wormux afsluiten"
 
@@ -602,7 +619,7 @@ msgstr "Resolutie"
 msgid "Riot Bomb"
 msgstr "Rellenbom"
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
 msgstr "Spel wordt gestart"
 
@@ -717,8 +734,8 @@ msgstr "De disco granaat heeft de dansvloer verlaten voor te ontploffen"
 msgid "The grenade left the battlefield before exploding"
 msgstr "De granaat heeft het slagveld verlaten voor te ontploffen"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "De raket heeft het slagveld verlaten voor te ontploffen"
 
@@ -757,7 +774,7 @@ msgstr "Wacht op clients"
 msgid "Unexpected exception caught..."
 msgstr "Onverwachte uitzondering gevangen..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "Versie"
 
@@ -785,7 +802,7 @@ msgstr[1] ""
 msgid "Weapons"
 msgstr "Wapens"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
 msgstr "Website: "
 
@@ -798,11 +815,11 @@ msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
 msgid "Wind particles?"
 msgstr "Wind deeltjes?"
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
 msgstr "Wormux wordt gestart..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
 msgstr "Wormux versie "
 
@@ -838,6 +855,41 @@ msgstr "U heeft minimaal twee geldige teams nodig !"
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
 
+#: src/sound/jukebox.cpp:304
+#, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:186
+#, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr ""
+
+#: src/sound/jukebox.cpp:161
+#, c-format
+msgid "[Music] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:202
+#, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:264
+#, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:354
+#, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "klaar"
@@ -846,6 +898,21 @@ msgstr "klaar"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "algemeen:"
+
+#: src/sound/jukebox.cpp:153
+#, fuzzy
+msgid "o Loading music"
+msgstr "=== Laden ==="
+
+#: src/sound/jukebox.cpp:321
+#, fuzzy, c-format
+msgid "o Loading sound profile: %s"
+msgstr "Fout bij het laden van configuratiebestand: %s"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
+msgstr ""
 
 #, fuzzy
 #~ msgid "  Most sold-out  :  "
@@ -925,9 +992,6 @@ msgstr "algemeen:"
 #~ msgstr ""
 #~ "Om <infinite_background> goed te laten werken moet <is_open> ingesteld "
 #~ "zijn!!"
-
-#~ msgid "=== Loading ==="
-#~ msgstr "=== Laden ==="
 
 #~ msgid "Air attack"
 #~ msgstr "Luchtaanval"

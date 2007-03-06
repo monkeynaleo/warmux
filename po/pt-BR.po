@@ -16,6 +16,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr ""
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr ""
+
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
@@ -133,6 +141,15 @@ msgstr "(morto)"
 msgid "(unlimited)"
 msgstr "(ilimitado)"
 
+#: src/sound/jukebox.cpp:70
+#, fuzzy
+msgid "* Couldn't initialize SDL: "
+msgstr "Não foi possível inicializar a biblioteca SDL: %s"
+
+#: src/sound/jukebox.cpp:78
+msgid "* Couldn't open audio: "
+msgstr ""
+
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
 msgstr "Ataque aéreo"
@@ -150,7 +167,7 @@ msgstr "Todos as equipes"
 msgid "Anvil"
 msgstr "Bigorna"
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
 msgstr "Autores:"
 
@@ -382,11 +399,11 @@ msgstr "Comandante"
 msgid "Host a game"
 msgstr "Criar um jogo"
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Corra, você está muito devagar!!"
 
-#: src/main.cpp:216
+#: src/main.cpp:217
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -403,7 +420,7 @@ msgstr "Energia inicial:"
 msgid "Initialisation"
 msgstr "Inicialização"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Falha ao inicializar a biblioteca TTF: %s"
@@ -564,7 +581,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Sair"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr "Sair do Wormux"
 
@@ -590,7 +607,7 @@ msgstr "Resolução"
 msgid "Riot Bomb"
 msgstr "Bomba Motim"
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
 msgstr "Iniciar jogo"
 
@@ -712,8 +729,8 @@ msgstr "A granada boate deixou o cenário antes que explodisse"
 msgid "The grenade left the battlefield before exploding"
 msgstr "A granada deixou o cenário antes que explodisse"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "O míssil deixou o campo de batalha ..."
 
@@ -752,7 +769,7 @@ msgstr "Não foi possível abrir conexão de escuta para o cliente!"
 msgid "Unexpected exception caught..."
 msgstr "Excepção desconhecida capturada..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "Versão"
 
@@ -781,7 +798,7 @@ msgstr[1] " os jogadores ainda não estão prontos!"
 msgid "Weapons"
 msgstr "Armas:"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
 msgstr "Site: "
 
@@ -794,11 +811,11 @@ msgstr "Que vergonha para o %s - ele foi morto por uma simples arma!"
 msgid "Wind particles?"
 msgstr "Partículas de vento?"
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
 msgstr "Iniciando wormux..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
 msgstr "Wormux versão "
 
@@ -834,6 +851,41 @@ msgstr "Você precisa de pelo menos duas equipes válidas!"
 msgid "Your shot has missed!"
 msgstr "Você errou o tiro!"
 
+#: src/sound/jukebox.cpp:304
+#, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:186
+#, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr ""
+
+#: src/sound/jukebox.cpp:161
+#, c-format
+msgid "[Music] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:202
+#, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:264
+#, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:354
+#, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "pronto"
@@ -842,6 +894,20 @@ msgstr "pronto"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "geral: "
+
+#: src/sound/jukebox.cpp:153
+msgid "o Loading music"
+msgstr ""
+
+#: src/sound/jukebox.cpp:321
+#, fuzzy, c-format
+msgid "o Loading sound profile: %s"
+msgstr "Erro ao carregar o arquivo de configuração : %s"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
+msgstr ""
 
 #~ msgid "  Most sold-out  :  "
 #~ msgstr "  Mais interessante  :  "

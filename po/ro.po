@@ -22,6 +22,14 @@ msgstr ""
 "X-Poedit-Country: ROMANIA\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr ""
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr ""
+
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
@@ -153,6 +161,16 @@ msgstr "(mort)"
 msgid "(unlimited)"
 msgstr "(infinit)"
 
+#: src/sound/jukebox.cpp:70
+#, fuzzy
+msgid "* Couldn't initialize SDL: "
+msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
+
+#: src/sound/jukebox.cpp:78
+#, fuzzy
+msgid "* Couldn't open audio: "
+msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
+
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
 msgstr "Atac aerian"
@@ -170,7 +188,7 @@ msgstr "Toate echipele"
 msgid "Anvil"
 msgstr "Nicovală"
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
 msgstr "Autori:"
 
@@ -399,11 +417,11 @@ msgstr "Comandant şef"
 msgid "Host a game"
 msgstr "Găzduieşte un joc"
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Grăbeşte-te te mişti prea încet!!"
 
-#: src/main.cpp:216
+#: src/main.cpp:217
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -420,7 +438,7 @@ msgstr "Energie iniţială"
 msgid "Initialisation"
 msgstr "Iniţializare"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Iniţializarea bibiliotecii TTF a eşuat: %s"
@@ -581,7 +599,7 @@ msgstr "Port:"
 msgid "Quit"
 msgstr "Ieşire"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr "Ieşire din Wormux"
 
@@ -606,7 +624,7 @@ msgstr "Rezoluţie"
 msgid "Riot Bomb"
 msgstr "Cocktail Molotov"
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
 msgstr "Rulează jocul"
 
@@ -727,8 +745,8 @@ msgstr "Grenada disco a părăsit ringul de dans înainte de a exploda"
 msgid "The grenade left the battlefield before exploding"
 msgstr "Grenada a părăsit câmpul de luptă înainte de a exploda"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Racheta a părăsit câmpul de luptă..."
 
@@ -766,7 +784,7 @@ msgstr "Nu a fost posibilă folosirea acestui port!"
 msgid "Unexpected exception caught..."
 msgstr "S-a captat o excepţie neaştepată..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "versiunea"
 
@@ -799,7 +817,7 @@ msgstr[2] "Aşteaptă! %i de jucători nu sunt gata încă!"
 msgid "Weapons"
 msgstr "Arme"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
 msgstr "Situl web: "
 
@@ -812,11 +830,11 @@ msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
 msgid "Wind particles?"
 msgstr "Particulele de vânt?"
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
 msgstr "Se lansează Wormux..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
@@ -852,6 +870,41 @@ msgstr "Aveţi nevoie de cel puţin două echipe valide !"
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
 
+#: src/sound/jukebox.cpp:304
+#, fuzzy, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
+
+#: src/sound/jukebox.cpp:186
+#, fuzzy, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
+
+#: src/sound/jukebox.cpp:161
+#, fuzzy, c-format
+msgid "[Music] Error : file %s not found"
+msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
+
+#: src/sound/jukebox.cpp:202
+#, fuzzy, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
+
+#: src/sound/jukebox.cpp:264
+#, fuzzy, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr "Nu a fost posibilă intrarea în joc ..."
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:354
+#, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "finalizat"
@@ -860,6 +913,20 @@ msgstr "finalizat"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "general: "
+
+#: src/sound/jukebox.cpp:153
+msgid "o Loading music"
+msgstr ""
+
+#: src/sound/jukebox.cpp:321
+#, fuzzy, c-format
+msgid "o Loading sound profile: %s"
+msgstr "Se citeşte fişierul personal de configurare"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
+msgstr ""
 
 #, fuzzy
 #~ msgid ""
@@ -978,10 +1045,6 @@ msgstr "general: "
 #~ msgstr[0] "'%s a câştigat %u gravitaţie scăzută"
 #~ msgstr[1] "'%s a câştigat %u gravitaţii scăzute"
 #~ msgstr[2] "'%s a câştigat %u de gravitaţii scăzute"
-
-#, fuzzy
-#~ msgid "* Couldn't initialize SDL: "
-#~ msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
 
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""
@@ -1122,10 +1185,6 @@ msgstr "general: "
 #~ msgstr "Încărcare aspecte:"
 
 #, fuzzy
-#~ msgid "Loading config file"
-#~ msgstr "Se citeşte fişierul personal de configurare"
-
-#, fuzzy
 #~ msgid "Main:Menu"
 #~ msgstr "Mină"
 
@@ -1211,10 +1270,6 @@ msgstr "general: "
 #~ msgstr "Nu a fost posibilă conectarea la server-ul de navigare!"
 
 #, fuzzy
-#~ msgid "Unable to find file "
-#~ msgstr "Nu a fost posibilă intrarea în joc ..."
-
-#, fuzzy
 #~ msgid "Unable to initialize SDL window."
 #~ msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
 
@@ -1286,10 +1341,6 @@ msgstr "general: "
 #, fuzzy
 #~ msgid "Wormux index server version %i"
 #~ msgstr "Versiunea Wormux "
-
-#, fuzzy
-#~ msgid "[Music] Error : Unable to load music "
-#~ msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
 
 #, fuzzy
 #~ msgid "\\Wormux\\"

@@ -18,6 +18,14 @@ msgstr ""
 "X-Poedit-Country: POLAND\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr ""
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr ""
+
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 #, fuzzy
@@ -141,6 +149,15 @@ msgstr "(martwy)"
 msgid "(unlimited)"
 msgstr "(nieograniczony)"
 
+#: src/sound/jukebox.cpp:70
+#, fuzzy
+msgid "* Couldn't initialize SDL: "
+msgstr "Nie można zainicjować biblioteki SDL: %s"
+
+#: src/sound/jukebox.cpp:78
+msgid "* Couldn't open audio: "
+msgstr ""
+
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
 msgstr "Atak powietrzny"
@@ -159,7 +176,7 @@ msgstr "Ładowanie drużyn:"
 msgid "Anvil"
 msgstr "Kowadło"
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
 msgstr "Autorzy:"
 
@@ -385,11 +402,11 @@ msgstr ""
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Pośpieszcie się, jesteście zbyt wolni !!"
 
-#: src/main.cpp:216
+#: src/main.cpp:217
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -406,7 +423,7 @@ msgstr "Energia początkowa"
 msgid "Initialisation"
 msgstr "Inicjacja"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Nieudana inicjacja biblioteki TTF: %s"
@@ -566,7 +583,7 @@ msgstr ""
 msgid "Quit"
 msgstr "Wyjdź"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr "Wyjdź z Wormux"
 
@@ -591,7 +608,7 @@ msgstr "Rozdzielczość"
 msgid "Riot Bomb"
 msgstr "Riotbomb"
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
 msgstr "Uruchom grę"
 
@@ -706,8 +723,8 @@ msgstr "Granat Disco opuścił pole bitwy zanim wybuchł"
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granat opuścił pole bitwy zanim wybuchł"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Rakieta opuściła pole bitwy..."
 
@@ -745,7 +762,7 @@ msgstr ""
 msgid "Unexpected exception caught..."
 msgstr "Przechwycony nieoczekiwany wyjątek..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "Wersja "
 
@@ -774,7 +791,7 @@ msgstr[2] ""
 msgid "Weapons"
 msgstr "Bronie"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
 msgstr "Strona domowa: "
 
@@ -787,11 +804,11 @@ msgstr "Co za wstyd dla %s - został zabity zwykłym pistoletem!"
 msgid "Wind particles?"
 msgstr "Wyświetlać cząsteczki wiatru?"
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
 msgstr "Uruchamianie Wormux..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
 msgstr "Wersja Wormux"
 
@@ -825,6 +842,41 @@ msgstr "Musisz ustawić przynajmniej dwie drużyny !"
 msgid "Your shot has missed!"
 msgstr "Spudłowałeś!"
 
+#: src/sound/jukebox.cpp:304
+#, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:186
+#, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr ""
+
+#: src/sound/jukebox.cpp:161
+#, c-format
+msgid "[Music] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:202
+#, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:264
+#, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr ""
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr ""
+
+#: src/sound/jukebox.cpp:354
+#, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr ""
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "gotowe"
@@ -833,3 +885,17 @@ msgstr "gotowe"
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "ogólne:"
+
+#: src/sound/jukebox.cpp:153
+msgid "o Loading music"
+msgstr ""
+
+#: src/sound/jukebox.cpp:321
+#, fuzzy, c-format
+msgid "o Loading sound profile: %s"
+msgstr "Błąd podczas ładowania pliku konfiguracyjnego %s"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
+msgstr ""
