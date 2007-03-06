@@ -24,6 +24,7 @@
 #include <sstream>
 #include <iostream>
 #include "../game/config.h"
+#include "../tool/i18n.h"
 #include "../include/app.h"
 //-----------------------------------------------------------------------------
 
@@ -46,6 +47,9 @@ bool Author::Feed (const xmlpp::Node *node)
 {
    if (!XmlReader::ReadString(node, "name", name)) return false;
    if (!XmlReader::ReadString(node, "description", description)) return false;
+   XmlReader::ReadString(node, "nickname", nickname);
+   XmlReader::ReadString(node, "email", email);
+   XmlReader::ReadString(node, "country", country);
    return true;
 }
 
@@ -61,11 +65,11 @@ std::string Author::PrettyString(bool with_email)
    }
    if (!nickname.empty())
    {
-     ss << " aka " << nickname;
+     ss << _(" aka ") << nickname;
    }
    if (!country.empty())
    {
-     ss << "from " << country;
+     ss << _(" from ") << country;
    }
    ss << ": " << description;
    return ss.str();
