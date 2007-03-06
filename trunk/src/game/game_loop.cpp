@@ -706,7 +706,8 @@ void GameLoop::SignalCharacterDeath (Character *character)
   GameMessages::GetInstance()->Add (txt);
 
   // Turn end if the playing character is dead
-  if (character->IsActiveCharacter())
+  // or if there is only one team alive
+  if (character->IsActiveCharacter() || Game::GetInstance()->IsGameFinished())
     SetState(END_TURN);
 }
 
