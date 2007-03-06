@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bs\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-03-05 00:35+0100\n"
+"PO-Revision-Date: 2007-03-06 12:10+0100\n"
 "Last-Translator: Adnan Hodzic <AbsintheSyringe@gmail.com>\n"
 "Language-Team: Bosnian <lokal@linux.org.ba>\n"
 "MIME-Version: 1.0\n"
@@ -19,15 +19,13 @@ msgstr ""
 
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
-#, fuzzy
 msgid " has joined the party"
-msgstr "%s je ispao sa mape!"
+msgstr "%s se pridružio partiji"
 
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:79
-#, fuzzy
 msgid " has left the party"
-msgstr "%s je ispao sa mape!"
+msgstr "%s je napustio partiju"
 
 #: src/map/maps_list.cpp:282
 #, c-format
@@ -146,9 +144,8 @@ msgstr "Zračni čekić"
 
 #. We'll do as if NULL is for all teams
 #: src/team/results.cpp:143
-#, fuzzy
 msgid "All teams"
-msgstr "Učitaj timove:"
+msgstr "Svi timovi"
 
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
@@ -281,9 +278,9 @@ msgstr ""
 "konfiguracionu datoteku."
 
 #: src/game/game_mode.cpp:260
-#, fuzzy, c-format
+#, c-format
 msgid "Error while exporting game mode %s (file %s):"
-msgstr "Greška tokom učitavanja moda igre  %s (file %s):"
+msgstr "Greška tokom eksportovanja moda igre  %s (file %s):"
 
 #: src/game/config.cpp:143
 #, c-format
@@ -296,9 +293,9 @@ msgid "Error while loading game mode %s (file %s):"
 msgstr "Greška tokom učitavanja moda igre  %s (file %s):"
 
 #: src/game/game_mode.cpp:223
-#, fuzzy, c-format
+#, c-format
 msgid "Error while loading game mode %s from memory:"
-msgstr "Greška tokom učitavanja moda igre  %s (file %s):"
+msgstr "Greška tokom učitavanja moda igre  %s iz memorije:"
 
 #: src/game/game.cpp:185
 #, c-format
@@ -333,9 +330,8 @@ msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Greška: ne mogu pronaći skin \"%s\" za tim \"%s\"."
 
 #: src/network/network.cpp:75
-#, fuzzy
 msgid "Failed to initialize network library!"
-msgstr "Nije u stanju da inicijalizira SDL biblioteku: %s"
+msgstr "Nije uspio initijalizirati mrežnu biblioteku!"
 
 #: src/game/game_loop.cpp:157
 msgid "Find a random position for characters"
@@ -437,9 +433,8 @@ msgstr "Učitaj timove:"
 
 #. How many teams ?
 #: src/menu/network_teams_selection_box.cpp:33
-#, fuzzy
 msgid "Local teams:"
-msgstr "Učitaj timove:"
+msgstr "Lokalni timovi:"
 
 #: src/weapon/lowgrav.cpp:38
 msgid "LowGrav"
@@ -532,9 +527,8 @@ msgstr "Igraj"
 
 #: src/menu/network_teams_selection_box.cpp:52
 #: src/menu/teams_selection_box.cpp:50
-#, fuzzy
 msgid "Player"
-msgstr "Igraj"
+msgstr "Igrač"
 
 #: src/menu/options_menu.cpp:68
 msgid "Player energy?"
