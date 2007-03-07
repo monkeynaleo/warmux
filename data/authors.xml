@@ -409,6 +409,14 @@
 	<country>France</country>
       </author>
       <author>
+	<nickname>Johannes</nickname>
+	<name>Johannes KRUDE</name>
+	<description>Patch, bug report</description>
+	<website>http://johannes.krude.de</website>
+	<email>johannes_AT_koeln.ccc_DOT_de</email>
+	<country>Germany</country>
+      </author>
+      <author>
 	<nickname>Jon</nickname>
 	<name>Jon DE ANDRES</name>
 	<description>Network chat</description>
