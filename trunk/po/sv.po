@@ -7,22 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wormux\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-03-06 12:51+0100\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
+"PO-Revision-Date: 2007-03-07 14:15+0100\n"
+"Last-Translator: artefact <artefact@altern.org>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2;plural=n != 1;\n"
 "X-Generator: KBabel 1.11.4\n"
+"POT-Creation-Date: \n"
 
 #: src/menu/credits_menu.cpp:68
 msgid " aka "
-msgstr ""
+msgstr " känd som "
 
 #: src/menu/credits_menu.cpp:72
 msgid " from "
-msgstr ""
+msgstr " från "
 
 #: src/map/maps_list.cpp:282
 #, c-format
@@ -75,7 +76,8 @@ msgstr "%s är en psykopat, han har dödat en medlem av %s!"
 msgid "%s is dead because he is clumsy!"
 msgstr "%s dog för att han var klumpig!"
 
-#: src/weapon/mine.cpp:115 src/weapon/mine.cpp:129
+#: src/weapon/mine.cpp:115
+#: src/weapon/mine.cpp:129
 #, c-format
 msgid "%s is next to a mine!"
 msgstr "%s står bredvid en mina!"
@@ -110,13 +112,12 @@ msgid "(unlimited)"
 msgstr "(obegränsat)"
 
 #: src/sound/jukebox.cpp:70
-#, fuzzy
 msgid "* Couldn't initialize SDL: "
-msgstr "Kunde inte initiera SDL-bibliotek: %s"
+msgstr "* Kunde inte initiera SDL: "
 
 #: src/sound/jukebox.cpp:78
 msgid "* Couldn't open audio: "
-msgstr ""
+msgstr "* Kunde inte öppna ljud: "
 
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
@@ -162,13 +163,15 @@ msgstr "Hej då Tux..."
 msgid "C++ exception caught:"
 msgstr "C++-undantag fångades:"
 
-#: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
+#: src/team/teams_list.cpp:449
+#: src/team/teams_list.cpp:471
 #: src/team/teams_list.cpp:518
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Kan inte hitta laget %s!"
 
-#: src/team/teams_list.cpp:117 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:117
+#: src/team/teams_list.cpp:132
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Kan inte öppna lagkatalogen (%s)!"
@@ -205,7 +208,8 @@ msgstr "Turlängd"
 msgid "Dynamite"
 msgstr "Dynamit"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:248
+#: src/game/game_loop.cpp:254
 msgid "END OF GAME"
 msgstr "SPELET ÄR ÖVER"
 
@@ -226,10 +230,8 @@ msgstr "Fel vid inläsning av lagets data %s:"
 
 #: src/game/config.cpp:230
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Fel vid skapandet av katalogen \"%s\": kunde inte lagra konfigurationsfilen."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Fel vid skapandet av katalogen \"%s\": kunde inte lagra konfigurationsfilen."
 
 #: src/game/game_mode.cpp:260
 #, c-format
@@ -298,12 +300,8 @@ msgid "Hurry up, you are too slow !!"
 msgstr "Skynda dig, du är för långsam!!"
 
 #: src/main.cpp:217
-msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
-"please):"
-msgstr ""
-"Om du har hittat ett fel eller har en önskar nya funktioner, skicka e-post "
-"till oss (på engelska, tack):"
+msgid "If you found a bug or have a feature request send us a email (in english, please):"
+msgstr "Om du har hittat ett fel eller har en önskar nya funktioner, skicka e-post till oss (på engelska, tack):"
 
 #: src/menu/game_menu.cpp:101
 msgid "Initial energy"
@@ -326,7 +324,8 @@ msgstr "Initiera data"
 msgid "Initialise objects"
 msgstr "Initiera objekt"
 
-#: src/game/game_loop.cpp:102 src/game/game_loop.cpp:126
+#: src/game/game_loop.cpp:102
+#: src/game/game_loop.cpp:126
 msgid "Initialise teams"
 msgstr "Initera lag"
 
@@ -516,7 +515,8 @@ msgstr "Discogranaten lämnade dansgolvet innan den exploderade"
 msgid "The grenade left the battlefield before exploding"
 msgstr "Granaten lämnade slagfältet innan den exploderade"
 
-#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58
+#: src/weapon/cluster_bomb.cpp:58
 #: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Raketen har lämnat slagfältet..."
@@ -526,7 +526,8 @@ msgstr "Raketen har lämnat slagfältet..."
 msgid "Unable to initialize SDL library: %s"
 msgstr "Kunde inte initiera SDL-bibliotek: %s"
 
-#: src/map/maps_list.cpp:203 src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:203
+#: src/map/maps_list.cpp:219
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Kunde inte öppna kartkatalogen (%s)!"
@@ -575,9 +576,7 @@ msgstr "Du behöver åtminstone en giltig karta!"
 
 #: src/game/game_loop.cpp:208
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr ""
-"Du behöver åtminstone två lag för att spela: ändra det här i \"Alternativ\"-"
-"menyn!"
+msgstr "Du behöver åtminstone två lag för att spela: ändra det här i \"Alternativ\"-menyn!"
 
 #: src/team/teams_list.cpp:152
 msgid "You need at least two valid teams !"
@@ -590,37 +589,37 @@ msgstr "Ditt skott missade!"
 #: src/sound/jukebox.cpp:304
 #, c-format
 msgid "[Music] Error : Unable to load music file: %s"
-msgstr ""
+msgstr "[Musik] Fel : Kunde inte läsa in musikfil: %s"
 
 #: src/sound/jukebox.cpp:186
 #, c-format
 msgid "[Music] Error : file %s does not exist"
-msgstr ""
+msgstr "[Musik] Fel : filen %s finns inte"
 
 #: src/sound/jukebox.cpp:161
 #, c-format
 msgid "[Music] Error : file %s not found"
-msgstr ""
+msgstr "[Musik] Fel : filen %s hittades inte"
 
 #: src/sound/jukebox.cpp:202
 #, c-format
 msgid "[Music] Unable to find music file: %s"
-msgstr ""
+msgstr "[Musik] Kunde inte hitta musikfil: %s"
 
 #: src/sound/jukebox.cpp:264
 #, c-format
 msgid "[Music] Unable to find profile: %s"
-msgstr ""
+msgstr "[Musik] Kunde inte hitta profil: %s"
 
 #: src/sound/jukebox.cpp:329
 #, c-format
 msgid "[Sound] Error : file %s not found"
-msgstr ""
+msgstr "[Ljud] Fel : filen %s hittades inte"
 
 #: src/sound/jukebox.cpp:354
 #, c-format
 msgid "[Sound] Error: File %s does not exist"
-msgstr ""
+msgstr "[Ljud] Fel: Filen %s finns inte"
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -632,46 +631,38 @@ msgstr "general: "
 
 #: src/sound/jukebox.cpp:153
 msgid "o Loading music"
-msgstr ""
+msgstr "o Läser in musik"
 
 #: src/sound/jukebox.cpp:321
-#, fuzzy, c-format
+#, c-format
 msgid "o Loading sound profile: %s"
-msgstr "Fel vid inläsning av konfigurationsfil: %s"
+msgstr "o Läser in ljudprofil: %s"
 
 #: src/sound/jukebox.cpp:82
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
-msgstr ""
+msgstr "o Öppnade ljud med %d Hz, %d bitar"
 
 #~ msgid "Wormux versions are differents : client=%s, server=%s."
 #~ msgstr "Wormux versionerna är inte samma : klient=%s, server=%s."
-
 #~ msgid "Refresh"
 #~ msgstr "Uppdatera"
-
 #~ msgid "Connect !"
 #~ msgstr "Anslut!"
-
 #~ msgid "Connect to an internet game"
 #~ msgstr "Anslut till ett Internetspel"
-
 #~ msgid "Server address:"
 #~ msgstr "Serveradress:"
-
 #~ msgid "Port:"
 #~ msgstr "Port:"
-
 #~ msgid "Server available on Internet"
 #~ msgstr "Server tillgänglig på Internet"
-
 #~ msgid ""
 #~ "WARNING!! Network is still under developement and therefore a little "
 #~ "experimental."
 #~ msgstr ""
 #~ "VARNING!! Nätverksdelen är fortfarande under utveckling och kan därför "
 #~ "vara halvstabil."
-
 #~ msgid ""
 #~ "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
 #~ "blowtorch, submachine gun) and surely many other things don't work either!"
@@ -684,227 +675,167 @@ msgstr ""
 #~ msgstr ""
 #~ "Gå in i kanalen #wormux på irc.freenode.net för att hitta några "
 #~ "motståndare."
-
 #~ msgid "Have a good game!"
 #~ msgstr "Lycka till i spelet!"
-
 #~ msgid "Host a game"
 #~ msgstr "Stå värd för spel"
-
 #~ msgid "Connect to game"
 #~ msgstr "Anslut till spel"
-
 #~ msgid "Error: Unable to contact index server to host a game"
 #~ msgstr ""
 #~ "Fel: Kunde inte kontakta indexservern för att vara värd för ett spel"
-
 #~ msgid "Error: Unable to start server"
 #~ msgstr "Fel: Kunde inte starta servern"
-
 #~ msgid "Error: Unable to connect to %s:%s"
 #~ msgstr "Fel: Kunde inte ansluta till %s:%s"
-
 #~ msgid "Error: Unable to contact index server to search an internet game"
 #~ msgstr ""
 #~ "Fel: Kunde inte kontakta indexservern för att söka efter ett internetspel"
-
 #~ msgid "Client mode"
 #~ msgstr "Klientläge"
-
 #~ msgid "Server mode"
 #~ msgstr "Serverläge"
-
 #~ msgid "Max number of players:"
 #~ msgstr "Max antal spelare:"
-
 #~ msgid "%i player connected"
 #~ msgid_plural "%i players connected"
 #~ msgstr[0] "%i spelare ansluten"
 #~ msgstr[1] "%i spelare anslutna"
-
 #~ msgid "%i player ready"
 #~ msgid_plural "%i players ready"
 #~ msgstr[0] "%i spelare redo"
 #~ msgstr[1] "%i spelare redo"
-
 #~ msgid ""
 #~ "WARNING! Disconnections are not yet handled. So you have to restart "
 #~ "Wormux after each disconnection!"
 #~ msgstr ""
 #~ "VARNING! Frånkopplingar kan inte hanteras än så du måste starta om Wormux "
 #~ "efter varje frånkoppling!"
-
 #~ msgid "There is only %i team."
 #~ msgid_plural "There are only %i teams."
 #~ msgstr[0] "Det finns endast %i lag."
 #~ msgstr[1] "Det finns endast %i lag."
-
 #~ msgid "You are alone..."
 #~ msgstr "Du är ensam..."
-
 #~ msgid "Wait! %i player is not ready yet!"
 #~ msgid_plural "Wait! %i players are not ready yet!"
 #~ msgstr[0] "Vänta! %i spelare är inte klara än!"
 #~ msgstr[1] "Vänta! %i spelare är inte klara än!"
-
 #~ msgid "Local teams:"
 #~ msgstr "Lokala lag:"
-
 #~ msgid "Player"
 #~ msgstr "Spelare"
-
 #~ msgid "Most violent"
 #~ msgstr "Mest våldsam"
-
 #~ msgid "Most useful"
 #~ msgstr "Mest användbar"
-
 #~ msgid "Most useless"
 #~ msgstr "Mest oanvändbar"
-
 #~ msgid "Most sold-out"
 #~ msgstr "Mest utsålda"
-
 #~ msgid "Nobody!"
 #~ msgstr "Ingen!"
-
 #~ msgid "Head commander"
 #~ msgstr "Ledare"
-
 #~ msgid "Number of characters"
 #~ msgstr "Antal karaktärer"
-
 #~ msgid "Remote"
 #~ msgstr "Fjärr"
-
 #~ msgid "Number of teams:"
 #~ msgstr "Antal lag:"
-
 #~ msgid " has joined the party"
 #~ msgstr " har gått med i spelet"
-
 #~ msgid " has left the party"
 #~ msgstr " har lämnat spelet"
-
 #~ msgid "Connected !"
 #~ msgstr "Ansluten!"
-
 #~ msgid "Unable to contact host."
 #~ msgstr "Kunde inte kontakta värden."
-
 #~ msgid "Unable to use this port!"
 #~ msgstr "Kan inte använda den här porten!"
-
 #~ msgid "Bad socket ..."
 #~ msgstr "Felaktigt uttag ..."
-
 #~ msgid "The server rejected the conection."
 #~ msgstr "Servern nekade anslutningen."
-
 #~ msgid "The connection timed out. Check there is no firewall in the way!"
 #~ msgstr ""
 #~ "Tidsgränsen för anslutningen överskreds. Kontrollera om det finns en "
 #~ "brandvägg i vägen! "
-
 #~ msgid "Failed to initialize network library!"
 #~ msgstr "Misslyckades med att initiera nätverksbiblioteket!"
-
 #~ msgid "It's a present!"
 #~ msgstr "En present!"
-
 #~ msgid "All teams"
 #~ msgstr "Alla lag"
-
 #~ msgid "View stat"
 #~ msgstr "Visa stat"
-
 #~ msgid "%s has won %u point of energy!"
 #~ msgid_plural "%s has won %u points of energy!"
 #~ msgstr[0] "%s har vunnit %u energipoäng!"
 #~ msgstr[1] "%s har vunnit %u energipoäng!"
-
 #~ msgid "%s has lost %u point of energy."
 #~ msgid_plural "%s has lost %u points of energy."
 #~ msgstr[0] "%s har förlorat %u energipoäng!"
 #~ msgstr[1] "%s har förlorat %u energipoäng!"
-
 #~ msgid "%s team has won %u Automatic Bazooka!"
 #~ msgid_plural "%s team has won %u Automatic Bazookas!"
 #~ msgstr[0] "%s-laget har vunnit %u automatiskt raketgevär!"
 #~ msgstr[1] "%s-laget har vunnit %u automatiska raketgevär!"
-
 #~ msgid "%s team has won %u stick of Dynamite!"
 #~ msgid_plural "%s team has won %u sticks of Dynamite!"
 #~ msgstr[0] "%s-laget har vunnit %u dynamitgubbe."
 #~ msgstr[1] "%s-laget har vunnit %u dynamitgubbar."
-
 #~ msgid "%s team has won %u teleportation."
 #~ msgid_plural "%s team has won %u teleportations."
 #~ msgstr[0] "%s-laget har vunnit %u teleportering."
 #~ msgstr[1] "%s-laget har vunnit %u teleporteringar."
-
 #~ msgid "'%s has won %u Air Attack"
 #~ msgid_plural "'%s has won %u Air Attacks"
 #~ msgstr[0] "'%s har vunnit %u luftattack"
 #~ msgstr[1] "'%s har vunnit %u luftattacker"
-
 #~ msgid "'%s has won %u Anvil"
 #~ msgid_plural "'%s has won %u Anvil"
 #~ msgstr[0] "'%s har vunnit %u städ"
 #~ msgstr[1] "'%s har vunnit %u städ"
-
 #~ msgid "'%s has won %u Baseball bat"
 #~ msgid_plural "'%s has won %u Baseball bats"
 #~ msgstr[0] "'%s har vunnit %u slagträd"
 #~ msgstr[1] "'%s har vunnit %u slagträd"
-
 #~ msgid "'%s has won %u Holy grenade"
 #~ msgid_plural "'%s has won %u Holy grenades"
 #~ msgstr[0] "'%s har vunnit %u helig granat"
 #~ msgstr[1] "'%s har vunnit %u heliga granater"
-
 #~ msgid "'%s has won %u Low gravity"
 #~ msgid_plural "'%s has won %u Low gravity"
 #~ msgstr[0] "'%s har vunnit %u låg gravitet"
 #~ msgstr[1] "'%s har vunnit %u låg gravitet"
-
 #~ msgid "Connected to "
 #~ msgstr "Ansluten till "
-
 #~ msgid "Contacting main server..."
 #~ msgstr "Kontaktar huvudserver..."
-
 #~ msgid "Game options:"
 #~ msgstr "Spelalternativ:"
-
 #, fuzzy
 #~ msgid "Invalid index server adress!"
 #~ msgstr "Ogiltig serveradress!"
-
 #~ msgid "Invalid port!"
 #~ msgstr "Ogiltig port!"
-
 #~ msgid "Invalid server adress!"
 #~ msgstr "Ogiltig serveradress!"
-
 #~ msgid "Invalid top server adress!"
 #~ msgstr "Ogiltig toppserveradress!"
-
 #~ msgid "Is it a gift?"
 #~ msgstr "Är det en present?"
-
 #~ msgid "It doesn't seem to be a valid Wormux server..."
 #~ msgstr "Det verkar inte vara en giltig Wormux-server..."
-
 #~ msgid "Only the server can set the map!"
 #~ msgstr "Endast servern kan ställa in kartan!"
-
 #~ msgid "Server started"
 #~ msgstr "Server startad"
 
 #, fuzzy
 #~ msgid "Unable to contact an index server!"
 #~ msgstr "Kunde inte kontakta servern!"
-
 #~ msgid "Unable to join the game..."
 #~ msgstr "Kunde inte gå med i spelet..."
+
