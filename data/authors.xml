@@ -141,11 +141,14 @@
 	<nickname>LnxSlck</nickname>
 	<name>Bruno QUEIRÓS</name>
 	<description>Translate Wormux 0.7.3 in Portuguese</description>
-      <email>brunomiguelqueiros_AT_gmail_DOT_com</email><country>Portugal</country></author>
+	<email>brunomiguelqueiros_AT_gmail_DOT_com</email>
+	<country>Portugal</country>
+      </author>
       <author>
 	<nickname>Christian</nickname>
 	<name>Christian LOMSDALEN</name>
 	<description>Translated Wormux 0.8 to Norwegian</description>
+	<website>http://hinsides.net/</website>
 	<email>christian_AT_vindstille_DOT_net</email>
 	<country>Norway</country>
       </author>
