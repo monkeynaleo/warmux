@@ -34,7 +34,7 @@
 		#foot a {color:#ffffff;}
 
 div.postatus {
-  width: 600px;
+  width: 650px;
   height: 3em;
   margin: 0 auto 0 auto;
 }
@@ -122,7 +122,7 @@ function find_languages () {
   $fh = fopen($languages, 'r');
   while (!feof($fh)) {
     $line = fgets($fh, 4096);
-    preg_match('`^(..)=(.*)$`', $line, $buffer);
+    preg_match('`^([a-zA-Z-]*)=(.*)$`', $line, $buffer);
     $ret[$buffer[1]] = $buffer[2];
   }
   
