@@ -1,62 +1,73 @@
-# translation of nb-no.po to Norwegian bokmal
-# Christian Lomsdalen <christian@vindstille.net>, 2006.
+# translation of nb-no.po to
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
+#
+# Christian Lomsdalen <christian@vindstille.net>, 2007.
 msgid ""
 msgstr ""
 "Project-Id-Version: nb-no\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2006-12-14 01:42+0100\n"
-"Last-Translator: Christian Lomsdalen <christian@vindstille.net>\n"
-"Language-Team: Norwegian bokmal\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3;    plural=n==1 ? 0 :    n%10>=2 && n%10<=4 && (n%"
-"100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Language: Norwegian Bokmål\n"
+"X-Poedit-Country: Norway\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: KBabel 1.11\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-03-07 13:15+0100\n"
+"Last-Translator: artefact <artefact@altern.org>\n"
+"Language-Team: \n"
+
+#: src/menu/credits_menu.cpp:68
+msgid " aka "
+msgstr "aka"
+
+#: src/menu/credits_menu.cpp:72
+msgid " from "
+msgstr "fra"
 
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
-msgstr ""
+msgstr " har blitt med i spillet"
 
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:79
-#, fuzzy
 msgid " has left the party"
-msgstr "%s har falt av kartet!"
+msgstr " har forsvunnet fra spillet"
 
 #: src/map/maps_list.cpp:282
 #, c-format
 msgid "! Map %s not found :-("
-msgstr "! Kartet %s ble ikke funnet :-("
+msgstr "! %s-kartet ble ikke funnet :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:107
+#: src/menu/network_menu.cpp:246
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%i spiller tilkoblet"
+msgstr[1] "%i spillere tilkoblet"
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
+#: src/menu/network_menu.cpp:111
+#: src/menu/network_menu.cpp:252
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] " %i spiller klar"
+msgstr[1] " %i spillere klare"
 
 #: src/game/game_loop.cpp:701
-#, fuzzy, c-format
+#, c-format
 msgid "%s (%s) has died."
-msgstr "%s (%s team) døde."
+msgstr "%s (%s) døde."
 
 #: src/map/maps_list.cpp:104
 #, c-format
 msgid "%s <%s> aka %s from %s"
-msgstr "%s <%s> aka %s fra %s"
+msgstr "%s <%s> dit %s fra %s"
 
 #: src/map/maps_list.cpp:111
 #, c-format
@@ -66,68 +77,67 @@ msgstr "%s <%s> fra %s"
 #: src/game/game_loop.cpp:680
 #, c-format
 msgid "%s commits suicide !"
-msgstr "%s tar selvmord!"
+msgstr "%s tok selvmord !"
 
 #: src/graphic/fps.cpp:106
 #, c-format
 msgid "%s fps"
-msgstr "%s fps"
+msgstr "%s bps"
 
 #: src/game/game_loop.cpp:673
 #, c-format
 msgid "%s has fallen in water."
-msgstr "%s har falt i vannet."
+msgstr "%s har falt i vannet"
 
 #: src/game/game_loop.cpp:684
 #, c-format
 msgid "%s has fallen off the map!"
-msgstr "%s har falt av kartet!"
+msgstr "%s har falt av kartet !"
 
 #: src/object/medkit.cpp:86
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
-msgstr[0] "%s har fått %u poeng med liv!"
-msgstr[1] "%s har fått %u poeng med liv!"
-msgstr[2] "%s har fått %u poeng med liv!"
+msgstr[0] "%s har fått %u livspoeng !"
+msgstr[1] "%s har fått %u livspoeng !"
 
 #: src/game/game_loop.cpp:695
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
-msgstr "%s er en psykopat, han drepte en av sine egne fra %s laget!"
+msgstr "%s er sinnsyk, han har drept et medlem av %s-laget !"
 
 #: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s is dead because he is clumsy!"
-msgstr "%s er død fordi han er klønete"
+msgstr "%s døde fordi han klønet det til!"
 
-#: src/weapon/mine.cpp:115 src/weapon/mine.cpp:129
+#: src/weapon/mine.cpp:115
+#: src/weapon/mine.cpp:129
 #, c-format
 msgid "%s is next to a mine!"
-msgstr "%s er ved en mine!"
+msgstr "%s er i nærheten av en mine !"
 
 #: src/object/bonus_box.cpp:119
 #, c-format
 msgid "%s team already has infinite ammo for the %s!"
-msgstr ""
+msgstr "%s-laget har allere uendelig med ammunisjon for %s !"
 
 #. Show message
 #: src/weapon/skip_turn.cpp:41
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has skipped its turn."
-msgstr "%s (%s team) døde."
+msgstr "%s hoppet over sin tur."
 
 #: src/object/bonus_box.cpp:113
-#, fuzzy, c-format
+#, c-format
 msgid "%s team has won %u %s!"
 msgid_plural "%s team has won %u %ss!"
-msgstr[0] "%s laget har vunnet!\n"
-msgstr[1] "%s laget har vunnet!\n"
-msgstr[2] "%s laget har vunnet!\n"
+msgstr[0] "%s-laget har vunnet %u %s !"
+msgstr[1] "%s-laget har vunnet %u %ss !"
 
 #: src/menu/options_menu.cpp:132
 msgid "(current)"
-msgstr ""
+msgstr "(aktuell)"
 
 #: src/interface/interface.cpp:175
 msgid "(dead)"
@@ -136,42 +146,46 @@ msgstr "(død)"
 #. Display number of ammo
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
-msgstr "(ubegrenset)"
+msgstr "(uendelig)"
+
+#: src/sound/jukebox.cpp:70
+msgid "* Couldn't initialize SDL: "
+msgstr "* Kunne ikke starte SDL:"
+
+#: src/sound/jukebox.cpp:78
+msgid "* Couldn't open audio: "
+msgstr " Kunne ikke starte lydfunksjonen"
 
 #: src/weapon/air_attack.cpp:161
-#, fuzzy
 msgid "Air Attack"
 msgstr "Luftangrep"
 
 #: src/weapon/airhammer.cpp:46
 msgid "Airhammer"
-msgstr ""
+msgstr "Lufthammer"
 
 #. We'll do as if NULL is for all teams
 #: src/team/results.cpp:143
-#, fuzzy
 msgid "All teams"
-msgstr "Venter på lag"
+msgstr "Alle lag"
 
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
-msgstr ""
+msgstr "Ambolt"
 
-#: src/main.cpp:224
+#: src/main.cpp:225
 msgid "Authors:"
-msgstr "Opphav:"
+msgstr "Forfattere :"
 
 #: src/weapon/auto_bazooka.cpp:153
-#, fuzzy
 msgid "Automatic Bazooka"
-msgstr "Laserstyrt Rakettkaster"
+msgstr "Automatisk rakettkaster"
 
 #: src/network/net_error_msg.cpp:43
 msgid "Bad socket ..."
-msgstr ""
+msgstr "Dårlig tilkobling"
 
 #: src/weapon/baseball.cpp:32
-#, fuzzy
 msgid "Baseball Bat"
 msgstr "Balltre"
 
@@ -181,91 +195,90 @@ msgstr "Rakettkaster"
 
 #: src/weapon/blowtorch.cpp:37
 msgid "Blowtorch"
-msgstr ""
+msgstr "Sveiseapparat"
 
 #: src/weapon/bounce_ball.cpp:70
 msgid "Bounce Ball"
-msgstr ""
+msgstr "Sprettball"
 
 #: src/weapon/supertux.cpp:106
 msgid "Bye bye tux..."
-msgstr ""
+msgstr "Hadé tux!!"
 
 #: src/main.cpp:126
 msgid "C++ exception caught:"
-msgstr "C++ unntak fanget"
+msgstr "C++ unntak fanget :"
 
-#: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
+#: src/team/teams_list.cpp:449
+#: src/team/teams_list.cpp:471
 #: src/team/teams_list.cpp:518
 #, c-format
 msgid "Can't find team %s!"
-msgstr "Kan ikke finne %s laget!"
+msgstr "Kan ikke finne %s-laget !"
 
-#: src/team/teams_list.cpp:117 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:117
+#: src/team/teams_list.cpp:132
 #, c-format
 msgid "Cannot open teams directory (%s)!"
-msgstr "Kan ikke åpne lag-mappen (%s)!"
+msgstr "Kan ikke åpne lagmappen (%s) !"
 
 #: src/menu/network_menu.cpp:95
 msgid "Client mode"
-msgstr ""
+msgstr "Mottagermodus"
 
 #: src/weapon/cluster_bomb.cpp:109
-#, fuzzy
 msgid "Cluster Bomb"
 msgstr "Klasebombe"
 
 #: src/weapon/suicide.cpp:33
-#, fuzzy
 msgid "Commit Suicide"
 msgstr "Ta selvmord"
 
 #: src/menu/internet_menu.cpp:63
 msgid "Connect !"
-msgstr ""
+msgstr "Koble til !"
 
 #: src/menu/network_connection_menu.cpp:65
 #: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
-msgstr ""
+msgstr "Koble til et internetspill"
 
 #: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
-msgstr ""
+msgstr "Koble til et spill"
 
 #: src/network/net_error_msg.cpp:34
 msgid "Connected !"
-msgstr ""
+msgstr "Tilkoblet !"
 
 #: src/weapon/construct.cpp:42
 msgid "Construct"
-msgstr ""
+msgstr "Konstruer"
 
 #: src/menu/main_menu.cpp:110
 msgid "Credits"
-msgstr "Takk til"
+msgstr "Heder og ære"
 
 #: src/weapon/disco_grenade.cpp:102
-#, fuzzy
 msgid "Disco Grenade"
-msgstr "Granat"
+msgstr "Diskogranat"
 
 #: src/game/game.cpp:229
 msgid "Do you really want to quit? (Y/N)"
-msgstr "Vil du virkelig slutte (J/N) ?"
+msgstr "Vil du virkelig avslutte ? (J/N)"
 
 #: src/menu/game_menu.cpp:95
-#, fuzzy
 msgid "Duration of a turn"
-msgstr "Varigheten av en runde:"
+msgstr "Varighet per runde"
 
 #: src/weapon/dynamite.cpp:91
 msgid "Dynamite"
 msgstr "Dynamitt"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:248
+#: src/game/game_loop.cpp:254
 msgid "END OF GAME"
-msgstr ""
+msgstr "Spillet er slutt"
 
 #: src/tool/error.cpp:81
 #, c-format
@@ -275,38 +288,37 @@ msgstr "Feil i %s:%lu"
 #: src/team/team.cpp:100
 #, c-format
 msgid "Error loading team %s:"
-msgstr "Feil i innhenting av lag %s:"
+msgstr "Lasting av %s-laget feilet :"
 
 #: src/team/team.cpp:181
-#, fuzzy, c-format
+#, c-format
 msgid "Error loading team's data %s:"
-msgstr "Feil i innhenting av lag %s:"
+msgstr "Feil under lasting av %s-laget :"
 
 #: src/game/config.cpp:230
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr "Feil ved opprettelse av \"%s\": kunne ikke lagre konfigurasjonsfil."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Katalogen \"%s\" kunne ikke lages: konfigurasjonsfilen kunne ikke lagres"
 
 #: src/game/game_mode.cpp:260
-#, fuzzy, c-format
+#, c-format
 msgid "Error while exporting game mode %s (file %s):"
-msgstr "Feil ved innhenting av spillmodus %s (fil %s):"
+msgstr "Eksportering av spillmodus feilet %s (fil %s) :"
 
 #: src/game/config.cpp:143
 #, c-format
 msgid "Error while loading configuration file: %s"
-msgstr "Feil ved innhenting av konfigurasjonsfil: %s"
+msgstr "Konfigurasjonsfilen kunne ikke lastes : %s"
 
 #: src/game/game_mode.cpp:200
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
-msgstr "Feil ved innhenting av spillmodus %s (fil %s):"
+msgstr "Lasting av spillmodus feilet %s (fil %s) :"
 
 #: src/game/game_mode.cpp:223
-#, fuzzy, c-format
+#, c-format
 msgid "Error while loading game mode %s from memory:"
-msgstr "Feil ved innhenting av spillmodus %s (fil %s):"
+msgstr "Lasting av spillmodus %s fra minnet feilet :"
 
 #: src/game/game.cpp:185
 #, c-format
@@ -314,48 +326,47 @@ msgid ""
 "Error:\n"
 "%s"
 msgstr ""
-"Feil:\n"
+"Feil :\n"
 "%s"
 
 #. translators: %s:%s will expand to something like "example.org:9999"
 #: src/menu/network_connection_menu.cpp:243
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
-msgstr ""
+msgstr "Tilkobling til %s:%s feilet"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Error: Unable to contact index server to host a game"
-msgstr ""
+msgstr "Tilkobling til Oversiktstjener for å starte et spill feilet"
 
 #: src/menu/network_connection_menu.cpp:254
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr ""
+msgstr "Tilkobling til Oversiktstjener feilet i forsøket på å søke etter et internettspill"
 
 #: src/menu/network_connection_menu.cpp:231
 msgid "Error: Unable to start server"
-msgstr ""
+msgstr "Start av tjener feilet"
 
 #: src/team/team.cpp:144
-#, fuzzy, c-format
+#, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
-msgstr "Feil: Kan ikke finne utseendet  \"%s\" for \"%s\" laget."
+msgstr "Kan ikke finne utseendet \"%s\" til \"%s\"-laget."
 
 #: src/network/network.cpp:75
-#, fuzzy
 msgid "Failed to initialize network library!"
-msgstr "Kunne ikke hente SDL biblioteket: %s"
+msgstr "Lasting av nettverksbiblioteket feilet : %s"
 
 #: src/game/game_loop.cpp:157
 msgid "Find a random position for characters"
-msgstr "Finn en tilfeldig plassering for karakterene"
+msgstr "Finn en tilfeldig plassering for enhetene"
 
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
-msgstr "Fullskjerm?"
+msgstr "Full skjerm ?"
 
 #: src/weapon/gnu.cpp:122
 msgid "Gnu Launcher"
-msgstr ""
+msgstr "Gnu-kaster"
 
 #: src/weapon/grenade.cpp:67
 msgid "Grenade"
@@ -363,7 +374,7 @@ msgstr "Granat"
 
 #: src/map/ground.cpp:42
 msgid "Ground initialization..."
-msgstr "Baneinnhenting"
+msgstr "Laster kart ..."
 
 #: src/weapon/gun.cpp:53
 msgid "Gun"
@@ -371,135 +382,128 @@ msgstr "Pistol"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "Hjemme-mappen (miljøvariabel $HOME) ble ikke funnet!"
+msgstr "HOME mappen(miljøvariabel $HOME) kunne ikke bli funnet !"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
-msgstr ""
+msgstr "Ha et godt spill !"
 
 #: src/menu/team_box.cpp:47
 msgid "Head commander"
-msgstr ""
+msgstr "Kommandant"
 
 #: src/menu/network_connection_menu.cpp:164
 msgid "Host a game"
-msgstr ""
+msgstr "Hold et spill"
 
-#: src/game/game_loop.cpp:736
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
-msgstr ""
+msgstr "Kjapp deg, du er for treg !!"
 
-#: src/main.cpp:216
-msgid ""
-"If you found a bug or have a feature request send us a email (in english, "
-"please):"
-msgstr ""
+#: src/main.cpp:217
+msgid "If you found a bug or have a feature request send us a email (in english, please):"
+msgstr "Hvis du finner en feil eller ønsker en funksjon, send oss gjerne en epost (på engelsk):"
 
 #: src/menu/game_menu.cpp:101
-#, fuzzy
 msgid "Initial energy"
-msgstr "Opprinnelige liv:"
+msgstr "Livspoeng ved start"
 
 #. Init all needed data
 #: src/game/game_loop.cpp:197
 msgid "Initialisation"
-msgstr "Innhenting"
+msgstr "Starter"
 
-#: src/main.cpp:199
+#: src/main.cpp:200
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
-msgstr "Innhenting av TTF biblioteket feilet: %s"
+msgstr "Lasting av TTF-biblioteket feilet : %s"
 
 #: src/game/game_loop.cpp:105
 msgid "Initialise data"
-msgstr "Innhenter data"
+msgstr "Laster data"
 
 #: src/game/game_loop.cpp:163
 msgid "Initialise objects"
-msgstr "Innhenter objekter"
+msgstr "Laster objekter"
 
-#: src/game/game_loop.cpp:102 src/game/game_loop.cpp:126
+#: src/game/game_loop.cpp:102
+#: src/game/game_loop.cpp:126
 msgid "Initialise teams"
-msgstr "Innhenter lag"
+msgstr "Laster lagene"
 
 #: src/object/objbox.cpp:141
 msgid "It's a present!"
-msgstr ""
+msgstr "Det er en gave !"
 
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
-msgstr ""
+msgstr "Rakettryggsekk"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:107
+#: src/menu/network_menu.cpp:128
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr ""
+msgstr "Oppsøk #wormux-fr på  irc.freenode.net for å finne motstandere."
 
 #: src/map/maps_list.cpp:190
 msgid "Load maps:"
-msgstr "Innhenter kart:"
+msgstr "Last kart :"
 
 #: src/team/teams_list.cpp:106
 msgid "Load teams:"
-msgstr "Innhenter lag:"
+msgstr "Last lagene :"
 
 #. How many teams ?
 #: src/menu/network_teams_selection_box.cpp:33
-#, fuzzy
 msgid "Local teams:"
-msgstr "Innhenter lag:"
+msgstr "Lokale lag :"
 
 #: src/weapon/lowgrav.cpp:38
 msgid "LowGrav"
-msgstr ""
+msgstr "Lav gravitet"
 
 #: src/map/map.cpp:331
-#, fuzzy, c-format
+#, c-format
 msgid "Map %s, a creation of: "
-msgstr "Kart %s, Laget av:"
+msgstr "%s-kartet, er laget av :"
 
 #. Load the map
 #: src/game/game_loop.cpp:200
 msgid "Maps"
-msgstr ""
+msgstr "Kart"
 
 #: src/menu/network_menu.cpp:101
-#, fuzzy
 msgid "Max number of players:"
-msgstr "Antall spillere per lag:"
+msgstr "Maksimalt antall deltagere :"
 
 #: src/menu/options_menu.cpp:77
-#, fuzzy
 msgid "Maximum FPS"
-msgstr "Maksimalt antall FPS"
+msgstr "Maksimum BPS"
 
 #: src/weapon/mine.cpp:206
 msgid "Mine"
 msgstr "Mine"
 
 #: src/menu/results_menu.cpp:169
-#, fuzzy
 msgid "Most sold-out"
-msgstr "  Mest utsolgt :  %s (%i).\n"
+msgstr "Mest utsolgt"
 
 #: src/menu/results_menu.cpp:159
 msgid "Most useful"
-msgstr ""
+msgstr "Mest brukbar"
 
 #: src/menu/results_menu.cpp:164
-#, fuzzy
 msgid "Most useless"
-msgstr "  Mest ubrukelig  :  %s (%i).\n"
+msgstr "Mest ubrukbar"
 
 #: src/menu/results_menu.cpp:154
-#, fuzzy
 msgid "Most violent"
-msgstr "  Mest voldelig  :  %s (%i).\n"
+msgstr "Mest voldelig"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
-msgstr "Musikk?"
+msgstr "Musikk ?"
 
 #: src/menu/main_menu.cpp:95
 msgid "Network Game"
@@ -507,28 +511,28 @@ msgstr "Nettverksspill"
 
 #: src/weapon/ninja_rope.cpp:82
 msgid "Ninjarope"
-msgstr ""
+msgstr "Ninjatau"
 
 #: src/weapon/weapon.cpp:572
 #, c-format
 msgid "No element <%s> found in the xml config file!"
-msgstr "Det ble ikke funnet noe element <%s> i xml-konfigurasjonsfilen!"
+msgstr "Ikke noe element <%s> kunne bli funnet i konfigurasjonsfilet for XML !"
 
-#: src/menu/results_menu.cpp:211 src/menu/results_menu.cpp:218
-#: src/menu/results_menu.cpp:225 src/menu/results_menu.cpp:232
-#, fuzzy
+#: src/menu/results_menu.cpp:211
+#: src/menu/results_menu.cpp:218
+#: src/menu/results_menu.cpp:225
+#: src/menu/results_menu.cpp:232
 msgid "Nobody!"
-msgstr "Ingen"
+msgstr "Ingen!"
 
 #: src/menu/team_box.cpp:53
 msgid "Number of characters"
-msgstr ""
+msgstr "Antall lagmedlemmer"
 
 #. How many teams ?
 #: src/menu/teams_selection_box.cpp:31
-#, fuzzy
 msgid "Number of teams:"
-msgstr "Antall spillere per lag:"
+msgstr "Antall lag :"
 
 #: src/menu/main_menu.cpp:104
 msgid "Options"
@@ -536,11 +540,11 @@ msgstr "Alternativer"
 
 #: src/weapon/parachute.cpp:35
 msgid "Parachute"
-msgstr ""
+msgstr "Fallskjerm"
 
 #: src/weapon/parachute.cpp:58
 msgid "Parachute is activated automatically."
-msgstr ""
+msgstr "Fallskjermen blir automatisk aktivert."
 
 #: src/menu/main_menu.cpp:88
 msgid "Play"
@@ -548,138 +552,131 @@ msgstr "Spill"
 
 #: src/menu/network_teams_selection_box.cpp:52
 #: src/menu/teams_selection_box.cpp:50
-#, fuzzy
 msgid "Player"
-msgstr "Spill"
+msgstr "Spiller"
 
 #: src/menu/options_menu.cpp:68
-#, fuzzy
 msgid "Player energy?"
-msgstr "Vis spillers liv?"
+msgstr "Spillers livsenergi ?"
 
 #: src/menu/options_menu.cpp:71
-#, fuzzy
 msgid "Player's name?"
-msgstr "Vis spillers navn?"
+msgstr "Spillers navn ?"
 
 #: src/weapon/polecat.cpp:135
 msgid "Polecat Launcher"
-msgstr ""
+msgstr "Ilder-kaster"
 
 #. Server port
 #: src/menu/network_connection_menu.cpp:81
 msgid "Port:"
-msgstr ""
+msgstr "Port :"
 
 #: src/menu/main_menu.cpp:116
 msgid "Quit"
 msgstr "Avslutt"
 
-#: src/main.cpp:204
+#: src/main.cpp:205
 msgid "Quit Wormux"
 msgstr "Avslutt Wormux"
 
 #: src/game/config.cpp:153
 msgid "Reading personal config file"
-msgstr ""
+msgstr "Laster personlig konfigurasjonsfil"
 
 #: src/menu/internet_menu.cpp:56
 msgid "Refresh"
-msgstr ""
+msgstr "Oppdater"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:71
 msgid "Remote"
-msgstr ""
+msgstr "Fjern"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
-msgstr ""
+msgstr "Resolusjon"
 
 #: src/weapon/riot_bomb.cpp:64
 msgid "Riot Bomb"
-msgstr ""
+msgstr "Opprørsbombe"
 
-#: src/main.cpp:249
+#: src/main.cpp:250
 msgid "Run game"
-msgstr "Spill"
+msgstr "Spill spillet"
 
 #: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
-msgstr ""
+msgstr "Rull på kanten"
 
 #. Server address
 #: src/menu/network_connection_menu.cpp:75
 msgid "Server address:"
-msgstr ""
+msgstr "Tjeneradresse :"
 
 #. Available on internet ?
 #: src/menu/network_connection_menu.cpp:87
 msgid "Server available on Internet"
-msgstr ""
+msgstr "Tjener er tilgjengelig på internett"
 
 #: src/menu/network_menu.cpp:97
 msgid "Server mode"
-msgstr ""
+msgstr "Tjenermodus"
 
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
-msgstr ""
+msgstr "Hagle"
 
 #: src/weapon/skip_turn.cpp:32
 msgid "Skip turn"
-msgstr ""
+msgstr "Hopp over en runde"
 
 #: src/weapon/snipe_rifle.cpp:55
 msgid "Sniper Rifle"
-msgstr ""
+msgstr "Snikskytterrifle"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:105
-msgid ""
-"Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
-"blowtorch, submachine gun) and surely many other things don't work either!"
-msgstr ""
+msgid "Some weapons are disabled, because of known bugs (ninjarope, airhammer, blowtorch, submachine gun) and surely many other things don't work either!"
+msgstr "Noen våpen er skrudd av, fordi det er kjente feil med de(Ninjatau, Luftangrep, Miltraljøse) og det er sikkert mange andre ting som heller ikke fungerer !"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
-msgstr "Lydeffekter?"
+msgstr "Lydeffekter ?"
 
 #: src/menu/options_menu.cpp:105
-#, fuzzy
 msgid "Sound frequency"
-msgstr "Lydeffekter?"
+msgstr "Lydstyrke ?"
 
 #. Load teams' sound profiles
 #: src/game/game_loop.cpp:218
-#, fuzzy
 msgid "Sounds"
-msgstr "Lydalternativer"
+msgstr "Lyder"
 
 #: src/game/game.cpp:86
 msgid "Starting a new game"
-msgstr "Starter et nytt spill"
+msgstr "Laster et nytt spill"
 
 #: src/interface/interface.cpp:206
 msgid "Stock:"
-msgstr "Antall:"
+msgstr "Lager :"
 
 #: src/weapon/submachine_gun.cpp:62
 msgid "Submachine Gun"
-msgstr ""
+msgstr "Mitraljøse"
 
 #: src/weapon/supertux.cpp:139
 msgid "SuperTux"
-msgstr ""
+msgstr "SuperTux"
 
 #: src/weapon/syringe.cpp:31
 msgid "Syringe"
-msgstr ""
+msgstr "Sprøyte"
 
 #. Init teams
 #: src/game/game_loop.cpp:204
 msgid "Teams"
-msgstr ""
+msgstr "Lag"
 
 #: src/weapon/teleportation.cpp:40
 msgid "Teleportation"
@@ -687,272 +684,303 @@ msgstr "Teleportering"
 
 #: src/weapon/cluster_bomb.cpp:85
 msgid "The Cluster Bomb has left the battlefield before it could explode."
-msgstr ""
+msgstr "Klasebomben forsvant fra kampplassen uten å eksplodere."
 
 #: src/weapon/gnu.cpp:114
-#, fuzzy
 msgid "The Gnu left the battlefield before exploding"
-msgstr "Raketten har forlatt banen."
+msgstr "Gnu'en forsvant fra kampplassen uten å eksplodere."
 
 #: src/weapon/polecat.cpp:127
-#, fuzzy
 msgid "The Polecat left the battlefield before exploding"
-msgstr "Raketten har forlatt banen."
+msgstr "Ilderen forsvant fra kampplassen uten å eksplodere."
 
 #: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
-msgstr "Den laserstyrte raketten har forlatt banen"
+msgstr "Den laserstyrte raketten forsvant fra kampplassen uten å eksplodere."
 
 #: src/weapon/bounce_ball.cpp:61
-#, fuzzy
 msgid "The ball left the battlefield before exploding"
-msgstr "Raketten har forlatt banen."
+msgstr "Sprettballen forsvant fra kampplassen uten å eksplodere."
 
 #: src/network/net_error_msg.cpp:49
 msgid "The connection timed out. Check there is no firewall in the way!"
-msgstr ""
+msgstr "Tilkoblingen brukte for lang tid. Sjekk om en brannmur blokkerer for tilkoblingen !"
 
 #: src/weapon/disco_grenade.cpp:93
 msgid "The disco grenade has left the dance floor before exploding"
-msgstr ""
+msgstr "Diskogranaten har forlatt dansegulvet uten å eksplodere"
 
 #: src/weapon/grenade.cpp:57
-#, fuzzy
 msgid "The grenade left the battlefield before exploding"
-msgstr "Raketten har forlatt banen."
+msgstr "Granaten forsvant fra kampplassen uten å eksplodere."
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
+#: src/weapon/bazooka.cpp:58
 #: src/weapon/cluster_bomb.cpp:58
-#, fuzzy
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
-msgstr "Raketten har forlatt banen."
+msgstr "Raketten forsvant fra kampplassen uten å eksplodere."
 
 #: src/network/net_error_msg.cpp:46
 msgid "The server rejected the conection."
-msgstr ""
+msgstr "Tjeneren nektet tilkoblingen"
 
 #: src/menu/network_menu.cpp:216
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Det er i øyeblikket %i lag."
+msgstr[1] "Det er i øyeblikket %i lag."
 
 #: src/network/net_error_msg.cpp:37
 msgid "Unable to contact host."
-msgstr ""
+msgstr "Umulig å koble til tjeneren."
 
 #: src/graphic/video.cpp:197
 #, c-format
 msgid "Unable to initialize SDL library: %s"
-msgstr "Kunne ikke hente SDL biblioteket: %s"
+msgstr "Umulig å laste SDL-biblioteket: %s"
 
-#: src/map/maps_list.cpp:203 src/map/maps_list.cpp:219
+#: src/map/maps_list.cpp:203
+#: src/map/maps_list.cpp:219
 #, c-format
 msgid "Unable to open maps directory (%s)!"
-msgstr "Kunne ikke åpne kartmappen (%s)!"
+msgstr "kunne ikke åpne kartmappen (%s) !"
 
 #: src/network/net_error_msg.cpp:40
-#, fuzzy
 msgid "Unable to use this port!"
-msgstr "Kunne ikke åpne utseendemappen (%s)!"
+msgstr "Kunne ikke bruke denne porten  !"
 
 #: src/main.cpp:133
-#, fuzzy
 msgid "Unexpected exception caught..."
-msgstr "Uventet unntak fanget..."
+msgstr "Uventet unntak fanget ..."
 
-#: src/main.cpp:166
+#: src/main.cpp:167
 msgid "Version"
 msgstr "Versjon"
 
 #: src/menu/network_menu.cpp:129
-msgid ""
-"WARNING! Disconnections are not yet handled. So you have to restart Wormux "
-"after each disconnection!"
-msgstr ""
+msgid "WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"
+msgstr "Advarsel! Avkoblinger kan enda ikke bli håndtert. Så du må omstarte Wormux etter hver avkobling !"
 
 #: src/menu/network_connection_menu.cpp:103
-msgid ""
-"WARNING!! Network is still under developement and therefore a little "
-"experimental."
-msgstr ""
+msgid "WARNING!! Network is still under developement and therefore a little experimental."
+msgstr "Advarsel!! Nettverksfunksjonen er fremdeles under utvikling og er derfor litt eksperimentel"
 
 #: src/menu/network_menu.cpp:227
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Vent ! %i spiller er ikke klar enda !"
+msgstr[1] "Vent ! %i spillere er ikke klare enda !"
 
 #. Initialization of teams' energy
 #: src/game/game_loop.cpp:213
-#, fuzzy
 msgid "Weapons"
-msgstr "Våpen:"
+msgstr "Våpen"
 
-#: src/main.cpp:233
+#: src/main.cpp:234
 msgid "Website: "
-msgstr "Webside: "
+msgstr "Webside : "
 
 #: src/game/game_loop.cpp:698
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
-msgstr "For en skam for %s - Han ble drept av en liten pistol"
+msgstr "For en skam for %s : han ble drept av en liten pistol !"
 
 #: src/menu/options_menu.cpp:65
-#, fuzzy
 msgid "Wind particles?"
-msgstr "Vis Vindpartikler?"
+msgstr "Vindpartikler ?"
 
-#: src/main.cpp:180
+#: src/main.cpp:181
 msgid "Wormux launching..."
-msgstr "Wormux starter..."
+msgstr "Laster Wormux ..."
 
-#: src/main.cpp:223
+#: src/main.cpp:224
 msgid "Wormux version "
-msgstr "Wormux versjon"
+msgstr "Wormux versjon "
 
 #: src/include/action_handler.cpp:211
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
+msgstr "Forskjellige versjoner av Wormux : mottager=%s, tjener=%s"
 
 #: src/map/maps_list.cpp:72
 #, c-format
 msgid "XML error during loading map '%s' :"
-msgstr "XML-feil ved innhenting av kart '%s' :"
+msgstr "XMLfeil under lasting av kart '%s' :"
 
 #: src/menu/network_menu.cpp:221
 msgid "You are alone..."
-msgstr ""
+msgstr "Du er alene..."
 
 #: src/map/maps_list.cpp:239
 msgid "You need at least one valid map !"
-msgstr "Du må velge minst ett gyldig kart!"
+msgstr "Du må ha i hvert fall ett godkjent kart !"
 
 #: src/game/game_loop.cpp:208
 msgid "You need at least two teams to play: change this in 'Options menu' !"
-msgstr ""
-"Du må ha minst 2 lag for å spille: Endre dette i \"Alternativer\"-menyen!"
+msgstr "Du må ha minst to lag for å spille: endre dette i 'alternativer'"
 
 #: src/team/teams_list.cpp:152
 msgid "You need at least two valid teams !"
-msgstr "Du må ha minst 2 gyldige lag!"
+msgstr "Du må ha minst to godkjente lag!"
 
 #: src/weapon/launcher.cpp:461
 msgid "Your shot has missed!"
-msgstr "Du bommet."
+msgstr "Du bommet"
+
+#: src/sound/jukebox.cpp:304
+#, c-format
+msgid "[Music] Error : Unable to load music file: %s"
+msgstr "[Musikk] Feil: Kunne ikke laste musikkfilen: %s"
+
+#: src/sound/jukebox.cpp:186
+#, c-format
+msgid "[Music] Error : file %s does not exist"
+msgstr "[Musikk] Feil : filen %s finnes ikke"
+
+#: src/sound/jukebox.cpp:161
+#, c-format
+msgid "[Music] Error : file %s not found"
+msgstr "[Musikk] Feil: fil %s ble ikke funnet"
+
+#: src/sound/jukebox.cpp:202
+#, c-format
+msgid "[Music] Unable to find music file: %s"
+msgstr "[Musikk] Kunne ikke laste musikkfilen: %s"
+
+#: src/sound/jukebox.cpp:264
+#, c-format
+msgid "[Music] Unable to find profile: %s"
+msgstr "[Musikk] Kunne ikke laste profilen: %s"
+
+#: src/sound/jukebox.cpp:329
+#, c-format
+msgid "[Sound] Error : file %s not found"
+msgstr "[Lyd] Feil: filen %s ble ikke funnet"
+
+#: src/sound/jukebox.cpp:354
+#, c-format
+msgid "[Sound] Error: File %s does not exist"
+msgstr "[Lyd] Feil: filen %s eksisterer ikke"
 
 #: src/map/ground.cpp:56
 msgid "done"
-msgstr "Ferdig"
+msgstr "ferdig"
 
 #. Display player's name
 #: src/interface/interface.cpp:166
 msgid "general: "
-msgstr ""
+msgstr "general :"
 
-#~ msgid "  Most usefull  :  %s (%i).\n"
-#~ msgstr "  Mest brukbar  :  %s (%i).\n"
+#: src/sound/jukebox.cpp:153
+msgid "o Loading music"
+msgstr "Laster musikk"
 
+#: src/sound/jukebox.cpp:321
+#, c-format
+msgid "o Loading sound profile: %s"
+msgstr "o Kunne ikke laste lydprofilen : %s"
+
+#: src/sound/jukebox.cpp:82
+#, c-format
+msgid "o Opened audio at %d Hz %d bit"
+msgstr "Åpnet lyden på %d Hz %d bit"
+
+#~ msgid " "
+#~ msgstr " "
+#~ msgid "  Most sold-out  :  "
+#~ msgstr "  Messt utsolgt : "
+#~ msgid "  Most useful   :  "
+#~ msgstr " Mest brukbar:  "
+#~ msgid "  Most useless  :  "
+#~ msgstr "  Mest ubrukelig :  "
+#~ msgid "  Most violent  :  "
+#~ msgstr "  Mest voldelig  :  "
 #~ msgid "%s has lost %u point of energy."
 #~ msgid_plural "%s has lost %u points of energy."
-#~ msgstr[0] "%s mistet %u poeng med liv."
-#~ msgstr[1] "%s mistet %u poeng med liv."
-#~ msgstr[2] "%s mistet %u poeng med liv."
-
-#~ msgid "%s team has won %u automatic bazooka!"
-#~ msgid_plural "%s team has won %u automatic bazookas!"
-#~ msgstr[0] "%s laget har fått %u Laserstyrt Rakettkaster!"
-#~ msgstr[1] "%s laget har fått %u Laserstyrte Rakettkastere!"
-#~ msgstr[2] "%s laget har fått %u Laserstyrte Rakettkastere!"
-
-#~ msgid "%s team has won %u stick of dynamite!"
-#~ msgid_plural "%s team has won %u sticks of dynamite!"
-#~ msgstr[0] "%s laget har fått %u Dynamittkubbe!"
-#~ msgstr[1] "%s laget har fått %u Dynamittkubber!"
-#~ msgstr[2] "%s laget har fått %u Dynamittkubber!"
-
+#~ msgstr[0] "%s har mistet %u livspoeng."
+#~ msgstr[1] "%s har mistet %u livspoeng."
+#~ msgid "%s team has won %u Automatic Bazooka!"
+#~ msgid_plural "%s team has won %u Automatic Bazookas!"
+#~ msgstr[0] "%s-laget har vunnet %u Laserstyrt rakett !"
+#~ msgstr[1] "%s-laget har vunnet %u Laserstyrte raketter !"
+#~ msgid "%s team has won %u stick of Dynamite!"
+#~ msgid_plural "%s team has won %u sticks of Dynamite!"
+#~ msgstr[0] "%s-laget har vunnet %u Dynamittkubbe !"
+#~ msgstr[1] "%s-laget har vunnet %u Dynamittkubber !"
 #~ msgid "%s team has won %u teleportation."
 #~ msgid_plural "%s team has won %u teleportations."
-#~ msgstr[0] "%s laget har fått %u Teleportering!"
-#~ msgstr[1] "%s laget har fått %u Teleporteringer!"
-#~ msgstr[2] "%s laget har fått %u Teleporteringer!"
-
-#~ msgid "'%s has won %u air attack"
-#~ msgid_plural "'%s has won %u air attacks"
-#~ msgstr[0] "%s laget har fått %u Luftangrep!"
-#~ msgstr[1] "%s laget har fått %u Luftangrep!"
-#~ msgstr[2] "%s laget har fått %u Luftangrep!"
-
-#~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
-#~ msgstr "<infinite_background> må <is_open> bli satt til å fungere korrekt!!"
-
-#~ msgid "All-Team results:\n"
-#~ msgstr "Resultater for alle lag:\n"
-
-#~ msgid "Duration of the end of a turn:"
-#~ msgstr "Varigheten av slutten av en runde:"
-
-#~ msgid "End of the game!\n"
-#~ msgstr "Spillet er slutt !\n"
-
+#~ msgstr[0] "%s-laget har vunnet %u teleportering."
+#~ msgstr[1] "%s-laget har vunnet %u teleporteringer."
+#~ msgid "'%s has won %u Air Attack"
+#~ msgid_plural "'%s has won %u Air Attacks"
+#~ msgstr[0] "%s-laget har vunnet %u luftangrep !"
+#~ msgstr[1] "%s-laget har vunnet %u luftangrep !"
+#~ msgid "'%s has won %u Anvil"
+#~ msgid_plural "'%s has won %u Anvil"
+#~ msgstr[0] "%s-laget har vunnet %u ambolt !"
+#~ msgstr[1] "%s-laget har vunnet %u ambolter !"
+#~ msgid "'%s has won %u Baseball bat"
+#~ msgid_plural "'%s has won %u Baseball bats"
+#~ msgstr[0] "%s-laget har vunnet %u balltre !"
+#~ msgstr[1] "%s-laget har vunnet %u balltrær !"
+#~ msgid "'%s has won %u Holy grenade"
+#~ msgid_plural "'%s has won %u Holy grenades"
+#~ msgstr[0] "%s-laget har vunnet %u hellig granat !"
+#~ msgstr[1] "%s-laget har vunnet %u hellige granater !"
+#~ msgid "'%s has won %u Low gravity"
+#~ msgid_plural "'%s has won %u Low gravity"
+#~ msgstr[0] "%s-laget har vunnet %u Lav Gravitet !"
+#~ msgstr[1] "%s-laget har vunnet %u Lav Gravitet !"
+#~ msgid "All teams results:\n"
+#~ msgstr "Statestikk for alle lag:\n"
+#~ msgid "Connected to "
+#~ msgstr "Tilkoblet til  "
+#~ msgid "Contacting main server..."
+#~ msgstr "Kobler til hovedtjener ..."
 #~ msgid "Energy:"
-#~ msgstr "Liv:"
-
-#~ msgid "Error during loading skin %s:"
-#~ msgstr "Feil under innhenting av utseende %s:"
-
-#~ msgid "Game options"
+#~ msgstr "Livspoeng :"
+#~ msgid "Game options:"
 #~ msgstr "Spillalternativer"
-
-#~ msgid "Graphic options"
-#~ msgstr "Grafikkalternativer"
-
-#~ msgid "Is it a gift ?"
-#~ msgstr "Er det en gave?"
-
-#~ msgid "Load map"
-#~ msgstr "Innhenter kart"
-
-#~ msgid "Load skins:"
-#~ msgstr "Innehenter utseender:"
-
+#~ msgid "Invalid index server adress!"
+#~ msgstr "Feil adresse til Oversiktstjener !"
+#~ msgid "Invalid port!"
+#~ msgstr "Feil port!"
+#~ msgid "Invalid server adress!"
+#~ msgstr "Feil tjeneradresse !"
+#~ msgid "Invalid top server adress!"
+#~ msgstr "Feil hovedtjeneradresse!"
+#~ msgid "Is it a gift?"
+#~ msgstr "Er det en gave !"
+#~ msgid "It doesn't seem to be a valid Wormux server..."
+#~ msgstr "Det ser ikke ut til å være en godkjent Wormuxtjener ..."
 #~ msgid "Name:"
-#~ msgstr "Navn:"
-
-#~ msgid "Please tell us your opinion of Wormux via email:"
-#~ msgstr "Fortell oss gjerne hva du mener om Wormux via e-post:"
-
-#~ msgid "Press a key to continue."
-#~ msgstr "Trykk en vilkårlig tast for å fortsette."
-
+#~ msgstr "Navn :"
+#~ msgid "Only the server can set the map!"
+#~ msgstr "Bare tjeneren kan bestemme kartet!"
 #~ msgid "Select the teams:"
-#~ msgstr "Velg lag:"
-
+#~ msgstr "Bestemm lag:"
 #~ msgid "Select the world:"
-#~ msgstr "Velg verden:"
-
+#~ msgstr "Bestem kart :"
+#~ msgid "Server started"
+#~ msgstr "Tjener startet"
+#~ msgid "So you have to restart Wormux after each"
+#~ msgstr "Du må omstarte wormux etter hver"
 #~ msgid "Team %s results:\n"
-#~ msgstr "Lag %s sine resultater:\n"
+#~ msgstr "Statestikk for %s-laget:\n"
+#~ msgid "Unable to contact an index server!"
+#~ msgstr "Kunne ikke koble til Oversiktstjener !"
+#~ msgid "Unable to contact top server!"
+#~ msgstr "Kunne ikke koble til hovedtjener!"
+#~ msgid "Unable to join the game..."
+#~ msgstr "Kunne ikke bli med i spillet ..."
+#~ msgid "Wait! "
+#~ msgstr "Vent! "
+#~ msgid "Weapon:"
+#~ msgstr "Våpen :"
+#~ msgid "disconnection!"
+#~ msgstr "Avkobling!"
+#~ msgid "some opponents."
+#~ msgstr "Noen motsandere"
 
-#~ msgid "The game has ended as a draw.\n"
-#~ msgstr "Uavgjort.\n"
-
-#~ msgid "Unknow action"
-#~ msgstr "Ukjent handling"
-
-#~ msgid "Wait for clients"
-#~ msgstr "Venter på klienter"
-
-#~ msgid "Wait for map"
-#~ msgstr "Venter på kart"
-
-#~ msgid "Wait for server"
-#~ msgstr "Venter på server"
-
-#~ msgid "Wait for server informations"
-#~ msgstr "Venter på serverinformasjon"
