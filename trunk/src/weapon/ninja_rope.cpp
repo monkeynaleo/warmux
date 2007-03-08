@@ -314,7 +314,7 @@ void NinjaRope::Refresh()
     return;
 
   ActiveCharacter().UpdatePosition();  
-  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 void NinjaRope::Draw()

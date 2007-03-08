@@ -297,7 +297,7 @@ void SyncCharacters()
     for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
       // Sync the character's position, energy, ...
-      SendCharacterInfos(team_no, char_no);
+      SendCharacterInfo(team_no, char_no);
     }
   }
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
@@ -339,8 +339,8 @@ void Action_Character_SetSkin (Action *a)
   }
 }
 
-// Send character infos on network (it's totally stupid to send it locally ;-)
-void SendCharacterInfos(int team_no, int char_no)
+// Send character information over the network (it's totally stupid to send it locally ;-)
+void SendCharacterInfo(int team_no, int char_no)
 {
   Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
   a.StoreCharacter(team_no, char_no);
@@ -353,7 +353,6 @@ void Action_Weapon_Shoot (Action *a)
 {
   double strength = a->PopDouble();
   double angle = a->PopDouble();
-  a->RetrieveCharacter();
   ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
 }
 
@@ -531,7 +530,7 @@ void ActionHandler::NewActionActiveCharacter(Action* a)
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
-  SendCharacterPosition();
+  SendActiveCharacterInfoAndSkin();
   NewAction(a);
   Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
   network.SendAction(&a_end_sync);

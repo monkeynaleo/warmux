@@ -46,9 +46,9 @@ void AIMovementModule::MakeStep()
 {
   if(ActiveCharacter().IsImmobile()) {
     if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
-      MoveCharacterRight(ActiveCharacter());
+      MoveActiveCharacterRight();
     }  else {
-      MoveCharacterLeft(ActiveCharacter());
+      MoveActiveCharacterLeft();
     }
   }
 }
@@ -139,7 +139,7 @@ void AIMovementModule::Jump()
 {
   //  GameMessages::GetInstance()->Add("try to jump!");
   current_movement = JUMPING;
-  ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
+  ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
 }
 
 void AIMovementModule::EndOfJump()

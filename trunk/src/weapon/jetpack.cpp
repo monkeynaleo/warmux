@@ -68,7 +68,7 @@ void JetPack::Refresh()
 
     ActiveCharacter().SetExternForceXY(F);
     ActiveCharacter().UpdatePosition();
-    SendCharacterPosition();
+    SendActiveCharacterInfoAndSkin();
 
     if( !F.IsNull() )
     {
