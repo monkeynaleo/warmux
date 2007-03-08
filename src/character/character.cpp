@@ -873,13 +873,13 @@ void Character::HandleKeyRefreshed_MoveRight()
   HideGameInterface();
 
   if(ActiveCharacter().IsImmobile())
-    MoveCharacterRight(ActiveCharacter());
+    MoveActiveCharacterRight();
 }
 
 void Character::HandleKeyReleased_MoveRight()
 {
   body->StopWalk();
-  SendCharacterPosition();
+  SendActiveCharacterInfoAndSkin();
 }
 
 // #################### MOVE_LEFT
@@ -896,13 +896,13 @@ void Character::HandleKeyRefreshed_MoveLeft()
   HideGameInterface();
 
   if(ActiveCharacter().IsImmobile())
-    MoveCharacterLeft(ActiveCharacter());
+    MoveActiveCharacterLeft();
 }
 
 void Character::HandleKeyReleased_MoveLeft()
 {
   body->StopWalk();
-  SendCharacterPosition();
+  SendActiveCharacterInfoAndSkin();
 }
 
 // #################### UP
@@ -921,8 +921,8 @@ void Character::HandleKeyRefreshed_Up()
 	  do_nothing_time = Time::GetInstance()->Read();
 	  CharacterCursor::GetInstance()->Hide();
 	  AddFiringAngle(-DELTA_CROSSHAIR);
-	  SendCharacterInfos((int)GetTeamIndex(),
-			     (int)GetCharacterIndex());
+	  SendCharacterInfo((int)GetTeamIndex(),
+			    (int)GetCharacterIndex());
 	}
     }
 }
@@ -945,8 +945,8 @@ void Character::HandleKeyRefreshed_Down()
 	  do_nothing_time = Time::GetInstance()->Read();
 	  CharacterCursor::GetInstance()->Hide();
 	  AddFiringAngle(DELTA_CROSSHAIR);
-	  SendCharacterInfos((int)GetTeamIndex(),
-			     (int)GetCharacterIndex());
+	  SendCharacterInfo((int)GetTeamIndex(),
+			    (int)GetCharacterIndex());
 	}
     }
 }

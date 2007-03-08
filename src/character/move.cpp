@@ -117,53 +117,48 @@ void MoveCharacter(Character &character)
 
   }while(character.CanStillMoveDG(PAUSE_MOVEMENT) && ComputeHeightMovement (character, height, true));
 }
-// Move a character to the left
-void MoveCharacterLeft(Character &character){
-  // Le character est pret a bouger ?
-  if (!character.MouvementDG_Autorise()) return;
 
-  bool bouge = (character.GetDirection() == Body::DIRECTION_LEFT);
-  if (bouge)
-  {
-    MoveCharacter(character);
-  }
-  else{
+// Move the active character to the left
+void MoveActiveCharacterLeft(){
+  // character is ready to move ?
+  if (!ActiveCharacter().MouvementDG_Autorise()) return;
+
+  bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT);
+  if (move) {
+    MoveCharacter(ActiveCharacter());
+  } else {
     ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-    character.InitMouvementDG (PAUSE_CHG_DIRECTION);
+    ActiveCharacter().InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
   //Refresh skin position across network
   if( !network.IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
-    SendCharacterPosition();
+    SendActiveCharacterInfoAndSkin();
 }
 
-// Move a character to the right
-void MoveCharacterRight (Character &character)
+// Move the active character to the right
+void MoveActiveCharacterRight()
 {
-  // Le character est pret a bouger ?
-  if (!character.MouvementDG_Autorise()) return;
+  // character is ready to move ?
+  if (!ActiveCharacter().MouvementDG_Autorise()) return;
 
-  bool bouge = (character.GetDirection() == Body::DIRECTION_RIGHT);
-  if (bouge)
-  {
-    MoveCharacter(character);
-  }
-  else
-  {    
+  bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT);
+  if (move) {
+    MoveCharacter(ActiveCharacter());
+  } else {    
     ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-    character.InitMouvementDG (PAUSE_CHG_DIRECTION);
+    ActiveCharacter().InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
-
 
   //Refresh skin position across network
   if( !network.IsLocal() && ActiveTeam().IsLocal())
-    SendCharacterPosition();
+    SendActiveCharacterInfoAndSkin();
 }
 
-void SendCharacterPosition()
+void SendActiveCharacterInfoAndSkin()
 {
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  SendCharacterInfos(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 
   Action a_set_skin(Action::ACTION_CHARACTER_SET_SKIN,ActiveCharacter().body->GetClothe());
   a_set_skin.Push(ActiveCharacter().body->GetMovement());
