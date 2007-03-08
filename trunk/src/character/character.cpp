@@ -954,11 +954,12 @@ void Character::HandleKeyRefreshed_Down()
 void Character::HandleKeyReleased_Down(){}
 
 // #################### JUMP
+
 void Character::HandleKeyPressed_Jump()
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_CHARACTER_JUMP));
+    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_JUMP));
 }
 
 void Character::HandleKeyRefreshed_Jump(){}
@@ -970,7 +971,7 @@ void Character::HandleKeyPressed_HighJump()
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
+    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
 }
 
 void Character::HandleKeyRefreshed_HighJump(){}
@@ -981,7 +982,7 @@ void Character::HandleKeyPressed_BackJump()
 {
   HideGameInterface();
   if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_CHARACTER_BACK_JUMP));
+    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_BACK_JUMP));
 }
 
 void Character::HandleKeyRefreshed_BackJump(){}
