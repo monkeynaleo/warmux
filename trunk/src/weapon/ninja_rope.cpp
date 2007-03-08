@@ -135,13 +135,17 @@ bool NinjaRope::TryAttachRope()
 
   Point2i contact_point;
   if (find_first_contact_point(pos, angle, length, 4, contact_point))
-    {
+    { 
+      if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
+	return false; 
+
       // The rope reaches the fixation point. Let's fix it !
       Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
       a->Push(ATTACH_ROPE);
       a->Push(contact_point);
       ActionHandler::GetInstance()->NewAction(a);
-
+      
+      MSG_DEBUG("ninja_rope.hook", "Creating ATTACH_ROPE Action");
       return true;
     }
 
@@ -332,7 +336,7 @@ void NinjaRope::Draw()
       TryAttachRope();
       if (!m_is_active)
 	return ;
-      if(m_attaching)
+      if (m_attaching)
         angle = m_initial_angle + M_PI/2;
       else
         angle = ActiveCharacter().GetRopeAngle();
@@ -410,6 +414,8 @@ void NinjaRope::AttachRope(Point2i contact_point)
  
   m_attaching = false;
   m_is_active = true;
+
+  rope_nodes.clear();
 
   // The rope reaches the fixation point. Let's fix it !
   Point2i handPos = ActiveCharacter().GetHandPosition();
