@@ -404,7 +404,7 @@ void Action_Weapon_Ninjarope (Action *a)
   assert(ninjarope != NULL);
 
   int subaction = a->PopInt();
-  switch(subaction) {
+  switch (subaction) {
   case NinjaRope::ATTACH_ROPE: 
     {// attach rope
       Point2i contact_point = a->PopPoint2i();
@@ -526,6 +526,16 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   if (repeat_to_network) network.SendAction(a);
 }
 
+void ActionHandler::NewActionActiveCharacter(Action* a)
+{  
+  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
+  network.SendAction(&a_begin_sync);
+  SendCharacterPosition();
+  NewAction(a);
+  Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
+  network.SendAction(&a_end_sync);
+}
 
 void ActionHandler::Register (Action::Action_t action,
 		                      const std::string &name,callback_t fct)
