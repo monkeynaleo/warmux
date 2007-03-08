@@ -97,6 +97,17 @@
   <contributors>
     <section title="Translations">
       <author>
+	<nickname>Emdek</nickname>
+	<name>Michal D.</name>
+	<description>Updated Polish Translation</description>
+	<country>Poland</country>
+      </author>
+      <author>
+	<nickname>Pedro Santos</nickname>
+	<description>Updated Portuguese Translation</description>
+	<country>Portugal</country>
+      </author>
+      <author>
 	<nickname>pepp</nickname>
 	<name>Pierre-eric Pelloux Prayer</name>
 	<description>Write small hack to optimize character drawing</description>
