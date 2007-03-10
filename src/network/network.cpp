@@ -417,7 +417,6 @@ void Network::ReceiveActions()
       dst_cpu++;
     }
   }
-  Game::GetInstance()->SetEndOfGameStatus( true );
 }
 
 // Send Messages
