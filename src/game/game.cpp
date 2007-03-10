@@ -59,13 +59,12 @@ Game * Game::GetInstance()
 Game::Game()
 {
   isGameLaunched = false;
-  endOfGameStatus = false;
-  //isGamePaused = false;
+  want_end_of_game = false;
 }
 
 bool Game::IsGameFinished() const
 {
-  return (NbrRemainingTeams() <= 1);
+  return (NbrRemainingTeams() <= 1 || want_end_of_game );
 }
 
 int Game::NbrRemainingTeams() const
@@ -130,6 +129,7 @@ void Game::Start()
   bool err = true;
   bool end = false;
   std::string err_msg;
+  want_end_of_game = false;
 
   try
   {
@@ -145,7 +145,7 @@ void Game::Start()
       MSG_DEBUG( "game", "End of game_loop.Run()" );
       isGameLaunched = false;
 
-      if (!IsGameFinished())
+      if (want_end_of_game)
       {
         if (Time::GetInstance()->IsGamePaused()){
           DisplayPause();
@@ -161,6 +161,7 @@ void Game::Start()
         world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
 	Keyboard::GetInstance()->Reset();
 	ActiveCharacter().StopPlaying();
+	want_end_of_game = false;
       }
 
     } while (!end);
@@ -259,10 +260,3 @@ bool Game::IsGameLaunched() const{
   return isGameLaunched;
 }
 
-bool Game::GetEndOfGameStatus() const{
-  return endOfGameStatus;
-}
-
-void Game::SetEndOfGameStatus(bool status){
-  endOfGameStatus = status;
-}

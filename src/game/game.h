@@ -31,8 +31,9 @@ class Game
 {
 private:
   bool isGameLaunched;
-  bool endOfGameStatus;
-  //bool isGamePaused;
+
+  // Set the user requested an end of the game
+  bool want_end_of_game;
 
   int NbrRemainingTeams() const;
 
@@ -57,8 +58,6 @@ public:
   void MessageEndOfGame() const;
 
   void TogglePause();
-
-  bool GetEndOfGameStatus() const;
-  void SetEndOfGameStatus(bool status);
+  void UserWantEndOfGame() { want_end_of_game = true; };
 };
 #endif

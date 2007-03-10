@@ -261,7 +261,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
     switch(key){
       // Managing interface
     case KEY_QUIT:
-      Game::GetInstance()->SetEndOfGameStatus( true );
+      Game::GetInstance()->UserWantEndOfGame();
       return;
     case KEY_PAUSE:
       Game::GetInstance()->TogglePause();
