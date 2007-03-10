@@ -79,8 +79,8 @@ DistantComputer::~DistantComputer()
     network.network_menu->ReceiveMsgCallback( GetAdress() + _(" has left the party"));
   }
 
-  SDLNet_TCP_DelSocket(network.socket_set, sock);
   SDLNet_TCP_Close(sock);
+  SDLNet_TCP_DelSocket(network.socket_set, sock);
 
   if(network.IsConnected())
   for(std::list<std::string>::iterator team = owned_teams.begin();
