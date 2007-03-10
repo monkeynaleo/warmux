@@ -226,8 +226,6 @@ void GameLoop::Init ()
   // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
 
-  Game::GetInstance()->SetEndOfGameStatus( false );
-
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 
   // First "selection" of a weapon -> fix bug 6576
@@ -244,13 +242,13 @@ void GameLoop::RefreshInput()
   while(SDL_PollEvent(&event)) {
     if ( event.type == SDL_QUIT) {
       std::cout << "SDL_QUIT received ===> exit TODO" << std::endl;
-      Game::GetInstance()->SetEndOfGameStatus( true );
+      Game::GetInstance()->UserWantEndOfGame();
       std::cout << _("END OF GAME") << std::endl;
       return;
     }
 
     if (event.type == SDL_KEYUP && event.key.keysym.sym == SDLK_ESCAPE) {
-      Game::GetInstance()->SetEndOfGameStatus( true );
+      Game::GetInstance()->UserWantEndOfGame();
       std::cout << _("END OF GAME") << std::endl;
       return;
     }
@@ -394,8 +392,6 @@ void GameLoop::Run()
   uint time_of_next_frame = SDL_GetTicks();
   uint previous_time_frame = 0;
 
-  Game::GetInstance()->SetEndOfGameStatus( false );
-
   // loop until game is finished
   do
   {
@@ -427,7 +423,7 @@ void GameLoop::Run()
     delay = time_of_next_frame - SDL_GetTicks();
     if (delay >= 0)
       SDL_Delay(delay);
-  } while( !Game::GetInstance()->GetEndOfGameStatus()
+  } while( !Game::GetInstance()->IsGameFinished()
 	   && !Time::GetInstance()->IsGamePaused());
 }
 
@@ -472,9 +468,8 @@ void GameLoop::RefreshClock()
 	    break;
 	  }
 
-          if (Game::GetInstance()->IsGameFinished())
-            Game::GetInstance()->SetEndOfGameStatus( true );
-          else if (give_objbox && ObjBox::NewBox()) {
+          if (!Game::GetInstance()->IsGameFinished()
+          && give_objbox && ObjBox::NewBox()) {
             give_objbox = false;
 	    break;
           }
