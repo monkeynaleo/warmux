@@ -49,15 +49,15 @@ void Blowtorch::Refresh()
 
 void Blowtorch::p_Deselect()
 {
+  ActiveCharacter().body->ResetWalk();
+  ActiveCharacter().body->StopWalk();
+  ActiveTeam().AccessNbUnits() = 0;
   m_is_active = false;
 }
 
 void Blowtorch::SignalTurnEnd()
 {
-  ActiveCharacter().body->ResetWalk();
-  ActiveCharacter().body->StopWalk();
-  ActiveTeam().AccessNbUnits() = 0;
-  m_is_active = false;
+  p_Deselect();
 }
 
 void Blowtorch::ActionStopUse()
