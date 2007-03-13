@@ -159,7 +159,7 @@ void Weapon::p_Deselect () {}
 
 void Weapon::Select()
 {
-  MSG_DEBUG("weapon", "Select %s", m_name.c_str());
+  MSG_DEBUG("weapon.change", "Select %s", m_name.c_str());
 
   m_time_anim_begin = Time::GetInstance()->Read();
   m_is_active = false;
@@ -192,7 +192,7 @@ void Weapon::Select()
 void Weapon::Deselect()
 {
   ActiveTeam().crosshair.enable = false;
-  MSG_DEBUG("weapon", "Deselect %s", m_name.c_str());
+  MSG_DEBUG("weapon.change", "Deselect %s", m_name.c_str());
   p_Deselect();
 }
 
@@ -243,7 +243,7 @@ void Weapon::NewActionShoot() const
 
 void Weapon::PrepareShoot(double strength, double angle)
 {
-  MSG_DEBUG("weapon_shoot", "Try to shoot");
+  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f", strength, angle);
   ActiveCharacter().SetFiringAngle(angle);
   m_strength = strength;
   StopLoading();
@@ -253,9 +253,9 @@ void Weapon::PrepareShoot(double strength, double angle)
 
 bool Weapon::Shoot()
 {
-  MSG_DEBUG("weapon_shoot", "Enough ammo ? %d", EnoughAmmo() );
-  MSG_DEBUG("weapon_shoot", "Enough ammo unit ? %d", EnoughAmmoUnit() );
-  MSG_DEBUG("weapon_shoot", "Use unit on 1st shoot ? %d", use_unit_on_first_shoot );
+  MSG_DEBUG("weapon.shoot", "Enough ammo ? %d", EnoughAmmo() );
+  MSG_DEBUG("weapon.shoot", "Enough ammo unit ? %d", EnoughAmmoUnit() );
+  MSG_DEBUG("weapon.shoot", "Use unit on 1st shoot ? %d", use_unit_on_first_shoot );
 
 
   {
@@ -278,12 +278,12 @@ bool Weapon::Shoot()
 	return false;
   }
 
-  MSG_DEBUG("weapon_shoot", "Enough ammo");
+  MSG_DEBUG("weapon.shoot", "Enough ammo");
 
   if (!p_Shoot()) return false;
   m_last_fire_time = Time::GetInstance()->Read();
 
-  MSG_DEBUG("weapon_shoot", "shoot!");
+  MSG_DEBUG("weapon.shoot", "shoot!");
 
   // Is this the first shoot for this ammo use ?
   if (ActiveTeam().ReadNbUnits() == m_initial_nb_unit_per_ammo) {
