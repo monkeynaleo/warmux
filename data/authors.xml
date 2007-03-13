@@ -97,6 +97,13 @@
   <contributors>
     <section title="Translations">
       <author>
+	<nickname>mabu</nickname>
+	<name>Marko Burjek</name>
+	<description>Slovenian translation</description>
+	<email>s0mebody.slo_AT_gmail_DOT_com</email>
+	<country>Slovenia</country>
+      </author>
+      <author>
 	<nickname>Emdek</nickname>
 	<name>Michal D.</name>
 	<description>Updated Polish Translation</description>
