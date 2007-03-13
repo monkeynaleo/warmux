@@ -243,7 +243,10 @@ void Weapon::NewActionShoot() const
 
 void Weapon::PrepareShoot(double strength, double angle)
 {
-  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f", strength, angle);
+  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f, position:%d,%d", 
+	    strength, angle,
+	    ActiveCharacter().GetHandPosition().GetX(),
+	    ActiveCharacter().GetHandPosition().GetY());
   ActiveCharacter().SetFiringAngle(angle);
   m_strength = strength;
   StopLoading();

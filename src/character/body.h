@@ -111,7 +111,8 @@ public:
   void SetDirection(Body::Direction_t dir);
   inline void SetOwner(const Character* belonger) { owner = belonger; };
   void PlayAnimation();
-  void Build();
+  void Build();  
+  void UpdateWeaponPosition(const Point2i& pos);
 
   const std::string& GetMovement();
   const std::string& GetClothe();

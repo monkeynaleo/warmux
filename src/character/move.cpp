@@ -133,7 +133,7 @@ void MoveActiveCharacterLeft(){
 
   //Refresh skin position across network
   if( !network.IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
-    SendActiveCharacterInfoAndSkin();
+    SendActiveCharacterInfo();
 }
 
 // Move the active character to the right
@@ -152,16 +152,6 @@ void MoveActiveCharacterRight()
 
   //Refresh skin position across network
   if( !network.IsLocal() && ActiveTeam().IsLocal())
-    SendActiveCharacterInfoAndSkin();
+    SendActiveCharacterInfo();
 }
 
-void SendActiveCharacterInfoAndSkin()
-{
-  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-
-  Action a_set_skin(Action::ACTION_CHARACTER_SET_SKIN,ActiveCharacter().body->GetClothe());
-  a_set_skin.Push(ActiveCharacter().body->GetMovement());
-  a_set_skin.Push((int)ActiveCharacter().body->GetFrame());
-  network.SendAction(&a_set_skin);
-}

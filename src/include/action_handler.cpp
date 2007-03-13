@@ -335,23 +335,18 @@ void Action_Character_SetPhysics (Action *a)
     a->RetrieveCharacter();
 }
 
-void Action_Character_SetSkin (Action *a)
-{
-  //Set the frame of the walking skin, to get the position of the hand synced
-  if (!ActiveTeam().IsLocal() || network.state != Network::NETWORK_PLAYING)
-  {
-    ActiveTeam().ActiveCharacter().SetClothe(a->PopString());
-    ActiveTeam().ActiveCharacter().SetMovement(a->PopString());
-    ActiveTeam().ActiveCharacter().body->SetFrame((uint)a->PopInt());
-  }
-}
-
 // Send character information over the network (it's totally stupid to send it locally ;-)
 void SendCharacterInfo(int team_no, int char_no)
 {
   Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
   a.StoreCharacter(team_no, char_no);
   network.SendAction(&a);
+}
+
+// Send active character information over the network (it's totally stupid to send it locally ;-)
+void SendActiveCharacterInfo()
+{
+  SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
 // ########################################################
@@ -537,7 +532,7 @@ void ActionHandler::NewActionActiveCharacter(Action* a)
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   network.SendAction(&a_begin_sync);
-  SendActiveCharacterInfoAndSkin();
+  SendActiveCharacterInfo();
   NewAction(a);
   Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
   network.SendAction(&a_end_sync);
@@ -609,7 +604,6 @@ ActionHandler::ActionHandler()
   Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
 
   Register (Action::ACTION_CHARACTER_SET_PHYSICS, "CHARACTER_set_physics", &Action_Character_SetPhysics);
-  Register (Action::ACTION_CHARACTER_SET_SKIN, "CHARACTER_set_skin", &Action_Character_SetSkin);
 
   // ########################################################
   // Using Weapon
