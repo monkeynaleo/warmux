@@ -45,6 +45,7 @@ public:
     // ########################################################
     ACTION_PLAYER_CHANGE_WEAPON,
     ACTION_PLAYER_NEXT_CHARACTER,
+    ACTION_PLAYER_PREVIOUS_CHARACTER,
     ACTION_GAMELOOP_CHANGE_CHARACTER,
     ACTION_GAMELOOP_NEXT_TEAM,
 

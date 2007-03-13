@@ -93,6 +93,7 @@ class Team
 
   // Switch to next worm.
     void NextCharacter();
+    void PreviousCharacter();
     void SelectCharacter(uint index);
 
   // Prepare turn.
