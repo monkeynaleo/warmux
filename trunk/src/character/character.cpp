@@ -879,7 +879,7 @@ void Character::HandleKeyRefreshed_MoveRight()
 void Character::HandleKeyReleased_MoveRight()
 {
   body->StopWalk();
-  SendActiveCharacterInfoAndSkin();
+  SendActiveCharacterInfo();
 }
 
 // #################### MOVE_LEFT
@@ -902,7 +902,7 @@ void Character::HandleKeyRefreshed_MoveLeft()
 void Character::HandleKeyReleased_MoveLeft()
 {
   body->StopWalk();
-  SendActiveCharacterInfoAndSkin();
+  SendActiveCharacterInfo();
 }
 
 // #################### UP
@@ -921,8 +921,7 @@ void Character::HandleKeyRefreshed_Up()
 	  do_nothing_time = Time::GetInstance()->Read();
 	  CharacterCursor::GetInstance()->Hide();
 	  AddFiringAngle(-DELTA_CROSSHAIR);
-	  SendCharacterInfo((int)GetTeamIndex(),
-			    (int)GetCharacterIndex());
+	  SendActiveCharacterInfo();
 	}
     }
 }
@@ -945,8 +944,7 @@ void Character::HandleKeyRefreshed_Down()
 	  do_nothing_time = Time::GetInstance()->Read();
 	  CharacterCursor::GetInstance()->Hide();
 	  AddFiringAngle(DELTA_CROSSHAIR);
-	  SendCharacterInfo((int)GetTeamIndex(),
-			    (int)GetCharacterIndex());
+	  SendActiveCharacterInfo();
 	}
     }
 }

@@ -125,7 +125,7 @@ WeaponProjectile::~WeaponProjectile()
 
 void WeaponProjectile::Shoot(double strength)
 {
-  MSG_DEBUG("weapon.projectile", "shoot with strength:%f\n", strength);
+  MSG_DEBUG("weapon.projectile", "shoot with strength:%f", strength);
 
   Init();
 
@@ -144,7 +144,10 @@ void WeaponProjectile::Shoot(double strength)
   SetSpeed (strength, angle);
   PutOutOfGround(angle);
 
-  MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f\n, position:%d,%d",
+  MSG_DEBUG("weapon.projectile", "shoot with hand position:%d,%d",
+	    ActiveCharacter().GetHandPosition().GetX(),
+	    ActiveCharacter().GetHandPosition().GetY());
+  MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f, position:%d,%d",
 	    strength, angle, GetX(), GetY());
 
   begin_time = Time::GetInstance()->Read();

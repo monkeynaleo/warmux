@@ -362,6 +362,8 @@ void Action::RetrieveCharacter()
     c->SetClothe(PopString());
     c->SetMovement(PopString());
     c->GetBody()->SetFrame((uint)PopInt());
+
+    c->GetBody()->UpdateWeaponPosition(c->GetPosition());
   }
 }
 

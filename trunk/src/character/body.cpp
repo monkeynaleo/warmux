@@ -365,16 +365,21 @@ void Body::Build()
   need_rebuild = false;
 }
 
-void Body::Draw(const Point2i& _pos)
+void Body::UpdateWeaponPosition(const Point2i& _pos)
 {
-  Build();
-
   // update the weapon position
   if(direction == DIRECTION_RIGHT)
     weapon_pos = Point2i((int)weapon_member->pos.x,(int)weapon_member->pos.y);
   else
     weapon_pos = Point2i(GetSize().x - (int)weapon_member->pos.x,(int)weapon_member->pos.y);
   weapon_pos += _pos;
+}
+
+void Body::Draw(const Point2i& _pos)
+{
+  Build();
+
+  UpdateWeaponPosition(_pos);
 
   // Finally draw each layer one by one
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)

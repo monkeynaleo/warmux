@@ -68,6 +68,8 @@ private:
 // TODO: Move it in an object !
 
 void SendCharacterInfo(int team_no, int char_no);// Send character information over the network (it's totally stupid to send it locally ;-)
+void SendActiveCharacterInfo();
+
 void SendGameMode();
 void SyncCharacters();
 
