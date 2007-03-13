@@ -125,7 +125,7 @@ WeaponProjectile::~WeaponProjectile()
 
 void WeaponProjectile::Shoot(double strength)
 {
-  MSG_DEBUG("weapon_projectile", "shoot.\n");
+  MSG_DEBUG("weapon.projectile", "shoot with strength:%f\n", strength);
 
   Init();
 
@@ -143,6 +143,9 @@ void WeaponProjectile::Shoot(double strength)
   RandomizeShoot(angle,strength);
   SetSpeed (strength, angle);
   PutOutOfGround(angle);
+
+  MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f\n, position:%d,%d",
+	    strength, angle, GetX(), GetY());
 
   begin_time = Time::GetInstance()->Read();
 
@@ -199,7 +202,7 @@ bool WeaponProjectile::IsImmobile() const
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {
   assert (obj != NULL);
-  MSG_DEBUG ("weapon_projectile", "SignalObjectCollision");
+  MSG_DEBUG ("weapon.projectile", "SignalObjectCollision");
   if (explode_colliding_character)
     Explosion();
 }
@@ -207,7 +210,7 @@ void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 // projectile explode when hiting the ground
 void WeaponProjectile::SignalGroundCollision()
 {
-  MSG_DEBUG ("weapon_projectile", "SignalGroundCollision");
+  MSG_DEBUG ("weapon.projectile", "SignalGroundCollision");
   if (explode_with_collision)
     Explosion();
 }
@@ -215,14 +218,14 @@ void WeaponProjectile::SignalGroundCollision()
 // Default behavior : signal to launcher a collision and explode
 void WeaponProjectile::SignalCollision()
 {
-  MSG_DEBUG ("weapon_projectile", "SignalCollision");
+  MSG_DEBUG ("weapon.projectile", "SignalCollision");
   if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
 }
 
 // Default behavior : signal to launcher projectile is drowning
 void WeaponProjectile::SignalDrowning()
 {
-  MSG_DEBUG ("weapon_projectile", "SignalDrowning");
+  MSG_DEBUG ("weapon.projectile", "SignalDrowning");
   PhysicalObj::SignalDrowning();
   if (launcher != NULL && !launcher->ignore_drowning_signal)
     launcher->SignalProjectileDrowning();
@@ -231,7 +234,7 @@ void WeaponProjectile::SignalDrowning()
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
-  MSG_DEBUG ("weapon_projectile", "SignalGhostState");
+  MSG_DEBUG ("weapon.projectile", "SignalGhostState");
   if (launcher != NULL && !launcher->ignore_ghost_state_signal)
     launcher->SignalProjectileGhostState();
   camera.SetCloseFollowing(false);
@@ -239,7 +242,7 @@ void WeaponProjectile::SignalGhostState(bool)
 
 void WeaponProjectile::SignalOutOfMap()
 {
-  MSG_DEBUG ("weapon_projectile", "SignalOutOfMap");
+  MSG_DEBUG ("weapon.projectile", "SignalOutOfMap");
 }
 
 // Implement it in subclass to randomize fire
@@ -250,7 +253,7 @@ void WeaponProjectile::RandomizeShoot(double &angle,double &strength)
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
 {
-  MSG_DEBUG("weapon_projectile", "Explosion");
+  MSG_DEBUG("weapon.projectile", "Explosion");
   DoExplosion();
   SignalExplosion();
   Ghost();
@@ -258,7 +261,7 @@ void WeaponProjectile::Explosion()
 
 void WeaponProjectile::SignalExplosion()
 {
-  MSG_DEBUG ("weapon_projectile", "SignalExplosion");
+  MSG_DEBUG ("weapon.projectile", "SignalExplosion");
   if (launcher != NULL && !launcher->ignore_explosion_signal)
     launcher->SignalProjectileExplosion();
 }
