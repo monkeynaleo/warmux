@@ -246,6 +246,28 @@ void Team::NextCharacter()
             ActiveCharacter().GetY());
 }
 
+void Team::PreviousCharacter()
+{
+  assert (0 < NbAliveCharacter());
+  ActiveCharacter().StopPlaying();
+  do
+  {
+    if (active_character == characters.begin())
+      active_character = characters.end();
+    --active_character;
+  } while (ActiveCharacter().IsDead());
+  ActiveCharacter().StartPlaying();
+
+  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
+  camera.FollowObject (&ActiveCharacter(),
+                          !is_camera_saved, !is_camera_saved,
+                          true);
+  MSG_DEBUG("team", "%s (%d, %d)is now the active character",
+            ActiveCharacter().GetName().c_str(),
+            ActiveCharacter().GetX(),
+            ActiveCharacter().GetY());
+}
+
 int Team::NbAliveCharacter() const
 {
   uint nbr = 0;

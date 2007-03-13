@@ -122,6 +122,13 @@ void Action_Player_NextCharacter (Action *a)
   camera.FollowObject(&ActiveCharacter(), true, true);
 }
 
+void Action_Player_PreviousCharacter (Action *a)
+{
+  a->RetrieveCharacter();       // Retrieve current character's informations
+  a->RetrieveCharacter();       // Retrieve previous character's information
+  camera.FollowObject(&ActiveCharacter(), true, true);
+}
+
 void Action_GameLoop_ChangeCharacter (Action *a)
 {
   a->RetrieveCharacter();
@@ -573,6 +580,7 @@ ActionHandler::ActionHandler()
   // ########################################################
   Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
   Register (Action::ACTION_PLAYER_NEXT_CHARACTER, "PLAYER_next_character", &Action_Player_NextCharacter);
+  Register (Action::ACTION_PLAYER_PREVIOUS_CHARACTER, "PLAYER_previous_character", &Action_Player_PreviousCharacter);
   Register (Action::ACTION_GAMELOOP_CHANGE_CHARACTER, "GAMELOOP_change_character", &Action_GameLoop_ChangeCharacter);
   Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_GameLoop_NextTeam);
 

@@ -40,11 +40,12 @@ public:
     KEY_CENTER,      KEY_TOGGLE_WEAPONS_MENUS,    KEY_CHAT,
     KEY_MOVE_LEFT,   KEY_MOVE_RIGHT,              KEY_UP,   KEY_DOWN, 
     KEY_JUMP,        KEY_HIGH_JUMP,               KEY_BACK_JUMP, 
-    KEY_SHOOT,       KEY_CHANGE_WEAPON,           KEY_NEXT_CHARACTER,
+    KEY_SHOOT,       KEY_CHANGE_WEAPON,           
     KEY_WEAPON_1,    KEY_WEAPON_2,                KEY_WEAPON_3,
     KEY_WEAPON_4,    KEY_WEAPON_5,                KEY_WEAPON_6,
     KEY_WEAPON_7,    KEY_WEAPON_8,                KEY_WEAPON_9,
-    KEY_WEAPON_LESS, KEY_WEAPON_MORE
+    KEY_WEAPON_LESS, KEY_WEAPON_MORE,             
+    KEY_PREVIOUS_CHARACTER,                       KEY_NEXT_CHARACTER,
   } Key_t;
 
 private:
