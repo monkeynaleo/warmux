@@ -74,7 +74,6 @@ public:
     ACTION_CHARACTER_BACK_JUMP,
     
     ACTION_CHARACTER_SET_PHYSICS,
-    ACTION_CHARACTER_SET_SKIN,
 
     // ########################################################
     // Using Weapon
