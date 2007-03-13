@@ -450,8 +450,10 @@ void Weapon::Draw(){
 	  DrawUnit(ActiveTeam().ReadNbUnits());
     }
 
-  // Do we need to draw strength_bar ? (real draw is done by class Interface
-  if (max_strength != 0 && IsReady() && !m_is_active)
+  // Do we need to draw strength_bar ? (real draw is done by class Interface)
+  // We do not draw on the network
+  if (max_strength != 0 && IsReady() && !m_is_active &&
+      (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
     weapon_strength_bar.visible = true;
 
   switch (m_visibility)
