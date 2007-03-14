@@ -58,8 +58,6 @@
 #include "../weapon/weapons_list.h"
 
 
-#define ENABLE_LIMIT_FPS
-
 GameLoop * GameLoop::singleton = NULL;
 
 GameLoop * GameLoop::GetInstance()
