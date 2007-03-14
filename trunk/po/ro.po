@@ -45,7 +45,7 @@ msgstr " a ieşit din partidă"
 msgid "! Map %s not found :-("
 msgstr "! Harta %s nu a fost găsită :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:258
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -53,7 +53,7 @@ msgstr[0] "un jucător conectat"
 msgstr[1] "%i jucători conectaţi"
 msgstr[2] "%i de jucători conectaţi"
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -61,7 +61,7 @@ msgstr[0] "un jucător e gata"
 msgstr[1] "%i jucători sunt gata"
 msgstr[2] "%i de jucători sunt gata"
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) a murit."
@@ -76,7 +76,7 @@ msgstr "%s <%s> cunoscut şi ca %s din %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> din %s"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s se sinucide !"
@@ -86,12 +86,12 @@ msgstr "%s se sinucide !"
 msgid "%s fps"
 msgstr "%s C/S"
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s a căzut în apă."
 
-#: src/game/game_loop.cpp:684
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s a căzut în afara hărţii!"
@@ -104,13 +104,13 @@ msgstr[0] "%s a câştigat %u punct de energie!"
 msgstr[1] "%s a câştigat %u puncte de energie!"
 msgstr[2] "%s a câştigat %u de puncte de energie!"
 
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "Psihopatia sălăşluieşte în %s, a omorât un membru al echipei %s!"
 
 # what about female names?
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s decedat prin propria stângăcie!"
@@ -160,16 +160,6 @@ msgstr "(mort)"
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(infinit)"
-
-#: src/sound/jukebox.cpp:70
-#, fuzzy
-msgid "* Couldn't initialize SDL: "
-msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
-
-#: src/sound/jukebox.cpp:78
-#, fuzzy
-msgid "* Couldn't open audio: "
-msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
 
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
@@ -277,7 +267,7 @@ msgstr "Merite"
 msgid "Disco Grenade"
 msgstr "Grenadă disco"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:230
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Chiar doriţi să abandonaţi? (D/N)"
 
@@ -289,7 +279,7 @@ msgstr "Durata unei ture"
 msgid "Dynamite"
 msgstr "Dinamită"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:246 src/game/game_loop.cpp:252
 msgid "END OF GAME"
 msgstr "SFÂRŞITUL JOCULUI"
 
@@ -336,7 +326,7 @@ msgstr "Eroare în timpul încărcării modului de joc %s (fişierul %s):"
 msgid "Error while loading game mode %s from memory:"
 msgstr "Eroare în timpul încărcării modului de joc %s din memorie:"
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:186
 #, c-format
 msgid ""
 "Error:\n"
@@ -417,7 +407,7 @@ msgstr "Comandant şef"
 msgid "Host a game"
 msgstr "Găzduieşte un joc"
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:732
 msgid "Hurry up, you are too slow !!"
 msgstr "Grăbeşte-te te mişti prea încet!!"
 
@@ -538,7 +528,7 @@ msgstr "Joc în reţea"
 msgid "Ninjarope"
 msgstr "Funie ninja"
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nu a fost găsit nici un element <%s> în fisierul xml de configurare!"
@@ -682,7 +672,7 @@ msgstr "Frecvenţa sunetului"
 msgid "Sounds"
 msgstr "Sunete"
 
-#: src/game/game.cpp:86
+#: src/game/game.cpp:85
 msgid "Starting a new game"
 msgstr "Se începe un nou joc"
 
@@ -754,7 +744,7 @@ msgstr "Racheta a părăsit câmpul de luptă..."
 msgid "The server rejected the conection."
 msgstr "Serverul a refuzat conexiunea."
 
-#: src/menu/network_menu.cpp:216
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -804,7 +794,7 @@ msgstr ""
 "AVERTISMENT!! Codul pentru reţea este încă în dezvoltare şi, de aceea, puţin "
 "experimental."
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:239
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -821,7 +811,7 @@ msgstr "Arme"
 msgid "Website: "
 msgstr "Situl web: "
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Ce umilire pentru %s - a fost ucis cu un simplu pistol!"
@@ -838,7 +828,7 @@ msgstr "Se lansează Wormux..."
 msgid "Wormux version "
 msgstr "Versiunea Wormux "
 
-#: src/include/action_handler.cpp:211
+#: src/include/action_handler.cpp:218
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr "Versiunile Wormux sunt diferite: client=%s, server=%s."
@@ -848,7 +838,7 @@ msgstr "Versiunile Wormux sunt diferite: client=%s, server=%s."
 msgid "XML error during loading map '%s' :"
 msgstr "Eroare XML în timpul încărcării hărţii '%s' :"
 
-#: src/menu/network_menu.cpp:221
+#: src/menu/network_menu.cpp:233
 msgid "You are alone..."
 msgstr "Nu mai e nimeni altcineva..."
 
@@ -866,44 +856,9 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Aveţi nevoie de cel puţin două echipe valide !"
 
-#: src/weapon/launcher.cpp:461
+#: src/weapon/launcher.cpp:467
 msgid "Your shot has missed!"
 msgstr "Focul dvs. a fost tras în aer!"
-
-#: src/sound/jukebox.cpp:304
-#, fuzzy, c-format
-msgid "[Music] Error : Unable to load music file: %s"
-msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
-
-#: src/sound/jukebox.cpp:186
-#, fuzzy, c-format
-msgid "[Music] Error : file %s does not exist"
-msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
-
-#: src/sound/jukebox.cpp:161
-#, fuzzy, c-format
-msgid "[Music] Error : file %s not found"
-msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
-
-#: src/sound/jukebox.cpp:202
-#, fuzzy, c-format
-msgid "[Music] Unable to find music file: %s"
-msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
-
-#: src/sound/jukebox.cpp:264
-#, fuzzy, c-format
-msgid "[Music] Unable to find profile: %s"
-msgstr "Nu a fost posibilă intrarea în joc ..."
-
-#: src/sound/jukebox.cpp:329
-#, c-format
-msgid "[Sound] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:354
-#, c-format
-msgid "[Sound] Error: File %s does not exist"
-msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -918,7 +873,7 @@ msgstr "general: "
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:321
+#: src/sound/jukebox.cpp:322
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Se citeşte fişierul personal de configurare"
@@ -1045,6 +1000,14 @@ msgstr ""
 #~ msgstr[0] "'%s a câştigat %u gravitaţie scăzută"
 #~ msgstr[1] "'%s a câştigat %u gravitaţii scăzute"
 #~ msgstr[2] "'%s a câştigat %u de gravitaţii scăzute"
+
+#, fuzzy
+#~ msgid "* Couldn't initialize SDL: "
+#~ msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
+
+#, fuzzy
+#~ msgid "* Couldn't open audio: "
+#~ msgstr "Nu a fost posibilă iniţializarea bibliotecii SDL: %s"
 
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""
@@ -1341,6 +1304,26 @@ msgstr ""
 #, fuzzy
 #~ msgid "Wormux index server version %i"
 #~ msgstr "Versiunea Wormux "
+
+#, fuzzy
+#~ msgid "[Music] Error : Unable to load music file: %s"
+#~ msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
+
+#, fuzzy
+#~ msgid "[Music] Error : file %s does not exist"
+#~ msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
+
+#, fuzzy
+#~ msgid "[Music] Error : file %s not found"
+#~ msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
+
+#, fuzzy
+#~ msgid "[Music] Unable to find music file: %s"
+#~ msgstr "Eroare: Nu a fost posibilă pornirea server-ului"
+
+#, fuzzy
+#~ msgid "[Music] Unable to find profile: %s"
+#~ msgstr "Nu a fost posibilă intrarea în joc ..."
 
 #, fuzzy
 #~ msgid "\\Wormux\\"

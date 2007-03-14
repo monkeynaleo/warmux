@@ -43,21 +43,21 @@ msgstr "%s kiesett a pályáról!"
 msgid "! Map %s not found :-("
 msgstr "Nem található %s térkép :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:258
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:696
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s csapat) meghalt."
@@ -72,7 +72,7 @@ msgstr "%s <%s> avagy ismertebb nevén %s %s csapatától"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> %s csapatától"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s öngyilkos lett!"
@@ -82,12 +82,12 @@ msgstr "%s öngyilkos lett!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:668
 #, fuzzy, c-format
 msgid "%s has fallen in water."
 msgstr "%s kiesett a pályáról!"
 
-#: src/game/game_loop.cpp:684
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s kiesett a pályáról!"
@@ -99,12 +99,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s energiaszintje %u egységgel nőtt!"
 msgstr[1] "%s energiaszintje %u egységgel nőtt!"
 
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s egy pszihopata, megölte %s csapatának egyik tagját!"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kicsit ügyefogyott volt, így hát távozott az élő sorából!"
@@ -144,14 +144,6 @@ msgstr "(kipurcant)"
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(korlátlan)"
-
-#: src/sound/jukebox.cpp:70
-msgid "* Couldn't initialize SDL: "
-msgstr ""
-
-#: src/sound/jukebox.cpp:78
-msgid "* Couldn't open audio: "
-msgstr ""
 
 #: src/weapon/air_attack.cpp:161
 #, fuzzy
@@ -269,7 +261,7 @@ msgstr ""
 msgid "Disco Grenade"
 msgstr "Gránát"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:230
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Biztos, hogy ki szeretnél lépni? (Y/N) ?"
 
@@ -282,7 +274,7 @@ msgstr "Egy forduló ideje:"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:246 src/game/game_loop.cpp:252
 msgid "END OF GAME"
 msgstr ""
 
@@ -327,7 +319,7 @@ msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 msgid "Error while loading game mode %s from memory:"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:186
 #, c-format
 msgid ""
 "Error:\n"
@@ -411,7 +403,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "Vége!"
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:732
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -534,7 +526,7 @@ msgstr ""
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:571
 #, fuzzy, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Nem találhat ó<%s> elem az XML konfigurációs állományban!"
@@ -682,7 +674,7 @@ msgstr "Hanghatások"
 msgid "Sounds"
 msgstr "Beállítások"
 
-#: src/game/game.cpp:86
+#: src/game/game.cpp:85
 msgid "Starting a new game"
 msgstr "Új játék kezdése"
 
@@ -753,7 +745,7 @@ msgstr ""
 msgid "The server rejected the conection."
 msgstr ""
 
-#: src/menu/network_menu.cpp:216
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -801,7 +793,7 @@ msgid ""
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:239
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -818,7 +810,7 @@ msgstr "Fegyver"
 msgid "Website: "
 msgstr "Honlap: "
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mekkora vesztes ez a %s, egy sima pisztoly kinyírta!"
@@ -835,7 +827,7 @@ msgstr "Töltődik a Wormux..."
 msgid "Wormux version "
 msgstr "Wormux verzió "
 
-#: src/include/action_handler.cpp:211
+#: src/include/action_handler.cpp:218
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -845,7 +837,7 @@ msgstr ""
 msgid "XML error during loading map '%s' :"
 msgstr "XML hiba a térkép (%s) betöltése közben:"
 
-#: src/menu/network_menu.cpp:221
+#: src/menu/network_menu.cpp:233
 msgid "You are alone..."
 msgstr ""
 
@@ -863,44 +855,9 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Legalább két csapatot kell verbuválnod!"
 
-#: src/weapon/launcher.cpp:461
+#: src/weapon/launcher.cpp:467
 msgid "Your shot has missed!"
 msgstr "Ezt elnézted!"
-
-#: src/sound/jukebox.cpp:304
-#, c-format
-msgid "[Music] Error : Unable to load music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:186
-#, fuzzy, c-format
-msgid "[Music] Error : file %s does not exist"
-msgstr "%s fájl nem létezik!"
-
-#: src/sound/jukebox.cpp:161
-#, c-format
-msgid "[Music] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:202
-#, c-format
-msgid "[Music] Unable to find music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:264
-#, c-format
-msgid "[Music] Unable to find profile: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:329
-#, c-format
-msgid "[Sound] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:354
-#, fuzzy, c-format
-msgid "[Sound] Error: File %s does not exist"
-msgstr "%s fájl nem létezik!"
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -915,7 +872,7 @@ msgstr ""
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:321
+#: src/sound/jukebox.cpp:322
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Hiba lépett fel a csapat betöltése közben (%s):"
@@ -1086,6 +1043,14 @@ msgstr ""
 #, fuzzy
 #~ msgid "Weapon:"
 #~ msgstr "Fegyver"
+
+#, fuzzy
+#~ msgid "[Music] Error : file %s does not exist"
+#~ msgstr "%s fájl nem létezik!"
+
+#, fuzzy
+#~ msgid "[Sound] Error: File %s does not exist"
+#~ msgstr "%s fájl nem létezik!"
 
 #, fuzzy
 #~ msgid "disconnection!"

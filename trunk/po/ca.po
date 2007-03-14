@@ -43,21 +43,21 @@ msgstr "%s ha caigut del mapa!"
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s no trobat :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:258
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:696
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (L'equip %s ) ha mort."
@@ -72,7 +72,7 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s es suicida!"
@@ -82,12 +82,12 @@ msgstr "%s es suicida!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ha caigut del mapa."
 
-#: src/game/game_loop.cpp:684
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ha caigut del mapa!"
@@ -99,12 +99,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "El jugador '%s' ha augmentat %u punt de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip : %s!"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ha mort per ser un maldestre!"
@@ -144,14 +144,6 @@ msgstr "(mort)"
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(ilimitat)"
-
-#: src/sound/jukebox.cpp:70
-msgid "* Couldn't initialize SDL: "
-msgstr ""
-
-#: src/sound/jukebox.cpp:78
-msgid "* Couldn't open audio: "
-msgstr ""
 
 #: src/weapon/air_attack.cpp:161
 #, fuzzy
@@ -269,7 +261,7 @@ msgstr ""
 msgid "Disco Grenade"
 msgstr "Granada"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:230
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Estar segur que vol sortir? (Y/N)"
 
@@ -282,7 +274,7 @@ msgstr "Duració del torn:"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:246 src/game/game_loop.cpp:252
 msgid "END OF GAME"
 msgstr ""
 
@@ -327,7 +319,7 @@ msgstr ""
 msgid "Error while loading game mode %s from memory:"
 msgstr ""
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:186
 #, c-format
 msgid ""
 "Error:\n"
@@ -408,7 +400,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "Final de la partida"
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:732
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -527,7 +519,7 @@ msgstr ""
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Cap element <%s> trobat en el arxiu de configuració xml !"
@@ -675,7 +667,7 @@ msgstr "Efectes sonors?"
 msgid "Sounds"
 msgstr "Efectes sonors?"
 
-#: src/game/game.cpp:86
+#: src/game/game.cpp:85
 msgid "Starting a new game"
 msgstr "Començant un nou joc"
 
@@ -751,7 +743,7 @@ msgstr "El cohet ha anat a un altre mon..."
 msgid "The server rejected the conection."
 msgstr ""
 
-#: src/menu/network_menu.cpp:216
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -799,7 +791,7 @@ msgid ""
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:239
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -816,7 +808,7 @@ msgstr "Arma :"
 msgid "Website: "
 msgstr "Lloc web: "
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s : ha estat mort per una simple pistola!"
@@ -833,7 +825,7 @@ msgstr "Arrencant Wormux..."
 msgid "Wormux version "
 msgstr "Versió Wormux"
 
-#: src/include/action_handler.cpp:211
+#: src/include/action_handler.cpp:218
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -843,7 +835,7 @@ msgstr ""
 msgid "XML error during loading map '%s' :"
 msgstr "Error XML durant la carrega del mapa '%s' :"
 
-#: src/menu/network_menu.cpp:221
+#: src/menu/network_menu.cpp:233
 msgid "You are alone..."
 msgstr ""
 
@@ -860,44 +852,9 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Tu necesites almenys dos equips vàlids!"
 
-#: src/weapon/launcher.cpp:461
+#: src/weapon/launcher.cpp:467
 msgid "Your shot has missed!"
 msgstr "Has fallat el tir!"
-
-#: src/sound/jukebox.cpp:304
-#, c-format
-msgid "[Music] Error : Unable to load music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:186
-#, fuzzy, c-format
-msgid "[Music] Error : file %s does not exist"
-msgstr "Arxiu \"%s\" no existeix !"
-
-#: src/sound/jukebox.cpp:161
-#, c-format
-msgid "[Music] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:202
-#, c-format
-msgid "[Music] Unable to find music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:264
-#, c-format
-msgid "[Music] Unable to find profile: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:329
-#, c-format
-msgid "[Sound] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:354
-#, fuzzy, c-format
-msgid "[Sound] Error: File %s does not exist"
-msgstr "Arxiu \"%s\" no existeix !"
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -912,7 +869,7 @@ msgstr ""
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:321
+#: src/sound/jukebox.cpp:322
 #, c-format
 msgid "o Loading sound profile: %s"
 msgstr ""
@@ -1073,6 +1030,14 @@ msgstr ""
 
 #~ msgid "Weapon:"
 #~ msgstr "Arma :"
+
+#, fuzzy
+#~ msgid "[Music] Error : file %s does not exist"
+#~ msgstr "Arxiu \"%s\" no existeix !"
+
+#, fuzzy
+#~ msgid "[Sound] Error: File %s does not exist"
+#~ msgstr "Arxiu \"%s\" no existeix !"
 
 #, fuzzy
 #~ msgid "disconnection!"
