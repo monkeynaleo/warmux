@@ -44,19 +44,19 @@ msgstr "%s harita dışına çıktı!"
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:258
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) öldü."
@@ -71,7 +71,7 @@ msgstr "%s'den %s <%s> aka %s"
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -81,12 +81,12 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game_loop.cpp:684
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
@@ -97,12 +97,12 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] ""
 
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -141,15 +141,6 @@ msgstr "(ölü)"
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(sınırsız)"
-
-#: src/sound/jukebox.cpp:70
-#, fuzzy
-msgid "* Couldn't initialize SDL: "
-msgstr "SDL kütüphanesi başlatılamadı: %s"
-
-#: src/sound/jukebox.cpp:78
-msgid "* Couldn't open audio: "
-msgstr ""
 
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
@@ -257,7 +248,7 @@ msgstr "Hazırlayanlar"
 msgid "Disco Grenade"
 msgstr "Disko El Bombası"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:230
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"
 
@@ -269,7 +260,7 @@ msgstr "Tur zamanı"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:246 src/game/game_loop.cpp:252
 msgid "END OF GAME"
 msgstr ""
 
@@ -314,7 +305,7 @@ msgstr "%s oyun modu yüklenirken hata (dosya %s):"
 msgid "Error while loading game mode %s from memory:"
 msgstr "%s oyun modu yüklenirken hata (dosya %s):"
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:186
 #, c-format
 msgid ""
 "Error:\n"
@@ -395,7 +386,7 @@ msgstr ""
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:732
 msgid "Hurry up, you are too slow !!"
 msgstr "Çabuk ol, çok yavaşsın !!"
 
@@ -514,7 +505,7 @@ msgstr "Ağ Oyunu"
 msgid "Ninjarope"
 msgstr "Ninja ipi"
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
@@ -655,7 +646,7 @@ msgstr "Ses frekansı"
 msgid "Sounds"
 msgstr "Sesler"
 
-#: src/game/game.cpp:86
+#: src/game/game.cpp:85
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
@@ -725,7 +716,7 @@ msgstr "Roket savaş alanını terketti..."
 msgid "The server rejected the conection."
 msgstr ""
 
-#: src/menu/network_menu.cpp:216
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -770,7 +761,7 @@ msgid ""
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:239
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -785,7 +776,7 @@ msgstr "Silahlar"
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
@@ -802,7 +793,7 @@ msgstr "Wormux çalıştırılıyor..."
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
-#: src/include/action_handler.cpp:211
+#: src/include/action_handler.cpp:218
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -812,7 +803,7 @@ msgstr ""
 msgid "XML error during loading map '%s' :"
 msgstr "'%s' haritası yüklenirken XML hatası :"
 
-#: src/menu/network_menu.cpp:221
+#: src/menu/network_menu.cpp:233
 msgid "You are alone..."
 msgstr ""
 
@@ -830,44 +821,9 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
-#: src/weapon/launcher.cpp:461
+#: src/weapon/launcher.cpp:467
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
-
-#: src/sound/jukebox.cpp:304
-#, c-format
-msgid "[Music] Error : Unable to load music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:186
-#, c-format
-msgid "[Music] Error : file %s does not exist"
-msgstr ""
-
-#: src/sound/jukebox.cpp:161
-#, c-format
-msgid "[Music] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:202
-#, c-format
-msgid "[Music] Unable to find music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:264
-#, c-format
-msgid "[Music] Unable to find profile: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:329
-#, c-format
-msgid "[Sound] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:354
-#, c-format
-msgid "[Sound] Error: File %s does not exist"
-msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -882,7 +838,7 @@ msgstr "genel: "
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:321
+#: src/sound/jukebox.cpp:322
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
@@ -891,6 +847,10 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 #, c-format
 msgid "o Opened audio at %d Hz %d bit"
 msgstr ""
+
+#, fuzzy
+#~ msgid "* Couldn't initialize SDL: "
+#~ msgstr "SDL kütüphanesi başlatılamadı: %s"
 
 #~ msgid "Is it a gift?"
 #~ msgstr "Bu bir hediye mi?"

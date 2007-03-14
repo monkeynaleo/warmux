@@ -44,21 +44,21 @@ msgstr "%s tipahti ulos kartalta!"
 msgid "! Map %s not found :-("
 msgstr "! Karttaa %s ei löydy :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:258
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:696
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (joukkue %s) kuoli."
@@ -73,7 +73,7 @@ msgstr "%s < %s > aka %s %s:stä"
 msgid "%s <%s> from %s"
 msgstr "%s < %s > %s:stä"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suoritti itsemurhan !"
@@ -83,12 +83,12 @@ msgstr "%s suoritti itsemurhan !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s sukelsi syvyyksiin."
 
-#: src/game/game_loop.cpp:684
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s tipahti ulos kartalta!"
@@ -100,12 +100,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s voitti %u voimapisteen."
 msgstr[1] "%s voitti %u voimapistettä."
 
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "psykopaatti %s tappaa jäseniä ryhmästä %s!"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s kuoli kömpelyyteensä!"
@@ -145,15 +145,6 @@ msgstr "(kuollut)"
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(rajaton)"
-
-#: src/sound/jukebox.cpp:70
-#, fuzzy
-msgid "* Couldn't initialize SDL: "
-msgstr "SDL kirjaston alustus epäonnistui:%s"
-
-#: src/sound/jukebox.cpp:78
-msgid "* Couldn't open audio: "
-msgstr ""
 
 #: src/weapon/air_attack.cpp:161
 #, fuzzy
@@ -267,7 +258,7 @@ msgstr "Kiitokset"
 msgid "Disco Grenade"
 msgstr "Kranaatti"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:230
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Haluatko tosiaan lopettaa? (Y/N)"
 
@@ -280,7 +271,7 @@ msgstr "Vuoron kesto:"
 msgid "Dynamite"
 msgstr "Dynamiitti"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:246 src/game/game_loop.cpp:252
 msgid "END OF GAME"
 msgstr ""
 
@@ -325,7 +316,7 @@ msgstr "Virhe ladataessa pelityyppiä %s (tiedosto %s):"
 msgid "Error while loading game mode %s from memory:"
 msgstr "Virhe ladataessa pelityyppiä %s (tiedosto %s):"
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:186
 #, c-format
 msgid ""
 "Error:\n"
@@ -406,7 +397,7 @@ msgstr ""
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:732
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -530,7 +521,7 @@ msgstr "Nettipeli"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Elementtiä <%s> ei löytynyt xml tiedostosta !"
@@ -680,7 +671,7 @@ msgstr "Ääniefektit?"
 msgid "Sounds"
 msgstr "Ääni asetukset"
 
-#: src/game/game.cpp:86
+#: src/game/game.cpp:85
 msgid "Starting a new game"
 msgstr "Aloitetaan uusi peli"
 
@@ -756,7 +747,7 @@ msgstr "Ohjus on poistunut taistelukentältä..."
 msgid "The server rejected the conection."
 msgstr ""
 
-#: src/menu/network_menu.cpp:216
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -804,7 +795,7 @@ msgid ""
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:239
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -821,7 +812,7 @@ msgstr "Ase:"
 msgid "Website: "
 msgstr "Verkkosivu:"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Mikä harmi, %s kuoli pikku pyssyn luodista!"
@@ -839,7 +830,7 @@ msgstr "Wormux käynnistyy..."
 msgid "Wormux version "
 msgstr "Wormux versio"
 
-#: src/include/action_handler.cpp:211
+#: src/include/action_handler.cpp:218
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -849,7 +840,7 @@ msgstr ""
 msgid "XML error during loading map '%s' :"
 msgstr "XML virhe ladattaessa karttaa '%s' :"
 
-#: src/menu/network_menu.cpp:221
+#: src/menu/network_menu.cpp:233
 msgid "You are alone..."
 msgstr ""
 
@@ -867,44 +858,9 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Tarvitset ainakin kaksi kunnollista joukkuetta!"
 
-#: src/weapon/launcher.cpp:461
+#: src/weapon/launcher.cpp:467
 msgid "Your shot has missed!"
 msgstr "Ammuit ohi!"
-
-#: src/sound/jukebox.cpp:304
-#, c-format
-msgid "[Music] Error : Unable to load music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:186
-#, c-format
-msgid "[Music] Error : file %s does not exist"
-msgstr ""
-
-#: src/sound/jukebox.cpp:161
-#, c-format
-msgid "[Music] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:202
-#, c-format
-msgid "[Music] Unable to find music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:264
-#, c-format
-msgid "[Music] Unable to find profile: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:329
-#, c-format
-msgid "[Sound] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:354
-#, c-format
-msgid "[Sound] Error: File %s does not exist"
-msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -919,7 +875,7 @@ msgstr ""
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:321
+#: src/sound/jukebox.cpp:322
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Virhe luettaessa asetustiedostoa: %s"
@@ -999,6 +955,10 @@ msgstr ""
 #~ msgid_plural "'%s has won %u Low gravity"
 #~ msgstr[0] "Joukkue %s voitti %u ilmaiskun."
 #~ msgstr[1] "Joukkue %s voitti %u ilmaiskua."
+
+#, fuzzy
+#~ msgid "* Couldn't initialize SDL: "
+#~ msgstr "SDL kirjaston alustus epäonnistui:%s"
 
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""

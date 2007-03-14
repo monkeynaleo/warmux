@@ -46,7 +46,7 @@ msgstr "%s выпал с карты!"
 msgid "! Map %s not found :-("
 msgstr "! Карта %s не найдена :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:258
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
@@ -54,7 +54,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
@@ -62,7 +62,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:696
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (команда %s) погибла."
@@ -77,7 +77,7 @@ msgstr "%s <%s> aka %s из %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> из %s"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s кончает жизнь самоубийством !"
@@ -87,12 +87,12 @@ msgstr "%s кончает жизнь самоубийством !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s упал в воду."
 
-#: src/game/game_loop.cpp:684
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s выпал с карты!"
@@ -105,12 +105,12 @@ msgstr[0] "%s получил %u единицу энергии!"
 msgstr[1] "%s получил %u единицы энергии!"
 msgstr[2] "%s получил %u единиц энергии!"
 
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s - псих, он убил члена команды %s!"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s погиб, потому что он недотёпа!"
@@ -151,14 +151,6 @@ msgstr "(мёртв)"
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(бесконечно)"
-
-#: src/sound/jukebox.cpp:70
-msgid "* Couldn't initialize SDL: "
-msgstr ""
-
-#: src/sound/jukebox.cpp:78
-msgid "* Couldn't open audio: "
-msgstr ""
 
 #: src/weapon/air_attack.cpp:161
 #, fuzzy
@@ -276,7 +268,7 @@ msgstr ""
 msgid "Disco Grenade"
 msgstr "Граната"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:230
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Вы точно хотите выйти? (Y/N)"
 
@@ -289,7 +281,7 @@ msgstr "Длительность шага:"
 msgid "Dynamite"
 msgstr "Динамит"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:246 src/game/game_loop.cpp:252
 msgid "END OF GAME"
 msgstr ""
 
@@ -334,7 +326,7 @@ msgstr "Ошибка при загрузке режима игры %s (файл 
 msgid "Error while loading game mode %s from memory:"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:186
 #, c-format
 msgid ""
 "Error:\n"
@@ -417,7 +409,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "Конец игры"
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:732
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
@@ -537,7 +529,7 @@ msgstr "Игра по сети"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Элемент <%s> не найден в файле с настройками!"
@@ -685,7 +677,7 @@ msgstr "Звуковые эффекты?"
 msgid "Sounds"
 msgstr "Настройки звука"
 
-#: src/game/game.cpp:86
+#: src/game/game.cpp:85
 msgid "Starting a new game"
 msgstr "Начинаем новую игру"
 
@@ -761,7 +753,7 @@ msgstr "Ракета улетела за пределы поля битвы..."
 msgid "The server rejected the conection."
 msgstr ""
 
-#: src/menu/network_menu.cpp:216
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -810,7 +802,7 @@ msgid ""
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:239
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -828,7 +820,7 @@ msgstr "Оружие:"
 msgid "Website: "
 msgstr "Веб-сайт"
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Какой позор для %s - его убили из простого пистолета!"
@@ -846,7 +838,7 @@ msgstr "Запуск Wormux..."
 msgid "Wormux version "
 msgstr "Wormux версии "
 
-#: src/include/action_handler.cpp:211
+#: src/include/action_handler.cpp:218
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -856,7 +848,7 @@ msgstr ""
 msgid "XML error during loading map '%s' :"
 msgstr "Ошибка разбора XML при загрузке карты '%s' :"
 
-#: src/menu/network_menu.cpp:221
+#: src/menu/network_menu.cpp:233
 msgid "You are alone..."
 msgstr ""
 
@@ -874,44 +866,9 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "Вам нужны хотя бы две команды!"
 
-#: src/weapon/launcher.cpp:461
+#: src/weapon/launcher.cpp:467
 msgid "Your shot has missed!"
 msgstr "Вы промазали!"
-
-#: src/sound/jukebox.cpp:304
-#, c-format
-msgid "[Music] Error : Unable to load music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:186
-#, c-format
-msgid "[Music] Error : file %s does not exist"
-msgstr ""
-
-#: src/sound/jukebox.cpp:161
-#, c-format
-msgid "[Music] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:202
-#, c-format
-msgid "[Music] Unable to find music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:264
-#, c-format
-msgid "[Music] Unable to find profile: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:329
-#, c-format
-msgid "[Sound] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:354
-#, c-format
-msgid "[Sound] Error: File %s does not exist"
-msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -926,7 +883,7 @@ msgstr ""
 msgid "o Loading music"
 msgstr ""
 
-#: src/sound/jukebox.cpp:321
+#: src/sound/jukebox.cpp:322
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Ошибка при загрузке режима игры %s (файл %s):"

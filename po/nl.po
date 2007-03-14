@@ -43,21 +43,21 @@ msgstr "%s is van de kaart gevallen!"
 msgid "! Map %s not found :-("
 msgstr "Kaart %s niet gevonden :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:246
+#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:258
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:252
+#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) is overleden."
@@ -72,7 +72,7 @@ msgstr "%s <%s> aka %s van %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> van %s"
 
-#: src/game/game_loop.cpp:680
+#: src/game/game_loop.cpp:675
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s pleegde zelfmoord !"
@@ -82,12 +82,12 @@ msgstr "%s pleegde zelfmoord !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:673
+#: src/game/game_loop.cpp:668
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s is in het water gevallen."
 
-#: src/game/game_loop.cpp:684
+#: src/game/game_loop.cpp:679
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s is van de kaart gevallen!"
@@ -99,12 +99,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s heeft %u punt energie gekregen!"
 msgstr[1] "%s heeft %u punten energie gekregen!"
 
-#: src/game/game_loop.cpp:695
+#: src/game/game_loop.cpp:690
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s is een psychopaat, hij vermoorde een lid van team %s!"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s is dood door zijn onhandigheid!"
@@ -144,15 +144,6 @@ msgstr "(dood)"
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(onbegrensd)"
-
-#: src/sound/jukebox.cpp:70
-#, fuzzy
-msgid "* Couldn't initialize SDL: "
-msgstr "Kon SDL bibliotheek niet initialiseren: %s"
-
-#: src/sound/jukebox.cpp:78
-msgid "* Couldn't open audio: "
-msgstr ""
 
 #: src/weapon/air_attack.cpp:161
 msgid "Air Attack"
@@ -264,7 +255,7 @@ msgstr "Credits"
 msgid "Disco Grenade"
 msgstr "Disco Granaat"
 
-#: src/game/game.cpp:229
+#: src/game/game.cpp:230
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Wilt u echt afsluiten? (Y/N)"
 
@@ -276,7 +267,7 @@ msgstr "Duur van een beurt"
 msgid "Dynamite"
 msgstr "Dynamiet"
 
-#: src/game/game_loop.cpp:248 src/game/game_loop.cpp:254
+#: src/game/game_loop.cpp:246 src/game/game_loop.cpp:252
 msgid "END OF GAME"
 msgstr ""
 
@@ -323,7 +314,7 @@ msgstr "Fout bij het laden van spel modus %s (bestand %s):"
 msgid "Error while loading game mode %s from memory:"
 msgstr "Fout bij het laden van spel modus %s (bestand %s):"
 
-#: src/game/game.cpp:185
+#: src/game/game.cpp:186
 #, c-format
 msgid ""
 "Error:\n"
@@ -405,7 +396,7 @@ msgstr ""
 msgid "Host a game"
 msgstr "Einde van het spel"
 
-#: src/game/game_loop.cpp:737
+#: src/game/game_loop.cpp:732
 msgid "Hurry up, you are too slow !!"
 msgstr "Snel, u bent te langzaam !!"
 
@@ -529,7 +520,7 @@ msgstr "Netwerk Spel"
 msgid "Ninjarope"
 msgstr "Ninja touw"
 
-#: src/weapon/weapon.cpp:572
+#: src/weapon/weapon.cpp:571
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Element <%s> niet gevonden het xml config bestand!"
@@ -673,7 +664,7 @@ msgstr "Geluids- frequentie"
 msgid "Sounds"
 msgstr "Geluiden"
 
-#: src/game/game.cpp:86
+#: src/game/game.cpp:85
 msgid "Starting a new game"
 msgstr "Starten van een nieuw spel"
 
@@ -743,7 +734,7 @@ msgstr "De raket heeft het slagveld verlaten voor te ontploffen"
 msgid "The server rejected the conection."
 msgstr ""
 
-#: src/menu/network_menu.cpp:216
+#: src/menu/network_menu.cpp:228
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -790,7 +781,7 @@ msgid ""
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:227
+#: src/menu/network_menu.cpp:239
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -806,7 +797,7 @@ msgstr "Wapens"
 msgid "Website: "
 msgstr "Website: "
 
-#: src/game/game_loop.cpp:698
+#: src/game/game_loop.cpp:693
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Wat een schande voor %s - hij is gedood door een simpel geweer!"
@@ -823,7 +814,7 @@ msgstr "Wormux wordt gestart..."
 msgid "Wormux version "
 msgstr "Wormux versie "
 
-#: src/include/action_handler.cpp:211
+#: src/include/action_handler.cpp:218
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
@@ -833,7 +824,7 @@ msgstr ""
 msgid "XML error during loading map '%s' :"
 msgstr "XML fout bij het laden van kaart '%s' :"
 
-#: src/menu/network_menu.cpp:221
+#: src/menu/network_menu.cpp:233
 msgid "You are alone..."
 msgstr ""
 
@@ -851,44 +842,9 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "U heeft minimaal twee geldige teams nodig !"
 
-#: src/weapon/launcher.cpp:461
+#: src/weapon/launcher.cpp:467
 msgid "Your shot has missed!"
 msgstr "U schoot mis!"
-
-#: src/sound/jukebox.cpp:304
-#, c-format
-msgid "[Music] Error : Unable to load music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:186
-#, c-format
-msgid "[Music] Error : file %s does not exist"
-msgstr ""
-
-#: src/sound/jukebox.cpp:161
-#, c-format
-msgid "[Music] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:202
-#, c-format
-msgid "[Music] Unable to find music file: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:264
-#, c-format
-msgid "[Music] Unable to find profile: %s"
-msgstr ""
-
-#: src/sound/jukebox.cpp:329
-#, c-format
-msgid "[Sound] Error : file %s not found"
-msgstr ""
-
-#: src/sound/jukebox.cpp:354
-#, c-format
-msgid "[Sound] Error: File %s does not exist"
-msgstr ""
 
 #: src/map/ground.cpp:56
 msgid "done"
@@ -904,7 +860,7 @@ msgstr "algemeen:"
 msgid "o Loading music"
 msgstr "=== Laden ==="
 
-#: src/sound/jukebox.cpp:321
+#: src/sound/jukebox.cpp:322
 #, fuzzy, c-format
 msgid "o Loading sound profile: %s"
 msgstr "Fout bij het laden van configuratiebestand: %s"
@@ -987,6 +943,10 @@ msgstr ""
 #~ msgid_plural "'%s has won %u Low gravity"
 #~ msgstr[0] "'%s heeft %u luchtaanval gekregen"
 #~ msgstr[1] "'%s heeft %u luchtaanvallen gekregen"
+
+#, fuzzy
+#~ msgid "* Couldn't initialize SDL: "
+#~ msgstr "Kon SDL bibliotheek niet initialiseren: %s"
 
 #~ msgid "<infinite_background> needs <is_open> to be set to work correctly!!"
 #~ msgstr ""
