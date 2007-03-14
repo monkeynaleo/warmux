@@ -163,10 +163,15 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 
   if(w == send_txt_bt)
   {
-    std::string empty = "";
-    network.SendChatMessage(line_to_send_tbox->GetText());
-    line_to_send_tbox->SetText(empty);
+    SendChatMsg();
   }
+}
+
+void NetworkMenu::SendChatMsg()
+{
+  std::string empty = "";
+  network.SendChatMessage(line_to_send_tbox->GetText());
+  line_to_send_tbox->SetText(empty);
 }
 
 void NetworkMenu::SaveOptions()
@@ -209,6 +214,13 @@ void NetworkMenu::__sig_ok()
 
 void NetworkMenu::sig_ok()
 {
+  // return was pressed while chat texbox still had focus (player wants to send his msg)
+  if(line_to_send_tbox->have_focus)
+  {
+    SendChatMsg();
+    return;
+  }
+
   if(network.IsServer())
   {
     if(teams_list.playing_list.size() <= 1)

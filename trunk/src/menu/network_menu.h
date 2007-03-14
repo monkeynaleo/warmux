@@ -57,6 +57,7 @@ class NetworkMenu : public Menu
   void SaveOptions();
   void OnClic(const Point2i &mousePosition, int button);
   void Draw(const Point2i &mousePosition);
+  void SendChatMsg();
   
   void sig_ok();
   void __sig_ok();
