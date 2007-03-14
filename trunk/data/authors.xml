@@ -455,6 +455,13 @@
 	<email>larry_AT_doubidou_DOT_net</email>
       </author>
       <author>
+	<nickname>lynxlynxlynx</nickname>
+	<name>Jaka KRANJC</name>
+	<description>Patch that enables cycling through characters backwards</description>
+	<email>svn_AT_lynxlynx_DOT_info</email>
+	<country>Slovenia</country>
+      </author>
+      <author>
 	<nickname>Mathias</nickname>
 	<name>Mathias PLICHTA</name>
 	<description>Automatic bazooka constant refresh</description>
