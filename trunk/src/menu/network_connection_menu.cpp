@@ -60,8 +60,8 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   // What do we want to do ?
   Box* action_box = new HBox(stdRect, false);
 
-  previous_action_bt = new Button(Point2i(0, 0), res, "menu/big_minus", false);
-  next_action_bt = new Button(Point2i(0, 0), res, "menu/big_plus", false);
+  previous_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_minus", false);
+  next_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_plus", false);
   action_label = new Label(_("Connect to an internet game"), 
 			   Rectanglei(0,0,250,0), 
 			   *big_font, white_color, true);

@@ -68,8 +68,13 @@
     </image>
   </sprite> 
   <sprite name="big_plus">
-    <image file="menu/img/big_right.png">
+    <image file="menu/img/right.png">
       <grid pos="0,0" size="21,21" array="2,1" />
+    </image>
+  </sprite> 
+  <sprite name="really_big_plus">
+    <image file="menu/img/big_right.png">
+      <grid pos="0,0" size="42,42" array="2,1" />
     </image>
   </sprite> 
   <sprite name="minus">
@@ -78,8 +83,13 @@
     </image>
   </sprite> 
   <sprite name="big_minus">
-    <image file="menu/img/big_left.png">
+    <image file="menu/img/left.png">
       <grid pos="0,0" size="21,21" array="2,1" />
+    </image>
+  </sprite> 
+  <sprite name="really_big_minus">
+    <image file="menu/img/big_left.png">
+      <grid pos="0,0" size="42,42" array="2,1" />
     </image>
   </sprite> 
   <sprite name="up">
