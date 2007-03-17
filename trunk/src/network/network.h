@@ -55,6 +55,9 @@ class Network
   int fin;	
 #endif
 
+  uint max_player_number;
+  
+
 protected:
   typedef enum {
     NETWORK_SERVER,
@@ -84,7 +87,6 @@ public:
   network_state_t state;
 
   std::list<DistantComputer*> cpu; // list of the connected computer
-  uint max_player_number;
   uint connected_player;
   uint client_inited;
   bool sync_lock;
@@ -117,7 +119,9 @@ public:
   void AcceptIncoming();
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
-  
+  void SetMaxNumberOfPlayers(uint max_nb_players);
+
+
   void SendChatMessage(const std::string& txt);
 };
 

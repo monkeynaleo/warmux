@@ -97,3 +97,12 @@ void Network::RejectIncoming()
   server_socket = NULL;
   printf("\nStop listening");
 }
+
+void Network::SetMaxNumberOfPlayers(uint max_nb_players)
+{
+  if (max_nb_players <= GameMode::GetInstance()->max_teams) {
+    max_player_number = max_nb_players;
+  } else {
+    max_player_number = GameMode::GetInstance()->max_teams;
+  }
+}

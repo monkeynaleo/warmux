@@ -92,25 +92,33 @@ NetworkMenu::NetworkMenu() :
   mode = new Label("", rectZero, *Font::GetInstance(Font::FONT_NORMAL));
   
   if (network.IsClient()) {
+    // Client Mode
     mode->SetText(_("Client mode"));
+    tmp_box->AddWidget(mode);
+
+    player_number = NULL;
+    connected_players = NULL;
+    inited_players = NULL;
   } else {
+
+    // Server Mode
     mode->SetText(_("Server mode"));
-  } 
-  tmp_box->AddWidget(mode);
+    tmp_box->AddWidget(mode);
   
-  player_number = new SpinButton(_("Max number of players:"), rectZero, 
-				 GameMode::GetInstance()->max_teams, 1, 2, 
-				 GameMode::GetInstance()->max_teams);
-  
-  tmp_box->AddWidget(player_number);
-
-  connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0), 
+    player_number = new SpinButton(_("Max number of players:"), rectZero, 
+				   GameMode::GetInstance()->max_teams, 1, 2, 
+				   GameMode::GetInstance()->max_teams);
+    
+    tmp_box->AddWidget(player_number);
+    
+    connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0), 
 				rectZero, *Font::GetInstance(Font::FONT_SMALL));
-  tmp_box->AddWidget(connected_players);
+    tmp_box->AddWidget(connected_players);
 
-  inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0), 
-			     rectZero, *Font::GetInstance(Font::FONT_SMALL));
-  tmp_box->AddWidget(inited_players);
+    inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0), 
+			       rectZero, *Font::GetInstance(Font::FONT_SMALL));
+    tmp_box->AddWidget(inited_players);
+  }
 
   options_box->AddWidget(tmp_box);
   widgets.AddWidget(options_box);
@@ -156,9 +164,9 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 {
   Widget* w = widgets.Clic(mousePosition, button);
 
-  if(w == player_number)
+  if(player_number != NULL && w == player_number)
   {
-    network.max_player_number = player_number->GetValue();
+    network.SetMaxNumberOfPlayers(player_number->GetValue());
   }
 
   if(w == send_txt_bt)
@@ -253,17 +261,21 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
 {
   if(network.IsConnected())
   {
-    //Refresh the number of connected players:
-    int nbr = network.connected_player;
-    std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
-    if(connected_players->GetText() != pl)
-      connected_players->SetText(pl);
+    if (connected_players != NULL) {
+      //Refresh the number of connected players:
+      int nbr = network.connected_player;
+      std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
+      if(connected_players->GetText() != pl)
+	connected_players->SetText(pl);
+    }
 
-    //Refresh the number of players ready:
-    nbr = network.client_inited;
-    pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
-    if(inited_players->GetText() != pl)
-      inited_players->SetText(pl);
+    if (inited_players != NULL) {
+      //Refresh the number of players ready:
+      int nbr = network.client_inited;
+      std::string pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
+      if(inited_players->GetText() != pl)
+	inited_players->SetText(pl);
+    }
 
     index_server.Refresh();
   }
