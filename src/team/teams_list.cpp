@@ -163,14 +163,14 @@ void TeamsList::LoadList()
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::LoadGamingData(uint how_many_characters)
+void TeamsList::LoadGamingData()
 {
   active_team = playing_list.begin();
 
   iterator it=playing_list.begin(), end=playing_list.end();
 
   // Load the data of all teams
-  for (; it != end; ++it) (**it).LoadGamingData(how_many_characters);
+  for (; it != end; ++it) (**it).LoadGamingData();
 }
 
 //-----------------------------------------------------------------------------

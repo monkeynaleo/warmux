@@ -82,7 +82,11 @@ private:
   // Initialization
   void InitGameData_NetServer();
   void InitGameData_NetClient();
-  void InitData_Local();
+  void InitGameData_Local();
+  
+  void InitMap();
+  void InitTeams();
+  void InitSounds();
   void InitData();
 
   // Refresh all objects (position, state ...)

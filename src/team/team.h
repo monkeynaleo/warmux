@@ -78,11 +78,11 @@ class Team
           const Surface &_flag,
           const std::string& _sound_profile);
 
-    bool LoadCharacters(uint howmany);
+    bool LoadCharacters();
   public:
     static Team* CreateTeam (const std::string &teams_dir, const std::string &id);
 
-    void LoadGamingData(uint howmany);
+    void LoadGamingData();
     void UnloadGamingData();
 
     bool IsSameAs(const Team& other) const;
