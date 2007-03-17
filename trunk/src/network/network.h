@@ -48,7 +48,7 @@ class Network
 {
   friend class DistantComputer;
 
-  bool inited;
+  bool sdlnet_inited;
 
 #if defined(DEBUG) && not defined(WIN32)
   int fout;
@@ -76,8 +76,7 @@ public:
 
   typedef enum
     {
-      NETWORK_NOT_CONNECTED,
-      NETWORK_OPTION_SCREEN,
+      NO_NETWORK,
       NETWORK_INIT_GAME,
       NETWORK_READY_TO_PLAY,
       NETWORK_PLAYING
@@ -109,6 +108,7 @@ public:
   void SendAction(Action* action);
   void SendPacket(char* packet, int size);
   void ReceiveActions();
+
   // Client specific
   ConnectionState ClientConnect(const std::string &host, const std::string &port);
 
@@ -117,9 +117,11 @@ public:
   void AcceptIncoming();
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
-
+  
   void SendChatMessage(const std::string& txt);
 };
+
+int net_thread_func(void* no_param);
 
 extern Network network;
 //-----------------------------------------------------------------------------

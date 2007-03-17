@@ -198,6 +198,7 @@ void DistantComputer::ManageTeam(Action* team)
 void DistantComputer::SendChatMessage(Action* a)
 {
   std::string txt = a->PopString();
+  if (txt == "") return;
   if(network.IsServer())
   {
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + "> "+txt));

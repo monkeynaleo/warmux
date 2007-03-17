@@ -21,14 +21,11 @@
 
 #include "network.h"
 //-----------------------------------------------------------------------------
-#include <SDL_net.h>
-#include <SDL_thread.h>
 #include "../game/game_mode.h"
 #include "../game/game.h"
 #include "../include/action_handler.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
-#include "distant_cpu.h"
 
 #if defined(DEBUG) && not defined(WIN32)
 #include <sys/types.h>
@@ -45,8 +42,8 @@ Network::Network()
   max_player_number = 0;
 
   m_connection = LOCAL_ONLY;
-  state = NETWORK_NOT_CONNECTED;
-  inited = false;
+  state = NO_NETWORK; // useless value at beginning
+  sdlnet_inited = false;
   sync_lock = false;
   network_menu = NULL;
 
@@ -59,6 +56,7 @@ Network::Network()
 }
 
 //-----------------------------------------------------------------------------
+
 int net_thread_func(void* no_param)
 {
   network.ReceiveActions();
@@ -70,11 +68,11 @@ int net_thread_func(void* no_param)
 
 void Network::Init()
 {
-  if(inited) return;
+  if (sdlnet_inited) return;
   if (SDLNet_Init()) {
       Error(_("Failed to initialize network library!"));
   }
-  inited = true;
+  sdlnet_inited = true;
   max_player_number = GameMode::GetInstance()->max_teams;
   connected_player = 0;
 
@@ -89,7 +87,7 @@ void Network::Init()
 Network::~Network()
 {
   Disconnect();
-  if(inited)
+  if (sdlnet_inited)
   {
     SDLNet_Quit();
 #if defined(DEBUG) && not defined(WIN32)
@@ -121,201 +119,6 @@ void Network::Disconnect()
 
   if(old_connection == NETWORK_SERVER)
     SDLNet_TCP_Close(server_socket);
-}
-
-//-----------------------------------------------------------------------------
-//----------------       Client specific methods   ----------------------------
-//-----------------------------------------------------------------------------
-// Standard header, only needed for the following method
-#ifndef WIN32
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <errno.h>
-#else
-#include <winsock.h>
-#endif
-
-ConnectionState Network::CheckHost(const std::string &host, const std::string& port)
-{
-  MSG_DEBUG("network", "Checking connection to %s:%s", host.c_str(), port.c_str());
-  int prt=0;
-  sscanf(port.c_str(),"%i",&prt);
-
-  struct hostent* hostinfo;
-  hostinfo = gethostbyname(host.c_str());
-  if( ! hostinfo )
-    return CONN_BAD_HOST;
-
-#ifndef WIN32
-  int fd = socket(AF_INET, SOCK_STREAM, 0); 
-  if( fd == -1 )
-    return CONN_BAD_SOCKET;
-
-#else
-  SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
-  if( fd == INVALID_SOCKET )
-    return CONN_BAD_SOCKET;
-#endif
-
-  // Set the timeout
-  struct timeval timeout;
-  memset(&timeout, 0, sizeof(timeout));
-  timeout.tv_sec = 5; // 5seconds timeout
-#ifndef WIN32
-  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (void*)&timeout, sizeof(timeout));
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (void*)&timeout, sizeof(timeout));
-#else
-  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeout, sizeof(timeout));
-#endif
-
-  struct sockaddr_in addr;
-  addr.sin_family = AF_INET;
-#ifndef WIN32
-  addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
-#else
-  addr.sin_addr.s_addr = inet_addr(*hostinfo->h_addr_list);
-#endif
-
-  addr.sin_port = htons(prt);
-
-#ifndef WIN32
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == -1 )
-  {
-    switch(errno)
-    {
-    case ECONNREFUSED: return CONN_REJECTED;
-    case EINPROGRESS:
-    case ETIMEDOUT: return CONN_TIMEOUT;
-    default: return CONN_BAD_SOCKET;
-    }
-  }
-  close(fd);
-#else
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
-  {
-    switch(WSAGetLastError())
-    {
-    case WSAECONNREFUSED: return CONN_REJECTED;
-    case WSAEINPROGRESS:
-    case WSAETIMEDOUT: return CONN_TIMEOUT;
-    default: return CONN_BAD_SOCKET;
-    }
-  }
-  closesocket(fd);
-#endif
-  return CONNECTED;
-}
-
-ConnectionState Network::ClientConnect(const std::string &host, const std::string& port)
-{
-  MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
-
-  int prt=0;
-  sscanf(port.c_str(),"%i",&prt);
-
-  if( CheckHost(host, port) == CONN_TIMEOUT)
-    return CONN_TIMEOUT;
-
-  if(SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt)==-1)
-  {
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return CONN_BAD_HOST;
-  }
-
-  TCPsocket socket = SDLNet_TCP_Open(&ip);
-
-  if(!socket)
-  {
-    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
-    return CONN_REJECTED;
-  }
-
-  m_connection = NETWORK_CLIENT;
-  state = NETWORK_OPTION_SCREEN;
-
-  socket_set = SDLNet_AllocSocketSet(1);
-  connected_player = 1;
-  cpu.push_back(new DistantComputer(socket));
-  //Send nickname to server
-  Action a(Action::ACTION_NICKNAME, nickname);
-  network.SendAction(&a);
-
-  //Control to net_thread_func
-  thread = SDL_CreateThread(net_thread_func,NULL);
-  return CONNECTED;
-}
-
-//-----------------------------------------------------------------------------
-//----------------       Server specific methods   ----------------------------
-//-----------------------------------------------------------------------------
-
-ConnectionState Network::ServerStart(const std::string &port)
-{
-  // The server starts listening for clients
-  MSG_DEBUG("network", "Start server on port %s", port.c_str());
-
-  cpu.clear();
-  // Convert port number (std::string port) into SDL port number format:
-  int prt;
-  sscanf(port.c_str(),"%i",&prt);
-
-  if(SDLNet_ResolveHost(&ip,NULL,(Uint16)prt)!=0)
-  {
-    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return CONN_BAD_PORT;
-  }
-
-  m_connection = NETWORK_SERVER;
-
-  // Open the port to listen to
-  state = NETWORK_OPTION_SCREEN;
-  AcceptIncoming();
-  connected_player = 1;
-  printf("\nConnected\n");
-  socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
-  thread = SDL_CreateThread(net_thread_func,NULL);
-  return CONNECTED;
-}
-
-std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<DistantComputer*>::iterator closed)
-{
-  printf("Client disconnected\n");
-  delete *closed;
-  if(IsServer() && connected_player == max_player_number)
-  {
-    // A new player will be able to connect, so we reopen the socket
-    // For incoming connections
-    printf("Allowing new connections\n");
-    AcceptIncoming();
-  }
-
-  connected_player--;
-  return cpu.erase(closed);
-}
-
-void Network::AcceptIncoming()
-{
-  assert(IsServer());
-  if(state != NETWORK_OPTION_SCREEN) return;
-
-  server_socket = SDLNet_TCP_Open(&ip);
-  if(!server_socket)
-  {
-    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
-    return;
-  }
-  printf("\nStart listening");
-}
-
-void Network::RejectIncoming()
-{
-  assert(IsServer());
-  if(!server_socket) return;
-  SDLNet_TCP_Close(server_socket);
-  server_socket = NULL;
-  printf("\nStop listening");
 }
 
 //-----------------------------------------------------------------------------
@@ -455,6 +258,8 @@ void Network::SendPacket(char* packet, int size)
 
 void Network::SendChatMessage(const std::string& txt)
 {
+  if (txt == "") return;
+
   if(IsServer())
   {
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + std::string("> ") + txt));

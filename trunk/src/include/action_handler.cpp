@@ -73,7 +73,7 @@ void Action_Network_ChangeState (Action *a)
   {
     switch(network.state)
     {
-    case Network::NETWORK_OPTION_SCREEN:
+    case Network::NO_NETWORK:
       // State is changed when server clicks on the launch game button
       network.client_inited++;
       break;
@@ -93,7 +93,7 @@ void Action_Network_ChangeState (Action *a)
   {
     switch(network.state)
     {
-    case Network::NETWORK_OPTION_SCREEN:
+    case Network::NO_NETWORK:
       network.state = Network::NETWORK_INIT_GAME;
       break;
     case Network::NETWORK_INIT_GAME:
