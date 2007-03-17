@@ -106,10 +106,10 @@ Team * Team::CreateTeam (const std::string& teams_dir,
 }
 
 
-bool Team::LoadCharacters(uint howmany)
+bool Team::LoadCharacters()
 {
   //assert(howmany <= GameMode::GetInstance()->max_characters);
-  assert (howmany <= 10);
+  assert (nb_characters <= 10);
 
   std::string nomfich;
   try
@@ -170,7 +170,7 @@ bool Team::LoadCharacters(uint howmany)
 
         // C'est la fin ?
       ++it;
-    } while (it!=nodes.end() && characters.size() < howmany );
+    } while (it!=nodes.end() && characters.size() < nb_characters );
 
     active_character = characters.begin();
 
@@ -183,7 +183,7 @@ bool Team::LoadCharacters(uint howmany)
     return false;
   }
 
-  return (characters.size() == howmany);
+  return (characters.size() == nb_characters);
 }
 
 void Team::InitEnergy (uint max)
@@ -385,7 +385,7 @@ Character* Team::FindByIndex(uint index)
   return &(*it);
 }
 
-void Team::LoadGamingData(uint howmany)
+void Team::LoadGamingData()
 {
   // Reset ammos
   m_nb_ammos.clear();
@@ -408,10 +408,7 @@ void Team::LoadGamingData(uint howmany)
   active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
   is_camera_saved = false;
 
-  if (howmany == 0)
-    LoadCharacters(nb_characters);
-  else
-    LoadCharacters(howmany);
+  LoadCharacters();
 }
 
 void Team::UnloadGamingData()

@@ -94,17 +94,13 @@ void GameLoop::InitGameData_NetServer()
 
   SendGameMode();
 
-  world.Reset();
-
   randomSync.Init();
+  
+  // Load maps
+  InitMap();
 
-  lst_objects.PlaceBarrels();
-
-  std::cout << "o " << _("Initialise teams") << std::endl;
-  teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
-
-  std::cout << "o " << _("Initialise data") << std::endl;
-  lst_objects.PlaceMines();
+  // Load teams
+  InitTeams();
 
   // Tells all clients that the server is ready to play
   network.SendAction ( &a_change_state );
@@ -124,14 +120,14 @@ void GameLoop::InitGameData_NetClient()
   AppWormux * app = AppWormux::GetInstance();
   app->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
   ActionHandler * action_handler = ActionHandler::GetInstance();
-  std::cout << "o " << _("Initialise teams") << std::endl;
 
-  world.Reset();
+  // Loading map
+  InitMap();
 
-  lst_objects.PlaceBarrels();
-  teams_list.LoadGamingData(GameMode::GetInstance()->max_characters);
-  lst_objects.PlaceMines();
+  // Loading teams
+  InitTeams();
 
+  // Tells server that client is ready
   Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
 
   network.SendAction (&a_change_state);
@@ -143,6 +139,7 @@ void GameLoop::InitGameData_NetClient()
     SDL_Delay(100);
   }
 
+  // Waiting for other clients
   std::cout << network.state << " : Waiting for people over the network" << std::endl;
   while (network.state != Network::NETWORK_PLAYING)
   {
@@ -153,69 +150,52 @@ void GameLoop::InitGameData_NetClient()
   std::cout << network.state << " : Run game !" << std::endl;
 }
 
-void GameLoop::InitData_Local()
+void GameLoop::InitGameData_Local()
 {
-  std::cout << "o " << _("Find a random position for characters") << std::endl;
-  world.Reset();
-  MapsList::GetInstance()->ActiveMap().FreeData();
-  lst_objects.PlaceBarrels();
-  teams_list.LoadGamingData(0);
-
-  std::cout << "o " << _("Initialise objects") << std::endl;
-  lst_objects.PlaceMines();
-}
-
-void GameLoop::InitData()
-{
-  Time::GetInstance()->Reset();
-
-  if (network.IsServer())
-    InitGameData_NetServer();
-  else if (network.IsClient())
-    InitGameData_NetClient();
-  else
-    InitData_Local();
-
-  CharacterCursor::GetInstance()->Reset();
-  Keyboard::GetInstance()->Reset();
-
-  fps.Reset();
-  if(network.IsConnected())
-     chatsession.Reset();
-  Interface::GetInstance()->Reset();
-  GameMessages::GetInstance()->Reset();
-  ParticleEngine::Init();
-}
-
-void GameLoop::Init()
-{
-  // Display Loading screen
-  LoadingScreen::GetInstance()->DrawBackground();
-  Mouse::GetInstance()->Hide();
-
-  Game::GetInstance()->MessageLoading();
-
-  // Init all needed data
-  std::cout << "o " << _("Initialisation") << std::endl;
-
   // Load the map
-  LoadingScreen::GetInstance()->StartLoading(1, "map_icon", _("Maps"));
-  InitData();
+  InitMap();
 
   // Init teams
-  LoadingScreen::GetInstance()->StartLoading(2, "team_icon", _("Teams"));
+  InitTeams();
+}
 
-  // Teams' creation
+void GameLoop::InitMap()
+{  
+  std::cout << "o " << _("Initialise map") << std::endl;
+  
+  LoadingScreen::GetInstance()->StartLoading(1, "map_icon", _("Maps"));
+  world.Reset();
+  MapsList::GetInstance()->ActiveMap().FreeData();
+
+  lst_objects.PlaceBarrels();
+}
+
+void GameLoop::InitTeams()
+{  
+  std::cout << "o " << _("Initialise teams") << std::endl;
+  
+  LoadingScreen::GetInstance()->StartLoading(2, "team_icon", _("Teams"));  
+
+  // Check the number of teams
   if (teams_list.playing_list.size() < 2)
     Error(_("You need at least two teams to play: "
              "change this in 'Options menu' !"));
   assert (teams_list.playing_list.size() <= GameMode::GetInstance()->max_teams);
 
-  // Initialization of teams' energy
-  LoadingScreen::GetInstance()->StartLoading(3, "weapon_icon", _("Weapons"));
+  // Load the teams
+  teams_list.LoadGamingData();
 
+  // Initialization of teams' energy
+  LoadingScreen::GetInstance()->StartLoading(3, "weapon_icon", _("Weapons")); // use fake message...
   teams_list.InitEnergy();
 
+  lst_objects.PlaceMines();  
+}
+
+void GameLoop::InitSounds()
+{  
+  std::cout << "o " << _("Initialise teams") << std::endl;
+   
   // Load teams' sound profiles
   LoadingScreen::GetInstance()->StartLoading(4, "sound_icon", _("Sounds"));
 
@@ -227,7 +207,44 @@ void GameLoop::Init()
   // Begin to play !!
   // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
+}
 
+void GameLoop::InitData()
+{  
+  std::cout << "o " << _("Initialisation") << std::endl;
+  Time::GetInstance()->Reset();
+
+  // initialize gaming data
+  if (network.IsServer())
+    InitGameData_NetServer();
+  else if (network.IsClient())
+    InitGameData_NetClient();
+  else
+    InitGameData_Local();
+
+  InitSounds();
+}
+
+void GameLoop::Init()
+{
+  // Display Loading screen
+  LoadingScreen::GetInstance()->DrawBackground();
+  Mouse::GetInstance()->Hide();
+
+  Game::GetInstance()->MessageLoading();
+
+  // Init all needed data
+  InitData();
+
+  CharacterCursor::GetInstance()->Reset();
+  Keyboard::GetInstance()->Reset();
+
+  fps.Reset();
+  if(network.IsConnected())
+     chatsession.Reset();
+  Interface::GetInstance()->Reset();
+  GameMessages::GetInstance()->Reset();
+  ParticleEngine::Init();
   
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   IgnorePendingInputEvents();

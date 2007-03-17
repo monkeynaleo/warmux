@@ -47,7 +47,7 @@ public:
   void LoadList ();
   void NextTeam (bool begin_game);
   Team& ActiveTeam();
-  void LoadGamingData(uint how_many_characters);
+  void LoadGamingData();
   void UnloadGamingData();
   void Clear();
 
