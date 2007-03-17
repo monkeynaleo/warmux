@@ -64,12 +64,6 @@ public:
   // Main loop
   void Run();
 
-  // Refresh all objects (position, state ...)
-  void RefreshObject();
-  void RefreshInput();
-  void RefreshClock();
-  void PingClient();
-
   // Read/Set State
   game_loop_state_t ReadState() const { return state; }
   void SetState(game_loop_state_t new_state, bool begin_game=false);
@@ -85,10 +79,21 @@ public:
 
 private:
 
+  // Initialization
   void InitGameData_NetServer();
   void InitGameData_NetClient();
   void InitData_Local();
   void InitData();
+
+  // Refresh all objects (position, state ...)
+  void RefreshObject();
+  void RefreshClock();
+
+  // Input management (keyboard/mouse)
+  void RefreshInput();
+  void IgnorePendingInputEvents();
+
+  void PingClient();
 
   void CallDraw();
 

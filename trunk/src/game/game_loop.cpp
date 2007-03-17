@@ -75,6 +75,9 @@ GameLoop::GameLoop()
   give_objbox = true;
 }
 
+// ####################################################################
+// ####################################################################
+
 void GameLoop::InitGameData_NetServer()
 {
   network.client_inited = 1;
@@ -184,10 +187,11 @@ void GameLoop::InitData()
   ParticleEngine::Init();
 }
 
-void GameLoop::Init ()
+void GameLoop::Init()
 {
   // Display Loading screen
   LoadingScreen::GetInstance()->DrawBackground();
+  Mouse::GetInstance()->Hide();
 
   Game::GetInstance()->MessageLoading();
 
@@ -224,12 +228,25 @@ void GameLoop::Init ()
   // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
   if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
 
+  
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
+  IgnorePendingInputEvents();
 
   // First "selection" of a weapon -> fix bug 6576
   ActiveTeam().AccessWeapon().Select();
 
   SetState(PLAYING, true);
+}
+
+// ####################################################################
+// ####################################################################
+
+// ignore all pending events
+// useful after loading screen
+void GameLoop::IgnorePendingInputEvents()
+{
+  SDL_Event event;
+  while(SDL_PollEvent(&event));
 }
 
 void GameLoop::RefreshInput()
@@ -273,6 +290,9 @@ void GameLoop::RefreshInput()
   GameMessages::GetInstance()->Refresh();
   camera.Refresh();
 }
+
+// ####################################################################
+// ####################################################################
 
 void GameLoop::RefreshObject()
 {
@@ -383,6 +403,9 @@ void GameLoop::PingClient()
   Action * a = new Action(Action::ACTION_NETWORK_PING);
   ActionHandler::GetInstance()->NewAction(a);
 }
+
+// ####################################################################
+// ####################################################################
 
 void GameLoop::Run()
 {
