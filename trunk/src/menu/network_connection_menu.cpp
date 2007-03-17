@@ -48,7 +48,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
   Font * big_font = Font::GetInstance(Font::FONT_BIG);
 
-  Rectanglei stdRect(0, 0, 300, 64);
+  Rectanglei stdRect(0, 0, 360, 64);
 
   uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
   uint y_box = AppWormux::GetInstance()->video.window.GetHeight()/2 - 200;
