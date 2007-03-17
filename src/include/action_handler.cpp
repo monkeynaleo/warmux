@@ -67,7 +67,7 @@ void Action_Nickname(Action *a)
 
 void Action_Network_ChangeState (Action *a)
 {
-  MSG_DEBUG("action.handler", "ChangeState");
+  MSG_DEBUG("action_handler", "ChangeState");
 
   if(network.IsServer())
   {
