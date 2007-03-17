@@ -143,7 +143,6 @@ ConnectionState Network::ClientConnect(const std::string &host, const std::strin
   m_connection = NETWORK_CLIENT;
 
   socket_set = SDLNet_AllocSocketSet(1);
-  connected_player = 1;
   cpu.push_back(new DistantComputer(socket));
   //Send nickname to server
   Action a(Action::ACTION_NICKNAME, nickname);

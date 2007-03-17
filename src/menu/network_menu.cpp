@@ -236,14 +236,14 @@ void NetworkMenu::sig_ok()
       msg_box->NewMessage(Format(ngettext("There is only %i team.", "There are only %i teams.", teams_list.playing_list.size()), teams_list.playing_list.size()), c_red);
       return;
     }
-    if(network.connected_player <= 1)
+    if(network.GetNbConnectedPlayers() <= 1)
     {
       msg_box->NewMessage(_("You are alone..."), c_red);
       return;
     }
-    if(network.connected_player != network.client_inited)
+    if(network.GetNbConnectedPlayers() != network.client_inited)
     {
-      int nbr = network.connected_player - network.client_inited;
+      int nbr = network.GetNbConnectedPlayers() - network.client_inited;
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl, c_red);
       return;
@@ -263,7 +263,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
   {
     if (connected_players != NULL) {
       //Refresh the number of connected players:
-      int nbr = network.connected_player;
+      int nbr = network.GetNbConnectedPlayers();
       std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
       if(connected_players->GetText() != pl)
 	connected_players->SetText(pl);
