@@ -283,7 +283,10 @@ Point2i Mouse::GetWorldPosition() const
 // set the new pointer type and return the previous one
 Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
 {
-  if (Config::GetInstance()->GetDefaultMouseCursor()) return current_pointer;
+  if (Config::GetInstance()->GetDefaultMouseCursor()) {
+    Show(); // be sure cursor is visible
+    return current_pointer;
+  }
 
   if (current_pointer == pointer) return current_pointer;
 
@@ -294,21 +297,6 @@ Mouse::pointer_t Mouse::SetPointer(pointer_t pointer)
   current_pointer = pointer;
   
   return old_pointer;
-}
-
-void Mouse::Show()
-{
-  hide = false;
-}
-
-void Mouse::Hide()
-{
-  hide = true;
-}
-
-bool Mouse::IsVisible() const
-{
-  return !hide;
 }
 
 const Surface& Mouse::GetSurfaceFromPointer(pointer_t pointer) const
@@ -440,7 +428,10 @@ void Mouse::DrawSelectPointer()
 
 void Mouse::Draw()
 {
-  if (current_pointer == POINTER_STANDARD || !IsVisible())
+  if (hide)
+    return;
+
+  if (current_pointer == POINTER_STANDARD)
     return; // use standard SDL cursor
 
   if ( DrawMovePointer() )
@@ -506,6 +497,20 @@ void Mouse::Draw()
     };
 }
 
+void Mouse::Show()
+{
+  hide = false;
+
+  if (Config::GetInstance()->GetDefaultMouseCursor()) {
+    SDL_ShowCursor(true); // be sure cursor is visible
+  }
+}
+
+void Mouse::Hide()
+{
+  hide = true;
+  SDL_ShowCursor(false); // be sure cursor is invisible
+}
 
 // Center the pointer on the screen
 void Mouse::CenterPointer()
