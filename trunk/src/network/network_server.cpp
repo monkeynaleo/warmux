@@ -53,7 +53,6 @@ ConnectionState Network::ServerStart(const std::string &port)
 
   // Open the port to listen to
   AcceptIncoming();
-  connected_player = 1;
   printf("\nConnected\n");
   socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
   thread = SDL_CreateThread(net_thread_func,NULL);
@@ -64,7 +63,7 @@ std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<Distant
 {
   printf("Client disconnected\n");
   delete *closed;
-  if(IsServer() && connected_player == max_player_number)
+  if (IsServer() && GetNbConnectedPlayers() == max_nb_players)
   {
     // A new player will be able to connect, so we reopen the socket
     // For incoming connections
@@ -72,7 +71,6 @@ std::list<DistantComputer*>::iterator Network::CloseConnection(std::list<Distant
     AcceptIncoming();
   }
 
-  connected_player--;
   return cpu.erase(closed);
 }
 
@@ -98,11 +96,16 @@ void Network::RejectIncoming()
   printf("\nStop listening");
 }
 
-void Network::SetMaxNumberOfPlayers(uint max_nb_players)
+void Network::SetMaxNumberOfPlayers(uint _max_nb_players)
 {
-  if (max_nb_players <= GameMode::GetInstance()->max_teams) {
-    max_player_number = max_nb_players;
+  if (_max_nb_players <= GameMode::GetInstance()->max_teams) {
+    max_nb_players = _max_nb_players;
   } else {
-    max_player_number = GameMode::GetInstance()->max_teams;
+    max_nb_players = GameMode::GetInstance()->max_teams;
   }
+}
+
+uint Network::GetNbConnectedPlayers()
+{
+  return cpu.size() + 1;
 }

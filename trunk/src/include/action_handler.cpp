@@ -80,7 +80,7 @@ void Action_Network_ChangeState (Action *a)
     case Network::NETWORK_INIT_GAME:
       // One more client is ready to play
       network.client_inited++;
-      if(network.client_inited == network.connected_player)
+      if(network.client_inited == network.GetNbConnectedPlayers())
         network.state = Network::NETWORK_READY_TO_PLAY;
       break;
     default:

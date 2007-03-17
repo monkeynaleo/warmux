@@ -39,7 +39,7 @@ Network network;
 
 Network::Network()
 {
-  max_player_number = 0;
+  max_nb_players = 0;
 
   m_connection = LOCAL_ONLY;
   state = NO_NETWORK; // useless value at beginning
@@ -73,8 +73,7 @@ void Network::Init()
       Error(_("Failed to initialize network library!"));
   }
   sdlnet_inited = true;
-  max_player_number = GameMode::GetInstance()->max_teams;
-  connected_player = 0;
+  max_nb_players = GameMode::GetInstance()->max_teams;
 
 #if defined(DEBUG) && not defined(WIN32)
   fin = open("./network.in", O_RDWR | O_CREAT | O_SYNC, S_IRWXU | S_IRWXG);
@@ -145,9 +144,8 @@ void Network::ReceiveActions()
       if (incoming)
       {
         cpu.push_back(new DistantComputer(incoming));
-        connected_player++;
         printf("New client connected\n");
-        if (connected_player >= max_player_number)
+        if (GetNbConnectedPlayers() >= max_nb_players)
           RejectIncoming();
         ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_ASK_VERSION));
       }
