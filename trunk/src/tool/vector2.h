@@ -200,7 +200,7 @@ template<class T> class Vector2
 		 */
 		inline void operator-=(const T val){
 			x -= val;
-			y += val;
+			y -= val;
 		}
 
 		/**
