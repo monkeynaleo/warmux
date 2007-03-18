@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: da\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-03-07 22:27+0100\n"
+"PO-Revision-Date: 2007-03-17 19:27+0100\n"
 "Last-Translator: Janus Troelsen <ysangkok@gmail.com>\n"
 "Language-Team: danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -27,13 +27,12 @@ msgstr " fra "
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
 msgid " has joined the party"
-msgstr ""
+msgstr " deltager nu i festen"
 
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:79
-#, fuzzy
 msgid " has left the party"
-msgstr "%s faldt ud af banen!"
+msgstr " deltager ikke mere i festen"
 
 #: src/map/maps_list.cpp:282
 #, c-format
@@ -44,20 +43,20 @@ msgstr "! Banen %s blev ikke fundet :-("
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Spiller %i er forbundet"
+msgstr[1] "Spillere %i er forbundet"
 
 #: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Spiller %i er klar"
+msgstr[1] "Spillere %i er klar"
 
 #: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s (%s) has died."
-msgstr "%s (fra holdet %s) blev dræbt."
+msgstr "%s (%s) døde."
 
 #: src/map/maps_list.cpp:104
 #, c-format
@@ -93,8 +92,8 @@ msgstr "%s faldt ud af banen!"
 #, c-format
 msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s har fået %u point ekstra energi!"
+msgstr[1] "%s har fået %u point ekstra energi!"
 
 #: src/game/game_loop.cpp:690
 #, c-format
@@ -152,9 +151,8 @@ msgstr "Tryklufthammer"
 
 #. We'll do as if NULL is for all teams
 #: src/team/results.cpp:143
-#, fuzzy
 msgid "All teams"
-msgstr "Indlæser hold:"
+msgstr "Alle hold"
 
 #: src/weapon/anvil.cpp:74
 msgid "Anvil"
@@ -166,11 +164,11 @@ msgstr "Forfattere:"
 
 #: src/weapon/auto_bazooka.cpp:153
 msgid "Automatic Bazooka"
-msgstr "Automatisk bazooka"
+msgstr "Laserstyret bazooka"
 
 #: src/network/net_error_msg.cpp:43
 msgid "Bad socket ..."
-msgstr ""
+msgstr "Dårlig socket..."
 
 #: src/weapon/baseball.cpp:32
 msgid "Baseball Bat"
@@ -209,7 +207,7 @@ msgstr "Kan ikke åbne holdkataloget (%s)!"
 
 #: src/menu/network_menu.cpp:95
 msgid "Client mode"
-msgstr ""
+msgstr "Klientmodus"
 
 #: src/weapon/cluster_bomb.cpp:109
 msgid "Cluster Bomb"
@@ -221,20 +219,20 @@ msgstr "Begå selvmord"
 
 #: src/menu/internet_menu.cpp:63
 msgid "Connect !"
-msgstr ""
+msgstr "Forbinder!"
 
 #: src/menu/network_connection_menu.cpp:65
 #: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
-msgstr ""
+msgstr "Forbind til et spil på internettet"
 
 #: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
-msgstr ""
+msgstr "Forbind til spil"
 
 #: src/network/net_error_msg.cpp:34
 msgid "Connected !"
-msgstr ""
+msgstr "Forbundet!"
 
 #: src/weapon/construct.cpp:42
 msgid "Construct"
@@ -281,10 +279,8 @@ msgstr "Fejl under indlæsning af holdet %ss data:"
 
 #: src/game/config.cpp:230
 #, c-format
-msgid ""
-"Error while creating directory \"%s\": unable to store configuration file."
-msgstr ""
-"Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
+msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgstr "Fejl under dannelse af kataloget \"%s\": kan ikke gemme konfigurationsfilen."
 
 #: src/game/game_mode.cpp:260
 #, c-format
@@ -319,19 +315,19 @@ msgstr ""
 #: src/menu/network_connection_menu.cpp:243
 #, c-format
 msgid "Error: Unable to connect to %s:%s"
-msgstr ""
+msgstr "Fejl: Kan ikke forbinde til %s:%s"
 
 #: src/menu/network_connection_menu.cpp:214
 msgid "Error: Unable to contact index server to host a game"
-msgstr ""
+msgstr "Fejl: Kan ikke kontakte indeksserveren for at starte et spil"
 
 #: src/menu/network_connection_menu.cpp:254
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr ""
+msgstr "Fejl: Kan ikke kontakte indeksserveren for at søge efter internetspil"
 
 #: src/menu/network_connection_menu.cpp:231
 msgid "Error: Unable to start server"
-msgstr ""
+msgstr "Fejl: Kan ikke starte server"
 
 #: src/team/team.cpp:144
 #, c-format
@@ -339,9 +335,8 @@ msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Fejl: Kan ikke finde kroppen \"%s\" for holdet \"%s\"."
 
 #: src/network/network.cpp:75
-#, fuzzy
 msgid "Failed to initialize network library!"
-msgstr "Kan ikke klargøre SDL-biblioteket: %s"
+msgstr "Kan ikke klargøre netværksbiblioteket!"
 
 #: src/game/game_loop.cpp:157
 msgid "Find a random position for characters"
@@ -374,15 +369,15 @@ msgstr "Hjemme katalog (miljøvariabelen $HOME) blev ikke fundet!"
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
-msgstr ""
+msgstr "Hav et godt spil!"
 
 #: src/menu/team_box.cpp:47
 msgid "Head commander"
-msgstr ""
+msgstr "Hovedkommandør"
 
 #: src/menu/network_connection_menu.cpp:164
 msgid "Host a game"
-msgstr ""
+msgstr "Vær vært for et spil"
 
 #: src/game/game_loop.cpp:732
 msgid "Hurry up, you are too slow !!"
@@ -424,7 +419,7 @@ msgstr "Klargører hold"
 
 #: src/object/objbox.cpp:141
 msgid "It's a present!"
-msgstr ""
+msgstr "Det er en gave!"
 
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
@@ -433,7 +428,7 @@ msgstr "Jetpack"
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:128
 msgid "Join #wormux on irc.freenode.net to find some opponents."
-msgstr ""
+msgstr "Besøg #wormux på irc.freenode.net for at finde nogle modstandere."
 
 #: src/map/maps_list.cpp:190
 msgid "Load maps:"
@@ -445,9 +440,8 @@ msgstr "Indlæser hold:"
 
 #. How many teams ?
 #: src/menu/network_teams_selection_box.cpp:33
-#, fuzzy
 msgid "Local teams:"
-msgstr "Indlæser hold:"
+msgstr "Lokale hold:"
 
 #: src/weapon/lowgrav.cpp:38
 msgid "LowGrav"
@@ -465,7 +459,7 @@ msgstr "Baner"
 
 #: src/menu/network_menu.cpp:101
 msgid "Max number of players:"
-msgstr ""
+msgstr "Maksimum antal spillere:"
 
 #: src/menu/options_menu.cpp:77
 msgid "Maximum FPS"
@@ -477,19 +471,19 @@ msgstr "Mine"
 
 #: src/menu/results_menu.cpp:169
 msgid "Most sold-out"
-msgstr ""
+msgstr "Mest udsolgt"
 
 #: src/menu/results_menu.cpp:159
 msgid "Most useful"
-msgstr ""
+msgstr "Mest brugbar"
 
 #: src/menu/results_menu.cpp:164
 msgid "Most useless"
-msgstr ""
+msgstr "Mest ubrugelig"
 
 #: src/menu/results_menu.cpp:154
 msgid "Most violent"
-msgstr ""
+msgstr "Mest voldelig"
 
 #: src/menu/options_menu.cpp:99
 msgid "Music?"
@@ -511,16 +505,16 @@ msgstr "Intet <%s> element fundet i XML-konfigurationsfilen!"
 #: src/menu/results_menu.cpp:211 src/menu/results_menu.cpp:218
 #: src/menu/results_menu.cpp:225 src/menu/results_menu.cpp:232
 msgid "Nobody!"
-msgstr ""
+msgstr "Ingen!"
 
 #: src/menu/team_box.cpp:53
 msgid "Number of characters"
-msgstr ""
+msgstr "Antal krigere"
 
 #. How many teams ?
 #: src/menu/teams_selection_box.cpp:31
 msgid "Number of teams:"
-msgstr ""
+msgstr "Antal hold:"
 
 #: src/menu/main_menu.cpp:104
 msgid "Options"
@@ -540,9 +534,8 @@ msgstr "Spil"
 
 #: src/menu/network_teams_selection_box.cpp:52
 #: src/menu/teams_selection_box.cpp:50
-#, fuzzy
 msgid "Player"
-msgstr "Spil"
+msgstr "Spiller"
 
 #: src/menu/options_menu.cpp:68
 msgid "Player energy?"
@@ -559,7 +552,7 @@ msgstr "Stinkdyrskaster"
 #. Server port
 #: src/menu/network_connection_menu.cpp:81
 msgid "Port:"
-msgstr ""
+msgstr "Port:"
 
 #: src/menu/main_menu.cpp:116
 msgid "Quit"
@@ -575,12 +568,12 @@ msgstr "Læser personlig konfigureringsfil"
 
 #: src/menu/internet_menu.cpp:56
 msgid "Refresh"
-msgstr ""
+msgstr "Opdater"
 
 #. translators: this is the team listing and will expand in a context like "OOo team - Remote"
 #: src/menu/team_box.cpp:71
 msgid "Remote"
-msgstr ""
+msgstr "Fjern"
 
 #: src/menu/options_menu.cpp:82
 msgid "Resolution"
@@ -601,16 +594,16 @@ msgstr "Rul ved kanten"
 #. Server address
 #: src/menu/network_connection_menu.cpp:75
 msgid "Server address:"
-msgstr ""
+msgstr "Serveradresse:"
 
 #. Available on internet ?
 #: src/menu/network_connection_menu.cpp:87
 msgid "Server available on Internet"
-msgstr ""
+msgstr "Server tilgængelig på internettet"
 
 #: src/menu/network_menu.cpp:97
 msgid "Server mode"
-msgstr ""
+msgstr "Servermodus"
 
 #: src/weapon/shotgun.cpp:62
 msgid "Shotgun"
@@ -629,7 +622,7 @@ msgstr "Skarpskytteriffel"
 msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
-msgstr ""
+msgstr "Nogle våben er utilgængelige på grund af kendte fejl (ninjaræb, tryklufthammer, blæselampe, maskinpistol) og der er sikkert mange andre ting som heller ikke virker!"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -687,7 +680,7 @@ msgstr "Stinkdyret forlod slagmarken før det eksploderede"
 
 #: src/weapon/auto_bazooka.cpp:137
 msgid "The automatic rocket has left the battlefield..."
-msgstr "Den automatiske raket forlod slagmarken..."
+msgstr "Den laserstyrede raket forlod slagmarken..."
 
 #: src/weapon/bounce_ball.cpp:61
 msgid "The ball left the battlefield before exploding"
@@ -695,7 +688,7 @@ msgstr "Bolden forlod slagmarken før den eksploderede"
 
 #: src/network/net_error_msg.cpp:49
 msgid "The connection timed out. Check there is no firewall in the way!"
-msgstr ""
+msgstr "Forbindelsen udløb. Check at der ikke er nogen firewall i vejen!"
 
 #: src/weapon/disco_grenade.cpp:93
 msgid "The disco grenade has left the dance floor before exploding"
@@ -712,18 +705,18 @@ msgstr "Raketten forlod slagmarken..."
 
 #: src/network/net_error_msg.cpp:46
 msgid "The server rejected the conection."
-msgstr ""
+msgstr "Serveren afslog forbindelsen."
 
 #: src/menu/network_menu.cpp:228
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Der er kun %i hold."
+msgstr[1] "Der er kun %i hold."
 
 #: src/network/net_error_msg.cpp:37
 msgid "Unable to contact host."
-msgstr ""
+msgstr "Kan ikke kontakte værten."
 
 #: src/graphic/video.cpp:197
 #, c-format
@@ -737,7 +730,7 @@ msgstr "Kan ikke åbne banekataloget (%s)!"
 
 #: src/network/net_error_msg.cpp:40
 msgid "Unable to use this port!"
-msgstr ""
+msgstr "Kan ikke bruge denne port!"
 
 #: src/main.cpp:133
 msgid "Unexpected exception caught..."
@@ -751,20 +744,20 @@ msgstr "Version"
 msgid ""
 "WARNING! Disconnections are not yet handled. So you have to restart Wormux "
 "after each disconnection!"
-msgstr ""
+msgstr "ADVARSEL! Afkoblinger er ikke håndteret endnu. Derfor skal du genstarte Wormux efter hver afkobling!"
 
 #: src/menu/network_connection_menu.cpp:103
 msgid ""
 "WARNING!! Network is still under developement and therefore a little "
 "experimental."
-msgstr ""
+msgstr "ADVARSEL! Netværksspil er stadig under udvikling og derfor er det eksperimentelt."
 
 #: src/menu/network_menu.cpp:239
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Vent! Spiller %i er ikke klar endnu!"
+msgstr[1] "Vent! Spillere %i er ikke klar endnu!"
 
 #. Initialization of teams' energy
 #: src/game/game_loop.cpp:213
@@ -795,7 +788,7 @@ msgstr "Wormux version "
 #: src/include/action_handler.cpp:218
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
-msgstr ""
+msgstr "Wormux versioner er forskellige: klient=%s, server=%s"
 
 #: src/map/maps_list.cpp:72
 #, c-format
@@ -804,7 +797,7 @@ msgstr "XML-fejl under indlæsning af bane '%s':"
 
 #: src/menu/network_menu.cpp:233
 msgid "You are alone..."
-msgstr ""
+msgstr "Du er alene..."
 
 #: src/map/maps_list.cpp:239
 msgid "You need at least one valid map !"
@@ -847,29 +840,3 @@ msgstr "o Indlæser lydprofilen: %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Åbnede lydenheden ved %d Hz og %d bit"
 
-#~ msgid "* Couldn't initialize SDL: "
-#~ msgstr "* Kunne ikke klargøre SDL: "
-
-#~ msgid "* Couldn't open audio: "
-#~ msgstr "* Kunne ikke åbne lyd-enheden: "
-
-#~ msgid "[Music] Error : Unable to load music file: %s"
-#~ msgstr "[Musik] Fejl: Kan ikke indlæse musikfilen: %s"
-
-#~ msgid "[Music] Error : file %s does not exist"
-#~ msgstr "[Musik] Fejl: Filen %s eksisterer ikke"
-
-#~ msgid "[Music] Error : file %s not found"
-#~ msgstr "[Musik] Fejl: Filen %s blev ikke fundet"
-
-#~ msgid "[Music] Unable to find music file: %s"
-#~ msgstr "[Musik] Kan ikke finde musikfilen: %s"
-
-#~ msgid "[Music] Unable to find profile: %s"
-#~ msgstr "[Musik] Kan ikke finde profilen: %s"
-
-#~ msgid "[Sound] Error : file %s not found"
-#~ msgstr "[Lyd] Fejl: Filen %s blev ikke fundet"
-
-#~ msgid "[Sound] Error: File %s does not exist"
-#~ msgstr "[Lyd] Fejl: Filen %s eksisterer ikke"
