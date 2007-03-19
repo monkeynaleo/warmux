@@ -43,7 +43,7 @@ public:
   // Serveur specific methods
   Network::connection_state_t ServerStart(const std::string &port);
 
-  void AcceptIncoming();
+  bool AcceptIncoming();
   void RejectIncoming();
   std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
   void SetMaxNumberOfPlayers(uint max_nb_players);
