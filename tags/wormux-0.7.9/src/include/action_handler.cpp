@@ -155,6 +155,9 @@ void Action_ChangeCharacter (Action *a)
 
 void Action_Shoot (Action *a)
 {
+  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) 
+    return; // hack related to bug 8656
+
   double strength = a->PopDouble();
   double angle = a->PopDouble();
   a->RetrieveCharacter();
