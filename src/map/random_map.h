@@ -16,24 +16,50 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Polygon class. Store point of a polygon and handle affine transformation
+ * Random map generator
  *****************************************************************************/
 
-#ifndef POLYGON_GENERATOR_H
-#define POLYGON_GENERATOR_H
+#ifndef RANDOM_MAP_H
+#define RANDOM_MAP_H
 
-#include "polygon.h"
+#include <vector>
+#include "../graphic/polygon_generator.h"
+#include "../graphic/surface.h"
+#include "../game/config.h"
+#include "../tool/resource_manager.h"
 
-class PolygonGenerator {
+class RandomMap {
+ protected:
+   double border_size;
+   Color border_color;
+   bool is_open;
+   int number_of_island;
+   Surface result;
+   int width;
+   int height;
+
+   Polygon * random_shape;
+   Polygon * bezier_shape;
+   Polygon * expanded_bezier_shape;
+
+   Profile *profile;
+
+   std::vector<Surface> object_list;
+
  public:
-   static const int MIN_SPACE_BETWEEN_POINT;
-   static Polygon * GenerateCircle(double diameter, int nb_point);
-   static Polygon * GenerateRectangle(double width, double height);
-   static Polygon * GenerateRoundedRectangle(double width, double height, double edge);
-   static Polygon * GenerateRandomShape();
-   static Polygon * GenerateRandomTrapeze(const double width, const double height,
-                                          const double x_rand_offset, const double y_rand_offset,
-                                          const double coef);
+   RandomMap(Profile *profile, const int width, const int height);
+   void SetSize(const int width, const int height);
+   const Point2i GetSize();
+   const int GetWidth();
+   const int GetHeight();
+   void AddObject(Surface & object);
+   void SetBorderSize(const double border);
+   void SetBorderColor(const Color color);
+   const bool IsOpen();
+   void Generate();
+   void GenerateIsland(double width, double height);
+   void SaveMap();
+   Surface GetRandomMap();
 };
 
-#endif /* POLYGON_GENERATOR_H */
+#endif /* RANDOM_MAP_H */

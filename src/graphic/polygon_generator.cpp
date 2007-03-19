@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -73,7 +73,6 @@ Polygon * PolygonGenerator::GenerateRoundedRectangle(double width, double height
 
 Polygon * PolygonGenerator::GenerateRandomShape()
 {
-  srand(time(NULL));
   double height = Random::GetDouble(400.0, 600.0);
   double width  = Random::GetDouble(400.0, 2000.0);
   return GenerateRandomTrapeze(width, height, Random::GetDouble(10.0, 15.0), Random::GetDouble(10.0, 15.0),

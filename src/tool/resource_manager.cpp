@@ -34,6 +34,7 @@
 #include "../game/config.h"
 #include "../graphic/sprite.h"
 #include "../graphic/polygon_generator.h"
+#include "../map/random_map.h"
 
 Profile::Profile()
 {
@@ -254,37 +255,12 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
   return sprite;
 }
 
-Surface ResourceManager::GenerateMap(const Profile *profile, const int width, const int height)
+Surface ResourceManager::GenerateMap(Profile *profile, const int width, const int height)
 {
-  Surface tmp(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
-
-  // Generate a random shape
-  Polygon * random_shape = PolygonGenerator::GenerateRandomShape();
-  // Then we apply a bezier interpolation
-  Polygon * bezier_shape = random_shape->GetBezierInterpolation(1.0);
-  Polygon * expanded_bezier_shape = new Polygon(*bezier_shape);
-  // Expand the random, bezier shape !
-  expanded_bezier_shape->Expand(16.0);
-
-  // Translate both shape
-  bezier_shape->ApplyTransformation(AffineTransform2D::Translate(200.0, 600.0));
-  expanded_bezier_shape->ApplyTransformation(AffineTransform2D::Translate(200.0, 600.0));
-
-  // Init Surface
-  tmp.Fill(0);
-  // Setting texture
-  Surface texture = LoadImage(profile, "texture");
-  bezier_shape->SetTexture(&texture);
-  expanded_bezier_shape->SetPlaneColor(Color(234, 219, 106, 255));
-
-  // Then draw it
-  tmp.DrawPolygon(*expanded_bezier_shape);
-  tmp.DrawPolygon(*bezier_shape);
-
-  delete random_shape;
-  delete bezier_shape;
-  delete expanded_bezier_shape;
-  return tmp;
+  RandomMap tmp = RandomMap(profile, width, height);
+  tmp.Generate();
+  tmp.SaveMap();
+  return tmp.GetRandomMap();
 }
 
 ResourceManager resource_manager;
