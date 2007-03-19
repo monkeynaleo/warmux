@@ -27,6 +27,8 @@
 #include "../game/game_mode.h"
 #include "../game/game.h"
 #include "../include/action_handler.h"
+#include "../include/app.h"
+#include "../include/constant.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 
@@ -142,6 +144,9 @@ void Network::Init()
 // Static method
 void Network::Disconnect()
 {
+  // restore Windows title
+  AppWormux::GetInstance()->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION);
+  
   if (singleton != NULL) {
     singleton->stop_thread = true;
     singleton->DisconnectNetwork();
@@ -323,6 +328,9 @@ Network::connection_state_t Network::ClientStart(const std::string &host,
     singleton = prev;
     delete net;
   } else if (prev != NULL) {
+
+    // that's ok
+    AppWormux::GetInstance()->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
     delete prev;
   }
   return error;
@@ -349,6 +357,9 @@ Network::connection_state_t Network::ServerStart(const std::string& port)
     singleton = prev;
     delete net;
   } else if (prev != NULL) {
+
+    // that's ok
+    AppWormux::GetInstance()->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Server mode");
     delete prev;
   }
   return error;
