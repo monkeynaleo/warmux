@@ -34,6 +34,14 @@
 #endif
 //-----------------------------------------------------------------------------
 
+NetworkClient::NetworkClient()
+{
+#if defined(DEBUG) && not defined(WIN32)
+  fin = open("./network_client.in", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
+  fout = open("./network_client.out", O_CREAT | O_TRUNC | O_WRONLY | O_SYNC, S_IRUSR | S_IWUSR | S_IRGRP);
+#endif
+}
+
 NetworkClient::~NetworkClient()
 {
 }
@@ -83,12 +91,14 @@ void NetworkClient::ReceiveActions()
           continue;
         }
 
-// #if defined(DEBUG) && not defined(WIN32)
-// 	int tmp = 0xFFFFFFFF;
-// 	write(fin, &packet_size, 4);
-// 	write(fin, packet, packet_size);
-// 	write(fin, &tmp, 4);
-// #endif
+#if defined(DEBUG) && not defined(WIN32)
+	if (fin != 0) {
+	  int tmp = 0xFFFFFFFF;
+	  write(fin, &packet_size, 4);
+	  write(fin, packet, packet_size);
+	  write(fin, &tmp, 4);
+	}
+#endif
 
         Action* a = new Action(packet);
         MSG_DEBUG("network.traffic","Received action %s",

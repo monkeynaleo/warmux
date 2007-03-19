@@ -73,10 +73,10 @@ protected:
   IPaddress ip; // for server : store listening port
                 // for client : store server address/port
 
-// #if defined(DEBUG) && not defined(WIN32)
-//   static int fout;
-//   static int fin;	
-// #endif
+#if defined(DEBUG) && not defined(WIN32)
+  int fout;
+  int fin;	
+#endif
   
   bool ThreadToContinue();
   static int ThreadRun(void* no_param);

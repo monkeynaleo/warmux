@@ -31,6 +31,7 @@ class NetworkServer : public Network
   uint nb_initialized_players;
   TCPsocket server_socket; // Wait for incoming connections on this socket
 public:
+  NetworkServer();
   ~NetworkServer();
 
   virtual const bool IsConnected() const { return true; }
