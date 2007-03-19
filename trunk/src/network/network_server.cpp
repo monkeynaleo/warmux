@@ -178,7 +178,9 @@ Network::connection_state_t NetworkServer::ServerStart(const std::string &port)
   max_nb_players = GameMode::GetInstance()->max_teams;
 
   // Open the port to listen to
-  AcceptIncoming();
+  if (!AcceptIncoming()) {
+    return Network::CONN_BAD_PORT;
+  }
   printf("\nConnected\n");
   socket_set = SDLNet_AllocSocketSet(GameMode::GetInstance()->max_teams);
   thread = SDL_CreateThread(Network::ThreadRun, NULL);
@@ -200,17 +202,18 @@ std::list<DistantComputer*>::iterator NetworkServer::CloseConnection(std::list<D
   return cpu.erase(closed);
 }
 
-void NetworkServer::AcceptIncoming()
+bool NetworkServer::AcceptIncoming()
 {
-  if (!IsServer()) return;
+  if (!IsServer()) return false;
 
   server_socket = SDLNet_TCP_Open(&ip);
   if (!server_socket)
   {
     printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
-    return;
+    return false;
   }
   printf("\nStart listening");
+  return true;
 }
 
 void NetworkServer::RejectIncoming()
