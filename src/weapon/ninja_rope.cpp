@@ -36,7 +36,7 @@
 #include "../tool/i18n.h"
 
 const int DT_MVT = 15 ; //delta_t between 2 up/down/left/right mvt
-const int DST_MIN = 1 ;  //dst_minimal between 2 nodes
+const int DST_MIN = 80 ;  //dst_minimal between 2 nodes
 
 bool find_first_contact_point (Point2i from, double angle, int length,
 			       int skip, Point2i &contact_point)
@@ -309,6 +309,9 @@ void NinjaRope::Refresh()
 {
   if (!m_is_active)
     return ;
+  
+  if (m_attaching)
+    TryAttachRope();
 
   if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
     return;
@@ -331,18 +334,13 @@ void NinjaRope::Draw()
     return ;
   }
 
-  if (m_attaching)
-    {
-      TryAttachRope();
-      if (!m_is_active)
-	return ;
-      if (m_attaching)
-        angle = m_initial_angle + M_PI/2;
-      else
-        angle = ActiveCharacter().GetRopeAngle();
-    }
-  else
+  if (m_attaching) {
+    angle = m_initial_angle + M_PI/2;
+  }
+  else {
     angle = ActiveCharacter().GetRopeAngle();
+  }
+
   prev_angle = angle;
 
   // Draw the rope.
