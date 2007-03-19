@@ -66,6 +66,7 @@ map/camera.cpp
 map/ground.cpp
 map/map.cpp
 map/maps_list.cpp
+map/random_map.cpp
 map/sky.cpp
 map/tile.cpp
 map/tileitem.cpp
