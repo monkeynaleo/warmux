@@ -81,8 +81,6 @@ GameLoop::GameLoop()
 
 void GameLoop::InitGameData_NetServer()
 {
-  AppWormux::GetInstance()->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Server mode");
-
   Network::GetInstanceServer()->RejectIncoming();
 
   Network::GetInstanceServer()->TMP_ResetInitializedPlayers();
@@ -115,8 +113,6 @@ void GameLoop::InitGameData_NetServer()
 
 void GameLoop::InitGameData_NetClient()
 {
-  AppWormux::GetInstance()->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION + " - Client mode");
-
   // Loading map
   InitMap();
 
