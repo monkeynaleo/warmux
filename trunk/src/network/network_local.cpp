@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2007 Jon de Andres
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,36 +16,20 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Chat in game session.
- * nefertum - Jon de Andres
+ * Fake Network layer for Wormux.
  *****************************************************************************/
+ 
+#include "network_local.h" 
 
-#ifndef CHAT_H
-#define CHAT_H
+NetworkLocal::~NetworkLocal() {}
 
-#include <SDL.h>
-#include "../graphic/text_list.h"
-#include "network.h"
+void NetworkLocal::SendAction(Action* action) {}
 
-class Chat
+void NetworkLocal::ReceiveActions() {}
+
+void NetworkLocal::SendChatMessage(const std::string& txt) {}
+
+std::list<DistantComputer*>::iterator NetworkLocal::CloseConnection(std::list<DistantComputer*>::iterator closed)
 {
- private:
-  TextList* chat;
-  Text* input;
-  Text* msg;
-
-  bool check_input;
-  uint last_time;
-
- public:
-  Chat();
-  ~Chat();
-  void Show();
-  void ShowInput();
-  bool CheckInput();
-  void Reset();
-  void NewMessage(const std::string& msg);
-  void HandleKey(const SDL_Event& event);
-};
-
-#endif
+  return cpu.end();
+}

@@ -34,48 +34,11 @@
 const std::string WORMUX_NETWORK_PORT = "9999";
 const uint WORMUX_NETWORK_PORT_INT = 9999;
 
-typedef enum
-{
-  CONNECTED,
-  CONN_BAD_HOST,
-  CONN_BAD_PORT,
-  CONN_BAD_SOCKET,
-  CONN_REJECTED,
-  CONN_TIMEOUT
-} ConnectionState;
+class NetworkServer;
 
 class Network
 {
-  friend class DistantComputer;
-
-  bool sdlnet_inited;
-
-#if defined(DEBUG) && not defined(WIN32)
-  int fout;
-  int fin;	
-#endif
-
-  uint max_nb_players;
-
-protected:
-  typedef enum {
-    NETWORK_SERVER,
-    NETWORK_CLIENT,
-    LOCAL_ONLY
-  } connection_side_t;
-
-  connection_side_t m_connection;
-
-  TCPsocket server_socket; // Wait for incoming connections on this socket
-  SDL_Thread* thread; // network thread, where we receive data from network
-  SDLNet_SocketSet socket_set;
-  IPaddress ip; // for server : store listening port
-                // for client : store server address/port
-
-  ConnectionState CheckHost(const std::string &host, const std::string &port);
 public:
-  NetworkMenu* network_menu;
-
   typedef enum
     {
       NO_NETWORK,
@@ -83,48 +46,83 @@ public:
       NETWORK_READY_TO_PLAY,
       NETWORK_PLAYING
     } network_state_t;
+
+  typedef enum
+    {
+      CONNECTED,
+      CONN_BAD_HOST,
+      CONN_BAD_PORT,
+      CONN_BAD_SOCKET,
+      CONN_REJECTED,
+      CONN_TIMEOUT
+    } connection_state_t;
+
+private:
+  friend class DistantComputer;
+  
+  static Network * singleton;
+  static bool sdlnet_initialized;
+
+  static bool stop_thread;
+  
+protected:
+  Network(); // pattern singleton
+
+  SDL_Thread* thread; // network thread, where we receive data from network
+  SDLNet_SocketSet socket_set;
+  IPaddress ip; // for server : store listening port
+                // for client : store server address/port
+
+// #if defined(DEBUG) && not defined(WIN32)
+//   static int fout;
+//   static int fin;	
+// #endif
+  
+  bool ThreadToContinue();
+  static int ThreadRun(void* no_param);
+
+  void DisconnectNetwork();
+  const connection_state_t CheckHost(const std::string &host, 
+				     const std::string &port) const;
+public:
+  NetworkMenu* network_menu;
+
   network_state_t state;
 
   std::list<DistantComputer*> cpu; // list of the connected computer
-  uint client_inited;
   bool sync_lock;
   std::string nickname; //Clients: Send to Server at connect
                         //Server: Send in chat messages
 
-  Network();
-  ~Network();
-  void Init();
-  
-  const bool IsConnected() const;
-  const bool IsLocal() const;
-  const bool IsServer() const;
-  const bool IsClient() const;
-  const uint GetPort();
-  
-  // Network functions common to client and server
-  void Disconnect();
+  virtual ~Network();
 
+  static Network* GetInstance();
+  static NetworkServer* GetInstanceServer(); // WARNING: return NULL if not server!!
+
+  static void Init();
+  static void Disconnect();
+
+  static bool IsConnected();
+  virtual const bool IsLocal() const { return false ; }
+  virtual const bool IsServer() const { return false ; }
+  virtual const bool IsClient() const { return false ; }
+  const uint GetPort() const;
+  
   // Action handling
-  void SendAction(Action* action);
   void SendPacket(char* packet, int size);
-  void ReceiveActions();
+  virtual void SendAction(Action* action);
 
-  // Client specific
-  ConnectionState ClientConnect(const std::string &host, const std::string &port);
+  virtual void ReceiveActions() = 0;
+  virtual void SendChatMessage(const std::string& txt) = 0;
+  virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed) = 0;
 
-  // Serveur specific methods
-  ConnectionState ServerStart(const std::string &port);
-  void AcceptIncoming();
-  void RejectIncoming();
-  std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
-  void SetMaxNumberOfPlayers(uint max_nb_players);
-  uint GetNbConnectedPlayers();
 
-  void SendChatMessage(const std::string& txt);
+  // Start a client
+  static connection_state_t ClientStart(const std::string &host, const std::string &port);
+
+  // Start a server
+  static connection_state_t ServerStart(const std::string &port);
 };
 
-int net_thread_func(void* no_param);
-
-extern Network network;
 //-----------------------------------------------------------------------------
 #endif

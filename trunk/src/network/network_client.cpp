@@ -16,11 +16,12 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Network server layer for Wormux.
+ * Network client layer for Wormux.
  *****************************************************************************/
 
-#include "network.h"
+#include "network_client.h"
 //-----------------------------------------------------------------------------
+#include "../include/action_handler.h"
 #include "../game/game_mode.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
@@ -33,122 +34,132 @@
 #endif
 //-----------------------------------------------------------------------------
 
-// Standard header, only needed for the following method
-#ifndef WIN32
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <errno.h>
-#else
-#include <winsock.h>
-#endif
-//-----------------------------------------------------------------------------
-
-ConnectionState Network::CheckHost(const std::string &host, const std::string& port)
+NetworkClient::~NetworkClient()
 {
-  MSG_DEBUG("network", "Checking connection to %s:%s", host.c_str(), port.c_str());
-  int prt=0;
-  sscanf(port.c_str(),"%i",&prt);
-
-  struct hostent* hostinfo;
-  hostinfo = gethostbyname(host.c_str());
-  if( ! hostinfo )
-    return CONN_BAD_HOST;
-
-#ifndef WIN32
-  int fd = socket(AF_INET, SOCK_STREAM, 0); 
-  if( fd == -1 )
-    return CONN_BAD_SOCKET;
-
-#else
-  SOCKET fd = socket(AF_INET, SOCK_STREAM, 0);
-  if( fd == INVALID_SOCKET )
-    return CONN_BAD_SOCKET;
-#endif
-
-  // Set the timeout
-  struct timeval timeout;
-  memset(&timeout, 0, sizeof(timeout));
-  timeout.tv_sec = 5; // 5seconds timeout
-#ifndef WIN32
-  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (void*)&timeout, sizeof(timeout));
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (void*)&timeout, sizeof(timeout));
-#else
-  setsockopt(fd, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(timeout));
-  setsockopt(fd, SOL_SOCKET, SO_SNDTIMEO, (char*)&timeout, sizeof(timeout));
-#endif
-
-  struct sockaddr_in addr;
-  addr.sin_family = AF_INET;
-#ifndef WIN32
-  addr.sin_addr.s_addr = *(in_addr_t*)*hostinfo->h_addr_list;
-#else
-  addr.sin_addr.s_addr = inet_addr(*hostinfo->h_addr_list);
-#endif
-
-  addr.sin_port = htons(prt);
-
-#ifndef WIN32
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) == -1 )
-  {
-    switch(errno)
-    {
-    case ECONNREFUSED: return CONN_REJECTED;
-    case EINPROGRESS:
-    case ETIMEDOUT: return CONN_TIMEOUT;
-    default: return CONN_BAD_SOCKET;
-    }
-  }
-  close(fd);
-#else
-  if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
-  {
-    switch(WSAGetLastError())
-    {
-    case WSAECONNREFUSED: return CONN_REJECTED;
-    case WSAEINPROGRESS:
-    case WSAETIMEDOUT: return CONN_TIMEOUT;
-    default: return CONN_BAD_SOCKET;
-    }
-  }
-  closesocket(fd);
-#endif
-  return CONNECTED;
 }
 
-ConnectionState Network::ClientConnect(const std::string &host, const std::string& port)
+void NetworkClient::SendChatMessage(const std::string& txt)
 {
+  if (txt == "") return;
+
+  Action a(Action::ACTION_CHAT_MESSAGE, txt);
+  SendAction(&a);
+}
+
+std::list<DistantComputer*>::iterator NetworkClient::CloseConnection(std::list<DistantComputer*>::iterator closed)
+{
+  printf("Client disconnected\n");
+  delete *closed;
+
+  return cpu.erase(closed);
+}
+
+void NetworkClient::ReceiveActions()
+{
+  char* packet;
+
+  while (cpu.size()==1 && ThreadToContinue()) // While connected to server
+  {
+    if (state == NETWORK_PLAYING && cpu.size() == 0)
+    {
+      // If while playing everybody disconnected, just quit
+      break;
+    }
+
+    while (SDLNet_CheckSockets(socket_set, 100) == 0 && ThreadToContinue()); //Loop while nothing is received
+
+    std::list<DistantComputer*>::iterator dst_cpu;
+    for (dst_cpu = cpu.begin();
+	 dst_cpu != cpu.end() && ThreadToContinue();
+	 dst_cpu++)
+    {
+      if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
+      {
+        // Read the size of the packet
+        int packet_size = (*dst_cpu)->ReceiveDatas(packet);
+        if( packet_size <= 0)
+	{
+          dst_cpu = CloseConnection(dst_cpu);
+          continue;
+        }
+
+// #if defined(DEBUG) && not defined(WIN32)
+// 	int tmp = 0xFFFFFFFF;
+// 	write(fin, &packet_size, 4);
+// 	write(fin, packet, packet_size);
+// 	write(fin, &tmp, 4);
+// #endif
+
+        Action* a = new Action(packet);
+        MSG_DEBUG("network.traffic","Received action %s",
+                ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
+
+	switch (a->GetType()) {
+	case Action::ACTION_NICKNAME: 
+	  {
+	    std::string nickname = a->PopString();
+	    std::cout<<"New nickname: " + nickname<< std::endl;
+	    (*dst_cpu)->nickname = nickname;
+	    delete a;
+	  }
+	  break;
+
+	case Action::ACTION_MENU_ADD_TEAM:
+	case Action::ACTION_MENU_DEL_TEAM:
+          (*dst_cpu)->ManageTeam(a);
+          delete a;
+	  break;
+
+	case Action::ACTION_CHAT_MESSAGE:
+          (*dst_cpu)->SendChatMessage(a);
+          delete a;
+	  break;
+
+	default:
+          ActionHandler::GetInstance()->NewAction(a, false);
+	}
+	free(packet);
+      }
+    }
+  }
+}
+
+//-----------------------------------------------------------------------------
+
+const Network::connection_state_t NetworkClient::ClientConnect(const std::string &host, 
+							       const std::string& port)
+{
+  Init();
+
   MSG_DEBUG("network", "Client connect to %s:%s", host.c_str(), port.c_str());
 
   int prt=0;
   sscanf(port.c_str(),"%i",&prt);
 
-  if( CheckHost(host, port) == CONN_TIMEOUT)
-    return CONN_TIMEOUT;
+  if (CheckHost(host, port) == Network::CONN_TIMEOUT)
+    return Network::CONN_TIMEOUT;
 
-  if(SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt)==-1)
+  if (SDLNet_ResolveHost(&ip,host.c_str(),(Uint16)prt) == -1)
   {
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
-    return CONN_BAD_HOST;
+    return Network::CONN_BAD_HOST;
   }
 
   TCPsocket socket = SDLNet_TCP_Open(&ip);
 
-  if(!socket)
+  if (!socket)
   {
     printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
-    return CONN_REJECTED;
+    return Network::CONN_REJECTED;
   }
-
-  m_connection = NETWORK_CLIENT;
 
   socket_set = SDLNet_AllocSocketSet(1);
   cpu.push_back(new DistantComputer(socket));
   //Send nickname to server
   Action a(Action::ACTION_NICKNAME, nickname);
-  network.SendAction(&a);
+  SendAction(&a);
 
   //Control to net_thread_func
-  thread = SDL_CreateThread(net_thread_func,NULL);
-  return CONNECTED;
+  thread = SDL_CreateThread(Network::ThreadRun, NULL);
+  return Network::CONNECTED;
 }

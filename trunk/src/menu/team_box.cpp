@@ -122,7 +122,7 @@ Widget* TeamBox::Clic (const Point2i &mousePosition, uint button)
       return NULL; // it's not a local team, we can't configure it !!
     
     if (w == nb_characters || w == player_name) {
-      if (network.IsConnected()) {
+      if (Network::GetInstance()->IsConnected()) {
       	ValidOptions();
       }
       return w;
@@ -149,7 +149,7 @@ void TeamBox::ValidOptions() const
       associated_team->SetLocal();
 
     // send team configuration to the remote clients
-    if (network.IsConnected()) {
+    if (Network::GetInstance()->IsConnected()) {
       Action* a = new Action(Action::ACTION_MENU_UPDATE_TEAM, associated_team->GetId());
       a->Push(associated_team->GetPlayerName());
       a->Push(int(associated_team->GetNbCharacters()));

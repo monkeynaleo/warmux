@@ -289,7 +289,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
 
 void Character::SetEnergy(int new_energy)
 {
-  if(!network.IsLocal())
+  if(!Network::GetInstance()->IsLocal())
   {
     if( m_alive == DEAD && new_energy > 0)
     {

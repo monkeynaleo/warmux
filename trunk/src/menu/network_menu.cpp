@@ -29,6 +29,7 @@
 #include "../map/maps_list.h"
 #include "../network/index_server.h"
 #include "../network/network.h"
+#include "../network/network_server.h"
 #include "../include/app.h"
 #include "../include/action_handler.h"
 #include "../team/teams_list.h"
@@ -68,7 +69,7 @@ NetworkMenu::NetworkMenu() :
   // ################################################
   // ##  MAP SELECTION
   // ################################################
-  if(network.IsServer()) {
+  if(Network::GetInstance()->IsServer()) {
     map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
 					      mainBoxWidth, mapBoxHeight),
 				   false);
@@ -91,7 +92,7 @@ NetworkMenu::NetworkMenu() :
 
   mode = new Label("", rectZero, *Font::GetInstance(Font::FONT_NORMAL));
   
-  if (network.IsClient()) {
+  if (Network::GetInstance()->IsClient()) {
     // Client Mode
     mode->SetText(_("Client mode"));
     tmp_box->AddWidget(mode);
@@ -166,7 +167,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 
   if(player_number != NULL && w == player_number)
   {
-    network.SetMaxNumberOfPlayers(player_number->GetValue());
+    Network::GetInstanceServer()->SetMaxNumberOfPlayers(player_number->GetValue());
   }
 
   if(w == send_txt_bt)
@@ -178,7 +179,7 @@ void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
 void NetworkMenu::SendChatMsg()
 {
   std::string empty = "";
-  network.SendChatMessage(line_to_send_tbox->GetText());
+  Network::GetInstance()->SendChatMessage(line_to_send_tbox->GetText());
   line_to_send_tbox->SetText(empty);
 }
 
@@ -196,54 +197,57 @@ void NetworkMenu::SaveOptions()
 
 void NetworkMenu::__sig_ok()
 {
-  if(network.IsClient())
+  if(Network::GetInstance()->IsClient())
   {
     // Wait for the server, and stay in the menu map / team can still be changed
     Action a(Action::ACTION_NETWORK_CHANGE_STATE);
-    network.SendAction(&a);
-    while(network.state != Network::NETWORK_INIT_GAME && network.IsConnected())
+    Network::GetInstance()->SendAction(&a);
+    while(Network::GetInstance()->state != Network::NETWORK_INIT_GAME && Network::GetInstance()->IsConnected())
     {
       Display(Point2i(-1,-1));
     }
   }
 
   // Disconnection :-/
-  if (!network.IsConnected()) {
+  if (!Network::IsConnected()) {
     close_menu = true;
-    network.network_menu = NULL;
+    Network::GetInstance()->network_menu = NULL;
     return;
   }
 
   // Starting the game :-)
   SaveOptions();
   Game::GetInstance()->Start();
-  network.network_menu = NULL;
+  Network::GetInstance()->network_menu = NULL;
 }
 
 void NetworkMenu::sig_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
-  if(line_to_send_tbox->have_focus)
+  if (line_to_send_tbox->have_focus)
   {
     SendChatMsg();
     return;
   }
 
-  if(network.IsServer())
+  if (Network::GetInstance()->IsServer())
   {
-    if(teams_list.playing_list.size() <= 1)
+    if (teams_list.playing_list.size() <= 1)
     {
-      msg_box->NewMessage(Format(ngettext("There is only %i team.", "There are only %i teams.", teams_list.playing_list.size()), teams_list.playing_list.size()), c_red);
+      msg_box->NewMessage(Format(ngettext("There is only %i team.", 
+					  "There are only %i teams.", 
+					  teams_list.playing_list.size()), 
+				 teams_list.playing_list.size()), c_red);
       return;
     }
-    if(network.GetNbConnectedPlayers() <= 1)
+    if (Network::GetInstanceServer()->GetNbConnectedPlayers() <= 1)
     {
       msg_box->NewMessage(_("You are alone..."), c_red);
       return;
     }
-    if(network.GetNbConnectedPlayers() != network.client_inited)
+    if (Network::GetInstanceServer()->GetNbConnectedPlayers() != Network::GetInstanceServer()->GetNbInitializedPlayers())
     {
-      int nbr = network.GetNbConnectedPlayers() - network.client_inited;
+      int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers() - Network::GetInstanceServer()->GetNbInitializedPlayers();
       std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
       msg_box->NewMessage(pl, c_red);
       return;
@@ -254,16 +258,16 @@ void NetworkMenu::sig_ok()
 
 void NetworkMenu::__sig_cancel()
 {
-  network.Disconnect();
+  Network::Disconnect();
 }
 
 void NetworkMenu::Draw(const Point2i &mousePosition)
 {
-  if(network.IsConnected())
+  if(Network::GetInstance()->IsConnected())
   {
     if (connected_players != NULL) {
       //Refresh the number of connected players:
-      int nbr = network.GetNbConnectedPlayers();
+      int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers();
       std::string pl = Format(ngettext("%i player connected", "%i players connected", nbr), nbr);
       if(connected_players->GetText() != pl)
 	connected_players->SetText(pl);
@@ -271,7 +275,7 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
 
     if (inited_players != NULL) {
       //Refresh the number of players ready:
-      int nbr = network.client_inited;
+      int nbr = Network::GetInstanceServer()->GetNbInitializedPlayers();
       std::string pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
       if(inited_players->GetText() != pl)
 	inited_players->SetText(pl);

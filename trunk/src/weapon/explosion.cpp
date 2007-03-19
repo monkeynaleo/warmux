@@ -50,13 +50,13 @@ void ApplyExplosion (const Point2i &pos,
 		     ParticleEngine::ESmokeStyle smoke
 		     )
 {
-  if(network.IsLocal())
+  if(Network::GetInstance()->IsLocal())
     ApplyExplosion_common(pos, config, son, fire_particle, smoke);
   else
-  if(network.IsServer())
+  if(Network::GetInstance()->IsServer())
     ApplyExplosion_server(pos, config, son, fire_particle, smoke);
   else
-  if(network.IsClient())
+  if(Network::GetInstance()->IsClient())
     return;
   // client receives explosion via the action handler
 }
@@ -195,7 +195,7 @@ void ApplyExplosion_server (const Point2i &pos,
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  network.SendAction(&a_begin_sync);
+  Network::GetInstance()->SendAction(&a_begin_sync);
 
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
@@ -225,7 +225,7 @@ void ApplyExplosion_server (const Point2i &pos,
     }
   }
   // send characters infos on network
-  network.SendAction(&a_characters_info);
+  Network::GetInstance()->SendAction(&a_characters_info);
 
   Action* a = new Action(Action::ACTION_EXPLOSION);
   a->Push(pos);
@@ -240,5 +240,5 @@ void ApplyExplosion_server (const Point2i &pos,
 
   action_handler->NewAction(a);
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  network.SendAction(&a_sync_end);
+  Network::GetInstance()->SendAction(&a_sync_end);
 }

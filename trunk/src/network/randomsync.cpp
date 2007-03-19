@@ -36,7 +36,7 @@ RandomSync::RandomSync(){
 
 void RandomSync::Init(){
   //If we are a client on the network, we don't generate any random number
-  if(network.IsClient()) return;
+  if(Network::GetInstance()->IsClient()) return;
 
   srand( time(NULL) );
 
@@ -52,7 +52,7 @@ void RandomSync::GenerateTable()
   //Add a random number to the table, send it over network if needed
   double nbr = rand();
   AddToTable(nbr);
-  if(network.IsServer()) ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_SEND_RANDOM,nbr));
+  if(Network::GetInstance()->IsServer()) ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_SEND_RANDOM,nbr));
 }
 
 void RandomSync::AddToTable(double nbr)
@@ -62,7 +62,7 @@ void RandomSync::AddToTable(double nbr)
 
 double RandomSync::GetRand()
 {
-  if(network.IsServer() || network.IsLocal()) GenerateTable();
+  if(Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()) GenerateTable();
 
   // If the table is empty freeze until the server have sent something
   while(rnd_table.size() == 0)

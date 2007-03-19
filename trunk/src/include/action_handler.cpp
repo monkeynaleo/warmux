@@ -36,6 +36,7 @@
 #include "../menu/network_menu.h"
 #include "../network/randomsync.h"
 #include "../network/network.h"
+#include "../network/network_server.h"
 #include "../team/macro.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
@@ -69,19 +70,23 @@ void Action_Network_ChangeState (Action *a)
 {
   MSG_DEBUG("action_handler", "ChangeState");
 
-  if(network.IsServer())
+  if(Network::GetInstance()->IsServer())
   {
-    switch(network.state)
+    switch(Network::GetInstance()->state)
     {
     case Network::NO_NETWORK:
       // State is changed when server clicks on the launch game button
-      network.client_inited++;
+
+      // One more client is ready to play
+      Network::GetInstanceServer()->AddAnInitializedPlayer();  
       break;
+
     case Network::NETWORK_INIT_GAME:
       // One more client is ready to play
-      network.client_inited++;
-      if(network.client_inited == network.GetNbConnectedPlayers())
-        network.state = Network::NETWORK_READY_TO_PLAY;
+      Network::GetInstanceServer()->AddAnInitializedPlayer();  
+      
+      if(Network::GetInstanceServer()->GetNbInitializedPlayers() == Network::GetInstanceServer()->GetNbConnectedPlayers())
+	Network::GetInstanceServer()->state = Network::NETWORK_READY_TO_PLAY;
       break;
     default:
       assert(false);
@@ -89,18 +94,18 @@ void Action_Network_ChangeState (Action *a)
     }
   }
 
-  if(network.IsClient())
+  if(Network::GetInstance()->IsClient())
   {
-    switch(network.state)
+    switch(Network::GetInstance()->state)
     {
     case Network::NO_NETWORK:
-      network.state = Network::NETWORK_INIT_GAME;
+      Network::GetInstance()->state = Network::NETWORK_INIT_GAME;
       break;
     case Network::NETWORK_INIT_GAME:
-      network.state = Network::NETWORK_READY_TO_PLAY;
+      Network::GetInstance()->state = Network::NETWORK_READY_TO_PLAY;
       break;
     case Network::NETWORK_READY_TO_PLAY:
-      network.state = Network::NETWORK_PLAYING;
+      Network::GetInstance()->state = Network::NETWORK_PLAYING;
       break;
     default:
        assert(false);
@@ -146,7 +151,7 @@ void Action_GameLoop_NextTeam (Action *a)
 
 void Action_Rules_SetGameMode (Action *a)
 {
-  assert(network.IsClient());
+  assert(Network::GetInstance()->IsClient());
   GameMode::GetInstance()->LoadFromString(a->PopString());
 
 //   GameMode::GetInstance()->max_characters = a->PopInt();
@@ -173,7 +178,7 @@ void Action_Rules_SetGameMode (Action *a)
 
 void SendGameMode()
 {
-  assert(network.IsServer());
+  assert(Network::GetInstance()->IsServer());
   Action a(Action::ACTION_RULES_SET_GAME_MODE);
   
   std::string contents;
@@ -200,18 +205,18 @@ void SendGameMode()
 //   a.Push(GameMode::GetInstance()->character.super_jump_angle);
 //   a.Push((int)GameMode::GetInstance()->character.back_jump_strength);
 //   a.Push(GameMode::GetInstance()->character.back_jump_angle);
-  network.SendAction(&a);
+  Network::GetInstance()->SendAction(&a);
 }
 
 void Action_Rules_AskVersion (Action *a)
 {
-  if (!network.IsClient()) return;
+  if (!Network::GetInstance()->IsClient()) return;
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_SEND_VERSION, Constants::VERSION));
 }
 
 void Action_Rules_SendVersion (Action *a)
 {
-  if (!network.IsServer()) return;
+  if (!Network::GetInstance()->IsServer()) return;
   std::string version= a->PopString();
   if (version != Constants::VERSION)
   {
@@ -231,14 +236,14 @@ void Action_ChatMessage (Action *a)
     GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
   else
     //Network Menu
-    network.network_menu->ReceiveMsgCallback(a->PopString());
+    Network::GetInstance()->network_menu->ReceiveMsgCallback(a->PopString());
 }
 
 void Action_Menu_SetMap (Action *a)
 {
-  if (!network.IsClient()) return;
+  if (!Network::GetInstance()->IsClient()) return;
   MapsList::GetInstance()->SelectMapByName(a->PopString());
-  network.network_menu->ChangeMapCallback();
+  Network::GetInstance()->network_menu->ChangeMapCallback();
 }
 
 // TODO: Move this into network/distant_cpu.cpp
@@ -254,7 +259,8 @@ void Action_Menu_AddTeam (Action *a)
 
   teams_list.AddTeam (the_team);
 
-  network.network_menu->AddTeamCallback(the_team.id);
+  if (Network::GetInstance()->network_menu != NULL)
+    Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
 }
 
 void Action_Menu_UpdateTeam (Action *a)
@@ -267,7 +273,8 @@ void Action_Menu_UpdateTeam (Action *a)
 
   teams_list.UpdateTeam (the_team);
 
-  network.network_menu->UpdateTeamCallback(the_team.id);
+  if (Network::GetInstance()->network_menu != NULL)
+    Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id);
 }
 
 // TODO: Move this into network/distant_cpu.cpp
@@ -278,7 +285,9 @@ void Action_Menu_DelTeam (Action *a)
   MSG_DEBUG("action_handler.menu", "- %s", team.c_str());
   
   teams_list.DelTeam (team);
-  network.network_menu->DelTeamCallback(team);
+
+  if (Network::GetInstance()->network_menu != NULL)
+    Network::GetInstance()->network_menu->DelTeamCallback(team);
 }
 
 // ########################################################
@@ -286,10 +295,10 @@ void Action_Menu_DelTeam (Action *a)
 // Send information about energy and the position of every character
 void SyncCharacters()
 {
-  assert(network.IsServer());
+  assert(Network::GetInstance()->IsServer());
 
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  network.SendAction(&a_begin_sync);
+  Network::GetInstance()->SendAction(&a_begin_sync);
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
     end=teams_list.playing_list.end();
@@ -308,7 +317,7 @@ void SyncCharacters()
     }
   }
   Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  network.SendAction(&a_sync_end);
+  Network::GetInstance()->SendAction(&a_sync_end);
 }
 
 void Action_Character_Jump (Action *a)
@@ -340,7 +349,7 @@ void SendCharacterInfo(int team_no, int char_no)
 {
   Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
   a.StoreCharacter(team_no, char_no);
-  network.SendAction(&a);
+  Network::GetInstance()->SendAction(&a);
 }
 
 // Send active character information over the network (it's totally stupid to send it locally ;-)
@@ -444,20 +453,20 @@ void Action_Wind (Action *a)
 
 void Action_Network_SendRandom (Action *a)
 {
-  if (!network.IsClient()) return;
+  if (!Network::GetInstance()->IsClient()) return;
   randomSync.AddToTable(a->PopDouble());
 }
 
 void Action_Network_SyncBegin (Action *a)
 {
-  assert(!network.sync_lock);
-  network.sync_lock = true;
+  assert(!Network::GetInstance()->sync_lock);
+  Network::GetInstance()->sync_lock = true;
 }
 
 void Action_Network_SyncEnd (Action *a)
 {
-  assert(network.sync_lock);
-  network.sync_lock = false;
+  assert(Network::GetInstance()->sync_lock);
+  Network::GetInstance()->sync_lock = false;
 }
 
 // Nothing to do here. Just for time synchronisation
@@ -524,18 +533,18 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   queue.push_back(a);
   //  std::cout << "  queue_size " << queue.size() << std::endl;
   SDL_UnlockMutex(mutex);
-  if (repeat_to_network) network.SendAction(a);
+  if (repeat_to_network) Network::GetInstance()->SendAction(a);
 }
 
 void ActionHandler::NewActionActiveCharacter(Action* a)
 {  
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  network.SendAction(&a_begin_sync);
+  Network::GetInstance()->SendAction(&a_begin_sync);
   SendActiveCharacterInfo();
   NewAction(a);
   Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
-  network.SendAction(&a_end_sync);
+  Network::GetInstance()->SendAction(&a_end_sync);
 }
 
 void ActionHandler::Register (Action::Action_t action,

@@ -37,11 +37,11 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
 {
   sock_lock = SDL_CreateMutex();
 
-  SDLNet_TCP_AddSocket(network.socket_set, sock);
+  SDLNet_TCP_AddSocket(Network::GetInstance()->socket_set, sock);
 
   // If we are the server, we have to tell this new computer
   // what teams / maps have already been selected
-  if( network.IsServer() )
+  if( Network::GetInstance()->IsServer() )
   {
     Action a(Action::ACTION_MENU_SET_MAP, ActiveMap().ReadName());
     int size;
@@ -64,25 +64,25 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
     }
   }
 
-  if(network.network_menu != NULL)
+  if(Network::GetInstance()->network_menu != NULL)
   {
     // Display a message in the network menu
-    network.network_menu->ReceiveMsgCallback(GetAdress() + _(" has joined the party"));
+    Network::GetInstance()->network_menu->ReceiveMsgCallback(GetAdress() + _(" has joined the party"));
   }
 }
 
 DistantComputer::~DistantComputer()
 {
-  if(network.network_menu != NULL)
+  if(Network::GetInstance()->network_menu != NULL)
   {
     // Display a message in the network menu
-    network.network_menu->ReceiveMsgCallback( GetAdress() + _(" has left the party"));
+    Network::GetInstance()->network_menu->ReceiveMsgCallback( GetAdress() + _(" has left the party"));
   }
 
   SDLNet_TCP_Close(sock);
-  SDLNet_TCP_DelSocket(network.socket_set, sock);
+  SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
 
-  if(network.IsConnected())
+  if(Network::GetInstance()->IsConnected())
   for(std::list<std::string>::iterator team = owned_teams.begin();
       team != owned_teams.end();
       ++team)
@@ -106,7 +106,7 @@ int DistantComputer::ReceiveDatas(char* & buf)
 
   // Firstly, we read the size of the incoming packet
   Uint32 net_size;
-  if(SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
+  if (SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
   {
     SDL_UnlockMutex(sock_lock);
     return -1;
@@ -119,16 +119,16 @@ int DistantComputer::ReceiveDatas(char* & buf)
   buf = (char*)malloc(size);
 
   int total_received = 0;
-  while(total_received != size)
+  while (total_received != size)
   {
     int received = SDLNet_TCP_Recv(sock, buf + total_received, size - total_received);
-    if(received > 0)
+    if (received > 0)
     {
       MSG_DEBUG("network", "%i received", received);
       total_received += received;
     }
 
-    if(received < 0)
+    if (received < 0)
     {
       assert(false);
       std::cerr << "Malformed packet" << std::endl;
@@ -199,7 +199,7 @@ void DistantComputer::SendChatMessage(Action* a)
 {
   std::string txt = a->PopString();
   if (txt == "") return;
-  if(network.IsServer())
+  if(Network::GetInstance()->IsServer())
   {
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + "> "+txt));
   }

@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2007 Jon de Andres
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,36 +16,30 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Chat in game session.
- * nefertum - Jon de Andres
+ * Fake Network layer for Wormux.
  *****************************************************************************/
 
-#ifndef CHAT_H
-#define CHAT_H
-
-#include <SDL.h>
-#include "../graphic/text_list.h"
+#ifndef NETWORK_LOCAL_H 
+#define NETWORK_LOCAL_H
+//-----------------------------------------------------------------------------
 #include "network.h"
+//-----------------------------------------------------------------------------
 
-class Chat
+class NetworkLocal : public Network
 {
- private:
-  TextList* chat;
-  Text* input;
-  Text* msg;
+public:
+  ~NetworkLocal();
 
-  bool check_input;
-  uint last_time;
+  virtual const bool IsConnected() const { return false; }
+  virtual const bool IsLocal() const { return true; }
+  
+  virtual void SendAction(Action* action);
+  virtual void ReceiveActions();
 
- public:
-  Chat();
-  ~Chat();
-  void Show();
-  void ShowInput();
-  bool CheckInput();
-  void Reset();
-  void NewMessage(const std::string& msg);
-  void HandleKey(const SDL_Event& event);
+  virtual void SendChatMessage(const std::string& txt);
+  virtual std::list<DistantComputer*>::iterator CloseConnection(std::list<DistantComputer*>::iterator closed);
+
 };
 
+//-----------------------------------------------------------------------------
 #endif

@@ -68,8 +68,8 @@ void Time::Refresh(){
   - current node is server and game loop is not in Playing state
   - game don't use network
   if((ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()) ||
-     (network.IsServer() && GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) ||
-     (!network.IsServer() && !network.IsClient()) ||
+     (Network::GetInstance()->IsServer() && GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) ||
+     (!Network::GetInstance()->IsServer() && !Network::GetInstance()->IsClient()) ||
      current_time < max_time)
   */
   current_time += delta_t;

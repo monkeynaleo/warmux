@@ -198,7 +198,7 @@ bool NinjaRope::TryAddNode(int CurrentSense)
       a.Push(contact_point);
       a.Push(rope_angle);
       a.Push(CurrentSense);
-      network.SendAction(&a);
+      Network::GetInstance()->SendAction(&a);
 
       return true;
     }
@@ -257,7 +257,7 @@ bool NinjaRope::TryBreakNode(int currentSense)
       // Send node suppression over the network
       Action a(Action::ACTION_WEAPON_NINJAROPE);
       a.Push(DETACH_NODE);
-      network.SendAction(&a);
+      Network::GetInstance()->SendAction(&a);
     }
 
   return breakNode ;

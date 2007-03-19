@@ -24,28 +24,28 @@
 #include "tool/i18n.h"
 #include "gui/question.h"
 
-void DispNetworkError(ConnectionState err)
+void DispNetworkError(Network::connection_state_t err)
 {
   Question question;
   std::string msg;
   switch(err)
   {
-  case CONNECTED:
+  case Network::CONNECTED:
 	  msg = _("Connected !");
 	  break;
-  case CONN_BAD_HOST:
+  case Network::CONN_BAD_HOST:
 	  msg = _("Unable to contact host.");
 	  break;
-  case CONN_BAD_PORT:
+  case Network::CONN_BAD_PORT:
 	  msg = _("Unable to use this port!");
 	  break;
-  case CONN_BAD_SOCKET:
+  case Network::CONN_BAD_SOCKET:
 	  msg = _("Bad socket ...");
 	  break;
-  case CONN_REJECTED:
+  case Network::CONN_REJECTED:
 	  msg = _("The server rejected the conection.");
 	  break;
-  case CONN_TIMEOUT:
+  case Network::CONN_TIMEOUT:
 	  msg = _("The connection timed out. Check there is no firewall in the way!");
 	  break;
   default: assert(false);

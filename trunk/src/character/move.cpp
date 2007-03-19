@@ -132,7 +132,7 @@ void MoveActiveCharacterLeft(){
   }
 
   //Refresh skin position across network
-  if( !network.IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
+  if( !Network::GetInstance()->IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
     SendActiveCharacterInfo();
 }
 
@@ -151,7 +151,7 @@ void MoveActiveCharacterRight()
   }
 
   //Refresh skin position across network
-  if( !network.IsLocal() && ActiveTeam().IsLocal())
+  if( !Network::GetInstance()->IsLocal() && ActiveTeam().IsLocal())
     SendActiveCharacterInfo();
 }
 

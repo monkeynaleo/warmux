@@ -62,7 +62,7 @@ class NetworkConnectionMenu : public Menu
 
    void SetAction(network_menu_action_t action);
 
-   void DisplayError(ConnectionState conn);
+   void DisplayError(Network::connection_state_t conn);
 
    void sig_ok();
    void __sig_ok();
