@@ -366,6 +366,9 @@ void SendActiveCharacterInfo()
 
 void Action_Weapon_Shoot (Action *a)
 {
+  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) 
+    return; // hack related to bug 8656
+
   double strength = a->PopDouble();
   double angle = a->PopDouble();
   ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
