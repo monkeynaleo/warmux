@@ -54,8 +54,6 @@
 
 bool Network::sdlnet_initialized = false;
 bool Network::stop_thread = true;
-// int Network::fout = 0;
-// int Network::fin = 0;
 
 Network * Network::singleton = NULL;
 
@@ -90,6 +88,11 @@ Network::Network()
 #else
   nickname = getenv("USER");
 #endif
+
+#if defined(DEBUG) && not defined(WIN32)
+  fin = 0;
+  fout = 0;
+#endif
 }
 //-----------------------------------------------------------------------------
 
@@ -99,10 +102,13 @@ Network::~Network()
   {
     SDLNet_Quit();
     sdlnet_initialized = false;
-// #if defined(DEBUG) && not defined(WIN32)
-//     close(fin);
-//     close(fout);
-// #endif
+
+#if defined(DEBUG) && not defined(WIN32)
+    if (fin != 0)
+      close(fin);
+    if (fout != 0)
+      close(fout);
+#endif
   }
 }
 
@@ -132,11 +138,6 @@ void Network::Init()
   sdlnet_initialized = true;
   
   std::cout << "o " << _("Network initialization") << std::endl;
-
-// #if defined(DEBUG) && not defined(WIN32)
-//   fin = open("./network.in", O_RDWR | O_CREAT | O_SYNC, S_IRWXU | S_IRWXG);
-//   fout = open("./network.out", O_RDWR | O_CREAT | O_SYNC, S_IRWXU | S_IRWXG);
-// #endif
 }
 
 //-----------------------------------------------------------------------------
@@ -277,12 +278,15 @@ void Network::SendAction(Action* a)
 
 void Network::SendPacket(char* packet, int size)
 {
-// #if defined(DEBUG) && not defined(WIN32)
-// 	int tmp = 0xFFFFFFFF;
-// 	write(fout, &size, 4);
-// 	write(fout, packet, size);
-// 	write(fout, &tmp, 4);
-// #endif
+#if defined(DEBUG) && not defined(WIN32)
+  if (fout != 0) {
+    int tmp = 0xFFFFFFFF;
+    write(fout, &size, 4);
+    write(fout, packet, size);
+    write(fout, &tmp, 4);
+  }
+#endif
+
   for(std::list<DistantComputer*>::iterator client = cpu.begin();
       client != cpu.end();
       client++)

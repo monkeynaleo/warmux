@@ -28,6 +28,7 @@
 class NetworkClient : public Network
 {
 public:
+  NetworkClient();
   ~NetworkClient();
 
   virtual const bool IsConnected() const { return true; }
