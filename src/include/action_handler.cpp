@@ -234,16 +234,20 @@ void Action_ChatMessage (Action *a)
     //Add message to chat session in Game
     //    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
     GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
-  else
+  else if (Network::GetInstance()->network_menu != NULL) {
     //Network Menu
     Network::GetInstance()->network_menu->ReceiveMsgCallback(a->PopString());
+  }
 }
 
 void Action_Menu_SetMap (Action *a)
 {
   if (!Network::GetInstance()->IsClient()) return;
   MapsList::GetInstance()->SelectMapByName(a->PopString());
-  Network::GetInstance()->network_menu->ChangeMapCallback();
+
+  if (Network::GetInstance()->network_menu != NULL) {
+    Network::GetInstance()->network_menu->ChangeMapCallback();
+  }
 }
 
 // TODO: Move this into network/distant_cpu.cpp
