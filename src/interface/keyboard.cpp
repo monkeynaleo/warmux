@@ -271,7 +271,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       AppWormux::GetInstance()->video.ToggleFullscreen();
       return;
     case KEY_CHAT:
-      if(network.IsConnected())
+      if(Network::GetInstance()->IsConnected())
 	GameLoop::GetInstance()->chatsession.ShowInput();
       return;
     case KEY_CENTER:

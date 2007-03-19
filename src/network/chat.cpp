@@ -23,7 +23,14 @@
 #include "chat.h"
 #include "../graphic/text.h"
 #include "../game/time.h"
+#include "../tool/i18n.h"
 #include <string>
+
+const uint HEIGHT=15;
+const uint XPOS=25;
+const uint YPOS=130;
+const uint MAXLINES=10; //Fidel's advise
+const uint MAXSECONDS=10;
 
 Chat::~Chat()
 {
@@ -64,7 +71,7 @@ void Chat::ShowInput()
   check_input = true;
   if (input == NULL){
     input = new Text("", c_white);
-    msg = new Text(SAY, c_red);
+    msg = new Text(_("Say: "), c_red);
   }
   input->DrawTopLeft(50,500);
   msg->DrawTopLeft(25,500);
@@ -96,7 +103,7 @@ void Chat::HandleKey(const SDL_Event& event)
   case SDLK_RETURN:
     check_input = false; //Hide input widget
     if (txt != "" )
-      network.SendChatMessage(txt); //Send 'txt' to other players
+      Network::GetInstance()->SendChatMessage(txt); //Send 'txt' to other players
     input->Set("");
     break;
 

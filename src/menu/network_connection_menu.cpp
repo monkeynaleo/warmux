@@ -189,7 +189,7 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
 
 void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
 
-void NetworkConnectionMenu::DisplayError(ConnectionState conn)
+void NetworkConnectionMenu::DisplayError(Network::connection_state_t conn)
 {
   DispNetworkError(conn);
   Redraw(Rectanglei(0, 0, 
@@ -201,23 +201,22 @@ void NetworkConnectionMenu::DisplayError(ConnectionState conn)
 
 void NetworkConnectionMenu::sig_ok()
 {
-  ConnectionState conn;
+  Network::connection_state_t conn;
   switch (current_action) {
   case NET_HOST: // Hosting your own server
     if( !internet_server->GetValue() )
       index_server.SetHiddenServer();
 
     conn = index_server.Connect();
-    if(conn != CONNECTED)
+    if(conn != Network::CONNECTED)
     {     
       DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
       return;
     }
 
-    network.Init();
-    conn = network.ServerStart(port_number->GetText());
-    if( conn != CONNECTED)
+    conn = Network::GetInstance()->ServerStart(port_number->GetText());
+    if( conn != Network::CONNECTED)
     {      
       DisplayError(conn);
       return;
@@ -225,18 +224,15 @@ void NetworkConnectionMenu::sig_ok()
 
     index_server.SendServerStatus();
 
-    if(network.IsConnected()) {
-      network.client_inited = 1;
-    } else {
+    if (!Network::GetInstance()->IsConnected()) {
       msg_box->NewMessage(_("Error: Unable to start server"), c_red);
       return;
     }
     break;
 
   case NET_CONNECT_LOCAL: // Direct connexion to a server
-    network.Init();
-    conn = network.ClientConnect(server_address->GetText(), port_number->GetText());
-    if (!network.IsConnected() || conn != CONNECTED) {
+    conn = Network::ClientStart(server_address->GetText(), port_number->GetText());
+    if (!Network::IsConnected() || conn != Network::CONNECTED) {
       DisplayError(conn);
 
       // translators: %s:%s will expand to something like "example.org:9999"
@@ -249,7 +245,7 @@ void NetworkConnectionMenu::sig_ok()
 
   case NET_BROWSE_INTERNET: // Search an internet game!
     conn = index_server.Connect();
-    if (conn != CONNECTED) {
+    if (conn != Network::CONNECTED) {
       DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
       return;
@@ -262,16 +258,16 @@ void NetworkConnectionMenu::sig_ok()
 
     // we don't go back into the main menu!
     // -> im.Run() may have connected to a host so the 
-    // if(network.IsConnected()) just below will be catched and close the menu
+    // if(Network::GetInstance()->IsConnected()) just below will be catched and close the menu
     break;
   }
 
-  if (network.IsConnected()) {
+  if (Network::GetInstance()->IsConnected()) {
     // run the network menu ! :-)
     NetworkMenu nm;
-    network.network_menu = &nm;
+    Network::GetInstance()->network_menu = &nm;
     nm.Run();
-    network.network_menu = NULL;
+    Network::GetInstance()->network_menu = NULL;
     index_server.Disconnect();
 
     // back to main menu after playing
@@ -285,11 +281,11 @@ void NetworkConnectionMenu::sig_ok()
 
 void NetworkConnectionMenu::__sig_ok()
 {
-  network.Disconnect();
+  Network::Disconnect();
 }
 
 void NetworkConnectionMenu::__sig_cancel()
 {
-  network.Disconnect();
+  Network::Disconnect();
 }
 

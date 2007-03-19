@@ -51,16 +51,16 @@ IndexServer::~IndexServer()
 }
 
 /*************  Connection  /  Disconnection  ******************/
-ConnectionState IndexServer::Connect()
+Network::connection_state_t IndexServer::Connect()
 {
   MSG_DEBUG("index_server", "Connecting..");
   assert(!connected);
 
   if( hidden_server )
-    return CONNECTED;
+    return Network::CONNECTED;
 
   if( !GetServerList() )
-    return CONN_REJECTED;
+    return Network::CONN_REJECTED;
 
   std::string addr;
   int port;
@@ -70,10 +70,10 @@ ConnectionState IndexServer::Connect()
   while( GetServerAddress( addr, port) )
   {
     if( ConnectTo( addr, port) )
-      return CONNECTED;
+      return Network::CONNECTED;
   }
 
-  return CONN_REJECTED;
+  return Network::CONN_REJECTED;
 }
 
 bool IndexServer::ConnectTo(const std::string & address, const int & port)
@@ -81,7 +81,7 @@ bool IndexServer::ConnectTo(const std::string & address, const int & port)
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
   AppWormux::GetInstance()->video.Flip();
 
-  network.Init(); // To get SDL_net initialized
+  Network::Init(); // To get SDL_net initialized
 
   MSG_DEBUG("index_server", "Opening connection");
 
@@ -317,12 +317,12 @@ bool IndexServer::HandShake()
 
 void IndexServer::SendServerStatus()
 {
-  assert(network.IsServer());
+  assert(Network::GetInstance()->IsServer());
 
   if(hidden_server)
     return;
   Send(TS_MSG_HOSTING);
-  Send(network.GetPort());
+  Send(Network::GetInstance()->GetPort());
 }
 
 std::list<address_pair> IndexServer::GetHostList()

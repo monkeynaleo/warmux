@@ -210,7 +210,7 @@ void Game::TogglePause()
 void Game::DisplayPause()
 {
   Question question;
-  if(!network.IsLocal())
+  if(!Network::GetInstance()->IsLocal())
     return;
 
   jukebox.Pause();

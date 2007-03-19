@@ -84,9 +84,8 @@ void InternetMenu::OnClic(const Point2i &mousePosition, int button)
   else
   if (w == connect && connect_lst->GetSelectedItem() != -1)
   {
-    network.Init();
-    ConnectionState conn = network.ClientConnect(connect_lst->ReadLabel(), connect_lst->ReadValue());
-    if( network.IsConnected() && conn == CONNECTED )
+    Network::connection_state_t conn = Network::ClientStart(connect_lst->ReadLabel(), connect_lst->ReadValue());
+    if ( Network::IsConnected() && conn == Network::CONNECTED )
     {
       close_menu = true;
       sig_ok();

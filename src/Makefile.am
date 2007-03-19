@@ -120,8 +120,9 @@ wormux_SOURCES = \
 	network/index_server.cpp network/index_server.h \
 	network/net_error_msg.cpp network/net_error_msg.h \
 	network/network.cpp network/network.h \
-	network/network_server.cpp \
-	network/network_client.cpp \
+	network/network_server.cpp network/network_server.h \
+	network/network_client.cpp network/network_client.h \
+	network/network_local.cpp network/network_local.h \
 	network/randomsync.cpp network/randomsync.h \
 	particles/body_member.cpp particles/body_member.h \
 	particles/bullet.cpp particles/bullet.h \
