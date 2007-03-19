@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ class Polygon {
                       const double x_random_offset, const double y_random_offset,
                       const int num_steps, const bool add_first_point = true,
                       const bool add_last_point = true);
-  Polygon * GetBezierInterpolation(const double smooth_value = 0.0, const int num_steps = 20);
+  Polygon * GetBezierInterpolation(const double smooth_value = 1.0, const int num_steps = 20);
   void Expand(const double expand_value);
   PolygonBuffer * GetPolygonBuffer() const;
   // Type of the polygon

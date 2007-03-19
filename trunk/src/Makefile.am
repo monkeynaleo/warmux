@@ -107,6 +107,7 @@ wormux_SOURCES = \
 	map/camera.cpp map/camera.h \
 	map/ground.cpp map/ground.h \
 	map/map.cpp map/map.h \
+	map/random_map.cpp map/random_map.h \
 	map/maps_list.cpp map/maps_list.h \
 	map/sky.cpp map/sky.h \
 	map/tile.cpp map/tile.h \

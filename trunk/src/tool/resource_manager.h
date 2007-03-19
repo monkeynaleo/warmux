@@ -58,7 +58,7 @@ class ResourceManager
    Color LoadColor( const Profile *profile, const std::string resource_name);
    Surface LoadImage( const Profile *profile, const std::string resource_name);
    Sprite *LoadSprite(const Profile *profile, const std::string resource_name);
-   Surface GenerateMap(const Profile *profile, const int width, const int height);
+   Surface GenerateMap(Profile *profile, const int width, const int height);
    xmlpp::Element * GetElement( const Profile *profile, const std::string ressource_type, const std::string ressource_name);
 
  private:

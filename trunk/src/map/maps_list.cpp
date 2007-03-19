@@ -149,7 +149,7 @@ void InfoMap::LoadData()
     img_ground = resource_manager.LoadImage(res_profile, "map");
   } else {
     img_ground = resource_manager.GenerateMap(res_profile, img_sky.GetWidth(), img_sky.GetHeight());
-    img_ground.ImgSave("/tmp/generate_" + name + ".png");
+    //img_ground.ImgSave("/tmp/generate_" + name + ".png");
   }
 }
 
