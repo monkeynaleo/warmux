@@ -25,7 +25,8 @@
   <sound sample="weapon/m16" file="../../weapon/sound/m16.ogg" />
   <sound sample="weapon/alleluia" file="../../weapon/sound/alleluia.ogg" />
   <sound sample="weapon/airhammer" file="../../weapon/sound/airhammer.ogg" />
-
+  <sound sample="weapon/anvil_fall" file="../../weapon/sound/anvil_fall.ogg" />
+  <sound sample="weapon/anvil_collision" file="../../weapon/sound/anvil_collision.ogg" />
 
   <sound sample="music/grenouilles" file="frog_music.ogg" />
 

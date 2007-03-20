@@ -32,13 +32,18 @@ class Anvil : public WeaponProjectile
 {
   private:
     uint merge_time;
+    int channel;
   public:
     Anvil(ExplosiveWeaponConfig& cfg,
           WeaponLauncher * p_launcher);
     void Refresh();
+
+    void PlayFallSound();
+    void PlayCollisionSound();
+
   protected:
-    void SignalObjectCollision(PhysicalObj * obj);
-    void SignalGroundCollision();
+    virtual void SignalObjectCollision(PhysicalObj * obj);
+    virtual void SignalGroundCollision();
 };
 
 class AnvilLauncher : public WeaponLauncher
