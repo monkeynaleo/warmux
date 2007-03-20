@@ -263,6 +263,68 @@ int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &
 }
 
 /**
+ * Merge a sprite (spr) with current Surface at a given position.
+ *
+ * Buggy and slow ! Don't use it ! But we need it for the ground generator ...
+ * @param spr
+ * @param position
+ */
+void Surface::MergeSurface(const Surface &spr, const Point2i &position) {
+  int starting_x = position.x >= 0 ? position.x : 0;
+  int starting_y = position.y >= 0 ? position.y : 0;
+  int ending_x = position.x + spr.GetWidth() <= GetWidth() ? position.x + spr.GetWidth() : GetWidth();
+  int ending_y = position.y + spr.GetHeight() <= GetHeight() ? position.y + spr.GetHeight() : GetHeight();
+  unsigned char r, g, b, a, p_r, p_g, p_b, p_a;
+  unsigned char* spr_buf = spr.GetPixels();
+  unsigned char* tile_buf = GetPixels();
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+  int r_offset = 0;
+  int g_offset = 1;
+  int b_offset = 2;
+  int a_offset = 3;
+#else
+  int r_offset = 3;
+  int g_offset = 2;
+  int b_offset = 1;
+  int a_offset = 0;
+#endif
+
+  // Really dirty hack: there is no obvious reason it should work, but with this it works (TM)
+  spr_buf += 3;
+
+  for( int py = starting_y ; py < ending_y ; py++) {
+    for( int px = starting_x ; px < ending_x ; px++) {
+      a = *(spr_buf+((py - position.y) * spr.GetPitch()) + ((px - position.x) * 4 + a_offset));
+      p_a = *(tile_buf + py * GetPitch() + (px * 4) + a_offset);
+      if (p_a > 0) {
+        p_r = *(tile_buf + py * GetPitch() + (px * 4) + r_offset);
+        p_g = *(tile_buf + py * GetPitch() + (px * 4) + g_offset);
+        p_b = *(tile_buf + py * GetPitch() + (px * 4) + b_offset);
+      } else {
+        p_r = p_g = p_b = 0;
+      }
+      if (a == SDL_ALPHA_OPAQUE || (p_a == 0 && a > 0)) {
+        r = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + r_offset);
+        g = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + g_offset);
+        b = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + b_offset);
+        *(tile_buf + py * GetPitch() + (px * 4) + r_offset) = r;
+        *(tile_buf + py * GetPitch() + (px * 4) + g_offset) = g;
+        *(tile_buf + py * GetPitch() + (px * 4) + b_offset) = b;
+        *(tile_buf + py * GetPitch() + (px * 4) + a_offset) = a;
+      } else if (a > 0) {
+        r = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + r_offset);
+        g = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + g_offset);
+        b = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + b_offset);
+        *(tile_buf + py * GetPitch() + (px * 4) + r_offset) = (r * a + p_r * p_a) / (a + p_a);
+        *(tile_buf + py * GetPitch() + (px * 4) + g_offset) = (g * a + p_g * p_a) / (a + p_a);
+        *(tile_buf + py * GetPitch() + (px * 4) + b_offset) = (b * a + p_b * p_a) / (a + p_a);
+        *(tile_buf + py * GetPitch() + (px * 4) + a_offset) = (a > p_a ? a : p_a);
+      }
+    }
+  }
+}
+
+/**
  *
  * @param flag
  * @param key
