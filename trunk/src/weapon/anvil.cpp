@@ -38,6 +38,7 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
              WeaponLauncher * p_launcher) :
   WeaponProjectile ("anvil", cfg, p_launcher)
 {
+  channel = -1;
   explode_with_collision = false;
   explode_colliding_character = false;
   merge_time = 0;
@@ -45,15 +46,17 @@ Anvil::Anvil(ExplosiveWeaponConfig& cfg,
 
 void Anvil::SignalObjectCollision(PhysicalObj * obj)
 {
-  if(typeid(*obj) == typeid(Character)) {
+  if (typeid(*obj) == typeid(Character)) {
     Character * tmp = (Character *)(obj);
     tmp -> SetEnergyDelta (-200);
   }
+  PlayCollisionSound();
 }
 
 void Anvil::SignalGroundCollision()
 {
   merge_time = Time::GetInstance()->Read() + 5000;
+  PlayCollisionSound();
 }
 
 void Anvil::Refresh()
@@ -64,6 +67,17 @@ void Anvil::Refresh()
   } else {
     WeaponProjectile::Refresh();
   }
+}
+
+void Anvil::PlayFallSound()
+{
+  channel = jukebox.Play("share","weapon/anvil_fall", -1);
+}
+
+void Anvil::PlayCollisionSound()
+{
+  jukebox.Stop(channel);
+  jukebox.Play("share","weapon/anvil_collision");
 }
 
 //-----------------------------------------------------------------------------
@@ -90,7 +104,9 @@ bool AnvilLauncher::p_Shoot ()
 {
   if(!target_chosen)
     return false;
+
   projectile->SetXY(target);
+  ((Anvil*)projectile)->PlayFallSound();
   lst_objects.AddObject(projectile);
   camera.FollowObject(projectile,true,true);
   projectile = NULL;
