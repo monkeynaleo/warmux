@@ -195,10 +195,6 @@ void GameLoop::InitSounds()
   FOR_EACH_TEAM(team)
     if ( (**team).GetSoundProfile() != "default" )
       jukebox.LoadXML((**team).GetSoundProfile()) ;
-
-  // Begin to play !!
-  // Music -> sound should be choosed in map.Init and then we just have to call jukebox.PlayMusic()
-  if (jukebox.UseMusic()) jukebox.Play ("share", "music/grenouilles", -1);
 }
 
 void GameLoop::InitData()
