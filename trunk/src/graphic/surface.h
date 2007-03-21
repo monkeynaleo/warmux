@@ -69,7 +69,7 @@ public:
   int Blit(const Surface& src);
   int Blit(const Surface& src, const Point2i& dst);
   int Blit(const Surface& src, const Rectanglei& srcRect, const Point2i &dstPoint);
-  void MergeSurface(const Surface &spr, const Point2i &position);
+  void MergeSurface(Surface &spr, const Point2i &position);
 
   int SetColorKey(Uint32 flag, Uint32 key);
   int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -108,46 +108,15 @@ public:
   Surface DisplayFormat();
   Uint32 GetPixel(int x, int y);
   void PutPixel(int x, int y, Uint32 pixel);
-  
-  inline bool IsNull() const{
-    return surface == NULL;
-  }
-  
-  /** 
-   * Return the size of a surface.
-   */
-  inline Point2i GetSize() const{
-    return Point2i( GetWidth(), GetHeight() );
-  }
-  
-  /// Return the width of a surface.
-  inline int GetWidth() const{
-    return surface->w;
-  }
-  
-  /// Return the height of a surface.
-  inline int GetHeight() const{
-    return surface->h;
-  }
-  
-  inline Uint32 GetFlags() const{
-    return surface->flags;
-  }
-  
-  /// Return the length of a surface scanline in bytes.
-  inline Uint16 GetPitch() const{
-    return surface->pitch;
-  }
-  
-  /// Return the number of bytes used to represent each pixel in a surface. Usually one to four.
-  inline Uint8 GetBytesPerPixel() const{
-    return surface->format->BytesPerPixel;
-  }
-  
-  /// Return a pointer on the pixels data.
-  inline unsigned char *GetPixels() const{
-    return (unsigned char *) surface->pixels;
-  }
+
+  bool IsNull() const;
+  Point2i GetSize() const;
+  int GetWidth() const;
+  int GetHeight() const;
+  Uint32 GetFlags() const;
+  Uint16 GetPitch() const;
+  Uint8 GetBytesPerPixel() const;
+  unsigned char *GetPixels() const;
 
 };
 

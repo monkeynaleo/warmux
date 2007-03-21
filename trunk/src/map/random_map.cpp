@@ -151,7 +151,11 @@ void RandomMap::Generate()
     AddElement(element, translate * Point2i((int)pos.x, (int)pos.y));
   }
   AddElement(element, Point2i(width / 2, height / 2));
+  AddElement(element, Point2i(-20, 0));
   DrawElement();
+  Polygon * tmp = PolygonGenerator::GenerateCircle(300, 20);
+  tmp->ApplyTransformation(AffineTransform2D::Translate(width / 2, height / 2));
+  result.DrawPolygon(*tmp);
 }
 
 void RandomMap::GenerateIsland(double width, double height)

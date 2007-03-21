@@ -103,6 +103,46 @@ Surface::~Surface(){
 	AutoFree();
 }
 
+bool Surface::IsNull() const{
+  return surface == NULL;
+}
+
+/** 
+ * Return the size of a surface.
+ */
+Point2i Surface::GetSize() const{
+  return Point2i( GetWidth(), GetHeight() );
+}
+
+/// Return the width of a surface.
+int Surface::GetWidth() const{
+  return surface->w;
+}
+
+/// Return the height of a surface.
+int Surface::GetHeight() const{
+  return surface->h;
+}
+
+Uint32 Surface::GetFlags() const{
+  return surface->flags;
+}
+
+/// Return the length of a surface scanline in bytes.
+Uint16 Surface::GetPitch() const{
+  return surface->pitch;
+}
+
+/// Return the number of bytes used to represent each pixel in a surface. Usually one to four.
+Uint8 Surface::GetBytesPerPixel() const{
+  return surface->format->BytesPerPixel;
+}
+
+/// Return a pointer on the pixels data.
+unsigned char *Surface::GetPixels() const{
+  return (unsigned char *) surface->pixels;
+}
+
 Surface &Surface::operator=(const Surface & src){
 	AutoFree();
 	surface = src.surface;
@@ -265,63 +305,56 @@ int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &
 /**
  * Merge a sprite (spr) with current Surface at a given position.
  *
- * Buggy and slow ! Don't use it ! But we need it for the ground generator ...
+ * No more buggy but slow ! :) Don't use it for quick blit. Needed by the ground generator.
+ *
  * @param spr
  * @param position
  */
-void Surface::MergeSurface(const Surface &spr, const Point2i &position) {
-  int starting_x = position.x >= 0 ? position.x : 0;
-  int starting_y = position.y >= 0 ? position.y : 0;
-  int ending_x = position.x + spr.GetWidth() <= GetWidth() ? position.x + spr.GetWidth() : GetWidth();
-  int ending_y = position.y + spr.GetHeight() <= GetHeight() ? position.y + spr.GetHeight() : GetHeight();
-  unsigned int r, g, b, a, p_r, p_g, p_b, p_a;
-  unsigned char* spr_buf = spr.GetPixels();
-  unsigned char* tile_buf = GetPixels();
-#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-  int r_offset = 0;
-  int g_offset = 1;
-  int b_offset = 2;
-  int a_offset = 3;
-#else
-  int r_offset = 3;
-  int g_offset = 2;
-  int b_offset = 1;
-  int a_offset = 0;
-#endif
+void Surface::MergeSurface(Surface &spr, const Point2i &pos) {
+  Uint32 spr_pix, cur_pix;
+  Uint8 r, g, b, a, p_r, p_g, p_b, p_a;
+  SDL_PixelFormat * current_fmt = surface->format;
+  SDL_PixelFormat * spr_fmt = spr.surface->format;
+  int current_offset, spr_offset, temp;
+  Point2i offset;
 
-  // Really dirty hack: there is no obvious reason it should work, but with this it works (TM)
-  spr_buf += 3;
-
-  for( int py = starting_y ; py < ending_y ; py++) {
-    for( int px = starting_x ; px < ending_x ; px++) {
-      a = *(spr_buf+((py - position.y) * spr.GetPitch()) + ((px - position.x) * 4 + a_offset));
-      p_a = *(tile_buf + py * GetPitch() + (px * 4) + a_offset);
-      if (p_a > 0) {
-        p_r = *(tile_buf + py * GetPitch() + (px * 4) + r_offset);
-        p_g = *(tile_buf + py * GetPitch() + (px * 4) + g_offset);
-        p_b = *(tile_buf + py * GetPitch() + (px * 4) + b_offset);
-      } else {
-        p_r = p_g = p_b = 0;
-      }
-      if (a == SDL_ALPHA_OPAQUE || (p_a == 0 && a > 0)) {
-        r = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + r_offset);
-        g = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + g_offset);
-        b = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + b_offset);
-        *(tile_buf + py * GetPitch() + (px * 4) + r_offset) = r;
-        *(tile_buf + py * GetPitch() + (px * 4) + g_offset) = g;
-        *(tile_buf + py * GetPitch() + (px * 4) + b_offset) = b;
-        *(tile_buf + py * GetPitch() + (px * 4) + a_offset) = a;
-      } else if (a > 0) {
-        r = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + r_offset);
-        g = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + g_offset);
-        b = *(spr_buf + (py - position.y) * spr.GetPitch() + (px - position.x) * 4 + b_offset);
-        *(tile_buf + py * GetPitch() + (px * 4) + r_offset) = (r * a + p_r * p_a) / (a + p_a);
-        *(tile_buf + py * GetPitch() + (px * 4) + g_offset) = (g * a + p_g * p_a) / (a + p_a);
-        *(tile_buf + py * GetPitch() + (px * 4) + b_offset) = (b * a + p_b * p_a) / (a + p_a);
-        *(tile_buf + py * GetPitch() + (px * 4) + a_offset) = (a > p_a ? a : p_a);
+  spr.Lock();
+  Lock();
+  // for each pixel lines of a source image
+  for (offset.x = (pos.x > 0 ? 0 : -pos.x); offset.x < spr.GetWidth() && pos.x + offset.x < GetWidth(); offset.x++) {
+    for (offset.y = (pos.y > 0 ? 0 : -pos.y); offset.y < spr.GetHeight() && pos.y + offset.y < GetHeight(); offset.y++) {
+      // Computing offset on both sprite
+      current_offset = (pos.y + offset.y) * surface->w + pos.x + offset.x;
+      spr_offset = offset.y * spr.surface->w + offset.x;
+      // Retrieving a pixel of sprite to merge
+      spr_pix = ((Uint32*)spr.surface->pixels)[spr_offset];
+      cur_pix = ((Uint32*)surface->pixels)[current_offset];
+      // Retreiving each chanel of the pixel using pixel format
+      r = (Uint8)(((spr_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
+      g = (Uint8)(((spr_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
+      b = (Uint8)(((spr_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
+      a = (Uint8)(((spr_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
+      // Retreiving previous alpha value
+      p_a = (Uint8)(((cur_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
+      if(a == SDL_ALPHA_OPAQUE || (p_a == 0 && a >0)) // new pixel with no alpha or nothing on previous pixel
+        ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
+      else if (a > 0) { // alpha is lower => merge color with previous value
+        p_r = (Uint8)(((cur_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
+        p_g = (Uint8)(((cur_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
+        p_b = (Uint8)(((cur_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
+        temp = (r * a + p_r * p_a) / (a + p_a);
+        r = (temp > 255 ? 255 : temp);
+        temp = (g * a + p_g * p_a) / (a + p_a);
+        g = (temp > 255 ? 255 : temp);
+        temp = (b * a + p_b * p_a) / (a + p_a);
+        b = (temp > 255 ? 255 : temp);
+        a = (a > p_a ? a : p_a);
+        ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
       }
     }
   }
+  Unlock();
+  spr.Unlock();
 }
 
 /**
