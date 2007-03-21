@@ -155,26 +155,11 @@ void Text::RenderMultiLines()
   surf.NewSurface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   surf = surf.DisplayFormatAlpha();
 
-  // Putting pixels of each image in destination surface
-  surf.Lock();
-
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
     Surface tmp=(font->CreateSurface(lines.at(i), color)).DisplayFormatAlpha();
-    tmp.Lock();
-
-    // for each pixel lines of a source image
-    for (int x=0; x < tmp.GetWidth() && x < int(max_width); x++) 
-      { // for each pixel rows of a source image
-	for (int y=0; y < tmp.GetHeight(); y++) 
-	  { 
-	    surf.PutPixel(x, ((font->GetHeight()+2)*i)+y, 
-			  tmp.GetPixel(x, y));
-	  }
-      }
-    tmp.Unlock();
+    surf.MergeSurface(tmp, Point2i(0, (font->GetHeight() + 2) * i));
   }
-  surf.Unlock();
 
   // Render the shadow !
   if (!shadowed) return;
@@ -183,25 +168,11 @@ void Text::RenderMultiLines()
   background = background.DisplayFormatAlpha();
 
   // Putting pixels of each image in destination surface
-  background.Lock();
-
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
     Surface tmp=(font->CreateSurface(lines.at(i), black_color)).DisplayFormatAlpha();
-    tmp.Lock();
-
-    // for each pixel lines of a source image
-    for (int x=0; x < tmp.GetWidth() && x < int(max_width); x++) 
-      { // for each pixel rows of a source image
-	for (int y=0; y < tmp.GetHeight(); y++) 
-	  { 
-	    background.PutPixel(x, ((font->GetHeight()+2)*i)+y, 
-				tmp.GetPixel(x, y));
-	  }
-      }
-    tmp.Unlock();
+    background.MergeSurface(tmp, Point2i(0, (font->GetHeight() + 2) * i));
   }
-  background.Unlock();
 }
 
 void Text::Set(const std::string &new_txt)
