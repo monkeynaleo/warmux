@@ -47,6 +47,8 @@ class Polygon {
   Surface * texture;
   Color * plane_color;
   Color * border_color;
+  Point2d max;
+  Point2d min;
   // Original shape
   std::vector<Point2d> original_shape;
   // Shape position after an affine transformation
@@ -70,6 +72,14 @@ class Polygon {
                       const bool add_last_point = true);
   Polygon * GetBezierInterpolation(const double smooth_value = 1.0, const int num_steps = 20);
   void Expand(const double expand_value);
+
+  double GetWidth() const;
+  double GetHeight() const;
+  Point2d GetSize() const;
+  int GetNbOfPoint() const;
+
+  Point2d GetRandomUpperPoint();
+
   PolygonBuffer * GetPolygonBuffer() const;
   // Type of the polygon
   bool IsTextured() const;

@@ -274,7 +274,7 @@ void Surface::MergeSurface(const Surface &spr, const Point2i &position) {
   int starting_y = position.y >= 0 ? position.y : 0;
   int ending_x = position.x + spr.GetWidth() <= GetWidth() ? position.x + spr.GetWidth() : GetWidth();
   int ending_y = position.y + spr.GetHeight() <= GetHeight() ? position.y + spr.GetHeight() : GetHeight();
-  unsigned char r, g, b, a, p_r, p_g, p_b, p_a;
+  unsigned int r, g, b, a, p_r, p_g, p_b, p_a;
   unsigned char* spr_buf = spr.GetPixels();
   unsigned char* tile_buf = GetPixels();
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)

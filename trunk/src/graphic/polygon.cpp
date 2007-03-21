@@ -97,6 +97,7 @@ void Polygon::Init()
   border_color = NULL;
   original_shape.clear();
   shape_buffer = new PolygonBuffer();
+  min = max = Point2d(0.0, 0.0);
 }
 
 void Polygon::ApplyTransformation(const AffineTransform2D & trans)
@@ -117,6 +118,48 @@ void Polygon::AddPoint(const Point2d & p)
   shape_buffer->SetSize(original_shape.size());
   shape_buffer->vx[original_shape.size() - 1] = (int)p.x;
   shape_buffer->vy[original_shape.size() - 1] = (int)p.y;
+  max = p.max(max);
+  min = p.min(min);
+}
+
+double Polygon::GetWidth() const
+{
+  return max.x - min.x;
+}
+
+double Polygon::GetHeight() const
+{
+  return max.y - min.y;
+}
+
+Point2d Polygon::GetSize() const
+{
+  return max - min;
+}
+
+Point2d Polygon::GetRandomUpperPoint()
+{
+  std::vector<Point2d>::iterator point = original_shape.begin();
+  Point2d tmp, previous;
+  tmp = *point;
+  int start = Random::GetInt(0, GetNbOfPoint());
+  int i;
+  for(i = 0; i < start; i++)
+    point++;
+  while(point != original_shape.end()) {
+    previous = *point++;
+    i++;
+    tmp = *point - previous;
+    tmp = tmp / tmp.Norm();
+    if(tmp.y > 0.4)
+      return tmp;
+  }
+  return Point2d();
+}
+
+int Polygon::GetNbOfPoint() const
+{
+  return (int)original_shape.size();
 }
 
 // And the famous Bezier curve. And this algorithme is that simple ? I'm so disappointed !
