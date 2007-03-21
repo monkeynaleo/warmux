@@ -28,23 +28,39 @@
 #include "../game/config.h"
 #include "../tool/resource_manager.h"
 
+class Profile;
+
+class MapElement {
+ protected:
+   Surface element;
+   Point2i position;
+ public:
+   MapElement(Surface & object, Point2i & position);
+   Surface & GetElement();
+   Point2i & GetPosition();
+};
+
 class RandomMap {
  protected:
    double border_size;
-   Color border_color;
    bool is_open;
    int number_of_island;
    Surface result;
    int width;
    int height;
 
+   // Shape used to generate island
    Polygon * random_shape;
    Polygon * bezier_shape;
    Polygon * expanded_bezier_shape;
 
+   // Internal parameters
    Profile *profile;
+   Color border_color;
+   Surface texture;
+   Surface element;
 
-   std::vector<Surface> object_list;
+   std::vector<MapElement> element_list;
 
  public:
    RandomMap(Profile *profile, const int width, const int height);
@@ -52,7 +68,8 @@ class RandomMap {
    const Point2i GetSize();
    const int GetWidth();
    const int GetHeight();
-   void AddObject(Surface & object);
+   void AddElement(Surface & object, Point2i position);
+   void DrawElement();
    void SetBorderSize(const double border);
    void SetBorderColor(const Color color);
    const bool IsOpen();

@@ -31,8 +31,9 @@
 #include <string>
 #include "xml_document.h"
 #include "../graphic/sprite.h"
+#include "../map/random_map.h"
 
-class Profile 
+class Profile
 { 
  public:
   XmlReader *doc;
@@ -63,8 +64,6 @@ class ResourceManager
 
  private:
    std::string base_path;
-
-
 };
 
 extern ResourceManager resource_manager;

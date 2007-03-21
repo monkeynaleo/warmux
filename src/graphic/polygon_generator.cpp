@@ -86,7 +86,7 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const doub
   double upper_width, lower_width, upper_offset, lower_offset;
   int number_of_bottom_point, number_of_upper_point, number_of_side_point;
   Polygon * tmp = new Polygon();
-  number_of_side_point = (int)Random::GetDouble((height * 0.25) / MIN_SPACE_BETWEEN_POINT,
+  number_of_side_point = 1 + (int)Random::GetDouble((height * 0.25) / MIN_SPACE_BETWEEN_POINT,
                                      height / MIN_SPACE_BETWEEN_POINT);
   if(coef > 0.0) {
     upper_width = width;
@@ -99,9 +99,9 @@ Polygon * PolygonGenerator::GenerateRandomTrapeze(const double width, const doub
     upper_offset = 0.0;
     lower_offset = Random::GetDouble(0.0, width - upper_width);
   }
-  number_of_upper_point = Random::GetInt((int)((upper_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
+  number_of_upper_point = Random::GetInt(1 + (int)((upper_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
                                          (int)(upper_width / MIN_SPACE_BETWEEN_POINT));
-  number_of_bottom_point = Random::GetInt((int)((lower_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
+  number_of_bottom_point = Random::GetInt(1 + (int)((lower_width * 0.25) / MIN_SPACE_BETWEEN_POINT),
                                           (int)((coef * lower_width) / MIN_SPACE_BETWEEN_POINT));
   tmp->AddRandomCurve(Point2d(upper_offset, 0.0), Point2d(lower_offset, height),
                       x_rand_offset, y_rand_offset, number_of_side_point, false, false);

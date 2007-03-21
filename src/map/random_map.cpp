@@ -22,14 +22,36 @@
 #include "random_map.h"
 #include "../tool/random.h"
 
+MapElement::MapElement(Surface & object, Point2i & pos)
+{
+  element = object;
+  position = pos;
+}
+
+Surface & MapElement::GetElement()
+{
+  return element;
+}
+
+Point2i & MapElement::GetPosition()
+{
+  return position;
+}
+
 RandomMap::RandomMap(Profile *profile, const int width, const int height)
 {
   this->profile = profile;
   SetSize(width, height);
-  number_of_island = Random::GetInt(2, 10);
   border_size = 8;
   result = Surface(Point2i(width,height), SDL_SWSURFACE|SDL_SRCALPHA, true);
+  random_shape = NULL;
+  bezier_shape = NULL;
+  expanded_bezier_shape = NULL;
+  // Loading resources
   border_color = resource_manager.LoadColor(profile, "border_color");
+  texture = resource_manager.LoadImage(profile, "texture");
+  element = resource_manager.LoadImage(profile, "element");
+  element_list.clear();
 }
 
 void RandomMap::SetSize(const int width, const int height)
@@ -53,16 +75,28 @@ const int RandomMap::GetHeight()
   return height;
 }
 
-void RandomMap::AddObject(Surface & object)
+void RandomMap::AddElement(Surface & object, Point2i position)
 {
+  element_list.push_back(MapElement(object, position));
+}
+
+void RandomMap::DrawElement()
+{
+  std::vector<MapElement>::iterator elt;
+  for(elt = element_list.begin(); elt != element_list.end(); elt++) {
+    Surface & tmp = elt->GetElement();
+    result.MergeSurface(tmp, elt->GetPosition() - Point2i((int)(tmp.GetWidth() / 2.0), tmp.GetHeight()));
+  }
 }
 
 void RandomMap::SetBorderSize(const double border)
 {
+  border_size = border;
 }
 
 void RandomMap::SetBorderColor(const Color color)
 {
+  border_color = color;
 }
 
 const bool RandomMap::IsOpen()
@@ -73,23 +107,24 @@ const bool RandomMap::IsOpen()
 void RandomMap::Generate()
 {
   srand(time(NULL));
-  double h = (height * 2.0) / number_of_island;
-  double w = (width * 2.0) / number_of_island;
-  double current_h_position = (width / 2.0) + Random::GetDouble(-w, w);
-  double current_v_position = (height / 2.0) + Random::GetDouble(-h, h);
+  // Computing number of island
+  number_of_island = 1; Random::GetInt(2, Random::GetInt(3, 10));
+  // is_open = (Random::GetInt(0, 10) > 8); // Open ?
+  is_open = true;
+  // Initializing ground generator
+  double h = height / number_of_island;
+  double w = width / number_of_island;
+  double current_h_position = (width / 2.0) + Random::GetDouble(-w / 2, w / 2);
+  double current_v_position = (height / 2.0) + Random::GetDouble(-h / 2, h / 2);
   double x_direction = 1.0;
   double y_direction = 1.0;
-  Surface texture = resource_manager.LoadImage(profile, "texture");
-  Surface element = resource_manager.LoadImage(profile, "element");
   AffineTransform2D translate;
   result.Fill(0);
   for(int i = 0; i < number_of_island; i++) {
     translate = AffineTransform2D::Translate(current_h_position, current_v_position);
     // Generate Island
-    GenerateIsland(Random::GetDouble(w * 1.25, w * 2.25),
-                   Random::GetDouble(h * 1.25, h * 2.25));
-    bezier_shape->SetTexture(&texture);
-    expanded_bezier_shape->SetPlaneColor(border_color);
+    GenerateIsland(Random::GetDouble(w * 0.55, w * 1.25),
+                   Random::GetDouble(h * 0.55, h * 1.25));
     bezier_shape->ApplyTransformation(translate);
     expanded_bezier_shape->ApplyTransformation(translate);
     // Then draw it
@@ -112,7 +147,11 @@ void RandomMap::Generate()
       y_direction = -y_direction;
       current_v_position = -current_v_position;
     }
+    Point2d pos = bezier_shape->GetRandomUpperPoint();
+    AddElement(element, translate * Point2i((int)pos.x, (int)pos.y));
   }
+  AddElement(element, Point2i(width / 2, height / 2));
+  DrawElement();
 }
 
 void RandomMap::GenerateIsland(double width, double height)
@@ -120,12 +159,21 @@ void RandomMap::GenerateIsland(double width, double height)
   double x_rand_offset = Random::GetDouble(10.0, 15.0);
   double y_rand_offset = Random::GetDouble(10.0, 15.0);
   double coef = Random::GetSign() * Random::GetDouble(0.5, 1.0);
+  if(random_shape)
+    delete random_shape;
+  if(bezier_shape)
+    delete bezier_shape;
+  if(expanded_bezier_shape)
+    delete expanded_bezier_shape;
   // Generate a random shape
   random_shape = PolygonGenerator::GenerateRandomTrapeze(width, height, x_rand_offset, y_rand_offset, coef);
   bezier_shape = random_shape->GetBezierInterpolation();
   expanded_bezier_shape = new Polygon(*bezier_shape);
   // Expand the random, bezier shape !
   expanded_bezier_shape->Expand(border_size);
+  // Setting texture and border color
+  bezier_shape->SetTexture(&texture);
+  expanded_bezier_shape->SetPlaneColor(border_color);
 }
 
 void RandomMap::SaveMap()

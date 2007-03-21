@@ -257,10 +257,10 @@ Sprite *ResourceManager::LoadSprite( const Profile *profile, const std::string r
 
 Surface ResourceManager::GenerateMap(Profile *profile, const int width, const int height)
 {
-  RandomMap tmp = RandomMap(profile, width, height);
-  tmp.Generate();
-  tmp.SaveMap();
-  return tmp.GetRandomMap();
+  RandomMap random_map = RandomMap(profile, width, height);
+  random_map.Generate();
+  random_map.SaveMap();
+  return random_map.GetRandomMap();
 }
 
 ResourceManager resource_manager;
