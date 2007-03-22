@@ -48,6 +48,9 @@ class ListBox : public Widget
 private:
   bool always_one_selected;
 
+  bool scrolling;
+  Rectanglei ScrollBarPos() const;
+
 protected:
   // what are the items ?
   uint first_visible_item;
@@ -73,6 +76,10 @@ public:
   ~ListBox();
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
+  void Update(const Point2i &mousePosition,
+	      const Point2i &lastMousePosition,
+	      Surface& surf);
+
   Widget* Click(const Point2i &mousePosition, uint button);
   Widget* ClickUp(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
