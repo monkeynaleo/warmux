@@ -11,7 +11,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"POT-Creation-Date: \n"
 "PO-Revision-Date: 2007-03-12 19:25+0000\n"
 "Last-Translator: Bruno Queiros <brunoqueiros@portugalmail.com>\n"
 "Language-Team: Português <pt@li.org>\n"
@@ -23,14 +22,6 @@ msgstr ""
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-SourceCharset: utf-8\n"
-
-#: src/menu/credits_menu.cpp:68
-msgid " aka "
-msgstr " também conhecido como "
-
-#: src/menu/credits_menu.cpp:72
-msgid " from "
-msgstr " de "
 
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
@@ -47,21 +38,21 @@ msgstr " abandonou a festa"
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s não encontrado :-("
 
-#: src/menu/network_menu.cpp:107 src/menu/network_menu.cpp:258
+#: src/menu/network_menu.cpp:115 src/menu/network_menu.cpp:275
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] "Jogador %i ligado"
 msgstr[1] "Jogadores %i ligados"
 
-#: src/menu/network_menu.cpp:111 src/menu/network_menu.cpp:264
+#: src/menu/network_menu.cpp:119 src/menu/network_menu.cpp:283
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] "Jogador %i está pronto"
 msgstr[1] "Os jogadores %i estão prontos"
 
-#: src/game/game_loop.cpp:696
+#: src/game/game_loop.cpp:722
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) morreu."
@@ -76,7 +67,7 @@ msgstr "%s <%s> também conhecido por %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:675
+#: src/game/game_loop.cpp:701
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s suicidou-se !"
@@ -86,12 +77,12 @@ msgstr "%s suicidou-se !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:668
+#: src/game/game_loop.cpp:694
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s caiu à água."
 
-#: src/game/game_loop.cpp:679
+#: src/game/game_loop.cpp:705
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s saiu do mapa!"
@@ -103,12 +94,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s ganhou %u ponto de vida !"
 msgstr[1] "%s ganhou %u pontos de vida !"
 
-#: src/game/game_loop.cpp:690
+#: src/game/game_loop.cpp:716
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s é um psicopata, matou um membro da equipa %s !"
 
-#: src/game/game_loop.cpp:685
+#: src/game/game_loop.cpp:711
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s morreu devido à sua trapalhice."
@@ -162,7 +153,7 @@ msgstr "Martelo Pneumático"
 msgid "All teams"
 msgstr "Todas as equipas"
 
-#: src/weapon/anvil.cpp:74
+#: src/weapon/anvil.cpp:88
 msgid "Anvil"
 msgstr "Bigorna"
 
@@ -213,7 +204,8 @@ msgstr "Incapaz de encontrar a equipa %s!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Incapaz de abrir o directório das equipas (%s)!"
 
-#: src/menu/network_menu.cpp:95
+#. Client Mode
+#: src/menu/network_menu.cpp:97
 msgid "Client mode"
 msgstr "Modo cliente"
 
@@ -230,11 +222,11 @@ msgid "Connect !"
 msgstr "Ligar !"
 
 #: src/menu/network_connection_menu.cpp:65
-#: src/menu/network_connection_menu.cpp:180
+#: src/menu/network_connection_menu.cpp:184
 msgid "Connect to an internet game"
 msgstr "Ligar a um jogo internet"
 
-#: src/menu/network_connection_menu.cpp:172
+#: src/menu/network_connection_menu.cpp:176
 msgid "Connect to game"
 msgstr "Ligar ao jogo"
 
@@ -266,7 +258,7 @@ msgstr "Duração do turno:"
 msgid "Dynamite"
 msgstr "Dinamite"
 
-#: src/game/game_loop.cpp:246 src/game/game_loop.cpp:252
+#: src/game/game_loop.cpp:266 src/game/game_loop.cpp:272
 msgid "END OF GAME"
 msgstr "FIM DE JOGO"
 
@@ -287,7 +279,8 @@ msgstr "Erro ao carregar a informação da equipa %s:"
 
 #: src/game/config.cpp:230
 #, c-format
-msgid "Error while creating directory \"%s\": unable to store configuration file."
+msgid ""
+"Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 "Erro ao criar o directório \"%s\": incapaz de guardar o ficheiro de "
 "configuração."
@@ -327,15 +320,17 @@ msgstr ""
 msgid "Error: Unable to connect to %s:%s"
 msgstr "Erro: Incapaz de ligar a %s:%s"
 
-#: src/menu/network_connection_menu.cpp:214
+#: src/menu/network_connection_menu.cpp:218
 msgid "Error: Unable to contact index server to host a game"
 msgstr "Erro: Incapaz de contactar o servidor de index para receber um jogo"
 
 #: src/menu/network_connection_menu.cpp:254
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr "Erro: Incapaz de contactar o servidor de index para procurar por um jogo na internet"
+msgstr ""
+"Erro: Incapaz de contactar o servidor de index para procurar por um jogo na "
+"internet"
 
-#: src/menu/network_connection_menu.cpp:231
+#: src/menu/network_connection_menu.cpp:232
 msgid "Error: Unable to start server"
 msgstr "Erro: Incapaz de iniciar servidor"
 
@@ -344,13 +339,9 @@ msgstr "Erro: Incapaz de iniciar servidor"
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Erro: não consegui encontrar o skin \"%s\" para a equipa \"%s\"."
 
-#: src/network/network.cpp:75
+#: src/network/network.cpp:136
 msgid "Failed to initialize network library!"
 msgstr "Incapaz de inicializar a libraria de rede!"
-
-#: src/game/game_loop.cpp:157
-msgid "Find a random position for characters"
-msgstr "Encontre uma posição aleatória para os jogadores"
 
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
@@ -385,11 +376,11 @@ msgstr "Tenha um bom jogo!"
 msgid "Head commander"
 msgstr "Comandante principal"
 
-#: src/menu/network_connection_menu.cpp:164
+#: src/menu/network_connection_menu.cpp:168
 msgid "Host a game"
 msgstr "Criar um Jogo"
 
-#: src/game/game_loop.cpp:732
+#: src/game/game_loop.cpp:758
 msgid "Hurry up, you are too slow !!"
 msgstr "Rápido, tu és lento demais !!"
 
@@ -405,8 +396,7 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energia inicial"
 
-#. Init all needed data
-#: src/game/game_loop.cpp:197
+#: src/game/game_loop.cpp:202
 msgid "Initialisation"
 msgstr "Inicialização"
 
@@ -415,15 +405,12 @@ msgstr "Inicialização"
 msgid "Initialisation of TTF library failed: %s"
 msgstr "Inicialização da libraria TTF falhou: %s"
 
-#: src/game/game_loop.cpp:105
-msgid "Initialise data"
+#: src/game/game_loop.cpp:156
+#, fuzzy
+msgid "Initialise map"
 msgstr "Inicialização da informação"
 
-#: src/game/game_loop.cpp:163
-msgid "Initialise objects"
-msgstr "Inicialização dos objectos"
-
-#: src/game/game_loop.cpp:102 src/game/game_loop.cpp:126
+#: src/game/game_loop.cpp:167 src/game/game_loop.cpp:189
 msgid "Initialise teams"
 msgstr "Inicialização das equipas"
 
@@ -436,7 +423,7 @@ msgid "Jetpack"
 msgstr "Jetpack"
 
 #. Skip a line
-#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:128
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:137
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr "Visite #wormux em irc.freenode.net para encontrar alguns adversários."
 
@@ -462,12 +449,11 @@ msgstr "Baixa Gravidade"
 msgid "Map %s, a creation of: "
 msgstr "O mapa %s, é uma criação de :"
 
-#. Load the map
-#: src/game/game_loop.cpp:200
+#: src/game/game_loop.cpp:158
 msgid "Maps"
 msgstr "Mapas"
 
-#: src/menu/network_menu.cpp:101
+#: src/menu/network_menu.cpp:109
 msgid "Max number of players:"
 msgstr "Número  máximo de jogadores:"
 
@@ -502,6 +488,11 @@ msgstr "Música?"
 #: src/menu/main_menu.cpp:95
 msgid "Network Game"
 msgstr "Jogo em Rede"
+
+#: src/network/network.cpp:140
+#, fuzzy
+msgid "Network initialization"
+msgstr "Iniciando o jogo..."
 
 #: src/weapon/ninja_rope.cpp:82
 msgid "Ninjarope"
@@ -597,6 +588,10 @@ msgstr "Bomba Motim"
 msgid "Run game"
 msgstr "Iniciar jogo"
 
+#: src/network/chat.cpp:74
+msgid "Say: "
+msgstr ""
+
 #: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
 msgstr "Mover a janela nas extremidades"
@@ -611,7 +606,8 @@ msgstr "Endereço do servidor:"
 msgid "Server available on Internet"
 msgstr "Servidor disponível na Internet"
 
-#: src/menu/network_menu.cpp:97
+#. Server Mode
+#: src/menu/network_menu.cpp:106
 msgid "Server mode"
 msgstr "Modo servidor"
 
@@ -633,8 +629,9 @@ msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
 "blowtorch, submachine gun) and surely many other things don't work either!"
 msgstr ""
-"Algumas armas foram desactivadas, por causa de alfuns bugs (corda ninja, martelo "
-"pneumático, maçarico, submetralhadora) e de certeza que muitas outras coisas também não funcionam!"
+"Algumas armas foram desactivadas, por causa de alfuns bugs (corda ninja, "
+"martelo pneumático, maçarico, submetralhadora) e de certeza que muitas "
+"outras coisas também não funcionam!"
 
 #: src/menu/options_menu.cpp:102
 msgid "Sound effects?"
@@ -645,7 +642,7 @@ msgid "Sound frequency"
 msgstr "Frequência sonora"
 
 #. Load teams' sound profiles
-#: src/game/game_loop.cpp:218
+#: src/game/game_loop.cpp:192
 msgid "Sounds"
 msgstr "Sons"
 
@@ -669,8 +666,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Seringa"
 
-#. Init teams
-#: src/game/game_loop.cpp:204
+#: src/game/game_loop.cpp:169
 msgid "Teams"
 msgstr "Equipas"
 
@@ -710,8 +706,8 @@ msgstr "A Granada Disco saiu do campo de batalha antes de explodir"
 msgid "The grenade left the battlefield before exploding"
 msgstr "A granada saiu do campo de batalha antes de explodir"
 
-#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
-#: src/weapon/riot_bomb.cpp:50
+#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
+#: src/weapon/cluster_bomb.cpp:58
 msgid "The rocket has left the battlefield..."
 msgstr "O míssil saiu do campo de batalha ..."
 
@@ -719,7 +715,7 @@ msgstr "O míssil saiu do campo de batalha ..."
 msgid "The server rejected the conection."
 msgstr "O servidor rejeitou a ligação."
 
-#: src/menu/network_menu.cpp:228
+#: src/menu/network_menu.cpp:241
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
@@ -752,13 +748,13 @@ msgstr "Excepção desconhecida apanhada..."
 msgid "Version"
 msgstr "Versão"
 
-#: src/menu/network_menu.cpp:129
+#: src/menu/network_menu.cpp:138
 msgid ""
 "WARNING! Disconnections are not yet handled. So you have to restart Wormux "
 "after each disconnection!"
 msgstr ""
-"AVISO! Como as disconexões ainda não são suportadas. Énecessário reiniciar "
-"o Wormux sempre que se desliga de um servidor!"
+"AVISO! Como as disconexões ainda não são suportadas. Énecessário reiniciar o "
+"Wormux sempre que se desliga de um servidor!"
 
 #: src/menu/network_connection_menu.cpp:103
 msgid ""
@@ -768,7 +764,7 @@ msgstr ""
 "AVISO!O jogo em rede encontra-se em fase de desenvolvimento sendo, portanto "
 "um pouco experimental."
 
-#: src/menu/network_menu.cpp:239
+#: src/menu/network_menu.cpp:255
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
@@ -776,7 +772,7 @@ msgstr[0] "Espere. A equipa %i ainda não está pronta!"
 msgstr[1] "Espere. As equipas %i ainda não estão prontas."
 
 #. Initialization of teams' energy
-#: src/game/game_loop.cpp:213
+#: src/game/game_loop.cpp:181
 msgid "Weapons"
 msgstr "Armas"
 
@@ -784,7 +780,7 @@ msgstr "Armas"
 msgid "Website: "
 msgstr "Página Internet: "
 
-#: src/game/game_loop.cpp:693
+#: src/game/game_loop.cpp:719
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Que vergonha para o %s : foi morto por uma simples pistola!"
@@ -801,7 +797,7 @@ msgstr "A iniciar wormux..."
 msgid "Wormux version "
 msgstr "Wormux versão "
 
-#: src/include/action_handler.cpp:218
+#: src/include/action_handler.cpp:223
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr "Versões do Wormux diferentes: utilizador=%s, servidor=%s"
@@ -811,7 +807,7 @@ msgstr "Versões do Wormux diferentes: utilizador=%s, servidor=%s"
 msgid "XML error during loading map '%s' :"
 msgstr "Erro XML durante o carregamento do mapa '%s' :"
 
-#: src/menu/network_menu.cpp:233
+#: src/menu/network_menu.cpp:249
 msgid "You are alone..."
 msgstr "Você está sozinho..."
 
@@ -819,7 +815,7 @@ msgstr "Você está sozinho..."
 msgid "You need at least one valid map !"
 msgstr "Você precisa no mínimo de um mapa válido!"
 
-#: src/game/game_loop.cpp:208
+#: src/game/game_loop.cpp:173
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Você precisa de pelo menos duas equipas para jogar: corrija isto no 'menu "
@@ -833,9 +829,19 @@ msgstr "Você precisa de pelo menos duas equipas válidas!"
 msgid "Your shot has missed!"
 msgstr "O seu tiro falhou!"
 
+#: src/menu/credits_menu.cpp:68
+#, fuzzy
+msgid "aka"
+msgstr " também conhecido como "
+
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "feito"
+
+#: src/menu/credits_menu.cpp:72
+#, fuzzy
+msgid "from"
+msgstr " de "
 
 #. Display player's name
 #: src/interface/interface.cpp:166
@@ -856,3 +862,8 @@ msgstr "o carregar o perfil de som : %s"
 msgid "o Opened audio at %d Hz %d bit"
 msgstr "o Audio aberto a %d Hz %d bit"
 
+#~ msgid "Find a random position for characters"
+#~ msgstr "Encontre uma posição aleatória para os jogadores"
+
+#~ msgid "Initialise objects"
+#~ msgstr "Inicialização dos objectos"
