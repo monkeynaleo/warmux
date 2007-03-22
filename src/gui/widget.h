@@ -45,7 +45,7 @@ class Widget : public Rectanglei
 
   virtual void Update(const Point2i &mousePosition,
 		      const Point2i &lastMousePosition,
-		      Surface& surf); // virtual only for Box !!
+		      Surface& surf); // virtual only for Box and ListBox
   virtual void Draw(const Point2i &mousePosition, 
 		    Surface& surf) const = 0;
   virtual void ForceRedraw(); // set need_redrawing to true; -- virtual for widget_list

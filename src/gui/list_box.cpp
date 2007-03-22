@@ -27,8 +27,6 @@
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
 
-//#define SCROLLBAR
-
 ListBoxItem::ListBoxItem(const std::string& _label, 
 			 Font& _font,
 			 const std::string& _value,
@@ -47,14 +45,6 @@ const std::string& ListBoxItem::GetValue() const
 {
   return value;
 }
-
-// struct CompareItems
-// {
-//      bool operator()(const ListBoxItem& a, const ListBoxItem& b)
-//      {
-//        return a.GetLabel() < b.GetLabel();
-//      }
-// };
 
 ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(rect)
 {
@@ -76,6 +66,8 @@ ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(r
   background_color = defaultListColor1;
   selected_item_color = defaultListColor2;
   default_item_color = defaultListColor3;
+
+  scrolling = false;
 }
 
 ListBox::~ListBox()
@@ -101,7 +93,7 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
 
 Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
 {
-  need_redrawing = true;
+  scrolling = false;
 
   if (m_items.empty())
     return NULL;
@@ -149,7 +141,12 @@ Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
 
 Widget* ListBox::Click(const Point2i &mousePosition, uint button)
 {
-  return NULL;
+  if (!Contains(mousePosition)) return NULL;
+
+  if (ScrollBarPos().Contains(mousePosition) && button == SDL_BUTTON_LEFT) {
+    scrolling = true;
+  }
+  return this;
 }
 
 void ListBox::SetBorderColor(const Color & border)
@@ -170,6 +167,36 @@ void ListBox::SetSelectedItemColor(const Color & selected_item)
 void ListBox::SetDefaultItemColor(const Color & default_item)
 {
   default_item_color = default_item;
+}
+
+void ListBox::Update(const Point2i &mousePosition,
+		     const Point2i &lastMousePosition,
+		     Surface& surf)
+{
+  if (!Contains(mousePosition)) {
+    scrolling = false;
+  }
+
+  if ( 
+      need_redrawing 
+      || (Contains(mousePosition) && mousePosition != lastMousePosition) 
+      || (Contains(lastMousePosition) && !Contains(mousePosition))
+      ) 
+    {
+      if (ct != NULL) ct->Redraw(*this, surf);
+
+      // update position of items because of scrolling
+      if (scrolling && 
+	  mousePosition.y < GetPositionY() + GetSizeY() - 12 && 
+	  mousePosition.y > GetPositionY() + 12)
+	{
+	  first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20);
+	}
+
+      Draw(mousePosition, surf);
+    }
+  need_redrawing = false;
+  
 }
 
 void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
@@ -210,7 +237,7 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 
     // Really draw items
     Rectanglei rect2(pos.x, pos.y, 
-		     GetSizeX()-2, m_items.at(i)->GetSizeY() - 2);
+		     GetSizeX()-12, m_items.at(i)->GetSizeY() - 2);
 
     m_items.at(i)->SetSizePosition(rect2);
     if (draw_it) {
@@ -221,21 +248,23 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
   }
 
   // buttons for listbox with more items than visible
-  if (m_items.size() > local_max_visible_items){
+  if (first_visible_item != 0 || m_items.size() > local_max_visible_items){
     m_up->Draw(mousePosition, surf);
     m_down->Draw(mousePosition, surf);
-#ifdef SCROLLBAR
-    uint tmp_y, tmp_h;
-    tmp_y = y+10+ first_visible_item* (h-20) / m_items.size();
-    tmp_h = nb_visible_items_max * (h-20) / m_items.size();
-    if (tmp_h < 5) tmp_h =5;
 
-    boxRGBA(surf,
-	    x+w-10, tmp_y,
-	    x+w-1,  tmp_y+tmp_h,
-	    white_color);
-#endif
+    Rectanglei scrollbar = ScrollBarPos();
+    surf.BoxColor(scrollbar, (scrolling || scrollbar.Contains(mousePosition)) ? white_color : gray_color);
   }
+}
+
+Rectanglei ListBox::ScrollBarPos() const
+{
+  uint tmp_y, tmp_h;
+  tmp_y = GetPositionY()+ 10 + first_visible_item* (GetSizeY()-20) / m_items.size();
+  tmp_h = /*nb_visible_items_max * */(GetSizeY()-20) / m_items.size();
+  if (tmp_h < 5) tmp_h =5;
+  
+  return Rectanglei(GetPositionX()+GetSizeX()-11, tmp_y, 9,  /*tmp_y+*/tmp_h);
 }
 
 void ListBox::SetSizePosition(const Rectanglei &rect)
