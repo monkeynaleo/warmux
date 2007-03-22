@@ -79,10 +79,14 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
 
   m_cfg.LoadXml(m_name,xml_config);  // Load physics constants from the xml file
   ResetConstants();       // Set physics constants from the xml file
+
+  MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
 
 PhysicalObj::~PhysicalObj ()
-{}
+{
+  MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());
+}
 
 //---------------------------------------------------------------------------//
 //--                         Class Parameters SET/GET                      --//
