@@ -41,6 +41,11 @@ class MapElement {
 };
 
 class RandomMap {
+  enum {
+    DENTED_CIRCLE,
+    DENTED_TRAPEZE,
+    ROUNDED_RECTANGLE,
+  } island_type;
  protected:
    double border_size;
    bool is_open;

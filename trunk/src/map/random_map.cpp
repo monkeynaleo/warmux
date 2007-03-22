@@ -108,7 +108,7 @@ void RandomMap::Generate()
 {
   srand(time(NULL));
   // Computing number of island
-  number_of_island = 1; Random::GetInt(2, Random::GetInt(3, 10));
+  number_of_island = Random::GetInt(2, 4);
   // is_open = (Random::GetInt(0, 10) > 8); // Open ?
   is_open = true;
   // Initializing ground generator
@@ -153,16 +153,12 @@ void RandomMap::Generate()
   AddElement(element, Point2i(width / 2, height / 2));
   AddElement(element, Point2i(-20, 0));
   DrawElement();
-  Polygon * tmp = PolygonGenerator::GenerateCircle(300, 20);
-  tmp->ApplyTransformation(AffineTransform2D::Translate(width / 2, height / 2));
-  result.DrawPolygon(*tmp);
 }
 
 void RandomMap::GenerateIsland(double width, double height)
 {
-  double x_rand_offset = Random::GetDouble(10.0, 15.0);
-  double y_rand_offset = Random::GetDouble(10.0, 15.0);
-  double coef = Random::GetSign() * Random::GetDouble(0.5, 1.0);
+  int nb_of_point;
+  double x_rand_offset, y_rand_offset, coef;
   if(random_shape)
     delete random_shape;
   if(bezier_shape)
@@ -170,8 +166,23 @@ void RandomMap::GenerateIsland(double width, double height)
   if(expanded_bezier_shape)
     delete expanded_bezier_shape;
   // Generate a random shape
-  random_shape = PolygonGenerator::GenerateRandomTrapeze(width, height, x_rand_offset, y_rand_offset, coef);
-  bezier_shape = random_shape->GetBezierInterpolation();
+  switch(Random::GetInt(DENTED_CIRCLE, ROUNDED_RECTANGLE)) {
+    case DENTED_CIRCLE:
+      nb_of_point = Random::GetInt(5, 20);
+      x_rand_offset = width / Random::GetDouble(2.0, 15.0);
+      random_shape = PolygonGenerator::GenerateDentedCircle(width, nb_of_point, x_rand_offset);
+      break;
+    case ROUNDED_RECTANGLE:
+      random_shape = PolygonGenerator::GenerateRectangle(width, height);
+      break;
+    default: case DENTED_TRAPEZE:
+      x_rand_offset = Random::GetDouble(10.0, 15.0);
+      y_rand_offset = Random::GetDouble(10.0, 15.0);
+      coef = Random::GetSign() * Random::GetDouble(0.5, 1.0);
+      random_shape = PolygonGenerator::GenerateRandomTrapeze(width, height, x_rand_offset, y_rand_offset, coef);
+      break;
+  }
+  bezier_shape = random_shape->GetBezierInterpolation(1.0, 20, 1.5);
   expanded_bezier_shape = new Polygon(*bezier_shape);
   // Expand the random, bezier shape !
   expanded_bezier_shape->Expand(border_size);
