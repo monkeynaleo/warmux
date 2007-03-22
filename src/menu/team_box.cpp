@@ -112,11 +112,11 @@ void TeamBox::Update(const Point2i &mousePosition,
   need_redrawing = false;
 }
 
-Widget* TeamBox::Clic (const Point2i &mousePosition, uint button)
+Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (associated_team != NULL) {
 
-    Widget* w = WidgetList::Clic(mousePosition, button);
+    Widget* w = WidgetList::ClickUp(mousePosition, button);
 
     if ( !associated_team->IsLocal() && !associated_team->IsLocalAI() )
       return NULL; // it's not a local team, we can't configure it !!
@@ -128,6 +128,11 @@ Widget* TeamBox::Clic (const Point2i &mousePosition, uint button)
       return w;
     }
   }
+  return NULL;
+}
+
+Widget* TeamBox::Click(const Point2i &mousePosition, uint button)
+{
   return NULL;
 }
 

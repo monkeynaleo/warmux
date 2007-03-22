@@ -49,7 +49,8 @@ class MapSelectionBox : public HBox
 
   void ValidMapSelection();
   void ChangeMapCallback();
-  Widget* Clic(const Point2i &mousePosition, uint button);
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
 };
 
 

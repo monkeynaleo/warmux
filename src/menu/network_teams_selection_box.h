@@ -51,7 +51,8 @@ class NetworkTeamsSelectionBox : public HBox
   NetworkTeamsSelectionBox(const Rectanglei &rect);
 
   void ValidTeamsSelection();
-  Widget* Clic(const Point2i &mousePosition, uint button);
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void AddTeamCallback(std::string team_id);
   void UpdateTeamCallback(std::string team_id);

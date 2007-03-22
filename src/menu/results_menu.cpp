@@ -232,12 +232,17 @@ void ResultsMenu::SetResult(int i)
     biggest_traitor->SetResult(_("Nobody!"), 0);
 }
 
-void ResultsMenu::OnClic(const Point2i &mousePosition, int button)
+void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
   if (bt_prev_team->Contains(mousePosition))
     SetResult(index-1);
   else if ( bt_next_team->Contains(mousePosition))
     SetResult(index+1);
+}
+
+void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
+{
+  // Do nothing if user has not released the button
 }
 
 void ResultsMenu::Draw(const Point2i &mousePosition)

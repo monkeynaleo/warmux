@@ -99,7 +99,7 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
   return -1;
 }
 
-Widget* ListBox::Clic(const Point2i &mousePosition, uint button)
+Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
@@ -145,6 +145,11 @@ Widget* ListBox::Clic(const Point2i &mousePosition, uint button)
   else{
     return NULL;
   }
+}
+
+Widget* ListBox::Click(const Point2i &mousePosition, uint button)
+{
+  return NULL;
 }
 
 void ListBox::SetBorderColor(const Color & border)

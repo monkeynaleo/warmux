@@ -172,7 +172,7 @@ void MapSelectionBox::ChangeMap(int index)
     map_preview_after2->SetNoSurface();
 }
 
-Widget* MapSelectionBox::Clic (const Point2i &mousePosition, uint button)
+Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (display_only) return NULL;
 
@@ -193,7 +193,12 @@ Widget* MapSelectionBox::Clic (const Point2i &mousePosition, uint button)
   }
 
   return NULL;
-}  
+} 
+ 
+Widget* MapSelectionBox::Click(const Point2i &mousePosition, uint button)
+{
+  return NULL;
+}
 
 void MapSelectionBox::ValidMapSelection()
 {

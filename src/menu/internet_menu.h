@@ -37,7 +37,8 @@ class InternetMenu : public Menu
    ButtonText* refresh;
    ButtonText* connect;
 
-   void OnClic(const Point2i &mousePosition, int button);
+   void OnClick(const Point2i &mousePosition, int button);
+   void OnClickUp(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
    void RefreshList();
 

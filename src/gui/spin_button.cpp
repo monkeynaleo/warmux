@@ -94,7 +94,7 @@ void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
   txt_value->DrawCenterTop(center, position.y);
 }
 
-Widget* SpinButton::Clic(const Point2i &mousePosition, uint button)
+Widget* SpinButton::ClickUp(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
@@ -102,12 +102,16 @@ Widget* SpinButton::Clic(const Point2i &mousePosition, uint button)
       (button == SDL_BUTTON_LEFT && m_minus->Contains(mousePosition)) ){
     SetValue(m_value - m_step);
     return this;
-  } else
-  	if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-        (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
-    	SetValue(m_value + m_step);
-    	return this;
-  	}
+  } else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
+	     (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
+    SetValue(m_value + m_step);
+    return this;
+  }
+  return NULL;
+}
+
+Widget* SpinButton::Click(const Point2i &mousePosition, uint button)
+{
   return NULL;
 }
 

@@ -136,44 +136,49 @@ Main_Menu::Main_Menu() :
      jukebox.PlayMusic("menu");
 }
 
-void Main_Menu::button_clic()
+void Main_Menu::button_click()
 {
   jukebox.Play("share", "menu/clic");
 }
 
-void Main_Menu::OnClic(const Point2i &mousePosition, int button)
+void Main_Menu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  Widget* b = widgets.Clic(mousePosition,button);
-  if(b == play)
+  Widget* b = widgets.ClickUp(mousePosition,button);
+  if (b == play)
   {
     choice = menuPLAY;
     close_menu = true;
-    button_clic();
+    button_click();
   }
   else if(b == network && Config::GetInstance()->IsNetworkActivated())
   {
     choice = menuNETWORK;
     close_menu = true;
-    button_clic();
+    button_click();
   }
   else if(b == options)
   {
     choice = menuOPTIONS;
     close_menu = true;
-    button_clic();
+    button_click();
   }
   else if(b == infos)
   {
     choice = menuCREDITS;
     close_menu = true;
-    button_clic();
+    button_click();
   }
   else if(b == quit)
   {
     choice = menuQUIT;
     close_menu = true;
-    button_clic();
+    button_click();
   }
+}
+
+void Main_Menu::OnClick(const Point2i &mousePosition, int button)
+{
+  // nothing to do while button is still not released
 }
 
 menu_item Main_Menu::Run ()

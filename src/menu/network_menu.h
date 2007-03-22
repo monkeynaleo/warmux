@@ -55,7 +55,8 @@ class NetworkMenu : public Menu
   MapSelectionBox *map_box;
   
   void SaveOptions();
-  void OnClic(const Point2i &mousePosition, int button);
+  void OnClick(const Point2i &mousePosition, int button);
+  void OnClickUp(const Point2i &mousePosition, int button);
   void Draw(const Point2i &mousePosition);
   void SendChatMsg();
   

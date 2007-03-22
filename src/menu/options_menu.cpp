@@ -162,9 +162,14 @@ OptionMenu::~OptionMenu()
 {
 }
 
-void OptionMenu::OnClic(const Point2i &mousePosition, int button)
+void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  widgets.Clic(mousePosition, button);
+  widgets.ClickUp(mousePosition, button);
+}
+
+void OptionMenu::OnClick(const Point2i &mousePosition, int button)
+{
+
 }
 
 void OptionMenu::SaveOptions()

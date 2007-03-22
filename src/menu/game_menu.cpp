@@ -127,9 +127,14 @@ GameMenu::~GameMenu()
 {
 }
 
-void GameMenu::OnClic(const Point2i &mousePosition, int button)
+void GameMenu::OnClick(const Point2i &mousePosition, int button)
 {
-  widgets.Clic(mousePosition, button);
+  widgets.Click(mousePosition, button);
+}
+
+void GameMenu::OnClickUp(const Point2i &mousePosition, int button)
+{
+  widgets.ClickUp(mousePosition, button);
 }
 
 void GameMenu::SaveOptions()
