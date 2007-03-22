@@ -28,6 +28,7 @@ class PolygonGenerator {
  public:
    static const int MIN_SPACE_BETWEEN_POINT;
    static Polygon * GenerateCircle(double diameter, int nb_point);
+   static Polygon * GenerateDentedCircle(double diameter, int nb_point, double rand_offset);
    static Polygon * GenerateRectangle(double width, double height);
    static Polygon * GenerateRoundedRectangle(double width, double height, double edge);
    static Polygon * GenerateRandomShape();

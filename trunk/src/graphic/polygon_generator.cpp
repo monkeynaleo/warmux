@@ -27,24 +27,29 @@ const int PolygonGenerator::MIN_SPACE_BETWEEN_POINT = 50;
 
 Polygon * PolygonGenerator::GenerateCircle(double diameter, int nb_point)
 {
-  Polygon * tmp = new Polygon();
-  AffineTransform2D trans = AffineTransform2D();
-  Point2d top = Point2d(0.0, diameter / 2.0);
-  tmp->AddPoint(top);
-  for(int i = 1; i < nb_point; i++) {
-    trans.SetRotation((2.0 * M_PI * i) / nb_point);
-    tmp->AddPoint(trans * top);
-  }
-  return tmp;
+  return PolygonGenerator::GenerateDentedCircle(diameter, nb_point, 0.0);
 }
 
 Polygon * PolygonGenerator::GenerateRectangle(double width, double height)
 {
   Polygon * tmp = new Polygon();
-  tmp->AddPoint(Point2d(-width / 2.0, -height / 2.0));
-  tmp->AddPoint(Point2d( width / 2.0, -height / 2.0));
   tmp->AddPoint(Point2d( width / 2.0,  height / 2.0));
+  tmp->AddPoint(Point2d( width / 2.0, -height / 2.0));
+  tmp->AddPoint(Point2d(-width / 2.0, -height / 2.0));
   tmp->AddPoint(Point2d(-width / 2.0,  height / 2.0));
+  return tmp;
+}
+
+Polygon * PolygonGenerator::GenerateDentedCircle(double diameter, int nb_point, double rand_offset)
+{
+  Polygon * tmp = new Polygon();
+  AffineTransform2D trans = AffineTransform2D();
+  Point2d top;
+  for(int i = 0; i < nb_point; i++) {
+    top = Point2d(0.0, (diameter + Random::GetDouble(-rand_offset, rand_offset)) / 2.0);
+    trans.SetRotation((2.0 * M_PI * -i) / nb_point);
+    tmp->AddPoint(trans * top);
+  }
   return tmp;
 }
 
