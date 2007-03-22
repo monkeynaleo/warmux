@@ -65,11 +65,11 @@ std::string Author::PrettyString(bool with_email)
    }
    if (!nickname.empty())
    {
-     ss << _(" aka ") << nickname;
+     ss << " " << _("aka") << " " << nickname;
    }
    if (!country.empty())
    {
-     ss << _(" from ") << country;
+     ss << " " << _("from") << " " << country;
    }
    ss << ": " << description;
    return ss.str();
