@@ -61,7 +61,13 @@ class Polygon {
   void Init();
   // Point handling
   void AddPoint(const Point2d & p);
+  void InsertPoint(int index, const Point2d & p);
+  void DeletePoint(int index, const Point2d & p);
   void ApplyTransformation(const AffineTransform2D & trans);
+  // Use to randomize a construction
+  Point2d GetRandomUpperPoint();
+  int GetRandomPointIndex();
+  // Interpolation handling
   void AddBezierCurve(const Point2d anchor1, const Point2d control1,
                              const Point2d control2, const Point2d anchor2,
                              const int num_steps = 20, const bool add_first_point = true,
@@ -70,17 +76,18 @@ class Polygon {
                       const double x_random_offset, const double y_random_offset,
                       const int num_steps, const bool add_first_point = true,
                       const bool add_last_point = true);
-  Polygon * GetBezierInterpolation(const double smooth_value = 1.0, const int num_steps = 20);
+  Polygon * GetBezierInterpolation(double smooth_value = 1.0, int num_steps = 20, double rand = 0.0);
   void Expand(const double expand_value);
 
+  // Size information
   double GetWidth() const;
   double GetHeight() const;
   Point2d GetSize() const;
   int GetNbOfPoint() const;
 
-  Point2d GetRandomUpperPoint();
-
+  // Buffer of transformed point
   PolygonBuffer * GetPolygonBuffer() const;
+
   // Type of the polygon
   bool IsTextured() const;
   bool IsPlaneColor() const;

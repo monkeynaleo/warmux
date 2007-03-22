@@ -122,6 +122,39 @@ void Polygon::AddPoint(const Point2d & p)
   min = p.min(min);
 }
 
+void Polygon::InsertPoint(int index, const Point2d & p)
+{
+  std::vector<Point2d> vector_tmp;
+  std::vector<Point2d>::iterator point;
+  Point2d tmp;
+  int i = 0;
+  shape_buffer->SetSize(original_shape.size() + 1);
+  // Inserting first part of the point
+  for(point = original_shape.begin();
+      point != original_shape.end() && i < index; point++, i++) {
+    tmp = *point;
+    vector_tmp.push_back(tmp);
+    shape_buffer->vx[i] = (int)tmp.x;
+    shape_buffer->vy[i] = (int)tmp.y;
+  }
+  // Inserting a new point
+  vector_tmp.push_back(p);
+  shape_buffer->vx[i] = (int)p.x;
+  shape_buffer->vy[i++] = (int)p.y;
+  // And interting remaining point of previous shape
+  for(; point != original_shape.end(); point++, i++) {
+    tmp = *point;
+    vector_tmp.push_back(tmp);
+    shape_buffer->vx[i] = (int)tmp.x;
+    shape_buffer->vy[i] = (int)tmp.y;
+  }
+  original_shape = vector_tmp;
+}
+
+void Polygon::DeletePoint(int index, const Point2d & p)
+{
+}
+
 double Polygon::GetWidth() const
 {
   return max.x - min.x;
@@ -202,11 +235,12 @@ void Polygon::AddRandomCurve(const Point2d start, const Point2d end,
 }
 
 // Generate a new polygon with Bezier interpolation
-Polygon * Polygon::GetBezierInterpolation(double smooth_value, const int num_steps)
+Polygon * Polygon::GetBezierInterpolation(double smooth_value, int num_steps, double rand)
 {
   Point2d p0, p1, p2, p3, c0, c1, c2, v1, v2;
   Polygon * shape = new Polygon();
   double l1, l2, l3;
+  AffineTransform2D trans = AffineTransform2D();
   for(int index_p1 = 0; index_p1 < (int)original_shape.size(); index_p1++) {
     p0 = original_shape[(index_p1 == 0 ? original_shape.size() : index_p1) - 1];
     p1 = original_shape[index_p1];
@@ -226,6 +260,14 @@ Polygon * Polygon::GetBezierInterpolation(double smooth_value, const int num_ste
     // Point control
     v1 = (c1 - c0) * (l2 / (l1 + l2)) * smooth_value;
     v2 = (c1 - c2) * (l2 / (l2 + l3)) * smooth_value;
+
+    // Randomization
+    if(rand != 0.0) {
+      trans.SetRotation(Random::GetDouble(-rand, rand));
+      v1 = trans * v1;
+      trans.SetRotation(Random::GetDouble(-rand, rand));
+      v2 = trans * v2;
+    }
 
     shape->AddBezierCurve(p1, v1, v2, p2, num_steps, false);
   }
