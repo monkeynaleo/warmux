@@ -72,7 +72,6 @@ Keyboard::Keyboard()
   SetKeyAction(SDLK_b,         Keyboard::KEY_BACK_JUMP);
   SetKeyAction(SDLK_SPACE,     Keyboard::KEY_SHOOT);
   SetKeyAction(SDLK_TAB,       Keyboard::KEY_NEXT_CHARACTER);
-  SetKeyAction(SDLK_q,         Keyboard::KEY_PREVIOUS_CHARACTER);
   SetKeyAction(SDLK_ESCAPE,    Keyboard::KEY_QUIT);
   SetKeyAction(SDLK_p,         Keyboard::KEY_PAUSE);
   SetKeyAction(SDLK_F10,       Keyboard::KEY_FULLSCREEN);
@@ -423,25 +422,26 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
     
     switch(key) {
 
-    case KEY_NEXT_CHARACTER:
-      if (GameMode::GetInstance()->AllowCharacterSelection()) {
-	Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
-	next_character->StoreActiveCharacter();
-	ActiveTeam().NextCharacter();
-	next_character->StoreActiveCharacter();
-	ActionHandler::GetInstance()->NewAction(next_character);
+    case KEY_NEXT_CHARACTER: 
+      {
+	if (GameMode::GetInstance()->AllowCharacterSelection()) {
+	  SDLMod mod = SDL_GetModState();
+	  if (mod & KMOD_CTRL) {
+	    Action * previous_character = new Action(Action::ACTION_PLAYER_PREVIOUS_CHARACTER);
+	    previous_character->StoreActiveCharacter();
+	    ActiveTeam().PreviousCharacter();
+	    previous_character->StoreActiveCharacter();
+	    ActionHandler::GetInstance()->NewAction(previous_character);
+	  } else {
+	    Action * next_character = new Action(Action::ACTION_PLAYER_NEXT_CHARACTER);
+	    next_character->StoreActiveCharacter();
+	    ActiveTeam().NextCharacter();
+	    next_character->StoreActiveCharacter();
+	    ActionHandler::GetInstance()->NewAction(next_character);
+	  }
+	}
       }
       return;
-
-    case KEY_PREVIOUS_CHARACTER:
-      if (GameMode::GetInstance()->AllowCharacterSelection()) {
-        Action * previous_character = new Action(Action::ACTION_PLAYER_PREVIOUS_CHARACTER);
-        previous_character->StoreActiveCharacter();
-        ActiveTeam().PreviousCharacter();
-        previous_character->StoreActiveCharacter();
-        ActionHandler::GetInstance()->NewAction(previous_character);
-      }
-      return ;
 
     case KEY_WEAPONS1:
       weapon_sort = 1;

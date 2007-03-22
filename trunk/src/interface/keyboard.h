@@ -45,7 +45,7 @@ public:
     KEY_WEAPON_4,    KEY_WEAPON_5,                KEY_WEAPON_6,
     KEY_WEAPON_7,    KEY_WEAPON_8,                KEY_WEAPON_9,
     KEY_WEAPON_LESS, KEY_WEAPON_MORE,             
-    KEY_PREVIOUS_CHARACTER,                       KEY_NEXT_CHARACTER,
+    KEY_NEXT_CHARACTER,
   } Key_t;
 
 private:
