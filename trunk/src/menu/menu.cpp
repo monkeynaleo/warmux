@@ -83,7 +83,7 @@ void Menu::sig_cancel()
   close_menu = true;
 }
 
-bool Menu::BasicOnClic(const Point2i &mousePosition)
+bool Menu::BasicOnClickUp(const Point2i &mousePosition)
 {
   if( b_ok != NULL &&  b_ok->Contains(mousePosition) )
     sig_ok();
@@ -126,37 +126,40 @@ void Menu::Run ()
     // Poll and treat events
     SDL_Event event;
      
-    while( SDL_PollEvent( &event) )
+    while (SDL_PollEvent(&event))
     {
       Point2i mousePosition(event.button.x, event.button.y);
 	   
-      if( event.type == SDL_QUIT )
+      if (event.type == SDL_QUIT) {
         sig_cancel();
-      else if( event.type == SDL_KEYDOWN )
-        switch( event.key.keysym.sym)
-        {
-        case SDLK_ESCAPE:
-          if(b_cancel != NULL)
-            sig_cancel();
-          else
-            key_cancel();
-          break;
-        case SDLK_RETURN:
-          if(b_ok != NULL)
-            sig_ok();
-          else
-            key_ok();
-          break;
-        case SDLK_F10:
-          AppWormux::GetInstance()->video.ToggleFullscreen();
-          break;
-        default:
-          widgets.SendKey(event.key.keysym);
-          break;
-        }
-      else if( event.type == SDL_MOUSEBUTTONUP)
-      if( !BasicOnClic(mousePosition) )
-        OnClic(mousePosition, event.button.button);
+      } else if (event.type == SDL_KEYDOWN) {
+        switch (event.key.keysym.sym)
+	  {
+	  case SDLK_ESCAPE:
+	    if (b_cancel != NULL)
+	      sig_cancel();
+	    else
+	      key_cancel();
+	    break;
+	  case SDLK_RETURN:
+	    if (b_ok != NULL)
+	      sig_ok();
+	    else
+	      key_ok();
+	    break;
+	  case SDLK_F10:
+	    AppWormux::GetInstance()->video.ToggleFullscreen();
+	    break;
+	  default:
+	    widgets.SendKey(event.key.keysym);
+	    break;
+	  }
+      } else if (event.type == SDL_MOUSEBUTTONUP) {
+	if (!BasicOnClickUp(mousePosition))
+	  OnClickUp(mousePosition, event.button.button);
+      } else if (event.type == SDL_MOUSEBUTTONDOWN) {
+	OnClick(mousePosition, event.button.button);
+      }
     }
 
     // Avoid to calculate redraw menu when comming back for closing.

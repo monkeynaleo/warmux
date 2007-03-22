@@ -44,7 +44,8 @@ class Box : public WidgetList
 	    Surface& surf) const;
   void Redraw(const Rectanglei& rect,
 	      Surface& surf);
-  Widget* Clic(const Point2i &mousePosition, uint button);
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void SetMargin(uint _margin);
   void SetBorder(const Point2i &newBorder);

@@ -59,7 +59,8 @@ class ResultsMenu : public Menu
     void __sig_cancel() { };
     
     void SetResult(int i);
-    void OnClic(const Point2i &mousePosition, int button);
+    void OnClick(const Point2i &mousePosition, int button);
+    void OnClickUp(const Point2i &mousePosition, int button);
     void Draw(const Point2i &mousePosition);
  public:
     ResultsMenu(const std::vector<TeamResults*>* v,

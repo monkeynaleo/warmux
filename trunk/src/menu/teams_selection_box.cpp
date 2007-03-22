@@ -84,11 +84,11 @@ TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
   }
 }
 
-Widget* TeamsSelectionBox::Clic (const Point2i &mousePosition, uint button)
+Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (!Contains(mousePosition)) return NULL;
 
-  if (teams_nb->Clic(mousePosition, button)){
+  if (teams_nb->ClickUp(mousePosition, button)){
     SetNbTeams(teams_nb->GetValue());
 
   } else {
@@ -96,7 +96,7 @@ Widget* TeamsSelectionBox::Clic (const Point2i &mousePosition, uint button)
 
       if ( teams_selections.at(i)->Contains(mousePosition) ) {
 	
-	Widget * w = teams_selections.at(i)->Clic(mousePosition, button);
+	Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
 
 	if ( w == NULL ) {
 	  if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
@@ -112,6 +112,11 @@ Widget* TeamsSelectionBox::Clic (const Point2i &mousePosition, uint button)
     }
   }
 
+  return NULL;
+}
+
+Widget* TeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
+{
   return NULL;
 }
 

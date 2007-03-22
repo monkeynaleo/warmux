@@ -161,19 +161,23 @@ NetworkMenu::~NetworkMenu()
 {
 }
 
-void NetworkMenu::OnClic(const Point2i &mousePosition, int button)
+void NetworkMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  Widget* w = widgets.Clic(mousePosition, button);
+  Widget* w = widgets.ClickUp(mousePosition, button);
 
-  if(player_number != NULL && w == player_number)
+  if (player_number != NULL && w == player_number)
   {
     Network::GetInstanceServer()->SetMaxNumberOfPlayers(player_number->GetValue());
   }
-
-  if(w == send_txt_bt)
+  else if (w == send_txt_bt)
   {
     SendChatMsg();
   }
+}
+
+void NetworkMenu::OnClick(const Point2i &mousePosition, int button)
+{
+  widgets.Click(mousePosition, button);
 }
 
 void NetworkMenu::SendChatMsg()

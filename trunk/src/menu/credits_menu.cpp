@@ -182,9 +182,14 @@ void CreditsMenu::Draw(const Point2i& mousePosition)
 {
 }
 
-void CreditsMenu::OnClic(const Point2i &mousePosition, int button)
+void CreditsMenu::OnClick(const Point2i &mousePosition, int button)
 {
-  widgets.Clic(mousePosition, button);
+  widgets.Click(mousePosition, button);
+}
+
+void CreditsMenu::OnClickUp(const Point2i &mousePosition, int button)
+{
+  widgets.ClickUp(mousePosition, button);
 }
 
 //-----------------------------------------------------------------------------

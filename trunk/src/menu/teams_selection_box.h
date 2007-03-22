@@ -50,7 +50,8 @@ class TeamsSelectionBox : public HBox
   TeamsSelectionBox(const Rectanglei &rect);
 
   void ValidTeamsSelection();
-  Widget* Clic(const Point2i &mousePosition, uint button);
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
 };
 
 #endif

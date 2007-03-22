@@ -46,7 +46,8 @@ public:
 
   // methods specialized from Widget to manage the list of widgets
   virtual void SendKey(SDL_keysym key);
-  virtual Widget* Clic(const Point2i &mousePosition, uint button);
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
   virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
 
   // needed to implements Widget

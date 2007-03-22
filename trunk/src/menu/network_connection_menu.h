@@ -57,7 +57,8 @@ class NetworkConnectionMenu : public Menu
 
    MsgBox *msg_box;
 
-   void OnClic(const Point2i &mousePosition, int button);
+   void OnClick(const Point2i &mousePosition, int button);
+   void OnClickUp(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
 
    void SetAction(network_menu_action_t action);

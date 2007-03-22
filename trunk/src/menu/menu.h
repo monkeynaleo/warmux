@@ -65,7 +65,7 @@ private:
    /* Actions buttons  */
    HBox *actions_buttons;
 
-   bool BasicOnClic(const Point2i &mousePosition);
+   bool BasicOnClickUp(const Point2i &mousePosition);
 
 protected:
    Button *b_cancel;
@@ -80,8 +80,14 @@ protected:
    virtual void key_cancel() {};
    virtual void __sig_ok() = 0;
    virtual void __sig_cancel() = 0;
-   virtual void Draw(const Point2i &mousePosition) = 0;   
-   virtual void OnClic(const Point2i &mousePosition, int button) = 0;
+   virtual void Draw(const Point2i &mousePosition) = 0; 
+  
+   // we have released the button
+   virtual void OnClickUp(const Point2i &mousePosition, int button) = 0; 
+
+   // we have clicked but still not released the button
+   virtual void OnClick(const Point2i &mousePosition, int button) = 0;
+
    void SetActionButtonsXY(int x, int y);
    void Display(const Point2i& mousePosition);
 };

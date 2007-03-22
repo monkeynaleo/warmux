@@ -105,7 +105,7 @@ void SpinButtonBig::Draw(const Point2i &mousePosition, Surface& surf) const
 			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 }
 
-Widget* SpinButtonBig::Clic(const Point2i &mousePosition, uint button)
+Widget* SpinButtonBig::ClickUp(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
@@ -119,6 +119,11 @@ Widget* SpinButtonBig::Clic(const Point2i &mousePosition, uint button)
     	SetValue(m_value + m_step);
     	return this;
   	}
+  return NULL;
+}
+
+Widget* SpinButtonBig::Click(const Point2i &mousePosition, uint button)
+{
   return NULL;
 }
 

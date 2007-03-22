@@ -84,7 +84,7 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition, Surface& surf) co
 			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 }
 
-Widget* SpinButtonWithPicture::Clic(const Point2i &mousePosition, uint button)
+Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
@@ -110,6 +110,11 @@ Widget* SpinButtonWithPicture::Clic(const Point2i &mousePosition, uint button)
     SetValue(m_value + m_step);
     return this;
   }
+  return NULL;
+}
+
+Widget* SpinButtonWithPicture::Click(const Point2i &mousePosition, uint button)
+{
   return NULL;
 }
 

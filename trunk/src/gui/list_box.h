@@ -73,7 +73,8 @@ public:
   ~ListBox();
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
-  Widget* Clic(const Point2i &mousePosition, uint button);
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
   void AddItem(bool selected, const std::string &label,

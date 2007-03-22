@@ -75,13 +75,13 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Rectanglei &rect) : HBo
   }
 }
 
-Widget* NetworkTeamsSelectionBox::Clic (const Point2i &mousePosition, uint button)
+Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 {
   if (!Contains(mousePosition)) return NULL;
 
   uint current_nb_teams = local_teams_nb->GetValue();
 
-  if (local_teams_nb->Clic(mousePosition, button)){
+  if (local_teams_nb->ClickUp(mousePosition, button)){
     SetNbLocalTeams(local_teams_nb->GetValue(), current_nb_teams);
 
   } else {
@@ -90,7 +90,7 @@ Widget* NetworkTeamsSelectionBox::Clic (const Point2i &mousePosition, uint butto
       if ( teams_selections.at(i)->Contains(mousePosition) && 
 	   teams_selections.at(i)->IsLocal() ) {
 	
-	Widget * w = teams_selections.at(i)->Clic(mousePosition, button);
+	Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
 
 	if ( w == NULL ) {
 	  if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
@@ -106,6 +106,11 @@ Widget* NetworkTeamsSelectionBox::Clic (const Point2i &mousePosition, uint butto
     }
   }
 
+  return NULL;
+}
+
+Widget* NetworkTeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
+{
   return NULL;
 }
 

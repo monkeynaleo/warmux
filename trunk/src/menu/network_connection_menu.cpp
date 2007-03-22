@@ -116,9 +116,9 @@ NetworkConnectionMenu::~NetworkConnectionMenu()
 {
 }
 
-void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
+void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  Widget* w = widgets.Clic(mousePosition, button);
+  Widget* w = widgets.ClickUp(mousePosition, button);
 
   if ((w == next_action_bt) ||
       (w == action_label && (button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN)))
@@ -153,6 +153,10 @@ void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
       }
       return;
     }
+}
+
+void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
+{
 }
 
 void NetworkConnectionMenu::SetAction(network_menu_action_t action)

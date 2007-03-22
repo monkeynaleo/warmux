@@ -75,9 +75,9 @@ InternetMenu::~InternetMenu()
 {
 }
 
-void InternetMenu::OnClic(const Point2i &mousePosition, int button)
+void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
 {     
-  Widget* w = widgets.Clic(mousePosition, button);  
+  Widget* w = widgets.ClickUp(mousePosition, button);  
 
   if (w == refresh)
     RefreshList();
@@ -95,6 +95,11 @@ void InternetMenu::OnClic(const Point2i &mousePosition, int button)
       DispNetworkError(conn);
     }
   }
+}
+
+void InternetMenu::OnClick(const Point2i &mousePosition, int button)
+{     
+  widgets.Click(mousePosition, button); 
 }
 
 void InternetMenu::RefreshList()

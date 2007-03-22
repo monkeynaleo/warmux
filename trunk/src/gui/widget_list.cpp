@@ -89,7 +89,7 @@ void WidgetList::SendKey(SDL_keysym key)
     last_clicked -> SendKey(key);
 }
 
-Widget* WidgetList::Clic(const Point2i &mousePosition, uint button)
+Widget* WidgetList::ClickUp(const Point2i &mousePosition, uint button)
 {
   for(std::list<Widget*>::iterator w=widget_list.begin();
       w != widget_list.end();
@@ -97,12 +97,26 @@ Widget* WidgetList::Clic(const Point2i &mousePosition, uint button)
   {
     if((*w)->Contains(mousePosition))
     {
-      Widget* child = (*w)->Clic(mousePosition,button);
+      Widget* child = (*w)->ClickUp(mousePosition,button);
       if(child != NULL)
       {
 	SetFocusOn(child);
         return child;
       }
+    }
+  }
+  return NULL;
+}
+
+Widget* WidgetList::Click(const Point2i &mousePosition, uint button)
+{
+  for(std::list<Widget*>::iterator w=widget_list.begin();
+      w != widget_list.end();
+      w++)
+  {
+    if((*w)->Contains(mousePosition))
+    {
+      (*w)->Click(mousePosition,button);
     }
   }
   return NULL;

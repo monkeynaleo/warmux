@@ -51,7 +51,8 @@ class Widget : public Rectanglei
   virtual void ForceRedraw(); // set need_redrawing to true; -- virtual for widget_list
 
   virtual void SendKey(SDL_keysym key);
-  virtual Widget* Clic(const Point2i &mousePosition, uint button);
+  virtual Widget* Click(const Point2i &mousePosition, uint button);
+  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
 
   void SetContainer(Container * _ct);
 

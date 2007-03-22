@@ -54,7 +54,8 @@ class TeamBox : public HBox
   void Update(const Point2i &mousePosition,
 	      const Point2i &lastMousePosition,
 	      Surface& surf);
-  Widget* Clic(const Point2i &mousePosition, uint button);
+  Widget* Click(const Point2i &mousePosition, uint button);
+  Widget* ClickUp(const Point2i &mousePosition, uint button);
 };
 
 #endif
