@@ -14,7 +14,7 @@
   <surface name="preview" file="preview.jpg" />
   <surface name="texture" file="texture.png" />
   <surface name="element" file="palm-tree.png" />
-
+  <color name="border_color" r="234" g="219" b="106" a="255" />
   <name>Random Island</name>
   <water>1</water>
   <nb_mine>10</nb_mine>
