@@ -27,6 +27,8 @@
   <sound sample="weapon/airhammer" file="../../weapon/sound/airhammer.ogg" />
   <sound sample="weapon/anvil_fall" file="../../weapon/sound/anvil_fall.ogg" />
   <sound sample="weapon/anvil_collision" file="../../weapon/sound/anvil_collision.ogg" />
+  <sound sample="weapon/supertux_flying" file="../../weapon/sound/supertux_flying.ogg" />
+
 
   <sound sample="music/grenouilles" file="frog_music.ogg" />
 

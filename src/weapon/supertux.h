@@ -43,6 +43,7 @@ class SuperTux : public WeaponProjectile
   private:
     ParticleEngine particle_engine;
     double angle_rad;
+    int sound_channel;
 
   public:
     uint speed;
