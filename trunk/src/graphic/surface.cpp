@@ -627,12 +627,10 @@ int Surface::ImgSave(std::string filename){
   FILE *f             = NULL;
   png_structp png_ptr = NULL;
   png_infop info_ptr  = NULL;
-  Uint8 *ptr          = (Uint8 *)(surface->pixels);
-  int height          = surface->h;
-  // Same dirty hack as in tileitemp.cpp : there is no obvious reason it should work, but with this it works (TM)
-  // WE NEED TO KNOW WHY !!!
-  // It's seems that this hack is not needed if we work with little image. But when we want to save a map, we need this ...
-  ptr++;
+  Uint32 spr_pix;
+  Uint8 r, g, b, a;
+  SDL_PixelFormat * spr_fmt = surface->format;
+
   // Creating a png ...
   png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
   if(png_ptr == NULL) // Structure and ...
@@ -653,12 +651,26 @@ int Surface::ImgSave(std::string filename){
 
   // Creating the png file
   png_write_info(png_ptr, info_ptr);
-  png_set_bgr(png_ptr); // Set byte order to blue green red.
-  while(height > 0) {
-    png_write_row(png_ptr, ptr);
-    ptr += surface->pitch;
-    height--;
+
+  Lock();
+  Uint8 tmp_line[surface->w * spr_fmt->BytesPerPixel];
+  for(int y = 0; y < surface->h; y++) {
+    for(int x = 0; x < surface->w; x++) {
+      // Retrieving a pixel of sprite to merge
+      spr_pix = ((Uint32*)surface->pixels)[y * surface->w  + x];
+      // Retreiving each chanel of the pixel using pixel format
+      r = (Uint8)(((spr_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
+      g = (Uint8)(((spr_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
+      b = (Uint8)(((spr_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
+      a = (Uint8)(((spr_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
+      tmp_line[x * spr_fmt->BytesPerPixel] = r;
+      tmp_line[x * spr_fmt->BytesPerPixel + 1] = g;
+      tmp_line[x * spr_fmt->BytesPerPixel + 2] = b;
+      tmp_line[x * spr_fmt->BytesPerPixel + 3] = a;
+    }
+    png_write_row(png_ptr, (Uint8 *)tmp_line);
   }
+  Unlock();
   png_write_flush(png_ptr);
   png_write_end(png_ptr, info_ptr);
   fclose(f);

@@ -124,6 +124,10 @@ void Polygon::AddPoint(const Point2d & p)
 
 void Polygon::InsertPoint(int index, const Point2d & p)
 {
+  if(index == GetNbOfPoint()) {
+    AddPoint(p);
+    return;
+  }
   std::vector<Point2d> vector_tmp;
   std::vector<Point2d>::iterator point;
   Point2d tmp;
