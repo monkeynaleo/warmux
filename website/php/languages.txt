@@ -20,6 +20,7 @@ ca=Catalan
 ce=Chechen
 ch=Chamorro
 co=Corsican
+cpf=Réunion
 cs=Czech
 cu=Church Slavic
 cv=Chuvash
