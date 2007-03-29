@@ -145,16 +145,18 @@ void Game::Start()
       MSG_DEBUG( "game", "End of game_loop.Run()" );
       isGameLaunched = false;
 
-      if (want_end_of_game)
-      {
+      //This commented code is apparently here for some reason, and has been for a while,
+      //however, it breaks the pause menu. It didn't always though...
+      //if (want_end_of_game)
+      //{
         if (Time::GetInstance()->IsGamePaused()){
           DisplayPause();
         } else {
           end = DisplayQuit();
         }
-      }
-      else
-        end = true;
+      //}
+      //else
+      //  end = true;
 
       if (!end)
       {
