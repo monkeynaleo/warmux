@@ -51,18 +51,17 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
   m_x_force = 0.0;
   m_y_force = 0.0;
   channel = -1;
-
 }
 
 void JetPack::Refresh()
 {
-  if(!ActiveTeam().IsLocal())
-    return;
-
-  Point2d F;
-
   if (m_is_active)
   {
+    if (!ActiveTeam().IsLocal()) {
+      return;
+    }
+
+    Point2d F;
     F.x = m_x_force ;
     F.y = m_y_force ;
 
@@ -179,32 +178,50 @@ void JetPack::StopRight()
 
 void JetPack::HandleKeyPressed_Up()
 {
-  GoUp();
+  if (m_is_active)
+    GoUp();
+  else
+    ActiveCharacter().HandleKeyPressed_Up();
 }
 
 void JetPack::HandleKeyReleased_Up()
 {
-  StopUp();
+  if (m_is_active)
+    StopUp();
+  else
+    ActiveCharacter().HandleKeyReleased_Up();
 }
 
 void JetPack::HandleKeyPressed_MoveLeft()
 {
-  GoLeft();
+  if (m_is_active)
+    GoLeft();
+  else
+    ActiveCharacter().HandleKeyPressed_MoveLeft();
 }
 
 void JetPack::HandleKeyReleased_MoveLeft()
 {
-  StopLeft();
+  if (m_is_active)
+    StopLeft();
+  else
+    ActiveCharacter().HandleKeyReleased_MoveLeft();
 }
 
 void JetPack::HandleKeyPressed_MoveRight()
 {
-  GoRight();
+  if (m_is_active)
+    GoRight();
+  else
+    ActiveCharacter().HandleKeyPressed_MoveRight();
 }
 
 void JetPack::HandleKeyReleased_MoveRight()
-{
-  StopRight();
+{  
+  if (m_is_active)
+    StopRight();
+  else
+    ActiveCharacter().HandleKeyReleased_MoveRight();
 }
 
 void JetPack::HandleKeyPressed_Shoot()
