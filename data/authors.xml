@@ -97,6 +97,13 @@
   <contributors>
     <section title="Translations">
       <author>
+        <nickname>GG</nickname>
+        <name>Jérôme Gallard</name>
+	<description>Créole Réyoné translation</description>
+	<email>jeronimo974_AT_gmail_DOT_com</email>
+	<country>France</country>
+      </author>
+      <author>
 	<nickname>mabu</nickname>
 	<name>Marko Burjek</name>
 	<description>Slovenian translation</description>
