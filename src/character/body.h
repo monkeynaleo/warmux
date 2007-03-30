@@ -130,6 +130,7 @@ public:
 
   void MakeParticles(const Point2i& pos);
   void MakeTeleportParticles(const Point2i& pos, const Point2i& dst);
+  void DebugState();
 };
 
 #endif //BODY_H

@@ -243,10 +243,8 @@ void Weapon::NewActionShoot() const
 
 void Weapon::PrepareShoot(double strength, double angle)
 {
-  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f, position:%d,%d", 
-	    strength, angle,
-	    ActiveCharacter().GetHandPosition().GetX(),
-	    ActiveCharacter().GetHandPosition().GetY());
+  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f", 
+	    strength, angle);
   ActiveCharacter().SetFiringAngle(angle);
   m_strength = strength;
   StopLoading();
@@ -283,6 +281,13 @@ bool Weapon::Shoot()
 
   MSG_DEBUG("weapon.shoot", "Enough ammo");
 
+  MSG_DEBUG("weapon.shoot", "%s Shooting at position:%d,%d (hand: %d,%d)", 
+	    ActiveCharacter().GetName().c_str(),
+	    ActiveCharacter().GetX(),
+	    ActiveCharacter().GetY(),
+	    ActiveCharacter().GetHandPosition().GetX(),
+	    ActiveCharacter().GetHandPosition().GetY());
+  ActiveCharacter().body->DebugState();
   if (!p_Shoot()) return false;
   m_last_fire_time = Time::GetInstance()->Read();
 
