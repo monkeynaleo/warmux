@@ -641,3 +641,13 @@ void Body::SetRotation(double angle)
 
 const std::string& Body::GetMovement() { return current_mvt->type; }
 const std::string& Body::GetClothe() { return current_clothe->name; }
+
+void Body::DebugState()
+{
+	MSG_DEBUG("body.state", "clothe: %s\tmovement: %s\t%i", current_clothe->name.c_str(),current_mvt->type.c_str(), current_frame);
+	MSG_DEBUG("body.state", "(played once)clothe: %s\tmovement: %s",
+			(play_once_clothe_sauv?play_once_clothe_sauv->name.c_str():"(NULL)"),
+			(play_once_mvt_sauv?play_once_mvt_sauv->type.c_str():"(NULL)"),
+			play_once_frame_sauv);
+	MSG_DEBUG("body.state", "need rebuild = %i",need_rebuild);
+}

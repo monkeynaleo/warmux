@@ -429,7 +429,6 @@ void Character::Draw()
 
   if(prepare_shoot)
   {
-    body->Build(); // Refresh the body
     if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
     {
       // if the movement is finnished, shoot !
@@ -535,6 +534,7 @@ bool Character::IsPreparingShoot()
 void Character::DoShoot()
 {
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
+  body->Build(); // Refresh the body
   ActiveTeam().AccessWeapon().Shoot();
 }
 
