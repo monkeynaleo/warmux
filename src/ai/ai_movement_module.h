@@ -42,8 +42,8 @@ class AIMovementModule
   Point2i destination_point;
  public:
   void SetDestinationPoint(Point2i destination_point);
-  static bool SeemsToBeReachable(const Character& shooter,
-				 const Character& enemy); // replace method IsNear()
+  bool SeemsToBeReachable(const Character& shooter, // must be ActiveCharacter()
+			  const Character& enemy) const;
   bool IsProgressing();
   bool IsArrived();
   // ======================================
@@ -65,7 +65,7 @@ class AIMovementModule
   uint time_at_last_position; 
   Point2i last_blocked_position;
   
-  void InverseDirection();
+  void InverseDirection(bool completely_blocked);
 
   void MakeStep();
 
