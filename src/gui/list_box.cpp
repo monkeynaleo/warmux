@@ -221,7 +221,7 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 		    m_items.at(i)->GetSizeY() - 2);
 
     // no more place to add item
-    if (draw_it && rect.GetPositionY() + rect.GetSizeY() > GetPositionY() + GetSizeY()) {
+    if (draw_it && rect.GetPositionY() + rect.GetSizeY() >= GetPositionY() + GetSizeY() -2) {
       local_max_visible_items = i - first_visible_item;
       draw_it = false;
     }
