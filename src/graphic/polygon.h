@@ -98,8 +98,8 @@ class Polygon {
   // Color handling
   void SetBorderColor(const Color & color);
   void SetPlaneColor(const Color & color);
-  Color & GetBorderColor() const;
-  Color & GetPlaneColor() const;
+  const Color & GetBorderColor() const;
+  const Color & GetPlaneColor() const;
 };
 
 #endif /* POLYGON_H */

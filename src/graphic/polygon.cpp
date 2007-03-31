@@ -356,12 +356,12 @@ void Polygon::SetPlaneColor(const Color & color)
   *plane_color = color;
 }
 
-Color & Polygon::GetBorderColor() const
+const Color & Polygon::GetBorderColor() const
 {
   return *border_color;
 }
 
-Color & Polygon::GetPlaneColor() const
+const Color & Polygon::GetPlaneColor() const
 {
   return *plane_color;
 }
