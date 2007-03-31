@@ -188,7 +188,7 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 	     || (button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
 	     || (button == SDL_BUTTON_WHEELDOWN)) {
     ChangeMapDelta(+1);
-  } else if (map_preview_after2->Contains(mousePosition) ) {
+  } else if (button == SDL_BUTTON_LEFT && map_preview_after2->Contains(mousePosition)) {
     ChangeMapDelta(+2);
   }
 
