@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Affiche un message dans le jeu, puis pose une question dans le jeu ou
- * attend au moins la pression d'une touche.
+ * Display a message on the game screen, and asks a question in the game or wait
+ * at least for the player to press a key.
  *****************************************************************************/
 
 #ifndef QUESTION_H

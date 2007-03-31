@@ -66,7 +66,7 @@ void Map::Reset()
   wind.Reset();
 
   // Configure game about open or closed world
-  bool open = ground.EstOuvert();
+  bool open = ground.IsOpen();
   ObjBox::Enable(open);
 
   delete author_info1; author_info1 = NULL;
@@ -153,7 +153,7 @@ void Map::DrawSky()
 {
   SwitchDrawingCache();
   SwitchDrawingCacheParticles();
-  
+
   OptimizeCache(*to_redraw_now);
 
   sky.Draw();
@@ -223,7 +223,7 @@ bool Map::VerticalLine_IsInVacuum(int x, int top, int bottom) const
 {
   assert (top <= bottom);
 
-  // V�ifie qu'on reste dans le monde
+  // Check we are still inside the world
   if (IsOutsideWorldX(x) || IsOutsideWorldYheight(top, bottom-top+1))
     return IsOpen();
 
@@ -347,7 +347,7 @@ bool CompareRectangle(const Rectanglei& a, const Rectanglei& b)
 void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache)
 {
   rectangleCache.sort(CompareRectangle);
-	
+
   std::list<Rectanglei>::iterator it = rectangleCache.begin(),
     jt = rectangleCache.begin(),
     end = rectangleCache.end(),
@@ -360,7 +360,7 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache)
 
   while (it != end && jt != end) {
     if ( (*it).Contains(*jt) ) {
-    //   std::cout << "X: " << (*jt).GetPositionX() << " ; " << (*jt).GetBottomRightPoint().GetX() << " - " ; 
+    //   std::cout << "X: " << (*jt).GetPositionX() << " ; " << (*jt).GetBottomRightPoint().GetX() << " - " ;
 //       std::cout << "Y: " << (*jt).GetPositionY() << " ; " << (*jt).GetBottomRightPoint().GetY();
 //       std::cout << std::endl;
       tmp = jt;
@@ -369,12 +369,12 @@ void Map::OptimizeCache(std::list<Rectanglei>& rectangleCache)
       jt = tmp;
 
     } else if ( (*jt).Contains(*it) ) {
-//       std::cout << "X: " << (*it).GetPositionX() << " ; " << (*it).GetBottomRightPoint().GetX() << " - " ; 
+//       std::cout << "X: " << (*it).GetPositionX() << " ; " << (*it).GetBottomRightPoint().GetX() << " - " ;
 //       std::cout << "Y: " << (*it).GetPositionY() << " ; " << (*it).GetBottomRightPoint().GetY();
 //       std::cout << std::endl;
       tmp = it;
       --tmp;
-      rectangleCache.erase(it);      
+      rectangleCache.erase(it);
       it = tmp;
 
     } else {

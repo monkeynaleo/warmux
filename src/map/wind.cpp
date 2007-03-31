@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- *  Refresh du vent
+ *  wind Refresh (you may get cold ;) )
  *****************************************************************************/
 
 #include "wind.h"
@@ -64,7 +64,7 @@ WindParticle::WindParticle(std::string &xml_file) :
   StartMoving();
   SetAirResistFactor(GetAirResistFactor() * (1.0 + randomObj.GetLong(-100, 100)/400.0));
 
-  // Fixe le rectangle de test
+  // Fixe test rectangle
   int dx = 0 ;
   int dy = 0 ;
   SetTestRect (dx, dx, dy, dy);

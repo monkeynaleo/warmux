@@ -157,7 +157,7 @@ void PhysicalObj::SetSize(const Point2i &newSize){
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
 }
 
-// Lit les dimensions de l'objet
+// Get objest's dimensions
 int PhysicalObj::GetWidth() const{
   assert (m_width != 0);
   return m_width;
@@ -342,7 +342,7 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     double ground_angle;
 
     if (ContactPoint(cx, cy)) {
-      ground_angle = world.ground.Tangeante(cx, cy);
+      ground_angle = world.ground.Tangent(cx, cy);
       contactPos.x = (double)cx / PIXEL_PER_METER;
       contactPos.y = (double)cy / PIXEL_PER_METER;
     } else {
@@ -731,7 +731,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
 {
   int x1, x2, y1, y2;
 
-  // On cherche un point de contact en bas de l'objet:
+  // We are looking for a point in contact with the bottom of the object:
   y1 = (GetY()+m_height-m_test_bottom);
   y2 = y1-1;
   for (uint x=GetX()+ m_test_left; x<=(GetX()+m_width)-m_test_right; x++)
@@ -745,7 +745,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
     }
   }
 
-  // On cherche un point de contact �gauche de l'objet:
+  // We are looking for a point in contact on the left hand of object:
   x1 = GetX()+m_test_left;
   x2 = x1+1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
@@ -759,7 +759,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
     }
   }
 
-  // On cherche un point de contact �droite de l'objet:
+  // We are looking for a point in contact on the rigth hand of object:
   x1 = (GetX()+m_width-m_test_right);
   x2 = x1-1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
@@ -773,7 +773,7 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
     }
   }
 
-  // On cherche un point de contact en haut de l'objet:
+  // We are looking for a point in contact on top of object:
   y1 = GetY()+m_test_top;
   y2 = y1 - 1;
   for(uint x=GetX()+m_test_left;x<=GetX()+m_width-m_test_right;x++)
@@ -789,13 +789,13 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   return false;
 }
 
-// Est-ce que deux objets se touchent ? (utilise les rectangles de test)
+// Are the two object in contact ? (uses test rectangles)
 bool PhysicalObj::ObjTouche(const PhysicalObj &b) const
 {
   return GetTestRect().Intersect( b.GetTestRect() );
 }
 
-// Est-ce que le point p touche l'objet a ?
+// Do the point p touch the object ?
 bool PhysicalObj::ObjTouche(const Point2i &p) const
 {
    return  GetTestRect().Contains( p );
@@ -822,7 +822,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     }
 
     if (on_top_of_world) {
-      // Placement au hasard en X
+      // Give a random position for x
       position.x = randomSync.GetLong(0, world.GetWidth() - GetWidth());
       position.y = -GetHeight()+1;
     } else {

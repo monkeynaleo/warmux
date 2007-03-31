@@ -31,32 +31,31 @@ class Constants
 public:
   // Version number of Wormux
   static const std::string VERSION;
-  
+
   // Env variables name to override previous values
   static const std::string ENV_DATADIR;
   static const std::string ENV_LOCALEDIR;
   static const std::string ENV_FONT_PATH;
-  
-  // Nombre de boucles maximum pour le test ...
-  static const uint NBR_BCL_MAX_EST_VIDE; // Un objet est dans le vide ?
-  
+
+  // Maximum number of loops for the test ...
+  static const uint NBR_BCL_MAX_EST_VIDE; // Is an object in vacuum ?
+
   // Authors list
   static std::vector<std::string> AUTHORS;
-  
+
   // Web site address and email
   static const std::string WEB_SITE;
   static const std::string EMAIL;
-  
-  // Dimensions min/max du terrain (en pixel)
+
+  // Dimension min/max of playground (in pixel)
   static const Point2i MAP_MIN_SIZE;
   static const int MAP_MAX_SIZE;
-  
-  // Hauteur (en pixel) minimale libre pour que le terrain
-  // soit qualifié " d'ouvert "
+
+  // Minimal free heigth (in pixel) for the playground to be said "open"
   static const uint HAUT_MIN_TERRAIN_OUVERT;
 
   static Constants * GetInstance();
-  
+
 private:
   Constants();
 

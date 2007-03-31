@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Classe principale qui gère le jeu : initialisation, dessin, gestion
- * des différents composants, et boucle de jeu.
+ * Main Class manage the game : initialization, drawing, components management
+ * and game loop.
  *****************************************************************************/
 
 #ifndef GAME_H

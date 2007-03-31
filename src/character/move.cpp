@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Mouvement droite/gauche pour un character.
+ * Mouvement right/left for a character.
  *****************************************************************************/
 
 #include "move.h"
@@ -43,7 +43,7 @@ const uint PAUSE_CHG_DIRECTION=80; // ms
 
 // Compute the height to fall or to walk on when moving horizontally
 // Return a boolean which says if movement is possible
-bool ComputeHeightMovement(Character &character, int &height, 
+bool ComputeHeightMovement(Character &character, int &height,
 			   bool falling)
 {
   int y_floor=character.GetY();
@@ -83,36 +83,36 @@ bool ComputeHeightMovement(Character &character, int &height,
   return false;
 }
 
-// Bouge un character characters la droite ou la gauche (selon le signe de direction)
+// Moves a character to the right/left depending the signess of direction
 void MoveCharacter(Character &character)
 {
   int height;
-  bool fantome;
+  bool ghost;
 
-  // On est bien dans le monde ? (sinon, pas besoin de tester !)
+  // If character moves out of the world, no need to go further: it is dead
   if (character.GetDirection() == -1)
-    fantome = character.IsOutsideWorld ( Point2i(-1, 0) );
+    ghost = character.IsOutsideWorld ( Point2i(-1, 0) );
   else
-    fantome = character.IsOutsideWorld ( Point2i(1, 0) );
-  if (fantome){
+    ghost = character.IsOutsideWorld ( Point2i(1, 0) );
+  if (ghost){
     MSG_DEBUG("ghost", "%s will be a ghost.", character.GetName().c_str());
     character.Ghost();
     return;
   }
 
-  // Calcule la hauteur a descendre
+  // Compute fall heigth
   if (!ComputeHeightMovement (character, height, true)) return;
 
   do
   {
-    // Bouge !
+    // Move !
     GameLoop::GetInstance()->character_already_chosen = true;
-    // Deplace enfin le character
+    // Eventually moves the character
 
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),
                              character.GetY() +height) );
 
-    // Gravite (s'il n'y a pas eu de collision
+    // If no collision, let gravity do its job
     character.UpdatePosition();
 
   }while(character.CanStillMoveDG(PAUSE_MOVEMENT) && ComputeHeightMovement (character, height, true));
@@ -145,7 +145,7 @@ void MoveActiveCharacterRight()
   bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT);
   if (move) {
     MoveCharacter(ActiveCharacter());
-  } else {    
+  } else {
     ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
     ActiveCharacter().InitMouvementDG (PAUSE_CHG_DIRECTION);
   }

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Ninja-rope: les skins se balancent au bout d'une corde pour se balader sur le terrain
+ * Ninja-rope
  *****************************************************************************/
 
 #include "ninja_rope.h"
@@ -135,16 +135,16 @@ bool NinjaRope::TryAttachRope()
 
   Point2i contact_point;
   if (find_first_contact_point(pos, angle, length, 4, contact_point))
-    { 
+    {
       if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
-	return false; 
+	return false;
 
       // The rope reaches the fixation point. Let's fix it !
       Action* a = new Action(Action::ACTION_WEAPON_NINJAROPE);
       a->Push(ATTACH_ROPE);
       a->Push(contact_point);
       ActionHandler::GetInstance()->NewAction(a);
-      
+
       MSG_DEBUG("ninja_rope.hook", "Creating ATTACH_ROPE Action");
       return true;
     }
@@ -191,7 +191,7 @@ bool NinjaRope::TryAddNode(int CurrentSense)
       // The rope has collided something...
       // Add a node on the rope and change the fixation point
       AttachNode(contact_point, rope_angle, CurrentSense);
-      
+
       // Send node addition over the network
       Action a(Action::ACTION_WEAPON_NINJAROPE);
       a.Push(ATTACH_NODE);
@@ -295,12 +295,12 @@ void NinjaRope::NotifyMove(bool collision)
   // While there is nodes to add, we add !
   while (TryAddNode(currentSense))
     addNode = true;
-  
+
   // If we have created nodes, we exit to avoid breaking what we
   // have just done !
   if (addNode)
     return;
-  
+
   // While there is nodes to break, we break !
   while (TryBreakNode(currentSense));
 }
@@ -309,14 +309,14 @@ void NinjaRope::Refresh()
 {
   if (!m_is_active)
     return ;
-  
+
   if (m_attaching)
     TryAttachRope();
 
   if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI())
     return;
 
-  ActiveCharacter().UpdatePosition();  
+  ActiveCharacter().UpdatePosition();
   SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
 }
 
@@ -328,7 +328,7 @@ void NinjaRope::Draw()
   struct CL_Quad {Sint16 x1,x2,x3,x4,y1,y2,y3,y4;} quad;
 
   Weapon::Draw();
-  
+
   if (!m_is_active)
   {
     return ;
@@ -353,7 +353,7 @@ void NinjaRope::Draw()
   quad.x2 = (int)round((double)x + 2 * cos(angle));
   quad.y2 = (int)round((double)y - 2 * sin(angle));
 
-  for (std::list<rope_node_t>::reverse_iterator it = rope_nodes.rbegin(); 
+  for (std::list<rope_node_t>::reverse_iterator it = rope_nodes.rbegin();
        it != rope_nodes.rend(); it++)
     {
       quad.x3 = (int)round((double)it->pos.x + 2 * cos(angle));
@@ -393,7 +393,7 @@ void NinjaRope::p_Deselect()
 {
   DetachRope();
 }
-    
+
 // force detaching rope if time is out
 void NinjaRope::SignalTurnEnd()
 {
@@ -409,7 +409,7 @@ void NinjaRope::ActionStopUse()
 void NinjaRope::AttachRope(Point2i contact_point)
 {
   MSG_DEBUG("ninja_rope.hook", "** AttachRope %d,%d", contact_point.x, contact_point.y);
- 
+
   m_attaching = false;
   m_is_active = true;
 
@@ -437,7 +437,7 @@ void NinjaRope::AttachRope(Point2i contact_point)
   ActiveCharacter().ChangePhysRopeSize (-10.0 / PIXEL_PER_METER);
   m_hooked_time = Time::GetInstance()->Read();
   ActiveCharacter().SetMovement("ninja-rope");
-  
+
   ActiveCharacter().SetFiringAngle(-M_PI / 3);
 
   // Camera should focus on it!
@@ -456,19 +456,19 @@ void NinjaRope::DetachRope()
 void NinjaRope::AttachNode(Point2i contact_point,
 			   double angle,
 			   int sense)
-{  
+{
   Point2i handPos = ActiveCharacter().GetHandPosition();
 
   // The rope has collided something...
   // Add a node on the rope and change the fixation point.
   Point2i pos(handPos.x - ActiveCharacter().GetX(),
 	      handPos.y - ActiveCharacter().GetY());
-  
+
   ActiveCharacter().SetPhysFixationPointXY(contact_point.x / PIXEL_PER_METER,
 					   contact_point.y / PIXEL_PER_METER,
 					   (double)pos.x / PIXEL_PER_METER,
 					   (double)pos.y / PIXEL_PER_METER);
-  
+
   m_fixation_point = contact_point;
   rope_node_t node;
   node.pos = m_fixation_point;
@@ -480,24 +480,24 @@ void NinjaRope::AttachNode(Point2i contact_point,
 }
 
 void NinjaRope::DetachNode()
-{      
-  assert(rope_nodes.size() >= 1); 
+{
+  assert(rope_nodes.size() >= 1);
 
   { // for debugging only
     rope_node_t node;
     node = rope_nodes.back();
     MSG_DEBUG("ninja_rope.node", "- %d,%d %f %d", node.pos.x, node.pos.y, node.angle, node.sense);
   }
-  
+
   // remove last node
   rope_nodes.pop_back();
-  
+
   m_fixation_point = rope_nodes.back().pos ;
-  
+
   Point2i handPos = ActiveCharacter().GetHandPosition();
   int dx = handPos.x - ActiveCharacter().GetX();
   int dy = handPos.y - ActiveCharacter().GetY();
-  
+
   ActiveCharacter().SetPhysFixationPointXY(m_fixation_point.x / PIXEL_PER_METER,
 					   m_fixation_point.y / PIXEL_PER_METER,
 					   (double)dx / PIXEL_PER_METER,
@@ -509,7 +509,7 @@ void NinjaRope::DetachNode()
 void NinjaRope::SetRopeSize(double length)
 {
   double delta = length - ActiveCharacter().GetRopeLength();
-  ActiveCharacter().ChangePhysRopeSize (delta);  
+  ActiveCharacter().ChangePhysRopeSize (delta);
 }
 
 void NinjaRope::GoUp()
@@ -521,7 +521,7 @@ void NinjaRope::GoUp()
   delta_len = -0.1 ;
   ActiveCharacter().ChangePhysRopeSize (delta_len);
   ActiveCharacter().UpdatePosition();
-  delta_len = 0 ;  
+  delta_len = 0 ;
 }
 
 void NinjaRope::GoDown()
@@ -586,7 +586,7 @@ void NinjaRope::HandleKeyPressed_Up()
 void NinjaRope::HandleKeyRefreshed_Up()
 {
   if (m_is_active)
-    GoUp(); 
+    GoUp();
   else
     ActiveCharacter().HandleKeyRefreshed_Up();
 }
@@ -623,7 +623,7 @@ void NinjaRope::HandleKeyPressed_MoveLeft()
 {
   if (m_is_active)
     GoLeft();
-  else 
+  else
     ActiveCharacter().HandleKeyPressed_MoveLeft();
 }
 
@@ -637,7 +637,7 @@ void NinjaRope::HandleKeyReleased_MoveLeft()
 {
   if (m_is_active)
     StopLeft();
-  else 
+  else
     ActiveCharacter().HandleKeyReleased_MoveLeft();
 }
 
@@ -666,7 +666,7 @@ void NinjaRope::HandleKeyReleased_MoveRight()
 void NinjaRope::HandleKeyPressed_Shoot()
 {
   if (m_is_active) {
-    //DetachRope(); 
+    //DetachRope();
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
   } else
     NewActionShoot();
@@ -686,7 +686,7 @@ NinjaRopeConfig& NinjaRope::cfg()
 //-----------------------------------------------------------------------------
 
 NinjaRopeConfig::NinjaRopeConfig()
-{ 
+{
   max_rope_length = 450;
   automatic_growing_speed = 12;
   push_force = 10;
