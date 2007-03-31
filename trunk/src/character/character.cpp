@@ -592,7 +592,7 @@ void Character::Refresh()
 
     Point2d speed;
     GetSpeedXY(speed);
-    rotation = -M_PI * speed.y / speed_init;
+    rotation = M_PI * speed.y / speed_init;
     body->SetRotation(rotation);
   }
 }

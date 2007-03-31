@@ -25,6 +25,7 @@
 #include "cursor.h"
 #include "game_msg.h"
 #include "interface.h"
+#include "../ai/ai_engine_stupid.h"
 #include "../include/action.h"
 #include "../include/app.h"
 #include "../game/config.h"
@@ -35,6 +36,7 @@
 #include "../graphic/video.h"
 #include "../include/action_handler.h"
 #include "../include/constant.h"
+#include "../network/network.h"
 #include "../map/camera.h"
 #include "../team/macro.h"
 #include "../character/move.h"
@@ -44,7 +46,6 @@
 #include "../map/camera.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
-#include "../network/network.h"
 
 // Vitesse du definalement au clavier
 #define SCROLL_CLAVIER 20 // ms
@@ -253,9 +254,14 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
 {
   PressedKeys[key] = false ;
 
-  // We manage here only actions which are active on KEY_RELEASED event.
-  Interface * interface = Interface::GetInstance();
+  // Here we manage only actions which are activated on KEY_RELEASED event.
   
+  // hack to interrupt AI
+  if (ActiveTeam().IsLocalAI() && key == KEY_SHOOT) 
+  {
+    AIStupidEngine::GetInstance()->ForceEndOfTurn();
+  }
+
   { // Managing keys related to interface (no game interaction)
     // Always available
     switch(key){
@@ -278,7 +284,7 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       camera.FollowObject (&ActiveCharacter(), true, true, true);
       return;
     case KEY_TOGGLE_INTERFACE:
-      interface->EnableDisplay (!interface->IsDisplayed());
+      Interface::GetInstance()->EnableDisplay (!Interface::GetInstance()->IsDisplayed());
       return;
     default:
       break;

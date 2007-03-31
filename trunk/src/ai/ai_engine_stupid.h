@@ -53,6 +53,7 @@ class AIStupidEngine
   static AIStupidEngine* GetInstance();
 
   void Refresh();
+  void ForceEndOfTurn();
 };
 
 #endif

@@ -22,7 +22,8 @@
 #include "ai_engine.h"
 #include <string>
 #include <iostream>
-#include "../ai/ai_engine_stupid.h"
+#include "ai_engine_stupid.h"
+#include "../game/game_loop.h"
 #include "../team/teams_list.h"
 
 
@@ -43,8 +44,11 @@ AIengine* AIengine::GetInstance()
 
 void AIengine::Refresh()
 {
-  if (ActiveCharacter().GetTeam().GetPlayerName() == "AI-stupid" 
-      && ActiveCharacter().GetTeam().IsLocalAI()) {
+  // AI does not have right to play
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
+    return;
+
+  if (ActiveCharacter().GetTeam().IsLocalAI()) {
     AIStupidEngine::GetInstance()->Refresh();
   }
   
