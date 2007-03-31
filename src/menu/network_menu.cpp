@@ -56,7 +56,7 @@ NetworkMenu::NetworkMenu() :
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
-  uint mapBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE) 
+  uint mapBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)
     - TEAMS_BOX_H - OPTIONS_BOX_H;
 
   // ################################################
@@ -71,8 +71,7 @@ NetworkMenu::NetworkMenu() :
   // ################################################
   if(Network::GetInstance()->IsServer()) {
     map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-					      mainBoxWidth, mapBoxHeight),
-				   false);
+					      mainBoxWidth, mapBoxHeight));
   } else {
     map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
 					      mainBoxWidth, mapBoxHeight),
@@ -87,11 +86,11 @@ NetworkMenu::NetworkMenu() :
   options_box = new HBox( Rectanglei(MARGIN_SIDE, map_box->GetPositionY()+map_box->GetSizeY()+ MARGIN_SIDE,
 				     mainBoxWidth, OPTIONS_BOX_H), true);
   options_box->AddWidget(new PictureWidget(Rectanglei(0,0,39,128), "menu/mode_label"));
-  
+
   Box* tmp_box = new VBox( Rectanglei(0,0, 200,0), false);
 
   mode = new Label("", rectZero, *Font::GetInstance(Font::FONT_NORMAL));
-  
+
   if (Network::GetInstance()->IsClient()) {
     // Client Mode
     mode->SetText(_("Client mode"));
@@ -105,18 +104,18 @@ NetworkMenu::NetworkMenu() :
     // Server Mode
     mode->SetText(_("Server mode"));
     tmp_box->AddWidget(mode);
-  
-    player_number = new SpinButton(_("Max number of players:"), rectZero, 
-				   GameMode::GetInstance()->max_teams, 1, 2, 
+
+    player_number = new SpinButton(_("Max number of players:"), rectZero,
+				   GameMode::GetInstance()->max_teams, 1, 2,
 				   GameMode::GetInstance()->max_teams);
-    
+
     tmp_box->AddWidget(player_number);
-    
-    connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0), 
+
+    connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
 				rectZero, *Font::GetInstance(Font::FONT_SMALL));
     tmp_box->AddWidget(connected_players);
 
-    inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0), 
+    inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
 			       rectZero, *Font::GetInstance(Font::FONT_SMALL));
     tmp_box->AddWidget(inited_players);
   }
@@ -132,8 +131,8 @@ NetworkMenu::NetworkMenu() :
 				       mainBoxWidth - options_box->GetSizeX() - MARGIN_SIDE,
 				       OPTIONS_BOX_H), false);
   chat_box->SetBorder(Point2i(0,0));
-  
-  msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::GetInstance(Font::FONT_SMALL));  
+
+  msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::GetInstance(Font::FONT_SMALL));
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
   msg_box->NewMessage(_("WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"), c_red);
 
@@ -143,10 +142,10 @@ NetworkMenu::NetworkMenu() :
   tmp2_box->SetMargin(4);
   tmp2_box->SetBorder(Point2i(0,0));
   line_to_send_tbox = new TextBox(" ",
-				  Rectanglei(0, 0, chat_box->GetSizeX()-20, 0), 
+				  Rectanglei(0, 0, chat_box->GetSizeX()-20, 0),
 				  *Font::GetInstance(Font::FONT_SMALL));
   tmp2_box->AddWidget(line_to_send_tbox);
-  
+
   send_txt_bt = new Button(Point2i(0,0), res, "menu/send_txt", true);
   tmp2_box->AddWidget(send_txt_bt);
 
@@ -238,9 +237,9 @@ void NetworkMenu::sig_ok()
   {
     if (teams_list.playing_list.size() <= 1)
     {
-      msg_box->NewMessage(Format(ngettext("There is only %i team.", 
-					  "There are only %i teams.", 
-					  teams_list.playing_list.size()), 
+      msg_box->NewMessage(Format(ngettext("There is only %i team.",
+					  "There are only %i teams.",
+					  teams_list.playing_list.size()),
 				 teams_list.playing_list.size()), c_red);
       return;
     }

@@ -24,13 +24,13 @@
 #include "../map/maps_list.h"
 #include "../network/network.h"
 
-MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) : 
+MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   HBox(rect, true)
 {
   display_only = _display_only;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-  
+
   AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
@@ -100,7 +100,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   }
 
   tmp_map_box->AddWidget(previews_box);
-  
+
   if (display_only) {
     map_preview_before2->Disable();
     map_preview_before->Disable();
@@ -135,13 +135,13 @@ void MapSelectionBox::ChangeMapDelta(int delta_index)
 void MapSelectionBox::ChangeMap(int index)
 {
   if (index < 0 || index > int(MapsList::GetInstance()->lst.size() - 1)) return;
-  
+
   selected_map_index = index;
 
   // Callback other network players
   if(Network::GetInstance()->IsServer())
     {
-      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP, 
+      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
 					    MapsList::GetInstance()->lst[selected_map_index].ReadName()));
     }
 
@@ -193,8 +193,8 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
   }
 
   return NULL;
-} 
- 
+}
+
 Widget* MapSelectionBox::Click(const Point2i &mousePosition, uint button)
 {
   return NULL;
