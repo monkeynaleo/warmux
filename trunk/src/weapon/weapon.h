@@ -184,8 +184,9 @@ public:
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
 
-  // Create a new action "shoot" in action handler
-  void NewActionShoot() const;
+  // Create a new action "shoot/stop_use" in action handler
+  void NewActionWeaponShoot() const;
+  void NewActionWeaponStopUse() const;
 
   // Prepare the shoot : set the angle and strenght of the weapon
   // Begin the shooting animation of the character

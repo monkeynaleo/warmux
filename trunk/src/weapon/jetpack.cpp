@@ -227,9 +227,9 @@ void JetPack::HandleKeyReleased_MoveRight()
 void JetPack::HandleKeyPressed_Shoot()
 {
   if (!m_is_active)
-    NewActionShoot();
+    NewActionWeaponShoot();
   else 
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
+    NewActionWeaponStopUse();
 }
 
 bool JetPack::p_Shoot()

@@ -94,7 +94,7 @@ void Blowtorch::RepeatShoot()
   
   if (time >= pause_time)
     {
-      NewActionShoot();
+      NewActionWeaponShoot();
       old_timer = tmp;
     }
 }
@@ -113,7 +113,7 @@ void Blowtorch::HandleKeyRefreshed_Shoot()
 
 void Blowtorch::HandleKeyReleased_Shoot()
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
+  NewActionWeaponStopUse();
 }
 
 //-------------------------------------------------------------------------------------

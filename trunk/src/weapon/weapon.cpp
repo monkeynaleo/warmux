@@ -231,7 +231,7 @@ bool Weapon::CanChangeWeapon() const
   return true;
 }
 
-void Weapon::NewActionShoot() const
+void Weapon::NewActionWeaponShoot() const
 {
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
 
@@ -239,6 +239,14 @@ void Weapon::NewActionShoot() const
 			       m_strength,
 			       ActiveCharacter().GetAbsFiringAngle());
   ActionHandler::GetInstance()->NewActionActiveCharacter(a_shoot);
+}
+
+void Weapon::NewActionWeaponStopUse() const
+{
+  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+
+  Action* a = new Action(Action::ACTION_WEAPON_STOP_USE);
+  ActionHandler::GetInstance()->NewActionActiveCharacter(a);
 }
 
 void Weapon::PrepareShoot(double strength, double angle)
@@ -639,7 +647,7 @@ void Weapon::HandleKeyPressed_Shoot()
     return;
 
   if (max_strength == 0)
-    NewActionShoot();
+    NewActionWeaponShoot();
   else if ( IsReady() )
     InitLoading();
 }
@@ -653,7 +661,7 @@ void Weapon::HandleKeyRefreshed_Shoot()
 
   // Strength == max strength -> Fire !!!
   if (ReadStrength() >= max_strength) {
-    NewActionShoot();
+    NewActionWeaponShoot();
   } else {
     // still pressing the Space key
     UpdateStrength();
@@ -667,7 +675,7 @@ void Weapon::HandleKeyReleased_Shoot()
   if ( !IsLoading()) 
     return;
 
-  NewActionShoot();
+  NewActionWeaponShoot();
 }
 
 void Weapon::HandleKeyPressed_MoveRight()
