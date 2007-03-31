@@ -41,7 +41,7 @@ class Map{
 public:
   Map();
   ~Map();
-   
+
   Ground ground;
   Sky sky;
   double dst_min_entre_vers;
@@ -87,7 +87,7 @@ public:
   bool IsOutsideWorld (const Point2i &pos) const;
 
   // Is it an open or closed world ?
-  bool IsOpen() const { return ground.EstOuvert(); }
+  bool IsOpen() const { return ground.IsOpen(); }
 
   // Dig the map using a picture
   void Dig(const Point2i position, const Surface& alpha_sur);
@@ -102,11 +102,11 @@ public:
   int GetWidth() const { return ground.GetSizeX(); }
   int GetHeight() const { return ground.GetSizeY(); }
   Point2i GetSize() const{ return ground.GetSize(); }
- 
- private:  
+
+ private:
   bool HorizontalLine_IsInVacuum (int left, int y,  int right) const;
   bool VerticalLine_IsInVacuum (int x,  int top, int bottom) const;
-  
+
   void SwitchDrawingCache();
   void SwitchDrawingCacheParticles();
   void OptimizeCache(std::list<Rectanglei>& rectangleCache);

@@ -102,7 +102,7 @@ void Gnu::Refresh()
   image->SetRotation_rad(angle);
   image->Scale((double)m_sens,1.0);
   image->Update();
-  // Fixe le rectangle de test  ??
+  // Fixes test rectangle ??
   SetTestRect ( image->GetWidth()/2-1,
                 image->GetWidth()/2-1,
                 image->GetHeight()/2-1,

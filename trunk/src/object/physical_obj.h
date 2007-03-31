@@ -51,7 +51,7 @@ private:
   bool m_goes_through_wall;
   bool m_collides_with_characters;
   bool m_collides_with_objects;
-  Point2i m_rebound_position;  
+  Point2i m_rebound_position;
 protected:
   PhysicalObj* m_overlapping_object;
   bool m_ignore_movements;
@@ -96,7 +96,7 @@ public:
 
   // Set/Get test rectangles
   void SetTestRect (uint left, uint right, uint top, uint bottom);
-  const Rectanglei GetTestRect() const;   
+  const Rectanglei GetTestRect() const;
   int GetTestWidth() const;
   int GetTestHeight() const;
 
@@ -160,10 +160,10 @@ public:
   bool IsGhost() const;
   bool IsDrowned() const;
 
-  // Est-ce que deux objets se touchent ? (utilise les rectangles de test)
+  // Are the two object in contact ? (uses test rectangles)
   bool ObjTouche(const PhysicalObj &b) const;
 
-  // Est-ce que le point p touche l'objet ?
+  // Do the point p touch the object ?
   bool ObjTouche(const Point2i &p) const;
 
   bool PutRandomly(bool on_top_of_world, double min_dst_with_characters);
@@ -176,8 +176,7 @@ protected:
   virtual void SignalOutOfMap();
 
 private:
-  //Renvoie la position du point de contact entre
-  //l'obj et le terrain
+  //Retrun the position of the point of contact of the obj on the ground
   bool ContactPoint (int &x, int &y);
 
   void NotifyMove(Point2d oldPos, Point2d newPos);

@@ -340,7 +340,7 @@ void JukeBox::LoadXML(const std::string& profile)
 
   for (; it != fin; ++it)
     {
-      // lit le XML
+      // reads XML
       xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
       std::string sample="no_sample";
       std::string file="no_file";

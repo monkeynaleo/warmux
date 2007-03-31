@@ -91,7 +91,7 @@ void GameLoop::InitGameData_NetServer()
   SendGameMode();
 
   randomSync.Init();
-  
+
   // Load maps
   InitMap();
 
@@ -152,9 +152,9 @@ void GameLoop::InitGameData_Local()
 }
 
 void GameLoop::InitMap()
-{  
+{
   std::cout << "o " << _("Initialise map") << std::endl;
-  
+
   LoadingScreen::GetInstance()->StartLoading(1, "map_icon", _("Maps"));
   world.Reset();
   MapsList::GetInstance()->ActiveMap().FreeData();
@@ -163,10 +163,10 @@ void GameLoop::InitMap()
 }
 
 void GameLoop::InitTeams()
-{  
+{
   std::cout << "o " << _("Initialise teams") << std::endl;
-  
-  LoadingScreen::GetInstance()->StartLoading(2, "team_icon", _("Teams"));  
+
+  LoadingScreen::GetInstance()->StartLoading(2, "team_icon", _("Teams"));
 
   // Check the number of teams
   if (teams_list.playing_list.size() < 2)
@@ -181,13 +181,13 @@ void GameLoop::InitTeams()
   LoadingScreen::GetInstance()->StartLoading(3, "weapon_icon", _("Weapons")); // use fake message...
   teams_list.InitEnergy();
 
-  lst_objects.PlaceMines();  
+  lst_objects.PlaceMines();
 }
 
 void GameLoop::InitSounds()
-{  
+{
   std::cout << "o " << _("Initialise teams") << std::endl;
-   
+
   // Load teams' sound profiles
   LoadingScreen::GetInstance()->StartLoading(4, "sound_icon", _("Sounds"));
 
@@ -198,7 +198,7 @@ void GameLoop::InitSounds()
 }
 
 void GameLoop::InitData()
-{  
+{
   std::cout << "o " << _("Initialisation") << std::endl;
   Time::GetInstance()->Reset();
 
@@ -233,7 +233,7 @@ void GameLoop::Init()
   Interface::GetInstance()->Reset();
   GameMessages::GetInstance()->Reset();
   ParticleEngine::Init();
-  
+
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   IgnorePendingInputEvents();
 
@@ -547,7 +547,7 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
     // Center the cursor
     Mouse::GetInstance()->CenterPointer();
 
-    // Init. le compteur
+    // Initialize counter
     duration = game_mode->duration_turn;
     Interface::GetInstance()->UpdateTimer(duration);
     Interface::GetInstance()->EnableDisplayTimer(true);
@@ -663,7 +663,7 @@ bool GameLoop::IsAnythingMoving()
   // Is the weapon still active or an object still moving ??
   bool object_still_moving = false;
 
-  if (ActiveTeam().GetWeapon().IsInUse()) 
+  if (ActiveTeam().GetWeapon().IsInUse())
   {
     MSG_DEBUG("game.endofturn", "Weapon %s is still active", ActiveTeam().GetWeapon().GetName().c_str());
     object_still_moving = true;

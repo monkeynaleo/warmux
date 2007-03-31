@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Main_Menu du jeu permettant de lancer une partie, modifier les options, d'obtenir
- * des informations, ou encore quitter le jeu.
+ * Game menu from which one may start a new game, modify options, obtain some
+ * infomations or leave the game.
  *****************************************************************************/
 
 #include "main_menu.h"

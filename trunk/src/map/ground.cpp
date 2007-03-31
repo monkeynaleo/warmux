@@ -51,7 +51,7 @@ void Ground::Init(){
   assert(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
 
   // Check if the map is "opened"
-  ouvert = ActiveMap().IsOpened();
+  open = ActiveMap().IsOpened();
 
   std::cout << _("done") << std::endl;
 }
@@ -75,7 +75,7 @@ bool Ground::IsEmpty(const Point2i &pos) const{
  * returns -1.0 if no tangent was found (pixel (x,y) does not touch any
  * other piece of ground
  */
-double Ground::Tangeante(int x,int y){
+double Ground::Tangent(int x,int y){
   //Approximation : returns the chord instead of the tangent to the ground
 
   /* We try to find 2 points on the ground on each side of (x,y)
