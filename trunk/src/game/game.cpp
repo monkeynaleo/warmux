@@ -36,6 +36,7 @@
 #include "../map/camera.h"
 #include "../map/map.h"
 #include "../menu/results_menu.h"
+#include "../network/network.h"
 #include "../object/objects_list.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
@@ -171,7 +172,18 @@ void Game::Start()
   }
 
   if (!err)
-    if (IsGameFinished())
+  // * When debug is disabled : only show the result menu if game
+  // have 'regularly' finished (only one survivor or timeout reached)
+  // * When debug is disabled : still show the result menu everytime the game
+  // is quit during local games (so we can still the result menu often).
+  // For network game only show the result if the game is regularly finished
+  // (elsewise when someone if someone quit the game before the end, it appears
+  // as disconnected only when if finnishes viewing the f*cking result menu)
+#ifndef DEBUG
+  if (IsGameFinished() && !want_end_of_game)
+#else
+  if (IsGameFinished() && (!want_end_of_game || Network::GetInstance()->IsLocal()))
+#endif
       MessageEndOfGame();
 
   UnloadDatas();
