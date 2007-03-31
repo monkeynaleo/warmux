@@ -120,7 +120,7 @@ void Airhammer::RepeatShoot()
   
   if (time >= MIN_TIME_BETWEEN_JOLT)
     {
-      NewActionShoot();
+      NewActionWeaponShoot();
       m_last_jolt = tmp;
     }
 }
@@ -161,7 +161,7 @@ void Airhammer::HandleKeyRefreshed_Shoot()
 
 void Airhammer::HandleKeyReleased_Shoot()
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
+  NewActionWeaponStopUse();
 }
 
 //-----------------------------------------------------------------------------

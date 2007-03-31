@@ -66,9 +66,9 @@ void LowGrav::Draw()
 void LowGrav::HandleKeyPressed_Shoot()
 {  
   if (!m_is_active) 
-    NewActionShoot();
+    NewActionWeaponShoot();
   else 
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
+    NewActionWeaponStopUse();
 }
 
 void LowGrav::SignalTurnEnd()

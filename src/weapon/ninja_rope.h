@@ -133,6 +133,8 @@ class NinjaRope : public Weapon
     virtual void HandleKeyPressed_Shoot();
     virtual void HandleKeyRefreshed_Shoot();
     virtual void HandleKeyReleased_Shoot();
+
+    void PrintDebugRope();
 };
 
 //-----------------------------------------------------------------------------

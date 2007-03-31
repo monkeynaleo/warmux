@@ -116,7 +116,7 @@ void SubMachineGun::RepeatShoot()
   
   if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
     {
-      NewActionShoot();
+      NewActionWeaponShoot();
       m_last_fire_time = tmp;
     }
 }

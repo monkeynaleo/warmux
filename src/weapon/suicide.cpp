@@ -60,8 +60,7 @@ void Suicide::Refresh()
     ActiveCharacter().DisableDeathExplosion();
     ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
     ActiveCharacter().SetEnergy(0); // Die!
-    SendCharacterInfo(ActiveCharacter().GetTeamIndex(),
-		      ActiveCharacter().GetCharacterIndex());
+    SendActiveCharacterInfo();
     ApplyExplosion(ActiveCharacter().GetCenter(),cfg());
   }
 }

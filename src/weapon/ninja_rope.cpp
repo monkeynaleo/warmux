@@ -208,16 +208,13 @@ bool NinjaRope::TryAddNode(int CurrentSense)
 
 bool NinjaRope::TryBreakNode(int currentSense)
 {
-  double currentAngle, nodeAngle;
-  int nodeSense;
-  double angularSpeed;
   bool breakNode = false;
 
   // Check if we can break a node.
-  nodeSense = rope_nodes.back().sense;
-  nodeAngle = rope_nodes.back().angle;
-  angularSpeed = ActiveCharacter().GetAngularSpeed();
-  currentAngle = ActiveCharacter().GetRopeAngle();
+  int nodeSense = rope_nodes.back().sense;
+  double nodeAngle = rope_nodes.back().angle;
+  double angularSpeed = ActiveCharacter().GetAngularSpeed();
+  double currentAngle = ActiveCharacter().GetRopeAngle();
 
   if ( (rope_nodes.size() != 1) &&              // We cannot break the initial node.
        (nodeSense * currentSense < 0) ) // Cannot break a node if we are in the
@@ -242,8 +239,15 @@ bool NinjaRope::TryBreakNode(int currentSense)
 	   (angularSpeed < 0) &&
 	   (currentAngle < nodeAngle))
 	breakNode = true ;
-    }
 
+//       if ( (currentAngle < 0) &&
+// 	   (angularSpeed > 0) &&
+// 	   (currentAngle < nodeAngle))
+// 	breakNode = true;
+
+      
+    }
+  
   // We can break the current node... Let's do it !
 
   if (breakNode)
@@ -317,7 +321,7 @@ void NinjaRope::Refresh()
     return;
 
   ActiveCharacter().UpdatePosition();
-  SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  SendActiveCharacterInfo();
 }
 
 void NinjaRope::Draw()
@@ -666,16 +670,30 @@ void NinjaRope::HandleKeyReleased_MoveRight()
 void NinjaRope::HandleKeyPressed_Shoot()
 {
   if (m_is_active) {
-    //DetachRope();
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
+    NewActionWeaponStopUse();
   } else
-    NewActionShoot();
+    NewActionWeaponShoot();
 }
 
 void NinjaRope::HandleKeyRefreshed_Shoot(){}
 
 void NinjaRope::HandleKeyReleased_Shoot(){}
 
+void NinjaRope::PrintDebugRope()
+{
+  printf("%05d %05d %03.3f\n", 
+	 ActiveCharacter().GetPosition().GetX(),
+	 ActiveCharacter().GetPosition().GetY(),
+	 ActiveCharacter().GetRopeAngle());
+
+  for (std::list<rope_node_t>::iterator it = rope_nodes.begin(); 
+       it != rope_nodes.end(); 
+       it++) {
+
+    printf("%05d %05d %03.3f %d\n", it->pos.x, it->pos.y,
+	   it->angle, it->sense);
+  }
+}
 
 //-----------------------------------------------------------------------------
 
