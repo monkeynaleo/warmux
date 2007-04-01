@@ -401,9 +401,8 @@ msgid "Initialisation of TTF library failed: %s"
 msgstr "Lasting av TTF-biblioteket feilet : %s"
 
 #: src/game/game_loop.cpp:156
-#, fuzzy
 msgid "Initialise map"
-msgstr "Laster data"
+msgstr "Laster kart"
 
 #: src/game/game_loop.cpp:167 src/game/game_loop.cpp:189
 msgid "Initialise teams"
@@ -485,9 +484,8 @@ msgid "Network Game"
 msgstr "Nettverksspill"
 
 #: src/network/network.cpp:140
-#, fuzzy
 msgid "Network initialization"
-msgstr "Laster kart ..."
+msgstr "Starter nettverk ..."
 
 #: src/weapon/ninja_rope.cpp:82
 msgid "Ninjarope"
@@ -825,23 +823,21 @@ msgid "Your shot has missed!"
 msgstr "Du bommet"
 
 #: src/menu/credits_menu.cpp:68
-#, fuzzy
 msgid "aka"
-msgstr "aka"
+msgstr "kjent som"
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "ferdig"
 
 #: src/menu/credits_menu.cpp:72
-#, fuzzy
 msgid "from"
 msgstr "fra"
 
 #. Display player's name
 #: src/interface/interface.cpp:166
 msgid "general: "
-msgstr "general :"
+msgstr "generelt :"
 
 #: src/sound/jukebox.cpp:153
 msgid "o Loading music"
@@ -1024,3 +1020,6 @@ msgstr "Åpnet lyden på %d Hz %d bit"
 
 #~ msgid "some opponents."
 #~ msgstr "Noen motsandere"
+
+
+!DSPAM:460fbac9103261280715606!
