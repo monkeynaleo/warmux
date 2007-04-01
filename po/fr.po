@@ -1,5 +1,5 @@
 # translation of fr.po to
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2007 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Victor Stinner <victor.stinner@haypocalc.com>, 2006.
@@ -7,18 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: wormux-dev@gna.org\n"
-"PO-Revision-Date: 2007-03-27 10:57+0100\n"
-"Last-Translator: artefact <artefact@altern.org>\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-04-01 18:50+0100\n"
+"Last-Translator: Matthieu Fertré <matthieu.fertre@free.fr>\n"
 "Language-Team:  <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: French\n"
-"X-Poedit-Country: FRANCE\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: KBabel 1.11\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"POT-Creation-Date: \n"
 
 #. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
@@ -226,7 +222,7 @@ msgstr "Connecté !"
 #: src/menu/network_connection_menu.cpp:65
 #: src/menu/network_connection_menu.cpp:184
 msgid "Connect to an internet game"
-msgstr "Connecter une partie internet"
+msgstr "Se connecter à une partie internet"
 
 #: src/menu/network_connection_menu.cpp:176
 msgid "Connect to game"
@@ -363,7 +359,7 @@ msgstr "Pistolet"
 
 #: src/tool/file_tools.cpp:60
 msgid "HOME directory (environment variable $HOME) could not be found!"
-msgstr "Le répertoire HOME (variable d'environnement $HOME) introuvable !"
+msgstr "Répertoire HOME (variable d'environnement $HOME) introuvable !"
 
 #. Skip a line
 #: src/menu/network_connection_menu.cpp:109
@@ -384,7 +380,7 @@ msgstr "Dépechez-vous, vous êtes trop lent !!"
 
 #: src/main.cpp:217
 msgid "If you found a bug or have a feature request send us a email (in english, please):"
-msgstr "Si vous trouvez un bug ou si vous pensez qu'il manque quelquechose à Wormux,envoyez un mail 'en anglais, svp):"
+msgstr "Si vous trouvez un bug ou si vous pensez qu'il manque quelquechose à Wormux, envoyez un mail (en anglais, svp):"
 
 #: src/menu/game_menu.cpp:101
 msgid "Initial energy"
@@ -433,7 +429,7 @@ msgstr "Chargement des équipes :"
 #. How many teams ?
 #: src/menu/network_teams_selection_box.cpp:33
 msgid "Local teams:"
-msgstr "Equipes local :"
+msgstr "Équipes locales :"
 
 #: src/weapon/lowgrav.cpp:38
 msgid "LowGrav"
@@ -590,7 +586,7 @@ msgstr "A dit:"
 
 #: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
-msgstr "Scrolling actif sur les bords"
+msgstr "Défilement actif sur les bords"
 
 #. Server address
 #: src/menu/network_connection_menu.cpp:75
@@ -630,7 +626,7 @@ msgstr "Effets sonores ?"
 
 #: src/menu/options_menu.cpp:105
 msgid "Sound frequency"
-msgstr "Fréquence d'échantillonage ?"
+msgstr "Fréquence d'échantillonage"
 
 #. Load teams' sound profiles
 #: src/game/game_loop.cpp:192
