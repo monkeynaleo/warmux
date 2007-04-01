@@ -39,6 +39,4 @@ void MoveCharacter (Character &character);
 void MoveActiveCharacterRight();
 void MoveActiveCharacterLeft();
 
-void SendActiveCharacterInfoAndSkin();
-
 #endif
