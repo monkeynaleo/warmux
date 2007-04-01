@@ -34,8 +34,8 @@
 InfoMap::InfoMap ()
 {
   is_data_loaded = false;
-  nb_mine = 0;
-  nb_barrel = 0;
+  nb_mine = 4;
+  nb_barrel = 4;
   wind.nb_sprite = 0;
   wind.need_flip = false;
   random = false;
