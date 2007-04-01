@@ -109,7 +109,20 @@ void Chat::HandleKey(const SDL_Event& event)
 
   case SDLK_BACKSPACE:
     if (kbd_event.state == 1 && txt != "")
-      txt = txt.substr(0, txt.size()-1);
+    {
+      int off = txt.size() -1;
+
+      // UTF-8 character encoded on 1 octet
+      if(! (txt[off] & 0x80))
+        txt = txt.substr(0, txt.size()-1);
+      else
+      // Multi-byte char
+      {
+        while(! (txt[off] & 0x40))
+          off--;
+      }
+      txt = txt.substr(0, off);
+    }
     input->Set(txt);
     break;
 
