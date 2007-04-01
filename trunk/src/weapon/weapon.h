@@ -114,7 +114,7 @@ protected:
     VISIBLE_ONLY_WHEN_INACTIVE
   } weapon_visibility_t;
 
- // Visibility
+  // Visibility
   weapon_visibility_t m_visibility;
   weapon_visibility_t m_unit_visibility;
 
@@ -133,12 +133,6 @@ public:
 
   // if max_strength != 0, display the strength bar
   double max_strength;
-
-  // True if the weapon uses keys when activated.
-  bool override_keys ;
-
-  //Force weapons to use keys when true
-  bool force_override_keys ;
 
   bool use_flipping;
 

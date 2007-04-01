@@ -69,7 +69,7 @@ void JetPack::Refresh()
     ActiveCharacter().UpdatePosition();
     SendActiveCharacterInfo();
 
-    if( !F.IsNull() )
+    if (!F.IsNull())
     {
       // We are using fuel !!!
       uint current = Time::GetInstance()->Read() ;
@@ -96,11 +96,17 @@ void JetPack::Refresh()
 void JetPack::p_Select()
 {
   ActiveCharacter().SetClothe("jetpack");
+
+  if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI()) {
+    m_unit_visibility = NEVER_VISIBLE; // do not show ammo units accross the network
+  } else {
+    m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
+  }
 }
 
 void JetPack::p_Deselect()
 {
-  m_is_active = true;
+  m_is_active = false;
   m_x_force = 0;
   m_y_force = 0;
   ActiveCharacter().SetExternForce(0,0);
@@ -243,7 +249,6 @@ bool JetPack::p_Shoot()
 void JetPack::SignalTurnEnd()
 {
   p_Deselect();
-  m_is_active= false;
 }
 
 void JetPack::ActionStopUse()

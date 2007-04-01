@@ -98,7 +98,7 @@ Weapon::Weapon(Weapon_type type,
 
   channel_load = -1;
 
-  if (!use_flipping and !EgalZero(min_angle - max_angle))
+  if (!use_flipping && !EgalZero(min_angle - max_angle))
     use_flipping = true;
 
   extra_params = params;
@@ -457,13 +457,16 @@ void Weapon::Draw(){
 
   switch (m_unit_visibility)
     {
-      case VISIBLE_ONLY_WHEN_ACTIVE:
-	if (!m_is_active)
-	  break;
-
-      default:
-	if (m_initial_nb_unit_per_ammo > 1)
-	  DrawUnit(ActiveTeam().ReadNbUnits());
+    case VISIBLE_ONLY_WHEN_ACTIVE:
+      if (!m_is_active)
+	break;
+      
+    case NEVER_VISIBLE:
+      break;
+      
+    default:
+      if (m_initial_nb_unit_per_ammo > 1)
+	DrawUnit(ActiveTeam().ReadNbUnits());
     }
 
   // Do we need to draw strength_bar ? (real draw is done by class Interface)
