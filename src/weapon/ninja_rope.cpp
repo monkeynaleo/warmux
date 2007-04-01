@@ -127,7 +127,13 @@ bool NinjaRope::TryAttachRope()
     {
       // Hum the roe is too short !
       m_attaching = false;
-      m_is_active = false;
+      m_is_active = false;  
+
+      // Give back one ammo...
+      int *ammo = &ActiveTeam().AccessNbAmmos();
+      if (*ammo != INFINITE_AMMO) (*ammo)++;
+      assert (*ammo > 0 || *ammo == INFINITE_AMMO);
+
       return false;
     }
 
