@@ -32,7 +32,7 @@ class JetPack : public Weapon
 
     int channel;
 
-  // Jetpack fuel.
+    // Jetpack fuel.
     uint m_last_fuel_down;
 
   public:
