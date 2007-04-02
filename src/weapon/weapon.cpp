@@ -455,33 +455,22 @@ void Weapon::Draw(){
     DrawWeaponFire();
   weapon_strength_bar.visible = false;
 
-  switch (m_unit_visibility)
-    {
-    case VISIBLE_ONLY_WHEN_ACTIVE:
-      if (!m_is_active)
-	break;
-      
-    case NEVER_VISIBLE:
-      break;
-      
-    default:
-      if (m_initial_nb_unit_per_ammo > 1)
-	DrawUnit(ActiveTeam().ReadNbUnits());
-    }
-
   // Do we need to draw strength_bar ? (real draw is done by class Interface)
   // We do not draw on the network
   if (max_strength != 0 && IsReady() && !m_is_active &&
       (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
     weapon_strength_bar.visible = true;
 
+  DrawAmmoUnits();
+
   switch (m_visibility)
     {
       case ALWAYS_VISIBLE:
-	break ;
+	break;
 
       case NEVER_VISIBLE:
-	return ;
+	return;
+	break;
 
       case VISIBLE_ONLY_WHEN_ACTIVE:
 	if (!m_is_active)
@@ -559,19 +548,42 @@ void Weapon::DrawWeaponFire()
   m_weapon_fire->Draw( GetGunHolePosition() - size );
 }
 
-void Weapon::DrawUnit(int unit) const
+void Weapon::DrawAmmoUnits() const
 {
-  Rectanglei rect;
+  switch (m_unit_visibility) {
 
-  std::ostringstream ss;
+  case VISIBLE_ONLY_WHEN_ACTIVE:
+    if (!m_is_active)
+      return;
+    break;
 
-  ss << unit;
+  case VISIBLE_ONLY_WHEN_INACTIVE:
+    if (m_is_active)
+      return ;
+    break;
 
-  DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
-		 Point2i( ActiveCharacter().GetCenterX(), 
-			  ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
-		 - camera.GetPosition(),
-		 ss.str());
+  case NEVER_VISIBLE:
+    return;
+    break;
+    
+  default:
+    ; // nothing to do
+  }
+
+  if (m_initial_nb_unit_per_ammo > 1) 
+  {
+    Rectanglei rect;
+    
+    std::ostringstream ss;
+    
+    ss << ActiveTeam().ReadNbUnits();
+    
+    DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
+		   Point2i( ActiveCharacter().GetCenterX(), 
+			    ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
+		   - camera.GetPosition(),
+		   ss.str());
+  }
 }
 
 Sprite & Weapon::GetIcon() const
