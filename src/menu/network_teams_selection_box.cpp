@@ -93,10 +93,16 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
 	Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
 
 	if ( w == NULL ) {
-	  if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
-	    NextTeam(i);
-	  } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
-	    PrevTeam(i);
+	  Rectanglei r(teams_selections.at(i)->GetPositionX(), 
+		       teams_selections.at(i)->GetPositionY(),
+		       60,
+		       60);
+	  if ( r.Contains(mousePosition) ) {
+	    if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
+	      NextTeam(i);
+	    } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
+	      PrevTeam(i);
+	    }
 	  }
 	} else {
 	  return w;

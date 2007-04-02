@@ -94,15 +94,21 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
   } else {
     for (uint i=0; i<teams_selections.size() ; i++) {
 
-      if ( teams_selections.at(i)->Contains(mousePosition) ) {
+      if (teams_selections.at(i)->Contains(mousePosition)) {
 	
 	Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
 
-	if ( w == NULL ) {
-	  if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
-	    NextTeam(i);
-	  } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
-	    PrevTeam(i);
+	if (w == NULL) {
+	  Rectanglei r(teams_selections.at(i)->GetPositionX(), 
+		       teams_selections.at(i)->GetPositionY(),
+		       60,
+		       60);
+	  if ( r.Contains(mousePosition) ) {
+	    if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
+	      NextTeam(i);
+	    } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
+	      PrevTeam(i);
+	    }
 	  }
 	} else {
 	  return w;
