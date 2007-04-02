@@ -186,7 +186,7 @@ void GameLoop::InitTeams()
 
 void GameLoop::InitSounds()
 {
-  std::cout << "o " << _("Initialise teams") << std::endl;
+  std::cout << "o " << _("Initialise sounds") << std::endl;
 
   // Load teams' sound profiles
   LoadingScreen::GetInstance()->StartLoading(4, "sound_icon", _("Sounds"));
@@ -543,7 +543,14 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
   {
   // Begining of a new turn:
   case PLAYING:
-    MSG_DEBUG("game.statechange", "Playing" );
+    MSG_DEBUG("game.statechange", "Playing" );    
+
+    if (Network::GetInstance()->IsServer()) {
+      // Send information about energy and position of every characters 
+      // A character can be hurted during the END_OF_TURN...
+      SyncCharacters();
+    }
+
     // Center the cursor
     Mouse::GetInstance()->CenterPointer();
 
@@ -627,8 +634,8 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
     Interface::GetInstance()->EnableDisplayTimer(false);
     pause_seconde = global_time->Read();
 
-    if(Network::GetInstance()->IsServer())
-      SyncCharacters(); // Send information about energy and the position of every character
+    if (Network::GetInstance()->IsServer())
+      SyncCharacters(); // Send information about energy and position of every characters
     break;
   }
 }
