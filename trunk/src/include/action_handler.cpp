@@ -28,6 +28,7 @@
 #include "../game/game.h"
 #include "../game/time.h"
 #include "../include/constant.h"
+#include "../interface/game_msg.h"
 #include "../network/network.h"
 #include "../map/camera.h"
 #include "../map/map.h"
@@ -481,6 +482,28 @@ void Action_Network_Ping(Action *a)
 {
 }
 
+// Only used to notify clients that someone connected to the server
+void Action_Network_Connect(Action *a)
+{
+  std::string msg = Format("%s just connected", a->PopString().c_str());
+  if(Game::GetInstance()->IsGameLaunched())
+    GameMessages::GetInstance()->Add(msg);
+  else if (Network::GetInstance()->network_menu != NULL)
+    //Network Menu
+    Network::GetInstance()->network_menu->ReceiveMsgCallback(msg);
+}
+
+// Only used to notify clients that someone disconnected from the server
+void Action_Network_Disconnect(Action *a)
+{
+  std::string msg = Format("%s just disconnected", a->PopString().c_str());
+  if(Game::GetInstance()->IsGameLaunched())
+    GameMessages::GetInstance()->Add(msg);
+  else if (Network::GetInstance()->network_menu != NULL)
+    //Network Menu
+    Network::GetInstance()->network_menu->ReceiveMsgCallback(msg);
+}
+
 void Action_Explosion (Action *a)
 {
   ExplosiveWeaponConfig config;
@@ -643,6 +666,8 @@ ActionHandler::ActionHandler()
   Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);  
   Register (Action::ACTION_WIND, "wind", &Action_Wind);
   Register (Action::ACTION_NETWORK_SEND_RANDOM, "NETWORK_send_random", &Action_Network_SendRandom);
+  Register (Action::ACTION_NETWORK_DISCONNECT, "NETWORK_disconnect", &Action_Network_Disconnect);
+  Register (Action::ACTION_NETWORK_CONNECT, "NETWORK_connect", &Action_Network_Connect);
 
   // ########################################################
   SDL_UnlockMutex(mutex);
