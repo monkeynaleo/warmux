@@ -96,6 +96,8 @@ public:
     ACTION_WIND,   
     ACTION_NETWORK_PING,
     ACTION_NETWORK_SEND_RANDOM,
+    ACTION_NETWORK_CONNECT,
+    ACTION_NETWORK_DISCONNECT,
 
     // ########################################################
   } Action_t;
