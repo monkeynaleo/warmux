@@ -110,6 +110,8 @@ void Polygon::ApplyTransformation(const AffineTransform2D & trans)
     shape_buffer->vx[i] = (int)tmp.x;
     shape_buffer->vy[i] = (int)tmp.y;
   }
+  trans_min = trans * min;
+  trans_max = trans * max;
 }
 
 void Polygon::AddPoint(const Point2d & p)
@@ -118,8 +120,8 @@ void Polygon::AddPoint(const Point2d & p)
   shape_buffer->SetSize(original_shape.size());
   shape_buffer->vx[original_shape.size() - 1] = (int)p.x;
   shape_buffer->vy[original_shape.size() - 1] = (int)p.y;
-  max = p.max(max);
-  min = p.min(min);
+  trans_max = max = p.max(max);
+  trans_min = min = p.min(min);
 }
 
 void Polygon::InsertPoint(int index, const Point2d & p)
@@ -172,6 +174,31 @@ double Polygon::GetHeight() const
 Point2d Polygon::GetSize() const
 {
   return max - min;
+}
+
+Point2i Polygon::GetIntSize() const
+{
+  return GetIntMax() - GetIntMin();
+}
+
+Point2d Polygon::GetMin() const
+{
+  return trans_min;
+}
+
+Point2i Polygon::GetIntMin() const
+{
+  return Point2i((int)(trans_min.x + 0.5), (int)(trans_min.y + 0.5));
+}
+
+Point2d Polygon::GetMax() const
+{
+  return trans_max;
+}
+
+Point2i Polygon::GetIntMax() const
+{
+  return Point2i((int)(trans_max.x + 0.5), (int)(trans_max.y + 0.5));
 }
 
 Point2d Polygon::GetRandomUpperPoint()
