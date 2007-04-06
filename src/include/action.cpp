@@ -52,6 +52,7 @@ Action::Action (Action_t type, double value) : m_type(type)
   var.clear();
   Push(value);
   m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 Action::Action (Action_t type, const std::string& value) : m_type(type)
@@ -59,6 +60,7 @@ Action::Action (Action_t type, const std::string& value) : m_type(type)
   var.clear();
   Push(value);
   m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 Action::Action (Action_t type, double value1, double value2) : m_type(type)
@@ -67,6 +69,7 @@ Action::Action (Action_t type, double value1, double value2) : m_type(type)
   Push(value1);
   Push(value2);
   m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 Action::Action (Action_t type, double value1, int value2) : m_type(type)
@@ -75,6 +78,7 @@ Action::Action (Action_t type, double value1, int value2) : m_type(type)
   Push(value1);
   Push(value2);
   m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 // Build an action from a network packet

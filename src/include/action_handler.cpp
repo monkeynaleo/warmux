@@ -64,7 +64,12 @@ ActionHandler * ActionHandler::GetInstance()
 
 void Action_Nickname(Action *a)
 {
-
+  if(Network::GetInstance()->IsServer() && a->creator)
+  {
+      std::string nickname = a->PopString();
+      std::cout<<"New nickname: " + nickname<< std::endl;
+      a->creator->nickname = nickname;
+  } 
 }
 
 void Action_Network_ChangeState (Action *a)
@@ -234,13 +239,20 @@ void Action_Rules_SendVersion (Action *a)
 // TODO: Move this into network/distant_cpu.cpp
 void Action_ChatMessage (Action *a)
 {
-  if(Game::GetInstance()->IsGameLaunched())
-    //Add message to chat session in Game
-    //    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
-    GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
-  else if (Network::GetInstance()->network_menu != NULL) {
-    //Network Menu
-    Network::GetInstance()->network_menu->ReceiveMsgCallback(a->PopString());
+  if(Network::GetInstance()->IsServer() && a->creator)
+  {
+    a->creator->SendChatMessage(a);
+  }
+  else
+  {
+    if(Game::GetInstance()->IsGameLaunched())
+      //Add message to chat session in Game
+      //    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
+      GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
+    else if (Network::GetInstance()->network_menu != NULL) {
+      //Network Menu
+      Network::GetInstance()->network_menu->ReceiveMsgCallback(a->PopString());
+    }
   }
 }
 
@@ -257,6 +269,12 @@ void Action_Menu_SetMap (Action *a)
 // TODO: Move this into network/distant_cpu.cpp
 void Action_Menu_AddTeam (Action *a)
 {
+  if(Network::GetInstance()->IsServer() && a->creator)
+  {
+    a->creator->ManageTeam(a);
+    return;
+  }
+
   ConfigTeam the_team;
 
   the_team.id = a->PopString();
@@ -288,6 +306,12 @@ void Action_Menu_UpdateTeam (Action *a)
 // TODO: Move this into network/distant_cpu.cpp
 void Action_Menu_DelTeam (Action *a)
 {
+  if(Network::GetInstance()->IsServer() && a->creator)
+  {
+    a->creator->ManageTeam(a);
+    return;
+  }
+
   std::string team = a->PopString();
 
   MSG_DEBUG("action_handler.menu", "- %s", team.c_str());
