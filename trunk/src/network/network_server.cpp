@@ -122,33 +122,8 @@ void NetworkServer::ReceiveActions()
 		(*client)->SendDatas(packet, packet_size);
 	      }
 	
-	//Add relation between nickname and socket
-	switch (a->GetType()) {
-	case Action::ACTION_NICKNAME:
-	  {
-	    std::string nickname = a->PopString();
-	    std::cout<<"New nickname: " + nickname<< std::endl;
-	    (*dst_cpu)->nickname = nickname;
-	    delete a;
-	  }
-	  break;
-
-	case Action::ACTION_MENU_ADD_TEAM:
-	case Action::ACTION_MENU_DEL_TEAM:
-	  (*dst_cpu)->ManageTeam(a);
-	  delete a;
-	  break;
-
-	case Action::ACTION_CHAT_MESSAGE:
-	  (*dst_cpu)->SendChatMessage(a);
-	  delete a;
-	  break;
-
-	default:
-	  ActionHandler::GetInstance()->NewAction(a, false);
-	}
-
-        free(packet);
+           ActionHandler::GetInstance()->NewAction(a, false);
+           free(packet);
       }
     }
   }
