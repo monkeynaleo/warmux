@@ -26,6 +26,7 @@
 #include "../tool/debug.h"
 #include "../game/time.h"
 #include "../character/character.h"
+#include "../network/distant_cpu.h"
 #include "../team/teams_list.h"
 
 //-----------------------------------------------------------------------------
@@ -35,6 +36,7 @@ Action::Action (Action_t type)
   var.clear();
   m_type = type;
   m_timestamp = Time::GetInstance()->Read();
+  creator = NULL;
 }
 
 // Action with various parameters
@@ -76,8 +78,10 @@ Action::Action (Action_t type, double value1, int value2) : m_type(type)
 }
 
 // Build an action from a network packet
-Action::Action (const char *is)
+Action::Action (const char *is, DistantComputer* _creator)
 {
+  creator = _creator;
+
   var.clear();
   m_type = (Action_t)SDLNet_Read32(is);
   is += 4;

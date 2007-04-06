@@ -35,6 +35,7 @@
 DistantComputer::DistantComputer(TCPsocket new_sock)
   : sock(new_sock)
 {
+  version_checked = false;
   sock_lock = SDL_CreateMutex();
 
   SDLNet_TCP_AddSocket(Network::GetInstance()->socket_set, sock);
@@ -63,13 +64,12 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
       free(pack);
     }
   }
-
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT, GetAdress()));
 }
 
 DistantComputer::~DistantComputer()
 {
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAdress()));
+  if(version_checked)
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAdress()));
 
   SDLNet_TCP_Close(sock);
   SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
