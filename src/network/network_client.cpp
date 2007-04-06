@@ -100,7 +100,7 @@ void NetworkClient::ReceiveActions()
 	}
 #endif
 
-        Action* a = new Action(packet);
+        Action* a = new Action(packet, (*dst_cpu));
         MSG_DEBUG("network.traffic","Received action %s",
                 ActionHandler::GetInstance()->GetActionName(a->GetType()).c_str());
 

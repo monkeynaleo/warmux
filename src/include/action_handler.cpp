@@ -224,6 +224,9 @@ void Action_Rules_SendVersion (Action *a)
     Error(Format(_("Wormux versions are differents : client=%s, server=%s."),
     version.c_str(), Constants::VERSION.c_str()));
   }
+  assert(a->creator != NULL);
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT, a->creator->GetAdress()));
+  a->creator->version_checked = true;
 }
 
 // ########################################################

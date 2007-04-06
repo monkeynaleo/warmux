@@ -28,7 +28,9 @@
 #include <list>
 #include "base.h"
 #include "../tool/point.h"
+#include "../network/distant_cpu.h"
 
+class DistantComputer;
 //-----------------------------------------------------------------------------
 
 class Action
@@ -102,6 +104,8 @@ public:
     // ########################################################
   } Action_t;
 
+  DistantComputer* creator;
+
   //inline Action_t &operator++() { ;}
 
   // Action without parameter
@@ -114,7 +118,7 @@ public:
   Action (Action_t type, const std::string& value);
 
   // Build an action from a network packet
-  Action (const char* is);
+  Action (const char* is, DistantComputer* _creator);
 
   ~Action();
 
