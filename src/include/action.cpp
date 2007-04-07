@@ -28,7 +28,7 @@
 #include "../character/character.h"
 #include "../network/distant_cpu.h"
 #include "../team/teams_list.h"
-
+#include "../network/network.h"
 //-----------------------------------------------------------------------------
 // Action without parameter
 Action::Action (Action_t type)
@@ -225,9 +225,12 @@ void Action::Push(std::string val)
 //-------------  Retrieve datas from the action  ----------------
 int Action::PopInt()
 {
-  assert(var.size() > 0);
-  if(var.size() <= 0)
-	return 0;
+  net_assert(var.size() > 0)
+  {
+    if(creator) creator->force_disconnect = true;
+    return 0;
+  }
+
   int val;
   Uint32 tmp = var.front();
   memcpy(&val, &tmp, 4);
@@ -239,9 +242,12 @@ int Action::PopInt()
 
 double Action::PopDouble()
 {
-  assert(var.size() > 0);
-  if(var.size() <= 0)
+  net_assert(var.size() > 0)
+  {
+    if(creator) creator->force_disconnect = true;
     return 0.0;
+  }
+
   double val;
   Uint32 tmp[2];
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
@@ -265,19 +271,30 @@ double Action::PopDouble()
 
 std::string Action::PopString()
 {
-  assert(var.size() > 1);
-  if(var.size() <= 1)
+  net_assert(var.size() > 1)
+  {
+    if(creator) creator->force_disconnect = true;
     return "";
+  }
+
   int lenght = PopInt();
 
   std::string str="";
 
-  assert((int)var.size() >= lenght/4);
-  if((int)var.size() < lenght/4)
+  net_assert((int)var.size() >= lenght/4)
+  {
+    if(creator) creator->force_disconnect = true;
     return "";
+  }
 
   while(lenght > 0)
   {
+    net_assert(var.size() > 0)
+    {
+      if(creator) creator->force_disconnect = true;
+      return "";
+    }
+
     Uint32 tmp = var.front();
     var.pop_front();
     char tmp_str[5] = {0, 0, 0, 0, 0};
