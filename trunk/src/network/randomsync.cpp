@@ -22,7 +22,6 @@
 #include <time.h>
 #include <math.h>
 #include <stdlib.h>
-#include <assert.h>
 #include "randomsync.h"
 #include "network.h"
 #include "../include/action_handler.h"

@@ -95,7 +95,11 @@ void Action_Network_ChangeState (Action *a)
 	Network::GetInstanceServer()->state = Network::NETWORK_READY_TO_PLAY;
       break;
     default:
-      assert(false);
+      net_assert(false)
+      {
+	if(a->creator) a->creator->force_disconnect = true;
+	return;
+      }
       break;
     }
   }
@@ -114,7 +118,11 @@ void Action_Network_ChangeState (Action *a)
       Network::GetInstance()->state = Network::NETWORK_PLAYING;
       break;
     default:
-       assert(false);
+       net_assert(false)
+       {
+	 if(a->creator) a->creator->force_disconnect = true;
+	 return;
+       }
     }
   }
 }
@@ -157,7 +165,11 @@ void Action_GameLoop_NextTeam (Action *a)
 
 void Action_Rules_SetGameMode (Action *a)
 {
-  assert(Network::GetInstance()->IsClient());
+  net_assert(Network::GetInstance()->IsClient())
+  {
+    if(a->creator) a->creator->force_disconnect = true;
+    return;
+  }
   GameMode::GetInstance()->LoadFromString(a->PopString());
 
 //   GameMode::GetInstance()->max_characters = a->PopInt();
@@ -185,6 +197,7 @@ void Action_Rules_SetGameMode (Action *a)
 void SendGameMode()
 {
   assert(Network::GetInstance()->IsServer());
+
   Action a(Action::ACTION_RULES_SET_GAME_MODE);
   
   std::string contents;
@@ -422,13 +435,19 @@ void Action_Weapon_SetTarget (Action *a)
 void Action_Weapon_SetTimeout (Action *a)
 {
   WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
-  assert(launcher != NULL);
+  net_assert(launcher != NULL)
+  {
+    return;
+  }
   launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
 }
 
 void Action_Weapon_Supertux (Action *a)
 {
-  assert(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX);
+  net_assert(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX)
+  {
+    return;
+  }
   WeaponLauncher* launcher = static_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
   SuperTux* tux = static_cast<SuperTux*>(launcher->GetProjectile());
 
@@ -444,14 +463,21 @@ void Action_Weapon_Supertux (Action *a)
 void Action_Weapon_Construction (Action *a)
 {
   Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
-  assert(construct_weapon != NULL);
+  net_assert(construct_weapon != NULL)
+  {
+    return;
+  }
+
   construct_weapon->SetAngle(a->PopDouble());
 }
 
 void Action_Weapon_Ninjarope (Action *a)
 {
   NinjaRope* ninjarope = dynamic_cast<NinjaRope*>(&(ActiveTeam().AccessWeapon()));
-  assert(ninjarope != NULL);
+  net_assert(ninjarope != NULL)
+  {
+    return;
+  }
 
   int subaction = a->PopInt();
   switch (subaction) {
@@ -620,7 +646,11 @@ void ActionHandler::Exec(Action *a)
 {
   MSG_DEBUG("action_handler", "Executing action %s",GetActionName(a->GetType()).c_str());
   handler_it it=handler.find(a->GetType());
-  assert(it != handler.end());
+  net_assert(it != handler.end())
+  {
+    if(a->creator) a->creator->force_disconnect = true;
+    return;
+  }
   (*it->second) (a);
 }
 

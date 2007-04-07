@@ -108,7 +108,11 @@ int DistantComputer::ReceiveDatas(char* & buf)
   }
 
   int size = (int)SDLNet_Read32(&net_size);
-  assert(size > 0);
+  net_assert(size > 0)
+  {
+    // force_disconnect = true; // hum.. in this case we will assume it's a network error
+    return 0;
+  }
 
   // Now we read the packet
   buf = (char*)malloc(size);
@@ -125,10 +129,12 @@ int DistantComputer::ReceiveDatas(char* & buf)
 
     if (received < 0)
     {
-      assert(false);
       std::cerr << "Malformed packet" << std::endl;
       total_received = received;
-      break;
+      net_assert(false)
+      {
+	return 0;
+      }
     }
   }
   SDL_UnlockMutex(sock_lock);
@@ -182,7 +188,11 @@ void DistantComputer::ManageTeam(Action* team)
   {
     std::list<std::string>::iterator it;
     it = find(owned_teams.begin(), owned_teams.end(), name);
-    assert(it != owned_teams.end());
+    net_assert(it != owned_teams.end())
+    {
+      force_disconnect = true;
+      return;
+    }
     owned_teams.erase(it);
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, name), false);
   }

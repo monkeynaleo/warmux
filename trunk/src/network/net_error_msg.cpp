@@ -43,7 +43,7 @@ void DispNetworkError(Network::connection_state_t err)
 	  msg = _("Bad socket ...");
 	  break;
   case Network::CONN_REJECTED:
-	  msg = _("The server rejected the conection.");
+	  msg = _("The server rejected the connection.");
 	  break;
   case Network::CONN_TIMEOUT:
 	  msg = _("The connection timed out. Check there is no firewall in the way!");
