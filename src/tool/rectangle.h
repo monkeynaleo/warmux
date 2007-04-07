@@ -26,6 +26,7 @@
 #define _RECTANGLE_H
 
 #include <cmath>
+#include "../include/base.h"
 #include "vector2.h"
 
 /** 
