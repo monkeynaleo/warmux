@@ -47,8 +47,8 @@ class Polygon {
   Surface * texture;
   Color * plane_color;
   Color * border_color;
-  Point2d max, trans_max;
-  Point2d min, trans_min;
+  Point2d max;
+  Point2d min;
   // Original shape
   std::vector<Point2d> original_shape;
   // Shape position after an affine transformation
