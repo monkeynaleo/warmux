@@ -224,12 +224,17 @@ void Action_Rules_SendVersion (Action *a)
 {
   if (!Network::GetInstance()->IsServer()) return;
   std::string version= a->PopString();
+  assert(a->creator != NULL);
+
   if (version != Constants::VERSION)
   {
-    Error(Format(_("Wormux versions are differents : client=%s, server=%s."),
-    version.c_str(), Constants::VERSION.c_str()));
+    a->creator->force_disconnect = true;
+    std::string str = Format(_("%s tries to connect with a different version : client=%s, me=%s."),
+                               a->creator->GetAdress().c_str(), version.c_str(), Constants::VERSION.c_str());
+    Network::GetInstance()->network_menu->ReceiveMsgCallback(str);
+    std::cerr << str << std::endl;
+    return;
   }
-  assert(a->creator != NULL);
   ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT, a->creator->GetAdress()));
   a->creator->version_checked = true;
 }

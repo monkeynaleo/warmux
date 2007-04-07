@@ -88,6 +88,12 @@ void NetworkServer::ReceiveActions()
 	 dst_cpu != cpu.end() && ThreadToContinue();
 	 dst_cpu++)
     {
+      if((*dst_cpu)->force_disconnect)
+      {
+        dst_cpu = CloseConnection(dst_cpu);
+        continue;
+      }
+        
       if((*dst_cpu)->SocketReady()) // Check if this socket contains data to receive
       {
         // Read the size of the packet
