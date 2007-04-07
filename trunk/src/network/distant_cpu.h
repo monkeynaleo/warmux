@@ -41,6 +41,7 @@ class DistantComputer
   
 public:
   bool version_checked;
+  bool force_disconnect;
 
   DistantComputer(TCPsocket new_sock);
   ~DistantComputer();
