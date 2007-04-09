@@ -38,6 +38,8 @@ class AffineTransform2D {
   void Set(AffineTransform2D &mat);
   void SetRotation(double rad_angle);
   void SetTranslation(double trans_x, double trans_y);
+  void SetTranslation(const Point2i & position);
+  void SetTranslation(const Point2d & position);
   void SetShrink(double shrink_x, double shrink_y);
   void SetShear(double shear_x, double shear_y);
   /* Matrix multiplication */

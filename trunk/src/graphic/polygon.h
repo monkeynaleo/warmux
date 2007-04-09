@@ -45,13 +45,18 @@ class PolygonBuffer {
 
 /** Store information about a item (sprite) of the polygon */
 class PolygonItem {
+ typedef enum { TOP,  V_CENTERED, BOTTOM } V_align;
+ typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
  protected:
   Point2d position;
   Point2i trans_position;
   Sprite * item;
+  V_align v_align;
+  H_align h_align;
  public:
-  PolygonItem(Sprite * sprite, const Point2d & pos);
+  PolygonItem(Sprite * sprite, const Point2d & pos, V_align v_a = V_CENTERED, H_align h_a = H_CENTERED);
   void SetPosition(const Point2d & pos);
+  void SetAlignment(V_align v_a = V_CENTERED, H_align h_a = H_CENTERED);
   const Point2d & GetPosition();
   const Point2i & GetTransformedPosition();
   void SetSprite(Sprite * sprite);
