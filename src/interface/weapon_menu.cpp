@@ -54,7 +54,8 @@ const uint BUTTON_ICO_GAP = 8; // Gap between buttons when a button is zoomed
 
 
 const uint ICONS_DRAW_TIME = 600; // Time to display all icons (in ms)
-const uint ICON_ZOOM_TIME = 150; // Time to zomm one icon.
+const uint ICON_ZOOM_TIME = 150; // Time to zoom one icon.
+const uint JELLY_TIME = 600;     // Jelly time when appearing
 
 const double DEFAULT_ICON_SCALE = 0.7;
 const double MAX_ICON_SCALE = 1.1;
@@ -221,7 +222,7 @@ WeaponsMenu::WeaponsMenu()
   my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));
   my_button5->cache.EnableLastFrameCache();
   resource_manager.UnLoadXMLProfile( res);
-  background = PolygonGenerator::GenerateRoundedRectangle(280, 500, 20);
+  background = PolygonGenerator::GenerateRoundedRectangle(320, 550, 20);
   background->SetPlaneColor(Color(255, 255, 255, 128));
   background->SetBorderColor(Color(128, 128, 255, 255));
   nb_weapon_type = new int[MAX_NUMBER_OF_WEAPON];
@@ -244,9 +245,12 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
   if(num_sort>nbr_weapon_type)
     nbr_weapon_type = num_sort;
 
-  nb_weapon_type[num_sort]++;
+  nb_weapon_type[num_sort - 1]++;
 
-  background->AddItem(item.weapon_icon, background->GetMin() + Point2d(10 + num_sort * 50, 10 + nb_weapon_type[num_sort] * 50));
+  if(num_sort < 5)
+    background->AddItem(item.weapon_icon, background->GetMin() + Point2d(10 + (num_sort * 50), 10 + nb_weapon_type[num_sort - 1] * 50));
+  else
+    background->AddItem(item.weapon_icon, background->GetMin() + Point2d(10 + nb_weapon_type[num_sort - 1] * 50, 490));
 }
 
 // Weapon menu display (init of the animation)
@@ -417,12 +421,26 @@ void WeaponsMenu::Draw()
 {
   if (!display)
     return;
-  position.SetTranslation(110, 260);
-  //AffineTransform2D shear;
+  position.SetTranslation(-background->GetMin() + Point2d(10.0, 10.0));
+  AffineTransform2D shear;
   AffineTransform2D rotation;
-  //shear.SetShear(cos(Time::GetInstance()->Read() / 200.0)/5, 0);
-  rotation.SetRotation(Time::GetInstance()->Read() / 1000.0);
-  background->ApplyTransformation(position * rotation);
+  AffineTransform2D zoom;
+  if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME) {
+    double coef = ((Time::GetInstance()->Read() - motion_start_time) / (double)ICONS_DRAW_TIME);
+    if(show) {
+      zoom.SetShrink(coef, coef);
+      rotation.SetRotation(coef * M_PI * 2.0);
+    } else {
+      zoom.SetShrink(1.0 - coef, 1.0 - coef);
+      rotation.SetRotation(2 * M_PI - coef * M_PI * 2);
+    }
+  } /*else if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME + JELLY_TIME) {
+    if(show) {
+      shear.SetShear(sin((Time::GetInstance()->Read() - motion_start_time + ICONS_DRAW_TIME) / 5.0), 0);
+    }
+  }*/
+  // Draw background
+  background->ApplyTransformation(position * zoom * rotation * shear);
   background->DrawOnScreen();
 
   MouseOver(Mouse::GetInstance()->GetWorldPosition() - camera.GetPosition());

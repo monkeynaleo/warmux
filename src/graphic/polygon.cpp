@@ -74,16 +74,23 @@ void PolygonBuffer::SetSize(const int size)
 //=========== POLYGON ITEM ============ //
 // Use this structure to draw item
 
-PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos)
+PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, V_align v_a, H_align h_a)
 {
   SetPosition(pos);
   SetSprite(sprite);
+  SetAlignment(v_a, h_a);
 }
 
 void PolygonItem::SetPosition(const Point2d & pos)
 {
   position = pos;
   trans_position = Point2i((int)pos.x, (int)pos.y);
+}
+
+void PolygonItem::SetAlignment(V_align v_a, H_align h_a)
+{
+  v_align = v_a;
+  h_align = h_a;
 }
 
 const Point2d & PolygonItem::GetPosition()
@@ -114,7 +121,18 @@ void PolygonItem::ApplyTransformation(const AffineTransform2D & trans)
 
 void PolygonItem::Draw(Surface * dest)
 {
-    item->Blit(*dest, trans_position);
+  int x, y;
+  switch(v_align) {
+    case TOP: y = trans_position.y; break;
+    case BOTTOM: y = trans_position.y - item->GetHeight(); break;
+    default : y = trans_position.y - (item->GetHeight() / 2); break;
+  }
+  switch(h_align) {
+    case LEFT: x = trans_position.x; break;
+    case RIGHT: x = trans_position.x - item->GetWidth(); break;
+    default : x = trans_position.x - (item->GetWidth() / 2); break;
+  }
+  item->Blit(*dest, x, y);
 }
 
 //=========== POLYGON ============ //

@@ -63,14 +63,14 @@ WeaponsList::~WeaponsList()
 
 //-----------------------------------------------------------------------------
 
-void WeaponsList::AddToList(Weapon* arme, uint num_sort)
+void WeaponsList::AddToList(Weapon* weapon, uint num_sort)
 {
   // insert the pointer
-  m_weapons_list.push_back(arme);
+  m_weapons_list.push_back(weapon);
 
-  m_weapons_map.insert(keybind(num_sort, arme));
+  m_weapons_map.insert(keybind(num_sort, weapon));
 
-  Interface::GetInstance()->weapons_menu.NewItem(arme,num_sort);
+  Interface::GetInstance()->weapons_menu.NewItem(weapon, num_sort);
 }
 
 //-----------------------------------------------------------------------------

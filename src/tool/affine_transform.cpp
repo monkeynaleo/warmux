@@ -63,6 +63,16 @@ void AffineTransform2D::SetTranslation(double trans_x, double trans_y)
   yt = trans_y;
 }
 
+void AffineTransform2D::SetTranslation(const Point2i & position)
+{
+  SetTranslation((double)position.x, (double)position.y);
+}
+
+void AffineTransform2D::SetTranslation(const Point2d & position)
+{
+  SetTranslation(position.x, position.y);
+}
+
 void AffineTransform2D::SetShrink(double shrink_x, double shrink_y)
 {
   Init();
