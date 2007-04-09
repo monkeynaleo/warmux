@@ -31,17 +31,17 @@
 
 class WeaponMenuItem
 {
-public:
+ public:
   Point2i position;
   double scale;
   Weapon* weapon;
   Sprite *weapon_icon;
   uint zoom_start_time;
   uint weapon_type;
-private:
+ private:
   bool zoom, dezoom;
 
-public:
+ public:
   WeaponMenuItem(uint num_sort);
   void Reset();
 
@@ -50,22 +50,18 @@ public:
 
   bool MouseOn(const Point2i &mousePos);
 
-private:
+ private:
   void ComputeScale();
 };
 
 class WeaponsMenu
 {
-public:
+ public:
   static const int MAX_NUMBER_OF_WEAPON;
-  Sprite *my_button1;
-  Sprite *my_button2;
-  Sprite *my_button3;
-  Sprite *my_button4;
-  Sprite *my_button5;
   int * nb_weapon_type;
+  Point2i size;
 
-private:
+ private:
   Polygon * background;
   AffineTransform2D position;
   std::vector<WeaponMenuItem> boutons;
@@ -81,7 +77,7 @@ private:
   uint nbr_weapon_type; // number of weapon type = number of rows
   uint max_weapon;  // max number of weapon in a weapon type = number of lines
 
-public:
+ public:
   WeaponsMenu();
 
   // Return true if mouse click on a button
@@ -104,7 +100,7 @@ public:
 
   void MouseOver(const Point2i &mousePos);
 
-private:
+ private:
   void ComputeSize();
   void Show();
   void ShowMotion(int nr_bottons, int button_no, iterator it, int column);
