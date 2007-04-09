@@ -25,8 +25,10 @@
 #include <vector>
 #include "../tool/affine_transform.h"
 #include "surface.h"
+#include "sprite.h"
 
 class Surface;
+class Sprite;
 
 /** Use to draw the polygon */
 class PolygonBuffer {
@@ -41,6 +43,23 @@ class PolygonBuffer {
   void SetSize(const int size);
 };
 
+/** Store information about a item (sprite) of the polygon */
+class PolygonItem {
+ protected:
+  Point2d position;
+  Point2i trans_position;
+  Sprite * item;
+ public:
+  PolygonItem(Sprite * sprite, const Point2d & pos);
+  void SetPosition(const Point2d & pos);
+  const Point2d & GetPosition();
+  const Point2i & GetTransformedPosition();
+  void SetSprite(Sprite * sprite);
+  const Sprite * GetSprite();
+  void ApplyTransformation(const AffineTransform2D & trans);
+  void Draw(Surface * dest);
+};
+
 /** Store information about a simple shape */
 class Polygon {
  protected:
@@ -51,6 +70,8 @@ class Polygon {
   Point2d min;
   // Original shape
   std::vector<Point2d> original_shape;
+  // Vector of icons
+  std::vector<PolygonItem> items;
   // Shape position after an affine transformation
   PolygonBuffer * shape_buffer;
 
@@ -62,11 +83,13 @@ class Polygon {
   // Point handling
   void AddPoint(const Point2d & p);
   void InsertPoint(int index, const Point2d & p);
-  void DeletePoint(int index, const Point2d & p);
+  void DeletePoint(int index);
   void ApplyTransformation(const AffineTransform2D & trans);
+
   // Use to randomize a construction
   Point2d GetRandomUpperPoint();
   int GetRandomPointIndex();
+
   // Interpolation handling
   void AddBezierCurve(const Point2d anchor1, const Point2d control1,
                              const Point2d control2, const Point2d anchor2,
@@ -89,6 +112,7 @@ class Polygon {
   Point2i GetIntMin() const;
   Point2d GetMax() const;
   Point2i GetIntMax() const;
+  Rectanglei GetRectangleToRefresh() const;
 
   // Buffer of transformed point
   PolygonBuffer * GetPolygonBuffer() const;
@@ -105,6 +129,14 @@ class Polygon {
   void SetPlaneColor(const Color & color);
   const Color & GetBorderColor() const;
   const Color & GetPlaneColor() const;
+
+  // Drawing
+  void Draw(Surface * dest);
+  void DrawOnScreen();
+
+  // Item management
+  void AddItem(Sprite * sprite, const Point2d & pos);
+  void DelItem(int index);
 };
 
 #endif /* POLYGON_H */

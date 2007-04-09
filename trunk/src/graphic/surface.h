@@ -29,9 +29,6 @@
 #include "../include/base.h"
 #include "../tool/point.h"
 #include "../tool/rectangle.h"
-#include "polygon.h"
-
-class Polygon;
 
 class Surface
 {
@@ -94,7 +91,6 @@ public:
   int FilledPolygon(std::list<Point2i> polygon, const Color & color);
   int TexturedPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Surface *texture, const int texture_dx, const int texture_dy);
   int TexturedPolygon(std::list<Point2i> polygon, const Surface *texture);
-  int DrawPolygon(const Polygon &polygon);
 
   int Fill(Uint32 color) const;
   int Fill(const Color &color) const;

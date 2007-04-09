@@ -21,6 +21,13 @@
 
 #include "polygon.h"
 #include "../tool/random.h"
+#include "../include/app.h"
+#include "../map/map.h"
+
+//=========== POLYGON BUFFER ============ //
+// Use this structure to store transformed point
+// In affine transformation, never transform directly the original point !
+// If you do it, your point will becoming dented.
 
 PolygonBuffer::PolygonBuffer()
 {
@@ -63,6 +70,56 @@ void PolygonBuffer::SetSize(const int size)
     delete tmp_vy;
   }
 }
+
+//=========== POLYGON ITEM ============ //
+// Use this structure to draw item
+
+PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos)
+{
+  SetPosition(pos);
+  SetSprite(sprite);
+}
+
+void PolygonItem::SetPosition(const Point2d & pos)
+{
+  position = pos;
+  trans_position = Point2i((int)pos.x, (int)pos.y);
+}
+
+const Point2d & PolygonItem::GetPosition()
+{
+  return position;
+}
+
+const Point2i & PolygonItem::GetTransformedPosition()
+{
+  return trans_position;
+}
+
+void PolygonItem::SetSprite(Sprite * sprite)
+{
+  item = sprite;
+}
+
+const Sprite * PolygonItem::GetSprite()
+{
+  return item;
+}
+
+void PolygonItem::ApplyTransformation(const AffineTransform2D & trans)
+{
+  Point2d tmp = trans * position;
+  trans_position = Point2i((int)tmp.x, (int)tmp.y);
+}
+
+void PolygonItem::Draw(Surface * dest)
+{
+    item->Blit(*dest, trans_position);
+}
+
+//=========== POLYGON ============ //
+// Store a vector of point and handle affine transformation,
+// Bezier interpolation handling etc.
 
 Polygon::Polygon()
 {
@@ -112,6 +169,10 @@ void Polygon::ApplyTransformation(const AffineTransform2D & trans)
     max = max.max(tmp);
     min = min.min(tmp);
   }
+  for(std::vector<PolygonItem>::iterator item = items.begin();
+      item != items.end(); item++, i++) {
+    (*item).ApplyTransformation(trans);
+  }
 }
 
 void Polygon::AddPoint(const Point2d & p)
@@ -157,8 +218,41 @@ void Polygon::InsertPoint(int index, const Point2d & p)
   original_shape = vector_tmp;
 }
 
-void Polygon::DeletePoint(int index, const Point2d & p)
+void Polygon::DeletePoint(int index)
 {
+  std::vector<Point2d> vector_tmp;
+  Point2d tmp;
+  int i = 0;
+  shape_buffer->SetSize(shape_buffer->GetSize() - 1);
+  for(std::vector<Point2d>::iterator point = original_shape.begin();
+      point != original_shape.end(); point++, i++) {
+    if(i == index) continue; // Skip point to remove
+    tmp = (*point);
+    vector_tmp.push_back(*point);
+    shape_buffer->vx[i] = (int)tmp.x;
+    shape_buffer->vy[i] = (int)tmp.y;
+    max = max.max(tmp);
+    min = min.min(tmp);
+  }
+  original_shape = vector_tmp;
+}
+
+void Polygon::AddItem(Sprite * sprite, const Point2d & pos)
+{
+  items.push_back(PolygonItem(sprite, pos));
+}
+
+void Polygon::DelItem(int index)
+{
+  std::vector<PolygonItem> vector_tmp;
+  Point2d tmp;
+  int i = 0;
+  for(std::vector<PolygonItem>::iterator item = items.begin();
+      item != items.end(); item++, i++) {
+    if(i == index) continue; // Skip point to remove
+    vector_tmp.push_back(*item);
+  }
+  items = vector_tmp;
 }
 
 double Polygon::GetWidth() const
@@ -199,6 +293,11 @@ Point2d Polygon::GetMax() const
 Point2i Polygon::GetIntMax() const
 {
   return Point2i((int)max.x, (int)max.y);
+}
+
+Rectanglei Polygon::GetRectangleToRefresh() const
+{
+  return Rectanglei(GetIntMin(), GetIntSize());
 }
 
 Point2d Polygon::GetRandomUpperPoint()
@@ -391,4 +490,27 @@ const Color & Polygon::GetBorderColor() const
 const Color & Polygon::GetPlaneColor() const
 {
   return *plane_color;
+}
+
+void Polygon::Draw(Surface * dest)
+{
+  // Draw polygon
+  if(IsPlaneColor())
+    dest->FilledPolygon(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *plane_color);
+  if(IsTextured())
+    dest->TexturedPolygon(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), texture, 0, 0);
+  if(IsBordered())
+    dest->AAPolygonColor(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *border_color);
+
+  // Draw Item
+  for(std::vector<PolygonItem>::iterator item = items.begin();
+      item != items.end(); item++) {
+    item->Draw(dest);
+  }
+}
+
+void Polygon::DrawOnScreen()
+{
+  Draw(&AppWormux::GetInstance()->video.window);
+  world.ToRedrawOnScreen(GetRectangleToRefresh());
 }

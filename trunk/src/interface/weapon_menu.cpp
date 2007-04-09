@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -64,6 +64,8 @@ const uint BUTTON_WIDTH = (int)(BUTTON_ICO_GAP + BUTTON_ICO_WIDTH  *
 
 const uint BUTTON_HEIGHT = (int)(BUTTON_ICO_GAP + BUTTON_ICO_HEIGHT  *
                                 (DEFAULT_ICON_SCALE+MAX_ICON_SCALE)/2);
+
+const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 5;
 
 WeaponMenuItem::WeaponMenuItem(uint num_sort)
 {
@@ -219,6 +221,12 @@ WeaponsMenu::WeaponsMenu()
   my_button5 = new Sprite( resource_manager.LoadImage(res,"interface/button5_icon"));
   my_button5->cache.EnableLastFrameCache();
   resource_manager.UnLoadXMLProfile( res);
+  background = PolygonGenerator::GenerateRoundedRectangle(280, 500, 20);
+  background->SetPlaneColor(Color(255, 255, 255, 128));
+  background->SetBorderColor(Color(128, 128, 255, 255));
+  nb_weapon_type = new int[MAX_NUMBER_OF_WEAPON];
+  for(int i = 0; i < MAX_NUMBER_OF_WEAPON; i++)
+    nb_weapon_type[i] = 0;
 }
 
 // Add a new weapon to the weapon menu.
@@ -235,6 +243,10 @@ void WeaponsMenu::NewItem(Weapon* new_item, uint num_sort)
 
   if(num_sort>nbr_weapon_type)
     nbr_weapon_type = num_sort;
+
+  nb_weapon_type[num_sort]++;
+
+  background->AddItem(item.weapon_icon, background->GetMin() + Point2d(10 + num_sort * 50, 10 + nb_weapon_type[num_sort] * 50));
 }
 
 // Weapon menu display (init of the animation)
@@ -405,6 +417,13 @@ void WeaponsMenu::Draw()
 {
   if (!display)
     return;
+  position.SetTranslation(110, 260);
+  //AffineTransform2D shear;
+  AffineTransform2D rotation;
+  //shear.SetShear(cos(Time::GetInstance()->Read() / 200.0)/5, 0);
+  rotation.SetRotation(Time::GetInstance()->Read() / 1000.0);
+  background->ApplyTransformation(position * rotation);
+  background->DrawOnScreen();
 
   MouseOver(Mouse::GetInstance()->GetWorldPosition() - camera.GetPosition());
   ComputeSize();
