@@ -554,27 +554,6 @@ int Surface::TexturedPolygon(std::list<Point2i> polygon, const Surface * texture
   return result;
 }
 
-int Surface::DrawPolygon(const Polygon &poly)
-{
-  PolygonBuffer * tmp;
-  int result = 0;
-  tmp = poly.GetPolygonBuffer();
-  if(poly.IsPlaneColor()) {
-    Color plane_color = poly.GetPlaneColor();
-    result |= filledPolygonRGBA(surface, tmp->vx, tmp->vy, tmp->GetSize(), plane_color.GetRed(),
-                                plane_color.GetGreen(), plane_color.GetBlue(), plane_color.GetAlpha());
-  }
-  if(poly.IsTextured()) {
-    result |= texturedPolygon(surface, tmp->vx, tmp->vy, tmp->GetSize(), poly.GetTexture()->surface, 0, 0);
-  }
-  if(poly.IsBordered()) {
-    Color border_color = poly.GetBorderColor();
-    result |= aapolygonRGBA(surface, tmp->vx, tmp->vy, tmp->GetSize(), border_color.GetRed(),
-                                border_color.GetGreen(), border_color.GetBlue(), border_color.GetAlpha());
-  }
-  return result;
-}
-
 /**
  *
  * @param color

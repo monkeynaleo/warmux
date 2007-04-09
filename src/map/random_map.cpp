@@ -128,8 +128,8 @@ void RandomMap::Generate()
     bezier_shape->ApplyTransformation(translate);
     expanded_bezier_shape->ApplyTransformation(translate);
     // Then draw it
-    result.DrawPolygon(*expanded_bezier_shape);
-    result.DrawPolygon(*bezier_shape);
+    expanded_bezier_shape->Draw(&result);
+    bezier_shape->Draw(&result);
     // compute a new position
     current_h_position += x_direction * Random::GetDouble(w * 0.75, w * 1.25);
     current_v_position += y_direction * Random::GetDouble(h * 0.75, h * 1.25);

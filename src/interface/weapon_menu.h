@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
+ *  Copyright (C) 2001-2007 Wormux Team.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -38,7 +38,6 @@ public:
   Sprite *weapon_icon;
   uint zoom_start_time;
   uint weapon_type;
-
 private:
   bool zoom, dezoom;
 
@@ -58,13 +57,17 @@ private:
 class WeaponsMenu
 {
 public:
+  static const int MAX_NUMBER_OF_WEAPON;
   Sprite *my_button1;
   Sprite *my_button2;
   Sprite *my_button3;
   Sprite *my_button4;
   Sprite *my_button5;
+  int * nb_weapon_type;
 
 private:
+  Polygon * background;
+  AffineTransform2D position;
   std::vector<WeaponMenuItem> boutons;
   typedef std::vector<WeaponMenuItem>::iterator iterator;
   typedef std::vector<WeaponMenuItem>::const_iterator const_iterator;
