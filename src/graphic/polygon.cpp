@@ -147,7 +147,7 @@ Polygon::Polygon()
 Polygon::Polygon(const std::vector<Point2d> shape)
 {
   Init();
-  original_shape = shape;
+  transformed_shape = original_shape = shape;
   shape_buffer->SetSize(original_shape.size());
 }
 
@@ -161,7 +161,7 @@ Polygon::Polygon(const Polygon & poly)
   if(poly.IsBordered()) {
     border_color = new Color(poly.GetBorderColor());
   }
-  original_shape = poly.original_shape;
+  transformed_shape = original_shape = poly.original_shape;
   shape_buffer->SetSize(original_shape.size());
 }
 
@@ -171,31 +171,58 @@ void Polygon::Init()
   plane_color = NULL;
   border_color = NULL;
   original_shape.clear();
+  transformed_shape.clear();
   shape_buffer = new PolygonBuffer();
   min = max = Point2d(0.0, 0.0);
 }
 
 void Polygon::ApplyTransformation(const AffineTransform2D & trans)
 {
-  Point2d tmp;
   int i = 0;
   for(std::vector<Point2d>::iterator point = original_shape.begin();
       point != original_shape.end(); point++, i++) {
-    tmp = trans * (*point);
-    shape_buffer->vx[i] = (int)tmp.x;
-    shape_buffer->vy[i] = (int)tmp.y;
-    max = max.max(tmp);
-    min = min.min(tmp);
+    transformed_shape[i] = trans * (*point);
+    shape_buffer->vx[i] = (int)transformed_shape[i].x;
+    shape_buffer->vy[i] = (int)transformed_shape[i].y;
+    max = max.max(transformed_shape[i]);
+    min = min.min(transformed_shape[i]);
   }
   for(std::vector<PolygonItem>::iterator item = items.begin();
-      item != items.end(); item++, i++) {
+      item != items.end(); item++) {
     (*item).ApplyTransformation(trans);
   }
+}
+
+// Check if a point is inside the polygon using Jordan curve theorem (amen).
+// For better explanation : http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
+// Note : Compile but not tested yet !
+bool Polygon::IsInsidePolygon(const Point2d & p) const
+{
+  int i, j;
+  bool c = false;
+  for (i = 0, j = GetNbOfPoint() - 1; i < GetNbOfPoint(); j = i++) {
+    if ((((transformed_shape[i].y <= p.y) && (p.y < transformed_shape[j].y)) ||
+         ((transformed_shape[j].y <= p.y) && (p.y < transformed_shape[i].y))) &&
+        (p.x < (transformed_shape[j].x - transformed_shape[i].x) * (p.y - transformed_shape[i].y) / (transformed_shape[j].y - transformed_shape[i].y) + transformed_shape[i].x))
+          c = !c;
+  }
+  return c;
+}
+
+// Not accurate at 100% but sufficent for the moment
+bool Polygon::IsOverlapping(const Polygon & poly) const
+{
+  for(int i = 0; i < GetNbOfPoint(); i++) {
+    if(poly.IsInsidePolygon(transformed_shape[i]))
+      return true;
+  }
+  return false;
 }
 
 void Polygon::AddPoint(const Point2d & p)
 {
   original_shape.push_back(p);
+  transformed_shape.push_back(p);
   shape_buffer->SetSize(original_shape.size());
   shape_buffer->vx[original_shape.size() - 1] = (int)p.x;
   shape_buffer->vy[original_shape.size() - 1] = (int)p.y;
@@ -233,7 +260,7 @@ void Polygon::InsertPoint(int index, const Point2d & p)
     shape_buffer->vx[i] = (int)tmp.x;
     shape_buffer->vy[i] = (int)tmp.y;
   }
-  original_shape = vector_tmp;
+  transformed_shape = original_shape = vector_tmp;
 }
 
 void Polygon::DeletePoint(int index)
@@ -252,7 +279,7 @@ void Polygon::DeletePoint(int index)
     max = max.max(tmp);
     min = min.min(tmp);
   }
-  original_shape = vector_tmp;
+  transformed_shape = original_shape = vector_tmp;
 }
 
 void Polygon::AddItem(Sprite * sprite, const Point2d & pos)
@@ -320,14 +347,14 @@ Rectanglei Polygon::GetRectangleToRefresh() const
 
 Point2d Polygon::GetRandomUpperPoint()
 {
-  std::vector<Point2d>::iterator point = original_shape.begin();
+  std::vector<Point2d>::iterator point = transformed_shape.begin();
   Point2d tmp, previous;
   tmp = *point;
   int start = Random::GetInt(0, GetNbOfPoint());
   int i;
   for(i = 0; i < start; i++)
     point++;
-  while(point != original_shape.end()) {
+  while(point != transformed_shape.end()) {
     previous = *point++;
     i++;
     tmp = *point - previous;
@@ -455,7 +482,7 @@ void Polygon::Expand(const double expand_value)
     shape_buffer->vy[i] = (int)expand.y;
   }
   original_shape.clear();
-  original_shape = tmp_shape;
+  transformed_shape = original_shape = tmp_shape;
 }
 
 // Get information about Polygon
