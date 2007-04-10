@@ -108,6 +108,7 @@ public:
    int GetMenuHeight() const;
    Point2i GetSize() const;
 
+   void SetCurrentOverflyWeapon(Weapon * weapon);
    void UpdateTimer(uint utimer);
    void UpdateWindIndicator(int wind_value);
    void EnableDisplayTimer (bool _display) {display_timer = _display;};
