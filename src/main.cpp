@@ -166,8 +166,7 @@ void AppWormux::DisplayLoadingPicture()
   string txt_version =
     _("Version") + string(" ") + Constants::VERSION;
   string filename = config->GetDataDir() + PATH_SEPARATOR + "menu"
-                         + PATH_SEPARATOR + "img" + PATH_SEPARATOR
-                         + "loading.png";
+                         + PATH_SEPARATOR + "loading.png";
 
   Surface surfaceLoading = Surface(filename.c_str());
   Sprite loading_image = Sprite(surfaceLoading);
