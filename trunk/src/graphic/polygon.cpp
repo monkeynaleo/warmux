@@ -172,6 +172,7 @@ void Polygon::Init()
   border_color = NULL;
   original_shape.clear();
   transformed_shape.clear();
+  items.clear();
   shape_buffer = new PolygonBuffer();
   min = max = Point2d(0.0, 0.0);
 }
