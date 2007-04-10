@@ -39,6 +39,7 @@ InfoMap::InfoMap ()
   wind.nb_sprite = 0;
   wind.need_flip = false;
   random = false;
+  music_playlist = "ingame";
 }
 
 bool InfoMap::Init (const std::string &map_name,
@@ -132,6 +133,8 @@ bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
     wind.nb_sprite = 0;
   }
   wind.default_nb_sprite = wind.nb_sprite;
+
+  XmlReader::ReadString(xml, "music_playlist", music_playlist);
 
   return true;
 }

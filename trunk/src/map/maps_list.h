@@ -34,6 +34,7 @@ class InfoMap{
 private:
   std::string name;
   std::string author_info;
+  std::string music_playlist;
   Surface img_ground, img_sky;
   Surface preview;
 
@@ -66,6 +67,7 @@ public:
 
   const std::string& ReadName() const { return name; }
   const std::string& ReadAuthorInfo() const { return author_info; }
+  const std::string& ReadMusicPlaylist() const { return music_playlist; }
 
   Surface ReadImgGround();
   Surface ReadImgSky();
