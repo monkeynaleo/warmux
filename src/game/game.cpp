@@ -35,6 +35,7 @@
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
+#include "../map/maps_list.h"
 #include "../menu/results_menu.h"
 #include "../network/network.h"
 #include "../object/objects_list.h"
@@ -134,8 +135,7 @@ void Game::Start()
 
   try
   {
-
-    jukebox.PlayMusic("ingame");
+    jukebox.PlayMusic(ActiveMap().ReadMusicPlaylist());
     GameLoop::GetInstance()->Init ();
 
     do
