@@ -382,15 +382,11 @@ body/phpteam/foot-right.png
 body/phpteam/ear-right.png
 body/phpteam/tail.png
 body/body.dtd
-interface/button1.png
-interface/button2.png
 interface/pause.png
-interface/button3.png
-interface/button4.png
-interface/button5.png
 interface/quit.png
 interface/wind_indicator.png
 interface/background_interface.png
+interface/infinite.png
 interface/wind.png
 interface/clock_background.png
 interface/clock.png
