@@ -40,8 +40,8 @@ PolygonBuffer::PolygonBuffer()
 
 PolygonBuffer::~PolygonBuffer()
 {
-  delete vx;
-  delete vy;
+  delete[] vx;
+  delete[] vy;
 }
 
 int PolygonBuffer::GetSize() const
@@ -66,8 +66,8 @@ void PolygonBuffer::SetSize(const int size)
       vy[i] = tmp_vy[i];
     }
     buffer_size = size;
-    delete tmp_vx;
-    delete tmp_vy;
+    delete[] tmp_vx;
+    delete[] tmp_vy;
   }
 }
 
