@@ -75,6 +75,7 @@ class Polygon {
   Point2d min;
   // Original shape
   std::vector<Point2d> original_shape;
+  std::vector<Point2d> transformed_shape;
   // Vector of icons
   std::vector<PolygonItem> items;
   // Shape position after an affine transformation
@@ -91,6 +92,9 @@ class Polygon {
   void DeletePoint(int index);
   void ApplyTransformation(const AffineTransform2D & trans);
 
+  // Test
+  bool IsInsidePolygon(const Point2d & point) const;
+  bool IsOverlapping(const Polygon & poly) const;
   // Use to randomize a construction
   Point2d GetRandomUpperPoint();
   int GetRandomPointIndex();
