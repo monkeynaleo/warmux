@@ -67,6 +67,9 @@ class PolygonItem {
 
 /** Store information about a simple shape */
 class Polygon {
+ private:
+  void Init();
+
  protected:
   Surface * texture;
   Color * plane_color;
@@ -85,7 +88,6 @@ class Polygon {
   Polygon();
   Polygon(const std::vector<Point2d> shape);
   Polygon(const Polygon & poly);
-  void Init();
   // Point handling
   void AddPoint(const Point2d & p);
   void InsertPoint(int index, const Point2d & p);
