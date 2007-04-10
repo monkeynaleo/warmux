@@ -232,7 +232,7 @@ void GameLoop::Init()
      chatsession.Reset();
   Interface::GetInstance()->Reset();
   GameMessages::GetInstance()->Reset();
-  ParticleEngine::Init();
+  ParticleEngine::Load();
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   IgnorePendingInputEvents();

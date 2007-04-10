@@ -86,6 +86,7 @@ class ParticleEngine
   uint m_last_refresh;
   uint m_time_between_add;
 
+  static bool sprites_loaded;
   static Sprite* particle_sprite[particle_spr_nbr];
   static std::list<Particle *> lst_particles;
 
@@ -99,7 +100,7 @@ class ParticleEngine
 		   bool upper,
 		   double angle=-1, double norme=-1);
 
-  static void Init();
+  static void Load();
   static void FreeMem();
   static Sprite* GetSprite(particle_spr type);
 
