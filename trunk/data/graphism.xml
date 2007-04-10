@@ -151,6 +151,7 @@
   <color name="background_color" r="255" g="255" b="255" a="128" />
   <color name="border_color" r="43" g="53" b="108" a="255" />
   <point name="weapon_interface_size" x="320" y="550" />
+  <surface name="infinite" file="interface/infinite.png"/>
   <surface name="clock_background" file="interface/clock_background.png"/>
   <surface name="clock" file="interface/clock.png"/>
   <surface name="wind" file="interface/wind.png"/>

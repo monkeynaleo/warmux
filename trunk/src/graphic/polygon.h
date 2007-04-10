@@ -49,20 +49,26 @@ class PolygonItem {
  typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
  protected:
   Point2d position;
-  Point2i trans_position;
+  Point2d transformed_position;
   Sprite * item;
   V_align v_align;
   H_align h_align;
+ protected:
+  virtual Point2i GetOffsetAlignment() const;
  public:
+  PolygonItem();
   PolygonItem(Sprite * sprite, const Point2d & pos, V_align v_a = V_CENTERED, H_align h_a = H_CENTERED);
+  virtual ~PolygonItem();
   void SetPosition(const Point2d & pos);
   void SetAlignment(V_align v_a = V_CENTERED, H_align h_a = H_CENTERED);
-  const Point2d & GetPosition();
-  const Point2i & GetTransformedPosition();
+  const Point2d & GetPosition() const;
+  const Point2d & GetTransformedPosition() const;
+  Point2i GetIntTransformedPosition() const;
+  virtual bool Contains(const Point2d & p) const;
   void SetSprite(Sprite * sprite);
   const Sprite * GetSprite();
-  void ApplyTransformation(const AffineTransform2D & trans);
-  void Draw(Surface * dest);
+  virtual void ApplyTransformation(const AffineTransform2D & trans);
+  virtual void Draw(Surface * dest);
 };
 
 /** Store information about a simple shape */
@@ -80,7 +86,7 @@ class Polygon {
   std::vector<Point2d> original_shape;
   std::vector<Point2d> transformed_shape;
   // Vector of icons
-  std::vector<PolygonItem> items;
+  std::vector<PolygonItem *> items;
   // Shape position after an affine transformation
   PolygonBuffer * shape_buffer;
 
@@ -97,6 +103,7 @@ class Polygon {
   // Test
   bool IsInsidePolygon(const Point2d & point) const;
   bool IsOverlapping(const Polygon & poly) const;
+
   // Use to randomize a construction
   Point2d GetRandomUpperPoint();
   int GetRandomPointIndex();
@@ -147,7 +154,9 @@ class Polygon {
 
   // Item management
   void AddItem(Sprite * sprite, const Point2d & pos);
+  void AddItem(PolygonItem * item);
   void DelItem(int index);
+  std::vector<PolygonItem *> GetItem() const;
 };
 
 #endif /* POLYGON_H */

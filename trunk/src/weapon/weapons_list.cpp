@@ -70,7 +70,7 @@ void WeaponsList::AddToList(Weapon* weapon, uint num_sort)
 
   m_weapons_map.insert(keybind(num_sort, weapon));
 
-  Interface::GetInstance()->weapons_menu.NewItem(weapon, num_sort);
+  Interface::GetInstance()->weapons_menu.AddWeapon(weapon, num_sort);
 }
 
 //-----------------------------------------------------------------------------

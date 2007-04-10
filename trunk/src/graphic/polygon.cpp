@@ -74,6 +74,13 @@ void PolygonBuffer::SetSize(const int size)
 //=========== POLYGON ITEM ============ //
 // Use this structure to draw item
 
+PolygonItem::PolygonItem()
+{
+  transformed_position = position = Point2d(0, 0);
+  SetSprite(NULL);
+  SetAlignment(V_CENTERED, H_CENTERED);
+}
+
 PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, V_align v_a, H_align h_a)
 {
   SetPosition(pos);
@@ -81,10 +88,13 @@ PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, V_align v_a, H_al
   SetAlignment(v_a, h_a);
 }
 
+PolygonItem::~PolygonItem()
+{
+}
+
 void PolygonItem::SetPosition(const Point2d & pos)
 {
-  position = pos;
-  trans_position = Point2i((int)pos.x, (int)pos.y);
+  transformed_position = position = pos;
 }
 
 void PolygonItem::SetAlignment(V_align v_a, H_align h_a)
@@ -93,14 +103,19 @@ void PolygonItem::SetAlignment(V_align v_a, H_align h_a)
   h_align = h_a;
 }
 
-const Point2d & PolygonItem::GetPosition()
+const Point2d & PolygonItem::GetPosition() const
 {
   return position;
 }
 
-const Point2i & PolygonItem::GetTransformedPosition()
+const Point2d & PolygonItem::GetTransformedPosition() const
 {
-  return trans_position;
+  return transformed_position;
+}
+
+Point2i PolygonItem::GetIntTransformedPosition() const
+{
+  return Point2i((int)transformed_position.x, (int)transformed_position.y);
 }
 
 void PolygonItem::SetSprite(Sprite * sprite)
@@ -115,24 +130,35 @@ const Sprite * PolygonItem::GetSprite()
 
 void PolygonItem::ApplyTransformation(const AffineTransform2D & trans)
 {
-  Point2d tmp = trans * position;
-  trans_position = Point2i((int)tmp.x, (int)tmp.y);
+  transformed_position = trans * position;
 }
 
 void PolygonItem::Draw(Surface * dest)
 {
-  int x, y;
+  if(item == NULL)
+    return;
+  item->Blit(*dest, GetOffsetAlignment());
+}
+
+bool PolygonItem::Contains(const Point2d & p) const
+{
+  return Rectanglei(GetOffsetAlignment(), item->GetSize()).Contains(Point2i((int)p.x, (int)p.y));
+}
+
+Point2i PolygonItem::GetOffsetAlignment() const
+{
+  Point2i offset;
   switch(v_align) {
-    case TOP: y = trans_position.y; break;
-    case BOTTOM: y = trans_position.y - item->GetHeight(); break;
-    default : y = trans_position.y - (item->GetHeight() / 2); break;
+    case TOP: offset.y = (int)transformed_position.y; break;
+    case BOTTOM: offset.y = (int)transformed_position.y - item->GetHeight(); break;
+    default : offset.y = (int)transformed_position.y - (item->GetHeight() / 2); break;
   }
   switch(h_align) {
-    case LEFT: x = trans_position.x; break;
-    case RIGHT: x = trans_position.x - item->GetWidth(); break;
-    default : x = trans_position.x - (item->GetWidth() / 2); break;
+    case LEFT: offset.x = (int)transformed_position.x; break;
+    case RIGHT: offset.x = (int)transformed_position.x - item->GetWidth(); break;
+    default : offset.x = (int)transformed_position.x - (item->GetWidth() / 2); break;
   }
-  item->Blit(*dest, x, y);
+  return offset;
 }
 
 //=========== POLYGON ============ //
@@ -188,9 +214,9 @@ void Polygon::ApplyTransformation(const AffineTransform2D & trans)
     max = max.max(transformed_shape[i]);
     min = min.min(transformed_shape[i]);
   }
-  for(std::vector<PolygonItem>::iterator item = items.begin();
+  for(std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {
-    (*item).ApplyTransformation(trans);
+    (*item)->ApplyTransformation(trans);
   }
 }
 
@@ -285,20 +311,30 @@ void Polygon::DeletePoint(int index)
 
 void Polygon::AddItem(Sprite * sprite, const Point2d & pos)
 {
-  items.push_back(PolygonItem(sprite, pos));
+  items.push_back(new PolygonItem(sprite, pos));
+}
+
+void Polygon::AddItem(PolygonItem * item)
+{
+  items.push_back(item);
 }
 
 void Polygon::DelItem(int index)
 {
-  std::vector<PolygonItem> vector_tmp;
+  std::vector<PolygonItem *> vector_tmp;
   Point2d tmp;
   int i = 0;
-  for(std::vector<PolygonItem>::iterator item = items.begin();
+  for(std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++, i++) {
     if(i == index) continue; // Skip point to remove
     vector_tmp.push_back(*item);
   }
   items = vector_tmp;
+}
+
+std::vector<PolygonItem *> Polygon::GetItem() const
+{
+  return items;
 }
 
 double Polygon::GetWidth() const
@@ -549,9 +585,9 @@ void Polygon::Draw(Surface * dest)
     dest->AAPolygonColor(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *border_color);
 
   // Draw Item
-  for(std::vector<PolygonItem>::iterator item = items.begin();
+  for(std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {
-    item->Draw(dest);
+    (*item)->Draw(dest);
   }
 }
 

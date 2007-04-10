@@ -399,6 +399,11 @@ void Interface::UpdateTimer(uint utimer)
   remaining_turn_time = utimer;
 }
 
+void Interface::SetCurrentOverflyWeapon(Weapon * weapon)
+{
+  weapon_under_cursor = weapon;
+}
+
 void Interface::UpdateWindIndicator(int wind_value)
 {
   wind_bar.UpdateValue(wind_value);
