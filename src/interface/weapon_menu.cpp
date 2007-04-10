@@ -55,7 +55,7 @@ const uint BUTTON_ICO_GAP = 8; // Gap between buttons when a button is zoomed
 
 const uint ICONS_DRAW_TIME = 600; // Time to display all icons (in ms)
 const uint ICON_ZOOM_TIME = 150; // Time to zoom one icon.
-const uint JELLY_TIME = 600;     // Jelly time when appearing
+const uint JELLY_TIME = 300;     // Jelly time when appearing
 
 const double DEFAULT_ICON_SCALE = 0.7;
 const double MAX_ICON_SCALE = 1.1;
@@ -88,7 +88,8 @@ bool WeaponMenuItem::IsMouseOver()
       zoom_start_time = Time::GetInstance()->Read();
     }
     return true;
-  } else {
+  }
+  if(zoom) {
     zoom = false;
     zoom_start_time = Time::GetInstance()->Read();
   }
@@ -98,15 +99,16 @@ bool WeaponMenuItem::IsMouseOver()
 void WeaponMenuItem::Draw(Surface * dest)
 {
   double scale = DEFAULT_ICON_SCALE;
-  if(zoom) {
+  if(zoom || zoom_start_time + ICON_ZOOM_TIME > Time::GetInstance()->Read()) {
     scale = (Time::GetInstance()->Read() - zoom_start_time) / (double)ICON_ZOOM_TIME;
-    scale = DEFAULT_ICON_SCALE + (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
-    scale = (scale > MAX_ICON_SCALE ? MAX_ICON_SCALE : scale);
-  } /* else if(zoom_start_time + ICON_ZOOM_TIME < Time::GetInstance()->Read()) {
-    scale = 1.0 - (Time::GetInstance()->Read() - zoom_start_time) / (double)ICON_ZOOM_TIME;
-    scale = MAX_ICON_SCALE - (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
-    scale = (scale < DEFAULT_ICON_SCALE ? DEFAULT_ICON_SCALE : scale);
-  }*/
+    if(zoom) {
+      scale = DEFAULT_ICON_SCALE + (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
+      scale = (scale > MAX_ICON_SCALE ? MAX_ICON_SCALE : scale);
+    } else {
+      scale = MAX_ICON_SCALE - (MAX_ICON_SCALE - DEFAULT_ICON_SCALE) * scale;
+      scale = (scale > DEFAULT_ICON_SCALE ? scale : DEFAULT_ICON_SCALE);
+    }
+  }
   item->Scale(scale, scale);
   PolygonItem::Draw(dest);
   int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetName());
@@ -211,8 +213,9 @@ void WeaponsMenu::Draw()
   AffineTransform2D shear;
   AffineTransform2D rotation;
   AffineTransform2D zoom;
+  double coef;
   if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME) {
-    double coef = ((Time::GetInstance()->Read() - motion_start_time) / (double)ICONS_DRAW_TIME);
+    coef = ((Time::GetInstance()->Read() - motion_start_time) / (double)ICONS_DRAW_TIME);
     if(show) {
       zoom.SetShrink(coef, coef);
       rotation.SetRotation(coef * M_PI * 2.0);
@@ -220,13 +223,13 @@ void WeaponsMenu::Draw()
       zoom.SetShrink(1.0 - coef, 1.0 - coef);
       rotation.SetRotation(2 * M_PI - coef * M_PI * 2);
     }
-  } /*else if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME + JELLY_TIME) {
-    if(show) {
-      shear.SetShear(sin((Time::GetInstance()->Read() - motion_start_time + ICONS_DRAW_TIME) / 5.0), 0);
-    }
-  }*/
+  } else if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME + JELLY_TIME) {
+    coef = 1.0 - ((double)Time::GetInstance()->Read() - (motion_start_time + ICONS_DRAW_TIME)) / (double)JELLY_TIME;
+    coef = -(cos((1.0 - coef) * M_PI * 4) * coef) / 5;
+    shear.SetShear(coef, 0);
+  }
   // Draw background
-  background->ApplyTransformation(position * zoom * rotation * shear);
+  background->ApplyTransformation(position * shear * zoom * rotation);
   background->DrawOnScreen();
   UpdateCurrentOverflyWeapon();
 }
