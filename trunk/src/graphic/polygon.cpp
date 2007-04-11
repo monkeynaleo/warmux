@@ -577,13 +577,26 @@ const Color & Polygon::GetPlaneColor() const
 void Polygon::Draw(Surface * dest)
 {
   // Draw polygon
-  if(IsPlaneColor())
-    dest->FilledPolygon(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *plane_color);
-  if(IsTextured())
-    dest->TexturedPolygon(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), texture, 0, 0);
-  if(IsBordered())
-    dest->AAPolygonColor(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *border_color);
-
+  if(is_closed) {
+    if(IsPlaneColor())
+      dest->FilledPolygon(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *plane_color);
+    if(IsTextured())
+      dest->TexturedPolygon(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), texture, 0, 0);
+    if(IsBordered())
+      dest->AAPolygonColor(shape_buffer->vx, shape_buffer->vy, shape_buffer->GetSize(), *border_color);
+  } else {
+    // Draw Line
+    Color *tmp;
+    if(IsBordered())
+      tmp = border_color;
+    else
+      tmp = plane_color;
+    if(tmp != NULL) {
+      for(int i = 0; i < shape_buffer->GetSize() - 1; i++) {
+        dest->AALineColor(shape_buffer->vx[i], shape_buffer->vx[i + 1], shape_buffer->vy[i], shape_buffer->vy[i + 1], *tmp);
+      }
+    }
+  }
   // Draw Item
   for(std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {
