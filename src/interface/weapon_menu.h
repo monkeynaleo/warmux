@@ -49,10 +49,13 @@ class WeaponsMenu
   static const int MAX_NUMBER_OF_WEAPON;
 
  private:
-  Polygon * background;
+  Polygon * weapons_menu;
+  Polygon * tools_menu;
   AffineTransform2D position;
+  AffineTransform2D shear;
+  AffineTransform2D rotation;
+  AffineTransform2D zoom;
   Sprite * infinite;
-  Weapon * weapon_over_mouse;
   bool show;
   uint motion_start_time;
 
@@ -66,13 +69,15 @@ class WeaponsMenu
   void AddTool(Weapon* new_item, uint num_sort);
   void Draw();
   void SwitchDisplay();
+  AffineTransform2D ComputeWeaponTransformation();
+  AffineTransform2D ComputeToolTransformation();
   void Show();
   void Hide();
   void Reset();
   bool IsDisplayed() const;
   bool ActionClic(const Point2i &mouse_pos);
   Sprite * GetInfiniteSymbol() const;
-  Weapon * UpdateCurrentOverflyWeapon() const;
+  Weapon * UpdateCurrentOverflyItem(Polygon * poly) const;
 };
 
 #endif

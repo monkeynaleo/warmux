@@ -45,8 +45,9 @@ class PolygonBuffer {
 
 /** Store information about a item (sprite) of the polygon */
 class PolygonItem {
- typedef enum { TOP,  V_CENTERED, BOTTOM } V_align;
- typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
+ public:
+  typedef enum { TOP,  V_CENTERED, BOTTOM } V_align;
+  typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
  protected:
   Point2d position;
   Point2d transformed_position;
@@ -57,10 +58,10 @@ class PolygonItem {
   virtual Point2i GetOffsetAlignment() const;
  public:
   PolygonItem();
-  PolygonItem(Sprite * sprite, const Point2d & pos, V_align v_a = V_CENTERED, H_align h_a = H_CENTERED);
+  PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
   virtual ~PolygonItem();
   void SetPosition(const Point2d & pos);
-  void SetAlignment(V_align v_a = V_CENTERED, H_align h_a = H_CENTERED);
+  void SetAlignment(H_align h_a = H_CENTERED, V_align v_a = V_CENTERED);
   const Point2d & GetPosition() const;
   const Point2d & GetTransformedPosition() const;
   Point2i GetIntTransformedPosition() const;
@@ -77,6 +78,7 @@ class Polygon {
   void Init();
 
  protected:
+  bool is_closed;
   Surface * texture;
   Color * plane_color;
   Color * border_color;
@@ -139,6 +141,11 @@ class Polygon {
   bool IsTextured() const;
   bool IsPlaneColor() const;
   bool IsBordered() const;
+  bool IsClosed() const;
+  // Set type to Open
+  void SetOpen();
+  void SetClosed();
+
   // Texture handling
   Surface * GetTexture() const;
   void SetTexture(Surface * texture_surface);
@@ -153,7 +160,9 @@ class Polygon {
   void DrawOnScreen();
 
   // Item management
-  void AddItem(Sprite * sprite, const Point2d & pos);
+  void AddItem(Sprite * sprite, const Point2d & pos,
+               PolygonItem::H_align h_a = PolygonItem::H_CENTERED,
+               PolygonItem::V_align v_a = PolygonItem::V_CENTERED);
   void AddItem(PolygonItem * item);
   void DelItem(int index);
   std::vector<PolygonItem *> GetItem() const;

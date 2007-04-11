@@ -30,6 +30,9 @@ class PolygonGenerator {
    static Polygon * GenerateCircle(double diameter, int nb_point);
    static Polygon * GenerateDentedCircle(double diameter, int nb_point, double rand_offset);
    static Polygon * GenerateRectangle(double width, double height);
+   static Polygon * GenerateRectangle(const Rectanglei & rectangle);
+   static Polygon * GenerateRectangle(const Point2d & orig, const Point2d & size);
+   static Polygon * GenerateRectangle(const Point2i & orig, const Point2i & size);
    static Polygon * GenerateRoundedRectangle(double width, double height, double edge);
    static Polygon * GenerateRandomShape();
    static Polygon * GenerateRandomTrapeze(const double width, const double height,

@@ -213,3 +213,8 @@ int Font::GetHeight (const std::string &str){
 Point2i Font::GetSize(const std::string &txt){
 	return Point2i(GetWidth(txt), GetHeight(txt));
 }
+
+Surface Font::GenerateSurface(const std::string &txt, const Color &color, int font_size, int font_style)
+{
+  return Surface(Font::GetInstance(font_size, font_style)->CreateSurface(txt, color));
+}

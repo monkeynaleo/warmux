@@ -109,45 +109,56 @@ WeaponsList::WeaponsList()
   Blowtorch* blowtorch = new Blowtorch;
   Syringe* syringe = new Syringe;
 
+  int i = 1;
   // Category 1
-  AddToList(bazooka, 1);
-  AddToList(submachine_gun, 1);
-  AddToList(snipe_rifle, 1);
-  AddToList(gun, 1);
-  AddToList(shotgun, 1);
-  AddToList(riot_bomb, 1);
-  AddToList(auto_bazooka, 1);
+  AddToList(bazooka, i);
+  AddToList(riot_bomb, i);
+  AddToList(auto_bazooka, i);
+  AddToList(air_attack, i);
 
   // Category 2
-  AddToList(dynamite,2);
-  AddToList(grenade_launcher, 2);
-  AddToList(cluster_launcher, 2);
-  AddToList(disco_grenade_launcher, 2);
-  AddToList(mine,2);
+  i++;
+  AddToList(submachine_gun, i);
+  AddToList(gun, i);
+  AddToList(shotgun, i);
+  AddToList(snipe_rifle, i);
 
   // Category 3
-  AddToList(baseball, 3);
-  AddToList(syringe,3);
-  AddToList(tux,3);
-  AddToList(gnu_launcher,3);
-  AddToList(polecat_launcher,3);
-  AddToList(air_attack,3);
-  AddToList(anvil,3);
-  AddToList(bounce_ball_launcher,3);
+  i++;
+  AddToList(cluster_launcher, i);
+  AddToList(grenade_launcher, i);
+  AddToList(disco_grenade_launcher, i);
+  AddToList(dynamite, i);
+  AddToList(mine, i);
 
   // Category 4
-  AddToList(ninjarope,4);
-  AddToList(jetpack,4);
-  AddToList(parachute,4);
-  AddToList(teleportation,4);
-  AddToList(lowgrav,4);
+  i++;
+  AddToList(gnu_launcher, i);
+  AddToList(tux, i);
+  AddToList(polecat_launcher, i);
 
   // Category 5
-  AddToList(skipturn,5);
-  AddToList(airhammer,5);
-  AddToList(construct,5);
-  AddToList(blowtorch,5);
-  AddToList(suicide,5);
+  i++;
+  AddToList(baseball, i);
+  AddToList(bounce_ball_launcher, i);
+  AddToList(anvil, i);
+  AddToList(syringe, i);
+  AddToList(suicide, i);
+
+  // Category 6
+  i++;
+  AddToList(ninjarope, i);
+  AddToList(jetpack, i);
+  AddToList(parachute, i);
+  AddToList(teleportation, i);
+  AddToList(lowgrav, i);
+
+  // Category 7
+  i++;
+  AddToList(skipturn,i);
+  AddToList(airhammer,i);
+  AddToList(construct,i);
+  AddToList(blowtorch,i);
 
   ref_counter = 0;
 }

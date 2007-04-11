@@ -38,6 +38,7 @@
 #include "../tool/rectangle.h"
 #include "../tool/string_tools.h"
 #include "../tool/resource_manager.h"
+#include "../tool/i18n.h"
 #include "../graphic/sprite.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
@@ -66,7 +67,7 @@ const uint BUTTON_WIDTH = (int)(BUTTON_ICO_GAP + BUTTON_ICO_WIDTH  *
 const uint BUTTON_HEIGHT = (int)(BUTTON_ICO_GAP + BUTTON_ICO_HEIGHT  *
                                 (DEFAULT_ICON_SCALE + MAX_ICON_SCALE)/2);
 
-const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 5;
+const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 7;
 
 
 WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
@@ -136,11 +137,26 @@ WeaponsMenu::WeaponsMenu()
   // Loading value from XML
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   infinite = new Sprite(resource_manager.LoadImage(res, "interface/infinite"));
-  Point2i size = resource_manager.LoadPoint2i(res, "interface/weapon_interface_size");
-  background = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
-  background->SetPlaneColor(resource_manager.LoadColor(res, "interface/background_color"));
-  background->SetBorderColor(resource_manager.LoadColor(res, "interface/border_color"));
-  weapon_over_mouse = NULL;
+  // Polygon Size
+  Point2i size = resource_manager.LoadPoint2i(res, "interface/weapons_interface_size");
+  weapons_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
+  size = resource_manager.LoadPoint2i(res, "interface/tools_interface_size");
+  tools_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
+
+  // Setting colors
+  Color plane_color = resource_manager.LoadColor(res, "interface/background_color");
+  Color border_color = resource_manager.LoadColor(res, "interface/border_color");
+  weapons_menu->SetPlaneColor(plane_color);
+  weapons_menu->SetBorderColor(border_color);
+  tools_menu->SetPlaneColor(plane_color);
+  tools_menu->SetBorderColor(border_color);
+
+  // Adding label
+  weapons_menu->AddItem(new Sprite(Font::GenerateSurface(_("Weapons"), gray_color, Font::FONT_BIG)),
+                        weapons_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
+  tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), gray_color, Font::FONT_BIG)),
+                        tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
+
   nb_weapon_type = new int[MAX_NUMBER_OF_WEAPON];
   for(int i = 0; i < MAX_NUMBER_OF_WEAPON; i++)
     nb_weapon_type[i] = 0;
@@ -151,14 +167,17 @@ WeaponsMenu::WeaponsMenu()
 void WeaponsMenu::AddWeapon(Weapon* new_item, uint num_sort)
 {
   Point2d position;
-  if(num_sort < 5)
-    position = background->GetMin() + Point2d(10 + (num_sort * 50), 10 + nb_weapon_type[num_sort - 1] * 50);
-  else
-    position = background->GetMin() + Point2d(10 + nb_weapon_type[num_sort - 1] * 50, 490);
-  WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
+  if(num_sort < 6) {
+    position = weapons_menu->GetMin() + Point2d(50 + nb_weapon_type[num_sort - 1] * 50, 20 + num_sort * 50);
+    WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
+    weapons_menu->AddItem(item);
+  } else {
+    position = tools_menu->GetMin() + Point2d(50 + (num_sort - 6) * 50, 80 + nb_weapon_type[num_sort - 1] * 50);
+    WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
+    tools_menu->AddItem(item);
+  }
 
   nb_weapon_type[num_sort - 1]++;
-  background->AddItem(item);
 }
 
 // Weapon menu display (init of the animation)
@@ -205,15 +224,24 @@ Sprite * WeaponsMenu::GetInfiniteSymbol() const
   return infinite;
 }
 
-void WeaponsMenu::Draw()
+AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 {
-  if(!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + ICONS_DRAW_TIME))
-    return;
-  position.SetTranslation(-background->GetMin() + Point2d(10.0, 10.0));
-  AffineTransform2D shear;
-  AffineTransform2D rotation;
-  AffineTransform2D zoom;
+  position.Init();
+  shear.Init();
+  rotation.Init();
+  zoom.Init();
+  position.SetTranslation((AppWormux::GetInstance()->video.window.GetSize() / 2));
+  return position * shear * zoom * rotation;
+}
+
+AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
+{
   double coef;
+  position.Init();
+  shear.Init();
+  rotation.Init();
+  zoom.Init();
+  position.SetTranslation((AppWormux::GetInstance()->video.window.GetSize() / 2) - Point2i((int)(weapons_menu->GetWidth() / 2), 0));
   if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME) {
     coef = ((Time::GetInstance()->Read() - motion_start_time) / (double)ICONS_DRAW_TIME);
     if(show) {
@@ -228,18 +256,32 @@ void WeaponsMenu::Draw()
     coef = -(cos((1.0 - coef) * M_PI * 4) * coef) / 5;
     shear.SetShear(coef, 0);
   }
-  // Draw background
-  background->ApplyTransformation(position * shear * zoom * rotation);
-  background->DrawOnScreen();
-  UpdateCurrentOverflyWeapon();
+  return position * shear * zoom * rotation;
 }
 
-Weapon * WeaponsMenu::UpdateCurrentOverflyWeapon() const
+void WeaponsMenu::Draw()
 {
-  std::vector<PolygonItem *> items = background->GetItem();
+  if(!show && (motion_start_time == 0 || Time::GetInstance()->Read() >= motion_start_time + ICONS_DRAW_TIME))
+    return;
+  // Draw weapons menu
+  weapons_menu->ApplyTransformation(ComputeWeaponTransformation());
+  weapons_menu->DrawOnScreen();
+  // Tools
+  tools_menu->ApplyTransformation(ComputeToolTransformation());
+  tools_menu->DrawOnScreen();
+  // Update overfly weapon/tool
+  if(UpdateCurrentOverflyItem(weapons_menu) == NULL)
+    UpdateCurrentOverflyItem(tools_menu);
+}
+
+Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly) const
+{
+  std::vector<PolygonItem *> items = poly->GetItem();
   WeaponMenuItem * tmp;
   Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
-  for(std::vector<PolygonItem *>::iterator item = items.begin(); item != items.end(); item++) {
+  std::vector<PolygonItem *>::iterator item = items.begin();
+  ++item; // Skeeping first item which is a text label
+  for(; item != items.end(); item++) {
     tmp = (WeaponMenuItem *)(*item);
     if(tmp->IsMouseOver()) {
       Interface::GetInstance()->SetCurrentOverflyWeapon(tmp->GetWeapon());
@@ -254,7 +296,8 @@ bool WeaponsMenu::ActionClic(const Point2i &mouse_pos)
   Weapon * tmp;
   if(!show)
     return false;
-  tmp = UpdateCurrentOverflyWeapon();
+  if((tmp = UpdateCurrentOverflyItem(weapons_menu)) == NULL)
+    tmp = UpdateCurrentOverflyItem(tools_menu);
   if(tmp != NULL) {
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, tmp->GetType()));
     Hide();

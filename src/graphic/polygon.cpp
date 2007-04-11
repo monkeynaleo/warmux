@@ -78,14 +78,14 @@ PolygonItem::PolygonItem()
 {
   transformed_position = position = Point2d(0, 0);
   SetSprite(NULL);
-  SetAlignment(V_CENTERED, H_CENTERED);
+  SetAlignment(H_CENTERED, V_CENTERED);
 }
 
-PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, V_align v_a, H_align h_a)
+PolygonItem::PolygonItem(Sprite * sprite, const Point2d & pos, H_align h_a, V_align v_a)
 {
   SetPosition(pos);
   SetSprite(sprite);
-  SetAlignment(v_a, h_a);
+  SetAlignment(h_a, v_a);
 }
 
 PolygonItem::~PolygonItem()
@@ -97,10 +97,10 @@ void PolygonItem::SetPosition(const Point2d & pos)
   transformed_position = position = pos;
 }
 
-void PolygonItem::SetAlignment(V_align v_a, H_align h_a)
+void PolygonItem::SetAlignment(H_align h_a, V_align v_a)
 {
-  v_align = v_a;
   h_align = h_a;
+  v_align = v_a;
 }
 
 const Point2d & PolygonItem::GetPosition() const
@@ -309,9 +309,9 @@ void Polygon::DeletePoint(int index)
   transformed_shape = original_shape = vector_tmp;
 }
 
-void Polygon::AddItem(Sprite * sprite, const Point2d & pos)
+void Polygon::AddItem(Sprite * sprite, const Point2d & pos, PolygonItem::H_align h_a, PolygonItem::V_align v_a)
 {
-  items.push_back(new PolygonItem(sprite, pos));
+  items.push_back(new PolygonItem(sprite, pos, h_a, v_a));
 }
 
 void Polygon::AddItem(PolygonItem * item)
