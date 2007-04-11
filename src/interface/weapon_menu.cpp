@@ -45,27 +45,12 @@
 
 
 // Weapon menu
-const uint BUTTON_ICO_WIDTH = 58;  // Width of the button icon
-const uint BUTTON_ICO_HEIGHT = 58; // Height of the button icon
-
-const uint WEAPON_ICO_WIDTH = 48;   // Width of the weapon icon
-const uint WEAPON_ICO_HEIGHT = 48;  // Height of the button icon
-
-const uint BUTTON_ICO_GAP = 8; // Gap between buttons when a button is zoomed
-
-
 const uint ICONS_DRAW_TIME = 600; // Time to display all icons (in ms)
 const uint ICON_ZOOM_TIME = 150; // Time to zoom one icon.
 const uint JELLY_TIME = 300;     // Jelly time when appearing
 
 const double DEFAULT_ICON_SCALE = 0.7;
 const double MAX_ICON_SCALE = 1.1;
-
-const uint BUTTON_WIDTH = (int)(BUTTON_ICO_GAP + BUTTON_ICO_WIDTH  *
-                               (DEFAULT_ICON_SCALE + MAX_ICON_SCALE)/2);
-
-const uint BUTTON_HEIGHT = (int)(BUTTON_ICO_GAP + BUTTON_ICO_HEIGHT  *
-                                (DEFAULT_ICON_SCALE + MAX_ICON_SCALE)/2);
 
 const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 7;
 
@@ -168,7 +153,7 @@ void WeaponsMenu::AddWeapon(Weapon* new_item, uint num_sort)
 {
   Point2d position;
   if(num_sort < 6) {
-    position = weapons_menu->GetMin() + Point2d(50 + nb_weapon_type[num_sort - 1] * 50, 20 + num_sort * 50);
+    position = weapons_menu->GetMin() + Point2d(50 + nb_weapon_type[num_sort - 1] * 50, 80 + (num_sort - 1) * 50);
     WeaponMenuItem * item = new WeaponMenuItem(new_item, position);
     weapons_menu->AddItem(item);
   } else {
@@ -226,28 +211,49 @@ Sprite * WeaponsMenu::GetInfiniteSymbol() const
 
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 {
+  double coef;
+  Point2i translate = (AppWormux::GetInstance()->video.window.GetSize() / 2);
   position.Init();
   shear.Init();
   rotation.Init();
   zoom.Init();
-  position.SetTranslation((AppWormux::GetInstance()->video.window.GetSize() / 2));
+  position.SetTranslation(translate);
+  if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME) {
+    coef = ((Time::GetInstance()->Read() - motion_start_time) / (double)ICONS_DRAW_TIME);
+    if(show) {
+      position.SetTranslation(POINT2I_2_POINT2D(translate) + POINT2I_2_POINT2D(translate) * Point2d(1.0 - coef, 1.0 - coef));
+      zoom.SetShrink(coef, coef);
+      rotation.SetRotation(coef * M_PI * 2.0);
+    } else {
+      position.SetTranslation(POINT2I_2_POINT2D(translate) + POINT2I_2_POINT2D(translate) * Point2d(coef, coef));
+      zoom.SetShrink(1.0 - coef, 1.0 - coef);
+      rotation.SetRotation(2 * M_PI - coef * M_PI * 2);
+    }
+  } else if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME + JELLY_TIME) {
+    coef = 1.0 - ((double)Time::GetInstance()->Read() - (motion_start_time + ICONS_DRAW_TIME)) / (double)JELLY_TIME;
+    coef = -(cos((1.0 - coef) * M_PI * 4) * coef) / 5;
+    shear.SetShear(coef, 0);
+  }
   return position * shear * zoom * rotation;
 }
 
 AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 {
   double coef;
+  Point2i translate = (AppWormux::GetInstance()->video.window.GetSize() / 2) - Point2i((int)(weapons_menu->GetWidth() / 2), 0);
   position.Init();
   shear.Init();
   rotation.Init();
   zoom.Init();
-  position.SetTranslation((AppWormux::GetInstance()->video.window.GetSize() / 2) - Point2i((int)(weapons_menu->GetWidth() / 2), 0));
+  position.SetTranslation(translate);
   if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME) {
     coef = ((Time::GetInstance()->Read() - motion_start_time) / (double)ICONS_DRAW_TIME);
     if(show) {
+      position.SetTranslation(POINT2I_2_POINT2D(translate) * Point2d(coef, coef));
       zoom.SetShrink(coef, coef);
       rotation.SetRotation(coef * M_PI * 2.0);
     } else {
+      position.SetTranslation(POINT2I_2_POINT2D(translate) * Point2d(1.0 - coef, 1.0 - coef));
       zoom.SetShrink(1.0 - coef, 1.0 - coef);
       rotation.SetRotation(2 * M_PI - coef * M_PI * 2);
     }
