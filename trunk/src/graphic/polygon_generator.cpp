@@ -40,6 +40,28 @@ Polygon * PolygonGenerator::GenerateRectangle(double width, double height)
   return tmp;
 }
 
+Polygon * PolygonGenerator::GenerateRectangle(const Point2d & orig, const Point2d & size)
+{
+  Polygon * tmp = new Polygon();
+  tmp->AddPoint(Point2d(orig.x + size.x, orig.y + size.y));
+  tmp->AddPoint(Point2d(orig.x + size.x, orig.y));
+  tmp->AddPoint(Point2d(orig.x,          orig.y));
+  tmp->AddPoint(Point2d(orig.x,          orig.y + size.y));
+  return tmp;
+}
+
+Polygon * PolygonGenerator::GenerateRectangle(const Rectanglei & r)
+{
+  return PolygonGenerator::GenerateRectangle(POINT2I_2_POINT2D(r.GetPosition()),
+                                             POINT2I_2_POINT2D(r.GetSize()));
+}
+
+Polygon * PolygonGenerator::GenerateRectangle(const Point2i & orig, const Point2i & size)
+{
+  return PolygonGenerator::GenerateRectangle(POINT2I_2_POINT2D(orig),
+                                             POINT2I_2_POINT2D(size));
+}
+
 Polygon * PolygonGenerator::GenerateDentedCircle(double diameter, int nb_point, double rand_offset)
 {
   Polygon * tmp = new Polygon();

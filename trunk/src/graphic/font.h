@@ -66,6 +66,7 @@ public:
 
   bool Load (const std::string& filename, int size);
 
+  static Surface GenerateSurface(const std::string &txt, const Color &color, int font_size = FONT_NORMAL, int font_style = NORMAL);
   void WriteLeft(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteLeftBottom(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteRight(const Point2i &pos, const std::string &txt, const Color &color);
