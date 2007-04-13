@@ -47,8 +47,12 @@ WindParticle::WindParticle(std::string &xml_file) :
   SetCollisionModel(true, false, false);
 
   sprite = resource_manager.LoadSprite( ActiveMap().ResProfile(), "wind_particle");
-//  if(sprite->GetFrameCount()==1)
-//    sprite->cache.EnableLastFrameCache();
+  if(ActiveMap().wind.rotation_speed != 0.0)
+  {
+    sprite->EnableRotationCache(64);
+    sprite->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
+  }
+
   sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
 
   double mass, wind_factor ;
@@ -77,6 +81,12 @@ void WindParticle::Refresh()
   sprite->Update();
   UpdatePosition();
 
+  // Rotate the sprite if needed
+  if(ActiveMap().wind.rotation_speed != 0.0)
+  {
+    float new_angle = sprite->GetRotation_rad() + ActiveMap().wind.rotation_speed;
+    sprite->SetRotation_rad(new_angle);
+  }
   // Flip the sprite if needed and if the direction of wind changed
   if(ActiveMap().wind.need_flip)
   {
