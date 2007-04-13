@@ -121,7 +121,7 @@ void InternetMenu::RefreshList()
       ++pair_it)
     connect_lst->AddItem( false, pair_it->first, pair_it->second );
 
-  if(current != -1)
+  if(current != -1 && connect_lst->Size() != 0)
     connect_lst->Select( current );
 }
 
