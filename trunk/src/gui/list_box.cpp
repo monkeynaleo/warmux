@@ -261,11 +261,16 @@ Rectanglei ListBox::ScrollBarPos() const
 {
   uint tmp_y, tmp_h;
   if(m_items.size() != 0)
+  {
     tmp_y = GetPositionY()+ 10 + first_visible_item* (GetSizeY()-20) / m_items.size();
+    tmp_h = /*nb_visible_items_max * */(GetSizeY()-20) / m_items.size();
+  }
   else
+  {
     tmp_y = GetPositionY()+ 10;
+    tmp_h = /*nb_visible_items_max * */GetSizeY()-20;
+  }
 
-  tmp_h = /*nb_visible_items_max * */(GetSizeY()-20) / m_items.size();
   if (tmp_h < 5) tmp_h =5;
   
   return Rectanglei(GetPositionX()+GetSizeX()-11, tmp_y, 9,  /*tmp_y+*/tmp_h);
