@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
- 
+
 #ifndef FONT_H
 #define FONT_H
 #include <SDL.h>
@@ -31,9 +31,15 @@ class GameLoop;
 class Font
 {
 private:
-  typedef std::map<std::string, Surface>::value_type 
+
+  /* If you need this, implement it */
+  Font(const Font&);
+  Font operator=(const Font&);
+  /**********************************/
+
+  typedef std::map<std::string, Surface>::value_type
     txt_sample;
-  typedef std::map<std::string, Surface>::iterator 
+  typedef std::map<std::string, Surface>::iterator
     txt_iterator;
   static const int FONT_SIZE[];
   static Font* FONT_ARRAY[6];
@@ -72,7 +78,7 @@ public:
   void WriteRight(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteCenterTop(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteCenter(const Point2i &pos, const std::string &txt, const Color &color);
-  
+
   int GetWidth(const std::string &txt);
   int GetHeight();
   int GetHeight(const std::string &txt);

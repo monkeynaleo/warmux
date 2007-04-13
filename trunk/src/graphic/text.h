@@ -27,6 +27,11 @@
 
 class Text
 {
+  /* If you need that, implement it */
+  Text(const Text&);
+  Text operator=(const Text&);
+  /**********************************/
+
   Surface surf;
   Surface background; //shadow or outline or nothing;
   std::string txt;
@@ -39,7 +44,7 @@ class Text
   void Render();
   void RenderMultiLines();
 public:
-  Text(const std::string &new_txt, const Color& new_color = white_color, 
+  Text(const std::string &new_txt, const Color& new_color = white_color,
        Font* new_font = NULL, bool shadowed = true);
   ~Text();
 
@@ -64,7 +69,7 @@ public:
   int GetHeight() const;
 };
 
-void DrawTmpBoxText(Font& font, 
+void DrawTmpBoxText(Font& font,
 		    Point2i pos,
 		    const std::string& txt, uint space=3,
 		    const Color& boxColor = defaultColorBox,
