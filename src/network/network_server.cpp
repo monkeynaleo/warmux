@@ -78,7 +78,6 @@ void NetworkServer::ReceiveActions()
 	      printf("New client connected\n");
 	      if (GetNbConnectedPlayers() >= max_nb_players)
 		RejectIncoming();
-	      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_ASK_VERSION));
 	    }
 	  SDL_Delay(100);
 	}
