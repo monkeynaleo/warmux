@@ -95,7 +95,7 @@ void Teleportation::Draw()
 
 void Teleportation::p_Select()
 {
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_RIGHT);
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
 }
 
 void Teleportation::p_Deselect()

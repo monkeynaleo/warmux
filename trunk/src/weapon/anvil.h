@@ -53,10 +53,12 @@ class AnvilLauncher : public WeaponLauncher
     bool target_chosen;
   public:
     AnvilLauncher();
-    void ChooseTarget (Point2i mouse_pos);
+    void ChooseTarget (Point2i mouse_pos);    
   protected:
     WeaponProjectile * GetProjectileInstance();
-    bool p_Shoot();
+    virtual bool p_Shoot();    
+    virtual void p_Select();
+    virtual void p_Deselect();
 };
 
 #endif /* ANVIL_H */
