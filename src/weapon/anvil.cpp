@@ -23,15 +23,16 @@
 //-----------------------------------------------------------------------------
 #include <sstream>
 #include "../game/time.h"
-#include "../team/teams_list.h"
 #include "../graphic/video.h"
-#include "../tool/math_tools.h"
-#include "../map/camera.h"
-#include "../weapon/explosion.h"
 #include "../interface/game_msg.h"
-#include "../tool/i18n.h"
-#include "../object/objects_list.h"
+#include "../interface/mouse.h"
+#include "../map/camera.h"
 #include "../map/map.h"
+#include "../object/objects_list.h"
+#include "../team/teams_list.h"
+#include "../tool/i18n.h"
+#include "../tool/math_tools.h"
+#include "../weapon/explosion.h"
 //-----------------------------------------------------------------------------
 
 Anvil::Anvil(ExplosiveWeaponConfig& cfg,
@@ -111,7 +112,21 @@ bool AnvilLauncher::p_Shoot ()
   camera.FollowObject(projectile,true,true);
   projectile = NULL;
   ReloadLauncher();
+
+  // Go back to default cursor
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   return true;
+}
+
+void AnvilLauncher::p_Select()
+{
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
+}
+
+void AnvilLauncher::p_Deselect()
+{
+  // Go back to default cursor
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 }
 
 WeaponProjectile * AnvilLauncher::GetProjectileInstance()
