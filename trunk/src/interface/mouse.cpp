@@ -326,10 +326,15 @@ const Surface& Mouse::GetSurfaceFromPointer(pointer_t pointer) const
     return pointer_arrow_left;
   case POINTER_AIM:
     return pointer_aim;
+  case POINTER_FIRE:
+    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT)
+      return pointer_fire_left; // left hand to shoot on the right
+    else 
+      return pointer_fire_right;
   case POINTER_FIRE_RIGHT:
-    return pointer_fire_right;
-  case POINTER_FIRE_LEFT:
     return pointer_fire_left;
+  case POINTER_FIRE_LEFT:
+    return pointer_fire_right;
   }
 
   // to make g++ happy
@@ -468,8 +473,28 @@ void Mouse::Draw()
       }
       break;
 
-      // Fire pointer right (used by air attack)
-    case POINTER_FIRE_RIGHT:
+      // Fire pointer (used by air attack)
+    case POINTER_FIRE:
+      if(ActiveTeam().IsLocal()) {
+	if (ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT) {
+	  // right hand to shoot on the left
+	  AppWormux::GetInstance()->video.window.Blit( pointer_fire_right,
+						       Point2i(GetPosition().x-7, GetPosition().y-9 ));
+	  world.ToRedrawOnScreen(Rectanglei(GetPosition().x-7, GetPosition().y-9,
+					    pointer_fire_right.GetWidth(), pointer_fire_right.GetHeight()));
+	} else {
+	  // left hand to shoot on the right
+	  AppWormux::GetInstance()->video.window.Blit( pointer_fire_left,
+						       Point2i(GetPosition().x-17, GetPosition().y-9 ));
+	  world.ToRedrawOnScreen(Rectanglei(GetPosition().x-17, GetPosition().y-9,
+					    pointer_fire_left.GetWidth(), pointer_fire_left.GetHeight()));
+	}
+      } else {
+	DrawSelectPointer();
+      }
+      break;
+
+    case POINTER_FIRE_LEFT: // left hand to shoot on the right
       if(ActiveTeam().IsLocal()) {
 	AppWormux::GetInstance()->video.window.Blit( pointer_fire_right,
 						     Point2i(GetPosition().x-7, GetPosition().y-9 ));
@@ -480,8 +505,7 @@ void Mouse::Draw()
       }
       break;
 
-         // Fire pointer left (used by air attack)
-    case POINTER_FIRE_LEFT:
+    case POINTER_FIRE_RIGHT: // right hand to shoot on the left
       if(ActiveTeam().IsLocal()) {
 	AppWormux::GetInstance()->video.window.Blit( pointer_fire_left,
 						     Point2i(GetPosition().x-17, GetPosition().y-9 ));
