@@ -28,8 +28,8 @@
 class Text
 {
   /* If you need that, implement it */
-  Text(const Text&);
-  Text operator=(const Text&);
+/*   Text(const Text&); */
+/*   Text operator=(const Text&); */
   /**********************************/
 
   Surface surf;
