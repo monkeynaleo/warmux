@@ -260,7 +260,11 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 Rectanglei ListBox::ScrollBarPos() const
 {
   uint tmp_y, tmp_h;
-  tmp_y = GetPositionY()+ 10 + first_visible_item* (GetSizeY()-20) / m_items.size();
+  if(m_items.size() != 0)
+    tmp_y = GetPositionY()+ 10 + first_visible_item* (GetSizeY()-20) / m_items.size();
+  else
+    tmp_y = GetPositionY()+ 10;
+
   tmp_h = /*nb_visible_items_max * */(GetSizeY()-20) / m_items.size();
   if (tmp_h < 5) tmp_h =5;
   
