@@ -32,7 +32,7 @@
 
 #include <vector>
 
-const uint NMAX_NB_TEAMS=4;
+const uint NMAX_NB_TEAMS=6;
 
 class NetworkTeamsSelectionBox : public HBox
 { 
