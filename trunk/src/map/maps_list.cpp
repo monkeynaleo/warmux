@@ -38,6 +38,7 @@ InfoMap::InfoMap ()
   nb_barrel = 4;
   wind.nb_sprite = 0;
   wind.need_flip = false;
+  wind.rotation_speed = 0;
   random = false;
   music_playlist = "ingame";
 }
@@ -124,7 +125,10 @@ bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
   xmlpp::Element *xmlwind = XmlReader::GetMarker(xml, "wind");
   if (xmlwind != NULL)
   {
+    double rot_speed=0.0;
     XmlReader::ReadUint(xmlwind, "nbr_sprite", wind.nb_sprite);
+    XmlReader::ReadDouble(xmlwind, "rotation_speed", rot_speed);
+    wind.rotation_speed = rot_speed;
     XmlReader::ReadBool(xmlwind, "need_flip", wind.need_flip);
 
     if (wind.nb_sprite > MAX_WIND_OBJECTS)
