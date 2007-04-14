@@ -796,7 +796,7 @@
 
 <movement name="weapon-grenade-end-shoot" speed="30">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
-	<frame number="1">
+	<frame number="0">
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="wingright" follow_half_crosshair="true" angle="-90"/>
 		<member type="body" angle="-15"/>
@@ -808,7 +808,7 @@
 		<member type="body" angle="-10"/>
 		<member type="foot-right" angle="10"/>
 	</frame>
-	<frame number="1">
+	<frame number="2">
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="wingright" follow_half_crosshair="true" angle="-10"/>
 		<member type="body" angle="-5"/>
@@ -1184,11 +1184,11 @@
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="wingright" follow_half_crosshair="true" angle="-90"/>
 	</frame>
-	<frame number="3">
+	<frame number="2">
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="wingright" follow_half_crosshair="true" angle="-60"/>
 	</frame>
-	<frame number="4">
+	<frame number="3">
 		<member type="head" follow_half_crosshair="true"/>
 		<member type="wingright" follow_half_crosshair="true" angle="-30"/>
 	</frame>
@@ -1278,26 +1278,6 @@
 		<member type="wingright" angle="-120" />
 		<member type="wingleft" angle="-60" />
 	</frame>
-	<frame number="0">
-		<member type="head" angle="-90" />
-		<member type="wingright" angle="-135" />
-		<member type="wingleft" angle="-45" />
-	</frame>
-	<frame number="1">
-		<member type="head" angle="-90" />
-		<member type="wingright" angle="-120" />
-		<member type="wingleft" angle="-60" />
-	</frame>
-	<frame number="2">
-		<member type="head" angle="-90" />
-		<member type="wingright" angle="-90" />
-		<member type="wingleft" angle="-90" />
-	</frame>
-	<frame number="3">
-		<member type="head" angle="-90" />
-		<member type="wingright" angle="-120" />
-		<member type="wingleft" angle="-60" />
-	</frame>
 	<frame number="4">
 		<member type="head" angle="-90" />
 		<member type="wingright" angle="-135" />
@@ -1354,6 +1334,26 @@
 		<member type="wingleft" angle="-90" />
 	</frame>
 	<frame number="15">
+		<member type="head" angle="-90" />
+		<member type="wingright" angle="-120" />
+		<member type="wingleft" angle="-60" />
+	</frame>
+	<frame number="16">
+		<member type="head" angle="-90" />
+		<member type="wingright" angle="-135" />
+		<member type="wingleft" angle="-45" />
+	</frame>
+	<frame number="17">
+		<member type="head" angle="-90" />
+		<member type="wingright" angle="-120" />
+		<member type="wingleft" angle="-60" />
+	</frame>
+	<frame number="18">
+		<member type="head" angle="-90" />
+		<member type="wingright" angle="-90" />
+		<member type="wingleft" angle="-90" />
+	</frame>
+	<frame number="19">
 		<member type="head" angle="-90" />
 		<member type="wingright" angle="-120" />
 		<member type="wingleft" angle="-60" />

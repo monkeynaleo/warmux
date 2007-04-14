@@ -57,13 +57,23 @@ Movement::Movement(xmlpp::Element *xml)
   {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     assert (elem != NULL);
-    int frame_number;
-    XmlReader::ReadIntAttr(elem, "number", frame_number);
 
     xmlpp::Node::NodeList nodes2 = elem -> get_children("member");
     xmlpp::Node::NodeList::iterator
       it2=nodes2.begin(),
       end2=nodes2.end();
+
+    int frame_number=0;
+    XmlReader::ReadIntAttr(elem, "number", frame_number);
+    if((int)frames.size() <= frame_number)
+    {
+      if(frame_number != (int) frames.size())
+        fprintf(stderr, "WARNING! Movement: %s -> frame %i skipped !\n", type.c_str(), frames.size()); 
+      frames.resize(frame_number+1);
+    }
+    else
+      fprintf(stderr, "WARNING! Movement: %s -> frame %i overwritten !\n", type.c_str(), frame_number); 
+  
 
     for (; it2 != end2; ++it2)
     {
@@ -98,9 +108,6 @@ Movement::Movement(xmlpp::Element *xml)
       always_moving |= mvt.follow_half_crosshair;
       always_moving |= mvt.follow_speed;
       always_moving |= mvt.follow_direction;
-
-      if((int)frames.size() <= frame_number)
-        frames.resize(frame_number+1);
 
       frames[frame_number][member_type] = mvt;
     }
