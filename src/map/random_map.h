@@ -41,6 +41,11 @@ class MapElement {
 };
 
 class RandomMap {
+  /* if you need that, implement it (correctly)*/
+  RandomMap(const RandomMap&);
+  RandomMap operator=(const RandomMap&);
+  /*********************************************/
+
   enum {
     DENTED_CIRCLE,
     DENTED_TRAPEZE,

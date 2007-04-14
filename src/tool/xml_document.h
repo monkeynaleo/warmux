@@ -45,7 +45,7 @@ public:
                        bool &output);
 
   // Get attributes of a marker
-  static bool ReadStringList(const xmlpp::Node *x, 
+  static bool ReadStringList(const xmlpp::Node *x,
                              const std::string &name,
                              std::list<std::string> &output);
 
@@ -84,6 +84,11 @@ public:
 
 class XmlWriter
 {
+  /* if you need that, implement it (correctly)*/
+  XmlWriter(const XmlWriter&);
+  XmlWriter operator=(const XmlWriter&);
+  /*********************************************/
+
 protected:
   xmlpp::Document *m_doc;
   xmlpp::Element *m_root;

@@ -19,9 +19,9 @@
  * Resource Manager: Load resources (images/sprites) suitable for SDL
  *                    Load directly or from refernece in xml resource profile
  ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
  *             Initial version
- * 
+ *
  * TODO:       Keep reference to resources, better exceptions
  *****************************************************************************/
 
@@ -141,7 +141,7 @@ Profile *ResourceManager::LoadXMLProfile(const std::string xml_filename, bool re
      return NULL;
    }
 
-   Profile *profile = new Profile; 
+   Profile *profile = new Profile;
    profile->doc = doc;
    profile->filename = xml_filename;
    profile->relative_path = path;
@@ -177,7 +177,7 @@ Surface ResourceManager::LoadImage( const Profile *profile, const std::string re
   if(elem == NULL)
     Error("ResourceManager: can't find image resource \""+resource_name+"\" in profile "+profile->filename);
 
-  std::string filename; 
+  std::string filename;
   if (!profile->doc->ReadStringAttr(elem, "file", filename))
     Error("ResourceManager: image resource \""+resource_name+"\" has no file field in profile "+profile->filename);
 
@@ -200,7 +200,7 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string re
   if(elem_image == NULL)
     Error("ResourceManager: can't load (sprite) resource " + resource_name);
 
-  std::string image_filename; 
+  std::string image_filename;
   if (!profile->doc->ReadStringAttr(elem_image, "file", image_filename) )
     Error("ResourceManager: can't load (sprite) resource " + resource_name);
 
@@ -276,7 +276,7 @@ Sprite *ResourceManager::LoadSprite(const Profile *profile, const std::string re
 
 Surface ResourceManager::GenerateMap(Profile *profile, const int width, const int height)
 {
-  RandomMap random_map = RandomMap(profile, width, height);
+  RandomMap random_map(profile, width, height);
   random_map.Generate();
   random_map.SaveMap();
   return random_map.GetRandomMap();

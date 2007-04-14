@@ -19,9 +19,9 @@
  * Resource Manager: Load resources (images/sprites) suitable for SDL
  *                   Load directly or from refernece in xml resource profile
  ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
  *             Initial version
- * 
+ *
  * TODO:       Keep reference to resources, better exceptions
  *****************************************************************************/
 
@@ -34,7 +34,7 @@
 #include "../map/random_map.h"
 
 class Profile
-{ 
+{
  public:
   XmlReader *doc;
   std::string filename;
