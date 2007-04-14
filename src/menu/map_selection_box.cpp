@@ -110,10 +110,10 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
 
   // Map information
-  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL, Font::BOLD), dark_gray_color, true, false);
+  map_name_label = new Label("Map", Rectanglei(0,0,0,0), Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_name_label);
 
-  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), dark_gray_color, true, false);
+  map_author_label = new Label("Author", Rectanglei(0,0,0,0), Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_author_label);
 
   AddWidget(tmp_map_box);

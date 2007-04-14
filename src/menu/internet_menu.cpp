@@ -37,9 +37,6 @@ InternetMenu::InternetMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
   
-  normal_font = Font::GetInstance(Font::FONT_NORMAL);
-  big_font = Font::GetInstance(Font::FONT_BIG);
-
   Rectanglei stdRect(0, 0, 300, 64);
 
   uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
@@ -52,16 +49,20 @@ InternetMenu::InternetMenu() :
   connection_box->AddWidget(connect_lst);
 
   refresh = new ButtonText( Point2i(0,0),
-				 res, "main_menu/button",
-				 _("Refresh"), // Refresh the list of available hosts
-				 big_font);
+			    res, "main_menu/button",
+			    _("Refresh"), // Refresh the list of available hosts
+			    Font::FONT_BIG, 
+			    Font::FONT_NORMAL);
+
   refresh->SetSizePosition( stdRect );
   connection_box->AddWidget(refresh);
 
   connect = new ButtonText( Point2i(0,0),
-				 res, "main_menu/button",
-				 _("Connect !"),
-				 big_font);
+			    res, "main_menu/button",
+			    _("Connect !"),
+			    Font::FONT_BIG, 
+			    Font::FONT_NORMAL);
+
   connect->SetSizePosition( stdRect );
   connection_box->AddWidget(connect);
 

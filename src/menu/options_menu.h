@@ -28,8 +28,6 @@
 
 class OptionMenu : public Menu
 {
-  Font * normal_font;
-
 public:
    OptionMenu(); 
    ~OptionMenu();

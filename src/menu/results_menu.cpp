@@ -47,7 +47,9 @@ private:
 
 public:
   ResultBox(const Rectanglei &rect, bool _visible,
-            const char* type_name, Font& font,
+            const char* type_name, 
+	    Font::font_size_t font_size,
+	    Font::font_style_t font_style,
             const Point2i& type_size,
             const Point2i& name_size,
             const Point2i& score_size);
@@ -57,7 +59,9 @@ public:
 };
 
 ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
-                     const char *type_name, Font& font,
+                     const char *type_name, 
+		     Font::font_size_t font_size,
+		     Font::font_style_t font_style,
                      const Point2i& type_size,
                      const Point2i& name_size,
                      const Point2i& score_size)
@@ -70,18 +74,18 @@ ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
   border.SetValues(DEF_BORDER, DEF_BORDER);
 
   type_box = new HBox( Rectanglei(pos, type_size), true);
-  type_box->AddWidget(new Label(type_name, Rectanglei(pos, type_size), font));
+  type_box->AddWidget(new Label(type_name, Rectanglei(pos, type_size), font_size, font_style));
   AddWidget(type_box);
 
   pos.SetValues(pos.GetX()+type_size.GetX(), pos.GetY());
   name_box = new HBox( Rectanglei(pos, name_size), true);
-  name_lbl = new Label("", Rectanglei(pos, name_size), font);
+  name_lbl = new Label("", Rectanglei(pos, name_size), font_size, font_style);
   name_box->AddWidget(name_lbl);
   AddWidget(name_box);
 
   pos.SetValues(pos.GetX()+name_size.GetX(), pos.GetY());
   score_box = new HBox( Rectanglei(pos, score_size), true);
-  score_lbl = new Label("", Rectanglei(pos, score_size), font);
+  score_lbl = new Label("", Rectanglei(pos, score_size), font_size, font_style);
   score_box->AddWidget(score_lbl);
   AddWidget(score_box);
 }
@@ -114,7 +118,6 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i pos (0, 0);
-  Font* big_font = Font::GetInstance(Font::FONT_BIG);
 
   // Center the boxes!
   uint x = 60;
@@ -136,7 +139,7 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   tmp_box->AddWidget(team_logo);
 
   pos.SetValues(pos.GetX()+team_logo->GetSizeX(),pos.GetY());
-  team_name = new Label("", Rectanglei(pos, team_size-48), *big_font);
+  team_name = new Label("", Rectanglei(pos, team_size-48), Font::FONT_BIG, Font::FONT_NORMAL);
   tmp_box->AddWidget(team_name);
 
   team_box->AddWidget(tmp_box);
@@ -151,22 +154,22 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
 
   //Results
   most_violent = new ResultBox(Rectanglei(x, y+int(1.5*max_height), total_width, max_height),
-                               true, _("Most violent"), *big_font,
+                               true, _("Most violent"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
   widgets.AddWidget(most_violent);
 
   most_usefull = new ResultBox(Rectanglei(x, y+3*max_height, total_width, max_height),
-                               true, _("Most useful"), *big_font,
+                               true, _("Most useful"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
   widgets.AddWidget(most_usefull);
 
   most_useless = new ResultBox(Rectanglei(x, y+int(4.5*max_height), total_width, max_height),
-                               true, _("Most useless"), *big_font,
+                               true, _("Most useless"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
   widgets.AddWidget(most_useless);
 
   biggest_traitor = new ResultBox(Rectanglei(x, y+6*max_height, total_width, max_height),
-                                  true, _("Most sold-out"), *big_font,
+                                  true, _("Most sold-out"), Font::FONT_BIG, Font::FONT_NORMAL,
                                   type_size, name_size, score_size);
   widgets.AddWidget(biggest_traitor);
 

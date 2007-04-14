@@ -89,7 +89,7 @@ NetworkMenu::NetworkMenu() :
 
   Box* tmp_box = new VBox( Rectanglei(0,0, 200,0), false);
 
-  mode = new Label("", rectZero, *Font::GetInstance(Font::FONT_NORMAL));
+  mode = new Label("", rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
 
   if (Network::GetInstance()->IsClient()) {
     // Client Mode
@@ -112,11 +112,11 @@ NetworkMenu::NetworkMenu() :
     tmp_box->AddWidget(player_number);
 
     connected_players = new Label(Format(ngettext("%i player connected", "%i players connected", 0), 0),
-				rectZero, *Font::GetInstance(Font::FONT_SMALL));
+				rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(connected_players);
 
     inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-			       rectZero, *Font::GetInstance(Font::FONT_SMALL));
+			       rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(inited_players);
   }
 
@@ -132,7 +132,7 @@ NetworkMenu::NetworkMenu() :
 				       OPTIONS_BOX_H), false);
   chat_box->SetBorder(Point2i(0,0));
 
-  msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::GetInstance(Font::FONT_SMALL));
+  msg_box = new MsgBox(Rectanglei( 0, 0, 400, OPTIONS_BOX_H - 20), Font::FONT_SMALL, Font::FONT_NORMAL);
   msg_box->NewMessage(_("Join #wormux on irc.freenode.net to find some opponents."));
   msg_box->NewMessage(_("WARNING! Disconnections are not yet handled. So you have to restart Wormux after each disconnection!"), c_red);
 
@@ -143,7 +143,7 @@ NetworkMenu::NetworkMenu() :
   tmp2_box->SetBorder(Point2i(0,0));
   line_to_send_tbox = new TextBox(" ",
 				  Rectanglei(0, 0, chat_box->GetSizeX()-20, 0),
-				  *Font::GetInstance(Font::FONT_SMALL));
+				  Font::FONT_SMALL, Font::FONT_NORMAL);
   tmp2_box->AddWidget(line_to_send_tbox);
 
   send_txt_bt = new Button(Point2i(0,0), res, "menu/send_txt", true);

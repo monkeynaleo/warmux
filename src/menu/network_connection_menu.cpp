@@ -45,9 +45,6 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
   
-  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
-  Font * big_font = Font::GetInstance(Font::FONT_BIG);
-
   Rectanglei stdRect(0, 0, 360, 64);
 
   uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
@@ -64,7 +61,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   next_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_plus", false);
   action_label = new Label(_("Connect to an internet game"), 
 			   Rectanglei(0,0,250,0), 
-			   *big_font, white_color, true);
+			   Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
   action_box->AddWidget(previous_action_bt);
   action_box->AddWidget(action_label);
   action_box->AddWidget(next_action_bt);
@@ -72,15 +69,15 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   connection_box->AddWidget(action_box);
 
   // Server address
-  server_address_label = new Label(_("Server address:"), rectZero, *normal_font);
+  server_address_label = new Label(_("Server address:"), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(server_address_label);
-  server_address = new TextBox("localhost", rectZero, *normal_font);
+  server_address = new TextBox("localhost", rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(server_address);
 
   // Server port
-  port_number_label = new Label(_("Port:"), rectZero, *normal_font);
+  port_number_label = new Label(_("Port:"), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(port_number_label);
-  port_number = new TextBox(WORMUX_NETWORK_PORT, rectZero, *normal_font);
+  port_number = new TextBox(WORMUX_NETWORK_PORT, rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
   connection_box->AddWidget(port_number);
 
   // Available on internet ?
@@ -97,7 +94,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   msg_box = new MsgBox(Rectanglei( AppWormux::GetInstance()->video.window.GetWidth()/2 - 300,
 				   y_box+connection_box->GetSizeY() + 30, 
 				   600, 200), 
-		       Font::GetInstance(Font::FONT_SMALL));
+		       Font::FONT_SMALL, Font::FONT_NORMAL);
   widgets.AddWidget(msg_box);
 
   msg_box->NewMessage(_("WARNING!! Network is still under developement and therefore a little experimental."), c_red);
