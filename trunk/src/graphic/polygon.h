@@ -32,6 +32,11 @@ class Sprite;
 
 /** Use to draw the polygon */
 class PolygonBuffer {
+  /* if you need that, implement it (correctly)*/
+  PolygonBuffer(const PolygonBuffer&);
+  PolygonBuffer operator=(const PolygonBuffer&);
+  /*********************************************/
+
  public:
   Sint16 * vx;
   Sint16 * vy;
@@ -45,6 +50,12 @@ class PolygonBuffer {
 
 /** Store information about a item (sprite) of the polygon */
 class PolygonItem {
+
+  /* if you need that, implement it (correctly)*/
+  PolygonItem(const PolygonItem&);
+  PolygonItem operator=(const PolygonItem&);
+  /*********************************************/
+
  public:
   typedef enum { TOP,  V_CENTERED, BOTTOM } V_align;
   typedef enum { LEFT, H_CENTERED, RIGHT } H_align;
@@ -91,7 +102,8 @@ class Polygon {
   std::vector<PolygonItem *> items;
   // Shape position after an affine transformation
   PolygonBuffer * shape_buffer;
-
+ private:
+  Polygon operator=(const Polygon&);
  public:
   Polygon();
   Polygon(const std::vector<Point2d> shape);
