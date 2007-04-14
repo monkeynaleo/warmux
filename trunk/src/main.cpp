@@ -64,7 +64,8 @@ AppWormux *AppWormux::GetInstance()
   return singleton;
 }
 
-AppWormux::AppWormux()
+AppWormux::AppWormux():
+  video()
 {
 }
 
@@ -144,8 +145,6 @@ void AppWormux::Init(int argc, char **argv)
   InitFonts();
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
-
-  video.InitWindow();
 
   teams_list.LoadList();
 
