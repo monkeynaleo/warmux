@@ -56,9 +56,7 @@ public:
   bool SetConfig(const int width, const int height, const bool fullscreen);
   void ToggleFullscreen();
 
-  void InitWindow();
-
   void Flip(void);
-}; 
+};
 
 #endif

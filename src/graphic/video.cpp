@@ -29,10 +29,31 @@
 #include "../include/constant.h"
 #include "../map/camera.h"
 
+
 Video::Video(){
   SetMaxFps (50);
   fullscreen = false;
   SDLReady = false;
+
+  InitSDL();
+
+  window.SetSurface( NULL , false );
+  window.SetAutoFree( false );
+
+  Config * config = Config::GetInstance();
+  SetConfig((int)(config->GetVideoWidth()),
+            (int)(config->GetVideoHeight()),
+            config->IsVideoFullScreen());
+
+  SetMaxFps(config->GetMaxFps());
+
+  if( window.IsNull() )
+    Error( "Unable to initialize SDL window.");
+
+  SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
+  SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux-32.xpm" );
+
+  ComputeAvailableConfigs();
 }
 
 Video::~Video(){
@@ -68,8 +89,8 @@ bool CompareConfigs(const Point2i& a, const Point2i& b)
 void Video::ComputeAvailableConfigs()
 {
   // Add the current resolution
-  available_configs.push_back(Point2i(AppWormux::GetInstance()->video.window.GetWidth(),
-                                      AppWormux::GetInstance()->video.window.GetHeight()));
+  available_configs.push_back(Point2i(window.GetWidth(),
+                                      window.GetHeight()));
 
   //Generate video mode list
   SDL_Rect **modes;
@@ -161,25 +182,6 @@ void Video::ToggleFullscreen()
   fullscreen = !fullscreen;
 }
 
-void Video::InitWindow(){
-  InitSDL();
-
-  window.SetSurface( NULL , false );
-  window.SetAutoFree( false );
-
-  Config * config = Config::GetInstance();
-  SetConfig((int)(config->GetVideoWidth()),
-            (int)(config->GetVideoHeight()),
-            config->IsVideoFullScreen());
-
-  if( window.IsNull() )
-    Error( "Unable to initialize SDL window.");
-
-  SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
-  SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux-32.xpm" );
-
-  ComputeAvailableConfigs();
-}
 
 void Video::SetWindowCaption(std::string caption){
   SDL_WM_SetCaption( caption.c_str(), NULL );

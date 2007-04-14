@@ -182,10 +182,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
   //=== Video ===
   if ((elem = XmlReader::GetMarker(xml, "video")) != NULL)
   {
-    uint max_fps;
-    if (XmlReader::ReadUint(elem, "max_fps", max_fps))
-      AppWormux::GetInstance()->video.SetMaxFps(max_fps);
-
+    XmlReader::ReadUint(elem, "max_fps", max_fps);
     XmlReader::ReadBool(elem, "display_wind_particles", display_wind_particles);
     XmlReader::ReadBool(elem, "display_energy_character", display_energy_character);
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);

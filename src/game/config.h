@@ -80,6 +80,8 @@ public:
   uint GetVideoHeight() const;
   void SetVideoHeight(const uint height);
 
+  inline uint GetMaxFps() const { return max_fps; };
+
   bool GetSoundMusic() const;
   void SetSoundMusic(const bool music);
 
@@ -129,6 +131,7 @@ protected:
   uint video_width;
   uint video_height;
   bool video_fullscreen;
+  uint max_fps;
   // Sound settings
   bool sound_music;
   bool sound_effects;
