@@ -270,13 +270,14 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       Game::GetInstance()->UserWantEndOfGame();
       return;
     case KEY_PAUSE:
-      Game::GetInstance()->TogglePause();
+      if (!Network::IsConnected())
+	Game::GetInstance()->TogglePause();
       return;
     case KEY_FULLSCREEN:
       AppWormux::GetInstance()->video.ToggleFullscreen();
       return;
     case KEY_CHAT:
-      if(Network::GetInstance()->IsConnected())
+      if(Network::IsConnected())
 	GameLoop::GetInstance()->chatsession.ShowInput();
       return;
     case KEY_CENTER:
