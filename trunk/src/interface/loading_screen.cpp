@@ -81,7 +81,7 @@ void LoadingScreen::StartLoading(uint nb, std::string resource,
 		    image.GetHeight() );
   AppWormux::GetInstance()->video.window.Blit( image, dest.GetPosition());
 
-  Font::GetInstance(Font::FONT_NORMAL)->WriteCenter(Point2i(x+120/2, y+80), label, white_color);
+  Font::GetInstance(Font::FONT_MEDIUM)->WriteCenter(Point2i(x+120/2, y+80), label, white_color);
 
   AppWormux::GetInstance()->video.Flip();
 }
