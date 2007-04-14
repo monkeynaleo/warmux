@@ -193,6 +193,7 @@ Polygon::Polygon(const Polygon & poly)
 
 void Polygon::Init()
 {
+  is_closed = true;
   texture = NULL;
   plane_color = NULL;
   border_color = NULL;
