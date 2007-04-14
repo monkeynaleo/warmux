@@ -53,8 +53,10 @@ Movement::Movement(xmlpp::Element *xml)
     it=nodes.begin(),
     end=nodes.end();
 
-  for (; it != end; ++it)
+  for (int frame_number=0; it != end; ++it, frame_number++)
   {
+    frames.resize(frame_number+1);
+    
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     assert (elem != NULL);
 
@@ -63,18 +65,7 @@ Movement::Movement(xmlpp::Element *xml)
       it2=nodes2.begin(),
       end2=nodes2.end();
 
-    int frame_number=0;
     XmlReader::ReadIntAttr(elem, "number", frame_number);
-    if((int)frames.size() <= frame_number)
-    {
-      if(frame_number != (int) frames.size())
-        fprintf(stderr, "WARNING! Movement: %s -> frame %i skipped !\n", type.c_str(), frames.size()); 
-      frames.resize(frame_number+1);
-    }
-    else
-      fprintf(stderr, "WARNING! Movement: %s -> frame %i overwritten !\n", type.c_str(), frame_number); 
-  
-
     for (; it2 != end2; ++it2)
     {
       xmlpp::Element *elem2 = dynamic_cast<xmlpp::Element*> (*it2);
