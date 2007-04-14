@@ -34,9 +34,6 @@ public:
   Video video;
 
 private:
-  int x, y;
-  std::string windows_title;
-
   static AppWormux * singleton;
 
 private:
