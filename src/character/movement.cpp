@@ -68,19 +68,6 @@ Movement::Movement(xmlpp::Element *xml)
       it2=nodes2.begin(),
       end2=nodes2.end();
 
-    /* the next Stuff checks the validity of the frame number given in the xml
-     * configuration file. The file must provide a description for each frame
-     * and must give the number of the frame. If a description is missing (for
-     * example the frame 4 is described right after the frame 2) an error will
-     * be displayed. Anyway, crashing here is not really nice, but the above
-     * layer should do some exception catching and here should throw something...
-     * FIXME TODO do it */
-    int file_frame_number;
-    XmlReader::ReadIntAttr(elem, "number", file_frame_number);
-    if (file_frame_number != frame_number)
-      std::cerr << "Malformed data file. Some character members could be mixed..." << std::endl;
-    /**************************************************************************/
-
     for (; it2 != end2; ++it2)
     {
       xmlpp::Element *elem2 = dynamic_cast<xmlpp::Element*> (*it2);
