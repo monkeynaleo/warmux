@@ -18,10 +18,9 @@ template<class T> class Vector2
 		/**
 		 * Default constructor that will be a vector null (0, 0)
 		 */
-		inline Vector2(){
-			x = 0;
-			y = 0;
-		}
+		inline Vector2():
+			x(0), y(0)
+                { }
 
 		/**
 		 * Constructor that build a new vector from two values, x and y.
@@ -29,10 +28,9 @@ template<class T> class Vector2
 		 * @param x
 		 * @param y
 		 */
-		inline Vector2(T x, T y){
-			this->x = x;
-			this->y = y;
-		}
+		inline Vector2(T _x, T _y):
+			x(_x), y(_y)
+		{}
 
 		/**
 		 * Return the x coordinate.

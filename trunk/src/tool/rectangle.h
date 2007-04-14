@@ -18,7 +18,7 @@
  ******************************************************************************
  * Rectangle.h: Standard C++ Rectangle template
  ******************************************************************************
- * 2005/09/21:  Jean-Christophe Duberga (jcduberga@gmx.de) 
+ * 2005/09/21:  Jean-Christophe Duberga (jcduberga@gmx.de)
  *              Initial version
  *****************************************************************************/
 
@@ -29,9 +29,9 @@
 #include "../include/base.h"
 #include "vector2.h"
 
-/** 
+/**
  * This template handle rectangles.
- * 
+ *
  * @param T Type for position and size of the Rectangle
  */
 template<class T> class rectangle
@@ -40,7 +40,7 @@ template<class T> class rectangle
 		/** Position of the rectangle. */
 		Vector2<T> position;
 		/** Size of the rectangle. */
-		Vector2<T> size; 
+		Vector2<T> size;
 
 	public:
 		/**
@@ -48,7 +48,7 @@ template<class T> class rectangle
 		 */
 		inline rectangle(){
 		}
-		
+
 		/**
 		 * Constructor for building a new rectangle.
 		 *
@@ -68,10 +68,10 @@ template<class T> class rectangle
 		 * @param thePosition Position of the new rectangle.
 		 * @param theSize Size of the new rectangle.
 		 */
-		inline rectangle(Vector2<T> thePosition, Vector2<T> theSize){
-			position = thePosition;
-			size = theSize;
-		}
+		inline rectangle(Vector2<T> thePosition, Vector2<T> theSize):
+			position(thePosition),
+                        size(theSize)
+                {}
 
 		/**
 		 * Set the position of the rectangle.
@@ -92,7 +92,7 @@ template<class T> class rectangle
 			position = newPos;
 		}
 
-		/** 
+		/**
 		 * Change the x position of the rectangle.
 		 *
 		 * @param x New X position.
@@ -101,7 +101,7 @@ template<class T> class rectangle
 			position.x = x;
 		}
 
-		/** 
+		/**
 		 * Change the y position of the rectangle.
 		 *
 		 * @param y New Y position.
@@ -120,7 +120,7 @@ template<class T> class rectangle
 			size.SetValues(sizeX, sizeY);
 		}
 
-		/** 
+		/**
 		 * Change the X size of the rectangle.
 		 *
 		 * @param x New size among x axe.
@@ -129,7 +129,7 @@ template<class T> class rectangle
 			size.x = sizeX;
 		}
 
-		/** 
+		/**
 		 * Change the Y size of the rectangle.
 		 *
 		 * @param y New size among y axe.
@@ -152,9 +152,9 @@ template<class T> class rectangle
 		inline Vector2<T> GetPosition() const{
 			return position;
 		}
-		
+
 		inline T GetPositionX() const{
-			return position.x;			
+			return position.x;
 		}
 
 		inline T GetPositionY() const{
@@ -167,7 +167,7 @@ template<class T> class rectangle
 		inline Vector2<T> GetSize() const{
 			return size;
 		}
-		
+
 		inline T GetSizeX() const{
 			return size.x;
 		}
@@ -178,7 +178,7 @@ template<class T> class rectangle
 
 		/**
 		 * Clip the current rectangle using an other rectangle.
-		 * 
+		 *
 		 * @param cr The rectangle used for clipping
 		 */
 		void Clip( const rectangle &cr){
@@ -188,30 +188,30 @@ template<class T> class rectangle
 
 				return;
 			}
-			
+
 			Vector2<T> newPositionBR = GetBottomRightPoint();
 
 			if( position.x < cr.position.x )
 				position.x = cr.position.x;
-			
+
 			if( position.x > cr.GetBottomRightPoint().x )
 				position.x = cr.GetBottomRightPoint().x;
 
 			if( position.y < cr.position.y )
 				position.y = cr.position.y;
-			
+
 			if( position.y > cr.GetBottomRightPoint().y )
 				position.y = cr.GetBottomRightPoint().y;
 
 			if( newPositionBR.x < cr.position.x )
 				newPositionBR.x = cr.position.x;
-			
+
 			if( newPositionBR.x > cr.GetBottomRightPoint().x )
 				newPositionBR.x = cr.GetBottomRightPoint().x;
 
 			if( newPositionBR.y < cr.position.y )
 				newPositionBR.y = cr.position.y;
-			
+
 			if( newPositionBR.y > cr.GetBottomRightPoint().y )
 				newPositionBR.y = cr.GetBottomRightPoint().y;
 
@@ -219,9 +219,9 @@ template<class T> class rectangle
 			assert( cr.Contains( *this ) );
 		}
 
-		/** 
+		/**
 		 * Return true if the point p is contained in the rectangle.
-		 * 
+		 *
 		 * @param p Point used to perform the check.
 		 */
 		inline bool Contains( const Vector2<T> p ) const{
@@ -240,12 +240,12 @@ template<class T> class rectangle
 		inline bool Contains( const rectangle<T> &r2 ) const{
 			if( r2.IsSizeZero() )
 				return false;
-			
+
 			return Contains( r2.GetTopLeftPoint() ) &&
 				Contains( r2.GetBottomRightPoint() );
 		}
 
-		/** 
+		/**
 		 * Return true if there is an intersection between the current rectangle
 		 * and the r2 rectangle.
 		 *
@@ -254,22 +254,22 @@ template<class T> class rectangle
 		inline bool Intersect( const rectangle<T> &r2 ) const{
 			if( IsSizeZero() || r2.IsSizeZero() )
 				return false;
-			
+
 			Vector2<T> r1BR = GetBottomRightPoint();
 			Vector2<T> r2BR = r2.GetBottomRightPoint();
 			Vector2<T> r1TL = GetTopLeftPoint();
 			Vector2<T> r2TL = r2.GetTopLeftPoint();
 
 			if( r1BR.x < r2TL.x || r1BR.y < r2TL.y ||
-				   r2BR.x < r1TL.x || r2BR.y < r1TL.y ) 
+				   r2BR.x < r1TL.x || r2BR.y < r1TL.y )
 				return false;
 
 			return true;
 		}
 
-		/** 
+		/**
 		 * Return the point in the top left corner of the rectangle.
-		 * 
+		 *
 		 * If the rectangle has a size of zero, this point doesn't exist,
 		 * so the program crash with a failled assertion.
 		 */
@@ -278,9 +278,9 @@ template<class T> class rectangle
 			return position;
 		}
 
-		/** 
+		/**
 		 * Return the point in the top right corner of the rectangle.
-		 * 
+		 *
 		 * If the rectangle has a size of zero, this point doesn't exist,
 		 * so the program crash with a failled assertion.
 		 */
@@ -293,11 +293,11 @@ template<class T> class rectangle
 			return r;
 		}
 
-		/** 
+		/**
 		 * Return the point in the bottom left corner of the rectangle.
-		 * 
+		 *
 		 * If the rectangle has a size of zero, this point doesn't exist,
-		 * so the program crash with a failled assertion. 
+		 * so the program crash with a failled assertion.
 		 */
 		inline Vector2<T> GetBottomLeftPoint() const{
 			assert( !IsSizeZero() );
@@ -308,9 +308,9 @@ template<class T> class rectangle
 			return r;
 		}
 
-		/** 
+		/**
 		 * Return the point in the top left corner of the rectangle.
-		 * 
+		 *
 		 * If the rectangle has a size of zero, this point doesn't exist,
 		 * so the program crash with a failled assertion. */
 		inline Vector2<T> GetBottomRightPoint() const{
@@ -318,7 +318,7 @@ template<class T> class rectangle
 			return position + size - 1;
 		}
 
-		/** 
+		/**
 		 * Return true if the rectangle has a size of zero.
 		 */
 		inline bool IsSizeZero() const{
