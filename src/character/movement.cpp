@@ -26,6 +26,7 @@
 
 Movement::Movement(xmlpp::Element *xml)
 {
+  frames.clear();
   play_mode = LOOP;
   always_moving = false;
   XmlReader::ReadStringAttr( xml, "name", type);
@@ -53,10 +54,12 @@ Movement::Movement(xmlpp::Element *xml)
     it=nodes.begin(),
     end=nodes.end();
 
+  /* We know the number of member frame that are being read so we can resize
+   * thr array to be able to get all of them. */
+  frames.resize(nodes.size());
+
   for (int frame_number=0; it != end; ++it, frame_number++)
   {
-    frames.resize(frame_number+1);
-    
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     assert (elem != NULL);
 
@@ -65,7 +68,19 @@ Movement::Movement(xmlpp::Element *xml)
       it2=nodes2.begin(),
       end2=nodes2.end();
 
-    XmlReader::ReadIntAttr(elem, "number", frame_number);
+    /* the next Stuff checks the validity of the frame number given in the xml
+     * configuration file. The file must provide a description for each frame
+     * and must give the number of the frame. If a description is missing (for
+     * example the frame 4 is described right after the frame 2) an error will
+     * be displayed. Anyway, crashing here is not really nice, but the above
+     * layer should do some exception catching and here should throw something...
+     * FIXME TODO do it */
+    int file_frame_number;
+    XmlReader::ReadIntAttr(elem, "number", file_frame_number);
+    if (file_frame_number != frame_number)
+      std::cerr << "Malformed data file. Some character members could be mixed..." << std::endl;
+    /**************************************************************************/
+
     for (; it2 != end2; ++it2)
     {
       xmlpp::Element *elem2 = dynamic_cast<xmlpp::Element*> (*it2);
@@ -99,7 +114,6 @@ Movement::Movement(xmlpp::Element *xml)
       always_moving |= mvt.follow_half_crosshair;
       always_moving |= mvt.follow_speed;
       always_moving |= mvt.follow_direction;
-
       frames[frame_number][member_type] = mvt;
     }
   }
