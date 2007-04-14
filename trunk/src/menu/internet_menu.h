@@ -29,9 +29,6 @@
 
 class InternetMenu : public Menu
 {
-   Font * normal_font;
-   Font * big_font;
-
    VBox* connection_box;
    ListBox* connect_lst;
    ButtonText* refresh;

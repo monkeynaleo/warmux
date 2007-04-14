@@ -131,9 +131,9 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
     std::cout << "       ===[ " << team_title << " ]===" << std::endl << std::endl;
 
     lbox_authors->AddItem (false, " ", "", 
-			   *Font::GetInstance(Font::FONT_BIG));
+			   Font::FONT_BIG, Font::FONT_NORMAL);
     lbox_authors->AddItem (false, team_title, teams[i], 
-			   *Font::GetInstance(Font::FONT_BIG), c_red);
+			   Font::FONT_BIG, Font::FONT_NORMAL, c_red);
 
     // We think there is ONLY ONE occurence of team section, so we use the first
     xmlpp::Node::NodeList sections = team.front()->get_children("section");
@@ -160,7 +160,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
 
       lbox_authors->AddItem (false, " ", "");
       lbox_authors->AddItem (false, "   "+title, title,
-			     *Font::GetInstance(Font::FONT_NORMAL), c_yellow);
+			     Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
 
       for (; node != end; ++node)
       {

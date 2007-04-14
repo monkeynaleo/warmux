@@ -48,8 +48,6 @@ OptionMenu::OptionMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   Rectanglei stdRect (0, 0, 140, 30);
 
-  normal_font = Font::GetInstance(Font::FONT_NORMAL);
-
   /* Grapic options */
   Box * graphic_options = new HBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
 

@@ -57,9 +57,6 @@ Main_Menu::Main_Menu() :
   int x_button;
   double y_scale;
 
-  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
-  Font * large_font = Font::GetInstance(Font::FONT_LARGE);
-
   int button_width = 402;
   int button_height = 64;
 
@@ -86,14 +83,14 @@ Main_Menu::Main_Menu() :
   play = new ButtonText(Point2i(x_button, y),
                         res, "main_menu/button",
                         _("Play"),
-                        large_font);
+                        Font::FONT_LARGE, Font::FONT_NORMAL);
   y += dy;
 
   if(Config::GetInstance()->IsNetworkActivated()) {
     network = new ButtonText( Point2i(x_button, y),
                               res, "main_menu/button",
                               _("Network Game"),
-                              large_font );
+                              Font::FONT_LARGE, Font::FONT_NORMAL );
     y += dy;
   } else {
     network = NULL;
@@ -102,19 +99,19 @@ Main_Menu::Main_Menu() :
   options = new ButtonText(Point2i(x_button, y),
                            res, "main_menu/button",
                            _("Options"),
-                           large_font);
+                           Font::FONT_LARGE, Font::FONT_NORMAL);
   y += dy;
 
   infos =  new ButtonText(Point2i(x_button, y),
                           res, "main_menu/button",
                           _("Credits"),
-                          large_font);
+                          Font::FONT_LARGE, Font::FONT_NORMAL);
   y += dy;
 
   quit =  new ButtonText(Point2i(x_button, y),
                          res, "main_menu/button",
                          _("Quit"),
-                         large_font);
+                         Font::FONT_LARGE, Font::FONT_NORMAL);
 
   widgets.AddWidget(play);
   if(Config::GetInstance()->IsNetworkActivated())
@@ -127,10 +124,10 @@ Main_Menu::Main_Menu() :
   resource_manager.UnLoadXMLProfile( res);
 
   std::string s("Version "+Constants::VERSION);
-  version_text = new Text(s, green_color, normal_font, false);
+  version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
   std::string s2(Constants::WEB_SITE);
-  website_text = new Text(s2, green_color, normal_font, false);
+  website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
 
   if(!jukebox.IsPlayingMusic())
      jukebox.PlayMusic("menu");
