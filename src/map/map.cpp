@@ -330,9 +330,9 @@ void Map::DrawAuthorName()
     std::string txt;
     txt  = Format(_("Map %s, a creation of: "),
 		  ActiveMap().ReadName().c_str());
-    author_info1 = new Text(txt, white_color, Font::GetInstance(Font::FONT_SMALL));
+    author_info1 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
     txt = ActiveMap().ReadAuthorInfo();
-    author_info2 = new Text(txt, white_color, Font::GetInstance(Font::FONT_SMALL));
+    author_info2 = new Text(txt, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
   }
 
   author_info1->DrawTopLeft(AUTHOR_INFO_X,AUTHOR_INFO_Y);
