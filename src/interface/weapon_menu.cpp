@@ -305,9 +305,14 @@ bool WeaponsMenu::ActionClic(const Point2i &mouse_pos)
   if((tmp = UpdateCurrentOverflyItem(weapons_menu)) == NULL)
     tmp = UpdateCurrentOverflyItem(tools_menu);
   if(tmp != NULL) {
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, tmp->GetType()));
-    Hide();
-    return true;
+    // Check we have enough ammo
+    int nb_bullets = ActiveTeam().ReadNbAmmos(tmp->GetName());
+    if( nb_bullets == INFINITE_AMMO || nb_bullets > 0)
+    {
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, tmp->GetType()));
+      Hide();
+      return true;
+    }
   }
   return false;
 }
