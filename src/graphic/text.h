@@ -27,25 +27,25 @@
 
 class Text
 {
-  /* If you need that, implement it */
-/*   Text(const Text&); */
-/*   Text operator=(const Text&); */
-  /**********************************/
-
   Surface surf;
   Surface background; //shadow or outline or nothing;
   std::string txt;
-  Font* font;
   Color color;
   bool shadowed;
   uint bg_offset;
   uint max_width;
 
+  Font::font_size_t font_size;
+  Font::font_style_t font_style;
+
   void Render();
   void RenderMultiLines();
 public:
-  Text(const std::string &new_txt, const Color& new_color = white_color,
-       Font* new_font = NULL, bool shadowed = true);
+  Text(const std::string &new_txt, 
+       const Color& new_color = white_color,
+       Font::font_size_t fsize = Font::FONT_SMALL, 
+       Font::font_style_t fstyle = Font::FONT_NORMAL, 
+       bool shadowed = true);
   ~Text();
 
   //Draw method using windows coordinates
@@ -74,12 +74,5 @@ void DrawTmpBoxText(Font& font,
 		    const std::string& txt, uint space=3,
 		    const Color& boxColor = defaultColorBox,
 		    const Color& rectColor = defaultColorRect);
-
-/* void DrawTmpBoxTextWithReturns(Font &font, */
-/* 			       const Point2i &position, */
-/* 			       const std::string &txt, uint space=3, */
-/* 			       Color boxColor = defaultColorBox, */
-/* 			       Color rectColor = defaultColorRect); */
-
 
 #endif

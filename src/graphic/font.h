@@ -51,28 +51,34 @@ private:
   void Write(const Point2i &pos, Surface &surface);
 
   Font(int size);
+  bool Load (const std::string& filename, int size);
 
 public:
   // Size
-  static const int FONT_HUGE;
-  static const int FONT_LARGE;
-  static const int FONT_BIG;
-  static const int FONT_NORMAL;
-  static const int FONT_SMALL;
-  static const int FONT_TINY;
+  typedef enum {
+    FONT_HUGE = 0,
+    FONT_LARGE = 1,
+    FONT_BIG = 2,
+    FONT_MEDIUM = 3,
+    FONT_SMALL = 4,
+    FONT_TINY = 5
+  } font_size_t;
+
   // Style
-  static const int NORMAL;
-  static const int BOLD;
-  static const int ITALIC;
+  typedef enum {
+    FONT_NORMAL = 0,
+    FONT_BOLD = 1,
+    FONT_ITALIC = 2,
+  } font_style_t;
 
   // type: defined as static consts above
-  static Font* GetInstance(int type, int font_style = NORMAL);
+  static Font* GetInstance(font_size_t size, font_style_t style = FONT_NORMAL);
 
   ~Font();
 
-  bool Load (const std::string& filename, int size);
+  static Surface GenerateSurface(const std::string &txt, const Color &color, 
+				 font_size_t size = FONT_MEDIUM, font_style_t style = FONT_NORMAL);
 
-  static Surface GenerateSurface(const std::string &txt, const Color &color, int font_size = FONT_NORMAL, int font_style = NORMAL);
   void WriteLeft(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteLeftBottom(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteRight(const Point2i &pos, const std::string &txt, const Color &color);

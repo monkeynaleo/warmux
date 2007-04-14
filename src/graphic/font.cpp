@@ -39,38 +39,33 @@ Font* Font::FONT_ARRAY_ITALIC[] = {NULL, NULL, NULL, NULL, NULL, NULL};
  */
 // Size
 const int Font::FONT_SIZE[] = {40, 32, 24, 16, 12, 8};
-const int Font::FONT_HUGE   = 0;
-const int Font::FONT_LARGE  = 1;
-const int Font::FONT_BIG    = 2;
-const int Font::FONT_NORMAL = 3;
-const int Font::FONT_SMALL  = 4;
-const int Font::FONT_TINY   = 5;
 
-// Style
-const int Font::NORMAL = 0;
-const int Font::BOLD   = 1;
-const int Font::ITALIC = 2;
-
-Font* Font::GetInstance(int type, int font_style) {
+Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
   Font * font;
+  int type = (int)ftype;
+  int style = (int)fstyle;
+
   if (FONT_ARRAY[type] == NULL) {
-    switch(font_style) {
-      case BOLD:
-        font = FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
-        font->SetBold();
-        break;
-      case ITALIC:
-        font = FONT_ARRAY_ITALIC[type] = new Font(FONT_SIZE[type]);
-        font->SetItalic();
-        break;
-      default:     font = FONT_ARRAY[type] = new Font(FONT_SIZE[type]); break;
-    }
-  } else {
-    switch(font_style) {
-      case BOLD:   font = FONT_ARRAY_BOLD[type]; break;
-      case ITALIC: font = FONT_ARRAY_ITALIC[type]; break;
-      default  :   font = FONT_ARRAY[type]; break;
-    }
+    // Load the font in the different styles
+    FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
+    FONT_ARRAY_BOLD[type]->SetBold();
+
+    FONT_ARRAY_ITALIC[type] = new Font(FONT_SIZE[type]);
+    FONT_ARRAY_ITALIC[type]->SetItalic();
+
+    FONT_ARRAY[type] = new Font(FONT_SIZE[type]); 
+  }
+   
+  switch(style) {
+  case FONT_BOLD:   
+    font = FONT_ARRAY_BOLD[type]; 
+    break;
+  case FONT_ITALIC: 
+    font = FONT_ARRAY_ITALIC[type]; 
+    break;
+  case FONT_NORMAL:
+    font = FONT_ARRAY[type]; 
+    break;
   }
   return font;
 }
@@ -214,7 +209,7 @@ Point2i Font::GetSize(const std::string &txt){
 	return Point2i(GetWidth(txt), GetHeight(txt));
 }
 
-Surface Font::GenerateSurface(const std::string &txt, const Color &color, int font_size, int font_style)
+Surface Font::GenerateSurface(const std::string &txt, const Color &color, font_size_t font_size, font_style_t font_style)
 {
   return Surface(Font::GetInstance(font_size, font_style)->CreateSurface(txt, color));
 }

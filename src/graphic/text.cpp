@@ -31,20 +31,21 @@
 #include "../interface/interface.h"
 #include "../map/map.h"
 
-Text::Text(const std::string &new_txt, const Color& new_color,
-           Font* new_font, bool shadowed)
+Text::Text(const std::string &new_txt, 
+	   const Color& new_color,
+	   Font::font_size_t fsize, 
+	   Font::font_style_t fstyle, 
+           bool shadowed)
 {
-				
-  if( new_font == NULL )
-    new_font = Font::GetInstance(Font::FONT_SMALL);
-	
+  font_size = fsize;
+  font_style = fstyle;
+
   txt = new_txt;
   color = new_color;
-  font = new_font;
   this->shadowed = shadowed;
 
   if( shadowed ){
-    int width = font->GetWidth("x");
+    int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
     bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
     if (bg_offset < 1) bg_offset = 1;
   }
@@ -68,6 +69,8 @@ void Text::Render()
     RenderMultiLines();
     return;
   }
+  
+  Font* font = Font::GetInstance(font_size, font_style);
 
   surf = font->CreateSurface(txt, color);
   if ( shadowed ) {
@@ -78,6 +81,8 @@ void Text::Render()
 void Text::RenderMultiLines()
 {
   if (txt=="") return;
+
+  Font* font = Font::GetInstance(font_size, font_style);
 
   // Make a first try
   if (font->GetWidth(txt) < int(max_width)) {
