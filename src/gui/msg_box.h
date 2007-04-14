@@ -30,13 +30,14 @@
 
 class MsgBox : public Widget
 {
-  Font* font;
+  Font::font_size_t font_size;
+  Font::font_style_t font_style;
   std::list<Text*> messages;
   void Flush();
 
  public:
 
-  MsgBox(const Rectanglei& rect, Font* _font);
+  MsgBox(const Rectanglei& rect, Font::font_size_t font_size, Font::font_style_t font_style);
 
   void NewMessage(const std::string& msg, const Color& color = white_color);
   

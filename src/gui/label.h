@@ -32,15 +32,22 @@ class Label : public Widget{
   Text *txt_label;
   bool hidden;
  private:
-  Font *font;
+  Font::font_size_t font_size;
+  Font::font_style_t font_style;
   const Color& font_color;
   bool center;
   bool shadowed;
 
  public:
-  Label(const std::string &label, const Rectanglei &rect, Font& font,
-	const Color& color = white_color, bool center = false, bool shadowed = true);
+  Label(const std::string &label, 
+	const Rectanglei &rect, 
+	Font::font_size_t font_size,
+	Font::font_style_t font_style,
+	const Color& color = white_color, 
+	bool center = false, 
+	bool shadowed = true);
   ~Label();
+
   void Draw (const Point2i &mousePosition, Surface& surf) const;
   void SetSizePosition(const Rectanglei &rect);
   void SetText(const std::string &new_txt);

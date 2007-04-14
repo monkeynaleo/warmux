@@ -28,10 +28,11 @@
 #include "../tool/resource_manager.h"
 
 ListBoxItem::ListBoxItem(const std::string& _label, 
-			 Font& _font,
+			 Font::font_size_t fsize,
+			 Font::font_style_t fstyle,
 			 const std::string& _value,
 			 const Color& color) :
-  Label(_label, Rectanglei(0,0,0,0), _font, color)
+  Label(_label, Rectanglei(0,0,0,0), fsize, fstyle, color)
 {
   value = _value;
 }
@@ -285,14 +286,15 @@ void ListBox::SetSizePosition(const Rectanglei &rect)
 
 void ListBox::AddItem (bool selected,
 		       const std::string &label,
-		       const std::string &value,
-		       Font& font,
+		       const std::string &value,	       
+		       Font::font_size_t fsize,
+		       Font::font_style_t fstyle,
 		       const Color& color)
 {
   uint pos = m_items.size();
 
   // Push item
-  ListBoxItem * item = new ListBoxItem(label, font, value, color);
+  ListBoxItem * item = new ListBoxItem(label, fsize, fstyle, value, color);
   m_items.push_back (item);
 
   // Select it if selected

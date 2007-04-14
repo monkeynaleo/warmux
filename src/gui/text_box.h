@@ -30,7 +30,10 @@ class TextBox : public Label
 protected:
   std::string::size_type cursor_pos;
 public:
-  TextBox(const std::string &label, const Rectanglei &rect, Font& _font);
+  TextBox(const std::string &label, 
+	  const Rectanglei &rect, 
+	  Font::font_size_t fsize,
+	  Font::font_style_t fstyle);
   ~TextBox();
 
   void SendKey(SDL_keysym key);

@@ -36,7 +36,10 @@ private:
   std::string value;
 
 public:
-  ListBoxItem(const std::string& _label, Font& _font, const std::string& value,
+  ListBoxItem(const std::string& _label, 
+	      Font::font_size_t font_size,
+	      Font::font_style_t font_style,
+	      const std::string& value,
 	      const Color& color = white_color);
 
   const std::string& GetLabel() const;
@@ -86,7 +89,8 @@ public:
 
   void AddItem(bool selected, const std::string &label,
 	       const std::string &value,
-	       Font& font = *Font::GetInstance(Font::FONT_SMALL),
+	       Font::font_size_t fsize = Font::FONT_SMALL,
+	       Font::font_style_t fstyle = Font::FONT_NORMAL,
 	       const Color& color = white_color);
   void Sort();
 
