@@ -34,12 +34,16 @@ class BodyList;
 class Member;
 class Clothe;
 
+/*
+ * FIXME: this class is either very useless either very badly used.
+ * It would be nice to keep members in private section. There is no
+ * copy constructor, this is really suspect.... */
 class c_junction
 {
 public:
   Member* member;
   Member* parent;
-  c_junction() { member = NULL; parent = NULL; } ;
+  c_junction(): member(NULL), parent(NULL) {};
 };
 
 typedef class c_junction junction;
@@ -111,7 +115,7 @@ public:
   void SetDirection(Body::Direction_t dir);
   inline void SetOwner(const Character* belonger) { owner = belonger; };
   void PlayAnimation();
-  void Build();  
+  void Build();
   void UpdateWeaponPosition(const Point2i& pos);
 
   const std::string& GetMovement();
