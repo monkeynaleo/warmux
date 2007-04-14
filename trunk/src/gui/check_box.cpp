@@ -38,7 +38,7 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
   SetSizeY( (*Font::GetInstance(Font::FONT_SMALL)).GetHeight() );
   m_value = value;
 
-  txt_label = new Text(label, white_color, Font::GetInstance(Font::FONT_SMALL));
+  txt_label = new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
   hidden = false;
 }
 

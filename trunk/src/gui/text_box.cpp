@@ -23,8 +23,9 @@
 #include "text_box.h"
 #include "label.h"
 
-TextBox::TextBox (const std::string &label, const Rectanglei &rect, Font& _font) :
-  Label(label, rect, _font),
+TextBox::TextBox (const std::string &label, const Rectanglei &rect, 
+		  Font::font_size_t fsize, Font::font_style_t fstyle) :
+  Label(label, rect, fsize, fstyle),
   cursor_pos(label.size())
 {
 }

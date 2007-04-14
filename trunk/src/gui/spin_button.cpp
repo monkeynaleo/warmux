@@ -36,7 +36,7 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
-  txt_label = new Text(label, color, Font::GetInstance(Font::FONT_SMALL), shadowed);
+  txt_label = new Text(label, color, Font::FONT_SMALL, Font::FONT_NORMAL, shadowed);
 
   if ( min_value != -1 && min_value <= value)
     m_min_value = min_value;
@@ -46,7 +46,7 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", color, Font::GetInstance(Font::FONT_SMALL), shadowed);
+  txt_value = new Text("", color, Font::FONT_SMALL, Font::FONT_NORMAL, shadowed);
   SetValue(value);
 
   std::ostringstream max_value_s;
