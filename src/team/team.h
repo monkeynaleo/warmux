@@ -45,6 +45,11 @@ typedef enum {
 
 class Team
 {
+  /* If you need this, implement it (correctly) */
+  Team(const Team&);
+  Team operator=(const Team&);
+  /**********************************************/
+
   public:
     typedef std::list<Character>::iterator iterator;
     typedef std::list<Character>::const_iterator const_iterator;
@@ -80,7 +85,7 @@ class Team
 
     bool LoadCharacters();
   public:
-    static Team* CreateTeam (const std::string &teams_dir, const std::string &id);
+    Team (const std::string &teams_dir, const std::string &id);
 
     void LoadGamingData();
     void UnloadGamingData();
