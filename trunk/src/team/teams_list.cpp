@@ -89,12 +89,28 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
 #endif
 
   // Add the team
-  Team * tmp = Team::CreateTeam (dir, team);
-  if (tmp != NULL) {
-    full_list.push_back(*tmp);
+  try {
+    full_list.push_back(new Team(dir, team));
     std::cout << ((1<full_list.size())?", ":" ") << team;
     std::cout.flush();
   }
+
+  catch (char const *error)
+    {
+      std::cerr << std::endl
+        << Format(_("Error loading team :")) << team <<":"<< error
+        << std::endl;
+      return;
+    }
+
+  catch (const xmlpp::exception &e)
+    {
+      std::cerr << std::endl
+        << Format(_("Error loading team :")) << team << std::endl
+        << e.what() << std::endl;
+      return;
+    }
+
 }
 
 //-----------------------------------------------------------------------------
@@ -192,10 +208,10 @@ Team *TeamsList::FindById (const std::string &id, int &pos)
   int i=0;
   for (; it != fin; ++it, ++i)
   {
-    if (it -> GetId() == id)
+    if ((*it)->GetId() == id)
     {
       pos = i;
-      return &(*it);
+      return (*it);
     }
   }
   pos = -1;
@@ -210,7 +226,8 @@ Team *TeamsList::FindByIndex (uint index)
   uint i=0;
   for (; it != fin; ++it, ++i)
   {
-    if (i == index) return &(*it);
+    if (i == index)
+      return (*it);
   }
   assert (false);
   return NULL;
@@ -489,9 +506,9 @@ void TeamsList::DelTeam (const std::string &id)
   if (it != selection.end()) {
     selection.erase(it);
   }
-  
+
   iterator playing_it = find(playing_list.begin(),playing_list.end(),equipe);
-  
+
   if (playing_it != playing_list.end()) {
     playing_list.erase(playing_it);
   }
@@ -534,9 +551,9 @@ Character& ActiveCharacter()
 
 //-----------------------------------------------------------------------------
 
-bool compareTeams(const Team& a, const Team& b)
+bool compareTeams(const Team *a, const Team *b)
 {
-  return a.GetName() < b.GetName();
+  return a->GetName() < b->GetName();
 }
 
 //-----------------------------------------------------------------------------

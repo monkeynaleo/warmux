@@ -40,71 +40,42 @@
 #include <sstream>
 #include <iostream>
 
-Team::Team(const std::string& _teams_dir,
-           const std::string& _id,
-           const std::string& _name,
-           const Surface& _flag,
-           const std::string& _sound_profile)
-  : energy(this)
+
+Team::Team (const std::string& teams_dir, const std::string& id)
+  : energy(this), m_teams_dir(teams_dir), m_id(id)
 {
+  std::string nomfich;
+  XmlReader doc;
+
+  // Load XML
+  nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
+
+  if (!doc.Load(nomfich))
+    throw "unable to load file of team data";
+
+  if (!XmlReader::ReadString(doc.GetRoot(), "name", m_name))
+    throw "Invalid file structure: cannot find a name for team ";
+
+  // Load flag
+  Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
+  flag = resource_manager.LoadImage(res, "flag");
+  resource_manager.UnLoadXMLProfile(res);
+
+  // Get sound profile
+  if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", m_sound_profile))
+    m_sound_profile = "default";
+
   active_character = characters.end();
 
   is_camera_saved = false;
   active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
 
-  m_teams_dir = _teams_dir;
-  m_id = _id;
-  m_name = _name;
-  m_sound_profile = _sound_profile;
   m_player_name = "";
 
   nb_characters = GameMode::GetInstance()->max_characters;
 
-  flag = _flag;
-
   type_of_player = TEAM_human_local;
 }
-
-Team * Team::CreateTeam (const std::string& teams_dir,
-                         const std::string& id)
-{
-  std::string nomfich;
-  try
-  {
-    XmlReader doc;
-
-    // Load XML
-    nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
-    if (!IsFileExist(nomfich)) return false;
-    if (!doc.Load(nomfich)) return false;
-
-    // Load name
-    std::string name;
-    if (!XmlReader::ReadString(doc.GetRoot(), "name", name)) return NULL;
-
-    // Load flag
-    Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
-    Surface flag = resource_manager.LoadImage(res, "flag");
-    resource_manager.UnLoadXMLProfile(res);
-
-    // Get sound profile
-    std::string sound_profile;
-    if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", sound_profile))
-      sound_profile = "default";
-
-    return new Team(teams_dir, id, name, flag, sound_profile) ;
-  }
-  catch (const xmlpp::exception &e)
-  {
-    std::cerr << std::endl
-        << Format(_("Error loading team %s:"), id.c_str())
-        << std::endl << e.what() << std::endl;
-    return NULL;
-  }
-
-  return NULL;
-}
-
 
 bool Team::LoadCharacters()
 {

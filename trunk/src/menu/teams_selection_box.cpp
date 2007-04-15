@@ -61,7 +61,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
   top_n_bottom_team_options->AddWidget(top_team_options);
   top_n_bottom_team_options->AddWidget(bottom_team_options);
 
-  AddWidget(top_n_bottom_team_options); 
+  AddWidget(top_n_bottom_team_options);
 
   // Load Teams' list
   teams_list.full_list.sort(compareTeams);
@@ -75,7 +75,7 @@ TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
     {
       teams_selections.at(j)->SetTeam((**it), true);
     }
-  
+
   if (j < 2) {
     SetNbTeams(2);
     teams_nb->SetValue(2);
@@ -95,11 +95,11 @@ Widget* TeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
     for (uint i=0; i<teams_selections.size() ; i++) {
 
       if (teams_selections.at(i)->Contains(mousePosition)) {
-	
+
 	Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
 
 	if (w == NULL) {
-	  Rectanglei r(teams_selections.at(i)->GetPositionX(), 
+	  Rectanglei r(teams_selections.at(i)->GetPositionX(),
 		       teams_selections.at(i)->GetPositionY(),
 		       60,
 		       60);
@@ -132,13 +132,13 @@ void TeamsSelectionBox::PrevTeam(int i)
 
   bool to_continue;
   Team* tmp;
-  int previous_index = -1, index;  
+  int previous_index = -1, index;
 
   teams_list.FindById(teams_selections.at(i)->GetTeam()->GetId(), previous_index);
 
   index = previous_index-1;
 
-  do 
+  do
     {
       to_continue = false;
 
@@ -148,7 +148,7 @@ void TeamsSelectionBox::PrevTeam(int i)
 
       // Get the team at current index
       tmp = teams_list.FindByIndex(index);
-      
+
       // Check if that team is already selected
       for (int j = 0; j < teams_nb->GetValue(); j++) {
 	if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
@@ -157,7 +157,7 @@ void TeamsSelectionBox::PrevTeam(int i)
 	  break;
 	}
       }
-      
+
       // We have found a team which is not selected
       if (tmp != NULL && !to_continue)
 	teams_selections.at(i)->SetTeam(*tmp);
@@ -176,7 +176,7 @@ void TeamsSelectionBox::NextTeam(int i)
 
   index = previous_index+1;
 
-  do 
+  do
     {
       to_continue = false;
 
@@ -186,7 +186,7 @@ void TeamsSelectionBox::NextTeam(int i)
 
       // Get the team at current index
       tmp = teams_list.FindByIndex(index);
-      
+
       // Check if that team is already selected
       for (int j = 0; j < teams_nb->GetValue(); j++) {
 	if (j!= i && tmp == teams_selections.at(j)->GetTeam()) {
@@ -195,7 +195,7 @@ void TeamsSelectionBox::NextTeam(int i)
 	  break;
 	}
       }
-      
+
       // We have found a team which is not selected
       if (tmp != NULL && !to_continue)
 	teams_selections.at(i)->SetTeam(*tmp);
