@@ -45,6 +45,8 @@ TeamsList::TeamsList()
 TeamsList::~TeamsList()
 {
   Clear();
+  for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
+    delete (*it);
   full_list.clear();
 }
 
