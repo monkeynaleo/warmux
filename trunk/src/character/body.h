@@ -50,6 +50,11 @@ typedef class c_junction junction;
 
 class Body
 {
+  /* If you need this, implement it (correctly) */
+  Body(const Body&);
+  Body operator=(const Body&);
+  /**********************************************/
+
 public:
   typedef enum
   {

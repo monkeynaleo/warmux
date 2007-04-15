@@ -43,8 +43,8 @@ class Question
       int m_key;
       int m_val;
     public:
-      choice_t (int key, int value)
-      { m_key = key; m_val = value; };
+      choice_t (int key, int value):
+        m_key(key), m_val(value) { };
       inline const int & key() const { return m_key; };
       inline const int & val() const { return m_val; };
   };

@@ -38,6 +38,10 @@ class ParticleEngine;
 class Character : public PhysicalObj
 {
 private:
+  /* If you need this, implement it (correctly) */
+  Character operator=(const Character&);
+  /**********************************************/
+
   std::string character_name;
   Team &m_team;
   bool step_sound_played;

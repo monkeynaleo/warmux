@@ -35,6 +35,11 @@ class c_junction; //defined in body.h
 
 class Member
 {
+  /* If you need this, implement it (correctly) */
+  Member(const Member&);
+  Member operator=(const Member&);
+  /**********************************************/
+
   Member* parent;
   double angle_rad;
 protected:

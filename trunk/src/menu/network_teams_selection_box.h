@@ -35,11 +35,15 @@
 const uint NMAX_NB_TEAMS=6;
 
 class NetworkTeamsSelectionBox : public HBox
-{ 
- private:  
+{
+ private:
+  /* If you need this, implement it (correctly) */
+  NetworkTeamsSelectionBox(const NetworkTeamsSelectionBox&);
+  NetworkTeamsSelectionBox operator=(const NetworkTeamsSelectionBox&);
+  /**********************************************/
+
   SpinButtonBig *local_teams_nb;
   std::vector<TeamBox*> teams_selections;
-
   void SetNbLocalTeams(uint nb_teams, uint previous_nb);
   void AddLocalTeam(uint i);
   void RemoveLocalTeam(uint i);
