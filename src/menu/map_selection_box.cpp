@@ -202,6 +202,10 @@ Widget* MapSelectionBox::Click(const Point2i &mousePosition, uint button)
 void MapSelectionBox::ValidMapSelection()
 {
   MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
+
+  /* The player chose a map, save it in the main config so that this will be
+   * the defaut map at next load of the game */
+  Config::GetInstance()->SetMapName(MapsList::GetInstance()->lst[selected_map_index].ReadName());
 }
 
 void MapSelectionBox::ChangeMapCallback()
