@@ -93,7 +93,8 @@ public:
 
   std::list<struct ConfigTeam> & AccessTeamList();
   const std::string & GetMapName() const;
-  std::string & AccessMapName();
+  inline void SetMapName(const std::string& new_name)
+  { map_name = new_name; }
 
   int GetTransparency() const;
 

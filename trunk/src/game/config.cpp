@@ -242,7 +242,9 @@ bool Config::SaveXml()
   doc.WriteElement(root, "version", Constants::VERSION);
 
   //=== Map ===
-  doc.WriteElement(root, "map", MapsList::GetInstance()->ActiveMap().ReadName());
+  //The map name is modified when the player validate its choice in the
+  //map selection box.
+  doc.WriteElement(root, "map", map_name);
 
   //=== Teams ===
   xmlpp::Element *team_elements = root->add_child("teams");
@@ -328,11 +330,6 @@ std::list<struct ConfigTeam> & Config::AccessTeamList()
 }
 
 const std::string & Config::GetMapName() const
-{
-  return map_name;
-}
-
-std::string & Config::AccessMapName()
 {
   return map_name;
 }
