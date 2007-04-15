@@ -195,7 +195,6 @@ MapsList::MapsList()
   lst.clear() ;
 
   std::cout << "o " << _("Load maps:");
-  terrain_actif = -1;
 
   Config * config = Config::GetInstance();
   std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "map" + PATH_SEPARATOR;
@@ -245,7 +244,13 @@ MapsList::MapsList()
   if (lst.size() < 1)
     Error(_("You need at least one valid map !"));
 
+  /* Get the full set of map ordered */
   std::sort(lst.begin(), lst.end(), compareMaps);
+
+  /* Read the personnal player data and try to restore the map that was played
+   * the last time. If it is no found the map 0 is used as we know here that
+   * there is at least one map */
+  SelectMapByName(Config::GetInstance()->GetMapName());
 }
 
 void MapsList::LoadOneMap (const std::string &dir, const std::string &file)

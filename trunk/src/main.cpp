@@ -150,9 +150,6 @@ void AppWormux::Init(int argc, char **argv)
 
   GameMode::GetInstance()->Load();
 
-  // Load maps
-  MapsList::GetInstance()->SelectMapByName(Config::GetInstance()->GetMapName());
-
   DisplayLoadingPicture();
 
   jukebox.Init();

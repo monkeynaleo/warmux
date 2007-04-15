@@ -25,7 +25,7 @@
 #include "../network/network.h"
 
 MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
-  HBox(rect, true)
+  HBox(rect, true), selected_map_index(0)
 {
   display_only = _display_only;
 
@@ -119,7 +119,6 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   AddWidget(tmp_map_box);
 
   // Load Maps' list
-  std::sort(MapsList::GetInstance()->lst.begin(), MapsList::GetInstance()->lst.end(), compareMaps);
   ChangeMap(MapsList::GetInstance()->GetActiveMapIndex());
 }
 
