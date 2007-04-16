@@ -47,11 +47,13 @@ Video::Video(){
 
   SetMaxFps(config->GetMaxFps());
 
-  if( window.IsNull() )
-    Error( "Unable to initialize SDL window.");
+  if( window.IsNull() ) {
+    Error("Unable to initialize SDL window: %s", SDL_GetError());
+    exit (1);
+  }
 
   SetWindowCaption( std::string("Wormux ") + Constants::VERSION );
-  SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux-32.xpm" );
+  SetWindowIcon( config->GetDataDir() + PATH_SEPARATOR + "wormux_32x32.xpm" );
 
   ComputeAvailableConfigs();
 }
@@ -125,6 +127,12 @@ void Video::ComputeAvailableConfigs()
   Point2i d(1600, 1200);
   if ( CompareConfigs((*available_configs.begin()), d))
     available_configs.push_back(d);
+  Point2i e(1400, 1050);
+  if ( CompareConfigs((*available_configs.begin()), e))
+    available_configs.push_back(e);
+  Point2i f(1280, 800);
+  if ( CompareConfigs((*available_configs.begin()), f))
+    available_configs.push_back(f);
 
   // Sort the list again...
   available_configs.sort(CompareConfigs);
@@ -182,7 +190,6 @@ void Video::ToggleFullscreen()
   fullscreen = !fullscreen;
 }
 
-
 void Video::SetWindowCaption(std::string caption){
   SDL_WM_SetCaption( caption.c_str(), NULL );
 }
@@ -195,8 +202,10 @@ void Video::InitSDL(){
   if( SDLReady )
     return;
 
-  if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 )
-    Error( Format( _("Unable to initialize SDL library: %s"), SDL_GetError() ) );
+  if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 ) {
+    Error("Unable to initialize SDL library: %s", SDL_GetError());
+    exit (1);
+  }
 
   SDL_EnableUNICODE(1);
   SDLReady = true;
