@@ -43,9 +43,8 @@ const int Font::FONT_SIZE[] = {40, 32, 24, 16, 12, 8};
 Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
   Font * font;
   int type = (int)ftype;
-  int style = (int)fstyle;
 
-  if (FONT_ARRAY[type] == NULL) {
+  if (FONT_ARRAY[ftype] == NULL) {
     // Load the font in the different styles
     FONT_ARRAY_BOLD[type] = new Font(FONT_SIZE[type]);
     FONT_ARRAY_BOLD[type]->SetBold();
@@ -53,18 +52,18 @@ Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
     FONT_ARRAY_ITALIC[type] = new Font(FONT_SIZE[type]);
     FONT_ARRAY_ITALIC[type]->SetItalic();
 
-    FONT_ARRAY[type] = new Font(FONT_SIZE[type]); 
+    FONT_ARRAY[type] = new Font(FONT_SIZE[type]);
   }
-   
-  switch(style) {
-  case FONT_BOLD:   
-    font = FONT_ARRAY_BOLD[type]; 
+
+  switch(fstyle) {
+  case FONT_BOLD:
+    font = FONT_ARRAY_BOLD[type];
     break;
-  case FONT_ITALIC: 
-    font = FONT_ARRAY_ITALIC[type]; 
+  case FONT_ITALIC:
+    font = FONT_ARRAY_ITALIC[type];
     break;
   case FONT_NORMAL:
-    font = FONT_ARRAY[type]; 
+    font = FONT_ARRAY[type];
     break;
   }
   return font;
@@ -73,7 +72,7 @@ Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
 Font::Font(int size){
   m_font = NULL;
   bool ok = Load(Config::GetInstance()->GetTtfFilename(), size);
-  
+
   if( !ok )
     Error("Error during initialisation of a font!");
 }
@@ -83,11 +82,11 @@ Font::~Font(){
     TTF_CloseFont(m_font);
     m_font = NULL;
   }
-  
+
   txt_iterator it;
-  
-  for( it = surface_text_table.begin(); 
-       it != surface_text_table.end(); 
+
+  for( it = surface_text_table.begin();
+       it != surface_text_table.end();
        ++it ){
     //SDL_FreeSurface(it->second);
     surface_text_table.erase(it->first);
@@ -101,12 +100,12 @@ bool Font::Load (const std::string& filename, int size) {
       m_font = TTF_OpenFont(filename.c_str(), size);
       ok = (m_font != NULL);
   }
-  
+
   if( !ok ){
       std::cout << "Error: Font " << filename << " can't be found!" << std::endl;
       return false;
   }
-  
+
   TTF_SetFontStyle(m_font, TTF_STYLE_NORMAL);
 
   return true;
@@ -124,7 +123,7 @@ void Font::SetItalic()
 
 void Font::Write(const Point2i &pos, Surface &surface){
   AppWormux::GetInstance()->video.window.Blit(surface, pos);
-		  
+
   // TODO: Remove this line! (and use GameFont instead of Font)
   world.ToRedrawOnScreen( Rectanglei(pos, surface.GetSize()) );
 }
@@ -135,19 +134,19 @@ void Font::WriteLeft(const Point2i &pos, const std::string &txt,  const Color &c
 }
 
 void Font::WriteLeftBottom(const Point2i &pos, const std::string &txt,
-			     const Color &color){ 
+			     const Color &color){
   Surface surface(Render(txt, color, true));
   Write(pos - Point2i(0, surface.GetHeight()), surface);
 }
 
 void Font::WriteRight(const Point2i &pos, const std::string &txt,
-		        const Color &color){ 
+		        const Color &color){
   Surface surface(Render(txt, color, true));
   Write(pos - Point2i(surface.GetWidth(), 0), surface);
 }
 
 void Font::WriteCenter (const Point2i &pos, const std::string &txt,
-			 const Color &color){ 
+			 const Color &color){
   Surface surface(Render(txt, color, true));
   Write(pos - Point2i(surface.GetWidth()/2, surface.GetHeight()), surface);
 }
@@ -164,10 +163,10 @@ Surface Font::CreateSurface(const std::string &txt, const Color &color){
 
 Surface Font::Render(const std::string &txt, const Color &color, bool cache){
   Surface surface;
-  
+
   if( cache ){
     txt_iterator p = surface_text_table.find(txt);
-    if( p == surface_text_table.end() ){ 
+    if( p == surface_text_table.end() ){
       if( surface_text_table.size() > 5 ){
         //SDL_FreeSurface( surface_text_table.begin()->second );
         surface_text_table.erase( surface_text_table.begin() );
@@ -180,26 +179,26 @@ Surface Font::Render(const std::string &txt, const Color &color, bool cache){
     }
   } else
     surface = CreateSurface(txt, color);
-  
+
   assert( !surface.IsNull() );
   return surface;
 }
 
-int Font::GetWidth (const std::string &txt){ 
+int Font::GetWidth (const std::string &txt){
   int width=-1;
-  
+
   TTF_SizeUTF8(m_font, txt.c_str(), &width, NULL);
 
   return width;
 }
 
-int Font::GetHeight (){ 
+int Font::GetHeight (){
   return TTF_FontHeight(m_font);
 }
 
-int Font::GetHeight (const std::string &str){ 
+int Font::GetHeight (const std::string &str){
   int height=-1;
-  
+
   TTF_SizeUTF8(m_font, str.c_str(), NULL, &height);
 
   return height;
