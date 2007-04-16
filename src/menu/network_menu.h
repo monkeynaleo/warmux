@@ -36,6 +36,8 @@ class Team;
 
 class NetworkMenu : public Menu
 {
+  bool waiting_for_server;
+
   /* Options controllers */
   SpinButton* player_number;
   Box* options_box;
@@ -59,6 +61,7 @@ class NetworkMenu : public Menu
   void OnClickUp(const Point2i &mousePosition, int button);
   void Draw(const Point2i &mousePosition);
   void SendChatMsg();
+  void WaitingForServer();
   
   void sig_ok();
   void __sig_ok();

@@ -62,15 +62,14 @@ public:
 private:
    Sprite *background;
 
-   /* Actions buttons  */
-   HBox *actions_buttons;
-
    bool BasicOnClickUp(const Point2i &mousePosition);
 
 protected:
    Button *b_cancel;
    Button *b_ok;
    bool close_menu;
+   /* Actions buttons  */
+   HBox *actions_buttons;
 
    virtual void sig_ok();
    virtual void sig_cancel();

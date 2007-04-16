@@ -48,6 +48,8 @@ const uint OPTIONS_BOX_H = 150;
 NetworkMenu::NetworkMenu() :
   Menu("menu/bg_network")
 {
+  waiting_for_server = false;
+
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
   Rectanglei stdRect (0, 0, 130, 30);
@@ -203,12 +205,7 @@ void NetworkMenu::__sig_ok()
   if(Network::GetInstance()->IsClient())
   {
     // Wait for the server, and stay in the menu map / team can still be changed
-    Action a(Action::ACTION_NETWORK_CHANGE_STATE);
-    Network::GetInstance()->SendAction(&a);
-    while(Network::GetInstance()->state != Network::NETWORK_INIT_GAME && Network::GetInstance()->IsConnected())
-    {
-      Display(Point2i(-1,-1));
-    }
+    WaitingForServer();
   }
 
   // Disconnection :-/
@@ -331,4 +328,63 @@ void NetworkMenu::ChangeMapCallback()
 void NetworkMenu::ReceiveMsgCallback(std::string msg)
 {
   msg_box->NewMessage(msg);
+}
+
+void NetworkMenu::WaitingForServer()
+{
+  // warn the server that we are ready to play
+  Action a(Action::ACTION_NETWORK_CHANGE_STATE);
+  Network::GetInstance()->SendAction(&a);
+  
+  waiting_for_server = true;
+  b_ok->SetVisible(false);
+  actions_buttons->ForceRedraw();
+
+  msg_box->NewMessage(_("Waiting for server, all you can do is cancel or chat!"), c_red);
+
+  int x=0, y=0;
+  SDL_GetMouseState( &x, &y );
+  Point2i mousePosition(x, y);
+
+  do
+  {
+    // Poll and treat events
+    SDL_Event event;
+     
+    while (SDL_PollEvent(&event))
+    {
+      Point2i mousePosition(event.button.x, event.button.y);
+	   
+      if (event.type == SDL_QUIT) {
+	Menu::sig_cancel();
+      } else if (event.type == SDL_KEYDOWN) {
+        switch (event.key.keysym.sym)
+	  {
+	  case SDLK_ESCAPE:
+	    Menu::sig_cancel();
+	    break;
+	  case SDLK_RETURN:
+	    SendChatMsg();
+	    break;
+	  case SDLK_F10:
+	    AppWormux::GetInstance()->video.ToggleFullscreen();
+	    break;
+	  default:
+	    widgets.SendKey(event.key.keysym);
+	    break;
+	  }
+      } else if (event.type == SDL_MOUSEBUTTONUP) {
+	if (b_cancel->Contains(mousePosition))
+	  Menu::sig_cancel();
+	
+	if (send_txt_bt->Contains(mousePosition))
+	  SendChatMsg();
+      }
+    } 
+
+    Menu::Display(mousePosition);
+    widgets.SetFocusOn(line_to_send_tbox);
+
+  } while (Network::GetInstance()->state != Network::NETWORK_INIT_GAME && 
+	   Network::GetInstance()->IsConnected());
 }
