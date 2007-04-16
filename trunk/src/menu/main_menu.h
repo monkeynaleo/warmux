@@ -45,10 +45,10 @@ typedef enum
 
 class Main_Menu : public Menu
 {
-  //PictureWidget *title;
-  //Surface s_title;
-
-  //Sprite *skin_left, *skin_right;
+  /* If you need this, implement it (correctly) */
+  Main_Menu(const Main_Menu&);
+  Main_Menu operator=(const Main_Menu&);
+  /**********************************************/
 
   ButtonText *play, *network, *options, *infos, *quit;
 

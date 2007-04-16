@@ -28,6 +28,11 @@
 class FramePerSecond
 {
 private:
+  /* If you need this, implement it (correctly) */
+  FramePerSecond(const FramePerSecond&);
+  FramePerSecond operator=(const FramePerSecond&);
+  /**********************************************/
+
   // Minimum number of values needed to compute the average
   static const uint MIN_NB_VALUES;
 
@@ -39,7 +44,7 @@ private:
 
 public:
   bool display;
-  
+
 public:
   FramePerSecond();
   ~FramePerSecond();
