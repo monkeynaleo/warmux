@@ -54,23 +54,26 @@ Button::~Button()
 }
 
 void Button::Draw(const Point2i &mousePosition, Surface& surf) const
-{
-  uint frame = Contains(mousePosition)?1:0;
-
-  image->SetCurrentFrame(frame);
-
-  if (img_scale) {
-    // image scalling : easy to place image
-    image->Blit(surf, position);
-  } else {
-    // centering image
-    Point2i pos = position;
-
-    pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
-    pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
-
-    image->Blit(surf, pos);
-  }
+{  
+  if (!hidden)
+    {
+      uint frame = Contains(mousePosition)?1:0;
+      
+      image->SetCurrentFrame(frame);
+      
+      if (img_scale) {
+	// image scalling : easy to place image
+	image->Blit(surf, position);
+      } else {
+	// centering image
+	Point2i pos = position;
+	
+	pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
+	pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
+	
+	image->Blit(surf, pos);
+      }
+    }
 }
 
 void Button::SetSizePosition(const Rectanglei &rect)
@@ -79,4 +82,12 @@ void Button::SetSizePosition(const Rectanglei &rect)
 
   if (img_scale)
     image->ScaleSize(size);
+}
+
+void Button::SetVisible(bool visible)
+{
+  if (hidden == visible) {
+    hidden = !visible;
+    need_redrawing = true;
+  }
 }
