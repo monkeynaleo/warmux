@@ -30,6 +30,11 @@
 
 class SpinButtonBig : public Widget
 {
+  /* If you need this, implement it (correctly)*/
+  SpinButtonBig(const SpinButtonBig&);
+  SpinButtonBig operator=(const SpinButtonBig&);
+  /*********************************************/
+
  protected:
   Text *txt_label, *txt_value;
 

@@ -30,6 +30,11 @@
 class WidgetList : public Widget, public Container
 {
 private:
+  /* If you need this, implement it (correctly)*/
+  WidgetList(const WidgetList&);
+  WidgetList operator=(const WidgetList&);
+  /*********************************************/
+
   Point2i lastMousePosition;
   Widget* last_clicked;
 
@@ -51,16 +56,16 @@ public:
   virtual void Draw(const Point2i &mousePosition, Surface& surf) const;
 
   // needed to implements Widget
-  virtual void SetSizePosition(const Rectanglei &rect) {};  
+  virtual void SetSizePosition(const Rectanglei &rect) {};
 
   // to add a widget
   virtual void AddWidget(Widget*);
 
   // redraw bottom layer container
   virtual void Redraw(const Rectanglei& rect, Surface& surf);
-  
+
   // set need_redrawing to true for all sub widgets;
-  void ForceRedraw(); 
+  void ForceRedraw();
 
   // set focus on a widget
   void SetFocusOn(Widget*);

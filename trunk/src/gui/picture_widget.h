@@ -29,6 +29,11 @@
 class PictureWidget : public Widget
 {
  private:
+  /* If you need this, implement it (correctly)*/
+  PictureWidget(const PictureWidget&);
+  PictureWidget operator=(const PictureWidget&);
+  /*********************************************/
+
   bool disabled;
   Sprite * spr;
 

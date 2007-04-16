@@ -29,17 +29,22 @@
 class OptionMenu : public Menu
 {
 public:
-   OptionMenu(); 
+   OptionMenu();
    ~OptionMenu();
 
 private:
 
-   /* Graphic options controllers */   
+  /* If you need this, implement it (correctly)*/
+   OptionMenu(const OptionMenu&);
+   OptionMenu operator=(const OptionMenu&);
+   /********************************************/
+
+   /* Graphic options controllers */
    ListBox *lbox_video_mode;
    CheckBox *opt_display_wind_particles;
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
-   CheckBox *full_screen; 
+   CheckBox *full_screen;
    SpinButtonBig *opt_max_fps;
 
    /* Sound options controllers */
