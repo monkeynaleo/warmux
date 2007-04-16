@@ -167,31 +167,18 @@ void Action_Rules_SetGameMode (Action *a)
 {
   net_assert(Network::GetInstance()->IsClient())
   {
-    if(a->creator) a->creator->force_disconnect = true;
+    if (a->creator) 
+      a->creator->force_disconnect = true;
     return;
   }
-  GameMode::GetInstance()->LoadFromString(a->PopString());
 
-//   GameMode::GetInstance()->max_characters = a->PopInt();
-//   GameMode::GetInstance()->max_teams = a->PopInt();
-//   GameMode::GetInstance()->duration_turn = a->PopInt();
-//   GameMode::GetInstance()->duration_exchange_player = a->PopInt();
-//   GameMode::GetInstance()->duration_before_death_mode = a->PopInt();
-//   GameMode::GetInstance()->gravity = a->PopDouble();
-//   GameMode::GetInstance()->safe_fall = a->PopDouble();
-//   GameMode::GetInstance()->damage_per_fall_unit = a->PopDouble();
-//   GameMode::GetInstance()->duration_move_player = a->PopInt();
-//   GameMode::GetInstance()->allow_character_selection = a->PopInt();
-//   GameMode::GetInstance()->character.init_energy = a->PopInt();
-//   GameMode::GetInstance()->character.max_energy = a->PopInt();
-//   GameMode::GetInstance()->character.mass = a->PopInt();
-//   GameMode::GetInstance()->character.air_resist_factor = a->PopDouble();
-//   GameMode::GetInstance()->character.jump_strength = a->PopInt();
-//   GameMode::GetInstance()->character.jump_angle = a->PopDouble();
-//   GameMode::GetInstance()->character.super_jump_strength = a->PopInt();
-//   GameMode::GetInstance()->character.super_jump_angle = a->PopDouble();
-//   GameMode::GetInstance()->character.back_jump_strength = a->PopInt();
-//   GameMode::GetInstance()->character.back_jump_angle = a->PopDouble();
+  std::string game_mode_name = a->PopString();
+  std::string game_mode = a->PopString();
+  std::string game_mode_objects = a->PopString();
+
+  GameMode::GetInstance()->LoadFromString(game_mode_name,
+					  game_mode,
+					  game_mode_objects);
 }
 
 void SendGameMode()
@@ -199,31 +186,21 @@ void SendGameMode()
   assert(Network::GetInstance()->IsServer());
 
   Action a(Action::ACTION_RULES_SET_GAME_MODE);
+
+  std::string game_mode_name = "network(";
+  game_mode_name += GameMode::GetInstance()->GetName();
+  game_mode_name += ")";
+
+  a.Push(game_mode_name);
+
+  std::string game_mode;
+  std::string game_mode_objects;
   
-  std::string contents;
-  GameMode::GetInstance()->ExportToString(contents);
-  
-  a.Push(contents);
-//   a.Push((int)GameMode::GetInstance()->max_characters);
-//   a.Push((int)GameMode::GetInstance()->max_teams);
-//   a.Push((int)GameMode::GetInstance()->duration_turn);
-//   a.Push((int)GameMode::GetInstance()->duration_exchange_player);
-//   a.Push((int)GameMode::GetInstance()->duration_before_death_mode);
-//   a.Push(GameMode::GetInstance()->gravity);
-//   a.Push(GameMode::GetInstance()->safe_fall);
-//   a.Push(GameMode::GetInstance()->damage_per_fall_unit);
-//   a.Push((int)GameMode::GetInstance()->duration_move_player);
-//   a.Push(GameMode::GetInstance()->allow_character_selection);
-//   a.Push((int)GameMode::GetInstance()->character.init_energy);
-//   a.Push((int)GameMode::GetInstance()->character.max_energy);
-//   a.Push((int)GameMode::GetInstance()->character.mass);
-//   a.Push(GameMode::GetInstance()->character.air_resist_factor);
-//   a.Push((int)GameMode::GetInstance()->character.jump_strength);
-//   a.Push(GameMode::GetInstance()->character.jump_angle);
-//   a.Push((int)GameMode::GetInstance()->character.super_jump_strength);
-//   a.Push(GameMode::GetInstance()->character.super_jump_angle);
-//   a.Push((int)GameMode::GetInstance()->character.back_jump_strength);
-//   a.Push(GameMode::GetInstance()->character.back_jump_angle);
+  GameMode::GetInstance()->ExportToString(game_mode,
+					  game_mode_objects);
+  a.Push(game_mode);
+  a.Push(game_mode_objects);
+
   Network::GetInstance()->SendAction(&a);
 }
 

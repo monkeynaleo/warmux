@@ -24,7 +24,9 @@
 #include <iostream>
 #include "object_cfg.h"
 #include "../game/config.h"
+#include "../game/game_mode.h"
 #include "../include/base.h"
+#include "../tool/debug.h"
 #include "../tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
@@ -44,16 +46,27 @@ ObjectConfig::~ObjectConfig()
 
 void ObjectConfig::LoadXml(const std::string& obj_name, const std::string &config_file)
 {
-  std::string file;
-  if(config_file=="")
-    file = Config::GetInstance()->GetDataDir() + PATH_SEPARATOR + "game_mode" + PATH_SEPARATOR + "objects.xml";
-  else
-    file = config_file;
-
-  // Load Xml configuration
+  xmlpp::Element* elem = NULL;
   XmlReader doc;
-  assert(doc.Load(file));
-  xmlpp::Element* elem = XmlReader::GetMarker(doc.GetRoot(), obj_name);
+
+  if (config_file == "") {
+
+    MSG_DEBUG("game_mode", "Load %s configuration from %s\n", 
+	      obj_name.c_str(), 
+	      GameMode::GetInstance()->GetName().c_str());
+
+    XmlReader& ddoc = GameMode::GetInstance()->GetXmlObjects();
+    elem = XmlReader::GetMarker(ddoc.GetRoot(), obj_name);
+
+  } else {
+    
+    MSG_DEBUG("game_mode", "** Load %s configuration from file %s\n", 
+	      obj_name.c_str(), config_file.c_str());
+
+    // Load Xml configuration
+    assert(doc.Load(config_file));
+    elem = XmlReader::GetMarker(doc.GetRoot(), obj_name);
+  }
 
   assert(elem != NULL);
   XmlReader::ReadDouble(elem, "mass", m_mass);
