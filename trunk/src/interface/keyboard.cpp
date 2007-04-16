@@ -297,7 +297,8 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
   // Shoot when in turn
   if (key == KEY_SHOOT) {
 
-    if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) {
+    if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN && 
+	!Network::IsConnected()) {
       ObjBox* current_box = GameLoop::GetInstance()->GetCurrentBox();
       if (current_box != NULL) {
 	current_box->DropBox();
