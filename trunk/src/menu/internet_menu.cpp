@@ -94,6 +94,7 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
     else
     {
       DispNetworkError(conn);
+      Menu::RedrawMenu();
     }
   }
 }
