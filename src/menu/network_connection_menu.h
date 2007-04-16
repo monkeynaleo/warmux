@@ -40,15 +40,20 @@ class NetworkConnectionMenu : public Menu
     NET_BROWSE_INTERNET
   } network_menu_action_t;
 
+  /* If you need this, implement it (correctly)*/
+   NetworkConnectionMenu(const NetworkConnectionMenu&);
+   NetworkConnectionMenu operator=(const NetworkConnectionMenu&);
+   /********************************************/
+
    /* Connection controllers */
    Button *previous_action_bt, *next_action_bt;
-   
+
    Label* action_label;
    network_menu_action_t current_action;
-   
+
    Label* server_address_label;
    TextBox* server_address;
-   
+
    Label* port_number_label;
    TextBox* port_number;
 
@@ -70,7 +75,7 @@ class NetworkConnectionMenu : public Menu
    void __sig_cancel();
 
 public:
-   NetworkConnectionMenu(); 
+   NetworkConnectionMenu();
    ~NetworkConnectionMenu();
 };
 

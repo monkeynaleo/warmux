@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * A big Spinbutton in 
+ * A big Spinbutton in
  *****************************************************************************/
 
 #ifndef SPIN_BUTTON_PICTURE_H
@@ -31,6 +31,11 @@
 class SpinButtonWithPicture : public Widget
 {
  private:
+  /* If you need this, implement it (correctly)*/
+  SpinButtonWithPicture(const SpinButtonWithPicture&);
+  SpinButtonWithPicture operator=(const SpinButtonWithPicture&);
+  /*********************************************/
+
   Surface m_image;
 
  protected:

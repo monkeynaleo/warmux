@@ -34,6 +34,11 @@
 
 class Question
 {
+  /* If you need this, implement it (correctly)*/
+  Question(const Question&);
+  Question operator=(const Question&);
+  /*********************************************/
+
   Sprite* background;
 
   // A choice = a key return a value

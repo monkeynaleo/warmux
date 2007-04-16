@@ -30,6 +30,11 @@
 
 class GameMenu : public Menu
 {
+  /* If you need this, implement it (correctly)*/
+   GameMenu(const GameMenu&);
+   GameMenu operator=(const GameMenu&);
+   /********************************************/
+
    /* Team controllers */
    TeamsSelectionBox * team_box;
 
@@ -51,7 +56,7 @@ class GameMenu : public Menu
    void __sig_cancel();
 
 public:
-   GameMenu(); 
+   GameMenu();
    ~GameMenu();
 };
 
