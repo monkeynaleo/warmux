@@ -35,14 +35,14 @@ Text::Text(const std::string &new_txt,
 	   const Color& new_color,
 	   Font::font_size_t fsize, 
 	   Font::font_style_t fstyle, 
-           bool shadowed)
+           bool _shadowed)
 {
   font_size = fsize;
   font_style = fstyle;
 
   txt = new_txt;
   color = new_color;
-  this->shadowed = shadowed;
+  shadowed = _shadowed;
 
   if( shadowed ){
     int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
