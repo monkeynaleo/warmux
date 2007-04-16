@@ -27,6 +27,8 @@
 Button::Button (const Rectanglei &rect, const Profile *res_profile,
 		const std::string& resource_id, bool _img_scale) : Widget(rect)
 {
+  hidden = false;
+
   image = resource_manager.LoadSprite(res_profile,resource_id);
   image->cache.EnableLastFrameCache();
 
