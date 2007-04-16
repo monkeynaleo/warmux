@@ -37,6 +37,7 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
   txt_label = new Text(label, color, Font::FONT_SMALL, Font::FONT_NORMAL, shadowed);
+  txt_label->SetMaxWidth(size.x - 30);
 
   if ( min_value != -1 && min_value <= value)
     m_min_value = min_value;
@@ -81,6 +82,8 @@ void SpinButton::SetSizePosition(const Rectanglei &rect)
   
   m_plus->SetSizePosition( Rectanglei(position.x + size.x - 5, position.y, 5, 10) );
   m_minus->SetSizePosition( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10) );
+
+  txt_label->SetMaxWidth(size.x - 30);
 }
 
 void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
