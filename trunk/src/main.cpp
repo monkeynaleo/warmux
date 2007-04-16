@@ -124,14 +124,14 @@ int AppWormux::main(int argc, char **argv)
   catch(const exception & e)
   {
     cerr << endl
-      << _("C++ exception caught:") << endl
+      << "C++ exception caught:" << endl
       << e.what() << endl << endl;
     WakeUpDebugger();
   }
   catch(...)
   {
     cerr << endl
-      << _("Unexpected exception caught...") << endl << endl;
+      << "Unexpected exception caught..." << endl << endl;
     WakeUpDebugger();
   }
 
@@ -187,9 +187,10 @@ void AppWormux::DisplayLoadingPicture()
 
 void AppWormux::InitFonts()
 {
-  if (TTF_Init() == -1)
-    Error(Format
-	  (_("Initialisation of TTF library failed: %s"), TTF_GetError()));
+  if (TTF_Init() == -1) {
+    Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
+    exit(1);
+  }
 }
 
 void AppWormux::End()
