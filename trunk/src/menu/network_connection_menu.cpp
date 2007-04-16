@@ -193,11 +193,7 @@ void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
 void NetworkConnectionMenu::DisplayError(Network::connection_state_t conn)
 {
   DispNetworkError(conn);
-  Redraw(Rectanglei(0, 0, 
-		    AppWormux::GetInstance()->video.window.GetWidth(),
-		    AppWormux::GetInstance()->video.window.GetHeight()), 
-	 AppWormux::GetInstance()->video.window);
-  widgets.ForceRedraw();
+  Menu::RedrawMenu();
 }
 
 void NetworkConnectionMenu::sig_ok()
