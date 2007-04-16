@@ -118,7 +118,7 @@ void SuperTux::SignalOutOfMap()
 void SuperTux::Explosion()
 {
   WeaponProjectile::Explosion();
-  
+
   jukebox.Stop(sound_channel);
 
   // To go further in the game loop
@@ -144,6 +144,7 @@ TuxLauncher::TuxLauncher() :
   WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("SuperTux");
+  m_category = SPECIAL;
   ReloadLauncher();
 
   // unit will be used when the supertux disappears
@@ -176,7 +177,7 @@ void TuxLauncher::HandleKeyPressed_MoveRight()
 {
   if (m_is_active)
     current_tux->turn_right();
-  else 
+  else
     ActiveCharacter().HandleKeyPressed_MoveRight();
 }
 
@@ -198,7 +199,7 @@ void TuxLauncher::HandleKeyPressed_MoveLeft()
 {
   if (m_is_active)
     current_tux->turn_left();
-  else 
+  else
     ActiveCharacter().HandleKeyPressed_MoveLeft();
 }
 

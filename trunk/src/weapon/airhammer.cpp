@@ -44,6 +44,7 @@ const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())
 {
   m_name = _("Airhammer");
+  m_category = TOOL;
 
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
   m_last_jolt = 0;
@@ -117,7 +118,7 @@ void Airhammer::RepeatShoot()
 {
   uint time = Time::GetInstance()->Read() - m_last_jolt;
   uint tmp = Time::GetInstance()->Read();
-  
+
   if (time >= MIN_TIME_BETWEEN_JOLT)
     {
       NewActionWeaponShoot();
@@ -148,7 +149,7 @@ void Airhammer::ActionStopUse()
 //-----------------------------------------------------------------------------
 
 void Airhammer::HandleKeyPressed_Shoot()
-{  
+{
   HandleKeyRefreshed_Shoot();
 }
 

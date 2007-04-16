@@ -65,8 +65,7 @@ class WeaponsMenu
 
  public:
   WeaponsMenu();
-  void AddWeapon(Weapon* new_item, uint num_sort);
-  void AddTool(Weapon* new_item, uint num_sort);
+  void AddWeapon(Weapon* new_item);
   void Draw();
   void SwitchDisplay();
   AffineTransform2D ComputeWeaponTransformation();

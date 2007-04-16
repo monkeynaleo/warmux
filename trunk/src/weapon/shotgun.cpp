@@ -60,6 +60,7 @@ bool ShotgunBuckshot::IsOverlapping(const PhysicalObj* obj) const
 Shotgun::Shotgun() : WeaponLauncher(WEAPON_SHOTGUN, "shotgun", new ExplosiveWeaponConfig())
 {
   m_name = _("Shotgun");
+  m_category = RIFLE;
 
   announce_missed_shots = false;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
@@ -88,7 +89,7 @@ void Shotgun::IncMissedShots()
 }
 
 bool Shotgun::p_Shoot ()
-{  
+{
   missed_shots = 0;
   announce_missed_shots = false;
   if (m_is_active)

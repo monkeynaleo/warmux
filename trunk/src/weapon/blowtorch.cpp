@@ -35,6 +35,7 @@ static const uint pause_time = 200;	// milliseconds
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
   m_name = _("Blowtorch");
+  m_category = TOOL;
 
   new_timer = 0;
   old_timer = 0;
@@ -91,7 +92,7 @@ void Blowtorch::RepeatShoot()
 {
   uint time = Time::GetInstance()->Read() - old_timer;
   uint tmp = Time::GetInstance()->Read();
-  
+
   if (time >= pause_time)
     {
       NewActionWeaponShoot();
@@ -100,7 +101,7 @@ void Blowtorch::RepeatShoot()
 }
 
 void Blowtorch::HandleKeyPressed_Shoot()
-{  
+{
   HandleKeyRefreshed_Shoot();
 }
 

@@ -31,6 +31,7 @@
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {
   m_name = _("Commit Suicide");
+  m_category = DUEL;
   sound_channel = -1;
 }
 

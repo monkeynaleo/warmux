@@ -162,7 +162,7 @@ void Keyboard::HandleKeyEvent(const SDL_Event& event)
     HandleKeyPressed(key);
     return;
   }
-  
+
   if(event_type == KEY_RELEASED) {
     HandleKeyReleased(key);
     return;
@@ -180,13 +180,13 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
 
   if (GameLoop::GetInstance()->ReadState() == GameLoop::HAS_PLAYED) {
     switch (key) {
-      
+
     case KEY_MOVE_RIGHT:
       ActiveCharacter().HandleKeyPressed_MoveRight();
       break;
     case KEY_MOVE_LEFT:
       ActiveCharacter().HandleKeyPressed_MoveLeft();
-      break;	
+      break;
     case KEY_UP:
       ActiveCharacter().HandleKeyPressed_Up();
       break;
@@ -208,18 +208,18 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
     default:
       // key not supported
       return;
-    } 
+    }
   } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-    
+
     // Movements are managed by weapons because sometimes it overrides the keys
     switch (key) {
-      
+
     case KEY_MOVE_RIGHT:
       ActiveTeam().AccessWeapon().HandleKeyPressed_MoveRight();
       break;
     case KEY_MOVE_LEFT:
       ActiveTeam().AccessWeapon().HandleKeyPressed_MoveLeft();
-      break;	
+      break;
     case KEY_UP:
       ActiveTeam().AccessWeapon().HandleKeyPressed_Up();
       break;
@@ -243,7 +243,7 @@ void Keyboard::HandleKeyPressed (const Key_t &key)
     default:
       // key not supported
       return;
-    } 
+    }
   }
 
   PressedKeys[key] = true ;
@@ -255,9 +255,9 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
   PressedKeys[key] = false ;
 
   // Here we manage only actions which are activated on KEY_RELEASED event.
-  
+
   // hack to interrupt AI
-  if (ActiveTeam().IsLocalAI() && key == KEY_SHOOT) 
+  if (ActiveTeam().IsLocalAI() && key == KEY_SHOOT)
   {
     AIStupidEngine::GetInstance()->ForceEndOfTurn();
   }
@@ -296,14 +296,14 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
   // Drop bonus box or medkit when outside a turn
   // Shoot when in turn
   if (key == KEY_SHOOT) {
-    
+
     if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) {
       ObjBox* current_box = GameLoop::GetInstance()->GetCurrentBox();
       if (current_box != NULL) {
 	current_box->DropBox();
       }
     } else if (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING &&
-	       ActiveTeam().IsLocal() && 
+	       ActiveTeam().IsLocal() &&
 	       !ActiveCharacter().IsDead()) {
       ActiveTeam().AccessWeapon().HandleKeyReleased_Shoot();
     }
@@ -343,21 +343,21 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       case KEY_SHOOT:
       // Shoot key is not accepted in HAS_PLAYED state
 	return;
-      default: 
+      default:
 	// Key not supported
-	return; 
+	return;
       }
     } else if  (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING) {
-      
+
       // Movements are managed by weapons because sometimes it overrides the keys
       switch (key) {
-	
+
       case KEY_MOVE_RIGHT:
 	ActiveTeam().AccessWeapon().HandleKeyReleased_MoveRight();
 	return;
       case KEY_MOVE_LEFT:
 	ActiveTeam().AccessWeapon().HandleKeyReleased_MoveLeft();
-	return;	
+	return;
       case KEY_UP:
 	ActiveTeam().AccessWeapon().HandleKeyReleased_Up();
 	return;
@@ -380,42 +380,42 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
 	return;
 
 	// Other keys usefull for weapons
-      case KEY_WEAPON_1:  
+      case KEY_WEAPON_1:
 	ActiveTeam().AccessWeapon().HandleKeyReleased_Num1();
 	return;
       case KEY_WEAPON_2:
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Num2();                
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num2();
 	return;
-      case KEY_WEAPON_3: 
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Num3();               
+      case KEY_WEAPON_3:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num3();
 	return;
-      case KEY_WEAPON_4:  
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Num4();               
-	return; 
-      case KEY_WEAPON_5:  
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Num5();              
+      case KEY_WEAPON_4:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num4();
 	return;
-      case KEY_WEAPON_6:  
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Num6();               
-	return;             
-      case KEY_WEAPON_7: 
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Num7();               
+      case KEY_WEAPON_5:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num5();
 	return;
-      case KEY_WEAPON_8: 
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Num8();               
+      case KEY_WEAPON_6:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num6();
 	return;
-      case KEY_WEAPON_9: 
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Num9();               
+      case KEY_WEAPON_7:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num7();
 	return;
-      case KEY_WEAPON_LESS:  
-	ActiveTeam().AccessWeapon().HandleKeyReleased_Less();              
+      case KEY_WEAPON_8:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num8();
 	return;
-      case KEY_WEAPON_MORE: 
-	ActiveTeam().AccessWeapon().HandleKeyReleased_More();               
+      case KEY_WEAPON_9:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Num9();
+	return;
+      case KEY_WEAPON_LESS:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_Less();
+	return;
+      case KEY_WEAPON_MORE:
+	ActiveTeam().AccessWeapon().HandleKeyReleased_More();
 	return;
       default:
 	break;
-      } 
+      }
     }
   }
 
@@ -424,12 +424,12 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
     if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING ||
 	!ActiveTeam().GetWeapon().CanChangeWeapon())
       return;
-      
-    int weapon_sort = -1;
-    
+
+    Weapon::category_t weapon_sort = Weapon::INVALID;
+
     switch(key) {
 
-    case KEY_NEXT_CHARACTER: 
+    case KEY_NEXT_CHARACTER:
       {
 	if (GameMode::GetInstance()->AllowCharacterSelection()) {
 	  SDLMod mod = SDL_GetModState();
@@ -451,38 +451,38 @@ void Keyboard::HandleKeyReleased (const Key_t &key)
       return;
 
     case KEY_WEAPONS1:
-      weapon_sort = 1;
+      weapon_sort = Weapon::HEAVY;
       break;
     case KEY_WEAPONS2:
-      weapon_sort = 2;
+      weapon_sort = Weapon::RIFLE;
       break;
     case KEY_WEAPONS3:
-      weapon_sort = 3;
+      weapon_sort = Weapon::THROW;
       break;
     case KEY_WEAPONS4:
-      weapon_sort = 4;
+      weapon_sort = Weapon::SPECIAL;
       break;
     case KEY_WEAPONS5:
-      weapon_sort = 5;
+      weapon_sort = Weapon::DUEL;
       break;
     case KEY_WEAPONS6:
-      weapon_sort = 6;
+      weapon_sort = Weapon::MOVE;
       break;
     case KEY_WEAPONS7:
-      weapon_sort = 7;
-      break;
-    case KEY_WEAPONS8:
-      weapon_sort = 8;
+      weapon_sort = Weapon::TOOL;
       break;
     default:
       // Key not supported
       return;
     }
-    
-    if ( weapon_sort != -1 ) {
+
+    if ( weapon_sort != Weapon::INVALID ) {
       Weapon::Weapon_type weapon;
       if (WeaponsList::GetInstance()->GetWeaponBySort(weapon_sort, weapon))
-	ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, weapon));
+        {
+          assert (weapon >= Weapon::WEAPON_FIRST && weapon <= Weapon::WEAPON_LAST);
+	  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, weapon));
+        }
     }
   }
 }
@@ -500,16 +500,16 @@ void Keyboard::Refresh()
       if (!ActiveTeam().IsLocal()) return;
       if (ActiveCharacter().IsDead()) return;
       if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN) return;
-      
+
       // Movements are managed by weapons because sometimes it overrides the keys
       switch (key) {
-	
+
       case KEY_MOVE_RIGHT:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveRight();
 	return;
       case KEY_MOVE_LEFT:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_MoveLeft();
-	return;	
+	return;
       case KEY_UP:
 	ActiveTeam().AccessWeapon().HandleKeyRefreshed_Up();
 	return;
@@ -532,6 +532,6 @@ void Keyboard::Refresh()
 	return;
       default:
 	break;
-      } 
+      }
     }
 }

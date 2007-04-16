@@ -51,6 +51,7 @@ void GunBullet::ShootSound()
 Gun::Gun() : WeaponLauncher(WEAPON_GUN, "gun", new ExplosiveWeaponConfig())
 {
   m_name = _("Gun");
+  m_category = RIFLE;
   m_weapon_fire = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_fire"));
   m_weapon_fire->EnableRotationCache(32);
   ReloadLauncher();
@@ -65,7 +66,7 @@ WeaponProjectile * Gun::GetProjectileInstance()
 bool Gun::p_Shoot()
 {
   if (m_is_active)
-    return false;  
+    return false;
 
   m_is_active = true;
   projectile->Shoot (GUN_BULLET_SPEED);

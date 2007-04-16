@@ -89,6 +89,7 @@ Dynamite::Dynamite() :
     WeaponLauncher(WEAPON_DYNAMITE, "dynamite", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Dynamite");
+  m_category = THROW;
   ReloadLauncher();
 }
 

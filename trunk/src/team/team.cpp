@@ -282,6 +282,8 @@ Character& Team::ActiveCharacter()
 
 void Team::SetWeapon (Weapon::Weapon_type type)
 {
+
+  assert (type >= Weapon::WEAPON_FIRST && type <= Weapon::WEAPON_LAST);
   AccessWeapon().Deselect();
   active_weapon = WeaponsList::GetInstance()->GetWeapon(type);
   AccessWeapon().Select();

@@ -70,9 +70,23 @@ public:
     WEAPON_SKIP_TURN,     WEAPON_JETPACK,     WEAPON_PARACHUTE, WEAPON_AIR_HAMMER,
     WEAPON_CONSTRUCT,     WEAPON_SNIPE_RIFLE, WEAPON_BLOWTORCH, WEAPON_SYRINGE
   } Weapon_type;
+#define WEAPON_FIRST WEAPON_BAZOOKA
+#define WEAPON_LAST  WEAPON_SYRINGE
+  typedef enum {
+    INVALID = 0,
+    HEAVY,
+    RIFLE,
+    THROW,
+    SPECIAL,
+    DUEL,
+    MOVE,
+    TOOL
+  } category_t;
 
 protected:
   Weapon::Weapon_type m_type;
+  Weapon::category_t  m_category;
+
   std::string m_id;
   std::string m_name;
   bool m_is_active;
@@ -135,6 +149,7 @@ public:
   double max_strength;
 
   bool use_flipping;
+  const category_t& Category() const { return m_category; };
 
 protected:
   virtual void p_Select();
@@ -252,7 +267,7 @@ public:
   virtual void HandleKeyPressed_BackJump();
   virtual void HandleKeyRefreshed_BackJump();
   virtual void HandleKeyReleased_BackJump();
-  
+
   // Other keys
   virtual void HandleKeyReleased_Num1(){};
   virtual void HandleKeyReleased_Num2(){};

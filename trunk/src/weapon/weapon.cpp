@@ -69,6 +69,7 @@ Weapon::Weapon(Weapon_type type,
 	       weapon_visibility_t visibility)
 {
   m_type = type;
+  m_category = INVALID;
   m_id = id;
 
   m_is_active = false;
@@ -252,7 +253,7 @@ void Weapon::NewActionWeaponStopUse() const
 
 void Weapon::PrepareShoot(double strength, double angle)
 {
-  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f", 
+  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f",
 	    strength, angle);
   ActiveCharacter().SetFiringAngle(angle);
   m_strength = strength;
@@ -290,7 +291,7 @@ bool Weapon::Shoot()
 
   MSG_DEBUG("weapon.shoot", "Enough ammo");
 
-  MSG_DEBUG("weapon.shoot", "%s Shooting at position:%d,%d (hand: %d,%d)", 
+  MSG_DEBUG("weapon.shoot", "%s Shooting at position:%d,%d (hand: %d,%d)",
 	    ActiveCharacter().GetName().c_str(),
 	    ActiveCharacter().GetX(),
 	    ActiveCharacter().GetY(),
@@ -566,21 +567,21 @@ void Weapon::DrawAmmoUnits() const
   case NEVER_VISIBLE:
     return;
     break;
-    
+
   default:
     ; // nothing to do
   }
 
-  if (m_initial_nb_unit_per_ammo > 1) 
+  if (m_initial_nb_unit_per_ammo > 1)
   {
     Rectanglei rect;
-    
+
     std::ostringstream ss;
-    
+
     ss << ActiveTeam().ReadNbUnits();
-    
+
     DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
-		   Point2i( ActiveCharacter().GetCenterX(), 
+		   Point2i( ActiveCharacter().GetCenterX(),
 			    ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
 		   - camera.GetPosition(),
 		   ss.str());
@@ -653,12 +654,12 @@ void Weapon::ActionStopUse()
 {
   assert(false);
 }
-  
+
 // Handle keyboard events
 
 // #################### SHOOT
 void Weapon::HandleKeyPressed_Shoot()
-{  
+{
   if(ActiveCharacter().IsPreparingShoot())
     return;
 
@@ -669,10 +670,10 @@ void Weapon::HandleKeyPressed_Shoot()
 }
 
 void Weapon::HandleKeyRefreshed_Shoot()
-{  
+{
   if(ActiveCharacter().IsPreparingShoot())
     return;
-  if ( !IsLoading() ) 
+  if ( !IsLoading() )
     return;
 
   // Strength == max strength -> Fire !!!
@@ -685,10 +686,10 @@ void Weapon::HandleKeyRefreshed_Shoot()
 }
 
 void Weapon::HandleKeyReleased_Shoot()
-{  
+{
   if(ActiveCharacter().IsPreparingShoot())
     return;
-  if ( !IsLoading()) 
+  if ( !IsLoading())
     return;
 
   NewActionWeaponShoot();

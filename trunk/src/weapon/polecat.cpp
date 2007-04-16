@@ -133,6 +133,7 @@ PolecatLauncher::PolecatLauncher() :
   WeaponLauncher(WEAPON_POLECAT, "polecatlauncher", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Polecat Launcher");
+  m_category = SPECIAL;
   ReloadLauncher();
 }
 

@@ -62,6 +62,7 @@ RiotBomb::RiotBomb() :
   WeaponLauncher(WEAPON_RIOT_BOMB, "riot_bomb", new ExplosiveWeaponConfig())
 {
   m_name = _("Riot Bomb");
+  m_category = HEAVY;
   ReloadLauncher();
 }
 

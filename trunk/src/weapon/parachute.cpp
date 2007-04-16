@@ -33,6 +33,7 @@
 Parachute::Parachute() : Weapon(WEAPON_PARACHUTE, "parachute", new ParachuteConfig(), NEVER_VISIBLE)
 {
   m_name = _("Parachute");
+  m_category = MOVE;
   m_initial_nb_ammo = 2 ;
   use_unit_on_first_shoot = false;
 
@@ -130,7 +131,7 @@ ParachuteConfig& Parachute::cfg() {
   return static_cast<ParachuteConfig&>(*extra_params);
 }
 
-ParachuteConfig::ParachuteConfig(){ 
+ParachuteConfig::ParachuteConfig(){
   wind_factor = 10.0;
   air_resist_factor = 140.0 ;
 }
