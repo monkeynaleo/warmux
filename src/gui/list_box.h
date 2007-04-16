@@ -36,7 +36,7 @@ private:
   std::string value;
 
 public:
-  ListBoxItem(const std::string& _label, 
+  ListBoxItem(const std::string& _label,
 	      Font::font_size_t font_size,
 	      Font::font_style_t font_style,
 	      const std::string& value,
@@ -48,6 +48,11 @@ public:
 
 class ListBox : public Widget
 {
+  /* If you need this, implement it (correctly)*/
+  ListBox(const ListBox&);
+  ListBox operator=(const ListBox&);
+  /*********************************************/
+
 private:
   bool always_one_selected;
 

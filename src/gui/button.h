@@ -29,6 +29,11 @@
 
 class Button : public Widget
 {
+  /* If you need this, implement it (correctly)*/
+  Button(const Button&);
+  Button operator=(const Button&);
+  /*********************************************/
+
 protected:
   bool img_scale;
   Sprite *image;
