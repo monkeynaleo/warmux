@@ -123,7 +123,6 @@ bool ObjectsList::AllReady()
 
 void ObjectsList::FreeMem()
 {
-  MSG_DEBUG("lst_objects", "Erasing object list");
   ObjectsList::iterator object;
   for (object = begin();
        object != end();

@@ -84,13 +84,16 @@ void GameLoop::InitGameData_NetServer()
   Network::GetInstanceServer()->RejectIncoming();
 
   Network::GetInstanceServer()->TMP_ResetInitializedPlayers();
+
+  randomSync.Init();
+
+  SendGameMode();
+
   Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
   Network::GetInstance()->SendAction ( &a_change_state );
   Network::GetInstance()->state = Network::NETWORK_INIT_GAME;
 
-  SendGameMode();
-
-  randomSync.Init();
+  GameMode::GetInstance()->Load();
 
   // Load maps
   InitMap();
@@ -112,7 +115,9 @@ void GameLoop::InitGameData_NetServer()
 }
 
 void GameLoop::InitGameData_NetClient()
-{
+{  
+  //GameMode::GetInstance()->Load(); : done by the action handler
+
   // Loading map
   InitMap();
 
@@ -144,6 +149,8 @@ void GameLoop::InitGameData_NetClient()
 
 void GameLoop::InitGameData_Local()
 {
+  GameMode::GetInstance()->Load();
+
   // Load the map
   InitMap();
 
@@ -170,8 +177,7 @@ void GameLoop::InitTeams()
 
   // Check the number of teams
   if (teams_list.playing_list.size() < 2)
-    Error(_("You need at least two teams to play: "
-             "change this in 'Options menu' !"));
+    Error(_("You need at least two valid teams !"));
   assert (teams_list.playing_list.size() <= GameMode::GetInstance()->max_teams);
 
   // Load the teams

@@ -41,7 +41,7 @@ GameMode * GameMode::GetInstance() {
 
 GameMode::GameMode()
 {
-  max_characters = 6;
+  nb_characters = 6;
   max_teams = 4;
   duration_turn = 60;
   duration_exchange_player = 2;
@@ -62,7 +62,14 @@ GameMode::GameMode()
   character.super_jump_angle = -80;
   character.back_jump_strength = 9;
   character.back_jump_angle = -100;
-  Load();
+
+  m_current = "classic";
+  //Load();
+}
+
+const std::string& GameMode::GetName() const
+{
+  return m_current;
 }
 
 // Load data options from the selected game_mode
@@ -89,7 +96,7 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   XmlReader::ReadUint(xml, "duration_before_death_mode", duration_before_death_mode);
   XmlReader::ReadUint(xml, "damage_per_turn_during_death_mode", damage_per_turn_during_death_mode);
   XmlReader::ReadUint(xml, "max_teams", max_teams);
-  XmlReader::ReadUint(xml, "max_characters", max_characters);
+  XmlReader::ReadUint(xml, "nb_characters", nb_characters);
   XmlReader::ReadDouble(xml, "gravity", gravity);
   XmlReader::ReadDouble(xml, "safe_fall", safe_fall);
   XmlReader::ReadDouble(xml, "damage_per_fall_unit", damage_per_fall_unit);
@@ -143,24 +150,25 @@ bool GameMode::LoadXml(xmlpp::Element *xml)
   }
 
   //=== Weapons ===
-  xmlpp::Element *armes = XmlReader::GetMarker(xml, "weapons");
-  if (armes != NULL)
+  xmlpp::Element *weapons_xml = XmlReader::GetMarker(xml, "weapons");
+  if (weapons_xml != NULL)
   {
     std::list<Weapon*> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
     std::list<Weapon*>::iterator
       itw = l_weapons_list.begin(),
       end = l_weapons_list.end();
 
-    for (; itw != end ; ++itw) (*itw)->LoadXml(armes);
+    for (; itw != end ; ++itw) (*itw)->LoadXml(weapons_xml);
   }
 
   // Bonus box explosion - must be loaded after the weapons.
   xmlpp::Element *bonus_box_xml = XmlReader::GetMarker(xml, "bonus_box");
   if(bonus_box_xml != NULL) {
+    BonusBox::LoadXml(bonus_box_xml);
+
     xmlpp::Element *bonus_box_explosion = XmlReader::GetMarker(bonus_box_xml, "explosion");
     if (bonus_box_explosion != NULL)
       bonus_box_explosion_cfg.LoadXml(bonus_box_explosion);
-    BonusBox::LoadXml(bonus_box_xml);
   }
 
   // Medkit - reuses the bonus_box explosion.
@@ -179,22 +187,39 @@ bool GameMode::Load(void)
   m_current = config->GetGameMode();
   try
   {
-    XmlReader doc;
-    std::string filename =
-      PATH_SEPARATOR
-      + std::string("game_mode")
-      + std::string(PATH_SEPARATOR)
-      + m_current
-      + std::string(".xml");
+    // Game mode objects configuration file
+    fullname = config->GetPersonalDir() + GetObjectsFilename();
+    
+    if(!IsFileExist(fullname))
+      fullname = config->GetDataDir() + GetObjectsFilename();
 
-    fullname = config->GetPersonalDir() + filename;
+    if(!IsFileExist(fullname)) {
+      Error(Format("Can not find file %s\n", fullname.c_str()));
+      return false;
+    }
+
+    if(!doc_objects.Load(fullname))
+      return false;
+    MSG_DEBUG("game_mode", "successful loading of %s\n", fullname.c_str());
+
+    // Game mode file
+    XmlReader doc;
+    fullname = config->GetPersonalDir() + GetFilename();
 
     if(!IsFileExist(fullname))
-      fullname = config->GetDataDir() + filename;
+      fullname = config->GetDataDir() + GetFilename();
+
+    if(!IsFileExist(fullname)) {
+      Error(Format("Can not find file %s\n", fullname.c_str()));
+      return false;
+    }
+
     if(!doc.Load(fullname))
       return false;
     if(!LoadXml(doc.GetRoot()))
       return false;
+
+    MSG_DEBUG("game_mode", "successful loading of %s\n", fullname.c_str());
   }
   catch (const xmlpp::exception &e)
   {
@@ -203,68 +228,84 @@ bool GameMode::Load(void)
 			  << std::endl << e.what() << std::endl;
     return false;
   }
+
   return true;
 }
 
-// Load the game mode from a string (probably from network)
-bool GameMode::LoadFromString(const std::string& contents)
+// Load the game mode from strings (probably from network)
+bool GameMode::LoadFromString(const std::string& game_mode_name,
+			      const std::string& game_mode_contents,
+			      const std::string& game_mode_objects_contents)
 {
-  Config * config = Config::GetInstance();
-  m_current = config->GetGameMode();
+  m_current = game_mode_name;
+  MSG_DEBUG("game_mode", "Loading %s from network: ", m_current.c_str());
+
   try
-  {
+  {    
+    if(!doc_objects.LoadFromString(game_mode_objects_contents))
+      return false;
+    
     XmlReader doc;
-    if(!doc.LoadFromString(contents))
+    if(!doc.LoadFromString(game_mode_contents))
       return false;
     if(!LoadXml(doc.GetRoot()))
       return false;
   }
   catch (const xmlpp::exception &e)
   {
-    std::cerr << Format(_("Error while loading game mode %s from memory:"),
-                        m_current.c_str())
-	      << std::endl << e.what() << std::endl;
+    Error(Format("Error while loading game mode %s from memory:\n\t%s",
+		 m_current.c_str(), e.what()));
     return false;
   }
+
+  MSG_DEBUG("game_mode", "OK\n");
   return true;
 }
 
-bool GameMode::ExportToString(std::string& contents)
+bool GameMode::ExportFileToString(const std::string& filename, std::string& contents) const
 {
   std::string fullname;
-  Config * config = Config::GetInstance();
-  std::string game_mode_name = config->GetGameMode();
-
   contents = "";
 
   try
   {
     XmlReader doc;
-    std::string filename =
-      PATH_SEPARATOR
-      + std::string("game_mode")
-      + std::string(PATH_SEPARATOR)
-      + game_mode_name
-      + std::string(".xml");
+    fullname = Config::GetInstance()->GetPersonalDir() + filename;
 
-    fullname = config->GetPersonalDir() + filename;
-
-    if(!IsFileExist(fullname))
-      fullname = config->GetDataDir() + filename;
-    if(!doc.Load(fullname))
+    if (!IsFileExist(fullname))
+      fullname = Config::GetInstance()->GetDataDir() + filename;
+    if (!doc.Load(fullname))
       return false;
 
     contents = doc.ExportToString();
   }
   catch (const xmlpp::exception &e)
   {
-    std::cerr << Format(_("Error while exporting game mode %s (file %s):"),
-                        m_current.c_str(), fullname.c_str())
-	      << std::endl << e.what() << std::endl;
+    Error(Format("Error while exporting file %s:\n\t%s",
+		 fullname.c_str(), e.what()));
     return false;
   }
   return true;
 }
+
+bool GameMode::ExportToString(std::string& mode, 
+			      std::string& mode_objects) const
+{
+  bool r;
+
+  r = ExportFileToString(GetFilename(), mode);
+  if (r) {
+    r = ExportFileToString(GetObjectsFilename(), mode_objects);
+  }
+
+  return r;
+}
+
+XmlReader& GameMode::GetXmlObjects()
+{
+  return doc_objects;
+}
+
 
 bool GameMode::AllowCharacterSelection() const
 {
@@ -283,4 +324,29 @@ bool GameMode::AllowCharacterSelection() const
 
   return true;
 }
+
+std::string GameMode::GetFilename() const
+{    
+  std::string filename =
+    PATH_SEPARATOR
+    + std::string("game_mode")
+    + std::string(PATH_SEPARATOR)
+    + m_current
+    + std::string(".xml");
+
+  return filename;
+}
+
+std::string GameMode::GetObjectsFilename() const
+{
+  std::string filename =
+    PATH_SEPARATOR
+    + std::string("game_mode")
+    + std::string(PATH_SEPARATOR)
+    + m_current
+    + std::string("_objects.xml");
+
+  return filename;
+}
+
 
