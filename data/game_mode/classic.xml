@@ -17,7 +17,7 @@
   <damage_per_fall_unit>2</damage_per_fall_unit>
 
   <max_teams>4</max_teams>
-  <max_characters>6</max_characters>
+  <nb_characters>6</nb_characters>
 
   <character>
     <energy initial="100" maximum="200" />

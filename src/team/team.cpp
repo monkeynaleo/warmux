@@ -68,18 +68,17 @@ Team::Team (const std::string& teams_dir, const std::string& id)
   active_character = characters.end();
 
   is_camera_saved = false;
-  active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
+  active_weapon = NULL;
 
   m_player_name = "";
 
-  nb_characters = GameMode::GetInstance()->max_characters;
+  nb_characters = GameMode::GetInstance()->nb_characters;
 
   type_of_player = TEAM_human_local;
 }
 
 bool Team::LoadCharacters()
 {
-  //assert(howmany <= GameMode::GetInstance()->max_characters);
   assert (nb_characters <= 10);
 
   std::string nomfich;
