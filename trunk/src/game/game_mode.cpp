@@ -64,7 +64,6 @@ GameMode::GameMode()
   character.back_jump_angle = -100;
 
   m_current = "classic";
-  //Load();
 }
 
 const std::string& GameMode::GetName() const
