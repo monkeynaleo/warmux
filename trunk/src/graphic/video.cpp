@@ -48,7 +48,7 @@ Video::Video(){
   SetMaxFps(config->GetMaxFps());
 
   if( window.IsNull() ) {
-    Error("Unable to initialize SDL window: %s", SDL_GetError());
+    Error(Format("Unable to initialize SDL window: %s", SDL_GetError()));
     exit (1);
   }
 
@@ -203,7 +203,7 @@ void Video::InitSDL(){
     return;
 
   if( SDL_Init(SDL_INIT_TIMER | SDL_INIT_VIDEO) < 0 ) {
-    Error("Unable to initialize SDL library: %s", SDL_GetError());
+    Error(Format("Unable to initialize SDL library: %s", SDL_GetError()));
     exit (1);
   }
 
