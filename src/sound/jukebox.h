@@ -67,6 +67,10 @@
 class JukeBox
 {
 private:
+  /* If you need this, implement it (correctly) */
+  JukeBox(const JukeBox&);
+  JukeBox operator=(const JukeBox&);
+  /**********************************************/
 
   typedef std::multimap<std::string, std::string>::value_type
     sound_sample;

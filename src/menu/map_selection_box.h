@@ -30,6 +30,11 @@
 class MapSelectionBox : public HBox
 {
  private:
+  /* If you need this, implement it (correctly) */
+  MapSelectionBox(const MapSelectionBox&);
+  MapSelectionBox operator=(const MapSelectionBox&);
+  /**********************************************/
+
   uint selected_map_index;
   bool display_only;
 

@@ -38,8 +38,13 @@ const uint MAX_NB_TEAMS=4;
 // -----------------------------------------------
 
 class TeamsSelectionBox : public HBox
-{ 
- private:  
+{
+ private:
+  /* If you need this, implement it (correctly) */
+  TeamsSelectionBox(const TeamsSelectionBox&);
+  TeamsSelectionBox operator=(const TeamsSelectionBox&);
+  /**********************************************/
+
   SpinButtonBig *teams_nb;
   std::vector<TeamBox*> teams_selections;
 

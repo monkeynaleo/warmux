@@ -33,6 +33,11 @@ class Team;
 class TeamBox : public HBox
 {
  private:
+  /* If you need this, implement it (correctly) */
+  TeamBox(const TeamBox&);
+  TeamBox operator=(const TeamBox&);
+  /**********************************************/
+
   bool is_local; // local/remote team
 
   Team * associated_team;
@@ -46,7 +51,7 @@ class TeamBox : public HBox
 
   void SetTeam(Team& _team, bool read_team_values=false);
   void ClearTeam();
-  Team* GetTeam() const;  
+  Team* GetTeam() const;
   void ValidOptions() const;
 
   bool IsLocal() const;

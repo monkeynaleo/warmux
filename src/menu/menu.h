@@ -52,7 +52,7 @@ public:
    WidgetList widgets;
    const t_action actions;
 
-   Menu(char* bg, t_action actions = vOkCancel); 
+   Menu(char* bg, t_action actions = vOkCancel);
    virtual ~Menu();
 
    void Run ();
@@ -80,10 +80,10 @@ protected:
    virtual void key_cancel() {};
    virtual void __sig_ok() = 0;
    virtual void __sig_cancel() = 0;
-   virtual void Draw(const Point2i &mousePosition) = 0; 
-  
+   virtual void Draw(const Point2i &mousePosition) = 0;
+
    // we have released the button
-   virtual void OnClickUp(const Point2i &mousePosition, int button) = 0; 
+   virtual void OnClickUp(const Point2i &mousePosition, int button) = 0;
 
    // we have clicked but still not released the button
    virtual void OnClick(const Point2i &mousePosition, int button) = 0;
