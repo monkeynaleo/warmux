@@ -20,6 +20,7 @@
  *****************************************************************************/
 
 #include "weapon_menu.h"
+#include "../weapon/weapons_list.h"
 
 #include <sstream>
 #include <math.h>
