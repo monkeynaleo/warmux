@@ -32,10 +32,6 @@
 class InfoMap{
 
 private:
-  /* If you need this, implement it (correctly)*/
-  InfoMap(const InfoMap&);
-  InfoMap operator=(const InfoMap&);
-  /*********************************************/
 
   std::string name;
   std::string author_info;
