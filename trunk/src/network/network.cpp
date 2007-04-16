@@ -133,7 +133,8 @@ void Network::Init()
 {
   if (sdlnet_initialized) return;
   if (SDLNet_Init()) {
-      Error(_("Failed to initialize network library!"));
+      Error("Failed to initialize network library! (SDL_Net)");
+      exit(1);
   }
   sdlnet_initialized = true;
   
