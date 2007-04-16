@@ -49,6 +49,8 @@ template<class T> class rectangle
 		inline rectangle(){
 		}
 
+                virtual ~rectangle() {};
+
 		/**
 		 * Constructor for building a new rectangle.
 		 *
