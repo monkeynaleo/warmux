@@ -39,20 +39,12 @@ class Blowtorch : public Weapon
     uint new_timer, old_timer;
   protected:
     bool p_Shoot();
-    void p_Deselect();
     void Refresh();
-
-    void RepeatShoot();
+    void EndTurn();
   public:
     Blowtorch();
     BlowtorchConfig& cfg();
-
-    virtual void SignalTurnEnd();
-    virtual void ActionStopUse();
-
-    virtual void HandleKeyPressed_Shoot();
-    virtual void HandleKeyRefreshed_Shoot();
-    virtual void HandleKeyReleased_Shoot();
+    void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
 };
 
 #endif  // __BLOWTORCH_H__

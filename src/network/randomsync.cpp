@@ -22,6 +22,7 @@
 #include <time.h>
 #include <math.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "randomsync.h"
 #include "network.h"
 #include "../include/action_handler.h"
@@ -35,7 +36,7 @@ RandomSync::RandomSync(){
 
 void RandomSync::Init(){
   //If we are a client on the network, we don't generate any random number
-  if(Network::GetInstance()->IsClient()) return;
+  if(network.IsClient()) return;
 
   srand( time(NULL) );
 
@@ -51,7 +52,7 @@ void RandomSync::GenerateTable()
   //Add a random number to the table, send it over network if needed
   double nbr = rand();
   AddToTable(nbr);
-  if(Network::GetInstance()->IsServer()) ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_SEND_RANDOM,nbr));
+  if(network.IsServer()) ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SEND_RANDOM,nbr));
 }
 
 void RandomSync::AddToTable(double nbr)
@@ -61,7 +62,7 @@ void RandomSync::AddToTable(double nbr)
 
 double RandomSync::GetRand()
 {
-  if(Network::GetInstance()->IsServer() || Network::GetInstance()->IsLocal()) GenerateTable();
+  if(network.IsServer() || network.IsLocal()) GenerateTable();
 
   // If the table is empty freeze until the server have sent something
   while(rnd_table.size() == 0)

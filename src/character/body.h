@@ -34,27 +34,18 @@ class BodyList;
 class Member;
 class Clothe;
 
-/*
- * FIXME: this class is either very useless either very badly used.
- * It would be nice to keep members in private section. There is no
- * copy constructor, this is really suspect.... */
 class c_junction
 {
 public:
   Member* member;
   Member* parent;
-  c_junction(): member(NULL), parent(NULL) {};
+  c_junction() { member = NULL; parent = NULL; } ;
 };
 
 typedef class c_junction junction;
 
 class Body
 {
-  /* If you need this, implement it (correctly) */
-  Body(const Body&);
-  Body operator=(const Body&);
-  /**********************************************/
-
 public:
   typedef enum
   {
@@ -121,7 +112,6 @@ public:
   inline void SetOwner(const Character* belonger) { owner = belonger; };
   void PlayAnimation();
   void Build();
-  void UpdateWeaponPosition(const Point2i& pos);
 
   const std::string& GetMovement();
   const std::string& GetClothe();
@@ -139,7 +129,6 @@ public:
 
   void MakeParticles(const Point2i& pos);
   void MakeTeleportParticles(const Point2i& pos, const Point2i& dst);
-  void DebugState();
 };
 
 #endif //BODY_H

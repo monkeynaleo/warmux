@@ -69,7 +69,6 @@ Weapon::Weapon(Weapon_type type,
 	       weapon_visibility_t visibility)
 {
   m_type = type;
-  m_category = INVALID;
   m_id = id;
 
   m_is_active = false;
@@ -87,6 +86,9 @@ Weapon::Weapon(Weapon_type type,
   max_strength = min_angle = max_angle = 0;
   use_flipping = true;
 
+  override_keys = false ;
+  force_override_keys = false;
+
   origin = weapon_origin_HAND;
 
   m_can_change_weapon = false;
@@ -99,7 +101,7 @@ Weapon::Weapon(Weapon_type type,
 
   channel_load = -1;
 
-  if (!use_flipping && !EgalZero(min_angle - max_angle))
+  if (!use_flipping and !EgalZero(min_angle - max_angle))
     use_flipping = true;
 
   extra_params = params;
@@ -112,39 +114,8 @@ Weapon::Weapon(Weapon_type type,
   }
 
   icon = new Sprite(resource_manager.LoadImage(weapons_res_profile,m_id+"_ico"));
-  icon->cache.EnableLastFrameCache();
 
   mouse_character_selection = true;
-
-  xmlpp::Element *elem = resource_manager.GetElement(weapons_res_profile, "position", m_id);
-  if (elem != NULL) {
-    // E.g. <position name="my_weapon_id" origin="hand" x="-1" y="0" />
-    std::string origin_xml;
-    XmlReader::ReadIntAttr (elem, "x", position.x);
-    XmlReader::ReadIntAttr (elem, "y", position.y);
-    if(!XmlReader::ReadStringAttr (elem, "origin", origin_xml))
-    {
-      std::cerr << "No \"origin\" flag found for weapon %s" << m_id <<std::endl;
-      assert(false);
-    }
-    if (origin_xml == "over")
-      origin = weapon_origin_OVER;
-    else
-      origin = weapon_origin_HAND;
-  }
-  else
-  {
-    std::cerr << "No \"position\" flag found for weapon %s" << m_id <<std::endl;
-    assert(false);
-  }
-
-  elem = resource_manager.GetElement(weapons_res_profile, "hole", m_id);
-  if (elem != NULL) {
-    // E.g. <hole name="my_weapon_id" dx="-1" dy="0" />
-    XmlReader::ReadIntAttr(elem, "dx", hole_delta.x);
-    XmlReader::ReadIntAttr(elem, "dy", hole_delta.y);
-  }
-
 }
 
 Weapon::~Weapon()
@@ -158,10 +129,11 @@ void Weapon::p_Select ()
   m_last_fire_time = 0;
 }
 void Weapon::p_Deselect () {}
+void Weapon::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) {}
 
 void Weapon::Select()
 {
-  MSG_DEBUG("weapon.change", "Select %s", m_name.c_str());
+  MSG_DEBUG("weapon", "Select %s", m_name.c_str());
 
   m_time_anim_begin = Time::GetInstance()->Read();
   m_is_active = false;
@@ -175,9 +147,6 @@ void Weapon::Select()
     ActiveTeam().crosshair.enable = true;
 
   p_Select();
-
-  // be sure that angle is correct
-  ActiveCharacter().SetFiringAngle(ActiveCharacter().GetAbsFiringAngle());
 
   if (max_strength == 0) return ;
 
@@ -194,7 +163,7 @@ void Weapon::Select()
 void Weapon::Deselect()
 {
   ActiveTeam().crosshair.enable = false;
-  MSG_DEBUG("weapon.change", "Deselect %s", m_name.c_str());
+  MSG_DEBUG("weapon", "Deselect %s", m_name.c_str());
   p_Deselect();
 }
 
@@ -233,28 +202,25 @@ bool Weapon::CanChangeWeapon() const
   return true;
 }
 
-void Weapon::NewActionWeaponShoot() const
+void Weapon::NewActionShoot() const
 {
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  Action a_begin_sync(Action::ACTION_SYNC_BEGIN);
+  network.SendAction(&a_begin_sync);
+  SendCharacterPosition();
+  Action * shoot = new Action(Action::ACTION_SHOOT,
+                              m_strength,
+                              ActiveCharacter().GetAbsFiringAngle());
+  shoot->StoreActiveCharacter();
+  ActionHandler::GetInstance()->NewAction(shoot);
+  Action a_end_sync(Action::ACTION_SYNC_END);
+  network.SendAction(&a_end_sync);
 
-  Action* a_shoot = new Action(Action::ACTION_WEAPON_SHOOT,
-			       m_strength,
-			       ActiveCharacter().GetAbsFiringAngle());
-  ActionHandler::GetInstance()->NewActionActiveCharacter(a_shoot);
-}
-
-void Weapon::NewActionWeaponStopUse() const
-{
-  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-
-  Action* a = new Action(Action::ACTION_WEAPON_STOP_USE);
-  ActionHandler::GetInstance()->NewActionActiveCharacter(a);
 }
 
 void Weapon::PrepareShoot(double strength, double angle)
 {
-  MSG_DEBUG("weapon.shoot", "Try to shoot with strength:%f, angle:%f",
-	    strength, angle);
+  MSG_DEBUG("weapon_shoot", "Try to shoot");
   ActiveCharacter().SetFiringAngle(angle);
   m_strength = strength;
   StopLoading();
@@ -264,9 +230,9 @@ void Weapon::PrepareShoot(double strength, double angle)
 
 bool Weapon::Shoot()
 {
-  MSG_DEBUG("weapon.shoot", "Enough ammo ? %d", EnoughAmmo() );
-  MSG_DEBUG("weapon.shoot", "Enough ammo unit ? %d", EnoughAmmoUnit() );
-  MSG_DEBUG("weapon.shoot", "Use unit on 1st shoot ? %d", use_unit_on_first_shoot );
+  MSG_DEBUG("weapon_shoot", "Enough ammo ? %d", EnoughAmmo() );
+  MSG_DEBUG("weapon_shoot", "Enough ammo unit ? %d", EnoughAmmoUnit() );
+  MSG_DEBUG("weapon_shoot", "Use unit on 1st shoot ? %d", use_unit_on_first_shoot );
 
 
   {
@@ -289,19 +255,12 @@ bool Weapon::Shoot()
 	return false;
   }
 
-  MSG_DEBUG("weapon.shoot", "Enough ammo");
+  MSG_DEBUG("weapon_shoot", "Enough ammo");
 
-  MSG_DEBUG("weapon.shoot", "%s Shooting at position:%d,%d (hand: %d,%d)",
-	    ActiveCharacter().GetName().c_str(),
-	    ActiveCharacter().GetX(),
-	    ActiveCharacter().GetY(),
-	    ActiveCharacter().GetHandPosition().GetX(),
-	    ActiveCharacter().GetHandPosition().GetY());
-  ActiveCharacter().body->DebugState();
   if (!p_Shoot()) return false;
   m_last_fire_time = Time::GetInstance()->Read();
 
-  MSG_DEBUG("weapon.shoot", "shoot!");
+  MSG_DEBUG("weapon_shoot", "shoot!");
 
   // Is this the first shoot for this ammo use ?
   if (ActiveTeam().ReadNbUnits() == m_initial_nb_unit_per_ammo) {
@@ -457,22 +416,28 @@ void Weapon::Draw(){
     DrawWeaponFire();
   weapon_strength_bar.visible = false;
 
-  // Do we need to draw strength_bar ? (real draw is done by class Interface)
-  // We do not draw on the network
-  if (max_strength != 0 && IsReady() && !m_is_active &&
-      (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
-    weapon_strength_bar.visible = true;
+  switch (m_unit_visibility)
+    {
+      case VISIBLE_ONLY_WHEN_ACTIVE:
+	if (!m_is_active)
+	  break;
 
-  DrawAmmoUnits();
+      default:
+	if (m_initial_nb_unit_per_ammo > 1)
+	  DrawUnit(ActiveTeam().ReadNbUnits());
+    }
+
+  // Do we need to draw strength_bar ? (real draw is done by class Interface
+  if (max_strength != 0 && IsReady() && !m_is_active)
+    weapon_strength_bar.visible = true;
 
   switch (m_visibility)
     {
       case ALWAYS_VISIBLE:
-	break;
+	break ;
 
       case NEVER_VISIBLE:
-	return;
-	break;
+	return ;
 
       case VISIBLE_ONLY_WHEN_ACTIVE:
 	if (!m_is_active)
@@ -550,42 +515,19 @@ void Weapon::DrawWeaponFire()
   m_weapon_fire->Draw( GetGunHolePosition() - size );
 }
 
-void Weapon::DrawAmmoUnits() const
+void Weapon::DrawUnit(int unit) const
 {
-  switch (m_unit_visibility) {
+  Rectanglei rect;
 
-  case VISIBLE_ONLY_WHEN_ACTIVE:
-    if (!m_is_active)
-      return;
-    break;
+  std::ostringstream ss;
 
-  case VISIBLE_ONLY_WHEN_INACTIVE:
-    if (m_is_active)
-      return ;
-    break;
+  ss << unit;
 
-  case NEVER_VISIBLE:
-    return;
-    break;
-
-  default:
-    ; // nothing to do
-  }
-
-  if (m_initial_nb_unit_per_ammo > 1)
-  {
-    Rectanglei rect;
-
-    std::ostringstream ss;
-
-    ss << ActiveTeam().ReadNbUnits();
-
-    DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
-		   Point2i( ActiveCharacter().GetCenterX(),
-			    ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
-		   - camera.GetPosition(),
-		   ss.str());
-  }
+  DrawTmpBoxText(*Font::GetInstance(Font::FONT_SMALL),
+		 Point2i( ActiveCharacter().GetCenterX(), 
+			  ActiveCharacter().GetY() - UNIT_BOX_HEIGHT / 2 - UNIT_BOX_GAP )
+		 - camera.GetPosition(),
+		 ss.str());
 }
 
 Sprite & Weapon::GetIcon() const
@@ -602,6 +544,26 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
                           m_id.c_str())
                 << std::endl;
     return false;
+  }
+
+  xmlpp::Element *pos_elem = XmlReader::GetMarker(elem, "position");
+  if (pos_elem != NULL) {
+    // E.g. <position origin="hand" x="-1" y="0" />
+    std::string origin_xml;
+    XmlReader::ReadIntAttr (pos_elem, "x", position.x);
+    XmlReader::ReadIntAttr (pos_elem, "y", position.y);
+    XmlReader::ReadStringAttr (pos_elem, "origin", origin_xml);
+    if (origin_xml == "over")
+      origin = weapon_origin_OVER;
+    else
+      origin = weapon_origin_HAND;
+  }
+
+  pos_elem = XmlReader::GetMarker(elem, "hole");
+  if (pos_elem != NULL) {
+    // E.g. <hole dx="-1" dy="0" />
+    XmlReader::ReadIntAttr(pos_elem, "dx", hole_delta.x);
+    XmlReader::ReadIntAttr(pos_elem, "dy", hole_delta.y);
   }
 
   XmlReader::ReadInt(elem, "nb_ammo", m_initial_nb_ammo);
@@ -632,7 +594,7 @@ bool Weapon::LoadXml(xmlpp::Element * weapon)
   return true;
 }
 
-bool Weapon::IsInUse() const{
+bool Weapon::IsActive() const{
   return m_is_active;
 }
 
@@ -650,152 +612,14 @@ void Weapon::ChooseTarget(Point2i mouse_pos){
 void Weapon::SignalTurnEnd(){
 }
 
+void Weapon::ActionUp(){ //called by mousse.cpp when mousewhellup
+}
+
+
+void Weapon::ActionDown(){//called by mousse.cpp when mousewhelldown
+}
+
 void Weapon::ActionStopUse()
 {
   assert(false);
-}
-
-// Handle keyboard events
-
-// #################### SHOOT
-void Weapon::HandleKeyPressed_Shoot()
-{
-  if(ActiveCharacter().IsPreparingShoot())
-    return;
-
-  if (max_strength == 0)
-    NewActionWeaponShoot();
-  else if ( IsReady() )
-    InitLoading();
-}
-
-void Weapon::HandleKeyRefreshed_Shoot()
-{
-  if(ActiveCharacter().IsPreparingShoot())
-    return;
-  if ( !IsLoading() )
-    return;
-
-  // Strength == max strength -> Fire !!!
-  if (ReadStrength() >= max_strength) {
-    NewActionWeaponShoot();
-  } else {
-    // still pressing the Space key
-    UpdateStrength();
-  }
-}
-
-void Weapon::HandleKeyReleased_Shoot()
-{
-  if(ActiveCharacter().IsPreparingShoot())
-    return;
-  if ( !IsLoading())
-    return;
-
-  NewActionWeaponShoot();
-}
-
-void Weapon::HandleKeyPressed_MoveRight()
-{
-  ActiveCharacter().HandleKeyPressed_MoveRight();
-}
-
-void Weapon::HandleKeyRefreshed_MoveRight()
-{
-  ActiveCharacter().HandleKeyRefreshed_MoveRight();
-}
-
-void Weapon::HandleKeyReleased_MoveRight()
-{
-  ActiveCharacter().HandleKeyReleased_MoveRight();
-}
-
-void Weapon::HandleKeyPressed_MoveLeft()
-{
-  ActiveCharacter().HandleKeyPressed_MoveLeft();
-}
-
-void Weapon::HandleKeyRefreshed_MoveLeft()
-{
-  ActiveCharacter().HandleKeyRefreshed_MoveLeft();
-}
-
-void Weapon::HandleKeyReleased_MoveLeft()
-{
-  ActiveCharacter().HandleKeyReleased_MoveLeft();
-}
-
-void Weapon::HandleKeyPressed_Up()
-{
-  ActiveCharacter().HandleKeyPressed_Up();
-}
-
-void Weapon::HandleKeyRefreshed_Up()
-{
-  ActiveCharacter().HandleKeyRefreshed_Up();
-}
-
-void Weapon::HandleKeyReleased_Up()
-{
-  ActiveCharacter().HandleKeyReleased_Up();
-}
-
-void Weapon::HandleKeyPressed_Down()
-{
-  ActiveCharacter().HandleKeyPressed_Down();
-}
-
-void Weapon::HandleKeyRefreshed_Down()
-{
-  ActiveCharacter().HandleKeyRefreshed_Down();
-}
-
-void Weapon::HandleKeyReleased_Down()
-{
-  ActiveCharacter().HandleKeyReleased_Down();
-}
-
-void Weapon::HandleKeyPressed_Jump()
-{
-  ActiveCharacter().HandleKeyPressed_Jump();
-}
-
-void Weapon::HandleKeyRefreshed_Jump()
-{
-  ActiveCharacter().HandleKeyRefreshed_Jump();
-}
-
-void Weapon::HandleKeyReleased_Jump()
-{
-  ActiveCharacter().HandleKeyReleased_Jump();
-}
-
-void Weapon::HandleKeyPressed_HighJump()
-{
-  ActiveCharacter().HandleKeyPressed_HighJump();
-}
-
-void Weapon::HandleKeyRefreshed_HighJump()
-{
-  ActiveCharacter().HandleKeyRefreshed_HighJump();
-}
-
-void Weapon::HandleKeyReleased_HighJump()
-{
-  ActiveCharacter().HandleKeyReleased_HighJump();
-}
-
-void Weapon::HandleKeyPressed_BackJump()
-{
-  ActiveCharacter().HandleKeyPressed_BackJump();
-}
-
-void Weapon::HandleKeyRefreshed_BackJump()
-{
-  ActiveCharacter().HandleKeyRefreshed_BackJump();
-}
-
-void Weapon::HandleKeyReleased_BackJump()
-{
-  ActiveCharacter().HandleKeyReleased_BackJump();
 }

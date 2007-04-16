@@ -30,11 +30,6 @@
 
 class GameMenu : public Menu
 {
-  /* If you need this, implement it (correctly)*/
-   GameMenu(const GameMenu&);
-   GameMenu operator=(const GameMenu&);
-   /********************************************/
-
    /* Team controllers */
    TeamsSelectionBox * team_box;
 
@@ -48,15 +43,14 @@ class GameMenu : public Menu
    CheckBox *opt_scroll_on_border;
 
    void SaveOptions();
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
+   void OnClic(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
 
    void __sig_ok();
    void __sig_cancel();
 
 public:
-   GameMenu();
+   GameMenu(); 
    ~GameMenu();
 };
 

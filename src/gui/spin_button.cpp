@@ -36,8 +36,7 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false); 
 
-  txt_label = new Text(label, color, Font::FONT_SMALL, Font::FONT_NORMAL, shadowed);
-  txt_label->SetMaxWidth(size.x - 30);
+  txt_label = new Text(label, color, Font::GetInstance(Font::FONT_SMALL), shadowed);
 
   if ( min_value != -1 && min_value <= value)
     m_min_value = min_value;
@@ -47,7 +46,7 @@ SpinButton::SpinButton (const std::string &label, const Rectanglei &rect,
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", color, Font::FONT_SMALL, Font::FONT_NORMAL, shadowed);
+  txt_value = new Text("", color, Font::GetInstance(Font::FONT_SMALL), shadowed);
   SetValue(value);
 
   std::ostringstream max_value_s;
@@ -82,8 +81,6 @@ void SpinButton::SetSizePosition(const Rectanglei &rect)
   
   m_plus->SetSizePosition( Rectanglei(position.x + size.x - 5, position.y, 5, 10) );
   m_minus->SetSizePosition( Rectanglei(position.x + size.x - max_value_w - 5 - 2 * margin, position.y, 5, 10) );
-
-  txt_label->SetMaxWidth(size.x - 30);
 }
 
 void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
@@ -97,7 +94,7 @@ void SpinButton::Draw(const Point2i &mousePosition, Surface& surf) const
   txt_value->DrawCenterTop(center, position.y);
 }
 
-Widget* SpinButton::ClickUp(const Point2i &mousePosition, uint button)
+Widget* SpinButton::Clic(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
@@ -105,16 +102,12 @@ Widget* SpinButton::ClickUp(const Point2i &mousePosition, uint button)
       (button == SDL_BUTTON_LEFT && m_minus->Contains(mousePosition)) ){
     SetValue(m_value - m_step);
     return this;
-  } else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
-	     (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
-    SetValue(m_value + m_step);
-    return this;
-  }
-  return NULL;
-}
-
-Widget* SpinButton::Click(const Point2i &mousePosition, uint button)
-{
+  } else
+  	if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
+        (button == SDL_BUTTON_LEFT && m_plus->Contains(mousePosition)) ){
+    	SetValue(m_value + m_step);
+    	return this;
+  	}
   return NULL;
 }
 

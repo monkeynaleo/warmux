@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************/
-
+ 
 #ifndef FONT_H
 #define FONT_H
 #include <SDL.h>
@@ -31,15 +31,9 @@ class GameLoop;
 class Font
 {
 private:
-
-  /* If you need this, implement it */
-  Font(const Font&);
-  Font operator=(const Font&);
-  /**********************************/
-
-  typedef std::map<std::string, Surface>::value_type
+  typedef std::map<std::string, Surface>::value_type 
     txt_sample;
-  typedef std::map<std::string, Surface>::iterator
+  typedef std::map<std::string, Surface>::iterator 
     txt_iterator;
   static const int FONT_SIZE[];
   static Font* FONT_ARRAY[6];
@@ -51,40 +45,33 @@ private:
   void Write(const Point2i &pos, Surface &surface);
 
   Font(int size);
-  bool Load (const std::string& filename, int size);
 
 public:
   // Size
-  typedef enum {
-    FONT_HUGE = 0,
-    FONT_LARGE = 1,
-    FONT_BIG = 2,
-    FONT_MEDIUM = 3,
-    FONT_SMALL = 4,
-    FONT_TINY = 5
-  } font_size_t;
-
+  static const int FONT_HUGE;
+  static const int FONT_LARGE;
+  static const int FONT_BIG;
+  static const int FONT_NORMAL;
+  static const int FONT_SMALL;
+  static const int FONT_TINY;
   // Style
-  typedef enum {
-    FONT_NORMAL = 0,
-    FONT_BOLD = 1,
-    FONT_ITALIC = 2,
-  } font_style_t;
+  static const int NORMAL;
+  static const int BOLD;
+  static const int ITALIC;
 
   // type: defined as static consts above
-  static Font* GetInstance(font_size_t size, font_style_t style = FONT_NORMAL);
+  static Font* GetInstance(int type, int font_style = NORMAL);
 
   ~Font();
 
-  static Surface GenerateSurface(const std::string &txt, const Color &color, 
-				 font_size_t size = FONT_MEDIUM, font_style_t style = FONT_NORMAL);
+  bool Load (const std::string& filename, int size);
 
   void WriteLeft(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteLeftBottom(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteRight(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteCenterTop(const Point2i &pos, const std::string &txt, const Color &color);
   void WriteCenter(const Point2i &pos, const std::string &txt, const Color &color);
-
+  
   int GetWidth(const std::string &txt);
   int GetHeight();
   int GetHeight(const std::string &txt);

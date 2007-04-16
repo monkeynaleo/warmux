@@ -39,16 +39,15 @@ TeamBox::TeamBox(std::string _player_name, const Rectanglei& rect) :
   tmp_box->SetMargin(2);
   tmp_box->SetBorder(Point2i(0,0));
   team_name = new Label(" ", Rectanglei(0,0,rect.GetSizeX()-80,0),
-			Font::FONT_MEDIUM, Font::FONT_BOLD, 
-			dark_gray_color, false, false);
+			*Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), dark_gray_color, false, false);
 
   Box * tmp_player_box = new HBox(Rectanglei(0,0,0,Font::GetInstance(Font::FONT_SMALL)->GetHeight()), false);
   tmp_player_box->SetMargin(0);
   tmp_player_box->SetBorder(Point2i(0,0));
   tmp_player_box->AddWidget(new Label(_("Head commander"), Rectanglei(0,0,(rect.GetSizeX()-80)-100,0),
-				      Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, false, false));
+				      *Font::GetInstance(Font::FONT_SMALL), dark_gray_color, false, false));
   player_name = new TextBox(_player_name, Rectanglei(0,0,100,0),
-			    Font::FONT_SMALL, Font::FONT_NORMAL);
+			    *Font::GetInstance(Font::FONT_SMALL));
   tmp_player_box->AddWidget(player_name);
 
   nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),
@@ -68,7 +67,6 @@ void TeamBox::SetTeam(Team& _team, bool read_team_values)
 
   team_logo->SetSurface(_team.flag);
   if (!_team.IsLocal() && !_team.IsLocalAI()) {
-    // translators: this is the team listing and will expand in a context like "OOo team - Remote"
     team_name->SetText(_team.GetName() + " - " + _("Remote"));
   } else {
     team_name->SetText(_team.GetName());
@@ -113,27 +111,22 @@ void TeamBox::Update(const Point2i &mousePosition,
   need_redrawing = false;
 }
 
-Widget* TeamBox::ClickUp(const Point2i &mousePosition, uint button)
+Widget* TeamBox::Clic (const Point2i &mousePosition, uint button)
 {
   if (associated_team != NULL) {
 
-    Widget* w = WidgetList::ClickUp(mousePosition, button);
+    Widget* w = WidgetList::Clic(mousePosition, button);
 
     if ( !associated_team->IsLocal() && !associated_team->IsLocalAI() )
       return NULL; // it's not a local team, we can't configure it !!
     
     if (w == nb_characters || w == player_name) {
-      if (Network::GetInstance()->IsConnected()) {
+      if (network.IsConnected()) {
       	ValidOptions();
       }
       return w;
     }
   }
-  return NULL;
-}
-
-Widget* TeamBox::Click(const Point2i &mousePosition, uint button)
-{
   return NULL;
 }
 
@@ -155,8 +148,8 @@ void TeamBox::ValidOptions() const
       associated_team->SetLocal();
 
     // send team configuration to the remote clients
-    if (Network::GetInstance()->IsConnected()) {
-      Action* a = new Action(Action::ACTION_MENU_UPDATE_TEAM, associated_team->GetId());
+    if (network.IsConnected()) {
+      Action* a = new Action(Action::ACTION_UPDATE_TEAM, associated_team->GetId());
       a->Push(associated_team->GetPlayerName());
       a->Push(int(associated_team->GetNbCharacters()));
       ActionHandler::GetInstance()->NewAction (a);

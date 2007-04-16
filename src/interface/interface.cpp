@@ -91,20 +91,25 @@ Interface::Interface()
   weapon_strength_bar.SetBorderColor(resource_manager.LoadColor(res, "interface/weapon_strength_bar_border"));
   weapon_strength_bar.SetBackgroundColor(resource_manager.LoadColor(res, "interface/weapon_strength_bar_background"));
 
+  // constant text initialisation
+  Font * big_font = Font::GetInstance(Font::FONT_BIG,Font::NORMAL);
+  Font * normal_font_bold = Font::GetInstance(Font::FONT_NORMAL,Font::BOLD);
+  Font * small_font_bold = Font::GetInstance(Font::FONT_SMALL,Font::BOLD);
+
   Color text_color = resource_manager.LoadColor(res, "interface/text_color");
   Color energy_text_color = resource_manager.LoadColor(res, "interface/energy_text_color");
   Color turn_timer_text_color = resource_manager.LoadColor(res, "interface/turn_timer_text_color");
   Color global_clock_text_color = resource_manager.LoadColor(res, "interface/global_clock_text_color");
 
-  global_timer = new Text(ulong2str(0), gray_color, Font::FONT_BIG, Font::FONT_NORMAL, false);
-  timer = new Text(ulong2str(0), black_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
+  global_timer = new Text(ulong2str(0), gray_color, big_font, false);
+  timer = new Text(ulong2str(0), black_color, normal_font_bold, false);
 
-  t_character_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_team_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_player_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_weapon_name = new Text("None", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_weapon_stock = new Text("0", text_color, Font::FONT_SMALL, Font::FONT_BOLD, false);
-  t_character_energy = new Text("Dead", energy_text_color, Font::FONT_SMALL, Font::FONT_BOLD);
+  t_character_name = new Text("None", text_color, small_font_bold, false);
+  t_team_name = new Text("None", text_color, small_font_bold, false);
+  t_player_name = new Text("None", text_color, small_font_bold, false);
+  t_weapon_name = new Text("None", text_color, small_font_bold, false);
+  t_weapon_stock = new Text("0", text_color, small_font_bold, false);
+  t_character_energy = new Text("Dead", energy_text_color, small_font_bold);
 
   resource_manager.UnLoadXMLProfile( res);
 }
@@ -158,7 +163,7 @@ void Interface::DrawCharacterInfo()
   t_character_name->DrawCenter(bottom_bar_pos + character_name_offset);
 
   // Display player's name
-  t_player_name->Set(_("Head commander: ") + character_under_cursor->GetTeam().GetPlayerName());
+  t_player_name->Set(_("general: ") + character_under_cursor->GetTeam().GetPlayerName());
   Point2i player_name_offset = energy_bar_offset + Point2i(energy_bar.GetWidth() / 2, t_team_name->GetHeight() + t_player_name->GetHeight() + MARGIN);
   t_player_name->DrawCenter(bottom_bar_pos + player_name_offset);
 
@@ -392,11 +397,6 @@ void Interface::UpdateTimer(uint utimer)
 {
   timer->Set(ulong2str(utimer));
   remaining_turn_time = utimer;
-}
-
-void Interface::SetCurrentOverflyWeapon(Weapon * weapon)
-{
-  weapon_under_cursor = weapon;
 }
 
 void Interface::UpdateWindIndicator(int wind_value)

@@ -26,9 +26,8 @@
 #include "../tool/debug.h"
 #include "../game/time.h"
 #include "../character/character.h"
-#include "../network/distant_cpu.h"
 #include "../team/teams_list.h"
-#include "../network/network.h"
+
 //-----------------------------------------------------------------------------
 // Action without parameter
 Action::Action (Action_t type)
@@ -36,7 +35,6 @@ Action::Action (Action_t type)
   var.clear();
   m_type = type;
   m_timestamp = Time::GetInstance()->Read();
-  creator = NULL;
 }
 
 // Action with various parameters
@@ -52,7 +50,6 @@ Action::Action (Action_t type, double value) : m_type(type)
   var.clear();
   Push(value);
   m_timestamp = Time::GetInstance()->Read();
-  creator = NULL;
 }
 
 Action::Action (Action_t type, const std::string& value) : m_type(type)
@@ -60,7 +57,6 @@ Action::Action (Action_t type, const std::string& value) : m_type(type)
   var.clear();
   Push(value);
   m_timestamp = Time::GetInstance()->Read();
-  creator = NULL;
 }
 
 Action::Action (Action_t type, double value1, double value2) : m_type(type)
@@ -69,7 +65,6 @@ Action::Action (Action_t type, double value1, double value2) : m_type(type)
   Push(value1);
   Push(value2);
   m_timestamp = Time::GetInstance()->Read();
-  creator = NULL;
 }
 
 Action::Action (Action_t type, double value1, int value2) : m_type(type)
@@ -78,14 +73,11 @@ Action::Action (Action_t type, double value1, int value2) : m_type(type)
   Push(value1);
   Push(value2);
   m_timestamp = Time::GetInstance()->Read();
-  creator = NULL;
 }
 
 // Build an action from a network packet
-Action::Action (const char *is, DistantComputer* _creator)
+Action::Action (const char *is)
 {
-  creator = _creator;
-
   var.clear();
   m_type = (Action_t)SDLNet_Read32(is);
   is += 4;
@@ -225,12 +217,9 @@ void Action::Push(std::string val)
 //-------------  Retrieve datas from the action  ----------------
 int Action::PopInt()
 {
-  net_assert(var.size() > 0)
-  {
-    if(creator) creator->force_disconnect = true;
-    return 0;
-  }
-
+  assert(var.size() > 0);
+  if(var.size() <= 0)
+	return 0;
   int val;
   Uint32 tmp = var.front();
   memcpy(&val, &tmp, 4);
@@ -242,12 +231,9 @@ int Action::PopInt()
 
 double Action::PopDouble()
 {
-  net_assert(var.size() > 0)
-  {
-    if(creator) creator->force_disconnect = true;
+  assert(var.size() > 0);
+  if(var.size() <= 0)
     return 0.0;
-  }
-
   double val;
   Uint32 tmp[2];
 #if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
@@ -271,30 +257,19 @@ double Action::PopDouble()
 
 std::string Action::PopString()
 {
-  net_assert(var.size() > 1)
-  {
-    if(creator) creator->force_disconnect = true;
+  assert(var.size() > 1);
+  if(var.size() <= 1)
     return "";
-  }
-
   int lenght = PopInt();
 
   std::string str="";
 
-  net_assert((int)var.size() >= lenght/4)
-  {
-    if(creator) creator->force_disconnect = true;
+  assert((int)var.size() >= lenght/4);
+  if((int)var.size() < lenght/4)
     return "";
-  }
 
   while(lenght > 0)
   {
-    net_assert(var.size() > 0)
-    {
-      if(creator) creator->force_disconnect = true;
-      return "";
-    }
-
     Uint32 tmp = var.front();
     var.pop_front();
     char tmp_str[5] = {0, 0, 0, 0, 0};
@@ -333,7 +308,6 @@ Point2d Action::PopPoint2d()
   return Point2d(x, y);
 }
 
-//-------------  Send/Retrieve datas about Character
 
 void Action::StoreActiveCharacter()
 {
@@ -352,9 +326,6 @@ void Action::StoreCharacter(uint team_no, uint char_no)
   Push((int)c->GetDiseaseDamage());
   Push((int)c->GetDiseaseDuration());
   Push(c->GetSpeed());
-  Push(c->GetExternForce());
-  Push(c->GetRopeAngle());
-  Push(c->GetRopeLength());
   if(c->IsActiveCharacter()) { // If active character, store step animation
     Push((int)true);
     Push(ActiveTeam().ActiveCharacter().GetBody()->GetClothe());
@@ -378,17 +349,12 @@ void Action::RetrieveCharacter()
   int disease_duration = PopInt();
   c->SetDiseaseDamage(disease_damage_per_turn, disease_duration);
   c->SetSpeedXY(PopPoint2d());
-  c->SetExternForceXY(PopPoint2d());
-  c->SetRopeAngle(PopDouble());
-  c->SetRopeLength(PopDouble());
   if((bool)PopInt()) { // If active characters, retrieve stored animation
     if(c->GetTeam().IsActiveTeam())
       ActiveTeam().SelectCharacter(char_no);
     c->SetClothe(PopString());
     c->SetMovement(PopString());
     c->GetBody()->SetFrame((uint)PopInt());
-
-    c->GetBody()->UpdateWeaponPosition(c->GetPosition());
   }
 }
 

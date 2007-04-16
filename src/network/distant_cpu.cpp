@@ -35,24 +35,17 @@
 DistantComputer::DistantComputer(TCPsocket new_sock)
   : sock(new_sock)
 {
-  version_checked = false;
-  force_disconnect = false;
   sock_lock = SDL_CreateMutex();
 
-  SDLNet_TCP_AddSocket(Network::GetInstance()->socket_set, sock);
+  SDLNet_TCP_AddSocket(network.socket_set, sock);
 
   // If we are the server, we have to tell this new computer
   // what teams / maps have already been selected
-  if( Network::GetInstance()->IsServer() )
+  if( network.IsServer() )
   {
+    Action a(Action::ACTION_SET_MAP, ActiveMap().ReadName());
     int size;
     char* pack;
-    Action c(Action::ACTION_RULES_ASK_VERSION);
-    c.WritePacket(pack, size);
-    SendDatas(pack, size);
-    free(pack);
-
-    Action a(Action::ACTION_MENU_SET_MAP, ActiveMap().ReadName());
     a.WritePacket(pack, size);
     SendDatas(pack, size);
     free(pack);
@@ -62,7 +55,7 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
       team != teams_list.playing_list.end();
       ++team)
     {
-      Action b(Action::ACTION_MENU_ADD_TEAM, (*team)->GetId());
+      Action b(Action::ACTION_NEW_TEAM, (*team)->GetId());
       b.Push((*team)->GetPlayerName());
       b.Push((int)(*team)->GetNbCharacters());
       b.WritePacket(pack, size);
@@ -70,24 +63,31 @@ DistantComputer::DistantComputer(TCPsocket new_sock)
       free(pack);
     }
   }
+
+  if(network.network_menu != NULL)
+  {
+    // Display a message in the network menu
+    network.network_menu->ReceiveMsgCallback(GetAdress() + _(" has joined the party"));
+  }
 }
 
 DistantComputer::~DistantComputer()
 {
-  if(version_checked)
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_DISCONNECT, GetAdress()));
-  if(force_disconnect)
-    std::cerr << GetAdress() << " have been kicked" << std::endl;
+  if(network.network_menu != NULL)
+  {
+    // Display a message in the network menu
+    network.network_menu->ReceiveMsgCallback( GetAdress() + _(" has left the party"));
+  }
 
+  SDLNet_TCP_DelSocket(network.socket_set, sock);
   SDLNet_TCP_Close(sock);
-  SDLNet_TCP_DelSocket(Network::GetInstance()->socket_set, sock);
 
-  if(Network::GetInstance()->IsConnected())
+  if(network.IsConnected())
   for(std::list<std::string>::iterator team = owned_teams.begin();
       team != owned_teams.end();
       ++team)
   {
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, *team));
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_DEL_TEAM, *team));
   }
   owned_teams.clear();
 
@@ -106,40 +106,34 @@ int DistantComputer::ReceiveDatas(char* & buf)
 
   // Firstly, we read the size of the incoming packet
   Uint32 net_size;
-  if (SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
+  if(SDLNet_TCP_Recv(sock, &net_size, 4) <= 0)
   {
     SDL_UnlockMutex(sock_lock);
     return -1;
   }
 
   int size = (int)SDLNet_Read32(&net_size);
-  net_assert(size > 0)
-  {
-    // force_disconnect = true; // hum.. in this case we will assume it's a network error
-    return 0;
-  }
+  assert(size > 0);
 
   // Now we read the packet
   buf = (char*)malloc(size);
 
   int total_received = 0;
-  while (total_received != size)
+  while(total_received != size)
   {
     int received = SDLNet_TCP_Recv(sock, buf + total_received, size - total_received);
-    if (received > 0)
+    if(received > 0)
     {
       MSG_DEBUG("network", "%i received", received);
       total_received += received;
     }
 
-    if (received < 0)
+    if(received < 0)
     {
+      assert(false);
       std::cerr << "Malformed packet" << std::endl;
       total_received = received;
-      net_assert(false)
-      {
-	return 0;
-      }
+      break;
     }
   }
   SDL_UnlockMutex(sock_lock);
@@ -150,7 +144,7 @@ int DistantComputer::ReceiveDatas(char* & buf)
 void DistantComputer::SendDatas(char* packet, int size_tmp)
 {
   SDL_LockMutex(sock_lock);
-  MSG_DEBUG("network","locked");
+MSG_DEBUG("network","locked");
   Uint32 size;
   SDLNet_Write32(size_tmp, &size);
   SDLNet_TCP_Send(sock,&size,4);
@@ -158,7 +152,7 @@ void DistantComputer::SendDatas(char* packet, int size_tmp)
   MSG_DEBUG("network","%i sent", 4 + size_tmp);
 
   SDL_UnlockMutex(sock_lock);
-  MSG_DEBUG("network","unlocked");
+MSG_DEBUG("network","unlocked");
 }
 
 std::string DistantComputer::GetAdress()
@@ -176,7 +170,7 @@ std::string DistantComputer::GetAdress()
 void DistantComputer::ManageTeam(Action* team)
 {
   std::string name = team->PopString();
-  if(team->GetType() == Action::ACTION_MENU_ADD_TEAM)
+  if(team->GetType() == Action::ACTION_NEW_TEAM)
   {
     owned_teams.push_back(name);
 
@@ -184,22 +178,20 @@ void DistantComputer::ManageTeam(Action* team)
     Team * tmp = teams_list.FindById(name, index);
     tmp->SetRemote();
     
-    Action* copy = new Action(Action::ACTION_MENU_ADD_TEAM, name);
+    Action* copy = new Action(Action::ACTION_NEW_TEAM, name);
     copy->Push( team->PopString() );
     copy->Push( team->PopInt() );
     ActionHandler::GetInstance()->NewAction(copy, false);
   }
-  else if(team->GetType() == Action::ACTION_MENU_DEL_TEAM)
+  else
+  if(team->GetType() == Action::ACTION_DEL_TEAM)
   {
     std::list<std::string>::iterator it;
     it = find(owned_teams.begin(), owned_teams.end(), name);
-    net_assert(it != owned_teams.end())
-    {
-      force_disconnect = true;
-      return;
-    }
+    std::cout << "ManageTeam : erase " << name << std::endl;
+    assert(it != owned_teams.end());
     owned_teams.erase(it);
-    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_MENU_DEL_TEAM, name), false);
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_DEL_TEAM, name), false);
   }
   else
     assert(false);
@@ -208,8 +200,7 @@ void DistantComputer::ManageTeam(Action* team)
 void DistantComputer::SendChatMessage(Action* a)
 {
   std::string txt = a->PopString();
-  if (txt == "") return;
-  if(Network::GetInstance()->IsServer())
+  if(network.IsServer())
   {
     ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHAT_MESSAGE, nickname + "> "+txt));
   }

@@ -44,7 +44,6 @@ public:
     POINTER_ARROW_RIGHT,
     POINTER_ARROW_LEFT,
     POINTER_AIM,
-    POINTER_FIRE,
     POINTER_FIRE_LEFT,
     POINTER_FIRE_RIGHT
   } pointer_t;
@@ -80,23 +79,27 @@ private:
   void DrawSelectPointer();
 
   const Surface& GetSurfaceFromPointer(pointer_t pointer) const;
-
-  void ActionLeftClic();
-  void ActionRightClic();
-  void ActionWheelDown();
-  void ActionWheelUp();
 public:
 
   static Mouse * GetInstance();
 
-  bool HandleClic (const SDL_Event& event);
+  void TraiteClic (const SDL_Event *event);
+
+  void Reset();
 
   void Refresh();
   void TestCamera();
+  bool ActionClicG();
+  bool ActionClicD();
+  bool ActionWhellDown();
+  bool ActionWhellUp();
   void ChoixVerPointe();
 
   Point2i GetPosition() const;
   Point2i GetWorldPosition() const;
+  bool ClicG() const;
+  bool ClicD() const;
+  bool ClicM() const;
 
   // Choose the pointer
   pointer_t SetPointer(pointer_t pointer);

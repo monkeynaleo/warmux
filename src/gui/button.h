@@ -29,15 +29,9 @@
 
 class Button : public Widget
 {
-  /* If you need this, implement it (correctly)*/
-  Button(const Button&);
-  Button operator=(const Button&);
-  /*********************************************/
-
 protected:
   bool img_scale;
   Sprite *image;
-  bool hidden;
 
 public:
   Button (const Rectanglei &rect,
@@ -52,8 +46,6 @@ public:
   virtual void SetSizePosition(const Rectanglei &rect);
 
   Sprite* GetSprite() { return image; };
-
-  void SetVisible(bool visible);
 };
 
 #endif

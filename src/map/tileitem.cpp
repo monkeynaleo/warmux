@@ -161,7 +161,59 @@ void TileItem_AlphaSoftware::Dig(const Point2i &center, const uint radius){
 
 void TileItem_AlphaSoftware::MergeSprite(const Point2i &position, Surface& spr)
 {
-  m_surface.MergeSurface(spr, position);
+  need_check_empty = true;
+  int starting_x = position.x >= 0 ? position.x : 0;
+  int starting_y = position.y >= 0 ? position.y : 0;
+  int ending_x = position.x+spr.GetWidth() <= m_surface.GetWidth() ? position.x+spr.GetWidth() : m_surface.GetWidth();
+  int ending_y = position.y+spr.GetHeight() <= m_surface.GetHeight() ? position.y+spr.GetHeight() : m_surface.GetHeight();
+  unsigned char r,g,b,a,p_r,p_g,p_b,p_a;
+  unsigned char* spr_buf = spr.GetPixels();
+  unsigned char* tile_buf = m_surface.GetPixels();
+#if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+  int r_offset = 0;
+  int g_offset = 1;
+  int b_offset = 2;
+  int a_offset = 3;
+#else
+  int r_offset = 3;
+  int g_offset = 2;
+  int b_offset = 1;
+  int a_offset = 0;
+#endif
+
+  // Really dirty hack: there is no obvious reason it should work, but with this it works (TM)
+  spr_buf++;
+
+  for( int py = starting_y ; py < ending_y ; py++) {
+    for( int px = starting_x ; px < ending_x ; px++) {
+      a = *(spr_buf+((py-position.y)*spr.GetPitch()) + ((px-position.x) * 4 + a_offset));
+      p_a = *(tile_buf + py*m_surface.GetPitch() + (px * 4) + a_offset);
+      if (p_a > 0) {
+        p_r = *(tile_buf + py*m_surface.GetPitch() + (px * 4) + r_offset);
+        p_g = *(tile_buf + py*m_surface.GetPitch() + (px * 4) + g_offset);
+        p_b = *(tile_buf + py*m_surface.GetPitch() + (px * 4) + b_offset);
+      } else {
+        p_r = p_g = p_b = 255;
+      }
+      if (a == SDL_ALPHA_OPAQUE || (p_a == 0 && a > 0)) {
+        r = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + r_offset);
+        g = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + g_offset);
+        b = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + b_offset);
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + r_offset) = r;
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + g_offset) = g;
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + b_offset) = b;
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + a_offset) = a;
+      } else if (a > 0) {
+        r = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + r_offset);
+        g = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + g_offset);
+        b = *(spr_buf + (py-position.y)*spr.GetPitch() + (px-position.x) * 4 + b_offset);
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + r_offset) = (r * a + p_r * p_a) / (a + p_a);
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + g_offset) = (g * a + p_g * p_a) / (a + p_a);
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + b_offset) = (b * a + p_b * p_a) / (a + p_a);
+        *(tile_buf + py*m_surface.GetPitch() + (px * 4) + a_offset) = (a > p_a ? a : p_a);
+      }
+    }
+  }
 }
 
 void TileItem_AlphaSoftware::Empty(const int start_x, const int end_x, unsigned char* buf, const int bpp)

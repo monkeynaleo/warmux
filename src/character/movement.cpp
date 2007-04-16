@@ -26,8 +26,6 @@
 
 Movement::Movement(xmlpp::Element *xml)
 {
-  frames.clear();
-  play_mode = LOOP;
   always_moving = false;
   XmlReader::ReadStringAttr( xml, "name", type);
   assert(type!="");
@@ -35,12 +33,7 @@ Movement::Movement(xmlpp::Element *xml)
   speed = 15;
   XmlReader::ReadIntAttr(xml, "speed", speed);
 
-  std::string pm;
-  if( XmlReader::ReadStringAttr(xml, "play_mode", pm))
-  if( pm == "play_once" )
-    play_mode = PLAY_ONCE;
-
-   // Load the test rectangle
+  // Load the test rectangle
   test_left = test_right = test_top = test_bottom = 0;
   xmlpp::Element *collision_rect = XmlReader::GetMarker(xml, "collision_rect");
   if (collision_rect == NULL) return;
@@ -54,14 +47,12 @@ Movement::Movement(xmlpp::Element *xml)
     it=nodes.begin(),
     end=nodes.end();
 
-  /* We know the number of member frame that are being read so we can resize
-   * thr array to be able to get all of them. */
-  frames.resize(nodes.size());
-
-  for (int frame_number=0; it != end; ++it, frame_number++)
+  for (; it != end; ++it)
   {
     xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
     assert (elem != NULL);
+    int frame_number;
+    XmlReader::ReadIntAttr(elem, "number", frame_number);
 
     xmlpp::Node::NodeList nodes2 = elem -> get_children("member");
     xmlpp::Node::NodeList::iterator
@@ -101,6 +92,10 @@ Movement::Movement(xmlpp::Element *xml)
       always_moving |= mvt.follow_half_crosshair;
       always_moving |= mvt.follow_speed;
       always_moving |= mvt.follow_direction;
+
+      if((int)frames.size() <= frame_number)
+        frames.resize(frame_number+1);
+
       frames[frame_number][member_type] = mvt;
     }
   }

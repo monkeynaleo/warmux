@@ -31,7 +31,7 @@
 #include "../particles/particle.h"
 #include "../object/physical_obj.h"
 #include "../sound/jukebox.h"
-#include "../tool/debug.h"
+#include "../interface/keyboard.h"
 
 class Character;
 
@@ -70,23 +70,9 @@ public:
     WEAPON_SKIP_TURN,     WEAPON_JETPACK,     WEAPON_PARACHUTE, WEAPON_AIR_HAMMER,
     WEAPON_CONSTRUCT,     WEAPON_SNIPE_RIFLE, WEAPON_BLOWTORCH, WEAPON_SYRINGE
   } Weapon_type;
-#define WEAPON_FIRST WEAPON_BAZOOKA
-#define WEAPON_LAST  WEAPON_SYRINGE
-  typedef enum {
-    INVALID = 0,
-    HEAVY,
-    RIFLE,
-    THROW,
-    SPECIAL,
-    DUEL,
-    MOVE,
-    TOOL
-  } category_t;
 
 protected:
   Weapon::Weapon_type m_type;
-  Weapon::category_t  m_category;
-
   std::string m_id;
   std::string m_name;
   bool m_is_active;
@@ -128,7 +114,7 @@ protected:
     VISIBLE_ONLY_WHEN_INACTIVE
   } weapon_visibility_t;
 
-  // Visibility
+ // Visibility
   weapon_visibility_t m_visibility;
   weapon_visibility_t m_unit_visibility;
 
@@ -148,8 +134,13 @@ public:
   // if max_strength != 0, display the strength bar
   double max_strength;
 
+  // True if the weapon uses keys when activated.
+  bool override_keys ;
+
+  //Force weapons to use keys when true
+  bool force_override_keys ;
+
   bool use_flipping;
-  const category_t& Category() const { return m_category; };
 
 protected:
   virtual void p_Select();
@@ -176,7 +167,7 @@ public:
   virtual void Draw();
   virtual void DrawWeaponFire();
 
-  void DrawAmmoUnits() const;
+  void DrawUnit(int unit) const;
 
   Sprite & GetIcon() const;
   // Manage the numbers of ammunitions
@@ -193,9 +184,8 @@ public:
   // Calculate weapon position
   virtual void PosXY (int &x, int &y) const;
 
-  // Create a new action "shoot/stop_use" in action handler
-  void NewActionWeaponShoot() const;
-  void NewActionWeaponStopUse() const;
+  // Create a new action "shoot" in action handler
+  void NewActionShoot() const;
 
   // Prepare the shoot : set the angle and strenght of the weapon
   // Begin the shooting animation of the character
@@ -205,8 +195,8 @@ public:
   // Return true if we have been able to trigger the weapon
   bool Shoot();
 
-  // The weapon is still in use (animation for instance) ?
-  bool IsInUse() const;
+  // L'arme est encore active (animation par ex.) ?
+  bool IsActive() const;
 
   // the weapon is ready to use ? (is there bullets left ?)
   virtual bool IsReady() const ;
@@ -228,63 +218,12 @@ public:
   // Choose a target.
   virtual void ChooseTarget (Point2i mouse_pos);
 
-  // Notify a move. It is usefull only for weapon which have strong
-  // interactions with the physical engine such as ninja rope
-  virtual void NotifyMove(bool collision){};
+  //Misc actions.
+  virtual void ActionUp ();//called by mousse.cpp when mousewhellup
+  virtual void ActionDown ();//called by mousse.cpp when mousewhelldown
 
   // Handle a keyboard event.
-
-  // Key Shoot management
-  virtual void HandleKeyPressed_Shoot();
-  virtual void HandleKeyRefreshed_Shoot();
-  virtual void HandleKeyReleased_Shoot();
-
-  // To override standard moves of character
-  virtual void HandleKeyPressed_MoveRight();
-  virtual void HandleKeyRefreshed_MoveRight();
-  virtual void HandleKeyReleased_MoveRight();
-
-  virtual void HandleKeyPressed_MoveLeft();
-  virtual void HandleKeyRefreshed_MoveLeft();
-  virtual void HandleKeyReleased_MoveLeft();
-
-  virtual void HandleKeyPressed_Up();
-  virtual void HandleKeyRefreshed_Up();
-  virtual void HandleKeyReleased_Up();
-
-  virtual void HandleKeyPressed_Down();
-  virtual void HandleKeyRefreshed_Down();
-  virtual void HandleKeyReleased_Down();
-
-  virtual void HandleKeyPressed_Jump();
-  virtual void HandleKeyRefreshed_Jump();
-  virtual void HandleKeyReleased_Jump();
-
-  virtual void HandleKeyPressed_HighJump();
-  virtual void HandleKeyRefreshed_HighJump();
-  virtual void HandleKeyReleased_HighJump();
-
-  virtual void HandleKeyPressed_BackJump();
-  virtual void HandleKeyRefreshed_BackJump();
-  virtual void HandleKeyReleased_BackJump();
-
-  // Other keys
-  virtual void HandleKeyReleased_Num1(){};
-  virtual void HandleKeyReleased_Num2(){};
-  virtual void HandleKeyReleased_Num3(){};
-  virtual void HandleKeyReleased_Num4(){};
-  virtual void HandleKeyReleased_Num5(){};
-  virtual void HandleKeyReleased_Num6(){};
-  virtual void HandleKeyReleased_Num7(){};
-  virtual void HandleKeyReleased_Num8(){};
-  virtual void HandleKeyReleased_Num9(){};
-  virtual void HandleKeyReleased_Less(){};
-  virtual void HandleKeyReleased_More(){};
-
-  // Handle a mouse event
-  virtual void HandleMouseLeftClicReleased(){};
-  virtual void HandleMouseWheelUp(){};
-  virtual void HandleMouseWheelDown(){};
+  virtual void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type) ;
 
   // Get informed that the turn is over.
   virtual void SignalTurnEnd();
@@ -299,7 +238,7 @@ public:
   // return the strength of the weapon
   const double ReadStrength() const;
 
-  // Data access
+  // Acc� aux donn�s
   const std::string& GetName() const;
   const std::string& GetID() const;
   Weapon_type GetType() const;

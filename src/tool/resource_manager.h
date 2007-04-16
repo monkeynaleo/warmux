@@ -19,9 +19,9 @@
  * Resource Manager: Load resources (images/sprites) suitable for SDL
  *                   Load directly or from refernece in xml resource profile
  ******************************************************************************
- * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de)
+ * 2005/09/21: Jean-Christophe Duberga (jcduberga@gmx.de) 
  *             Initial version
- *
+ * 
  * TODO:       Keep reference to resources, better exceptions
  *****************************************************************************/
 
@@ -31,10 +31,9 @@
 #include <string>
 #include "xml_document.h"
 #include "../graphic/sprite.h"
-#include "../map/random_map.h"
 
-class Profile
-{
+class Profile 
+{ 
  public:
   XmlReader *doc;
   std::string filename;
@@ -50,22 +49,20 @@ class ResourceManager
    ResourceManager();
    ~ResourceManager();
 
-   void AddDataPath(std::string base_path);
-   Surface LoadImage(const std::string ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0);
+   void AddDataPath( std::string base_path);
+   Surface LoadImage( const std::string ressource_str, bool alpha = false, bool set_colorkey = false, Uint32 colorkey = 0);
 
-   Profile *LoadXMLProfile(const std::string xml_filename, bool relative_path);
-   void UnLoadXMLProfile(Profile *profile);
+   Profile *LoadXMLProfile( const std::string xml_filename, bool relative_path);
+   void UnLoadXMLProfile( Profile *profile);
 
-   Color LoadColor(const Profile *profile, const std::string resource_name);
-   Point2i LoadPoint2i(const Profile *profile, const std::string resource_name);
-   Point2d LoadPoint2d(const Profile *profile, const std::string resource_name);
-   Surface LoadImage(const Profile *profile, const std::string resource_name);
-   Sprite *LoadSprite(const Profile *profile, const std::string resource_name);
-   Surface GenerateMap(Profile *profile, const int width, const int height);
-   xmlpp::Element * GetElement(const Profile *profile, const std::string ressource_type, const std::string ressource_name);
+   Color LoadColor( const Profile *profile, const std::string resource_name);
+   Surface LoadImage( const Profile *profile, const std::string resource_name); 
+   Sprite *LoadSprite( const Profile *profile, const std::string resource_name); 
 
  private:
    std::string base_path;
+
+   xmlpp::Element * GetElement( const Profile *profile, const std::string ressource_type, const std::string ressource_name);
 };
 
 extern ResourceManager resource_manager;

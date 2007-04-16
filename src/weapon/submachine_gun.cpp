@@ -19,7 +19,7 @@
  * Submachine gun. Don't fire bullet one by one but with burst fire (like
  * a submachine gun :)
  * The hack in order to firing multiple bullet at once consist in using a
- * std::list of projectile and override the Refresh and the management of the keys
+ * std::list of projectile and overide the Refresh & HandleKeyEvent methods.
  *****************************************************************************/
 
 #include <sstream>
@@ -60,8 +60,8 @@ void SubMachineGunBullet::ShootSound()
 SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", new ExplosiveWeaponConfig())
 {
   m_name = _("Submachine Gun");
-  m_category = RIFLE;
 
+  override_keys = true ;
   ignore_collision_signal = true;
   ignore_explosion_signal = true;
   ignore_ghost_state_signal = true;
@@ -88,8 +88,11 @@ void SubMachineGun::IncMissedShots()
   WeaponLauncher::IncMissedShots();
 }
 
-bool SubMachineGun::p_Shoot()
+bool SubMachineGun::p_Shoot ()
 {
+  if (m_is_active)
+    return false;
+
   projectile->Shoot(SUBMACHINE_BULLET_SPEED);
   projectile = NULL;
   ReloadLauncher();
@@ -100,48 +103,40 @@ bool SubMachineGun::p_Shoot()
   particle.AddNow(pos, 1, particle_BULLET, true, angle,
   	                   5.0 + (Time::GetInstance()->Read() % 6));
 
+  m_is_active = true;
   announce_missed_shots = false;
   return true;
-}
-
-void SubMachineGun::p_Deselect()
-{
-  m_is_active = false;
 }
 
 // Overide regular Refresh method
 void SubMachineGun::RepeatShoot()
 {
-  uint tmp = Time::GetInstance()->Read();
-  uint time = tmp - m_last_fire_time;
+  if ( m_is_active )
+  {
+    uint tmp = Time::GetInstance()->Read();
+    uint time = tmp - m_last_fire_time;
 
-  if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
+    if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
     {
-      NewActionWeaponShoot();
+      m_is_active = false;
+      NewActionShoot();
       m_last_fire_time = tmp;
     }
-}
-
-void SubMachineGun::SignalTurnEnd()
-{
-  // It's too late !
-  m_is_active = false;
-}
-
-void SubMachineGun::HandleKeyPressed_Shoot()
-{
-  HandleKeyRefreshed_Shoot();
-}
-
-void SubMachineGun::HandleKeyRefreshed_Shoot()
-{
-  if (EnoughAmmoUnit()) {
-    RepeatShoot();
   }
 }
 
-void SubMachineGun::HandleKeyReleased_Shoot()
+// Special handle to allow multiple shoot at a time
+void SubMachineGun::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
-  m_is_active = false;
+  switch (action) {
+    case Action::ACTION_SHOOT:
+      if (event_type == Keyboard::KEY_REFRESH)
+        m_is_active = true;
+      if (event_type ==  Keyboard::KEY_RELEASED)
+        m_is_active = false;
+      if (m_is_active) RepeatShoot();
+      break;
+    default:
+      break;
+  };
 }
-

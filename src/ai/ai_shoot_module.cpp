@@ -78,12 +78,12 @@ bool AIShootModule::IsDirectlyShootable(const Character& shooter,
   while (pos != arrival) {
 
     // is there a collision on the ground ??
-    if ( !world.IsInVacuum(pos.x, pos.y) ) {
+    if ( !world.EstDansVide(pos.x, pos.y) ) {
       return false;
     }
 
     // the point is outside the map
-    if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) {
+    if ( world.EstHorsMondeX(pos.x) || world.EstHorsMondeY(pos.y) ) {
       break;
     }
 
@@ -170,10 +170,10 @@ bool AIShootModule::SelectFiringWeapon(double shoot_angle) const
 // Try to find an enemy which is shootable by
 // weapons like dynamite, mine, ...
 // =================================================
-const Character* AIShootModule::FindProximityEnemy(const Character& shooter) const
+const Character* AIShootModule::FindProximityEnemy(const Character& shooter)
 {
   FOR_ALL_LIVING_ENEMIES(shooter, team, character) {
-    if ( m_AIMovementModule.SeemsToBeReachable(shooter, *character) ) {
+    if ( AIMovementModule::SeemsToBeReachable(shooter, *character) ) {
       return &(*character);
     }
   }
@@ -223,7 +223,8 @@ void AIShootModule::Shoot()
 {
   if (m_current_time > m_last_shoot_time + 2 ||
       m_last_shoot_time == 0) {
-    ActiveTeam().GetWeapon().NewActionWeaponShoot();
+    ActiveTeam().GetWeapon().NewActionShoot();
+    std::cout << "Shoot ! (" << m_current_time << ")" << std::endl;
     m_last_shoot_time = m_current_time;
   }
 
@@ -288,14 +289,11 @@ void AIShootModule::ChooseDirection()
 {
   if ( m_enemy ) {
 
-    if ( abs(ActiveCharacter().GetCenterX() - m_enemy->GetCenterX()) <= 5 )
-      return;
-
     if ( ActiveCharacter().GetCenterX() < m_enemy->GetCenterX())
       ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-    else if ( ActiveCharacter().GetCenterX() > m_enemy->GetCenterX())
+    else
       ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-    // else ActiveCharacter().GetCenterX() == m_enemy->GetCenterX()
+
   }
 }
 
@@ -315,7 +313,7 @@ bool AIShootModule::Refresh(uint current_time)
   case NO_STRATEGY:
     //ActiveTeam().SetWeapon(Weapon::WEAPON_SKIP_TURN);
     //Shoot();
-    //break;
+    break;
 
   case NEAR_FROM_ENEMY:
     // We are near enough of an enemy (perhaps not the first one we have choosen)
@@ -358,12 +356,7 @@ void AIShootModule::BeginTurn()
   ActiveCharacter().SetDirection( randomSync.GetBool()?Body::DIRECTION_LEFT:Body::DIRECTION_RIGHT );
 }
 
-AIShootModule::AIShootModule(const AIMovementModule& to_remove) : m_AIMovementModule(to_remove)
+AIShootModule::AIShootModule()
 {
   std::cout << "o Artificial Intelligence Shoot module initialization" << std::endl;
-}
-
-void AIShootModule::SetNoStrategy()
-{
-  m_current_strategy = NO_STRATEGY;
 }

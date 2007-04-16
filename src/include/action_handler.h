@@ -52,28 +52,20 @@ private:
 public:
   static ActionHandler * GetInstance();
 
-  void NewAction(Action* a, bool repeat_to_network=true);
-  void NewActionActiveCharacter(Action* a); // send infos (on the network) about active character in the same time
-
-  void ExecActions();
+  void NewAction (Action* a, bool repeat_to_network=true);
+  void ExecActions ();
   std::string GetActionName(Action::Action_t action);
 
 private:
   ActionHandler();
 
-  void Exec(Action *a);
-  void Register(Action::Action_t action, const std::string &name, callback_t fct);
+  void Exec (Action *a);
+  void Register (Action::Action_t action, const std::string &name, callback_t fct);
 };
 
-// TODO: Move it in an object !
-
-void SendCharacterInfo(int team_no, int char_no);// Send character information over the network (it's totally stupid to send it locally ;-)
-void SendActiveCharacterInfo();
-
+Action* BuildActionSendCharacterPhysics(int team_no, int char_no);
 void SendGameMode();
 void SyncCharacters();
-
-
 
 //-----------------------------------------------------------------------------
 #endif

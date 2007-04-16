@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Display a message on the game screen, and asks a question in the game or wait
- * at least for the player to press a key.
+ * Affiche un message dans le jeu, puis pose une question dans le jeu ou
+ * attend au moins la pression d'une touche.
  *****************************************************************************/
 
 #ifndef QUESTION_H
@@ -34,11 +34,6 @@
 
 class Question
 {
-  /* If you need this, implement it (correctly)*/
-  Question(const Question&);
-  Question operator=(const Question&);
-  /*********************************************/
-
   Sprite* background;
 
   // A choice = a key return a value
@@ -48,8 +43,8 @@ class Question
       int m_key;
       int m_val;
     public:
-      choice_t (int key, int value):
-        m_key(key), m_val(value) { };
+      choice_t (int key, int value)
+      { m_key = key; m_val = value; };
       inline const int & key() const { return m_key; };
       inline const int & val() const { return m_val; };
   };

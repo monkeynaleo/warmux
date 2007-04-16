@@ -35,7 +35,7 @@
 #include "../tool/resource_manager.h"
 
 Ground::Ground()
-{ //FIXME (to erase)
+{ //FIXME (a effacer)
 }
 
 void Ground::Init(){
@@ -46,12 +46,12 @@ void Ground::Init(){
   Surface m_image = ActiveMap().ReadImgGround();
   LoadImage ( m_image );
 
-  // Check the size of the map
+  // V�ifie la taille du terrain
   assert(Constants::MAP_MIN_SIZE <= GetSize());
   assert(GetSizeX()*GetSizeY() <= Constants::MAP_MAX_SIZE);
 
-  // Check if the map is "opened"
-  open = ActiveMap().IsOpened();
+  // V�ifie si c'est un terrain ouvert ou ferm�
+  ouvert = ActiveMap().IsOpened();
 
   std::cout << _("done") << std::endl;
 }
@@ -61,10 +61,11 @@ void Ground::Reset(){
   lastPos.SetValues(INT_MAX, INT_MAX);
 }
 
-// Read the alpha channel of the pixel
-bool Ground::IsEmpty(const Point2i &pos) const{
-	assert( !world.IsOutsideWorldXY(pos.x, pos.y) );
+// Lit la valeur alpha du pixel (x,y)
+bool Ground::IsEmpty(const Point2i &pos){
+	assert( !world.EstHorsMondeXY(pos.x, pos.y) );
 
+	// Lit le monde
 	return GetAlpha( pos ) != 255; // IsTransparent
 }
 
@@ -75,8 +76,9 @@ bool Ground::IsEmpty(const Point2i &pos) const{
  * returns -1.0 if no tangent was found (pixel (x,y) does not touch any
  * other piece of ground
  */
-double Ground::Tangent(int x,int y){
-  //Approximation : returns the chord instead of the tangent to the ground
+double Ground::Tangeante(int x,int y){
+  //Approxiamtion : on renvoie la corde de la courbe form�
+  //par le terrain...
 
   /* We try to find 2 points on the ground on each side of (x,y)
    * the points should be at the limit between land and vaccum
@@ -92,53 +94,39 @@ double Ground::Tangent(int x,int y){
     p2.x = x;
     p2.y = y;
   }
-/*
+
   if(p1.x == p2.x)
     return M_PI / 2.0;
   if(p1.y == p2.y)
     return M_PI;
-*/
-  //assert (p1.x != p2.x);
 
-  /* double tangeante = atan((double)(p2.y-p1.y)/(double)(p2.x-p1.x));
+  assert (p1.x != p2.x);
+
+  double tangeante = atan((double)(p2.y-p1.y)/(double)(p2.x-p1.x));
 
   while(tangeante <= 0.0)
     tangeante += M_PI;
   while(tangeante > 2 * M_PI)
     tangeante -= M_PI;
 
-  return tangeante; */
-
-  //calculated with a good old TI-83... using table[a][b] = atan( (a-2) / (b-2) )
-  const float table[5][5] = {
-    {.78539,		.46364,		M_PI,		-.46364+M_PI,	-.78539+M_PI},
-    {1.1071,		.78539,		M_PI,		-.78539+M_PI,	-1.1071+M_PI},
-    {M_PI/2.0,		M_PI/2.0,	M_PI/2.0,	M_PI/2.0,	M_PI / 2.0},
-    {-1.1071+M_PI,	 -.78539+M_PI,  M_PI,		78539,		1.1071},
-    {-.78539+M_PI,	-.46364+M_PI,	M_PI,		.46364,		.78539}};
-
-  assert(p2.x-p1.x >= -2 && p2.x-p1.x <= 2);
-  assert(p2.y-p1.y >= -2 && p2.y-p1.y <= 2);
-
-  return table[(p2.y-p1.y)+2][(p2.x-p1.x)+2];
+  return tangeante;
 }
 
 bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
-                           int bad_x,int bad_y)
+                           int pas_bon_x,int pas_bon_y)
 {
-  //Look for a pixel around (x,y) that is at the edge of the ground
-  //and vaccum
-  //return true (and set p_x and p_y) if this point have been found
-  if(world.IsOutsideWorld(Point2i(x-1,y))
-  || world.IsOutsideWorld(Point2i(x+1,y))
-  || world.IsOutsideWorld(Point2i(x,y-1))
-  || world.IsOutsideWorld(Point2i(x,y+1)) )
+  //Cherche un pixel autour du pixel(x,y) qui est �la limite entre
+  //le terrin et le vide.
+  //renvoie true (+ p_x et p_y) si on a trouv�qqch, sinon false
+  if(world.EstHorsMonde(Point2i(x-1,y))
+  || world.EstHorsMonde(Point2i(x+1,y))
+  || world.EstHorsMonde(Point2i(x,y-1))
+  || world.EstHorsMonde(Point2i(x,y+1)) )
     return false;
 
-  // check adjacents pixels one by one:
-  //upper right pixel
-  if(x-1 != bad_x
-  || y-1 != bad_y)
+  //regarde en haut �gauche
+  if(x-1 != pas_bon_x
+  || y-1 != pas_bon_y)
   if( !IsEmpty(Point2i(x-1,y-1) )
   &&( IsEmpty(Point2i(x-1,y))
   || IsEmpty(Point2i(x,y-1))))
@@ -147,9 +135,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y-1;
     return true;
   }
-  //upper pixel
-  if(x != bad_x
-  || y-1 != bad_y)
+  //regarde en haut
+  if(x != pas_bon_x
+  || y-1 != pas_bon_y)
   if(!IsEmpty(Point2i(x,y-1))
   &&(IsEmpty(Point2i(x-1,y-1))
   || IsEmpty(Point2i(x+1,y-1))))
@@ -158,9 +146,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y-1;
     return true;
   }
-  //upper right pixel
-  if(x+1 != bad_x
-  || y-1 != bad_y)
+  //regarde en haut �droite
+  if(x+1 != pas_bon_x
+  || y-1 != pas_bon_y)
   if(!IsEmpty(Point2i(x+1,y-1))
   &&(IsEmpty(Point2i(x,y-1))
   || IsEmpty(Point2i(x+1,y))))
@@ -169,9 +157,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y-1;
     return true;
   }
-  //pixel at the right
-  if(x+1 != bad_x
-  || y != bad_y)
+  //regarde �droite
+  if(x+1 != pas_bon_x
+  || y != pas_bon_y)
   if(!IsEmpty(Point2i(x+1,y))
   &&(IsEmpty(Point2i(x+1,y-1))
   || IsEmpty(Point2i(x,y+1))))
@@ -180,9 +168,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y;
     return true;
   }
-  //bottom right pixel
-  if(x+1 != bad_x
-  || y+1 != bad_y)
+  //regarde en bas �droite
+  if(x+1 != pas_bon_x
+  || y+1 != pas_bon_y)
   if(!IsEmpty(Point2i(x+1,y+1))
   &&(IsEmpty(Point2i(x+1,y))
   || IsEmpty(Point2i(x,y+1))))
@@ -191,9 +179,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y+1;
     return true;
   }
-  //bottom pixel
-  if(x != bad_x
-  || y+1 != bad_y)
+  //regarde en bas
+  if(x != pas_bon_x
+  || y+1 != pas_bon_y)
   if(!IsEmpty(Point2i(x,y+1))
   &&(IsEmpty(Point2i(x-1,y+1))
   || IsEmpty(Point2i(x+1,y+1))))
@@ -202,9 +190,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y+1;
     return true;
   }
-  //bottom left pixel
-  if(x-1 != bad_x
-  || y+1 != bad_y)
+  //regarde en bas �gauche
+  if(x-1 != pas_bon_x
+  || y+1 != pas_bon_y)
   if(!IsEmpty(Point2i(x-1,y+1))
   &&(IsEmpty(Point2i(x-1,y))
   || IsEmpty(Point2i(x,y+1))))
@@ -213,9 +201,9 @@ bool Ground::PointContigu(int x,int y,  int & p_x,int & p_y,
     p_y=y+1;
     return true;
   }
-  //pixel at left
-  if(x-1 == bad_x
-  && y == bad_y)
+  //regarde �gauche
+  if(x-1 == pas_bon_x
+  && y == pas_bon_y)
   if(!IsEmpty(Point2i(x-1,y))
   &&(IsEmpty(Point2i(x-1,y-1))
   || IsEmpty(Point2i(x-1,y+1))))

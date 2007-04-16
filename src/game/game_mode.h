@@ -31,7 +31,7 @@
 class GameMode
 {
 public:
-  uint nb_characters;
+  uint max_characters;
   uint max_teams;
   uint duration_turn;
   uint duration_move_player;
@@ -69,39 +69,19 @@ public:
 
 private:
   std::string m_current;
-
-  XmlReader doc_objects;
-
-  bool LoadXml (xmlpp::Element *xml);
-  bool ExportFileToString(const std::string& filename, std::string& contents) const;
-
-  std::string GetFilename() const;
-  std::string GetObjectsFilename() const;
+  static GameMode * singleton;
 
 public:
   static GameMode * GetInstance();
 
-  const std::string& GetName() const;
-
-  bool Load(void);
-
-  // mode: xml text of data/game_mode/<mode>.xml
-  // mode_objects: xml text of data/game_mode/<mode>_objects.xml
-  bool LoadFromString(const std::string& game_mode_name,
-		      const std::string& mode,
-		      const std::string& mode_objects);
-
-  bool ExportToString(std::string& mode,
-		      std::string& mode_objects) const;
-
-  XmlReader& GetXmlObjects(); // for object_cfg
-
+  bool Load(const std::string &mode);
   bool AllowCharacterSelection() const;
 
 private:
-  static GameMode * singleton;
   GameMode();
 
+protected:
+  bool LoadXml (xmlpp::Element *xml);
 };
 
 #endif /* GAME_MODE_H */

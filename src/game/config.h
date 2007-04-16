@@ -18,13 +18,6 @@
  ******************************************************************************
  * Configuration of Wormux : store game config of every tunable variable of Wormux.
  * Vars have a default value and can be change with the file configuration.
- * This object aims to become the only place where the XML is read and/or
- * written. It is handled as a singleton pattern whereas one doesn't really
- * care when the XML config file is loaded, but when it was actually read, this
- * is useless to load it again.
- * On the other hand, this objet is not designed to handle any other
- * information whereas it is nothing but a shell around the XML config file
- * created to be able to handle config data easily.
  *****************************************************************************/
 
 #ifndef CONFIG_H
@@ -35,6 +28,8 @@
 #include "../include/base.h"
 #include "../team/team_config.h"
 #include "../tool/xml_document.h"
+#include "../interface/keyboard.h"
+#include "../weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)
 #define PATH_SEPARATOR "\\"
@@ -54,49 +49,26 @@ public:
   static const int COLORKEY = 1;
 
   bool GetDisplayEnergyCharacter() const;
-  void SetDisplayEnergyCharacter(const bool dec);
+  void SetDisplayEnergyCharacter(bool dec);
 
   bool GetDisplayNameCharacter() const;
-  void SetDisplayNameCharacter(const bool dnc);
+  void SetDisplayNameCharacter(bool dnc);
 
   bool GetDisplayWindParticles() const;
   void SetDisplayWindParticles(bool dwp);
 
   bool GetDefaultMouseCursor() const;
-  void SetDefaultMouseCursor(const bool dmc);
+  void SetDefaultMouseCursor(bool dmc);
 
   bool GetScrollOnBorder() const;
-  void SetScrollOnBorder(const bool sob);
+  void SetScrollOnBorder(bool sob);
 
   bool IsNetworkActivated() const;
-  void SetNetworkActivated(const bool set_net);
-
-  bool IsVideoFullScreen() const;
-  void SetVideoFullScreen(const bool set_fullscreen);
-
-  uint GetVideoWidth() const;
-  void SetVideoWidth(const uint width);
-
-  uint GetVideoHeight() const;
-  void SetVideoHeight(const uint height);
-
-  inline uint GetMaxFps() const { return max_fps; };
-
-  bool GetSoundMusic() const;
-  void SetSoundMusic(const bool music);
-
-  bool GetSoundEffects() const;
-  void SetSoundEffects(const bool effects);
-
-  uint GetSoundFrequency() const;
-  void SetSoundFrequency(const uint freq);
-
-  std::list<struct ConfigTeam> & AccessTeamList();
-  const std::string & GetMapName() const;
-  inline void SetMapName(const std::string& new_name)
-  { map_name = new_name; }
 
   int GetTransparency() const;
+
+  inline Keyboard * GetKeyboard() { return my_keyboard; }
+  inline WeaponsList * GetWeaponsList() { return my_weapons_list; }
 
   std::string GetTtfFilename() const;
 
@@ -104,13 +76,32 @@ public:
   std::string GetLocaleDir() const;
   std::string GetPersonalDir() const;
 
-  static Config * GetInstance();
+  // Tempory values (loaded from XML, but may change during running)
+  struct tmp_xml_config{
+    struct tmp_xml_net{
+      bool enable_network;
+    } network;
+    struct tmp_xml_screen{
+      int width,height;
+      bool fullscreen;
+    } video;
+    struct tmp_xml_sound{
+      bool music;
+      bool effects;
+      uint frequency;
+    } sound;
+    std::list<struct ConfigTeam> teams;
+    std::string map_name;
+  } tmp;
 
+  static Config * GetInstance();
+// bool Load();
+  void Apply();
   bool Save();
-  inline const std::string &GetGameMode() const { return m_game_mode; };
 
 protected:
   bool LoadXml(xmlpp::Element *xml);
+  void SetKeyboardConfig();
   bool SaveXml();
   std::string GetEnv(const std::string & name, const std::string &default_value);
 
@@ -120,32 +111,20 @@ protected:
 
   std::string data_dir, locale_dir, personal_dir;
 
-  std::list<struct ConfigTeam> teams;
-  std::string map_name;
-  // Game settings
   bool display_energy_character;
   bool display_name_character;
   bool display_wind_particles;
   bool default_mouse_cursor;
   bool scroll_on_border;
-  // Video settings
-  uint video_width;
-  uint video_height;
-  bool video_fullscreen;
-  uint max_fps;
-  // Sound settings
-  bool sound_music;
-  bool sound_effects;
-  uint sound_frequency;
-  // network
-  bool enable_network;
-
   std::string ttf_filename;
 
   int transparency;
 
 private:
   Config();
+  // In french Clavier = keyboard
+  Keyboard * my_keyboard;
+  WeaponsList * my_weapons_list;
   static Config * singleton;
   bool DoLoading(void);
 };

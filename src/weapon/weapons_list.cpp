@@ -35,30 +35,25 @@
 
 //-----------------------------------------------------------------------------
 
-WeaponsList * weapon_list = NULL;
-
-WeaponsList * WeaponsList::GetInstance()
-{
-  if (weapon_list == NULL) {
-    weapon_list = new WeaponsList();
-  }
-  weapon_list->ref_counter++;
-  return weapon_list;
-}
-
 WeaponsList::~WeaponsList()
 {
-  ref_counter--;
-  /* we can delete the list iif nobody has an instance somewhere */
-  if (ref_counter == 0)
-    {
-      weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
-      for (; it != end; ++it)
-        {
-          delete *it;
-        }
-      weapon_list = NULL;
-    }
+  weapons_list_it it=m_weapons_list.begin(), end=m_weapons_list.end();
+  for (; it != end; ++it)
+  {
+    delete *it;
+  }
+}
+
+//-----------------------------------------------------------------------------
+
+void WeaponsList::AddToList(Weapon* arme, uint num_sort)
+{
+  // insert the pointer
+  m_weapons_list.push_back(arme);
+
+  m_weapons_map.insert(keybind(num_sort, arme));
+
+  Interface::GetInstance()->weapons_menu.NewItem(arme,num_sort);
 }
 
 //-----------------------------------------------------------------------------
@@ -66,38 +61,76 @@ WeaponsList::~WeaponsList()
 WeaponsList::WeaponsList()
 {
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
-  m_weapons_list.push_back(new Bazooka);
-  m_weapons_list.push_back(new SubMachineGun);
-  m_weapons_list.push_back(new Gun);
-  m_weapons_list.push_back(new Shotgun);
-  m_weapons_list.push_back(new SnipeRifle);
-  m_weapons_list.push_back(new RiotBomb);
-  m_weapons_list.push_back(new AutomaticBazooka);
-  m_weapons_list.push_back(new Dynamite);
-  m_weapons_list.push_back(new GrenadeLauncher);
-  m_weapons_list.push_back(new DiscoGrenadeLauncher);
-  m_weapons_list.push_back(new ClusterLauncher);
-  m_weapons_list.push_back(new Baseball);
-  m_weapons_list.push_back(new Mine);
-  m_weapons_list.push_back(new AirAttack);
-  m_weapons_list.push_back(new AnvilLauncher);
-  m_weapons_list.push_back(new TuxLauncher);
-  m_weapons_list.push_back(new GnuLauncher);
-  m_weapons_list.push_back(new PolecatLauncher);
-  m_weapons_list.push_back(new BounceBallLauncher);
-  m_weapons_list.push_back(new Teleportation);
-  m_weapons_list.push_back(new Parachute);
-  m_weapons_list.push_back(new Suicide);
-  m_weapons_list.push_back(new SkipTurn);
-  m_weapons_list.push_back(new JetPack);
-  m_weapons_list.push_back(new Airhammer);
-  m_weapons_list.push_back(new Construct);
-  m_weapons_list.push_back(new LowGrav);
-  m_weapons_list.push_back(new NinjaRope);
-  m_weapons_list.push_back(new Blowtorch);
-  m_weapons_list.push_back(new Syringe);
+  Bazooka* bazooka = new Bazooka;
+  SubMachineGun* submachine_gun = new SubMachineGun;
+  Gun* gun = new Gun;
+  Shotgun* shotgun = new Shotgun;
+  SnipeRifle* snipe_rifle = new SnipeRifle;
+  RiotBomb* riot_bomb = new RiotBomb;
+  AutomaticBazooka* auto_bazooka = new AutomaticBazooka;
+  Dynamite* dynamite = new Dynamite;
+  GrenadeLauncher* grenade_launcher = new GrenadeLauncher;
+  DiscoGrenadeLauncher* disco_grenade_launcher = new DiscoGrenadeLauncher;
+  ClusterLauncher* cluster_launcher = new ClusterLauncher;
+  Baseball* baseball = new Baseball;
+  Mine* mine = new Mine;
+  AirAttack* air_attack = new AirAttack;
+  AnvilLauncher* anvil = new AnvilLauncher;
+  TuxLauncher* tux = new TuxLauncher;
+  GnuLauncher* gnu_launcher = new GnuLauncher;
+  PolecatLauncher* polecat_launcher = new PolecatLauncher;
+  BounceBallLauncher* bounce_ball_launcher = new BounceBallLauncher;
+  Teleportation* teleportation = new Teleportation;
+  Parachute* parachute = new Parachute;
+  Suicide* suicide = new Suicide;
+  SkipTurn* skipturn = new SkipTurn;
+  JetPack* jetpack = new JetPack;
+  Airhammer* airhammer = new Airhammer;
+  Construct* construct = new Construct;
+  LowGrav* lowgrav = new LowGrav;
+  NinjaRope* ninjarope = new NinjaRope;
+  Blowtorch* blowtorch = new Blowtorch;
+  Syringe* syringe = new Syringe;
 
-  ref_counter = 0;
+  // Category 1
+  AddToList(bazooka, 1);
+  AddToList(submachine_gun, 1);
+  AddToList(snipe_rifle, 1);
+  AddToList(gun, 1);
+  AddToList(shotgun, 1);
+  AddToList(riot_bomb, 1);
+  AddToList(auto_bazooka, 1);
+
+  // Category 2
+  AddToList(dynamite,2);
+  AddToList(grenade_launcher, 2);
+  AddToList(cluster_launcher, 2);
+  AddToList(disco_grenade_launcher, 2);
+  AddToList(mine,2);
+
+  // Category 3
+  AddToList(baseball, 3);
+  AddToList(syringe,3);
+  AddToList(tux,3);
+  AddToList(gnu_launcher,3);
+  AddToList(polecat_launcher,3);
+  AddToList(air_attack,3);
+  AddToList(anvil,3);
+  AddToList(bounce_ball_launcher,3);
+
+  // Category 4
+  AddToList(ninjarope,4);
+  AddToList(jetpack,4);
+  AddToList(parachute,4);
+  AddToList(teleportation,4);
+  AddToList(lowgrav,4);
+
+  // Category 5
+  AddToList(skipturn,5);
+  AddToList(airhammer,5);
+  AddToList(construct,5);
+  AddToList(blowtorch,5);
+  AddToList(suicide,5);
 }
 
 //-----------------------------------------------------------------------------
@@ -114,64 +147,61 @@ WeaponsList::weapons_list_type& WeaponsList::GetList()
   return m_weapons_list;
 }
 
+//-----------------------------------------------------------------------------
+
+Weapon* WeaponsList::GetNextWeapon(uint sort, uint index)
+{
+	uint n = m_weapons_map.count(sort);
+	index = index % n;  // index can't be greater than number of weapons
+	weapons_map_it it = m_weapons_map.lower_bound(sort);
+
+	if(index + 1 < n)
+	{
+		for(uint i=0; i < index + 1; i++)
+			it++;
+	}
+
+	return it->second;
+}
 
 //-----------------------------------------------------------------------------
 
-bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &type)
+bool WeaponsList::GetWeaponBySort(uint sort, Weapon::Weapon_type &type)
 {
-  weapons_list_it it, end=m_weapons_list.end();
+  uint nb_weapons = m_weapons_map.count(sort);
+  if (nb_weapons == 0) return false;
 
-  /* find the current position */
-  it = find(m_weapons_list.begin(),
-            m_weapons_list.end(),
-            &ActiveTeam().GetWeapon());
+  // One or many weapons on this key
+  std::pair<weapons_map_it, weapons_map_it> p = m_weapons_map.equal_range(sort);
+  weapons_map_it it = p.first, end = p.second;
 
-  /* if the current weapon match the criteria */
-  if (it != end && ActiveTeam().GetWeapon().Category() == sort)
+  Weapon* next_weapon = it->second;
+
+  if (nb_weapons > 1)
     {
-      /* try to find the next weapon matching our criteria */
-      do {
-        ++it;
-      } while(it != end
-              && ((*it)->Category() != sort
-                  || ActiveTeam().ReadNbAmmos((*it)->GetName()) == 0
-                  || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap().IsOpened()))
-              );
+    	// Find index of current weapon
+    	uint current_weapon;
+    	for(current_weapon=0; current_weapon < nb_weapons-1; current_weapon++, it++)
+	{
+		if(it->second == &(ActiveTeam().GetWeapon()))
+			break;
+	}
 
-      /* Ok, a weapon was found let's return it */
-      if (it != end && (*it)->Category() == sort)
-        {
-          type = (*it)->GetType();
-          return true;
-        }
-    }
-  /* we didn't find a valid weapon after the current one ; lets wrap:
-   * restart from the begining and try to find the first one matching
-   * our criteria */
-  it = m_weapons_list.begin();
-  while(it != end && (*it)->Category() != sort)
-    ++it;
+	// Get next weapon that has enough ammo and can be used on the map
+	uint i = 0;
+	do
+	{
+		next_weapon = GetNextWeapon(sort, current_weapon++);
+	} while(i++ < nb_weapons && (ActiveTeam().ReadNbAmmos(next_weapon->GetName()) == 0 || !(next_weapon->CanBeUsedOnClosedMap() || ActiveMap().IsOpened())));
+	// this corresponds to:  while (stop-condition && (not-enoughammo || not-usable-on-map))
 
-  /* no weapon of this sort was found -> give up... */
-  if (it == end)
-    return false;
-
-  /* try to find the next weapon matching our criteria */
-  while(it != end
-      && ((*it)->Category() != sort
-        || ActiveTeam().ReadNbAmmos((*it)->GetName()) == 0
-        || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap().IsOpened())))
-    ++it;
-
-  /* Ok, a weapon was found let's return it if it is not the one active */
-  if (it != end && (*it)->Category() == sort && (*it) != &ActiveTeam().GetWeapon())
-    {
-      type = (*it)->GetType();
-      return true;
+	// no right weapon has been found
+	if(i > nb_weapons)
+		return false;
     }
 
-  /* we definitly found nothing... */
-  return false;
+  type = next_weapon->GetType();
+  return true;
 }
 
 //-----------------------------------------------------------------------------

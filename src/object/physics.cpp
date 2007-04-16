@@ -253,11 +253,6 @@ void Physics::SetExternForceXY (Point2d vector)
     StartMoving();
 }
 
-Point2d Physics::GetExternForce() const
-{
-  return m_extern_force;
-}
-
 // Set fixation point positions
 void Physics::SetPhysFixationPointXY(double g_x, double g_y, double dx,
 				     double dy)
@@ -340,26 +335,15 @@ void Physics::ChangePhysRopeSize(double dl)
   if (!was_moving && IsMoving()) StartMoving();
 }
 
-double Physics::GetRopeAngle() const
+double Physics::GetRopeAngle()
 {
   return m_rope_angle.x0 ;
 }
 
-void Physics::SetRopeAngle(double angle)
-{
-  m_rope_angle.x0 = angle;
-}
-
-double Physics::GetRopeLength() const
+double Physics::GetRopeLength()
 {
   return m_rope_length.x0;
 }
-
-void Physics::SetRopeLength(double length)
-{
-  m_rope_length.x0 = length;
-}
-
 
 //---------------------------------------------------------------------------//
 //--                            Physical Simulation                        --//

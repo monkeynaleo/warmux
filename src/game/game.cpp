@@ -16,7 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Init the game, handle drawing and states of the game.
+ * Classe principale qui gêre le jeu : initialisation, dessin, gestion
+ * des différents composants, et boucle de jeu.
  *****************************************************************************/
 
 #include "game.h"
@@ -35,9 +36,7 @@
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
-#include "../map/maps_list.h"
 #include "../menu/results_menu.h"
-#include "../network/network.h"
 #include "../object/objects_list.h"
 #include "../sound/jukebox.h"
 #include "../team/macro.h"
@@ -61,12 +60,13 @@ Game * Game::GetInstance()
 Game::Game()
 {
   isGameLaunched = false;
-  want_end_of_game = false;
+  endOfGameStatus = false;
+  isGamePaused = false;
 }
 
 bool Game::IsGameFinished() const
 {
-  return (NbrRemainingTeams() <= 1 || want_end_of_game );
+  return (NbrRemainingTeams() <= 1);
 }
 
 int Game::NbrRemainingTeams() const
@@ -115,53 +115,51 @@ void Game::MessageEndOfGame() const
 
 int Game::AskQuestion (Question &question, bool draw)
 {
-  Time::GetInstance()->Pause();
+  Time * global_time = Time::GetInstance();
+  global_time->Pause();
 
   if (draw)
     GameLoop::GetInstance()->Draw ();
 
   int answer = question.Ask ();
 
-  Time::GetInstance()->Continue();
+  global_time->Continue();
   return answer;
 }
 
 void Game::Start()
 {
-  bool err = true;
-  bool end = false;
+  bool err=true;
+  bool end;
   std::string err_msg;
-  want_end_of_game = false;
 
   try
   {
-    jukebox.PlayMusic(ActiveMap().ReadMusicPlaylist());
+
+    jukebox.PlayMusic("ingame");
     GameLoop::GetInstance()->Init ();
 
     do
     {
       isGameLaunched = true;
+      GameLoop::GetInstance()->fps.Reset();
+
       GameLoop::GetInstance()->Run();
 
       MSG_DEBUG( "game", "End of game_loop.Run()" );
       isGameLaunched = false;
 
-      if (Time::GetInstance()->IsGamePaused()){
-        DisplayPause();
-      } else {
-        if (want_end_of_game)
-          end = DisplayQuit();
-        else
-          end = true;
-      }
-
-      if (!end)
+      if (!IsGameFinished())
       {
-        world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
-	Keyboard::GetInstance()->Reset();
-	ActiveCharacter().StopPlaying();
-	want_end_of_game = false;
+	if (isGamePaused){
+	  DisplayPause();
+	} else {
+	  end = DisplayQuit();
+	}
       }
+      
+      if (!end)
+	world.ToRedrawOnScreen(Rectanglei(Point2i(0,0),AppWormux::GetInstance()->video.window.GetSize()));
 
     } while (!end);
     err = false;
@@ -172,18 +170,7 @@ void Game::Start()
   }
 
   if (!err)
-  // * When debug is disabled : only show the result menu if game
-  // have 'regularly' finished (only one survivor or timeout reached)
-  // * When debug is disabled : still show the result menu everytime the game
-  // is quit during local games (so we can still the result menu often).
-  // For network game only show the result if the game is regularly finished
-  // (elsewise when someone if someone quit the game before the end, it appears
-  // as disconnected only when if finnishes viewing the f*cking result menu)
-#ifndef DEBUG
-  if (IsGameFinished() && !want_end_of_game)
-#else
-  if (IsGameFinished() && (!want_end_of_game || Network::GetInstance()->IsLocal()))
-#endif
+    if (IsGameFinished())
       MessageEndOfGame();
 
   UnloadDatas();
@@ -209,29 +196,27 @@ void Game::UnloadDatas()
   jukebox.StopAll();
 }
 
-void Game::TogglePause()
+void Game::Pause()
 {
-  if(Time::GetInstance()->IsGamePaused())
-    Time::GetInstance()->Continue();
-  else 
-    Time::GetInstance()->Pause();
+  isGamePaused = true;
 }
 
 void Game::DisplayPause()
 {
   Question question;
-  if(!Network::GetInstance()->IsLocal())
+  if(!network.IsLocal())
     return;
 
   jukebox.Pause();
 
   //Pause screen
   question.Set ("", false, 0, "interface/pause_screen");
-  question.add_choice(Keyboard::GetInstance()->GetKeyAssociatedToAction(Keyboard::KEY_PAUSE),
+  question.add_choice(Config::GetInstance()->GetKeyboard()->GetKeyAssociatedToAction(Action::ACTION_PAUSE),
 		      1
 		      );
   AskQuestion(question, false);
   jukebox.Resume();
+  isGamePaused = false;
 }
 
 bool Game::DisplayQuit()
@@ -251,10 +236,10 @@ bool Game::DisplayQuit()
       abort();
     if (!isalpha(key_x)) /* sanity check */
       abort();
-
+    
     question.add_choice(SDLK_a + (int)key_x - 'a', 1);
   }
-
+  
   jukebox.Pause();
   bool exit = (AskQuestion(question) == 1);
   jukebox.Resume();
@@ -263,10 +248,17 @@ bool Game::DisplayQuit()
 }
 
 bool Game::IsGamePaused() const{
-  return Time::GetInstance()->IsGamePaused();
+  return isGamePaused;
 }
 
 bool Game::IsGameLaunched() const{
   return isGameLaunched;
 }
 
+bool Game::GetEndOfGameStatus() const{
+  return endOfGameStatus;
+}
+
+void Game::SetEndOfGameStatus(bool status){
+  endOfGameStatus = status;
+}

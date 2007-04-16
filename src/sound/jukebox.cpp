@@ -52,10 +52,6 @@ void JukeBox::Resume()
 
 void JukeBox::Init()
 {
-  jukebox.ActiveMusic(Config::GetInstance()->GetSoundMusic());
-  jukebox.ActiveEffects(Config::GetInstance()->GetSoundEffects());
-  jukebox.SetFrequency(Config::GetInstance()->GetSoundFrequency());
-
   if (!m_config.music && !m_config.effects) {
     End();
     return;
@@ -79,7 +75,8 @@ void JukeBox::Init()
     return;
   } else {
     Mix_QuerySpec(&m_config.frequency, &audio_format, &m_config.channels);
-    std::cout << Format(_("o Opened audio at %d Hz %d bit"), m_config.frequency, (audio_format&0xFF)) << std::endl;
+    std::cout << "o Opened audio at " << m_config.frequency <<" Hz "<< (audio_format&0xFF)
+	      <<" bit " << std::endl;
   }
   Mix_ChannelFinished(JukeBox::EndChunk);
   Mix_HookMusicFinished(JukeBox::EndMusic);
@@ -150,7 +147,7 @@ void JukeBox::LoadMusicXML()
 	  MSG_DEBUG("jukebox", "Music is already loaded !");
       return;
   }
-  std::cout << _("o Loading music") << std::endl;
+  std::cout << "o Loading music" << std::endl;
 
   XmlReader doc;
 
@@ -171,7 +168,7 @@ void JukeBox::LoadMusicXML()
 
   for (; it != fin; ++it)
     {
-      // loading XML ...
+      // lit le XML
       xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
       std::string sample="no_sample";
       std::string file="no_file";
@@ -180,7 +177,7 @@ void JukeBox::LoadMusicXML()
 
       MSG_DEBUG("jukebox", "Load music sample %s", sample.c_str());
 
-      // Load sound
+      // Charge le son
       std::string filename = folder + file;
       if( !IsFileExist(filename) ){
         std::cerr << "Music error: File " << filename.c_str()
@@ -251,7 +248,7 @@ void JukeBox::NextMusic()
    else if(!IsPlayingMusicSample())
       PlayMusic(playing_pl->first);
    else
-      EndMusic(); // next music but before, we stop the current one.
+      EndMusic(); // On passe à la musique suivante par l'arrêt de celle-ci
 }
 
 bool JukeBox::PlayMusic(const std::string& type)
@@ -319,7 +316,7 @@ void JukeBox::LoadXML(const std::string& profile)
 	  MSG_DEBUG("jukebox", "Profile %s is already loaded !", profile.c_str());
       return;
   }
-  std::cout << Format(_("o Loading sound profile: %s"), profile.c_str()) << std::endl;
+  std::cout << "o Loading sound profile " << profile << std::endl;
 
   XmlReader doc;
 
@@ -340,7 +337,7 @@ void JukeBox::LoadXML(const std::string& profile)
 
   for (; it != fin; ++it)
     {
-      // reads XML
+      // lit le XML
       xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
       std::string sample="no_sample";
       std::string file="no_file";
@@ -349,7 +346,7 @@ void JukeBox::LoadXML(const std::string& profile)
 
 	  MSG_DEBUG("jukebox", "Load sound sample %s/%s: %s", profile.c_str(), sample.c_str(), file.c_str());
 
-      // Load sound
+      // Charge le son
       std::string sample_filename = folder + file;
       if( !IsFileExist(sample_filename) ){
 	std::cerr << "Sound error: File " << sample_filename.c_str()

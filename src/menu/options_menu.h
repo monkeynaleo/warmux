@@ -28,23 +28,20 @@
 
 class OptionMenu : public Menu
 {
+  Font * normal_font;
+
 public:
-   OptionMenu();
+   OptionMenu(); 
    ~OptionMenu();
 
 private:
 
-  /* If you need this, implement it (correctly)*/
-   OptionMenu(const OptionMenu&);
-   OptionMenu operator=(const OptionMenu&);
-   /********************************************/
-
-   /* Graphic options controllers */
+   /* Graphic options controllers */   
    ListBox *lbox_video_mode;
    CheckBox *opt_display_wind_particles;
    CheckBox *opt_display_energy;
    CheckBox *opt_display_name;
-   CheckBox *full_screen;
+   CheckBox *full_screen; 
    SpinButtonBig *opt_max_fps;
 
    /* Sound options controllers */
@@ -53,8 +50,7 @@ private:
    CheckBox *opt_sound_effects;
 
    void SaveOptions();
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
+   void OnClic(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
 
    void __sig_ok();

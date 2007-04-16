@@ -36,10 +36,10 @@ PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &re
   SetPosition( rect.GetPosition() );
   SetSize( rect.GetSize() );
 
-  SetSizeY( m_image.GetHeight() + (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).GetHeight() );
+  SetSizeY( m_image.GetHeight() + (*Font::GetInstance(Font::FONT_NORMAL, Font::BOLD)).GetHeight() );
   m_value = value;
 
-  txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
   txt_label->SetMaxWidth (GetSizeX());
 }
 

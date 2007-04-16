@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game menu from which one may start a new game, modify options, obtain some
- * infomations or leave the game.
+ * Menu du jeu permettant de lancer une partie, modifier les options, d'obtenir
+ * des informations, ou encore quitter le jeu.
  *****************************************************************************/
 
 #ifndef MAIN_MENU_H
@@ -45,15 +45,15 @@ typedef enum
 
 class Main_Menu : public Menu
 {
-  /* If you need this, implement it (correctly) */
-  Main_Menu(const Main_Menu&);
-  Main_Menu operator=(const Main_Menu&);
-  /**********************************************/
+  //PictureWidget *title;
+  //Surface s_title;
+
+  //Sprite *skin_left, *skin_right;
 
   ButtonText *play, *network, *options, *infos, *quit;
 
   Text *version_text, *website_text;
-
+ 
 
 public:
   menu_item choice;
@@ -72,12 +72,11 @@ protected:
 
 private:
    virtual void DrawBackground();
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
+   void OnClic(const Point2i &mousePosition, int button);
 
-  // Main drawing function: refresh parts of screen
+  // Main drawing function: refresh parts of screen 
   void Draw(const Point2i &mousePosition) {};
-  void button_click();
+  void button_clic();
 };
 
 #endif

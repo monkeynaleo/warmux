@@ -29,13 +29,15 @@
 
 class InternetMenu : public Menu
 {
+   Font * normal_font;
+   Font * big_font;
+
    VBox* connection_box;
    ListBox* connect_lst;
    ButtonText* refresh;
    ButtonText* connect;
 
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
+   void OnClic(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
    void RefreshList();
 

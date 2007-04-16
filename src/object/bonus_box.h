@@ -24,16 +24,20 @@
 //-----------------------------------------------------------------------------
 #include <SDL.h>
 #include "../include/base.h"
-#include "objbox.h"
 #include "../object/physical_obj.h"
 #include "../team/team.h"
 #include "../weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 
-class BonusBox : public ObjBox
+class BonusBox : public PhysicalObj
 {
   private:
+    static bool enable;
     uint nbr_ammo;
+    static int start_life_points;
+
+    bool parachute; 
+    Sprite *anim;
 
     Weapon::Weapon_type contents;
     static uint weapon_count;
@@ -45,10 +49,22 @@ class BonusBox : public ObjBox
     void PickRandomWeapon();
   public:
     BonusBox();
+    ~BonusBox();
+
+    static void Enable (bool _enable);
+    static bool NewBonusBox();
+    void DropBonusBox();
+    static void RemoveInfiniteWeapons();
     static void LoadXml(xmlpp::Element * object);
 
     void Draw();
     void Refresh();
+
+  protected:
+    // Signal Fall ending
+    virtual void SignalCollision();
+    virtual void SignalDrowning();
+    void SignalGhostState(bool was_already_dead);
 };
 
 //-----------------------------------------------------------------------------

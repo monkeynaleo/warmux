@@ -40,7 +40,7 @@ const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
 SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :
     WeaponBullet("snipe_rifle_bullet", cfg, p_launcher)
-{
+{ 
 }
 
 void SnipeBullet::ShootSound()
@@ -53,7 +53,6 @@ void SnipeBullet::ShootSound()
 SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new ExplosiveWeaponConfig())
 {
   m_name = _("Sniper Rifle");
-  m_category = RIFLE;
 
   last_angle = 0.0;
   targeting_something = false;
@@ -129,7 +128,7 @@ bool SnipeRifle::ComputeCrossPoint(bool force = false)
     if ( distance < SNIPE_RIFLE_BEAM_START ) laser_beam_start = pos;
 
     // the point is outside the map
-    if ( world.IsOutsideWorldX(pos.x) || world.IsOutsideWorldY(pos.y) ) break;
+    if ( world.EstHorsMondeX(pos.x) || world.EstHorsMondeY(pos.y) ) break;
 
     // is there a collision ??
     if ( distance > 30 && !projectile->IsInVacuumXY( pos )){
@@ -198,7 +197,7 @@ void SnipeRifle::DrawBeam()
 void SnipeRifle::Draw()
 {
   WeaponLauncher::Draw();
-  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsInUse() ) return;
+  if( GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING || IsActive() ) return;
   ComputeCrossPoint();
   DrawBeam();
   // Draw the laser impact

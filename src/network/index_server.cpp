@@ -26,6 +26,7 @@
 #include "index_server.h"
 #include "index_svr_msg.h"
 #include "network.h"
+#include "gui/question.h"
 #include "include/app.h"
 #include "include/constant.h"
 #include "tool/debug.h"
@@ -51,16 +52,16 @@ IndexServer::~IndexServer()
 }
 
 /*************  Connection  /  Disconnection  ******************/
-Network::connection_state_t IndexServer::Connect()
+bool IndexServer::Connect()
 {
   MSG_DEBUG("index_server", "Connecting..");
   assert(!connected);
 
   if( hidden_server )
-    return Network::CONNECTED;
+    return true;
 
   if( !GetServerList() )
-    return Network::CONN_REJECTED;
+    return false;
 
   std::string addr;
   int port;
@@ -70,41 +71,44 @@ Network::connection_state_t IndexServer::Connect()
   while( GetServerAddress( addr, port) )
   {
     if( ConnectTo( addr, port) )
-      return Network::CONNECTED;
+      return true;
   }
 
-  return Network::CONN_REJECTED;
+  Question question;
+  question.Set(_("Unable to contact an index server!"),1,0);
+  question.Ask();
+
+  return false;
 }
 
 bool IndexServer::ConnectTo(const std::string & address, const int & port)
 {
   MSG_DEBUG("index_server", "Connecting to %s %i", address.c_str(), port);
+  Question question;
+  question.Set(_("Contacting main server..."),1,0);
+  question.Draw();
   AppWormux::GetInstance()->video.Flip();
 
-  Network::Init(); // To get SDL_net initialized
+  network.Init(); // To get SDL_net initialized
 
   MSG_DEBUG("index_server", "Opening connection");
 
+//  if( SDLNet_ResolveHost(&ip, "localhost" , port) == -1 )
   if( SDLNet_ResolveHost(&ip, address.c_str() , port) == -1 )
   {
+    question.Set(_("Invalid index server adress!"),1,0);
+    question.Ask();
     printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return false;
   }
 
   socket = SDLNet_TCP_Open(&ip);
+
   if(!socket)
   {
-    printf("SDLNet_TCP_Open: %s\n", SDLNet_GetError());
+    printf("SDLNet_ResolveHost: %s\n", SDLNet_GetError());
     return false;
   }
-
-  sock_set = SDLNet_AllocSocketSet(1);
-  if(!sock_set)
-  {
-    printf("SDLNet_AllocSocketSet: %s\n", SDLNet_GetError());
-    return false;
-  }
-  SDLNet_TCP_AddSocket(sock_set, socket);
 
   connected = true;
 
@@ -126,10 +130,8 @@ void IndexServer::Disconnect()
   first_server = server_lst.end();
   current_server = server_lst.end();
 
-  SDLNet_TCP_DelSocket(sock_set, socket);
   SDLNet_TCP_Close(socket);
   connected = false;
-  SDLNet_FreeSocketSet(sock_set);
 }
 
 static ssize_t getline(std::string& line, std::ifstream& file)
@@ -244,15 +246,6 @@ void IndexServer::Send(const std::string &str)
 int IndexServer::ReceiveInt()
 {
   char packet[4];
-  //somehow we can get here while being disconnected... this should not be
-  if(!connected)
-    return -1;
-  if(SDLNet_CheckSockets(sock_set, 5000) == 0)
-    return -1;
-
-  if(!SDLNet_SocketReady(socket))
-    return -1;
-
   if( SDLNet_TCP_Recv(socket, packet, sizeof(packet)) < 1 )
   {
     Disconnect();
@@ -266,20 +259,13 @@ int IndexServer::ReceiveInt()
 
 std::string IndexServer::ReceiveStr()
 {
+  int size = ReceiveInt();
+
   if(!connected)
     return "";
 
-  int size = ReceiveInt();
-  if(size <= 0)
-    return "";
-
+  assert(size > 0);
   char* str = new char[size+1];
-
-  if(SDLNet_CheckSockets(sock_set, 5000) == 0)
-    return "";
-
-  if(!SDLNet_SocketReady(socket))
-    return "";
 
   if( SDLNet_TCP_Recv(socket, str, size) < 1 )
   {
@@ -300,8 +286,6 @@ bool IndexServer::HandShake()
   Send(Constants::VERSION);
 
   int msg = ReceiveInt();
-  if(msg == -1)
-    return false;
   std::string sign;
 
   if(msg == TS_MSG_VERSION)
@@ -309,6 +293,9 @@ bool IndexServer::HandShake()
 
   if(msg != TS_MSG_VERSION || sign != "MassMurder!")
   {
+    Question question;
+    question.Set(_("It doesn't seem to be a valid Wormux server..."),1,0);
+    question.Ask();
     Disconnect();
     return false;
   }
@@ -317,12 +304,12 @@ bool IndexServer::HandShake()
 
 void IndexServer::SendServerStatus()
 {
-  assert(Network::GetInstance()->IsServer());
+  assert(network.IsServer());
 
   if(hidden_server)
     return;
   Send(TS_MSG_HOSTING);
-  Send(Network::GetInstance()->GetPort());
+  Send(network.GetPort());
 }
 
 std::list<address_pair> IndexServer::GetHostList()
@@ -330,8 +317,6 @@ std::list<address_pair> IndexServer::GetHostList()
   Send(TS_MSG_GET_LIST);
   int lst_size = ReceiveInt();
   std::list<address_pair> lst;
-  if(lst_size == -1)
-    return lst;
   while(lst_size--)
   {
     IPaddress ip;
@@ -360,25 +345,4 @@ std::list<address_pair> IndexServer::GetHostList()
     lst.push_back(addr_pair);
   }
   return lst;
-}
-
-void IndexServer::Refresh()
-{
-  if(!connected)
-    return;
-
-  if(SDLNet_CheckSockets(sock_set, 100) == 0)
-    return;
-
-  if(!SDLNet_SocketReady(socket))
-    return;
-
-  int msg_id = ReceiveInt();
-  if(msg_id == -1)
-    return;
-
-  if( msg_id == TS_MSG_PING )
-    Send(TS_MSG_PONG);
-  else
-    Disconnect();
 }

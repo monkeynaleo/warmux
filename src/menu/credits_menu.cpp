@@ -24,7 +24,6 @@
 #include <sstream>
 #include <iostream>
 #include "../game/config.h"
-#include "../tool/i18n.h"
 #include "../include/app.h"
 //-----------------------------------------------------------------------------
 
@@ -47,9 +46,6 @@ bool Author::Feed (const xmlpp::Node *node)
 {
    if (!XmlReader::ReadString(node, "name", name)) return false;
    if (!XmlReader::ReadString(node, "description", description)) return false;
-   XmlReader::ReadString(node, "nickname", nickname);
-   XmlReader::ReadString(node, "email", email);
-   XmlReader::ReadString(node, "country", country);
    return true;
 }
 
@@ -65,11 +61,11 @@ std::string Author::PrettyString(bool with_email)
    }
    if (!nickname.empty())
    {
-     ss << " " << _("aka") << " " << nickname;
+     ss << " aka " << nickname;
    }
    if (!country.empty())
    {
-     ss << " " << _("from") << " " << country;
+     ss << "from " << country;
    }
    ss << ": " << description;
    return ss.str();
@@ -85,7 +81,7 @@ CreditsMenu::CreditsMenu()  :
 						    AppWormux::GetInstance()->video.window.GetWidth()-60,
 						    AppWormux::GetInstance()->video.window.GetHeight()-60-30),
                                         false);
-  lbox_authors->SetBackgroundColor(Color(0,0,0,200));
+
   widgets.AddWidget(lbox_authors);
 
   PrepareAuthorsList(lbox_authors);
@@ -131,9 +127,9 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
     std::cout << "       ===[ " << team_title << " ]===" << std::endl << std::endl;
 
     lbox_authors->AddItem (false, " ", "", 
-			   Font::FONT_BIG, Font::FONT_NORMAL);
+			   *Font::GetInstance(Font::FONT_BIG));
     lbox_authors->AddItem (false, team_title, teams[i], 
-			   Font::FONT_BIG, Font::FONT_NORMAL, c_red);
+			   *Font::GetInstance(Font::FONT_BIG), c_red);
 
     // We think there is ONLY ONE occurence of team section, so we use the first
     xmlpp::Node::NodeList sections = team.front()->get_children("section");
@@ -160,7 +156,7 @@ void CreditsMenu::PrepareAuthorsList(ListBox * lbox_authors)
 
       lbox_authors->AddItem (false, " ", "");
       lbox_authors->AddItem (false, "   "+title, title,
-			     Font::FONT_MEDIUM, Font::FONT_NORMAL, c_yellow);
+			     *Font::GetInstance(Font::FONT_NORMAL), c_yellow);
 
       for (; node != end; ++node)
       {
@@ -182,14 +178,9 @@ void CreditsMenu::Draw(const Point2i& mousePosition)
 {
 }
 
-void CreditsMenu::OnClick(const Point2i &mousePosition, int button)
+void CreditsMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  widgets.Click(mousePosition, button);
-}
-
-void CreditsMenu::OnClickUp(const Point2i &mousePosition, int button)
-{
-  widgets.ClickUp(mousePosition, button);
+  widgets.Clic(mousePosition, button);
 }
 
 //-----------------------------------------------------------------------------

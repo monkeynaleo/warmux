@@ -36,12 +36,9 @@ class Team;
 
 class NetworkMenu : public Menu
 {
-  bool waiting_for_server;
-
   /* Options controllers */
   SpinButton* player_number;
   Box* options_box;
-  Label* mode;
   Label* connected_players;
   Label* inited_players;
   
@@ -57,11 +54,8 @@ class NetworkMenu : public Menu
   MapSelectionBox *map_box;
   
   void SaveOptions();
-  void OnClick(const Point2i &mousePosition, int button);
-  void OnClickUp(const Point2i &mousePosition, int button);
+  void OnClic(const Point2i &mousePosition, int button);
   void Draw(const Point2i &mousePosition);
-  void SendChatMsg();
-  void WaitingForServer();
   
   void sig_ok();
   void __sig_ok();

@@ -34,17 +34,14 @@
 InfoMap::InfoMap ()
 {
   is_data_loaded = false;
-  nb_mine = 4;
-  nb_barrel = 4;
+  nb_mine = 0;
+  nb_barrel = 0;
   wind.nb_sprite = 0;
   wind.need_flip = false;
-  wind.rotation_speed = 0;
-  random = false;
-  music_playlist = "ingame";
 }
 
 bool InfoMap::Init (const std::string &map_name,
-                    const std::string &directory)
+		    const std::string &directory)
 {
   std::string nomfich;
 
@@ -84,7 +81,6 @@ bool InfoMap::Init (const std::string &map_name,
 
 bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
 {
-  XmlReader::ReadBool(xml, "random", random);
   // Read author informations
   xmlpp::Element *author = XmlReader::GetMarker(xml, "author");
   if (author != NULL) {
@@ -125,10 +121,7 @@ bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
   xmlpp::Element *xmlwind = XmlReader::GetMarker(xml, "wind");
   if (xmlwind != NULL)
   {
-    double rot_speed=0.0;
     XmlReader::ReadUint(xmlwind, "nbr_sprite", wind.nb_sprite);
-    XmlReader::ReadDouble(xmlwind, "rotation_speed", rot_speed);
-    wind.rotation_speed = rot_speed;
     XmlReader::ReadBool(xmlwind, "need_flip", wind.need_flip);
 
     if (wind.nb_sprite > MAX_WIND_OBJECTS)
@@ -137,8 +130,6 @@ bool InfoMap::ProcessXmlData(xmlpp::Element *xml)
     wind.nb_sprite = 0;
   }
   wind.default_nb_sprite = wind.nb_sprite;
-
-  XmlReader::ReadString(xml, "music_playlist", music_playlist);
 
   return true;
 }
@@ -151,13 +142,8 @@ void InfoMap::LoadData()
 
   MSG_DEBUG("map.load", "Map data loaded: %s", name.c_str());
 
+  img_ground = resource_manager.LoadImage(res_profile, "map");
   img_sky = resource_manager.LoadImage(res_profile,"sky");
-  if(!random) {
-    img_ground = resource_manager.LoadImage(res_profile, "map");
-  } else {
-    img_ground = resource_manager.GenerateMap(res_profile, img_sky.GetWidth(), img_sky.GetHeight());
-    //img_ground.ImgSave("/tmp/generate_" + name + ".png");
-  }
 }
 
 void InfoMap::FreeData()
@@ -195,6 +181,7 @@ MapsList::MapsList()
   lst.clear() ;
 
   std::cout << "o " << _("Load maps:");
+  terrain_actif = -1;
 
   Config * config = Config::GetInstance();
   std::string dirname = config->GetDataDir() + PATH_SEPARATOR + "map" + PATH_SEPARATOR;
@@ -244,13 +231,7 @@ MapsList::MapsList()
   if (lst.size() < 1)
     Error(_("You need at least one valid map !"));
 
-  /* Get the full set of map ordered */
   std::sort(lst.begin(), lst.end(), compareMaps);
-
-  /* Read the personnal player data and try to restore the map that was played
-   * the last time. If it is no found the map 0 is used as we know here that
-   * there is at least one map */
-  SelectMapByName(Config::GetInstance()->GetMapName());
 }
 
 void MapsList::LoadOneMap (const std::string &dir, const std::string &file)

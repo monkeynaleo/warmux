@@ -27,7 +27,6 @@
 #include "include/app.h"
 #include "gui/button_text.h"
 #include "network/network.h"
-#include "network/net_error_msg.h"
 #include "network/index_server.h"
 #include "tool/i18n.h"
 
@@ -37,6 +36,9 @@ InternetMenu::InternetMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
   
+  normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  big_font = Font::GetInstance(Font::FONT_BIG);
+
   Rectanglei stdRect(0, 0, 300, 64);
 
   uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
@@ -49,20 +51,16 @@ InternetMenu::InternetMenu() :
   connection_box->AddWidget(connect_lst);
 
   refresh = new ButtonText( Point2i(0,0),
-			    res, "main_menu/button",
-			    _("Refresh"), // Refresh the list of available hosts
-			    Font::FONT_BIG, 
-			    Font::FONT_NORMAL);
-
+				 res, "main_menu/button",
+				 _("Refresh"), // Refresh the list of available hosts
+				 big_font);
   refresh->SetSizePosition( stdRect );
   connection_box->AddWidget(refresh);
 
   connect = new ButtonText( Point2i(0,0),
-			    res, "main_menu/button",
-			    _("Connect !"),
-			    Font::FONT_BIG, 
-			    Font::FONT_NORMAL);
-
+				 res, "main_menu/button",
+				 _("Connect !"),
+				 big_font);
   connect->SetSizePosition( stdRect );
   connection_box->AddWidget(connect);
 
@@ -76,32 +74,29 @@ InternetMenu::~InternetMenu()
 {
 }
 
-void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
+void InternetMenu::OnClic(const Point2i &mousePosition, int button)
 {     
-  Widget* w = widgets.ClickUp(mousePosition, button);  
+  Widget* w = widgets.Clic(mousePosition, button);  
 
   if (w == refresh)
     RefreshList();
   else
   if (w == connect && connect_lst->GetSelectedItem() != -1)
   {
-    Network::connection_state_t conn = Network::ClientStart(connect_lst->ReadLabel(), connect_lst->ReadValue());
-    if ( Network::IsConnected() && conn == Network::CONNECTED )
+    network.Init();
+    network.ClientConnect(connect_lst->ReadLabel(), connect_lst->ReadValue());
+    if( network.IsConnected() )
     {
       close_menu = true;
       sig_ok();
     }
     else
     {
-      DispNetworkError(conn);
-      Menu::RedrawMenu();
+      Question question;
+      question.Set(_("Unable to join the game..."),1,0);
+      question.Draw();
     }
   }
-}
-
-void InternetMenu::OnClick(const Point2i &mousePosition, int button)
-{     
-  widgets.Click(mousePosition, button); 
 }
 
 void InternetMenu::RefreshList()
@@ -123,14 +118,11 @@ void InternetMenu::RefreshList()
       ++pair_it)
     connect_lst->AddItem( false, pair_it->first, pair_it->second );
 
-  if(current != -1 && connect_lst->Size() != 0)
+  if(current != -1)
     connect_lst->Select( current );
 }
 
-void InternetMenu::Draw(const Point2i &mousePosition)
-{
-  index_server.Refresh();
-}
+void InternetMenu::Draw(const Point2i &mousePosition){}
 
 void InternetMenu::__sig_ok()
 {

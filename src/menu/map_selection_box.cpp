@@ -24,13 +24,13 @@
 #include "../map/maps_list.h"
 #include "../network/network.h"
 
-MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
-  HBox(rect, true), selected_map_index(0)
+MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) : 
+  HBox(rect, true)
 {
   display_only = _display_only;
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
-
+  
   AddWidget(new PictureWidget(Rectanglei(0,0,46,100), "menu/map_label"));
 
   // PreviousMap/NextMap buttons
@@ -100,7 +100,7 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   }
 
   tmp_map_box->AddWidget(previews_box);
-
+  
   if (display_only) {
     map_preview_before2->Disable();
     map_preview_before->Disable();
@@ -110,15 +110,16 @@ MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
 
 
   // Map information
-  map_name_label = new Label("Map", Rectanglei(0,0,0,0), Font::FONT_SMALL, Font::FONT_BOLD, dark_gray_color, true, false);
+  map_name_label = new Label("Map", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL, Font::BOLD), dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_name_label);
 
-  map_author_label = new Label("Author", Rectanglei(0,0,0,0), Font::FONT_SMALL, Font::FONT_NORMAL, dark_gray_color, true, false);
+  map_author_label = new Label("Author", Rectanglei(0,0,0,0), *Font::GetInstance(Font::FONT_SMALL), dark_gray_color, true, false);
   tmp_map_box->AddWidget(map_author_label);
 
   AddWidget(tmp_map_box);
 
   // Load Maps' list
+  std::sort(MapsList::GetInstance()->lst.begin(), MapsList::GetInstance()->lst.end(), compareMaps);
   ChangeMap(MapsList::GetInstance()->GetActiveMapIndex());
 }
 
@@ -134,13 +135,13 @@ void MapSelectionBox::ChangeMapDelta(int delta_index)
 void MapSelectionBox::ChangeMap(int index)
 {
   if (index < 0 || index > int(MapsList::GetInstance()->lst.size() - 1)) return;
-
+  
   selected_map_index = index;
 
   // Callback other network players
-  if(Network::GetInstance()->IsServer())
+  if(network.IsServer())
     {
-      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_SET_MAP,
+      ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_SET_MAP, 
 					    MapsList::GetInstance()->lst[selected_map_index].ReadName()));
     }
 
@@ -171,7 +172,7 @@ void MapSelectionBox::ChangeMap(int index)
     map_preview_after2->SetNoSurface();
 }
 
-Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
+Widget* MapSelectionBox::Clic (const Point2i &mousePosition, uint button)
 {
   if (display_only) return NULL;
 
@@ -187,25 +188,16 @@ Widget* MapSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
 	     || (button == SDL_BUTTON_LEFT && map_preview_after->Contains(mousePosition))
 	     || (button == SDL_BUTTON_WHEELDOWN)) {
     ChangeMapDelta(+1);
-  } else if (button == SDL_BUTTON_LEFT && map_preview_after2->Contains(mousePosition)) {
+  } else if (map_preview_after2->Contains(mousePosition) ) {
     ChangeMapDelta(+2);
   }
 
   return NULL;
-}
-
-Widget* MapSelectionBox::Click(const Point2i &mousePosition, uint button)
-{
-  return NULL;
-}
+}  
 
 void MapSelectionBox::ValidMapSelection()
 {
   MapsList::GetInstance()->SelectMapByIndex(selected_map_index);
-
-  /* The player chose a map, save it in the main config so that this will be
-   * the defaut map at next load of the game */
-  Config::GetInstance()->SetMapName(MapsList::GetInstance()->lst[selected_map_index].ReadName());
 }
 
 void MapSelectionBox::ChangeMapCallback()

@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon Supertux : Look ! it's the famous flying magic pinguin !
+ * Arme Supertux : Look ! it's the famous flying magic pinguin !
  *****************************************************************************/
 
 #ifndef SUPERTUX_H
@@ -43,7 +43,6 @@ class SuperTux : public WeaponProjectile
   private:
     ParticleEngine particle_engine;
     double angle_rad;
-    int sound_channel;
 
   public:
     uint speed;
@@ -59,7 +58,6 @@ class SuperTux : public WeaponProjectile
     void turn_left();
     void turn_right();
     void Shoot(double strength);
-    virtual void Explosion();
   protected:
     void SignalOutOfMap();
 };
@@ -69,17 +67,8 @@ class TuxLauncher : public WeaponLauncher
   private:
     SuperTux * current_tux;
   public:
-    TuxLauncher(); 
-    void EndOfTurn(); // should be called only by SuperTux
-
-    virtual void HandleKeyPressed_MoveRight();
-    virtual void HandleKeyRefreshed_MoveRight();
-    virtual void HandleKeyReleased_MoveRight();
-    
-    virtual void HandleKeyPressed_MoveLeft();
-    virtual void HandleKeyRefreshed_MoveLeft();
-    virtual void HandleKeyReleased_MoveLeft();
-
+    TuxLauncher();
+    void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
   protected:
     WeaponProjectile * GetProjectileInstance();
     bool p_Shoot();

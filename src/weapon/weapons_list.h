@@ -36,23 +36,19 @@ public:
   typedef std::list<Weapon*>::iterator weapons_list_it;
 
 private:
-  static WeaponsList * weapons_list; /* list by itself */
-  /* reference counter on the list WARNING not thread safe */
-  int ref_counter;
-
-  WeaponsList();
   weapons_list_type m_weapons_list;
 
+  // The int is used to classify weapon by sort
+  std::multimap<uint, Weapon*> m_weapons_map;
+  typedef std::multimap<uint, Weapon*>::value_type keybind;
+  typedef std::multimap<uint, Weapon*>::iterator weapons_map_it;
+  void AddToList(Weapon* arme, uint num_sort);
   Weapon* GetNextWeapon(uint sort, uint index);
 
-  /* if you need to use this, implement it */
-  WeaponsList(const WeaponsList &a_list) {};
-
-
 public:
+  WeaponsList();
   ~WeaponsList();
   void Init();
-  static WeaponsList * GetInstance();
 
   // Refresh des armes
   // Retourne true si c'est la fin d'un tour
@@ -61,7 +57,7 @@ public:
   // Return a list of  weapons
   weapons_list_type& GetList();
   Weapon* GetWeapon(Weapon::Weapon_type type);
-  bool GetWeaponBySort(Weapon::category_t num_sort, Weapon::Weapon_type &type);
+  bool GetWeaponBySort(uint num_sort, Weapon::Weapon_type &type);
 };
 
 //-----------------------------------------------------------------------------

@@ -1,22 +1,3 @@
-/******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************/
-
 #include <list>
 #include <fstream>
 #include <sys/types.h>
@@ -28,7 +9,6 @@
 #include "net_data.h"
 #include "download.h"
 #include "debug.h"
-#include "stat.h"
 #include "../../src/network/index_svr_msg.h"
 
 SyncSlave sync_slave;
@@ -46,7 +26,7 @@ SyncSlave::~SyncSlave()
 		it != end();
 		++it)
 	{
-		delete (it->second);
+		delete (*it);
 	}
 }
 
@@ -63,7 +43,8 @@ static ssize_t getline(std::string& line, std::ifstream& file)
 bool SyncSlave::Start()
 {
 	const std::string server_fn = "./server_list";
-	DPRINT(TRAFFIC, "Contacting other servers ...");
+	downloader.Get( server_list_url.c_str(), server_fn.c_str() );
+
 	std::ifstream fin;
 	fin.open(server_fn.c_str(), std::ios::in);
 	if(!fin)
@@ -89,14 +70,9 @@ bool SyncSlave::Start()
 		std::string portstr = line.substr(port_pos+1);
 		int port = atoi(portstr.c_str());
 
-		if( hostname != my_hostname && find(hostname) == end())
-		{
-			IndexServerConn* c = new IndexServerConn(hostname, port);
-			if( c->connected )
-				insert(make_pair( hostname, c));
-			else
-				delete c;
-		}
+		if( hostname != my_hostname )
+			push_back( new IndexServerConn( hostname, port ) );
+//  		push_back( new IndexServerConn( "localhost", 9997 ) );
 	}
 	fin.close();
 	return true;
@@ -110,27 +86,22 @@ void SyncSlave::CheckGames()
 		int received;
 		bool result = false;
 				
-		if( ioctl( it->second->GetFD(), FIONREAD, &received) == -1 )
+		if( ioctl( (*it)->GetFD(), FIONREAD, &received) == -1 )
 		{
 			PRINT_ERROR;
 			result = false;
 		}
 
-		if( received == 0 || it->second->Receive() )
+		if( received == 0 || (*it)->Receive() )
 			result = true;
 
-		if(!result || ! it->second->connected)
+		if(!result)
 		{
-			DPRINT(INFO, "Index server at %s disconnected", it->first.c_str());
-			delete it->second;
-			erase(it);
-			it = begin();
+			delete (*it);
+			it = erase(it);
 		}
 		else
-		{
-			it->second->CheckState();
 			++it;
-		}
 	}
 }
 
@@ -138,15 +109,13 @@ void SyncSlave::CheckGames()
 IndexServerConn::IndexServerConn(const std::string &addr, int port)
 {
 	DPRINT(INFO, "Contacting index server at %s ...",addr.c_str());
-	if(!ConnectTo( addr, port))
-		return;
+    	ConnectTo( addr, port);
 	SendInt((int)TS_MSG_VERSION);
 	SendStr("WIS");
 }
 
 IndexServerConn::~IndexServerConn()
 {
-	close(GetFD());
 }
 
 bool IndexServerConn::HandleMsg(const std::string & full_str)
@@ -170,7 +139,7 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
 			return false;
 		if(nbr > VERSION)
 		{
-			DPRINT(INFO,"The server at %i have a version %i, while we are only running a %i version",GetIP(), nbr, VERSION);
+			DPRINT(INFO,"This server have a version %i, while we are only running a %i version",nbr, VERSION);
 			exit(EXIT_FAILURE);
 		}
 		else
@@ -208,7 +177,6 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
 		else
 		{
 			fake_clients.insert( std::make_pair(full_str, FakeClient(nbr, nbr2)));
-			stats.NewFakeServer();
 		}
 		break;
 	default:

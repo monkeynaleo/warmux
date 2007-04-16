@@ -117,19 +117,14 @@ public:
   // Add new strength
   void SetExternForce (double length, double angle);
   void SetExternForceXY (Point2d vector);
-  Point2d GetExternForce() const;
 
   // Add / Remove a fixation point.
   void SetPhysFixationPointXY(double g_x, double g_y,
 			      double dx, double dy) ;
   void UnsetPhysFixationPoint() ;
-  void ChangePhysRopeSize(double delta) ;
-
-  double GetRopeAngle() const;
-  void SetRopeAngle(double angle);
-
-  double GetRopeLength() const;
-  void SetRopeLength(double length);
+  void ChangePhysRopeSize(double dl) ;
+  double GetRopeAngle() ;
+  double GetRopeLength();
 
   // Physical engine : update position (and state) with current time
   void RunPhysicalEngine();

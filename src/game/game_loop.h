@@ -27,25 +27,22 @@
 #include "../character/character.h"
 #include "../network/chat.h"
 #include "../object/bonus_box.h"
-#include "../object/medkit.h"
 
 class GameLoop
 {
-public:
-  typedef enum {
-    PLAYING = 0,
-    HAS_PLAYED = 1,
-    END_TURN = 2
-  } game_loop_state_t;
-
 private:
-  game_loop_state_t state;
+  int state;
   uint pause_seconde;
   uint duration;
-  ObjBox * current_ObjBox;
-  bool give_objbox;
+  BonusBox * current_bonus_box;
+
+public:
+  static const int PLAYING = 0;
+  static const int HAS_PLAYED = 1;
+  static const int END_TURN = 2;
 
   FramePerSecond fps;
+  Chat chatsession;
 
   static GameLoop * singleton;
   GameLoop();
@@ -56,7 +53,7 @@ public:
   void Init();
 
   bool character_already_chosen;
-  Chat chatsession;
+  bool interaction_enabled;
 
   // Draw to screen
   void Draw();
@@ -64,9 +61,15 @@ public:
   // Main loop
   void Run();
 
+  // Refresh all objects (position, state ...)
+  void RefreshObject();
+  void RefreshInput();
+  void RefreshClock();
+  void PingClient();
+
   // Read/Set State
-  game_loop_state_t ReadState() const { return state; }
-  void SetState(game_loop_state_t new_state, bool begin_game=false);
+  int ReadState() const { return state; }
+  void SetState(int new_state, bool begin_game=false);
 
   // Signal death of a player
   void SignalCharacterDeath (Character *character);
@@ -74,30 +77,15 @@ public:
   // Signal character damage
   void SignalCharacterDamage(Character *character);
 
-  void SetCurrentBox(ObjBox * current_box);
-  ObjBox * GetCurrentBox() const;
+  void SetCurrentBonusBox(BonusBox * current_box);
+  BonusBox * GetCurrentBonusBox() const;
 
 private:
 
-  // Initialization
   void InitGameData_NetServer();
   void InitGameData_NetClient();
-  void InitGameData_Local();
-  
-  void InitMap();
-  void InitTeams();
-  void InitSounds();
+  void InitData_Local();
   void InitData();
-
-  // Refresh all objects (position, state ...)
-  void RefreshObject();
-  void RefreshClock();
-
-  // Input management (keyboard/mouse)
-  void RefreshInput();
-  void IgnorePendingInputEvents();
-
-  void PingClient();
 
   void CallDraw();
 

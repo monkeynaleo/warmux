@@ -40,46 +40,76 @@
 #include <sstream>
 #include <iostream>
 
-
-Team::Team (const std::string& teams_dir, const std::string& id)
-  : energy(this), m_teams_dir(teams_dir), m_id(id)
+Team::Team(const std::string& _teams_dir,
+           const std::string& _id,
+           const std::string& _name,
+           const Surface& _flag,
+           const std::string& _sound_profile)
+  : energy(this)
 {
-  std::string nomfich;
-  XmlReader doc;
-
-  // Load XML
-  nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
-
-  if (!doc.Load(nomfich))
-    throw "unable to load file of team data";
-
-  if (!XmlReader::ReadString(doc.GetRoot(), "name", m_name))
-    throw "Invalid file structure: cannot find a name for team ";
-
-  // Load flag
-  Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
-  flag = resource_manager.LoadImage(res, "flag");
-  resource_manager.UnLoadXMLProfile(res);
-
-  // Get sound profile
-  if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", m_sound_profile))
-    m_sound_profile = "default";
-
   active_character = characters.end();
 
   is_camera_saved = false;
-  active_weapon = NULL;
+  active_weapon = Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_DYNAMITE);
 
+  m_teams_dir = _teams_dir;
+  m_id = _id;
+  m_name = _name;
+  m_sound_profile = _sound_profile;
   m_player_name = "";
 
-  nb_characters = GameMode::GetInstance()->nb_characters;
+  nb_characters = GameMode::GetInstance()->max_characters;
+
+  flag = _flag;
 
   type_of_player = TEAM_human_local;
 }
 
-bool Team::LoadCharacters()
+Team * Team::CreateTeam (const std::string& teams_dir,
+                         const std::string& id)
 {
-  assert (nb_characters <= 10);
+  std::string nomfich;
+  try
+  {
+    XmlReader doc;
+
+    // Load XML
+    nomfich = teams_dir+id+PATH_SEPARATOR+ "team.xml";
+    if (!IsFileExist(nomfich)) return false;
+    if (!doc.Load(nomfich)) return false;
+
+    // Load name
+    std::string name;
+    if (!XmlReader::ReadString(doc.GetRoot(), "name", name)) return NULL;
+
+    // Load flag
+    Profile *res = resource_manager.LoadXMLProfile( nomfich, true);
+    Surface flag = resource_manager.LoadImage(res, "flag");
+    resource_manager.UnLoadXMLProfile(res);
+
+    // Get sound profile
+    std::string sound_profile;
+    if (!XmlReader::ReadString(doc.GetRoot(), "sound_profile", sound_profile))
+      sound_profile = "default";
+
+    return new Team(teams_dir, id, name, flag, sound_profile) ;
+  }
+  catch (const xmlpp::exception &e)
+  {
+    std::cerr << std::endl
+        << Format(_("Error loading team %s:"), id.c_str())
+        << std::endl << e.what() << std::endl;
+    return NULL;
+  }
+
+  return NULL;
+}
+
+
+bool Team::LoadCharacters(uint howmany)
+{
+  //assert(howmany <= GameMode::GetInstance()->max_characters);
+  assert (howmany <= 10);
 
   std::string nomfich;
   try
@@ -140,7 +170,7 @@ bool Team::LoadCharacters()
 
         // C'est la fin ?
       ++it;
-    } while (it!=nodes.end() && characters.size() < nb_characters );
+    } while (it!=nodes.end() && characters.size() < howmany );
 
     active_character = characters.begin();
 
@@ -153,7 +183,7 @@ bool Team::LoadCharacters()
     return false;
   }
 
-  return (characters.size() == nb_characters);
+  return (characters.size() == howmany);
 }
 
 void Team::InitEnergy (uint max)
@@ -216,28 +246,6 @@ void Team::NextCharacter()
             ActiveCharacter().GetY());
 }
 
-void Team::PreviousCharacter()
-{
-  assert (0 < NbAliveCharacter());
-  ActiveCharacter().StopPlaying();
-  do
-  {
-    if (active_character == characters.begin())
-      active_character = characters.end();
-    --active_character;
-  } while (ActiveCharacter().IsDead());
-  ActiveCharacter().StartPlaying();
-
-  if (is_camera_saved) camera.SetXYabs (sauve_camera.x, sauve_camera.y);
-  camera.FollowObject (&ActiveCharacter(),
-                          !is_camera_saved, !is_camera_saved,
-                          true);
-  MSG_DEBUG("team", "%s (%d, %d)is now the active character",
-            ActiveCharacter().GetName().c_str(),
-            ActiveCharacter().GetX(),
-            ActiveCharacter().GetY());
-}
-
 int Team::NbAliveCharacter() const
 {
   uint nbr = 0;
@@ -269,7 +277,7 @@ void Team::PrepareTurn()
   if (AccessWeapon().EnoughAmmo())
     AccessWeapon().Select();
   else { // try to find another weapon !!
-    active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_BAZOOKA);
+    active_weapon = Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_BAZOOKA);
     AccessWeapon().Select();
   }
 }
@@ -281,10 +289,8 @@ Character& Team::ActiveCharacter()
 
 void Team::SetWeapon (Weapon::Weapon_type type)
 {
-
-  assert (type >= Weapon::WEAPON_FIRST && type <= Weapon::WEAPON_LAST);
   AccessWeapon().Deselect();
-  active_weapon = WeaponsList::GetInstance()->GetWeapon(type);
+  active_weapon = Config::GetInstance()->GetWeaponsList()->GetWeapon(type);
   AccessWeapon().Select();
 }
 
@@ -357,12 +363,12 @@ Character* Team::FindByIndex(uint index)
   return &(*it);
 }
 
-void Team::LoadGamingData()
+void Team::LoadGamingData(uint howmany)
 {
   // Reset ammos
   m_nb_ammos.clear();
   m_nb_units.clear();
-  std::list<Weapon *> l_weapons_list = WeaponsList::GetInstance()->GetList() ;
+  std::list<Weapon *> l_weapons_list = Config::GetInstance()->GetWeaponsList()->GetList() ;
   std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
   end = l_weapons_list.end();
 
@@ -372,15 +378,21 @@ void Team::LoadGamingData()
   }
 
   // Disable non-working weapons in network games
-  if(Network::GetInstance()->IsConnected())
+  if(network.IsConnected())
   {
-    //m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
+    m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
+    m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_AIR_HAMMER)->GetName() ] = 0;
+    m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_BLOWTORCH)->GetName() ] = 0;
+    m_nb_ammos[ Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_SUBMACHINE_GUN)->GetName() ] = 0;
   }
 
-  active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
+  active_weapon = Config::GetInstance()->GetWeaponsList()->GetWeapon(Weapon::WEAPON_DYNAMITE);
   is_camera_saved = false;
 
-  LoadCharacters();
+  if (howmany == 0)
+    LoadCharacters(nb_characters);
+  else
+    LoadCharacters(howmany);
 }
 
 void Team::UnloadGamingData()

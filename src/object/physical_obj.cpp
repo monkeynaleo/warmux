@@ -79,14 +79,10 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
 
   m_cfg.LoadXml(m_name,xml_config);  // Load physics constants from the xml file
   ResetConstants();       // Set physics constants from the xml file
-
-  MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
 
 PhysicalObj::~PhysicalObj ()
-{
-  MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());
-}
+{}
 
 //---------------------------------------------------------------------------//
 //--                         Class Parameters SET/GET                      --//
@@ -157,7 +153,7 @@ void PhysicalObj::SetSize(const Point2i &newSize){
   SetPhysSize( (double)newSize.x / PIXEL_PER_METER, (double)newSize.y/PIXEL_PER_METER );
 }
 
-// Get objest's dimensions
+// Lit les dimensions de l'objet
 int PhysicalObj::GetWidth() const{
   assert (m_width != 0);
   return m_width;
@@ -325,9 +321,14 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     lg -= 1.0 ;
   } while (0 < lg);
 
-  // Notify the weapon that there is a movement
-  // Useful for ninja for example
-  ActiveTeam().AccessWeapon().NotifyMove(collision);
+
+  // Only for ninja rope... TO REMOVE!!
+  if (ActiveTeam().GetWeaponType() == Weapon::WEAPON_NINJA_ROPE &&
+      ActiveTeam().GetWeapon().IsActive()) {
+    Weapon& tmp = ActiveTeam().AccessWeapon();
+    NinjaRope * ninjarope = (NinjaRope *)(&tmp);
+    ninjarope->NotifyMove(collision) ;
+  }
 
   if ( collision == NO_COLLISION ) // Nothing more to do!
     return;
@@ -342,14 +343,9 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
     double ground_angle;
 
     if (ContactPoint(cx, cy)) {
-      ground_angle = world.ground.Tangent(cx, cy);
-      if(!isnan(ground_angle)) {
-        contactPos.x = (double)cx / PIXEL_PER_METER;
-        contactPos.y = (double)cy / PIXEL_PER_METER;
-      } else {
-        ground_angle = - GetSpeedAngle();
-        contactPos = pos;
-      }
+      ground_angle = world.ground.Tangeante(cx, cy);
+      contactPos.x = (double)cx / PIXEL_PER_METER;
+      contactPos.y = (double)cy / PIXEL_PER_METER;
     } else {
       ground_angle = - GetSpeedAngle();
       contactPos = pos;
@@ -460,8 +456,8 @@ bool PhysicalObj::PutOutOfGround()
   bool left,right,top,bottom;
   left   = world.IsInVacuum_left(*this, 0, 0);
   right  = world.IsInVacuum_right(*this, 0, 0);
-  top    = world.IsInVacuum_top(*this, 0, 0);
-  bottom = world.IsInVacuum_bottom(*this, 0, 0);
+  top    = world.EstDansVide_haut(*this, 0, 0);
+  bottom = world.EstDansVide_bas(*this, 0, 0);
 
   int dx = (int)GetTestRect().GetSizeX() * (right-left);
   int dy = (int)GetTestRect().GetSizeY() * (top-bottom);
@@ -592,9 +588,9 @@ bool PhysicalObj::IsOutsideWorldXY(Point2i position) const{
   int x = position.x + m_test_left;
   int y = position.y + m_test_top;
 
-  if( world.IsOutsideWorldXwidth(x, GetTestWidth()) )
+  if( world.EstHorsMondeXlarg(x, GetTestWidth()) )
 	  return true;
-  if( world.IsOutsideWorldYheight(y, GetTestHeight()) ){
+  if( world.EstHorsMondeYhaut(y, GetTestHeight()) ){
     if( m_allow_negative_y )
       if( (Y_OBJET_MIN <= y) && (y + GetTestHeight() - 1 < 0) )
 		  return false;
@@ -641,7 +637,7 @@ bool PhysicalObj::IsInVacuumXY(const Point2i &position, bool check_object) const
   Rectanglei rect(position.x + m_test_left, position.y + m_test_top,
 		  m_width - m_test_right - m_test_left, m_height -m_test_bottom - m_test_top);
 
-  return world.RectIsInVacuum (rect);
+  return world.RectEstDansVide (rect);
 }
 
 PhysicalObj* PhysicalObj::CollidedObject(const Point2i &offset) const
@@ -715,7 +711,7 @@ bool PhysicalObj::FootsInVacuumXY(const Point2i &position) const
   if(CollidedObjectXY( position + Point2i(0, 1)) != NULL )
     return false;
 
-  return world.RectIsInVacuum (rect);
+  return world.RectEstDansVide (rect);
 }
 
 bool PhysicalObj::IsInWater () const
@@ -736,12 +732,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
 {
   int x1, x2, y1, y2;
 
-  // We are looking for a point in contact with the bottom of the object:
+  // On cherche un point de contact en bas de l'objet:
   y1 = (GetY()+m_height-m_test_bottom);
   y2 = y1-1;
   for (uint x=GetX()+ m_test_left; x<=(GetX()+m_width)-m_test_right; x++)
   {
-    if(!world.IsOutsideWorld(Point2i(x,y1)) && !world.IsOutsideWorld(Point2i(x,y2))
+    if(!world.EstHorsMonde(Point2i(x,y1)) && !world.EstHorsMonde(Point2i(x,y2))
     && world.ground.IsEmpty(Point2i(x,y2)) && !world.ground.IsEmpty(Point2i(x,y1)))
     {
       contact_x = x;
@@ -750,12 +746,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
     }
   }
 
-  // We are looking for a point in contact on the left hand of object:
+  // On cherche un point de contact �gauche de l'objet:
   x1 = GetX()+m_test_left;
   x2 = x1+1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-    if(!world.IsOutsideWorld(Point2i(x1,y)) && !world.IsOutsideWorld(Point2i(x2,y))
+    if(!world.EstHorsMonde(Point2i(x1,y)) && !world.EstHorsMonde(Point2i(x2,y))
     && !world.ground.IsEmpty(Point2i(x1,y)) &&  world.ground.IsEmpty(Point2i(x2,y)))
     {
       contact_x = GetX() +m_test_left;
@@ -764,12 +760,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
     }
   }
 
-  // We are looking for a point in contact on the rigth hand of object:
+  // On cherche un point de contact �droite de l'objet:
   x1 = (GetX()+m_width-m_test_right);
   x2 = x1-1;
   for(uint y=GetY()+m_test_top;y<=GetY()+m_height-m_test_bottom;y++)
   {
-    if(!world.IsOutsideWorld(Point2i(x1, y)) && !world.IsOutsideWorld(Point2i(x2, y))
+    if(!world.EstHorsMonde(Point2i(x1, y)) && !world.EstHorsMonde(Point2i(x2, y))
        && !world.ground.IsEmpty(Point2i(x1, y)) && world.ground.IsEmpty(Point2i(x2, y)))
     {
       contact_x = GetX() + m_width - m_test_right;
@@ -778,12 +774,12 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
     }
   }
 
-  // We are looking for a point in contact on top of object:
+  // On cherche un point de contact en haut de l'objet:
   y1 = GetY()+m_test_top;
   y2 = y1 - 1;
   for(uint x=GetX()+m_test_left;x<=GetX()+m_width-m_test_right;x++)
   {
-    if(!world.IsOutsideWorld(Point2i(x,y1)) && !world.IsOutsideWorld(Point2i(x,y2))
+    if(!world.EstHorsMonde(Point2i(x,y1)) && !world.EstHorsMonde(Point2i(x,y2))
     && !world.ground.IsEmpty(Point2i(x, y1)) && world.ground.IsEmpty(Point2i(x, y2)))
     {
       contact_x =x;
@@ -794,13 +790,13 @@ bool PhysicalObj::ContactPoint (int & contact_x, int & contact_y)
   return false;
 }
 
-// Are the two object in contact ? (uses test rectangles)
+// Est-ce que deux objets se touchent ? (utilise les rectangles de test)
 bool PhysicalObj::ObjTouche(const PhysicalObj &b) const
 {
   return GetTestRect().Intersect( b.GetTestRect() );
 }
 
-// Do the point p touch the object ?
+// Est-ce que le point p touche l'objet a ?
 bool PhysicalObj::ObjTouche(const Point2i &p) const
 {
    return  GetTestRect().Contains( p );
@@ -827,7 +823,7 @@ bool PhysicalObj::PutRandomly(bool on_top_of_world, double min_dst_with_characte
     }
 
     if (on_top_of_world) {
-      // Give a random position for x
+      // Placement au hasard en X
       position.x = randomSync.GetLong(0, world.GetWidth() - GetWidth());
       position.y = -GetHeight()+1;
     } else {

@@ -31,7 +31,7 @@
 #include "../graphic/video.h"
 #include "../graphic/font.h"
 #include "../map/maps_list.h"
-#include "../network/net_error_msg.h"
+#include "../network/network.h"
 #include "../network/index_server.h"
 #include "../include/app.h"
 #include "../include/action_handler.h"
@@ -45,7 +45,10 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Rectanglei rectZero(0, 0, 0, 0);
   
-  Rectanglei stdRect(0, 0, 360, 64);
+  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  Font * big_font = Font::GetInstance(Font::FONT_BIG);
+
+  Rectanglei stdRect(0, 0, 300, 64);
 
   uint x_button = AppWormux::GetInstance()->video.window.GetWidth()/2 - stdRect.GetSizeX()/2;
   uint y_box = AppWormux::GetInstance()->video.window.GetHeight()/2 - 200;
@@ -57,11 +60,11 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   // What do we want to do ?
   Box* action_box = new HBox(stdRect, false);
 
-  previous_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_minus", false);
-  next_action_bt = new Button(Point2i(0, 0), res, "menu/really_big_plus", false);
+  previous_action_bt = new Button(Point2i(0, 0), res, "menu/big_minus", false);
+  next_action_bt = new Button(Point2i(0, 0), res, "menu/big_plus", false);
   action_label = new Label(_("Connect to an internet game"), 
 			   Rectanglei(0,0,250,0), 
-			   Font::FONT_BIG, Font::FONT_NORMAL, white_color, true);
+			   *big_font, white_color, true);
   action_box->AddWidget(previous_action_bt);
   action_box->AddWidget(action_label);
   action_box->AddWidget(next_action_bt);
@@ -69,15 +72,15 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   connection_box->AddWidget(action_box);
 
   // Server address
-  server_address_label = new Label(_("Server address:"), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  server_address_label = new Label(_("Server address:"), rectZero, *normal_font);
   connection_box->AddWidget(server_address_label);
-  server_address = new TextBox("localhost", rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  server_address = new TextBox("localhost", rectZero, *normal_font);
   connection_box->AddWidget(server_address);
 
   // Server port
-  port_number_label = new Label(_("Port:"), rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number_label = new Label(_("Port:"), rectZero, *normal_font);
   connection_box->AddWidget(port_number_label);
-  port_number = new TextBox(WORMUX_NETWORK_PORT, rectZero, Font::FONT_MEDIUM, Font::FONT_NORMAL);
+  port_number = new TextBox(WORMUX_NETWORK_PORT, rectZero, *normal_font);
   connection_box->AddWidget(port_number);
 
   // Available on internet ?
@@ -94,7 +97,7 @@ NetworkConnectionMenu::NetworkConnectionMenu() :
   msg_box = new MsgBox(Rectanglei( AppWormux::GetInstance()->video.window.GetWidth()/2 - 300,
 				   y_box+connection_box->GetSizeY() + 30, 
 				   600, 200), 
-		       Font::FONT_SMALL, Font::FONT_NORMAL);
+		       Font::GetInstance(Font::FONT_SMALL));
   widgets.AddWidget(msg_box);
 
   msg_box->NewMessage(_("WARNING!! Network is still under developement and therefore a little experimental."), c_red);
@@ -113,9 +116,9 @@ NetworkConnectionMenu::~NetworkConnectionMenu()
 {
 }
 
-void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
+void NetworkConnectionMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  Widget* w = widgets.ClickUp(mousePosition, button);
+  Widget* w = widgets.Clic(mousePosition, button);
 
   if ((w == next_action_bt) ||
       (w == action_label && (button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN)))
@@ -152,10 +155,6 @@ void NetworkConnectionMenu::OnClickUp(const Point2i &mousePosition, int button)
     }
 }
 
-void NetworkConnectionMenu::OnClick(const Point2i &mousePosition, int button)
-{
-}
-
 void NetworkConnectionMenu::SetAction(network_menu_action_t action)
 {
   current_action = action;
@@ -190,49 +189,36 @@ void NetworkConnectionMenu::SetAction(network_menu_action_t action)
 
 void NetworkConnectionMenu::Draw(const Point2i &mousePosition){}
 
-void NetworkConnectionMenu::DisplayError(Network::connection_state_t conn)
-{
-  DispNetworkError(conn);
-  Menu::RedrawMenu();
-}
-
 void NetworkConnectionMenu::sig_ok()
 {
-  Network::connection_state_t conn;
   switch (current_action) {
   case NET_HOST: // Hosting your own server
     if( !internet_server->GetValue() )
       index_server.SetHiddenServer();
 
-    conn = index_server.Connect();
-    if(conn != Network::CONNECTED)
-    {     
-      DisplayError(conn);
+    if( !index_server.Connect() ) {
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
       return;
     }
 
-    conn = Network::GetInstance()->ServerStart(port_number->GetText());
-    if( conn != Network::CONNECTED)
-    {      
-      DisplayError(conn);
-      return;
-    }
+    network.Init();
+    network.ServerStart(port_number->GetText());
 
     index_server.SendServerStatus();
 
-    if (!Network::GetInstance()->IsConnected()) {
+    if(network.IsConnected()) {
+      network.client_inited = 1;
+    } else {
       msg_box->NewMessage(_("Error: Unable to start server"), c_red);
       return;
     }
     break;
 
-  case NET_CONNECT_LOCAL: // Direct connexion to a server
-    conn = Network::ClientStart(server_address->GetText(), port_number->GetText());
-    if (!Network::IsConnected() || conn != Network::CONNECTED) {
-      DisplayError(conn);
 
-      // translators: %s:%s will expand to something like "example.org:9999"
+  case NET_CONNECT_LOCAL: // Direct connexion to a server
+    network.Init();
+    network.ClientConnect(server_address->GetText(), port_number->GetText());
+    if (!network.IsConnected()) {
       msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
 				 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
 			  c_red);
@@ -241,9 +227,7 @@ void NetworkConnectionMenu::sig_ok()
     break;
 
   case NET_BROWSE_INTERNET: // Search an internet game!
-    conn = index_server.Connect();
-    if (conn != Network::CONNECTED) {
-      DisplayError(conn);
+    if( !index_server.Connect() ) {
       msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
       return;
     }
@@ -255,34 +239,32 @@ void NetworkConnectionMenu::sig_ok()
 
     // we don't go back into the main menu!
     // -> im.Run() may have connected to a host so the 
-    // if(Network::GetInstance()->IsConnected()) just below will be catched and close the menu
+    // if(network.IsConnected()) just below will be catched and close the menu
     break;
   }
 
-  if (Network::GetInstance()->IsConnected()) {
+  if (network.IsConnected()) {
     // run the network menu ! :-)
     NetworkMenu nm;
-    Network::GetInstance()->network_menu = &nm;
+    network.network_menu = &nm;
     nm.Run();
-    Network::GetInstance()->network_menu = NULL;
+    network.network_menu = NULL;
     index_server.Disconnect();
 
     // back to main menu after playing
     Menu::sig_ok();
   } else {
-    // if InternetMenu was closed without making a connection menu has to be redrawn
-    Menu::RedrawMenu();
     // TODO : add error sound and dialog
   }
 }
 
 void NetworkConnectionMenu::__sig_ok()
 {
-  Network::Disconnect();
+  network.Disconnect();
 }
 
 void NetworkConnectionMenu::__sig_cancel()
 {
-  Network::Disconnect();
+  network.Disconnect();
 }
 

@@ -26,13 +26,8 @@
 #include "label.h"
 
 class ListBoxWithLabel : public ListBox
-{
+{ 
  private:
-  /* If you need this, implement it (correctly)*/
-  ListBoxWithLabel(const ListBoxWithLabel&);
-  ListBoxWithLabel operator=(const ListBoxWithLabel&);
-  /*********************************************/
-
   Text *txt_label;
 
 public:

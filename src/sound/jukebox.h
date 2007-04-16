@@ -35,30 +35,23 @@
 /* Informations about music...
  *
  * Now, there is a playlist in JukeBox class.
- * A profil is openned in $DATA$/music/profile.xml, where there is a list of
- * "music" sections like this :
+ * A profil is openned in $DATA$/music/profile.xml, where there is a list of "music" sections like this :
  *   <music type="menu" playlist="menu/menu.m3u" />
  *
- * Your must create a m3u file, where there are listed (one per line) all music
- * files with a relative or an absolute path.
- *
+ * Your must create a m3u file, where there are listed (one per line) all music files with a relative or an absolute path.
  * A comment is a line begined with a '#' char.
  *
  * When wormux is launched, there is a menu playlist and a ingame playlist.
- * At startup of a playlist, a random music is selected, after that, at the end
- * of the current music, we play the next music in list. If this is the last
- * music, we go back to the first music...
+ * At startup of a playlist, a random music is selected, after that, at the end of the current music, we play
+ * the next music in list. If this is the last music, we go back to the first music...
  *
- * Music is a separate section of JukeBox class, with his own members functions
- * and variables.
+ * Music is a separate section of JukeBox class, with his own members functions and variables.
  *
  * Call LoadMusicXML() will load profile and playlists.
- * Next, a call to PlayMusic(profile_name) will stop any playing playlist, and
- * will play request playlist.
+ * Next, a call to PlayMusic(profile_name) will stop any playing playlist, and will play request playlist.
  * You can use NextMusic() and StopMusic().
  *
- * There isn't any PauseMusic() and ResumeMusic(), but if it is necessary it can
- * easily be done.
+ * There isn't any PauseMusic() and ResumeMusic(), but if it is necessary it can easily be done.
  * Note that Pause() and Resume() are used for CHUNK SOUNDS ONLY.
  *
  * -Progs
@@ -67,10 +60,6 @@
 class JukeBox
 {
 private:
-  /* If you need this, implement it (correctly) */
-  JukeBox(const JukeBox&);
-  JukeBox operator=(const JukeBox&);
-  /**********************************************/
 
   typedef std::multimap<std::string, std::string>::value_type
     sound_sample;
@@ -130,14 +119,8 @@ public:
   void StopMusic();
   void NextMusic();
 
-  inline bool IsPlayingMusic() const
-    {
-      return (!playlist.empty() && playing_pl != playlist.end());
-    }
-  inline bool IsPlayingMusicSample() const
-    {
-      return (IsPlayingMusic() && playing_music != playing_pl->second.end());
-    }
+  bool IsPlayingMusic() const { return (!playlist.empty() && playing_pl != playlist.end()); }
+  bool IsPlayingMusicSample() const { return (IsPlayingMusic() && playing_music != playing_pl->second.end()); }
 
   /**
    * Playing a sound effect

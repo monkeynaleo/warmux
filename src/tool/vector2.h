@@ -18,9 +18,10 @@ template<class T> class Vector2
 		/**
 		 * Default constructor that will be a vector null (0, 0)
 		 */
-		inline Vector2():
-			x(0), y(0)
-                { }
+		inline Vector2(){
+			x = 0;
+			y = 0;
+		}
 
 		/**
 		 * Constructor that build a new vector from two values, x and y.
@@ -28,9 +29,10 @@ template<class T> class Vector2
 		 * @param x
 		 * @param y
 		 */
-		inline Vector2(T _x, T _y):
-			x(_x), y(_y)
-		{}
+		inline Vector2(T x, T y){
+			this->x = x;
+			this->y = y;
+		}
 
 		/**
 		 * Return the x coordinate.
@@ -198,7 +200,7 @@ template<class T> class Vector2
 		 */
 		inline void operator-=(const T val){
 			x -= val;
-			y -= val;
+			y += val;
 		}
 
 		/**
@@ -342,8 +344,7 @@ template<class T> class Vector2
 		}
 
 		/**
-		 *  Compute the angle of point M in the Cartesian plane
-                 *  centered on O
+		 *  Calcule l'angle en radian du point M dans le repère de centre O
 		 *
 		 * Pour O=(0,0) :
 		 * - M=(10,10) -> PI/4 (0.78)

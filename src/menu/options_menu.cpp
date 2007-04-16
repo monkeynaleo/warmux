@@ -48,6 +48,8 @@ OptionMenu::OptionMenu() :
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   Rectanglei stdRect (0, 0, 140, 30);
 
+  normal_font = Font::GetInstance(Font::FONT_NORMAL);
+
   /* Grapic options */
   Box * graphic_options = new HBox( Rectanglei(GRAPHIC_X, GRAPHIC_Y, GRAPHIC_W, GRAPHIC_H));
 
@@ -160,14 +162,9 @@ OptionMenu::~OptionMenu()
 {
 }
 
-void OptionMenu::OnClickUp(const Point2i &mousePosition, int button)
+void OptionMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  widgets.ClickUp(mousePosition, button);
-}
-
-void OptionMenu::OnClick(const Point2i &mousePosition, int button)
-{
-
+  widgets.Clic(mousePosition, button);
 }
 
 void OptionMenu::SaveOptions()
@@ -177,11 +174,6 @@ void OptionMenu::SaveOptions()
   config->SetDisplayWindParticles(opt_display_wind_particles->GetValue());
   config->SetDisplayEnergyCharacter(opt_display_energy->GetValue());
   config->SetDisplayNameCharacter(opt_display_name->GetValue());
-
-  // Sound settings
-  config->SetSoundEffects(opt_sound_effects->GetValue());
-  config->SetSoundMusic(opt_music->GetValue());
-  config->SetSoundFrequency(lbox_sound_freq->ReadIntValue());
 
   AppWormux * app = AppWormux::GetInstance();
   app->video.SetMaxFps(opt_max_fps->GetValue());

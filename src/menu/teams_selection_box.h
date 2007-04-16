@@ -38,13 +38,8 @@ const uint MAX_NB_TEAMS=4;
 // -----------------------------------------------
 
 class TeamsSelectionBox : public HBox
-{
- private:
-  /* If you need this, implement it (correctly) */
-  TeamsSelectionBox(const TeamsSelectionBox&);
-  TeamsSelectionBox operator=(const TeamsSelectionBox&);
-  /**********************************************/
-
+{ 
+ private:  
   SpinButtonBig *teams_nb;
   std::vector<TeamBox*> teams_selections;
 
@@ -55,8 +50,7 @@ class TeamsSelectionBox : public HBox
   TeamsSelectionBox(const Rectanglei &rect);
 
   void ValidTeamsSelection();
-  Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
+  Widget* Clic(const Point2i &mousePosition, uint button);
 };
 
 #endif

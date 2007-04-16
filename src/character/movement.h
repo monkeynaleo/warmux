@@ -48,10 +48,9 @@ public:
   bool follow_half_crosshair;
   bool follow_speed;
   bool follow_direction;
-  member_mvt(): angle_rad(0), pos(0.0, 0.0), scale(1.0, 1.0), alpha(1),
-                follow_crosshair(false), follow_half_crosshair(false),
-                follow_speed(false), follow_direction(false)
-  { };
+  member_mvt() { pos.x = pos.y = angle_rad = follow_crosshair = follow_half_crosshair
+                       = follow_speed = follow_direction = 0;
+                 alpha = scale.x = scale.y = 1.0;};
 };
 
 class Movement
@@ -63,11 +62,6 @@ public:
   bool always_moving;
   int speed;
   uint test_left, test_right, test_top, test_bottom;
-  enum
-  {
-    LOOP,
-    PLAY_ONCE
-  } play_mode;
 
   std::string type;
 

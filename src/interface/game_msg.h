@@ -35,19 +35,16 @@
  */
 class Message : public Text
 {
-private:
-  uint time;
-
-public:
-  Message(const std::string &new_txt,
-	  const Color &new_color, 
-	  Font::font_size_t font_size,
-	  Font::font_style_t font_style,
-	  uint _time) :
-    Text(new_txt, new_color, font_size, font_style),
-    time(_time) {};
-
-  inline uint get_time() { return time; }
+  public:
+    Message(const std::string &new_txt,
+            const Color &new_color, Font* new_font,
+            uint _time) :
+      Text(new_txt, new_color, new_font),
+      time(_time) {};
+    inline uint get_time()
+    { return time; }
+  private:
+    uint time;
 };
 /*
  * class GameMessages

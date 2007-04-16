@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Main Class manage the game : initialization, drawing, components management
- * and game loop.
+ * Classe principale qui gère le jeu : initialisation, dessin, gestion
+ * des différents composants, et boucle de jeu.
  *****************************************************************************/
 
 #ifndef GAME_H
@@ -25,21 +25,19 @@
 
 #include "../include/base.h"
 #include "../gui/question.h"
-#include "../weapon/weapons_list.h"
 
 class Game
 {
 private:
   bool isGameLaunched;
-
-  // Set the user requested an end of the game
-  bool want_end_of_game;
+  bool endOfGameStatus;
+  bool isGamePaused;
 
   int NbrRemainingTeams() const;
 
   Game();
   static Game * singleton;
-
+  
   int AskQuestion (Question &question, bool draw=true);
   void DisplayPause();
   bool DisplayQuit();
@@ -57,7 +55,9 @@ public:
   void MessageLoading() const;
   void MessageEndOfGame() const;
 
-  void TogglePause();
-  void UserWantEndOfGame() { want_end_of_game = true; };
+  void Pause();
+
+  bool GetEndOfGameStatus() const;
+  void SetEndOfGameStatus(bool status);
 };
 #endif

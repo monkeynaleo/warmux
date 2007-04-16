@@ -70,14 +70,9 @@ void Box::Draw(const Point2i &mousePosition,
   }
 }
 
-Widget* Box::Click(const Point2i &mousePosition, uint button)
+Widget* Box::Clic (const Point2i &mousePosition, uint button)
 {
-  return WidgetList::Click(mousePosition, button);
-}
-
-Widget* Box::ClickUp(const Point2i &mousePosition, uint button)
-{
-  return WidgetList::ClickUp(mousePosition, button);
+  return WidgetList::Clic(mousePosition, button);
 }
 
 void Box::SetMargin (uint _margin)

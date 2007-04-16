@@ -26,18 +26,16 @@
 #include "point.h"
 
 class Random{
- public:
-  Random();
+public:
+	Random();
 
-  static bool GetBool();
-  static long GetLong(long min, long max);
-  static int GetInt(int min, int max);
-  static double GetDouble();
-  static double GetDouble(double max);
-  static double GetDouble(double min, double max);
-  static Point2i GetPoint(const Rectanglei &rect);
-  static Point2i GetPoint(const Point2i &pt);
-  static int GetSign();
+	bool GetBool();
+	long GetLong(long min, long max);
+	double GetDouble();
+	double GetDouble(double max);
+	double GetDouble(double min, double max);
+	Point2i GetPoint(const Rectanglei &rect);
+	Point2i GetPoint(const Point2i &pt);
 };
 
 extern Random randomObj;

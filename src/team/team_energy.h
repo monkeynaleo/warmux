@@ -46,11 +46,6 @@ typedef enum {
 class TeamEnergy
 {
   private :
-    /* If you need this, implement it (correctly) */
-    TeamEnergy(const TeamEnergy&);
-    TeamEnergy operator=(const TeamEnergy&);
-    /**********************************************/
-
     EnergyBar energy_bar;
     // displayed value
     uint value;

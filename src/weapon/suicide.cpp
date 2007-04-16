@@ -31,7 +31,6 @@
 Suicide::Suicide() : Weapon(WEAPON_SUICIDE, "suicide", new ExplosiveWeaponConfig())
 {
   m_name = _("Commit Suicide");
-  m_category = DUEL;
   sound_channel = -1;
 }
 
@@ -44,7 +43,7 @@ bool Suicide::p_Shoot()
 {
   sound_channel = jukebox.Play ("share", "weapon/suicide");
 
-  // GameLoop::GetInstance()->interaction_enabled=false;
+  GameLoop::GetInstance()->interaction_enabled=false;
   is_dying = true;
 
   return true;
@@ -60,8 +59,11 @@ void Suicide::Refresh()
   {
     ActiveCharacter().DisableDeathExplosion();
     ActiveCharacter().body->MakeParticles(ActiveCharacter().GetPosition());
-    ActiveCharacter().SetEnergy(0); // Die!
-    SendActiveCharacterInfo();
+    Action* a = new Action(Action::ACTION_SET_CHARACTER_ENERGY);
+    a->Push((int)ActiveCharacter().GetTeamIndex());
+    a->Push((int)ActiveCharacter().GetCharacterIndex());
+    a->Push(0); // Set energy to 0 => death
+    ActionHandler::GetInstance()->NewAction(a);
     ApplyExplosion(ActiveCharacter().GetCenter(),cfg());
   }
 }

@@ -100,7 +100,6 @@ DiscoGrenadeLauncher::DiscoGrenadeLauncher() :
   WeaponLauncher(WEAPON_DISCO_GRENADE, "disco_grenade", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Disco Grenade");
-  m_category = THROW;
   m_allow_change_timeout = true;
   ignore_collision_signal = true;
   ReloadLauncher();

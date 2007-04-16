@@ -45,6 +45,8 @@
 #include "smoke.h"
 #include "star.h"
 
+ParticleEngine global_particle_engine;
+
 Particle::Particle(const std::string &name) :
   PhysicalObj(name)
 {
@@ -134,11 +136,11 @@ void ParticleEngine::AddPeriodic(const Point2i &position, particle_t type,
 
 //-----------------------------------------------------------------------------
 // Static methods
-bool ParticleEngine::sprites_loaded = false;
+
 std::list<Particle*> ParticleEngine::lst_particles;
 Sprite* ParticleEngine::particle_sprite[particle_spr_nbr];
 
-void ParticleEngine::Load()
+void ParticleEngine::Init()
 {
   // Pre-load the sprite of each particle
   Profile *res = resource_manager.LoadXMLProfile( "weapons.xml", false);
@@ -160,25 +162,18 @@ void ParticleEngine::Load()
   particle_sprite[POLECAT_FART_spr] = resource_manager.LoadSprite(res,"polecat_fart");
   particle_sprite[POLECAT_FART_spr]->EnableRotationCache(6);
   resource_manager.UnLoadXMLProfile(res);
-
-  sprites_loaded = true;
 }
 
 void ParticleEngine::FreeMem()
 {
-  sprites_loaded = false;
-
   for(int i=0; i<particle_spr_nbr ; i++)
-    delete particle_sprite[i];
+    delete global_particle_engine.particle_sprite[i];
 }
 
 Sprite* ParticleEngine::GetSprite(particle_spr type)
 {
   assert(type < particle_spr_nbr);
-  if (!sprites_loaded)
-    return NULL;
-
-  return new Sprite(*(particle_sprite[type]));
+  return new Sprite(*(global_particle_engine.particle_sprite[type]));
 }
 
 void ParticleEngine::AddNow(const Point2i &position,
@@ -186,9 +181,6 @@ void ParticleEngine::AddNow(const Point2i &position,
 			    bool upper,
 			    double angle, double norme)
 {
-  if (!sprites_loaded)
-    return;
-
   Particle *particle = NULL;
   double tmp_angle, tmp_norme;
 
@@ -244,17 +236,11 @@ void ParticleEngine::AddNow(const Point2i &position,
 
 void ParticleEngine::AddNow(Particle* particle)
 {
-  if (!sprites_loaded || !particle)
-    return;
-
   lst_particles.push_back(particle);
 }
 
 void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
 {
-  if (!sprites_loaded)
-    return;
-
   //Add many little smoke particles
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
   // see the commented value of 'angle' to see how it was generated
@@ -286,9 +272,6 @@ void ParticleEngine::AddBigESmoke(const Point2i &position, const uint &radius)
 
 void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius)
 {
-  if (!sprites_loaded)
-    return;
-
   //Add a few big smoke particles
   const uint big_partic_nbr = 5;
   // Sin / cos  precomputed value, to avoid recomputing them and speed up.
@@ -318,10 +301,7 @@ void ParticleEngine::AddLittleESmoke(const Point2i &position, const uint &radius
 }
 
 void ParticleEngine::AddExplosionSmoke(const Point2i &position, const uint &radius, ESmokeStyle &style)
-{  
-  if (!sprites_loaded)
-    return;
-
+{
   if(style == NoESmoke) return;
   AddLittleESmoke (position, radius);
   if(style == BigESmoke) AddBigESmoke (position, radius);

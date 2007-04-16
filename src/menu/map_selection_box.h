@@ -28,34 +28,28 @@
 #include "../gui/picture_widget.h"
 
 class MapSelectionBox : public HBox
-{
- private:
-  /* If you need this, implement it (correctly) */
-  MapSelectionBox(const MapSelectionBox&);
-  MapSelectionBox operator=(const MapSelectionBox&);
-  /**********************************************/
-
+{ 
+ private:  
   uint selected_map_index;
   bool display_only;
 
   PictureWidget *map_preview_selected;
   PictureWidget *map_preview_before, *map_preview_before2;
-  PictureWidget *map_preview_after, *map_preview_after2;
-
+  PictureWidget *map_preview_after, *map_preview_after2;  
+     
   Label *map_name_label;
   Label *map_author_label;
   Button *bt_map_plus, *bt_map_minus;
 
-  void ChangeMapDelta(int delta_index);
+  void ChangeMapDelta(int delta_index);   
   void ChangeMap(int index);
 
  public:
-  MapSelectionBox(const Rectanglei &rect, bool _display_only = false);
+  MapSelectionBox(const Rectanglei &rect, bool _display_only);
 
   void ValidMapSelection();
   void ChangeMapCallback();
-  Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
+  Widget* Clic(const Point2i &mousePosition, uint button);
 };
 
 

@@ -48,7 +48,6 @@ bool Time::IsGamePaused() const {
 Time::Time(){
   is_game_paused = false;
   delta_t = 20;
-  max_time = 0;
 }
 
 void Time::Reset(){
@@ -68,8 +67,8 @@ void Time::Refresh(){
   - current node is server and game loop is not in Playing state
   - game don't use network
   if((ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()) ||
-     (Network::GetInstance()->IsServer() && GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) ||
-     (!Network::GetInstance()->IsServer() && !Network::GetInstance()->IsClient()) ||
+     (network.IsServer() && GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) ||
+     (!network.IsServer() && !network.IsClient()) ||
      current_time < max_time)
   */
   current_time += delta_t;

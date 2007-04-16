@@ -2,5 +2,4 @@
 <profile>
   <music type="menu" playlist="menu/menu.m3u" />
   <music type="ingame" playlist="ingame/ingame.m3u" />
-  <music type="fear" playlist="ingame/fear.m3u" />
 </profile>

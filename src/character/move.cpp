@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Mouvement right/left for a character.
+ * Mouvement droite/gauche pour un character.
  *****************************************************************************/
 
 #include "move.h"
@@ -43,7 +43,7 @@ const uint PAUSE_CHG_DIRECTION=80; // ms
 
 // Compute the height to fall or to walk on when moving horizontally
 // Return a boolean which says if movement is possible
-bool ComputeHeightMovement(Character &character, int &height,
+bool ComputeHeightMovement(Character &character, int &height, 
 			   bool falling)
 {
   int y_floor=character.GetY();
@@ -83,75 +83,92 @@ bool ComputeHeightMovement(Character &character, int &height,
   return false;
 }
 
-// Moves a character to the right/left depending the signess of direction
+// Bouge un character characters la droite ou la gauche (selon le signe de direction)
 void MoveCharacter(Character &character)
 {
   int height;
-  bool ghost;
+  bool fantome;
 
-  // If character moves out of the world, no need to go further: it is dead
+  // On est bien dans le monde ? (sinon, pas besoin de tester !)
   if (character.GetDirection() == -1)
-    ghost = character.IsOutsideWorld ( Point2i(-1, 0) );
+    fantome = character.IsOutsideWorld ( Point2i(-1, 0) );
   else
-    ghost = character.IsOutsideWorld ( Point2i(1, 0) );
-  if (ghost){
+    fantome = character.IsOutsideWorld ( Point2i(1, 0) );
+  if (fantome){
     MSG_DEBUG("ghost", "%s will be a ghost.", character.GetName().c_str());
     character.Ghost();
     return;
   }
 
-  // Compute fall heigth
+  // Calcule la hauteur a descendre
   if (!ComputeHeightMovement (character, height, true)) return;
 
   do
   {
-    // Move !
+    // Bouge !
     GameLoop::GetInstance()->character_already_chosen = true;
-    // Eventually moves the character
+    // Deplace enfin le character
 
     character.SetXY( Point2i(character.GetX() +character.GetDirection(),
                              character.GetY() +height) );
 
-    // If no collision, let gravity do its job
+    // Gravite (s'il n'y a pas eu de collision
     character.UpdatePosition();
 
   }while(character.CanStillMoveDG(PAUSE_MOVEMENT) && ComputeHeightMovement (character, height, true));
 }
+// Move a character to the left
+void MoveCharacterLeft(Character &character){
+  // Le character est pret a bouger ?
+  if (!character.MouvementDG_Autorise()) return;
 
-// Move the active character to the left
-void MoveActiveCharacterLeft(){
-  // character is ready to move ?
-  if (!ActiveCharacter().MouvementDG_Autorise()) return;
-
-  bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT);
-  if (move) {
-    MoveCharacter(ActiveCharacter());
-  } else {
-    ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-    ActiveCharacter().InitMouvementDG (PAUSE_CHG_DIRECTION);
+  bool bouge = (character.GetDirection() == -1);
+  if (bouge)
+  {
+    MoveCharacter(character);
+  }
+  else{
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_CHARACTER_DIRECTION,-1));
+    character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
   //Refresh skin position across network
-  if( !Network::GetInstance()->IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
-    SendActiveCharacterInfo();
+  if( !network.IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
+    SendCharacterPosition();
 }
 
-// Move the active character to the right
-void MoveActiveCharacterRight()
+// Move a character to the right
+void MoveCharacterRight (Character &character)
 {
-  // character is ready to move ?
-  if (!ActiveCharacter().MouvementDG_Autorise()) return;
+  // Le character est pret a bouger ?
+  if (!character.MouvementDG_Autorise()) return;
 
-  bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT);
-  if (move) {
-    MoveCharacter(ActiveCharacter());
-  } else {
-    ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-    ActiveCharacter().InitMouvementDG (PAUSE_CHG_DIRECTION);
+  bool bouge = (character.GetDirection() == 1);
+  if (bouge)
+  {
+    MoveCharacter(character);
+  }
+  else
+  {
+    ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_CHARACTER_DIRECTION,1));
+    character.InitMouvementDG (PAUSE_CHG_DIRECTION);
   }
 
+
   //Refresh skin position across network
-  if( !Network::GetInstance()->IsLocal() && ActiveTeam().IsLocal())
-    SendActiveCharacterInfo();
+  if( !network.IsLocal() && ActiveTeam().IsLocal())
+    SendCharacterPosition();
 }
 
+void SendCharacterPosition()
+{
+  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
+  Action* a = BuildActionSendCharacterPhysics(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  network.SendAction(a);
+  delete a;
+
+  Action a_set_skin(Action::ACTION_SET_SKIN,ActiveCharacter().body->GetClothe());
+  a_set_skin.Push(ActiveCharacter().body->GetMovement());
+  a_set_skin.Push((int)ActiveCharacter().body->GetFrame());
+  network.SendAction(&a_set_skin);
+}

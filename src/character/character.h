@@ -30,6 +30,7 @@
 #include "../include/base.h"
 #include "../object/physical_obj.h"
 #include "../particles/particle.h"
+#include "../interface/keyboard.h"
 #include "body.h"
 
 class Team;
@@ -38,10 +39,6 @@ class ParticleEngine;
 class Character : public PhysicalObj
 {
 private:
-  /* If you need this, implement it (correctly) */
-  Character operator=(const Character&);
-  /**********************************************/
-
   std::string character_name;
   Team &m_team;
   bool step_sound_played;
@@ -67,7 +64,6 @@ private:
   // chrono
   uint pause_bouge_dg;  // pause pour mouvement droite/gauche
   uint do_nothing_time;
-  uint walking_time;
   uint animation_time;
   int lost_energy;
   bool hidden; //The character is hidden (needed by teleportation)
@@ -92,8 +88,6 @@ private:
   void SignalGhostState(bool was_dead);
   void SignalCollision();
   void SetBody(Body* char_body);
-
-  void AddFiringAngle(double angle);
 
 public:
 
@@ -126,12 +120,15 @@ public:
   void StartPlaying();
   void StopPlaying();
 
+  // Handle a key event on the character
+  void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
   void PrepareShoot();
-  bool IsPreparingShoot();
   void DoShoot();
+  void HandleShoot(Keyboard::Key_Event_t event_type);
   double GetFiringAngle() const;
   double GetAbsFiringAngle() const;
   void SetFiringAngle(double angle);
+  void AddFiringAngle(double angle);
 
   // Show hide the Character
   void Hide();
@@ -182,36 +179,6 @@ public:
   void SetMovement(std::string name);
   void SetClotheOnce(std::string name);
   void SetMovementOnce(std::string name);
-
-  // Keyboard handling
-  void HandleKeyPressed_MoveRight();
-  void HandleKeyRefreshed_MoveRight();
-  void HandleKeyReleased_MoveRight();
-
-  void HandleKeyPressed_MoveLeft();
-  void HandleKeyRefreshed_MoveLeft();
-  void HandleKeyReleased_MoveLeft();
-
-  void HandleKeyPressed_Up();
-  void HandleKeyRefreshed_Up();
-  void HandleKeyReleased_Up();
-
-  void HandleKeyPressed_Down();
-  void HandleKeyRefreshed_Down();
-  void HandleKeyReleased_Down();
-
-  void HandleKeyPressed_Jump();
-  void HandleKeyRefreshed_Jump();
-  void HandleKeyReleased_Jump();
-
-  void HandleKeyPressed_HighJump();
-  void HandleKeyRefreshed_HighJump();
-  void HandleKeyReleased_HighJump();
-
-  void HandleKeyPressed_BackJump();
-  void HandleKeyRefreshed_BackJump();
-  void HandleKeyReleased_BackJump();
-
 };
 
 #endif

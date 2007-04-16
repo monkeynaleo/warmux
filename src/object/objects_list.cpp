@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * List of objects that are displayed.
+ * Liste des objets qui sont sur le plateau de jeu.
  *****************************************************************************/
 
 #include "../object/objects_list.h"
@@ -123,6 +123,7 @@ bool ObjectsList::AllReady()
 
 void ObjectsList::FreeMem()
 {
+  MSG_DEBUG("lst_objects", "Erasing object list");
   ObjectsList::iterator object;
   for (object = begin();
        object != end();

@@ -24,7 +24,6 @@
 #include "../character/body.h"
 #include "../character/move.h"
 #include "../interface/game_msg.h"
-#include "../game/game_loop.h"
 #include "../map/map.h"
 #include "../network/randomsync.h"
 #include "../team/macro.h"
@@ -37,7 +36,7 @@
 
 AIStupidEngine * AIStupidEngine::singleton = NULL;
 
-AIStupidEngine::AIStupidEngine() : m_shoot(m_movement)
+AIStupidEngine::AIStupidEngine()
 {
   std::cout << "o Artificial Intelligence Stupid engine initialization" << std::endl;
 }
@@ -86,9 +85,6 @@ void AIStupidEngine::Refresh()
 
   if (m_shoot.Refresh(m_current_time)) {
     m_movement.Move(m_current_time);
-
-    if (m_movement.IsProgressing())
-      m_shoot.SetNoStrategy();
   }
 
 //   switch (m_step)
@@ -122,8 +118,3 @@ void AIStupidEngine::Refresh()
 
 }
 
-void AIStupidEngine::ForceEndOfTurn()
-{ 
-  m_movement.StopMoving();
-  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
-}

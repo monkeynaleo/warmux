@@ -36,10 +36,7 @@ private:
   std::string value;
 
 public:
-  ListBoxItem(const std::string& _label,
-	      Font::font_size_t font_size,
-	      Font::font_style_t font_style,
-	      const std::string& value,
+  ListBoxItem(const std::string& _label, Font& _font, const std::string& value,
 	      const Color& color = white_color);
 
   const std::string& GetLabel() const;
@@ -48,16 +45,8 @@ public:
 
 class ListBox : public Widget
 {
-  /* If you need this, implement it (correctly)*/
-  ListBox(const ListBox&);
-  ListBox operator=(const ListBox&);
-  /*********************************************/
-
 private:
   bool always_one_selected;
-
-  bool scrolling;
-  Rectanglei ScrollBarPos() const;
 
 protected:
   // what are the items ?
@@ -68,34 +57,17 @@ protected:
   // Buttons
   Button *m_up, *m_down;
 
-  // Colors
-  Color border_color;
-  Color background_color;
-  Color selected_item_color;
-  Color default_item_color;
-
 public:
-  void SetBorderColor(const Color & border);
-  void SetBackgroundColor(const Color & background);
-  void SetSelectedItemColor(const Color & selected_item);
-  void SetDefaultItemColor(const Color & default_item);
-
   ListBox (const Rectanglei &rect, bool always_one_selected_b = true);
   ~ListBox();
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
-  void Update(const Point2i &mousePosition,
-	      const Point2i &lastMousePosition,
-	      Surface& surf);
-
-  Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
+  Widget* Clic(const Point2i &mousePosition, uint button);
   void SetSizePosition(const Rectanglei &rect);
 
   void AddItem(bool selected, const std::string &label,
 	       const std::string &value,
-	       Font::font_size_t fsize = Font::FONT_SMALL,
-	       Font::font_style_t fstyle = Font::FONT_NORMAL,
+	       Font& font = *Font::GetInstance(Font::FONT_SMALL),
 	       const Color& color = white_color);
   void Sort();
 
@@ -108,7 +80,6 @@ public:
   void RemoveSelected();
   const std::string& ReadLabel() const;
   const std::string& ReadValue() const;
-  const int ReadIntValue() const;
   const std::string& ReadValue(int index) const;
 
   uint Size() const;

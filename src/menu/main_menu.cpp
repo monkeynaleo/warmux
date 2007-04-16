@@ -16,8 +16,8 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Game menu from which one may start a new game, modify options, obtain some
- * infomations or leave the game.
+ * Main_Menu du jeu permettant de lancer une partie, modifier les options, d'obtenir
+ * des informations, ou encore quitter le jeu.
  *****************************************************************************/
 
 #include "main_menu.h"
@@ -57,6 +57,9 @@ Main_Menu::Main_Menu() :
   int x_button;
   double y_scale;
 
+  Font * normal_font = Font::GetInstance(Font::FONT_NORMAL);
+  Font * large_font = Font::GetInstance(Font::FONT_LARGE);
+
   int button_width = 402;
   int button_height = 64;
 
@@ -83,14 +86,14 @@ Main_Menu::Main_Menu() :
   play = new ButtonText(Point2i(x_button, y),
                         res, "main_menu/button",
                         _("Play"),
-                        Font::FONT_LARGE, Font::FONT_NORMAL);
+                        large_font);
   y += dy;
 
   if(Config::GetInstance()->IsNetworkActivated()) {
     network = new ButtonText( Point2i(x_button, y),
                               res, "main_menu/button",
                               _("Network Game"),
-                              Font::FONT_LARGE, Font::FONT_NORMAL );
+                              large_font );
     y += dy;
   } else {
     network = NULL;
@@ -99,19 +102,19 @@ Main_Menu::Main_Menu() :
   options = new ButtonText(Point2i(x_button, y),
                            res, "main_menu/button",
                            _("Options"),
-                           Font::FONT_LARGE, Font::FONT_NORMAL);
+                           large_font);
   y += dy;
 
   infos =  new ButtonText(Point2i(x_button, y),
                           res, "main_menu/button",
                           _("Credits"),
-                          Font::FONT_LARGE, Font::FONT_NORMAL);
+                          large_font);
   y += dy;
 
   quit =  new ButtonText(Point2i(x_button, y),
                          res, "main_menu/button",
                          _("Quit"),
-                         Font::FONT_LARGE, Font::FONT_NORMAL);
+                         large_font);
 
   widgets.AddWidget(play);
   if(Config::GetInstance()->IsNetworkActivated())
@@ -124,58 +127,53 @@ Main_Menu::Main_Menu() :
   resource_manager.UnLoadXMLProfile( res);
 
   std::string s("Version "+Constants::VERSION);
-  version_text = new Text(s, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
+  version_text = new Text(s, green_color, normal_font, false);
 
   std::string s2(Constants::WEB_SITE);
-  website_text = new Text(s2, green_color, Font::FONT_MEDIUM, Font::FONT_NORMAL, false);
+  website_text = new Text(s2, green_color, normal_font, false);
 
   if(!jukebox.IsPlayingMusic())
      jukebox.PlayMusic("menu");
 }
 
-void Main_Menu::button_click()
+void Main_Menu::button_clic()
 {
   jukebox.Play("share", "menu/clic");
 }
 
-void Main_Menu::OnClickUp(const Point2i &mousePosition, int button)
+void Main_Menu::OnClic(const Point2i &mousePosition, int button)
 {
-  Widget* b = widgets.ClickUp(mousePosition,button);
-  if (b == play)
+  Widget* b = widgets.Clic(mousePosition,button);
+  if(b == play)
   {
     choice = menuPLAY;
     close_menu = true;
-    button_click();
+    button_clic();
   }
   else if(b == network && Config::GetInstance()->IsNetworkActivated())
   {
     choice = menuNETWORK;
     close_menu = true;
-    button_click();
+    button_clic();
   }
   else if(b == options)
   {
     choice = menuOPTIONS;
     close_menu = true;
-    button_click();
+    button_clic();
   }
   else if(b == infos)
   {
     choice = menuCREDITS;
     close_menu = true;
-    button_click();
+    button_clic();
   }
   else if(b == quit)
   {
     choice = menuQUIT;
     close_menu = true;
-    button_click();
+    button_clic();
   }
-}
-
-void Main_Menu::OnClick(const Point2i &mousePosition, int button)
-{
-  // nothing to do while button is still not released
 }
 
 menu_item Main_Menu::Run ()

@@ -16,13 +16,12 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Weapon Supertux : Look ! it's the famous flying magic pinguin !
+ * Arme Supertux : Look ! it's the famous flying magic pinguin !
  *****************************************************************************/
 
 #include "supertux.h"
 #include "explosion.h"
 #include "../game/config.h"
-#include "../game/game_loop.h"
 #include "../game/time.h"
 #include "../graphic/video.h"
 #include "../include/action_handler.h"
@@ -33,7 +32,6 @@
 #include "../team/teams_list.h"
 #include "../tool/math_tools.h"
 #include "../tool/i18n.h"
-
 const uint time_delta = 40;
 const uint animation_deltat = 50;
 
@@ -45,7 +43,6 @@ SuperTux::SuperTux(SuperTuxWeaponConfig& cfg,
   explode_colliding_character = true;
   SetSize(image->GetSize());
   SetTestRect(1, 1, 2, 2);
-  sound_channel = -1;
 }
 
 void SuperTux::Shoot(double strength)
@@ -57,8 +54,6 @@ void SuperTux::Shoot(double strength)
   time_next_action = global_time->Read();
   last_move = global_time->Read();
   begin_time = global_time->Read();
-
-  sound_channel = jukebox.Play("share","weapon/supertux_flying", -1);
 }
 
 void SuperTux::Refresh()
@@ -75,11 +70,12 @@ void SuperTux::Refresh()
 
   if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
   {
-    Action a(Action::ACTION_WEAPON_SUPERTUX);
+    Action a(Action::ACTION_SUPERTUX_STATE);
     a.Push(angle_rad);
     a.Push(GetPhysX());
     a.Push(GetPhysY());
-    Network::GetInstance()->SendAction(&a);
+    Point2d speed;
+    network.SendAction(&a);
   }
   particle_engine.AddPeriodic(GetPosition(), particle_STAR, false, angle_rad, 0);
 }
@@ -108,21 +104,6 @@ void SuperTux::SignalOutOfMap()
 {
   GameMessages::GetInstance()->Add (_("Bye bye tux..."));
   WeaponProjectile::SignalOutOfMap();
-
-  jukebox.Stop(sound_channel);
-
-  // To go further in the game loop
-  static_cast<TuxLauncher *>(launcher)->EndOfTurn();
-}
-
-void SuperTux::Explosion()
-{
-  WeaponProjectile::Explosion();
-
-  jukebox.Stop(sound_channel);
-
-  // To go further in the game loop
-  static_cast<TuxLauncher *>(launcher)->EndOfTurn();
 }
 
 //-----------------------------------------------------------------------------
@@ -144,11 +125,8 @@ TuxLauncher::TuxLauncher() :
   WeaponLauncher(WEAPON_SUPERTUX, "tux", new SuperTuxWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("SuperTux");
-  m_category = SPECIAL;
+  override_keys = true ;
   ReloadLauncher();
-
-  // unit will be used when the supertux disappears
-  use_unit_on_first_shoot = false;
 }
 
 WeaponProjectile * TuxLauncher::GetProjectileInstance()
@@ -160,61 +138,26 @@ WeaponProjectile * TuxLauncher::GetProjectileInstance()
 bool TuxLauncher::p_Shoot ()
 {
   current_tux = static_cast<SuperTux *>(projectile);
-  bool r = WeaponLauncher::p_Shoot();
-
-  if (r) m_is_active = true;
-  return r;
+  return WeaponLauncher::p_Shoot();
 }
 
-void TuxLauncher::EndOfTurn()
+void TuxLauncher::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
-  // To go further in the game loop
-  m_is_active = false;
-  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
-}
+  switch (action)
+  {
+    case Action::ACTION_MOVE_LEFT:
+    if (event_type !=  Keyboard:: Keyboard::KEY_RELEASED)
+      current_tux->turn_left();
+    break ;
 
-void TuxLauncher::HandleKeyPressed_MoveRight()
-{
-  if (m_is_active)
-    current_tux->turn_right();
-  else
-    ActiveCharacter().HandleKeyPressed_MoveRight();
-}
+    case Action::ACTION_MOVE_RIGHT:
+    if (event_type !=  Keyboard:: Keyboard::KEY_RELEASED)
+      current_tux->turn_right();
+    break ;
 
-void TuxLauncher::HandleKeyRefreshed_MoveRight()
-{
-  if (m_is_active)
-    current_tux->turn_right();
-  else
-    ActiveCharacter().HandleKeyRefreshed_MoveRight();
-}
-
-void TuxLauncher::HandleKeyReleased_MoveRight()
-{
-  if (!m_is_active)
-    ActiveCharacter().HandleKeyReleased_MoveRight();
-}
-
-void TuxLauncher::HandleKeyPressed_MoveLeft()
-{
-  if (m_is_active)
-    current_tux->turn_left();
-  else
-    ActiveCharacter().HandleKeyPressed_MoveLeft();
-}
-
-void TuxLauncher::HandleKeyRefreshed_MoveLeft()
-{
-  if (m_is_active)
-    current_tux->turn_left();
-  else
-    ActiveCharacter().HandleKeyRefreshed_MoveLeft();
-}
-
-void TuxLauncher::HandleKeyReleased_MoveLeft()
-{
-  if (!m_is_active)
-    ActiveCharacter().HandleKeyReleased_MoveLeft();
+  default:
+    break ;
+  } ;
 }
 
 SuperTuxWeaponConfig& TuxLauncher::cfg()

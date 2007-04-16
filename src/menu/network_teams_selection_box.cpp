@@ -75,13 +75,13 @@ NetworkTeamsSelectionBox::NetworkTeamsSelectionBox(const Rectanglei &rect) : HBo
   }
 }
 
-Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint button)
+Widget* NetworkTeamsSelectionBox::Clic (const Point2i &mousePosition, uint button)
 {
   if (!Contains(mousePosition)) return NULL;
 
   uint current_nb_teams = local_teams_nb->GetValue();
 
-  if (local_teams_nb->ClickUp(mousePosition, button)){
+  if (local_teams_nb->Clic(mousePosition, button)){
     SetNbLocalTeams(local_teams_nb->GetValue(), current_nb_teams);
 
   } else {
@@ -90,19 +90,13 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
       if ( teams_selections.at(i)->Contains(mousePosition) && 
 	   teams_selections.at(i)->IsLocal() ) {
 	
-	Widget * w = teams_selections.at(i)->ClickUp(mousePosition, button);
+	Widget * w = teams_selections.at(i)->Clic(mousePosition, button);
 
 	if ( w == NULL ) {
-	  Rectanglei r(teams_selections.at(i)->GetPositionX(), 
-		       teams_selections.at(i)->GetPositionY(),
-		       60,
-		       60);
-	  if ( r.Contains(mousePosition) ) {
-	    if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
-	      NextTeam(i);
-	    } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
-	      PrevTeam(i);
-	    }
+	  if ( button == SDL_BUTTON_LEFT || button == SDL_BUTTON_WHEELDOWN ) {
+	    NextTeam(i);
+	  } else if ( button == SDL_BUTTON_RIGHT || button == SDL_BUTTON_WHEELUP ) {
+	    PrevTeam(i);
 	  }
 	} else {
 	  return w;
@@ -112,11 +106,6 @@ Widget* NetworkTeamsSelectionBox::ClickUp(const Point2i &mousePosition, uint but
     }
   }
 
-  return NULL;
-}
-
-Widget* NetworkTeamsSelectionBox::Click(const Point2i &mousePosition, uint button)
-{
   return NULL;
 }
 
@@ -238,9 +227,8 @@ void NetworkTeamsSelectionBox::AddLocalTeam(uint i)
 void NetworkTeamsSelectionBox::RemoveLocalTeam(uint i)
 {
   if ( teams_selections.at(i)->GetTeam() != NULL ) {
-    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_MENU_DEL_TEAM, 
+    ActionHandler::GetInstance()->NewAction (new Action(Action::ACTION_DEL_TEAM, 
  							teams_selections.at(i)->GetTeam()->GetId()));
-    ActionHandler::GetInstance()->ExecActions();
   }
 }
 
@@ -258,11 +246,10 @@ void NetworkTeamsSelectionBox::SetLocalTeam(uint i, Team& team, bool remove_prev
 #endif
   std::string team_id = team.GetId();
   
-  Action* a = new Action(Action::ACTION_MENU_ADD_TEAM, team_id);
+  Action* a = new Action(Action::ACTION_NEW_TEAM, team_id);
   a->Push(team.GetPlayerName());
   a->Push(int(team.GetNbCharacters()));
-  ActionHandler::GetInstance()->NewAction(a);
-  ActionHandler::GetInstance()->ExecActions();
+  ActionHandler::GetInstance()->NewAction (a);
 }
 
 void NetworkTeamsSelectionBox::AddTeamCallback(std::string team_id)

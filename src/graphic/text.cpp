@@ -31,21 +31,20 @@
 #include "../interface/interface.h"
 #include "../map/map.h"
 
-Text::Text(const std::string &new_txt, 
-	   const Color& new_color,
-	   Font::font_size_t fsize, 
-	   Font::font_style_t fstyle, 
-           bool _shadowed)
+Text::Text(const std::string &new_txt, const Color& new_color,
+           Font* new_font, bool shadowed)
 {
-  font_size = fsize;
-  font_style = fstyle;
-
+				
+  if( new_font == NULL )
+    new_font = Font::GetInstance(Font::FONT_SMALL);
+	
   txt = new_txt;
   color = new_color;
-  shadowed = _shadowed;
+  font = new_font;
+  this->shadowed = shadowed;
 
   if( shadowed ){
-    int width = Font::GetInstance(font_size, font_style)->GetWidth("x");
+    int width = font->GetWidth("x");
     bg_offset = (unsigned int)width/8; // shadow offset = 0.125ex
     if (bg_offset < 1) bg_offset = 1;
   }
@@ -69,8 +68,6 @@ void Text::Render()
     RenderMultiLines();
     return;
   }
-  
-  Font* font = Font::GetInstance(font_size, font_style);
 
   surf = font->CreateSurface(txt, color);
   if ( shadowed ) {
@@ -81,8 +78,6 @@ void Text::Render()
 void Text::RenderMultiLines()
 {
   if (txt=="") return;
-
-  Font* font = Font::GetInstance(font_size, font_style);
 
   // Make a first try
   if (font->GetWidth(txt) < int(max_width)) {
@@ -160,11 +155,26 @@ void Text::RenderMultiLines()
   surf.NewSurface(size, SDL_SWSURFACE|SDL_SRCALPHA, true);
   surf = surf.DisplayFormatAlpha();
 
+  // Putting pixels of each image in destination surface
+  surf.Lock();
+
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
     Surface tmp=(font->CreateSurface(lines.at(i), color)).DisplayFormatAlpha();
-    surf.MergeSurface(tmp, Point2i(0, (font->GetHeight() + 2) * i));
+    tmp.Lock();
+
+    // for each pixel lines of a source image
+    for (int x=0; x < tmp.GetWidth() && x < int(max_width); x++) 
+      { // for each pixel rows of a source image
+	for (int y=0; y < tmp.GetHeight(); y++) 
+	  { 
+	    surf.PutPixel(x, ((font->GetHeight()+2)*i)+y, 
+			  tmp.GetPixel(x, y));
+	  }
+      }
+    tmp.Unlock();
   }
+  surf.Unlock();
 
   // Render the shadow !
   if (!shadowed) return;
@@ -173,11 +183,25 @@ void Text::RenderMultiLines()
   background = background.DisplayFormatAlpha();
 
   // Putting pixels of each image in destination surface
+  background.Lock();
+
   // for each lines
   for (uint i = 0; i < lines.size(); i++) {
     Surface tmp=(font->CreateSurface(lines.at(i), black_color)).DisplayFormatAlpha();
-    background.MergeSurface(tmp, Point2i(0, (font->GetHeight() + 2) * i));
+    tmp.Lock();
+
+    // for each pixel lines of a source image
+    for (int x=0; x < tmp.GetWidth() && x < int(max_width); x++) 
+      { // for each pixel rows of a source image
+	for (int y=0; y < tmp.GetHeight(); y++) 
+	  { 
+	    background.PutPixel(x, ((font->GetHeight()+2)*i)+y, 
+				tmp.GetPixel(x, y));
+	  }
+      }
+    tmp.Unlock();
   }
+  background.Unlock();
 }
 
 void Text::Set(const std::string &new_txt)
@@ -299,6 +323,8 @@ void DrawTmpBoxText(Font& font, Point2i pos,
 {
   Point2i size = font.GetSize(txt) + Point2i(space, space)*2;
   
+  pos.y -= font.GetHeight(txt)/2;
+
   Rectanglei rect( pos - size/2, size);
   
   AppWormux * app = AppWormux::GetInstance();
@@ -307,8 +333,72 @@ void DrawTmpBoxText(Font& font, Point2i pos,
   app->video.window.RectangleColor(rect, rectColor);  
 
   world.ToRedrawOnScreen( rect );
-  
-  pos.y += font.GetHeight(txt)/2;
-  font.WriteCenter( pos, txt, white_color);
+  font.WriteCenterTop( pos, txt, white_color);
 }
 
+// void DrawTmpBoxTextWithReturns(Font &font, const Point2i &position, 
+//                                const std::string &txt, uint space,
+//                                Color boxColor,
+//                                Color rectColor)
+// {
+//   size_t pos          = 0;
+//   size_t last_pos     = 0;
+//   size_t max_width    = 0;
+//   size_t total_height = 0;
+//   int    x, y;
+//   char  *lines        = strdup(txt.c_str());
+
+//   std::vector< size_t > offsets;
+
+//   // Store offsets
+//   offsets.push_back(0);
+//   while (lines[pos] != '\0')
+//   {
+//     if (lines[pos] == '\n')
+//     {
+//       lines[pos] = 0;
+//       if (!lines[pos+1]) break;
+
+//       offsets.push_back(pos+1);
+//       int w = font.GetWidth(lines+last_pos) + space*2;
+//       if ((int)max_width < w) max_width = w;
+//       total_height += font.GetHeight(lines+last_pos);
+// #if DEBUG
+//       if (last_pos)
+//       {
+//         std::cerr << "(" << pos << "," << pos-last_pos
+//                   << ") >>> " << lines+last_pos << " <<<\n";
+//       }
+// #endif
+//       last_pos = pos+1;
+//     }
+//     pos++;
+//   }
+//   if (max_width == 0) {
+//     max_width = font.GetWidth(lines) + space*2;
+//   }
+
+//   // Initial position
+//   total_height += 5*space;
+//   x = position.x - max_width / 2;
+//   y = position.y - total_height / 2;
+
+//   Rectanglei rect(x, y, max_width, total_height);
+  
+//   AppWormux * app = AppWormux::GetInstance();
+
+//   app->video.window.BoxColor(rect, boxColor);
+//   app->video.window.RectangleColor(rect, rectColor);
+
+//   world.ToRedrawOnScreen(rect);
+
+//   for( std::vector<size_t>::iterator it=offsets.begin();
+//        it != offsets.end();
+//        ++it)
+//   {
+//     font.WriteLeft( Point2i(x+space, y+space), lines+(*it), white_color);
+//     y += font.GetHeight(lines+(*it));
+//   }
+//   offsets.clear();
+//   free(lines);
+// }

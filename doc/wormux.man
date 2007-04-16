@@ -47,9 +47,7 @@ opponents.
 .br
 * Key backspace: ("Vertical") jump
 .br
-* Key tab: Switch to next character
-.br
-* Key 'q': Switch to previous character
+* Key tab: Change active character
 .br
 * Key 'c': Recenter to active character
 .br

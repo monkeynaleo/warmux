@@ -30,9 +30,9 @@
 class TeamsList
 {
 public:
-  typedef std::list<Team *>::iterator full_iterator;
-  typedef std::vector<Team *>::iterator iterator;
-  std::list<Team *> full_list;
+  typedef std::list<Team>::iterator full_iterator;
+  typedef std::vector<Team*>::iterator iterator;
+  std::list<Team> full_list;
   std::vector<Team*> playing_list;
 
 private:
@@ -47,7 +47,7 @@ public:
   void LoadList ();
   void NextTeam (bool begin_game);
   Team& ActiveTeam();
-  void LoadGamingData();
+  void LoadGamingData(uint how_many_characters);
   void UnloadGamingData();
   void Clear();
 
@@ -83,7 +83,7 @@ Character& ActiveCharacter();
 
 //-----------------------------------------------------------------------------
 
-bool compareTeams(const Team *a, const Team *b);
+bool compareTeams(const Team& a, const Team& b);
 
 //-----------------------------------------------------------------------------
 #endif

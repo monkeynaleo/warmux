@@ -31,7 +31,7 @@
 
 ListBoxWithLabel::ListBoxWithLabel (const std::string &label, const Rectanglei &rect) : ListBox(rect)
 {  
-  txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
   SetSizePosition(rect);
   txt_label->SetMaxWidth(GetSizeX());
 }

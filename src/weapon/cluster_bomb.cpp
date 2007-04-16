@@ -107,7 +107,6 @@ ClusterLauncher::ClusterLauncher() :
   WeaponLauncher(WEAPON_CLUSTER_BOMB, "cluster_bomb", new ClusterBombConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Cluster Bomb");
-  m_category = THROW;
   ignore_collision_signal = true;
   ReloadLauncher();
 }

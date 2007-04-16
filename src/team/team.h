@@ -45,11 +45,6 @@ typedef enum {
 
 class Team
 {
-  /* If you need this, implement it (correctly) */
-  Team(const Team&);
-  Team operator=(const Team&);
-  /**********************************************/
-
   public:
     typedef std::list<Character>::iterator iterator;
     typedef std::list<Character>::const_iterator const_iterator;
@@ -83,11 +78,11 @@ class Team
           const Surface &_flag,
           const std::string& _sound_profile);
 
-    bool LoadCharacters();
+    bool LoadCharacters(uint howmany);
   public:
-    Team (const std::string &teams_dir, const std::string &id);
+    static Team* CreateTeam (const std::string &teams_dir, const std::string &id);
 
-    void LoadGamingData();
+    void LoadGamingData(uint howmany);
     void UnloadGamingData();
 
     bool IsSameAs(const Team& other) const;
@@ -98,7 +93,6 @@ class Team
 
   // Switch to next worm.
     void NextCharacter();
-    void PreviousCharacter();
     void SelectCharacter(uint index);
 
   // Prepare turn.

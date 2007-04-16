@@ -28,7 +28,6 @@
 #include <list>
 #include <string>
 #include <utility>
-#include "network.h"
 
 typedef std::pair<std::string, std::string> address_pair;
 
@@ -37,7 +36,6 @@ class IndexServer
   // Connection to the server
   TCPsocket socket;
   IPaddress ip;
-  SDLNet_SocketSet sock_set;
 
   // Stores the hostname / port of all online servers
   std::map<std::string, int> server_lst;
@@ -71,19 +69,15 @@ public:
   IndexServer();
   ~IndexServer();
 
-  // Connect/disconnect to a server
-  Network::connection_state_t Connect();
-  void Disconnect();
-
-  // Answers to pings from the server / close connection if distantly closed
-  void Refresh();
+  // Connect to a server
+  bool Connect();
 
   // We want to host a game hidden on internet
   void SetHiddenServer() { hidden_server = true; };
 
   // Notify the top server we are hosting a game
   void SendServerStatus();
-
+  void Disconnect();
   // returns a list with string pairs: first element = hostname/ip, second element = port
   std::list<address_pair> GetHostList();
 };

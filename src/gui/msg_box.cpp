@@ -26,9 +26,10 @@
 const uint vmargin = 5;
 const uint hmargin = 5;
 
-MsgBox::MsgBox(const Rectanglei& rect, Font::font_size_t fsize, Font::font_style_t fstyle) :
-  Widget(rect), font_size(fsize), font_style(fstyle)
+MsgBox::MsgBox(const Rectanglei& rect, Font* _font) :
+   Widget(rect)
 {
+  font = _font;
 }
 
 void MsgBox::Flush()
@@ -51,7 +52,7 @@ void MsgBox::Flush()
 
 void MsgBox::NewMessage(const std::string &msg, const Color& color)
 {
-  messages.push_back(new Text(msg, color, font_size, font_style));
+  messages.push_back(new Text(msg, color));
   messages.back()->SetMaxWidth(GetSizeX() - (2*hmargin));
 
   // Remove old messages if needed

@@ -38,7 +38,7 @@ CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
   SetSizeY( (*Font::GetInstance(Font::FONT_SMALL)).GetHeight() );
   m_value = value;
 
-  txt_label = new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
+  txt_label = new Text(label, white_color, Font::GetInstance(Font::FONT_SMALL));
   hidden = false;
 }
 
@@ -63,17 +63,11 @@ void CheckBox::Draw(const Point2i &mousePosition, Surface& surf) const
     }
 }
 
-Widget* CheckBox::Click(const Point2i &mousePosition, uint button)
-{
-  // do nothing since user has not released the button
-  return this;
-}
-
-Widget* CheckBox::ClickUp(const Point2i &mousePosition, uint button)
+Widget* CheckBox::Clic(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
   m_value = !m_value;
-  return this;
+  return this ;
 }
 
 void CheckBox::SetSizePosition(const Rectanglei &rect)

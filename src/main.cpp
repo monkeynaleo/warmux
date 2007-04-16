@@ -27,15 +27,11 @@
 #include <string>
 #include <vector>
 #include <iostream>
-using namespace std;
-
 #include <SDL.h>
 #include "game/config.h"
-#include "game/game_mode.h"
 #include "game/time.h"
 #include "graphic/font.h"
 #include "graphic/video.h"
-#include "map/maps_list.h"
 #include "menu/credits_menu.h"
 #include "menu/game_menu.h"
 #include "menu/main_menu.h"
@@ -45,7 +41,6 @@ using namespace std;
 #include "include/action_handler.h"
 #include "include/constant.h"
 #include "sound/jukebox.h"
-#include "team/teams_list.h"
 #include "tool/debug.h"
 #include "tool/i18n.h"
 #include "tool/random.h"
@@ -53,149 +48,135 @@ using namespace std;
 
 #include "network/download.h"
 
-AppWormux *AppWormux::singleton = NULL;
+AppWormux * AppWormux::singleton = NULL;
 
-AppWormux *AppWormux::GetInstance()
-{
-  if (singleton == NULL)
-    {
-      singleton = new AppWormux();
-    }
+AppWormux * AppWormux::GetInstance() {
+  if (singleton == NULL) {
+    singleton = new AppWormux();
+  }
   return singleton;
 }
 
-AppWormux::AppWormux():
-  video()
-{
+AppWormux::AppWormux(){
 }
 
-int AppWormux::main(int argc, char **argv)
-{
+int AppWormux::main (int argc, char **argv){
   bool quit = false;
 
-  try
-  {
+  try {
     Init(argc, argv);
-    do
-      {
-	Main_Menu main_menu;
-	menu_item choix;
+    do {
+      Main_Menu main_menu;
+      menu_item choix;
 
-	StatStart("Main:Menu");
-	choix = main_menu.Run();
-	StatStop("Main:Menu");
+      StatStart("Main:Menu");
+      choix = main_menu.Run();
+      StatStop("Main:Menu");
 
-	switch (choix)
+      switch (choix)
+        {
+        case menuPLAY:
 	  {
-	  case menuPLAY:
-	    {
-	      GameMenu game_menu;
-	      game_menu.Run();
-	      break;
-	    }
-	  case menuNETWORK:
-	    {
-	      NetworkConnectionMenu network_connection_menu;
-	      network_connection_menu.Run();
-	      break;
-	    }
-	  case menuOPTIONS:
-	    {
-	      OptionMenu options_menu;
-	      options_menu.Run();
-	      break;
-	    }
-	  case menuCREDITS:
-	    {
-	      CreditsMenu credits_menu;
-	      credits_menu.Run();
-	      break;
-	    }
-	  case menuQUIT:
-	    quit = true;
-	  default:
+	    GameMenu game_menu;
+	    game_menu.Run();
 	    break;
 	  }
-      }
-    while (!quit);
+        case menuNETWORK:
+	  {
+	    NetworkConnectionMenu network_connection_menu;
+	    network_connection_menu.Run();
+	    break;
+	  }
+        case menuOPTIONS:
+          {
+            OptionMenu options_menu;
+            options_menu.Run();
+            break;
+          }
+	case menuCREDITS:
+	  {
+	    CreditsMenu credits_menu;
+	    credits_menu.Run();
+	    break;
+	  }
+        case menuQUIT:
+          quit = true;
+        default:
+          break;
+        }
+    } while (!quit);
 
     End();
   }
-  catch(const exception & e)
-  {
-    cerr << endl
-      << "C++ exception caught:" << endl
-      << e.what() << endl << endl;
+  catch (const std::exception &e){
+    std::cerr << std::endl
+	      << _("C++ exception caught:") << std::endl
+	      << e.what() << std::endl
+	      << std::endl;
     WakeUpDebugger();
   }
-  catch(...)
-  {
-    cerr << endl
-      << "Unexpected exception caught..." << endl << endl;
+  catch (...){
+    std::cerr << std::endl
+	      << _("Unexpected exception caught...") << std::endl
+	      << std::endl;
     WakeUpDebugger();
   }
 
   return 0;
 }
 
-void AppWormux::Init(int argc, char **argv)
-{
-  Config::GetInstance();  // init config first, because it initializes i18n
+void AppWormux::Init(int argc, char **argv){
+  Config * config = Config::GetInstance();
 
-  InitFonts();
   DisplayWelcomeMessage();
   InitDebugModes(argc, argv);
 
-  teams_list.LoadList();
+  video.InitWindow();
+  InitFonts();
 
   DisplayLoadingPicture();
+  config->Apply();
 
   jukebox.Init();
 }
 
-void AppWormux::DisplayLoadingPicture()
-{
-  Config *config = Config::GetInstance();
+void AppWormux::DisplayLoadingPicture(){
+  Config * config = Config::GetInstance();
 
-  string txt_version =
-    _("Version") + string(" ") + Constants::VERSION;
-  string filename = config->GetDataDir() + PATH_SEPARATOR + "menu"
-                         + PATH_SEPARATOR + "loading.png";
+  std::string txt_version = _("Version") + std::string(" ") + Constants::VERSION;
+  std::string filename = config->GetDataDir()
+    + PATH_SEPARATOR + "menu"
+    + PATH_SEPARATOR + "img"
+    + PATH_SEPARATOR + "loading.png";
 
-  Surface surfaceLoading = Surface(filename.c_str());
-  Sprite loading_image = Sprite(surfaceLoading);
+  Surface surfaceLoading = Surface( filename.c_str() );
+  Sprite loading_image = Sprite( surfaceLoading );
 
   loading_image.cache.EnableLastFrameCache();
-  loading_image.ScaleSize(video.window.GetSize());
-  loading_image.Blit(video.window, 0, 0);
+  loading_image.ScaleSize( video.window.GetSize() );
+  loading_image.Blit( video.window, 0, 0 );
 
   Time::GetInstance()->Reset();
 
-  Text text1(_("Wormux launching..."), white_color,
-	     Font::FONT_HUGE, Font::FONT_NORMAL, true);
-  Text text2(txt_version, white_color, Font::FONT_HUGE, Font::FONT_NORMAL,
-	     true);
+  Text text1(_("Wormux launching..."), white_color, Font::GetInstance(Font::FONT_HUGE), true);
+  Text text2(txt_version, white_color, Font::GetInstance(Font::FONT_HUGE), true);
 
   Point2i windowCenter = video.window.GetSize() / 2;
 
-  text1.DrawCenter(windowCenter);
-  text2.DrawCenter(windowCenter
-                   + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE, Font::FONT_NORMAL)).GetHeight() + 20));
+  text1.DrawCenter( windowCenter );
+  text2.DrawCenter( windowCenter + Point2i(0, (*Font::GetInstance(Font::FONT_HUGE)).GetHeight() + 20 ));
 
   video.window.Flip();
 }
 
-void AppWormux::InitFonts()
-{
-  if (TTF_Init() == -1) {
-    Error(Format("Initialisation of TTF library failed: %s", TTF_GetError()));
-    exit(1);
-  }
+void AppWormux::InitFonts(){
+  if( TTF_Init() == -1 )
+    Error( Format( _("Initialisation of TTF library failed: %s"), TTF_GetError() ) );
 }
 
-void AppWormux::End()
-{
-  cout << endl << "[ " << _("Quit Wormux") << " ]" << endl;
+void AppWormux::End(){
+  std::cout << std::endl
+	    << "[ " << _("Quit Wormux") << " ]" << std::endl;
 
   Config::GetInstance()->Save();
   jukebox.End();
@@ -207,45 +188,49 @@ void AppWormux::End()
 #ifdef ENABLE_STATS
   SaveStatToXML("stats.xml");
 #endif
-  cout << "o " << _("If you found a bug or have a feature request "
-			 "send us a email (in english, please):")
-    << " " << Constants::EMAIL << endl;
+  std::cout << "o "
+            << _("If you found a bug or have a feature request send us a email (in english, please):") << " " << Constants::EMAIL
+            << std::endl;
 }
 
-void AppWormux::DisplayWelcomeMessage()
-{
-  cout << "=== " << _("Wormux version ") << Constants::VERSION << endl;
-  cout << "=== " << _("Authors:") << ' ';
-  for (vector < string >::iterator it = Constants::AUTHORS.begin(),
-       fin = Constants::AUTHORS.end(); it != fin; ++it)
-    {
-      if (it != Constants::AUTHORS.begin())
-	cout << ", ";
-      cout << *it;
-    }
-  cout << endl
-    << "=== " << _("Website: ") << Constants::WEB_SITE << endl
-    << endl;
+void AppWormux::DisplayWelcomeMessage(){
+  std::cout << "=== " << _("Wormux version ") << Constants::VERSION << std::endl;
+  std::cout << "=== " << _("Authors:") << ' ';
+  for( std::vector<std::string>::iterator it=Constants::AUTHORS.begin(),
+       fin=Constants::AUTHORS.end();
+       it != fin;
+       ++it)
+  {
+    if( it != Constants::AUTHORS.begin() )
+      std::cout << ", ";
+    std::cout << *it;
+  }
+  std::cout << std::endl
+	    << "=== " << _("Website: ") << Constants::WEB_SITE << std::endl
+	    << std::endl;
 
   // Affiche l'absence de garantie sur le jeu
-  cout << "Wormux version " << Constants::VERSION
-    << ", Copyright (C) 2001-2006 Wormux Team" << endl
-    << "Wormux comes with ABSOLUTELY NO WARRANTY." << endl
-    << "This is free software, and you are welcome to redistribute it" << endl
-    << "under certain conditions." << endl << endl
-    << "Read COPYING file for details." << endl << endl;
+  std::cout << "Wormux version " << Constants::VERSION
+	    << ", Copyright (C) 2001-2006 Wormux Team"
+	    << std::endl
+	    << "Wormux comes with ABSOLUTELY NO WARRANTY." << std::endl
+            << "This is free software, and you are welcome to redistribute it" << std::endl
+            << "under certain conditions." << std::endl
+	    << std::endl
+	    << "Read COPYING file for details." << std::endl
+	    << std::endl;
 
 #ifdef DEBUG
-  cout << "This program was compiled in DEBUG mode (development version)"
-       << endl << endl;
+  std::cout << "!!! This program was compiled in DEBUG mode (development version) !!!" << std::endl
+	    << std::endl;
 #endif
 
-  cout << "[ " << _("Run game") << " ]" << endl;
+  std::cout << "[ " << _("Run game") << " ]" << std::endl;
 }
 
-int main(int argc, char **argv)
+int main (int argc, char **argv)
 {
-  AppWormux::GetInstance()->main(argc, argv);
+  AppWormux::GetInstance()->main(argc,argv);
   delete AppWormux::GetInstance();
-  exit(EXIT_SUCCESS);
+  exit (EXIT_SUCCESS);
 }

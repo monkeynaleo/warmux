@@ -38,7 +38,6 @@ Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 					VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Teleportation");
-  m_category = MOVE;
   target_chosen = false;
 }
 
@@ -52,12 +51,12 @@ bool Teleportation::p_Shoot ()
     return false;
 
   Rectanglei rect = ActiveCharacter().GetTestRect();
-  rect.SetPosition(dst);
+  rect.SetPosition(dst); 
 
   // Go back to default cursor
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
-
-  //  GameLoop::GetInstance()->interaction_enabled = false;
+  
+  GameLoop::GetInstance()->interaction_enabled = false;
 
   jukebox.Play("share", "weapon/teleport_start");
 
@@ -83,7 +82,7 @@ void Teleportation::Refresh()
     ActiveCharacter().SetSpeed(0.0,0.0);
     ActiveCharacter().Show();
     jukebox.Play("share","weapon/teleport_end");
-    //    GameLoop::GetInstance()->interaction_enabled = true;
+    GameLoop::GetInstance()->interaction_enabled = true;
     return;
   }
 }
@@ -96,7 +95,7 @@ void Teleportation::Draw()
 
 void Teleportation::p_Select()
 {
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_RIGHT);
 }
 
 void Teleportation::p_Deselect()

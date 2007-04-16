@@ -53,7 +53,7 @@ CharacterCursor::CharacterCursor()
   time_begin_anim = 0;
   last_update = 0;
   image = NULL;
-  dy = 0;
+  dy = 0;  
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   image = resource_manager.LoadSprite( res, "gfx/curseur");
@@ -65,18 +65,18 @@ CharacterCursor::~CharacterCursor()
   if(image) delete image;
 }
 
-// Draw cursor
+// Dessine le curseur
 void CharacterCursor::Draw()
 {
   if (!IsDisplayed()) return;
   if (obj_designe == NULL) return;
   if (obj_designe -> IsGhost()) return;
 
-  // Draw cursor arround character
+  // Dessine le curseur autour du ver
   Point2i centre = obj_designe->GetCenter();
   uint x = centre.x - image->GetWidth()/2;
   uint y = obj_designe->GetY() - image->GetHeight() - y_min;
-
+  
   image->Draw( Point2i(x, y+dy) );
 }
 

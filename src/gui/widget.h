@@ -45,21 +45,20 @@ class Widget : public Rectanglei
 
   virtual void Update(const Point2i &mousePosition,
 		      const Point2i &lastMousePosition,
-		      Surface& surf); // virtual only for Box and ListBox
-  virtual void Draw(const Point2i &mousePosition,
+		      Surface& surf); // virtual only for Box !!
+  virtual void Draw(const Point2i &mousePosition, 
 		    Surface& surf) const = 0;
   virtual void ForceRedraw(); // set need_redrawing to true; -- virtual for widget_list
 
   virtual void SendKey(SDL_keysym key);
-  virtual Widget* Click(const Point2i &mousePosition, uint button);
-  virtual Widget* ClickUp(const Point2i &mousePosition, uint button);
+  virtual Widget* Clic(const Point2i &mousePosition, uint button);
 
   void SetContainer(Container * _ct);
 
   virtual void SetSizePosition(const Rectanglei &rect) = 0;
-  void SetXY(int _x, int _y){
-	  SetSizePosition( Rectanglei(Point2i(_x, _y), size) );
-  };
+  void SetXY(int _x, int _y){ 
+	  SetSizePosition( Rectanglei(Point2i(_x, _y), size) ); 
+  };  
 };
 
 #endif

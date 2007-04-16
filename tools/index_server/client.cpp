@@ -1,22 +1,3 @@
-/******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************/
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
@@ -33,7 +14,6 @@
 #include "net_data.h"
 #include "debug.h"
 #include "sync_slave.h"
-#include "stat.h"
 #include "../../src/network/index_svr_msg.h"
 
 // map < version, client >
@@ -80,7 +60,6 @@ bool Client::HandleMsg(const std::string & str)
 			handshake_done = true;
 			SetVersion( str );
 			msg_id = TS_NO_MSG;
-			stats.NewClient();
 			return SendSignature();		
 		}
 		else
@@ -116,7 +95,6 @@ bool Client::HandleMsg(const std::string & str)
 		if(! ReceiveInt(port) )
 			return false;
 		NotifyServers( true );
-		stats.NewServer();
 
 		// TODO: try opening a connection to see if it's 
 		// firewalled or not

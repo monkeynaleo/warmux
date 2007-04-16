@@ -27,21 +27,22 @@
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
+#include "../network/network.h"
 #include "../team/teams_list.h"
 #include "../tool/i18n.h"
 
-const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
+const double angle_step = M_PI / 6.0; // should be a multiple
 
 
 Construct::Construct() : Weapon(WEAPON_CONSTRUCT, "construct",
-				new WeaponConfig(),
-				NEVER_VISIBLE)
+					new WeaponConfig(),
+					NEVER_VISIBLE)
 {
   construct_spr = resource_manager.LoadSprite( weapons_res_profile, "construct_spr");
-  construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / DELTA_ANGLE));
+  construct_spr->EnableRotationCache(static_cast<int>(2 * M_PI / angle_step));
   m_name = _("Construct");
-  m_category = TOOL;
   angle = 0;
+  force_override_keys = true;
   target_chosen = false;
 }
 
@@ -53,9 +54,10 @@ Construct::~Construct()
 bool Construct::p_Shoot ()
 {
   if(!target_chosen)
-    return false;
+	return false;
   jukebox.Play("share", "weapon/construct");
   world.MergeSprite(dst - construct_spr->GetSizeMax()/2, construct_spr);
+  GameLoop::GetInstance()->interaction_enabled = false;
   return true;
 }
 
@@ -82,45 +84,47 @@ void Construct::ChooseTarget(Point2i mouse_pos)
   Shoot();
 }
 
-void Construct::HandleKeyPressed_Up()
+void Construct::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
+{
+  switch (action) {
+    case Action::ACTION_UP:
+      if (event_type == Keyboard::KEY_PRESSED)
+        Up();
+      break ;
+    case Action::ACTION_DOWN:
+      if (event_type == Keyboard::KEY_PRESSED)
+        Down();
+      break ;
+    default:
+      ActiveCharacter().HandleKeyEvent( action, event_type);
+      break ;
+  }
+}
+
+void Construct::ActionUp()
 {
   Up();
 }
 
-void Construct::HandleKeyPressed_Down()
-{
-  Down();
-}
-
-void Construct::HandleMouseWheelUp()
-{
-  Up();
-}
-
-void Construct::HandleMouseWheelDown()
+void Construct::ActionDown()
 {
   Down();
 }
 
 void Construct::Up()
 {
-  double new_angle = angle + DELTA_ANGLE;
-
-  Action* a = new Action(Action::ACTION_WEAPON_CONSTRUCTION, new_angle);
-  ActionHandler::GetInstance()->NewAction(a);
+  Action a(Action::ACTION_CONSTRUCTION_UP);
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+    network.SendAction(&a);
+  angle += angle_step;
 }
 
 void Construct::Down()
 {
-  double new_angle = angle - DELTA_ANGLE;
-
-  Action* a = new Action(Action::ACTION_WEAPON_CONSTRUCTION, new_angle);
-  ActionHandler::GetInstance()->NewAction(a);
-}
-
-void Construct::SetAngle(double _angle)
-{
-  angle = _angle;
+  Action a(Action::ACTION_CONSTRUCTION_DOWN);
+  if(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI())
+    network.SendAction(&a);
+  angle -= angle_step;
 }
 
 WeaponConfig& Construct::cfg()

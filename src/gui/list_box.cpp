@@ -27,12 +27,13 @@
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
 
+//#define SCROLLBAR
+
 ListBoxItem::ListBoxItem(const std::string& _label, 
-			 Font::font_size_t fsize,
-			 Font::font_style_t fstyle,
+			 Font& _font,
 			 const std::string& _value,
 			 const Color& color) :
-  Label(_label, Rectanglei(0,0,0,0), fsize, fstyle, color)
+  Label(_label, Rectanglei(0,0,0,0), _font, color)
 {
   value = _value;
 }
@@ -46,6 +47,14 @@ const std::string& ListBoxItem::GetValue() const
 {
   return value;
 }
+
+// struct CompareItems
+// {
+//      bool operator()(const ListBoxItem& a, const ListBoxItem& b)
+//      {
+//        return a.GetLabel() < b.GetLabel();
+//      }
+// };
 
 ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(rect)
 {
@@ -63,12 +72,6 @@ ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(r
   first_visible_item = 0;
   selected_item = -1;
   always_one_selected = always_one_selected_b;
-  border_color = white_color;
-  background_color = defaultListColor1;
-  selected_item_color = defaultListColor2;
-  default_item_color = defaultListColor3;
-
-  scrolling = false;
 }
 
 ListBox::~ListBox()
@@ -92,9 +95,9 @@ int ListBox::MouseIsOnWhichItem(const Point2i &mousePosition) const
   return -1;
 }
 
-Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
+Widget* ListBox::Clic(const Point2i &mousePosition, uint button)
 {
-  scrolling = false;
+  need_redrawing = true;
 
   if (m_items.empty())
     return NULL;
@@ -140,74 +143,14 @@ Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
   }
 }
 
-Widget* ListBox::Click(const Point2i &mousePosition, uint button)
-{
-  if (!Contains(mousePosition)) return NULL;
-
-  if (ScrollBarPos().Contains(mousePosition) && button == SDL_BUTTON_LEFT) {
-    scrolling = true;
-  }
-  return this;
-}
-
-void ListBox::SetBorderColor(const Color & border)
-{
-  border_color = border;
-}
-
-void ListBox::SetBackgroundColor(const Color & background)
-{
-  background_color = background;
-}
-
-void ListBox::SetSelectedItemColor(const Color & selected_item)
-{
-  selected_item_color = selected_item;
-}
-
-void ListBox::SetDefaultItemColor(const Color & default_item)
-{
-  default_item_color = default_item;
-}
-
-void ListBox::Update(const Point2i &mousePosition,
-		     const Point2i &lastMousePosition,
-		     Surface& surf)
-{
-  if (!Contains(mousePosition)) {
-    scrolling = false;
-  }
-
-  if ( 
-      need_redrawing 
-      || (Contains(mousePosition) && mousePosition != lastMousePosition) 
-      || (Contains(lastMousePosition) && !Contains(mousePosition))
-      ) 
-    {
-      if (ct != NULL) ct->Redraw(*this, surf);
-
-      // update position of items because of scrolling
-      if (scrolling && 
-	  mousePosition.y < GetPositionY() + GetSizeY() - 12 && 
-	  mousePosition.y > GetPositionY() + 12)
-	{
-	  first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20);
-	}
-
-      Draw(mousePosition, surf);
-    }
-  need_redrawing = false;
-  
-}
-
 void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 {
   int item = MouseIsOnWhichItem(mousePosition);
   Rectanglei rect (*this);
 
   // Draw border and bg color
-  surf.BoxColor(rect, background_color);
-  surf.RectangleColor(rect, border_color);
+  surf.BoxColor(rect, defaultListColor1);
+  surf.RectangleColor(rect, white_color);
 
   // Draw items
   Point2i pos = GetPosition() + Point2i(5, 0);
@@ -222,7 +165,7 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 		    m_items.at(i)->GetSizeY() - 2);
 
     // no more place to add item
-    if (draw_it && rect.GetPositionY() + rect.GetSizeY() >= GetPositionY() + GetSizeY() -2) {
+    if (draw_it && rect.GetPositionY() + rect.GetSizeY() > GetPositionY() + GetSizeY()) {
       local_max_visible_items = i - first_visible_item;
       draw_it = false;
     }
@@ -230,15 +173,15 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
     // item is selected or mouse-overed
     if (draw_it) {
       if( int(i) == selected_item) {
-        surf.BoxColor(rect, selected_item_color);
+	surf.BoxColor(rect, defaultListColor2);
       } else if( i == uint(item) ) {
-	surf.BoxColor(rect, default_item_color);
+	surf.BoxColor(rect, defaultListColor3);
       }
     }
 
     // Really draw items
     Rectanglei rect2(pos.x, pos.y, 
-		     GetSizeX()-12, m_items.at(i)->GetSizeY() - 2);
+		     GetSizeX()-2, m_items.at(i)->GetSizeY() - 2);
 
     m_items.at(i)->SetSizePosition(rect2);
     if (draw_it) {
@@ -249,32 +192,21 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
   }
 
   // buttons for listbox with more items than visible
-  if (first_visible_item != 0 || m_items.size() > local_max_visible_items){
+  if (m_items.size() > local_max_visible_items){
     m_up->Draw(mousePosition, surf);
     m_down->Draw(mousePosition, surf);
+#ifdef SCROLLBAR
+    uint tmp_y, tmp_h;
+    tmp_y = y+10+ first_visible_item* (h-20) / m_items.size();
+    tmp_h = nb_visible_items_max * (h-20) / m_items.size();
+    if (tmp_h < 5) tmp_h =5;
 
-    Rectanglei scrollbar = ScrollBarPos();
-    surf.BoxColor(scrollbar, (scrolling || scrollbar.Contains(mousePosition)) ? white_color : gray_color);
+    boxRGBA(surf,
+	    x+w-10, tmp_y,
+	    x+w-1,  tmp_y+tmp_h,
+	    white_color);
+#endif
   }
-}
-
-Rectanglei ListBox::ScrollBarPos() const
-{
-  uint tmp_y, tmp_h;
-  if(m_items.size() != 0)
-  {
-    tmp_y = GetPositionY()+ 10 + first_visible_item* (GetSizeY()-20) / m_items.size();
-    tmp_h = /*nb_visible_items_max * */(GetSizeY()-20) / m_items.size();
-  }
-  else
-  {
-    tmp_y = GetPositionY()+ 10;
-    tmp_h = /*nb_visible_items_max * */GetSizeY()-20;
-  }
-
-  if (tmp_h < 5) tmp_h =5;
-  
-  return Rectanglei(GetPositionX()+GetSizeX()-11, tmp_y, 9,  /*tmp_y+*/tmp_h);
 }
 
 void ListBox::SetSizePosition(const Rectanglei &rect)
@@ -286,15 +218,14 @@ void ListBox::SetSizePosition(const Rectanglei &rect)
 
 void ListBox::AddItem (bool selected,
 		       const std::string &label,
-		       const std::string &value,	       
-		       Font::font_size_t fsize,
-		       Font::font_style_t fstyle,
+		       const std::string &value,
+		       Font& font,
 		       const Color& color)
 {
   uint pos = m_items.size();
 
   // Push item
-  ListBoxItem * item = new ListBoxItem(label, fsize, fstyle, value, color);
+  ListBoxItem * item = new ListBoxItem(label, font, value, color);
   m_items.push_back (item);
 
   // Select it if selected
@@ -359,13 +290,6 @@ const std::string& ListBox::ReadValue () const
 {
   assert (selected_item != -1);
   return m_items.at(selected_item)->GetValue();
-}
-
-const int ListBox::ReadIntValue() const
-{
-  int tmp = 0;
-  sscanf(ReadValue().c_str(),"%d", &tmp);
-  return tmp;
 }
 
 const std::string& ListBox::ReadValue (int index) const

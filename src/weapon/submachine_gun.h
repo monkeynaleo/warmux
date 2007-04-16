@@ -48,13 +48,9 @@ class SubMachineGun : public WeaponLauncher
     WeaponProjectile * GetProjectileInstance();
     void IncMissedShots();
     bool p_Shoot();
-    void p_Deselect();
   public:
     SubMachineGun();
-    virtual void SignalTurnEnd();
-    virtual void HandleKeyPressed_Shoot();
-    virtual void HandleKeyRefreshed_Shoot();
-    virtual void HandleKeyReleased_Shoot();
+    void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
 };
 
 #endif /* SUBMACHINE_GUN_H */

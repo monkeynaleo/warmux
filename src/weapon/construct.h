@@ -34,9 +34,6 @@ private:
   double angle;
   Point2i dst;
 
-  void Up();
-  void Down();
-
 protected:
   bool p_Shoot();
   void Refresh();
@@ -47,12 +44,11 @@ public:
   void Draw();
   void ChooseTarget(Point2i mouse_pos);
 
-  virtual void HandleKeyPressed_Down();
-  virtual void HandleKeyPressed_Up();
-  virtual void HandleMouseWheelUp();
-  virtual void HandleMouseWheelDown();
-
-  void SetAngle(double angle); // to be used by network
+  void HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type);
+  void ActionUp ();    // Mouse wheel up
+  void ActionDown ();  // Mouse wheel down
+  void Up();
+  void Down();
 
   WeaponConfig& cfg();
 };

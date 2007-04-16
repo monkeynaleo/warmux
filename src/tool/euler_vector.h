@@ -24,9 +24,7 @@ class EulerVector{
 	public:
 		double x0, x1, x2;
 
-		EulerVector() :
-                  x0(0.0), x1(0.0), x2(0.0)
-                { };
+		EulerVector() { Clear(); };
 		void Clear();
 		void ComputeOneEulerStep(double a, double b, double c, double d, double dt);
 };

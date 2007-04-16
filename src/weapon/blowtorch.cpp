@@ -20,7 +20,6 @@
  *****************************************************************************/
 
 #include "../weapon/blowtorch.h"
-#include "../include/action_handler.h"
 #include "../tool/i18n.h"
 #include "../map/map.h"
 #include "../team/teams_list.h"
@@ -35,7 +34,7 @@ static const uint pause_time = 200;	// milliseconds
 Blowtorch::Blowtorch() : Weapon(WEAPON_BLOWTORCH, "blowtorch", new BlowtorchConfig())
 {
   m_name = _("Blowtorch");
-  m_category = TOOL;
+  override_keys = true;
 
   new_timer = 0;
   old_timer = 0;
@@ -48,22 +47,14 @@ void Blowtorch::Refresh()
 
 }
 
-void Blowtorch::p_Deselect()
+void Blowtorch::EndTurn()
 {
   ActiveCharacter().body->ResetWalk();
   ActiveCharacter().body->StopWalk();
   ActiveTeam().AccessNbUnits() = 0;
   m_is_active = false;
-}
 
-void Blowtorch::SignalTurnEnd()
-{
-  p_Deselect();
-}
-
-void Blowtorch::ActionStopUse()
-{
-  SignalTurnEnd();
+        // XXX This doesn't seem to be the correct to end a turn, does it?
   GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
 
@@ -88,33 +79,30 @@ bool Blowtorch::p_Shoot()
   return true;
 }
 
-void Blowtorch::RepeatShoot()
+void Blowtorch::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
-  uint time = Time::GetInstance()->Read() - old_timer;
-  uint tmp = Time::GetInstance()->Read();
+  switch(action)
+  {
+    case Action::ACTION_SHOOT:
+      if(event_type ==  Keyboard:: Keyboard::KEY_RELEASED)
+        EndTurn();
+      else if(event_type == Keyboard::KEY_REFRESH)
+      {
+        if(!EnoughAmmoUnit() || ActiveCharacter().GotInjured())
+          EndTurn();
 
-  if (time >= pause_time)
-    {
-      NewActionWeaponShoot();
-      old_timer = tmp;
-    }
-}
+        new_timer = Time::GetInstance()->Read();
+        if(new_timer - old_timer >= pause_time)
+        {
+          NewActionShoot();
+          old_timer = new_timer;
+        }
+      }
 
-void Blowtorch::HandleKeyPressed_Shoot()
-{
-  HandleKeyRefreshed_Shoot();
-}
-
-void Blowtorch::HandleKeyRefreshed_Shoot()
-{
-  if (EnoughAmmoUnit()) {
-    RepeatShoot();
+      break;
+    default:
+      break;
   }
-}
-
-void Blowtorch::HandleKeyReleased_Shoot()
-{
-  NewActionWeaponStopUse();
 }
 
 //-------------------------------------------------------------------------------------

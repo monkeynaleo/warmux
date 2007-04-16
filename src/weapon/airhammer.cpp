@@ -44,7 +44,7 @@ const uint MIN_TIME_BETWEEN_JOLT = 100; // in milliseconds
 Airhammer::Airhammer() : Weapon(WEAPON_AIR_HAMMER,"airhammer",new AirhammerConfig())
 {
   m_name = _("Airhammer");
-  m_category = TOOL;
+  override_keys = true ;
 
   impact = resource_manager.LoadImage( weapons_res_profile, "airhammer_impact");
   m_last_jolt = 0;
@@ -120,10 +120,12 @@ void Airhammer::RepeatShoot()
   uint tmp = Time::GetInstance()->Read();
 
   if (time >= MIN_TIME_BETWEEN_JOLT)
-    {
-      NewActionWeaponShoot();
-      m_last_jolt = tmp;
-    }
+  {
+    m_is_active = false;
+    NewActionShoot();
+    m_last_jolt = tmp;
+  }
+
 }
 
 //-----------------------------------------------------------------------------
@@ -132,39 +134,31 @@ void Airhammer::Refresh()
 {
 }
 
-void Airhammer::SignalTurnEnd()
-{
-  // It's too late !
-  m_is_active = false;
-}
-
-void Airhammer::ActionStopUse()
-{
-  ActiveTeam().AccessNbUnits() = 0; // ammo units are lost
-  m_is_active = false;
-  GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
-}
-
-
 //-----------------------------------------------------------------------------
 
-void Airhammer::HandleKeyPressed_Shoot()
+void Airhammer::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
-  HandleKeyRefreshed_Shoot();
-}
+  switch (action) {
 
-void Airhammer::HandleKeyRefreshed_Shoot()
-{
-  if (EnoughAmmoUnit()) {
-    RepeatShoot();
+    case Action::ACTION_SHOOT:
+
+      if (event_type == Keyboard::KEY_RELEASED || ActiveCharacter().GotInjured()) {
+        // stop when key is released or character got injured
+        ActiveTeam().AccessNbUnits() = 0;
+        m_is_active = false;
+        GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
+      }
+
+      if (event_type == Keyboard::KEY_REFRESH)
+        RepeatShoot();
+
+      break ;
+
+    default:
+      break ;
   }
-}
 
-void Airhammer::HandleKeyReleased_Shoot()
-{
-  NewActionWeaponStopUse();
 }
-
 //-----------------------------------------------------------------------------
 
 AirhammerConfig& Airhammer::cfg() {

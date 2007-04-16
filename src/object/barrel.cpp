@@ -30,7 +30,7 @@
 PetrolBarrel::PetrolBarrel() : PhysicalObj("barrel")
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
-  img= resource_manager.LoadSprite( res, "object/barrel");
+  img= resource_manager.LoadSprite( res, "objet/barrel");
   resource_manager.UnLoadXMLProfile(res);
 
   life_points = 40;
@@ -57,7 +57,6 @@ void PetrolBarrel::Refresh()
 
 void PetrolBarrel::SignalGhostState(bool was_already_dead)
 {
-  ParticleEngine::AddNow(GetCenter(), 20, particle_FIRE, true);
-  ApplyExplosion(GetCenter(), GameMode::GetInstance()->barrel_explosion_cfg, 
-		 "weapon/explosion", false);
+  ParticleEngine::AddNow(GetCenter() , 20, particle_FIRE, true);
+  ApplyExplosion(GetCenter(), GameMode::GetInstance()->barrel_explosion_cfg);
 }

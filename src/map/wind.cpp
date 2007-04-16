@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- *  wind Refresh (you may get cold ;) )
+ *  Refresh du vent
  *****************************************************************************/
 
 #include "wind.h"
@@ -47,12 +47,8 @@ WindParticle::WindParticle(std::string &xml_file) :
   SetCollisionModel(true, false, false);
 
   sprite = resource_manager.LoadSprite( ActiveMap().ResProfile(), "wind_particle");
-  if(ActiveMap().wind.rotation_speed != 0.0)
-  {
-    sprite->EnableRotationCache(64);
-    sprite->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
-  }
-
+//  if(sprite->GetFrameCount()==1)
+//    sprite->cache.EnableLastFrameCache();
   sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
 
   double mass, wind_factor ;
@@ -68,7 +64,7 @@ WindParticle::WindParticle(std::string &xml_file) :
   StartMoving();
   SetAirResistFactor(GetAirResistFactor() * (1.0 + randomObj.GetLong(-100, 100)/400.0));
 
-  // Fixe test rectangle
+  // Fixe le rectangle de test
   int dx = 0 ;
   int dy = 0 ;
   SetTestRect (dx, dx, dy, dy);
@@ -81,12 +77,6 @@ void WindParticle::Refresh()
   sprite->Update();
   UpdatePosition();
 
-  // Rotate the sprite if needed
-  if(ActiveMap().wind.rotation_speed != 0.0)
-  {
-    float new_angle = sprite->GetRotation_rad() + ActiveMap().wind.rotation_speed;
-    sprite->SetRotation_rad(new_angle);
-  }
   // Flip the sprite if needed and if the direction of wind changed
   if(ActiveMap().wind.need_flip)
   {

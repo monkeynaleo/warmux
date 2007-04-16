@@ -78,9 +78,6 @@ const double MIN_SPEED_TO_FLY = 15.0;
 const uint LARG_ENERGIE = 40;
 const uint HAUT_ENERGIE = 6;
 
-// Delta angle used to move the crosshair
-const double DELTA_CROSSHAIR = 0.035; /* ~1 degree */
-
 Body * Character::GetBody() const
 {
   return body;
@@ -112,7 +109,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   channel_step = -1;
   hidden = false;
   do_nothing_time = 0;
-  walking_time = 0;
   m_allow_negative_y = true;
   animation_time = Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
   prepare_shoot = false;
@@ -175,7 +171,6 @@ Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
   survivals            = acharacter.survivals;
   pause_bouge_dg       = acharacter.pause_bouge_dg;
   do_nothing_time      = acharacter.do_nothing_time;
-  walking_time         = acharacter.walking_time;
   animation_time       = acharacter.animation_time;
   lost_energy          = acharacter.lost_energy;
   hidden               = acharacter.hidden;
@@ -289,7 +284,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
 
 void Character::SetEnergy(int new_energy)
 {
-  if(!Network::GetInstance()->IsLocal())
+  if(!network.IsLocal())
   {
     if( m_alive == DEAD && new_energy > 0)
     {
@@ -385,10 +380,6 @@ void Character::Draw()
   // Gone in another world ?
   if (IsGhost()) return;
 
-  // Character is visible on carema? If not, just leave the function
-  Rectanglei rect(GetPosition(), Vector2<int>(GetWidth(), GetHeight()));
-  if (!rect.Intersect(camera)) return;
-
   bool dessine_perte = (lost_energy != 0);
   if ((&ActiveCharacter() == this
     && GameLoop::GetInstance()->ReadState() != GameLoop::END_TURN)
@@ -429,6 +420,7 @@ void Character::Draw()
 
   if(prepare_shoot)
   {
+    body->Build(); // Refresh the body
     if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-begin-shoot")
     {
       // if the movement is finnished, shoot !
@@ -478,7 +470,6 @@ void Character::Draw()
 void Character::Jump(double strength, double angle /*in radian */)
 {
   do_nothing_time = Time::GetInstance()->Read();
-  walking_time = Time::GetInstance()->Read();
 
   if (!CanJump() && ActiveTeam().IsLocal()) return;
 
@@ -526,16 +517,161 @@ void Character::PrepareShoot()
     prepare_shoot = true;
 }
 
-bool Character::IsPreparingShoot()
-{
-  return prepare_shoot;
-}
-
 void Character::DoShoot()
 {
   SetMovementOnce("weapon-" + ActiveTeam().GetWeapon().GetID() + "-end-shoot");
-  body->Build(); // Refresh the body
   ActiveTeam().AccessWeapon().Shoot();
+}
+
+void Character::HandleShoot(Keyboard::Key_Event_t event_type)
+{
+  if(prepare_shoot)
+    return;
+
+  switch (event_type) {
+    case Keyboard::KEY_PRESSED:
+      if (ActiveTeam().GetWeapon().max_strength == 0)
+        ActiveTeam().GetWeapon().NewActionShoot();
+      else
+      if ( (GameLoop::GetInstance()->ReadState() == GameLoop::PLAYING)
+         && ActiveTeam().GetWeapon().IsReady() )
+        ActiveTeam().AccessWeapon().InitLoading();
+      break ;
+
+    case Keyboard::KEY_RELEASED:
+      if (ActiveTeam().GetWeapon().IsLoading())
+        ActiveTeam().GetWeapon().NewActionShoot();
+      break ;
+
+    case Keyboard::KEY_REFRESH:
+      if ( ActiveTeam().GetWeapon().IsLoading() )
+	{
+	  // Strength == max strength -> Fire !!!
+	  if (ActiveTeam().GetWeapon().ReadStrength() >=
+	      ActiveTeam().GetWeapon().max_strength)
+            ActiveTeam().GetWeapon().NewActionShoot();
+	  else
+	    {
+	      // still pressing the Space key
+	      ActiveTeam().AccessWeapon().UpdateStrength();
+	    }
+	}
+      break ;
+
+    default:
+      break ;
+  }
+}
+
+void Character::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
+{
+  // The character cannot move anymove if the turn is over...
+  if (GameLoop::GetInstance()->ReadState() == GameLoop::END_TURN)
+    return ;
+
+  if (ActiveCharacter().IsDead())
+    return;
+
+  if (action == Action::ACTION_SHOOT)
+    {
+      HandleShoot(event_type);
+      do_nothing_time = Time::GetInstance()->Read();
+      CharacterCursor::GetInstance()->Hide();
+      return;
+    }
+
+  ActionHandler * action_handler = ActionHandler::GetInstance();
+
+  if(action <= Action::ACTION_NEXT_CHARACTER)
+    {
+      switch (event_type)
+      {
+        case Keyboard::KEY_REFRESH:
+          switch (action) {
+            case Action::ACTION_MOVE_LEFT:
+              if(ActiveCharacter().IsImmobile())
+                MoveCharacterLeft(ActiveCharacter());
+              HideGameInterface();
+              return;
+            case Action::ACTION_MOVE_RIGHT:
+              if(ActiveCharacter().IsImmobile())
+                MoveCharacterRight(ActiveCharacter());
+              HideGameInterface();
+              return;
+            default:
+              break ;
+          }
+          //no break!! -> it's normal
+        case Keyboard::KEY_PRESSED:
+          switch (action)
+          {
+            case Action::ACTION_UP:
+              HideGameInterface();
+              if(ActiveCharacter().IsImmobile())
+              {
+                if (ActiveTeam().crosshair.enable)
+                {
+                  do_nothing_time = Time::GetInstance()->Read();
+                  CharacterCursor::GetInstance()->Hide();
+                  action_handler->NewAction (new Action(Action::ACTION_UP));
+                }
+              }
+              break ;
+
+            case Action::ACTION_DOWN:
+              HideGameInterface();
+              if(ActiveCharacter().IsImmobile())
+              {
+                if (ActiveTeam().crosshair.enable)
+                {
+                  do_nothing_time = Time::GetInstance()->Read();
+                  CharacterCursor::GetInstance()->Hide();
+                  action_handler->NewAction (new Action(Action::ACTION_DOWN));
+                }
+              }
+              break ;
+            case Action::ACTION_MOVE_LEFT:
+            case Action::ACTION_MOVE_RIGHT:
+              HideGameInterface();
+              InitMouvementDG(PAUSE_MOVEMENT);
+              body->StartWalk();
+              break;
+            // WARNING!! ALL JUMP KEYS NEEDS TO BE PROCESSED AFTER ANY MOVEMENT KEYS
+            // OTHERWISE, THE JUMP ACTION WILL BYPASSED ON DISTANT COMPUTERS BYE THE REFRESH
+            // OF THE WALK
+            case Action::ACTION_JUMP:
+              HideGameInterface();
+              if(ActiveCharacter().IsImmobile())
+                action_handler->NewAction (new Action(Action::ACTION_JUMP));
+              return ;
+            case Action::ACTION_HIGH_JUMP:
+              HideGameInterface();
+              if(ActiveCharacter().IsImmobile())
+                action_handler->NewAction (new Action(Action::ACTION_HIGH_JUMP));
+              return ;
+            case Action::ACTION_BACK_JUMP:
+              HideGameInterface();
+              if(ActiveCharacter().IsImmobile())
+                action_handler->NewAction (new Action(Action::ACTION_BACK_JUMP));
+              return ;
+            default:
+              break;
+          }
+          break;
+
+        case Keyboard::KEY_RELEASED:
+          switch (action) {
+            case Action::ACTION_MOVE_LEFT:
+            case Action::ACTION_MOVE_RIGHT:
+               body->StopWalk();
+               SendCharacterPosition();
+               break;
+            default:
+               break;
+            }
+        default: break;
+      }
+    }
 }
 
 void Character::Refresh()
@@ -558,11 +694,6 @@ void Character::Refresh()
   {
     if(do_nothing_time + do_nothing_timeout < global_time->Read())
       CharacterCursor::GetInstance()->FollowActiveCharacter();
-
-    
-    if(walking_time + 1000 < global_time->Read())
-    if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
-      body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");
   }
 
   if(body->IsWalking())
@@ -592,7 +723,7 @@ void Character::Refresh()
 
     Point2d speed;
     GetSpeedXY(speed);
-    rotation = M_PI * speed.y / speed_init;
+    rotation = -M_PI * speed.y / speed_init;
     body->SetRotation(rotation);
   }
 }
@@ -623,9 +754,7 @@ bool Character::CanJump() const
 
 void Character::InitMouvementDG(uint pause)
 {
-  walking_time = Time::GetInstance()->Read();
   do_nothing_time = Time::GetInstance()->Read();
-  SetMovement("walk");
   CharacterCursor::GetInstance()->Hide();
   step_sound_played = true;
   pause_bouge_dg = Time::GetInstance()->Read()+pause;
@@ -635,7 +764,6 @@ bool Character::CanStillMoveDG(uint pause)
 {
   if(pause_bouge_dg+pause<Time::GetInstance()->Read())
   {
-    walking_time = Time::GetInstance()->Read();
     pause_bouge_dg += pause;
     return true;
   }
@@ -798,7 +926,6 @@ void Character::SetWeaponClothe()
   SetClothe("weapon-" + m_team.GetWeapon().GetID());
   if(body->GetClothe() != "weapon-" + m_team.GetWeapon().GetID())
     SetClothe("normal");
-  SetMovement("walk");
 }
 
 void Character::SetMovement(std::string name)
@@ -854,134 +981,3 @@ uint Character::GetCharacterIndex()
   assert(false);
   return 0;
 }
-
-// ###################################################################
-// ###################################################################
-// ###################################################################
-
-// #################### MOVE_RIGHT
-void Character::HandleKeyPressed_MoveRight()
-{
-  InitMouvementDG(PAUSE_MOVEMENT);
-  body->StartWalk();
-
-  HandleKeyRefreshed_MoveRight();
-}
-
-void Character::HandleKeyRefreshed_MoveRight()
-{
-  HideGameInterface();
-
-  if(ActiveCharacter().IsImmobile())
-    MoveActiveCharacterRight();
-}
-
-void Character::HandleKeyReleased_MoveRight()
-{
-  body->StopWalk();
-  SendActiveCharacterInfo();
-}
-
-// #################### MOVE_LEFT
-void Character::HandleKeyPressed_MoveLeft()
-{
-  InitMouvementDG(PAUSE_MOVEMENT);
-  body->StartWalk();
-
-  HandleKeyRefreshed_MoveLeft();
-}
-
-void Character::HandleKeyRefreshed_MoveLeft()
-{
-  HideGameInterface();
-
-  if(ActiveCharacter().IsImmobile())
-    MoveActiveCharacterLeft();
-}
-
-void Character::HandleKeyReleased_MoveLeft()
-{
-  body->StopWalk();
-  SendActiveCharacterInfo();
-}
-
-// #################### UP
-void Character::HandleKeyPressed_Up()
-{
-  HandleKeyRefreshed_Up();
-}
-
-void Character::HandleKeyRefreshed_Up()
-{
-  HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    {
-      if (ActiveTeam().crosshair.enable)
-	{
-	  do_nothing_time = Time::GetInstance()->Read();
-	  CharacterCursor::GetInstance()->Hide();
-	  AddFiringAngle(-DELTA_CROSSHAIR);
-	  SendActiveCharacterInfo();
-	}
-    }
-}
-
-void Character::HandleKeyReleased_Up(){}
-
-// #################### DOWN
-void Character::HandleKeyPressed_Down()
-{
-  HandleKeyRefreshed_Up();
-}
-
-void Character::HandleKeyRefreshed_Down()
-{
-  HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    {
-      if (ActiveTeam().crosshair.enable)
-	{
-	  do_nothing_time = Time::GetInstance()->Read();
-	  CharacterCursor::GetInstance()->Hide();
-	  AddFiringAngle(DELTA_CROSSHAIR);
-	  SendActiveCharacterInfo();
-	}
-    }
-}
-
-void Character::HandleKeyReleased_Down(){}
-
-// #################### JUMP
-
-void Character::HandleKeyPressed_Jump()
-{
-  HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_JUMP));
-}
-
-void Character::HandleKeyRefreshed_Jump(){}
-
-void Character::HandleKeyReleased_Jump(){}
-
-// #################### HIGH JUMP
-void Character::HandleKeyPressed_HighJump()
-{
-  HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_HIGH_JUMP));
-}
-
-void Character::HandleKeyRefreshed_HighJump(){}
-void Character::HandleKeyReleased_HighJump(){}
-
-// #################### BACK JUMP
-void Character::HandleKeyPressed_BackJump()
-{
-  HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
-    ActionHandler::GetInstance()->NewActionActiveCharacter(new Action(Action::ACTION_CHARACTER_BACK_JUMP));
-}
-
-void Character::HandleKeyRefreshed_BackJump(){}
-void Character::HandleKeyReleased_BackJump(){}

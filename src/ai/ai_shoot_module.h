@@ -28,8 +28,6 @@
 class AIShootModule
 {
  private:
-
-  // ===== TODO : move in AI-stupid-engine
   typedef enum {
     NO_STRATEGY,
     NEAR_FROM_ENEMY,
@@ -42,9 +40,6 @@ class AIShootModule
 
   const Character* m_enemy;
   bool m_has_finished;
-
-  const AIMovementModule& m_AIMovementModule;
-  // =======================
 
   double m_angle;
   uint m_last_shoot_time;
@@ -61,7 +56,7 @@ class AIShootModule
 
   // for proximity weapons like dynamite, mine, ...
   // TODO -> Go in ai_movment_module
-  const Character* FindProximityEnemy(const Character& shooter) const;
+  static const Character* FindProximityEnemy(const Character& shooter);
 
   bool SelectProximityWeapon(const Character& enemy) const;
 
@@ -71,11 +66,10 @@ class AIShootModule
 
   void Shoot();
  public:
-  AIShootModule(const AIMovementModule& to_remove);
+  AIShootModule();
   void BeginTurn();
 
   bool Refresh(uint current_time);
-  void SetNoStrategy();
 };
 
 #endif

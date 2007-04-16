@@ -36,7 +36,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
   m_image = resource_manager.LoadImage(res, resource_id);
   resource_manager.UnLoadXMLProfile( res); 
 
-  txt_label = new Text(label, dark_gray_color, Font::FONT_MEDIUM, Font::FONT_BOLD, false);
+  txt_label = new Text(label, dark_gray_color, Font::GetInstance(Font::FONT_NORMAL, Font::BOLD), false);
   txt_label->SetMaxWidth(GetSizeX());
 
   if ( min_value != -1 && min_value <= value)
@@ -47,7 +47,7 @@ SpinButtonWithPicture::SpinButtonWithPicture (const std::string &label, const st
     m_max_value = max_value;
   else m_max_value = value*2;
 
-  txt_value = new Text("", dark_gray_color, Font::FONT_LARGE, Font::FONT_NORMAL, false);
+  txt_value = new Text("", dark_gray_color, Font::GetInstance(Font::FONT_LARGE), false);
   SetValue(value);
 
   m_step = step;
@@ -84,7 +84,7 @@ void SpinButtonWithPicture::Draw(const Point2i &mousePosition, Surface& surf) co
 			    GetPositionY() + GetSizeY() - txt_label->GetHeight() );
 }
 
-Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button)
+Widget* SpinButtonWithPicture::Clic(const Point2i &mousePosition, uint button)
 {
   need_redrawing = true;
 
@@ -110,11 +110,6 @@ Widget* SpinButtonWithPicture::ClickUp(const Point2i &mousePosition, uint button
     SetValue(m_value + m_step);
     return this;
   }
-  return NULL;
-}
-
-Widget* SpinButtonWithPicture::Click(const Point2i &mousePosition, uint button)
-{
   return NULL;
 }
 

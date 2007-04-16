@@ -1,6 +1,6 @@
 /******************************************************************************
  *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2007 Jon de Andres
+ *  Copyright (C) 2001-2004 Lawrence Azzoug.
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,36 +23,25 @@
 #include "chat.h"
 #include "../graphic/text.h"
 #include "../game/time.h"
-#include "../tool/i18n.h"
 #include <string>
 
-const uint HEIGHT=15;
-const uint XPOS=25;
-const uint YPOS=130;
-const uint MAXLINES=10; //Fidel's advise
-const uint MAXSECONDS=10;
-
-Chat::~Chat()
-{
+Chat::~Chat(){
   delete chat;
 }
 
-Chat::Chat()
-{
+Chat::Chat(){
   chat = NULL;
   input = NULL;
   msg = NULL;
-  check_input = false;
+  check_input = 0;
 }
 
-void Chat::Reset()
-{
+void Chat::Reset(){
   if(chat == NULL)
     chat = new TextList();
 }
 
-void Chat::Show()
-{
+void Chat::Show(){
   uint now = Time::GetInstance()->ReadSec();
   
   if((now - last_time) >= MAXSECONDS){
@@ -66,24 +55,22 @@ void Chat::Show()
     ShowInput();
 }
 
-void Chat::ShowInput()
-{
-  check_input = true;
-  if (input == NULL){
+void Chat::ShowInput(){
+  check_input = 1;
+  if(input == NULL){
     input = new Text("", c_white);
-    msg = new Text(_("Say: "), c_red);
+    msg = new Text(SAY, c_red);
   }
   input->DrawTopLeft(50,500);
   msg->DrawTopLeft(25,500);
 }
 
-bool Chat::CheckInput(){
+int Chat::CheckInput(){
   return check_input;
 }
 
-void Chat::NewMessage(const std::string &msg)
-{
-  if (!chat->Size()){
+void Chat::NewMessage(const std::string &msg){
+  if(!(chat->Size())){
     uint now = Time::GetInstance()->ReadSec();
     last_time = now;
   }
@@ -92,55 +79,31 @@ void Chat::NewMessage(const std::string &msg)
 }
 
 
-void Chat::HandleKey(const SDL_Event& event)
-{
-  SDL_KeyboardEvent kbd_event = event.key;
+void Chat::HandleKey(const SDL_Event *event){
+  SDL_KeyboardEvent kbd_event = event->key;
   SDL_keysym key = kbd_event.keysym;
   std::string txt = input->GetText();
 
-  switch (key.sym){
+  switch(key.sym){
     
   case SDLK_RETURN:
-    check_input = false; //Hide input widget
-    if (txt != "" )
-      Network::GetInstance()->SendChatMessage(txt); //Send 'txt' to other players
+    check_input = 0; //Hide input widget
+    if(txt != "" )
+      network.SendChatMessage(txt); //Send 'txt' to other players
     input->Set("");
     break;
 
   case SDLK_BACKSPACE:
-    if (kbd_event.state == 1 && txt != "")
-    {
-      int off = txt.size() -1;
-
-      // UTF-8 character encoded on 1 octet
-      if(! (txt[off] & 0x80))
-        txt = txt.substr(0, txt.size()-1);
-      else
-      // Multi-byte char
-      {
-        while(! (txt[off] & 0x40))
-          off--;
-      }
-      txt = txt.substr(0, off);
-    }
+    if(kbd_event.state == 1 && txt != "")
+      txt = txt.substr(0, txt.size()-1);
     input->Set(txt);
     break;
 
   default:
-    if (kbd_event.state == 1 && key.unicode > 0){
-      if(key.unicode < 0x80) { // 1 byte char
+    if(kbd_event.state == 1){
+      if(key.unicode < 0x80 && key.unicode > 0)
 	txt = txt + (char)key.unicode;
-      }
-      else if (key.unicode < 0x800) {// 2 byte char
-        txt = txt + (char)(((key.unicode & 0x7c0) >> 6) | 0xc0);
-        txt = txt + (char)((key.unicode & 0x3f) | 0x80);
-      }
-      else {// if (key.unicode < 0x10000) // 3 byte char
-        txt = txt + (char)(((key.unicode & 0xf000) >> 12) | 0xe0);
-        txt = txt + (char)(((key.unicode & 0xfc0) >> 6) | 0x80);
-        txt = txt + (char)((key.unicode & 0x3f) | 0x80);
-      }
-      input->Set(txt);  
+      input->Set(txt);
     }
   }
 }

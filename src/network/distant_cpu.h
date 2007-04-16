@@ -30,9 +30,6 @@
 #include <string>
 #include "../include/action.h" 
 //-----------------------------------------------------------------------------
-
-class Action;
-
 class DistantComputer
 {
   SDL_mutex* sock_lock;
@@ -40,9 +37,6 @@ class DistantComputer
   std::list<std::string> owned_teams;
   
 public:
-  bool version_checked;
-  bool force_disconnect;
-
   DistantComputer(TCPsocket new_sock);
   ~DistantComputer();
 

@@ -34,6 +34,7 @@ public:
   bool Get(const char* url, const char* save_as);
 };
 
-void DownloadServerList();
+extern Downloader downloader;
+
 #endif
 

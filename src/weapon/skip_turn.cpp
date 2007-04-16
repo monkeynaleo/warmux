@@ -30,7 +30,6 @@
 SkipTurn::SkipTurn() : Weapon(WEAPON_SKIP_TURN, "skip_turn", new WeaponConfig())
 {
   m_name = _("Skip turn");
-  m_category = TOOL;
 }
 
 //-----------------------------------------------------------------------------

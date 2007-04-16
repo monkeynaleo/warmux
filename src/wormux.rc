@@ -9,8 +9,8 @@
 #endif
 
 1 VERSIONINFO
-FILEVERSION 0,7,9,0
-PRODUCTVERSION 0,7,9,0
+FILEVERSION 0,8,0,0
+PRODUCTVERSION 0,8,0,0
 FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
 FILEFLAGS 0x1L
@@ -26,10 +26,10 @@ FILETYPE VFT_APP
         {
             VALUE "Comments","Localization support: " IS_NLS_ENABLED "."
             VALUE "CompanyName", "\000"
-            VALUE "FileDescription", "Wormux is a convivial mass murder game."
+            VALUE "FileDescription", "Wormux, a balistics model engine :)"
             VALUE "FileVersion", PACKAGE_VERSION
             VALUE "InternalName", "wormux"
-            VALUE "LegalCopyright", "Copyright (C) 2001-2007 Lawrence Azzoug, the Wormux Project et al."
+            VALUE "LegalCopyright", "Copyright (C) 2001-2006 Lawrence Azzoug, the Wormux Project et al."
             //VALUE "LegalTrademarks", "test"
             VALUE "OriginalFilename", "wormux.exe"
             VALUE "ProductName", "wormux"

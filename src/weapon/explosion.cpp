@@ -50,13 +50,13 @@ void ApplyExplosion (const Point2i &pos,
 		     ParticleEngine::ESmokeStyle smoke
 		     )
 {
-  if(Network::GetInstance()->IsLocal())
+  if(network.IsLocal())
     ApplyExplosion_common(pos, config, son, fire_particle, smoke);
   else
-  if(Network::GetInstance()->IsServer())
+  if(network.IsServer())
     ApplyExplosion_server(pos, config, son, fire_particle, smoke);
   else
-  if(Network::GetInstance()->IsClient())
+  if(network.IsClient())
     return;
   // client receives explosion via the action handler
 }
@@ -92,7 +92,7 @@ void ApplyExplosion_common (const Point2i &pos,
   jukebox.Play("share", son);
 
   // Apply damage on the character.
-  // Do not care about the death of the active character.
+  // Do not care about the death of the active worm.
   double highest_force = 0.0;
   Character* fastest_character = NULL;
   FOR_ALL_CHARACTERS(equipe,ver)
@@ -186,22 +186,22 @@ void ApplyExplosion_common (const Point2i &pos,
 }
 
 void ApplyExplosion_server (const Point2i &pos,
-			    const ExplosiveWeaponConfig &config,
-			    const std::string& son,
-			    bool fire_particle,
-			    ParticleEngine::ESmokeStyle smoke
-			    )
+		     const ExplosiveWeaponConfig &config,
+		     const std::string& son,
+		     bool fire_particle,
+		     ParticleEngine::ESmokeStyle smoke
+		     )
 {
   ActionHandler* action_handler = ActionHandler::GetInstance();
 
-  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendAction(&a_begin_sync);
+  Action a_begin_sync(Action::ACTION_SYNC_BEGIN);
+  network.SendAction(&a_begin_sync);
 
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
     end=teams_list.playing_list.end();
 
-  Action a_characters_info(Action::ACTION_CHARACTER_SET_PHYSICS);
+  Action* send_char = new Action(Action::ACTION_SET_CHARACTER_PHYSICS);
 
   for (int team_no = 0; it != end; ++it, ++team_no)
   {
@@ -220,15 +220,15 @@ void ApplyExplosion_server (const Point2i &pos,
       if (distance <= config.explosion_range || distance < config.blast_range)
       {
         // cliens : Place characters
-        a_characters_info.StoreCharacter(team_no, char_no);
+        send_char->StoreCharacter(team_no, char_no);
       }
     }
   }
-  // send characters infos on network
-  Network::GetInstance()->SendAction(&a_characters_info);
+  action_handler->NewAction(send_char);
 
   Action* a = new Action(Action::ACTION_EXPLOSION);
-  a->Push(pos);
+  a->Push(pos.x);
+  a->Push(pos.y);
   a->Push((int)config.explosion_range);
   a->Push((int)config.particle_range);
   a->Push((int)config.damage);
@@ -239,6 +239,6 @@ void ApplyExplosion_server (const Point2i &pos,
   a->Push(smoke);
 
   action_handler->NewAction(a);
-  Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendAction(&a_sync_end);
+  Action a_sync_end(Action::ACTION_SYNC_END);
+  network.SendAction(&a_sync_end);
 }

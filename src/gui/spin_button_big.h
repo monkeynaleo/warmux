@@ -30,11 +30,6 @@
 
 class SpinButtonBig : public Widget
 {
-  /* If you need this, implement it (correctly)*/
-  SpinButtonBig(const SpinButtonBig&);
-  SpinButtonBig operator=(const SpinButtonBig&);
-  /*********************************************/
-
  protected:
   Text *txt_label, *txt_value;
 
@@ -50,8 +45,7 @@ class SpinButtonBig : public Widget
   void SetSizePosition(const Rectanglei &rect);
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
-  Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
+  Widget* Clic(const Point2i &mousePosition, uint button);
   int GetValue() const;
   void SetValue(int value);
 };

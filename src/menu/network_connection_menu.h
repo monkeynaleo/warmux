@@ -30,7 +30,6 @@
 #include "../gui/button_text.h"
 #include "../gui/msg_box.h"
 #include "../gui/text_box.h"
-#include "../network/network.h"
 
 class NetworkConnectionMenu : public Menu
 {
@@ -40,20 +39,15 @@ class NetworkConnectionMenu : public Menu
     NET_BROWSE_INTERNET
   } network_menu_action_t;
 
-  /* If you need this, implement it (correctly)*/
-   NetworkConnectionMenu(const NetworkConnectionMenu&);
-   NetworkConnectionMenu operator=(const NetworkConnectionMenu&);
-   /********************************************/
-
    /* Connection controllers */
    Button *previous_action_bt, *next_action_bt;
-
+   
    Label* action_label;
    network_menu_action_t current_action;
-
+   
    Label* server_address_label;
    TextBox* server_address;
-
+   
    Label* port_number_label;
    TextBox* port_number;
 
@@ -62,20 +56,17 @@ class NetworkConnectionMenu : public Menu
 
    MsgBox *msg_box;
 
-   void OnClick(const Point2i &mousePosition, int button);
-   void OnClickUp(const Point2i &mousePosition, int button);
+   void OnClic(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
 
    void SetAction(network_menu_action_t action);
-
-   void DisplayError(Network::connection_state_t conn);
 
    void sig_ok();
    void __sig_ok();
    void __sig_cancel();
 
 public:
-   NetworkConnectionMenu();
+   NetworkConnectionMenu(); 
    ~NetworkConnectionMenu();
 };
 

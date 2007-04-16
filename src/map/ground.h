@@ -25,15 +25,13 @@
 #include <list>
 #include "tile.h"
 
-class Ground : public Tile
+class Ground : public Tile 
 {
 private:
-  bool open;
+  bool ouvert;
   bool PointContigu(int x,int y, int & p_x,int & p_y,
                     int pas_bon_x,int pas_bon_y);
   Point2i lastPos;
-
-  static float table[5][5];
 
 public:
   Ground();
@@ -42,14 +40,14 @@ public:
   void Reset();
   void Free() { FreeMem(); }
 
-  // Is point (x,y) in vacuum ?
-  bool IsEmpty(const Point2i &pos) const;
+  // Le point (x,y) est dans le vide ?
+  bool IsEmpty(const Point2i &pos);
 
-  // Is the playground "open" ?
-  bool IsOpen() const { return open; }
-
-  //returns the angle formed by the ground tangent au terrain
-  double Tangent(int x,int y);
+  // C'est un terrain ouvert ?
+  bool EstOuvert() const { return ouvert; }
+  
+  //Renvoie l'angle de la tangeante au terrain
+  double Tangeante(int x,int y);
 
   void RedrawParticleList(std::list<Rectanglei> &list);
 };

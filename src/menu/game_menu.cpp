@@ -63,7 +63,7 @@ GameMenu::GameMenu() :
 
   // Calculate main box size
   uint mainBoxWidth = window.GetWidth() - 2*MARGIN_SIDE;
-  uint mapBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE)
+  uint mapBoxHeight = (window.GetHeight() - MARGIN_TOP - MARGIN_BOTTOM - 2*MARGIN_SIDE) 
     - TEAMS_BOX_H - OPTIONS_BOX_H;
 
   // ################################################
@@ -78,7 +78,8 @@ GameMenu::GameMenu() :
   // ##  MAP SELECTION
   // ################################################
   map_box = new MapSelectionBox( Rectanglei(MARGIN_SIDE, team_box->GetPositionY()+team_box->GetSizeY()+ MARGIN_SIDE,
-					    mainBoxWidth, mapBoxHeight));
+					    mainBoxWidth, mapBoxHeight),
+				 false);
 
   widgets.AddWidget(map_box);
 
@@ -126,14 +127,9 @@ GameMenu::~GameMenu()
 {
 }
 
-void GameMenu::OnClick(const Point2i &mousePosition, int button)
+void GameMenu::OnClic(const Point2i &mousePosition, int button)
 {
-  widgets.Click(mousePosition, button);
-}
-
-void GameMenu::OnClickUp(const Point2i &mousePosition, int button)
-{
-  widgets.ClickUp(mousePosition, button);
+  widgets.Clic(mousePosition, button);
 }
 
 void GameMenu::SaveOptions()

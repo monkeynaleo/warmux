@@ -24,7 +24,6 @@
 
 #include <SDL.h>
 #include <string>
-#include <list>
 #include "color.h"
 #include "../include/base.h"
 #include "../tool/point.h"
@@ -63,11 +62,10 @@ public:
   int Lock();
   void Unlock();
 
-  int Blit(const Surface& src);
+  int Blit(const Surface& src); 
   int Blit(const Surface& src, const Point2i& dst);
   int Blit(const Surface& src, const Rectanglei& srcRect, const Point2i &dstPoint);
-  void MergeSurface(Surface &spr, const Point2i &position);
-
+  
   int SetColorKey(Uint32 flag, Uint32 key);
   int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
   
@@ -85,34 +83,58 @@ public:
   int LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int AALineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color);
   int CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color);
-  int AAPolygonColor(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color);
-  int AAPolygonColor(std::list<Point2i> polygon, const Color & color);
-  int FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color);
-  int FilledPolygon(std::list<Point2i> polygon, const Color & color);
-  int TexturedPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Surface *texture, const int texture_dx, const int texture_dy);
-  int TexturedPolygon(std::list<Point2i> polygon, const Surface *texture);
 
   int Fill(Uint32 color) const;
   int Fill(const Color &color) const;
   int FillRect(const Rectanglei &dstRect, Uint32 color) const;
   int FillRect(const Rectanglei &dstRect, const Color &color) const;
-
+  
   int ImgLoad(std::string filename);
-  int ImgSave(std::string filename);
   Surface RotoZoom(double angle, double zoomx, double zoomy, int smooth);
   Surface DisplayFormatAlpha();
   Surface DisplayFormat();
   Uint32 GetPixel(int x, int y);
   void PutPixel(int x, int y, Uint32 pixel);
-
-  bool IsNull() const;
-  Point2i GetSize() const;
-  int GetWidth() const;
-  int GetHeight() const;
-  Uint32 GetFlags() const;
-  Uint16 GetPitch() const;
-  Uint8 GetBytesPerPixel() const;
-  unsigned char *GetPixels() const;
+  
+  inline bool IsNull() const{
+    return surface == NULL;
+  }
+  
+  /** 
+   * Return the size of a surface.
+   */
+  inline Point2i GetSize() const{
+    return Point2i( GetWidth(), GetHeight() );
+  }
+  
+  /// Return the width of a surface.
+  inline int GetWidth() const{
+    return surface->w;
+  }
+  
+  /// Return the height of a surface.
+  inline int GetHeight() const{
+    return surface->h;
+  }
+  
+  inline Uint32 GetFlags() const{
+    return surface->flags;
+  }
+  
+  /// Return the length of a surface scanline in bytes.
+  inline Uint16 GetPitch() const{
+    return surface->pitch;
+  }
+  
+  /// Return the number of bytes used to represent each pixel in a surface. Usually one to four.
+  inline Uint8 GetBytesPerPixel() const{
+    return surface->format->BytesPerPixel;
+  }
+  
+  /// Return a pointer on the pixels data.
+  inline unsigned char *GetPixels() const{
+    return (unsigned char *) surface->pixels;
+  }
 
 };
 

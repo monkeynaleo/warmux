@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * A big Spinbutton in
+ * A big Spinbutton in 
  *****************************************************************************/
 
 #ifndef SPIN_BUTTON_PICTURE_H
@@ -31,11 +31,6 @@
 class SpinButtonWithPicture : public Widget
 {
  private:
-  /* If you need this, implement it (correctly)*/
-  SpinButtonWithPicture(const SpinButtonWithPicture&);
-  SpinButtonWithPicture operator=(const SpinButtonWithPicture&);
-  /*********************************************/
-
   Surface m_image;
 
  protected:
@@ -53,8 +48,7 @@ class SpinButtonWithPicture : public Widget
   void SetSizePosition(const Rectanglei &rect);
 
   void Draw(const Point2i &mousePosition, Surface& surf) const;
-  Widget* Click(const Point2i &mousePosition, uint button);
-  Widget* ClickUp(const Point2i &mousePosition, uint button);
+  Widget* Clic(const Point2i &mousePosition, uint button);
   int GetValue() const;
   void SetValue(int value);
 };

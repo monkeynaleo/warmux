@@ -23,6 +23,8 @@
 
 #include "config.h"
 
+#define USE_AUTOPACKAGE
+
 #include <sstream>
 #include <string>
 #include <iostream>
@@ -83,16 +85,18 @@ Config::Config()
   scroll_on_border = true;
   transparency = ALPHA;
 
-  // Video settings
-  video_width = 800;
-  video_height = 600;
-  video_fullscreen = false;
-  // Sound settings
-  sound_music = true;
-  sound_effects = true;
-  sound_frequency = 44100;
+  // video
+  tmp.video.width = 800;
+  tmp.video.height = 600;
+  tmp.video.fullscreen = false;
+
+  // sound
+  tmp.sound.music = true;
+  tmp.sound.effects = true;
+  tmp.sound.frequency = 44100;
+
   // network
-  enable_network = true;
+  tmp.network.enable_network = false;
 
   Constants::GetInstance();
 
@@ -155,7 +159,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
   xmlpp::Element *elem;
 
   //=== Map ===
-  XmlReader::ReadString(xml, "map", map_name);
+  XmlReader::ReadString(xml, "map", tmp.map_name);
 
   //=== Teams ===
   elem = XmlReader::GetMarker(xml, "teams");
@@ -173,7 +177,7 @@ bool Config::LoadXml(xmlpp::Element *xml)
     XmlReader::ReadInt(team, "nb_characters", tmp_nb_characters);
     one_team.nb_characters = (uint)tmp_nb_characters;
 
-    teams.push_back(one_team);
+    tmp.teams.push_back(one_team);
 
     // get next team
     i++;
@@ -182,34 +186,104 @@ bool Config::LoadXml(xmlpp::Element *xml)
   //=== Video ===
   if ((elem = XmlReader::GetMarker(xml, "video")) != NULL)
   {
-    XmlReader::ReadUint(elem, "max_fps", max_fps);
+    uint max_fps;
+    if (XmlReader::ReadUint(elem, "max_fps", max_fps))
+      AppWormux::GetInstance()->video.SetMaxFps(max_fps);
+
     XmlReader::ReadBool(elem, "display_wind_particles", display_wind_particles);
     XmlReader::ReadBool(elem, "display_energy_character", display_energy_character);
     XmlReader::ReadBool(elem, "display_name_character", display_name_character);
     XmlReader::ReadBool(elem, "default_mouse_cursor", default_mouse_cursor);
     XmlReader::ReadBool(elem, "scroll_on_border", scroll_on_border);
-    XmlReader::ReadUint(elem, "width", video_width);
-    XmlReader::ReadUint(elem, "height", video_height);
-    XmlReader::ReadBool(elem, "full_screen", video_fullscreen);
+    XmlReader::ReadInt(elem, "width", tmp.video.width);
+    XmlReader::ReadInt(elem, "height", tmp.video.height);
+    XmlReader::ReadBool(elem, "full_screen", tmp.video.fullscreen);
   }
 
   //=== Sound ===
   if ((elem = XmlReader::GetMarker(xml, "sound")) != NULL)
   {
-    XmlReader::ReadBool(elem, "music", sound_music);
-    XmlReader::ReadBool(elem, "effects", sound_effects);
-    XmlReader::ReadUint(elem, "frequency", sound_frequency);
+    XmlReader::ReadBool(elem, "music", tmp.sound.music);
+    XmlReader::ReadBool(elem, "effects", tmp.sound.effects);
+    XmlReader::ReadUint(elem, "frequency", tmp.sound.frequency);
   }
 
   //=== network ===
-  //if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
-  //{
-  //  XmlReader::ReadBool(elem, "enable_network", enable_network);
-  //}
+  if ((elem = XmlReader::GetMarker(xml, "network")) != NULL)
+  {
+    XmlReader::ReadBool(elem, "enable_network", tmp.network.enable_network);
+  }
 
   //=== game mode ===
   XmlReader::ReadString(xml, "game_mode", m_game_mode);
   return true;
+}
+
+void Config::SetKeyboardConfig()
+{
+  my_keyboard = new Keyboard();
+
+  my_keyboard->SetKeyAction(SDLK_LEFT,      Action::ACTION_MOVE_LEFT);
+  my_keyboard->SetKeyAction(SDLK_RIGHT,     Action::ACTION_MOVE_RIGHT);
+  my_keyboard->SetKeyAction(SDLK_UP,        Action::ACTION_UP);
+  my_keyboard->SetKeyAction(SDLK_DOWN,      Action::ACTION_DOWN);
+  my_keyboard->SetKeyAction(SDLK_RETURN,    Action::ACTION_JUMP);
+  my_keyboard->SetKeyAction(SDLK_BACKSPACE, Action::ACTION_HIGH_JUMP);
+  my_keyboard->SetKeyAction(SDLK_b,         Action::ACTION_BACK_JUMP);
+  my_keyboard->SetKeyAction(SDLK_SPACE,     Action::ACTION_SHOOT);
+  my_keyboard->SetKeyAction(SDLK_TAB,       Action::ACTION_NEXT_CHARACTER);
+  my_keyboard->SetKeyAction(SDLK_ESCAPE,    Action::ACTION_QUIT);
+  my_keyboard->SetKeyAction(SDLK_p,         Action::ACTION_PAUSE);
+  my_keyboard->SetKeyAction(SDLK_F10,       Action::ACTION_FULLSCREEN);
+  my_keyboard->SetKeyAction(SDLK_F9,        Action::ACTION_TOGGLE_INTERFACE);
+  my_keyboard->SetKeyAction(SDLK_F1,        Action::ACTION_WEAPONS1);
+  my_keyboard->SetKeyAction(SDLK_F2,        Action::ACTION_WEAPONS2);
+  my_keyboard->SetKeyAction(SDLK_F3,        Action::ACTION_WEAPONS3);
+  my_keyboard->SetKeyAction(SDLK_F4,        Action::ACTION_WEAPONS4);
+  my_keyboard->SetKeyAction(SDLK_F5,        Action::ACTION_WEAPONS5);
+  my_keyboard->SetKeyAction(SDLK_F6,        Action::ACTION_WEAPONS6);
+  my_keyboard->SetKeyAction(SDLK_F7,        Action::ACTION_WEAPONS7);
+  my_keyboard->SetKeyAction(SDLK_F8,        Action::ACTION_WEAPONS8);
+  my_keyboard->SetKeyAction(SDLK_c,         Action::ACTION_CENTER);
+  my_keyboard->SetKeyAction(SDLK_1,         Action::ACTION_WEAPON_1);
+  my_keyboard->SetKeyAction(SDLK_2,         Action::ACTION_WEAPON_2);
+  my_keyboard->SetKeyAction(SDLK_3,         Action::ACTION_WEAPON_3);
+  my_keyboard->SetKeyAction(SDLK_4,         Action::ACTION_WEAPON_4);
+  my_keyboard->SetKeyAction(SDLK_5,         Action::ACTION_WEAPON_5);
+  my_keyboard->SetKeyAction(SDLK_6,         Action::ACTION_WEAPON_6);
+  my_keyboard->SetKeyAction(SDLK_7,         Action::ACTION_WEAPON_7);
+  my_keyboard->SetKeyAction(SDLK_8,         Action::ACTION_WEAPON_8);
+  my_keyboard->SetKeyAction(SDLK_9,         Action::ACTION_WEAPON_9);
+  my_keyboard->SetKeyAction(SDLK_PAGEUP,    Action::ACTION_WEAPON_MORE);
+  my_keyboard->SetKeyAction(SDLK_PAGEDOWN,  Action::ACTION_WEAPON_LESS);
+  my_keyboard->SetKeyAction(SDLK_s,         Action::ACTION_CHAT);
+
+}
+
+void Config::Apply()
+{
+  SetKeyboardConfig();
+
+  // Charge le mode jeu
+  my_weapons_list = new WeaponsList();
+
+  GameMode::GetInstance()->Load(m_game_mode);
+
+  // Son
+  jukebox.ActiveMusic (tmp.sound.music);
+  jukebox.ActiveEffects (tmp.sound.effects);
+  jukebox.SetFrequency (tmp.sound.frequency);
+
+  // load the teams
+  teams_list.LoadList();
+  if (m_xml_loaded)
+    teams_list.InitList (tmp.teams);
+
+  // Load maps
+  if (m_xml_loaded && !tmp.map_name.empty())
+    MapsList::GetInstance()->SelectMapByName (tmp.map_name);
+  else
+    MapsList::GetInstance()->SelectMapByIndex (0);
 }
 
 bool Config::Save()
@@ -242,9 +316,7 @@ bool Config::SaveXml()
   doc.WriteElement(root, "version", Constants::VERSION);
 
   //=== Map ===
-  //The map name is modified when the player validate its choice in the
-  //map selection box.
-  doc.WriteElement(root, "map", map_name);
+  doc.WriteElement(root, "map", MapsList::GetInstance()->ActiveMap().ReadName());
 
   //=== Teams ===
   xmlpp::Element *team_elements = root->add_child("teams");
@@ -287,8 +359,8 @@ bool Config::SaveXml()
   doc.WriteElement(sound_node, "frequency", ulong2str(jukebox.GetFrequency()));
 
   //=== Network ===
-  //xmlpp::Element *net_node = root->add_child("network");
-  //doc.WriteElement(net_node, "enable_network",  ulong2str(IsNetworkActivated()));
+  xmlpp::Element *net_node = root->add_child("network");
+  doc.WriteElement(net_node, "enable_network",  ulong2str(IsNetworkActivated()));
 
   //=== game mode ===
   doc.WriteElement(root, "game_mode", m_game_mode);
@@ -324,16 +396,6 @@ std::string Config::GetPersonalDir() const
   return personal_dir;
 }
 
-std::list<struct ConfigTeam> & Config::AccessTeamList()
-{
-  return teams;
-}
-
-const std::string & Config::GetMapName() const
-{
-  return map_name;
-}
-
 bool Config::GetDisplayEnergyCharacter() const
 {
   return display_energy_character;
@@ -366,95 +428,30 @@ std::string Config::GetTtfFilename() const
 
 bool Config::IsNetworkActivated() const
 {
-  return enable_network;
+  return tmp.network.enable_network;
 }
 
-bool Config::IsVideoFullScreen() const
-{
-  return video_fullscreen;
-}
-
-void Config::SetNetworkActivated(const bool set_net)
-{
-  enable_network = set_net;
-}
-
-void Config::SetVideoFullScreen(const bool set_fullscreen)
-{
-  video_fullscreen = set_fullscreen;
-}
-
-uint Config::GetVideoWidth() const
-{
-  return video_width;
-}
-
-void Config::SetVideoWidth(const uint width)
-{
-  video_width = width;
-}
-
-uint Config::GetVideoHeight() const
-{
-  return video_height;
-}
-
-void Config::SetVideoHeight(const uint height)
-{
-  video_height = height;
-}
-
-bool Config::GetSoundMusic() const
-{
-  return sound_music;
-}
-
-void Config::SetSoundMusic(const bool music)
-{
-  sound_music = music;
-}
-
-bool Config::GetSoundEffects() const
-{
-  return sound_effects;
-}
-
-void Config::SetSoundEffects(const bool effects)
-{
-  sound_effects = effects;
-}
-
-uint Config::GetSoundFrequency() const
-{
-  return sound_frequency;
-}
-
-void Config::SetSoundFrequency(const uint freq)
-{
-  sound_frequency = freq;
-}
-
-void Config::SetDisplayEnergyCharacter(const bool dec)
+void Config::SetDisplayEnergyCharacter(bool dec)
 {
   display_energy_character = dec;
 }
 
-void Config::SetDisplayNameCharacter(const bool dnc)
+void Config::SetDisplayNameCharacter(bool dnc)
 {
   display_name_character = dnc;
 }
 
-void Config::SetDisplayWindParticles(const bool dwp)
+void Config::SetDisplayWindParticles(bool dwp)
 {
   display_wind_particles = dwp;
 }
 
-void Config::SetDefaultMouseCursor(const bool dmc)
+void Config::SetDefaultMouseCursor(bool dmc)
 {
   default_mouse_cursor = dmc;
 }
 
-void Config::SetScrollOnBorder(const bool sob)
+void Config::SetScrollOnBorder(bool sob)
 {
   scroll_on_border = sob;
 }

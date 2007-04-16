@@ -15,12 +15,8 @@ public:
   xmlpp::DomParser parser;
 
 public:
-  // Load an XML document from a file
+  // Load an XML document
   bool Load(const std::string &nomfich);
-
-  // Load an XML document from a string in memory
-  bool LoadFromString(const std::string &contents);
-  std::string ExportToString();
 
   bool IsOk() const;
 
@@ -45,7 +41,7 @@ public:
                        bool &output);
 
   // Get attributes of a marker
-  static bool ReadStringList(const xmlpp::Node *x,
+  static bool ReadStringList(const xmlpp::Node *x, 
                              const std::string &name,
                              std::list<std::string> &output);
 
@@ -84,11 +80,6 @@ public:
 
 class XmlWriter
 {
-  /* if you need that, implement it (correctly)*/
-  XmlWriter(const XmlWriter&);
-  XmlWriter operator=(const XmlWriter&);
-  /*********************************************/
-
 protected:
   xmlpp::Document *m_doc;
   xmlpp::Element *m_root;
@@ -115,8 +106,6 @@ public:
 		    const std::string& comment);
 
   bool Save();
-
-  std::string SaveToString();
 };
 
 #endif /* XML_DOCUMENT_H */

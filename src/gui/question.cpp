@@ -88,8 +88,8 @@ void Question::Draw() const
 
   if(text->GetText() != "")
   {
-    text->DrawCenter(app->video.window.GetWidth()/2, 
-		     app->video.window.GetHeight()/2);
+    text->DrawCenterTop(app->video.window.GetWidth()/2, 
+			app->video.window.GetHeight()/2);
   }
 }
 
@@ -133,7 +133,7 @@ int Question::Ask ()
 void Question::Set (const std::string &pmessage,
 		    bool default_active, int default_value,const std::string& bg_sprite)
 {
-  text = new Text(pmessage, white_color, Font::FONT_BIG, Font::FONT_NORMAL);
+  text = new Text(pmessage, white_color, Font::GetInstance(Font::FONT_BIG));
 
   default_choice.active = default_active;
   default_choice.value = default_value;

@@ -48,7 +48,7 @@ ObjMine::ObjMine(MineConfig& cfg,
                  WeaponLauncher * p_launcher) :
   WeaponProjectile("mine", cfg, p_launcher)
 {
-  m_allow_negative_y = true;
+  m_allow_negative_y = true; 
   animation = false;
   channel = -1;
   is_active = true;
@@ -160,7 +160,7 @@ void ObjMine::Refresh()
   {
     Detection();
   }
-  else
+  else 
   {
     image->Update();
 
@@ -191,7 +191,7 @@ void ObjMine::Draw()
 
 MineConfig * MineConfig::singleton = NULL;
 
-MineConfig * MineConfig::GetInstance()
+MineConfig * MineConfig::GetInstance() 
 {
   if (singleton == NULL) {
     singleton = new MineConfig();
@@ -204,7 +204,6 @@ MineConfig * MineConfig::GetInstance()
 Mine::Mine() : WeaponLauncher(WEAPON_MINE, "minelauncher", MineConfig::GetInstance(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Mine");
-  m_category = THROW;
   ReloadLauncher();
 }
 
@@ -249,7 +248,7 @@ MineConfig::MineConfig()
   escape_time = 2;
 }
 
-void MineConfig::LoadXml(xmlpp::Element *elem)
+void MineConfig::LoadXml(xmlpp::Element *elem) 
 {
   ExplosiveWeaponConfig::LoadXml (elem);
   XmlReader::ReadUint(elem, "escape_time", escape_time);

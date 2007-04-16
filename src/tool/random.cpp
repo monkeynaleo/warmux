@@ -27,51 +27,47 @@
 
 Random randomObj;
 
-Random::Random()
-{
-  srand(time(NULL));
+Random::Random(){
+  srand( time(NULL) );
 }
 
-int Random::GetSign()
-{
-  if(rand() % 2) return 1;
-  else return -1;
+bool Random::GetBool(){
+  int moitie = RAND_MAX/2;
+  return (rand() <= moitie);
 }
 
-bool Random::GetBool()
-{
-  return rand() % 2 == 0;
+/**
+ *  Génère un nombre entier aléatoire compris dans [min;max]
+ */
+long Random::GetLong(long min, long max){
+	return min + (long)GetDouble(max - min + 1);
+/*  double r = rand();
+  
+  r *= (max - min);
+  r /= RAND_MAX;
+  if( r >= 0 )
+	  r = floor(r + 0.5);
+  else
+	  r = ceil(r - 0.5);
+  
+  return min + (long)r; */
 }
 
-// Get a random value between min and max
-long Random::GetLong(long min, long max)
-{
-  return min + (long)GetDouble(max - min + 1);
+double Random::GetDouble(double min, double max){
+	return min + GetDouble(max - min);
 }
 
-int Random::GetInt(int min, int max)
-{
-  return GetLong(min, max);
-}
-
-double Random::GetDouble(double min, double max)
-{
-  return min + GetDouble(max - min);
-}
-
-double Random::GetDouble(double max)
-{
-  return max * GetDouble();
+double Random::GetDouble(double max){
+	return max * GetDouble();
 }
 
 /**
  * Get a random number between 0.0 and 1.0
- *
+ * 
  * @return A number between 0.0 and 1.0
  */
-double Random::GetDouble()
-{
-  return 1.0 * rand() / (RAND_MAX + 1.0);
+double Random::GetDouble(){
+	return 1.0*rand()/(RAND_MAX + 1.0);
 }
 
 /**
@@ -80,16 +76,14 @@ double Random::GetDouble()
  * @param rect The rectangle in which the returned point will be.
  * @return a random point.
  */
-Point2i Random::GetPoint(const Rectanglei &rect)
-{
-  Point2i topPoint = rect.GetPosition();
-  Point2i bottomPoint = rect.GetBottomRightPoint();
-
-  return Point2i( GetLong(topPoint.x, bottomPoint.x),
-      GetLong(topPoint.y, bottomPoint.y) );
+Point2i Random::GetPoint(const Rectanglei &rect){
+	Point2i topPoint = rect.GetPosition();
+	Point2i bottomPoint = rect.GetBottomRightPoint();
+	
+	return Point2i( GetLong(topPoint.x, bottomPoint.x), 
+			GetLong(topPoint.y, bottomPoint.y) );
 }
 
-Point2i Random::GetPoint(const Point2i &pt)
-{
-  return Point2i( GetLong(0, pt.x - 1), GetLong(0, pt.y - 1) );
+Point2i Random::GetPoint(const Point2i &pt){
+	return Point2i( GetLong(0, pt.x - 1), GetLong(0, pt.y - 1) );
 }

@@ -45,8 +45,6 @@ TeamsList::TeamsList()
 TeamsList::~TeamsList()
 {
   Clear();
-  for(full_iterator it = full_list.begin(); it != full_list.end(); ++it)
-    delete (*it);
   full_list.clear();
 }
 
@@ -64,7 +62,7 @@ void TeamsList::NextTeam (bool begin_game)
     ++it;
     if (it == playing_list.end()) it = playing_list.begin();
   } while ((**it).NbAliveCharacter() == 0);
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_GAMELOOP_NEXT_TEAM, (**it).GetId()));
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_CHANGE_TEAM, (**it).GetId()));
 }
 
 //-----------------------------------------------------------------------------
@@ -91,28 +89,12 @@ void TeamsList::LoadOneTeam(const std::string &dir, const std::string &team)
 #endif
 
   // Add the team
-  try {
-    full_list.push_back(new Team(dir, team));
+  Team * tmp = Team::CreateTeam (dir, team);
+  if (tmp != NULL) {
+    full_list.push_back(*tmp);
     std::cout << ((1<full_list.size())?", ":" ") << team;
     std::cout.flush();
   }
-
-  catch (char const *error)
-    {
-      std::cerr << std::endl
-        << Format(_("Error loading team :")) << team <<":"<< error
-        << std::endl;
-      return;
-    }
-
-  catch (const xmlpp::exception &e)
-    {
-      std::cerr << std::endl
-        << Format(_("Error loading team :")) << team << std::endl
-        << e.what() << std::endl;
-      return;
-    }
-
 }
 
 //-----------------------------------------------------------------------------
@@ -176,19 +158,18 @@ void TeamsList::LoadList()
   ChangeSelection (nv_selection);
 
   std::cout << std::endl;
-  InitList(Config::GetInstance()->AccessTeamList());
 }
 
 //-----------------------------------------------------------------------------
 
-void TeamsList::LoadGamingData()
+void TeamsList::LoadGamingData(uint how_many_characters)
 {
   active_team = playing_list.begin();
 
   iterator it=playing_list.begin(), end=playing_list.end();
 
   // Load the data of all teams
-  for (; it != end; ++it) (**it).LoadGamingData();
+  for (; it != end; ++it) (**it).LoadGamingData(how_many_characters);
 }
 
 //-----------------------------------------------------------------------------
@@ -210,10 +191,10 @@ Team *TeamsList::FindById (const std::string &id, int &pos)
   int i=0;
   for (; it != fin; ++it, ++i)
   {
-    if ((*it)->GetId() == id)
+    if (it -> GetId() == id)
     {
       pos = i;
-      return (*it);
+      return &(*it);
     }
   }
   pos = -1;
@@ -228,8 +209,7 @@ Team *TeamsList::FindByIndex (uint index)
   uint i=0;
   for (; it != fin; ++it, ++i)
   {
-    if (i == index)
-      return (*it);
+    if (i == index) return &(*it);
   }
   assert (false);
   return NULL;
@@ -503,17 +483,8 @@ void TeamsList::DelTeam (const std::string &id)
   Team *equipe = FindById (id, pos);
   assert(equipe != NULL);
 
-  selection_iterator it = find(selection.begin(),selection.end(),(uint)pos);
-
-  if (it != selection.end()) {
-    selection.erase(it);
-  }
-
-  iterator playing_it = find(playing_list.begin(),playing_list.end(),equipe);
-
-  if (playing_it != playing_list.end()) {
-    playing_list.erase(playing_it);
-  }
+  selection.erase(find(selection.begin(),selection.end(),(uint)pos));
+  playing_list.erase(find(playing_list.begin(),playing_list.end(),equipe));
 
   active_team = playing_list.begin();
 }
@@ -553,9 +524,9 @@ Character& ActiveCharacter()
 
 //-----------------------------------------------------------------------------
 
-bool compareTeams(const Team *a, const Team *b)
+bool compareTeams(const Team& a, const Team& b)
 {
-  return a->GetName() < b->GetName();
+  return a.GetName() < b.GetName();
 }
 
 //-----------------------------------------------------------------------------

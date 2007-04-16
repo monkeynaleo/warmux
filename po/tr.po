@@ -19,51 +19,48 @@ msgstr ""
 "X-Poedit-Country: TURKEY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#. Display a message in the network menu
 #: src/network/distant_cpu.cpp:70
-#, fuzzy
 msgid " has joined the party"
-msgstr "%s harita dışına çıktı!"
+msgstr ""
 
-#. Display a message in the network menu
 #: src/network/distant_cpu.cpp:79
 #, fuzzy
 msgid " has left the party"
 msgstr "%s harita dışına çıktı!"
 
-#: src/map/maps_list.cpp:282
+#: src/map/maps_list.cpp:275
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! %s haritası bulunamadı :-("
 
-#: src/menu/network_menu.cpp:115 src/menu/network_menu.cpp:275
+#: src/menu/network_menu.cpp:97 src/menu/network_menu.cpp:228
 #, c-format
 msgid "%i player connected"
 msgid_plural "%i players connected"
 msgstr[0] ""
 
-#: src/menu/network_menu.cpp:119 src/menu/network_menu.cpp:283
+#: src/menu/network_menu.cpp:101 src/menu/network_menu.cpp:233
 #, c-format
 msgid "%i player ready"
 msgid_plural "%i players ready"
 msgstr[0] ""
 
-#: src/game/game_loop.cpp:722
+#: src/game/game_loop.cpp:702
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s) öldü."
 
-#: src/map/maps_list.cpp:104
+#: src/map/maps_list.cpp:102
 #, c-format
 msgid "%s <%s> aka %s from %s"
 msgstr "%s'den %s <%s> aka %s"
 
-#: src/map/maps_list.cpp:111
+#: src/map/maps_list.cpp:109
 #, c-format
 msgid "%s <%s> from %s"
 msgstr "%s'den %s <%s>"
 
-#: src/game/game_loop.cpp:701
+#: src/game/game_loop.cpp:681
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s intihar etti !"
@@ -73,12 +70,12 @@ msgstr "%s intihar etti !"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:694
+#: src/game/game_loop.cpp:674
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s suya daldı."
 
-#: src/game/game_loop.cpp:705
+#: src/game/game_loop.cpp:685
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s harita dışına çıktı!"
@@ -89,12 +86,12 @@ msgid "%s has won %u point of energy!"
 msgid_plural "%s has won %u points of energy!"
 msgstr[0] ""
 
-#: src/game/game_loop.cpp:716
+#: src/game/game_loop.cpp:696
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s bir psikopat, %s takımından bir üyeyi öldürdü!"
 
-#: src/game/game_loop.cpp:711
+#: src/game/game_loop.cpp:691
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s öldü, çünkü bir beceriksiz!"
@@ -109,7 +106,6 @@ msgstr "%s bir mayının yanında!"
 msgid "%s team already has infinite ammo for the %s!"
 msgstr "%s takımı zaten %s için sınırsız cephaneye sahip!"
 
-#. Show message
 #: src/weapon/skip_turn.cpp:41
 #, c-format
 msgid "%s team has skipped its turn."
@@ -129,7 +125,6 @@ msgstr "(şimdiki)"
 msgid "(dead)"
 msgstr "(ölü)"
 
-#. Display number of ammo
 #: src/interface/interface.cpp:206
 msgid "(unlimited)"
 msgstr "(sınırsız)"
@@ -142,27 +137,22 @@ msgstr "Hava Saldırısı"
 msgid "Airhammer"
 msgstr "Hava çekici"
 
-#. We'll do as if NULL is for all teams
 #: src/team/results.cpp:143
 #, fuzzy
 msgid "All teams"
 msgstr "Takımları yükle:"
 
-#: src/weapon/anvil.cpp:88
+#: src/weapon/anvil.cpp:74
 msgid "Anvil"
 msgstr "Örs"
 
-#: src/main.cpp:225
+#: src/main.cpp:206
 msgid "Authors:"
 msgstr "Yazarlar:"
 
 #: src/weapon/auto_bazooka.cpp:153
 msgid "Automatic Bazooka"
 msgstr "Otomatik Bazuka"
-
-#: src/network/net_error_msg.cpp:43
-msgid "Bad socket ..."
-msgstr ""
 
 #: src/weapon/baseball.cpp:32
 msgid "Baseball Bat"
@@ -172,7 +162,7 @@ msgstr "Beyzbol Sopası"
 msgid "Bazooka"
 msgstr "Bazuka"
 
-#: src/weapon/blowtorch.cpp:37
+#: src/weapon/blowtorch.cpp:36
 msgid "Blowtorch"
 msgstr "Pürmüs"
 
@@ -180,16 +170,16 @@ msgstr "Pürmüs"
 msgid "Bounce Ball"
 msgstr "Zıplayan Top"
 
-#: src/weapon/supertux.cpp:106
+#: src/weapon/supertux.cpp:105
 msgid "Bye bye tux..."
 msgstr "Bay bay tux..."
 
-#: src/main.cpp:126
+#: src/main.cpp:116
 msgid "C++ exception caught:"
 msgstr "C++ istisnası oluştu:"
 
 #: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
-#: src/team/teams_list.cpp:518
+#: src/team/teams_list.cpp:509
 #, c-format
 msgid "Can't find team %s!"
 msgstr "%s takımı bulunamadı!"
@@ -199,11 +189,6 @@ msgstr "%s takımı bulunamadı!"
 msgid "Cannot open teams directory (%s)!"
 msgstr "Takım dizini açılamadı (%s)!"
 
-#. Client Mode
-#: src/menu/network_menu.cpp:97
-msgid "Client mode"
-msgstr ""
-
 #: src/weapon/cluster_bomb.cpp:109
 msgid "Cluster Bomb"
 msgstr "Şarapnelli Bomba"
@@ -212,26 +197,26 @@ msgstr "Şarapnelli Bomba"
 msgid "Commit Suicide"
 msgstr "İntihar"
 
-#: src/menu/internet_menu.cpp:63
+#: src/menu/internet_menu.cpp:62
 msgid "Connect !"
 msgstr ""
 
 #: src/menu/network_connection_menu.cpp:65
-#: src/menu/network_connection_menu.cpp:184
+#: src/menu/network_connection_menu.cpp:180
 msgid "Connect to an internet game"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:176
+#: src/menu/network_connection_menu.cpp:172
 msgid "Connect to game"
 msgstr ""
 
-#: src/network/net_error_msg.cpp:34
-msgid "Connected !"
-msgstr ""
-
-#: src/weapon/construct.cpp:42
+#: src/weapon/construct.cpp:43
 msgid "Construct"
 msgstr "İnşa Et"
+
+#: src/network/index_server.cpp:88
+msgid "Contacting main server..."
+msgstr ""
 
 #: src/menu/main_menu.cpp:110
 msgid "Credits"
@@ -241,7 +226,7 @@ msgstr "Hazırlayanlar"
 msgid "Disco Grenade"
 msgstr "Disko El Bombası"
 
-#: src/game/game.cpp:230
+#: src/game/game.cpp:226
 msgid "Do you really want to quit? (Y/N)"
 msgstr "Gerçekten çıkmak istiyor musunuz? (Y/N)"
 
@@ -253,7 +238,7 @@ msgstr "Tur zamanı"
 msgid "Dynamite"
 msgstr "Dinamit"
 
-#: src/game/game_loop.cpp:266 src/game/game_loop.cpp:272
+#: src/game/game_loop.cpp:250 src/game/game_loop.cpp:256
 msgid "END OF GAME"
 msgstr ""
 
@@ -272,18 +257,13 @@ msgstr "%s takımı yüklenirken hata:"
 msgid "Error loading team's data %s:"
 msgstr "%s takımının verileri yüklenirken hata:"
 
-#: src/game/config.cpp:230
+#: src/game/config.cpp:221
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "\"%s\" dizini oluşturulurken hata: ayar dosyası saklanamadı."
 
-#: src/game/game_mode.cpp:260
-#, fuzzy, c-format
-msgid "Error while exporting game mode %s (file %s):"
-msgstr "%s oyun modu yüklenirken hata (dosya %s):"
-
-#: src/game/config.cpp:143
+#: src/game/config.cpp:134
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Ayar dosyası yüklenirken hata: %s"
@@ -293,12 +273,7 @@ msgstr "Ayar dosyası yüklenirken hata: %s"
 msgid "Error while loading game mode %s (file %s):"
 msgstr "%s oyun modu yüklenirken hata (dosya %s):"
 
-#: src/game/game_mode.cpp:223
-#, fuzzy, c-format
-msgid "Error while loading game mode %s from memory:"
-msgstr "%s oyun modu yüklenirken hata (dosya %s):"
-
-#: src/game/game.cpp:186
+#: src/game/game.cpp:184
 #, c-format
 msgid ""
 "Error:\n"
@@ -307,36 +282,36 @@ msgstr ""
 "Hata:\n"
 "%s"
 
-#. translators: %s:%s will expand to something like "example.org:9999"
-#: src/menu/network_connection_menu.cpp:243
-#, fuzzy, c-format
+#: src/menu/network_connection_menu.cpp:222
+#, c-format
 msgid "Error: Unable to connect to %s:%s"
-msgstr "(%s) harita dizini açılamadı!"
+msgstr ""
 
-#: src/menu/network_connection_menu.cpp:218
-#, fuzzy
+#: src/menu/network_connection_menu.cpp:200
 msgid "Error: Unable to contact index server to host a game"
-msgstr "(%s) harita dizini açılamadı!"
+msgstr ""
 
-#: src/menu/network_connection_menu.cpp:254
-#, fuzzy
+#: src/menu/network_connection_menu.cpp:231
 msgid "Error: Unable to contact index server to search an internet game"
-msgstr "(%s) harita dizini açılamadı!"
+msgstr ""
 
-#: src/menu/network_connection_menu.cpp:232
-#, fuzzy
+#: src/menu/network_connection_menu.cpp:212
 msgid "Error: Unable to start server"
-msgstr "(%s) harita dizini açılamadı!"
+msgstr ""
 
 #: src/team/team.cpp:144
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Hata: \"%s\" takımı için, \"%s\" teması bulunamadı."
 
-#: src/network/network.cpp:136
+#: src/network/network.cpp:77
 #, fuzzy
 msgid "Failed to initialize network library!"
 msgstr "SDL kütüphanesi başlatılamadı: %s"
+
+#: src/game/game_loop.cpp:159
+msgid "Find a random position for characters"
+msgstr "Karakterler için rastgele yer bul"
 
 #: src/menu/options_menu.cpp:74
 msgid "Fullscreen?"
@@ -362,7 +337,6 @@ msgstr "Tabanca"
 msgid "HOME directory (environment variable $HOME) could not be found!"
 msgstr "Ev dizini ($HOME çevre değeri) bulunamadı!"
 
-#. Skip a line
 #: src/menu/network_connection_menu.cpp:109
 msgid "Have a good game!"
 msgstr ""
@@ -371,15 +345,15 @@ msgstr ""
 msgid "Head commander"
 msgstr ""
 
-#: src/menu/network_connection_menu.cpp:168
+#: src/menu/network_connection_menu.cpp:164
 msgid "Host a game"
 msgstr ""
 
-#: src/game/game_loop.cpp:758
+#: src/game/game_loop.cpp:737
 msgid "Hurry up, you are too slow !!"
 msgstr "Çabuk ol, çok yavaşsın !!"
 
-#: src/main.cpp:217
+#: src/main.cpp:200
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -391,38 +365,56 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Başlangıç enerjisi"
 
-#: src/game/game_loop.cpp:202
+#: src/game/game_loop.cpp:199
 msgid "Initialisation"
 msgstr "Ayarlama"
 
-#: src/main.cpp:200
+#: src/main.cpp:182
 #, c-format
 msgid "Initialisation of TTF library failed: %s"
 msgstr "TTF kütüphanesi başlatılmasında hata: %s"
 
-#: src/game/game_loop.cpp:156
-#, fuzzy
-msgid "Initialise map"
+#: src/game/game_loop.cpp:107
+msgid "Initialise data"
 msgstr "Veriler yükleniyor"
 
-#: src/game/game_loop.cpp:167 src/game/game_loop.cpp:189
+#: src/game/game_loop.cpp:165
+msgid "Initialise objects"
+msgstr "Nesneler yükleniyor"
+
+#: src/game/game_loop.cpp:104 src/game/game_loop.cpp:128
 msgid "Initialise teams"
 msgstr "Takımlar yükleniyor"
 
+#: src/network/index_server.cpp:99
+msgid "Invalid index server adress!"
+msgstr ""
+
+#: src/network/network.cpp:193
+msgid "Invalid port!"
+msgstr ""
+
+#: src/network/network.cpp:143
+msgid "Invalid server adress!"
+msgstr ""
+
+#: src/network/index_server.cpp:315
+msgid "It doesn't seem to be a valid Wormux server..."
+msgstr ""
+
 #: src/object/objbox.cpp:141
-msgid "It's a present!"
+msgid "Its a present!"
 msgstr ""
 
 #: src/weapon/jetpack.cpp:46
 msgid "Jetpack"
 msgstr "Jet çantası"
 
-#. Skip a line
-#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:137
+#: src/menu/network_connection_menu.cpp:107 src/menu/network_menu.cpp:118
 msgid "Join #wormux on irc.freenode.net to find some opponents."
 msgstr ""
 
-#: src/map/maps_list.cpp:190
+#: src/map/maps_list.cpp:183
 msgid "Load maps:"
 msgstr "Haritaları yükle:"
 
@@ -430,7 +422,6 @@ msgstr "Haritaları yükle:"
 msgid "Load teams:"
 msgstr "Takımları yükle:"
 
-#. How many teams ?
 #: src/menu/network_teams_selection_box.cpp:33
 #, fuzzy
 msgid "Local teams:"
@@ -440,16 +431,16 @@ msgstr "Takımları yükle:"
 msgid "LowGrav"
 msgstr "Düşük yer çekimi"
 
-#: src/map/map.cpp:331
+#: src/map/map.cpp:327
 #, c-format
 msgid "Map %s, a creation of: "
 msgstr "%s haritasını tasarlayan:"
 
-#: src/game/game_loop.cpp:158
+#: src/game/game_loop.cpp:202
 msgid "Maps"
 msgstr "Haritalar"
 
-#: src/menu/network_menu.cpp:109
+#: src/menu/network_menu.cpp:91
 msgid "Max number of players:"
 msgstr ""
 
@@ -485,16 +476,11 @@ msgstr "Müzik?"
 msgid "Network Game"
 msgstr "Ağ Oyunu"
 
-#: src/network/network.cpp:140
-#, fuzzy
-msgid "Network initialization"
-msgstr "Alan oluşturuluyor..."
-
-#: src/weapon/ninja_rope.cpp:82
+#: src/weapon/ninja_rope.cpp:83
 msgid "Ninjarope"
 msgstr "Ninja ipi"
 
-#: src/weapon/weapon.cpp:571
+#: src/weapon/weapon.cpp:542
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "XML ayar dosyasında <%s> elementi bulunamadı!"
@@ -508,7 +494,6 @@ msgstr ""
 msgid "Number of characters"
 msgstr ""
 
-#. How many teams ?
 #: src/menu/teams_selection_box.cpp:31
 msgid "Number of teams:"
 msgstr ""
@@ -547,7 +532,6 @@ msgstr "Oyuncu isimleri?"
 msgid "Polecat Launcher"
 msgstr "Kokarca Mancınığı"
 
-#. Server port
 #: src/menu/network_connection_menu.cpp:81
 msgid "Port:"
 msgstr ""
@@ -556,20 +540,19 @@ msgstr ""
 msgid "Quit"
 msgstr "Çıkış"
 
-#: src/main.cpp:205
+#: src/main.cpp:187
 msgid "Quit Wormux"
 msgstr "Wormux'dan çıkılıyor"
 
-#: src/game/config.cpp:153
+#: src/game/config.cpp:144
 msgid "Reading personal config file"
 msgstr "Kişisel ayar dosyası okunuyor"
 
-#: src/menu/internet_menu.cpp:56
+#: src/menu/internet_menu.cpp:55
 msgid "Refresh"
 msgstr ""
 
-#. translators: this is the team listing and will expand in a context like "OOo team - Remote"
-#: src/menu/team_box.cpp:71
+#: src/menu/team_box.cpp:70
 msgid "Remote"
 msgstr ""
 
@@ -581,31 +564,20 @@ msgstr "Çözünürlük"
 msgid "Riot Bomb"
 msgstr "Ses Bombası"
 
-#: src/main.cpp:250
+#: src/main.cpp:236
 msgid "Run game"
 msgstr "Oyunu çalıştır"
-
-#: src/network/chat.cpp:74
-msgid "Say: "
-msgstr ""
 
 #: src/menu/game_menu.cpp:107
 msgid "Scroll on border"
 msgstr "Sınırlarda kaydır"
 
-#. Server address
 #: src/menu/network_connection_menu.cpp:75
 msgid "Server address:"
 msgstr ""
 
-#. Available on internet ?
 #: src/menu/network_connection_menu.cpp:87
 msgid "Server available on Internet"
-msgstr ""
-
-#. Server Mode
-#: src/menu/network_menu.cpp:106
-msgid "Server mode"
 msgstr ""
 
 #: src/weapon/shotgun.cpp:62
@@ -620,7 +592,6 @@ msgstr "Sırayı atla"
 msgid "Sniper Rifle"
 msgstr "Suikast Tüfeği"
 
-#. Skip a line
 #: src/menu/network_connection_menu.cpp:105
 msgid ""
 "Some weapons are disabled, because of known bugs (ninjarope, airhammer, "
@@ -635,12 +606,11 @@ msgstr "Ses efektleri?"
 msgid "Sound frequency"
 msgstr "Ses frekansı"
 
-#. Load teams' sound profiles
-#: src/game/game_loop.cpp:192
+#: src/game/game_loop.cpp:220
 msgid "Sounds"
 msgstr "Sesler"
 
-#: src/game/game.cpp:85
+#: src/game/game.cpp:86
 msgid "Starting a new game"
 msgstr "Yeni oyun başlatılıyor"
 
@@ -652,7 +622,7 @@ msgstr "Stok:"
 msgid "Submachine Gun"
 msgstr "Makinalı Tüfek"
 
-#: src/weapon/supertux.cpp:139
+#: src/weapon/supertux.cpp:127
 msgid "SuperTux"
 msgstr "SuperTux"
 
@@ -660,7 +630,7 @@ msgstr "SuperTux"
 msgid "Syringe"
 msgstr "Şırınga"
 
-#: src/game/game_loop.cpp:169
+#: src/game/game_loop.cpp:206
 msgid "Teams"
 msgstr "Takımlar"
 
@@ -688,10 +658,6 @@ msgstr "Otomatik roket savaş alanını terketti..."
 msgid "The ball left the battlefield before exploding"
 msgstr "Top, patlamadan savaş alanını terketti"
 
-#: src/network/net_error_msg.cpp:49
-msgid "The connection timed out. Check there is no firewall in the way!"
-msgstr ""
-
 #: src/weapon/disco_grenade.cpp:93
 msgid "The disco grenade has left the dance floor before exploding"
 msgstr "Disko el bombası, patlamadan dans pistini terketti"
@@ -700,24 +666,24 @@ msgstr "Disko el bombası, patlamadan dans pistini terketti"
 msgid "The grenade left the battlefield before exploding"
 msgstr "El bombası, patlamadan savaş alanını terketti"
 
-#: src/weapon/riot_bomb.cpp:50 src/weapon/bazooka.cpp:58
-#: src/weapon/cluster_bomb.cpp:58
+#: src/weapon/bazooka.cpp:58 src/weapon/cluster_bomb.cpp:58
+#: src/weapon/riot_bomb.cpp:50
 msgid "The rocket has left the battlefield..."
 msgstr "Roket savaş alanını terketti..."
 
-#: src/network/net_error_msg.cpp:46
-msgid "The server rejected the conection."
-msgstr ""
-
-#: src/menu/network_menu.cpp:241
+#: src/menu/network_menu.cpp:198
 #, c-format
 msgid "There is only %i team."
 msgid_plural "There are only %i teams."
 msgstr[0] ""
 
-#: src/network/net_error_msg.cpp:37
+#: src/network/index_server.cpp:78
+msgid "Unable to contact an index server!"
+msgstr ""
+
+#: src/network/network.cpp:154
 #, fuzzy
-msgid "Unable to contact host."
+msgid "Unable to contact server!"
 msgstr "(%s) harita dizini açılamadı!"
 
 #: src/graphic/video.cpp:197
@@ -725,24 +691,28 @@ msgstr "(%s) harita dizini açılamadı!"
 msgid "Unable to initialize SDL library: %s"
 msgstr "SDL kütüphanesi başlatılamadı: %s"
 
-#: src/map/maps_list.cpp:203 src/map/maps_list.cpp:219
+#: src/menu/internet_menu.cpp:96
+msgid "Unable to join the game..."
+msgstr ""
+
+#: src/network/network.cpp:237
+msgid "Unable to listen for client!"
+msgstr ""
+
+#: src/map/maps_list.cpp:196 src/map/maps_list.cpp:212
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "(%s) harita dizini açılamadı!"
 
-#: src/network/net_error_msg.cpp:40
-msgid "Unable to use this port!"
-msgstr ""
-
-#: src/main.cpp:133
+#: src/main.cpp:123
 msgid "Unexpected exception caught..."
 msgstr "Beklenmeyen istisna oluştu..."
 
-#: src/main.cpp:167
+#: src/main.cpp:154
 msgid "Version"
 msgstr "Sürüm"
 
-#: src/menu/network_menu.cpp:138
+#: src/menu/network_menu.cpp:119
 msgid ""
 "WARNING! Disconnections are not yet handled. So you have to restart Wormux "
 "after each disconnection!"
@@ -754,22 +724,21 @@ msgid ""
 "experimental."
 msgstr ""
 
-#: src/menu/network_menu.cpp:255
+#: src/menu/network_menu.cpp:209
 #, c-format
 msgid "Wait! %i player is not ready yet!"
 msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 
-#. Initialization of teams' energy
-#: src/game/game_loop.cpp:181
+#: src/game/game_loop.cpp:215
 msgid "Weapons"
 msgstr "Silahlar"
 
-#: src/main.cpp:234
+#: src/main.cpp:217
 msgid "Website: "
 msgstr "Web sitesi: "
 
-#: src/game/game_loop.cpp:719
+#: src/game/game_loop.cpp:699
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
@@ -778,33 +747,33 @@ msgstr "%s ne ayıp - basit bir silah tarafından öldürüldü!"
 msgid "Wind particles?"
 msgstr "Rüzgar parçacıkları?"
 
-#: src/main.cpp:181
+#: src/main.cpp:169
 msgid "Wormux launching..."
 msgstr "Wormux çalıştırılıyor..."
 
-#: src/main.cpp:224
+#: src/main.cpp:205
 msgid "Wormux version "
 msgstr "Wormux sürüm "
 
-#: src/include/action_handler.cpp:223
+#: src/include/action_handler.cpp:375
 #, c-format
 msgid "Wormux versions are differents : client=%s, server=%s."
 msgstr ""
 
-#: src/map/maps_list.cpp:72
+#: src/map/maps_list.cpp:71
 #, c-format
 msgid "XML error during loading map '%s' :"
 msgstr "'%s' haritası yüklenirken XML hatası :"
 
-#: src/menu/network_menu.cpp:249
+#: src/menu/network_menu.cpp:203
 msgid "You are alone..."
 msgstr ""
 
-#: src/map/maps_list.cpp:239
+#: src/map/maps_list.cpp:232
 msgid "You need at least one valid map !"
 msgstr "En az bir geçerli haritaya ihtiyacınız var !"
 
-#: src/game/game_loop.cpp:173
+#: src/game/game_loop.cpp:210
 msgid "You need at least two teams to play: change this in 'Options menu' !"
 msgstr ""
 "Oynamak için en az iki takıma ihtiyacınız var: bunu 'Seçenekler menüsü'nden "
@@ -814,51 +783,17 @@ msgstr ""
 msgid "You need at least two valid teams !"
 msgstr "En az iki geçerli takıma ihtiyacınız var !"
 
-#: src/weapon/launcher.cpp:467
+#: src/weapon/launcher.cpp:464
 msgid "Your shot has missed!"
 msgstr "Iskaladın!"
-
-#: src/menu/credits_menu.cpp:68
-#, fuzzy
-msgid "aka"
-msgstr "Bazuka"
 
 #: src/map/ground.cpp:56
 msgid "done"
 msgstr "tamam"
 
-#: src/menu/credits_menu.cpp:72
-msgid "from"
-msgstr ""
-
-#. Display player's name
 #: src/interface/interface.cpp:166
 msgid "general: "
 msgstr "genel: "
-
-#: src/sound/jukebox.cpp:153
-msgid "o Loading music"
-msgstr ""
-
-#: src/sound/jukebox.cpp:322
-#, fuzzy, c-format
-msgid "o Loading sound profile: %s"
-msgstr "Ayar dosyası yüklenirken hata: %s"
-
-#: src/sound/jukebox.cpp:82
-#, c-format
-msgid "o Opened audio at %d Hz %d bit"
-msgstr ""
-
-#~ msgid "Find a random position for characters"
-#~ msgstr "Karakterler için rastgele yer bul"
-
-#~ msgid "Initialise objects"
-#~ msgstr "Nesneler yükleniyor"
-
-#, fuzzy
-#~ msgid "* Couldn't initialize SDL: "
-#~ msgstr "SDL kütüphanesi başlatılamadı: %s"
 
 #~ msgid "Is it a gift?"
 #~ msgstr "Bu bir hediye mi?"

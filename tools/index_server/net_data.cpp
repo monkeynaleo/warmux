@@ -1,22 +1,3 @@
-/******************************************************************************
- *  Wormux is a convivial mass murder game.
- *  Copyright (C) 2001-2004 Lawrence Azzoug.
- *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
- ******************************************************************************/
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
@@ -27,7 +8,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <list>
-#include <time.h>
 #include "net_data.h"
 #include "debug.h"
 
@@ -35,15 +15,13 @@ NetData::NetData()
 {
 	str_size = 0;
 	connected = false;
-	ping_sent = false;
 	msg_id = TS_NO_MSG;
 }
 
 NetData::~NetData()
 {
-// The socket is closed from server.cpp instead
-//	if(connected)
-//		close(fd);
+	if(connected)
+		close(fd);
 	DPRINT(CONN, "Disconnected.");
 }
 
@@ -54,16 +32,13 @@ void NetData::Host(const int & client_fd, const unsigned int & ip)
 	connected = true;
 }
 
-bool NetData::ConnectTo(const std::string & address, const int & port)
+void NetData::ConnectTo(const std::string & address, const int & port)
 {
 	// Resolve the name of the host:
 	struct hostent* hostinfo;
 	hostinfo = gethostbyname(address.c_str());
 	if(!hostinfo)
-	{
-		PRINT_ERROR;
-		return false;
-	}
+		TELL_ERROR;
 
 	fd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -71,7 +46,7 @@ bool NetData::ConnectTo(const std::string & address, const int & port)
 	{
 		PRINT_ERROR;
 		DPRINT(INFO, "Rejected");
-		return false;
+		return;
 	}
 
 	struct sockaddr_in addr;
@@ -80,15 +55,10 @@ bool NetData::ConnectTo(const std::string & address, const int & port)
 	addr.sin_port = htons(port);
 
 	if( connect(fd, (struct sockaddr*) &addr, sizeof(addr)) != 0 )
-	{
-		PRINT_ERROR;
-		return false;
-	}
+		TELL_ERROR;
 
 	connected = true;
 	DPRINT(CONN, "Connected.");
-	UpdatePing();
-	return true;
 }
 
 bool NetData::ReceiveInt(int & nbr)
@@ -104,7 +74,6 @@ bool NetData::ReceiveInt(int & nbr)
 	nbr = *((int*)&u_nbr);
 	DPRINT(TRAFFIC, "Received int: %i", nbr);
 	received -= 4;
-	UpdatePing();
 	return true;
 }
 
@@ -163,7 +132,6 @@ bool NetData::ReceiveStr(std::string & full_str)
 		delete []str;
 		str_size = 0;
 	}
-	UpdatePing();
 	return true;
 }
 
@@ -181,7 +149,6 @@ bool NetData::SendInt(const int &nbr)
 	}
 
 	DPRINT(TRAFFIC, "Sent int: %i", nbr);
-	UpdatePing();
 	return true;
 }
 
@@ -197,7 +164,6 @@ bool NetData::SendStr(const std::string &full_str)
 	}
 
 	DPRINT(TRAFFIC, "Sent string: %s", full_str.c_str());
-	UpdatePing();
 	return true;
 }
 
@@ -223,20 +189,6 @@ bool NetData::Receive()
 		msg_id = (IndexServerMsg)id;
 	}
 
-	if(msg_id == TS_MSG_PING)
-	{
-		SendInt(TS_MSG_PONG);
-		msg_id = TS_NO_MSG;
-		return true;
-	}
-
-	if(msg_id == TS_MSG_PONG)
-	{
-		ping_sent = false;
-		msg_id = TS_NO_MSG;
-		return true;
-	}
-
 	std::string full_str = "";
 	// If a string is embedded in the msg, get it	{
 	if( msg_id == TS_MSG_VERSION
@@ -255,25 +207,3 @@ bool NetData::Receive()
 
 	return result;
 }
-
-void NetData::CheckState()
-{
-	if(difftime(time(NULL), ping_time) < 60.0)
-		return;
-
-	if(ping_sent)
-	{
-		DPRINT(CONN, "Connection to %i timed out", GetIP());
-		connected = false;
-		return;
-	}
-
-	SendInt(TS_MSG_PING);
-	ping_sent = true;
-}
-
-void NetData::UpdatePing()
-{
-	ping_time = time(NULL);
-}
-

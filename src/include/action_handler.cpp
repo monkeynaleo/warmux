@@ -28,7 +28,6 @@
 #include "../game/game.h"
 #include "../game/time.h"
 #include "../include/constant.h"
-#include "../interface/game_msg.h"
 #include "../network/network.h"
 #include "../map/camera.h"
 #include "../map/map.h"
@@ -37,18 +36,19 @@
 #include "../menu/network_menu.h"
 #include "../network/randomsync.h"
 #include "../network/network.h"
-#include "../network/network_server.h"
 #include "../team/macro.h"
 #include "../tool/debug.h"
 #include "../tool/i18n.h"
 #include "../tool/vector2.h"
 #include "../weapon/construct.h"
 #include "../weapon/launcher.h"
-#include "../weapon/ninja_rope.h"
 #include "../weapon/supertux.h"
 #include "../weapon/weapon.h"
 #include "../weapon/weapons_list.h"
 #include "../weapon/explosion.h"
+
+// Delta angle used to move the crosshair
+#define DELTA_CROSSHAIR 0.035 /* ~1 degree */
 
 ActionHandler * ActionHandler::singleton = NULL;
 
@@ -59,273 +59,14 @@ ActionHandler * ActionHandler::GetInstance()
   return singleton;
 }
 
-// ########################################################
-// ########################################################
-
-void Action_Nickname(Action *a)
-{
-  if(Network::GetInstance()->IsServer() && a->creator)
-  {
-      std::string nickname = a->PopString();
-      std::cout<<"New nickname: " + nickname<< std::endl;
-      a->creator->nickname = nickname;
-  } 
-}
-
-void Action_Network_ChangeState (Action *a)
-{
-  MSG_DEBUG("action_handler", "ChangeState");
-
-  if(Network::GetInstance()->IsServer())
-  {
-    switch(Network::GetInstance()->state)
-    {
-    case Network::NO_NETWORK:
-      // State is changed when server clicks on the launch game button
-
-      // One more client is ready to play
-      Network::GetInstanceServer()->AddAnInitializedPlayer();  
-      break;
-
-    case Network::NETWORK_INIT_GAME:
-      // One more client is ready to play
-      Network::GetInstanceServer()->AddAnInitializedPlayer();  
-      
-      if(Network::GetInstanceServer()->GetNbInitializedPlayers() == Network::GetInstanceServer()->GetNbConnectedPlayers())
-	Network::GetInstanceServer()->state = Network::NETWORK_READY_TO_PLAY;
-      break;
-    default:
-      net_assert(false)
-      {
-	if(a->creator) a->creator->force_disconnect = true;
-	return;
-      }
-      break;
-    }
-  }
-
-  if(Network::GetInstance()->IsClient())
-  {
-    switch(Network::GetInstance()->state)
-    {
-    case Network::NO_NETWORK:
-      Network::GetInstance()->state = Network::NETWORK_INIT_GAME;
-      break;
-    case Network::NETWORK_INIT_GAME:
-      Network::GetInstance()->state = Network::NETWORK_READY_TO_PLAY;
-      break;
-    case Network::NETWORK_READY_TO_PLAY:
-      Network::GetInstance()->state = Network::NETWORK_PLAYING;
-      break;
-    default:
-       net_assert(false)
-       {
-	 if(a->creator) a->creator->force_disconnect = true;
-	 return;
-       }
-    }
-  }
-}
-
-// ########################################################
-
-void Action_Player_ChangeWeapon (Action *a)
-{
-  ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
-}
-
-void Action_Player_NextCharacter (Action *a)
-{
-  a->RetrieveCharacter();       // Retrieve current character's informations
-  a->RetrieveCharacter();       // Retrieve next character information
-  camera.FollowObject(&ActiveCharacter(), true, true);
-}
-
-void Action_Player_PreviousCharacter (Action *a)
-{
-  a->RetrieveCharacter();       // Retrieve current character's informations
-  a->RetrieveCharacter();       // Retrieve previous character's information
-  camera.FollowObject(&ActiveCharacter(), true, true);
-}
-
-void Action_GameLoop_ChangeCharacter (Action *a)
-{
-  a->RetrieveCharacter();
-  camera.FollowObject(&ActiveCharacter(), true, true);
-}
-
-void Action_GameLoop_NextTeam (Action *a)
-{
-  teams_list.SetActive (a->PopString());
-  ActiveTeam().PrepareTurn();
-  assert (!ActiveCharacter().IsDead());
-}
-
-// ########################################################
-
-void Action_Rules_SetGameMode (Action *a)
-{
-  net_assert(Network::GetInstance()->IsClient())
-  {
-    if (a->creator) 
-      a->creator->force_disconnect = true;
-    return;
-  }
-
-  std::string game_mode_name = a->PopString();
-  std::string game_mode = a->PopString();
-  std::string game_mode_objects = a->PopString();
-
-  GameMode::GetInstance()->LoadFromString(game_mode_name,
-					  game_mode,
-					  game_mode_objects);
-}
-
-void SendGameMode()
-{
-  assert(Network::GetInstance()->IsServer());
-
-  Action a(Action::ACTION_RULES_SET_GAME_MODE);
-
-  std::string game_mode_name = "network(";
-  game_mode_name += GameMode::GetInstance()->GetName();
-  game_mode_name += ")";
-
-  a.Push(game_mode_name);
-
-  std::string game_mode;
-  std::string game_mode_objects;
-  
-  GameMode::GetInstance()->ExportToString(game_mode,
-					  game_mode_objects);
-  a.Push(game_mode);
-  a.Push(game_mode_objects);
-
-  Network::GetInstance()->SendAction(&a);
-}
-
-void Action_Rules_AskVersion (Action *a)
-{
-  if (!Network::GetInstance()->IsClient()) return;
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_RULES_SEND_VERSION, Constants::VERSION));
-}
-
-void Action_Rules_SendVersion (Action *a)
-{
-  if (!Network::GetInstance()->IsServer()) return;
-  std::string version= a->PopString();
-  assert(a->creator != NULL);
-
-  if (version != Constants::VERSION)
-  {
-    a->creator->force_disconnect = true;
-    std::string str = Format(_("%s tries to connect with a different version : client=%s, me=%s."),
-                               a->creator->GetAdress().c_str(), version.c_str(), Constants::VERSION.c_str());
-    Network::GetInstance()->network_menu->ReceiveMsgCallback(str);
-    std::cerr << str << std::endl;
-    return;
-  }
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_CONNECT, a->creator->GetAdress()));
-  a->creator->version_checked = true;
-}
-
-// ########################################################
-
-// TODO: Move this into network/distant_cpu.cpp
-void Action_ChatMessage (Action *a)
-{
-  if(Network::GetInstance()->IsServer() && a->creator)
-  {
-    a->creator->SendChatMessage(a);
-  }
-  else
-  {
-    if(Game::GetInstance()->IsGameLaunched())
-      //Add message to chat session in Game
-      //    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
-      GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
-    else if (Network::GetInstance()->network_menu != NULL) {
-      //Network Menu
-      Network::GetInstance()->network_menu->ReceiveMsgCallback(a->PopString());
-    }
-  }
-}
-
-void Action_Menu_SetMap (Action *a)
-{
-  if (!Network::GetInstance()->IsClient()) return;
-  MapsList::GetInstance()->SelectMapByName(a->PopString());
-
-  if (Network::GetInstance()->network_menu != NULL) {
-    Network::GetInstance()->network_menu->ChangeMapCallback();
-  }
-}
-
-// TODO: Move this into network/distant_cpu.cpp
-void Action_Menu_AddTeam (Action *a)
-{
-  if(Network::GetInstance()->IsServer() && a->creator)
-  {
-    a->creator->ManageTeam(a);
-    return;
-  }
-
-  ConfigTeam the_team;
-
-  the_team.id = a->PopString();
-  the_team.player_name = a->PopString();
-  the_team.nb_characters = uint(a->PopInt());
-
-  MSG_DEBUG("action_handler.menu", "+ %s", the_team.id.c_str());
-
-  teams_list.AddTeam (the_team);
-
-  if (Network::GetInstance()->network_menu != NULL)
-    Network::GetInstance()->network_menu->AddTeamCallback(the_team.id);
-}
-
-void Action_Menu_UpdateTeam (Action *a)
-{
-  ConfigTeam the_team;
-
-  the_team.id = a->PopString();
-  the_team.player_name = a->PopString();
-  the_team.nb_characters = uint(a->PopInt());
-
-  teams_list.UpdateTeam (the_team);
-
-  if (Network::GetInstance()->network_menu != NULL)
-    Network::GetInstance()->network_menu->UpdateTeamCallback(the_team.id);
-}
-
-// TODO: Move this into network/distant_cpu.cpp
-void Action_Menu_DelTeam (Action *a)
-{
-  if(Network::GetInstance()->IsServer() && a->creator)
-  {
-    a->creator->ManageTeam(a);
-    return;
-  }
-
-  std::string team = a->PopString();
-
-  MSG_DEBUG("action_handler.menu", "- %s", team.c_str());
-  
-  teams_list.DelTeam (team);
-
-  if (Network::GetInstance()->network_menu != NULL)
-    Network::GetInstance()->network_menu->DelTeamCallback(team);
-}
-
-// ########################################################
-
 // Send information about energy and the position of every character
 void SyncCharacters()
 {
-  assert(Network::GetInstance()->IsServer());
+  assert(network.IsServer());
+  ActionHandler* action_handler = ActionHandler::GetInstance();
 
-  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendAction(&a_begin_sync);
+  Action a_begin_sync(Action::ACTION_SYNC_BEGIN);
+  network.SendAction(&a_begin_sync);
   TeamsList::iterator
     it=teams_list.playing_list.begin(),
     end=teams_list.playing_list.end();
@@ -339,92 +80,312 @@ void SyncCharacters()
 
     for (int char_no = 0; tit != tend; ++tit, ++char_no)
     {
-      // Sync the character's position, energy, ...
-      SendCharacterInfo(team_no, char_no);
+      // Sync the character's energy
+      Action* a = new Action(Action::ACTION_SET_CHARACTER_ENERGY);
+      a->Push(team_no);
+      a->Push(char_no);
+      a->Push((int)(*tit).GetEnergy());
+      action_handler->NewAction(a);
+      // Sync the character's position
+      a = BuildActionSendCharacterPhysics(team_no, char_no);
+      action_handler->NewAction(a);
     }
   }
-  Action a_sync_end(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendAction(&a_sync_end);
+  Action a_sync_end(Action::ACTION_SYNC_END);
+  network.SendAction(&a_sync_end);
 }
 
-void Action_Character_Jump (Action *a)
+void Action_MoveRight (Action *a)
+{
+  assert(false);
+  MoveCharacterRight (ActiveCharacter());
+}
+
+void Action_MoveLeft (Action *a)
+{
+  assert(false);
+  MoveCharacterLeft (ActiveCharacter());
+}
+
+void Action_Jump (Action *a)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
   ActiveCharacter().Jump();
 }
 
-void Action_Character_HighJump (Action *a)
+void Action_HighJump (Action *a)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
   ActiveCharacter().HighJump();
 }
 
-void Action_Character_BackJump (Action *a)
+void Action_BackJump (Action *a)
 {
   GameLoop::GetInstance()->character_already_chosen = true;
   ActiveCharacter().BackJump();
 }
 
-void Action_Character_SetPhysics (Action *a)
+void Action_Up (Action *a)
+{
+  ActiveCharacter().AddFiringAngle(-DELTA_CROSSHAIR);
+}
+
+void Action_Down (Action *a)
+{
+  ActiveCharacter().AddFiringAngle(DELTA_CROSSHAIR);
+}
+
+void Action_ChangeWeapon (Action *a)
+{
+  ActiveTeam().SetWeapon(static_cast<Weapon::Weapon_type>(a->PopInt()));
+}
+
+void Action_NextCharacter (Action *a)
+{
+  a->RetrieveCharacter();       // Retrieve current character's informations
+  a->RetrieveCharacter();       // Retrieve next character information
+  camera.FollowObject(&ActiveCharacter(), true, true);
+}
+
+void Action_ChangeCharacter (Action *a)
+{
+  a->RetrieveCharacter();
+  camera.FollowObject(&ActiveCharacter(), true, true);
+}
+
+void Action_Shoot (Action *a)
+{
+  double strength = a->PopDouble();
+  double angle = a->PopDouble();
+  a->RetrieveCharacter();
+  ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
+}
+
+void Action_Wind (Action *a)
+{
+  wind.SetVal (a->PopInt());
+}
+
+Action* BuildActionSendCharacterPhysics(int team_no, int char_no)
+{
+  Action* a = new Action(Action::ACTION_SET_CHARACTER_PHYSICS);
+  a->StoreCharacter(team_no, char_no);
+  return a;
+}
+
+void Action_SetCharacterPhysics (Action *a)
 {
   while(!a->IsEmpty())
     a->RetrieveCharacter();
 }
 
-// Send character information over the network (it's totally stupid to send it locally ;-)
-void SendCharacterInfo(int team_no, int char_no)
+void Action_SetCharacterEnergy(Action *a)
 {
-  Action a(Action::ACTION_CHARACTER_SET_PHYSICS);
-  a.StoreCharacter(team_no, char_no);
-  Network::GetInstance()->SendAction(&a);
+  int team_no, char_no;
+  team_no = a->PopInt();
+  char_no = a->PopInt();
+  Character* c = teams_list.FindPlayingByIndex(team_no)->FindByIndex(char_no);
+  c->SetEnergy( a->PopInt() );
 }
 
-// Send active character information over the network (it's totally stupid to send it locally ;-)
-void SendActiveCharacterInfo()
+void Action_SetSkin (Action *a)
 {
-  SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
-}
-
-// ########################################################
-
-void Action_Weapon_Shoot (Action *a)
-{
-  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) 
-    return; // hack related to bug 8656
-
-  double strength = a->PopDouble();
-  double angle = a->PopDouble();
-  ActiveTeam().AccessWeapon().PrepareShoot(strength, angle);
-}
-
-void Action_Weapon_StopUse(Action *a)
-{
-  ActiveTeam().AccessWeapon().ActionStopUse();
-}
-
-void Action_Weapon_SetTarget (Action *a)
-{
-  MSG_DEBUG("action.handler", "Set target by clicking");
-
-  ActiveTeam().AccessWeapon().ChooseTarget (a->PopPoint2i());
-}
-
-void Action_Weapon_SetTimeout (Action *a)
-{
-  WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
-  net_assert(launcher != NULL)
+  //Set the frame of the walking skin, to get the position of the hand synced
+  if (!ActiveTeam().IsLocal() || network.state != Network::NETWORK_PLAYING)
   {
-    return;
+    ActiveTeam().ActiveCharacter().SetClothe(a->PopString());
+    ActiveTeam().ActiveCharacter().SetMovement(a->PopString());
+    ActiveTeam().ActiveCharacter().body->SetFrame((uint)a->PopInt());
   }
-  launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
 }
 
-void Action_Weapon_Supertux (Action *a)
+void Action_SetCharacterDirection (Action *a)
 {
-  net_assert(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX)
+  ActiveCharacter().SetDirection (Body::Direction_t(a->PopInt()));
+}
+
+void Action_SetMap (Action *a)
+{
+  if (!network.IsClient()) return;
+  MapsList::GetInstance()->SelectMapByName(a->PopString());
+  network.network_menu->ChangeMapCallback();
+}
+
+void Action_ChangeState (Action *a)
+{
+  MSG_DEBUG("action.handler", "ChangeState");
+
+  if(network.IsServer())
   {
-    return;
+    switch(network.state)
+    {
+    case Network::NETWORK_OPTION_SCREEN:
+      // State is changed when server clicks on the launch game button
+      network.client_inited++;
+      break;
+    case Network::NETWORK_INIT_GAME:
+      // One more client is ready to play
+      network.client_inited++;
+      if(network.client_inited == network.connected_player)
+        network.state = Network::NETWORK_READY_TO_PLAY;
+      break;
+    default:
+      assert(false);
+      break;
+    }
   }
+
+  if(network.IsClient())
+  {
+    switch(network.state)
+    {
+    case Network::NETWORK_OPTION_SCREEN:
+      network.state = Network::NETWORK_INIT_GAME;
+      break;
+    case Network::NETWORK_INIT_GAME:
+      network.state = Network::NETWORK_READY_TO_PLAY;
+      break;
+    case Network::NETWORK_READY_TO_PLAY:
+      network.state = Network::NETWORK_PLAYING;
+      break;
+    default:
+       assert(false);
+    }
+  }
+}
+
+void Action_SetGameMode (Action *a)
+{
+  assert(network.IsClient());
+  GameMode::GetInstance()->max_characters = a->PopInt();
+  GameMode::GetInstance()->max_teams = a->PopInt();
+  GameMode::GetInstance()->duration_turn = a->PopInt();
+  GameMode::GetInstance()->duration_exchange_player = a->PopInt();
+  GameMode::GetInstance()->duration_before_death_mode = a->PopInt();
+  GameMode::GetInstance()->gravity = a->PopDouble();
+  GameMode::GetInstance()->safe_fall = a->PopDouble();
+  GameMode::GetInstance()->damage_per_fall_unit = a->PopDouble();
+  GameMode::GetInstance()->duration_move_player = a->PopInt();
+  GameMode::GetInstance()->allow_character_selection = a->PopInt();
+  GameMode::GetInstance()->character.init_energy = a->PopInt();
+  GameMode::GetInstance()->character.max_energy = a->PopInt();
+  GameMode::GetInstance()->character.mass = a->PopInt();
+  GameMode::GetInstance()->character.air_resist_factor = a->PopDouble();
+  GameMode::GetInstance()->character.jump_strength = a->PopInt();
+  GameMode::GetInstance()->character.jump_angle = a->PopDouble();
+  GameMode::GetInstance()->character.super_jump_strength = a->PopInt();
+  GameMode::GetInstance()->character.super_jump_angle = a->PopDouble();
+  GameMode::GetInstance()->character.back_jump_strength = a->PopInt();
+  GameMode::GetInstance()->character.back_jump_angle = a->PopDouble();
+}
+
+void SendGameMode()
+{
+  assert(network.IsServer());
+  Action a(Action::ACTION_SET_GAME_MODE);
+  a.Push((int)GameMode::GetInstance()->max_characters);
+  a.Push((int)GameMode::GetInstance()->max_teams);
+  a.Push((int)GameMode::GetInstance()->duration_turn);
+  a.Push((int)GameMode::GetInstance()->duration_exchange_player);
+  a.Push((int)GameMode::GetInstance()->duration_before_death_mode);
+  a.Push(GameMode::GetInstance()->gravity);
+  a.Push(GameMode::GetInstance()->safe_fall);
+  a.Push(GameMode::GetInstance()->damage_per_fall_unit);
+  a.Push((int)GameMode::GetInstance()->duration_move_player);
+  a.Push(GameMode::GetInstance()->allow_character_selection);
+  a.Push((int)GameMode::GetInstance()->character.init_energy);
+  a.Push((int)GameMode::GetInstance()->character.max_energy);
+  a.Push((int)GameMode::GetInstance()->character.mass);
+  a.Push(GameMode::GetInstance()->character.air_resist_factor);
+  a.Push((int)GameMode::GetInstance()->character.jump_strength);
+  a.Push(GameMode::GetInstance()->character.jump_angle);
+  a.Push((int)GameMode::GetInstance()->character.super_jump_strength);
+  a.Push(GameMode::GetInstance()->character.super_jump_angle);
+  a.Push((int)GameMode::GetInstance()->character.back_jump_strength);
+  a.Push(GameMode::GetInstance()->character.back_jump_angle);
+  network.SendAction(&a);
+}
+
+// TODO: Move this into network/distant_cpu.cpp
+void Action_NewTeam (Action *a)
+{
+  ConfigTeam the_team;
+
+  the_team.id = a->PopString();
+  the_team.player_name = a->PopString();
+  the_team.nb_characters = uint(a->PopInt());
+
+  teams_list.AddTeam (the_team);
+
+  network.network_menu->AddTeamCallback(the_team.id);
+}
+
+void Action_UpdateTeam (Action *a)
+{
+  ConfigTeam the_team;
+
+  the_team.id = a->PopString();
+  the_team.player_name = a->PopString();
+  the_team.nb_characters = uint(a->PopInt());
+
+  teams_list.UpdateTeam (the_team);
+
+  network.network_menu->UpdateTeamCallback(the_team.id);
+}
+
+// TODO: Move this into network/distant_cpu.cpp
+void Action_DelTeam (Action *a)
+{
+  std::string team = a->PopString();
+  teams_list.DelTeam (team);
+  network.network_menu->DelTeamCallback(team);
+}
+
+// TODO: Move this into network/distant_cpu.cpp
+void Action_ChatMessage (Action *a)
+{
+  if(Game::GetInstance()->IsGameLaunched())
+    //Add message to chat session in Game
+    //    GameLoop::GetInstance()->chatsession.chat->AddText(a->PopString());
+    GameLoop::GetInstance()->chatsession.NewMessage(a->PopString());
+  else
+    //Network Menu
+    network.network_menu->ReceiveMsgCallback(a->PopString());
+}
+
+void Action_ChangeTeam (Action *a)
+{
+  teams_list.SetActive (a->PopString());
+  ActiveTeam().PrepareTurn();
+  assert (!ActiveCharacter().IsDead());
+}
+
+void Action_AskVersion (Action *a)
+{
+  if (!network.IsClient()) return;
+  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SEND_VERSION, Constants::VERSION));
+}
+
+void Action_SendVersion (Action *a)
+{
+  if (!network.IsServer()) return;
+  std::string version= a->PopString();
+  if (version != Constants::VERSION)
+  {
+    Error(Format(_("Wormux versions are differents : client=%s, server=%s."),
+    version.c_str(), Constants::VERSION.c_str()));
+  }
+}
+
+void Action_SendRandom (Action *a)
+{
+  if (!network.IsClient()) return;
+  randomSync.AddToTable(a->PopDouble());
+}
+
+void Action_SupertuxState (Action *a)
+{
+  assert(ActiveTeam().GetWeaponType() == Weapon::WEAPON_SUPERTUX);
   WeaponLauncher* launcher = static_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
   SuperTux* tux = static_cast<SuperTux*>(launcher->GetProjectile());
 
@@ -437,113 +398,30 @@ void Action_Weapon_Supertux (Action *a)
   tux->SetSpeedXY(Point2d(0,0));
 }
 
-void Action_Weapon_Construction (Action *a)
+void Action_SyncBegin (Action *a)
 {
-  Construct* construct_weapon = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
-  net_assert(construct_weapon != NULL)
-  {
-    return;
-  }
-
-  construct_weapon->SetAngle(a->PopDouble());
+  assert(!network.sync_lock);
+  network.sync_lock = true;
 }
 
-void Action_Weapon_Ninjarope (Action *a)
+void Action_SyncEnd (Action *a)
 {
-  NinjaRope* ninjarope = dynamic_cast<NinjaRope*>(&(ActiveTeam().AccessWeapon()));
-  net_assert(ninjarope != NULL)
-  {
-    return;
-  }
-
-  int subaction = a->PopInt();
-  switch (subaction) {
-  case NinjaRope::ATTACH_ROPE: 
-    {// attach rope
-      Point2i contact_point = a->PopPoint2i();
-      ninjarope->AttachRope(contact_point);
-    }
-    break;
-
-  case NinjaRope::ATTACH_NODE: // attach node
-    {
-      Point2i contact_point = a->PopPoint2i();
-      double angle = a->PopDouble();
-      int sense = a->PopInt();
-      ninjarope->AttachNode(contact_point, angle, sense);
-    }
-    break;
-
-  case NinjaRope::DETACH_NODE: // detach last node
-    ninjarope->DetachNode();
-    break;
-
-  case NinjaRope::SET_ROPE_SIZE: // update rope size
-    ninjarope->SetRopeSize(a->PopDouble());
-    break;
-
-  default:
-    assert(false);
-  }
-}
-
-// ########################################################
-
-void Action_Wind (Action *a)
-{
-  wind.SetVal (a->PopInt());
-}
-
-void Action_Network_SendRandom (Action *a)
-{
-  if (!Network::GetInstance()->IsClient()) return;
-  randomSync.AddToTable(a->PopDouble());
-}
-
-void Action_Network_SyncBegin (Action *a)
-{
-  assert(!Network::GetInstance()->sync_lock);
-  Network::GetInstance()->sync_lock = true;
-}
-
-void Action_Network_SyncEnd (Action *a)
-{
-  assert(Network::GetInstance()->sync_lock);
-  Network::GetInstance()->sync_lock = false;
+  assert(network.sync_lock);
+  network.sync_lock = false;
 }
 
 // Nothing to do here. Just for time synchronisation
-void Action_Network_Ping(Action *a)
+void Action_Ping(Action *a)
 {
-}
-
-// Only used to notify clients that someone connected to the server
-void Action_Network_Connect(Action *a)
-{
-  std::string msg = Format("%s just connected", a->PopString().c_str());
-  if(Game::GetInstance()->IsGameLaunched())
-    GameMessages::GetInstance()->Add(msg);
-  else if (Network::GetInstance()->network_menu != NULL)
-    //Network Menu
-    Network::GetInstance()->network_menu->ReceiveMsgCallback(msg);
-}
-
-// Only used to notify clients that someone disconnected from the server
-void Action_Network_Disconnect(Action *a)
-{
-  std::string msg = Format("%s just disconnected", a->PopString().c_str());
-  if(Game::GetInstance()->IsGameLaunched())
-    GameMessages::GetInstance()->Add(msg);
-  else if (Network::GetInstance()->network_menu != NULL)
-    //Network Menu
-    Network::GetInstance()->network_menu->ReceiveMsgCallback(msg);
 }
 
 void Action_Explosion (Action *a)
 {
+  Point2i pos;
   ExplosiveWeaponConfig config;
 
-  Point2i pos = a->PopPoint2i();
+  pos.x = a->PopInt();
+  pos.y = a->PopInt();
   config.explosion_range = a->PopInt();
   config.particle_range = a->PopInt();
   config.damage = a->PopInt();
@@ -556,9 +434,53 @@ void Action_Explosion (Action *a)
   ApplyExplosion_common(pos, config, son, fire_particle, smoke);
 }
 
-// ########################################################
-// ########################################################
-// ########################################################
+void Action_SetTarget (Action *a)
+{
+  MSG_DEBUG("action.handler", "Set target by clicking");
+
+  Point2i target;
+  target.x = a->PopInt();
+  target.y = a->PopInt();
+
+  ActiveTeam().AccessWeapon().ChooseTarget (target);
+}
+
+void Action_SetTimeout (Action *a)
+{
+  WeaponLauncher* launcher = dynamic_cast<WeaponLauncher*>(&(ActiveTeam().AccessWeapon()));
+  assert(launcher != NULL);
+  launcher->GetProjectile()->m_timeout_modifier = a->PopInt();
+}
+
+void Action_ConstructionUp (Action *a)
+{
+  Construct* launcher = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
+  assert(launcher != NULL);
+  launcher->Up();
+}
+
+void Action_ConstructionDown (Action *a)
+{
+  Construct* launcher = dynamic_cast<Construct*>(&(ActiveTeam().AccessWeapon()));
+  assert(launcher != NULL);
+  launcher->Down();
+}
+
+void Action_WeaponStopUse(Action *a)
+{
+  ActiveTeam().AccessWeapon().ActionStopUse();
+}
+
+void Action_Nickname(Action *a)
+{
+
+}
+
+void Action_Pause(Action *a)
+{
+  // Toggle pause
+  Game::GetInstance()->Pause();
+}
 
 void ActionHandler::ExecActions()
 {
@@ -598,18 +520,7 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
   queue.push_back(a);
   //  std::cout << "  queue_size " << queue.size() << std::endl;
   SDL_UnlockMutex(mutex);
-  if (repeat_to_network) Network::GetInstance()->SendAction(a);
-}
-
-void ActionHandler::NewActionActiveCharacter(Action* a)
-{  
-  assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
-  Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
-  Network::GetInstance()->SendAction(&a_begin_sync);
-  SendActiveCharacterInfo();
-  NewAction(a);
-  Action a_end_sync(Action::ACTION_NETWORK_SYNC_END);
-  Network::GetInstance()->SendAction(&a_end_sync);
+  if (repeat_to_network) network.SendAction(a);
 }
 
 void ActionHandler::Register (Action::Action_t action,
@@ -623,11 +534,7 @@ void ActionHandler::Exec(Action *a)
 {
   MSG_DEBUG("action_handler", "Executing action %s",GetActionName(a->GetType()).c_str());
   handler_it it=handler.find(a->GetType());
-  net_assert(it != handler.end())
-  {
-    if(a->creator) a->creator->force_disconnect = true;
-    return;
-  }
+  assert(it != handler.end());
   (*it->second) (a);
 }
 
@@ -645,70 +552,45 @@ ActionHandler::ActionHandler()
 {
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
-
-  // ########################################################
-  Register (Action::ACTION_NICKNAME, "nickname", Action_Nickname);
-  Register (Action::ACTION_NETWORK_CHANGE_STATE, "NETWORK_change_state", &Action_Network_ChangeState);
-
-  // ########################################################
-  Register (Action::ACTION_PLAYER_CHANGE_WEAPON, "PLAYER_change_weapon", &Action_Player_ChangeWeapon);
-  Register (Action::ACTION_PLAYER_NEXT_CHARACTER, "PLAYER_next_character", &Action_Player_NextCharacter);
-  Register (Action::ACTION_PLAYER_PREVIOUS_CHARACTER, "PLAYER_previous_character", &Action_Player_PreviousCharacter);
-  Register (Action::ACTION_GAMELOOP_CHANGE_CHARACTER, "GAMELOOP_change_character", &Action_GameLoop_ChangeCharacter);
-  Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_GameLoop_NextTeam);
-
-  // ########################################################
-  // To be sure that rules will be the same on each computer  
-  Register (Action::ACTION_RULES_ASK_VERSION, "RULES_ask_version", &Action_Rules_AskVersion);
-  Register (Action::ACTION_RULES_SEND_VERSION, "RULES_send_version", &Action_Rules_SendVersion);
-  Register (Action::ACTION_RULES_SET_GAME_MODE, "RULES_set_game_mode", &Action_Rules_SetGameMode);
-
-  // ########################################################
-  // Chat message
-  Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);  
-
-  // Map selection in network menu
-  Register (Action::ACTION_MENU_SET_MAP, "MENU_set_map", &Action_Menu_SetMap);
-
-  // Teams selection in network menu
-  Register (Action::ACTION_MENU_ADD_TEAM, "MENU_add_team", &Action_Menu_AddTeam);
-  Register (Action::ACTION_MENU_DEL_TEAM, "MENU_del_team", &Action_Menu_DelTeam);
-  Register (Action::ACTION_MENU_UPDATE_TEAM, "MENU_update_team", &Action_Menu_UpdateTeam);
-
-  // ########################################################
-  // Character's move
-  Register (Action::ACTION_CHARACTER_JUMP, "CHARACTER_jump", &Action_Character_Jump);
-  Register (Action::ACTION_CHARACTER_HIGH_JUMP, "CHARACTER_super_jump", &Action_Character_HighJump);
-  Register (Action::ACTION_CHARACTER_BACK_JUMP, "CHARACTER_back_jump", &Action_Character_BackJump);
-
-  Register (Action::ACTION_CHARACTER_SET_PHYSICS, "CHARACTER_set_physics", &Action_Character_SetPhysics);
-
-  // ########################################################
-  // Using Weapon
-  Register (Action::ACTION_WEAPON_SHOOT, "WEAPON_shoot", &Action_Weapon_Shoot);
-  Register (Action::ACTION_WEAPON_STOP_USE, "WEAPON_stop_use", &Action_Weapon_StopUse);
-
-  // Quite standard weapon options
-  Register (Action::ACTION_WEAPON_SET_TIMEOUT, "WEAPON_set_timeout", &Action_Weapon_SetTimeout);
-  Register (Action::ACTION_WEAPON_SET_TARGET, "WEAPON_set_target", &Action_Weapon_SetTarget);
-
-  // Special weapon options
-  Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
-  Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
-  Register (Action::ACTION_WEAPON_NINJAROPE, "WEAPON_ninjarope", &Action_Weapon_Ninjarope);
- 
-  // ########################################################
-  Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
-  Register (Action::ACTION_NETWORK_SYNC_END, "NETWORK_sync_end", &Action_Network_SyncEnd);
-  Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
-
-  Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);  
+  Register (Action::ACTION_MOVE_LEFT, "move_left", &Action_MoveLeft);
+  Register (Action::ACTION_MOVE_RIGHT, "move_right", &Action_MoveRight);
+  Register (Action::ACTION_UP, "up", &Action_Up);
+  Register (Action::ACTION_DOWN, "down", &Action_Down);
+  Register (Action::ACTION_JUMP, "jump", &Action_Jump);
+  Register (Action::ACTION_HIGH_JUMP, "super_jump", &Action_HighJump);
+  Register (Action::ACTION_BACK_JUMP, "back_jump", &Action_BackJump);
+  Register (Action::ACTION_SHOOT, "shoot", &Action_Shoot);
+  Register (Action::ACTION_CHANGE_WEAPON, "change_weapon", &Action_ChangeWeapon);
   Register (Action::ACTION_WIND, "wind", &Action_Wind);
-  Register (Action::ACTION_NETWORK_SEND_RANDOM, "NETWORK_send_random", &Action_Network_SendRandom);
-  Register (Action::ACTION_NETWORK_DISCONNECT, "NETWORK_disconnect", &Action_Network_Disconnect);
-  Register (Action::ACTION_NETWORK_CONNECT, "NETWORK_connect", &Action_Network_Connect);
-
-  // ########################################################
+  Register (Action::ACTION_NEXT_CHARACTER, "next_character", &Action_NextCharacter);
+  Register (Action::ACTION_CHANGE_CHARACTER, "change_character", &Action_ChangeCharacter);
+  Register (Action::ACTION_SET_GAME_MODE, "set_game_mode", &Action_SetGameMode);
+  Register (Action::ACTION_SET_MAP, "set_map", &Action_SetMap);
+  Register (Action::ACTION_UPDATE_TEAM, "update_team", &Action_UpdateTeam);
+  Register (Action::ACTION_NEW_TEAM, "new_team", &Action_NewTeam);
+  Register (Action::ACTION_DEL_TEAM, "del_team", &Action_DelTeam);
+  Register (Action::ACTION_CHANGE_TEAM, "change_team", &Action_ChangeTeam);
+  Register (Action::ACTION_SET_CHARACTER_PHYSICS, "set_character_physics", &Action_SetCharacterPhysics);
+  Register (Action::ACTION_SET_SKIN, "set_skin", &Action_SetSkin);
+  Register (Action::ACTION_SET_CHARACTER_DIRECTION, "set_character_direction", &Action_SetCharacterDirection);
+  Register (Action::ACTION_CHANGE_STATE, "change_state", &Action_ChangeState);
+  Register (Action::ACTION_ASK_VERSION, "ask_version", &Action_AskVersion);
+  Register (Action::ACTION_SEND_VERSION, "send_version", &Action_SendVersion);
+  Register (Action::ACTION_SEND_RANDOM, "send_random", &Action_SendRandom);
+  Register (Action::ACTION_PING, "ping", &Action_Ping);
+  Register (Action::ACTION_SYNC_BEGIN, "sync_begin", &Action_SyncBegin);
+  Register (Action::ACTION_SYNC_END, "sync_end", &Action_SyncEnd);
+  Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
+  Register (Action::ACTION_SET_TARGET, "set_target", &Action_SetTarget);
+  Register (Action::ACTION_SUPERTUX_STATE, "supertux_state", &Action_SupertuxState);
+  Register (Action::ACTION_SET_TIMEOUT, "set_timeout", &Action_SetTimeout);
+  Register (Action::ACTION_CONSTRUCTION_UP, "construction_up", &Action_ConstructionUp);
+  Register (Action::ACTION_CONSTRUCTION_DOWN, "construction_down", &Action_ConstructionDown);
+  Register (Action::ACTION_WEAPON_STOP_USE, "weapon_stop_use", &Action_WeaponStopUse);
+  Register (Action::ACTION_SET_CHARACTER_ENERGY, "set_character_energy", &Action_SetCharacterEnergy);
+  Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
+  Register (Action::ACTION_NICKNAME, "nickname", Action_Nickname);
+  Register (Action::ACTION_PAUSE, "pause", Action_Pause);
   SDL_UnlockMutex(mutex);
 }
 

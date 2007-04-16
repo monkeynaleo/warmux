@@ -16,7 +16,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
  ******************************************************************************
- * Refresh water that may be placed in bottom of the ground.
+ * Refresh de l'eau pouvant apparaitre en bas du terrain.
  *****************************************************************************/
 
 #include "water.h"
@@ -92,7 +92,7 @@ void Water::Refresh(){
   }
 
   ////////  Wave calculation:
-  // Fill ground with water
+  // on rempli le sol avec de l'eau
   if (WAVE_TIME < (global_time->Read() - temps_eau))
   {
     temps_eau = global_time->Read();

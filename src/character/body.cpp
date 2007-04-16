@@ -305,29 +305,20 @@ void Body::Build()
   if(walk_events > 0 || current_mvt->type!="walk")
   if(Time::GetInstance()->Read() > last_refresh + current_mvt->speed)
   {
-    // Compute the new frame number
     current_frame += (Time::GetInstance()->Read()-last_refresh) / current_mvt->speed;
     last_refresh += ((Time::GetInstance()->Read()-last_refresh) / current_mvt->speed) * current_mvt->speed;
 
-    // Depending on playmode loop if we have exceeded the nbr of frame of this movement
     if(current_frame >= current_mvt->frames.size())
     {
-      if(current_mvt->play_mode == Movement::LOOP)
+      if(play_once_clothe_sauv)
+        SetClothe(play_once_clothe_sauv->name);
+      if(play_once_mvt_sauv)
       {
-        if(play_once_clothe_sauv)
-          SetClothe(play_once_clothe_sauv->name);
-        if(play_once_mvt_sauv)
-        {
-          SetMovement(play_once_mvt_sauv->type);
-          current_frame = play_once_frame_sauv;
-        }
-        current_frame %= current_mvt->frames.size();
+        SetMovement(play_once_mvt_sauv->type);
+        current_frame = play_once_frame_sauv;
       }
-      else
-      if(current_mvt->play_mode == Movement::PLAY_ONCE)
-        current_frame = current_mvt->frames.size() - 1;
     }
-
+    current_frame %= current_mvt->frames.size();
   }
 
   need_rebuild |= (last_frame != current_frame);
@@ -365,21 +356,16 @@ void Body::Build()
   need_rebuild = false;
 }
 
-void Body::UpdateWeaponPosition(const Point2i& _pos)
+void Body::Draw(const Point2i& _pos)
 {
+  Build();
+
   // update the weapon position
   if(direction == DIRECTION_RIGHT)
     weapon_pos = Point2i((int)weapon_member->pos.x,(int)weapon_member->pos.y);
   else
     weapon_pos = Point2i(GetSize().x - (int)weapon_member->pos.x,(int)weapon_member->pos.y);
   weapon_pos += _pos;
-}
-
-void Body::Draw(const Point2i& _pos)
-{
-  Build();
-
-  UpdateWeaponPosition(_pos);
 
   // Finally draw each layer one by one
   for(int layer=0;layer < (int)current_clothe->layers.size() ;layer++)
@@ -449,10 +435,12 @@ void Body::SetClothe(std::string name)
     BuildSqueleton();
     main_rotation_rad = 0;
     need_rebuild = true;
-    play_once_clothe_sauv = NULL;
   }
   else
     MSG_DEBUG("body","Clothe not found");
+
+
+  play_once_clothe_sauv = NULL;
 
   assert(current_clothe != NULL);
 }
@@ -472,10 +460,11 @@ void Body::SetMovement(std::string name)
     last_refresh = Time::GetInstance()->Read();
     main_rotation_rad = 0;
     need_rebuild = true;
-    play_once_mvt_sauv = NULL;
   }
   else
     MSG_DEBUG("body","Movement not found");
+
+  play_once_mvt_sauv = NULL;
 
   assert(current_mvt != NULL);
 }
@@ -641,13 +630,3 @@ void Body::SetRotation(double angle)
 
 const std::string& Body::GetMovement() { return current_mvt->type; }
 const std::string& Body::GetClothe() { return current_clothe->name; }
-
-void Body::DebugState()
-{
-	MSG_DEBUG("body.state", "clothe: %s\tmovement: %s\t%i", current_clothe->name.c_str(),current_mvt->type.c_str(), current_frame);
-	MSG_DEBUG("body.state", "(played once)clothe: %s\tmovement: %s",
-			(play_once_clothe_sauv?play_once_clothe_sauv->name.c_str():"(NULL)"),
-			(play_once_mvt_sauv?play_once_mvt_sauv->type.c_str():"(NULL)"),
-			play_once_frame_sauv);
-	MSG_DEBUG("body.state", "need rebuild = %i",need_rebuild);
-}

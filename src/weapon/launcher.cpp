@@ -125,7 +125,7 @@ WeaponProjectile::~WeaponProjectile()
 
 void WeaponProjectile::Shoot(double strength)
 {
-  MSG_DEBUG("weapon.projectile", "shoot with strength:%f", strength);
+  MSG_DEBUG("weapon_projectile", "shoot.\n");
 
   Init();
 
@@ -143,12 +143,6 @@ void WeaponProjectile::Shoot(double strength)
   RandomizeShoot(angle,strength);
   SetSpeed (strength, angle);
   PutOutOfGround(angle);
-
-  MSG_DEBUG("weapon.projectile", "shoot with hand position:%d,%d",
-	    ActiveCharacter().GetHandPosition().GetX(),
-	    ActiveCharacter().GetHandPosition().GetY());
-  MSG_DEBUG("weapon.projectile", "shoot with strength:%f, angle:%f, position:%d,%d",
-	    strength, angle, GetX(), GetY());
 
   begin_time = Time::GetInstance()->Read();
 
@@ -205,7 +199,7 @@ bool WeaponProjectile::IsImmobile() const
 void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 {
   assert (obj != NULL);
-  MSG_DEBUG ("weapon.projectile", "SignalObjectCollision");
+
   if (explode_colliding_character)
     Explosion();
 }
@@ -213,7 +207,6 @@ void WeaponProjectile::SignalObjectCollision(PhysicalObj * obj)
 // projectile explode when hiting the ground
 void WeaponProjectile::SignalGroundCollision()
 {
-  MSG_DEBUG ("weapon.projectile", "SignalGroundCollision");
   if (explode_with_collision)
     Explosion();
 }
@@ -221,14 +214,12 @@ void WeaponProjectile::SignalGroundCollision()
 // Default behavior : signal to launcher a collision and explode
 void WeaponProjectile::SignalCollision()
 {
-  MSG_DEBUG ("weapon.projectile", "SignalCollision");
   if (launcher != NULL && !launcher->ignore_collision_signal) launcher->SignalProjectileCollision();
 }
 
 // Default behavior : signal to launcher projectile is drowning
 void WeaponProjectile::SignalDrowning()
 {
-  MSG_DEBUG ("weapon.projectile", "SignalDrowning");
   PhysicalObj::SignalDrowning();
   if (launcher != NULL && !launcher->ignore_drowning_signal)
     launcher->SignalProjectileDrowning();
@@ -237,7 +228,6 @@ void WeaponProjectile::SignalDrowning()
 // Signal a ghost state
 void WeaponProjectile::SignalGhostState(bool)
 {
-  MSG_DEBUG ("weapon.projectile", "SignalGhostState");
   if (launcher != NULL && !launcher->ignore_ghost_state_signal)
     launcher->SignalProjectileGhostState();
   camera.SetCloseFollowing(false);
@@ -245,7 +235,6 @@ void WeaponProjectile::SignalGhostState(bool)
 
 void WeaponProjectile::SignalOutOfMap()
 {
-  MSG_DEBUG ("weapon.projectile", "SignalOutOfMap");
 }
 
 // Implement it in subclass to randomize fire
@@ -256,7 +245,7 @@ void WeaponProjectile::RandomizeShoot(double &angle,double &strength)
 // the projectile explode and signal the explosion to launcher
 void WeaponProjectile::Explosion()
 {
-  MSG_DEBUG("weapon.projectile", "Explosion");
+  MSG_DEBUG (m_name.c_str(), "Explosion");
   DoExplosion();
   SignalExplosion();
   Ghost();
@@ -264,7 +253,6 @@ void WeaponProjectile::Explosion()
 
 void WeaponProjectile::SignalExplosion()
 {
-  MSG_DEBUG ("weapon.projectile", "SignalExplosion");
   if (launcher != NULL && !launcher->ignore_explosion_signal)
     launcher->SignalProjectileExplosion();
 }
@@ -421,7 +409,7 @@ void WeaponLauncher::Draw()
   //Display timeout for projectil if can be changed.
   if (projectile->change_timeout_allowed())
   {
-    if( IsInUse() ) //Do not display after launching.
+    if( IsActive() ) //Do not display after launching.
       return;
 
     int tmp = projectile->GetTotalTimeout();
@@ -455,9 +443,18 @@ void WeaponLauncher::p_Select()
   missed_shots = 0;
   if (projectile->change_timeout_allowed())
   {
+    force_override_keys = true; //Allow overriding key during movement.
     projectile->ResetTimeOut();
   }
   Weapon::p_Select();
+}
+
+void WeaponLauncher::p_Deselect()
+{
+  if (projectile->change_timeout_allowed())
+  {
+    force_override_keys = false;
+  }
 }
 
 void WeaponLauncher::IncMissedShots()
@@ -467,88 +464,68 @@ void WeaponLauncher::IncMissedShots()
     GameMessages::GetInstance()->Add (_("Your shot has missed!"));
 }
 
-void WeaponLauncher::HandleKeyReleased_Num1()
+void WeaponLauncher::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
-  projectile->SetTimeOut(1);
-  NetworkSetTimeoutProjectile();
+  if (event_type == Keyboard::KEY_RELEASED)
+    switch (action) {
+      case Action::ACTION_WEAPON_1:
+        projectile->SetTimeOut(1);
+        break;
+      case Action::ACTION_WEAPON_2:
+        projectile->SetTimeOut(2);
+        break;
+      case Action::ACTION_WEAPON_3:
+        projectile->SetTimeOut(3);
+        break;
+      case Action::ACTION_WEAPON_4:
+        projectile->SetTimeOut(4);
+        break;
+      case Action::ACTION_WEAPON_5:
+        projectile->SetTimeOut(5);
+        break;
+      case Action::ACTION_WEAPON_6:
+        projectile->SetTimeOut(6);
+        break;
+      case Action::ACTION_WEAPON_7:
+        projectile->SetTimeOut(7);
+        break;
+      case Action::ACTION_WEAPON_8:
+        projectile->SetTimeOut(8);
+        break;
+      case Action::ACTION_WEAPON_9:
+        projectile->SetTimeOut(9);
+        break;
+
+      case Action::ACTION_WEAPON_MORE:
+        projectile->IncrementTimeOut();
+        break ;
+
+      case Action::ACTION_WEAPON_LESS:
+        projectile->DecrementTimeOut();
+        break   ;
+
+      default:
+        break ;
+
+    };
+
+    if((action >= Action::ACTION_WEAPON_1 && action <= Action::ACTION_WEAPON_9)
+        || action == Action::ACTION_WEAPON_MORE || action == Action::ACTION_WEAPON_LESS)
+      ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_SET_TIMEOUT, projectile->m_timeout_modifier));
+
+    ActiveCharacter().HandleKeyEvent(action, event_type);
 }
 
-void WeaponLauncher::HandleKeyReleased_Num2()
-{
-  projectile->SetTimeOut(2);
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleKeyReleased_Num3()
-{
-  projectile->SetTimeOut(3);
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleKeyReleased_Num4()
-{
-  projectile->SetTimeOut(4);
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleKeyReleased_Num5()
-{
-  projectile->SetTimeOut(5);
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleKeyReleased_Num6()
-{
-  projectile->SetTimeOut(6);
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleKeyReleased_Num7()
-{
-  projectile->SetTimeOut(7);
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleKeyReleased_Num8()
-{
-  projectile->SetTimeOut(8);
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleKeyReleased_Num9()
-{
-  projectile->SetTimeOut(9);
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleKeyReleased_Less()
+// called by mousse.cpp when mousewhellup
+void WeaponLauncher::ActionUp()
 {
   projectile->IncrementTimeOut();
-  NetworkSetTimeoutProjectile();
 }
 
-void WeaponLauncher::HandleKeyReleased_More()
+// called by mousse.cpp when mousewhelldown
+void WeaponLauncher::ActionDown()
 {
   projectile->DecrementTimeOut();
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::NetworkSetTimeoutProjectile()
-{
-  ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_SET_TIMEOUT, 
-						     projectile->m_timeout_modifier));
-}
-
-void WeaponLauncher::HandleMouseWheelUp()
-{
-  projectile->IncrementTimeOut();
-  NetworkSetTimeoutProjectile();
-}
-
-void WeaponLauncher::HandleMouseWheelDown()
-{
-  projectile->DecrementTimeOut();
-  NetworkSetTimeoutProjectile();
 }
 
 ExplosiveWeaponConfig& WeaponLauncher::cfg()

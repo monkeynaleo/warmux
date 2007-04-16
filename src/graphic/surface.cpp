@@ -25,16 +25,10 @@
 #include <SDL_gfxPrimitives.h>
 #include <SDL_image.h>
 #include <SDL_rotozoom.h>
-#include <png.h>
 #include "../tool/debug.h"
 #include "../tool/error.h"
 #include "../tool/i18n.h"
 #include "../include/base.h"
-
-/* texturedPolygon import from SDL_gfx v2.0.15 */
-#if (SDL_GFXPRIMITIVES_MAJOR == 2) && (SDL_GFXPRIMITIVES_MINOR == 0) && (SDL_GFXPRIMITIVES_MICRO < 14)
-#include "textured_polygon.h"
-#endif /* texturedPolygon import from SDL_gfx v2.0.15 */
 
 /**
  * Default constructor.
@@ -101,46 +95,6 @@ Surface::Surface(const Surface &src){
  */
 Surface::~Surface(){
 	AutoFree();
-}
-
-bool Surface::IsNull() const{
-  return surface == NULL;
-}
-
-/** 
- * Return the size of a surface.
- */
-Point2i Surface::GetSize() const{
-  return Point2i( GetWidth(), GetHeight() );
-}
-
-/// Return the width of a surface.
-int Surface::GetWidth() const{
-  return surface->w;
-}
-
-/// Return the height of a surface.
-int Surface::GetHeight() const{
-  return surface->h;
-}
-
-Uint32 Surface::GetFlags() const{
-  return surface->flags;
-}
-
-/// Return the length of a surface scanline in bytes.
-Uint16 Surface::GetPitch() const{
-  return surface->pitch;
-}
-
-/// Return the number of bytes used to represent each pixel in a surface. Usually one to four.
-Uint8 Surface::GetBytesPerPixel() const{
-  return surface->format->BytesPerPixel;
-}
-
-/// Return a pointer on the pixels data.
-unsigned char *Surface::GetPixels() const{
-  return (unsigned char *) surface->pixels;
 }
 
 Surface &Surface::operator=(const Surface & src){
@@ -303,61 +257,6 @@ int Surface::Blit(const Surface& src, const Rectanglei &srcRect, const Point2i &
 }
 
 /**
- * Merge a sprite (spr) with current Surface at a given position.
- *
- * No more buggy but slow ! :) Don't use it for quick blit. Needed by the ground generator.
- *
- * @param spr
- * @param position
- */
-void Surface::MergeSurface(Surface &spr, const Point2i &pos) {
-  Uint32 spr_pix, cur_pix;
-  Uint8 r, g, b, a, p_r, p_g, p_b, p_a;
-  SDL_PixelFormat * current_fmt = surface->format;
-  SDL_PixelFormat * spr_fmt = spr.surface->format;
-  int current_offset, spr_offset, temp;
-  Point2i offset;
-
-  spr.Lock();
-  Lock();
-  // for each pixel lines of a source image
-  for (offset.x = (pos.x > 0 ? 0 : -pos.x); offset.x < spr.GetWidth() && pos.x + offset.x < GetWidth(); offset.x++) {
-    for (offset.y = (pos.y > 0 ? 0 : -pos.y); offset.y < spr.GetHeight() && pos.y + offset.y < GetHeight(); offset.y++) {
-      // Computing offset on both sprite
-      current_offset = (pos.y + offset.y) * surface->w + pos.x + offset.x;
-      spr_offset = offset.y * spr.surface->w + offset.x;
-      // Retrieving a pixel of sprite to merge
-      spr_pix = ((Uint32*)spr.surface->pixels)[spr_offset];
-      cur_pix = ((Uint32*)surface->pixels)[current_offset];
-      // Retreiving each chanel of the pixel using pixel format
-      r = (Uint8)(((spr_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
-      g = (Uint8)(((spr_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
-      b = (Uint8)(((spr_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
-      a = (Uint8)(((spr_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
-      // Retreiving previous alpha value
-      p_a = (Uint8)(((cur_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
-      if(a == SDL_ALPHA_OPAQUE || (p_a == 0 && a >0)) // new pixel with no alpha or nothing on previous pixel
-        ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
-      else if (a > 0) { // alpha is lower => merge color with previous value
-        p_r = (Uint8)(((cur_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
-        p_g = (Uint8)(((cur_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
-        p_b = (Uint8)(((cur_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
-        temp = (r * a + p_r * p_a) / (a + p_a);
-        r = (temp > 255 ? 255 : temp);
-        temp = (g * a + p_g * p_a) / (a + p_a);
-        g = (temp > 255 ? 255 : temp);
-        temp = (b * a + p_b * p_a) / (a + p_a);
-        b = (temp > 255 ? 255 : temp);
-        a = (a > p_a ? a : p_a);
-        ((Uint32 *)(surface->pixels))[current_offset] = SDL_MapRGBA(current_fmt, r, g, b, a);
-      }
-    }
-  }
-  Unlock();
-  spr.Unlock();
-}
-
-/**
  *
  * @param flag
  * @param key
@@ -477,7 +376,7 @@ int Surface::RectangleColor(const Rectanglei &rect, const Color &color, const ui
 }
 
 int Surface::VlineColor(const uint &x1, const uint &y1, const uint &y2, const Color &color){
-  return vlineRGBA( surface, x1, y1, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
+	return vlineRGBA( surface, x1, y1, y2, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
 int Surface::LineColor(const uint &x1, const uint &x2, const uint &y1, const uint &y2, const Color &color){
@@ -489,69 +388,7 @@ int Surface::AALineColor(const uint &x1, const uint &x2, const uint &y1, const u
 }
 
 int Surface::CircleColor(const uint &x, const uint &y, const uint &rad, const Color &color){
-  return circleRGBA( surface, x, y, rad, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
-}
-
-int Surface::AAPolygonColor(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color){
-  return aapolygonRGBA(surface, vx, vy, n, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
-}
-
-int Surface::AAPolygonColor(std::list<Point2i> polygon, const Color & color)
-{
-  Sint16 * vx, * vy;
-  vx = new Sint16[polygon.size()];
-  vy = new Sint16[polygon.size()];
-  int i = 0;
-  for(std::list<Point2i>::iterator point = polygon.begin(); point != polygon.end(); point++, i++) {
-    vx[i] = point->x;
-    vy[i] = point->y;
-  }
-  int result = aapolygonRGBA(surface, vx, vy, polygon.size(), color.GetRed(),
-                             color.GetGreen(), color.GetBlue(), color.GetAlpha());
-  delete vx;
-  delete vy;
-  return result;
-}
-
-int Surface::FilledPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Color & color){
-  return filledPolygonRGBA(surface, vx, vy, n, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha());
-}
-
-int Surface::FilledPolygon(std::list<Point2i> polygon, const Color & color)
-{
-  Sint16 * vx, * vy;
-  vx = new Sint16[polygon.size()];
-  vy = new Sint16[polygon.size()];
-  int i = 0;
-  for(std::list<Point2i>::iterator point = polygon.begin(); point != polygon.end(); point++, i++) {
-    vx[i] = point->x;
-    vy[i] = point->y;
-  }
-  int result = filledPolygonRGBA(surface, vx, vy, polygon.size(), color.GetRed(),
-                                 color.GetGreen(), color.GetBlue(), color.GetAlpha());
-  delete vx;
-  delete vy;
-  return result;
-}
-
-int Surface::TexturedPolygon(const Sint16 * vx, const Sint16 * vy, const int n, const Surface *texture, const int texture_dx, const int texture_dy){
-  return texturedPolygon(surface, vx, vy, n, texture->surface, texture_dx, texture_dy);
-}
-
-int Surface::TexturedPolygon(std::list<Point2i> polygon, const Surface * texture)
-{
-  Sint16 * vx, * vy;
-  vx = new Sint16[polygon.size()];
-  vy = new Sint16[polygon.size()];
-  int i = 0;
-  for(std::list<Point2i>::iterator point = polygon.begin(); point != polygon.end(); point++, i++) {
-    vx[i] = point->x;
-    vy[i] = point->y;
-  }
-  int result = texturedPolygon(surface, vx, vy, polygon.size(), texture->surface, 0, 0);
-  delete vx;
-  delete vy;
-  return result;
+    return circleRGBA( surface, x, y, rad, color.GetRed(), color.GetGreen(), color.GetBlue(), color.GetAlpha() );
 }
 
 /**
@@ -592,72 +429,10 @@ int Surface::FillRect(const Rectanglei &dstRect, const Color &color) const{
  * @param filename
  */
 int Surface::ImgLoad(std::string filename){
-  AutoFree();
-  surface = IMG_Load( filename.c_str() );
+	AutoFree();
+	surface = IMG_Load( filename.c_str() );
 
-  return !IsNull();
-}
-
-/**
- *
- * @param filename
- */
-int Surface::ImgSave(std::string filename){
-  FILE *f             = NULL;
-  png_structp png_ptr = NULL;
-  png_infop info_ptr  = NULL;
-  Uint32 spr_pix;
-  Uint8 r, g, b, a;
-  SDL_PixelFormat * spr_fmt = surface->format;
-
-  // Creating a png ...
-  png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
-  if(png_ptr == NULL) // Structure and ...
-    goto error_while_creating_png;
-  info_ptr = png_create_info_struct(png_ptr);
-  if(info_ptr == NULL) // Information.
-    goto error_while_creating_png;
-
-  // Opening a new file
-  f = fopen(filename.c_str(), "wb");
-  if(f == NULL)
-    goto error_while_creating_png;
-  png_init_io(png_ptr, f); // Associate png struture with a file
-  png_set_IHDR(png_ptr, info_ptr, surface->w, surface->h, 8,
-               PNG_COLOR_TYPE_RGB_ALPHA,      PNG_INTERLACE_NONE,
-               PNG_COMPRESSION_TYPE_DEFAULT,  PNG_FILTER_TYPE_DEFAULT);
-  png_set_compression_level(png_ptr, Z_BEST_COMPRESSION);
-
-  // Creating the png file
-  png_write_info(png_ptr, info_ptr);
-
-  Lock();
-  Uint8 tmp_line[surface->w * spr_fmt->BytesPerPixel];
-  for(int y = 0; y < surface->h; y++) {
-    for(int x = 0; x < surface->w; x++) {
-      // Retrieving a pixel of sprite to merge
-      spr_pix = ((Uint32*)surface->pixels)[y * surface->w  + x];
-      // Retreiving each chanel of the pixel using pixel format
-      r = (Uint8)(((spr_pix & spr_fmt->Rmask) >> spr_fmt->Rshift) << spr_fmt->Rloss);
-      g = (Uint8)(((spr_pix & spr_fmt->Gmask) >> spr_fmt->Gshift) << spr_fmt->Gloss);
-      b = (Uint8)(((spr_pix & spr_fmt->Bmask) >> spr_fmt->Bshift) << spr_fmt->Bloss);
-      a = (Uint8)(((spr_pix & spr_fmt->Amask) >> spr_fmt->Ashift) << spr_fmt->Aloss);
-      tmp_line[x * spr_fmt->BytesPerPixel] = r;
-      tmp_line[x * spr_fmt->BytesPerPixel + 1] = g;
-      tmp_line[x * spr_fmt->BytesPerPixel + 2] = b;
-      tmp_line[x * spr_fmt->BytesPerPixel + 3] = a;
-    }
-    png_write_row(png_ptr, (Uint8 *)tmp_line);
-  }
-  Unlock();
-  png_write_flush(png_ptr);
-  png_write_end(png_ptr, info_ptr);
-  fclose(f);
-  return 0;
- error_while_creating_png:
-  if (png_ptr) png_destroy_write_struct(&png_ptr, NULL);
-  if (f) fclose(f);
-  return 1;
+	return !IsNull();
 }
 
 /**

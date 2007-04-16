@@ -48,7 +48,7 @@ Obus::Obus(AirAttackConfig& cfg) :
 
 //-----------------------------------------------------------------------------
 
-Plane::Plane(AirAttackConfig &p_cfg) :
+Plane::Plane(AirAttackConfig &p_cfg) : 
   PhysicalObj("air_attack_plane"),
   cfg(p_cfg)
 {
@@ -132,8 +132,8 @@ void Plane::Refresh()
   }
 }
 
-int Plane::GetDirection() const
-{
+int Plane::GetDirection() const 
+{ 
   float x,y;
   image->GetScaleFactors(x,y);
   return (x<0)?-1:1;
@@ -141,13 +141,13 @@ int Plane::GetDirection() const
 
 void Plane::Draw()
 {
-  if (IsGhost()) return;
-  image->Draw(GetPosition());
+  if (IsGhost()) return;  
+  image->Draw(GetPosition());  
 }
 
 bool Plane::OnTopOfTarget() const
 {
-  if (GetDirection() == 1)
+  if (GetDirection() == 1) 
     return (cible_x <= GetX() + distance_to_release);
   else
     return (GetX() - (int)image->GetWidth() + obus_dx - distance_to_release <= cible_x);
@@ -157,9 +157,8 @@ bool Plane::OnTopOfTarget() const
 
 AirAttack::AirAttack() :
   Weapon(WEAPON_AIR_ATTACK, "air_attack",new AirAttackConfig(), ALWAYS_VISIBLE)//, plane(cfg())
-{
+{  
   m_name = _("Air Attack");
-  m_category = HEAVY;
   mouse_character_selection = false;
   can_be_used_on_closed_map = false;
   target_chosen = false;
@@ -168,6 +167,13 @@ AirAttack::AirAttack() :
 void AirAttack::Refresh()
 {
   m_is_active = false;
+
+  // DOES NOT WORK
+  // Change direction of the cursor care about Active player direction
+  // if (ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT)
+//     Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_RIGHT);
+//   else 
+//     Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_LEFT);
 }
 
 void AirAttack::ChooseTarget(Point2i mouse_pos)
@@ -192,7 +198,7 @@ bool AirAttack::p_Shoot ()
 
 void AirAttack::p_Select()
 {
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE);
+  Mouse::GetInstance()->SetPointer(Mouse::POINTER_FIRE_RIGHT);
 }
 
 void AirAttack::p_Deselect()
@@ -201,7 +207,7 @@ void AirAttack::p_Deselect()
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
 }
 
-AirAttackConfig& AirAttack::cfg()
+AirAttackConfig& AirAttack::cfg() 
 {
   return static_cast<AirAttackConfig&>(*extra_params);
 }

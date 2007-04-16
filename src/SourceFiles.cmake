@@ -20,8 +20,6 @@ graphic/color.cpp
 graphic/effects.cpp
 graphic/font.cpp
 graphic/fps.cpp
-graphic/polygon.cpp
-graphic/polygon_generator.cpp
 graphic/spriteanimation.cpp
 graphic/spritecache.cpp
 graphic/sprite.cpp
@@ -66,7 +64,6 @@ map/camera.cpp
 map/ground.cpp
 map/map.cpp
 map/maps_list.cpp
-map/random_map.cpp
 map/sky.cpp
 map/tile.cpp
 map/tileitem.cpp
@@ -89,16 +86,10 @@ network/chat.cpp
 network/distant_cpu.cpp
 network/download.cpp
 network/index_server.cpp
-network/net_error_msg.cpp
-network/network_client.cpp
 network/network.cpp
-network/network_local.cpp
-network/network_server.cpp
 network/randomsync.cpp
 object/barrel.cpp
 object/bonus_box.cpp
-object/medkit.cpp
-object/objbox.cpp
 object/object_cfg.cpp
 object/objects_list.cpp
 object/physical_obj.cpp
@@ -121,7 +112,6 @@ team/results.cpp
 team/team.cpp
 team/team_energy.cpp
 team/teams_list.cpp
-tool/affine_transform.cpp
 tool/debug.cpp
 tool/error.cpp
 tool/euler_vector.cpp

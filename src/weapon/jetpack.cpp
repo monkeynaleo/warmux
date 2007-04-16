@@ -35,18 +35,18 @@
 #include "../character/move.h"
 #include "../include/action_handler.h"
 
-const double JETPACK_FORCE = 2500.0;
+const double JETPACK_FORCE = 2000.0;
 
-const uint DELTA_FUEL_DOWN = 100 ;  // Delta time between 2 fuel unit consumption.
+const uint DELTA_FUEL_DOWN = 200 ;  // Delta time between 2 fuel unit consumption.
 
 JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             new WeaponConfig(),
                             NEVER_VISIBLE)
 {
   m_name = _("Jetpack");
-  m_category = MOVE;
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
+  override_keys = true ;
   use_unit_on_first_shoot = false;
 
   m_x_force = 0.0;
@@ -56,21 +56,24 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
 
 void JetPack::Refresh()
 {
+  if(!ActiveTeam().IsLocal())
+    return;
+
+  Point2d F;
+
   if (m_is_active)
   {
-    if (!ActiveTeam().IsLocal()) {
-      return;
-    }
-
-    Point2d F;
     F.x = m_x_force ;
     F.y = m_y_force ;
 
     ActiveCharacter().SetExternForceXY(F);
     ActiveCharacter().UpdatePosition();
-    SendActiveCharacterInfo();
+    SendCharacterPosition();
+    Action a(Action::ACTION_SET_CHARACTER_PHYSICS);
+    a.StoreActiveCharacter();
+    network.SendAction(&a);
 
-    if (!F.IsNull())
+    if( !F.IsNull() )
     {
       // We are using fuel !!!
       uint current = Time::GetInstance()->Read() ;
@@ -97,12 +100,6 @@ void JetPack::Refresh()
 void JetPack::p_Select()
 {
   ActiveCharacter().SetClothe("jetpack");
-
-  if (!ActiveTeam().IsLocal() && !ActiveTeam().IsLocalAI()) {
-    m_unit_visibility = NEVER_VISIBLE; // do not show ammo units accross the network
-  } else {
-    m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
-  }
 }
 
 void JetPack::p_Deselect()
@@ -146,7 +143,7 @@ void JetPack::StopUse()
 void JetPack::GoUp()
 {
   StartUse();
-  m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE);
+  m_y_force = -(ActiveCharacter().GetMass() * GameMode::GetInstance()->gravity + JETPACK_FORCE) ;
 }
 
 void JetPack::GoLeft()
@@ -183,60 +180,38 @@ void JetPack::StopRight()
   StopUse();
 }
 
-void JetPack::HandleKeyPressed_Up()
+void JetPack::HandleKeyEvent(Action::Action_t action, Keyboard::Key_Event_t event_type)
 {
-  if (m_is_active)
-    GoUp();
-  else
-    ActiveCharacter().HandleKeyPressed_Up();
-}
+  switch (action) {
+    case Action::ACTION_UP:
+      if (event_type == Keyboard::KEY_PRESSED)
+        GoUp();
+      else if (event_type == Keyboard::KEY_RELEASED)
+        StopUp();
+      break ;
 
-void JetPack::HandleKeyReleased_Up()
-{
-  if (m_is_active)
-    StopUp();
-  else
-    ActiveCharacter().HandleKeyReleased_Up();
-}
+    case Action::ACTION_MOVE_LEFT:
+      if (event_type == Keyboard::KEY_PRESSED)
+        GoLeft();
+      else if (event_type == Keyboard::KEY_RELEASED)
+        StopLeft();
+      break ;
 
-void JetPack::HandleKeyPressed_MoveLeft()
-{
-  if (m_is_active)
-    GoLeft();
-  else
-    ActiveCharacter().HandleKeyPressed_MoveLeft();
-}
+    case Action::ACTION_MOVE_RIGHT:
+      if (event_type == Keyboard::KEY_PRESSED)
+        GoRight();
+      else if (event_type == Keyboard::KEY_RELEASED)
+        StopRight();
+      break ;
 
-void JetPack::HandleKeyReleased_MoveLeft()
-{
-  if (m_is_active)
-    StopLeft();
-  else
-    ActiveCharacter().HandleKeyReleased_MoveLeft();
-}
+    case Action::ACTION_SHOOT:
+      if (event_type == Keyboard::KEY_PRESSED)
+        ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_WEAPON_STOP_USE));
+      break ;
 
-void JetPack::HandleKeyPressed_MoveRight()
-{
-  if (m_is_active)
-    GoRight();
-  else
-    ActiveCharacter().HandleKeyPressed_MoveRight();
-}
-
-void JetPack::HandleKeyReleased_MoveRight()
-{
-  if (m_is_active)
-    StopRight();
-  else
-    ActiveCharacter().HandleKeyReleased_MoveRight();
-}
-
-void JetPack::HandleKeyPressed_Shoot()
-{
-  if (!m_is_active)
-    NewActionWeaponShoot();
-  else
-    NewActionWeaponStopUse();
+    default:
+      break ;
+  } ;
 }
 
 bool JetPack::p_Shoot()
