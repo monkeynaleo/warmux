@@ -344,8 +344,13 @@ void PhysicalObj::NotifyMove(Point2d oldPos, Point2d newPos)
 
     if (ContactPoint(cx, cy)) {
       ground_angle = world.ground.Tangeante(cx, cy);
-      contactPos.x = (double)cx / PIXEL_PER_METER;
-      contactPos.y = (double)cy / PIXEL_PER_METER;
+      if (!isnan(ground_angle)) {
+	contactPos.x = (double)cx / PIXEL_PER_METER;
+	contactPos.y = (double)cy / PIXEL_PER_METER;
+      } else {
+	ground_angle = - GetSpeedAngle();
+	contactPos = pos;
+      }
     } else {
       ground_angle = - GetSpeedAngle();
       contactPos = pos;
