@@ -74,8 +74,6 @@ private:
 public:
   static GameMode * GetInstance();
 
-  bool Load(void);
-
   bool LoadFromString(const std::string& contents);
   bool ExportToString(std::string& contents);
 
@@ -83,6 +81,7 @@ public:
 
 private:
   GameMode();
+  bool Load(void);
   bool LoadXml (xmlpp::Element *xml);
 
 };

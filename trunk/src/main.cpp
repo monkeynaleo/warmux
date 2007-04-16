@@ -148,8 +148,6 @@ void AppWormux::Init(int argc, char **argv)
 
   teams_list.LoadList();
 
-  GameMode::GetInstance()->Load();
-
   DisplayLoadingPicture();
 
   jukebox.Init();

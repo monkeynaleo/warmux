@@ -62,6 +62,7 @@ GameMode::GameMode()
   character.super_jump_angle = -80;
   character.back_jump_strength = 9;
   character.back_jump_angle = -100;
+  Load();
 }
 
 // Load data options from the selected game_mode
