@@ -65,6 +65,7 @@ GrenadeLauncher::GrenadeLauncher() :
 {
 
   m_name = _("Grenade");
+  m_category = THROW;
   m_allow_change_timeout = true;
   ReloadLauncher();
 }

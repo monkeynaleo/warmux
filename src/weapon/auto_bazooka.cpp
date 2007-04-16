@@ -151,6 +151,7 @@ AutomaticBazooka::AutomaticBazooka() :
   WeaponLauncher(WEAPON_AUTOMATIC_BAZOOKA, "automatic_bazooka",new AutomaticBazookaConfig() )
 {
   m_name = _("Automatic Bazooka");
+  m_category = HEAVY;
   mouse_character_selection = false;
   m_allow_change_timeout = true;
   m_target.selected = false;

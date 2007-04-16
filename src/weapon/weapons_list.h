@@ -43,11 +43,6 @@ private:
   WeaponsList();
   weapons_list_type m_weapons_list;
 
-  // The int is used to classify weapon by sort
-  std::multimap<uint, Weapon*> m_weapons_map;
-  typedef std::multimap<uint, Weapon*>::value_type keybind;
-  typedef std::multimap<uint, Weapon*>::iterator weapons_map_it;
-  void AddToList(Weapon* arme, uint num_sort);
   Weapon* GetNextWeapon(uint sort, uint index);
 
   /* if you need to use this, implement it */
@@ -66,7 +61,7 @@ public:
   // Return a list of  weapons
   weapons_list_type& GetList();
   Weapon* GetWeapon(Weapon::Weapon_type type);
-  bool GetWeaponBySort(uint num_sort, Weapon::Weapon_type &type);
+  bool GetWeaponBySort(Weapon::category_t num_sort, Weapon::Weapon_type &type);
 };
 
 //-----------------------------------------------------------------------------

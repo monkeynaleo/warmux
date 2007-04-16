@@ -80,6 +80,7 @@ bool find_first_contact_point (Point2i from, double angle, int length,
 NinjaRope::NinjaRope() : Weapon(WEAPON_NINJA_ROPE, "ninjarope", new NinjaRopeConfig())
 {
   m_name = _("Ninjarope");
+  m_category = MOVE;
   use_unit_on_first_shoot = false;
 
   m_hook_sprite = resource_manager.LoadSprite(weapons_res_profile,"ninjahook");
@@ -127,7 +128,7 @@ bool NinjaRope::TryAttachRope()
     {
       // Hum the roe is too short !
       m_attaching = false;
-      m_is_active = false;  
+      m_is_active = false;
 
       // Give back one ammo...
       int *ammo = &ActiveTeam().AccessNbAmmos();
@@ -251,9 +252,9 @@ bool NinjaRope::TryBreakNode(int currentSense)
 // 	   (currentAngle < nodeAngle))
 // 	breakNode = true;
 
-      
+
     }
-  
+
   // We can break the current node... Let's do it !
 
   if (breakNode)
@@ -687,13 +688,13 @@ void NinjaRope::HandleKeyReleased_Shoot(){}
 
 void NinjaRope::PrintDebugRope()
 {
-  printf("%05d %05d %03.3f\n", 
+  printf("%05d %05d %03.3f\n",
 	 ActiveCharacter().GetPosition().GetX(),
 	 ActiveCharacter().GetPosition().GetY(),
 	 ActiveCharacter().GetRopeAngle());
 
-  for (std::list<rope_node_t>::iterator it = rope_nodes.begin(); 
-       it != rope_nodes.end(); 
+  for (std::list<rope_node_t>::iterator it = rope_nodes.begin();
+       it != rope_nodes.end();
        it++) {
 
     printf("%05d %05d %03.3f %d\n", it->pos.x, it->pos.y,

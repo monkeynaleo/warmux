@@ -29,6 +29,7 @@
 Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())
 {
   m_name = _("Syringe");
+  m_category = DUEL;
 }
 
 void Syringe::Draw() {

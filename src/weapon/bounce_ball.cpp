@@ -68,6 +68,7 @@ BounceBallLauncher::BounceBallLauncher() :
   WeaponLauncher(WEAPON_BOUNCE_BALL, "bounce_ball", new ExplosiveWeaponConfig(), VISIBLE_ONLY_WHEN_INACTIVE)
 {
   m_name = _("Bounce Ball");
+  m_category = DUEL;
   ReloadLauncher();
 }
 

@@ -44,6 +44,7 @@ JetPack::JetPack() : Weapon(WEAPON_JETPACK, "jetpack",
                             NEVER_VISIBLE)
 {
   m_name = _("Jetpack");
+  m_category = MOVE;
   m_unit_visibility = VISIBLE_ONLY_WHEN_ACTIVE;
 
   use_unit_on_first_shoot = false;
@@ -223,7 +224,7 @@ void JetPack::HandleKeyPressed_MoveRight()
 }
 
 void JetPack::HandleKeyReleased_MoveRight()
-{  
+{
   if (m_is_active)
     StopRight();
   else
@@ -234,7 +235,7 @@ void JetPack::HandleKeyPressed_Shoot()
 {
   if (!m_is_active)
     NewActionWeaponShoot();
-  else 
+  else
     NewActionWeaponStopUse();
 }
 

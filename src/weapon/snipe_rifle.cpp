@@ -40,7 +40,7 @@ const uint SNIPE_RIFLE_MAX_BEAM_SIZE = 500;
 SnipeBullet::SnipeBullet(ExplosiveWeaponConfig& cfg,
                      WeaponLauncher * p_launcher) :
     WeaponBullet("snipe_rifle_bullet", cfg, p_launcher)
-{ 
+{
 }
 
 void SnipeBullet::ShootSound()
@@ -53,6 +53,7 @@ void SnipeBullet::ShootSound()
 SnipeRifle::SnipeRifle() : WeaponLauncher(WEAPON_SNIPE_RIFLE,"snipe_rifle", new ExplosiveWeaponConfig())
 {
   m_name = _("Sniper Rifle");
+  m_category = RIFLE;
 
   last_angle = 0.0;
   targeting_something = false;

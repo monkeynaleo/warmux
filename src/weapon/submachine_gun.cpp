@@ -60,6 +60,7 @@ void SubMachineGunBullet::ShootSound()
 SubMachineGun::SubMachineGun() : WeaponLauncher(WEAPON_SUBMACHINE_GUN, "m16", new ExplosiveWeaponConfig())
 {
   m_name = _("Submachine Gun");
+  m_category = RIFLE;
 
   ignore_collision_signal = true;
   ignore_explosion_signal = true;
@@ -113,7 +114,7 @@ void SubMachineGun::RepeatShoot()
 {
   uint tmp = Time::GetInstance()->Read();
   uint time = tmp - m_last_fire_time;
-  
+
   if (time >= SUBMACHINE_TIME_BETWEEN_SHOOT)
     {
       NewActionWeaponShoot();
@@ -128,7 +129,7 @@ void SubMachineGun::SignalTurnEnd()
 }
 
 void SubMachineGun::HandleKeyPressed_Shoot()
-{  
+{
   HandleKeyRefreshed_Shoot();
 }
 
@@ -136,7 +137,7 @@ void SubMachineGun::HandleKeyRefreshed_Shoot()
 {
   if (EnoughAmmoUnit()) {
     RepeatShoot();
-  } 
+  }
 }
 
 void SubMachineGun::HandleKeyReleased_Shoot()

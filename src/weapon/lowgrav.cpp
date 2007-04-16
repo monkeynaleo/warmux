@@ -36,6 +36,7 @@ LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",
 			    new WeaponConfig(), NEVER_VISIBLE)
 {
   m_name = _("LowGrav");
+  m_category = MOVE;
 
   use_unit_on_first_shoot = false;
 }
@@ -64,10 +65,10 @@ void LowGrav::Draw()
 }
 
 void LowGrav::HandleKeyPressed_Shoot()
-{  
-  if (!m_is_active) 
+{
+  if (!m_is_active)
     NewActionWeaponShoot();
-  else 
+  else
     NewActionWeaponStopUse();
 }
 

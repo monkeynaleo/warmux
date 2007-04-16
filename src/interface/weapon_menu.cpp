@@ -146,12 +146,17 @@ WeaponsMenu::WeaponsMenu()
   for(int i = 0; i < MAX_NUMBER_OF_WEAPON; i++)
     nb_weapon_type[i] = 0;
   resource_manager.UnLoadXMLProfile( res);
+
+  WeaponsList *weapons_list = WeaponsList::GetInstance();
+  for (WeaponsList::weapons_list_it it=weapons_list->GetList().begin(); it != weapons_list->GetList().end(); ++it)
+    AddWeapon(*it);
 }
 
 // Add a new weapon to the weapon menu.
-void WeaponsMenu::AddWeapon(Weapon* new_item, uint num_sort)
+void WeaponsMenu::AddWeapon(Weapon* new_item)
 {
   Point2d position;
+  Weapon::category_t num_sort = new_item->Category();
   if(num_sort < 6) {
     position = weapons_menu->GetMin() + Point2d(50 + nb_weapon_type[num_sort - 1] * 50, 80 + (num_sort - 1) * 50);
     WeaponMenuItem * item = new WeaponMenuItem(new_item, position);

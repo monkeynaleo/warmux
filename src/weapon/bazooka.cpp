@@ -71,6 +71,7 @@ Bazooka::Bazooka() :
   WeaponLauncher(WEAPON_BAZOOKA, "bazooka", new ExplosiveWeaponConfig())
 {
   m_name = _("Bazooka");
+  m_category = HEAVY;
   ReloadLauncher();
 }
 
