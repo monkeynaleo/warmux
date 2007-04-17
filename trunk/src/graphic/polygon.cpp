@@ -212,8 +212,12 @@ void Polygon::ApplyTransformation(const AffineTransform2D & trans)
     transformed_shape[i] = trans * (*point);
     shape_buffer->vx[i] = (int)transformed_shape[i].x;
     shape_buffer->vy[i] = (int)transformed_shape[i].y;
-    max = max.max(transformed_shape[i]);
-    min = min.min(transformed_shape[i]);
+    if(i == 0) {
+      max = min = transformed_shape[i];
+    } else {
+      max = max.max(transformed_shape[i]);
+      min = min.min(transformed_shape[i]);
+    }
   }
   for(std::vector<PolygonItem *>::iterator item = items.begin();
       item != items.end(); item++) {

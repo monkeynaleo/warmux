@@ -70,17 +70,19 @@ bool WeaponMenuItem::IsMouseOver()
 {
   Point2i mouse_pos = Mouse::GetInstance()->GetPosition();
   if(Contains(Point2d((double)mouse_pos.x, (double)mouse_pos.y))) {
-    if(!zoom) {
-      zoom = true;
-      zoom_start_time = Time::GetInstance()->Read();
-    }
+    if(!zoom)
+      SetZoom(true);
     return true;
   }
-  if(zoom) {
-    zoom = false;
-    zoom_start_time = Time::GetInstance()->Read();
-  }
+  if(zoom)
+    SetZoom(false);
   return false;
+}
+
+void WeaponMenuItem::SetZoom(bool value)
+{
+  zoom = value;
+  zoom_start_time = Time::GetInstance()->Read();
 }
 
 void WeaponMenuItem::Draw(Surface * dest)
@@ -105,7 +107,7 @@ void WeaponMenuItem::Draw(Surface * dest)
   } else {
     std::ostringstream txt;
     txt << nb_bullets;
-    (*Font::GetInstance(Font::FONT_TINY)).WriteLeftBottom(tmp, txt.str(), white_color);
+    (*Font::GetInstance(Font::FONT_MEDIUM, Font::FONT_BOLD)).WriteLeft(tmp, txt.str(), gray_color);
   }
 }
 
@@ -119,7 +121,7 @@ WeaponsMenu::WeaponsMenu()
   show = false;
   nbr_weapon_type = 0;
   motion_start_time = 0;
-
+  current_overfly_item = NULL;
   // Loading value from XML
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   infinite = new Sprite(resource_manager.LoadImage(res, "interface/infinite"));
@@ -217,57 +219,53 @@ Sprite * WeaponsMenu::GetInfiniteSymbol() const
 
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 {
-  double coef;
-  Point2i translate = (AppWormux::GetInstance()->video.window.GetSize() / 2);
-  position.Init();
-  shear.Init();
-  rotation.Init();
-  zoom.Init();
-  position.SetTranslation(translate);
-  if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME) {
-    coef = ((Time::GetInstance()->Read() - motion_start_time) / (double)ICONS_DRAW_TIME);
-    if(show) {
-      position.SetTranslation(POINT2I_2_POINT2D(translate) + POINT2I_2_POINT2D(translate) * Point2d(1.0 - coef, 1.0 - coef));
-      zoom.SetShrink(coef, coef);
-      rotation.SetRotation(coef * M_PI * 2.0);
-    } else {
-      position.SetTranslation(POINT2I_2_POINT2D(translate) + POINT2I_2_POINT2D(translate) * Point2d(coef, coef));
-      zoom.SetShrink(1.0 - coef, 1.0 - coef);
-      rotation.SetRotation(2 * M_PI - coef * M_PI * 2);
-    }
-  } else if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME + JELLY_TIME) {
-    coef = 1.0 - ((double)Time::GetInstance()->Read() - (motion_start_time + ICONS_DRAW_TIME)) / (double)JELLY_TIME;
-    coef = -(cos((1.0 - coef) * M_PI * 4) * coef) / 5;
-    shear.SetShear(coef, 0);
+  // Init with default value (show)
+  Point2d start(AppWormux::GetInstance()->video.window.GetWidth(), 0);
+  Point2i pos(AppWormux::GetInstance()->video.window.GetSize() / 2 + Point2i((int)(tools_menu->GetWidth() / 2) + 10, 0));
+  Point2d end(POINT2I_2_POINT2D(pos));
+  double zoom_start = 0.2, zoom_end = 1.0;
+  double angle_start = M_PI * 2.0, angle_end = 0.0;
+  // Inverting
+  if(!show) {
+    Point2d tmp(start);
+    start = end;
+    end = tmp;
+    zoom_start = 1.0;
+    zoom_end = 0.2;
+    angle_end = angle_start;
+    angle_start = 0.0;
   }
+  // Define the animation
+  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), start, end);
+  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), zoom_start, zoom_start, zoom_end, zoom_end);
+  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), angle_start, angle_end);
+  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), 2.0, 0.2, 0.0);
   return position * shear * zoom * rotation;
 }
 
 AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 {
-  double coef;
-  Point2i translate = (AppWormux::GetInstance()->video.window.GetSize() / 2) - Point2i((int)(weapons_menu->GetWidth() / 2), 0);
-  position.Init();
-  shear.Init();
-  rotation.Init();
-  zoom.Init();
-  position.SetTranslation(translate);
-  if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME) {
-    coef = ((Time::GetInstance()->Read() - motion_start_time) / (double)ICONS_DRAW_TIME);
-    if(show) {
-      position.SetTranslation(POINT2I_2_POINT2D(translate) * Point2d(coef, coef));
-      zoom.SetShrink(coef, coef);
-      rotation.SetRotation(coef * M_PI * 2.0);
-    } else {
-      position.SetTranslation(POINT2I_2_POINT2D(translate) * Point2d(1.0 - coef, 1.0 - coef));
-      zoom.SetShrink(1.0 - coef, 1.0 - coef);
-      rotation.SetRotation(2 * M_PI - coef * M_PI * 2);
-    }
-  } else if(Time::GetInstance()->Read() < motion_start_time + ICONS_DRAW_TIME + JELLY_TIME) {
-    coef = 1.0 - ((double)Time::GetInstance()->Read() - (motion_start_time + ICONS_DRAW_TIME)) / (double)JELLY_TIME;
-    coef = -(cos((1.0 - coef) * M_PI * 4) * coef) / 5;
-    shear.SetShear(coef, 0);
+  // Init with default value (show)
+  Point2d start(0, 0);
+  Point2i pos(AppWormux::GetInstance()->video.window.GetSize() / 2 - Point2i((int)(weapons_menu->GetWidth() / 2) + 10, 0));
+  Point2d end(POINT2I_2_POINT2D(pos));
+  double zoom_start = 0.2, zoom_end = 1.0;
+  double angle_start = -M_PI * 2.0, angle_end = 0.0;
+  // Inverting
+  if(!show) {
+    Point2d tmp(start);
+    start = end;
+    end = tmp;
+    zoom_start = 1.0;
+    zoom_end = 0.2;
+    angle_end = angle_start;
+    angle_start = 0.0;
   }
+  // Define the animation
+  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), start, end);
+  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), zoom_start, zoom_start, zoom_end, zoom_end);
+  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), angle_start, angle_end);
+  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), 2.0, 0.2, 0.0);
   return position * shear * zoom * rotation;
 }
 
@@ -286,7 +284,7 @@ void WeaponsMenu::Draw()
     UpdateCurrentOverflyItem(tools_menu);
 }
 
-Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly) const
+Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly)
 {
   std::vector<PolygonItem *> items = poly->GetItem();
   WeaponMenuItem * tmp;
@@ -297,6 +295,11 @@ Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly) const
     tmp = (WeaponMenuItem *)(*item);
     if(tmp->IsMouseOver()) {
       Interface::GetInstance()->SetCurrentOverflyWeapon(tmp->GetWeapon());
+      if(current_overfly_item != tmp) {
+        if(current_overfly_item != NULL)
+          current_overfly_item->SetZoom(false);
+        current_overfly_item = tmp;
+      }
       return tmp->GetWeapon();
     }
   }
