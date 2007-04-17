@@ -39,6 +39,7 @@ class WeaponMenuItem : public PolygonItem {
  public:
   WeaponMenuItem(Weapon * weapon, const Point2d & position);
   bool IsMouseOver();
+  void SetZoom(bool value);
   void Draw(Surface * dest);
   Weapon * GetWeapon() const;
 };
@@ -51,6 +52,7 @@ class WeaponsMenu
  private:
   Polygon * weapons_menu;
   Polygon * tools_menu;
+  WeaponMenuItem * current_overfly_item;
   AffineTransform2D position;
   AffineTransform2D shear;
   AffineTransform2D rotation;
@@ -76,7 +78,7 @@ class WeaponsMenu
   bool IsDisplayed() const;
   bool ActionClic(const Point2i &mouse_pos);
   Sprite * GetInfiniteSymbol() const;
-  Weapon * UpdateCurrentOverflyItem(Polygon * poly) const;
+  Weapon * UpdateCurrentOverflyItem(Polygon * poly);
 };
 
 #endif

@@ -41,7 +41,7 @@ private:
 public:
   typedef enum
   {
-    ACTION_NICKNAME,       
+    ACTION_NICKNAME,
     ACTION_NETWORK_CHANGE_STATE,
 
     // ########################################################
@@ -65,16 +65,16 @@ public:
     ACTION_MENU_SET_MAP,
 
     // Teams selection in network menu
-    ACTION_MENU_ADD_TEAM, 
-    ACTION_MENU_DEL_TEAM, 
+    ACTION_MENU_ADD_TEAM,
+    ACTION_MENU_DEL_TEAM,
     ACTION_MENU_UPDATE_TEAM,
 
     // ########################################################
     // Character's move
-    ACTION_CHARACTER_JUMP,        
-    ACTION_CHARACTER_HIGH_JUMP,   
+    ACTION_CHARACTER_JUMP,
+    ACTION_CHARACTER_HIGH_JUMP,
     ACTION_CHARACTER_BACK_JUMP,
-    
+
     ACTION_CHARACTER_SET_PHYSICS,
 
     // ########################################################
@@ -83,7 +83,7 @@ public:
     ACTION_WEAPON_STOP_USE,
 
     // Quite standard weapon options
-    ACTION_WEAPON_SET_TIMEOUT, 
+    ACTION_WEAPON_SET_TIMEOUT,
     ACTION_WEAPON_SET_TARGET,
 
     // Special weapon options
@@ -93,9 +93,9 @@ public:
 
     // ########################################################
     ACTION_NETWORK_SYNC_BEGIN,
-    ACTION_NETWORK_SYNC_END,    
-    ACTION_EXPLOSION,  
-    ACTION_WIND,   
+    ACTION_NETWORK_SYNC_END,
+    ACTION_EXPLOSION,
+    ACTION_WIND,
     ACTION_NETWORK_PING,
     ACTION_NETWORK_SEND_RANDOM,
     ACTION_NETWORK_CONNECT,
