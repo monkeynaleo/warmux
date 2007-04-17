@@ -613,15 +613,19 @@ int Surface::ImgSave(std::string filename){
   // Creating a png ...
   png_ptr = png_create_write_struct(PNG_LIBPNG_VER_STRING, NULL, NULL, NULL);
   if(png_ptr == NULL) // Structure and ...
-    goto error_while_creating_png;
+    return 1;
   info_ptr = png_create_info_struct(png_ptr);
-  if(info_ptr == NULL) // Information.
-    goto error_while_creating_png;
+  if(info_ptr == NULL) { // Information.
+    png_destroy_write_struct(&png_ptr, NULL);
+    return 1;
+  }
 
   // Opening a new file
   f = fopen(filename.c_str(), "wb");
-  if(f == NULL)
-    goto error_while_creating_png;
+  if(f == NULL) {
+    png_destroy_write_struct(&png_ptr, NULL);
+    return 1;
+  }
   png_init_io(png_ptr, f); // Associate png struture with a file
   png_set_IHDR(png_ptr, info_ptr, surface->w, surface->h, 8,
                PNG_COLOR_TYPE_RGB_ALPHA,      PNG_INTERLACE_NONE,
@@ -654,10 +658,6 @@ int Surface::ImgSave(std::string filename){
   png_write_end(png_ptr, info_ptr);
   fclose(f);
   return 0;
- error_while_creating_png:
-  if (png_ptr) png_destroy_write_struct(&png_ptr, NULL);
-  if (f) fclose(f);
-  return 1;
 }
 
 /**
