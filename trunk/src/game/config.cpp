@@ -123,6 +123,29 @@ Config::Config()
   resource_manager.AddDataPath(dir + PATH_SEPARATOR);
 }
 
+/*
+ * Load physics constants from the xml file and cache it.
+ * This tries to find already loaded data in the map<> config_set and actually
+ * load it if it cannot be found.
+ */
+const ObjectConfig &Config::GetOjectConfig(const std::string &name, const std::string &xml_config)
+{
+  ObjectConfig * objcfg;
+
+  std::map<std::string, ObjectConfig*>::iterator  it = config_set.find(name);
+  if (it == config_set.end())
+    {
+      objcfg = new ObjectConfig();
+      objcfg->LoadXml(name,xml_config);
+      config_set[name] = objcfg;
+    }
+  else
+    objcfg = it->second;
+
+  return *objcfg;
+}
+
+
 bool Config::DoLoading(void)
 {
   m_xml_loaded = false;
