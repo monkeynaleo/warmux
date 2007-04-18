@@ -42,11 +42,11 @@ class AffineTransform2D {
   void SetTranslation(const Point2d & position);
   void SetShrink(double shrink_x, double shrink_y);
   void SetShear(double shear_x, double shear_y);
-  void SetTranslationAnimation(int start_time, int duration, int time, const Point2d & start, const Point2d & end);
-  void SetRotationAnimation(int start_time, int duration, int time, double angle_start, double angle_end = 0.0);
-  void SetShrinkAnimation(int start_time, int duration, int time, double shrink_x_start, double shrink_y_start,
+  void SetTranslationAnimation(int start_time, int duration, int time, bool invert, const Point2d & start, const Point2d & end);
+  void SetRotationAnimation(int start_time, int duration, int time, bool invert, double angle_start, double angle_end = 0.0);
+  void SetShrinkAnimation(int start_time, int duration, int time, bool invert, double shrink_x_start, double shrink_y_start,
                           double shrink_x_end = 1.0, double shrink_y_end = 1.0);
-  void SetShearAnimation(int start_time, int duration, int time, double shear_tremor,
+  void SetShearAnimation(int start_time, int duration, int time, bool invert, double shear_tremor,
                          double shear_x_start, double shear_y_start,
                          double shear_x_end = 0.0, double shear_y_end = 0.0);
   /* Matrix multiplication */
