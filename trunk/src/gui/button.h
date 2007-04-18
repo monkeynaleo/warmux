@@ -33,11 +33,11 @@ class Button : public Widget
   Button(const Button&);
   Button operator=(const Button&);
   /*********************************************/
+  bool hidden;
 
 protected:
   bool img_scale;
   Sprite *image;
-  bool hidden;
 
 public:
   Button (const Rectanglei &rect,

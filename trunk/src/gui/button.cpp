@@ -34,14 +34,15 @@ Button::Button (const Rectanglei &rect, const Profile *res_profile,
 
   // image scalling or not
   img_scale = _img_scale;
-  
+
   if (img_scale)
     image->ScaleSize(rect.GetSize());
 }
 
-Button::Button (const Point2i &m_position, const Profile *res_profile, 
+Button::Button (const Point2i &m_position, const Profile *res_profile,
 		const std::string& resource_id, bool _img_scale)
 {
+  hidden = false;
   image = resource_manager.LoadSprite(res_profile, resource_id);
   position = m_position;
   size = image->GetSize();
@@ -56,23 +57,23 @@ Button::~Button()
 }
 
 void Button::Draw(const Point2i &mousePosition, Surface& surf) const
-{  
+{
   if (!hidden)
     {
       uint frame = Contains(mousePosition)?1:0;
-      
+
       image->SetCurrentFrame(frame);
-      
+
       if (img_scale) {
 	// image scalling : easy to place image
 	image->Blit(surf, position);
       } else {
 	// centering image
 	Point2i pos = position;
-	
+
 	pos.x += (GetSizeX()/2) - (image->GetWidth()/2);
 	pos.y += (GetSizeY()/2) - (image->GetHeight()/2);
-	
+
 	image->Blit(surf, pos);
       }
     }
