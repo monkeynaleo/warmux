@@ -178,7 +178,10 @@ void WeaponsMenu::Show()
 {
   ShowGameInterface();
   if(!show) {
-    motion_start_time = Time::GetInstance()->Read();
+    if(motion_start_time + ICONS_DRAW_TIME < Time::GetInstance()->Read())
+      motion_start_time = Time::GetInstance()->Read();
+    else
+      motion_start_time = Time::GetInstance()->Read() - (ICONS_DRAW_TIME - (Time::GetInstance()->Read() - motion_start_time));
     show = true;
   }
 }
@@ -187,7 +190,10 @@ void WeaponsMenu::Hide()
 {
   if(show) {
     Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
-    motion_start_time = Time::GetInstance()->Read();
+    if(motion_start_time + ICONS_DRAW_TIME < Time::GetInstance()->Read())
+      motion_start_time = Time::GetInstance()->Read();
+    else
+      motion_start_time = Time::GetInstance()->Read() - (ICONS_DRAW_TIME - (Time::GetInstance()->Read() - motion_start_time));
     show = false;
   }
 }
@@ -219,53 +225,35 @@ Sprite * WeaponsMenu::GetInfiniteSymbol() const
 
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()
 {
-  // Init with default value (show)
+  // Init animation parameter
   Point2d start(AppWormux::GetInstance()->video.window.GetWidth(), 0);
   Point2i pos(AppWormux::GetInstance()->video.window.GetSize() / 2 + Point2i((int)(tools_menu->GetWidth() / 2) + 10, 0));
   Point2d end(POINT2I_2_POINT2D(pos));
   double zoom_start = 0.2, zoom_end = 1.0;
   double angle_start = M_PI * 2.0, angle_end = 0.0;
-  // Inverting
-  if(!show) {
-    Point2d tmp(start);
-    start = end;
-    end = tmp;
-    zoom_start = 1.0;
-    zoom_end = 0.2;
-    angle_end = angle_start;
-    angle_start = 0.0;
-  }
   // Define the animation
-  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), start, end);
-  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), zoom_start, zoom_start, zoom_end, zoom_end);
-  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), angle_start, angle_end);
-  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), 2.0, 0.2, 0.0);
+  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, start, end);
+  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show,
+                          zoom_start, zoom_start, zoom_end, zoom_end);
+  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, angle_start, angle_end);
+  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
   return position * shear * zoom * rotation;
 }
 
 AffineTransform2D WeaponsMenu::ComputeWeaponTransformation()
 {
-  // Init with default value (show)
+  // Init animation parameter
   Point2d start(0, 0);
   Point2i pos(AppWormux::GetInstance()->video.window.GetSize() / 2 - Point2i((int)(weapons_menu->GetWidth() / 2) + 10, 0));
   Point2d end(POINT2I_2_POINT2D(pos));
   double zoom_start = 0.2, zoom_end = 1.0;
   double angle_start = -M_PI * 2.0, angle_end = 0.0;
-  // Inverting
-  if(!show) {
-    Point2d tmp(start);
-    start = end;
-    end = tmp;
-    zoom_start = 1.0;
-    zoom_end = 0.2;
-    angle_end = angle_start;
-    angle_start = 0.0;
-  }
-  // Define the animation
-  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), start, end);
-  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), zoom_start, zoom_start, zoom_end, zoom_end);
-  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), angle_start, angle_end);
-  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), 2.0, 0.2, 0.0);
+ // Define the animation
+  position.SetTranslationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, start, end);
+  zoom.SetShrinkAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show,
+                          zoom_start, zoom_start, zoom_end, zoom_end);
+  rotation.SetRotationAnimation(motion_start_time, ICONS_DRAW_TIME, Time::GetInstance()->Read(), !show, angle_start, angle_end);
+  shear.SetShearAnimation(motion_start_time + ICONS_DRAW_TIME, JELLY_TIME, Time::GetInstance()->Read(), !show, 2.0, 0.2, 0.0);
   return position * shear * zoom * rotation;
 }
 
