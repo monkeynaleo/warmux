@@ -41,7 +41,7 @@ Font* Font::FONT_ARRAY_ITALIC[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 const int Font::FONT_SIZE[] = {40, 32, 24, 16, 12, 8};
 
 Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
-  Font * font;
+  Font * font = NULL;
   int type = (int)ftype;
 
   if (FONT_ARRAY[ftype] == NULL) {
