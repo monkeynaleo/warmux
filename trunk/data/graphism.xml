@@ -153,6 +153,7 @@
   <point name="weapons_interface_size" x="320" y="320" />
   <point name="tools_interface_size" x="160" y="320" />
   <surface name="infinite" file="interface/infinite.png"/>
+  <surface name="cross" file="interface/cross.png"/>
   <surface name="clock_background" file="interface/clock_background.png"/>
   <surface name="clock" file="interface/clock.png"/>
   <surface name="wind" file="interface/wind.png"/>
