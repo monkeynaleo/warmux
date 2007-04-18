@@ -50,8 +50,8 @@ template<class T> class Vector2
 		 *
 		 */
 		inline bool IsZero(T val) const{
-			return (val == 0 || val <= VECTOR2_EPS_ZERO) &&
-                               (-val <= VECTOR2_EPS_ZERO);
+			return (val == 0 || (val <= (T)VECTOR2_EPS_ZERO &&
+                               val >= (T)-VECTOR2_EPS_ZERO));
 		}
 
 		// Comparators
