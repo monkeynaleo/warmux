@@ -68,6 +68,12 @@ PolygonItem()
 
 bool WeaponMenuItem::IsMouseOver()
 {
+  int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetName());
+  if(nb_bullets == 0) {
+    if(zoom)
+      SetZoom(false);
+    return false;
+  }
   Point2i mouse_pos = Mouse::GetInstance()->GetPosition();
   if(Contains(Point2d((double)mouse_pos.x, (double)mouse_pos.y))) {
     if(!zoom)
@@ -104,6 +110,9 @@ void WeaponMenuItem::Draw(Surface * dest)
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
   if(nb_bullets ==  INFINITE_AMMO) {
     Interface::GetInstance()->GetWeaponsMenu().GetInfiniteSymbol()->Blit(*dest, tmp);
+  } if(nb_bullets == 0) {
+    tmp += Point2i(0, -Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
+    Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->Blit(*dest, tmp);
   } else {
     std::ostringstream txt;
     txt << nb_bullets;
@@ -125,6 +134,7 @@ WeaponsMenu::WeaponsMenu()
   // Loading value from XML
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   infinite = new Sprite(resource_manager.LoadImage(res, "interface/infinite"));
+  cross = new Sprite(resource_manager.LoadImage(res, "interface/cross"));
   // Polygon Size
   Point2i size = resource_manager.LoadPoint2i(res, "interface/weapons_interface_size");
   weapons_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
@@ -221,6 +231,11 @@ bool WeaponsMenu::IsDisplayed() const
 Sprite * WeaponsMenu::GetInfiniteSymbol() const
 {
   return infinite;
+}
+
+Sprite * WeaponsMenu::GetCrossSymbol() const
+{
+  return cross;
 }
 
 AffineTransform2D WeaponsMenu::ComputeToolTransformation()

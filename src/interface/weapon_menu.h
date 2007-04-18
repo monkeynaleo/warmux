@@ -58,6 +58,7 @@ class WeaponsMenu
   AffineTransform2D rotation;
   AffineTransform2D zoom;
   Sprite * infinite;
+  Sprite * cross;
   bool show;
   uint motion_start_time;
 
@@ -78,6 +79,7 @@ class WeaponsMenu
   bool IsDisplayed() const;
   bool ActionClic(const Point2i &mouse_pos);
   Sprite * GetInfiniteSymbol() const;
+  Sprite * GetCrossSymbol() const;
   Weapon * UpdateCurrentOverflyItem(Polygon * poly);
 };
 
