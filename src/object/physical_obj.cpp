@@ -77,7 +77,7 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
 
   m_rebound_position = Point2i(-1, -1);
 
-  m_cfg.LoadXml(m_name,xml_config);  // Load physics constants from the xml file
+  m_cfg = Config::GetInstance()->GetOjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());

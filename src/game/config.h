@@ -35,6 +35,8 @@
 #include "../include/base.h"
 #include "../team/team_config.h"
 #include "../tool/xml_document.h"
+#include "../object/object_cfg.h"
+
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)
 #define PATH_SEPARATOR "\\"
@@ -52,6 +54,9 @@ class Config
 public:
   static const int ALPHA = 0;
   static const int COLORKEY = 1;
+
+  const ObjectConfig &GetOjectConfig(const std::string &name,
+                                     const std::string &xml_config);
 
   bool GetDisplayEnergyCharacter() const;
   void SetDisplayEnergyCharacter(const bool dec);
@@ -143,6 +148,7 @@ protected:
   std::string ttf_filename;
 
   int transparency;
+  std::map<std::string, ObjectConfig *> config_set;
 
 private:
   Config();
