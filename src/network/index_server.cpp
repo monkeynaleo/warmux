@@ -34,13 +34,16 @@
 
 IndexServer index_server;
 
-IndexServer::IndexServer()
+IndexServer::IndexServer():
+  socket(),
+  ip(),
+  sock_set(),
+  server_lst(),
+  first_server(server_lst.end()),
+  current_server(server_lst.end()),
+  hidden_server(false),
+  connected(false)
 {
-  hidden_server = false;
-  connected = false;
-  server_lst.clear();
-  first_server = server_lst.end();
-  current_server = server_lst.end();
 }
 
 IndexServer::~IndexServer()
@@ -164,7 +167,7 @@ bool IndexServer::GetServerList()
   size_t len = 0;*/
   ssize_t read;
   std::string line;
- 
+
   // GNU getline isn't available on *BSD and Win32, so we use a new function, see getline above
   while ((read = getline(line, fin)) >= 0)
   {

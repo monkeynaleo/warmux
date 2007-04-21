@@ -19,7 +19,7 @@
  * Notify an index server of an opened wormux server
  * Obtain information about running games from an index server
  *****************************************************************************/
- 
+
 #ifndef INDEX_SERVER_H
 #define INDEX_SERVER_H
 //-----------------------------------------------------------------------------
@@ -34,6 +34,12 @@ typedef std::pair<std::string, std::string> address_pair;
 
 class IndexServer
 {
+  /* If you need this, implement it (correctly)*/
+  IndexServer(const IndexServer&);
+  const IndexServer& operator=(const IndexServer&);
+  /*********************************************/
+
+
   // Connection to the server
   TCPsocket socket;
   IPaddress ip;
