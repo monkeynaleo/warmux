@@ -34,6 +34,9 @@
 extern const uint MAX_WIND_OBJECTS;
 
 class Map{
+  Map(const Map&);
+  const Map& operator=(const Map&);
+
  private:
   Text * author_info1;
   Text * author_info2;

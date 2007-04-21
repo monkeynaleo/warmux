@@ -31,6 +31,11 @@
 
 class GameLoop
 {
+  /* If you need this, implement it (correctly)*/
+  GameLoop(const GameLoop&);
+  const GameLoop& operator=(const GameLoop&);
+  /**********************************************/
+
 public:
   typedef enum {
     PLAYING = 0,
@@ -83,7 +88,7 @@ private:
   void InitGameData_NetServer();
   void InitGameData_NetClient();
   void InitGameData_Local();
-  
+
   void InitMap();
   void InitTeams();
   void InitSounds();

@@ -46,6 +46,10 @@ double MeterDistance (const Point2i &p1, const Point2i &p2);
 
 class PhysicalObj : public Physics
 {
+  /* If you need this, implement it (correctly)*/
+  const PhysicalObj& operator=(const PhysicalObj&);
+  /*********************************************/
+
 private:
   // collision management
   bool m_goes_through_wall;
@@ -76,6 +80,7 @@ protected:
 
 public:
   PhysicalObj (const std::string &name, const std::string &xml_config="");
+  PhysicalObj(const PhysicalObj&);
   virtual ~PhysicalObj ();
 
   //-------- Set position and size -------
