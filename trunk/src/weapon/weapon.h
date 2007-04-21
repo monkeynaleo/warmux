@@ -316,6 +316,11 @@ public:
 private:
   // Angle in radian between -PI to PI
   double min_angle, max_angle;
+
+  /* If you need this, implement it (correctly)*/
+  Weapon(const Weapon&);
+  const Weapon& operator=(const Weapon&);
+  /*********************************************/
 };
 
 //-----------------------------------------------------------------------------
