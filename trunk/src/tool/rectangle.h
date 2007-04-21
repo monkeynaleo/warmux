@@ -46,8 +46,10 @@ template<class T> class rectangle
 		/**
 		 * Default constructor
 		 */
-		inline rectangle(){
-		}
+		inline rectangle():
+                  position(0, 0),
+                  size(0, 0)
+                { }
 
                 virtual ~rectangle() {};
 

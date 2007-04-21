@@ -63,7 +63,8 @@ WeaponsList::~WeaponsList()
 
 //-----------------------------------------------------------------------------
 
-WeaponsList::WeaponsList()
+WeaponsList::WeaponsList():
+  ref_counter(0)
 {
   weapons_res_profile = resource_manager.LoadXMLProfile( "weapons.xml", false);
   m_weapons_list.push_back(new Bazooka);
@@ -96,8 +97,6 @@ WeaponsList::WeaponsList()
   m_weapons_list.push_back(new NinjaRope);
   m_weapons_list.push_back(new Blowtorch);
   m_weapons_list.push_back(new Syringe);
-
-  ref_counter = 0;
 }
 
 //-----------------------------------------------------------------------------
@@ -180,8 +179,8 @@ class test_weapon_type {
   private:
     Weapon::Weapon_type m_type;
   public:
-    test_weapon_type(Weapon::Weapon_type &type) { m_type = type; }
-	bool operator() ( Weapon* w) { return w->GetType()==m_type; }
+    test_weapon_type(const Weapon::Weapon_type &type) :  m_type(type){ }
+    bool operator() (const Weapon* w) const { return w->GetType()==m_type; }
 };
 
 Weapon* WeaponsList::GetWeapon (Weapon::Weapon_type type)
