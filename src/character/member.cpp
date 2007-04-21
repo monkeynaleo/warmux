@@ -37,9 +37,9 @@ Member::Member(xmlpp::Element *xml, Profile* res)
 
   // Load the sprite
   spr = resource_manager.LoadSprite( res, name);
-//  spr->EnableRotationCache(64);
+//  spr->EnableRotationCache(32);
 //  spr->EnableFlippingCache();
-//  spr->cache.EnableLastFrameCache();
+  spr->cache.EnableLastFrameCache();
 
   // Get the various option
   type="";
