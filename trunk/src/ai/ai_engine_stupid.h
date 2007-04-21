@@ -29,6 +29,8 @@
 class AIStupidEngine
 {
  private:
+  AIStupidEngine(const AIStupidEngine&);
+  const AIStupidEngine& operator=(const AIStupidEngine&);
 
   static AIStupidEngine * singleton;
   AIStupidEngine();
