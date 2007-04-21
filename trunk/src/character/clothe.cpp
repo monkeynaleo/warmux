@@ -25,7 +25,9 @@
 #include "../tool/xml_document.h"
 #include "../tool/string_tools.h"
 
-Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
+Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst):
+  name(),
+  layers()
 {
   XmlReader::ReadStringAttr( xml, "name", name);
 
@@ -72,10 +74,10 @@ Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
     i=layers.erase(i);
 }
 
-Clothe::Clothe(Clothe* c, std::map<std::string, Member*>& members_lst)
+Clothe::Clothe(Clothe* c, std::map<std::string, Member*>& members_lst):
+  name(c->name),
+  layers()
 {
-  name = c->name;
-
   for (std::vector<Member*>::iterator it = c->layers.begin();
       it != c->layers.end();
       ++it)

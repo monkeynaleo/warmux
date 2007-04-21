@@ -25,20 +25,25 @@
 #include <SDL_net.h>
 #include <SDL_thread.h>
 #include <SDL_mutex.h>
-#include "../include/base.h" 
+#include "../include/base.h"
 #include <list>
 #include <string>
-#include "../include/action.h" 
+#include "../include/action.h"
 //-----------------------------------------------------------------------------
 
 class Action;
 
 class DistantComputer
 {
+  /* If you need this, implement it (correctly)*/
+  DistantComputer(const DistantComputer&);
+  const DistantComputer& operator=(const DistantComputer&);
+  /*********************************************/
+
   SDL_mutex* sock_lock;
   TCPsocket sock;
   std::list<std::string> owned_teams;
-  
+
 public:
   bool version_checked;
   bool force_disconnect;

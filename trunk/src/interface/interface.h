@@ -44,6 +44,11 @@ public:
   Team * tmp_team;
 
  private:
+   /* If you need this, implement it (correctly)*/
+   Interface(const Interface&);
+   const Interface& operator=(const Interface&);
+   /*********************************************/
+
    // Timers
    Text * global_timer;
    Text * timer;
