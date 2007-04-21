@@ -29,6 +29,7 @@
 #include "../tool/debug.h"
 #include "../tool/rectangle.h"
 #include "../tool/math_tools.h"
+#include "game/game.h"
 
 const Point2i CAMERA_MARGIN(200, 200);
 const Point2i CAMERA_SPEED(20, 20);
@@ -178,6 +179,9 @@ void Camera::FollowObject(PhysicalObj *obj, bool follow, bool center_on, bool fo
 }
 
 void Camera::StopFollowingObj(PhysicalObj* obj){
+  if(Game::GetInstance()->IsGameFinished())
+    return;
+	
   if(followed_object == obj)
     FollowObject((PhysicalObj*)&ActiveCharacter(), true, true, true);
 }
