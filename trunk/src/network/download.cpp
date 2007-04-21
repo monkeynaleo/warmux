@@ -24,9 +24,9 @@
 
 Downloader downloader;
 
-Downloader::Downloader()
+Downloader::Downloader():
+  curl(curl_easy_init())
 {
-  curl = curl_easy_init();
 }
 
 Downloader::~Downloader()
