@@ -32,29 +32,27 @@ const uint YPOS=130;
 const uint MAXLINES=10; //Fidel's advise
 const uint MAXSECONDS=10;
 
+/*
+ * FIXME, this class leaks memory -> input and msg are not handled...
+ */
 Chat::~Chat()
 {
   delete chat;
 }
 
-Chat::Chat()
+Chat::Chat():
+  chat(new TextList()),
+  input(NULL),
+  msg(NULL),
+  check_input(false),
+  last_time(-1)
 {
-  chat = NULL;
-  input = NULL;
-  msg = NULL;
-  check_input = false;
-}
-
-void Chat::Reset()
-{
-  if(chat == NULL)
-    chat = new TextList();
 }
 
 void Chat::Show()
 {
   uint now = Time::GetInstance()->ReadSec();
-  
+
   if((now - last_time) >= MAXSECONDS){
     chat->DeleteLine();
     last_time = now;
@@ -99,7 +97,7 @@ void Chat::HandleKey(const SDL_Event& event)
   std::string txt = input->GetText();
 
   switch (key.sym){
-    
+
   case SDLK_RETURN:
     check_input = false; //Hide input widget
     if (txt != "" )
@@ -140,7 +138,7 @@ void Chat::HandleKey(const SDL_Event& event)
         txt = txt + (char)(((key.unicode & 0xfc0) >> 6) | 0x80);
         txt = txt + (char)((key.unicode & 0x3f) | 0x80);
       }
-      input->Set(txt);  
+      input->Set(txt);
     }
   }
 }
