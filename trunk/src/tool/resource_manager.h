@@ -35,6 +35,11 @@
 
 class Profile
 {
+  /* If you need this, implement it (correctly)*/
+  Profile(const Profile&);
+  const Profile& operator=(const Profile&);
+  /*********************************************/
+
  public:
   XmlReader *doc;
   std::string filename;
