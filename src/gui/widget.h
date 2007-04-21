@@ -31,6 +31,9 @@
 
 class Widget : public Rectanglei
 {
+  Widget(const Widget&);
+  const Widget& operator=(const Widget&);
+
  protected:
   Container * ct;
   bool need_redrawing;
