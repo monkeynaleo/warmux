@@ -27,7 +27,11 @@
 #include "../tool/point.h"
 #include "../tool/rectangle.h"
 
-class Camera : public Rectanglei{
+class Camera : public Rectanglei
+{
+  Camera(const Camera&);
+  const Camera& operator=(const Camera&);
+
 public:
   bool auto_crop;
 

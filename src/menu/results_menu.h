@@ -32,6 +32,9 @@ class ResultBox;
 class ResultsMenu : public Menu
 {
  private:
+    ResultsMenu(const ResultsMenu&);
+    const ResultsMenu& operator=(const ResultsMenu&);
+
     const std::vector<TeamResults*>* results;
     int     index;
 
@@ -42,22 +45,22 @@ class ResultsMenu : public Menu
     Point2i type_size;
     Point2i name_size;
     Point2i score_size;
-    
+
     /* Team controllers */
     Button  *bt_prev_team;
     Button  *bt_next_team;
     PictureWidget *team_logo;
     Label   *team_name;
     HBox    *team_box;
-    
+
     ResultBox* most_violent;
     ResultBox* most_usefull;
     ResultBox* most_useless;
     ResultBox* biggest_traitor;
-    
+
     void __sig_ok() { };
     void __sig_cancel() { };
-    
+
     void SetResult(int i);
     void OnClick(const Point2i &mousePosition, int button);
     void OnClickUp(const Point2i &mousePosition, int button);
