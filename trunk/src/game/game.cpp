@@ -58,10 +58,10 @@ Game * Game::GetInstance()
 }
 
 
-Game::Game()
+Game::Game():
+  isGameLaunched(false),
+  want_end_of_game(false)
 {
-  isGameLaunched = false;
-  want_end_of_game = false;
 }
 
 bool Game::IsGameFinished() const
@@ -213,7 +213,7 @@ void Game::TogglePause()
 {
   if(Time::GetInstance()->IsGamePaused())
     Time::GetInstance()->Continue();
-  else 
+  else
     Time::GetInstance()->Pause();
 }
 

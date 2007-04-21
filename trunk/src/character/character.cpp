@@ -86,6 +86,8 @@ Body * Character::GetBody() const
   return body;
 }
 
+/* FIXME This methode is really strange, all this should probably be done in
+ * constructor of Body...*/
 void Character::SetBody(Body* char_body)
 {
   body = char_body;
@@ -99,41 +101,38 @@ void Character::SetBody(Body* char_body)
 }
 
 Character::Character (Team& my_team, const std::string &name, Body *char_body) :
-  PhysicalObj("character"), m_team(my_team), bubble_engine(500)
+  PhysicalObj("character"),
+  character_name(name),
+  m_team(my_team),
+  step_sound_played(true),
+  prepare_shoot(false),
+  back_jumping(false),
+  death_explosion(true),
+  firing_angle(0),
+  disease_damage_per_turn(0),
+  disease_duration(0),
+  damage_other_team(0),
+  damage_own_team(0),
+  max_damage(0),
+  current_total_damage(0),
+  energy_bar(),
+  survivals(0),
+  name_text(NULL),
+  pause_bouge_dg(0),
+  do_nothing_time(0),
+  walking_time(0),
+  animation_time(Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX)),
+  lost_energy(-1),
+  hidden(false),
+  channel_step(-1),
+  bubble_engine(500),
+  previous_strength(0),
+  body(NULL)
 {
   SetCollisionModel(false, true, true);
   /* body stuff */
   assert(char_body);
   SetBody(char_body);
-
-  step_sound_played = true;
-  pause_bouge_dg = 0;
-  previous_strength = 0;
-  channel_step = -1;
-  hidden = false;
-  do_nothing_time = 0;
-  walking_time = 0;
-  m_allow_negative_y = true;
-  animation_time = Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX);
-  prepare_shoot = false;
-  back_jumping = false;
-  death_explosion = true;
-  firing_angle = 0.;
-
-  // Damage count
-  damage_other_team = 0;
-  damage_own_team = 0;
-  max_damage = 0;
-  current_total_damage = 0;
-
-  // Disease damage
-  disease_damage_per_turn = 0;
-  disease_duration = 0;
-
-  // Survivals
-  survivals = 0;
-
-  character_name = name;
 
   ResetConstants();
 
@@ -157,33 +156,35 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
 
-Character::Character (const Character& acharacter) : PhysicalObj(acharacter),
-                                                     m_team(acharacter.m_team),
-                                                     bubble_engine(250)
+Character::Character (const Character& acharacter) :
+  PhysicalObj(acharacter),
+  character_name(acharacter.character_name),
+  m_team(acharacter.m_team),
+  step_sound_played(acharacter.step_sound_played),
+  prepare_shoot(acharacter.prepare_shoot),
+  back_jumping(acharacter.back_jumping),
+  death_explosion(acharacter.death_explosion),
+  firing_angle(acharacter.firing_angle),
+  disease_damage_per_turn(acharacter.disease_damage_per_turn),
+  disease_duration(acharacter.disease_duration),
+  damage_other_team(acharacter.damage_other_team),
+  damage_own_team(acharacter.damage_own_team),
+  max_damage(acharacter.max_damage),
+  current_total_damage(acharacter.current_total_damage),
+  energy_bar(acharacter.energy_bar),
+  survivals(acharacter.survivals),
+  name_text(NULL),
+  pause_bouge_dg(acharacter.pause_bouge_dg),
+  do_nothing_time(acharacter.do_nothing_time),
+  walking_time(acharacter.walking_time),
+  animation_time(acharacter.animation_time),
+  lost_energy(acharacter.lost_energy),
+  hidden(acharacter.hidden),
+  channel_step(acharacter.channel_step),
+  bubble_engine(250),
+  previous_strength(acharacter.previous_strength),
+  body(NULL)
 {
-  character_name       = acharacter.character_name;
-  step_sound_played    = acharacter.step_sound_played;
-  prepare_shoot        = acharacter.prepare_shoot;
-  back_jumping         = acharacter.back_jumping;
-  damage_other_team    = acharacter.damage_other_team;
-  damage_own_team      = acharacter.damage_own_team;
-  max_damage           = acharacter.max_damage;
-  death_explosion      = acharacter.death_explosion;
-  firing_angle         = acharacter.firing_angle;
-  current_total_damage = acharacter.current_total_damage;
-  energy_bar           = acharacter.energy_bar;
-  survivals            = acharacter.survivals;
-  pause_bouge_dg       = acharacter.pause_bouge_dg;
-  do_nothing_time      = acharacter.do_nothing_time;
-  walking_time         = acharacter.walking_time;
-  animation_time       = acharacter.animation_time;
-  lost_energy          = acharacter.lost_energy;
-  hidden               = acharacter.hidden;
-  channel_step         = acharacter.channel_step ;
-  previous_strength    = acharacter.previous_strength;
-  disease_damage_per_turn = acharacter.disease_damage_per_turn;
-  disease_duration     = acharacter.disease_duration;
-
   if (acharacter.body)
     SetBody(new Body(acharacter.body));
   if(acharacter.name_text)

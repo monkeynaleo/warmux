@@ -33,6 +33,9 @@ class Team;
 class TeamResults
 {
 private:
+  TeamResults(const TeamResults&);
+  const TeamResults& operator=(const TeamResults&);
+
   //std::couple<const sting&, int> ?
   const std::string teamName;
   const Surface* team_logo;
