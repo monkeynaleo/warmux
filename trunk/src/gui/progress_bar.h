@@ -65,7 +65,7 @@ private:
 
 public:
   ProgressBar();
-  virtual ~ProgressBar();
+  virtual ~ProgressBar() {};
 
   // Actualisation de la valeur
   void UpdateValue (long val);
