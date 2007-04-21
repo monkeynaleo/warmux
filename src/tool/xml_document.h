@@ -44,15 +44,6 @@ public:
                        const std::string &name,
                        bool &output);
 
-  // Get attributes of a marker
-  static bool ReadStringList(const xmlpp::Node *x,
-                             const std::string &name,
-                             std::list<std::string> &output);
-
-  // Read marker value
-  static bool ReadMarkerValue(const xmlpp::Node *marker,
-                               std::string &output);
-
   // get an XML element
   static xmlpp::Element* GetMarker(const xmlpp::Node *x,
                                    const std::string &name);
@@ -78,6 +69,10 @@ public:
   static bool ReadBoolAttr(const xmlpp::Element *x,
                            const std::string &name,
                            bool &output);
+private:
+  // Read marker value
+  static bool ReadMarkerValue(const xmlpp::Node *marker, std::string &output);
+
 };
 
 //-----------------------------------------------------------------------------
