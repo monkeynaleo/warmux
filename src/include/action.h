@@ -37,7 +37,8 @@ class Action
 {
 private:
   std::list<Uint32> var;
-  Action ( const Action& an_action);
+  Action(const Action& an_action);
+  const Action& operator=(const Action&);
 public:
   typedef enum
   {

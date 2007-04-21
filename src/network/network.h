@@ -19,7 +19,7 @@
  * Network layer for Wormux.
  *****************************************************************************/
 
-#ifndef NETWORK_H 
+#ifndef NETWORK_H
 #define NETWORK_H
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
@@ -28,7 +28,7 @@
 #include <string>
 #include "distant_cpu.h"
 #include "../include/action.h"
-#include "../include/base.h" 
+#include "../include/base.h"
 #include "../menu/network_menu.h"
 //-----------------------------------------------------------------------------
 const std::string WORMUX_NETWORK_PORT = "9999";
@@ -58,13 +58,15 @@ public:
     } connection_state_t;
 
 private:
+  Network(const Network&);
+  const Network& operator=(const Network&);
   friend class DistantComputer;
-  
+
   static Network * singleton;
   static bool sdlnet_initialized;
 
   static bool stop_thread;
-  
+
 protected:
   Network(); // pattern singleton
 
@@ -75,14 +77,14 @@ protected:
 
 #if defined(DEBUG) && not defined(WIN32)
   int fout;
-  int fin;	
+  int fin;
 #endif
-  
+
   bool ThreadToContinue();
   static int ThreadRun(void* no_param);
 
   void DisconnectNetwork();
-  const connection_state_t CheckHost(const std::string &host, 
+  const connection_state_t CheckHost(const std::string &host,
 				     const std::string &port) const;
 public:
   NetworkMenu* network_menu;
@@ -107,7 +109,7 @@ public:
   virtual const bool IsServer() const { return false ; }
   virtual const bool IsClient() const { return false ; }
   const uint GetPort() const;
-  
+
   // Action handling
   void SendPacket(char* packet, int size);
   virtual void SendAction(Action* action);

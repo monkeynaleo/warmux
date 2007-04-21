@@ -59,6 +59,11 @@ const int particle_spr_nbr = POLECAT_FART_spr + 1;
 
 class Particle : public PhysicalObj
 {
+  /* If you need this, implement it (correctly)*/
+  Particle(const Particle&);
+  const Particle& operator=(const Particle&);
+  /*********************************************/
+
  protected:
   bool on_top; // if true displayed on top of characters and weapons
   uint m_initial_time_to_live;

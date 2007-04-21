@@ -559,7 +559,7 @@ void Character::Refresh()
     if(do_nothing_time + do_nothing_timeout < global_time->Read())
       CharacterCursor::GetInstance()->FollowActiveCharacter();
 
-    
+
     if(walking_time + 1000 < global_time->Read())
     if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
       body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");

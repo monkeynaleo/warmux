@@ -29,7 +29,12 @@
 
 class ObjBox : public PhysicalObj //it would be nice to name this "Box", but that was already taken...
 {
-  private:    
+  /* If you need this, implement it (correctly)*/
+  ObjBox(const ObjBox&);
+  const ObjBox& operator=(const ObjBox&);
+  /*********************************************/
+
+  private:
     virtual void ApplyBox (Team &team, Character &character){}
 
   public:
