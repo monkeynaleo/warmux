@@ -41,12 +41,12 @@ class Text
   void Render();
   void RenderMultiLines();
 public:
-  Text(const std::string &new_txt, 
+  Text(const std::string &new_txt,
        const Color& new_color = white_color,
-       Font::font_size_t fsize = Font::FONT_SMALL, 
-       Font::font_style_t fstyle = Font::FONT_NORMAL, 
+       Font::font_size_t fsize = Font::FONT_SMALL,
+       Font::font_style_t fstyle = Font::FONT_NORMAL,
        bool shadowed = true);
-  ~Text();
+  virtual ~Text();
 
   //Draw method using windows coordinates
   void DrawCenter(int x, int y) const;
