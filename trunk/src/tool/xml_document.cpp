@@ -160,33 +160,6 @@ bool XmlReader::ReadMarkerValue(const xmlpp::Node *marker,
 }
 
 /* FIXME see XmlReader::ReadString comment */
-bool XmlReader::ReadStringList(const xmlpp::Node *x,
-                               const std::string &name,
-                               std::list<std::string> &output)
-{
-  xmlpp::Node::NodeList nodes = x -> get_children(name);
-  xmlpp::Node::NodeList::iterator
-    it=nodes.begin(),
-    end=nodes.end();
-
-    output.clear();
-  for (; it != end; ++it)
-  {
-    std::string txt;
-
-    xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
-    assert (elem != NULL);
-    if (!ReadMarkerValue(elem, txt))
-    {
-      output.clear();
-      return false;
-    }
-    output.push_back (txt);
-  }
-  return true;
-}
-
-/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadStringAttr(const xmlpp::Element *x,
                                const std::string &name,
                                std::string &output)
