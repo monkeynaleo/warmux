@@ -83,15 +83,6 @@ PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config
   MSG_DEBUG("physical.mem", "Construction of %s", m_name.c_str());
 }
 
-PhysicalObj::PhysicalObj(const PhysicalObj& a_phyobj):
-  Physics(a_phyobj)
-{
-  /* Note : we can copy directly the pointer m_overlapping_object because this
-   * object does not own it.
-   * FIXME what happen if the object is deleted meanwhile ???*/
-}
-
-
 PhysicalObj::~PhysicalObj ()
 {
   MSG_DEBUG("physical.mem", "Destruction of %s", m_name.c_str());

@@ -80,7 +80,10 @@ protected:
 
 public:
   PhysicalObj (const std::string &name, const std::string &xml_config="");
-  PhysicalObj(const PhysicalObj&);
+  /* Note : The copy constructor is not implemented (and this is not a bug)
+   * because we can copy directly the pointer m_overlapping_object whereas this
+   * object does not own it.
+   * FIXME what happen if the object is deleted meanwhile ???*/
   virtual ~PhysicalObj ();
 
   //-------- Set position and size -------
