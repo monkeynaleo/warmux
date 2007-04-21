@@ -115,7 +115,7 @@ void GameLoop::InitGameData_NetServer()
 }
 
 void GameLoop::InitGameData_NetClient()
-{  
+{
   //GameMode::GetInstance()->Load(); : done by the action handler
 
   // Loading map
@@ -234,8 +234,7 @@ void GameLoop::Init()
   Keyboard::GetInstance()->Reset();
 
   fps.Reset();
-  if(Network::GetInstance()->IsConnected())
-     chatsession.Reset();
+
   Interface::GetInstance()->Reset();
   GameMessages::GetInstance()->Reset();
   ParticleEngine::Load();
@@ -549,10 +548,10 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
   {
   // Begining of a new turn:
   case PLAYING:
-    MSG_DEBUG("game.statechange", "Playing" );    
+    MSG_DEBUG("game.statechange", "Playing" );
 
     if (Network::GetInstance()->IsServer()) {
-      // Send information about energy and position of every characters 
+      // Send information about energy and position of every characters
       // A character can be hurted during the END_OF_TURN...
       SyncCharacters();
     }
