@@ -32,13 +32,14 @@
 #include "../tool/i18n.h"
 //-----------------------------------------------------------------------------
 
-DistantComputer::DistantComputer(TCPsocket new_sock)
-  : sock(new_sock)
+DistantComputer::DistantComputer(TCPsocket new_sock) :
+  sock_lock(SDL_CreateMutex()),
+  sock(new_sock),
+  owned_teams(),
+  version_checked(false),
+  force_disconnect(false),
+  nickname("this is not initialized")
 {
-  version_checked = false;
-  force_disconnect = false;
-  sock_lock = SDL_CreateMutex();
-
   SDLNet_TCP_AddSocket(Network::GetInstance()->socket_set, sock);
 
   // If we are the server, we have to tell this new computer
@@ -183,7 +184,7 @@ void DistantComputer::ManageTeam(Action* team)
     int index = 0;
     Team * tmp = teams_list.FindById(name, index);
     tmp->SetRemote();
-    
+
     Action* copy = new Action(Action::ACTION_MENU_ADD_TEAM, name);
     copy->Push( team->PopString() );
     copy->Push( team->PopInt() );
