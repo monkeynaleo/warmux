@@ -30,6 +30,11 @@
 class Chat
 {
  private:
+  /* If you need this, implement it (correctly)*/
+  Chat(const Chat&);
+  const Chat& operator=(const Chat&);
+  /*********************************************/
+
   TextList* chat;
   Text* input;
   Text* msg;
