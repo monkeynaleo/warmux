@@ -27,7 +27,7 @@ class Downloader
 {
   /* If you need this, implement it (correctly) */
   Downloader(const Downloader&);
-  Downloader operator=(const Downloader&);
+  const Downloader& operator=(const Downloader&);
   /**********************************************/
 
   CURL* curl;
