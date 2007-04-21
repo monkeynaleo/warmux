@@ -69,6 +69,13 @@ Sprite::Sprite(const Sprite &other) :
 
   for(unsigned int f=0;f<other.frames.size();f++)
     AddFrame(other.frames[f].surface,other.frames[f].delay);
+
+  if(other.cache.have_lastframe_cache)
+    cache.EnableLastFrameCache();
+  if(other.cache.have_rotation_cache)
+    EnableRotationCache(other.cache.rotation_cache_size);
+  if(other.cache.have_flipping_cache)
+    EnableFlippingCache();
 }
 
 void Sprite::Constructor() {

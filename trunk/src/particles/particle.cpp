@@ -146,7 +146,6 @@ void ParticleEngine::Load()
   particle_sprite[EXPLOSION_SMOKE_spr] = resource_manager.LoadSprite(res,"smoke_explosion");
   particle_sprite[ILL_BUBBLE_spr] = resource_manager.LoadSprite(res,"ill_bubble");
   particle_sprite[FIRE_spr]  = resource_manager.LoadSprite(res,"fire_particle");
-  particle_sprite[FIRE_spr]->EnableRotationCache(32);
   particle_sprite[STAR_spr]  = resource_manager.LoadSprite(res,"star_particle");
   particle_sprite[DARK_SMOKE_spr]  = resource_manager.LoadSprite(res,"dark_smoke");
   particle_sprite[MAGIC_STAR_R_spr] = resource_manager.LoadSprite(res,"pink_star_particle");
@@ -158,7 +157,6 @@ void ParticleEngine::Load()
   particle_sprite[BULLET_spr] = resource_manager.LoadSprite(res,"bullet_particle");
   particle_sprite[BULLET_spr]->EnableRotationCache(6);
   particle_sprite[POLECAT_FART_spr] = resource_manager.LoadSprite(res,"polecat_fart");
-  particle_sprite[POLECAT_FART_spr]->EnableRotationCache(6);
   resource_manager.UnLoadXMLProfile(res);
 
   sprites_loaded = true;

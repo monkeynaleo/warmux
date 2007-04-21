@@ -41,27 +41,18 @@ const uint bar_speed = 20;
 
 Wind wind;
 
-WindParticle::WindParticle(std::string &xml_file) :
+WindParticle::WindParticle(std::string &xml_file, float scale) :
   PhysicalObj("wind",xml_file)
 {
   SetCollisionModel(true, false, false);
 
-  sprite = resource_manager.LoadSprite( ActiveMap().ResProfile(), "wind_particle");
-  if(ActiveMap().wind.rotation_speed != 0.0)
-  {
-    sprite->EnableRotationCache(64);
-    sprite->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
-  }
-
-  sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
-
+  // Physic constants
   double mass, wind_factor ;
-
   //Mass = mass_mean + or - 25%
   mass = GetMass();
   mass *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
   SetMass (mass);
-  SetSize( sprite->GetSize() );
+  SetSize( Point2i(20,20) );
   wind_factor = GetWindFactor() ;
   wind_factor *= (1.0 + randomObj.GetLong(-100, 100)/400.0);
   SetWindFactor(wind_factor);
@@ -74,31 +65,64 @@ WindParticle::WindParticle(std::string &xml_file) :
   SetTestRect (dx, dx, dy, dy);
 
   m_allow_negative_y = true;
+
+  // Sprite loading
+  scale = 0.5 + scale / 2.0;
+
+  Sprite* tmp = resource_manager.LoadSprite( ActiveMap().ResProfile(), "wind_particle");
+  tmp->Scale(scale, scale);
+  tmp->RefreshSurface();
+  sprite = new Sprite(tmp->GetSurface());
+  sprite->SetAlpha(scale);
+  sprite->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
+
+  if(ActiveMap().wind.need_flip)
+  {
+    tmp->Scale(-scale, scale);
+    tmp->RefreshSurface();
+    flipped = new Sprite(tmp->GetSurface());
+    flipped->SetAlpha(scale);
+    flipped->SetCurrentFrame ( randomObj.GetLong(0, sprite->GetFrameCount()-1));
+  }
+  else
+    flipped = NULL;
+
+  delete tmp;
+
+
+  if(ActiveMap().wind.rotation_speed != 0.0)
+  {
+    sprite->EnableRotationCache(64);
+    sprite->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
+    if(flipped)
+    {
+      flipped->EnableRotationCache(64);
+      flipped->SetRotation_rad(randomObj.GetLong(0,628)/100.0); // 0 < angle < 2PI
+    }
+  }
 }
 
 void WindParticle::Refresh()
 {
-  sprite->Update();
+  if(flipped && GetSpeed().x < 0)
+    flipped->Update();
+  else
+    sprite->Update();
+ 
   UpdatePosition();
 
   // Rotate the sprite if needed
   if(ActiveMap().wind.rotation_speed != 0.0)
   {
-    float new_angle = sprite->GetRotation_rad() + ActiveMap().wind.rotation_speed;
-    sprite->SetRotation_rad(new_angle);
-  }
-  // Flip the sprite if needed and if the direction of wind changed
-  if(ActiveMap().wind.need_flip)
-  {
-    Point2d speed;
-    GetSpeedXY(speed);
-    float scale_x, scale_y;
-    sprite->GetScaleFactors( scale_x, scale_y);
-    if((speed.x<0 && scale_x>0)
-    || (speed.x>0 && scale_x<0))
+    if(flipped && GetSpeed().x < 0)
     {
-      scale_x=-scale_x;
-      sprite->Scale( scale_x, scale_y);
+      float new_angle = flipped->GetRotation_rad() + ActiveMap().wind.rotation_speed;
+      flipped->SetRotation_rad(new_angle);
+    }
+    else
+    {
+      float new_angle = sprite->GetRotation_rad() + ActiveMap().wind.rotation_speed;
+      sprite->SetRotation_rad(new_angle);
     }
   }
   // Put particles inside of the camera view
@@ -129,14 +153,12 @@ void WindParticle::Refresh()
 
 void WindParticle::Draw()
 {
-  sprite->Draw(GetPosition());
-}
-
-void WindParticle::Resize(double size)
-{
-  size=0.5+size/2.0;
-  sprite->Scale( size,size);
-  sprite->SetAlpha( size);
+  // Use the flipped sprite if needed and if the direction of wind changed
+  if(!sprite->cache.have_rotation_cache) printf("putain de merde ...\n");
+  if(flipped && GetSpeed().x < 0)
+    flipped->Draw(GetPosition());
+  else
+    sprite->Draw(GetPosition());
 }
 
 //---------------------------------------------------
@@ -163,8 +185,7 @@ void Wind::Reset(){
   std::string config_file = ActiveMap().m_directory + PATH_SEPARATOR + "config.xml";
 
   for (uint i=0; i<nb; ++i){
-    WindParticle tmp = WindParticle(config_file);
-    tmp.Resize( (double)i / nb );
+    WindParticle tmp = WindParticle(config_file, (float)i / nb);
     particles.push_back( tmp );
   }
   RandomizeParticlesPos();
