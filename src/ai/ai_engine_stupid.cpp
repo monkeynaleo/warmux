@@ -37,7 +37,14 @@
 
 AIStupidEngine * AIStupidEngine::singleton = NULL;
 
-AIStupidEngine::AIStupidEngine() : m_shoot(m_movement)
+AIStupidEngine::AIStupidEngine() :
+  m_movement(),
+  m_shoot(m_movement),
+  m_last_char(NULL),
+  m_enemy(NULL),
+  m_begin_turn_time(-1),
+  m_step(-1),
+  m_current_time(-1)
 {
   std::cout << "o Artificial Intelligence Stupid engine initialization" << std::endl;
 }
@@ -123,7 +130,7 @@ void AIStupidEngine::Refresh()
 }
 
 void AIStupidEngine::ForceEndOfTurn()
-{ 
+{
   m_movement.StopMoving();
   GameLoop::GetInstance()->SetState(GameLoop::HAS_PLAYED);
 }
