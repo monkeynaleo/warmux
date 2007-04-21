@@ -33,6 +33,11 @@ public:
    Sprite *image;
 
 private:
+  /* If you need this, implement it (correctly)*/
+  CharacterCursor(const CharacterCursor&);
+  const CharacterCursor& operator=(const CharacterCursor&);
+  /*********************************************/
+
   uint time_begin_anim;
   uint last_update;
   PhysicalObj *obj_designe;
@@ -58,7 +63,7 @@ public:
   // Hide the cursor
   void Hide();
 
-  
+
 
 private:
   CharacterCursor();

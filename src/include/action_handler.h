@@ -61,6 +61,11 @@ public:
 private:
   ActionHandler();
 
+  /* If you need this, you probably made an error in your code... */
+  ActionHandler(const ActionHandler&);
+  const ActionHandler& operator=(const ActionHandler&);
+  /****************************************************************/
+
   void Exec(Action *a);
   void Register(Action::Action_t action, const std::string &name, callback_t fct);
 };
