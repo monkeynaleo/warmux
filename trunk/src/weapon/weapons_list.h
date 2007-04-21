@@ -46,7 +46,7 @@ private:
   Weapon* GetNextWeapon(uint sort, uint index);
 
   /* if you need to use this, implement it */
-  WeaponsList(const WeaponsList &a_list) {};
+  WeaponsList(const WeaponsList &a_list);
 
 
 public:
