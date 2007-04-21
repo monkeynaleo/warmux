@@ -41,7 +41,7 @@
 const Character* AIShootModule::FindShootableEnemy(Character& shooter,
 						   double& shoot_angle)
 {
-  FOR_ALL_LIVING_ENEMIES(shooter, team, character) 
+  FOR_ALL_LIVING_ENEMIES(shooter, team, character)
   {
     if ( IsDirectlyShootable(shooter, *character, shoot_angle) ) {
       return &(*character);
@@ -63,7 +63,7 @@ const Character* AIShootModule::FindShootableEnemy(Character& shooter,
 // and not from the gun hole
 // =================================================
 bool AIShootModule::IsDirectlyShootable(const Character& shooter,
-					const Character& enemy, 
+					const Character& enemy,
 					double& shoot_angle)
 {
   Point2i pos = shooter.GetCenter();
@@ -211,7 +211,7 @@ bool AIShootModule::SelectProximityWeapon(const Character& enemy) const
   if (ActiveTeam().GetWeapon().EnoughAmmo())
     return true;
 
-  
+
   // No proximity weapons found !
   return false;
 }
@@ -260,7 +260,7 @@ const Character* AIShootModule::FindEnemy()
       return m_enemy;
     }
   }
-  
+
   // "Gun-able" enemy ?
   m_enemy = FindShootableEnemy(ActiveCharacter(), m_angle);
   if ( m_enemy != NULL ) {
@@ -358,7 +358,14 @@ void AIShootModule::BeginTurn()
   ActiveCharacter().SetDirection( randomSync.GetBool()?Body::DIRECTION_LEFT:Body::DIRECTION_RIGHT );
 }
 
-AIShootModule::AIShootModule(const AIMovementModule& to_remove) : m_AIMovementModule(to_remove)
+AIShootModule::AIShootModule(const AIMovementModule& to_remove) :
+  m_current_strategy(NO_STRATEGY),
+  m_current_time(0),
+  m_enemy(NULL),
+  m_has_finished(false),
+  m_AIMovementModule(to_remove),
+  m_angle(0),
+  m_last_shoot_time(0)
 {
   std::cout << "o Artificial Intelligence Shoot module initialization" << std::endl;
 }
