@@ -53,7 +53,7 @@ std::string XmlReader::ExportToString()
   return parser.get_document()->write_to_string();
 }
 
-xmlpp::Element* XmlReader::GetMarker(const xmlpp::Node *x, 
+xmlpp::Element* XmlReader::GetMarker(const xmlpp::Node *x,
                                      const std::string &name)
 {
   xmlpp::Node::NodeList nodes = x -> get_children(name);
@@ -69,7 +69,7 @@ xmlpp::Element* XmlReader::Access(const xmlpp::Node *x,
                                   const std::string &attr_name)
 {
   xmlpp::Node::NodeList nodes = x -> get_children(name);
-  xmlpp::Node::NodeList::iterator 
+  xmlpp::Node::NodeList::iterator
     it = nodes.begin(),
     end = nodes.end();
   for (; it != end; ++it) {
@@ -84,7 +84,9 @@ xmlpp::Element* XmlReader::Access(const xmlpp::Node *x,
   return NULL;
 }
 
-bool XmlReader::ReadString(const xmlpp::Node *x, 
+/* FIXME this should return the string (std::string &output) and should use
+ * exceptions for errors */
+bool XmlReader::ReadString(const xmlpp::Node *x,
                            const std::string &name,
                            std::string &output)
 {
@@ -93,6 +95,7 @@ bool XmlReader::ReadString(const xmlpp::Node *x,
   return ReadMarkerValue(elem, output);
 }
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadDouble(const xmlpp::Node *x,
                            const std::string &name,
                            double &output)
@@ -102,6 +105,7 @@ bool XmlReader::ReadDouble(const xmlpp::Node *x,
   return str2double (val, output);
 }
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadInt(const xmlpp::Node *x,
                         const std::string &name,
                         int &output)
@@ -111,7 +115,8 @@ bool XmlReader::ReadInt(const xmlpp::Node *x,
   return str2int (val, output);
 }
 
-bool XmlReader::ReadUint(const xmlpp::Node *x, 
+/* FIXME see XmlReader::ReadString comment */
+bool XmlReader::ReadUint(const xmlpp::Node *x,
                          const std::string &name,
                          uint &output)
 {
@@ -125,7 +130,8 @@ bool XmlReader::ReadUint(const xmlpp::Node *x,
   }
 }
 
-bool XmlReader::ReadBool (const xmlpp::Node *x, 
+/* FIXME see XmlReader::ReadString comment */
+bool XmlReader::ReadBool (const xmlpp::Node *x,
                           const std::string &name,
                           bool &output)
 {
@@ -134,6 +140,7 @@ bool XmlReader::ReadBool (const xmlpp::Node *x,
   return str2bool (val, output);
 }
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadMarkerValue(const xmlpp::Node *marker,
                                 std::string &output)
 {
@@ -152,12 +159,13 @@ bool XmlReader::ReadMarkerValue(const xmlpp::Node *marker,
   return true;
 }
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadStringList(const xmlpp::Node *x,
                                const std::string &name,
                                std::list<std::string> &output)
 {
   xmlpp::Node::NodeList nodes = x -> get_children(name);
-  xmlpp::Node::NodeList::iterator 
+  xmlpp::Node::NodeList::iterator
     it=nodes.begin(),
     end=nodes.end();
 
@@ -178,6 +186,7 @@ bool XmlReader::ReadStringList(const xmlpp::Node *x,
   return true;
 }
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadStringAttr(const xmlpp::Element *x,
                                const std::string &name,
                                std::string &output)
@@ -189,6 +198,7 @@ bool XmlReader::ReadStringAttr(const xmlpp::Element *x,
   return true;
 }
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadIntAttr(const xmlpp::Element *x,
                             const std::string &name,
                             int &output)
@@ -198,6 +208,7 @@ bool XmlReader::ReadIntAttr(const xmlpp::Element *x,
   return str2int (val, output);
 }
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadUintAttr(const xmlpp::Element *x,
                              const std::string &name,
                              unsigned int &output)
@@ -212,6 +223,7 @@ bool XmlReader::ReadUintAttr(const xmlpp::Element *x,
   }
 }
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadBoolAttr(const xmlpp::Element *x,
                              const std::string &name,
                              bool &output)
@@ -222,6 +234,7 @@ bool XmlReader::ReadBoolAttr(const xmlpp::Element *x,
 }
 
 
+/* FIXME see XmlReader::ReadString comment */
 bool XmlReader::ReadDoubleAttr(const xmlpp::Element *x,
                                const std::string &name,
                                double &output)
@@ -231,12 +244,12 @@ bool XmlReader::ReadDoubleAttr(const xmlpp::Element *x,
   return str2double(val, output);
 }
 
-bool XmlReader::IsOk() const 
+bool XmlReader::IsOk() const
 {
   return parser;
 }
 
-xmlpp::Element* XmlReader::GetRoot() const 
+xmlpp::Element* XmlReader::GetRoot() const
 {
   assert(IsOk());
   xmlpp::Element *root = parser.get_document()->get_root_node();
