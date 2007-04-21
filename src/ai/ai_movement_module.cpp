@@ -34,7 +34,7 @@
 
 #include "ai_movement_module.h"
 
-// TODO: 
+// TODO:
 // - Be sure to not go out of the map
 // - Fix hole detection
 // - Do not go back on the shoot position !
@@ -105,7 +105,7 @@ bool AIMovementModule::RiskGoingOutOfMap()
 // 1) Decect collision and prepare to go back
 // 2) Go back, then when far enought of the obstacle
 // 3) Jump!
-// 4) Detect when on the ground! 
+// 4) Detect when on the ground!
 // =================================================
 
 void AIMovementModule::PrepareJump()
@@ -113,7 +113,7 @@ void AIMovementModule::PrepareJump()
   MSG_DEBUG("ai.move", "Go back before jumping");
 
   ActiveCharacter().body->StartWalk();
-  
+
   current_movement = BACK_TO_JUMP;
   time_at_last_position = m_current_time;
 
@@ -152,10 +152,10 @@ void AIMovementModule::EndOfJump()
   assert(current_movement = JUMPING);
   MSG_DEBUG("ai.move", "End of Jump!");
   //GameMessages::GetInstance()->Add("finished to jump");
-  
+
   if ( last_position.GetX() == ActiveCharacter().GetPosition().GetX() ) {
     // we have not moved since last movement
-    
+
     if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
       max_reachable_x = ActiveCharacter().GetPosition().GetX();
     } else {
@@ -163,12 +163,12 @@ void AIMovementModule::EndOfJump()
     }
     MSG_DEBUG("ai.move", "We are blocked");
     StopMoving();
-    
+
   } else {
     // No more blocked !!
     MSG_DEBUG("ai.move", "We are NO MORE blocked");
     current_movement = WALKING;
-  }  
+  }
 }
 
 
@@ -195,12 +195,12 @@ void AIMovementModule::Walk()
   if ( blocked ) {
 
     if ( last_blocked_position.GetX() != ActiveCharacter().GetPosition().GetX() ) {
-      
+
       last_blocked_position = ActiveCharacter().GetPosition();
-      
+
       if (height < 0 ) {
 	// There's a barrier
-	
+
 	if (height >= -80) { // we can try to jump!
 	  PrepareJump();
 	  return; // do not update position
@@ -211,7 +211,7 @@ void AIMovementModule::Walk()
 	}
       } else {
 	// There's a hole
-	
+
 	if (height >= 100) { // it's too deep, go back!!
 	  MSG_DEBUG("ai.move", "It's too deep, we have to go back");
 	  //	  GameMessages::GetInstance()->Add("It's too deep!" + ulong2str(height));
@@ -251,7 +251,7 @@ void AIMovementModule::StopWalking()
 void AIMovementModule::InverseDirection(bool completely_blocked)
 {
   MSG_DEBUG("ai.move", "Inverse direction");
-  
+
   if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT) {
 
     ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
@@ -298,7 +298,7 @@ void AIMovementModule::Move(uint current_time)
 
   case JUMPING:
     EndOfJump();
- 
+
     break;
   default:
     break;
@@ -313,7 +313,7 @@ void AIMovementModule::StopMoving()
 }
 
 // =================================================
-// Initialize Movement module when changing 
+// Initialize Movement module when changing
 // character to control
 // =================================================
 void AIMovementModule::BeginTurn()
@@ -327,7 +327,17 @@ void AIMovementModule::BeginTurn()
   max_reachable_x = world.GetWidth();
 }
 
-AIMovementModule::AIMovementModule()
+AIMovementModule::AIMovementModule() :
+  m_current_time(0),
+  points_to_avoid(),
+  min_reachable_x(-1),
+  max_reachable_x(-1),
+  destination_point(Point2i(-1,-1)),
+  current_movement(NO_MOVEMENT),
+  last_position(Point2i(-1,-1)),
+  time_at_last_position(0),
+  last_blocked_position(Point2i(-1,-1))
+
 {
   std::cout << "o Artificial Intelligence Movement module initialization" << std::endl;
 }
@@ -375,7 +385,7 @@ bool AIMovementModule::SeemsToBeReachable(const Character& shooter,
   if (delta_y > 100)
     return false;
 
-  if (min_reachable_x > uint(enemy.GetX()) || 
+  if (min_reachable_x > uint(enemy.GetX()) ||
       uint(enemy.GetX()) > max_reachable_x)
     return false;
 
