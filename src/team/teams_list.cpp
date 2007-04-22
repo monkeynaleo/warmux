@@ -39,7 +39,11 @@ TeamsList teams_list;
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 
-TeamsList::TeamsList()
+TeamsList::TeamsList():
+  full_list(),
+  playing_list(),
+  selection(),
+  active_team(playing_list.end())
 {}
 
 TeamsList::~TeamsList()
