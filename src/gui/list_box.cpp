@@ -27,7 +27,7 @@
 #include "../tool/math_tools.h"
 #include "../tool/resource_manager.h"
 
-ListBoxItem::ListBoxItem(const std::string& _label, 
+ListBoxItem::ListBoxItem(const std::string& _label,
 			 Font::font_size_t fsize,
 			 Font::font_style_t fstyle,
 			 const std::string& _value,
@@ -47,7 +47,19 @@ const std::string& ListBoxItem::GetValue() const
   return value;
 }
 
-ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(rect)
+ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b):
+  Widget(rect),
+  always_one_selected(always_one_selected_b),
+  scrolling(false),
+  first_visible_item(0),
+  selected_item(-1),
+  m_items(),
+  m_up(NULL),
+  m_down(NULL),
+  border_color(white_color),
+  background_color(defaultListColor1),
+  selected_item_color(defaultListColor2),
+  default_item_color(defaultListColor3)
 {
   Rectanglei buttonRect;
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
@@ -58,17 +70,7 @@ ListBox::ListBox (const Rectanglei &rect, bool always_one_selected_b) : Widget(r
   buttonRect.SetPosition(GetPositionX() + GetSizeX() - 12, GetPositionY() + GetSizeY() - 7);
   m_down = new Button(buttonRect, res, "menu/down");
 
-  resource_manager.UnLoadXMLProfile( res);
-
-  first_visible_item = 0;
-  selected_item = -1;
-  always_one_selected = always_one_selected_b;
-  border_color = white_color;
-  background_color = defaultListColor1;
-  selected_item_color = defaultListColor2;
-  default_item_color = defaultListColor3;
-
-  scrolling = false;
+  resource_manager.UnLoadXMLProfile(res);
 }
 
 ListBox::~ListBox()
@@ -100,25 +102,25 @@ Widget* ListBox::ClickUp(const Point2i &mousePosition, uint button)
     return NULL;
 
   // buttons for listbox with more items than visible (first or last item not visible)
-  if(first_visible_item > 0  
-     || m_items.back()->GetPositionY() + m_items.back()->GetSizeY() > GetPositionY() + GetSizeY()) 
+  if(first_visible_item > 0
+     || m_items.back()->GetPositionY() + m_items.back()->GetSizeY() > GetPositionY() + GetSizeY())
     {
       if( (button == SDL_BUTTON_WHEELDOWN && Contains(mousePosition)) ||
 	  (button == SDL_BUTTON_LEFT && m_down->Contains(mousePosition)) ){
-	
+
 	// bottom button
 	if( m_items.back()->GetPositionY() + m_items.back()->GetSizeY() > GetPositionY() + GetSizeY() )
 	  first_visible_item++ ;
-	
+
 	return this;
       }
       else if( (button == SDL_BUTTON_WHEELUP && Contains(mousePosition)) ||
 	       (button == SDL_BUTTON_LEFT && m_up->Contains(mousePosition)) ){
-	
+
 	// top button
 	if( first_visible_item > 0 )
 	  first_visible_item-- ;
-	
+
 	return this;
       }
     }
@@ -178,17 +180,17 @@ void ListBox::Update(const Point2i &mousePosition,
     scrolling = false;
   }
 
-  if ( 
-      need_redrawing 
-      || (Contains(mousePosition) && mousePosition != lastMousePosition) 
+  if (
+      need_redrawing
+      || (Contains(mousePosition) && mousePosition != lastMousePosition)
       || (Contains(lastMousePosition) && !Contains(mousePosition))
-      ) 
+      )
     {
       if (ct != NULL) ct->Redraw(*this, surf);
 
       // update position of items because of scrolling
-      if (scrolling && 
-	  mousePosition.y < GetPositionY() + GetSizeY() - 12 && 
+      if (scrolling &&
+	  mousePosition.y < GetPositionY() + GetSizeY() - 12 &&
 	  mousePosition.y > GetPositionY() + 12)
 	{
 	  first_visible_item = (mousePosition.y - GetPositionY() - 10) * m_items.size() / (GetSizeY()-20);
@@ -197,7 +199,7 @@ void ListBox::Update(const Point2i &mousePosition,
       Draw(mousePosition, surf);
     }
   need_redrawing = false;
-  
+
 }
 
 void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
@@ -216,9 +218,9 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
 
   for(uint i=first_visible_item; i < m_items.size(); i++){
 
-    Rectanglei rect(GetPositionX() + 1, 
-		    pos.GetY() + 1, 
-		    GetSizeX() - 2, 
+    Rectanglei rect(GetPositionX() + 1,
+		    pos.GetY() + 1,
+		    GetSizeX() - 2,
 		    m_items.at(i)->GetSizeY() - 2);
 
     // no more place to add item
@@ -226,7 +228,7 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
       local_max_visible_items = i - first_visible_item;
       draw_it = false;
     }
-    
+
     // item is selected or mouse-overed
     if (draw_it) {
       if( int(i) == selected_item) {
@@ -237,7 +239,7 @@ void ListBox::Draw(const Point2i &mousePosition, Surface& surf) const
     }
 
     // Really draw items
-    Rectanglei rect2(pos.x, pos.y, 
+    Rectanglei rect2(pos.x, pos.y,
 		     GetSizeX()-12, m_items.at(i)->GetSizeY() - 2);
 
     m_items.at(i)->SetSizePosition(rect2);
@@ -273,7 +275,7 @@ Rectanglei ListBox::ScrollBarPos() const
   }
 
   if (tmp_h < 5) tmp_h =5;
-  
+
   return Rectanglei(GetPositionX()+GetSizeX()-11, tmp_y, 9,  /*tmp_y+*/tmp_h);
 }
 
@@ -286,7 +288,7 @@ void ListBox::SetSizePosition(const Rectanglei &rect)
 
 void ListBox::AddItem (bool selected,
 		       const std::string &label,
-		       const std::string &value,	       
+		       const std::string &value,
 		       Font::font_size_t fsize,
 		       Font::font_style_t fstyle,
 		       const Color& color)

@@ -25,30 +25,26 @@
 #include "../include/app.h"
 
 Button::Button (const Rectanglei &rect, const Profile *res_profile,
-		const std::string& resource_id, bool _img_scale) : Widget(rect)
+		const std::string& resource_id, bool _img_scale) :
+  Widget(rect),
+  hidden(false),
+  img_scale(_img_scale),
+  image(resource_manager.LoadSprite(res_profile,resource_id))
 {
-  hidden = false;
-
-  image = resource_manager.LoadSprite(res_profile,resource_id);
   image->cache.EnableLastFrameCache();
-
-  // image scalling or not
-  img_scale = _img_scale;
 
   if (img_scale)
     image->ScaleSize(rect.GetSize());
 }
 
 Button::Button (const Point2i &m_position, const Profile *res_profile,
-		const std::string& resource_id, bool _img_scale)
+		const std::string& resource_id, bool _img_scale):
+  hidden(false),
+  img_scale(_img_scale),
+  image(resource_manager.LoadSprite(res_profile,resource_id))
 {
-  hidden = false;
-  image = resource_manager.LoadSprite(res_profile, resource_id);
   position = m_position;
   size = image->GetSize();
-
-  // image scalling on resize
-  img_scale = _img_scale;
 }
 
 Button::~Button()
