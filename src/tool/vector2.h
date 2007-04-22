@@ -50,8 +50,8 @@ template<class T> class Vector2
 		 *
 		 */
 		inline bool IsZero(T val) const{
-			return (val == 0 || (val <= (T)VECTOR2_EPS_ZERO &&
-                               val >= (T)-VECTOR2_EPS_ZERO));
+			return (val == 0 || (val <= static_cast<T>(VECTOR2_EPS_ZERO) &&
+                               val >= static_cast<T>(-VECTOR2_EPS_ZERO)));
 		}
 
 		// Comparators
@@ -68,7 +68,7 @@ template<class T> class Vector2
 		 * @param p2
 		 */
 		inline bool operator!=(const Vector2<T> &p2) const{
-			return (x != p2.x) || (y != p2.y);
+			return !IsZero(x - p2.x) || !IsZero(y - p2.y);
 		}
 
 		/**
