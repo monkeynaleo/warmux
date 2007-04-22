@@ -69,12 +69,16 @@ GameLoop * GameLoop::GetInstance()
   return singleton;
 }
 
-GameLoop::GameLoop()
-{
-  state = PLAYING;
-  current_ObjBox = NULL;
-  give_objbox = true;
-}
+GameLoop::GameLoop():
+  state(PLAYING),
+  pause_seconde(-1),
+  duration(-1),
+  current_ObjBox(NULL),
+  give_objbox(true),
+  fps(),
+  character_already_chosen(false),
+  chatsession()
+{ }
 
 // ####################################################################
 // ####################################################################
