@@ -211,11 +211,11 @@ bool Map::IsInVacuum(const Point2i& pos) const{
 bool Map::HorizontalLine_IsInVacuum(int ox, int y, int width) const
 {
   // Traite une ligne
-  for (int i=0; i<width; i++)
+
+  for (int i=0; i<width; ++i)
 	if (!IsInVacuum(ox+i, (uint)y))
 	  return false;
-
-   return true;
+  return true;
 }
 
 // TODO : for consistency, VerticalLine_IsInVacuum should use a 'height' as LigneH does it ...

@@ -36,6 +36,9 @@ class Team;
 
 class NetworkMenu : public Menu
 {
+  NetworkMenu(const NetworkMenu&);
+  const NetworkMenu& operator=(const NetworkMenu&);
+
   bool waiting_for_server;
 
   /* Options controllers */
@@ -44,38 +47,38 @@ class NetworkMenu : public Menu
   Label* mode;
   Label* connected_players;
   Label* inited_players;
-  
+
   /* Chat controllers */
   MsgBox* msg_box;
   TextBox* line_to_send_tbox;
   Button* send_txt_bt;
-  
+
   /* Team controllers */
   NetworkTeamsSelectionBox *team_box;
-  
+
   /* Map controllers */
   MapSelectionBox *map_box;
-  
+
   void SaveOptions();
   void OnClick(const Point2i &mousePosition, int button);
   void OnClickUp(const Point2i &mousePosition, int button);
   void Draw(const Point2i &mousePosition);
   void SendChatMsg();
   void WaitingForServer();
-  
+
   void sig_ok();
   void __sig_ok();
   void __sig_cancel();
-  
+
 public:
-  NetworkMenu(); 
+  NetworkMenu();
   ~NetworkMenu();
-  
+
   void AddTeamCallback(std::string team_id);
   void UpdateTeamCallback(std::string team_id);
   void DelTeamCallback(std::string team_id);
   void ChangeMapCallback();
-  
+
   void ReceiveMsgCallback(std::string msg);
 };
 

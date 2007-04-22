@@ -21,21 +21,23 @@
 
 #include "label.h"
 
-Label::Label (const std::string &label, 
-	      const Rectanglei &rect, 
+Label::Label (const std::string &label,
+	      const Rectanglei &rect,
 	      Font::font_size_t fsize,
 	      Font::font_style_t fstyle,
-	      const Color& color, 
-	      bool _center, 
-	      bool _shadowed) 
-  : font_size(fsize), font_style (fstyle), font_color(color)
+	      const Color& color,
+	      bool _center,
+	      bool _shadowed):
+  txt_label(new Text(label, color, fsize, fstyle, _shadowed)),
+  hidden(false),
+  font_size(fsize),
+  font_style(fstyle),
+  font_color(color),
+  center(_center),
+  shadowed(_shadowed)
 {
   position = rect.GetPosition();
   size = rect.GetSize();
-  center = _center;
-  shadowed = _shadowed;
-  hidden = false;
-  txt_label = new Text(label, font_color, font_size, font_style, shadowed);
   txt_label->SetMaxWidth(GetSizeX());
   size.y = txt_label->GetHeight();
 }
@@ -47,7 +49,7 @@ Label::~Label()
 
 void Label::Draw(const Point2i &mousePosition, Surface& surf) const
 {
-  if (!hidden) 
+  if (!hidden)
     {
       if (!center)
 	txt_label->DrawTopLeft(position);
