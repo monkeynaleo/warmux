@@ -57,13 +57,13 @@ const int WeaponsMenu::MAX_NUMBER_OF_WEAPON = 7;
 
 
 WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
-PolygonItem()
+  PolygonItem(),
+  zoom(false),
+  weapon(new_weapon),
+  zoom_start_time(0)
 {
-  weapon = new_weapon;
   SetSprite(new Sprite(weapon->GetIcon()));
   SetPosition(position);
-  zoom = false;
-  zoom_start_time = 0;
 }
 
 bool WeaponMenuItem::IsMouseOver()
@@ -125,12 +125,21 @@ Weapon * WeaponMenuItem::GetWeapon() const
   return weapon;
 }
 
-WeaponsMenu::WeaponsMenu()
+WeaponsMenu::WeaponsMenu():
+  weapons_menu(NULL),
+  tools_menu(NULL),
+  current_overfly_item(NULL),
+  position(),
+  shear(),
+  rotation(),
+  zoom(),
+  infinite(NULL),
+  cross(NULL),
+  show(false),
+  motion_start_time(0),
+  nbr_weapon_type(0),
+  nb_weapon_type(new int[MAX_NUMBER_OF_WEAPON])
 {
-  show = false;
-  nbr_weapon_type = 0;
-  motion_start_time = 0;
-  current_overfly_item = NULL;
   // Loading value from XML
   Profile *res = resource_manager.LoadXMLProfile("graphism.xml", false);
   infinite = new Sprite(resource_manager.LoadImage(res, "interface/infinite"));
@@ -155,7 +164,6 @@ WeaponsMenu::WeaponsMenu()
   tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), gray_color, Font::FONT_BIG)),
                         tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
 
-  nb_weapon_type = new int[MAX_NUMBER_OF_WEAPON];
   for(int i = 0; i < MAX_NUMBER_OF_WEAPON; i++)
     nb_weapon_type[i] = 0;
   resource_manager.UnLoadXMLProfile( res);

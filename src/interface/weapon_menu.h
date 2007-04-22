@@ -31,10 +31,13 @@
 #include <vector>
 
 class WeaponMenuItem : public PolygonItem {
+  WeaponMenuItem(const WeaponMenuItem&);
+  const WeaponMenuItem& operator=(const WeaponMenuItem&);
+  bool zoom;
+
  public:
   Weapon* weapon;
   int zoom_start_time;
-  bool zoom;
 
  public:
   WeaponMenuItem(Weapon * weapon, const Point2d & position);
@@ -64,7 +67,6 @@ class WeaponsMenu
 
   int nbr_weapon_type; // number of weapon type = number of rows
   int * nb_weapon_type;
-  uint max_weapon;  // max number of weapon in a weapon type = number of lines
 
  public:
   WeaponsMenu();

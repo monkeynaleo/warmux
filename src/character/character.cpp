@@ -122,7 +122,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   do_nothing_time(0),
   walking_time(0),
   animation_time(Time::GetInstance()->Read() + randomObj.GetLong(ANIM_PAUSE_MIN,ANIM_PAUSE_MAX)),
-  lost_energy(-1),
+  lost_energy(0),
   hidden(false),
   channel_step(-1),
   bubble_engine(500),
@@ -152,7 +152,6 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   energy_bar.SetBackgroundColor( gray_color );
 
   SetEnergy(GameMode::GetInstance()->character.init_energy);
-  lost_energy = 0;
   MSG_DEBUG("character", "Load character %s", character_name.c_str());
 }
 
