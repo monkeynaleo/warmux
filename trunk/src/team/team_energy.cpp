@@ -40,21 +40,27 @@ const uchar BACK_ALPHA = 0;
 
 const float MOVE_DURATION = 750.0;
 
-TeamEnergy::TeamEnergy(Team * _team)
+TeamEnergy::TeamEnergy(Team * _team):
+  energy_bar(),
+  value(0),
+  new_value(0),
+  max_value(0),
+  team(_team),
+  icon(NULL),
+  t_team_energy(new Text("None", black_color,
+                         Font::FONT_SMALL, Font::FONT_NORMAL, false)),
+  dx(0),
+  dy(0),
+  rank(0),
+  new_rank(0),
+  team_name("not initialized"),
+  move_start_time(0),
+  rank_tmp(0),
+  status(EnergyStatusOK)
 {
-  dx = 0;
-  dy = 0;
-  move_start_time = 0;
-  max_value = 0;
-  status = EnergyStatusOK;
   energy_bar.InitPos(0, 0, BAR_WIDTH, BAR_HEIGHT);
-
   energy_bar.SetBorderColor(Color(255, 255, 255, ALPHA));
   energy_bar.SetBackgroundColor(Color(255*6/10, 255*6/10, 255*6/10, BACK_ALPHA));
-
-  team = _team;
-  icon = NULL;
-  t_team_energy = new Text("None", black_color, Font::FONT_SMALL, Font::FONT_NORMAL, false);
 }
 
 TeamEnergy::~TeamEnergy()
