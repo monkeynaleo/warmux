@@ -61,10 +61,10 @@ template<class T> class rectangle
 		 * @param width Width of the new rectangle.
 		 * @param height Height of the new rectangle.
 		 */
-		inline rectangle(T x, T y, T width, T height){
-			position.SetValues( x, y );
-			size.SetValues( width, height );
-		}
+		inline rectangle(T x, T y, T width, T height):
+                  position(x, y),
+                  size(width, height)
+                { }
 
 		/**
 		 * Constructor for building a new rectangle with the position and size specified.
