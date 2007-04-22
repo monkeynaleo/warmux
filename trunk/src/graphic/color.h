@@ -28,12 +28,12 @@ class Color
 {
 	private:
 
-	public:
 		Uint8 red;
 		Uint8 green;
 		Uint8 blue;
 		Uint8 alpha;
-		
+
+	public:
 		Color();
 		Color(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 

@@ -61,12 +61,13 @@ public:
 
   int allow_character_selection;
 
-  static const int ALWAYS = 0;
-  static const int BEFORE_FIRST_ACTION = 1;
-  static const int BEFORE_FIRST_ACTION_AND_END_TURN = 2;
-  static const int CHANGE_ON_END_TURN = 3;
-  static const int NEVER = 4;
-
+  enum {
+    ALWAYS = 0,
+    BEFORE_FIRST_ACTION,
+    BEFORE_FIRST_ACTION_AND_END_TURN,
+    CHANGE_ON_END_TURN,
+    NEVER
+  };
 private:
   std::string m_current;
 
