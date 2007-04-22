@@ -24,22 +24,22 @@
 #include "../graphic/sprite.h"
 #include "../tool/resource_manager.h"
 
-CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value)
+CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value):
+  txt_label(new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL)),
+  m_value(value),
+  m_checked_image(NULL),
+  hidden(false)
 {
-  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);   
+  Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
   m_checked_image = resource_manager.LoadSprite( res, "menu/check");
   resource_manager.UnLoadXMLProfile( res);
-  
+
   m_checked_image->cache.EnableLastFrameCache();
- 
+
   SetPosition( rect.GetPosition() );
   SetSize( rect.GetSize() );
 
   SetSizeY( (*Font::GetInstance(Font::FONT_SMALL)).GetHeight() );
-  m_value = value;
-
-  txt_label = new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL);
-  hidden = false;
 }
 
 CheckBox::~CheckBox()
@@ -53,12 +53,12 @@ void CheckBox::Draw(const Point2i &mousePosition, Surface& surf) const
   if (!hidden)
     {
       txt_label->DrawTopLeft( GetPosition() );
-      
+
       if (m_value)
 	m_checked_image->SetCurrentFrame(0);
-      else 
+      else
 	m_checked_image->SetCurrentFrame(1);
-      
+
       m_checked_image->Blit(surf, GetPositionX() + GetSizeX() - 16, GetPositionY());
     }
 }
