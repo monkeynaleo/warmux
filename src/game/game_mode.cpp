@@ -39,19 +39,25 @@ GameMode * GameMode::GetInstance() {
   return singleton;
 }
 
-GameMode::GameMode()
+GameMode::GameMode():
+  nb_characters(6),
+  max_teams(4),
+  duration_turn(60),
+  duration_move_player(3),
+  duration_exchange_player(2),
+  duration_before_death_mode(20 * 60),
+  damage_per_turn_during_death_mode(5),
+  gravity(9.81),
+  safe_fall(10),
+  damage_per_fall_unit(7),
+  death_explosion_cfg(),
+  barrel_explosion_cfg(),
+  bonus_box_explosion_cfg(),
+  character(),
+  allow_character_selection(BEFORE_FIRST_ACTION_AND_END_TURN),
+  m_current("classic"),
+  doc_objects()
 {
-  nb_characters = 6;
-  max_teams = 4;
-  duration_turn = 60;
-  duration_exchange_player = 2;
-  duration_before_death_mode = 20 * 60;
-  damage_per_turn_during_death_mode = 5;
-  gravity = 9.81;
-  safe_fall = 10;
-  damage_per_fall_unit = 7;
-  duration_move_player = 3;
-  allow_character_selection = BEFORE_FIRST_ACTION_AND_END_TURN;
   character.init_energy = 100; /* overwritten when reading XML */
   character.max_energy = 100; /* overwritten when reading XML */
   character.mass = 100;
@@ -62,8 +68,6 @@ GameMode::GameMode()
   character.super_jump_angle = -80;
   character.back_jump_strength = 9;
   character.back_jump_angle = -100;
-
-  m_current = "classic";
 }
 
 const std::string& GameMode::GetName() const
@@ -188,7 +192,7 @@ bool GameMode::Load(void)
   {
     // Game mode objects configuration file
     fullname = config->GetPersonalDir() + GetObjectsFilename();
-    
+
     if(!IsFileExist(fullname))
       fullname = config->GetDataDir() + GetObjectsFilename();
 
@@ -240,10 +244,10 @@ bool GameMode::LoadFromString(const std::string& game_mode_name,
   MSG_DEBUG("game_mode", "Loading %s from network: ", m_current.c_str());
 
   try
-  {    
+  {
     if(!doc_objects.LoadFromString(game_mode_objects_contents))
       return false;
-    
+
     XmlReader doc;
     if(!doc.LoadFromString(game_mode_contents))
       return false;
@@ -287,7 +291,7 @@ bool GameMode::ExportFileToString(const std::string& filename, std::string& cont
   return true;
 }
 
-bool GameMode::ExportToString(std::string& mode, 
+bool GameMode::ExportToString(std::string& mode,
 			      std::string& mode_objects) const
 {
   bool r;
@@ -325,7 +329,7 @@ bool GameMode::AllowCharacterSelection() const
 }
 
 std::string GameMode::GetFilename() const
-{    
+{
   std::string filename =
     PATH_SEPARATOR
     + std::string("game_mode")

@@ -69,10 +69,11 @@ Font* Font::GetInstance(font_size_t ftype, font_style_t fstyle) {
   return font;
 }
 
-Font::Font(int size){
-  m_font = NULL;
+Font::Font(int size):
+  surface_text_table(),
+  m_font(NULL)
+{
   bool ok = Load(Config::GetInstance()->GetTtfFilename(), size);
-
   if( !ok )
     Error("Error during initialisation of a font!");
 }
