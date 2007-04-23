@@ -58,8 +58,8 @@ class ResultsMenu : public Menu
     ResultBox* most_useless;
     ResultBox* biggest_traitor;
 
-    void __sig_ok() { };
-    void __sig_cancel() { };
+    bool signal_ok() { return true;};
+    bool signal_cancel() { return true;};
 
     void SetResult(int i);
     void OnClick(const Point2i &mousePosition, int button);

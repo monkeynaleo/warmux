@@ -76,14 +76,14 @@ protected:
    /* Actions buttons  */
    HBox *actions_buttons;
 
-   virtual void sig_ok();
-   virtual void sig_cancel();
-   virtual void DrawBackground();
+   virtual void mouse_ok();
+   virtual void mouse_cancel();
+   virtual void key_ok();
+   virtual void key_cancel();
+   virtual bool signal_ok() = 0;
+   virtual bool signal_cancel() = 0;
 
-   virtual void key_ok() {};
-   virtual void key_cancel() {};
-   virtual void __sig_ok() = 0;
-   virtual void __sig_cancel() = 0;
+   virtual void DrawBackground();
    virtual void Draw(const Point2i &mousePosition) = 0;
 
    // we have released the button

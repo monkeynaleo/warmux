@@ -69,30 +69,48 @@ Menu::~Menu()
   delete background;
 }
 
-void Menu::sig_ok()
+void Menu::mouse_ok()
 {
-  jukebox.Play("share", "menu/ok");
-  __sig_ok();
-  close_menu = true;
+  if (signal_ok()) {
+    jukebox.Play("share", "menu/ok");
+    close_menu = true;
+  }
 }
 
-void Menu::sig_cancel()
+void Menu::mouse_cancel()
 {
-  jukebox.Play("share", "menu/cancel");
-  __sig_cancel();
-  close_menu = true;
+  if (signal_cancel()) {
+    jukebox.Play("share", "menu/cancel");
+    close_menu = true;
+  }
 }
 
 bool Menu::BasicOnClickUp(const Point2i &mousePosition)
 {
   if( b_ok != NULL &&  b_ok->Contains(mousePosition) )
-    sig_ok();
+    mouse_ok();
   else if( b_cancel != NULL && b_cancel->Contains(mousePosition) )
-    sig_cancel();
+    mouse_cancel();
   else
     return false;
   
   return true;
+}
+
+void Menu::key_ok()
+{
+  if (signal_ok()) {
+    jukebox.Play("share", "menu/ok");
+    close_menu = true;
+  }
+}
+
+void Menu::key_cancel()
+{
+  if (signal_cancel()) {
+    jukebox.Play("share", "menu/cancel");
+    close_menu = true;
+  }
 }
 
 void Menu::DrawBackground()
@@ -131,21 +149,15 @@ void Menu::Run ()
       Point2i mousePosition(event.button.x, event.button.y);
 	   
       if (event.type == SDL_QUIT) {
-        sig_cancel();
+        key_cancel();
       } else if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.sym)
 	  {
 	  case SDLK_ESCAPE:
-	    if (b_cancel != NULL)
-	      sig_cancel();
-	    else
-	      key_cancel();
+	    key_cancel();
 	    break;
 	  case SDLK_RETURN:
-	    if (b_ok != NULL)
-	      sig_ok();
-	    else
-	      key_ok();
+	    key_ok();
 	    break;
 	  case SDLK_F10:
 	    AppWormux::GetInstance()->video.ToggleFullscreen();

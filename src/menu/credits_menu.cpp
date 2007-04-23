@@ -95,13 +95,14 @@ CreditsMenu::~CreditsMenu()
 {
 }
 
-void CreditsMenu::__sig_ok()
+bool CreditsMenu::signal_ok()
 {
-  // Nothing to do
+  return true;
 }
-void CreditsMenu::__sig_cancel()
+
+bool CreditsMenu::signal_cancel()
 {
-  // Nothing to do
+  return true;
 }
 
 

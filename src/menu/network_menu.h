@@ -66,9 +66,9 @@ class NetworkMenu : public Menu
   void SendChatMsg();
   void WaitingForServer();
 
-  void sig_ok();
-  void __sig_ok();
-  void __sig_cancel();
+  void key_ok();
+  bool signal_ok();
+  bool signal_cancel();
 
 public:
   NetworkMenu();

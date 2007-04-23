@@ -209,14 +209,15 @@ void OptionMenu::SaveOptions()
   config->Save();
 }
 
-void OptionMenu::__sig_ok()
+bool OptionMenu::signal_ok()
 {
   SaveOptions();
+  return true;
 }
 
-void OptionMenu::__sig_cancel()
+bool OptionMenu::signal_cancel()
 {
-  // Nothing to do
+  return true;
 }
 
 void OptionMenu::Draw(const Point2i &mousePosition)

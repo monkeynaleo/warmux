@@ -70,9 +70,8 @@ class NetworkConnectionMenu : public Menu
 
    void DisplayError(Network::connection_state_t conn);
 
-   void sig_ok();
-   void __sig_ok();
-   void __sig_cancel();
+   bool signal_ok();
+   bool signal_cancel();
 
 public:
    NetworkConnectionMenu();

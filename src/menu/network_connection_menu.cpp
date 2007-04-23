@@ -196,9 +196,11 @@ void NetworkConnectionMenu::DisplayError(Network::connection_state_t conn)
   Menu::RedrawMenu();
 }
 
-void NetworkConnectionMenu::sig_ok()
+bool NetworkConnectionMenu::signal_ok()
 {
   Network::connection_state_t conn;
+  bool r = false;
+
   switch (current_action) {
   case NET_HOST: // Hosting your own server
     if( !internet_server->GetValue() )
@@ -209,21 +211,21 @@ void NetworkConnectionMenu::sig_ok()
     {     
       DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to host a game"), c_red);
-      return;
+      goto out;
     }
 
     conn = Network::GetInstance()->ServerStart(port_number->GetText());
     if( conn != Network::CONNECTED)
     {      
       DisplayError(conn);
-      return;
+      goto out;
     }
 
     index_server.SendServerStatus();
 
     if (!Network::GetInstance()->IsConnected()) {
       msg_box->NewMessage(_("Error: Unable to start server"), c_red);
-      return;
+      goto out;
     }
     break;
 
@@ -236,7 +238,7 @@ void NetworkConnectionMenu::sig_ok()
       msg_box->NewMessage(Format(_("Error: Unable to connect to %s:%s"),
 				 (server_address->GetText()).c_str(), (port_number->GetText()).c_str()),
 			  c_red);
-      return;
+      goto out;
     }
     break;
 
@@ -245,7 +247,7 @@ void NetworkConnectionMenu::sig_ok()
     if (conn != Network::CONNECTED) {
       DisplayError(conn);
       msg_box->NewMessage(_("Error: Unable to contact index server to search an internet game"), c_red);
-      return;
+      goto out;
     }
 
     InternetMenu im;
@@ -268,21 +270,25 @@ void NetworkConnectionMenu::sig_ok()
     index_server.Disconnect();
 
     // back to main menu after playing
-    Menu::sig_ok();
+    Network::Disconnect();
+    return true;
   } else {
     // if InternetMenu was closed without making a connection menu has to be redrawn
     Menu::RedrawMenu();
+    Network::Disconnect();
+    goto out;
     // TODO : add error sound and dialog
   }
+
+  r = true;
+ out:
+  Network::Disconnect();
+  return r;
 }
 
-void NetworkConnectionMenu::__sig_ok()
+bool NetworkConnectionMenu::signal_cancel()
 {
   Network::Disconnect();
-}
-
-void NetworkConnectionMenu::__sig_cancel()
-{
-  Network::Disconnect();
+  return true;
 }
 
