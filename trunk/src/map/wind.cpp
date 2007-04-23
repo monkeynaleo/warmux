@@ -108,7 +108,7 @@ void WindParticle::Refresh()
     flipped->Update();
   else
     sprite->Update();
- 
+
   UpdatePosition();
 
   // Rotate the sprite if needed
@@ -154,7 +154,6 @@ void WindParticle::Refresh()
 void WindParticle::Draw()
 {
   // Use the flipped sprite if needed and if the direction of wind changed
-  if(!sprite->cache.have_rotation_cache) printf("putain de merde ...\n");
   if(flipped && GetSpeed().x < 0)
     flipped->Draw(GetPosition());
   else
