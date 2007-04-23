@@ -45,8 +45,11 @@ const uint SPEED = 5; // meter / seconde
 const uint SPEED_PARACHUTE = 170; // ms per frame
 const uint NB_MAX_TRY = 20;
 
-BonusBox::BonusBox()
-  : ObjBox("bonus_box") {
+BonusBox::BonusBox():
+  ObjBox("bonus_box"),
+  nbr_ammo(2),
+  contents(Weapon::WEAPON_MINE)
+{
   SetTestRect (29, 29, 63, 6);
 
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
@@ -56,8 +59,6 @@ BonusBox::BonusBox()
   SetSize(anim->GetSize());
   anim->animation.SetLoopMode(false);
   anim->SetCurrentFrame(0);
-
-  nbr_ammo = 2;
 
   PickRandomWeapon();
 }

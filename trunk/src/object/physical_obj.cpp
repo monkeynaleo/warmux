@@ -51,32 +51,25 @@ double MeterDistance (const Point2i &p1, const Point2i &p2)
 }
 
 PhysicalObj::PhysicalObj (const std::string &name, const std::string &xml_config) :
-  m_name(name),
-  m_width(0),
-  m_height(0)
-{
-  life_points = -1; // Disable lifepoints
-  m_goes_through_wall = false;
-  m_collides_with_characters = false;
-  m_collides_with_objects = false;
-
-  m_ignore_movements = false;
-
+  m_goes_through_wall(false),
+  m_collides_with_characters(false),
+  m_collides_with_objects(false),
+  m_rebound_position(-1,-1),
   // No collision with this object until we have gone out of his collision rectangle
-  m_overlapping_object = NULL;
-
-  m_allow_negative_y = false;
-  m_alive = ALIVE;
-
-  m_rebound_sound = "";
-
-  m_test_left = 0;
-  m_test_right = 0;
-  m_test_top = 0;
-  m_test_bottom = 0;
-
-  m_rebound_position = Point2i(-1, -1);
-
+  m_overlapping_object(NULL),
+  m_ignore_movements(false),
+  m_name(name),
+  m_test_left(0),
+  m_test_right(0),
+  m_test_top(0),
+  m_test_bottom(0),
+  m_width(0),
+  m_height(0),
+  m_rebound_sound(""),
+  m_alive(ALIVE),
+  life_points(-1),
+  m_allow_negative_y(false)
+{
   m_cfg = Config::GetInstance()->GetOjectConfig(m_name,xml_config);
   ResetConstants();       // Set physics constants from the xml file
 
