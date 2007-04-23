@@ -32,9 +32,9 @@ ListBoxItem::ListBoxItem(const std::string& _label,
 			 Font::font_style_t fstyle,
 			 const std::string& _value,
 			 const Color& color) :
-  Label(_label, Rectanglei(0,0,0,0), fsize, fstyle, color)
+  Label(_label, Rectanglei(0,0,0,0), fsize, fstyle, color),
+  value(_value)
 {
-  value = _value;
 }
 
 const std::string& ListBoxItem::GetLabel() const

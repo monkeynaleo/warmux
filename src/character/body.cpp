@@ -150,7 +150,7 @@ Body::Body(Body *_body)
   {
     std::pair<std::string,Member*> p;
     p.first = it1->first;
-    p.second = new Member(it1->second);
+    p.second = new Member(*it1->second);
     members_lst.insert(p);
     it1++;
   }
