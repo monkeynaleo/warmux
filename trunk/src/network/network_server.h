@@ -28,7 +28,6 @@
 class NetworkServer : public Network
 {
   uint max_nb_players;
-  uint nb_initialized_players;
   TCPsocket server_socket; // Wait for incoming connections on this socket
 public:
   NetworkServer();
@@ -49,8 +48,6 @@ public:
   void SetMaxNumberOfPlayers(uint max_nb_players);
   const uint GetNbConnectedPlayers() const;
   const uint GetNbInitializedPlayers() const;
-  void AddAnInitializedPlayer();
-  void TMP_ResetInitializedPlayers();
 };
 
 //-----------------------------------------------------------------------------

@@ -87,8 +87,6 @@ void GameLoop::InitGameData_NetServer()
 {
   Network::GetInstanceServer()->RejectIncoming();
 
-  Network::GetInstanceServer()->TMP_ResetInitializedPlayers();
-
   randomSync.Init();
 
   SendGameMode();

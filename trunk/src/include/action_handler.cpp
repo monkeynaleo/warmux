@@ -84,14 +84,14 @@ void Action_Network_ChangeState (Action *a)
       // State is changed when server clicks on the launch game button
 
       // One more client is ready to play
-      Network::GetInstanceServer()->AddAnInitializedPlayer();
+      a->creator->SetInitialized();
       break;
 
     case Network::NETWORK_INIT_GAME:
       // One more client is ready to play
-      Network::GetInstanceServer()->AddAnInitializedPlayer();
+      a->creator->SetInitialized();
 
-      if(Network::GetInstanceServer()->GetNbInitializedPlayers() == Network::GetInstanceServer()->GetNbConnectedPlayers())
+      if(Network::GetInstanceServer()->GetNbInitializedPlayers() + 1 == Network::GetInstanceServer()->GetNbConnectedPlayers())
 	Network::GetInstanceServer()->state = Network::NETWORK_READY_TO_PLAY;
       break;
     default:
