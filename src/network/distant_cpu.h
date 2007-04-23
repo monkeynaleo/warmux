@@ -44,6 +44,8 @@ class DistantComputer
   TCPsocket sock;
   std::list<std::string> owned_teams;
 
+  bool initialized;
+
 public:
   bool version_checked;
   bool force_disconnect;
@@ -60,6 +62,9 @@ public:
 
   void ManageTeam(Action* team);
   void SendChatMessage(Action* a);
+
+  bool IsInitialized();
+  void SetInitialized();
 };
 
 #endif

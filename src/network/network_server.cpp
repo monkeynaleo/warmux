@@ -154,7 +154,6 @@ Network::connection_state_t NetworkServer::ServerStart(const std::string &port)
     return Network::CONN_BAD_PORT;
   }
 
-  nb_initialized_players = 1;
   max_nb_players = GameMode::GetInstance()->max_teams;
 
   // Open the port to listen to
@@ -221,15 +220,13 @@ const uint NetworkServer::GetNbConnectedPlayers() const
 
 const uint NetworkServer::GetNbInitializedPlayers() const
 {
-  return nb_initialized_players;
-}
+  uint r = 0;
+  for (std::list<DistantComputer*>::const_iterator client = cpu.begin();
+       client != cpu.end();
+       client++) {
+    if ((*client)->IsInitialized())
+      r++;
+  }
 
-void NetworkServer::TMP_ResetInitializedPlayers()
-{
-  nb_initialized_players = 1;
-}
-
-void NetworkServer::AddAnInitializedPlayer()
-{
-  nb_initialized_players++;
+  return r;
 }
