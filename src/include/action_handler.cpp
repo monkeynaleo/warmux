@@ -69,7 +69,7 @@ void Action_Nickname(Action *a)
       std::string nickname = a->PopString();
       std::cout<<"New nickname: " + nickname<< std::endl;
       a->creator->nickname = nickname;
-  } 
+  }
 }
 
 void Action_Network_ChangeState (Action *a)
@@ -84,13 +84,13 @@ void Action_Network_ChangeState (Action *a)
       // State is changed when server clicks on the launch game button
 
       // One more client is ready to play
-      Network::GetInstanceServer()->AddAnInitializedPlayer();  
+      Network::GetInstanceServer()->AddAnInitializedPlayer();
       break;
 
     case Network::NETWORK_INIT_GAME:
       // One more client is ready to play
-      Network::GetInstanceServer()->AddAnInitializedPlayer();  
-      
+      Network::GetInstanceServer()->AddAnInitializedPlayer();
+
       if(Network::GetInstanceServer()->GetNbInitializedPlayers() == Network::GetInstanceServer()->GetNbConnectedPlayers())
 	Network::GetInstanceServer()->state = Network::NETWORK_READY_TO_PLAY;
       break;
@@ -167,7 +167,7 @@ void Action_Rules_SetGameMode (Action *a)
 {
   net_assert(Network::GetInstance()->IsClient())
   {
-    if (a->creator) 
+    if (a->creator)
       a->creator->force_disconnect = true;
     return;
   }
@@ -195,7 +195,7 @@ void SendGameMode()
 
   std::string game_mode;
   std::string game_mode_objects;
-  
+
   GameMode::GetInstance()->ExportToString(game_mode,
 					  game_mode_objects);
   a.Push(game_mode);
@@ -310,7 +310,7 @@ void Action_Menu_DelTeam (Action *a)
   std::string team = a->PopString();
 
   MSG_DEBUG("action_handler.menu", "- %s", team.c_str());
-  
+
   teams_list.DelTeam (team);
 
   if (Network::GetInstance()->network_menu != NULL)
@@ -389,7 +389,7 @@ void SendActiveCharacterInfo()
 
 void Action_Weapon_Shoot (Action *a)
 {
-  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING) 
+  if (GameLoop::GetInstance()->ReadState() != GameLoop::PLAYING)
     return; // hack related to bug 8656
 
   double strength = a->PopDouble();
@@ -458,7 +458,7 @@ void Action_Weapon_Ninjarope (Action *a)
 
   int subaction = a->PopInt();
   switch (subaction) {
-  case NinjaRope::ATTACH_ROPE: 
+  case NinjaRope::ATTACH_ROPE:
     {// attach rope
       Point2i contact_point = a->PopPoint2i();
       ninjarope->AttachRope(contact_point);
@@ -602,7 +602,7 @@ void ActionHandler::NewAction(Action* a, bool repeat_to_network)
 }
 
 void ActionHandler::NewActionActiveCharacter(Action* a)
-{  
+{
   assert(ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI());
   Action a_begin_sync(Action::ACTION_NETWORK_SYNC_BEGIN);
   Network::GetInstance()->SendAction(&a_begin_sync);
@@ -641,7 +641,10 @@ std::string ActionHandler::GetActionName (Action::Action_t action)
   return it->second;
 }
 
-ActionHandler::ActionHandler()
+ActionHandler::ActionHandler():
+  handler(),
+  action_name(),
+  queue()
 {
   mutex = SDL_CreateMutex();
   SDL_LockMutex(mutex);
@@ -658,14 +661,14 @@ ActionHandler::ActionHandler()
   Register (Action::ACTION_GAMELOOP_NEXT_TEAM, "GAMELOOP_change_team", &Action_GameLoop_NextTeam);
 
   // ########################################################
-  // To be sure that rules will be the same on each computer  
+  // To be sure that rules will be the same on each computer
   Register (Action::ACTION_RULES_ASK_VERSION, "RULES_ask_version", &Action_Rules_AskVersion);
   Register (Action::ACTION_RULES_SEND_VERSION, "RULES_send_version", &Action_Rules_SendVersion);
   Register (Action::ACTION_RULES_SET_GAME_MODE, "RULES_set_game_mode", &Action_Rules_SetGameMode);
 
   // ########################################################
   // Chat message
-  Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);  
+  Register (Action::ACTION_CHAT_MESSAGE, "chat_message", Action_ChatMessage);
 
   // Map selection in network menu
   Register (Action::ACTION_MENU_SET_MAP, "MENU_set_map", &Action_Menu_SetMap);
@@ -696,13 +699,13 @@ ActionHandler::ActionHandler()
   Register (Action::ACTION_WEAPON_SUPERTUX, "WEAPON_supertux", &Action_Weapon_Supertux);
   Register (Action::ACTION_WEAPON_CONSTRUCTION, "WEAPON_construction", &Action_Weapon_Construction);
   Register (Action::ACTION_WEAPON_NINJAROPE, "WEAPON_ninjarope", &Action_Weapon_Ninjarope);
- 
+
   // ########################################################
   Register (Action::ACTION_NETWORK_SYNC_BEGIN, "NETWORK_sync_begin", &Action_Network_SyncBegin);
   Register (Action::ACTION_NETWORK_SYNC_END, "NETWORK_sync_end", &Action_Network_SyncEnd);
   Register (Action::ACTION_NETWORK_PING, "NETWORK_ping", &Action_Network_Ping);
 
-  Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);  
+  Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
   Register (Action::ACTION_WIND, "wind", &Action_Wind);
   Register (Action::ACTION_NETWORK_SEND_RANDOM, "NETWORK_send_random", &Action_Network_SendRandom);
   Register (Action::ACTION_NETWORK_DISCONNECT, "NETWORK_disconnect", &Action_Network_Disconnect);

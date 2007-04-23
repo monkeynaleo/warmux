@@ -33,16 +33,27 @@
 #include "../particles/body_member.h"
 #include "../particles/teleport_member.h"
 
-Body::Body(xmlpp::Element* xml, Profile* res)
+Body::Body(xmlpp::Element* xml, Profile* res):
+  members_lst(),
+  clothes_lst(),
+  mvt_lst(),
+  current_clothe(NULL),
+  current_mvt(NULL),
+  play_once_mvt_sauv(NULL),
+  play_once_clothe_sauv(NULL),
+  play_once_frame_sauv(0),
+  weapon_member(new WeaponMember()),
+  weapon_pos(0,0),
+  last_refresh(0),
+  current_frame(0),
+  walk_events(0),
+  main_rotation_rad(0),
+  squel_lst(),
+  direction(DIRECTION_RIGHT),
+  animation_number(0),
+  need_rebuild(false),
+  owner(NULL)
 {
-  need_rebuild = true;
-  current_clothe = NULL;
-  current_mvt = NULL;
-  walk_events = 0;
-  animation_number = 0;
-  direction = DIRECTION_RIGHT;
-  main_rotation_rad = 0;
-
   // Load members
   xmlpp::Node::NodeList nodes = xml -> get_children("sprite");
   xmlpp::Node::NodeList::iterator it=nodes.begin();
@@ -62,8 +73,6 @@ Body::Body(xmlpp::Element* xml, Profile* res)
     it++;
   }
 
-  // Add a special weapon member to the body
-  weapon_member = new WeaponMember();
   members_lst["weapon"] = weapon_member;
 
   // Load clothes
@@ -129,23 +138,32 @@ Body::Body(xmlpp::Element* xml, Profile* res)
   }
 }
 
-Body::Body(Body *_body)
+Body::Body(const Body& _body):
+  clothes_lst(),
+  mvt_lst(),
+  current_clothe(NULL),
+  current_mvt(NULL),
+  play_once_mvt_sauv(NULL),
+  play_once_clothe_sauv(NULL),
+  play_once_frame_sauv(0),
+  weapon_member(new WeaponMember()),
+  weapon_pos(0,0),
+  last_refresh(0),
+  current_frame(0),
+  walk_events(0),
+  main_rotation_rad(0),
+  squel_lst(),
+  direction(DIRECTION_RIGHT),
+  animation_number(_body.animation_number),
+  need_rebuild(true),
+  owner(NULL)
 {
-  need_rebuild = true;
-  current_clothe = NULL;
-  current_mvt = NULL;
-  walk_events = 0;
-  animation_number = _body->animation_number;
-  direction = DIRECTION_RIGHT;
-  main_rotation_rad = 0;
-
   // Add a special weapon member to the body
-  weapon_member = new WeaponMember();
   members_lst["weapon"] = weapon_member;
 
   // Make a copy of members
-  std::map<std::string, Member*>::iterator it1 = _body->members_lst.begin();
-  while(it1 != _body->members_lst.end())
+  std::map<std::string, Member*>::const_iterator it1 = _body.members_lst.begin();
+  while(it1 != _body.members_lst.end())
   if(it1->second->name != "weapon")
   {
     std::pair<std::string,Member*> p;
@@ -158,8 +176,8 @@ Body::Body(Body *_body)
     it1++;
 
   // Make a copy of clothes
-  std::map<std::string, Clothe*>::iterator it2 = _body->clothes_lst.begin();
-  while(it2 != _body->clothes_lst.end())
+  std::map<std::string, Clothe*>::const_iterator it2 = _body.clothes_lst.begin();
+  while(it2 != _body.clothes_lst.end())
   {
     std::pair<std::string,Clothe*> p;
     p.first = it2->first;
@@ -169,8 +187,8 @@ Body::Body(Body *_body)
   }
 
   // Movement are shared
-  std::map<std::string, Movement*>::iterator it3 = _body->mvt_lst.begin();
-  while(it3 != _body->mvt_lst.end())
+  std::map<std::string, Movement*>::const_iterator it3 = _body.mvt_lst.begin();
+  while(it3 != _body.mvt_lst.end())
   {
     std::pair<std::string,Movement*> p;
     p.first = it3->first;
