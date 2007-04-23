@@ -27,11 +27,21 @@
 #include "../tool/xml_document.h"
 #include "../tool/string_tools.h"
 
-Member::Member(xmlpp::Element *xml, Profile* res)
+Member::Member(xmlpp::Element *xml, Profile* res):
+  parent(NULL),
+  angle_rad(0),
+  anchor(0,0),
+  spr(NULL),
+  name(""),
+  attached_members(),
+  pos(0,0),
+  scale(0,0),
+  alpha(0),
+  type(""),
+  go_through_ground(false)
 {
-  parent = NULL;
-  if(xml == NULL) return;
-  name="";
+  if(xml == NULL)
+    return;
   XmlReader::ReadStringAttr( xml, "name", name);
   assert(name!="");
 
@@ -42,7 +52,6 @@ Member::Member(xmlpp::Element *xml, Profile* res)
   spr->cache.EnableLastFrameCache();
 
   // Get the various option
-  type="";
   XmlReader::ReadStringAttr( xml, "type", type);
   assert(type!="");
 
@@ -57,7 +66,6 @@ Member::Member(xmlpp::Element *xml, Profile* res)
     spr->SetRotation_HotSpot(Point2i(dx,dy));
   }
 
-  go_through_ground = false;
   XmlReader::ReadBoolAttr(xml, "go_through_ground", go_through_ground);
 
   xmlpp::Node::NodeList nodes = xml -> get_children("attached");
@@ -110,19 +118,24 @@ Member::Member(xmlpp::Element *xml, Profile* res)
   ResetMovement();
 }
 
-Member::Member(Member* m)
+Member::Member(const Member& m):
+  parent(NULL),
+  angle_rad(m.angle_rad),
+  anchor(m.anchor),
+  spr(new Sprite(*m.spr)),
+  name(m.name),
+  attached_members(),
+  pos(m.pos),
+  scale(m.scale),
+  alpha(m.alpha),
+  type(m.type),
+  go_through_ground(m.go_through_ground)
 {
-  parent = NULL;
-  name = m->name;
-  spr = new Sprite(*m->spr);
-  type = m->type;
-  anchor = m->anchor;
   Point2i rot = Point2i((int)anchor.x, (int)anchor.y);
   spr->SetRotation_HotSpot(rot);
-  go_through_ground = m->go_through_ground;
 
-  for(std::map<std::string, v_attached>::iterator it = m->attached_members.begin();
-      it != m->attached_members.end();
+  for (std::map<std::string, v_attached>::const_iterator it = m.attached_members.begin();
+      it != m.attached_members.end();
       ++it)
   {
     attached_members[it->first] = it->second;

@@ -36,7 +36,6 @@ class c_junction; //defined in body.h
 class Member
 {
   /* If you need this, implement it (correctly) */
-  Member(const Member&);
   Member operator=(const Member&);
   /**********************************************/
 
@@ -59,7 +58,7 @@ public:
 
   virtual ~Member();
   Member(xmlpp::Element *xml, Profile* res);
-  Member(Member* m);
+  Member(const Member& m);
   virtual void Draw(const Point2i & _pos, int flip_x, int direction);
   void RotateSprite();
   void ResetMovement();
