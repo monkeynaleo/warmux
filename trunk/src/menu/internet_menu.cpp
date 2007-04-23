@@ -89,7 +89,7 @@ void InternetMenu::OnClickUp(const Point2i &mousePosition, int button)
     if ( Network::IsConnected() && conn == Network::CONNECTED )
     {
       close_menu = true;
-      sig_ok();
+      Menu::mouse_ok();
     }
     else
     {
@@ -132,10 +132,12 @@ void InternetMenu::Draw(const Point2i &mousePosition)
   index_server.Refresh();
 }
 
-void InternetMenu::__sig_ok()
+bool InternetMenu::signal_ok()
 {
+  return true;
 }
 
-void InternetMenu::__sig_cancel()
+bool InternetMenu::signal_cancel()
 {
+  return true;
 }

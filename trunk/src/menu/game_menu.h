@@ -52,8 +52,8 @@ class GameMenu : public Menu
    void OnClickUp(const Point2i &mousePosition, int button);
    void Draw(const Point2i &mousePosition);
 
-   void __sig_ok();
-   void __sig_cancel();
+   bool signal_ok();
+   bool signal_cancel();
 
 public:
    GameMenu();

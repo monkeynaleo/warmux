@@ -200,28 +200,56 @@ void NetworkMenu::SaveOptions()
 //  Config::GetInstance()->Save();
 }
 
-void NetworkMenu::__sig_ok()
+bool NetworkMenu::signal_ok()
 {
-  if(Network::GetInstance()->IsClient())
+  if (Network::GetInstance()->IsClient())
   {
     // Wait for the server, and stay in the menu map / team can still be changed
     WaitingForServer();
+
+  } 
+  else if (Network::GetInstance()->IsServer())
+  {
+    if (teams_list.playing_list.size() <= 1)
+    {
+      msg_box->NewMessage(Format(ngettext("There is only %i team.",
+					  "There are only %i teams.",
+					  teams_list.playing_list.size()),
+				 teams_list.playing_list.size()), c_red);
+      return false;
+    }
+    if (Network::GetInstanceServer()->GetNbConnectedPlayers() <= 1)
+    {
+      msg_box->NewMessage(_("You are alone..."), c_red);
+      return false;
+    }
+    if (Network::GetInstanceServer()->GetNbConnectedPlayers() != Network::GetInstanceServer()->GetNbInitializedPlayers())
+    {
+      int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers() - Network::GetInstanceServer()->GetNbInitializedPlayers();
+      std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
+      msg_box->NewMessage(pl, c_red);
+      return false;
+    }
   }
 
   // Disconnection :-/
   if (!Network::IsConnected()) {
-    close_menu = true;
     Network::GetInstance()->network_menu = NULL;
-    return;
+    return true;
+
+  } else {
+
+    // Starting the game :-)
+    SaveOptions();
+    Game::GetInstance()->Start();
+    Network::GetInstance()->network_menu = NULL;
   }
 
-  // Starting the game :-)
-  SaveOptions();
-  Game::GetInstance()->Start();
-  Network::GetInstance()->network_menu = NULL;
+  Network::Disconnect();
+  return true;
 }
 
-void NetworkMenu::sig_ok()
+void NetworkMenu::key_ok()
 {
   // return was pressed while chat texbox still had focus (player wants to send his msg)
   if (line_to_send_tbox->have_focus)
@@ -230,35 +258,13 @@ void NetworkMenu::sig_ok()
     return;
   }
 
-  if (Network::GetInstance()->IsServer())
-  {
-    if (teams_list.playing_list.size() <= 1)
-    {
-      msg_box->NewMessage(Format(ngettext("There is only %i team.",
-					  "There are only %i teams.",
-					  teams_list.playing_list.size()),
-				 teams_list.playing_list.size()), c_red);
-      return;
-    }
-    if (Network::GetInstanceServer()->GetNbConnectedPlayers() <= 1)
-    {
-      msg_box->NewMessage(_("You are alone..."), c_red);
-      return;
-    }
-    if (Network::GetInstanceServer()->GetNbConnectedPlayers() != Network::GetInstanceServer()->GetNbInitializedPlayers())
-    {
-      int nbr = Network::GetInstanceServer()->GetNbConnectedPlayers() - Network::GetInstanceServer()->GetNbInitializedPlayers();
-      std::string pl = Format(ngettext("Wait! %i player is not ready yet!", "Wait! %i players are not ready yet!", nbr), nbr);
-      msg_box->NewMessage(pl, c_red);
-      return;
-    }
-  }
-  Menu::sig_ok();
+  Menu::key_ok();
 }
 
-void NetworkMenu::__sig_cancel()
+bool NetworkMenu::signal_cancel()
 {
   Network::Disconnect();
+  return true;
 }
 
 void NetworkMenu::Draw(const Point2i &mousePosition)
@@ -356,12 +362,12 @@ void NetworkMenu::WaitingForServer()
       Point2i mousePosition(event.button.x, event.button.y);
 	   
       if (event.type == SDL_QUIT) {
-	Menu::sig_cancel();
+	Menu::mouse_cancel();
       } else if (event.type == SDL_KEYDOWN) {
         switch (event.key.keysym.sym)
 	  {
 	  case SDLK_ESCAPE:
-	    Menu::sig_cancel();
+	    Menu::mouse_cancel();
 	    break;
 	  case SDLK_RETURN:
 	    SendChatMsg();
@@ -375,7 +381,7 @@ void NetworkMenu::WaitingForServer()
 	  }
       } else if (event.type == SDL_MOUSEBUTTONUP) {
 	if (b_cancel->Contains(mousePosition))
-	  Menu::sig_cancel();
+	  Menu::mouse_cancel();
 	
 	if (send_txt_bt->Contains(mousePosition))
 	  SendChatMsg();

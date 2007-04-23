@@ -39,8 +39,8 @@ class InternetMenu : public Menu
    void Draw(const Point2i &mousePosition);
    void RefreshList();
 
-   void __sig_ok();
-   void __sig_cancel();
+   bool signal_ok();
+   bool signal_cancel();
 
 public:
    InternetMenu(); 

@@ -154,15 +154,16 @@ void GameMenu::SaveOptions()
 
 }
 
-void GameMenu::__sig_ok()
+bool GameMenu::signal_ok()
 {
   SaveOptions();
   Game::GetInstance()->Start();
+  return true;
 }
 
-void GameMenu::__sig_cancel()
+bool GameMenu::signal_cancel()
 {
-  // Nothing to do
+  return true;
 }
 
 void GameMenu::Draw(const Point2i &mousePosition)

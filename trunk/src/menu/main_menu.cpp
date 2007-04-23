@@ -188,26 +188,16 @@ menu_item Main_Menu::Run ()
   return choice;
 }
 
-void Main_Menu::key_ok()
-{
-  choice = menuPLAY;
-  close_menu = true;
-}
-
-void Main_Menu::key_cancel()
+bool Main_Menu::signal_cancel()
 {
   choice = menuQUIT;
-  close_menu = true;
+  return true;
 }
 
-void Main_Menu::__sig_cancel()
+bool Main_Menu::signal_ok()
 {
-  key_cancel();
-}
-
-void Main_Menu::__sig_ok()
-{
-  key_ok();
+  choice = menuPLAY;
+  return true;
 }
 
 void Main_Menu::DrawBackground()
