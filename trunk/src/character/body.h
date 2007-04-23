@@ -51,8 +51,7 @@ typedef class c_junction junction;
 class Body
 {
   /* If you need this, implement it (correctly) */
-  Body(const Body&);
-  Body operator=(const Body&);
+  const Body& operator=(const Body&);
   /**********************************************/
 
 public:
@@ -105,7 +104,7 @@ private:
 public:
 
   Body(xmlpp::Element *xml, Profile* res);
-  Body(Body *_body);
+  Body(const Body&);
   ~Body();
 
   Point2i GetSize() {return Point2i(30,45);};

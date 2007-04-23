@@ -185,7 +185,7 @@ Character::Character (const Character& acharacter) :
   body(NULL)
 {
   if (acharacter.body)
-    SetBody(new Body(acharacter.body));
+    SetBody(new Body(*acharacter.body));
   if(acharacter.name_text)
     name_text = new Text(*acharacter.name_text);
 }

@@ -60,7 +60,31 @@ Config * Config::GetInstance() {
   return singleton;
 }
 
-Config::Config()
+Config::Config():
+  m_game_mode("classic"),
+  m_xml_loaded(),
+  m_filename(),
+  data_dir(),
+  locale_dir(),
+  personal_dir(),
+  teams(),
+  map_name(),
+  display_energy_character(true),
+  display_name_character(true),
+  display_wind_particles(true),
+  default_mouse_cursor(false),
+  scroll_on_border(true),
+  video_width(800),
+  video_height(600),
+  video_fullscreen(false),
+  max_fps(0),
+  sound_music(true),
+  sound_effects(true),
+  sound_frequency(44100),
+  enable_network(true),
+  ttf_filename(),
+  transparency(ALPHA),
+  config_set()
 {
 
 #ifdef USE_AUTOPACKAGE
@@ -73,27 +97,6 @@ Config::Config()
     std::cout << "Will fallback to hardcoded default path." << std::endl;
   }
 #endif
-
-  // Default values
-  m_game_mode = "classic";
-  display_energy_character = true;
-  display_name_character = true;
-  display_wind_particles = true;
-  default_mouse_cursor = false;
-  scroll_on_border = true;
-  transparency = ALPHA;
-
-  // Video settings
-  video_width = 800;
-  video_height = 600;
-  video_fullscreen = false;
-  // Sound settings
-  sound_music = true;
-  sound_effects = true;
-  sound_frequency = 44100;
-  // network
-  enable_network = true;
-
   Constants::GetInstance();
 
   // directories

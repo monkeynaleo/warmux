@@ -86,5 +86,5 @@ Body* BodyList::GetBody(const std::string &name)
     std::cerr << "Unable to load body \"" << name << "\"" << std::endl;
     return NULL;
   }
-  return new Body(list[name]);
+  return new Body(*list[name]);
 }
