@@ -40,25 +40,24 @@ const double AIR_RESISTANCE_FACTOR = 40.0 ;
 const double PHYS_DELTA_T = 0.02 ;         // Physical simulation time step
 const double PENDULUM_REBOUND_FACTOR = 0.8 ;
 
-Physics::Physics ()
+Physics::Physics ():
+  m_motion_type(NoMotion),
+  m_pos_x(),
+  m_pos_y(),
+  m_extern_force(),
+  m_last_move(Time::GetInstance()->Read()),
+  m_phys_width(),
+  m_phys_height(),
+  m_fix_point_gnd(),
+  m_fix_point_dxy(),
+  m_rope_angle(),
+  m_rope_length(),
+  m_rope_elasticity(10.0),
+  m_elasticity_damping(0.20),
+  m_balancing_damping(0.40),
+  m_elasticity_off(true),
+  m_cfg()
 {
-  m_extern_force.Clear();
-  m_pos_x.Clear();
-  m_pos_y.Clear();
-
-  m_fix_point_gnd.Clear();
-  m_fix_point_dxy.Clear();
-  m_rope_angle.Clear();
-  m_rope_length.Clear();
-
-  m_rope_elasticity = 10.0 ;
-  m_elasticity_damping = 0.20 ;
-  m_balancing_damping = 0.40 ;
-
-  m_motion_type = NoMotion ;
-  m_elasticity_off = true;
-
-  m_last_move = Time::GetInstance()->Read() ;
 }
 
 void Physics::ResetConstants()
