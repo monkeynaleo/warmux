@@ -58,10 +58,10 @@ private:
 public:
   static GameLoop * GetInstance();
 
-  void Init();
-
   bool character_already_chosen;
   Chat chatsession;
+
+  void Init();
 
   // Draw to screen
   void Draw();
@@ -83,16 +83,6 @@ public:
   ObjBox * GetCurrentBox() const;
 
 private:
-
-  // Initialization
-  void InitGameData_NetServer();
-  void InitGameData_NetClient();
-  void InitGameData_Local();
-
-  void InitMap();
-  void InitTeams();
-  void InitSounds();
-  void InitData();
 
   // Refresh all objects (position, state ...)
   void RefreshObject();

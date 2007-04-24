@@ -19,7 +19,7 @@ msgstr ""
 "X-Poedit-Language: Bulgarian\n"
 "X-Poedit-Country: BULGARIA\n"
 
-#: src/map/maps_list.cpp:289
+#: src/map/maps_list.cpp:294
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Не мога да намеря картата %s =("
@@ -38,7 +38,7 @@ msgid_plural "%i players ready"
 msgstr[0] "%i Spieler bereit"
 msgstr[1] "%i Spieler bereit"
 
-#: src/game/game_loop.cpp:735
+#: src/game/game_loop.cpp:738
 #, c-format
 msgid "%s (%s) has died."
 msgstr "%s от %s си го отнесе..."
@@ -53,7 +53,7 @@ msgstr "%s <%s> познат и като %s от %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> от %s"
 
-#: src/game/game_loop.cpp:714
+#: src/game/game_loop.cpp:717
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s направи жестока жертва!"
@@ -63,12 +63,12 @@ msgstr "%s направи жестока жертва!"
 msgid "%s fps"
 msgstr "%s fps"
 
-#: src/game/game_loop.cpp:707
+#: src/game/game_loop.cpp:710
 #, c-format
 msgid "%s has fallen in water."
 msgstr "Добър ден за плуване а, %s ?"
 
-#: src/game/game_loop.cpp:718
+#: src/game/game_loop.cpp:721
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s умело уцели въздуха."
@@ -80,12 +80,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s hat %u Lebenspunkt gewonnen!"
 msgstr[1] "%s hat %u Lebenspunkte gewonnen!"
 
-#: src/game/game_loop.cpp:729
+#: src/game/game_loop.cpp:732
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s е опасен, избива хора от отбора на %s!!!"
 
-#: src/game/game_loop.cpp:724
+#: src/game/game_loop.cpp:727
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s проявява сапьорска предпазливост..."
@@ -101,7 +101,7 @@ msgid "%s team already has infinite ammo for the %s!"
 msgstr "Ехее, %s вече си имат безкрайни муниции за %s!"
 
 #. Show message
-#: src/weapon/skip_turn.cpp:41
+#: src/weapon/skip_turn.cpp:42
 #, c-format
 msgid "%s team has skipped its turn."
 msgstr "Отборът на %s галантно отстъпва ход..."
@@ -148,7 +148,7 @@ msgstr "Alle Mannschaften"
 msgid "Anvil"
 msgstr "Наковалня"
 
-#: src/main.cpp:222
+#: src/main.cpp:218
 msgid "Authors:"
 msgstr "Автори:"
 
@@ -180,13 +180,13 @@ msgstr "Супер-топче"
 msgid "Bye bye tux..."
 msgstr "Tux e свободен!!!"
 
-#: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
-#: src/team/teams_list.cpp:518
+#: src/team/teams_list.cpp:472 src/team/teams_list.cpp:494
+#: src/team/teams_list.cpp:541
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Не мога да намеря отборът на %s!"
 
-#: src/team/teams_list.cpp:117 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:139 src/team/teams_list.cpp:154
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "Не мога да отворя директорията на отбора (%s)!"
@@ -246,7 +246,7 @@ msgstr "Продължение на хода"
 msgid "Dynamite"
 msgstr "Шашка динамит"
 
-#: src/game/game_loop.cpp:272 src/game/game_loop.cpp:278
+#: src/game/game_loop.cpp:275 src/game/game_loop.cpp:281
 msgid "END OF GAME"
 msgstr ""
 
@@ -255,17 +255,17 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Грешка в %s:%lu"
 
-#: src/team/team.cpp:100
-#, c-format
-msgid "Error loading team %s:"
+#: src/team/teams_list.cpp:107 src/team/teams_list.cpp:115
+#, fuzzy
+msgid "Error loading team :"
 msgstr "Грешка при зареждането на отбора %s:"
 
-#: src/team/team.cpp:180
+#: src/team/team.cpp:151
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr "Проблем при зареждането на данните за %s:"
 
-#: src/game/config.cpp:230
+#: src/game/config.cpp:250
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
@@ -273,12 +273,12 @@ msgstr ""
 "Не мога да създам директорията \"%s\"! не мога да съхраня конфигурационните "
 "файлове!"
 
-#: src/game/config.cpp:143
+#: src/game/config.cpp:166
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Проблем при зареждането на конфигурацията: %s"
 
-#: src/game/game_mode.cpp:225
+#: src/game/game_mode.cpp:229
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Грешла при зареждането на режима %s (файл %s):"
@@ -313,7 +313,7 @@ msgstr "Kann Indexserver nicht kontaktieren!"
 msgid "Error: Unable to start server"
 msgstr "Kann Server nicht starten"
 
-#: src/team/team.cpp:143
+#: src/team/team.cpp:114
 #, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Не мога да намеря телата на \"%s\" отбора \"%s\" !"
@@ -361,11 +361,11 @@ msgstr "Hauptkommandant"
 msgid "Host a game"
 msgstr "Spiel hosten"
 
-#: src/game/game_loop.cpp:771
+#: src/game/game_loop.cpp:774
 msgid "Hurry up, you are too slow !!"
 msgstr "Хабиш време за убиване за други неща!!!"
 
-#: src/main.cpp:214
+#: src/main.cpp:210
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -377,21 +377,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Начално здраве"
 
-#: src/game/game_loop.cpp:208
+#: src/game/game_loop.cpp:212
 msgid "Initialisation"
 msgstr "Инициализация..."
 
-#: src/game/game_loop.cpp:163
+#: src/game/game_loop.cpp:167
 #, fuzzy
 msgid "Initialise map"
 msgstr "Инициализирам основни данни..."
 
-#: src/game/game_loop.cpp:195
+#: src/game/game_loop.cpp:199
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Инициализирам обектите..."
 
-#: src/game/game_loop.cpp:174
+#: src/game/game_loop.cpp:178
 msgid "Initialise teams"
 msgstr "Инициализирам отборите..."
 
@@ -413,7 +413,7 @@ msgstr "Komm nach #wormux auf irc.freenode.net"
 msgid "Load maps:"
 msgstr "Карти които да заредя:"
 
-#: src/team/teams_list.cpp:106
+#: src/team/teams_list.cpp:128
 msgid "Load teams:"
 msgstr "Отбори които да заредя:"
 
@@ -432,7 +432,7 @@ msgstr "Ниска гравитация"
 msgid "Map %s, a creation of: "
 msgstr "Картата %s е творение на: "
 
-#: src/game/game_loop.cpp:165
+#: src/game/game_loop.cpp:169
 msgid "Maps"
 msgstr "Карти"
 
@@ -482,7 +482,7 @@ msgstr "Инициализирам терена..."
 msgid "Ninjarope"
 msgstr "Кьокетсу шоге"
 
-#: src/weapon/weapon.cpp:599
+#: src/weapon/weapon.cpp:601
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Няма такъв елемент в XML-конфигурационния фаил! <%s>"
@@ -509,7 +509,7 @@ msgstr "Настройки"
 msgid "Parachute"
 msgstr "Парашут"
 
-#: src/weapon/parachute.cpp:58
+#: src/weapon/parachute.cpp:59
 msgid "Parachute is activated automatically."
 msgstr "Парашутът се активира автоматично при падане!"
 
@@ -543,11 +543,11 @@ msgstr ""
 msgid "Quit"
 msgstr "Вън!"
 
-#: src/main.cpp:202
+#: src/main.cpp:198
 msgid "Quit Wormux"
 msgstr "Излизане от Wormux"
 
-#: src/game/config.cpp:153
+#: src/game/config.cpp:176
 msgid "Reading personal config file"
 msgstr "Чета персоналния конфигурационен фаил"
 
@@ -568,11 +568,11 @@ msgstr "Разделителна способност"
 msgid "Riot Bomb"
 msgstr "Звуков заряд"
 
-#: src/main.cpp:247
+#: src/main.cpp:243
 msgid "Run game"
 msgstr "Пусни играта"
 
-#: src/network/chat.cpp:74
+#: src/network/chat.cpp:72
 msgid "Say: "
 msgstr ""
 
@@ -624,7 +624,7 @@ msgid "Sound frequency"
 msgstr "Честота на семплиране"
 
 #. Load teams' sound profiles
-#: src/game/game_loop.cpp:198
+#: src/game/game_loop.cpp:202
 msgid "Sounds"
 msgstr "Звуци"
 
@@ -648,7 +648,7 @@ msgstr "Супер-Tux!"
 msgid "Syringe"
 msgstr "Отрова"
 
-#: src/game/game_loop.cpp:176
+#: src/game/game_loop.cpp:180
 msgid "Teams"
 msgstr "Отбори"
 
@@ -704,7 +704,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/interface/weapon_menu.cpp:142
+#: src/interface/weapon_menu.cpp:164
 msgid "Tools"
 msgstr ""
 
@@ -713,7 +713,7 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr "Kann Server nicht kontaktieren!"
 
-#: src/map/maps_list.cpp:210 src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:209 src/map/maps_list.cpp:225
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Не мога да отворя директорията за карти! (%s)"
@@ -723,7 +723,7 @@ msgstr "Не мога да отворя директорията за карти
 msgid "Unable to use this port!"
 msgstr "Kann Server nicht starten!"
 
-#: src/main.cpp:165
+#: src/main.cpp:161
 msgid "Version"
 msgstr "версия"
 
@@ -747,17 +747,21 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] "Warte! %i Spieler ist noch nicht bereit!"
 msgstr[1] "Warte! %i Spieler sind noch nicht bereit!"
 
+#: src/menu/network_menu.cpp:343
+msgid "Waiting for server, all you can do is cancel or chat!"
+msgstr ""
+
 #. Adding label
 #. Initialization of teams' energy
-#: src/interface/weapon_menu.cpp:140 src/game/game_loop.cpp:187
+#: src/interface/weapon_menu.cpp:162 src/game/game_loop.cpp:191
 msgid "Weapons"
 msgstr "Оръжия"
 
-#: src/main.cpp:231
+#: src/main.cpp:227
 msgid "Website: "
 msgstr "Страница: "
 
-#: src/game/game_loop.cpp:732
+#: src/game/game_loop.cpp:735
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr ""
@@ -767,11 +771,11 @@ msgstr ""
 msgid "Wind particles?"
 msgstr "Красотички носени от вятъра?"
 
-#: src/main.cpp:178
+#: src/main.cpp:174
 msgid "Wormux launching..."
 msgstr "Wormux се зарежда..."
 
-#: src/main.cpp:221
+#: src/main.cpp:217
 msgid "Wormux version "
 msgstr "Версия на Wormux"
 
@@ -784,11 +788,11 @@ msgstr "XML грешка при зареждане на картата '%s ':"
 msgid "You are alone..."
 msgstr ""
 
-#: src/map/maps_list.cpp:246
+#: src/map/maps_list.cpp:245
 msgid "You need at least one valid map !"
 msgstr "Трябва ми поне една валидна карта!"
 
-#: src/team/teams_list.cpp:152 src/game/game_loop.cpp:180
+#: src/team/teams_list.cpp:174 src/game/game_loop.cpp:184
 msgid "You need at least two valid teams !"
 msgstr "Трябват ми поне два валидни отбора!"
 

@@ -18,7 +18,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:289
+#: src/map/maps_list.cpp:294
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapa %s no trobat :-("
@@ -37,7 +37,7 @@ msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game_loop.cpp:735
+#: src/game/game_loop.cpp:738
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (L'equip %s ) ha mort."
@@ -52,7 +52,7 @@ msgstr "%s <%s> aka %s de %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> de %s"
 
-#: src/game/game_loop.cpp:714
+#: src/game/game_loop.cpp:717
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s es suicida!"
@@ -62,12 +62,12 @@ msgstr "%s es suicida!"
 msgid "%s fps"
 msgstr ""
 
-#: src/game/game_loop.cpp:707
+#: src/game/game_loop.cpp:710
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s ha caigut del mapa."
 
-#: src/game/game_loop.cpp:718
+#: src/game/game_loop.cpp:721
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s ha caigut del mapa!"
@@ -79,12 +79,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "El jugador '%s' ha augmentat %u punt de vida!"
 msgstr[1] "El jugador '%s' ha augmentat %u punts de vida!"
 
-#: src/game/game_loop.cpp:729
+#: src/game/game_loop.cpp:732
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s es un psicopata!!, ha mort un company del seu equip : %s!"
 
-#: src/game/game_loop.cpp:724
+#: src/game/game_loop.cpp:727
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s ha mort per ser un maldestre!"
@@ -100,7 +100,7 @@ msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
 
 #. Show message
-#: src/weapon/skip_turn.cpp:41
+#: src/weapon/skip_turn.cpp:42
 #, fuzzy, c-format
 msgid "%s team has skipped its turn."
 msgstr "%s (L'equip %s ) ha mort."
@@ -149,7 +149,7 @@ msgstr "Carrega les mapas"
 msgid "Anvil"
 msgstr ""
 
-#: src/main.cpp:222
+#: src/main.cpp:218
 msgid "Authors:"
 msgstr "Autors:"
 
@@ -183,13 +183,13 @@ msgstr ""
 msgid "Bye bye tux..."
 msgstr ""
 
-#: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
-#: src/team/teams_list.cpp:518
+#: src/team/teams_list.cpp:472 src/team/teams_list.cpp:494
+#: src/team/teams_list.cpp:541
 #, c-format
 msgid "Can't find team %s!"
 msgstr ""
 
-#: src/team/teams_list.cpp:117 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:139 src/team/teams_list.cpp:154
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr "No es pot obrir el directori d'equips (%s)!"
@@ -256,7 +256,7 @@ msgstr "Duració del torn:"
 msgid "Dynamite"
 msgstr "Dinamita"
 
-#: src/game/game_loop.cpp:272 src/game/game_loop.cpp:278
+#: src/game/game_loop.cpp:275 src/game/game_loop.cpp:281
 msgid "END OF GAME"
 msgstr ""
 
@@ -265,28 +265,28 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Error en %s:%lu"
 
-#: src/team/team.cpp:100
-#, c-format
-msgid "Error loading team %s:"
+#: src/team/teams_list.cpp:107 src/team/teams_list.cpp:115
+#, fuzzy
+msgid "Error loading team :"
 msgstr "Error carregant l'equip %s :"
 
-#: src/team/team.cpp:180
+#: src/team/team.cpp:151
 #, c-format
 msgid "Error loading team's data %s:"
 msgstr ""
 
-#: src/game/config.cpp:230
+#: src/game/config.cpp:250
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr ""
 
-#: src/game/config.cpp:143
+#: src/game/config.cpp:166
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr ""
 
-#: src/game/game_mode.cpp:225
+#: src/game/game_mode.cpp:229
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr ""
@@ -321,7 +321,7 @@ msgstr "Imposible obrir el directori dels mapas (%s) !"
 msgid "Error: Unable to start server"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
-#: src/team/team.cpp:143
+#: src/team/team.cpp:114
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr "Error: no es pot trobar el skin \"%s\" per l'equip \"%s\"."
@@ -369,11 +369,11 @@ msgstr ""
 msgid "Host a game"
 msgstr "Final de la partida"
 
-#: src/game/game_loop.cpp:771
+#: src/game/game_loop.cpp:774
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:214
+#: src/main.cpp:210
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -384,21 +384,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Energia inicial:"
 
-#: src/game/game_loop.cpp:208
+#: src/game/game_loop.cpp:212
 msgid "Initialisation"
 msgstr "Inicialització"
 
-#: src/game/game_loop.cpp:163
+#: src/game/game_loop.cpp:167
 #, fuzzy
 msgid "Initialise map"
 msgstr "Inicialització de les dades"
 
-#: src/game/game_loop.cpp:195
+#: src/game/game_loop.cpp:199
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Inicialització de les dades"
 
-#: src/game/game_loop.cpp:174
+#: src/game/game_loop.cpp:178
 msgid "Initialise teams"
 msgstr "Inicialització de les dades"
 
@@ -419,7 +419,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Carrega les mapas"
 
-#: src/team/teams_list.cpp:106
+#: src/team/teams_list.cpp:128
 msgid "Load teams:"
 msgstr ""
 
@@ -438,7 +438,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Mapa %s, fet per :"
 
-#: src/game/game_loop.cpp:165
+#: src/game/game_loop.cpp:169
 msgid "Maps"
 msgstr ""
 
@@ -488,7 +488,7 @@ msgstr "Inicialització..."
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:599
+#: src/weapon/weapon.cpp:601
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Cap element <%s> trobat en el arxiu de configuració xml !"
@@ -517,7 +517,7 @@ msgstr "Opcions"
 msgid "Parachute"
 msgstr ""
 
-#: src/weapon/parachute.cpp:58
+#: src/weapon/parachute.cpp:59
 msgid "Parachute is activated automatically."
 msgstr ""
 
@@ -554,11 +554,11 @@ msgstr ""
 msgid "Quit"
 msgstr "Sortir"
 
-#: src/main.cpp:202
+#: src/main.cpp:198
 msgid "Quit Wormux"
 msgstr ""
 
-#: src/game/config.cpp:153
+#: src/game/config.cpp:176
 msgid "Reading personal config file"
 msgstr ""
 
@@ -579,11 +579,11 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/main.cpp:247
+#: src/main.cpp:243
 msgid "Run game"
 msgstr "Arrenca el joc"
 
-#: src/network/chat.cpp:74
+#: src/network/chat.cpp:72
 msgid "Say: "
 msgstr ""
 
@@ -636,7 +636,7 @@ msgid "Sound frequency"
 msgstr "Efectes sonors?"
 
 #. Load teams' sound profiles
-#: src/game/game_loop.cpp:198
+#: src/game/game_loop.cpp:202
 #, fuzzy
 msgid "Sounds"
 msgstr "Efectes sonors?"
@@ -661,7 +661,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_loop.cpp:176
+#: src/game/game_loop.cpp:180
 msgid "Teams"
 msgstr ""
 
@@ -723,7 +723,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/interface/weapon_menu.cpp:142
+#: src/interface/weapon_menu.cpp:164
 msgid "Tools"
 msgstr ""
 
@@ -732,7 +732,7 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
-#: src/map/maps_list.cpp:210 src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:209 src/map/maps_list.cpp:225
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
@@ -742,7 +742,7 @@ msgstr "Imposible obrir el directori dels mapas (%s) !"
 msgid "Unable to use this port!"
 msgstr "Imposible obrir el directori dels mapas (%s) !"
 
-#: src/main.cpp:165
+#: src/main.cpp:161
 msgid "Version"
 msgstr "Versió"
 
@@ -765,18 +765,22 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 msgstr[1] ""
 
+#: src/menu/network_menu.cpp:343
+msgid "Waiting for server, all you can do is cancel or chat!"
+msgstr ""
+
 #. Adding label
 #. Initialization of teams' energy
-#: src/interface/weapon_menu.cpp:140 src/game/game_loop.cpp:187
+#: src/interface/weapon_menu.cpp:162 src/game/game_loop.cpp:191
 #, fuzzy
 msgid "Weapons"
 msgstr "Arma :"
 
-#: src/main.cpp:231
+#: src/main.cpp:227
 msgid "Website: "
 msgstr "Lloc web: "
 
-#: src/game/game_loop.cpp:732
+#: src/game/game_loop.cpp:735
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Quina vergonya per %s : ha estat mort per una simple pistola!"
@@ -785,11 +789,11 @@ msgstr "Quina vergonya per %s : ha estat mort per una simple pistola!"
 msgid "Wind particles?"
 msgstr ""
 
-#: src/main.cpp:178
+#: src/main.cpp:174
 msgid "Wormux launching..."
 msgstr "Arrencant Wormux..."
 
-#: src/main.cpp:221
+#: src/main.cpp:217
 msgid "Wormux version "
 msgstr "Versió Wormux"
 
@@ -802,11 +806,11 @@ msgstr "Error XML durant la carrega del mapa '%s' :"
 msgid "You are alone..."
 msgstr ""
 
-#: src/map/maps_list.cpp:246
+#: src/map/maps_list.cpp:245
 msgid "You need at least one valid map !"
 msgstr "Tu necesites almenys un mapa vàlid!"
 
-#: src/team/teams_list.cpp:152 src/game/game_loop.cpp:180
+#: src/team/teams_list.cpp:174 src/game/game_loop.cpp:184
 msgid "You need at least two valid teams !"
 msgstr "Tu necesites almenys dos equips vàlids!"
 
