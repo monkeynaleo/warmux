@@ -80,173 +80,11 @@ GameLoop::GameLoop():
   chatsession()
 { }
 
-// ####################################################################
-// ####################################################################
-
-void GameLoop::InitGameData_NetServer()
-{
-  Network::GetInstanceServer()->RejectIncoming();
-
-  randomSync.Init();
-
-  SendGameMode();
-
-  Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
-  Network::GetInstance()->SendAction ( &a_change_state );
-  Network::GetInstance()->state = Network::NETWORK_INIT_GAME;
-
-  GameMode::GetInstance()->Load();
-
-  // Load maps
-  InitMap();
-
-  // Load teams
-  InitTeams();
-
-  // Tells all clients that the server is ready to play
-  Network::GetInstance()->SendAction ( &a_change_state );
-
-  // Wait for all clients to be ready to play
-  while (Network::GetInstance()->state != Network::NETWORK_READY_TO_PLAY)
-  {
-    ActionHandler::GetInstance()->ExecActions();
-    SDL_Delay(200);
-  }
-  Network::GetInstance()->SendAction ( &a_change_state );
-  Network::GetInstance()->state = Network::NETWORK_PLAYING;
-}
-
-void GameLoop::InitGameData_NetClient()
-{
-  //GameMode::GetInstance()->Load(); : done by the action handler
-
-  // Loading map
-  InitMap();
-
-  // Loading teams
-  InitTeams();
-
-  // Tells server that client is ready
-  Action a_change_state(Action::ACTION_NETWORK_CHANGE_STATE);
-
-  Network::GetInstance()->SendAction (&a_change_state);
-  while (Network::GetInstance()->state != Network::NETWORK_READY_TO_PLAY)
-  {
-    // The server is placing characters on the map
-    // We can receive new team / map selection
-    ActionHandler::GetInstance()->ExecActions();
-    SDL_Delay(100);
-  }
-
-  // Waiting for other clients
-  std::cout << Network::GetInstance()->state << " : Waiting for people over the network" << std::endl;
-  while (Network::GetInstance()->state != Network::NETWORK_PLAYING)
-  {
-    // The server waits for everybody to be ready to start
-    ActionHandler::GetInstance()->ExecActions();
-    SDL_Delay(100);
-  }
-  std::cout << Network::GetInstance()->state << " : Run game !" << std::endl;
-}
-
-void GameLoop::InitGameData_Local()
-{
-  GameMode::GetInstance()->Load();
-
-  // Load the map
-  InitMap();
-
-  // Init teams
-  InitTeams();
-}
-
-void GameLoop::InitMap()
-{
-  std::cout << "o " << _("Initialise map") << std::endl;
-
-  LoadingScreen::GetInstance()->StartLoading(1, "map_icon", _("Maps"));
-  world.Reset();
-  MapsList::GetInstance()->ActiveMap().FreeData();
-
-  lst_objects.PlaceBarrels();
-}
-
-void GameLoop::InitTeams()
-{
-  std::cout << "o " << _("Initialise teams") << std::endl;
-
-  LoadingScreen::GetInstance()->StartLoading(2, "team_icon", _("Teams"));
-
-  // Check the number of teams
-  if (teams_list.playing_list.size() < 2)
-    Error(_("You need at least two valid teams !"));
-  assert (teams_list.playing_list.size() <= GameMode::GetInstance()->max_teams);
-
-  // Load the teams
-  teams_list.LoadGamingData();
-
-  // Initialization of teams' energy
-  LoadingScreen::GetInstance()->StartLoading(3, "weapon_icon", _("Weapons")); // use fake message...
-  teams_list.InitEnergy();
-
-  lst_objects.PlaceMines();
-}
-
-void GameLoop::InitSounds()
-{
-  std::cout << "o " << _("Initialise sounds") << std::endl;
-
-  // Load teams' sound profiles
-  LoadingScreen::GetInstance()->StartLoading(4, "sound_icon", _("Sounds"));
-
-  jukebox.LoadXML("default");
-  FOR_EACH_TEAM(team)
-    if ( (**team).GetSoundProfile() != "default" )
-      jukebox.LoadXML((**team).GetSoundProfile()) ;
-}
-
-void GameLoop::InitData()
-{
-  std::cout << "o " << _("Initialisation") << std::endl;
-  Time::GetInstance()->Reset();
-
-  // initialize gaming data
-  if (Network::GetInstance()->IsServer())
-    InitGameData_NetServer();
-  else if (Network::GetInstance()->IsClient())
-    InitGameData_NetClient();
-  else
-    InitGameData_Local();
-
-  InitSounds();
-}
 
 void GameLoop::Init()
 {
-  // Display Loading screen
-  LoadingScreen::GetInstance()->DrawBackground();
-  Mouse::GetInstance()->Hide();
-
-  Game::GetInstance()->MessageLoading();
-
-  // Init all needed data
-  InitData();
-
-  CharacterCursor::GetInstance()->Reset();
-  Keyboard::GetInstance()->Reset();
-
   fps.Reset();
-
-  Interface::GetInstance()->Reset();
-  GameMessages::GetInstance()->Reset();
-  ParticleEngine::Load();
-
-  Mouse::GetInstance()->SetPointer(Mouse::POINTER_SELECT);
   IgnorePendingInputEvents();
-
-  // First "selection" of a weapon -> fix bug 6576
-  ActiveTeam().AccessWeapon().Select();
-
   SetState(PLAYING, true);
 }
 
@@ -561,7 +399,7 @@ void GameLoop::SetState(game_loop_state_t new_state, bool begin_game)
     // Center the cursor
     Mouse::GetInstance()->CenterPointer();
 
-    // Initialize counter
+    // initialize counter
     duration = game_mode->duration_turn;
     Interface::GetInstance()->UpdateTimer(duration);
     Interface::GetInstance()->EnableDisplayTimer(true);

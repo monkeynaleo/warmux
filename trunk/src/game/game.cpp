@@ -24,6 +24,7 @@
 #include <SDL.h>
 #include <sstream>
 #include "time.h"
+#include "game_init.h"
 #include "game_loop.h"
 #include "game_mode.h"
 #include "../graphic/video.h"
@@ -136,7 +137,7 @@ void Game::Start()
   try
   {
     jukebox.PlayMusic(ActiveMap().ReadMusicPlaylist());
-    GameLoop::GetInstance()->Init ();
+    GameInit::Init ();
 
     do
     {

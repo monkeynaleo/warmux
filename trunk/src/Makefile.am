@@ -21,6 +21,7 @@ wormux_SOURCES = \
 	include/action_handler.cpp include/action_handler.h \
 	include/app.h main.cpp \
 	game/config.cpp game/config.h \
+	game/game_init.cpp game/game_init.h \
 	game/game_mode.cpp game/game_mode.h \
 	game/game.cpp game/game.h \
 	game/game_loop.cpp game/game_loop.h \

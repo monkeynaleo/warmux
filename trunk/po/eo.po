@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/map/maps_list.cpp:289
+#: src/map/maps_list.cpp:294
 #, c-format
 msgid "! Map %s not found :-("
 msgstr "! Mapo %s ne troveblas :-("
@@ -34,7 +34,7 @@ msgid_plural "%i players ready"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/game/game_loop.cpp:735
+#: src/game/game_loop.cpp:738
 #, fuzzy, c-format
 msgid "%s (%s) has died."
 msgstr "%s (%s teamo) mortis."
@@ -49,7 +49,7 @@ msgstr "%s <%s> kiel %s el %s"
 msgid "%s <%s> from %s"
 msgstr "%s <%s> el %s"
 
-#: src/game/game_loop.cpp:714
+#: src/game/game_loop.cpp:717
 #, c-format
 msgid "%s commits suicide !"
 msgstr "%s mortigis sin !"
@@ -59,12 +59,12 @@ msgstr "%s mortigis sin !"
 msgid "%s fps"
 msgstr "%s bildo po sekundo (fps)"
 
-#: src/game/game_loop.cpp:707
+#: src/game/game_loop.cpp:710
 #, c-format
 msgid "%s has fallen in water."
 msgstr "%s droniĝis"
 
-#: src/game/game_loop.cpp:718
+#: src/game/game_loop.cpp:721
 #, c-format
 msgid "%s has fallen off the map!"
 msgstr "%s falis el la mapo"
@@ -76,12 +76,12 @@ msgid_plural "%s has won %u points of energy!"
 msgstr[0] "%s gajnis %u energian poenton."
 msgstr[1] "%s gajnis %u energiajn poentojn."
 
-#: src/game/game_loop.cpp:729
+#: src/game/game_loop.cpp:732
 #, c-format
 msgid "%s is a psychopath, he has killed a member of %s team!"
 msgstr "%s estas psikopatiulon, li mortigas membron el lia teamo : %s !"
 
-#: src/game/game_loop.cpp:724
+#: src/game/game_loop.cpp:727
 #, c-format
 msgid "%s is dead because he is clumsy!"
 msgstr "%s estas mortinta pro lia mallerteco."
@@ -97,7 +97,7 @@ msgid "%s team already has infinite ammo for the %s!"
 msgstr ""
 
 #. Show message
-#: src/weapon/skip_turn.cpp:41
+#: src/weapon/skip_turn.cpp:42
 #, fuzzy, c-format
 msgid "%s team has skipped its turn."
 msgstr "La teamo '%s' malhavas lian vicon."
@@ -146,7 +146,7 @@ msgstr "Atendas teamojn"
 msgid "Anvil"
 msgstr ""
 
-#: src/main.cpp:222
+#: src/main.cpp:218
 msgid "Authors:"
 msgstr "Aŭtoroj :"
 
@@ -180,13 +180,13 @@ msgstr ""
 msgid "Bye bye tux..."
 msgstr ""
 
-#: src/team/teams_list.cpp:449 src/team/teams_list.cpp:471
-#: src/team/teams_list.cpp:518
+#: src/team/teams_list.cpp:472 src/team/teams_list.cpp:494
+#: src/team/teams_list.cpp:541
 #, c-format
 msgid "Can't find team %s!"
 msgstr "Ne povas trovi teamon %s!"
 
-#: src/team/teams_list.cpp:117 src/team/teams_list.cpp:132
+#: src/team/teams_list.cpp:139 src/team/teams_list.cpp:154
 #, c-format
 msgid "Cannot open teams directory (%s)!"
 msgstr " Ne eblas malfermi teaman dosierujon (%s)"
@@ -253,7 +253,7 @@ msgstr "Vicdaŭro"
 msgid "Dynamite"
 msgstr "Dinamito"
 
-#: src/game/game_loop.cpp:272 src/game/game_loop.cpp:278
+#: src/game/game_loop.cpp:275 src/game/game_loop.cpp:281
 msgid "END OF GAME"
 msgstr ""
 
@@ -262,28 +262,28 @@ msgstr ""
 msgid "Error in %s:%lu"
 msgstr "Eraro en %s:%lu"
 
-#: src/team/team.cpp:100
-#, c-format
-msgid "Error loading team %s:"
+#: src/team/teams_list.cpp:107 src/team/teams_list.cpp:115
+#, fuzzy
+msgid "Error loading team :"
 msgstr "Eraro muntante teamon %s:"
 
-#: src/team/team.cpp:180
+#: src/team/team.cpp:151
 #, fuzzy, c-format
 msgid "Error loading team's data %s:"
 msgstr "Eraro muntante teamon %s:"
 
-#: src/game/config.cpp:230
+#: src/game/config.cpp:250
 #, c-format
 msgid ""
 "Error while creating directory \"%s\": unable to store configuration file."
 msgstr "Eraro kreante dosierujon \"%s\": ne eblas registri agordan dosieron."
 
-#: src/game/config.cpp:143
+#: src/game/config.cpp:166
 #, c-format
 msgid "Error while loading configuration file: %s"
 msgstr "Eraro muntante agordan dosieron : %s"
 
-#: src/game/game_mode.cpp:225
+#: src/game/game_mode.cpp:229
 #, c-format
 msgid "Error while loading game mode %s (file %s):"
 msgstr "Eraro muntante ludon %s (dosiero %s):"
@@ -318,7 +318,7 @@ msgstr " Ne eblas malfermi mapan dosierujon (%s)"
 msgid "Error: Unable to start server"
 msgstr " Ne eblas malfermi mapan dosierujon (%s)"
 
-#: src/team/team.cpp:143
+#: src/team/team.cpp:114
 #, fuzzy, c-format
 msgid "Error: can't find the body \"%s\" for the team \"%s\"."
 msgstr " Eraro: Ne eblas trovi aspekton \"%s\" por la teamo \"%s\"."
@@ -366,11 +366,11 @@ msgstr ""
 msgid "Host a game"
 msgstr "Partofino !"
 
-#: src/game/game_loop.cpp:771
+#: src/game/game_loop.cpp:774
 msgid "Hurry up, you are too slow !!"
 msgstr ""
 
-#: src/main.cpp:214
+#: src/main.cpp:210
 msgid ""
 "If you found a bug or have a feature request send us a email (in english, "
 "please):"
@@ -381,21 +381,21 @@ msgstr ""
 msgid "Initial energy"
 msgstr "Komenca energio"
 
-#: src/game/game_loop.cpp:208
+#: src/game/game_loop.cpp:212
 msgid "Initialisation"
 msgstr "Preparanto"
 
-#: src/game/game_loop.cpp:163
+#: src/game/game_loop.cpp:167
 #, fuzzy
 msgid "Initialise map"
 msgstr "Preparante datumojn"
 
-#: src/game/game_loop.cpp:195
+#: src/game/game_loop.cpp:199
 #, fuzzy
 msgid "Initialise sounds"
 msgstr "Preparante objektojn"
 
-#: src/game/game_loop.cpp:174
+#: src/game/game_loop.cpp:178
 msgid "Initialise teams"
 msgstr "Preparante teamon"
 
@@ -416,7 +416,7 @@ msgstr ""
 msgid "Load maps:"
 msgstr "Muntas la mapojn %s"
 
-#: src/team/teams_list.cpp:106
+#: src/team/teams_list.cpp:128
 msgid "Load teams:"
 msgstr "Muntas la teamon %s"
 
@@ -435,7 +435,7 @@ msgstr ""
 msgid "Map %s, a creation of: "
 msgstr "Mapo %s, far :"
 
-#: src/game/game_loop.cpp:165
+#: src/game/game_loop.cpp:169
 msgid "Maps"
 msgstr ""
 
@@ -490,7 +490,7 @@ msgstr "Preparante la grundon"
 msgid "Ninjarope"
 msgstr ""
 
-#: src/weapon/weapon.cpp:599
+#: src/weapon/weapon.cpp:601
 #, c-format
 msgid "No element <%s> found in the xml config file!"
 msgstr "Neniu elemento <%s> trovita en la XML agorda dosiero!"
@@ -520,7 +520,7 @@ msgstr "Elektoj"
 msgid "Parachute"
 msgstr ""
 
-#: src/weapon/parachute.cpp:58
+#: src/weapon/parachute.cpp:59
 msgid "Parachute is activated automatically."
 msgstr ""
 
@@ -557,11 +557,11 @@ msgstr ""
 msgid "Quit"
 msgstr "Forlasi"
 
-#: src/main.cpp:202
+#: src/main.cpp:198
 msgid "Quit Wormux"
 msgstr "Forigu el Wormux"
 
-#: src/game/config.cpp:153
+#: src/game/config.cpp:176
 msgid "Reading personal config file"
 msgstr ""
 
@@ -582,11 +582,11 @@ msgstr ""
 msgid "Riot Bomb"
 msgstr ""
 
-#: src/main.cpp:247
+#: src/main.cpp:243
 msgid "Run game"
 msgstr "Komencas partion"
 
-#: src/network/chat.cpp:74
+#: src/network/chat.cpp:72
 msgid "Say: "
 msgstr ""
 
@@ -639,7 +639,7 @@ msgid "Sound frequency"
 msgstr "Sonaj efektoj"
 
 #. Load teams' sound profiles
-#: src/game/game_loop.cpp:198
+#: src/game/game_loop.cpp:202
 #, fuzzy
 msgid "Sounds"
 msgstr "Sonaj agordoj"
@@ -664,7 +664,7 @@ msgstr ""
 msgid "Syringe"
 msgstr ""
 
-#: src/game/game_loop.cpp:176
+#: src/game/game_loop.cpp:180
 msgid "Teams"
 msgstr ""
 
@@ -726,7 +726,7 @@ msgid_plural "There are only %i teams."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/interface/weapon_menu.cpp:142
+#: src/interface/weapon_menu.cpp:164
 msgid "Tools"
 msgstr ""
 
@@ -735,7 +735,7 @@ msgstr ""
 msgid "Unable to contact host."
 msgstr " Ne eblas malfermi mapan dosierujon (%s)"
 
-#: src/map/maps_list.cpp:210 src/map/maps_list.cpp:226
+#: src/map/maps_list.cpp:209 src/map/maps_list.cpp:225
 #, c-format
 msgid "Unable to open maps directory (%s)!"
 msgstr " Ne eblas malfermi mapan dosierujon (%s)"
@@ -745,7 +745,7 @@ msgstr " Ne eblas malfermi mapan dosierujon (%s)"
 msgid "Unable to use this port!"
 msgstr "Atendas klienton"
 
-#: src/main.cpp:165
+#: src/main.cpp:161
 msgid "Version"
 msgstr "Versio "
 
@@ -768,18 +768,22 @@ msgid_plural "Wait! %i players are not ready yet!"
 msgstr[0] ""
 msgstr[1] ""
 
+#: src/menu/network_menu.cpp:343
+msgid "Waiting for server, all you can do is cancel or chat!"
+msgstr ""
+
 #. Adding label
 #. Initialization of teams' energy
-#: src/interface/weapon_menu.cpp:140 src/game/game_loop.cpp:187
+#: src/interface/weapon_menu.cpp:162 src/game/game_loop.cpp:191
 #, fuzzy
 msgid "Weapons"
 msgstr "Armilo:"
 
-#: src/main.cpp:231
+#: src/main.cpp:227
 msgid "Website: "
 msgstr "TTT-ejo: "
 
-#: src/game/game_loop.cpp:732
+#: src/game/game_loop.cpp:735
 #, c-format
 msgid "What a shame for %s - he was killed by a simple gun!"
 msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo!"
@@ -789,11 +793,11 @@ msgstr "Kiel honto por %s : li estis mortigita per simpla pafilo!"
 msgid "Wind particles?"
 msgstr "Montru venterojn?"
 
-#: src/main.cpp:178
+#: src/main.cpp:174
 msgid "Wormux launching..."
 msgstr "Wormux muntas..."
 
-#: src/main.cpp:221
+#: src/main.cpp:217
 msgid "Wormux version "
 msgstr "Wormux versio "
 
@@ -806,11 +810,11 @@ msgstr "XML-a eraro dum la mapa muntado '%s' :"
 msgid "You are alone..."
 msgstr ""
 
-#: src/map/maps_list.cpp:246
+#: src/map/maps_list.cpp:245
 msgid "You need at least one valid map !"
 msgstr "Vi bezonas almenaŭ unu taŭgan mapon!"
 
-#: src/team/teams_list.cpp:152 src/game/game_loop.cpp:180
+#: src/team/teams_list.cpp:174 src/game/game_loop.cpp:184
 msgid "You need at least two valid teams !"
 msgstr "Vi bezonas almenaŭ du teamojn!"
 

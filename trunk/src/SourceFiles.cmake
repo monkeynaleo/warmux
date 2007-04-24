@@ -13,6 +13,7 @@ character/move.cpp
 character/movement.cpp
 game/config.cpp
 game/game.cpp
+game/game_init.cpp
 game/game_loop.cpp
 game/game_mode.cpp
 game/time.cpp

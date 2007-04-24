@@ -113,6 +113,7 @@ POTFILES = \
         src/network/network.cpp \
         src/game/game.cpp \
         src/game/config.cpp \
+        src/game/game_init.cpp \
         src/game/game_loop.cpp \
         src/game/time.cpp \
         src/game/game_mode.cpp \
