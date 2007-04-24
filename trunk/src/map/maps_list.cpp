@@ -192,6 +192,7 @@ MapsList* MapsList::GetInstance()
 
 MapsList::MapsList()
 {
+  terrain_actif = 0;
   lst.clear() ;
 
   std::cout << "o " << _("Load maps:");
