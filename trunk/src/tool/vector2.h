@@ -2,7 +2,7 @@
 #define _VECTOR2_H
 
 #include <math.h>
-#define VECTOR2_EPS_ZERO (0.05)
+#define VECTOR2_EPS_ZERO (0.005)
 
 /**
  * Class for storing a vector of two points x, y.
