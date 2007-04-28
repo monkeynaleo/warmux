@@ -126,7 +126,7 @@ void GameInit::InitGameData_NetClient()
 
 void GameInit::InitGameData_Local()
 {
-  GameMode::GetInstance()->Load();
+  // GameMode::GetInstance()->Load(); : done in the game menu to adjust some parameters
 
   // Load the map
   InitMap();

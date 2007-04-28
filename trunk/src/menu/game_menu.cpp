@@ -114,6 +114,8 @@ GameMenu::GameMenu() :
   // Values initialization
 
   // Load game options
+  GameMode::GetInstance()->Load();
+
   GameMode * game_mode = GameMode::GetInstance();
   opt_duration_turn->SetValue(game_mode->duration_turn);
   opt_energy_ini->SetValue(game_mode->character.init_energy);
