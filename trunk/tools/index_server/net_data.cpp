@@ -37,6 +37,7 @@ NetData::NetData()
 	connected = false;
 	ping_sent = false;
 	msg_id = TS_NO_MSG;
+	UpdatePing();
 }
 
 NetData::~NetData()

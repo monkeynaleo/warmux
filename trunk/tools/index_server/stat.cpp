@@ -60,7 +60,8 @@ void ConnectionStats::OpenFile()
 
 void ConnectionStats::CloseFile()
 {
-	fclose(fd);
+	if(fd)
+		fclose(fd);
 }
 
 void ConnectionStats::Reset()
@@ -79,6 +80,8 @@ void ConnectionStats::Rotate()
 
 void ConnectionStats::Write()
 {
+	if(!fd)
+		return;
 	struct tm* t;
 	time_t now = time(NULL);
 	t = localtime(&now);
