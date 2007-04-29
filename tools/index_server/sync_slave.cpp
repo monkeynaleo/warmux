@@ -179,7 +179,7 @@ bool IndexServerConn::HandleMsg(const std::string & full_str)
 			DPRINT(INFO,"This server is running an old version (v%i) !",nbr);
 			return false;
 		}
-		DPRINT(INFO,"We are running the same verion..");
+		DPRINT(INFO,"We are running the same version..");
 		break;
 	case TS_MSG_JOIN_LEAVE:
 		if( received < 8 ) // The message is not completely received
