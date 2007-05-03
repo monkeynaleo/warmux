@@ -73,18 +73,18 @@ ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
   margin = DEF_MARGIN;
   border.SetValues(DEF_BORDER, DEF_BORDER);
 
-  type_box = new HBox( Rectanglei(pos, type_size), true);
+  type_box = new HBox( Rectanglei(pos, type_size), false);
   type_box->AddWidget(new Label(type_name, Rectanglei(pos, type_size), font_size, font_style));
   AddWidget(type_box);
 
   pos.SetValues(pos.GetX()+type_size.GetX(), pos.GetY());
-  name_box = new HBox( Rectanglei(pos, name_size), true);
+  name_box = new HBox( Rectanglei(pos, name_size), false);
   name_lbl = new Label("", Rectanglei(pos, name_size), font_size, font_style);
   name_box->AddWidget(name_lbl);
   AddWidget(name_box);
 
   pos.SetValues(pos.GetX()+name_size.GetX(), pos.GetY());
-  score_box = new HBox( Rectanglei(pos, score_size), true);
+  score_box = new HBox( Rectanglei(pos, score_size), false);
   score_lbl = new Label("", Rectanglei(pos, score_size), font_size, font_style);
   score_box->AddWidget(score_lbl);
   AddWidget(score_box);
@@ -134,7 +134,7 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
 
   pos.SetValues(pos.GetX()+DEF_SIZE, pos.GetY());
 
-  HBox* tmp_box = new HBox( Rectanglei(pos, team_size), true);
+  HBox* tmp_box = new HBox( Rectanglei(pos, team_size), false);
   team_logo = new PictureWidget( Rectanglei(0,0,48,48) );
   tmp_box->AddWidget(team_logo);
 
@@ -201,8 +201,7 @@ void ResultsMenu::SetResult(int i)
   }  else  {
     team_logo->SetSurface( *(res->getTeamLogo()) );
   }
-  printf("Now result %i/%i: team '%s'\n",
-         index, (int)results->size(), name.c_str());
+
   team_name->SetText(name);
   team_box->ForceRedraw();
 
