@@ -52,7 +52,7 @@ TeamBox::TeamBox(std::string _player_name, const Rectanglei& rect) :
   tmp_player_box->AddWidget(player_name);
 
   nb_characters = new SpinButton(_("Number of characters"), Rectanglei(0,0,0,0),
-				 6,1,2,10,
+				 6,1,1,10,
 				 dark_gray_color, false);
 
   tmp_box->AddWidget(team_name);

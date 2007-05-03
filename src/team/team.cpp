@@ -391,7 +391,7 @@ void Team::UnloadGamingData()
 
 void Team::SetNbCharacters(uint howmany)
 {
-  assert(howmany >= 2 && howmany <= 10);
+  assert(howmany >= 1 && howmany <= 10);
   nb_characters = howmany;
 }
 
