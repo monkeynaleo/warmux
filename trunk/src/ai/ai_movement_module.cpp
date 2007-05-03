@@ -330,8 +330,8 @@ void AIMovementModule::BeginTurn()
 AIMovementModule::AIMovementModule() :
   m_current_time(0),
   points_to_avoid(),
-  min_reachable_x(-1),
-  max_reachable_x(-1),
+  min_reachable_x(0),
+  max_reachable_x(0),
   destination_point(Point2i(-1,-1)),
   current_movement(NO_MOVEMENT),
   last_position(Point2i(-1,-1)),
