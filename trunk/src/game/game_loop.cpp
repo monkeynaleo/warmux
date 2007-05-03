@@ -148,6 +148,7 @@ void GameLoop::RefreshObject()
 {
   FOR_ALL_CHARACTERS(team,character)
     character->Refresh();
+
   // Recompute energy of each team
   FOR_EACH_TEAM(team)
     (**team).Refresh();
@@ -283,7 +284,7 @@ void GameLoop::Run()
     // Refresh the map
     world.Refresh();
     // try to adjust to max Frame by seconds
-    time_of_next_frame += Time::GetInstance()->GetDelta();
+    time_of_next_frame += AppWormux::GetInstance()->video.GetSleepMaxFps();
     if (time_of_next_frame > SDL_GetTicks()) {
       StatStart("GameLoop:Draw()");
       CallDraw();
