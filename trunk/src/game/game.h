@@ -35,8 +35,6 @@ private:
   // Set the user requested an end of the game
   bool want_end_of_game;
 
-  int NbrRemainingTeams() const;
-
   Game();
   static Game * singleton;
 
@@ -50,6 +48,8 @@ public:
   void Start();
   void UnloadDatas();
 
+  int NbrRemainingTeams() const;
+  
   bool IsGameFinished() const;
   bool IsGamePaused() const;
   bool IsGameLaunched() const;

@@ -301,7 +301,7 @@ void GameLoop::Run()
 	   && !Time::GetInstance()->IsGamePaused());
 
   // the game is finished but we won't go at the results screen to fast!
-  if (Game::GetInstance()->IsGameFinished()) {
+  if (Game::GetInstance()->NbrRemainingTeams() <= 1) {
     EndOfGame();
   }
 
