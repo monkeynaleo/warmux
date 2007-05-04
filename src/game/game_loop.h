@@ -100,5 +100,7 @@ private:
   bool IsAnythingMoving();
   void ApplyDiseaseDamage();
   void ApplyDeathMode();
+
+  void EndOfGame();
 };
 #endif
