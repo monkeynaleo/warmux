@@ -59,6 +59,13 @@
 #include "../weapon/weapons_list.h"
 
 
+#ifdef DEBUG
+// Uncomment this to get an image during the game under Valgrind
+// DON'T USE THIS IF YOU INTEND TO PLAY NETWORKED GAMES!
+//#define USE_VALGRIND
+#endif
+
+
 GameLoop * GameLoop::singleton = NULL;
 
 GameLoop * GameLoop::GetInstance()
@@ -287,13 +294,17 @@ void GameLoop::Run()
     world.Refresh();
     // try to adjust to max Frame by seconds
     time_of_next_frame += AppWormux::GetInstance()->video.GetSleepMaxFps();
+#ifndef USE_VALGRIND
     if (time_of_next_frame > SDL_GetTicks()) {
+#endif
       StatStart("GameLoop:Draw()");
       CallDraw();
       // How many frame by seconds ?
       fps.Refresh();
       StatStop("GameLoop:Draw()");
+#ifndef USE_VALGRIND
     }
+#endif
     delay = time_of_next_frame - SDL_GetTicks();
     if (delay >= 0)
       SDL_Delay(delay);
