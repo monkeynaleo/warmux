@@ -42,7 +42,7 @@ GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
 void GroundParticle::Refresh()
 {
   UpdatePosition();
-  image->SetRotation_rad((Time::GetInstance()->Read()/2) % 360/* /180*/ * M_PI);
+  image->SetRotation_rad(Time::GetInstance()->Read() / 180.0 * M_PI);
   image->Update();
   if(IsOutsideWorld()) {
     m_left_time_to_live = 0;
