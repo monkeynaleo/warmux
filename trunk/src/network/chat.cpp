@@ -45,7 +45,7 @@ Chat::Chat():
   input(NULL),
   msg(NULL),
   check_input(false),
-  last_time(-1)
+  last_time(0)
 {
 }
 
