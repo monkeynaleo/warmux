@@ -78,8 +78,8 @@ GameLoop * GameLoop::GetInstance()
 
 GameLoop::GameLoop():
   state(PLAYING),
-  pause_seconde(-1),
-  duration(-1),
+  pause_seconde(0),
+  duration(0),
   current_ObjBox(NULL),
   give_objbox(true),
   fps(),
