@@ -25,12 +25,9 @@
        ###############             ###############
        ###########################################   -->
 
-<alias movement="weapon-riot_bomb-begin-shoot" correspond_to="weapon-bazooka-begin-shoot" />
 <alias movement="weapon-riot_bomb-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
-<alias movement="weapon-bazooka-select" correspond_to="weapon-bazooka-begin-shoot" />
-<alias movement="weapon-riot_bomb-select" correspond_to="weapon-bazooka-begin-shoot" />
-<alias movement="weapon-automatic_bazooka-select" correspond_to="weapon-bazooka-begin-shoot" />
-<alias movement="weapon-automatic_bazooka-begin-shoot" correspond_to="weapon-bazooka-begin-shoot" />
+<alias movement="weapon-riot_bomb-select" correspond_to="weapon-bazooka-select" />
+<alias movement="weapon-automatic_bazooka-select" correspond_to="weapon-bazooka-select" />
 <alias movement="weapon-automatic_bazooka-end-shoot" correspond_to="weapon-bazooka-end-shoot" />
 <alias movement="weapon-cluster_bomb-begin-shoot" correspond_to="weapon-grenade-begin-shoot" />
 <alias movement="weapon-cluster_bomb-end-shoot" correspond_to="weapon-grenade-end-shoot" />
@@ -1091,7 +1088,7 @@
 </movement>
 
 <!-- ###### Bazooka ###### -->
-<movement name="weapon-bazooka-begin-shoot" speed="50" play_mode="play_once">
+<movement name="weapon-bazooka-select" speed="50" play_mode="play_once">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="foot-left" dy="0"/>
