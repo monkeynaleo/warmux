@@ -23,7 +23,7 @@
 #define TEAM_H
 
 #include <list>
-#include <map>
+#include <vector>
 #include <string>
 #include "team_energy.h"
 #include "../character/character.h"
@@ -54,8 +54,8 @@ class Team
     typedef std::list<Character>::iterator iterator;
     typedef std::list<Character>::const_iterator const_iterator;
 
-    std::map<std::string, int> m_nb_ammos;
-    std::map<std::string, int> m_nb_units;
+    std::vector<int> m_nb_ammos;
+    std::vector<int> m_nb_units;
 
   // Autres
     CrossHair crosshair;
@@ -143,13 +143,13 @@ class Team
   // Number of ammo for the current selected weapon.
   // (return INFINITE_AMMO is ammo are unlimited !)
     int ReadNbAmmos() const;
-    int ReadNbAmmos(const std::string &weapon_name) const;
+    int ReadNbAmmos(const Weapon::Weapon_type &weapon_type) const;
     int& AccessNbAmmos();
 
 
   // Number of current unit per ammo for the selected weapon.
     int ReadNbUnits() const;
-    int ReadNbUnits(const std::string &weapon_name) const;
+    int ReadNbUnits(const Weapon::Weapon_type &weapon_type) const;
     int& AccessNbUnits();
     void ResetNbUnits();
 

@@ -68,7 +68,7 @@ WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
 
 bool WeaponMenuItem::IsMouseOver()
 {
-  int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetName());
+  int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   if(nb_bullets == 0) {
     if(zoom)
       SetZoom(false);
@@ -106,7 +106,7 @@ void WeaponMenuItem::Draw(Surface * dest)
   }
   item->Scale(scale, scale);
   PolygonItem::Draw(dest);
-  int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetName());
+  int nb_bullets = ActiveTeam().ReadNbAmmos(weapon->GetType());
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
   if(nb_bullets ==  INFINITE_AMMO) {
     Interface::GetInstance()->GetWeaponsMenu().GetInfiniteSymbol()->Blit(*dest, tmp);
@@ -326,7 +326,7 @@ bool WeaponsMenu::ActionClic(const Point2i &mouse_pos)
     tmp = UpdateCurrentOverflyItem(tools_menu);
   if(tmp != NULL) {
     // Check we have enough ammo
-    int nb_bullets = ActiveTeam().ReadNbAmmos(tmp->GetName());
+    int nb_bullets = ActiveTeam().ReadNbAmmos(tmp->GetType());
     if( nb_bullets == INFINITE_AMMO || nb_bullets > 0)
     {
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, tmp->GetType()));

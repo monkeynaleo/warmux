@@ -290,55 +290,41 @@ void Team::SetWeapon (Weapon::Weapon_type type)
 
 int Team::ReadNbAmmos() const
 {
-  return ReadNbAmmos(active_weapon->GetName());
+  return ReadNbAmmos(active_weapon->GetType());
 }
 
 int Team::ReadNbUnits() const
 {
-  return ReadNbUnits( active_weapon->GetName());
+  return ReadNbUnits( active_weapon->GetType());
 }
 
-int Team::ReadNbAmmos(const std::string &weapon_name) const
+int Team::ReadNbAmmos(const Weapon::Weapon_type &weapon_type) const
 {
-  // Read in the Map
-  // The same method as in AccesNbAmmos can't be use on const team !
-  std::map<std::string, int>::const_iterator it =
-      m_nb_ammos.find( weapon_name );
-
-  if (it !=  m_nb_ammos.end()) return ( it->second ) ;
-  // We should not be here !
-  MSG_DEBUG("team", "%s : not found into the ammo map.", weapon_name.c_str());
-  assert(false);
-  return 0 ;
+  assert((unsigned int)weapon_type < m_nb_ammos.size());
+  return m_nb_ammos[weapon_type];
 }
 
-int Team::ReadNbUnits(const std::string &weapon_name) const
+int Team::ReadNbUnits(const Weapon::Weapon_type &weapon_type) const
 {
-  std::map<std::string, int>::const_iterator it =
-      m_nb_units.find( weapon_name );
-
-  if (it !=  m_nb_units.end()) return ( it->second ) ;
-  // We should not be here !
-  MSG_DEBUG("team", "%s : not found into the ammo map.", weapon_name.c_str());
-  assert(false);
-  return 0 ;
+  assert((unsigned int)weapon_type < m_nb_units.size());
+  return m_nb_units[weapon_type];
 }
 
 int& Team::AccessNbAmmos()
 {
   // if value not initialized, it initialize to 0 and then return 0
-  return m_nb_ammos[ active_weapon->GetName() ] ;
+  return m_nb_ammos[ active_weapon->GetType() ] ;
 }
 
 int& Team::AccessNbUnits()
 {
   // if value not initialized, it initialize to 0 and then return 0
-  return m_nb_units[ active_weapon->GetName() ] ;
+  return m_nb_units[ active_weapon->GetType() ] ;
 }
 
 void Team::ResetNbUnits()
 {
-  m_nb_units[ active_weapon->GetName() ] = active_weapon->ReadInitialNbUnit();
+  m_nb_units[ active_weapon->GetType() ] = active_weapon->ReadInitialNbUnit();
 }
 
 Team::iterator Team::begin() { return characters.begin(); }
@@ -366,15 +352,18 @@ void Team::LoadGamingData()
   std::list<Weapon *>::iterator itw = l_weapons_list.begin(),
   end = l_weapons_list.end();
 
+  m_nb_ammos.assign(l_weapons_list.size(), 0);
+  m_nb_units.assign(l_weapons_list.size(), 0);
+	
   for (; itw != end ; ++itw) {
-    m_nb_ammos[ (*itw)->GetName() ] = (*itw)->ReadInitialNbAmmo();
-    m_nb_units[ (*itw)->GetName() ] = (*itw)->ReadInitialNbUnit();
+    m_nb_ammos[ (*itw)->GetType() ] = (*itw)->ReadInitialNbAmmo();
+    m_nb_units[ (*itw)->GetType() ] = (*itw)->ReadInitialNbUnit();
   }
 
   // Disable non-working weapons in network games
   if(Network::GetInstance()->IsConnected())
   {
-    //m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_NINJA_ROPE)->GetName() ] = 0;
+    //m_nb_ammos[ Weapon::WEAPON_NINJA_ROPE ] = 0;
   }
 
   active_weapon = WeaponsList::GetInstance()->GetWeapon(Weapon::WEAPON_DYNAMITE);
