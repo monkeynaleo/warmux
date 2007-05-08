@@ -133,7 +133,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
         ++it;
       } while(it != end
               && ((*it)->Category() != sort
-                  || ActiveTeam().ReadNbAmmos((*it)->GetName()) == 0
+                  || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
                   || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap().IsOpened()))
               );
 
@@ -158,7 +158,7 @@ bool WeaponsList::GetWeaponBySort(Weapon::category_t sort, Weapon::Weapon_type &
   /* try to find the next weapon matching our criteria */
   while(it != end
       && ((*it)->Category() != sort
-        || ActiveTeam().ReadNbAmmos((*it)->GetName()) == 0
+        || ActiveTeam().ReadNbAmmos((*it)->GetType()) == 0
         || (!(*it)->CanBeUsedOnClosedMap() && ActiveMap().IsOpened())))
     ++it;
 

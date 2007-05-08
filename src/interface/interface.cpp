@@ -186,7 +186,7 @@ void Interface::DrawWeaponInfo() const
     nbr_munition = ActiveTeam().ReadNbAmmos();
   } else {
     weapon = weapon_under_cursor;
-    nbr_munition = ActiveTeam().ReadNbAmmos(weapon_under_cursor->GetName());
+    nbr_munition = ActiveTeam().ReadNbAmmos(weapon_under_cursor->GetType());
     icon_scale_factor = cos((float)Time::GetInstance()->Read() / 1000 * M_PI) * 0.9;
   }
 

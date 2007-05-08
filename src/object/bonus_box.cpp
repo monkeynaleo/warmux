@@ -95,7 +95,7 @@ void BonusBox::PickRandomWeapon() {
   }
   weapon_num = (int)randomSync.GetDouble(1,weapon_count);
   contents = (weapon_map[weapon_num].first)->GetType();
-  if(ActiveTeam().ReadNbAmmos(WeaponsList::GetInstance()->GetWeapon(contents)->GetName())==INFINITE_AMMO) {
+  if(ActiveTeam().ReadNbAmmos(contents)==INFINITE_AMMO) {
     life_points = 0;
     nbr_ammo = 0;
     MSG_DEBUG("bonus","Weapon %s already has infinite ammo",WeaponsList::GetInstance()->GetWeapon(contents)->GetName().c_str());
@@ -108,8 +108,8 @@ void BonusBox::ApplyBonus(Team &equipe, Character &ver) {
   if(weapon_count == 0 || nbr_ammo == 0) return;
   std::ostringstream txt;
     /*this next 'if' should never be true, but I am loath to remove it just in case. */
-    if(equipe.ReadNbAmmos(WeaponsList::GetInstance()->GetWeapon(contents)->GetName())!=INFINITE_AMMO) {
-        equipe.m_nb_ammos[ WeaponsList::GetInstance()->GetWeapon(contents)->GetName() ] += nbr_ammo;
+    if(equipe.ReadNbAmmos(contents)!=INFINITE_AMMO) {
+        equipe.m_nb_ammos[contents] += nbr_ammo;
         txt << Format(ngettext(
                 "%s team has won %u %s!",
                 "%s team has won %u %ss!",
