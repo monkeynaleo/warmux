@@ -752,6 +752,14 @@
 	</frame>
 </movement>
 
+<!-- ###### Airhammer ###### -->
+<movement name="weapon-airhammer-begin-shoot" speed="100">
+	<collision_rect left="5" right="5" top="10" bottom="2" />
+	<frame>
+		<member type="construct" angle="12" dy="-5"/>
+	</frame>
+</movement>
+
 <!-- ###### Grenade ###### -->
 <movement name="weapon-grenade-begin-shoot" speed="30">
 	<collision_rect left="5" right="5" top="10" bottom="2" />
