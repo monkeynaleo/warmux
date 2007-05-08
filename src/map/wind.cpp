@@ -166,6 +166,13 @@ Wind::Wind(){
   m_val = m_nv_val = 0;
 }
 
+Wind::~Wind()
+{
+  iterator it=particles.begin(), end=particles.end();
+  for (; it != end; ++it)
+    delete (*it);
+}
+
 void Wind::Reset(){
   m_last_move = 0;
   m_last_part_mvt = 0;
@@ -184,8 +191,8 @@ void Wind::Reset(){
   std::string config_file = ActiveMap().m_directory + PATH_SEPARATOR + "config.xml";
 
   for (uint i=0; i<nb; ++i){
-    WindParticle tmp = WindParticle(config_file, (float)i / nb);
-    particles.push_back( tmp );
+    WindParticle *tmp = new WindParticle(config_file, (float)i / nb);
+    particles.push_back(tmp);
   }
   RandomizeParticlesPos();
 }
@@ -205,7 +212,8 @@ void Wind::SetVal(long val){
 
 void Wind::DrawParticles(){
   iterator it=particles.begin(), end=particles.end();
-  for (; it != end; ++it) it -> Draw();
+  for (; it != end; ++it)
+    (*it)->Draw();
 }
 
 void Wind::Refresh(){
@@ -220,7 +228,8 @@ void Wind::Refresh(){
   }
 
   iterator it=particles.begin(), end=particles.end();
-  for (; it != end; ++it) it -> Refresh();
+  for (; it != end; ++it)
+    (*it)->Refresh();
 }
 
 void Wind::RandomizeParticlesPos()
@@ -228,8 +237,8 @@ void Wind::RandomizeParticlesPos()
   iterator it=particles.begin(), end=particles.end();
   for (; it != end; ++it)
   {
-    if(!camera.IsVisible(*it))
-      it -> SetXY( Point2i( randomObj.GetLong(camera.GetPositionX(), camera.GetPositionX()+camera.GetSizeX()),
+    if(!camera.IsVisible(**it))
+      (*it)->SetXY(Point2i( randomObj.GetLong(camera.GetPositionX(), camera.GetPositionX()+camera.GetSizeX()),
                             randomObj.GetLong(camera.GetPositionY(), camera.GetPositionY()+camera.GetSizeY())));
   }
 }

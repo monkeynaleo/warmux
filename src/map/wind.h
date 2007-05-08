@@ -33,22 +33,16 @@
 
 class WindParticle : public PhysicalObj
 {
+  /* You should not need this */
+  WindParticle(const WindParticle&);
+  const WindParticle& operator=(const WindParticle&);
+
 public:
   Sprite *sprite;
   Sprite *flipped;
 
 public:
   WindParticle(std::string& xml_file, float scale);
-  inline WindParticle(const WindParticle & aparticle):
-    PhysicalObj(aparticle)
-    {
-      assert(aparticle.sprite);
-      sprite = new Sprite(*aparticle.sprite);
-      if(aparticle.flipped != NULL)
-        flipped = new Sprite(*aparticle.flipped);
-      else
-        flipped = NULL;
-    };
   ~WindParticle() { delete sprite; if(flipped) delete flipped;};
   void Draw();
   void Refresh();
@@ -61,11 +55,12 @@ class Wind
   uint m_last_part_mvt;
 
 public:
-  std::list<WindParticle> particles;
-  typedef std::list<WindParticle>::iterator iterator;
+  std::list<WindParticle *> particles;
+  typedef std::list<WindParticle *>::iterator iterator;
 
 public:
   Wind();
+  ~Wind();
   double GetStrength() const;
   void ChooseRandomVal();
   void SetVal (long val);
