@@ -779,7 +779,7 @@
 </movement>
 
 <!-- ###### Grenade ###### -->
-<movement name="weapon-grenade-begin-shoot" speed="30">
+<movement name="weapon-grenade-begin-shoot" speed="30" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -865,7 +865,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-grenade-end-shoot" speed="30">
+<movement name="weapon-grenade-end-shoot" speed="30" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -888,7 +888,7 @@
 </movement>
 
 <!-- ###### Bounceball ###### -->
-<movement name="weapon-bounce_ball-begin-shoot" speed="50">
+<movement name="weapon-bounce_ball-begin-shoot" speed="50" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" angle="0"/>
@@ -978,7 +978,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-bounce_ball-end-shoot" speed="50">
+<movement name="weapon-bounce_ball-end-shoot" speed="50" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" angle="40"/>
@@ -1115,7 +1115,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-bazooka-end-shoot" speed="70">
+<movement name="weapon-bazooka-end-shoot" speed="70" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="foot-left" dy="-4"/>
@@ -1192,7 +1192,7 @@
 </movement>
 
 <!-- ###### Uzi ###### -->
-<movement name="weapon-uzi-end-shoot" speed="100">
+<movement name="weapon-uzi-end-shoot" speed="100" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -1201,7 +1201,7 @@
 </movement>
 
 <!-- ###### Dynamite ###### -->
-<movement name="weapon-dynamite-begin-shoot" speed="30">
+<movement name="weapon-dynamite-begin-shoot" speed="30" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -1245,7 +1245,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-dynamite-end-shoot" speed="30">
+<movement name="weapon-dynamite-end-shoot" speed="30" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -1266,7 +1266,7 @@
 </movement>
 
 <!-- ###### Mine ###### -->
-<movement name="weapon-minelauncher-begin-shoot" speed="60">
+<movement name="weapon-minelauncher-begin-shoot" speed="60" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -1294,7 +1294,7 @@
 	</frame>
 </movement>
 
-<movement name="weapon-minelauncher-end-shoot" speed="30">
+<movement name="weapon-minelauncher-end-shoot" speed="30" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" follow_half_crosshair="true"/>
@@ -1327,7 +1327,7 @@
 </movement>
 
 <!-- ###### SuperTux ###### -->
-<movement name="weapon-tux-end-shoot" speed="50">
+<movement name="weapon-tux-end-shoot" speed="50" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="head" angle="-90" />
