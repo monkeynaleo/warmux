@@ -422,7 +422,7 @@
 </movement>
 
 <!-- ###### Hard land ###### -->
-<movement name="hard-land" speed="50">
+<movement name="hard-land" speed="50" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="foot-left" dy="-2"/>
@@ -553,7 +553,7 @@
        ###########################################   -->
 
 <!-- ###### Yoyo ###### -->
-<movement name="animation0" speed="5400"> <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
+<movement name="animation0" speed="5400" play_mode="play_once" > <!-- 5400 = 36 (frames of yoyo animation) * 150ms (speed of the yoyos animation) -->
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="arm-right" angle="-90"/>
@@ -562,7 +562,7 @@
 </movement>
 
 <!-- ###### Tired ###### -->
-<movement name="animation1" speed="100">
+<movement name="animation1" speed="100" play_mode="play_once" >
 	<collision_rect left="5" right="5" top="10" bottom="2" />
 	<frame>
 		<member type="body" angle="0"/>
