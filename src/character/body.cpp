@@ -332,6 +332,12 @@ void Body::Build()
     {
       if(current_mvt->play_mode == Movement::LOOP)
       {
+        current_frame %= current_mvt->frames.size();
+      }
+      else
+      if(current_mvt->play_mode == Movement::PLAY_ONCE)
+      {
+        current_frame = current_mvt->frames.size() - 1;
         if(play_once_clothe_sauv)
           SetClothe(play_once_clothe_sauv->name);
         if(play_once_mvt_sauv)
@@ -339,11 +345,7 @@ void Body::Build()
           SetMovement(play_once_mvt_sauv->type);
           current_frame = play_once_frame_sauv;
         }
-        current_frame %= current_mvt->frames.size();
       }
-      else
-      if(current_mvt->play_mode == Movement::PLAY_ONCE)
-        current_frame = current_mvt->frames.size() - 1;
     }
 
   }
