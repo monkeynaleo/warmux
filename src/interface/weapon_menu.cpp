@@ -22,7 +22,6 @@
 #include "weapon_menu.h"
 #include "../weapon/weapons_list.h"
 
-#include <sstream>
 #include <math.h>
 #include "interface.h"
 #include "../graphic/video.h"
@@ -110,7 +109,7 @@ void WeaponMenuItem::Draw(Surface * dest)
   Point2i tmp = GetOffsetAlignment() + Point2i(0, item->GetWidth() - 10);
   if(nb_bullets ==  INFINITE_AMMO) {
     Interface::GetInstance()->GetWeaponsMenu().GetInfiniteSymbol()->Blit(*dest, tmp);
-  } if(nb_bullets == 0) {
+  } else if(nb_bullets == 0) {
     tmp += Point2i(0, -Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->GetHeight() / 2);
     Interface::GetInstance()->GetWeaponsMenu().GetCrossSymbol()->Blit(*dest, tmp);
   } else {
@@ -149,7 +148,6 @@ WeaponsMenu::WeaponsMenu():
   weapons_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
   size = resource_manager.LoadPoint2i(res, "interface/tools_interface_size");
   tools_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
-
   // Setting colors
   Color plane_color = resource_manager.LoadColor(res, "interface/background_color");
   Color border_color = resource_manager.LoadColor(res, "interface/border_color");
@@ -293,6 +291,7 @@ void WeaponsMenu::Draw()
   // Update overfly weapon/tool
   if(UpdateCurrentOverflyItem(weapons_menu) == NULL)
     UpdateCurrentOverflyItem(tools_menu);
+
 }
 
 Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly)
