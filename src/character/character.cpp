@@ -425,7 +425,8 @@ void Character::Draw()
     SetMovement("walk");
 
 
-  Point2i pos = GetPosition();
+  // Refresh the body (needed to determine if "weapon-*-begin-shoot" is finnished)
+  body->Build();
 
   if(prepare_shoot)
   {
@@ -437,6 +438,7 @@ void Character::Draw()
     }
   }
 
+  Point2i pos = GetPosition();
   body->Draw(pos);
 
    // Draw energy bar
@@ -560,7 +562,7 @@ void Character::Refresh()
       CharacterCursor::GetInstance()->FollowActiveCharacter();
 
 
-    if(walking_time + 1000 < global_time->Read())
+    if(walking_time + 1000 < global_time->Read() && !prepare_shoot)
     if(body->GetMovement() != "weapon-" + ActiveTeam().GetWeapon().GetID() + "-select")
       body->SetMovement("weapon-" + ActiveTeam().GetWeapon().GetID() + "-select");
   }
