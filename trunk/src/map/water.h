@@ -27,6 +27,7 @@
 #include "../include/base.h"
 
 const uint WATER_INITIAL_HEIGHT = 100;
+#define pattern_width 180
 
 class Water
 {
@@ -38,7 +39,7 @@ private:
   double shift1;
   uint hauteur_eau;
   uint temps_montee;
-  std::vector<int> height;
+  int height[pattern_width];
   Surface surface;
   Surface pattern;
 public:
