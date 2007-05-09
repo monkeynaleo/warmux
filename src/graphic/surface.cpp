@@ -107,7 +107,7 @@ bool Surface::IsNull() const{
   return surface == NULL;
 }
 
-/** 
+/**
  * Return the size of a surface.
  */
 Point2i Surface::GetSize() const{
@@ -177,28 +177,6 @@ void Surface::AutoFree(){
  */
 void Surface::SetAutoFree( bool newAutoFree ){
 	autoFree = newAutoFree;
-}
-
-/**
- * Return the pointer of the SDL_Surface.
- *
- * Should be used carefully.
- */
-SDL_Surface *Surface::GetSurface(){
-	return surface;
-}
-
-/**
- * Change the surface pointer.
- *
- * @param newSurface The new surface to use.
- * @param freePrevius Indicate if the old surface should be freed.
- */
-void Surface::SetSurface(SDL_Surface *newSurface, bool freePrevious){
-	if( freePrevious )
-		Free();
-
-	surface = newSurface;
 }
 
 /**
@@ -785,23 +763,23 @@ void Surface::PutPixel(int x, int y, Uint32 pixel){
 SDL_Rect Surface::GetSDLRect(const Rectanglei &r) const
 {
   SDL_Rect sdlRect;
-  
+
   sdlRect.x = r.GetPositionX();
   sdlRect.y = r.GetPositionY();
   sdlRect.w = r.GetSizeX();
   sdlRect.h = r.GetSizeY();
-  
+
   return sdlRect;
 }
 
 SDL_Rect Surface::GetSDLRect(const Point2i &pt) const
 {
   SDL_Rect sdlRect;
-  
+
   sdlRect.x = pt.GetX();
   sdlRect.y = pt.GetY();
   sdlRect.w = 0;
   sdlRect.h = 0;
-  
+
   return sdlRect;
 }

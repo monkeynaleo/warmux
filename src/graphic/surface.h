@@ -38,7 +38,7 @@ private:
   int Blit(const Surface& src, SDL_Rect *srcRect, SDL_Rect *dstRect);
   SDL_Rect GetSDLRect(const Rectanglei &r) const;
   SDL_Rect GetSDLRect(const Point2i &r) const;
-  
+
 public:
   explicit Surface();
   explicit Surface(SDL_Surface *sdl_surface);
@@ -48,18 +48,35 @@ public:
   ~Surface();
 
   Surface &operator=(const Surface &src);
-  
+
   void Free();
   void AutoFree();
   void SetAutoFree(bool newAutoFree);
-  
-  void SetSurface(SDL_Surface *newSurface, bool freePrevious = true);
+
+  /**
+   * Change the surface pointer.
+   *
+   * @param newSurface The new surface to use.
+   * @param freePrevius Indicate if the old surface should be freed.
+   */
+  inline void SetSurface(SDL_Surface *newSurface, bool freePrevious = true){
+    if( freePrevious )
+      Free();
+
+    surface = newSurface;
+  }
+
+  /**
+   * Return the pointer of the SDL_Surface.
+   *
+   * Should be used carefully.
+   */
+  inline SDL_Surface *GetSurface()
+  { return surface; };
+
   void NewSurface(const Point2i &size, Uint32 flags, bool useAlpha = true);
-  
-  SDL_Surface *GetSurface();
-  
   int SetAlpha(Uint32 flags, Uint8 alpha);
-  
+
   int Lock();
   void Unlock();
 
@@ -70,7 +87,7 @@ public:
 
   int SetColorKey(Uint32 flag, Uint32 key);
   int SetColorKey(Uint32 flag, Uint8 r, Uint8 g, Uint8 b, Uint8 a);
-  
+
   void GetRGBA(Uint32 color, Uint8 &r, Uint8 &g, Uint8 &b, Uint8 &a) const;
   Uint32 MapRGBA(Uint8 r, Uint8 g, Uint8 b, Uint8 a) const;
   Color GetColor(Uint32 color) const;
