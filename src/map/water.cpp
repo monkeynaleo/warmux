@@ -45,7 +45,15 @@ void Water::Init(){
    Profile *res = resource_manager.LoadXMLProfile( "graphism.xml", false);
    surface = resource_manager.LoadImage(res, "gfx/water");
    surface.SetAlpha(0, 0);
-   pattern.NewSurface( Point2i(180, surface.GetHeight() + 40), SDL_SWSURFACE|SDL_SRCALPHA, true);
+   pattern.NewSurface(Point2i(pattern_width, surface.GetHeight() + 40),
+                      SDL_SWSURFACE|SDL_SRCALPHA, true);
+   /* Convert the pattern into the same format than surface. This allow not to need
+    * conversions on fly and thus saves CPU */
+   pattern.SetSurface(
+       SDL_ConvertSurface(pattern.GetSurface(),
+                          surface.GetSurface()->format,
+                          SDL_SWSURFACE|SDL_SRCALPHA),
+       true /* free old one */);
    shift1 = 0;
    resource_manager.UnLoadXMLProfile(res);
 }
@@ -58,8 +66,6 @@ void Water::Reset(){
   vague = 0;
   temps_eau = 0;
   temps_montee = GO_UP_TIME * 60 * 1000;
-  height.clear();
-  height.assign(180, 0);
   Refresh(); // Calculate first height position
 }
 
@@ -68,7 +74,6 @@ void Water::Free(){
     return;
   surface.Free();
   pattern.Free();
-  height.clear();
 }
 
 void Water::Refresh(){
@@ -101,64 +106,61 @@ void Water::Refresh(){
 		vague=0;
   }
 
-  int x = -surface.GetWidth() + vague;
-  int y = world.GetHeight()-(hauteur_eau + height_mvt);
 
-  double decree = (double) 2*M_PI/360;
+  double decree = static_cast<double>(2*M_PI/360.0);
 
   double angle1 = 0;
   double angle2 = shift1;
-  do
-  {
-    int offset=0;
-    double y_pos = y + sin(angle1)*10 + sin(angle2)*10;
 
-    if (0<=x+offset)
-	 height.at(x+offset) = (int)y_pos;
+  for (int x = -surface.GetWidth() + vague; x < pattern_width; x++)
+  {
+    double y_pos = sin(angle1)*10 + sin(angle2)*10;
+
+    if (0 <= x)
+      height[x] = (int)y_pos;
 
     angle1 += 2*decree;
     angle2 += 4*decree;
-    x++;
-  } while ((uint)x < 180);
+  }
 
   shift1 += 4*decree;
+
+  /* Now the wave has changed, we need to build the new image pattern */
+  pattern.SetAlpha( 0, 0);
+  pattern.Fill(0x00000000);
+
+  SDL_LockSurface(surface.GetSurface());
+  SDL_LockSurface(pattern.GetSurface());
+
+  uint bpp = surface.GetSurface()->format->BytesPerPixel;
+  for (uint x = 0; x < pattern_width; x++)
+    for (uint y=0; y<(uint)surface.GetHeight(); y++)
+      {
+        memcpy((Uint8*)pattern.GetSurface()->pixels + x * bpp
+               + (height[x]+20+y) * pattern.GetSurface()->pitch,
+               (Uint8*)surface.GetSurface()->pixels + y * bpp, bpp);
+      }
+
+  SDL_UnlockSurface(pattern.GetSurface());
+  SDL_UnlockSurface(surface.GetSurface());
+
+  pattern.SetAlpha(SDL_SRCALPHA, 0);
 }
 
 void Water::Draw(){
   if (!actif)
     return;
 
-  // Compute 1 pattern:
-  pattern.SetAlpha( 0, 0);
-  pattern.Fill(0x00000000);
+  int x0 = camera.GetPosition().x % pattern_width;
 
-  int y0 = world.GetHeight()-(hauteur_eau + height_mvt)-20;
-
-  for(uint x=0; x<180; x++){
-    Point2i dst(x, height.at(x) - y0);
-    pattern.Blit(surface, dst);
-  }
-  pattern.SetAlpha(SDL_SRCALPHA, 0);
-
-  int x0 = camera.GetPosition().x;
-  while(x0<0)
-    x0+=180;
-  while(x0>180)
-    x0-=180;
-
-  for(int x=camera.GetPosition().x-x0; x<camera.GetPosition().x+camera.GetSize().x; x+=180)
-    for(int y=y0; y<(int)camera.GetPosition().y+(int)camera.GetSize().y; y+=surface.GetSize().y)
+  for(int x=camera.GetPosition().x-x0; x<camera.GetPosition().x+camera.GetSize().x; x+=pattern_width)
+    for(int y=world.GetHeight()-(hauteur_eau + height_mvt)-20; y<(int)camera.GetPosition().y+(int)camera.GetSize().y; y+=surface.GetSize().y)
       AbsoluteDraw(pattern, Point2i(x, y));
 }
 
 int Water::GetHeight(int x){
-  if (IsActive()){
-    while(x<0)
-      x += 180;
-    while(x>=180)
-      x -= 180;
-    return height.at(x);
-  }
+  if (IsActive())
+    return height[x % pattern_width] + world.GetHeight()-(hauteur_eau + height_mvt);
   else
     return world.GetHeight();
 }
