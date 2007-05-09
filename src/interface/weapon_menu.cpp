@@ -22,6 +22,7 @@
 #include "weapon_menu.h"
 #include "../weapon/weapons_list.h"
 
+#include <sstream>
 #include <math.h>
 #include "interface.h"
 #include "../graphic/video.h"
@@ -291,7 +292,6 @@ void WeaponsMenu::Draw()
   // Update overfly weapon/tool
   if(UpdateCurrentOverflyItem(weapons_menu) == NULL)
     UpdateCurrentOverflyItem(tools_menu);
-
 }
 
 Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly)
