@@ -98,7 +98,7 @@ void ResultBox::SetResult(const std::string& name, int score, const Surface& tea
   score_lbl->SetText(score_str);
   team_picture->SetSurface(team_logo);
 
-  ForceRedraw();
+  //ForceRedraw();
 }
 
 void ResultBox::SetNoResult()
@@ -107,30 +107,43 @@ void ResultBox::SetNoResult()
   score_lbl->SetText("0");
   team_picture->SetNoSurface();
 
-  ForceRedraw();
+  //ForceRedraw();
 }
 
 
 ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
-                         const char *winner_name)
+                         const Team *winning_team)
   : Menu("menu/bg_play", vOk)
   , results(v)
   , index(0)
   , max_height(DEF_SIZE+3*DEF_BORDER)
   , team_size(360, 40)
-  , type_size(260, 40)
-  , name_size(250, 40)
-  , score_size(60, 40)
+  , type_size(200, 40)
+  , name_size(150, 40)
+  , score_size(40, 40)
 {
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i pos (0, 0);
 
-  // Center the boxes!
   uint x = 60;
   uint y = 60;
-
+  
+  // And the winner is :
+  if (winning_team) {
+    winner_box = new VBox(Rectanglei(x, y, 180, 0), true);
+    winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 180,1), Font::FONT_LARGE, Font::FONT_BOLD));
+    PictureWidget* winner_logo = new PictureWidget( Rectanglei(0,0,96,96));
+    winner_logo->SetSurface(winning_team->flag, true);
+    winner_box->AddWidget(winner_logo);
+    winner_box->AddWidget(new Label(winning_team->GetName(), Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    winner_box->AddWidget(new Label(winning_team->GetPlayerName(), Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    
+    widgets.AddWidget(winner_box);
+  }
+  x+=200;
+				   
   //Team selection
-  team_box = new HBox(Rectanglei(x, y, total_width, max_height), true);
+  team_box = new HBox(Rectanglei(x, y, 0, max_height), true);
   team_box->SetMargin(DEF_MARGIN);
   team_box->SetBorder(Point2i(DEF_BORDER, DEF_BORDER));
 
@@ -159,25 +172,29 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   resource_manager.UnLoadXMLProfile(res);
 
   //Results
-  most_violent = new ResultBox(Rectanglei(x, y+int(1.5*max_height), total_width, max_height),
-                               true, _("Most violent"), Font::FONT_BIG, Font::FONT_NORMAL,
-                               type_size, name_size, score_size);
-  widgets.AddWidget(most_violent);
+  statistics_box = new VBox(Rectanglei(x, y+int(1.5*max_height), 510, 0), true);
 
-  most_usefull = new ResultBox(Rectanglei(x, y+3*max_height, total_width, max_height),
-                               true, _("Most useful"), Font::FONT_BIG, Font::FONT_NORMAL,
+  most_violent = new ResultBox(Rectanglei(0,0,0, max_height),
+                               false, _("Most violent"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
-  widgets.AddWidget(most_usefull);
+  statistics_box->AddWidget(most_violent);
 
-  most_useless = new ResultBox(Rectanglei(x, y+int(4.5*max_height), total_width, max_height),
-                               true, _("Most useless"), Font::FONT_BIG, Font::FONT_NORMAL,
+  most_usefull = new ResultBox(Rectanglei(0,0,0, max_height),
+                               false, _("Most useful"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
-  widgets.AddWidget(most_useless);
+  statistics_box->AddWidget(most_usefull);
 
-  biggest_traitor = new ResultBox(Rectanglei(x, y+6*max_height, total_width, max_height),
-                                  true, _("Most sold-out"), Font::FONT_BIG, Font::FONT_NORMAL,
+  most_useless = new ResultBox(Rectanglei(0,0,0, max_height),
+                               false, _("Most useless"), Font::FONT_BIG, Font::FONT_NORMAL,
+                               type_size, name_size, score_size);
+  statistics_box->AddWidget(most_useless);
+
+  biggest_traitor = new ResultBox(Rectanglei(0,0,0, max_height),
+                                  false, _("Most sold-out"), Font::FONT_BIG, Font::FONT_NORMAL,
                                   type_size, name_size, score_size);
-  widgets.AddWidget(biggest_traitor);
+  statistics_box->AddWidget(biggest_traitor);
+
+  widgets.AddWidget(statistics_box);
 
   SetResult(0);
 }
@@ -194,6 +211,8 @@ void ResultsMenu::SetResult(int i)
 
   DrawBackground();
   b_ok->ForceRedraw();
+  winner_box->ForceRedraw();
+
   index = i;
   if (index < 0) index = results->size()-1;
   else if (index>(int)results->size()-1) index = 0;
@@ -238,6 +257,8 @@ void ResultsMenu::SetResult(int i)
     biggest_traitor->SetResult(player->GetName(), player->GetOwnDamage(), player->GetTeam().flag);
   else
     biggest_traitor->SetNoResult();
+
+  statistics_box->ForceRedraw();
 }
 
 void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
