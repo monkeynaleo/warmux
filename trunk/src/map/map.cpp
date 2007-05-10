@@ -32,7 +32,7 @@
 #include "../tool/i18n.h"
 #include "../tool/stats.h"
 
-const double DST_MIN_ENTRE_VERS = 50.0;
+const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
 
 const uint AUTHOR_INFO_TIME = 5000; // ms
 const uint AUTHOR_INFO_X = 100;
@@ -42,7 +42,7 @@ Map world;
 
 Map::Map()
 {
-  dst_min_entre_vers = DST_MIN_ENTRE_VERS;
+  min_distance_between_characters = MINIMUM_DISTANCE_BETWEEN_CHARACTERS;
 
   to_redraw = new std::list<Rectanglei>;
   to_redraw_now = new std::list<Rectanglei>;

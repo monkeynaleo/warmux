@@ -47,7 +47,7 @@ public:
 
   Ground ground;
   Sky sky;
-  double dst_min_entre_vers;
+  double min_distance_between_characters;
   Water water;
 
   std::list<Rectanglei> *to_redraw;
@@ -105,6 +105,7 @@ public:
   int GetWidth() const { return ground.GetSizeX(); }
   int GetHeight() const { return ground.GetSizeY(); }
   Point2i GetSize() const{ return ground.GetSize(); }
+  double GetDistanceBetweenCharacters() const { return min_distance_between_characters; }
 
  private:
   bool HorizontalLine_IsInVacuum (int left, int y,  int right) const;

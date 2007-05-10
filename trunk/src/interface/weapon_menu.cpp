@@ -33,6 +33,7 @@
 #include "../interface/mouse.h"
 #include "../map/camera.h"
 #include "../map/map.h"
+#include "../map/maps_list.h"
 #include "../team/team.h"
 #include "../team/teams_list.h"
 #include "../tool/point.h"
@@ -64,6 +65,12 @@ WeaponMenuItem::WeaponMenuItem(Weapon * new_weapon, const Point2d & position) :
 {
   SetSprite(new Sprite(weapon->GetIcon()));
   SetPosition(position);
+}
+
+WeaponMenuItem::~WeaponMenuItem()
+{
+  if(item)
+    delete item;
 }
 
 bool WeaponMenuItem::IsMouseOver()
@@ -149,6 +156,7 @@ WeaponsMenu::WeaponsMenu():
   weapons_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
   size = resource_manager.LoadPoint2i(res, "interface/tools_interface_size");
   tools_menu = PolygonGenerator::GenerateRoundedRectangle(size.x, size.y, 20);
+  help = NULL;
   // Setting colors
   Color plane_color = resource_manager.LoadColor(res, "interface/background_color");
   Color border_color = resource_manager.LoadColor(res, "interface/border_color");
@@ -163,18 +171,25 @@ WeaponsMenu::WeaponsMenu():
   tools_menu->AddItem(new Sprite(Font::GenerateSurface(_("Tools"), gray_color, Font::FONT_BIG)),
                         tools_menu->GetMin() + Point2d(20, 20), PolygonItem::LEFT, PolygonItem::TOP);
 
-  for(int i = 0; i < MAX_NUMBER_OF_WEAPON; i++)
-    nb_weapon_type[i] = 0;
-  resource_manager.UnLoadXMLProfile( res);
+  resource_manager.UnLoadXMLProfile(res);
+}
 
-  WeaponsList *weapons_list = WeaponsList::GetInstance();
-  for (WeaponsList::weapons_list_it it=weapons_list->GetList().begin(); it != weapons_list->GetList().end(); ++it)
-    AddWeapon(*it);
+WeaponsMenu::~WeaponsMenu()
+{
+  if(weapons_menu)
+    delete weapons_menu;
+  if(tools_menu)
+    delete tools_menu;
+  if(help)
+    delete help;
 }
 
 // Add a new weapon to the weapon menu.
 void WeaponsMenu::AddWeapon(Weapon* new_item)
 {
+  if(!new_item->CanBeUsedOnClosedMap() && !ActiveMap().IsOpened())
+    return;
+
   Point2d position;
   Weapon::category_t num_sort = new_item->Category();
   if(num_sort < 6) {
@@ -218,8 +233,40 @@ void WeaponsMenu::Hide()
 void WeaponsMenu::Reset()
 {
   Interface::GetInstance()->SetCurrentOverflyWeapon(NULL);
+  RefreshWeaponList();
   motion_start_time = 0;
   show = false;
+}
+
+void WeaponsMenu::RefreshWeaponList()
+{
+  // reset number of weapon
+  for(int i = 0; i < MAX_NUMBER_OF_WEAPON; i++)
+    nb_weapon_type[i] = 0;
+  weapons_menu->ResetTransformation();
+  tools_menu->ResetTransformation();
+  // Refreshing Weapons menu
+  std::vector<PolygonItem *> items = weapons_menu->GetItem();
+  std::vector<PolygonItem *>::iterator item = items.begin();
+  PolygonItem * tmp = (*item); item++;
+  for(; item != items.end(); item++) {
+    delete (*item);
+  }
+  weapons_menu->ClearItem();
+  weapons_menu->AddItem(tmp);
+  // Tools menu
+  items = tools_menu->GetItem();
+  item = items.begin();
+  tmp = (*item); item++;
+  for(; item != items.end(); item++) {
+    delete (*item);
+  }
+  tools_menu->ClearItem();
+  tools_menu->AddItem(tmp);
+  // Reinserting weapon
+  WeaponsList *weapons_list = WeaponsList::GetInstance();
+  for (WeaponsList::weapons_list_it it=weapons_list->GetList().begin(); it != weapons_list->GetList().end(); ++it)
+    AddWeapon(*it);
 }
 
 void WeaponsMenu::SwitchDisplay()
@@ -292,6 +339,10 @@ void WeaponsMenu::Draw()
   // Update overfly weapon/tool
   if(UpdateCurrentOverflyItem(weapons_menu) == NULL)
     UpdateCurrentOverflyItem(tools_menu);
+}
+
+void WeaponsMenu::SetHelp(std::ostringstream msg)
+{
 }
 
 Weapon * WeaponsMenu::UpdateCurrentOverflyItem(Polygon * poly)

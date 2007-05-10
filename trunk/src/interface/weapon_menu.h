@@ -29,6 +29,7 @@
 #include "../graphic/sprite.h"
 #include "../graphic/polygon.h"
 #include <vector>
+#include <sstream>
 
 class WeaponMenuItem : public PolygonItem {
   WeaponMenuItem(const WeaponMenuItem&);
@@ -41,6 +42,7 @@ class WeaponMenuItem : public PolygonItem {
 
  public:
   WeaponMenuItem(Weapon * weapon, const Point2d & position);
+  ~WeaponMenuItem();
   bool IsMouseOver();
   void SetZoom(bool value);
   void Draw(Surface * dest);
@@ -55,6 +57,7 @@ class WeaponsMenu
  private:
   Polygon * weapons_menu;
   Polygon * tools_menu;
+  Polygon * help;
   WeaponMenuItem * current_overfly_item;
   AffineTransform2D position;
   AffineTransform2D shear;
@@ -64,12 +67,15 @@ class WeaponsMenu
   Sprite * cross;
   bool show;
   uint motion_start_time;
+  uint select_start_time;
 
   int nbr_weapon_type; // number of weapon type = number of rows
   int * nb_weapon_type;
 
  public:
   WeaponsMenu();
+  ~WeaponsMenu();
+  void RefreshWeaponList();
   void AddWeapon(Weapon* new_item);
   void Draw();
   void SwitchDisplay();
@@ -78,6 +84,7 @@ class WeaponsMenu
   void Show();
   void Hide();
   void Reset();
+  void SetHelp(std::ostringstream msg);
   bool IsDisplayed() const;
   bool ActionClic(const Point2i &mouse_pos);
   Sprite * GetInfiniteSymbol() const;

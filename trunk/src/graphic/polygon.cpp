@@ -191,6 +191,14 @@ Polygon::Polygon(const Polygon & poly)
   shape_buffer->SetSize(original_shape.size());
 }
 
+Polygon::~Polygon()
+{
+  for(std::vector<PolygonItem *>::iterator item = items.begin();
+      item != items.end(); item++) {
+    delete (*item);
+  }
+}
+
 void Polygon::Init()
 {
   is_closed = true;
@@ -204,12 +212,14 @@ void Polygon::Init()
   min = max = Point2d(0.0, 0.0);
 }
 
-void Polygon::ApplyTransformation(const AffineTransform2D & trans)
+void Polygon::ApplyTransformation(const AffineTransform2D & trans, bool save_transformation)
 {
   int i = 0;
   for(std::vector<Point2d>::iterator point = original_shape.begin();
       point != original_shape.end(); point++, i++) {
     transformed_shape[i] = trans * (*point);
+    if(save_transformation)
+      (*point) = transformed_shape[i];
     shape_buffer->vx[i] = (int)transformed_shape[i].x;
     shape_buffer->vy[i] = (int)transformed_shape[i].y;
     if(i == 0) {
@@ -223,6 +233,28 @@ void Polygon::ApplyTransformation(const AffineTransform2D & trans)
       item != items.end(); item++) {
     (*item)->ApplyTransformation(trans);
   }
+}
+
+// Reset the point
+void Polygon::ResetTransformation()
+{
+  for(int i = 0; i < (int)original_shape.size(); i++) {
+    transformed_shape[i] = original_shape[i];
+    shape_buffer->vx[i] = (int)original_shape[i].x;
+    shape_buffer->vy[i] = (int)original_shape[i].y;
+    if(i == 0) {
+      max = min = transformed_shape[i];
+    } else {
+      max = max.max(transformed_shape[i]);
+      min = min.min(transformed_shape[i]);
+    }
+  }
+}
+
+// Applying definitively the transformation
+void Polygon::SaveTransformation(const AffineTransform2D & trans)
+{
+  ApplyTransformation(trans, true);
 }
 
 // Check if a point is inside the polygon using Jordan curve theorem (amen).
@@ -340,6 +372,11 @@ void Polygon::DelItem(int index)
 std::vector<PolygonItem *> Polygon::GetItem() const
 {
   return items;
+}
+
+void Polygon::ClearItem()
+{
+  items.clear();
 }
 
 double Polygon::GetWidth() const
