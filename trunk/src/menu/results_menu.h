@@ -25,8 +25,8 @@
 #include "menu.h"
 #include "../include/base.h"
 #include "../graphic/font.h"
+#include "../team/results.h"
 
-class TeamResults;
 class ResultBox;
 
 class ResultsMenu : public Menu
