@@ -91,24 +91,24 @@ void Game::MessageLoading() const
 void Game::MessageEndOfGame() const
 {
   std::vector<TeamResults*>* results_list = TeamResults::createAllResults();
-  const char *winner_name = NULL;
+  const Team *winning_team = NULL;
 
   FOR_EACH_TEAM(team)
   {
     // Determine winner
     if (0 < (**team).NbAliveCharacter())
     {
-      winner_name = (**team).GetName().c_str();
+      winning_team = *team;
       break;
     }
   }
 
   // Print out results
-  if (winner_name)
+  if (winning_team)
     jukebox.Play("share","victory");
 
   Mouse::GetInstance()->SetPointer(Mouse::POINTER_STANDARD);
-  ResultsMenu menu(results_list, winner_name);
+  ResultsMenu menu(results_list, winning_team);
   menu.Run();
 
   TeamResults::deleteAllResults(results_list);

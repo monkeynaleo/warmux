@@ -39,7 +39,6 @@ class ResultsMenu : public Menu
     int     index;
 
     // Box sizes
-    int     total_width;
     int     max_height;
     Point2i team_size;
     Point2i type_size;
@@ -53,6 +52,8 @@ class ResultsMenu : public Menu
     Label   *team_name;
     HBox    *team_box;
 
+    Box    *winner_box;
+    Box    *statistics_box;
     ResultBox* most_violent;
     ResultBox* most_usefull;
     ResultBox* most_useless;
@@ -67,7 +68,7 @@ class ResultsMenu : public Menu
     void Draw(const Point2i &mousePosition);
  public:
     ResultsMenu(const std::vector<TeamResults*>* v,
-                const char *winner_name);
+                const Team *winning_team);
     ~ResultsMenu();
 };
 
