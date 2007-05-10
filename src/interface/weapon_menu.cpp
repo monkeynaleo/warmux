@@ -326,8 +326,7 @@ bool WeaponsMenu::ActionClic(const Point2i &mouse_pos)
   if(tmp != NULL) {
     // Check we have enough ammo
     int nb_bullets = ActiveTeam().ReadNbAmmos(tmp->GetType());
-    if( nb_bullets == INFINITE_AMMO || nb_bullets > 0)
-    {
+    if((nb_bullets == INFINITE_AMMO || nb_bullets > 0) && ActiveTeam().GetWeapon().CanChangeWeapon()) {
       ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_PLAYER_CHANGE_WEAPON, tmp->GetType()));
       Hide();
       return true;
