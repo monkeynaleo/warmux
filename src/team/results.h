@@ -26,8 +26,9 @@
 #include <map>
 #include <string>
 
+#include "team.h"
+
 class Character;
-class Team;
 
 // Could be a 5-tuple
 class TeamResults

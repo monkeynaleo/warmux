@@ -39,12 +39,9 @@ const Point2i DefSize(DEF_SIZE, DEF_SIZE);
 class ResultBox : public HBox
 {
 private:
-  Box   *type_box;
-  Box   *name_box;
   Label *name_lbl;
-  Box   *score_box;
   Label *score_lbl;
-
+  PictureWidget *team_picture;
 public:
   ResultBox(const Rectanglei &rect, bool _visible,
             const char* type_name, 
@@ -55,7 +52,8 @@ public:
             const Point2i& score_size);
   // Hopefully no need for ~ResultBox() as it automatically
   // destroy child widgets by inheriting from HBox
-  void SetResult(const std::string& name, int score);
+  void SetResult(const std::string& name, int score, const Surface& team_logo);
+  void SetNoResult();
 };
 
 ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
@@ -73,24 +71,21 @@ ResultBox::ResultBox(const Rectanglei &rect, bool _visible,
   margin = DEF_MARGIN;
   border.SetValues(DEF_BORDER, DEF_BORDER);
 
-  type_box = new HBox( Rectanglei(pos, type_size), false);
-  type_box->AddWidget(new Label(type_name, Rectanglei(pos, type_size), font_size, font_style));
-  AddWidget(type_box);
+  AddWidget(new Label(type_name, Rectanglei(pos, type_size), font_size, font_style));
 
   pos.SetValues(pos.GetX()+type_size.GetX(), pos.GetY());
-  name_box = new HBox( Rectanglei(pos, name_size), false);
   name_lbl = new Label("", Rectanglei(pos, name_size), font_size, font_style);
-  name_box->AddWidget(name_lbl);
-  AddWidget(name_box);
+  AddWidget(name_lbl);
 
   pos.SetValues(pos.GetX()+name_size.GetX(), pos.GetY());
-  score_box = new HBox( Rectanglei(pos, score_size), false);
   score_lbl = new Label("", Rectanglei(pos, score_size), font_size, font_style);
-  score_box->AddWidget(score_lbl);
-  AddWidget(score_box);
+  AddWidget(score_lbl);
+
+  team_picture = new PictureWidget( Rectanglei(0,0,48,48) );
+  AddWidget(team_picture);
 }
 
-void ResultBox::SetResult(const std::string& name, int score)
+void ResultBox::SetResult(const std::string& name, int score, const Surface& team_logo)
 {
   char buffer[16];
   std::string copy_name(name);
@@ -101,9 +96,20 @@ void ResultBox::SetResult(const std::string& name, int score)
 
   name_lbl->SetText(copy_name);
   score_lbl->SetText(score_str);
+  team_picture->SetSurface(team_logo);
 
   ForceRedraw();
 }
+
+void ResultBox::SetNoResult()
+{
+  name_lbl->SetText(_("Nobody!"));
+  score_lbl->SetText("0");
+  team_picture->SetNoSurface();
+
+  ForceRedraw();
+}
+
 
 ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
                          const char *winner_name)
@@ -208,30 +214,30 @@ void ResultsMenu::SetResult(int i)
   //Most violent
   player = res->getMostViolent();
   if(player)
-    most_violent->SetResult(player->GetName(), player->GetMostDamage());
+    most_violent->SetResult(player->GetName(), player->GetMostDamage(), player->GetTeam().flag);
   else
-    most_violent->SetResult(_("Nobody!"), 0);
+    most_violent->SetNoResult();
 
   //Most usefull
   player = res->getMostUsefull();
   if(player)
-    most_usefull->SetResult(player->GetName(), player->GetOtherDamage());
+    most_usefull->SetResult(player->GetName(), player->GetOtherDamage(), player->GetTeam().flag);
   else
-    most_usefull->SetResult(_("Nobody!"), 0);
+    most_usefull->SetNoResult();
 
   //Most usefull
   player = res->getMostUseless();
   if(player)
-    most_useless->SetResult(player->GetName(), player->GetOtherDamage());
+    most_useless->SetResult(player->GetName(), player->GetOtherDamage(), player->GetTeam().flag);
   else
-    most_useless->SetResult(_("Nobody!"), 0);
+    most_useless->SetNoResult();
 
   // Biggest sold-out
   player = res->getBiggestTraitor();
   if(player)
-    biggest_traitor->SetResult(player->GetName(), player->GetOwnDamage());
+    biggest_traitor->SetResult(player->GetName(), player->GetOwnDamage(), player->GetTeam().flag);
   else
-    biggest_traitor->SetResult(_("Nobody!"), 0);
+    biggest_traitor->SetNoResult();
 }
 
 void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
