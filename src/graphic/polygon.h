@@ -108,11 +108,14 @@ class Polygon {
   Polygon();
   Polygon(const std::vector<Point2d> shape);
   Polygon(const Polygon & poly);
+  virtual ~Polygon();
   // Point handling
   void AddPoint(const Point2d & p);
   void InsertPoint(int index, const Point2d & p);
   void DeletePoint(int index);
-  void ApplyTransformation(const AffineTransform2D & trans);
+  void ApplyTransformation(const AffineTransform2D & trans, bool save_transformation = false);
+  void ResetTransformation();
+  void SaveTransformation(const AffineTransform2D & trans);
 
   // Test
   bool IsInsidePolygon(const Point2d & point) const;
@@ -178,6 +181,7 @@ class Polygon {
   void AddItem(PolygonItem * item);
   void DelItem(int index);
   std::vector<PolygonItem *> GetItem() const;
+  void ClearItem();
 };
 
 #endif /* POLYGON_H */

@@ -373,14 +373,20 @@ void Interface::Show()
 {
   if(display) return;
   display = true;
-  start_show_display = Time::GetInstance()->Read();
+  if(start_show_display + 1000 < (int)Time::GetInstance()->Read())
+    start_show_display = Time::GetInstance()->Read();
+  else
+    start_show_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_show_display));
 }
 
 void Interface::Hide()
 {
   if(!display) return;
   display = false;
-  start_hide_display = Time::GetInstance()->Read() + 1000;
+  if(start_hide_display + 1000 < (int)Time::GetInstance()->Read())
+    start_hide_display = Time::GetInstance()->Read();
+  else
+    start_hide_display = Time::GetInstance()->Read() - (1000 - ((int)Time::GetInstance()->Read() - start_hide_display));
 }
 
 bool Interface::IsVisible() const

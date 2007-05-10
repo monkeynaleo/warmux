@@ -103,8 +103,8 @@ bool Team::LoadCharacters()
     {
       xmlpp::Element *elem = dynamic_cast<xmlpp::Element*> (*it);
       Body* body;
-      std::string character_name="Soldat Inconnu";
-      std::string body_name="";
+      std::string character_name = "Unknown Soldier (it's all over)";
+      std::string body_name = "";
       XmlReader::ReadStringAttr(elem, "name", character_name);
       XmlReader::ReadStringAttr(elem, "body", body_name);
 
@@ -122,10 +122,10 @@ bool Team::LoadCharacters()
       Character new_character(*this, character_name, body);
       characters.push_back(new_character);
       active_character = characters.begin(); // we need active_character to be initialized here !!
-      if (!characters.back().PutRandomly(false, world.dst_min_entre_vers))
+      if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters()))
       {
         // We haven't found any place to put the characters!!
-        if (!characters.back().PutRandomly(false, world.dst_min_entre_vers/2)) {
+        if (!characters.back().PutRandomly(false, world.GetDistanceBetweenCharacters() / 2)) {
           std::cerr << std::endl;
           std::cerr << "Error: " << character_name.c_str() << " will be probably misplaced!" << std::endl;
           std::cerr << std::endl;
