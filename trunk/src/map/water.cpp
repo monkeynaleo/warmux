@@ -29,10 +29,6 @@
 #include "../interface/interface.h"
 #include "../tool/resource_manager.h"
 
-const uint WAVE_TIME=10;
-const uint WAVE_STEP=1;
-const uint WAVE_HEIGHT = 5;
-
 const uint GO_UP_TIME = 1; // min
 const uint GO_UP_STEP = 15; // pixels
 const uint GO_UP_OSCILLATION_TIME = 30; // seconds
@@ -102,7 +98,7 @@ void Water::Refresh(){
 
   for (int x = 0; x < pattern_width; x++)
   {
-    height[x] = (sin(angle1) + sin(angle2)) * 10;
+    height[x] = static_cast<int>((sin(angle1) + sin(angle2)) * 10);
     angle1 += 2*decree;
     angle2 += 4*decree;
   }
