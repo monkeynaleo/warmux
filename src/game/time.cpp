@@ -48,12 +48,21 @@ bool Time::IsGamePaused() const {
 Time::Time(){
   is_game_paused = false;
   delta_t = 20;
-  max_time = 0;
+  //max_time = 0;
+  real_time_game_start = 0;
+  real_time_pause_dt = 0;
 }
 
 void Time::Reset(){
   current_time = 0;
   is_game_paused = false;
+  real_time_game_start = SDL_GetTicks();
+  real_time_pause_dt = 0;
+  real_time_pause_begin = 0;
+}
+
+uint Time::ReadRealTime() {
+  return SDL_GetTicks() - real_time_game_start - real_time_pause_dt;
 }
 
 uint Time::Read() const{
@@ -73,13 +82,15 @@ void Time::Refresh(){
      current_time < max_time)
   */
   current_time += delta_t;
-  RefreshMaxTime(current_time);
+  //RefreshMaxTime(current_time);
 }
 
+/*
 void Time::RefreshMaxTime(uint updated_max_time){
   if(updated_max_time > max_time)
     max_time = updated_max_time;
 }
+*/
 
 uint Time::ReadSec() const{
   return Read() / 1000;
@@ -97,11 +108,13 @@ void Time::Pause(){
   if (is_game_paused)
     return;
   is_game_paused = true;
+  real_time_pause_begin = SDL_GetTicks();
 }
 
 void Time::Continue(){
   assert (is_game_paused);
   is_game_paused = false;
+  real_time_pause_dt += SDL_GetTicks() - real_time_pause_begin;
 }
 
 uint Time::ClockSec(){

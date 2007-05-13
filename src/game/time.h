@@ -29,10 +29,14 @@ class Time
 {
 private:
   uint current_time;
-  uint max_time;
+  //uint max_time;
   uint delta_t;
   bool is_game_paused;
   static Time * singleton;
+
+  uint real_time_game_start;
+  uint real_time_pause_dt;
+  uint real_time_pause_begin;
 
 private:
   Time();
@@ -43,12 +47,13 @@ public:
   bool IsGamePaused() const;
 
   // Read the time of the game, excluding paused time
+  uint ReadRealTime();
   uint Read() const;
   uint ReadSec() const;
   uint ReadMin() const;
   void Refresh();
   uint GetDelta() const;
-  void RefreshMaxTime(uint updated_max_time);
+  //void RefreshMaxTime(uint updated_max_time);
 
   // Read the clock time
   uint ClockSec();  // ReadSec() % 60
