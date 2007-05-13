@@ -570,7 +570,7 @@ void ActionHandler::ExecActions()
   {
     SDL_LockMutex(mutex);
     a = (*it);
-    Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
+    //Time::GetInstance()->RefreshMaxTime((*it)->GetTimestamp());
     // If action is in the future, wait for next refresh
     if((*it)->GetTimestamp() > Time::GetInstance()->Read()) {
       SDL_UnlockMutex(mutex);
