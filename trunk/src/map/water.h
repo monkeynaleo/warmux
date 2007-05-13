@@ -32,9 +32,7 @@ const uint WATER_INITIAL_HEIGHT = 100;
 class Water
 {
 private:
-  uint temps_eau;
   int height_mvt;
-  int vague;
   bool actif;
   double shift1;
   uint hauteur_eau;
