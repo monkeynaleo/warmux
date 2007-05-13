@@ -63,8 +63,6 @@ void Water::Reset(){
   if(!actif) return;
   Init();
   hauteur_eau = WATER_INITIAL_HEIGHT;
-  vague = 0;
-  temps_eau = 0;
   temps_montee = GO_UP_TIME * 60 * 1000;
   Refresh(); // Calculate first height position
 }
@@ -96,29 +94,15 @@ void Water::Refresh(){
     }
   }
 
-  ////////  Wave calculation:
-  // Fill ground with water
-  if (WAVE_TIME < (global_time->Read() - temps_eau))
-  {
-    temps_eau = global_time->Read();
-    vague += WAVE_STEP;
-    if (surface.GetWidth() <= vague)
-		vague=0;
-  }
-
-
   double decree = static_cast<double>(2*M_PI/360.0);
-
+  /* FIXME angle1 always start a 0 which means that the calculation is always
+   * the same ; maybe it could be replaced by some array of values */
   double angle1 = 0;
   double angle2 = shift1;
 
-  for (int x = -surface.GetWidth() + vague; x < pattern_width; x++)
+  for (int x = 0; x < pattern_width; x++)
   {
-    double y_pos = sin(angle1)*10 + sin(angle2)*10;
-
-    if (0 <= x)
-      height[x] = (int)y_pos;
-
+    height[x] = (sin(angle1) + sin(angle2)) * 10;
     angle1 += 2*decree;
     angle2 += 4*decree;
   }
@@ -126,12 +110,16 @@ void Water::Refresh(){
   shift1 += 4*decree;
 
   /* Now the wave has changed, we need to build the new image pattern */
-  pattern.SetAlpha( 0, 0);
+  pattern.SetAlpha(0, 0);
   pattern.Fill(0x00000000);
 
+  /* Locks on SDL_Surface must be taken when accessing pixel member */
   SDL_LockSurface(surface.GetSurface());
   SDL_LockSurface(pattern.GetSurface());
 
+  /* Copy directly the surface image into the pattern image. This doesn't use
+   * blit in order to save CPU but it makes this code not really easy to read..
+   * The copy is done pixel per pixel */
   uint bpp = surface.GetSurface()->format->BytesPerPixel;
   for (uint x = 0; x < pattern_width; x++)
     for (uint y=0; y<(uint)surface.GetHeight(); y++)
