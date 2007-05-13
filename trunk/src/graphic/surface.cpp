@@ -114,16 +114,6 @@ Point2i Surface::GetSize() const{
   return Point2i( GetWidth(), GetHeight() );
 }
 
-/// Return the width of a surface.
-int Surface::GetWidth() const{
-  return surface->w;
-}
-
-/// Return the height of a surface.
-int Surface::GetHeight() const{
-  return surface->h;
-}
-
 Uint32 Surface::GetFlags() const{
   return surface->flags;
 }
