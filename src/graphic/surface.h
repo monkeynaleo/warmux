@@ -124,8 +124,10 @@ public:
 
   bool IsNull() const;
   Point2i GetSize() const;
-  int GetWidth() const;
-  int GetHeight() const;
+
+  inline int GetWidth() const { return surface->w; }
+  inline int GetHeight() const { return surface->h; }
+
   Uint32 GetFlags() const;
   Uint16 GetPitch() const;
   Uint8 GetBytesPerPixel() const;
