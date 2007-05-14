@@ -100,7 +100,7 @@ NetworkMenu::NetworkMenu() :
 
     player_number = NULL;
     connected_players = NULL;
-    inited_players = NULL;
+    initialized_players = NULL;
   } else {
 
     // Server Mode
@@ -117,9 +117,9 @@ NetworkMenu::NetworkMenu() :
 				rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
     tmp_box->AddWidget(connected_players);
 
-    inited_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
-			       rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
-    tmp_box->AddWidget(inited_players);
+    initialized_players = new Label(Format(ngettext("%i player ready", "%i players ready", 0), 0),
+				    rectZero, Font::FONT_SMALL, Font::FONT_NORMAL);
+    tmp_box->AddWidget(initialized_players);
   }
 
   options_box->AddWidget(tmp_box);
@@ -279,12 +279,18 @@ void NetworkMenu::Draw(const Point2i &mousePosition)
 	connected_players->SetText(pl);
     }
 
-    if (inited_players != NULL) {
+    if (initialized_players != NULL) {
       //Refresh the number of players ready:
       int nbr = Network::GetInstanceServer()->GetNbInitializedPlayers();
       std::string pl = Format(ngettext("%i player ready", "%i players ready", nbr), nbr);
-      if(inited_players->GetText() != pl)
-	inited_players->SetText(pl);
+      if (initialized_players->GetText() != pl) {
+	initialized_players->SetText(pl);
+	msg_box->NewMessage(pl, c_red);
+	if (Network::GetInstanceServer()->GetNbConnectedPlayers() - 
+	    Network::GetInstanceServer()->GetNbInitializedPlayers() == 1) {
+	  msg_box->NewMessage(_("The others are waiting for you! Wake up :-)"), c_red);
+	}
+      }
     }
 
     index_server.Refresh();
