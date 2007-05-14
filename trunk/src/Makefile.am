@@ -11,6 +11,7 @@ wormux_SOURCES = \
 	character/body_list.cpp character/body_list.h \
 	character/character.cpp character/character.h \
 	character/clothe.cpp character/clothe.h \
+	character/damage_stats.cpp character/damage_stats.h \
 	character/member.cpp character/member.h \
 	character/move.cpp character/move.h \
 	character/movement.cpp character/movement.h \

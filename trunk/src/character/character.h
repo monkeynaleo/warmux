@@ -31,6 +31,7 @@
 #include "../object/physical_obj.h"
 #include "../particles/particle.h"
 #include "body.h"
+#include "damage_stats.h"
 
 class Team;
 class ParticleEngine;
@@ -52,10 +53,7 @@ private:
 
   uint disease_damage_per_turn;
   uint disease_duration;
-  int  damage_other_team;
-  int  damage_own_team;
-  int  max_damage;
-  int  current_total_damage;
+  DamageStatistics damage_stats;
   EnergyBar energy_bar;
 
   // survived games
@@ -163,17 +161,13 @@ public:
 
   // Access to character info
   const std::string& GetName() const { return character_name; }
-  bool IsSameAs(const Character& other) { return (GetName() == other.GetName()); }
+  bool IsSameAs(const Character& other) const { return (GetName() == other.GetName()); }
 
   // Hand position
   const Point2i & GetHandPosition() const;
 
   // Damage report
-  void HandleMostDamage();
-  void MadeDamage(const int Dmg, const Character &other);
-  int  GetMostDamage() const { return max_damage; }
-  int  GetOwnDamage() const { return damage_own_team; }
-  int  GetOtherDamage() const { return damage_other_team; }
+  const DamageStatistics& GetDamageStats() const;
 
   // Body handling
   Body * GetBody() const;

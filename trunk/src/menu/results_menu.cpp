@@ -21,9 +21,10 @@
 
 #include "results_menu.h"
 
-#include "../team/results.h"
 #include "../character/character.h"
 #include "../include/app.h"
+#include "../team/results.h"
+#include "../team/macro.h"
 #include "../tool/i18n.h"
 #include "../tool/string_tools.h"
 
@@ -111,8 +112,7 @@ void ResultBox::SetNoResult()
 }
 
 
-ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
-                         const Team *winning_team)
+ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v)
   : Menu("menu/bg_play", vOk)
   , results(v)
   , index(0)
@@ -122,21 +122,37 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
   , name_size(150, 40)
   , score_size(40, 40)
 {
+  Team* winning_team = NULL;
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i pos (0, 0);
 
   uint x = 60;
   uint y = 60;
-  
+
+  // And the winner is :
+  FOR_EACH_TEAM(team)
+  {
+    // Determine winner
+    if (0 < (**team).NbAliveCharacter())
+    {
+      winning_team = *team;
+      break;
+    }
+  }
+
   // And the winner is :
   if (winning_team) {
+    jukebox.Play("share","victory");
+
     winner_box = new VBox(Rectanglei(x, y, 180, 0), true);
     winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 180,1), Font::FONT_LARGE, Font::FONT_BOLD));
     PictureWidget* winner_logo = new PictureWidget( Rectanglei(0,0,96,96));
     winner_logo->SetSurface(winning_team->flag, true);
     winner_box->AddWidget(winner_logo);
     winner_box->AddWidget(new Label(winning_team->GetName(), Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
-    winner_box->AddWidget(new Label(winning_team->GetPlayerName(), Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
+
+    std::string tmp = _("Controlled by: ") + winning_team->GetPlayerName();
+    winner_box->AddWidget(new Label(tmp, Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
     
     widgets.AddWidget(winner_box);
   }
@@ -179,10 +195,10 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v,
                                type_size, name_size, score_size);
   statistics_box->AddWidget(most_violent);
 
-  most_usefull = new ResultBox(Rectanglei(0,0,0, max_height),
+  most_useful = new ResultBox(Rectanglei(0,0,0, max_height),
                                false, _("Most useful"), Font::FONT_BIG, Font::FONT_NORMAL,
                                type_size, name_size, score_size);
-  statistics_box->AddWidget(most_usefull);
+  statistics_box->AddWidget(most_useful);
 
   most_useless = new ResultBox(Rectanglei(0,0,0, max_height),
                                false, _("Most useless"), Font::FONT_BIG, Font::FONT_NORMAL,
@@ -233,28 +249,28 @@ void ResultsMenu::SetResult(int i)
   //Most violent
   player = res->getMostViolent();
   if(player)
-    most_violent->SetResult(player->GetName(), player->GetMostDamage(), player->GetTeam().flag);
+    most_violent->SetResult(player->GetName(), player->GetDamageStats().GetMostDamage(), player->GetTeam().flag);
   else
     most_violent->SetNoResult();
 
-  //Most usefull
-  player = res->getMostUsefull();
+  //Most useful
+  player = res->getMostUseful();
   if(player)
-    most_usefull->SetResult(player->GetName(), player->GetOtherDamage(), player->GetTeam().flag);
+    most_useful->SetResult(player->GetName(), player->GetDamageStats().GetOtherDamage(), player->GetTeam().flag);
   else
-    most_usefull->SetNoResult();
+    most_useful->SetNoResult();
 
-  //Most usefull
+  //Most useless
   player = res->getMostUseless();
   if(player)
-    most_useless->SetResult(player->GetName(), player->GetOtherDamage(), player->GetTeam().flag);
+    most_useless->SetResult(player->GetName(), player->GetDamageStats().GetOtherDamage(), player->GetTeam().flag);
   else
     most_useless->SetNoResult();
 
   // Biggest sold-out
   player = res->getBiggestTraitor();
   if(player)
-    biggest_traitor->SetResult(player->GetName(), player->GetOwnDamage(), player->GetTeam().flag);
+    biggest_traitor->SetResult(player->GetName(), player->GetDamageStats().GetOwnDamage(), player->GetTeam().flag);
   else
     biggest_traitor->SetNoResult();
 

@@ -55,7 +55,7 @@ class ResultsMenu : public Menu
     Box    *winner_box;
     Box    *statistics_box;
     ResultBox* most_violent;
-    ResultBox* most_usefull;
+    ResultBox* most_useful;
     ResultBox* most_useless;
     ResultBox* biggest_traitor;
 
@@ -67,8 +67,7 @@ class ResultsMenu : public Menu
     void OnClickUp(const Point2i &mousePosition, int button);
     void Draw(const Point2i &mousePosition);
  public:
-    ResultsMenu(const std::vector<TeamResults*>* v,
-                const Team *winning_team);
+    ResultsMenu(const std::vector<TeamResults*>* v);
     ~ResultsMenu();
 };
 

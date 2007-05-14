@@ -41,7 +41,7 @@ private:
   const std::string teamName;
   const Surface* team_logo;
   const Character* mostViolent;
-  const Character* mostUsefull;
+  const Character* mostUseful;
   const Character* mostUseless;
   const Character* biggestTraitor;
 protected:
@@ -60,7 +60,7 @@ public:
   const std::string& getTeamName() const { return teamName; };
   const Surface* getTeamLogo() const {return team_logo;};
   const Character* getMostViolent() const { return mostViolent; };
-  const Character* getMostUsefull() const { return mostUsefull; };
+  const Character* getMostUseful() const { return mostUseful; };
   const Character* getMostUseless() const { return mostUseless; };
   const Character* getBiggestTraitor() const { return biggestTraitor; };
 };
