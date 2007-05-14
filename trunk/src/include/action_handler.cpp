@@ -379,10 +379,17 @@ void SendCharacterInfo(int team_no, int char_no)
   Network::GetInstance()->SendAction(&a);
 }
 
+uint last_time = 0;
+
 // Send active character information over the network (it's totally stupid to send it locally ;-)
-void SendActiveCharacterInfo()
+void SendActiveCharacterInfo(bool can_be_dropped)
 {
-  SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  uint current_time = Time::GetInstance()->Read();
+
+  if (!can_be_dropped || last_time + 50 < Time::GetInstance()->Read()) {
+    last_time = current_time; 
+    SendCharacterInfo(ActiveCharacter().GetTeamIndex(), ActiveCharacter().GetCharacterIndex());
+  }
 }
 
 // ########################################################
@@ -494,10 +501,16 @@ void Action_Wind (Action *a)
   wind.SetVal (a->PopInt());
 }
 
-void Action_Network_SendRandom (Action *a)
+void Action_Network_RandomAdd (Action *a)
 {
-  if (!Network::GetInstance()->IsClient()) return;
+  assert(Network::GetInstance()->IsClient())
   randomSync.AddToTable(a->PopDouble());
+}
+
+void Action_Network_RandomClear (Action *a)
+{
+  assert(Network::GetInstance()->IsClient());
+  randomSync.ClearTable();
 }
 
 void Action_Network_SyncBegin (Action *a)
@@ -707,7 +720,8 @@ ActionHandler::ActionHandler():
 
   Register (Action::ACTION_EXPLOSION, "explosion", &Action_Explosion);
   Register (Action::ACTION_WIND, "wind", &Action_Wind);
-  Register (Action::ACTION_NETWORK_SEND_RANDOM, "NETWORK_send_random", &Action_Network_SendRandom);
+  Register (Action::ACTION_NETWORK_RANDOM_CLEAR, "NETWORK_clear_random", &Action_Network_RandomClear);
+  Register (Action::ACTION_NETWORK_RANDOM_ADD, "NETWORK_add_random", &Action_Network_RandomAdd);
   Register (Action::ACTION_NETWORK_DISCONNECT, "NETWORK_disconnect", &Action_Network_Disconnect);
   Register (Action::ACTION_NETWORK_CONNECT, "NETWORK_connect", &Action_Network_Connect);
 

@@ -35,12 +35,17 @@ RandomSync::RandomSync(){
 
 void RandomSync::Init(){
   //If we are a client on the network, we don't generate any random number
-  if(Network::GetInstance()->IsClient()) return;
+  if (Network::GetInstance()->IsClient()) return;
 
   srand( time(NULL) );
 
   rnd_table.clear();
 
+  if  (Network::GetInstance()->IsServer()) {
+    Action a(Action::ACTION_NETWORK_RANDOM_CLEAR);
+    Network::GetInstance()->SendAction(&a);
+  }
+  
   //Fill the pregenerated tables:
   for(uint i=0; i < table_size; i++)
     GenerateTable();
@@ -48,15 +53,25 @@ void RandomSync::Init(){
 
 void RandomSync::GenerateTable()
 {
-  //Add a random number to the table, send it over network if needed
+  //Add a random number to the table
   double nbr = rand();
   AddToTable(nbr);
-  if(Network::GetInstance()->IsServer()) ActionHandler::GetInstance()->NewAction(new Action(Action::ACTION_NETWORK_SEND_RANDOM,nbr));
+
+  // send it over network if needed
+  if (Network::GetInstance()->IsServer()) {
+    Action a(Action::ACTION_NETWORK_RANDOM_ADD,nbr);
+    Network::GetInstance()->SendAction(&a);
+  }
 }
 
 void RandomSync::AddToTable(double nbr)
 {
   rnd_table.push_back(nbr);
+}
+
+void RandomSync::ClearTable()
+{
+  rnd_table.clear();
 }
 
 double RandomSync::GetRand()
