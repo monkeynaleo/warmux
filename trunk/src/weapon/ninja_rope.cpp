@@ -328,7 +328,7 @@ void NinjaRope::Refresh()
     return;
 
   ActiveCharacter().UpdatePosition();
-  SendActiveCharacterInfo();
+  SendActiveCharacterInfo(true);
 }
 
 void NinjaRope::Draw()
