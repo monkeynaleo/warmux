@@ -111,10 +111,7 @@ Character::Character (Team& my_team, const std::string &name, Body *char_body) :
   firing_angle(0),
   disease_damage_per_turn(0),
   disease_duration(0),
-  damage_other_team(0),
-  damage_own_team(0),
-  max_damage(0),
-  current_total_damage(0),
+  damage_stats(*this),
   energy_bar(),
   survivals(0),
   name_text(NULL),
@@ -166,10 +163,7 @@ Character::Character (const Character& acharacter) :
   firing_angle(acharacter.firing_angle),
   disease_damage_per_turn(acharacter.disease_damage_per_turn),
   disease_duration(acharacter.disease_duration),
-  damage_other_team(acharacter.damage_other_team),
-  damage_own_team(acharacter.damage_own_team),
-  max_damage(acharacter.max_damage),
-  current_total_damage(acharacter.current_total_damage),
+  damage_stats(acharacter.damage_stats, *this),
   energy_bar(acharacter.energy_bar),
   survivals(acharacter.survivals),
   name_text(NULL),
@@ -214,7 +208,7 @@ void Character::SignalDrowning()
 void Character::SignalGhostState (bool was_dead)
 {
   // Report to damage performer this character lost all of its energy
-  ActiveCharacter().MadeDamage(GetEnergy(), *this);
+  ActiveCharacter().damage_stats.MadeDamage(GetEnergy(), *this);
 
   MSG_DEBUG("character", "ghost");
 
@@ -253,6 +247,11 @@ void Character::DrawName (int dy) const
   }
 }
 
+const DamageStatistics& Character::GetDamageStats() const
+{
+  return damage_stats;
+}
+
 void Character::SetEnergyDelta (int delta, bool do_report)
 {
   // If already dead, do nothing
@@ -260,7 +259,7 @@ void Character::SetEnergyDelta (int delta, bool do_report)
 
   // Report damage to damage performer
   if (do_report)
-    ActiveCharacter().MadeDamage(-delta, *this);
+    ActiveCharacter().damage_stats.MadeDamage(-delta, *this);
 
   uint saved_life_points = GetEnergy();
 
@@ -606,7 +605,7 @@ void Character::Refresh()
 // Prepare a new turn
 void Character::PrepareTurn()
 {
-  HandleMostDamage();
+  damage_stats.HandleMostDamage();
   lost_energy = 0;
   pause_bouge_dg = Time::GetInstance()->Read();
 }
@@ -763,41 +762,8 @@ void Character::AddFiringAngle(double angle) {
   SetFiringAngle(firing_angle + angle);
 }
 
-void Character::HandleMostDamage()
-{
-  if (current_total_damage > max_damage)
-  {
-    max_damage = current_total_damage;
-  }
-#ifdef DEBUG_STATS
-  std::cerr << m_name << " most damage: " << max_damage << std::endl;
-#endif
-  current_total_damage = 0;
-}
-
 void Character::Hide() { hidden = true; }
 void Character::Show() { hidden = false; }
-
-void Character::MadeDamage(const int Dmg, const Character &other)
-{
-  if (m_team.IsSameAs(other.GetTeam()))
-  {
-#ifdef DEBUG_STATS
-    std::cerr << m_name << " damaged own team with " << Dmg << std::endl;
-#endif
-    if (Character::IsSameAs(other))
-      damage_own_team += Dmg;
-  }
-  else
-  {
-#ifdef DEBUG_STATS
-    std::cerr << m_name << " damaged other team with " << Dmg << std::endl;
-#endif
-    damage_other_team += Dmg;
-  }
-
-  current_total_damage += Dmg;
-}
 
 void Character::SetWeaponClothe()
 {
