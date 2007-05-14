@@ -43,7 +43,6 @@ LowGrav::LowGrav() : Weapon(WEAPON_LOWGRAV, "lowgrav",
 
 void LowGrav::Refresh()
 {
-  ActiveCharacter().UpdatePosition();
 }
 
 void LowGrav::p_Deselect()
