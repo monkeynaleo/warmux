@@ -7,6 +7,7 @@ ai/ai_shoot_module.cpp
 character/body.cpp
 character/body_list.cpp
 character/character.cpp
+character/damage_stats.cpp
 character/clothe.cpp
 character/member.cpp
 character/move.cpp
