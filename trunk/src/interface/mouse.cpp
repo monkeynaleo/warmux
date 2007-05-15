@@ -23,17 +23,17 @@
 
 #include "cursor.h"
 #include "interface.h"
-#include "../game/game_mode.h"
-#include "../game/game_loop.h"
-#include "../game/time.h"
-#include "../graphic/video.h"
-#include "../include/app.h"
-#include "../include/action_handler.h"
-#include "../map/camera.h"
-#include "../map/map.h"
-#include "../team/macro.h"
-#include "../tool/point.h"
-#include "../weapon/weapon.h"
+#include "game/game_mode.h"
+#include "game/game_loop.h"
+#include "game/time.h"
+#include "graphic/video.h"
+#include "include/app.h"
+#include "include/action_handler.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "team/macro.h"
+#include "tool/point.h"
+#include "weapon/weapon.h"
 
 // mouse scroll speed
 const uint SCROLL_MOUSE = 20;

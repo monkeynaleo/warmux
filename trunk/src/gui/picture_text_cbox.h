@@ -22,7 +22,7 @@
 #ifndef PICTURE_TEXT_CBOX_H
 #define PICTURE_TEXT_CBOX_H
 
-#include "../gui/check_box.h"
+#include "gui/check_box.h"
 
 class PictureTextCBox : public CheckBox
 {

@@ -23,12 +23,12 @@
 #define INTERFACE_H
 #include <vector>
 #include "weapon_menu.h"
-#include "../graphic/surface.h"
-#include "../graphic/sprite.h"
-#include "../gui/progress_bar.h"
-#include "../include/base.h"
-#include "../character/character.h"
-#include "../team/team.h"
+#include "graphic/surface.h"
+#include "graphic/sprite.h"
+#include "gui/progress_bar.h"
+#include "include/base.h"
+#include "character/character.h"
+#include "team/team.h"
 
 #ifdef WIN32
 #undef interface

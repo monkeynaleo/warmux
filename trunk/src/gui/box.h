@@ -24,7 +24,7 @@
 
 #include "widget_list.h"
 #include <list>
-#include "../tool/point.h"
+#include "tool/point.h"
 
 class Box : public WidgetList
 {

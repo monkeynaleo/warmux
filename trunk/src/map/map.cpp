@@ -24,13 +24,13 @@
 #include "camera.h"
 #include "maps_list.h"
 #include "wind.h"
-#include "../game/time.h"
-#include "../graphic/surface.h"
-#include "../graphic/font.h"
-#include "../include/constant.h"
-#include "../object/bonus_box.h"
-#include "../tool/i18n.h"
-#include "../tool/stats.h"
+#include "game/time.h"
+#include "graphic/surface.h"
+#include "graphic/font.h"
+#include "include/constant.h"
+#include "object/bonus_box.h"
+#include "tool/i18n.h"
+#include "tool/stats.h"
 
 const double MINIMUM_DISTANCE_BETWEEN_CHARACTERS = 50.0;
 

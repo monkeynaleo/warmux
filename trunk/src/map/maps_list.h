@@ -24,10 +24,10 @@
 #include <SDL.h>
 #include <string>
 #include <map>
-#include "../graphic/surface.h"
-#include "../include/base.h"
-#include "../tool/resource_manager.h"
-#include "../tool/xml_document.h"
+#include "graphic/surface.h"
+#include "include/base.h"
+#include "tool/resource_manager.h"
+#include "tool/xml_document.h"
 
 class InfoMap{
 

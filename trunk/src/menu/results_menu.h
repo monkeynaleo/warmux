@@ -23,9 +23,9 @@
 #define RESULTS_MENU_H
 
 #include "menu.h"
-#include "../include/base.h"
-#include "../graphic/font.h"
-#include "../team/results.h"
+#include "include/base.h"
+#include "graphic/font.h"
+#include "team/results.h"
 
 class ResultBox;
 

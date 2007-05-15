@@ -19,7 +19,7 @@
  * Refresh des fichiers.
  *****************************************************************************/
 
-#include "../tool/file_tools.h"
+#include "tool/file_tools.h"
 #include <fstream>
 #ifdef _WIN32
    // To get SHGetSpecialFolderPath

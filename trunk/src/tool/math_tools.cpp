@@ -19,7 +19,7 @@
  * Outils mathématiques.
  *****************************************************************************/
 
-#include "../tool/math_tools.h"
+#include "tool/math_tools.h"
 #include <math.h>
 
 // Limit under which, real numbers are considered as NULL

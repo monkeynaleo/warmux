@@ -24,8 +24,8 @@
 //-----------------------------------------------------------------------------
 #include <map>
 #include <SDL.h>
-#include "../include/action.h"
-#include "../include/base.h"
+#include "include/action.h"
+#include "include/base.h"
 //-----------------------------------------------------------------------------
 
 class Keyboard

@@ -24,13 +24,13 @@
 #include <algorithm>
 #include "all.h"
 #include "explosion.h"
-#include "../game/game_loop.h"
-#include "../game/time.h"
-#include "../interface/interface.h"
-#include "../object/objects_list.h"
-#include "../map/camera.h"
-#include "../team/macro.h"
-#include "../map/maps_list.h"
+#include "game/game_loop.h"
+#include "game/time.h"
+#include "interface/interface.h"
+#include "object/objects_list.h"
+#include "map/camera.h"
+#include "team/macro.h"
+#include "map/maps_list.h"
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------

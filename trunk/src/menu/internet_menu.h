@@ -25,7 +25,7 @@
 
 #include <list>
 #include "menu.h"
-#include "../gui/button_text.h"
+#include "gui/button_text.h"
 
 class InternetMenu : public Menu
 {

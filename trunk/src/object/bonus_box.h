@@ -23,11 +23,11 @@
 #define BONUS_BOX_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
-#include "../include/base.h"
+#include "include/base.h"
 #include "objbox.h"
-#include "../object/physical_obj.h"
-#include "../team/team.h"
-#include "../weapon/weapons_list.h"
+#include "object/physical_obj.h"
+#include "team/team.h"
+#include "weapon/weapons_list.h"
 //-----------------------------------------------------------------------------
 
 class BonusBox : public ObjBox

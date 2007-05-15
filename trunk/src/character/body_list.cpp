@@ -22,9 +22,9 @@
 //-----------------------------------------------------------------------------
 #include <string>
 #include <iostream>
-#include "../game/config.h" // DATADIR
-#include "../tool/i18n.h"
-#include "../tool/xml_document.h"
+#include "game/config.h" // DATADIR
+#include "tool/i18n.h"
+#include "tool/xml_document.h"
 
 const std::string CONFIG_FN = "config.xml";
 //-----------------------------------------------------------------------------

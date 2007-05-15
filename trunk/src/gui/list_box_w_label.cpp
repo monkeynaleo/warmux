@@ -22,10 +22,10 @@
 #include "list_box_w_label.h"
 #include <algorithm>
 #include <SDL_gfxPrimitives.h>
-#include "../graphic/font.h"
-#include "../include/app.h"
-#include "../tool/math_tools.h"
-#include "../tool/resource_manager.h"
+#include "graphic/font.h"
+#include "include/app.h"
+#include "tool/math_tools.h"
+#include "tool/resource_manager.h"
 
 //#define SCROLLBAR
 

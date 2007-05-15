@@ -24,15 +24,15 @@
  * If the object go outside of the world, it become a ghost.
  *****************************************************************************/
 
-#include "../object/physics.h"
+#include "object/physics.h"
 #include <stdlib.h>
 #include <iostream>
-#include "../game/config.h"
-#include "../game/game_mode.h"
-#include "../game/time.h"
-#include "../tool/debug.h"
-#include "../tool/math_tools.h"
-#include "../map/wind.h"
+#include "game/config.h"
+#include "game/game_mode.h"
+#include "game/time.h"
+#include "tool/debug.h"
+#include "tool/math_tools.h"
+#include "map/wind.h"
 
 // Physical constants
 const double STOP_REBOUND_LIMIT = 0.5 ;

@@ -22,9 +22,9 @@
 #ifndef GUI_BUTTON_H
 #define GUI_BUTTON_H
 
-#include "../include/base.h"
-#include "../graphic/sprite.h"
-#include "../tool/resource_manager.h"
+#include "include/base.h"
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 #include "widget.h"
 
 class Button : public Widget

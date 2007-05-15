@@ -22,10 +22,10 @@
 #ifndef SCROLLING_H
 #define SCROLLING_H
 
-#include "../include/base.h"
-#include "../object/physical_obj.h"
-#include "../tool/point.h"
-#include "../tool/rectangle.h"
+#include "include/base.h"
+#include "object/physical_obj.h"
+#include "tool/point.h"
+#include "tool/rectangle.h"
 
 class Camera : public Rectanglei
 {

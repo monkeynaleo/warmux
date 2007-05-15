@@ -21,8 +21,8 @@
 
 #include "ground_particles.h"
 #include "particle.h"
-#include "../game/time.h"
-#include "../map/map.h"
+#include "game/time.h"
+#include "map/map.h"
 
 GroundParticle::GroundParticle(const Point2i& size, const Point2i& position) :
   Particle("ground_particle")

@@ -21,7 +21,7 @@
 
 #ifndef FILE_TOOLS_H
 #define FILE_TOOLS_H
-#include "../include/base.h"
+#include "include/base.h"
 
 // Check if a file exists
 bool IsFileExist(const std::string &name);

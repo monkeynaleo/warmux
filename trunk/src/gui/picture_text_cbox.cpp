@@ -20,10 +20,10 @@
  *****************************************************************************/
 
 #include "picture_text_cbox.h"
-#include "../include/app.h"
-#include "../graphic/font.h"
-#include "../graphic/sprite.h"
-#include "../tool/resource_manager.h"
+#include "include/app.h"
+#include "graphic/font.h"
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 
 PictureTextCBox::PictureTextCBox(const std::string &label, const std::string &resource_id, 
 				 const Rectanglei &rect, bool value):

@@ -25,11 +25,11 @@
 #include "ground.h"
 #include "sky.h"
 #include "water.h"
-#include "../graphic/surface.h"
-#include "../graphic/sprite.h"
-#include "../graphic/text.h"
-#include "../include/base.h"
-#include "../object/physical_obj.h"
+#include "graphic/surface.h"
+#include "graphic/sprite.h"
+#include "graphic/text.h"
+#include "include/base.h"
+#include "object/physical_obj.h"
 
 extern const uint MAX_WIND_OBJECTS;
 

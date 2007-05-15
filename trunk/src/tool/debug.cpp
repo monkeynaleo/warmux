@@ -24,7 +24,7 @@
 #include <stdarg.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "../include/base.h"
+#include "include/base.h"
 
 /**
  * The debug modes in use.

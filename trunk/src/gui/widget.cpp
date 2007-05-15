@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "widget.h"
-#include "../tool/point.h"
+#include "tool/point.h"
 
 Widget::Widget():
   Rectanglei(),

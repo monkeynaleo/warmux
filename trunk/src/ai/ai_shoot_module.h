@@ -22,7 +22,7 @@
 #ifndef AI_SHOOT_MODULE_H
 #define AI_SHOOT_MODULE_H
 
-#include "../character/character.h"
+#include "character/character.h"
 #include "ai_movement_module.h"
 
 class AIShootModule

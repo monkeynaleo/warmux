@@ -23,7 +23,7 @@
 #define POLYGON_H
 
 #include <vector>
-#include "../tool/affine_transform.h"
+#include "tool/affine_transform.h"
 #include "surface.h"
 #include "sprite.h"
 

@@ -24,15 +24,15 @@
 #include <sstream>
 #include <math.h>
 #include "explosion.h"
-#include "../game/time.h"
-#include "../graphic/video.h"
-#include "../interface/game_msg.h"
-#include "../map/camera.h"
-#include "../object/objects_list.h"
-#include "../team/teams_list.h"
-#include "../tool/math_tools.h"
-#include "../tool/i18n.h"
-#include "../network/randomsync.h"
+#include "game/time.h"
+#include "graphic/video.h"
+#include "interface/game_msg.h"
+#include "map/camera.h"
+#include "object/objects_list.h"
+#include "team/teams_list.h"
+#include "tool/math_tools.h"
+#include "tool/i18n.h"
+#include "network/randomsync.h"
 
 Cluster::Cluster(ClusterBombConfig& cfg,
                  WeaponLauncher * p_launcher) :

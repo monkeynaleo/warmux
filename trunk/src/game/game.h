@@ -23,9 +23,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "../include/base.h"
-#include "../gui/question.h"
-#include "../weapon/weapons_list.h"
+#include "include/base.h"
+#include "gui/question.h"
+#include "weapon/weapons_list.h"
 
 class Game
 {

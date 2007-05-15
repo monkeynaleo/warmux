@@ -23,8 +23,8 @@
 #include <string>
 #include <iostream>
 #include "ai_engine_stupid.h"
-#include "../game/game_loop.h"
-#include "../team/teams_list.h"
+#include "game/game_loop.h"
+#include "team/teams_list.h"
 
 
 AIengine * AIengine::singleton = NULL;

@@ -22,10 +22,10 @@
 #ifndef MAP_SELECTION_BOX_H
 #define MAP_SELECTION_BOX_H
 
-#include "../gui/box.h"
-#include "../gui/button.h"
-#include "../gui/label.h"
-#include "../gui/picture_widget.h"
+#include "gui/box.h"
+#include "gui/button.h"
+#include "gui/label.h"
+#include "gui/picture_widget.h"
 
 class MapSelectionBox : public HBox
 {

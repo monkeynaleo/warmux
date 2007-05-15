@@ -22,9 +22,9 @@
 #ifndef CONSTRUCT_H
 #define CONSTRUCT_H
 #include "weapon.h"
-#include "../include/base.h"
-#include "../tool/point.h"
-#include "../graphic/sprite.h"
+#include "include/base.h"
+#include "tool/point.h"
+#include "graphic/sprite.h"
 
 class Construct : public Weapon
 {

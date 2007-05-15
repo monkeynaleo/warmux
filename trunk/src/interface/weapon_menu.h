@@ -22,12 +22,12 @@
 #ifndef WEAPON_MENU_H
 #define WEAPON_MENU_H
 
-#include "../include/base.h"
-#include "../character/character.h"
-#include "../team/team.h"
-#include "../weapon/weapon.h"
-#include "../graphic/sprite.h"
-#include "../graphic/polygon.h"
+#include "include/base.h"
+#include "character/character.h"
+#include "team/team.h"
+#include "weapon/weapon.h"
+#include "graphic/sprite.h"
+#include "graphic/polygon.h"
 #include <vector>
 #include <sstream>
 

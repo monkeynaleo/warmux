@@ -23,10 +23,10 @@
 #define MOUSE_H
 
 #include <SDL.h>
-#include "../graphic/surface.h"
-#include "../include/app.h"
-#include "../include/base.h"
-#include "../tool/point.h"
+#include "graphic/surface.h"
+#include "include/app.h"
+#include "include/base.h"
+#include "tool/point.h"
 
 class Mouse
 {

@@ -22,12 +22,12 @@
 #include <iostream>
 #include <SDL_endian.h>
 #include <SDL_image.h>
-#include "../game/config.h"
-#include "../tool/error.h"
-#include "../tool/i18n.h"
-#include "../include/app.h"
-#include "../include/constant.h"
-#include "../map/camera.h"
+#include "game/config.h"
+#include "tool/error.h"
+#include "tool/i18n.h"
+#include "include/app.h"
+#include "include/constant.h"
+#include "map/camera.h"
 
 
 Video::Video(){

@@ -22,8 +22,8 @@
 #ifndef RANDOMSYNC_H
 #define RANDOMSYNC_H
 #include <list>
-#include "../tool/rectangle.h"
-#include "../tool/point.h"
+#include "tool/rectangle.h"
+#include "tool/point.h"
 
 class RandomSync{
   //Pregenerated table of random number (mainly usefull for network)

@@ -24,7 +24,7 @@
 
 #include <vector>
 #include "launcher.h"
-#include "../include/base.h"
+#include "include/base.h"
 
 class SnipeBullet : public WeaponBullet
 {

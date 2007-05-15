@@ -24,11 +24,11 @@
 #include <string>
 #include "font.h"
 #include "colors.h"
-#include "../game/config.h"
-#include "../include/app.h"
-#include "../map/map.h"
-#include "../tool/error.h"
-#include "../tool/file_tools.h"
+#include "game/config.h"
+#include "include/app.h"
+#include "map/map.h"
+#include "tool/error.h"
+#include "tool/file_tools.h"
 
 Font* Font::FONT_ARRAY[] = {NULL, NULL, NULL, NULL, NULL, NULL};
 Font* Font::FONT_ARRAY_BOLD[] = {NULL, NULL, NULL, NULL, NULL, NULL};

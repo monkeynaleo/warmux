@@ -22,9 +22,9 @@
 
 #include <vector>
 #include "tileitem.h"
-#include "../graphic/surface.h"
-#include "../graphic/sprite.h"
-#include "../tool/rectangle.h"
+#include "graphic/surface.h"
+#include "graphic/sprite.h"
+#include "tool/rectangle.h"
 
 const uint EXPLOSION_BORDER_SIZE = 10;
 

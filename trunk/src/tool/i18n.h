@@ -23,7 +23,7 @@
 #ifndef FORMAT_H
 #define FORMAT_H
 
-#include "../include/base.h"
+#include "include/base.h"
 #include <string>
 #include <libintl.h>
 

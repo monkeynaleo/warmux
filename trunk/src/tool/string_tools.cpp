@@ -19,7 +19,7 @@
  * Refresh des chaînes de caractère (string).
  *****************************************************************************/
 
-#include "../tool/string_tools.h"
+#include "tool/string_tools.h"
 #include <sstream>
 
 bool str2long (const std::string &txt, long &valeur)

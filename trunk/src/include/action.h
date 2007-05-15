@@ -27,8 +27,8 @@
 #include <iostream>
 #include <list>
 #include "base.h"
-#include "../tool/point.h"
-#include "../network/distant_cpu.h"
+#include "tool/point.h"
+#include "network/distant_cpu.h"
 
 class DistantComputer;
 //-----------------------------------------------------------------------------

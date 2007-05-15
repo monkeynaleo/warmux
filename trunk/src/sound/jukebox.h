@@ -29,7 +29,7 @@
 #include <map>
 #include <set>
 #include <utility>
-#include "../include/base.h"
+#include "include/base.h"
 //-----------------------------------------------------------------------------
 
 /* Informations about music...

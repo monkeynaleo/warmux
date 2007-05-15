@@ -21,15 +21,15 @@
 
 #include "options_menu.h"
 
-#include "../include/app.h"
-#include "../game/game_mode.h"
-#include "../game/config.h"
-#include "../graphic/video.h"
-#include "../graphic/font.h"
-#include "../map/maps_list.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
-#include "../tool/string_tools.h"
+#include "include/app.h"
+#include "game/game_mode.h"
+#include "game/config.h"
+#include "graphic/video.h"
+#include "graphic/font.h"
+#include "map/maps_list.h"
+#include "team/teams_list.h"
+#include "tool/i18n.h"
+#include "tool/string_tools.h"
 #include <sstream>
 
 const uint SOUND_X = 30;

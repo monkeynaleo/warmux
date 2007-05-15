@@ -24,9 +24,9 @@
 #define GAME_MODE_H
 
 #include <string>
-#include "../include/base.h"
-#include "../tool/xml_document.h"
-#include "../weapon/weapon_cfg.h"
+#include "include/base.h"
+#include "tool/xml_document.h"
+#include "weapon/weapon_cfg.h"
 
 class GameMode
 {

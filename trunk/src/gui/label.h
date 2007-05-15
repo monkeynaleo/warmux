@@ -22,9 +22,9 @@
 #ifndef LABEL_H
 #define LABEL_H
 
-#include "../include/base.h"
-#include "../graphic/text.h"
-#include "../gui/widget.h"
+#include "include/base.h"
+#include "graphic/text.h"
+#include "gui/widget.h"
 #include <string>
 
 class Label : public Widget{

@@ -5,7 +5,7 @@
 #ifndef XML_DOCUMENT_H
 #define XML_DOCUMENT_H
 
-#include "../include/base.h"
+#include "include/base.h"
 #include <string>
 #include <libxml++/libxml++.h>
 

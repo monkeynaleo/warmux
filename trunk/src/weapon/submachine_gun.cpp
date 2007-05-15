@@ -23,16 +23,16 @@
  *****************************************************************************/
 
 #include <sstream>
-#include "../map/map.h"
-#include "../game/time.h"
-#include "../object/objects_list.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
-#include "../interface/game_msg.h"
-#include "../interface/game_msg.h"
-#include "../weapon/explosion.h"
-#include "../weapon/submachine_gun.h"
-#include "../network/randomsync.h"
+#include "map/map.h"
+#include "game/time.h"
+#include "object/objects_list.h"
+#include "team/teams_list.h"
+#include "tool/i18n.h"
+#include "interface/game_msg.h"
+#include "interface/game_msg.h"
+#include "weapon/explosion.h"
+#include "weapon/submachine_gun.h"
+#include "network/randomsync.h"
 
 const uint    SUBMACHINE_BULLET_SPEED       = 30;
 const double  SUBMACHINE_TIME_BETWEEN_SHOOT = 70;

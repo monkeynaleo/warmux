@@ -22,9 +22,9 @@
 #ifndef CURSOR_H
 #define CURSOR_H
 //-----------------------------------------------------------------------------
-#include "../graphic/sprite.h"
-#include "../object/physical_obj.h"
-#include "../include/base.h"
+#include "graphic/sprite.h"
+#include "object/physical_obj.h"
+#include "include/base.h"
 //-----------------------------------------------------------------------------
 
 class CharacterCursor

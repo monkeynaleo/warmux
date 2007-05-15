@@ -24,7 +24,7 @@
 #define CHAT_H
 
 #include <SDL.h>
-#include "../graphic/text_list.h"
+#include "graphic/text_list.h"
 #include "network.h"
 
 class Chat

@@ -23,15 +23,15 @@
 #include "grenade.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
-#include "../game/time.h"
-#include "../team/teams_list.h"
-#include "../graphic/video.h"
-#include "../tool/math_tools.h"
-#include "../map/camera.h"
-#include "../weapon/explosion.h"
-#include "../interface/game_msg.h"
-#include "../tool/i18n.h"
-#include "../object/objects_list.h"
+#include "game/time.h"
+#include "team/teams_list.h"
+#include "graphic/video.h"
+#include "tool/math_tools.h"
+#include "map/camera.h"
+#include "weapon/explosion.h"
+#include "interface/game_msg.h"
+#include "tool/i18n.h"
+#include "object/objects_list.h"
 //-----------------------------------------------------------------------------
 
 Grenade::Grenade(ExplosiveWeaponConfig& cfg,

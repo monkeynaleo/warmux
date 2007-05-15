@@ -20,13 +20,13 @@
  *****************************************************************************/
 
 #include <sstream>
-#include "../include/app.h"
-#include "../include/constant.h"
+#include "include/app.h"
+#include "include/constant.h"
 #include "results.h"
-#include "../character/character.h"
+#include "character/character.h"
 #include "team.h"
 #include "macro.h"
-#include "../tool/i18n.h"
+#include "tool/i18n.h"
 
 TeamResults::TeamResults(const std::string& name,
 			 const Surface* logo,

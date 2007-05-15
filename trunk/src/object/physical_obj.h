@@ -28,8 +28,8 @@
 #define PHYSICAL_OBJECT_H
 
 #include "physics.h"
-#include "../tool/point.h"
-#include "../tool/rectangle.h"
+#include "tool/point.h"
+#include "tool/rectangle.h"
 
 // Alive state
 typedef enum

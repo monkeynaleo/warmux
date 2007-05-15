@@ -30,8 +30,8 @@
 
 #include <string>
 #include "xml_document.h"
-#include "../graphic/sprite.h"
-#include "../map/random_map.h"
+#include "graphic/sprite.h"
+#include "map/random_map.h"
 
 class Profile
 {

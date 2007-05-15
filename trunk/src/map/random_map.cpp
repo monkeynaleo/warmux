@@ -20,7 +20,7 @@
  *****************************************************************************/
 
 #include "random_map.h"
-#include "../tool/random.h"
+#include "tool/random.h"
 
 MapElement::MapElement(Surface & object, Point2i & pos)
 {

@@ -22,8 +22,8 @@
 #ifndef WEAPON_CONFIGURATION_H
 #define WEAPON_CONFIGURATION_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../tool/xml_document.h"
+#include "include/base.h"
+#include "tool/xml_document.h"
 //-----------------------------------------------------------------------------
 
 class EmptyWeaponConfig

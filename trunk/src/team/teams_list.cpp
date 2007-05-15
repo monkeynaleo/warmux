@@ -21,11 +21,11 @@
 
 #include "teams_list.h"
 //-----------------------------------------------------------------------------
-#include "../character/body_list.h"
-#include "../include/action_handler.h"
-#include "../game/config.h"
-#include "../tool/file_tools.h"
-#include "../tool/i18n.h"
+#include "character/body_list.h"
+#include "include/action_handler.h"
+#include "game/config.h"
+#include "tool/file_tools.h"
+#include "tool/i18n.h"
 #include "team_energy.h"
 #include <algorithm>
 #include <iostream>

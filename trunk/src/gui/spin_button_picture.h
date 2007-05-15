@@ -22,8 +22,8 @@
 #ifndef SPIN_BUTTON_PICTURE_H
 #define SPIN_BUTTON_PICTURE_H
 
-#include "../include/base.h"
-#include "../graphic/text.h"
+#include "include/base.h"
+#include "graphic/text.h"
 #include "widget.h"
 #include "button.h"
 #include <string>

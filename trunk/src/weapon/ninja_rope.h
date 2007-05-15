@@ -23,7 +23,7 @@
 #define NINJA_ROPE_H
 //-----------------------------------------------------------------------------
 #include "weapon.h"
-#include "../include/base.h"
+#include "include/base.h"
 //-----------------------------------------------------------------------------
 
 class NinjaRopeConfig : public EmptyWeaponConfig

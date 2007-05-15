@@ -21,14 +21,14 @@
 
 #include "question.h"
 #include <SDL.h>
-#include "../graphic/text.h"
-#include "../graphic/font.h"
-#include "../graphic/video.h"
-#include "../include/app.h"
-#include "../interface/interface.h"
-#include "../interface/mouse.h"
-#include "../map/map.h"
-#include "../tool/resource_manager.h"
+#include "graphic/text.h"
+#include "graphic/font.h"
+#include "graphic/video.h"
+#include "include/app.h"
+#include "interface/interface.h"
+#include "interface/mouse.h"
+#include "map/map.h"
+#include "tool/resource_manager.h"
 
 Question::Question()
 {

@@ -22,8 +22,8 @@
 #ifndef OBJECTS_LIST_H
 #define OBJECTS_LIST_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../object/physical_obj.h"
+#include "include/base.h"
+#include "object/physical_obj.h"
 #include <list>
 //-----------------------------------------------------------------------------
 

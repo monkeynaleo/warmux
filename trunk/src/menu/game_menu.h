@@ -25,8 +25,8 @@
 #include "menu.h"
 #include "map_selection_box.h"
 #include "teams_selection_box.h"
-#include "../include/base.h"
-#include "../graphic/font.h"
+#include "include/base.h"
+#include "graphic/font.h"
 
 class GameMenu : public Menu
 {

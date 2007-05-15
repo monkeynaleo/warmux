@@ -23,10 +23,10 @@
 #define MEDKIT_H
 //-----------------------------------------------------------------------------
 #include <SDL.h>
-#include "../include/base.h"
+#include "include/base.h"
 #include "objbox.h"
-#include "../object/physical_obj.h"
-#include "../team/team.h"
+#include "object/physical_obj.h"
+#include "team/team.h"
 //-----------------------------------------------------------------------------
 
 class Medkit : public ObjBox//public PhysicalObj

@@ -20,9 +20,9 @@
  *****************************************************************************/
 
 #include "damage_stats.h"
-#include "../character/character.h"
-#include "../team/team.h"
-#include "../tool/debug.h"
+#include "character/character.h"
+#include "team/team.h"
+#include "tool/debug.h"
 
 DamageStatistics::DamageStatistics(const Character& _owner) :
   owner(_owner),

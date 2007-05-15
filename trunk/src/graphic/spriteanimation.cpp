@@ -23,7 +23,7 @@
  *****************************************************************************/
 
 #include "spriteanimation.h"
-#include "../game/time.h"
+#include "game/time.h"
 #include "sprite.h"
 
 SpriteAnimation::SpriteAnimation(Sprite &p_sprite) :

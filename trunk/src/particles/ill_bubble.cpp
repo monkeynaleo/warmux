@@ -22,8 +22,8 @@
 
 #include "ill_bubble.h"
 #include "explosion_smoke.h"
-#include "../game/time.h"
-#include "../tool/random.h"
+#include "game/time.h"
+#include "tool/random.h"
 
 // Vibration period of the bubble
 const uint vib_period = 250;

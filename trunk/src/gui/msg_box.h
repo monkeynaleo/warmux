@@ -22,9 +22,9 @@
 #ifndef MSG_BOX_H
 #define MSG_BOX_H
 
-#include "../include/base.h"
-#include "../graphic/font.h"
-#include "../graphic/text.h"
+#include "include/base.h"
+#include "graphic/font.h"
+#include "graphic/text.h"
 #include "widget.h"
 #include <list>
 

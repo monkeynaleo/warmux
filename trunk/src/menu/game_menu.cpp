@@ -23,14 +23,14 @@
 #include "map_selection_box.h"
 #include "teams_selection_box.h"
 
-#include "../game/game.h"
-#include "../game/config.h"
-#include "../game/game_mode.h"
-#include "../graphic/video.h"
-#include "../graphic/font.h"
-#include "../include/app.h"
-#include "../tool/i18n.h"
-#include "../tool/string_tools.h"
+#include "game/game.h"
+#include "game/config.h"
+#include "game/game_mode.h"
+#include "graphic/video.h"
+#include "graphic/font.h"
+#include "include/app.h"
+#include "tool/i18n.h"
+#include "tool/string_tools.h"
 
 #include <iostream>
 const uint MARGIN_TOP    = 5;

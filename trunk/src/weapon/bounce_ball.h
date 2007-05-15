@@ -24,10 +24,10 @@
 #define BOUNCE_BALL_H
 
 #include <SDL.h>
-#include "../include/base.h"
-#include "../graphic/surface.h"
-#include "../gui/progress_bar.h"
-#include "../object/physical_obj.h"
+#include "include/base.h"
+#include "graphic/surface.h"
+#include "gui/progress_bar.h"
+#include "object/physical_obj.h"
 #include "launcher.h"
 
 class BounceBall : public WeaponProjectile

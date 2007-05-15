@@ -20,11 +20,11 @@
  *****************************************************************************/
 
 #include "menu.h"
-#include "../graphic/sprite.h"
-#include "../graphic/video.h"
-#include "../include/app.h"
-#include "../tool/resource_manager.h"
-#include "../sound/jukebox.h"
+#include "graphic/sprite.h"
+#include "graphic/video.h"
+#include "include/app.h"
+#include "tool/resource_manager.h"
+#include "sound/jukebox.h"
 
 Menu::Menu(char * bg, t_action _actions) :
   actions(_actions)

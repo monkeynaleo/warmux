@@ -20,10 +20,10 @@
  *****************************************************************************/
 
 #include "syringe.h"
-#include "../game/game_loop.h"
-#include "../team/macro.h"
-#include "../tool/point.h"
-#include "../tool/i18n.h"
+#include "game/game_loop.h"
+#include "team/macro.h"
+#include "tool/point.h"
+#include "tool/i18n.h"
 #include "explosion.h"
 
 Syringe::Syringe() : Weapon(WEAPON_SYRINGE, "syringe", new SyringeConfig())

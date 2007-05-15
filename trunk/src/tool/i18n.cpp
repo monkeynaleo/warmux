@@ -25,8 +25,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "debug.h"
-#include "../config.h"
-#include "../game/config.h"
+#include "config.h"
+#include "game/config.h"
 
 // Package is defined by autotools
 #ifdef WIN32

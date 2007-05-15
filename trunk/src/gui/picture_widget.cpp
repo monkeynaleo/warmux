@@ -20,9 +20,9 @@
  *****************************************************************************/
 #include "picture_widget.h"
 //#include <SDL_gfxPrimitives.h>
-#include "../graphic/colors.h"
-#include "../include/app.h"
-#include "../tool/resource_manager.h"
+#include "graphic/colors.h"
+#include "include/app.h"
+#include "tool/resource_manager.h"
 
 PictureWidget::PictureWidget (const Rectanglei &rect) : Widget(rect)
 {

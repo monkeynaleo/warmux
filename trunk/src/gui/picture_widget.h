@@ -22,7 +22,7 @@
 #ifndef PICTURE_WIDGET_H
 #define PICTURE_WIDGET_H
 
-#include "../graphic/sprite.h"
+#include "graphic/sprite.h"
 #include "widget.h"
 #include <string>
 

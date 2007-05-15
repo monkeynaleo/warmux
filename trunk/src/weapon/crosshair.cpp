@@ -21,13 +21,13 @@
 
 #include "crosshair.h"
 #include "weapon.h"
-#include "../game/game_loop.h"
-#include "../graphic/surface.h"
-#include "../include/app.h"
-#include "../map/camera.h"
-#include "../map/map.h"
-#include "../team/teams_list.h"
-#include "../tool/math_tools.h"
+#include "game/game_loop.h"
+#include "graphic/surface.h"
+#include "include/app.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "team/teams_list.h"
+#include "tool/math_tools.h"
 
 // Distance between crosshair and character
 #define RAY 40 // pixels

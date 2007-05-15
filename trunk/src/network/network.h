@@ -27,9 +27,9 @@
 #include <list>
 #include <string>
 #include "distant_cpu.h"
-#include "../include/action.h"
-#include "../include/base.h"
-#include "../menu/network_menu.h"
+#include "include/action.h"
+#include "include/base.h"
+#include "menu/network_menu.h"
 //-----------------------------------------------------------------------------
 const std::string WORMUX_NETWORK_PORT = "9999";
 const uint WORMUX_NETWORK_PORT_INT = 9999;

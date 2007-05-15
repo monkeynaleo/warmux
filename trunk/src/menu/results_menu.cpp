@@ -21,12 +21,12 @@
 
 #include "results_menu.h"
 
-#include "../character/character.h"
-#include "../include/app.h"
-#include "../team/results.h"
-#include "../team/macro.h"
-#include "../tool/i18n.h"
-#include "../tool/string_tools.h"
+#include "character/character.h"
+#include "include/app.h"
+#include "team/results.h"
+#include "team/macro.h"
+#include "tool/i18n.h"
+#include "tool/string_tools.h"
 
 #define DEF_MARGIN    16
 #define DEF_BORDER    8

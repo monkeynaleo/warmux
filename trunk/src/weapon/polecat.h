@@ -25,10 +25,10 @@
 #include <SDL.h>
 #include "grenade.h"
 #include "weapon.h"
-#include "../graphic/sprite.h"
-#include "../gui/progress_bar.h"
-#include "../include/base.h"
-#include "../object/physical_obj.h"
+#include "graphic/sprite.h"
+#include "gui/progress_bar.h"
+#include "include/base.h"
+#include "object/physical_obj.h"
 
 class PolecatFart : public WeaponProjectile
 {

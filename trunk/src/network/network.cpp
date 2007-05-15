@@ -24,13 +24,13 @@
 #include "network_client.h"
 #include "network_server.h"
 //-----------------------------------------------------------------------------
-#include "../game/game_mode.h"
-#include "../game/game.h"
-#include "../include/action_handler.h"
-#include "../include/app.h"
-#include "../include/constant.h"
-#include "../tool/debug.h"
-#include "../tool/i18n.h"
+#include "game/game_mode.h"
+#include "game/game.h"
+#include "include/action_handler.h"
+#include "include/app.h"
+#include "include/constant.h"
+#include "tool/debug.h"
+#include "tool/i18n.h"
 
 #if defined(DEBUG) && not defined(WIN32)
 #include <sys/types.h>
