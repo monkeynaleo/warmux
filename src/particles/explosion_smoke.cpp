@@ -22,8 +22,8 @@
 
 #include "explosion_smoke.h"
 #include "particle.h"
-#include "../game/time.h"
-#include "../tool/random.h"
+#include "game/time.h"
+#include "tool/random.h"
 
 ExplosionSmoke::ExplosionSmoke(const uint size_init) :
   Particle("explosion_smoke_particle")

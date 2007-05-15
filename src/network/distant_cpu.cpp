@@ -24,12 +24,12 @@
 #include <SDL_net.h>
 #include <SDL_thread.h>
 #include "network.h"
-#include "../include/action_handler.h"
-#include "../map/maps_list.h"
-#include "../menu/network_menu.h"
-#include "../team/teams_list.h"
-#include "../tool/debug.h"
-#include "../tool/i18n.h"
+#include "include/action_handler.h"
+#include "map/maps_list.h"
+#include "menu/network_menu.h"
+#include "team/teams_list.h"
+#include "tool/debug.h"
+#include "tool/i18n.h"
 //-----------------------------------------------------------------------------
 
 DistantComputer::DistantComputer(TCPsocket new_sock) :

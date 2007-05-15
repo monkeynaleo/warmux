@@ -22,9 +22,9 @@
 #ifndef CROSSHAIR_H
 #define CROSSHAIR_H
 
-#include "../graphic/surface.h"
-#include "../include/base.h"
-#include "../tool/point.h"
+#include "graphic/surface.h"
+#include "include/base.h"
+#include "tool/point.h"
 
 class CrossHair
 {

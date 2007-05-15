@@ -20,9 +20,9 @@
  *****************************************************************************/
 
 #include "polygon.h"
-#include "../tool/random.h"
-#include "../include/app.h"
-#include "../map/map.h"
+#include "tool/random.h"
+#include "include/app.h"
+#include "map/map.h"
 
 //=========== POLYGON BUFFER ============ //
 // Use this structure to store transformed point

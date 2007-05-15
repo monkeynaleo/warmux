@@ -19,20 +19,20 @@
  * AirHammer - Use it to dig
  *****************************************************************************/
 
-#include "../weapon/airhammer.h"
+#include "weapon/airhammer.h"
 //-----------------------------------------------------------------------------
 #include <sstream>
-#include "../game/game.h"
-#include "../game/game_loop.h"
-#include "../game/time.h"
-#include "../include/action_handler.h"
-#include "../map/map.h"
-#include "../object/objects_list.h"
-#include "../team/teams_list.h"
-#include "../team/macro.h"
-#include "../tool/i18n.h"
-#include "../interface/game_msg.h"
-#include "../weapon/explosion.h"
+#include "game/game.h"
+#include "game/game_loop.h"
+#include "game/time.h"
+#include "include/action_handler.h"
+#include "map/map.h"
+#include "object/objects_list.h"
+#include "team/teams_list.h"
+#include "team/macro.h"
+#include "tool/i18n.h"
+#include "interface/game_msg.h"
+#include "weapon/explosion.h"
 
 //-----------------------------------------------------------------------------
 

@@ -22,7 +22,7 @@
 #ifndef __ENERGYBAR_H__
 #define __ENERGYBAR_H__
 
-#include "../gui/progress_bar.h"
+#include "gui/progress_bar.h"
 
 class EnergyBar : public ProgressBar {
   public:

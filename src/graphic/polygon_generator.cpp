@@ -21,7 +21,7 @@
 
 #include <stdlib.h>
 #include "polygon_generator.h"
-#include "../tool/random.h"
+#include "tool/random.h"
 
 const int PolygonGenerator::MIN_SPACE_BETWEEN_POINT = 50;
 

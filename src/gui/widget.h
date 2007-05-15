@@ -23,9 +23,9 @@
 #define GUI_WIDGET_H
 
 #include <SDL_keyboard.h>
-#include "../include/base.h"
-#include "../tool/rectangle.h"
-#include "../tool/point.h"
+#include "include/base.h"
+#include "tool/rectangle.h"
+#include "tool/point.h"
 
 #include "container.h"
 

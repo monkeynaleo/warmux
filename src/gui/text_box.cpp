@@ -19,7 +19,7 @@
  * Text box widget
  *****************************************************************************/
 
-#include "../include/app.h"
+#include "include/app.h"
 #include "text_box.h"
 #include "label.h"
 

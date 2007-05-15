@@ -20,9 +20,9 @@
  *****************************************************************************/
 
 #include "button.h"
-#include "../tool/resource_manager.h"
-#include "../graphic/sprite.h"
-#include "../include/app.h"
+#include "tool/resource_manager.h"
+#include "graphic/sprite.h"
+#include "include/app.h"
 
 Button::Button (const Rectanglei &rect, const Profile *res_profile,
 		const std::string& resource_id, bool _img_scale) :

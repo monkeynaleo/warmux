@@ -28,7 +28,7 @@
 #include "widget.h"
 #include "button.h"
 #include "label.h"
-#include "../include/base.h"
+#include "include/base.h"
 
 class ListBoxItem : public Label
 {

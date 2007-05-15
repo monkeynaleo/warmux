@@ -24,12 +24,12 @@
 
 #include <string>
 #include <SDL.h>
-#include "../gui/EnergyBar.h"
-#include "../graphic/sprite.h"
-#include "../graphic/text.h"
-#include "../include/base.h"
-#include "../object/physical_obj.h"
-#include "../particles/particle.h"
+#include "gui/EnergyBar.h"
+#include "graphic/sprite.h"
+#include "graphic/text.h"
+#include "include/base.h"
+#include "object/physical_obj.h"
+#include "particles/particle.h"
 #include "body.h"
 #include "damage_stats.h"
 

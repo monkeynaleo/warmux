@@ -26,10 +26,10 @@
 #include "colors.h"
 #include "font.h"
 #include "video.h"
-#include "../include/app.h"
-#include "../tool/error.h"
-#include "../interface/interface.h"
-#include "../map/map.h"
+#include "include/app.h"
+#include "tool/error.h"
+#include "interface/interface.h"
+#include "map/map.h"
 
 Text::Text(const std::string &new_txt, 
 	   const Color& new_color,

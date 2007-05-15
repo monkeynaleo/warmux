@@ -23,9 +23,9 @@
 #ifndef QUESTION_H
 #define QUESTION_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../graphic/sprite.h"
-#include "../graphic/text.h"
+#include "include/base.h"
+#include "graphic/sprite.h"
+#include "graphic/text.h"
 #include <string>
 #include <list>
 #include <SDL_events.h>

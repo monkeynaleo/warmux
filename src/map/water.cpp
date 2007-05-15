@@ -24,10 +24,10 @@
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
-#include "../game/time.h"
-#include "../include/app.h"
-#include "../interface/interface.h"
-#include "../tool/resource_manager.h"
+#include "game/time.h"
+#include "include/app.h"
+#include "interface/interface.h"
+#include "tool/resource_manager.h"
 
 const uint GO_UP_TIME = 1; // min
 const uint GO_UP_STEP = 15; // pixels

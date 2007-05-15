@@ -19,19 +19,19 @@
  * List of objects that are displayed.
  *****************************************************************************/
 
-#include "../object/objects_list.h"
+#include "object/objects_list.h"
 //-----------------------------------------------------------------------------
 #include "barrel.h"
-#include "../include/app.h"
-#include "../game/game_loop.h"
-#include "../map/map.h"
-#include "../map/maps_list.h"
-#include "../map/camera.h"
-#include "../tool/debug.h"
-#include "../tool/random.h"
-#include "../tool/rectangle.h"
-#include "../game/time.h"
-#include "../weapon/mine.h"
+#include "include/app.h"
+#include "game/game_loop.h"
+#include "map/map.h"
+#include "map/maps_list.h"
+#include "map/camera.h"
+#include "tool/debug.h"
+#include "tool/random.h"
+#include "tool/rectangle.h"
+#include "game/time.h"
+#include "weapon/mine.h"
 #include <vector>
 #include <iostream>
 

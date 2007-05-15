@@ -21,10 +21,10 @@
 
 #include "maps_list.h"
 #include "map.h"
-#include "../game/config.h"
-#include "../tool/debug.h"
-#include "../tool/file_tools.h"
-#include "../tool/i18n.h"
+#include "game/config.h"
+#include "tool/debug.h"
+#include "tool/file_tools.h"
+#include "tool/i18n.h"
 #include <iostream>
 #if !defined(WIN32) || defined(__MINGW32__)
 #include <dirent.h>

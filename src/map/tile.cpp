@@ -18,8 +18,8 @@
  *****************************************************************************/
 
 #include "tile.h"
-#include "../include/app.h"
-#include "../map/camera.h"
+#include "include/app.h"
+#include "map/camera.h"
 
 Tile::Tile(){
 }

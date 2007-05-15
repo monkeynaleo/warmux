@@ -20,11 +20,11 @@
  *****************************************************************************/
 
 #include "baseball.h"
-#include "../game/game_loop.h"
-#include "../map/camera.h"
-#include "../team/macro.h"
-#include "../tool/point.h"
-#include "../tool/i18n.h"
+#include "game/game_loop.h"
+#include "map/camera.h"
+#include "team/macro.h"
+#include "tool/point.h"
+#include "tool/i18n.h"
 #include "explosion.h"
 
 Baseball::Baseball() : Weapon(WEAPON_BASEBALL, "baseball", new BaseballConfig())

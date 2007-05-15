@@ -22,7 +22,7 @@
 #ifndef CONTAINER_WIDGET_H
 #define CONTAINER_WIDGET_H
 
-#include "../graphic/surface.h"
+#include "graphic/surface.h"
 
 class Container
 {

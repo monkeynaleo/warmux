@@ -25,7 +25,7 @@
 #include <math.h>
 #include "sprite.h"
 #include "video.h"
-#include "../game/time.h"
+#include "game/time.h"
 
 //Make the sdl_surface 'a', do a wave of 'nbr_frames', and last 'duration' milliseconds.
 //wave_amp is the amplitude of the wave on the left and the right side of the sprite

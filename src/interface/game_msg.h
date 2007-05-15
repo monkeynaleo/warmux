@@ -22,8 +22,8 @@
 #ifndef GAME_MESSAGES_H
 #define GAME_MESSAGES_H
 //-----------------------------------------------------------------------------
-#include "../include/base.h"
-#include "../graphic/text.h"
+#include "include/base.h"
+#include "graphic/text.h"
 #include <string>
 #include <list>
 //-----------------------------------------------------------------------------

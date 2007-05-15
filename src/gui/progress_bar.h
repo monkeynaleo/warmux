@@ -24,9 +24,9 @@
 
 #include <SDL.h>
 #include <list>
-#include "../include/base.h"
-#include "../graphic/color.h"
-#include "../graphic/surface.h"
+#include "include/base.h"
+#include "graphic/color.h"
+#include "graphic/surface.h"
 
 class ProgressBar
 {

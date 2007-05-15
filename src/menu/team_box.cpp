@@ -20,10 +20,10 @@
  *****************************************************************************/
 
 #include "team_box.h"
-#include "../include/action_handler.h"
-#include "../network/network.h"
-#include "../team/team.h"
-#include "../tool/i18n.h"
+#include "include/action_handler.h"
+#include "network/network.h"
+#include "team/team.h"
+#include "tool/i18n.h"
 
 TeamBox::TeamBox(std::string _player_name, const Rectanglei& rect) : 
   HBox(rect, false)

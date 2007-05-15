@@ -23,12 +23,12 @@
 //-----------------------------------------------------------------------------
 #include <SDL_net.h>
 #include "action_handler.h"
-#include "../tool/debug.h"
-#include "../game/time.h"
-#include "../character/character.h"
-#include "../network/distant_cpu.h"
-#include "../team/teams_list.h"
-#include "../network/network.h"
+#include "tool/debug.h"
+#include "game/time.h"
+#include "character/character.h"
+#include "network/distant_cpu.h"
+#include "team/teams_list.h"
+#include "network/network.h"
 //-----------------------------------------------------------------------------
 // Action without parameter
 Action::Action (Action_t type)

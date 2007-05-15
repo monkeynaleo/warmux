@@ -27,12 +27,12 @@
 #include "camera.h"
 #include "map.h"
 #include "maps_list.h"
-#include "../graphic/surface.h"
-#include "../graphic/video.h"
-#include "../include/app.h"
-#include "../include/constant.h"
-#include "../tool/i18n.h"
-#include "../tool/resource_manager.h"
+#include "graphic/surface.h"
+#include "graphic/video.h"
+#include "include/app.h"
+#include "include/constant.h"
+#include "tool/i18n.h"
+#include "tool/resource_manager.h"
 
 Ground::Ground()
 { //FIXME (to erase)

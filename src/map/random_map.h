@@ -23,10 +23,10 @@
 #define RANDOM_MAP_H
 
 #include <vector>
-#include "../graphic/polygon_generator.h"
-#include "../graphic/surface.h"
-#include "../game/config.h"
-#include "../tool/resource_manager.h"
+#include "graphic/polygon_generator.h"
+#include "graphic/surface.h"
+#include "game/config.h"
+#include "tool/resource_manager.h"
 
 class Profile;
 

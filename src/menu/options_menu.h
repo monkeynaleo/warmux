@@ -23,8 +23,8 @@
 #define OPTIONS_MENU_H
 
 #include "menu.h"
-#include "../include/base.h"
-#include "../graphic/font.h"
+#include "include/base.h"
+#include "graphic/font.h"
 
 class OptionMenu : public Menu
 {

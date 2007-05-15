@@ -21,14 +21,14 @@
 
 #include "construct.h"
 #include "explosion.h"
-#include "../game/game_loop.h"
-#include "../game/game_mode.h"
-#include "../include/action_handler.h"
-#include "../interface/mouse.h"
-#include "../map/camera.h"
-#include "../map/map.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
+#include "game/game_loop.h"
+#include "game/game_mode.h"
+#include "include/action_handler.h"
+#include "interface/mouse.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "team/teams_list.h"
+#include "tool/i18n.h"
 
 const double DELTA_ANGLE = M_PI / 6.0; // should be a multiple
 

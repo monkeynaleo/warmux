@@ -26,8 +26,8 @@
 #include "colors.h"
 #include "video.h"
 #include "text.h"
-#include "../include/app.h"
-#include "../tool/i18n.h"
+#include "include/app.h"
+#include "tool/i18n.h"
 
 const uint FramePerSecond::MIN_NB_VALUES = 4;
 

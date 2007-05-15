@@ -20,19 +20,19 @@
  *****************************************************************************/
 
 #include "explosion.h"
-#include "../graphic/surface.h"
-#include "../graphic/video.h"
-#include "../include/action_handler.h"
-#include "../map/camera.h"
-#include "../map/map.h"
-#include "../network/network.h"
-#include "../object/objects_list.h"
-#include "../particles/particle.h"
-#include "../object/physical_obj.h"
-#include "../sound/jukebox.h"
-#include "../team/macro.h"
-#include "../tool/debug.h"
-#include "../tool/math_tools.h"
+#include "graphic/surface.h"
+#include "graphic/video.h"
+#include "include/action_handler.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "network/network.h"
+#include "object/objects_list.h"
+#include "particles/particle.h"
+#include "object/physical_obj.h"
+#include "sound/jukebox.h"
+#include "team/macro.h"
+#include "tool/debug.h"
+#include "tool/math_tools.h"
 
 Profile *weapons_res_profile = NULL;
 

@@ -24,12 +24,12 @@
 
 #include <SDL.h>
 #include <list>
-#include "../game/config.h"
-#include "../graphic/sprite.h"
-#include "../gui/progress_bar.h"
-#include "../include/base.h"
-#include "../object/physical_obj.h"
-#include "../tool/xml_document.h"
+#include "game/config.h"
+#include "graphic/sprite.h"
+#include "gui/progress_bar.h"
+#include "include/base.h"
+#include "object/physical_obj.h"
+#include "tool/xml_document.h"
 
 class WindParticle : public PhysicalObj
 {

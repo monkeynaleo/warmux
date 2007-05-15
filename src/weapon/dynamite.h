@@ -25,9 +25,9 @@
 #define DYNAMITE_H
 
 #include "launcher.h"
-#include "../graphic/sprite.h"
-#include "../include/base.h"
-#include "../character/character.h"
+#include "graphic/sprite.h"
+#include "include/base.h"
+#include "character/character.h"
 
 class Dynamite;
 

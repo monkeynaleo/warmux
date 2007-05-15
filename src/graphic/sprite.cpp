@@ -27,12 +27,12 @@
 #include <SDL_rotozoom.h>
 #include <iostream>
 #include "surface.h"
-#include "../game/game.h"
-#include "../include/app.h"
-#include "../map/camera.h"
-#include "../map/map.h"
-#include "../tool/rectangle.h"
-#include "../tool/debug.h"
+#include "game/game.h"
+#include "include/app.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "tool/rectangle.h"
+#include "tool/debug.h"
 
 #define BUGGY_SDLGFX
 

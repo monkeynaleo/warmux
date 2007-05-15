@@ -22,9 +22,9 @@
 #define MOVEMENT_H
 #include <map>
 #include <vector>
-#include "../graphic/sprite.h"
-#include "../tool/point.h"
-#include "../tool/xml_document.h"
+#include "graphic/sprite.h"
+#include "tool/point.h"
+#include "tool/xml_document.h"
 
 class member_mvt
 {  // Position of a member relative to its superior one

@@ -24,10 +24,10 @@
 
 #include "tile.h"
 #include <list>
-#include "../graphic/surface.h"
-#include "../include/base.h"
-#include "../tool/point.h"
-#include "../tool/rectangle.h"
+#include "graphic/surface.h"
+#include "include/base.h"
+#include "tool/point.h"
+#include "tool/rectangle.h"
 
 class Sky{
 private:

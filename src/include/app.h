@@ -25,8 +25,8 @@
 #include <SDL.h>
 #include <string>
 #include "base.h"
-#include "../game/config.h"
-#include "../graphic/video.h"
+#include "game/config.h"
+#include "graphic/video.h"
 
 class AppWormux
 {

@@ -23,8 +23,8 @@
 #define LOADING_SCREEN_H
 
 #include <string>
-#include "../graphic/sprite.h"
-#include "../tool/resource_manager.h"
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 
 class LoadingScreen
 {

@@ -22,8 +22,8 @@
 
 #include "magic_star.h"
 #include "particle.h"
-#include "../tool/random.h"
-#include "../game/time.h"
+#include "tool/random.h"
+#include "game/time.h"
 
 MagicStarParticle::MagicStarParticle() :
   Particle("magic_star_particle")

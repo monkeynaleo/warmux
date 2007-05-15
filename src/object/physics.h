@@ -27,9 +27,9 @@
 #ifndef PHYSICS_H
 #define PHYSICS_H
 
-#include "../include/base.h"
-#include "../tool/euler_vector.h"
-#include "../tool/point.h"
+#include "include/base.h"
+#include "tool/euler_vector.h"
+#include "tool/point.h"
 #include "object_cfg.h"
 
 typedef enum

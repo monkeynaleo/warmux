@@ -22,10 +22,10 @@
 #ifndef CREDITS_MENU_H
 #define CREDITS_MENU_H
 
-#include "../include/base.h"
-#include "../graphic/font.h"
-#include "../gui/list_box.h"
-#include "../menu/menu.h"
+#include "include/base.h"
+#include "graphic/font.h"
+#include "gui/list_box.h"
+#include "menu/menu.h"
 
 class CreditsMenu : public Menu
 {

@@ -19,10 +19,10 @@
  * Refresh des erreurs, exceptions, assertions, etc.
  *****************************************************************************/
 
-#include "../include/base.h"
+#include "include/base.h"
 #include <iostream>
 #include <signal.h>
-#include "../tool/i18n.h"
+#include "tool/i18n.h"
 
 #if !defined WIN32 || defined __MINGW32__
 #include <sys/types.h>

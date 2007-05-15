@@ -21,9 +21,9 @@
  *****************************************************************************/
 
 #include "chat.h"
-#include "../graphic/text.h"
-#include "../game/time.h"
-#include "../tool/i18n.h"
+#include "graphic/text.h"
+#include "game/time.h"
+#include "tool/i18n.h"
 #include <string>
 
 const uint HEIGHT=15;

@@ -24,7 +24,7 @@
 #include <string>
 #include <list>
 #include "surface.h"
-#include "../include/base.h"
+#include "include/base.h"
 
 class Video{
  private:

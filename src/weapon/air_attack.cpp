@@ -21,17 +21,17 @@
 
 #include "air_attack.h"
 #include <sstream>
-#include "../game/game_loop.h"
-#include "../graphic/sprite.h"
-#include "../include/action_handler.h"
-#include "../interface/mouse.h"
-#include "../map/map.h"
-#include "../map/camera.h"
-#include "../network/randomsync.h"
-#include "../object/objects_list.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
-#include "../weapon/explosion.h"
+#include "game/game_loop.h"
+#include "graphic/sprite.h"
+#include "include/action_handler.h"
+#include "interface/mouse.h"
+#include "map/map.h"
+#include "map/camera.h"
+#include "network/randomsync.h"
+#include "object/objects_list.h"
+#include "team/teams_list.h"
+#include "tool/i18n.h"
+#include "weapon/explosion.h"
 
 const int FORCE_X_MIN = -50;
 const uint FORCE_X_MAX = 0;

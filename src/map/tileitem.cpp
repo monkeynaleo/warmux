@@ -22,14 +22,14 @@
 #include <SDL.h>
 #include <SDL_endian.h>
 #include "tile.h"
-#include "../game/config.h"
-#include "../include/app.h"
-#include "../map/camera.h"
-#include "../tool/error.h"
-#include "../tool/point.h"
-#include "../tool/stats.h"
+#include "game/config.h"
+#include "include/app.h"
+#include "map/camera.h"
+#include "tool/error.h"
+#include "tool/point.h"
+#include "tool/stats.h"
 #ifdef DBG_TILE
-#include "../graphic/colors.h"
+#include "graphic/colors.h"
 #endif
 
 // === Common to all TileItem_* except TileItem_Emtpy ==============================

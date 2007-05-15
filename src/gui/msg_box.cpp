@@ -19,7 +19,7 @@
  * Message Box
  *****************************************************************************/
 
-#include "../tool/rectangle.h"
+#include "tool/rectangle.h"
 #include "widget.h"
 #include "msg_box.h"
 

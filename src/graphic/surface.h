@@ -26,9 +26,9 @@
 #include <string>
 #include <list>
 #include "color.h"
-#include "../include/base.h"
-#include "../tool/point.h"
-#include "../tool/rectangle.h"
+#include "include/base.h"
+#include "tool/point.h"
+#include "tool/rectangle.h"
 
 class Surface
 {

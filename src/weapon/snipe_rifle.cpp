@@ -22,15 +22,15 @@
 #include "snipe_rifle.h"
 #include <sstream>
 #include "explosion.h"
-#include "../game/time.h"
-#include "../interface/game_msg.h"
-#include "../map/map.h"
-#include "../map/camera.h"
-#include "../object/objects_list.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
-#include "../include/app.h"
-#include "../game/game_loop.h"
+#include "game/time.h"
+#include "interface/game_msg.h"
+#include "map/map.h"
+#include "map/camera.h"
+#include "object/objects_list.h"
+#include "team/teams_list.h"
+#include "tool/i18n.h"
+#include "include/app.h"
+#include "game/game_loop.h"
 
 
 const uint SNIPE_RIFLE_BEAM_START = 5;

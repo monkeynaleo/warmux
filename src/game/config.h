@@ -32,10 +32,10 @@
 //-----------------------------------------------------------------------------
 #include <list>
 #include <string>
-#include "../include/base.h"
-#include "../team/team_config.h"
-#include "../tool/xml_document.h"
-#include "../object/object_cfg.h"
+#include "include/base.h"
+#include "team/team_config.h"
+#include "tool/xml_document.h"
+#include "object/object_cfg.h"
 
 //-----------------------------------------------------------------------------
 #if defined(WIN32) || defined(__MINGW32__)

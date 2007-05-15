@@ -31,10 +31,10 @@
 #include "error.h"
 #include "xml_document.h"
 #include "string_tools.h"
-#include "../game/config.h"
-#include "../graphic/sprite.h"
-#include "../graphic/polygon_generator.h"
-#include "../map/random_map.h"
+#include "game/config.h"
+#include "graphic/sprite.h"
+#include "graphic/polygon_generator.h"
+#include "map/random_map.h"
 
 Profile::Profile()
 {

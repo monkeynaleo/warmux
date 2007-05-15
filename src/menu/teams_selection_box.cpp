@@ -20,8 +20,8 @@
  *****************************************************************************/
 
 #include "teams_selection_box.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
+#include "team/teams_list.h"
+#include "tool/i18n.h"
 
 TeamsSelectionBox::TeamsSelectionBox(const Rectanglei &rect) : HBox(rect, true)
 {

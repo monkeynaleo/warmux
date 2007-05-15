@@ -20,9 +20,9 @@
  *****************************************************************************/
 
 #include "check_box.h"
-#include "../graphic/font.h"
-#include "../graphic/sprite.h"
-#include "../tool/resource_manager.h"
+#include "graphic/font.h"
+#include "graphic/sprite.h"
+#include "tool/resource_manager.h"
 
 CheckBox::CheckBox(const std::string &label, const Rectanglei &rect, bool value):
   txt_label(new Text(label, white_color, Font::FONT_SMALL, Font::FONT_NORMAL)),

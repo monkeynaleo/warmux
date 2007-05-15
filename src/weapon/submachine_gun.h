@@ -26,8 +26,8 @@
 #include <SDL.h>
 #include <vector>
 #include "launcher.h"
-#include "../include/base.h"
-#include "../tool/point.h"
+#include "include/base.h"
+#include "tool/point.h"
 
 class SubMachineGunBullet : public WeaponBullet
 {

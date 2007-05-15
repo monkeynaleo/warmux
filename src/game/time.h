@@ -23,7 +23,7 @@
 #define TIME_H
 
 #include <string>
-#include "../include/base.h"
+#include "include/base.h"
 
 class Time
 {

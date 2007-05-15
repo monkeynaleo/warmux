@@ -22,10 +22,10 @@
 #ifndef CHECK_BOX_H
 #define CHECK_BOX_H
 
-#include "../include/base.h"
-#include "../graphic/text.h"
-#include "../gui/widget.h"
-#include "../graphic/sprite.h"
+#include "include/base.h"
+#include "graphic/text.h"
+#include "gui/widget.h"
+#include "graphic/sprite.h"
 #include <string>
 
 class CheckBox : public Widget

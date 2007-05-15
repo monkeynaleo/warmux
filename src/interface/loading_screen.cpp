@@ -20,10 +20,10 @@
  *****************************************************************************/
 
 #include "loading_screen.h"
-#include "../include/app.h"
-#include "../game/config.h"
-#include "../graphic/font.h"
-#include "../graphic/sprite.h"
+#include "include/app.h"
+#include "game/config.h"
+#include "graphic/font.h"
+#include "graphic/sprite.h"
 
 LoadingScreen * LoadingScreen::singleton = NULL;
 

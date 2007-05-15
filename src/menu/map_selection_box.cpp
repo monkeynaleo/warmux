@@ -20,9 +20,9 @@
  *****************************************************************************/
 
 #include "map_selection_box.h"
-#include "../include/action_handler.h"
-#include "../map/maps_list.h"
-#include "../network/network.h"
+#include "include/action_handler.h"
+#include "map/maps_list.h"
+#include "network/network.h"
 
 MapSelectionBox::MapSelectionBox(const Rectanglei &rect, bool _display_only) :
   HBox(rect, true), selected_map_index(0)

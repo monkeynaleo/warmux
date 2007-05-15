@@ -22,13 +22,13 @@
 #include "team_energy.h"
 #include <sstream>
 #include <math.h>
-#include "../map/camera.h"
-#include "../map/map.h"
-#include "../game/time.h"
-#include "../graphic/text.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "game/time.h"
+#include "graphic/text.h"
 #include "team.h"
 #include "teams_list.h"
-#include "../include/app.h"
+#include "include/app.h"
 
 const uint BAR_WIDTH = 13;
 const uint BAR_SPACING = 30;

@@ -22,11 +22,11 @@
 #ifndef TEAM_BOX_H
 #define TEAM_BOX_H
 
-#include "../gui/box.h"
-#include "../gui/label.h"
-#include "../gui/picture_widget.h"
-#include "../gui/spin_button.h"
-#include "../gui/text_box.h"
+#include "gui/box.h"
+#include "gui/label.h"
+#include "gui/picture_widget.h"
+#include "gui/spin_button.h"
+#include "gui/text_box.h"
 
 class Team;
 

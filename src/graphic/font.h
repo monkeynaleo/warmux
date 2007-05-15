@@ -22,7 +22,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 #include <map>
-#include "../include/base.h"
+#include "include/base.h"
 #include "colors.h"
 #include "surface.h"
 

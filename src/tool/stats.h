@@ -22,7 +22,7 @@
 #ifndef STATS_H
 #define STATS_H
 
-#include "../include/base.h"
+#include "include/base.h"
 #include <string>
 
 #ifdef DEBUG

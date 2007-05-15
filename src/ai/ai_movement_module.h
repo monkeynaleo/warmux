@@ -21,7 +21,7 @@
 #ifndef AI_MOVEMENT_MODULE
 #define AI_MOVEMENT_MODULE
 
-#include "../tool/point.h"
+#include "tool/point.h"
 #include <set>
 
 class AIMovementModule

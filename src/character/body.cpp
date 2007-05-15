@@ -24,14 +24,14 @@
 #include <map>
 #include "clothe.h"
 #include "member.h"
-#include "../team/teams_list.h"
-#include "../game/time.h"
-#include "../tool/debug.h"
-#include "../tool/random.h"
-#include "../tool/resource_manager.h"
-#include "../tool/xml_document.h"
-#include "../particles/body_member.h"
-#include "../particles/teleport_member.h"
+#include "team/teams_list.h"
+#include "game/time.h"
+#include "tool/debug.h"
+#include "tool/random.h"
+#include "tool/resource_manager.h"
+#include "tool/xml_document.h"
+#include "particles/body_member.h"
+#include "particles/teleport_member.h"
 
 Body::Body(xmlpp::Element* xml, Profile* res):
   members_lst(),

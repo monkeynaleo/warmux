@@ -22,10 +22,10 @@
 #ifndef TEAM_ENERGY_H
 #define TEAM_ENERGY_H
 
-#include "../graphic/text.h"
-#include "../graphic/sprite.h"
-#include "../gui/EnergyBar.h"
-#include "../object/physical_obj.h"
+#include "graphic/text.h"
+#include "graphic/sprite.h"
+#include "gui/EnergyBar.h"
+#include "object/physical_obj.h"
 
 class Team;
 

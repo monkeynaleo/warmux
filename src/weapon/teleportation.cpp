@@ -20,18 +20,18 @@
  *****************************************************************************/
 
 #include "teleportation.h"
-#include "../character/body.h"
-#include "../game/game_loop.h"
-#include "../game/game_mode.h"
-#include "../game/time.h"
-#include "../graphic/effects.h"
-#include "../include/action_handler.h"
-#include "../interface/mouse.h"
-#include "../map/camera.h"
-#include "../map/map.h"
-#include "../particles/teleport_member.h"
-#include "../team/teams_list.h"
-#include "../tool/i18n.h"
+#include "character/body.h"
+#include "game/game_loop.h"
+#include "game/game_mode.h"
+#include "game/time.h"
+#include "graphic/effects.h"
+#include "include/action_handler.h"
+#include "interface/mouse.h"
+#include "map/camera.h"
+#include "map/map.h"
+#include "particles/teleport_member.h"
+#include "team/teams_list.h"
+#include "tool/i18n.h"
 
 Teleportation::Teleportation() : Weapon(WEAPON_TELEPORTATION, "teleportation",
 					new WeaponConfig(),

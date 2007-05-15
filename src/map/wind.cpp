@@ -21,17 +21,17 @@
 
 #include "wind.h"
 #include "camera.h"
-#include "../game/config.h"
-#include "../game/time.h"
-#include "../graphic/sprite.h"
-#include "../include/action_handler.h"
-#include "../include/app.h"
-#include "../map/map.h"
-#include "../map/maps_list.h"
-#include "../tool/random.h"
-#include "../tool/resource_manager.h"
-#include "../tool/xml_document.h"
-#include "../interface/interface.h"
+#include "game/config.h"
+#include "game/time.h"
+#include "graphic/sprite.h"
+#include "include/action_handler.h"
+#include "include/app.h"
+#include "map/map.h"
+#include "map/maps_list.h"
+#include "tool/random.h"
+#include "tool/resource_manager.h"
+#include "tool/xml_document.h"
+#include "interface/interface.h"
 
 const uint MAX_WIND_OBJECTS = 200;
 const uint BARRE_LARG = 80;

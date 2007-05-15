@@ -33,20 +33,20 @@
 #endif
 #include "game_mode.h"
 #include "errno.h"
-#include "../graphic/video.h"
-#include "../include/action.h"
-#include "../include/app.h"
-#include "../interface/keyboard.h"
-#include "../include/constant.h"
-#include "../map/maps_list.h"
-#include "../sound/jukebox.h"
-#include "../team/teams_list.h"
-#include "../tool/file_tools.h"
-#include "../tool/string_tools.h"
-#include "../tool/i18n.h"
-#include "../weapon/weapons_list.h"
+#include "graphic/video.h"
+#include "include/action.h"
+#include "include/app.h"
+#include "interface/keyboard.h"
+#include "include/constant.h"
+#include "map/maps_list.h"
+#include "sound/jukebox.h"
+#include "team/teams_list.h"
+#include "tool/file_tools.h"
+#include "tool/string_tools.h"
+#include "tool/i18n.h"
+#include "weapon/weapons_list.h"
 #ifdef USE_AUTOPACKAGE
-#  include "../include/binreloc.h"
+#  include "include/binreloc.h"
 #endif
 
 

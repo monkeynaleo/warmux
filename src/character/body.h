@@ -26,9 +26,9 @@
 #include "clothe.h"
 #include "member.h"
 #include "movement.h"
-#include "../tool/resource_manager.h"
-#include "../tool/point.h"
-#include "../tool/xml_document.h"
+#include "tool/resource_manager.h"
+#include "tool/point.h"
+#include "tool/xml_document.h"
 class Character;
 class BodyList;
 class Member;
