@@ -23,12 +23,7 @@
 #define GNU_H
 
 #include <SDL.h>
-#include "grenade.h"
-#include "weapon.h"
-#include "graphic/sprite.h"
-#include "gui/progress_bar.h"
-#include "include/base.h"
-#include "object/physical_obj.h"
+#include "weapon/launcher.h"
 
 class GnuLauncher;
 
