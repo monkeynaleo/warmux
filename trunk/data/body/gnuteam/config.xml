@@ -268,9 +268,8 @@
 	<member name="body-normal" layer="4"/>
 	<member name="head" layer="5"/>
 	<member name="foot-right" layer="6"/>
-	<member name="yoyo" layer="7"/>
-	<member name="arm-right" layer="8"/>
-	<member name="hoop" layer="9"/>
+	<member name="arm-right" layer="7"/>
+	<member name="hoop" layer="8"/>
 </clothe>
 
 <!-- ###### Dead ###### -->
