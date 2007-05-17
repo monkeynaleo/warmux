@@ -28,8 +28,9 @@ class DamageStatistics
 {
   const Character& owner;
 
-  int  damage_other_team;
-  int  damage_own_team;
+  int  damage_other_teams;
+  int  damage_friendly_fire; // damage same team but not itself
+  int  damage_itself;
   int  max_damage;
   int  current_total_damage;
 
@@ -42,8 +43,9 @@ public:
   void HandleMostDamage();
 
   int  GetMostDamage() const { return max_damage; }
-  int  GetOwnDamage() const { return damage_own_team; }
-  int  GetOtherDamage() const { return damage_other_team; }
+  int  GetFriendlyFireDamage() const { return damage_friendly_fire; }
+  int  GetItselfDamage() const { return damage_itself; }
+  int  GetOthersDamage() const { return damage_other_teams; }
 };
 
 #endif

@@ -21,6 +21,7 @@
   <surface name="bg_option" file="menu/background_options.png" />
   <surface name="bg_play" file="menu/background_play.png" />
   <surface name="bg_network" file="menu/background_network.png" />
+  <surface name="bg_results" file="menu/background_play.png" />
 
   <surface name="video_label" file="menu/video_label.png" />
   <surface name="audio_label" file="menu/audio_label.png" />
@@ -28,8 +29,12 @@
   <surface name="map_label" file="menu/map_label.png" />
   <surface name="mode_label" file="menu/mode_label.png" />
 
+  <!-- Sound options -->
+
   <surface name="music_enable" file="menu/music_enable.png" />
   <surface name="sound_effects_enable" file="menu/sound_effects_enable.png" />
+
+  <!-- Display options -->
 
   <surface name="display_energy" file="menu/display_energy.png" />
   <surface name="display_name" file="menu/display_name.png" />
@@ -37,10 +42,17 @@
   <surface name="fullscreen" file="menu/fullscreen.png" />
   <surface name="scroll_on_border" file="menu/scroll_on_border.png" />  
 
+  <!-- Game mode options -->
+
   <surface name="timing_turn" file="menu/timing_turn.png" />
   <surface name="timing_end_of_turn" file="menu/timing_end_turn.png" />
   <surface name="energy" file="menu/display_energy.png" />
 
+  <!-- For results menu -->
+  <surface name="podium" file="menu/podium.png" />
+
+  <!-- Buttons -->
+  
   <sprite name="send_txt">
     <image file="menu/send_txt.png">
       <grid pos="0,0" size="16,16" array="2,1" />
