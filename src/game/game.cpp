@@ -157,6 +157,8 @@ void Game::Start()
     err_msg = e.what();
   }
 
+  jukebox.StopAll();
+  
   if (!err)
   // * When debug is disabled : only show the result menu if game
   // have 'regularly' finished (only one survivor or timeout reached)
@@ -192,7 +194,6 @@ void Game::UnloadDatas()
   lst_objects.FreeMem();
   ParticleEngine::Stop();
   teams_list.UnloadGamingData();
-  jukebox.StopAll();
 }
 
 void Game::TogglePause()
