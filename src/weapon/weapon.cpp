@@ -324,20 +324,17 @@ bool Weapon::Shoot()
 // Calcule la position de l'image de l'arme
 void Weapon::PosXY (int &x, int &y) const
 {
-  if(origin == weapon_origin_HAND)
+  if (origin == weapon_origin_HAND)
   {
     Point2i handPos = ActiveCharacter().GetHandPosition();
     y = handPos.y + position.y;
-    if (ActiveCharacter().GetDirection() == 1)
+    if (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT)
       x = handPos.x + position.x;
     else
-      x = handPos.x - position.x;
-
-    if(ActiveCharacter().GetDirection()==-1)
-      x -= m_image->GetWidth();
+      x = handPos.x - position.x - m_image->GetWidth();
   }
   else
-  if(origin == weapon_origin_OVER)
+  if (origin == weapon_origin_OVER)
   {
     x = ActiveCharacter().GetCenterX() - m_image->GetWidth() / 2 + position.x;
     y = ActiveCharacter().GetY()       - m_image->GetHeight()    + position.y;
