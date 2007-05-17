@@ -181,7 +181,7 @@ void AIMovementModule::Walk()
 {
   // Animate skin
   if ( current_movement != WALKING ) {
-    ActiveCharacter().InitMouvementDG(100);
+    ActiveCharacter().BeginMovementRL(100);
     ActiveCharacter().body->StartWalk();
     current_movement = WALKING;
   }
