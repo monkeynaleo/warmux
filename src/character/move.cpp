@@ -115,24 +115,24 @@ void MoveCharacter(Character &character)
     // If no collision, let gravity do its job
     character.UpdatePosition();
 
-  }while(character.CanStillMoveDG(PAUSE_MOVEMENT) && ComputeHeightMovement (character, height, true));
+  } while (character.CanStillMoveRL(PAUSE_MOVEMENT) && ComputeHeightMovement (character, height, true));
 }
 
 // Move the active character to the left
 void MoveActiveCharacterLeft(){
   // character is ready to move ?
-  if (!ActiveCharacter().MouvementDG_Autorise()) return;
+  if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_LEFT);
   if (move) {
     MoveCharacter(ActiveCharacter());
   } else {
     ActiveCharacter().SetDirection(Body::DIRECTION_LEFT);
-    ActiveCharacter().InitMouvementDG (PAUSE_CHG_DIRECTION);
+    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
   }
 
   //Refresh skin position across network
-  if( !Network::GetInstance()->IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
+  if (!Network::GetInstance()->IsLocal() && (ActiveTeam().IsLocal() || ActiveTeam().IsLocalAI()))
     SendActiveCharacterInfo();
 }
 
@@ -140,18 +140,18 @@ void MoveActiveCharacterLeft(){
 void MoveActiveCharacterRight()
 {
   // character is ready to move ?
-  if (!ActiveCharacter().MouvementDG_Autorise()) return;
+  if (!ActiveCharacter().CanMoveRL()) return;
 
   bool move = (ActiveCharacter().GetDirection() == Body::DIRECTION_RIGHT);
   if (move) {
     MoveCharacter(ActiveCharacter());
   } else {
     ActiveCharacter().SetDirection(Body::DIRECTION_RIGHT);
-    ActiveCharacter().InitMouvementDG (PAUSE_CHG_DIRECTION);
+    ActiveCharacter().BeginMovementRL(PAUSE_CHG_DIRECTION);
   }
 
   //Refresh skin position across network
-  if( !Network::GetInstance()->IsLocal() && ActiveTeam().IsLocal())
+  if (!Network::GetInstance()->IsLocal() && ActiveTeam().IsLocal())
     SendActiveCharacterInfo();
 }
 

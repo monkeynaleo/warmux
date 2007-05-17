@@ -137,7 +137,7 @@ public:
 
   // ---- Movement  -----
   // Can we move (check a timeout)
-  bool MouvementDG_Autorise() const;
+  bool CanMoveRL() const;
   bool CanJump() const;
 
   // Jumps
@@ -147,8 +147,8 @@ public:
   void BackJump();
 
   // Initialise left or right movement
-  void InitMouvementDG (uint pause);
-  bool CanStillMoveDG (uint pause);
+  void BeginMovementRL (uint pause);
+  bool CanStillMoveRL (uint pause);
 
   // Direction of the character ( -1 == looks to the left / +1 == looks to the right)
   void SetDirection(Body::Direction_t direction);

@@ -615,7 +615,7 @@ const Team &Character::GetTeam() const
   return m_team;
 }
 
-bool Character::MouvementDG_Autorise() const
+bool Character::CanMoveRL() const
 {
   if (!IsImmobile() || IsFalling()) return false;
   return pause_bouge_dg < Time::GetInstance()->Read();
@@ -623,10 +623,10 @@ bool Character::MouvementDG_Autorise() const
 
 bool Character::CanJump() const
 {
-	return MouvementDG_Autorise();
+  return CanMoveRL();
 }
 
-void Character::InitMouvementDG(uint pause)
+void Character::BeginMovementRL(uint pause)
 {
   walking_time = Time::GetInstance()->Read();
   do_nothing_time = Time::GetInstance()->Read();
@@ -636,7 +636,7 @@ void Character::InitMouvementDG(uint pause)
   pause_bouge_dg = Time::GetInstance()->Read()+pause;
 }
 
-bool Character::CanStillMoveDG(uint pause)
+bool Character::CanStillMoveRL(uint pause)
 {
   if(pause_bouge_dg+pause<Time::GetInstance()->Read())
   {
@@ -834,7 +834,7 @@ uint Character::GetCharacterIndex()
 // #################### MOVE_RIGHT
 void Character::HandleKeyPressed_MoveRight()
 {
-  InitMouvementDG(PAUSE_MOVEMENT);
+  BeginMovementRL(PAUSE_MOVEMENT);
   body->StartWalk();
 
   HandleKeyRefreshed_MoveRight();
@@ -844,7 +844,7 @@ void Character::HandleKeyRefreshed_MoveRight()
 {
   HideGameInterface();
 
-  if(ActiveCharacter().IsImmobile())
+  if (ActiveCharacter().IsImmobile())
     MoveActiveCharacterRight();
 }
 
@@ -857,7 +857,7 @@ void Character::HandleKeyReleased_MoveRight()
 // #################### MOVE_LEFT
 void Character::HandleKeyPressed_MoveLeft()
 {
-  InitMouvementDG(PAUSE_MOVEMENT);
+  BeginMovementRL(PAUSE_MOVEMENT);
   body->StartWalk();
 
   HandleKeyRefreshed_MoveLeft();
@@ -867,7 +867,7 @@ void Character::HandleKeyRefreshed_MoveLeft()
 {
   HideGameInterface();
 
-  if(ActiveCharacter().IsImmobile())
+  if (ActiveCharacter().IsImmobile())
     MoveActiveCharacterLeft();
 }
 
@@ -886,7 +886,7 @@ void Character::HandleKeyPressed_Up()
 void Character::HandleKeyRefreshed_Up()
 {
   HideGameInterface();
-  if(ActiveCharacter().IsImmobile())
+  if (ActiveCharacter().IsImmobile())
     {
       if (ActiveTeam().crosshair.enable)
 	{

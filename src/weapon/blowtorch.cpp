@@ -69,9 +69,6 @@ void Blowtorch::ActionStopUse()
 
 bool Blowtorch::p_Shoot()
 {
-  ActiveCharacter().SetRebounding(false);
-  ActiveCharacter().body->StartWalk();
-
   Point2i hole = ActiveCharacter().GetCenter();
 
   double angle = ActiveCharacter().GetFiringAngle();
@@ -83,7 +80,6 @@ bool Blowtorch::p_Shoot()
   world.Dig(pos, ActiveCharacter().GetHeight()/2);
 
   MoveCharacter(ActiveCharacter());
-  ActiveCharacter().SetXY(ActiveCharacter().GetPosition());
 
   return true;
 }
@@ -102,6 +98,10 @@ void Blowtorch::RepeatShoot()
 
 void Blowtorch::HandleKeyPressed_Shoot()
 {
+  ActiveCharacter().BeginMovementRL(PAUSE_MOVEMENT);
+  ActiveCharacter().SetRebounding(false);
+  ActiveCharacter().body->StartWalk();
+
   HandleKeyRefreshed_Shoot();
 }
 
