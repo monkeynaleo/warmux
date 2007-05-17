@@ -26,16 +26,18 @@
 
 DamageStatistics::DamageStatistics(const Character& _owner) :
   owner(_owner),
-  damage_other_team(0),
-  damage_own_team(0),
+  damage_other_teams(0),
+  damage_friendly_fire(0),
+  damage_itself(0),
   max_damage(0),
   current_total_damage(0)
 {}
 
 DamageStatistics::DamageStatistics(const DamageStatistics& adamage_stats, const Character& _owner) :
   owner(_owner),
-  damage_other_team(adamage_stats.damage_other_team),
-  damage_own_team(adamage_stats.damage_own_team),
+  damage_other_teams(adamage_stats.damage_other_teams),
+  damage_friendly_fire(adamage_stats.damage_friendly_fire),
+  damage_itself(adamage_stats.damage_itself),
   max_damage(adamage_stats.max_damage),
   current_total_damage(adamage_stats.current_total_damage)
 {}
@@ -55,15 +57,15 @@ void DamageStatistics::MadeDamage(const int Dmg, const Character &other)
 {
   if (owner.GetTeam().IsSameAs(other.GetTeam()))
   {
-    //MSG_DEBUG("damage", "%s damaged own team with %d\n", m_name, Dmg);
-
     if (owner.IsSameAs(other))
-      damage_own_team += Dmg;
+      damage_itself += Dmg;
+    else 
+      damage_friendly_fire += Dmg;
   }
   else
   {
     //MSG_DEBUG("damage", "%s damaged other team with %d\n", m_name, Dmg);
-    damage_other_team += Dmg;
+    damage_other_teams += Dmg;
   }
 
   current_total_damage += Dmg;

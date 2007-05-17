@@ -36,6 +36,7 @@ class ResultsMenu : public Menu
     const ResultsMenu& operator=(const ResultsMenu&);
 
     const std::vector<TeamResults*>* results;
+    Team *first_team, *second_team, *third_team;
     int     index;
 
     // Box sizes
@@ -50,7 +51,7 @@ class ResultsMenu : public Menu
     Button  *bt_next_team;
     PictureWidget *team_logo;
     Label   *team_name;
-    HBox    *team_box;
+    Box    *team_box;
 
     Box    *winner_box;
     Box    *statistics_box;
@@ -58,13 +59,20 @@ class ResultsMenu : public Menu
     ResultBox* most_useful;
     ResultBox* most_useless;
     ResultBox* biggest_traitor;
+    ResultBox* most_stupid;
+
+    Surface podium_img;
 
     bool signal_ok() { return true;};
     bool signal_cancel() { return true;};
 
+    void ComputeTeamsOrder();
     void SetResult(int i);
     void OnClick(const Point2i &mousePosition, int button);
     void OnClickUp(const Point2i &mousePosition, int button);
+    void DrawPodium(const Point2i &position);
+    void DrawTeamOnPodium(const Team& team, const Point2i& podium_position, 
+			  const Point2i& relative_position);
     void Draw(const Point2i &mousePosition);
  public:
     ResultsMenu(const std::vector<TeamResults*>* v);

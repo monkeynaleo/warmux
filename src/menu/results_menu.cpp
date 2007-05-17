@@ -113,49 +113,43 @@ void ResultBox::SetNoResult()
 
 
 ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v)
-  : Menu("menu/bg_play", vOk)
+  : Menu("menu/bg_results", vOk)
   , results(v)
-  , index(0)
+  , index(-1)
   , max_height(DEF_SIZE+3*DEF_BORDER)
   , team_size(360, 40)
   , type_size(200, 40)
   , name_size(150, 40)
   , score_size(40, 40)
 {
-  Team* winning_team = NULL;
   Profile *res = resource_manager.LoadXMLProfile( "graphism.xml",false);
   Point2i pos (0, 0);
 
   uint x = 60;
   uint y = 60;
 
-  // And the winner is :
-  FOR_EACH_TEAM(team)
-  {
-    // Determine winner
-    if (0 < (**team).NbAliveCharacter())
-    {
-      winning_team = *team;
-      break;
-    }
-  }
+  ComputeTeamsOrder();
 
   // And the winner is :
-  if (winning_team) {
+  if (first_team) {
     jukebox.Play("share","victory");
 
     winner_box = new VBox(Rectanglei(x, y, 180, 0), true);
     winner_box->AddWidget(new Label(_("Winner"), Rectanglei(0,0, 180,1), Font::FONT_LARGE, Font::FONT_BOLD));
     PictureWidget* winner_logo = new PictureWidget( Rectanglei(0,0,96,96));
-    winner_logo->SetSurface(winning_team->flag, true);
+    winner_logo->SetSurface(first_team->flag, true);
     winner_box->AddWidget(winner_logo);
-    winner_box->AddWidget(new Label(winning_team->GetName(), Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
+    winner_box->AddWidget(new Label(first_team->GetName(), Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
 
-    std::string tmp = _("Controlled by: ") + winning_team->GetPlayerName();
+    std::string tmp = _("Controlled by: ") + first_team->GetPlayerName();
     winner_box->AddWidget(new Label(tmp, Rectanglei(0,0, 180,1), Font::FONT_MEDIUM, Font::FONT_NORMAL));
     
     widgets.AddWidget(winner_box);
   }
+
+  // Load the podium img
+  podium_img = resource_manager.LoadImage(res, "menu/podium");
+  
   x+=200;
 				   
   //Team selection
@@ -210,30 +204,97 @@ ResultsMenu::ResultsMenu(const std::vector<TeamResults*>* v)
                                   type_size, name_size, score_size);
   statistics_box->AddWidget(biggest_traitor);
 
-  widgets.AddWidget(statistics_box);
+  most_stupid = new ResultBox(Rectanglei(0,0,0, max_height),
+			      false, _("Most clumsy"), Font::FONT_BIG, Font::FONT_NORMAL,
+			      type_size, name_size, score_size);
+  statistics_box->AddWidget(most_stupid);
 
-  SetResult(0);
+  widgets.AddWidget(statistics_box);
 }
 
 ResultsMenu::~ResultsMenu()
 {
 }
 
+void ResultsMenu::ComputeTeamsOrder()
+{
+  first_team = NULL;
+  second_team = NULL;
+  third_team = NULL;
+
+  FOR_EACH_TEAM(team)
+  {
+    if (!first_team)
+      first_team = *team;
+
+    else
+      if (
+	  ((**team).NbAliveCharacter() > (*first_team).NbAliveCharacter())
+	  || ((**team).NbAliveCharacter() > (*first_team).NbAliveCharacter()
+	      &&(**team).ReadEnergy() > (*first_team).ReadEnergy())
+	  ) {
+	third_team = second_team;
+	second_team = first_team;
+	first_team = *team;
+      } else if (!second_team) {
+	second_team = *team;
+      } else if (!third_team) {
+	third_team = *team;
+      }
+  }
+}
+
+void ResultsMenu::DrawTeamOnPodium(const Team& team, const Point2i& podium_position, 
+				   const Point2i& relative_position)
+{
+  Point2i flag_pos(team.flag.GetWidth()/2, team.flag.GetHeight());
+  Point2i position = podium_position + relative_position - flag_pos;
+
+  Surface team_character(team.flag);
+  //team_character.Flip(); ==> Why does it not work ?
+
+  AppWormux::GetInstance()->video.window.Blit(team_character, position);
+}
+
+
+void ResultsMenu::DrawPodium(const Point2i& position)
+{
+  AppWormux::GetInstance()->video.window.Blit(podium_img, position);
+
+  if (first_team)
+    DrawTeamOnPodium(*first_team, position, Point2i(60,8));
+
+  if (second_team)
+    DrawTeamOnPodium(*second_team, position, Point2i(20,20));
+  
+  if (third_team)
+    DrawTeamOnPodium(*second_team, position, Point2i(98,42));
+}
+
 void ResultsMenu::SetResult(int i)
 {
+  if (index == i)
+    return;
+
   const Character* player = NULL;
   const TeamResults* res = NULL;
   std::string name;
 
   DrawBackground();
   b_ok->ForceRedraw();
-  winner_box->ForceRedraw();
+
+  if (winner_box)
+    winner_box->ForceRedraw();
+
+  DrawPodium(Point2i(50,300));
 
   index = i;
-  if (index < 0) index = results->size()-1;
-  else if (index>(int)results->size()-1) index = 0;
-  res = (*results)[index];
-  assert(res);
+  if (index < 0) 
+    index = results->size()-1;
+  else if (index > (int)results->size()-1) 
+    index = 0;
+
+  res = (*results).at(index);
 
   //Team header
   name = res->getTeamName();
@@ -248,41 +309,53 @@ void ResultsMenu::SetResult(int i)
 
   //Most violent
   player = res->getMostViolent();
-  if(player)
+  if (player)
     most_violent->SetResult(player->GetName(), player->GetDamageStats().GetMostDamage(), player->GetTeam().flag);
   else
     most_violent->SetNoResult();
 
   //Most useful
   player = res->getMostUseful();
-  if(player)
-    most_useful->SetResult(player->GetName(), player->GetDamageStats().GetOtherDamage(), player->GetTeam().flag);
+  if (player)
+    most_useful->SetResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().flag);
   else
     most_useful->SetNoResult();
 
   //Most useless
   player = res->getMostUseless();
-  if(player)
-    most_useless->SetResult(player->GetName(), player->GetDamageStats().GetOtherDamage(), player->GetTeam().flag);
+  if (player)
+    most_useless->SetResult(player->GetName(), player->GetDamageStats().GetOthersDamage(), player->GetTeam().flag);
   else
     most_useless->SetNoResult();
 
   // Biggest sold-out
   player = res->getBiggestTraitor();
-  if(player)
-    biggest_traitor->SetResult(player->GetName(), player->GetDamageStats().GetOwnDamage(), player->GetTeam().flag);
+  if (player)
+    biggest_traitor->SetResult(player->GetName(), player->GetDamageStats().GetFriendlyFireDamage(), player->GetTeam().flag);
   else
     biggest_traitor->SetNoResult();
+
+  // Most clumsy
+  player = res->getMostStupid();
+  if (player)
+    most_stupid->SetResult(player->GetName(), player->GetDamageStats().GetItselfDamage(), player->GetTeam().flag);
+  else
+    most_stupid->SetNoResult();
 
   statistics_box->ForceRedraw();
 }
 
 void ResultsMenu::OnClickUp(const Point2i &mousePosition, int button)
 {
-  if (bt_prev_team->Contains(mousePosition))
-    SetResult(index-1);
-  else if ( bt_next_team->Contains(mousePosition))
-    SetResult(index+1);
+  if (team_box->Contains(mousePosition)) {
+
+    if (button == SDL_BUTTON_WHEELDOWN || 
+	(button == SDL_BUTTON_LEFT && bt_prev_team->Contains(mousePosition)))
+      SetResult(index-1);
+    else if (button == SDL_BUTTON_WHEELUP ||
+	     (button == SDL_BUTTON_LEFT && bt_next_team->Contains(mousePosition)))
+      SetResult(index+1);
+  }
 }
 
 void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
@@ -292,5 +365,7 @@ void ResultsMenu::OnClick(const Point2i &mousePosition, int button)
 
 void ResultsMenu::Draw(const Point2i &mousePosition)
 {
+  if (index == -1)
+    SetResult(0);
 }
 

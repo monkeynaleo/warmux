@@ -44,13 +44,15 @@ private:
   const Character* mostUseful;
   const Character* mostUseless;
   const Character* biggestTraitor;
+  const Character* mostStupid;
 protected:
   TeamResults(const std::string& name,
 	      const Surface* team_logo,
 	      const Character* MV,
 	      const Character* MUl,
 	      const Character* MUs,
-	      const Character* BT);
+	      const Character* BT,
+	      const Character* MS);
 public:
   static TeamResults* createTeamResults(Team* team);
   static TeamResults* createGlobalResults(std::vector<TeamResults*>* list);
@@ -63,6 +65,7 @@ public:
   const Character* getMostUseful() const { return mostUseful; };
   const Character* getMostUseless() const { return mostUseless; };
   const Character* getBiggestTraitor() const { return biggestTraitor; };
+  const Character* getMostStupid() const { return mostStupid; };
 };
 
 typedef std::vector<TeamResults*>::iterator res_iterator;
