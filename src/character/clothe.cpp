@@ -57,13 +57,7 @@ Clothe::Clothe(xmlpp::Element *xml, std::map<std::string, Member*>& members_lst)
       std::cerr << "Undefined member \"" << att << "\"" << std::endl;
     }
 
-    int lay=0;
-    if(XmlReader::ReadIntAttr(elem, "layer", lay))
-    {
-      if((uint)lay >= layers.size())
-        layers.resize( lay+1, (Member*)NULL);
-      layers[lay] = member;
-    }
+    layers.push_back( member );
   }
 
   std::vector<Member*>::iterator i = layers.begin();
