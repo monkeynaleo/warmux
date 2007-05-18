@@ -56,7 +56,7 @@
 	<image file="body.png"/>
 	<anchor dx="16" dy="17"/>
 	<attached member_type="hoop" frame="*" dx="14" dy="25"/>
-	<attached member_type="head" frame="*" dx="12" dy="5"/>
+	<attached member_type="head" frame="*" dx="9" dy="7"/>
 	<attached member_type="arm-right" frame="*" dx="3" dy="18"/>
 	<attached member_type="arm-right2" frame="*" dx="3" dy="18"/>
 	<attached member_type="arm-left2" frame="*" dx="3" dy="18"/>
@@ -89,10 +89,10 @@
 
 <!-- ###### Head ###### -->
 <sprite name="head" type="head">
-	<image file="eyes.png"/>
-	<anchor dx="2" dy="2"/>
-	<attached member_type="horns" frame="*" dx="-2" dy="-2"/>
-	<attached member_type="nose" frame="*" dx="4" dy="9"/>
+	<image file="nose.png"/>
+	<anchor dx="-1" dy="0"/>
+	<attached member_type="horns" frame="*" dx="-2" dy="-4"/>
+	<attached member_type="eyes-normal" frame="*" dx="3" dy="-1"/>
 	<attached member_type="helmet" frame="*" dx="0" dy="3"/>
 </sprite>
 
@@ -101,9 +101,22 @@
 	<anchor dx="3" dy="6"/>
 </sprite>
 
-<sprite name="nose" type="nose">
-	<image file="nose.png"/>
-	<anchor dx="3" dy="7"/>
+<!-- ###### Eyes ###### -->
+<sprite name="eyes-normal" type="eyes-normal">
+	<image file="eyes.png"/>
+	<anchor dx="4" dy="3"/>
+	<attached member_type="pupil-right" frame="*" dx="3" dy="4"/>
+	<attached member_type="pupil-left" frame="*" dx="5" dy="4"/>
+</sprite>
+
+<sprite name="pupil-right" type="pupil-right" >
+	<image file="pupil.png"/>
+	<anchor dx="1" dy="1"/>
+</sprite>
+
+<sprite name="pupil-left" type="pupil-left" >
+	<image file="pupil.png"/>
+	<anchor dx="1" dy="1"/>
 </sprite>
 
 
@@ -218,7 +231,9 @@
 	<member name="body-normal"/>
 	<member name="horns"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
 	<member name="weapon"/>
@@ -234,7 +249,9 @@
 	<member name="body-normal"/>
 	<member name="horns"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
 </clothe>
@@ -248,7 +265,9 @@
 	<member name="body-normal"/>
 	<member name="horns"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
 </clothe>
@@ -263,7 +282,9 @@
 	<member name="c2"/>
 	<member name="body-normal"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="construct"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
@@ -279,7 +300,9 @@
 	<member name="c2"/>
 	<member name="body-normal"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="construct"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
@@ -296,7 +319,9 @@
 	<member name="body-normal"/>
 	<member name="horns"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-right2"/>
 	<member name="weapon"/>
@@ -311,7 +336,9 @@
 	<member name="body-normal"/>
 	<member name="horns"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-right"/>
 	<member name="helmet"/>
@@ -327,7 +354,9 @@
 	<member name="body-normal"/>
 	<member name="horns"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-left2"/>
 	<member name="yoyo"/>
@@ -344,7 +373,9 @@
 	<member name="body-normal"/>
 	<member name="horns"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-left2"/>
 	<member name="hoop"/>
@@ -360,7 +391,9 @@
 	<member name="body-normal"/>
 	<member name="horns"/>
 	<member name="head"/>
-	<member name="nose"/>
+	<member name="eyes-normal"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
 	<member name="foot-right"/>
 	<member name="arm-right2"/>
 </clothe>
