@@ -232,180 +232,180 @@
 
 <!-- ###### Normal ###### -->
 <clothe name="normal">
-	<member name="tail" layer="0"/>
-	<member name="arm-left-1" layer="1"/>
-	<member name="foot-left" layer="2"/>
-	<member name="ear-left" layer="3"/>
-	<member name="body-normal" layer="4"/>
-	<member name="head" layer="5"/>
-	<member name="ear-right" layer="6"/>
-	<member name="pupil-right" layer="8"/>
-	<member name="pupil-left" layer="9"/>
-	<member name="foot-right" layer="10"/>
-	<member name="arm-right-1" layer="11"/>
-	<member name="weapon" layer="12"/>
+	<member name="tail"/>
+	<member name="arm-left-1"/>
+	<member name="foot-left"/>
+	<member name="ear-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="ear-right"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right-1"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- ###### Jetpack ###### -->
 <clothe name="jetpack"> <!-- When jetpack weapon is selected, during walk, jump movement... -->
-	<member name="tail" layer="0"/>	
-	<member name="arm-left-1" layer="1"/>
-	<member name="foot-left" layer="2"/>
-	<member name="jetpack-left" layer="3"/>
-	<member name="ear-left" layer="4"/>
-	<member name="body-normal" layer="5"/>
-	<member name="head" layer="6"/>
-	<member name="ear-right" layer="7"/>
-	<member name="pupil-right" layer="9"/>
-	<member name="pupil-left" layer="10"/>
-	<member name="foot-right" layer="11"/>
-	<member name="jetpack-right" layer="12"/>
-	<member name="jetpack-belt" layer="13"/>
-	<member name="arm-right-1" layer="14"/>
+	<member name="tail"/>	
+	<member name="arm-left-1"/>
+	<member name="foot-left"/>
+	<member name="jetpack-left"/>
+	<member name="ear-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="ear-right"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="jetpack-right"/>
+	<member name="jetpack-belt"/>
+	<member name="arm-right-1"/>
 </clothe>
 
 <clothe name="jetpack-fire"> <!-- When jetpack weapon is selected and used -->
-	<member name="tail" layer="0"/>	
-	<member name="arm-left-1" layer="1"/>
-	<member name="foot-left" layer="2"/>
-	<member name="jetpack-fire-left" layer="3"/>
-	<member name="jetpack-left" layer="4"/>
-	<member name="jetpack-fire-right" layer="5"/>
-	<member name="ear-left" layer="6"/>
-	<member name="body-normal" layer="7"/>
-	<member name="head" layer="8"/>
-	<member name="ear-right" layer="9"/>
-	<member name="pupil-right" layer="11"/>
-	<member name="pupil-left" layer="12"/>
-	<member name="foot-right" layer="13"/>
-	<member name="jetpack-right" layer="14"/>
-	<member name="jetpack-belt" layer="15"/>
+	<member name="tail"/>	
+	<member name="arm-left-1"/>
+	<member name="foot-left"/>
+	<member name="jetpack-fire-left"/>
+	<member name="jetpack-left"/>
+	<member name="jetpack-fire-right"/>
+	<member name="ear-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="ear-right"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="jetpack-right"/>
+	<member name="jetpack-belt"/>
 	<member name="arm-right-1" layer="16"/>
 </clothe>
 
 
 <!-- ###### Helmet ###### -->
 <clothe name="helmet">
-	<member name="tail" layer="0"/>	
-	<member name="arm-left-1" layer="1"/>
-	<member name="foot-left" layer="2"/>
-	<member name="ear-left" layer="3"/>
-	<member name="body-normal" layer="4"/>
-	<member name="head" layer="5"/>
-	<member name="ear-right" layer="6"/>
-	<member name="pupil-right" layer="8"/>
-	<member name="pupil-left" layer="9"/>
-	<member name="helmet" layer="10"/>
-	<member name="foot-right" layer="11"/>
-	<member name="arm-right-1" layer="12"/>
+	<member name="tail"/>	
+	<member name="arm-left-1"/>
+	<member name="foot-left"/>
+	<member name="ear-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="ear-right"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="helmet"/>
+	<member name="foot-right"/>
+	<member name="arm-right-1"/>
 </clothe>
 
 <!-- ###### Animation Yoyo ###### -->
 <clothe name="animation0">
-	<member name="tail" layer="0"/>
-	<member name="arm-left-1" layer="1"/>
-	<member name="foot-left" layer="2"/>
-	<member name="ear-left" layer="3"/>
-	<member name="body-normal" layer="4"/>
-	<member name="head" layer="5"/>
-	<member name="ear-right" layer="6"/>
-	<member name="pupil-right" layer="8"/>
-	<member name="pupil-left" layer="9"/>
-	<member name="foot-right" layer="10"/>
-	<member name="yoyo" layer="11"/>
-	<member name="arm-right-2" layer="12"/>
-	<member name="weapon" layer="13"/>
+	<member name="tail"/>
+	<member name="arm-left-1"/>
+	<member name="foot-left"/>
+	<member name="ear-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="ear-right"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="yoyo"/>
+	<member name="arm-right-2"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- ###### Animation Hula hoop ###### -->
 <clothe name="animation2">
-	<member name="tail" layer="0"/>
-	<member name="arm-left-2" layer="1"/>
-	<member name="hula" layer="2"/>
-	<member name="foot-left" layer="3"/>
-	<member name="ear-left" layer="4"/>
-	<member name="body-normal" layer="5"/>
-	<member name="head" layer="6"/>
-	<member name="ear-right" layer="7"/>
-	<member name="pupil-right" layer="8"/>
-	<member name="pupil-left" layer="9"/>
-	<member name="foot-right" layer="10"/>
-	<member name="arm-right-2" layer="11"/>
-	<member name="hoop" layer="12"/>
+	<member name="tail"/>
+	<member name="arm-left-2"/>
+	<member name="hula"/>
+	<member name="foot-left"/>
+	<member name="ear-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="ear-right"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right-2"/>
+	<member name="hoop"/>
 </clothe>
 
 
 <!-- ###### Animation Tired ###### -->
 <clothe name="animation1">
-	<member name="tail" layer="0"/>
-	<member name="arm-left-2" layer="1"/>
-	<member name="foot-left" layer="2"/>
-	<member name="ear-left" layer="3"/>
-	<member name="body-normal" layer="4"/>
-	<member name="head" layer="5"/>
-	<member name="ear-right" layer="6"/>
-	<member name="pupil-right" layer="8"/>
-	<member name="pupil-left" layer="9"/>
-	<member name="foot-right" layer="10"/>
-	<member name="arm-right-2" layer="12"/>
-	<member name="weapon" layer="13"/>
+	<member name="tail"/>
+	<member name="arm-left-2"/>
+	<member name="foot-left"/>
+	<member name="ear-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="ear-right"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right-2"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- ###### Dead ###### -->
 <clothe name="dead">
-	<member name="body-dead" layer="0"/>
+	<member name="body-dead"/>
 </clothe>
 
 <!-- ###### Black ###### -->
 <clothe name="black">
-	<member name="body-black" layer="0"/>
+	<member name="body-black"/>
 </clothe>
 
 <!-- # Parachute # -->
 <clothe name="weapon-parachute">
-	<member name="tail" layer="0"/>
-	<member name="arm-left-2" layer="1"/>
-	<member name="foot-left" layer="2"/>
-	<member name="ear-left" layer="3"/>
-	<member name="body-normal" layer="4"/>
-	<member name="head" layer="5"/>
-	<member name="ear-right" layer="6"/>
-	<member name="pupil-right" layer="8"/>
-	<member name="pupil-left" layer="9"/>
-	<member name="foot-right" layer="10"/>
-	<member name="arm-right-2" layer="12"/>
-	<member name="weapon" layer="13"/>
+	<member name="tail"/>
+	<member name="arm-left-2"/>
+	<member name="foot-left"/>
+	<member name="ear-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="ear-right"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="foot-right"/>
+	<member name="arm-right-2"/>
+	<member name="weapon"/>
 </clothe>
 
 <!-- # Construct/Airhammer helmet # -->
 <clothe name="weapon-construct">
-	<member name="c2" layer="0"/>
-	<member name="tail" layer="1"/>
-	<member name="arm-left-1" layer="2"/>
-	<member name="foot-left" layer="3"/>
-	<member name="body-normal" layer="4"/>
-	<member name="head" layer="5"/>
-	<member name="pupil-right" layer="6"/>
-	<member name="pupil-left" layer="7"/>
-	<member name="construct" layer="8"/>
-	<member name="foot-right" layer="9"/>
-	<member name="arm-right-1" layer="10"/>
-	<member name="weapon" layer="11"/>
+	<member name="c2"/>
+	<member name="tail"/>
+	<member name="arm-left-1"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="construct"/>
+	<member name="foot-right"/>
+	<member name="arm-right-1"/>
+	<member name="weapon"/>
 </clothe>
 
 <clothe name="weapon-airhammer">
-	<member name="c2" layer="0"/>
-	<member name="tail" layer="1"/>
-	<member name="arm-left-1" layer="2"/>
-	<member name="foot-left" layer="3"/>
-	<member name="body-normal" layer="4"/>
-	<member name="head" layer="5"/>
-	<member name="pupil-right" layer="6"/>
-	<member name="pupil-left" layer="7"/>
-	<member name="construct" layer="8"/>
-	<member name="foot-right" layer="9"/>
-	<member name="arm-right-1" layer="10"/>
-	<member name="weapon" layer="11"/>
+	<member name="c2"/>
+	<member name="tail"/>
+	<member name="arm-left-1"/>
+	<member name="foot-left"/>
+	<member name="body-normal"/>
+	<member name="head"/>
+	<member name="pupil-right"/>
+	<member name="pupil-left"/>
+	<member name="construct"/>
+	<member name="foot-right"/>
+	<member name="arm-right-1"/>
+	<member name="weapon"/>
 </clothe>
 
 <!--   ###########################################
