@@ -73,26 +73,25 @@ NetworkServer * Network::GetInstanceServer()
   return (NetworkServer*)singleton;
 }
 
-Network::Network()
-{
-  state = NO_NETWORK; // useless value at beginning
-  sdlnet_initialized = false;
-  sync_lock = false;
-  network_menu = NULL;
-
-  thread = NULL;
-  socket_set = NULL;
-  //Set nickname
-#ifdef WIN32
-  nickname = getenv("USERNAME");
-#else
-  nickname = getenv("USER");
-#endif
-
+Network::Network():
+  thread(NULL),
+  socket_set(NULL),
+  ip(),
 #if defined(DEBUG) && not defined(WIN32)
-  fin = 0;
-  fout = 0;
+  fout(0),
+  fin(0),
 #endif
+  network_menu(NULL),
+  state(NO_NETWORK),// useless value at beginning
+  cpu(),
+  sync_lock(false),
+#ifdef WIN32
+  nickname(getenv("USERNAME"))
+#else
+  nickname(getenv("USER"))
+#endif
+{
+  sdlnet_initialized = false;
 }
 //-----------------------------------------------------------------------------
 
@@ -137,7 +136,7 @@ void Network::Init()
       exit(1);
   }
   sdlnet_initialized = true;
-  
+
   std::cout << "o " << _("Network initialization") << std::endl;
 }
 
@@ -148,7 +147,7 @@ void Network::Disconnect()
 {
   // restore Windows title
   AppWormux::GetInstance()->video.SetWindowCaption( std::string("Wormux ") + Constants::VERSION);
-  
+
   if (singleton != NULL) {
     singleton->stop_thread = true;
     singleton->DisconnectNetwork();
@@ -161,12 +160,12 @@ void Network::Disconnect()
 void Network::DisconnectNetwork()
 {
   if (thread != NULL && SDL_ThreadID() != SDL_GetThreadID(thread)) {
-    SDL_WaitThread(thread, NULL); 
+    SDL_WaitThread(thread, NULL);
     printf("Network thread finished\n");
-  } 
-  
+  }
+
   thread = NULL;
-  stop_thread = true;  
+  stop_thread = true;
 
   for(std::list<DistantComputer*>::iterator client = cpu.begin();
       client != cpu.end();
@@ -184,7 +183,7 @@ void Network::DisconnectNetwork()
 
 //-----------------------------------------------------------------------------
 
-const Network::connection_state_t Network::CheckHost(const std::string &host, 
+const Network::connection_state_t Network::CheckHost(const std::string &host,
 						     const std::string& port) const
 {
   MSG_DEBUG("network", "Checking connection to %s:%s", host.c_str(), port.c_str());
@@ -197,7 +196,7 @@ const Network::connection_state_t Network::CheckHost(const std::string &host,
     return Network::CONN_BAD_HOST;
 
 #ifndef WIN32
-  int fd = socket(AF_INET, SOCK_STREAM, 0); 
+  int fd = socket(AF_INET, SOCK_STREAM, 0);
   if( fd == -1 )
     return Network::CONN_BAD_SOCKET;
 
@@ -270,7 +269,7 @@ void Network::SendAction(Action* a)
   int size;
   char* packet;
   a->WritePacket(packet, size);
-  
+
   assert(packet != NULL);
   SendPacket(packet, size);
 
@@ -300,8 +299,8 @@ void Network::SendPacket(char* packet, int size)
 
 // Static method
 bool Network::IsConnected()
-{ 
-  return (!GetInstance()->IsLocal() && !stop_thread); 
+{
+  return (!GetInstance()->IsLocal() && !stop_thread);
 }
 
 const uint Network::GetPort() const
@@ -314,7 +313,7 @@ const uint Network::GetPort() const
 //-----------------------------------------------------------------------------
 
 // Static method
-Network::connection_state_t Network::ClientStart(const std::string &host, 
+Network::connection_state_t Network::ClientStart(const std::string &host,
 						 const std::string& port)
 {
   NetworkClient* net = new NetworkClient();
@@ -326,7 +325,7 @@ Network::connection_state_t Network::ClientStart(const std::string &host,
   // try to connect
   stop_thread = false;
   const Network::connection_state_t error = net->ClientConnect(host, port);
-  
+
   if (error != Network::CONNECTED) {
     // revert change if connection failed
     stop_thread = true;
@@ -347,7 +346,7 @@ Network::connection_state_t Network::ClientStart(const std::string &host,
 Network::connection_state_t Network::ServerStart(const std::string& port)
 {
   NetworkServer* net = new NetworkServer();
-  
+
   // replace current singleton
   Network* prev = singleton;
   singleton = net;
@@ -355,7 +354,7 @@ Network::connection_state_t Network::ServerStart(const std::string& port)
   // try to connect
   stop_thread = false;
   const Network::connection_state_t error = net->ServerStart(port);
-  
+
   if (error != Network::CONNECTED) {
     // revert change
     stop_thread = true;
