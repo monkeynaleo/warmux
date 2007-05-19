@@ -36,11 +36,12 @@ const Point2i CAMERA_SPEED(20, 20);
 
 Camera camera;
 
-Camera::Camera(){
-  throw_camera = false;
-  auto_crop = true;
-  followed_object = NULL;
-}
+Camera::Camera():
+  auto_crop(true),
+  followed_object(NULL),
+  throw_camera(false),
+  follow_closely(false)
+{}
 
 bool Camera::HasFixedX() const{
   return (int)world.GetWidth() <= GetSizeX();
@@ -167,7 +168,8 @@ void Camera::Refresh(){
 
 void Camera::FollowObject(PhysicalObj *obj, bool follow, bool center_on, bool force_center_on_object){
   MSG_DEBUG( "camera.tracking", "Following object %s, center_on=%d, follow=%d", obj->GetName().c_str(), center_on, follow);
-  if ((center_on) && ((followed_object != obj) || !IsVisible(*obj) || force_center_on_object))
+  if ((center_on) && (followed_object != obj ||
+                      !IsVisible(*obj) || force_center_on_object))
   {
     bool visible = IsVisible(*obj);
     CenterOn(*obj);
@@ -181,8 +183,8 @@ void Camera::FollowObject(PhysicalObj *obj, bool follow, bool center_on, bool fo
 void Camera::StopFollowingObj(PhysicalObj* obj){
   if(Game::GetInstance()->IsGameFinished())
     return;
-	
-  if(followed_object == obj)
+
+  if (followed_object == obj)
     FollowObject((PhysicalObj*)&ActiveCharacter(), true, true, true);
 }
 
