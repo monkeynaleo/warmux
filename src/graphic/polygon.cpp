@@ -197,6 +197,15 @@ Polygon::~Polygon()
       item != items.end(); item++) {
     delete (*item);
   }
+  if (texture)
+    delete texture;
+  if (border_color)
+    delete border_color;
+  delete shape_buffer;
+
+  shape_buffer = NULL;
+  border_color = NULL;
+  texture = NULL;
 }
 
 void Polygon::Init()
