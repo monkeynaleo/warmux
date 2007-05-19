@@ -34,7 +34,7 @@ class Camera : public Rectanglei
 
 private:
   bool auto_crop;
-  PhysicalObj* followed_object;
+  const PhysicalObj* followed_object;
   bool throw_camera;
   bool follow_closely;
 

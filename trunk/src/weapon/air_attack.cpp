@@ -110,10 +110,12 @@ void Plane::DropBomb()
 
   lst_objects.AddObject(instance);
 
-  camera.FollowObject(instance, true, true);
-
   last_dropped_bomb = instance;
   nb_dropped_bombs++;
+
+  if (nb_dropped_bombs == 1)
+    camera.FollowObject(instance, true, true);
+
 }
 
 void Plane::Refresh()
@@ -122,7 +124,7 @@ void Plane::Refresh()
   image->Update();
   // First shoot !!
   if ( OnTopOfTarget() && nb_dropped_bombs == 0) {
-    camera.StopFollowingObj(this);
+  //  camera.StopFollowingObj(this);
     DropBomb();
     m_ignore_movements = true;
   } else if (nb_dropped_bombs > 0 &&  nb_dropped_bombs < cfg.nbr_obus) {
