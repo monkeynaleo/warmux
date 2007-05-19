@@ -40,11 +40,11 @@ private:
 
   Point2i FreeDegrees() const;
   Point2i NonFreeDegrees() const;
-  bool HasFixedX() const;
-  bool HasFixedY() const;
-
 public:
   Camera();
+
+  bool HasFixedX() const;
+  bool HasFixedY() const;
 
   // set camera to position
   void SetXY(Point2i pos);
